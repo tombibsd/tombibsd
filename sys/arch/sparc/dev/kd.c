@@ -334,7 +334,6 @@ kdparam(struct tty *tp, struct termios *t)
 static void
 kdstart(struct tty *tp)
 {
-	struct clist *cl;
 	int s1, s2;
 
 	s1 = splsoftclock();
@@ -342,7 +341,6 @@ kdstart(struct tty *tp)
 	if (tp->t_state & (TS_BUSY|TS_TTSTOP|TS_TIMEOUT))
 		goto out;
 
-	cl = &tp->t_outq;
 	if (ttypull(tp)) {
 		tp->t_state |= TS_BUSY;
 		if ((s1 & PSR_PIL) == 0) {
@@ -619,15 +617,20 @@ prom_get_device_args(const char *prop, char *args, unsigned int sz)
 void
 consinit(void)
 {
+#if 0
 	int inSource, outSink;
+#endif
 
 	switch (prom_version()) {
+#if 0
 	case PROM_OLDMON:
 	case PROM_OBP_V0:
 		/* The stdio handles identify the device type */
 		inSource = prom_stdin();
 		outSink  = prom_stdout();
 		break;
+	// XXXMRG  should these just set prom_stdin_node / prom_stdout_node?
+#endif
 
 	case PROM_OBP_V2:
 	case PROM_OBP_V3:

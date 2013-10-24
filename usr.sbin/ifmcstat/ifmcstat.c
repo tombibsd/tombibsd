@@ -110,21 +110,14 @@ const char *inet6_n2a(p)
 {
 	static char buf[NI_MAXHOST];
 	struct sockaddr_in6 sin6;
-	u_int32_t scopeid;
 	const int niflags = NI_NUMERICHOST;
 
 	memset(&sin6, 0, sizeof(sin6));
 	sin6.sin6_family = AF_INET6;
 	sin6.sin6_len = sizeof(struct sockaddr_in6);
 	sin6.sin6_addr = *p;
-	if (IN6_IS_ADDR_LINKLOCAL(p) || IN6_IS_ADDR_MC_LINKLOCAL(p)) {
-		scopeid = ntohs(*(u_int16_t *)&sin6.sin6_addr.s6_addr[2]);
-		if (scopeid) {
-			sin6.sin6_scope_id = scopeid;
-			sin6.sin6_addr.s6_addr[2] = 0;
-			sin6.sin6_addr.s6_addr[3] = 0;
-		}
-	}
+	inet6_getscopeid(&sin6, INET6_IS_ADDR_LINKLOCAL|
+	    INET6_IS_ADDR_MC_LINKLOCAL);
 	if (getnameinfo((struct sockaddr *)&sin6, sin6.sin6_len,
 			buf, sizeof(buf), NULL, 0, niflags) == 0)
 		return buf;

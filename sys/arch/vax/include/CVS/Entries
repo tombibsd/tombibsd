@@ -9,7 +9,7 @@
 /cdefs.h/1.7/Fri Jan 20 14:08:07 2012/-kk/
 /clock.h/1.8/Fri Nov 19 03:31:24 2010/-kk/
 /coff_machdep.h/1.2/Mon Apr 28 20:23:39 2008/-kk/
-/cpu.h/1.95/Sat Oct 27 17:18:13 2012/-kk/
+/cpu.h/1.96/Thu Oct 24 06:29:26 2013/-kk/
 /db_machdep.h/1.19/Sun Jul  3 02:18:20 2011/-kk/
 /disklabel.h/1.7/Thu Apr  4 12:50:03 2013/-kk/
 /elf_machdep.h/1.5/Sun Dec  9 23:05:59 2001/-kk/

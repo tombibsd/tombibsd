@@ -107,7 +107,6 @@ ATF_TC_HEAD(before_threads, tc)
 ATF_TC_BODY(before_threads, tc)
 {
 	struct sigaction act;
-	int ret;
 
 	act.sa_sigaction = upcalls_not_started_handler1;
 	sigemptyset(&act.sa_mask);
@@ -119,7 +118,7 @@ ATF_TC_BODY(before_threads, tc)
 	act.sa_sigaction = upcalls_not_started_handler2;
 	sigemptyset(&act.sa_mask);
 	act.sa_flags = SA_SIGINFO;
-	ret = sigaction(SIGUSR2, &act, NULL);
+	(void)sigaction(SIGUSR2, &act, NULL);
 
 	kill(getpid(), SIGUSR1);
 
@@ -179,7 +178,6 @@ ATF_TC_BODY(respected_while_running, tc)
 {
 	struct sigaction act;
 	pthread_t thread;
-	int rv;
 
 	act.sa_sigaction = respected_while_running_handler1;
 	sigemptyset(&act.sa_mask);
@@ -191,7 +189,7 @@ ATF_TC_BODY(respected_while_running, tc)
 	act.sa_sigaction = respected_while_running_handler2;
 	sigemptyset(&act.sa_mask);
 	act.sa_flags = SA_SIGINFO;
-	rv = sigaction(SIGUSR2, &act, NULL);
+	(void)sigaction(SIGUSR2, &act, NULL);
 
 	PTHREAD_REQUIRE(pthread_create(&thread, NULL,
 	    respected_while_running_threadroutine, NULL));

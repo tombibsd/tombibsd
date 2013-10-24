@@ -399,17 +399,10 @@ print_addr(struct sockaddr *sa, struct sockaddr **rtinfo, struct if_data *ifd,
 #ifdef INET6
 	case AF_INET6:
 		sin6 = (struct sockaddr_in6 *)sa;
+		inet6_getscopeid(sin6, INET6_IS_ADDR_LINKLOCAL);
 #ifdef __KAME__
-		if (IN6_IS_ADDR_LINKLOCAL(&sin6->sin6_addr)) {
-			sin6->sin6_scope_id =
-				ntohs(*(u_int16_t *)
-				  &sin6->sin6_addr.s6_addr[2]);
-			/* too little width */
-			if (!vflag)
-				sin6->sin6_scope_id = 0;
-			sin6->sin6_addr.s6_addr[2] = 0;
-			sin6->sin6_addr.s6_addr[3] = 0;
-		}
+		if (!vflag)
+			sin6->sin6_scope_id = 0;
 #endif
 
 		if (use_sysctl) {
@@ -453,15 +446,8 @@ print_addr(struct sockaddr *sa, struct sockaddr **rtinfo, struct if_data *ifd,
 				as6.sin6_len = sizeof(struct sockaddr_in6);
 				as6.sin6_family = AF_INET6;
 				as6.sin6_addr = inm.in6m_addr;
-#ifdef __KAME__
-				if (IN6_IS_ADDR_MC_LINKLOCAL(&as6.sin6_addr)) {
-					as6.sin6_scope_id =
-					    ntohs(*(u_int16_t *)
-						&as6.sin6_addr.s6_addr[2]);
-					as6.sin6_addr.s6_addr[2] = 0;
-					as6.sin6_addr.s6_addr[3] = 0;
-				}
-#endif
+				inet6_getscopeid(&as6,
+				    INET6_IS_ADDR_MC_LINKLOCAL);
 				if (getnameinfo((struct sockaddr *)&as6,
 				    as6.sin6_len, hbuf,
 				    sizeof(hbuf), NULL, 0,

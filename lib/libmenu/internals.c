@@ -517,7 +517,7 @@ _menui_draw_item(MENU *menu, int item)
 int
 _menui_draw_menu(MENU *menu)
 {
-	int rowmajor, i, j, k, row = -1, col = -1, stride;
+	int rowmajor, i, j, k, row = -1, stride;
 	int incr, cur_row, offset, row_count;
 
 	rowmajor = ((menu->opts & O_ROWMAJOR) == O_ROWMAJOR);
@@ -555,7 +555,6 @@ _menui_draw_menu(MENU *menu)
 				wattrset(menu->scrwin, menu->back);
 				if (row < 0) {
 					row = menu->items[menu->item_count - 1]->row;
-					col = menu->items[menu->item_count - 1]->col;
 				}
 
 				wmove(menu->scrwin, cur_row,

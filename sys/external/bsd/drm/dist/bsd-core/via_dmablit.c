@@ -67,7 +67,6 @@ via_unmap_blit_from_device(drm_via_sg_info_t *vsg)
 	unsigned descriptor_this_page = num_desc % vsg->descriptors_per_page;
 	drm_via_descriptor_t *desc_ptr = vsg->desc_pages[cur_descriptor_page] +
 		descriptor_this_page;
-	dma_addr_t next = vsg->chain_start;
 
 	while(num_desc--) {
 		if (descriptor_this_page-- == 0) {
@@ -76,7 +75,6 @@ via_unmap_blit_from_device(drm_via_sg_info_t *vsg)
 			desc_ptr = vsg->desc_pages[cur_descriptor_page] +
 				descriptor_this_page;
 		}
-		next = (dma_addr_t) desc_ptr->next;
 		desc_ptr--;
 	}
 }

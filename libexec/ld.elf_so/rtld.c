@@ -1290,6 +1290,7 @@ dladdr(const void *addr, Dl_info *info)
 		info->dli_saddr = symbol_addr;
 		best_def = def;
 
+
 		/* Exact match? */
 		if (info->dli_saddr == addr)
 			break;
@@ -1299,6 +1300,8 @@ dladdr(const void *addr, Dl_info *info)
 	if (best_def != NULL && ELF_ST_TYPE(best_def->st_info) == STT_FUNC)
 		info->dli_saddr = (void *)_rtld_function_descriptor_alloc(obj,
 		    best_def, 0);
+#else
+	__USE(best_def);
 #endif /* __HAVE_FUNCTION_DESCRIPTORS */
 
 	lookup_mutex_exit();

@@ -63,6 +63,9 @@ CPPFLAGS+=	-D__BUILD_LEGACY
 .include "${.CURDIR}/db/Makefile.inc"
 .include "${.CURDIR}/citrus/Makefile.inc"
 .include "${.CURDIR}/compat-43/Makefile.inc"
+.if ${HAVE_LIBGCC} == "no"
+.include "${.CURDIR}/compiler_rt/Makefile.inc"
+.endif
 .include "${.CURDIR}/dlfcn/Makefile.inc"
 .include "${.CURDIR}/gdtoa/Makefile.inc"
 .include "${.CURDIR}/gen/Makefile.inc"
@@ -96,6 +99,9 @@ CPPFLAGS+=	-D__BUILD_LEGACY
 .include "${.CURDIR}/time/Makefile.inc"
 .include "${.CURDIR}/tls/Makefile.inc"
 .include "${.CURDIR}/sys/Makefile.inc"
+.if ${HAVE_LIBGCC} == "no"
+.include "${NETBSDSRCDIR}/sys/lib/libunwind/Makefile.inc"
+.endif
 .include "${.CURDIR}/uuid/Makefile.inc"
 .if (${MKYP} != "no")
 .include "${.CURDIR}/yp/Makefile.inc"
@@ -146,3 +152,6 @@ CSHLIBFLAGS+=	-D_I18N_DYNAMIC
 
 # force the dynamic linker to initialize libc first
 SHLIB_SHFLAGS+=	-Wl,-z,initfirst
+.if ${HAVE_LIBGCC} == "no"
+SHLIB_SHFLAGS+= -Wl,-z,defs
+.endif

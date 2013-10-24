@@ -88,6 +88,7 @@ __RCSID("$NetBSD$");
 
 #ifdef INET6
 #include <netinet/ip6.h>
+#include <netinet6/in6.h>
 #include <netinet6/ip6_var.h>
 #include <netinet6/in6_pcb.h>
 #endif
@@ -903,14 +904,7 @@ inet6_addrstr(char *buf, size_t len, const struct in6_addr *a, uint16_t p)
 	sin6.sin6_addr = *a;
 	sin6.sin6_port = htons(p);
 
-	if (IN6_IS_ADDR_LINKLOCAL(a) &&
-	    *(u_int16_t *)&sin6.sin6_addr.s6_addr[2] != 0) {
-		sin6.sin6_scope_id =
-			ntohs(*(uint16_t *)&sin6.sin6_addr.s6_addr[2]);
-		sin6.sin6_addr.s6_addr[2] = 0;
-		sin6.sin6_addr.s6_addr[3] = 0;
-	}
-
+	inet6_getscopeid(&sin6, INET6_IS_ADDR_LINKLOCAL);
 	serv[0] = '\0';
 
 	if (getnameinfo((struct sockaddr *)&sin6, sin6.sin6_len,

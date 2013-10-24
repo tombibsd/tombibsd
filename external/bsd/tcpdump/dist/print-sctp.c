@@ -349,10 +349,6 @@ void sctp_print(const u_char *bp,        /* beginning of sctp packet */
 	  }
 	case SCTP_HEARTBEAT_REQUEST :
 	  {
-	    const struct sctpHBsender *hb;
-
-	    hb=(const struct sctpHBsender*)chunkDescPtr;
-
 	    printf("[HB REQ] ");
 
 	    break;

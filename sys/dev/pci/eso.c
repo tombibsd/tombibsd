@@ -1181,10 +1181,8 @@ static int
 eso_get_port(void *hdl, mixer_ctrl_t *cp)
 {
 	struct eso_softc *sc;
-	int error;
 
 	sc = hdl;
-	error = 0;
 
 	mutex_spin_enter(&sc->sc_intr_lock);
 
@@ -1224,7 +1222,6 @@ eso_get_port(void *hdl, mixer_ctrl_t *cp)
 			    sc->sc_gain[cp->dev][ESO_RIGHT];
 			break;
 		default:
-			error = EINVAL;
 			break;
 		}
 		break;
@@ -1234,7 +1231,6 @@ eso_get_port(void *hdl, mixer_ctrl_t *cp)
 	case ESO_MONO_REC_VOL:
 	case ESO_SPATIALIZER:
 		if (cp->un.value.num_channels != 1) {
-			error = EINVAL;
 			break;
 		}
 		cp->un.value.level[AUDIO_MIXER_LEVEL_MONO] =
@@ -1273,7 +1269,6 @@ eso_get_port(void *hdl, mixer_ctrl_t *cp)
 		break;
 
 	default:
-		error = EINVAL;
 		break;
 	}
 

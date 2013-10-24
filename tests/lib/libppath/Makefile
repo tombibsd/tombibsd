@@ -18,6 +18,7 @@ CPPFLAGS+=-I$(.OBJDIR)
 .plist.c:
 	AWK=${TOOL_AWK:Q} ${HOST_SH} ${.CURDIR}/plist_to_c ${.TARGET:S,.c$,,} < ${.IMPSRC} > ${.TARGET}
 
+t_ppath.o: personnel.h
 CLEANFILES+=personnel.c personnel.h
 
 #LDADD+=-L$(LIBPPATH)

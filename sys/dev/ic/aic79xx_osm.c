@@ -739,7 +739,6 @@ ahd_timeout(void *arg)
 {
 	struct	scb	  *scb;
 	struct	ahd_softc *ahd;
-	ahd_mode_state	   saved_modes;
 	int		   s;
 
 	scb = arg;
@@ -750,7 +749,7 @@ ahd_timeout(void *arg)
 	ahd_lock(ahd, &s);
 
 	ahd_pause_and_flushwork(ahd);
-	saved_modes = ahd_save_modes(ahd);
+	(void)ahd_save_modes(ahd);
 #if 0
 	ahd_set_modes(ahd, AHD_MODE_SCSI, AHD_MODE_SCSI);
 	ahd_outb(ahd, SCSISIGO, ACKO);

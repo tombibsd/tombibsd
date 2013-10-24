@@ -107,7 +107,7 @@ xenbus_attach(device_t parent, device_t self, void *aux)
 
 	aprint_normal(": Xen Virtual Bus Interface\n");
 	xenbus_dev = self;
-	config_pending_incr();
+	config_pending_incr(self);
 
 	err = kthread_create(PRI_NONE, 0, NULL, xenbus_probe_init, NULL,
 	    NULL, "xenbus_probe");
@@ -711,7 +711,7 @@ xenbus_probe_init(void *unused)
 	}
 
 	DPRINTK("done");
-	config_pending_decr();
+	config_pending_decr(xenbus_dev);
 #ifdef DOM0OPS
 	if (dom0) {
 		int s;

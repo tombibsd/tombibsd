@@ -855,7 +855,6 @@ int
 tpm_legacy_init(struct tpm_softc *sc, int irq, const char *name)
 {
 	char id[8];
-	uint8_t ioh, iol;
 	int i;
 
 	if ((i = bus_space_map(sc->sc_batm, tpm_enabled, 2, 0, &sc->sc_bahm))) {
@@ -870,8 +869,6 @@ tpm_legacy_init(struct tpm_softc *sc, int irq, const char *name)
 
 	aprint_debug_dev(sc->sc_dev, "%.4s %d.%d @0x%x\n", &id[4], id[0],
 	    id[1], tpm_enabled);
-	iol = tpm_enabled & 0xff;
-	ioh = tpm_enabled >> 16;
 	tpm_enabled = 0;
 
 	return 0;

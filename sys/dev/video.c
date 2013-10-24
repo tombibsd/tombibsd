@@ -315,10 +315,12 @@ static const char *	video_ioctl_str(u_long);
 static int
 video_match(device_t parent, cfdata_t match, void *aux)
 {
+#ifdef VIDEO_DEBUG
 	struct video_attach_args *args;
 
 	args = aux;
 	DPRINTF(("video_match: hw=%p\n", args->hw_if));
+#endif
 	return 1;
 }
 
@@ -397,11 +399,8 @@ video_detach(device_t self, int flags)
 static int
 video_print(void *aux, const char *pnp)
 {
-	struct video_attach_args *arg;
-
 	if (pnp != NULL) {
 		DPRINTF(("video_print: have pnp\n"));
-		arg = aux;
 		aprint_normal("%s at %s\n", "video", pnp);
 	} else {
 		DPRINTF(("video_print: pnp is NULL\n"));

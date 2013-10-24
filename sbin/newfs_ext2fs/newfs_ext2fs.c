@@ -126,12 +126,11 @@ main(int argc, char *argv[])
 	struct statvfs *mp;
 	struct stat sb;
 	int ch, fsi, fso, len, n, Fflag, Iflag, Zflag;
-	char *cp, *s1, *s2, *special;
+	char *s1, *s2, *special;
 	const char *opstring;
 	int byte_sized;
 	uint blocks;			/* number of blocks */
 
-	cp = NULL;
 	fsi = fso = -1;
 	Fflag = Iflag = Zflag = 0;
 	verbosity = -1;

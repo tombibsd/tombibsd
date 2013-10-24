@@ -353,7 +353,7 @@ s(SCR *sp, EXCMD *cmdp, CHAR_T *st, regex_t *re, u_int flags)
 	regmatch_t match[10];
 	size_t blen, cnt, last, lbclen, lblen, len, llen;
 	size_t offset, saved_offset, scno;
-	int cflag, lflag, nflag, pflag, rflag;
+	int lflag, nflag, pflag, rflag;
 	int didsub, do_eol_match, eflags, empty_ok, eval;
 	int linechanged, matched, quit, rval;
 	CHAR_T *lb, *bp;
@@ -391,7 +391,7 @@ s(SCR *sp, EXCMD *cmdp, CHAR_T *st, regex_t *re, u_int flags)
 	 * just take it them in whatever order the user gives them.  (The ex
 	 * usage statement doesn't reflect this.)
 	 */
-	cflag = lflag = nflag = pflag = rflag = 0;
+	lflag = nflag = pflag = rflag = 0;
 	if (st == NULL)
 		goto noargs;
 	for (lno = OOBLNO; *st != '\0'; ++st)

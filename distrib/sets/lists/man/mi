@@ -980,6 +980,7 @@
 ./usr/share/man/cat4/dtv.0			man-sys-catman		.cat
 ./usr/share/man/cat4/dtviic.0			man-sys-catman		.cat
 ./usr/share/man/cat4/dty.0			man-sys-catman		.cat
+./usr/share/man/cat4/dwctwo.0			man-sys-catman		.cat
 ./usr/share/man/cat4/ea.0			man-sys-catman		.cat
 ./usr/share/man/cat4/eap.0			man-sys-catman		.cat
 ./usr/share/man/cat4/eb.0			man-sys-catman		.cat
@@ -1296,6 +1297,7 @@
 ./usr/share/man/cat4/lkm.0			man-obsolete		obsolete
 ./usr/share/man/cat4/lm.0			man-sys-catman		.cat
 ./usr/share/man/cat4/lmc.0			man-sys-catman		.cat
+./usr/share/man/cat4/lmenv.0			man-sys-catman		.cat
 ./usr/share/man/cat4/lmtemp.0			man-sys-catman		.cat
 ./usr/share/man/cat4/lo.0			man-sys-catman		.cat
 ./usr/share/man/cat4/lsu.0			man-obsolete		obsolete
@@ -2035,6 +2037,7 @@
 ./usr/share/man/cat5/lastlogx.0			man-sys-catman		.cat
 ./usr/share/man/cat5/ld.so.conf.0		man-sys-catman		.cat
 ./usr/share/man/cat5/ldap_table.0		man-postfix-catman	postfix,.cat
+./usr/share/man/cat5/ldpd.conf.0		man-router-catman	.cat
 ./usr/share/man/cat5/link.0			man-sys-catman		.cat
 ./usr/share/man/cat5/lkm.conf.0			man-obsolete		obsolete
 ./usr/share/man/cat5/locale.alias.0		man-sys-catman		.cat
@@ -3958,6 +3961,7 @@
 ./usr/share/man/html4/dtv.html			man-sys-htmlman		html
 ./usr/share/man/html4/dtviic.html		man-sys-htmlman		html
 ./usr/share/man/html4/dty.html			man-sys-htmlman		html
+./usr/share/man/html4/dwctwo.html		man-sys-htmlman		html
 ./usr/share/man/html4/ea.html			man-sys-htmlman		html
 ./usr/share/man/html4/eap.html			man-sys-htmlman		html
 ./usr/share/man/html4/eb.html			man-sys-htmlman		html
@@ -4240,6 +4244,7 @@
 ./usr/share/man/html4/lkm.html			man-obsolete		obsolete
 ./usr/share/man/html4/lm.html			man-sys-htmlman		html
 ./usr/share/man/html4/lmc.html			man-sys-htmlman		html
+./usr/share/man/html4/lmenv.html		man-sys-htmlman		html
 ./usr/share/man/html4/lmtemp.html		man-sys-htmlman		html
 ./usr/share/man/html4/lo.html			man-sys-htmlman		html
 ./usr/share/man/html4/lxtphy.html		man-sys-htmlman		html
@@ -4925,6 +4930,7 @@
 ./usr/share/man/html5/lastlogx.html		man-sys-htmlman		html
 ./usr/share/man/html5/ld.so.conf.html		man-sys-htmlman		html
 ./usr/share/man/html5/ldap_table.html		man-postfix-htmlman	postfix,html
+./usr/share/man/html5/ldpd.conf.html		man-router-htmlman	html
 ./usr/share/man/html5/link.html			man-sys-htmlman		html
 ./usr/share/man/html5/lkm.conf.html		man-obsolete		obsolete
 ./usr/share/man/html5/locale.alias.html		man-sys-htmlman		html
@@ -6706,6 +6712,7 @@
 ./usr/share/man/man4/dtv.4			man-sys-man		.man
 ./usr/share/man/man4/dtviic.4			man-sys-man		.man
 ./usr/share/man/man4/dty.4			man-sys-man		.man
+./usr/share/man/man4/dwctwo.4			man-sys-man		.man
 ./usr/share/man/man4/ea.4			man-sys-man		.man
 ./usr/share/man/man4/eap.4			man-sys-man		.man
 ./usr/share/man/man4/eb.4			man-sys-man		.man
@@ -7022,6 +7029,7 @@
 ./usr/share/man/man4/lkm.4			man-obsolete 		obsolete
 ./usr/share/man/man4/lm.4			man-sys-man		.man
 ./usr/share/man/man4/lmc.4			man-sys-man		.man
+./usr/share/man/man4/lmenv.4			man-sys-man		.man
 ./usr/share/man/man4/lmtemp.4			man-sys-man		.man
 ./usr/share/man/man4/lo.4			man-sys-man		.man
 ./usr/share/man/man4/lsu.4			man-obsolete		obsolete
@@ -7761,6 +7769,7 @@
 ./usr/share/man/man5/lastlogx.5			man-sys-man		.man
 ./usr/share/man/man5/ld.so.conf.5		man-sys-man		.man
 ./usr/share/man/man5/ldap_table.5		man-postfix-man		postfix,.man
+./usr/share/man/man5/ldpd.conf.5		man-router-man		.man
 ./usr/share/man/man5/link.5			man-sys-man		.man
 ./usr/share/man/man5/lkm.conf.5			man-obsolete		obsolete
 ./usr/share/man/man5/locale.alias.5		man-sys-man		.man

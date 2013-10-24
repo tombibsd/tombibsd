@@ -344,7 +344,9 @@ doskip(const char *fname, int statok)
 			skip -= sb.st_size;
 			return;
 		}
-	}
+	} else
+		sb.st_mode = S_IFIFO;
+
 	if (S_ISREG(sb.st_mode)) {
 		if (fseek(stdin, skip, SEEK_SET))
 			err(1, "fseek %s", fname);

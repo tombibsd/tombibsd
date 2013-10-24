@@ -269,7 +269,6 @@ void
 quip_rawmode(void)
 {
 	char line[MAXLINESIZE];
-	int result_code;
 
 	printf(">>>Entering the raw interactive mode to the server:\n\n");
 	if (server == NULL) {
@@ -297,7 +296,7 @@ quip_rawmode(void)
 		quip_sendrequest(server, line);
 
 		/* get a response message from the server */
-		result_code = quip_recvresponse(server, NULL, NULL, NULL);
+		(void)quip_recvresponse(server, NULL, NULL, NULL);
 	}
 }
 

@@ -36,6 +36,9 @@
 
 #include <sys/stat.h>
 
+#ifndef NO_LUA_SUPPORT
+#include <lua.h>
+#endif
 #include <stdio.h>
 
 /* lots of "const" but gets free()'ed etc at times, sigh */
@@ -46,6 +49,22 @@ typedef struct bozoheaders {
 	/*const*/ char *h_value;	/* this gets free()'ed etc at times */
 	SIMPLEQ_ENTRY(bozoheaders)	h_next;
 } bozoheaders_t;
+
+#ifndef NO_LUA_SUPPORT
+typedef struct lua_handler {
+	const char	*name;
+	int		 ref;
+	SIMPLEQ_ENTRY(lua_handler)	h_next;
+} lua_handler_t;
+
+typedef struct lua_state_map {
+	const char 	*script;
+	const char	*prefix;
+	lua_State	*L;
+	SIMPLEQ_HEAD(, lua_handler)	handlers;
+	SIMPLEQ_ENTRY(lua_state_map)	s_next;
+} lua_state_map_t;
+#endif
 
 typedef struct bozo_content_map_t {
 	const char	*name;		/* postfix of file */
@@ -94,6 +113,10 @@ typedef struct bozohttpd_t {
 	int		 hide_dots;	/* hide .* */
 	int		 process_cgi;	/* use the cgi handler */
 	char		*cgibin;	/* cgi-bin directory */
+#ifndef NO_LUA_SUPPORT
+	int		 process_lua;	/* use the Lua handler */
+	SIMPLEQ_HEAD(, lua_state_map)	lua_states;
+#endif
 	void		*sslinfo;	/* pointer to ssl struct */
 	int		dynamic_content_map_size;/* size of dyn cont map */
 	bozo_content_map_t	*dynamic_content_map;/* dynamic content map */
@@ -121,7 +144,7 @@ typedef struct bozo_httpreq_t {
 					   to hr_httpd->virthostname) */
 	char	*hr_file;
 	char	*hr_oldfile;	/* if we added an index_html */
-	char	*hr_query;  
+	char	*hr_query;
 	const char *hr_proto;
 	const char *hr_content_type;
 	const char *hr_content_length;
@@ -184,7 +207,7 @@ typedef struct bozoprefs_t {
 void	debug__(bozohttpd_t *, int, const char *, ...) BOZO_PRINTFLIKE(3, 4);
 #define debug(x)	debug__ x
 #else
-#define	debug(x)	
+#define	debug(x)
 #endif /* NO_DEBUG */
 
 void	bozo_warn(bozohttpd_t *, const char *, ...)
@@ -250,6 +273,15 @@ void	bozo_setenv(bozohttpd_t *, const char *, const char *, char **);
 int	bozo_process_cgi(bozo_httpreq_t *);
 void	bozo_add_content_map_cgi(bozohttpd_t *, const char *, const char *);
 #endif /* NO_CGIBIN_SUPPORT */
+
+
+/* lua-bozo.c */
+#ifdef NO_LUA_SUPPORT
+#define bozo_process_lua(h)				0
+#else
+void	bozo_add_lua_map(bozohttpd_t *, const char *, const char *);
+int	bozo_process_lua(bozo_httpreq_t *);
+#endif /* NO_LUA_SUPPORT */
 
 
 /* daemon-bozo.c */

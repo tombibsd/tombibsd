@@ -9,7 +9,6 @@ LIB=	lldReaderWriter
 SRCS+=	CoreLinkingContext.cpp \
 	LinkerScript.cpp \
 	Reader.cpp \
-	ReaderArchive.cpp \
 	ReaderLinkerScript.cpp \
 	Writer.cpp
 

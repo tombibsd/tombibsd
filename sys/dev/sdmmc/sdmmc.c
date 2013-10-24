@@ -170,7 +170,7 @@ sdmmc_attach(device_t parent, device_t self, void *aux)
 	 * Create the event thread that will attach and detach cards
 	 * and perform other lengthy operations.
 	 */
-	config_pending_incr();
+	config_pending_incr(self);
 	config_interrupts(self, sdmmc_doattach);
 }
 
@@ -252,7 +252,7 @@ sdmmc_task_thread(void *arg)
 	struct sdmmc_task *task;
 
 	sdmmc_discover_task(sc);
-	config_pending_decr();
+	config_pending_decr(sc->sc_dev);
 
 	mutex_enter(&sc->sc_tskq_mtx);
 	for (;;) {

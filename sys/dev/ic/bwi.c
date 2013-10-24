@@ -5320,7 +5320,7 @@ bwi_rf_calc_nrssi_slope_11b(struct bwi_mac *mac)
 	struct bwi_phy *phy = &mac->mac_phy;
 	uint16_t save_rf[SAVE_RF_MAX];
 	uint16_t save_phy[SAVE_PHY_MAX];
-	uint16_t ant_div, bbp_atten, chan_ex;
+	uint16_t ant_div, chan_ex;
 	int16_t nrssi[2];
 	int i;
 
@@ -5333,7 +5333,7 @@ bwi_rf_calc_nrssi_slope_11b(struct bwi_mac *mac)
 		save_phy[i] = PHY_READ(mac, save_phy_regs[i]);
 
 	ant_div = CSR_READ_2(sc, BWI_RF_ANTDIV);
-	bbp_atten = CSR_READ_2(sc, BWI_BBP_ATTEN);
+	(void)CSR_READ_2(sc, BWI_BBP_ATTEN);
 	chan_ex = CSR_READ_2(sc, BWI_RF_CHAN_EX);
 
 	/*
@@ -9338,13 +9338,13 @@ bwi_txeof(struct bwi_softc *sc)
 	struct ifnet *ifp = &sc->sc_if;
 
 	for (;;) {
-		uint32_t tx_status0, tx_status1;
+		uint32_t tx_status0;
 		uint16_t tx_id, tx_info;
 
 		tx_status0 = CSR_READ_4(sc, BWI_TXSTATUS_0);
 		if ((tx_status0 & BWI_TXSTATUS_0_MORE) == 0)
 			break;
-		tx_status1 = CSR_READ_4(sc, BWI_TXSTATUS_1);
+		(void)CSR_READ_4(sc, BWI_TXSTATUS_1);
 
 		tx_id = __SHIFTOUT(tx_status0, BWI_TXSTATUS_0_TXID_MASK);
 		tx_info = BWI_TXSTATUS_0_INFO(tx_status0);

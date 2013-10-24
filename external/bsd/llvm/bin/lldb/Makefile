@@ -8,7 +8,10 @@ NOMAN=		yes
 .PATH: ${LLDB_SRCDIR}/tools/driver
 
 SRCS=	Driver.cpp \
-	IOChannel.cpp
+	ELWrapper.cpp \
+	GetOptWrapper.cpp \
+	IOChannel.cpp \
+	Platform.cpp
 
 CPPFLAGS.Driver.cpp+=	-Dgetopt_long_only=getopt_long
 
@@ -55,6 +58,7 @@ LLDB_LIBS+= \
 	PluginPlatformLinux \
 	PluginPlatformMacOSX \
 	PluginPlatformPOSIX \
+	PluginPlatformWindows \
 	PluginProcessElfCore \
 	PluginProcessNetBSD \
 	PluginProcessPOSIX \

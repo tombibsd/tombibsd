@@ -845,7 +845,7 @@ input_gssapi_errtok(int type, u_int32_t plen, void *ctxt)
 	Gssctxt *gssctxt;
 	gss_buffer_desc send_tok = GSS_C_EMPTY_BUFFER;
 	gss_buffer_desc recv_tok;
-	OM_uint32 status, ms;
+	OM_uint32 ms;
 	u_int len;
 
 	if (authctxt == NULL)
@@ -858,7 +858,7 @@ input_gssapi_errtok(int type, u_int32_t plen, void *ctxt)
 	packet_check_eom();
 
 	/* Stick it into GSSAPI and see what it says */
-	status = ssh_gssapi_init_ctx(gssctxt, options.gss_deleg_creds,
+	(void)ssh_gssapi_init_ctx(gssctxt, options.gss_deleg_creds,
 	    &recv_tok, &send_tok, NULL);
 
 	xfree(recv_tok.value);
@@ -871,12 +871,11 @@ input_gssapi_errtok(int type, u_int32_t plen, void *ctxt)
 void
 input_gssapi_error(int type, u_int32_t plen, void *ctxt)
 {
-	OM_uint32 maj, min;
 	char *msg;
 	char *lang;
 
-	maj=packet_get_int();
-	min=packet_get_int();
+	(void)packet_get_int();	/* max */
+	(void)packet_get_int();	/* min */
 	msg=packet_get_string(NULL);
 	lang=packet_get_string(NULL);
 
@@ -1445,7 +1444,7 @@ pubkey_prepare(Authctxt *authctxt)
 		/* If IdentitiesOnly set and key not found then don't use it */
 		if (!found && options.identities_only) {
 			TAILQ_REMOVE(&files, id, next);
-			bzero(id, sizeof(id));
+			memset(id, 0, sizeof(*id));
 			free(id);
 		}
 	}

@@ -1071,7 +1071,7 @@ static int
 _hp700_btlb_insert(struct btlb_slot *btlb_slot)
 {
 	int error;
-#ifdef DEBUG
+#ifdef MACHDEPDEBUG
 	const char *prot;
 
 	/* Display the protection like a file protection. */
@@ -1741,7 +1741,7 @@ cpu_dump(void)
 {
 	long buf[dbtob(1) / sizeof (long)];
 	kcore_seg_t	*segp;
-	cpu_kcore_hdr_t	*cpuhdrp;
+	cpu_kcore_hdr_t	*cpuhdrp __unused;
 	const struct bdevsw *bdev;
 
 	segp = (kcore_seg_t *)buf;

@@ -1155,7 +1155,9 @@ add_dir(char *name, int nlen, struct stat *psb, int frc_mode)
 			return;
 		}
 		name = rp;
+#ifdef DIRS_USE_FILE
 		nlen = strlen(name);
+#endif
 	}
 
 #ifdef DIRS_USE_FILE

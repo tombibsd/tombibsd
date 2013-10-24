@@ -197,6 +197,7 @@ SUBDIR+= \
 	liblldbPluginPlatformLinux \
 	liblldbPluginPlatformMacOSX \
 	liblldbPluginPlatformPOSIX \
+	liblldbPluginPlatformWindows \
 	liblldbPluginProcessElfCore \
 	liblldbPluginProcessNetBSD \
 	liblldbPluginProcessGDBRemote \

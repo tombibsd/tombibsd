@@ -19,7 +19,7 @@ TESTS_CXX=	c_gate_test \
 		stack_cleaner_test \
 		state_test
 
-LDADD+=		-llutok
-DPADD+=		${LIBLUTOK}
+LDADD+=		-llutok -llua
+DPADD+=		${LIBLUTOK} ${LIBLUA}
 
 .include <bsd.test.mk>

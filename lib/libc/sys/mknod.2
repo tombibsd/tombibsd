@@ -42,6 +42,8 @@
 .In sys/stat.h
 .Ft int
 .Fn mknod "const char *path" "mode_t mode" "dev_t dev"
+.In sys/stat.h
+.In fcntl.h
 .Ft int
 .Fn mknodat "int fd" "const char *path" "mode_t mode" "dev_t dev"
 .Sh DESCRIPTION

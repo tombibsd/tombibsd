@@ -2220,7 +2220,7 @@ clock_select(void)
 	struct peer *peer;
 	int	i, j, k, n;
 	int	nlist, nl3;
-	int	allow, osurv;
+	int	allow;
 	double	d, e, f, g;
 	double	high, low;
 	double	seljitter;
@@ -2249,7 +2249,6 @@ clock_select(void)
 	 * enough to handle all associations.
 	 */
 	osys_peer = sys_peer;
-	osurv = sys_survivors;
 	sys_survivors = 0;
 #ifdef LOCKCLOCK
 	sys_leap = LEAP_NOTINSYNC;

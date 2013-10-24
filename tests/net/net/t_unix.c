@@ -37,8 +37,17 @@
  */
 
 #include <sys/cdefs.h>
+#ifdef __RCSID
 __RCSID("$Id$");
+#else
+#define getprogname() argv[0]
+#endif
 
+#ifdef __linux__
+#define LX -1
+#else
+#define LX
+#endif
 #include <sys/param.h>
 #include <sys/socket.h>
 #include <sys/un.h>
@@ -56,7 +65,7 @@ __RCSID("$Id$");
 #else
 
 #include <atf-c.h>
-#define FAIL(msg, ...)	ATF_CHECK_MSG(0, msg, ## __VA_ARGS__)
+#define FAIL(msg, ...)	ATF_CHECK_MSG(0, msg, ## __VA_ARGS__); goto fail
 
 #endif
 
@@ -101,7 +110,9 @@ acc(int s)
 		FAIL("guard1 = '%c'", guard1);
 	if (guard2 != 's')
 		FAIL("guard2 = '%c'", guard2);
+#ifdef DEBUG
 	print("accept", &sun, len);
+#endif
 	if (len != 2)
 		FAIL("len %d != 2", len);
 	if (sun.sun_family != AF_UNIX)
@@ -115,6 +126,10 @@ acc(int s)
 			FAIL("sun.sun_path[%zu] %d != NULL", i,
 			    sun.sun_path[i]);
 	return s;
+fail:
+	if (s != -1)
+		close(s);
+	return -1;
 }
 
 static int
@@ -122,8 +137,8 @@ test(bool closeit, size_t len)
 {
 	size_t slen;
 	socklen_t sl;
-	int srvr, clnt, acpt;
-	struct sockaddr_un *sock_addr, *sun;
+	int srvr = -1, clnt = -1, acpt = -1;
+	struct sockaddr_un *sock_addr = NULL, *sun = NULL;
 	socklen_t sock_addrlen;
 
 	srvr = socket(AF_UNIX, SOCK_STREAM, 0);
@@ -144,7 +159,9 @@ test(bool closeit, size_t len)
 	(void)unlink(sun->sun_path);
 
 	sl = SUN_LEN(sun);
+#ifdef BSD4_4
 	sun->sun_len = sl;
+#endif
 	sun->sun_family = AF_UNIX;
 
 	if (bind(srvr, (struct sockaddr *)sun, sl) == -1) {
@@ -199,7 +216,7 @@ test(bool closeit, size_t len)
 		    sock_addr->sun_family);
 
 	len += OF;
-	if (sock_addrlen != len)
+	if (sock_addrlen LX != len)
 		FAIL("sock_addr_len %zu != %zu", (size_t)sock_addrlen, len);
 #ifdef BSD4_4
 	if (sock_addr->sun_len != sl)
@@ -217,7 +234,16 @@ test(bool closeit, size_t len)
 	if (!closeit)
 		(void)close(clnt);
 
+	free(sock_addr);
+	free(sun);
 	return 0;
+fail:
+	(void)close(acpt);
+	(void)close(srvr);
+	(void)close(clnt);
+	free(sock_addr);
+	free(sun);
+	return -1;
 }
 
 #ifndef TEST
@@ -284,6 +310,7 @@ main(int argc, char *argv[])
 		fprintf(stderr, "Usage: %s <len>\n", getprogname());
 		return EXIT_FAILURE;
 	}
-	test(atoi(argv[1]));
+	test(false, atoi(argv[1]));
+	test(true, atoi(argv[1]));
 }
 #endif

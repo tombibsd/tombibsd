@@ -131,10 +131,10 @@ file_init(SCR *sp, FREF *frp, char *rcv_name, int flags)
 	EXF *ep;
 	struct stat sb;
 	size_t psize;
-	int fd, exists, open_err, readonly, stolen;
+	int fd, exists, open_err, readonly;
 	char *oname = NULL, tname[MAXPATHLEN];
 
-	stolen = open_err = readonly = 0;
+	open_err = readonly = 0;
 
 	/*
 	 * If the file is a recovery file, let the recovery code handle it.

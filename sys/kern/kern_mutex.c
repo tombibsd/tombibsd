@@ -711,6 +711,9 @@ mutex_vector_exit(kmutex_t *mtx)
 	MUTEX_DASSERT(mtx, curthread != 0);
 	MUTEX_ASSERT(mtx, MUTEX_OWNER(mtx->mtx_owner) == curthread);
 	MUTEX_UNLOCKED(mtx);
+#if !defined(LOCKDEBUG)
+	__USE(curthread);
+#endif
 
 #ifdef LOCKDEBUG
 	/*

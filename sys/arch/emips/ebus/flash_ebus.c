@@ -295,7 +295,7 @@ eflash_ebus_attach(device_t parent, device_t self, void *aux)
                sc->sc_type.ft_manuf_code, sc->sc_type.ft_device_code);
     }
 
-    config_pending_incr();
+    config_pending_incr(self);
 
 	error = kthread_create(PRI_NONE, 0, NULL,
 	    eflash_thread, sc, NULL, "%s", device_xname(sc->sc_dev));
@@ -1537,7 +1537,7 @@ eflash_wedges(void *arg)
     dkwedge_autodiscover = 1;
 	dkwedge_discover(&sc->sc_dk);
 
-    config_pending_decr();
+    config_pending_decr(sc->sc_dev);
 
     DBGME(DEBUG_STATUS,printf("%s: wedges thread done for %p\n", device_xname(sc->sc_dev), sc));
 	kthread_exit(0);

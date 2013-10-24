@@ -344,7 +344,6 @@ bread(struct uvnode * vp, daddr_t lbn, int size, void * unused,
 {
 	struct ubuf *bp;
 	daddr_t daddr;
-	int error;
 
 	bp = getblk(vp, lbn, size);
 	*bpp = bp;
@@ -359,7 +358,7 @@ bread(struct uvnode * vp, daddr_t lbn, int size, void * unused,
 	 * and load it in.
 	 */
 	daddr = -1;
-	error = VOP_BMAP(vp, lbn, &daddr);
+	(void)VOP_BMAP(vp, lbn, &daddr);
 	bp->b_blkno = daddr;
 	if (daddr >= 0) {
 		bp->b_flags |= B_READ;

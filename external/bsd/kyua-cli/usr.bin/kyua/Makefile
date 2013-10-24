@@ -17,7 +17,7 @@ WARNS?=		3
 	kyua-debug.1 kyua-help.1 kyua-list.1 kyua-report-html.1 \
 	kyua-report.1 kyua-test.1 kyua.1
 MAN+=	${name}
-${name}: ${name}.in
+${name}: ${name}.in ${MANPAGE_DEPS}
 	name=${name}; ${BUILD_MANPAGE}
 .endfor
 

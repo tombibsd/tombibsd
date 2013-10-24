@@ -2645,9 +2645,9 @@ fwohci_arcv_swap(struct fw_pkt *fp, int len)
 {
 	struct fw_pkt *fp0;
 	uint32_t ld0;
-	int slen, hlen;
+	int hlen;
 #if BYTE_ORDER == BIG_ENDIAN
-	int i;
+	int slen, i;
 #endif
 
 	ld0 = FWOHCI_DMA_READ(fp->mode.ld[0]);
@@ -2662,7 +2662,9 @@ fwohci_arcv_swap(struct fw_pkt *fp, int len)
 	case FWTCODE_WREQQ:
 	case FWTCODE_RRESQ:
 	case FWOHCITCODE_PHY:
+#if BYTE_ORDER == BIG_ENDIAN
 		slen = 12;
+#endif
 		break;
 
 	case FWTCODE_RREQB:
@@ -2670,7 +2672,9 @@ fwohci_arcv_swap(struct fw_pkt *fp, int len)
 	case FWTCODE_LREQ:
 	case FWTCODE_RRESB:
 	case FWTCODE_LRES:
+#if BYTE_ORDER == BIG_ENDIAN
 		slen = 16;
+#endif
 		break;
 
 	default:

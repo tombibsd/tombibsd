@@ -316,7 +316,7 @@ wdc_pcmcia_attach(device_t parent, device_t self, void *aux)
 	 * and probe properly, so give them half a second.
 	 * See PR 25659 for details.
 	 */
-	config_pending_incr();
+	config_pending_incr(self);
 	tsleep(wdc_pcmcia_attach, PWAIT, "wdcattach", hz / 2);
 
 	wdcattach(&sc->ata_channel);
@@ -324,7 +324,7 @@ wdc_pcmcia_attach(device_t parent, device_t self, void *aux)
 	if (!pmf_device_register(self, NULL, NULL))
 		aprint_error_dev(self, "unable to establish power handler\n");
 
-	config_pending_decr();
+	config_pending_decr(self);
 	ata_delref(&sc->ata_channel);
 	sc->sc_state = WDC_PCMCIA_ATTACHED;
 	return;

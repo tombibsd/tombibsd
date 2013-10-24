@@ -887,7 +887,8 @@ isc_sha256_final(isc_uint8_t digest[], isc_sha256_t *context) {
 			*context->buffer = 0x80;
 		}
 		/* Set the bit count: */
-		*(isc_uint64_t*)&context->buffer[ISC_SHA256_SHORT_BLOCK_LENGTH] = context->bitcount;
+		memcpy(&context->buffer[ISC_SHA256_SHORT_BLOCK_LENGTH],
+		    &context->bitcount, sizeof(isc_uint64_t));
 
 		/* Final transform: */
 		isc_sha256_transform(context, (isc_uint32_t*)context->buffer);
@@ -1198,8 +1199,8 @@ void isc_sha512_last(isc_sha512_t *context) {
 		*context->buffer = 0x80;
 	}
 	/* Store the length of input data (in bits): */
-	*(isc_uint64_t*)&context->buffer[ISC_SHA512_SHORT_BLOCK_LENGTH] = context->bitcount[1];
-	*(isc_uint64_t*)&context->buffer[ISC_SHA512_SHORT_BLOCK_LENGTH+8] = context->bitcount[0];
+	memcpy(&context->buffer[ISC_SHA512_SHORT_BLOCK_LENGTH+8],
+	    &context->bitcount[0], sizeof(isc_uint64_t));
 
 	/* Final transform: */
 	isc_sha512_transform(context, (isc_uint64_t*)context->buffer);

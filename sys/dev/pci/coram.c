@@ -450,9 +450,6 @@ done:
 static bool
 coram_resume(device_t dv, const pmf_qual_t *qual)
 {
-	struct coram_softc *sc;
-	sc = device_private(dv);
-
 	return true;
 }
 
@@ -774,10 +771,6 @@ coram_dtv_stop_transfer(void *cookie)
 static int
 coram_mpeg_reset(struct coram_softc *sc)
 {
-	uint32_t v;
-
-	v = (uint32_t)-1;
-
 	/* hold RISC in reset */
 	bus_space_write_4(sc->sc_memt, sc->sc_memh, DEV_CNTRL2, 0);
 

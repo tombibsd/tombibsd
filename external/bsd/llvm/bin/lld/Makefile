@@ -17,12 +17,12 @@ LLD_LIBS+= \
 	lldReaderWriterELFX86 \
 	lldReaderWriterELFX86_64 \
 	lldReaderWriterMachO \
-	lldReaderWriterNative \
 	lldReaderWriterPECOFF \
 	lldReaderWriter \
 	lldReaderWriterYAML \
 	lldPasses \
-	lldCore
+	lldCore \
+	lldReaderWriterNative \
 
 LLVM_LIBS+= \
 	Object \

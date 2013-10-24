@@ -537,10 +537,8 @@ aml_region_handle_alloc(struct aml_environ *env, int regtype, u_int32_t flags,
     struct aml_region_handle *h)
 {
 	int	state;
-	struct	aml_name *pci_info;
 
 	state = 0;
-	pci_info = NULL;
 	bzero(h, sizeof(struct aml_region_handle));
 
 	h->env = env;

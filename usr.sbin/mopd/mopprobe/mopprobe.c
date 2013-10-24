@@ -128,7 +128,7 @@ void
 mopProcess(struct if_info *ii, u_char *pkt)
 {
 	u_char  *dst, *src, *p, mopcode, tmpc, ilen;
-	u_short *ptype, moplen, tmps, itype, len;
+	u_short *ptype, moplen, itype, len;
 	int	idx, i, device, trans;
 
 	dst	= pkt;
@@ -177,7 +177,7 @@ mopProcess(struct if_info *ii, u_char *pkt)
 	}
 	
 	tmpc	= mopGetChar(pkt,&idx);		/* Reserved  */
-	tmps	= mopGetShort(pkt,&idx);		/* Receipt # */
+	(void)mopGetShort(pkt,&idx);		/* Receipt # */
 
 	device	= 0;					/* Unknown Device */
 	

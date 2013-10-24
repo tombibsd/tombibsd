@@ -1038,8 +1038,12 @@ kue_ioctl(struct ifnet *ifp, u_long command, void *data)
 		break;
 	case SIOCADDMULTI:
 	case SIOCDELMULTI:
-		kue_setmulti(sc);
-		error = 0;
+		error = ether_ioctl(ifp, command, data);
+		if (error == ENETRESET) {
+			if (ifp->if_flags & IFF_RUNNING)
+				kue_setmulti(sc);
+			error = 0;
+		}
 		break;
 	default:
 		error = ether_ioctl(ifp, command, data);

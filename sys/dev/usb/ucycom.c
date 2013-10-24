@@ -1096,6 +1096,10 @@ ucycom_get_cfg(struct ucycom_softc *sc)
 
 	err = uhidev_get_report(&sc->sc_hdev, UHID_FEATURE_REPORT,
 	    report, sc->sc_flen);
+	if (err) {
+		DPRINTF(("%s: failed\n", __func__));
+		return;
+	}
 	cfg = report[4];
 	baud = (report[3] << 24) + (report[2] << 16) + (report[1] << 8) +
 	    report[0];

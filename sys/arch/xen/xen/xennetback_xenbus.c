@@ -288,6 +288,7 @@ xennetback_xenbus_create(struct xenbus_device *xbusd)
 		if ((e[0] == '\0' && i != 5) && e[0] != ':') {
 			aprint_error_ifnet(ifp,
 			    "%s is not a valid mac address\n", val);
+			free(val, M_DEVBUF);
 			err = EINVAL;
 			goto fail;
 		}

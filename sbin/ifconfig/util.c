@@ -344,17 +344,3 @@ ifa_any_preferences(const char *ifname, struct ifaddrs *ifap, int family)
 	}
 	return false;
 }
-
-
-#ifdef INET6
-/* KAME idiosyncrasy */
-void
-in6_fillscopeid(struct sockaddr_in6 *sin6)
-{
-	if (IN6_IS_ADDR_LINKLOCAL(&sin6->sin6_addr)) {
-		sin6->sin6_scope_id =
-			ntohs(*(u_int16_t *)&sin6->sin6_addr.s6_addr[2]);
-		sin6->sin6_addr.s6_addr[2] = sin6->sin6_addr.s6_addr[3] = 0;
-	}
-}
-#endif /* INET6	*/

@@ -730,17 +730,19 @@ MODULE(MODULE_CLASS_DRIVER, vcoda, NULL);
 static int
 vcoda_modcmd(modcmd_t cmd, void *arg)
 {
-	int cmajor, dmajor, error = 0;
-
-	dmajor = cmajor = -1;
+	int error = 0;
 
 	switch (cmd) {
 	case MODULE_CMD_INIT:
 #ifdef _MODULE
+	{
+		int cmajor, dmajor;
 		vcodaattach(NVCODA);
 
+		dmajor = cmajor = -1;
 		return devsw_attach("vcoda", NULL, &dmajor,
 		    &vcoda_cdevsw, &cmajor);
+	}
 #endif
 		break;
 

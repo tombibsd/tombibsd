@@ -43,6 +43,7 @@ __RCSID("$NetBSD$");
 
 __thread int var1 = 1;
 __thread int var2;
+__attribute__((__tls_model__("initial-exec"))) __thread int var3;
 
 __thread pid_t (*dso_var1)(void) = getpid;
 
@@ -53,4 +54,5 @@ testf_dso_helper(int x, int y)
 {
 	var1 = x;
 	var2 = y;
+	var3 = x;
 }

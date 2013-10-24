@@ -300,9 +300,6 @@ tss_alloc(struct x86_64_tss *tss)
 {
 #ifndef XEN
 	int slot;
-	struct sys_segment_descriptor *gdt;
-
-	gdt = (struct sys_segment_descriptor *)&gdtstore[DYNSEL_START];
 
 	mutex_enter(&cpu_lock);
 	slot = gdt_get_slot();

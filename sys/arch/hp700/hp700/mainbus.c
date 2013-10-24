@@ -1243,7 +1243,7 @@ _bus_dmamap_load_buffer(bus_dma_tag_t t, bus_dmamap_t map, void *buf,
 	bmask = ~(map->_dm_boundary - 1);
 
 	for (seg = *segp; buflen > 0; ) {
-		bool ok;
+		bool ok __unused;
 		/*
 		 * Get the physical address for this segment.
 		 */

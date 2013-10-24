@@ -215,12 +215,14 @@ xhci_read_4(const struct xhci_softc * const sc, bus_size_t offset)
 	return bus_space_read_4(sc->sc_iot, sc->sc_ioh, offset);
 }
 
+#if 0 /* unused */
 static inline void
 xhci_write_4(const struct xhci_softc * const sc, bus_size_t offset,
     uint32_t value)
 {
 	bus_space_write_4(sc->sc_iot, sc->sc_ioh, offset, value);
 }
+#endif /* unused */
 
 static inline uint32_t
 xhci_cap_read_4(const struct xhci_softc * const sc, bus_size_t offset)
@@ -241,6 +243,7 @@ xhci_op_write_4(const struct xhci_softc * const sc, bus_size_t offset,
 	bus_space_write_4(sc->sc_iot, sc->sc_obh, offset, value);
 }
 
+#if 0 /* unused */
 static inline uint64_t
 xhci_op_read_8(const struct xhci_softc * const sc, bus_size_t offset)
 {
@@ -260,6 +263,7 @@ xhci_op_read_8(const struct xhci_softc * const sc, bus_size_t offset)
 
 	return value;
 }
+#endif /* unused */
 
 static inline void
 xhci_op_write_8(const struct xhci_softc * const sc, bus_size_t offset,
@@ -292,6 +296,7 @@ xhci_rt_write_4(const struct xhci_softc * const sc, bus_size_t offset,
 	bus_space_write_4(sc->sc_iot, sc->sc_rbh, offset, value);
 }
 
+#if 0 /* unused */
 static inline uint64_t
 xhci_rt_read_8(const struct xhci_softc * const sc, bus_size_t offset)
 {
@@ -311,6 +316,7 @@ xhci_rt_read_8(const struct xhci_softc * const sc, bus_size_t offset)
 
 	return value;
 }
+#endif /* unused */
 
 static inline void
 xhci_rt_write_8(const struct xhci_softc * const sc, bus_size_t offset,
@@ -330,11 +336,13 @@ xhci_rt_write_8(const struct xhci_softc * const sc, bus_size_t offset,
 	}
 }
 
+#if 0 /* unused */
 static inline uint32_t
 xhci_db_read_4(const struct xhci_softc * const sc, bus_size_t offset)
 {
 	return bus_space_read_4(sc->sc_iot, sc->sc_dbh, offset);
 }
+#endif /* unused */
 
 static inline void
 xhci_db_write_4(const struct xhci_softc * const sc, bus_size_t offset,
@@ -399,12 +407,14 @@ xhci_slot_get_dcv(struct xhci_softc * const sc, struct xhci_slot * const xs,
 	return KERNADDR(&xs->xs_dc_dma, sc->sc_ctxsz * dci);
 }
 
+#if 0 /* unused */
 static inline bus_addr_t
 xhci_slot_get_dcp(struct xhci_softc * const sc, struct xhci_slot * const xs,
     const u_int dci)
 {
 	return DMAADDR(&xs->xs_dc_dma, sc->sc_ctxsz * dci);
 }
+#endif /* unused */
 
 static inline void *
 xhci_slot_get_icv(struct xhci_softc * const sc, struct xhci_slot * const xs,
@@ -1488,7 +1498,8 @@ xhci_new_device(device_t parent, usbd_bus_handle bus, int depth,
 		if (err)
 			return err;
 		USETW(dev->def_ep_desc.wMaxPacketSize, dd->bMaxPacketSize);
-		device_printf(sc->sc_dev, "%s bMaxPacketSize %u\n", __func__, dd->bMaxPacketSize);
+		device_printf(sc->sc_dev, "%s bMaxPacketSize %u\n", __func__,
+		    dd->bMaxPacketSize);
 		xhci_update_ep0_mps(sc, xs, dd->bMaxPacketSize);
 		err = usbd_reload_device_desc(dev);
 		if (err)
@@ -2207,8 +2218,9 @@ xhci_root_ctrl_start(usbd_xfer_handle xfer)
 		hubd.bNbrPorts = sc->sc_hs_port_count;
 		USETW(hubd.wHubCharacteristics, UHD_PWR_NO_SWITCH);
 		hubd.bPwrOn2PwrGood = 200;
-		for (i = 0, l = sc->sc_maxports; l > 0; i++, l -= 8, v >>= 8)
-			hubd.DeviceRemovable[i++] = 0; /* XXX can't find out? */		hubd.bDescLength = USB_HUB_DESCRIPTOR_SIZE + i;
+		for (i = 0, l = sc->sc_maxports; l > 0; i++, l -= 8)
+			hubd.DeviceRemovable[i++] = 0; /* XXX can't find out? */
+		hubd.bDescLength = USB_HUB_DESCRIPTOR_SIZE + i;
 		l = min(len, hubd.bDescLength);
 		totlen = l;
 		memcpy(buf, &hubd, l);

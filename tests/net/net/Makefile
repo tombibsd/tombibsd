@@ -6,6 +6,7 @@
 TESTSDIR=	${TESTSBASE}/net/net
 
 TESTS_C=	t_unix
+TESTS_C+=	t_tcp
 TESTS_C+=	t_udp
 TESTS_C+=	t_pktinfo
 .if (${MKRUMP} != "no")

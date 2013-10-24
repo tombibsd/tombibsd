@@ -96,6 +96,7 @@
 ./usr/include/clang-3.4/rtmintrin.h		comp-c-include		llvm
 ./usr/include/clang-3.4/shaintrin.h		comp-c-include		llvm
 ./usr/include/clang-3.4/smmintrin.h		comp-c-include		llvm
+./usr/include/clang-3.4/tbmintrin.h		comp-c-include		llvm
 ./usr/include/clang-3.4/tmmintrin.h		comp-c-include		llvm
 ./usr/include/clang-3.4/wmmintrin.h		comp-c-include		llvm
 ./usr/include/clang-3.4/x86intrin.h		comp-c-include		llvm

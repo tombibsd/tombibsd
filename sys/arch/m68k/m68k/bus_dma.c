@@ -138,7 +138,7 @@ _bus_dmamap_load_buffer_direct_common(bus_dma_tag_t t, bus_dmamap_t map,
 	vaddr_t vaddr = (vaddr_t)buf;
 	int seg, cacheable, coherent;
 	pmap_t pmap;
-	bool rv;
+	bool rv __unused;
 
 	coherent = BUS_DMA_COHERENT;
 	lastaddr = *lastaddrp;

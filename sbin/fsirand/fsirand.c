@@ -204,10 +204,9 @@ statussig(int dummy)
 {
 	char	msgbuf[256];
 	int	len, deltat;
-	time_t	tnow, elapsed;
+	time_t	tnow;
 
 	(void)time(&tnow);
-	elapsed = tnow - tstart;
 	len = snprintf(msgbuf, sizeof(msgbuf),
 	    "fsirand: completed inode %d of %d (%3.2f%%)",
 	    ino, imax, (ino * 100.0) / imax);

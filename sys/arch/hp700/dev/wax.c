@@ -112,7 +112,7 @@ waxattach(device_t parent, device_t self, void *aux)
 	struct gsc_attach_args ga;
 	struct cpu_info *ci = &cpus[0];
 	bus_space_handle_t ioh;
-	int s, in;
+	int s;
 
 	ca->ca_irq = hp700_intr_allocate_bit(&ci->ci_ir, ca->ca_irq);
 	if (ca->ca_irq == HP700CF_IRQ_UNDEF) {
@@ -140,7 +140,7 @@ waxattach(device_t parent, device_t self, void *aux)
 	sc->sc_regs->wax_iar = ci->ci_hpa | (31 - ca->ca_irq);
 	sc->sc_regs->wax_icr = 0;
 	sc->sc_regs->wax_imr = ~0U;
-	in = sc->sc_regs->wax_irr;
+	(void)sc->sc_regs->wax_irr;
 	sc->sc_regs->wax_imr = 0;
 	splx(s);
 

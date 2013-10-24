@@ -121,7 +121,7 @@ keyboard(void)
 				}
 				continue;
 			}
-			if (ch == '\b' || ch == '\?' || ch == erasechar()) {
+			if (ch == '\b' || ch == '\177' || ch == erasechar()) {
 				if (col > 0)
 					col--;
 				goto doerase;

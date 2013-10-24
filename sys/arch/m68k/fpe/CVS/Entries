@@ -14,7 +14,7 @@
 /fpu_fscale.c/1.16/Tue Mar 26 11:30:20 2013/-kk/
 /fpu_fstore.c/1.14/Tue Mar 26 11:30:21 2013/-kk/
 /fpu_getexp.c/1.5/Mon Jul 18 07:44:30 2011/-kk/
-/fpu_hyperb.c/1.15/Sat Apr 20 07:33:05 2013/-kk/
+/fpu_hyperb.c/1.16/Thu Oct 24 06:29:23 2013/-kk/
 /fpu_implode.c/1.15/Tue Mar 26 11:30:21 2013/-kk/
 /fpu_int.c/1.12/Tue Mar 19 09:17:17 2013/-kk/
 /fpu_log.c/1.17/Sat Apr 20 05:27:05 2013/-kk/

@@ -3115,7 +3115,6 @@ iwn_ioctl(struct ifnet *ifp, u_long cmd, void *data)
 {
 	struct iwn_softc *sc = ifp->if_softc;
 	struct ieee80211com *ic = &sc->sc_ic;
-	struct ifaddr *ifa;
 	const struct sockaddr *sa;
 	int s, error = 0;
 
@@ -3123,9 +3122,9 @@ iwn_ioctl(struct ifnet *ifp, u_long cmd, void *data)
 
 	switch (cmd) {
 	case SIOCSIFADDR:
-		ifa = (struct ifaddr *)data;
 		ifp->if_flags |= IFF_UP;
 #ifdef INET
+		struct ifaddr *ifa = (struct ifaddr *)data;
 		if (ifa->ifa_addr->sa_family == AF_INET)
 			arp_ifinit(&ic->ic_ac, ifa);
 #endif

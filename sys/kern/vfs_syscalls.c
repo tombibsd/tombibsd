@@ -2162,7 +2162,8 @@ sys_mknodat(struct lwp *l, const struct sys_mknodat_args *uap,
 		syscallarg(int) fd;
 		syscallarg(const char *) path;
 		syscallarg(mode_t) mode;
-		syscallarg(uint32_t) dev;
+		syscallarg(int) pad;
+		syscallarg(dev_t) dev;
 	} */
 
 	return do_sys_mknodat(l, SCARG(uap, fd), SCARG(uap, path), 

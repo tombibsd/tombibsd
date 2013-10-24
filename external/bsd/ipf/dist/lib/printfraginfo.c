@@ -16,7 +16,6 @@ printfraginfo(prefix, ifr)
 	char *prefix;
 	struct ipfr *ifr;
 {
-	frentry_t fr;
 	int family;
 
 	PRINTF("%s", prefix);
@@ -27,10 +26,11 @@ printfraginfo(prefix, ifr)
 		PRINTF("inet");
 		family = AF_INET;
 	}
-	fr.fr_flags = 0xffffffff;
 
 	PRINTF(" %s -> ", hostname(family, &ifr->ipfr_src));
 /*
+	frentry_t fr;
+	fr.fr_flags = 0xffffffff;
 	if (kmemcpy((char *)&fr, (u_long)ifr->ipfr_rule,
 		    sizeof(fr)) == -1)
 		return;

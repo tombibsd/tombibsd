@@ -49,9 +49,12 @@
 #define INIT(x)
 #endif
 
-/* some constants */
-#define TRUE 1
-#define FALSE 0
+#ifndef TRUE
+#define TRUE	1
+#endif
+#ifndef FALSE
+#define FALSE	0
+#endif
 
 /* Global variables .. to be defined in main.c, extern elsewhere. */
 

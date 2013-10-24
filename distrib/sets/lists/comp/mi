@@ -2779,6 +2779,7 @@
 ./usr/include/ulimit.h				comp-c-include
 ./usr/include/unctrl.h				comp-c-include
 ./usr/include/unistd.h				comp-c-include
+./usr/include/unwind.h				comp-c-include		!libgcc
 ./usr/include/usb.h				comp-obsolete		obsolete
 ./usr/include/usbhid.h				comp-c-include
 ./usr/include/util.h				comp-c-include
@@ -3347,11 +3348,13 @@
 ./usr/libdata/lint/llib-lcrypto_idea.ln		comp-obsolete		obsolete
 ./usr/libdata/lint/llib-lcrypto_mdc2.ln		comp-obsolete		obsolete
 ./usr/libdata/lint/llib-lcrypto_rc5.ln		comp-c-lintlib		lint,crypto_rc5
+./usr/libdata/lint/llib-lctf.ln			comp-c-lintlib		lint,dtrace
 ./usr/libdata/lint/llib-lcurses.ln		comp-c-lintlib		lint
 ./usr/libdata/lint/llib-ldes.ln			comp-c-lintlib		lint,crypto
 ./usr/libdata/lint/llib-ldm.ln			comp-c-lintlib		lint
 ./usr/libdata/lint/llib-ldns.ln			comp-bind-lintlib	lint
 ./usr/libdata/lint/llib-ldns_sd.ln		comp-mdns-lintlib	lint,mdns
+./usr/libdata/lint/llib-ldtrace.ln		comp-c-lintlib		lint,dtrace
 ./usr/libdata/lint/llib-ldwarf.ln		comp-c-lintlib		lint
 ./usr/libdata/lint/llib-ledit.ln		comp-c-lintlib		lint
 ./usr/libdata/lint/llib-lelf.ln			comp-c-lintlib		lint
@@ -4538,6 +4541,7 @@
 ./usr/share/man/cat3/__STRING.0			comp-c-catman		.cat
 ./usr/share/man/cat3/__UNCONST.0		comp-c-catman		.cat
 ./usr/share/man/cat3/__UNVOLATILE.0		comp-c-catman		.cat
+./usr/share/man/cat3/__USE.0			comp-c-catman		.cat
 ./usr/share/man/cat3/__aligned.0		comp-c-catman		.cat
 ./usr/share/man/cat3/__alignof__.0		comp-c-catman		.cat
 ./usr/share/man/cat3/__arraycount.0		comp-c-catman		.cat
@@ -6051,6 +6055,7 @@
 ./usr/share/man/cat3/inchstr.0			comp-c-catman		.cat
 ./usr/share/man/cat3/index.0			comp-c-catman		.cat
 ./usr/share/man/cat3/inet.0			comp-c-catman		.cat
+./usr/share/man/cat3/inet6_getscopeid.0		comp-c-catman		.cat
 ./usr/share/man/cat3/inet6_opt_append.0		comp-c-catman		.cat
 ./usr/share/man/cat3/inet6_opt_find.0		comp-c-catman		.cat
 ./usr/share/man/cat3/inet6_opt_finish.0		comp-c-catman		.cat
@@ -6064,6 +6069,7 @@
 ./usr/share/man/cat3/inet6_option_init.0	comp-c-catman		.cat
 ./usr/share/man/cat3/inet6_option_next.0	comp-c-catman		.cat
 ./usr/share/man/cat3/inet6_option_space.0	comp-c-catman		.cat
+./usr/share/man/cat3/inet6_putscopeid.0		comp-c-catman		.cat
 ./usr/share/man/cat3/inet6_rth_add.0		comp-c-catman		.cat
 ./usr/share/man/cat3/inet6_rth_getaddr.0	comp-c-catman		.cat
 ./usr/share/man/cat3/inet6_rth_init.0		comp-c-catman		.cat
@@ -11140,6 +11146,7 @@
 ./usr/share/man/html3/__STRING.html		comp-c-htmlman		html
 ./usr/share/man/html3/__UNCONST.html		comp-c-htmlman		html
 ./usr/share/man/html3/__UNVOLATILE.html		comp-c-htmlman		html
+./usr/share/man/html3/__USE.html		comp-c-htmlman		html
 ./usr/share/man/html3/__aligned.html		comp-c-htmlman		html
 ./usr/share/man/html3/__alignof__.html		comp-c-htmlman		html
 ./usr/share/man/html3/__arraycount.html		comp-c-htmlman		html
@@ -12594,6 +12601,7 @@
 ./usr/share/man/html3/inchstr.html		comp-c-htmlman		html
 ./usr/share/man/html3/index.html		comp-c-htmlman		html
 ./usr/share/man/html3/inet.html			comp-c-htmlman		html
+./usr/share/man/html3/inet6_getscopeid.html	comp-c-htmlman		html
 ./usr/share/man/html3/inet6_opt_append.html	comp-c-htmlman		html
 ./usr/share/man/html3/inet6_opt_find.html	comp-c-htmlman		html
 ./usr/share/man/html3/inet6_opt_finish.html	comp-c-htmlman		html
@@ -12607,6 +12615,7 @@
 ./usr/share/man/html3/inet6_option_init.html	comp-c-htmlman		html
 ./usr/share/man/html3/inet6_option_next.html	comp-c-htmlman		html
 ./usr/share/man/html3/inet6_option_space.html	comp-c-htmlman		html
+./usr/share/man/html3/inet6_putscopeid.html	comp-c-htmlman		html
 ./usr/share/man/html3/inet6_rth_add.html	comp-c-htmlman		html
 ./usr/share/man/html3/inet6_rth_getaddr.html	comp-c-htmlman		html
 ./usr/share/man/html3/inet6_rth_init.html	comp-c-htmlman		html
@@ -17544,6 +17553,7 @@
 ./usr/share/man/man3/__STRING.3			comp-c-man		.man
 ./usr/share/man/man3/__UNCONST.3		comp-c-man		.man
 ./usr/share/man/man3/__UNVOLATILE.3		comp-c-man		.man
+./usr/share/man/man3/__USE.3			comp-c-man		.man
 ./usr/share/man/man3/__aligned.3		comp-c-man		.man
 ./usr/share/man/man3/__alignof__.3		comp-c-man		.man
 ./usr/share/man/man3/__arraycount.3		comp-c-man		.man
@@ -19057,6 +19067,7 @@
 ./usr/share/man/man3/inchstr.3			comp-c-man		.man
 ./usr/share/man/man3/index.3			comp-c-man		.man
 ./usr/share/man/man3/inet.3			comp-c-man		.man
+./usr/share/man/man3/inet6_getscopeid.3		comp-c-man		.man
 ./usr/share/man/man3/inet6_opt_append.3		comp-c-man		.man
 ./usr/share/man/man3/inet6_opt_find.3		comp-c-man		.man
 ./usr/share/man/man3/inet6_opt_finish.3		comp-c-man		.man
@@ -19070,6 +19081,7 @@
 ./usr/share/man/man3/inet6_option_init.3	comp-c-man		.man
 ./usr/share/man/man3/inet6_option_next.3	comp-c-man		.man
 ./usr/share/man/man3/inet6_option_space.3	comp-c-man		.man
+./usr/share/man/man3/inet6_putscopeid.3		comp-c-man		.man
 ./usr/share/man/man3/inet6_rth_add.3		comp-c-man		.man
 ./usr/share/man/man3/inet6_rth_getaddr.3	comp-c-man		.man
 ./usr/share/man/man3/inet6_rth_init.3		comp-c-man		.man

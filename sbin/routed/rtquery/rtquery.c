@@ -372,8 +372,9 @@ trace_loop(char *argv[])
 static void
 query_loop(char *argv[], int argc)
 {
-#	define NA0 (OMSG.rip_auths[0])
-#	define NA2 (OMSG.rip_auths[2])
+	struct netauth *na = OMSG.rip_auths;
+#	define NA0 (na[0])
+#	define NA2 (na[2])
 	struct seen {
 		struct seen *next;
 		struct in_addr addr;
@@ -391,14 +392,14 @@ query_loop(char *argv[], int argc)
 	if (ripv2) {
 		OMSG.rip_vers = RIPv2;
 		if (auth_type == RIP_AUTH_PW) {
-			OMSG.rip_nets[1] = OMSG.rip_nets[0];
+			na[1] = na[0];
 			NA0.a_family = RIP_AF_AUTH;
 			NA0.a_type = RIP_AUTH_PW;
 			memcpy(NA0.au.au_pw, passwd, RIP_AUTH_PW_LEN);
 			omsg_len += sizeof(OMSG.rip_nets[0]);
 
 		} else if (auth_type == RIP_AUTH_MD5) {
-			OMSG.rip_nets[1] = OMSG.rip_nets[0];
+			na[1] = na[0];
 			NA0.a_family = RIP_AF_AUTH;
 			NA0.a_type = RIP_AUTH_MD5;
 			NA0.au.a_md5.md5_keyid = (int8_t)keyid;

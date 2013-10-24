@@ -589,7 +589,7 @@ DPLIBC ?= ${DESTDIR}${LIBC_SO}
 .endif
 .else
 LDLIBC ?= -nodefaultlibs
-.if ${LIB} == "c"
+.if ${HAVE_LIBGCC} == "yes" && ${LIB} == "c"
 LDADD+= -lgcc
 .endif
 .endif
@@ -599,7 +599,7 @@ LDADD+= -lgcc
 LIBCC:=	${CXX}
 . if ${MKLIBCXX} == "yes"
 LIBDPLIBS+=     c++	${.CURDIR}/../../../../../external/bsd/libc++/lib
-. elif ${HAVE_GCC} == 4
+. elif defined(HAVE_GCC) && ${HAVE_GCC} == 4
 LIBDPLIBS+=     stdc++	${.CURDIR}/../../../../../gnu/lib/libstdc++-v3_4
 . else
 LIBDPLIBS+=     stdc++	${.CURDIR}/../../../../../external/gpl3/gcc/lib/libstdc++-v3

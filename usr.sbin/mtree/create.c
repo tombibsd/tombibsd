@@ -55,6 +55,7 @@ __RCSID("$NetBSD$");
 #include <pwd.h>
 #include <stdio.h>
 #include <stdarg.h>
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
@@ -221,7 +222,7 @@ statf(int indent, FTSENT *p)
 	if (keys & F_NLINK && p->fts_statp->st_nlink != 1)
 		output(indent, &offset, "nlink=%u", p->fts_statp->st_nlink);
 	if (keys & F_SIZE &&
-	    (flavor != F_NETBSD6 || S_ISREG(p->fts_statp->st_mode)))
+	    (flavor == F_FREEBSD9 || S_ISREG(p->fts_statp->st_mode)))
 		output(indent, &offset, "size=%ju",
 		    (uintmax_t)p->fts_statp->st_size);
 	if (keys & F_TIME)

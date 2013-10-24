@@ -70,7 +70,7 @@ random_uint32(void)
 static void
 trylocks(int id)
 {
-	int i, ret, fd;
+	int i, fd;
 
 	srand48(getpid());
 
@@ -99,7 +99,7 @@ trylocks(int id)
 		}
 		fl.l_whence = SEEK_SET;
 
-		ret = fcntl(fd, F_SETLKW, &fl);
+		(void)fcntl(fd, F_SETLKW, &fl);
 
 		if (usleep(sleeptime) < 0) 
 		  err(1, "usleep");

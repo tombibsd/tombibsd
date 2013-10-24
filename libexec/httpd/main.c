@@ -79,6 +79,9 @@ usage(bozohttpd_t *httpd, char *progname)
 	bozo_warn(httpd,
 		"   -c cgibin\t\tenable cgi-bin support in this directory");
 #endif
+#ifndef NO_LUA_SUPPORT
+	bozo_warn(httpd, "   -L arg script\tadd this Lua script");
+#endif
 	bozo_warn(httpd, "   -I port\t\tbind or use on this port");
 #ifndef NO_DAEMON_MODE
 	bozo_warn(httpd, "   -b\t\t\tbackground and go into daemon mode");
@@ -138,9 +141,22 @@ main(int argc, char **argv)
 	bozo_set_defaults(&httpd, &prefs);
 
 	while ((c = getopt(argc, argv,
-			   "C:HI:M:P:S:U:VXZ:bc:defhi:np:rst:uv:x:z:")) != -1) {
+	    "C:HI:L:M:P:S:U:VXZ:bc:defhi:np:rst:uv:x:z:")) != -1) {
 		switch(c) {
 
+		case 'L':
+#ifdef NO_LUA_SUPPORT
+			bozo_err(&httpd, 1,
+				"Lua support is not enabled");
+			/* NOTREACHED */
+#else
+			/* make sure there's two argument */
+			if (argc - optind < 1)
+				usage(&httpd, progname);
+			bozo_add_lua_map(&httpd, optarg, argv[optind]);
+			optind++;
+			break;
+#endif /* NO_LUA_SUPPORT */
 		case 'M':
 #ifdef NO_DYNAMIC_CONTENT
 			bozo_err(&httpd, 1,

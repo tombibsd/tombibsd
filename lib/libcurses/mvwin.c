@@ -52,7 +52,7 @@ int
 mvderwin(WINDOW *win, int dy, int dx)
 {
 	WINDOW *parent;
-	int x, y, i;
+	int x, i;
 	__LINE *lp, *olp;
 #ifdef HAVE_WCHAR
 	__LDATA *cp;
@@ -73,7 +73,6 @@ mvderwin(WINDOW *win, int dy, int dx)
 		return ERR;
 
 	x = parent->begx + dx;
-	y = parent->begy + dy;
 
 	win->ch_off = x;
 	/* Point the line pointers to line space */

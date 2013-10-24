@@ -65,6 +65,12 @@ USE_COMPILERCRTSTUFF?=	yes
 USE_COMPILERCRTSTUFF?=	no
 .endif
 
+.if ${MKLLVM:Uno} == "yes" && (${MACHINE_ARCH} == "i386" || ${MACHINE_ARCH} == "x86_64")
+HAVE_LIBGCC?=	no
+.else
+HAVE_LIBGCC?=	yes
+.endif
+
 HAVE_GDB?=	7
 
 .if (${MACHINE_ARCH} == "alpha") || \

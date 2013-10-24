@@ -163,8 +163,10 @@ struct clockframe {
 #define	cpu_signotify(l)	aston(l)
 
 // void cpu_need_resched(struct cpu_info *ci, int flags)
-#define cpu_need_resched(ci, f) do { \
-} while(0)
+#define cpu_need_resched(ci, f) do {	\
+	__USE(ci);			\
+	__USE(f);			\
+} while(/*CONSTCOND*/0)
 
 #define setsoftclock()              /*XXX: FIXME */
 

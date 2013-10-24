@@ -263,7 +263,7 @@ show_vtw_v4(void (*print)(const vtw_t *))
 	/* snarf/adjust vtw_ctl */
 	for (i = 0; i < VTW_NCLASS; ++i) {
 		vtw_v4_t *kbase, *klim;
-		vtw_v4_t *ubase, *ulim;
+		vtw_v4_t *ubase;
 		ptrdiff_t delta;
 
 		kbase = vtw_tcpv4[i].base.v4;
@@ -277,14 +277,11 @@ show_vtw_v4(void (*print)(const vtw_t *))
 		if (!i) {
 			if ((ubase = malloc(n * sizeof(*kbase))) == NULL)
 				err(EXIT_FAILURE, NULL);
-			ulim = ubase + n - 1;
-
 			snarf(kbase, ubase, n * sizeof(*ubase));
 
 			mem += n * sizeof(*ubase);
 		} else {
 			ubase = vtw_tcpv4[0].base.v4;
-			ulim = vtw_tcpv4[0].lim.v4;
 		}
 
 		delta = ubase - kbase;
@@ -366,7 +363,7 @@ show_vtw_v6(void (*print)(const vtw_t *))
 
 	for (i = 0; i < VTW_NCLASS; ++i) {
 		vtw_v6_t *kbase, *klim;
-		vtw_v6_t *ubase, *ulim;
+		vtw_v6_t *ubase;
 		ptrdiff_t delta;
 
 		kbase = vtw_tcpv6[i].base.v6;
@@ -380,14 +377,12 @@ show_vtw_v6(void (*print)(const vtw_t *))
 		if (!i) {
 			if ((ubase = malloc(n * sizeof(*kbase))) == NULL)
 				err(EXIT_FAILURE, NULL);
-			ulim = ubase + n - 1;
 
 			snarf(kbase, ubase, n * sizeof(*ubase));
 
 			mem += n * sizeof(*ubase);
 		} else {
 			ubase = vtw_tcpv6[0].base.v6;
-			ulim = vtw_tcpv6[0].lim.v6;
 		}
 
 		delta = ubase - kbase;

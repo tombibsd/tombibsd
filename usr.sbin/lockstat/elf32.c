@@ -166,9 +166,8 @@ NAME(loadsym)(int fd)
 int
 NAME(findsym)(findsym_t find, char *name, uintptr_t *start, uintptr_t *end)
 {
-	static int lastptr[FIND_MAX];
 	uintptr_t sa, ea;
-	int i, rv, off;
+	int i, off;
 	Elf_Byte st;
 
 	switch (find) {
@@ -184,9 +183,9 @@ NAME(findsym)(findsym_t find, char *name, uintptr_t *start, uintptr_t *end)
 		return -1;
 	}
 
-	rv = -1;
 
 #ifdef dump_core
+	static int lastptr[FIND_MAX];
 	for (i = lastptr[find];;) {
 #else
 	for (i = 0; i < nsyms; i++) {
@@ -239,6 +238,8 @@ NAME(findsym)(findsym_t find, char *name, uintptr_t *start, uintptr_t *end)
 	return -1;
 
  found:
+#ifdef dump_core
  	lastptr[find] = i;
+#endif
  	return 0;
 }

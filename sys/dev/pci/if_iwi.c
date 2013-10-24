@@ -1233,25 +1233,29 @@ static void
 iwi_notification_intr(struct iwi_softc *sc, struct iwi_notif *notif)
 {
 	struct ieee80211com *ic = &sc->sc_ic;
-	struct iwi_notif_scan_channel *chan;
-	struct iwi_notif_scan_complete *scan;
 	struct iwi_notif_authentication *auth;
 	struct iwi_notif_association *assoc;
 	struct iwi_notif_beacon_state *beacon;
 
 	switch (notif->type) {
 	case IWI_NOTIF_TYPE_SCAN_CHANNEL:
-		chan = (struct iwi_notif_scan_channel *)(notif + 1);
+#ifdef IWI_DEBUG
+		struct iwi_notif_scan_channel *chan =
+		    (struct iwi_notif_scan_channel *)(notif + 1);
 
 		DPRINTFN(2, ("Scan of channel %u complete (%u)\n",
 		    ic->ic_channels[chan->nchan].ic_freq, chan->nchan));
+#endif
 		break;
 
 	case IWI_NOTIF_TYPE_SCAN_COMPLETE:
-		scan = (struct iwi_notif_scan_complete *)(notif + 1);
+#ifdef IWI_DEBUG
+		struct iwi_notif_scan_complete *scan =
+		    (struct iwi_notif_scan_complete *)(notif + 1);
 
 		DPRINTFN(2, ("Scan completed (%u, %u)\n", scan->nchan,
 		    scan->status));
+#endif
 
 		/* monitor mode uses scan to set the channel ... */
 		if (ic->ic_opmode != IEEE80211_M_MONITOR) {
@@ -1333,9 +1337,8 @@ iwi_notification_intr(struct iwi_softc *sc, struct iwi_notif *notif)
 static void
 iwi_cmd_intr(struct iwi_softc *sc)
 {
-	uint32_t hw;
 
-	hw = CSR_READ_4(sc, IWI_CSR_CMD_RIDX);
+	(void)CSR_READ_4(sc, IWI_CSR_CMD_RIDX);
 
 	bus_dmamap_sync(sc->sc_dmat, sc->cmdq.desc_map,
 	    sc->cmdq.next * IWI_CMD_DESC_SIZE, IWI_CMD_DESC_SIZE,

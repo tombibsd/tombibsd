@@ -897,7 +897,6 @@ coda_lookup(void *v)
     const char *nm = cnp->cn_nameptr;
     int len = cnp->cn_namelen;
     int flags = cnp->cn_flags;
-    int isdot;
     CodaFid VFid;
     int	vtype;
     int error = 0;
@@ -935,13 +934,6 @@ coda_lookup(void *v)
 	error = EINVAL;
 	goto exit;
     }
-
-    /*
-     * XXX Check for DOT lookups, and short circuit all the caches,
-     * just doing an extra vref.  (venus guarantees that lookup of
-     * . returns self.)
-     */
-    isdot = (len == 1 && nm[0] == '.');
 
     /*
      * Try to resolve the lookup in the minicache.  If that fails, ask

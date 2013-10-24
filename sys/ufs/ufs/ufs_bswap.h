@@ -65,9 +65,23 @@ ufs_rw64(uint64_t a, int ns)
 	return ((ns) ? bswap64(a) : (a));
 }
 #else
-#define ufs_rw16(a, ns) ((uint16_t)(a))
-#define ufs_rw32(a, ns) ((uint32_t)(a))
-#define ufs_rw64(a, ns) ((uint64_t)(a))
+static inline u_int16_t
+ufs_rw16(uint16_t a, int ns)
+{
+	return a;
+}
+
+static inline u_int32_t
+ufs_rw32(uint32_t a, int ns)
+{
+	return a;
+}
+
+static inline u_int64_t
+ufs_rw64(uint64_t a, int ns)
+{
+	return a;
+}
 #endif
 
 #define ufs_add16(a, b, ns) \

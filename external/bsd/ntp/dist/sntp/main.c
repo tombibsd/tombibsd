@@ -365,7 +365,7 @@ on_wire (
 	int key_id = 0;
 	struct timeval tv_xmt;
 	struct pkt x_pkt;
-	int error, rpktl, handle_pkt_res;
+	int rpktl, handle_pkt_res;
 
 
 	if (ENABLED_OPT(AUTHENTICATION)) {
@@ -375,7 +375,7 @@ on_wire (
 	for (try=0; try<5; try++) {
 		memset(&r_pkt, 0, sizeof rbuf);
 		
-		error = GETTIMEOFDAY(&tv_xmt, (struct timezone *)NULL);
+		(void)GETTIMEOFDAY(&tv_xmt, (struct timezone *)NULL);
 		tv_xmt.tv_sec += JAN_1970;
 
 #ifdef DEBUG

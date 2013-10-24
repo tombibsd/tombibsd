@@ -886,16 +886,17 @@ ipw_read_prom_word(struct ipw_softc *sc, uint8_t addr)
 static void
 ipw_command_intr(struct ipw_softc *sc, struct ipw_soft_buf *sbuf)
 {
-	struct ipw_cmd *cmd;
 
 	bus_dmamap_sync(sc->sc_dmat, sbuf->map, 0, sizeof (struct ipw_cmd),
 	    BUS_DMASYNC_POSTREAD);
 
-	cmd = mtod(sbuf->m, struct ipw_cmd *);
+#ifdef IPW_DEBUG
+	struct ipw_cmd *cmd = mtod(sbuf->m, struct ipw_cmd *);
 
 	DPRINTFN(2, ("cmd ack'ed (%u, %u, %u, %u, %u)\n", le32toh(cmd->type),
 	    le32toh(cmd->subtype), le32toh(cmd->seq), le32toh(cmd->len),
 	    le32toh(cmd->status)));
+#endif
 
 	wakeup(&sc->cmd);
 }
@@ -1152,7 +1153,6 @@ ipw_rx_intr(struct ipw_softc *sc)
 static void
 ipw_release_sbd(struct ipw_softc *sc, struct ipw_soft_bd *sbd)
 {
-	struct ieee80211com *ic;
 	struct ipw_soft_hdr *shdr;
 	struct ipw_soft_buf *sbuf;
 
@@ -1171,7 +1171,6 @@ ipw_release_sbd(struct ipw_softc *sc, struct ipw_soft_bd *sbd)
 		break;
 
 	case IPW_SBD_TYPE_DATA:
-		ic = &sc->sc_ic;
 		sbuf = sbd->priv;
 
 		bus_dmamap_sync(sc->sc_dmat, sbuf->map,

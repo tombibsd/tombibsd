@@ -41,9 +41,9 @@
 #define ULFS_FSNEEDSWAP(fs)	((fs)->fs_flags & FS_SWAPPED)
 #define	ULFS_IPNEEDSWAP(ip)	ULFS_MPNEEDSWAP((ip)->i_lfs)
 #else
-#define	ULFS_MPNEEDSWAP(ump)	(0)
-#define ULFS_FSNEEDSWAP(fs)	(0)
-#define	ULFS_IPNEEDSWAP(ip)	(0)
+#define	ULFS_MPNEEDSWAP(ump)	(__USE(ump), 0)
+#define ULFS_FSNEEDSWAP(fs)	(__USE(fs), 0)
+#define	ULFS_IPNEEDSWAP(ip)	(__USE(ip), 0)
 #endif
 
 #if !defined(_KERNEL) || defined(LFS_EI)
@@ -66,9 +66,9 @@ ulfs_rw64(uint64_t a, int ns)
 	return ((ns) ? bswap64(a) : (a));
 }
 #else
-#define ulfs_rw16(a, ns) ((uint16_t)(a))
-#define ulfs_rw32(a, ns) ((uint32_t)(a))
-#define ulfs_rw64(a, ns) ((uint64_t)(a))
+#define ulfs_rw16(a, ns) (__USE(ns), (uint16_t)(a))
+#define ulfs_rw32(a, ns) (__USE(ns), (uint32_t)(a))
+#define ulfs_rw64(a, ns) (__USE(ns), (uint64_t)(a))
 #endif
 
 #define ulfs_add16(a, b, ns) \

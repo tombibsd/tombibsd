@@ -166,7 +166,7 @@ typedef	int pacmac;		/* compressed macro name */
 static int	argconcat = 0;	/* concat arguments together (-me only) */
 
 #define	tomac(c1, c2)		((((c1) & 0xFF) << 8) | ((c2) & 0xFF))
-#define	frommac(src, c1, c2)	(((c1)=((src)>>8)&0xFF),((c2) =(src)&0xFF))
+#define	frommac(src, c1, c2)	(((c1)=((src)>>8)&0xFF),((c2) =(src)&0xFF), __USE(c1), __USE(c2))
 
 struct mactab {
 	int	condition;

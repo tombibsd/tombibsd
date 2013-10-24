@@ -36,4 +36,4 @@
 # - remove ruserok() and friends to libcompat (or entirely)
 # - remove alloca fallback and expect compiler to provide a builtin version.
 major=12
-minor=186
+minor=187

@@ -31,7 +31,6 @@ SRCS+=	APValue.cpp \
 	DeclOpenMP.cpp \
 	DeclPrinter.cpp \
 	DeclTemplate.cpp \
-	DumpXML.cpp \
 	Expr.cpp \
 	ExprClassification.cpp \
 	ExprConstant.cpp \

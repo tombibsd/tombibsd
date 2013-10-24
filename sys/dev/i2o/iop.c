@@ -607,14 +607,12 @@ static void
 iop_reconf_thread(void *cookie)
 {
 	struct iop_softc *sc;
-	struct lwp *l;
 	struct i2o_lct lct;
 	u_int32_t chgind;
 	int rv;
 
 	sc = cookie;
 	chgind = sc->sc_chgind + 1;
-	l = curlwp;
 
 	for (;;) {
 		DPRINTF(("%s: async reconfig: requested 0x%08x\n",
@@ -2239,11 +2237,13 @@ iop_msg_wait(struct iop_softc *sc, struct iop_msg *im, int timo)
 	if (rv != 0) {
 		printf("iop_msg_wait: tsleep() == %d\n", rv);
 		if (iop_status_get(sc, 0) != 0)
-			printf("iop_msg_wait: unable to retrieve status\n");
+			printf("%s: unable to retrieve status\n", __func__);
 		else
-			printf("iop_msg_wait: IOP state = %d\n",
+			printf("%s: IOP state = %d\n", __func__,
 			    (le32toh(sc->sc_status.segnumber) >> 16) & 0xff);
 	}
+#else
+	__USE(rv);
 #endif
 }
 

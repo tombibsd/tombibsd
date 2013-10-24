@@ -1,16 +1,18 @@
 /CHANGES/1.13/Thu Jul 11 07:44:19 2013/-kk/
 /Makefile.boot/1.5/Mon May 10 14:44:19 2010/-kk/
-/Makefile/1.14/Thu Jul 11 08:51:09 2013/-kk/
-/auth-bozo.c/1.10/Fri Nov 18 09:51:31 2011/-kk/
-/bozohttpd.8/1.38/Thu Jul 11 08:19:56 2013/-kk/
-/bozohttpd.c/1.41/Thu Jul 11 07:46:37 2013/-kk/
-/bozohttpd.h/1.28/Wed Sep  4 22:59:50 2013/-kk/
-/cgi-bozo.c/1.22/Thu Jul 11 07:46:37 2013/-kk/
+/Makefile/1.17/Thu Oct 24 06:29:10 2013/-kk/
+/auth-bozo.c/1.11/Thu Oct 24 06:29:10 2013/-kk/
+/bozohttpd.8/1.41/Thu Oct 24 06:29:10 2013/-kk/
+/bozohttpd.c/1.44/Thu Oct 24 06:29:10 2013/-kk/
+/bozohttpd.h/1.30/Thu Oct 24 06:29:10 2013/-kk/
+/cgi-bozo.c/1.23/Thu Oct 24 06:29:10 2013/-kk/
 /content-bozo.c/1.8/Thu Jul 11 07:44:19 2013/-kk/
 /daemon-bozo.c/1.15/Fri Nov 18 09:51:31 2011/-kk/
-/dir-index-bozo.c/1.17/Thu Jul 11 07:46:37 2013/-kk/
-/main.c/1.5/Fri Nov 18 09:51:31 2011/-kk/
+/dir-index-bozo.c/1.18/Thu Oct 24 06:29:10 2013/-kk/
+/lua-bozo.c/1.5/Thu Oct 17 08:07:54 2013/-kk/
+/main.c/1.6/Thu Oct 24 06:29:10 2013/-kk/
 /netbsd_queue.h/1.1/Thu Jul 11 08:24:47 2013/-kk/
+/printenv.lua/1.1/Sat Oct 12 17:24:07 2013/-kk/
 /ssl-bozo.c/1.15/Wed Mar 14 23:47:19 2012/-kk/
 /tilde-luzah-bozo.c/1.9/Fri Nov 18 09:51:31 2011/-kk/
 D/debug////

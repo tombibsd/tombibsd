@@ -261,7 +261,7 @@ wav_prepare_header(struct write_info *wi, void **hdrp, size_t *lenp, int *leftp)
 	    *fact = "fact",
 	    *data = "data";
 	u_int32_t filelen, fmtsz, sps, abps, factsz = 4, nsample, datalen;
-	u_int16_t fmttag, nchan, align, bps, extln = 0;
+	u_int16_t fmttag, nchan, align, extln = 0;
 
 	if (wi->header_info)
 		warnx("header information not supported for WAV");
@@ -269,13 +269,10 @@ wav_prepare_header(struct write_info *wi, void **hdrp, size_t *lenp, int *leftp)
 
 	switch (wi->precision) {
 	case 8:
-		bps = 8;
 		break;
 	case 16:
-		bps = 16;
 		break;
 	case 32:
-		bps = 32;
 		break;
 	default:
 		{

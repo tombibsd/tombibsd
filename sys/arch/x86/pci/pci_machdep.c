@@ -309,9 +309,7 @@ pci_conf_lock(struct pci_conf_lock *ocl, uint32_t sel)
 static void
 pci_conf_unlock(struct pci_conf_lock *ocl)
 {
-	uint32_t sel;
-
-	sel = atomic_cas_32_ni(&cl->cl_sel, cl->cl_sel, ocl->cl_sel);
+	atomic_cas_32_ni(&cl->cl_sel, cl->cl_sel, ocl->cl_sel);
 	pci_conf_select(ocl->cl_sel);
 	if (ocl->cl_cpuno != cl->cl_cpuno)
 		atomic_cas_32(&cl->cl_cpuno, cl->cl_cpuno, ocl->cl_cpuno);

@@ -98,11 +98,9 @@ mount_lfs_parseargs(int argc, char *argv[],
 	char *canon_dev, char *canon_dir)
 {
 	int ch;
-	char *options;
 	mntoptparse_t mp;
 
 	memset(args, 0, sizeof(*args));
-	options = NULL;
 	nsegs = "4";
 	*mntflags = noclean = 0;
 	cleaner_bytes = 1;
@@ -208,6 +206,8 @@ mount_lfs(int argc, char *argv[])
 	/* Downgrade to r/o; kill the cleaner */
 	if ((mntflags & MNT_RDONLY) && !(oldflags & MNT_RDONLY))
 		kill_cleaner(fs_name);
+#else
+	__USE(oldflags);
 #endif /* WANT_CLEANER */
 
 	exit(0);

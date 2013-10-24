@@ -71,10 +71,7 @@ fwhrng_match(device_t parent, cfdata_t match, void *aux)
 {
 	bus_space_tag_t bst;
 	bus_space_handle_t bsh;
-	int ret;
 	uint8_t id0, id1, data0, data1;
-
-	ret = 0;
 
 	bst = x86_bus_space_mem;
 

@@ -902,7 +902,7 @@
 459	STD  RUMP	{ int|sys||mkfifoat(int fd, const char *path, \
 			    mode_t mode); }
 460	STD  RUMP	{ int|sys||mknodat(int fd, const char *path, \
-			    mode_t mode, uint32_t dev); }
+			    mode_t mode, int PAD, dev_t dev); }
 461	STD  RUMP	{ int|sys||mkdirat(int fd, const char *path, \
 			    mode_t mode); }
 462	STD  RUMP	{ int|sys||faccessat(int fd, const char *path, \

@@ -1427,12 +1427,6 @@ midiseq_open(int unit, int flags)
 static void
 midiseq_close(struct midi_dev *md)
 {
-	int major;
-	dev_t dev;
-	
-	major = devsw_name2chr("midi", NULL, 0);
-	dev = makedev(major, md->unit);
-
 	DPRINTFN(2, ("midiseq_close: %d\n", md->unit));
 	(void)vn_close(md->vp, 0, kauth_cred_get());
 	kmem_free(md, sizeof(*md));

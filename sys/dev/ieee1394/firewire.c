@@ -256,13 +256,13 @@ firewireattach(device_t parent, device_t self, void *aux)
 	callout_schedule(&fc->timeout_callout, hz);
 
 	/* Tell config we will have started a thread to scan the bus.  */
-	config_pending_incr();
+	config_pending_incr(self);
 
 	/* create thread */
 	if (kthread_create(PRI_NONE, KTHREAD_MPSAFE, NULL, fw_bus_probe_thread,
 	    fc, &fc->probe_thread, "fw%dprobe", device_unit(fc->bdev))) {
 		aprint_error_dev(self, "kthread_create failed\n");
-		config_pending_decr();
+		config_pending_decr(self);
 	}
 
 	devlist = malloc(sizeof(struct firewire_dev_list), M_DEVBUF, M_NOWAIT);
@@ -1962,7 +1962,7 @@ fw_bus_probe_thread(void *arg)
 	 * 		once = true;
 	 * 	}
 	 */
-	config_pending_decr();
+	config_pending_decr(fc->bdev);
 
 	mutex_enter(&fc->wait_lock);
 	while (fc->status != FWBUSDETACH) {

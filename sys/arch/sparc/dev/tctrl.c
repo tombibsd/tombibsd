@@ -747,7 +747,7 @@ static void
 tctrl_read_event_status(struct tctrl_softc *sc)
 {
 	struct tctrl_req req;
-	int s, lid;
+	int s;
 	uint32_t v;
 
 	req.cmdbuf[0] = TS102_OP_RD_EVENT_STATUS;
@@ -800,7 +800,6 @@ tctrl_read_event_status(struct tctrl_softc *sc)
 		    (sc->sc_ext_status & TS102_EXT_STATUS_LID_DOWN)
 		    ? "closed" : "opened");
 #endif
-		lid = (sc->sc_ext_status & TS102_EXT_STATUS_LID_DOWN) == 0;
 	}
 	if (v & TS102_EVENT_STATUS_EXTERNAL_VGA_STATUS_CHANGE) {
 		int vga;

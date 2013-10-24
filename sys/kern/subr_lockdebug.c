@@ -780,7 +780,8 @@ lockdebug_abort1(lockdebug_t *ld, int s, const char *func,
 	splx(s);
 	printf_nolog("\n");
 	if (dopanic)
-		panic("LOCKDEBUG");
+		panic("LOCKDEBUG: %s error: %s: %s", ld->ld_lockops->lo_name,
+		    func, msg);
 }
 
 #endif	/* LOCKDEBUG */

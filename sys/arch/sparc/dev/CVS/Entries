@@ -22,10 +22,10 @@
 /fd.c/1.151/Wed Oct 10 16:51:50 2012/-kk/
 /fdreg.h/1.10/Sun Dec 11 12:19:05 2005/-kk/
 /fdvar.h/1.15/Thu Jun 30 20:09:36 2011/-kk/
-/if_ie_obio.c/1.40/Fri Jul  1 18:50:41 2011/-kk/
+/if_ie_obio.c/1.41/Thu Oct 24 06:29:25 2013/-kk/
 /if_le_obio.c/1.27/Fri Jul  1 18:50:41 2011/-kk/
 /kbd_pckbport.c/1.6/Fri Jul  1 18:50:41 2011/-kk/
-/kd.c/1.51/Sat Oct 27 17:18:11 2012/-kk/
+/kd.c/1.52/Thu Oct 24 06:29:25 2013/-kk/
 /ms_pckbport.c/1.9/Sat Oct 27 17:18:11 2012/-kk/
 /obio.c/1.74/Sun Mar 24 17:50:26 2013/-kk/
 /pckbc_js.c/1.19/Sat Oct 13 17:58:54 2012/-kk/
@@ -40,9 +40,9 @@
 /sx.c/1.2/Wed Feb  6 04:06:29 2013/-kk/
 /sxreg.h/1.11/Wed Jun 19 00:41:16 2013/-kk/
 /sxvar.h/1.1/Tue Feb  5 21:52:48 2013/-kk/
-/tctrl.c/1.56/Sat Oct 27 17:18:11 2012/-kk/
+/tctrl.c/1.57/Thu Oct 24 06:29:25 2013/-kk/
 /tctrlvar.h/1.8/Mon Apr 28 20:23:35 2008/-kk/
-/ts102.c/1.17/Sat Oct 27 17:18:11 2012/-kk/
+/ts102.c/1.18/Thu Oct 24 06:29:25 2013/-kk/
 /ts102reg.h/1.12/Mon Apr 28 20:23:35 2008/-kk/
 /vme_machdep.c/1.68/Sat Oct 27 17:18:11 2012/-kk/
 /vmereg.h/1.7/Mon Apr 28 20:23:36 2008/-kk/

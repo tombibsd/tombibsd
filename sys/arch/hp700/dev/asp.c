@@ -189,7 +189,6 @@ aspattach(device_t parent, device_t self, void *aux)
 	struct gsc_attach_args ga;
 	struct cpu_info *ci = &cpus[0];
 	bus_space_handle_t ioh;
-	uint32_t irr;
 	int s;
 
 	sc->sc_dev = self;
@@ -245,7 +244,7 @@ aspattach(device_t parent, device_t self, void *aux)
 	viper_setintrwnd(1 << ca->ca_irq);
 
 	sc->sc_trs->asp_imr = ~0;
-	irr = sc->sc_trs->asp_irr;
+	(void)sc->sc_trs->asp_irr;
 	sc->sc_trs->asp_imr = 0;
 
 	/* Establish the interrupt register. */

@@ -129,14 +129,12 @@ const char   *const lastch[] = {
 int
 wrtext(const char *const *txt)
 {
-	const char  *const *begin;
 	const char   *a;
 	char    b;
 	const char   *c;
 	int     i;
 
 	fixtty(&noech);
-	begin = txt;
 	while (*txt) {
 		a = *(txt++);
 		if (*a != '\0') {
@@ -187,7 +185,6 @@ wrtext(const char *const *txt)
 			fixtty(&noech);
 			if (tflag)
 				curmove(curr, 0);
-			begin = txt;
 		}
 	}
 	fixtty(&raw);

@@ -459,6 +459,8 @@ init_transport(struct netconfig *nconf)
 				nconf->nc_netid);
 		}
 	}
+#else
+	__USE(status);
 #endif
 	/*
 	 * rmtcall only supported on CLTS transports for now.

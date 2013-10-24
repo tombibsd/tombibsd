@@ -314,7 +314,7 @@ _prop_number_alloc(const struct _prop_number_value *pnv)
 	rpn = _prop_rb_tree_insert_node(&_prop_number_tree, pn);
 	_PROP_ASSERT(rpn == pn);
 	_PROP_MUTEX_UNLOCK(_prop_number_tree_mutex);
-	return (pn);
+	return (rpn);
 }
 
 /*

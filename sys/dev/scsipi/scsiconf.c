@@ -241,7 +241,7 @@ scsibusattach(device_t parent, device_t self, void *aux)
 	scsi_initq = malloc(sizeof(struct scsi_initq), M_DEVBUF, M_WAITOK);
 	scsi_initq->sc_channel = chan;
 	TAILQ_INSERT_TAIL(&scsi_initq_head, scsi_initq, scsi_initq);
-        config_pending_incr();
+        config_pending_incr(sc->sc_dev);
 	if (scsipi_channel_init(chan)) {
 		aprint_error_dev(sc->sc_dev, "failed to init channel\n");
 		return;
@@ -288,7 +288,7 @@ scsibus_config(struct scsipi_channel *chan, void *arg)
 
 	scsipi_adapter_delref(chan->chan_adapter);
 
-	config_pending_decr();
+	config_pending_decr(sc->sc_dev);
 }
 
 static int

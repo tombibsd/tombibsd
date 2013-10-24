@@ -1037,7 +1037,9 @@ wsemul_vt100_setmsgattrs(void *cookie, const struct wsscreen_descr *type,
 					   vd->msgattrs.default_bg,
 	                                   vd->msgattrs.default_attrs,
 	                                   &tmp);
-#ifdef VT100_DEBUG
+#ifndef VT100_DEBUG
+	__USE(error);
+#else
 	if (error)
 		printf("vt100: failed to allocate attribute for default "
 		       "messages\n");

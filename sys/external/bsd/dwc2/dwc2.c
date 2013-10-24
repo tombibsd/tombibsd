@@ -130,7 +130,6 @@ Static void		dwc2_device_isoc_close(usbd_pipe_handle);
 Static void		dwc2_device_isoc_done(usbd_xfer_handle);
 
 Static usbd_status	dwc2_device_start(usbd_xfer_handle);
-Static void		dwc2_device_close(usbd_pipe_handle);
 
 Static void		dwc2_close_pipe(usbd_pipe_handle);
 Static void		dwc2_abort_xfer(usbd_xfer_handle, usbd_status);
@@ -520,10 +519,9 @@ dwc2_poll(struct usbd_bus *bus)
 Static void
 dwc2_close_pipe(usbd_pipe_handle pipe)
 {
-	struct dwc2_pipe *dpipe = (struct dwc2_pipe *)pipe;
+#ifdef DIAGNOSTIC
 	struct dwc2_softc *sc = pipe->device->bus->hci_private;
-
-	dpipe = dpipe;
+#endif
 
 	KASSERT(mutex_owned(&sc->sc_lock));
 }
@@ -1385,7 +1383,7 @@ fail2:
 	case 0:
 		break;
 	case -ENODEV:
-		err = USBD_NOMEM;
+		err = USBD_INVAL;
 		break;
 	case -ENOMEM:
 		err = USBD_NOMEM;
@@ -1546,7 +1544,7 @@ dwc2_suspend(device_t dv, const pmf_qual_t *qual)
 }
 
 /***********************************************************************/
-Static int
+int
 dwc2_init(struct dwc2_softc *sc)
 {
 	int err = 0;

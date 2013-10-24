@@ -242,7 +242,7 @@ mapleattach(device_t parent, device_t self, void *aux)
 	sc->sc_intrhand = sysasic_intr_establish(SYSASIC_EVENT_MAPLE_DMADONE,
 	    IPL_MAPLE, IRL_MAPLE, maple_intr, sc);
 
-	config_pending_incr();	/* create thread before mounting root */
+	config_pending_incr(self); /* create thread before mounting root */
 
 	if (kthread_create(PRI_NONE, 0, NULL, maple_event_thread, sc,
 	    &sc->event_thread, "%s", device_xname(self)) == 0)
@@ -1428,7 +1428,7 @@ maple_event_thread(void *arg)
 
 	/* OK, continue booting system */
 	maple_polling = 0;
-	config_pending_decr();
+	config_pending_decr(sc->sc_dev);
 
 	for (;;) {
 		/*

@@ -399,13 +399,13 @@ vs_output(SCR *sp, mtype_t mtype, const char *line, int llen)
 	GS *gp;
 	VI_PRIVATE *vip;
 	size_t chlen, notused;
-	int ch, len, rlen, tlen;
+	int ch, len, tlen;
 	const char *p, *t;
 	char *cbp, *ecbp, cbuf[128];
 
 	gp = sp->gp;
 	vip = VIP(sp);
-	for (p = line, rlen = llen; llen > 0;) {
+	for (p = line; llen > 0;) {
 		/* Get the next physical line. */
 		if ((p = memchr(line, '\n', llen)) == NULL)
 			len = llen;

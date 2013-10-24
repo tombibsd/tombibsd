@@ -77,7 +77,6 @@ memecc_attach(device_t parent, device_t self, void *aux)
 {
 	struct memecc_softc *sc = device_private(self);
 	struct mainbus_attach_args *ma = aux;
-	int node;
 	uint32_t reg;
 
 	if (memerr_handler) {
@@ -86,7 +85,6 @@ memecc_attach(device_t parent, device_t self, void *aux)
 	}
 
 	sc->sc_bt = ma->ma_bustag;
-	node = ma->ma_node;
 
 	/*
 	 * Map registers

@@ -88,10 +88,10 @@ ENTRY(pxecall_pxenv)
 	movl	8(%ebp), %ebx
 
 	call	_C_LABEL(prot_to_real)		# enter real mode
+	/* prot_to_real() has already set %es to BOOTSEG */
+	lea	_C_LABEL(pxe_command_buf), %edi
 	.code16
 
-	/* prot_to_real() has already set %es to BOOTSEG */
-	lea	_C_LABEL(pxe_command_buf), %di
 
 	/* The encoding is: 0x9a offlo offhi seglo seghi */
 	lcall	$0, $0xffff

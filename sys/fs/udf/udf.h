@@ -78,7 +78,7 @@ extern int udf_verbose;
 /* initial value of udf_verbose */
 #define UDF_DEBUGGING		0
 
-#ifdef DEBUG
+#ifdef UDF_DEBUG
 #define DPRINTF(name, arg) { \
 		if (udf_verbose & UDF_DEBUG_##name) {\
 			printf arg;\

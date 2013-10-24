@@ -2437,6 +2437,7 @@ xdc_ioctlcmd(struct xd_softc *xd, dev_t dev, struct xd_iocmd *xio)
 	xio->errnum = xdcsc->reqs[rqno].errnum;
 	xio->tries = xdcsc->reqs[rqno].tries;
 	XDC_DONE(xdcsc, rqno, dummy);
+	__USE(dummy);
 
 	if (xio->cmd == XDCMD_RD || xio->cmd == XDCMD_XRD)
 		error = copyout(buf, xio->dptr, xio->dlen);

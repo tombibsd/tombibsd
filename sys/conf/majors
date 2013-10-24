@@ -54,3 +54,4 @@ device-major mfi       char 205		   mfi
 device-major seeprom   char 206		   seeprom
 device-major dtrace    char 207		   dtrace
 device-major spiflash  char 208 block 208  spiflash
+device-major lua       char 209            lua

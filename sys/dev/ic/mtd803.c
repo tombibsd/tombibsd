@@ -460,7 +460,6 @@ mtd_start(struct ifnet *ifp)
 {
 	struct mtd_softc *sc = ifp->if_softc;
 	struct mbuf *m;
-	int len;
 	int first_tx = sc->cur_tx;
 
 	/* Don't transmit when the interface is busy or inactive */
@@ -476,7 +475,7 @@ mtd_start(struct ifnet *ifp)
 		bpf_mtap(ifp, m);
 
 		/* Copy mbuf chain into tx buffer */
-		len = mtd_put(sc, sc->cur_tx, m);
+		(void)mtd_put(sc, sc->cur_tx, m);
 
 		if (sc->cur_tx != first_tx)
 			sc->desc[MTD_NUM_RXD + sc->cur_tx].stat = MTD_TXD_OWNER;

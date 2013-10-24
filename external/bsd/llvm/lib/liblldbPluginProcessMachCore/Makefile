@@ -6,6 +6,8 @@ LIB=	lldbPluginProcessMachCore
 
 .PATH: ${LLDB_SRCDIR}/source/Plugins/Process/mach-core
 
+CPPFLAGS.ProcessMachCore.cpp+=	-I${LLDB_SRCDIR}/source/Plugins/Process/Utility
+
 SRCS+=	ProcessMachCore.cpp \
 	ThreadMachCore.cpp
 

@@ -128,7 +128,7 @@ ffs_mkfs(const char *fsys, const fsinfo_t *fsopts)
 	int32_t cylno, i, csfrags;
 	long long sizepb;
 	void *space;
-	int size, blks;
+	int size;
 	int nprintcols, printcolwidth;
 	ffs_opt_t	*ffs_opts = fsopts->fs_specific;
 
@@ -413,7 +413,6 @@ ffs_mkfs(const char *fsys, const fsinfo_t *fsopts)
 	 * Cribbed from ffs_mountfs().
 	 */
 	size = sblock.fs_cssize;
-	blks = howmany(size, sblock.fs_fsize);
 	if (sblock.fs_contigsumsize > 0)
 		size += sblock.fs_ncg * sizeof(int32_t);
 	space = ecalloc(1, size);

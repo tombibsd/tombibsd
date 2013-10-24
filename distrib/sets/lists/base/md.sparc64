@@ -84,7 +84,7 @@
 ./usr/lib/sparc/libc++.so.1			base-compat-shlib	compat,pic,libcxx
 ./usr/lib/sparc/libc++.so.1.0			base-compat-shlib	compat,pic,libcxx
 ./usr/lib/sparc/libc.so.12			base-compat-shlib	compat,pic
-./usr/lib/sparc/libc.so.12.186			base-compat-shlib	compat,pic
+./usr/lib/sparc/libc.so.12.187			base-compat-shlib	compat,pic
 ./usr/lib/sparc/libcom_err.so.7			base-compat-shlib	compat,pic,kerberos
 ./usr/lib/sparc/libcom_err.so.7.0		base-compat-shlib	compat,pic,kerberos
 ./usr/lib/sparc/libcrypt.so.1			base-compat-shlib	compat,pic
@@ -183,8 +183,10 @@
 ./usr/lib/sparc/liblua.so.1			base-compat-shlib	compat,pic
 ./usr/lib/sparc/liblua.so.1.0			base-compat-shlib	compat,pic
 ./usr/lib/sparc/liblutok.so			base-compat-shlib	compat,pic,kyua
-./usr/lib/sparc/liblutok.so.1			base-compat-shlib	compat,pic,kyua
-./usr/lib/sparc/liblutok.so.1.0			base-compat-shlib	compat,pic,kyua
+./usr/lib/sparc/liblutok.so.2			base-compat-shlib	compat,pic,kyua
+./usr/lib/sparc/liblutok.so.2.0			base-compat-shlib	compat,pic,kyua
+./usr/lib/sparc/liblutok.so.1			base-obsolete		obsolete
+./usr/lib/sparc/liblutok.so.1.0			base-obsolete		obsolete
 ./usr/lib/sparc/liblwres.so.7			base-compat-shlib	compat,pic
 ./usr/lib/sparc/liblwres.so.7.0			base-compat-shlib	compat,pic
 ./usr/lib/sparc/liblzf.so.1			base-compat-shlib	compat,pic

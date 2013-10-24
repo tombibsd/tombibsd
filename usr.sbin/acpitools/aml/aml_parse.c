@@ -761,12 +761,10 @@ static void
 aml_parse_fieldlist(struct aml_environ *env, struct aml_field *template,
     int indent)
 {
-	u_int32_t	offset;
 
-	offset = 0;
 	while (env->dp < env->end) {
 		aml_print_indent(indent);
-		offset = aml_parse_field(env, template);
+		(void)aml_parse_field(env, template);
 		if (env->dp < env->end) {
 			AML_DEBUGPRINT(",\n");
 		} else {

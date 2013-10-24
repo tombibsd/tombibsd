@@ -71,7 +71,6 @@ ex_g_setup(SCR *sp, EXCMD *cmdp, enum which cmd)
 	RANGE *rp;
 	busy_t btype;
 	db_recno_t start, end;
-	regex_t *re;
 	regmatch_t match[1];
 	size_t len;
 	int cnt, delim, eval;
@@ -150,7 +149,6 @@ usage:		ex_emsg(sp, cmdp->cmd->usage, EXM_USAGE);
 		 */
 		sp->searchdir = FORWARD;
 	}
-	re = &sp->re_c;
 
 	/* The global commands always set the previous context mark. */
 	myabs.lno = sp->lno;

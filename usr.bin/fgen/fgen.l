@@ -996,7 +996,7 @@ usage(const char *me)
 int
 main(int argc, char *argv[])
 {
-	int bflag, ch;
+	int ch;
 	FILE *inf;
 	struct fcode_header *fheader;
 	YY_BUFFER_STATE inbuf;
@@ -1006,7 +1006,6 @@ main(int argc, char *argv[])
 	outf = 1; /* stdout */
 	myname = argv[0];
 
-	bflag = 0;
 	while ((ch = getopt(argc, argv, "d:o:")) != -1)
 		switch(ch) {
 		case 'd':

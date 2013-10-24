@@ -645,7 +645,6 @@ acpiec_space_handler(uint32_t func, ACPI_PHYSICAL_ADDRESS paddr,
     uint32_t width, ACPI_INTEGER *value, void *arg, void *region_arg)
 {
 	device_t dv;
-	struct acpiec_softc *sc;
 	ACPI_STATUS rv;
 	uint8_t addr, reg;
 	unsigned int i;
@@ -656,7 +655,6 @@ acpiec_space_handler(uint32_t func, ACPI_PHYSICAL_ADDRESS paddr,
 
 	addr = paddr;
 	dv = arg;
-	sc = device_private(dv);
 
 	rv = AE_OK;
 

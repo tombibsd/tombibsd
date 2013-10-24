@@ -229,6 +229,7 @@ SUBST="${SUBST};s#@MACHINE@#${MACHINE}#g"
 #	ldap			${MKLDAP} != no
 #	lint			${MKLINT} != no
 #	libcxx			${MKLIBCXX} != no
+#	libgcc			${HAVE_LIBGCC} != no
 #	libstdcxx		${MKLIBSTDCXX} != no
 #	lld			${MKLLD} != no
 #	lldb			${MKLLDB} != no

@@ -325,6 +325,7 @@ type1(int *msgvec, int doign, int mime_decode)
 	 * not what it is pointing at!
 	 */
 	FILE *volatile obuf;		/* avoid longjmp clobbering */
+	int * volatile mvec;
 	sig_t volatile oldsigpipe;	/* avoid longjmp clobbering? */
 #ifdef MIME_SUPPORT
 	struct mime_info *volatile mip;	/* avoid longjmp clobbering? */
@@ -332,6 +333,7 @@ type1(int *msgvec, int doign, int mime_decode)
 	mip = NULL;
 #endif
 
+	mvec = msgvec;
 	if ((obuf = last_registered_file(0)) == NULL)
 		obuf = stdout;
 
@@ -348,7 +350,7 @@ type1(int *msgvec, int doign, int mime_decode)
 	msgCount = get_msgCount();
 
 	recursive = do_recursion();
-	for (ip = msgvec; *ip && ip - msgvec < msgCount; ip++) {
+	for (ip = mvec; *ip && ip - mvec < msgCount; ip++) {
 		struct type1_core_args_s args;
 		struct message *mp;
 

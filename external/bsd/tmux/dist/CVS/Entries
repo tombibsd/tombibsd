@@ -23,7 +23,7 @@
 /cmd-display-panes.c/1.1.1.2/Wed Aug 17 18:40:04 2011/-kk/
 /cmd-find-window.c/1.1.1.2/Wed Aug 17 18:40:04 2011/-kk/
 /cmd-has-session.c/1.1.1.2/Wed Aug 17 18:40:04 2011/-kk/
-/cmd-if-shell.c/1.1.1.2/Wed Aug 17 18:40:04 2011/-kk/
+/cmd-if-shell.c/1.2/Thu Oct 24 06:28:28 2013/-kk/
 /cmd-join-pane.c/1.1.1.2/Wed Aug 17 18:40:04 2011/-kk/
 /cmd-kill-pane.c/1.1.1.2/Wed Aug 17 18:40:04 2011/-kk/
 /cmd-kill-server.c/1.1.1.2/Wed Aug 17 18:40:04 2011/-kk/

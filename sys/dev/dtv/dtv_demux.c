@@ -368,7 +368,6 @@ static int
 dtv_demux_ioctl(struct file *fp, u_long cmd, void *data)
 {
 	struct dtv_demux *demux = fp->f_data;
-	struct dtv_softc *sc;
 	struct dmx_pes_filter_params *pesfilt;
 	struct dmx_sct_filter_params *sctfilt;
 	uint16_t pid;
@@ -376,7 +375,6 @@ dtv_demux_ioctl(struct file *fp, u_long cmd, void *data)
 
 	if (demux == NULL)
 		return ENXIO;
-	sc = demux->dd_sc;
 
 	switch (cmd) {
 	case DMX_START:

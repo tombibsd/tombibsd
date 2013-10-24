@@ -480,7 +480,6 @@ retrieve_seq(const char* str, struct pfsync_state_peer* peer)
 static void
 add_state(void)
 {
-	int idx;
 
 	if (allocated == 0) {
 		allocated = 5;
@@ -500,5 +499,4 @@ add_state(void)
 		states->ps_buf = buf;
 	}
 
-	idx = states->ps_len / sizeof(struct pfsync_state);
 }

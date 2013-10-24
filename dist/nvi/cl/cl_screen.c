@@ -185,11 +185,9 @@ static int
 cl_vi_init(SCR *sp)
 {
 	CL_PRIVATE *clp;
-	GS *gp;
 	char *o_cols, *o_lines, *o_term;
 	const char *ttype;
 
-	gp = sp->gp;
 	clp = CLP(sp);
 
 	/* If already initialized, just set the terminal modes. */

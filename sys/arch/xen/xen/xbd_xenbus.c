@@ -246,7 +246,7 @@ xbd_xenbus_attach(device_t parent, device_t self, void *aux)
 	int err;
 #endif
 
-	config_pending_incr();
+	config_pending_incr(self);
 	aprint_normal(": Xen Virtual Block Device Interface\n");
 
 	dk_sc_init(&sc->sc_dksc, device_xname(self));
@@ -581,7 +581,7 @@ static void xbd_backend_changed(void *arg, XenbusState new_state)
 		disk_set_info(sc->sc_dksc.sc_dev, &sc->sc_dksc.sc_dkdev, NULL);
 
 		/* the disk should be working now */
-		config_pending_decr();
+		config_pending_decr(sc->sc_dksc.sc_dev);
 		break;
 	default:
 		panic("bad backend state %d", new_state);

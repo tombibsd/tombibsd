@@ -267,7 +267,7 @@ atabusconfig(struct atabus_softc *atabus_sc)
 
 	ata_delref(chp);
 
-	config_pending_decr();
+	config_pending_decr(atac->atac_dev);
 }
 
 /*
@@ -394,7 +394,7 @@ atabusconfig_thread(void *arg)
 
 	ata_delref(chp);
 
-	config_pending_decr();
+	config_pending_decr(atac->atac_dev);
 	kthread_exit(0);
 }
 
@@ -518,7 +518,7 @@ atabus_attach(device_t parent, device_t self, void *aux)
 	initq = malloc(sizeof(*initq), M_DEVBUF, M_WAITOK);
 	initq->atabus_sc = sc;
 	TAILQ_INSERT_TAIL(&atabus_initq_head, initq, atabus_initq);
-	config_pending_incr();
+	config_pending_incr(sc->sc_dev);
 
 	if ((error = kthread_create(PRI_NONE, 0, NULL, atabus_thread, sc,
 	    &chp->ch_thread, "%s", device_xname(self))) != 0)
@@ -1715,7 +1715,7 @@ atabus_rescan(device_t self, const char *ifattr, const int *locators)
 	initq = malloc(sizeof(*initq), M_DEVBUF, M_WAITOK);
 	initq->atabus_sc = sc;
 	TAILQ_INSERT_TAIL(&atabus_initq_head, initq, atabus_initq);
-	config_pending_incr();
+	config_pending_incr(sc->sc_dev);
 
 	chp->ch_flags |= ATACH_TH_RESCAN;
 	wakeup(&chp->ch_thread);

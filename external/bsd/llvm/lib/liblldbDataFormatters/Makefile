@@ -25,7 +25,8 @@ SRCS+=	CF.cpp \
 	TypeCategoryMap.cpp \
 	TypeFormat.cpp \
 	TypeSummary.cpp \
-	TypeSynthetic.cpp
+	TypeSynthetic.cpp \
+	ValueObjectPrinter.cpp
 
 .if defined(HOSTLIB)
 .include <bsd.hostlib.mk>

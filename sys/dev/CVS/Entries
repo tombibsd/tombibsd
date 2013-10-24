@@ -58,10 +58,10 @@
 /radio_if.h/1.5/Wed Jul  9 13:12:54 2008/-kk/
 /rnd_private.h/1.4/Tue Aug 27 19:30:10 2013/-kk/
 /rndpseudo.c/1.17/Wed Sep 25 03:14:55 2013/-kk/
-/sequencer.c/1.56/Sat Apr 27 22:12:42 2013/-kk/
+/sequencer.c/1.57/Thu Oct 24 06:29:27 2013/-kk/
 /sequencervar.h/1.16/Sat Apr 27 22:12:42 2013/-kk/
 /verified_exec.c/1.67/Tue Mar 13 18:40:30 2012/-kk/
-/video.c/1.29/Mon Jan  7 15:07:40 2013/-kk/
+/video.c/1.30/Thu Oct 24 06:29:27 2013/-kk/
 /video_if.h/1.7/Fri Dec 24 20:54:28 2010/-kk/
 /vnd.c/1.226/Sun Sep 15 16:05:51 2013/-kk/
 /vndvar.h/1.33/Mon Jun  3 16:42:32 2013/-kk/

@@ -68,7 +68,6 @@ landisk_setboot(ib_params *params)
 	size_t bootstrapsize;
 	int retval, i;
 	uint32_t bplen;
-	int bpbsize;
 
 	assert(params != NULL);
 	assert(params->fsfd != -1);
@@ -149,11 +148,11 @@ landisk_setboot(ib_params *params)
 	 *	2b a0 11	jmp ENDOF(mbr_bpbFAT32)+1, nop
 	 *      (anything else)	; don't preserve
 	 */
-	bpbsize = 0;
 #if 0
+	int bpbsize;
 	if (bootstrapbuf[1] == 0xa0 && bootstrapbuf[2] == 0x11 &&
 	    (bootstrapbuf[0] == 0x2b /*|| bootstrapbuf[0] == 0x1d*/)) {
-		bpbsize = bootstrapbuf[0] + 2 - MBR_BPB_OFFSET;
+		 bpbsize = bootstrapbuf[0] + 2 - MBR_BPB_OFFSET;
 	}
 #endif
 

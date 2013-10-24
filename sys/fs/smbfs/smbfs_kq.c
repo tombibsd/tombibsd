@@ -387,7 +387,6 @@ filt_smbfsvnode(struct knote *kn, long hint)
 {
 	struct kevq *ke = (struct kevq *)kn->kn_hook;
 	struct vnode *vp = ke->vp;
-	int fflags;
 
 	switch (hint) {
 	case NOTE_REVOKE:
@@ -398,14 +397,12 @@ filt_smbfsvnode(struct knote *kn, long hint)
 		return (1);
 	case 0:
 		mutex_enter(vp->v_interlock);
-		fflags = kn->kn_fflags;
 		mutex_exit(vp->v_interlock);
 		break;
 	default:
 		KASSERT(mutex_owned(vp->v_interlock));
 		if ((kn->kn_sfflags & hint) != 0)
 			kn->kn_fflags |= hint;
-		fflags = kn->kn_fflags;
 		break;
 	}
 

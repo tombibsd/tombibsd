@@ -113,11 +113,11 @@ static const struct wsmouse_accessops spic_accessops = {
 static u_int8_t
 spic_call1(struct spic_softc *sc, u_int8_t dev)
 {
-	u_int8_t v1, v2;
+	u_int8_t v2;
 
 	SPIC_COMMAND(0, INB(sc, SPIC_PORT2) & 2);
 	OUTB(sc, dev, SPIC_PORT2);
-	v1 = INB(sc, SPIC_PORT2);
+	(void)INB(sc, SPIC_PORT2);
 	v2 = INB(sc, SPIC_PORT1);
 	return v2;
 }

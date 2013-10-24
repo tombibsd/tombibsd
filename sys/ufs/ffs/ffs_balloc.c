@@ -111,9 +111,7 @@ ffs_balloc_ufs1(struct vnode *vp, off_t off, int size, kauth_cred_t cred,
 	int32_t *blkp, *allocblk, allociblk[UFS_NIADDR + 1];
 	int32_t *allocib;
 	int unwindidx = -1;
-#ifdef FFS_EI
 	const int needswap = UFS_FSNEEDSWAP(fs);
-#endif
 	UVMHIST_FUNC("ffs_balloc"); UVMHIST_CALLED(ubchist);
 
 	lbn = ffs_lblkno(fs, off);
@@ -528,9 +526,7 @@ ffs_balloc_ufs2(struct vnode *vp, off_t off, int size, kauth_cred_t cred,
 	daddr_t *blkp, *allocblk, allociblk[UFS_NIADDR + 1];
 	int64_t *allocib;
 	int unwindidx = -1;
-#ifdef FFS_EI
 	const int needswap = UFS_FSNEEDSWAP(fs);
-#endif
 	UVMHIST_FUNC("ffs_balloc"); UVMHIST_CALLED(ubchist);
 
 	lbn = ffs_lblkno(fs, off);

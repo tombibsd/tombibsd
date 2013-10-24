@@ -129,11 +129,9 @@ icom_init(
 {
 	TTY ttyb;
 	int fd;
-	int flags;
 	int rc;
 	int saved_errno;
 
-	flags = trace;
 	fd = tty_open(device, O_RDWR, 0777);
 	if (fd < 0)
 		return -1;

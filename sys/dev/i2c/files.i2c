@@ -107,6 +107,11 @@ file	dev/i2c/lm75.c				lmtemp
 attach	lm at iic with lm_iic
 file	dev/i2c/lm_i2c.c			lm_iic
 
+# National Semiconductor LM87 and clones system hardware monitor
+device	lmenv: sysmon_envsys
+attach	lmenv at iic
+file	dev/i2c/lm87.c				lmenv
+
 # Dallas DS1307 Real Time Clock
 device	dsrtc
 attach	dsrtc at iic

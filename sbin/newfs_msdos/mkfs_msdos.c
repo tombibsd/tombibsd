@@ -274,7 +274,6 @@ mkfs_msdos(const char *fname, const char *dtype, const struct msdos_options *op)
 	return -1;
     }
     if (o.create_size) {
-	off_t pos;
 	if (o.no_create) {
 	    warnx("create (-C) is incompatible with -N");
 	    return -1;
@@ -286,12 +285,12 @@ mkfs_msdos(const char *fname, const char *dtype, const struct msdos_options *op)
 	    warnx("failed to create %s", fname);
 	    return -1;
 	}
-	pos = lseek(fd, o.create_size - 1, SEEK_SET);
+	(void)lseek(fd, o.create_size - 1, SEEK_SET);
 	if (write(fd, "\0", 1) != 1) {
 	    warn("failed to set file size");
 	    return -1;
 	}
-	pos = lseek(fd, 0, SEEK_SET);
+	(void)lseek(fd, 0, SEEK_SET);
     } else if ((fd = open(fname, o.no_create ? O_RDONLY : O_RDWR)) == -1 ||
 	fstat(fd, &sb)) {
 	warn("%s", fname);

@@ -263,7 +263,7 @@ void
 ckfini(int noint)
 {
 	struct bufarea *bp, *nbp;
-	int ofsmodified, cnt = 0;
+	int cnt = 0;
 
 	if (!noint) {
 		if (doinglevel2)
@@ -314,11 +314,7 @@ ckfini(int noint)
 			sblock->fs_pendingblocks = 0;
 			sblock->fs_pendinginodes = 0;
 			sbdirty();
-			ofsmodified = fsmodified;
 			flush(fswritefd, &sblk);
-#if LITE2BORKEN
-			fsmodified = ofsmodified;
-#endif
 			if (!preen)
 				printf(
 				    "\n***** FILE SYSTEM MARKED CLEAN *****\n");

@@ -539,11 +539,8 @@ aedioctl(dev_t dev, u_long cmd, void *data, int flag, struct lwp *l)
 		/* Do nothing for now */
 		break;
 
-	case ADBIOC_LISTENCMD:{
-		adb_listencmd_t *lc;
-
-		lc = (void *)data;
-	}
+	case ADBIOC_LISTENCMD:
+		/* adb_listencmd_t *lc = data; */
 
 	default:
 		return (EINVAL);

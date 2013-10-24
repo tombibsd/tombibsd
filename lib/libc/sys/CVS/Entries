@@ -10,7 +10,7 @@
 /Lint_ptrace.c/1.2/Wed Jun 14 06:49:10 2000/-kk/
 /Lint_sbrk.c/1.3/Wed Jun 14 06:49:10 2000/-kk/
 /Lint_syscall.c/1.4/Sat Jan 18 11:32:58 2003/-kk/
-/Makefile.inc/1.219/Fri Mar 29 02:10:53 2013/-kk/
+/Makefile.inc/1.220/Thu Oct 24 06:29:09 2013/-kk/
 /__quotactl.2/1.3/Mon Feb 13 19:50:15 2012/-kk/
 /_brk.c/1.6/Wed Oct 21 01:07:45 2009/-kk/
 /_exit.2/1.18/Mon Sep  8 17:54:34 2003/-kk/
@@ -42,7 +42,7 @@
 /brk.2/1.32/Thu May 13 10:20:57 2004/-kk/
 /chdir.2/1.22/Tue Feb  5 13:36:59 2013/-kk/
 /chflags.2/1.28/Sat Jun  8 06:05:03 2013/-kk/
-/chmod.2/1.46/Mon Jul 29 19:18:37 2013/-kk/
+/chmod.2/1.47/Thu Oct 24 06:29:09 2013/-kk/
 /chown.2/1.36/Tue Jul 30 12:38:16 2013/-kk/
 /chroot.2/1.23/Mon May 31 12:16:20 2010/-kk/
 /clock_settime.2/1.20/Wed Mar 11 13:39:14 2009/-kk/
@@ -97,9 +97,10 @@
 /makelintstub/1.25/Sun Feb 12 01:46:05 2012/-kk/
 /mincore.2/1.19/Thu May 13 10:20:58 2004/-kk/
 /minherit.2/1.18/Fri Oct 13 20:52:57 2006/-kk/
-/mkdir.2/1.28/Sun Jul 28 14:38:25 2013/-kk/
-/mkfifo.2/1.26/Tue Jul 30 13:15:07 2013/-kk/
-/mknod.2/1.27/Tue Jul 30 13:45:38 2013/-kk/
+/mkdir.2/1.29/Thu Oct 24 06:29:09 2013/-kk/
+/mkfifo.2/1.27/Thu Oct 24 06:29:09 2013/-kk/
+/mknod.2/1.28/Thu Oct 24 06:29:09 2013/-kk/
+/mknodat.c/1.1/Thu Oct 17 18:01:11 2013/-kk/
 /mlock.2/1.20/Mon Feb 28 07:17:02 2011/-kk/
 /mlockall.2/1.13/Wed Apr 30 13:10:51 2008/-kk/
 /mmap.2/1.47/Thu Jan  5 15:19:52 2012/-kk/
@@ -177,7 +178,7 @@
 /sigwaitinfo.c/1.3/Tue Mar 20 16:26:12 2012/-kk/
 /socket.2/1.41/Fri Mar  1 18:25:16 2013/-kk/
 /socketpair.2/1.23/Mon Jun 27 08:21:08 2011/-kk/
-/stat.2/1.55/Sun Jul 28 15:46:34 2013/-kk/
+/stat.2/1.56/Thu Oct 24 06:29:09 2013/-kk/
 /statvfs.2/1.5/Mon May 31 12:16:20 2010/-kk/
 /statvfs.c/1.6/Mon Apr 28 20:23:00 2008/-kk/
 /swapctl.2/1.38/Thu Apr 28 11:58:50 2011/-kk/

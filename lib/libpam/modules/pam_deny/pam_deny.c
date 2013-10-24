@@ -78,14 +78,14 @@ PAM_EXTERN int
 pam_sm_chauthtok(pam_handle_t *pamh __unused, int flags,
     int argc, const char *argv[])
 {
-	int prelim_ignore = 0, debug = 0;
+	int prelim_ignore = 0;
 	int i;
 
 	for (i = 0; i < argc; i++) {
 		if (strcmp(argv[i], "prelim_ignore") == 0)
 			prelim_ignore = 1;
 		else if (strcmp(argv[i], "debug") == 0)
-			debug = 1;
+			/* nothing */;
 		else
 			syslog(LOG_ERR, "illegal option %s", argv[i]);
 	}

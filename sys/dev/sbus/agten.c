@@ -618,7 +618,6 @@ agten_init(struct agten_softc *sc)
 {
 	int i;
 	uint32_t src, srcw;
-	volatile uint32_t junk;
 
 	/* then we set up a linear LUT for 24bit colour */
 	agten_write_idx(sc, IBM561_CMAP_TABLE + 256);
@@ -683,7 +682,7 @@ agten_init(struct agten_softc *sc)
 	bus_space_write_4(sc->sc_bustag, sc->sc_p9100_regh, COORD_INDEX, 0);
 	bus_space_write_4(sc->sc_bustag, sc->sc_p9100_regh, RECT_RTW_XY, src);
 	bus_space_write_4(sc->sc_bustag, sc->sc_p9100_regh, RECT_RTW_XY, srcw);
-	junk = bus_space_read_4(sc->sc_bustag, sc->sc_p9100_regh, COMMAND_QUAD);
+	(void)bus_space_read_4(sc->sc_bustag, sc->sc_p9100_regh, COMMAND_QUAD);
 
 	/* initialize the cursor registers */
 	

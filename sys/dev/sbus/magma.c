@@ -618,11 +618,9 @@ magma_hard(void *arg)
 			}
 		} else {		/* serial port */
 			struct mtty_port *mtty;
-			struct tty *tp;
 
 			mtty = &sc->ms_mtty->ms_port[port];
 			cd = mtty->mp_cd1400;
-			tp = mtty->mp_tty;
 
 			if( !ISSET(mtty->mp_flags, MTTYF_STOP) ) {
 				int count = 0;

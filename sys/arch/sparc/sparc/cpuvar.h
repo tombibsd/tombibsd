@@ -171,9 +171,9 @@ struct cpu_info {
 	 * the pending register to avoid a hardware bug.
 	 */
 #define raise_ipi(cpi,lvl)	do {			\
-	volatile int x;					\
+	int x;						\
 	(cpi)->intreg_4m->pi_set = PINTR_SINTRLEV(lvl);	\
-	x = (cpi)->intreg_4m->pi_pend;			\
+	x = (cpi)->intreg_4m->pi_pend; __USE(x);	\
 } while (0)
 
 	int		sun4_mmu3l;	/* [4]: 3-level MMU present */

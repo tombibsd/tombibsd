@@ -141,6 +141,7 @@ receive(int s) {
 		printf("%s message received on address %s at interface %d\n",
 		    m, inet_ntoa(ipi->ipi_addr), ipi->ipi_ifindex);
 #else
+		__USE(m);
 		ATF_REQUIRE_MSG(ipi->ipi_addr.s_addr == htonl(INADDR_LOOPBACK),
 			"address 0x%x != 0x%x", ipi->ipi_addr.s_addr,
 			htonl(INADDR_LOOPBACK));

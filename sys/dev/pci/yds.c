@@ -421,6 +421,9 @@ yds_allocate_slots(struct yds_softc *sc)
 	DPRINTF(("play control size : %d\n", (unsigned int)pcs));
 	DPRINTF(("rec control size : %d\n", (unsigned int)rcs));
 	DPRINTF(("eff control size : %d\n", (unsigned int)ecs));
+#ifndef AUDIO_DEBUG
+	__USE(ecs);
+#endif
 	DPRINTF(("work size : %d\n", (unsigned int)ws));
 #ifdef DIAGNOSTIC
 	if (pcs != sizeof(struct play_slot_ctrl_bank)) {

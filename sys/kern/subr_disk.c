@@ -529,7 +529,7 @@ disk_set_info(device_t dev, struct disk *dk, const char *type)
 #endif
 			return;
 		}
-		dg->dg_secperunit = dg->dg_nsectors *
+		dg->dg_secperunit = (int64_t) dg->dg_nsectors *
 		    dg->dg_ntracks * dg->dg_ncylinders;
 	}
 

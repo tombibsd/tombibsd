@@ -1345,7 +1345,6 @@ jme_ifioctl(struct ifnet *ifp, unsigned long cmd, void *data)
 static int
 jme_encap(struct jme_softc *sc, struct mbuf **m_head)
 {
-	struct jme_desc *txd;
 	struct jme_desc *desc;
 	struct mbuf *m;
 	struct m_tag *mtag;
@@ -1446,7 +1445,6 @@ jme_encap(struct jme_softc *sc, struct mbuf **m_head)
 	}
 
 	prod = sc->jme_tx_prod;
-	txd = &sc->jme_txring[prod];
 
 	error = bus_dmamap_load_mbuf(sc->jme_dmatag, sc->jme_txmbufm[prod],
 	    *m_head, BUS_DMA_NOWAIT | BUS_DMA_WRITE);

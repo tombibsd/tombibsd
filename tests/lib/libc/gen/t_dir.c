@@ -122,7 +122,6 @@ ATF_TC_HEAD(telldir_leak, tc)
 ATF_TC_BODY(telldir_leak, tc)
 {
 	DIR *dp;
-	long loc;
 	char *memused;
 	int i;
 	int oktouse = 4096;
@@ -131,7 +130,7 @@ ATF_TC_BODY(telldir_leak, tc)
 	if (dp == NULL)
 		atf_tc_fail("Could not open current directory");
 
-	loc = telldir(dp);
+	(void)telldir(dp);
 	memused = sbrk(0);
 	closedir(dp);
 
@@ -140,7 +139,7 @@ ATF_TC_BODY(telldir_leak, tc)
 		if (dp == NULL)
 			atf_tc_fail("Could not open current directory");
 
-		loc = telldir(dp);
+		(void)telldir(dp);
 		closedir(dp);
 
 		if ((char *)sbrk(0) - memused > oktouse) {

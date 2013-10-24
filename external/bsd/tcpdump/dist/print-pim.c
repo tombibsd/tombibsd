@@ -126,7 +126,7 @@ static void pimv2_print(register const u_char *bp, register u_int len, u_int cks
 static void
 pimv1_join_prune_print(register const u_char *bp, register u_int len)
 {
-	int maddrlen, addrlen, ngroups, njoin, nprune;
+	int addrlen, maddrlen, ngroups, njoin, nprune;
 	int njp;
 
 	/* If it's a single group and a single source, use 1-line output. */
@@ -177,6 +177,8 @@ pimv1_join_prune_print(register const u_char *bp, register u_int len)
 		 * XXX - does the address have length "addrlen" and the
 		 * mask length "maddrlen"?
 		 */
+		__USE(addrlen);
+		__USE(maddrlen);
 		TCHECK2(bp[0], sizeof(struct in_addr));
 		(void)printf("\n\tGroup: %s", ipaddr_string(bp));
 		TCHECK2(bp[4], sizeof(struct in_addr));

@@ -381,9 +381,8 @@ getscores(int *fdp)
 	struct highscore_header header;
 	int sd, mint, lck;
 	mode_t mask;
-	const char *mstr, *human;
+	const char *human;
 	int doflip;
-	int serrno;
 	ssize_t result;
 
 #ifdef ALLOW_SCORE_UPDATES
@@ -395,14 +394,12 @@ getscores(int *fdp)
 #endif
 	{
 		mint = O_RDONLY;
-		mstr = "r";
 		human = "reading";
 		lck = LOCK_SH;
 	}
 	setegid(egid);
 	mask = umask(S_IWOTH);
 	sd = open(_PATH_SCOREFILE, mint, 0666);
-	serrno = errno;
 	(void)umask(mask);
 	setegid(gid);
 	if (sd < 0) {

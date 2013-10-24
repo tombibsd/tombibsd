@@ -1068,9 +1068,7 @@ ufs_dirremove(struct vnode *dvp, const struct ufs_lookup_results *ulr,
 	struct direct *ep;
 	struct buf *bp;
 	int error;
-#ifdef FFS_EI
 	const int needswap = UFS_MPNEEDSWAP(dp->i_ump);
-#endif
 
 	UFS_WAPBL_JLOCK_ASSERT(dvp->v_mount);
 

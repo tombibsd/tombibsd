@@ -1397,7 +1397,10 @@ start:
 int
 xyc_startbuf(struct xyc_softc *xycsc, struct xy_softc *xysc, struct buf *bp)
 {
-	int     partno, error;
+#ifdef XYC_DEBUG
+	int     partno;
+#endif
+	int     error;
 	struct xy_iorq *iorq;
 	struct xy_iopb *iopb;
 	u_long  block;
@@ -1410,8 +1413,8 @@ xyc_startbuf(struct xyc_softc *xycsc, struct xy_softc *xysc, struct buf *bp)
 	if (bp == NULL)
 		panic("xyc_startbuf null buf");
 
-	partno = DISKPART(bp->b_dev);
 #ifdef XYC_DEBUG
+	partno = DISKPART(bp->b_dev);
 	printf("xyc_startbuf: %s%c: %s block %d\n", device_xname(xysc->sc_dev),
 	    'a' + partno, (bp->b_flags & B_READ) ? "read" : "write", bp->b_blkno);
 	printf("xyc_startbuf: b_bcount %d, b_data 0x%x\n",

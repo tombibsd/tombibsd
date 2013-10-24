@@ -146,11 +146,9 @@ ex_usage(SCR *sp, EXCMD *cmdp)
 int
 ex_viusage(SCR *sp, EXCMD *cmdp)
 {
-	GS *gp;
 	VIKEYS const *kp;
 	int key;
 
-	gp = sp->gp;
 	switch (cmdp->argc) {
 	case 1:
 		if (cmdp->argv[0]->len != 1) {

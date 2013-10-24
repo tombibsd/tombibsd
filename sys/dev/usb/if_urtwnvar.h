@@ -23,11 +23,7 @@
  * Driver definitions.
  */
 #define URTWN_RX_LIST_COUNT		1
-#ifndef URTWN_DOTG_WORKAROUND
 #define URTWN_TX_LIST_COUNT		8
-#else
-#define URTWN_TX_LIST_COUNT		1
-#endif
 
 #define URTWN_HOST_CMD_RING_COUNT	32
 

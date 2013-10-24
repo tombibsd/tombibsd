@@ -148,7 +148,7 @@ xpci_xenbus_attach(device_t parent, device_t self, void *aux)
 	xpci_sc = sc;
 	DPRINTF(("xpci_sc %p\n", xpci_sc));
 
-	config_pending_incr();
+	config_pending_incr(self);
 	aprint_normal(": Xen PCI passthrough Interface\n");
 	sc->sc_dev = self;
 
@@ -284,7 +284,7 @@ xpci_backend_changed(void *arg, XenbusState new_state)
 		sc->sc_backend_status = XPCI_STATE_CONNECTED;
 
 		/* the devices should be working now */
-		config_pending_decr();
+		config_pending_decr(sc->sc_dev);
 		break;
 	default:
 		panic("bad backend state %d", new_state);

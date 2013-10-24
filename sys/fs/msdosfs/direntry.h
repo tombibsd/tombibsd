@@ -78,6 +78,12 @@ struct direntry {
 	u_int8_t	deFileSize[4];	/* size of file in bytes */
 };
 
+static __inline uint8_t
+msdos_dirchar(const struct direntry *de, size_t i) {
+	return i < sizeof(de->deName) ? de->deName[i] :
+	    de->deExtension[i - sizeof(de->deName)];
+}
+
 /*
  * Structure of a Win95 long name directory entry
  */

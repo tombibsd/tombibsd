@@ -866,6 +866,8 @@ tslot_slot_intr(struct tslot_data *td, int intreg)
 #ifdef TSLOT_DEBUG
 	printf("%s: interrupt on socket %d ir %x sts %x\n",
 	    device_xname(sc->sc_dev), td->td_slot, intreg, status);
+#else	
+	__USE(status);
 #endif
 
 	sockstat = td->td_status;

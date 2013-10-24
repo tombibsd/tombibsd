@@ -13,6 +13,7 @@
 #	NO_DYNAMIC_CONTENT	/* don't support dynamic content updates */
 #	NO_SSL_SUPPORT		/* don't support ssl (https) */
 #	DO_HTPASSWD		/* support .htpasswd files */
+#	NO_LUA_SUPPORT		/* don't support Lua for dynamic content */
 #
 # these are usually set via the "COPTS" variable, or some other method
 # for setting CFLAGS relevant to your make, eg
@@ -23,11 +24,11 @@ PROG=	httpd
 MAN=	httpd.8
 BUILDSYMLINKS+=bozohttpd.8 httpd.8
 SRCS=	bozohttpd.c ssl-bozo.c auth-bozo.c cgi-bozo.c daemon-bozo.c \
-	tilde-luzah-bozo.c dir-index-bozo.c content-bozo.c
+	tilde-luzah-bozo.c dir-index-bozo.c content-bozo.c lua-bozo.c
 SRCS+=	main.c
 
-LDADD=	-lcrypt
-DPADD=	${LIBCRYPT}
+LDADD=	-lcrypt -llua -lm
+DPADD=	${LIBCRYPT} ${LIBLUA} ${LIBM}
 
 WARNS?=	4
 
@@ -48,7 +49,7 @@ COPTS+=	-DNO_SSL_SUPPORT
 # Build release things.
 #
 NROFF?=		nroff
-  
+
 PREHTMLFROB=	sed \
 		    -e 's/&/\&amp;/' \
 		    -e 's/</\&lt;/' \
@@ -64,7 +65,7 @@ TXTFROB=	col -b
 
 bozohttpd.8.html: bozohttpd.8
 	$(PREHTMLFROB) $> | $(NROFF) -mdoc2html | $(HTMLFROB) > $@
-  
+
 bozohttpd.8.txt: bozohttpd.8
 	$(NROFF) -mdoc -Tascii $> | $(TXTFROB) > $@
 

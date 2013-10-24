@@ -788,6 +788,8 @@ kcs_probe(struct ipmi_softc *sc)
 	printf(" C/D: %2x\n", v & KCS_CD);
 	printf(" IBF: %2x\n", v & KCS_IBF);
 	printf(" OBF: %2x\n", v & KCS_OBF);
+#else
+	__USE(v);
 #endif
 	return (0);
 }

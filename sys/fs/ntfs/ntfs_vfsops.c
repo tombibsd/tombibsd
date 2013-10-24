@@ -307,7 +307,7 @@ ntfs_mountfs(struct vnode *devvp, struct mount *mp, struct ntfs_args *argsp, str
 	struct buf *bp;
 	struct ntfsmount *ntmp;
 	dev_t dev = devvp->v_rdev;
-	int error, ronly, i;
+	int error, i;
 	struct vnode *vp;
 
 	ntmp = NULL;
@@ -320,8 +320,6 @@ ntfs_mountfs(struct vnode *devvp, struct mount *mp, struct ntfs_args *argsp, str
 	VOP_UNLOCK(devvp);
 	if (error)
 		return (error);
-
-	ronly = (mp->mnt_flag & MNT_RDONLY) != 0;
 
 	bp = NULL;
 

@@ -66,7 +66,7 @@ extern int nilfs_verbose;
 /* initial value of nilfs_verbose */
 #define NILFS_DEBUGGING		0
 
-#ifdef DEBUG
+#ifdef NILFS_DEBUG
 #define DPRINTF(name, arg) { \
 		if (nilfs_verbose & NILFS_DEBUG_##name) {\
 			printf arg;\

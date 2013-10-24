@@ -260,7 +260,7 @@ vaddr_t		pmap_map(vaddr_t, paddr_t, paddr_t, int);
 #define		pmap_phys_address(x) (x)
 void		pmap_reference(pmap_t);
 void		pmap_remove(pmap_t, vaddr_t, vaddr_t);
-#define		pmap_update(pmap)		/* nothing (yet) */
+#define		pmap_update(pmap)		__USE(pmap)
 void		pmap_virtual_space(vaddr_t *, vaddr_t *);
 #ifdef PMAP_GROWKERNEL
 vaddr_t		pmap_growkernel(vaddr_t);

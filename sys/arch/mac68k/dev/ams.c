@@ -106,7 +106,7 @@ amsattach(device_t parent, device_t self, void *aux)
 	ADBSetInfoBlock adbinfo;
 	struct ams_softc *sc = device_private(self);
 	struct adb_attach_args * aa_args = (struct adb_attach_args *)aux;
-	int error;
+	int error __unused;
 #if NWSMOUSE > 0
 	struct wsmousedev_attach_args a;
 #endif

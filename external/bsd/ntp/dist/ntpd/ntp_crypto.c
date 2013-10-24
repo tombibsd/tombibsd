@@ -393,7 +393,6 @@ crypto_recv(
 	int	has_mac;	/* length of MAC field */
 	int	authlen;	/* offset of MAC field */
 	associd_t associd;	/* association ID */
-	tstamp_t tstamp = 0;	/* timestamp */
 	tstamp_t fstamp = 0;	/* filestamp */
 	u_int	len;		/* extension field length */
 	u_int	code;		/* extension field opcode */
@@ -443,7 +442,6 @@ crypto_recv(
 		}
 
 		if (len >= VALUE_LEN) {
-			tstamp = ntohl(ep->tstamp);
 			fstamp = ntohl(ep->fstamp);
 			vallen = ntohl(ep->vallen);
 		}

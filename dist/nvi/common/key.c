@@ -345,12 +345,10 @@ v_event_push(SCR *sp, EVENT *p_evp, const CHAR_T *p_s, size_t nitems, u_int flag
 	            			/* CH_* flags. */
 {
 	EVENT *evp;
-	GS *gp;
 	WIN *wp;
 	size_t total;
 
 	/* If we have room, stuff the items into the buffer. */
-	gp = sp->gp;
 	wp = sp->wp;
 	if (nitems <= wp->i_next ||
 	    (wp->i_event != NULL && wp->i_cnt == 0 && nitems <= wp->i_nelem)) {

@@ -99,7 +99,7 @@
  *	- 14.9: we aren't a cache.
  *
  *	- 14.15: content-md5 would be nice...
- *	
+ *
  *	- 14.24/14.26/14.27: be nice to support this...
  *
  *	- 14.44: not sure about this Vary: header.  ignore it for now.
@@ -347,12 +347,10 @@ bozo_clean_request(bozo_httpreq_t *request)
 	    hdr = SIMPLEQ_NEXT(hdr, h_next)) {
 		free(hdr->h_value);
 		free(hdr->h_header);
-		if (ohdr)
-			free(ohdr);
+		free(ohdr);
 		ohdr = hdr;
 	}
-	if (ohdr)
-		free(ohdr);
+	free(ohdr);
 
 	free(request);
 }
@@ -867,7 +865,7 @@ bozo_escape_rfc3986(bozohttpd_t *httpd, const char *url)
 		buflen = len * 3 + 1;
 		buf = bozorealloc(httpd, buf, buflen);
 	}
-	
+
 	if (url == NULL) {
 		buf[0] = 0;
 		return buf;
@@ -958,7 +956,7 @@ handle_redirect(bozo_httpreq_t *request,
 	char portbuf[20];
 	const char *hostname = BOZOHOST(httpd, request);
 	int query = 0;
-	
+
 	if (url == NULL) {
 		if (asprintf(&urlbuf, "/%s/", request->hr_file) < 0)
 			bozo_err(httpd, 1, "asprintf");
@@ -981,7 +979,7 @@ handle_redirect(bozo_httpreq_t *request,
 		bozo_warn(httpd, "redirecting %s%s%s", hostname, portbuf, url);
 	debug((httpd, DEBUG_FAT, "redirecting %s", url));
 	bozo_printf(httpd, "%s 301 Document Moved\r\n", request->hr_proto);
-	if (request->hr_proto != httpd->consts.http_09) 
+	if (request->hr_proto != httpd->consts.http_09)
 		bozo_print_header(request, NULL, "text/html", NULL);
 	if (request->hr_proto != httpd->consts.http_09) {
 		bozo_printf(httpd, "Location: http://");
@@ -1016,8 +1014,7 @@ handle_redirect(bozo_httpreq_t *request,
 	bozo_printf(httpd, "</body></html>\n");
 head:
 	bozo_flush(httpd, stdout);
-	if (urlbuf)
-		free(urlbuf);
+	free(urlbuf);
 }
 
 /*
@@ -1230,7 +1227,7 @@ fix_url_percent(bozo_httpreq_t *request)
 					"percent hack was %2f (/)");
 			goto copy_rest;
 		}
-			
+
 		buf[0] = *++s;
 		buf[1] = *++s;
 		buf[2] = '\0';
@@ -1267,7 +1264,7 @@ copy_rest:
  *	- punt if it doesn't start with /
  *	- check httpd->untrustedref / referrer
  *	- look for "http://myname/" and deal with it.
- *	- maybe call bozo_process_cgi() 
+ *	- maybe call bozo_process_cgi()
  *	- check for ~user and call bozo_user_transform() if so
  *	- if the length > 1, check for trailing slash.  if so,
  *	  add the index.html file
@@ -1307,8 +1304,8 @@ transform_request(bozo_httpreq_t *request, int *isindex)
 
 #define TOP_PAGE(x)	(strcmp((x), "/") == 0 || \
 			 strcmp((x) + 1, httpd->index_html) == 0 || \
-			 strcmp((x) + 1, "favicon.ico") == 0) 
-		
+			 strcmp((x) + 1, "favicon.ico") == 0)
+
 		debug((httpd, DEBUG_EXPLODING, "checking httpd->untrustedref"));
 		/*
 		 * first check that this path isn't allowed via .bzdirect file,
@@ -1403,7 +1400,7 @@ transform_request(bozo_httpreq_t *request, int *isindex)
 	 */
 
 	/*
-	 * stop traversing outside our domain 
+	 * stop traversing outside our domain
 	 *
 	 * XXX true security only comes from our parent using chroot(2)
 	 * before execve(2)'ing us.  or our own built in chroot(2) support.
@@ -1425,12 +1422,14 @@ transform_request(bozo_httpreq_t *request, int *isindex)
 	if (bozo_process_cgi(request))
 		return 0;
 
+	if (bozo_process_lua(request))
+		return 0;
+
 	debug((httpd, DEBUG_FAT, "transform_request set: %s", newfile));
 	return 1;
 bad_done:
 	debug((httpd, DEBUG_FAT, "transform_request returning: 0"));
-	if (newfile)
-		free(newfile);
+	free(newfile);
 	return 0;
 }
 
@@ -1527,7 +1526,7 @@ bozo_process_request(bozo_httpreq_t *request)
 			(void)bozo_http_error(httpd, 403, request,
 						"no permission to open file");
 		else if (errno == ENOENT) {
-			if (!bozo_dir_index(request, file, isindex)) 
+			if (!bozo_dir_index(request, file, isindex))
 				(void)bozo_http_error(httpd, 404, request,
 							"no file");
 		} else
@@ -1690,7 +1689,7 @@ debug__(bozohttpd_t *httpd, int level, const char *fmt, ...)
 {
 	va_list	ap;
 	int savederrno;
-	
+
 	/* only log if the level is low enough */
 	if (httpd->debug < level)
 		return;
@@ -2086,6 +2085,9 @@ bozo_init_httpd(bozohttpd_t *httpd)
 			"bozohttpd: memory_allocation failure\n");
 		return 0;
 	}
+#ifndef NO_LUA_SUPPORT
+	SIMPLEQ_INIT(&httpd->lua_states);
+#endif
 	return 1;
 }
 

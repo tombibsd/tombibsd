@@ -237,6 +237,7 @@ debug_dump_to_xml(FILE *fd)
 	struct iso_primary_descriptor primaryVD;
 	struct _boot_volume_descriptor bootVD;
 
+	memset(&primaryVD, 0, sizeof(primaryVD));
 	printf("<cd9660dump>\n");
 
 	/* Display Volume Descriptors */

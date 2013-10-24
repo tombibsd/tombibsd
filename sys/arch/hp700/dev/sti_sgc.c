@@ -143,7 +143,7 @@ sti_sgc_probe(device_t parent, cfdata_t cf, void *aux)
 	struct confargs *ca = aux;
 	bus_space_handle_t romh;
 	paddr_t rom;
-	uint32_t id, romend;
+	uint32_t id;
 	u_char devtype;
 	int rv = 0, romunmapped = 0;
 
@@ -197,7 +197,6 @@ sti_sgc_probe(device_t parent, cfdata_t cf, void *aux)
 	default:
 		DPRINTF(("%s: unknown type (%x)\n", __func__, devtype));
 		rv = 0;
-		romend = 0;
 	}
 
 	if (rv &&

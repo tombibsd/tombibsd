@@ -89,14 +89,9 @@ fpu_atanh(struct fpemu *fe)
 	if (ISINF(&fe->fe_f2))
 		return fpu_newnan(fe);
 
-	/*
-	 * if x is +0/-0, 68000PRM.pdf says it returns +0/-0 but
-	 * my real 68882 returns +0 for both.
-	 */
-	if (ISZERO(&fe->fe_f2)) {
-		fe->fe_f2.fp_sign = 0;
+	/* if x is +0/-0, return +0/-0 */
+	if (ISZERO(&fe->fe_f2))
 		return &fe->fe_f2;
-	}
 
 	/*
 	 * -INF if x == -1

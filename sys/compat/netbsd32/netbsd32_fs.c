@@ -1063,13 +1063,15 @@ netbsd32_mknodat(struct lwp *l, const struct netbsd32_mknodat_args *uap,
 		syscallarg(int) fd;
 		syscallarg(netbsd32_charp) path;
 		syscallarg(mode_t) mode;
-		syscallarg(uint32_t) dev;
+		syscallarg(int) pad;
+		syscallarg(netbsd32_dev_t) dev;
 	} */
 	struct sys_mknodat_args ua;
 
 	NETBSD32TO64_UAP(fd);
 	NETBSD32TOP_UAP(path, const char);
 	NETBSD32TO64_UAP(mode);
+	NETBSD32TO64_UAP(PAD);
 	NETBSD32TO64_UAP(dev);
 
 	return sys_mknodat(l, &ua, retval);

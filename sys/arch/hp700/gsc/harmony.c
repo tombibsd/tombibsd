@@ -919,7 +919,7 @@ harmony_get_port(void *vsc, mixer_ctrl_t *cp)
 		err = 0;
 		break;
 	}
-	return 0;
+	return err;
 }
 
 int

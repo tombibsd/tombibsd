@@ -170,7 +170,6 @@ pmapproc_change(struct svc_req *rqstp, SVCXPRT *xprt, unsigned long op)
 	struct pmap reg;
 	RPCB rpcbreg;
 	long ans;
-	struct sockaddr_in *who;
 	struct sockcred *sc;
 	char uidbuf[32];
 
@@ -191,7 +190,7 @@ pmapproc_change(struct svc_req *rqstp, SVCXPRT *xprt, unsigned long op)
 		return FALSE;
 	}
 
-	who = svc_getcaller(xprt);
+	(void)svc_getcaller(xprt);
 	sc = __svc_getcallercreds(xprt);
 
 	/*

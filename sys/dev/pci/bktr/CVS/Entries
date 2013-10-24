@@ -3,7 +3,7 @@
 /bktr2netbsd/1.6/Wed Apr 30 13:10:59 2008/-kk/
 /bktr_audio.c/1.19/Fri Dec  7 05:56:30 2012/-kk/
 /bktr_audio.h/1.4/Sun Dec 11 12:23:22 2005/-kk/
-/bktr_card.c/1.24/Fri Oct 19 12:01:02 2007/-kk/
+/bktr_card.c/1.25/Thu Oct 24 06:29:28 2013/-kk/
 /bktr_card.h/1.6/Fri Aug 24 09:01:23 2012/-kk/
 /bktr_core.c/1.54/Fri Dec 14 19:38:36 2012/-kk/
 /bktr_core.h/1.10/Wed Jan 16 13:08:55 2008/-kk/

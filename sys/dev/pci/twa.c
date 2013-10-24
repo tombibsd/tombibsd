@@ -1128,7 +1128,6 @@ out:
 static int
 twa_drain_response_queue(struct twa_softc *sc)
 {
-	union twa_response_queue	rq;
 	uint32_t			status_reg;
 
 	for (;;) {
@@ -1137,7 +1136,7 @@ twa_drain_response_queue(struct twa_softc *sc)
 			return(1);
 		if (status_reg & TWA_STATUS_RESPONSE_QUEUE_EMPTY)
 			return(0); /* no more response queue entries */
-		rq.value = twa_inl(sc, TWA_RESPONSE_QUEUE_OFFSET);
+		(void)twa_inl(sc, TWA_RESPONSE_QUEUE_OFFSET);
 	}
 }
 
@@ -1643,7 +1642,7 @@ twa_shutdown(void *arg)
 {
 	extern struct cfdriver twa_cd;
 	struct twa_softc *sc;
-	int i, rv, unit;
+	int i, unit;
 
 	for (i = 0; i < twa_cd.cd_ndevs; i++) {
 		if ((sc = device_lookup_private(&twa_cd, i)) == NULL)
@@ -1658,7 +1657,7 @@ twa_shutdown(void *arg)
 			TWA_CONTROL_DISABLE_INTERRUPTS);
 
 		/* Let the controller know that we are going down. */
-		rv = twa_init_connection(sc, TWA_SHUTDOWN_MESSAGE_CREDITS,
+		(void)twa_init_connection(sc, TWA_SHUTDOWN_MESSAGE_CREDITS,
 				0, 0, 0, 0, 0,
 				NULL, NULL, NULL, NULL, NULL);
 	}

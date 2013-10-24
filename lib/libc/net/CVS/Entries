@@ -2,7 +2,7 @@
 /Lint_htons.c/1.4/Wed Aug 22 07:42:09 2001/-kk/
 /Lint_ntohl.c/1.4/Wed Aug 22 07:42:09 2001/-kk/
 /Lint_ntohs.c/1.4/Wed Aug 22 07:42:09 2001/-kk/
-/Makefile.inc/1.83/Fri Mar  1 18:25:16 2013/-kk/
+/Makefile.inc/1.85/Thu Oct 24 06:29:08 2013/-kk/
 /base64.c/1.14/Mon Jun 25 22:32:44 2012/-kk/
 /byteorder.3/1.15/Tue May  3 04:07:39 2011/-kk/
 /ethers.3/1.13/Wed Apr 16 13:34:41 2003/-kk/
@@ -42,10 +42,12 @@
 /if_indextoname.c/1.7/Mon Dec 13 23:10:12 2010/-kk/
 /if_nameindex.c/1.7/Tue Mar 13 21:13:41 2012/-kk/
 /if_nametoindex.c/1.4/Fri Nov 24 08:21:12 2000/-kk/
+/inet6_getscopeid.3/1.2/Sat Oct 19 23:34:48 2013/-kk/
 /inet6_opt_init.3/1.1/Fri May  5 00:03:21 2006/-kk/
 /inet6_option_space.3/1.17/Mon Mar 22 19:30:54 2010/-kk/
 /inet6_rth_space.3/1.1/Fri May  5 00:03:21 2006/-kk/
 /inet6_rthdr_space.3/1.16/Mon Mar 22 19:30:54 2010/-kk/
+/inet6_scopeid.c/1.2/Sat Oct 19 15:47:02 2013/-kk/
 /ip6opt.c/1.14/Tue Mar 20 17:44:18 2012/-kk/
 /iso_addr.c/1.15/Fri Mar  1 18:25:16 2013/-kk/
 /linkaddr.3/1.10/Thu Aug  7 16:43:11 2003/-kk/

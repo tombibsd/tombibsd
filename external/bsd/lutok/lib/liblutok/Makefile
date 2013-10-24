@@ -48,7 +48,7 @@ lutok.pc: Makefile lutok.pc.in
 	    -e 's,__LIBDIR__,/usr/lib,g' \
 	    -e 's,__LUA_CFLAGS__,-I/usr/include,g' \
 	    -e 's,__LUA_LIBS,-llua,g' \
-	    -e 's,__VERSION__,0.2,g' \
+	    -e 's,__VERSION__,0.3,g' \
 	    <${SRCDIR}/lutok.pc.in >lutok.pc
 CLEANFILES+=	lutok.pc
 .endif

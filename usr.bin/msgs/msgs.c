@@ -143,7 +143,7 @@ void	ask(const char *);
 void	gfrsub(FILE *);
 int	linecnt(FILE *);
 int	main(int, char *[]);
-int	next(char *);
+int	next(char *, size_t);
 char	*nxtfld(char *);
 void	onintr(int);
 void	onsusp(int);
@@ -578,7 +578,8 @@ cmnd:
 					break;
 				}
 				if (isdigit((unsigned char)*in)) {
-					msg = next(in);
+					msg = next(in, sizeof(inbuf) -
+					    (in - inbuf));
 					sep = in;
 					break;
 				}
@@ -726,11 +727,11 @@ linecnt(FILE *f)
 }
 
 int
-next(char *buf)
+next(char *buf, size_t bufsiz)
 {
 	int i;
 	sscanf(buf, "%d", &i);
-	snprintf(buf, sizeof (buf), "Goto %d", i);
+	snprintf(buf, bufsiz, "Goto %d", i);
 	return(--i);
 }
 

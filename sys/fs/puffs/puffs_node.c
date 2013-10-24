@@ -256,10 +256,8 @@ puffs_newnode(struct mount *mp, struct vnode *dvp, struct vnode **vpp,
 void
 puffs_putvnode(struct vnode *vp)
 {
-	struct puffs_mount *pmp;
 	struct puffs_node *pnode;
 
-	pmp = VPTOPUFFSMP(vp);
 	pnode = VPTOPP(vp);
 
 #ifdef DIAGNOSTIC

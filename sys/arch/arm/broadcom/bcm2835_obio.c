@@ -134,7 +134,7 @@ static const struct ambadev_locators bcm2835_ambadev_locs[] = {
 	},
 	{
 		/* DesignWare_OTG USB controller */
-		.ad_name = "dotg",
+		.ad_name = "dwctwo",
 		.ad_addr = BCM2835_USB_BASE,
 		.ad_size = BCM2835_USB_SIZE,
 		.ad_intr = BCM2835_INT_USB,

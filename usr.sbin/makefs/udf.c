@@ -368,7 +368,6 @@ udf_parse_opts(const char *option, fsinfo_t *fsopts)
 	option_t *udf_options = fsopts->fs_options;
 	uint64_t stdsize;
 	uint32_t set_sectorsize;
-	const char *name, *desc;
 	char buffer[1024], *buf, *colon;
 	int i;
 
@@ -388,8 +387,6 @@ udf_parse_opts(const char *option, fsinfo_t *fsopts)
 	stdsize = 0;
 
 	buf = buffer;
-	name = udf_options[i].name;
-	desc = udf_options[i].desc;
 	switch (udf_options[i].letter) {
 	case 'T':
 		if (strcmp(buf, "cdrom") == 0) {

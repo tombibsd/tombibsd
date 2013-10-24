@@ -15,7 +15,7 @@
 #
 ./lib/libc.so					base-sys-shlib		dynamicroot
 ./lib/libc.so.12				base-sys-shlib		dynamicroot
-./lib/libc.so.12.186				base-sys-shlib		dynamicroot
+./lib/libc.so.12.187				base-sys-shlib		dynamicroot
 ./lib/libcrypt.so				base-sys-shlib		dynamicroot
 ./lib/libcrypt.so.1				base-sys-shlib		dynamicroot
 ./lib/libcrypt.so.1.0				base-sys-shlib		dynamicroot
@@ -197,7 +197,7 @@
 ./usr/lib/libc++.so.1.0				base-sys-shlib		libcxx
 ./usr/lib/libc.so				base-sys-shlib
 ./usr/lib/libc.so.12				base-sys-shlib
-./usr/lib/libc.so.12.186			base-sys-shlib
+./usr/lib/libc.so.12.187			base-sys-shlib
 ./usr/lib/libcdk.so				base-obsolete		obsolete
 ./usr/lib/libcom_err.so				base-krb5-shlib		kerberos
 ./usr/lib/libcom_err.so.7			base-krb5-shlib		kerberos
@@ -353,8 +353,10 @@
 ./usr/lib/liblua.so.1				base-sys-shlib
 ./usr/lib/liblua.so.1.0				base-sys-shlib
 ./usr/lib/liblutok.so				base-sys-shlib		kyua
-./usr/lib/liblutok.so.1				base-sys-shlib		kyua
-./usr/lib/liblutok.so.1.0			base-sys-shlib		kyua
+./usr/lib/liblutok.so.2				base-sys-shlib		kyua
+./usr/lib/liblutok.so.2.0			base-sys-shlib		kyua
+./usr/lib/liblutok.so.1				base-obsolete		obsolete
+./usr/lib/liblutok.so.1.0			base-obsolete		obsolete
 ./usr/lib/liblwres.so				base-bind-shlib
 ./usr/lib/liblwres.so.7				base-bind-shlib
 ./usr/lib/liblwres.so.7.0			base-bind-shlib

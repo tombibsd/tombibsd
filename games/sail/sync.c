@@ -247,13 +247,12 @@ int
 sync_open(void)
 {
 	const char *sync_file;
-	const char *sync_lock;
 	struct stat tmp;
 
 	if (sync_fp != NULL)
 		fclose(sync_fp);
 	sync_file = get_sync_file(game);
-	sync_lock = get_lock_file(game);
+	(void)get_lock_file(game);
 	setegid(egid);
 	if (stat(sync_file, &tmp) < 0) {
 		mode_t omask = umask(002);

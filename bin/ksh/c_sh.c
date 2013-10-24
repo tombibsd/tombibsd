@@ -506,6 +506,8 @@ c_trap(wp)
 					shprintf(" %s", p->name);
 			shprintf(newline);
 		}
+#else
+		__USE(anydfl);
 #endif
 		return 0;
 	}

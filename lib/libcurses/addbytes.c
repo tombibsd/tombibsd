@@ -199,11 +199,13 @@ _cursesi_addbyte(WINDOW *win, __LINE **lp, int *y, int *x, int c,
 	static char	 blanks[] = "        ";
 	int		 newx;
 	attr_t		 attributes;
+	int		 tabsize;
 
 	switch (c) {
 	case '\t':
+		tabsize = win->screen->TABSIZE;
 		PSYNCH_OUT;
-		if (waddbytes(win, blanks, 8 - (*x % 8)) == ERR)
+		if (waddbytes(win, blanks, tabsize - (*x % tabsize)) == ERR)
 			return (ERR);
 		PSYNCH_IN;
 		break;
@@ -324,7 +326,7 @@ _cursesi_addwchar(WINDOW *win, __LINE **lnp, int *y, int *x,
 #ifndef HAVE_WCHAR
 	return (ERR);
 #else
-	int sx = 0, ex = 0, cw = 0, i = 0, newx = 0;
+	int sx = 0, ex = 0, cw = 0, i = 0, newx = 0, tabsize;
 	__LDATA *lp = &win->alines[*y]->line[*x], *tp = NULL;
 	nschar_t *np = NULL;
 	cchar_t cc;
@@ -360,7 +362,8 @@ _cursesi_addwchar(WINDOW *win, __LINE **lnp, int *y, int *x,
 		cc.vals[0] = L' ';
 		cc.elements = 1;
 		cc.attributes = win->wattr;
-		for (i = 0; i < 8 - (*x % 8); i++) {
+		tabsize = win->screen->TABSIZE;
+		for (i = 0; i < tabsize - (*x % tabsize); i++) {
 			if (wadd_wch(win, &cc) == ERR)
 				return ERR;
 		}

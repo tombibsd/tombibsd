@@ -1206,9 +1206,8 @@ ParseDoDependency(char *line)
 		 */
 		int 	length;
 		void    *freeIt;
-		char	*result;
 
-		result = Var_Parse(cp, VAR_CMD, TRUE, &length, &freeIt);
+		(void)Var_Parse(cp, VAR_CMD, TRUE, &length, &freeIt);
 		if (freeIt)
 		    free(freeIt);
 		cp += length-1;

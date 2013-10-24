@@ -209,8 +209,8 @@ sdmmc*  at sdhc?
 ld*     at sdmmc?
 
 # On-board USB
-dotg*          at obio?
-usb*           at dotg?
+dwctwo* 	at obio?
+usb* 		at dwctwo?
 
 # USB device drivers
 include "dev/usb/usbdevices.config"

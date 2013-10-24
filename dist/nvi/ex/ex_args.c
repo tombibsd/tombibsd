@@ -265,7 +265,6 @@ ex_rew(SCR *sp, EXCMD *cmdp)
 int
 ex_args(SCR *sp, EXCMD *cmdp)
 {
-	GS *gp;
 	int cnt, sep;
 	size_t col, len;
 	char **ap;
@@ -275,7 +274,6 @@ ex_args(SCR *sp, EXCMD *cmdp)
 		return (0);
 	}
 
-	gp = sp->gp;
 	col = len = sep = 0;
 	for (cnt = 1, ap = sp->argv; *ap != NULL; ++ap) {
 		col += len = strlen(*ap) + sep + (ap == sp->cargv ? 2 : 0);

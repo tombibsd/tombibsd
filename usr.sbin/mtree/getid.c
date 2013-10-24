@@ -230,6 +230,9 @@ grscan(int search, gid_t gid, const char *name)
 				;
 			continue;
 		}
+		/* skip comments */
+		if (pwline[0] == '#')
+			continue;
 		if (grmatchline(search, gid, name))
 			return 1;
 	}
@@ -371,6 +374,9 @@ pwscan(int search, uid_t uid, const char *name)
 				;
 			continue;
 		}
+		/* skip comments */
+		if (pwline[0] == '#')
+			continue;
 		if (pwmatchline(search, uid, name))
 			return 1;
 	}

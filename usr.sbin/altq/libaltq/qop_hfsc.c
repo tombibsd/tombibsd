@@ -1071,9 +1071,7 @@ hfsc_add_class(struct classinfo *clinfo)
 {
 	struct hfsc_add_class class_add;
 	struct hfsc_classinfo *hfsc_clinfo;
-	struct hfsc_ifinfo *hfsc_ifinfo;
 
-	hfsc_ifinfo = clinfo->ifinfo->private;
 	hfsc_clinfo = clinfo->private;
 
 	memset(&class_add, 0, sizeof(class_add));

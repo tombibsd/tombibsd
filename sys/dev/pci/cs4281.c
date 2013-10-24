@@ -335,8 +335,13 @@ cs4281_intr(void *p)
 	/* clear the interrupt register */
 	BA0WRITE4(sc, CS4281_HICR, HICR_CHGM | HICR_IEV);
 
+#ifdef CS4280_DEBUG
 	DPRINTF(("intr = 0x%08x, hdsr0 = 0x%08x hdsr1 = 0x%08x\n",
 		 intr, hdsr0, hdsr1));
+#else
+	__USE(hdsr0);
+	__USE(hdsr1);
+#endif
 
 	/* Playback Interrupt */
 	if (intr & HISR_DMA0) {

@@ -976,8 +976,8 @@
 			    mode_t mode); }
 460	STD  		{ int|netbsd32||mknodat(int fd, \
 			    const netbsd32_charp path, \
-			    mode_t mode, \
-			    uint32_t dev); }
+			    mode_t mode, int PAD, \
+			    netbsd32_dev_t dev); }
 461	STD  		{ int|netbsd32||mkdirat(int fd, \
 			    const netbsd32_charp path, \
 			    mode_t mode); }

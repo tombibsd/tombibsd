@@ -230,14 +230,11 @@ content_encoding_core(void *fh, const char *ctype)
 #define MAILMSG_8BIT	0x4
 #define MAILMSG_LONGL	0x8
 	int c, lastc, state;
-	int ctrlchar, endwhite;
 	size_t curlen, maxlen;
 
 	state = MAILMSG_CLEAN;
 	curlen = 0;
 	maxlen = line_limit();
-	ctrlchar = 0;
-	endwhite = 0;
 	lastc = EOF;
 	while ((c = fgetc(fh)) != EOF) {
 		curlen++;

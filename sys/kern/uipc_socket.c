@@ -1664,7 +1664,8 @@ sorflush(struct socket *so)
 static int
 sosetopt1(struct socket *so, const struct sockopt *sopt)
 {
-	int error = EINVAL, optval, opt;
+	int error = EINVAL, opt;
+	int optval = 0; /* XXX: gcc */
 	struct linger l;
 	struct timeval tv;
 

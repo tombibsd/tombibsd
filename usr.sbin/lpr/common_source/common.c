@@ -396,27 +396,15 @@ checkremote(void)
 		    rname, sizeof(rname), NULL, 0, niflags) != 0)
 			continue;
 		for (ifa = ifap; ifa; ifa = ifa->ifa_next) {
-#ifdef __KAME__
 			sin6p = (struct sockaddr_in6 *)ifa->ifa_addr;
 			if (ifa->ifa_addr->sa_family == AF_INET6 &&
-			    ifa->ifa_addr->sa_len == sizeof(sin6) &&
-			    IN6_IS_ADDR_LINKLOCAL(&sin6p->sin6_addr) &&
-			    *(u_int16_t *)&sin6p->sin6_addr.s6_addr[2]) {
-				/* kame scopeid hack */
-				memcpy(&sin6, ifa->ifa_addr, sizeof(sin6));
-				sin6.sin6_scope_id =
-				    ntohs(*(u_int16_t *)&sin6p->sin6_addr.s6_addr[2]);
-				sin6.sin6_addr.s6_addr[2] = 0;
-				sin6.sin6_addr.s6_addr[3] = 0;
+			    ifa->ifa_addr->sa_len == sizeof(sin6)) {
+			    inet6_getscopeid(sin6p, 3);
 				if (getnameinfo((struct sockaddr *)&sin6,
 				    sin6.sin6_len, lname, sizeof(lname),
 				    NULL, 0, niflags) != 0)
 					continue;
-			} else
-#endif
-			if (getnameinfo(ifa->ifa_addr, ifa->ifa_addr->sa_len,
-			    lname, sizeof(lname), NULL, 0, niflags) != 0)
-				continue;
+			}
 
 			if (strcmp(rname, lname) == 0) {
 				remote = 0;

@@ -57,6 +57,10 @@ delwin(WINDOW *win)
 #ifdef DEBUG
 	__CTRACE(__CTRACE_WINDOW, "delwin(%p)\n", win);
 #endif
+
+	if (win == NULL)
+		return (OK);
+
 	/*
 	 * Free any storage used by non-spacing characters in the window.
 	 */

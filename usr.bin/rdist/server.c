@@ -748,7 +748,7 @@ static void
 recvf(char *cmd, int type)
 {
 	char *cp = cmd;
-	int f = -1, opts = 0, wrerr, olderrno;
+	int f = -1, opts = 0, wrerr;
 	mode_t mode;
 	off_t i, size;
 	time_t mtime;
@@ -924,7 +924,6 @@ recvf(char *cmd, int type)
 		if (i + amt > size)
 			amt = size - i;
 		if (wrerr == 0 && write(f, buf, amt) != amt) {
-			olderrno = errno;
 			wrerr++;
 		}
 	}

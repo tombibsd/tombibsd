@@ -814,7 +814,6 @@ ulfs_direnter(struct vnode *dvp, const struct ulfs_lookup_results *ulr,
     struct componentname *cnp, struct buf *newdirbp)
 {
 	kauth_cred_t cr;
-	struct lwp *l;
 	int newentrysize;
 	struct inode *dp;
 	struct buf *bp;
@@ -830,7 +829,6 @@ ulfs_direnter(struct vnode *dvp, const struct ulfs_lookup_results *ulr,
 
 	error = 0;
 	cr = cnp->cn_cred;
-	l = curlwp;
 
 	dp = VTOI(dvp);
 	newentrysize = LFS_DIRSIZ(0, dirp, 0);
@@ -1068,9 +1066,7 @@ ulfs_dirremove(struct vnode *dvp, const struct ulfs_lookup_results *ulr,
 	struct lfs_direct *ep;
 	struct buf *bp;
 	int error;
-#ifdef LFS_EI
 	const int needswap = ULFS_MPNEEDSWAP(dp->i_lfs);
-#endif
 
 	if (flags & DOWHITEOUT) {
 		/*

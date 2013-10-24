@@ -510,11 +510,8 @@ uscsi_format_cdrw_mode7(struct uscsi_dev *mydev, uint32_t blocks)
 {
 	scsicmd cmd;
 	struct uscsi_sense sense;
-	uint32_t param;
 	uint8_t  buffer[16];
-	int cnt, error;
-
-	param = cnt = 0;
+	int error;
 
 	if (blocks % 32) {
 		blocks -= blocks % 32;

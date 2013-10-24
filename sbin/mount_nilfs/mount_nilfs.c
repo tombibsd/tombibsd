@@ -110,14 +110,12 @@ mount_nilfs_parseargs(int argc, char **argv,
 	struct tm *tm;
 	time_t	 now;
 	int	 ch, set_gmtoff;
-	uint32_t sector_size;
 	mntoptparse_t mp;
 
 	/* initialise */
 	(void)memset(args, 0, sizeof(*args));
 
 	set_gmtoff = *mntflags = 0;
-	sector_size = 0;
 
 	while ((ch = getopt(argc, argv, "c:o:t:")) != -1) {
 		switch (ch) {

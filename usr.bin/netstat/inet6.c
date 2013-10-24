@@ -1420,15 +1420,8 @@ inet6name(const struct in6_addr *in6p)
 		sin6.sin6_len = sizeof(sin6);
 		sin6.sin6_family = AF_INET6;
 		sin6.sin6_addr = *in6p;
-#ifdef __KAME__
-		if (IN6_IS_ADDR_LINKLOCAL(in6p) ||
-		    IN6_IS_ADDR_MC_LINKLOCAL(in6p)) {
-			sin6.sin6_scope_id =
-			    ntohs(*(const u_int16_t *)&in6p->s6_addr[2]);
-			sin6.sin6_addr.s6_addr[2] = 0;
-			sin6.sin6_addr.s6_addr[3] = 0;
-		}
-#endif
+		inet6_getscopeid(&sin6, INET6_IS_ADDR_LINKLOCAL|
+		    INET6_IS_ADDR_MC_LINKLOCAL);
 		if (getnameinfo((struct sockaddr *)&sin6, sin6.sin6_len,
 				hbuf, sizeof(hbuf), NULL, 0, niflag) != 0)
 			strlcpy(hbuf, "?", sizeof(hbuf));

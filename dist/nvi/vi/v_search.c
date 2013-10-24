@@ -351,11 +351,7 @@ v_searchw(SCR *sp, VICMD *vp)
 int
 v_esearch(SCR *sp, VICMD *vp)
 {
-	MARK m;
 	int flags;
-
-	m.lno = sp->lno;
-	m.cno = sp->cno;
 
 	LF_INIT(SEARCH_NOOPT);
 	if (FL_ISSET(vp->ev.e_flags, VI_SEARCH_EXT))
@@ -444,7 +440,6 @@ v_search(SCR *sp, VICMD *vp, CHAR_T *ptrn, size_t plen, u_int flags, dir_t dir)
 int
 v_correct(SCR *sp, VICMD *vp, int isdelta)
 {
-	dir_t dir;
 	MARK m;
 	size_t len;
 
@@ -489,9 +484,7 @@ v_correct(SCR *sp, VICMD *vp, int isdelta)
 		m = vp->m_start;
 		vp->m_start = vp->m_stop;
 		vp->m_stop = m;
-		dir = BACKWARD;
 	} else
-		dir = FORWARD;
 
 	/*
 	 * BACKWARD:

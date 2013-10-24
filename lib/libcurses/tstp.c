@@ -234,8 +234,8 @@ __stopwin(void)
 		    (int) curscr->maxy - 1, 0, 0);
 	}
 
-	if (meta_off != NULL)
-		(void) tputs(meta_off, 0, __cputchar);
+	if (meta_on != NULL)
+		(void) tputs(meta_on, 0, __cputchar);
 
 	if ((curscr != NULL) && (curscr->flags & __KEYPAD))
 		(void) tputs(keypad_local, 0, __cputchar);

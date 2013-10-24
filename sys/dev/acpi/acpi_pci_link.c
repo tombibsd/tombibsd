@@ -903,6 +903,10 @@ acpi_pci_link_srs(struct acpi_pci_link_softc *sc, ACPI_BUFFER *srsbuf)
 	else
 		status = acpi_pci_link_srs_from_crs(sc, srsbuf);
 
+	if (ACPI_FAILURE(status))
+		printf("%s: Unable to find link srs : %s\n",
+		    sc->pl_name, AcpiFormatException(status));
+
 	/* Write out new resources via _SRS. */
 	return AcpiSetCurrentResources(sc->pl_handle, srsbuf);
 }

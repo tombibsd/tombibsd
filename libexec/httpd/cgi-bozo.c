@@ -490,12 +490,9 @@ bozo_process_cgi(bozo_httpreq_t *request)
 	exit(0);
 
  out:
-	if (query)
-		free(query);
-	if (file)
-		free(file);
-	if (url)
-		free(url);
+	free(query);
+	free(file);
+	free(url);
 	return 0;
 }
 

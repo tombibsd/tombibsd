@@ -136,7 +136,7 @@ wins_nwstr(WINDOW *win, const wchar_t *wstr, int n)
 	__LDATA	 *start, *temp1, *temp2;
 	__LINE	  *lnp;
 	const wchar_t *scp;
-	int width, len, sx, x, y, cw, pcw, newx;
+	int width, len, sx, x, y, cw, pcw, newx, tabsize;
 	nschar_t *np;
 	wchar_t ws[] = L"		";
 
@@ -266,9 +266,10 @@ wins_nwstr(WINDOW *win, const wchar_t *wstr, int n)
 				}
 				continue;
 			case L'\t':
+				tabsize = win->screen->TABSIZE;
 				if (wins_nwstr(win, ws,
-						min(win->maxx - x, 8-(x % 8)))
-							== ERR)
+				    min(win->maxx - x, tabsize - (x % tabsize)))
+				    == ERR)
 					return ERR;
 				continue;
 		}

@@ -316,7 +316,7 @@ usb_doattach(device_t self)
 		sc->sc_dying = 1;
 	}
 
-	config_pending_incr();
+	config_pending_incr(self);
 
 	if (!pmf_device_register(self, NULL, NULL))
 		aprint_error_dev(self, "couldn't establish power handler\n");
@@ -402,7 +402,7 @@ usb_event_thread(void *arg)
 	usb_discover(sc);
 	if (sc->sc_bus->lock)
 		mutex_exit(sc->sc_bus->lock);
-	config_pending_decr();
+	config_pending_decr(sc->sc_bus->usbctl);
 
 	if (sc->sc_bus->lock)
 		mutex_enter(sc->sc_bus->lock);
@@ -507,13 +507,13 @@ usbread(dev_t dev, struct uio *uio, int flag)
 	struct usb_event *ue;
 #ifdef COMPAT_30
 	struct usb_event_old *ueo = NULL;	/* XXXGCC */
+	int useold = 0;
 #endif
-	int error, n, useold;
+	int error, n;
 
 	if (minor(dev) != USB_DEV_MINOR)
 		return (ENXIO);
 
-	useold = 0;
 	switch (uio->uio_resid) {
 #ifdef COMPAT_30
 	case sizeof(struct usb_event_old):

@@ -56,7 +56,6 @@ ex_bang(SCR *sp, EXCMD *cmdp)
 	EX_PRIVATE *exp;
 	MARK rm;
 	db_recno_t lno;
-	int rval;
 	const char *msg;
 	const char *np;
 	size_t nlen;
@@ -156,7 +155,7 @@ ex_bang(SCR *sp, EXCMD *cmdp)
 				ftype = FILTER_RBANG;
 			}
 		}
-		rval = ex_filter(sp, cmdp,
+		(void)ex_filter(sp, cmdp,
 		    &cmdp->addr1, &cmdp->addr2, &rm, ap->bp, ftype);
 
 		/*

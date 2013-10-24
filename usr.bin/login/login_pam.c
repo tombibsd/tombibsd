@@ -107,10 +107,9 @@ main(int argc, char *argv[])
 	uid_t uid, saved_uid;
 	gid_t saved_gid, saved_gids[NGROUPS_MAX];
 	int nsaved_gids;
-	char *domain, *p, *ttyn, *pwprompt;
+	char *domain, *p, *ttyn;
 	char tbuf[MAXPATHLEN + 2], tname[sizeof(_PATH_TTY) + 10];
 	char localhost[MAXHOSTNAMELEN + 1];
-	int need_chpass, require_chpass;
 	int login_retries = DEFAULT_RETRIES, 
 	    login_backoff = DEFAULT_BACKOFF;
 	char *shell = NULL;
@@ -126,9 +125,7 @@ main(int argc, char *argv[])
 	char **pamenv;
 
 	tbuf[0] = '\0';
-	pwprompt = NULL;
 	nested = NULL;
-	need_chpass = require_chpass = 0;
 
 	oabrt = signal(SIGABRT, SIG_IGN);
 	oalrm = signal(SIGALRM, timedout);

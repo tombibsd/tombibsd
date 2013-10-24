@@ -357,7 +357,7 @@ _libelf_resync_sections(Elf *e, off_t rc)
 static off_t
 _libelf_resync_elf(Elf *e)
 {
-	int ec, eh_class, eh_type;
+	int ec, eh_class;
 	unsigned int eh_byteorder, eh_version;
 	size_t align, fsz;
 	size_t phnum, shnum;
@@ -386,14 +386,12 @@ _libelf_resync_elf(Elf *e)
 		eh_class     = eh32->e_ident[EI_CLASS];
 		phoff        = (uint64_t) eh32->e_phoff;
 		shoff        = (uint64_t) eh32->e_shoff;
-		eh_type      = eh32->e_type;
 		eh_version   = eh32->e_version;
 	} else {
 		eh_byteorder = eh64->e_ident[EI_DATA];
 		eh_class     = eh64->e_ident[EI_CLASS];
 		phoff        = eh64->e_phoff;
 		shoff        = eh64->e_shoff;
-		eh_type      = eh64->e_type;
 		eh_version   = eh64->e_version;
 	}
 

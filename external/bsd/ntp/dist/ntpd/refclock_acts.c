@@ -638,7 +638,6 @@ acts_poll (
 	struct peer *peer
 	)
 {
-	struct actsunit *up;
 	struct refclockproc *pp;
 
 	/*
@@ -647,7 +646,6 @@ acts_poll (
 	 * the timeout routine and state machine.
 	 */
 	pp = peer->procptr;
-	up = (struct actsunit *)pp->unitptr;
 	switch (peer->ttl) {
 
 	/*

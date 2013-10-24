@@ -118,6 +118,7 @@ void	sparc_softintr_init(void);
  * user mode, or after the current trap/syscall if in system mode.
  */
 #define cpu_need_resched(ci, flags) do {				\
+	__USE(flags);							\
 	(ci)->ci_want_resched = 1;					\
 	(ci)->ci_want_ast = 1;						\
 									\

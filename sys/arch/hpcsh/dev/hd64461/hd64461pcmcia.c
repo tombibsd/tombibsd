@@ -273,7 +273,7 @@ hd64461pcmcia_attach(device_t parent, device_t self, void *aux)
 			       "%s", device_xname(self));
 	KASSERT(error == 0);
 
-	config_pending_incr();
+	config_pending_incr(self);
 
 	/* XXX: TODO */
 	if (!pmf_device_register(self, NULL, NULL))
@@ -294,7 +294,7 @@ hd64461pcmcia_event_thread(void *arg)
 	hd64461pcmcia_attach_channel(sc, CHANNEL_1);
 	hd64461pcmcia_attach_channel(sc, CHANNEL_0);
 #endif
-	config_pending_decr();
+	config_pending_decr(sc->sc_dev);
 
 	while (!sc->sc_shutdown) {
 		tsleep(sc, PWAIT, "CSC wait", 0);

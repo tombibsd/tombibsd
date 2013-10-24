@@ -711,7 +711,7 @@ autoifprobe(void)
 	static int n = 0;
 	char **a;
 	int i, found;
-	struct ifaddrs *ifap, *ifa, *target;
+	struct ifaddrs *ifap, *ifa;
 
 	/* initialize */
 	while (n--)
@@ -725,7 +725,6 @@ autoifprobe(void)
 	if (getifaddrs(&ifap) != 0)
 		return NULL;
 
-	target = NULL;
 	/* find an ethernet */
 	for (ifa = ifap; ifa; ifa = ifa->ifa_next) {
 		if ((ifa->ifa_flags & IFF_UP) == 0)

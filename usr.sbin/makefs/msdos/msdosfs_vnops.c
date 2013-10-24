@@ -136,7 +136,6 @@ msdosfs_findslot(struct denode *dp, struct componentname *cnp)
 	int blkoff;
 	u_int diroff;
 	int blsize;
-	struct denode *tdp;
 	struct msdosfsmount *pmp;
 	struct buf *bp = 0;
 	struct direntry *dep;
@@ -179,7 +178,6 @@ msdosfs_findslot(struct denode *dp, struct componentname *cnp)
 	 * Search the directory pointed at by vdp for the name pointed at
 	 * by cnp->cn_nameptr.
 	 */
-	tdp = NULL;
 	/*
 	 * The outer loop ranges over the clusters that make up the
 	 * directory.  Note that the root directory is different from all

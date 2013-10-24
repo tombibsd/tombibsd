@@ -37,7 +37,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include "opt_kgdb.h"
 
 #include "sdhc.h"
-#include "dotg.h"
+#include "bcmdwctwo.h"
 #include "bcmspi.h"
 #include "bsciic.h"
 #include "plcom.h"
@@ -385,7 +385,7 @@ rpi_bootparams(void)
 #if (NPLCOM > 0)
 	    (1 << VCPM_POWER_UART0) |
 #endif
-#if (NDOTG > 0)
+#if (NBCMDWCTWO > 0)
 	    (1 << VCPM_POWER_USB) | 
 #endif
 #if (NBSCIIC > 0)

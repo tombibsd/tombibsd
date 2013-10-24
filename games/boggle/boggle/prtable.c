@@ -106,6 +106,7 @@ prtable(const char *const base[], int num, int d_cols, int width,
 			}
                 }
 		getyx(stdscr, row, col);
+		__USE(col);
 		move(row + 1, 0);
         }
 	refresh();

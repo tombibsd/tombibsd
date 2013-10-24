@@ -725,7 +725,6 @@ static void
 nilfs_register_node(struct nilfs_node *node)
 {
 	struct nilfs_mount *ump;
-	struct nilfs_node *chk;
 	uint32_t hashline;
 
 	ump = node->ump;
@@ -734,13 +733,12 @@ nilfs_register_node(struct nilfs_node *node)
 	/* add to our hash table */
 	hashline = nilfs_calchash(node->ino) & NILFS_INODE_HASHMASK;
 #ifdef DEBUG
+	struct nilfs_node *chk;
 	LIST_FOREACH(chk, &ump->nilfs_nodes[hashline], hashchain) {
 		assert(chk);
 		if (chk->ino == node->ino)
 			panic("Double node entered\n");
 	}
-#else
-	chk = NULL;
 #endif
 	LIST_INSERT_HEAD(&ump->nilfs_nodes[hashline], node, hashchain);
 

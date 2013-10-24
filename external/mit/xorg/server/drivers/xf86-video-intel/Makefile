@@ -4,7 +4,7 @@ DRIVER=		xf86-video-intel
 DRIVER_NAME=	intel_drv
 
 SRCS=		drmmode_display.c i810_accel.c i810_cursor.c i810_dga.c
-SRCS+=		i810_driver.c i810_io.c i810_memory.c i810_video.c
+SRCS+=		i810_dri.c i810_driver.c i810_io.c i810_memory.c i810_video.c
 SRCS+=		i810_wmark.c i830_3d.c i830_accel.c i830_bios.c
 SRCS+=		i830_batchbuffer.c i830_crt.c i830_cursor.c i830_debug.c
 SRCS+=		i830_display.c i830_quirks.c i830_driver.c i830_dvo.c

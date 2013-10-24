@@ -13,7 +13,7 @@
 /clnt_perror.c/1.30/Mon Mar 11 20:19:29 2013/-kk/
 /clnt_raw.c/1.32/Mon Mar 11 20:19:29 2013/-kk/
 /clnt_simple.c/1.32/Mon Mar 11 20:19:29 2013/-kk/
-/clnt_vc.c/1.23/Tue May  7 21:08:45 2013/-kk/
+/clnt_vc.c/1.24/Thu Oct 24 06:29:08 2013/-kk/
 /getnetconfig.3/1.7/Wed Apr 16 13:34:43 2003/-kk/
 /getnetconfig.c/1.21/Mon Mar 11 20:19:29 2013/-kk/
 /getnetpath.3/1.6/Wed Apr 16 13:34:43 2003/-kk/

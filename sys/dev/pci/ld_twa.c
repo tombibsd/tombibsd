@@ -200,11 +200,9 @@ ld_twa_handler(struct twa_request *tr)
 	uint8_t	status;
 	struct buf *bp;
 	struct ld_twa_softc *sc;
-	struct twa_softc *twa;
 
 	bp = tr->bp;
 	sc = (struct ld_twa_softc *)tr->tr_ld_sc;
-	twa = device_private(device_parent(sc->sc_ld.sc_dv));
 
 	status = tr->tr_command->command.cmd_pkt_9k.status;
 

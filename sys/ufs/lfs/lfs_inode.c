@@ -627,13 +627,11 @@ static int
 lfs_update_seguse(struct lfs *fs, struct inode *ip, long lastseg, size_t num)
 {
 	struct segdelta *sd;
-	struct vnode *vp;
 
 	ASSERT_SEGLOCK(fs);
 	if (lastseg < 0 || num == 0)
 		return 0;
 
-	vp = ITOV(ip);
 	LIST_FOREACH(sd, &ip->i_lfs_segdhd, list)
 		if (sd->segnum == lastseg)
 			break;

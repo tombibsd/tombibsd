@@ -2081,7 +2081,7 @@ mly_scsipi_ioctl(struct scsipi_channel *chan, u_long cmd, void *data,
 static int
 mly_fwhandshake(struct mly_softc *mly)
 {
-	u_int8_t error, param0, param1;
+	u_int8_t error;
 	int spinup;
 
 	spinup = 0;
@@ -2107,8 +2107,8 @@ mly_fwhandshake(struct mly_softc *mly)
 			continue;
 
 		error = mly_inb(mly, mly->mly_error_status) & ~MLY_MSG_EMPTY;
-		param0 = mly_inb(mly, mly->mly_cmd_mailbox);
-		param1 = mly_inb(mly, mly->mly_cmd_mailbox + 1);
+		(void)mly_inb(mly, mly->mly_cmd_mailbox);
+		(void)mly_inb(mly, mly->mly_cmd_mailbox + 1);
 
 		switch (error) {
 		case MLY_MSG_SPINUP:

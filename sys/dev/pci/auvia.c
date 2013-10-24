@@ -1076,11 +1076,9 @@ auvia_build_dma_ops(struct auvia_softc *sc, struct auvia_softc_chan *ch,
 	struct auvia_dma *p, void *start, void *end, int blksize)
 {
 	struct auvia_dma_op *op;
-	struct auvia_dma *dp;
 	bus_addr_t s;
 	size_t l;
 
-	dp = ch->sc_dma_ops_dma;
 	op = ch->sc_dma_ops;
 	s = p->map->dm_segs[0].ds_addr;
 	l = ((char *)end - (char *)start);

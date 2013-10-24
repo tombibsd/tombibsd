@@ -139,7 +139,9 @@ int
 bus_space_map(bus_space_tag_t t, bus_addr_t bpa, bus_size_t size, int flags,
 	      bus_space_handle_t *hp)
 {
+#ifdef DIAGNOSTIC
 	paddr_t pa, endpa;
+#endif
 	int error;
 
 	/*
@@ -151,10 +153,10 @@ bus_space_map(bus_space_tag_t t, bus_addr_t bpa, bus_size_t size, int flags,
 	if (error)
 		return (error);
 
+#ifdef DIAGNOSTIC
 	pa = m68k_trunc_page(bpa + t);
 	endpa = m68k_round_page((bpa + t + size) - 1);
 
-#ifdef DIAGNOSTIC
 	if (endpa <= pa)
 		panic("bus_space_map: overflow");
 #endif
@@ -269,7 +271,6 @@ int
 mac68k_bus_space_probe(bus_space_tag_t t, bus_space_handle_t h,
 		       bus_size_t offset, int size)
 {
-	int i;
 	label_t faultbuf;
 
 	nofault = &faultbuf;
@@ -280,13 +281,13 @@ mac68k_bus_space_probe(bus_space_tag_t t, bus_space_handle_t h,
 
 	switch (size) {
 	case 1:
-		i = bus_space_read_1(t, h, offset);
+		bus_space_read_1(t, h, offset);
 		break;
 	case 2:
-		i = bus_space_read_2(t, h, offset);
+		bus_space_read_2(t, h, offset);
 		break;
 	case 4:
-		i = bus_space_read_4(t, h, offset);
+		bus_space_read_4(t, h, offset);
 		break;
 	case 8:
 	default:

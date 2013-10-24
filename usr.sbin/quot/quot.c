@@ -450,7 +450,10 @@ static void
 donames(int fd, struct fs *super, const char *name)
 {
 	int c;
-	ino_t inode, inode1;
+	ino_t inode;
+#ifdef COMPAT
+	ino_t inode1 = -1;
+#endif
 	ino_t maxino;
 	union dinode *dp;
 	
@@ -459,7 +462,6 @@ donames(int fd, struct fs *super, const char *name)
 	while ((c = getchar()) != EOF && (c < '0' || c > '9'))
 		while ((c = getchar()) != EOF && c != '\n');
 	ungetc(c, stdin);
-	inode1 = -1;
 	while (scanf("%" SCNu64, &inode) == 1) {
 		if (inode > maxino) {
 #ifndef	COMPAT
@@ -483,7 +485,9 @@ donames(int fd, struct fs *super, const char *name)
 				c = getchar();
 			}
 			putchar('\n');
+#ifdef COMPAT
 			inode1 = inode;
+#endif
 		} else {
 			if (errno)
 				errx(1, "%s", name);

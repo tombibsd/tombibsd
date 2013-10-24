@@ -473,7 +473,7 @@ struct rxbugentry {
 static int
 dge_alloc_rcvmem(struct dge_softc *sc)
 {
-	char *ptr, *kva;
+	char *kva;
 	bus_dma_segment_t seg;
 	int i, rseg, state, error;
 	struct rxbugentry *entry;
@@ -519,7 +519,6 @@ dge_alloc_rcvmem(struct dge_softc *sc)
 	 * Now divide it up into DGE_BUFFER_SIZE pieces and save the addresses
 	 * in an array.
 	 */
-	ptr = sc->sc_bugbuf;
 	if ((entry = malloc(sizeof(*entry) * DGE_NBUFFERS,
 	    M_DEVBUF, M_NOWAIT)) == NULL) {
 		error = ENOBUFS;

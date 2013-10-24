@@ -6,9 +6,12 @@ LIB=	lldbPluginProcessElfCore
 
 .PATH: ${LLDB_SRCDIR}/source/Plugins/Process/elf-core
 
+CPPFLAGS.RegisterContextPOSIXCore_mips64.cpp+= -I${LLDB_SRCDIR}/source/Plugins/Process/POSIX
+
 SRCS+=	ProcessElfCore.cpp \
-	ThreadElfCore.cpp \
-	RegisterContextPOSIXCore_x86_64.cpp
+	RegisterContextPOSIXCore_mips64.cpp \
+	RegisterContextPOSIXCore_x86_64.cpp \
+	ThreadElfCore.cpp
 
 .if defined(HOSTLIB)
 .include <bsd.hostlib.mk>

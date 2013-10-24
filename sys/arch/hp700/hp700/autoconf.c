@@ -471,6 +471,8 @@ cpu_rootconf(void)
 	}
 	printf("dp_flags 0x%x pz_class 0x%x\n", PAGE0->mem_boot.pz_dp.dp_flags,
 	    PAGE0->mem_boot.pz_class);
+
+	hp700_pagezero_unmap(pagezero_cookie);
 #endif /* DEBUG */
 
 	if (boot_device != NULL)

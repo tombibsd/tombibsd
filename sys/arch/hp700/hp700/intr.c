@@ -408,7 +408,7 @@ hp700_intr_dispatch(int ncpl, int eiem, struct trapframe *frame)
 	int ipending_run;
 	int bit_pos;
 	void *arg;
-	int handled;
+	int handled __unused;
 	bool locked = false;
 
 	/*

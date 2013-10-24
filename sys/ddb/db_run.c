@@ -197,7 +197,7 @@ db_restart_at_pc(db_regs_t *regs, bool watchpt)
 	if ((db_run_mode == STEP_COUNT) ||
 	    (db_run_mode == STEP_RETURN) ||
 	    (db_run_mode == STEP_CALLT)) {
-		db_expr_t		ins;
+		db_expr_t		ins __unused;
 
 		/*
 		 * We are about to execute this instruction,

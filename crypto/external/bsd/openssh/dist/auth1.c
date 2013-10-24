@@ -162,7 +162,7 @@ auth1_process_kerberos(Authctxt *authctxt, char *info, size_t infolen)
 
 		if (PRIVSEP(auth_krb4(authctxt, &tkt, &client_user, &reply))) {
 			authenticated = 1;
-			snprintf(info, sizeof(info), " tktuser %.100s",
+			snprintf(info, infolen, " tktuser %.100s",
 			    client_user);
 
 			packet_start(SSH_SMSG_AUTH_KERBEROS_RESPONSE);
@@ -182,7 +182,7 @@ auth1_process_kerberos(Authctxt *authctxt, char *info, size_t infolen)
 
 		if (PRIVSEP(auth_krb5(authctxt, &tkt, &client_user, &reply))) {
 			authenticated = 1;
-			snprintf(info, sizeof(info), " tktuser %.100s",
+			snprintf(info, infolen, " tktuser %.100s",
 			    client_user);
 
 			/* Send response to client */

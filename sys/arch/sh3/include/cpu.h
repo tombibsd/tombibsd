@@ -101,6 +101,7 @@ struct clockframe {
  */
 #define	cpu_need_resched(ci, flags)					\
 do {									\
+	__USE(flags); 							\
 	ci->ci_want_resched = 1;					\
 	if (curlwp != ci->ci_data.cpu_idlelwp)				\
 		aston(curlwp);						\

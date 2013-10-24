@@ -496,13 +496,11 @@ vs_number(SCR *sp)
 {
 	GS *gp;
 	SMAP *smp;
-	VI_PRIVATE *vip;
 	size_t len, oldy, oldx;
 	int exist;
 	char nbuf[10];
 
 	gp = sp->gp;
-	vip = VIP(sp);
 
 	/* No reason to do anything if we're in input mode on the info line. */
 	if (F_ISSET(sp, SC_TINPUT_INFO))

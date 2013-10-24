@@ -901,12 +901,10 @@ setifaddr(prop_dictionary_t env, prop_dictionary_t oenv)
 static int
 setifnetmask(prop_dictionary_t env, prop_dictionary_t oenv)
 {
-	const struct paddr_prefix *pfx;
 	prop_data_t d;
 
 	d = (prop_data_t)prop_dictionary_get(env, "dstormask");
 	assert(d != NULL);
-	pfx = prop_data_data_nocopy(d);
 
 	if (!prop_dictionary_set(oenv, "netmask", (prop_object_t)d))
 		return -1;
@@ -917,7 +915,6 @@ setifnetmask(prop_dictionary_t env, prop_dictionary_t oenv)
 static int
 setifbroadaddr(prop_dictionary_t env, prop_dictionary_t oenv)
 {
-	const struct paddr_prefix *pfx;
 	prop_data_t d;
 	unsigned short flags;
 
@@ -929,7 +926,6 @@ setifbroadaddr(prop_dictionary_t env, prop_dictionary_t oenv)
 
 	d = (prop_data_t)prop_dictionary_get(env, "broadcast");
 	assert(d != NULL);
-	pfx = prop_data_data_nocopy(d);
 
 	if (!prop_dictionary_set(oenv, "broadcast", (prop_object_t)d))
 		return -1;
@@ -950,7 +946,6 @@ static int
 setifdstormask(prop_dictionary_t env, prop_dictionary_t oenv)
 {
 	const char *key;
-	const struct paddr_prefix *pfx;
 	prop_data_t d;
 	unsigned short flags;
 
@@ -959,7 +954,6 @@ setifdstormask(prop_dictionary_t env, prop_dictionary_t oenv)
 
 	d = (prop_data_t)prop_dictionary_get(env, "dstormask");
 	assert(d != NULL);
-	pfx = prop_data_data_nocopy(d);
 
 	if ((flags & IFF_BROADCAST) == 0) {
 		key = "dst";
@@ -1030,12 +1024,9 @@ static int
 setifcaps(prop_dictionary_t env, prop_dictionary_t oenv)
 {
 	int64_t ifcap;
-	int s;
 	bool rc;
 	prop_data_t capdata;
 	struct ifcapreq ifcr;
-
-	s = getsock(AF_INET);
 
 	rc = prop_dictionary_get_int64(env, "ifcap", &ifcap);
 	assert(rc);

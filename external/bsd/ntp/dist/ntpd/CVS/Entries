@@ -9,7 +9,7 @@
 /keyword-gen.c/1.3/Wed Feb  1 07:46:22 2012/-kk/
 /ntp_config.c/1.5/Wed Feb  1 07:46:22 2012/-kk/
 /ntp_control.c/1.6/Wed Feb  1 20:48:01 2012/-kk/
-/ntp_crypto.c/1.4/Wed Feb  1 07:46:22 2012/-kk/
+/ntp_crypto.c/1.5/Thu Oct 24 06:28:26 2013/-kk/
 /ntp_data_structures.c/1.1.1.1/Sun Dec 13 16:56:17 2009/-kk/
 /ntp_filegen.c/1.3/Wed Feb  1 07:46:22 2012/-kk/
 /ntp_intres.c/1.4/Wed Feb  1 07:46:22 2012/-kk/
@@ -21,7 +21,7 @@
 /ntp_parser.h/1.3/Wed Feb  1 07:46:22 2012/-kk/
 /ntp_parser.y/1.5/Wed Feb  1 07:46:22 2012/-kk/
 /ntp_peer.c/1.3/Wed Feb  1 07:46:22 2012/-kk/
-/ntp_proto.c/1.3/Wed Feb  1 07:46:22 2012/-kk/
+/ntp_proto.c/1.4/Thu Oct 24 06:28:26 2013/-kk/
 /ntp_refclock.c/1.4/Wed Feb  1 20:48:01 2012/-kk/
 /ntp_request.c/1.7/Wed Feb  1 22:48:15 2012/-kk/
 /ntp_restrict.c/1.2/Wed Feb  1 20:48:01 2012/-kk/
@@ -40,14 +40,14 @@
 /ntpdbase-opts.def/1.1.1.1/Sun Dec 13 16:55:56 2009/-kk/
 /ntpsim.c/1.1.1.1/Sun Dec 13 16:56:16 2009/-kk/
 /ppsapi_timepps.h/1.1.1.1/Sun Dec 13 16:55:42 2009/-kk/
-/refclock_acts.c/1.4/Wed Feb  1 07:46:22 2012/-kk/
+/refclock_acts.c/1.5/Thu Oct 24 06:28:26 2013/-kk/
 /refclock_arbiter.c/1.1.1.2/Tue Jan 31 21:26:42 2012/-kk/
 /refclock_arc.c/1.3/Wed Feb  1 07:46:22 2012/-kk/
 /refclock_as2201.c/1.1.1.2/Tue Jan 31 21:26:44 2012/-kk/
 /refclock_atom.c/1.1.1.2/Tue Jan 31 21:25:18 2012/-kk/
 /refclock_bancomm.c/1.1.1.2/Tue Jan 31 21:25:09 2012/-kk/
 /refclock_chronolog.c/1.1.1.2/Tue Jan 31 21:25:59 2012/-kk/
-/refclock_chu.c/1.1.1.2/Tue Jan 31 21:25:55 2012/-kk/
+/refclock_chu.c/1.2/Thu Oct 24 06:28:26 2013/-kk/
 /refclock_conf.c/1.1.1.2/Tue Jan 31 21:26:35 2012/-kk/
 /refclock_datum.c/1.2/Sat Dec  4 23:08:35 2010/-kk/
 /refclock_dumbclock.c/1.1.1.2/Tue Jan 31 21:26:00 2012/-kk/
@@ -57,7 +57,7 @@
 /refclock_hopfpci.c/1.1.1.2/Tue Jan 31 21:24:56 2012/-kk/
 /refclock_hopfser.c/1.1.1.2/Tue Jan 31 21:25:37 2012/-kk/
 /refclock_hpgps.c/1.1.1.2/Tue Jan 31 21:25:51 2012/-kk/
-/refclock_irig.c/1.1.1.2/Tue Jan 31 21:24:51 2012/-kk/
+/refclock_irig.c/1.2/Thu Oct 24 06:28:26 2013/-kk/
 /refclock_jjy.c/1.4/Wed Feb  1 20:48:01 2012/-kk/
 /refclock_jupiter.c/1.4/Wed Feb  1 07:46:22 2012/-kk/
 /refclock_leitch.c/1.1.1.2/Tue Jan 31 21:26:43 2012/-kk/
@@ -66,7 +66,7 @@
 /refclock_mx4200.c/1.1.1.2/Tue Jan 31 21:25:32 2012/-kk/
 /refclock_neoclock4x.c/1.4/Wed Feb  1 07:46:22 2012/-kk/
 /refclock_nmea.c/1.4/Wed Feb  1 07:46:22 2012/-kk/
-/refclock_oncore.c/1.6/Wed Feb  1 07:46:22 2012/-kk/
+/refclock_oncore.c/1.7/Thu Oct 24 06:28:26 2013/-kk/
 /refclock_palisade.c/1.1.1.2/Tue Jan 31 21:26:16 2012/-kk/
 /refclock_palisade.h/1.1.1.1/Sun Dec 13 16:55:56 2009/-kk/
 /refclock_parse.c/1.9/Sun Aug 12 07:22:24 2012/-kk/

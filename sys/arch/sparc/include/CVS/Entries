@@ -12,7 +12,7 @@
 /bus_funcs.h/1.1/Fri Jul  1 17:10:01 2011/-kk/
 /cdefs.h/1.12/Fri Jan 20 14:08:06 2012/-kk/
 /cgtworeg.h/1.5/Tue May 20 13:38:00 2003/-kk/
-/cpu.h/1.94/Tue May  1 09:40:15 2012/-kk/
+/cpu.h/1.95/Thu Oct 24 06:29:25 2013/-kk/
 /cpuconf.h/1.4/Sun Dec 11 12:19:05 2005/-kk/
 /ctlreg.h/1.28/Sun Dec 11 12:19:05 2005/-kk/
 /db_machdep.h/1.26/Thu May 26 15:34:13 2011/-kk/
@@ -50,7 +50,7 @@
 /param.h/1.70/Fri Feb 10 17:35:48 2012/-kk/
 /pcb.h/1.9/Tue Oct 13 22:41:57 2009/-kk/
 /pci_machdep.h/1.10/Tue Apr 16 06:57:06 2013/-kk/
-/pmap.h/1.91/Mon Jan  7 16:59:18 2013/-kk/
+/pmap.h/1.92/Thu Oct 24 06:29:25 2013/-kk/
 /pmc.h/1.1/Wed Aug  7 05:16:09 2002/-kk/
 /proc.h/1.19/Fri Jan 14 02:06:31 2011/-kk/
 /profile.h/1.16/Thu Sep 12 15:36:17 2013/-kk/

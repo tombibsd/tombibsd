@@ -762,7 +762,6 @@ cbq_class_spec(struct ifinfo *ifinfo, u_long parent_class,
 	double          f;
  	double		gton;
  	double		gtom;
-	double		maxrate;
 
  	/* Compute other class parameters */
 	if (bandwidth == 0)
@@ -783,7 +782,6 @@ cbq_class_spec(struct ifinfo *ifinfo, u_long parent_class,
 
         nsPerByte = cbq_ifinfo->nsPerByte / f;
 	ptime = (double) av_pkt_size * (double)cbq_ifinfo->nsPerByte;
-	maxrate = f * ((double)ifinfo->bandwidth / 8.0);
 	cptime = ptime * (1.0 - f) / f;
 #if 1 /* ALTQ */
 	if (nsPerByte * (double)max_pkt_size > (double)INT_MAX) {
@@ -997,9 +995,7 @@ cbq_add_class(struct classinfo *clinfo)
 {
 	struct cbq_add_class class_add;
 	struct cbq_classinfo *cbq_clinfo;
-	struct cbq_ifinfo *cbq_ifinfo;
 
-	cbq_ifinfo = clinfo->ifinfo->private;
 	cbq_clinfo = clinfo->private;
 	
 	memset(&class_add, 0, sizeof(class_add));

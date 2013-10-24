@@ -72,6 +72,7 @@ friendly(uuid_t *t)
 	static const uuid_t swap = GPT_ENT_TYPE_FREEBSD_SWAP;
 	static const uuid_t ufs = GPT_ENT_TYPE_FREEBSD_UFS;
 	static const uuid_t vinum = GPT_ENT_TYPE_FREEBSD_VINUM;
+	static const uuid_t zfs = GPT_ENT_TYPE_FREEBSD_ZFS;
 	static const uuid_t nb_swap = GPT_ENT_TYPE_NETBSD_SWAP;
 	static const uuid_t nb_ffs = GPT_ENT_TYPE_NETBSD_FFS;
 	static const uuid_t nb_lfs = GPT_ENT_TYPE_NETBSD_LFS;
@@ -106,7 +107,8 @@ friendly(uuid_t *t)
 		return ("FreeBSD UFS/UFS2");
 	if (uuid_equal(t, &vinum, NULL))
 		return ("FreeBSD vinum");
-
+	if (uuid_equal(t, &zfs, NULL))
+		return ("FreeBSD ZFS");
 	if (uuid_equal(t, &freebsd, NULL))
 		return ("FreeBSD legacy");
 	if (uuid_equal(t, &msdata, NULL))

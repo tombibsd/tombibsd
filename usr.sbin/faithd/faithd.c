@@ -751,7 +751,6 @@ grab_myaddrs(void)
 {
 	struct ifaddrs *ifap, *ifa;
 	struct myaddrs *p;
-	struct sockaddr_in6 *sin6;
 
 	if (getifaddrs(&ifap) != 0) {
 		exit_failure("getifaddrs");
@@ -776,19 +775,11 @@ grab_myaddrs(void)
 		memcpy(p + 1, ifa->ifa_addr, ifa->ifa_addr->sa_len);
 		p->next = myaddrs;
 		p->addr = (void *)(p + 1);
-#ifdef __KAME__
 		if (ifa->ifa_addr->sa_family == AF_INET6) {
-			sin6 = (void *)p->addr;
-			if (IN6_IS_ADDR_LINKLOCAL(&sin6->sin6_addr)
-			 || IN6_IS_ADDR_SITELOCAL(&sin6->sin6_addr)) {
-				sin6->sin6_scope_id =
-				    ntohs(*(uint16_t *)(void *)
-				    &sin6->sin6_addr.s6_addr[3]);
-				sin6->sin6_addr.s6_addr[2] = 0;
-				sin6->sin6_addr.s6_addr[3] = 0;
-			}
+			struct sockaddr_in6 *sin6 = (void *)p->addr;
+			inet6_getscopeid(sin6, INET6_IS_ADDR_LINKLOCAL|
+				INET6_IS_ADDR_SITELOCAL);
 		}
-#endif
 		myaddrs = p;
 		if (dflag) {
 			char hbuf[NI_MAXHOST];

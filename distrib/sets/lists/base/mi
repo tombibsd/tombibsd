@@ -5439,6 +5439,10 @@
 ./var/chroot/pflogd				base-sys-root
 ./var/chroot/pfspamd				base-obsolete		obsolete
 ./var/chroot/spamd				base-obsolete		obsolete
+./var/chroot/rtadvd				base-sys-root
+./var/chroot/rtadvd/etc				base-sys-root
+./var/chroot/rtadvd/var				base-sys-root
+./var/chroot/rtadvd/var/run			base-sys-root
 ./var/chroot/sshd				base-sys-root
 ./var/chroot/tcpdump				base-sys-root
 ./var/chroot/tcpdump/etc			base-obsolete		obsolete

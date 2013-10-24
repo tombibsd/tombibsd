@@ -18,7 +18,7 @@
 /netbsd32_exec_aout.c/1.25/Fri Apr 23 15:19:20 2010/-kk/
 /netbsd32_exec_elf32.c/1.36/Fri Aug  3 07:49:18 2012/-kk/
 /netbsd32_execve.c/1.37/Tue Jan 15 17:14:11 2013/-kk/
-/netbsd32_fs.c/1.68/Tue Jul 30 17:22:31 2013/-kk/
+/netbsd32_fs.c/1.69/Thu Oct 24 06:29:27 2013/-kk/
 /netbsd32_ioctl.c/1.67/Mon Aug  6 08:27:49 2012/-kk/
 /netbsd32_ioctl.h/1.43/Mon May 28 14:19:10 2012/-kk/
 /netbsd32_ipc.c/1.17/Sat Dec 12 10:30:09 2009/-kk/
@@ -29,14 +29,14 @@
 /netbsd32_sem.c/1.10/Sat Mar 10 21:51:58 2012/-kk/
 /netbsd32_signal.c/1.37/Sun Feb 19 21:06:41 2012/-kk/
 /netbsd32_socket.c/1.41/Sat Aug 18 15:25:15 2012/-kk/
-/netbsd32_syscall.h/1.105/Fri Mar 29 01:14:09 2013/-kk/
-/netbsd32_syscallargs.h/1.105/Fri Mar 29 01:14:09 2013/-kk/
-/netbsd32_syscalls.c/1.104/Fri Mar 29 01:14:09 2013/-kk/
+/netbsd32_syscall.h/1.106/Thu Oct 24 06:29:27 2013/-kk/
+/netbsd32_syscallargs.h/1.106/Thu Oct 24 06:29:27 2013/-kk/
+/netbsd32_syscalls.c/1.105/Thu Oct 24 06:29:27 2013/-kk/
 /netbsd32_sysctl.c/1.33/Fri Jan 20 14:08:07 2012/-kk/
 /netbsd32_sysctl.h/1.1/Wed Nov 19 18:36:05 2008/-kk/
-/netbsd32_sysent.c/1.104/Fri Mar 29 01:14:10 2013/-kk/
+/netbsd32_sysent.c/1.105/Thu Oct 24 06:29:27 2013/-kk/
 /netbsd32_time.c/1.42/Tue Oct  2 01:44:28 2012/-kk/
 /netbsd32_wait.c/1.22/Sat Nov  3 23:22:22 2012/-kk/
 /syscalls.conf/1.12/Fri Mar 29 01:04:30 2013/-kk/
-/syscalls.master/1.97/Fri Mar 29 01:04:30 2013/-kk/
+/syscalls.master/1.98/Thu Oct 24 06:29:27 2013/-kk/
 D

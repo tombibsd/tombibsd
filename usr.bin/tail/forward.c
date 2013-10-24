@@ -90,13 +90,7 @@ forward(FILE *fp, enum STYLE style, off_t off, struct stat *sbp)
 	int ch, n;
 	int kq=-1, action=USE_SLEEP;
 	struct stat statbuf;
-	dev_t lastdev;
-	ino_t lastino;
 	struct kevent ev[2];
-
-	/* Keep track of file's previous incarnation. */
-	lastdev = sbp->st_dev;
-	lastino = sbp->st_ino;
 
 	switch(style) {
 	case FBYTES:

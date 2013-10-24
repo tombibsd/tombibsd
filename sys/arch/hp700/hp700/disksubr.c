@@ -159,7 +159,7 @@ readdisklabel(dev_t dev, void (*strat)(struct buf *), struct disklabel *lp,
 	struct buf *bp = NULL;
 	const char *msg = "no disk label";
 	int i;
-	struct disklabel minilabel, fallbacklabel;
+	struct disklabel fallbacklabel;
 
 	/* minimal requirements for archetypal disk label */
 	if (lp->d_secsize == 0)
@@ -177,7 +177,7 @@ readdisklabel(dev_t dev, void (*strat)(struct buf *), struct disklabel *lp,
 	if (lp->d_partitions[i].p_size == 0)
 		lp->d_partitions[i].p_size = 0x1fffffff;
 	lp->d_partitions[i].p_offset = 0;
-	minilabel = fallbacklabel = *lp;
+	fallbacklabel = *lp;
 
 	/* get a buffer and initialize it */
 	bp = geteblk((int)lp->d_secsize);

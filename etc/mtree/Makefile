@@ -54,7 +54,7 @@ TOOL_MTREE.unpriv=	-W
 # the Makefile.
 #
 emit_dist_file:
-	cat ${.CURDIR}/NetBSD.dist.base ${EXTRA_DIST_FILES}
+	@cat ${.CURDIR}/NetBSD.dist.base ${EXTRA_DIST_FILES}
 
 distrib-dirs: .PHONY check_DESTDIR NetBSD.dist
 .if !defined(DISTRIBUTION_DONE)						# {

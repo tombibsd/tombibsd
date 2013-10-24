@@ -127,8 +127,12 @@
 #define ALL             1
 #define TOP             0
  
-#define TRUE            1
-#define FALSE           0
+#ifndef TRUE
+#define TRUE	1
+#endif
+#ifndef FALSE
+#define FALSE	0
+#endif
 #define cycle           for(;;)
 
 /*

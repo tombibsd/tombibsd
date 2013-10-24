@@ -69,7 +69,6 @@ READ(void *v)
 	struct vnode *vp;
 	struct inode *ip;
 	struct uio *uio;
-	struct ulfsmount *ump;
 	struct buf *bp;
 	FS *fs;
 	vsize_t bytelen;
@@ -81,7 +80,6 @@ READ(void *v)
 
 	vp = ap->a_vp;
 	ip = VTOI(vp);
-	ump = ip->i_ump;
 	fs = ip->I_FS;
 	uio = ap->a_uio;
 	ioflag = ap->a_ioflag;
@@ -220,14 +218,12 @@ WRITE(void *v)
 #ifdef LFS_READWRITE
 	bool need_unreserve = false;
 #endif
-	struct ulfsmount *ump;
 
 	cred = ap->a_cred;
 	ioflag = ap->a_ioflag;
 	uio = ap->a_uio;
 	vp = ap->a_vp;
 	ip = VTOI(vp);
-	ump = ip->i_ump;
 
 	KASSERT(vp->v_size == ip->i_size);
 #ifdef DIAGNOSTIC
@@ -406,6 +402,8 @@ WRITE(void *v)
 			if (error)
 				break;
 		}
+#else
+		__USE(async);
 #endif
 	}
 	if (error == 0 && ioflag & IO_SYNC) {

@@ -176,7 +176,7 @@ process_read_fpregs(struct lwp *l, struct fpreg *regs)
 {
 #ifdef FPU_VFP
 	if (curcpu()->ci_vfp_id == 0) {
-		memset(regs, 0, sizeof(regs));
+		memset(regs, 0, sizeof(*regs));
 		return 0;
 	}
 	const struct pcb * const pcb = lwp_getpcb(l);

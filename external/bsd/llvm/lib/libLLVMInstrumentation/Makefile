@@ -10,13 +10,9 @@ SRCS+=	AddressSanitizer.cpp \
 	BoundsChecking.cpp \
 	DataFlowSanitizer.cpp \
 	DebugIR.cpp \
-	EdgeProfiling.cpp \
 	GCOVProfiling.cpp \
 	Instrumentation.cpp \
 	MemorySanitizer.cpp \
-	OptimalEdgeProfiling.cpp \
-	PathProfiling.cpp \
-	ProfilingUtils.cpp \
 	ThreadSanitizer.cpp
 
 .if defined(HOSTLIB)

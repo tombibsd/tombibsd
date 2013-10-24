@@ -415,13 +415,11 @@ loop:	memcpy(&rdfd, fdset, sizeof(fd_set));
 int
 sscr_input(SCR *sp)
 {
-	GS *gp;
 	WIN *wp;
 	struct timeval poll;
 	fd_set rdfd;
 	int maxfd;
 
-	gp = sp->gp;
 	wp = sp->wp;
 
 loop:	maxfd = 0;

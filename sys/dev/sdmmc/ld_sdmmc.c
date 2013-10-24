@@ -135,7 +135,7 @@ ld_sdmmc_attach(device_t parent, device_t self, void *aux)
 	 * It is avoided that the error occurs when the card attaches it,
 	 * when wedge is supported.
 	 */
-	config_pending_incr();
+	config_pending_incr(self);
 	if (kthread_create(PRI_NONE, KTHREAD_MPSAFE, NULL,
 	    ld_sdmmc_doattach, sc, &lwp, "%sattach", device_xname(self))) {
 		aprint_error_dev(self, "couldn't create thread\n");
@@ -157,7 +157,7 @@ ld_sdmmc_doattach(void *arg)
 		    ssc->sc_busclk / 1000, ssc->sc_busclk % 1000);
 	else
 		aprint_normal(" %u KHz\n", ssc->sc_busclk % 1000);
-	config_pending_decr();
+	config_pending_decr(ld->sc_dv);
 	kthread_exit(0);
 }
 

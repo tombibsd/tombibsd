@@ -36,6 +36,7 @@ D/init////
 D/iscsictl////
 D/iscsid////
 D/ldconfig////
+D/luactl////
 D/mbrlabel////
 D/mknod////
 D/modload////

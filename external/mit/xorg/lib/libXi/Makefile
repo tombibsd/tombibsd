@@ -80,7 +80,7 @@ PKGDIST=	${LIB}
 COPTS.XExtInt.c+=	-Wno-error	# XXX
 COPTS.XSndExEv.c+=	-Wno-error	# XXX
 
-.if ${HAVE_GCC} < 45
+.if defined(HAVE_GCC) && ${HAVE_GCC} < 45
 COPTS.XGetFCtl.c+=	-Wno-error	# XXX
 .endif
 

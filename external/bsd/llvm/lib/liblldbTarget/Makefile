@@ -6,6 +6,8 @@ LIB=	lldbTarget
 
 .PATH: ${LLDB_SRCDIR}/source/Target
 
+CPPFLAGS.Thread.cpp+=	-I${LLDB_SRCDIR}/source/Plugins/Process/Utility
+
 SRCS+=	ABI.cpp \
 	CPPLanguageRuntime.cpp \
 	ExecutionContext.cpp \

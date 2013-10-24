@@ -968,11 +968,9 @@ static int
 urndis_ioctl(struct ifnet *ifp, unsigned long command, void *data)
 {
 	struct urndis_softc	*sc;
-	struct ifaddr		*ifa;
 	int			 s, error;
 
 	sc = ifp->if_softc;
-	ifa = (struct ifaddr *)data;
 	error = 0;
 
 	if (sc->sc_dying)

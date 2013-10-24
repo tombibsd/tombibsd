@@ -183,9 +183,8 @@ static void
 sat_print1(const char *prefix, const struct sockaddr *sa)
 {
 	char buf[40];
-	int rc;
 
-	rc = getnameinfo(sa, sa->sa_len, buf, sizeof(buf), NULL, 0, 0);
+	(void)getnameinfo(sa, sa->sa_len, buf, sizeof(buf), NULL, 0, 0);
 	
 	printf("%s%s", prefix, buf);
 }

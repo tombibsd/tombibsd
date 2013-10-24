@@ -242,7 +242,7 @@ ace_ebus_attach(device_t parent, device_t self, void *aux)
 	ebus_intr_establish(parent, (void*)ia->ia_cookie, IPL_BIO,
 	    ace_ebus_intr, ace);
 
-	config_pending_incr();
+	config_pending_incr(self);
 
 	error = kthread_create(PRI_NONE, 0, NULL, sysace_thread,
 	    ace, NULL, "%s", device_xname(ace->sc_dev));
@@ -348,7 +348,7 @@ sysace_wedges(void *arg)
 	dkwedge_autodiscover = 1;
 	dkwedge_discover(&sc->sc_dk);
 
-	config_pending_decr();
+	config_pending_decr(sc->sc_dev);
 
 	DBGME(DEBUG_STATUS, printf("Sysace::thread done for %p\n", sc));
 	kthread_exit(0);

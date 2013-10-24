@@ -1890,8 +1890,9 @@ get_ptn_alignment(struct mbr_partition *mbrp0)
 		}
 	} else {
 		/* Use 1MB offset for large (>128GB) disks */
-		if (dlsize > 2048 * 1024 * 128)
+		if (dlsize > 2048 * 1024 * 128) {
 			ptn_alignment = 2048;
 			ptn_0_offset = 2048;
+		}
 	}
 }

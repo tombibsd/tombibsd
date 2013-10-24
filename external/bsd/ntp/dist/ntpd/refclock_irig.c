@@ -983,10 +983,8 @@ irig_poll(
 	)
 {
 	struct refclockproc *pp;
-	struct irigunit *up;
 
 	pp = peer->procptr;
-	up = (struct irigunit *)pp->unitptr;
 
 	if (pp->coderecv == pp->codeproc) {
 		refclock_report(peer, CEVNT_TIMEOUT);

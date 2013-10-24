@@ -926,7 +926,6 @@ static int
 print_ascii(struct field *f, int sofar)
 {
 	printf("%s: %.128s\n", f->tag, (char *)f->loc);
-	sofar = 0;
 	return 0;
 }
 

@@ -741,10 +741,8 @@ static int
 fetch_robust_entry(struct lwp *l, struct linux_robust_list **entry,
     struct linux_robust_list **head, int *pi)
 {
-	struct linux_emuldata *led;
 	unsigned long uentry;
 
-	led = l->l_emuldata;
 #ifdef __arch64__
 	if (l->l_proc->p_flag & PK_32) {
 		uint32_t u32;

@@ -1,9 +1,9 @@
 /Makefile/1.37/Fri Jan  6 14:08:08 2012/-kk/
-/bufcache.c/1.25/Fri Nov 23 15:35:57 2012/-kk/
+/bufcache.c/1.26/Thu Oct 24 06:29:35 2013/-kk/
 /cmds.c/1.28/Thu Nov  4 07:18:47 2004/-kk/
 /cmdtab.c/1.24/Fri Jan  6 14:08:08 2012/-kk/
 /df.c/1.4/Sat Dec 24 21:14:50 2005/-kk/
-/disks.c/1.17/Mon Apr 13 23:20:27 2009/-kk/
+/disks.c/1.18/Thu Oct 24 06:29:35 2013/-kk/
 /extern.h/1.42/Fri Jan  6 14:08:08 2012/-kk/
 /fetch.c/1.13/Mon Apr 13 23:20:27 2009/-kk/
 /globalcmds.c/1.15/Sun Nov  1 22:08:14 2009/-kk/
@@ -11,7 +11,7 @@
 /iostat.c/1.37/Mon Apr 13 23:20:27 2009/-kk/
 /ip.c/1.17/Thu Apr 10 17:16:39 2008/-kk/
 /ip6.c/1.15/Thu Apr 10 17:16:39 2008/-kk/
-/keyboard.c/1.24/Mon Dec 31 00:22:14 2007/-kk/
+/keyboard.c/1.25/Thu Oct 24 06:29:35 2013/-kk/
 /main.c/1.47/Fri Nov 23 03:47:36 2012/-kk/
 /mbufs.c/1.16/Fri Nov 23 01:43:10 2012/-kk/
 /netcmds.c/1.21/Sat Feb 26 22:12:33 2005/-kk/
@@ -21,7 +21,7 @@
 /ps.h/1.4/Fri Nov 23 03:33:05 2012/-kk/
 /swap.c/1.20/Fri May 30 02:29:37 2008/-kk/
 /syscall.c/1.8/Fri Nov 23 00:05:18 2012/-kk/
-/systat.1/1.42/Thu Mar 22 07:58:20 2012/-kk/
+/systat.1/1.43/Thu Oct 24 06:29:35 2013/-kk/
 /systat.h/1.11/Sat Feb 26 22:12:34 2005/-kk/
 /tcp.c/1.15/Thu Apr 10 17:16:39 2008/-kk/
 /vmstat.c/1.77/Fri Apr 30 16:21:05 2010/-kk/

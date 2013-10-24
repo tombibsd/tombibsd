@@ -3,7 +3,7 @@
 .include <bsd.own.mk>
 
 PROG=   ldpd
-MAN=    ldpd.8
+MAN=    ldpd.8 ldpd.conf.5
 
 SRCS=   conffile.c \
 	fsm.c \

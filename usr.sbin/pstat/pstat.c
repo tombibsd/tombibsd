@@ -683,7 +683,10 @@ loadvnodes(int *avnodes)
 {
 	int mib[2];
 	int status;
-	size_t copysize, oldsize;
+	size_t copysize;
+#if 0
+	size_t oldsize;
+#endif
 	char *vnodebase;
 
 	if (totalflag) {
@@ -709,7 +712,9 @@ loadvnodes(int *avnodes)
 	 */
 	if (sysctl(mib, 2, NULL, &copysize, NULL, 0) == -1)
 		err(1, "sysctl: KERN_VNODE");
+#if 0
 	oldsize = copysize;
+#endif
 	copysize += 100 * sizeof(struct vnode) + copysize / 20;
 	if ((vnodebase = malloc(copysize)) == NULL)
 		err(1, "malloc");

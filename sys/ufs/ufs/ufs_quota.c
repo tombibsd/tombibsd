@@ -641,13 +641,9 @@ quota_handle_cmd_quotaon(struct mount *mp, struct lwp *l,
     struct quotactl_args *args)
 {
 	struct ufsmount *ump = VFSTOUFS(mp);
-	int idtype;
-	const char *qfile;
 	int error;
 
 	KASSERT(args->qc_op == QUOTACTL_QUOTAON);
-	idtype = args->u.quotaon.qc_idtype;
-	qfile = args->u.quotaon.qc_quotafile;
 
 	if ((ump->um_flags & UFS_QUOTA2) != 0)
 		return EBUSY;
@@ -658,6 +654,8 @@ quota_handle_cmd_quotaon(struct mount *mp, struct lwp *l,
 		return error;
 	}
 #ifdef QUOTA
+	int idtype = args->u.quotaon.qc_idtype;
+	const char *qfile = args->u.quotaon.qc_quotafile;
 	error = quota1_handle_cmd_quotaon(l, ump, idtype, qfile);
 #else
 	error = EOPNOTSUPP;
@@ -671,11 +669,9 @@ quota_handle_cmd_quotaoff(struct mount *mp, struct lwp *l,
     struct quotactl_args *args)
 {
 	struct ufsmount *ump = VFSTOUFS(mp);
-	int idtype;
 	int error;
 
 	KASSERT(args->qc_op == QUOTACTL_QUOTAOFF);
-	idtype = args->u.quotaoff.qc_idtype;
 
 	if ((ump->um_flags & UFS_QUOTA2) != 0)
 		return EOPNOTSUPP;
@@ -686,6 +682,7 @@ quota_handle_cmd_quotaoff(struct mount *mp, struct lwp *l,
 		return error;
 	}
 #ifdef QUOTA
+	int idtype = args->u.quotaoff.qc_idtype;
 	error = quota1_handle_cmd_quotaoff(l, ump, idtype);
 #else
 	error = EOPNOTSUPP;

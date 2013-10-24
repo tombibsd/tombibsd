@@ -200,6 +200,7 @@
 ./usr/lib/librumpnet_netbt_g.a			-unknown-		debuglib,rump
 ./usr/lib/librumpnet_netinet_g.a		-unknown-		debuglib,rump
 ./usr/lib/librumpnet_netinet6_g.a		-unknown-		debuglib,rump
+./usr/lib/librumpnet_netmpls_g.a		-unknown-		debuglib,rump
 ./usr/lib/librumpnet_npf_g.a			-unknown-		debuglib,rump
 ./usr/lib/librumpnet_shmif_g.a			-unknown-		debuglib,rump
 ./usr/lib/librumpnet_sockin_g.a			-unknown-		debuglib,rump
@@ -2059,6 +2060,7 @@
 ./usr/libdata/debug/usr/tests/net/if_loop/t_pr.debug		tests-net-debug		debug,atf,rump
 ./usr/libdata/debug/usr/tests/net/net/t_pktinfo.debug		tests-net-debug		debug,atf
 ./usr/libdata/debug/usr/tests/net/net/t_raw.debug		tests-net-debug		debug,atf,rump
+./usr/libdata/debug/usr/tests/net/net/t_tcp.debug		tests-net-debug		debug,atf
 ./usr/libdata/debug/usr/tests/net/net/t_udp.debug		tests-net-debug		debug,atf
 ./usr/libdata/debug/usr/tests/net/net/t_unix.debug		tests-net-debug		debug,atf
 ./usr/libdata/debug/usr/tests/net/sys/t_connect.debug			tests-obsolete		obsolete

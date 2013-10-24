@@ -20,7 +20,20 @@ KYUA_TESTSDIR=		${TESTSBASE}
 
 KYUA_TARNAME!=	grep 'define PACKAGE_TARNAME' ${TOPDIR}/config.h \
 		| cut -d '"' -f 2
+cookie-tarname: cookie-tarname-2
+	@cmp -s cookie-tarname cookie-tarname-2 \
+	    || cp cookie-tarname-2 cookie-tarname
+cookie-tarname-2: .PHONY
+	@echo "${KYUA_TARNAME}" >cookie-tarname-2
+CLEANFILES+=	cookie-tarname cookie-tarname-2
+	
 KYUA_VERSION!=	grep 'define VERSION' ${TOPDIR}/config.h | cut -d '"' -f 2
+cookie-version: cookie-version-2
+	@cmp -s cookie-version cookie-version-2 \
+	    || cp cookie-version-2 cookie-version
+cookie-version-2: .PHONY
+	@echo "${KYUA_VERSION}" >cookie-version-2
+CLEANFILES+=	cookie-version cookie-version-2
 
 CPPFLAGS+=	-DHAVE_CONFIG_H
 
@@ -49,6 +62,7 @@ LDADD+=		-llutok -lsqlite3
 DPADD+=		${LIBLUTOK} ${LIBSQLITE}
 .endif
 
+MANPAGE_DEPS = cookie-tarname cookie-version
 BUILD_MANPAGE = \
 	sed -e 's,__CONFDIR__,${KYUA_CONFDIR},g' \
 	    -e 's,__DOCDIR__,${KYUA_DOCDIR},g' \

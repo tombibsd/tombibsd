@@ -119,12 +119,9 @@ bozo_auth_cleanup(bozo_httpreq_t *request)
 
 	if (request == NULL)
 		return;
-	if (request->hr_authuser)
-		free(request->hr_authuser);
-	if (request->hr_authpass)
-		free(request->hr_authpass);
-	if (request->hr_authrealm)
-		free(request->hr_authrealm);
+	free(request->hr_authuser);
+	free(request->hr_authpass);
+	free(request->hr_authrealm);
 }
 
 int

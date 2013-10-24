@@ -39,6 +39,7 @@ __RCSID("$NetBSD$");
 
 #include <ctype.h>
 #include <string.h>
+#include <fnmatch.h>
 
 #include "systat.h"
 #include "extern.h"
@@ -99,9 +100,8 @@ drvselect(char *args, int truefalse, int selections[])
 		if (cp - args == 0)
 			break;
 		for (i = 0; i < ndrive; i++)
-			if (strcmp(args, dr_name[i]) == 0) {
+			if (fnmatch(args, dr_name[i], 0) == 0) {
 				selections[i] = truefalse;
-				break;
 			}
 		if (i >= ndrive)
 			error("%s: unknown drive", args);

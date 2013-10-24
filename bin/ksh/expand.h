@@ -40,6 +40,7 @@ typedef char * XStringP;
 			(xs).beg = alloc((xs).len + X_EXTRA, (xs).areap); \
 			(xs).end = (xs).beg + (xs).len; \
 			xp = (xs).beg; \
+			__USE(xp); \
 		} while (0)
 
 /* stuff char into string */

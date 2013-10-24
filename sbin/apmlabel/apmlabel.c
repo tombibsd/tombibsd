@@ -104,7 +104,7 @@ getparts(int sd, int verbose)
 	struct apple_drvr_map	*drvr;
 	struct apple_part_map_entry *part;
 	struct partition	npe;
-	uint16_t		blksize, blkcnt, partcnt;
+	uint16_t		blksize, partcnt;
 	int			i, j, unused, changed;
 	uint64_t		temp;
 
@@ -123,7 +123,6 @@ getparts(int sd, int verbose)
 	if (drvr->sbSig != APPLE_DRVR_MAP_MAGIC)
 		return (changed);
 	blksize = drvr->sbBlockSize;
-	blkcnt = drvr->sbBlkCount;
 
 	partcnt = 1;
 	

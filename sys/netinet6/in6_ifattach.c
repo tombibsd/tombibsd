@@ -588,12 +588,7 @@ in6_ifattach_linklocal(struct ifnet *ifp, struct ifnet *altifp)
 	}
 
 	ia = in6ifa_ifpforlinklocal(ifp, 0); /* ia must not be NULL */
-#ifdef DIAGNOSTIC
-	if (!ia) {
-		panic("ia == NULL in in6_ifattach_linklocal");
-		/* NOTREACHED */
-	}
-#endif
+	KASSERTMSG(ia, "ia == NULL in in6_ifattach_linklocal");
 
 	/*
 	 * Make the link-local prefix (fe80::/64%link) as on-link.

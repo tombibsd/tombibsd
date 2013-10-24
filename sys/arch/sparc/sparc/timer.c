@@ -163,11 +163,12 @@ timerattach(volatile int *cntreg, volatile int *limreg)
 	 * Note: sun4m clocks tick with 500ns periods.
 	 */
 	for (timerblurb = 1; ; timerblurb++) {
-		volatile int discard;
+		int discard;
 		u_int t1;
 
 		/* Reset counter register by writing some large limit value */
 		discard = *limreg;
+		__USE(discard);
 		*limreg = tmr_ustolim(TMR_MASK-1);
 
 		t0 = *cntreg;

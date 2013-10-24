@@ -205,8 +205,7 @@ bozo_dir_index(bozo_httpreq_t *request, const char *dirname, int isindex)
 	bozo_flush(httpd, stdout);
 
 done:
-	if (file)
-		free(file);
+	free(file);
 	return 1;
 }
 #endif /* NO_DIRINDEX_SUPPORT */

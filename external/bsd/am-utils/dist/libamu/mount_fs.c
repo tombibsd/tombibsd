@@ -466,6 +466,7 @@ compute_nfs_attrcache_flags(nfs_args_t *nap, mntent_t *mntp)
   if (amu_hasmntopt(mntp, MNTTAB_OPT_NOAC) != NULL)
     nap->flags |= MNT2_NFS_OPT_NOAC;
 #endif /* defined(MNTTAB_OPT_NOAC) && defined(MNT2_NFS_OPT_NOAC) */
+  (void)err_acval;
 }
 
 

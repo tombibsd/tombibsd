@@ -550,6 +550,8 @@
 #define __CAST(__dt, __st)	((__dt)(__st))
 #endif
 
+#define __USE(a) ((void)(a))
+
 #define __type_mask(t) (/*LINTED*/sizeof(t) < sizeof(intmax_t) ? \
     (~((1ULL << (sizeof(t) * NBBY)) - 1)) : 0ULL)
 

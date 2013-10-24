@@ -1296,7 +1296,6 @@ acpi_enter_sleep_state(int state)
 {
 	struct acpi_softc *sc = acpi_softc;
 	ACPI_STATUS rv;
-	int err;
 
 	if (acpi_softc == NULL)
 		return;
@@ -1403,7 +1402,7 @@ acpi_enter_sleep_state(int state)
 
 		} else {
 
-			err = acpi_md_sleep(state);
+			(void)acpi_md_sleep(state);
 
 			if (state == ACPI_STATE_S4)
 				AcpiEnable();

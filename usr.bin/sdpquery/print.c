@@ -833,7 +833,7 @@ print_codeset_string(const char *src, size_t srclen, const char *codeset)
 {
 	char buf[50], *dst;
 	iconv_t ih;
-	size_t n, dstlen;
+	size_t dstlen;
 
 	dst = buf;
 	dstlen = sizeof(buf);
@@ -844,7 +844,7 @@ print_codeset_string(const char *src, size_t srclen, const char *codeset)
 		return;
 	}
 
-	n = iconv(ih, &src, &srclen, &dst, &dstlen);
+	(void)iconv(ih, &src, &srclen, &dst, &dstlen);
 
 	iconv_close(ih);
 

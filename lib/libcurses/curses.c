@@ -66,6 +66,7 @@ WINDOW	*__virtscr;			/* Virtual screen (for doupdate()). */
 SCREEN  *_cursesi_screen;               /* the current screen we are using */
 int	 COLS;				/* Columns on the screen. */
 int	 LINES;				/* Lines on the screen. */
+int	 TABSIZE;			/* Size of a tab. */
 int	 COLORS;			/* Maximum colors on the screen */
 int	 COLOR_PAIRS = 0;		/* Maximum color pairs on the screen */
 int	 My_term = 0;			/* Use Def_term regardless. */

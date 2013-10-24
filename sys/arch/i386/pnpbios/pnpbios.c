@@ -369,7 +369,7 @@ pnpbios_attach(device_t parent, device_t self, void *aux)
 	if (evtype != PNP_IC_CONTROL_EVENT_NONE) {
 		if (evtype != PNP_IC_CONTROL_EVENT_POLL || sc->sc_evaddr) {
 			sc->sc_threadrun = 1;
-			config_pending_incr();
+			config_pending_incr(sc->sc_dev);
 			if (kthread_create(PRI_NONE, 0, NULL,
 			    pnpbios_event_thread, sc, &sc->sc_evthread,
 			    "%s", device_xname(self)))
@@ -1412,7 +1412,7 @@ pnpbios_event_thread(void *arg)
 		EDPRINTF(("pnpbios: os active returns 0x%02x\n", rv));
 	}
 
-	config_pending_decr();
+	config_pending_decr(sc->sc_dev);
 
 	goto start;
 	while (sc->sc_threadrun) {

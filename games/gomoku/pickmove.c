@@ -1083,7 +1083,7 @@ checkframes(struct combostr *cbp, struct combostr *fcbp, struct spotstr *osp,
 	    int s, struct overlap_info *vertices)
 {
 	struct combostr *tcbp, *lcbp;
-	int i, n, mask, flags, verts, loop, myindex, fcnt;
+	int i, n, mask, flags, verts, myindex, fcnt;
 	union comboval cb;
 	u_char *str;
 	short *ip;
@@ -1094,7 +1094,6 @@ checkframes(struct combostr *cbp, struct combostr *fcbp, struct spotstr *osp,
 	cb.s = s;
 	fcnt = cb.c.a - 2;
 	verts = 0;
-	loop = 0;
 	myindex = cbp->c_nframes;
 	n = (fcbp - frames) * FAREA;
 	str = &overlap[n];

@@ -457,11 +457,10 @@ carp_proto_input(struct mbuf *m, ...)
 	struct ip *ip = mtod(m, struct ip *);
 	struct carp_softc *sc = NULL;
 	struct carp_header *ch;
-	int iplen, len, hlen;
+	int iplen, len;
 	va_list ap;
 
 	va_start(ap, m);
-	hlen = va_arg(ap, int);
 	va_end(ap);
 
 	CARP_STATINC(CARP_STAT_IPACKETS);

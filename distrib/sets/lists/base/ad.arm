@@ -92,7 +92,7 @@
 ./usr/lib/oabi/libc++.so.1			base-compat-shlib	compat,pic,libcxx
 ./usr/lib/oabi/libc++.so.1.0			base-compat-shlib	compat,pic,libcxx
 ./usr/lib/oabi/libc.so.12			base-compat-shlib	compat,pic
-./usr/lib/oabi/libc.so.12.186			base-compat-shlib	compat,pic
+./usr/lib/oabi/libc.so.12.187			base-compat-shlib	compat,pic
 ./usr/lib/oabi/libc_vfp.so.0			base-compat-shlib	compat,pic
 ./usr/lib/oabi/libc_vfp.so.0.0			base-compat-shlib	compat,pic
 ./usr/lib/oabi/libcom_err.so.7			base-compat-shlib	compat,pic,kerberos
@@ -191,8 +191,10 @@
 ./usr/lib/oabi/libldap_r.so.4.2			base-compat-shlib	compat,pic,ldap
 ./usr/lib/oabi/liblua.so.1			base-compat-shlib	compat,pic
 ./usr/lib/oabi/liblua.so.1.0			base-compat-shlib	compat,pic
-./usr/lib/oabi/liblutok.so.1			base-compat-shlib	compat,pic,kyua
-./usr/lib/oabi/liblutok.so.1.0			base-compat-shlib	compat,pic,kyua
+./usr/lib/oabi/liblutok.so.2			base-compat-shlib	compat,pic,kyua
+./usr/lib/oabi/liblutok.so.2.0			base-compat-shlib	compat,pic,kyua
+./usr/lib/oabi/liblutok.so.1			base-obsolete		obsolete
+./usr/lib/oabi/liblutok.so.1.0			base-obsolete		obsolete
 ./usr/lib/oabi/liblwres.so.7			base-compat-shlib	compat,pic
 ./usr/lib/oabi/liblwres.so.7.0			base-compat-shlib	compat,pic
 ./usr/lib/oabi/liblzf.so.1			base-compat-shlib	compat,pic

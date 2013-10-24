@@ -319,7 +319,7 @@ int
 deextend(struct denode *dep, u_long length, struct kauth_cred *cred)
 {
 	struct msdosfsmount *pmp = dep->de_pmp;
-	u_long count, osize;
+	u_long count;
 	int error;
 
 	/*
@@ -357,7 +357,6 @@ deextend(struct denode *dep, u_long length, struct kauth_cred *cred)
 	 * memset(); we set the write size so ubc won't read in file data that
 	 * is zero'd later.
 	 */
-	osize = dep->de_FileSize;
 	dep->de_FileSize = length;
 	dep->de_flag |= DE_UPDATE|DE_MODIFIED;
 	return 0;

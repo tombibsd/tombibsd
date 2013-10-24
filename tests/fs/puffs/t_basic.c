@@ -115,13 +115,11 @@ ATF_TC_HEAD(root_lnk, tc)
 ATF_TC_BODY(root_lnk, tc)
 {
 	MAKEOPTS("-r", "lnk " LINKSTR);
-	struct puffstestargs *pargs;
 	void *args;
 	char buf[PATH_MAX];
 	ssize_t len;
 
 	FSTEST_CONSTRUCTOR_FSPRIV(tc, puffs, args, theopts);
-	pargs = args;
 
 	if ((len = rump_sys_readlink(FSTEST_MNTNAME, buf, sizeof(buf)-1)) == -1)
 		atf_tc_fail_errno("readlink");

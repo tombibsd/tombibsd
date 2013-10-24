@@ -1727,13 +1727,13 @@ genfs_do_directio(struct vmspace *vs, vaddr_t uva, size_t len, struct vnode *vp,
     off_t off, enum uio_rw rw)
 {
 	struct vm_map *map;
-	struct pmap *upm, *kpm;
+	struct pmap *upm, *kpm __unused;
 	size_t klen = round_page(uva + len) - trunc_page(uva);
 	off_t spoff, epoff;
 	vaddr_t kva, puva;
 	paddr_t pa;
 	vm_prot_t prot;
-	int error, rv, poff, koff;
+	int error, rv __unused, poff, koff;
 	const int pgoflags = PGO_CLEANIT | PGO_SYNCIO | PGO_JOURNALLOCKED |
 		(rw == UIO_WRITE ? PGO_FREE : 0);
 

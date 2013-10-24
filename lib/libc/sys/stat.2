@@ -48,6 +48,8 @@
 .Fn lstat "const char *path" "struct stat *sb"
 .Ft int
 .Fn fstat "int fd" "struct stat *sb"
+.In sys/stat.h
+.In fcntl.h
 .Ft int
 .Fn fstatat "int fd" "const char *path" "struct stat *sb" "int flag"
 .Sh DESCRIPTION

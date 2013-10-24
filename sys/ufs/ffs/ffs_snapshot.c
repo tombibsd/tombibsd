@@ -958,7 +958,7 @@ cgaccount1(int cg, struct vnode *vp, void *data, int passno)
 	struct fs *fs;
 	struct lwp *l = curlwp;
 	daddr_t base, numblks;
-	int error, len, loc, ns, indiroff;
+	int error, len, loc, ns __unused, indiroff;
 
 	ip = VTOI(vp);
 	fs = ip->i_fs;
@@ -1035,7 +1035,7 @@ static int
 expunge(struct vnode *snapvp, struct inode *cancelip, struct fs *fs,
     acctfunc_t acctfunc, int expungetype)
 {
-	int i, error, ns;
+	int i, error, ns __unused;
 	daddr_t lbn, rlbn;
 	daddr_t len, blkno, numblks, blksperindir;
 	struct ufs1_dinode *dip1;
@@ -1727,7 +1727,7 @@ ffs_snapshot_mount(struct mount *mp)
 	struct inode *ip, *xp;
 	struct snap_info *si;
 	daddr_t snaplistsize, *snapblklist;
-	int i, error, ns, snaploc, loc;
+	int i, error, ns __unused, snaploc, loc;
 
 	/*
 	 * No persistent snapshots on apple ufs file systems.

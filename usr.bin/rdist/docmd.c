@@ -123,7 +123,8 @@ docmds(char **dhosts, int argc, char **argv)
  * Process commands for sending files to other machines.
  */
 static void
-doarrow(char **filev, struct namelist *files, char *rhost, struct subcmd *cmds)
+doarrow(char **filev, struct namelist *xfiles, char *rhost,
+    struct subcmd *xcmds)
 {
 	struct namelist *f;
 	struct subcmd *sc;
@@ -131,6 +132,8 @@ doarrow(char **filev, struct namelist *files, char *rhost, struct subcmd *cmds)
 	int n;
 	int volatile ddir;
 	int volatile opts;
+	struct namelist * volatile files = xfiles;
+	struct subcmd * volatile cmds = xcmds;
 
 	opts = options;
 	if (debug)

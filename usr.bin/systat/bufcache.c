@@ -245,7 +245,6 @@ fetchbufcache(void)
 	int count;
 	struct buf_sysctl *bp, *buffers;
 	struct vnode *vn;
-	struct mount *mt;
 	struct ml_entry *ml;
 	int mib[6];
 	size_t size;
@@ -315,8 +314,7 @@ again:
 					mp = sd.sd_mountpoint;
 			}
 			if (mp != NULL)
-				mt = ml_lookup(mp,
-				    bp->b_bufsize,
+				(void)ml_lookup(mp, bp->b_bufsize,
 				    bp->b_bcount);
 		}
 	}

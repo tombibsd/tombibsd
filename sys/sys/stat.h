@@ -278,7 +278,7 @@ int     fchmodat(int, const char *, mode_t, int);
 int     fstatat(int, const char *, struct stat *, int);
 int     mkdirat(int, const char *, mode_t);
 int     mkfifoat(int, const char *, mode_t);
-int     mknodat(int, const char *, mode_t, uint32_t);
+int     mknodat(int, const char *, mode_t, dev_t);
 int     utimensat(int, const char *, const struct timespec *, int);
 #endif
 

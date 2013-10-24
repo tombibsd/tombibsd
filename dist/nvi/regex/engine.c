@@ -380,6 +380,7 @@ sopno stopst;
 			/* did innards match? */
 			if (slow(m, sp, rest, ssub, esub) != NULL) {
 				dp = dissect(m, sp, rest, ssub, esub);
+				__USE(dp);
 				assert(dp == rest);
 			} else		/* no */
 				assert(sp == rest);
