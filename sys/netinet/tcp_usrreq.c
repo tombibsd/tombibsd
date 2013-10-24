@@ -1164,18 +1164,20 @@ sysctl_net_inet_ip_ports(SYSCTLFN_ARGS)
 static inline int
 copyout_uid(struct socket *sockp, void *oldp, size_t *oldlenp)
 {
-	size_t sz;
-	int error;
-	uid_t uid;
-
-	uid = kauth_cred_geteuid(sockp->so_cred);
 	if (oldp) {
+		size_t sz;
+		uid_t uid;
+		int error;
+
+		if (sockp->so_cred == NULL)
+			return EPERM;
+
+		uid = kauth_cred_geteuid(sockp->so_cred);
 		sz = MIN(sizeof(uid), *oldlenp);
-		error = copyout(&uid, oldp, sz);
-		if (error)
+		if ((error = copyout(&uid, oldp, sz)) != 0)
 			return error;
 	}
-	*oldlenp = sizeof(uid);
+	*oldlenp = sizeof(uid_t);
 	return 0;
 }
 

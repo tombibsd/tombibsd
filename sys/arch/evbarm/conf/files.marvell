@@ -11,3 +11,6 @@ file	arch/evbarm/marvell/marvell_machdep.c
 
 # CPU support and integrated peripherals
 include	"arch/arm/marvell/files.marvell"
+
+# Some SoC(ARMADAXP) reports false DeviceID. 
+defparam opt_mvsoc.h				MVSOC_FIXUP_DEVID

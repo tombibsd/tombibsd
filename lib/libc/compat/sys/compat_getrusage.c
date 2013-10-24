@@ -45,6 +45,8 @@ __RCSID("$NetBSD$");
 __warn_references(getrusage,
     "warning: reference to compatibility getrusage(); include <sys/resource.h> to generate correct reference")
 
+__strong_alias(getrusage, __compat_getrusage)
+
 void __rusage_to_rusage50(const struct rusage *, struct rusage50 *);
 
 void
@@ -62,7 +64,7 @@ __rusage_to_rusage50(const struct rusage *ru, struct rusage50 *ru50)
  * libc12 compatible getrusage routine.
  */
 int
-getrusage(int who, struct rusage50 *ru50)
+__compat_getrusage(int who, struct rusage50 *ru50)
 {
 	struct rusage ru;
 	int rv;

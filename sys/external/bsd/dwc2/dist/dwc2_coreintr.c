@@ -1,3 +1,5 @@
+/*	$NetBSD$	*/
+
 /*
  * core_intr.c - DesignWare HS OTG Controller common interrupt handling
  *

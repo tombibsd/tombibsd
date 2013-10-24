@@ -32,9 +32,9 @@ __warn_references(__fts_set30,
 #define	__fts_dev_t	uint32_t
 #define	__fts_level_t	short
 
-#define	stat		__stat30
-#define	lstat		__lstat30
-#define	fstat		__fstat30
+#define	stat		__compat___stat30
+#define	lstat		__compat___lstat30
+#define	fstat		__compat___fstat30
 
 #ifndef ftsent_namelen_truncate
 #define ftsent_namelen_truncate(a)	\

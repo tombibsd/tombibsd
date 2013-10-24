@@ -44,11 +44,13 @@ __RCSID("$NetBSD$");
 __warn_references(gettimeofday,
     "warning: reference to compatibility gettimeofday(); include <sys/time.h> to generate correct reference")
 
+__strong_alias(gettimeofday, __compat_gettimeofday)
+
 /*
  * libc12 compatible gettimeofday routine.
  */
 int
-gettimeofday(struct timeval50 *tv50, void *tzp)
+__compat_gettimeofday(struct timeval50 *tv50, void *tzp)
 {
 	struct timeval tv;
 	int rv;

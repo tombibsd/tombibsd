@@ -1,3 +1,5 @@
+/*	$NetBSD$	*/
+
 /*
  * hcd_queue.c - DesignWare HS OTG Controller host queuing routines
  *

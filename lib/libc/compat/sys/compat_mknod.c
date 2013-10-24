@@ -50,8 +50,10 @@ __RCSID("$NetBSD$");
 __warn_references(mknod,
     "warning: reference to compatibility mknod(); include <time.h> to generate correct reference")
 
+__strong_alias(mknod, __compat_mknod)
+
 int
-mknod(const char *path, mode_t mode, uint32_t dev)
+__compat_mknod(const char *path, mode_t mode, uint32_t dev)
 {
 	return __mknod50(path, mode, dev);
 }

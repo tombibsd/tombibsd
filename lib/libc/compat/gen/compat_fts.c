@@ -62,4 +62,8 @@ __warn_references(fts_set,
 #define	__FTS_COMPAT_LENGTH
 #define	__FTS_COMPAT_LEVEL
 
+#define stat __compat_stat
+#define lstat __compat_lstat
+#define fstat __compat_fstat
+
 #include "gen/fts.c"

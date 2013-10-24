@@ -117,6 +117,8 @@ extern int	 __vfwscanf_unlocked_l(FILE * __restrict, locale_t,
 extern void __flockfile_internal(FILE *, int);
 extern void __funlockfile_internal(FILE *, int);
 
+extern char *__gets(char *);
+
 /*
  * Detect if the current file position fits in a long int.
  */

@@ -58,6 +58,10 @@ __warn_references(lstat,
 
 static void cvtstat(const struct stat *, struct stat12 *);
 
+__strong_alias(stat, __compat_stat)
+__strong_alias(lstat, __compat_lstat)
+__strong_alias(fstat, __compat_fstat)
+
 static void
 cvtstat(const struct stat *st, struct stat12 *ost)
 {
@@ -86,7 +90,7 @@ cvtstat(const struct stat *st, struct stat12 *ost)
 }
 
 int
-stat(const char *file, struct stat12 *ost)
+__compat_stat(const char *file, struct stat12 *ost)
 {
 	struct stat nst;
 	int ret;
@@ -98,7 +102,7 @@ stat(const char *file, struct stat12 *ost)
 }
 
 int
-fstat(int f, struct stat12 *ost)
+__compat_fstat(int f, struct stat12 *ost)
 {
 	struct stat nst;
 	int ret;
@@ -110,7 +114,7 @@ fstat(int f, struct stat12 *ost)
 }
 
 int
-lstat(const char *file, struct stat12 *ost)
+__compat_lstat(const char *file, struct stat12 *ost)
 {
 	struct stat nst;
 	int ret;

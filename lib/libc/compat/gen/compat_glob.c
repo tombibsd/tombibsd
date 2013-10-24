@@ -28,4 +28,8 @@ __warn_references(glob,
 __warn_references(globfree,
     "warning: reference to compatibility globfree(); include <glob.h> for correct reference")
 
+#define stat __compat_stat
+#define lstat __compat_lstat
+#define fstat __compat_fstat
+
 #include "gen/glob.c"

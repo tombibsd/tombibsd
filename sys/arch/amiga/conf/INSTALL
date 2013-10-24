@@ -154,12 +154,6 @@ options 	DDB		# Kernel debugger
 #
 #options 	LIMITMEM=24	# Do not use more than LIMITMEM MB of the
 				# first bank of RAM. (default: unlimited)
-#options 	NKPTADD=4	# set this for 4 additional KPT pages
-#options 	NKPTADDSHIFT=24	# set this for 1 additional KPT page
-				# per 16 MB (1<<24 bytes) of RAM
-				# uncomment and decrease this, or uncomment and
-				# increase NKPTADD if you get "out of PT pages"
-				# panics.
 
 # ATTENTION: There is NO WARRANTY AT ALL that the sync will be complete
 # before the 10 secondinterval ends, or that KBDRESET does work at all.

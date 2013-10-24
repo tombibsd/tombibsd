@@ -1038,7 +1038,7 @@ cpu_probe_base_features(struct cpu_info *ci, const char *cpuname)
 	if (ci->ci_cpuid_level < 0xd)
 		return;
 
-	/* Get support XRC0 bits */
+	/* Get support XCR0 bits */
 	x86_cpuid2(0xd, 0, descs);
 	ci->ci_feat_val[5] = descs[0];	/* Actually 64 bits */
 	ci->ci_cur_xsave = descs[1];

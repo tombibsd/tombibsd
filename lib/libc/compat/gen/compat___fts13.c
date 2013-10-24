@@ -42,9 +42,9 @@ __warn_references(__fts_set13,
     ((a) > USHRT_MAX ? USHRT_MAX : (unsigned short)(a))
 #endif
 
-#define	stat		__stat13
-#define	lstat		__lstat13
-#define	fstat		__fstat13
+#define	stat		__compat___stat13
+#define	lstat		__compat___lstat13
+#define	fstat		__compat___fstat13
 
 #undef	fts_children
 #define	fts_children __fts_children13

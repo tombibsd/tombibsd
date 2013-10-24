@@ -53,7 +53,7 @@ __RCSID("$NetBSD$");
 __warn_references(gets, "warning: this program uses gets(), which is unsafe.")
 
 char *
-gets(char *buf)
+__gets(char *buf)
 {
 	int c;
 	char *s;
@@ -76,4 +76,9 @@ gets(char *buf)
 	*s = 0;
 	FUNLOCKFILE(stdin);
 	return buf;
+}
+
+char *
+gets(char *buf) {
+	return __gets(buf);
 }

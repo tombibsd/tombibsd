@@ -25,4 +25,7 @@ __warn_references(times,
 #define __times_rusage struct rusage50
 #define __times_timeval struct timeval50
 
+#define getrusage __compat_getrusage
+#define gettimeofday __compat_gettimeofday
+
 #include "gen/times.c"

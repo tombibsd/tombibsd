@@ -514,10 +514,7 @@ tmpfs_dir_detach(vnode_t *dvp, tmpfs_dirent_t *de)
 
 		KASSERT(node->tn_links > 0);
 		node->tn_links--;
-		if (vp) {
-			VN_KNOTE(vp, node->tn_links ?
-			    NOTE_LINK : NOTE_DELETE);
-		}
+		VN_KNOTE(vp, node->tn_links ? NOTE_LINK : NOTE_DELETE);
 
 		/* If directory - decrease the link count of parent. */
 		if (node->tn_type == VDIR) {

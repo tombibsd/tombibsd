@@ -44,7 +44,8 @@ __BEGIN_DECLS
 #if (_POSIX_C_SOURCE - 0) >= 200112L || \
     defined(_XOPEN_SOURCE) || defined(_NETBSD_SOURCE)
 int	getitimer(int, struct itimerval50 *);
-int	gettimeofday(struct timeval50 * __restrict, void *__restrict);
+int	__compat_gettimeofday(struct timeval50 * __restrict, void *__restrict)
+    __dso_hidden;
 int	setitimer(int, const struct itimerval50 * __restrict,
 	    struct itimerval50 * __restrict);
 int	utimes(const char *, const struct timeval50 [2]);

@@ -85,7 +85,7 @@ static void	prmount(struct statvfs *);
 __dead static void	usage(void);
 
 
-/* Map from mount otions to printable formats. */
+/* Map from mount options to printable formats. */
 static const struct opt {
 	int o_opt;
 	int o_silent;
@@ -352,7 +352,7 @@ hasopt(const char *mntopts, const char *option)
 }
 
 static int
-mountfs(const char *vfstype, const char *spec, const char *name, 
+mountfs(const char *vfstype, const char *spec, const char *name,
     int flags, const char *options, const char *mntopts,
     int skipmounted, char *buf, size_t buflen)
 {
@@ -579,7 +579,7 @@ prmount(struct statvfs *sfp)
 	    sfp->f_fstypename);
 
 	flags = sfp->f_flag & MNT_VISFLAGMASK;
-	for (f = 0, o = optnames; flags && o < 
+	for (f = 0, o = optnames; flags && o <
 	    &optnames[sizeof(optnames)/sizeof(optnames[0])]; o++)
 		if (flags & o->o_opt) {
 			if (!o->o_silent || verbose)

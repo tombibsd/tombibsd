@@ -115,7 +115,7 @@
 /uhcireg.h/1.19/Mon Apr 28 20:23:59 2008/-kk/
 /uhcivar.h/1.52/Tue Jan 29 00:00:15 2013/-kk/
 /uhid.c/1.89/Sat Jan  5 01:30:17 2013/-kk/
-/uhidev.c/1.57/Thu Sep 26 07:25:31 2013/-kk/
+/uhidev.c/1.58/Thu Oct 24 06:11:21 2013/-kk/
 /uhidev.h/1.14/Thu Sep 26 07:25:31 2013/-kk/
 /uhmodem.c/1.13/Fri Dec 23 00:51:46 2011/-kk/
 /uhso.c/1.11/Sat Jan  5 01:30:17 2013/-kk/

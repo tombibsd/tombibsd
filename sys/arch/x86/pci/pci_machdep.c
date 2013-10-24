@@ -526,6 +526,7 @@ pci_mode_detect(void)
 	uint32_t sav, val;
 	int i;
 	pcireg_t idreg;
+	extern char cpu_brand_string[];
 
 	if (pci_mode != -1)
 		return pci_mode;
@@ -554,6 +555,13 @@ pci_mode_detect(void)
 #endif
 			return (pci_mode);
 		}
+	}
+        if (memcmp(cpu_brand_string, "QEMU", 4) == 0) {
+		/* PR 45671, https://bugs.launchpad.net/qemu/+bug/897771 */
+#ifdef DEBUG
+		printf("forcing PCI mode 1 for QEMU\n");
+#endif
+		return (pci_mode);
 	}
 
 	/*

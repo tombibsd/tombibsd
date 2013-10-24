@@ -24,4 +24,7 @@ __warn_references(time,
 
 #define timeval timeval50
 #define time_t int32_t
+
+#define gettimeofday __compat_gettimeofday
+
 #include "gen/time.c"

@@ -61,7 +61,7 @@ void rusage_to_rusage50(const struct rusage *, struct rusage50 *);
 
 #ifndef _KERNEL
 __BEGIN_DECLS
-int	getrusage(int, struct rusage50 *);
+int	__compat_getrusage(int, struct rusage50 *) __dso_hidden;
 int	__getrusage50(int, struct rusage *);
 __END_DECLS
 #endif	/* _KERNEL */

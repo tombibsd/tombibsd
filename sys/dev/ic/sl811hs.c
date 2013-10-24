@@ -1340,14 +1340,14 @@ slhci_abort(struct usbd_xfer *xfer)
 	struct slhci_softc *sc;
 	struct slhci_pipe *spipe;
 
-	KASSERT(mutex_owned(&sc->sc_lock));
-
 	spipe = (struct slhci_pipe *)xfer->pipe;
 
 	if (spipe == NULL)
 		goto callback;
 
 	sc = spipe->pipe.device->bus->hci_private;
+
+	KASSERT(mutex_owned(&sc->sc_lock));
 
 	DLOG(D_TRACE, "%s abort xfer %p spipe %p spipe->xfer %p",
 	    pnames(spipe->ptype), xfer, spipe, spipe->xfer);
