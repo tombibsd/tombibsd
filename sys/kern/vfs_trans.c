@@ -657,7 +657,7 @@ fscow_run(struct buf *bp, bool data_valid)
 		return 0;
 	}
 	if (bp->b_vp->v_type == VBLK)
-		mp = bp->b_vp->v_specmountpoint;
+		mp = spec_node_getmountedfs(bp->b_vp);
 	else
 		mp = bp->b_vp->v_mount;
 	if (mp == NULL || (mp->mnt_iflag & IMNT_HAS_TRANS) == 0) {

@@ -723,7 +723,7 @@ main(int argc, char **argv)
 				printf("internal database\n");
 			else
 				printf("%s%s\n", _ti_database,
-				    *_ti_database == '/' ? ".db" : "");
+				    *_ti_database == '/' ? ".cdb" : "");
 		}
 		printf("%s", t->name);
 		if (t->_alias != NULL && *t->_alias != '\0')

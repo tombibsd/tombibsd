@@ -171,7 +171,7 @@
 /uipc_socket2.c/1.114/Sun Sep 15 15:41:11 2013/-kk/
 /uipc_syscalls.c/1.162/Thu Aug 29 17:49:21 2013/-kk/
 /uipc_usrreq.c/1.144/Thu Aug 29 17:49:21 2013/-kk/
-/vfs_bio.c/1.246/Sun Sep 15 15:57:26 2013/-kk/
+/vfs_bio.c/1.247/Thu Oct 24 05:50:43 2013/-kk/
 /vfs_cache.c/1.91/Mon Nov  5 17:27:39 2012/-kk/
 /vfs_cwd.c/1.4/Tue Feb 15 15:54:28 2011/-kk/
 /vfs_dirhash.c/1.11/Sun Jul  7 19:31:26 2013/-kk/
@@ -180,12 +180,12 @@
 /vfs_init.c/1.46/Tue Mar 13 18:40:55 2012/-kk/
 /vfs_lockf.c/1.73/Mon Jan 31 08:25:32 2011/-kk/
 /vfs_lookup.c/1.200/Sun Nov 18 17:41:53 2012/-kk/
-/vfs_mount.c/1.20/Fri Aug 30 12:58:22 2013/-kk/
+/vfs_mount.c/1.21/Thu Oct 24 05:50:43 2013/-kk/
 /vfs_quotactl.c/1.38/Wed Feb  1 05:43:54 2012/-kk/
-/vfs_subr.c/1.437/Mon Mar 18 19:35:43 2013/-kk/
+/vfs_subr.c/1.438/Thu Oct 24 05:50:43 2013/-kk/
 /vfs_syscalls.c/1.467/Sat Jul 20 15:55:57 2013/-kk/
-/vfs_trans.c/1.26/Mon Jan 21 09:14:01 2013/-kk/
-/vfs_vnode.c/1.20/Sat Sep 21 19:51:33 2013/-kk/
+/vfs_trans.c/1.27/Thu Oct 24 05:50:43 2013/-kk/
+/vfs_vnode.c/1.21/Thu Oct 24 05:50:43 2013/-kk/
 /vfs_vnops.c/1.186/Mon Nov 12 11:00:07 2012/-kk/
 /vfs_wapbl.c/1.58/Sun Sep 15 15:59:37 2013/-kk/
 /vfs_xattr.c/1.31/Tue May  1 07:48:25 2012/-kk/

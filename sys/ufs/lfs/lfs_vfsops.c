@@ -1070,7 +1070,7 @@ lfs_mountfs(struct vnode *devvp, struct mount *mp, struct lwp *l)
 	ump->um_devvp = devvp;
 	for (i = 0; i < ULFS_MAXQUOTAS; i++)
 		ump->um_quotas[i] = NULLVP;
-	devvp->v_specmountpoint = mp;
+	spec_node_setmountedfs(devvp, mp);
 
 	/* Set up reserved memory for pageout */
 	lfs_setup_resblks(fs);
@@ -1325,7 +1325,7 @@ lfs_unmount(struct mount *mp, int mntflags)
 
 	ronly = !fs->lfs_ronly;
 	if (ump->um_devvp->v_type != VBAD)
-		ump->um_devvp->v_specmountpoint = NULL;
+		spec_node_setmountedfs(ump->um_devvp, NULL);
 	vn_lock(ump->um_devvp, LK_EXCLUSIVE | LK_RETRY);
 	error = VOP_CLOSE(ump->um_devvp,
 	    ronly ? FREAD : FREAD|FWRITE, NOCRED);

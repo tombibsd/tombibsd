@@ -460,7 +460,7 @@ reassignbuf(struct buf *bp, struct vnode *vp)
 				delayx = dirdelay;
 				break;
 			case VBLK:
-				if (vp->v_specmountpoint != NULL) {
+				if (spec_node_getmountedfs(vp) != NULL) {
 					delayx = metadelay;
 					break;
 				}

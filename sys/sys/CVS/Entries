@@ -136,7 +136,7 @@
 /null.h/1.9/Tue Jul  6 11:56:20 2010/-kk/
 /once.h/1.5/Thu Oct  9 10:48:21 2008/-kk/
 /optstr.h/1.3/Mon Apr 28 20:24:11 2008/-kk/
-/param.h/1.432/Sun Jun 30 00:00:53 2013/-kk/
+/param.h/1.433/Thu Oct 24 05:50:46 2013/-kk/
 /pax.h/1.11/Thu Dec 27 15:21:53 2007/-kk/
 /pcq.h/1.1/Tue Nov 11 20:17:27 2008/-kk/
 /pcu.h/1.11/Thu Aug 22 19:50:55 2013/-kk/
@@ -248,10 +248,10 @@
 /vmem.h/1.20/Tue Jan 29 21:26:24 2013/-kk/
 /vmem_impl.h/1.2/Tue Jan 29 21:26:24 2013/-kk/
 /vmmeter.h/1.19/Wed Oct 21 21:12:07 2009/-kk/
-/vnode.h/1.237/Sun Nov 18 18:39:24 2012/-kk/
+/vnode.h/1.238/Thu Oct 24 05:50:46 2013/-kk/
 /vnode_if.h/1.84/Wed Jul 17 21:21:34 2013/-kk/
 /wait.h/1.26/Sun Jan 11 02:45:56 2009/-kk/
-/wapbl.h/1.14/Wed Sep 18 14:37:24 2013/-kk/
+/wapbl.h/1.15/Thu Oct 24 05:50:46 2013/-kk/
 /wapbl_replay.h/1.1/Mon Nov 24 16:05:21 2008/-kk/
 /wdog.h/1.3/Sun Dec 11 12:25:21 2005/-kk/
 /workqueue.h/1.9/Fri Oct 19 12:16:48 2007/-kk/

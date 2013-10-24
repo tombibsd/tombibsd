@@ -319,7 +319,7 @@ adosfs_unmount(struct mount *mp, int mntflags)
 		return (error);
 	amp = VFSTOADOSFS(mp);
 	if (amp->devvp->v_type != VBAD)
-		amp->devvp->v_specmountpoint = NULL;
+		spec_node_setmountedfs(amp->devvp, NULL);
 	vn_lock(amp->devvp, LK_EXCLUSIVE | LK_RETRY);
 	error = VOP_CLOSE(amp->devvp, FREAD, NOCRED);
 	vput(amp->devvp);

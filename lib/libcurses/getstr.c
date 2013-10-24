@@ -178,7 +178,7 @@ __wgetnstr(WINDOW *win, char *str, int n)
 		    win, c, remain);
 #endif
 		*str = c;
-		touchline(win, win->cury, 1);
+		__touchline(win, win->cury, 0, (int) win->maxx - 1);
 		if (c == ec || c == KEY_BACKSPACE || c == KEY_LEFT) {
 			*str = '\0';
 			if (str != ostr) {

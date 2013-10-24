@@ -189,7 +189,7 @@ wapbl_vptomp(struct vnode *vp)
 	mp = NULL;
 	if (vp != NULL) {
 		if (vp->v_type == VBLK)
-			mp = vp->v_specmountpoint;
+			mp = spec_node_getmountedfs(vp);
 		else
 			mp = vp->v_mount;
 	}

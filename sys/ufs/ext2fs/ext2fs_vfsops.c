@@ -763,7 +763,7 @@ ext2fs_mountfs(struct vnode *devvp, struct mount *mp)
 	ump->um_maxsymlinklen = EXT2_MAXSYMLINKLEN;
 	ump->um_dirblksiz = m_fs->e2fs_bsize;
 	ump->um_maxfilesize = ((uint64_t)0x80000000 * m_fs->e2fs_bsize - 1);
-	devvp->v_specmountpoint = mp;
+	spec_node_setmountedfs(devvp, mp);
 	return (0);
 
 out:
@@ -801,7 +801,7 @@ ext2fs_unmount(struct mount *mp, int mntflags)
 		(void) ext2fs_sbupdate(ump, MNT_WAIT);
 	}
 	if (ump->um_devvp->v_type != VBAD)
-		ump->um_devvp->v_specmountpoint = NULL;
+		spec_node_setmountedfs(ump->um_devvp, NULL);
 	vn_lock(ump->um_devvp, LK_EXCLUSIVE | LK_RETRY);
 	error = VOP_CLOSE(ump->um_devvp, fs->e2fs_ronly ? FREAD : FREAD|FWRITE,
 	    NOCRED);

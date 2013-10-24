@@ -330,7 +330,8 @@ spec_node_lookup_by_mount(struct mount *mp, vnode_t **vpp)
 			if (vp->v_type != VBLK)
 				continue;
 			vq = vp->v_specnode->sn_dev->sd_bdevvp;
-			if (vq != NULL && vq->v_specmountpoint == mp)
+			if (vq != NULL &&
+			    vq->v_specnode->sn_dev->sd_mountpoint == mp)
 				break;
 			vq = NULL;
 		}
@@ -348,6 +349,32 @@ spec_node_lookup_by_mount(struct mount *mp, vnode_t **vpp)
 
 	return 0;
 
+}
+
+/*
+ * Get the file system mounted on this block device.
+ */
+struct mount *
+spec_node_getmountedfs(vnode_t *devvp)
+{
+	struct mount *mp;
+
+	KASSERT(devvp->v_type == VBLK);
+	mp = devvp->v_specnode->sn_dev->sd_mountpoint;
+
+	return mp;
+}
+
+/*
+ * Set the file system mounted on this block device.
+ */
+void
+spec_node_setmountedfs(vnode_t *devvp, struct mount *mp)
+{
+
+	KASSERT(devvp->v_type == VBLK);
+	KASSERT(devvp->v_specnode->sn_dev->sd_mountpoint == NULL || mp == NULL);
+	devvp->v_specnode->sn_dev->sd_mountpoint = mp;
 }
 
 /*
@@ -961,7 +988,7 @@ spec_fsync(void *v)
 	int error;
 
 	if (vp->v_type == VBLK) {
-		if ((mp = vp->v_specmountpoint) != NULL) {
+		if ((mp = spec_node_getmountedfs(vp)) != NULL) {
 			error = VFS_FSYNC(mp, vp, ap->a_flags);
 			if (error != EOPNOTSUPP)
 				return error;

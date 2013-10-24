@@ -456,7 +456,7 @@ filecore_unmount(struct mount *mp, int mntflags)
 	fcmp = VFSTOFILECORE(mp);
 
 	if (fcmp->fc_devvp->v_type != VBAD)
-		fcmp->fc_devvp->v_specmountpoint = NULL;
+		spec_node_setmountedfs(fcmp->fc_devvp, NULL);
 	vn_lock(fcmp->fc_devvp, LK_EXCLUSIVE | LK_RETRY);
 	error = VOP_CLOSE(fcmp->fc_devvp, FREAD, NOCRED);
 	vput(fcmp->fc_devvp);

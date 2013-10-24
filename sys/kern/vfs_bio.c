@@ -693,7 +693,7 @@ bio_doread(struct vnode *vp, daddr_t blkno, int size, kauth_cred_t cred,
 		brelse(bp, 0);
 
 	if (vp->v_type == VBLK)
-		mp = vp->v_specmountpoint;
+		mp = spec_node_getmountedfs(vp);
 	else
 		mp = vp->v_mount;
 
@@ -800,7 +800,7 @@ bwrite(buf_t *bp)
 	if (vp != NULL) {
 		KASSERT(bp->b_objlock == vp->v_interlock);
 		if (vp->v_type == VBLK)
-			mp = vp->v_specmountpoint;
+			mp = spec_node_getmountedfs(vp);
 		else
 			mp = vp->v_mount;
 	} else {

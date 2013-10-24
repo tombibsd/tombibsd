@@ -52,13 +52,9 @@ __floatundidf(u_quad_t x)
 
 	if (x == 0)
 		return 0.0;
-	if (x == 1)
-		return 1.0;
 
 	u_int l = __builtin_clzll(x);
 	x <<= (l + 1);	/* clear implicit bit */
-	if (x == 0)
-		return 0x1.0p31;
 	x >>= 64 - (DBL_FRACHBITS + DBL_FRACLBITS);
 	union uu u = { .uq = x };
 	ux.dblu_frach = u.ul[H];

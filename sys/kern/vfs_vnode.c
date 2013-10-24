@@ -744,9 +744,7 @@ retry:
 			 * clean it here.  We donate it our last reference.
 			 */
 			KASSERT(mutex_owned(vp->v_interlock));
-			KASSERT((vp->v_iflag & VI_INACTPEND) == 0);
 			vp->v_iflag &= ~VI_INACTNOW;
-			vp->v_iflag |= VI_INACTPEND;
 			mutex_enter(&vrele_lock);
 			TAILQ_INSERT_TAIL(&vrele_list, vp, v_freelist);
 			if (++vrele_pending > (desiredvnodes >> 8))
@@ -894,8 +892,6 @@ vrele_thread(void *cookie)
 		 * and look for more work.
 		 */
 		mutex_enter(vp->v_interlock);
-		KASSERT((vp->v_iflag & VI_INACTPEND) != 0);
-		vp->v_iflag &= ~VI_INACTPEND;
 		vrelel(vp, 0);
 	}
 }

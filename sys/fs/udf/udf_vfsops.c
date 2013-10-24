@@ -419,7 +419,7 @@ udf_mount(struct mount *mp, const char *path,
 	}
 
 	/* register our mountpoint being on this device */
-	devvp->v_specmountpoint = mp;
+	spec_node_setmountedfs(devvp, mp);
 
 	/* successfully mounted */
 	DPRINTF(VOLUMES, ("udf_mount() successfull\n"));
@@ -541,7 +541,7 @@ udf_unmount(struct mount *mp, int mntflags)
 	DPRINTF(VOLUMES, ("device close ok\n"));
 
 	/* clear our mount reference and release device node */
-	ump->devvp->v_specmountpoint = NULL;
+	spec_node_setmountedfs(ump->devvp, NULL);
 	vput(ump->devvp);
 
 	/* free our ump */
@@ -728,9 +728,6 @@ udf_mountfs(struct vnode *devvp, struct mount *mp,
 			"(rootdirs failing)\n");
 		return error;
 	}
-
-	/* do we have to set this? */
-	devvp->v_specmountpoint = mp;
 
 	/* success! */
 	return 0;

@@ -523,7 +523,7 @@ iso_mountfs(struct vnode *devvp, struct mount *mp, struct lwp *l,
 		supbp = NULL;
 	}
 
-	devvp->v_specmountpoint = mp;
+	spec_node_setmountedfs(devvp, mp);
 
 	return 0;
 out:
@@ -568,7 +568,7 @@ cd9660_unmount(struct mount *mp, int mntflags)
 	isomp = VFSTOISOFS(mp);
 
 	if (isomp->im_devvp->v_type != VBAD)
-		isomp->im_devvp->v_specmountpoint = NULL;
+		spec_node_setmountedfs(isomp->im_devvp, NULL);
 
 	vn_lock(isomp->im_devvp, LK_EXCLUSIVE | LK_RETRY);
 	error = VOP_CLOSE(isomp->im_devvp, FREAD, NOCRED);

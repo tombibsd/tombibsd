@@ -1374,7 +1374,7 @@ void
 ffs_snapgone(struct vnode *vp)
 {
 	struct inode *xp, *ip = VTOI(vp);
-	struct mount *mp = ip->i_devvp->v_specmountpoint;
+	struct mount *mp = spec_node_getmountedfs(ip->i_devvp);
 	struct fs *fs;
 	struct snap_info *si;
 	int snaploc;
@@ -1425,7 +1425,7 @@ ffs_snapremove(struct vnode *vp)
 	struct inode *ip = VTOI(vp), *xp;
 	struct vnode *devvp = ip->i_devvp;
 	struct fs *fs = ip->i_fs;
-	struct mount *mp = devvp->v_specmountpoint;
+	struct mount *mp = spec_node_getmountedfs(devvp);
 	struct buf *ibp;
 	struct snap_info *si;
 	struct lwp *l = curlwp;
@@ -1541,7 +1541,7 @@ int
 ffs_snapblkfree(struct fs *fs, struct vnode *devvp, daddr_t bno,
     long size, ino_t inum)
 {
-	struct mount *mp = devvp->v_specmountpoint;
+	struct mount *mp = spec_node_getmountedfs(devvp);
 	struct buf *ibp;
 	struct inode *ip;
 	struct vnode *vp = NULL;
@@ -1877,7 +1877,7 @@ ffs_copyonwrite(void *v, struct buf *bp, bool data_valid)
 	struct fs *fs;
 	struct inode *ip;
 	struct vnode *devvp = v, *vp = NULL;
-	struct mount *mp = devvp->v_specmountpoint;
+	struct mount *mp = spec_node_getmountedfs(devvp);
 	struct snap_info *si;
 	void *saved_data = NULL;
 	daddr_t lbn, blkno, *snapblklist;

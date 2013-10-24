@@ -1286,10 +1286,10 @@ vfs_mountedon(vnode_t *vp)
 
 	if (vp->v_type != VBLK)
 		return ENOTBLK;
-	if (vp->v_specmountpoint != NULL)
+	if (spec_node_getmountedfs(vp) != NULL)
 		return EBUSY;
 	if (spec_node_lookup_by_dev(vp->v_type, vp->v_rdev, &vq) == 0) {
-		if (vq->v_specmountpoint != NULL)
+		if (spec_node_getmountedfs(vq) != NULL)
 			error = EBUSY;
 		vrele(vq);
 	}
