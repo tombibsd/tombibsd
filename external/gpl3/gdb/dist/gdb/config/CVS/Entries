@@ -1,5 +1,6 @@
 /nm-linux.h/1.1.1.1/Sat Sep 24 20:14:56 2011/-kk/
 /nm-nto.h/1.1.1.1/Sat Sep 24 20:14:56 2011/-kk/
+D/aarch64////
 D/alpha////
 D/arm////
 D/djgpp////
@@ -15,5 +16,6 @@ D/rs6000////
 D/s390////
 D/sh////
 D/sparc////
+D/tilegx////
 D/vax////
 D/xtensa////

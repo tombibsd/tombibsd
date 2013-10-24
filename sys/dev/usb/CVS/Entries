@@ -167,11 +167,11 @@
 /usbdevs.h/1.646/Sat Sep 14 20:29:55 2013/-kk/
 /usbdevs/1.654/Sat Sep 14 20:28:15 2013/-kk/
 /usbdevs_data.h/1.647/Sat Sep 14 20:29:55 2013/-kk/
-/usbdi.c/1.158/Thu Oct 24 06:05:15 2013/-kk/
+/usbdi.c/1.159/Thu Oct 24 06:08:18 2013/-kk/
 /usbdi.h/1.89/Thu Sep 26 07:25:31 2013/-kk/
 /usbdi_util.c/1.62/Thu Sep 26 07:25:31 2013/-kk/
 /usbdi_util.h/1.45/Thu Sep 26 07:25:31 2013/-kk/
-/usbdivar.h/1.106/Thu Oct 24 06:05:15 2013/-kk/
+/usbdivar.h/1.107/Thu Oct 24 06:08:18 2013/-kk/
 /usbhid.h/1.14/Tue Jan 17 03:49:20 2012/-kk/
 /usbroothub_subr.c/1.1/Sun Feb  3 10:57:13 2008/-kk/
 /usbroothub_subr.h/1.1/Sun Feb  3 10:57:13 2008/-kk/

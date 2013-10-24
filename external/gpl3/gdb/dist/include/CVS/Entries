@@ -10,6 +10,7 @@
 /bout.h/1.1.1.1/Sat Sep 24 19:48:50 2011/-kk/
 /demangle.h/1.1.1.1/Sat Sep 24 19:48:50 2011/-kk/
 /dis-asm.h/1.1.1.1/Sat Sep 24 19:48:50 2011/-kk/
+/dwarf2.def/1.1.1.1/Thu Oct  3 15:47:19 2013/-kk/
 /dwarf2.h/1.1.1.1/Sat Sep 24 19:48:51 2011/-kk/
 /dyn-string.h/1.1.1.1/Sat Sep 24 19:48:51 2011/-kk/
 /fibheap.h/1.1.1.1/Sat Sep 24 19:48:51 2011/-kk/
@@ -24,6 +25,7 @@
 /hashtab.h/1.1.1.1/Sat Sep 24 19:48:51 2011/-kk/
 /hp-symtab.h/1.1.1.1/Sat Sep 24 19:48:52 2011/-kk/
 /ieee.h/1.1.1.1/Sat Sep 24 19:48:52 2011/-kk/
+/leb128.h/1.1.1.1/Thu Oct  3 15:47:19 2013/-kk/
 /libiberty.h/1.1.1.1/Sat Sep 24 19:48:53 2011/-kk/
 /lto-symtab.h/1.1.1.1/Sat Sep 24 19:48:53 2011/-kk/
 /md5.h/1.1.1.1/Sat Sep 24 19:48:53 2011/-kk/
@@ -40,6 +42,7 @@
 /sort.h/1.1.1.1/Sat Sep 24 19:48:54 2011/-kk/
 /splay-tree.h/1.1.1.1/Sat Sep 24 19:48:54 2011/-kk/
 /symcat.h/1.1.1.1/Sat Sep 24 19:48:54 2011/-kk/
+/timeval-utils.h/1.1.1.1/Thu Oct  3 15:47:18 2013/-kk/
 /xregex.h/1.1.1.1/Sat Sep 24 19:48:54 2011/-kk/
 /xregex2.h/1.1.1.1/Sat Sep 24 19:48:55 2011/-kk/
 /xtensa-config.h/1.1.1.1/Sat Sep 24 19:48:55 2011/-kk/
@@ -50,6 +53,7 @@ D/cgen////
 D/coff////
 D/elf////
 D/gdb////
+D/mach-o////
 D/nlm////
 D/opcode////
 D/som////

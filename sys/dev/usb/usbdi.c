@@ -65,8 +65,8 @@ extern int usbdebug;
 #define DPRINTFN(n,x)
 #endif
 
-Static usbd_status usbd_ar_pipe(usbd_pipe_handle pipe);
-Static void usbd_start_next(usbd_pipe_handle pipe);
+Static usbd_status usbd_ar_pipe(usbd_pipe_handle);
+Static void usbd_start_next(usbd_pipe_handle);
 Static usbd_status usbd_open_pipe_ival
 	(usbd_interface_handle, u_int8_t, u_int8_t, usbd_pipe_handle *, int);
 

@@ -142,7 +142,7 @@ usage(void)
 {
 
 	syslog(LOG_ERR,
-    "Usage: %s [-dln] [-g group] [-p pathsep] [-s directory] [-u user] [directory ...]",
+    "Usage: %s [-cdln] [-g group] [-p pathsep] [-s directory] [-u user] [directory ...]",
 		    getprogname());
 	exit(1);
 }
@@ -174,7 +174,7 @@ main(int argc, char *argv[])
 
 	while ((ch = getopt(argc, argv, "cdg:lnp:s:u:")) != -1)
 		switch (ch) {
-		case 'w':
+		case 'c':
 			unrestricted_writes = 1;
 			break;
 

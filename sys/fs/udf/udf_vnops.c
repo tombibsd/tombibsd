@@ -118,7 +118,6 @@ udf_inactive(void *v)
 		*ap->a_recycle = true;
 		udf_delete_node(udf_node);
 		VOP_UNLOCK(vp);
-		vrecycle(vp, NULL, curlwp);
 		return 0;
 	}
 

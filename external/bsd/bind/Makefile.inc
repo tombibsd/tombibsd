@@ -94,10 +94,16 @@ CPPFLAGS+=-DOPENSSL -DUSE_ISC_SPNEGO
 CPPFLAGS+=-DGSSAPI
 .endif
 .if ${MKKERBEROS} != "no"
+.if !defined (LIB) || empty(LIB)
 LDADD+= -lgssapi -lkrb5 -lhx509 -lheimntlm -lheimbase \
 	-lcom_err  -lroken -lasn1 -lwind
 DPADD+= ${LIBGSSAPI} ${LIBKRB5} ${LIBHX509} ${LIBHEIMNTLM} ${LIBHEIMBASE} \
 	${LIBCOM_ERR} ${LIBROKEN} ${LIBASN1} ${LIBWIND}
+.else
+.for L in gssapi krb5 hx509 heimntlm heimbase com_err roken asn1 wind
+LIBDPLIBS+=	$L ${NETBSDSRCDIR}/crypto/external/bsd/heimdal/lib/lib$L
+.endfor
+.endif
 .endif
 .if !defined (LIB) || empty(LIB)
 LDADD+= -lcrypto -lcrypt

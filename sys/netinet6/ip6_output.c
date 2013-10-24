@@ -1594,7 +1594,11 @@ else 					\
 				break;
 			}
 
-			sockopt_get(sopt, optbuf, optbuflen);
+			error = sockopt_get(sopt, optbuf, optbuflen);
+			if (error) {
+				free(optbuf, M_IP6OPT);
+				break;
+			}
 			optp = &in6p->in6p_outputopts;
 			error = ip6_pcbopt(optname, optbuf, optbuflen,
 			    optp, kauth_cred_get(), uproto);

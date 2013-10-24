@@ -1,8 +1,9 @@
 /config.h/1.2/Sun May  5 10:23:01 2013/-kk/
 /defs.mk/1.2/Sun May  5 10:23:01 2013/-kk/
 /init.c/1.2/Sun May  5 10:23:01 2013/-kk/
+/jit-reader.h/1.1/Fri Oct  4 01:09:04 2013/-kk/
 /observer.h/1.1/Wed Apr 17 10:12:26 2013/-kk/
 /observer.inc/1.1/Wed Apr 17 10:12:26 2013/-kk/
 /version.c/1.1/Wed Apr 17 10:12:26 2013/-kk/
 /xml-builtin.c/1.1/Wed Apr 17 10:12:26 2013/-kk/
-D
+D/build-gnulib////

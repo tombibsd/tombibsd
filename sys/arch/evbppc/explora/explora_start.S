@@ -126,8 +126,13 @@ _next:
 
 /* Jump into the staging area so we can remap the dram. */
 
+#if 0
 	lis	0,stage1reloc@h
 	ori	0,0,stage1reloc@l
+#else
+	lis	0,((stage1reloc >> 16) & 0xffff)
+	ori	0,0,(stage1reloc & 0xffff)
+#endif
 	mtlr	0
 	blr
 

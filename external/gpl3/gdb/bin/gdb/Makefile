@@ -12,6 +12,7 @@ SRCS=		gdb.c
 CPPFLAGS+=	-I${.CURDIR} \
 		-I${GDBARCHDIR} \
 		-I${DIST}/gdb \
+		-I${DIST}/gdb/common \
 		-I${DIST}/gdb/config \
 		-I${DIST}/include/opcode \
 		-I${DIST} \
@@ -80,8 +81,8 @@ DPADD+=	${LIBOPCODESDIR}/libopcodes.a \
 	${LIBTERMINFO} \
 	${LIBIBERTYDIR}/libiberty.a
 
-LDADD+=		-lz -lcurses -lintl -lm -lkvm
-DPADD+=		${LIBZ} ${LIBCURSES} ${LIBINTL} ${LIBM} ${LIBKVM}
+LDADD+=		-lexpat -llzma -lz -lcurses -lintl -lm -lkvm
+DPADD+=		${LIBEXPAT} ${LIBLZMA} ${LIBZ} ${LIBCURSES} ${LIBINTL} ${LIBM} ${LIBKVM}
 
 LDADD+=                -lpthread_dbg
 

@@ -390,8 +390,8 @@ for GCC 4.5:
 		gcc/testsuite/gnat.dg
 
 Package:	gdb
-Version:	6.5/7.3.1
-Current Vers:	7.6
+Version:	7.6.1
+Current Vers:	7.6.1
 Maintainer:	FSF
 Archive Site:	ftp://ftp.gnu.org/gnu/gdb/
 Home Page:	http://www.gnu.org/software/gdb/

@@ -1,5 +1,6 @@
 /ChangeLog-9103/1.1.1.1/Sat Sep 24 19:48:57 2011/-kk/
 /ChangeLog/1.1.1.1/Sat Sep 24 19:48:58 2011/-kk/
+/aarch64.h/1.1.1.1/Thu Oct  3 15:47:29 2013/-kk/
 /alpha.h/1.1.1.1/Sat Sep 24 19:48:59 2011/-kk/
 /arc.h/1.1.1.1/Sat Sep 24 19:48:59 2011/-kk/
 /arm.h/1.1.1.1/Sat Sep 24 19:48:59 2011/-kk/
@@ -14,6 +15,7 @@
 /d30v.h/1.1.1.1/Sat Sep 24 19:49:00 2011/-kk/
 /dlx.h/1.1.1.1/Sat Sep 24 19:49:00 2011/-kk/
 /dwarf.h/1.1.1.1/Sat Sep 24 19:49:00 2011/-kk/
+/epiphany.h/1.1.1.1/Thu Oct  3 15:47:28 2013/-kk/
 /external.h/1.1.1.1/Sat Sep 24 19:48:58 2011/-kk/
 /fr30.h/1.1.1.1/Sat Sep 24 19:49:00 2011/-kk/
 /frv.h/1.1.1.1/Sat Sep 24 19:49:00 2011/-kk/
@@ -34,6 +36,7 @@
 /m68k.h/1.1.1.1/Sat Sep 24 19:49:02 2011/-kk/
 /mcore.h/1.1.1.1/Sat Sep 24 19:49:02 2011/-kk/
 /mep.h/1.1.1.1/Sat Sep 24 19:49:02 2011/-kk/
+/metag.h/1.1.1.1/Thu Oct  3 15:47:30 2013/-kk/
 /microblaze.h/1.1.1.1/Sat Sep 24 19:49:02 2011/-kk/
 /mips.h/1.1.1.1/Sat Sep 24 19:49:02 2011/-kk/
 /mmix.h/1.1.1.1/Sat Sep 24 19:49:03 2011/-kk/
@@ -42,12 +45,14 @@
 /moxie.h/1.1.1.1/Sat Sep 24 19:49:03 2011/-kk/
 /msp430.h/1.1.1.1/Sat Sep 24 19:49:03 2011/-kk/
 /mt.h/1.1.1.1/Sat Sep 24 19:49:03 2011/-kk/
+/nios2.h/1.1.1.1/Thu Oct  3 15:47:29 2013/-kk/
 /openrisc.h/1.1.1.1/Sat Sep 24 19:49:03 2011/-kk/
 /or32.h/1.1.1.1/Sat Sep 24 19:49:03 2011/-kk/
 /pj.h/1.1.1.1/Sat Sep 24 19:49:03 2011/-kk/
 /ppc.h/1.1.1.1/Sat Sep 24 19:49:03 2011/-kk/
 /ppc64.h/1.1.1.1/Sat Sep 24 19:49:03 2011/-kk/
 /reloc-macros.h/1.1.1.1/Sat Sep 24 19:49:03 2011/-kk/
+/rl78.h/1.1.1.1/Thu Oct  3 15:47:30 2013/-kk/
 /rx.h/1.1.1.1/Sat Sep 24 19:49:03 2011/-kk/
 /s390.h/1.1.1.1/Sat Sep 24 19:49:03 2011/-kk/
 /score.h/1.1.1.1/Sat Sep 24 19:49:03 2011/-kk/
@@ -56,11 +61,14 @@
 /spu.h/1.1.1.1/Sat Sep 24 19:49:04 2011/-kk/
 /tic6x-attrs.h/1.1.1.1/Sat Sep 24 19:49:04 2011/-kk/
 /tic6x.h/1.1.1.1/Sat Sep 24 19:49:04 2011/-kk/
+/tilegx.h/1.1.1.1/Thu Oct  3 15:47:29 2013/-kk/
+/tilepro.h/1.1.1.1/Thu Oct  3 15:47:30 2013/-kk/
 /v850.h/1.1.1.1/Sat Sep 24 19:49:04 2011/-kk/
 /vax.h/1.1.1.1/Sat Sep 24 19:49:04 2011/-kk/
 /vxworks.h/1.1.1.1/Sat Sep 24 19:49:04 2011/-kk/
 /x86-64.h/1.1.1.1/Sat Sep 24 19:49:04 2011/-kk/
 /xc16x.h/1.1.1.1/Sat Sep 24 19:49:04 2011/-kk/
+/xgate.h/1.1.1.1/Thu Oct  3 15:47:29 2013/-kk/
 /xstormy16.h/1.1.1.1/Sat Sep 24 19:49:04 2011/-kk/
 /xtensa.h/1.1.1.1/Sat Sep 24 19:49:04 2011/-kk/
 D

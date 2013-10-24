@@ -1,9 +1,11 @@
 /arm-ice.exp/1.1.1.1/Sat Sep 24 20:16:23 2011/-kk/
+/bfin.exp/1.1.1.1/Thu Oct  3 15:51:10 2013/-kk/
 /cfdbug.exp/1.1.1.1/Sat Sep 24 20:16:23 2011/-kk/
 /cygmon.exp/1.1.1.1/Sat Sep 24 20:16:23 2011/-kk/
 /d10v.exp/1.1.1.1/Sat Sep 24 20:16:23 2011/-kk/
 /default.exp/1.1.1.1/Sat Sep 24 20:16:23 2011/-kk/
 /dve.exp/1.1.1.1/Sat Sep 24 20:16:23 2011/-kk/
+/extended-gdbserver.exp/1.1.1.1/Thu Oct  3 15:51:10 2013/-kk/
 /gdbserver.exp/1.1.1.1/Sat Sep 24 20:16:23 2011/-kk/
 /h8300.exp/1.1.1.1/Sat Sep 24 20:16:23 2011/-kk/
 /i386-bozo.exp/1.1.1.1/Sat Sep 24 20:16:23 2011/-kk/

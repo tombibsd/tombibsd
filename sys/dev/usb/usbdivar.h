@@ -325,7 +325,7 @@ void		usb_needs_reattach(usbd_device_handle);
 void		usb_schedsoftintr(struct usbd_bus *);
 
 /*
- * These macros help while not all host controllers are ported to the MP code.
+ * These macros reflect the current locking scheme.  They might change.
  */
 
 #define usbd_lock_pipe(p)	mutex_enter((p)->device->bus->lock)

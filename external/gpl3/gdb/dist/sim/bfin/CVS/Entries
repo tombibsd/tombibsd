@@ -31,6 +31,8 @@
 /dv-bfin_evt.h/1.1.1.1/Sat Sep 24 19:57:33 2011/-kk/
 /dv-bfin_gpio.c/1.1.1.1/Sat Sep 24 19:57:33 2011/-kk/
 /dv-bfin_gpio.h/1.1.1.1/Sat Sep 24 19:57:33 2011/-kk/
+/dv-bfin_gpio2.c/1.1.1.1/Thu Oct  3 15:47:05 2013/-kk/
+/dv-bfin_gpio2.h/1.1.1.1/Thu Oct  3 15:47:10 2013/-kk/
 /dv-bfin_gptimer.c/1.1.1.1/Sat Sep 24 19:57:33 2011/-kk/
 /dv-bfin_gptimer.h/1.1.1.1/Sat Sep 24 19:57:33 2011/-kk/
 /dv-bfin_jtag.c/1.1.1.1/Sat Sep 24 19:57:33 2011/-kk/
@@ -41,6 +43,10 @@
 /dv-bfin_nfc.h/1.1.1.1/Sat Sep 24 19:57:34 2011/-kk/
 /dv-bfin_otp.c/1.1.1.1/Sat Sep 24 19:57:34 2011/-kk/
 /dv-bfin_otp.h/1.1.1.1/Sat Sep 24 19:57:34 2011/-kk/
+/dv-bfin_pfmon.c/1.1.1.1/Thu Oct  3 15:47:10 2013/-kk/
+/dv-bfin_pfmon.h/1.1.1.1/Thu Oct  3 15:47:10 2013/-kk/
+/dv-bfin_pint.c/1.1.1.1/Thu Oct  3 15:47:10 2013/-kk/
+/dv-bfin_pint.h/1.1.1.1/Thu Oct  3 15:47:10 2013/-kk/
 /dv-bfin_pll.c/1.1.1.1/Sat Sep 24 19:57:34 2011/-kk/
 /dv-bfin_pll.h/1.1.1.1/Sat Sep 24 19:57:34 2011/-kk/
 /dv-bfin_ppi.c/1.1.1.1/Sat Sep 24 19:57:34 2011/-kk/

@@ -6,4 +6,9 @@
 /goodbye.c/1.1.1.1/Sat Sep 24 20:18:17 2011/-kk/
 /hangout.c/1.1.1.1/Sat Sep 24 20:18:17 2011/-kk/
 /hello.c/1.1.1.1/Sat Sep 24 20:18:17 2011/-kk/
+/multi-arch-exec.c/1.1.1.1/Thu Oct  3 15:51:28 2013/-kk/
+/multi-arch-exec.exp/1.1.1.1/Thu Oct  3 15:51:28 2013/-kk/
+/multi-arch.exp/1.1.1.1/Thu Oct  3 15:51:28 2013/-kk/
+/watchpoint-multi.c/1.1.1.1/Thu Oct  3 15:51:28 2013/-kk/
+/watchpoint-multi.exp/1.1.1.1/Thu Oct  3 15:51:28 2013/-kk/
 D

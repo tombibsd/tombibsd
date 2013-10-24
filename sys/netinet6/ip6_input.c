@@ -806,17 +806,21 @@ static struct m_tag *
 ip6_setdstifaddr(struct mbuf *m, const struct in6_ifaddr *ia)
 {
 	struct m_tag *mtag;
+	struct ip6aux *ip6a;
 
 	mtag = ip6_addaux(m);
-	if (mtag != NULL) {
-		struct ip6aux *ip6a;
+	if (mtag == NULL)
+		return NULL;
 
-		ip6a = (struct ip6aux *)(mtag + 1);
-		in6_setscope(&ip6a->ip6a_src, ia->ia_ifp, &ip6a->ip6a_scope_id);
-		ip6a->ip6a_src = ia->ia_addr.sin6_addr;
-		ip6a->ip6a_flags = ia->ia6_flags;
+	ip6a = (struct ip6aux *)(mtag + 1);
+	if (in6_setscope(&ip6a->ip6a_src, ia->ia_ifp, &ip6a->ip6a_scope_id)) {
+		IP6_STATINC(IP6_STAT_BADSCOPE);
+		return NULL;
 	}
-	return mtag;	/* NULL if failed to set */
+
+	ip6a->ip6a_src = ia->ia_addr.sin6_addr;
+	ip6a->ip6a_flags = ia->ia6_flags;
+	return mtag;
 }
 
 const struct ip6aux *

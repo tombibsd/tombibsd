@@ -34,7 +34,9 @@ GENASSYM_CONF=	${SPARC}/sparc/genassym.cf
 # work around GCC (egcs-2.91.66) bug which is liable
 # to use FPU registers as temporaries:
 CFLAGS+=	-mno-fpu
+CFLAGS+=	-Wa,-Av8
 AFLAGS+=	-x assembler-with-cpp
+AFLAGS+=	-Wa,-Av8
 
 ##
 ## (3) libkern and compat

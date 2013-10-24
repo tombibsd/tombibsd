@@ -47,8 +47,7 @@ CWARNFLAGS.clang+=	-Wno-switch
 #
 COPTS+=	-Wno-stack-protector
 
-# Don't run yacc/bison or lex
-.y.c .y.h .l.c:
+ada-exp.c: ada-lex.c
 
 .if ${MACHINE} == "amiga"
 COPTS.dwarf2-frame.c+=-O1
