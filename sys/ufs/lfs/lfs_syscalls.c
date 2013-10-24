@@ -524,7 +524,6 @@ err2:
 	 */
 
 err3:
-	KERNEL_UNLOCK_ONE(NULL);
 	/*
 	 * XXX should do segwrite here anyway?
 	 */

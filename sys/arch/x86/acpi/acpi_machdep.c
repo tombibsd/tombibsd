@@ -297,7 +297,7 @@ acpi_md_OsReadable(void *Pointer, uint32_t Length)
 BOOLEAN
 acpi_md_OsWritable(void *Pointer, uint32_t Length)
 {
-	BOOLEAN rv = FALSE;
+	BOOLEAN rv = TRUE;
 	vaddr_t sva, eva;
 	pt_entry_t *pte;
 

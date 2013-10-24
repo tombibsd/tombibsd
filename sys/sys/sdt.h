@@ -62,7 +62,7 @@ typedef struct {
  * This type definition must match that of dtrace_probe. It is defined this
  * way to avoid having to rely on CDDL code.
  */
-typedef	void (*sdt_probe_func_t)(u_int32_t, uintptr_t arg0, uintptr_t arg1,
+typedef	void (*sdt_probe_func_t)(uint32_t, uintptr_t arg0, uintptr_t arg1,
     uintptr_t arg2, uintptr_t arg3, uintptr_t arg4);
 
 /*

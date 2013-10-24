@@ -536,10 +536,10 @@ manual(char *page, struct manstate *mp, glob_t *pg)
 	*eptr = '\0';
 
 	/*
-	 * If 'page' is given with a full or relative path
-	 * then interpret it as a file specification.
+	 * If 'page' contains a slash then it's
+	 * interpreted as a file specification.
 	 */
-	if ((page[0] == '/') || (page[0] == '.')) {
+	if (strchr(page, '/') != NULL) {
 		/* check if file actually exists */
 		(void)strlcpy(buf, escpage, sizeof(buf));
 		error = glob(buf, GLOB_APPEND | GLOB_BRACE | GLOB_NOSORT, NULL, pg);
@@ -555,9 +555,16 @@ manual(char *page, struct manstate *mp, glob_t *pg)
 			goto notfound;
 
 		/* clip suffix for the suffix check below */
-		p = strrchr(escpage, '.');
-		if (p && p[0] == '.' && isdigit((unsigned char)p[1]))
-			p[0] = '\0';
+		if ((p = strrchr(escpage, '.')) != NULL) {
+			/* Should get suffixes from the configuration file */
+			if (strcmp(p, ".gz") == 0 || strcmp(p, ".bz2") == 0 ||
+			    strcmp(p, ".Z") == 0 || strcmp(p, ".xz") == 0) {
+				*p = '\0';
+				p = strrchr(escpage, '.');
+			}
+			if (p && strchr("0123456789ln", p[1]) != NULL)
+				*p = '\0';
+		}
 
 		found = 0;
 		for (cnt = pg->gl_pathc - pg->gl_matchc;
