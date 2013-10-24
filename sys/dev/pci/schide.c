@@ -74,7 +74,7 @@ static int  schide_match(device_t, cfdata_t, void *);
 static void schide_attach(device_t, device_t, void *);
 
 CFATTACH_DECL_NEW(schide, sizeof(struct pciide_softc),
-    schide_match, schide_attach, NULL, NULL);
+    schide_match, schide_attach, pciide_detach, NULL);
 
 static const struct pciide_product_desc pciide_sch_products[] =  {
 	{ PCI_PRODUCT_INTEL_SCH_IDE,

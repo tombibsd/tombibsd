@@ -57,7 +57,7 @@ const struct pciide_product_desc pciide_stpc_products[] = {
 };
 
 CFATTACH_DECL_NEW(stpcide, sizeof(struct pciide_softc),
-    stpcide_match, stpcide_attach, NULL, NULL);
+    stpcide_match, stpcide_attach, pciide_detach, NULL);
 
 static int
 stpcide_match(device_t parent, cfdata_t match, void *aux)

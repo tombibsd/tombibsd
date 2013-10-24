@@ -49,7 +49,7 @@ static int  iteide_match(device_t, cfdata_t, void *);
 static void iteide_attach(device_t, device_t, void *);
 
 CFATTACH_DECL_NEW(iteide, sizeof(struct pciide_softc),
-    iteide_match, iteide_attach, NULL, NULL);
+    iteide_match, iteide_attach, pciide_detach, NULL);
 
 static const struct pciide_product_desc pciide_ite_products[] =  {
 	{ PCI_PRODUCT_ITE_IT8211,

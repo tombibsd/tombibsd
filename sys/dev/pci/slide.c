@@ -49,7 +49,7 @@ static int  slide_match(device_t, cfdata_t, void *);
 static void slide_attach(device_t, device_t, void *);
 
 CFATTACH_DECL_NEW(slide, sizeof(struct pciide_softc),
-    slide_match, slide_attach, NULL, NULL);
+    slide_match, slide_attach, pciide_detach, NULL);
 
 static const struct pciide_product_desc pciide_symphony_products[] = {
 	{ PCI_PRODUCT_SYMPHONY_82C105,

@@ -48,7 +48,7 @@ static int  optiide_match(device_t, cfdata_t, void *);
 static void optiide_attach(device_t, device_t, void *);
 
 CFATTACH_DECL_NEW(optiide, sizeof(struct pciide_softc),
-    optiide_match, optiide_attach, NULL, NULL);
+    optiide_match, optiide_attach, pciide_detach, NULL);
 
 static const struct pciide_product_desc pciide_opti_products[] =  {
 	{ PCI_PRODUCT_OPTI_82C621,

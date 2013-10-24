@@ -1906,6 +1906,7 @@ sogetopt1(struct socket *so, struct sockopt *sopt)
 #ifdef SO_OTIMESTAMP
 	case SO_OTIMESTAMP:
 #endif
+	case SO_ACCEPTCONN:
 		error = sockopt_setint(sopt, (so->so_options & opt) ? 1 : 0);
 		break;
 

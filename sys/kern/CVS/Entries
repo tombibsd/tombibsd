@@ -84,7 +84,7 @@
 /kern_verifiedexec.c/1.129/Tue Mar 13 18:40:52 2012/-kk/
 /kern_xxx.c/1.72/Thu Sep  1 18:25:44 2011/-kk/
 /kgdb_stub.c/1.26/Sat May 11 15:44:46 2013/-kk/
-/makesyscalls.sh/1.133/Tue Sep 10 17:40:54 2013/-kk/
+/makesyscalls.sh/1.134/Thu Oct 24 06:20:28 2013/-kk/
 /sched_4bsd.c/1.28/Fri Dec  2 12:29:35 2011/-kk/
 /sched_m2.c/1.30/Fri Sep 16 01:03:52 2011/-kk/
 /subr_autoconf.c/1.227/Fri Jun 28 15:33:40 2013/-kk/
@@ -167,9 +167,9 @@
 /uipc_mbuf2.c/1.29/Mon Aug  8 19:10:33 2011/-kk/
 /uipc_proto.c/1.22/Sun May 29 03:32:46 2011/-kk/
 /uipc_sem.c/1.40/Fri Mar 29 01:08:17 2013/-kk/
-/uipc_socket.c/1.217/Thu Aug 29 17:49:21 2013/-kk/
+/uipc_socket.c/1.218/Thu Oct 24 06:20:28 2013/-kk/
 /uipc_socket2.c/1.114/Sun Sep 15 15:41:11 2013/-kk/
-/uipc_syscalls.c/1.162/Thu Aug 29 17:49:21 2013/-kk/
+/uipc_syscalls.c/1.163/Thu Oct 24 06:20:28 2013/-kk/
 /uipc_usrreq.c/1.144/Thu Aug 29 17:49:21 2013/-kk/
 /vfs_bio.c/1.247/Thu Oct 24 05:50:43 2013/-kk/
 /vfs_cache.c/1.91/Mon Nov  5 17:27:39 2012/-kk/

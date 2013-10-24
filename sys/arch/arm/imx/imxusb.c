@@ -43,6 +43,8 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <dev/usb/ehcireg.h>
 #include <dev/usb/ehcivar.h>
 
+#include <arm/pic/picvar.h>	/* XXX: for intr_establish! */
+
 #include <arm/imx/imxusbreg.h>
 #include <arm/imx/imxusbvar.h>
 #include <arm/imx/imxgpiovar.h>
@@ -394,7 +396,9 @@ imxehci_host_mode(struct imxehci_softc *sc)
 
 	reg = bus_space_read_4(sc->sc_iot, sc->sc_ioh, IMXUSB_OTGSC);
 	reg |= OTGSC_IDPU;
-	reg |= OTGSC_DPIE | OTGSC_IDIE;
+	/* disable IDIE not to conflict with SSP1_DETECT. */
+	//reg |= OTGSC_DPIE | OTGSC_IDIE;
+	reg |= OTGSC_DPIE;
 	bus_space_write_4(sc->sc_iot, sc->sc_ioh, IMXUSB_OTGSC, reg);
 
 	reg = bus_space_read_4(sc->sc_iot, sc->sc_ioh, IMXUSB_OTGMODE);

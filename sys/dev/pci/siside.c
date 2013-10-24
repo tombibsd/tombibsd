@@ -49,7 +49,7 @@ static int  siside_match(device_t, cfdata_t, void *);
 static void siside_attach(device_t, device_t, void *);
 
 CFATTACH_DECL_NEW(siside, sizeof(struct pciide_softc),
-    siside_match, siside_attach, NULL, NULL);
+    siside_match, siside_attach, pciide_detach, NULL);
 
 static const struct pciide_product_desc pciide_sis_products[] =  {
 	{ PCI_PRODUCT_SIS_5597_IDE,

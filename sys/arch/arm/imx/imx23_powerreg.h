@@ -35,6 +35,7 @@
 #include <sys/cdefs.h>
 
 #define HW_POWER_BASE 0x80044000
+#define HW_POWER_SIZE 0x2000
 
 /*
  * Power Control Register.

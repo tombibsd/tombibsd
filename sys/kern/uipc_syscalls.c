@@ -184,6 +184,7 @@ do_sys_accept(struct lwp *l, int sock, struct mbuf **name, register_t *new_sock,
 		return (error);
 	}
 	nam = m_get(M_WAIT, MT_SONAME);
+	nam->m_len = 0;
 	*new_sock = fd;
 	so = fp->f_data;
 	solock(so);

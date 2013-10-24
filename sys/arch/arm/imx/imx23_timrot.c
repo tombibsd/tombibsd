@@ -239,7 +239,7 @@ setstatclockrate(int newhz)
 	sc->freq = newhz;
 
 	TIMER_WRITE_2(sc, TIMER_COUNT,
-	    __SHIFTIN(SOURCE_32KHZ_HZ / sc->freq,
+	    __SHIFTIN(SOURCE_32KHZ_HZ / sc->freq - 1,
 	    HW_TIMROT_TIMCOUNT0_FIXED_COUNT));
 
 	return;
@@ -254,7 +254,7 @@ timer_init(struct timrot_softc *sc)
 	uint32_t ctrl;
 
 	TIMER_WRITE_2(sc, TIMER_COUNT,
-	    __SHIFTIN(SOURCE_32KHZ_HZ / sc->freq,
+	    __SHIFTIN(SOURCE_32KHZ_HZ / sc->freq - 1,
 	    HW_TIMROT_TIMCOUNT0_FIXED_COUNT));
 	ctrl = IRQ_EN | UPDATE | RELOAD | SELECT_32KHZ;
 	TIMER_WRITE(sc, TIMER_CTRL, ctrl);

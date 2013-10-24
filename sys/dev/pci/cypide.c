@@ -46,7 +46,7 @@ static int  cypide_match(device_t, cfdata_t, void *);
 static void cypide_attach(device_t, device_t, void *);
 
 CFATTACH_DECL_NEW(cypide, sizeof(struct pciide_softc),
-    cypide_match, cypide_attach, NULL, NULL);
+    cypide_match, cypide_attach, pciide_detach, NULL);
 
 static const struct pciide_product_desc pciide_cypress_products[] =  {
 	{ PCI_PRODUCT_CONTAQ_82C693,

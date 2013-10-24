@@ -71,7 +71,7 @@ static int  pdcsata_match(device_t, cfdata_t, void *);
 static void pdcsata_attach(device_t, device_t, void *);
 
 CFATTACH_DECL_NEW(pdcsata, sizeof(struct pciide_softc),
-    pdcsata_match, pdcsata_attach, NULL, NULL);
+    pdcsata_match, pdcsata_attach, pciide_detach, NULL);
 
 static const struct pciide_product_desc pciide_pdcsata_products[] =  {
 	{ PCI_PRODUCT_PROMISE_PDC20318,

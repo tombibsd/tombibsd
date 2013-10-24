@@ -1,7 +1,7 @@
 /* $Id$ */
 
 /*
- * Copyright (c) 2012 The NetBSD Foundation, Inc.
+ * Copyright (c) 2013 The NetBSD Foundation, Inc.
  * All rights reserved.
  *
  * This code is derived from software contributed to The NetBSD Foundation
@@ -29,83 +29,9 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <sys/param.h>
-#include <sys/types.h>
-#include <sys/cdefs.h>
+#ifndef _ARM_IMX_IMX23_CLKCTRLVAR_H_
+#define _ARM_IMX_IMX23_CLKCTRLVAR_H_
 
-#include <lib/libsa/stand.h>
+void clkctrl_en_usb(void);
 
-#include <arm/imx/imx23_digctlreg.h>
-#include <arm/imx/imx23_uartdbgreg.h>
-
-#include "common.h"
-
-/*
- * Delay us microseconds.
- */
-void
-delay(unsigned int us)
-{
-        volatile uint32_t *us_r;
-
-	us_r = (uint32_t *)(HW_DIGCTL_BASE + HW_DIGCTL_MICROSECONDS);
-
-        *us_r = 0;
-        while (*us_r < us)
-                ;
-
-        return;
-}
-
-/*
- * Write character c to debug UART.
- */
-void
-putchar(int c)
-{
-	volatile uint8_t *fr_r, *dr_r;
-
-	fr_r = (uint8_t *)(HW_UARTDBG_BASE + HW_UARTDBGFR);
-	dr_r = (uint8_t *)(HW_UARTDBG_BASE + HW_UARTDBGDR);
-
-        /* Wait until transmit FIFO has space for the new character. */
-        while (*fr_r & HW_UARTDBGFR_TXFF)
-                ;
-
-	*dr_r = c;
-#ifdef DIAGNOSTIC
-
-	/* Flush: Wait until transmit FIFO contents are written to UART. */
-	while (!(*fr_r & HW_UARTDBGFR_TXFE))
-		;
-#endif
-
-	return;
-}
-
-/*
- * Read character from debug UART.
- */
-int
-getchar(void)
-{
-	volatile uint8_t *fr_r, *dr_r;
-
-	fr_r = (uint8_t *)(HW_UARTDBG_BASE + HW_UARTDBGFR);
-	dr_r = (uint8_t *)(HW_UARTDBG_BASE + HW_UARTDBGDR);
-
-	/* Wait until receive FIFO has character(s) */
-	while (*fr_r & HW_UARTDBGFR_RXFE)
-		;
-
-	return *dr_r;
-}
-
-void
-vpanic(const char *fmt, va_list ap)
-{
-	printf(fmt, ap);
-	for(;;);
-
-	/* NOTREACHED */
-}
+#endif /* !_ARM_IMX_IMX23_CLKCTRLVAR_H_ */

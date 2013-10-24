@@ -46,7 +46,7 @@ static int  acardide_match(device_t, cfdata_t, void *);
 static void acardide_attach(device_t, device_t, void *);
 
 CFATTACH_DECL_NEW(acardide, sizeof(struct pciide_softc),
-    acardide_match, acardide_attach, NULL, NULL);
+    acardide_match, acardide_attach, pciide_detach, NULL);
 
 static const struct pciide_product_desc pciide_acard_products[] =  {
 	{ PCI_PRODUCT_ACARD_ATP850U,

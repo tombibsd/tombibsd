@@ -45,13 +45,8 @@ static void natsemi_irqack(struct ata_channel *);
 static int  nside_match(device_t, cfdata_t, void *);
 static void nside_attach(device_t, device_t, void *);
 
-struct nside_softc {
-	struct pciide_softc pciide_sc;
-	struct pci_attach_args pcib_pa;
-};
-
-CFATTACH_DECL_NEW(nside, sizeof(struct nside_softc),
-    nside_match, nside_attach, NULL, NULL);
+CFATTACH_DECL_NEW(nside, sizeof(struct pciide_softc),
+    nside_match, nside_attach, pciide_detach, NULL);
 
 static const struct pciide_product_desc pciide_natsemi_products[] =  {
 	{ PCI_PRODUCT_NS_PC87415,       /* National Semi PC87415 IDE */

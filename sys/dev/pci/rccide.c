@@ -47,7 +47,7 @@ static int  rccide_match(device_t, cfdata_t, void *);
 static void rccide_attach(device_t, device_t, void *);
 
 CFATTACH_DECL_NEW(rccide, sizeof(struct pciide_softc),
-    rccide_match, rccide_attach, NULL, NULL);
+    rccide_match, rccide_attach, pciide_detach, NULL);
 
 static const struct pciide_product_desc pciide_serverworks_products[] =  {
 	{ PCI_PRODUCT_SERVERWORKS_OSB4_IDE,

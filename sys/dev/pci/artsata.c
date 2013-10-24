@@ -91,7 +91,7 @@ static const struct artisea_cmd_map artisea_dpa_cmd_map[] =
 #define ARTISEA_NUM_CHAN 4
 
 CFATTACH_DECL_NEW(artsata, sizeof(struct pciide_softc),
-    artsata_match, artsata_attach, NULL, NULL);
+    artsata_match, artsata_attach, pciide_detach, NULL);
 
 static int
 artsata_match(device_t parent, cfdata_t match, void *aux)

@@ -16,8 +16,10 @@ options {
 }
 
 sources {
+	# elf(3) binary.
 	boot_prep="./bootimx23";
-	netbsd="./netbsd";
+	# objcopy(1) generated .bin
+	netbsd="./netbsd.bin";
 }
 
 section (0) {
@@ -26,6 +28,6 @@ section (0) {
 	call boot_prep;
 
 	// Load kernel to DRAM.
-	load netbsd;
-	jump netbsd;
+	load netbsd > 0x40000000;
+	jump 0x40000000;
 }

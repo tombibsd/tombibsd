@@ -112,7 +112,7 @@ static const uint32_t gcscide_udma_timings[] = {
 };
 
 CFATTACH_DECL_NEW(gcscide, sizeof(struct pciide_softc),
-    gcscide_match, gcscide_attach, NULL, NULL);
+    gcscide_match, gcscide_attach, pciide_detach, NULL);
 
 static const struct pciide_product_desc pciide_gcscide_products[] = {
 	{

@@ -260,7 +260,7 @@ static int  satalink_match(device_t, cfdata_t, void *);
 static void satalink_attach(device_t, device_t, void *);
 
 CFATTACH_DECL_NEW(satalink, sizeof(struct pciide_softc),
-    satalink_match, satalink_attach, NULL, NULL);
+    satalink_match, satalink_attach, pciide_detach, NULL);
 
 static void sii3112_chip_map(struct pciide_softc*,
     const struct pci_attach_args*);

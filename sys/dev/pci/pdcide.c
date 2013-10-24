@@ -49,7 +49,7 @@ static int  pdcide_match(device_t, cfdata_t, void *);
 static void pdcide_attach(device_t, device_t, void *);
 
 CFATTACH_DECL_NEW(pdcide, sizeof(struct pciide_softc),
-    pdcide_match, pdcide_attach, NULL, NULL);
+    pdcide_match, pdcide_attach, pciide_detach, NULL);
 
 static const struct pciide_product_desc pciide_promise_products[] =  {
 	{ PCI_PRODUCT_PROMISE_PDC20246,

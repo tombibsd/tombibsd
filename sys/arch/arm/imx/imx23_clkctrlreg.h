@@ -35,6 +35,7 @@
 #include <sys/cdefs.h>
 
 #define HW_CLKCTRL_BASE 0x80040000
+#define HW_CLKCTRL_SIZE	0x2000
 
 /*
  * PLL Control Register 0.

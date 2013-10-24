@@ -35,6 +35,7 @@
 #include <sys/cdefs.h>
 
 #define HW_DIGCTL_BASE 0x8001C000
+#define HW_DIGCTL_SIZE 0x2000
 
 /*
  * DIGCTL Control Register.
