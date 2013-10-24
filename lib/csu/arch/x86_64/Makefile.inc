@@ -1,0 +1,3 @@
+# $NetBSD$
+
+CPPFLAGS+=	-DELFSIZE=64

@@ -1,0 +1,6 @@
+	$NetBSD$
+
+Things this needs:
+
+a) code cleanup
+b) support for mdoc macros

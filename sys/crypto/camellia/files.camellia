@@ -1,0 +1,6 @@
+# $NetBSD$
+
+define camellia
+
+file crypto/camellia/camellia.c		camellia
+file crypto/camellia/camellia-api.c	camellia

@@ -1,0 +1,4 @@
+#	$NetBSD$
+
+SETNAME=games
+PREFIX=/

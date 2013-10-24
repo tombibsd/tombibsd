@@ -1,0 +1,5 @@
+# $NetBSD$
+
+NAME		"EBCDIC-x"
+ENCODING	"NONE"
+DEFCSID		"EBCDIC-x"	0

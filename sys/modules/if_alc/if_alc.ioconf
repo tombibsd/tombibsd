@@ -1,0 +1,10 @@
+#	$NetBSD$
+
+ioconf if_alc
+
+include "conf/files"
+include "dev/pci/files.pci"
+
+pseudo-root pci*
+
+alc* at pci? dev ? function ?

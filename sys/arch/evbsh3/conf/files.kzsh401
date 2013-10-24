@@ -1,0 +1,6 @@
+#	$NetBSD$
+#
+#	KZSH401 configuration info
+
+file	arch/evbsh3/kzsh401/kzsh401.c
+file	arch/evbsh3/kzsh401/clock_machdep.c

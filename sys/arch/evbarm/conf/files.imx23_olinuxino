@@ -1,0 +1,10 @@
+# $Id$
+#
+# Olimex i.MX23 OLinuXino board configuration info.
+#
+
+# Pull in SoC support
+include "arch/arm/imx/files.imx23"
+
+file	arch/evbarm/imx23_olinuxino/imx23_olinuxino_machdep.c
+

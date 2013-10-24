@@ -1,0 +1,10 @@
+# $NetBSD$
+#
+# Standard/required configuration info for NetBSD/ia64
+
+machine		ia64
+include		"conf/std"	# MI standard options
+
+options 	EXEC_ELF64	# exec ELF binaries
+options 	EXEC_SCRIPT	# exec #! scripts
+

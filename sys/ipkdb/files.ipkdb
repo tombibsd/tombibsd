@@ -1,0 +1,8 @@
+#	$NetBSD$
+
+defflag opt_ipkdb.h		IPKDB
+defflag opt_ipkdb.h		IPKDBSECURE
+defparam opt_ipkdb.h		IPKDBKEY := "\"lint\""
+
+file	ipkdb/ipkdb_ipkdb.c		ipkdb
+file	ipkdb/ipkdb_if.c		ipkdb

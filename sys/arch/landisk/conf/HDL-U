@@ -1,0 +1,8 @@
+# $NetBSD$
+#
+# HDL-U/LAN Tank
+#
+
+include "arch/landisk/conf/GENERIC"
+
+no wdc0 at obio?

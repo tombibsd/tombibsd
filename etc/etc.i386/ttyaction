@@ -1,0 +1,4 @@
+#	$NetBSD$
+#
+# tty	action	command...
+ttyE0	*	chown ${USER}:tty /dev/console

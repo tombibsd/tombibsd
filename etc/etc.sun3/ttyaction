@@ -1,0 +1,5 @@
+#
+# $NetBSD$
+#
+# tty	action	command...
+kd	*	chown ${USER}:tty /dev/kbd /dev/mouse /dev/fb

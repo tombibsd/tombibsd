@@ -1,0 +1,26 @@
+/assert.h/1.1.1.1/Tue Jun 21 01:24:47 2011/-kk/
+/complex.h/1.1.1.1/Tue Jun 21 01:24:47 2011/-kk/
+/ctype.h/1.1.1.1/Tue Jun 21 01:24:47 2011/-kk/
+/errno.h/1.1.1.1/Tue Jun 21 01:24:47 2011/-kk/
+/fenv.h/1.1.1.1/Tue Jun 21 01:24:47 2011/-kk/
+/float.h/1.1.1.1/Tue Jun 21 01:24:47 2011/-kk/
+/inttypes.h/1.1.1.1/Tue Jun 21 01:24:47 2011/-kk/
+/iso646.h/1.1.1.1/Tue Jun 21 01:24:47 2011/-kk/
+/limits.h/1.1.1.1/Tue Jun 21 01:24:47 2011/-kk/
+/locale.h/1.1.1.1/Tue Jun 21 01:24:47 2011/-kk/
+/math.h/1.1.1.1/Tue Jun 21 01:24:47 2011/-kk/
+/setjmp.h/1.1.1.1/Tue Jun 21 01:24:47 2011/-kk/
+/signal.h/1.1.1.1/Tue Jun 21 01:24:47 2011/-kk/
+/stdarg.h/1.1.1.1/Tue Jun 21 01:24:47 2011/-kk/
+/stdatomic.h/1.1.1.1/Tue Jun 21 01:24:47 2011/-kk/
+/stdbool.h/1.1.1.1/Tue Jun 21 01:24:47 2011/-kk/
+/stddef.h/1.1.1.1/Tue Jun 21 01:24:47 2011/-kk/
+/stdint.h/1.1.1.1/Tue Jun 21 01:24:47 2011/-kk/
+/stdio.h/1.1.1.1/Tue Jun 21 01:24:47 2011/-kk/
+/stdlib.h/1.1.1.1/Tue Jun 21 01:24:47 2011/-kk/
+/string.h/1.1.1.1/Tue Jun 21 01:24:47 2011/-kk/
+/tgmath.h/1.1.1.1/Tue Jun 21 01:24:47 2011/-kk/
+/time.h/1.1.1.1/Tue Jun 21 01:24:47 2011/-kk/
+/wchar.h/1.1.1.1/Tue Jun 21 01:24:47 2011/-kk/
+/wctype.h/1.1.1.1/Tue Jun 21 01:24:47 2011/-kk/
+D

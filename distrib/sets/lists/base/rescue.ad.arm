@@ -1,0 +1,2 @@
+# $NetBSD$
+./rescue/ldconfig				base-rescue-root	endian=1234

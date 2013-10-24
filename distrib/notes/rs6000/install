@@ -1,0 +1,5 @@
+.\"	$NetBSD$
+.
+.Ss2 Installing NetBSD by using a netboot setup
+.
+.so ../common/netboot

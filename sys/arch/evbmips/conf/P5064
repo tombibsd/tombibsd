@@ -1,0 +1,4 @@
+#	$NetBSD$
+
+include "arch/evbmips/conf/std.algor"
+include "arch/algor/conf/P5064"

@@ -1,0 +1,9 @@
+# 	$NetBSD$
+
+include "arch/evbppc/conf/MPC8536DS"
+
+#ident 		"INSTALL_MPC8536DS-$Revision$"
+
+include "arch/evbppc/conf/INSTALL.inc"
+
+no config nfsnetbsd

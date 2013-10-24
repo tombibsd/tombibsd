@@ -1,0 +1,2 @@
+# $NetBSD$
+./usr/libdata/debug/sbin/ldconfig.debug		comp-sysutil-debug	debug,pic

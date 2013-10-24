@@ -1,0 +1,8 @@
+#	$NetBSD$
+
+include		"conf/std"
+include		"arch/arm/conf/std.arm"	# arch standard options
+
+options 	EXEC_ELF32
+options 	EXEC_SCRIPT
+options 	ARM32

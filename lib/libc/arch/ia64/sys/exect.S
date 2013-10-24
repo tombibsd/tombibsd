@@ -1,0 +1,3 @@
+/* $NetBSD$ */
+	
+/* XXX:	 Stub */

@@ -1,0 +1,14 @@
+#	$NetBSD$
+#
+
+LIB=	rumpdev_ugenhc
+IOCONF= UGENHC.ioconf
+
+SRCS=	ugenhc.c ugenhc_at_mainbus.c
+
+CPPFLAGS+=	-I${RUMPTOP}/librump/rumpkern
+
+RUMPCOMP_USER= #ioctl
+
+.include <bsd.lib.mk>
+.include <bsd.klinks.mk>

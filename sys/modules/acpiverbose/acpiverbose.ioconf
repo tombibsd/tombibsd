@@ -1,0 +1,6 @@
+# $NetBSD$
+
+ioconf acpiverbose
+
+include "conf/files"
+include "dev/pci/files.pci"

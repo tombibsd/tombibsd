@@ -1,0 +1,16 @@
+/Makefile/1.39/Fri Aug 10 12:20:11 2012/-kk/
+/dump.8/1.65/Wed Aug 29 18:46:13 2012/-kk/
+/dump.h/1.51/Sat Jun 15 01:27:19 2013/-kk/
+/dumprmt.c/1.37/Sat Jun 15 01:27:19 2013/-kk/
+/ffs_inode.c/1.22/Sun Jun 23 02:06:04 2013/-kk/
+/itime.c/1.20/Sat Jun 15 01:27:19 2013/-kk/
+/main.c/1.71/Sun Sep  8 13:26:05 2013/-kk/
+/optr.c/1.42/Sun Sep  8 13:26:05 2013/-kk/
+/pathnames.h/1.11/Thu Aug  7 10:04:14 2003/-kk/
+/rcache.c/1.24/Sat Jun 15 01:27:19 2013/-kk/
+/snapshot.c/1.6/Thu Feb 24 09:38:57 2011/-kk/
+/snapshot.h/1.4/Mon Apr 28 20:23:08 2008/-kk/
+/tape.c/1.53/Sat Jun 15 01:27:19 2013/-kk/
+/traverse.c/1.50/Sat Jun 15 01:27:19 2013/-kk/
+/unctime.c/1.17/Sat Jun 15 01:27:19 2013/-kk/
+D

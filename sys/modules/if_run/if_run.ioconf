@@ -1,0 +1,10 @@
+# $NetBSD$
+
+ioconf run
+
+include "conf/files"
+include "dev/usb/files.usb"
+
+pseudo-root usbdevif*
+
+run* at usbdevif?

@@ -1,0 +1,31 @@
+/Makefile.inc/1.1/Sun Feb  6 01:13:43 2011/-kk/
+/Makefile/1.12/Sun Sep 29 12:11:59 2013/-kk/
+D/bugpoint////
+D/clang-format////
+D/clang-tblgen////
+D/clang////
+D/llc////
+D/lld////
+D/lldb////
+D/lli////
+D/llvm-ar////
+D/llvm-as////
+D/llvm-bcanalyzer////
+D/llvm-cov////
+D/llvm-diff////
+D/llvm-dis////
+D/llvm-dwarfdump////
+D/llvm-extract////
+D/llvm-link////
+D/llvm-mc////
+D/llvm-mcld////
+D/llvm-nm////
+D/llvm-objdump////
+D/llvm-prof////
+D/llvm-ranlib////
+D/llvm-readobj////
+D/llvm-size////
+D/llvm-symbolizer////
+D/macho-dumpx////
+D/opt////
+D/tblgen////

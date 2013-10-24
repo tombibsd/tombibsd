@@ -1,0 +1,6 @@
+# $NetBSD$
+
+NAME		"MACchangeme"
+ENCODING	"NONE"
+DEFCSID		"changeme"	0
+INVALID		0x3F	# '?'

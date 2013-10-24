@@ -1,0 +1,10 @@
+/.cvsignore/1.1.1.1/Fri Sep 19 20:07:17 2008/-kk/
+/Makefile.am/1.1.1.1/Fri Sep 19 20:07:17 2008/-kk/
+/amq.8/1.3/Fri Mar 20 20:30:52 2009/-kk/
+/amq.c/1.1.1.2/Fri Mar 20 20:26:50 2009/-kk/
+/amq.h/1.1.1.2/Fri Mar 20 20:26:50 2009/-kk/
+/amq_clnt.c/1.1.1.2/Fri Mar 20 20:26:50 2009/-kk/
+/amq_xdr.c/1.1.1.2/Fri Mar 20 20:26:50 2009/-kk/
+/pawd.1/1.1.1.2/Fri Mar 20 20:26:50 2009/-kk/
+/pawd.c/1.1.1.2/Fri Mar 20 20:26:50 2009/-kk/
+D

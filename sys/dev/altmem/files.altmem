@@ -1,0 +1,7 @@
+# $NetBSD$
+
+define	altmemdev { }
+
+device	altmem:	disk
+attach	altmem at altmemdev
+file	dev/altmem/altmem.c	altmem

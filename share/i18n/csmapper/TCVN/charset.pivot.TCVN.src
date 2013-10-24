@@ -1,0 +1,6 @@
+# $NetBSD$
+
+TCVN5712-1		UCS			1
+VISCII			UCS			1
+UCS			TCVN5712-1		1
+UCS			VISCII			1

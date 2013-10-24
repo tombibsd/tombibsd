@@ -1,0 +1,10 @@
+#	$NetBSD$
+
+ioconf hdafg
+
+include "conf/files"
+include "dev/pci/files.pci"
+
+pseudo-root hdaudio*
+
+hdafg* at hdaudiobus?

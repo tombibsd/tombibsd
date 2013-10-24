@@ -1,0 +1,20 @@
+#	$NetBSD$
+#
+
+ioconf scsipi
+
+include "conf/files"
+include "dev/scsipi/files.scsipi"
+
+pseudo-root scsi*
+pseudo-root atapi*
+
+# SCSI support
+scsibus* at scsi?
+sd*	at scsibus? target ? lun ?
+cd*	at scsibus? target ? lun ? 
+
+# ATAPI support
+atapibus* at atapi?
+sd*	at atapibus? drive ? flags 0x0000 
+cd*	at atapibus? drive ? flags 0x0000

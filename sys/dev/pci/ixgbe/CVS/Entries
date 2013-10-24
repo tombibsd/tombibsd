@@ -1,0 +1,23 @@
+/LICENSE/1.1/Fri Aug 12 21:55:28 2011/-kk/
+/README/1.1/Fri Aug 12 21:55:28 2011/-kk/
+/ixgbe.c/1.5/Mon Jun 18 06:21:11 2012/-kk/
+/ixgbe.h/1.1/Fri Aug 12 21:55:29 2011/-kk/
+/ixgbe_82598.c/1.1/Fri Aug 12 21:55:29 2011/-kk/
+/ixgbe_82599.c/1.1/Fri Aug 12 21:55:29 2011/-kk/
+/ixgbe_api.c/1.1/Fri Aug 12 21:55:29 2011/-kk/
+/ixgbe_api.h/1.1/Fri Aug 12 21:55:29 2011/-kk/
+/ixgbe_common.c/1.1/Fri Aug 12 21:55:29 2011/-kk/
+/ixgbe_common.h/1.1/Fri Aug 12 21:55:29 2011/-kk/
+/ixgbe_mbx.c/1.1/Fri Aug 12 21:55:29 2011/-kk/
+/ixgbe_mbx.h/1.1/Fri Aug 12 21:55:29 2011/-kk/
+/ixgbe_netbsd.c/1.1/Fri Aug 12 21:55:29 2011/-kk/
+/ixgbe_netbsd.h/1.1/Fri Aug 12 21:55:29 2011/-kk/
+/ixgbe_osdep.h/1.1/Fri Aug 12 21:55:29 2011/-kk/
+/ixgbe_phy.c/1.1/Fri Aug 12 21:55:29 2011/-kk/
+/ixgbe_phy.h/1.1/Fri Aug 12 21:55:29 2011/-kk/
+/ixgbe_type.h/1.1/Fri Aug 12 21:55:29 2011/-kk/
+/ixgbe_vf.c/1.1/Fri Aug 12 21:55:29 2011/-kk/
+/ixgbe_vf.h/1.1/Fri Aug 12 21:55:29 2011/-kk/
+/ixv.c/1.1/Fri Aug 12 21:55:29 2011/-kk/
+/ixv.h/1.2/Sat Oct 27 17:18:36 2012/-kk/
+D

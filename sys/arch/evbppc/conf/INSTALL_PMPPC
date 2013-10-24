@@ -1,0 +1,7 @@
+# 	$NetBSD$
+
+include "arch/evbppc/conf/PMPPC"
+
+#ident 		"INSTALL_PMPPC-$Revision$"
+
+include "arch/evbppc/conf/INSTALL.inc"

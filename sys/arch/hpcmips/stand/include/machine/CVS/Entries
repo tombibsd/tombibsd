@@ -1,0 +1,24 @@
+/ansi.h/1.1.1.1/Thu Sep 16 12:23:25 1999/-kk/
+/bootinfo.h/1.3/Fri Feb  1 18:16:06 2002/-kk/
+/bswap.h/1.1.1.1/Thu Sep 16 12:23:25 1999/-kk/
+/cdefs.h/1.1.1.1/Thu Sep 16 12:23:25 1999/-kk/
+/cpu.h/1.1/Wed Jan 12 19:33:18 2000/-kk/
+/disklabel.h/1.1.1.1/Thu Sep 16 12:23:25 1999/-kk/
+/elf_machdep.h/1.1.1.1/Thu Sep 16 12:23:26 1999/-kk/
+/endian.h/1.1.1.1/Thu Sep 16 12:23:26 1999/-kk/
+/endian_machdep.h/1.1/Sun Mar 19 10:46:17 2000/-kk/
+/int_const.h/1.1/Sat May  5 08:14:21 2001/-kk/
+/int_fmtio.h/1.1/Sat May  5 08:14:21 2001/-kk/
+/int_limits.h/1.1/Sat May  5 08:14:21 2001/-kk/
+/int_mwgwtypes.h/1.1/Sat May  5 08:14:21 2001/-kk/
+/int_types.h/1.1/Tue Aug 29 15:10:16 2000/-kk/
+/intr.h/1.1.1.1/Thu Sep 16 12:23:26 1999/-kk/
+/limits.h/1.1.1.1/Thu Sep 16 12:23:26 1999/-kk/
+/param.h/1.1.1.1/Thu Sep 16 12:23:26 1999/-kk/
+/platid.h/1.3/Fri Feb  1 18:16:06 2002/-kk/
+/platid_generated.h/1.1/Sun Jan 28 02:52:39 2001/-kk/
+/platid_mask.h/1.1/Sun Sep 26 12:46:56 1999/-kk/
+/signal.h/1.1.1.1/Thu Sep 16 12:23:26 1999/-kk/
+/stdarg.h/1.1.1.1/Thu Sep 16 12:23:26 1999/-kk/
+/types.h/1.1.1.1/Thu Sep 16 12:23:26 1999/-kk/
+D

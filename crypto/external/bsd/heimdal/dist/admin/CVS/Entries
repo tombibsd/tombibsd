@@ -1,0 +1,18 @@
+/ChangeLog/1.1.1.1/Wed Apr 13 18:14:31 2011/-kk/
+/Makefile.am/1.1.1.2/Thu Apr 14 14:08:06 2011/-kk/
+/NTMakefile/1.1.1.1/Wed Apr 13 18:14:32 2011/-kk/
+/add.c/1.1.1.1/Wed Apr 13 18:14:32 2011/-kk/
+/change.c/1.1.1.1/Wed Apr 13 18:14:32 2011/-kk/
+/copy.c/1.1.1.1/Wed Apr 13 18:14:32 2011/-kk/
+/destroy.c/1.1.1.1/Wed Apr 13 18:14:32 2011/-kk/
+/get.c/1.1.1.1/Wed Apr 13 18:14:32 2011/-kk/
+/ktutil-commands.in/1.1.1.2/Thu Apr 14 14:08:06 2011/-kk/
+/ktutil-version.rc/1.1.1.1/Wed Apr 13 18:14:32 2011/-kk/
+/ktutil.8/1.2/Thu Apr 14 19:19:19 2011/-kk/
+/ktutil.c/1.1.1.1/Wed Apr 13 18:14:32 2011/-kk/
+/ktutil_locl.h/1.1.1.2/Thu Apr 14 14:08:06 2011/-kk/
+/list.c/1.1.1.1/Wed Apr 13 18:14:32 2011/-kk/
+/purge.c/1.1.1.1/Wed Apr 13 18:14:32 2011/-kk/
+/remove.c/1.1.1.1/Wed Apr 13 18:14:32 2011/-kk/
+/rename.c/1.1.1.1/Wed Apr 13 18:14:32 2011/-kk/
+D

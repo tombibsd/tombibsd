@@ -1,0 +1,11 @@
+/autoconf.c/1.31/Sat Oct 27 17:17:43 2012/-kk/
+/bus.c/1.44/Tue Oct  2 23:54:51 2012/-kk/
+/console.c/1.12/Fri Jul  1 20:36:42 2011/-kk/
+/console.h/1.1/Thu Mar 27 15:21:46 2008/-kk/
+/cpu.c/1.11/Sun Feb 20 07:54:10 2011/-kk/
+/disksubr.c/1.25/Thu May 16 19:06:44 2013/-kk/
+/interrupt.c/1.7/Fri Jul  1 20:36:42 2011/-kk/
+/locore_machdep.S/1.6/Sun Dec 11 12:17:05 2005/-kk/
+/machdep.c/1.114/Sat Jul 28 23:08:56 2012/-kk/
+/mainbus.c/1.18/Fri May  9 10:59:55 2008/-kk/
+D

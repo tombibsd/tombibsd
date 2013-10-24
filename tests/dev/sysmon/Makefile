@@ -1,0 +1,18 @@
+#	$NetBSD$
+#
+
+.include <bsd.own.mk>
+
+TESTSDIR=	${TESTSBASE}/dev/sysmon
+
+TESTS_C=	t_swwdog
+
+LDADD+=	-lrumpdev_sysmon -lrumpdev -lrumpvfs
+LDADD+=	-lrump
+LDADD+=	-lrumpuser -lpthread
+
+WARNS=	4
+
+TESTS_SH=	t_swsensor
+
+.include <bsd.test.mk>

@@ -1,0 +1,6 @@
+#	$NetBSD$
+#
+
+# see comment in rumpuser_component.c
+major=0
+minor=1

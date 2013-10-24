@@ -1,0 +1,9 @@
+# $NetBSD$
+#
+# USL-5P
+#
+
+include "arch/landisk/conf/GENERIC"
+
+no pciide* at pci?
+no acardide* at pci?

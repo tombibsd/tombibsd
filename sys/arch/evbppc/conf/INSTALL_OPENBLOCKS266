@@ -1,0 +1,16 @@
+# 	$NetBSD$
+
+include	"arch/evbppc/conf/OPENBLOCKS266"
+
+#ident 	"INSTALL_OPENBLOCKS266-$Revision$"
+
+include	"arch/evbppc/conf/INSTALL.inc"
+
+#
+# DEBUG options turned on:
+#
+#makeoptions	DEBUG="-g"
+#options 	DEBUG
+#options 	LOCKDEBUG
+#options 	SYSCALL_DEBUG
+options 	DIAGNOSTIC

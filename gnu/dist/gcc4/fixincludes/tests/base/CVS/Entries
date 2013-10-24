@@ -1,0 +1,57 @@
+/AvailabilityMacros.h/1.1.1.1/Thu Apr 20 08:24:13 2006/-kk/
+/_G_config.h/1.1.1.1/Thu Apr 20 08:24:13 2006/-kk/
+/assert.h/1.1.1.1/Thu Apr 20 08:24:13 2006/-kk/
+/c_asm.h/1.1.1.1/Thu Apr 20 08:24:12 2006/-kk/
+/com_err.h/1.1.1.1/Thu Apr 20 08:24:13 2006/-kk/
+/ctrl-quotes-def-1.h/1.1.1.1/Thu Apr 20 08:24:12 2006/-kk/
+/ctype.h/1.1.1.1/Thu Apr 20 08:24:13 2006/-kk/
+/curses.h/1.1.1.1/Thu Apr 20 08:24:13 2006/-kk/
+/errno.h/1.1.1.1/Sat Oct 21 22:26:55 2006/-kk/
+/fixinc-test-limits.h/1.1.1.1/Thu Apr 20 08:24:12 2006/-kk/
+/inttypes.h/1.1.1.1/Thu Apr 20 08:24:13 2006/-kk/
+/io-quotes-def-1.h/1.1.1.1/Thu Apr 20 08:24:12 2006/-kk/
+/locale.h/1.1.1.1/Thu Apr 20 08:24:12 2006/-kk/
+/malloc.h/1.1.1.1/Thu Apr 20 08:24:11 2006/-kk/
+/math.h/1.1.1.1/Thu Apr 20 08:24:12 2006/-kk/
+/obstack.h/1.1.1.1/Thu Apr 20 08:24:11 2006/-kk/
+/pthread.h/1.1.1.2/Sat Oct 21 22:26:57 2006/-kk/
+/reg_types.h/1.1.1.1/Thu Apr 20 08:24:13 2006/-kk/
+/regex.h/1.1.1.1/Thu Apr 20 08:24:13 2006/-kk/
+/regexp.h/1.1.1.1/Thu Apr 20 08:24:11 2006/-kk/
+/standards.h/1.1.1.1/Thu Apr 20 08:24:13 2006/-kk/
+/stdio.h/1.1.1.1/Thu Apr 20 08:24:12 2006/-kk/
+/stdio_tag.h/1.1.1.1/Thu Apr 20 08:24:13 2006/-kk/
+/stdlib.h/1.1.1.1/Thu Apr 20 08:24:12 2006/-kk/
+/string.h/1.1.1.1/Thu Apr 20 08:24:11 2006/-kk/
+/strings.h/1.1.1.1/Thu Apr 20 08:24:12 2006/-kk/
+/sym.h/1.1.1.1/Thu Apr 20 08:24:11 2006/-kk/
+/testing.h/1.1.1.1/Thu Apr 20 08:24:13 2006/-kk/
+/time.h/1.1.1.1/Thu Apr 20 08:24:12 2006/-kk/
+/tinfo.h/1.1.1.1/Thu Apr 20 08:24:12 2006/-kk/
+/unistd.h/1.1.1.1/Thu Apr 20 08:24:13 2006/-kk/
+/wchar.h/1.1.1.1/Thu Apr 20 08:24:13 2006/-kk/
+/widec.h/1.1.1.1/Thu Apr 20 08:24:12 2006/-kk/
+D/X11////
+D/Xm////
+D/ansi////
+D/arch////
+D/arpa////
+D/bits////
+D/bsd////
+D/fs////
+D/hsfs////
+D/ia64////
+D/internal////
+D/iso////
+D/mach-o////
+D/machine////
+D/netdnet////
+D/netinet////
+D/pixrect////
+D/rpc////
+D/rpcsvc////
+D/sparc////
+D/sundev////
+D/sunwindow////
+D/sys////
+D/types////

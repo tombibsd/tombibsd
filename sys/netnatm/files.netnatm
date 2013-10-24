@@ -1,0 +1,7 @@
+#	$NetBSD$
+
+defflag			NATM		# "native" ATM protocols
+
+file	netnatm/natm.c			natm
+file	netnatm/natm_pcb.c		natm
+file	netnatm/natm_proto.c		natm

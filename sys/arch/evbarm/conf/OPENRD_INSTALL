@@ -1,0 +1,10 @@
+#	$NetBSD$
+#
+#	OPENRD_INSTALL -- OPENRD kernel with installation-sized
+#	ramdisk
+#
+
+include "arch/evbarm/conf/OPENRD"
+include "arch/evbarm/conf/INSTALL"
+
+options BOOTHOWTO=RB_SINGLE

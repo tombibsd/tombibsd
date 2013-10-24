@@ -1,0 +1,5 @@
+#	$NetBSD$
+
+define	skipjack
+
+file	crypto/skipjack/skipjack.c	skipjack

@@ -1,0 +1,22 @@
+/Makefile.inc/1.2/Fri Sep 16 16:30:18 2011/-kk/
+/Makefile/1.44/Mon Feb 25 00:33:19 2013/-kk/
+/README/1.4/Fri May 18 15:36:21 2012/-kk/
+/h_macros.h/1.9/Fri May 17 15:42:09 2013/-kk/
+D/bin////
+D/crypto////
+D/dev////
+D/fs////
+D/games////
+D/include////
+D/ipf////
+D/kernel////
+D/lib////
+D/libexec////
+D/modules////
+D/net////
+D/rump////
+D/sbin////
+D/share////
+D/sys////
+D/usr.bin////
+D/usr.sbin////

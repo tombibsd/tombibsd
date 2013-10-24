@@ -1,0 +1,10 @@
+# $NetBSD$
+
+ioconf hpacel
+
+include "conf/files"
+include "dev/acpi/files.acpi"
+
+pseudo-root acpi*
+
+hpacel* at acpi?

@@ -1,0 +1,3 @@
+/*	$NetBSD$	*/
+
+#define PACKAGE_REVISION_TYPE_DIST

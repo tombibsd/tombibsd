@@ -1,0 +1,5 @@
+#	$NetBSD$
+
+device	rtas
+attach	rtas at ofbus
+file	arch/powerpc/powerpc/rtas.c		rtas	needs-flag

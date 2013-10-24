@@ -1,0 +1,10 @@
+# $NetBSD$
+
+ioconf wmimsi
+
+include "conf/files"
+include "dev/acpi/wmi/files.wmi"
+
+pseudo-root acpiwmi*
+
+wmimsi* at acpiwmibus?

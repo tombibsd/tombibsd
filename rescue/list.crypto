@@ -1,0 +1,10 @@
+#	$NetBSD$
+
+PROG	cgdconfig
+
+PROG	scp
+PROG	ssh		slogin
+SPECIAL	scp	srcdir	crypto/external/bsd/openssh/bin/scp
+SPECIAL	ssh	srcdir	crypto/external/bsd/openssh/bin/ssh
+
+LIBS	-lssh -lssl -lcrypto

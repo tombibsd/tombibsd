@@ -1,0 +1,8 @@
+#	$NetBSD$
+#
+#	ADI_BRH_INSTALL -- BRH kernel with installation-sized
+#	ramdisk
+#
+
+include "arch/evbarm/conf/ADI_BRH"
+include "arch/evbarm/conf/INSTALL"

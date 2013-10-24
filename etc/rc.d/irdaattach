@@ -1,0 +1,17 @@
+#!/bin/sh
+#
+# $NetBSD$
+#
+
+# PROVIDE: irdaattach
+# REQUIRE: DAEMON
+# BEFORE:  LOGIN
+
+$_rc_subr_loaded . /etc/rc.subr
+
+name="irdaattach"
+rcvar=$name
+command="/usr/sbin/${name}"
+
+load_rc_config $name
+run_rc_command "$1"

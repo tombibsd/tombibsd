@@ -1,0 +1,15 @@
+/Makefile.bootprogs/1.32/Sun Jan 23 13:24:05 2011/-kk/
+/Makefile.bootxx/1.10/Fri Jul 20 15:23:02 2012/-kk/
+/Makefile.inc/1.23/Sun Jan 23 13:24:05 2011/-kk/
+/Makefile/1.17/Sun Dec 11 12:16:20 2005/-kk/
+D/boot////
+D/bootxx_cd9660////
+D/bootxx_ffs////
+D/bootxx_ffsv2////
+D/bootxx_lfs////
+D/common////
+D/mkbootimage////
+D/netboot////
+D/setnetbootinfo////
+D/standtest////
+D/ustarboot////

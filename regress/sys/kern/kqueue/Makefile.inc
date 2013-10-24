@@ -1,0 +1,7 @@
+# $NetBSD$
+
+WARNS=2
+NOMAN=
+PROG=${.CURDIR:T}
+
+# LDFLAGS=-static

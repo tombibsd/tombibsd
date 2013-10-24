@@ -1,0 +1,7 @@
+#	$NetBSD$
+
+.include <bsd.own.mk>
+
+tcdevs.h tcdevs_data.h: tcdevs devlist2h.awk
+	/bin/rm -f tcdevs.h tcdevs_data.h
+	${TOOL_AWK} -f devlist2h.awk tcdevs

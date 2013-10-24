@@ -1,0 +1,5 @@
+#	$NetBSD$
+#
+# XXX netbsd-4 had minor=3
+major=2
+minor=0

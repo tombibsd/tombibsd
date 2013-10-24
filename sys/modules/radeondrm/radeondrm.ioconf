@@ -1,0 +1,9 @@
+#	$NetBSD$
+
+ioconf radeondrm
+
+include "conf/files"
+
+pseudo-root drm*
+
+radeondrm* at drm?

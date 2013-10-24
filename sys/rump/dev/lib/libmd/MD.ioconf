@@ -1,0 +1,8 @@
+#	$NetBSD$
+#
+
+ioconf md
+
+include "conf/files"
+
+pseudo-device md

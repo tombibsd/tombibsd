@@ -1,0 +1,3 @@
+/*	$NetBSD$	*/
+
+/* No performance counters */

@@ -1,0 +1,10 @@
+# $NetBSD$
+
+ioconf powernow
+
+include "conf/files"
+include "arch/x86/conf/files.x86"
+
+pseudo-root cpufeaturebus*
+
+powernow0 at cpufeaturebus?

@@ -1,0 +1,11 @@
+#	$NetBSD$
+
+# copy the kernel
+#COPY	${CURDIR}/../../../../sys/arch/amiga/compile/GENERIC/netbsd	netbsd
+COPY	/netbsd				netbsd
+
+# and the upgrade tools
+COPY	dot.profile			.profile
+COPY	dot.upgrutils			.upgrutils
+COPY	upgrade.sh			upgrade
+SPECIAL	chmod 755 upgrade

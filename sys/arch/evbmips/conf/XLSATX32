@@ -1,0 +1,10 @@
+# $NetBSD$
+#
+
+#ident 		"XLSATX32-$Revision$"
+
+include "arch/evbmips/conf/XLSATX"
+
+options 	MEMLIMIT=0x20000000                     # 512MB 
+
+makeoptions	LP64="no"

@@ -1,0 +1,14 @@
+#	$NetBSD$
+#
+
+.PATH:	${.CURDIR}/../../../../dev/pad
+
+LIB=	rumpdev_pad
+
+SRCS=	pad.c padvol.c
+SRCS+=	component.c
+
+CPPFLAGS+=	-I${.CURDIR}/../../../librump/rumpvfs
+
+.include <bsd.lib.mk>
+.include <bsd.klinks.mk>

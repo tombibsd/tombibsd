@@ -1,0 +1,4 @@
+.\" $NetBSD$
+.ds Lt <
+.ds Gt >
+.ds Am \&&

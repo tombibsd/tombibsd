@@ -1,0 +1,13 @@
+# $NetBSD$
+
+.PATH:		${X11SRCDIR.X11}/modules/lc/def
+SRCS.xlcDef=	lcDefConv.c
+
+CPPFLAGS+= \
+	-I${DESTDIR}${X11INCDIR}/X11 \
+	-I${X11SRCDIR.X11}/src/xlibi18n
+
+CPPFLAGS+= \
+	-DHASXDMAUTH
+
+.include <bsd.lib.mk>

@@ -1,0 +1,6 @@
+#	$NetBSD$
+
+deffs	FDESC
+
+file	miscfs/fdesc/fdesc_vfsops.c	fdesc
+file	miscfs/fdesc/fdesc_vnops.c	fdesc

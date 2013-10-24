@@ -1,0 +1,10 @@
+# $NetBSD$
+
+ioconf viac7temp
+
+include "conf/files"
+include "arch/x86/conf/files.x86"
+
+pseudo-root cpufeaturebus*
+
+viac7temp* at cpufeaturebus?

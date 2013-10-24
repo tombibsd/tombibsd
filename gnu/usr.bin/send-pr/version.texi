@@ -1,0 +1,2 @@
+@c	$NetBSD$
+@set VERSION 3.95

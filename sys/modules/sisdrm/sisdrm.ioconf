@@ -1,0 +1,9 @@
+#	$NetBSD$
+
+ioconf sisdrm
+
+include "conf/files"
+
+pseudo-root drm*
+
+sisdrm* at drm?

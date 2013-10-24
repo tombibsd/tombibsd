@@ -1,0 +1,6 @@
+# $NetBSD$
+
+NAME		"KOIx"
+ENCODING	"NONE"
+DEFCSID		"KOIx"		0
+INVALID		0x3F # '?'

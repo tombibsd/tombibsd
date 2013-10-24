@@ -1,0 +1,9 @@
+#	$NetBSD$
+
+.include <bsd.own.mk>
+
+RM=	rm
+
+miidevs.h: miidevs devlist2h.awk
+	${RM} -f miidevs.h miidevs_data.h
+	${TOOL_AWK} -f devlist2h.awk miidevs

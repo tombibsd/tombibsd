@@ -1,0 +1,10 @@
+# $NetBSD$
+
+ioconf thinkpad
+
+include "conf/files"
+include "dev/acpi/files.acpi"
+
+pseudo-root acpi*
+
+thinkpad* at acpi?

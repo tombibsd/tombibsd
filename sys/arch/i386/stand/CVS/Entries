@@ -1,0 +1,15 @@
+/Makefile.booters/1.88/Wed Aug 21 15:24:27 2013/-kk/
+/Makefile.inc/1.11/Mon Jul  1 12:48:03 2013/-kk/
+/Makefile/1.27/Fri Jan 27 08:41:35 2012/-kk/
+D/boot////
+D/bootxx////
+D/cdboot////
+D/dosboot////
+D/fatboot////
+D/genprom////
+D/lib////
+D/libsa////
+D/mbr////
+D/misc////
+D/netboot////
+D/pxeboot////

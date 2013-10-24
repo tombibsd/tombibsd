@@ -1,0 +1,17 @@
+#!/bin/sh
+#
+# $NetBSD$
+#
+
+# PROVIDE: ftp_proxy
+# REQUIRE: pf
+# BEFORE:  LOGIN
+
+$_rc_subr_loaded . /etc/rc.subr
+
+name="ftp_proxy"
+rcvar=$name
+command="/usr/sbin/ftp-proxy"
+
+load_rc_config $name
+run_rc_command "$1"

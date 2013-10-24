@@ -1,0 +1,3 @@
+$Id$
+
+it's a C-version of tpfmt.sh.  see usr.sbin/tprof/README for the usage.

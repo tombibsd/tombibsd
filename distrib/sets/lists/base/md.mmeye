@@ -1,0 +1,4 @@
+# $NetBSD$
+./usr/mdec/boot					base-sysutil-bin
+./usr/mdec/bootelf				base-sysutil-bin
+./usr/mdec/osloader				base-sysutil-bin

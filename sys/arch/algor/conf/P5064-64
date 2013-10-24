@@ -1,0 +1,12 @@
+#	$NetBSD$
+#
+# Algorithmics P-5064 kernel (64-bit).
+#
+
+include	"arch/algor/conf/P5064"
+
+include	"arch/algor/conf/std.algor64"
+
+no options	SYMTAB_SPACE
+options 	SYMTAB_SPACE=620000
+#ident 		"P5064-64-$Revision$"

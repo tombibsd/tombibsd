@@ -1,0 +1,5 @@
+#	$NetBSD$
+
+XKBROOTDIR=	${X11LIBDIR}/xkb
+XKBCOMPDIR=	${XKBROOTDIR}/compiled	# actually a link to ${XKBDATADIR}
+XKBDATADIR=	/var/db/xkb		# must be writable!

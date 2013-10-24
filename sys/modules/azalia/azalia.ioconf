@@ -1,0 +1,10 @@
+#	$NetBSD$
+
+ioconf azalia
+
+include "conf/files"
+include "dev/pci/files.pci"
+
+pseudo-root pci*
+
+azalia* at pci? dev ? function ?

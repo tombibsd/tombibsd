@@ -1,0 +1,10 @@
+# $NetBSD$
+
+ioconf hpqlb
+
+include "conf/files"
+include "dev/acpi/files.acpi"
+
+pseudo-root acpi*
+
+hpqlb* at acpi?

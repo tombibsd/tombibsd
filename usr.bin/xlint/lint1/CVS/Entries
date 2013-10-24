@@ -1,0 +1,21 @@
+/Makefile.ops-c/1.3/Sat Feb  5 19:13:48 2011/-kk/
+/Makefile.ops-h/1.3/Sat Feb  5 19:13:48 2011/-kk/
+/Makefile/1.50/Fri May 10 15:41:44 2013/-kk/
+/cgram.y/1.55/Fri Apr 19 17:43:05 2013/-kk/
+/decl.c/1.57/Fri Apr 19 18:51:14 2013/-kk/
+/emit1.c/1.19/Fri Sep 26 22:52:24 2008/-kk/
+/err.c/1.46/Fri Apr 19 17:43:05 2013/-kk/
+/externs1.h/1.31/Fri Apr 19 17:43:05 2013/-kk/
+/func.c/1.25/Fri Apr 19 17:43:05 2013/-kk/
+/init.c/1.24/Fri Oct  2 18:17:16 2009/-kk/
+/lint1.h/1.27/Fri Apr 19 17:43:05 2013/-kk/
+/main1.c/1.21/Fri Apr 19 17:43:05 2013/-kk/
+/makeman/1.3/Wed Apr 30 13:11:01 2008/-kk/
+/mem1.c/1.15/Fri Jun 24 01:10:31 2011/-kk/
+/mkops/1.8/Mon Feb  7 23:56:18 2011/-kk/
+/op.h/1.6/Sat Feb  5 17:14:14 2011/-kk/
+/ops.def/1.2/Sat Feb  5 17:14:14 2011/-kk/
+/print.c/1.4/Thu Jul 31 15:21:34 2008/-kk/
+/scan.l/1.52/Fri Apr 19 18:51:14 2013/-kk/
+/tree.c/1.73/Fri Apr 19 18:51:14 2013/-kk/
+D

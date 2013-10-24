@@ -1,0 +1,9 @@
+#	$NetBSD$
+
+ioconf savagedrm
+
+include "conf/files"
+
+pseudo-root drm*
+
+savagedrm* at drm?

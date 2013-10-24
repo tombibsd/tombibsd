@@ -1,0 +1,16 @@
+/bfin-modes.def/1.1.1.1/Thu Apr 20 09:54:53 2006/-kk/
+/bfin-protos.h/1.1.1.1/Thu Apr 20 09:54:55 2006/-kk/
+/bfin.c/1.1.1.2/Sat Jun  3 05:40:09 2006/-kk/
+/bfin.h/1.1.1.2/Thu Jan 11 02:56:25 2007/-kk/
+/bfin.md/1.1.1.2/Sat Oct 21 23:05:05 2006/-kk/
+/bfin.opt/1.1.1.1/Thu Apr 20 09:54:51 2006/-kk/
+/crti.s/1.1.1.1/Thu Apr 20 09:54:53 2006/-kk/
+/crtlibid.s/1.1.1.1/Thu Apr 20 09:54:57 2006/-kk/
+/crtn.s/1.1.1.1/Thu Apr 20 09:54:55 2006/-kk/
+/elf.h/1.1.1.1/Thu Apr 20 09:54:55 2006/-kk/
+/lib1funcs.asm/1.1.1.1/Thu Apr 20 09:54:55 2006/-kk/
+/predicates.md/1.1.1.1/Thu Apr 20 09:54:54 2006/-kk/
+/t-bfin-elf/1.1.1.1/Thu Apr 20 09:54:51 2006/-kk/
+/t-bfin/1.1.1.1/Thu Apr 20 09:54:53 2006/-kk/
+/uclinux.h/1.1.1.1/Thu Apr 20 09:54:57 2006/-kk/
+D

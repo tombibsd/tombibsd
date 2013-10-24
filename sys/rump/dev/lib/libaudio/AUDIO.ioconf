@@ -1,0 +1,10 @@
+#	$NetBSD$
+#
+
+ioconf audio
+
+include "conf/files"
+
+pseudo-root audiobus*
+
+audio* at audiobus?

@@ -1,0 +1,10 @@
+# $NetBSD$
+
+ioconf urtwn
+
+include "conf/files"
+include "dev/usb/files.usb"
+
+pseudo-root usbdevif*
+
+urtwn* at usbdevif?

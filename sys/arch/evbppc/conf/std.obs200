@@ -1,0 +1,11 @@
+#	$NetBSD$
+#
+# Standard/required options for obs200
+
+include		"arch/evbppc/conf/std.obs405"
+
+makeoptions	PRDCTTYPE="obs200"
+makeoptions	TEXTADDR=0x450000
+options 	KERNBASE=0x450000
+
+include		"arch/evbppc/conf/files.obs200"

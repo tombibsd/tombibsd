@@ -1,0 +1,4 @@
+#	$NetBSD$
+
+COPY	${DESTDIR}/usr/mdec/ofwboot			ofwboot
+COPY	${NETBSDSRCDIR}/distrib/sparc64/bootfs/boot.cfg	boot.cfg

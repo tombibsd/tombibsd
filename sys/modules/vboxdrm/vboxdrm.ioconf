@@ -1,0 +1,9 @@
+#	$NetBSD$
+
+ioconf vboxdrm
+
+include "conf/files"
+
+pseudo-root drm*
+
+vboxdrm* at drm?

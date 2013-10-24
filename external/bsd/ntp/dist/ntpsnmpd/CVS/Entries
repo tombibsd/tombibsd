@@ -1,0 +1,16 @@
+/Makefile.am/1.1.1.2/Tue Jan 31 21:27:06 2012/-kk/
+/Makefile.in/1.1.1.2/Tue Jan 31 21:27:06 2012/-kk/
+/README/1.1.1.1/Sun Dec 13 16:56:32 2009/-kk/
+/netsnmp_daemonize.c/1.1.1.2/Tue Jan 31 21:27:04 2012/-kk/
+/ntpSnmpSubagentObject.c/1.1.1.2/Tue Jan 31 21:27:06 2012/-kk/
+/ntpSnmpSubagentObject.h/1.1.1.2/Tue Jan 31 21:27:04 2012/-kk/
+/ntp_snmp.h/1.1.1.1/Tue Jan 31 21:27:06 2012/-kk/
+/ntpsnmpd-opts.c/1.1.1.2/Tue Jan 31 21:27:05 2012/-kk/
+/ntpsnmpd-opts.def/1.1.1.2/Tue Jan 31 21:27:04 2012/-kk/
+/ntpsnmpd-opts.h/1.1.1.2/Tue Jan 31 21:27:04 2012/-kk/
+/ntpsnmpd-opts.menu/1.1.1.1/Sun Dec 13 16:56:34 2009/-kk/
+/ntpsnmpd-opts.texi/1.1.1.2/Tue Jan 31 21:27:07 2012/-kk/
+/ntpsnmpd.1/1.1.1.2/Tue Jan 31 21:27:06 2012/-kk/
+/ntpsnmpd.c/1.1.1.2/Tue Jan 31 21:27:06 2012/-kk/
+/ntpv4-mib.mib/1.1.1.2/Tue Jan 31 21:27:05 2012/-kk/
+D

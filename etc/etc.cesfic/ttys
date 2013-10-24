@@ -1,0 +1,3 @@
+# $NetBSD$
+console "/usr/libexec/getty std.9600"   unknown on secure
+constty "/usr/libexec/getty std.9600"   unknown off secure

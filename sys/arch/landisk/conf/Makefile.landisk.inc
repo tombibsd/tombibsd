@@ -1,0 +1,3 @@
+#	$NetBSD$
+
+LINKFORMAT=	-N

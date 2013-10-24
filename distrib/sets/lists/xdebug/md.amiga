@@ -1,0 +1,3 @@
+# $NetBSD$
+./usr/libdata/debug/usr/X11R6/bin/Xamiga.debug		-unknown-	debug
+./usr/libdata/debug/usr/X11R6/bin/Xvfb.debug		-unknown-	debug

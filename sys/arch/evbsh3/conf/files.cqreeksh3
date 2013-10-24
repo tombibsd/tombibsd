@@ -1,0 +1,6 @@
+#	$NetBSD$
+#
+#	CQREEKSH3 configuration info
+
+file	arch/evbsh3/cqreeksh3/cqreeksh3.c
+file	arch/evbsh3/cqreeksh3/clock_machdep.c

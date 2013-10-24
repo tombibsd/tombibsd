@@ -1,0 +1,9 @@
+#	$NetBSD$
+
+ioconf mach64drm
+
+include "conf/files"
+
+pseudo-root drm*
+
+mach64drm* at drm?

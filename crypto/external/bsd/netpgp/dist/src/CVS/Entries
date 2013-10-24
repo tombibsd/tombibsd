@@ -1,0 +1,15 @@
+/Makefile.am/1.5/Sat Aug  7 04:16:40 2010/-kk/
+/Makefile.in/1.6/Fri Nov  5 03:37:18 2010/-kk/
+D/hkpclient////
+D/hkpd////
+D/lib////
+D/libbn////
+D/libdigest////
+D/libmj////
+D/libpaa////
+D/librsa////
+D/libverify////
+D/netpgp////
+D/netpgpkeys////
+D/netpgpverify////
+D/pgp2ssh////

@@ -1,0 +1,3 @@
+#	$NetBSD$
+
+WARNS?=		5

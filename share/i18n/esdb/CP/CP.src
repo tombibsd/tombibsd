@@ -1,0 +1,5 @@
+# $NetBSD$
+
+NAME		"CPx"
+ENCODING	"NONE"
+DEFCSID		"CPx"	0

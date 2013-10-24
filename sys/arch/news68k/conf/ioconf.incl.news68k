@@ -1,0 +1,8 @@
+/* $NetBSD$ */
+
+#include <sys/param.h>
+#include <sys/conf.h>
+#include <sys/device.h>
+#include <sys/mount.h>
+
+#include <machine/cpu.h>

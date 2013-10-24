@@ -1,0 +1,10 @@
+#	$NetBSD$
+
+ioconf auvitek
+
+include "conf/files"
+include "dev/usb/files.usb"
+
+pseudo-root uhub*
+
+auvitek* at uhub?

@@ -1,0 +1,21 @@
+/common_w32res.rc/1.1.1.1/Tue Nov  2 15:20:52 2010/-kk/
+/mythread.h/1.1.1.1/Tue Nov  2 15:20:52 2010/-kk/
+/sysdefs.h/1.1.1.2/Tue Feb 28 13:46:58 2012/-kk/
+/tuklib_common.h/1.1.1.1/Tue Nov  2 15:20:52 2010/-kk/
+/tuklib_config.h/1.1.1.1/Tue Nov  2 15:20:52 2010/-kk/
+/tuklib_cpucores.c/1.1.1.1/Tue Nov  2 15:20:52 2010/-kk/
+/tuklib_cpucores.h/1.1.1.1/Tue Nov  2 15:20:52 2010/-kk/
+/tuklib_exit.c/1.1.1.1/Tue Nov  2 15:20:52 2010/-kk/
+/tuklib_exit.h/1.1.1.1/Tue Nov  2 15:20:52 2010/-kk/
+/tuklib_gettext.h/1.1.1.1/Tue Nov  2 15:20:52 2010/-kk/
+/tuklib_integer.h/1.1.1.1/Tue Nov  2 15:20:52 2010/-kk/
+/tuklib_mbstr.h/1.1.1.1/Tue Nov  2 15:20:52 2010/-kk/
+/tuklib_mbstr_fw.c/1.1.1.1/Tue Nov  2 15:20:52 2010/-kk/
+/tuklib_mbstr_width.c/1.1.1.1/Tue Nov  2 15:20:53 2010/-kk/
+/tuklib_open_stdxxx.c/1.1.1.1/Tue Nov  2 15:20:53 2010/-kk/
+/tuklib_open_stdxxx.h/1.1.1.1/Tue Nov  2 15:20:53 2010/-kk/
+/tuklib_physmem.c/1.1.1.1/Tue Nov  2 15:20:53 2010/-kk/
+/tuklib_physmem.h/1.1.1.1/Tue Nov  2 15:20:53 2010/-kk/
+/tuklib_progname.c/1.1.1.1/Tue Nov  2 15:20:53 2010/-kk/
+/tuklib_progname.h/1.1.1.1/Tue Nov  2 15:20:53 2010/-kk/
+D

@@ -1,0 +1,6 @@
+#	$NetBSD$
+
+PKGBASE=comp-util-sbin
+TINY_VERSION=0
+
+.include "../../../mk/bsd.syspkg.mk"

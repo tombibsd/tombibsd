@@ -1,0 +1,2 @@
+# $NetBSD$
+/dev/md0a / ufs rw 1 1

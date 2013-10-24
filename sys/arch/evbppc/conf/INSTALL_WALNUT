@@ -1,0 +1,15 @@
+# 	$NetBSD$
+
+include "arch/evbppc/conf/WALNUT"
+
+#ident 		"INSTALL_WALNUT-$Revision$"
+
+include "arch/evbppc/conf/INSTALL.inc"
+
+# DEBUG options turned on:
+
+#options 	LOCKDEBUG
+options 	DIAGNOSTIC
+#makeoptions	DEBUG="-g"
+#options 	DEBUG
+#options 	SYSCALL_DEBUG

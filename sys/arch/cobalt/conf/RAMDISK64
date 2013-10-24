@@ -1,0 +1,10 @@
+# $NetBSD$
+
+include 	"arch/cobalt/conf/RAMDISK"
+
+#ident 		"RAMDISK64-$Revision$"
+
+no makeoptions	CPUFLAGS
+makeoptions	LP64="yes"
+options 	EXEC_ELF64
+options 	COMPAT_NETBSD64

@@ -1,0 +1,6 @@
+# $NetBSD$
+
+ISO-5427		UCS			1
+UCS			ISO-5427		1
+KOI7			UCS			1
+UCS			KOI7			1

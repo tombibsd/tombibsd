@@ -1,0 +1,11 @@
+/Makefile/1.3/Fri Feb  8 15:22:03 2013/-kk/
+/aes-ppc.S/1.4/Sun Aug  4 17:15:21 2013/-kk/
+/bn.inc/1.1/Sun Jul 19 23:30:46 2009/-kk/
+/crypto.inc/1.2/Fri Jul 27 23:01:23 2012/-kk/
+/des.inc/1.1/Sun Jul 19 23:30:46 2009/-kk/
+/ppc-mont.S/1.2/Thu Jul 26 19:58:40 2012/-kk/
+/ppc.S/1.3/Thu Jul 26 19:58:40 2012/-kk/
+/ppccpuid.S/1.7/Sun Aug  4 17:15:21 2013/-kk/
+/sha1-ppc.S/1.3/Thu Jul 26 19:58:40 2012/-kk/
+/sha512-ppc.S/1.4/Sun Aug  4 17:15:21 2013/-kk/
+D

@@ -1,0 +1,17 @@
+#	$NetBSD$
+
+LIB=	lldReaderWriterMachO
+
+.include <bsd.init.mk>
+
+.PATH: ${LLD_SRCDIR}/lib/ReaderWriter/MachO
+
+SRCS+=	MachOLinkingContext.cpp \
+	ReferenceKinds.cpp \
+	WriterMachO.cpp
+
+.if defined(HOSTLIB)
+.include <bsd.hostlib.mk>
+.else
+.include <bsd.lib.mk>
+.endif

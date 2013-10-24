@@ -1,0 +1,9 @@
+#	$NetBSD$
+
+ioconf viadrm
+
+include "conf/files"
+
+pseudo-root drm*
+
+viadrm* at drm?

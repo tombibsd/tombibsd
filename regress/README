@@ -1,0 +1,6 @@
+	$NetBSD$
+
+New tests must use the ATF framework; see atf(7)
+and the src/tests directory.
+
+All exceptions need prior approval from core.

@@ -1,0 +1,12 @@
+#	$NetBSD$
+#
+
+ioconf scsitest
+
+include "conf/files"
+include "dev/scsipi/files.scsipi"
+include "rump/dev/files.rump"
+
+pseudo-root mainbus*
+
+scsitest0 at mainbus?

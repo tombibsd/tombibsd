@@ -1,0 +1,8 @@
+#	$NetBSD$
+
+SUBDIR=	
+
+TARGETS+=	passwd aliases amd.home ethers group hosts ipnodes netgroup \
+		networks protocols rpc services netid
+
+.include <bsd.subdir.mk>

@@ -1,0 +1,5 @@
+#	$NetBSD$
+
+define	cast128
+
+file	crypto/cast128/cast128.c	cast128

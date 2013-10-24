@@ -1,0 +1,14 @@
+/files.fpu/1.1/Wed Jun 13 06:01:46 2001/-kk/
+/fpu_add.c/1.4/Sun Dec 11 12:18:42 2005/-kk/
+/fpu_arith.h/1.4/Sat Dec 24 20:07:28 2005/-kk/
+/fpu_compare.c/1.4/Sun Dec 11 12:18:42 2005/-kk/
+/fpu_div.c/1.4/Sun Dec 11 12:18:42 2005/-kk/
+/fpu_emu.c/1.16/Mon Jul 23 04:13:06 2012/-kk/
+/fpu_emu.h/1.4/Mon Jul 23 04:13:06 2012/-kk/
+/fpu_explode.c/1.6/Sun Dec 11 12:18:42 2005/-kk/
+/fpu_extern.h/1.5/Mon Jul 23 04:13:06 2012/-kk/
+/fpu_implode.c/1.6/Sun Dec 11 12:18:42 2005/-kk/
+/fpu_mul.c/1.4/Sun Dec 11 12:18:42 2005/-kk/
+/fpu_sqrt.c/1.4/Sun Dec 11 12:18:42 2005/-kk/
+/fpu_subr.c/1.4/Sun Dec 11 12:18:42 2005/-kk/
+D

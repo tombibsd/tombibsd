@@ -1,0 +1,5 @@
+#	$NetBSD$
+#	H/PC touch panel interface.
+
+define	hpctpanel: tpcalib
+file dev/hpc/hpctpanel.c			hpctpanel

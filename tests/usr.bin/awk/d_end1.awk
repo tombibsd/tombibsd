@@ -1,0 +1,5 @@
+# $NetBSD$
+
+END {
+	print NF;
+}

@@ -1,0 +1,5 @@
+#	$NetBSD$
+#	Remember to update distrib/sets/lists/base/shl.* when changing
+#
+major=19
+minor=0

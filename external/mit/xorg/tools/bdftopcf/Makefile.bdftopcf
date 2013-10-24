@@ -1,0 +1,7 @@
+#	$NetBSD$
+
+BDFTOPCFDIR!=	cd ${NETBSDSRCDIR}/external/mit/xorg/tools/bdftopcf && ${PRINTOBJDIR}
+BDFTOPCF=	${BDFTOPCFDIR}/bdftopcf
+
+${BDFTOPCF}:
+	(cd ${NETBSDSRCDIR}/external/mit/xorg/tools/bdftopcf && ${MAKE})

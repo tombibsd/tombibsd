@@ -1,0 +1,3 @@
+#!/bin/sh
+# $NetBSD$
+exec mount_msdos -G "$@"

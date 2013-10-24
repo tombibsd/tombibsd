@@ -1,0 +1,46 @@
+/Makefile.inc/1.15/Tue Apr 30 01:42:04 2013/-kk/
+/README.NetBSD/1.2/Tue May 21 23:51:05 2002/-kk/
+/README.txt/1.1/Tue Jun  6 08:15:02 2000/-kk/
+/eqdf2.c/1.1/Tue Jun  6 08:15:02 2000/-kk/
+/eqsf2.c/1.1/Tue Jun  6 08:15:03 2000/-kk/
+/eqtf2.c/1.1/Mon Jan 17 10:08:35 2011/-kk/
+/fpgetmask.c/1.4/Mon Apr 28 20:23:00 2008/-kk/
+/fpgetround.c/1.3/Mon Apr 28 20:23:00 2008/-kk/
+/fpgetsticky.c/1.3/Mon Apr 28 20:23:00 2008/-kk/
+/fpsetmask.c/1.5/Thu Jan 10 08:16:10 2013/-kk/
+/fpsetround.c/1.4/Thu Jan 10 08:16:10 2013/-kk/
+/fpsetsticky.c/1.4/Thu Jan 10 08:16:10 2013/-kk/
+/gedf2.c/1.1/Tue Jun  6 08:15:05 2000/-kk/
+/gesf2.c/1.1/Tue Jun  6 08:15:05 2000/-kk/
+/getf2.c/1.1/Mon Jan 17 10:08:35 2011/-kk/
+/gexf2.c/1.2/Mon Sep 27 10:16:24 2004/-kk/
+/gtdf2.c/1.1/Tue Jun  6 08:15:05 2000/-kk/
+/gtsf2.c/1.1/Tue Jun  6 08:15:06 2000/-kk/
+/gttf2.c/1.1/Mon Jan 17 10:08:35 2011/-kk/
+/gtxf2.c/1.2/Mon Sep 27 10:16:24 2004/-kk/
+/ledf2.c/1.1/Tue Jun  6 08:15:06 2000/-kk/
+/lesf2.c/1.1/Tue Jun  6 08:15:06 2000/-kk/
+/letf2.c/1.1/Mon Jan 17 10:08:35 2011/-kk/
+/ltdf2.c/1.1/Tue Jun  6 08:15:06 2000/-kk/
+/ltsf2.c/1.1/Tue Jun  6 08:15:06 2000/-kk/
+/lttf2.c/1.1/Mon Jan 17 10:08:35 2011/-kk/
+/nedf2.c/1.1/Tue Jun  6 08:15:07 2000/-kk/
+/negdf2.c/1.1/Tue Jun  6 08:15:07 2000/-kk/
+/negsf2.c/1.1/Tue Jun  6 08:15:07 2000/-kk/
+/negtf2.c/1.1/Mon Jan 17 10:08:35 2011/-kk/
+/negxf2.c/1.2/Mon Sep 27 10:16:24 2004/-kk/
+/nesf2.c/1.1/Tue Jun  6 08:15:07 2000/-kk/
+/netf2.c/1.1/Mon Jan 17 10:08:35 2011/-kk/
+/nexf2.c/1.2/Mon Sep 27 10:16:24 2004/-kk/
+/softfloat-for-gcc.h/1.12/Thu Aug  1 23:21:19 2013/-kk/
+/softfloat-history.txt/1.1/Tue Jun  6 08:15:08 2000/-kk/
+/softfloat-source.txt/1.2/Fri Nov 24 19:46:58 2006/-kk/
+/softfloat-specialize/1.8/Thu Jan 10 08:16:10 2013/-kk/
+/softfloat.txt/1.2/Fri Nov 24 19:46:58 2006/-kk/
+/timesoftfloat.c/1.1/Tue Jun  6 08:15:11 2000/-kk/
+/timesoftfloat.txt/1.1/Tue Jun  6 08:15:11 2000/-kk/
+/unorddf2.c/1.1/Tue May  6 08:58:19 2003/-kk/
+/unordsf2.c/1.1/Tue May  6 08:58:20 2003/-kk/
+D/bits32////
+D/bits64////
+D/templates////

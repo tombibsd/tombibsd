@@ -1,0 +1,9 @@
+# 	$NetBSD$
+
+include "arch/evbppc/conf/MPC8548CDS"
+
+#ident 		"INSTALL_MPC8548CDS-$Revision$"
+
+include "arch/evbppc/conf/INSTALL.inc"
+
+no config nfsnetbsd

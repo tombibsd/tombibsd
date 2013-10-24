@@ -1,0 +1,5 @@
+#	$NetBSD$
+#
+# Build a 32-bit `sparc64' kernel, that is compatible with our userland.
+
+include "arch/sparc64/conf/GENERIC32"

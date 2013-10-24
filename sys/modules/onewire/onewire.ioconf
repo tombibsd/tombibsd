@@ -1,0 +1,8 @@
+#	$NetBSD$
+
+ioconf		onewire
+
+include		"conf/files"
+
+pseudo-root	onewirebus*
+onewire*	at onewirebus?

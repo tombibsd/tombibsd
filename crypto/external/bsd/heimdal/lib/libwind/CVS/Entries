@@ -1,0 +1,13 @@
+/Makefile/1.1/Wed Apr 13 19:16:56 2011/-kk/
+/bidi_table.c/1.1/Wed Apr 13 19:08:57 2011/-kk/
+/bidi_table.h/1.1/Wed Apr 13 19:08:57 2011/-kk/
+/combining_table.c/1.1/Wed Apr 13 19:08:57 2011/-kk/
+/combining_table.h/1.1/Wed Apr 13 19:08:57 2011/-kk/
+/errorlist_table.c/1.1/Wed Apr 13 19:08:57 2011/-kk/
+/errorlist_table.h/1.1/Wed Apr 13 19:08:57 2011/-kk/
+/map_table.c/1.1/Wed Apr 13 19:08:57 2011/-kk/
+/map_table.h/1.1/Wed Apr 13 19:08:57 2011/-kk/
+/normalize_table.c/1.1/Wed Apr 13 19:08:57 2011/-kk/
+/normalize_table.h/1.1/Wed Apr 13 19:08:57 2011/-kk/
+/shlib_version/1.1/Wed Apr 13 19:16:56 2011/-kk/
+D

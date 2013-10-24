@@ -1,0 +1,3 @@
+# $NetBSD$
+
+GCC_MACHINE_ARCH=${MACHINE_ARCH:S/earmv5/earm/}

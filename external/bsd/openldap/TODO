@@ -1,0 +1,9 @@
+#	$NetBSD$
+
+install ldap.conf ?
+
+add patches from pkgsrc/databases/openldap/patches ?
+
+build server?
+
+build: slappasswd

@@ -1,0 +1,6 @@
+# $NetBSD$
+./usr/mdec/aoutboot				base-sysutil-bin
+./usr/mdec/ip2xboot				base-sysutil-bin
+./usr/mdec/ip30boot				base-sysutil-bin
+./usr/mdec/ip3xboot				base-sysutil-bin
+./usr/mdec/sgivol				base-sysutil-bin

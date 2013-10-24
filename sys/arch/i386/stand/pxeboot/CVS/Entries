@@ -1,0 +1,14 @@
+/Makefile/1.21/Fri May 20 22:29:56 2011/-kk/
+/conf.c/1.5/Sun Dec 11 12:17:49 2005/-kk/
+/dev_net.c/1.11/Sun Jul 17 20:54:42 2011/-kk/
+/dev_net.h/1.2/Sat Mar 14 14:46:00 2009/-kk/
+/devopen.c/1.9/Mon Oct 26 19:16:56 2009/-kk/
+/main.c/1.30/Wed Mar  6 11:34:37 2013/-kk/
+/pxe.c/1.17/Sun Dec 13 23:01:42 2009/-kk/
+/pxe.h/1.6/Wed Dec 22 20:46:42 2010/-kk/
+/pxe_call.S/1.3/Sat Feb  1 14:48:19 2003/-kk/
+/pxe_netif.h/1.2/Sun Dec 13 23:01:42 2009/-kk/
+/pxeboot.h/1.1/Sat Feb 16 03:37:40 2002/-kk/
+/start_pxe.S/1.6/Fri Mar 18 17:46:26 2011/-kk/
+/version/1.3/Tue Jul 15 23:16:27 2008/-kk/
+D

@@ -1,0 +1,6 @@
+#	$NetBSD$
+
+deffs	NULLFS
+
+file	miscfs/nullfs/null_vfsops.c	nullfs
+file	miscfs/nullfs/null_vnops.c	nullfs

@@ -1,0 +1,8 @@
+$NetBSD$
+
+# The newvers.sh looks for the line below.  We use this method
+# rather than $3 of the dollar-NetBSD-dollar line above so that
+# this version can be on branch-files also.
+Version: 1.0
+
+1.0:	Initial two-stage pmax netboot

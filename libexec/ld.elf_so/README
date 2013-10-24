@@ -1,0 +1,6 @@
+$NetBSD$
+
+TO DO:
+
+* Support for coexistence of 32-bit and 64-bit ELF on platforms that can
+  do that.

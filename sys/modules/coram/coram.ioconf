@@ -1,0 +1,10 @@
+#	$NetBSD$
+
+ioconf coram
+
+include "conf/files"
+include "dev/pci/files.pci"
+
+pseudo-root pci*
+
+coram* at pci? dev ? function ?

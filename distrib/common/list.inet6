@@ -1,0 +1,6 @@
+#	$NetBSD$
+
+PROG	sbin/ping6
+PROG	sbin/rtsol
+
+SPECIAL	ping6		srcdir	distrib/utils/x_ping6

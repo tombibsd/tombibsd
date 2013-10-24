@@ -1,0 +1,6 @@
+# 
+# etc/protocols (ramdisk version)
+# $NetBSD$
+#
+ip	0	IP
+icmp	1	ICMP

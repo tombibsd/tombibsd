@@ -1,0 +1,41 @@
+/AAAREADME/1.1.1.2/Wed Jan  2 18:58:23 2013/-kk/
+/COMPATIBILITY/1.1.1.1/Tue Jun 23 10:08:14 2009/-kk/
+/COPYRIGHT/1.1.1.1/Tue Jun 23 10:08:14 2009/-kk/
+/HISTORY/1.1.1.19/Wed Sep 25 19:06:17 2013/-kk/
+/INSTALL/1.1.1.4/Wed Sep 25 19:06:18 2013/-kk/
+/IPv6-ChangeLog/1.1.1.1/Tue Jun 23 10:08:14 2009/-kk/
+/LICENSE/1.1.1.1/Tue Jun 23 10:08:17 2009/-kk/
+/Makefile.in/1.1.1.4/Wed Sep 25 19:06:17 2013/-kk/
+/Makefile.init/1.1.1.1/Tue Jun 23 10:08:17 2009/-kk/
+/Makefile/1.1.1.1/Tue Jun 23 10:08:17 2009/-kk/
+/PORTING/1.1.1.1/Tue Jun 23 10:08:17 2009/-kk/
+/RELEASE_NOTES-1.0/1.1.1.1/Tue Jun 23 10:08:17 2009/-kk/
+/RELEASE_NOTES-1.1/1.1.1.1/Tue Jun 23 10:08:17 2009/-kk/
+/RELEASE_NOTES-2.0/1.1.1.1/Tue Jun 23 10:08:17 2009/-kk/
+/RELEASE_NOTES-2.1/1.1.1.1/Tue Jun 23 10:08:17 2009/-kk/
+/RELEASE_NOTES-2.2/1.1.1.1/Tue Jun 23 10:08:17 2009/-kk/
+/RELEASE_NOTES-2.3/1.1.1.1/Tue Jun 23 10:08:17 2009/-kk/
+/RELEASE_NOTES-2.4/1.1.1.1/Tue Jun 23 10:08:18 2009/-kk/
+/RELEASE_NOTES-2.5/1.1.1.1/Tue Jun 23 10:08:18 2009/-kk/
+/RELEASE_NOTES-2.6/1.1.1.1/Thu Jun 17 18:05:49 2010/-kk/
+/RELEASE_NOTES-2.7/1.1.1.1/Wed Mar  2 19:31:24 2011/-kk/
+/RELEASE_NOTES-2.8/1.1.1.1/Wed Jan  2 18:58:28 2013/-kk/
+/RELEASE_NOTES-2.9/1.1.1.1/Wed Sep 25 19:06:18 2013/-kk/
+/RELEASE_NOTES/1.1.1.10/Wed Sep 25 19:06:17 2013/-kk/
+/TLS_ACKNOWLEDGEMENTS/1.1.1.1/Tue Jun 23 10:08:17 2009/-kk/
+/TLS_CHANGES/1.1.1.1/Tue Jun 23 10:08:18 2009/-kk/
+/TLS_LICENSE/1.1.1.1/Tue Jun 23 10:08:18 2009/-kk/
+/TLS_TODO/1.1.1.1/Tue Jun 23 10:08:18 2009/-kk/
+/US_PATENT_6321267/1.1.1.1/Tue Jun 23 10:08:18 2009/-kk/
+/makedefs/1.8/Wed Sep 25 19:12:34 2013/-kk/
+/pflogsumm_quickfix.txt/1.1.1.1/Wed Jan  2 18:58:30 2013/-kk/
+/postfix-install/1.4/Wed Jan  2 19:18:30 2013/-kk/
+D/README_FILES////
+D/conf////
+D/examples////
+D/html////
+D/implementation-notes////
+D/man////
+D/mantools////
+D/proto////
+D/src////

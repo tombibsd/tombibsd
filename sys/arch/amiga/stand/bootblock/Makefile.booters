@@ -1,0 +1,6 @@
+#	$NetBSD$
+
+.include <bsd.own.mk>
+
+RELOC2BB=	${TOOL_AMIGAELF2BB}
+TXLT=		${TOOL_AMIGATXLT}

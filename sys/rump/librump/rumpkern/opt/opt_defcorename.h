@@ -1,0 +1,3 @@
+/*	$NetBSD$	*/
+
+#define DEFCORENAME	"rumpdump"

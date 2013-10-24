@@ -1,0 +1,13 @@
+/Makefile.in/1.1.1.2/Sun Sep  9 16:08:04 2012/-kk/
+/ns_date.c/1.1.1.2/Sun Sep  9 16:08:03 2012/-kk/
+/ns_name.c/1.1.1.2/Sun Sep  9 16:08:04 2012/-kk/
+/ns_netint.c/1.1.1.2/Sun Sep  9 16:08:04 2012/-kk/
+/ns_newmsg.c/1.1.1.2/Sun Sep  9 16:08:05 2012/-kk/
+/ns_parse.c/1.1.1.2/Sun Sep  9 16:08:05 2012/-kk/
+/ns_print.c/1.1.1.2/Sun Sep  9 16:08:03 2012/-kk/
+/ns_rdata.c/1.1.1.2/Sun Sep  9 16:08:03 2012/-kk/
+/ns_samedomain.c/1.1.1.2/Sun Sep  9 16:08:03 2012/-kk/
+/ns_sign.c/1.1.1.2/Sun Sep  9 16:08:05 2012/-kk/
+/ns_ttl.c/1.1.1.2/Sun Sep  9 16:08:03 2012/-kk/
+/ns_verify.c/1.1.1.2/Sun Sep  9 16:08:04 2012/-kk/
+D

@@ -1,0 +1,8 @@
+# $NetBSD$
+#
+# tree tables can have address blocks
+#
+# entry comment 1 (optional)
+198.51.100.40/30
+# entry comment 2 (optional)
+192.0.2.7

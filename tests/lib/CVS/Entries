@@ -1,0 +1,25 @@
+/Makefile.inc/1.1/Wed Nov  3 16:10:21 2010/-kk/
+/Makefile/1.23/Sat Feb 16 21:40:07 2013/-kk/
+D/csu////
+D/libbluetooth////
+D/libbpfjit////
+D/libc////
+D/libcrypt////
+D/libcurses////
+D/libdes////
+D/libevent////
+D/libexecinfo////
+D/libm////
+D/libobjc////
+D/libposix////
+D/libppath////
+D/libprop////
+D/libpthread////
+D/librt////
+D/librumpclient////
+D/librumphijack////
+D/libskey////
+D/libsljit////
+D/libtre////
+D/libutil////
+D/semaphore////

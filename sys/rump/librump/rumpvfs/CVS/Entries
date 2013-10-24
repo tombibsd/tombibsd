@@ -1,0 +1,15 @@
+/Makefile.rumpvfs/1.36/Fri Mar 15 12:09:59 2013/-kk/
+/Makefile/1.1/Wed Nov 19 14:10:49 2008/-kk/
+/compat.c/1.10/Thu Aug 15 21:28:23 2013/-kk/
+/devnodes.c/1.8/Thu Mar  7 22:12:34 2013/-kk/
+/devnull.c/1.4/Thu Apr  4 01:29:55 2013/-kk/
+/rump_vfs.c/1.77/Mon Jun 10 19:48:22 2013/-kk/
+/rump_vfs_private.h/1.17/Thu Mar  7 22:12:34 2013/-kk/
+/rumpblk.c/1.54/Tue Apr 30 00:03:54 2013/-kk/
+/rumpfs.c/1.120/Mon Aug  5 11:48:22 2013/-kk/
+/rumpvfs.ifspec/1.8/Sun Nov 18 18:39:23 2012/-kk/
+/rumpvfs_if_priv.h/1.10/Sun Nov 18 18:40:45 2012/-kk/
+/rumpvfs_if_wrappers.c/1.10/Sun Nov 18 18:40:45 2012/-kk/
+/rumpvnode_if.c/1.12/Wed Jul 17 21:21:34 2013/-kk/
+/vm_vfs.c/1.33/Sun Jun  3 16:46:08 2012/-kk/
+D

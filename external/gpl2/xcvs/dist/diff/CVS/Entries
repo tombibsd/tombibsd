@@ -1,0 +1,27 @@
+/ChangeLog/1.1.1.1/Tue Apr  7 22:10:10 2009/-kk/
+/Makefile.am/1.1.1.1/Tue Apr  7 22:10:10 2009/-kk/
+/Makefile.in/1.3/Thu Mar  8 20:54:20 2012/-kk/
+/README/1.1.1.1/Tue Apr  7 22:10:10 2009/-kk/
+/analyze.c/1.1.1.1/Tue Apr  7 22:10:11 2009/-kk/
+/build_diff.com/1.1.1.1/Tue Apr  7 22:10:10 2009/-kk/
+/cmpbuf.c/1.1.1.1/Tue Apr  7 22:10:11 2009/-kk/
+/cmpbuf.h/1.1.1.1/Tue Apr  7 22:10:11 2009/-kk/
+/context.c/1.1.1.1/Tue Apr  7 22:10:11 2009/-kk/
+/diagmeet.note/1.1.1.1/Tue Apr  7 22:10:11 2009/-kk/
+/diff.c/1.1.1.1/Tue Apr  7 22:10:10 2009/-kk/
+/diff.h/1.1.1.1/Tue Apr  7 22:10:11 2009/-kk/
+/diff3.c/1.3/Thu Mar  8 20:50:46 2012/-kk/
+/diffrun.h/1.1.1.1/Tue Apr  7 22:10:11 2009/-kk/
+/dir.c/1.1.1.1/Tue Apr  7 22:10:11 2009/-kk/
+/ed.c/1.1.1.1/Tue Apr  7 22:10:11 2009/-kk/
+/ifdef.c/1.1.1.1/Tue Apr  7 22:10:11 2009/-kk/
+/io.c/1.1.1.1/Tue Apr  7 22:10:11 2009/-kk/
+/libdiff.dep/1.1.1.1/Tue Apr  7 22:10:11 2009/-kk/
+/libdiff.dsp/1.1.1.1/Tue Apr  7 22:10:11 2009/-kk/
+/libdiff.mak/1.1.1.1/Tue Apr  7 22:10:11 2009/-kk/
+/normal.c/1.1.1.1/Tue Apr  7 22:10:11 2009/-kk/
+/side.c/1.2/Fri Jan  6 15:16:02 2012/-kk/
+/system.h/1.1.1.1/Tue Apr  7 22:10:11 2009/-kk/
+/util.c/1.2/Thu Mar  8 20:50:55 2012/-kk/
+/version.c/1.1.1.1/Tue Apr  7 22:10:11 2009/-kk/
+D

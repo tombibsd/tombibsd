@@ -1,0 +1,10 @@
+#	$NetBSD$
+
+ioconf pseye
+
+include "conf/files"
+include "dev/usb/files.usb"
+
+pseudo-root uhub*
+
+pseye* at uhub?

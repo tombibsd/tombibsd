@@ -1,0 +1,5 @@
+#	$NetBSD$
+/kern	/kern		kernfs	rw		0 0
+/proc	/proc		procfs	rw		0 0
+fdesc	/dev		fdesc   ro,-o=union	0 0
+ptyfs	/dev/pts	ptyfs	rw		0 0

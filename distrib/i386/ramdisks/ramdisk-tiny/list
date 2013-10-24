@@ -1,0 +1,4 @@
+#	$NetBSD$
+
+SPECIAL	umount		srcdir	distrib/utils/x_umount
+SPECIAL	gzip		srcdir	distrib/utils/x_gzip

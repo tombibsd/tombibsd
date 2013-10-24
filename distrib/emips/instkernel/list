@@ -1,0 +1,4 @@
+#	$NetBSD$
+
+COPY	${DESTDIR}/usr/mdec/boot.emips	boot.emips
+COPY	${OBJDIR}/netbsd-INSTALL.gz	netbsd

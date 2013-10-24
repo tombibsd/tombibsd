@@ -1,0 +1,9 @@
+#	$NetBSD$
+
+ioconf r128drm 
+
+include "conf/files"
+
+pseudo-root drm*
+
+r128drm* at drm?

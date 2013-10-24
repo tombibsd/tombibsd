@@ -1,0 +1,10 @@
+# $NetBSD$
+
+ioconf acpibat
+
+include "conf/files"
+include "dev/acpi/files.acpi"
+
+pseudo-root acpi*
+
+acpibat* at acpi?

@@ -1,0 +1,10 @@
+# $NetBSD$
+
+ioconf lm_wbsio
+
+include "conf/files"
+include "dev/isa/files.isa"
+
+pseudo-root wbsio*
+
+lm* at wbsio?

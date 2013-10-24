@@ -1,0 +1,13 @@
+# $NetBSD$
+#
+# GENERIC machine description file for 32-bit kernel
+#
+
+include 	"arch/sparc64/conf/GENERIC"
+
+#ident		"GENERIC32-$Revision$"
+
+include 	"arch/sparc64/conf/std.sparc64-32"
+
+no options 	COMPAT_NETBSD32
+no options 	COMPAT_SVR4_32

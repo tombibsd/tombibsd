@@ -1,0 +1,4 @@
+# $NetBSD$
+
+headers:
+	sh genheaders.sh

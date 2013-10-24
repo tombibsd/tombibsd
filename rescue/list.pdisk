@@ -1,0 +1,4 @@
+#	$NetBSD$
+
+PROG	pdisk
+SPECIAL pdisk   srcdir  external/bsd/pdisk/bin

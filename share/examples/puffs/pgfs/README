@@ -1,0 +1,15 @@
+$NetBSD$
+
+pgfs - a puffs file system server backed by a PostgreSQL database
+
+install:
+	install postgresql (tested with 9.2devel)
+	# make
+	# make install
+
+newfs:
+	# createdb hoge
+	# psql -f newfs.sql hoge
+
+mount:
+	# mount_pgfs -o dbname=hoge,dbuser=takashi,nconn=16 a /mnt

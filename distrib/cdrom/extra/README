@@ -1,0 +1,7 @@
+$NetBSD$
+
+This "extra" directory exists to hold files that should be provided on any
+TNF-created (and hopefully, third party created) CD-ROM images, such as
+copyrights, boot instructions, etc.
+
+- tv@NetBSD.org

@@ -1,0 +1,17 @@
+#!/bin/sh
+#
+# $NetBSD$
+#
+
+# PROVIDE: route6d
+# REQUIRE: network mountcritlocal
+# BEFORE:  NETWORKING
+
+$_rc_subr_loaded . /etc/rc.subr
+
+name="route6d"
+rcvar=$name
+command="/usr/sbin/${name}"
+
+load_rc_config $name
+run_rc_command "$1"

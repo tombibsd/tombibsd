@@ -1,0 +1,2 @@
+#	$NetBSD$
+/dev/cd0a	/cdrom	cd9660	ro,noauto,nodev,nosuid	0 0

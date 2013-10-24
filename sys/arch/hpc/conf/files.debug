@@ -1,0 +1,8 @@
+#	$NetBSD$
+
+#
+# Debug utility
+#
+
+defflag debug_hpc.h	HPC_DEBUG_LCD HPC_DEBUG_INTERRUPT_MONITOR
+file	arch/hpc/hpc/debug_subr.c

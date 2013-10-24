@@ -1,0 +1,9 @@
+# $NetBSD$
+
+# Standard information for Sun2 machines.
+machine	sun2 m68k sun68k
+include		"conf/std"			# MI standard options
+include		"arch/m68k/conf/std.m68k"	# m68k standard options
+
+# XXX temporary option until sun3 port migrates to all sun68k stuff
+options 	_SUN2_

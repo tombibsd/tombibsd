@@ -1,0 +1,3 @@
+#	$NetBSD$
+
+COPY	${MAKEDEVSCRIPT}	dev/MAKEDEV		555

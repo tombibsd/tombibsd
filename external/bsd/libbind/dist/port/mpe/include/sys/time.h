@@ -1,0 +1,3 @@
+/*	$NetBSD$	*/
+
+/* Omitted from MPE. */

@@ -1,0 +1,9 @@
+#	$NetBSD$
+
+#
+#	ZSCONS -- like GENERIC, but use zs serial console.
+#
+
+include "arch/x68k/conf/GENERIC"
+
+options 	ZSCONSOLE,ZSCN_SPEED="9600"	# use serial console

@@ -1,0 +1,10 @@
+#	$NetBSD$
+
+ioconf cas
+
+include "conf/files"
+include "dev/pci/files.pci"
+
+pseudo-root pci*
+
+cas* at pci? dev ? function ?

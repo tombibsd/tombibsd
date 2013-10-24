@@ -1,0 +1,14 @@
+/test_allocator.h/1.1.1.1/Fri May 17 23:02:32 2013/-kk/
+/test_deleter.h/1.1.1.1/Fri May 17 23:02:32 2013/-kk/
+/types.pass.cpp/1.1.1.1/Fri May 17 23:02:32 2013/-kk/
+D/util.smartptr.getdeleter////
+D/util.smartptr.shared.assign////
+D/util.smartptr.shared.cast////
+D/util.smartptr.shared.cmp////
+D/util.smartptr.shared.const////
+D/util.smartptr.shared.create////
+D/util.smartptr.shared.dest////
+D/util.smartptr.shared.io////
+D/util.smartptr.shared.mod////
+D/util.smartptr.shared.obs////
+D/util.smartptr.shared.spec////

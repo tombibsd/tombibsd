@@ -1,0 +1,6 @@
+$NetBSD$
+
+1.1:	Boot program for mvme68k, initial revision
+	(import from sun3 port, adapt to mvme68k by Chuck Cranor)
+1.2:	Support verbose/quiet boot.
+1.3:	switched to using MI libsa and libkern

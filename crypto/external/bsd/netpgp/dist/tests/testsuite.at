@@ -1,0 +1,14 @@
+# $NetBSD$
+
+AT_INIT([netpgp])
+
+AT_TESTED([netpgp netpgpverify])
+
+m4_include([userid.at])
+
+m4_include([init.at])
+
+m4_include([cat.at])
+m4_include([crypt.at])
+m4_include([detached.at])
+m4_include([verify.at])

@@ -1,0 +1,7 @@
+#	$NetBSD$
+
+FCCACHEDIR!=	cd ${NETBSDSRCDIR}/external/mit/xorg/tools/fc-cache && ${PRINTOBJDIR}
+FCCACHE=	${FCCACHEDIR}/fc-cache
+
+${FCCACHE}:
+	(cd ${NETBSDSRCDIR}/external/mit/xorg/tools/fc-cache && ${MAKE})

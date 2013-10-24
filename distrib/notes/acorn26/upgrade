@@ -1,0 +1,5 @@
+.\"	$NetBSD$
+.
+.\" No machine-dependent upgrade problems yet.
+.
+.so ../common/upgrade

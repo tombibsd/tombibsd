@@ -1,0 +1,7 @@
+#	$NetBSD$
+
+XKBCOMPDIR!=	cd ${NETBSDSRCDIR}/external/mit/xorg/tools/xkbcomp && ${PRINTOBJDIR}
+XKBCOMP=	${XKBCOMPDIR}/xkbcomp
+
+${XKBCOMP}:
+	(cd ${NETBSDSRCDIR}/external/mit/xorg/tools/xkbcomp && ${MAKE})

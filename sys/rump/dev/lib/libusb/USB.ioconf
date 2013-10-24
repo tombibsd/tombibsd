@@ -1,0 +1,20 @@
+#	$NetBSD$
+#
+
+ioconf usb
+
+include "conf/files"
+include "dev/usb/files.usb"
+include "rump/dev/files.rump"
+
+pseudo-root ugenhc*
+
+# USB bus support
+usb*    at ugenhc?
+
+# USB ROOT Hub
+#
+# Do *NOT* configure uhub @ uhub.
+# That is not compatible with ugen.
+#
+uhub*   at usb?

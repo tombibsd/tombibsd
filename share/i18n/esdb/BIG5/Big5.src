@@ -1,0 +1,8 @@
+# $NetBSD$
+
+NAME		"encoding"
+ENCODING	"BIG5"
+VARIABLE	"variable"
+DEFCSID		"ISO646-US"		0
+DEFCSID		"encoding"		1
+INVALID		0x3F	# '?'

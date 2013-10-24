@@ -1,0 +1,14 @@
+#	$NetBSD$
+#
+# standard NetBSD/hpcarm options
+
+machine	hpcarm arm
+include		"conf/std"	# MI standard options
+include		"arch/arm/conf/std.arm"	# arch standard options
+
+options 	EXEC_AOUT
+options 	EXEC_ELF32
+options 	EXEC_SCRIPT
+
+# To support easy transit to ../arch/arm/arm32
+options 	ARM32

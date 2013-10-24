@@ -1,0 +1,3 @@
+## $NetBSD$
+
+SUBDIRS = src

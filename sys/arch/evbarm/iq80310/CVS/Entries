@@ -1,0 +1,15 @@
+/com_obio.c/1.14/Fri Jul  1 20:41:16 2011/-kk/
+/i80312_mainbus.c/1.16/Sun Oct 14 18:37:55 2012/-kk/
+/iq80310_7seg.c/1.10/Fri Jul  1 20:41:16 2011/-kk/
+/iq80310_intr.c/1.32/Wed Oct  3 16:51:44 2012/-kk/
+/iq80310_intr.h/1.8/Sat Feb 14 12:44:20 2009/-kk/
+/iq80310_machdep.c/1.84/Sun Aug 18 15:58:20 2013/-kk/
+/iq80310_pci.c/1.11/Fri Jul  1 20:41:16 2011/-kk/
+/iq80310_start.S/1.5/Mon Jan 31 06:28:03 2011/-kk/
+/iq80310_timer.c/1.22/Fri Jul  1 20:41:16 2011/-kk/
+/iq80310reg.h/1.6/Sat Dec 24 20:06:59 2005/-kk/
+/iq80310var.h/1.8/Wed Oct  3 16:51:44 2012/-kk/
+/obio.c/1.20/Fri Jul  1 20:41:16 2011/-kk/
+/obio_space.c/1.14/Fri Jul  1 20:41:16 2011/-kk/
+/obiovar.h/1.4/Mon Jun 16 17:40:52 2003/-kk/
+D

@@ -1,0 +1,22 @@
+/.cvsignore/1.1.1.1/Fri Sep 19 20:07:22 2008/-kk/
+/Makefile.am/1.1.1.1/Fri Sep 19 20:07:22 2008/-kk/
+/amu.h/1.1.1.2/Fri Mar 20 20:26:55 2009/-kk/
+/clnt_sperrno.c/1.1.1.2/Fri Mar 20 20:26:55 2009/-kk/
+/hasmntopt.c/1.1.1.2/Fri Mar 20 20:26:55 2009/-kk/
+/memcmp.c/1.1.1.2/Fri Mar 20 20:26:55 2009/-kk/
+/misc_rpc.c/1.1.1.2/Fri Mar 20 20:26:55 2009/-kk/
+/mount_fs.c/1.1.1.2/Fri Mar 20 20:26:55 2009/-kk/
+/mtab.c/1.1.1.2/Fri Mar 20 20:26:55 2009/-kk/
+/nfs_prot_xdr.c/1.1.1.2/Fri Mar 20 20:26:55 2009/-kk/
+/strcasecmp.c/1.1.1.2/Fri Mar 20 20:26:55 2009/-kk/
+/strdup.c/1.1.1.2/Fri Mar 20 20:26:55 2009/-kk/
+/strerror.c/1.1.1.2/Fri Mar 20 20:26:56 2009/-kk/
+/strlcat.c/1.1.1.2/Fri Mar 20 20:26:56 2009/-kk/
+/strlcpy.c/1.1.1.2/Fri Mar 20 20:26:56 2009/-kk/
+/strstr.c/1.1.1.2/Fri Mar 20 20:26:56 2009/-kk/
+/strutil.c/1.1.1.2/Fri Mar 20 20:26:56 2009/-kk/
+/ualarm.c/1.1.1.2/Fri Mar 20 20:26:56 2009/-kk/
+/wire.c/1.1.1.2/Fri Mar 20 20:26:56 2009/-kk/
+/xdr_func.c/1.1.1.2/Fri Mar 20 20:26:56 2009/-kk/
+/xutil.c/1.1.1.2/Fri Mar 20 20:26:55 2009/-kk/
+D

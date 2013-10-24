@@ -1,0 +1,8 @@
+# $NetBSD$
+
+device	bonito: pcibus
+file	arch/mips/bonito/bonito_pci.c		bonito
+file	arch/mips/bonito/bonito_iobc.c		bonito
+
+attach	bonito at mainbus with bonito_mainbus
+#file	arch/algor/dev/bonito_mainbus.c		bonito_mainbus

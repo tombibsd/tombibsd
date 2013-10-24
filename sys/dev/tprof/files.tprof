@@ -1,0 +1,4 @@
+#	$NetBSD$
+
+defpseudo tprof
+file	dev/tprof/tprof.c	tprof

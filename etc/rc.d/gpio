@@ -1,0 +1,30 @@
+#!/bin/sh
+#
+# $NetBSD$
+#
+
+# PROVIDE: gpio
+# BEFORE:  securelevel
+
+$_rc_subr_loaded . /etc/rc.subr
+
+name="gpio"
+rcvar=$name
+start_cmd="gpio_start"
+stop_cmd=":"
+
+gpio_start()
+{
+	if [ -f /etc/gpio.conf ]; then
+		echo "Configuring GPIO."
+		cat /etc/gpio.conf |
+		while read -r args; do
+			args=${args%%#*}		# strip comments
+			test -z "$args" && continue
+			/usr/sbin/gpioctl -q $args
+		done
+	fi
+}
+
+load_rc_config $name
+run_rc_command "$1"

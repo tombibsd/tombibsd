@@ -1,0 +1,18 @@
+/Makefile.in/1.1.1.2/Mon Mar 26 14:26:54 2012/-kk/
+/builtins.c/1.1.1.2/Mon Mar 26 14:26:55 2012/-kk/
+/cgram.y/1.1.1.1/Wed Jan 11 20:33:17 2012/-kk/
+/cxxcode.c/1.1.1.1/Wed Jan 11 20:33:18 2012/-kk/
+/cxxdefs.h/1.1.1.1/Wed Jan 11 20:33:18 2012/-kk/
+/gcc_compat.c/1.1.1.2/Mon Mar 26 14:26:57 2012/-kk/
+/init.c/1.1.1.2/Mon Mar 26 14:26:57 2012/-kk/
+/inline.c/1.1.1.2/Mon Mar 26 14:26:57 2012/-kk/
+/main.c/1.1.1.2/Mon Mar 26 14:26:58 2012/-kk/
+/optim.c/1.1.1.2/Mon Mar 26 14:26:58 2012/-kk/
+/pass1.h/1.1.1.2/Mon Mar 26 14:26:58 2012/-kk/
+/pftn.c/1.1.1.2/Mon Mar 26 14:27:00 2012/-kk/
+/scan.l/1.1.1.1/Wed Jan 11 20:33:21 2012/-kk/
+/softfloat.c/1.1.1.1/Wed Jan 11 20:33:21 2012/-kk/
+/stabs.c/1.1.1.2/Mon Mar 26 14:27:01 2012/-kk/
+/symtabs.c/1.1.1.1/Wed Jan 11 20:33:22 2012/-kk/
+/trees.c/1.1.1.2/Mon Mar 26 14:27:03 2012/-kk/
+D

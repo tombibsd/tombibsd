@@ -1,0 +1,2 @@
+# $NetBSD$
+device-major	ttycons		char 159		ttycons

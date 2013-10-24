@@ -1,0 +1,15 @@
+/Makefile.rump/1.87/Tue Sep  3 19:57:02 2013/-kk/
+/Makefile/1.6/Thu Jun 10 21:56:42 2010/-kk/
+/README.dirs/1.12/Tue Jan  8 13:12:26 2013/-kk/
+/TODO/1.9/Tue Jan  8 13:45:28 2013/-kk/
+/ldscript.rump/1.2/Mon Mar  1 13:12:19 2010/-kk/
+/ldscript_sun.rump/1.1/Fri Mar 15 12:13:07 2013/-kk/
+/linksyms_sun.c/1.1/Fri Mar 15 12:13:07 2013/-kk/
+/listsrcdirs/1.4/Mon Mar 18 15:55:43 2013/-kk/
+/sunldgen.sh/1.1/Fri Mar 15 12:12:16 2013/-kk/
+D/dev////
+D/fs////
+D/include////
+D/kern////
+D/librump////
+D/net////

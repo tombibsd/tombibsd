@@ -1,0 +1,4 @@
+#	$NetBSD$
+
+COPY	${OBJDIR}/netbsd-INSTALL32_IP2x.gz	netbsd
+COPY	${OBJDIR}/netbsd-INSTALL32_IP3x.gz	netbsd

@@ -1,0 +1,10 @@
+/accept_sec_context.c/1.1.1.1/Wed Apr 13 18:14:48 2011/-kk/
+/compat.c/1.1.1.1/Wed Apr 13 18:14:48 2011/-kk/
+/context_stubs.c/1.1.1.1/Wed Apr 13 18:14:48 2011/-kk/
+/cred_stubs.c/1.1.1.1/Wed Apr 13 18:14:48 2011/-kk/
+/external.c/1.1.1.1/Wed Apr 13 18:14:48 2011/-kk/
+/init_sec_context.c/1.1.1.1/Wed Apr 13 18:14:48 2011/-kk/
+/spnego.asn1/1.1.1.2/Thu Apr 14 14:08:30 2011/-kk/
+/spnego.opt/1.1.1.1/Wed Apr 13 18:14:48 2011/-kk/
+/spnego_locl.h/1.1.1.2/Thu Apr 14 14:08:30 2011/-kk/
+D

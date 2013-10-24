@@ -1,0 +1,10 @@
+#	$NetBSD$
+
+ioconf cxdtv
+
+include "conf/files"
+include "dev/pci/files.pci"
+
+pseudo-root pci*
+
+cxdtv* at pci? dev ? function ?

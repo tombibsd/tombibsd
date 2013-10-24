@@ -1,0 +1,5 @@
+# $NetBSD$
+
+7		koi-7 iso-ir-37 iso-5427 iso_5427
+8		koi-8 cp878
+8-E		ecma-cyrillic iso-ir-111

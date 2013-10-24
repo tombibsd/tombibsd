@@ -1,0 +1,22 @@
+/Makefile/1.6/Sat Aug  4 11:03:34 2012/-kk/
+/aes-x86_64.S/1.6/Sat Aug  4 11:03:34 2012/-kk/
+/aes.inc/1.4/Mon Jul 25 09:36:10 2011/-kk/
+/aesni-sha1-x86_64.S/1.3/Sat Aug  4 11:03:34 2012/-kk/
+/aesni-x86_64.S/1.6/Sat Aug  4 11:03:34 2012/-kk/
+/bsaes-x86_64.S/1.3/Sat Aug  4 11:03:34 2012/-kk/
+/cmll-x86_64.S/1.5/Sat Aug  4 11:03:34 2012/-kk/
+/crypto.inc/1.1/Tue Jul  5 10:42:54 2011/-kk/
+/ghash-x86_64.S/1.3/Sat Aug  4 11:03:34 2012/-kk/
+/md5-x86_64.S/1.3/Sat Aug  4 11:03:34 2012/-kk/
+/modes.inc/1.1/Thu Jul 26 19:58:42 2012/-kk/
+/modexp512-x86_64.S/1.2/Sat Aug  4 11:03:35 2012/-kk/
+/rc4-md5-x86_64.S/1.2/Sat Aug  4 11:03:35 2012/-kk/
+/rc4-x86_64.S/1.6/Sat Aug  4 11:03:35 2012/-kk/
+/rc4.inc/1.2/Thu Jul 26 19:58:42 2012/-kk/
+/sha1-x86_64.S/1.5/Sat Aug  4 11:03:35 2012/-kk/
+/sha512-x86_64.S/1.6/Sat Aug  4 11:03:35 2012/-kk/
+/uplink-x86_64.S/1.2/Sat Aug  4 11:03:35 2012/-kk/
+/vpaes-x86_64.S/1.3/Sat Aug  4 11:03:35 2012/-kk/
+/wp-x86_64.S/1.6/Sat Aug  4 11:03:35 2012/-kk/
+/x86_64cpuid.S/1.4/Sat Aug  4 11:03:35 2012/-kk/
+D

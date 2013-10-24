@@ -1,0 +1,10 @@
+# $NetBSD$
+
+ioconf odcm
+
+include "conf/files"
+include "arch/x86/conf/files.x86"
+
+pseudo-root cpufeaturebus*
+
+odcm0 at cpufeaturebus?

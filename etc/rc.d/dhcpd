@@ -1,0 +1,19 @@
+#!/bin/sh
+#
+# $NetBSD$
+#
+
+# PROVIDE: dhcpd
+# REQUIRE: DAEMON
+# BEFORE:  LOGIN
+
+$_rc_subr_loaded . /etc/rc.subr
+
+name="dhcpd"
+rcvar=$name
+command="/usr/sbin/${name}"
+pidfile="/var/run/${name}.pid"
+required_files="/etc/${name}.conf /var/db/${name}.leases"
+
+load_rc_config $name
+run_rc_command "$1"

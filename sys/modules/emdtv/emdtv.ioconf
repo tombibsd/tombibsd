@@ -1,0 +1,10 @@
+#	$NetBSD$
+
+ioconf emdtv
+
+include "conf/files"
+include "dev/usb/files.usb"
+
+pseudo-root uhub*
+
+emdtv* at uhub?

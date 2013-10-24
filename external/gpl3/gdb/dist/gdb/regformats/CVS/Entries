@@ -1,0 +1,25 @@
+/arm-with-iwmmxt.dat/1.1.1.1/Sat Sep 24 20:15:57 2011/-kk/
+/arm-with-neon.dat/1.1.1.1/Sat Sep 24 20:15:57 2011/-kk/
+/arm-with-vfpv2.dat/1.1.1.1/Sat Sep 24 20:15:57 2011/-kk/
+/arm-with-vfpv3.dat/1.1.1.1/Sat Sep 24 20:15:57 2011/-kk/
+/mips-linux.dat/1.1.1.1/Sat Sep 24 20:15:57 2011/-kk/
+/mips64-linux.dat/1.1.1.1/Sat Sep 24 20:15:57 2011/-kk/
+/reg-arm.dat/1.1.1.1/Sat Sep 24 20:15:57 2011/-kk/
+/reg-bfin.dat/1.1.1.1/Sat Sep 24 20:15:57 2011/-kk/
+/reg-cf.dat/1.1.1.1/Sat Sep 24 20:15:57 2011/-kk/
+/reg-cris.dat/1.1.1.1/Sat Sep 24 20:15:57 2011/-kk/
+/reg-crisv32.dat/1.1.1.1/Sat Sep 24 20:15:57 2011/-kk/
+/reg-ia64.dat/1.1.1.1/Sat Sep 24 20:15:57 2011/-kk/
+/reg-m32r.dat/1.1.1.1/Sat Sep 24 20:15:57 2011/-kk/
+/reg-m68k.dat/1.1.1.1/Sat Sep 24 20:15:58 2011/-kk/
+/reg-sh.dat/1.1.1.1/Sat Sep 24 20:15:58 2011/-kk/
+/reg-sparc64.dat/1.1.1.1/Sat Sep 24 20:15:58 2011/-kk/
+/reg-spu.dat/1.1.1.1/Sat Sep 24 20:15:58 2011/-kk/
+/reg-xtensa.dat/1.1.1.1/Sat Sep 24 20:15:58 2011/-kk/
+/regdat.sh/1.1.1.1/Sat Sep 24 20:15:58 2011/-kk/
+/regdef.h/1.1.1.1/Sat Sep 24 20:15:58 2011/-kk/
+/s390-linux32.dat/1.1.1.1/Sat Sep 24 20:15:57 2011/-kk/
+/s390-linux64.dat/1.1.1.1/Sat Sep 24 20:15:58 2011/-kk/
+/s390x-linux64.dat/1.1.1.1/Sat Sep 24 20:15:58 2011/-kk/
+D/i386////
+D/rs6000////

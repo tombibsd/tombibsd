@@ -1,0 +1,10 @@
+# 	$NetBSD$
+
+include "arch/sparc/conf/GENERIC"
+
+
+# Map the SCSI disk at targets 3120 to units 0123, a'la SunOS.
+sd0	at scsibus? target 3 lun ?		# first SCSI disk
+sd1	at scsibus? target 1 lun ?		# second SCSI disk
+sd2	at scsibus? target 2 lun ?		# third SCSI disk
+sd3	at scsibus? target 0 lun ?		# fourth SCSI disk

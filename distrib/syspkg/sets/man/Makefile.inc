@@ -1,0 +1,4 @@
+#	$NetBSD$
+
+SETNAME=man
+PREFIX=/

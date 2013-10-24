@@ -1,0 +1,17 @@
+#!/bin/sh
+#
+# $NetBSD$
+#
+
+# PROVIDE: identd
+# REQUIRE: DAEMON
+# KEYWORD: shutdown
+
+$_rc_subr_loaded . /etc/rc.subr
+
+name="identd"
+rcvar=$name
+command="/usr/libexec/${name}"
+
+load_rc_config $name
+run_rc_command "$1"

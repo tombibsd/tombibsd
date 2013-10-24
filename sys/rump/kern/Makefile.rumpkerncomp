@@ -1,0 +1,15 @@
+#	$NetBSD$
+#
+
+.include <bsd.own.mk>
+
+RUMPKERNCOMPS=	crypto tty z
+
+.if ${MKZFS} != "no"
+RUMPKERNCOMPS+=    solaris
+.endif
+
+.for var in ${RUMPKERNCOMPS}
+RUMPKERNLIBS+=lib${var}
+RUMPKERNLDADD+=-lrumpkern_${var}
+.endfor

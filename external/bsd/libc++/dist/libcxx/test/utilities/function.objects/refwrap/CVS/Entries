@@ -1,0 +1,9 @@
+/binary.pass.cpp/1.1.1.1/Fri May 17 23:02:33 2013/-kk/
+/type.pass.cpp/1.1.1.1/Fri May 17 23:02:33 2013/-kk/
+/unary.pass.cpp/1.1.1.1/Fri May 17 23:02:33 2013/-kk/
+/weak_result.pass.cpp/1.1.1.1/Fri May 17 23:02:33 2013/-kk/
+D/refwrap.access////
+D/refwrap.assign////
+D/refwrap.const////
+D/refwrap.helpers////
+D/refwrap.invoke////

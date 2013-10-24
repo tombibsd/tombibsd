@@ -1,0 +1,9 @@
+#	$NetBSD$
+
+FILES=		fonts.alias
+FILESDIR=	${X11FONTDIR}/${ALIASSUBDIR}
+
+.include <bsd.x11.mk>
+.include <bsd.prog.mk>
+
+.PATH: ${X11SRCDIR.font-alias}/${ALIASSUBDIR}

@@ -1,0 +1,12 @@
+#	$NetBSD$
+#
+# Samsung SMDK2800 evaluation board configuration info
+#
+
+# CPU support and integrated peripherals
+include "arch/arm/s3c2xx0/files.s3c2800"
+
+file	arch/evbarm/smdk2xx0/smdk2800_machdep.c
+
+# Integrator PCI support
+file	arch/evbarm/smdk2xx0/smdk2800_pci.c	pci

@@ -1,0 +1,9 @@
+# $NetBSD$
+
+ioconf flash
+
+include "conf/files"
+
+pseudo-root flashbus*
+
+flash* at flashbus?

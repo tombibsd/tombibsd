@@ -1,0 +1,9 @@
+#	$NetBSD$
+
+ioconf mgadrm
+
+include "conf/files"
+
+pseudo-root drm*
+
+mgadrm* at drm?

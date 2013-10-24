@@ -1,0 +1,11 @@
+/assign.cc/1.1.1.1/Tue Jun 21 01:24:31 2011/-kk/
+/auto_ptr.cc/1.1.1.1/Tue Jun 21 01:24:31 2011/-kk/
+/auto_ptr_neg.cc/1.1.1.1/Tue Jun 21 01:24:31 2011/-kk/
+/auto_ptr_rvalue.cc/1.1.1.1/Tue Jun 21 01:24:31 2011/-kk/
+/dr541.cc/1.1.1.1/Tue Jun 21 01:24:31 2011/-kk/
+/move.cc/1.1.1.1/Tue Jun 21 01:24:31 2011/-kk/
+/shared_ptr.cc/1.1.1.1/Tue Jun 21 01:24:31 2011/-kk/
+/shared_ptr_neg.cc/1.1.1.1/Tue Jun 21 01:24:31 2011/-kk/
+/unique_ptr_lvalue_neg.cc/1.1.1.1/Tue Jun 21 01:24:31 2011/-kk/
+/unique_ptr_rvalue.cc/1.1.1.1/Tue Jun 21 01:24:31 2011/-kk/
+D

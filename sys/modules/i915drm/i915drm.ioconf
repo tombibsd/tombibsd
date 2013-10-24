@@ -1,0 +1,9 @@
+#	$NetBSD$
+
+ioconf i915drm
+
+include "conf/files"
+
+pseudo-root drm*
+
+i915drm* at drm?

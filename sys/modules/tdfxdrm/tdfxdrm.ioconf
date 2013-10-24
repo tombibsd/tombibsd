@@ -1,0 +1,9 @@
+#	$NetBSD$
+
+ioconf tdfxdrm
+
+include "conf/files"
+
+pseudo-root drm*
+
+tdfxdrm* at drm?

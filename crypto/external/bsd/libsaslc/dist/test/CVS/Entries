@@ -1,0 +1,13 @@
+/Atffile/1.3/Sat Feb 12 23:21:33 2011/-kk/
+/Makefile/1.4/Sat Feb 12 23:21:33 2011/-kk/
+/example_client.c/1.4/Sat Feb 12 23:21:33 2011/-kk/
+/t_crypto.c/1.4/Sat Feb 12 23:21:33 2011/-kk/
+/t_dict.c/1.4/Sat Feb 12 23:21:33 2011/-kk/
+/t_error.c/1.4/Sat Feb 12 23:21:33 2011/-kk/
+/t_parser.c/1.4/Sat Feb 12 23:21:33 2011/-kk/
+/t_saslc.c/1.4/Sat Feb 12 23:21:33 2011/-kk/
+/t_session.c/1.4/Sat Feb 12 23:21:33 2011/-kk/
+D/hash_tests////
+D/parser_tests////
+D/session_tests////
+D/sessions////

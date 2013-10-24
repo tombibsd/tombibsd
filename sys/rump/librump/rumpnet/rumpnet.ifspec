@@ -1,0 +1,11 @@
+;       $NetBSD$
+
+NAME|net
+PUBHDR|include/rump/rumpnet_if_pub.h
+PRIVHDR|librump/rumpnet/rumpnet_if_priv.h
+WRAPPERS|librump/rumpnet/rumpnet_if_wrappers.c
+
+; type          | name          | args			| attrs
+;
+
+int		|shmif_create	|const char *, int *	|WEAK

@@ -1,0 +1,8 @@
+#	$NetBSD$
+
+/set				type=dir uname=root gname=wheel mode=0755
+
+.
+./altroot
+./etc
+./etc/cgd			mode=0700

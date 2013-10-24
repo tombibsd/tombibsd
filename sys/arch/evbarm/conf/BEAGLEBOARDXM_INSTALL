@@ -1,0 +1,10 @@
+#	$NetBSD$
+#
+#	BEAGLEBOARDXM_INSTALL -- BEAGLEBOARDXM kernel with installation-sized
+#	ramdisk
+#
+
+include "arch/evbarm/conf/BEAGLEBOARDXM"
+include "arch/evbarm/conf/INSTALL"
+
+options BOOTHOWTO=RB_SINGLE

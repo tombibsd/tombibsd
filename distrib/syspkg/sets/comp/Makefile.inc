@@ -1,0 +1,4 @@
+#	$NetBSD$
+
+SETNAME=comp
+PREFIX=/

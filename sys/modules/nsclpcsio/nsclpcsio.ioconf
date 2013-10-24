@@ -1,0 +1,10 @@
+# $NetBSD$
+
+ioconf nsclpcsio
+
+include "conf/files"
+include "dev/isa/files.isa"
+
+pseudo-root isa*
+
+nsclpcsio* at isa?

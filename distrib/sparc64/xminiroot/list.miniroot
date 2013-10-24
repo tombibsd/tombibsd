@@ -1,0 +1,3 @@
+#	$NetBSD$
+
+COPY	${OBJDIR}/netbsd.gz	netbsd

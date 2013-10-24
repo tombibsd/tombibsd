@@ -1,0 +1,28 @@
+/ChangeLog/1.1.1.2/Tue Sep 18 06:15:53 2012/-kk/
+/Makefile.in/1.2/Tue Jun 21 02:41:38 2011/-kk/
+/aclocal.m4/1.1.1.1/Tue Jun 21 01:23:16 2011/-kk/
+/charset.c/1.1.1.1/Tue Jun 21 01:23:15 2011/-kk/
+/config.in/1.1.1.1/Tue Jun 21 01:23:17 2011/-kk/
+/configure.ac/1.1.1.1/Tue Jun 21 01:23:16 2011/-kk/
+/configure/1.1.1.1/Tue Jun 21 01:23:16 2011/-kk/
+/directives-only.c/1.1.1.1/Tue Jun 21 01:23:16 2011/-kk/
+/directives.c/1.1.1.1/Tue Jun 21 01:23:16 2011/-kk/
+/errors.c/1.1.1.1/Tue Jun 21 01:23:16 2011/-kk/
+/expr.c/1.1.1.1/Tue Jun 21 01:23:17 2011/-kk/
+/files.c/1.2/Tue Jun 21 02:41:38 2011/-kk/
+/identifiers.c/1.1.1.1/Tue Jun 21 01:23:16 2011/-kk/
+/init.c/1.2/Tue Jun 21 02:41:38 2011/-kk/
+/internal.h/1.2/Tue Jun 21 02:41:38 2011/-kk/
+/lex.c/1.2/Tue Jun 21 02:41:38 2011/-kk/
+/line-map.c/1.1.1.1/Tue Jun 21 01:23:15 2011/-kk/
+/macro.c/1.2/Tue Jun 21 02:41:38 2011/-kk/
+/makeucnid.c/1.1.1.1/Tue Jun 21 01:23:17 2011/-kk/
+/mkdeps.c/1.1.1.1/Tue Jun 21 01:23:15 2011/-kk/
+/pch.c/1.1.1.1/Tue Jun 21 01:23:15 2011/-kk/
+/symtab.c/1.1.1.1/Tue Jun 21 01:23:16 2011/-kk/
+/system.h/1.1.1.1/Tue Jun 21 01:23:16 2011/-kk/
+/traditional.c/1.1.1.1/Tue Jun 21 01:23:15 2011/-kk/
+/ucnid.h/1.1.1.1/Tue Jun 21 01:23:17 2011/-kk/
+/ucnid.tab/1.1.1.1/Tue Jun 21 01:23:17 2011/-kk/
+D/include////
+D/po////

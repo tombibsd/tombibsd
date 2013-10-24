@@ -1,0 +1,3 @@
+#	$NetBSD$
+
+file	crypto/nist_ctr_drbg/nist_ctr_drbg.c

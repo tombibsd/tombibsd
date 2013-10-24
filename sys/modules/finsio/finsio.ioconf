@@ -1,0 +1,11 @@
+# $NetBSD$
+
+ioconf finsio
+
+include "conf/files"
+include "dev/isa/files.isa"
+
+pseudo-root isa*
+
+finsio0 at isa? port 0x2e
+finsio0 at isa? port 0x4e

@@ -1,0 +1,4 @@
+# $NetBSD$
+
+CMBINT			UCS			1
+UCS			CBMINT			1

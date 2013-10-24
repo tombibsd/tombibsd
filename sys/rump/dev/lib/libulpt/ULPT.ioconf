@@ -1,0 +1,11 @@
+#	$NetBSD$
+#
+
+ioconf ulpt
+
+include "conf/files"
+include "dev/usb/files.usb"
+
+pseudo-root uhub*
+
+ulpt*   at uhub? port ? configuration ? interface ?

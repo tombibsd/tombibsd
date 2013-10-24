@@ -1,0 +1,7 @@
+# $NetBSD$
+#
+# Non MODULAR
+#
+include "arch/i386/conf/GENERIC"
+
+no options	MODULAR

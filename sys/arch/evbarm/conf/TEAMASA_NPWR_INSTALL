@@ -1,0 +1,8 @@
+#	$NetBSD$
+#
+#	TEAMASA_NPWR-INSTALL -- Npwr kernel with installation-sized
+#	ramdisk
+#
+
+include "arch/evbarm/conf/TEAMASA_NPWR"
+include "arch/evbarm/conf/INSTALL"

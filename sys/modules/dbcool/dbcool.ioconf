@@ -1,0 +1,11 @@
+# $NetBSD$
+
+ioconf dbcool
+
+include "conf/files"
+
+pseudo-root iic*
+
+dbcool* at iic? addr 0x2c
+dbcool* at iic? addr 0x2d
+dbcool* at iic? addr 0x2e

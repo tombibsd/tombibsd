@@ -1,0 +1,16 @@
+#	$NetBSD$
+#
+
+RUMPDEVCOMP=	audio bpf cgd disk dm drvctl fss md netsmb pad pud	\
+		putter raidframe rnd scsipi scsitest sysmon wscons
+
+RUMPUSBDEVS=	ubt ucom ugenhc ulpt umass usb
+
+.for var in ${RUMPDEVCOMP}
+RUMPDEVLIBS+=lib${var}
+RUMPDEVLDADD+=-lrumpdev_${var}
+.endfor
+
+.for var in ${RUMPUSBDEVS}
+RUMPDEVLIBS+=lib${var}
+.endfor

@@ -1,0 +1,3 @@
+#	$NetBSD$
+
+file	arch/arm/ofw/openfirm.c

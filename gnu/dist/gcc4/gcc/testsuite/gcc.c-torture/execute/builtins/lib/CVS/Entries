@@ -1,0 +1,25 @@
+/abs.c/1.1.1.1/Thu Apr 20 09:14:19 2006/-kk/
+/chk.c/1.1.1.1/Thu Apr 20 09:14:19 2006/-kk/
+/fprintf.c/1.1.1.1/Thu Apr 20 09:14:19 2006/-kk/
+/main.c/1.1.1.1/Thu Apr 20 09:14:19 2006/-kk/
+/memcmp.c/1.1.1.1/Thu Apr 20 09:14:19 2006/-kk/
+/memmove.c/1.1.1.1/Thu Apr 20 09:14:19 2006/-kk/
+/mempcpy.c/1.1.1.1/Thu Apr 20 09:14:19 2006/-kk/
+/memset.c/1.1.1.1/Thu Apr 20 09:14:19 2006/-kk/
+/printf.c/1.1.1.1/Thu Apr 20 09:14:19 2006/-kk/
+/sprintf.c/1.1.1.1/Thu Apr 20 09:14:19 2006/-kk/
+/stpcpy.c/1.1.1.1/Thu Apr 20 09:14:19 2006/-kk/
+/strcat.c/1.1.1.1/Thu Apr 20 09:14:19 2006/-kk/
+/strchr.c/1.1.1.1/Thu Apr 20 09:14:19 2006/-kk/
+/strcmp.c/1.1.1.1/Thu Apr 20 09:14:19 2006/-kk/
+/strcpy.c/1.1.1.1/Thu Apr 20 09:14:19 2006/-kk/
+/strcspn.c/1.1.1.1/Thu Apr 20 09:14:19 2006/-kk/
+/strlen.c/1.1.1.1/Thu Apr 20 09:14:19 2006/-kk/
+/strncat.c/1.1.1.1/Thu Apr 20 09:14:19 2006/-kk/
+/strncmp.c/1.1.1.1/Thu Apr 20 09:14:19 2006/-kk/
+/strncpy.c/1.1.1.1/Thu Apr 20 09:14:19 2006/-kk/
+/strpbrk.c/1.1.1.1/Thu Apr 20 09:14:19 2006/-kk/
+/strrchr.c/1.1.1.1/Thu Apr 20 09:14:19 2006/-kk/
+/strspn.c/1.1.1.1/Thu Apr 20 09:14:19 2006/-kk/
+/strstr.c/1.1.1.1/Thu Apr 20 09:14:19 2006/-kk/
+D

@@ -1,0 +1,5 @@
+#	$NetBSD$
+
+Example Postfix configuration files can be found in:
+
+	/usr/share/examples/postfix

@@ -1,0 +1,5 @@
+.\"	$NetBSD$
+.
+Installation mechanism that uses
+.Ic sysinst
+is yet to be provided.

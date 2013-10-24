@@ -1,0 +1,13 @@
+/Makefile/1.14/Thu Oct 29 14:36:14 2009/-kk/
+/avl.c/1.7/Fri Feb 11 06:21:22 2005/-kk/
+/defs.h/1.9/Tue Mar  6 16:55:18 2012/-kk/
+/main.c/1.11/Tue Mar  6 16:55:18 2012/-kk/
+/mdb.c/1.46/Tue Mar  6 16:55:18 2012/-kk/
+/mdb.h/1.9/Tue Mar  6 16:55:18 2012/-kk/
+/menu_sys.def/1.59/Tue Mar  6 16:55:18 2012/-kk/
+/menuc.1/1.30/Tue Mar  6 16:55:18 2012/-kk/
+/parse.y/1.16/Tue Mar  6 16:55:18 2012/-kk/
+/pathnames.h/1.1/Mon Oct 15 22:20:03 2001/-kk/
+/scan.l/1.16/Tue Mar  6 16:55:18 2012/-kk/
+/util.c/1.5/Tue Mar  6 16:55:18 2012/-kk/
+D/testm////

@@ -1,0 +1,39 @@
+/ChangeLog.1998/1.1.1.1/Wed Apr 13 18:14:29 2011/-kk/
+/ChangeLog.1999/1.1.1.1/Wed Apr 13 18:14:30 2011/-kk/
+/ChangeLog.2000/1.1.1.1/Wed Apr 13 18:14:30 2011/-kk/
+/ChangeLog.2001/1.1.1.1/Wed Apr 13 18:14:30 2011/-kk/
+/ChangeLog.2002/1.1.1.1/Wed Apr 13 18:14:30 2011/-kk/
+/ChangeLog.2003/1.1.1.1/Wed Apr 13 18:14:30 2011/-kk/
+/ChangeLog.2004/1.1.1.1/Wed Apr 13 18:14:30 2011/-kk/
+/ChangeLog.2005/1.1.1.1/Wed Apr 13 18:14:31 2011/-kk/
+/ChangeLog.2006/1.1.1.1/Wed Apr 13 18:14:31 2011/-kk/
+/ChangeLog.2007/1.1.1.1/Wed Apr 13 18:14:31 2011/-kk/
+/ChangeLog/1.1.1.1/Wed Apr 13 18:14:29 2011/-kk/
+/LICENSE/1.1.1.1/Wed Apr 13 18:14:31 2011/-kk/
+/Makefile.am.common/1.1.1.2/Thu Apr 14 14:08:03 2011/-kk/
+/Makefile.am/1.1.1.2/Thu Apr 14 14:08:06 2011/-kk/
+/NEWS/1.1.1.1/Wed Apr 13 18:14:31 2011/-kk/
+/NTMakefile/1.1.1.1/Wed Apr 13 18:14:31 2011/-kk/
+/README/1.1.1.1/Wed Apr 13 18:14:31 2011/-kk/
+/TODO/1.1.1.1/Wed Apr 13 18:14:31 2011/-kk/
+/acinclude.m4/1.1.1.2/Thu Apr 14 14:08:06 2011/-kk/
+/autogen.sh/1.1.1.1/Wed Apr 13 18:14:31 2011/-kk/
+/configure.ac/1.1.1.1/Wed Apr 13 18:14:31 2011/-kk/
+/krb5.conf/1.1.1.1/Wed Apr 13 18:14:31 2011/-kk/
+D/admin////
+D/base////
+D/cf////
+D/doc////
+D/etc////
+D/include////
+D/kadmin////
+D/kcm////
+D/kdc////
+D/kpasswd////
+D/kuser////
+D/lib////
+D/packages////
+D/po////
+D/tests////
+D/tools////
+D/windows////

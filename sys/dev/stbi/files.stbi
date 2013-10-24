@@ -1,0 +1,4 @@
+# $NetBSD$
+
+define stbi
+file dev/stbi/stb_image.c	stbi

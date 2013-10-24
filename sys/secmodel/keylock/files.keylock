@@ -1,0 +1,5 @@
+# $NetBSD$
+
+defflag secmodel_keylock
+
+file	secmodel/keylock/secmodel_keylock.c	secmodel_keylock

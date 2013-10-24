@@ -1,0 +1,19 @@
+#!/bin/sh
+#
+# $NetBSD$
+#
+
+# PROVIDE: ftpd
+# REQUIRE: LOGIN
+# KEYWORD: shutdown
+
+$_rc_subr_loaded . /etc/rc.subr
+
+name="ftpd"
+rcvar=$name
+command="/usr/libexec/${name}"
+command_args="-D"
+pidfile="/var/run/${name}.pid"
+
+load_rc_config $name
+run_rc_command "$1"

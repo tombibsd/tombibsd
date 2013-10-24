@@ -1,0 +1,5 @@
+# $NetBSD$
+
+defflag secmodel_overlay : secmodel_bsd44_logic
+
+file	secmodel/overlay/secmodel_overlay.c	secmodel_overlay

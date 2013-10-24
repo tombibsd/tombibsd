@@ -1,0 +1,7 @@
+#	$NetBSD$
+
+IMAGESIZE=	4m
+IMAGEENDIAN=	be
+MAKEFS_FLAGS=	-o density=12k
+MAKEDEVTARGETS=	raminst
+IMAGEDEPENDS+=	${ARCHDIR}/dot.profile ${ARCHDIR}/install.md

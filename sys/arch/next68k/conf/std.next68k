@@ -1,0 +1,6 @@
+# $NetBSD$
+
+# Standard information for next68k
+machine	next68k m68k
+include		"conf/std"			# MI standard options
+include		"arch/m68k/conf/std.m68k"	# m68k standard options

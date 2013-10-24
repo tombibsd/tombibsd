@@ -1,0 +1,13 @@
+#	$NetBSD$
+
+V_1 {
+	testfunc;
+};
+
+V_2 {
+	testfunc;
+};
+
+V_3 {
+	testfunc;
+};

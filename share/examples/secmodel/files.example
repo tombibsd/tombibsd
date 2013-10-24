@@ -1,0 +1,3 @@
+# $NetBSD$
+
+file	secmodel/example/secmodel_example.c	secmodel_example

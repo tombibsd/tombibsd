@@ -1,0 +1,5 @@
+#	$NetBSD$
+#
+# standard NetBSD/arm options
+
+options		CPU_IN_CKSUM

@@ -1,0 +1,6 @@
+# $NetBSD$
+
+NAME		"ISO646-x"
+ENCODING	"NONE"
+DEFCSID		"ISO646-x"	0
+INVALID		0x3F	# '?'

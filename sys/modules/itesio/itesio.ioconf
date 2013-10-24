@@ -1,0 +1,10 @@
+# $NetBSD$
+
+ioconf itesio
+
+include "conf/files"
+include "dev/isa/files.isa"
+
+pseudo-root isa*
+
+itesio* at isa? port 0x2e

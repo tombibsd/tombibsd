@@ -1,0 +1,5 @@
+#	$NetBSD$
+#
+# XXX netbsd xsrc had major=4
+major=2
+minor=1

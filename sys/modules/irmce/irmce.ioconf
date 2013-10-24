@@ -1,0 +1,10 @@
+#	$NetBSD$
+
+ioconf irmce
+
+include "conf/files"
+include "dev/usb/files.usb"
+
+pseudo-root uhub*
+
+irmce* at uhub?

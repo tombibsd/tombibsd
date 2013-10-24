@@ -1,0 +1,5 @@
+# $NetBSD$
+
+defflag secmodel_securelevel
+
+file	secmodel/securelevel/secmodel_securelevel.c	secmodel_securelevel

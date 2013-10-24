@@ -1,0 +1,20 @@
+/asm.h/1.1.1.1/Thu Apr 20 08:24:17 2006/-kk/
+/cdefs.h/1.1.1.1/Thu Apr 20 08:24:17 2006/-kk/
+/file.h/1.1.1.1/Thu Apr 20 08:24:17 2006/-kk/
+/ioctl.h/1.1.1.1/Thu Apr 20 08:24:17 2006/-kk/
+/limits.h/1.1.1.1/Thu Apr 20 08:24:15 2006/-kk/
+/machine.h/1.1.1.1/Thu Apr 20 08:24:15 2006/-kk/
+/mman.h/1.1.1.1/Thu Apr 20 08:24:17 2006/-kk/
+/pthread.h/1.1.1.1/Sat Oct 21 22:26:58 2006/-kk/
+/regset.h/1.1.1.1/Thu Apr 20 08:24:15 2006/-kk/
+/signal.h/1.1.1.1/Thu Apr 20 08:24:17 2006/-kk/
+/socket.h/1.1.1.2/Thu Jan 11 02:32:35 2007/-kk/
+/spinlock.h/1.1.1.1/Thu Apr 20 08:24:17 2006/-kk/
+/stat.h/1.1.1.1/Thu Apr 20 08:24:17 2006/-kk/
+/time.h/1.1.1.1/Thu Apr 20 08:24:15 2006/-kk/
+/times.h/1.1.1.1/Thu Apr 20 08:24:17 2006/-kk/
+/types.h/1.1.1.1/Thu Apr 20 08:24:17 2006/-kk/
+/ucontext.h/1.1.1.1/Thu Apr 20 08:24:17 2006/-kk/
+/utsname.h/1.1.1.1/Thu Apr 20 08:24:17 2006/-kk/
+/wait.h/1.1.1.1/Thu Apr 20 08:24:17 2006/-kk/
+D

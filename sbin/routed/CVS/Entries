@@ -1,0 +1,15 @@
+/Makefile/1.25/Thu Aug 25 16:12:37 2011/-kk/
+/defs.h/1.27/Sun Feb 12 13:56:56 2012/-kk/
+/if.c/1.30/Sun Jun 24 16:24:34 2012/-kk/
+/input.c/1.31/Mon Oct 26 02:53:15 2009/-kk/
+/main.c/1.41/Mon Oct 26 02:53:15 2009/-kk/
+/output.c/1.25/Mon Oct 26 02:53:15 2009/-kk/
+/parms.c/1.26/Mon Jan 16 17:38:16 2012/-kk/
+/pathnames.h/1.11/Sat Mar 10 23:52:46 2001/-kk/
+/radix.c/1.13/Sat Feb 25 00:58:35 2006/-kk/
+/radix.h/1.6/Sat Feb  5 13:47:19 2005/-kk/
+/rdisc.c/1.17/Tue May  9 20:18:09 2006/-kk/
+/routed.8/1.44/Mon May 17 15:38:20 2004/-kk/
+/table.c/1.24/Mon Oct 26 02:53:15 2009/-kk/
+/trace.c/1.32/Mon Apr  6 12:36:27 2009/-kk/
+D/rtquery////

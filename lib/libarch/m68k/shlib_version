@@ -1,0 +1,5 @@
+#	$NetBSD$
+#	Remember to update distrib/sets/lists/base/ad.m68k when changing
+#
+major=0
+minor=0

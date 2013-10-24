@@ -1,0 +1,3 @@
+#	$NetBSD$
+
+include "arch/algor/conf/files.algor"

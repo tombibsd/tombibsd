@@ -1,0 +1,17 @@
+/clean.sh/1.1.1.2/Sat Jul 27 15:22:51 2013/-kk/
+/dig.sh/1.1.1.2/Sat Jul 27 15:22:51 2013/-kk/
+/missing.example.dlv.example.dlv.db/1.2/Tue Dec  4 23:38:39 2012/-kk/
+/missing.example.dnskey.db/1.1.1.1/Tue Dec  4 19:22:32 2012/-kk/
+/missing.example.ds.db/1.1.1.1/Tue Dec  4 19:22:32 2012/-kk/
+/none.example.dlv.example.dlv.db/1.1.1.1/Tue Dec  4 19:22:32 2012/-kk/
+/none.example.dnskey.db/1.1.1.1/Tue Dec  4 19:22:32 2012/-kk/
+/none.example.ds.db/1.1.1.1/Tue Dec  4 19:22:32 2012/-kk/
+/ok.example.dlv.example.dlv.db/1.1.1.1/Tue Dec  4 19:22:32 2012/-kk/
+/ok.example.dnskey.db/1.1.1.1/Tue Dec  4 19:22:32 2012/-kk/
+/ok.example.ds.db/1.1.1.1/Tue Dec  4 19:22:32 2012/-kk/
+/setup.sh/1.1.1.2/Sat Jul 27 15:22:51 2013/-kk/
+/tests.sh/1.1.1.2/Sat Jul 27 15:22:51 2013/-kk/
+/wrong.example.dlv.example.dlv.db/1.1.1.1/Tue Dec  4 19:22:32 2012/-kk/
+/wrong.example.dnskey.db/1.1.1.1/Tue Dec  4 19:22:32 2012/-kk/
+/wrong.example.ds.db/1.1.1.1/Tue Dec  4 19:22:32 2012/-kk/
+D

@@ -1,0 +1,5 @@
+# $NetBSD$
+./usr/lib/crtbegin.o				comp-c-lib
+./usr/lib/crtend.o				comp-c-lib
+./usr/lib/crti.o				comp-c-lib
+./usr/lib/crtn.o				comp-c-lib

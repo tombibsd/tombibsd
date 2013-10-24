@@ -1,0 +1,5 @@
+# $NetBSD$
+
+defflag secmodel_extensions
+
+file	secmodel/extensions/secmodel_extensions.c	secmodel_extensions

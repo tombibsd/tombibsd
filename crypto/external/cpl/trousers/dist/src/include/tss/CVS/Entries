@@ -1,0 +1,24 @@
+/compat11b.h/1.1.1.1/Sat Jan 28 01:36:48 2012/-kk/
+/platform.h/1.1.1.1/Sat Jan 28 01:36:47 2012/-kk/
+/tcpa_defines.h/1.1.1.1/Sat Jan 28 01:36:48 2012/-kk/
+/tcpa_error.h/1.1.1.1/Sat Jan 28 01:36:47 2012/-kk/
+/tcpa_struct.h/1.1.1.1/Sat Jan 28 01:36:53 2012/-kk/
+/tcpa_typedef.h/1.1.1.1/Sat Jan 28 01:36:54 2012/-kk/
+/tcs.h/1.1.1.1/Sat Jan 28 01:36:53 2012/-kk/
+/tcs_defines.h/1.1.1.1/Sat Jan 28 01:36:47 2012/-kk/
+/tcs_error.h/1.1.1.1/Sat Jan 28 01:36:47 2012/-kk/
+/tcs_structs.h/1.1.1.1/Sat Jan 28 01:36:48 2012/-kk/
+/tcs_typedef.h/1.1.1.1/Sat Jan 28 01:36:54 2012/-kk/
+/tddl_error.h/1.1.1.1/Sat Jan 28 01:36:47 2012/-kk/
+/tddlapi_error.h/1.1.1.1/Sat Jan 28 01:36:48 2012/-kk/
+/tddli.h/1.1.1.1/Sat Jan 28 01:36:51 2012/-kk/
+/tpm.h/1.1.1.1/Sat Jan 28 01:36:54 2012/-kk/
+/tpm_error.h/1.1.1.1/Sat Jan 28 01:36:52 2012/-kk/
+/tpm_ordinal.h/1.1.1.1/Sat Jan 28 01:36:52 2012/-kk/
+/tspi.h/1.1.1.1/Sat Jan 28 01:36:51 2012/-kk/
+/tss_defines.h/1.1.1.1/Sat Jan 28 01:36:51 2012/-kk/
+/tss_error.h/1.1.1.1/Sat Jan 28 01:36:48 2012/-kk/
+/tss_error_basics.h/1.1.1.1/Sat Jan 28 01:36:47 2012/-kk/
+/tss_structs.h/1.1.1.1/Sat Jan 28 01:36:47 2012/-kk/
+/tss_typedef.h/1.1.1.1/Sat Jan 28 01:36:48 2012/-kk/
+D

@@ -1,0 +1,12 @@
+/Makefile/1.7/Wed Sep 11 23:04:10 2013/-kk/
+/deviceid.c/1.2/Thu Jul  5 13:55:58 2012/-kk/
+/efi.c/1.1/Fri Aug  7 20:57:56 2009/-kk/
+/fsshare.c/1.2/Mon Aug 10 22:44:41 2009/-kk/
+/mkdirp.c/1.1/Fri Aug  7 20:57:56 2009/-kk/
+/mnttab.c/1.2/Sun Feb 28 17:36:51 2010/-kk/
+/shlib_version/1.1/Fri Aug  7 20:57:56 2009/-kk/
+/stubs.c/1.1/Sun Feb 28 17:36:51 2010/-kk/
+/ucred.c/1.1/Fri Aug  7 20:57:56 2009/-kk/
+/zmount.c/1.1/Fri Aug  7 20:57:56 2009/-kk/
+/zone.c/1.1/Fri Aug  7 20:57:56 2009/-kk/
+D

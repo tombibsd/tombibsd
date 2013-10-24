@@ -1,0 +1,6 @@
+# $NetBSD$
+
+KZ1048			UCS			1
+PTCP154			UCS			1
+UCS			KZ1048			1
+UCS			PTCP154			1

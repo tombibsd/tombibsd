@@ -1,0 +1,3 @@
+# $NetBSD$
+./@MODULEDIR@/acpiverbose			base-kernel-modules	kmod
+./@MODULEDIR@/acpiverbose/acpiverbose.kmod	base-kernel-modules	kmod

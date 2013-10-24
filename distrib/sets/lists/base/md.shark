@@ -1,0 +1,3 @@
+# $NetBSD$
+./dev/mouse-qms0				base-obsolete		obsolete
+./dev/qms0					base-obsolete		obsolete

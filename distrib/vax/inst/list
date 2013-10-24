@@ -1,0 +1,4 @@
+#	$NetBSD$
+
+# and the installation tools
+COPY	${CURDIR}/dot.profile		.profile

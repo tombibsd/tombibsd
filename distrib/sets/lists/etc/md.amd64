@@ -1,0 +1,3 @@
+# $NetBSD$
+./boot.cfg					etc-sys-etc
+./etc/ttyaction					etc-sys-etc

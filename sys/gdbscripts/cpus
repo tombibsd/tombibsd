@@ -1,0 +1,10 @@
+#	$NetBSD$
+
+define cpus
+	set $ci = &cpu_info_primary
+	printf "\t     cpu id           curlwp\n"
+	while ($ci != 0)
+		printf "%16lx %2d %16lx\n", $ci, $ci->ci_cpuid, $ci->ci_curlwp
+		set $ci = $ci->ci_next
+	end
+end

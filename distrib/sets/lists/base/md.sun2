@@ -1,0 +1,8 @@
+# $NetBSD$
+./usr/bin/fdformat				base-util-bin
+./usr/mdec/bootxx				base-sysutil-bin
+./usr/mdec/bootyy				base-sysutil-bin
+./usr/mdec/installboot				base-obsolete		obsolete
+./usr/mdec/netboot				base-sysutil-bin
+./usr/mdec/tapeboot				base-sysutil-bin
+./usr/mdec/ufsboot				base-sysutil-bin

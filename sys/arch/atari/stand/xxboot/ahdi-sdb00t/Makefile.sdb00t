@@ -1,0 +1,11 @@
+#	$NetBSD$
+
+PROG=	sdb00t.ahdi
+SRCS=	sdb00t.ahdi.S
+NOMAN=	# defined
+LIBCRT0=
+
+.PATH: ${.CURDIR}/..
+
+.include <../../Makefile.xxboot>
+.include <bsd.prog.mk>

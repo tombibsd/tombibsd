@@ -1,0 +1,5 @@
+#	$NetBSD$
+# troff files that are no manpages - ready for fgrep -v
+USD.doc/csh
+libcurses/PSD.doc
+/intro

@@ -1,0 +1,5 @@
+# $NetBSD$
+./usr/sbin/apm					base-sysutil-bin
+./usr/sbin/apmd					base-sysutil-bin
+./usr/sbin/tpctl				base-sysutil-bin
+./usr/sbin/zzz					base-sysutil-bin

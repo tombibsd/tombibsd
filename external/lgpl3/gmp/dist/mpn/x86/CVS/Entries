@@ -1,0 +1,31 @@
+/README/1.1.1.1/Mon Jun 20 05:54:42 2011/-kk/
+/aors_n.asm/1.1.1.1/Mon Jun 20 05:54:42 2011/-kk/
+/aorsmul_1.asm/1.1.1.1/Mon Jun 20 05:54:42 2011/-kk/
+/bdiv_dbm1c.asm/1.1.1.1/Mon Jun 20 05:54:42 2011/-kk/
+/copyd.asm/1.1.1.1/Mon Jun 20 05:54:42 2011/-kk/
+/copyi.asm/1.1.1.1/Mon Jun 20 05:54:42 2011/-kk/
+/darwin.m4/1.1.1.1/Mon Jun 20 05:54:42 2011/-kk/
+/dive_1.asm/1.1.1.1/Mon Jun 20 05:54:42 2011/-kk/
+/divrem_1.asm/1.1.1.1/Mon Jun 20 05:54:42 2011/-kk/
+/divrem_2.asm/1.1.1.1/Mon Jun 20 05:54:42 2011/-kk/
+/gmp-mparam.h/1.1.1.1/Mon Jun 20 05:54:42 2011/-kk/
+/invert_limb.asm/1.1.1.1/Mon Jun 20 05:54:42 2011/-kk/
+/lshift.asm/1.1.1.1/Mon Jun 20 05:54:42 2011/-kk/
+/mod_34lsub1.asm/1.1.1.1/Mon Jun 20 05:54:42 2011/-kk/
+/mul_1.asm/1.1.1.1/Mon Jun 20 05:54:42 2011/-kk/
+/mul_basecase.asm/1.1.1.1/Mon Jun 20 05:54:42 2011/-kk/
+/rshift.asm/1.1.1.1/Mon Jun 20 05:54:42 2011/-kk/
+/sqr_basecase.asm/1.1.1.1/Mon Jun 20 05:54:42 2011/-kk/
+/t-zdisp.sh/1.1.1.1/Mon Jun 20 05:54:42 2011/-kk/
+/t-zdisp2.pl/1.1.1.1/Mon Jun 20 05:54:42 2011/-kk/
+/udiv.asm/1.1.1.1/Mon Jun 20 05:54:42 2011/-kk/
+/umul.asm/1.1.1.1/Mon Jun 20 05:54:42 2011/-kk/
+/x86-defs.m4/1.1.1.1/Mon Jun 20 05:54:42 2011/-kk/
+D/atom////
+D/fat////
+D/i486////
+D/k6////
+D/k7////
+D/p6////
+D/pentium////
+D/pentium4////

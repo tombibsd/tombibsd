@@ -1,0 +1,8 @@
+# $NetBSD$
+
+CN		euc-cn euccn gb2312
+JP-MS		euc-jp-ms eucjp-ms
+JP		euc-jp eucjp
+JIS-2004	euc-jp-2004 euc-jisx0213
+KR		euc-kr euckr
+TW		euc-tw euctw cns11643

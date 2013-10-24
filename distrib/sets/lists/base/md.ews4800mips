@@ -1,0 +1,6 @@
+# $NetBSD$
+./usr/mdec/boot					base-sysutil-bin
+./usr/mdec/boot.coff				base-sysutil-bin
+./usr/mdec/boot_kernel.gz			base-sysutil-bin
+./usr/mdec/bootxx_bfs				base-sysutil-bin
+./usr/mdec/bootxx_ustarfs			base-sysutil-bin

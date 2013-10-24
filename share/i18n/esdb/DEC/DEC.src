@@ -1,0 +1,5 @@
+# $NetBSD$
+
+NAME		"DECx"
+ENCODING	"NONE"
+DEFCSID		"DECx"	0

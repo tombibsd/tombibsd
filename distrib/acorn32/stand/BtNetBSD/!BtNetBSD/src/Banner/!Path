@@ -1,0 +1,4 @@
+| $NetBSD$
+
+Set asmlib$dir <obey$dir>
+dir <Obey$Dir>

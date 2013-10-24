@@ -1,0 +1,16 @@
+#!/bin/sh
+#
+# $NetBSD$
+#
+
+# PROVIDE: moused
+# REQUIRE: DAEMON
+
+$_rc_subr_loaded . /etc/rc.subr
+
+name="moused"
+rcvar=$name
+command="/usr/sbin/${name}"
+
+load_rc_config $name
+run_rc_command "$1"

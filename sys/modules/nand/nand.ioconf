@@ -1,0 +1,9 @@
+#	$NetBSD$
+
+ioconf nand
+
+include "conf/files"
+
+pseudo-root nandbus*
+
+nand* at nandbus?

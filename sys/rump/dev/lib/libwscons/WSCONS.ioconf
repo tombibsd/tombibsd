@@ -1,0 +1,13 @@
+#	$NetBSD$
+#
+
+ioconf wscons
+
+include "conf/files"
+include "dev/usb/files.usb"
+
+pseudo-root ums*
+pseudo-root ukbd*
+
+wsmouse* at ums? mux 0
+wskbd* at ukbd? console ? mux 1

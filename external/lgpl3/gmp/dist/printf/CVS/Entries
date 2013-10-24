@@ -1,0 +1,24 @@
+/Makefile.am/1.1.1.1/Mon Jun 20 05:54:37 2011/-kk/
+/Makefile.in/1.1.1.1/Mon Jun 20 05:54:37 2011/-kk/
+/asprintf.c/1.1.1.1/Mon Jun 20 05:54:37 2011/-kk/
+/asprntffuns.c/1.1.1.1/Mon Jun 20 05:54:37 2011/-kk/
+/doprnt.c/1.1.1.1/Mon Jun 20 05:54:37 2011/-kk/
+/doprntf.c/1.1.1.1/Mon Jun 20 05:54:37 2011/-kk/
+/doprnti.c/1.1.1.1/Mon Jun 20 05:54:37 2011/-kk/
+/fprintf.c/1.1.1.1/Mon Jun 20 05:54:37 2011/-kk/
+/obprintf.c/1.1.1.1/Mon Jun 20 05:54:37 2011/-kk/
+/obprntffuns.c/1.1.1.1/Mon Jun 20 05:54:37 2011/-kk/
+/obvprintf.c/1.1.1.1/Mon Jun 20 05:54:37 2011/-kk/
+/printf.c/1.1.1.1/Mon Jun 20 05:54:37 2011/-kk/
+/printffuns.c/1.1.1.1/Mon Jun 20 05:54:37 2011/-kk/
+/repl-vsnprintf.c/1.1.1.1/Mon Jun 20 05:54:37 2011/-kk/
+/snprintf.c/1.1.1.1/Mon Jun 20 05:54:37 2011/-kk/
+/snprntffuns.c/1.1.1.1/Mon Jun 20 05:54:37 2011/-kk/
+/sprintf.c/1.1.1.1/Mon Jun 20 05:54:37 2011/-kk/
+/sprintffuns.c/1.1.1.1/Mon Jun 20 05:54:37 2011/-kk/
+/vasprintf.c/1.1.1.1/Mon Jun 20 05:54:37 2011/-kk/
+/vfprintf.c/1.1.1.1/Mon Jun 20 05:54:37 2011/-kk/
+/vprintf.c/1.1.1.1/Mon Jun 20 05:54:37 2011/-kk/
+/vsnprintf.c/1.1.1.1/Mon Jun 20 05:54:37 2011/-kk/
+/vsprintf.c/1.1.1.1/Mon Jun 20 05:54:37 2011/-kk/
+D

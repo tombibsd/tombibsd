@@ -1,0 +1,7 @@
+#	$NetBSD$
+
+UCS2ANYDIR!=	cd ${NETBSDSRCDIR}/external/mit/xorg/tools/ucs2any && ${PRINTOBJDIR}
+UCS2ANY=	${UCS2ANYDIR}/ucs2any
+
+${UCS2ANY}:
+	(cd ${NETBSDSRCDIR}/external/mit/xorg/tools/ucs2any && ${MAKE})

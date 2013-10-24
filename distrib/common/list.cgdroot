@@ -1,0 +1,10 @@
+#	$NetBSD$
+#
+# list file (c.f. parselist.awk) for cgd full-disk encryption.
+#
+
+PROG	sbin/cgdconfig
+PROG	sbin/wsconsctl
+LIBS	-lcrypto
+
+COPY	${NETBSDSRCDIR}/distrib/common/cgdroot.rc etc/rc

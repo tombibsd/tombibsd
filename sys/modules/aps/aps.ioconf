@@ -1,0 +1,10 @@
+#	$NetBSD$
+
+ioconf aps
+
+include "conf/files"
+include "dev/isa/files.isa"
+
+pseudo-root isa*
+
+aps0 at isa? port 0x1600

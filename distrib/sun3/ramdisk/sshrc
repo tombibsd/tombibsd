@@ -1,0 +1,4 @@
+# .sshrc
+# $NetBSD$
+path /sbin:/bin
+run cat /.welcome

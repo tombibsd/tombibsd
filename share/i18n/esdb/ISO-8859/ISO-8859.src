@@ -1,0 +1,6 @@
+# $NetBSD$
+
+NAME		"ISO-8859-x"
+ENCODING	"NONE"
+DEFCSID		"ISO-8859-x"	0
+INVALID		0x3F	# '?'

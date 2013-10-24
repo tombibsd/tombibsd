@@ -1,0 +1,11 @@
+# $NetBSD$
+
+ioconf acpivga
+
+include "conf/files"
+include "dev/acpi/files.acpi"
+
+pseudo-root acpi*
+
+acpivga* at acpi?
+acpiout* at acpivga?

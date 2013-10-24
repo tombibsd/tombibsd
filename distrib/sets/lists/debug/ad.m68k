@@ -1,0 +1,4 @@
+# $NetBSD$
+./usr/lib/libm68k_g.a				-unknown-		debuglib
+./usr/libdata/debug/usr/bin/elf2aout.debug	comp-sysutil-debug	debug
+./usr/libdata/debug/usr/bin/fdformat.debug	comp-util-debug		debug

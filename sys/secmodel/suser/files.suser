@@ -1,0 +1,5 @@
+# $NetBSD$
+
+defflag secmodel_suser
+
+file	secmodel/suser/secmodel_suser.c	secmodel_suser

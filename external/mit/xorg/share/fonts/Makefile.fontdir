@@ -1,0 +1,6 @@
+#	$NetBSD$
+
+FILESDIR=	${X11FONTDIR}/${FONTSUBDIR}
+.PATH:  	${X11SRCDIR.${FONTSRCPKG}}
+
+.include "../Makefile.mkfontscale"

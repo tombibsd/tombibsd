@@ -1,0 +1,7 @@
+#	$NetBSD$
+
+USE_NETIF=	i82557
+
+CPPFLAGS+= -DPCIROM -DPCI_VID=0x8086 -DPCI_DID=0x1229 -DPCI_CLASS=0x020000
+
+.include "../Makefile.netboot"

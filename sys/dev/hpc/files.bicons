@@ -1,0 +1,8 @@
+#	$NetBSD$
+#	H/PC builtin console
+
+defpseudo	biconsdev
+
+file	dev/hpc/biconsdev.c	biconsdev	needs-count
+file	dev/hpc/bicons.c	biconsdev
+file	dev/hpc/bifont.c	biconsdev

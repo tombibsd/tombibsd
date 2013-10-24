@@ -1,0 +1,5 @@
+# $NetBSD$
+
+include "arch/i386/conf/XEN3_DOM0"
+
+options 	 PAE

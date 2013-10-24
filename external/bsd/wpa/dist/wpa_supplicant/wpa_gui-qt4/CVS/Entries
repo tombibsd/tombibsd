@@ -1,0 +1,31 @@
+/.gitignore/1.1.1.2/Sun Oct  7 23:48:10 2012/-kk/
+/addinterface.cpp/1.1.1.1/Wed Aug  4 10:23:49 2010/-kk/
+/addinterface.h/1.1.1.1/Wed Aug  4 10:23:49 2010/-kk/
+/eventhistory.cpp/1.1.1.1/Wed Aug  4 10:23:49 2010/-kk/
+/eventhistory.h/1.1.1.1/Wed Aug  4 10:23:49 2010/-kk/
+/eventhistory.ui/1.1.1.1/Wed Aug  4 10:23:48 2010/-kk/
+/icons.qrc/1.1.1.2/Sun Oct  7 23:48:09 2012/-kk/
+/icons_png.qrc/1.1.1.2/Sun Oct  7 23:48:10 2012/-kk/
+/main.cpp/1.1.1.1/Wed Aug  4 10:23:49 2010/-kk/
+/networkconfig.cpp/1.1.1.1/Wed Aug  4 10:23:48 2010/-kk/
+/networkconfig.h/1.1.1.1/Wed Aug  4 10:23:49 2010/-kk/
+/networkconfig.ui/1.1.1.1/Wed Aug  4 10:23:48 2010/-kk/
+/peers.cpp/1.1.1.2/Sun Oct  7 23:48:09 2012/-kk/
+/peers.h/1.1.1.2/Sun Oct  7 23:48:10 2012/-kk/
+/peers.ui/1.1.1.1/Wed Aug  4 10:23:46 2010/-kk/
+/scanresults.cpp/1.1.1.1/Wed Aug  4 10:23:46 2010/-kk/
+/scanresults.h/1.1.1.1/Wed Aug  4 10:23:41 2010/-kk/
+/scanresults.ui/1.1.1.1/Wed Aug  4 10:23:41 2010/-kk/
+/stringquery.cpp/1.1.1.1/Wed Aug  4 10:23:49 2010/-kk/
+/stringquery.h/1.1.1.1/Wed Aug  4 10:23:48 2010/-kk/
+/userdatarequest.cpp/1.1.1.1/Wed Aug  4 10:23:48 2010/-kk/
+/userdatarequest.h/1.1.1.1/Wed Aug  4 10:23:49 2010/-kk/
+/userdatarequest.ui/1.1.1.1/Wed Aug  4 10:23:44 2010/-kk/
+/wpa_gui.desktop/1.1.1.1/Wed Aug  4 10:23:44 2010/-kk/
+/wpa_gui.pro/1.1.1.1/Wed Aug  4 10:23:49 2010/-kk/
+/wpagui.cpp/1.1.1.3/Sun Oct  7 23:48:09 2012/-kk/
+/wpagui.h/1.1.1.1/Wed Aug  4 10:23:48 2010/-kk/
+/wpagui.ui/1.1.1.1/Wed Aug  4 10:23:45 2010/-kk/
+/wpamsg.h/1.1.1.1/Wed Aug  4 10:23:41 2010/-kk/
+D/icons////
+D/lang////

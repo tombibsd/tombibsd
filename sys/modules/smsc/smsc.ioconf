@@ -1,0 +1,10 @@
+# $NetBSD$
+
+ioconf smsc
+
+include "conf/files"
+include "dev/isa/files.isa"
+
+pseudo-root isa*
+
+smsc0 at isa? port 0x02e

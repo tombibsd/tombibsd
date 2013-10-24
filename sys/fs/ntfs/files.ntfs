@@ -1,0 +1,12 @@
+#	$NetBSD$
+
+deffs	NTFS
+
+defflag	opt_ntfs.h		NTFS_DEBUG
+
+file	fs/ntfs/ntfs_compr.c	ntfs
+file	fs/ntfs/ntfs_conv.c	ntfs
+file	fs/ntfs/ntfs_ihash.c	ntfs
+file	fs/ntfs/ntfs_subr.c	ntfs
+file	fs/ntfs/ntfs_vfsops.c	ntfs
+file	fs/ntfs/ntfs_vnops.c	ntfs

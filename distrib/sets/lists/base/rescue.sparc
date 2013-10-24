@@ -1,0 +1,3 @@
+# $NetBSD$
+./rescue/edlabel				base-rescue-root	obsolete
+./rescue/ldconfig				base-rescue-root

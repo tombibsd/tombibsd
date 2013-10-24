@@ -1,0 +1,18 @@
+/Makefile.am/1.1.1.1/Mon Jun 20 05:54:46 2011/-kk/
+/Makefile.in/1.1.1.1/Mon Jun 20 05:54:46 2011/-kk/
+/clocale.c/1.1.1.1/Mon Jun 20 05:54:46 2011/-kk/
+/t-assign.cc/1.1.1.1/Mon Jun 20 05:54:45 2011/-kk/
+/t-binary.cc/1.1.1.1/Mon Jun 20 05:54:45 2011/-kk/
+/t-cast.cc/1.1.1.1/Mon Jun 20 05:54:45 2011/-kk/
+/t-constr.cc/1.1.1.1/Mon Jun 20 05:54:45 2011/-kk/
+/t-headers.cc/1.1.1.1/Mon Jun 20 05:54:46 2011/-kk/
+/t-istream.cc/1.1.1.1/Mon Jun 20 05:54:45 2011/-kk/
+/t-locale.cc/1.1.1.1/Mon Jun 20 05:54:46 2011/-kk/
+/t-misc.cc/1.1.1.1/Mon Jun 20 05:54:46 2011/-kk/
+/t-ops.cc/1.1.1.1/Mon Jun 20 05:54:45 2011/-kk/
+/t-ostream.cc/1.1.1.1/Mon Jun 20 05:54:46 2011/-kk/
+/t-prec.cc/1.1.1.1/Mon Jun 20 05:54:46 2011/-kk/
+/t-rand.cc/1.1.1.1/Mon Jun 20 05:54:46 2011/-kk/
+/t-ternary.cc/1.1.1.1/Mon Jun 20 05:54:46 2011/-kk/
+/t-unary.cc/1.1.1.1/Mon Jun 20 05:54:46 2011/-kk/
+D

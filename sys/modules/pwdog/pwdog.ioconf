@@ -1,0 +1,11 @@
+#	$NetBSD$
+
+ioconf		pwdog
+
+include		"conf/files"
+include		"dev/i2o/files.i2o"
+include		"dev/pci/files.pci"
+
+pseudo-root	pci*
+pwdog*		at pci?
+

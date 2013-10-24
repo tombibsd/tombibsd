@@ -1,0 +1,9 @@
+$NetBSD$
+
+NOTE ANY CHANGES YOU MAKE TO THE BOOTBLOCKS HERE.  The format of this
+file is important - make sure the entries are appended on end, last item
+is taken as the current.
+
+1.0:	PXE boot loader, contributed by Wasabi Systems, Inc.
+1.1:	use .code16 and .code32 directives
+5.1:	Change boot messages to replace build date with kernel version.
