@@ -295,14 +295,11 @@ cpu_intr_p(void)
 bool
 cpu_kpreempt_enter(uintptr_t where, int s)
 {
-	struct cpu_info *ci;
 	struct pcb *pcb;
 	lwp_t *l;
 
 	KASSERT(kpreempt_disabled());
-
 	l = curlwp;
-	ci = curcpu();
 
 	/*
 	 * If SPL raised, can't go.  Note this implies that spin

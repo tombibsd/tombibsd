@@ -29,8 +29,8 @@
 .\"
 .\"	@(#)2.5.t	8.6 (Berkeley) 5/29/94
 .\"
-.Sh 2 "Process debugging
-.Sh 3 "Traditional debugging
+.Sh 2 38 "Process debugging
+.Sh 3 38 "Traditional debugging
 .LP
 Debuggers traditionally use the
 .Fn ptrace
@@ -73,7 +73,7 @@ The debugger finds (or creates) the process that it wants to
 debug and then issues an attach command via the \fIctl\fP file.
 Further interaction can then be done with the process through
 the other files provided by the \fI/proc\fP filesystem.
-.Sh 3 "Kernel tracing
+.Sh 3 38 "Kernel tracing
 .LP
 Another facility for debugging programs is provided by the
 .Fn ktrace

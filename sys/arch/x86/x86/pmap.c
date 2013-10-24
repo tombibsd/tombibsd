@@ -3549,12 +3549,10 @@ pmap_page_remove(struct vm_page *pg)
 	struct pv_entry *killlist = NULL;
 	struct vm_page *ptp;
 	pt_entry_t expect;
-	lwp_t *l;
 	int count;
 
 	KASSERT(uvm_page_locked_p(pg));
 
-	l = curlwp;
 	pp = VM_PAGE_TO_PP(pg);
 	expect = pmap_pa2pte(VM_PAGE_TO_PHYS(pg)) | PG_V;
 	count = SPINLOCK_BACKOFF_MIN;

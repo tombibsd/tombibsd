@@ -29,7 +29,7 @@
 .\"
 .\"	@(#)1.0.t	8.3 (Berkeley) 5/26/94
 .\"
-.Sh 1 "Kernel primitives
+.Sh 1 4 "Kernel primitives
 .PP
 The facilities available to a user process are logically
 divided into two parts: kernel facilities directly implemented by

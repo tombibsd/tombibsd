@@ -1644,6 +1644,11 @@ ifioctl_common(struct ifnet *ifp, u_long cmd, void *data)
 		ifdr->ifdr_data = ifp->if_data;
 		break;
 
+	case SIOCGIFINDEX:
+		ifr = data;
+		ifr->ifr_index = ifp->if_index;
+		break;
+
 	case SIOCZIFDATA:
 		ifdr = data;
 		ifdr->ifdr_data = ifp->if_data;

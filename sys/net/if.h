@@ -598,6 +598,7 @@ struct	ifreq {
 						 */
 #define	ifr_buf		ifr_ifru.ifru_b.b_buf	/* new interface ioctls */
 #define	ifr_buflen	ifr_ifru.ifru_b.b_buflen
+#define	ifr_index	ifr_ifru.ifru_value	/* interface index */
 };
 
 #ifdef _KERNEL

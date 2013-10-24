@@ -29,7 +29,7 @@
 .\"
 .\"	@(#)2.0.t	8.4 (Berkeley) 5/26/94
 .\"
-.Sh 1 "System facilities
+.Sh 1 21 "System facilities
 .LP
 The system abstractions described are:
 .IP "Directory contexts

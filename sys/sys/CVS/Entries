@@ -191,7 +191,7 @@
 /sleepq.h/1.22/Sun Feb 19 21:07:00 2012/-kk/
 /socket.h/1.108/Thu Jan 31 14:30:47 2013/-kk/
 /socketvar.h/1.131/Thu Aug 29 17:49:21 2013/-kk/
-/sockio.h/1.31/Wed Oct 31 10:17:35 2012/-kk/
+/sockio.h/1.32/Thu Oct 24 06:14:28 2013/-kk/
 /spawn.h/1.4/Sat Apr 27 21:35:25 2013/-kk/
 /specificdata.h/1.4/Mon Apr 28 20:24:11 2008/-kk/
 /spl.h/1.9/Sat Mar  7 21:59:25 2009/-kk/

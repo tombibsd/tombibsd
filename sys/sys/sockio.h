@@ -136,6 +136,7 @@
 /* 138 is SIOCGATHDIAG in athioctl.h */
 
 #define	SIOCGETHERCAP	_IOWR('i', 139, struct eccapreq) /* get ethercap */
+#define SIOCGIFINDEX  _IOWR('i', 140, struct ifreq)   /* get ifnet index */
 
 #define	SIOCSETPFSYNC	_IOW('i', 247, struct ifreq)	
 #define	SIOCGETPFSYNC	_IOWR('i', 248, struct ifreq)

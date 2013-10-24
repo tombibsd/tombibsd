@@ -32,7 +32,7 @@
 /odcm.c/1.2/Sat Jun  2 21:36:42 2012/-kk/
 /patch.c/1.21/Sun Apr 18 23:47:51 2010/-kk/
 /platform.c/1.14/Sat Dec  8 12:36:31 2012/-kk/
-/pmap.c/1.179/Tue Nov 13 14:07:42 2012/-kk/
+/pmap.c/1.180/Thu Oct 24 06:14:23 2013/-kk/
 /pmap_tlb.c/1.6/Sat Apr 21 22:22:48 2012/-kk/
 /powernow.c/1.7/Sat Oct 27 07:19:45 2012/-kk/
 /procfs_machdep.c/1.1/Thu Jul  8 11:25:00 2010/-kk/
@@ -48,7 +48,7 @@
 /vm_machdep.c/1.16/Sun Jul 15 15:17:56 2012/-kk/
 /vmt.c/1.8/Sat Mar 16 01:26:53 2013/-kk/
 /x86_autoconf.c/1.68/Thu May 16 19:06:45 2013/-kk/
-/x86_machdep.c/1.60/Sat Aug 31 12:26:56 2013/-kk/
+/x86_machdep.c/1.61/Thu Oct 24 06:14:23 2013/-kk/
 /x86_stub.c/1.4/Wed Oct 19 05:01:43 2011/-kk/
 /x86_userconf.c/1.1/Tue May 31 23:28:53 2011/-kk/
 D
