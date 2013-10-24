@@ -15,7 +15,13 @@ options 	FONT_VT220ISO8x16
 
 wskbd0		at kbd0 console ?
 
+ukbd*		at uhidev? reportid ?  
+wskbd*		at ukbd? console ?
+
 wsmouse*	at ms?
+
+ums*		at uhidev? reportid ? 
+wsmouse*	at ums?
 
 no grfcc0	at mainbus0
 no grfrt0	at zbus0

@@ -183,7 +183,7 @@ static const long reloc_target_bitmask[] = {
 	_BM(7), _BM(5), _BM(6),		/* _7, _5, _6 */
 	-1, -1,				/* DISP64, PLT64 */
 	_BM(22), _BM(13),		/* HIX22, LOX10 */
-	_BM(22), _BM(10), _BM(13),	/* H44, M44, L44 */
+	_BM(22), _BM(10), _BM(12),	/* H44, M44, L44 */
 	-1, -1, _BM(16),		/* REGISTER, UA64, UA16 */
 #undef _BM
 };

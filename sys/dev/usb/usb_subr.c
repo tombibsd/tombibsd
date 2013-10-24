@@ -780,8 +780,6 @@ usbd_setup_pipe_flags(usbd_device_handle dev, usbd_interface_handle iface,
 void
 usbd_kill_pipe(usbd_pipe_handle pipe)
 {
-	int s;
-
 	usbd_abort_pipe(pipe);
 	usbd_lock_pipe(pipe);
 	pipe->methods->close(pipe);

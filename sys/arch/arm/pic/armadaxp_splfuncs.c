@@ -56,7 +56,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <arm/marvell/mvsocreg.h>
 #include <arm/marvell/mvsocvar.h>
-#include <evbarm/armadaxp/armadaxpreg.h>
+#include <arm/marvell/armadaxpreg.h>
 
 #include <evbarm/marvell/marvellreg.h>
 #include <dev/marvell/marvellreg.h>

@@ -647,7 +647,12 @@ evalvar(char *p, int flag)
 	p = strchr(p, '=') + 1;
 
 again: /* jump here after setting a variable with ${var=text} */
-	if (special) {
+	if (varflags & VSLINENO) {
+		set = 1;
+		special = 0;
+		val = var;
+		p[-1] = '\0';
+	} else if (special) {
 		set = varisset(var, varflags & VSNUL);
 		val = NULL;
 	} else {
@@ -784,6 +789,7 @@ again: /* jump here after setting a variable with ${var=text} */
 	default:
 		abort();
 	}
+	p[-1] = '=';	/* recover overwritten '=' */
 
 	if (apply_ifs)
 		recordregion(startloc, expdest - stackblock(),

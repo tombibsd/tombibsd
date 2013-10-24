@@ -28,6 +28,7 @@ SRCS+=		${LIB2FUNCS} ${LIB2FUNCS_ST} ${LIB2DIVMOD} \
 .if empty(LIBGCC_MACHINE_ARCH:Mearm*)
 SRCS+=		${LIB2_EH} ${LIB2_EHASM}
 .endif
+PICFLAGS=
 .else
 CPPFLAGS+=	-DPIC
 .endif

@@ -112,7 +112,10 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <arm/cpufunc.h>
 #include <arm/mainbus/mainbus.h>
-#include <arm/omap/omap_reg.h>
+/* 
+ * XXX. Do we really need this ? #include <arm/omap/omap_reg.h> 
+ * Atleast commenting this makes it more generic.
+ */
 #include <arm/omap/omap_tipb.h>
 
 struct tipb_softc {

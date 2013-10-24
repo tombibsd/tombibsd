@@ -902,6 +902,7 @@ static const char * const initpaths[] = {
 	"/sbin/init",
 	"/sbin/oinit",
 	"/sbin/init.bak",
+	"/rescue/init",
 	NULL,
 };
 

@@ -150,11 +150,11 @@
 /clmpcc.c/1.46/Sat Oct 27 17:18:19 2012/-kk/
 /clmpccreg.h/1.4/Mon Apr 28 20:23:49 2008/-kk/
 /clmpccvar.h/1.13/Sat Oct 27 17:18:20 2012/-kk/
-/com.c/1.316/Thu Sep 12 12:54:39 2013/-kk/
+/com.c/1.317/Thu Oct 24 06:05:14 2013/-kk/
 /com_cpcbus.c/1.11/Mon Apr 28 20:23:49 2008/-kk/
 /com_upc.c/1.11/Sun Jan 25 14:34:14 2009/-kk/
-/comreg.h/1.21/Tue Sep  3 15:32:55 2013/-kk/
-/comvar.h/1.77/Tue Sep  3 15:32:55 2013/-kk/
+/comreg.h/1.22/Thu Oct 24 06:05:14 2013/-kk/
+/comvar.h/1.78/Thu Oct 24 06:05:14 2013/-kk/
 /cpc700.c/1.19/Fri Jan 27 18:53:07 2012/-kk/
 /cpc700reg.h/1.5/Mon Apr 28 20:23:49 2008/-kk/
 /cpc700uic.h/1.4/Mon Apr 28 20:23:49 2008/-kk/
@@ -418,7 +418,7 @@
 /ninjascsi32reg.h/1.3/Mon Apr 28 20:23:50 2008/-kk/
 /ninjascsi32var.h/1.7/Sat Oct 27 17:18:22 2012/-kk/
 /ns16450reg.h/1.6/Sun Dec 11 12:21:28 2005/-kk/
-/ns16550reg.h/1.9/Sun Sep  1 04:51:24 2013/-kk/
+/ns16550reg.h/1.10/Thu Oct 24 06:05:14 2013/-kk/
 /ns8477reg.h/1.3/Mon Apr 28 20:23:50 2008/-kk/
 /nslm7x.c/1.59/Sat Jan 21 15:50:13 2012/-kk/
 /nslm7xvar.h/1.28/Tue Jan 17 16:14:47 2012/-kk/
@@ -497,9 +497,9 @@
 /siopreg.h/1.22/Mon Oct 19 18:41:13 2009/-kk/
 /siopvar.h/1.29/Fri Aug 24 09:01:23 2012/-kk/
 /siopvar_common.h/1.40/Mon Oct 19 18:41:13 2009/-kk/
-/sl811hs.c/1.40/Mon Sep 23 11:27:45 2013/-kk/
+/sl811hs.c/1.45/Thu Oct 24 06:05:14 2013/-kk/
 /sl811hsreg.h/1.4/Sun Sep 22 06:54:35 2013/-kk/
-/sl811hsvar.h/1.10/Sun Sep 22 06:54:35 2013/-kk/
+/sl811hsvar.h/1.11/Thu Oct 24 06:05:14 2013/-kk/
 /sm502reg.h/1.7/Wed Mar 13 21:31:01 2013/-kk/
 /smc83c170.c/1.81/Sun Jul 22 14:32:58 2012/-kk/
 /smc83c170reg.h/1.13/Mon Apr 28 20:23:51 2008/-kk/

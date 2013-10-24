@@ -49,9 +49,11 @@
 #define	CTL_LAST '\211'		/* last 'special' character */
 
 /* variable substitution byte (follows CTLVAR) */
-#define VSTYPE	0x0f		/* type of variable substitution */
-#define VSNUL	0x10		/* colon--treat the empty string as unset */
-#define VSQUOTE 0x80		/* inside double quotes--suppress splitting */
+#define VSTYPE		0x0f	/* type of variable substitution */
+#define VSNUL		0x10	/* colon--treat the empty string as unset */
+#define VSLINENO	0x20	/* expansion of $LINENO, the line number
+				   follows immediately */
+#define VSQUOTE	 	0x80	/* inside double quotes--suppress splitting */
 
 /* values of VSTYPE field */
 #define VSNORMAL	0x1		/* normal variable:  $var or ${var} */

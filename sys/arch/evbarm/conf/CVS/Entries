@@ -26,6 +26,7 @@
 /GOLDENGATE_INSTALL/1.1/Tue Feb 19 16:12:36 2013/-kk/
 /GUMSTIX/1.79/Tue Aug 13 12:11:02 2013/-kk/
 /GUMSTIX_INSTALL/1.3/Sun Aug  9 07:10:13 2009/-kk/
+/HAWK/1.1/Wed Oct  2 16:48:26 2013/-kk/
 /HDL_G/1.38/Sun Jun 30 21:38:56 2013/-kk/
 /HPT5325/1.18/Sun Jun 30 21:38:56 2013/-kk/
 /IGEPV2/1.20/Mon Aug 12 21:17:59 2013/-kk/
@@ -104,6 +105,7 @@
 /files.gemini/1.1/Fri Oct 24 04:23:18 2008/-kk/
 /files.goldengate/1.1/Tue Feb 19 16:12:36 2013/-kk/
 /files.gumstix/1.17/Thu Sep 23 07:08:57 2010/-kk/
+/files.hawk/1.1/Wed Oct  2 16:48:26 2013/-kk/
 /files.hdl_g/1.3/Mon Dec  3 15:33:30 2007/-kk/
 /files.imx23_olinuxino/1.1/Tue Nov 20 19:08:45 2012/-kk/
 /files.imx31/1.3/Sat Nov 13 04:53:58 2010/-kk/
@@ -141,6 +143,7 @@
 /mk.gemini/1.3/Mon Jan 31 06:09:32 2011/-kk/
 /mk.goldengate/1.1/Tue Feb 19 16:12:36 2013/-kk/
 /mk.gumstix/1.4/Thu Jun 30 18:20:24 2011/-kk/
+/mk.hawk/1.1/Wed Oct  2 16:48:26 2013/-kk/
 /mk.hdl_g/1.1/Sun Apr 16 02:22:33 2006/-kk/
 /mk.imx23_olinuxino/1.1/Tue Nov 20 19:08:45 2012/-kk/
 /mk.imx31/1.2/Sun Apr 27 18:58:46 2008/-kk/
@@ -176,6 +179,7 @@
 /std.gemini/1.7/Sun Dec 16 23:47:56 2012/-kk/
 /std.goldengate/1.1/Tue Feb 19 16:12:36 2013/-kk/
 /std.gumstix/1.9/Sun Dec 16 23:47:56 2012/-kk/
+/std.hawk/1.1/Wed Oct  2 16:48:26 2013/-kk/
 /std.hdl_g/1.5/Sun Dec 16 23:47:56 2012/-kk/
 /std.igepv2/1.5/Sun Dec 16 23:47:56 2012/-kk/
 /std.imx23_olinuxino/1.3/Sun Dec 16 23:47:56 2012/-kk/
