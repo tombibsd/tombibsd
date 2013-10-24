@@ -1196,6 +1196,12 @@ voodoofb_ioctl(void *v, void *vs, u_long cmd, void *data, int flag,
 		}
 		}
 		return 0;
+		/* XXX WSDISPLAYIO_GET_EDID */
+
+	case WSDISPLAYIO_GET_FBINFO: {
+		struct wsdisplayio_fbinfo *fbi = data;
+		return wsdisplayio_get_fbinfo(&ms->scr_ri, fbi);
+	}
 	}
 	return EPASSTHROUGH;
 }

@@ -494,6 +494,7 @@ ffb_ioctl(void *v, void *vs, u_long cmd, void *data, int flags, struct lwp *l)
 	case WSDISPLAYIO_GVIDEO:
 		return(ffb_blank(sc, cmd, (u_int *)data));
 		break;
+	
 	case WSDISPLAYIO_GCURPOS:
 	case WSDISPLAYIO_SCURPOS:
 	case WSDISPLAYIO_GCURMAX:
@@ -501,10 +502,17 @@ ffb_ioctl(void *v, void *vs, u_long cmd, void *data, int flags, struct lwp *l)
 	case WSDISPLAYIO_SCURSOR:
 		return EIO; /* not supported yet */
 		break;
+	
 	case WSDISPLAYIO_GET_EDID: {
 		struct wsdisplayio_edid_info *d = data;
 		return wsdisplayio_get_edid(sc->sc_dev, d);
 	}
+	
+	case WSDISPLAYIO_GET_FBINFO: {
+		struct wsdisplayio_fbinfo *fbi = data;
+		return wsdisplayio_get_fbinfo(&ms->scr_ri, fbi);
+	}
+	
 	default:
 		return EPASSTHROUGH;
 	}

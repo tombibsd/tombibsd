@@ -750,6 +750,12 @@ chipsfb_ioctl(void *v, void *vs, u_long cmd, void *data, int flag,
 		}
 		}
 		return 0;
+	
+	case WSDISPLAYIO_GET_FBINFO: {
+		struct wsdisplayio_fbinfo *fbi = data;
+		return wsdisplayio_get_fbinfo(&ms->scr_ri, fbi);
+	}
+
 	default:
 		if (sc->sc_ioctl != NULL)
 			return sc->sc_ioctl(v, vs, cmd, data, flag, l);

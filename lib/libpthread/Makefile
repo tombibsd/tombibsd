@@ -78,11 +78,10 @@ SRCS+=		pthread_compat.c
 
 ALIGN_FUNCTIONS=	${${ACTIVE_CC} == "gcc":? -falign-functions=32 :}
 
-.if ${MACHINE_ARCH} == "m68k" || ${MACHINE_ARCH} == "m68000" || \
-    ${MACHINE_CPU} == "sh3" || ${MACHINE_ARCH} == "vax"
-OMIT_FRAME_POINTER=
-.else
+.if ${MACHINE_CPU} != "m68k" && ${MACHINE_CPU} != "sh3" && ${MACHINE_ARCH} != "vax"
 OMIT_FRAME_POINTER=	-fomit-frame-pointer
+.else
+OMIT_FRAME_POINTER=
 .endif
 
 # The TSD routines are used in the implementation of profiling, and so

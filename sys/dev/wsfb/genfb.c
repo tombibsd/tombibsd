@@ -394,6 +394,7 @@ genfb_ioctl(void *v, void *vs, u_long cmd, void *data, int flag,
 				}
 			}
 			return 0;
+		
 		case WSDISPLAYIO_SSPLASH:
 #if defined(SPLASHSCREEN)
 			if(*(int *)data == 1) {
@@ -452,10 +453,17 @@ genfb_ioctl(void *v, void *vs, u_long cmd, void *data, int flag,
 				    sc->sc_backlight->gpc_cookie, val);
 			}
 			return EPASSTHROUGH;
+		
 		case WSDISPLAYIO_GET_EDID: {
 			struct wsdisplayio_edid_info *d = data;
 			return wsdisplayio_get_edid(sc->sc_dev, d);
 		}
+	
+		case WSDISPLAYIO_GET_FBINFO: {
+			struct wsdisplayio_fbinfo *fbi = data;
+			return wsdisplayio_get_fbinfo(&ms->scr_ri, fbi);
+		}
+		
 		default:
 			if (sc->sc_ops.genfb_ioctl)
 				return sc->sc_ops.genfb_ioctl(sc, vs, cmd,

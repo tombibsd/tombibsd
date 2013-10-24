@@ -1062,8 +1062,10 @@ radeonfb_ioctl(void *v, void *vs,
 	struct radeonfb_display	*dp;
 	struct radeonfb_softc	*sc;
 	struct wsdisplay_param  *param;
+	struct vcons_screen 	*ms;
 
 	vd = (struct vcons_data *)v;
+	ms = vd->active;
 	dp = (struct radeonfb_display *)vd->cookie;
 	sc = dp->rd_softc;
 
@@ -1205,6 +1207,11 @@ radeonfb_ioctl(void *v, void *vs,
 	case WSDISPLAYIO_GET_EDID: {
 		struct wsdisplayio_edid_info *ei = d;
 		return wsdisplayio_get_edid(sc->sc_dev, ei);
+	}
+
+	case WSDISPLAYIO_GET_FBINFO: {
+		struct wsdisplayio_fbinfo *fbi = d;
+		return wsdisplayio_get_fbinfo(&ms->scr_ri, fbi);
 	}
 
 	default:

@@ -184,7 +184,6 @@ do_sys_accept(struct lwp *l, int sock, struct mbuf **name, register_t *new_sock,
 		return (error);
 	}
 	nam = m_get(M_WAIT, MT_SONAME);
-	nam->m_len = 0;
 	*new_sock = fd;
 	so = fp->f_data;
 	solock(so);
@@ -235,8 +234,10 @@ do_sys_accept(struct lwp *l, int sock, struct mbuf **name, register_t *new_sock,
 	    ((flags & SOCK_NOSIGPIPE) ? FNOSIGPIPE : 0);
 	fp2->f_ops = &socketops;
 	fp2->f_data = so2;
-	if (flags & SOCK_NONBLOCK)
+	if (fp2->f_flag & FNONBLOCK)
 		so2->so_state |= SS_NBIO;
+	else
+		so2->so_state &= ~SS_NBIO;
 	error = soaccept(so2, nam);
 	so2->so_cred = kauth_cred_dup(so->so_cred);
 	sounlock(so);

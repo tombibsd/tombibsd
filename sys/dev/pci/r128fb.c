@@ -453,9 +453,15 @@ r128fb_ioctl(void *v, void *vs, u_long cmd, void *data, int flag,
 			return 0;
 		}
 		return EPASSTHROUGH;
+	
 	case WSDISPLAYIO_GET_EDID: {
 		struct wsdisplayio_edid_info *d = data;
 		return wsdisplayio_get_edid(sc->sc_dev, d);
+	}
+
+	case WSDISPLAYIO_GET_FBINFO: {
+		struct wsdisplayio_fbinfo *fbi = data;
+		return wsdisplayio_get_fbinfo(&ms->scr_ri, fbi);
 	}
 	}
 	return EPASSTHROUGH;

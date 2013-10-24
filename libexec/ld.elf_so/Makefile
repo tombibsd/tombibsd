@@ -100,7 +100,7 @@ CPPFLAGS+=	-I${NETBSDSRCDIR}/lib/libexecinfo
 #DBG=		-g
 COPTS+=		-O3
 
-.if ${MACHINE_ARCH} != "m68k" && ${MACHINE_CPU} != "sh3" && ${MACHINE_ARCH} != "vax"
+.if ${MACHINE_CPU} != "m68k" && ${MACHINE_CPU} != "sh3" && ${MACHINE_ARCH} != "vax"
 COPTS+=		-fomit-frame-pointer
 .endif
 
