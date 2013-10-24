@@ -298,11 +298,7 @@ ssize_t	 pwrite(int, const void *, size_t, off_t);
     defined(_INCOMPLETE_XOPEN_C063) || defined(_NETBSD_SOURCE)
 int	linkat(int, const char *, int, const char *, int);
 int	renameat(int, const char *, int, const char *);
-int	mkfifoat(int, const char *, mode_t);
-int	mknodat(int, const char *, mode_t, uint32_t);
-int	mkdirat(int, const char *, mode_t);
 int	faccessat(int, const char *, int, int);
-int	fchmodat(int, const char *, mode_t, int);
 int	fchownat(int, const char *, uid_t, gid_t, int);
 int	readlinkat(int, const char *, char *, size_t);
 int	symlinkat(const char *, int, const char *);

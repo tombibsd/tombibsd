@@ -722,7 +722,7 @@ sbappend(struct sockbuf *sb, struct mbuf *m)
 
 	KASSERT(solocked(sb->sb_so));
 
-	if (m == 0)
+	if (m == NULL)
 		return;
 
 #ifdef MBUFTRACE
@@ -819,7 +819,7 @@ sbappendrecord(struct sockbuf *sb, struct mbuf *m0)
 
 	KASSERT(solocked(sb->sb_so));
 
-	if (m0 == 0)
+	if (m0 == NULL)
 		return;
 
 #ifdef MBUFTRACE
@@ -854,7 +854,7 @@ sbinsertoob(struct sockbuf *sb, struct mbuf *m0)
 
 	KASSERT(solocked(sb->sb_so));
 
-	if (m0 == 0)
+	if (m0 == NULL)
 		return;
 
 	SBLASTRECORDCHK(sb, "sbinsertoob 1");
@@ -921,13 +921,13 @@ sbappendaddr(struct sockbuf *sb, const struct sockaddr *asa, struct mbuf *m0,
 	for (n = control; n; n = n->m_next) {
 		space += n->m_len;
 		MCLAIM(n, sb->sb_mowner);
-		if (n->m_next == 0)	/* keep pointer to last control buf */
+		if (n->m_next == NULL)	/* keep pointer to last control buf */
 			break;
 	}
 	if (space > sbspace(sb))
 		return (0);
-	MGET(m, M_DONTWAIT, MT_SONAME);
-	if (m == 0)
+	m = m_get(M_DONTWAIT, MT_SONAME);
+	if (m == NULL)
 		return (0);
 	MCLAIM(m, sb->sb_mowner);
 	/*
@@ -979,16 +979,16 @@ m_prepend_sockaddr(struct sockbuf *sb, struct mbuf *m0,
 	KASSERT(solocked(sb->sb_so));
 
 	/* only the first in each chain need be a pkthdr */
-	MGETHDR(m, M_DONTWAIT, MT_SONAME);
-	if (m == 0)
-		return (0);
+	m = m_gethdr(M_DONTWAIT, MT_SONAME);
+	if (m == NULL)
+		return NULL;
 	MCLAIM(m, sb->sb_mowner);
 #ifdef notyet
 	if (salen > MHLEN) {
 		MEXTMALLOC(m, salen, M_NOWAIT);
 		if ((m->m_flags & M_EXT) == 0) {
 			m_free(m);
-			return (0);
+			return NULL;
 		}
 	}
 #else
@@ -1109,12 +1109,12 @@ sbappendcontrol(struct sockbuf *sb, struct mbuf *m0, struct mbuf *control)
 	KASSERT(solocked(sb->sb_so));
 
 	space = 0;
-	if (control == 0)
+	if (control == NULL)
 		panic("sbappendcontrol");
 	for (m = control; ; m = m->m_next) {
 		space += m->m_len;
 		MCLAIM(m, sb->sb_mowner);
-		if (m->m_next == 0)
+		if (m->m_next == NULL)
 			break;
 	}
 	n = m;			/* save pointer to last control buffer */
@@ -1228,10 +1228,10 @@ sbdrop(struct sockbuf *sb, int len)
 
 	KASSERT(solocked(sb->sb_so));
 
-	next = (m = sb->sb_mb) ? m->m_nextpkt : 0;
+	next = (m = sb->sb_mb) ? m->m_nextpkt : NULL;
 	while (len > 0) {
-		if (m == 0) {
-			if (next == 0)
+		if (m == NULL) {
+			if (next == NULL)
 				panic("sbdrop(%p,%d): cc=%lu",
 				    sb, len, sb->sb_cc);
 			m = next;
