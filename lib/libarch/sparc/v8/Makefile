@@ -10,6 +10,8 @@ LIB=		sparc_v8
 DPLIBC=		# nothing
 LDLIBC=		-nodefaultlibs
 
+AFLAGS+=	-Av8
+
 SRCS=	sparc_v8.S
 
 .include <bsd.lib.mk>

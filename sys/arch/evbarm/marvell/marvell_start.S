@@ -229,7 +229,6 @@ u_boot_args:
 cores_start:
 	.word	CPU_ID_MV88SV131,	SHEEVA
 	.word	CPU_ID_MV88FR571_VD,	SHEEVA	/* Is it Sheeva? */
-	.word	CPU_ID_MVOLD,		SHEEVA	/* Is it Sheeva? */
 	.word	CPU_ID_MV88SV581X_V6,	PJ4B
 	.word	CPU_ID_MV88SV581X_V7,	PJ4B
 	.word	CPU_ID_MV88SV584X_V7,	PJ4B
