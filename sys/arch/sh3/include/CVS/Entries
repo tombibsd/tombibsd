@@ -2,7 +2,7 @@
 /adcreg.h/1.3/Sun Dec 11 12:18:58 2005/-kk/
 /ansi.h/1.15/Sun Jul 17 20:54:47 2011/-kk/
 /aout_machdep.h/1.4/Tue Dec 10 17:14:18 2002/-kk/
-/asm.h/1.28/Thu Sep 12 15:36:17 2013/-kk/
+/asm.h/1.28/Thu Oct 24 10:28:57 2013/-kk/
 /bscreg.h/1.7/Sun Feb 17 05:36:38 2008/-kk/
 /bswap.h/1.7/Wed Feb  1 20:56:18 2006/-kk/
 /bus_defs.h/1.1/Fri Jul  1 17:10:01 2011/-kk/
@@ -15,12 +15,12 @@
 /clock.h/1.4/Mon Apr 28 20:23:35 2008/-kk/
 /coff_machdep.h/1.6/Sun Apr 28 17:10:33 2002/-kk/
 /cpgreg.h/1.5/Sun Apr 28 17:10:34 2002/-kk/
-/cpu.h/1.56/Thu Oct 24 06:29:25 2013/-kk/
+/cpu.h/1.56/Thu Oct 24 10:28:57 2013/-kk/
 /cputypes.h/1.12/Tue Apr 21 12:57:41 2009/-kk/
 /dacreg.h/1.2/Sun Dec 11 12:18:58 2005/-kk/
 /db_machdep.h/1.16/Thu May 26 15:34:13 2011/-kk/
 /devreg.h/1.6/Mon Apr 28 20:23:35 2008/-kk/
-/disklabel.h/1.9/Thu May 16 18:47:38 2013/-kk/
+/disklabel.h/1.9/Thu Oct 24 10:28:57 2013/-kk/
 /dmacreg.h/1.3/Thu Mar 29 23:09:41 2007/-kk/
 /elf_machdep.h/1.10/Sat May 30 05:56:53 2009/-kk/
 /endian.h/1.4/Fri Mar 17 00:09:25 2000/-kk/
@@ -37,7 +37,7 @@
 /int_types.h/1.8/Sat Dec 24 20:07:32 2005/-kk/
 /intcreg.h/1.10/Sun Dec 11 12:18:58 2005/-kk/
 /intr.h/1.26/Sat Mar 21 06:11:08 2009/-kk/
-/limits.h/1.13/Thu Apr 11 00:57:36 2013/-kk/
+/limits.h/1.13/Thu Oct 24 10:28:57 2013/-kk/
 /lock.h/1.16/Tue Oct 13 12:55:53 2009/-kk/
 /locore.h/1.22/Fri Feb  4 04:13:52 2011/-kk/
 /math.h/1.3/Tue Feb 19 13:08:15 2002/-kk/
@@ -61,7 +61,7 @@
 /rtcreg.h/1.11/Thu Oct 19 03:26:10 2006/-kk/
 /rwlock.h/1.5/Mon Apr 28 20:23:35 2008/-kk/
 /scifreg.h/1.10/Sat Feb 18 00:41:32 2006/-kk/
-/scireg.h/1.10/Tue May 14 13:53:47 2013/-kk/
+/scireg.h/1.10/Thu Oct 24 10:28:57 2013/-kk/
 /setjmp.h/1.3/Thu Jan  5 00:50:23 2006/-kk/
 /sh_opcode.h/1.3/Sun Apr 28 17:10:36 2002/-kk/
 /signal.h/1.13/Wed Nov 19 18:36:00 2008/-kk/

@@ -1,4 +1,4 @@
-/Makefile/1.14/Thu May  2 03:56:41 2013/-kk/
+/Makefile/1.14/Thu Oct 24 10:28:57 2013/-kk/
 /ansi.h/1.1/Sun Feb 10 01:57:06 2002/-kk/
 /aout_machdep.h/1.1/Sun Feb 10 01:57:07 2002/-kk/
 /asm.h/1.1/Sun Feb 10 01:57:07 2002/-kk/
@@ -12,7 +12,7 @@
 /cpu.h/1.1/Sun Feb 10 01:57:12 2002/-kk/
 /db_machdep.h/1.1/Sun Feb 10 01:57:12 2002/-kk/
 /devmap.h/1.1/Sun Feb 10 01:57:13 2002/-kk/
-/disklabel.h/1.5/Tue May  7 20:42:47 2013/-kk/
+/disklabel.h/1.5/Thu Oct 24 10:28:57 2013/-kk/
 /elf_machdep.h/1.1/Sun Feb 10 01:57:14 2002/-kk/
 /endian.h/1.1/Sun Feb 10 01:57:15 2002/-kk/
 /endian_machdep.h/1.1/Sun Feb 10 01:57:15 2002/-kk/
@@ -41,7 +41,7 @@
 /mcontext.h/1.2/Sat Jan 18 06:37:05 2003/-kk/
 /mouse.h/1.2/Fri Apr 19 01:43:49 2002/-kk/
 /mutex.h/1.2/Fri Feb  9 21:55:12 2007/-kk/
-/netbsd32_machdep.h/1.1/Wed Aug 14 14:43:12 2013/-kk/
+/netbsd32_machdep.h/1.1/Thu Oct 24 10:28:57 2013/-kk/
 /ofisa_machdep.h/1.1/Sun Feb 10 01:57:29 2002/-kk/
 /ofw.h/1.1/Sun Feb 10 01:57:30 2002/-kk/
 /param.h/1.4/Thu Apr 17 00:03:36 2008/-kk/

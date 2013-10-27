@@ -677,7 +677,7 @@ static void
 spx_cursor(void *id, int on, int row, int col)
 {
 	struct spx_screen *ss = id;
-	int attr, data;
+	int attr, data __unused;
 
 	attr = ss->ss_image[row * spx_cols + col].attr;
 	data = ss->ss_image[row * spx_cols + col].data;

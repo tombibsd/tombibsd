@@ -107,7 +107,7 @@ void	(*pxe_call)(uint16_t);
 void	pxecall_bangpxe(uint16_t);	/* pxe_call.S */
 void	pxecall_pxenv(uint16_t);	/* pxe_call.S */
 
-char pxe_command_buf[256];
+extern char pxe_command_buf[256];
 
 BOOTPLAYER bootplayer;
 

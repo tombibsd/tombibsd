@@ -204,7 +204,6 @@ int
 chfs_mountfs(struct vnode *devvp, struct mount *mp)
 {
 	struct lwp *l = curlwp;
-	struct proc *p;
 	kauth_cred_t cred;
 	devmajor_t flash_major;
 	dev_t dev;
@@ -216,7 +215,6 @@ chfs_mountfs(struct vnode *devvp, struct mount *mp)
 	dbg("mountfs()\n");
 
 	dev = devvp->v_rdev;
-	p = l ? l->l_proc : NULL;
 	cred = l ? l->l_cred : NOCRED;
 
 	/* Flush out any old buffers remaining from a previous use. */

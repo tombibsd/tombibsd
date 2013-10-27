@@ -1,10 +1,10 @@
-/Makefile/1.19/Thu May  2 03:56:42 2013/-kk/
-/defs.h/1.15/Tue Jul  2 11:59:46 2013/-kk/
-/eehandlers.c/1.18/Tue Jul  2 11:59:46 2013/-kk/
+/Makefile/1.19/Thu Oct 24 10:29:00 2013/-kk/
+/defs.h/1.15/Thu Oct 24 10:29:00 2013/-kk/
+/eehandlers.c/1.18/Thu Oct 24 10:29:00 2013/-kk/
 /eeprom.8/1.16/Sat Dec 19 23:10:57 2009/-kk/
-/main.c/1.23/Tue Jul  2 11:59:46 2013/-kk/
-/ofhandlers.c/1.6/Tue Jul  2 11:59:46 2013/-kk/
-/ophandlers.c/1.13/Tue Jul  2 11:59:46 2013/-kk/
+/main.c/1.23/Thu Oct 24 10:29:00 2013/-kk/
+/ofhandlers.c/1.6/Thu Oct 24 10:29:00 2013/-kk/
+/ophandlers.c/1.13/Thu Oct 24 10:29:00 2013/-kk/
 /pathnames.h/1.4/Mon Apr 28 20:24:15 2008/-kk/
-/prephandlers.c/1.4/Tue Jul  2 11:59:46 2013/-kk/
+/prephandlers.c/1.4/Thu Oct 24 10:29:00 2013/-kk/
 D

@@ -1,14 +1,14 @@
-/addrinfo.h/1.1.1.2/Sat Apr  6 17:58:04 2013/-kk/
-/datalinks.c/1.1.1.2/Sat Apr  6 17:58:04 2013/-kk/
-/dlnames.c/1.1.1.2/Sat Apr  6 17:58:04 2013/-kk/
-/getnameinfo.c/1.1.1.2/Sat Apr  6 17:58:04 2013/-kk/
-/inet_aton.c/1.1.1.2/Sat Apr  6 17:58:04 2013/-kk/
-/inet_ntop.c/1.1.1.2/Sat Apr  6 17:58:04 2013/-kk/
-/inet_pton.c/1.1.1.2/Sat Apr  6 17:58:04 2013/-kk/
-/snprintf.c/1.1.1.2/Sat Apr  6 17:58:04 2013/-kk/
+/addrinfo.h/1.1.1.2/Thu Oct 24 10:28:47 2013/-kk/
+/datalinks.c/1.1.1.2/Thu Oct 24 10:28:47 2013/-kk/
+/dlnames.c/1.1.1.2/Thu Oct 24 10:28:47 2013/-kk/
+/getnameinfo.c/1.1.1.2/Thu Oct 24 10:28:47 2013/-kk/
+/inet_aton.c/1.1.1.2/Thu Oct 24 10:28:47 2013/-kk/
+/inet_ntop.c/1.1.1.2/Thu Oct 24 10:28:47 2013/-kk/
+/inet_pton.c/1.1.1.2/Thu Oct 24 10:28:47 2013/-kk/
+/snprintf.c/1.1.1.2/Thu Oct 24 10:28:47 2013/-kk/
 /sockstorage.h/1.1.1.1/Sun Dec  5 03:15:43 2010/-kk/
-/strdup.c/1.1.1.2/Sat Apr  6 17:58:04 2013/-kk/
-/strlcat.c/1.1.1.2/Sat Apr  6 17:58:04 2013/-kk/
-/strlcpy.c/1.1.1.2/Sat Apr  6 17:58:04 2013/-kk/
-/strsep.c/1.1.1.2/Sat Apr  6 17:58:04 2013/-kk/
+/strdup.c/1.1.1.2/Thu Oct 24 10:28:47 2013/-kk/
+/strlcat.c/1.1.1.2/Thu Oct 24 10:28:47 2013/-kk/
+/strlcpy.c/1.1.1.2/Thu Oct 24 10:28:47 2013/-kk/
+/strsep.c/1.1.1.2/Thu Oct 24 10:28:47 2013/-kk/
 D

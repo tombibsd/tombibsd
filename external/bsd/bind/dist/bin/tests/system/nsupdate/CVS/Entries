@@ -1,11 +1,11 @@
-/clean.sh/1.1.1.8/Sat Jul 27 15:22:54 2013/-kk/
+/clean.sh/1.1.1.8/Thu Oct 24 10:28:41 2013/-kk/
 /commandlist/1.1.1.1/Tue Dec  4 19:22:53 2012/-kk/
 /knowngood.ns1.after/1.1.1.2/Sun Oct 25 00:01:37 2009/-kk/
 /knowngood.ns1.afterstop/1.1.1.1/Sun Mar 22 14:56:57 2009/-kk/
 /knowngood.ns1.before/1.1.1.2/Sun Oct 25 00:01:37 2009/-kk/
-/setup.sh/1.1.1.8/Sat Jul 27 15:22:54 2013/-kk/
-/tests.sh/1.1.1.8/Sat Jul 27 15:22:54 2013/-kk/
-/update_test.pl/1.1.1.5/Sat Jul 27 15:22:54 2013/-kk/
+/setup.sh/1.1.1.8/Thu Oct 24 10:28:41 2013/-kk/
+/tests.sh/1.1.1.8/Thu Oct 24 10:28:41 2013/-kk/
+/update_test.pl/1.1.1.5/Thu Oct 24 10:28:41 2013/-kk/
 D/ns1////
 D/ns2////
 D/ns3////

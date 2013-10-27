@@ -77,12 +77,7 @@ struct trapframe;
 struct cpu_info;
 
 void fpuinit(struct cpu_info *);
-void fpudrop(void);
-void fpusave(struct lwp *);
-void fpudiscard(struct lwp *);
 void fputrap(struct trapframe *);
-void fpusave_lwp(struct lwp *, bool);
-void fpusave_cpu(bool);
 
 #endif
 

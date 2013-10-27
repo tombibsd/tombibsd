@@ -41,7 +41,7 @@
 #include <lua.h>
 
 #ifdef _MODULE
-MODULE(MODULE_CLASS_LUA_BINDING, luacore, "lua");
+MODULE(MODULE_CLASS_MISC, luacore, "lua");
 
 /* Various printing functions */
 static int

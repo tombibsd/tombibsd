@@ -1,15 +1,15 @@
 /Makefile/1.63/Sun Aug 14 11:46:28 2011/-kk/
-/cmds.c/1.33/Wed Jul  3 14:15:47 2013/-kk/
+/cmds.c/1.33/Thu Oct 24 10:28:53 2013/-kk/
 /conf.c/1.64/Sun Nov  4 20:46:46 2012/-kk/
-/extern.h/1.63/Thu Mar 21 05:53:01 2013/-kk/
+/extern.h/1.63/Thu Oct 24 10:28:53 2013/-kk/
 /ftpcmd.y/1.93/Fri Sep 16 16:13:17 2011/-kk/
 /ftpd.8/1.85/Fri May  1 10:53:27 2009/-kk/
-/ftpd.c/1.200/Wed Jul 31 19:50:47 2013/-kk/
+/ftpd.c/1.200/Thu Oct 24 10:28:53 2013/-kk/
 /ftpd.conf.5/1.37/Thu Apr  9 02:25:45 2009/-kk/
 /ftpusers.5/1.17/Sat Sep 13 02:41:52 2008/-kk/
 /logutmp.c/1.12/Fri Sep 16 16:13:17 2011/-kk/
 /logwtmp.c/1.25/Sat Sep 23 16:03:50 2006/-kk/
 /pathnames.h/1.12/Sat Dec 11 18:37:26 2004/-kk/
 /popen.c/1.37/Sat Mar 20 18:23:30 2010/-kk/
-/version.h/1.75/Thu Mar 21 00:17:26 2013/-kk/
+/version.h/1.75/Thu Oct 24 10:28:53 2013/-kk/
 D

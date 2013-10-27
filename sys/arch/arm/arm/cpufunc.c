@@ -2836,17 +2836,19 @@ struct cpu_option arm10_options[] = {
 void
 arm10_setup(char *args)
 {
-	int cpuctrl, cpuctrlmask;
+	int cpuctrl;
 
 	cpuctrl = CPU_CONTROL_MMU_ENABLE | CPU_CONTROL_SYST_ENABLE
 	    | CPU_CONTROL_IC_ENABLE | CPU_CONTROL_DC_ENABLE
 	    | CPU_CONTROL_WBUF_ENABLE | CPU_CONTROL_BPRD_ENABLE;
+#if 0
 	cpuctrlmask = CPU_CONTROL_MMU_ENABLE | CPU_CONTROL_SYST_ENABLE
 	    | CPU_CONTROL_IC_ENABLE | CPU_CONTROL_DC_ENABLE
 	    | CPU_CONTROL_WBUF_ENABLE | CPU_CONTROL_ROM_ENABLE
 	    | CPU_CONTROL_BEND_ENABLE | CPU_CONTROL_AFLT_ENABLE
 	    | CPU_CONTROL_BPRD_ENABLE
 	    | CPU_CONTROL_ROUNDROBIN | CPU_CONTROL_CPCLK;
+#endif
 
 #ifndef ARM32_DISABLE_ALIGNMENT_FAULTS
 	cpuctrl |= CPU_CONTROL_AFLT_ENABLE;
@@ -2871,7 +2873,7 @@ arm10_setup(char *args)
 
 	/* Set the control register */
 	curcpu()->ci_ctrl = cpuctrl;
-	cpu_control(cpuctrlmask, cpuctrl);
+	cpu_control(0xffffffff, cpuctrl);
 
 	/* And again. */
 	cpu_idcache_wbinv_all();

@@ -496,7 +496,6 @@ dwc2_open(usbd_pipe_handle pipe)
 	}
 
 	dpipe->priv = NULL;	/* QH */
-	dpipe->xfer = NULL;	/* dwc2_urb */
 
 	return USBD_NORMAL_COMPLETION;
 }
@@ -1318,10 +1317,8 @@ dwc2_device_start(usbd_xfer_handle xfer)
 
 	/* XXXNH this shouldn't be required */
 	if (xfertype == UE_CONTROL && len == 0) {
-		KASSERT(xfertype == UE_CONTROL);
 		dwc2_urb->usbdma = &dpipe->req_dma;
 	} else {
-		KASSERT(xfertype != UE_CONTROL || len != 0);
 		dwc2_urb->usbdma = &xfer->dmabuf;
 	}
 	dwc2_urb->buf = KERNADDR(dwc2_urb->usbdma, 0);
@@ -1361,7 +1358,7 @@ dwc2_device_start(usbd_xfer_handle xfer)
 	/* might need to check cpu_intr_p */
 	retval = dwc2_hcd_urb_enqueue(hsotg, dwc2_urb, &dpipe->priv, 0);
 	if (retval)
-		goto fail2;
+		goto fail;
 
 	if (xfer->timeout && !sc->sc_bus.use_polling) {
 		callout_reset(&xfer->timeout_handle, mstohz(xfer->timeout),
@@ -1376,7 +1373,7 @@ dwc2_device_start(usbd_xfer_handle xfer)
 		mutex_spin_exit(&hsotg->lock);
 	}
 
-fail2:
+fail:
 // 	mutex_exit(&sc->sc_lock);
 
 	switch (retval) {
@@ -1390,11 +1387,6 @@ fail2:
 		break;
 	default:
 		err = USBD_IOERROR;
-	}
-
-// fail1:
-	if (err) {
-		dpipe->xfer = NULL;
 	}
 
 	return err;

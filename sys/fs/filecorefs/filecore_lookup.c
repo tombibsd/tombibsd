@@ -127,7 +127,6 @@ filecore_lookup(void *v)
 	} */ *ap = v;
 	struct vnode *vdp;		/* vnode for directory being searched */
 	struct filecore_node *dp;	/* inode for directory being searched */
-	struct filecore_mnt *fcmp;	/* file system that directory is in */
 	struct buf *bp;			/* a buffer of directory entries */
 	struct filecore_direntry *de;
 	int numdirpasses;		/* strategy for directory search */
@@ -150,7 +149,6 @@ filecore_lookup(void *v)
 	*vpp = NULL;
 	vdp = ap->a_dvp;
 	dp = VTOI(vdp);
-	fcmp = dp->i_mnt;
 
 	/*
 	 * Check accessiblity of directory.

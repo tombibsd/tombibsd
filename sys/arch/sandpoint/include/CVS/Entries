@@ -11,7 +11,7 @@
 /cpu.h/1.4/Mon Jun 20 06:35:41 2011/-kk/
 /cpu_counter.h/1.1/Wed Feb  5 13:58:01 2003/-kk/
 /db_machdep.h/1.1/Sun Feb  4 18:32:12 2001/-kk/
-/disklabel.h/1.9/Thu May 16 19:06:45 2013/-kk/
+/disklabel.h/1.9/Thu Oct 24 10:28:57 2013/-kk/
 /elf_machdep.h/1.1/Sun Feb  4 18:32:12 2001/-kk/
 /endian.h/1.1/Sun Feb  4 18:32:13 2001/-kk/
 /endian_machdep.h/1.1/Sun Feb  4 18:32:13 2001/-kk/

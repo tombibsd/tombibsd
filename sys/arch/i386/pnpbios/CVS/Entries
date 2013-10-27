@@ -8,9 +8,9 @@
 /lm_pnpbios.c/1.15/Fri Jul  1 18:14:15 2011/-kk/
 /lpt_pnpbios.c/1.12/Fri Jul  1 18:14:15 2011/-kk/
 /npx_pnpbios.c/1.13/Fri Jul  1 18:14:15 2011/-kk/
-/pciide_pnpbios.c/1.31/Sat Jun 22 05:41:25 2013/-kk/
+/pciide_pnpbios.c/1.31/Thu Oct 24 10:28:57 2013/-kk/
 /pckbc_pnpbios.c/1.17/Sun Jun  8 18:35:25 2008/-kk/
-/pnpbios.c/1.72/Thu Oct 24 06:29:23 2013/-kk/
+/pnpbios.c/1.72/Thu Oct 24 10:28:57 2013/-kk/
 /pnpbioscall.S/1.2/Tue Dec 11 23:06:14 2007/-kk/
 /pnpbiosreg.h/1.4/Tue Dec 25 18:33:33 2007/-kk/
 /pnpbiosvar.h/1.12/Thu Jun 30 20:09:31 2011/-kk/

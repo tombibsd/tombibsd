@@ -65,7 +65,11 @@ __RCSID("$Id$");
 #else
 
 #include <atf-c.h>
-#define FAIL(msg, ...)	ATF_CHECK_MSG(0, msg, ## __VA_ARGS__); goto fail
+#define FAIL(msg, ...)	\
+	do { \
+		ATF_CHECK_MSG(0, msg, ## __VA_ARGS__); \
+		goto fail; \
+	} while (/*CONSTCOND*/0)
 
 #endif
 

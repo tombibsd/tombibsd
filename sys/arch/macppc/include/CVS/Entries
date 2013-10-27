@@ -28,7 +28,7 @@
 /int_limits.h/1.1/Sun Apr 15 15:29:08 2001/-kk/
 /int_mwgwtypes.h/1.1/Sat Apr 14 12:19:55 2001/-kk/
 /int_types.h/1.1/Mon Jun 26 15:42:44 2000/-kk/
-/intr.h/1.32/Sat Apr 20 13:32:40 2013/-kk/
+/intr.h/1.32/Thu Oct 24 10:28:57 2013/-kk/
 /ipkdb.h/1.2/Fri May 29 10:32:52 1998/-kk/
 /kcore.h/1.2/Fri May 29 10:32:52 1998/-kk/
 /keyboard.h/1.5/Wed Jun 11 07:35:40 2003/-kk/
@@ -46,7 +46,7 @@
 /pio.h/1.2/Mon Feb  5 19:33:54 2001/-kk/
 /pmap.h/1.9/Wed Jan  9 21:23:18 2008/-kk/
 /pmc.h/1.1/Wed Aug  7 05:15:32 2002/-kk/
-/powerpc.h/1.8/Mon May 13 00:21:56 2013/-kk/
+/powerpc.h/1.8/Thu Oct 24 10:28:57 2013/-kk/
 /proc.h/1.2/Fri May 29 10:32:53 1998/-kk/
 /profile.h/1.2/Fri May 29 10:32:53 1998/-kk/
 /psl.h/1.2/Fri May 29 10:32:54 1998/-kk/

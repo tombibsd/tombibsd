@@ -1,10 +1,10 @@
 /Makefile.in/1.1.1.1/Sat Sep 24 20:18:04 2011/-kk/
 /array-element.exp/1.1.1.1/Sat Sep 24 20:18:04 2011/-kk/
 /array-element.f/1.1.1.1/Sat Sep 24 20:18:04 2011/-kk/
-/charset.exp/1.1.1.1/Thu Oct  3 15:51:29 2013/-kk/
-/charset.f90/1.1.1.1/Thu Oct  3 15:51:29 2013/-kk/
-/common-block.exp/1.1.1.1/Thu Oct  3 15:51:29 2013/-kk/
-/common-block.f90/1.1.1.1/Thu Oct  3 15:51:29 2013/-kk/
+/charset.exp/1.1.1.1/Thu Oct 24 10:28:52 2013/-kk/
+/charset.f90/1.1.1.1/Thu Oct 24 10:28:52 2013/-kk/
+/common-block.exp/1.1.1.1/Thu Oct 24 10:28:52 2013/-kk/
+/common-block.f90/1.1.1.1/Thu Oct 24 10:28:52 2013/-kk/
 /complex.exp/1.1.1.1/Sat Sep 24 20:18:04 2011/-kk/
 /complex.f/1.1.1.1/Sat Sep 24 20:18:04 2011/-kk/
 /derived-type.exp/1.1.1.1/Sat Sep 24 20:18:04 2011/-kk/

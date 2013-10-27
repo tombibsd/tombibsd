@@ -1,16 +1,16 @@
 /Makefile/1.4/Thu Jan  6 01:08:48 2011/-kk/
-/add.c/1.14/Sun May 26 21:26:17 2013/-kk/
-/biosboot.c/1.6/Sat Apr 13 18:25:56 2013/-kk/
-/create.c/1.6/Sat Apr 13 18:04:33 2013/-kk/
+/add.c/1.14/Thu Oct 24 10:28:53 2013/-kk/
+/biosboot.c/1.6/Thu Oct 24 10:28:53 2013/-kk/
+/create.c/1.6/Thu Oct 24 10:28:53 2013/-kk/
 /destroy.c/1.4/Sat Aug 27 17:38:16 2011/-kk/
-/gpt.8/1.12/Thu Oct 24 06:29:13 2013/-kk/
-/gpt.c/1.20/Sat Apr 13 18:32:01 2013/-kk/
-/gpt.h/1.6/Sat Apr 13 18:04:33 2013/-kk/
-/label.c/1.10/Sat Apr 13 18:04:33 2013/-kk/
+/gpt.8/1.14/Sun Oct 27 08:19:47 2013/-kk/
+/gpt.c/1.20/Thu Oct 24 10:28:53 2013/-kk/
+/gpt.h/1.6/Thu Oct 24 10:28:53 2013/-kk/
+/label.c/1.10/Thu Oct 24 10:28:53 2013/-kk/
 /map.c/1.2/Sun Oct 15 22:36:29 2006/-kk/
 /map.h/1.1.1.1/Sun Oct 15 22:34:16 2006/-kk/
-/migrate.c/1.10/Thu Oct 24 06:29:13 2013/-kk/
+/migrate.c/1.11/Sun Oct 27 08:19:47 2013/-kk/
 /recover.c/1.4/Sat Aug 27 17:38:16 2011/-kk/
-/remove.c/1.8/Sat Apr 13 18:04:33 2013/-kk/
-/show.c/1.11/Thu Oct 24 06:29:13 2013/-kk/
+/remove.c/1.8/Thu Oct 24 10:28:53 2013/-kk/
+/show.c/1.11/Thu Oct 24 10:28:53 2013/-kk/
 D

@@ -37,7 +37,7 @@
 /dt_pid.c/1.5/Mon Mar  1 11:19:41 2010/-kk/
 /dt_pid.h/1.1.1.1/Sat Feb 20 04:33:47 2010/-kk/
 /dt_pragma.c/1.2/Sun Feb 21 00:49:55 2010/-kk/
-/dt_printf.c/1.4/Wed Feb 20 22:45:12 2013/-kk/
+/dt_printf.c/1.4/Thu Oct 24 10:28:50 2013/-kk/
 /dt_printf.h/1.1.1.1/Sat Feb 20 04:33:48 2010/-kk/
 /dt_proc.c/1.5/Mon Mar  1 11:19:41 2010/-kk/
 /dt_proc.h/1.2/Sun Feb 21 00:49:55 2010/-kk/
@@ -51,7 +51,7 @@
 /dt_string.h/1.1.1.1/Sat Feb 20 04:33:49 2010/-kk/
 /dt_strtab.c/1.1.1.1/Sat Feb 20 04:33:49 2010/-kk/
 /dt_strtab.h/1.1.1.1/Sat Feb 20 04:33:49 2010/-kk/
-/dt_subr.c/1.6/Wed Jan  2 21:19:13 2013/-kk/
+/dt_subr.c/1.6/Thu Oct 24 10:28:50 2013/-kk/
 /dt_work.c/1.2/Sun Feb 21 00:49:55 2010/-kk/
 /dt_xlator.c/1.1.1.1/Sat Feb 20 04:33:49 2010/-kk/
 /dt_xlator.h/1.1.1.1/Sat Feb 20 04:33:49 2010/-kk/

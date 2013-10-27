@@ -1,7 +1,7 @@
 /*	$NetBSD$	*/
 
 /*
- * Copyright (c) 2007, 2012 Michael Lorenz
+ * Copyright (c) 2013 Michael Lorenz
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without

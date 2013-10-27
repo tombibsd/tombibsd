@@ -1,9 +1,9 @@
-/autoconf.c/1.26/Fri Jun 28 14:42:31 2013/-kk/
+/autoconf.c/1.26/Thu Oct 24 10:28:57 2013/-kk/
 /consinit.c/1.8/Sat Oct 13 17:58:53 2012/-kk/
 /cpu.c/1.18/Fri Jul  1 20:52:02 2011/-kk/
 /ibm_machdep.c/1.15/Mon Apr 28 20:23:33 2008/-kk/
 /locore.S/1.18/Mon Jun 20 19:56:12 2011/-kk/
-/machdep.c/1.74/Sun Apr 21 15:42:11 2013/-kk/
+/machdep.c/1.74/Thu Oct 24 10:28:57 2013/-kk/
 /mainbus.c/1.33/Fri Jan 27 18:53:00 2012/-kk/
 /platform.c/1.26/Mon Jun 20 07:18:07 2011/-kk/
 /residual.c/1.16/Mon Apr 28 20:23:33 2008/-kk/

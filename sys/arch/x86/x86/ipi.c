@@ -56,20 +56,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include "acpica.h"
 
-#ifdef __x86_64__
-#include <machine/fpu.h>
-static void	x86_ipi_synch_fpu(struct cpu_info *);
-#else
-/* XXXfpu */
-#include "npx.h"
-#if NNPX > 0
-static void	x86_ipi_synch_fpu(struct cpu_info *);
-#define		fpusave_cpu(x)		npxsave_cpu(x)
-#else
-#define		x86_ipi_synch_fpu	NULL
-#endif
-#endif
-
 static void	x86_ipi_halt(struct cpu_info *);
 static void	x86_ipi_kpreempt(struct cpu_info *);
 static void	x86_ipi_xcall(struct cpu_info *);
@@ -91,7 +77,7 @@ void (*ipifunc[X86_NIPI])(struct cpu_info *) =
 	x86_ipi_halt,
 	NULL,
 	NULL,
-	x86_ipi_synch_fpu,
+	NULL,
 	x86_ipi_reload_mtrr,
 	gdt_reload_cpu,
 	x86_ipi_xcall,
@@ -179,15 +165,6 @@ x86_ipi_halt(struct cpu_info *ci)
 		x86_hlt();
 	}
 }
-
-#if defined(__x86_64__) || NNPX > 0	/* XXXfpu */
-static void
-x86_ipi_synch_fpu(struct cpu_info *ci)
-{
-
-	fpusave_cpu(true);
-}
-#endif
 
 #ifdef MTRR
 static void

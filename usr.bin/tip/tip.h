@@ -141,8 +141,6 @@ typedef
 	}
 	acu_t;
 
-#define	equal(a, b)	(strcmp(a,b)==0)/* A nice function to string compare */
-
 /*
  * variable manipulation stuff --
  *   if we defined the value entry in value_t, then we couldn't

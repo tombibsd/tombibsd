@@ -141,7 +141,7 @@ _rtld_tls_allocate_locked(void)
 	SET_DTV_GENERATION(tcb->tcb_dtv, _rtld_tls_dtv_generation);
 
 	for (obj = _rtld_objlist; obj != NULL; obj = obj->next) {
-		if (obj->tlssize) {
+		if (obj->tlsinitsize && obj->tls_done) {
 #ifdef __HAVE_TLS_VARIANT_I
 			q = p + obj->tlsoffset;
 #else

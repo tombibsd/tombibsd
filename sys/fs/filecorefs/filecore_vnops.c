@@ -204,7 +204,7 @@ filecore_read(void *v)
 	struct filecore_node *ip = VTOI(vp);
 	struct filecore_mnt *fcmp;
 	struct buf *bp;
-	daddr_t lbn, rablock;
+	daddr_t lbn;
 	off_t diff;
 	int error = 0;
 	long size, n, on;
@@ -248,7 +248,6 @@ filecore_read(void *v)
 		if (diff < n)
 			n = diff;
 		size = filecore_blksize(fcmp, ip, lbn);
-		rablock = lbn + 1;
 		if (ip->i_dirent.attr & FILECORE_ATTR_DIR) {
 			error = filecore_dbread(ip, &bp);
 			on = uio->uio_offset;
@@ -294,7 +293,6 @@ filecore_readdir(void *v)
 	struct uio *uio = ap->a_uio;
 	struct vnode *vdp = ap->a_vp;
 	struct filecore_node *dp;
-	struct filecore_mnt *fcmp;
 	struct buf *bp = NULL;
 	struct dirent *de;
 	struct filecore_direntry *dep = NULL;
@@ -315,7 +313,6 @@ filecore_readdir(void *v)
 	uiooff = uio->uio_offset;
 
 	*ap->a_eofflag = 0;
-	fcmp = dp->i_mnt;
 
 	error = filecore_dbread(dp, &bp);
 	if (error) {

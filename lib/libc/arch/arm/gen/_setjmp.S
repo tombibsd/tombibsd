@@ -135,6 +135,7 @@ ENTRY(_longjmp)
 	vldmia	r3, {d8-d15}
 	ldr	r3, [r0, #(_JB_REG_FPSCR * 4)]
 	vmsr	fpscr, r3
+1:
 #endif /* __ARM_EABI__ && (_ARM_ARCH_T2 || !__thumb__) */
 
 	adds	r0, r0, #(_JB_REG_R4 * 4)

@@ -1,7 +1,7 @@
 /Makefile/1.5/Sun May  4 06:36:37 2003/-kk/
 /config_hook.c/1.8/Wed Mar 18 10:22:28 2009/-kk/
 /debug_subr.c/1.10/Wed Mar 18 10:22:28 2009/-kk/
-/disksubr.c/1.21/Mon May 13 15:40:31 2013/-kk/
+/disksubr.c/1.21/Thu Oct 24 10:28:57 2013/-kk/
 /platid.awk/1.1/Sun Jan 28 02:52:18 2001/-kk/
 /platid.c/1.11/Wed May 10 06:24:02 2006/-kk/
 /platid_copyright.awk/1.2/Sun Feb  4 05:19:14 2001/-kk/

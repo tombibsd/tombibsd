@@ -1,6 +1,6 @@
 /Makefile/1.6/Thu May  4 22:27:51 2006/-kk/
 /aoutm68k_exec.c/1.27/Sun Feb 19 21:06:36 2012/-kk/
-/aoutm68k_mod.c/1.2/Thu Sep 19 18:50:35 2013/-kk/
+/aoutm68k_mod.c/1.2/Thu Oct 24 10:28:57 2013/-kk/
 /aoutm68k_stat.c/1.24/Mon Apr 28 20:23:41 2008/-kk/
 /aoutm68k_stat.h/1.8/Sun Jan 11 22:54:16 2009/-kk/
 /aoutm68k_syscall.h/1.42/Mon Mar  7 19:27:27 2011/-kk/

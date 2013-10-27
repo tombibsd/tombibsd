@@ -28,7 +28,7 @@
 /elfm68hc11.sc/1.1.1.1/Tue Aug 18 10:05:56 2009/-kk/
 /elfm68hc12.sc/1.1.1.1/Tue Aug 18 10:05:56 2009/-kk/
 /elfmicroblaze.sc/1.1.1.1/Sat Sep 24 22:21:31 2011/-kk/
-/elfxgate.sc/1.1.1.1/Sun Sep 29 13:46:02 2013/-kk/
+/elfxgate.sc/1.1.1.1/Thu Oct 24 10:28:51 2013/-kk/
 /elfxtensa.sc/1.1.1.2/Sat Sep 24 22:21:33 2011/-kk/
 /epocpe.sc/1.1.1.2/Sat Sep 24 22:21:32 2011/-kk/
 /h8300.sc/1.1.1.2/Sat Sep 24 22:21:32 2011/-kk/
@@ -50,7 +50,7 @@
 /i386msdos.sc/1.1.1.1/Tue Aug 18 10:05:57 2009/-kk/
 /i860coff.sc/1.1.1.1/Tue Aug 18 10:05:57 2009/-kk/
 /i960.sc/1.1.1.1/Tue Aug 18 10:05:57 2009/-kk/
-/ia64vms.sc/1.1.1.1/Sun Sep 29 13:46:02 2013/-kk/
+/ia64vms.sc/1.1.1.1/Thu Oct 24 10:28:51 2013/-kk/
 /ip2k.sc/1.1.1.1/Tue Aug 18 10:05:57 2009/-kk/
 /iq2000.sc/1.1.1.1/Tue Aug 18 10:05:58 2009/-kk/
 /m68kaux.sc/1.1.1.2/Sat Sep 24 22:21:31 2011/-kk/

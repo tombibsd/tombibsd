@@ -1,6 +1,6 @@
 /ChangeLog-9103/1.1.1.1/Tue Aug 18 09:49:20 2009/-kk/
 /ChangeLog/1.3/Sun Sep 25 04:32:42 2011/-kk/
-/aarch64.h/1.1.1.1/Sun Sep 29 13:45:14 2013/-kk/
+/aarch64.h/1.1.1.1/Thu Oct 24 10:28:51 2013/-kk/
 /alpha.h/1.1.1.2/Sat Sep 24 22:22:53 2011/-kk/
 /arc.h/1.1.1.2/Sat Sep 24 22:22:53 2011/-kk/
 /arm.h/1.1.1.2/Sat Sep 24 22:22:53 2011/-kk/
@@ -38,7 +38,7 @@
 /pn.h/1.1.1.2/Sat Sep 24 22:22:40 2011/-kk/
 /ppc.h/1.3/Sun Sep 25 04:32:42 2011/-kk/
 /pyr.h/1.1.1.2/Sat Sep 24 22:22:39 2011/-kk/
-/rl78.h/1.1.1.1/Sun Sep 29 13:45:18 2013/-kk/
+/rl78.h/1.1.1.1/Thu Oct 24 10:28:51 2013/-kk/
 /rx.h/1.1.1.1/Sat Sep 24 22:22:39 2011/-kk/
 /s390.h/1.1.1.2/Sat Sep 24 22:22:39 2011/-kk/
 /score-datadep.h/1.1.1.2/Sat Sep 24 22:22:39 2011/-kk/
@@ -55,9 +55,9 @@
 /tic6x-opcode-table.h/1.1.1.1/Sat Sep 24 22:22:37 2011/-kk/
 /tic6x.h/1.1.1.1/Sat Sep 24 22:22:35 2011/-kk/
 /tic80.h/1.1.1.2/Sat Sep 24 22:22:35 2011/-kk/
-/tilegx.h/1.1.1.1/Sun Sep 29 13:45:19 2013/-kk/
-/tilepro.h/1.1.1.1/Sun Sep 29 13:45:19 2013/-kk/
+/tilegx.h/1.1.1.1/Thu Oct 24 10:28:51 2013/-kk/
+/tilepro.h/1.1.1.1/Thu Oct 24 10:28:51 2013/-kk/
 /v850.h/1.1.1.2/Sat Sep 24 22:22:35 2011/-kk/
 /vax.h/1.1.1.2/Sat Sep 24 22:22:34 2011/-kk/
-/xgate.h/1.1.1.1/Sun Sep 29 13:45:20 2013/-kk/
+/xgate.h/1.1.1.1/Thu Oct 24 10:28:51 2013/-kk/
 D

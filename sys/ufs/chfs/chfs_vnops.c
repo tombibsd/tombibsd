@@ -217,7 +217,6 @@ chfs_mknod(void *v)
 
 	struct ufsmount *ump;
 	struct chfs_mount *chmp;
-	ino_t ino;
 
 	struct chfs_full_dnode *fd;
 	struct buf *bp;
@@ -255,7 +254,6 @@ chfs_mknod(void *v)
 	err = chfs_makeinode(mode, dvp, &vp, cnp, vap->va_type);
 
 	ip = VTOI(vp);
-	ino = ip->ino;
 	if (vap->va_rdev != VNOVAL)
 		ip->rdev = vap->va_rdev;
 

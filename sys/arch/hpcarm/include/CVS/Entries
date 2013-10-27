@@ -1,4 +1,4 @@
-/Makefile/1.29/Thu May  2 03:56:41 2013/-kk/
+/Makefile/1.29/Thu Oct 24 10:28:57 2013/-kk/
 /ansi.h/1.1/Fri Feb 23 03:48:14 2001/-kk/
 /aout_machdep.h/1.1/Fri Feb 23 03:48:14 2001/-kk/
 /apmvar.h/1.6/Mon Apr 28 20:23:21 2008/-kk/
@@ -13,7 +13,7 @@
 /config_hook.h/1.2/Fri Feb  1 18:16:05 2002/-kk/
 /cpu.h/1.2/Fri Feb 23 21:23:52 2001/-kk/
 /db_machdep.h/1.3/Tue Mar 20 18:01:49 2001/-kk/
-/disklabel.h/1.10/Tue May  7 20:42:46 2013/-kk/
+/disklabel.h/1.10/Thu Oct 24 10:28:57 2013/-kk/
 /elf_machdep.h/1.1/Fri Feb 23 03:48:15 2001/-kk/
 /endian.h/1.1/Fri Feb 23 03:48:15 2001/-kk/
 /endian_machdep.h/1.2/Fri Feb 23 21:23:52 2001/-kk/
@@ -52,7 +52,7 @@
 /signal.h/1.1/Fri Feb 23 03:48:19 2001/-kk/
 /sysarch.h/1.3/Sat Jul 14 00:23:11 2001/-kk/
 /trap.h/1.1/Fri Feb 23 03:48:19 2001/-kk/
-/types.h/1.15/Tue May  7 20:42:46 2013/-kk/
+/types.h/1.15/Thu Oct 24 10:28:57 2013/-kk/
 /vmparam.h/1.30/Fri Feb 17 16:46:46 2012/-kk/
 /wchar_limits.h/1.2/Sun Dec 11 12:17:33 2005/-kk/
 D

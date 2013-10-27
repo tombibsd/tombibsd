@@ -2,7 +2,7 @@
 /archive_check_magic.c/1.2/Fri Sep 16 16:27:36 2011/-kk/
 /archive_crc32.h/1.1.1.1/Sun Mar 14 19:19:48 2010/-kk/
 /archive_endian.h/1.1.1.2/Sat Feb 20 02:48:26 2010/-kk/
-/archive_entry.3/1.3/Sat Jul 20 21:40:04 2013/-kk/
+/archive_entry.3/1.3/Thu Oct 24 10:28:45 2013/-kk/
 /archive_entry.c/1.1.1.2/Sat Feb 20 02:48:27 2010/-kk/
 /archive_entry.h/1.1.1.2/Sat Feb 20 02:48:26 2010/-kk/
 /archive_entry_copy_bhfi.c/1.1.1.1/Sat Feb 20 02:48:41 2010/-kk/
@@ -15,10 +15,10 @@
 /archive_hash.h/1.1.1.2/Wed Jul 14 22:10:47 2010/-kk/
 /archive_platform.h/1.1.1.2/Sat Feb 20 02:48:28 2010/-kk/
 /archive_private.h/1.1.1.2/Sat Feb 20 02:48:28 2010/-kk/
-/archive_read.3/1.5/Sat Jul 20 21:40:04 2013/-kk/
+/archive_read.3/1.5/Thu Oct 24 10:28:45 2013/-kk/
 /archive_read.c/1.1.1.2/Sat Feb 20 02:48:28 2010/-kk/
 /archive_read_data_into_fd.c/1.1.1.1/Fri Sep 19 21:56:12 2008/-kk/
-/archive_read_disk.3/1.3/Sat Jul 20 21:40:04 2013/-kk/
+/archive_read_disk.3/1.3/Thu Oct 24 10:28:45 2013/-kk/
 /archive_read_disk.c/1.1.1.1/Sat Feb 20 02:48:28 2010/-kk/
 /archive_read_disk_entry_from_file.c/1.4/Wed Jul 14 22:13:58 2010/-kk/
 /archive_read_disk_private.h/1.1.1.1/Sat Feb 20 02:48:29 2010/-kk/
@@ -56,9 +56,9 @@
 /archive_virtual.c/1.1.1.2/Sat Feb 20 02:48:36 2010/-kk/
 /archive_windows.c/1.1.1.3/Wed Jul 14 22:11:04 2010/-kk/
 /archive_windows.h/1.1.1.3/Wed Jul 14 22:11:04 2010/-kk/
-/archive_write.3/1.4/Sat Jul 20 21:40:04 2013/-kk/
+/archive_write.3/1.4/Thu Oct 24 10:28:45 2013/-kk/
 /archive_write.c/1.1.1.2/Sat Feb 20 02:48:36 2010/-kk/
-/archive_write_disk.3/1.4/Sat Jul 20 21:40:04 2013/-kk/
+/archive_write_disk.3/1.4/Thu Oct 24 10:28:45 2013/-kk/
 /archive_write_disk.c/1.2/Tue Jul 12 18:19:13 2011/-kk/
 /archive_write_disk_private.h/1.1.1.2/Sat Feb 20 02:48:38 2010/-kk/
 /archive_write_disk_set_standard_lookup.c/1.1.1.3/Wed Jul 14 22:10:59 2010/-kk/
@@ -80,7 +80,7 @@
 /archive_write_set_format_cpio_newc.c/1.1.1.2/Sat Feb 20 02:48:39 2010/-kk/
 /archive_write_set_format_mtree.c/1.1.1.1/Sat Feb 20 02:48:39 2010/-kk/
 /archive_write_set_format_pax.c/1.1.1.2/Sat Feb 20 02:48:40 2010/-kk/
-/archive_write_set_format_shar.c/1.2/Thu Oct 24 06:28:20 2013/-kk/
+/archive_write_set_format_shar.c/1.2/Thu Oct 24 10:28:45 2013/-kk/
 /archive_write_set_format_ustar.c/1.2/Tue Jul 12 18:19:13 2011/-kk/
 /archive_write_set_format_zip.c/1.1.1.1/Sat Feb 20 02:48:41 2010/-kk/
 /cpio.5/1.1.1.1/Fri Sep 19 21:56:12 2008/-kk/

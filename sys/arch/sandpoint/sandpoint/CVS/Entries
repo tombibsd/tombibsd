@@ -5,8 +5,8 @@
 /flash_cfi.c/1.3/Mon Jan 30 15:47:01 2012/-kk/
 /iic_eumb.c/1.19/Sat May 12 13:13:24 2012/-kk/
 /locore.S/1.23/Mon Jun 20 19:56:13 2011/-kk/
-/machdep.c/1.63/Sun Apr 21 15:42:12 2013/-kk/
+/machdep.c/1.63/Thu Oct 24 10:28:57 2013/-kk/
 /mainbus.c/1.29/Tue Jan 31 21:12:03 2012/-kk/
 /nhpow.c/1.1/Sat Jan 14 19:39:25 2012/-kk/
-/satmgr.c/1.24/Tue Feb 19 15:58:19 2013/-kk/
+/satmgr.c/1.24/Thu Oct 24 10:28:57 2013/-kk/
 D

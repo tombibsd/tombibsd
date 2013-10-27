@@ -24,7 +24,7 @@ getvars()
 	_mf="$1"; shift
 	case "$MAKE" in
 	*gmake)
-	env MAKEFLAGS= $MAKE -f - -f "$_TMPDIR/$_mf" _x_ <<EOF || bomb "getvars $_mf $* failed"
+	env MAKEFLAGS= $MAKE --quiet -f - -f "$_TMPDIR/$_mf" _x_ <<EOF || bomb "getvars $_mf $* failed"
 define echo_var
 	@echo G_\${var}="\${\${var}}" | sed -e 's,\([^\.]\)\./\([a-zA-Z0-9_-]*\.o\),\1\2,g' -e 's,$_VPATH,\$\${GNUHOSTDIST},g' -e 's,$_GNU_DIST,\$\${GNUHOSTDIST},g'
 

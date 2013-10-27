@@ -9,7 +9,7 @@
 /isr.h/1.12/Mon Apr 28 20:23:29 2008/-kk/
 /locore.s/1.110/Thu Dec 22 15:33:29 2011/-kk/
 /machdep.c/1.152/Sat Jul 28 19:08:24 2012/-kk/
-/pmap_bootstrap.c/1.52/Thu Sep 19 12:04:36 2013/-kk/
+/pmap_bootstrap.c/1.52/Thu Oct 24 10:28:57 2013/-kk/
 /seglist.h/1.5/Fri Oct 23 17:01:08 2009/-kk/
 /trap.c/1.106/Sun Feb 19 21:06:21 2012/-kk/
 /vectors.s/1.11/Sun Dec 11 12:18:17 2005/-kk/

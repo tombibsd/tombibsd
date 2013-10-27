@@ -90,13 +90,13 @@
 /sio_pic.c/1.42/Mon Feb  6 02:14:15 2012/-kk/
 /sioreg.h/1.2/Mon Apr  7 02:00:07 1997/-kk/
 /siovar.h/1.11/Sat Mar 14 14:45:53 2009/-kk/
-/tsc.c/1.22/Mon Sep 23 16:50:12 2013/-kk/
+/tsc.c/1.22/Thu Oct 24 10:28:57 2013/-kk/
 /tsp_bus_io.c/1.8/Fri Jul  1 19:19:50 2011/-kk/
 /tsp_bus_mem.c/1.12/Mon Feb  6 02:14:15 2012/-kk/
-/tsp_dma.c/1.13/Mon Sep 23 16:41:57 2013/-kk/
+/tsp_dma.c/1.13/Thu Oct 24 10:28:57 2013/-kk/
 /tsp_pci.c/1.9/Tue Jun 14 15:34:22 2011/-kk/
-/tsreg.h/1.6/Mon Sep 23 16:41:57 2013/-kk/
-/tsvar.h/1.11/Mon Sep 23 16:41:57 2013/-kk/
+/tsreg.h/1.6/Thu Oct 24 10:28:57 2013/-kk/
+/tsvar.h/1.11/Thu Oct 24 10:28:57 2013/-kk/
 /ttwoga.c/1.15/Mon Feb  6 02:14:15 2012/-kk/
 /ttwoga_bus_io.c/1.3/Fri Jul  1 19:19:50 2011/-kk/
 /ttwoga_bus_mem.c/1.3/Fri Jul  1 19:19:50 2011/-kk/

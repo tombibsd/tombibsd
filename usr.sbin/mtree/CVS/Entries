@@ -1,16 +1,16 @@
-/Makefile/1.34/Sun Feb  3 19:15:16 2013/-kk/
-/compare.c/1.57/Thu Oct 24 06:29:37 2013/-kk/
+/Makefile/1.34/Thu Oct 24 10:29:01 2013/-kk/
+/compare.c/1.57/Thu Oct 24 10:29:01 2013/-kk/
 /crc.c/1.9/Fri Oct  5 00:40:51 2012/-kk/
-/create.c/1.72/Thu Oct 24 06:29:37 2013/-kk/
+/create.c/1.72/Thu Oct 24 10:29:01 2013/-kk/
 /excludes.c/1.13/Sun Jun 20 22:20:18 2004/-kk/
-/extern.h/1.38/Sun Feb  3 19:15:17 2013/-kk/
-/getid.c/1.8/Thu Oct 24 06:29:37 2013/-kk/
+/extern.h/1.38/Thu Oct 24 10:29:01 2013/-kk/
+/getid.c/1.8/Thu Oct 24 10:29:01 2013/-kk/
 /misc.c/1.34/Thu Dec 20 19:09:25 2012/-kk/
-/mtree.8/1.69/Sun Feb  3 19:16:06 2013/-kk/
-/mtree.c/1.48/Mon Apr  8 17:39:11 2013/-kk/
+/mtree.8/1.69/Thu Oct 24 10:29:01 2013/-kk/
+/mtree.c/1.48/Thu Oct 24 10:29:01 2013/-kk/
 /mtree.h/1.31/Fri Oct  5 09:17:29 2012/-kk/
-/only.c/1.2/Tue Feb  5 00:59:03 2013/-kk/
-/spec.c/1.88/Thu Oct 24 06:29:37 2013/-kk/
+/only.c/1.2/Thu Oct 24 10:29:01 2013/-kk/
+/spec.c/1.88/Thu Oct 24 10:29:01 2013/-kk/
 /specspec.c/1.2/Fri Oct  5 01:27:29 2012/-kk/
-/verify.c/1.44/Sun Feb  3 19:15:17 2013/-kk/
+/verify.c/1.44/Thu Oct 24 10:29:01 2013/-kk/
 D

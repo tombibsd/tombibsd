@@ -53,7 +53,6 @@ struct dwc2_pipe {
 
 	/* Current transfer */
 	void *priv;			/* QH */
-	usbd_xfer_handle xfer;
 
 	 /* DMA buffer for control endpoint requests */
 	usb_dma_t req_dma;

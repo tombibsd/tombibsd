@@ -1,15 +1,15 @@
-/ifpga.c/1.26/Tue Feb 19 10:57:10 2013/-kk/
-/ifpga_clock.c/1.15/Tue Feb 19 10:57:10 2013/-kk/
+/ifpga.c/1.26/Thu Oct 24 10:28:57 2013/-kk/
+/ifpga_clock.c/1.15/Thu Oct 24 10:28:57 2013/-kk/
 /ifpga_intr.c/1.9/Mon Dec 20 00:25:31 2010/-kk/
 /ifpga_intr.h/1.9/Fri Feb 13 21:08:40 2009/-kk/
-/ifpga_io.c/1.12/Tue Feb 19 10:57:10 2013/-kk/
+/ifpga_io.c/1.12/Thu Oct 24 10:28:57 2013/-kk/
 /ifpga_pci.c/1.15/Fri Sep  7 04:32:03 2012/-kk/
 /ifpga_pcivar.h/1.3/Fri Sep  7 04:32:03 2012/-kk/
-/ifpgamem.h/1.2/Tue Feb 19 10:57:10 2013/-kk/
-/ifpgareg.h/1.5/Tue Feb 19 10:57:10 2013/-kk/
-/ifpgavar.h/1.8/Sun Aug 18 15:58:20 2013/-kk/
+/ifpgamem.h/1.2/Thu Oct 24 10:28:57 2013/-kk/
+/ifpgareg.h/1.5/Thu Oct 24 10:28:57 2013/-kk/
+/ifpgavar.h/1.8/Thu Oct 24 10:28:57 2013/-kk/
 /pl030_rtc.c/1.10/Sat Dec 12 14:44:09 2009/-kk/
-/plcom_ifpga.c/1.16/Tue Feb 19 10:57:10 2013/-kk/
+/plcom_ifpga.c/1.16/Thu Oct 24 10:28:57 2013/-kk/
 /plcom_ifpgavar.h/1.2/Sun May 20 10:28:44 2012/-kk/
-/sm_ifpga.c/1.2/Sat Feb 23 08:23:03 2013/-kk/
+/sm_ifpga.c/1.2/Thu Oct 24 10:28:57 2013/-kk/
 D

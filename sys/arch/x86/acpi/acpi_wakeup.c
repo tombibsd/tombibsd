@@ -309,11 +309,7 @@ acpi_md_sleep(int state)
 	AcpiSetFirmwareWakingVector(acpi_wakeup_paddr);
 
 	s = splhigh();
-#ifdef __i386__
-	npxsave_cpu(true);
-#else
-	fpusave_cpu(true);
-#endif
+	pcu_save_all_on_cpu();
 	x86_disable_intr();
 
 #ifdef MULTIPROCESSOR

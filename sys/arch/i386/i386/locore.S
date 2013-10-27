@@ -1077,20 +1077,11 @@ ENTRY(cpu_switchto)
 	call	_C_LABEL(i386_tls_switch)
 	addl	$4,%esp
 #else /* !XEN */
-	movl	$IPL_HIGH,CPUVAR(ILEVEL)
-	movl	PCB_CR0(%ebx),%ecx		/* has CR0_TS clear */
+	movl	PCB_CR0(%ebx),%ecx
 	movl	%cr0,%edx
 
-	/*
-	 * If our floating point registers are on a different CPU,
-	 * set CR0_TS so we'll trap rather than reuse bogus state.
-	 */
-	cmpl	CPUVAR(FPCURLWP),%edi
-	je	3f
-	orl	$CR0_TS,%ecx
-
 	/* Reloading CR0 is very expensive - avoid if possible. */
-3:	cmpl	%edx,%ecx
+	cmpl	%edx,%ecx
 	je	4f
 	movl	%ecx,%cr0
 #endif /* !XEN */

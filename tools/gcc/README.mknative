@@ -23,8 +23,8 @@ work.
 
 2. Build and install a cross toolchain (via "build.sh -m MACHINE tools").
    Note that while PR #47353 is not fixed, you can not use the -O option
-   to build.sh. Use -M instead. (The difference is only a minor layout/
-   pathname prefixe in the object directory pointed to bei either option.)
+   to build.sh. Use -M instead. (The differences are in layout and pathname
+   prefixes in the object directory pointed to by each option.)
 
 3. In src/tools/gcc, do "nbmake-MACHINE HAVE_GCC=45 bootstrap-libgcc".
 

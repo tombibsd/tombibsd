@@ -1143,7 +1143,7 @@ receive_pdu(connection_t *conn, pdu_t *pdu)
 			throttle_ccb(req_ccb, FALSE);
 			TAILQ_INSERT_TAIL(&waiting, req_ccb, chain);
 		}
-		splbio();
+		splx(s);
 
 		while ((req_ccb = TAILQ_FIRST(&waiting)) != NULL) {
 			TAILQ_REMOVE(&waiting, req_ccb, chain);

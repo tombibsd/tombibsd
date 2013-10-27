@@ -4,14 +4,14 @@
 /ctl.c/1.5/Sat Jul  4 04:29:54 2009/-kk/
 /ctl_transact.c/1.9/Sat Jul  4 04:29:54 2009/-kk/
 /draw.c/1.8/Wed Aug 12 07:42:11 2009/-kk/
-/driver.c/1.22/Thu Oct 24 06:28:47 2013/-kk/
+/driver.c/1.22/Thu Oct 24 10:28:53 2013/-kk/
 /execute.c/1.10/Wed Aug 31 16:24:56 2011/-kk/
 /expl.c/1.7/Sat Jul  4 04:29:54 2009/-kk/
 /extern.c/1.6/Wed Aug 12 07:42:11 2009/-kk/
 /faketalk.c/1.18/Thu Aug 27 00:36:33 2009/-kk/
 /get_names.c/1.10/Sat Jul  4 04:29:55 2009/-kk/
 /hunt.h/1.19/Wed Aug 12 07:42:11 2009/-kk/
-/huntd.6/1.10/Tue Jul  9 09:41:30 2013/-kk/
+/huntd.6/1.10/Thu Oct 24 10:28:53 2013/-kk/
 /makemaze.c/1.8/Mon May 23 22:58:44 2011/-kk/
 /pathname.c/1.5/Sat Jul  4 04:29:55 2009/-kk/
 /shots.c/1.12/Wed Aug 31 16:24:56 2011/-kk/

@@ -45,6 +45,7 @@ __RCSID("$NetBSD$");
 extern __thread int var1;
 extern __thread int var2;
 extern __thread int *var3;
+__thread int var5 = 1;
 static __thread pid_t (*local_var)(void) = getpid;
 
 void testf_dso_helper(int x, int y);

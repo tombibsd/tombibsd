@@ -54,7 +54,7 @@ static const char *classes[] = {
 	"vfs",
 	"driver",
 	"exec",
-	"secmodel",
+	"secmodel"
 };
 const unsigned int class_max = __arraycount(classes);
 

@@ -1,7 +1,7 @@
 /Makefile.inc/1.2/Wed May 30 21:14:35 2007/-kk/
 /__builtin_object_size.3/1.10/Thu Jul 19 06:44:12 2012/-kk/
 /fgets_chk.c/1.6/Thu Feb  5 05:41:51 2009/-kk/
-/gets_chk.c/1.7/Thu Oct 24 06:11:04 2013/-kk/
+/gets_chk.c/1.7/Thu Oct 24 10:28:53 2013/-kk/
 /memcpy_chk.c/1.4/Mon Apr 28 20:23:00 2008/-kk/
 /memmove_chk.c/1.4/Mon Apr 28 20:23:00 2008/-kk/
 /memset_chk.c/1.4/Mon Apr 28 20:23:00 2008/-kk/

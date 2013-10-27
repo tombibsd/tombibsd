@@ -13,7 +13,7 @@
 /cpu.h/1.1/Fri Sep  1 21:26:18 2006/-kk/
 /cputypes.h/1.1/Fri Sep  1 21:26:18 2006/-kk/
 /db_machdep.h/1.1/Fri Sep  1 21:26:18 2006/-kk/
-/disklabel.h/1.4/Thu May 16 19:06:45 2013/-kk/
+/disklabel.h/1.4/Thu Oct 24 10:28:57 2013/-kk/
 /elf_machdep.h/1.1/Fri Sep  1 21:26:18 2006/-kk/
 /endian.h/1.1/Fri Sep  1 21:26:18 2006/-kk/
 /endian_machdep.h/1.1/Fri Sep  1 21:26:18 2006/-kk/

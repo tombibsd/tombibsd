@@ -1219,6 +1219,12 @@ struct pf_pdesc {
 		if (x < PFRES_MAX) \
 			pf_status.counters[x]++; \
 	} while (0)
+#define REASON_SET_NOPTR(a, x) \
+	do { \
+		*(a) = (x); \
+		if (x < PFRES_MAX) \
+			pf_status.counters[x]++; \
+	} while (0)
 
 struct pf_status {
 	u_int64_t	counters[PFRES_MAX];

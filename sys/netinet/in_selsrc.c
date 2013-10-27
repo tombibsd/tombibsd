@@ -147,7 +147,7 @@ SYSCTL_SETUP(sysctl_selectsrc_setup, "sysctl selectsrc subtree setup")
 	}
 #endif /* GETIFA_DEBUG */
 	if ((rc = sysctl_createv(clog, 0, &rnode, &cnode,
-	    CTLFLAG_READWRITE, CTLTYPE_STRING, "default",
+	    CTLFLAG_READWRITE, CTLTYPE_STRUCT, "default",
 	    SYSCTL_DESCR("default source selection policy"),
 	    in_sysctl_selectsrc, 0, &default_iss, IN_SELECTSRC_LEN,
 	    CTL_CREATE, CTL_EOL)) != 0) {

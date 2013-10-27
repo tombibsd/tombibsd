@@ -9,7 +9,7 @@
 /cpu.h/1.1/Wed Jan 26 01:18:51 2011/-kk/
 /cpu_counter.h/1.1/Wed Jan 26 01:18:51 2011/-kk/
 /db_machdep.h/1.2/Sat Jul  9 16:58:04 2011/-kk/
-/disklabel.h/1.5/Thu May 16 19:06:44 2013/-kk/
+/disklabel.h/1.5/Thu Oct 24 10:28:57 2013/-kk/
 /ecoff_machdep.h/1.1/Wed Jan 26 01:18:51 2011/-kk/
 /elf_machdep.h/1.1/Wed Jan 26 01:18:51 2011/-kk/
 /emipsreg.h/1.1/Wed Jan 26 01:18:51 2011/-kk/

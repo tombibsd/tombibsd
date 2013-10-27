@@ -8,7 +8,7 @@
 /bus_defs.h/1.1/Fri Jul  1 17:09:58 2011/-kk/
 /bus_funcs.h/1.1/Fri Jul  1 17:09:58 2011/-kk/
 /cdefs.h/1.1.1.1/Sun Mar 26 07:12:08 1995/-kk/
-/cpu.h/1.70/Thu Oct 24 06:29:19 2013/-kk/
+/cpu.h/1.70/Thu Oct 24 10:28:57 2013/-kk/
 /cpufunc.h/1.1.1.1/Sun Mar 26 07:12:05 1995/-kk/
 /db_machdep.h/1.2/Mon Sep 24 09:21:24 2001/-kk/
 /disklabel.h/1.10/Sat Oct  1 15:59:00 2011/-kk/

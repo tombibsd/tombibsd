@@ -172,7 +172,6 @@ acpi_print_dev_real(const char *pnpstr)
 static void
 acpi_print_madt(struct acpi_softc *sc)
 {
-	ACPI_TABLE_MADT *madt;
 	ACPI_STATUS rv;
 
 	rv = acpi_madt_map();
@@ -183,7 +182,6 @@ acpi_print_madt(struct acpi_softc *sc)
 	if (madt_header == NULL)
 		return;
 
-	madt = (ACPI_TABLE_MADT *)madt_header;
 	acpi_madt_walk(acpi_print_madt_callback, sc);
 }
 

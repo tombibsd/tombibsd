@@ -12,7 +12,7 @@
 /c_nec_jazz.c/1.13/Fri Mar 14 16:43:27 2008/-kk/
 /c_nec_pci.c/1.20/Sat Oct 13 17:58:53 2012/-kk/
 /cpu.c/1.19/Sun Mar  6 14:58:42 2011/-kk/
-/disksubr.c/1.29/Thu May 16 19:06:44 2013/-kk/
+/disksubr.c/1.29/Thu Oct 24 10:28:57 2013/-kk/
 /interrupt.c/1.9/Wed Mar  2 10:51:04 2011/-kk/
 /locore_machdep.S/1.16/Fri Nov 27 03:23:04 2009/-kk/
 /machdep.c/1.126/Sat Jul 28 23:08:56 2012/-kk/

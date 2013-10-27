@@ -1147,7 +1147,9 @@ ipf_auth_reply(ipf_main_softc_t *softc, ipf_auth_softc_t *softa, char *data)
 	frauth_t auth, *au = &auth, *fra;
 	fr_info_t fin;
 	int error, i;
+#ifdef _KERNEL
 	mb_t *m;
+#endif
 	SPL_INT(s);
 
 	error = ipf_inobj(softc, data, NULL, &auth, IPFOBJ_FRAUTH);
@@ -1179,9 +1181,11 @@ ipf_auth_reply(ipf_main_softc_t *softc, ipf_auth_softc_t *softa, char *data)
 		return ESRCH;
 	}
 
-	m = softa->ipf_auth_pkts[i];
 	fra->fra_index = -2;
 	fra->fra_pass = au->fra_pass;
+#ifdef	_KERNEL
+	m = softa->ipf_auth_pkts[i];
+#endif
 	softa->ipf_auth_pkts[i] = NULL;
 	softa->ipf_auth_replies++;
 	bcopy(&fra->fra_info, &fin, sizeof(fin));

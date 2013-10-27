@@ -1,4 +1,4 @@
-/Makefile/1.29/Thu May  2 03:56:40 2013/-kk/
+/Makefile/1.29/Thu Oct 24 10:28:57 2013/-kk/
 /ansi.h/1.1/Fri Oct  5 22:27:48 2001/-kk/
 /aout_machdep.h/1.1/Fri Oct  5 22:27:48 2001/-kk/
 /asm.h/1.1/Fri Oct  5 22:27:49 2001/-kk/
@@ -10,7 +10,7 @@
 /cdefs.h/1.1/Fri Oct  5 22:27:49 2001/-kk/
 /cpu.h/1.9/Sat Jan 17 22:56:34 2009/-kk/
 /db_machdep.h/1.1/Fri Oct  5 22:27:49 2001/-kk/
-/disklabel.h/1.5/Tue May  7 20:42:45 2013/-kk/
+/disklabel.h/1.5/Thu Oct 24 10:28:57 2013/-kk/
 /elf_machdep.h/1.1/Fri Oct  5 22:27:49 2001/-kk/
 /endian.h/1.1/Fri Oct  5 22:27:49 2001/-kk/
 /endian_machdep.h/1.1/Fri Oct  5 22:27:49 2001/-kk/

@@ -985,8 +985,6 @@ chfs_gcollect_deletion_dirent(struct chfs_mount *chmp,
 
 	int ret;
 
-	struct vnode *vnode = NULL;
-
 	dbg_gc("gcollect_deletion_dirent\n");
 
 	/* Check node. */
@@ -995,7 +993,7 @@ chfs_gcollect_deletion_dirent(struct chfs_mount *chmp,
 
 	nref_len = chfs_nref_len(chmp, cheb, fd->nref);
 
-	vnode = chfs_vnode_lookup(chmp, fd->vno);
+	(void)chfs_vnode_lookup(chmp, fd->vno);
 
 	/* Find it in parent dirents. */
 	for (nref = parent->chvc->dirents;

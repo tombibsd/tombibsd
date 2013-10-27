@@ -815,6 +815,7 @@ urlphy* at mii? phy ?			# Realtek RTL8150L internal PHYs
 # USB Controller and Devices
 
 # PCI USB controllers
+xhci*	at pci?	dev ? function ?	# eXtensible Host Controller
 ehci*	at pci?	dev ? function ?	# Enhanced Host Controller
 ohci*	at pci?	dev ? function ?	# Open Host Controller
 uhci*	at pci?	dev ? function ?	# Universal Host Controller (Intel)
@@ -831,6 +832,7 @@ uhci*	at cardbus? function ?		# Universal Host Controller (Intel)
 slhci*	at pcmcia? function ?		# ScanLogic SL811HS
 
 # USB bus support
+usb*	at xhci?
 usb*	at ehci?
 usb*	at ohci?
 usb*	at uhci?

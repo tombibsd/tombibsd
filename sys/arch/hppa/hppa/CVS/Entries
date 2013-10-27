@@ -5,7 +5,7 @@
 /db_interface.c/1.27/Wed Jan 18 09:35:48 2012/-kk/
 /db_machdep.c/1.7/Mon Apr  2 13:18:04 2012/-kk/
 /db_memrw.c/1.7/Tue Nov  3 05:07:26 2009/-kk/
-/db_trace.c/1.13/Thu Oct 24 06:29:22 2013/-kk/
+/db_trace.c/1.13/Thu Oct 24 10:28:57 2013/-kk/
 /fpemu.S/1.6/Tue Nov  3 05:07:26 2009/-kk/
 /fpu.c/1.24/Fri Apr  6 12:21:59 2012/-kk/
 /hppa_machdep.c/1.28/Mon May 21 14:15:17 2012/-kk/
@@ -14,7 +14,7 @@
 /in_cksum.c/1.8/Tue Nov  3 05:07:26 2009/-kk/
 /ipifuncs.c/1.2/Thu Apr  5 16:16:01 2012/-kk/
 /kgdb_hppa.c/1.8/Sat Jan 22 19:35:48 2011/-kk/
-/kobj_machdep.c/1.11/Tue Aug  6 07:10:52 2013/-kk/
+/kobj_machdep.c/1.11/Thu Oct 24 10:28:57 2013/-kk/
 /lock_stubs.S/1.26/Tue Apr  3 14:18:14 2012/-kk/
 /machdep.h/1.15/Sun Jan 23 21:53:40 2011/-kk/
 /pmap.c/1.98/Tue Feb 28 07:30:30 2012/-kk/
@@ -24,6 +24,6 @@
 /sigcode.S/1.7/Tue Nov  3 05:07:26 2009/-kk/
 /support.S/1.6/Tue Nov  3 05:07:26 2009/-kk/
 /trap.S/1.68/Fri Apr  6 13:13:13 2012/-kk/
-/trap.c/1.103/Thu Oct 24 06:29:22 2013/-kk/
+/trap.c/1.103/Thu Oct 24 10:28:57 2013/-kk/
 /vm_machdep.c/1.52/Wed Mar  7 22:10:50 2012/-kk/
 D

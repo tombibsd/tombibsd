@@ -53,7 +53,6 @@ struct mdlwp {
 	volatile int md_astpending;
 };
 
-#define	MDL_USEDFPU	0x0001	/* has used the FPU */
 #define	MDL_COMPAT32	0x0008	/* i386, always return via iret */
 #define	MDL_IRET	0x0010	/* force return via iret, not sysret */
 

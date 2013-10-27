@@ -341,7 +341,7 @@ buf_read_file(struct open_file *f, char **buf_p, size_t *size_p)
 	struct m_ext2fs *fs = fp->f_fs;
 	long off;
 	indp_t file_block;
-	indp_t disk_block;
+	indp_t disk_block = 0;	/* XXX: gcc */
 	size_t block_size;
 	int rc;
 

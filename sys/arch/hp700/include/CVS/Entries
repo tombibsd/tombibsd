@@ -9,7 +9,7 @@
 /bus_funcs.h/1.1/Fri Jul  1 17:09:59 2011/-kk/
 /byte_swap.h/1.1/Thu Jun  6 19:48:07 2002/-kk/
 /cdefs.h/1.1/Thu Jun  6 19:48:07 2002/-kk/
-/cpu.h/1.71/Tue Feb 12 23:02:58 2013/-kk/
+/cpu.h/1.71/Thu Oct 24 10:28:57 2013/-kk/
 /cpufunc.h/1.1/Thu Jun  6 19:48:07 2002/-kk/
 /db_machdep.h/1.1/Thu Jun  6 19:48:07 2002/-kk/
 /disklabel.h/1.9/Tue Aug 30 12:39:55 2011/-kk/

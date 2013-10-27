@@ -10,7 +10,7 @@
 /exclude.h/1.1.1.1/Sun Jan 26 23:15:11 2003/-kk/
 /fnmatch.c/1.1.1.1/Sun Jan 26 23:15:11 2003/-kk/
 /fnmatch.h/1.1.1.1/Sun Jan 26 23:15:11 2003/-kk/
-/getopt.c/1.2/Sat Jan  5 09:40:15 2013/-kk/
+/getopt.c/1.2/Thu Oct 24 10:28:53 2013/-kk/
 /getopt.h/1.1.1.1/Sun Jan 26 23:15:12 2003/-kk/
 /getopt1.c/1.1.1.1/Sun Jan 26 23:15:12 2003/-kk/
 /hard-locale.c/1.2/Tue Jan 28 01:43:34 2003/-kk/
@@ -23,7 +23,7 @@
 /quotearg.c/1.1.1.1/Sun Jan 26 23:15:12 2003/-kk/
 /quotearg.h/1.1.1.1/Sun Jan 26 23:15:13 2003/-kk/
 /realloc.c/1.1.1.1/Sun Jan 26 23:15:13 2003/-kk/
-/regex.c/1.2/Sat Jan  5 09:40:15 2013/-kk/
+/regex.c/1.2/Thu Oct 24 10:28:53 2013/-kk/
 /regex.h/1.1.1.1/Sun Jan 26 23:15:13 2003/-kk/
 /savedir.c/1.2/Sun May 15 14:57:35 2011/-kk/
 /savedir.h/1.1.1.1/Sun Jan 26 23:15:13 2003/-kk/

@@ -8,10 +8,10 @@
 /ntfs_ihash.c/1.10/Fri Jan 27 19:48:40 2012/-kk/
 /ntfs_ihash.h/1.4/Thu Feb 15 15:40:52 2007/-kk/
 /ntfs_inode.h/1.7/Tue Jan 29 18:21:10 2008/-kk/
-/ntfs_subr.c/1.51/Fri Jun 28 17:13:34 2013/-kk/
+/ntfs_subr.c/1.51/Thu Oct 24 10:28:58 2013/-kk/
 /ntfs_subr.h/1.6/Sun Mar  4 06:03:00 2007/-kk/
-/ntfs_vfsops.c/1.89/Thu Oct 24 06:29:29 2013/-kk/
+/ntfs_vfsops.c/1.89/Thu Oct 24 10:28:58 2013/-kk/
 /ntfs_vfsops.h/1.7/Sat Jun 28 01:34:05 2008/-kk/
-/ntfs_vnops.c/1.55/Mon Mar 18 19:35:38 2013/-kk/
+/ntfs_vnops.c/1.55/Thu Oct 24 10:28:58 2013/-kk/
 /ntfsmount.h/1.5/Sat Dec  3 17:34:43 2005/-kk/
 D

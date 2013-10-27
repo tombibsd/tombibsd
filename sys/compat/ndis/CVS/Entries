@@ -1,7 +1,7 @@
 /cfg_var.h/1.2/Fri Mar 31 00:03:57 2006/-kk/
 /files.ndis/1.1/Fri Mar 31 02:43:18 2006/-kk/
 /hal_var.h/1.1/Thu Mar 30 22:56:50 2006/-kk/
-/kern_ndis.c/1.24/Thu Sep 19 18:50:35 2013/-kk/
+/kern_ndis.c/1.24/Thu Oct 24 10:28:57 2013/-kk/
 /kern_windrv.c/1.8/Wed Mar 18 17:06:48 2009/-kk/
 /nbcompat.c/1.12/Sun Jul 17 20:54:50 2011/-kk/
 /nbcompat.h/1.15/Sat May 14 12:44:16 2011/-kk/

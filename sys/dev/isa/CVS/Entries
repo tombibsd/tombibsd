@@ -41,12 +41,12 @@
 /ess_isa.c/1.24/Sat May 22 16:35:00 2010/-kk/
 /essreg.h/1.16/Sun Dec 11 12:22:02 2005/-kk/
 /essvar.h/1.26/Wed Nov 23 23:07:32 2011/-kk/
-/fd.c/1.101/Wed May 29 00:47:48 2013/-kk/
+/fd.c/1.101/Thu Oct 24 10:28:58 2013/-kk/
 /fdc_isa.c/1.19/Thu Feb  2 19:43:04 2012/-kk/
 /fdcvar.h/1.10/Mon Apr 28 20:23:52 2008/-kk/
 /fdreg.h/1.7/Thu Jun 30 20:09:39 2011/-kk/
 /fdvar.h/1.8/Thu Feb  2 19:43:04 2012/-kk/
-/files.isa/1.163/Mon Jun 10 07:14:02 2013/-kk/
+/files.isa/1.163/Thu Oct 24 10:28:58 2013/-kk/
 /finsio_isa.c/1.7/Sun Jul 31 18:23:46 2011/-kk/
 /gus.c/1.109/Sat Oct 27 17:18:24 2012/-kk/
 /gusreg.h/1.9/Mon Apr 28 20:23:52 2008/-kk/
@@ -63,7 +63,7 @@
 /if_ecreg.h/1.1/Sun Nov  2 00:44:26 1997/-kk/
 /if_ef.c/1.31/Fri Jun  3 16:28:40 2011/-kk/
 /if_efreg.h/1.4/Mon Apr 28 20:23:52 2008/-kk/
-/if_eg.c/1.86/Thu Oct 24 06:29:28 2013/-kk/
+/if_eg.c/1.86/Thu Oct 24 10:28:58 2013/-kk/
 /if_egreg.h/1.5/Sun Dec 11 12:22:02 2005/-kk/
 /if_el.c/1.89/Sat Oct 27 17:18:24 2012/-kk/
 /if_elreg.h/1.4/Thu Oct 27 04:17:29 1994/-kk/
@@ -151,7 +151,7 @@
 /slhci_isa.c/1.12/Tue Mar  8 04:58:21 2011/-kk/
 /smsc.c/1.11/Sun Jul 31 16:18:54 2011/-kk/
 /smscvar.h/1.5/Sat Oct 27 17:18:25 2012/-kk/
-/soekrisgpio.c/1.2/Mon Jun 10 07:14:02 2013/-kk/
+/soekrisgpio.c/1.2/Thu Oct 24 10:28:58 2013/-kk/
 /spkr.c/1.33/Fri Apr  6 20:16:58 2012/-kk/
 /spkrio.h/1.1/Wed Apr 15 20:26:19 1998/-kk/
 /tcic2_isa.c/1.26/Sat Oct 27 17:18:25 2012/-kk/

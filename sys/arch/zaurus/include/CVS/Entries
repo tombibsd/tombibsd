@@ -1,4 +1,4 @@
-/Makefile/1.9/Thu May  2 03:56:41 2013/-kk/
+/Makefile/1.9/Thu Oct 24 10:28:57 2013/-kk/
 /ansi.h/1.1/Sat Dec 16 05:42:48 2006/-kk/
 /aout_machdep.h/1.1/Sat Dec 16 05:42:54 2006/-kk/
 /apmvar.h/1.2/Mon Apr 28 20:23:41 2008/-kk/
@@ -13,7 +13,7 @@
 /config_hook.h/1.1/Sun Dec 17 16:07:11 2006/-kk/
 /cpu.h/1.1/Sat Dec 16 05:43:48 2006/-kk/
 /db_machdep.h/1.1/Sat Dec 16 05:43:53 2006/-kk/
-/disklabel.h/1.4/Tue May  7 20:42:47 2013/-kk/
+/disklabel.h/1.4/Thu Oct 24 10:28:57 2013/-kk/
 /elf_machdep.h/1.1/Sat Dec 16 05:44:12 2006/-kk/
 /endian.h/1.1/Sat Dec 16 05:44:34 2006/-kk/
 /endian_machdep.h/1.1/Sat Dec 16 05:44:41 2006/-kk/

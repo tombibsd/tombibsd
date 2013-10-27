@@ -241,8 +241,8 @@ migrate_netbsd_disklabel(int fd, off_t start, struct gpt_ent *ent)
 		ofs = (le32toh(dl->d_partitions[i].p_offset) *
 		    le32toh(dl->d_secsize)) / secsz;
 		ofs = (ofs > 0) ? ofs - rawofs : 0;
-		ent->ent_lba_start = htole64(start + ofs);
-		ent->ent_lba_end = htole64(start + ofs +
+		ent->ent_lba_start = htole64(ofs);
+		ent->ent_lba_end = htole64(ofs +
 		    le32toh(dl->d_partitions[i].p_size) - 1LL);
 		ent++;
 	}

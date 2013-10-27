@@ -6,7 +6,7 @@
 /intr.h/1.6/Tue Jun 21 04:19:22 2011/-kk/
 /obiovar.h/1.2/Thu Jun 30 04:45:38 2011/-kk/
 /openpicreg.h/1.6/Sun Jul 15 08:44:57 2012/-kk/
-/pmap.h/1.12/Wed Jul 17 23:27:02 2013/-kk/
+/pmap.h/1.12/Thu Oct 24 10:28:57 2013/-kk/
 /pte.h/1.6/Thu Jun 30 00:52:59 2011/-kk/
 /spr.h/1.11/Wed Aug  1 00:45:18 2012/-kk/
 /trap.h/1.2/Tue Jan 18 01:02:54 2011/-kk/

@@ -133,6 +133,8 @@ struct group;
 #define __unused
 #undef __arraycount
 #define	__arraycount(__x)	(sizeof(__x) / sizeof(__x[0]))
+#undef __USE
+#define __USE(a) ((void)(a))
 
 /* Dirent support. */
 

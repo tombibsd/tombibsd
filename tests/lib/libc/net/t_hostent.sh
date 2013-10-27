@@ -26,11 +26,11 @@
 #
 
 n6="sixthavenue.astron.com"
-a6="2620:106:3000:100:2e0:81ff:fe2f:e5d6"
+a6="2620:106:3003:1f00:2e0:81ff:fe2f:e5d7"
 ans6="name=$n6, length=16, addrtype=24, aliases=[] addr_list=[$a6]\n"
 
 n4="sixthavenue.astron.com"
-a4="208.77.212.99"
+a4="38.117.134.6"
 ans4="name=$n4, length=4, addrtype=2, aliases=[] addr_list=[$a4]\n"
 
 l6="localhost"

@@ -6,14 +6,14 @@
 /cardbus_map.c/1.36/Mon Mar 15 19:48:31 2010/-kk/
 /cardbusreg.h/1.7/Mon Aug  1 11:20:27 2011/-kk/
 /cardbusvar.h/1.56/Sat Feb 18 00:36:57 2012/-kk/
-/cardslot.c/1.55/Thu Oct 24 06:29:27 2013/-kk/
+/cardslot.c/1.55/Thu Oct 24 10:28:57 2013/-kk/
 /cardslotvar.h/1.16/Tue Dec 15 22:17:12 2009/-kk/
 /com_cardbus.c/1.30/Mon Aug  1 11:20:27 2011/-kk/
 /ehci_cardbus.c/1.31/Mon Aug  1 11:20:27 2011/-kk/
-/files.cardbus/1.38/Sat Mar 30 02:38:59 2013/-kk/
+/files.cardbus/1.38/Thu Oct 24 10:28:57 2013/-kk/
 /fwohci_cardbus.c/1.35/Sat Aug  4 03:55:43 2012/-kk/
 /if_ath_cardbus.c/1.45/Fri Oct  7 20:47:42 2011/-kk/
-/if_athn_cardbus.c/1.2/Wed Apr  3 14:20:02 2013/-kk/
+/if_athn_cardbus.c/1.2/Thu Oct 24 10:28:57 2013/-kk/
 /if_atw_cardbus.c/1.36/Mon Aug  1 11:20:27 2011/-kk/
 /if_bwi_cardbus.c/1.2/Thu Apr 12 12:52:58 2012/-kk/
 /if_ex_cardbus.c/1.55/Mon Aug  1 11:20:27 2011/-kk/
@@ -21,7 +21,7 @@
 /if_ral_cardbus.c/1.23/Sat Feb 18 13:38:35 2012/-kk/
 /if_re_cardbus.c/1.27/Mon Aug  1 11:20:27 2011/-kk/
 /if_rtk_cardbus.c/1.47/Thu Feb  2 19:43:02 2012/-kk/
-/if_rtw_cardbus.c/1.43/Thu Oct 24 06:29:27 2013/-kk/
+/if_rtw_cardbus.c/1.43/Thu Oct 24 10:28:57 2013/-kk/
 /if_tlp_cardbus.c/1.70/Mon Aug  1 11:20:27 2011/-kk/
 /njata_cardbus.c/1.15/Mon Aug  1 11:20:28 2011/-kk/
 /njs_cardbus.c/1.17/Mon Aug  1 11:20:28 2011/-kk/

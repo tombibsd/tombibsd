@@ -8,7 +8,7 @@
 /bus.h/1.18/Mon May  7 18:16:38 2012/-kk/
 /cacheops_machdep.h/1.7/Thu Feb 16 20:17:13 2006/-kk/
 /cdefs.h/1.2/Tue Dec  6 17:02:53 2005/-kk/
-/cpu.h/1.68/Thu Oct 24 06:29:21 2013/-kk/
+/cpu.h/1.68/Thu Oct 24 10:28:57 2013/-kk/
 /db_machdep.h/1.5/Mon Apr 11 04:22:30 2011/-kk/
 /disklabel.h/1.4/Tue Aug 30 12:39:55 2011/-kk/
 /elf_machdep.h/1.2/Tue Dec  6 17:02:53 2005/-kk/

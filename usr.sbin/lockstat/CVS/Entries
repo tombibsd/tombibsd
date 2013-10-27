@@ -1,7 +1,7 @@
 /Makefile/1.1/Thu Sep  7 00:50:45 2006/-kk/
-/elf32.c/1.10/Thu Oct 24 06:29:37 2013/-kk/
+/elf32.c/1.10/Thu Oct 24 10:29:01 2013/-kk/
 /elf64.c/1.1/Thu Sep  7 00:50:45 2006/-kk/
 /extern.h/1.3/Mon Apr 28 20:24:16 2008/-kk/
-/lockstat.8/1.10/Wed Mar  6 11:49:06 2013/-kk/
-/main.c/1.19/Wed Mar  6 11:49:06 2013/-kk/
+/lockstat.8/1.10/Thu Oct 24 10:29:01 2013/-kk/
+/main.c/1.19/Thu Oct 24 10:29:01 2013/-kk/
 D

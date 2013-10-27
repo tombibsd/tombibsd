@@ -2,7 +2,7 @@
 /cpu.c/1.12/Sat Oct 20 14:53:37 2012/-kk/
 /ipi_bebox.c/1.1/Sat Oct 20 14:53:37 2012/-kk/
 /locore.S/1.28/Sat Oct 20 14:53:37 2012/-kk/
-/machdep.c/1.107/Sun Apr 21 15:42:11 2013/-kk/
+/machdep.c/1.107/Thu Oct 24 10:28:57 2013/-kk/
 /mainbus.c/1.29/Fri Jan 27 18:52:52 2012/-kk/
 /pic_bebox.c/1.10/Sat Oct 20 14:56:31 2012/-kk/
 D

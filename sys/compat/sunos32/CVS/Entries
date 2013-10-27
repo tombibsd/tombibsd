@@ -7,7 +7,7 @@
 /sunos32_exec_aout.c/1.11/Thu May 29 14:51:26 2008/-kk/
 /sunos32_ioctl.c/1.29/Thu May 29 14:51:26 2008/-kk/
 /sunos32_misc.c/1.74/Sun Feb 12 16:34:11 2012/-kk/
-/sunos32_mod.c/1.2/Thu Sep 19 18:50:36 2013/-kk/
+/sunos32_mod.c/1.2/Thu Oct 24 10:28:57 2013/-kk/
 /sunos32_syscall.h/1.27/Tue Mar  2 21:14:44 2010/-kk/
 /sunos32_syscallargs.h/1.26/Tue Mar  2 21:14:44 2010/-kk/
 /sunos32_syscalls.c/1.26/Tue Mar  2 21:14:44 2010/-kk/

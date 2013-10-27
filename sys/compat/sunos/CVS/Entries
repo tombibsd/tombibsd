@@ -7,7 +7,7 @@
 /sunos_exec_aout.c/1.18/Sat Aug 15 23:39:35 2009/-kk/
 /sunos_ioctl.c/1.61/Wed Nov 19 18:36:05 2008/-kk/
 /sunos_misc.c/1.168/Thu Jun 24 13:03:07 2010/-kk/
-/sunos_mod.c/1.2/Thu Sep 19 18:50:36 2013/-kk/
+/sunos_mod.c/1.2/Thu Oct 24 10:28:57 2013/-kk/
 /sunos_syscall.h/1.86/Wed Mar  3 11:08:00 2010/-kk/
 /sunos_syscallargs.h/1.70/Wed Mar  3 11:08:00 2010/-kk/
 /sunos_syscalls.c/1.85/Wed Mar  3 11:08:00 2010/-kk/

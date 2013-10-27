@@ -3,7 +3,7 @@
 /ansi.h/1.23/Sun Jul 17 20:54:47 2011/-kk/
 /aout_machdep.h/1.10/Sat Mar 17 21:45:39 2012/-kk/
 /apmvar.h/1.3/Mon Apr 28 20:23:36 2008/-kk/
-/asm.h/1.19/Thu Sep 12 15:36:17 2013/-kk/
+/asm.h/1.19/Thu Oct 24 10:28:57 2013/-kk/
 /autoconf.h/1.48/Sat Oct 27 17:18:11 2012/-kk/
 /bootinfo.h/1.6/Mon May 28 19:24:29 2012/-kk/
 /bsd_openprom.h/1.25/Mon Dec 24 15:46:45 2007/-kk/
@@ -12,7 +12,7 @@
 /bus_funcs.h/1.1/Fri Jul  1 17:10:01 2011/-kk/
 /cdefs.h/1.12/Fri Jan 20 14:08:06 2012/-kk/
 /cgtworeg.h/1.5/Tue May 20 13:38:00 2003/-kk/
-/cpu.h/1.95/Thu Oct 24 06:29:25 2013/-kk/
+/cpu.h/1.95/Thu Oct 24 10:28:57 2013/-kk/
 /cpuconf.h/1.4/Sun Dec 11 12:19:05 2005/-kk/
 /ctlreg.h/1.28/Sun Dec 11 12:19:05 2005/-kk/
 /db_machdep.h/1.26/Thu May 26 15:34:13 2011/-kk/
@@ -26,7 +26,7 @@
 /frame.h/1.8/Tue Apr 12 07:54:16 2011/-kk/
 /fsr.h/1.5/Sun Aug  8 18:44:15 2010/-kk/
 /idprom.h/1.9/Sun Dec 11 12:19:05 2005/-kk/
-/ieee.h/1.15/Thu Feb 14 09:34:46 2013/-kk/
+/ieee.h/1.15/Thu Oct 24 10:28:57 2013/-kk/
 /ieeefp.h/1.8/Tue Mar 20 23:57:57 2012/-kk/
 /instr.h/1.8/Sun Dec 11 12:19:05 2005/-kk/
 /int_const.h/1.3/Sat May 29 17:33:58 2010/-kk/
@@ -38,7 +38,7 @@
 /kbd.h/1.9/Tue Aug 27 09:47:44 2002/-kk/
 /kbio.h/1.6/Tue Aug 27 09:47:44 2002/-kk/
 /kcore.h/1.4/Mon Apr 28 20:23:36 2008/-kk/
-/limits.h/1.21/Thu Apr 11 00:57:36 2013/-kk/
+/limits.h/1.21/Thu Oct 24 10:28:57 2013/-kk/
 /loadfile_machdep.h/1.10/Mon Apr 28 20:23:36 2008/-kk/
 /lock.h/1.31/Mon Apr 28 20:23:36 2008/-kk/
 /math.h/1.5/Mon Dec 15 00:25:05 2008/-kk/
@@ -49,11 +49,11 @@
 /openpromio.h/1.6/Sun Dec 11 12:19:05 2005/-kk/
 /param.h/1.70/Fri Feb 10 17:35:48 2012/-kk/
 /pcb.h/1.9/Tue Oct 13 22:41:57 2009/-kk/
-/pci_machdep.h/1.10/Tue Apr 16 06:57:06 2013/-kk/
-/pmap.h/1.92/Thu Oct 24 06:29:25 2013/-kk/
+/pci_machdep.h/1.10/Thu Oct 24 10:28:57 2013/-kk/
+/pmap.h/1.92/Thu Oct 24 10:28:57 2013/-kk/
 /pmc.h/1.1/Wed Aug  7 05:16:09 2002/-kk/
 /proc.h/1.19/Fri Jan 14 02:06:31 2011/-kk/
-/profile.h/1.16/Thu Sep 12 15:36:17 2013/-kk/
+/profile.h/1.16/Thu Oct 24 10:28:57 2013/-kk/
 /promlib.h/1.24/Thu Jan 21 11:40:01 2010/-kk/
 /psl.h/1.48/Sun Aug 28 22:30:09 2011/-kk/
 /pte.h/1.31/Thu Feb 16 20:17:15 2006/-kk/
@@ -71,7 +71,7 @@
 /trap.h/1.18/Sun Mar 27 18:47:08 2011/-kk/
 /types.h/1.62/Fri Nov  2 00:01:19 2012/-kk/
 /userret.h/1.8/Mon Nov  5 20:37:48 2007/-kk/
-/vmparam.h/1.43/Mon Jan  7 16:59:18 2013/-kk/
+/vmparam.h/1.43/Thu Oct 24 10:28:57 2013/-kk/
 /vuid_event.h/1.3/Tue Aug 27 09:47:44 2002/-kk/
 /wchar_limits.h/1.3/Mon Apr 28 20:23:36 2008/-kk/
 /z8530var.h/1.11/Fri Jul  1 21:00:57 2011/-kk/

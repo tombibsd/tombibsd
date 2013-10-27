@@ -42,8 +42,8 @@
 /mcf-wdebug.s/1.1.1.1/Tue Aug 18 09:44:12 2009/-kk/
 /mode5.d/1.1.1.1/Tue Aug 18 09:44:12 2009/-kk/
 /mode5.s/1.1.1.1/Tue Aug 18 09:44:12 2009/-kk/
-/movem-offset.d/1.1.1.1/Sun Sep 29 13:43:24 2013/-kk/
-/movem-offset.s/1.1.1.1/Sun Sep 29 13:43:28 2013/-kk/
+/movem-offset.d/1.1.1.1/Thu Oct 24 10:28:51 2013/-kk/
+/movem-offset.s/1.1.1.1/Thu Oct 24 10:28:51 2013/-kk/
 /op68000.d/1.1.1.1/Tue Aug 18 09:44:12 2009/-kk/
 /operands.d/1.1.1.1/Tue Aug 18 09:44:12 2009/-kk/
 /operands.s/1.1.1.1/Tue Aug 18 09:44:12 2009/-kk/
@@ -59,8 +59,8 @@
 /pcrel.d/1.1.1.1/Tue Aug 18 09:44:13 2009/-kk/
 /pcrel.s/1.1.1.1/Tue Aug 18 09:44:13 2009/-kk/
 /pic1.s/1.1.1.1/Tue Aug 18 09:44:13 2009/-kk/
-/pmove.d/1.1.1.1/Sun Sep 29 13:43:28 2013/-kk/
-/pmove.s/1.1.1.1/Sun Sep 29 13:43:28 2013/-kk/
+/pmove.d/1.1.1.1/Thu Oct 24 10:28:51 2013/-kk/
+/pmove.s/1.1.1.1/Thu Oct 24 10:28:51 2013/-kk/
 /pr11676.d/1.1.1.1/Sat Sep 24 22:28:17 2011/-kk/
 /pr11676.s/1.1.1.1/Sat Sep 24 22:28:17 2011/-kk/
 /t2.d/1.1.1.1/Tue Aug 18 09:44:13 2009/-kk/

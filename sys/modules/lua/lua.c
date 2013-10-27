@@ -478,7 +478,7 @@ lua_require(lua_State *L)
 		snprintf(name, sizeof name, "lua%s", module);
 		if (lua_verbose)
 			device_printf(sc_self, "autoload %s\n", name);
-		module_autoload(name, MODULE_CLASS_LUA_BINDING);
+		module_autoload(name, MODULE_CLASS_MISC);
 		LIST_FOREACH(m, &lua_modules, mod_next)
 			if (!strcmp(m->mod_name, module)) {
 				md = m;

@@ -143,7 +143,7 @@ getremcap(char *host)
 	 *   from the description file
 	 */
 	if (!HW)
-		HW = (CU == NULL) || (DU && equal(DV, CU));
+		HW = (CU == NULL) || (DU && strcmp(DV, CU) == 0);
 	HO = host;
 	/*
 	 * see if uppercase mode should be turned on initially

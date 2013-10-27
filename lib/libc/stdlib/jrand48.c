@@ -35,5 +35,5 @@ jrand48(unsigned short xseed[3])
 	_DIAGASSERT(xseed != NULL);
 
 	__dorand48(xseed);
-	return ((long) xseed[2] << 16) + (long) xseed[1];
+	return (int16_t)xseed[2] * 65536 + xseed[1];
 }

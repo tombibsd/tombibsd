@@ -3,17 +3,17 @@
 /TODO/1.1.1.1/Thu Dec  8 08:57:40 1994/-kk/
 /acu.c/1.16/Tue Sep  6 18:33:01 2011/-kk/
 /acutab.c/1.5/Thu Aug  7 11:16:16 2003/-kk/
-/cmds.c/1.36/Sun Jun  2 13:18:12 2013/-kk/
+/cmds.c/1.36/Thu Oct 24 10:28:59 2013/-kk/
 /cmdtab.c/1.8/Sun Oct 22 16:47:50 2006/-kk/
 /cu.c/1.21/Tue Sep  6 18:33:01 2011/-kk/
 /hunt.c/1.18/Tue Sep  6 18:33:01 2011/-kk/
 /partab.c/1.6/Thu Aug  7 11:16:18 2003/-kk/
 /pathnames.h/1.5/Mon Apr  3 02:25:27 2006/-kk/
-/remote.c/1.18/Mon Jul 21 14:19:26 2008/-kk/
+/remote.c/1.19/Sun Oct 27 08:20:10 2013/-kk/
 /tip.1/1.32/Thu Mar 22 07:58:20 2012/-kk/
-/tip.c/1.52/Sun Jun  2 13:18:12 2013/-kk/
-/tip.h/1.32/Tue Sep  6 18:33:01 2011/-kk/
+/tip.c/1.53/Sun Oct 27 08:20:10 2013/-kk/
+/tip.h/1.33/Sun Oct 27 08:20:10 2013/-kk/
 /tipout.c/1.15/Tue Sep  6 18:33:01 2011/-kk/
-/value.c/1.14/Thu Dec 14 17:09:43 2006/-kk/
+/value.c/1.15/Sun Oct 27 08:20:10 2013/-kk/
 /vars.c/1.12/Mon Apr  3 04:53:58 2006/-kk/
 D/aculib////

@@ -1819,7 +1819,7 @@ static int
 wb_match(struct lm_softc *sc)
 {
 	const char *model = NULL;
-	int banksel, vendid, devid, cf_flags;
+	int banksel, vendid, cf_flags;
 
 	aprint_naive("\n");
 	aprint_normal("\n");
@@ -1835,7 +1835,7 @@ wb_match(struct lm_softc *sc)
 
 	/* Read device/chip ID */
 	lm_generic_banksel(sc, WB_BANKSEL_B0);
-	devid = (*sc->lm_readreg)(sc, LMD_CHIPID);
+	(void)(*sc->lm_readreg)(sc, LMD_CHIPID);
 	sc->chipid = (*sc->lm_readreg)(sc, WB_BANK0_CHIPID);
 	lm_generic_banksel(sc, banksel);
 	cf_flags = device_cfdata(sc->sc_dev)->cf_flags;

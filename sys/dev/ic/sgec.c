@@ -241,17 +241,17 @@ sgec_attach(struct ze_softc *sc)
  fail_6:
 	for (i = 0; i < RXDESCS; i++) {
 		if (sc->sc_rxmbuf[i] != NULL) {
-			bus_dmamap_unload(sc->sc_dmat, sc->sc_xmtmap[i]);
+			bus_dmamap_unload(sc->sc_dmat, sc->sc_rcvmap[i]);
 			m_freem(sc->sc_rxmbuf[i]);
 		}
 	}
  fail_5:
-	for (i = 0; i < RXDESCS; i++) {
+	for (i = 0; i < TXDESCS; i++) {
 		if (sc->sc_xmtmap[i] != NULL)
 			bus_dmamap_destroy(sc->sc_dmat, sc->sc_xmtmap[i]);
 	}
  fail_4:
-	for (i = 0; i < TXDESCS; i++) {
+	for (i = 0; i < RXDESCS; i++) {
 		if (sc->sc_rcvmap[i] != NULL)
 			bus_dmamap_destroy(sc->sc_dmat, sc->sc_rcvmap[i]);
 	}

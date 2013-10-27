@@ -1,6 +1,6 @@
 /Makefile/1.4/Wed Apr 11 19:07:37 2001/-kk/
-/agten.c/1.32/Thu Oct 24 06:29:28 2013/-kk/
-/be.c/1.80/Sun Jun  9 09:23:35 2013/-kk/
+/agten.c/1.32/Thu Oct 24 10:28:58 2013/-kk/
+/be.c/1.80/Thu Oct 24 10:28:58 2013/-kk/
 /bereg.h/1.9/Sat Sep 19 11:53:42 2009/-kk/
 /bpp.c/1.39/Thu Sep 17 16:28:12 2009/-kk/
 /bppreg.h/1.2/Mon Apr 28 20:23:57 2008/-kk/
@@ -10,11 +10,11 @@
 /cgtwelve.c/1.5/Wed Jan 11 16:08:57 2012/-kk/
 /cgtwelvereg.h/1.2/Wed Apr 14 04:37:11 2010/-kk/
 /cs4231_sbus.c/1.49/Wed Nov 23 23:07:36 2011/-kk/
-/dbri.c/1.35/Thu Oct 24 06:29:28 2013/-kk/
+/dbri.c/1.35/Thu Oct 24 10:28:58 2013/-kk/
 /dbrireg.h/1.6/Fri May  9 03:12:49 2008/-kk/
 /dbrivar.h/1.13/Wed Nov 23 23:07:36 2011/-kk/
 /dma_sbus.c/1.35/Thu Sep 17 16:28:12 2009/-kk/
-/esp_sbus.c/1.52/Thu Sep 12 19:54:51 2013/-kk/
+/esp_sbus.c/1.52/Thu Oct 24 10:28:58 2013/-kk/
 /files.sbus/1.39/Sat Oct 20 13:52:11 2012/-kk/
 /genfb_sbus.c/1.10/Thu Oct  7 07:53:54 2010/-kk/
 /if_en.c/1.29/Mon Jul 18 00:58:52 2011/-kk/
@@ -26,7 +26,7 @@
 /isp_sbus.c/1.81/Fri Sep  7 22:37:27 2012/-kk/
 /lebuffer.c/1.36/Thu Sep 17 17:53:35 2009/-kk/
 /lebuffervar.h/1.8/Thu Sep 17 17:51:52 2009/-kk/
-/magma.c/1.57/Thu Oct 24 06:29:28 2013/-kk/
+/magma.c/1.57/Thu Oct 24 10:28:58 2013/-kk/
 /magmareg.h/1.17/Sat Oct 27 17:18:37 2012/-kk/
 /mbppio.h/1.2/Wed Jul  2 10:16:20 2008/-kk/
 /p9100.c/1.59/Sat Oct 27 17:18:37 2012/-kk/
@@ -38,7 +38,7 @@
 /qereg.h/1.7/Sat Sep 19 11:53:42 2009/-kk/
 /sbusvar.h/1.27/Thu Sep 17 16:28:12 2009/-kk/
 /sio16.c/1.24/Mon Jul 18 00:58:52 2011/-kk/
-/spif.c/1.29/Sun Sep 15 14:04:04 2013/-kk/
+/spif.c/1.29/Thu Oct 24 10:28:58 2013/-kk/
 /spifreg.h/1.4/Tue May 12 14:43:59 2009/-kk/
 /spifvar.h/1.4/Mon Jul 18 00:58:52 2011/-kk/
 /stp4020.c/1.67/Sat Oct 27 17:18:37 2012/-kk/

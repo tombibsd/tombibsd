@@ -5,7 +5,7 @@
 /divsi3.S/1.6/Thu Aug  7 16:42:07 2003/-kk/
 /fabs.S/1.5/Thu Aug  7 16:42:07 2003/-kk/
 /fixdfsi.S/1.6/Thu Aug  7 16:42:07 2003/-kk/
-/fixunsdfsi.S/1.13/Thu Sep 12 15:36:15 2013/-kk/
+/fixunsdfsi.S/1.13/Thu Oct 24 10:28:53 2013/-kk/
 /flt_rounds.S/1.9/Fri Sep 30 23:42:00 2011/-kk/
 /fpclassifyl.c/1.3/Mon Apr 28 20:22:56 2008/-kk/
 /fpgetmask.S/1.4/Sun Jan 13 21:45:42 2002/-kk/
@@ -22,10 +22,10 @@
 /isnanl.c/1.8/Sun Jun  5 14:43:13 2011/-kk/
 /makecontext.c/1.4/Mon Apr 28 20:22:56 2008/-kk/
 /nanf.c/1.4/Sun Feb 22 01:34:01 2009/-kk/
-/resumecontext.S/1.7/Thu Sep 12 15:36:15 2013/-kk/
-/setjmp.S/1.15/Thu Sep 12 15:36:15 2013/-kk/
+/resumecontext.S/1.7/Thu Oct 24 10:28:53 2013/-kk/
+/setjmp.S/1.15/Thu Oct 24 10:28:53 2013/-kk/
 /signbitl.c/1.2/Mon Apr 28 20:22:56 2008/-kk/
-/sigsetjmp.S/1.17/Thu Sep 12 15:36:15 2013/-kk/
-/swapcontext.S/1.7/Thu Sep 12 15:36:15 2013/-kk/
+/sigsetjmp.S/1.17/Thu Oct 24 10:28:53 2013/-kk/
+/swapcontext.S/1.7/Thu Oct 24 10:28:53 2013/-kk/
 /udivsi3.S/1.6/Thu Aug  7 16:42:07 2003/-kk/
 D

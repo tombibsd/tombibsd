@@ -1,13 +1,13 @@
 /autoconf.c/1.22/Sat Oct 27 17:17:52 2012/-kk/
 /genassym.cf/1.8/Sat Sep 20 18:29:05 2008/-kk/
-/hpc_machdep.c/1.102/Sun Aug 18 22:26:51 2013/-kk/
+/hpc_machdep.c/1.102/Thu Oct 24 10:28:57 2013/-kk/
 /intr.c/1.19/Fri Jul 27 05:36:10 2012/-kk/
 /kloader_machdep.c/1.1/Sat Mar 31 14:02:54 2012/-kk/
 /kloader_pxa2x0.S/1.1/Sat Mar 31 14:02:54 2012/-kk/
-/locore.S/1.14/Mon Aug 26 15:31:44 2013/-kk/
+/locore.S/1.14/Thu Oct 24 10:28:57 2013/-kk/
 /netbookpro_machdep.c/1.1/Sat Aug  6 03:53:40 2011/-kk/
-/pxa2x0_hpc_machdep.c/1.20/Mon Aug 26 15:31:06 2013/-kk/
-/sa11x0_hpc_machdep.c/1.8/Sun Aug 18 22:26:51 2013/-kk/
+/pxa2x0_hpc_machdep.c/1.20/Thu Oct 24 10:28:57 2013/-kk/
+/sa11x0_hpc_machdep.c/1.8/Thu Oct 24 10:28:57 2013/-kk/
 /softintr.c/1.14/Mon Apr 28 20:23:21 2008/-kk/
 /spl.S/1.6/Tue Jan  8 02:07:55 2008/-kk/
 /wzero3_machdep.c/1.2/Thu Jun 23 12:40:32 2011/-kk/

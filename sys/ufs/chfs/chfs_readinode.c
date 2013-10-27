@@ -507,7 +507,6 @@ no_overlapping_node(struct rb_tree *fragtree,
 		}
 
 		rb_tree_insert_node(fragtree, holefrag);
-		this = holefrag;
 	}
 
 	rb_tree_insert_node(fragtree, newfrag);

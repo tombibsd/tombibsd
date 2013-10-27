@@ -5,7 +5,7 @@
 /bswap.h/1.2/Sat Aug 21 05:39:52 1999/-kk/
 /bus.h/1.27/Fri Jun  1 09:41:35 2012/-kk/
 /cdefs.h/1.1/Thu Jan 19 01:38:36 1995/-kk/
-/cpu.h/1.80/Thu Oct 24 06:29:17 2013/-kk/
+/cpu.h/1.80/Thu Oct 24 10:28:57 2013/-kk/
 /cpufunc.h/1.7/Wed Oct 26 02:06:02 1994/-kk/
 /db_machdep.h/1.5/Wed Aug 15 01:29:29 2001/-kk/
 /disklabel.h/1.8/Tue Aug 30 12:39:53 2011/-kk/

@@ -99,7 +99,7 @@ smbfs_node_alloc(struct mount *mp, struct vnode *dvp,
 	struct vattr vattr;
 	struct smbmount *smp = VFSTOSMBFS(mp);
 	struct smbnode_hashhead *nhpp;
-	struct smbnode *np, *np2, *dnp;
+	struct smbnode *np, *np2;
 	struct vnode *vp;
 	u_long hashval;
 	int error;
@@ -121,8 +121,8 @@ smbfs_node_alloc(struct mount *mp, struct vnode *dvp,
 		return (error);
 	}
 
-	dnp = dvp ? VTOSMB(dvp) : NULL;
 #ifdef DIAGNOSTIC
+	struct smbnode *dnp = dvp ? VTOSMB(dvp) : NULL;
 	if (dnp == NULL && dvp != NULL)
 		panic("smbfs_node_alloc: dead parent vnode %p", dvp);
 #endif

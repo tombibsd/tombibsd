@@ -1,7 +1,7 @@
 /ChangeLog/1.1.1.1/Sat Sep 24 19:49:10 2011/-kk/
 /callback.h/1.1.1.1/Sat Sep 24 19:49:10 2011/-kk/
 /fileio.h/1.1.1.1/Sat Sep 24 19:49:10 2011/-kk/
-/gdb-index.h/1.1.1.1/Thu Oct  3 15:47:28 2013/-kk/
+/gdb-index.h/1.1.1.1/Thu Oct 24 10:28:52 2013/-kk/
 /remote-sim.h/1.1.1.1/Sat Sep 24 19:49:10 2011/-kk/
 /signals.def/1.1.1.1/Sat Sep 24 19:49:10 2011/-kk/
 /signals.h/1.1.1.1/Sat Sep 24 19:49:10 2011/-kk/
@@ -14,7 +14,7 @@
 /sim-lm32.h/1.1.1.1/Sat Sep 24 19:49:11 2011/-kk/
 /sim-m32c.h/1.1.1.1/Sat Sep 24 19:49:11 2011/-kk/
 /sim-ppc.h/1.1.1.1/Sat Sep 24 19:49:11 2011/-kk/
-/sim-rl78.h/1.1.1.1/Thu Oct  3 15:47:27 2013/-kk/
+/sim-rl78.h/1.1.1.1/Thu Oct 24 10:28:52 2013/-kk/
 /sim-rx.h/1.1.1.1/Sat Sep 24 19:49:11 2011/-kk/
 /sim-sh.h/1.1.1.1/Sat Sep 24 19:49:11 2011/-kk/
 D

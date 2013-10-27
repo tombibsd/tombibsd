@@ -350,7 +350,9 @@ efs_inode_lookup(struct efs_mount *emp, struct efs_inode *ei,
 	int ret;
 	
 	KASSERT(VOP_ISLOCKED(ei->ei_vp));
+#ifdef DIAGNOSTIC
 	KASSERT(efs_is_inode_synced(ei) == 0);
+#endif
 	KASSERT((ei->ei_mode & S_IFMT) == S_IFDIR);
 
 	efs_extent_iterator_init(&exi, ei, 0);
