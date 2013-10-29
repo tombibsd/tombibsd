@@ -460,7 +460,7 @@ pdccninit(struct consdev *cn)
 int
 pdccnlookc(dev_t dev, int *cp)
 {
-	int s, err __unused, l, pagezero_cookie;
+	int s, err __debugused, l, pagezero_cookie;
 
 	s = splhigh();
 	pagezero_cookie = hp700_pagezero_map();

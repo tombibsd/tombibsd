@@ -502,7 +502,6 @@ hdcstart(struct hdcsoftc *sc, struct buf *ob)
 	struct rdsoftc *rd;
 	struct buf *bp;
 	int cn, sn, tn, bn, blks;
-	volatile char ch;
 
 	if (sc->sc_active)
 		return; /* Already doing something */
@@ -559,7 +558,7 @@ hdcstart(struct hdcsoftc *sc, struct buf *ob)
 	/* Count up vars */
 	sc->sc_xfer = blks * DEV_BSIZE;
 
-	ch = HDC_RSTAT; /* Avoid pending interrupts */
+	(void)HDC_RSTAT; /* Avoid pending interrupts */
 	WAIT;
 	vsbus_clrintr(sc->sc_intbit); /* Clear pending int's */
 

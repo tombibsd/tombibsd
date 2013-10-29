@@ -994,7 +994,7 @@ vmem_roundup_size(vmem_t *vm, vmem_size_t size)
 int
 vmem_alloc(vmem_t *vm, vmem_size_t size, vm_flag_t flags, vmem_addr_t *addrp)
 {
-	const vm_flag_t strat __unused = flags & VM_FITMASK;
+	const vm_flag_t strat __diagused = flags & VM_FITMASK;
 
 	KASSERT((flags & (VM_SLEEP|VM_NOSLEEP)) != 0);
 	KASSERT((~flags & (VM_SLEEP|VM_NOSLEEP)) != 0);

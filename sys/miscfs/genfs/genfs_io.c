@@ -1733,7 +1733,7 @@ genfs_do_directio(struct vmspace *vs, vaddr_t uva, size_t len, struct vnode *vp,
 	vaddr_t kva, puva;
 	paddr_t pa;
 	vm_prot_t prot;
-	int error, rv __unused, poff, koff;
+	int error, rv __diagused, poff, koff;
 	const int pgoflags = PGO_CLEANIT | PGO_SYNCIO | PGO_JOURNALLOCKED |
 		(rw == UIO_WRITE ? PGO_FREE : 0);
 

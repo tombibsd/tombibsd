@@ -384,6 +384,8 @@ of_enter_i2c_devs(prop_dictionary_t props, int ofnode, size_t cell_size)
 			/* Set size for EEPROM's that we know about */
 			if (strcmp(compatible, "i2c-at24c64") == 0)
 				prop_dictionary_set_uint32(dev, "size", 8192);
+			if (strcmp(compatible, "i2c-at34c02") == 0)
+				prop_dictionary_set_uint32(dev, "size", 256);
 		}
 		prop_array_add(array, dev);
 		prop_object_release(dev);

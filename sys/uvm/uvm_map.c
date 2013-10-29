@@ -2551,7 +2551,7 @@ uvm_map_extract(struct vm_map *srcmap, vaddr_t start, vsize_t len,
 	struct vm_map_entry *chain, *endchain, *entry, *orig_entry, *newentry,
 	    *deadentry, *oldentry;
 	struct vm_map_entry *resentry = NULL; /* a dummy reservation entry */
-	vsize_t elen;
+	vsize_t elen __unused;
 	int nchain, error, copy_ok;
 	vsize_t nsize;
 	UVMHIST_FUNC("uvm_map_extract"); UVMHIST_CALLED(maphist);

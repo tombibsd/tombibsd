@@ -431,7 +431,7 @@ exec_ibcs2_coff_prep_zmagic(struct lwp *l, struct exec_package *epp, struct coff
 		size_t resid;
 		struct coff_slhdr *slhdr;
 		char *tbuf, *bufp;
-		size_t len = sh.s_size, path_index, entry_len;
+		size_t len = sh.s_size, /* path_index, */ entry_len;
 
 		if (len > 64 * 1024)
 			return ENOEXEC;
@@ -462,7 +462,7 @@ exec_ibcs2_coff_prep_zmagic(struct lwp *l, struct exec_package *epp, struct coff
 				return ENOEXEC;
 			}
 
-			path_index = slhdr->path_index * sizeof(long);
+			/* path_index = slhdr->path_index * sizeof(long); */
 			entry_len = slhdr->entry_len * sizeof(long);
 
 			if (entry_len > len) {

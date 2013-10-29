@@ -60,7 +60,7 @@
 /kern_resource.c/1.172/Thu Oct 24 10:28:58 2013/-kk/
 /kern_rndpool.c/1.5/Thu Oct 24 10:28:58 2013/-kk/
 /kern_rndq.c/1.21/Thu Oct 24 10:28:58 2013/-kk/
-/kern_rndsink.c/1.6/Thu Oct 24 10:28:58 2013/-kk/
+/kern_rndsink.c/1.7/Tue Oct 29 07:53:58 2013/-kk/
 /kern_runq.c/1.40/Thu Oct 24 10:28:58 2013/-kk/
 /kern_rwlock.c/1.42/Thu Oct 24 10:28:58 2013/-kk/
 /kern_rwlock_obj.c/1.3/Fri May 13 22:16:43 2011/-kk/
@@ -106,7 +106,7 @@
 /subr_hash.c/1.5/Tue Jun  5 20:51:36 2012/-kk/
 /subr_humanize.c/1.1/Fri Oct  2 15:48:41 2009/-kk/
 /subr_iostat.c/1.19/Mon Nov 30 11:28:35 2009/-kk/
-/subr_kcpuset.c/1.9/Thu Oct 24 10:28:58 2013/-kk/
+/subr_kcpuset.c/1.10/Tue Oct 29 07:53:59 2013/-kk/
 /subr_kmem.c/1.50/Thu Oct 24 10:28:58 2013/-kk/
 /subr_kobj.c/1.46/Thu Oct 24 10:28:58 2013/-kk/
 /subr_kobj_vfs.c/1.7/Thu Oct 24 10:28:58 2013/-kk/
@@ -129,7 +129,7 @@
 /subr_tftproot.c/1.12/Sat Dec  1 11:41:50 2012/-kk/
 /subr_time.c/1.17/Thu Oct 24 10:28:58 2013/-kk/
 /subr_userconf.c/1.25/Mon Aug  1 10:33:26 2011/-kk/
-/subr_vmem.c/1.85/Thu Oct 24 10:28:58 2013/-kk/
+/subr_vmem.c/1.86/Tue Oct 29 07:53:59 2013/-kk/
 /subr_workqueue.c/1.33/Sun Oct  7 22:16:21 2012/-kk/
 /subr_xcall.c/1.15/Thu Oct 24 10:28:58 2013/-kk/
 /sys_aio.c/1.37/Thu Feb 17 19:02:50 2011/-kk/

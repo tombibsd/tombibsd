@@ -290,8 +290,12 @@ extern bool vm_page_zero_enable;
  */
 
 #define	VM_PHYSMEM_PTR(i)	(&vm_physmem[i])
+#if VM_PHYSSEG_MAX == 1
+#define VM_PHYSMEM_PTR_SWAP(i, j) /* impossible */
+#else
 #define VM_PHYSMEM_PTR_SWAP(i, j) \
 	do { vm_physmem[(i)] = vm_physmem[(j)]; } while (0)
+#endif
 
 extern struct vm_physseg vm_physmem[VM_PHYSSEG_MAX];
 extern int vm_nphysseg;

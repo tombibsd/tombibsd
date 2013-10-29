@@ -748,7 +748,7 @@ cdstart(struct scsipi_periph *periph)
 	struct scsi_rw_6 cmd_small;
 	struct scsipi_generic *cmdp;
 	struct scsipi_xfer *xs;
-	int flags, nblks, cmdlen, error __unused;
+	int flags, nblks, cmdlen, error __diagused;
 
 	SC_DEBUG(periph, SCSIPI_DB2, ("cdstart "));
 	/*

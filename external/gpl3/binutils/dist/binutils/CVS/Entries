@@ -1,4 +1,4 @@
-/.gitignore/1.1.1.1/Thu Oct 24 10:28:51 2013/-kk/
+/.gitignore/1.1.1.1/Tue Oct 29 07:49:32 2013/-kk/
 /BRANCHES/1.1.1.2/Sat Sep 24 22:39:13 2011/-kk/
 /ChangeLog-0001/1.1.1.1/Tue Aug 18 10:10:26 2009/-kk/
 /ChangeLog-0203/1.1.1.1/Tue Aug 18 10:10:27 2009/-kk/
@@ -109,9 +109,9 @@
 /strings.c/1.3/Sun Sep 25 04:32:36 2011/-kk/
 /sysdep.h/1.1.1.2/Sat Sep 24 22:38:12 2011/-kk/
 /sysdump.c/1.1.1.2/Sat Sep 24 22:38:12 2011/-kk/
-/sysinfo.c/1.1.1.2/Sun Oct 27 08:18:56 2013/-kk/
-/sysinfo.h/1.1.1.2/Sun Oct 27 08:18:56 2013/-kk/
-/sysinfo.y/1.1.1.2/Sat Sep 24 22:38:11 2011/-kk/
+/sysinfo.c/1.1.1.2/Tue Oct 29 07:49:32 2013/-kk/
+/sysinfo.h/1.1.1.2/Tue Oct 29 07:49:32 2013/-kk/
+/sysinfo.y/1.1.1.2/Tue Oct 29 07:24:53 2013/-kk/
 /syslex.c/1.1.1.2/Sun Oct 27 08:18:56 2013/-kk/
 /syslex.l/1.1.1.2/Sat Sep 24 22:38:10 2011/-kk/
 /syslex_wrap.c/1.1.1.1/Thu Oct 24 10:28:51 2013/-kk/

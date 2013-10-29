@@ -135,7 +135,7 @@ rndpool_maybe_extract(void *buffer, size_t bytes)
 
 	mutex_spin_enter(&rndpool_mtx);
 	if (bits_needed <= rndpool_get_entropy_count(&rnd_pool)) {
-		const uint32_t extracted __unused =
+		const uint32_t extracted __diagused =
 		    rndpool_extract_data(&rnd_pool, buffer, bytes,
 			RND_EXTRACT_GOOD);
 

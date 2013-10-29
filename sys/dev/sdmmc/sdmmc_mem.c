@@ -1204,7 +1204,7 @@ static int
 sdmmc_mem_single_read_block(struct sdmmc_function *sf, uint32_t blkno,
     u_char *data, size_t datalen)
 {
-	struct sdmmc_softc *sc __unused = sf->sc;
+	struct sdmmc_softc *sc __diagused = sf->sc;
 	int error = 0;
 	int i;
 
@@ -1391,7 +1391,7 @@ static int
 sdmmc_mem_single_write_block(struct sdmmc_function *sf, uint32_t blkno,
     u_char *data, size_t datalen)
 {
-	struct sdmmc_softc *sc __unused = sf->sc;
+	struct sdmmc_softc *sc __diagused = sf->sc;
 	int error = 0;
 	int i;
 

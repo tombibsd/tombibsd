@@ -35,5 +35,6 @@
 # - make __cerror (spelled CERROR) hidden again
 # - remove ruserok() and friends to libcompat (or entirely)
 # - remove alloca fallback and expect compiler to provide a builtin version.
+# - switch to DT_INIT_ARRAY on all platforms
 major=12
 minor=187
