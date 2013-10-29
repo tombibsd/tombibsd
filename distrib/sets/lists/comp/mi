@@ -2590,6 +2590,7 @@
 ./usr/include/sys/localedef.h			comp-c-include
 ./usr/include/sys/lock.h			comp-c-include
 ./usr/include/sys/lockf.h			comp-c-include
+./usr/include/sys/lua.h				comp-c-include
 ./usr/include/sys/lwp.h				comp-c-include
 ./usr/include/sys/lwpctl.h			comp-c-include
 ./usr/include/sys/malloc.h			comp-c-include
@@ -3238,9 +3239,9 @@
 ./usr/lib/librumpnet_netbt.a			comp-c-lib		rump
 ./usr/lib/librumpnet_netbt_p.a			comp-c-proflib		profile,rump
 ./usr/lib/librumpnet_netinet.a			comp-c-lib		rump
-./usr/lib/librumpnet_netinet_p.a		comp-c-proflib		profile,rump
 ./usr/lib/librumpnet_netinet6.a			comp-c-lib		rump
 ./usr/lib/librumpnet_netinet6_p.a		comp-c-proflib		profile,rump
+./usr/lib/librumpnet_netinet_p.a		comp-c-proflib		profile,rump
 ./usr/lib/librumpnet_netmpls.a			comp-c-lib		rump
 ./usr/lib/librumpnet_netmpls_p.a		comp-c-proflib		profile,rump
 ./usr/lib/librumpnet_npf.a			comp-c-lib		rump
@@ -4554,6 +4555,8 @@
 ./usr/share/man/cat3/__cacheline_aligned.0	comp-c-catman		.cat
 ./usr/share/man/cat3/__constfunc.0		comp-c-catman		.cat
 ./usr/share/man/cat3/__dead.0			comp-c-catman		.cat
+./usr/share/man/cat3/__debugused.0		comp-c-catman		.cat
+./usr/share/man/cat3/__diagused.0		comp-c-catman		.cat
 ./usr/share/man/cat3/__insn_barrier.0		comp-c-catman		.cat
 ./usr/share/man/cat3/__noinline.0		comp-c-catman		.cat
 ./usr/share/man/cat3/__packed.0			comp-c-catman		.cat
@@ -11159,6 +11162,8 @@
 ./usr/share/man/html3/__cacheline_aligned.html	comp-c-htmlman		html
 ./usr/share/man/html3/__constfunc.html		comp-c-htmlman		html
 ./usr/share/man/html3/__dead.html		comp-c-htmlman		html
+./usr/share/man/html3/__debugused.html		comp-c-htmlman		html
+./usr/share/man/html3/__diagused.html		comp-c-htmlman		html
 ./usr/share/man/html3/__insn_barrier.html	comp-c-htmlman		html
 ./usr/share/man/html3/__noinline.html		comp-c-htmlman		html
 ./usr/share/man/html3/__packed.html		comp-c-htmlman		html
@@ -17566,6 +17571,8 @@
 ./usr/share/man/man3/__cacheline_aligned.3	comp-c-man		.man
 ./usr/share/man/man3/__constfunc.3		comp-c-man		.man
 ./usr/share/man/man3/__dead.3			comp-c-man		.man
+./usr/share/man/man3/__debugused.3		comp-c-man		.man
+./usr/share/man/man3/__diagused.3		comp-c-man		.man
 ./usr/share/man/man3/__insn_barrier.3		comp-c-man		.man
 ./usr/share/man/man3/__noinline.3		comp-c-man		.man
 ./usr/share/man/man3/__packed.3			comp-c-man		.man

@@ -26,6 +26,8 @@ MLINKS+=attribute.3 __dead.3 \
 	attribute.3 __noinline.3 \
 	attribute.3 __unused.3 \
 	attribute.3 __used.3 \
+	attribute.3 __diagused.3 \
+	attribute.3 __debugused.3 \
 	attribute.3 __packed.3 \
 	attribute.3 __aligned.3 \
 	attribute.3 __section.3 \

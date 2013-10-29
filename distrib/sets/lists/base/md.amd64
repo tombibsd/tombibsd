@@ -188,10 +188,10 @@
 ./usr/lib/i386/liblua.so.1			base-compat-shlib	compat,pic
 ./usr/lib/i386/liblua.so.1.0			base-compat-shlib	compat,pic
 ./usr/lib/i386/liblutok.so			base-compat-shlib	compat,pic,kyua
-./usr/lib/i386/liblutok.so.2			base-compat-shlib	compat,pic,kyua
-./usr/lib/i386/liblutok.so.2.0			base-compat-shlib	compat,pic,kyua
 ./usr/lib/i386/liblutok.so.1			base-obsolete		obsolete
 ./usr/lib/i386/liblutok.so.1.0			base-obsolete		obsolete
+./usr/lib/i386/liblutok.so.2			base-compat-shlib	compat,pic,kyua
+./usr/lib/i386/liblutok.so.2.0			base-compat-shlib	compat,pic,kyua
 ./usr/lib/i386/liblwres.so.7			base-compat-shlib	compat,pic
 ./usr/lib/i386/liblwres.so.7.0			base-compat-shlib	compat,pic
 ./usr/lib/i386/liblzf.so.1			base-compat-shlib	compat,pic

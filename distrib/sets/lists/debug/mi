@@ -198,8 +198,8 @@
 ./usr/lib/librumpnet_net80211_g.a		-unknown-		debuglib,rump
 ./usr/lib/librumpnet_net_g.a			-unknown-		debuglib,rump
 ./usr/lib/librumpnet_netbt_g.a			-unknown-		debuglib,rump
-./usr/lib/librumpnet_netinet_g.a		-unknown-		debuglib,rump
 ./usr/lib/librumpnet_netinet6_g.a		-unknown-		debuglib,rump
+./usr/lib/librumpnet_netinet_g.a		-unknown-		debuglib,rump
 ./usr/lib/librumpnet_netmpls_g.a		-unknown-		debuglib,rump
 ./usr/lib/librumpnet_npf_g.a			-unknown-		debuglib,rump
 ./usr/lib/librumpnet_shmif_g.a			-unknown-		debuglib,rump

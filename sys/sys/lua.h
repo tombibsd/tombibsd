@@ -1,3 +1,5 @@
+/*	$NetBSD$ */
+
 /*
  * Copyright (c) 2011, 2013 Marc Balmer <mbalmer@NetBSD.org>.
  * All rights reserved.

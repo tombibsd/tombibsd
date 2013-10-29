@@ -36,7 +36,6 @@
 .Sh DESCRIPTION
 This section provides an overview of the Lua kernel bindings, their
 functions, error returns and other common definitions and concepts.
-.El
 .Sh SEE ALSO
 .Xr lua 1 ,
 .Xr luac 1 ,

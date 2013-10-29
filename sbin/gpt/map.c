@@ -72,8 +72,8 @@ map_add(off_t start, off_t size, int type, void *data)
 		return (NULL);
 
 	if (n->map_start + n->map_size < start + size) {
-		warnx("error: bogus map");
-		return (0);
+		warnx("error: map entry doesn't fit media");
+		return (NULL);
 	}
 
 	if (n->map_start == start && n->map_size == size) {

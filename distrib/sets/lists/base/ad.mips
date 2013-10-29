@@ -191,10 +191,10 @@
 ./usr/lib/64/libldap_r.so.4.2			base-compat-shlib	compat,pic,ldap,arch64
 ./usr/lib/64/liblua.so.1			base-compat-shlib	compat,pic,arch64
 ./usr/lib/64/liblua.so.1.0			base-compat-shlib	compat,pic,arch64
-./usr/lib/64/liblutok.so.2			base-compat-shlib	compat,pic,kyua,arch64
-./usr/lib/64/liblutok.so.2.0			base-compat-shlib	compat,pic,kyua,arch64
 ./usr/lib/64/liblutok.so.1			base-obsolete		obsolete
 ./usr/lib/64/liblutok.so.1.0			base-obsolete		obsolete
+./usr/lib/64/liblutok.so.2			base-compat-shlib	compat,pic,kyua,arch64
+./usr/lib/64/liblutok.so.2.0			base-compat-shlib	compat,pic,kyua,arch64
 ./usr/lib/64/liblwres.so.7			base-compat-shlib	compat,pic,arch64
 ./usr/lib/64/liblwres.so.7.0			base-compat-shlib	compat,pic,arch64
 ./usr/lib/64/liblzf.so.1			base-compat-shlib	compat,pic,arch64

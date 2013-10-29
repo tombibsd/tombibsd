@@ -777,6 +777,8 @@ Lstart1:
 #endif
 	movl	#_C_LABEL(end),%d5	| end of static kernel text/data
 Lstart2:
+	RELOC(setmemrange,%a0)		| call setmemrange()
+	jbsr	%a0@			|  to probe all memory regions
 	addl	#PAGE_SIZE-1,%d5
 	andl	#PG_FRAME,%d5		| round to a page
 	movl	%d5,%a4

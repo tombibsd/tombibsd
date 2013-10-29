@@ -1,4 +1,4 @@
-/Makefile/1.143/Sun Feb 19 21:06:57 2012/-kk/
+/Makefile/1.144/Tue Oct 29 08:27:26 2013/-kk/
 /acct.h/1.27/Sun Jan 11 02:45:55 2009/-kk/
 /agpio.h/1.10/Tue Feb 15 08:57:01 2011/-kk/
 /aio.h/1.12/Sat Jan  7 19:48:19 2012/-kk/
@@ -115,7 +115,7 @@
 /lock.h/1.86/Thu Jul  1 13:00:57 2010/-kk/
 /lockdebug.h/1.14/Thu Oct 24 10:28:58 2013/-kk/
 /lockf.h/1.20/Wed Nov 19 13:34:11 2008/-kk/
-/lua.h/1.1/Thu Oct 24 10:28:58 2013/-kk/
+/lua.h/1.2/Tue Oct 29 08:27:26 2013/-kk/
 /lwp.h/1.168/Thu Oct 24 10:28:58 2013/-kk/
 /lwpctl.h/1.4/Mon Apr 28 20:24:10 2008/-kk/
 /malloc.h/1.114/Mon Apr 30 22:51:27 2012/-kk/
@@ -210,7 +210,7 @@
 /sysctl.h/1.209/Thu Oct 24 10:28:58 2013/-kk/
 /syslimits.h/1.27/Fri Dec  7 07:06:39 2012/-kk/
 /syslog.h/1.35/Wed Oct 10 22:51:55 2012/-kk/
-/systm.h/1.258/Thu Oct 24 10:28:58 2013/-kk/
+/systm.h/1.259/Tue Oct 29 08:27:26 2013/-kk/
 /tape.h/1.3/Mon Dec 26 18:41:36 2005/-kk/
 /termios.h/1.32/Thu Oct 24 10:28:58 2013/-kk/
 /time.h/1.65/Thu Oct 27 16:12:52 2011/-kk/

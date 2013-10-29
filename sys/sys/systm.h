@@ -185,7 +185,7 @@ void	aprint_naive(const char *, ...) __printflike(1, 2);
 void	aprint_verbose(const char *, ...) __printflike(1, 2);
 void	aprint_debug(const char *, ...) __printflike(1, 2);
 
-void device_printf(device_t, const char *fmt, ...) __printflike(2, 3);
+void	device_printf(device_t, const char *fmt, ...) __printflike(2, 3);
 
 void	aprint_normal_dev(device_t, const char *, ...) __printflike(2, 3);
 void	aprint_error_dev(device_t, const char *, ...) __printflike(2, 3);

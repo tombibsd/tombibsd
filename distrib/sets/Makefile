@@ -307,6 +307,17 @@ makesyspkgsums: .PHONY check_RELEASEDIR
 makedeps: .PHONY
 	${SETSCMD} ./syspkgdeps all >${.CURDIR}/deps
 
+# Sort the lists files
+sortlists: .PHONY
+	find ${.CURDIR}/lists \! \( -name CVS -prune \) -type f -print \
+	| while read f ; do \
+	    ${_MKSHMSG} "sorting $${f#${.CURDIR}/}" ; \
+	    { grep '^#' "$$f" ; \
+	      grep -v '^#' "$$f" | sort ; \
+	    } >"$$f".tmp \
+	    && mv "$$f".tmp "$$f" ; \
+	  done
+
 #
 # MAIN ENTRY POINTS
 #

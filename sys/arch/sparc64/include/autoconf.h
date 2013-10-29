@@ -76,6 +76,10 @@
 #include <sys/bus.h>
 #include <machine/promlib.h>
 
+/* Machine banner name and model name */
+extern char machine_banner[100];
+extern char machine_model[100];
+
 /* This is used to map device classes to IPLs */
 struct intrmap {
 	const char *in_class;

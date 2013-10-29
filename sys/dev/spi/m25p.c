@@ -92,6 +92,7 @@ static const struct m25p_info {
 	uint16_t	mhz;
 } m25p_infos[] = {
 	{ 0x16, 0x20, 0x2017, "STMicro M25P64", 8192, 64 },	/* 64Mbit */
+	{ 0x14, 0x20, 0x2015, "STMicro M25P16", 2048, 64 },	/* 16Mbit */
 	{ 0x12,	0x20, 0x2013, "STMicro M25P40", 512, 64 },	/* 4Mbit */
 	{ 0xc0, 0x20, 0x7117, "STMicro M25PX64", 8192, 64 },	/* 64Mbit */
 	{ 0x0, 0x20, 0xBB18, "Numonyx N25Q128", 16384, 64 },	/* 128Mbit */

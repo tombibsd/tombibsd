@@ -26,6 +26,7 @@ __RCSID("$NetBSD$");
 #endif
 
 #include <sys/types.h>
+#include <sys/param.h>
 #include <sys/hash.h>
 
 #if !defined(_KERNEL) && !defined(_STANDALONE)
@@ -48,23 +49,39 @@ murmurhash2(const void *key, size_t len, uint32_t seed)
 	const uint8_t *data = key;
 	uint32_t h = seed ^ (uint32_t)len;
 
-	while (len >= sizeof(uint32_t)) {
-		uint32_t k;
+	if (__predict_true(ALIGNED_POINTER(key, uint32_t))) {
+		while (len >= sizeof(uint32_t)) {
+			uint32_t k = *(const uint32_t *)data;
 
-		k  = data[0];
-		k |= data[1] << 8;
-		k |= data[2] << 16;
-		k |= data[3] << 24;
+			k *= m;
+			k ^= k >> r;
+			k *= m;
 
-		k *= m;
-		k ^= k >> r;
-		k *= m;
+			h *= m;
+			h ^= k;
 
-		h *= m;
-		h ^= k;
+			data += sizeof(uint32_t);
+			len -= sizeof(uint32_t);
+		}
+	} else {
+		while (len >= sizeof(uint32_t)) {
+			uint32_t k;
 
-		data += sizeof(uint32_t);
-		len -= sizeof(uint32_t);
+			k  = data[0];
+			k |= data[1] << 8;
+			k |= data[2] << 16;
+			k |= data[3] << 24;
+
+			k *= m;
+			k ^= k >> r;
+			k *= m;
+
+			h *= m;
+			h ^= k;
+
+			data += sizeof(uint32_t);
+			len -= sizeof(uint32_t);
+		}
 	}
 
 	/* Handle the last few bytes of the input array. */

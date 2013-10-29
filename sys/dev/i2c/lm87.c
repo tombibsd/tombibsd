@@ -365,7 +365,7 @@ lmenv_refresh(struct sysmon_envsys *sme, envsys_data_t *edata)
 			break;
 		}
 		tmp = data * sc->sc_fan1_div;
-		if (tmp == 0)
+		if (tmp == 0 || tmp == 0xff)
 			edata->state = ENVSYS_SINVALID;
 		else
 			edata->value_cur = 1350000 / tmp;
@@ -378,7 +378,7 @@ lmenv_refresh(struct sysmon_envsys *sme, envsys_data_t *edata)
 			break;
 		}
 		tmp = data * sc->sc_fan2_div;
-		if (tmp == 0)
+		if (tmp == 0 || tmp == 0xff)
 			edata->state = ENVSYS_SINVALID;
 		else
 			edata->value_cur = 1350000 / tmp;
