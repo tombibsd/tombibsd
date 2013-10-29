@@ -99,7 +99,7 @@ static void cow_change_done(const struct mount *);
 void
 fstrans_init(void)
 {
-	int error;
+	int error __diagused;
 
 	error = lwp_specific_key_create(&lwp_data_key, fstrans_lwp_dtor);
 	KASSERT(error == 0);
@@ -510,7 +510,7 @@ static bool
 cow_state_change_done(const struct mount *mp)
 {
 	struct fstrans_lwp_info *fli;
-	struct fstrans_mount_info *fmi;
+	struct fstrans_mount_info *fmi __diagused;
 
 	fmi = mp->mnt_transinfo;
 

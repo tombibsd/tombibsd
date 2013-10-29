@@ -232,7 +232,7 @@ static kmutex_t tcp_congctl_mtx;
 void
 tcp_congctl_init(void)
 {
-	int r;
+	int r __diagused;
 	
 	mutex_init(&tcp_congctl_mtx, MUTEX_DEFAULT, IPL_NONE);
 

@@ -391,7 +391,7 @@ adb_cuda_tickle(void)
 void
 adb_intr_cuda(void *arg)
 {
-	volatile int i, ending;
+	volatile int i __unused, ending;
 	volatile unsigned int s;
 	struct adbCommand packet;
 

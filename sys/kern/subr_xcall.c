@@ -159,7 +159,7 @@ void
 xc_init_cpu(struct cpu_info *ci)
 {
 	static bool again = false;
-	int error;
+	int error __diagused;
 
 	if (!again) {
 		/* Autoconfiguration will prevent re-entry. */

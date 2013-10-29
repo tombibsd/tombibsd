@@ -190,7 +190,7 @@ cv_exit(kcondvar_t *cv, kmutex_t *mtx, lwp_t *l, const int error)
 static void
 cv_unsleep(lwp_t *l, bool cleanup)
 {
-	kcondvar_t *cv;
+	kcondvar_t *cv __diagused;
 
 	cv = (kcondvar_t *)(uintptr_t)l->l_wchan;
 

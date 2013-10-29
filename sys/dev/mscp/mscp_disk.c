@@ -320,13 +320,11 @@ void
 rastrategy(struct buf *bp)
 {
 	struct ra_softc *ra = mscp_device_lookup(bp->b_dev);
-	int unit;
 	int b;
 
 	/*
 	 * Make sure this is a reasonable drive to use.
 	 */
-	unit = DISKUNIT(bp->b_dev);
 	if (ra == NULL) {
 		bp->b_error = ENXIO;
 		goto done;
@@ -728,7 +726,6 @@ rx_putonline(struct rx_softc *rx)
 {
 	struct	mscp *mp;
 	struct	mscp_softc *mi = device_private(device_parent(rx->ra_dev));
-	volatile int i;
 
 	rx->ra_state = DK_CLOSED;
 	mp = mscp_getcp(mi, MSCP_WAIT);
@@ -738,7 +735,7 @@ rx_putonline(struct rx_softc *rx)
 	*mp->mscp_addr |= MSCP_OWN | MSCP_INT;
 
 	/* Poll away */
-	i = bus_space_read_2(mi->mi_iot, mi->mi_iph, 0);
+	bus_space_read_2(mi->mi_iot, mi->mi_iph, 0);
 	if (tsleep(&rx->ra_state, PRIBIO, "rxonline", 100*100))
 		rx->ra_state = DK_CLOSED;
 

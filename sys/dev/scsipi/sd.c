@@ -773,7 +773,7 @@ sdstart(struct scsipi_periph *periph)
 	struct scsi_rw_6 cmd_small;
 	struct scsipi_generic *cmdp;
 	struct scsipi_xfer *xs;
-	int nblks, cmdlen, error, flags;
+	int nblks, cmdlen, error __diagused, flags;
 
 	SC_DEBUG(periph, SCSIPI_DB2, ("sdstart "));
 	/*

@@ -1104,7 +1104,7 @@ ststart(struct scsipi_periph *periph)
 	struct buf *bp;
 	struct scsi_rw_tape cmd;
 	struct scsipi_xfer *xs;
-	int flags, error;
+	int flags, error __diagused;
 
 	SC_DEBUG(periph, SCSIPI_DB2, ("ststart "));
 	/* See if there is a buf to do and we are not already  doing one */

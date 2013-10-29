@@ -407,7 +407,7 @@ uao_create(vsize_t size, int flags)
 {
 	static struct uvm_aobj kernel_object_store;
 	static kmutex_t kernel_object_lock;
-	static int kobj_alloced = 0;
+	static int kobj_alloced __diagused = 0;
 	pgoff_t pages = round_page(size) >> PAGE_SHIFT;
 	struct uvm_aobj *aobj;
 	int refs;

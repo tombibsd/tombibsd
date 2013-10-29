@@ -527,7 +527,7 @@ success:
 static int
 in6_ifattach_linklocal(struct ifnet *ifp, struct ifnet *altifp)
 {
-	struct in6_ifaddr *ia;
+	struct in6_ifaddr *ia __diagused;
 	struct in6_aliasreq ifra;
 	struct nd_prefixctl pr0;
 	int i, error;

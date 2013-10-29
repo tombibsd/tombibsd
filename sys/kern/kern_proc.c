@@ -1452,7 +1452,7 @@ proc_specific_key_delete(specificdata_key_t key)
 void
 proc_initspecific(struct proc *p)
 {
-	int error;
+	int error __diagused;
 
 	error = specificdata_init(proc_specificdata_domain, &p->p_specdataref);
 	KASSERT(error == 0);

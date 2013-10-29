@@ -646,7 +646,7 @@ ubc_release(void *va, int flags)
 		mutex_enter(&uvm_pageqlock);
 		for (u_int i = 0; i < npages; i++) {
 			paddr_t pa;
-			bool rv;
+			bool rv __diagused;
 
 			rv = pmap_extract(pmap_kernel(),
 			    umapva + slot_offset + (i << PAGE_SHIFT), &pa);

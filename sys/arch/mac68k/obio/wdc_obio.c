@@ -91,7 +91,6 @@ wdc_obio_match(device_t parent, cfdata_t match, void *aux)
 	struct ata_channel ch;
 	struct wdc_softc wdc;
 	struct wdc_regs wdr;
-	static int wdc_matched = 0;
 	int i, result = 0;
 
 	memset(&wdc, 0, sizeof(wdc));
@@ -132,8 +131,6 @@ wdc_obio_match(device_t parent, cfdata_t match, void *aux)
 
 		bus_space_unmap(wdr.cmd_iot, wdr.cmd_baseioh, WDC_OBIO_REG_NPORTS);
 
-		if (result)
-			wdc_matched = 1;
 		return (result);
 	}
 	return 0;

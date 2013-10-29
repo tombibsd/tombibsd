@@ -4,7 +4,7 @@
 .include <bsd.own.mk>
 
 .if ${MKSHARE} != "no"
-SUBDIR=	man0 man1 man2 man3 man4 man5 man6 man7 man8 man9
+SUBDIR=	man0 man1 man2 man3 man3lua man4 man5 man6 man7 man8 man9 man9lua
 
 WHATISDBDIR?=	/usr/share/man
 

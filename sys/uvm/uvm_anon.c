@@ -431,7 +431,7 @@ void
 uvm_anon_release(struct vm_anon *anon)
 {
 	struct vm_page *pg = anon->an_page;
-	bool success;
+	bool success __diagused;
 
 	KASSERT(mutex_owned(anon->an_lock));
 	KASSERT(pg != NULL);

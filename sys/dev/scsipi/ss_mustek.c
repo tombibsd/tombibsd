@@ -451,7 +451,7 @@ mustek_read(struct ss_softc *ss, struct buf *bp)
 	struct scsipi_xfer *xs;
 	struct scsipi_periph *periph = ss->sc_periph;
 	u_long lines_to_read;
-	int error;
+	int error __diagused;
 
 	SC_DEBUG(periph, SCSIPI_DB1, ("mustek_read: start\n"));
 

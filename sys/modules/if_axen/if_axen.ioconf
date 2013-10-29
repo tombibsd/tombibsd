@@ -1,0 +1,10 @@
+# $NetBSD$
+
+ioconf axen
+
+include "conf/files"
+include "dev/usb/files.usb"
+
+pseudo-root usbdevif*
+
+axen* at usbdevif?

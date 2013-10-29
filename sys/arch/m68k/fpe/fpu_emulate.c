@@ -421,7 +421,7 @@ fpu_emul_fmovm(struct fpemu *fe, struct instruction *insn)
 	int word1, sig;
 	int reglist, regmask, regnum;
 	int fpu_to_mem, order;
-	int w1_post_incr;
+	/* int w1_post_incr; */
 	int *fpregs;
 
 	insn->is_advance = 4;
@@ -438,7 +438,7 @@ fpu_emul_fmovm(struct fpemu *fe, struct instruction *insn)
 	 * 1,0: Static  reg list, post-incr.
 	 * 1,1: Dynamic reg list, post-incr
 	 */
-	w1_post_incr = word1 & 0x1000;
+	/* w1_post_incr = word1 & 0x1000; */
 	if (word1 & 0x0800) {
 		/* dynamic reg list */
 		reglist = frame->f_regs[(word1 & 0x70) >> 4];

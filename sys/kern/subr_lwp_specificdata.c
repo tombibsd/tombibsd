@@ -74,7 +74,7 @@ lwp_specific_key_delete(specificdata_key_t key)
 void
 lwp_initspecific(struct lwp *l)
 {
-	int error;
+	int error __diagused;
 
 	error = specificdata_init(lwp_specificdata_domain, &l->l_specdataref);
 	KASSERT(error == 0);

@@ -516,7 +516,7 @@ swapcluster_flush(struct swapcluster *swc, bool now)
 	int slot;
 	int nused;
 	int nallocated;
-	int error;
+	int error __diagused;
 
 	if (swc->swc_slot == 0) {
 		return;

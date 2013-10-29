@@ -396,7 +396,7 @@ uvm_aio_aiodone_pages(struct vm_page **pgs, int npages, bool write, int error)
 #if defined(VMSWAP)
 			if (swap) {
 				if (pg->uobject != NULL) {
-					int oldslot;
+					int oldslot __diagused;
 					oldslot = uao_set_swslot(pg->uobject,
 						pg->offset >> PAGE_SHIFT, slot);
 					KASSERT(oldslot == swslot + i);
@@ -527,7 +527,7 @@ uvm_pageratop(vaddr_t kva)
 {
 	struct vm_page *pg;
 	paddr_t pa;
-	bool rv;
+	bool rv __diagused;
 
 	rv = pmap_extract(pmap_kernel(), kva, &pa);
 	KASSERT(rv);

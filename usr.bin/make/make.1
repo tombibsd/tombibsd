@@ -29,7 +29,7 @@
 .\"
 .\"	from: @(#)make.1	8.4 (Berkeley) 3/19/94
 .\"
-.Dd August 11, 2013
+.Dd October 25, 2013
 .Dt MAKE 1
 .Os
 .Sh NAME
@@ -1066,6 +1066,13 @@ may
 be used.
 The wildcard characters may be escaped with a backslash
 .Pq Ql \e .
+As a consequence of the way values are split into words, matched,
+and then joined, a construct like
+.Dl ${VAR:M*}
+will normalise the inter-word spacing, removing all leading and
+trailing space, and converting multiple consecutive spaces
+to single spaces.
+.
 .It Cm \&:N Ns Ar pattern
 This is identical to
 .Ql Cm \&:M ,
@@ -1209,7 +1216,7 @@ The
 modifier is just like the
 .Cm \&:S
 modifier except that the old and new strings, instead of being
-simple strings, are a regular expression (see
+simple strings, are an extended regular expression (see
 .Xr regex 3 )
 string
 .Ar pattern

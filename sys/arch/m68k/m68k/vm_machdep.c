@@ -149,7 +149,7 @@ cpu_lwp_free2(struct lwp *l)
 int
 vmapbuf(struct buf *bp, vsize_t len)
 {
-	struct pmap *upmap, *kpmap;
+	struct pmap *upmap, *kpmap __unused;
 	vaddr_t uva;		/* User VA (map from) */
 	vaddr_t kva;		/* Kernel VA (new to) */
 	paddr_t pa; 		/* physical address */

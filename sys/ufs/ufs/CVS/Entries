@@ -16,7 +16,7 @@
 /ufs_extern.h/1.73/Thu Oct 24 10:28:58 2013/-kk/
 /ufs_ihash.c/1.31/Sun Jun 12 03:36:02 2011/-kk/
 /ufs_inode.c/1.89/Thu Oct 24 10:28:58 2013/-kk/
-/ufs_lookup.c/1.126/Thu Oct 24 10:28:58 2013/-kk/
+/ufs_lookup.c/1.127/Tue Oct 29 08:21:50 2013/-kk/
 /ufs_quota.c/1.113/Thu Oct 24 10:28:58 2013/-kk/
 /ufs_quota.h/1.21/Sat Feb 18 06:13:23 2012/-kk/
 /ufs_quota1.c/1.18/Thu Feb  2 03:00:48 2012/-kk/

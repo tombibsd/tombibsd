@@ -369,7 +369,6 @@ uipc_usrreq(struct socket *so, int req, struct mbuf *m, struct mbuf *nam,
 {
 	struct unpcb *unp = sotounpcb(so);
 	struct socket *so2;
-	struct proc *p;
 	u_int newhiwat;
 	int error = 0;
 
@@ -380,7 +379,6 @@ uipc_usrreq(struct socket *so, int req, struct mbuf *m, struct mbuf *nam,
 	if (req != PRU_SEND && req != PRU_SENDOOB && control)
 		panic("uipc_usrreq: unexpected control mbuf");
 #endif
-	p = l ? l->l_proc : NULL;
 	if (req != PRU_ATTACH) {
 		if (unp == NULL) {
 			error = EINVAL;
@@ -567,7 +565,7 @@ uipc_usrreq(struct socket *so, int req, struct mbuf *m, struct mbuf *nam,
 				m_freem(m);
 				break;
 			}
-			KASSERT(p != NULL);
+			KASSERT(l != NULL);
 			error = unp_output(m, control, unp, l);
 			if (nam)
 				unp_disconnect(unp);

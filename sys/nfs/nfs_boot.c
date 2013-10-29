@@ -112,7 +112,7 @@ nfs_boot_init(struct nfs_diskless *nd, struct lwp *lwp)
 {
 	struct ifnet *ifp;
 	int error = 0;
-	int flags;
+	int flags __unused;
 
 	/* Explicitly necessary or build fails
 	 * due to unused variable, otherwise.

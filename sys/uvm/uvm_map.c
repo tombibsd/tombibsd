@@ -404,7 +404,7 @@ uvm_rb_fixup(struct vm_map *map, struct vm_map_entry *entry)
 static void
 uvm_rb_insert(struct vm_map *map, struct vm_map_entry *entry)
 {
-	struct vm_map_entry *ret;
+	struct vm_map_entry *ret __diagused;
 
 	entry->gap = entry->maxgap = uvm_rb_gap(entry);
 	if (entry->prev != &map->header)
@@ -1798,7 +1798,7 @@ uvm_map_findspace(struct vm_map *map, vaddr_t hint, vsize_t length,
 {
 	struct vm_map_entry *entry;
 	struct vm_map_entry *child, *prev, *tmp;
-	vaddr_t orig_hint;
+	vaddr_t orig_hint __diagused;
 	const int topdown = map->flags & VM_MAP_TOPDOWN;
 	UVMHIST_FUNC("uvm_map_findspace");
 	UVMHIST_CALLED(maphist);

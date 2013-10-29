@@ -253,7 +253,7 @@ scanjet_read(struct ss_softc *ss, struct buf *bp)
 	struct scsi_rw_scanner cmd;
 	struct scsipi_xfer *xs;
 	struct scsipi_periph *periph = ss->sc_periph;
-	int error;
+	int error __diagused;
 
 	/* Fill out the scsi command */
 	memset(&cmd, 0, sizeof(cmd));

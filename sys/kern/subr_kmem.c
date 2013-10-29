@@ -549,7 +549,7 @@ kmem_size_check(void *p, size_t sz)
 char *
 kmem_asprintf(const char *fmt, ...)
 {
-	int size, len;
+	int size __diagused, len;
 	va_list va;
 	char *str;
 

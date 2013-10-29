@@ -1,4 +1,4 @@
-/asc.c/1.54/Sat Oct 27 17:18:00 2012/-kk/
+/asc.c/1.55/Tue Oct 29 08:21:39 2013/-kk/
 /ascvar.h/1.8/Sat Oct 27 17:18:00 2012/-kk/
 /esp.c/1.55/Sat Feb 18 23:51:27 2012/-kk/
 /espvar.h/1.7/Sun Apr 13 04:55:52 2008/-kk/
@@ -12,5 +12,5 @@
 /obio.c/1.25/Mon Jun  6 16:52:18 2011/-kk/
 /obiovar.h/1.8/Mon Apr 28 20:23:27 2008/-kk/
 /sbc_obio.c/1.25/Mon Nov 23 00:11:44 2009/-kk/
-/wdc_obio.c/1.26/Tue Jul 31 15:50:32 2012/-kk/
+/wdc_obio.c/1.27/Tue Oct 29 08:21:39 2013/-kk/
 D

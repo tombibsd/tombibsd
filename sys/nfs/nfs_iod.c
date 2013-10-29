@@ -194,7 +194,7 @@ nfs_iodinit(void)
 void
 nfs_iodfini(void)
 {
-	int error;
+	int error __diagused;
 
 	error = nfs_set_niothreads(0);
 	KASSERT(error == 0);

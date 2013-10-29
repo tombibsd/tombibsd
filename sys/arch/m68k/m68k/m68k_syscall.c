@@ -414,7 +414,7 @@ startlwp(void *arg)
 	ucontext_t *uc = arg;
 	lwp_t *l = curlwp;
 	struct frame *f = (struct frame *)l->l_md.md_regs;
-	int error;
+	int error __diagused;
 
 	f->f_regs[D0] = 0;
 	f->f_sr &= ~PSL_C;

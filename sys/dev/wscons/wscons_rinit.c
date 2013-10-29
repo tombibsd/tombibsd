@@ -57,7 +57,9 @@ void	rcons_initfont(struct rcons *, struct raster_font *);
 void
 rcons_initfont(struct rcons *rc, struct raster_font *fp)
 {
+#if !defined(MSBYTE_FIRST) && !defined(MSBIT_FIRST) /* XXX other cases */
 	static int initfontdone;
+#endif
 
 	rc->rc_font = fp;
 
@@ -87,9 +89,9 @@ rcons_initfont(struct rcons *rc, struct raster_font *fp)
 			}
 		}
 	}
-#endif
 
 	initfontdone = 1;
+#endif
 }
 
 void

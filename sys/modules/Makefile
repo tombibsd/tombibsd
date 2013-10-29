@@ -32,6 +32,7 @@ SUBDIR+=	gpioow
 SUBDIR+=	gpiosim
 SUBDIR+=	hfs
 SUBDIR+=	if_axe
+SUBDIR+=	if_axen
 SUBDIR+=	if_npflog
 SUBDIR+=	iic
 SUBDIR+=	kernfs

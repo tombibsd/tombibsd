@@ -280,7 +280,7 @@ aio_worker(void *arg)
 	struct aio_job *a_job;
 	struct lio_req *lio;
 	sigset_t oss, nss;
-	int error, refcnt;
+	int error __diagused, refcnt;
 
 	/*
 	 * Make an empty signal mask, so it

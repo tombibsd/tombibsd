@@ -239,7 +239,7 @@ uvm_pageinsert_list(struct uvm_object *uobj, struct vm_page *pg,
 static inline void
 uvm_pageinsert_tree(struct uvm_object *uobj, struct vm_page *pg)
 {
-	struct vm_page *ret;
+	struct vm_page *ret __diagused;
 
 	KASSERT(uobj == pg->uobject);
 	ret = rb_tree_insert_node(&uobj->rb_tree, pg);

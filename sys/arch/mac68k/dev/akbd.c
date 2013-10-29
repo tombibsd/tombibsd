@@ -132,7 +132,7 @@ akbdattach(device_t parent, device_t self, void *aux)
 	ADBSetInfoBlock adbinfo;
 	struct akbd_softc *sc = device_private(self);
 	struct adb_attach_args *aa_args = (struct adb_attach_args *)aux;
-	int error, kbd_done;
+	int error __unused, kbd_done;
 	short cmd;
 	u_char buffer[9];
 #if NWSKBD > 0

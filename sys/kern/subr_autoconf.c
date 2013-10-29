@@ -241,7 +241,7 @@ frob_cfdrivervec(struct cfdriver * const *cfdriverv,
 {
 	void (*pr)(const char *, ...) __printflike(1, 2) =
 	    dopanic ? panic : printf;
-	int i, error = 0, e2;
+	int i, error = 0, e2 __diagused;
 
 	for (i = 0; cfdriverv[i] != NULL; i++) {
 		if ((error = drv_do(cfdriverv[i])) != 0) {
@@ -273,7 +273,7 @@ frob_cfattachvec(const struct cfattachinit *cfattachv,
 	const struct cfattachinit *cfai = NULL;
 	void (*pr)(const char *, ...) __printflike(1, 2) =
 	    dopanic ? panic : printf;
-	int j = 0, error = 0, e2;
+	int j = 0, error = 0, e2 __diagused;
 
 	for (cfai = &cfattachv[0]; cfai->cfai_name != NULL; cfai++) {
 		for (j = 0; cfai->cfai_list[j] != NULL; j++) {

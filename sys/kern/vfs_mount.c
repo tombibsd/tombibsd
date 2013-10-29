@@ -130,7 +130,7 @@ struct mount *
 vfs_mountalloc(struct vfsops *vfsops, vnode_t *vp)
 {
 	struct mount *mp;
-	int error;
+	int error __diagused;
 
 	mp = kmem_zalloc(sizeof(*mp), KM_SLEEP);
 	if (mp == NULL)
@@ -1233,7 +1233,7 @@ mount_specific_key_delete(specificdata_key_t key)
 void
 mount_initspecific(struct mount *mp)
 {
-	int error;
+	int error __diagused;
 
 	error = specificdata_init(mount_specificdata_domain,
 				  &mp->mnt_specdataref);

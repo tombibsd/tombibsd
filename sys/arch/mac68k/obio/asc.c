@@ -250,11 +250,13 @@ ascwrite(dev_t dev, struct uio *uio, int ioflag)
 int
 ascioctl(dev_t dev, u_long cmd, void *data, int flag, struct lwp *l)
 {
-	struct asc_softc *sc;
 	int error;
+#ifdef not_yet
+	struct asc_softc *sc;
 	int unit = ASCUNIT(dev);
 
 	sc = device_lookup_private(&asc_cd, unit);
+#endif
 	error = 0;
 
 	switch (cmd) {
