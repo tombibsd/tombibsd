@@ -7,7 +7,7 @@ WARNS?=	1	# XXX -Wshadow -Wcast-qual -Wsign-compare
 USE_FORT?= yes	# network client/server
 CWARNFLAGS.clang+=	-Wno-tautological-compare \
 			-Wno-conversion -Wno-constant-logical-operand \
-			-Wno-format-security
+			-Wno-format-security -Wno-error=unused-const-variable
 
 DIST:=	${.PARSEDIR}/dist
 BIND:=	${.PARSEDIR}/../bind/dist
@@ -39,9 +39,17 @@ LDADD+=-lpthread
 .if defined(PROG) && ${PROG} == "dhclient"
 LDADD+=-Wl,-Bdynamic
 .endif
-LDADD+= -lcrypto -lipsec
+.if (${MKCRYPTO} != "no")
+.if (${MKKERBEROS} != "no")
+LDADD+= -lgssapi -lkrb5 -lhx509 -lheimntlm -lheimbase \
+	-lcom_err  -lroken -lasn1 -lwind
+DPADD+= ${LIBGSSAPI} ${LIBKRB5} ${LIBHX509} ${LIBHEIMNTLM} ${LIBHEIMBASE} \
+	${LIBCOM_ERR} ${LIBROKEN} ${LIBASN1} ${LIBWIND}
+.endif
+LDADD+= -lcrypto -lipsec -lcrypt
+DPADD+= ${LIBCRYPTO} ${LIBIPSEC} ${LIBCRYPT}
+.endif
 DPADD+= ${COBJDIR}/libdhcp.a
 DPADD+= ${OMOBJDIR}/libomapi.a ${DSTOBJDIR}/libdst.a
 DPADD+=	${LIBDNS} ${LIBISC}
-DPADD+= ${LIBCRYPTO} ${LIBIPSEC}
 DPADD+= ${LIBPTHREAD}

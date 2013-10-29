@@ -276,6 +276,10 @@ unlock_service(VCHIQ_SERVICE_T *service)
 		if (!service->ref_count) {
 			BUG_ON(service->srvstate != VCHIQ_SRVSTATE_FREE);
 			state->services[service->localport] = NULL;
+
+			_sema_destroy(&service->remove_event);
+			_sema_destroy(&service->bulk_remove_event);
+			lmutex_destroy(&service->bulk_mutex);
 		} else
 			service = NULL;
 	}
@@ -380,7 +384,7 @@ remote_event_create(REMOTE_EVENT_T *event)
 	event->armed = 0;
 	/* Don't clear the 'fired' flag because it may already have been set
 	** by the other side. */
-	event->event->value = 0;
+	_sema_init(event->event, 0);
 }
 
 static inline void
@@ -2373,10 +2377,6 @@ vchiq_init_state(VCHIQ_STATE_T *state, VCHIQ_SLOT_ZERO_T *slot_zero,
 
 	_sema_init(&state->connect, 0);
 	lmutex_init(&state->mutex);
-	_sema_init(&state->trigger_event, 0);
-	_sema_init(&state->recycle_event, 0);
-	_sema_init(&state->sync_trigger_event, 0);
-	_sema_init(&state->sync_release_event, 0);
 
 	lmutex_init(&state->slot_mutex);
 	lmutex_init(&state->recycle_mutex);
@@ -2588,6 +2588,10 @@ vchiq_add_service_internal(VCHIQ_STATE_T *state,
 		lmutex_unlock(&state->mutex);
 
 		if (!pservice) {
+			_sema_destroy(&service->remove_event);
+			_sema_destroy(&service->bulk_remove_event);
+			lmutex_destroy(&service->bulk_mutex);
+
 			kfree(service);
 			service = NULL;
 		}
@@ -3660,7 +3664,7 @@ vchiq_dump_service_state(void *dump_context, VCHIQ_SERVICE_T *service)
 			if (service->public_fourcc != VCHIQ_FOURCC_INVALID)
 				snprintf(remoteport + len2,
 					sizeof(remoteport) - len2,
-					" (client %x)", service->client_id);
+					" (client %8x)", service->client_id);
 		} else
 			strcpy(remoteport, "n/a");
 

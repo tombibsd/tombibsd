@@ -2005,6 +2005,12 @@ x86_print_cacheinfo(struct cpu_info *ci)
 		if (sep != NULL)
 			aprint_verbose("\n");
 	}
+	if (ci->ci_cinfo[CAI_PREFETCH].cai_linesize != 0) {
+		aprint_verbose_dev(ci->ci_dev, "%dB prefetching",
+			ci->ci_cinfo[CAI_PREFETCH].cai_linesize);
+		if (sep != NULL)
+			aprint_verbose("\n");
+	}
 	if (ci->ci_cinfo[CAI_ITLB].cai_totalsize != 0) {
 		sep = print_tlb_config(ci, CAI_ITLB, "ITLB", NULL);
 		sep = print_tlb_config(ci, CAI_ITLB2, NULL, sep);

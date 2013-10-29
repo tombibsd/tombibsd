@@ -43,7 +43,7 @@ __RCSID("$NetBSD$");
 
 __weak_alias(__libc_thr_init,__libc_thr_init_stub)
 
-void
+void __section(".text.startup")
 __libc_thr_init_stub(void)
 {
 

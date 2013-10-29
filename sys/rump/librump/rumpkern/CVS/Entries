@@ -13,12 +13,12 @@
 /locks.c/1.65/Thu Oct 24 10:28:58 2013/-kk/
 /locks_up.c/1.9/Thu Oct 24 10:28:58 2013/-kk/
 /ltsleep.c/1.33/Thu Oct 24 10:28:58 2013/-kk/
-/lwproc.c/1.23/Thu Oct 24 10:28:58 2013/-kk/
+/lwproc.c/1.24/Tue Oct 29 12:12:01 2013/-kk/
 /memalloc.c/1.21/Thu Oct 24 10:28:58 2013/-kk/
 /pmap_stub.c/1.25/Wed Mar  2 13:11:52 2011/-kk/
 /rump.c/1.275/Thu Oct 24 10:28:58 2013/-kk/
 /rump_atomic_cas_up.c/1.2/Tue Nov 23 12:51:10 2010/-kk/
-/rump_private.h/1.77/Thu Oct 24 10:28:58 2013/-kk/
+/rump_private.h/1.78/Tue Oct 29 12:12:01 2013/-kk/
 /rump_syscalls.c/1.92/Thu Oct 24 10:28:58 2013/-kk/
 /rumpcopy.c/1.18/Thu Oct 24 10:28:58 2013/-kk/
 /rumpcpu_generic.c/1.4/Fri Jun 22 12:45:43 2012/-kk/

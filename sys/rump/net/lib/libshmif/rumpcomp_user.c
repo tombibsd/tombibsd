@@ -37,13 +37,15 @@
 #define seterr(_v_) if ((_v_) == -1) *error = errno; else *error = 0;
 
 /*
- * On NetBSD we use kqueue, on Linux we use inotify.  The underlying
+ * On BSD we use kqueue, on Linux we use inotify.  The underlying
  * interface requirements aren't quite the same, but we have a very
  * good chance of doing the fd->path mapping on Linux thanks to dcache,
  * so just keep the existing interfaces for now.
  */
-#if defined(__NetBSD__)
+#if defined(__NetBSD__) || defined(__FreeBSD__) || defined(__DragonFly__)
 #include <sys/event.h>
+
+#include <stdlib.h>
 
 int
 rumpcomp_shmif_watchsetup(int *kqp, int fd)

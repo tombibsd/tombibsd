@@ -12,7 +12,7 @@
 /ixgbe_mbx.h/1.1/Fri Aug 12 21:55:29 2011/-kk/
 /ixgbe_netbsd.c/1.1/Fri Aug 12 21:55:29 2011/-kk/
 /ixgbe_netbsd.h/1.1/Fri Aug 12 21:55:29 2011/-kk/
-/ixgbe_osdep.h/1.1/Fri Aug 12 21:55:29 2011/-kk/
+/ixgbe_osdep.h/1.2/Tue Oct 29 12:11:55 2013/-kk/
 /ixgbe_phy.c/1.1/Fri Aug 12 21:55:29 2011/-kk/
 /ixgbe_phy.h/1.1/Fri Aug 12 21:55:29 2011/-kk/
 /ixgbe_type.h/1.1/Fri Aug 12 21:55:29 2011/-kk/

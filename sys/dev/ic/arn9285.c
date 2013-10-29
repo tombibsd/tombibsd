@@ -794,21 +794,25 @@ ar9285_set_txpower(struct athn_softc *sc, struct ieee80211_channel *c,
     struct ieee80211_channel *extc)
 {
 	const struct ar9285_eeprom *eep = sc->sc_eep;
+#ifdef notyet
 	const struct ar9285_modal_eep_header *modal = &eep->modalHeader;
+#endif
 	uint8_t tpow_cck[4], tpow_ofdm[4];
 #ifndef IEEE80211_NO_HT
 	uint8_t tpow_cck_ext[4], tpow_ofdm_ext[4];
 	uint8_t tpow_ht20[8], tpow_ht40[8];
 	uint8_t ht40inc;
 #endif
-	int16_t max_ant_gain, power[ATHN_POWER_COUNT];
+	int16_t power[ATHN_POWER_COUNT];
 	int i;
 
 	ar9285_set_power_calib(sc, c);
 
+#ifdef notyet
 	/* Compute transmit power reduction due to antenna gain. */
-	max_ant_gain = modal->antennaGain;
+	uint16_t max_ant_gain = modal->antennaGain;
 	/* XXX */
+#endif
 
 	/* Get CCK target powers. */
 	ar5008_get_lg_tpow(sc, c, AR_CTL_11B, eep->calTargetPowerCck,

@@ -27,9 +27,11 @@
 
 struct virtif_user;
 
-int 	rumpcomp_virtif_create(int, struct virtif_user **);
-void	rumpcomp_virtif_dying(struct virtif_user *);
-void	rumpcomp_virtif_destroy(struct virtif_user *);
+#define VIFHYPER_REVISION 20130704
 
-void	rumpcomp_virtif_send(struct virtif_user *, struct iovec *, size_t);
-int	rumpcomp_virtif_recv(struct virtif_user *, void *, size_t, size_t *);
+int 	VIFHYPER_CREATE(int, struct virtif_user **);
+void	VIFHYPER_DYING(struct virtif_user *);
+void	VIFHYPER_DESTROY(struct virtif_user *);
+
+void	VIFHYPER_SEND(struct virtif_user *, struct iovec *, size_t);
+int	VIFHYPER_RECV(struct virtif_user *, void *, size_t, size_t *);

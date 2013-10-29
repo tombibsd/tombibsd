@@ -135,6 +135,7 @@ __KERNEL_RCSID(1, "$NetBSD$");
 
 #include <uvm/uvm_extern.h>
 
+#include <arm/locore.h>
 #include <arm/undefined.h>
 #include <arm/arm32/machdep.h>
 

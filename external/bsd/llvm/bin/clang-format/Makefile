@@ -29,6 +29,7 @@ LLVM_LIBS+= \
 	BitReader \
 	MCParser \
 	MC \
+	Option \
 	Support
 
 .include "${.PARSEDIR}/../../link.mk"

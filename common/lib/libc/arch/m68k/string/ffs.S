@@ -47,30 +47,49 @@
 
 WEAK_ALIAS(__ffssi2,ffs)
 
-#ifndef	__mc68010__
+#if (!defined(__mc68010__) && !defined(__mcoldfire__)) || defined(__mcfisac__)
 
 ENTRY(ffs)
-	movl	%sp@(4),%d0
+	movl	4(%sp),%d0
 	movl	%d0,%d1
 	negl	%d0
 	andl	%d0,%d1
 	movql	#32,%d0
+#if defined(__mcfisac__)
+	ff1.l	%d1		| count leading zeros
+#else
 	bfffo	%d1{#0:#32},%d1
+#endif
 	subl	%d1,%d0
+	rts
+END(ffs)
+
+#elif defined(__mcoldfire__)
+
+ENTRY(ffs)
+	clrl	%d0
+	movl	4(%sp),%d1
+	jeq	.L2		| return 0 if 0
+.L1:
+	addql	#1,%d0
+	lsrl	#1,%d1		| shift low bit into carry
+	jcc	.L1		| keep looping while carry is clear.
+.L2:
 	rts
 
 #else	/* __mc68010__ */
 
 ENTRY(ffs)
-	movl	%sp@(4),%d0
-	jeq	L2
+	movl	4(%sp),%d0
+	jeq	.L2
 	movql	#31,%d1
-L1:	
+.L1:	
 	lsrl	#1,%d0
-	dbcs	%d1,L1
+	dbcs	%d1,.L1
 	movql	#32,%d0
 	subl	%d1,%d0
-L2:
+.L2:
 	rts
+END(ffs)
 
 #endif	/* __mc68010__ */

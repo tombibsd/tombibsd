@@ -1,6 +1,6 @@
 /ADDRESS_CLASS_README.html/1.1.1.1/Tue Jun 23 10:08:36 2009/-kk/
 /ADDRESS_REWRITING_README.html/1.1.1.2/Thu Jun 17 18:06:31 2010/-kk/
-/ADDRESS_VERIFICATION_README.html/1.5/Thu Oct 24 10:28:52 2013/-kk/
+/ADDRESS_VERIFICATION_README.html/1.6/Tue Oct 29 12:10:58 2013/-kk/
 /BACKSCATTER_README.html/1.1.1.3/Thu Oct 24 10:28:52 2013/-kk/
 /BASIC_CONFIGURATION_README.html/1.1.1.2/Thu Oct 24 10:28:52 2013/-kk/
 /BUILTIN_FILTER_README.html/1.1.1.1/Tue Jun 23 10:08:36 2009/-kk/
@@ -13,7 +13,7 @@
 /DSN_README.html/1.1.1.1/Tue Jun 23 10:08:36 2009/-kk/
 /ETRN_README.html/1.1.1.1/Tue Jun 23 10:08:37 2009/-kk/
 /FILTER_README.html/1.1.1.3/Thu Oct 24 10:28:52 2013/-kk/
-/INSTALL.html/1.4/Thu Oct 24 10:28:52 2013/-kk/
+/INSTALL.html/1.5/Tue Oct 29 12:10:58 2013/-kk/
 /IPV6_README.html/1.1.1.2/Thu Oct 24 10:28:52 2013/-kk/
 /LDAP_README.html/1.1.1.2/Wed Mar  2 19:31:58 2011/-kk/
 /LINUX_README.html/1.1.1.2/Thu Oct 24 10:28:52 2013/-kk/
@@ -42,7 +42,7 @@
 /STANDARD_CONFIGURATION_README.html/1.1.1.4/Thu Oct 24 10:28:52 2013/-kk/
 /STRESS_README.html/1.1.1.2/Thu Oct 24 10:28:52 2013/-kk/
 /TLS_LEGACY_README.html/1.1.1.1/Tue Jun 23 10:08:39 2009/-kk/
-/TLS_README.html/1.6/Thu Oct 24 10:28:52 2013/-kk/
+/TLS_README.html/1.8/Tue Oct 29 12:10:58 2013/-kk/
 /TUNING_README.html/1.1.1.3/Thu Oct 24 10:28:52 2013/-kk/
 /UUCP_README.html/1.1.1.1/Tue Jun 23 10:08:40 2009/-kk/
 /VERP_README.html/1.1.1.3/Thu Oct 24 10:28:52 2013/-kk/
@@ -70,7 +70,7 @@
 /postconf.html.prolog/1.1.1.1/Tue Jun 23 10:08:40 2009/-kk/
 /postconf.man.epilog/1.1.1.1/Tue Jun 23 10:08:40 2009/-kk/
 /postconf.man.prolog/1.1.1.1/Tue Jun 23 10:08:40 2009/-kk/
-/postconf.proto/1.10/Thu Oct 24 10:28:52 2013/-kk/
+/postconf.proto/1.12/Tue Oct 29 12:10:58 2013/-kk/
 /postfix-wrapper/1.1.1.2/Thu Jun 17 18:06:40 2010/-kk/
 /regexp_table/1.1.1.2/Thu Jun 17 18:06:40 2010/-kk/
 /relocated/1.1.1.1/Tue Jun 23 10:08:40 2009/-kk/

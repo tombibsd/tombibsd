@@ -7,7 +7,9 @@ LIB=event_openssl
 SRCS= \
 bufferevent_openssl.c
 
-LIBDPLIBS+=     crypto  ${NETBSDSRCDIR}/crypto/external/bsd/openssl/lib/libcrypto \
-	crypt  ${NETBSDSRCDIR}/lib/libcrypt
+LIBDPLIBS+= \
+	event	${.CURDIR}/../libevent \
+	crypto	${NETBSDSRCDIR}/crypto/external/bsd/openssl/lib/libcrypto \
+	ssl	${NETBSDSRCDIR}/crypto/external/bsd/openssl/lib/libssl
 
 .include <bsd.lib.mk>

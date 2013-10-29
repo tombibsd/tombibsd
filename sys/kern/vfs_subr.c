@@ -903,16 +903,16 @@ setrootfstime(time_t t)
 	rootfstime = t;
 }
 
-static const uint8_t vttodt_tab[9] = {
-	DT_UNKNOWN,	/* VNON  */
-	DT_REG,		/* VREG  */
-	DT_DIR,		/* VDIR  */
-	DT_BLK,		/* VBLK  */
-	DT_CHR,		/* VCHR  */
-	DT_LNK,		/* VLNK  */
-	DT_SOCK,	/* VSUCK */
-	DT_FIFO,	/* VFIFO */
-	DT_UNKNOWN	/* VBAD  */
+static const uint8_t vttodt_tab[ ] = {
+	[VNON]	=	DT_UNKNOWN,
+	[VREG]	=	DT_REG,
+	[VDIR]	=	DT_DIR,
+	[VBLK]	=	DT_BLK,
+	[VCHR]	=	DT_CHR,
+	[VLNK]	=	DT_LNK,
+	[VSOCK]	=	DT_SOCK,
+	[VFIFO]	=	DT_FIFO,
+	[VBAD]	=	DT_UNKNOWN
 };
 
 uint8_t

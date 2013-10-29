@@ -743,6 +743,12 @@ case $host in
     esac
     ;;
 
+  # Mototole Coldfire (isa_b)
+  M5407_PATTERN)
+    gcc_cflags="$gcc_cflags $fomit_frame_pointer"
+    gcc_cflags_optlist="arch"
+    gcc_cflags_arch="-m5407"
+    ;;
 
   # Motorola 68k
   #

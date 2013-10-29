@@ -68,15 +68,43 @@
 #  endif
 #endif
 
+#if defined(__APPLE__)
+#define	__dead		__attribute__((noreturn))
+#include <sys/cdefs.h>
+
+#include <libkern/OSAtomic.h>
+#define	atomic_inc_uint(x)	OSAtomicIncrement32((volatile int32_t *)(x))
+#define	atomic_dec_uint(x)	OSAtomicDecrement32((volatile int32_t *)(x))
+
+#include <sys/time.h>
+
+#define	CLOCK_REALTIME	0
+typedef int clockid_t;
+
+static inline int
+clock_gettime(clockid_t clk, struct timespec *ts)
+{
+	struct timeval tv;
+
+	if (gettimeofday(&tv, 0) == 0) {
+		ts->tv_sec = tv.tv_sec;
+		ts->tv_nsec = tv.tv_usec * 1000;
+	}
+	return -1;
+}
+
+#endif
+
 #include <sys/types.h>
 #include <sys/param.h>
 
 /* maybe this should be !__NetBSD__ ? */
 #if defined(__linux__) || defined(__sun__) || defined(__FreeBSD__)	\
-    || defined(__DragonFly__) || defined(__CYGWIN__)
+    || defined(__DragonFly__) || defined(__APPLE__) || defined(__CYGWIN__)
 #include <errno.h>
 #include <stdlib.h>
 #include <string.h>
+#include <inttypes.h>
 
 /* this is inline simply to make this header self-contained */
 static inline int 

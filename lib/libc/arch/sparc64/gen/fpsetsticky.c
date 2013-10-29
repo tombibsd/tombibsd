@@ -24,8 +24,7 @@ extern fp_except _softfloat_float_exception_flags;
 #endif
 
 fp_except
-fpsetsticky(sticky)
-	fp_except sticky;
+fpsetsticky(fp_except sticky)
 {
 	fp_except old;
 	fp_except new;

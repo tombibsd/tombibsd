@@ -23,7 +23,6 @@ LLVM_LIBS+= \
 	SparcTargetInfo \
 	X86TargetInfo \
 	MC \
-	Archive \
 	BitReader \
 	Object \
 	IR \

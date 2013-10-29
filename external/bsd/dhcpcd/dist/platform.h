@@ -32,10 +32,10 @@
 
 char *hardware_platform(void);
 #ifdef INET6
-int check_ipv6(const char *);
+int check_ipv6(const char *, int);
 int ipv6_dadtransmits(const char *);
 #else
-#define check_ipv6(a) 0
+#define check_ipv6(a, b) -1
 #endif
 
 #endif

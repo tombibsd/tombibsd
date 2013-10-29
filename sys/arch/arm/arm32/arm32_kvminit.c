@@ -505,7 +505,7 @@ arm32_kernel_vm_init(vaddr_t kernel_vm_base, vaddr_t vectors, vaddr_t iovbase,
 		add_pages(bmi, &bmi->bmi_io_l2pt);
 	}
 
-#ifdef VERBOSE_ARM_INIT
+#ifdef VERBOSE_INIT_ARM
 	printf("%s: allocating stacks\n", __func__);
 #endif
 

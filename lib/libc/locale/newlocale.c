@@ -97,5 +97,9 @@ newlocale(int mask, const char *name, locale_t src)
 			}
 		}
 	}
+	if (_setlocale_cache(dst, NULL)) {
+		free(dst);
+		return NULL;
+	}
 	return (locale_t)dst;
 }

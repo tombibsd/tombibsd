@@ -1,6 +1,6 @@
 /autoconf.c/1.10/Thu Oct 24 10:28:57 2013/-kk/
 /bus.c/1.7/Tue Jul 19 16:05:09 2011/-kk/
-/bus_asm.S/1.5/Wed Oct  4 20:14:44 2006/-kk/
+/bus_asm.S/1.6/Tue Oct 29 12:11:43 2013/-kk/
 /conf.c/1.9/Sun Dec 11 12:16:03 2005/-kk/
 /cons_machdep.c/1.13/Sun Dec 11 03:19:20 2011/-kk/
 /cpu.c/1.29/Thu Oct 24 10:28:57 2013/-kk/

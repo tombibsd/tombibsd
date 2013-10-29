@@ -62,7 +62,7 @@
 #include "dhcp6.h"
 #include "eloop.h"
 #include "ipv6.h"
-#include "ipv6rs.h"
+#include "ipv6nd.h"
 
 /* Hackery at it's finest. */
 #ifndef s6_addr32
@@ -460,7 +460,10 @@ ipv6_freedrop_addrs(struct ipv6_addrhead *addrs, int drop,
 		 * This is safe because the RA is removed from the list
 		 * before we are called. */
 		if (drop && ap->flags & IPV6_AF_ADDED &&
-		    !ipv6rs_addrexists(ap) && !dhcp6_addrexists(ap))
+		    !ipv6nd_addrexists(ap) && !dhcp6_addrexists(ap) &&
+		    (ap->iface->options->options &
+		    (DHCPCD_EXITING | DHCPCD_PERSISTENT)) !=
+		    (DHCPCD_EXITING | DHCPCD_PERSISTENT))
 		{
 			syslog(LOG_INFO, "%s: deleting address %s",
 			    ap->iface->name, ap->saddr);
@@ -538,7 +541,7 @@ ipv6_handleifa(int cmd, struct if_head *ifs, const char *ifname,
 		return;
 
 	if (!IN6_IS_ADDR_LINKLOCAL(addr)) {
-		ipv6rs_handleifa(cmd, ifname, addr, flags);
+		ipv6nd_handleifa(cmd, ifname, addr, flags);
 		dhcp6_handleifa(cmd, ifname, addr, flags);
 	}
 
@@ -800,7 +803,6 @@ make_route(const struct interface *ifp, const struct ra *rap)
 		syslog(LOG_ERR, "%s: %m", __func__);
 		return NULL;
 	}
-	r->ra = rap;
 	r->iface = ifp;
 	r->metric = ifp->metric;
 	if (rap)
@@ -816,7 +818,13 @@ make_prefix(const struct interface * ifp, const struct ra *rap,
 {
 	struct rt6 *r;
 
-	if (addr == NULL || addr->prefix_len > 128)
+	if (addr == NULL || addr->prefix_len > 128) {
+		errno = EINVAL;
+		return NULL;
+	}
+
+	/* There is no point in trying to manage a /128 prefix. */
+	if (addr->prefix_len == 128)
 		return NULL;
 
 	r = make_route(ifp, rap);
@@ -924,6 +932,8 @@ ipv6_build_dhcp_routes(struct rt6head *dnr, enum DH6S dstate)
 	struct rt6 *rt;
 
 	TAILQ_FOREACH(ifp, ifaces, next) {
+		if (!(ifp->options->options & DHCPCD_IPV6RA_OWN))
+			continue;
 		d6_state = D6_CSTATE(ifp);
 		if (d6_state && d6_state->state == dstate) {
 			TAILQ_FOREACH(addr, &d6_state->addrs, next) {
@@ -944,9 +954,7 @@ ipv6_buildroutes(void)
 	struct rt6head dnr, *nrs;
 	struct rt6 *rt, *rtn, *or;
 	uint8_t have_default;
-
-	if (!(options & (DHCPCD_IPV6RA_OWN | DHCPCD_IPV6RA_OWN_DEFAULT)))
-		return;
+	unsigned long long o;
 
 	TAILQ_INIT(&dnr);
 
@@ -1020,15 +1028,18 @@ ipv6_buildroutes(void)
 	while ((rt = TAILQ_LAST(routes, rt6head))) {
 		TAILQ_REMOVE(routes, rt, next);
 		if (find_route6(nrs, rt) == NULL) {
+			o = rt->iface->options->options;
 			if (!have_default &&
-			    (options & DHCPCD_IPV6RA_OWN_DEFAULT) &&
-			    !(options & DHCPCD_IPV6RA_OWN) &&
+			    (o & DHCPCD_IPV6RA_OWN_DEFAULT) &&
+			    !(o & DHCPCD_IPV6RA_OWN) &&
 			    RT_IS_DEFAULT(rt))
 				have_default = 1;
 				/* no need to add it back to our routing table
 				 * as we delete an exiting route when we add
 				 * a new one */
-			else
+			else if ((rt->iface->options->options &
+				(DHCPCD_EXITING | DHCPCD_PERSISTENT)) !=
+				(DHCPCD_EXITING | DHCPCD_PERSISTENT))
 				d_route(rt);
 		}
 		free(rt);

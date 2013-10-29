@@ -4,9 +4,10 @@ LIB=event_pthreads
 
 COPTS+=-pthread
 
-SRCS= \
-evthread_pthread.c
+SRCS=		evthread_pthread.c
 
-LIBDPLIBS+=     pthread  ${NETBSDSRCDIR}/lib/libpthread
+LIBDPLIBS+= \
+	event	${.CURDIR}/../libevent \
+	pthread	${NETBSDSRCDIR}/lib/libpthread
 
 .include <bsd.lib.mk>

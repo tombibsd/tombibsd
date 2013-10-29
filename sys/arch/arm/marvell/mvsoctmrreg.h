@@ -37,6 +37,8 @@
 #define MVSOCTMR_TIMER0		0
 #define MVSOCTMR_TIMER1		1
 #define MVSOCTMR_WATCHDOG	2
+#define MVSOCTMR_TIMER2		4	/* Discovery Innovation only */
+#define MVSOCTMR_TIMER3		5	/* Discovery Innovation only */
 
 /* CPU Timers Control Register (MVSOCTMR_CTCR) */
 #define MVSOCTMR_CTCR_CPUTIMEREN(n)	(1 << ((n) * 2))

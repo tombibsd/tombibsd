@@ -467,7 +467,9 @@ npfctl_reload(u_long cmd, void *data)
 
 	/* NAT policies. */
 	natlist = prop_dictionary_get(npf_dict, "translation");
-	nitems = prop_array_count(natlist);
+	if ((nitems = prop_array_count(natlist)) > NPF_MAX_RULES) {
+		goto fail;
+	}
 
 	nset = npf_ruleset_create(nitems);
 	error = npf_mk_natlist(nset, natlist, errdict);
@@ -493,7 +495,9 @@ npfctl_reload(u_long cmd, void *data)
 
 	/* Rules. */
 	rules = prop_dictionary_get(npf_dict, "rules");
-	nitems = prop_array_count(rules);
+	if ((nitems = prop_array_count(rules)) > NPF_MAX_RULES) {
+		goto fail;
+	}
 
 	rlset = npf_ruleset_create(nitems);
 	error = npf_mk_rules(rlset, rules, rpset, errdict);

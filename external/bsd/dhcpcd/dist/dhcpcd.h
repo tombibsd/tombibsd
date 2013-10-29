@@ -45,11 +45,12 @@
 #define LINK_UNKNOWN	0
 #define LINK_DOWN	-1
 
-#define IF_DATA_DHCP	0
-#define IF_DATA_IPV6	1
-#define IF_DATA_IPV6RS	2
-#define IF_DATA_DHCP6	3
-#define IF_DATA_MAX	4
+#define IF_DATA_IPV4	0
+#define IF_DATA_DHCP	1	
+#define IF_DATA_IPV6	2
+#define IF_DATA_IPV6ND	3
+#define IF_DATA_DHCP6	4
+#define IF_DATA_MAX	5
 
 struct interface {
 	TAILQ_ENTRY(interface) next;
@@ -86,7 +87,7 @@ struct interface *find_interface(const char *);
 int handle_args(struct fd_list *, int, char **);
 void handle_carrier(int, int, const char *);
 void handle_interface(int, const char *);
-void handle_hwaddr(const char *, unsigned char *, size_t);
+void handle_hwaddr(const char *, const unsigned char *, size_t);
 void drop_interface(struct interface *, const char *);
 int select_profile(struct interface *, const char *);
 

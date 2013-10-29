@@ -1941,7 +1941,7 @@ athn_set_sta_timers(struct athn_softc *sc)
 	struct ieee80211com *ic = &sc->sc_ic;
 	uint32_t tsfhi, tsflo, tsftu, reg;
 	uint32_t intval, next_tbtt, next_dtim;
-	int dtim_period, dtim_count, rem_dtim_count;
+	int dtim_period, rem_dtim_count;
 
 	tsfhi = AR_READ(sc, AR_TSF_U32);
 	tsflo = AR_READ(sc, AR_TSF_L32);
@@ -1958,10 +1958,10 @@ athn_set_sta_timers(struct athn_softc *sc)
 		dtim_period = 1;	/* Assume all TIMs are DTIMs. */
 
 #ifdef notyet
-	dtim_count = ic->ic_dtim_count;
+	int dtim_count = ic->ic_dtim_count;
 	if (dtim_count >= dtim_period)	/* Should not happen. */
-#endif
 		dtim_count = 0;	/* Assume last TIM was a DTIM. */
+#endif
 
 	/* Compute number of remaining TIMs until next DTIM. */
 	rem_dtim_count = 0;	/* XXX */
@@ -2675,7 +2675,8 @@ athn_watchdog(struct ifnet *ifp)
 	if (sc->sc_tx_timer > 0) {
 		if (--sc->sc_tx_timer == 0) {
 			aprint_error_dev(sc->sc_dev, "device timeout\n");
-			athn_stop(ifp, 1);
+			/* see athn_init, no need to call athn_stop here */
+			/* athn_stop(ifp, 0); */
 			(void)athn_init(ifp);
 			ifp->if_oerrors++;
 			return;
@@ -2816,7 +2817,7 @@ athn_init(struct ifnet *ifp)
 	KASSERT(!cpu_intr_p());
 
 	if (device_is_active(sc->sc_dev)) {
-		athn_stop(ifp, 0);	/* XXX: necessary? */
+		athn_stop(ifp, 0);	/* see athn_watchdog() */
 	} else {
 		short flags = ifp->if_flags;
 		ifp->if_flags &= ~IFF_UP;

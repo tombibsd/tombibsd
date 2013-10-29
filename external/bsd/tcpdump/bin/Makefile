@@ -2,7 +2,7 @@
 
 WARNS?=	1	# XXX: need to cleanup later
 
-CWARNFLAGS.clang+=	-Wno-constant-logical-operand
+CWARNFLAGS.clang+=	-Wno-constant-logical-operand -Wno-error=unused-function
 
 .include <bsd.own.mk>
 

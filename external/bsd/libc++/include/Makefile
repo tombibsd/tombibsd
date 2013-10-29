@@ -118,4 +118,5 @@ DPSRCS+=	cxxabi.h
 CLEANFILES+=	cxxabi.h
 
 .include <bsd.inc.mk>
+.include <bsd.clean.mk>
 .include <bsd.obj.mk>

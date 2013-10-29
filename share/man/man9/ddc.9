@@ -90,7 +90,7 @@ to retrieve and print information about a monitor:
 	...
 	/* initialize i2c tag... */
 	...
-	if ((ddc_read_edid(tag, buffer, 128) == 0) \*[Am]\*[Am] 
+	if ((ddc_read_edid(tag, buffer, 128) == 0) \*[Am]\*[Am]
 	    (edid_parse(buffer, \*[Am]info) == 0))
 		edid_print(info);
 	...
@@ -106,4 +106,4 @@ autoconfiguration.
 DDCv2 support was added in
 .Nx 4.0 .
 .Sh AUTHORS
-.An Garrett D'Amore Aq gdamore@NetBSD.org
+.An Garrett D'Amore Aq Mt gdamore@NetBSD.org

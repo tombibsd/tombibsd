@@ -29,6 +29,7 @@
 #include <sys/ioctl.h>
 
 #include <errno.h>
+#include <unistd.h>
 
 #include <rump/rumpuser_component.h>
 

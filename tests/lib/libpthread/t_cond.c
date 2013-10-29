@@ -74,7 +74,6 @@ ATF_TC_HEAD(signal_delay_wait, tc)
 }
 ATF_TC_BODY(signal_delay_wait, tc)
 {
-	int x;
 	pthread_t new;
 	void *joinval;
 	int sharedval;
@@ -84,7 +83,6 @@ ATF_TC_BODY(signal_delay_wait, tc)
 	PTHREAD_REQUIRE(pthread_mutex_init(&mutex, NULL));
 	PTHREAD_REQUIRE(pthread_cond_init(&cond, NULL));
 
-	x = 20;
 	PTHREAD_REQUIRE(pthread_mutex_lock(&mutex));
 
 	sharedval = 1;
@@ -137,7 +135,6 @@ ATF_TC_HEAD(signal_before_unlock, tc)
 }
 ATF_TC_BODY(signal_before_unlock, tc)
 {
-	int x;
 	pthread_t new;
 	void *joinval;
 	int sharedval;
@@ -147,7 +144,6 @@ ATF_TC_BODY(signal_before_unlock, tc)
 	PTHREAD_REQUIRE(pthread_mutex_init(&mutex, NULL));
 	PTHREAD_REQUIRE(pthread_cond_init(&cond, NULL));
 
-	x = 20;
 	PTHREAD_REQUIRE(pthread_mutex_lock(&mutex));
 
 	sharedval = 1;
@@ -201,14 +197,12 @@ ATF_TC_HEAD(signal_before_unlock_static_init, tc)
 }
 ATF_TC_BODY(signal_before_unlock_static_init, tc)
 {
-	int x;
 	pthread_t new;
 	void *joinval;
 	int sharedval;
 
 	printf("1: condition variable test 3\n");
 
-	x = 20;
 	PTHREAD_REQUIRE(pthread_mutex_lock(&static_mutex));
 
 	sharedval = 1;

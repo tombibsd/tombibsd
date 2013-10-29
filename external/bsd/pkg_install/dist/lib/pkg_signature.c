@@ -325,10 +325,7 @@ pkg_verify_signature(const char *archive_name, struct archive **archive,
 
 	*pkgname = NULL;
 
-	state = xmalloc(sizeof(*state));
-	state->sign_blocks = NULL;
-	state->sign_buf = NULL;
-	state->archive = NULL;
+	state = xcalloc(sizeof(*state), 1);
 
 	r = read_file_from_archive(archive_name, *archive, entry, HASH_FNAME,
 	    &hash_file, &hash_len);

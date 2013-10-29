@@ -53,8 +53,8 @@
 /lookup_elf64.c/1.1/Wed Feb 10 21:54:47 2010/-kk/
 /ls.c/1.4/Fri Mar  2 12:08:44 2012/-kk/
 /lseek.c/1.11/Sun Dec  2 04:59:26 2007/-kk/
-/minixfs3.c/1.4/Thu Oct 24 10:28:58 2013/-kk/
-/minixfs3.h/1.4/Thu Oct 24 10:28:58 2013/-kk/
+/minixfs3.c/1.5/Tue Oct 29 12:12:00 2013/-kk/
+/minixfs3.h/1.5/Tue Oct 29 12:12:00 2013/-kk/
 /net.c/1.35/Sat Apr 11 10:57:55 2009/-kk/
 /net.h/1.26/Wed May 11 16:23:40 2011/-kk/
 /netif.c/1.25/Sun Oct 27 08:20:04 2013/-kk/

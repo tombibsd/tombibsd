@@ -48,7 +48,6 @@ __RCSID("$NetBSD$");
 #include <assert.h>
 
 #include <dlfcn.h>
-#include <elf.h>
 #include <errno.h>
 #include <fcntl.h>
 #include <stdio.h>
@@ -61,6 +60,7 @@ __RCSID("$NetBSD$");
 #if defined(__ELF__) && (defined(__NetBSD__) || defined(__FreeBSD__)	\
     || (defined(__sun__) && defined(__svr4__))) || defined(__linux__)	\
     || defined(__DragonFly__)
+#include <elf.h>
 #include <link.h>
 
 static size_t symtabsize = 0, strtabsize = 0;

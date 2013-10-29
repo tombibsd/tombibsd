@@ -1339,7 +1339,7 @@ ar9003_swba_intr(struct athn_softc *sc)
 Static int
 ar9003_intr(struct athn_softc *sc)
 {
-	uint32_t intr, intr2, intr5, sync;
+	uint32_t intr, sync;
 
 	/* Get pending interrupts. */
 	intr = AR_READ(sc, AR_INTR_ASYNC_CAUSE);
@@ -1360,7 +1360,7 @@ ar9003_intr(struct athn_softc *sc)
 
 	if (intr != 0) {
 		if (intr & AR_ISR_BCNMISC) {
-			intr2 = AR_READ(sc, AR_ISR_S2);
+			uint32_t intr2 = AR_READ(sc, AR_ISR_S2);
 #ifdef notyet
 			if (intr2 & AR_ISR_S2_TIM)
 				/* TBD */;
@@ -1368,6 +1368,8 @@ ar9003_intr(struct athn_softc *sc)
 				/* TBD */;
 			if (intr2 & AR_ISR_S2_BB_WATCHDOG)
 				/* TBD */;
+#else
+			__USE(intr2);
 #endif
 		}
 		intr = AR_READ(sc, AR_ISR_RAC);
@@ -1391,11 +1393,15 @@ ar9003_intr(struct athn_softc *sc)
 			ar9003_tx_intr(sc);
 
 		if (intr & AR_ISR_GENTMR) {
-			intr5 = AR_READ(sc, AR_ISR_S5_S);
+			uint32_t intr5 = AR_READ(sc, AR_ISR_S5_S);
+#ifdef ATHN_DEBUG
 			DPRINTFN(DBG_INTR, sc,
 			    "GENTMR trigger=%d thresh=%d\n",
 			    MS(intr5, AR_ISR_S5_GENTIMER_TRIG),
 			    MS(intr5, AR_ISR_S5_GENTIMER_THRESH));
+#else
+			__USE(intr5);
+#endif
 		}
 	}
 	if (sync != 0) {
@@ -1834,14 +1840,14 @@ ar9003_set_rf_mode(struct athn_softc *sc, struct ieee80211_channel *c)
 static __inline uint32_t
 ar9003_synth_delay(struct athn_softc *sc)
 {
-	uint32_t delay;
+	uint32_t synth_delay;
 
-	delay = MS(AR_READ(sc, AR_PHY_RX_DELAY), AR_PHY_RX_DELAY_DELAY);
+	synth_delay = MS(AR_READ(sc, AR_PHY_RX_DELAY), AR_PHY_RX_DELAY_DELAY);
 	if (sc->sc_ic.ic_curmode == IEEE80211_MODE_11B)
-		delay = (delay * 4) / 22;
+		synth_delay = (synth_delay * 4) / 22;
 	else
-		delay = delay / 10;	/* in 100ns steps */
-	return delay;
+		synth_delay = synth_delay / 10;	/* in 100ns steps */
+	return synth_delay;
 }
 
 Static int

@@ -13,7 +13,6 @@ SRCS=	llvm-objdump.cpp \
 	MachODump.cpp
 
 LLVM_LIBS+= \
-	Object \
 	AArch64Disassembler \
 	AArch64TargetInfo \
 	AArch64MCTargetDesc \
@@ -30,6 +29,7 @@ LLVM_LIBS+= \
 	MipsMCTargetDesc \
 	MipsAsmPrinter \
 	MipsAsmParser \
+	PowerPCAsmParser \
 	PowerPCTargetInfo \
 	PowerPCMCTargetDesc \
 	PowerPCAsmPrinter \
@@ -44,8 +44,12 @@ LLVM_LIBS+= \
 	DebugInfo \
 	MCParser \
 	MC \
+	Object \
 	IR \
 	Support
+
+LDADD+=	-lz
+DPADD+=	${LIBZ}
 
 .include "${.PARSEDIR}/../../link.mk"
 

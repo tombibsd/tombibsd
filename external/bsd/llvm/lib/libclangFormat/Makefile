@@ -7,7 +7,9 @@ LIB=	clangFormat
 .PATH: ${CLANG_SRCDIR}/lib/Format
 
 SRCS+=	BreakableToken.cpp \
+	ContinuationIndenter.cpp \
 	Format.cpp \
+	FormatToken.cpp \
 	TokenAnnotator.cpp \
 	UnwrappedLineParser.cpp \
 	WhitespaceManager.cpp

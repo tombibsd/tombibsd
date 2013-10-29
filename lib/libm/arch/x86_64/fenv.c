@@ -181,7 +181,7 @@ feraiseexcept(int excepts)
 	_DIAGASSERT((excepts & ~FE_ALL_EXCEPT) == 0);
 
 	ex = excepts & FE_ALL_EXCEPT;
-	fesetexceptflag((unsigned int *)&excepts, excepts);
+	fesetexceptflag((unsigned int *)&ex, ex);
 	__fwait();
 
 	/* Success */

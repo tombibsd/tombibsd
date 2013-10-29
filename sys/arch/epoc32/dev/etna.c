@@ -226,7 +226,7 @@ etna_doattach(device_t self)
 	struct etna_softc *sc = device_private(self);
 	int status;
 
-	config_pending_incr();
+	config_pending_incr(self);
 
 	status = bus_space_read_1(sc->sc_iot, sc->sc_ioh, ETNA_SKT_STATUS);
 	if ((status & SKT_CARD_OUT) != SKT_CARD_OUT)
@@ -242,7 +242,7 @@ etna_event_thread(void *arg)
 {
 	struct etna_softc *sc = arg;
 
-	config_pending_decr();
+	config_pending_decr(sc->sc_dev);
 
 //	while (1) {
 //	}

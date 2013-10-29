@@ -144,7 +144,7 @@
 /if_atw_pci.c/1.25/Tue Jul 26 20:51:24 2011/-kk/
 /if_bce.c/1.37/Sun Jul 22 14:33:01 2012/-kk/
 /if_bcereg.h/1.4/Sun Dec 11 12:22:49 2005/-kk/
-/if_bge.c/1.259/Thu Oct 24 10:28:58 2013/-kk/
+/if_bge.c/1.260/Tue Oct 29 12:11:55 2013/-kk/
 /if_bgereg.h/1.84/Thu Oct 24 10:28:58 2013/-kk/
 /if_bgevar.h/1.16/Thu Oct 24 10:28:58 2013/-kk/
 /if_bnx.c/1.49/Thu Oct 24 10:28:58 2013/-kk/
@@ -278,7 +278,7 @@
 /mlyio.h/1.4/Mon Apr 28 20:23:55 2008/-kk/
 /mlyreg.h/1.5/Mon Sep  8 23:36:54 2008/-kk/
 /mlyvar.h/1.6/Sat Oct 27 17:18:35 2012/-kk/
-/mpii.c/1.1/Thu Apr 19 17:50:51 2012/-kk/
+/mpii.c/1.4/Tue Oct 29 12:11:55 2013/-kk/
 /mpt_pci.c/1.22/Sun Mar 18 21:05:21 2012/-kk/
 /mpu_cmpci.c/1.16/Wed Nov 23 23:07:35 2011/-kk/
 /mpu_eso.c/1.17/Wed Nov 23 23:07:35 2011/-kk/

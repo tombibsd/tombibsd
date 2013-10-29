@@ -8,3 +8,4 @@ include "arch/evbppc/conf/INSTALL.inc"
 
 no config nfsnetbsd
 no config netbsd-esata
+no config netbsd-sd0a

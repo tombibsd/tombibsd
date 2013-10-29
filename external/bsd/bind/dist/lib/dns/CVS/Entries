@@ -42,9 +42,9 @@
 /lib.c/1.4/Thu Oct 24 10:28:41 2013/-kk/
 /log.c/1.4/Tue Dec  4 23:38:42 2012/-kk/
 /lookup.c/1.5/Thu Oct 24 10:28:41 2013/-kk/
-/master.c/1.8/Tue Dec  4 23:38:42 2012/-kk/
+/master.c/1.9/Tue Oct 29 12:08:16 2013/-kk/
 /masterdump.c/1.6/Tue Dec  4 23:38:42 2012/-kk/
-/message.c/1.9/Tue Jun  5 00:41:34 2012/-kk/
+/message.c/1.10/Tue Oct 29 12:08:16 2013/-kk/
 /name.c/1.6/Thu Oct 24 10:28:41 2013/-kk/
 /ncache.c/1.7/Thu Oct 24 10:28:41 2013/-kk/
 /nsec.c/1.6/Thu Oct 24 10:28:41 2013/-kk/
@@ -52,8 +52,8 @@
 /openssl_link.c/1.9/Thu Oct 24 10:28:41 2013/-kk/
 /openssldh_link.c/1.4/Tue Dec  4 23:38:42 2012/-kk/
 /openssldsa_link.c/1.6/Thu Oct 24 10:28:41 2013/-kk/
-/opensslecdsa_link.c/1.2/Tue Dec  4 23:38:42 2012/-kk/
-/opensslgost_link.c/1.4/Tue Dec  4 23:38:42 2012/-kk/
+/opensslecdsa_link.c/1.3/Tue Oct 29 12:08:16 2013/-kk/
+/opensslgost_link.c/1.5/Tue Oct 29 12:08:16 2013/-kk/
 /opensslrsa_link.c/1.6/Thu Oct 24 10:28:41 2013/-kk/
 /order.c/1.3/Tue Jun  5 00:41:36 2012/-kk/
 /peer.c/1.4/Thu Oct 24 10:28:41 2013/-kk/
@@ -72,10 +72,10 @@
 /rdatasetiter.c/1.3/Tue Jun  5 00:41:38 2012/-kk/
 /rdataslab.c/1.6/Thu Sep 13 05:32:08 2012/-kk/
 /request.c/1.6/Thu Oct 24 10:28:41 2013/-kk/
-/resolver.c/1.15/Tue Dec  4 23:38:42 2012/-kk/
+/resolver.c/1.16/Tue Oct 29 12:08:16 2013/-kk/
 /result.c/1.5/Thu Oct 24 10:28:41 2013/-kk/
 /rootns.c/1.4/Thu Oct 24 10:28:41 2013/-kk/
-/rpz.c/1.4/Tue Dec  4 23:38:43 2012/-kk/
+/rpz.c/1.5/Tue Oct 29 12:08:16 2013/-kk/
 /rriterator.c/1.3/Tue Jun  5 00:41:40 2012/-kk/
 /sdb.c/1.6/Thu Oct 24 10:28:41 2013/-kk/
 /sdlz.c/1.6/Thu Oct 24 10:28:41 2013/-kk/
@@ -86,7 +86,7 @@
 /spnego_asn1.c/1.4/Thu Oct 24 10:28:41 2013/-kk/
 /spnego_asn1.pl/1.1.1.4/Tue Dec  4 19:25:11 2012/-kk/
 /ssu.c/1.4/Thu Oct 24 10:28:41 2013/-kk/
-/ssu_external.c/1.4/Tue Jun  5 00:41:41 2012/-kk/
+/ssu_external.c/1.5/Tue Oct 29 12:08:16 2013/-kk/
 /stats.c/1.3/Tue Jun  5 00:41:41 2012/-kk/
 /tcpmsg.c/1.3/Tue Jun  5 00:41:41 2012/-kk/
 /time.c/1.4/Tue Jun  5 00:41:41 2012/-kk/

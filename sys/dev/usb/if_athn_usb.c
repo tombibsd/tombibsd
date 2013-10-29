@@ -2731,7 +2731,7 @@ athn_usb_stop(struct ifnet *ifp)
 	struct ar_htc_target_vif hvif;
 	struct mbuf *m;
 	uint8_t sta_index;
-	int s, error;
+	int s;
 
 	DPRINTFN(DBG_FN, sc, "\n");
 
@@ -2771,7 +2771,7 @@ athn_usb_stop(struct ifnet *ifp)
 	/* Remove default node. */
 	sta_index = 0;
 	DPRINTFN(DBG_NODES, usc, "removing node %u\n", sta_index);
-	error = athn_usb_remove_hw_node(usc, &sta_index);
+	(void)athn_usb_remove_hw_node(usc, &sta_index);
 
 	(void)athn_usb_wmi_cmd(usc, AR_WMI_CMD_DISABLE_INTR);
 	(void)athn_usb_wmi_cmd(usc, AR_WMI_CMD_DRAIN_TXQ_ALL);

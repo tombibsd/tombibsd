@@ -254,7 +254,7 @@ _sema_init(struct semaphore *s, int value)
 {
 	bzero(s, sizeof(*s));
 	mutex_init(&s->mtx, MUTEX_DEFAULT, IPL_VM);
-	cv_init(&s->cv, "sema cv");
+	cv_init(&s->cv, "semacv");
 	s->value = value;
 }
 

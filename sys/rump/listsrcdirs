@@ -29,18 +29,20 @@ precho src/external/cddl/	osnet
 precho src/external/historical/	nawk
 precho src/usr.bin/		make xinstall config mktemp sed tsort
 precho src/usr.bin/		lorder join cksum m4 mkdep
+precho src/usr.bin/		Makefile.inc rump_server rump_allserver
 precho src/usr.sbin/		mtree
 
 # If -c is given, use CVS syntax to exclude large subdirectories
 # of sys.  Otherwise just do it wholesale.
 if [ "${1}" = '-c' ]; then
-	echo \!src/sys/arch \!src/sys/dev/microcode	\
-	    \!src/sys/dev/pci src/sys
+	echo \!src/sys/arch src/sys
 
 	# pick a few useful archs, namely those mentioned in buildrump.sh
-	for x in amd64 i386 x86 arm evbarm sparc sparc64 ; do
-		precho src/sys/arch/${x}/ include ${x}
+	for x in amd64 i386 x86 arm evbarm sparc sparc64 powerpc evbppc; do
+		precho src/sys/arch/${x}/ include ${x} Makefile
 	done
+	echo src/sys/arch/arm/arm32
+	echo src/sys/arch/Makefile
 else
 	echo src/sys
 fi

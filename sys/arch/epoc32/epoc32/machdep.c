@@ -50,10 +50,13 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <uvm/uvm_extern.h>
 
+#include <dev/cons.h>
+#include <dev/md.h>
+
+#include <arm/locore.h>
+#include <arm/undefined.h>
 #include <arm/arm32/machdep.h>
 #include <arm/arm32/pmap.h>
-#include <arm/cpufunc.h>
-#include <arm/undefined.h>
 
 #include <machine/bootconfig.h>
 #include <machine/bootinfo.h>
@@ -63,9 +66,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <epoc32/windermere/windermerevar.h>
 #include <epoc32/windermere/windermerereg.h>
 #include <epoc32/dev/epockbdvar.h>
-
-#include <dev/cons.h>
-#include <dev/md.h>
 
 #include <machine/db_machdep.h>
 #include <ddb/db_extern.h>

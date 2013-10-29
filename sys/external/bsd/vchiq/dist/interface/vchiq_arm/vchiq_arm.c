@@ -119,7 +119,7 @@ typedef struct user_service_struct {
 
 struct bulk_waiter_node {
 	struct bulk_waiter bulk_waiter;
-	int pid;
+	struct lwp *l;
 	struct list_head list;
 };
 
@@ -134,7 +134,7 @@ struct vchiq_instance_struct {
 
 	int connected;
 	int closing;
-	int pid;
+	struct lwp *l;
 	int mark;
 
 	struct list_head bulk_waiter_list;
@@ -508,7 +508,7 @@ vchiq_ioctl(struct file *fp, u_long cmd, void *arg)
 
 			if (pargs->is_open) {
 				status = vchiq_open_service_internal
-					(service, instance->pid);
+					(service, (uintptr_t)instance->l);
 				if (status != VCHIQ_SUCCESS) {
 					vchiq_remove_service(service->handle);
 					service = NULL;
@@ -577,7 +577,7 @@ vchiq_ioctl(struct file *fp, u_long cmd, void *arg)
 			if (status != VCHIQ_SUCCESS) {
 				vchiq_log_error(vchiq_susp_log_level,
 					"%s: cmd %s returned error %d for "
-					"service %c%c%c%c:%03d",
+					"service %c%c%c%c:%8x",
 					__func__,
 					(cmd == VCHIQ_IOC_USE_SERVICE) ?
 						"VCHIQ_IOC_USE_SERVICE" :
@@ -643,7 +643,7 @@ vchiq_ioctl(struct file *fp, u_long cmd, void *arg)
 			lmutex_lock(&instance->bulk_waiter_list_mutex);
 			list_for_each(pos, &instance->bulk_waiter_list) {
 				if (list_entry(pos, struct bulk_waiter_node,
-					list)->pid == current->l_proc->p_pid) {
+					list)->l == current) {
 					waiter = list_entry(pos,
 						struct bulk_waiter_node,
 						list);
@@ -682,11 +682,12 @@ vchiq_ioctl(struct file *fp, u_long cmd, void *arg)
 				waiter->bulk_waiter.bulk->userdata = NULL;
 				spin_unlock(&bulk_waiter_spinlock);
 			}
+			_sema_destroy(&waiter->bulk_waiter.event);
 			kfree(waiter);
 		} else {
 			const VCHIQ_BULK_MODE_T mode_waiting =
 				VCHIQ_BULK_MODE_WAITING;
-			waiter->pid = current->l_proc->p_pid;
+			waiter->l = current;
 			lmutex_lock(&instance->bulk_waiter_list_mutex);
 			list_add(&waiter->list, &instance->bulk_waiter_list);
 			lmutex_unlock(&instance->bulk_waiter_list_mutex);
@@ -810,6 +811,8 @@ vchiq_ioctl(struct file *fp, u_long cmd, void *arg)
 				if (completion->reason ==
 					VCHIQ_SERVICE_CLOSED) {
 					unlock_service(service1);
+					_sema_destroy(&user_service->insert_event);
+					_sema_destroy(&user_service->remove_event);
 					kfree(user_service);
 				}
 
@@ -1047,8 +1050,7 @@ vchiq_open(dev_t dev, int flags, int mode, lwp_t *l)
 		}
 
 		instance->state = state;
-		/* XXXBSD: PID or thread ID? */
-		instance->pid = l->l_proc->p_pid;
+		instance->l = l;
 
 #ifdef notyet
 		ret = vchiq_proc_add_instance(instance);
@@ -1064,7 +1066,7 @@ vchiq_open(dev_t dev, int flags, int mode, lwp_t *l)
 		lmutex_init(&instance->bulk_waiter_list_mutex);
 		INIT_LIST_HEAD(&instance->bulk_waiter_list);
 
-	} 
+	}
 	else {
 		vchiq_log_error(vchiq_arm_log_level,
 			"Unknown minor device");
@@ -1159,6 +1161,8 @@ vchiq_close(struct file *fp)
 			spin_unlock(&msg_queue_spinlock);
 
 			unlock_service(service);
+			_sema_destroy(&user_service->insert_event);
+			_sema_destroy(&user_service->remove_event);
 			kfree(user_service);
 		}
 
@@ -1190,8 +1194,9 @@ vchiq_close(struct file *fp)
 				list_del(pos);
 				vchiq_log_info(vchiq_arm_log_level,
 					"bulk_waiter - cleaned up %x "
-					"for pid %d",
-					(unsigned int)waiter, waiter->pid);
+					"for lwp %p",
+					(unsigned int)waiter, waiter->l);
+		                _sema_destroy(&waiter->bulk_waiter.event);
 				kfree(waiter);
 			}
 		}
@@ -1285,9 +1290,9 @@ vchiq_dump_platform_instances(void *dump_context)
 			instance = service->instance;
 			if (instance && !instance->mark) {
 				len = snprintf(buf, sizeof(buf),
-					"Instance %x: pid %d,%s completions "
+					"Instance %x: lwp %p,%s completions "
 						"%d/%d",
-					(unsigned int)instance, instance->pid,
+					(unsigned int)instance, instance->l,
 					instance->connected ? " connected, " :
 						"",
 					instance->completion_insert -
@@ -1937,7 +1942,7 @@ output_timeout_error(VCHIQ_STATE_T *state)
 		VCHIQ_SERVICE_T *service_ptr = state->services[i];
 		if (service_ptr && service_ptr->service_use_count &&
 			(service_ptr->srvstate != VCHIQ_SRVSTATE_FREE)) {
-			snprintf(service_err, 50, " %c%c%c%c(%d) service has "
+			snprintf(service_err, 50, " %c%c%c%c(%8x) service has "
 				"use count %d%s", VCHIQ_FOURCC_AS_4CHARS(
 					service_ptr->base.fourcc),
 				 service_ptr->client_id,
@@ -2232,7 +2237,7 @@ vchiq_use_internal(VCHIQ_STATE_T *state, VCHIQ_SERVICE_T *service,
 		sprintf(entity, "VCHIQ:   ");
 		entity_uc = &arm_state->peer_use_count;
 	} else if (service) {
-		sprintf(entity, "%c%c%c%c:%03d",
+		snprintf(entity, sizeof(entity), "%c%c%c%c:%8x",
 			VCHIQ_FOURCC_AS_4CHARS(service->base.fourcc),
 			service->client_id);
 		entity_uc = &service->service_use_count;
@@ -2361,7 +2366,7 @@ vchiq_release_internal(VCHIQ_STATE_T *state, VCHIQ_SERVICE_T *service)
 	vchiq_log_trace(vchiq_susp_log_level, "%s", __func__);
 
 	if (service) {
-		sprintf(entity, "%c%c%c%c:%03d",
+		snprintf(entity, sizeof(entity), "%c%c%c%c:%8x",
 			VCHIQ_FOURCC_AS_4CHARS(service->base.fourcc),
 			service->client_id);
 		entity_uc = &service->service_use_count;
@@ -2591,7 +2596,7 @@ vchiq_check_service(VCHIQ_SERVICE_T *service)
 
 	if (ret == VCHIQ_ERROR) {
 		vchiq_log_error(vchiq_susp_log_level,
-			"%s ERROR - %c%c%c%c:%d service count %d, "
+			"%s ERROR - %c%c%c%c:%8x service count %d, "
 			"state count %d, videocore suspend state %s", __func__,
 			VCHIQ_FOURCC_AS_4CHARS(service->base.fourcc),
 			service->client_id, service->service_use_count,

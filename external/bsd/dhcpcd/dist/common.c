@@ -139,8 +139,9 @@ set_nonblock(int fd)
 }
 
 const char *
-get_hostname(void)
+get_hostname(int short_hostname)
 {
+	char *p;
 
 	gethostname(hostname_buffer, sizeof(hostname_buffer));
 	hostname_buffer[sizeof(hostname_buffer) - 1] = '\0';
@@ -149,6 +150,13 @@ get_hostname(void)
 	    strncmp(hostname_buffer, "localhost.", strlen("localhost.")) == 0 ||
 	    hostname_buffer[0] == '.')
 		return NULL;
+
+	if (short_hostname) {
+		p = strchr(hostname_buffer, '.');
+		if (p)
+			*p = '\0';
+	}
+
 	return hostname_buffer;
 }
 

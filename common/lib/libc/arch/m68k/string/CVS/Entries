@@ -1,8 +1,8 @@
 /bcmp.S/1.6/Thu Oct 24 10:28:41 2013/-kk/
 /bcopy.S/1.6/Thu Oct 24 10:28:41 2013/-kk/
 /bzero.S/1.6/Thu Oct 24 10:28:41 2013/-kk/
-/ffs.S/1.2/Sat Jul  9 14:57:29 2011/-kk/
-/memcmp.S/1.1/Tue Dec 20 19:28:49 2005/-kk/
+/ffs.S/1.6/Tue Oct 29 12:08:00 2013/-kk/
+/memcmp.S/1.5/Tue Oct 29 12:08:00 2013/-kk/
 /memcpy.S/1.1/Tue Dec 20 19:28:49 2005/-kk/
 /memmove.S/1.1/Tue Dec 20 19:28:49 2005/-kk/
 /memset.S/1.7/Thu Oct 24 10:28:41 2013/-kk/
@@ -12,6 +12,6 @@
 /strcpy.S/1.4/Thu Oct 24 10:28:41 2013/-kk/
 /strlen.S/1.4/Thu Oct 24 10:28:41 2013/-kk/
 /strncmp.S/1.7/Thu Oct 24 10:28:41 2013/-kk/
-/strncpy.S/1.1/Tue Dec 20 19:28:49 2005/-kk/
+/strncpy.S/1.5/Tue Oct 29 12:08:00 2013/-kk/
 /strrchr.S/1.4/Thu Oct 24 10:28:41 2013/-kk/
 D

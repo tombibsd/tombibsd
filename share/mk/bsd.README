@@ -1809,6 +1809,8 @@ MAKE		make(1).  [make]
 
 MKDEP		Construct Makefile dependency list.  [mkdep]
 
+MKDEPCXX	Construct Makefile dependency list for C++ files.  [mkdep]
+
 NM		List symbols from object files.  [nm]
 
 PC		Pascal compiler.  [pc]  (Not present)

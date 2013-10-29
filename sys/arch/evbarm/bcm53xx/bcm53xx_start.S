@@ -57,6 +57,8 @@ RCSID("$NetBSD$")
 #define	XPUTC(n)
 #endif
 
+#define	MD_CPU_HATCH	bcm53xx_cpu_hatch
+
 /*
  * Kernel start routine for BCM5301X boards.
  * At this point, this code has been loaded into SDRAM
@@ -66,6 +68,9 @@ RCSID("$NetBSD$")
 
 	.global	_C_LABEL(bcm53xx_start)
 _C_LABEL(bcm53xx_start):
+#ifdef __ARMEB__
+	setend	be		/* make sure we are running big endian */
+#endif
 	/*
 	 * Save any arguments u-boot passed us.
 	 */

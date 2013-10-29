@@ -38,8 +38,6 @@
 #include <limits.h>
 #include <stdint.h>
 
-#include "ipv4.h"
-
 /* Don't set any optional arguments here so we retain POSIX
  * compatibility with getopt */
 #define IF_OPTS "46bc:de:f:gh:i:kl:m:no:pqr:s:t:u:v:wxy:z:ABC:DEF:GHI:JKLO:Q:S:TUVW:X:Z:"
@@ -96,6 +94,11 @@
 #define DHCPCD_IA_FORCED		(1ULL << 40)
 #define DHCPCD_STOPPING			(1ULL << 41)
 #define DHCPCD_DEPARTED			(1ULL << 42)
+#define DHCPCD_HOSTNAME_SHORT		(1ULL << 43)
+#define DHCPCD_EXITING			(1ULL << 44)
+#define DHCPCD_WAITIP4			(1ULL << 45)
+#define DHCPCD_WAITIP6			(1ULL << 46)
+#define DHCPCD_DEV			(1ULL << 47)
 
 extern const struct option cf_options[];
 
@@ -158,6 +161,7 @@ struct if_options {
 };
 
 extern unsigned long long options;
+extern char *dev_load;
 
 struct if_options *read_config(const char *,
     const char *, const char *, const char *);

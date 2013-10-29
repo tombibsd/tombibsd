@@ -26,4 +26,6 @@ SHLIBINSTALLDIR=${LIBROOTDIR}/npf
 LIB=		${MOD}
 SRCS=		npf${MOD}.c
 
+LIBDPLIBS+=	npf		${NETBSDSRCDIR}/lib/libnpf
+
 .include <bsd.lib.mk>

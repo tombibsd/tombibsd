@@ -41,7 +41,9 @@ input or output the `floatx80' type will be defined.  The same applies to
 the `FLOAT128' macro and the quadruple-precision format `float128'.
 -------------------------------------------------------------------------------
 */
+#ifndef __mcoldfire__
 #define FLOATX80
+#endif
 /* #define FLOAT128 */
 
 #include <machine/ieeefp.h>

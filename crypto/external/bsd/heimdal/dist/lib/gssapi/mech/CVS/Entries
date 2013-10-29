@@ -69,7 +69,7 @@
 /gss_wrap.c/1.1.1.1/Wed Apr 13 18:14:47 2011/-kk/
 /gss_wrap_size_limit.c/1.1.1.1/Wed Apr 13 18:14:47 2011/-kk/
 /gssapi.asn1/1.1.1.2/Thu Apr 14 14:08:28 2011/-kk/
-/mech.5/1.1.1.1/Wed Apr 13 18:14:47 2011/-kk/
+/mech.5/1.2/Tue Oct 29 12:08:02 2013/-kk/
 /mech_locl.h/1.1.1.2/Thu Apr 14 14:08:28 2011/-kk/
 /mech_switch.h/1.1.1.2/Thu Apr 14 14:08:28 2011/-kk/
 /mechqueue.h/1.1.1.1/Wed Apr 13 18:14:47 2011/-kk/

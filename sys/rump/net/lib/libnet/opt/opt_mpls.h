@@ -1,3 +1,3 @@
 /* $NetBSD$ */
 
-/* XXX: dummy */
+#define	MPLS 1

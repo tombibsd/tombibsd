@@ -129,20 +129,6 @@ translate_domain(int domain)
 }
 
 #undef translate
-#define translate_back(_a_) case _a_: return RUMP_##_a_
-static int translate_domain_back(int);
-static int
-translate_domain_back(int domain)
-{
-
-	switch (domain) {
-	translate_back(AF_INET);
-	translate_back(AF_INET6);
-	default: return RUMP_AF_UNSPEC;
-	}
-}
-
-#undef translate_back
 
 static void
 translate_sockopt(int *levelp, int *namep)
@@ -325,6 +311,20 @@ translate_sockaddr(const struct sockaddr *addr, uint32_t len)
 #endif
 	return laddr;
 }
+
+#define translate_back(_a_) case _a_: return RUMP_##_a_
+static int translate_domain_back(int);
+static int
+translate_domain_back(int domain)
+{
+
+	switch (domain) {
+	translate_back(AF_INET);
+	translate_back(AF_INET6);
+	default: return RUMP_AF_UNSPEC;
+	}
+}
+#undef translate_back
 
 static void
 translate_sockaddr_back(const struct sockaddr *laddr,

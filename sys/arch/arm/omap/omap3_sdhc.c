@@ -89,9 +89,9 @@ struct am335x_sdhc {
 
 static const struct am335x_sdhc am335x_sdhc[] = {
 	/* XXX All offset by 0x100 because of the am335x's mmc registers.  */
-	{ "MMCHS0",	0x48060100, 64, { AM335X_PRCM_CM_PER, 0x3c } },
-	{ "MMC1",	0x481d8100, 28, { AM335X_PRCM_CM_PER, 0xf4 } },
-	{ "MMCHS2",	0x47810100, 29, { AM335X_PRCM_CM_WKUP, 0xf8 } },
+	{ "MMCHS0", SDMMC1_BASE_TIAM335X, 64, { AM335X_PRCM_CM_PER, 0x3c } },
+	{ "MMC1",   SDMMC2_BASE_TIAM335X, 28, { AM335X_PRCM_CM_PER, 0xf4 } },
+	{ "MMCHS2", SDMMC3_BASE_TIAM335X, 29, { AM335X_PRCM_CM_WKUP, 0xf8 } },
 };
 #endif
 
@@ -372,9 +372,9 @@ obiosdhc_bus_clock(struct sdhc_softc *sc, int clk)
 
 	ctl = bus_space_read_4(osc->sc_bst, osc->sc_bsh, MMCHS_SYSCTL);
 	if (clk == 0) {
-		clk &= ~SYSCTL_CEN;
+		ctl &= ~SYSCTL_CEN;
 	} else {
-		clk |= SYSCTL_CEN;
+		ctl |= SYSCTL_CEN;
 	}
 	bus_space_write_4(osc->sc_bst, osc->sc_bsh, MMCHS_SYSCTL, ctl);
 

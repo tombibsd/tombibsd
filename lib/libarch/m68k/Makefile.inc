@@ -1,6 +1,6 @@
 # $NetBSD$
 
-.if (${MACHINE_ARCH} == "m68k" || ${MACHINE_ARCH} == "m68000")
+.if ${MACHINE_CPU} == "m68k"
 NOLINT=		# defined
 SRCS=		m68k_sync_icache.S
 .endif

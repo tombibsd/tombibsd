@@ -43,7 +43,12 @@ __RCSID("$NetBSD$");
 #include <sys/dkio.h>
 #endif
 
-#if defined(__NetBSD__) || defined(__FreeBSD__) || defined(__DragonFly__)
+#if defined(__NetBSD__) || defined(__FreeBSD__) || \
+    defined(__DragonFly__) || defined(__APPLE__)
+#define	__BSD__
+#endif
+
+#if defined(__BSD__)
 #include <sys/sysctl.h>
 #endif
 
@@ -533,7 +538,7 @@ gethostncpu(void)
 {
 	int ncpu = 1;
 
-#if defined(__NetBSD__) || defined(__FreeBSD__) || defined(__DragonFly__)
+#if defined(__BSD__)
 	size_t sz = sizeof(ncpu);
 
 	sysctlbyname("hw.ncpu", &ncpu, &sz, NULL, 0);
@@ -607,7 +612,7 @@ rumpuser_putchar(int c)
 	putchar(c);
 }
 
-void
+__dead void
 rumpuser_exit(int rv)
 {
 

@@ -34,14 +34,12 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifdef __INTR_PRIVATE
 #ifndef _POWERPC_SOFTINT_H_
 #define _POWERPC_SOFTINT_H_
 
-#include <sys/intr.h>
-
 #ifdef __HAVE_FAST_SOFTINTS
 
+#ifdef __INTR_PRIVATE
 #ifdef __HAVE_PREEMPTION
 #define	IPL_PREEMPT_SOFTMASK	(1 << IPL_NONE)
 #else
@@ -66,7 +64,10 @@
 	    |(SOFTINT_CLOCK  << (4*IPL_SOFTCLOCK )))
 #define	IPL2SOFTINT(ipl)	((IPL2SOFTINT_MAP >> (4 * (ipl))) & 0x0f)
 
+#endif /* __INTR_PRIVATE */
+
 #ifdef _KERNEL
+struct cpu_info;
 void	powerpc_softint(struct cpu_info *, int, vaddr_t);
 void	powerpc_softint_init_md(lwp_t *, u_int, uintptr_t *);
 void	powerpc_softint_trigger(uintptr_t);
@@ -74,4 +75,3 @@ void	powerpc_softint_trigger(uintptr_t);
 
 #endif /* __HAVE_FAST_SOFTINTS */
 #endif /* !_POWERPC_SOFTINT_H_ */
-#endif /* __INTR_PRIVATE */

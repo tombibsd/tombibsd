@@ -4166,10 +4166,23 @@ bge_reset(struct bge_softc *sc)
 	pci_conf_write(sc->sc_pc, sc->sc_pcitag, BGE_PCI_CACHESZ, cachesize);
 	pci_conf_write(sc->sc_pc, sc->sc_pcitag, BGE_PCI_CMD, command);
 
-	/* Step 11: disable PCI-X Relaxed Ordering. */
+	/* 57xx step 11: disable PCI-X Relaxed Ordering. */
 	if (sc->bge_flags & BGE_PCIX) {
 		reg = pci_conf_read(sc->sc_pc, sc->sc_pcitag, sc->bge_pcixcap
 		    + PCIX_CMD);
+		/* Set max memory read byte count to 2K */
+		if (BGE_ASICREV(sc->bge_chipid) == BGE_ASICREV_BCM5703) {
+			reg &= ~PCIX_CMD_BYTECNT_MASK;
+			reg |= PCIX_CMD_BCNT_2048;
+		} else if (BGE_ASICREV(sc->bge_chipid) == BGE_ASICREV_BCM5704){
+			/*
+			 * For 5704, set max outstanding split transaction
+			 * field to 0 (0 means it supports 1 request)
+			 */
+			reg &= ~(PCIX_CMD_SPLTRANS_MASK
+			    | PCIX_CMD_BYTECNT_MASK);
+			reg |= PCIX_CMD_BCNT_2048;
+		}
 		pci_conf_write(sc->sc_pc, sc->sc_pcitag, sc->bge_pcixcap
 		    + PCIX_CMD, reg & ~PCIX_CMD_RELAXED_ORDER);
 	}

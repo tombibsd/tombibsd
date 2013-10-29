@@ -8,17 +8,18 @@ NOLINT=		# defined
 LIB=		gcov
 
 .include <bsd.own.mk>
+.include <bsd.init.mk>
 
 .if ${MKGCC} != "no"
 
-.include "${.CURDIR}/arch/${MACHINE_ARCH}/defs.mk"
+.include "${.CURDIR}/arch/${LIBGCC_MACHINE_ARCH}/defs.mk"
 
 LIBGCOVSRCS=	${G_LIBGCOV:=.c}
 
-CPPFLAGS+=	-I${.CURDIR}/arch/${MACHINE_ARCH}
+CPPFLAGS+=	-I${.CURDIR}/arch/${LIBGCC_MACHINE_ARCH}
 CPPFLAGS+=	-Wno-stack-protector
 
-DPSRCS+=	${.CURDIR}/arch/${MACHINE_ARCH}/defs.mk
+DPSRCS+=	${.CURDIR}/arch/${LIBGCC_MACHINE_ARCH}/defs.mk
 SRCS+=		${LIBGCOVSRCS}
 
 CLEANFILES+=	${LIBGCOVSRCS}

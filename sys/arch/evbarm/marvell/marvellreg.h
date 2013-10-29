@@ -33,12 +33,13 @@
  * that are used while bootstrapping.
  */
 #define MARVELL_PEXMEM_PBASE			0xe0000000
-#if defined(ARMADAXP)
-#define MARVELL_INTERREGS_PBASE			0xd0000000
 #define MARVELL_PEXMEM_SIZE			0x01000000
-#else
+#if !defined(ARMADAXP)
 #define MARVELL_INTERREGS_PBASE			0xf1000000
-#define MARVELL_PEXMEM_SIZE			0x08000000
+#elif !defined(ORION) && !defined(KIRKWOOD) && !defined(MV78XX0)
+#define MARVELL_INTERREGS_PBASE			0xd0000000
+#else
+#define MARVELL_INTERREGS_PBASE			marvell_interregs_pbase
 #endif
 #define MARVELL_INTERREGS_SIZE			0x00100000
 #define MARVELL_PEXIO_PBASE			0xf2000000

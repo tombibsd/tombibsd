@@ -108,6 +108,8 @@ extern struct cpu_info *rump_cpu;
 extern bool rump_ttycomponent;
 
 struct lwp *	rump__lwproc_alloclwp(struct proc *);
+void		rump__lwproc_lwphold(void);
+void		rump__lwproc_lwprele(void);
 
 void	rump_cpus_bootstrap(int *);
 void	rump_biglock_init(void);

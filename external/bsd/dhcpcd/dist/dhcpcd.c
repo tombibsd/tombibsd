@@ -57,6 +57,7 @@ const char copyright[] = "Copyright (c) 2006-2013 Roy Marples";
 #include "config.h"
 #include "common.h"
 #include "control.h"
+#include "dev.h"
 #include "dhcpcd.h"
 #include "dhcp6.h"
 #include "eloop.h"
@@ -64,8 +65,7 @@ const char copyright[] = "Copyright (c) 2006-2013 Roy Marples";
 #include "if-pref.h"
 #include "ipv4.h"
 #include "ipv6.h"
-#include "ipv6ns.h"
-#include "ipv6rs.h"
+#include "ipv6nd.h"
 #include "net.h"
 #include "platform.h"
 #include "script.h"
@@ -162,6 +162,7 @@ cleanup(void)
 	free(ifdv);
 #endif
 
+	dev_stop();
 	if (linkfd != -1)
 		close(linkfd);
 	if (pidfd > -1) {
@@ -209,6 +210,23 @@ daemonise(void)
 	pid_t pid;
 	char buf = '\0';
 	int sidpipe[2], fd;
+
+	if (options & DHCPCD_DAEMONISE && !(options & DHCPCD_DAEMONISED)) {
+		if (options & DHCPCD_WAITIP4 &&
+		    !ipv4_addrexists(NULL))
+			return -1;
+		if (options & DHCPCD_WAITIP6 &&
+		    !ipv6nd_addrexists(NULL) &&
+		    !dhcp6_addrexists(NULL))
+			return -1;
+		if ((options &
+		    (DHCPCD_WAITIP | DHCPCD_WAITIP4 | DHCPCD_WAITIP6)) ==
+		    DHCPCD_WAITIP &&
+		    !ipv4_addrexists(NULL) &&
+		    !ipv6nd_addrexists(NULL) &&
+		    !dhcp6_addrexists(NULL))
+			return -1;
+	}
 
 	eloop_timeout_delete(handle_exit_timeout, NULL);
 	if (options & DHCPCD_DAEMONISED || !(options & DHCPCD_DAEMONISE))
@@ -282,7 +300,7 @@ stop_interface(struct interface *ifp)
 	// Remove the interface from our list
 	TAILQ_REMOVE(ifaces, ifp, next);
 	dhcp6_drop(ifp, NULL);
-	ipv6rs_drop(ifp);
+	ipv6nd_drop(ifp);
 	dhcp_drop(ifp, "STOP");
 	dhcp_close(ifp);
 	eloop_timeout_delete(NULL, ifp);
@@ -297,6 +315,7 @@ static void
 configure_interface1(struct interface *ifp)
 {
 	struct if_options *ifo = ifp->options;
+	int ra_global, ra_iface;
 
 	/* Do any platform specific configuration */
 	if_conf(ifp);
@@ -316,8 +335,13 @@ configure_interface1(struct interface *ifp)
 
 	/* We want to disable kernel interface RA as early as possible. */
 	if (ifo->options & DHCPCD_IPV6RS) {
-		if (check_ipv6(NULL) != 1 || check_ipv6(ifp->name) != 1)
+		ra_global = check_ipv6(NULL, options & DHCPCD_IPV6RA_OWN ? 1:0);
+		ra_iface = check_ipv6(ifp->name,
+		    ifp->options->options & DHCPCD_IPV6RA_OWN ? 1 : 0);
+		if (ra_global == -1 || ra_iface == -1)
 			ifo->options &= ~DHCPCD_IPV6RS;
+		else if (ra_iface == 0)
+			ifo->options |= DHCPCD_IPV6RA_OWN;
 	}
 
 	/* If we haven't specified a ClientID and our hardware address
@@ -378,14 +402,8 @@ handle_carrier(int carrier, int flags, const char *ifname)
 {
 	struct interface *ifp;
 
-	if (!(options & DHCPCD_LINK))
-		return;
 	ifp = find_interface(ifname);
-	if (ifp == NULL) {
-		handle_interface(1, ifname);
-		return;
-	}
-	if (!(ifp->options->options & DHCPCD_LINK))
+	if (ifp == NULL || !(ifp->options->options & DHCPCD_LINK))
 		return;
 
 	if (carrier == LINK_UNKNOWN)
@@ -403,7 +421,7 @@ handle_carrier(int carrier, int flags, const char *ifname)
 			ifp->carrier = LINK_DOWN;
 			dhcp_close(ifp);
 			dhcp6_drop(ifp, "EXPIRE6");
-			ipv6rs_drop(ifp);
+			ipv6nd_drop(ifp);
 			/* Don't blindly delete our knowledge of LL addresses.
 			 * We need to listen to what the kernel does with
 			 * them as some OS's will remove, mark tentative or
@@ -415,6 +433,12 @@ handle_carrier(int carrier, int flags, const char *ifname)
 		if (ifp->carrier != LINK_UP) {
 			syslog(LOG_INFO, "%s: carrier acquired", ifp->name);
 			ifp->carrier = LINK_UP;
+#if !defined(__linux__) && !defined(__NetBSD__)
+			/* BSD does not emit RTM_NEWADDR or RTM_CHGADDR when the
+			 * hardware address changes so we have to go
+			 * through the disovery process to work it out. */
+			handle_interface(0, ifp->name);
+#endif
 			if (ifp->wireless)
 				getifssid(ifp->name, ifp->ssid);
 			configure_interface(ifp, margc, margv);
@@ -440,7 +464,7 @@ start_interface(void *arg)
 	if (ifo->options & DHCPCD_IPV6) {
 		if (ifo->options & DHCPCD_IPV6RS &&
 		    !(ifo->options & DHCPCD_INFORM))
-			ipv6rs_start(ifp);
+			ipv6nd_startrs(ifp);
 
 		if (!(ifo->options & DHCPCD_IPV6RS)) {
 			if (ifo->options & DHCPCD_IA_FORCED)
@@ -503,11 +527,11 @@ init_state(struct interface *ifp, int argc, char **argv)
 
 	if (ifo->options & DHCPCD_LINK) {
 		switch (carrier_status(ifp)) {
-		case 0:
+		case LINK_DOWN:
 			ifp->carrier = LINK_DOWN;
 			reason = "NOCARRIER";
 			break;
-		case 1:
+		case LINK_UP:
 			ifp->carrier = LINK_UP;
 			reason = "CARRIER";
 			break;
@@ -563,8 +587,10 @@ handle_interface(int action, const char *ifname)
 			TAILQ_REMOVE(ifs, ifp, next);
 			TAILQ_INSERT_TAIL(ifaces, ifp, next);
 		}
-		init_state(ifp, margc, margv);
-		start_interface(ifp);
+		if (action == 1) {
+			init_state(ifp, margc, margv);
+			start_interface(ifp);
+		}
 	}
 
 	/* Free our discovered list */
@@ -575,47 +601,29 @@ handle_interface(int action, const char *ifname)
 	free(ifs);
 }
 
-#ifdef RTM_CHGADDR
 void
-handle_hwaddr(const char *ifname, unsigned char *hwaddr, size_t hwlen)
+handle_hwaddr(const char *ifname, const uint8_t *hwaddr, size_t hwlen)
 {
 	struct interface *ifp;
-	struct if_options *ifo;
-	struct dhcp_state *state;
 
-	TAILQ_FOREACH(ifp, ifaces, next) {
-		if (strcmp(ifp->name, ifname) == 0 && ifp->hwlen <= hwlen) {
-			state = D_STATE(ifp);
-			if (state == NULL)
-				continue;
-			ifo = ifp->options;
-			if (!(ifo->options &
-			    (DHCPCD_INFORM | DHCPCD_STATIC | DHCPCD_CLIENTID))
-			    && state->new != NULL &&
-			    state->new->cookie == htonl(MAGIC_COOKIE))
-			{
-				syslog(LOG_INFO,
-				    "%s: expiring for new hardware address",
-				    ifp->name);
-				dhcp_drop(ifp, "EXPIRE");
-			}
-			memcpy(ifp->hwaddr, hwaddr, hwlen);
-			ifp->hwlen = hwlen;
-			if (!(ifo->options &
-			    (DHCPCD_INFORM | DHCPCD_STATIC | DHCPCD_CLIENTID)))
-			{
-				syslog(LOG_DEBUG, "%s: using hwaddr %s",
-				    ifp->name,
-				    hwaddr_ntoa(ifp->hwaddr, ifp->hwlen));
-				state->interval = 0;
-				state->nakoff = 0;
-				start_interface(ifp);
-			}
-		}
+	ifp = find_interface(ifname);
+	if (ifp == NULL)
+		return;
+
+	if (hwlen > sizeof(ifp->hwaddr)) {
+		errno = ENOBUFS;
+		syslog(LOG_ERR, "%s: %s: %m", ifp->name, __func__);
+		return;
 	}
-	free(hwaddr);
+
+	if (ifp->hwlen == hwlen && memcmp(ifp->hwaddr, hwaddr, hwlen) == 0)
+		return;
+
+	syslog(LOG_INFO, "%s: new hardware address: %s", ifp->name,
+	    hwaddr_ntoa(hwaddr, hwlen));
+	ifp->hwlen = hwlen;
+	memcpy(ifp->hwaddr, hwaddr, hwlen);
 }
-#endif
 
 static void
 if_reboot(struct interface *ifp, int argc, char **argv)
@@ -755,6 +763,7 @@ handle_signal(int sig, siginfo_t *siginfo, __unused void *context)
 			break;
 		if (do_release)
 			ifp->options->options |= DHCPCD_RELEASE;
+		ifp->options->options |= DHCPCD_EXITING;
 		stop_interface(ifp);
 	}
 	exit(EXIT_FAILURE);
@@ -802,7 +811,7 @@ handle_args(struct fd_list *fd, int argc, char **argv)
 					len++;
 					if (D6_STATE_RUNNING(ifp))
 						len++;
-					if (ipv6rs_has_ra(ifp))
+					if (ipv6nd_has_ra(ifp))
 						len++;
 				}
 				len = write(fd->fd, &len, sizeof(len));
@@ -820,7 +829,7 @@ handle_args(struct fd_list *fd, int argc, char **argv)
 						len++;
 						if (D6_STATE_RUNNING(ifp))
 							len++;
-						if (ipv6rs_has_ra(ifp))
+						if (ipv6nd_has_ra(ifp))
 							len++;
 					}
 				}
@@ -892,6 +901,7 @@ handle_args(struct fd_list *fd, int argc, char **argv)
 				continue;
 			if (do_release)
 				ifp->options->options |= DHCPCD_RELEASE;
+			ifp->options->options |= DHCPCD_EXITING;
 			stop_interface(ifp);
 		}
 		return 0;
@@ -1192,7 +1202,7 @@ main(int argc, char **argv)
 
 #if 0
 	if (options & DHCPCD_IPV6RS && disable_rtadv() == -1) {
-		syslog(LOG_ERR, "ipv6rs: %m");
+		syslog(LOG_ERR, "disable_rtadvd: %m");
 		options &= ~DHCPCD_IPV6RS;
 	}
 #endif
@@ -1217,6 +1227,12 @@ main(int argc, char **argv)
 		else
 			eloop_event_add(linkfd, handle_link, NULL);
 	}
+
+	/* Start any dev listening plugin which may want to
+	 * change the interface name provided by the kernel */
+	if ((options & (DHCPCD_MASTER | DHCPCD_DEV)) ==
+	    (DHCPCD_MASTER | DHCPCD_DEV))
+		dev_start(dev_load);
 
 	ifaces = discover_interfaces(ifc, ifv);
 	for (i = 0; i < ifc; i++) {

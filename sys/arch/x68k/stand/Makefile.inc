@@ -1,3 +1,3 @@
 #	$NetBSD$
 
-DBG=-Os
+DBG=-Os -fno-unwind-tables

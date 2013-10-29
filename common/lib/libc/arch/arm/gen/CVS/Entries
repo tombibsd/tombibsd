@@ -4,8 +4,8 @@
 /byte_swap_4.S/1.7/Thu Oct 24 10:28:41 2013/-kk/
 /divide.S/1.4/Thu Oct 24 10:28:41 2013/-kk/
 /divsi3.S/1.13/Thu Oct 24 10:28:41 2013/-kk/
-/modsi3.S/1.2/Wed Nov 28 01:35:05 2012/-kk/
+/modsi3.S/1.4/Tue Oct 29 12:07:59 2013/-kk/
 /neon_mask.S/1.2/Tue Dec 18 06:14:23 2012/-kk/
 /udivsi3.S/1.9/Thu Oct 24 10:28:41 2013/-kk/
-/umodsi3.S/1.2/Wed Nov 28 01:35:05 2012/-kk/
+/umodsi3.S/1.4/Tue Oct 29 12:07:59 2013/-kk/
 D

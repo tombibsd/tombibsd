@@ -1,7 +1,7 @@
 #	$NetBSD$
 .include <bsd.own.mk>
 
-SUBDIR=	 libevent
+SUBDIR=	 libevent .WAIT
 .if ${MKCRYPTO} != "no"
 SUBDIR+=	libevent_openssl
 .endif

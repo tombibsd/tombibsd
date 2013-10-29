@@ -32,7 +32,7 @@ vers.c:	${VERSIONFILE}
 	${_MKTARGET_CREATE}
 	${HOST_SH} ${S}/conf/newvers_stand.sh ${.ALLSRC} ${MACHINE} ${NEWVERSWHAT}
 
-CFLAGS=	-Os -fomit-frame-pointer
+CFLAGS=	-Os -fomit-frame-pointer -fno-unwind-tables
 #CFLAGS+= -Wall
 CPPFLAGS+= -D_STANDALONE
 CPPFLAGS+= -DTEXTADDR="0x$(TEXT)" -DBOOT_TEXTADDR="0x$(BOOT_TEXT)"

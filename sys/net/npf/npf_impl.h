@@ -100,7 +100,9 @@ typedef bool (*npf_alg_func_t)(npf_cache_t *, nbuf_t *, npf_nat_t *, int);
 typedef npf_session_t *(*npf_alg_sfunc_t)(npf_cache_t *, nbuf_t *, int);
 typedef void (*npf_workfunc_t)(void);
 
+/* Some artificial limits. */
 #define	NPF_TABLE_SLOTS		32
+#define	NPF_MAX_RULES		(1024 * 1024)
 
 /*
  * SESSION STATE STRUCTURES

@@ -29,8 +29,9 @@
 __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <sys/systm.h>
+#include <sys/cpu.h>
 
-#include <machine/cpu.h>
+#include <arm/locore.h>
 
 #include <arm/pic/picvar.h>
 

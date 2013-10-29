@@ -9,7 +9,6 @@ LIB=	LLVMVectorize
 SRCS+=	BBVectorize.cpp \
 	LoopVectorize.cpp \
 	SLPVectorizer.cpp \
-	VecUtils.cpp \
 	Vectorize.cpp
 
 .if defined(HOSTLIB)
