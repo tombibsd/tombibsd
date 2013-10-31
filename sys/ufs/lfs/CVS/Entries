@@ -16,9 +16,9 @@
 /lfs_kernel.h/1.1/Thu Oct 24 10:28:58 2013/-kk/
 /lfs_rename.c/1.4/Thu Oct 24 10:28:58 2013/-kk/
 /lfs_rfw.c/1.18/Thu Oct 24 10:28:58 2013/-kk/
-/lfs_segment.c/1.232/Thu Oct 24 10:28:58 2013/-kk/
+/lfs_segment.c/1.233/Thu Oct 31 07:00:37 2013/-kk/
 /lfs_subr.c/1.80/Thu Oct 24 10:28:58 2013/-kk/
-/lfs_syscalls.c/1.149/Thu Oct 24 10:28:58 2013/-kk/
+/lfs_syscalls.c/1.150/Thu Oct 31 07:00:37 2013/-kk/
 /lfs_vfsops.c/1.315/Thu Oct 24 10:28:58 2013/-kk/
 /lfs_vnops.c/1.259/Thu Oct 24 10:28:58 2013/-kk/
 /ulfs_bmap.c/1.5/Thu Oct 24 10:28:58 2013/-kk/

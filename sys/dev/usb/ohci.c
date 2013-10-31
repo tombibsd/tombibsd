@@ -259,6 +259,7 @@ Static const struct usbd_bus_methods ohci_bus_methods = {
 	.allocx =	ohci_allocx,
 	.freex =	ohci_freex,
 	.get_lock =	ohci_get_lock,
+	.new_device =	NULL,
 };
 
 Static const struct usbd_pipe_methods ohci_root_ctrl_methods = {

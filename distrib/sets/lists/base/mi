@@ -283,6 +283,7 @@
 ./sbin/iscsid					base-iscsi-bin		iscsi
 ./sbin/ispppcontrol				base-obsolete		obsolete
 ./sbin/lmcctl					base-obsolete		obsolete
+./sbin/luactl					base-sysutil-root
 ./sbin/lvm					base-lvm-root		lvm
 ./sbin/mbrlabel					base-sysutil-root
 ./sbin/mknod					base-sysutil-root

@@ -227,6 +227,8 @@ bcmusb_ccb_match(device_t parent, cfdata_t cf, void *aux)
 	return 1;
 }
 
+#define	OHCI_OFFSET	(OHCI_BASE - EHCI_BASE)
+
 void
 bcmusb_ccb_attach(device_t parent, device_t self, void *aux)
 {
@@ -237,10 +239,10 @@ bcmusb_ccb_attach(device_t parent, device_t self, void *aux)
 	usbsc->usbsc_bst = ccbaa->ccbaa_ccb_bst;
 	usbsc->usbsc_dmat = ccbaa->ccbaa_dmat;
 
-	bus_space_subregion(usbsc->usbsc_bst, ccbaa->ccbaa_ccb_bsh, EHCI_BASE,
-	    0x1000, &usbsc->usbsc_ehci_bsh);
-	bus_space_subregion(usbsc->usbsc_bst, ccbaa->ccbaa_ccb_bsh, OHCI_BASE,
-	    0x1000, &usbsc->usbsc_ohci_bsh);
+	bus_space_subregion(usbsc->usbsc_bst, ccbaa->ccbaa_ccb_bsh,
+	    loc->loc_offset, 0x1000, &usbsc->usbsc_ehci_bsh);
+	bus_space_subregion(usbsc->usbsc_bst, ccbaa->ccbaa_ccb_bsh,
+	    loc->loc_offset + OHCI_OFFSET, 0x1000, &usbsc->usbsc_ohci_bsh);
 
 	/*
 	 * Bring the PHYs out of reset.

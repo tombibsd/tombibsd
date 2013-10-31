@@ -14,7 +14,7 @@
 /auvitekreg.h/1.1/Mon Dec 27 15:42:11 2010/-kk/
 /auvitekvar.h/1.7/Sun Oct  2 19:15:40 2011/-kk/
 /devlist2h.awk/1.14/Sun Dec 11 12:24:00 2005/-kk/
-/ehci.c/1.212/Thu Oct 24 10:28:58 2013/-kk/
+/ehci.c/1.213/Thu Oct 31 07:00:24 2013/-kk/
 /ehcireg.h/1.34/Sun Nov  4 12:01:55 2012/-kk/
 /ehcivar.h/1.42/Thu Oct 24 10:28:58 2013/-kk/
 /emdtv.c/1.9/Thu Dec 27 16:42:32 2012/-kk/
@@ -80,7 +80,7 @@
 /irmce.c/1.1/Tue Jul 19 12:23:04 2011/-kk/
 /kue_fw.h/1.5/Mon Aug 16 09:52:11 2010/-kk/
 /moscom.c/1.8/Sun Sep 23 01:08:17 2012/-kk/
-/ohci.c/1.243/Thu Oct 24 10:28:58 2013/-kk/
+/ohci.c/1.244/Thu Oct 31 07:00:24 2013/-kk/
 /ohcireg.h/1.23/Mon Apr 28 20:23:59 2008/-kk/
 /ohcivar.h/1.54/Thu Oct 24 10:28:58 2013/-kk/
 /pseye.c/1.21/Tue May 24 16:42:31 2011/-kk/
@@ -110,7 +110,7 @@
 /ugen.c/1.122/Thu Oct 24 10:28:58 2013/-kk/
 /ugensa.c/1.31/Thu Oct 24 10:28:58 2013/-kk/
 /ugraphire_rdesc.h/1.9/Fri Dec 23 00:51:46 2011/-kk/
-/uhci.c/1.261/Thu Oct 24 10:28:58 2013/-kk/
+/uhci.c/1.262/Thu Oct 31 07:00:24 2013/-kk/
 /uhcireg.h/1.19/Mon Apr 28 20:23:59 2008/-kk/
 /uhcivar.h/1.52/Thu Oct 24 10:28:58 2013/-kk/
 /uhid.c/1.89/Thu Oct 24 10:28:58 2013/-kk/
@@ -191,8 +191,8 @@
 /uyap.c/1.19/Fri Dec 23 00:51:50 2011/-kk/
 /uyap_firmware.h/1.7/Tue Aug 18 11:08:37 2009/-kk/
 /uyurex.c/1.9/Thu Oct 24 10:28:58 2013/-kk/
-/xhci.c/1.4/Thu Oct 24 10:28:58 2013/-kk/
+/xhci.c/1.5/Thu Oct 31 07:00:24 2013/-kk/
 /xhcireg.h/1.1/Thu Oct 24 10:28:58 2013/-kk/
-/xhcivar.h/1.1/Thu Oct 24 10:28:58 2013/-kk/
+/xhcivar.h/1.2/Thu Oct 31 07:00:24 2013/-kk/
 /xinput_rdesc.h/1.1/Sat Jul 30 12:15:44 2011/-kk/
 D

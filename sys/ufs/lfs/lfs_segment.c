@@ -2801,9 +2801,8 @@ lfs_vunref(struct vnode *vp)
 		return;
 	}
 
-	/* does not call inactive */
-	mutex_enter(vp->v_interlock);
-	vrelel(vp, 0);
+	/* does not call inactive XXX sure it does XXX */
+	vrele(vp);
 }
 
 /*
@@ -2820,9 +2819,9 @@ lfs_vunref_head(struct vnode *vp)
 
 	ASSERT_SEGLOCK(VTOI(vp)->i_lfs);
 
-	/* does not call inactive, inserts non-held vnode at head of freelist */
-	mutex_enter(vp->v_interlock);
-	vrelel(vp, 0);
+	/* does not call inactive XXX sure it does XXX,
+	   inserts non-held vnode at head of freelist */
+	vrele(vp);
 }
 
 

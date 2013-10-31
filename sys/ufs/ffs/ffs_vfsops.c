@@ -827,7 +827,7 @@ ffs_reload(struct mount *mp, kauth_cred_t cred, struct lwp *l)
 		/*
 		 * Step 4: invalidate all inactive vnodes.
 		 */
-		if (vrecycle(vp, &mntvnode_lock, l)) {
+		if (vrecycle(vp, &mntvnode_lock)) {
 			mutex_enter(&mntvnode_lock);
 			(void)vunmark(mvp);
 			goto loop;

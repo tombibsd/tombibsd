@@ -25,7 +25,7 @@ options 	BCMETH_COUNTERS
 #options 	MULTIPROCESSOR
 options 	CPU_CORTEXA9
 #options 	MEMSIZE=256
-options 	BCM5301X
+options 	BCM563XX
 options 	PMAPCOUNTERS
 options 	BUSDMA_COUNTERS
 
@@ -151,7 +151,7 @@ options 	DDB_COMMANDONENTER="show event"
 options 	DB_MAX_LINE=INT_MAX
 #options 	KGDB
 makeoptions	DEBUG="-g"	# compile full symbol table
-options 	SYMTAB_SPACE=600000
+options 	SYMTAB_SPACE=575000
 
 ## USB Debugging options
 options USB_DEBUG

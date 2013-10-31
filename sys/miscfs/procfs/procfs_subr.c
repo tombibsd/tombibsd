@@ -671,18 +671,17 @@ procfs_revoke_vnodes(struct proc *p, void *arg)
 	for (pfs = LIST_FIRST(ppp); pfs; pfs = pnext) {
 		vp = PFSTOV(pfs);
 		pnext = LIST_NEXT(pfs, pfs_hash);
+		if (pfs->pfs_pid != p->p_pid || vp->v_mount != mp)
+			continue;
 		mutex_enter(vp->v_interlock);
-		if (vp->v_usecount > 0 && pfs->pfs_pid == p->p_pid &&
-		    vp->v_mount == mp) {
-		    	vp->v_usecount++;
-		    	mutex_exit(vp->v_interlock);
-			mutex_exit(&pfs_ihash_lock);
-			VOP_REVOKE(vp, REVOKEALL);
-			vrele(vp);
+		mutex_exit(&pfs_ihash_lock);
+		if (vget(vp, 0) != 0) {
 			mutex_enter(&pfs_ihash_lock);
-		} else {
-			mutex_exit(vp->v_interlock);
+			continue;
 		}
+		VOP_REVOKE(vp, REVOKEALL);
+		vrele(vp);
+		mutex_enter(&pfs_ihash_lock);
 	}
 	mutex_exit(&pfs_ihash_lock);
 }

@@ -291,6 +291,7 @@ const struct usbd_bus_methods uhci_bus_methods = {
 	.allocx =	uhci_allocx,
 	.freex =	uhci_freex,
 	.get_lock =	uhci_get_lock,
+	.new_device =	NULL,
 };
 
 const struct usbd_pipe_methods uhci_root_ctrl_methods = {

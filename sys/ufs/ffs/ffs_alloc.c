@@ -720,14 +720,17 @@ ffs_dirpref(struct inode *pip)
 	/*
 	 * Count various limits which used for
 	 * optimal allocation of a directory inode.
+	 * Try cylinder groups with >75% avgifree and avgbfree.
+	 * Avoid cylinder groups with no free blocks or inodes as that
+	 * triggers an I/O-expensive cylinder group scan.
 	 */
 	maxndir = min(avgndir + fs->fs_ipg / 16, fs->fs_ipg);
-	minifree = avgifree - fs->fs_ipg / 4;
-	if (minifree < 0)
-		minifree = 0;
-	minbfree = avgbfree - ffs_fragstoblks(fs, fs->fs_fpg) / 4;
-	if (minbfree < 0)
-		minbfree = 0;
+	minifree = avgifree - avgifree / 4;
+	if (minifree < 1)
+		minifree = 1;
+	minbfree = avgbfree - avgbfree / 4;
+	if (minbfree < 1)
+		minbfree = 1;
 	cgsize = (int64_t)fs->fs_fsize * fs->fs_fpg;
 	dirsize = (int64_t)fs->fs_avgfilesize * fs->fs_avgfpdir;
 	if (avgndir != 0) {
@@ -736,7 +739,7 @@ ffs_dirpref(struct inode *pip)
 			dirsize = curdsz;
 	}
 	if (cgsize < dirsize * 255)
-		maxcontigdirs = cgsize / dirsize;
+		maxcontigdirs = (avgbfree * fs->fs_bsize) / dirsize;
 	else
 		maxcontigdirs = 255;
 	if (fs->fs_avgfpdir > 0)

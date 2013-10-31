@@ -2538,6 +2538,7 @@
 ./usr/share/man/cat8/lockstat.0			man-sysutil-catman	.cat
 ./usr/share/man/cat8/lpc.0			man-lpr-catman		.cat
 ./usr/share/man/cat8/lpd.0			man-lpr-catman		.cat
+./usr/share/man/cat8/luactl.0			man-sysutil-catman	.cat
 ./usr/share/man/cat8/luna68k/MAKEDEV.0		man-obsolete		obsolete
 ./usr/share/man/cat8/luna68k/makedev.0		man-obsolete		obsolete
 ./usr/share/man/cat8/lvchange.0			man-lvm-catman		lvm,.cat
@@ -3116,7 +3117,9 @@
 ./usr/share/man/cat8/zpool.0			man-zfs-catman		zfs,.cat
 ./usr/share/man/cat8/zzz.0			man-sysutil-catman	.cat
 ./usr/share/man/cat9/boot.0			man-obsolete		obsolete
+./usr/share/man/cat9lua/core.0			man-sys-catman		.cat
 ./usr/share/man/cat9lua/intro.0			man-sys-catman		.cat
+./usr/share/man/cat9lua/pmf.0			man-sys-catman		.cat
 ./usr/share/man/html1/Mail.html			man-mail-htmlman	html
 ./usr/share/man/html1/[.html			man-util-htmlman	html
 ./usr/share/man/html1/agrep.html		man-util-htmlman	html
@@ -5343,6 +5346,7 @@
 ./usr/share/man/html8/lockstat.html		man-sysutil-htmlman	html
 ./usr/share/man/html8/lpc.html			man-lpr-htmlman		html
 ./usr/share/man/html8/lpd.html			man-lpr-htmlman		html
+./usr/share/man/html8/luactl.html		man-sysutil-htmlman	html
 ./usr/share/man/html8/lvchange.html		man-lvm-htmlman		lvm,html
 ./usr/share/man/html8/lvconvert.html		man-lvm-htmlman		lvm,html
 ./usr/share/man/html8/lvcreate.html		man-lvm-htmlman		lvm,html
@@ -5800,7 +5804,9 @@
 ./usr/share/man/html8/zic.html			man-sysutil-htmlman	html
 ./usr/share/man/html8/zpool.html		man-zfs-htmlman		zfs,html
 ./usr/share/man/html8/zzz.html			man-sysutil-htmlman	html
+./usr/share/man/html9lua/core.html		man-sys-htmlman		html
 ./usr/share/man/html9lua/intro.html		man-sys-htmlman		html
+./usr/share/man/html9lua/pmf.html		man-sys-htmlman		html
 ./usr/share/man/man1/Mail.1			man-mail-man		.man
 ./usr/share/man/man1/[.1			man-util-man		.man
 ./usr/share/man/man1/agrep.1			man-util-man		.man
@@ -8300,6 +8306,7 @@
 ./usr/share/man/man8/lockstat.8			man-sysutil-man		.man
 ./usr/share/man/man8/lpc.8			man-lpr-man		.man
 ./usr/share/man/man8/lpd.8			man-lpr-man		.man
+./usr/share/man/man8/luactl.8			man-sysutil-man		.man
 ./usr/share/man/man8/luna68k/MAKEDEV.8		man-obsolete		obsolete
 ./usr/share/man/man8/luna68k/makedev.8		man-obsolete		obsolete
 ./usr/share/man/man8/lvchange.8			man-lvm-man		lvm,.man
@@ -8873,5 +8880,7 @@
 ./usr/share/man/man8/zpool.8			man-zfs-man		zfs,.man
 ./usr/share/man/man8/zzz.8			man-sysutil-man		.man
 ./usr/share/man/man9/boot.9			man-obsolete		obsolete
+./usr/share/man/man9lua/core.9lua		man-sys-man		.man
 ./usr/share/man/man9lua/intro.9lua		man-sys-man		.man
+./usr/share/man/man9lua/pmf.9lua		man-sys-man		.man
 ./usr/share/man/style.css			man-mdocml-htmlman	html

@@ -851,7 +851,8 @@ unp_detach(struct unpcb *unp)
 		/* XXXAD racy */
 		mutex_enter(vp->v_interlock);
 		vp->v_socket = NULL;
-		vrelel(vp, 0);
+		mutex_exit(vp->v_interlock);
+		vrele(vp);
 		solock(so);
 		unp->unp_vnode = NULL;
 	}

@@ -12,7 +12,7 @@
 /ethertypes.h/1.18/Sun Sep 23 01:14:19 2012/-kk/
 /files.pf/1.6/Mon Aug 29 09:50:04 2011/-kk/
 /if.c/1.269/Thu Oct 24 10:28:58 2013/-kk/
-/if.h/1.158/Thu Oct 24 10:28:58 2013/-kk/
+/if.h/1.159/Thu Oct 31 07:00:33 2013/-kk/
 /if_arc.h/1.22/Wed Feb 20 17:05:52 2008/-kk/
 /if_arcsubr.c/1.64/Mon Sep 24 03:05:53 2012/-kk/
 /if_arp.h/1.29/Tue Apr 15 15:17:54 2008/-kk/

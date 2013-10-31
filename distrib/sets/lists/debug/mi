@@ -309,6 +309,7 @@
 ./usr/libdata/debug/sbin/ipf.debug		comp-ipf-debug		ipfilter,debug
 ./usr/libdata/debug/sbin/iscsictl.debug		comp-iscsi-debug	iscsi,debug
 ./usr/libdata/debug/sbin/iscsid.debug		comp-iscsi-debug	iscsi,debug
+./usr/libdata/debug/sbin/luactl.debug		comp-sysutil-debug	debug
 ./usr/libdata/debug/sbin/lvm.debug		comp-sysutil-debug	lvm,debug
 ./usr/libdata/debug/sbin/mbrlabel.debug		comp-sysutil-debug	debug
 ./usr/libdata/debug/sbin/mknod.debug		comp-sysutil-debug	debug

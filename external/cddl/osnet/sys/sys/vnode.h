@@ -686,7 +686,6 @@ vn_remove(char *fnamep, enum uio_seg seg, enum rm dirflag)
 
 #define VN_RELE_ASYNC(vp, taskq) 	vrele_async((vp))
 #define vn_exists(a) 	do { } while(0)
-#define vn_reinit(a) 	vclean((a), 0)
 
 /*
  * Flags for VOP_LOOKUP
