@@ -82,11 +82,13 @@ LIBRUMPFS_UDF?=		/usr/lib/librumpfs_udf.a
 LIBRUMPFS_UFS?=		/usr/lib/librumpfs_ufs.a
 
 HOST_MKDEP?=	CC=${HOST_CC:Q} mkdep
+HOST_MKDEPCXX?=	CC=${HOST_CXX:Q} mkdep
 MKDEP_SUFFIXES?=	.lo .ln
 
 # Override these:
 INSTALL:=	${INSTALL:NSTRIP=*}
 MKDEP:=		${HOST_MKDEP}
+MKDEPCXX:=	${HOST_MKDEPCXX}
 
 .if ${TOOLCHAIN_MISSING} == "no" || defined(EXTERNAL_TOOLCHAIN)
 OBJHOSTMACHINE=	# set

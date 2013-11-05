@@ -260,8 +260,6 @@ struct mips_options mips_options = {
 	.mips_fpu_id = 0xffffffff,
 };
 
-struct	user *proc0paddr;
-
 void *	msgbufaddr;
 
 /* the following is used externally (sysctl_hw) */

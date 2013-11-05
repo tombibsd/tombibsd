@@ -1014,7 +1014,7 @@ axen_rxeof(usbd_xfer_handle xfer, usbd_private_handle priv, usbd_status status)
 	}
 		
 	/* sanity check */
-	if ((int)hdr_offset > total_len) {
+	if (hdr_offset > total_len) {
 		ifp->if_ierrors++;
 		usbd_delay_ms(sc->axen_udev, 100);
 		goto done;

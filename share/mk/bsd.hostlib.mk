@@ -8,10 +8,12 @@
 ##### Default values
 CFLAGS+=	${COPTS}
 HOST_MKDEP?=	CC=${HOST_CC:Q} mkdep
+HOST_MKDEPCXX?=	CC=${HOST_CXX:Q} mkdep
 MKDEP_SUFFIXES?=	.o .lo
 
 # Override these:
 MKDEP:=		${HOST_MKDEP}
+MKDEPCXX:=	${HOST_MKDEPCXX}
 
 .if ${TOOLCHAIN_MISSING} == "no" || defined(EXTERNAL_TOOLCHAIN)
 OBJHOSTMACHINE=	# set

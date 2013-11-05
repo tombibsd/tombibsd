@@ -8,6 +8,8 @@ LIB=	lldPasses
 
 SRCS+=	GOTPass.cpp \
 	LayoutPass.cpp \
+	RoundTripNativePass.cpp \
+	RoundTripYAMLPass.cpp \
 	StubsPass.cpp
 
 .if defined(HOSTLIB)

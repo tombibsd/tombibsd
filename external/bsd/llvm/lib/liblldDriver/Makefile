@@ -14,8 +14,11 @@ SRCS+=	CoreDriver.cpp \
 	UniversalDriver.cpp \
 	WinLinkDriver.cpp
 
-TABLEGEN_SRC=	CoreOptions.td DarwinLdOptions.td GnuLdOptions.td WinLinkOptions.td
+TABLEGEN_SRC=	CoreOptions.td DarwinLdOptions.td GnuLdOptions.td \
+	UniversalDriverOptions.td WinLinkOptions.td
 
+TABLEGEN_OUTPUT.UniversalDriverOptions.td= \
+	UniversalDriverOptions.inc|-gen-opt-parser-defs
 TABLEGEN_OUTPUT.CoreOptions.td= \
 	CoreOptions.inc|-gen-opt-parser-defs
 TABLEGEN_OUTPUT.DarwinLdOptions.td= \

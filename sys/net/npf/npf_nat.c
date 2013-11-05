@@ -677,7 +677,7 @@ translate:
 		 * Note: packet now has a translated address in the cache.
 		 */
 		nt->nt_session = se;
-		error = npf_session_setnat(se, nt, di);
+		error = npf_session_setnat(se, nt, np->n_type);
 out:
 		if (error) {
 			/* If session was for NAT only - expire it. */

@@ -16,6 +16,7 @@ SRCS+=	BasicBlockUtils.cpp \
 	CodeExtractor.cpp \
 	DemoteRegToStack.cpp \
 	FlattenCFG.cpp \
+	GlobalStatus.cpp \
 	InlineFunction.cpp \
 	InstructionNamer.cpp \
 	IntegerDivision.cpp \

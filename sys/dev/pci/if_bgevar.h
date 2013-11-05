@@ -315,6 +315,7 @@ struct bge_softc {
 #define BGE_STS_CLRBIT(sc, x)	((sc)->bge_sts &= ~(x))
 	int			bge_if_flags;
 	uint32_t		bge_flags;
+	uint32_t		bge_phy_flags;
 	int			bge_flowflags;
 #ifdef BGE_EVENT_COUNTERS
 	/*

@@ -80,7 +80,7 @@ struct lwp *rumpuser_curlwp(void);
 #define cpu_number() (cpu_index(curcpu))
 
 extern struct cpu_info *rumpcpu_info_list;
-#define CPU_INFO_ITERATOR		int
+#define CPU_INFO_ITERATOR		int __unused
 #define CPU_INFO_FOREACH(_cii_, _ci_)	_cii_ = 0, _ci_ = rumpcpu_info_list; \
 					_ci_ != NULL; _ci_ = _ci_->ci_next
 #define CPU_IS_PRIMARY(_ci_)		(_ci_->ci_index == 0)

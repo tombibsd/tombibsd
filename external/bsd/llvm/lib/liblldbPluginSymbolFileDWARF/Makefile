@@ -8,6 +8,7 @@ LIB=	lldbPluginSymbolFileDWARF
 
 SRCS+=	DWARFAbbreviationDeclaration.cpp \
 	DWARFCompileUnit.cpp \
+	DWARFDataExtractor.cpp \
 	DWARFDebugAbbrev.cpp \
 	DWARFDebugAranges.cpp \
 	DWARFDebugArangeSet.cpp \

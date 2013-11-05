@@ -193,7 +193,7 @@ udf_write_nodedscr_direct(struct udf_strat_args *args)
 	struct long_ad   *icb      = args->icb;
 	int               waitfor  = args->waitfor;
 	uint32_t logsector, sector, dummy;
-	int error, vpart;
+	int error, vpart __diagused;
 
 	/*
 	 * we have to decide if we write it out sequential or at its fixed 
@@ -255,7 +255,7 @@ udf_queue_buf_direct(struct udf_strat_args *args)
 	int sector_size = ump->discinfo.sector_size;
 	int len, buf_len, sector, sectors, run_length;
 	int blks = sector_size / DEV_BSIZE;
-	int what, class, queue;
+	int what, class __diagused, queue;
 
 	KASSERT(ump);
 	KASSERT(buf);

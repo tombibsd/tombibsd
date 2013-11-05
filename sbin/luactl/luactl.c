@@ -58,7 +58,7 @@ static void destroy(char *);
 static void require(char *, char *);
 static void load(char *, char *);
 
-static void usage(void);
+static void usage(void) __dead;
 
 #define _PATH_DEV_LUA	"/dev/lua"
 

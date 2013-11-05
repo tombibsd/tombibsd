@@ -71,7 +71,7 @@ CLANG_TABLEGEN_OUTPUT.Attr.td= \
 	clang/AST/AttrImpl.inc|-gen-clang-attr-impl \
 	clang/Basic/AttrList.inc|-gen-clang-attr-list \
 	clang/Lex/AttrSpellings.inc|-gen-clang-attr-spelling-list \
-	clang/Parse/AttrExprArgs.inc|-gen-clang-attr-expr-args-list \
+	clang/Parse/AttrIdentifierArg.inc|-gen-clang-attr-identifier-arg-list \
 	clang/Parse/AttrLateParsed.inc|-gen-clang-attr-late-parsed-list \
 	clang/Sema/AttrParsedAttrImpl.inc|-gen-clang-attr-parsed-attr-impl \
 	clang/Sema/AttrParsedAttrKinds.inc|-gen-clang-attr-parsed-attr-kinds \

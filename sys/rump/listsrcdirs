@@ -19,6 +19,9 @@ precho ()
 	for arg in $* ; do echo ${pfx}${arg} ; done
 }
 
+ARCHS="amd64 i386 x86 arm evbarm sparc sparc64 powerpc evbppc mips evbmips"
+ARCHS_EXTRA="arm/arm32 Makefile"
+
 precho src/			build.sh Makefile Makefile.inc
 precho src/			tools common include share/mk
 precho src/etc/			Makefile.params master.passwd group
@@ -38,11 +41,12 @@ if [ "${1}" = '-c' ]; then
 	echo \!src/sys/arch src/sys
 
 	# pick a few useful archs, namely those mentioned in buildrump.sh
-	for x in amd64 i386 x86 arm evbarm sparc sparc64 powerpc evbppc; do
-		precho src/sys/arch/${x}/ include ${x} Makefile
+	for arch in ${ARCHS}; do
+		precho src/sys/arch/${arch}/ include ${arch} Makefile
 	done
-	echo src/sys/arch/arm/arm32
-	echo src/sys/arch/Makefile
+	for extra in ${ARCHS_EXTRA}; do
+		echo src/sys/arch/${extra}
+	done
 else
 	echo src/sys
 fi

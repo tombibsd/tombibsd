@@ -314,8 +314,13 @@ sortlists: .PHONY
 	    ${_MKSHMSG} "sorting $${f#${.CURDIR}/}" ; \
 	    { grep '^#' "$$f" ; \
 	      grep -v '^#' "$$f" | sort ; \
-	    } >"$$f".tmp \
-	    && mv "$$f".tmp "$$f" ; \
+	    } >"$$f".tmp; \
+	    if cmp "$$f" "$$f".tmp >/dev/null; then \
+	      : "$$f is unchanged" ; \
+	      rm "$$f".tmp ; \
+	    else \
+	      mv "$$f".tmp "$$f" ; \
+	    fi ; \
 	  done
 
 #

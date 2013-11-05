@@ -60,37 +60,41 @@ _MKDEP_FILEFLAGS=
 
 .c.d:
 	${_MKTARGET_CREATE}
-	${MKDEP} -f ${.TARGET} ${_MKDEP_FILEFLAGS} -- ${MKDEPFLAGS} \
+	${MKDEP} -f ${.TARGET}.tmp ${_MKDEP_FILEFLAGS} -- ${MKDEPFLAGS} \
 	    ${CFLAGS:C/-([IDU])[  ]*/-\1/Wg:M-[IDU]*} \
 	    ${CPPFLAGS} ${COPTS.${.IMPSRC:T}} ${CPUFLAGS.${.IMPSRC:T}} \
-	    ${CPPFLAGS.${.IMPSRC:T}} ${.IMPSRC}
+	    ${CPPFLAGS.${.IMPSRC:T}} ${.IMPSRC} && \
+	    mv ${.TARGET}.tmp ${.TARGET}
 
 .m.d:
 	${_MKTARGET_CREATE}
-	${MKDEP} -f ${.TARGET} ${_MKDEP_FILEFLAGS} -- ${MKDEPFLAGS} \
+	${MKDEP} -f ${.TARGET}.tmp ${_MKDEP_FILEFLAGS} -- ${MKDEPFLAGS} \
 	    ${OBJCFLAGS:C/-([IDU])[  ]*/-\1/Wg:M-[IDU]*} \
 	    ${CPPFLAGS} ${COPTS.${.IMPSRC:T}} ${CPUFLAGS.${.IMPSRC:T}} \
-	    ${CPPFLAGS.${.IMPSRC:T}} ${.IMPSRC}
+	    ${CPPFLAGS.${.IMPSRC:T}} ${.IMPSRC} && \
+	    mv ${.TARGET}.tmp ${.TARGET}
 
 .s.d .S.d:
 	${_MKTARGET_CREATE}
-	${MKDEP} -f ${.TARGET} ${_MKDEP_FILEFLAGS} -- ${MKDEPFLAGS} \
+	${MKDEP} -f ${.TARGET}.tmp ${_MKDEP_FILEFLAGS} -- ${MKDEPFLAGS} \
 	    ${AFLAGS:C/-([IDU])[  ]*/-\1/Wg:M-[IDU]*} \
 	    ${CPPFLAGS} ${AFLAGS.${.IMPSRC:T}} ${CPPFLAGS.${.IMPSRC:T}} \
-	    ${__acpp_flags} ${.IMPSRC}
+	    ${__acpp_flags} ${.IMPSRC} && \
+	    mv ${.TARGET}.tmp ${.TARGET}
 
 .C.d .cc.d .cpp.d .cxx.d:
 	${_MKTARGET_CREATE}
-	${MKDEPCXX} -f ${.TARGET} ${_MKDEP_FILEFLAGS} -- ${MKDEPFLAGS} \
+	${MKDEPCXX} -f ${.TARGET}.tmp ${_MKDEP_FILEFLAGS} -- ${MKDEPFLAGS} \
 	    ${CXXFLAGS:C/-([IDU])[  ]*/-\1/Wg:M-[IDU]*} \
 	    ${CPPFLAGS} ${COPTS.${.IMPSRC:T}} ${CPUFLAGS.${.IMPSRC:T}} \
-	    ${CPPFLAGS.${.IMPSRC:T}} ${.IMPSRC}
+	    ${CPPFLAGS.${.IMPSRC:T}} ${.IMPSRC} && \
+	    mv ${.TARGET}.tmp ${.TARGET}
 
 .endif # defined(SRCS) && !empty(SRCS)					# }
 
 ##### Clean rules
 .if defined(SRCS) && !empty(SRCS)
-CLEANDIRFILES+= .depend ${__DPSRCS.d} ${.CURDIR}/tags ${CLEANDEPEND}
+CLEANDIRFILES+= .depend ${__DPSRCS.d} ${__DPSRCS.d:.d=.d.tmp} ${.CURDIR}/tags ${CLEANDEPEND}
 .endif
 
 ##### Custom rules

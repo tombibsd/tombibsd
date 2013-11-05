@@ -902,6 +902,9 @@ netbsd_elf_signature(struct lwp *l, struct exec_package *epp,
 			    np->n_descsz == ELF_NOTE_NETBSD_DESCSZ &&
 			    memcmp(ndata, ELF_NOTE_NETBSD_NAME,
 			    ELF_NOTE_NETBSD_NAMESZ) == 0) {
+				memcpy(&epp->ep_osversion,
+				    ndata + ELF_NOTE_NETBSD_NAMESZ + 1,
+				    ELF_NOTE_NETBSD_DESCSZ);
 				isnetbsd = 1;
 				break;
 			}

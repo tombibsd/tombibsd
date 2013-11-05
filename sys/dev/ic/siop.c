@@ -884,7 +884,7 @@ scintr:
 					return(1);
 				default:
 					panic("invalid retval from "
-					    "siop_wdtr_neg()");
+					    "siop_sdtr_neg()");
 				}
 				return(1);
 			}

@@ -248,8 +248,6 @@ extern int pmap_debug_level;
 
 pv_addr_t kernel_pt_table[NUM_KERNEL_PTS];
 
-struct user *proc0paddr;
-
 /* Prototypes */
 
 void consinit(void);

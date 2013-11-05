@@ -10,6 +10,7 @@ CPPFLAGS+=	-I${LLD_SRCDIR}/lib/ReaderWriter/ELF
 
 SRCS+=	X86_64LinkingContext.cpp \
 	X86_64RelocationHandler.cpp \
+	X86_64RelocationPass.cpp \
 	X86_64TargetHandler.cpp
 
 .if defined(HOSTLIB)

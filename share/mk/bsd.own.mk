@@ -262,6 +262,7 @@ LDFLAGS+=	--sysroot=/
 .endif	# EXTERNAL_TOOLCHAIN						# }
 
 HOST_MKDEP=	${TOOLDIR}/bin/${_TOOL_PREFIX}host-mkdep
+HOST_MKDEPCXX=	${TOOLDIR}/bin/${_TOOL_PREFIX}host-mkdep
 
 DBSYM=		${TOOLDIR}/bin/${MACHINE_GNU_PLATFORM}-dbsym
 ELF2AOUT=	${TOOLDIR}/bin/${_TOOL_PREFIX}m68k-elf2aout

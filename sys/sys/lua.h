@@ -33,6 +33,10 @@
 
 #include <lua.h>		/* for lua_State */
 
+#ifdef _KERNEL
+#include <sys/condvar.h>
+#endif
+
 #define MAX_LUA_NAME		16
 #define MAX_LUA_DESC		64
 #define LUA_MAX_MODNAME		32

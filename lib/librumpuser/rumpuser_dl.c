@@ -50,6 +50,7 @@ __RCSID("$NetBSD$");
 #include <dlfcn.h>
 #include <errno.h>
 #include <fcntl.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -150,8 +151,7 @@ do {									\
  * On Solaris and DragonFly / FreeBSD, the main object works differently
  * ... uuuuh.
  */
-#if defined(__GLIBC__)
-/* XXX: not true for e.g. MIPS, but we'll cross that hurdle later */
+#if defined(__GLIBC__) && !defined(__mips__)
 #define adjptr(_map_, _ptr_) ((void *)(_ptr_))
 #elif defined(__sun__) || defined(__DragonFly__) || defined(__FreeBSD__)
 #define adjptr(_map_, _ptr_) \

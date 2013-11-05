@@ -493,7 +493,7 @@ void
 npf_recache(npf_cache_t *npc, nbuf_t *nbuf)
 {
 	const int mflags __diagused = npc->npc_info & (NPC_IP46 | NPC_LAYER4);
-	int flags;
+	int flags __diagused;
 
 	nbuf_reset(nbuf);
 	npc->npc_info = 0;

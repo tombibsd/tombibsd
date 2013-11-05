@@ -238,7 +238,9 @@ preadbuffer(void)
 {
 	char *p, *q;
 	int more;
+#ifndef SMALL
 	int something;
+#endif
 	char savec;
 
 	if (parsefile->strpush) {
@@ -262,7 +264,9 @@ again:
 	q = p = parsenextc;
 
 	/* delete nul characters */
+#ifndef SMALL
 	something = 0;
+#endif
 	for (more = 1; more;) {
 		switch (*p) {
 		case '\0':
@@ -279,7 +283,9 @@ again:
 			break;
 
 		default:
+#ifndef SMALL
 			something = 1;
+#endif
 			break;
 		}
 

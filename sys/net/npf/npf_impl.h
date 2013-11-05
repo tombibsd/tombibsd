@@ -290,7 +290,7 @@ void		npf_session_release(npf_session_t *);
 void		npf_session_expire(npf_session_t *);
 bool		npf_session_pass(const npf_session_t *, npf_rproc_t **);
 void		npf_session_setpass(npf_session_t *, npf_rproc_t *);
-int		npf_session_setnat(npf_session_t *, npf_nat_t *, const int);
+int		npf_session_setnat(npf_session_t *, npf_nat_t *, u_int);
 npf_nat_t *	npf_session_retnat(npf_session_t *, const int, bool *);
 
 void		npf_session_load(npf_sehash_t *);

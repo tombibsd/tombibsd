@@ -345,7 +345,7 @@ udf_pop_eccline(struct strat_private *priv, int queued_on)
 static void
 udf_unqueue_eccline(struct strat_private *priv, struct udf_eccline *eccline)
 {
-	struct buf *ret;
+	struct buf *ret __diagused;
 
 	UDF_LOCK_ECCLINE(eccline);
 	if (eccline->queued_on == 0) {

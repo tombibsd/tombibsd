@@ -269,7 +269,7 @@ efs_dirblk_lookup(struct efs_dirblk *dir, struct componentname *cn,
     ino_t *inode)
 {
 	struct efs_dirent *de;
-	int i, slot, offset;
+	int i, slot __diagused, offset;
 
 	KASSERT(cn->cn_namelen <= EFS_DIRENT_NAMELEN_MAX);
 

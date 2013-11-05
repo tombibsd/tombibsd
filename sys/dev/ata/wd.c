@@ -405,8 +405,14 @@ wd_suspend(device_t dv, const pmf_qual_t *qual)
 {
 	struct wd_softc *sc = device_private(dv);
 
+	/* the adapter needs to be enabled */
+	if (sc->atabus->ata_addref(sc->drvp))
+		return true; /* no need to complain */
+
 	wd_flushcache(sc, AT_WAIT);
 	wd_standby(sc, AT_WAIT);
+
+	sc->atabus->ata_delref(sc->drvp);
 	return true;
 }
 

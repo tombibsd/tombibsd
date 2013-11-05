@@ -8,7 +8,8 @@ LIB=	lldReaderWriterELF
 
 CPPFLAGS+=	-I${LLD_SRCDIR}/lib/ReaderWriter/ELF
 
-SRCS+=	ELFLinkingContext.cpp \
+SRCS+=	ArrayOrderPass.cpp \
+	ELFLinkingContext.cpp \
 	Reader.cpp \
 	Writer.cpp
 

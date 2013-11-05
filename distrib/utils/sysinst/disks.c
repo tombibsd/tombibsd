@@ -259,7 +259,8 @@ get_descr_ata(struct disk_desc *dd, int fd)
 	 * Mitsumi ATAPI devices
 	 */
 
-	if (!((inqbuf->atap_config & WDC_CFG_ATAPI_MASK) == WDC_CFG_ATAPI &&
+	if (!(inqbuf->atap_config != WDC_CFG_CFA_MAGIC &&
+	      (inqbuf->atap_config & WDC_CFG_ATAPI) &&
 	      ((inqbuf->atap_model[0] == 'N' &&
 		  inqbuf->atap_model[1] == 'E') ||
 	       (inqbuf->atap_model[0] == 'F' &&
@@ -494,13 +495,11 @@ fmt_fspart(menudesc *m, int ptn, void *arg)
 {
 	unsigned int poffset, psize, pend;
 	const char *desc;
-	static const char *Yes, *No;
+	static const char *Yes;
 	partinfo *p = bsdlabel + ptn;
 
-	if (Yes == NULL) {
+	if (Yes == NULL)
 		Yes = msg_string(MSG_Yes);
-		No = msg_string(MSG_No);
-	}
 
 	poffset = p->pi_offset / sizemult;
 	psize = p->pi_size / sizemult;

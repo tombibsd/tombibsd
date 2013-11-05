@@ -1000,7 +1000,7 @@ scintr:
 					return 1;
 				default:
 					panic("invalid retval from "
-					    "siop_wdtr_neg()");
+					    "siop_ppr_neg()");
 				}
 				return 1;
 			}
@@ -1042,7 +1042,7 @@ scintr:
 					return 1;
 				default:
 					panic("invalid retval from "
-					    "siop_wdtr_neg()");
+					    "siop_sdtr_neg()");
 				}
 				return 1;
 			}
@@ -1101,7 +1101,7 @@ scintr:
 		return 1;
 	}
 	/* We just should't get there */
-	panic("siop_intr: I shouldn't be there !");
+	panic("esiop_intr: I shouldn't be there !");
 
 end:
 	/*

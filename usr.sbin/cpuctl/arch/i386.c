@@ -1986,7 +1986,7 @@ cache_info_lookup(const struct x86_cache_info *cai, uint8_t desc)
 static void
 x86_print_cacheinfo(struct cpu_info *ci)
 {
-	const char *sep;
+	const char *sep = NULL;
 
 	if (ci->ci_cinfo[CAI_ICACHE].cai_totalsize != 0 ||
 	    ci->ci_cinfo[CAI_DCACHE].cai_totalsize != 0) {

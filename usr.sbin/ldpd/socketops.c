@@ -336,6 +336,7 @@ bind_socket(int s, int stype)
 
 	assert (stype == AF_INET || stype == AF_INET6);
 
+	memset(&su, 0, sizeof su);
 	if (stype == AF_INET) {
 		su.sin.sin_len = sizeof(su.sin);
 		su.sin.sin_family = AF_INET;

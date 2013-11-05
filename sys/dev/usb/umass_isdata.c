@@ -546,8 +546,8 @@ uisdata_get_params(struct ata_drive_datas *drvp, u_int8_t flags,
 		 * Shuffle string byte order.
 		 * ATAPI Mitsumi and NEC drives don't need this.
 		 */
-		if ((prms->atap_config & WDC_CFG_ATAPI_MASK) ==
-		    WDC_CFG_ATAPI &&
+		if (prms->atap_config != WDC_CFG_CFA_MAGIC &&
+		    (prms->atap_config & WDC_CFG_ATAPI) &&
 		    ((prms->atap_model[0] == 'N' &&
 			prms->atap_model[1] == 'E') ||
 		     (prms->atap_model[0] == 'F' &&

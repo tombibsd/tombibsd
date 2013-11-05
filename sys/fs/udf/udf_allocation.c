@@ -1157,7 +1157,7 @@ udf_allocate_space(struct udf_mount *ump, struct udf_node *udf_node,
 	struct logvol_int_desc *lvid;
 	uint64_t *lmappos;
 	uint32_t ptov, lb_num, *freepos, free_lbs;
-	int lb_size, alloc_num_lb;
+	int lb_size __diagused, alloc_num_lb;
 	int alloc_type, error;
 	int is_node;
 
@@ -1307,7 +1307,7 @@ udf_free_allocated_space(struct udf_mount *ump, uint32_t lb_num,
 	uint32_t lb_map, udf_rw32_lbmap;
 	uint32_t *freepos, free_lbs;
 	int phys_part;
-	int error;
+	int error __diagused;
 
 	DPRINTF(ALLOC, ("udf_free_allocated_space: freeing virt lbnum %d "
 			  "part %d + %d sect\n", lb_num, vpart_num, num_lb));
@@ -1473,7 +1473,7 @@ udf_trunc_metadatapart(struct udf_mount *ump, uint32_t num_lb)
 	uint32_t *freepos, *sizepos;
 	uint32_t unit, lb_size;
 	uint16_t meta_vpart_num, data_vpart_num, num_vpart;
-	int err;
+	int err __diagused;
 
 	unit = ump->metadata_alloc_unit_size;
 	lb_size = udf_rw32(ump->logical_vol->lb_size);
