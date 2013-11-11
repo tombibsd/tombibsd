@@ -119,7 +119,9 @@ static int
 ipsec_reinject_ipstack(struct mbuf *m, int af)
 {
 #ifdef INET
-	struct ip * ip;
+#ifdef __FreeBSD__
+	struct ip *ip;
+#endif /* __FreeBSD_ */
 #endif /* INET */
 #if defined(INET) || defined(INET6)
 	int rv;
@@ -128,8 +130,8 @@ ipsec_reinject_ipstack(struct mbuf *m, int af)
 	switch (af) {
 #ifdef INET
 	case AF_INET:
-		ip = mtod(m, struct ip *);
 #ifdef __FreeBSD__
+		ip = mtod(m, struct ip *);
 		/* FreeBSD ip_output() expects ip_len, ip_off in host endian */
 		ip->ip_len = ntohs(ip->ip_len);
 		ip->ip_off = ntohs(ip->ip_off);

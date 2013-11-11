@@ -147,6 +147,8 @@
 ./usr/lib/oabi/libgnumalloc.so.1.0		base-compat-shlib	compat,pic
 ./usr/lib/oabi/libgomp.so.1			base-compat-shlib	compat,pic,gcc=45
 ./usr/lib/oabi/libgomp.so.1.0			base-compat-shlib	compat,pic,gcc=45
+./usr/lib/oabi/libgomp.so.1			base-compat-shlib	compat,pic,gcc=48
+./usr/lib/oabi/libgomp.so.1.1			base-compat-shlib	compat,pic,gcc=48
 ./usr/lib/oabi/libgssapi.so.10			base-compat-shlib	compat,pic,kerberos
 ./usr/lib/oabi/libgssapi.so.10.0		base-compat-shlib	compat,pic,kerberos
 ./usr/lib/oabi/libhdb.so.14			base-compat-shlib	compat,pic,kerberos
@@ -219,8 +221,12 @@
 ./usr/lib/oabi/libnetpgpverify.so.4.0		base-compat-shlib	compat,pic,crypto
 ./usr/lib/oabi/libnpf.so.0			base-compat-shlib	compat,pic,npf
 ./usr/lib/oabi/libnpf.so.0.0			base-compat-shlib	compat,pic,npf
-./usr/lib/oabi/libobjc.so.3			base-compat-shlib	compat,pic,gcccmds
-./usr/lib/oabi/libobjc.so.3.0			base-compat-shlib	compat,pic,gcccmds
+./usr/lib/oabi/libobjc.so.3			base-compat-shlib	compat,pic,gcccmds,gcc=4
+./usr/lib/oabi/libobjc.so.3			base-compat-shlib	compat,pic,gcccmds,gcc=45
+./usr/lib/oabi/libobjc.so.4			base-compat-shlib	compat,pic,gcccmds,gcc=48
+./usr/lib/oabi/libobjc.so.3.0			base-compat-shlib	compat,pic,gcccmds,gcc=4
+./usr/lib/oabi/libobjc.so.3.0			base-compat-shlib	compat,pic,gcccmds,gcc=45
+./usr/lib/oabi/libobjc.so.4.0			base-compat-shlib	compat,pic,gcccmds,gcc=48
 ./usr/lib/oabi/libopcodes.so.6			base-compat-shlib	compat,pic,binutils
 ./usr/lib/oabi/libopcodes.so.6.0		base-compat-shlib	compat,pic,binutils
 ./usr/lib/oabi/libossaudio.so.1			base-compat-shlib	compat,pic
@@ -300,6 +306,7 @@
 ./usr/lib/oabi/libstdc++.so.7			base-compat-shlib	compat,pic,cxx,gcccmds,libstdcxx
 ./usr/lib/oabi/libstdc++.so.7.0			base-compat-shlib	gcc=4,compat,pic,cxx,libstdcxx
 ./usr/lib/oabi/libstdc++.so.7.1			base-compat-shlib	gcc=45,compat,pic,cxx,libstdcxx
+./usr/lib/oabi/libstdc++.so.7.2			base-compat-shlib	gcc=48,compat,pic,cxx,libstdcxx
 ./usr/lib/oabi/libsupc++.so.0			base-compat-shlib	obsolete
 ./usr/lib/oabi/libsupc++.so.0.0			base-compat-shlib	obsolete
 ./usr/lib/oabi/libtermcap.so.0			base-compat-shlib	compat,pic

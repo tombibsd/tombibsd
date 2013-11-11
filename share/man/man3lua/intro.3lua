@@ -27,15 +27,29 @@
 .\" SUCH DAMAGE.
 .\"
 .\"
-.Dd October 25, 2013
+.Dd November 4, 2013
 .Dt INTRO 3lua
 .Os
 .Sh NAME
 .Nm intro
-.Nd introduction to the Lua libraries
+.Nd introduction to the Lua modules
 .Sh DESCRIPTION
-This section provides an overview of the Lua libraries, their
+This section provides an overview of the Lua modules, their
 functions, error returns and other common definitions and concepts.
+.Pp
+The Lua modules provided by NetBSD are:
+.Pp
+.Bl -tag -width XXXX -compact
+.It Em gpio
+Access
+.Xr gpio 4
+pins.
+.Pp
+.It Em sqlite
+Access
+.Xr sqlite3 1
+files.
+.El
 .Sh SEE ALSO
 .Xr lua 1 ,
 .Xr luac 1 ,
@@ -43,5 +57,5 @@ functions, error returns and other common definitions and concepts.
 .Sh HISTORY
 An
 .Nm
-manual for Lua libraries appeared in
+manual for Lua modules appeared in
 .Nx 7.0 .

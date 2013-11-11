@@ -109,7 +109,10 @@ int
 main(int argc, char *argv[])
 {
 	struct bt_bad *bt;
-	daddr_t	sn, bn[NBT_BAD];
+	daddr_t	sn;
+#ifdef __vax__
+	daddr_t bn[NBT_BAD];
+#endif
 	int i, f, nbad, new, bad, errs, ch;
 
 	while ((ch = getopt(argc, argv, OPTSTRING)) != -1) {
@@ -250,7 +253,9 @@ main(int argc, char *argv[])
 			errs++;
 			continue;
 		}
+#ifdef __vax__
 		bn[i] = sn;
+#endif
 		curbad.bt_bad[i].bt_cyl = sn / (dp->d_nsectors*dp->d_ntracks);
 		sn %= (dp->d_nsectors*dp->d_ntracks);
 		curbad.bt_bad[i].bt_trksec =

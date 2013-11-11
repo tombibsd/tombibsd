@@ -25,7 +25,6 @@ options 	EVBARM_BOARDTYPE="goldengate"
 makeoptions	LOADADDRESS_VIRT="0x80008000"
 makeoptions	LOADADDRESS="0x8000"
 makeoptions	BOARDMKFRAG="${THISARM}/conf/mk.goldengate"
-makeoptions	CPPFLAGS+="-I$S/../../../include"
 
 options 	ARM_INTR_IMPL="<arch/arm/cortina/g2_intr.h>"
 options		ARM_GENERIC_TODR

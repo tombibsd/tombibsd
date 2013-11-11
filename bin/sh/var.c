@@ -754,10 +754,10 @@ unsetvar(const char *s, int unexport)
 
 	vp = find_var(s, &vpp, NULL);
 	if (vp == NULL)
-		return 1;
+		return 0;
 
 	if (vp->flags & VREADONLY)
-		return (1);
+		return 1;
 
 	INTOFF;
 	if (unexport) {

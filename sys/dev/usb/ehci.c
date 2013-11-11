@@ -3404,8 +3404,8 @@ ehci_device_request(usbd_xfer_handle xfer)
 			goto bad3;
 		end->qtd.qtd_status &= htole32(~EHCI_QTD_IOC);
 		end->nextqtd = stat;
-		end->qtd.qtd_next =
-		end->qtd.qtd_altnext = htole32(stat->physaddr);
+		end->qtd.qtd_next = end->qtd.qtd_altnext =
+		    htole32(stat->physaddr);
 		usb_syncmem(&end->dma, end->offs, sizeof(end->qtd),
 		   BUS_DMASYNC_PREWRITE | BUS_DMASYNC_PREREAD);
 	} else {

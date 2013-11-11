@@ -1,5 +1,6 @@
 # $NetBSD$
 ./usr/include/gcc-4.5/tgmath.h			comp-c-include		gcccmds,gcc=45
+./usr/include/gcc-4.8/tgmath.h			comp-c-include		gcccmds,gcc=48
 ./usr/include/ieeefp.h				comp-c-include
 ./usr/include/sparc				comp-c-include
 ./usr/include/sparc/_G_config.h			comp-obsolete		obsolete
@@ -400,6 +401,10 @@
 ./usr/lib/sparc/libgomp.so			base-sys-shlib		compat,pic,gcc=45
 ./usr/lib/sparc/libgomp_p.a			comp-c-proflib		compat,profile,gcc=45
 ./usr/lib/sparc/libgomp_pic.a			comp-c-piclib		compat,pic,gcc=45
+./usr/lib/sparc/libgomp.a			comp-c-lib		compat,gcc=48
+./usr/lib/sparc/libgomp.so			base-sys-shlib		compat,pic,gcc=48
+./usr/lib/sparc/libgomp_p.a			comp-c-proflib		compat,profile,gcc=48
+./usr/lib/sparc/libgomp_pic.a			comp-c-piclib		compat,pic,gcc=48
 ./usr/lib/sparc/libgssapi.a			comp-c-lib		compat,kerberos
 ./usr/lib/sparc/libgssapi.so			base-sys-shlib		compat,pic,kerberos
 ./usr/lib/sparc/libgssapi_p.a			comp-c-proflib		compat,profile,kerberos
@@ -494,7 +499,6 @@
 ./usr/lib/sparc/liblua_p.a			comp-c-proflib		compat,profile
 ./usr/lib/sparc/liblua_pic.a			comp-c-piclib		compat,pic
 ./usr/lib/sparc/liblutok.a			comp-c-lib		compat,kyua
-./usr/lib/sparc/liblutok_g.a			-unknown-		compat,debuglib,kyua
 ./usr/lib/sparc/liblutok_p.a			comp-c-proflib		compat,profile,kyua
 ./usr/lib/sparc/liblutok_pic.a			comp-c-piclib		compat,pic,kyua
 ./usr/lib/sparc/liblwres.a			comp-c-lib		compat

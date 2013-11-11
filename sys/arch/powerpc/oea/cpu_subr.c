@@ -747,7 +747,6 @@ cpu_identify(char *str, size_t len)
 	u_int pvr, major, minor;
 	uint16_t vers, rev, revfmt;
 	const struct cputab *cp;
-	const char *name;
 	size_t n;
 
 	pvr = mfpvr();
@@ -780,9 +779,7 @@ cpu_identify(char *str, size_t len)
 	}
 
 	revfmt = cp->revfmt;
-	name = cp->name;
 	if (rev == MPC750 && pvr == 15) {
-		name = "755";
 		revfmt = REVFMT_HEX;
 	}
 

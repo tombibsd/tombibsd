@@ -1980,7 +1980,7 @@ according to the IEC/IEEE Standard for Binary Floating-Point Arithmetic.
 */
 float32 float32_rem( float32 a, float32 b )
 {
-    flag aSign, bSign, zSign;
+    flag aSign, bSign __unused, zSign;
     int16 aExp, bExp, expDiff;
     bits32 aSig, bSig;
     bits32 q;
@@ -2950,7 +2950,7 @@ according to the IEC/IEEE Standard for Binary Floating-Point Arithmetic.
 */
 float64 float64_rem( float64 a, float64 b )
 {
-    flag aSign, bSign, zSign;
+    flag aSign, bSign __unused, zSign;
     int16 aExp, bExp, expDiff;
     bits64 aSig, bSig;
     bits64 q, alternateASig;

@@ -30,7 +30,6 @@ makeoptions	KERNEL_BASE_PHYS="0x60100000"
 makeoptions	KERNEL_BASE_VIRT="0x80100000"
 makeoptions	LOADADDRESS="0x00100000"
 makeoptions	BOARDMKFRAG="${THISARM}/conf/mk.bcm53xx"
-makeoptions	CPPFLAGS+="-I$S/../../../include"
 
 options 	ARM_INTR_IMPL="<arch/arm/broadcom/bcm53xx_intr.h>"
 options		ARM_GENERIC_TODR

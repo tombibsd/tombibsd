@@ -818,8 +818,6 @@ ah_input_cb(struct cryptop *crp)
 	int rplen, error, skip, protoff;
 	unsigned char calc[AH_ALEN_MAX];
 	struct mbuf *m;
-	struct cryptodesc *crd;
-	const struct auth_hash *ahx;
 	struct tdb_crypto *tc;
 	struct m_tag *mtag;
 	struct secasvar *sav;
@@ -829,8 +827,6 @@ ah_input_cb(struct cryptop *crp)
 	int s, authsize;
 	u_int16_t dport;
 	u_int16_t sport;
-
-	crd = crp->crp_desc;
 
 	tc = (struct tdb_crypto *) crp->crp_opaque;
 	IPSEC_ASSERT(tc != NULL, ("ah_input_cb: null opaque crypto data area!"));
@@ -860,8 +856,6 @@ ah_input_cb(struct cryptop *crp)
 		saidx->dst.sa.sa_family == AF_INET6,
 		("ah_input_cb: unexpected protocol family %u",
 		 saidx->dst.sa.sa_family));
-
-	ahx = sav->tdb_authalgxform;
 
 	/* Check for crypto errors. */
 	if (crp->crp_etype) {
@@ -1235,7 +1229,7 @@ bad:
 static int
 ah_output_cb(struct cryptop *crp)
 {
-	int skip, protoff, error;
+	int skip, error;
 	struct tdb_crypto *tc;
 	struct ipsecrequest *isr;
 	struct secasvar *sav;
@@ -1246,7 +1240,6 @@ ah_output_cb(struct cryptop *crp)
 	tc = (struct tdb_crypto *) crp->crp_opaque;
 	IPSEC_ASSERT(tc != NULL, ("ah_output_cb: null opaque data area!"));
 	skip = tc->tc_skip;
-	protoff = tc->tc_protoff;
 	ptr = (tc + 1);
 	m = (struct mbuf *) crp->crp_buf;
 

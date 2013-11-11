@@ -35,6 +35,9 @@
 #		@${PRINT_PARAMS}
 #
 
+.include <bsd.own.mk>	# for some variables
+.include <bsd.sys.mk>	# for more variables
+
 RELEASEVARS=	BSDOBJDIR BSDSRCDIR BUILDID \
 		DESTDIR DISTRIBVER EXTERNAL_TOOLCHAIN HAVE_GCC HAVE_GDB \
 		HAVE_LLVM HAVE_PCC INSTALLWORLDDIR \
@@ -61,6 +64,17 @@ RELEASEVARS=	BSDOBJDIR BSDSRCDIR BUILDID \
 		USETOOLS USR_OBJMACHINE \
 		X11SRCDIR X11FLAVOUR
 
+
+#
+# Duplicate the DISTRIBVER setting from src/etc/Makefile.
+#
+.ifndef DISTRIBVER
+DISTRIBVER!=	${HOST_SH} ${NETBSDSRCDIR}/sys/conf/osrelease.sh
+.endif
+
+#
+# _params does the printing.
+#
 _params_redirect?= # empty
 
 _params: .PHONY
@@ -69,7 +83,7 @@ _params: .PHONY
 	@printf "%20s = '%-s'\n" ${var} ${${var}:C/'/'\\\\''/gW:Q} \
 	    ${_params_redirect}
 .else
-	@printf >&3 "%20s = (undefined)\n" ${var} \
+	@printf "%20s = (undefined)\n" ${var} \
 	    ${_params_redirect}
 .endif
 .endfor

@@ -46,8 +46,7 @@ __weak_alias(fpsetmask,_fpsetmask)
 #endif
 
 fp_except
-fpsetmask(mask)
-	fp_except mask;
+fpsetmask(fp_except mask)
 {
 	struct alpha_fp_except_args a;
 

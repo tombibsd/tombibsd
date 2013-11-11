@@ -1,18 +1,18 @@
 # $NetBSD$
-./usr/lib/libarm_g.a				-unknown-		debuglib
-./usr/lib/libc_vfp_g.a				-unknown-		debuglib,softfloat
-./usr/lib/libpmc_g.a				-unknown-		debuglib
-./usr/lib/oabi/libdevmapper_g.a			-unknown-		compat,debuglib,lvm
-./usr/lib/oabi/libdm_g.a			-unknown-		compat,debuglib
-./usr/lib/oabi/libgmp_g.a			-unknown-		obsolete
-./usr/lib/oabi/libheimbase_g.a			comp-c-proflib		compat,debuglib,kerberos
-./usr/lib/oabi/libkdc_g.a			comp-c-proflib		compat,debuglib,kerberos
-./usr/lib/oabi/liblzf_g.a			-unknown-		compat,debuglib
-./usr/lib/oabi/libmpc_g.a			-unknown-		obsolete
-./usr/lib/oabi/libmpfr_g.a			-unknown-		obsolete
-./usr/lib/oabi/libperfuse_g.a			comp-c-proflib		compat,debuglib
-./usr/lib/oabi/libppath_g.a			comp-c-proflib		compat,debuglib
-./usr/lib/oabi/libwind_g.a			comp-c-proflib		compat,debuglib,kerberos
+./usr/lib/libarm_g.a				comp-c-debuglib		debuglib
+./usr/lib/libc_vfp_g.a				comp-c-debuglib		debuglib,softfloat
+./usr/lib/libpmc_g.a				comp-c-debuglib		debuglib
+./usr/lib/oabi/libdevmapper_g.a			comp-c-debuglib		compat,debuglib,lvm
+./usr/lib/oabi/libdm_g.a			comp-c-debuglib		compat,debuglib
+./usr/lib/oabi/libgmp_g.a			comp-c-debuglib		obsolete
+./usr/lib/oabi/libheimbase_g.a			comp-c-debuglib		compat,debuglib,kerberos
+./usr/lib/oabi/libkdc_g.a			comp-c-debuglib		compat,debuglib,kerberos
+./usr/lib/oabi/liblzf_g.a			comp-c-debuglib		compat,debuglib
+./usr/lib/oabi/libmpc_g.a			comp-c-debuglib		obsolete
+./usr/lib/oabi/libmpfr_g.a			comp-c-debuglib		obsolete
+./usr/lib/oabi/libperfuse_g.a			comp-c-debuglib		compat,debuglib
+./usr/lib/oabi/libppath_g.a			comp-c-debuglib		compat,debuglib
+./usr/lib/oabi/libwind_g.a			comp-c-debuglib		compat,debuglib,kerberos
 ./usr/libdata/debug/lib/libc_vfp.so.0.0.debug	comp-sys-debug		debug,pic,softfloat
 ./usr/libdata/debug/lib/oabi			-unknown-		debug,compat
 ./usr/libdata/debug/lib/oabi/npf		-unknown-		debug,compat
@@ -94,6 +94,7 @@
 ./usr/libdata/debug/usr/lib/oabi/libgmp.so.10.2.debug	comp-sys-debug	obsolete
 ./usr/libdata/debug/usr/lib/oabi/libgnumalloc.so.1.0.debug	comp-sys-debug	debug,compat
 ./usr/libdata/debug/usr/lib/oabi/libgomp.so.1.0.debug	comp-sys-debug	debug,compat,gcc=45
+./usr/libdata/debug/usr/lib/oabi/libgomp.so.1.1.debug	comp-sys-debug	debug,compat,gcc=48
 ./usr/libdata/debug/usr/lib/oabi/libgssapi.so.10.0.debug	comp-compat-shlib	 compat,pic,kerberos,debug
 ./usr/libdata/debug/usr/lib/oabi/libgssapi.so.9.0.debug	comp-compat-shlib	 compat,pic,kerberos,debug,obsolete
 ./usr/libdata/debug/usr/lib/oabi/libhdb.so.13.0.debug		comp-compat-shlib	 compat,pic,kerberos,debug,obsolete
@@ -145,6 +146,7 @@
 ./usr/libdata/debug/usr/lib/oabi/libobjc.so.2.0.debug	comp-sys-debug	gcc=3,debug,compat
 ./usr/libdata/debug/usr/lib/oabi/libobjc.so.3.0.debug	comp-sys-debug	gcc=4,debug,compat
 ./usr/libdata/debug/usr/lib/oabi/libobjc.so.3.0.debug	comp-sys-debug	gcc=45,debug,compat
+./usr/libdata/debug/usr/lib/oabi/libobjc.so.4.0.debug	comp-sys-debug	gcc=48,debug,compat
 ./usr/libdata/debug/usr/lib/oabi/libopcodes.so.6.0.debug	comp-c-debug	binutils,debug,compat
 ./usr/libdata/debug/usr/lib/oabi/libossaudio.so.1.0.debug	comp-sys-debug	debug,compat
 ./usr/libdata/debug/usr/lib/oabi/libp2k.so.2.0.debug		comp-puffs-debug	debug,compat,rump
@@ -185,6 +187,7 @@
 ./usr/libdata/debug/usr/lib/oabi/libstdc++.so.5.0.debug	comp-sys-debug	gcc=3,cxx,debug,compat,libstdcxx
 ./usr/libdata/debug/usr/lib/oabi/libstdc++.so.7.0.debug	comp-sys-debug	gcc=4,cxx,debug,compat,libstdcxx
 ./usr/libdata/debug/usr/lib/oabi/libstdc++.so.7.1.debug	comp-sys-debug	gcc=45,cxx,debug,compat,libstdcxx
+./usr/libdata/debug/usr/lib/oabi/libstdc++.so.7.2.debug	comp-sys-debug	gcc=48,cxx,debug,compat,libstdcxx
 ./usr/libdata/debug/usr/lib/oabi/libterminfo.so.1.0.debug	comp-sys-debug	debug,compat
 ./usr/libdata/debug/usr/lib/oabi/libtre.so.0.8.debug	comp-sys-debug	debug,compat
 ./usr/libdata/debug/usr/lib/oabi/libukfs.so.1.0.debug	comp-sys-debug	debug,compat,rump

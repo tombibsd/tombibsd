@@ -42,7 +42,8 @@ SRCS+=		strcspn.c \
 		strpbrk.c \
 		strspn.c
 
-CPPFLAGS+=	-include ${.CURDIR}/luaconf.h \
-		-I${S}/../external/mit/lua/dist/src
+CFLAGS+=	-include ${.CURDIR}/luaconf.h
+
+CPPFLAGS+=	-I${S}/../external/mit/lua/dist/src
 
 .include <bsd.kmodule.mk>

@@ -20,7 +20,6 @@ options 	CORTEX_PMC_CCNT_HZ=800000000
 makeoptions	LOADADDRESS="0x90100000"
 makeoptions	BOARDTYPE="netwalker"
 makeoptions	BOARDMKFRAG="${THISARM}/conf/mk.netwalker"
-makeoptions	CPPFLAGS+="-I$S/../../../include"
 
 options 	ARM_INTR_IMPL="<arch/arm/imx/imx51_intr.h>"
 options		ARM_GENERIC_TODR

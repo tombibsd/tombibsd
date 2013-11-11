@@ -399,7 +399,7 @@ nilfs_read_superblock(struct nilfs_device *nilfsdev)
 static void
 nilfs_unmount_base(struct nilfs_device *nilfsdev)
 {
-	int error;
+	int error __diagused;
 
 	if (!nilfsdev)
 		return;

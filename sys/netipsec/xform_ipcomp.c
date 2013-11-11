@@ -233,26 +233,21 @@ ipcomp_input(struct mbuf *m, const struct secasvar *sav, int skip, int protoff)
 static int
 ipcomp_input_cb(struct cryptop *crp)
 {
-	struct cryptodesc *crd;
 	struct tdb_crypto *tc;
 	int skip, protoff;
-	struct mtag *mtag;
 	struct mbuf *m;
 	struct secasvar *sav;
-	struct secasindex *saidx;
+	struct secasindex *saidx __diagused;
 	int s, hlen = IPCOMP_HLENGTH, error, clen;
 	u_int8_t nproto;
 	void *addr;
 	u_int16_t dport;
 	u_int16_t sport;
 
-	crd = crp->crp_desc;
-
 	tc = (struct tdb_crypto *) crp->crp_opaque;
 	IPSEC_ASSERT(tc != NULL, ("ipcomp_input_cb: null opaque crypto data area!"));
 	skip = tc->tc_skip;
 	protoff = tc->tc_protoff;
-	mtag = (struct mtag *) tc->tc_ptr;
 	m = (struct mbuf *) crp->crp_buf;
 
 	/* find the source port for NAT-T */

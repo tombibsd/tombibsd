@@ -11,7 +11,7 @@
 /error.h/1.19/Thu Mar 15 02:02:20 2012/-kk/
 /eval.c/1.107/Thu Oct 24 10:28:41 2013/-kk/
 /eval.h/1.15/Fri Feb 15 17:26:06 2008/-kk/
-/exec.c/1.44/Mon Dec 31 14:10:15 2012/-kk/
+/exec.c/1.45/Mon Nov 11 15:17:45 2013/-kk/
 /exec.h/1.23/Thu Mar 15 02:02:20 2012/-kk/
 /expand.c/1.90/Thu Oct 24 10:28:41 2013/-kk/
 /expand.h/1.19/Sat Dec 22 20:15:22 2012/-kk/
@@ -55,7 +55,7 @@
 /syntax.h/1.2/Sat Jan 17 17:38:12 2004/-kk/
 /trap.c/1.35/Sat Jun 18 21:18:46 2011/-kk/
 /trap.h/1.20/Thu Mar 15 02:02:20 2012/-kk/
-/var.c/1.42/Thu Dec 13 19:33:23 2012/-kk/
+/var.c/1.43/Mon Nov 11 15:17:45 2013/-kk/
 /var.h/1.25/Sat Jun 18 21:18:46 2011/-kk/
 D/USD.doc////
 D/bltin////

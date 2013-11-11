@@ -33,6 +33,7 @@ SRCS=		${LIBSUPCXXSRCS} ${LIBSTDCXXSRCS}
 CXXFLAGS+=	-fno-implicit-templates -fdiagnostics-show-location=once
 CPPFLAGS+=	-I${DIST}/libstdc++-v3/include
 CPPFLAGS+=	-I${.CURDIR}/arch/${GCC_MACHINE_ARCH}
+CPPFLAGS+=	-I${.CURDIR}/../libgomp/arch/${GCC_MACHINE_ARCH}
 
 CONF=		${DIST}/libstdc++-v3/config
 

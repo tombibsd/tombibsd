@@ -503,9 +503,8 @@ esp_input_cb(struct cryptop *crp)
 	u_int8_t lastthree[3], aalg[AH_ALEN_MAX];
 	int s, hlen, skip, protoff, error;
 	struct mbuf *m;
-	struct cryptodesc *crd;
+	struct cryptodesc *crd __diagused;
 	const struct auth_hash *esph;
-	const struct enc_xform *espx;
 	struct tdb_crypto *tc;
 	struct m_tag *mtag;
 	struct secasvar *sav;
@@ -547,7 +546,6 @@ esp_input_cb(struct cryptop *crp)
 		 saidx->dst.sa.sa_family));
 
 	esph = sav->tdb_authalgxform;
-	espx = sav->tdb_encalgxform;
 
 	/* Check for crypto errors */
 	if (crp->crp_etype) {
@@ -719,7 +717,7 @@ esp_output(
 {
 	const struct enc_xform *espx;
 	const struct auth_hash *esph;
-	int hlen, rlen, plen, padding, blks, alen, i, roff;
+	int hlen, rlen, padding, blks, alen, i, roff;
 	struct mbuf *mo = NULL;
 	struct tdb_crypto *tc;
 	const struct secasvar *sav;
@@ -753,7 +751,6 @@ esp_output(
 
 	/* XXX clamp padding length a la KAME??? */
 	padding = ((blks - ((rlen + 2) % blks)) % blks) + 2;
-	plen = rlen + padding;		/* Padded payload length. */
 
 	if (esph)
 		alen = esph->authsize;

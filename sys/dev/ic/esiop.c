@@ -1100,8 +1100,12 @@ scintr:
 		}
 		return 1;
 	}
-	/* We just should't get there */
-	panic("esiop_intr: I shouldn't be there !");
+	/*
+	 * We just should't get there, but on some KVM virtual hosts,
+	 * we do - see PR 48277.
+	 */
+	printf("esiop_intr: I shouldn't be there !\n");
+	return 1;
 
 end:
 	/*

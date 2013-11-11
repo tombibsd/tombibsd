@@ -1036,11 +1036,14 @@ tmpfs_readlink(void *v)
 	KASSERT(VOP_ISLOCKED(vp));
 	KASSERT(uio->uio_offset == 0);
 	KASSERT(vp->v_type == VLNK);
-	KASSERT(node->tn_size > 0);
 
-	/* Note: readlink(2) returns the path without NIL. */
-	error = uiomove(node->tn_spec.tn_lnk.tn_link,
-	    MIN(node->tn_size - 1, uio->uio_resid), uio);
+	/* Note: readlink(2) returns the path without NUL terminator. */
+	if (node->tn_size > 0) {
+		error = uiomove(node->tn_spec.tn_lnk.tn_link,
+		    MIN(node->tn_size - 1, uio->uio_resid), uio);
+	} else {
+		error = 0;
+	}
 	node->tn_status |= TMPFS_NODE_ACCESSED;
 
 	return error;

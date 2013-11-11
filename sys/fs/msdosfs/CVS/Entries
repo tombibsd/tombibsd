@@ -11,6 +11,6 @@
 /msdosfs_fat.c/1.28/Thu Oct 24 10:28:58 2013/-kk/
 /msdosfs_lookup.c/1.29/Thu Oct 24 10:28:58 2013/-kk/
 /msdosfs_vfsops.c/1.102/Thu Oct 24 10:28:58 2013/-kk/
-/msdosfs_vnops.c/1.86/Thu Oct 24 10:28:58 2013/-kk/
+/msdosfs_vnops.c/1.87/Mon Nov 11 15:21:41 2013/-kk/
 /msdosfsmount.h/1.19/Thu Oct 24 10:28:58 2013/-kk/
 D

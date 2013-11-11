@@ -910,7 +910,7 @@ pgt_page_free(struct pool *pp, void *v)
 {
 	vaddr_t va;
 	paddr_t pa;
-	bool rv;
+	bool rv __diagused;
 
 	va = (vaddr_t)v;
 	rv = pmap_extract(pmap_kernel(), va, &pa);
@@ -2635,7 +2635,7 @@ pv_changepte4m(struct vm_page *pg, int bis, int bic)
 		return;
 
 	for (; pv != NULL; pv = pv->pv_next) {
-		int tpte;
+		int tpte __diagused;
 		pm = pv->pv_pmap;
 		/* XXXSMP: should lock pm */
 		va = pv->pv_va;

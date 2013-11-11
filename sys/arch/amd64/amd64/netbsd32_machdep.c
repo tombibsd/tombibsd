@@ -956,7 +956,7 @@ startlwp32(void *arg)
 {
 	ucontext32_t *uc = arg;
 	lwp_t *l = curlwp;
-	int error;
+	int error __diagused;
 
 	error = cpu_setmcontext32(l, &uc->uc_mcontext, uc->uc_flags);
 	KASSERT(error == 0);

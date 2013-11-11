@@ -945,7 +945,7 @@ uatp_attach(device_t parent, device_t self, void *aux)
 
 	/* Initialize model-specific parameters.  */
 	sc->sc_parameters = uatp_descriptor->parameters;
-	KASSERT(sc->sc_parameters->input_size == input_size);
+	KASSERT((int)sc->sc_parameters->input_size == input_size);
 	KASSERT(sc->sc_parameters->x_sensors <= UATP_MAX_X_SENSORS);
 	KASSERT(sc->sc_parameters->x_ratio <= UATP_MAX_X_RATIO);
 	KASSERT(sc->sc_parameters->y_sensors <= UATP_MAX_Y_SENSORS);

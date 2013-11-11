@@ -60,8 +60,9 @@
  * implemented.
  */
 
-#include "vlan.h"
-#include "opt_usb.h"
+#ifdef _KERNEL_OPT
+#include "opt_inet.h"
+#endif
 
 #include <sys/param.h>
 #include <sys/bus.h>
@@ -86,10 +87,7 @@
 
 #ifdef INET
 #include <netinet/in.h>
-#include <netinet/in_systm.h>
-#include <netinet/in_var.h>
-#include <netinet/ip.h>
-#include <netinet/if_ether.h>
+#include <netinet/if_inarp.h>
 #endif
 
 #include <dev/mii/mii.h>

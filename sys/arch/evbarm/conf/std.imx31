@@ -17,7 +17,6 @@ options 	ARM11_CACHE_WRITE_THROUGH
 makeoptions	LOADADDRESS="0x80100000"
 makeoptions	BOARDTYPE="imx31"
 makeoptions	BOARDMKFRAG="${THISARM}/conf/mk.imx31"
-makeoptions	CPPFLAGS+="-I$S/../../../include"
 
 options 	ARM_INTR_IMPL="<arch/arm/imx/imx31_intr.h>"
 options		ARM_GENERIC_TODR

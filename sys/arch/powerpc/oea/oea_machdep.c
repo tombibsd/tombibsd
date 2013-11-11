@@ -656,11 +656,13 @@ void
 oea_batinit(paddr_t pa, ...)
 {
 	struct mem_region *allmem, *availmem, *mp;
-	unsigned int cpuvers;
 	register_t msr = mfmsr();
 	va_list ap;
+#ifdef PPC_OEA601
+	unsigned int cpuvers;
 
 	cpuvers = mfpvr() >> 16;
+#endif /* PPC_OEA601 */
 
 	/*
 	 * we need to call this before zapping BATs so OF calls work

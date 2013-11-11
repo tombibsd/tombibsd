@@ -19,7 +19,6 @@ options 	FPU_VFP
 makeoptions	LOADADDRESS="0x80300000"
 makeoptions	BOARDTYPE="n900"
 makeoptions	BOARDMKFRAG="${THISARM}/conf/mk.beagle"
-makeoptions	CPPFLAGS+="-I$S/../../../include"
 
 options 	ARM_INTR_IMPL="<arch/arm/omap/omap2_intr.h>"
 options		ARM_GENERIC_TODR

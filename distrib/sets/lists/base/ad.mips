@@ -147,6 +147,8 @@
 ./usr/lib/64/libgnumalloc.so.1.0		base-compat-shlib	compat,pic,arch64
 ./usr/lib/64/libgomp.so.1			base-compat-shlib	compat,pic,gcc=45,notyet,arch64
 ./usr/lib/64/libgomp.so.1.0			base-compat-shlib	compat,pic,gcc=45,notyet,arch64
+./usr/lib/64/libgomp.so.1			base-compat-shlib	compat,pic,gcc=48,notyet,arch64
+./usr/lib/64/libgomp.so.1.1			base-compat-shlib	compat,pic,gcc=48,notyet,arch64
 ./usr/lib/64/libgssapi.so.10			base-compat-shlib	compat,pic,kerberos,arch64
 ./usr/lib/64/libgssapi.so.10.0			base-compat-shlib	compat,pic,kerberos,arch64
 ./usr/lib/64/libhdb.so.14			base-compat-shlib	compat,pic,kerberos,arch64
@@ -219,8 +221,12 @@
 ./usr/lib/64/libnetpgpverify.so.4.0		base-compat-shlib	compat,pic,crypto,arch64
 ./usr/lib/64/libnpf.so.0			base-compat-shlib	compat,pic,npf,arch64
 ./usr/lib/64/libnpf.so.0.0			base-compat-shlib	compat,pic,npf,arch64
-./usr/lib/64/libobjc.so.3			base-compat-shlib	compat,pic,gcccmds,arch64
-./usr/lib/64/libobjc.so.3.0			base-compat-shlib	compat,pic,gcccmds,arch64
+./usr/lib/64/libobjc.so.3			base-compat-shlib	compat,pic,gcccmds,arch64,gcc=4
+./usr/lib/64/libobjc.so.3			base-compat-shlib	compat,pic,gcccmds,arch64,gcc=45
+./usr/lib/64/libobjc.so.4			base-compat-shlib	compat,pic,gcccmds,arch64,gcc=48
+./usr/lib/64/libobjc.so.3.0			base-compat-shlib	compat,pic,gcccmds,arch64,gcc=4
+./usr/lib/64/libobjc.so.3.0			base-compat-shlib	compat,pic,gcccmds,arch64,gcc=45
+./usr/lib/64/libobjc.so.4.0			base-compat-shlib	compat,pic,gcccmds,arch64,gcc=48
 ./usr/lib/64/libopcodes.so.6			base-compat-shlib	compat,pic,binutils,arch64
 ./usr/lib/64/libopcodes.so.6.0			base-compat-shlib	compat,pic,binutils,arch64
 ./usr/lib/64/libossaudio.so.1			base-compat-shlib	compat,pic,arch64
@@ -296,6 +302,7 @@
 ./usr/lib/64/libstdc++.so.7			base-compat-shlib	compat,pic,cxx,gcccmds,libstdcxx,arch64
 ./usr/lib/64/libstdc++.so.7.0			base-compat-shlib	gcc=4,compat,pic,cxx,libstdcxx,arch64
 ./usr/lib/64/libstdc++.so.7.1			base-compat-shlib	gcc=45,compat,pic,cxx,libstdcxx,arch64
+./usr/lib/64/libstdc++.so.7.2			base-compat-shlib	gcc=48,compat,pic,cxx,libstdcxx,arch64
 ./usr/lib/64/libsupc++.so.0			base-compat-shlib	obsolete,arch64
 ./usr/lib/64/libsupc++.so.0.0			base-compat-shlib	obsolete,arch64
 ./usr/lib/64/libtermcap.so.0			base-compat-shlib	compat,pic,arch64
@@ -473,6 +480,8 @@
 ./usr/lib/o32/libgnumalloc.so.1.0		base-compat-shlib	compat,pic,arch64
 ./usr/lib/o32/libgomp.so.1			base-compat-shlib	compat,pic,gcc=45,arch64
 ./usr/lib/o32/libgomp.so.1.0			base-compat-shlib	compat,pic,gcc=45,arch64
+./usr/lib/o32/libgomp.so.1			base-compat-shlib	compat,pic,gcc=48,arch64
+./usr/lib/o32/libgomp.so.1.0			base-compat-shlib	compat,pic,gcc=48,arch64
 ./usr/lib/o32/libgssapi.so.10			base-compat-shlib	compat,pic,kerberos,arch64
 ./usr/lib/o32/libgssapi.so.10.0			base-compat-shlib	compat,pic,kerberos,arch64
 ./usr/lib/o32/libhdb.so.14			base-compat-shlib	compat,pic,kerberos,arch64
@@ -543,8 +552,12 @@
 ./usr/lib/o32/libnetpgpverify.so.4.0		base-compat-shlib	compat,pic,crypto,arch64
 ./usr/lib/o32/libnpf.so.0			base-compat-shlib	compat,pic,npf,arch64
 ./usr/lib/o32/libnpf.so.0.0			base-compat-shlib	compat,pic,npf,arch64
-./usr/lib/o32/libobjc.so.3			base-compat-shlib	compat,pic,gcccmds,arch64
-./usr/lib/o32/libobjc.so.3.0			base-compat-shlib	compat,pic,gcccmds,arch64
+./usr/lib/o32/libobjc.so.3			base-compat-shlib	compat,pic,gcccmds,arch64,gcc=4
+./usr/lib/o32/libobjc.so.3			base-compat-shlib	compat,pic,gcccmds,arch64,gcc=45
+./usr/lib/o32/libobjc.so.4			base-compat-shlib	compat,pic,gcccmds,arch64,gcc=48
+./usr/lib/o32/libobjc.so.3.0			base-compat-shlib	compat,pic,gcccmds,arch64,gcc=4
+./usr/lib/o32/libobjc.so.3.0			base-compat-shlib	compat,pic,gcccmds,arch64,gcc=45
+./usr/lib/o32/libobjc.so.4.0			base-compat-shlib	compat,pic,gcccmds,arch64,gcc=48
 ./usr/lib/o32/libopcodes.so.6			base-compat-shlib	compat,pic,binutils,arch64
 ./usr/lib/o32/libopcodes.so.6.0			base-compat-shlib	compat,pic,binutils,arch64
 ./usr/lib/o32/libossaudio.so.1			base-compat-shlib	compat,pic,arch64
@@ -620,6 +633,7 @@
 ./usr/lib/o32/libstdc++.so.7			base-compat-shlib	compat,pic,cxx,gcccmds,libstdcxx,arch64
 ./usr/lib/o32/libstdc++.so.7.0			base-compat-shlib	gcc=4,compat,pic,cxx,libstdcxx,arch64
 ./usr/lib/o32/libstdc++.so.7.1			base-compat-shlib	gcc=45,compat,pic,cxx,libstdcxx,arch64
+./usr/lib/o32/libstdc++.so.7.2			base-compat-shlib	gcc=48,compat,pic,cxx,libstdcxx,arch64
 ./usr/lib/o32/libsupc++.so.0			base-compat-shlib	obsolete,arch64
 ./usr/lib/o32/libsupc++.so.0.0			base-compat-shlib	obsolete,arch64
 ./usr/lib/o32/libtermcap.so.0			base-compat-shlib	compat,pic,arch64

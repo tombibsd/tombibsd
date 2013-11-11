@@ -829,6 +829,7 @@ msdosfs_rename(void *v)
 	struct vnode *tdvp = ap->a_tdvp;
 	struct vnode *fvp = ap->a_fvp;
 	struct vnode *fdvp = ap->a_fdvp;
+	struct mount *mp = fdvp->v_mount;
 	struct componentname *tcnp = ap->a_tcnp;
 	struct componentname *fcnp = ap->a_fcnp;
 	struct denode *ip, *xp, *dp, *zp;
@@ -906,7 +907,7 @@ abortit:
 	}
 	VN_KNOTE(fdvp, NOTE_WRITE);		/* XXXLUKEM/XXX: right place? */
 
-	fstrans_start(fdvp->v_mount, FSTRANS_SHARED);
+	fstrans_start(mp, FSTRANS_SHARED);
 	/*
 	 * When the target exists, both the directory
 	 * and target vnodes are returned locked.
@@ -993,7 +994,7 @@ abortit:
 	 * file/directory.
 	 */
 	if ((error = uniqdosname(VTODE(tdvp), tcnp, toname)) != 0) {
-		fstrans_done(fdvp->v_mount);
+		fstrans_done(mp);
 		goto abortit;
 	}
 
@@ -1009,7 +1010,7 @@ abortit:
 		VOP_UNLOCK(fdvp);
 		vrele(ap->a_fvp);
 		vrele(tdvp);
-		fstrans_done(fdvp->v_mount);
+		fstrans_done(mp);
 		return (error);
 	}
 	if (fvp == NULL) {
@@ -1021,7 +1022,7 @@ abortit:
 		vput(fdvp);
 		vrele(ap->a_fvp);
 		vrele(tdvp);
-		fstrans_done(fdvp->v_mount);
+		fstrans_done(mp);
 		return 0;
 	}
 	VOP_UNLOCK(fdvp);
@@ -1129,7 +1130,7 @@ bad:
 	ip->de_flag &= ~DE_RENAME;
 	vrele(fdvp);
 	vrele(fvp);
-	fstrans_done(fdvp->v_mount);
+	fstrans_done(mp);
 	return (error);
 
 	/* XXX: uuuh */
@@ -1291,6 +1292,7 @@ msdosfs_rmdir(void *v)
 	} */ *ap = v;
 	struct vnode *vp = ap->a_vp;
 	struct vnode *dvp = ap->a_dvp;
+	struct mount *mp = dvp->v_mount;
 	struct componentname *cnp = ap->a_cnp;
 	struct denode *ip, *dp;
 	int error;
@@ -1305,7 +1307,7 @@ msdosfs_rmdir(void *v)
 		vput(vp);
 		return (EINVAL);
 	}
-	fstrans_start(ap->a_dvp->v_mount, FSTRANS_SHARED);
+	fstrans_start(mp, FSTRANS_SHARED);
 	/*
 	 * Verify the directory is empty (and valid).
 	 * (Rmdir ".." won't be valid since
@@ -1347,7 +1349,7 @@ out:
 	if (dvp)
 		vput(dvp);
 	vput(vp);
-	fstrans_done(ap->a_dvp->v_mount);
+	fstrans_done(mp);
 	return (error);
 }
 

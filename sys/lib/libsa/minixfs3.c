@@ -354,7 +354,7 @@ buf_read_file(struct open_file *f, void *v, size_t *size_p)
 	struct mfs_sblock *fs = fp->f_fs;
 	long off;
 	block_t file_block;
-	block_t disk_block;
+	block_t disk_block = 0;	/* XXX: gcc */
 	size_t block_size;
 	int rc;
 

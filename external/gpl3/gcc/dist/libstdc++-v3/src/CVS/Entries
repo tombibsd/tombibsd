@@ -1,7 +1,7 @@
 /Makefile.am/1.1.1.1/Tue Jun 21 01:24:05 2011/-kk/
 /Makefile.in/1.1.1.1/Tue Jun 21 01:24:05 2011/-kk/
 /allocator-inst.cc/1.1.1.1/Tue Jun 21 01:24:05 2011/-kk/
-/atomic.cc/1.1.1.1/Tue Jun 21 01:24:05 2011/-kk/
+/atomic.cc/1.2/Mon Nov 11 15:19:54 2013/-kk/
 /bitmap_allocator.cc/1.1.1.1/Tue Jun 21 01:24:05 2011/-kk/
 /chrono.cc/1.1.1.1/Tue Jun 21 01:24:05 2011/-kk/
 /codecvt.cc/1.1.1.1/Tue Jun 21 01:24:05 2011/-kk/

@@ -18,7 +18,6 @@ options 	KERNEL_BASE_EXT=0xc0000000
 
 options 	EVBARM_BOARDTYPE="rpi"
 makeoptions	BOARDMKFRAG="${THISARM}/conf/mk.rpi"
-makeoptions	CPPFLAGS+="-I$S/../../../include"
 makeoptions	LOADADDRESS="0xc0008000"
 
 options 	ARM_INTR_IMPL="<arch/arm/broadcom/bcm2835_intr.h>"

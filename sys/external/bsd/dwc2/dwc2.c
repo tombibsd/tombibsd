@@ -66,7 +66,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #endif
 #define	DWC2_EVCNT_INCR(a)	DWC2_EVCNT_ADD((a), 1)
 
-#define DWC2_DEBUG
 #ifdef DWC2_DEBUG
 #define	DPRINTFN(n,fmt,...) do {			\
 	if (dwc2debug >= (n)) {			\

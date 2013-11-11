@@ -61,7 +61,7 @@ MALLOC_DECLARE(M_USBHC);
 #define AUVITEK_I2C_DEBUG 1
 #define AXE_DEBUG 1
 #define CUE_DEBUG 1
-#define DWC_OTG_DEBUG 1
+#define DWC2_DEBUG 1
 #define EHCI_DEBUG 1
 #define EZLOAD_DEBUG 1
 #define KUE_DEBUG 1

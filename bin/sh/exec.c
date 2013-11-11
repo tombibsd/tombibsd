@@ -943,9 +943,8 @@ unsetfunc(char *name)
 	    cmdp->cmdtype == CMDFUNCTION) {
 		freefunc(cmdp->param.func);
 		delete_cmd_entry();
-		return (0);
 	}
-	return (1);
+	return 0;
 }
 
 /*

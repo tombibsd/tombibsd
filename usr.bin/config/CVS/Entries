@@ -7,7 +7,7 @@
 /gram.y/1.38/Thu Oct 24 10:28:59 2013/-kk/
 /hash.c/1.8/Mon Mar 12 02:58:55 2012/-kk/
 /lint.c/1.14/Tue Mar 20 20:34:57 2012/-kk/
-/main.c/1.49/Fri Aug 31 01:23:49 2012/-kk/
+/main.c/1.51/Mon Nov 11 15:21:44 2013/-kk/
 /mkdevsw.c/1.10/Fri Jul 30 16:23:49 2010/-kk/
 /mkheaders.c/1.21/Mon Mar 12 02:58:55 2012/-kk/
 /mkioconf.c/1.21/Sun Mar 11 21:16:08 2012/-kk/
@@ -17,5 +17,5 @@
 /scan.l/1.17/Tue Mar 20 20:34:57 2012/-kk/
 /sem.c/1.42/Thu Oct 24 10:28:59 2013/-kk/
 /sem.h/1.10/Sun Mar 11 21:16:08 2012/-kk/
-/util.c/1.14/Mon Mar 12 02:58:55 2012/-kk/
+/util.c/1.16/Mon Nov 11 15:21:44 2013/-kk/
 D

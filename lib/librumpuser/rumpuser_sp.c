@@ -1318,7 +1318,7 @@ rumpuser_sp_init(const char *url,
 	struct spservarg *sarg;
 	struct sockaddr *sap;
 	char *p;
-	unsigned idx;
+	unsigned idx = 0; /* XXXgcc */
 	int error, s;
 
 	p = strdup(url);

@@ -167,11 +167,16 @@ tmpfs_alloc_node(tmpfs_mount_t *tmp, enum vtype type, uid_t uid, gid_t gid,
 	case VLNK:
 		/* Symbolic link.  Target specifies the file name. */
 		KASSERT(target != NULL);
-
 		nnode->tn_size = strlen(target);
-		KASSERT(nnode->tn_size > 0);
+
+		if (nnode->tn_size == 0) {
+			/* Zero-length targets are supported. */
+			nnode->tn_spec.tn_lnk.tn_link = NULL;
+			break;
+		}
+
 		KASSERT(nnode->tn_size < MAXPATHLEN);
-		nnode->tn_size++; /* include the NIL */
+		nnode->tn_size++; /* include the NUL terminator */
 
 		nnode->tn_spec.tn_lnk.tn_link =
 		    tmpfs_strname_alloc(tmp, nnode->tn_size);

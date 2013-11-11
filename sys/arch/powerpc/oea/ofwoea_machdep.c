@@ -623,7 +623,6 @@ ofwoea_map_space(int rangetype, int iomem, int node,
 {
 	int i, cur, range, nrofholes, error;
 	static int exmap=0;
-	u_int32_t addr;
 	rangemap_t region, holes[32], list[32];
 
 	memset(list, 0, sizeof(list));
@@ -697,7 +696,6 @@ ofwoea_map_space(int rangetype, int iomem, int node,
 		DPRINTF("addr=0x%x size=0x%x type=%d\n", list[i].addr,
 		    list[i].size, list[i].type);
 
-	addr=0;
 	range = find_lowest_range(list, cur, iomem);
 	i = 0;
 	nrofholes = 0;

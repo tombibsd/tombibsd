@@ -278,7 +278,7 @@ int
 ipsec4_common_input_cb(struct mbuf *m, struct secasvar *sav,
     int skip, int protoff, struct m_tag *mt)
 {
-	int prot, af, sproto;
+	int prot, af __diagused, sproto;
 	struct ip *ip;
 	struct m_tag *mtag;
 	struct tdb_ident *tdbi;

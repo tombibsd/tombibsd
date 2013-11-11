@@ -927,15 +927,13 @@ dns_rbtnodechain_nextflat(dns_rbtnodechain_t *chain, dns_name_t *name);
 	do {                                                    \
 		REQUIRE((node)->references > 0);                \
 		(node)->references++;                           \
-		if ((refs) != NULL)                             \
-			(*refs) = (node)->references;           \
+		(*refs) = (node)->references;           	\
 	} while (/*CONSTCOND*/0)
 #define dns_rbtnode_refdecrement(node, refs)                    \
 	do {                                                    \
 		REQUIRE((node)->references > 0);                \
 		(node)->references--;                           \
-		if ((refs) != NULL)                             \
-			(*refs) = (node)->references;           \
+		(*refs) = (node)->references;           	\
 	} while (/*CONSTCOND*/0)
 #endif /* DNS_RBT_USEISCREFCOUNT */
 

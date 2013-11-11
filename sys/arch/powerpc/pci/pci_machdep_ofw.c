@@ -375,13 +375,12 @@ genofw_pci_intr_map(const struct pci_attach_args *pa, pci_intr_handle_t *ihp)
 	prop_dictionary_t dict, devsub;
 	prop_object_t pinsub;
 	prop_number_t pbus;
-	int busno, bus, pin, line, swiz, dev, origdev, func, i;
+	int busno, pin, line, dev, origdev, func, i;
 	char key[20];
 
 	pin = pa->pa_intrpin;
 	line = pa->pa_intrline;
-	bus = busno = pa->pa_bus;
-	swiz = pa->pa_intrswiz;
+	busno = pa->pa_bus;
 	origdev = dev = pa->pa_device;
 	func = pa->pa_function;
 	i = 0;

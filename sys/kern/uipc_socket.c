@@ -416,7 +416,7 @@ socket_listener_cb(kauth_cred_t cred, kauth_action_t action, void *cookie,
 		/* Normal users can only drop their own connections. */
 		struct socket *so = (struct socket *)arg1;
 
-		if (proc_uidmatch(cred, so->so_cred) == 0)
+		if (so->so_cred && proc_uidmatch(cred, so->so_cred) == 0)
 			result = KAUTH_RESULT_ALLOW;
 
 		break;

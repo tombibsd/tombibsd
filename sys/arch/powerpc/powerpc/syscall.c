@@ -91,7 +91,6 @@ EMULNAME(syscall)(struct trapframe *tf)
 	const struct sysent *callp;
 	size_t argsize;
 	register_t code;
-	register_t realcode;
 	register_t *params, rval[2];
 	register_t args[10];
 	int error;
@@ -105,7 +104,6 @@ EMULNAME(syscall)(struct trapframe *tf)
 	params = tf->tf_fixreg + FIRSTARG;
 	n = NARGREG;
 
-	realcode = code;
 	{
 		switch (code) {
 		case EMULNAMEU(SYS_syscall):
@@ -129,7 +127,6 @@ EMULNAME(syscall)(struct trapframe *tf)
 
 		code &= EMULNAMEU(SYS_NSYSENT) - 1;
 		callp = p->p_emul->e_sysent + code;
-		realcode = code;
 	}
 
 	argsize = callp->sy_argsize;

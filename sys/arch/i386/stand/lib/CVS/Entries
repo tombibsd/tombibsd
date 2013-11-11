@@ -3,7 +3,7 @@
 /bios_disk.S/1.21/Thu Jun 16 13:27:59 2011/-kk/
 /bios_pci.S/1.6/Sun Dec 11 12:17:48 2005/-kk/
 /biosdelay.S/1.4/Sun Dec 11 12:17:48 2005/-kk/
-/biosdisk.c/1.42/Tue Jul  3 15:24:37 2012/-kk/
+/biosdisk.c/1.43/Mon Nov 11 15:21:30 2013/-kk/
 /biosdisk.h/1.8/Fri Dec 24 20:36:51 2010/-kk/
 /biosdisk_ll.c/1.31/Mon Feb 21 02:58:02 2011/-kk/
 /biosdisk_ll.h/1.15/Tue Dec 25 18:33:34 2007/-kk/

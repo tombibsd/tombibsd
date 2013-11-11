@@ -209,7 +209,7 @@
 /elinkxl.c/1.115/Sun Jul 22 14:32:57 2012/-kk/
 /elinkxlreg.h/1.15/Mon Apr 28 20:23:49 2008/-kk/
 /elinkxlvar.h/1.24/Thu Feb  2 19:43:03 2012/-kk/
-/esiop.c/1.56/Tue Nov  5 03:38:17 2013/-kk/
+/esiop.c/1.57/Mon Nov 11 15:21:36 2013/-kk/
 /esiopvar.h/1.21/Fri Aug 24 09:01:22 2012/-kk/
 /fmv.c/1.10/Sat Apr 12 06:27:01 2008/-kk/
 /fmvreg.h/1.1/Sat Oct  5 15:16:11 2002/-kk/
@@ -492,7 +492,7 @@
 /siisata.c/1.27/Thu Oct 24 10:28:58 2013/-kk/
 /siisatareg.h/1.7/Wed Nov  2 16:03:01 2011/-kk/
 /siisatavar.h/1.6/Mon Jul 26 15:41:33 2010/-kk/
-/siop.c/1.99/Tue Nov  5 03:38:17 2013/-kk/
+/siop.c/1.100/Mon Nov 11 15:21:36 2013/-kk/
 /siop_common.c/1.54/Thu Oct 24 10:28:58 2013/-kk/
 /siopreg.h/1.22/Mon Oct 19 18:41:13 2009/-kk/
 /siopvar.h/1.29/Fri Aug 24 09:01:23 2012/-kk/

@@ -1366,8 +1366,8 @@ xhci_allocx(struct usbd_bus *bus)
 
 	xfer = pool_cache_get(sc->sc_xferpool, PR_NOWAIT);
 	if (xfer != NULL) {
-#ifdef DIAGNOSTIC
 		memset(xfer, 0, sizeof(struct xhci_xfer));
+#ifdef DIAGNOSTIC
 		xfer->busy_free = XFER_BUSY;
 #endif
 	}
