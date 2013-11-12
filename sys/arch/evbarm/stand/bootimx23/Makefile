@@ -13,7 +13,11 @@ CPPFLAGS+=	-D_STANDALONE -DMEMSIZE=64
 CPPFLAGS+=	-DKERNEL_BOOT_ARGS=\"root=ld0a\"
 CPPFLAGS+=	-nostdinc -I. -I${.CURDIR} -I${.OBJDIR} -I${S} -I${S}/arch
 CPPFLAGS+=	-mabi=apcs-gnu -mfloat-abi=soft
+.if ${HAVE_GCC} < 48
 CPPFLAGS+=	-mno-thumb -mno-thumb-interwork
+.else
+CPPFLAGS+=	-marm
+.endif
 #CPPFLAGS+=	-DDEBUG
 #CPPFLAGS+=	-DDIAGNOSTIC
 DBG=		-g

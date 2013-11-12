@@ -1137,6 +1137,7 @@ upgt_eeprom_parse_freq3(struct upgt_softc *sc, uint8_t *data, int len)
 
 	DPRINTF(2, "%s: flags=0x%02x\n", device_xname(sc->sc_dev), flags);
 	DPRINTF(2, "%s: elements=%d\n", device_xname(sc->sc_dev), elements);
+	__USE(flags);
 
 	for (i = 0; i < elements; i++) {
 		channel = ieee80211_mhz2ieee(le16toh(freq3[i].freq), 0);
@@ -1171,6 +1172,7 @@ upgt_eeprom_parse_freq4(struct upgt_softc *sc, uint8_t *data, int len)
 	DPRINTF(2, "%s: flags=0x%02x\n", device_xname(sc->sc_dev), flags);
 	DPRINTF(2, "%s: elements=%d\n", device_xname(sc->sc_dev), elements);
 	DPRINTF(2, "%s: settings=%d\n", device_xname(sc->sc_dev), settings);
+	__USE(flags);
 
 	for (i = 0; i < elements; i++) {
 		channel = ieee80211_mhz2ieee(le16toh(freq4_1[i].freq), 0);

@@ -1806,6 +1806,15 @@ const struct puc_device_description puc_devices[] = {
 	    },
 	},
 
+	/* Intel Core 4G (mobile) KT */
+	{   "Intel Core 4G (mobile) KT",
+	    {	PCI_VENDOR_INTEL, PCI_PRODUCT_INTEL_CORE4G_M_KT, 0, 0 },
+	    {	0xffff,	0xffff,	0,	0	},
+	    {
+		{ PUC_PORT_TYPE_COM, 0x10, 0x00, COM_FREQ },
+	    },
+	},
+
 	/* Intel EG20T UART */
 	{   "Intel EG20T UART #0",
 	    {	PCI_VENDOR_INTEL, PCI_PRODUCT_INTEL_EG20T_UART_0, 0, 0 },

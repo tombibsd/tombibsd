@@ -376,11 +376,9 @@ npxintr(void *arg, struct intrframe *frame)
 	struct cpu_info *ci = curcpu();
 	struct lwp *l = curlwp;
 	union savefpu *addr;
-	struct npx_softc *sc;
 	struct pcb *pcb;
 	ksiginfo_t ksi;
 
-	sc = npx_softc;
 
 	kpreempt_disable();
 #ifndef XEN
@@ -392,6 +390,7 @@ npxintr(void *arg, struct intrframe *frame)
 	IPRINTF(("%s: fp intr\n", device_xname(ci->ci_dev)));
 
 #ifndef XEN
+	struct npx_softc *sc = npx_softc;
 	/*
 	 * Clear the interrupt latch.
 	 */

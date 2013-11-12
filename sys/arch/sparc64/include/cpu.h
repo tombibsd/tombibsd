@@ -220,9 +220,8 @@ extern struct pool_cache *fpstate_cache;
 #define	cpu_number()	(curcpu()->ci_index)
 #define	CPU_IS_PRIMARY(ci)	((ci)->ci_flags & CPUF_PRIMARY)
 
-#define CPU_INFO_ITERATOR		int
-#define CPU_INFO_FOREACH(cii, ci)	(void)cii, ci = cpus; ci != NULL; \
-					ci = ci->ci_next
+#define CPU_INFO_ITERATOR		int __unused
+#define CPU_INFO_FOREACH(cii, ci)	ci = cpus; ci != NULL; ci = ci->ci_next
 
 #define curlwp		curcpu()->ci_curlwp
 #define fplwp		curcpu()->ci_fplwp

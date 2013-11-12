@@ -1,5 +1,5 @@
 /*	$NetBSD$	*/
-/* $OpenBSD: groupaccess.c,v 1.13 2008/07/04 03:44:59 djm Exp $ */
+/* $OpenBSD: groupaccess.c,v 1.14 2013/05/17 00:13:13 djm Exp $ */
 /*
  * Copyright (c) 2001 Kevin Steves.  All rights reserved.
  *
@@ -32,6 +32,7 @@ __RCSID("$NetBSD$");
 #include <grp.h>
 #include <unistd.h>
 #include <stdarg.h>
+#include <stdlib.h>
 #include <string.h>
 
 #include "xmalloc.h"
@@ -115,7 +116,7 @@ ga_free(void)
 
 	if (ngroups > 0) {
 		for (i = 0; i < ngroups; i++)
-			xfree(groups_byname[i]);
+			free(groups_byname[i]);
 		ngroups = 0;
 	}
 }

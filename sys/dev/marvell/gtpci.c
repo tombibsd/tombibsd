@@ -314,12 +314,9 @@ gtpci_barinit(struct gtpci_softc *sc)
 	};
 	device_t pdev = device_parent(sc->sc_dev);
 	uint64_t base;
-	uint32_t p2pc, size, bare;
-	int map, bus, dev, rv;
+	uint32_t size, bare;
+	int map, rv;
 
-	p2pc = GTPCI_READ(sc, GTPCI_P2PC);
-	bus = GTPCI_P2PC_BUSNUMBER(p2pc);
-	dev = GTPCI_P2PC_DEVNUM(p2pc);
 
 	bare = GTPCI_BARE_ALLDISABLE;
 	for (map = 0; maps[map].tag != MARVELL_TAG_UNDEFINED; map++) {
@@ -337,6 +334,9 @@ gtpci_barinit(struct gtpci_softc *sc)
 		if (maps[map].func != -1) {
 			pcitag_t tag;
 			pcireg_t reg;
+			int dev = GTPCI_P2PC_DEVNUM(p2pc);
+			int bus = GTPCI_P2PC_BUSNUMBER(p2pc);
+			uint32_t p2pc = GTPCI_READ(sc, GTPCI_P2PC);
 
 			tag = gtpci_make_tag(NULL, bus, dev, maps[map].func);
 			reg = gtpci_conf_read(sc, tag, maps[map].balow);

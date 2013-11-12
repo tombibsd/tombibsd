@@ -34,6 +34,10 @@ __RCSID("$NetBSD$");
 
 #include <string.h>
 
+#ifdef _FORTIFY_SOURCE
+#undef stpncpy
+#endif
+
 char *
 stpncpy(char * __restrict dst, const char * __restrict src, size_t n)
 {

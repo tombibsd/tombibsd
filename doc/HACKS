@@ -517,6 +517,55 @@ port	vax
 		Many filesystem on-disk formats have 32 bit times.
 	kcah
 
+	hack	gcc 4.5 fsdb miscompile
+	date	Sat Nov  9 11:03:02 EST 2013
+	who	christos
+	file	src/sbin/fsdb/Makefile : 1.36 (and earlier)
+	descr
+		src/sbin/fsdb/fsdb.c: In function 'findblk':
+		src/sbin/fsdb/fsdb.c:610:1: error: unrecognizable insn:
+		(insn 941 940 942 134 src/sbin/fsdb/fsdb.c:589 (set (reg:SI 604)
+		    (subreg:SI (mem/s/j:DI (plus:SI (mult:SI (reg:SI 602)
+                        (const_int 8 [0x8]))
+                    (reg/f:SI 601)) [0 curinode.99_378->dp2.di_ib S8 A32]) 4)) \
+			-1 (nil))
+		src/sbin/fsdb/fsdb.c:610:1: internal compiler error: in \
+		extract_insn, at recog.c:2103
+	kcah
+
+	hack	gcc 4.8 gcc miscompiles
+	date	Sat Nov  9 16:35:18 EST 2013
+	who	christos
+	file	distrib/utils/x_ping/Makefile
+	file	distrib/vax/miniroot/Makefile.inc
+	file	distrib/vax/ramdisk/Makefile
+	file	external/gpl3/gdb/lib/libdecnumber/Makefile
+	file	sbin/fsdb/Makefile
+	file	sbin/newfs_ext2fs/Makefile
+	file	sbin/ping/Makefile
+	file	usr.sbin/lmcconfig/Makefile
+	file	usr.sbin/mtrace/Makefile
+	descr
+		external/gpl3/gcc/dist/gcc/expmed.c:2781:1:
+		internal compiler error: in change_address_1, at emit-rtl.c:2019
+		external/gpl3/gcc/dist/gcc/recog.c:770:1:
+		internal compiler error: in change_address_1, at emit-rtl.c:2019
+		external/gpl3/gcc/dist/libdecnumber/decNumber.c:7214:3:
+		internal compiler error: in change_address_1, at emit-rtl.c:2019
+		sbin/ping/ping.c:679:1:
+		internal compiler error: in change_address_1, at emit-rtl.c:2019
+		sbin/newfs_ext2fs/mke2fs.c:681:1:
+		internal compiler error: in reload_combine_note_use,
+		at postreload.c:1561
+		external/gpl3/gdb/dist/libdecnumber/decNumber.c:7214:3:
+		internal compiler error: in change_address_1, at emit-rtl.c:2019
+		usr.sbin/lmcconfig/lmcconfig.c:939:3:
+		internal compiler error: in reload_combine_note_use,
+		at postreload.c:1561
+		usr.sbin/mtrace/mtrace.c:1655:1:
+		internal compiler error: in change_address_1, at emit-rtl.c:2019
+	kcah
+
 port	arm
 
 	hack	gcc-unsigned-compare
@@ -586,6 +635,46 @@ port	sh3
 		-fno-loop-optimize.
 	kcah
 
+port	sh3eb
+	hack	gcc4.8.1
+	cdate	Thu Nov  7 16:31:23 EST 2013
+	who	christos
+	file	src/sys/rump/net/lib/libnetbt/Makefile	: 1.2
+	desrc
+		for profiling
+		compile l2cap_signal.c with -O0 to avoid:
+		./netbt/l2cap_signal.c:36:
+		/p/netbsd/cvsroot/src/sys/rump/net/lib/libnetbt/../../../../\
+		netbt/l2cap_signal.c: In function 'l2cap_recv_signal':
+		./sh3/byte_swap.h:20:2: error: 'asm' operand requires \
+		impossible reload
+		  __asm volatile ("swap.b %1,%0" : "=r"(rval) : "r"(x));
+	kcah
+
+port	sh3el
+	hack	gcc4.8.1
+	cdate	Fri Nov  8 19:27:01 EST 2013
+	who	christos
+	file	src/external/bsd/libevent/lib/libevent/Makefile	: 1.2
+	desrc
+		for profiling
+		compile evdns.c with -O0 to avoid:
+		./sh3/byte_swap.h:20:2: error: 'asm' operand requires \
+		impossible reload
+		  __asm volatile ("swap.b %1,%0" : "=r"(rval) : "r"(x));
+	kcah
+	
+	hack	gcc4.8.1
+	cdate	Fri Nov  8 19:34:48 EST 2013
+	who	christos
+	file	src/usr.sbin/racoon/Makefile	: 1.27
+	desrc
+		for profiling
+		compile ipsec_doi.c with -O0 to avoid:
+		./sh3/byte_swap.h:20:2: error: 'asm' operand requires \
+		impossible reload
+		  __asm volatile ("swap.b %1,%0" : "=r"(rval) : "r"(x));
+	kcah
 
 port	m68000
 
@@ -607,6 +696,17 @@ port	m68000
 		This might be related with GCC Bugzilla Bug 32424.
 	kcah
 
+port	m68k,sh3,vax
+
+	hack	gcc-4.8.1
+	cdate	Wed Nov  6 20:41:35 EST 2013
+	who	christos
+	file	src/external/gpl3/gcc/libstdc++-v3/Makefile : 1.6
+	descr
+		compile hashtable_c++0x.cc with -O2 instead of -Os to
+		produce missing instantiation of std::lower_bound expansion
+		for unsigned long.
+	kcah
 
 port	sparc
 
@@ -796,7 +896,7 @@ cdate	Wed Jun  5 15:49:27 CEST 2013
 who	joerg
 file	src/usr.bin/rpcgen/rpc_main.c
 descr
-	It is undecided which compiler owns /usr/bin/cpp whether it should
+	It is undecided which compiler owns /usr/bin/cpp and whether it should
 	exist in a MKGCC=no world. To allow rpcgen to work out-of-the-box,
 	if either gcc or clang is installed, use /usr/bin/clang-cpp as fallback.
 	This applies only if RPCGEN_CPP is not set and /usr/bin/cpp is not executable.

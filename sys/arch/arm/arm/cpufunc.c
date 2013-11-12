@@ -3192,19 +3192,19 @@ struct cpu_option sa110_options[] = {
 void
 sa110_setup(char *args)
 {
-	int cpuctrl, cpuctrlmask;
-
-	cpuctrl = CPU_CONTROL_MMU_ENABLE | CPU_CONTROL_32BP_ENABLE
+	int cpuctrl = CPU_CONTROL_MMU_ENABLE | CPU_CONTROL_32BP_ENABLE
 		 | CPU_CONTROL_32BD_ENABLE | CPU_CONTROL_SYST_ENABLE
 		 | CPU_CONTROL_IC_ENABLE | CPU_CONTROL_DC_ENABLE
 		 | CPU_CONTROL_WBUF_ENABLE;
-	cpuctrlmask = CPU_CONTROL_MMU_ENABLE | CPU_CONTROL_32BP_ENABLE
+#ifdef notyet
+	int cpuctrlmask = CPU_CONTROL_MMU_ENABLE | CPU_CONTROL_32BP_ENABLE
 		 | CPU_CONTROL_32BD_ENABLE | CPU_CONTROL_SYST_ENABLE
 		 | CPU_CONTROL_IC_ENABLE | CPU_CONTROL_DC_ENABLE
 		 | CPU_CONTROL_WBUF_ENABLE | CPU_CONTROL_ROM_ENABLE
 		 | CPU_CONTROL_BEND_ENABLE | CPU_CONTROL_AFLT_ENABLE
 		 | CPU_CONTROL_LABT_ENABLE | CPU_CONTROL_BPRD_ENABLE
 		 | CPU_CONTROL_CPCLK;
+#endif
 
 #ifndef ARM32_DISABLE_ALIGNMENT_FAULTS
 	cpuctrl |= CPU_CONTROL_AFLT_ENABLE;
@@ -3226,7 +3226,9 @@ sa110_setup(char *args)
 
 	/* Set the control register */
 	curcpu()->ci_ctrl = cpuctrl;
-/*	cpu_control(cpuctrlmask, cpuctrl);*/
+#ifdef notyet
+	cpu_control(cpuctrlmask, cpuctrl);
+#endif
 	cpu_control(0xffffffff, cpuctrl);
 
 	/*

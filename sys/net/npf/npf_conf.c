@@ -108,6 +108,11 @@ npf_config_destroy(npf_config_t *nc)
 void
 npf_config_fini(void)
 {
+	mutex_enter(&npf_config_lock);
+	pserialize_perform(npf_config_psz);
+	npf_ifmap_flush();
+	mutex_exit(&npf_config_lock);
+
 	npf_config_destroy(npf_config);
 	pserialize_destroy(npf_config_psz);
 	mutex_destroy(&npf_config_lock);
@@ -151,12 +156,16 @@ npf_config_reload(prop_dictionary_t dict, npf_ruleset_t *rset,
 	npf_config = nc;
 	if (onc == NULL) {
 		/* Initial load, done. */
+		npf_ifmap_flush();
 		mutex_exit(&npf_config_lock);
 		return;
 	}
 
 	/* Synchronise: drain all references. */
 	pserialize_perform(npf_config_psz);
+	if (flush) {
+		npf_ifmap_flush();
+	}
 	mutex_exit(&npf_config_lock);
 
 	/* Finally, it is safe to destroy the old config. */

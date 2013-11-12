@@ -282,7 +282,7 @@ strtc_settime(struct todr_chip_handle *ch, struct timeval *tv)
 static int
 strtc_clock_read(struct strtc_softc *sc, struct clock_ymdhms *dt)
 {
-	u_int8_t bcd[M41ST84_REG_DATE_BYTES], cmdbuf[1];
+	u_int8_t bcd[M41ST84_REG_DATE_BYTES], cmdbuf[2];
 	int i;
 
 	if (iic_acquire_bus(sc->sc_tag, I2C_F_POLL)) {

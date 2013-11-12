@@ -143,13 +143,11 @@ void
 prom_iclose(struct saioreq *si)
 {
 	struct boottab *ops;
-	struct devinfo *dip;
 
 	if (promdev_inuse == 0)
 		return;
 
 	ops = si->si_boottab;
-	dip = ops->b_devinfo;
 
 #ifdef	DEBUG_PROM
 	if (debug)

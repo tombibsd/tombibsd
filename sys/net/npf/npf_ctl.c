@@ -67,10 +67,10 @@ npfctl_switch(void *data)
 
 	if (onoff) {
 		/* Enable: add pfil hooks. */
-		error = npf_pfil_register();
+		error = npf_pfil_register(false);
 	} else {
 		/* Disable: remove pfil hooks. */
-		npf_pfil_unregister();
+		npf_pfil_unregister(false);
 		error = 0;
 	}
 	return error;

@@ -18,6 +18,10 @@ CPPFLAGS+=	-I${.CURDIR}/arch/${GDB_MACHINE_ARCH} \
 
 SRCS=		${G_OBJS:.o=.c} ${G_SOURCES}
 
+.if ${MACHINE_ARCH} == "vax"
+COPTS.decNumber.c=-O0
+.endif
+
 .PATH: ${DIST}/libdecnumber ${DIST}/libdecnumber/dpd
 
 .include <bsd.lib.mk>

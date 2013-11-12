@@ -12,6 +12,10 @@ PROG=	mtrace
 SRCS=	igmp.c inet.c kern.c mtrace.c
 MAN=	mtrace.8
 
+.if ${MACHINE_ARCH} == "vax"
+COPTS.mtrace.c=-O0
+.endif
+
 BINMODE=4555
 BINOWN= root
 

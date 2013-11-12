@@ -649,6 +649,7 @@ cpu_reboot(int howto, char *bootstr)
 {
 	static bool syncdone = false;
 	int s = IPL_NONE;
+	__USE(s);	/* ugly otherwise */
 
 	if (cold) {
 		howto |= RB_HALT;

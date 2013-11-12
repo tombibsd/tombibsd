@@ -119,6 +119,6 @@ wadd_wch(WINDOW *win, const cchar_t *wch)
 	__CTRACE(__CTRACE_INPUT, "wadd_wch: win(%p)", win);
 #endif
 	lnp = win->alines[y];
-	return _cursesi_addwchar(win, &lnp, &y, &x, wch);
+	return _cursesi_addwchar(win, &lnp, &y, &x, wch, 1);
 #endif /* HAVE_WCHAR */
 }

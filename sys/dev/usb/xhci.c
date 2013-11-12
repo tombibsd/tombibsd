@@ -570,7 +570,7 @@ usbd_status
 xhci_init(struct xhci_softc *sc)
 {
 	bus_size_t bsz;
-	uint32_t cap, hcs1, hcs2, hcs3, hcc, dboff, rtsoff;
+	uint32_t cap, hcs1, hcs2, hcc, dboff, rtsoff;
 	uint32_t ecp, ecr;
 	uint32_t usbcmd, usbsts, pagesize, config;
 	int i;
@@ -605,7 +605,7 @@ xhci_init(struct xhci_softc *sc)
 	sc->sc_maxintrs = XHCI_HCS1_MAXINTRS(hcs1);
 	sc->sc_maxports = XHCI_HCS1_MAXPORTS(hcs1);
 	hcs2 = xhci_cap_read_4(sc, XHCI_HCSPARAMS2);
-	hcs3 = xhci_cap_read_4(sc, XHCI_HCSPARAMS3);
+	(void)xhci_cap_read_4(sc, XHCI_HCSPARAMS3);
 	hcc = xhci_cap_read_4(sc, XHCI_HCCPARAMS);
 
 	sc->sc_ac64 = XHCI_HCC_AC64(hcc);
@@ -1851,6 +1851,10 @@ xhci_init_slot(struct xhci_softc * const sc, uint32_t slot, int depth,
 		xspeed = 4;
 		mps = USB_3_MAX_CTRL_PACKET;
 		break;
+	default:
+		device_printf(sc->sc_dev, "%s: impossible speed: %x",
+		    __func__, speed);
+		return USBD_INVAL;
 	}
 
 	xs = &sc->sc_slots[slot];

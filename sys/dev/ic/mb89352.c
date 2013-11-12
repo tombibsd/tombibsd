@@ -510,7 +510,7 @@ spc_scsipi_request(struct scsipi_channel *chan, scsipi_adapter_req_t req,
     void *arg)
 {
 	struct scsipi_xfer *xs;
-	struct scsipi_periph *periph;
+	struct scsipi_periph *periph __diagused;
 	struct spc_softc *sc = device_private(chan->chan_adapter->adapt_dev);
 	struct spc_acb *acb;
 	int s, flags;

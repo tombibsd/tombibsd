@@ -363,6 +363,8 @@ u14_intr(void *arg)
 
 #ifdef	UHADEBUG
 		printf("status = 0x%x ", uhastat);
+#else
+		__USE(uhastat);
 #endif /*UHADEBUG*/
 
 		/*

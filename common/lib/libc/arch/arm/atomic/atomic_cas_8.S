@@ -1,6 +1,7 @@
 /* $NetBSD$ */
+
 /*-
- * Copyright (c) 2008 The NetBSD Foundation, Inc.
+ * Copyright (c) 2013 The NetBSD Foundation, Inc.
  * All rights reserved.
  *
  * This code is derived from software contributed to The NetBSD Foundation
@@ -59,5 +60,6 @@ ENTRY_NP(_atomic_cas_8)
 ATOMIC_OP_ALIAS(atomic_cas_8,_atomic_cas_8)
 STRONG_ALIAS(_atomic_cas_char,_atomic_cas_8)
 STRONG_ALIAS(_atomic_cas_uchar,_atomic_cas_8)
+STRONG_ALIAS(__sync_val_compare_and_swap_1,_atomic_cas_8)
 
 #endif /* _ARM_ARCH_6 */

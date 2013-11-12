@@ -59,8 +59,8 @@ fill_packet(int proto)
 static int
 test_bpf_code(const void *code)
 {
+	ifnet_t *dummy_ifp = npf_test_addif(IFNAME_TEST, false, false);
 	npf_cache_t npc = { .npc_info = 0 };
-	const void *dummy_ifp = (void *)0xdeadbeef;
 	struct mbuf *m;
 	nbuf_t nbuf;
 	int ret;

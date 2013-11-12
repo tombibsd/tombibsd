@@ -42,11 +42,11 @@
 /svr4_statvfs.h/1.4/Mon Apr 28 20:23:45 2008/-kk/
 /svr4_stream.c/1.79/Sun Jun 26 16:42:41 2011/-kk/
 /svr4_stropts.h/1.14/Mon Apr 28 20:23:45 2008/-kk/
-/svr4_syscall.h/1.84/Mon Dec 14 00:58:37 2009/-kk/
-/svr4_syscallargs.h/1.83/Mon Dec 14 00:58:37 2009/-kk/
-/svr4_syscalls.c/1.84/Mon Dec 14 00:58:37 2009/-kk/
+/svr4_syscall.h/1.85/Tue Nov 12 02:18:43 2013/-kk/
+/svr4_syscallargs.h/1.84/Tue Nov 12 02:18:43 2013/-kk/
+/svr4_syscalls.c/1.85/Tue Nov 12 02:18:43 2013/-kk/
 /svr4_sysconfig.h/1.5/Mon Apr 28 20:23:45 2008/-kk/
-/svr4_sysent.c/1.87/Mon Dec 14 00:58:37 2009/-kk/
+/svr4_sysent.c/1.88/Tue Nov 12 02:18:43 2013/-kk/
 /svr4_systeminfo.h/1.7/Mon Apr 28 20:23:45 2008/-kk/
 /svr4_termios.c/1.27/Mon Apr 28 20:23:45 2008/-kk/
 /svr4_termios.h/1.7/Mon Apr 28 20:23:45 2008/-kk/
@@ -62,5 +62,5 @@
 /svr4_utsname.h/1.5/Mon Apr 28 20:23:46 2008/-kk/
 /svr4_wait.h/1.7/Mon Apr 28 20:23:46 2008/-kk/
 /syscalls.conf/1.7/Sat Dec  9 06:16:13 2000/-kk/
-/syscalls.master/1.61/Tue Jan 13 22:27:44 2009/-kk/
+/syscalls.master/1.62/Tue Nov 12 02:18:43 2013/-kk/
 D

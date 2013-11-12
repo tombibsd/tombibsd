@@ -445,7 +445,7 @@ vga_init_screen(struct vga_config *vc, struct vgascreen *scr,
 		const struct wsscreen_descr *type, int existing, long *attrp)
 {
 	int cpos;
-	int res;
+	int res __diagused;
 
 	scr->cfg = vc;
 	scr->pcs.hdl = (struct pcdisplay_handle *)&vc->hdl;

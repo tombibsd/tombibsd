@@ -27,7 +27,6 @@
 #define uudecode	ssh_uudecode
 #define uuencode	ssh_uuencode
 #define verbose		ssh_verbose
-#define xfree		ssh_free
 #define xmalloc		ssh_malloc
 #define xrealloc	ssh_realloc
 #define xstrdup		ssh_strdup

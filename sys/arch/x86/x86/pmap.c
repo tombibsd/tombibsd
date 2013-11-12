@@ -505,8 +505,8 @@ extern int mem_cluster_cnt;
 #define PTESLEW(pte, id) ((pte)+(id)*NPTECL)
 #define VASLEW(va,id) ((va)+(id)*NPTECL*PAGE_SIZE)
 #else
-#define PTESLEW(pte, id) (pte)
-#define VASLEW(va,id) (va)
+#define PTESLEW(pte, id) ((void)id, pte)
+#define VASLEW(va,id) ((void)id, va)
 #endif
 
 /*
@@ -4220,9 +4220,10 @@ pmap_growkernel(vaddr_t maxkvaddr)
 	struct pmap *kpm = pmap_kernel();
 #if !defined(XEN) || !defined(__x86_64__)
 	struct pmap *pm;
+	long old;
 #endif
 	int s, i;
-	long needed_kptp[PTP_LEVELS], target_nptp, old;
+	long needed_kptp[PTP_LEVELS], target_nptp;
 	bool invalidate = false;
 
 	s = splvm();	/* to be safe */
@@ -4235,7 +4236,10 @@ pmap_growkernel(vaddr_t maxkvaddr)
 	}
 
 	maxkvaddr = x86_round_pdr(maxkvaddr);
+#if !defined(XEN) || !defined(__x86_64__)
 	old = nkptp[PTP_LEVELS - 1];
+#endif
+
 	/*
 	 * This loop could be optimized more, but pmap_growkernel()
 	 * is called infrequently.

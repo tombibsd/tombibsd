@@ -961,6 +961,21 @@ bad:
 				    sizeof(epp->ep_machine_arch));
 				break;
 			}
+		case ELF_NOTE_TYPE_MCMODEL_TAG:
+			/*
+			 * arch specific check for code model
+			 */
+#ifdef ELF_MD_MCMODEL_CHECK
+			if (np->n_namesz == ELF_NOTE_MCMODEL_NAMESZ
+			    && memcmp(ndata, ELF_NOTE_MCMODEL_NAME,
+				    ELF_NOTE_MCMODEL_NAMESZ) == 0) {
+				ELF_MD_MCMODEL_CHECK(epp, 
+				    ndata + roundup(ELF_NOTE_MCMODEL_NAMESZ, 4),
+				    np->n_descsz);
+				break;
+			}
+#endif
+			break;
 
 			/*
 			 * Dunno, warn for diagnostic

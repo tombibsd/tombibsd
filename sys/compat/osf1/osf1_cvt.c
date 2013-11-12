@@ -293,7 +293,7 @@ void
 osf1_cvt_flock_from_native(const struct flock *nf, struct osf1_flock *of)
 {
 
-	memset(of, 0, sizeof of);
+	memset(of, 0, sizeof(*of));
 
 	of->l_start = nf->l_start;
 	of->l_len = nf->l_len;
@@ -332,7 +332,7 @@ int
 osf1_cvt_flock_to_native(const struct osf1_flock *of, struct flock *nf)
 {
 
-	memset(nf, 0, sizeof nf);
+	memset(nf, 0, sizeof(*nf));
 
 	nf->l_start = of->l_start;
 	nf->l_len = of->l_len;
@@ -380,7 +380,7 @@ osf1_cvt_msghdr_xopen_to_native(const struct osf1_msghdr_xopen *omh, struct msgh
 {
 	unsigned long leftovers;
 
-	memset(bmh, 0, sizeof bmh);
+	memset(bmh, 0, sizeof(*bmh));
 	bmh->msg_name = omh->msg_name;		/* XXX sockaddr translation */
 	bmh->msg_namelen = omh->msg_namelen;
 	bmh->msg_iov = NULL;			/* iovec xlation separate */

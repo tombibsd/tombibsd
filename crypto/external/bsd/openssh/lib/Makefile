@@ -16,7 +16,6 @@ canohost.c \
 channels.c \
 cipher-3des1.c \
 cipher-bf1.c \
-cipher-ctr.c \
 cipher.c \
 cleanup.c \
 compat.c \

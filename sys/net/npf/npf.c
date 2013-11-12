@@ -97,6 +97,7 @@ npf_init(void)
 	npf_ext_sysinit();
 
 	/* Load empty configuration. */
+	npf_pfil_register(true);
 	npf_config_init();
 
 #ifdef _MODULE
@@ -117,7 +118,7 @@ npf_fini(void)
 #ifdef _MODULE
 	devsw_detach(NULL, &npf_cdevsw);
 #endif
-	npf_pfil_unregister();
+	npf_pfil_unregister(true);
 
 	/* Flush all sessions, destroy configuration (ruleset, etc). */
 	npf_session_tracking(false);

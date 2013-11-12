@@ -520,7 +520,15 @@ npf_rule_alloc(prop_dictionary_t rldict)
 	/* Attributes, priority and interface ID (optional). */
 	prop_dictionary_get_uint32(rldict, "attributes", &rl->r_attr);
 	prop_dictionary_get_int32(rldict, "priority", &rl->r_priority);
-	prop_dictionary_get_uint32(rldict, "interface", &rl->r_ifid);
+
+	if (prop_dictionary_get_cstring_nocopy(rldict, "interface", &rname)) {
+		if ((rl->r_ifid = npf_ifmap_register(rname)) == 0) {
+			kmem_free(rl, sizeof(npf_rule_t));
+			return NULL;
+		}
+	} else {
+		rl->r_ifid = 0;
+	}
 
 	/* Get the skip-to index.  No need to validate it. */
 	prop_dictionary_get_uint32(rldict, "skip-to", &rl->r_skip_to);
@@ -661,10 +669,8 @@ static inline bool
 npf_rule_inspect(npf_cache_t *npc, nbuf_t *nbuf, const npf_rule_t *rl,
     const int di_mask, const int layer)
 {
-	const ifnet_t *ifp = nbuf->nb_ifp;
-
 	/* Match the interface. */
-	if (rl->r_ifid && rl->r_ifid != ifp->if_index) {
+	if (rl->r_ifid && rl->r_ifid != nbuf->nb_ifid) {
 		return false;
 	}
 

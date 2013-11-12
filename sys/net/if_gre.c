@@ -412,7 +412,6 @@ gre_upcall_remove(struct socket *so)
 static int
 gre_socreate(struct gre_softc *sc, const struct gre_soparm *sp, int *fdout)
 {
-	const struct protosw *pr;
 	int fd, rc;
 	struct mbuf *m;
 	struct sockaddr *sa;
@@ -459,8 +458,7 @@ gre_socreate(struct gre_softc *sc, const struct gre_soparm *sp, int *fdout)
 	m = NULL;
 
 	/* XXX convert to a (new) SOL_SOCKET call */
-  	pr = so->so_proto;
-  	KASSERT(pr != NULL);
+  	KASSERT(so->so_proto != NULL);
  	rc = so_setsockopt(curlwp, so, IPPROTO_IP, IP_TTL,
 	    &ip_gre_ttl, sizeof(ip_gre_ttl));
   	if (rc != 0) {

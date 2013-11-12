@@ -117,6 +117,7 @@ tr_mca_attach(device_t parent, device_t self, void *aux)
 	pos3 = mca_conf_read(ma->ma_mc, ma->ma_slot, 3);
 	pos4 = mca_conf_read(ma->ma_mc, ma->ma_slot, 4);
 	pos5 = mca_conf_read(ma->ma_mc, ma->ma_slot, 5);
+	__USE(pos5);
 
 	/*
 	 * POS register 2: (adf pos0)

@@ -303,7 +303,6 @@ psycho_attach(device_t parent, device_t self, void *aux)
 	int psycho_br[2], n, i;
 	bus_space_handle_t pci_ctl;
 	char *model = prom_getpropstring(ma->ma_node, "model");
-	extern char machine_model[];
 
 	aprint_normal("\n");
 

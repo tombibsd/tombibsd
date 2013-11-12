@@ -1902,7 +1902,7 @@ ehci_set_qh_qtd(ehci_soft_qh_t *sqh, ehci_soft_qtd_t *sqtd)
 Static void
 ehci_sync_hc(ehci_softc_t *sc)
 {
-	int error;
+	int error __diagused;
 
 	KASSERT(mutex_owned(&sc->sc_lock));
 

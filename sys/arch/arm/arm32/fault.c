@@ -758,7 +758,7 @@ void
 prefetch_abort_handler(trapframe_t *tf)
 {
 	struct lwp *l;
-	struct pcb *pcb;
+	struct pcb *pcb __diagused;
 	struct vm_map *map;
 	vaddr_t fault_pc, va;
 	ksiginfo_t ksi;

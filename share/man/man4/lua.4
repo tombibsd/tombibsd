@@ -66,20 +66,17 @@ The operation of
 can be controlled by means of the following
 .Xr sysctl 8
 variables:
-.Bl -tag -width XXXX -compact
-.Pp
+.Bl -tag -width XXXX
 .It Dv kern.lua.autoload
 When set to 1,
 .Nm
 tries to autoload kernel modules.
 .Pp
 The default value is 1.
-.Pp
 .It Dv kern.lua.bytecode
 When set to 1, loading of Lua bytecode is allowed.
 .Pp
 The default value is 0.
-.Pp
 .It Dv kern.lua.maxcount
 When set to a value > 0,
 .Nm
@@ -87,14 +84,12 @@ limits the number of instructions executed
 to this number.
 .Pp
 The default value is 0.
-.Pp
 .It Dv kern.lua.require
 When set to 1, enables the
 .Em require
 command in Lua.
 .Pp
 The default value is 1.
-.Pp
 .It Dv kern.lua.verbose
 When set to a value > 0, verbosity is increased.
 .Pp

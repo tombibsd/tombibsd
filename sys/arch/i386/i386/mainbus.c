@@ -242,6 +242,8 @@ mainbus_attach(device_t parent, device_t self, void *aux)
 		pci_addr_fixup(NULL, pci_maxbus);
 #endif
 	}
+#else
+	__USE(mode);
 #endif
 #endif
 

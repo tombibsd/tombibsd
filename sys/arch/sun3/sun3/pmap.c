@@ -3044,9 +3044,8 @@ out:
 void
 pmap_protect_mmu(pmap_t pmap, vaddr_t sva, vaddr_t eva)
 {
-	pmeg_t pmegp;
 	vaddr_t pgva, segva;
-	int pte, sme;
+	int pte;
 #ifdef	HAVECACHE
 	int flush_by_page = 0;
 #endif
@@ -3061,9 +3060,9 @@ pmap_protect_mmu(pmap_t pmap, vaddr_t sva, vaddr_t eva)
 #endif
 
 	segva = sun3_trunc_seg(sva);
-	sme = get_segmap(segva);
 
 #ifdef	DIAGNOSTIC
+	int sme = get_segmap(segva);
 	/* Make sure it is valid and known. */
 	if (sme == SEGINV)
 		panic("pmap_protect_mmu: SEGINV");
@@ -3071,10 +3070,10 @@ pmap_protect_mmu(pmap_t pmap, vaddr_t sva, vaddr_t eva)
 		panic("pmap_protect_mmu: incorrect sme, va=0x%lx", segva);
 #endif
 
-	pmegp = pmeg_p(sme);
-	/* have pmeg, will travel */
 
 #ifdef	DIAGNOSTIC
+	/* have pmeg, will travel */
+	pmeg_t pmegp = pmeg_p(sme);
 	/* Make sure we own the pmeg, right va, etc. */
 	if ((pmegp->pmeg_va != segva) ||
 	    (pmegp->pmeg_owner != pmap) ||

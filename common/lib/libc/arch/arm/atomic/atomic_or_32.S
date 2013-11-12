@@ -33,9 +33,10 @@
 #ifdef _ARM_ARCH_6
 
 ENTRY_NP(_atomic_or_32)
-1:	ldrex	r3, [r0]		/* load old value (to be returned) */
-	orrs	r3, r3, r1		/* calculate new value */
-	strex	r2, r3, [r0]		/* try to store */
+	mov	ip, r0
+1:	ldrex	r0, [ip]		/* load old value (to be returned) */
+	orrs	r3, r0, r1		/* calculate new value */
+	strex	r2, r3, [ip]		/* try to store */
 	cmp	r2, #0			/*   succeed? */
 	bne	1b			/*     no, try again */
 #ifdef _ARM_ARCH_7
@@ -49,6 +50,7 @@ END(_atomic_or_32)
 ATOMIC_OP_ALIAS(atomic_or_32,_atomic_or_32)
 ATOMIC_OP_ALIAS(atomic_or_uint,_atomic_or_32)
 ATOMIC_OP_ALIAS(atomic_or_ulong,_atomic_or_32)
+STRONG_ALIAS(__sync_fetch_and_or_4,_atomic_or_32)
 STRONG_ALIAS(_atomic_or_uint,_atomic_or_32)
 STRONG_ALIAS(_atomic_or_ulong,_atomic_or_32)
 
@@ -70,6 +72,7 @@ END(_atomic_or_32_nv)
 ATOMIC_OP_ALIAS(atomic_or_32_nv,_atomic_or_32_nv)
 ATOMIC_OP_ALIAS(atomic_or_uint_nv,_atomic_or_32_nv)
 ATOMIC_OP_ALIAS(atomic_or_ulong_nv,_atomic_or_32_nv)
+STRONG_ALIAS(__sync_or_and_fetch_4,_atomic_or_32_nv)
 STRONG_ALIAS(_atomic_or_uint_nv,_atomic_or_32_nv)
 STRONG_ALIAS(_atomic_or_ulong_nv,_atomic_or_32_nv)
 

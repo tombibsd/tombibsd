@@ -9,7 +9,7 @@
 /cia.c/1.73/Mon Feb  6 02:14:14 2012/-kk/
 /cia_bwx_bus_io.c/1.5/Fri Jul  1 19:19:49 2011/-kk/
 /cia_bwx_bus_mem.c/1.5/Fri Jul  1 19:19:49 2011/-kk/
-/cia_dma.c/1.28/Mon Feb  6 02:14:14 2012/-kk/
+/cia_dma.c/1.29/Tue Nov 12 02:18:33 2013/-kk/
 /cia_pci.c/1.32/Mon Feb  6 02:14:14 2012/-kk/
 /cia_swiz_bus_io.c/1.17/Fri Jul  1 19:19:49 2011/-kk/
 /cia_swiz_bus_mem.c/1.18/Fri Jul  1 19:19:49 2011/-kk/
@@ -74,15 +74,15 @@
 /pci_kn20aa.h/1.5/Sat Mar 14 14:45:53 2009/-kk/
 /pci_kn300.c/1.35/Mon Feb  6 02:14:15 2012/-kk/
 /pci_kn300.h/1.3/Sat Mar 14 14:45:53 2009/-kk/
-/pci_kn8ae.c/1.27/Mon Feb  6 02:14:15 2012/-kk/
+/pci_kn8ae.c/1.28/Tue Nov 12 02:18:33 2013/-kk/
 /pci_kn8ae.h/1.5/Sat Mar 14 14:45:53 2009/-kk/
 /pci_machdep.c/1.19/Mon Feb  6 02:14:15 2012/-kk/
 /pci_sgmap_pte32.c/1.8/Fri Jul  1 19:19:50 2011/-kk/
 /pci_sgmap_pte32.h/1.5/Mon Feb  6 02:14:15 2012/-kk/
 /pci_sgmap_pte64.c/1.8/Fri Jul  1 19:19:50 2011/-kk/
 /pci_sgmap_pte64.h/1.4/Mon Feb  6 02:14:15 2012/-kk/
-/pci_swiz_bus_io_chipdep.c/1.41/Mon Feb  6 02:14:15 2012/-kk/
-/pci_swiz_bus_mem_chipdep.c/1.46/Mon Feb  6 02:14:15 2012/-kk/
+/pci_swiz_bus_io_chipdep.c/1.42/Tue Nov 12 02:18:33 2013/-kk/
+/pci_swiz_bus_mem_chipdep.c/1.47/Tue Nov 12 02:18:33 2013/-kk/
 /pci_up1000.c/1.14/Fri Jul  1 19:19:50 2011/-kk/
 /pci_up1000.h/1.3/Sat Mar 14 14:45:53 2009/-kk/
 /pciide_machdep.c/1.5/Mon Apr  4 20:37:45 2011/-kk/

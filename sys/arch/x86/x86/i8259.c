@@ -233,9 +233,11 @@ i8259_reinit_irqs(void)
 {
 	int irqs, irq;
 	struct cpu_info *ci = &cpu_info_primary;
+	const size_t array_len = MIN(__arraycount(ci->ci_isources),
+				     NUM_LEGACY_IRQS);
 
 	irqs = 0;
-	for (irq = 0; irq < NUM_LEGACY_IRQS; irq++)
+	for (irq = 0; irq < array_len; irq++)
 		if (ci->ci_isources[irq] != NULL)
 			irqs |= 1 << irq;
 	if (irqs >= 0x100) /* any IRQs >= 8 in use */

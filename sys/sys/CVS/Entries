@@ -44,7 +44,7 @@
 /dirent.h/1.28/Tue Sep 27 01:40:32 2011/-kk/
 /dirhash.h/1.6/Thu Oct 24 10:28:58 2013/-kk/
 /disk.h/1.59/Thu Oct 24 10:28:58 2013/-kk/
-/disklabel.h/1.115/Thu Oct 24 10:28:58 2013/-kk/
+/disklabel.h/1.116/Tue Nov 12 02:18:53 2013/-kk/
 /disklabel_acorn.h/1.6/Sun Dec 11 12:25:20 2005/-kk/
 /disklabel_gpt.h/1.11/Thu Oct 24 10:28:58 2013/-kk/
 /disklabel_rdb.h/1.2/Sat Jun 19 08:45:25 2010/-kk/
@@ -65,7 +65,7 @@
 /exec_aout.h/1.40/Sat Mar 17 21:54:12 2012/-kk/
 /exec_coff.h/1.7/Sun Dec 11 12:25:20 2005/-kk/
 /exec_ecoff.h/1.20/Thu Dec 10 14:13:54 2009/-kk/
-/exec_elf.h/1.131/Thu Oct 31 07:00:36 2013/-kk/
+/exec_elf.h/1.132/Tue Nov 12 02:18:53 2013/-kk/
 /exec_script.h/1.12/Sun Dec 11 12:25:20 2005/-kk/
 /extattr.h/1.9/Tue Mar 13 18:41:02 2012/-kk/
 /extent.h/1.19/Fri Jan 27 18:53:10 2012/-kk/
@@ -249,7 +249,7 @@
 /vmem.h/1.20/Thu Oct 24 10:28:58 2013/-kk/
 /vmem_impl.h/1.2/Thu Oct 24 10:28:58 2013/-kk/
 /vmmeter.h/1.19/Wed Oct 21 21:12:07 2009/-kk/
-/vnode.h/1.239/Thu Oct 31 07:00:37 2013/-kk/
+/vnode.h/1.240/Tue Nov 12 02:18:53 2013/-kk/
 /vnode_if.h/1.84/Thu Oct 24 10:28:58 2013/-kk/
 /wait.h/1.26/Sun Jan 11 02:45:56 2009/-kk/
 /wapbl.h/1.15/Thu Oct 24 10:28:58 2013/-kk/

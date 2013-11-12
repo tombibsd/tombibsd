@@ -130,7 +130,7 @@
 /i82365_pcivar.h/1.7/Thu Sep 17 18:14:41 2009/-kk/
 /iavc_pci.c/1.15/Thu Oct 24 10:28:58 2013/-kk/
 /ibmcd.c/1.1/Mon Dec 17 20:38:00 2012/-kk/
-/ichsmb.c/1.32/Thu Oct 24 10:28:58 2013/-kk/
+/ichsmb.c/1.33/Tue Nov 12 02:18:45 2013/-kk/
 /icp_pci.c/1.21/Sat Oct 27 17:18:32 2012/-kk/
 /if_age.c/1.42/Thu Oct 24 10:28:58 2013/-kk/
 /if_agereg.h/1.3/Tue Jul 28 21:03:46 2009/-kk/
@@ -144,7 +144,7 @@
 /if_atw_pci.c/1.25/Tue Jul 26 20:51:24 2011/-kk/
 /if_bce.c/1.37/Sun Jul 22 14:33:01 2012/-kk/
 /if_bcereg.h/1.4/Sun Dec 11 12:22:49 2005/-kk/
-/if_bge.c/1.262/Tue Nov  5 03:38:18 2013/-kk/
+/if_bge.c/1.264/Tue Nov 12 02:18:49 2013/-kk/
 /if_bgereg.h/1.86/Tue Nov  5 03:38:18 2013/-kk/
 /if_bgevar.h/1.17/Tue Nov  5 03:38:18 2013/-kk/
 /if_bnx.c/1.49/Thu Oct 24 10:28:58 2013/-kk/
@@ -180,7 +180,7 @@
 /if_iwnvar.h/1.15/Thu Oct 24 10:28:58 2013/-kk/
 /if_jme.c/1.23/Thu Oct 24 10:28:58 2013/-kk/
 /if_jmereg.h/1.3/Fri Jan 16 19:56:06 2009/-kk/
-/if_kse.c/1.24/Thu Oct 24 10:28:58 2013/-kk/
+/if_kse.c/1.25/Tue Nov 12 02:18:50 2013/-kk/
 /if_le_pci.c/1.51/Tue Jul 26 20:51:24 2011/-kk/
 /if_levar.h/1.9/Mon Apr 28 20:23:55 2008/-kk/
 /if_lii.c/1.12/Thu Oct 24 10:28:58 2013/-kk/
@@ -269,7 +269,7 @@
 /lynxfb.c/1.4/Wed Mar 14 13:41:07 2012/-kk/
 /lynxfbreg.h/1.2/Sun Mar 11 15:58:56 2012/-kk/
 /lynxfbvar.h/1.1/Fri Mar  2 13:20:57 2012/-kk/
-/machfb.c/1.89/Thu Oct 24 10:28:58 2013/-kk/
+/machfb.c/1.90/Tue Nov 12 02:18:50 2013/-kk/
 /machfbreg.h/1.5/Wed Aug 15 15:39:23 2012/-kk/
 /mfi_pci.c/1.17/Fri Aug 31 05:22:17 2012/-kk/
 /mlx_pci.c/1.24/Sat Oct 27 17:18:35 2012/-kk/
@@ -316,9 +316,9 @@
 /pcibusprint.c/1.3/Sun Dec 11 12:22:50 2005/-kk/
 /pciconf.c/1.36/Sat Oct 20 06:09:07 2012/-kk/
 /pciconf.h/1.12/Sat Sep  8 05:02:41 2012/-kk/
-/pcidevs.h/1.1154/Thu Oct 24 10:28:58 2013/-kk/
-/pcidevs/1.1162/Thu Oct 24 10:28:58 2013/-kk/
-/pcidevs_data.h/1.1153/Thu Oct 24 10:28:58 2013/-kk/
+/pcidevs.h/1.1157/Tue Nov 12 02:18:50 2013/-kk/
+/pcidevs/1.1164/Tue Nov 12 02:18:50 2013/-kk/
+/pcidevs_data.h/1.1156/Tue Nov 12 02:18:50 2013/-kk/
 /pciide.c/1.219/Sat Nov  6 00:29:09 2010/-kk/
 /pciide_acard_reg.h/1.8/Wed May 14 13:29:29 2008/-kk/
 /pciide_acer_reg.h/1.12/Mon Oct 19 18:41:15 2009/-kk/
@@ -362,7 +362,7 @@
 /puc.c/1.36/Thu Oct 24 10:28:58 2013/-kk/
 /puccn.c/1.11/Thu Oct 24 10:28:58 2013/-kk/
 /puccn.h/1.5/Thu Oct 24 10:28:58 2013/-kk/
-/pucdata.c/1.86/Thu Oct 24 10:28:58 2013/-kk/
+/pucdata.c/1.87/Tue Nov 12 02:18:50 2013/-kk/
 /pucvar.h/1.10/Thu Oct 24 10:28:58 2013/-kk/
 /pwdog.c/1.7/Tue Aug 30 07:22:12 2011/-kk/
 /r128fb.c/1.38/Thu Oct 24 10:28:58 2013/-kk/
@@ -392,10 +392,10 @@
 /svreg.h/1.4/Sun Dec 11 12:22:50 2005/-kk/
 /svvar.h/1.8/Sat Oct 27 17:18:35 2012/-kk/
 /svwsata.c/1.18/Thu Oct 24 10:28:58 2013/-kk/
-/tdvfb.c/1.6/Thu Oct 24 10:28:58 2013/-kk/
+/tdvfb.c/1.7/Tue Nov 12 02:18:50 2013/-kk/
 /tdvfbreg.h/1.3/Fri Jul 20 21:31:28 2012/-kk/
 /tdvfbvar.h/1.3/Sun Jul 29 20:31:53 2012/-kk/
-/tga.c/1.83/Wed Jan 11 20:50:00 2012/-kk/
+/tga.c/1.84/Tue Nov 12 02:18:50 2013/-kk/
 /tga_conf.c/1.7/Sat Mar 14 15:36:19 2009/-kk/
 /tgareg.h/1.6/Sun Dec 11 12:22:50 2005/-kk/
 /tgavar.h/1.18/Mon May 18 00:14:27 2009/-kk/

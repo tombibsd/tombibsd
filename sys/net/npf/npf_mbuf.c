@@ -51,11 +51,13 @@ __KERNEL_RCSID(0, "$NetBSD$");
 void
 nbuf_init(nbuf_t *nbuf, struct mbuf *m, const ifnet_t *ifp)
 {
+	u_int ifid = npf_ifmap_id(ifp);
+
 	KASSERT((m->m_flags & M_PKTHDR) != 0);
-	KASSERT(ifp != NULL);
 
 	nbuf->nb_mbuf0 = m;
 	nbuf->nb_ifp = ifp;
+	nbuf->nb_ifid =  ifid;
 	nbuf_reset(nbuf);
 }
 

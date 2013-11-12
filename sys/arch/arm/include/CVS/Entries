@@ -14,7 +14,7 @@
 /bus_funcs.h/1.5/Thu Oct 24 10:28:57 2013/-kk/
 /byte_swap.h/1.13/Thu Oct 24 10:28:57 2013/-kk/
 /cdefs.h/1.9/Thu Oct 24 10:28:57 2013/-kk/
-/cpu.h/1.80/Thu Oct 24 10:28:57 2013/-kk/
+/cpu.h/1.81/Tue Nov 12 02:18:38 2013/-kk/
 /cpu_counter.h/1.2/Wed Aug 29 18:45:40 2012/-kk/
 /cpuconf.h/1.21/Thu Oct 24 10:28:57 2013/-kk/
 /cpufunc.h/1.64/Thu Oct 24 10:28:57 2013/-kk/

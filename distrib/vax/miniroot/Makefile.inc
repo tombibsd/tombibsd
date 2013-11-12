@@ -1,6 +1,6 @@
 # $NetBSD$
 
-IMAGESIZE=	7m
+IMAGESIZE=	8m
 MAKEFS_FLAGS=	-o density=3k
 IMAGEENDIAN=	le
 MAKEDEVTARGETS=	all ipty

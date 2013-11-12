@@ -284,7 +284,7 @@
 /intersil7170.c/1.12/Mon Apr 28 20:23:50 2008/-kk/
 /intersil7170reg.h/1.2/Mon Apr 28 20:23:50 2008/-kk/
 /intersil7170var.h/1.4/Mon Apr 28 20:23:50 2008/-kk/
-/interwave.c/1.37/Sat Oct 27 17:18:20 2012/-kk/
+/interwave.c/1.38/Tue Nov 12 02:18:44 2013/-kk/
 /interwavereg.h/1.9/Mon Apr 28 20:23:50 2008/-kk/
 /interwavevar.h/1.18/Sat Oct 27 17:18:21 2012/-kk/
 /ipac.h/1.4/Sun Aug  7 20:05:08 2011/-kk/
@@ -348,7 +348,7 @@
 /mb86960.c/1.79/Thu Oct 24 10:28:58 2013/-kk/
 /mb86960reg.h/1.10/Sun Dec 11 12:21:27 2005/-kk/
 /mb86960var.h/1.39/Thu Feb  2 19:43:03 2012/-kk/
-/mb89352.c/1.53/Fri Dec  2 16:17:04 2011/-kk/
+/mb89352.c/1.54/Tue Nov 12 02:18:44 2013/-kk/
 /mb89352reg.h/1.6/Sun Dec 11 12:21:27 2005/-kk/
 /mb89352var.h/1.15/Thu Nov 12 20:15:02 2009/-kk/
 /mc146818.c/1.18/Sat Dec 13 17:32:53 2008/-kk/
@@ -556,7 +556,7 @@
 /upc.c/1.15/Sat Oct 27 17:18:23 2012/-kk/
 /upcreg.h/1.3/Sun Mar  2 00:21:47 2003/-kk/
 /upcvar.h/1.6/Sat Oct 27 17:18:23 2012/-kk/
-/vga.c/1.110/Thu Oct 24 10:28:58 2013/-kk/
+/vga.c/1.111/Tue Nov 12 02:18:44 2013/-kk/
 /vga_common.c/1.11/Thu Feb 19 00:39:26 2009/-kk/
 /vga_raster.c/1.37/Thu Oct 24 10:28:58 2013/-kk/
 /vga_subr.c/1.25/Thu Aug  9 20:25:05 2012/-kk/

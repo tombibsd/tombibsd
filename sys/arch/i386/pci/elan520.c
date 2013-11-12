@@ -693,7 +693,6 @@ static void
 elansc_protect_text(device_t self, struct elansc_softc *sc)
 {
 	int i, j, nregion, pidx, tidx = 0, xnregion;
-	uint32_t par;
 	uint32_t protsize, unprotsize;
 	paddr_t start_pa, end_pa;
 	extern char kernel_text, etext;
@@ -722,7 +721,7 @@ elansc_protect_text(device_t self, struct elansc_softc *sc)
 		return;
 	}
 
-	par = bus_space_read_4(memt, memh, MMCR_PAR(pidx));
+	(void) bus_space_read_4(memt, memh, MMCR_PAR(pidx));
 
 	aprint_debug_dev(self,
 	    "protect kernel text at physical addresses "

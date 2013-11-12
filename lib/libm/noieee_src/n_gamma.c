@@ -158,6 +158,7 @@ gamma(double x)
 			else return (one/x);
 		}
 		b =one+1e-20;		/* Raise inexact flag. ??? -ragge */
+		__USE(b);
 		return (one/x);
 	} else if (!finite(x)) {
 		if (_IEEE)		/* x = NaN, -Inf */

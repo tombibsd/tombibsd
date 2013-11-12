@@ -44,7 +44,7 @@ ENTRY_NP(_atomic_inc_32)
 	mcr	p15, 0, r2, c7, c10, 5	/* data memory barrier */
 #endif
 	RET				/* return new value */
-	END(_atomic_inc_32)
+END(_atomic_inc_32)
 ATOMIC_OP_ALIAS(atomic_inc_32,_atomic_inc_32)
 ATOMIC_OP_ALIAS(atomic_inc_uint,_atomic_inc_32)
 ATOMIC_OP_ALIAS(atomic_inc_ulong,_atomic_inc_32)
@@ -66,7 +66,7 @@ ENTRY_NP(_atomic_inc_32_nv)
 	mcr	p15, 0, r2, c7, c10, 5	/* data memory barrier */
 #endif
 	RET				/* return new value */
-	END(_atomic_inc_32_nv)
+END(_atomic_inc_32_nv)
 ATOMIC_OP_ALIAS(atomic_inc_32_nv,_atomic_inc_32_nv)
 ATOMIC_OP_ALIAS(atomic_inc_uint_nv,_atomic_inc_32_nv)
 ATOMIC_OP_ALIAS(atomic_inc_ulong_nv,_atomic_inc_32_nv)

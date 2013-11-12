@@ -45,7 +45,7 @@
 #include <netinet/in_systm.h>
 #include <netinet/in.h>
 
-#define	NPF_VERSION		10
+#define	NPF_VERSION		11
 
 /*
  * Public declarations and definitions.
@@ -143,6 +143,7 @@ typedef struct {
 	struct mbuf *	nb_mbuf;
 	void *		nb_nptr;
 	const ifnet_t *	nb_ifp;
+	unsigned	nb_ifid;
 	int		nb_flags;
 } nbuf_t;
 

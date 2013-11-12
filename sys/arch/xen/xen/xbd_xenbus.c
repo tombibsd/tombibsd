@@ -821,7 +821,6 @@ xbdioctl(dev_t dev, u_long cmd, void *data, int flag, struct lwp *l)
 	    device_lookup_private(&xbd_cd, DISKUNIT(dev));
 	struct	dk_softc *dksc;
 	int	error;
-	struct	disk *dk;
 	int s;
 	struct xbd_req *xbdreq;
 	blkif_request_t *req;
@@ -830,7 +829,6 @@ xbdioctl(dev_t dev, u_long cmd, void *data, int flag, struct lwp *l)
 	DPRINTF(("xbdioctl(%d, %08lx, %p, %d, %p)\n",
 	    dev, cmd, data, flag, l));
 	dksc = &sc->sc_dksc;
-	dk = &dksc->sc_dkdev;
 
 	error = disk_ioctl(&sc->sc_dksc.sc_dkdev, cmd, data, flag, l);
 	if (error != EPASSTHROUGH)

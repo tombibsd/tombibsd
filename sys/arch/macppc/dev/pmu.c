@@ -702,13 +702,26 @@ pmu_todr_get(todr_chip_handle_t tch, struct timeval *tvp)
 {
 	struct pmu_softc *sc = tch->cookie;
 	uint32_t sec;
+	int count = 10;
+	int ok = FALSE;
 	uint8_t resp[16];
 
 	DPRINTF("pmu_todr_get\n");
-	pmu_send(sc, PMU_READ_RTC, 0, NULL, 16, resp);
+	while ((count > 0) && (!ok)) {
+		pmu_send(sc, PMU_READ_RTC, 0, NULL, 16, resp);
 
-	memcpy(&sec, &resp[1], 4);
-	tvp->tv_sec = sec - DIFF19041970;
+		memcpy(&sec, &resp[1], 4);
+		tvp->tv_sec = sec - DIFF19041970;
+		ok = (sec > DIFF19041970) && (sec < 0xf0000000);
+		if (!ok) aprint_error_dev(sc->sc_dev,
+		    "got garbage from rtc (%08x)\n", sec);
+		count--;
+	}
+	if (count == 0) {
+		aprint_error_dev(sc->sc_dev,
+		    "unable to get a sane time value\n");
+		tvp->tv_sec = 0;
+	}
 	DPRINTF("tod: %" PRIo64 "\n", tvp->tv_sec);
 	tvp->tv_usec = 0;
 	return 0;

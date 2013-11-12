@@ -11,6 +11,10 @@ CPPFLAGS+=	-DPPC_OEA
 .endif
 .endif
 
+.if (!empty(MACHINE_ARCH:Mearm*) || !empty(MACHINE_ARCH:Marm*))
+GENASSYM_DIR= $S/arch/arm/arm32
+.endif
+
 .if exists($S/arch/${MACHINE}/${MACHINE}/genassym.cf)
 GENASSYM_DIR?= $S/arch/${MACHINE}/${MACHINE}
 .elif exists($S/arch/${MACHINE_CPU}/${MACHINE_CPU}/genassym.cf)

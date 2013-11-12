@@ -784,9 +784,10 @@ again:
 			}
 			idb.d_off = (linux_off_t)off;
 			idb.d_reclen = (u_short)linux_reclen;
+			/* Linux puts d_type at the end of each record */
+			*((char *)&idb + idb.d_reclen - 1) = bdp->d_type;
 		}
 		strcpy(idb.d_name, bdp->d_name);
-		idb.d_name[strlen(idb.d_name) + 1] = bdp->d_type;
 		if ((error = copyout((void *)&idb, outp, linux_reclen)))
 			goto out;
 		/* advance past this real entry */

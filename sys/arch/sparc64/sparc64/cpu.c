@@ -92,7 +92,6 @@ static struct cpu_info *alloc_cpuinfo(u_int);
 char	machine[] = MACHINE;		/* from <machine/param.h> */
 char	machine_arch[] = MACHINE_ARCH;	/* from <machine/param.h> */
 char	cpu_model[100];			/* machine model (primary CPU) */
-extern char machine_model[];
 
 /* These are used in locore.s, and are maximums */
 int	dcache_line_size;

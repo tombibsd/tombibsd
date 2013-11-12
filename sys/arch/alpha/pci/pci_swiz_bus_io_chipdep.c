@@ -656,16 +656,15 @@ __C(CHIP,_io_read_4)(void *v, bus_space_handle_t ioh, bus_size_t off)
 	register bus_space_handle_t tmpioh;
 	register uint32_t *port, val;
 	register uint32_t rval;
-	register int offset;
 
 	alpha_mb();
 
 	tmpioh = ioh + off;
-	offset = tmpioh & 3;
 	port = (uint32_t *)((tmpioh << CHIP_ADDR_SHIFT) |
 	    (3 << CHIP_SIZE_SHIFT));
 	val = *port;
 #if 0
+	int offset = tmpioh & 3;
 	rval = ((val) >> (8 * offset)) & 0xffffffff;
 #else
 	rval = val;
@@ -753,10 +752,12 @@ __C(CHIP,_io_write_4)(void *v, bus_space_handle_t ioh,
 {
 	register bus_space_handle_t tmpioh;
 	register uint32_t *port, nval;
-	register int offset;
 
 	tmpioh = ioh + off;
+#if 0
+	register int offset;
 	offset = tmpioh & 3;
+#endif
 	nval = val /*<< (8 * offset)*/;
 	port = (uint32_t *)((tmpioh << CHIP_ADDR_SHIFT) |
 	    (3 << CHIP_SIZE_SHIFT));

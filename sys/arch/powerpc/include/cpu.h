@@ -199,7 +199,7 @@ extern struct cpuset_info cpuset_info;
 #define CPU_IS_PRIMARY(ci)	true
 #define CPU_INFO_ITERATOR	int
 #define CPU_INFO_FOREACH(cii, ci)				\
-	cii = 0, ci = curcpu(); ci != NULL; ci = NULL
+	(void)cii, ci = curcpu(); ci != NULL; ci = NULL
 
 #endif /* MULTIPROCESSOR || _MODULE */
 

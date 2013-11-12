@@ -45,8 +45,6 @@ quotearg.c \
 safe-read.c \
 safe-write.c \
 sh-quote.c \
-stpcpy.c \
-stpncpy.c \
 tmpdir.c \
 wait-process.c \
 xallocsa.c \

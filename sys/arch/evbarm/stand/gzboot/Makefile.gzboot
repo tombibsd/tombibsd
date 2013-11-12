@@ -37,7 +37,11 @@ CPPFLAGS+= -nostdinc -I. -I${EVBARM_STAND}/gzboot -I${EVBARM_STAND}/board
 CPPFLAGS+= -I${S} -I${S}/arch -I${S}/lib/libsa
 CPPFLAGS+= -I${S}/../common/dist/zlib
 CPPFLAGS+= -mabi=apcs-gnu -mfloat-abi=soft
+.if ${HAVE_GCC} < 48
 CPPFLAGS+= -mno-thumb -mno-thumb-interwork
+.else
+CPPFLAGS+= -marm
+.endif
 
 CPPFLAGS+= -D_STANDALONE
 

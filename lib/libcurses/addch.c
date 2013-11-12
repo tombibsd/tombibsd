@@ -124,5 +124,5 @@ __waddch(WINDOW *win, __LDATA *dp)
 
 	buf[0] = dp->ch;
 	buf[1] = '\0';
-	return (__waddbytes(win, buf, 1, dp->attr));
+	return (_cursesi_waddbytes(win, buf, 1, dp->attr, 1));
 }

@@ -1403,7 +1403,7 @@ ufs_parentcheck(struct vnode *upper, struct vnode *lower, kauth_cred_t cred,
 		int *found_ret, struct vnode **upperchild_ret)
 {
 	const int needswap = UFS_MPNEEDSWAP(VTOI(lower)->i_ump);
-	ino_t upper_ino, found_ino;
+	ino_t upper_ino, found_ino = 0;	/* XXX: gcc */
 	struct vnode *current, *next;
 	int error;
 

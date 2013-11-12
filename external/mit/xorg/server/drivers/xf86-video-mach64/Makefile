@@ -11,14 +11,14 @@ SRCS=		atibus.c atichip.c atiprobe.c atividmem.c \
 		atimach64xv.c atimode.c atipreinit.c atiprint.c \
 		atirgb514.c atiscreen.c atituner.c atiutil.c \
 		ativalid.c atiload.c atimisc.c atimach64probe.c \
-		${SRCS.cpio} ${SRCS.dga} #${SRCS.dri} ${SRCS.exa}
+		${SRCS.cpio} ${SRCS.dga} ${SRCS.exa} #${SRCS.dri}
 
 SRCS.cpio=	ativga.c ativgaio.c atibank.c atiwonder.c atiwonderio.c
 SRCS.dga=	atidga.c
 SRCS.dri=	atidri.c
 SRCS.exa=	atimach64exa.c
 
-CPPFLAGS+=	-DUSE_XAA
+CPPFLAGS+=	-DUSE_XAA -DUSE_EXA
 
 .if ${MACHINE_ARCH} == "powerpc" || ${MACHINE_ARCH} == "sparc64" || \
     ${MACHINE_ARCH} == "sparc"

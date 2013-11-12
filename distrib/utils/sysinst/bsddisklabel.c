@@ -743,8 +743,9 @@ check_partitions(void)
 	if (bootxx != NULL) {
 		rv = access(bootxx, R_OK);
 		free(bootxx);
-	}
-	if (bootxx == NULL || rv != 0) {
+	} else
+		rv = -1;
+	if (rv != 0) {
 		process_menu(MENU_ok, deconst(MSG_No_Bootcode));
 		return 0;
 	}

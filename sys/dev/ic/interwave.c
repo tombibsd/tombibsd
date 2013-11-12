@@ -576,6 +576,7 @@ iw_set_speed(struct iw_softc *sc, u_long freq, char in)
 	IW_READ_CODEC_1(CRDFI, reg);
 
 	DPRINTF((" CRDFI %x ", reg));
+	__USE(reg);
 
 	return freq;
 }

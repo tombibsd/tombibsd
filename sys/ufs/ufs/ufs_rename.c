@@ -930,7 +930,7 @@ ufs_gro_genealogy(struct mount *mp, kauth_cred_t cred,
     struct vnode **intermediate_node_ret)
 {
 	struct vnode *vp, *dvp;
-	ino_t dotdot_ino;
+	ino_t dotdot_ino = 0;	/* XXX: gcc */
 	int error;
 
 	KASSERT(mp != NULL);

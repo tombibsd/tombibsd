@@ -251,7 +251,7 @@ hd64461pcmcia_attach(device_t parent, device_t self, void *aux)
 {
 	struct hd64461_attach_args *ha = aux;
 	struct hd64461pcmcia_softc *sc;
-	int error;
+	int error __diagused;
 
 	sc = device_private(self);
 	sc->sc_dev = self;
@@ -893,11 +893,11 @@ hd64461pcmcia_power_on(enum controller_channel channel)
 {
 	uint8_t r;
 	uint16_t r16;
-	bus_addr_t scr, gcr, isr;
+	bus_addr_t gcr, isr;
 
 	isr = HD64461_PCCISR(channel);
 	gcr = HD64461_PCCGCR(channel);
-	scr = HD64461_PCCSCR(channel);
+	(void)HD64461_PCCSCR(channel);
 
 	/*
 	 * XXX to access attribute memory, this is required.

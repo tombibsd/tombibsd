@@ -505,6 +505,8 @@ ym_hvol_to_master_gain(struct ym_softc *sc)
 	/* Notify the change to async processes. */
 	if (changed && sc->sc_audiodev)
 		mixer_signal(sc->sc_audiodev);
+#else
+	__USE(changed);
 #endif
 }
 

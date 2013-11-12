@@ -12,4 +12,8 @@ CPPFLAGS+=	-DIPSEC
 LDADD+= -lipsec
 DPADD+= ${LIBIPSEC}
 
+.if ${MACHINE_ARCH} == "vax"
+COPTS.ping.c=-O0
+.endif
+
 .include <bsd.prog.mk>

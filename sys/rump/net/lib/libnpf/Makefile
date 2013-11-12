@@ -7,11 +7,11 @@
 
 LIB=	rumpnet_npf
 
-SRCS=	npf.c npf_alg.c npf_conf.c npf_ctl.c npf_handler.c npf_bpf.c 
-SRCS+=	npf_inet.c npf_mbuf.c npf_nat.c npf_ruleset.c npf_rproc.c 
-SRCS+=	npf_sendpkt.c npf_session.c npf_state.c npf_state_tcp.c
-SRCS+=	npf_tableset.c npf_tableset_ptree.c npf_worker.c
-SRCS+=	if_npflog.c
+SRCS=	npf.c npf_alg.c npf_conf.c npf_ctl.c npf_handler.c
+SRCS+=	npf_bpf.c npf_if.c npf_inet.c npf_mbuf.c npf_nat.c
+SRCS+=	npf_ruleset.c npf_rproc.c npf_sendpkt.c npf_session.c
+SRCS+=	npf_state.c npf_state_tcp.c npf_tableset.c
+SRCS+=	npf_tableset_ptree.c npf_worker.c if_npflog.c
 
 SRCS+=	npf_alg_icmp.c
 

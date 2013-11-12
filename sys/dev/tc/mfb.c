@@ -260,6 +260,7 @@ mfbattach(device_t parent, device_t self, void *aux)
 	/* clear any pending interrupts */
 	*(uint8_t *)((char *)ri->ri_hw + MX_IREQ_OFFSET) = 0;
 	junk = *(uint8_t *)((char *)ri->ri_hw + MX_IREQ_OFFSET);
+	__USE(junk);
 	*(uint8_t *)((char *)ri->ri_hw + MX_IREQ_OFFSET) = 1;
 
 	waa.console = console;
@@ -471,6 +472,7 @@ mfbintr(void *arg)
 
 	base = (void *)sc->sc_ri->ri_hw;
 	junk = *(uint8_t *)(base + MX_IREQ_OFFSET);
+	__USE(junk);
 #if 0
 	*(uint8_t *)(base + MX_IREQ_OFFSET) = 0;
 #endif

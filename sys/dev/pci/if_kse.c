@@ -350,7 +350,7 @@ kse_attach(device_t parent, device_t self, void *aux)
 	struct ifmedia *ifm;
 	uint8_t enaddr[ETHER_ADDR_LEN];
 	bus_dma_segment_t seg;
-	int i, p, error, nseg;
+	int i, error, nseg;
 	pcireg_t pmode;
 	int pmreg;
 
@@ -526,8 +526,8 @@ kse_attach(device_t parent, device_t self, void *aux)
 	if_attach(ifp);
 	ether_ifattach(ifp, enaddr);
 
-	p = (sc->sc_chip == 0x8842) ? 3 : 1;
 #ifdef KSE_EVENT_COUNTERS
+	int p = (sc->sc_chip == 0x8842) ? 3 : 1;
 	for (i = 0; i < p; i++) {
 		struct ksext *ee = &sc->sc_ext;
 		sprintf(ee->evcntname[i], "%s.%d", device_xname(sc->sc_dev), i+1);

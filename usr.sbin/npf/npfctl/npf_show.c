@@ -319,8 +319,7 @@ static void
 npfctl_print_rule(npf_conf_info_t *ctx, nl_rule_t *rl)
 {
 	const uint32_t attr = npf_rule_getattr(rl);
-	const char *rproc, *name;
-	u_int if_idx;
+	const char *rproc, *ifname, *name;
 
 	/* Rule attributes/flags. */
 	for (u_int i = 0; i < __arraycount(attr_keyword_map); i++) {
@@ -333,9 +332,7 @@ npfctl_print_rule(npf_conf_info_t *ctx, nl_rule_t *rl)
 			fprintf(ctx->fp, "%s ", ak->val);
 		}
 	}
-	if ((if_idx = npf_rule_getinterface(rl)) != 0) {
-		char ifnamebuf[IFNAMSIZ], *ifname;
-		ifname = if_indextoname(if_idx, ifnamebuf);
+	if ((ifname = npf_rule_getinterface(rl)) != NULL) {
 		fprintf(ctx->fp, "on %s ", ifname);
 	}
 
@@ -360,14 +357,14 @@ npfctl_print_nat(npf_conf_info_t *ctx, nl_nat_t *nt)
 {
 	nl_rule_t *rl = (nl_nat_t *)nt;
 	const char *ifname, *seg1, *seg2, *arrow;
-	char *seg, ifnamebuf[IFNAMSIZ];
-	size_t if_idx, alen;
 	npf_addr_t addr;
 	in_port_t port;
+	size_t alen;
+	char *seg;
 
 	/* Get the interface. */
-	if_idx = npf_rule_getinterface(rl);
-	ifname = if_indextoname(if_idx, ifnamebuf);
+	ifname = npf_rule_getinterface(rl);
+	assert(ifname != NULL);
 
 	/* Get the translation address (and port, if used). */
 	npf_nat_getmap(nt, &addr, &alen, &port);

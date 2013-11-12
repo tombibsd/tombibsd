@@ -354,9 +354,10 @@ lmenv_refresh(struct sysmon_envsys *sme, envsys_data_t *edata)
 	case LMENV_INT_TEMP:
 		if (data == 0x80)
 			edata->state = ENVSYS_SINVALID;
-		else
+		else {
 			edata->value_cur = (int8_t)data * 1000000 + 273150000;
 			edata->state = ENVSYS_SVALID;
+		}
 		break;
 	case LMENV_FAN1:
 		if (edata->units == ENVSYS_SVOLTS_DC) {
@@ -364,12 +365,17 @@ lmenv_refresh(struct sysmon_envsys *sme, envsys_data_t *edata)
 			edata->state = ENVSYS_SVALID;
 			break;
 		}
-		tmp = data * sc->sc_fan1_div;
-		if (tmp == 0 || tmp == 0xff)
+		if (data == 0xff) {
 			edata->state = ENVSYS_SINVALID;
-		else
+			break;
+		}
+		tmp = data * sc->sc_fan1_div;
+		if (tmp == 0)
+			edata->state = ENVSYS_SINVALID;
+		else {
 			edata->value_cur = 1350000 / tmp;
 			edata->state = ENVSYS_SVALID;
+		}
 		break;
 	case LMENV_FAN2:
 		if (edata->units == ENVSYS_SVOLTS_DC) {
@@ -377,12 +383,17 @@ lmenv_refresh(struct sysmon_envsys *sme, envsys_data_t *edata)
 			edata->state = ENVSYS_SVALID;
 			break;
 		}
-		tmp = data * sc->sc_fan2_div;
-		if (tmp == 0 || tmp == 0xff)
+		if (data == 0xff) {
 			edata->state = ENVSYS_SINVALID;
-		else
+			break;
+		}
+		tmp = data * sc->sc_fan2_div;
+		if (tmp == 0)
+			edata->state = ENVSYS_SINVALID;
+		else {
 			edata->value_cur = 1350000 / tmp;
 			edata->state = ENVSYS_SVALID;
+		}
 		break;
 	default:
 		edata->state = ENVSYS_SINVALID;

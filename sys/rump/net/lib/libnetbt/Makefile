@@ -1,6 +1,8 @@
 #	$NetBSD$
 #
 
+.include <bsd.own.mk>
+
 .PATH:	${.CURDIR}/../../../../netbt
 
 LIB=	rumpnet_netbt
@@ -13,6 +15,11 @@ SRCS=	bt_proto.c bt_sysctl.c						\
 	rfcomm_dlc.c rfcomm_session.c rfcomm_socket.c rfcomm_upper.c	\
 	sco_socket.c sco_upper.c
 
+.if ${HAVE_GCC} && ${HAVE_GCC} == 48
+.if ${MACHINE_ARCH} == "sh3eb" || ${MACHINE_ARCH} == "sh3el"
+COPTS.l2cap_signal.c=	-O0
+.endif
+.endif
 SRCS+=	component.c
 
 .include <bsd.lib.mk>

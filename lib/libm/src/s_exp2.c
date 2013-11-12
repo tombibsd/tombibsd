@@ -343,9 +343,9 @@ static const double tbl[TBLSIZE * 2] = {
 double
 exp2(double x)
 {
-	double r, t, twopk, twopkp1000, z;
+	double r, t, twopk, z;
 	uint32_t hx, ix, lx, i0;
-	int k;
+	int k, big;
 
 	/* Filter out exceptional cases. */
 	GET_HIGH_WORD(hx,x);
@@ -378,19 +378,20 @@ exp2(double x)
 	/* Compute r = exp2(y) = exp2t[i0] * p(z - eps[i]). */
 	t = tbl[i0];		/* exp2t[i0] */
 	z -= tbl[i0 + 1];	/* eps[i0]   */
-	if (k >= -1021 << 20)
+	big = k >= -1021 << 20;
+	if (big)
 		INSERT_WORDS(twopk, 0x3ff00000 + k, 0);
 	else
-		INSERT_WORDS(twopkp1000, 0x3ff00000 + k + (1000 << 20), 0);
+		INSERT_WORDS(twopk, 0x3ff00000 + k + (1000 << 20), 0);
 	r = t + t * z * (P1 + z * (P2 + z * (P3 + z * (P4 + z * P5))));
 
 	/* Scale by 2**(k>>20). */
-	if(k >= -1021 << 20) {
+	if (big) {
 		if (k == 1024 << 20)
 			return (r * 2.0 * 0x1p1023);
 		return (r * twopk);
 	} else {
-		return (r * twopkp1000 * twom1000);
+		return (r * twopk * twom1000);
 	}
 }
 

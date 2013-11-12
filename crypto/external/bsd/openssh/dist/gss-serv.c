@@ -1,5 +1,5 @@
 /*	$NetBSD$	*/
-/* $OpenBSD: gss-serv.c,v 1.23 2011/08/01 19:18:15 markus Exp $ */
+/* $OpenBSD: gss-serv.c,v 1.24 2013/07/20 01:55:13 djm Exp $ */
 
 /*
  * Copyright (c) 2001-2003 Simon Wilkinson. All rights reserved.

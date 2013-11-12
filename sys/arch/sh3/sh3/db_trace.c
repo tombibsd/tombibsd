@@ -82,7 +82,6 @@ db_stack_trace_print(db_expr_t addr, bool have_addr, db_expr_t count,
 	struct trapframe *tf;
 	db_addr_t callpc, frame, lastframe;
 	uint32_t vbr;
-	bool kernel_only = true;
 	bool lwpid = false;
 	bool lwpaddr = false;
 	const char *cp;
@@ -96,8 +95,6 @@ db_stack_trace_print(db_expr_t addr, bool have_addr, db_expr_t count,
 			lwpaddr = true;
 		else if (c == 't')
 			lwpid = true;
-		else if (c == 'u')
-			kernel_only = false;
 	}
 
 	if (lwpaddr && lwpid) {

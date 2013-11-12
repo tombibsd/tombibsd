@@ -348,6 +348,8 @@ tdvfb_videomode_set(struct tdvfb_softc *sc)
 	uint16_t hbackporch, hsyncon, hsyncoff; 
 	uint16_t yheight, xwidth; 
 
+	fbiinit5 = fbiinit6 = 0; /* XXX gcc */
+
 	yheight = sc->sc_videomode->vdisplay;
 	xwidth = sc->sc_videomode->hdisplay;
 
@@ -746,7 +748,7 @@ tdvfb_gendac_detect(struct tdvfb_softc *sc)
 	    (n_f1 == TDV_GENDAC_DFLT_F1_N) &&
 	    (m_f7 == TDV_GENDAC_DFLT_F7_M) &&
 	    (n_f7 == TDV_GENDAC_DFLT_F7_N) &&
-	    (n_fb == TDV_GENDAC_DFLT_FB_N) &&
+	    (m_fb == TDV_GENDAC_DFLT_FB_M) &&
 	    (n_fb == TDV_GENDAC_DFLT_FB_N) ) {
 		aprint_normal_dev(sc->sc_dev, "ICS 5342 GENDAC\n");
 		return true;

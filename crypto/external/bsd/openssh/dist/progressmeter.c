@@ -1,5 +1,5 @@
 /*	$NetBSD$	*/
-/* $OpenBSD: progressmeter.c,v 1.37 2006/08/03 03:34:42 deraadt Exp $ */
+/* $OpenBSD: progressmeter.c,v 1.39 2013/06/02 13:33:05 dtucker Exp $ */
 /*
  * Copyright (c) 2003 Nils Nordman.  All rights reserved.
  *
@@ -39,6 +39,7 @@ __RCSID("$NetBSD$");
 
 #include "progressmeter.h"
 #include "atomicio.h"
+#include "misc.h"
 
 #define DEFAULT_WINSIZE 80
 #define MAX_WINSIZE 512
@@ -134,7 +135,7 @@ refresh_progress_meter(void)
 
 	transferred = *counter - cur_pos;
 	cur_pos = *counter;
-	now = time(NULL);
+	now = monotime();
 	bytes_left = end_pos - cur_pos;
 
 	delta_pos = cur_pos - last_pos;
@@ -266,7 +267,7 @@ update_progress_meter(int ignore)
 void
 start_progress_meter(char *f, off_t filesize, off_t *ctr)
 {
-	start = last_update = time(NULL);
+	start = last_update = monotime();
 	file = f;
 	end_pos = filesize;
 	cur_pos = 0;

@@ -446,6 +446,9 @@ encbrdfix(struct brdprop *brd)
 	val = pcicfgread(ac97, 0x3c) &~ 0xff;
 	val |= 5;
 	pcicfgwrite(ac97, 0x3c, val);
+
+	(void) pcicfgread(ide, 0x08);
+	(void) pcicfgread(pmgt, 0x08);
 }
 
 void

@@ -1025,7 +1025,7 @@ tga_rop_vtov(struct rasops_info *dst, int dx, int dy, int w, int h, int rop,
 	struct tga_devconfig *dc = dst->ri_hw;
 	int srcb, dstb, tga_srcb, tga_dstb;
 	int x, y, wb;
-	int xstart, xend, xdir;
+	int xstart, xdir;
 	int ystart, yend, ydir, yinc;
 	int xleft, lastx, lastleft;
 	int offset = 1 * dc->dc_tgaconf->tgac_vvbr_units;
@@ -1063,11 +1063,9 @@ tga_rop_vtov(struct rasops_info *dst, int dx, int dy, int w, int h, int rop,
         wb = w * (dst->ri_depth / 8);
 	if (sx >= dx || (sx + w) <= dx) {	/* copy forwards */
 		xstart = 0;
-		xend = wb;
 		xdir = 1;
 	} else {				/* copy backwards */
 		xstart = wb;
-		xend = 0;
 		xdir = -1;
 	}
 

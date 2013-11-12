@@ -294,17 +294,11 @@ hpcapm_hook(void *ctx, int type, long id, void *msg)
 static void
 hpcapm_disconnect(void *scx)
 {
-	struct apmhpc_softc *sc;
-
-	sc = scx;
 }
 
 static void
 hpcapm_enable(void *scx, int onoff)
 {
-	struct apmhpc_softc *sc;
-
-	sc = scx;
 }
 
 static int
@@ -432,26 +426,16 @@ hpcapm_get_event(void *scx, u_int *event_type, u_int *event_info)
 static void
 hpcapm_cpu_busy(void *scx)
 {
-	struct apmhpc_softc *sc;
-
-	sc = scx;
 }
 
 static void
 hpcapm_cpu_idle(void *scx)
 {
-	struct apmhpc_softc *sc;
-
-	sc = scx;
 }
 
 static void
 hpcapm_get_capabilities(void *scx, u_int *numbatts, u_int *capflags)
 {
-	struct apmhpc_softc *sc;
-
 	*numbatts = 0;
 	*capflags = APM_GLOBAL_STANDBY | APM_GLOBAL_SUSPEND;
-
-	sc = scx;
 }

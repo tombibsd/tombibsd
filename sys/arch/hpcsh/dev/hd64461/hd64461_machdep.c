@@ -74,10 +74,10 @@ do {									\
 	r &= ~HD64461_PCCSCR_VCC1;					\
 	hd64461_reg_write_1(scr, r);					\
 } while (/*CONSTCOND*/0)
-	bus_addr_t isr, gcr, scr;
+	bus_addr_t gcr, scr;
 	uint8_t r;
 	
-	isr = HD64461_PCCISR(ch);
+	(void)HD64461_PCCISR(ch);
 	gcr = HD64461_PCCGCR(ch);
 	scr = HD64461_PCCSCR(ch);
 

@@ -13,7 +13,7 @@
 /ether.c/1.2/Thu Nov  1 13:43:23 2012/-kk/
 /extern.h/1.14/Fri Aug  7 18:53:37 2009/-kk/
 /ieee80211.c/1.25/Mon Dec 13 17:35:08 2010/-kk/
-/ifconfig.8/1.104/Sat Jan 28 15:01:44 2012/-kk/
+/ifconfig.8/1.105/Tue Nov 12 02:18:30 2013/-kk/
 /ifconfig.c/1.231/Thu Oct 24 10:28:53 2013/-kk/
 /ifconfig_hostops.c/1.1/Mon Dec 13 17:35:08 2010/-kk/
 /ifconfig_rumpops.c/1.1/Mon Dec 13 17:35:08 2010/-kk/

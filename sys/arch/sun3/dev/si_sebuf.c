@@ -526,11 +526,10 @@ se_intr(void *arg)
 {
 	struct se_softc *sc = arg;
 	volatile struct se_regs *se = sc->sc_regs;
-	int dma_error, claimed;
+	int claimed;
 	u_short csr;
 
 	claimed = 0;
-	dma_error = 0;
 
 	/* SBC interrupt? DMA interrupt? */
 	csr = se->se_csr;

@@ -554,7 +554,6 @@ void	vrele_flush(void);
 int	vtruncbuf(struct vnode *, daddr_t, bool, int);
 void	vwakeup(struct buf *);
 void	vwait(struct vnode *, int);
-void	vclean(struct vnode *, int);
 void	vrevoke(struct vnode *);
 struct vnode *
 	vnalloc(struct mount *);

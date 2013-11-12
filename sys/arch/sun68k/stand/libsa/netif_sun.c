@@ -278,7 +278,7 @@ netif_put(struct iodesc *desc, void *pkt, size_t len)
 	struct devdata *dd;
 	struct saioreq *si;
 	struct saif *sif;
-	int rv, slen;
+	int slen;
 
 #ifdef NETIF_DEBUG
 	if (debug > 1) {
@@ -318,7 +318,7 @@ netif_put(struct iodesc *desc, void *pkt, size_t len)
 		slen = 60;
 	}
 
-	rv = (*sif->sif_xmit)(si->si_devdata, dd->tbuf, slen);
+	(void)(*sif->sif_xmit)(si->si_devdata, dd->tbuf, slen);
 
 #ifdef NETIF_DEBUG
 	if (debug > 1)

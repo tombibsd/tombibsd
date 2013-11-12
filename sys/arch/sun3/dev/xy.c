@@ -1241,7 +1241,6 @@ xyc_cmd(struct xyc_softc *xycsc, int cmd, int subfn, int unit, int block,
 int 
 xyc_startbuf(struct xyc_softc *xycsc, struct xy_softc *xysc, struct buf *bp)
 {
-	int partno;
 	struct xy_iorq *iorq;
 	struct xy_iopb *iopb;
 	u_long  block;
@@ -1255,8 +1254,8 @@ xyc_startbuf(struct xyc_softc *xycsc, struct xy_softc *xysc, struct buf *bp)
 	if (bp == NULL)
 		panic("%s null buf", __func__);
 
-	partno = DISKPART(bp->b_dev);
 #ifdef XYC_DEBUG
+	int partno = DISKPART(bp->b_dev);
 	printf("%s: %s%c: %s block %d\n", __func__, device_xname(xysc->sc_dev),
 	    'a' + partno, (bp->b_flags & B_READ) ? "read" : "write",
 	    (int)bp->b_blkno);

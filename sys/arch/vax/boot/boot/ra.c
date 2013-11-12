@@ -242,6 +242,7 @@ igen:	uda.uda_cmd.mscp_opcode = cmd;
 	printf("sending cmd %x...", cmd);
 #endif
 	hej = *ra_ip;
+	__USE(hej);
 	to = 10000000;
 	while (uda.uda_ca.ca_rspdsc < 0) {
 //		if (uda.uda_ca.ca_cmdint)

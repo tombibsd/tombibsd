@@ -70,5 +70,6 @@ ENTRY_NP(_atomic_cas_64)
 END(_atomic_cas_64)
 
 ATOMIC_OP_ALIAS(atomic_cas_64,_atomic_cas_64)
+STRONG_ALIAS(__sync_val_compare_and_swap_8,_atomic_cas_64)
 
 #endif /* _ARM_ARCH_6 */

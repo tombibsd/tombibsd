@@ -983,6 +983,21 @@ struct netbsd_elfcore_procinfo {
 /* NetBSD-specific note name */
 #define ELF_NOTE_MARCH_NAME		ELF_NOTE_NETBSD_NAME
 
+/*
+ * NetBSD-specific note type: MCMODEL
+ * There should be 1 NOTE per executable.
+ * name:	NetBSD\0
+ * namesz:	7
+ * code model:	string
+ */
+
+#define ELF_NOTE_TYPE_MCMODEL_TAG	6
+/* NetBSD-specific note name and description sizes */
+#define ELF_NOTE_MCMODEL_NAMESZ		ELF_NOTE_NETBSD_NAMESZ
+/* NetBSD-specific note name */
+#define ELF_NOTE_MCMODEL_NAME		ELF_NOTE_NETBSD_NAME
+
+
 #if !defined(ELFSIZE) && defined(ARCH_ELFSIZE)
 #define ELFSIZE ARCH_ELFSIZE
 #endif

@@ -2,6 +2,8 @@
 
 ./lib/sparc
 ./lib/sparc/npf
+./usr/include/g++/bits/sparc
+./usr/include/g++/bits/sparc64
 ./usr/lib/sparc
 ./usr/lib/sparc/i18n
 ./usr/lib/sparc/lua

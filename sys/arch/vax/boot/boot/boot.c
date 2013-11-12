@@ -93,12 +93,10 @@ struct rpb bootrpb;
 void
 Xmain(void)
 {
-	int io;
 	int j, nu;
 	u_long marks[MARK_MAX];
 	extern const char bootprog_rev[];
 
-	io = 0;
 	skip = 1;
 	autoconf();
 

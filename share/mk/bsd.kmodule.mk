@@ -27,7 +27,7 @@ CFLAGS+=	-fno-strict-aliasing -Wno-pointer-sign
 # relocations inside the loader and removing this workaround, as the
 # resulting code would be much faster.
 .if ${MACHINE_CPU} == "arm"
-CFLAGS+=	-fno-common
+CFLAGS+=	-fno-common -fno-unwind-tables
 .elif ${MACHINE_CPU} == "hppa"
 CFLAGS+=	-mlong-calls
 .elif ${MACHINE_CPU} == "powerpc"

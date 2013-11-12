@@ -695,12 +695,11 @@ static void
 scif_iflush(struct scif_softc *sc)
 {
 	int i;
-	unsigned char c;
 
 	i = scif_fdr_read() & SCFDR2_RECVCNT;
 
 	while (i > 0) {
-		c = scif_frdr_read();
+		(void)scif_frdr_read();
 		scif_ssr_write(scif_ssr_read() & ~(SCSSR2_RDF | SCSSR2_DR));
 		i--;
 	}

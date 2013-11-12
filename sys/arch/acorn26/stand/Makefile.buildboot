@@ -34,7 +34,11 @@ CPPFLAGS+=	-D_STANDALONE -DHIMEM=0x28000
 CPPFLAGS+=	-I. -I${.CURDIR}/../../.. -I${.CURDIR}/../../../..
 CPPFLAGS+=	-I${.CURDIR}/../lib
 CPPFLAGS+=	-mabi=apcs-gnu -mfloat-abi=soft -march=armv2
+.if ${HAVE_GCC} < 48
 CPPFLAGS+=	-mno-thumb -mno-thumb-interwork
+.else
+CPPFLAGS+=	-marm
+.endif
 CFLAGS=		-O2
 CFLAGS+=	-ffreestanding -fno-unwind-tables
 CFLAGS+=	-Wall -Wstrict-prototypes -Wmissing-prototypes

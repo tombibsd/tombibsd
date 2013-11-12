@@ -46,7 +46,7 @@
  * disk geometry, filesystem partitions, and drive specific information.
  * The location of the label, as well as the number of partitions the
  * label can describe and the number of the "whole disk" (raw)
- * paritition are machine dependent.
+ * partition are machine dependent.
  */
 #if HAVE_NBTOOL_CONFIG_H
 #undef MAXPARTITIONS

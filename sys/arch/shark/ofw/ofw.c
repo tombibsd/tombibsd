@@ -1202,7 +1202,6 @@ ofw_callbackhandler(void *v)
 		args->nreturns = 1;
 	} else if (strcmp(name, "claim-virt") == 0) {
 		vaddr_t va;
-		vsize_t size;
 		vaddr_t align;
 
 		/* XXX - notyet */
@@ -1220,7 +1219,6 @@ ofw_callbackhandler(void *v)
 		args_n_results[nargs] =	0;	/* properly formatted request */
 
 		/* Allocate size bytes with specified alignment. */
-		size = (vsize_t)args_n_results[0];
 		align = (vaddr_t)args_n_results[1];
 		if (align % PAGE_SIZE != 0) {
 			args_n_results[nargs + 1] = -1;
@@ -1239,8 +1237,6 @@ ofw_callbackhandler(void *v)
 			args->nreturns = 3;
 		}
 	} else if (strcmp(name, "release-virt") == 0) {
-		vaddr_t va;
-		vsize_t size;
 
 		/* XXX - notyet */
 		printf("unimplemented ofw callback - %s\n", name);
@@ -1255,10 +1251,6 @@ ofw_callbackhandler(void *v)
 			return;
 		}
 		args_n_results[nargs] =	0;	/* properly formatted request */
-
-		/* Release bytes. */
-		va = (vaddr_t)args_n_results[0];
-		size = (vsize_t)args_n_results[1];
 
 		args->nreturns = 1;
 	} else {

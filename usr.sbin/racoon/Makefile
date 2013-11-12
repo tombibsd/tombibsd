@@ -72,4 +72,9 @@ prsa_tok.c: ${DIST}/src/racoon/prsa_tok.l
 prsa_par.c: ${DIST}/src/racoon/prsa_par.y
 	${YACC} -pprsa -d -o ${.TARGET} ${.ALLSRC}
 
+.if defined(HAVE_GCC) && ${HAVE_GCC} == 48
+.if ${MACHINE_ARCH} == "sh3el"
+COPTS.ipsec_doi.c=	-O0
+.endif
+.endif
 .include <bsd.prog.mk>

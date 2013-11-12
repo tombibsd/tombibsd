@@ -103,6 +103,7 @@ typedef void (*npf_workfunc_t)(void);
 /* Some artificial limits. */
 #define	NPF_TABLE_SLOTS		32
 #define	NPF_MAX_RULES		(1024 * 1024)
+#define	NPF_MAX_IFMAP		64
 
 /*
  * SESSION STATE STRUCTURES
@@ -120,7 +121,7 @@ typedef struct {
 
 typedef struct {
 	kmutex_t	nst_lock;
-	int		nst_state;
+	u_int		nst_state;
 	npf_tcpstate_t	nst_tcpst[2];
 } npf_state_t;
 
@@ -166,9 +167,15 @@ int		npfctl_table(void *);
 void		npf_stats_inc(npf_stats_t);
 void		npf_stats_dec(npf_stats_t);
 
+u_int		npf_ifmap_register(const char *);
+void		npf_ifmap_flush(void);
+void		npf_ifmap_attach(ifnet_t *);
+void		npf_ifmap_detach(ifnet_t *);
+u_int		npf_ifmap_id(const ifnet_t *);
+
 /* Packet filter hooks. */
-int		npf_pfil_register(void);
-void		npf_pfil_unregister(void);
+int		npf_pfil_register(bool);
+void		npf_pfil_unregister(bool);
 bool		npf_pfil_registered_p(void);
 int		npf_packet_handler(void *, struct mbuf **, ifnet_t *, int);
 

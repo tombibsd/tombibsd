@@ -648,7 +648,7 @@ void
 intc_intr(int ssr, int spc, int ssp)
 {
 	struct intc_intrhand *ih;
-	int s, evtcode;
+	int evtcode;
 
 	curcpu()->ci_data.cpu_nintr++;
 
@@ -662,7 +662,7 @@ intc_intr(int ssr, int spc, int ssp)
 	 * SH3 may or may not cause TLB miss when access stack.)
 	 * Enable higher level interrupt here.
 	 */
-	s = _cpu_intr_resume(ih->ih_level);
+	(void)_cpu_intr_resume(ih->ih_level);
 
 	if (evtcode == SH_INTEVT_TMU0_TUNI0) {	/* hardclock */
 		struct clockframe cf;

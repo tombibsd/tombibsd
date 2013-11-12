@@ -202,11 +202,11 @@ DPSRCS+= ${DEFINES_H}
 
 # misc. dependancies.
 filter_host.c: ${DIST}/sim/ppc/filter_filename.c
-	cp ${.ALLSRC} ${.TARGET}
+	cp -f ${.ALLSRC} ${.TARGET}
 filter_host.lo: ppc-config.h
 
 ppc-config.h: ${DIST}/sim/ppc/std-config.h
-	cp ${.ALLSRC} ${.TARGET}
+	cp -f ${.ALLSRC} ${.TARGET}
 DPSRCS+= ppc-config.h
 
 CLEANFILES+=	igen dgen gentmap *.lo \

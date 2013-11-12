@@ -20,4 +20,8 @@ DPADD+=${LIBPROP}
 
 .PATH:	${NETBSDSRCDIR}/sys/ufs/ext2fs ${FSCK}
 
+.if ${MACHINE_ARCH} == "vax"
+COPTS.mke2fs.c=-O0
+.endif
+
 .include <bsd.prog.mk>

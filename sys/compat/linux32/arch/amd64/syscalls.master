@@ -113,7 +113,7 @@
 		    netbsd32_charp to); }
 39	NOARGS	{ int|netbsd32||mkdir(netbsd32_charp path, int mode); }
 40	NOARGS	{ int|netbsd32||rmdir(netbsd32_charp path); }
-41	NOARGS	{ int|netbsd32||dup(u_int fd); }
+41	NOARGS	{ int|netbsd32||dup(int fd); }
 42	STD	{ int|linux32_sys||pipe(netbsd32_intp fd); }
 43	STD	{ int|linux32_sys||times(linux32_tmsp_t tms); }
 44	OBSOL	prof

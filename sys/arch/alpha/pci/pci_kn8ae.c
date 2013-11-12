@@ -215,6 +215,7 @@ dec_kn8ae_intr_disestablish(void *ccv, void *cookie)
 	vec = IH_VEC(ih);
 
 	scb = &scb_iovectab[SCB_VECTOIDX(vec - SCB_IOVECBASE)];
+	__USE(scb);
 
 	kn8ae_enadis_intr(ccp, ih, 0);
 

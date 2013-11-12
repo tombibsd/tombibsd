@@ -120,7 +120,6 @@ tc_bus_dmamap_create_sgmap(
 	int flags,
 	bus_dmamap_t *dmamp)
 {
-	bus_dmamap_t map;
 	int error;
 
 	error = _bus_dmamap_create(t, size, nsegments, maxsegsz,
@@ -128,7 +127,7 @@ tc_bus_dmamap_create_sgmap(
 	if (error)
 		return (error);
 
-	map = *dmamp;
+	(void)*dmamp;
 
 	/* XXX BUS_DMA_ALLOCNOW */
 

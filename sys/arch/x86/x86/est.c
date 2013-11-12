@@ -534,11 +534,11 @@ static const uint16_t pm90_n725d[] = {
 
 /* Intel Pentium M processor 730 1.6 GHz, 533 MHz FSB */
 static const uint16_t pm90_n730[] = {
-       ID16(1600, 1308, BUS133),
-       ID16(1333, 1260, BUS133),
-       ID16(1200, 1212, BUS133),
-       ID16(1067, 1180, BUS133),
-       ID16( 800,  988, BUS133),
+	ID16(1600, 1308, BUS133),
+	ID16(1333, 1260, BUS133),
+	ID16(1200, 1212, BUS133),
+	ID16(1067, 1180, BUS133),
+	ID16( 800,  988, BUS133),
 };
 
 /* Intel Pentium M processor 735 1.7 GHz, VID #A */
@@ -583,10 +583,10 @@ static const uint16_t pm90_n735d[] = {
 
 /* Intel Pentium M processor 740 1.73 GHz, 533 MHz FSB */
 static const uint16_t pm90_n740[] = {
-       ID16(1733, 1356, BUS133),
-       ID16(1333, 1212, BUS133),
-       ID16(1067, 1100, BUS133),
-       ID16( 800,  988, BUS133),
+	ID16(1733, 1356, BUS133),
+	ID16(1333, 1212, BUS133),
+	ID16(1067, 1100, BUS133),
+	ID16( 800,  988, BUS133),
 };
 
 /* Intel Pentium M processor 745 1.8 GHz, VID #A */
@@ -1121,7 +1121,6 @@ est_tables(device_t self)
 #endif
 	uint64_t msr;
 	uint16_t cur, idhi, idlo;
-	uint8_t crhi, crlo, crcur;
 	size_t len;
 	int i, mv;
 
@@ -1130,9 +1129,6 @@ est_tables(device_t self)
 	idhi = (msr >> 32) & 0xffff;
 	idlo = (msr >> 48) & 0xffff;
 	cur = msr & 0xffff;
-	crhi = (idhi  >> 8) & 0xff;
-	crlo = (idlo  >> 8) & 0xff;
-	crcur = (cur >> 8) & 0xff;
 
 #ifdef __i386__
 	if (idhi == 0 || idlo == 0 || cur == 0 ||
@@ -1144,6 +1140,9 @@ est_tables(device_t self)
 #endif
 
 #ifdef __amd64__
+	uint8_t crhi = (idhi >> 8) & 0xff;
+	uint8_t crlo = (idlo >> 8) & 0xff;
+	uint8_t crcur = (cur >> 8) & 0xff;
 	if (crlo == 0 || crhi == 0 || crcur == 0 || crhi == crlo ||
 	    crlo > crhi || crcur < crlo || crcur > crhi) {
 		/*

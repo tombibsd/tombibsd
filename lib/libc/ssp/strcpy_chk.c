@@ -41,10 +41,10 @@ __RCSID("$NetBSD$");
 char *
 __strcpy_chk(char * __restrict dst, const char * __restrict src, size_t slen)
 {
-	size_t len = strlen(src);
+	size_t len = strlen(src) + 1;
 
-	if (len >= slen)
+	if (len > slen)
 		__chk_fail();
 
-	return memcpy(dst, src, len + 1);
+	return memcpy(dst, src, len);
 }

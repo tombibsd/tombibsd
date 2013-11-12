@@ -530,12 +530,10 @@ void i386_tls_switch(lwp_t *);
 void
 i386_switch_context(lwp_t *l)
 {
-	struct cpu_info *ci;
 	struct pcb *pcb;
 	struct physdev_op physop;
 
 	pcb = lwp_getpcb(l);
-	ci = curcpu();
 
 	HYPERVISOR_stack_switch(GSEL(GDATA_SEL, SEL_KPL), pcb->pcb_esp0);
 
@@ -806,6 +804,8 @@ haltsys:
 			splx(s);
 
 		acpi_enter_sleep_state(ACPI_STATE_S5);
+#else
+		__USE(s);
 #endif
 	}
 
@@ -1162,7 +1162,6 @@ void
 init386(paddr_t first_avail)
 {
 	extern void consinit(void);
-	struct pcb *pcb;
 	int x;
 #ifndef XEN
 	union descriptor *tgdt;
@@ -1184,7 +1183,6 @@ init386(paddr_t first_avail)
 	cpu_probe(&cpu_info_primary);
 
 	uvm_lwp_setuarea(&lwp0, lwp0uarea);
-	pcb = lwp_getpcb(&lwp0);
 
 	cpu_init_msrs(&cpu_info_primary, true);
 
@@ -1195,6 +1193,7 @@ init386(paddr_t first_avail)
 #endif
 
 #ifdef XEN
+	struct pcb *pcb = lwp_getpcb(&lwp0);
 	pcb->pcb_cr3 = PDPpaddr;
 	__PRINTK(("pcb_cr3 0x%lx cr3 0x%lx\n",
 	    PDPpaddr, xpmap_ptom(PDPpaddr)));

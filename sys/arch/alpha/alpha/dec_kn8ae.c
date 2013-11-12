@@ -470,7 +470,6 @@ void
 kn8ae_mcheck(unsigned long mces, unsigned long type, unsigned long logout, struct trapframe *framep)
 {
 	struct mchkinfo *mcp;
-	int get_dwlpx_regs;
 	struct tlsb_mchk_fatal mcs[TLSB_NODE_MAX+1], *ptr;
 	mc_hdr_ev5 *hdr;
 	mc_uc_ev5 *mptr;
@@ -484,7 +483,6 @@ kn8ae_mcheck(unsigned long mces, unsigned long type, unsigned long logout, struc
 		return;
 	}
 
-	get_dwlpx_regs = 0;
 	ptr = NULL;
 	memset(mcs, 0, sizeof (mcs));
 

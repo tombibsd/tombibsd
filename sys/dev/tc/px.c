@@ -344,6 +344,7 @@ px_pbuf_post(struct stic_info *si, uint32_t *buf)
 			sr->sr_ipdvint = STIC_INT_P_WE;
 			tc_wmb();
 			junk = *poll;
+			__USE(junk);
 			return (0);
 		}
 		DELAY(STAMP_DELAY);

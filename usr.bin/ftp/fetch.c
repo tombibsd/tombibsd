@@ -1263,7 +1263,7 @@ fetch_url(const char *url, const char *proxyenv, char *proxyauth, char *wwwauth)
 					/* transfer file or chunk */
 		while (1) {
 			struct timeval then, now, td;
-			off_t bufrem;
+			volatile off_t bufrem;
 
 			if (rate_get)
 				(void)gettimeofday(&then, NULL);

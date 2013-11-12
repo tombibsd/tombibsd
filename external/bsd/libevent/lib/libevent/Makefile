@@ -28,4 +28,10 @@ poll.c \
 select.c \
 signal.c
 
+.if defined(HAVE_GCC) && ${HAVE_GCC} == 48
+.if ${MACHINE_ARCH} == "sh3el"
+COPTS.evdns.c=	-O0
+.endif
+.endif
+
 .include <bsd.lib.mk>

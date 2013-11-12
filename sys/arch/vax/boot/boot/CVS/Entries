@@ -1,6 +1,6 @@
 /Makefile/1.41/Thu Oct 24 10:28:57 2013/-kk/
 /autoconf.c/1.28/Wed Mar 18 10:22:37 2009/-kk/
-/boot.c/1.31/Sat Jan 22 19:19:24 2011/-kk/
+/boot.c/1.32/Tue Nov 12 02:18:42 2013/-kk/
 /conf.c/1.16/Thu Oct 24 10:28:57 2013/-kk/
 /consio.c/1.15/Sat Mar 14 14:46:07 2009/-kk/
 /consio2.S/1.1/Sun Feb 24 01:04:24 2002/-kk/
@@ -10,12 +10,12 @@
 /hp.c/1.9/Wed Mar 18 16:00:15 2009/-kk/
 /if_de.c/1.8/Mon Oct 26 19:16:58 2009/-kk/
 /if_le.c/1.12/Mon Jan 12 11:32:45 2009/-kk/
-/if_ni.c/1.9/Sun Jul  3 08:56:25 2011/-kk/
+/if_ni.c/1.10/Tue Nov 12 02:18:42 2013/-kk/
 /if_qe.c/1.9/Mon Oct 26 19:16:58 2009/-kk/
 /if_ze.c/1.17/Mon Oct 26 19:16:58 2009/-kk/
-/mfm.c/1.13/Mon Oct 26 19:16:58 2009/-kk/
+/mfm.c/1.14/Tue Nov 12 02:18:42 2013/-kk/
 /netio.c/1.16/Thu May 19 02:37:41 2011/-kk/
-/ra.c/1.18/Wed Mar 18 16:00:15 2009/-kk/
+/ra.c/1.19/Tue Nov 12 02:18:42 2013/-kk/
 /rom.c/1.9/Wed Mar 18 16:00:15 2009/-kk/
 /tmscp.c/1.8/Tue Mar 17 18:19:15 2009/-kk/
 /vaxstand.h/1.8/Sun Dec 11 12:19:30 2005/-kk/

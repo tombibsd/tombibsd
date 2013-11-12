@@ -284,8 +284,8 @@ struct cpu_info {
 extern struct cpu_info cpu_info_primary;
 extern struct cpu_info *cpu_info_list;
 
-#define	CPU_INFO_ITERATOR		int
-#define	CPU_INFO_FOREACH(cii, ci)	__USE(cii), ci = cpu_info_list; \
+#define	CPU_INFO_ITERATOR		int __unused
+#define	CPU_INFO_FOREACH(cii, ci)	ci = cpu_info_list; \
 					ci != NULL; ci = ci->ci_next
 
 #define CPU_STARTUP(_ci, _target)	((_ci)->ci_func->start(_ci, _target))

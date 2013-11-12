@@ -185,8 +185,8 @@ cpu_intr_p(void)
 #if defined(MULTIPROCESSOR)
 #define	CPU_IS_PRIMARY(ci)	((ci)->ci_flags & CI_MASTERCPU)
 
-#define	CPU_INFO_ITERATOR	int
-#define	CPU_INFO_FOREACH(cii, ci)	cii = 0, ci = SIMPLEQ_FIRST(&cpus); \
+#define	CPU_INFO_ITERATOR	int __unused
+#define	CPU_INFO_FOREACH(cii, ci)	ci = SIMPLEQ_FIRST(&cpus); \
 					ci != NULL; \
 					ci = SIMPLEQ_NEXT(ci, ci_next)
 

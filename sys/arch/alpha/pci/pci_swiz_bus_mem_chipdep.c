@@ -982,7 +982,6 @@ __C(CHIP,_mem_read_4)(void *v, bus_space_handle_t memh, bus_size_t off)
 	register bus_space_handle_t tmpmemh;
 	register uint32_t *port, val;
 	register uint32_t rval;
-	register int offset;
 
 	alpha_mb();
 
@@ -992,11 +991,12 @@ __C(CHIP,_mem_read_4)(void *v, bus_space_handle_t memh, bus_size_t off)
 #endif
 
 	tmpmemh = memh + off;
-	offset = tmpmemh & 3;
 	port = (uint32_t *)((tmpmemh << CHIP_ADDR_SHIFT) |
 	    (3 << CHIP_SIZE_SHIFT));
 	val = *port;
 #if 0
+	int offset;
+	offset = tmpmemh & 3;
 	rval = ((val) >> (8 * offset)) & 0xffffffff;
 #else
 	rval = val;
@@ -1102,7 +1102,6 @@ __C(CHIP,_mem_write_4)(void *v, bus_space_handle_t memh, bus_size_t off, uint32_
 {
 	register bus_space_handle_t tmpmemh;
 	register uint32_t *port, nval;
-	register int offset;
 
 #ifdef CHIP_D_MEM_W1_SYS_START
 	if ((memh >> 63) != 0)
@@ -1111,7 +1110,10 @@ __C(CHIP,_mem_write_4)(void *v, bus_space_handle_t memh, bus_size_t off, uint32_
 #endif
 	{
 		tmpmemh = memh + off;
+#if 0
+		int offset;
 		offset = tmpmemh & 3;
+#endif
 	        nval = val /*<< (8 * offset)*/;
 	        port = (uint32_t *)((tmpmemh << CHIP_ADDR_SHIFT) |
 	            (3 << CHIP_SIZE_SHIFT));

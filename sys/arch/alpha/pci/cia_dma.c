@@ -424,7 +424,6 @@ cia_tlb_invalidate(void)
 void
 cia_broken_pyxis_tlb_invalidate(void)
 {
-	volatile uint64_t dummy;
 	uint32_t ctrl;
 	int i, s;
 
@@ -447,9 +446,11 @@ cia_broken_pyxis_tlb_invalidate(void)
 	 * XXX to read more times than there are actual tags!
 	 */
 	for (i = 0; i < CIA_TLB_NTAGS + 4; i++) {
+		volatile uint64_t dummy;
 		dummy = *((volatile uint64_t *)
 		    ALPHA_PHYS_TO_K0SEG(CIA_PCI_DENSE + CIA_PYXIS_BUG_BASE +
 		    (i * 65536)));
+		__USE(dummy);
 	}
 
 	/*

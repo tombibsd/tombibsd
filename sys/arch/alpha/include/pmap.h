@@ -141,7 +141,7 @@ struct pmap {
 	struct pmap_statistics	pm_stats;	/* pmap statistics */
 	unsigned long		pm_cpus;	/* mask of CPUs using pmap */
 	unsigned long		pm_needisync;	/* mask of CPUs needing isync */
-	struct pmap_asn_info	pm_asni[1];	/* ASN information */
+	struct pmap_asn_info	pm_asni[];	/* ASN information */
 			/*	variable length		*/
 };
 

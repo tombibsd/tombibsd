@@ -552,7 +552,9 @@ mpbios_scan(device_t self, int *ncpup)
 	int		count;
 	int		type;
 	int		intr_cnt, cur_intr;
+#if NLAPIC > 0
 	paddr_t		lapic_base;
+#endif
 	const struct dflt_conf_entry *dflt_conf;
 	const int *dflt_bus_irq;
 	const struct mpbios_int *iep;
@@ -580,11 +582,11 @@ mpbios_scan(device_t self, int *ncpup)
 #if NACPICA > 0
 	if (mpacpi_ncpu == 0) {
 #endif
+#if NLAPIC > 0
 		lapic_base = LAPIC_BASE;
 		if (mp_cth != NULL)
 			lapic_base = (paddr_t)mp_cth->apic_address;
 
-#if NLAPIC > 0
 		lapic_boot_init(lapic_base);
 #endif
 #if NACPICA > 0

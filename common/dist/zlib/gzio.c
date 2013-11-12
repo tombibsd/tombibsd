@@ -157,6 +157,8 @@ local gzFile gz_open (path, mode, fd)
     if (s->mode == 'w') {
 #ifdef NO_GZCOMPRESS
         err = Z_STREAM_ERROR;
+	__USE(level);
+	__USE(strategy);
 #else
         err = deflateInit2(&(s->stream), level,
                            Z_DEFLATED, -MAX_WBITS, DEF_MEM_LEVEL, strategy);

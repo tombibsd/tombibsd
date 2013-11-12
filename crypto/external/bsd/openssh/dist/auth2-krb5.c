@@ -61,11 +61,11 @@ userauth_kerberos(Authctxt *authctxt)
 	if (PRIVSEP(auth_krb5(authctxt, &tkt, &client, &reply))) {
 		authenticated = 1;
 		if (reply.length)
-			xfree(reply.data);
+			free(reply.data);
 	}
 	if (client)
-		xfree(client);
-	xfree(tkt.data);
+		free(client);
+	free(tkt.data);
 	return (authenticated);
 }
 

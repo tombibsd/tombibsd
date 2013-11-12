@@ -22,7 +22,11 @@ CPPFLAGS+=	-nostdinc -I. -I${.CURDIR} -I${.OBJDIR} -I${S}
 CPPFLAGS+=	-D_STANDALONE -DHEAP_VARIABLE
 CPPFLAGS+=	-DLIBSA_ENABLE_LS_OP
 CPPFLAGS+=	-mabi=apcs-gnu -mfloat-abi=soft -mcpu=xscale
+.if ${HAVE_GCC} < 48
 CPPFLAGS+=	-mno-thumb -mno-thumb-interwork
+.else
+CPPFLAGS+=	-marm
+.endif
 CPUFLAGS=
 AFLAGS+=	-D_LOCORE
 LDFLAGS+=	-nostdlib -Bstatic

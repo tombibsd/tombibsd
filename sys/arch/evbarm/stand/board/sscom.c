@@ -144,7 +144,7 @@ cons_init(void)
 int
 getchar(void)
 {
-	uint8_t stat;
+	uint8_t stat __unused;
 	int c;
 
 	while (!sscom_rxrdy())
