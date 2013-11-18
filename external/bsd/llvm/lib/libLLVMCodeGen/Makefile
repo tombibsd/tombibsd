@@ -96,13 +96,13 @@ SRCS+=	AggressiveAntiDepBreaker.cpp \
 	ScheduleDAGInstrs.cpp \
 	ScheduleDAGPrinter.cpp \
 	ShadowStackGC.cpp \
-	ShrinkWrapping.cpp \
 	SjLjEHPrepare.cpp \
 	SlotIndexes.cpp \
 	Spiller.cpp \
 	SpillPlacement.cpp \
 	SplitKit.cpp \
 	StackColoring.cpp \
+	StackMaps.cpp \
 	StackProtector.cpp \
 	StackSlotColoring.cpp \
 	TailDuplication.cpp \

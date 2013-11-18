@@ -1,10 +1,10 @@
 /Makefile/1.5/Wed Aug  8 13:58:56 2012/-kk/
-/makerumpdefs.sh/1.21/Thu Oct 24 10:28:58 2013/-kk/
+/makerumpdefs.sh/1.22/Mon Nov 18 05:31:47 2013/-kk/
 /rump.h/1.57/Thu Oct 24 10:28:58 2013/-kk/
 /rump_namei.h/1.22/Sun Nov 18 18:25:50 2012/-kk/
 /rump_syscalls.h/1.67/Thu Oct 24 10:28:58 2013/-kk/
 /rump_syscalls_compat.h/1.13/Thu Oct 24 10:28:58 2013/-kk/
-/rumpdefs.h/1.26/Thu Oct 24 10:28:58 2013/-kk/
+/rumpdefs.h/1.27/Mon Nov 18 05:31:47 2013/-kk/
 /rumpkern_if_pub.h/1.14/Thu Oct 24 10:28:58 2013/-kk/
 /rumpnet_if_pub.h/1.5/Thu Oct 24 10:28:58 2013/-kk/
 /rumpuser.h/1.108/Thu Oct 24 10:28:58 2013/-kk/

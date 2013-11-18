@@ -643,11 +643,11 @@ bool			uvm_map_checkprot(struct vm_map *, vaddr_t,
 			    vaddr_t, vm_prot_t);
 int			uvm_map_protect(struct vm_map *, vaddr_t,
 			    vaddr_t, vm_prot_t, bool);
-struct vmspace		*uvmspace_alloc(vaddr_t, vaddr_t);
+struct vmspace		*uvmspace_alloc(vaddr_t, vaddr_t, bool);
 void			uvmspace_init(struct vmspace *, struct pmap *,
-			    vaddr_t, vaddr_t);
-void			uvmspace_exec(struct lwp *, vaddr_t, vaddr_t);
-void			uvmspace_spawn(struct lwp *, vaddr_t, vaddr_t);
+			    vaddr_t, vaddr_t, bool);
+void			uvmspace_exec(struct lwp *, vaddr_t, vaddr_t, bool);
+void			uvmspace_spawn(struct lwp *, vaddr_t, vaddr_t, bool);
 struct vmspace		*uvmspace_fork(struct vmspace *);
 void			uvmspace_addref(struct vmspace *);
 void			uvmspace_free(struct vmspace *);

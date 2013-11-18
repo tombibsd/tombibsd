@@ -1168,9 +1168,8 @@ finish_config6(struct if_options *ifo, const char *ifname)
 			if (ifo->ia_type == 0)
 				ifo->ia_type = D6_OPTION_IA_NA;
 			ifo->iaid_len = strlen(ifname);
-			if (ifo->iaid_len <= sizeof(ifo->iaid->iaid)) {
-				strncpy((char *)ifo->iaid->iaid, ifname,
-					sizeof(ifo->iaid->iaid));
+			if (ifo->iaid_len < sizeof(ifo->iaid->iaid)) {
+				memcpy(ifo->iaid->iaid, ifname, ifo->iaid_len);
 				memset(ifo->iaid->iaid + ifo->iaid_len, 0,
 					sizeof(ifo->iaid->iaid) -ifo->iaid_len);
 			} else {

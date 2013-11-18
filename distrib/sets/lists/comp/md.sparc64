@@ -143,6 +143,9 @@
 ./usr/include/sparc64/vuid_event.h		comp-c-include
 ./usr/include/sparc64/wchar_limits.h		comp-c-include
 ./usr/include/sparc64/z8530var.h		comp-c-include
+./usr/lib/sparc_mcmedany.o			comp-c-lib
+./usr/lib/sparc_mcmedlow.o			comp-c-lib
+./usr/lib/sparc_mcmedmid.o			comp-c-lib
 ./usr/lib/sparc/crt0.o				comp-c-lib		compat
 ./usr/lib/sparc/crtbegin.o			comp-c-lib		compat
 ./usr/lib/sparc/crtbeginS.o			comp-c-lib		compat,pic

@@ -514,7 +514,7 @@ void
 dzrint(struct dz_softc *sc, uint32_t csr)
 {
 	struct tty *tp;
-	int cc, mcc;
+	int cc;
 	struct _Usart *dzr;
 
 	sc->sc_rxint++;
@@ -522,11 +522,6 @@ dzrint(struct dz_softc *sc, uint32_t csr)
 
 	cc = dzr->RxData;
 	tp = sc->sc_dz.dz_tty;
-
-	if (csr & USI_RXBRK)
-		mcc = CNC_BREAK;
-	else
-		mcc = cc;
 
 	/* clear errors before we print or bail out */
 	if (csr & (USI_OVRE|USI_FRAME|USI_PARE))

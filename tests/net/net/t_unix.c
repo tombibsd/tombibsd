@@ -169,8 +169,10 @@ test(bool closeit, size_t len)
 	sun->sun_family = AF_UNIX;
 
 	if (bind(srvr, (struct sockaddr *)sun, sl) == -1) {
-		if (errno == EINVAL && sl >= 256)
+		if (errno == EINVAL && sl >= 256) {
+			close(srvr);
 			return -1;
+		}
 		FAIL("bind");
 	}
 
@@ -187,6 +189,7 @@ test(bool closeit, size_t len)
 	if (closeit) {
 		if (close(clnt) == -1)
 			FAIL("close");
+		clnt = -1;
 	}
 
 	acpt = acc(srvr);
@@ -233,18 +236,23 @@ test(bool closeit, size_t len)
 			    "sun->sun_path[%zu] %d\n", i, 
 			    sock_addr->sun_path[i], i, sun->sun_path[i]);
 
-	(void)close(acpt);
-	(void)close(srvr);
-	if (!closeit)
+	if (acpt != -1)
+		(void)close(acpt);
+	if (srvr != -1)
+		(void)close(srvr);
+	if (clnt != -1 && !closeit)
 		(void)close(clnt);
 
 	free(sock_addr);
 	free(sun);
 	return 0;
 fail:
-	(void)close(acpt);
-	(void)close(srvr);
-	(void)close(clnt);
+	if (acpt != -1)
+		(void)close(acpt);
+	if (srvr != -1)
+		(void)close(srvr);
+	if (clnt != -1 && !closeit)
+		(void)close(clnt);
 	free(sock_addr);
 	free(sun);
 	return -1;

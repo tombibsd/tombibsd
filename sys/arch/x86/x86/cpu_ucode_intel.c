@@ -76,7 +76,7 @@ cpu_ucode_intel_get_version(struct cpu_ucode_version *ucode)
 	struct cpu_ucode_version_intel1 data;
 
 	if (ucode->loader_version != CPU_UCODE_LOADER_INTEL1 ||
-	    CPUID2FAMILY(ci->ci_signature) < 6)
+	    CPUID_TO_FAMILY(ci->ci_signature) < 6)
 		return EOPNOTSUPP;
 	if (!ucode->data)
 		return 0;
@@ -98,7 +98,7 @@ cpu_ucode_intel_firmware_open(firmware_handle_t *fwh, const char *fwname)
 		return firmware_open(fw_path, fwname, fwh);
 
 	cpu_signature = curcpu()->ci_signature;
-	if (CPUID2FAMILY(cpu_signature) < 6)
+	if (CPUID_TO_FAMILY(cpu_signature) < 6)
 		return EOPNOTSUPP;
 
 	intel_getcurrentucode(&ucodeversion, &platformid);

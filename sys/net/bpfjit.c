@@ -63,6 +63,8 @@ __RCSID("$NetBSD$");
 #include <sys/module.h>
 #endif
 
+#define	__BPF_PRIVATE
+#include <net/bpf.h>
 #include <net/bpfjit.h>
 #include <sljitLir.h>
 
@@ -1186,8 +1188,8 @@ kx_to_reg_arg(struct bpf_insn *pc)
 	}
 }
 
-bpfjit_function_t
-bpfjit_generate_code(struct bpf_insn *insns, size_t insn_count)
+bpfjit_func_t
+bpfjit_generate_code(bpf_ctx_t *bc, struct bpf_insn *insns, size_t insn_count)
 {
 	void *rv;
 	size_t i;
@@ -1727,12 +1729,11 @@ fail:
 	if (ret0 != NULL)
 		BPFJIT_FREE(ret0, ret0_maxsize * sizeof(ret0[0]));
 
-	return (bpfjit_function_t)rv;
+	return (bpfjit_func_t)rv;
 }
 
 void
-bpfjit_free_code(bpfjit_function_t code)
+bpfjit_free_code(bpfjit_func_t code)
 {
-
 	sljit_free_code((void *)code);
 }

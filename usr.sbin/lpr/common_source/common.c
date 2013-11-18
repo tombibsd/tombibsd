@@ -399,16 +399,15 @@ checkremote(void)
 			sin6p = (struct sockaddr_in6 *)ifa->ifa_addr;
 			if (ifa->ifa_addr->sa_family == AF_INET6 &&
 			    ifa->ifa_addr->sa_len == sizeof(sin6)) {
-			    inet6_getscopeid(sin6p, 3);
+				inet6_getscopeid(sin6p, 3);
 				if (getnameinfo((struct sockaddr *)&sin6,
 				    sin6.sin6_len, lname, sizeof(lname),
 				    NULL, 0, niflags) != 0)
 					continue;
-			}
-
-			if (strcmp(rname, lname) == 0) {
-				remote = 0;
-				goto done;
+				if (strcmp(rname, lname) == 0) {
+					remote = 0;
+					goto done;
+				}
 			}
 		}
 	}

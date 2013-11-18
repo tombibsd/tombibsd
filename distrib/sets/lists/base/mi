@@ -801,6 +801,7 @@
 ./usr/bin/zfgrep				base-util-bin
 ./usr/bin/zforce				base-util-bin
 ./usr/bin/zgrep					base-util-bin
+./usr/bin/zless					base-util-bin
 ./usr/bin/zmore					base-util-bin
 ./usr/bin/znew					base-util-bin
 ./usr/bin/ztest					base-zfs-bin		zfs

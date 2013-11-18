@@ -50,6 +50,11 @@
 #define _BSD_PTRDIFF_T_		long
 #define _BSD_SIZE_T_		unsigned long
 #define _BSD_SSIZE_T_		long
+#elif defined(__arm__)
+#define _BSD_CLOCK_T_		unsigned int
+#define _BSD_PTRDIFF_T_		long int
+#define _BSD_SIZE_T_		unsigned long int
+#define _BSD_SSIZE_T_		long int
 #else
 #error "platform not supported"
 #endif

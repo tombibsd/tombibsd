@@ -2353,11 +2353,13 @@
 ./usr/tests/lib/libm/t_erf			tests-lib-tests		atf
 ./usr/tests/lib/libm/t_exp			tests-lib-tests		atf
 ./usr/tests/lib/libm/t_floor			tests-obsolete		obsolete
+./usr/tests/lib/libm/t_fmod			tests-lib-tests		atf
 ./usr/tests/lib/libm/t_infinity			tests-lib-tests		atf
 ./usr/tests/lib/libm/t_ldexp			tests-lib-tests		atf
 ./usr/tests/lib/libm/t_libm			tests-obsolete		obsolete
 ./usr/tests/lib/libm/t_log			tests-lib-tests		atf
 ./usr/tests/lib/libm/t_pow			tests-lib-tests		atf
+./usr/tests/lib/libm/t_precision		tests-lib-tests		atf
 ./usr/tests/lib/libm/t_round			tests-lib-tests		atf
 ./usr/tests/lib/libm/t_scalbn			tests-lib-tests		atf
 ./usr/tests/lib/libm/t_sin			tests-lib-tests		atf
@@ -2604,7 +2606,7 @@
 ./usr/tests/net/mpls/Atffile			tests-net-tests		atf,rump
 ./usr/tests/net/mpls/Kyuafile			tests-net-tests		atf,rump,kyua
 ./usr/tests/net/mpls/t_ldp_regen		tests-net-tests		atf,rump
-./usr/tests/net/mpls/t_ldp_static		tests-net-tests		atf,rump
+./usr/tests/net/mpls/t_ldp_static		tests-net-tests		obsolete
 ./usr/tests/net/mpls/t_mpls_fw			tests-net-tests		atf,rump
 ./usr/tests/net/mpls/t_rfc4182			tests-net-tests		atf,rump
 ./usr/tests/net/net				tests-net-tests

@@ -1485,6 +1485,7 @@ DPADD		Additional dependencies for the program.  Usually used for
 		LIBCOMPAT?=	${DESTDIR}/usr/lib/libcompat.a
 		LIBCOM_ERR?=	${DESTDIR}/usr/lib/libcom_err.a
 		LIBCRT0?=	${DESTDIR}/usr/lib/crt0.o
+		LIBCRTI?=	${DESTDIR}/usr/lib/crti.o
 		LIBCRYPT?=	${DESTDIR}/usr/lib/libcrypt.a
 		LIBCRYPTO?=	${DESTDIR}/usr/lib/libcrypto.a
 		LIBCRYPTO_IDEA?=${DESTDIR}/usr/lib/libcrypto_idea.a

@@ -57,7 +57,7 @@ main(int argc, char *argv[])
 		fprintf(stderr, "%s: too short\n", argv[1]);
 		return 1;
 	} else if (len > BOOTSIZE) {
-		fprintf(stderr, "%s: too long\n", argv[1]);
+		fprintf(stderr, "%s: too long (%d vs %d)\n", argv[1], len, BOOTSIZE);
 		return 1;
 	}
 	(void) fclose(fp);

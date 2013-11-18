@@ -45,3 +45,24 @@
 #define scalbln _scalbln
 #define scalblnf _scalblnf
 #define scalblnl _scalblnl
+
+#define ceill _ceill
+#define floorl _floorl
+#define roundl _roundl
+#define fmodl _fmodl
+#define truncl _truncl
+
+#define exp2l _exp2l
+#define cosl _cosl
+#define sinl _sinl
+#define tanl _tanl
+#define powl _powl
+#define coshl _coshl
+#define sinhl _sinhl
+#define acosl _acosl
+#define atanl _atanl
+#define asinhl _asinhl
+#define acoshl _acoshl
+#define tanhl _tanhl
+#define atanhl _atanhl
+#define log10l _log10l

@@ -835,6 +835,7 @@
 ./usr/libdata/debug/usr/games/fortune.debug	comp-utils-debug	debug
 ./usr/libdata/debug/usr/games/gomoku.debug	comp-games-debug	debug
 ./usr/libdata/debug/usr/games/hack.debug	comp-games-debug	debug
+./usr/libdata/debug/usr/games/hals_end.debug	comp-games-debug	debug
 ./usr/libdata/debug/usr/games/hangman.debug	comp-games-debug	debug
 ./usr/libdata/debug/usr/games/hunt.debug	comp-games-debug	debug
 ./usr/libdata/debug/usr/games/huntd.debug	comp-games-debug	debug
@@ -1975,11 +1976,13 @@
 ./usr/libdata/debug/usr/tests/lib/libm/t_erf.debug			tests-lib-debug		debug,atf
 ./usr/libdata/debug/usr/tests/lib/libm/t_exp.debug			tests-lib-debug		debug,atf
 ./usr/libdata/debug/usr/tests/lib/libm/t_floor.debug			tests-obsolete		obsolete
+./usr/libdata/debug/usr/tests/lib/libm/t_fmod.debug			tests-lib-debug		debug,atf
 ./usr/libdata/debug/usr/tests/lib/libm/t_infinity.debug			tests-lib-debug		debug,atf
 ./usr/libdata/debug/usr/tests/lib/libm/t_ldexp.debug			tests-lib-debug		debug,atf
 ./usr/libdata/debug/usr/tests/lib/libm/t_libm.debug			tests-obsolete		obsolete
 ./usr/libdata/debug/usr/tests/lib/libm/t_log.debug			tests-lib-debug		debug,atf
 ./usr/libdata/debug/usr/tests/lib/libm/t_pow.debug			tests-lib-debug		debug,atf
+./usr/libdata/debug/usr/tests/lib/libm/t_precision.debug		tests-lib-debug		debug,atf
 ./usr/libdata/debug/usr/tests/lib/libm/t_round.debug			tests-lib-debug		debug,atf
 ./usr/libdata/debug/usr/tests/lib/libm/t_scalbn.debug			tests-lib-debug		debug,atf
 ./usr/libdata/debug/usr/tests/lib/libm/t_sin.debug			tests-lib-debug		debug,atf

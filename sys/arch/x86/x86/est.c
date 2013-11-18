@@ -1080,8 +1080,8 @@ est_bus_clock(struct cpu_info *ci)
 	uint32_t family, model;
 	int bus_clock = 0;
 
-	model  = CPUID2MODEL(ci->ci_signature);
-	family = CPUID2FAMILY(ci->ci_signature);
+	family = CPUID_TO_BASEFAMILY(ci->ci_signature);
+	model  = CPUID_TO_MODEL(ci->ci_signature);
 
 	switch (family) {
 

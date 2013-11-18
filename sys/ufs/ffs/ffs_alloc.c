@@ -635,8 +635,8 @@ ffs_valloc(struct vnode *pvp, int mode, kauth_cred_t cred,
 		panic("ffs_valloc: dup alloc");
 	}
 	if (DIP(ip, blocks)) {				/* XXX */
-		printf("free inode %s/%llu had %" PRId64 " blocks\n",
-		    fs->fs_fsmnt, (unsigned long long)ino, DIP(ip, blocks));
+		printf("free inode %llu on %s had %" PRId64 " blocks\n",
+		    (unsigned long long)ino, fs->fs_fsmnt, DIP(ip, blocks));
 		DIP_ASSIGN(ip, blocks, 0);
 	}
 	ip->i_flag &= ~IN_SPACECOUNTED;

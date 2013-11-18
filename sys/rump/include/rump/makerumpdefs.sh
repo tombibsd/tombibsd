@@ -34,6 +34,22 @@ struct rump_'"$2"' {
 	}' < $1
 }
 
+# likewise not perfect, but as long as it's KNF, we're peachy (though
+# I personally like nectarines more)
+getenum () {
+	sed -n '/enum[ 	]*'"$2"'[ 	]*{/{
+		a\
+enum rump_'"$2"' {
+		:loop
+		n
+		s/^}.*;$/};/p
+		t
+		s/'$3'/RUMP_&/gp
+		b loop
+	}' < $1
+}
+
+
 fromvers ../../../sys/fcntl.h
 sed -n '/#define	O_[A-Z]*	*0x/s/O_/RUMP_O_/gp' \
     < ../../../sys/fcntl.h
@@ -89,6 +105,7 @@ sed -n '/#define[ 	]*_IO.*[^\]$/{s/_IO/_RUMP_IO/g;s/IOC_/RUMP_IOC_/gp}' <../../.
 
 fromvers ../../../sys/module.h
 getstruct ../../../sys/module.h modctl_load
+getenum ../../../sys/module.h modctl MODCTL
 
 fromvers ../../../ufs/ufs/ufsmount.h
 getstruct ../../../ufs/ufs/ufsmount.h ufs_args

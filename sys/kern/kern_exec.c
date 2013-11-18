@@ -112,6 +112,14 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <compat/common/compat_util.h>
 
+#ifndef MD_TOPDOWN_INIT
+#ifdef __USING_TOPDOWN_VM
+#define	MD_TOPDOWN_INIT(epp)	(epp)->ep_flags |= EXEC_TOPDOWN_VM
+#else
+#define	MD_TOPDOWN_INIT(epp)
+#endif
+#endif
+
 static int exec_sigcode_map(struct proc *, const struct emul *);
 
 #ifdef DEBUG_EXEC
@@ -653,6 +661,7 @@ execve_loadvm(struct lwp *l, const char *path, char * const *args,
 	data->ed_pack.ep_vmcmds.evs_used = 0;
 	data->ed_pack.ep_vap = &data->ed_attr;
 	data->ed_pack.ep_flags = 0;
+	MD_TOPDOWN_INIT(&data->ed_pack);
 	data->ed_pack.ep_emul_root = NULL;
 	data->ed_pack.ep_interp = NULL;
 	data->ed_pack.ep_esch = NULL;
@@ -933,10 +942,12 @@ execve_runproc(struct lwp *l, struct execve_data * restrict data,
 	 */
 	if (is_spawn)
 		uvmspace_spawn(l, data->ed_pack.ep_vm_minaddr,
-		    data->ed_pack.ep_vm_maxaddr);
+		    data->ed_pack.ep_vm_maxaddr,
+		    data->ed_pack.ep_flags & EXEC_TOPDOWN_VM);
 	else
 		uvmspace_exec(l, data->ed_pack.ep_vm_minaddr,
-		    data->ed_pack.ep_vm_maxaddr);
+		    data->ed_pack.ep_vm_maxaddr,
+		    data->ed_pack.ep_flags & EXEC_TOPDOWN_VM);
 
 	/* record proc's vnode, for use by procfs and others */
         if (p->p_textvp)

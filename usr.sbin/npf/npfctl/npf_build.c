@@ -42,6 +42,7 @@ __RCSID("$NetBSD$");
 #include <stdlib.h>
 #include <inttypes.h>
 #include <string.h>
+#include <ctype.h>
 #include <errno.h>
 #include <err.h>
 
@@ -658,17 +659,16 @@ npfctl_fill_table(nl_table_t *tl, u_int type, const char *fname)
  * if required, fill with contents from a file.
  */
 void
-npfctl_build_table(const char *tid, u_int type, const char *fname)
+npfctl_build_table(const char *tname, u_int type, const char *fname)
 {
+	static unsigned tid = 0;
 	nl_table_t *tl;
-	u_int id;
 
-	id = atoi(tid);
-	tl = npf_table_create(id, type);
+	tl = npf_table_create(tname, tid++, type);
 	assert(tl != NULL);
 
 	if (npf_table_insert(npf_conf, tl)) {
-		errx(EXIT_FAILURE, "table '%d' is already defined\n", id);
+		yyerror("table '%s' is already defined", tname);
 	}
 
 	if (fname) {

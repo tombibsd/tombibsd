@@ -9,7 +9,7 @@
 /tmpfs_rename.c/1.5/Tue Nov 12 02:18:52 2013/-kk/
 /tmpfs_specops.c/1.10/Tue May 24 20:17:49 2011/-kk/
 /tmpfs_specops.h/1.8/Tue May 24 20:17:49 2011/-kk/
-/tmpfs_subr.c/1.85/Tue Nov 12 02:18:52 2013/-kk/
+/tmpfs_subr.c/1.86/Mon Nov 18 05:31:46 2013/-kk/
 /tmpfs_vfsops.c/1.54/Tue Nov 12 02:18:52 2013/-kk/
 /tmpfs_vnops.c/1.106/Tue Nov 12 02:18:52 2013/-kk/
 /tmpfs_vnops.h/1.13/Tue May 24 20:17:49 2011/-kk/

@@ -1512,6 +1512,8 @@ to_blob(const Key *key, u_char **blobp, u_int *lenp, int force_plain)
 	Buffer b;
 	int len, type;
 
+	if (blobp)
+		*blobp = NULL;
 	if (key == NULL) {
 		error("key_to_blob: key == NULL");
 		return 0;

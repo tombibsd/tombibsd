@@ -227,7 +227,7 @@ tprof_pmi_start(tprof_backend_cookie_t *cookie)
 	uint64_t xc;
 
 	if (!(cpu_vendor == CPUVENDOR_INTEL &&
-	    CPUID2FAMILY(ci->ci_signature) == 15)) {
+	    CPUID_TO_BASEFAMILY(ci->ci_signature) == 15)) {
 		return ENOTSUP;
 	}
 

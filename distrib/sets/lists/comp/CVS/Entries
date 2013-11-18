@@ -3,7 +3,7 @@
 /ad.hppa/1.7/Mon Nov 11 15:18:11 2013/-kk/
 /ad.m68k.shl/1.9/Thu Oct 24 10:28:41 2013/-kk/
 /ad.m68k/1.49/Mon Nov 11 15:18:11 2013/-kk/
-/ad.mips/1.43/Mon Nov 11 15:18:11 2013/-kk/
+/ad.mips/1.44/Mon Nov 18 05:28:13 2013/-kk/
 /ad.powerpc/1.63/Mon Nov 11 15:18:11 2013/-kk/
 /ad.sh3/1.29/Mon Nov 11 15:18:11 2013/-kk/
 /md.algor/1.16/Sun Jul 17 20:54:31 2011/-kk/
@@ -48,12 +48,12 @@
 /md.sbmips/1.15/Sun Nov 25 21:55:50 2012/-kk/
 /md.sgimips/1.19/Thu Oct 24 10:28:41 2013/-kk/
 /md.sparc/1.82/Tue Nov 12 02:15:52 2013/-kk/
-/md.sparc64/1.175/Tue Nov 12 02:15:52 2013/-kk/
+/md.sparc64/1.176/Mon Nov 18 05:28:13 2013/-kk/
 /md.sun2/1.20/Thu Oct 24 10:28:41 2013/-kk/
 /md.sun3/1.62/Thu Oct 24 10:28:41 2013/-kk/
 /md.vax/1.40/Mon Nov 11 15:18:11 2013/-kk/
 /md.x68k/1.60/Thu Oct 24 10:28:41 2013/-kk/
-/mi/1.1854/Tue Nov 12 02:15:52 2013/-kk/
+/mi/1.1859/Mon Nov 18 05:28:14 2013/-kk/
 /shl.mi/1.256/Mon Nov 11 15:18:11 2013/-kk/
 /stl.mi/1.1/Fri Jul  2 21:19:00 2010/-kk/
 D

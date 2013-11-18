@@ -78,6 +78,7 @@ struct tcp_congctl {
 
 extern const struct tcp_congctl tcp_reno_ctl;
 extern const struct tcp_congctl tcp_newreno_ctl;
+extern const struct tcp_congctl tcp_cubic_ctl;
 
 /* currently selected global congestion control */
 extern char tcp_congctl_global_name[TCPCC_MAXLEN];

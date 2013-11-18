@@ -82,7 +82,7 @@ npfctl_parse_string(const char *str)
 %option noyywrap nounput noinput
 
 ID	[a-zA-Z_][a-zA-Z_0-9]*
-NID	[a-zA-Z_0-9]+
+DID	[a-zA-Z_][a-zA-Z_0-9-]*
 NUMBER	[0-9]+
 
 %%
@@ -181,12 +181,12 @@ any			return ANY;
 			return NUM;
 		}
 
-"<"{NID}">"	{
+"<"{DID}">"	{
 			yylval.str = estrndup(yytext + 1, yyleng - 2);
 			return TABLE_ID;
 		}
 
-"$"{NID}	{
+"$"{ID}	{
 			yylval.str = estrndup(yytext + 1, yyleng - 1);
 			return VAR_ID;
 		}

@@ -151,28 +151,35 @@ LIB=	m
 COMMON_SRCS+= b_exp.c b_log.c b_tgamma.c \
 	e_acos.c e_acosf.c e_acosh.c e_acoshf.c e_asin.c e_asinf.c \
 	e_atan2.c e_atan2f.c e_atanh.c e_atanhf.c e_cosh.c e_coshf.c e_exp.c \
-	e_expf.c e_fmod.c e_fmodf.c e_hypot.c e_hypotf.c e_j0.c e_j0f.c \
+	e_expf.c e_fmod.c e_fmodf.c e_fmodl.c e_hypot.c e_hypotf.c \
+	e_j0.c e_j0f.c \
 	e_j1.c e_j1f.c e_jn.c e_jnf.c e_lgamma_r.c e_lgammaf_r.c e_log.c \
 	e_log2.c e_log10.c e_log10f.c e_log2f.c e_logf.c e_pow.c e_powf.c \
 	e_rem_pio2.c e_rem_pio2f.c e_remainder.c e_remainderf.c e_scalb.c \
 	e_scalbf.c e_sinh.c e_sinhf.c e_sqrt.c e_sqrtf.c \
 	k_cos.c k_cosf.c k_rem_pio2.c k_rem_pio2f.c k_sin.c k_sinf.c \
 	k_standard.c k_tan.c k_tanf.c \
-	s_asinh.c s_asinhf.c s_atan.c s_atanf.c s_cbrt.c s_cbrtf.c s_ceil.c \
-	s_ceilf.c s_copysign.c s_copysignf.c s_copysignl.c s_cos.c s_cosf.c s_erf.c \
+	ldbl_dummy.c \
+	s_asinh.c s_asinhf.c s_atan.c s_atanf.c s_cbrt.c s_cbrtf.c \
+	s_ceil.c s_ceilf.c s_ceill.c s_copysign.c s_copysignf.c s_copysignl.c \
+	s_cos.c s_cosf.c s_erf.c \
 	s_erff.c s_exp2.c s_exp2f.c s_expm1.c s_expm1f.c s_fabsf.c s_fabsl.c \
 	s_finite.c s_finitef.c \
-	s_floor.c s_floorf.c s_frexpf.c s_ilogb.c s_ilogbf.c s_ilogbl.c \
+	s_floor.c s_floorf.c s_floorl.c s_frexpf.c \
+	s_ilogb.c s_ilogbf.c s_ilogbl.c \
 	s_isinff.c s_isnanf.c s_lib_version.c s_log1p.c \
 	s_log1pf.c s_logb.c s_logbf.c s_logbl.c \
 	s_matherr.c s_modff.c s_nextafter.c s_nextafterl.c \
-	s_nextafterf.c s_remquo.c s_remquof.c s_rint.c s_rintf.c s_round.c s_roundf.c s_scalbn.c \
+	s_nextafterf.c s_remquo.c s_remquof.c s_rint.c s_rintf.c \
+	s_round.c s_roundf.c s_roundl.c s_scalbn.c \
 	s_scalbnf.c s_scalbnl.c s_signgam.c s_significand.c s_significandf.c s_sin.c \
-	s_sinf.c s_tan.c s_tanf.c s_tanh.c s_tanhf.c s_tgammaf.c s_trunc.c s_truncf.c \
+	s_sinf.c s_tan.c s_tanf.c s_tanh.c s_tanhf.c s_tgammaf.c \
+	s_trunc.c s_truncf.c s_truncl.c \
 	w_acos.c w_acosf.c w_acosh.c w_acoshf.c w_asin.c w_asinf.c w_atan2.c \
 	w_atan2f.c w_atanh.c w_atanhf.c w_cosh.c w_coshf.c \
-	w_drem.c w_dremf.c w_exp.c w_expf.c w_fmod.c w_fmodf.c w_gamma.c \
-	w_gamma_r.c w_gammaf.c w_gammaf_r.c w_hypot.c w_hypotf.c w_j0.c \
+	w_drem.c w_dremf.c w_exp.c w_expf.c w_fmod.c w_fmodf.c w_fmodl.c \
+	w_gamma.c w_gamma_r.c w_gammaf.c w_gammaf_r.c w_hypot.c w_hypotf.c \
+	w_j0.c \
 	w_j0f.c w_j1.c w_j1f.c w_jn.c w_jnf.c w_lgamma.c w_lgamma_r.c \
 	w_lgammaf.c w_lgammaf_r.c w_log.c w_log10.c w_log10f.c w_log2.c \
 	w_log2f.c w_logf.c \
@@ -260,8 +267,10 @@ MLINKS+=atan.3 atanf.3
 MLINKS+=atan2.3 atan2f.3
 MLINKS+=atanh.3 atanhf.3
 MLINKS+=ceil.3 ceilf.3 \
+	ceil.3 ceill.3 \
 	ceil.3 floor.3 \
-	ceil.3 floorf.3
+	ceil.3 floorf.3 \
+	ceil.3 floorl.3
 MLINKS+=copysign.3 copysignf.3 \
 	copysign.3 copysignl.3
 MLINKS+=cos.3 cosf.3
@@ -279,7 +288,8 @@ MLINKS+=log.3 logf.3 \
 MLINKS+=pow.3 powf.3
 MLINKS+=fabs.3 fabsf.3
 MLINKS+=finite.3 finitef.3
-MLINKS+=fmod.3 fmodf.3
+MLINKS+=fmod.3 fmodf.3 \
+	fmod.3 fmodl.3
 MLINKS+=hypot.3 hypotf.3
 MLINKS+=ieee_test.3 logb.3 ieee_test.3 logbf.3 ieee_test.3 logbl.3
 MLINKS+=ieee_test.3 scalb.3 ieee_test.3 scalbf.3
@@ -306,8 +316,10 @@ MLINKS+=sin.3 sinhf.3
 MLINKS+=sqrt.3 sqrtf.3 sqrt.3 cbrt.3 sqrt.3 cbrtf.3
 MLINKS+=tan.3 tanf.3
 MLINKS+=tanh.3 tanhf.3
-MLINKS+=round.3 roundf.3
-MLINKS+=trunc.3 truncf.3
+MLINKS+=round.3 roundf.3 \
+	round.3 roundl.3
+MLINKS+=trunc.3 truncf.3 \
+	trunc.3 truncl.3
 MLINKS+=fmax.3 fmaxl.3
 MLINKS+=fmax.3 fmaxf.3
 MLINKS+=fmax.3 fmin.3

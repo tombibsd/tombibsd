@@ -3898,26 +3898,25 @@ cfline(size_t linenum, const char *line, struct filed *f, const char *prog,
 			f->f_flags |= FFLAG_SIGN;
 #endif /* !DISABLE_SIGN */
 		(void)strlcpy(f->f_un.f_fname, p, sizeof(f->f_un.f_fname));
-		if (!stat(p, &sb) && S_ISFIFO(sb.st_mode)) {
+		if ((f->f_file = open(p, O_WRONLY|O_APPEND|O_NONBLOCK, 0)) < 0)
+		{
+			f->f_type = F_UNUSED;
+			logerror("%s", p);
+			break;
+		}
+		if (!fstat(f->f_file, &sb) && S_ISFIFO(sb.st_mode)) {
 			f->f_file = -1;
 			f->f_type = F_FIFO;
 			break;
 		}
 
-		if ((f->f_file = open(p, O_WRONLY|O_APPEND, 0)) < 0) {
-			f->f_type = F_UNUSED;
-			logerror("%s", p);
-			break;
-		}
 		if (isatty(f->f_file)) {
 			f->f_type = F_TTY;
 			if (strcmp(p, ctty) == 0)
 				f->f_type = F_CONSOLE;
-			if (fcntl(f->f_file, F_SETFL, O_NONBLOCK) == -1)
-				logerror("Warning: cannot change tty fd for"
-				    " `%s' to non-blocking.", p);
 		} else
 			f->f_type = F_FILE;
+
 		if (syncfile)
 			f->f_flags |= FFLAG_SYNC;
 		break;

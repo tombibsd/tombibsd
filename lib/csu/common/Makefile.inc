@@ -21,6 +21,16 @@ CFLAGS.crtbegin.c+= -fPIE
 OBJS+=		crtfm.o
 .endif
 
+.if ${MACHINE_ARCH} == "sparc64"
+# create helper objects for the compiler to mark compiler memory models
+.for m in medlow medmid medany
+sparc_mc${m}.o:	compident.S sysident_assym.h
+	${CC} ${ASFLAGS} -I. -DCONTENT=\"${m}\\0\\0\" -DCONTENTLENGTH=8 -c \
+		-o $@ ${COMMON_DIR}/compident.S
+.endfor
+OBJS += sparc_mcmedlow.o sparc_mcmedmid.o sparc_mcmedany.o
+.endif
+
 realall: ${OBJS}
 
 .if exists(${ARCHDIR}/crtbegin.S)
@@ -98,7 +108,7 @@ crtfm.o: crtfm.c
 .endif
 
 GENASSYM_CONF=	${COMMON_DIR}/sysident_assym.cf 
-sysident_assym.h: ${GENASSYM_CONF} ${GENASSYM_EXTRAS}
+sysident_assym.h: ${GENASSYM_CONF} ${GENASSYM_EXTRAS} ${NETBSDSRCDIR}/sys/sys/param.h
 	${_MKTARGET_CREATE}
 	cat ${COMMON_DIR}/sysident_assym.cf | \
 	    ${TOOL_GENASSYM} -- ${CC} ${CFLAGS:N-Wa,*} ${CPPFLAGS} ${PROF} \

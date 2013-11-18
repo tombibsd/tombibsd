@@ -148,7 +148,7 @@ struct cpu_info {
 
 };
 
-#define	CPU_INFO_ITERATOR		int __UNUSED
+#define	CPU_INFO_ITERATOR		int __unused
 #define	CPU_INFO_FOREACH(cii, ci)	\
     ci = &cpu_info_store; ci != NULL; ci = ci->ci_next
 

@@ -27,6 +27,7 @@
  */
 
 #include <atf-c.h>
+#include <float.h>
 #include <math.h>
 
 /*
@@ -38,6 +39,7 @@
 /* 0.5 - EPSILON */
 #define VAL	0x0.7ffffffffffffcp0
 #define VALF	0x0.7fffff8p0
+#define VALL	(0.5 - LDBL_EPSILON)
 
 #ifdef __vax__
 #define SMALL_NUM	1.0e-38
@@ -55,18 +57,23 @@ ATF_TC_BODY(round_dir, tc)
 {
 	double a = VAL, b, c;
 	float af = VALF, bf, cf;
+	long double al = VALL, bl, cl;
 
 	b = round(a);
 	bf = roundf(af);
+	bl = roundl(al);
 
 	ATF_CHECK(fabs(b) < SMALL_NUM);
 	ATF_CHECK(fabsf(bf) < SMALL_NUM);
+	ATF_CHECK(fabsl(bl) < SMALL_NUM);
 
 	c = round(-a);
 	cf = roundf(-af);
+	cl = roundl(-al);
 
 	ATF_CHECK(fabs(c) < SMALL_NUM);
 	ATF_CHECK(fabsf(cf) < SMALL_NUM);
+	ATF_CHECK(fabsl(cl) < SMALL_NUM);
 }
 
 ATF_TP_ADD_TCS(tp)

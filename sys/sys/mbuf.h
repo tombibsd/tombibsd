@@ -686,7 +686,7 @@ do {									\
 } while (/* CONSTCOND */ 0)
 
 /* length to m_copy to copy all */
-#define	M_COPYALL	1000000000
+#define	M_COPYALL	-1
 
 /* compatibility with 4.3 */
 #define  m_copy(m, o, l)	m_copym((m), (o), (l), M_DONTWAIT)

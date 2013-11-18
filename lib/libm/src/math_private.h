@@ -299,6 +299,9 @@ extern float __kernel_cosf __P((float,float));
 extern float __kernel_tanf __P((float,float,int));
 extern int   __kernel_rem_pio2f __P((float*,float*,int,int,int,const int*));
 
+/* ieee style elementary long double functions */
+extern long double __ieee754_fmodl(long double, long double);
+
 /*
  * TRUNC() is a macro that sets the trailing 27 bits in the mantissa of an
  * IEEE double variable to zero.  It must be expression-like for syntactic

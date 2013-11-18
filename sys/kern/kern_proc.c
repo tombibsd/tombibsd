@@ -483,7 +483,13 @@ proc0_init(void)
 	 * share proc0's vmspace, and thus, the kernel pmap.
 	 */
 	uvmspace_init(&vmspace0, pmap_kernel(), round_page(VM_MIN_ADDRESS),
-	    trunc_page(VM_MAX_ADDRESS));
+	    trunc_page(VM_MAX_ADDRESS),
+#ifdef __USING_TOPDOWN_VM
+	    true
+#else
+	    false
+#endif
+	    );
 
 	/* Initialize signal state for proc0. XXX IPL_SCHED */
 	mutex_init(&p->p_sigacts->sa_mutex, MUTEX_DEFAULT, IPL_SCHED);

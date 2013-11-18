@@ -140,7 +140,6 @@ mach_init(int argc, int32_t *argv32, int code, intptr_t cv, u_int bim, char *bip
 #if NKSYMS || defined(DDB) || defined(MODULAR)
 	void *ssym = 0;
 	struct btinfo_symtab *bi_syms;
-	struct exec *aout;		/* XXX backwards compatilbity for DDB */
 #endif
 	extern char edata[], end[];	/* XXX */
 
@@ -162,7 +161,9 @@ mach_init(int argc, int32_t *argv32, int code, intptr_t cv, u_int bim, char *bip
 	/* clear the BSS segment */
 #if NKSYMS || defined(DDB) || defined(MODULAR)
 	bi_syms = lookup_bootinfo(BTINFO_SYMTAB);
-	aout = (struct exec *)edata;
+#ifdef EXEC_AOUT
+	struct exec *aout = (struct exec *)edata;
+#endif
 
 	/* Was it a valid bootinfo symtab info? */
 	if (bi_syms != NULL) {
@@ -215,6 +216,8 @@ mach_init(int argc, int32_t *argv32, int code, intptr_t cv, u_int bim, char *bip
 #if 0
 	if (bootinfo_msg != NULL)
 		printf(bootinfo_msg);
+#else
+	__USE(bootinfo_msg);
 #endif
 	/*
 	 * Set the VM page size.

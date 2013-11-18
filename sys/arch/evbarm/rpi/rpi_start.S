@@ -277,6 +277,7 @@ Lcontrol_set:
 	      CPU_CONTROL_SYST_ENABLE | \
 		(1 << 16) | 	/* SBO - Global enable for data tcm */ \
 		(1 << 18) |	/* SBO - Global enable for insn tcm */ \
+	      CPU_CONTROL_UNAL_ENABLE | \
 	      CPU_CONTROL_IC_ENABLE
 
 

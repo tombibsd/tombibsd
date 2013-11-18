@@ -179,6 +179,8 @@ ioasicattach(device_t parent, device_t self, void *aux)
 	for (i = 0; i < ioasic_ndevs; i++)
 		imsk &= ~ioasic_devs[i].iad_intrbits;
 	bus_space_write_4(sc->sc_bst, sc->sc_bsh, IOASIC_IMSK, imsk);
+#else
+	__USE(ioasic_ndevs);
 #endif
 
 	/*

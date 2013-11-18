@@ -963,6 +963,9 @@ static struct tcpcb tcpcb_template = {
 	.snd_cwnd = TCP_MAXWIN << TCP_MAX_WINSHIFT,
 	.snd_ssthresh = TCP_MAXWIN << TCP_MAX_WINSHIFT,
 	.snd_numholes = 0,
+	.snd_cubic_wmax = 0,
+	.snd_cubic_wmax_last = 0,
+	.snd_cubic_ctime = 0,
 
 	.t_partialacks = -1,
 	.t_bytes_acked = 0,

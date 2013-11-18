@@ -781,6 +781,7 @@
 ./usr/lib/libzpool_pic.a			base-zfs-shlib		zfs,dynamicroot
 ./usr/lib/lua/5.1/gpio.so                    	base-sys-shlib
 ./usr/lib/lua/5.1/sqlite.so                    	base-sys-shlib
+./usr/lib/lua/5.1/syslog.so                    	base-sys-shlib
 ./usr/lib/npf/ext_log.so			base-obsolete		obsolete
 ./usr/lib/npf/ext_log.so.0			base-obsolete		obsolete
 ./usr/lib/npf/ext_log.so.0.0			base-obsolete		obsolete

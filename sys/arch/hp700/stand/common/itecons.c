@@ -161,7 +161,7 @@ int
 ite_getc(dev_t dev)
 {
 	static int stash = 0;
-	int err, c, l, i;
+	int err __debugused, c, l, i;
 
 	if (kyiodc == NULL)
 		return(0x100);

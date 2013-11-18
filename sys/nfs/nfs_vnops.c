@@ -1164,7 +1164,7 @@ nfs_readrpc(struct vnode *vp, struct uio *uiop)
 	char *bpos, *dpos, *cp2;
 	struct mbuf *mreq, *mrep, *md, *mb;
 	struct nfsmount *nmp;
-	int error = 0, len, retlen, tsiz, eof, byte_count;
+	int error = 0, len, retlen, tsiz, eof __unused, byte_count;
 	const int v3 = NFS_ISV3(vp);
 	struct nfsnode *np = VTONFS(vp);
 #ifndef NFS_V2_ONLY

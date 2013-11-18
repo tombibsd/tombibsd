@@ -387,6 +387,8 @@ icap_ebus_intr(void *cookie, void *f)
         saf = sc->sc_dp->SizeAndFlags;
         hi  = sc->sc_dp->BufferAddressHi32; /* BUGBUG 64bit */
         lo  = sc->sc_dp->BufferAddressLo32; /* this pops the fifo */
+	__USE(hi);
+	__USE(lo);
 
         /* Say its done that much (and sanity)
          */

@@ -41,6 +41,8 @@ __RCSID("$NetBSD$");
 #include <sys/audioio.h>
 #include <sys/shm.h>
 #include <sys/ioctl.h>
+
+#define _KMEMUSER
 #include <machine/vmparam.h>
 
 #include <net/if.h>

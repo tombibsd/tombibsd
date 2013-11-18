@@ -7,6 +7,9 @@ LIB=	lldReaderWriterMachO
 .PATH: ${LLD_SRCDIR}/lib/ReaderWriter/MachO
 
 SRCS+=	MachOLinkingContext.cpp \
+	MachONormalizedFileBinaryReader.cpp \
+	MachONormalizedFileFromAtoms.cpp \
+	MachONormalizedFileBinaryWriter.cpp \
 	MachONormalizedFileYAML.cpp \
 	ReferenceKinds.cpp \
 	WriterMachO.cpp

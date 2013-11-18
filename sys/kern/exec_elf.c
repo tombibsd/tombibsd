@@ -422,14 +422,15 @@ elf_load_file(struct lwp *l, struct exec_package *epp, char *path,
 	p = l->l_proc;
 
 	KASSERT(p->p_vmspace);
-	if (__predict_true(p->p_vmspace != proc0.p_vmspace))
+	if (__predict_true(p->p_vmspace != proc0.p_vmspace)) {
 		use_topdown = p->p_vmspace->vm_map.flags & VM_MAP_TOPDOWN;
-	else
+	} else {
 #ifdef __USING_TOPDOWN_VM
-		use_topdown = true;
+		use_topdown = epp->ep_flags & EXEC_TOPDOWN_VM;
 #else
 		use_topdown = false;
 #endif
+	}
 
 	/*
 	 * 1. open file
@@ -976,11 +977,6 @@ bad:
 			}
 #endif
 			break;
-
-			/*
-			 * Dunno, warn for diagnostic
-			 */
-			goto bad;
 
 		case ELF_NOTE_TYPE_SUSE_VERSION_TAG:
 			break;

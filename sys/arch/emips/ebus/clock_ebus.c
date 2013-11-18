@@ -260,7 +260,7 @@ eclock_ebus_intr(void *cookie, void *f)
 	struct eclock_softc *sc = cookie;
 	struct _Tc *tc = sc->sc_dp;
 	struct clockframe *cf = f;
-	volatile uint32_t x;
+	volatile uint32_t x __unused;
 
 	x = tc->Control;
 	tc->DownCounterHigh = 0;

@@ -2996,7 +2996,9 @@ pj4bv7_setup(char *args)
 	pj4b_config();
 
 	cpuctrl = CPU_CONTROL_MMU_ENABLE;
-#ifndef ARM32_DISABLE_ALIGNMENT_FAULTS
+#ifdef ARM32_DISABLE_ALIGNMENT_FAULTS
+	cpuctrl |= CPU_CONTROL_UNAL_ENABLE;
+#else
 	cpuctrl |= CPU_CONTROL_AFLT_ENABLE;
 #endif
 	cpuctrl |= CPU_CONTROL_DC_ENABLE;
@@ -3047,15 +3049,13 @@ armv7_setup(char *args)
 	    | CPU_CONTROL_BEND_ENABLE | CPU_CONTROL_AFLT_ENABLE
 	    | CPU_CONTROL_ROUNDROBIN | CPU_CONTROL_CPCLK;
 
-#ifndef ARM32_DISABLE_ALIGNMENT_FAULTS
+#ifdef ARM32_DISABLE_ALIGNMENT_FAULTS
+	cpuctrl |= CPU_CONTROL_UNAL_ENABLE;
+#else
 	cpuctrl |= CPU_CONTROL_AFLT_ENABLE;
 #endif
 
 	cpuctrl = parse_cpu_options(args, armv7_options, cpuctrl);
-
-#ifdef __ARMEB__
-	cpuctrl |= CPU_CONTROL_BEND_ENABLE;
-#endif
 
 #ifndef ARM_HAS_VBAR
 	if (vector_page == ARM_VECTORS_HIGH)
@@ -3092,6 +3092,7 @@ arm11x6_setup(char *args)
 		CPU_CONTROL_32BD_ENABLE |
 		CPU_CONTROL_LABT_ENABLE |
 		CPU_CONTROL_SYST_ENABLE |
+		CPU_CONTROL_UNAL_ENABLE |
 		CPU_CONTROL_IC_ENABLE;
 
 	/*

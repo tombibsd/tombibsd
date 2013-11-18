@@ -101,7 +101,7 @@ struct bpf_d {
 #ifdef _LP64
 	int		bd_compat32;	/* 32-bit stream on LP64 system */
 #endif
-	bpfjit_function_t	bd_jitcode; /* compiled filter program */
+	bpfjit_func_t	bd_jitcode;	/* compiled filter program */
 };
 
 

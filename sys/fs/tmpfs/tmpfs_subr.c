@@ -77,6 +77,7 @@
 __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <sys/param.h>
+#include <sys/cprng.h>
 #include <sys/dirent.h>
 #include <sys/event.h>
 #include <sys/kmem.h>
@@ -126,7 +127,7 @@ tmpfs_alloc_node(tmpfs_mount_t *tmp, enum vtype type, uid_t uid, gid_t gid,
 	 * for applications that do not understand 64-bit ino_t.
 	 */
 	nnode->tn_id = (ino_t)((uintptr_t)nnode / sizeof(*nnode));
-	nnode->tn_gen = TMPFS_NODE_GEN_MASK & random();
+	nnode->tn_gen = TMPFS_NODE_GEN_MASK & (unsigned long)cprng_fast64();
 
 	/* Generic initialization. */
 	nnode->tn_type = type;

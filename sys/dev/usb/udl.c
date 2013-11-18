@@ -619,7 +619,7 @@ udl_mmap(void *v, void *vs, off_t off, int prot)
 	struct udl_softc *sc = v;
 	vaddr_t vaddr;
 	paddr_t paddr;
-	bool rv;
+	bool rv __diagused;
 
 	if (off < 0 || off > roundup2(UDL_FBMEM_SIZE(sc), PAGE_SIZE))
 		return -1;

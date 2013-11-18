@@ -81,7 +81,7 @@ struct npf_rule {
 
 	/* Code to process, if any. */
 	int			r_type;
-	bpfjit_function_t	r_jcode;
+	bpfjit_func_t		r_jcode;
 	void *			r_code;
 	size_t			r_clen;
 

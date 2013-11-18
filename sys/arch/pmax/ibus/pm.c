@@ -555,14 +555,12 @@ pm_flush(struct pm_softc *sc)
 	int v, i, x, y;
 	u_short *p, *pe;
 	struct hwcmap256 *cm;
-	struct rasops_info *ri;
 
 	if (sc->sc_changed == 0)
 		return (1);
 
 	vdac = (void *)MIPS_PHYS_TO_KSEG1(KN01_SYS_VDAC);
 	pcc = (void *)MIPS_PHYS_TO_KSEG1(KN01_SYS_PCC);
-	ri = &pm_ri;
 	v = sc->sc_changed;
 
 	if ((v & WSDISPLAY_CURSOR_DOCUR) != 0) {

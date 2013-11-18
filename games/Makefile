@@ -11,7 +11,7 @@ SUBDIR=	adventure arithmetic atc \
 	backgammon banner battlestar bcd boggle \
 	caesar canfield cgram ching colorbars countmail cribbage \
 	dm factor fish fortune gomoku \
-	hack hangman hunt larn mille monop morse number \
+	hack hals_end hangman hunt larn mille monop morse number \
 	phantasia pig pom ppt primes quiz \
 	rain random robots rogue sail snake tetris trek \
 	wargames worm worms wtf wump

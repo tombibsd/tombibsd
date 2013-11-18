@@ -101,7 +101,7 @@ lapic_map(paddr_t lapic_base)
 	 * to using it at this point.  Be conservative and assume that the MSR
 	 * is not present on the Pentium (is it?).
 	 */
-	if (CPUID2FAMILY(curcpu()->ci_signature) >= 6) {
+	if (CPUID_TO_FAMILY(curcpu()->ci_signature) >= 6) {
 		lapic_base = (paddr_t)rdmsr(LAPIC_MSR);
 		if ((lapic_base & LAPIC_MSR_ADDR) == 0) {
 			lapic_base |= LAPIC_BASE;

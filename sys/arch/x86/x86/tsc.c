@@ -95,17 +95,17 @@ tsc_tc_init(void)
 		 * that it's safe on P-II and P-III Xeons due to the
 		 * typical configuration of those systems.
 		 */
-		switch (CPUID2FAMILY(ci->ci_signature)) {
+		switch (CPUID_TO_BASEFAMILY(ci->ci_signature)) {
 		case 0x05:
 			safe = true;
 			break;
 		case 0x06:
-			safe = CPUID2MODEL(ci->ci_signature) == 0x0e ||
-			    CPUID2MODEL(ci->ci_signature) == 0x0f ||
-			    CPUID2MODEL(ci->ci_signature) == 0x0a;
+			safe = CPUID_TO_MODEL(ci->ci_signature) == 0x0e ||
+			    CPUID_TO_MODEL(ci->ci_signature) == 0x0f ||
+			    CPUID_TO_MODEL(ci->ci_signature) == 0x0a;
 			break;
 		case 0x0f:
-			safe = CPUID2MODEL(ci->ci_signature) >= 0x03;
+			safe = CPUID_TO_MODEL(ci->ci_signature) >= 0x03;
 			break;
 		}
 	} else if (cpu_vendor == CPUVENDOR_AMD) {
@@ -118,7 +118,7 @@ tsc_tc_init(void)
 		 * We're only going to follow the simple, reliable
 		 * ones.
 		 */
-		switch (CPUID2FAMILY(ci->ci_signature)) {
+		switch (CPUID_TO_BASEFAMILY(ci->ci_signature)) {
 		case 0x06:
 		case 0x07:
 			/*

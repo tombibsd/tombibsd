@@ -34,6 +34,11 @@ __FBSDID("$FreeBSD: src/lib/msun/src/s_round.c,v 1.1 2004/06/07 08:05:36 das Exp
 
 #include <math.h>
 
+#ifndef __HAVE_LONG_DOUBLE
+__strong_alias(_roundl, round)
+__weak_alias(roundl, round)
+#endif
+
 double
 round(double x)
 {

@@ -363,7 +363,8 @@ uvm_init(void)
 }
 
 void
-uvmspace_init(struct vmspace *vm, struct pmap *pmap, vaddr_t vmin, vaddr_t vmax)
+uvmspace_init(struct vmspace *vm, struct pmap *pmap, vaddr_t vmin, vaddr_t vmax,
+    bool topdown)
 {
 
 	vm->vm_map.pmap = pmap_kernel();

@@ -1757,11 +1757,10 @@ sii_CmdDone(struct siisoftc *sc, int target, int error)
 	/* target:			 which device is done */
 	/* error:			 error code if any errors */
 {
-	ScsiCmd *scsicmd;
 	int i;
 
-	scsicmd = sc->sc_cmd[target];
 #ifdef DIAGNOSTIC
+	ScsiCmd *scsicmd = sc->sc_cmd[target];
 	if (target < 0 || !scsicmd)
 		panic("sii_CmdDone");
 #endif

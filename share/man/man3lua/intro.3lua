@@ -27,7 +27,7 @@
 .\" SUCH DAMAGE.
 .\"
 .\"
-.Dd November 4, 2013
+.Dd November 13, 2013
 .Dt INTRO 3lua
 .Os
 .Sh NAME
@@ -49,6 +49,10 @@ pins.
 Access
 .Xr sqlite3 1
 files.
+.It Em syslog
+Acces
+.Xr syslog 3
+functionality.
 .El
 .Sh SEE ALSO
 .Xr lua 1 ,

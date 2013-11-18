@@ -3801,7 +3801,7 @@ process_program_headers (FILE * file)
       if (elf_header.e_phnum > 1)
 	printf (_("\nProgram Headers:\n"));
       else
-	printf (_("\nProgram Headers:\n"));
+	printf (_("\nProgram Header:\n"));
 
       if (is_32bit_elf)
 	printf
@@ -6973,6 +6973,11 @@ decode_arm_unwind (struct arm_unw_aux_info *  aux,
 	return;
 
       remaining = 4;
+    }
+  else
+    {
+      addr.section = SHN_UNDEF;
+      addr.offset = 0;
     }
 
   if ((word & 0x80000000) == 0)

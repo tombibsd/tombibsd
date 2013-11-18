@@ -86,7 +86,7 @@ npf_config_init(void)
 
 	/* Load the empty configuration. */
 	dict = prop_dictionary_create();
-	tset = npf_tableset_create();
+	tset = npf_tableset_create(0);
 	rpset = npf_rprocset_create();
 	rlset = npf_ruleset_create(0);
 	nset = npf_ruleset_create(0);

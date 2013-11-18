@@ -303,6 +303,7 @@ bozo_process_lua(bozo_httpreq_t *request)
 	char *s, *query, *uri, *file, *command, *info, *content;
 	const char *type, *clen;
 	char *prefix, *handler, *p;
+	int rv = 0;
 
 	if (!httpd->process_lua)
 		return 0;
@@ -435,16 +436,18 @@ bozo_process_lua(bozo_httpreq_t *request)
 				printf("<br>Lua error: %s\n",
 				    lua_tostring(map->L, -1));
 			bozo_flush(httpd, stdout);
-			free(prefix);
-			free(uri);
-			free(info);
-			return 1;
+			rv = 1;
+			goto out;
 		}
 	}
+out:
 	free(prefix);
 	free(uri);
 	free(info);
-	return 0;
+	free(query);
+	free(command);
+	free(file);
+	return rv;
 }
 
 #endif /* NO_LUA_SUPPORT */

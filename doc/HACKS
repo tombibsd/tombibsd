@@ -891,6 +891,16 @@ port	x68k
 		internal compiler error: in cselib_record_set, at cselib.c:1999
 	kcah
 
+port	x86_64
+	hack	gcc 4.8 gcc miscompiles
+	cdate	Wed Nov 13 10:16:00 GMT 2013
+	who	skrll
+	file	libexec/ld.elf_so/Makefile:1.124
+	descr
+		Incorrect code for rtld.o is produced with -fipa-cp-clone - stack
+		becomes unaligned in _rtld_unload_object.
+	kcah
+
 hack	fallback to /usr/bin/clang-cpp in rpcgen
 cdate	Wed Jun  5 15:49:27 CEST 2013
 who	joerg

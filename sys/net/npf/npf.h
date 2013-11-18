@@ -45,7 +45,7 @@
 #include <netinet/in_systm.h>
 #include <netinet/in.h>
 
-#define	NPF_VERSION		11
+#define	NPF_VERSION		12
 
 /*
  * Public declarations and definitions.
@@ -231,6 +231,8 @@ bool		npf_autounload_p(void);
 #define	NPF_TABLE_HASH			1
 #define	NPF_TABLE_TREE			2
 
+#define	NPF_TABLE_MAXNAMELEN		32
+
 /* Layers. */
 #define	NPF_LAYER_2			2
 #define	NPF_LAYER_3			3
@@ -272,7 +274,7 @@ typedef struct npf_ioctl_buf {
 
 typedef struct npf_ioctl_table {
 	int			nct_cmd;
-	u_int			nct_tid;
+	const char *		nct_name;
 	union {
 		npf_ioctl_ent_t	ent;
 		npf_ioctl_buf_t	buf;

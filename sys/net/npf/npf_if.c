@@ -98,7 +98,7 @@ npf_ifmap_lookup(const char *ifname)
 	for (u_int i = 0; i < npf_ifmap_cnt; i++) {
 		npf_ifmap_t *nim = &npf_ifmap[i];
 
-		if (nim->n_ifname && strcmp(nim->n_ifname, ifname) == 0)
+		if (nim->n_ifname[0] && strcmp(nim->n_ifname, ifname) == 0)
 			return i + 1;
 	}
 	return INACTIVE_ID;

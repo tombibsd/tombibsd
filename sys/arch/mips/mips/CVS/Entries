@@ -47,13 +47,13 @@
 /mips_fixup.c/1.10/Wed Nov  9 17:05:50 2011/-kk/
 /mips_fpu.c/1.11/Thu Oct 24 10:28:57 2013/-kk/
 /mips_fputrap.c/1.10/Sat Feb 26 15:41:32 2011/-kk/
-/mips_machdep.c/1.257/Tue Nov  5 03:38:10 2013/-kk/
+/mips_machdep.c/1.258/Mon Nov 18 05:31:34 2013/-kk/
 /mips_mcclock.c/1.19/Sun Feb 20 07:45:48 2011/-kk/
 /mips_mcclock.h/1.6/Sun Feb 20 07:45:48 2011/-kk/
 /mips_mcclock_loop.S/1.5/Mon Mar 28 12:26:59 2011/-kk/
 /mips_softint.c/1.6/Tue Sep 27 01:02:34 2011/-kk/
 /netbsd32_machdep.c/1.9/Mon May 21 14:15:18 2012/-kk/
-/pmap.c/1.208/Thu Jul  5 17:21:02 2012/-kk/
+/pmap.c/1.209/Mon Nov 18 05:31:34 2013/-kk/
 /pmap_segtab.c/1.5/Thu Jul  5 17:21:02 2012/-kk/
 /pmap_tlb.c/1.8/Tue Sep 27 01:02:34 2011/-kk/
 /process_machdep.c/1.36/Thu Jul 14 22:31:22 2011/-kk/

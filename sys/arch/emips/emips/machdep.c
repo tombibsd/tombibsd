@@ -491,7 +491,6 @@ void
 cpu_reboot(volatile int howto,	/* XXX volatile to keep gcc happy */
            char *bootstr)
 {
-	int s = 0;
 
 	/* take a snap shot before clobbering any registers */
 	if (curlwp)
@@ -527,7 +526,7 @@ cpu_reboot(volatile int howto,	/* XXX volatile to keep gcc happy */
 	}
 
 	/* Disable interrupts. */
-	s = splhigh();
+	splhigh();
 
 	/* If rebooting and a dump is requested do it. */
 	if ((howto & (RB_DUMP | RB_HALT)) == RB_DUMP)

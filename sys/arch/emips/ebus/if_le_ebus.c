@@ -683,6 +683,7 @@ enic_intr(void *cookie, void *f)
 		saf = sc->sc_regs->SizeAndFlags;
 		hi  = sc->sc_regs->BufferAddressHi32; /* BUGBUG 64bit */
 		lo  = sc->sc_regs->BufferAddressLo32; /* this pops the fifo */
+		__USE(hi);
 
 		fl = saf & (ES_F_MASK &~ ES_F_DONE);
 		if (fl == ES_F_RECV)

@@ -166,7 +166,7 @@ odcm_quirks(void)
 
 	x86_cpuid(1, regs);
 
-	switch (CPUID2STEPPING(regs[0])) {
+	switch (CPUID_TO_STEPPING(regs[0])) {
 
 	case 0x22:	/* errata O50 P44 and Z21 */
 	case 0x24:

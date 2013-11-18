@@ -128,8 +128,9 @@ static int get_line_error;
 #define	OPT_STRICT			15
 #define	OPT_SPARSE			16
 #define OPT_XZ				17
+#define OPT_GNU				18
 #if !HAVE_NBTOOL_CONFIG_H
-#define	OPT_CHROOT			18
+#define	OPT_CHROOT			19
 #endif
 
 /*
@@ -248,6 +249,8 @@ struct option pax_longopts[] = {
 						OPT_USE_COMPRESS_PROGRAM },
 	{ "xz",			no_argument,		0,
 						OPT_XZ },
+	{ "gnu",		no_argument,		0,
+						OPT_GNU },
 	{ 0,			0,			0,
 						0 },
 };
@@ -654,6 +657,9 @@ pax_options(int argc, char **argv)
 			break;
 		case OPT_XZ:
 			gzip_program = XZ_CMD;
+			break;
+		case OPT_GNU:
+			is_gnutar = 1;
 			break;
 		case '?':
 		default:

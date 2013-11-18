@@ -95,9 +95,7 @@ amd_cpufamily(void)
 	uint32_t family;
 	struct cpu_info *ci = curcpu();
 
-	family = CPUID2FAMILY(ci->ci_signature);
-	if (family == 0xf)
-		family += CPUID2EXTFAMILY(ci->ci_signature);
+	family = CPUID_TO_FAMILY(ci->ci_signature);
 
 	return family;
 }

@@ -21,6 +21,17 @@
 #define ARCH_ELFSIZE		32	/* MD native binary size */
 #endif
 
+#ifdef __arch64__
+/*
+ * we need to check .note.netbsd.mcmodel in native binaries before enabling
+ * top-down VM.
+ */
+struct exec_package;
+void sparc64_elf_mcmodel_check(struct exec_package*, const char *, size_t);
+#define	ELF_MD_MCMODEL_CHECK(ep, str, len)	\
+	sparc64_elf_mcmodel_check(ep,str,len)
+#endif
+
 /* The following are what is used for AT_SUN_HWCAP: */
 #define AV_SPARC_HWMUL_32x32	1	/* 32x32-bit smul/umul is efficient */
 #define	AV_SPARC_HWDIV_32x32	2	/* 32x32-bit sdiv/udiv is efficient */

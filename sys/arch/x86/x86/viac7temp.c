@@ -71,8 +71,8 @@ viac7temp_match(device_t parent, cfdata_t cf, void *aux)
 	if (cpu_vendor != CPUVENDOR_IDT)
 		return 0;
 
-	model = CPUID2MODEL(ci->ci_signature);
-	family = CPUID2FAMILY(ci->ci_signature);
+	model = CPUID_TO_MODEL(ci->ci_signature);
+	family = CPUID_TO_FAMILY(ci->ci_signature);
 
 	if (family != 0x06 || model < 0x09)
 		return 0;

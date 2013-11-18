@@ -334,11 +334,13 @@ DICT   *dict_sockmap_open(const char *mapname, int open_flags, int dict_flags)
      * Separate the socketmap name from the socketmap server name.
      */
     saved_name = mystrdup(mapname);
-    if ((sockmap = split_at_right(saved_name, ':')) == 0)
+    if ((sockmap = split_at_right(saved_name, ':')) == 0) {
+	myfree(saved_name);
 	return (dict_surrogate(DICT_TYPE_SOCKMAP, mapname,
 			       open_flags, dict_flags,
 			       "%s requires server:socketmap argument",
 			       DICT_TYPE_SOCKMAP));
+    }
 
     /*
      * Use one reference-counted client handle for all socketmaps with the

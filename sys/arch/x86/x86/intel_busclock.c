@@ -92,8 +92,12 @@ p3_get_bus_clock(struct cpu_info *ci)
 {
 	uint64_t msr;
 	int bus, bus_clock = 0;
+	uint32_t family, model;
 
-	switch (CPUID2MODEL(ci->ci_signature)) {
+	family = CPUID_TO_FAMILY(ci->ci_signature);
+	model = CPUID_TO_MODEL(ci->ci_signature);
+		
+	switch (model) {
 	case 0x9: /* Pentium M (130 nm, Banias) */
 		bus_clock = 10000;
 		break;
@@ -276,7 +280,7 @@ p3_get_bus_clock(struct cpu_info *ci)
 	default:
 		aprint_debug("%s: unknown i686 model %d, can't get bus clock",
 		    device_xname(ci->ci_dev),
-		    CPUID2MODEL(ci->ci_signature));
+		    CPUID_TO_MODEL(ci->ci_signature));
 print_msr:
 		/*
 		 * Show the EBL_CR_POWERON MSR, so we'll at least have
@@ -296,7 +300,7 @@ p4_get_bus_clock(struct cpu_info *ci)
 	int bus, bus_clock = 0;
 
 	msr = rdmsr(MSR_EBC_FREQUENCY_ID);
-	if (CPUID2MODEL(ci->ci_signature) < 2) {
+	if (CPUID_TO_MODEL(ci->ci_signature) < 2) {
 		bus = (msr >> 21) & 0x7;
 		switch (bus) {
 		case 0:
@@ -309,14 +313,14 @@ p4_get_bus_clock(struct cpu_info *ci)
 			aprint_debug("%s: unknown Pentium 4 (model %d) "
 			    "EBC_FREQUENCY_ID value %d\n",
 			    device_xname(ci->ci_dev),
-			    CPUID2MODEL(ci->ci_signature), bus);
+			    CPUID_TO_MODEL(ci->ci_signature), bus);
 			break;
 		}
 	} else {
 		bus = (msr >> 16) & 0x7;
 		switch (bus) {
 		case 0:
-			bus_clock = (CPUID2MODEL(ci->ci_signature) == 2) ?
+			bus_clock = (CPUID_TO_MODEL(ci->ci_signature) == 2) ?
 			    10000 : 26666;
 			break;
 		case 1:
@@ -332,7 +336,7 @@ p4_get_bus_clock(struct cpu_info *ci)
 			aprint_debug("%s: unknown Pentium 4 (model %d) "
 			    "EBC_FREQUENCY_ID value %d\n",
 			    device_xname(ci->ci_dev),
-			    CPUID2MODEL(ci->ci_signature), bus);
+			    CPUID_TO_MODEL(ci->ci_signature), bus);
 			break;
 		}
 	}

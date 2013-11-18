@@ -5,6 +5,7 @@ D/function.objects////
 D/intseq////
 D/memory////
 D/meta////
+D/optional////
 D/ratio////
 D/template.bitset////
 D/time////

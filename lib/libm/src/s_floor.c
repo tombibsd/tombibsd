@@ -27,6 +27,11 @@ __RCSID("$NetBSD$");
 #include "math.h"
 #include "math_private.h"
 
+#ifndef __HAVE_LONG_DOUBLE
+__strong_alias(_floorl, floor)
+__weak_alias(floorl, floor)
+#endif
+
 static const double huge = 1.0e300;
 
 double

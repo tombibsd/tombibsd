@@ -57,7 +57,7 @@ x86_cpu_topology(struct cpu_info *ci)
 	uint32_t descs[4], lextmode;
 
 	apic_id = ci->ci_initapicid;
-	cpu_family = CPUID2FAMILY(ci->ci_signature);
+	cpu_family = CPUID_TO_FAMILY(ci->ci_signature);
 
 	/* Initial values. */
 	ci->ci_package_id = apic_id;

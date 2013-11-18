@@ -7,13 +7,6 @@ PROG=		rump_server
 SRCS=		rump_allserver.c
 NOMAN=		installed by ../rump_allserver
 
-LDADD+= -lrump -lrumpuser -lpthread
-
-.include <bsd.own.mk>
-
-.if ${RUMP_SERVER_LIBUTIL:Uyes} == "yes"
-DPADD+=	${LIBUTIL}
-LDADD+=	-lutil
-.endif
+LDADD+= -Wl,--whole-archive -lrump -lrumpuser -Wl,--no-whole-archive -lpthread
 
 .include <bsd.prog.mk>

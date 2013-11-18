@@ -306,7 +306,6 @@ dwc2_rhc(void *addr)
 {
 	struct dwc2_softc *sc = addr;
 	usbd_xfer_handle xfer;
-	usbd_pipe_handle pipe;
 	u_char *p;
 
 	DPRINTF("\n");
@@ -320,8 +319,6 @@ dwc2_rhc(void *addr)
 
 	}
 	/* set port bit */
-	pipe = xfer->pipe;
-
 	p = KERNADDR(&xfer->dmabuf, 0);
 
 	p[0] = 0x02;	/* we only have one port (1 << 1) */

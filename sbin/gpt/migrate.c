@@ -91,6 +91,7 @@ migrate_disklabel(int fd, off_t start, struct gpt_ent *ent)
 	    le32toh(dl->d_magic2) != DISKMAGIC) {
 		warnx("%s: warning: FreeBSD slice without disklabel",
 		    device_name);
+		free(buf);
 		return (ent);
 	}
 
@@ -153,6 +154,7 @@ migrate_disklabel(int fd, off_t start, struct gpt_ent *ent)
 		ent++;
 	}
 
+	free(buf);
 	return (ent);
 }
 
@@ -171,6 +173,7 @@ migrate_netbsd_disklabel(int fd, off_t start, struct gpt_ent *ent)
 	    le32toh(dl->d_magic2) != DISKMAGIC) {
 		warnx("%s: warning: NetBSD slice without disklabel",
 		    device_name);
+		free(buf);
 		return (ent);
 	}
 
@@ -247,6 +250,7 @@ migrate_netbsd_disklabel(int fd, off_t start, struct gpt_ent *ent)
 		ent++;
 	}
 
+	free(buf);
 	return (ent);
 }
 

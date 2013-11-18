@@ -117,6 +117,13 @@ CPPFLAGS+=	-DRTLD_DEFAULT_LIBRARY_PATH=\"${SHLIBDIR}:${LIBDIR}\"
 COPTS.rtld.c+=	-Wno-stack-protector
 COPTS.symbol.c+=-Wno-stack-protector
 
+.if ${HAVE_GCC} >= 48
+.if ${LDELFSO_MACHINE_ARCH} == "x86_64"
+# gcc 4.8.1 miscompiles rtld.c when ipa-cp-clone is included.
+COPTS.rtld.c+=	-fno-ipa-cp-clone
+.endif
+.endif
+
 LDADD+=		-L${CLIBOBJ} -L${DESTDIR}${LIBDIR}
 .if ${MKPICLIB} != "no"
 LDADD+=		-lc_pic

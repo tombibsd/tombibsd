@@ -178,8 +178,7 @@ tprof_amdpmi_start(tprof_backend_cookie_t *cookie)
 	uint64_t xc;
 
 	if (!(cpu_vendor == CPUVENDOR_AMD) ||
-	    CPUID2FAMILY(ci->ci_signature) +
-	    CPUID2EXTFAMILY(ci->ci_signature) != 0xf) { /* XXX */
+	    CPUID_TO_FAMILY(ci->ci_signature) != 0xf) { /* XXX */
 		return ENOTSUP;
 	}
 

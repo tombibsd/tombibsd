@@ -2431,6 +2431,7 @@ acedump(dev_t dev, daddr_t blkno, void *va, size_t size)
 	    va, size, blkno);
 	DELAY(500 * 1000);	/* half a second */
 	err = 0;
+	__USE(err);
 #endif
 
 	acedoingadump = 0;

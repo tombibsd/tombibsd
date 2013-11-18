@@ -14,11 +14,4 @@ RUMPTOP=${.CURDIR}/../../sys/rump
 LDADD+=	${RUMPDEVLDADD} ${RUMPFSLDADD} ${RUMPKERNLDADD} ${RUMPNETLDADD}
 LDADD+= -lrumpdev -lrumpvfs -lrumpnet -lrump -lrumpuser -lpthread
 
-.include <bsd.own.mk>
-
-.if ${RUMP_SERVER_LIBUTIL:Uyes} == "yes"
-DPADD+=	${LIBUTIL}
-LDADD+=	-lutil
-.endif
-
 .include <bsd.prog.mk>

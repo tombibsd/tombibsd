@@ -27,7 +27,7 @@
 /eloop.c/1.1.1.7/Thu Oct 24 10:28:43 2013/-kk/
 /eloop.h/1.1.1.8/Tue Oct 29 12:08:17 2013/-kk/
 /if-bsd.c/1.2/Tue Oct 29 12:08:17 2013/-kk/
-/if-options.c/1.1.1.21/Tue Oct 29 12:08:17 2013/-kk/
+/if-options.c/1.3/Mon Nov 18 05:28:24 2013/-kk/
 /if-options.h/1.1.1.18/Tue Oct 29 12:08:17 2013/-kk/
 /if-pref.c/1.1.1.7/Thu Oct 24 10:28:43 2013/-kk/
 /if-pref.h/1.1.1.3/Thu Oct 24 10:28:43 2013/-kk/
@@ -37,7 +37,7 @@
 /ipv4ll.h/1.1.1.3/Thu Oct 24 10:28:43 2013/-kk/
 /ipv6.c/1.1.1.7/Tue Oct 29 12:08:17 2013/-kk/
 /ipv6.h/1.1.1.5/Thu Oct 24 10:28:43 2013/-kk/
-/ipv6nd.c/1.1.1.1/Thu Oct 24 10:28:43 2013/-kk/
+/ipv6nd.c/1.2/Mon Nov 18 05:28:24 2013/-kk/
 /ipv6nd.h/1.1.1.1/Thu Oct 24 10:28:43 2013/-kk/
 /net.c/1.3/Tue Oct 29 12:08:17 2013/-kk/
 /net.h/1.1.1.14/Thu Oct 24 10:28:43 2013/-kk/

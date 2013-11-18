@@ -100,6 +100,16 @@ fenv_t __fe_dfl_env = {
 };
 #define FE_DFL_ENV      ((const fenv_t *) &__fe_dfl_env)
 
+static void __init_libm(void) __attribute__ ((constructor, used));
+
+static void __init_libm(void)
+{
+	uint16_t control;
+
+	__fnstcw(&control);
+	__fe_dfl_env.x87.control = control;
+}
+
 
 /*
  * The feclearexcept() function clears the supported floating-point exceptions

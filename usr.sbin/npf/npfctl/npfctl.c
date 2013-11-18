@@ -274,12 +274,12 @@ npfctl_table(int fd, int argc, char **argv)
 	npf_ioctl_table_t nct;
 	fam_addr_mask_t fam;
 	size_t buflen = 512;
-	char *cmd, *arg = NULL; /* XXX gcc */
+	char *cmd, *arg;
 	int n, alen;
 
 	/* Default action is list. */
 	memset(&nct, 0, sizeof(npf_ioctl_table_t));
-	nct.nct_tid = atoi(argv[0]);
+	nct.nct_name = argv[0];
 	cmd = argv[1];
 
 	for (n = 0; tblops[n].cmd != NULL; n++) {
@@ -296,6 +296,7 @@ npfctl_table(int fd, int argc, char **argv)
 	switch (nct.nct_cmd) {
 	case NPF_CMD_TABLE_LIST:
 	case NPF_CMD_TABLE_FLUSH:
+		arg = NULL;
 		break;
 	default:
 		if (argc < 3) {

@@ -30,10 +30,10 @@ SRCS+=	AsmWriter.cpp \
 	LLVMContext.cpp \
 	LLVMContextImpl.cpp \
 	LeakDetector.cpp \
+	LegacyPassManager.cpp \
 	Metadata.cpp \
 	Module.cpp \
 	Pass.cpp \
-	PassManager.cpp \
 	PassRegistry.cpp \
 	PrintModulePass.cpp \
 	Type.cpp \

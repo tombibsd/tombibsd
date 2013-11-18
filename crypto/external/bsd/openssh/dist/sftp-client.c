@@ -1069,6 +1069,7 @@ do_download(struct sftp_conn *conn, char *remote_path, char *local_path,
 			do_close(conn, handle, handle_len);
 			buffer_free(&msg);
 			free(handle);
+			close(local_fd);
 			return -1;
 		}
 		offset = highwater = st.st_size;
@@ -1211,7 +1212,9 @@ do_download(struct sftp_conn *conn, char *remote_path, char *local_path,
 			    "server reordered requests", local_path);
 		}
 		debug("truncating at %llu", (unsigned long long)highwater);
-		ftruncate(local_fd, highwater);
+		if (ftruncate(local_fd, highwater) == -1) {
+			error("Unable to truncate \"%s\"", local_path);
+		}
 	}
 	if (read_error) {
 		error("Couldn't read from remote file \"%s\" : %s",

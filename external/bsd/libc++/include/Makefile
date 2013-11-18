@@ -55,6 +55,7 @@ INCS=	__bit_reference \
 	cwchar \
 	cwctype \
 	deque \
+	dynarray \
 	exception \
 	forward_list \
 	fstream \
@@ -75,6 +76,7 @@ INCS=	__bit_reference \
 	mutex \
 	new \
 	numeric \
+	optional \
 	ostream \
 	queue \
 	random \
@@ -82,6 +84,7 @@ INCS=	__bit_reference \
 	regex \
 	scoped_allocator \
 	set \
+	shared_mutex \
 	sstream \
 	stack \
 	stdexcept \

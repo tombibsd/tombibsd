@@ -592,10 +592,10 @@ cpu_init(struct cpu_info *ci)
 		/*
 		 * Must be a K6-2 Step >= 7 or a K6-III.
 		 */
-		if (CPUID2FAMILY(ci->ci_signature) == 5) {
-			if (CPUID2MODEL(ci->ci_signature) > 8 ||
-			    (CPUID2MODEL(ci->ci_signature) == 8 &&
-			     CPUID2STEPPING(ci->ci_signature) >= 7)) {
+		if (CPUID_TO_FAMILY(ci->ci_signature) == 5) {
+			if (CPUID_TO_MODEL(ci->ci_signature) > 8 ||
+			    (CPUID_TO_MODEL(ci->ci_signature) == 8 &&
+			     CPUID_TO_STEPPING(ci->ci_signature) >= 7)) {
 				mtrr_funcs = &k6_mtrr_funcs;
 				k6_mtrr_init_first();
 				mtrr_init_cpu(ci);

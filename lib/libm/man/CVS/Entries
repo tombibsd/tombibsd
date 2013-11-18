@@ -5,7 +5,7 @@
 /atan.3/1.17/Thu Oct 24 10:28:53 2013/-kk/
 /atan2.3/1.18/Thu Oct 24 10:28:53 2013/-kk/
 /atanh.3/1.16/Thu Oct 24 10:28:53 2013/-kk/
-/ceil.3/1.19/Sun Sep 18 05:33:13 2011/-kk/
+/ceil.3/1.20/Mon Nov 18 05:31:23 2013/-kk/
 /copysign.3/1.1/Wed Apr 13 04:57:10 2011/-kk/
 /cos.3/1.15/Thu Aug  7 16:44:47 2003/-kk/
 /cosh.3/1.15/Thu Aug  7 16:44:47 2003/-kk/
@@ -20,7 +20,7 @@
 /fenv.3/1.2/Wed Aug  4 18:58:28 2010/-kk/
 /finite.3/1.2/Sat Aug  6 11:09:22 2011/-kk/
 /fmax.3/1.2/Mon Mar  8 02:35:50 2010/-kk/
-/fmod.3/1.11/Thu Aug  7 16:44:47 2003/-kk/
+/fmod.3/1.12/Mon Nov 18 05:31:23 2013/-kk/
 /frexp.3/1.2/Thu Apr 29 08:35:03 2010/-kk/
 /hypot.3/1.17/Thu Feb 22 22:08:20 2007/-kk/
 /ieee_test.3/1.12/Tue Sep 13 07:11:43 2011/-kk/
@@ -37,12 +37,12 @@
 /pow.3/1.1/Sat Sep 17 10:51:53 2011/-kk/
 /remainder.3/1.2/Sun Sep 18 05:33:14 2011/-kk/
 /rint.3/1.13/Tue Sep 13 07:11:43 2011/-kk/
-/round.3/1.6/Tue Sep 13 07:11:43 2011/-kk/
+/round.3/1.7/Mon Nov 18 05:31:23 2013/-kk/
 /scalbn.3/1.2/Sun Sep 18 05:33:14 2011/-kk/
 /sin.3/1.14/Thu Aug  7 16:44:49 2003/-kk/
 /sinh.3/1.14/Thu Aug  7 16:44:49 2003/-kk/
 /sqrt.3/1.13/Thu Aug  7 16:44:49 2003/-kk/
 /tan.3/1.13/Thu Aug  7 16:44:49 2003/-kk/
 /tanh.3/1.15/Thu Nov 17 23:46:32 2011/-kk/
-/trunc.3/1.5/Tue Apr  4 20:26:33 2006/-kk/
+/trunc.3/1.7/Mon Nov 18 05:31:23 2013/-kk/
 D

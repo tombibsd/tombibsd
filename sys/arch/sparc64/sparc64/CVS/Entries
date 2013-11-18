@@ -24,7 +24,7 @@
 /kobj_machdep.c/1.4/Sun May  2 11:43:30 2010/-kk/
 /lock_stubs.s/1.9/Thu Oct 24 10:28:57 2013/-kk/
 /locore.s/1.349/Thu Oct 24 10:28:57 2013/-kk/
-/machdep.c/1.272/Thu Oct 24 10:28:57 2013/-kk/
+/machdep.c/1.273/Mon Nov 18 05:31:36 2013/-kk/
 /mp_subr.S/1.5/Thu Oct 24 10:28:57 2013/-kk/
 /netbsd32_machdep.c/1.100/Thu Oct 24 10:28:57 2013/-kk/
 /netbsd32_sigcode.s/1.6/Thu May 29 14:51:26 2008/-kk/

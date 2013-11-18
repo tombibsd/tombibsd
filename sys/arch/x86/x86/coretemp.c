@@ -217,8 +217,8 @@ coretemp_quirks(struct cpu_info *ci)
 	uint32_t model, stepping;
 	uint64_t msr;
 
-	model = CPUID2MODEL(ci->ci_signature);
-	stepping = CPUID2STEPPING(ci->ci_signature);
+	model = CPUID_TO_MODEL(ci->ci_signature);
+	stepping = CPUID_TO_STEPPING(ci->ci_signature);
 
 	/*
 	 * Check if the MSR contains thermal
@@ -256,12 +256,12 @@ coretemp_tjmax(device_t self)
 {
 	struct coretemp_softc *sc = device_private(self);
 	struct cpu_info *ci = sc->sc_ci;
-	uint32_t extmodel, model, stepping;
+	uint32_t family, model, stepping;
 	uint64_t msr;
 
-	model = CPUID2MODEL(ci->ci_signature);
-	extmodel = CPUID2EXTMODEL(ci->ci_signature);
-	stepping = CPUID2STEPPING(ci->ci_signature);
+	family = CPUID_TO_FAMILY(ci->ci_signature);
+	model = CPUID_TO_MODEL(ci->ci_signature);
+	stepping = CPUID_TO_STEPPING(ci->ci_signature);
 
 	sc->sc_tjmax = 100;
 
@@ -279,7 +279,7 @@ coretemp_tjmax(device_t self)
 	 * that MSR_IA32_EXT_CONFIG is not safe on all CPUs.
 	 */
 	if ((model == 0x0F && stepping >= 2) ||
-	    (model == 0x0E && extmodel != 1)) {
+	    (model == 0x0E)) {
 
 		if (rdmsr_safe(MSR_IA32_EXT_CONFIG, &msr) == EFAULT)
 			return;
@@ -295,7 +295,7 @@ coretemp_tjmax(device_t self)
 	 * but only consider the interval [70, 100] C as valid.
 	 * It is not fully known which CPU models have the MSR.
 	 */
-	if (model == 0x0E && extmodel != 0) {
+	if (model == 0x0E) {
 
 		if (rdmsr_safe(MSR_TEMPERATURE_TARGET, &msr) == EFAULT)
 			return;

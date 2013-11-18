@@ -187,9 +187,6 @@ dtkbd_cnpollc(void *v, int on)
 int
 dtkbd_ioctl(void *v, u_long cmd, void *data, int flag, struct lwp *l)
 {
-	struct dtkbd_softc *sc;
-
-	sc = v;
 
 	switch (cmd) {
 	case WSKBDIO_GTYPE:

@@ -1,6 +1,6 @@
 #	$NetBSD$
 
-MAN=	gpio.3lua intro.3lua sqlite.3lua
+MAN=	gpio.3lua intro.3lua sqlite.3lua syslog.3lua
 
 MLINKS+=gpio.3lua gpio.open.3lua \
 	gpio.3lua gpio.info.3lua \

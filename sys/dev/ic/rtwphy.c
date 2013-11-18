@@ -127,6 +127,7 @@ rtw_sa2400_txpower(struct rtw_rf *rf, uint8_t opaque_txpower)
 static void
 verify_syna(u_int freq, uint32_t val)
 {
+#ifdef DIAGNOSTIC
 	uint32_t expected_val = ~val;
 
 	switch (freq) {
@@ -174,6 +175,7 @@ verify_syna(u_int freq, uint32_t val)
 		break;
 	}
 	KASSERT(val == expected_val);
+#endif
 }
 
 /* freq is in MHz */

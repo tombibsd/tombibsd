@@ -2655,12 +2655,8 @@ after_listen:
 		 * If the congestion window was inflated to account
 		 * for the other side's cached packets, retract it.
 		 */
-		/* XXX: make SACK have his own congestion control
-		 * struct -- rpaulo */
-		if (TCP_SACK_ENABLED(tp))
-			tcp_sack_newack(tp, th);
-		else
-			tp->t_congctl->fast_retransmit_newack(tp, th);
+		tp->t_congctl->fast_retransmit_newack(tp, th);
+
 		if (SEQ_GT(th->th_ack, tp->snd_max)) {
 			TCP_STATINC(TCP_STAT_RCVACKTOOMUCH);
 			goto dropafterack;

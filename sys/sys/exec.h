@@ -226,6 +226,7 @@ struct exec_package {
 #define	EXEC_DESTR	0x0010		/* destructive ops performed */
 #define	EXEC_32		0x0020		/* 32-bit binary emulation */
 #define	EXEC_FORCEAUX	0x0040		/* always use ELF AUX vector */
+#define	EXEC_TOPDOWN_VM	0x0080		/* may use top-down VM layout */
 
 struct exec_vmcmd {
 	int	(*ev_proc)(struct lwp *, struct exec_vmcmd *);

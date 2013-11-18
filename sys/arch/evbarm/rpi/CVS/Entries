@@ -1,7 +1,7 @@
 /genassym.cf/1.1/Thu Jul 26 06:21:57 2012/-kk/
 /rpi.h/1.2/Thu Oct 24 10:28:57 2013/-kk/
 /rpi_machdep.c/1.38/Thu Oct 24 10:28:57 2013/-kk/
-/rpi_start.S/1.7/Sun Sep 23 15:56:32 2012/-kk/
+/rpi_start.S/1.8/Mon Nov 18 05:31:33 2013/-kk/
 /rpi_vcmbox.c/1.2/Thu Oct 24 10:28:57 2013/-kk/
 /vcio.h/1.1/Sun Oct 14 16:16:52 2012/-kk/
 /vcpm.h/1.1/Thu Oct 24 10:28:57 2013/-kk/

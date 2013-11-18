@@ -121,8 +121,10 @@ conf_parsefile(const char *fname)
 
 	if (confh == -1 || fstat(confh, &fs) == -1 ||
 	    (mapped = mmap(NULL, fs.st_size, PROT_READ, MAP_SHARED, confh, 0))
-	    == MAP_FAILED)
+	    == MAP_FAILED) {
+		close(confh);
 		return E_CONF_IO;
+	}
 
 	mapsize = fs.st_size;
 	nextline = mapped;
@@ -375,12 +377,14 @@ int
 Finterface(char *line)
 {
 	char *ifname;
-	struct conf_interface *conf_if = calloc(1, sizeof(*conf_if));
+	struct conf_interface *conf_if;
 	char buf[LINEMAXSIZE];
 
-	ifname = NextCommand(line);
-	if (conf_if == NULL || ifname == NULL)
+	if ((ifname = NextCommand(line)) == NULL)
 		return -1;
+	if ((conf_if = calloc(1, sizeof(*conf_if))) == NULL)
+		return -1;
+
 	strlcpy(conf_if->if_name, ifname, IF_NAMESIZE);
 	SLIST_INSERT_HEAD(&coifs_head, conf_if, iflist);
 
