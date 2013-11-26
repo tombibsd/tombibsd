@@ -940,7 +940,6 @@ m_adj(struct mbuf *mp, int req_len)
 	struct mbuf *m;
 	int count;
 
-	KASSERT(len != M_COPYALL);
 	if ((m = mp) == NULL)
 		return;
 	if (len >= 0) {

@@ -14,7 +14,7 @@ CPPFLAGS+=	-D__daddr_t=int32_t
 # ANSI C feature prevents from being relocatable
 #CPPFLAGS+=	-traditional	# would be best
 CPPFLAGS+=	-Dconst=
-COPTS+=		-funsigned-char	-mdisable-fpregs -mpa-risc-1-0
+COPTS+=		-Os -funsigned-char -mdisable-fpregs -mpa-risc-1-0
 
 .include <bsd.own.mk>
 

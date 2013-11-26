@@ -532,9 +532,15 @@ __kernel_standard(double x, double y, int type)
 		break;
             case 27:
 	    case 127:
+	    case 227:
                 /* fmod(x,0) */
                 exc.type = DOMAIN;
-                exc.name = type < 100 ? "fmod" : "fmodf";
+		if (type == 27)
+			exc.name = "fmod";
+		else if (type == 127)
+			exc.name = "fmodf";
+		else
+			exc.name = "fmodl";
                 if (_LIB_VERSION == _SVID_)
                     exc.retval = x;
 		else

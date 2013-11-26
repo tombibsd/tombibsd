@@ -2,7 +2,7 @@
 
 # Makefile for luna68k tags file
 
-# Find where mips source files are for inclusion in tags
+# Find where m68k source files are for inclusion in tags
 .include <../m68k/Makefile.inc>
 
 TLUNA68K=	../luna68k/tags

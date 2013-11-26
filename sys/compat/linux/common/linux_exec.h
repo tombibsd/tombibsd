@@ -82,7 +82,7 @@
 #define LINUX_N_BSSADDR(x,m) (LINUX_N_DATADDR(x,m) + (x).a_data)
 
 #ifndef LINUX_MACHDEP_ELF_COPYARGS
-#define LINUX_ELF_AUX_ENTRIES	13	/* we push 13 parameters */
+#define LINUX_ELF_AUX_ENTRIES	14
 #endif
 
 /*
@@ -96,6 +96,7 @@
 #define LINUX_AT_HWCAP		16	/* arch dependent CPU capabilities */
 #define LINUX_AT_CLKTCK		17	/* frequency times() increments */
 #define LINUX_AT_SECURE		23	/* secure mode boolean */
+#define LINUX_AT_RANDOM		25	/* address of 16 random bytes */
 #define LINUX_AT_SYSINFO	32	/* pointer to __kernel_vsyscall */
 #define LINUX_AT_SYSINFO_EHDR	33	/* pointer to ELF header */
 

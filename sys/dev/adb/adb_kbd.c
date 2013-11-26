@@ -814,6 +814,8 @@ adbkbd_setup_sysctl(struct adbkbd_softc *sc)
 		    me->sysctl_num, CTL_CREATE, CTL_EOL);
 	}
 #endif /* NWSMOUSE > 0 */
+
+	(void)ret;
 }
 
 SYSCTL_SETUP(sysctl_adbkbdtrans_setup, "adbkbd translator setup")

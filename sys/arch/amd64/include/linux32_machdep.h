@@ -5,6 +5,7 @@
 
 #include <compat/netbsd32/netbsd32.h>
 
+#include <compat/linux/common/linux_types.h>
 #include <compat/linux32/common/linux32_types.h>
 
 #include <compat/linux32/arch/amd64/linux32_siginfo.h>

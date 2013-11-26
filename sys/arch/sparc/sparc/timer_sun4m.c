@@ -87,7 +87,7 @@ void
 timer_init_4m(void)
 {
 	struct cpu_info *cpi;
-	int n;
+	CPU_INFO_ITERATOR n;
 
 	timerreg4m->t_limit = tmr_ustolim4m(tick);
 	for (CPU_INFO_FOREACH(n, cpi)) {
@@ -212,7 +212,8 @@ timerattach_obio_4m(device_t parent, device_t self, void *aux)
 	struct sbus_attach_args *sa = &uoba->uoba_sbus;
 	struct cpu_info *cpi;
 	bus_space_handle_t bh;
-	int i, n;
+	int i;
+	CPU_INFO_ITERATOR n;
 
 	if (sa->sa_nreg < 2) {
 		printf(": only %d register sets\n", sa->sa_nreg);

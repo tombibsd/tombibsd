@@ -34,6 +34,7 @@ SUBDIR+=	hfs
 SUBDIR+=	if_axe
 SUBDIR+=	if_axen
 SUBDIR+=	if_npflog
+SUBDIR+=	if_smsc
 SUBDIR+=	iic
 SUBDIR+=	kernfs
 SUBDIR+=	layerfs
@@ -127,11 +128,14 @@ SUBDIR+=	tprof_amdpmi
 SUBDIR+=	vmt
 .endif
 
+.if ${MKSLJIT} != "no"
+# No modules for arm, mips and powerpc yet.
 .if ${MACHINE_ARCH} == "i386" || \
     ${MACHINE_ARCH} == "x86_64" || \
     ${MACHINE_ARCH} == "sparc"
 SUBDIR+=	bpfjit
 SUBDIR+=	sljit
+.endif
 .endif
 
 #

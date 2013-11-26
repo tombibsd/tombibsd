@@ -1,7 +1,7 @@
 /*	$NetBSD$	*/
 
 /*-
- * Copyright (c) 2012 The NetBSD Foundation, Inc.
+ * Copyright (c) 2012-2013 The NetBSD Foundation, Inc.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,12 +26,15 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef I386_SLJITARCH_H
-#define I386_SLJITARCH_H
+#ifndef _I386_SLJITARCH_H
+#define _I386_SLJITARCH_H
 
 #define SLJIT_CONFIG_X86_32 1
 
+/* No call attributes. */
 #define SLJIT_CALL
 #define SLJIT_X86_32_FASTCALL 0
+
+#define SLJIT_CACHE_FLUSH(from, to)
 
 #endif

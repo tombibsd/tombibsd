@@ -25,8 +25,8 @@
 
 #include <compat/linux/common/linux_ipc.h>
 #include <compat/linux/common/linux_sem.h>
+
 #include <compat/linux/common/linux_fcntl64.c>
 #include <compat/linux/common/linux_llseek.c>
 #include <compat/linux/common/linux_misc_notalpha.c>
-#include <compat/linux/common/linux_misc.c>
 #include <compat/linux/common/linux_uid16.c>

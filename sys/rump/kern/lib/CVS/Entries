@@ -1,6 +1,7 @@
 /Makefile.inc/1.1/Thu Jun 10 21:56:42 2010/-kk/
 /Makefile/1.4/Sun Dec  5 16:27:42 2010/-kk/
 D/libcrypto////
+D/libsljit////
 D/libsolaris////
 D/libsys_cygwin////
 D/libsys_linux////

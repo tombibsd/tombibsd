@@ -438,7 +438,7 @@ api_opts_get(SCR *sp, const CHAR_T *name, char **value, int *boolvalue)
 	case OPT_STR:
 		if (O_STR(sp, offset) == NULL) {
 			MALLOC_RET(sp, *value, char *, 2);
-			value[0] = '\0';
+			value[0][0] = '\0';
 		} else {
 			MALLOC_RET(sp,
 			    *value, char *, strlen(O_STR(sp, offset)) + 1);

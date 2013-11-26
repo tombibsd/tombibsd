@@ -89,7 +89,7 @@
 /segments.h/1.54/Tue Apr 26 15:51:23 2011/-kk/
 /setjmp.h/1.2/Mon Sep 14 21:31:52 1998/-kk/
 /signal.h/1.29/Wed Nov 19 18:35:59 2008/-kk/
-/sljitarch.h/1.2/Sun Nov 18 14:39:42 2012/-kk/
+/sljitarch.h/1.3/Tue Nov 26 03:29:47 2013/-kk/
 /specialreg.h/1.29/Wed Feb 26 21:29:03 2003/-kk/
 /spkr.h/1.4/Wed Apr 15 21:40:27 1998/-kk/
 /svr4_machdep.h/1.16/Mon Apr 28 20:23:24 2008/-kk/

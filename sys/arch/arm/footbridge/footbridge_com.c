@@ -742,12 +742,12 @@ fcomcngetc(dev_t dev)
 	int s = splserial();
 	bus_space_tag_t iot = fcomconstag;
 	bus_space_handle_t ioh = fcomconsioh;
-	u_char stat, c;
+	u_char c;
 
 	while ((bus_space_read_4(iot, ioh, UART_FLAGS) & UART_RX_FULL) != 0)
 		;
 	c = bus_space_read_4(iot, ioh, UART_DATA);
-	stat = bus_space_read_4(iot, ioh, UART_RX_STAT);
+	(void)bus_space_read_4(iot, ioh, UART_RX_STAT);
 	(void)splx(s);
 #if defined(DDB) && DDB_KEYCODE > 0
 		/*

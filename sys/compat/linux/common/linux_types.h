@@ -54,6 +54,7 @@ typedef long linux_suseconds_t;
 
 typedef unsigned short linux_gid16_t;
 typedef unsigned short linux_uid16_t;
+typedef unsigned short linux_umode_t;
 
 /*
  * From Linux include/asm-.../posix_types.h

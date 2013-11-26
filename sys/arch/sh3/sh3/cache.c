@@ -166,7 +166,6 @@ __cache_flush(void)
 		(void)*p;
 		p += 4;	/* next line index (16B) */
 	}
-	__USE(d);
 
 	/* Flush I-Cache */
 	/*

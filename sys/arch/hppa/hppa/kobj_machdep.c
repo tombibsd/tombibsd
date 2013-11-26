@@ -143,6 +143,7 @@ kobj_reloc(kobj_t ko, uintptr_t relocbase, const void *data,
 		value = RR(addr, value);
 		break;
 
+	case R_TYPE(PCREL32):
 	case R_TYPE(PCREL17F):
 		/* symbol - PC - 8 + addend */
 		addr = kobj_sym_lookup(ko, symidx);
@@ -181,6 +182,7 @@ kobj_reloc(kobj_t ko, uintptr_t relocbase, const void *data,
 
 	switch (rtype) {
 	case R_TYPE(DIR32):
+	case R_TYPE(PCREL32):
 	case R_TYPE(PLABEL32):
 	case R_TYPE(SEGREL32):
 		*where = value;

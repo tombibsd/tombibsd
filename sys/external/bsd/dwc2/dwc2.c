@@ -1279,7 +1279,7 @@ dwc2_device_start(usbd_xfer_handle xfer)
 			dir = UE_DIR_OUT;
 		}
 
-		DPRINTFN(3, "req = %p dma = %lx len %d dir %s\n",
+		DPRINTFN(3, "req = %p dma = %" PRIxBUSADDR " len %d dir %s\n",
 		    KERNADDR(&dpipe->req_dma, 0), DMAADDR(&dpipe->req_dma, 0),
 		    len, dir == UE_DIR_IN ? "in" : "out");
 	} else {
@@ -1294,7 +1294,8 @@ dwc2_device_start(usbd_xfer_handle xfer)
 	if (!dwc2_urb)
 		    return USBD_NOMEM;
 
-	memset(dwc2_urb, 0, sizeof(*dwc2_urb));
+	memset(dwc2_urb, 0, sizeof(*dwc2_urb) +
+	    sizeof(dwc2_urb->iso_descs[0]) * DWC2_MAXISOCPACKETS);
 
 	dwc2_urb->priv = xfer;
 	dwc2_hcd_urb_set_pipeinfo(hsotg, dwc2_urb, addr, epnum, xfertype, dir,
@@ -1324,13 +1325,38 @@ dwc2_device_start(usbd_xfer_handle xfer)
 	dwc2_urb->status = -EINPROGRESS;
 	dwc2_urb->packet_count = xfer->nframes;
 
-	if (xfertype == UE_INTERRUPT) {
-		if (dpipe->pipe.interval == USBD_DEFAULT_INTERVAL)
-			dwc2_urb->interval = ed->bInterval;
-		else
-			dwc2_urb->interval = dpipe->pipe.interval;
-	} else if (xfertype == UE_ISOCHRONOUS)
-		dwc2_urb->interval = ed->bInterval;
+	if (xfertype == UE_INTERRUPT ||
+	    xfertype == UE_ISOCHRONOUS) {
+		uint16_t ival;
+
+		if (xfertype == UE_INTERRUPT &&
+		    dpipe->pipe.interval != USBD_DEFAULT_INTERVAL) {
+			ival = dpipe->pipe.interval;
+		} else {
+			ival = ed->bInterval;
+		}
+
+		if (ival < 1) {
+			retval = -ENODEV;
+			goto fail;
+		}
+		if (dev->speed == USB_SPEED_HIGH ||
+		   (dev->speed == USB_SPEED_FULL && xfertype == UE_ISOCHRONOUS)) {
+			if (ival > 16) {
+				/*
+				 * illegal with HS/FS, but there were
+				 * documentation bugs in the spec
+				 */
+				ival = 256;
+			} else {
+				ival = (1 << (ival - 1));
+			}
+		} else {
+			if (xfertype == UE_INTERRUPT && ival < 10)
+				ival = 10;
+		}
+		dwc2_urb->interval = ival;
+	}
 
 	/* XXXNH bring down from callers?? */
 // 	mutex_enter(&sc->sc_lock);

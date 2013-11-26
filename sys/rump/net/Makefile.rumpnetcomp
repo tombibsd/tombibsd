@@ -3,8 +3,12 @@
 
 .include <bsd.own.mk>
 
-RUMPNETCOMP=	agr bridge net net80211 netbt netinet netinet6 netmpls npf
-RUMPNETCOMP+=	local shmif
+RUMPNETCOMP=	agr bridge net net80211 netbt netinet netinet6
+RUMPNETCOMP+=	netmpls npf local shmif
+
+.if ${MKSLJIT} != "no"
+RUMPNETCOMP+=	bpfjit
+.endif
 
 .if ${RUMP_VIRTIF:Uyes} == "yes"
 RUMPNETCOMP+=	virtif

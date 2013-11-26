@@ -256,10 +256,9 @@ coretemp_tjmax(device_t self)
 {
 	struct coretemp_softc *sc = device_private(self);
 	struct cpu_info *ci = sc->sc_ci;
-	uint32_t family, model, stepping;
+	uint32_t model, stepping;
 	uint64_t msr;
 
-	family = CPUID_TO_FAMILY(ci->ci_signature);
 	model = CPUID_TO_MODEL(ci->ci_signature);
 	stepping = CPUID_TO_STEPPING(ci->ci_signature);
 

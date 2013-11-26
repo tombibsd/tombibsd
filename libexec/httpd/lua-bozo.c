@@ -445,7 +445,6 @@ out:
 	free(uri);
 	free(info);
 	free(query);
-	free(command);
 	free(file);
 	return rv;
 }

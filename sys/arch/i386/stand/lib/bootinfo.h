@@ -29,14 +29,14 @@
 #include <machine/bootinfo.h>
 
 struct bootinfo {
-	int nentries;
-	physaddr_t entry[1];
+	uint32_t nentries;
+	uint32_t entry[1];
 };
 
 extern struct bootinfo *bootinfo;
 
 #define BI_ALLOC(max) (bootinfo = alloc(sizeof(struct bootinfo) \
-                                        + ((max) - 1) * sizeof(physaddr_t))) \
+                                        + ((max) - 1) * sizeof(uint32_t))) \
                       ->nentries = 0
 
 #define BI_FREE() dealloc(bootinfo, 0)

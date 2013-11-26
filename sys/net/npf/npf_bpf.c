@@ -40,6 +40,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/param.h>
 
 #include <sys/mbuf.h>
+#include <net/bpf.h>
 
 #define NPF_BPFCOP
 #include "npf_impl.h"
@@ -94,6 +95,12 @@ npf_bpf_filter(npf_cache_t *npc, nbuf_t *nbuf,
 
 	/* Execute BPF byte-code. */
 	return bpf_filter_ext(npf_bpfctx, code, &args);
+}
+
+void *
+npf_bpf_compile(void *code, size_t size)
+{
+	return bpf_jit_generate(npf_bpfctx, code, size);
 }
 
 bool

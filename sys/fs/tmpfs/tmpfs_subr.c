@@ -127,7 +127,7 @@ tmpfs_alloc_node(tmpfs_mount_t *tmp, enum vtype type, uid_t uid, gid_t gid,
 	 * for applications that do not understand 64-bit ino_t.
 	 */
 	nnode->tn_id = (ino_t)((uintptr_t)nnode / sizeof(*nnode));
-	nnode->tn_gen = TMPFS_NODE_GEN_MASK & (unsigned long)cprng_fast64();
+	nnode->tn_gen = TMPFS_NODE_GEN_MASK & cprng_fast32();
 
 	/* Generic initialization. */
 	nnode->tn_type = type;
@@ -272,7 +272,7 @@ tmpfs_vnode_get(struct mount *mp, tmpfs_node_t *node, vnode_t **vpp)
 again:
 	/* If there is already a vnode, try to reclaim it. */
 	if ((vp = node->tn_vnode) != NULL) {
-		atomic_or_ulong(&node->tn_gen, TMPFS_RECLAIMING_BIT);
+		atomic_or_32(&node->tn_gen, TMPFS_RECLAIMING_BIT);
 		mutex_enter(vp->v_interlock);
 		mutex_exit(&node->tn_vlock);
 		error = vget(vp, LK_EXCLUSIVE);
@@ -280,12 +280,12 @@ again:
 			mutex_enter(&node->tn_vlock);
 			goto again;
 		}
-		atomic_and_ulong(&node->tn_gen, ~TMPFS_RECLAIMING_BIT);
+		atomic_and_32(&node->tn_gen, ~TMPFS_RECLAIMING_BIT);
 		*vpp = vp;
 		return error;
 	}
 	if (TMPFS_NODE_RECLAIMING(node)) {
-		atomic_and_ulong(&node->tn_gen, ~TMPFS_RECLAIMING_BIT);
+		atomic_and_32(&node->tn_gen, ~TMPFS_RECLAIMING_BIT);
 	}
 
 	/*
@@ -788,7 +788,7 @@ tmpfs_dir_getdents(tmpfs_node_t *node, struct uio *uio, off_t *cntp)
 	 * Allocate struct dirent and first check for the "." and "..".
 	 * Note: tmpfs_dir_getdotents() will "seek" for us.
 	 */
-	dentp = kmem_alloc(sizeof(struct dirent), KM_SLEEP);
+	dentp = kmem_zalloc(sizeof(struct dirent), KM_SLEEP);
 
 	if (uio->uio_offset == TMPFS_DIRSEQ_DOT) {
 		if ((error = tmpfs_dir_getdotents(node, dentp, uio)) != 0) {

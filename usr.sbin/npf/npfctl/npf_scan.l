@@ -119,10 +119,9 @@ apply			return APPLY;
 final			return FINAL;
 quick			return FINAL;
 on			return ON;
-ifnet			return IFNET;
 inet6			return INET6;
-inet4			return INET;
-inet			return INET;
+inet4			return INET4;
+inet			return INET4;
 proto			return PROTO;
 family			return FAMILY;
 tcp			return TCP;
@@ -186,7 +185,7 @@ any			return ANY;
 			return TABLE_ID;
 		}
 
-"$"{ID}	{
+"$"{ID}		{
 			yylval.str = estrndup(yytext + 1, yyleng - 1);
 			return VAR_ID;
 		}

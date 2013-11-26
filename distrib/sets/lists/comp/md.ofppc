@@ -47,6 +47,7 @@
 ./usr/include/ofppc/rwlock.h			comp-c-include
 ./usr/include/ofppc/setjmp.h			comp-c-include
 ./usr/include/ofppc/signal.h			comp-c-include
+./usr/include/ofppc/sljitarch.h			comp-c-include
 ./usr/include/ofppc/spr.h			comp-obsolete		obsolete
 ./usr/include/ofppc/stdarg.h			comp-obsolete		obsolete
 ./usr/include/ofppc/trap.h			comp-c-include

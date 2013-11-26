@@ -21,7 +21,7 @@ CFLAGS.crtbegin.c+= -fPIE
 OBJS+=		crtfm.o
 .endif
 
-.if ${MACHINE_ARCH} == "sparc64"
+.if ${CSU_MACHINE_ARCH} == "sparc64"
 # create helper objects for the compiler to mark compiler memory models
 .for m in medlow medmid medany
 sparc_mc${m}.o:	compident.S sysident_assym.h

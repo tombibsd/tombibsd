@@ -784,13 +784,14 @@ static struct {
 __dead static void
 usage(void)
 {
-	extern const char addmsg[], biosbootmsg[], createmsg[], destroymsg[];
-	extern const char labelmsg1[], labelmsg2[], labelmsg3[];
+	extern const char addmsg1[], addmsg2[], biosbootmsg[], createmsg[];
+	extern const char destroymsg[], labelmsg1[], labelmsg2[], labelmsg3[];
 	extern const char migratemsg[], recovermsg[], removemsg1[];
 	extern const char removemsg2[], showmsg[];
 
 	fprintf(stderr,
 	    "usage: %s %s\n"
+	    "       %s %s\n"
 	    "       %s %s\n"
 	    "       %s %s\n"
 	    "       %s %s\n"
@@ -802,7 +803,8 @@ usage(void)
 	    "       %s %s\n"
 	    "       %s %s\n"
 	    "       %s %s\n",
-	    getprogname(), addmsg,
+	    getprogname(), addmsg1,
+	    getprogname(), addmsg2,
 	    getprogname(), biosbootmsg,
 	    getprogname(), createmsg,
 	    getprogname(), destroymsg,

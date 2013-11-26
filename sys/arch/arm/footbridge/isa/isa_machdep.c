@@ -429,7 +429,6 @@ isa_intr_disestablish(isa_chipset_tag_t ic, void *arg)
 void
 isa_intr_init(void)
 {
-	static void *isa_ih;
  	struct intrq *iq;
  	int i;
  
@@ -452,7 +451,7 @@ isa_intr_init(void)
 #ifndef ISA_FOOTBRIDGE_IRQ 
 #warning Before using isa with footbridge you must define ISA_FOOTBRIDGE_IRQ
 #endif
-	isa_ih = footbridge_intr_claim(ISA_FOOTBRIDGE_IRQ, IPL_BIO, "isabus",
+	footbridge_intr_claim(ISA_FOOTBRIDGE_IRQ, IPL_BIO, "isabus",
 	    isa_irqdispatch, NULL);
 	
 }

@@ -9,7 +9,7 @@
 /ibm40x_machdep.c/1.6/Sat Jun 18 06:41:41 2011/-kk/
 /ibm4xx_autoconf.c/1.15/Sat Jun 18 06:41:41 2011/-kk/
 /ibm4xx_machdep.c/1.18/Mon Dec 12 11:38:26 2011/-kk/
-/pic_uic.c/1.3/Wed Feb  1 09:54:02 2012/-kk/
+/pic_uic.c/1.4/Tue Nov 26 03:29:48 2013/-kk/
 /pmap.c/1.72/Fri Jan 27 19:48:39 2012/-kk/
 /trap.c/1.66/Thu Oct 24 10:28:57 2013/-kk/
 /trap_subr.S/1.24/Thu Oct 24 10:28:57 2013/-kk/

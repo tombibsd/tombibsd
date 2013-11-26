@@ -191,7 +191,7 @@
 /uyap.c/1.19/Fri Dec 23 00:51:50 2011/-kk/
 /uyap_firmware.h/1.7/Tue Aug 18 11:08:37 2009/-kk/
 /uyurex.c/1.9/Thu Oct 24 10:28:58 2013/-kk/
-/xhci.c/1.9/Mon Nov 18 05:31:45 2013/-kk/
+/xhci.c/1.10/Tue Nov 26 03:29:56 2013/-kk/
 /xhcireg.h/1.1/Thu Oct 24 10:28:58 2013/-kk/
 /xhcivar.h/1.2/Thu Oct 31 07:00:24 2013/-kk/
 /xinput_rdesc.h/1.1/Sat Jul 30 12:15:44 2011/-kk/

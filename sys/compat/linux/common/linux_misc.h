@@ -144,6 +144,8 @@ __BEGIN_DECLS
 int bsd_to_linux_wstat(int);
 int linux_select1(struct lwp *, register_t *, int, fd_set *, fd_set *,
 		       fd_set *, struct linux_timeval *);
+int linux_do_sys_utimensat(struct lwp *, int, const char *,
+    struct timespec *, int, register_t *);
 __END_DECLS
 #endif /* !_KERNEL */
 

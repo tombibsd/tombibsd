@@ -116,7 +116,7 @@ linux_setregs(struct lwp *l, struct exec_package *epp, vaddr_t stack)
 	tf->tf_rflags = PSL_USERSET;
 	tf->tf_cs = GSEL(GUCODE_SEL, SEL_UPL);
 	tf->tf_ss = GSEL(GUDATA_SEL, SEL_UPL);
-	tf->tf_ds = 0;
+	tf->tf_ds = GSEL(GUDATA_SEL, SEL_UPL);
 	tf->tf_es = 0;
 	cpu_fsgs_zero(l);
 

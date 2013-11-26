@@ -563,17 +563,14 @@ void
 npf_rule_setcode(npf_rule_t *rl, const int type, void *code, size_t size)
 {
 	KASSERT(type == NPF_CODE_BPF);
-	rl->r_type = type;
-	rl->r_code = code;
-	rl->r_clen = size;
-#if 0
-	/* Perform BPF JIT if possible. */
-	if (membar_consumer(), bpfjit_module_ops.bj_generate_code != NULL) {
-		KASSERT(rl->r_jcode == NULL);
-		rl->r_jcode = bpfjit_module_ops.bj_generate_code(code, size);
+
+	if ((rl->r_jcode = npf_bpf_compile(code, size)) == NULL) {
+		rl->r_code = code;
+		rl->r_clen = size;
+	} else {
 		rl->r_code = NULL;
 	}
-#endif
+	rl->r_type = type;
 }
 
 /*
@@ -609,8 +606,7 @@ npf_rule_free(npf_rule_t *rl)
 	}
 	if (rl->r_jcode) {
 		/* Free JIT code. */
-		KASSERT(bpfjit_module_ops.bj_free_code != NULL);
-		bpfjit_module_ops.bj_free_code(rl->r_jcode);
+		bpf_jit_freecode(rl->r_jcode);
 	}
 	if (rl->r_dict) {
 		/* Destroy the dictionary. */

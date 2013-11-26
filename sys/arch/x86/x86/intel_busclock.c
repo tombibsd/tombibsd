@@ -92,9 +92,8 @@ p3_get_bus_clock(struct cpu_info *ci)
 {
 	uint64_t msr;
 	int bus, bus_clock = 0;
-	uint32_t family, model;
+	uint32_t model;
 
-	family = CPUID_TO_FAMILY(ci->ci_signature);
 	model = CPUID_TO_MODEL(ci->ci_signature);
 		
 	switch (model) {

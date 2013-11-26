@@ -213,7 +213,7 @@ extern struct pic_ops pic_uic1;
 static void
 uic1_finish_setup(struct pic_ops *pic)
 {
-	intr_establish(30, IST_LEVEL, IPL_NONE, pic_handle_intr, &pic_uic1);
+	intr_establish(30, IST_LEVEL, IPL_HIGH, pic_handle_intr, &pic_uic1);
 }
 
 struct uic uic1 = {
@@ -268,7 +268,7 @@ extern struct pic_ops pic_uic2;
 static void
 uic2_finish_setup(struct pic_ops *pic)
 {
-	intr_establish(28, IST_LEVEL, IPL_NONE, pic_handle_intr, &pic_uic2);
+	intr_establish(28, IST_LEVEL, IPL_HIGH, pic_handle_intr, &pic_uic2);
 }
 
 static struct uic uic2 = {

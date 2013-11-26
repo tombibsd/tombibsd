@@ -54,6 +54,7 @@
 ./usr/include/prep/rwlock.h			comp-c-include
 ./usr/include/prep/setjmp.h			comp-c-include
 ./usr/include/prep/signal.h			comp-c-include
+./usr/include/prep/sljitarch.h			comp-c-include
 ./usr/include/prep/spkr.h			comp-c-include
 ./usr/include/prep/spr.h			comp-obsolete		obsolete
 ./usr/include/prep/stdarg.h			comp-obsolete		obsolete

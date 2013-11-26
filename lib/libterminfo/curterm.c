@@ -151,7 +151,7 @@ termname(void)
 	return __UNCONST(cur_term->name);
 }
 
-static const char * nullname = '\0';
+static const char * nullname = "";
 
 char *
 longname(void)

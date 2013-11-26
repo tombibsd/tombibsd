@@ -26,6 +26,10 @@ __RCSID("$NetBSD$");
 
 static const double one = 1.0, Zero[] = {0.0, -0.0,};
 
+#ifndef __HAVE_LONG_DOUBLE
+__strong_alias(__ieee754_fmodl, __ieee754_fmod)
+#endif
+
 double
 __ieee754_fmod(double x, double y)
 {

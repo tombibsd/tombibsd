@@ -1,5 +1,5 @@
 /*	$NetBSD$	*/
-/*  from NetBSD: ufs_quota.c,v 1.112 2012/09/09 04:27:49 manu Exp  */
+/*  from NetBSD: ufs_quota.c,v 1.115 2013/11/16 17:04:53 dholland Exp  */
 
 /*
  * Copyright (c) 1982, 1986, 1990, 1993, 1995

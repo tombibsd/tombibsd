@@ -420,6 +420,11 @@ npfctl_print_table(npf_conf_info_t *ctx, nl_table_t *tl)
 	const char *name = npf_table_getname(tl);
 	const int type = npf_table_gettype(tl);
 
+	if (name[0] == '.') {
+		/* Internal tables use dot and are hidden. */
+		return;
+	}
+
 	fprintf(ctx->fp, "table <%s> type %s\n", name,
 	    (type == NPF_TABLE_HASH) ? "hash" :
 	    (type == NPF_TABLE_TREE) ? "tree" :

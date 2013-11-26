@@ -223,6 +223,13 @@ ELFNAME2(linux,copyargs)(struct lwp *l, struct exec_package *pack,
 	esd.ai[i].a_type = LINUX_AT_PLATFORM;
 	esd.ai[i++].a_v = (Elf_Addr)&esdp->hw_platform[0];
 
+	esd.ai[i].a_type = LINUX_AT_RANDOM;
+	esd.ai[i++].a_v = (Elf_Addr)&esdp->randbytes[0];
+	esd.randbytes[0] = random();
+	esd.randbytes[1] = random();
+	esd.randbytes[2] = random();
+	esd.randbytes[3] = random();
+
 	esd.ai[i].a_type = AT_NULL;
 	esd.ai[i++].a_v = 0;
 

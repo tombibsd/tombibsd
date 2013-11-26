@@ -44,7 +44,9 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <compat/netbsd32/netbsd32.h>
 
+#include <compat/linux/common/linux_types.h>
 #include <compat/linux/common/linux_signal.h>
+
 #include <compat/linux32/common/linux32_types.h>
 #include <compat/linux32/common/linux32_signal.h>
 #include <compat/linux32/common/linux32_siginfo.h>

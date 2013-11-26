@@ -209,6 +209,7 @@ void		npf_bpf_sysinit(void);
 void		npf_bpf_sysfini(void);
 int		npf_bpf_filter(npf_cache_t *, nbuf_t *,
 		    const void *, bpfjit_func_t);
+void *		npf_bpf_compile(void *, size_t);
 bool		npf_bpf_validate(const void *, size_t);
 
 /* Tableset interface. */

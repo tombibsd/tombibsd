@@ -1,0 +1,10 @@
+#	$NetBSD$
+
+ioconf ubsec
+
+include "conf/files"
+include "dev/pci/files.pci"
+
+pseudo-root pci*
+
+ubsec* at pci? dev ? function ?

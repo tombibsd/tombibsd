@@ -743,6 +743,8 @@ init_trackpad(struct adbms_softc *sc)
 	    CTLTYPE_INT, "tapping", "tapping the pad causes button events",
 	    sysctl_adbms_tap, 1, (void *)sc, 0,
 	    CTL_MACHDEP, me->sysctl_num, CTL_CREATE, CTL_EOL);
+
+	(void)ret;
 }
 
 static int

@@ -268,6 +268,16 @@ rump_init(void)
 		return EINVAL;
 	}
 
+	/* init minimal lwp/cpu context */
+	l = &lwp0;
+	l->l_lid = 1;
+	l->l_cpu = l->l_target_cpu = rump_cpu;
+	l->l_fd = &filedesc0;
+
+	/* lwp0 isn't created like other threads, so notify hypervisor here */
+	rumpuser_curlwpop(RUMPUSER_LWP_CREATE, l);
+	rumpuser_curlwpop(RUMPUSER_LWP_SET, l);
+
 	/* retrieve env vars which affect the early stage of bootstrap */
 	if (rumpuser_getparam("RUMP_THREADS", buf, sizeof(buf)) == 0) {
 		rump_threads = *buf != '0';
@@ -296,16 +306,6 @@ rump_init(void)
 	aprint_verbose("%s%s", copyright, version);
 
 	rump_intr_init(numcpu);
-
-	/* init minimal lwp/cpu context */
-	l = &lwp0;
-	l->l_lid = 1;
-	l->l_cpu = l->l_target_cpu = rump_cpu;
-	l->l_fd = &filedesc0;
-
-	/* lwp0 isn't created like other threads, so notify hypervisor here */
-	rumpuser_curlwpop(RUMPUSER_LWP_CREATE, l);
-	rumpuser_curlwpop(RUMPUSER_LWP_SET, l);
 
 	rump_tsleep_init();
 

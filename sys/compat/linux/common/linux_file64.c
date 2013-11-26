@@ -171,6 +171,33 @@ linux_sys_lstat64(struct lwp *l, const struct linux_sys_lstat64_args *uap, regis
 }
 
 int
+linux_sys_fstatat64(struct lwp *l, const struct linux_sys_fstatat64_args *uap, register_t *retval)
+{
+	/* {
+		syscallarg(int) fd;
+		syscallarg(const char *) path;
+		syscallarg(struct linux_stat64 *) sp;
+		syscallarg(int) flag;
+	} */
+	struct linux_stat64 tmplst;
+	struct stat tmpst;
+	int error, nd_flag;
+
+	if (SCARG(uap, flag) & LINUX_AT_SYMLINK_NOFOLLOW)
+		nd_flag = NOFOLLOW;
+	else
+		nd_flag = FOLLOW;
+
+	error = do_sys_statat(l, SCARG(uap, fd), SCARG(uap, path), nd_flag, &tmpst);
+	if (error != 0)
+		return error;
+
+	bsd_to_linux_stat(&tmpst, &tmplst);
+
+	return copyout(&tmplst, SCARG(uap, sp), sizeof tmplst);
+}
+
+int
 linux_sys_truncate64(struct lwp *l, const struct linux_sys_truncate64_args *uap, register_t *retval)
 {
 	/* {

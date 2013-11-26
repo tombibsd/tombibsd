@@ -2289,7 +2289,7 @@ ctx_free(struct pmap *pm)
 
 #if defined(SUN4M) || defined(SUN4D)
 	if (CPU_HAS_SRMMU) {
-		int i;
+		CPU_INFO_ITERATOR i;
 
 		cache_flush_context(ctx);
 		tlb_flush_context(ctx, PMAP_CPUSET(pm));

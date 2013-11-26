@@ -1,7 +1,7 @@
 /*	$NetBSD$	*/
 
 /*-
- * Copyright (c) 2012 The NetBSD Foundation, Inc.
+ * Copyright (c) 2012-2013 The NetBSD Foundation, Inc.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,9 +26,11 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef AMD64_SLJITARCH_H
-#define AMD64_SLJITARCH_H
+#ifndef _AMD64_SLJITARCH_H
+#define _AMD64_SLJITARCH_H
 
 #define SLJIT_CONFIG_X86_64 1
+
+#define SLJIT_CACHE_FLUSH(from, to)
 
 #endif

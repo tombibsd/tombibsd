@@ -47,13 +47,14 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <compat/netbsd32/netbsd32.h>
 #include <compat/netbsd32/netbsd32_syscallargs.h>
 
+#include <compat/linux/common/linux_types.h>
+
 #include <compat/linux32/common/linux32_types.h>
 #include <compat/linux32/common/linux32_signal.h>
 #include <compat/linux32/common/linux32_sched.h>
 #include <compat/linux32/linux32_syscallargs.h>
 
 #include <compat/linux/common/linux_ptrace.h>
-#include <compat/linux/common/linux_types.h>
 #include <compat/linux/common/linux_emuldata.h>
 #include <compat/linux/common/linux_signal.h>
 #include <compat/linux/common/linux_misc.h>

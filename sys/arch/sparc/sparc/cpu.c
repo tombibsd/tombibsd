@@ -1823,7 +1823,8 @@ int
 viking_module_error(void)
 {
 	uint64_t v;
-	int n = 0, fatal = 0;
+	int fatal = 0;
+	CPU_INFO_ITERATOR n;
 	struct cpu_info *cpi;
 
 	/* Report on MXCC error registers in each module */
