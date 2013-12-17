@@ -34,10 +34,10 @@
 
 ENTRY_NP(_atomic_inc_64_nv)
 	mov	ip, r0			/* need r0 for return value */
-1:	ldrexd	r0, [ip]		/* load old value */
+1:	ldrexd	r0, r1, [ip]		/* load old value */
 	adds	LO, LO, #1		/* calculate new value (return value) */
 	adcs	HI, HI, #0		/* fold carry into high */
-	strexd	r2, r0, [ip]		/* try to store */
+	strexd	r2, r0, r1, [ip]	/* try to store */
 	cmp	r2, #0			/*   succeed? */
 	bne	1b			/*     no, try again? */
 #ifdef _ARM_ARCH_7

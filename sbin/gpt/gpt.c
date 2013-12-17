@@ -39,6 +39,7 @@ __RCSID("$NetBSD$");
 #include <sys/disk.h>
 #include <sys/stat.h>
 #include <sys/ioctl.h>
+#include <sys/bootblock.h>
 
 #include <err.h>
 #include <errno.h>
@@ -392,9 +393,9 @@ gpt_mbr(int fd, off_t lba)
 	 */
 	pmbr = 0;
 	for (i = 0; i < 4; i++) {
-		if (mbr->mbr_part[i].part_typ == 0)
+		if (mbr->mbr_part[i].part_typ == MBR_PTYPE_UNUSED)
 			continue;
-		if (mbr->mbr_part[i].part_typ == 0xee)
+		if (mbr->mbr_part[i].part_typ == MBR_PTYPE_PMBR)
 			pmbr++;
 		else
 			break;
@@ -419,8 +420,8 @@ gpt_mbr(int fd, off_t lba)
 	if (p == NULL)
 		return (-1);
 	for (i = 0; i < 4; i++) {
-		if (mbr->mbr_part[i].part_typ == 0 ||
-		    mbr->mbr_part[i].part_typ == 0xee)
+		if (mbr->mbr_part[i].part_typ == MBR_PTYPE_UNUSED ||
+		    mbr->mbr_part[i].part_typ == MBR_PTYPE_PMBR)
 			continue;
 		start = le16toh(mbr->mbr_part[i].part_start_hi);
 		start = (start << 16) + le16toh(mbr->mbr_part[i].part_start_lo);
@@ -437,7 +438,7 @@ gpt_mbr(int fd, off_t lba)
 			warnx("%s: MBR part: type=%d, start=%llu, size=%llu",
 			    device_name, mbr->mbr_part[i].part_typ,
 			    (long long)start, (long long)size);
-		if (mbr->mbr_part[i].part_typ != 15) {
+		if (mbr->mbr_part[i].part_typ != MBR_PTYPE_EXT_LBA) {
 			m = map_add(start, size, MAP_TYPE_MBR_PART, p);
 			if (m == NULL)
 				return (-1);
@@ -726,7 +727,9 @@ static struct {
 	{ cmd_remove, "remove" },
 	{ NULL, "rename" },
 	{ cmd_resize, "resize" },
+	{ cmd_set, "set" },
 	{ cmd_show, "show" },
+	{ cmd_unset, "unset" },
 	{ NULL, "verify" },
 	{ NULL, NULL }
 };
@@ -737,7 +740,8 @@ usage(void)
 	extern const char addmsg1[], addmsg2[], biosbootmsg[], createmsg[];
 	extern const char destroymsg[], labelmsg1[], labelmsg2[], labelmsg3[];
 	extern const char migratemsg[], recovermsg[], removemsg1[];
-	extern const char removemsg2[], resizemsg[], showmsg[];
+	extern const char removemsg2[], resizemsg[], setmsg[], showmsg[];
+	extern const char unsetmsg[];
 
 	fprintf(stderr,
 	    "usage: %s %s\n"
@@ -748,6 +752,8 @@ usage(void)
 	    "       %s %s\n"
 	    "       %s %s\n"
 	    "       %*s %s\n"
+	    "       %s %s\n"
+	    "       %s %s\n"
 	    "       %s %s\n"
 	    "       %s %s\n"
 	    "       %s %s\n"
@@ -767,7 +773,9 @@ usage(void)
 	    getprogname(), removemsg1,
 	    getprogname(), removemsg2,
 	    getprogname(), resizemsg,
-	    getprogname(), showmsg);
+	    getprogname(), setmsg,
+	    getprogname(), showmsg,
+	    getprogname(), unsetmsg);
 	exit(1);
 }
 

@@ -189,13 +189,4 @@ ASM_SRCS_LIST= \
 	divrem_2.asm		mpn/alpha/divrem_2.asm \
 	sub_n.asm		mpn/alpha/sub_n.asm \
 
-gen-trialdivtab: gen-trialdivtab.c
-	${HOST_CC} -o ${.OBJDIR}/gen-trialdivtab ${.ALLSRC} -lm
-
 GMP_LIMB_BITS=64
-
-trialdiv.c: trialdivtab.h
-trialdivtab.h: gen-trialdivtab
-	${.OBJDIR}/gen-trialdivtab $(GMP_LIMB_BITS) 8000 > ${.OBJDIR}/trialdivtab.h
-
-CLEANFILES+=	trialdivtab.h

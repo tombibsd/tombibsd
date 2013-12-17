@@ -47,7 +47,7 @@ ENTRY_NP(CERROR)
 	.cfi_offset 4, -8
 #endif
 	mov	r4, r0
-	bl	PIC_SYM(_C_LABEL(__errno), PLT)
+	bl	PLT_SYM(_C_LABEL(__errno))
 	str	r4, [r0]
 #ifdef __thumb__
 	movs	r0, #0

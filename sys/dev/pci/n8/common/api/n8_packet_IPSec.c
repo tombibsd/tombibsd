@@ -241,8 +241,8 @@ static void resultHandlerIPSecVerify(API_Request_t* req_p)
  * @par Errors:
  *    N8_INVALID_OBJECT   - packet object is zero, couldn't write to unspecified
  *                          address<BR>
- *    N8_INVALID_INPUT_SIZE - The value of packetLength is less then 8 or bigger 
- *                            then 17 KBytes or is not a multiple of 8.
+ *    N8_INVALID_INPUT_SIZE - The value of packetLength is less than 8 or bigger 
+ *                            than 17 KBytes or is not a multiple of 8.
  *    N8_UNIMPLEMENTED_FUNCTION - not supported protocol configuration requested
  *    N8_HARDWARE_ERROR   - couldn't write to context memory
  *   

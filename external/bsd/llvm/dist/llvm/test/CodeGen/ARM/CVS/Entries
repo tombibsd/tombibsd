@@ -378,7 +378,7 @@
 /fnmul.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /fnmuls.ll/1.1.1.1/Thu Nov 28 14:18:10 2013/-kk/
 /fold-const.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
-/fold-stack-adjust.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
+/fold-stack-adjust.ll/1.1.1.2/Tue Dec 17 04:10:41 2013/-kk/
 /formal.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /fp-arg-shuffle.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /fp-fast.ll/1.1.1.1/Thu Nov 28 14:18:10 2013/-kk/

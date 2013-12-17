@@ -270,7 +270,7 @@ compat_16_sys___sigreturn14(struct lwp *l, const struct compat_16_sys___sigretur
 	memcpy(&tf->tf_regs[1], &scp->sc_regs[1],
 	    sizeof(scp->sc_regs) - sizeof(scp->sc_regs[0]));
 #else
-	for (size_t i = 1; i < __arraycount(tf->tf_regs); i++)
+	for (size_t i = 1; i < __arraycount(ksc.sc_regs); i++)
 		tf->tf_regs[i] = ksc.sc_regs[i];
 #endif
 #if !defined(NOFPU)

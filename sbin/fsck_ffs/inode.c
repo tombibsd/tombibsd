@@ -993,7 +993,7 @@ expandfile(union dinode *dp)
 			dp->dp1.di_ib[ilevel - 1] = iswap32(newblk);
 	} else {
 		ibp = getdatablk(is_ufs2 ? iswap64(dp->dp2.di_ib[ilevel - 1]) :
-		    iswap32(dp->dp2.di_ib[ilevel - 1]), sblock->fs_bsize);
+		    iswap32(dp->dp1.di_ib[ilevel - 1]), sblock->fs_bsize);
 	}
 	/* walk indirect blocks up to the data block */
 	for (; ilevel >0 ; ilevel--) {

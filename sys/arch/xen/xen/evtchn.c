@@ -343,13 +343,6 @@ splx:
 					ih_fun = (void *)ih->ih_fun;
 					ih_fun(ih->ih_arg, regs);
 					cli();
-					if (ci->ci_ilevel != i) {
-						printf("evtchn_do_event: "
-						    "handler %p didn't lower "
-						    "ipl %d %d\n",
-						    ih_fun, ci->ci_ilevel, i);
-						ci->ci_ilevel = i;
-					}
 				}
 				hypervisor_enable_ipl(i);
 				/* more pending IPLs may have been registered */

@@ -516,14 +516,13 @@ v_ecl(SCR *sp)
 	if (screen_init(gp, sp, &new))
 		return (1);
 	if (vs_split(sp, new, 1)) {
-		(void)screen_end(new);
+		(void)screen_fini(new);
 		return (1);
 	}
 
 	/* Attach to the screen. */
 	new->ep = wp->ccl_sp->ep;
 	++new->ep->refcnt;
-	TAILQ_NEXT(new, eq) = NULL;
 	TAILQ_INSERT_HEAD(&new->ep->scrq, new, eq);
 
 	new->frp = wp->ccl_sp->frp;
@@ -652,7 +651,7 @@ v_ecl_init(SCR *sp)
 		return (1);
 	conv_enc(wp->ccl_sp, O_FILEENCODING, "WCHAR_T");
 	if (file_init(wp->ccl_sp, frp, NULL, 0)) {
-		(void)screen_end(wp->ccl_sp);
+		(void)screen_fini(wp->ccl_sp);
 		wp->ccl_sp = 0;
 		return (1);
 	}

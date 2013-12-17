@@ -15,13 +15,13 @@
 /ExceptionHandling.rst/1.1.1.1/Thu Nov 28 14:18:15 2013/-kk/
 /ExtendedIntegerResults.txt/1.1.1.1/Thu Nov 28 14:18:15 2013/-kk/
 /ExtendingLLVM.rst/1.1.1.1/Thu Nov 28 14:18:15 2013/-kk/
-/Extensions.rst/1.1.1.1/Thu Nov 28 14:18:15 2013/-kk/
+/Extensions.rst/1.1.1.2/Tue Dec 17 04:10:38 2013/-kk/
 /FAQ.rst/1.1.1.1/Thu Nov 28 14:18:15 2013/-kk/
 /GarbageCollection.rst/1.1.1.1/Thu Nov 28 14:18:15 2013/-kk/
 /GetElementPtr.rst/1.1.1.1/Thu Nov 28 14:18:15 2013/-kk/
 /GettingStarted.rst/1.1.1.1/Thu Nov 28 14:18:15 2013/-kk/
 /GettingStartedVS.rst/1.1.1.1/Thu Nov 28 14:18:15 2013/-kk/
-/GoldPlugin.rst/1.1.1.1/Thu Nov 28 14:18:15 2013/-kk/
+/GoldPlugin.rst/1.1.1.2/Tue Dec 17 04:10:38 2013/-kk/
 /HowToAddABuilder.rst/1.1.1.1/Thu Nov 28 14:18:15 2013/-kk/
 /HowToBuildOnARM.rst/1.1.1.1/Thu Nov 28 14:18:15 2013/-kk/
 /HowToCrossCompileLLVM.rst/1.1.1.1/Thu Nov 28 14:18:15 2013/-kk/
@@ -32,7 +32,7 @@
 /HowToUseInstrMappings.rst/1.1.1.1/Thu Nov 28 14:18:15 2013/-kk/
 /LLVMBuild.rst/1.1.1.1/Thu Nov 28 14:18:15 2013/-kk/
 /LLVMBuild.txt/1.1.1.1/Thu Nov 28 14:18:15 2013/-kk/
-/LangRef.rst/1.1.1.1/Thu Nov 28 14:18:15 2013/-kk/
+/LangRef.rst/1.1.1.2/Tue Dec 17 04:10:38 2013/-kk/
 /Lexicon.rst/1.1.1.1/Thu Nov 28 14:18:15 2013/-kk/
 /LinkTimeOptimization.rst/1.1.1.1/Thu Nov 28 14:18:15 2013/-kk/
 /MCJIT-creation.png/1.1.1.1/Thu Nov 28 14:18:15 2013/-kk/
@@ -53,7 +53,7 @@
 /ProgrammersManual.rst/1.1.1.1/Thu Nov 28 14:18:15 2013/-kk/
 /Projects.rst/1.1.1.1/Thu Nov 28 14:18:15 2013/-kk/
 /README.txt/1.1.1.1/Thu Nov 28 14:18:15 2013/-kk/
-/ReleaseNotes.rst/1.1.1.1/Thu Nov 28 14:18:15 2013/-kk/
+/ReleaseNotes.rst/1.1.1.2/Tue Dec 17 04:10:38 2013/-kk/
 /ReleaseProcess.rst/1.1.1.1/Thu Nov 28 14:18:15 2013/-kk/
 /SegmentedStacks.rst/1.1.1.1/Thu Nov 28 14:18:15 2013/-kk/
 /SourceLevelDebugging.rst/1.1.1.1/Thu Nov 28 14:18:15 2013/-kk/

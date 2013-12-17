@@ -1163,6 +1163,7 @@ char *s;
 	timeout_next = 0;
 	s = clean(s, 0);
 	timeout = atoi(s);
+	free(s);
 	
 	if (timeout <= 0)
 	    timeout = DEFAULT_CHAT_TIMEOUT;

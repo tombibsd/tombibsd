@@ -27,7 +27,7 @@
 /dcpi1_div_qr.c/1.1.1.1/Mon Jun 20 05:54:40 2011/-kk/
 /dcpi1_divappr_q.c/1.1.1.1/Mon Jun 20 05:54:41 2011/-kk/
 /div_q.c/1.1.1.1/Mon Jun 20 05:54:41 2011/-kk/
-/div_qr_2.c/1.1.1.1/Fri Nov 29 07:49:49 2013/-kk/
+/div_qr_2.c/1.2/Tue Dec 17 04:12:39 2013/-kk/
 /div_qr_2n_pi1.c/1.1.1.1/Fri Nov 29 07:49:49 2013/-kk/
 /div_qr_2u_pi1.c/1.1.1.1/Fri Nov 29 07:49:49 2013/-kk/
 /dive_1.c/1.1.1.1/Mon Jun 20 05:54:41 2011/-kk/
@@ -36,7 +36,7 @@
 /divis.c/1.1.1.2/Tue Dec 17 04:03:53 2013/-kk/
 /divrem.c/1.1.1.2/Tue Dec 17 04:03:53 2013/-kk/
 /divrem_1.c/1.1.1.2/Tue Dec 17 04:03:53 2013/-kk/
-/divrem_2.c/1.1.1.2/Tue Dec 17 04:03:53 2013/-kk/
+/divrem_2.c/1.3/Tue Dec 17 04:12:39 2013/-kk/
 /dump.c/1.1.1.1/Mon Jun 20 05:54:41 2011/-kk/
 /fib2_ui.c/1.1.1.1/Mon Jun 20 05:54:41 2011/-kk/
 /gcd.c/1.1.1.2/Tue Dec 17 04:03:53 2013/-kk/
@@ -67,10 +67,10 @@
 /matrix22_mul.c/1.1.1.2/Tue Dec 17 04:03:53 2013/-kk/
 /matrix22_mul1_inverse_vector.c/1.1.1.1/Fri Nov 29 07:49:49 2013/-kk/
 /mod_1.c/1.1.1.2/Tue Dec 17 04:03:53 2013/-kk/
-/mod_1_1.c/1.1.1.2/Tue Dec 17 04:03:53 2013/-kk/
-/mod_1_2.c/1.1.1.2/Tue Dec 17 04:03:53 2013/-kk/
-/mod_1_3.c/1.1.1.2/Tue Dec 17 04:03:53 2013/-kk/
-/mod_1_4.c/1.1.1.2/Tue Dec 17 04:03:53 2013/-kk/
+/mod_1_1.c/1.2/Tue Dec 17 04:12:39 2013/-kk/
+/mod_1_2.c/1.2/Tue Dec 17 04:12:39 2013/-kk/
+/mod_1_3.c/1.2/Tue Dec 17 04:12:39 2013/-kk/
+/mod_1_4.c/1.2/Tue Dec 17 04:12:39 2013/-kk/
 /mod_34lsub1.c/1.1.1.1/Mon Jun 20 05:54:41 2011/-kk/
 /mode1o.c/1.1.1.1/Mon Jun 20 05:54:41 2011/-kk/
 /mu_bdiv_q.c/1.1.1.1/Mon Jun 20 05:54:41 2011/-kk/
@@ -163,7 +163,7 @@
 /toom_interpolate_16pts.c/1.1.1.2/Tue Dec 17 04:03:53 2013/-kk/
 /toom_interpolate_5pts.c/1.1.1.2/Tue Dec 17 04:03:53 2013/-kk/
 /toom_interpolate_6pts.c/1.1.1.2/Tue Dec 17 04:03:53 2013/-kk/
-/toom_interpolate_7pts.c/1.1.1.1/Mon Jun 20 05:54:41 2011/-kk/
+/toom_interpolate_7pts.c/1.2/Tue Dec 17 04:12:39 2013/-kk/
 /toom_interpolate_8pts.c/1.1.1.2/Tue Dec 17 04:03:53 2013/-kk/
 /trialdiv.c/1.1.1.2/Tue Dec 17 04:03:53 2013/-kk/
 /udiv_w_sdiv.c/1.1.1.2/Tue Dec 17 04:03:53 2013/-kk/

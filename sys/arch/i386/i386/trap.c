@@ -203,7 +203,7 @@ xmm_si_code(struct lwp *l)
 		return 0;
 	}
 	pcb = lwp_getpcb(l);
-	mxcsr = pcb->pcb_savefpu.sv_xmm.sv_env.en_mxcsr;
+	mxcsr = pcb->pcb_savefpu.sv_xmm.sv_env.fx_mxcsr;
 
 	/*
          * Since we only have a single status and control register,

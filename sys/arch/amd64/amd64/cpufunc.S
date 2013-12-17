@@ -244,6 +244,21 @@ ENTRY(rdmsr_safe)
 	movq	%rax, PCB_ONFAULT(%r8)
 	ret
 
+ENTRY(rdxcr)
+	movq	%rdi, %rcx
+	xgetbv
+	shlq	$32, %rdx
+	orq	%rdx, %rax
+	ret
+
+ENTRY(wrxcr)
+	movq	%rdi, %rcx
+	movq	%rsi, %rax
+	movq	%rsi, %rdx
+	shrq	$32, %rdx
+	xsetbv
+	ret
+
 /*
  * MSR operations fault handler
  */
@@ -466,6 +481,27 @@ ENTRY(fxrstor)
 ENTRY(fldummy)
 	ffree	%st(7)
 	flds	(%rdi)
+	ret
+
+ENTRY(xsave)
+	movq	%rsi, %rax
+	movq	%rsi, %rdx
+	shrq	$32, %rdx
+	xsave	(%rdi)
+	ret
+
+ENTRY(xsaveopt)
+	movq	%rsi, %rax
+	movq	%rsi, %rdx
+	shrq	$32, %rdx
+	xsaveopt	(%rdi)
+	ret
+
+ENTRY(xrstor)
+	movq	%rsi, %rax
+	movq	%rsi, %rdx
+	shrq	$32, %rdx
+	xrstor	(%rdi)
 	ret
 
 ENTRY(x86_ldmxcsr)

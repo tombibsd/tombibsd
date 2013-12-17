@@ -103,6 +103,11 @@ sed -n '/#define[ 	]*_IO.*\\$/{:t;N;/\\$/bt;s/_IOC/_RUMP_IOC/g;s/IOC[A-Z]/RUMP_&
 sed -n '/#define[ 	]*_IO.*[^\]$/{s/_IO/_RUMP_IO/g;s/IOC_/RUMP_IOC_/gp}' <../../../sys/ioccom.h \
     | sed 's,/\*.*$,,'
 
+fromvers ../../../sys/ktrace.h
+sed -n '/#define[ 	]*KTROP_[A-Z_]/s/KTROP_/RUMP_&/gp' <../../../sys/ktrace.h | sed 's,/\*.*$,,'
+sed -n '/#define[ 	]*KTR_[A-Z_]/s/KTR_/RUMP_&/gp' <../../../sys/ktrace.h | sed 's,/\*.*$,,'
+sed -n '/#define[ 	]*KTRFAC_[A-Z_]/{s/KTRFAC_/RUMP_&/g;s/KTR_/RUMP_&/g;p;}' <../../../sys/ktrace.h | sed 's,/\*.*$,,'
+
 fromvers ../../../sys/module.h
 getstruct ../../../sys/module.h modctl_load
 getenum ../../../sys/module.h modctl MODCTL

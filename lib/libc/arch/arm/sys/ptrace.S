@@ -42,7 +42,7 @@ ENTRY(ptrace)
 	mov	r4, lr
 #endif
 	sub	sp, sp, #4	/* align stack */
-	bl	PIC_SYM(_C_LABEL(__errno), PLT)
+	bl	PLT_SYM(_C_LABEL(__errno))
 	add	sp, sp, #4	/* unalign stack */
 	movs	r1, #0
 	str	r1, [r0]

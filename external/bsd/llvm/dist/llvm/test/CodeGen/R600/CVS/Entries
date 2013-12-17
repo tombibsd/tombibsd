@@ -24,7 +24,7 @@
 /elf.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /elf.r600.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /extload.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
-/fabs.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
+/fabs.ll/1.1.1.2/Tue Dec 17 04:10:42 2013/-kk/
 /fadd.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /fadd64.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /fcmp-cnd.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
@@ -88,6 +88,7 @@
 /llvm.floor.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /llvm.pow.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /llvm.rint.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
+/llvm.round.ll/1.1.1.1/Fri Dec  6 23:19:14 2013/-kk/
 /llvm.sin.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /llvm.sqrt.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /load-input-fold.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
@@ -144,6 +145,7 @@
 /shl.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /si-annotate-cf-assertion.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /si-lod-bias.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
+/si-sgpr-spill.ll/1.1.1.1/Fri Dec  6 23:19:14 2013/-kk/
 /si-vector-hang.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /sign_extend.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /sint_to_fp.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/

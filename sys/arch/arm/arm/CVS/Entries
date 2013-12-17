@@ -1,7 +1,7 @@
 /arm_machdep.c/1.39/Tue Nov 12 02:18:33 2013/-kk/
 /ast.c/1.22/Thu Oct 24 10:28:57 2013/-kk/
 /bcopyinout.S/1.20/Thu Oct 24 10:28:57 2013/-kk/
-/bcopyinout_xscale.S/1.10/Thu Oct 24 10:28:57 2013/-kk/
+/bcopyinout_xscale.S/1.11/Tue Dec 17 04:13:25 2013/-kk/
 /blockio.S/1.8/Thu Oct 24 10:28:57 2013/-kk/
 /bootconfig.c/1.6/Sun Aug  2 11:32:05 2009/-kk/
 /bus_space_a2x.S/1.4/Thu Oct 31 07:00:00 2013/-kk/
@@ -26,7 +26,7 @@
 /cpufunc_asm_arm3.S/1.3/Thu Oct 24 10:28:57 2013/-kk/
 /cpufunc_asm_arm67.S/1.6/Thu Oct 24 10:28:57 2013/-kk/
 /cpufunc_asm_arm7tdmi.S/1.6/Thu Oct 24 10:28:57 2013/-kk/
-/cpufunc_asm_arm8.S/1.8/Thu Oct 24 10:28:57 2013/-kk/
+/cpufunc_asm_arm8.S/1.9/Tue Dec 17 04:13:25 2013/-kk/
 /cpufunc_asm_arm9.S/1.10/Thu Oct 24 10:28:57 2013/-kk/
 /cpufunc_asm_armv4.S/1.3/Thu Oct 24 10:28:57 2013/-kk/
 /cpufunc_asm_armv5.S/1.6/Thu Oct 24 10:28:57 2013/-kk/
@@ -36,10 +36,10 @@
 /cpufunc_asm_fa526.S/1.6/Thu Oct 24 10:28:57 2013/-kk/
 /cpufunc_asm_ixp12x0.S/1.3/Thu Oct 24 10:28:57 2013/-kk/
 /cpufunc_asm_pj4b.S/1.3/Thu Oct 24 10:28:57 2013/-kk/
-/cpufunc_asm_sa1.S/1.13/Thu Oct 24 10:28:57 2013/-kk/
-/cpufunc_asm_sa11x0.S/1.4/Thu Oct 24 10:28:57 2013/-kk/
+/cpufunc_asm_sa1.S/1.14/Tue Dec 17 04:13:25 2013/-kk/
+/cpufunc_asm_sa11x0.S/1.5/Tue Dec 17 04:13:25 2013/-kk/
 /cpufunc_asm_sheeva.S/1.4/Thu Oct 24 10:28:57 2013/-kk/
-/cpufunc_asm_xscale.S/1.21/Thu Oct 24 10:28:57 2013/-kk/
+/cpufunc_asm_xscale.S/1.22/Tue Dec 17 04:13:25 2013/-kk/
 /db_disasm.c/1.6/Wed Feb 21 22:59:38 2007/-kk/
 /db_trace.c/1.28/Thu Oct 24 10:28:57 2013/-kk/
 /disassem.c/1.22/Thu Oct 24 10:28:57 2013/-kk/
@@ -48,7 +48,7 @@
 /disksubr_acorn.c/1.12/Thu Oct 24 10:28:57 2013/-kk/
 /disksubr_mbr.c/1.18/Thu Oct 24 10:28:57 2013/-kk/
 /fiq.c/1.7/Thu Oct 24 10:28:57 2013/-kk/
-/fiq_subr.S/1.5/Thu Oct 24 10:28:57 2013/-kk/
+/fiq_subr.S/1.6/Tue Dec 17 04:13:25 2013/-kk/
 /fusu.S/1.3/Tue Oct 29 12:11:43 2013/-kk/
 /idle_machdep.c/1.5/Thu Oct 24 10:28:57 2013/-kk/
 /linux_sigcode.S/1.2/Thu Jan 17 22:50:38 2002/-kk/

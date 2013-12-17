@@ -129,7 +129,7 @@ _timer_intr_enb(struct mputmr_softc *sc)
 	bus_space_write_4(sc->sc_iot, sc->sc_ioh, TIER, TIER_OVF_IT_ENA);
 }
 
-static inline uint32_t
+__unused static inline uint32_t
 _timer_intr_sts(struct mputmr_softc *sc)
 {
 	return bus_space_read_4(sc->sc_iot, sc->sc_ioh, TISR);

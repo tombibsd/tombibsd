@@ -24,6 +24,7 @@
 /float.h/1.8/Sat Oct 25 09:23:50 2008/-kk/
 /frame.h/1.15/Thu Nov 20 22:50:52 2008/-kk/
 /fsr.h/1.4/Sun Aug  8 18:44:16 2010/-kk/
+/hypervisor.h/1.2/Sat Dec  7 16:54:43 2013/-kk/
 /idprom.h/1.4/Sat Jul 20 11:52:21 2002/-kk/
 /ieee.h/1.2/Sat Jul 20 11:52:21 2002/-kk/
 /ieeefp.h/1.4/Sat Jul 20 11:52:21 2002/-kk/
@@ -58,7 +59,7 @@
 /profile.h/1.6/Sat Jul 20 11:52:22 2002/-kk/
 /promlib.h/1.1/Sat Jul 20 11:52:22 2002/-kk/
 /psl.h/1.53/Thu Oct 24 10:28:57 2013/-kk/
-/pte.h/1.22/Fri Jan 15 15:02:48 2010/-kk/
+/pte.h/1.23/Tue Dec 17 04:13:29 2013/-kk/
 /ptrace.h/1.3/Tue Mar 14 22:05:05 2006/-kk/
 /rbus_machdep.h/1.3/Thu Jun 26 15:08:48 2008/-kk/
 /reg.h/1.14/Tue Jul 12 07:51:34 2011/-kk/

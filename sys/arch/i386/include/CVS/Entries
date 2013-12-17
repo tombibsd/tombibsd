@@ -33,7 +33,7 @@
 /float.h/1.12/Wed Feb 26 21:29:00 2003/-kk/
 /frame.h/1.35/Sun Feb 19 21:06:11 2012/-kk/
 /frameasm.h/1.15/Tue Jul 26 12:57:35 2011/-kk/
-/freebsd_machdep.h/1.9/Wed Sep 14 15:00:16 2005/-kk/
+/freebsd_machdep.h/1.11/Tue Dec 17 04:13:27 2013/-kk/
 /gdt.h/1.13/Mon Apr 28 20:23:24 2008/-kk/
 /i82093reg.h/1.8/Thu Jul  3 14:02:25 2008/-kk/
 /i82093var.h/1.7/Wed Feb 26 21:29:00 2003/-kk/
@@ -69,15 +69,15 @@
 /mtrr.h/1.8/Wed Feb 26 21:29:02 2003/-kk/
 /multiboot.h/1.8/Sun Feb 22 18:05:42 2009/-kk/
 /mutex.h/1.2/Fri Feb  9 21:55:05 2007/-kk/
-/npx.h/1.26/Mon Nov 18 05:31:34 2013/-kk/
+/npx.h/1.27/Tue Dec 17 04:13:27 2013/-kk/
 /param.h/1.77/Fri Apr 20 22:23:24 2012/-kk/
-/pcb.h/1.49/Sun Oct 27 08:19:55 2013/-kk/
+/pcb.h/1.50/Tue Dec 17 04:13:27 2013/-kk/
 /pci_machdep.h/1.19/Wed Feb 26 21:29:02 2003/-kk/
 /pic.h/1.2/Wed Feb 26 21:29:02 2003/-kk/
 /pio.h/1.20/Wed Feb 26 21:29:02 2003/-kk/
 /pmap.h/1.116/Thu Oct 24 10:28:57 2013/-kk/
 /pmc.h/1.8/Mon Apr 16 19:12:18 2007/-kk/
-/proc.h/1.39/Sun Oct 27 08:19:55 2013/-kk/
+/proc.h/1.40/Tue Dec 17 04:13:27 2013/-kk/
 /profile.h/1.33/Thu Dec 20 23:46:13 2007/-kk/
 /psl.h/1.35/Wed Feb 26 21:29:03 2003/-kk/
 /pte.h/1.27/Tue Feb  1 20:09:08 2011/-kk/
@@ -97,7 +97,7 @@
 /tlog.h/1.4/Fri Feb 13 11:36:14 2004/-kk/
 /trap.h/1.7/Wed Feb 26 21:29:03 2003/-kk/
 /tss.h/1.10/Sat Jan  5 21:45:00 2008/-kk/
-/types.h/1.75/Sun Oct 27 08:19:55 2013/-kk/
+/types.h/1.76/Tue Dec 17 04:13:27 2013/-kk/
 /userret.h/1.11/Mon Apr 28 20:23:24 2008/-kk/
 /vm86.h/1.19/Sat Nov 21 03:11:01 2009/-kk/
 /vmparam.h/1.76/Tue Nov 13 14:10:24 2012/-kk/

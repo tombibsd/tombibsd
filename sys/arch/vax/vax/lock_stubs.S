@@ -197,7 +197,7 @@ ENTRY(rw_exit, 0)
 
 	blbs	%r2, 3f				/* RW_HAS_WAITERS mbz */
 	subl3	$RW_READ_INCR, %r2, %r3		/* decr. reader count (new) */
-	blss	3f				/* if less then 0, go slow */
+	blss	3f				/* if less than 0, go slow */
 #ifndef MULTIPROCESSOR
 	mfpr	$PR_SSP, %r4			/* get curlwp */
 	addl3	$CI_CAS_ADDR, L_CPU(%r4), %r4 /* r4 == &curcpu()->ci_cas_addr */

@@ -33,6 +33,7 @@ __RCSID("$NetBSD$");
 #endif
 
 #include <sys/types.h>
+#include <sys/bootblock.h>
 
 #include <err.h>
 #include <stddef.h>
@@ -103,7 +104,7 @@ create(int fd)
 		mbr->mbr_part[0].part_shd = 0x00;
 		mbr->mbr_part[0].part_ssect = 0x02;
 		mbr->mbr_part[0].part_scyl = 0x00;
-		mbr->mbr_part[0].part_typ = 0xee;
+		mbr->mbr_part[0].part_typ = MBR_PTYPE_PMBR;
 		mbr->mbr_part[0].part_ehd = 0xfe;
 		mbr->mbr_part[0].part_esect = 0xff;
 		mbr->mbr_part[0].part_ecyl = 0xff;

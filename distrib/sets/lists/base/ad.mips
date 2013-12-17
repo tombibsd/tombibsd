@@ -482,7 +482,7 @@
 ./usr/lib/o32/libgomp.so.1			base-compat-shlib	compat,pic,gcc=45,arch64
 ./usr/lib/o32/libgomp.so.1.0			base-compat-shlib	compat,pic,gcc=45,arch64
 ./usr/lib/o32/libgomp.so.1			base-compat-shlib	compat,pic,gcc=48,arch64
-./usr/lib/o32/libgomp.so.1.0			base-compat-shlib	compat,pic,gcc=48,arch64
+./usr/lib/o32/libgomp.so.1.1			base-compat-shlib	compat,pic,gcc=48,arch64
 ./usr/lib/o32/libgssapi.so.10			base-compat-shlib	compat,pic,kerberos,arch64
 ./usr/lib/o32/libgssapi.so.10.0			base-compat-shlib	compat,pic,kerberos,arch64
 ./usr/lib/o32/libhdb.so.14			base-compat-shlib	compat,pic,kerberos,arch64

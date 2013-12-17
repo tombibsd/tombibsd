@@ -62,7 +62,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/proc.h>
 #include <sys/vnode.h>
 #include <sys/ptrace.h>
-#include <sys/pcu.h>
 
 #include <machine/psl.h>
 #include <machine/reg.h>
@@ -75,8 +74,6 @@ static inline struct fxsave64 *process_fpframe(struct lwp *);
 static inline int verr_gdt(struct pmap *, int sel);
 static inline int verr_ldt(struct pmap *, int sel);
 #endif
-
-extern const pcu_ops_t fpu_ops;
 
 static inline struct trapframe *
 process_frame(struct lwp *l)
@@ -110,8 +107,8 @@ process_read_fpregs(struct lwp *l, struct fpreg *regs)
 {
 	struct fxsave64 *frame = process_fpframe(l);
 
-	if (pcu_used_p(&fpu_ops)) {
-		pcu_save(&fpu_ops);
+	if (l->l_md.md_flags & MDL_USEDFPU) {
+		fpusave_lwp(l, true);
 	} else {
 		uint16_t cw;
 		uint32_t mxcsr, mxcsr_mask;
@@ -130,6 +127,7 @@ process_read_fpregs(struct lwp *l, struct fpreg *regs)
 		frame->fx_ftw = 0x00;	/* abridged tag; all empty */
 		frame->fx_mxcsr = mxcsr;
 		frame->fx_mxcsr_mask = mxcsr_mask;
+		l->l_md.md_flags |= MDL_USEDFPU;
 	}
 
 	memcpy(&regs->fxstate, frame, sizeof(*regs));
@@ -164,7 +162,12 @@ process_write_fpregs(struct lwp *l, const struct fpreg *regs)
 {
 	struct fxsave64 *frame = process_fpframe(l);
 
-	pcu_discard(&fpu_ops, true);
+	if (l->l_md.md_flags & MDL_USEDFPU) {
+		fpusave_lwp(l, false);
+	} else {
+		l->l_md.md_flags |= MDL_USEDFPU;
+	}
+
 	memcpy(frame, &regs->fxstate, sizeof(*regs));
 	return (0);
 }

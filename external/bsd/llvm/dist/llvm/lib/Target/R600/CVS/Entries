@@ -7,11 +7,11 @@
 /AMDGPUFrameLowering.cpp/1.1.1.1/Thu Nov 28 14:18:21 2013/-kk/
 /AMDGPUFrameLowering.h/1.1.1.1/Thu Nov 28 14:18:21 2013/-kk/
 /AMDGPUISelDAGToDAG.cpp/1.1.1.1/Thu Nov 28 14:18:21 2013/-kk/
-/AMDGPUISelLowering.cpp/1.1.1.1/Thu Nov 28 14:18:21 2013/-kk/
+/AMDGPUISelLowering.cpp/1.1.1.2/Tue Dec 17 04:10:39 2013/-kk/
 /AMDGPUISelLowering.h/1.1.1.1/Thu Nov 28 14:18:21 2013/-kk/
 /AMDGPUInstrInfo.cpp/1.1.1.1/Thu Nov 28 14:18:21 2013/-kk/
 /AMDGPUInstrInfo.h/1.1.1.1/Thu Nov 28 14:18:21 2013/-kk/
-/AMDGPUInstrInfo.td/1.1.1.1/Thu Nov 28 14:18:21 2013/-kk/
+/AMDGPUInstrInfo.td/1.1.1.2/Tue Dec 17 04:10:39 2013/-kk/
 /AMDGPUInstructions.td/1.1.1.1/Thu Nov 28 14:18:21 2013/-kk/
 /AMDGPUIntrinsics.td/1.1.1.1/Thu Nov 28 14:18:21 2013/-kk/
 /AMDGPUMCInstLower.cpp/1.1.1.1/Thu Nov 28 14:18:21 2013/-kk/
@@ -48,7 +48,7 @@
 /R600InstrFormats.td/1.1.1.1/Thu Nov 28 14:18:21 2013/-kk/
 /R600InstrInfo.cpp/1.1.1.1/Thu Nov 28 14:18:21 2013/-kk/
 /R600InstrInfo.h/1.1.1.1/Thu Nov 28 14:18:21 2013/-kk/
-/R600Instructions.td/1.1.1.1/Thu Nov 28 14:18:21 2013/-kk/
+/R600Instructions.td/1.1.1.2/Tue Dec 17 04:10:39 2013/-kk/
 /R600Intrinsics.td/1.1.1.1/Thu Nov 28 14:18:21 2013/-kk/
 /R600MachineFunctionInfo.cpp/1.1.1.1/Thu Nov 28 14:18:21 2013/-kk/
 /R600MachineFunctionInfo.h/1.1.1.1/Thu Nov 28 14:18:21 2013/-kk/
@@ -71,7 +71,7 @@
 /SIInstrInfo.cpp/1.1.1.1/Thu Nov 28 14:18:21 2013/-kk/
 /SIInstrInfo.h/1.1.1.1/Thu Nov 28 14:18:21 2013/-kk/
 /SIInstrInfo.td/1.1.1.1/Thu Nov 28 14:18:21 2013/-kk/
-/SIInstructions.td/1.1.1.1/Thu Nov 28 14:18:21 2013/-kk/
+/SIInstructions.td/1.1.1.2/Tue Dec 17 04:10:39 2013/-kk/
 /SIIntrinsics.td/1.1.1.1/Thu Nov 28 14:18:21 2013/-kk/
 /SILowerControlFlow.cpp/1.1.1.1/Thu Nov 28 14:18:21 2013/-kk/
 /SIMachineFunctionInfo.cpp/1.1.1.1/Thu Nov 28 14:18:21 2013/-kk/

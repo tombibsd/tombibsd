@@ -255,7 +255,7 @@ pic_find_pending_irqs_by_ipl(struct pic_softc *pic, size_t irq_base,
 void
 pic_dispatch(struct intrsource *is, void *frame)
 {
-	int rv;
+	int rv __unused;
 
 	if (__predict_false(is->is_arg == NULL)
 	    && __predict_true(frame != NULL)) {

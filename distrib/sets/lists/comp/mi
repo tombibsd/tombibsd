@@ -4043,6 +4043,7 @@
 ./usr/libdata/lint/llib-lrt.ln			comp-c-lintlib		lint
 ./usr/libdata/lint/llib-lrumpclient.ln		comp-c-lintlib		lint,rump
 ./usr/libdata/lint/llib-lrumphijack.ln		comp-c-lintlib		lint,rump
+./usr/libdata/lint/llib-lrumpnet_netbt.ln	comp-c-lintlib		lint,rump
 ./usr/libdata/lint/llib-lrumpuser.ln		comp-c-lintlib		lint,rump
 ./usr/libdata/lint/llib-lsaslc.ln		comp-c-lintlib		lint,crypto
 ./usr/libdata/lint/llib-lsdp.ln			comp-obsolete		obsolete
@@ -4911,6 +4912,7 @@
 ./usr/share/man/cat3/SIMPLEQ_INSERT_AFTER.0	comp-c-catman		.cat
 ./usr/share/man/cat3/SIMPLEQ_INSERT_HEAD.0	comp-c-catman		.cat
 ./usr/share/man/cat3/SIMPLEQ_INSERT_TAIL.0	comp-c-catman		.cat
+./usr/share/man/cat3/SIMPLEQ_LAST.0		comp-c-catman		.cat
 ./usr/share/man/cat3/SIMPLEQ_NEXT.0		comp-c-catman		.cat
 ./usr/share/man/cat3/SIMPLEQ_REMOVE.0		comp-c-catman		.cat
 ./usr/share/man/cat3/SIMPLEQ_REMOVE_AFTER.0	comp-c-catman		.cat

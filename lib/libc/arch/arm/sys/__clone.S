@@ -109,7 +109,7 @@ ENTRY(__clone)
 	RETr(r1)
 #endif
 	/* call _exit with the returned value */
-	bl	PIC_SYM(_C_LABEL(_exit), PLT)
+	bl	PLT_SYM(_C_LABEL(_exit))
 
 	/* NOTREACHED */
 

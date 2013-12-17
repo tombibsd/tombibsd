@@ -281,20 +281,6 @@ syscall_intern(struct proc *p)
 }
 #endif
 
-int
-trace_enter(register_t code, const register_t *args, int narg)
-{
-
-	return 0;
-}
-
-void
-trace_exit(register_t code, register_t rval[], int error)
-{
-
-	/* nada */
-}
-
 #ifdef LOCKDEBUG
 void
 turnstile_print(volatile void *obj, void (*pr)(const char *, ...))

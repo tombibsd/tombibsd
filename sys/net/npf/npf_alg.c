@@ -58,8 +58,6 @@ struct npf_alg {
 	u_int		na_slot;
 };
 
-#define	NPF_MAX_ALGS	8
-
 /* List of ALGs and the count. */
 static pserialize_t	alg_psz			__cacheline_aligned;
 static npf_alg_t	alg_list[NPF_MAX_ALGS]	__read_mostly;
@@ -218,7 +216,7 @@ npf_alg_match(npf_cache_t *npc, nbuf_t *nbuf, npf_nat_t *nt, int di)
  * npf_alg_exec: execute ALG hooks for translation.
  */
 void
-npf_alg_exec(npf_cache_t *npc, nbuf_t *nbuf, npf_nat_t *nt, int di)
+npf_alg_exec(npf_cache_t *npc, nbuf_t *nbuf, npf_nat_t *nt, bool forw)
 {
 	int s;
 
@@ -227,7 +225,7 @@ npf_alg_exec(npf_cache_t *npc, nbuf_t *nbuf, npf_nat_t *nt, int di)
 		npf_alg_func_t func;
 
 		if ((func = alg_tfunc[i]) != NULL) {
-			func(npc, nbuf, nt, di);
+			func(npc, nbuf, nt, (int)forw);
 		}
 	}
 	pserialize_read_exit(s);

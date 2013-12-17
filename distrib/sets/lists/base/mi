@@ -5536,6 +5536,7 @@
 ./var/run/lwresd				base-bind-root
 ./var/run/named					base-bind-root
 ./var/rwho					base-netutil-root
+./var/shm					base-sys-root
 ./var/spool					base-sys-root
 ./var/spool/ftp					base-netutil-root
 ./var/spool/ftp/bin				base-netutil-root

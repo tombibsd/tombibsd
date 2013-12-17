@@ -302,7 +302,7 @@ ex_tag_Nswitch(SCR *sp, TAG *tp, int force)
 		return (1);
 	if (vs_split(sp, new, 0)) {
 		(void)file_end(new, new->ep, 1);
-		(void)screen_end(new);
+		(void)screen_fini(new);
 		return (1);
 	}
 
@@ -311,7 +311,6 @@ ex_tag_Nswitch(SCR *sp, TAG *tp, int force)
 		/* Copy file state. */
 		new->ep = sp->ep;
 		++new->ep->refcnt;
-		TAILQ_NEXT(new, eq) = NULL;
 		TAILQ_INSERT_HEAD(&new->ep->scrq, new, eq);
 
 		new->frp = tp->frp;

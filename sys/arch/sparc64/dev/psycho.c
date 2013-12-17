@@ -1574,6 +1574,14 @@ psycho_getstick(void)
 	return stick;
 }
 
+uint32_t
+psycho_getstick32(void)
+{
+
+	return bus_space_read_8(psycho0->sc_bustag, psycho0->sc_bh,
+	    STICK_CNT_LOW);
+}
+
 void
 psycho_setstick(long cnt)
 {

@@ -139,6 +139,7 @@ bus_space_tag_t psycho_alloc_bus_tag(struct psycho_pbm *, int);
 #define psycho_alloc_io_tag(pp) psycho_alloc_bus_tag((pp), PCI_IO_BUS_SPACE)
 
 uint64_t psycho_getstick(void);
+uint32_t psycho_getstick32(void);
 void psycho_setstick(long);
 void psycho_nextstick(long);
 

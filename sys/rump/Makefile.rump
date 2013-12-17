@@ -62,6 +62,11 @@ CPPFLAGS+=	-DDEBUG
 CPPFLAGS+=	-DLOCKDEBUG
 .endif
 
+RUMP_KTRACE?=yes
+.if ${RUMP_KTRACE} == "yes"
+CPPFLAGS+=	-DKTRACE
+.endif
+
 # kernel libs should not get linked against libc
 # XXX: actually, we would like to enable this but cannot, since it
 # also leaves out libgcc, it causes problems on some platforms.

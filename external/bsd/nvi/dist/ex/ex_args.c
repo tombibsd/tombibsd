@@ -141,7 +141,7 @@ ex_N_next(SCR *sp, EXCMD *cmdp)
 	if (screen_init(sp->gp, sp, &new))
 		return (1);
 	if (vs_split(sp, new, 0)) {
-		(void)screen_end(new);
+		(void)screen_fini(new);
 		return (1);
 	}
 

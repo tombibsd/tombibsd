@@ -100,6 +100,7 @@ struct pcb {
 	int	vm86_eflags;		/* virtual eflags for vm86 mode */
 	int	vm86_flagmask;		/* flag mask for vm86 mode */
 	void	*vm86_userp;		/* XXX performance hack */
+	struct cpu_info *pcb_fpcpu;	/* cpu holding our fp state. */
 	char	*pcb_iomap;		/* I/O permission bitmap */
 };
 

@@ -81,8 +81,7 @@ vs_refresh(SCR *sp, int forcepaint)
 			(void)vs_paint(tsp,
 			    (F_ISSET(VIP(tsp), VIP_CUR_INVALID) ?
 			    UPDATE_CURSOR : 0) | UPDATE_SCREEN);
-			if (VIP(sp))
-				F_SET(VIP(sp), VIP_CUR_INVALID);
+			F_SET(VIP(sp), VIP_CUR_INVALID);
 		}
 
 	/*

@@ -82,7 +82,7 @@ arm11_pmc_ccnt_read(void)
 	return val;
 }
 
-static inline void
+__unused static inline void
 arm11_pmc_ccnt_write(uint32_t val)
 {
 	__asm volatile ("mcr p15, 0, %0, c15, c12, 1;" :: "r" (val));

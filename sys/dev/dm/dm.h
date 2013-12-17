@@ -102,7 +102,7 @@ typedef struct dm_table_head {
 /*
  * This structure is used to store opened vnodes for disk with name.
  * I need this because devices can be opened only once, but I can
- * have more then one device on one partition.
+ * have more than one device on one partition.
  */
 
 typedef struct dm_pdev {

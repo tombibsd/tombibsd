@@ -141,7 +141,7 @@ hwtlb_read(uint32_t mas0, u_int slot)
 	 * ESEL is the way we want to look up.
 	 * If tlbassoc is the same as tlbentries (like in TLB1) then the TLB is
 	 * fully associative, the entire slot is placed into ESEL.  If tlbassoc 
-	 * is less then the number of tlb entries, the slot is split in two
+	 * is less than the number of tlb entries, the slot is split in two
 	 * fields.  Since the TLB is M rows by N ways, the lowers bits are for
 	 * row (MAS2[EPN]) and the upper for the way (MAS1[ESEL]). 
 	 */

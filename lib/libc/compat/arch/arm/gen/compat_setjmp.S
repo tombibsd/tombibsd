@@ -50,7 +50,7 @@ ENTRY(setjmp)
 	push	{r0, lr}
 	movs	r0, #0x00000000
 
-	bl	PIC_SYM(_C_LABEL(sigblock), PLT)
+	bl	PLT_SYM(_C_LABEL(sigblock))
 	mov	r1, r0
 
 	/* Store signal mask */
@@ -99,7 +99,7 @@ ENTRY(longjmp)
 	push	{r0, r1}	/* don't care about lr */
 
 	mov	r0, r2
-	bl	PIC_SYM(_C_LABEL(sigsetmask), PLT)
+	bl	PLT_SYM(_C_LABEL(sigsetmask))
 
 	pop	{r0, r1} 
 
@@ -145,8 +145,8 @@ ENTRY(longjmp)
 
 	/* validation failed, die die die. */
 botch:
-	bl	PIC_SYM(_C_LABEL(longjmperror), PLT)
-	bl	PIC_SYM(_C_LABEL(abort), PLT)
+	bl	PLT_SYM(_C_LABEL(longjmperror))
+	bl	PLT_SYM(_C_LABEL(abort))
 2:	b	2b		/* Cannot get here */
 
 	.align	0

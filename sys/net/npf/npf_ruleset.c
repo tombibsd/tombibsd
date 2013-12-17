@@ -469,16 +469,16 @@ npf_ruleset_freealg(npf_ruleset_t *rlset, npf_alg_t *alg)
 }
 
 /*
- * npf_ruleset_natreload: minimum reload of NAT policies by maching
+ * npf_ruleset_natreload: minimum reload of NAT policies by matching
  * two (active and new) NAT rulesets.
- *
- * => Active ruleset should be exclusively locked.
  */
 void
 npf_ruleset_natreload(npf_ruleset_t *nrlset, npf_ruleset_t *arlset)
 {
 	npf_natpolicy_t *np, *anp;
 	npf_rule_t *rl, *arl;
+
+	KASSERT(npf_config_locked_p());
 
 	/* Scan a new NAT ruleset against NAT policies in old ruleset. */
 	LIST_FOREACH(rl, &nrlset->rs_all, r_aentry) {
@@ -629,7 +629,7 @@ npf_rule_getid(const npf_rule_t *rl)
 }
 
 npf_rproc_t *
-npf_rule_getrproc(npf_rule_t *rl)
+npf_rule_getrproc(const npf_rule_t *rl)
 {
 	npf_rproc_t *rp = rl->r_rproc;
 

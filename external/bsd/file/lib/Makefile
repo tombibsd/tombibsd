@@ -37,7 +37,7 @@ COPTS.softmagic.c = -Wno-format-nonliteral
 
 magic.c:	magic.h
 magic.h:        magic.h.in
-	${TOOL_SED} -e "s/X.YY/514/" < ${.ALLSRC} > ${.TARGET}
+	${TOOL_SED} -e "s/X.YY/${VERSION:S/.//g}/" < ${.ALLSRC} > ${.TARGET}
 CLEANFILES+=	magic.h
 
 .include <bsd.lib.mk>

@@ -3,7 +3,7 @@
 /isapnp_machdep.c/1.17/Fri Jul  1 18:11:24 2011/-kk/
 /lms.c/1.56/Fri Jul  1 18:11:24 2011/-kk/
 /mms.c/1.53/Fri Jul  1 18:11:24 2011/-kk/
-/npx.c/1.145/Tue Nov 12 02:18:40 2013/-kk/
+/npx.c/1.147/Tue Dec 17 04:13:27 2013/-kk/
 /npx_isa.c/1.22/Fri Jul  1 18:11:24 2011/-kk/
 /npxvar.h/1.8/Tue Mar  4 14:53:38 2008/-kk/
 /nvram.h/1.8/Sun Dec 11 12:17:43 2005/-kk/

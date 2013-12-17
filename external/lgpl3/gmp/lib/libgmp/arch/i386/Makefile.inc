@@ -215,15 +215,4 @@ ASM_SRCS_LIST= \
 # XXX? put in C_SRCS_LIST?
 # divrem.c
 
-gen-trialdivtab: gen-trialdivtab.c
-	${HOST_CC} -o ${.OBJDIR}/gen-trialdivtab ${.ALLSRC} -lm
-
-# XXX
-# XXX is this right?
 GMP_LIMB_BITS=32
-
-trialdiv.c: trialdivtab.h
-trialdivtab.h: gen-trialdivtab
-	${.OBJDIR}/gen-trialdivtab $(GMP_LIMB_BITS) 8000 > ${.OBJDIR}/trialdivtab.h
-
-CLEANFILES+=	trialdivtab.h

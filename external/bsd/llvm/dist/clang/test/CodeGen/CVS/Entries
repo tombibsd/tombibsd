@@ -319,12 +319,13 @@
 /a5.c/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /aarch64-arguments.c/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /aarch64-inline-asm.c/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
-/aarch64-neon-2velem.c/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
+/aarch64-neon-2velem.c/1.1.1.2/Tue Dec 17 04:10:31 2013/-kk/
 /aarch64-neon-across.c/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
-/aarch64-neon-copy.c/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
+/aarch64-neon-copy.c/1.1.1.2/Tue Dec 17 04:10:31 2013/-kk/
 /aarch64-neon-crypto.c/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /aarch64-neon-extract.c/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
-/aarch64-neon-intrinsics.c/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
+/aarch64-neon-fcvt-intrinsics.c/1.1.1.1/Fri Dec  6 23:16:50 2013/-kk/
+/aarch64-neon-intrinsics.c/1.1.1.2/Tue Dec 17 04:10:31 2013/-kk/
 /aarch64-neon-ldst-one.c/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /aarch64-neon-misc.c/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
 /aarch64-neon-perm.c/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
@@ -332,6 +333,7 @@
 /aarch64-neon-scalar-x-indexed-elem.c/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /aarch64-neon-shifts.c/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /aarch64-neon-tbl.c/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
+/aarch64-neon-vcombine.c/1.1.1.1/Fri Dec  6 23:16:50 2013/-kk/
 /aarch64-neon-vget-hilo.c/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /aarch64-poly64.c/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /aarch64-type-sizes.c/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
@@ -754,7 +756,7 @@
 /struct.c/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /switch-dce.c/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
 /switch.c/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
-/systemz-inline-asm.c/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
+/systemz-inline-asm.c/1.1.1.2/Tue Dec 17 04:10:32 2013/-kk/
 /target-data.c/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /tbaa-class.cpp/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /tbaa-for-vptr.cpp/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/

@@ -72,8 +72,8 @@ ENTRY(siglongjmp)
 #if defined(__thumb__)
 	it	eq
 #endif
-	beq	PIC_SYM(_C_LABEL(_longjmp), PLT)
-	b	PIC_SYM(_C_LABEL(longjmp), PLT)
+	beq	PLT_SYM(_C_LABEL(_longjmp))
+	b	PLT_SYM(_C_LABEL(longjmp))
 #else
 	push	{lr}
 	sub	sp, sp, #4

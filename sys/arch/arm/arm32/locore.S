@@ -72,7 +72,7 @@ ASENTRY_NP(start)
 #endif
 .L1:
 #ifdef _ARM_ARCH_DWORD_OK
-	strd	r4, [r1], #0x0008	/* Zero the bss */
+	strd	r4, r5, [r1], #0x0008	/* Zero the bss */
 #else
 	str	r4, [r1], #0x0004	/* Zero the bss */
 #endif

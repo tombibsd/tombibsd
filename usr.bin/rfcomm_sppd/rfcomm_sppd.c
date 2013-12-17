@@ -294,7 +294,7 @@ open_tty(const char *tty)
 	int		 master;
 
 	/*
-	 * Construct master PTY name. The slave tty name must be less then
+	 * Construct master PTY name. The slave tty name must be less than
 	 * PATH_MAX characters in length, must contain '/' character and
 	 * must not end with '/'.
 	 */

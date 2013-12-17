@@ -10,7 +10,7 @@ SRCS=		lua.c
 
 WARNS=		1
 
-# Lua source code
+# Lua core source code
 SRCS+=		lapi.c \
 		lcode.c \
 		ldebug.c \
@@ -29,11 +29,15 @@ SRCS+=		lapi.c \
 		ltm.c \
 		lundump.c \
 		lvm.c \
-		lzio.c \
-		# lauxlib.c \
-		ltablib.c \
+		lzio.c
+
+# Lua auxlib source code
+SRCS+=		lauxlib.c
+
+# Lua stdlibs source code
+SRCS+=		lbaselib.c \
 		lstrlib.c \
-		lbaselib.c \
+		ltablib.c \
 		linit.c
 
 # Compatability code
@@ -42,8 +46,7 @@ SRCS+=		strcspn.c \
 		strpbrk.c \
 		strspn.c
 
-CFLAGS+=	-include ${.CURDIR}/luaconf.h
-
-CPPFLAGS+=	-I${S}/../external/mit/lua/dist/src
+CPPFLAGS+=	-I${S}/../external/mit/lua/dist/src \
+		-I${S}/sys
 
 .include <bsd.kmodule.mk>

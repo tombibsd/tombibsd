@@ -260,7 +260,9 @@ sendsig_sigcontext(const ksiginfo_t *ksi, const sigset_t *mask)
 		/* NOTREACHED */
 	}
 
+	int svufpu = l->l_md.md_flags & MDL_USEDFPU;
 	buildcontext(l, sel, catcher, fp);
+	l->l_md.md_flags |= svufpu;
 
 	/* Remember that we're now on the signal stack. */
 	if (onstack)

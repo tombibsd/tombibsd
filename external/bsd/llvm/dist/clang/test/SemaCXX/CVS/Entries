@@ -183,8 +183,8 @@
 /cxx1y-contextual-conversion-tweaks.cpp/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /cxx1y-deduced-return-type.cpp/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /cxx1y-generic-lambdas-capturing.cpp/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
-/cxx1y-generic-lambdas.cpp/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
-/cxx1y-init-captures.cpp/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
+/cxx1y-generic-lambdas.cpp/1.1.1.2/Tue Dec 17 04:10:37 2013/-kk/
+/cxx1y-init-captures.cpp/1.1.1.2/Tue Dec 17 04:10:37 2013/-kk/
 /cxx1y-initializer-aggregates.cpp/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /cxx1y-sized-deallocation.cpp/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /cxx1y-user-defined-literals.cpp/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
@@ -197,7 +197,7 @@
 /dcl_init_aggr.cpp/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /decl-expr-ambiguity.cpp/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /decl-init-ref.cpp/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
-/decl-microsoft-call-conv.cpp/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
+/decl-microsoft-call-conv.cpp/1.1.1.2/Tue Dec 17 04:10:37 2013/-kk/
 /decltype-98.cpp/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /decltype-crash.cpp/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /decltype-overloaded-functions.cpp/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
@@ -511,7 +511,7 @@
 /warn-static-function-inheader.cpp/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /warn-static-function-inheader.h/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /warn-string-conversion.cpp/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
-/warn-thread-safety-analysis.cpp/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
+/warn-thread-safety-analysis.cpp/1.1.1.2/Tue Dec 17 04:10:37 2013/-kk/
 /warn-thread-safety-parsing.cpp/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /warn-unreachable.cpp/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /warn-unsequenced.cpp/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/

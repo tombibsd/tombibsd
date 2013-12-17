@@ -110,7 +110,7 @@
 /pause.c/1.9/Wed Jul 22 16:57:15 2009/-kk/
 /printw.c/1.22/Sun Jul 17 20:54:34 2011/-kk/
 /putchar.c/1.21/Wed Feb  3 15:34:40 2010/-kk/
-/refresh.c/1.77/Thu Oct 24 10:28:53 2013/-kk/
+/refresh.c/1.78/Tue Dec 17 04:13:16 2013/-kk/
 /resize.c/1.20/Wed Jul 22 16:57:15 2009/-kk/
 /scanw.c/1.21/Sun Jul 17 20:54:34 2011/-kk/
 /screen.c/1.23/Thu Jun 10 05:24:55 2010/-kk/
@@ -121,7 +121,7 @@
 /standout.c/1.16/Wed Feb  3 15:34:40 2010/-kk/
 /timeout.c/1.8/Wed Nov  4 21:24:57 2009/-kk/
 /toucholap.c/1.15/Sun Jan 21 13:25:36 2007/-kk/
-/touchwin.c/1.26/Tue Feb 23 19:48:26 2010/-kk/
+/touchwin.c/1.27/Tue Dec 17 04:13:16 2013/-kk/
 /tscroll.c/1.13/Sun Jan 21 13:25:36 2007/-kk/
 /tstp.c/1.40/Thu Oct 24 10:28:53 2013/-kk/
 /tty.c/1.43/Mon Aug 29 11:07:38 2011/-kk/

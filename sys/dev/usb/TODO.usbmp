@@ -8,16 +8,7 @@ flesh out most of usbdi(9).
 
 
 host controllers needing to be ported:
-  - dev/ic/slhci.c
-  - arch/mips/adm5120/dev/ahci.c
   - rump/dev/lib/libugenhc/ugenhc.c
-
-
-use /* XXXSMP ok */ markers for non-SMP-safe host controller driver uses.
-eg, "if (lock_ptr) mutex_enter(lock_ptr); else s = splusb();"
-
-
-add lots more asserts
 
 
 usb_event_thread() startup should use something to sync companions

@@ -41,6 +41,7 @@
 #define _FREEBSD_MACHDEP_H
 
 #include <compat/sys/sigtypes.h>
+#include <machine/npx.h>
 
 /*
  * signal support
@@ -143,16 +144,7 @@ struct freebsd_trapframe {
 };
 
 /* Environment information of floating point unit */
-struct freebsd_env87 {
-	long	en_cw;		/* control word (16bits) */
-	long	en_sw;		/* status word (16bits) */
-	long	en_tw;		/* tag word (16bits) */
-	long	en_fip;		/* floating point instruction pointer */
-	u_short	en_fcs;		/* floating code segment selector */
-	u_short	en_opcode;	/* opcode last executed (11 bits ) */
-	long	en_foo;		/* floating operand offset */
-	long	en_fos;		/* floating operand segment selector */
-};
+#define freebsd_env87 env87
 
 /* Contents of each floating point accumulator */
 struct freebsd_fpacc87 {

@@ -34,6 +34,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/kauth.h>
 #include <sys/kmem.h>
 #include <sys/lwp.h>
+#include <sys/ktrace.h>
 #include <sys/pool.h>
 #include <sys/proc.h>
 #include <sys/queue.h>
@@ -51,12 +52,20 @@ lwproc_proc_free(struct proc *p)
 {
 	kauth_cred_t cred;
 
+	KASSERT(p->p_stat == SDYING || p->p_stat == SDEAD);
+
+#ifdef KTRACE
+	if (p->p_tracep) {
+		mutex_enter(&ktrace_lock);
+		ktrderef(p);
+		mutex_exit(&ktrace_lock);
+	}
+#endif
+
 	mutex_enter(proc_lock);
 
 	KASSERT(p->p_nlwps == 0);
 	KASSERT(LIST_EMPTY(&p->p_lwps));
-	KASSERT(p->p_stat == SACTIVE || p->p_stat == SDYING ||
-	    p->p_stat == SDEAD);
 
 	LIST_REMOVE(p, p_list);
 	LIST_REMOVE(p, p_sibling);

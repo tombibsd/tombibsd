@@ -76,6 +76,26 @@ bzero(void *dst0, size_t length)
 #define	VAL	c0
 #define	WIDEVAL	c
 
+#if defined(__ARM_EABI__)
+void __aeabi_memset(void *, size_t, int);
+void __aeabi_memclr(void *, size_t);
+
+__strong_alias(__aeabi_memset4, __aebi_memset)
+__strong_alias(__aeabi_memset8, __aebi_memset)
+
+void
+__aeabi_memset(void *dst0, size_t length, int c)
+{
+	memset(dst0, c, length);
+}
+
+void
+__aeabi_memclr(void *dst0, size_t length)
+{
+	memset(dst0, 0, length);
+}
+#endif
+
 void *
 memset(void *dst0, int c0, size_t length)
 #endif

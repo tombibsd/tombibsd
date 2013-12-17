@@ -216,7 +216,7 @@ stick_get_timecount(struct timecounter *tc)
 static u_int
 stick2e_get_timecount(struct timecounter *tc)
 {
-	return psycho_getstick();
+	return psycho_getstick32();
 }
 #endif
 

@@ -189,7 +189,7 @@ athn_pci_attach(device_t parent, device_t self, void *aux)
 		    (int)memtype);
 		goto fail;
 	}
-	error = pci_mapreg_map(pa, PCI_MAPREG_START, memtype, 0, &psc->psc_iot,
+	error = pci_mapreg_map(pa, ATHN_PCI_MMBA, memtype, 0, &psc->psc_iot,
 	    &psc->psc_ioh, NULL, &psc->psc_mapsz);
 	if (error != 0) {
 		aprint_error_dev(self, "cannot map register space\n");

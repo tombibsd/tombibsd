@@ -30,7 +30,7 @@
 /neon-bitwise-instructions.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /neon-compare-instructions.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /neon-crypto.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
-/neon-diagnostics.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
+/neon-diagnostics.s/1.1.1.2/Tue Dec 17 04:11:00 2013/-kk/
 /neon-extract.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /neon-facge-facgt.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /neon-frsqrt-frecp.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
@@ -46,14 +46,14 @@
 /neon-saturating-add-sub.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /neon-saturating-rounding-shift.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /neon-saturating-shift.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
-/neon-scalar-abs.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
+/neon-scalar-abs.s/1.1.1.2/Tue Dec 17 04:11:00 2013/-kk/
 /neon-scalar-add-sub.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /neon-scalar-by-elem-mla.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /neon-scalar-by-elem-mul.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /neon-scalar-by-elem-saturating-mla.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /neon-scalar-by-elem-saturating-mul.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /neon-scalar-compare.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
-/neon-scalar-cvt.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
+/neon-scalar-cvt.s/1.1.1.2/Tue Dec 17 04:11:00 2013/-kk/
 /neon-scalar-dup.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /neon-scalar-extract-narrow.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /neon-scalar-fp-compare.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/

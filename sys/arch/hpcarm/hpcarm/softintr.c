@@ -115,7 +115,7 @@ softintr_schedule(void *cookie)
 	sh->sh_hlink = NULL;
 
 #ifdef __GNUC__
-	__asm volatile("mrs %0, cpsr_all\n orr r1, %0, %1\n msr cpsr_all, r1" :
+	__asm volatile("mrs %0, cpsr\n orr r1, %0, %1\n msr cpsr_a;;, r1" :
 	    "=r" (saved_cpsr) : "i" (I32_bit) : "r1");
 #else
 	saved_cpsr = SetCPSR(I32_bit, I32_bit);
@@ -156,7 +156,7 @@ softintr_dispatch(int s)
 	while (1) {
 		/* Protect list operation from interrupts */
 #ifdef __GNUC__
-		__asm volatile("mrs %0, cpsr_all\n orr r1, %0, %1\n"
+		__asm volatile("mrs %0, cpsr\n orr r1, %0, %1\n"
 		    " msr cpsr_all, r1" : "=r" (saved_cpsr) :
 		    "i" (I32_bit) : "r1");
 #else

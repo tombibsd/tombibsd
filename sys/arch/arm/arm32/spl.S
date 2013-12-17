@@ -61,7 +61,7 @@ ENTRY(raisespl)
 	stmfd	sp!, {r0, r1, r4, lr}	/* Preserve registers */
 
 	/* Disable interrupts */
-	mrs	r4, cpsr_all
+	mrs	r4, cpsr
 	orr	r2, r4, #(I32_bit)
 	msr	cpsr_c, r2
 
@@ -81,7 +81,7 @@ ENTRY(lowerspl)
 	stmfd	sp!, {r0, r1, r4, lr}	/* Preserve registers */
 
 	/* Disable interrupts */
-	mrs	r4, cpsr_all
+	mrs	r4, cpsr
 	orr	r2, r4,  #(I32_bit)
 	msr	cpsr_c, r2
 
@@ -104,7 +104,7 @@ ENTRY(splx)
 	stmfd	sp!, {r0, r1, r4, lr}
 
 	/* Disable interrupts */
-	mrs	r4, cpsr_all
+	mrs	r4, cpsr
 	orr	r2, r4,  #(I32_bit)
 	msr	cpsr_c, r2
 

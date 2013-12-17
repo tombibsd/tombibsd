@@ -220,6 +220,9 @@ DB	*__bt_open(const char *, int, mode_t, const BTREEINFO *, int);
 DB	*__hash_open(const char *, int, mode_t, const HASHINFO *, int);
 DB	*__rec_open(const char *, int, mode_t, const RECNOINFO *, int);
 void	 __dbpanic(DB *);
+struct stat;
+int	 __dbopen(const char *, int, mode_t, struct stat *);
+int	 __dbtemp(const char *, struct stat *);
 #endif
 __END_DECLS
 #endif /* !_DB_H_ */

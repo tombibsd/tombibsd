@@ -243,8 +243,8 @@ msm6242b_settime_ymdhms(todr_chip_handle_t handle, struct clock_ymdhms *dt)
 	msm6242b_write(sc, MSM6242B_1DAY, dt->dt_day % 10);
 	msm6242b_write(sc, MSM6242B_10MONTH, dt->dt_mon / 10);
 	msm6242b_write(sc, MSM6242B_1MONTH, dt->dt_mon % 10);
-	msm6242b_write(sc, MSM6242B_10YEAR, (dt->dt_mon / 10) % 10);
-	msm6242b_write(sc, MSM6242B_1YEAR, dt->dt_mon % 10);
+	msm6242b_write(sc, MSM6242B_10YEAR, (dt->dt_year / 10) % 10);
+	msm6242b_write(sc, MSM6242B_1YEAR, dt->dt_year % 10);
 	msm6242b_write(sc, MSM6242B_WEEK, dt->dt_wday);
 
 	msm6242b_free(sc);

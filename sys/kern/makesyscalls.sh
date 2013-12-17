@@ -232,7 +232,8 @@ NR == 1 {
 	printf "#ifdef RUMP_CLIENT\n" > rumpcalls
 	printf "#include <errno.h>\n" > rumpcalls
 	printf "#include <stdint.h>\n" > rumpcalls
-	printf "#include <stdlib.h>\n\n" > rumpcalls
+	printf "#include <stdlib.h>\n" > rumpcalls
+	printf "#include <string.h>\n\n" > rumpcalls
 	printf "#include <srcsys/syscall.h>\n" > rumpcalls
 	printf "#include <srcsys/syscallargs.h>\n\n" > rumpcalls
 	printf "#include <rump/rumpclient.h>\n\n" > rumpcalls
@@ -812,7 +813,7 @@ function putent(type, compatwrap) {
 	}
 	printf("%s %s)\n", uncompattype(argtype[argc]), argname[argc]) \
 	    > rumpcalls
-	printf("{\n\tregister_t retval[2] = {0, 0};\n") > rumpcalls
+	printf("{\n\tregister_t retval[2];\n") > rumpcalls
 	if (returntype != "void") {
 		if (type != "NOERR") {
 			printf("\tint error = 0;\n") > rumpcalls
@@ -828,6 +829,7 @@ function putent(type, compatwrap) {
 		argsize = "sizeof(callarg)"
 		printf("\tstruct %s%s_args callarg;\n\n",compatwrap_,funcname) \
 		    > rumpcalls
+		printf "\tmemset(&callarg, 0, sizeof(callarg));\n" > rumpcalls
 		for (i = 1; i <= argc; i++) {
 			if (argname[i] == "PAD") {
 				printf("\tSPARG(&callarg, %s) = 0;\n", \
@@ -938,7 +940,7 @@ END {
 		printf("int rump_sys_pipe(int *);\n") > rumpprotos
 		printf("\nint rump_sys_pipe(int *);\n") > rumpcalls
 		printf("int\nrump_sys_pipe(int *fd)\n{\n") > rumpcalls
-		printf("\tregister_t retval[2] = {0, 0};\n") > rumpcalls
+		printf("\tregister_t retval[2];\n") > rumpcalls
 		printf("\tint error = 0;\n") > rumpcalls
 		printf("\n\terror = rsys_syscall(SYS_pipe, ") > rumpcalls
 		printf("NULL, 0, retval);\n") > rumpcalls
@@ -1003,3 +1005,6 @@ echo >> $rumpcallshdr
 cat $rumpprotos >> $rumpcallshdr
 
 #chmod 444 $sysnames $sysnumhdr $syssw
+
+echo Generated following files:
+echo $sysarghdr $sysnumhdr $syssw $sysnames $rumpcalls $rumpcallshdr

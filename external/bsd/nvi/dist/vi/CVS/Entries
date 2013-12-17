@@ -4,7 +4,7 @@
 /v_cmd.c/1.2/Fri Nov 22 15:52:06 2013/-kk/
 /v_delete.c/1.2/Fri Nov 22 15:52:06 2013/-kk/
 /v_event.c/1.2/Fri Nov 22 15:52:06 2013/-kk/
-/v_ex.c/1.4/Thu Nov 28 23:19:43 2013/-kk/
+/v_ex.c/1.6/Tue Dec 17 04:11:03 2013/-kk/
 /v_increment.c/1.2/Fri Nov 22 15:52:06 2013/-kk/
 /v_init.c/1.2/Fri Nov 22 15:52:06 2013/-kk/
 /v_itxt.c/1.2/Fri Nov 22 15:52:06 2013/-kk/
@@ -31,12 +31,12 @@
 /v_yank.c/1.2/Fri Nov 22 15:52:06 2013/-kk/
 /v_z.c/1.2/Fri Nov 22 15:52:06 2013/-kk/
 /v_zexit.c/1.2/Fri Nov 22 15:52:06 2013/-kk/
-/vi.c/1.4/Thu Nov 28 23:19:43 2013/-kk/
+/vi.c/1.5/Tue Dec 17 04:11:03 2013/-kk/
 /vi.h/1.2/Fri Nov 22 15:52:06 2013/-kk/
 /vs_line.c/1.2/Fri Nov 22 15:52:06 2013/-kk/
-/vs_msg.c/1.4/Tue Nov 26 16:48:01 2013/-kk/
-/vs_refresh.c/1.4/Tue Nov 26 16:48:01 2013/-kk/
+/vs_msg.c/1.5/Tue Dec 17 04:11:03 2013/-kk/
+/vs_refresh.c/1.5/Tue Dec 17 04:11:03 2013/-kk/
 /vs_relative.c/1.2/Fri Nov 22 15:52:06 2013/-kk/
 /vs_smap.c/1.2/Fri Nov 22 15:52:06 2013/-kk/
-/vs_split.c/1.5/Thu Nov 28 23:19:43 2013/-kk/
+/vs_split.c/1.6/Tue Dec 17 04:11:03 2013/-kk/
 D

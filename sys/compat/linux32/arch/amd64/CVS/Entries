@@ -3,7 +3,7 @@
 /linux32_errno.h/1.1/Thu Feb  9 19:18:57 2006/-kk/
 /linux32_exec.h/1.4/Wed Jul  7 01:30:35 2010/-kk/
 /linux32_ioctl.h/1.1/Wed Feb 15 09:31:17 2006/-kk/
-/linux32_machdep.c/1.32/Sun Oct 27 08:19:59 2013/-kk/
+/linux32_machdep.c/1.33/Tue Dec 17 04:13:30 2013/-kk/
 /linux32_machdep.h/1.2/Tue Dec  4 18:40:18 2007/-kk/
 /linux32_missing.c/1.7/Tue Nov 26 03:29:51 2013/-kk/
 /linux32_missing.h/1.9/Mon Jun  8 14:42:10 2009/-kk/

@@ -183,13 +183,4 @@ ASM_SRCS_LIST= \
 	rshift.asm		mpn/m68k/rshift.asm \
 	sub_n.asm		mpn/m68k/aors_n.asm \
 
-gen-trialdivtab: gen-trialdivtab.c
-	${HOST_CC} -o ${.OBJDIR}/gen-trialdivtab ${.ALLSRC} -lm
-
 GMP_LIMB_BITS=32
-
-trialdiv.c: trialdivtab.h
-trialdivtab.h: gen-trialdivtab
-	${.OBJDIR}/gen-trialdivtab $(GMP_LIMB_BITS) 8000 > ${.OBJDIR}/trialdivtab.h
-
-CLEANFILES+=	trialdivtab.h

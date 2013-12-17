@@ -129,7 +129,7 @@ try_lfs(void)
 #if 0
 	fsi_lfs.ibsize = (fsi_lfs.version == 1) ? s->dlfs_bsize : s->dlfs_fsize;
 #else	/* simplify calculation to reduce code size */
-	/* use fsi.bsize (larger then needed for v2, but probably no harm) */
+	/* use fsi.bsize (larger than needed for v2, but probably no harm) */
 #endif
 
 	/*

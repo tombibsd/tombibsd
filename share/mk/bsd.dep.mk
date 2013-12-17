@@ -101,6 +101,7 @@ CLEANDIRFILES+= .depend ${__DPSRCS.d} ${__DPSRCS.d:.d=.d.tmp} ${.CURDIR}/tags ${
 .if !target(tags)
 tags: ${SRCS}
 .if defined(SRCS) && !empty(SRCS)
+	${_MKTARGET_CREATE}
 	-cd "${.CURDIR}"; ctags -f /dev/stdout ${.ALLSRC:N*.h} | \
 	    ${TOOL_SED} "s;\${.CURDIR}/;;" > tags
 .endif

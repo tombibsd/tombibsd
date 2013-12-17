@@ -116,7 +116,7 @@
 
 #ifdef __PIC__
 #define	REL_SYM(a, b)	((a) - (b))
-#define	PLT_SYM(x)	PIC_SYM(x, PLT)
+#define	PLT_SYM(x)	x
 #define	GOT_SYM(x)	PIC_SYM(x, GOT)
 #define	GOT_GET(x,got,sym)	\
 	ldr	x, sym;		\

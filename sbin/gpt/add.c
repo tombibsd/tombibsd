@@ -46,12 +46,12 @@ __RCSID("$NetBSD$");
 #include "gpt.h"
 
 static uuid_t type;
-static off_t alignment, block, size;
+static off_t alignment, block, sectors, size;
 static unsigned int entry;
 static uint8_t *name;
 
 const char addmsg1[] = "add [-a alignment] [-b blocknr] [-i index] [-l label]";
-const char addmsg2[] = "    [-s sectors] [-t type] device ...";
+const char addmsg2[] = "    [-s size] [-t type] device ...";
 
 __dead static void
 usage_add(void)
@@ -134,19 +134,17 @@ add(int fd)
 
 	if (alignment > 0) {
 		alignsecs = alignment / secsz;
-		map = map_alloc(block, size, alignsecs);
+		map = map_alloc(block, sectors, alignsecs);
 		if (map == NULL) {
-			warnx("%s: error: not enough space available on device for an aligned partition", device_name);
-			map = map_alloc(block, size, 0);
-			if (map == NULL) {
-				warnx("%s: error: not enough available on device", device_name);
-				return;
-			}
+			warnx("%s: error: not enough space available on "
+			      "device for an aligned partition", device_name);
+			return;
 		}
 	} else {
-		map = map_alloc(block, size, 0);
+		map = map_alloc(block, sectors, 0);
 		if (map == NULL) {
-			warnx("%s: error: not enough space available on device", device_name);
+			warnx("%s: error: not enough space available on "
+			      "device", device_name);
 			return;
 		}
 	}
@@ -182,7 +180,7 @@ add(int fd)
 	gpt_write(fd, lbt);
 	gpt_write(fd, tpg);
 
-	printf("Partition added, use:\n");
+	printf("Partition %d added, use:\n", i + 1);
 	printf("\tdkctl %s addwedge <wedgename> %" PRIu64 " %" PRIu64
 	    " <type>\n", device_arg, map->map_start, map->map_size);
 	printf("to create a wedge for it\n");
@@ -228,11 +226,31 @@ cmd_add(int argc, char *argv[])
 			name = (uint8_t *)strdup(optarg);
 			break;
 		case 's':
-			if (size > 0)
+			if (sectors > 0 || size > 0)
 				usage_add();
-			size = strtoll(optarg, &p, 10);
-			if (*p != 0 || size < 1)
+			sectors = strtoll(optarg, &p, 10);
+			if (sectors < 1)
 				usage_add();
+			if (*p == '\0')
+				break;
+			if (*p == 's' || *p == 'S') {
+				if (*(p + 1) == '\0')
+					break;
+				else
+					usage_add();
+			}
+			if (*p == 'b' || *p == 'B') {
+				if (*(p + 1) == '\0') {
+					size = sectors;
+					sectors = 0;
+					break;
+				} else
+					usage_add();
+			}
+			if (dehumanize_number(optarg, &human_num) < 0)
+				usage_add();
+			size = human_num;
+			sectors = 0;
 			break;
 		case 't':
 			if (!uuid_is_nil(&type, NULL))
@@ -262,11 +280,21 @@ cmd_add(int argc, char *argv[])
 		}
 
 		if (alignment % secsz != 0) {
-			warnx("Alignment must be a multiple of sector size; ");
+			warnx("Alignment must be a multiple of sector size;");
 			warnx("the sector size for %s is %d bytes.",
 			    device_name, secsz);
 			continue;
 		}
+
+		if (size % secsz != 0) {
+			warnx("Size in bytes must be a multiple of sector "
+			      "size;");
+			warnx("the sector size for %s is %d bytes.",
+			    device_name, secsz);
+			continue;
+		}
+		if (size > 0)
+			sectors = size / secsz;
 
 		add(fd);
 

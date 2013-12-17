@@ -227,7 +227,7 @@ om_copyrows(void *cookie, int srcrow, int dstrow, int nrows)
 	srcy = ri->ri_font->fontheight * srcrow;
 	if (srcrow < dstrow && srcrow + nrows > dstrow) {
 		scanspan = -scanspan;
-		srcy += height;
+		srcy = srcy + height - 1;
 	}
 
 	p = (uint8_t *)ri->ri_bits + srcy * ri->ri_stride;

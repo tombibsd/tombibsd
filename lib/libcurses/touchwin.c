@@ -41,6 +41,8 @@ __RCSID("$NetBSD$");
 #include "curses.h"
 #include "curses_private.h"
 
+static int _cursesi_touchline_force(WINDOW *, int, int, int, int);
+
 /*
  * is_linetouched --
  *	Indicate if line has been touched or not.
@@ -157,7 +159,8 @@ wtouchln(WINDOW *win, int line, int n, int changed)
 		line = win->maxy - n;
 	for (y = line; y < line + n; y++) {
 		if (changed == 1)
-			__touchline(win, y, 0, (int) win->maxx - 1);
+			_cursesi_touchline_force(win, y, 0,
+			    (int) win->maxx - 1, 1);
 		else {
 			wlp = win->alines[y];
 			if (*wlp->firstchp >= win->ch_off &&
@@ -166,13 +169,13 @@ wtouchln(WINDOW *win, int line, int n, int changed)
 			if (*wlp->lastchp >= win->ch_off &&
 			    *wlp->lastchp < win->maxx + win->ch_off)
 				*wlp->lastchp = win->ch_off;
-			wlp->flags &= ~__ISDIRTY;
+			wlp->flags &= ~(__ISDIRTY | __ISFORCED);
 		}
 	}
 
 	return OK;
 }
-		
+
 int
 __touchwin(WINDOW *win)
 {
@@ -190,6 +193,19 @@ __touchwin(WINDOW *win)
 int
 __touchline(WINDOW *win, int y, int sx, int ex)
 {
+	return (_cursesi_touchline_force(win, y, sx, ex, 0));
+}
+
+/*
+ * Touch line y on window win starting from column sx and ending at
+ * column ex.  If force is 1 then we mark this line as a forced update
+ * which will bypass screen optimisation in the refresh code to rewrite
+ * this line unconditionally (even if refresh thinks the screen matches
+ * what is in the virtscr)
+ */
+static int
+_cursesi_touchline_force(WINDOW *win, int y, int sx, int ex, int force)
+{
 #ifdef DEBUG
 	__CTRACE(__CTRACE_LINE, "__touchline: (%p, %d, %d, %d)\n",
 	    win, y, sx, ex);
@@ -198,8 +214,9 @@ __touchline(WINDOW *win, int y, int sx, int ex)
 #endif
 	sx += win->ch_off;
 	ex += win->ch_off;
-	if (!(win->alines[y]->flags & __ISDIRTY))
-		win->alines[y]->flags |= __ISDIRTY;
+	win->alines[y]->flags |= __ISDIRTY;
+	if (force == 1)
+		win->alines[y]->flags |= __ISFORCED;
 	/* firstchp/lastchp are shared between parent window and sub-window. */
 	if (*win->alines[y]->firstchp > sx)
 		*win->alines[y]->firstchp = sx;
@@ -217,7 +234,7 @@ wsyncup(WINDOW *win)
 {
 
 	do {
-		touchwin(win);
+		__touchwin(win);
 		win = win->orig;
 	} while (win);
 }
@@ -229,7 +246,7 @@ wsyncdown(WINDOW *win)
 
 	while (w) {
 		if (is_wintouched(w)) {
-			touchwin(win);
+			__touchwin(win);
 			break;
 		}
 		w = w->orig;

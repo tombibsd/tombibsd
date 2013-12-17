@@ -65,7 +65,7 @@ ENTRY(arm8_clock_config)
  * addresses that are about to change.
  */
 ENTRY(arm8_setttb)
-	mrs	r3, cpsr_all
+	mrs	r3, cpsr
 	orr	r2, r3, #(I32_bit | F32_bit)
 	msr	cpsr_all, r2
 
@@ -176,7 +176,7 @@ ENTRY(arm8_cache_purgeID)
 
 	mov	r0, #0x00000000
 
-	mrs	r3, cpsr_all
+	mrs	r3, cpsr
 	orr	r2, r3, #(I32_bit | F32_bit)
 	msr	cpsr_all, r2
 
@@ -248,7 +248,7 @@ ENTRY(arm8_cache_purgeID_E)
 	 * mcr p15, 0, rd, c7, c11, 1
 	 * mcr p15, 0, rd, c7, c7, 1
 	 */
-	mrs	r3, cpsr_all
+	mrs	r3, cpsr
 	orr	r2, r3, #(I32_bit | F32_bit)
 	msr	cpsr_all, r2
 	mcr	p15, 0, r0, c7, c11, 1	/* clean I+D single entry */

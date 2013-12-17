@@ -45,6 +45,8 @@ struct cdbr;
 __BEGIN_DECLS
 
 struct cdbr	*cdbr_open(const char *, int);
+struct cdbr	*cdbr_open_mem(void *, size_t, int,
+    void (*)(void *, void *, size_t), void *);
 uint32_t	 cdbr_entries(struct cdbr *);
 int		 cdbr_get(struct cdbr *, uint32_t, const void **, size_t *);
 int		 cdbr_find(struct cdbr *, const void *, size_t,

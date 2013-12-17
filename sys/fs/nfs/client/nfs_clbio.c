@@ -1187,7 +1187,7 @@ again:
 
 		if (error != 0 && !bp_cached) {
 			/*
-			 * This block has no other content then what
+			 * This block has no other content than what
 			 * possibly was written by the faulty uiomove.
 			 * Release it, forgetting the data pages, to
 			 * prevent the leak of uninitialized data to
@@ -1480,7 +1480,7 @@ again:
 	if (gotiod) {
 		/*
 		 * Ensure that the queue never grows too large.  We still want
-		 * to asynchronize so we block rather then return EIO.
+		 * to asynchronize so we block rather than return EIO.
 		 */
 		while (nmp->nm_bufqlen >= 2*ncl_numasync) {
 			NFS_DPF(ASYNCIO,

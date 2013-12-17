@@ -39,10 +39,10 @@ ENTRY_NP(_atomic_xor_64_nv)
 	mov	r2, r1
 #endif
 	mov	ip, r0			/* need r0 for return value */
-1:	ldrexd	r0, [ip]		/* load old value */
+1:	ldrexd	r0, r1, [ip]		/* load old value */
 	eors	r0, r0, r2		/* calculate new value (return value) */
 	eors	r1, r1, r3		/* calculate new value (return value) */
-	strexd	r4, r0, [ip]		/* try to store */
+	strexd	r4, r0, r1, [ip]	/* try to store */
 	cmp	r4, #0			/*   succeed? */
 	bne	1b			/*     no, try again? */
 #ifdef _ARM_ARCH_7

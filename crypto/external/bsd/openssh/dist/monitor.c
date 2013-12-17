@@ -1181,6 +1181,9 @@ mm_answer_keyallowed(int sock, Buffer *m)
 			break;
 		}
 	}
+	debug3("%s: key %p is %s",
+	    __func__, key, allowed ? "allowed" : "not allowed");
+
 	if (key != NULL)
 		key_free(key);
 
@@ -1201,9 +1204,6 @@ mm_answer_keyallowed(int sock, Buffer *m)
 		free(cuser);
 		free(chost);
 	}
-
-	debug3("%s: key %p is %s",
-	    __func__, key, allowed ? "allowed" : "not allowed");
 
 	buffer_clear(m);
 	buffer_put_int(m, allowed);

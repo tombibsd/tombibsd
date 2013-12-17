@@ -50,7 +50,7 @@ ENTRY(swapcontext)
 	.cfi_offset 1, -12
 	.cfi_offset 0, -16
 #endif
-	bl	PIC_SYM(_C_LABEL(_getcontext), PLT)  /* getcontext(oucp) */
+	bl	PLT_SYM(_C_LABEL(_getcontext))  /* getcontext(oucp) */
 	cmp	r0, #0
 #if !defined(__thumb__)
 	pop	{r0-r2, lr}
@@ -82,10 +82,10 @@ ENTRY(swapcontext)
 #endif
 	mov	r0, r1
 #if !defined(__thumb__) || defined(_ARM_ARCH_T2)
-	b	PIC_SYM(_C_LABEL(setcontext), PLT)
+	b	PLT_SYM(_C_LABEL(setcontext))
 #else
 	push	{lr}
-	bl	PIC_SYM(_C_LABEL(setcontext), PLT)
+	bl	PLT_SYM(_C_LABEL(setcontext))
 	pop	{pc}
 #endif
 #if defined(__ARM_EABI__) && defined(__UNWIND_TABLES__)

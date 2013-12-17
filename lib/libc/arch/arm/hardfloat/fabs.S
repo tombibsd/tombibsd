@@ -33,6 +33,7 @@ RCSID("$NetBSD$")
 
 	.fpu	vfp
 
+ENTRY(fabsl)
 ENTRY(fabs)
 	vabs.f64	d0, d0
 	RET

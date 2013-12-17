@@ -486,6 +486,27 @@ CTFCONVERT=	${TOOL_CTFCONVERT}
 CTFMERGE=	${TOOL_CTFMERGE}
 .endif
 
+# For each ${MACHINE_CPU}, list the ports that use it.
+MACHINES.alpha=		alpha
+MACHINES.arm=		acorn26 acorn32 cats epoc32 evbarm hpcarm \
+			iyonix netwinder shark zaurus
+MACHINES.coldfire=	evbcf
+MACHINES.i386=		i386
+MACHINES.ia64=		ia64
+MACHINES.hppa=		hp700
+MACHINES.m68000=	sun2
+MACHINES.m68k=		amiga atari cesfic hp300 luna68k mac68k \
+			news68k next68k sun3 x68k
+MACHINES.mips=		arc cobalt algor cobalt emips evbmips ews4800mips \
+			hpcmips mipsco newsmips pmax sbmips sgimips
+MACHINES.powerpc=	amigappc bebox evbppc ibmnws macppc mvmeppc \
+			ofppc prep rs6000 sandpoint
+MACHINES.sh3=		dreamcast evbsh3 hpcsh landisk mmeye
+MACHINES.sparc=		sparc sparc64
+MACHINES.sparc64=	sparc64
+MACHINES.vax=		vax
+MACHINES.x86_64=	amd64
+
 # OBJCOPY flags to create a.out binaries for old firmware
 # shared among src/distrib and ${MACHINE}/conf/Makefile.${MACHINE}.inc
 .if ${MACHINE_CPU} == "arm"

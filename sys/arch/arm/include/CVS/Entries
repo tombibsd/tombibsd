@@ -5,7 +5,7 @@
 /aout_machdep.h/1.5/Sun Dec 11 12:16:46 2005/-kk/
 /apmvar.h/1.1/Thu Oct 24 10:28:57 2013/-kk/
 /armreg.h/1.83/Thu Oct 24 10:28:57 2013/-kk/
-/asm.h/1.24/Thu Oct 24 10:28:57 2013/-kk/
+/asm.h/1.25/Tue Dec 17 04:13:25 2013/-kk/
 /atomic.h/1.11/Wed Nov 19 06:39:17 2008/-kk/
 /blockio.h/1.2/Sat Jun  2 10:44:56 2001/-kk/
 /bootconfig.h/1.6/Fri Aug 31 23:59:52 2012/-kk/
@@ -54,7 +54,7 @@
 /pio.h/1.2/Fri Jul  1 21:20:33 2011/-kk/
 /pmc.h/1.3/Fri Aug  9 05:27:10 2002/-kk/
 /proc.h/1.15/Thu Oct 24 10:28:57 2013/-kk/
-/profile.h/1.12/Thu Oct 24 10:28:57 2013/-kk/
+/profile.h/1.13/Tue Dec 17 04:13:25 2013/-kk/
 /ptrace.h/1.6/Wed Dec  5 19:05:46 2012/-kk/
 /reg.h/1.5/Thu Oct 24 10:28:57 2013/-kk/
 /rwlock.h/1.5/Mon Apr 28 20:23:14 2008/-kk/

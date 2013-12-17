@@ -26,7 +26,7 @@
 .\"
 .\" $FreeBSD: src/sbin/gpt/gpt.8,v 1.17 2006/06/22 22:22:32 marcel Exp $
 .\"
-.Dd November 21, 2013
+.Dd December 9, 2013
 .Dt GPT 8
 .Os
 .Sh NAME
@@ -95,7 +95,7 @@ There is no formalized definition of the different levels yet.
 .Bl -tag -width indent
 .\" ==== add ====
 .It Nm Ic add Oo Fl a Ar alignment Oc Oo Fl b Ar blocknr Oc \
-Oo Fl i Ar index Oc Oo Fl l Ar label Oc Oo Fl s Ar sectors Oc \
+Oo Fl i Ar index Oc Oo Fl l Ar label Oc Oo Fl s Ar size Oc \
 Oo Fl t Ar type Oc Ar device ...
 The
 .Ic add
@@ -110,7 +110,6 @@ option allows the user to specify an alignment for the start and size.
 The alignment may have a suffix to indicate its magnitude.
 .Nm
 will attempt to align the partition.
-If it can not, then it will attempt to create an unaligned partition.
 .Pp
 The
 .Fl b Ar blocknr
@@ -130,9 +129,15 @@ The
 option allows the user to specify a label for the partition.
 .Pp
 The
-.Fl s Ar sectors
-option allows the user to specify the size of the partition in sectors.
-The minimum size is 1.
+.Fl s Ar size
+option allows the user to specify the size of the partition.
+If there is no suffix, or the suffix is
+.Sq s
+or
+.Sq S
+then size is in sectors, otherwise size is in bytes which must be
+a multiple of the device's sector size.
+The minimum size is 1 sector.
 .Pp
 The
 .Fl t Ar type
@@ -318,7 +323,7 @@ Partitions are removed by clearing the partition type.
 No other information is changed.
 .\" ==== resize ====
 .It Nm Ic resize Fl i Ar index Oo Fl a Ar alignment Oc \
-Oo Fl s Ar sectors Oc Ar device ...
+Oo Fl s Ar size Oc Ar device ...
 The
 .Ic resize
 command allows the user to resize a partition.
@@ -328,30 +333,103 @@ The
 .Fl s
 option allows the new size to be specified, otherwise the partition will
 be increased to the maximum available size.
+If there is no suffix, or the suffix is
+.Sq s
+or
+.Sq S
+then size is in sectors, otherwise size is in bytes which must be
+a multiple of the device's sector size.
+The minimum size is 1 sector.
 If the
 .Fl a
 option is specified then the size will be adjusted to be a multiple of
 alignment if possible.
+.\" ==== set ====
+.It Nm Ic set Fl a Ar attribute Fl i Ar index Ar device ...
+The
+.Ic set
+command sets various partition attributes.
+The
+.Fl a
+option specifies which attributes to set and may be specified more than once.
+The
+.Fl i
+option specifies which entry to update.
+The possible attributes are
+.Do biosboot Dc ,
+.Do bootme Dc ,
+.Do bootonce Dc , and
+.Do bootfailed Dc .
+The biosboot flag is used to indicate which partition should be booted
+by legacy BIOS boot code.
+See the
+.Ic biosboot
+command for more information.
+The other three attributes are for compatibility with
+.Fx
+and are not currently used by any
+.Nx
+code.
+They may be used by
+.Nx
+code in the future.
 .\" ==== show ====
-.It Nm Ic show Oo Fl lu Oc Ar device ...
+.It Nm Ic show Oo Fl glu Oc Oo Fl i Ar index Oc Ar device ...
 The
 .Ic show
 command displays the current partitioning on the listed devices and gives
 an overall view of the disk contents.
 With the
+.Fl g
+option the GPT partition GUID will be displayed instead of the GPT partition
+type.
+With the
 .Fl l
 option the GPT partition label will be displayed instead of the GPT partition
 type.
-The option has no effect on non-GPT partitions.
 With the
 .Fl u
 option the GPT partition type is displayed as an UUID instead of in a
 user friendly form.
+With the
+.Fl i
+option, all the details of a particular GPT partition will be displayed.
+The format of this display is subject to change.
+None of the options have any effect on non-GPT partitions.
+The order of precedence for the options are:
+.Fl i ,
+.Fl l ,
+.Fl g ,
+.Fl u .
+.\" ==== unset ====
+.It Nm Ic unset Fl a Ar attribute Fl i Ar index Ar device ...
 The
-.Fl l
-option takes precedence over the
-.Fl u
-option.
+.Ic unset
+command unsets various partition attributes.
+The
+.Fl a
+option specifies which attributes to unset and may be specified more than once.
+The
+.Fl i
+option specifies which entry to update.
+The possible attributes are
+.Do biosboot Dc ,
+.Do bootme Dc ,
+.Do bootonce Dc , and
+.Do bootfailed Dc .
+The biosboot flag is used to indicate which partition should be booted
+by legacy BIOS boot code.
+See the
+.Ic biosboot
+command for more information.
+The other three attributes are for compatibility with
+.Fx
+and are not currently used by any
+.Nx
+code.
+They may be used by
+.Nx
+code in the future.
 .El
 .Sh EXAMPLES
 .Bd -literal

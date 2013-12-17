@@ -513,14 +513,14 @@ void
 kpreempt_disable(void)
 {
 
-	//KPREEMPT_DISABLE(curlwp);
+	KPREEMPT_DISABLE(curlwp);
 }
 
 void
 kpreempt_enable(void)
 {
 
-	//KPREEMPT_ENABLE(curlwp);
+	KPREEMPT_ENABLE(curlwp);
 }
 
 void

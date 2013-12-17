@@ -76,8 +76,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <machine/vm86.h>
 #endif
 
-extern const pcu_ops_t fpu_ops;
-
 static inline struct trapframe *
 process_frame(struct lwp *l)
 {
@@ -134,14 +132,12 @@ process_xmm_to_s87(const struct savexmm *sxmm, struct save87 *s87)
 	int i;
 
 	/* FPU control/status */
-	s87->sv_env.en_cw = sxmm->sv_env.en_cw;
-	s87->sv_env.en_sw = sxmm->sv_env.en_sw;
+	s87->sv_env.en_cw = sxmm->sv_env.fx_cw;
+	s87->sv_env.en_sw = sxmm->sv_env.fx_sw;
 	/* tag word handled below */
-	s87->sv_env.en_fip = sxmm->sv_env.en_fip;
-	s87->sv_env.en_fcs = sxmm->sv_env.en_fcs;
-	s87->sv_env.en_opcode = sxmm->sv_env.en_opcode;
-	s87->sv_env.en_foo = sxmm->sv_env.en_foo;
-	s87->sv_env.en_fos = sxmm->sv_env.en_fos;
+	s87->sv_env.en_ip = sxmm->sv_env.fx_ip;
+	s87->sv_env.en_opcode = sxmm->sv_env.fx_opcode;
+	s87->sv_env.en_dp = sxmm->sv_env.fx_dp;
 
 	/* Tag word and registers. */
 	s87->sv_env.en_tw = 0;
@@ -149,7 +145,7 @@ process_xmm_to_s87(const struct savexmm *sxmm, struct save87 *s87)
 	for (i = 0; i < 8; i++) {
 		s87->sv_env.en_tw |=
 		    (xmm_to_s87_tag(sxmm->sv_ac[i].fp_bytes, i,
-		     sxmm->sv_env.en_tw) << (i * 2));
+		     sxmm->sv_env.fx_tw) << (i * 2));
 
 		s87->sv_ex_tw |=
 		    (xmm_to_s87_tag(sxmm->sv_ac[i].fp_bytes, i,
@@ -168,21 +164,19 @@ process_s87_to_xmm(const struct save87 *s87, struct savexmm *sxmm)
 	int i;
 
 	/* FPU control/status */
-	sxmm->sv_env.en_cw = s87->sv_env.en_cw;
-	sxmm->sv_env.en_sw = s87->sv_env.en_sw;
+	sxmm->sv_env.fx_cw = s87->sv_env.en_cw;
+	sxmm->sv_env.fx_sw = s87->sv_env.en_sw;
 	/* tag word handled below */
-	sxmm->sv_env.en_fip = s87->sv_env.en_fip;
-	sxmm->sv_env.en_fcs = s87->sv_env.en_fcs;
-	sxmm->sv_env.en_opcode = s87->sv_env.en_opcode;
-	sxmm->sv_env.en_foo = s87->sv_env.en_foo;
-	sxmm->sv_env.en_fos = s87->sv_env.en_fos;
+	sxmm->sv_env.fx_ip = s87->sv_env.en_ip;
+	sxmm->sv_env.fx_opcode = s87->sv_env.en_opcode;
+	sxmm->sv_env.fx_dp = s87->sv_env.en_dp;
 
 	/* Tag word and registers. */
 	for (i = 0; i < 8; i++) {
 		if (((s87->sv_env.en_tw >> (i * 2)) & 3) == 3)
-			sxmm->sv_env.en_tw &= ~(1U << i);
+			sxmm->sv_env.fx_tw &= ~(1U << i);
 		else
-			sxmm->sv_env.en_tw |= (1U << i);
+			sxmm->sv_env.fx_tw |= (1U << i);
 
 #if 0
 		/*
@@ -248,9 +242,9 @@ process_read_fpregs(struct lwp *l, struct fpreg *regs)
 {
 	union savefpu *frame = process_fpframe(l);
 
-	if (pcu_used_p(&fpu_ops)) {
+	if (l->l_md.md_flags & MDL_USEDFPU) {
 #if NNPX > 0
-		pcu_save(&fpu_ops);
+		npxsave_lwp(l, true);
 #endif
 	} else {
 		/*
@@ -259,15 +253,15 @@ process_read_fpregs(struct lwp *l, struct fpreg *regs)
 		 * save it temporarily.
 		 */
 		if (i386_use_fxsave) {
-			uint32_t mxcsr = frame->sv_xmm.sv_env.en_mxcsr;
-			uint16_t cw = frame->sv_xmm.sv_env.en_cw;
+			uint32_t mxcsr = frame->sv_xmm.sv_env.fx_mxcsr;
+			uint16_t cw = frame->sv_xmm.sv_env.fx_cw;
 
 			/* XXX Don't zero XMM regs? */
 			memset(&frame->sv_xmm, 0, sizeof(frame->sv_xmm));
-			frame->sv_xmm.sv_env.en_cw = cw;
-			frame->sv_xmm.sv_env.en_mxcsr = mxcsr;
-			frame->sv_xmm.sv_env.en_sw = 0x0000;
-			frame->sv_xmm.sv_env.en_tw = 0x00;
+			frame->sv_xmm.sv_env.fx_cw = cw;
+			frame->sv_xmm.sv_env.fx_mxcsr = mxcsr;
+			frame->sv_xmm.sv_env.fx_sw = 0x0000;
+			frame->sv_xmm.sv_env.fx_tw = 0x00;
 		} else {
 			uint16_t cw = frame->sv_87.sv_env.en_cw;
 
@@ -276,6 +270,7 @@ process_read_fpregs(struct lwp *l, struct fpreg *regs)
 			frame->sv_87.sv_env.en_sw = 0x0000;
 			frame->sv_87.sv_env.en_tw = 0xffff;
 		}
+		l->l_md.md_flags |= MDL_USEDFPU;
 	}
 
 	if (i386_use_fxsave) {
@@ -350,7 +345,13 @@ process_write_fpregs(struct lwp *l, const struct fpreg *regs)
 {
 	union savefpu *frame = process_fpframe(l);
 
-	pcu_discard(&fpu_ops, true);
+	if (l->l_md.md_flags & MDL_USEDFPU) {
+#if NNPX > 0
+		npxsave_lwp(l, false);
+#endif
+	} else {
+		l->l_md.md_flags |= MDL_USEDFPU;
+	}
 
 	if (i386_use_fxsave) {
 		struct save87 s87;
@@ -395,9 +396,13 @@ process_machdep_read_xmmregs(struct lwp *l, struct xmmregs *regs)
 	if (i386_use_fxsave == 0)
 		return (EINVAL);
 
-	if (pcu_used_p(&fpu_ops)) {
+	if (l->l_md.md_flags & MDL_USEDFPU) {
 #if NNPX > 0
-		pcu_save(&fpu_ops);
+		struct pcb *pcb = lwp_getpcb(l);
+
+		if (pcb->pcb_fpcpu != NULL) {
+			npxsave_lwp(l, true);
+		}
 #endif
 	} else {
 		/*
@@ -405,15 +410,17 @@ process_machdep_read_xmmregs(struct lwp *l, struct xmmregs *regs)
 		 * The initial control word was already set by setregs(),
 		 * so save it temporarily.
 		 */
-		uint32_t mxcsr = frame->sv_xmm.sv_env.en_mxcsr;
-		uint16_t cw = frame->sv_xmm.sv_env.en_cw;
+		uint32_t mxcsr = frame->sv_xmm.sv_env.fx_mxcsr;
+		uint16_t cw = frame->sv_xmm.sv_env.fx_cw;
 
 		/* XXX Don't zero XMM regs? */
 		memset(&frame->sv_xmm, 0, sizeof(frame->sv_xmm));
-		frame->sv_xmm.sv_env.en_cw = cw;
-		frame->sv_xmm.sv_env.en_mxcsr = mxcsr;
-		frame->sv_xmm.sv_env.en_sw = 0x0000;
-		frame->sv_xmm.sv_env.en_tw = 0x00;
+		frame->sv_xmm.sv_env.fx_cw = cw;
+		frame->sv_xmm.sv_env.fx_mxcsr = mxcsr;
+		frame->sv_xmm.sv_env.fx_sw = 0x0000;
+		frame->sv_xmm.sv_env.fx_tw = 0x00;
+
+		l->l_md.md_flags |= MDL_USEDFPU;  
 	}
 
 	memcpy(regs, &frame->sv_xmm, sizeof(*regs));
@@ -428,8 +435,18 @@ process_machdep_write_xmmregs(struct lwp *l, struct xmmregs *regs)
 	if (i386_use_fxsave == 0)
 		return (EINVAL);
 
-	pcu_save(&fpu_ops); /* keep i387 regs */
-	pcu_discard(&fpu_ops, true);
+	if (l->l_md.md_flags & MDL_USEDFPU) {
+#if NNPX > 0
+		struct pcb *pcb = lwp_getpcb(l);
+
+		/* If we were using the FPU, drop it. */
+		if (pcb->pcb_fpcpu != NULL) {
+			npxsave_lwp(l, false);
+		}
+#endif
+	} else {
+		l->l_md.md_flags |= MDL_USEDFPU;
+	}
 
 	memcpy(&frame->sv_xmm, regs, sizeof(*regs));
 	return (0);

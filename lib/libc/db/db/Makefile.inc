@@ -3,4 +3,4 @@
 
 .PATH: ${.CURDIR}/db/db
 
-SRCS+=	db.c
+SRCS+=	db.c dbfile.c

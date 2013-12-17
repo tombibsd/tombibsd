@@ -46,7 +46,7 @@ _C_LABEL(ixm1200_start):
 	/*
 	 * Disable IRQ and FIQ
 	 */
-	mrs     r3, cpsr_all
+	mrs     r3, cpsr
 	orr     r1, r3, #(I32_bit | F32_bit)
 	msr     cpsr_all, r1
 

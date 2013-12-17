@@ -661,8 +661,6 @@ vs_resolve(SCR *sp, SCR *csp, int forcewait)
 	gp = sp->gp;
 	wp = sp->wp;
 	vip = VIP(sp);
-	if (vip == NULL)
-		return 0;
 	if (csp == NULL)
 		csp = sp;
 

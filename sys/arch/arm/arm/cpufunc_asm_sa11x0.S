@@ -79,7 +79,7 @@ ENTRY(sa11x0_cpu_sleep)
 	 * re-enable clock switching before servicing interrupts.
 	 */
 
-	mrs	r3, cpsr_all						/* 6 */
+	mrs	r3, cpsr						/* 6 */
 	orr	r2, r3, #(I32_bit|F32_bit)				/* 7 */
 	msr	cpsr_all, r2						/* 8 */
 

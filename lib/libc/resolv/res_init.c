@@ -269,7 +269,7 @@ __res_vinit(res_state statp, int preinit) {
 		 * Examples and applications exist which do not check
 		 * our return code.  Furthermore several applications
 		 * simply call us to get the systems domainname.  So
-		 * rather then immediately fail here we store the
+		 * rather than immediately fail here we store the
 		 * failure, which is returned later, in h_errno.  And
 		 * prevent the collection of 'nameserver' information
 		 * by setting maxns to 0.  Thus applications that fail

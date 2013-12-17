@@ -66,7 +66,7 @@ typedef uint32_t blist_bitmap_t;
 typedef uint32_t blist_blkno_t;
 
 /*
- * note: currently use BLIST_NONE as an absolute value rather then 
+ * note: currently use BLIST_NONE as an absolute value rather than 
  * a flag bit.
  */
 

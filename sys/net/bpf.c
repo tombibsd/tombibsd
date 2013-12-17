@@ -356,7 +356,7 @@ bpf_detachd(struct bpf_d *d)
 	 * If so, turn it off.
 	 */
 	if (d->bd_promisc) {
-		int error;
+		int error __diagused;
 
 		d->bd_promisc = 0;
 		/*
@@ -367,8 +367,10 @@ bpf_detachd(struct bpf_d *d)
 		 * if we don't get an unexpected error.
 		 */
   		error = ifpromisc(bp->bif_ifp, 0);
-		if (error && error != EINVAL)
-			panic("%s: ifpromisc failed: %d", __func__, error);
+#ifdef DIAGNOSTIC
+		if (error)
+			printf("%s: ifpromisc failed: %d", __func__, error);
+#endif
 	}
 	/* Remove d from the interface's descriptor list. */
 	p = &bp->bif_dlist;

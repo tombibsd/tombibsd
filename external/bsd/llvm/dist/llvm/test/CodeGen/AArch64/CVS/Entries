@@ -64,7 +64,7 @@
 /logical_shifted_reg.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /movw-consts.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /movw-shift-encoding.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
-/neon-2velem.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
+/neon-2velem.ll/1.1.1.2/Tue Dec 17 04:10:40 2013/-kk/
 /neon-3vdiff.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /neon-aba-abd.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /neon-across.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
@@ -72,10 +72,11 @@
 /neon-add-sub.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /neon-bitcast.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /neon-bitwise-instructions.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
+/neon-bsl.ll/1.1.1.1/Fri Dec  6 23:19:14 2013/-kk/
 /neon-compare-instructions.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /neon-copy.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /neon-crypto.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
-/neon-diagnostics.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
+/neon-diagnostics.ll/1.1.1.2/Tue Dec 17 04:10:40 2013/-kk/
 /neon-extract.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /neon-facge-facgt.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /neon-fma.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
@@ -98,9 +99,11 @@
 /neon-scalar-by-elem-fma.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /neon-scalar-by-elem-mul.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /neon-scalar-compare.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
-/neon-scalar-copy.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
-/neon-scalar-cvt.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
+/neon-scalar-copy.ll/1.1.1.2/Tue Dec 17 04:10:40 2013/-kk/
+/neon-scalar-cvt.ll/1.1.1.2/Tue Dec 17 04:10:40 2013/-kk/
 /neon-scalar-extract-narrow.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
+/neon-scalar-fabd.ll/1.1.1.1/Fri Dec  6 23:19:14 2013/-kk/
+/neon-scalar-fcvt.ll/1.1.1.1/Fri Dec  6 23:19:14 2013/-kk/
 /neon-scalar-fp-compare.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /neon-scalar-mul.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /neon-scalar-neg.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
@@ -110,7 +113,7 @@
 /neon-scalar-saturating-add-sub.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /neon-scalar-saturating-rounding-shift.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /neon-scalar-saturating-shift.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
-/neon-scalar-shift-imm.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
+/neon-scalar-shift-imm.ll/1.1.1.2/Tue Dec 17 04:10:40 2013/-kk/
 /neon-scalar-shift.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /neon-shift-left-long.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /neon-shift.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/

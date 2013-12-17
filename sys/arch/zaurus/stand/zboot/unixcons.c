@@ -175,7 +175,7 @@ awaitkey(int timeout, int tell)
 			for (j = 0; j < len; j++)
 				numbuf[len + j] = '\b';
 			numbuf[len + j] = '\0';
-			printf(numbuf);
+			printf("%s", numbuf);
 		}
 		c = common_getc(infd, 1);
 		if (c == 0)

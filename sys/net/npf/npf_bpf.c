@@ -157,6 +157,6 @@ npf_cop_table(bpf_ctx_t *bc, bpf_args_t *args, uint32_t A)
 	if ((t = npf_tableset_getbyid(tblset, tid)) == NULL) {
 		return 0;
 	}
-	addr = (A & SRC_FLAG_BIT) ? npc->npc_srcip : npc->npc_dstip;
+	addr = npc->npc_ips[(A & SRC_FLAG_BIT) ? NPF_SRC : NPF_DST];
 	return npf_table_lookup(t, npc->npc_alen, addr) == 0;
 }

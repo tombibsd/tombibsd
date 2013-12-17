@@ -74,8 +74,6 @@
  * Some other defines, dealing with values returned by cpuid.
  */
 
-#define CPU_MAXMODEL	15	/* Models within family range 0-15 */
-#define CPU_DEFMODEL	16	/* Value for unknown model -> default  */
 #define CPU_MINFAMILY	 4	/* Lowest that cpuid can return (486) */
 #define CPU_MAXFAMILY	 7	/* Highest consecutive # we know (fake P4) */
 #define CPU_FAMILY_P4	15	/* Family number for Pentium 4 */

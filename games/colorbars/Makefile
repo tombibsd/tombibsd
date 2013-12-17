@@ -1,6 +1,5 @@
 # $NetBSD$
 
-WARNS?=	4
 PROG=  colorbars
 MAN=   colorbars.6
 DPADD=	${LIBCURSES} ${LIBTERMINFO}

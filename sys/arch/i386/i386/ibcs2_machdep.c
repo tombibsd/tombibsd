@@ -69,7 +69,7 @@ ibcs2_setregs(struct lwp *l, struct exec_package *epp, vaddr_t stack)
 
 	setregs(l, epp, stack);
 	if (i386_use_fxsave)
-		pcb->pcb_savefpu.sv_xmm.sv_env.en_cw = __iBCS2_NPXCW__;
+		pcb->pcb_savefpu.sv_xmm.sv_env.fx_cw = __iBCS2_NPXCW__;
 	else
 		pcb->pcb_savefpu.sv_87.sv_env.en_cw = __iBCS2_NPXCW__;
 	tf = l->l_md.md_regs;

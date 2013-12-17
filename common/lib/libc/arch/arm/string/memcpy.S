@@ -7,3 +7,7 @@
 #else
 #include "memcpy_xscale.S"
 #endif
+
+#if defined(__ARM_EABI__)
+STRONG_ALIAS(__aeabi_memcpy, memcpy)
+#endif

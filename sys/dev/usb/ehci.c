@@ -839,9 +839,26 @@ ehci_check_qh_intr(ehci_softc_t *sc, struct ehci_xfer *ex)
 			/* Any kind of error makes the xfer done. */
 			if (status & EHCI_QTD_HALTED)
 				goto done;
-			/* We want short packets, and it is short: it's done */
-			if (EHCI_QTD_GET_BYTES(status) != 0)
+			/* Handle short packets */
+			if (EHCI_QTD_GET_BYTES(status) != 0) {
+				usbd_pipe_handle pipe = ex->xfer.pipe;
+				usb_endpoint_descriptor_t *ed =
+				    pipe->endpoint->edesc;
+				uint8_t xt = UE_GET_XFERTYPE(ed->bmAttributes);
+
+				/*
+				 * If we get here for a control transfer then
+				 * we need to let the hardware complete the
+				 * status phase.  That is, we're not done
+				 * quite yet.
+				 *
+				 * Otherwise, we're done.
+				 */
+				if (xt == UE_CONTROL) {
+					break;
+				}
 				goto done;
+			}
 		}
 		DPRINTFN(12, ("ehci_check_intr: ex=%p std=%p still active\n",
 			      ex, ex->sqtdstart));
@@ -3296,7 +3313,7 @@ ehci_device_ctrl_done(usbd_xfer_handle xfer)
 
 	DPRINTFN(10,("ehci_ctrl_done: xfer=%p\n", xfer));
 
-	KASSERT(mutex_owned(&sc->sc_lock));
+	KASSERT(sc->sc_bus.use_polling || mutex_owned(&sc->sc_lock));
 
 #ifdef DIAGNOSTIC
 	if (!(xfer->rqflags & URQ_REQUEST)) {

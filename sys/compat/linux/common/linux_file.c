@@ -144,7 +144,7 @@ linux_sys_creat(struct lwp *l, const struct linux_sys_creat_args *uap, register_
 {
 	/* {
 		syscallarg(const char *) path;
-		syscallarg(int) mode;
+		syscallarg(linux_umode_t) mode;
 	} */
 	struct sys_open_args oa;
 
@@ -193,7 +193,7 @@ linux_sys_open(struct lwp *l, const struct linux_sys_open_args *uap, register_t 
 	/* {
 		syscallarg(const char *) path;
 		syscallarg(int) flags;
-		syscallarg(int) mode;
+		syscallarg(linux_umode_t) mode;
 	} */
 	int error, fl;
 	struct sys_open_args boa;
@@ -215,9 +215,10 @@ int
 linux_sys_openat(struct lwp *l, const struct linux_sys_openat_args *uap, register_t *retval)
 {
 	/* {
+		syscallarg(int) fd;
 		syscallarg(const char *) path;
 		syscallarg(int) flags;
-		syscallarg(int) mode;
+		syscallarg(linux_umode_t) mode;
 	} */
 	int error, fl;
 	struct sys_openat_args boa;

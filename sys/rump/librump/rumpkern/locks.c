@@ -73,6 +73,9 @@ static lockops_t rw_lockops = {
 #define UNLOCKED(a, b)
 #endif
 
+/* not used, but need the symbols for pointer comparisons */
+syncobj_t mutex_syncobj, rw_syncobj;
+
 /*
  * We map locks to pthread routines.  The difference between kernel
  * and rumpuser routines is that while the kernel uses static

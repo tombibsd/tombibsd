@@ -179,3 +179,7 @@ ENTRY(memcmp)
 	RET
 #endif
 END(memcmp)
+
+#if defined(__ARM_EABI__)
+STRONG_ALIAS(__aeabi_memcmp, memcmp)
+#endif

@@ -48,6 +48,11 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/errno.h>
 #include <sys/systm.h>
 
+#ifdef __x86_64__
+#include <machine/fpu.h>
+#else
+#include <machine/npx.h>
+#endif /* __x86_64__ */
 #include <machine/frame.h>
 #include <machine/segments.h>
 
@@ -64,6 +69,7 @@ extern void ddb_ipi(int, struct trapframe);
 #endif /* __x86_64__ */
 
 static void xen_ipi_halt(struct cpu_info *, struct intrframe *);
+static void xen_ipi_synch_fpu(struct cpu_info *, struct intrframe *);
 static void xen_ipi_ddb(struct cpu_info *, struct intrframe *);
 static void xen_ipi_xcall(struct cpu_info *, struct intrframe *);
 static void xen_ipi_hvcb(struct cpu_info *, struct intrframe *);
@@ -71,7 +77,7 @@ static void xen_ipi_hvcb(struct cpu_info *, struct intrframe *);
 static void (*ipifunc[XEN_NIPIS])(struct cpu_info *, struct intrframe *) =
 {	/* In order of priority (see: xen/include/intrdefs.h */
 	xen_ipi_halt,
-	NULL,
+	xen_ipi_synch_fpu,
 	xen_ipi_ddb,
 	xen_ipi_xcall,
 	xen_ipi_hvcb
@@ -208,6 +214,19 @@ xen_ipi_halt(struct cpu_info *ci, struct intrframe *intrf)
 		panic("vcpu%" PRIuCPUID "shutdown failed.\n", ci->ci_cpuid);
 	}
 
+}
+
+static void
+xen_ipi_synch_fpu(struct cpu_info *ci, struct intrframe *intrf)
+{
+	KASSERT(ci != NULL);
+	KASSERT(intrf != NULL);
+
+#ifdef __x86_64__
+	fpusave_cpu(true);
+#else
+	npxsave_cpu(true);
+#endif /* __x86_64__ */
 }
 
 static void

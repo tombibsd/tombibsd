@@ -14,7 +14,7 @@
 /cgtworeg.h/1.5/Tue May 20 13:38:00 2003/-kk/
 /cpu.h/1.95/Thu Oct 24 10:28:57 2013/-kk/
 /cpuconf.h/1.4/Sun Dec 11 12:19:05 2005/-kk/
-/ctlreg.h/1.28/Sun Dec 11 12:19:05 2005/-kk/
+/ctlreg.h/1.29/Tue Dec 17 04:13:29 2013/-kk/
 /db_machdep.h/1.26/Thu May 26 15:34:13 2011/-kk/
 /disklabel.h/1.6/Tue Aug 30 12:39:58 2011/-kk/
 /eeprom.h/1.9/Mon Apr 28 20:23:36 2008/-kk/

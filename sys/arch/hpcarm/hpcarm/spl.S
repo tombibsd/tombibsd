@@ -52,7 +52,7 @@ Lcurrent_spl_level:
 ENTRY(raisespl)
 	stmfd	sp!, {r4}
 	/* Disable interrupts */
-	mrs	r4, cpsr_all
+	mrs	r4, cpsr
 	orr	r1, r4,  #(I32_bit)
 	msr	cpsr_all, r1
 
@@ -75,7 +75,7 @@ raisespl_exit:
 ENTRY(lowerspl)
 	stmfd	sp!, {r4}
 	/* Disable interrupts */
-	mrs	r4, cpsr_all
+	mrs	r4, cpsr
 	orr	r1, r4,  #(I32_bit)
 	msr	cpsr_all, r1
 
@@ -104,7 +104,7 @@ lowerspl_exit:
 ENTRY(splx)
 	stmfd	sp!, {r4}
 	/* Disable interrupts */
-	mrs	r4, cpsr_all
+	mrs	r4, cpsr
 	orr	r1, r4,  #(I32_bit)
 	msr	cpsr_all, r1
 

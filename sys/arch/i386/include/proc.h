@@ -52,6 +52,7 @@ struct mdlwp {
 };
 
 /* md_flags */
+#define	MDL_USEDFPU	0x0001	/* has used the FPU */
 #define	MDL_IOPL	0x0002	/* XEN: i/o privilege */
 
 struct mdproc {

@@ -1033,7 +1033,6 @@ v_dtoh(SCR *sp)
 			_HMAP(tsp) = NULL;
 		}
 		TAILQ_REMOVE(&wp->scrq, tsp, q);
-		TAILQ_NEXT(tsp, q) = NULL;
 		TAILQ_INSERT_TAIL(&gp->hq, tsp, q);
 		/* XXXX Change if hidden screens per window */
 		tsp->wp = 0;
@@ -1042,7 +1041,6 @@ v_dtoh(SCR *sp)
 
 	/* Move current screen back to the display queue. */
 	TAILQ_REMOVE(&gp->hq, sp, q);
-	TAILQ_NEXT(sp, q) = NULL;
 	TAILQ_INSERT_TAIL(&wp->scrq, sp, q);
 	sp->wp = wp;
 

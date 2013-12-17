@@ -68,3 +68,7 @@ memcmp(const void *s1, const void *s2, size_t n)
 	}
 	return (0);
 }
+
+#if defined(__ARM_EABI__)
+__strong_alias(__aeabi_memcmp, memcmp)
+#endif

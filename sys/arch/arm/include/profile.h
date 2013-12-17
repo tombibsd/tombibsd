@@ -39,13 +39,7 @@
  */
 
 #define MCOUNT_ASM_NAME "__mcount"
-#ifdef __PIC__
-#define	PLTSYM		"(PLT)"
-#endif
-
-#ifndef PLTSYM
 #define	PLTSYM
-#endif
 
 #if !defined(__ARM_EABI__)
 #define	MCOUNT								\

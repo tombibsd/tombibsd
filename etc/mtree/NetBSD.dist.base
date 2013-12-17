@@ -1317,6 +1317,7 @@
 ./var/run/lwresd		mode=0775 gname=named
 ./var/run/named			mode=0775 gname=named
 ./var/rwho			uname=_rwhod gname=_rwhod
+./var/shm			mode=01777
 ./var/spool
 ./var/spool/ftp
 ./var/spool/ftp/bin

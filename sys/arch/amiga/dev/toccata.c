@@ -181,7 +181,7 @@ const struct audio_hw_if audiocs_hw_if = {
 	toccata_close,
 	0,	/*
 		 * XXX toccata_drain could be written:
-		 * sleep for play interrupt. This loses less then 512 bytes of
+		 * sleep for play interrupt. This loses less than 512 bytes of
 		 * sample data, otherwise up to 1024.
 		 */
 	ad1848_query_encoding,

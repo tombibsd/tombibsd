@@ -20,3 +20,4 @@ is taken as the current.
 1.14:	Make 3 attempts at BOOTP/DHCP for to allow for bridges and clear prior data read
 1.15:	Properly close the firmware handle before starting the kernel
 1.16:	Add support to boot with root on cd9660
+1.17:	Add support for sun4v architecture

@@ -188,16 +188,6 @@ ASM_SRCS_LIST= \
 	divrem_2.asm		mpn/powerpc32/divrem_2.asm \
 	sub_n.asm		mpn/powerpc32/aors_n.asm \
 
-gen-trialdivtab: gen-trialdivtab.c
-	${HOST_CC} -o ${.OBJDIR}/gen-trialdivtab ${.ALLSRC} -lm
-
-# XXX
 GMP_LIMB_BITS=32
-
-trialdiv.c: trialdivtab.h
-trialdivtab.h: gen-trialdivtab
-	${.OBJDIR}/gen-trialdivtab $(GMP_LIMB_BITS) 8000 > ${.OBJDIR}/trialdivtab.h
-
-CLEANFILES+=	trialdivtab.h
 
 M4FLAGS= -DPIC

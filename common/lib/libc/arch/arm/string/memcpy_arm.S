@@ -31,10 +31,6 @@
 
 #include <machine/asm.h>
 
-#if defined(__ARM_EABI__)
-STRONG_ALIAS(__aeabi_memcpy, memcpy)
-#endif
-
 /*
  * This is one fun bit of code ...
  * Some easy listening music is suggested while trying to understand this

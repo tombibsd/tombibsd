@@ -152,7 +152,7 @@ elf32bsdboot(void)
 			esymp = (vaddr_t *)phdr[i].p_vaddr;
 	}
 
-	__asm volatile ("mrs %0, cpsr_all" : "=r" (cpsr));
+	__asm volatile ("mrs %0, cpsr" : "=r" (cpsr));
 	cpsr |= 0xc0;  /* set FI */
 	__asm volatile ("msr cpsr_all, %0" :: "r" (cpsr));
 

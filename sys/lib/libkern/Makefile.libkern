@@ -80,7 +80,7 @@ SRCS+=	memset.c
 .endif
 
 SRCS+=	popcount32.c popcount64.c
-SRCS+=	strtoul.c strtoll.c strtoull.c strtoumax.c
+SRCS+=	strtoul.c strtoll.c strtoull.c strtoimax.c strtoumax.c
 
 SRCS+=	scanc.c skpc.c
 SRCS+=	random.c

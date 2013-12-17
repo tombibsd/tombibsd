@@ -53,6 +53,8 @@ NESTED_NOPROFILE(__start, CALLFRAME_SIZ, ra)
 	SETUP_GP64(t3, __start)
 	move	a0, a1		/* cleanup */
 	move	a1, a2		/* Obj_Entry */
-	move	a2, a3		/* ps_strings */
-	j	_C_LABEL(___start)
+	PTR_L	t9,%call16(_C_LABEL(___start))(gp)
+	 move	a2, a3		/* ps_strings */
+	.reloc  1f,R_MIPS_JALR,___start
+1:	jr	t9
 END(__start)

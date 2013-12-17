@@ -40,10 +40,10 @@ ENTRY_NP(__sync_fetch_and_xor_8)
 	mov	r3, r2
 	mov	r2, r1
 #endif
-1:	ldrexd	r0, [ip]		/* load old value */
+1:	ldrexd	r0, r1, [ip]		/* load old value */
 	eors	r4, r0, r2		/* calculate new value */
 	eors	r5, r1, r3		/* calculate new value */
-	strexd	r6, r4, [ip]		/* try to store */
+	strexd	r6, r4, r5, [ip]	/* try to store */
 	cmp	r6, #0			/*   succeed? */
 	bne	1b			/*     no, try again */
 #ifdef _ARM_ARCH_7

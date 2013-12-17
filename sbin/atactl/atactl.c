@@ -577,7 +577,7 @@ static const struct {
 	{ 127, "Abort off-line test" },
 	{ 129, "Short captive" },
 	{ 130, "Extended captive" },
-	{ 256, "Unknown test" }, /* larger then uint8_t */
+	{ 256, "Unknown test" }, /* larger than uint8_t */
 	{ 0, NULL }
 };
 

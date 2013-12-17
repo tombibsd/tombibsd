@@ -233,14 +233,12 @@ editor(WIN *wp, int argc, char **argv)
 	 */
 	if (screen_init(gp, NULL, &sp)) {
 		if (sp != NULL) {
-			TAILQ_NEXT(sp, q) = NULL;
 			TAILQ_INSERT_HEAD(&wp->scrq, sp, q);
 			sp->wp = wp;
 		}
 		goto err;
 	}
 	F_SET(sp, SC_EX);
-	TAILQ_NEXT(sp, q) = NULL;
 	TAILQ_INSERT_HEAD(&wp->scrq, sp, q);
 	sp->wp = wp;
 

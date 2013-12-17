@@ -6,7 +6,7 @@
 /chfs_ihash.c/1.2/Fri Oct 19 12:44:39 2012/-kk/
 /chfs_inode.h/1.7/Thu Oct 24 10:28:58 2013/-kk/
 /chfs_malloc.c/1.4/Fri Oct 19 12:44:39 2012/-kk/
-/chfs_nodeops.c/1.3/Fri Oct 19 12:44:39 2012/-kk/
+/chfs_nodeops.c/1.4/Tue Dec 17 04:13:40 2013/-kk/
 /chfs_pool.c/1.2/Tue Feb 28 02:48:39 2012/-kk/
 /chfs_pool.h/1.1/Thu Nov 24 15:51:31 2011/-kk/
 /chfs_readinode.c/1.8/Sun Oct 27 08:20:07 2013/-kk/

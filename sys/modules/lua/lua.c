@@ -515,7 +515,7 @@ lua_alloc(void *ud, void *ptr, size_t osize, size_t nsize)
 	} else {
 		nptr = kmem_alloc(nsize, KM_SLEEP);
 		if (ptr != NULL) {
-			memcpy(nptr, ptr, osize);
+			memcpy(nptr, ptr, osize < nsize ? osize : nsize);
 			kmem_free(ptr, osize);
 		}
 	}

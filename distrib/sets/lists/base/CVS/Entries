@@ -3,7 +3,7 @@
 /ad.m68000/1.2/Wed Mar 10 23:13:09 2010/-kk/
 /ad.m68k.shl/1.7/Thu Aug 12 16:07:07 2004/-kk/
 /ad.m68k/1.18/Wed Mar 10 23:13:09 2010/-kk/
-/ad.mips/1.23/Mon Nov 18 05:28:13 2013/-kk/
+/ad.mips/1.24/Tue Dec 17 04:10:16 2013/-kk/
 /ad.powerpc/1.1/Sat Feb 14 22:46:05 2009/-kk/
 /md.acorn32/1.13/Thu Oct 24 10:28:41 2013/-kk/
 /md.alpha/1.40/Thu Jul 28 20:30:07 2011/-kk/
@@ -48,7 +48,7 @@
 /md.sun3/1.46/Sat Feb 14 11:33:56 2009/-kk/
 /md.vax/1.28/Sat Nov 29 17:57:34 2008/-kk/
 /md.x68k/1.46/Thu Oct 24 10:28:41 2013/-kk/
-/mi/1.1050/Tue Dec 17 03:59:02 2013/-kk/
+/mi/1.1051/Tue Dec 17 04:10:16 2013/-kk/
 /module.mi/1.13/Fri Dec 11 15:22:33 2009/-kk/
 /rescue.ad.arm/1.3/Thu Oct 24 10:28:41 2013/-kk/
 /rescue.ad.m68k.shl/1.2/Sun Jan 11 10:24:59 2004/-kk/

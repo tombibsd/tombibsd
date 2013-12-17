@@ -19,7 +19,7 @@
 /init_main.c/1.454/Thu Oct 24 10:28:58 2013/-kk/
 /init_sysctl.c/1.198/Thu Oct 24 10:28:58 2013/-kk/
 /init_sysctl_base.c/1.1/Wed Sep 16 15:03:56 2009/-kk/
-/init_sysent.c/1.275/Thu Oct 24 10:28:58 2013/-kk/
+/init_sysent.c/1.279/Tue Dec 17 04:13:38 2013/-kk/
 /kern_acct.c/1.94/Thu Oct 24 10:28:58 2013/-kk/
 /kern_auth.c/1.73/Thu Oct 24 10:28:58 2013/-kk/
 /kern_cctr.c/1.9/Sat Jan  3 03:31:23 2009/-kk/
@@ -41,7 +41,8 @@
 /kern_idle.c/1.25/Sun Jan 29 22:55:40 2012/-kk/
 /kern_ksyms.c/1.70/Thu Oct 24 10:28:58 2013/-kk/
 /kern_kthread.c/1.39/Sat Sep  1 00:26:37 2012/-kk/
-/kern_ktrace.c/1.163/Thu Oct 24 10:28:58 2013/-kk/
+/kern_ktrace.c/1.164/Tue Dec 17 04:13:38 2013/-kk/
+/kern_ktrace_vfs.c/1.1/Mon Dec  9 16:45:23 2013/-kk/
 /kern_lock.c/1.155/Thu Oct 24 10:28:58 2013/-kk/
 /kern_lwp.c/1.177/Tue Dec 17 04:05:10 2013/-kk/
 /kern_malloc.c/1.142/Mon Apr 30 22:51:27 2012/-kk/
@@ -69,10 +70,10 @@
 /kern_sleepq.c/1.48/Thu Oct 24 10:28:58 2013/-kk/
 /kern_softint.c/1.40/Thu Oct 24 10:28:58 2013/-kk/
 /kern_ssp.c/1.6/Sat Nov 19 22:51:25 2011/-kk/
-/kern_stub.c/1.37/Sun Feb 19 21:06:54 2012/-kk/
-/kern_subr.c/1.213/Sun Jun 10 17:05:18 2012/-kk/
+/kern_stub.c/1.38/Tue Dec 17 04:13:38 2013/-kk/
+/kern_subr.c/1.214/Tue Dec 17 04:13:38 2013/-kk/
 /kern_synch.c/1.307/Thu Oct 24 07:31:55 2013/-kk/
-/kern_syscall.c/1.7/Sat May  5 19:37:37 2012/-kk/
+/kern_syscall.c/1.8/Tue Dec 17 04:13:38 2013/-kk/
 /kern_sysctl.c/1.243/Thu Oct 24 10:28:58 2013/-kk/
 /kern_tc.c/1.46/Thu Oct 24 10:28:58 2013/-kk/
 /kern_time.c/1.179/Thu Oct 24 10:28:58 2013/-kk/
@@ -84,11 +85,11 @@
 /kern_verifiedexec.c/1.131/Tue Dec 17 04:05:10 2013/-kk/
 /kern_xxx.c/1.72/Thu Sep  1 18:25:44 2011/-kk/
 /kgdb_stub.c/1.26/Thu Oct 24 10:28:58 2013/-kk/
-/makesyscalls.sh/1.134/Thu Oct 24 10:28:58 2013/-kk/
+/makesyscalls.sh/1.139/Tue Dec 17 04:13:38 2013/-kk/
 /sched_4bsd.c/1.28/Fri Dec  2 12:29:35 2011/-kk/
 /sched_m2.c/1.30/Fri Sep 16 01:03:52 2011/-kk/
 /subr_autoconf.c/1.229/Tue Oct 29 08:21:47 2013/-kk/
-/subr_blist.c/1.11/Thu Oct 24 10:28:58 2013/-kk/
+/subr_blist.c/1.12/Tue Dec 17 04:13:38 2013/-kk/
 /subr_bufq.c/1.20/Thu Sep 17 09:54:27 2009/-kk/
 /subr_callback.c/1.7/Tue Nov 24 20:11:50 2009/-kk/
 /subr_copy.c/1.1/Wed Nov  4 16:54:00 2009/-kk/
@@ -147,9 +148,9 @@
 /sys_sig.c/1.41/Thu Oct 24 10:28:58 2013/-kk/
 /sys_socket.c/1.65/Tue Dec 20 23:56:28 2011/-kk/
 /sys_syscall.c/1.10/Sat May  5 19:44:02 2012/-kk/
-/syscalls.c/1.266/Thu Oct 24 10:28:58 2013/-kk/
+/syscalls.c/1.270/Tue Dec 17 04:13:38 2013/-kk/
 /syscalls.conf/1.19/Fri Aug  3 12:41:13 2012/-kk/
-/syscalls.master/1.264/Thu Oct 24 10:28:58 2013/-kk/
+/syscalls.master/1.265/Tue Dec 17 04:13:38 2013/-kk/
 /sysv_ipc.c/1.24/Tue Mar 13 18:40:53 2012/-kk/
 /sysv_msg.c/1.64/Thu Oct 24 10:28:58 2013/-kk/
 /sysv_sem.c/1.89/Tue Mar 13 18:40:54 2012/-kk/
@@ -185,7 +186,7 @@
 /vfs_subr.c/1.441/Tue Dec 17 04:05:10 2013/-kk/
 /vfs_syscalls.c/1.471/Tue Dec 17 04:05:10 2013/-kk/
 /vfs_trans.c/1.29/Tue Dec 17 04:05:10 2013/-kk/
-/vfs_vnode.c/1.27/Tue Dec 17 04:05:10 2013/-kk/
+/vfs_vnode.c/1.30/Tue Dec 17 04:13:38 2013/-kk/
 /vfs_vnops.c/1.186/Mon Nov 12 11:00:07 2012/-kk/
 /vfs_wapbl.c/1.58/Thu Oct 24 10:28:58 2013/-kk/
 /vfs_xattr.c/1.31/Tue May  1 07:48:25 2012/-kk/
