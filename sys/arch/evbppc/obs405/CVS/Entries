@@ -5,7 +5,7 @@
 /obs266_machdep.c/1.20/Wed Jun 22 18:06:32 2011/-kk/
 /obs405_autoconf.c/1.6/Sun Jul 29 18:05:42 2012/-kk/
 /obs405_machdep.c/1.6/Sat Jun 18 06:44:26 2011/-kk/
-/obs600_autoconf.c/1.6/Tue Jan 10 12:17:20 2012/-kk/
+/obs600_autoconf.c/1.7/Tue Dec 17 04:05:02 2013/-kk/
 /obs600_locore.S/1.5/Mon Dec 12 11:28:04 2011/-kk/
 /obs600_machdep.c/1.9/Thu Jul  5 02:56:40 2012/-kk/
 /rbus_machdep.c/1.9/Mon Apr  9 14:44:01 2012/-kk/

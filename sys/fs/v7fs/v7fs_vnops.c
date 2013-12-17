@@ -41,7 +41,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/vnode.h>
 #include <sys/namei.h>
 #include <sys/dirent.h>
-#include <sys/malloc.h>
+#include <sys/kmem.h>
 #include <sys/lockf.h>
 #include <sys/unistd.h>
 #include <sys/fcntl.h>
@@ -63,9 +63,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #else
 #define	DPRINTF(arg...)		((void)0)
 #endif
-
-MALLOC_JUSTDEFINE(M_V7FS_VNODE, "v7fs vnode", "v7fs vnode structures");
-MALLOC_DECLARE(M_V7FS);
 
 int v7fs_vnode_reload(struct mount *, struct vnode *);
 
@@ -983,7 +980,7 @@ v7fs_readdir(void *v)
 		DPRINTF("uio buffer too small\n");
 		return ENOMEM;
 	}
-	dp = malloc(sizeof(*dp), M_V7FS, M_WAITOK | M_ZERO);
+	dp = kmem_zalloc(sizeof(*dp), KM_SLEEP);
 	arg.cnt = 0;
 	arg.dp = dp;
 	arg.uio = uio;
@@ -996,7 +993,7 @@ v7fs_readdir(void *v)
 	if (error < 0)
 		error = 0;
 
-	free(dp, M_V7FS);
+	kmem_free(dp, sizeof(*dp));
 
 	return error;
 }

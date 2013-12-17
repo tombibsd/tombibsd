@@ -28,6 +28,12 @@
 #ifndef _MVSOC_INTR_H_
 #define _MVSOC_INTR_H_
 
+#include "opt_mvsoc.h"
+
+#if defined(ARMADAXP)
+#define __HAVE_PIC_SET_PRIORITY
+#endif
+
 #define ARM_IRQ_HANDLER	_C_LABEL(mvsoc_irq_handler)
 
 #ifndef _LOCORE

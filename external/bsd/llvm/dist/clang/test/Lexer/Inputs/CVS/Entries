@@ -1,0 +1,10 @@
+/bad-header-guard-defined.h/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
+/bad-header-guard.h/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
+/different-define.h/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
+/good-header-guard.h/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
+/multiple.h/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
+/no-define.h/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
+/out-of-order-define.h/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
+/tokens-between-ifndef-and-define.h/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
+/unlikely-to-be-header-guard.h/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
+D

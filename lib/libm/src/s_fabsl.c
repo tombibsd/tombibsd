@@ -35,7 +35,7 @@ __RCSID("$NetBSD$");
  * fabsl(long double x)
  * This function returns the absolute value of its argumetn x, |x|.
  */
-#ifdef EXT_EXP_INFNAN
+#ifdef __HAVE_LONG_DOUBLE
 long double
 fabsl(long double x)
 {

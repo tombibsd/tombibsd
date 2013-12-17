@@ -221,13 +221,13 @@ npfctl_parse_fam_addr_mask(const char *addr, const char *mask,
 }
 
 npfvar_t *
-npfctl_parse_table_id(const char *id)
+npfctl_parse_table_id(const char *name)
 {
-	if (!npfctl_table_exists_p(id)) {
-		yyerror("table '%s' is not defined", id);
+	if (!npfctl_table_exists_p(name)) {
+		yyerror("table '%s' is not defined", name);
 		return NULL;
 	}
-	return npfvar_create_from_string(NPFVAR_TABLE, id);
+	return npfvar_create_from_string(NPFVAR_TABLE, name);
 }
 
 /*

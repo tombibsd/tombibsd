@@ -60,7 +60,13 @@ __isinfl(long double x)
 	u.extu_ld = x;
 
 	return u.extu_ext.ext_exp == EXT_EXP_INFNAN
-	    && u.extu_ext.ext_frach == 0 && u.extu_ext.ext_frachm == 0
-	    && u.extu_ext.ext_fraclm == 0 && u.extu_ext.ext_fracl == 0;
+	    && u.extu_ext.ext_frach == 0
+#if EXT_FRACHMBITS
+	    && u.extu_ext.ext_frachm == 0
+#endif
+#if EXT_FRACLMBITS
+	    && u.extu_ext.ext_fraclm == 0
+#endif
+	    && u.extu_ext.ext_fracl == 0;
 }
 #endif /* __HAVE_LONG_DOUBLE */

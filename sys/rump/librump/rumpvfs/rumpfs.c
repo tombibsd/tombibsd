@@ -1870,9 +1870,7 @@ rumpfs_mountroot()
 	if ((error = rumpfs_mountfs(mp)) != 0)
 		panic("mounting rootfs failed: %d", error);
 
-	mutex_enter(&mountlist_lock);
-	CIRCLEQ_INSERT_TAIL(&mountlist, mp, mnt_list);
-	mutex_exit(&mountlist_lock);
+	mountlist_append(mp);
 
 	error = set_statvfs_info("/", UIO_SYSSPACE, "rumpfs", UIO_SYSSPACE,
 	    mp->mnt_op->vfs_name, mp, curlwp);

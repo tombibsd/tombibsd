@@ -1,5 +1,5 @@
 /Makefile.inc/1.10/Wed Mar 21 05:47:53 2012/-kk/
-/Makefile/1.213/Thu Oct 24 10:28:59 2013/-kk/
+/Makefile/1.214/Tue Dec 17 04:05:18 2013/-kk/
 D/apply////
 D/apropos////
 D/asa////
@@ -131,7 +131,6 @@ D/nfsstat////
 D/nice////
 D/nl////
 D/nohup////
-D/nvi////
 D/pagesize////
 D/passwd////
 D/paste////

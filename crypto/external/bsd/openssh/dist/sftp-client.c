@@ -1069,7 +1069,8 @@ do_download(struct sftp_conn *conn, char *remote_path, char *local_path,
 			do_close(conn, handle, handle_len);
 			buffer_free(&msg);
 			free(handle);
-			close(local_fd);
+			if (local_fd != -1)
+				close(local_fd);
 			return -1;
 		}
 		offset = highwater = st.st_size;

@@ -570,8 +570,7 @@ lfs_flush(struct lfs *fs, int flags, int only_onefs)
 	} else {
 		locked_fakequeue_count = 0;
 		mutex_enter(&mountlist_lock);
-		for (mp = CIRCLEQ_FIRST(&mountlist); mp != (void *)&mountlist;
-		     mp = nmp) {
+		for (mp = TAILQ_FIRST(&mountlist); mp != NULL; mp = nmp) {
 			if (vfs_busy(mp, &nmp)) {
 				DLOG((DLOG_FLUSH, "lfs_flush: fs vfs_busy\n"));
 				continue;

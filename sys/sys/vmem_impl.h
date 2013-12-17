@@ -62,7 +62,7 @@
 
 typedef struct vmem_btag bt_t;
 
-CIRCLEQ_HEAD(vmem_seglist, vmem_btag);
+TAILQ_HEAD(vmem_seglist, vmem_btag);
 LIST_HEAD(vmem_freelist, vmem_btag);
 LIST_HEAD(vmem_hashlist, vmem_btag);
 
@@ -116,7 +116,7 @@ struct vmem {
 
 /* boundary tag */
 struct vmem_btag {
-	CIRCLEQ_ENTRY(vmem_btag) bt_seglist;
+	TAILQ_ENTRY(vmem_btag) bt_seglist;
 	union {
 		LIST_ENTRY(vmem_btag) u_freelist; /* BT_TYPE_FREE */
 		LIST_ENTRY(vmem_btag) u_hashlist; /* BT_TYPE_BUSY */

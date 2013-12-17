@@ -1,7 +1,7 @@
 #	$NetBSD$
 #
 
-GNUHOSTDIST=	${.CURDIR}/../../external/lgpl2/mpc/dist
+GNUHOSTDIST=	${.CURDIR}/../../external/lgpl3/mpc/dist
 
 CONFIGURE_ARGS+=	--with-gmp=${TOOLDIR:Q} \
 			--with-mpfr=${TOOLDIR:Q}

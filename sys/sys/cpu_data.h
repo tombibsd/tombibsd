@@ -71,7 +71,6 @@ struct cpu_data {
 	kcondvar_t	cpu_xcall;		/* cross-call support */
 	int		cpu_xcall_pending;	/* cross-call support */
 	lwp_t		*cpu_onproc;		/* bottom level LWP */
-	CIRCLEQ_ENTRY(cpu_info) cpu_qchain;	/* circleq of all CPUs */
 
 	cpuid_t		cpu_package_id;
 	cpuid_t		cpu_core_id;

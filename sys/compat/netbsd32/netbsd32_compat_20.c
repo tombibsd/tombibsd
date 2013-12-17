@@ -102,7 +102,7 @@ compat_20_netbsd32_getfsstat(struct lwp *l, const struct compat_20_netbsd32_getf
 	sfsp = SCARG_P32(uap, buf);
 	mutex_enter(&mountlist_lock);
 	count = 0;
-	for (mp = mountlist.cqh_first; mp != (void *)&mountlist; mp = nmp) {
+	for (mp = TAILQ_FIRST(&mountlist); mp != NULL; mp = nmp) {
 		if (vfs_busy(mp, &nmp)) {
 			continue;
 		}

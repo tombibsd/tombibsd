@@ -1,5 +1,5 @@
 /Makefile.wakecode.inc/1.8/Thu Sep 15 12:32:30 2011/-kk/
-/acpi_cpu_md.c/1.73/Mon Nov 18 05:31:36 2013/-kk/
+/acpi_cpu_md.c/1.74/Tue Dec 17 04:05:05 2013/-kk/
 /acpi_machdep.c/1.7/Thu Oct 24 10:28:57 2013/-kk/
 /acpi_pdc.c/1.2/Mon Jun 20 15:39:54 2011/-kk/
 /acpi_wakeup.c/1.33/Sun Oct 27 08:19:59 2013/-kk/

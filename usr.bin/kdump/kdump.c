@@ -1055,7 +1055,7 @@ ktruser_misc(const char *name, const void *buf, size_t len)
 
 	printf("%.*s: %zu, ", KTR_USER_MAXIDLEN, name, len);
 	for (i = 0; i < len; i++)
-		printf("%02x", (unsigned int) dta[i]);
+		printf("%02x", (unsigned char)dta[i]);
 	printf("\n");
 }
 

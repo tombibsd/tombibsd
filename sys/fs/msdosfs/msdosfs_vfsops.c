@@ -269,9 +269,7 @@ msdosfs_mountroot(void)
 		return (error);
 	}
 
-	mutex_enter(&mountlist_lock);
-	CIRCLEQ_INSERT_TAIL(&mountlist, mp, mnt_list);
-	mutex_exit(&mountlist_lock);
+	mountlist_append(mp);
 	(void)msdosfs_statvfs(mp, &mp->mnt_stat);
 	vfs_unbusy(mp, false, NULL);
 	return (0);

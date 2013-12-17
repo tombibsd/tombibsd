@@ -703,7 +703,7 @@ trm_scsipi_request(struct scsipi_channel *chan, scsipi_adapter_req_t req,
 		    xs->xs_periph->periph_lun));
 		if (xs->xs_control & XS_CTL_RESET) {
 			trm_reset(sc);
-			xs->error = XS_NOERROR | XS_RESET;
+			xs->error = XS_RESET;
 			return;
 		}
 		if (xs->xs_status & XS_STS_DONE) {

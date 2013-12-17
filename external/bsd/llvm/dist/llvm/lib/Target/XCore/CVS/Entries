@@ -1,0 +1,38 @@
+/CMakeLists.txt/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
+/LLVMBuild.txt/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
+/Makefile/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
+/README.txt/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
+/XCore.h/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
+/XCore.td/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
+/XCoreAsmPrinter.cpp/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
+/XCoreCallingConv.td/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
+/XCoreFrameLowering.cpp/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
+/XCoreFrameLowering.h/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
+/XCoreISelDAGToDAG.cpp/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
+/XCoreISelLowering.cpp/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
+/XCoreISelLowering.h/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
+/XCoreInstrFormats.td/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
+/XCoreInstrInfo.cpp/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
+/XCoreInstrInfo.h/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
+/XCoreInstrInfo.td/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
+/XCoreLowerThreadLocal.cpp/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
+/XCoreMCInstLower.cpp/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
+/XCoreMCInstLower.h/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
+/XCoreMachineFunctionInfo.cpp/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
+/XCoreMachineFunctionInfo.h/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
+/XCoreRegisterInfo.cpp/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
+/XCoreRegisterInfo.h/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
+/XCoreRegisterInfo.td/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
+/XCoreSelectionDAGInfo.cpp/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
+/XCoreSelectionDAGInfo.h/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
+/XCoreSubtarget.cpp/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
+/XCoreSubtarget.h/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
+/XCoreTargetMachine.cpp/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
+/XCoreTargetMachine.h/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
+/XCoreTargetObjectFile.cpp/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
+/XCoreTargetObjectFile.h/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
+/XCoreTargetTransformInfo.cpp/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
+D/Disassembler////
+D/InstPrinter////
+D/MCTargetDesc////
+D/TargetInfo////

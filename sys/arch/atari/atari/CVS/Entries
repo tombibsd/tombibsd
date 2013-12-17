@@ -15,8 +15,8 @@
 /machdep.c/1.175/Fri Aug 10 17:43:32 2012/-kk/
 /mainbus.c/1.11/Fri Jul  1 20:34:05 2011/-kk/
 /pmap_bootstrap.c/1.7/Tue Apr 13 09:49:54 2010/-kk/
-/stalloc.c/1.13/Tue Apr 13 11:22:22 2010/-kk/
-/stalloc.h/1.4/Thu Mar  5 13:21:44 2009/-kk/
+/stalloc.c/1.15/Tue Dec 17 04:04:56 2013/-kk/
+/stalloc.h/1.5/Tue Dec 17 04:04:56 2013/-kk/
 /trap.c/1.112/Sun Feb 19 21:06:05 2012/-kk/
 /vectors.s/1.23/Tue Feb  8 20:20:09 2011/-kk/
 D

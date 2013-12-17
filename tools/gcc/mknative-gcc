@@ -31,7 +31,7 @@ sanitise_includes () {
 	sed \
 		-e "s,-I$_DESTDIR/usr/include,,g" \
 		-e "s,-I$_SRC/external/lgpl3/mpfr/dist,,g" \
-		-e "s,-I$_SRC/external/lgpl2/mpc/dist/src,,g" \
+		-e "s,-I$_SRC/external/lgpl3/mpc/dist/src,,g" \
 		-e "s,-I$_SRC/external/lgpl3/gmp/lib/libgmp/arch/$MACHINE_ARCH,,g" \
 		-e "s,-I/usr/include/[^ 	]*,,"
 }

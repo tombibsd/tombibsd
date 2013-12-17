@@ -43,7 +43,7 @@
 .Nm
 .Op Fl s
 .Nm
-.Op Fl c Op Ar days
+.Op Fl c Op Ar \-days
 .Sh DESCRIPTION
 .Nm
 is used to read system messages.
@@ -149,6 +149,10 @@ to run every night.
 This will remove all messages over 21 days old.
 A different expiration may be specified on the command line to override
 the default.
+This number must be negative and indicates the number of days before
+the present whose messages should be kept; that is, use
+.Fl c Ar \-3
+to remove messages more than three days old.
 .Pp
 Options when reading messages include:
 .Bl -tag -width Fl

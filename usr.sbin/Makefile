@@ -19,7 +19,7 @@ SUBDIR=	ac accton acpitools altq apm apmd arp \
 	mopd mountd moused mrinfo mrouted mscdlabel mtrace mtree \
 	ndbootd ndiscvt netgroup_mkdb nfsd \
 	ofctl \
-	paxctl pcictl perfused pppd psrset pstat pwd_mkdb postinstall \
+	paxctl pcictl perfused psrset pstat pwd_mkdb postinstall \
 	powerd \
 	quot quotacheck quotaon quotarestore \
 	rarpd rbootd rdate repquota rmt rpc.bootparamd rpc.lockd \

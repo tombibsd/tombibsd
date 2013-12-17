@@ -156,6 +156,3 @@ fault:
 	iret
 END(ipkdbsbyte)
 #endif	/* IPKDB */
-
-#ifdef XEN
-

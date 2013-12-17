@@ -18,7 +18,7 @@ SUBDIR= apply asa at audio audiocfg \
 	machine mail make man menuc mesg midiplay mixerctl mkcsmapper \
 	mkdep mkesdb mkfifo mklocale mkstr mktemp mkubootimage moduli \
 	msgc msgs \
-	nbperf netgroup netstat newgrp newsyslog nfsstat nice nl nohup nvi \
+	nbperf netgroup netstat newgrp newsyslog nfsstat nice nl nohup \
 	pagesize passwd paste patch pathchk pkill pmap pmc pr \
 	printenv printf progress pwhash qsubst quota radioctl rdist \
 	renice rev revoke rfcomm_sppd rlogin rpcgen rpcinfo rs rsh \

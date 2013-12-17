@@ -6,7 +6,8 @@ LIB=	clangIndex
 
 .PATH: ${CLANG_SRCDIR}/lib/Index
 
-SRCS+=	USRGeneration.cpp
+SRCS+=	CommentToXML.cpp \
+	USRGeneration.cpp
 
 .if defined(HOSTLIB)
 .include <bsd.hostlib.mk>

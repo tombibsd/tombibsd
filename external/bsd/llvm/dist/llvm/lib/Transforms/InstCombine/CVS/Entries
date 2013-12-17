@@ -1,0 +1,19 @@
+/CMakeLists.txt/1.1.1.1/Thu Nov 28 14:18:22 2013/-kk/
+/InstCombine.h/1.1.1.1/Thu Nov 28 14:18:22 2013/-kk/
+/InstCombineAddSub.cpp/1.1.1.1/Thu Nov 28 14:18:22 2013/-kk/
+/InstCombineAndOrXor.cpp/1.1.1.1/Thu Nov 28 14:18:22 2013/-kk/
+/InstCombineCalls.cpp/1.1.1.1/Thu Nov 28 14:18:22 2013/-kk/
+/InstCombineCasts.cpp/1.1.1.1/Thu Nov 28 14:18:22 2013/-kk/
+/InstCombineCompares.cpp/1.1.1.1/Thu Nov 28 14:18:22 2013/-kk/
+/InstCombineLoadStoreAlloca.cpp/1.1.1.1/Thu Nov 28 14:18:23 2013/-kk/
+/InstCombineMulDivRem.cpp/1.1.1.1/Thu Nov 28 14:18:23 2013/-kk/
+/InstCombinePHI.cpp/1.1.1.1/Thu Nov 28 14:18:22 2013/-kk/
+/InstCombineSelect.cpp/1.1.1.1/Thu Nov 28 14:18:22 2013/-kk/
+/InstCombineShifts.cpp/1.1.1.1/Thu Nov 28 14:18:22 2013/-kk/
+/InstCombineSimplifyDemanded.cpp/1.1.1.1/Thu Nov 28 14:18:22 2013/-kk/
+/InstCombineVectorOps.cpp/1.1.1.1/Thu Nov 28 14:18:22 2013/-kk/
+/InstCombineWorklist.h/1.1.1.1/Thu Nov 28 14:18:22 2013/-kk/
+/InstructionCombining.cpp/1.1.1.1/Thu Nov 28 14:18:22 2013/-kk/
+/LLVMBuild.txt/1.1.1.1/Thu Nov 28 14:18:22 2013/-kk/
+/Makefile/1.1.1.1/Thu Nov 28 14:18:22 2013/-kk/
+D

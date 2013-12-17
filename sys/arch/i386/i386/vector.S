@@ -734,6 +734,9 @@ END(xenev_stubs)
 #endif /* XEN */
 
 #include "i386_trap.S"
+#ifdef IPKDB
+#include "i386_trap_ipkdb.S"
+#endif
 
 #ifdef XEN
 

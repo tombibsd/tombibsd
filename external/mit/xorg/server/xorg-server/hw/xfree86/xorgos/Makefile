@@ -77,6 +77,10 @@ CPPFLAGS.${_FN}=        -DWSCONS_SUPPORT -DPCVT_SUPPORT -DUSESTDRES -DHAVE_SYSV_
 .endfor
 .endif
 
+.if ${MACHINE} == "shark"
+CPPFLAGS.ppc_video.c += -DPCI_MAGIC_IO_RANGE=0xf0000000
+.endif
+
 .if ${MACHINE} == "dreamcast" || \
     ${MACHINE} == "hpcsh"
 SRCS.bsd+=	ppc_video.c pm_noop.c agp_noop.c

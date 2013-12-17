@@ -34,6 +34,10 @@ __FBSDID("$FreeBSD: src/lib/msun/src/s_fmin.c,v 1.1 2004/06/30 07:04:01 das Exp 
 
 #include <machine/ieee.h>
 
+#ifndef __HAVE_LONG_DOUBLE
+__strong_alias(fminl, fmin)
+#endif
+
 double
 fmin(double x, double y)
 {

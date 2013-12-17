@@ -45,5 +45,6 @@ struct plb_dev {
 struct plb_attach_args {
 	const char *plb_name;
 	bus_dma_tag_t plb_dmat;	/* DMA tag */
+	bus_addr_t plb_addr;
 	int plb_irq;
 };

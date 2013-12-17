@@ -138,7 +138,7 @@ PROG	usr/bin/gzip	usr/bin/gzcat usr/bin/gunzip
 PROG	usr/bin/sort
 
 SPECIAL	less		srcdir external/bsd/less/bin/less
-SPECIAL	vi		srcdir usr.bin/nvi/build
+SPECIAL	vi		srcdir external/bsd/nvi/usr.bin/nvi
 
 SPECIAL	ed		srcdir	distrib/utils/x_ed
 SPECIAL	gzip		srcdir	distrib/utils/x_gzip

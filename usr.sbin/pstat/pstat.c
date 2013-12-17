@@ -756,8 +756,7 @@ kinfo_vnodes(int *avnodes)
 	beg = bp;
 	ep = bp + (numvnodes + 20) * (VPTRSZ + VNODESZ);
 	KGET(V_MOUNTLIST, mlist);
-	for (mp = mlist.cqh_first;;
-	    mp = mount.mnt_list.cqe_next) {
+	TAILQ_FOREACH(mp, &mlist, mnt_list) {
 		KGET2(mp, &mount, sizeof(mount), "mount entry");
 		TAILQ_FOREACH(vp, &mount.mnt_vnodelist, v_mntvnodes) {
 			KGET2(vp, &vnode, sizeof(vnode), "vnode");
@@ -769,8 +768,6 @@ kinfo_vnodes(int *avnodes)
 			memmove(bp, &vnode, VNODESZ);
 			bp += VNODESZ;
 		}
-		if (mp == mlist.cqh_last)
-			break;
 	}
 	*avnodes = (bp - beg) / (VPTRSZ + VNODESZ);
 	return (beg);

@@ -132,20 +132,41 @@ static void marvell_device_register(device_t, void *);
 static void marvell_startend_by_tag(int, uint64_t *, uint64_t *);
 #endif
 
+#if defined(ORION) || defined(KIRKWOOD) || defined(MV78XX0)
 static void
-marvell_system_reset(void)
+marvell_system_reset_old(void)
 {
 	/* unmask soft reset */
 	write_mlmbreg(MVSOC_MLMB_RSTOUTNMASKR,
 	    MVSOC_MLMB_RSTOUTNMASKR_SOFTRSTOUTEN);
 	/* assert soft reset */
 	write_mlmbreg(MVSOC_MLMB_SSRR, MVSOC_MLMB_SSRR_SYSTEMSOFTRST);
+
 	/* if we're still running, jump to the reset address */
 	cpu_reset_address = 0;
 	cpu_reset_address_paddr = 0xffff0000;
 	cpu_reset();
 	/*NOTREACHED*/
 }
+#endif
+
+#if defined(ARMADAXP)
+static void
+marvell_system_reset(void)
+{
+
+	/* Unmask soft reset */
+	write_miscreg(MVSOC_MISC_RSTOUTNMASKR,
+	    MVSOC_MISC_RSTOUTNMASKR_GLOBALSOFTRSTOUTEN);
+	/* Assert soft reset */
+	write_miscreg(MVSOC_MISC_SSRR, MVSOC_MISC_SSRR_GLOBALSOFTRST);
+
+	while (1);
+
+	/*NOTREACHED*/
+}
+#endif
+
 
 static inline
 pd_entry_t *
@@ -213,10 +234,13 @@ initarm(void *arg)
 	uint32_t target, attr, base, size;
 	int cs, memtag = 0, iotag = 0, window;
 
-	/* Use the mapped reset routine! */
-	cpu_reset_address = marvell_system_reset;
-
 	mvsoc_bootstrap(MARVELL_INTERREGS_VBASE);
+
+	/*
+	 * Heads up ... Setup the CPU / MMU / TLB functions
+	 */
+	if (set_cpufuncs())
+		panic("cpu not recognized!");
 
 #if (defined(ORION) || defined(KIRKWOOD) || defined(MV78XX0)) && \
     defined(ARMADAXP)
@@ -233,12 +257,6 @@ initarm(void *arg)
 	pmap_devmap_bootstrap((vaddr_t)read_ttb(), marvell_devmap);
 
 	/*
-	 * Heads up ... Setup the CPU / MMU / TLB functions
-	 */
-	if (set_cpufuncs())
-		panic("cpu not recognized!");
-
-	/*
 	 * U-Boot doesn't use the virtual memory.
 	 *
 	 * Physical Address Range     Description
@@ -251,16 +269,6 @@ initarm(void *arg)
 	 */
 
 	cpu_domains((DOMAIN_CLIENT << (PMAP_DOMAIN_KERNEL*2)) | DOMAIN_CLIENT);
-
-	consinit();
-
-	/* Talk to the user */
-#ifndef EVBARM_BOARDTYPE
-#define EVBARM_BOARDTYPE	Marvell
-#endif
-#define BDSTR(s)	_BDSTR(s)
-#define _BDSTR(s)	#s
-	printf("\nNetBSD/evbarm (" BDSTR(EVBARM_BOARDTYPE) ") booting ...\n");
 
 	/* Get ready for splfoo() */
 	switch (mvsoc_model()) {
@@ -275,6 +283,8 @@ initarm(void *arg)
 	case MARVELL_ORION_1_88W8660:
 	case MARVELL_ORION_2_88F1281:
 	case MARVELL_ORION_2_88F5281:
+		cpu_reset_address = marvell_system_reset_old;
+
 		orion_intr_bootstrap();
 
 		memtag = ORION_TAG_PEX0_MEM;
@@ -291,6 +301,8 @@ initarm(void *arg)
 	case MARVELL_KIRKWOOD_88F6192:
 	case MARVELL_KIRKWOOD_88F6281:
 	case MARVELL_KIRKWOOD_88F6282:
+		cpu_reset_address = marvell_system_reset_old;
+
 		kirkwood_intr_bootstrap();
 
 		memtag = KIRKWOOD_TAG_PEX_MEM;
@@ -305,6 +317,8 @@ initarm(void *arg)
 #ifdef MV78XX0
 	case MARVELL_MV78XX0_MV78100:
 	case MARVELL_MV78XX0_MV78200:
+		cpu_reset_address = marvell_system_reset_old;
+
 		mv78xx0_intr_bootstrap();
 
 		memtag = MV78XX0_TAG_PEX0_MEM;
@@ -322,6 +336,8 @@ initarm(void *arg)
 	case MARVELL_ARMADAXP_MV78230:
 	case MARVELL_ARMADAXP_MV78260:
 	case MARVELL_ARMADAXP_MV78460:
+		cpu_reset_address = marvell_system_reset;
+
 		armadaxp_intr_bootstrap(MARVELL_INTERREGS_PBASE);
 
 		memtag = ARMADAXP_TAG_PEX00_MEM;
@@ -353,6 +369,16 @@ initarm(void *arg)
 
 		/* NOTREACHED */
 	}
+
+	consinit();
+
+	/* Talk to the user */
+#ifndef EVBARM_BOARDTYPE
+#define EVBARM_BOARDTYPE	Marvell
+#endif
+#define BDSTR(s)	_BDSTR(s)
+#define _BDSTR(s)	#s
+	printf("\nNetBSD/evbarm (" BDSTR(EVBARM_BOARDTYPE) ") booting ...\n");
 
 	/* Reset PCI-Express space to window register. */
 	window = mvsoc_target(memtag, &target, &attr, NULL, NULL);

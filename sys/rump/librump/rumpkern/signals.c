@@ -234,7 +234,7 @@ void
 ksiginfo_queue_drain0(ksiginfoq_t *kq)
 {
 
-	if (!(CIRCLEQ_EMPTY(kq)))
+	if (!(TAILQ_EMPTY(kq)))
 		panic("how did that get there?");
 }
 

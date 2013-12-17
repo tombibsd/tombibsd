@@ -1,0 +1,26 @@
+/CMakeLists.txt/1.1.1.1/Thu Nov 28 14:18:18 2013/-kk/
+/LLVMBuild.txt/1.1.1.1/Thu Nov 28 14:18:18 2013/-kk/
+/Makefile/1.1.1.1/Thu Nov 28 14:18:18 2013/-kk/
+/Mangler.cpp/1.1.1.1/Thu Nov 28 14:18:18 2013/-kk/
+/README.txt/1.1.1.1/Thu Nov 28 14:18:18 2013/-kk/
+/Target.cpp/1.1.1.1/Thu Nov 28 14:18:18 2013/-kk/
+/TargetIntrinsicInfo.cpp/1.1.1.1/Thu Nov 28 14:18:18 2013/-kk/
+/TargetJITInfo.cpp/1.1.1.1/Thu Nov 28 14:18:18 2013/-kk/
+/TargetLibraryInfo.cpp/1.1.1.1/Thu Nov 28 14:18:18 2013/-kk/
+/TargetLoweringObjectFile.cpp/1.1.1.1/Thu Nov 28 14:18:18 2013/-kk/
+/TargetMachine.cpp/1.1.1.1/Thu Nov 28 14:18:18 2013/-kk/
+/TargetMachineC.cpp/1.1.1.1/Thu Nov 28 14:18:18 2013/-kk/
+/TargetSubtargetInfo.cpp/1.1.1.1/Thu Nov 28 14:18:18 2013/-kk/
+D/AArch64////
+D/ARM////
+D/CppBackend////
+D/Hexagon////
+D/MSP430////
+D/Mips////
+D/NVPTX////
+D/PowerPC////
+D/R600////
+D/Sparc////
+D/SystemZ////
+D/X86////
+D/XCore////

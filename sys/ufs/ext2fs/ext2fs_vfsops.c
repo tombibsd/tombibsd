@@ -278,9 +278,7 @@ ext2fs_mountroot(void)
 		vfs_destroy(mp);
 		return (error);
 	}
-	mutex_enter(&mountlist_lock);
-	CIRCLEQ_INSERT_TAIL(&mountlist, mp, mnt_list);
-	mutex_exit(&mountlist_lock);
+	mountlist_append(mp);
 	ump = VFSTOUFS(mp);
 	fs = ump->um_e2fs;
 	memset(fs->e2fs_fsmnt, 0, sizeof(fs->e2fs_fsmnt));

@@ -812,7 +812,7 @@ fstrans_dump(int full)
 				fstrans_print_lwp(p, l, full == 1);
 
 	printf("Fstrans state by mount:\n");
-	CIRCLEQ_FOREACH(mp, &mountlist, mnt_list)
+	TAILQ_FOREACH(mp, &mountlist, mnt_list)
 		fstrans_print_mount(mp, full == 1);
 }
 #endif /* defined(DDB) */

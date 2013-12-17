@@ -1675,6 +1675,7 @@ pseudo-device	ccd			# concatenated/striped disk devices
 pseudo-device	cgd			# cryptographic disk devices
 pseudo-device	raid			# RAIDframe disk driver
 options 	RAID_AUTOCONFIG		# auto-configuration of RAID components
+options 	RAID_DIAGNOSTIC		# Additional raidframe diagnostic info
 # Options to enable various other RAIDframe RAID types.
 options 	RF_INCLUDE_EVENODD=1
 options 	RF_INCLUDE_RAID5_RS=1
@@ -1719,7 +1720,7 @@ pseudo-device	agr			# IEEE 802.3ad link aggregation
 pseudo-device	pf			# PF packet filter
 pseudo-device	pflog			# PF log if
 pseudo-device	pfsync			# PF sync if
-pseudo-device	npf			# NPF packet filter
+#pseudo-device	npf			# NPF packet filter
 pseudo-device	kttcp
 pseudo-device	etherip			# EtherIP
 # srt is EXPERIMENTAL

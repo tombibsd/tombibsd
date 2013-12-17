@@ -291,7 +291,7 @@ fork1(struct lwp *l1, int flags, int exitsig, void *stack, size_t stacksize,
 	memcpy(&p2->p_startcopy, &p1->p_startcopy,
 	    (unsigned) ((char *)&p2->p_endcopy - (char *)&p2->p_startcopy));
 
-	CIRCLEQ_INIT(&p2->p_sigpend.sp_info);
+	TAILQ_INIT(&p2->p_sigpend.sp_info);
 
 	LIST_INIT(&p2->p_lwps);
 	LIST_INIT(&p2->p_sigwaiters);

@@ -146,6 +146,14 @@ _rtld_load_object(const char *filepath, int flags)
 		}
 	}
 
+#ifdef RTLD_LOADER
+	if (pathlen == _rtld_objself.pathlen &&
+	    strcmp(_rtld_objself.path, filepath) == 0) {
+		close(fd);
+		return &_rtld_objself;
+	}
+#endif
+
 	if (obj == NULL) { /* First use of this object, so we must map it in */
 		obj = _rtld_map_object(filepath, fd, &sb);
 		(void)close(fd);

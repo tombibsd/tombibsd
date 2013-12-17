@@ -49,14 +49,12 @@ __fpclassifyl(long double x)
 	u.extu_ld = x;
 
 	if (u.extu_ext.ext_exp == 0) {
-		if (u.extu_ext.ext_frach  == 0 && u.extu_ext.ext_frachm == 0 &&
-		    u.extu_ext.ext_fraclm == 0 && u.extu_ext.ext_fracl  == 0)
+		if (u.extu_ext.ext_frach  == 0 && u.extu_ext.ext_fracl  == 0)
 			return FP_ZERO;
 		else
 			return FP_SUBNORMAL;
 	} else if (u.extu_ext.ext_exp == EXT_EXP_INFNAN) {
-		if (u.extu_ext.ext_frach  == 0 && u.extu_ext.ext_frachm == 0 &&
-		    u.extu_ext.ext_fraclm == 0 && u.extu_ext.ext_fracl  == 0)
+		if (u.extu_ext.ext_frach  == 0 && u.extu_ext.ext_fracl  == 0)
 			return FP_INFINITE;
 		else
 			return FP_NAN;

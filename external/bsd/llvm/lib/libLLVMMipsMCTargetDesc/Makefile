@@ -14,7 +14,8 @@ SRCS+=	MipsAsmBackend.cpp \
 	MipsMCAsmInfo.cpp \
 	MipsMCCodeEmitter.cpp \
 	MipsMCTargetDesc.cpp \
-	MipsReginfo.cpp
+	MipsReginfo.cpp \
+	MipsTargetStreamer.cpp
 
 .if defined(HOSTLIB)
 .include <bsd.hostlib.mk>

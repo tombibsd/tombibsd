@@ -9,6 +9,7 @@ LIB=	lldCore
 SRCS+=	DefinedAtom.cpp \
 	Error.cpp \
 	File.cpp \
+	InputGraph.cpp \
 	LinkingContext.cpp \
 	PassManager.cpp \
 	Resolver.cpp \

@@ -167,7 +167,7 @@ static int	atw_rf3000_read(struct atw_softc *sc, u_int, u_int *);
 static void	atw_si4126_print(struct atw_softc *);
 static int	atw_si4126_read(struct atw_softc *, u_int, u_int *);
 #	endif /* ATW_SYNDEBUG */
-
+#define __atwdebugused	/* empty */
 #else
 #define ATW_DPRINTF(x)
 #define ATW_DPRINTF2(x)
@@ -175,6 +175,7 @@ static int	atw_si4126_read(struct atw_softc *, u_int, u_int *);
 #define	DPRINTF(sc, x)	/* nothing */
 #define	DPRINTF2(sc, x)	/* nothing */
 #define	DPRINTF3(sc, x)	/* nothing */
+#define __atwdebugused	__unused
 #endif
 
 /* ifnet methods */
@@ -902,6 +903,7 @@ void
 atw_reset(struct atw_softc *sc)
 {
 	int i;
+	uint32_t lpc __atwdebugused;
 
 	ATW_WRITE(sc, ATW_NAR, 0x0);
 	DELAY(atw_nar_delay);
@@ -948,7 +950,7 @@ atw_reset(struct atw_softc *sc)
 
 	DELAY(atw_magic_delay4);
 
-	(void)ATW_READ(sc, ATW_LPC);
+	lpc = ATW_READ(sc, ATW_LPC);
 
 	DPRINTF(sc, ("%s: ATW_LPC %#08x\n", __func__, lpc));
 

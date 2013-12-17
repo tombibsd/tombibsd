@@ -314,7 +314,7 @@ sess_hash_bucket(npf_sehash_t *stbl, const npf_secomid_t *scid,
 
 	mix[0] = (scid->proto ^ scid->ifid) << 16;
 	mix[0] |= sen->se_src_id ^ sen->se_dst_id;
-	mix[1] = npf_addr_sum(sz, &sen->se_src_addr, &sen->se_dst_addr);
+	mix[1] = npf_addr_mix(sz, &sen->se_src_addr, &sen->se_dst_addr);
 	hash = murmurhash2(mix, sizeof(mix), sess_hash_seed);
 
 	return &stbl[hash & SESS_HASH_MASK];

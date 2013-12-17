@@ -21,6 +21,7 @@ SRCS+=	AliasAnalysis.cpp \
 	CodeMetrics.cpp \
 	ConstantFolding.cpp \
 	CostModel.cpp \
+	Delinearization.cpp \
 	DependenceAnalysis.cpp \
 	DomPrinter.cpp \
 	DominanceFrontier.cpp \

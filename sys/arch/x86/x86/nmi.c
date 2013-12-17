@@ -153,7 +153,7 @@ nmi_dispatch(const struct trapframe *tf)
 	 *
 	 * we don't bother to call pserialize_read_enter/pserialize_read_exit
 	 * because they are not necessary here as we are sure our IPL is
-	 * higher than IPL_SOFTCLOCK.  better to avoid unnecessary calls as
+	 * higher than IPL_SOFTSERIAL.  better to avoid unnecessary calls as
 	 * we are in a dangerous context. (NMI)
 	 */
 

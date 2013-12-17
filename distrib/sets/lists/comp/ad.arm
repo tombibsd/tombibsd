@@ -391,6 +391,7 @@
 ./usr/include/gcc-4.8/arm_neon.h		comp-c-include		gcccmds,gcc=48
 ./usr/include/gcc-4.8/mmintrin.h		comp-c-include		gcccmds,gcc=48
 ./usr/include/gcc-4.8/tgmath.h			comp-c-include		gcccmds,gcc=48
+./usr/include/gcc-4.8/unwind-arm-common.h	comp-c-include		gcccmds,gcc=48,eabi
 ./usr/include/hpcarm				comp-c-include
 ./usr/include/hpcarm/ansi.h			comp-obsolete		obsolete
 ./usr/include/hpcarm/aout_machdep.h		comp-obsolete		obsolete

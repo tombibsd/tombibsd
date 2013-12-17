@@ -73,7 +73,7 @@ struct inpcbpolicy;
 struct inpcb_hdr {
 	LIST_ENTRY(inpcb_hdr) inph_hash;
 	LIST_ENTRY(inpcb_hdr) inph_lhash;
-	CIRCLEQ_ENTRY(inpcb_hdr) inph_queue;
+	TAILQ_ENTRY(inpcb_hdr) inph_queue;
 	int	  inph_af;		/* address family - AF_INET */
 	void *	  inph_ppcb;		/* pointer to per-protocol pcb */
 	int	  inph_state;		/* bind/connect state */
@@ -110,8 +110,10 @@ typedef struct vestigial_hooks {
 			   struct vestigial_inpcb *);
 } vestigial_hooks_t;
 
+TAILQ_HEAD(inpcbqueue, inpcb_hdr);
+
 struct inpcbtable {
-	CIRCLEQ_HEAD(, inpcb_hdr) inpt_queue;
+	struct	  inpcbqueue inpt_queue;
 	struct	  inpcbhead *inpt_porthashtbl;
 	struct	  inpcbhead *inpt_bindhashtbl;
 	struct	  inpcbhead *inpt_connecthashtbl;

@@ -62,7 +62,7 @@ int opt_verbose;
 int opt_noupdate;
 int opt_forceupdate;
 
-static void
+static __dead void
 usage(void)
 {
 

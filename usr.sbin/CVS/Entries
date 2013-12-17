@@ -1,5 +1,5 @@
 /Makefile.inc/1.6/Wed Apr 22 15:23:01 2009/-kk/
-/Makefile/1.267/Thu Oct 24 10:28:59 2013/-kk/
+/Makefile/1.268/Tue Dec 17 04:05:19 2013/-kk/
 D/ac////
 D/accton////
 D/acpitools////
@@ -91,7 +91,6 @@ D/perfused////
 D/pf////
 D/postinstall////
 D/powerd////
-D/pppd////
 D/psrset////
 D/pstat////
 D/puffs////

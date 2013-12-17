@@ -630,7 +630,7 @@ tryagain:
 	 * Get all the matches and put them on the temp list.
 	 */
 	rp = LIST_FIRST(hp);
-	while (rp != LIST_END(hp)) {
+	while (rp != NULL) {
 		nextrp = LIST_NEXT(rp, rc_hash);
 		if (newrp->rc_xid == rp->rc_xid &&
 		    (!(rp->rc_flag & RC_INPROG) ||
@@ -668,13 +668,13 @@ tryagain:
 	if (i != 1)
 		hit = 0;
 	hitrp = rp = LIST_FIRST(&nfsrc_templist);
-	while (rp != LIST_END(&nfsrc_templist)) {
+	while (rp != NULL) {
 		nextrp = LIST_NEXT(rp, rc_hash);
 		LIST_REMOVE(rp, rc_hash);
 		LIST_INSERT_HEAD(hp, rp, rc_hash);
 		rp = nextrp;
 	}
-	if (LIST_FIRST(&nfsrc_templist) != LIST_END(&nfsrc_templist))
+	if (LIST_FIRST(&nfsrc_templist) != NULL)
 		panic("nfs gettcp cache templist");
 
 	if (hit) {

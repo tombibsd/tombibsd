@@ -166,6 +166,9 @@ npf_config_reload(prop_dictionary_t dict, npf_ruleset_t *rset,
 	if (flush) {
 		npf_ifmap_flush();
 	}
+
+	/* Sync the config proplib data. */
+	npf_tableset_syncdict(tset, dict);
 	mutex_exit(&npf_config_lock);
 
 	/* Finally, it is safe to destroy the old config. */

@@ -496,7 +496,7 @@ quota_handle_cmd_cursorget(struct mount *mp, struct lwp *l,
 		
 #ifdef LFS_QUOTA2
 	if (fs->um_flags & ULFS_QUOTA2) {
-		struct quotacursor *cursor = args->u.cursorget.qc_cursor;
+		struct quotakcursor *cursor = args->u.cursorget.qc_cursor;
 		struct quotakey *keys = args->u.cursorget.qc_keys;
 		struct quotaval *vals = args->u.cursorget.qc_vals;
 		unsigned maxnum = args->u.cursorget.qc_maxnum;

@@ -10,7 +10,7 @@
 /nfs_bootstatic.c/1.8/Fri Oct 23 02:32:34 2009/-kk/
 /nfs_clntsocket.c/1.1/Tue Mar  2 23:19:09 2010/-kk/
 /nfs_clntsubs.c/1.2/Sun Jun 12 03:35:59 2011/-kk/
-/nfs_export.c/1.56/Thu Oct 24 10:28:58 2013/-kk/
+/nfs_export.c/1.57/Tue Dec 17 04:05:11 2013/-kk/
 /nfs_iod.c/1.6/Tue Oct 29 08:21:49 2013/-kk/
 /nfs_kq.c/1.25/Mon Oct 24 11:43:30 2011/-kk/
 /nfs_node.c/1.116/Sun Jun 12 03:35:59 2011/-kk/
@@ -20,9 +20,9 @@
 /nfs_srvsocket.c/1.4/Thu Sep  3 20:59:12 2009/-kk/
 /nfs_srvsubs.c/1.14/Mon Nov  5 19:06:27 2012/-kk/
 /nfs_subs.c/1.224/Thu Oct 24 10:28:58 2013/-kk/
-/nfs_syscalls.c/1.153/Thu Dec 31 20:01:33 2009/-kk/
+/nfs_syscalls.c/1.154/Tue Dec 17 04:05:11 2013/-kk/
 /nfs_var.h/1.90/Tue Mar  2 23:19:09 2010/-kk/
-/nfs_vfsops.c/1.222/Thu Oct 24 10:28:58 2013/-kk/
+/nfs_vfsops.c/1.223/Tue Dec 17 04:05:11 2013/-kk/
 /nfs_vnops.c/1.301/Mon Nov 18 05:31:47 2013/-kk/
 /nfsdiskless.h/1.30/Mon Oct  4 23:48:23 2010/-kk/
 /nfsm_subs.h/1.53/Thu Oct 24 07:31:58 2013/-kk/

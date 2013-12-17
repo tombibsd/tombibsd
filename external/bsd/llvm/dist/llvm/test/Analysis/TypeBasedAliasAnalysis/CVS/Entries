@@ -1,0 +1,15 @@
+/PR17620.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/aliastest.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/argument-promotion.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/dse.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/dynamic-indices.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/functionattrs.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/gvn-nonlocal-type-mismatch.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/intrinsics.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/licm.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/memcpyopt.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/placement-tbaa.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/precedence.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/sink.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/tbaa-path.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+D

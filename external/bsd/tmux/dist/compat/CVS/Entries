@@ -1,24 +1,5 @@
-/asprintf.c/1.1.1.2/Wed Aug 17 18:40:06 2011/-kk/
-/bitstring.h/1.1.1.2/Wed Aug 17 18:40:06 2011/-kk/
-/closefrom.c/1.1.1.2/Wed Aug 17 18:40:06 2011/-kk/
-/daemon.c/1.1.1.2/Wed Aug 17 18:40:06 2011/-kk/
-/fgetln.c/1.1.1.2/Wed Aug 17 18:40:06 2011/-kk/
-/forkpty-aix.c/1.1.1.2/Wed Aug 17 18:40:06 2011/-kk/
-/forkpty-hpux.c/1.1.1.1/Wed Aug 17 18:40:06 2011/-kk/
-/forkpty-sunos.c/1.1.1.2/Wed Aug 17 18:40:06 2011/-kk/
-/getopt.c/1.1.1.2/Wed Aug 17 18:40:06 2011/-kk/
 /imsg-buffer.c/1.5/Fri Jan 20 14:08:04 2012/-kk/
 /imsg.c/1.5/Fri Jan 20 14:08:04 2012/-kk/
 /imsg.h/1.1.1.2/Wed Aug 17 18:40:06 2011/-kk/
-/queue.h/1.1.1.2/Wed Aug 17 18:40:06 2011/-kk/
-/setenv.c/1.1.1.2/Wed Aug 17 18:40:06 2011/-kk/
-/strcasestr.c/1.1.1.2/Wed Aug 17 18:40:06 2011/-kk/
-/strlcat.c/1.1.1.2/Wed Aug 17 18:40:06 2011/-kk/
-/strlcpy.c/1.1.1.2/Wed Aug 17 18:40:06 2011/-kk/
-/strsep.c/1.1.1.2/Wed Aug 17 18:40:06 2011/-kk/
 /strtonum.c/1.1.1.2/Wed Aug 17 18:40:06 2011/-kk/
-/tree.h/1.1.1.2/Wed Aug 17 18:40:06 2011/-kk/
-/unvis.c/1.1.1.2/Wed Aug 17 18:40:06 2011/-kk/
-/vis.c/1.1.1.2/Wed Aug 17 18:40:06 2011/-kk/
-/vis.h/1.1.1.2/Wed Aug 17 18:40:06 2011/-kk/
 D

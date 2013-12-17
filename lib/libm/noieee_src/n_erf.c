@@ -320,6 +320,12 @@ erf(double x)
 		return (z-one);
 }
 
+float
+erff(float x)
+{
+	return (float)erf(x);
+}
+
 double
 erfc(double x)
 {
@@ -396,3 +402,11 @@ erfc(double x)
 	else
 		return two-r;
 }
+
+float
+erfcf(float x)
+{
+	return (float)erfc(x);
+}
+
+

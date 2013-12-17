@@ -62,6 +62,18 @@ static const double
 	    F= 45./28.,
 	    G= 5./14.;
 
+float
+cbrtf(float x)
+{
+	return (float)cbrt(x);
+}
+
+long double
+cbrtl(long double x)
+{
+	return cbrt((double)x);
+}
+
 double
 cbrt(double x)
 {

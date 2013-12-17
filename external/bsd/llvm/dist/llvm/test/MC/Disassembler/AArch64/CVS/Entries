@@ -1,0 +1,12 @@
+/a64-ignored-fields.txt/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
+/basic-a64-instructions.txt/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
+/basic-a64-undefined.txt/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
+/basic-a64-unpredictable.txt/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
+/gicv3-regs.txt/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
+/ldp-offset-predictable.txt/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
+/ldp-postind.predictable.txt/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
+/ldp-preind.predictable.txt/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
+/lit.local.cfg/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
+/neon-instructions.txt/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
+/trace-regs.txt/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
+D

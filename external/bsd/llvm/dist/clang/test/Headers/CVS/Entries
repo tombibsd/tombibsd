@@ -1,0 +1,19 @@
+/altivec-header.c/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
+/arm-neon-header.c/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
+/c11.c/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
+/c89.c/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
+/cxx11.cpp/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
+/int64-type.c/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
+/limits.cpp/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
+/ms-intrin.cpp/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
+/ms-null-ms-header-vs-stddef.cpp/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
+/ms-wchar.c/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
+/stdbool.cpp/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
+/tgmath.c/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
+/typedef_guards.c/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
+/unwind.c/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
+/wchar_limits.cpp/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
+/wmmintrin.c/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
+/x86-intrinsics-headers.c/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
+/x86intrin.c/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
+D/Inputs////

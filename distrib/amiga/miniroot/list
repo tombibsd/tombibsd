@@ -11,7 +11,7 @@ PROG	usr/sbin/loadkmap
 
 # crunchgen source directory specials
 SPECIAL	loadkmap	srcdir sys/arch/amiga/stand/loadkmap
-SPECIAL	vi		srcdir usr.bin/nvi/build
+SPECIAL	vi		srcdir external/bsd/nvi/usr.bin/nvi
 
 # Minimize use of MFS
 SYMLINK	/tmp	var/tmp

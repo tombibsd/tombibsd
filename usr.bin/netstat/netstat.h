@@ -92,7 +92,7 @@ struct sockaddr_in6;
 struct in6_addr;
 void	ip6protopr __P((u_long, const char *));
 void	tcp6_stats __P((u_long, const char *));
-void	tcp6_dump __P((u_long));
+void	tcp6_dump __P((u_long, const char *, u_long));
 void	udp6_stats __P((u_long, const char *));
 void	ip6_stats __P((u_long, const char *));
 void	ip6_ifstats __P((const char *));

@@ -301,6 +301,7 @@ extern int   __kernel_rem_pio2f __P((float*,float*,int,int,int,const int*));
 
 /* ieee style elementary long double functions */
 extern long double __ieee754_fmodl(long double, long double);
+extern long double __ieee754_sqrtl(long double);
 
 /*
  * TRUNC() is a macro that sets the trailing 27 bits in the mantissa of an

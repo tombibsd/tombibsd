@@ -53,7 +53,7 @@ work.
    "nbmake-MACHINE obj includes dependall install".
 
 8. In each of src/external/lgpl3/gmp/lib/libgmp,
-   src/external/lgpl3/mpfr/lib/libmpfr, src/external/lgpl2/mpc/lib/libmpc
+   src/external/lgpl3/mpfr/lib/libmpfr, src/external/lgpl3/mpc/lib/libmpc
    do "nbmake-MACHINE obj dependall".
 
 9. In src/lib, do

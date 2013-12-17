@@ -130,7 +130,7 @@ native-gcc: .native/.configure_done
 
 NATIVE_CONFIGURE_ARGS=	${COMMON_CONFIGURE_ARGS}
 .if ${HAVE_GCC} >= 45
-MPC=		${NETBSDSRCDIR}/external/lgpl2/mpc
+MPC=		${NETBSDSRCDIR}/external/lgpl3/mpc
 MPFR=		${NETBSDSRCDIR}/external/lgpl3/mpfr
 GMP=		${NETBSDSRCDIR}/external/lgpl3/gmp
 MPCOBJ!=	cd ${MPC}/lib/libmpc && ${PRINTOBJDIR}

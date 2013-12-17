@@ -1,0 +1,24 @@
+/already-vectorized.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/avx1.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/constant-vector-operand.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/conversion-cost.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/cost-model.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/gather-cost.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/gcc-examples.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/illegal-parallel-loop-uniform-write.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/lit.local.cfg/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/min-trip-count-switch.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/no-vector.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/parallel-loops-after-reg2mem.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/parallel-loops.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/rauw-bug.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/reduction-crash.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/small-size.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/struct-store.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/unroll-pm.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/unroll-small-loops.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/unroll_selection.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/vector-scalar-select-cost.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/vector_ptr_load_store.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/x86_fp80-vector-store.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+D

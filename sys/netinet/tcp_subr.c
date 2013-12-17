@@ -1351,7 +1351,7 @@ tcp_drain(void)
 	/*
 	 * Free the sequence queue of all TCP connections.
 	 */
-	CIRCLEQ_FOREACH(inph, &tcbtable.inpt_queue, inph_queue) {
+	TAILQ_FOREACH(inph, &tcbtable.inpt_queue, inph_queue) {
 		switch (inph->inph_af) {
 		case AF_INET:
 			tp = intotcpcb((struct inpcb *)inph);

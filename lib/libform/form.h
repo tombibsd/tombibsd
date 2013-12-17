@@ -231,7 +231,7 @@ struct _form_field {
 	void *userptr;  /* user defined pointer. */
 	FIELD *link; /* used if fields are linked */
 	FIELDTYPE *type; /* type struct for the field */
-	CIRCLEQ_ENTRY(_form_field) glue; /* circle queue glue for sorting fields */
+	TAILQ_ENTRY(_form_field) glue; /* tail queue glue for sorting fields */
 	char *args; /* args for field type. */
 	_FORMI_FIELD_LINES *alines; /* array of the starts and ends of lines */
 	_FORMI_FIELD_LINES *free; /* list of lines available for reuse */
@@ -291,7 +291,7 @@ struct _form_struct {
 	int max_page; /* number of pages in the form */
 	_FORMI_PAGE_START *page_starts; /* dynamic array of fields that start
 					   the pages */
-	CIRCLEQ_HEAD(_formi_sort_head, _form_field) sorted_fields; /* sorted field
+	TAILQ_HEAD(_formi_sort_head, _form_field) sorted_fields; /* sorted field
 								list */
 	FIELD **fields; /* array of fields attached to this form. */
 };

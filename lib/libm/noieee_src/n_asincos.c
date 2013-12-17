@@ -103,6 +103,12 @@ asin(double x)
 
 }
 
+float
+asinf(float x)
+{
+	return (float)asin(x);
+}
+
 /* ACOS(X)
  * RETURNS ARC COS OF X
  * DOUBLE PRECISION (IEEE DOUBLE 53 bits, VAX D FORMAT 56 bits)
@@ -167,4 +173,10 @@ acos(double x)
 	else
 	    t=atan2(one,0.0);	/* t = PI/2 */
 	return(t+t);
+}
+
+float
+acosf(float x)
+{
+	return (float)acos(x);
 }

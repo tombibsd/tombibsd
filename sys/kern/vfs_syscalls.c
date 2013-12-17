@@ -622,8 +622,7 @@ do_sys_sync(struct lwp *l)
 	int asyncflag;
 
 	mutex_enter(&mountlist_lock);
-	for (mp = CIRCLEQ_FIRST(&mountlist); mp != (void *)&mountlist;
-	     mp = nmp) {
+	for (mp = TAILQ_FIRST(&mountlist); mp != NULL; mp = nmp) {
 		if (vfs_busy(mp, &nmp)) {
 			continue;
 		}
@@ -1237,8 +1236,7 @@ do_sys_getvfsstat(struct lwp *l, void *sfsp, size_t bufsize, int flags,
 	maxcount = bufsize / entry_sz;
 	mutex_enter(&mountlist_lock);
 	count = 0;
-	for (mp = CIRCLEQ_FIRST(&mountlist); mp != (void *)&mountlist;
-	     mp = nmp) {
+	for (mp = TAILQ_FIRST(&mountlist); mp != NULL; mp = nmp) {
 		if (vfs_busy(mp, &nmp)) {
 			continue;
 		}

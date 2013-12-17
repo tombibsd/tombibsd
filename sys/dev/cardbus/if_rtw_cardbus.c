@@ -215,17 +215,17 @@ rtw_cardbus_attach(device_t parent, device_t self, void *aux)
 		panic("rtw_cardbus_attach: impossible");
 	}
 
+	printf(": %s\n", rcp->rcp_product_name);
+
 #ifdef notyet
 	/* Get revision info. */
 	int rev = PCI_REVISION(ca->ca_class);
-#endif
-
-	printf(": %s\n", rcp->rcp_product_name);
 
 	RTW_DPRINTF(RTW_DEBUG_ATTACH,
 	    ("%s: pass %d.%d signature %08x\n", device_xname(self),
 	     (rev >> 4) & 0xf, rev & 0xf,
 	     Cardbus_conf_read(ct, csc->sc_tag, 0x80)));
+#endif
 
 	/*
 	 * Map the device.

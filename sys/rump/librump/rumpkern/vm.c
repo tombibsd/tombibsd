@@ -1188,3 +1188,8 @@ rump_hyperfree(void *what, size_t size)
 	}
 	rumpuser_free(what, size);
 }
+
+void
+uvm_swap_shutdown(struct lwp *lwp)
+{
+}

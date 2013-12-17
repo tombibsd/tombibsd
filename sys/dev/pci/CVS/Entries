@@ -172,7 +172,7 @@
 /if_ipw.c/1.55/Thu Oct 24 10:28:58 2013/-kk/
 /if_ipwreg.h/1.6/Tue Dec 25 18:33:40 2007/-kk/
 /if_ipwvar.h/1.16/Sat Oct 27 17:18:33 2012/-kk/
-/if_iwi.c/1.93/Thu Oct 24 10:28:58 2013/-kk/
+/if_iwi.c/1.95/Tue Dec 17 04:05:07 2013/-kk/
 /if_iwireg.h/1.19/Mon Sep  8 23:36:54 2008/-kk/
 /if_iwivar.h/1.16/Tue Jan 19 22:07:00 2010/-kk/
 /if_iwn.c/1.70/Thu Oct 24 10:28:58 2013/-kk/
@@ -400,7 +400,7 @@
 /tgareg.h/1.6/Sun Dec 11 12:22:50 2005/-kk/
 /tgavar.h/1.18/Mon May 18 00:14:27 2009/-kk/
 /toshide.c/1.11/Thu Oct 24 10:28:58 2013/-kk/
-/trm.c/1.34/Thu Oct 24 10:28:58 2013/-kk/
+/trm.c/1.35/Tue Dec 17 04:05:08 2013/-kk/
 /trmreg.h/1.2/Thu May 10 03:16:50 2012/-kk/
 /twa.c/1.45/Thu Oct 24 10:28:58 2013/-kk/
 /twaio.h/1.5/Mon Sep  8 23:36:54 2008/-kk/

@@ -1552,8 +1552,7 @@ veriexec_dump(struct lwp *l, prop_array_t rarray)
 	struct mount *mp, *nmp;
 
 	mutex_enter(&mountlist_lock);
-	for (mp = CIRCLEQ_FIRST(&mountlist); mp != (void *)&mountlist;
-	    mp = nmp) {
+	for (mp = TAILQ_FIRST(&mountlist); mp != NULL; mp = nmp) {
 		/* If it fails, the file-system is [being] unmounted. */
 		if (vfs_busy(mp, &nmp) != 0)
 			continue;
@@ -1575,8 +1574,7 @@ veriexec_flush(struct lwp *l)
 	int error = 0;
 
 	mutex_enter(&mountlist_lock);
-	for (mp = CIRCLEQ_FIRST(&mountlist); mp != (void *)&mountlist;
-	    mp = nmp) {
+	for (mp = TAILQ_FIRST(&mountlist); mp != NULL; mp = nmp) {
 		int lerror;
 
 		/* If it fails, the file-system is [being] unmounted. */

@@ -4,7 +4,7 @@
 /fabs.S/1.5/Thu Aug  7 16:42:27 2003/-kk/
 /fixunsdfsi.S/1.5/Thu Oct 24 10:28:53 2013/-kk/
 /flt_rounds.c/1.6/Sun Jun 24 15:26:02 2012/-kk/
-/fpclassifyl.c/1.2/Mon Apr 28 20:22:57 2008/-kk/
+/fpclassifyl.c/1.3/Tue Dec 17 04:04:49 2013/-kk/
 /fpgetmask.c/1.6/Sun Jun 24 15:26:02 2012/-kk/
 /fpgetround.c/1.6/Sun Jun 24 15:26:02 2012/-kk/
 /fpgetsticky.c/1.7/Sun Jun 24 15:26:02 2012/-kk/
@@ -13,8 +13,8 @@
 /fpsetsticky.c/1.7/Tue Oct 29 12:11:36 2013/-kk/
 /infinityl.c/1.2/Sun Jun 12 05:21:27 2005/-kk/
 /isfinitel.c/1.2/Mon Apr 28 20:22:57 2008/-kk/
-/isinfl.c/1.4/Thu Mar  4 23:42:39 2004/-kk/
-/isnanl.c/1.4/Thu Mar  4 23:42:39 2004/-kk/
+/isinfl.c/1.5/Tue Dec 17 04:04:49 2013/-kk/
+/isnanl.c/1.5/Tue Dec 17 04:04:49 2013/-kk/
 /longjmp.c/1.7/Sat Mar 17 21:35:06 2012/-kk/
 /makecontext.c/1.5/Sat Mar 17 21:35:06 2012/-kk/
 /modf.S/1.5/Thu Oct 24 10:28:53 2013/-kk/

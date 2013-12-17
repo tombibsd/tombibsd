@@ -1,20 +1,26 @@
-/addlsh1_n.asm/1.1.1.1/Mon Jun 20 05:54:40 2011/-kk/
-/addmul_1.asm/1.1.1.1/Mon Jun 20 05:54:40 2011/-kk/
-/aors_n.asm/1.1.1.1/Mon Jun 20 05:54:40 2011/-kk/
-/bdiv_dbm1c.asm/1.1.1.1/Mon Jun 20 05:54:40 2011/-kk/
-/dive_1.asm/1.1.1.1/Mon Jun 20 05:54:40 2011/-kk/
-/divrem_1.asm/1.1.1.1/Mon Jun 20 05:54:40 2011/-kk/
-/divrem_2.asm/1.1.1.1/Mon Jun 20 05:54:40 2011/-kk/
+/aors_n.asm/1.1.1.2/Tue Dec 17 04:03:54 2013/-kk/
+/aorscnd_n.asm/1.1.1.1/Fri Nov 29 07:49:48 2013/-kk/
+/aorslsh1_n.asm/1.1.1.1/Fri Nov 29 07:49:48 2013/-kk/
+/aorslsh2_n.asm/1.1.1.1/Fri Nov 29 07:49:48 2013/-kk/
+/aorslshC_n.asm/1.1.1.1/Fri Nov 29 07:49:48 2013/-kk/
+/aorsmul_1.asm/1.1.1.1/Fri Nov 29 07:49:48 2013/-kk/
+/bdiv_dbm1c.asm/1.1.1.2/Tue Dec 17 04:03:54 2013/-kk/
+/dive_1.asm/1.1.1.2/Tue Dec 17 04:03:54 2013/-kk/
+/divrem_1.asm/1.1.1.2/Tue Dec 17 04:03:54 2013/-kk/
+/divrem_2.asm/1.1.1.2/Tue Dec 17 04:03:54 2013/-kk/
 /gmp-mparam.h/1.1.1.1/Mon Jun 20 05:54:40 2011/-kk/
-/invert_limb.asm/1.1.1.1/Mon Jun 20 05:54:40 2011/-kk/
-/mod_34lsub1.asm/1.1.1.1/Mon Jun 20 05:54:40 2011/-kk/
-/mode1o.asm/1.1.1.1/Mon Jun 20 05:54:40 2011/-kk/
-/mul_1.asm/1.1.1.1/Mon Jun 20 05:54:40 2011/-kk/
-/mul_basecase.asm/1.1.1.1/Mon Jun 20 05:54:40 2011/-kk/
-/rsh1add_n.asm/1.1.1.1/Mon Jun 20 05:54:40 2011/-kk/
-/rsh1sub_n.asm/1.1.1.1/Mon Jun 20 05:54:40 2011/-kk/
-/sublsh1_n.asm/1.1.1.1/Mon Jun 20 05:54:40 2011/-kk/
-/submul_1.asm/1.1.1.1/Mon Jun 20 05:54:40 2011/-kk/
+/invert_limb.asm/1.1.1.2/Tue Dec 17 04:03:54 2013/-kk/
+/mod_1_1.asm/1.1.1.1/Fri Nov 29 07:49:48 2013/-kk/
+/mod_1_4.asm/1.1.1.1/Fri Nov 29 07:49:48 2013/-kk/
+/mod_34lsub1.asm/1.1.1.2/Tue Dec 17 04:03:54 2013/-kk/
+/mode1o.asm/1.1.1.2/Tue Dec 17 04:03:54 2013/-kk/
+/mul_1.asm/1.1.1.2/Tue Dec 17 04:03:54 2013/-kk/
+/mul_basecase.asm/1.1.1.2/Tue Dec 17 04:03:54 2013/-kk/
+/rsh1add_n.asm/1.1.1.2/Tue Dec 17 04:03:54 2013/-kk/
+/rsh1sub_n.asm/1.1.1.2/Tue Dec 17 04:03:54 2013/-kk/
+/sqr_basecase.asm/1.1.1.1/Fri Nov 29 07:49:48 2013/-kk/
 D/p3////
 D/p4////
 D/p5////
+D/p6////
+D/p7////

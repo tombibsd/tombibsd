@@ -5261,7 +5261,7 @@ float128 float128_sqrt( float128 a )
         if ( ( aSig0 | aSig1 ) == 0 ) return packFloat128( 0, 0, 0, 0 );
         normalizeFloat128Subnormal( aSig0, aSig1, &aExp, &aSig0, &aSig1 );
     }
-    zExp = ( (unsigned int)(aExp - 0x3FFF) >> 1) + 0x3FFE;
+    zExp = (int32) ( (aExp - 0x3FFF) >> 1) + 0x3FFE;
     aSig0 |= LIT64( 0x0001000000000000 );
     zSig0 = estimateSqrt32((int16)aExp, (bits32)(aSig0>>17));
     shortShift128Left( aSig0, aSig1, 13 - ( aExp & 1 ), &aSig0, &aSig1 );

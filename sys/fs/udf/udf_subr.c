@@ -4764,7 +4764,6 @@ udf_dir_detach(struct udf_mount *ump, struct udf_node *dir_node,
 	struct dirhash       *dirh;
 	struct dirhash_entry *dirh_ep;
 	struct file_entry    *fe  = dir_node->fe;
-	struct extfile_entry *efe = dir_node->efe;
 	struct fileid_desc *fid;
 	struct dirent *dirent;
 	uint64_t diroffset;
@@ -4785,7 +4784,7 @@ udf_dir_detach(struct udf_mount *ump, struct udf_node *dir_node,
 
 	/* get directory filesize */
 	if (!fe) {
-		assert(efe);
+		assert(dir_node->efe);
 	}
 
 	/* allocate temporary space for fid */

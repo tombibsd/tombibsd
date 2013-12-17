@@ -22,6 +22,10 @@ __RCSID("$NetBSD$");
 #include "math.h"
 #include "math_private.h"
 
+#ifndef __HAVE_LONG_DOUBLE
+__strong_alias(fabsl, fabs)
+#endif
+
 double
 fabs(double x)
 {

@@ -87,7 +87,7 @@ SUBDIR+=	../external/gpl3/gcc/lib/libgomp
 # specific build area, but we get better parallelism this way.
 SUBDIR+=	../external/lgpl3/gmp/lib/libgmp
 SUBDIR+=	../external/lgpl3/mpfr/lib/libmpfr
-SUBDIR+=	../external/lgpl2/mpc/lib/libmpc
+SUBDIR+=	../external/lgpl3/mpc/lib/libmpc
 . endif
 .endif
 

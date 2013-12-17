@@ -46,7 +46,7 @@
 /*
  * Queue of signals.
  */
-typedef CIRCLEQ_HEAD(ksiginfoq, ksiginfo) ksiginfoq_t;
+typedef TAILQ_HEAD(ksiginfoq, ksiginfo) ksiginfoq_t;
 
 /*
  * Process signal actions, possibly shared between processes.
@@ -222,13 +222,13 @@ firstsig(const sigset_t *ss)
 static inline void
 ksiginfo_queue_init(ksiginfoq_t *kq)
 {
-	CIRCLEQ_INIT(kq);
+	TAILQ_INIT(kq);
 }
 
 static inline void
 ksiginfo_queue_drain(ksiginfoq_t *kq)
 {
-	if (!CIRCLEQ_EMPTY(kq))
+	if (!TAILQ_EMPTY(kq))
 		ksiginfo_queue_drain0(kq);
 }
 

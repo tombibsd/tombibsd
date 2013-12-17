@@ -1,7 +1,7 @@
 /n_argred.S/1.9/Thu Apr 19 00:37:20 2007/-kk/
 /n_atan2.S/1.8/Thu Mar 20 18:49:39 2008/-kk/
 /n_cabs.S/1.6/Thu Mar 20 16:41:26 2008/-kk/
-/n_cbrt.S/1.6/Thu Aug  7 16:44:45 2003/-kk/
+/n_cbrt.S/1.7/Tue Dec 17 04:04:51 2013/-kk/
 /n_infnan.S/1.6/Thu Aug  7 16:44:45 2003/-kk/
 /n_scalbn.S/1.4/Thu Oct 24 10:28:53 2013/-kk/
 /n_sincos.S/1.8/Thu Aug  7 16:44:45 2003/-kk/

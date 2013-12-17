@@ -1396,10 +1396,6 @@ sysctl_inpcblist(SYSCTLFN_ARGS)
 	struct sockaddr_in6 *in6;
 	const struct in6pcb *in6p;
 #endif
-	/*
-	 * sysctl_data is const, but CIRCLEQ_FOREACH can't use a const
-	 * struct inpcbtable pointer, so we have to discard const.  :-/
-	 */
 	struct inpcbtable *pcbtbl = __UNCONST(rnode->sysctl_data);
 	const struct inpcb_hdr *inph;
 	struct tcpcb *tp;
@@ -1439,7 +1435,7 @@ sysctl_inpcblist(SYSCTLFN_ARGS)
 
 	mutex_enter(softnet_lock);
 
-	CIRCLEQ_FOREACH(inph, &pcbtbl->inpt_queue, inph_queue) {
+	TAILQ_FOREACH(inph, &pcbtbl->inpt_queue, inph_queue) {
 #ifdef INET
 		inp = (const struct inpcb *)inph;
 #endif

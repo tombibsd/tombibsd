@@ -248,15 +248,16 @@ ultrix_sys_getmnt(struct lwp *l, const struct ultrix_sys_getmnt_args *uap, regis
 				    sizeof(*SCARG(uap, start))))  != 0)
 			goto bad;
 		mutex_enter(&mountlist_lock);
-		for (skip = start, mp = mountlist.cqh_first;
-		    mp != (void*)&mountlist && skip-- > 0; mp = nmp)
-			nmp = mp->mnt_list.cqe_next;
+		for (skip = start, mp = TAILQ_FIRST(&mountlist);
+		    mp != NULL && skip-- > 0;
+		    mp = TAILQ_NEXT(mp, mnt_list))
+			continue;
 		mutex_exit(&mountlist_lock);
 	}
 
 	mutex_enter(&mountlist_lock);
-	for (count = 0, mp = mountlist.cqh_first;
-	    mp != (void*)&mountlist && count < maxcount; mp = nmp) {
+	for (count = 0, mp = TAILQ_FIRST(&mountlist);
+	    mp != NULL && count < maxcount; mp = nmp) {
 		if (vfs_busy(mp, &nmp)) {
 			continue;
 		}

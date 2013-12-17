@@ -128,6 +128,12 @@ powf(float x, float y)
    return pow((double) x, (double) (y));
 }
 
+long double
+powl(long double x, long double y)
+{
+   return pow((double) x, (double) (y));
+}
+
 double
 pow(double x, double y)
 {

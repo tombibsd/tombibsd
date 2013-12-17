@@ -399,8 +399,7 @@ usbd_alloc_xfer(usbd_device_handle dev)
 	if (xfer == NULL)
 		return (NULL);
 	xfer->device = dev;
-	callout_init(&xfer->timeout_handle,
-	    dev->bus->methods->get_lock ? CALLOUT_MPSAFE : 0);
+	callout_init(&xfer->timeout_handle, CALLOUT_MPSAFE);
 	cv_init(&xfer->cv, "usbxfer");
 	cv_init(&xfer->hccv, "usbhcxfer");
 	DPRINTFN(5,("usbd_alloc_xfer() = %p\n", xfer));

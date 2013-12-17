@@ -59,6 +59,5 @@ __isnanl(long double x)
 	u.extu_ld = x;
 
 	return (u.extu_ext.ext_exp == EXT_EXP_INFNAN &&
-	    (u.extu_ext.ext_frach  != 0 || u.extu_ext.ext_frachm != 0 ||
-	     u.extu_ext.ext_fraclm != 0 || u.extu_ext.ext_fracl  != 0));
+	    (u.extu_ext.ext_frach  != 0 || u.extu_ext.ext_fracl  != 0));
 }

@@ -599,8 +599,7 @@ procfs_domounts(struct lwp *curl, struct proc *p,
 	bf = malloc(LBFSZ, M_TEMP, M_WAITOK);
 
 	mutex_enter(&mountlist_lock);
-	for (mp = CIRCLEQ_FIRST(&mountlist); mp != (void *)&mountlist;
-	    mp = nmp) {
+	for (mp = TAILQ_FIRST(&mountlist); mp != NULL; mp = nmp) {
 		struct statvfs sfs;
 
 		if (vfs_busy(mp, &nmp))

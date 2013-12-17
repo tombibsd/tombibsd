@@ -325,9 +325,7 @@ ffs_mountroot(void)
 		return (error);
 	}
 	mp->mnt_flag &= ~MNT_FORCE;
-	mutex_enter(&mountlist_lock);
-	CIRCLEQ_INSERT_TAIL(&mountlist, mp, mnt_list);
-	mutex_exit(&mountlist_lock);
+	mountlist_append(mp);
 	ump = VFSTOUFS(mp);
 	fs = ump->um_fs;
 	memset(fs->fs_fsmnt, 0, sizeof(fs->fs_fsmnt));

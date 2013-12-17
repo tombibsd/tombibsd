@@ -207,6 +207,7 @@ SUBDIR+= \
 	liblldbPluginSymbolFileDWARF \
 	liblldbPluginSymbolFileSymtab \
 	liblldbPluginSymbolVendorELF \
+	liblldbPluginSystemRuntimeMacOSX \
 	liblldbPluginUnwindAssemblyInstEmulation \
 	liblldbPluginUnwindAssemblyX86 \
 	liblldbSymbol \

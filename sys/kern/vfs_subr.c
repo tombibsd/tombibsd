@@ -631,8 +631,7 @@ sysctl_kern_vnode(SYSCTLFN_ARGS)
 
 	sysctl_unlock();
 	mutex_enter(&mountlist_lock);
-	for (mp = CIRCLEQ_FIRST(&mountlist); mp != (void *)&mountlist;
-	    mp = nmp) {
+	for (mp = TAILQ_FIRST(&mountlist); mp != NULL; mp = nmp) {
 		if (vfs_busy(mp, &nmp)) {
 			continue;
 		}
@@ -1264,8 +1263,7 @@ printlockedvnodes(void)
 
 	printf("Locked vnodes\n");
 	mutex_enter(&mountlist_lock);
-	for (mp = CIRCLEQ_FIRST(&mountlist); mp != (void *)&mountlist;
-	     mp = nmp) {
+	for (mp = TAILQ_FIRST(&mountlist); mp != NULL; mp = nmp) {
 		if (vfs_busy(mp, &nmp)) {
 			continue;
 		}

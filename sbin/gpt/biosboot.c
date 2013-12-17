@@ -291,7 +291,6 @@ cmd_biosboot(int argc, char *argv[])
 		start = 0;
 		size = 0;
 
-#ifdef __NetBSD__
 		/*
 		 * If a dk wedge was specified, loader should be
 		 * installed onto parent device
@@ -315,7 +314,6 @@ cmd_biosboot(int argc, char *argv[])
 #endif
 	close:
 		close(fd);
-#endif	/* __NetBSD__*/
 
 		fd = gpt_open(dev);
 	next:

@@ -636,8 +636,10 @@ _rtld(Elf_Addr *sp, Elf_Addr relocbase)
 	 * one is being used.
 	 */
 	if (_rtld_objmain->interp != NULL &&
-	    strcmp(_rtld_objmain->interp, _rtld_objself.path) != 0)
+	    strcmp(_rtld_objmain->interp, _rtld_objself.path) != 0) {
 		_rtld_objself.path = xstrdup(_rtld_objmain->interp);
+		_rtld_objself.pathlen = strlen(_rtld_objself.path);
+	}
 	dbg(("actual dynamic linker is %s", _rtld_objself.path));
 
 	_rtld_digest_dynamic(execname, _rtld_objmain);

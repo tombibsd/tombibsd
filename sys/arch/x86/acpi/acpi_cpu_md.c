@@ -986,7 +986,7 @@ acpicpu_md_tstate_set(struct acpicpu_tstate *ts)
 	uint8_t i;
 
 	val = ts->ts_control;
-	val = val & __BITS(1, 4);
+	val = val & __BITS(0, 4);
 
 	wrmsr(MSR_THERM_CONTROL, val);
 

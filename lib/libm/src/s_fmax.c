@@ -34,6 +34,10 @@ __FBSDID("$FreeBSD: src/lib/msun/src/s_fmax.c,v 1.1 2004/06/30 07:04:01 das Exp 
 
 #include <machine/ieee.h>
 
+#ifndef __HAVE_LONG_DOUBLE
+__strong_alias(fmaxl, fmax)
+#endif
+
 double
 fmax(double x, double y)
 {

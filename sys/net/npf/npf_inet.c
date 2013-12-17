@@ -60,7 +60,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include "npf_impl.h"
 
 /*
- * npf_fixup{16,32}_cksum: update IPv4 checksum.
+ * npf_fixup{16,32}_cksum: incremental update of the Internet checksum.
  */
 
 uint16_t
@@ -71,22 +71,33 @@ npf_fixup16_cksum(uint16_t cksum, uint16_t odatum, uint16_t ndatum)
 	/*
 	 * RFC 1624:
 	 *	HC' = ~(~HC + ~m + m')
+	 *
+	 * Note: 1's complement sum is endian-independent (RFC 1071, page 2).
 	 */
-	sum = ~ntohs(cksum) & 0xffff;
-	sum += (~ntohs(odatum) & 0xffff) + ntohs(ndatum);
+	sum = ~cksum & 0xffff;
+	sum += (~odatum & 0xffff) + ndatum;
 	sum = (sum >> 16) + (sum & 0xffff);
 	sum += (sum >> 16);
 
-	return htons(~sum & 0xffff);
+	return ~sum & 0xffff;
 }
 
 uint16_t
 npf_fixup32_cksum(uint16_t cksum, uint32_t odatum, uint32_t ndatum)
 {
+	uint32_t sum;
 
-	cksum = npf_fixup16_cksum(cksum, odatum & 0xffff, ndatum & 0xffff);
-	cksum = npf_fixup16_cksum(cksum, odatum >> 16, ndatum >> 16);
-	return cksum;
+	/*
+	 * Checksum 32-bit datum as as two 16-bit.  Note, the first
+	 * 32->16 bit reduction is not necessary.
+	 */
+	sum = ~cksum & 0xffff;
+	sum += (~odatum & 0xffff) + (ndatum & 0xffff);
+
+	sum += (~odatum >> 16) + (ndatum >> 16);
+	sum = (sum >> 16) + (sum & 0xffff);
+	sum += (sum >> 16);
+	return ~sum & 0xffff;
 }
 
 /*
@@ -109,20 +120,19 @@ npf_addr_cksum(uint16_t cksum, int sz, const npf_addr_t *oaddr,
 }
 
 /*
- * npf_addr_sum: provide IP address as a summed (if needed) 32-bit integer.
+ * npf_addr_sum: provide IP addresses as a XORed 32-bit integer.
  * Note: used for hash function.
  */
 uint32_t
-npf_addr_sum(const int sz, const npf_addr_t *a1, const npf_addr_t *a2)
+npf_addr_mix(const int sz, const npf_addr_t *a1, const npf_addr_t *a2)
 {
 	uint32_t mix = 0;
-	int i;
 
 	KASSERT(sz > 0 && a1 != NULL && a2 != NULL);
 
-	for (i = 0; i < (sz >> 2); i++) {
-		mix += a1->s6_addr32[i];
-		mix += a2->s6_addr32[i];
+	for (int i = 0; i < (sz >> 2); i++) {
+		mix ^= a1->s6_addr32[i];
+		mix ^= a2->s6_addr32[i];
 	}
 	return mix;
 }

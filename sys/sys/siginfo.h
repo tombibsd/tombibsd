@@ -83,7 +83,7 @@ struct _ksiginfo {
 #ifdef _KERNEL
 typedef struct ksiginfo {
 	u_long			ksi_flags;	/* 4 or 8 bytes (LP64) */
-	CIRCLEQ_ENTRY(ksiginfo) ksi_list;
+	TAILQ_ENTRY(ksiginfo)	ksi_list;
 	struct _ksiginfo	ksi_info;
 	lwpid_t			ksi_lid;	/* 0, or directed to LWP */
 } ksiginfo_t;

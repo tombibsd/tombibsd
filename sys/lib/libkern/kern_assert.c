@@ -38,6 +38,7 @@
 #include <lib/libkern/libkern.h>
 #endif
 
+/* coverity[+kill] */
 void
 kern_assert(const char *fmt, ...)
 {

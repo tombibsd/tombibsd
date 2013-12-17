@@ -18,10 +18,10 @@ HOST_CPPFLAGS+=	-I${.CURDIR}/..
 
 # Link in the GMP/MPFR/MPC headers since we don't install them
 BUILDSYMLINKS+=	${NETBSDSRCDIR}/external/lgpl3/gmp/lib/libgmp/arch/${GMP_MACHINE_ARCH}/gmp.h gmp.h
-BUILDSYMLINKS+=	${NETBSDSRCDIR}/external/lgpl3/mpfr/dist/mpfr.h mpfr.h
-BUILDSYMLINKS+=	${NETBSDSRCDIR}/external/lgpl3/mpfr/dist/mpf2mpfr.h mpf2mpfr.h
-BUILDSYMLINKS+=	${NETBSDSRCDIR}/external/lgpl2/mpc/dist/src/mpc.h mpc.h
-BUILDSYMLINKS+=	${NETBSDSRCDIR}/external/lgpl2/mpc/dist/src/mpc-log.h mpc-log.h
+BUILDSYMLINKS+=	${NETBSDSRCDIR}/external/lgpl3/mpfr/dist/src/mpfr.h mpfr.h
+BUILDSYMLINKS+=	${NETBSDSRCDIR}/external/lgpl3/mpfr/dist/src/mpf2mpfr.h mpf2mpfr.h
+BUILDSYMLINKS+=	${NETBSDSRCDIR}/external/lgpl3/mpc/dist/src/mpc.h mpc.h
+BUILDSYMLINKS+=	${NETBSDSRCDIR}/external/lgpl3/mpc/dist/src/mpc-log.h mpc-log.h
 CPPFLAGS+=	-I.
 # XXX
 DPSRCS+= gmp.h mpfr.h mpf2mpfr.h mpc.h mpc-log.h

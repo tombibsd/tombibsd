@@ -1,0 +1,27 @@
+/2011-04-15-vec-init-from-vec.cl/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
+/addr-space-struct-arg.cl/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
+/address-spaces-mangling.cl/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
+/address-spaces.cl/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
+/event_t.cl/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
+/ext-vector-shuffle.cl/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
+/fpmath.cl/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
+/half.cl/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
+/kernel-arg-info.cl/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
+/kernel-attributes.cl/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
+/kernel-metadata.cl/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
+/local.cl/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
+/logical-ops.cl/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
+/opencl_types.cl/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
+/ptx-calls.cl/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
+/ptx-kernels.cl/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
+/shifts.cl/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
+/single-precision-constant.cl/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
+/spir32_target.cl/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
+/spir64_target.cl/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
+/str_literals.cl/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
+/vectorLoadStore.cl/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
+/vector_literals_nested.cl/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
+/vector_literals_valid.cl/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
+/vector_logops.cl/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
+/vector_odd.cl/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
+D

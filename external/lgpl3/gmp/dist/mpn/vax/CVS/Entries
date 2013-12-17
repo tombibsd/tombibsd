@@ -1,9 +1,10 @@
-/add_n.s/1.1.1.1/Mon Jun 20 05:54:44 2011/-kk/
-/addmul_1.s/1.1.1.1/Mon Jun 20 05:54:44 2011/-kk/
+/add_n.asm/1.1.1.1/Fri Nov 29 07:49:48 2013/-kk/
+/addmul_1.asm/1.1.1.1/Fri Nov 29 07:49:48 2013/-kk/
+/elf.m4/1.1.1.1/Fri Nov 29 07:49:48 2013/-kk/
 /gmp-mparam.h/1.1.1.1/Mon Jun 20 05:54:44 2011/-kk/
-/lshift.s/1.1.1.1/Mon Jun 20 05:54:44 2011/-kk/
-/mul_1.s/1.1.1.1/Mon Jun 20 05:54:44 2011/-kk/
-/rshift.s/1.1.1.1/Mon Jun 20 05:54:44 2011/-kk/
-/sub_n.s/1.1.1.1/Mon Jun 20 05:54:44 2011/-kk/
-/submul_1.s/1.1.1.1/Mon Jun 20 05:54:44 2011/-kk/
+/lshift.asm/1.1.1.1/Fri Nov 29 07:49:48 2013/-kk/
+/mul_1.asm/1.1.1.1/Fri Nov 29 07:49:48 2013/-kk/
+/rshift.asm/1.1.1.1/Fri Nov 29 07:49:48 2013/-kk/
+/sub_n.asm/1.1.1.1/Fri Nov 29 07:49:48 2013/-kk/
+/submul_1.asm/1.1.1.1/Fri Nov 29 07:49:48 2013/-kk/
 D

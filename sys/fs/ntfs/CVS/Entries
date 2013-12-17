@@ -10,7 +10,7 @@
 /ntfs_inode.h/1.7/Tue Jan 29 18:21:10 2008/-kk/
 /ntfs_subr.c/1.51/Thu Oct 24 10:28:58 2013/-kk/
 /ntfs_subr.h/1.6/Sun Mar  4 06:03:00 2007/-kk/
-/ntfs_vfsops.c/1.89/Thu Oct 24 10:28:58 2013/-kk/
+/ntfs_vfsops.c/1.90/Tue Dec 17 04:05:09 2013/-kk/
 /ntfs_vfsops.h/1.7/Sat Jun 28 01:34:05 2008/-kk/
 /ntfs_vnops.c/1.55/Thu Oct 24 10:28:58 2013/-kk/
 /ntfsmount.h/1.5/Sat Dec  3 17:34:43 2005/-kk/

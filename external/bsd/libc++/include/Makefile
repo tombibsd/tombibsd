@@ -3,6 +3,7 @@
 .include <bsd.init.mk>
 
 .PATH: ${LIBCXX_SRCDIR}/include
+.PATH: ${LIBCXX_SRCDIR}/include/experimental
 .PATH: ${LIBCXX_SRCDIR}/include/ext
 
 INCS=	__bit_reference \
@@ -112,6 +113,10 @@ INCS+=		cxxabi.h
 INCSDIR=	/usr/include/c++
 .for f in __hash hash_map hash_set
 INCSDIR_${f}=	/usr/include/c++/ext
+.endfor
+
+.for f in dynarray optional
+INCSDIR_${f}=	/usr/include/c++/experimental
 .endfor
 
 cxxabi.h: ${LIBCXXRT_SRCDIR}/src/cxxabi.h

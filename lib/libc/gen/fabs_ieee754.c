@@ -41,6 +41,10 @@ __RCSID("$NetBSD$");
  * 7.12.3.6 fabs - return the absolute value of the argument
  *          IEEE 754 double-precision version
  */
+#ifndef __HAVE_LONG_DOUBLE
+__strong_alias(fabsl, fabs)
+#endif
+
 double
 fabs(double x)
 {

@@ -97,7 +97,7 @@
 #include <sys/reboot.h>
 #include <sys/reboot.h>
 
-#include <machine/multiboot.h>
+#include <i386/multiboot.h>
 
 #include <lib/libsa/stand.h>
 #include <lib/libkern/libkern.h>
@@ -345,7 +345,7 @@ int
 exec_netbsd(const char *file, physaddr_t loadaddr, int boothowto, int floppy,
 	    void (*callback)(void))
 {
-	u_long          boot_argv[BOOT_NARGS];
+	uint32_t	boot_argv[BOOT_NARGS];
 	u_long		marks[MARK_MAX];
 	struct btinfo_symtab btinfo_symtab;
 	u_long		extmem;
@@ -578,7 +578,7 @@ module_init(const char *kernel_path)
 		if (fd == -1)
 			continue;
 		image_end = (image_end + PAGE_SIZE - 1) & ~(PAGE_SIZE - 1);
-		len = pread(fd, (void *)image_end, SSIZE_MAX);
+		len = pread(fd, (void *)(uintptr_t)image_end, SSIZE_MAX);
 		if (len < bm->bm_len) {
 			if ((howto & AB_SILENT) != 0)
 				printf("Loading %s ", bm->bm_path);
@@ -636,7 +636,7 @@ userconf_init(void)
 	count = 0;
 	for (uc = userconf_commands; uc != NULL; uc = uc->uc_next)
 		count++;
-	len = sizeof(btinfo_userconfcommands) +
+	len = sizeof(*btinfo_userconfcommands) +
 	      count * sizeof(struct bi_userconfcommand);
 
 	/* Allocate the userconf commands list */

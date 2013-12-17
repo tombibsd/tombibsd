@@ -284,13 +284,14 @@ form_driver(FORM *form, int c)
 			break;
 		
 		case REQ_SFIRST_FIELD:
-			fieldp = CIRCLEQ_FIRST(&form->sorted_fields);
+			fieldp = TAILQ_FIRST(&form->sorted_fields);
 			form->cur_field = fieldp->index;
 			update_field = 1;
 			break;
 		
 		case REQ_SLAST_FIELD:
-			fieldp = CIRCLEQ_LAST(&form->sorted_fields);
+			fieldp = TAILQ_LAST(&form->sorted_fields,
+			    _formi_sort_head);
 			form->cur_field = fieldp->index;
 			update_field = 1;
 			break;

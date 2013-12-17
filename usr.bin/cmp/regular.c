@@ -45,6 +45,7 @@ __RCSID("$NetBSD$");
 #include <err.h>
 #include <limits.h>
 #include <stdlib.h>
+#include <stdint.h>
 #include <stdio.h>
 
 #include "extern.h"

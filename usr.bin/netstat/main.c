@@ -227,7 +227,7 @@ struct protox ip6protox[] = {
 	  tcp6_stats,	NULL,		tcp6_dump,	"tcp6" },
 #else
 	{ N_TCBTABLE,	N_TCP6STAT,	1,	ip6protopr,
-	  tcp_stats,	NULL,		tcp_dump,	"tcp6" },
+	  tcp_stats,	NULL,		tcp6_dump,	"tcp6" },
 #endif
 	{ N_UDBTABLE,	N_UDP6STAT,	1,	ip6protopr,
 	  udp6_stats,	NULL,		0,	"udp6" },

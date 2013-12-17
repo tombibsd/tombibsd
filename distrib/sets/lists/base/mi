@@ -812,6 +812,7 @@
 ./usr/include/altq				base-c-usr
 ./usr/include/arpa				base-c-usr
 ./usr/include/c++				base-cxx-usr
+./usr/include/c++/experimental			base-cxx-usr
 ./usr/include/c++/ext				base-cxx-usr
 ./usr/include/cdk				base-obsolete		obsolete
 ./usr/include/clang-3.0				base-obsolete		obsolete

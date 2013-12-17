@@ -39,6 +39,7 @@
 #endif
 
 struct swapent;
+struct lwp;
 
 #if defined(VMSWAP)
 int	uvm_swap_get(struct vm_page *, int, int);
@@ -50,6 +51,7 @@ bool	uvm_swapisfull(void);
 #else /* defined(VMSWAP) */
 #define	uvm_swapisfull()	true
 #endif /* defined(VMSWAP) */
+void	uvm_swap_shutdown(struct lwp *);
 
 #endif /* _KERNEL */
 

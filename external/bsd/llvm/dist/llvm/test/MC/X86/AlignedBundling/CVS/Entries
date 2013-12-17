@@ -1,0 +1,18 @@
+/align-mode-argument-error.s/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/asm-printing-bundle-directives.s/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/autogen-inst-offset-align-to-end.s/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/autogen-inst-offset-padding.s/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/bundle-group-too-large-error.s/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/bundle-lock-option-error.s/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/different-sections.s/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/lit.local.cfg/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/lock-without-bundle-mode-error.s/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/long-nop-pad.s/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/pad-align-to-bundle-end.s/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/pad-bundle-groups.s/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/relax-at-bundle-end.s/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/relax-in-bundle-group.s/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/single-inst-bundling.s/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/switch-section-locked-error.s/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/unlock-without-lock-error.s/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+D

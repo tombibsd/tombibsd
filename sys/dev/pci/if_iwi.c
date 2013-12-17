@@ -930,25 +930,25 @@ iwi_newstate(struct ieee80211com *ic, enum ieee80211_state nstate, int arg)
 		break;
 
 	case IEEE80211_S_RUN:
-		if (ic->ic_opmode == IEEE80211_M_IBSS)
-			ieee80211_new_state(ic, IEEE80211_S_AUTH, -1);
+		if (ic->ic_opmode == IEEE80211_M_IBSS &&
+		    ic->ic_state == IEEE80211_S_SCAN)
+			iwi_auth_and_assoc(sc);
 		else if (ic->ic_opmode == IEEE80211_M_MONITOR)
 			iwi_set_chan(sc, ic->ic_ibss_chan);
-
-		return (*sc->sc_newstate)(ic, nstate,
-		    IEEE80211_FC0_SUBTYPE_ASSOC_RESP);
-
+		break;
 	case IEEE80211_S_ASSOC:
 		iwi_led_set(sc, IWI_LED_ASSOCIATED, 0);
+		if (ic->ic_state == IEEE80211_S_AUTH)
+			break;
+		iwi_auth_and_assoc(sc);
 		break;
 
 	case IEEE80211_S_INIT:
 		sc->flags &= ~IWI_FLAG_SCANNING;
-		return (*sc->sc_newstate)(ic, nstate, arg);
+		break;
 	}
 
-	ic->ic_state = nstate;
-	return 0;
+	return sc->sc_newstate(ic, nstate, arg);
 }
 
 /*
@@ -1240,21 +1240,25 @@ iwi_notification_intr(struct iwi_softc *sc, struct iwi_notif *notif)
 	switch (notif->type) {
 	case IWI_NOTIF_TYPE_SCAN_CHANNEL:
 #ifdef IWI_DEBUG
-		struct iwi_notif_scan_channel *chan =
-		    (struct iwi_notif_scan_channel *)(notif + 1);
+		{
+			struct iwi_notif_scan_channel *chan =
+			    (struct iwi_notif_scan_channel *)(notif + 1);
 
-		DPRINTFN(2, ("Scan of channel %u complete (%u)\n",
-		    ic->ic_channels[chan->nchan].ic_freq, chan->nchan));
+			DPRINTFN(2, ("Scan of channel %u complete (%u)\n",
+			    ic->ic_channels[chan->nchan].ic_freq, chan->nchan));
+		}
 #endif
 		break;
 
 	case IWI_NOTIF_TYPE_SCAN_COMPLETE:
 #ifdef IWI_DEBUG
-		struct iwi_notif_scan_complete *scan =
-		    (struct iwi_notif_scan_complete *)(notif + 1);
+		{
+			struct iwi_notif_scan_complete *scan =
+			    (struct iwi_notif_scan_complete *)(notif + 1);
 
-		DPRINTFN(2, ("Scan completed (%u, %u)\n", scan->nchan,
-		    scan->status));
+			DPRINTFN(2, ("Scan completed (%u, %u)\n", scan->nchan,
+			    scan->status));
+		}
 #endif
 
 		/* monitor mode uses scan to set the channel ... */

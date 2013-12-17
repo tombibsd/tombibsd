@@ -454,8 +454,7 @@ lfs_writerd(void *arg)
  		mutex_enter(&mountlist_lock);
 		lfsc = 0;
 		skipc = 0;
- 		for (mp = CIRCLEQ_FIRST(&mountlist); mp != (void *)&mountlist;
- 		     mp = nmp) {
+ 		for (mp = TAILQ_FIRST(&mountlist); mp != NULL; mp = nmp) {
  			if (vfs_busy(mp, &nmp)) {
 				++skipc;
  				continue;
@@ -609,9 +608,7 @@ lfs_mountroot(void)
 		vfs_destroy(mp);
 		return (error);
 	}
-	mutex_enter(&mountlist_lock);
-	CIRCLEQ_INSERT_TAIL(&mountlist, mp, mnt_list);
-	mutex_exit(&mountlist_lock);
+	mountlist_append(mp);
 	ump = VFSTOULFS(mp);
 	fs = ump->um_lfs;
 	memset(fs->lfs_fsmnt, 0, sizeof(fs->lfs_fsmnt));

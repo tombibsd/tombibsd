@@ -147,7 +147,7 @@
 /sa_stacks.2/1.6/Sun Dec 12 05:56:45 2004/-kk/
 /sa_yield.2/1.4/Sun May  9 11:28:58 2004/-kk/
 /sched.c/1.4/Sun Mar 18 02:04:39 2012/-kk/
-/select.2/1.39/Thu Oct 24 10:28:53 2013/-kk/
+/select.2/1.41/Tue Dec 17 04:04:50 2013/-kk/
 /semctl.2/1.20/Mon Mar 22 19:30:55 2010/-kk/
 /semctl.c/1.15/Fri Jan 16 00:02:57 2009/-kk/
 /semget.2/1.18/Sun Oct  8 08:22:34 2006/-kk/

@@ -85,3 +85,11 @@ atan(double x)
 	double one=1.0;
 	return(atan2(x,one));
 }
+
+float
+atanf(float x)
+{
+	float one=1.0;
+	return (float)atan2(x,one);
+}
+

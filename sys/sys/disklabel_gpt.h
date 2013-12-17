@@ -88,6 +88,13 @@ struct gpt_ent {
 					/* UEFI won't recognize file system */
 #define	GPT_ENT_ATTR_LEGACY_BIOS_BOOTABLE	(1ULL << 2)
 					/* legacy BIOS boot partition */
+/* The following three entries are from FreeBSD. */
+#define GPT_ENT_ATTR_BOOTME			(1ULL << 59)
+					/* indicates a bootable partition */
+#define GPT_ENT_ATTR_BOOTONCE			(1ULL << 58)
+				/* attempt to boot this partition only once */
+#define GPT_ENT_ATTR_BOOTFAILED			(1ULL << 57)
+		/* partition that was marked bootonce but failed to boot */
 
 /*
  * Partition types defined by the EFI specification:

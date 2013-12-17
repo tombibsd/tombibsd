@@ -1,0 +1,13 @@
+/argv0.txt/1.1.1.1/Thu Nov 28 14:18:16 2013/-kk/
+/fail.txt/1.1.1.1/Thu Nov 28 14:18:16 2013/-kk/
+/lit.cfg/1.1.1.1/Thu Nov 28 14:18:16 2013/-kk/
+/no-test-line.txt/1.1.1.1/Thu Nov 28 14:18:16 2013/-kk/
+/pass.txt/1.1.1.1/Thu Nov 28 14:18:16 2013/-kk/
+/requires-missing.txt/1.1.1.1/Thu Nov 28 14:18:16 2013/-kk/
+/requires-present.txt/1.1.1.1/Thu Nov 28 14:18:16 2013/-kk/
+/xfail-feature.txt/1.1.1.1/Thu Nov 28 14:18:16 2013/-kk/
+/xfail-target.txt/1.1.1.1/Thu Nov 28 14:18:16 2013/-kk/
+/xfail.txt/1.1.1.1/Thu Nov 28 14:18:16 2013/-kk/
+/xpass.txt/1.1.1.1/Thu Nov 28 14:18:16 2013/-kk/
+D/external_shell////
+D/unsupported_dir////

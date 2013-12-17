@@ -103,6 +103,12 @@ dequote(const char *s, size_t *len)
 					p++;
 					break;
 
+				case 'r':
+					/* carriage return */
+					*q++ = '\r';
+					p++;
+					break;
+
 				case 't':
 					/* tab */
 					*q++ = '\t';

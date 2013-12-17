@@ -36,7 +36,7 @@
 /sigcode32.s/1.1/Wed Jun  6 21:19:50 2001/-kk/
 /sigdebug.h/1.1/Sat Jan  9 23:12:36 1999/-kk/
 /sunos32_machdep.c/1.32/Fri Mar  4 22:25:29 2011/-kk/
-/sunos_machdep.c/1.31/Sat Nov 21 04:16:52 2009/-kk/
+/sunos_machdep.c/1.32/Tue Dec 17 04:05:05 2013/-kk/
 /sunos_sigcode.s/1.2/Sun May  5 08:21:40 2002/-kk/
 /svr4_32_machdep.c/1.38/Fri Mar  4 22:25:29 2011/-kk/
 /svr4_32_sigcode.s/1.2/Sun May  5 08:21:40 2002/-kk/

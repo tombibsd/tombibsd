@@ -15,7 +15,7 @@ PROG	usr/bin/less usr/bin/more
 SYMLINK	/bin/cat	usr/bin/strings
 
 # crunchgen source directory specials
-#SPECIAL	vi srcdir usr.bin/nvi/build
+#SPECIAL	vi srcdir external/bsd/nvi/usr.bin/nvi
 SPECIAL	less srcdir external/bsd/less/bin/less
 
 # Minimize use of MFS

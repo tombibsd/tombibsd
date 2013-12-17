@@ -46,6 +46,8 @@
 #define scalblnf _scalblnf
 #define scalblnl _scalblnl
 
+#define sqrtl _sqrtl
+#define cbrtl _cbrtl
 #define ceill _ceill
 #define floorl _floorl
 #define roundl _roundl

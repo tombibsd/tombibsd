@@ -1,31 +1,40 @@
 /README/1.1.1.1/Mon Jun 20 05:54:42 2011/-kk/
-/aors_n.asm/1.1.1.1/Mon Jun 20 05:54:42 2011/-kk/
-/aorsmul_1.asm/1.1.1.1/Mon Jun 20 05:54:42 2011/-kk/
-/bdiv_dbm1c.asm/1.1.1.1/Mon Jun 20 05:54:42 2011/-kk/
-/copyd.asm/1.1.1.1/Mon Jun 20 05:54:42 2011/-kk/
-/copyi.asm/1.1.1.1/Mon Jun 20 05:54:42 2011/-kk/
-/darwin.m4/1.1.1.1/Mon Jun 20 05:54:42 2011/-kk/
+/aors_n.asm/1.1.1.2/Tue Dec 17 04:03:54 2013/-kk/
+/aorsmul_1.asm/1.1.1.2/Tue Dec 17 04:03:54 2013/-kk/
+/bdiv_dbm1c.asm/1.1.1.2/Tue Dec 17 04:03:54 2013/-kk/
+/bdiv_q_1.asm/1.1.1.1/Fri Nov 29 07:49:48 2013/-kk/
+/copyd.asm/1.1.1.2/Tue Dec 17 04:03:54 2013/-kk/
+/copyi.asm/1.1.1.2/Tue Dec 17 04:03:54 2013/-kk/
+/darwin.m4/1.1.1.2/Tue Dec 17 04:03:54 2013/-kk/
 /dive_1.asm/1.1.1.1/Mon Jun 20 05:54:42 2011/-kk/
 /divrem_1.asm/1.1.1.1/Mon Jun 20 05:54:42 2011/-kk/
-/divrem_2.asm/1.1.1.1/Mon Jun 20 05:54:42 2011/-kk/
+/divrem_2.asm/1.1.1.2/Tue Dec 17 04:03:54 2013/-kk/
 /gmp-mparam.h/1.1.1.1/Mon Jun 20 05:54:42 2011/-kk/
-/invert_limb.asm/1.1.1.1/Mon Jun 20 05:54:42 2011/-kk/
-/lshift.asm/1.1.1.1/Mon Jun 20 05:54:42 2011/-kk/
-/mod_34lsub1.asm/1.1.1.1/Mon Jun 20 05:54:42 2011/-kk/
-/mul_1.asm/1.1.1.1/Mon Jun 20 05:54:42 2011/-kk/
-/mul_basecase.asm/1.1.1.1/Mon Jun 20 05:54:42 2011/-kk/
-/rshift.asm/1.1.1.1/Mon Jun 20 05:54:42 2011/-kk/
-/sqr_basecase.asm/1.1.1.1/Mon Jun 20 05:54:42 2011/-kk/
+/lshift.asm/1.1.1.2/Tue Dec 17 04:03:54 2013/-kk/
+/mod_34lsub1.asm/1.1.1.2/Tue Dec 17 04:03:54 2013/-kk/
+/mul_1.asm/1.1.1.2/Tue Dec 17 04:03:54 2013/-kk/
+/mul_basecase.asm/1.1.1.2/Tue Dec 17 04:03:54 2013/-kk/
+/rshift.asm/1.1.1.2/Tue Dec 17 04:03:54 2013/-kk/
+/sqr_basecase.asm/1.1.1.2/Tue Dec 17 04:03:54 2013/-kk/
 /t-zdisp.sh/1.1.1.1/Mon Jun 20 05:54:42 2011/-kk/
 /t-zdisp2.pl/1.1.1.1/Mon Jun 20 05:54:42 2011/-kk/
+/tabselect.asm/1.1.1.1/Fri Nov 29 07:49:48 2013/-kk/
 /udiv.asm/1.1.1.1/Mon Jun 20 05:54:42 2011/-kk/
 /umul.asm/1.1.1.1/Mon Jun 20 05:54:42 2011/-kk/
-/x86-defs.m4/1.1.1.1/Mon Jun 20 05:54:42 2011/-kk/
+/x86-defs.m4/1.1.1.2/Tue Dec 17 04:03:54 2013/-kk/
 D/atom////
+D/bobcat////
+D/core2////
+D/coreinhm////
+D/coreisbr////
 D/fat////
+D/geode////
 D/i486////
+D/k10////
 D/k6////
 D/k7////
+D/k8////
+D/nano////
 D/p6////
 D/pentium////
 D/pentium4////

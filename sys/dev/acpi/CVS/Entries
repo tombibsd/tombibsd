@@ -9,7 +9,7 @@
 /acpi_cpu.h/1.44/Fri Apr 27 04:38:24 2012/-kk/
 /acpi_cpu_cstate.c/1.59/Sat Feb 25 17:22:52 2012/-kk/
 /acpi_cpu_pstate.c/1.53/Tue Nov 15 07:43:37 2011/-kk/
-/acpi_cpu_tstate.c/1.31/Fri Apr 27 04:38:24 2012/-kk/
+/acpi_cpu_tstate.c/1.32/Tue Dec 17 04:05:06 2013/-kk/
 /acpi_debug.c/1.4/Wed Oct 27 14:39:26 2010/-kk/
 /acpi_display.c/1.10/Sat Jun  2 21:36:43 2012/-kk/
 /acpi_ec.c/1.72/Thu Oct 24 10:28:57 2013/-kk/

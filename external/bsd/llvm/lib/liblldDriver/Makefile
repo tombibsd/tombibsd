@@ -10,7 +10,6 @@ SRCS+=	CoreDriver.cpp \
 	DarwinLdDriver.cpp \
 	Driver.cpp \
 	GnuLdDriver.cpp \
-	InputGraph.cpp \
 	UniversalDriver.cpp \
 	WinLinkDriver.cpp
 

@@ -35,7 +35,7 @@ void pbzero(void *, size_t);
 physaddr_t vtophys(void *);
 
 ssize_t pread(int, void *, size_t);
-void startprog(physaddr_t, int, unsigned long *, physaddr_t);
+void startprog(physaddr_t, uint32_t, uint32_t *, physaddr_t);
 void multiboot(physaddr_t, physaddr_t, physaddr_t);
 
 int exec_netbsd(const char *, physaddr_t, int, int, void (*)(void));

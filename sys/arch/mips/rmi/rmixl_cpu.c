@@ -422,7 +422,6 @@ rmixl_cpu_data_print(struct cpu_data *dp)
 	printf("&cpu_xcall %p\n", &dp->cpu_xcall);		/* TBD */
 	printf("cpu_xcall_pending %d\n", dp->cpu_xcall_pending);
 	printf("cpu_onproc %p\n", dp->cpu_onproc);
-	printf("&cpu_qchain %p\n", &dp->cpu_qchain);		/* TBD */
 	printf("cpu_idlelwp %p\n", dp->cpu_idlelwp);
 	printf("cpu_lockstat %p\n", dp->cpu_lockstat);
 	printf("cpu_index %d\n", dp->cpu_index);

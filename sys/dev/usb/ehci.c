@@ -918,19 +918,16 @@ ehci_idone(struct ehci_xfer *ex)
 	DPRINTFN(/*12*/2, ("ehci_idone: ex=%p\n", ex));
 
 #ifdef DIAGNOSTIC
-	{
-		if (ex->isdone) {
+	if (ex->isdone) {
+		printf("ehci_idone: ex=%p is done!\n", ex);
 #ifdef EHCI_DEBUG
-			printf("ehci_idone: ex is done!\n   ");
-			ehci_dump_exfer(ex);
-#else
-			printf("ehci_idone: ex=%p is done!\n", ex);
+		ehci_dump_exfer(ex);
 #endif
-			return;
-		}
-		ex->isdone = 1;
+		return;
 	}
+	ex->isdone = 1;
 #endif
+
 	if (xfer->status == USBD_CANCELLED ||
 	    xfer->status == USBD_TIMEOUT) {
 		DPRINTF(("ehci_idone: aborted xfer=%p\n", xfer));
@@ -1033,14 +1030,16 @@ ehci_idone(struct ehci_xfer *ex)
 		char sbuf[128];
 
 		snprintb(sbuf, sizeof(sbuf),
-		    "\20\7HALTED\6BUFERR\5BABBLE\4XACTERR\3MISSED\1PINGSTATE",
+		    "\20\10ACTIVE\7HALTED\6BUFERR\5BABBLE"
+		    "\4XACTERR\3MISSED\2SPLIT\1PING",
 		    (u_int32_t)status);
 
-		DPRINTFN(2, ("ehci_idone: error, addr=%d, endpt=0x%02x, "
-			  "status 0x%s\n",
-			  xfer->pipe->device->address,
-			  xfer->pipe->endpoint->edesc->bEndpointAddress,
-			  sbuf));
+		DPRINTFN(2, ("%s: error, addr=%d, endpt=0x%02x, "
+		    "cerr=%d pid=%d stat=%s\n", __func__,
+		   xfer->pipe->device->address,
+		   xfer->pipe->endpoint->edesc->bEndpointAddress,
+		   EHCI_QTD_GET_CERR(status), EHCI_QTD_GET_PID(status), sbuf));
+
 		if (ehcidebug > 2) {
 			ehci_dump_sqh(epipe->sqh);
 			ehci_dump_sqtds(ex->sqtdstart);
@@ -1526,7 +1525,7 @@ ehci_dump_qtd(ehci_qtd_t *qtd)
 	printf("  status=0x%08x: toggle=%d bytes=0x%x ioc=%d c_page=0x%x\n",
 	       s, EHCI_QTD_GET_TOGGLE(s), EHCI_QTD_GET_BYTES(s),
 	       EHCI_QTD_GET_IOC(s), EHCI_QTD_GET_C_PAGE(s));
-	printf("    cerr=%d pid=%d stat=0x%s\n", EHCI_QTD_GET_CERR(s),
+	printf("    cerr=%d pid=%d stat=%s\n", EHCI_QTD_GET_CERR(s),
 	       EHCI_QTD_GET_PID(s), sbuf);
 	for (s = 0; s < 5; s++)
 		printf("  buffer[%d]=0x%08x\n", s, le32toh(qtd->qtd_buffer[s]));

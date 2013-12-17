@@ -166,10 +166,10 @@ axp_system_reset(void)
 	cpu_reset_address = 0;
 
 	/* Unmask soft reset */
-	write_miscreg(MVSOC_MLMB_RSTOUTNMASKR,
-	    MVSOC_MLMB_RSTOUTNMASKR_SOFTRSTOUTEN);
+	write_miscreg(MVSOC_MISC_RSTOUTNMASKR,
+	    MVSOC_MISC_RSTOUTNMASKR_GLOBALSOFTRSTOUTEN);
 	/* Assert soft reset */
-	write_miscreg(MVSOC_MLMB_SSRR, MVSOC_MLMB_SSRR_SYSTEMSOFTRST);
+	write_miscreg(MVSOC_MISC_SSRR, MVSOC_MISC_SSRR_GLOBALSOFTRST);
 
 	while (1);
 }

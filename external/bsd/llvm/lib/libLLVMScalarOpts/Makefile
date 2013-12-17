@@ -22,6 +22,7 @@ SRCS+=	ADCE.cpp \
 	LoopDeletion.cpp \
 	LoopIdiomRecognize.cpp \
 	LoopInstSimplify.cpp \
+	LoopRerollPass.cpp \
 	LoopRotation.cpp \
 	LoopStrengthReduce.cpp \
 	LoopUnrollPass.cpp \
@@ -33,6 +34,7 @@ SRCS+=	ADCE.cpp \
 	Reg2Mem.cpp \
 	SCCP.cpp \
 	SROA.cpp \
+	SampleProfile.cpp \
 	Scalar.cpp \
 	ScalarReplAggregates.cpp \
 	SimplifyCFGPass.cpp \

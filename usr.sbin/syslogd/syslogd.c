@@ -3207,13 +3207,15 @@ read_config_file(FILE *cf, struct filed **f_ptr)
 		if (!TypeInfo[i].queue_length_string
 		    || dehumanize_number(TypeInfo[i].queue_length_string,
 		    &TypeInfo[i].queue_length) == -1)
-			dehumanize_number(TypeInfo[i].default_length_string,
-					  &TypeInfo[i].queue_length);
+			if (dehumanize_number(TypeInfo[i].default_length_string,
+			    &TypeInfo[i].queue_length) == -1)
+				abort();
 		if (!TypeInfo[i].queue_size_string
 		    || dehumanize_number(TypeInfo[i].queue_size_string,
 		    &TypeInfo[i].queue_size) == -1)
-			dehumanize_number(TypeInfo[i].default_size_string,
-					  &TypeInfo[i].queue_size);
+			if (dehumanize_number(TypeInfo[i].default_size_string,
+			    &TypeInfo[i].queue_size) == -1)
+				abort();
 	}
 
 #ifndef DISABLE_SIGN

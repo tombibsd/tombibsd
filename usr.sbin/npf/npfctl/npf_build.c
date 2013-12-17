@@ -124,9 +124,9 @@ npfctl_debug_addif(const char *ifname)
 }
 
 bool
-npfctl_table_exists_p(const char *id)
+npfctl_table_exists_p(const char *name)
 {
-	return npf_table_exists_p(npf_conf, atoi(id));
+	return npf_conf ? npf_table_exists_p(npf_conf, name) : false;
 }
 
 static in_port_t

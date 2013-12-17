@@ -33,7 +33,7 @@ fmodl(long double x, long double y)	/* wrapper fmod */
 #ifdef _IEEE_LIBM
 	return __ieee754_fmodl(x,y);
 #else
-	double z;
+	long double z;
 	z = __ieee754_fmodl(x,y);
 	if(_LIB_VERSION == _IEEE_ ||isnan(y)||isnan(x)) return z;
 	if(y==0.0) {

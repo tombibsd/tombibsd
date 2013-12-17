@@ -40,6 +40,16 @@
  * Max error less than 0.667 ulps (unit in the last places)
  */
 
+ENTRY(cbrtf, 0)
+	cvtfd	4(%ap),-(%sp)
+	calls	$2,_C_LABEL(cbrt)
+	cvtdf	%r0,%r0
+	ret
+
+#ifdef WEAK_ALIAS
+WEAK_ALIAS(cbrtl, cbrt)
+#endif
+
 ALTENTRY(cbrt)
 ENTRY(d_cbrt, 0x00c0)		# save %r6 & %r7
 	movq	4(%ap),%r0	# %r0 = argument x

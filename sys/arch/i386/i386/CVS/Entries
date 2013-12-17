@@ -19,7 +19,7 @@
 /gdt.c/1.53/Fri Feb 24 08:06:07 2012/-kk/
 /genassym.cf/1.95/Sun Oct 27 08:19:55 2013/-kk/
 /i386_trap.S/1.1/Thu Oct 24 10:28:57 2013/-kk/
-/i386_trap_ipkdb.S/1.1/Thu Oct 24 10:28:57 2013/-kk/
+/i386_trap_ipkdb.S/1.2/Tue Dec 17 04:05:02 2013/-kk/
 /i386func.S/1.17/Wed Aug 29 22:43:35 2012/-kk/
 /ibcs2_machdep.c/1.40/Sun Feb 14 11:09:54 2010/-kk/
 /ibcs2_sigcode.S/1.5/Mon Apr 28 20:23:24 2008/-kk/
@@ -37,7 +37,7 @@
 /mptramp.S/1.25/Thu Oct 24 10:28:57 2013/-kk/
 /mtrr_k6.c/1.13/Fri Apr  4 22:07:22 2008/-kk/
 /multiboot.c/1.22/Fri Dec  7 04:49:08 2012/-kk/
-/pmc.c/1.20/Mon Jan 30 21:35:22 2012/-kk/
+/pmc.c/1.21/Tue Dec 17 04:05:02 2013/-kk/
 /process_machdep.c/1.73/Sun Oct 27 08:19:55 2013/-kk/
 /rbus_machdep.c/1.26/Fri Jul  1 18:14:15 2011/-kk/
 /spl.S/1.39/Thu Oct 24 10:28:57 2013/-kk/
@@ -45,6 +45,6 @@
 /svr4_sigcode.S/1.13/Wed Nov 19 18:35:59 2008/-kk/
 /svr4_syscall.c/1.47/Thu Jul 12 18:13:08 2012/-kk/
 /trap.c/1.266/Sat Dec  8 12:36:30 2012/-kk/
-/vector.S/1.62/Thu Oct 24 10:28:57 2013/-kk/
+/vector.S/1.63/Tue Dec 17 04:05:02 2013/-kk/
 /vm86.c/1.51/Sat Nov 21 03:11:00 2009/-kk/
 D

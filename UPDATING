@@ -16,6 +16,10 @@ See also: BUILDING, build.sh, Makefile.
 Recent changes:
 ^^^^^^^^^^^^^^^
 
+20131128:
+	The MPC and MPFR sources were updated, and builds may require their
+	tools and in-tree directories cleaned for successful updates.
+
 20130605:
 	The kernel option FAST_IPSEC no longer exists, it's been renamed
 	to IPSEC (and the older IPSEC version removed).

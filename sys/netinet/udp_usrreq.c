@@ -766,7 +766,7 @@ udp4_realinput(struct sockaddr_in *src, struct sockaddr_in *dst,
 		/*
 		 * Locate pcb(s) for datagram.
 		 */
-		CIRCLEQ_FOREACH(inph, &udbtable.inpt_queue, inph_queue) {
+		TAILQ_FOREACH(inph, &udbtable.inpt_queue, inph_queue) {
 			inp = (struct inpcb *)inph;
 			if (inp->inp_af != AF_INET)
 				continue;
@@ -911,7 +911,7 @@ udp6_realinput(int af, struct sockaddr_in6 *src, struct sockaddr_in6 *dst,
 		/*
 		 * Locate pcb(s) for datagram.
 		 */
-		CIRCLEQ_FOREACH(inph, &udbtable.inpt_queue, inph_queue) {
+		TAILQ_FOREACH(inph, &udbtable.inpt_queue, inph_queue) {
 			in6p = (struct in6pcb *)inph;
 			if (in6p->in6p_af != AF_INET6)
 				continue;

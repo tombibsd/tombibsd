@@ -114,10 +114,10 @@ rf_RegularONEFunc(RF_DagNode_t *node)
 	RF_PhysDiskAddr_t *EPDA =
 	    (RF_PhysDiskAddr_t *) node->params[EpdaIndex].p;
 	int     ESUOffset = rf_StripeUnitOffset(layoutPtr, EPDA->startSector);
-#endif /* RAID_DIAGNOSTIC */
 
 	RF_ASSERT(EPDA->type == RF_PDA_TYPE_Q);
 	RF_ASSERT(ESUOffset == 0);
+#endif /* RAID_DIAGNOSTIC */
 
 	RF_ETIMER_START(timer);
 

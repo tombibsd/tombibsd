@@ -19,8 +19,14 @@ __RCSID("$NetBSD$");
  * wrapper sqrt(x)
  */
 
+#include "namespace.h"
 #include "math.h"
 #include "math_private.h"
+
+#ifndef __HAVE_LONG_DOUBLE
+__strong_alias(_sqrtl, sqrt)
+__weak_alias(sqrtl, _sqrtl)
+#endif
 
 double
 sqrt(double x)		/* wrapper sqrt */

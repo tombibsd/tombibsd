@@ -1,10 +1,10 @@
 /dwc2_core.c/1.4/Thu Oct 24 10:28:58 2013/-kk/
 /dwc2_core.h/1.4/Thu Oct 24 10:28:58 2013/-kk/
 /dwc2_coreintr.c/1.5/Thu Oct 24 10:28:58 2013/-kk/
-/dwc2_hcd.c/1.8/Mon Nov 18 05:31:46 2013/-kk/
+/dwc2_hcd.c/1.9/Tue Dec 17 04:05:09 2013/-kk/
 /dwc2_hcd.h/1.7/Mon Nov 18 05:31:46 2013/-kk/
 /dwc2_hcdddma.c/1.4/Thu Oct 24 10:28:58 2013/-kk/
-/dwc2_hcdintr.c/1.5/Thu Oct 24 10:28:58 2013/-kk/
-/dwc2_hcdqueue.c/1.5/Mon Nov 18 05:31:46 2013/-kk/
+/dwc2_hcdintr.c/1.6/Tue Dec 17 04:05:09 2013/-kk/
+/dwc2_hcdqueue.c/1.6/Tue Dec 17 04:05:09 2013/-kk/
 /dwc2_hw.h/1.2/Thu Oct 24 10:28:58 2013/-kk/
 D

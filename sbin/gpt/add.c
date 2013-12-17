@@ -50,8 +50,8 @@ static off_t alignment, block, size;
 static unsigned int entry;
 static uint8_t *name;
 
-const char addmsg1[] = "add [-a alignment] [-b lba] [-i index] [-l label]";
-const char addmsg2[] = "    [-s lba] [-t type] device ...";
+const char addmsg1[] = "add [-a alignment] [-b blocknr] [-i index] [-l label]";
+const char addmsg2[] = "    [-s sectors] [-t type] device ...";
 
 __dead static void
 usage_add(void)
@@ -171,6 +171,8 @@ add(int fd)
 	le_uuid_enc(ent->ent_type, &type);
 	ent->ent_lba_start = htole64(map->map_start);
 	ent->ent_lba_end = htole64(map->map_start + map->map_size - 1LL);
+	if (name != NULL)
+		utf8_to_utf16(name, ent->ent_name, 36);
 
 	hdr->hdr_crc_table = htole32(crc32(lbt->map_data,
 	    le32toh(hdr->hdr_entries) * le32toh(hdr->hdr_entsz)));
@@ -180,15 +182,10 @@ add(int fd)
 	gpt_write(fd, lbt);
 	gpt_write(fd, tpg);
 
-#ifdef __FreeBSD__
-	printf("%sp%u added\n", device_name, i + 1);
-#endif
-#ifdef __NetBSD__
 	printf("Partition added, use:\n");
 	printf("\tdkctl %s addwedge <wedgename> %" PRIu64 " %" PRIu64
 	    " <type>\n", device_arg, map->map_start, map->map_size);
 	printf("to create a wedge for it\n");
-#endif
 }
 
 int
@@ -198,7 +195,6 @@ cmd_add(int argc, char *argv[])
 	int ch, fd;
 	int64_t human_num;
 
-	/* Get the migrate options */
 	while ((ch = getopt(argc, argv, "a:b:i:l:s:t:")) != -1) {
 		switch(ch) {
 		case 'a':
@@ -207,12 +203,16 @@ cmd_add(int argc, char *argv[])
 			if (dehumanize_number(optarg, &human_num) < 0)
 				usage_add();
 			alignment = human_num;
+			if (alignment < 1)
+				usage_add();
 			break;
 		case 'b':
 			if (block > 0)
 				usage_add();
-			block = strtoll(optarg, &p, 10);
-			if (*p != 0 || block < 1)
+			if (dehumanize_number(optarg, &human_num) < 0)
+				usage_add();
+			block = human_num;
+			if (block < 1)
 				usage_add();
 			break;
 		case 'i':

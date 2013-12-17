@@ -324,9 +324,7 @@ domount(kthread_t *td, vnode_t *vp, const char *fstype, char *fspath,
 		vp->v_iflag &= ~VI_MOUNT;
 		simple_unlock(&vp->v_interlock);
 		vp->v_mountedhere = mp;
-		mutex_enter(&mountlist_lock);
-		CIRCLEQ_INSERT_TAIL(&mountlist, mp, mnt_list);
-		mutex_exit(&mountlist_lock);
+		mountlist_append(mp);
 		vfs_event_signal(NULL, VQ_MOUNT, 0);
 		if (VFS_ROOT(mp, LK_EXCLUSIVE, &mvp, td))
 			panic("mount: lost mount");

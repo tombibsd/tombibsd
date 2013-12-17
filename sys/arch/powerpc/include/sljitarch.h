@@ -29,6 +29,9 @@
 #ifndef _POWERPC_SLJITARCH_H
 #define _POWERPC_SLJITARCH_H
 
+#include <sys/types.h>
+#include <machine/cpu.h>
+
 #if defined(_LP64)
 #define SLJIT_CONFIG_PPC_64 1
 #else
@@ -36,6 +39,6 @@
 #endif
 
 #define SLJIT_CACHE_FLUSH(from, to) \
-	ppc_cache_flush((from), (to))
+	__syncicache((from), (to)-(from))
 
 #endif

@@ -15,8 +15,14 @@
 __RCSID("$NetBSD$");
 #endif
 
+#include "namespace.h"
 #include "math.h"
 #include "math_private.h"
+
+#ifndef __HAVE_LONG_DOUBLE
+__strong_alias(_cbrtl, cbrt)
+__weak_alias(cbrtl, _cbrtl)
+#endif
 
 /* cbrt(x)
  * Return cube root of x

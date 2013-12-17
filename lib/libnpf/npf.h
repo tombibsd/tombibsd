@@ -111,7 +111,7 @@ int		npf_nat_insert(nl_config_t *, nl_nat_t *, pri_t);
 nl_table_t *	npf_table_create(const char *, u_int, int);
 int		npf_table_add_entry(nl_table_t *, int,
 		    const npf_addr_t *, const npf_netmask_t);
-bool		npf_table_exists_p(nl_config_t *, u_int);
+bool		npf_table_exists_p(nl_config_t *, const char *);
 int		npf_table_insert(nl_config_t *, nl_table_t *);
 void		npf_table_destroy(nl_table_t *);
 

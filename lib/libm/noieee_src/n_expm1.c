@@ -111,6 +111,12 @@ ic(invln2, 1.4426950408889633870E0,     0, 1.71547652B82FE)
 #define PREC	53
 #endif	/* defined(__vax__)||defined(tahoe) */
 
+float
+expm1f(float x)
+{
+	return (float)expm1(x);
+}
+
 double
 expm1(double x)
 {

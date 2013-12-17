@@ -112,14 +112,12 @@ int		ncpu			__read_mostly;
 int		ncpuonline		__read_mostly;
 bool		mp_online		__read_mostly;
 
+/* An array of CPUs.  There are ncpu entries. */
+struct cpu_info **cpu_infos		__read_mostly;
+
 /* Note: set on mi_cpu_attach() and idle_loop(). */
 kcpuset_t *	kcpuset_attached	__read_mostly	= NULL;
 kcpuset_t *	kcpuset_running		__read_mostly	= NULL;
-
-struct cpuqueue	cpu_queue		__cacheline_aligned
-    = CIRCLEQ_HEAD_INITIALIZER(cpu_queue);
-
-static struct cpu_info **cpu_infos	__read_mostly;
 
 /*
  * mi_cpu_init: early initialisation of MI CPU related structures.
@@ -153,7 +151,6 @@ mi_cpu_attach(struct cpu_info *ci)
 	kcpuset_create(&ci->ci_data.cpu_kcpuset, true);
 	kcpuset_set(ci->ci_data.cpu_kcpuset, cpu_index(ci));
 
-	CIRCLEQ_INSERT_TAIL(&cpu_queue, ci, ci_data.cpu_qchain);
 	TAILQ_INIT(&ci->ci_data.cpu_ld_locks);
 	__cpu_simple_lock_init(&ci->ci_data.cpu_ld_lock);
 
@@ -162,8 +159,8 @@ mi_cpu_attach(struct cpu_info *ci)
 	    cpu_index(ci));
 
 	if (__predict_false(cpu_infos == NULL)) {
-		cpu_infos =
-		    kmem_zalloc(sizeof(cpu_infos[0]) * maxcpus, KM_SLEEP);
+		size_t nslots = maxcpus * sizeof(struct cpu_info *) + 1;
+		cpu_infos = kmem_zalloc(nslots, KM_SLEEP);
 	}
 	cpu_infos[cpu_index(ci)] = ci;
 

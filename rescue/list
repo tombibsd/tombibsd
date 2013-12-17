@@ -130,7 +130,7 @@ PROG	less		more
 SPECIAL	less		srcdir	external/bsd/less/bin/less
 
 PROG	vi		ex
-SPECIAL vi        	srcdir  usr.bin/nvi/build
+SPECIAL vi        	srcdir  external/bsd/nvi/usr.bin/nvi
 
 SRCDIRS	usr.sbin
 

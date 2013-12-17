@@ -63,6 +63,7 @@ test_bpf_code(void *code, size_t size)
 {
 	ifnet_t *dummy_ifp = npf_test_addif(IFNAME_TEST, false, false);
 	npf_cache_t npc = { .npc_info = 0 };
+	bpf_args_t bc_args;
 	struct mbuf *m;
 	nbuf_t nbuf;
 	int ret, jret;
@@ -73,12 +74,17 @@ test_bpf_code(void *code, size_t size)
 	nbuf_init(&nbuf, m, dummy_ifp);
 	npf_cache_all(&npc, &nbuf);
 
-	ret = npf_bpf_filter(&npc, &nbuf, code, NULL);
+	memset(&bc_args, 0, sizeof(bpf_args_t));
+	bc_args.pkt = m;
+	bc_args.wirelen = m_length(m);
+	bc_args.arg = &npc;
+
+	ret = npf_bpf_filter(&bc_args, code, NULL);
 
 	/* JIT-compiled code. */
 	jcode = npf_bpf_compile(code, size);
 	if (jcode) {
-		jret = npf_bpf_filter(&npc, &nbuf, NULL, jcode);
+		jret = npf_bpf_filter(&bc_args, NULL, jcode);
 		assert(ret == jret);
 		bpf_jit_freecode(jcode);
 	} else if (lverbose) {

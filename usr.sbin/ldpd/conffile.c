@@ -122,7 +122,8 @@ conf_parsefile(const char *fname)
 	if (confh == -1 || fstat(confh, &fs) == -1 ||
 	    (mapped = mmap(NULL, fs.st_size, PROT_READ, MAP_SHARED, confh, 0))
 	    == MAP_FAILED) {
-		close(confh);
+		if (confh != -1)
+			close(confh);
 		return E_CONF_IO;
 	}
 

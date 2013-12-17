@@ -3,6 +3,9 @@
 /*
  * Missing stuff from OS's
  */
+#if defined(__MINT__) || defined(__linux__)
+#include <signal.h>
+#endif
 
 #ifndef MAKE_NATIVE
 static char rcsid[] = "$NetBSD$";

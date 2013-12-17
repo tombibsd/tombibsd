@@ -1,0 +1,27 @@
+/.arcconfig/1.1.1.1/Thu Nov 28 14:17:30 2013/-kk/
+/.clang-format/1.1.1.1/Thu Nov 28 14:17:29 2013/-kk/
+/.gitignore/1.1.1.1/Thu Nov 28 14:17:29 2013/-kk/
+/CMakeLists.txt/1.1.1.1/Thu Nov 28 14:17:30 2013/-kk/
+/CODE_OWNERS.TXT/1.1.1.1/Thu Nov 28 14:17:29 2013/-kk/
+/CREDITS.TXT/1.1.1.1/Thu Nov 28 14:17:30 2013/-kk/
+/LICENSE.TXT/1.1.1.1/Thu Nov 28 14:17:29 2013/-kk/
+/LLVMBuild.txt/1.1.1.1/Thu Nov 28 14:17:30 2013/-kk/
+/Makefile.common/1.1.1.1/Thu Nov 28 14:17:29 2013/-kk/
+/Makefile.config.in/1.1.1.1/Thu Nov 28 14:17:29 2013/-kk/
+/Makefile.rules/1.1.1.1/Thu Nov 28 14:17:30 2013/-kk/
+/Makefile/1.1.1.1/Thu Nov 28 14:17:29 2013/-kk/
+/README.txt/1.1.1.1/Thu Nov 28 14:17:30 2013/-kk/
+/configure/1.1.1.1/Thu Nov 28 14:17:30 2013/-kk/
+/llvm.spec.in/1.1.1.1/Thu Nov 28 14:17:30 2013/-kk/
+D/autoconf////
+D/bindings////
+D/cmake////
+D/docs////
+D/examples////
+D/include////
+D/lib////
+D/projects////
+D/test////
+D/tools////
+D/unittests////
+D/utils////

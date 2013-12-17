@@ -1083,10 +1083,11 @@ execve_runproc(struct lwp *l, struct execve_data * restrict data,
 #ifdef notyet
 	/*
 	 * Although this works most of the time [since the entry was just
-	 * entered in the cache] we don't use it because it theoretically
-	 * can fail and it is not the cleanest interface, because there
-	 * could be races. When the namei cache is re-written, this can
-	 * be changed to use the appropriate function.
+	 * entered in the cache] we don't use it because it will fail for
+	 * entries that are not placed in the cache because their name is
+	 * longer than NCHNAMLEN and it is not the cleanest interface,
+	 * because there could be races. When the namei cache is re-written,
+	 * this can be changed to use the appropriate function.
 	 */
 	else if (!(error = vnode_to_path(dp, MAXPATHLEN, p->p_textvp, l, p)))
 		data->ed_pack.ep_path = dp;
@@ -2226,7 +2227,7 @@ do_posix_spawn(struct lwp *l1, pid_t *pid_res, bool *child_ok, const char *path,
 	    (unsigned) ((char *)&p2->p_endcopy - (char *)&p2->p_startcopy));
 	p2->p_vmspace = proc0.p_vmspace;
 
-	CIRCLEQ_INIT(&p2->p_sigpend.sp_info);
+	TAILQ_INIT(&p2->p_sigpend.sp_info);
 
 	LIST_INIT(&p2->p_lwps);
 	LIST_INIT(&p2->p_sigwaiters);

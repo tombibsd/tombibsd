@@ -237,7 +237,13 @@ tmpfs_unmount(struct mount *mp, int mntflags)
 			tmpfs_dir_detach(node, de);
 			tmpfs_free_dirent(tmp, de);
 		}
+		/* Extra virtual entry (itself for the root). */
+		node->tn_links--;
 	}
+
+	/* Release the reference on root (diagnostic). */
+	node = tmp->tm_root;
+	node->tn_links--;
 
 	/* Second round, destroy all inodes. */
 	while ((node = LIST_FIRST(&tmp->tm_nodes)) != NULL) {

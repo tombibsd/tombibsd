@@ -118,13 +118,13 @@ struct netcred {
  * Network export information.
  */
 struct netexport {
-	CIRCLEQ_ENTRY(netexport) ne_list;
+	TAILQ_ENTRY(netexport) ne_list;
 	struct mount *ne_mount;
 	struct netcred ne_defexported;		      /* Default export */
 	struct radix_node_head *ne_rtable[AF_MAX+1]; /* Individual exports */
 };
-CIRCLEQ_HEAD(, netexport) netexport_list =
-    CIRCLEQ_HEAD_INITIALIZER(netexport_list);
+TAILQ_HEAD(, netexport) netexport_list =
+    TAILQ_HEAD_INITIALIZER(netexport_list);
 
 /* Publicly exported file system. */
 struct nfs_public nfs_pub;
@@ -207,9 +207,9 @@ netexport_fini(void)
 	struct mount *mp;
 	int error;
 
-	while (!CIRCLEQ_EMPTY(&netexport_list)) {
+	while (!TAILQ_EMPTY(&netexport_list)) {
 		netexport_wrlock();
-		ne = CIRCLEQ_FIRST(&netexport_list);
+		ne = TAILQ_FIRST(&netexport_list);
 		mp = ne->ne_mount;
 		error = vfs_busy(mp, NULL);
 		netexport_wrunlock();
@@ -340,14 +340,14 @@ static void
 netexport_insert(struct netexport *ne)
 {
 
-	CIRCLEQ_INSERT_HEAD(&netexport_list, ne, ne_list);
+	TAILQ_INSERT_HEAD(&netexport_list, ne, ne_list);
 }
 
 static void
 netexport_remove(struct netexport *ne)
 {
 
-	CIRCLEQ_REMOVE(&netexport_list, ne, ne_list);
+	TAILQ_REMOVE(&netexport_list, ne, ne_list);
 }
 
 static struct netexport *
@@ -355,7 +355,7 @@ netexport_lookup(const struct mount *mp)
 {
 	struct netexport *ne;
 
-	CIRCLEQ_FOREACH(ne, &netexport_list, ne_list) {
+	TAILQ_FOREACH(ne, &netexport_list, ne_list) {
 		if (ne->ne_mount == mp) {
 			goto done;
 		}
@@ -370,7 +370,7 @@ netexport_lookup_byfsid(const fsid_t *fsid)
 {
 	struct netexport *ne;
 
-	CIRCLEQ_FOREACH(ne, &netexport_list, ne_list) {
+	TAILQ_FOREACH(ne, &netexport_list, ne_list) {
 		const struct mount *mp = ne->ne_mount;
 
 		if (mp->mnt_stat.f_fsidx.__fsid_val[0] == fsid->__fsid_val[0] &&

@@ -157,8 +157,8 @@ typedef struct copper_list {
  */
 
 struct mem_node {
-	CIRCLEQ_ENTRY(mem_node) link; 
-	CIRCLEQ_ENTRY(mem_node) free_link;
+	TAILQ_ENTRY(mem_node) link; 
+	TAILQ_ENTRY(mem_node) free_link;
 	u_long size;		/* size of memory following node. */
 };
 

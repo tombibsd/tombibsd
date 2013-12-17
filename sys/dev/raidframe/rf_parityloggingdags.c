@@ -342,9 +342,7 @@ rf_CommonCreateParityLoggingSmallWriteDAG(
 	int     (*qfunc) (RF_DagNode_t * node);
 	const char   *name, *qname;
 	RF_StripeNum_t parityStripeID = rf_RaidAddressToParityStripeID(&(raidPtr->Layout), asmap->raidAddress, &which_ru);
-#ifdef RAID_DIAGNOSTIC
-	long    nfaults = qfuncs ? 2 : 1;
-#endif /* RAID_DIAGNOSTIC */
+	long    nfaults __unused = qfuncs ? 2 : 1;
 
 	if (rf_dagDebug)
 		printf("[Creating parity-logging small-write DAG]\n");

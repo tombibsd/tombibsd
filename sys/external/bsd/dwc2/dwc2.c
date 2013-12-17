@@ -1764,7 +1764,9 @@ void dwc2_host_complete(struct dwc2_hsotg *hsotg, struct dwc2_qtd *qtd,
 
 	TAILQ_INSERT_TAIL(&sc->sc_complete, dxfer, xnext);
 
+	mutex_spin_exit(&hsotg->lock);
 	usb_schedsoftintr(&sc->sc_bus);
+	mutex_spin_enter(&hsotg->lock);
 }
 
 

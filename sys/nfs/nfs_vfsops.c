@@ -379,9 +379,7 @@ nfs_mountroot(void)
 	/*
 	 * Link it into the mount list.
 	 */
-	mutex_enter(&mountlist_lock);
-	CIRCLEQ_INSERT_TAIL(&mountlist, mp, mnt_list);
-	mutex_exit(&mountlist_lock);
+	mountlist_append(mp);
 	rootvp = vp;
 	mp->mnt_vnodecovered = NULLVP;
 	vfs_unbusy(mp, false, NULL);

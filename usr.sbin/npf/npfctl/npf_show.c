@@ -155,13 +155,15 @@ print_table(npf_conf_info_t *ctx, const uint32_t *words)
 {
 	unsigned tid = words[0];
 	nl_table_t *tl;
-	char *p;
+	char *p = NULL;
 
+	/* XXX: Iterating all as we need to rewind for the next call. */
 	while ((tl = npf_table_iterate(ctx->conf)) != NULL) {
-		if (npf_table_getid(tl) == tid)
-			break;
+		if (!p && npf_table_getid(tl) == tid) {
+			easprintf(&p, "%s", npf_table_getname(tl));
+		}
 	}
-	easprintf(&p, "%s", npf_table_getname(tl));
+	assert(p != NULL);
 	return p;
 }
 

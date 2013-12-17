@@ -29,6 +29,8 @@
 #include <sys/cdefs.h>
 __RCSID("$NetBSD$");
 
+#include "crtbegin.h"
+
 typedef void (*fptr_t)(void);
 
 __dso_hidden const fptr_t __JCR_LIST__[0] __section(".jcr");
@@ -131,5 +133,3 @@ __do_global_dtors_aux(void)
 #endif
 }
 #endif /* !__ARM_EABI__ || SHARED */
-
-#include "crtbegin.h"

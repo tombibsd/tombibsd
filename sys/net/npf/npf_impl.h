@@ -193,7 +193,7 @@ uint16_t	npf_fixup16_cksum(uint16_t, uint16_t, uint16_t);
 uint16_t	npf_fixup32_cksum(uint16_t, uint32_t, uint32_t);
 uint16_t	npf_addr_cksum(uint16_t, int, const npf_addr_t *,
 		    const npf_addr_t *);
-uint32_t	npf_addr_sum(const int, const npf_addr_t *, const npf_addr_t *);
+uint32_t	npf_addr_mix(const int, const npf_addr_t *, const npf_addr_t *);
 int		npf_addr_cmp(const npf_addr_t *, const npf_netmask_t,
 		    const npf_addr_t *, const npf_netmask_t, const int);
 void		npf_addr_mask(const npf_addr_t *, const npf_netmask_t,
@@ -207,8 +207,7 @@ bool		npf_return_block(npf_cache_t *, nbuf_t *, const int);
 /* BPF interface. */
 void		npf_bpf_sysinit(void);
 void		npf_bpf_sysfini(void);
-int		npf_bpf_filter(npf_cache_t *, nbuf_t *,
-		    const void *, bpfjit_func_t);
+int		npf_bpf_filter(bpf_args_t *, const void *, bpfjit_func_t);
 void *		npf_bpf_compile(void *, size_t);
 bool		npf_bpf_validate(const void *, size_t);
 
@@ -224,6 +223,7 @@ int		npf_tableset_insert(npf_tableset_t *, npf_table_t *);
 npf_table_t *	npf_tableset_getbyname(npf_tableset_t *, const char *);
 npf_table_t *	npf_tableset_getbyid(npf_tableset_t *, u_int);
 void		npf_tableset_reload(npf_tableset_t *, npf_tableset_t *);
+void		npf_tableset_syncdict(const npf_tableset_t *, prop_dictionary_t);
 
 npf_table_t *	npf_table_create(const char *, u_int, int, size_t);
 void		npf_table_destroy(npf_table_t *);
