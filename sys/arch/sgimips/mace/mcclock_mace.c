@@ -226,13 +226,12 @@ mcclock_mace_settime_ymdhms(todr_chip_handle_t todrch, struct clock_ymdhms *dt)
 void
 mcclock_poweroff(void)
 {
-	int s;
 	uint8_t a, xctl_a, xctl_b;
 
 	if (mace0 == NULL)
 		return;
 
-	s = splhigh();
+	(void)splhigh();
 	a = ds1687_read(mace0, DS1687_CONTROLA);
 	a &= ~DS1687_DV2;
 	a |= DS1687_DV1;

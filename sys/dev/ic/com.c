@@ -385,7 +385,9 @@ com_attach_subr(struct com_softc *sc)
 {
 	struct com_regs *regsp = &sc->sc_regs;
 	struct tty *tp;
+#if defined(COM_16650) || defined(COM_16750)
 	u_int8_t lcr;
+#endif
 	const char *fifo_msg = NULL;
 	prop_dictionary_t	dict;
 	bool is_console = true;
@@ -492,6 +494,7 @@ com_attach_subr(struct com_softc *sc)
 #endif
 				sc->sc_fifolen = 16;
 
+#ifdef COM_16750
 			/*
 			 * TL16C750 can enable 64byte FIFO, only when DLAB
 			 * is 1.  However, some 16750 may always enable.  For
@@ -522,6 +525,7 @@ com_attach_subr(struct com_softc *sc)
 				SET(sc->sc_hwflags, COM_HW_AFE);
 			} else
 				CSR_WRITE_1(regsp, COM_REG_FIFO, fcr);
+#endif
 
 #ifdef COM_16650
 			CSR_WRITE_1(regsp, COM_REG_LCR, lcr);
@@ -531,9 +535,11 @@ com_attach_subr(struct com_softc *sc)
 				fifo_msg = "st16650a, working fifo";
 			else
 #endif
+#ifdef COM_16750
 			if (sc->sc_fifolen == 64)
 				fifo_msg = "tl16c750, working fifo";
 			else
+#endif
 				fifo_msg = "ns16550a, working fifo";
 		} else
 			fifo_msg = "ns16550, broken fifo";

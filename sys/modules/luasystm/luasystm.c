@@ -28,7 +28,7 @@
  * SUCH DAMAGE.
  */
 
-/* Lua core kernel services module */
+/* Lua systm module */
 
 #include <sys/param.h>
 #include <sys/lua.h>
@@ -42,7 +42,7 @@
 #include <lauxlib.h>
 
 #ifdef _MODULE
-MODULE(MODULE_CLASS_MISC, luacore, "lua");
+MODULE(MODULE_CLASS_MISC, luasystm, "lua");
 
 /* Various printing functions */
 static int
@@ -79,7 +79,7 @@ uprint(lua_State *L)
 }
 
 static int
-core_aprint_normal(lua_State *L)
+systm_aprint_normal(lua_State *L)
 {
 	const char *s;
 
@@ -90,7 +90,7 @@ core_aprint_normal(lua_State *L)
 }
 
 static int
-core_aprint_naive(lua_State *L)
+systm_aprint_naive(lua_State *L)
 {
 	const char *s;
 
@@ -101,7 +101,7 @@ core_aprint_naive(lua_State *L)
 }
 
 static int
-core_aprint_verbose(lua_State *L)
+systm_aprint_verbose(lua_State *L)
 {
 	const char *s;
 
@@ -112,7 +112,7 @@ core_aprint_verbose(lua_State *L)
 }
 
 static int
-core_aprint_debug(lua_State *L)
+systm_aprint_debug(lua_State *L)
 {
 	const char *s;
 
@@ -123,7 +123,7 @@ core_aprint_debug(lua_State *L)
 }
 
 static int
-core_aprint_error(lua_State *L)
+systm_aprint_error(lua_State *L)
 {
 	const char *s;
 
@@ -134,7 +134,7 @@ core_aprint_error(lua_State *L)
 }
 
 static int
-core_aprint_get_error_count(lua_State *L)
+systm_aprint_get_error_count(lua_State *L)
 {
 	lua_pushinteger(L, aprint_get_error_count());
 	return 1;
@@ -143,7 +143,7 @@ core_aprint_get_error_count(lua_State *L)
 /* panicing */
 
 static int
-core_panic(lua_State *L)
+systm_panic(lua_State *L)
 {
 	const char *s;
 
@@ -157,34 +157,32 @@ core_panic(lua_State *L)
 
 /* mutexes */
 
-static const luaL_Reg core_lib[ ] = {
-	{ "print",			print },
-	{ "print_nolog",		print_nolog },
-	{ "uprint",			uprint },
-	{ "aprint_normal",		core_aprint_normal },
-	{ "aprint_naive",		core_aprint_naive },
-	{ "aprint_verbose",		core_aprint_verbose },
-	{ "aprint_debug",		core_aprint_debug },
-	{ "aprint_error",		core_aprint_error },
-	{ "aprint_get_error_count",	core_aprint_get_error_count },
-
-	/* panicing */
-	{ "panic",			core_panic },
-
-	/* callouts */
-
-	/* mutexes */
-
-	{NULL, NULL}
-};
-
-
 static int
-luaopen_core(void *ls)
+luaopen_systm(void *ls)
 {
 	lua_State *L = (lua_State *)ls;
+	const luaL_Reg systm_lib[ ] = {
+		{ "print",			print },
+		{ "print_nolog",		print_nolog },
+		{ "uprint",			uprint },
+		{ "aprint_normal",		systm_aprint_normal },
+		{ "aprint_naive",		systm_aprint_naive },
+		{ "aprint_verbose",		systm_aprint_verbose },
+		{ "aprint_debug",		systm_aprint_debug },
+		{ "aprint_error",		systm_aprint_error },
+		{ "aprint_get_error_count",	systm_aprint_get_error_count },
 
-	luaL_register(L, "core", core_lib);
+		/* panicing */
+		{ "panic",			systm_panic },
+
+		/* callouts */
+
+		/* mutexes */
+
+		{NULL, NULL}
+	};
+
+	luaL_register(L, "systm", systm_lib);
 
 	/* some string values */
 	lua_pushstring(L, copyright);
@@ -212,16 +210,16 @@ luaopen_core(void *ls)
 }
 
 static int
-luacore_modcmd(modcmd_t cmd, void *opaque)
+luasystm_modcmd(modcmd_t cmd, void *opaque)
 {
 	int error;
 
 	switch (cmd) {
 	case MODULE_CMD_INIT:
-		error = lua_mod_register("core", luaopen_core);
+		error = lua_mod_register("systm", luaopen_systm);
 		break;
 	case MODULE_CMD_FINI:
-		error = lua_mod_unregister("core");
+		error = lua_mod_unregister("systm");
 		break;
 	default:
 		error = ENOTTY;

@@ -1793,7 +1793,7 @@ cmalo_cmd_set_assoc(struct malo_softc *sc)
 	hdr->result = 0;
 
 	body = (struct malo_cmd_body_assoc *)(hdr + 1);
-	memset(body, 0, sizeof(struct malo_cmd_body_assoc *));
+	memset(body, 0, sizeof(*body));
 	memcpy(body->peermac, sc->sc_net[sc->sc_net_cur].bssid, ETHER_ADDR_LEN);
 	body->capinfo = htole16(sc->sc_net[sc->sc_net_cur].capinfo);
 	body->listenintrv = htole16(10);

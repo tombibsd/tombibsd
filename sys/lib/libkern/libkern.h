@@ -189,9 +189,15 @@ tolower(int ch)
 #endif
 #endif
 
+#ifndef	CTASSERT
 #define	CTASSERT(x)		__CTASSERT(x)
+#endif
+#ifndef	CTASSERT_SIGNED
 #define	CTASSERT_SIGNED(x)	__CTASSERT(((typeof(x))-1) < 0)
+#endif
+#ifndef	CTASSERT_UNSIGNED
 #define	CTASSERT_UNSIGNED(x)	__CTASSERT(((typeof(x))-1) >= 0)
+#endif
 
 #ifndef DIAGNOSTIC
 #define _DIAGASSERT(a)	(void)0
@@ -321,6 +327,8 @@ char	*initstate(unsigned long, char *, size_t);
 char	*setstate(char *);
 #endif /* SMALL_RANDOM */
 long	 random(void);
+void	 mi_vector_hash(const void * __restrict, size_t, uint32_t,
+	    uint32_t[3]);
 void	 mtprng_init32(struct mtprng_state *, uint32_t);
 void	 mtprng_initarray(struct mtprng_state *, const uint32_t *, size_t);
 uint32_t mtprng_rawrandom(struct mtprng_state *);

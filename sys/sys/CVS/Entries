@@ -1,4 +1,4 @@
-/Makefile/1.144/Tue Oct 29 08:27:26 2013/-kk/
+/Makefile/1.145/Wed Dec 25 07:37:48 2013/-kk/
 /acct.h/1.27/Sun Jan 11 02:45:55 2009/-kk/
 /agpio.h/1.10/Tue Feb 15 08:57:01 2011/-kk/
 /aio.h/1.12/Sat Jan  7 19:48:19 2012/-kk/
@@ -20,6 +20,7 @@
 /callback.h/1.3/Mon Jul  9 21:11:32 2007/-kk/
 /callout.h/1.31/Mon Apr 28 20:24:10 2008/-kk/
 /cctr.h/1.3/Mon Apr 28 20:24:10 2008/-kk/
+/cdbr.h/1.1/Wed Dec 11 01:24:08 2013/-kk/
 /cdefs.h/1.116/Tue Oct 29 07:54:16 2013/-kk/
 /cdefs_aout.h/1.20/Thu May 18 17:55:38 2006/-kk/
 /cdefs_elf.h/1.43/Thu Oct 24 10:28:58 2013/-kk/
@@ -124,7 +125,7 @@
 /md4.h/1.7/Mon Dec 26 18:41:36 2005/-kk/
 /md5.h/1.9/Mon Dec 26 18:41:36 2005/-kk/
 /midiio.h/1.15/Mon Apr 28 20:24:11 2008/-kk/
-/mman.h/1.44/Thu Jan  5 15:19:52 2012/-kk/
+/mman.h/1.45/Wed Dec 25 07:37:48 2013/-kk/
 /module.h/1.34/Sun Oct 27 08:20:07 2013/-kk/
 /mount.h/1.210/Tue Dec 17 04:05:17 2013/-kk/
 /mqueue.h/1.16/Mon Nov 21 04:36:05 2011/-kk/
@@ -203,9 +204,9 @@
 /stdint.h/1.7/Thu Oct 24 10:28:58 2013/-kk/
 /swap.h/1.8/Wed Jan 14 02:20:45 2009/-kk/
 /syncobj.h/1.8/Wed Oct 21 21:12:07 2009/-kk/
-/syscall.h/1.266/Tue Dec 17 04:13:40 2013/-kk/
+/syscall.h/1.267/Wed Dec 25 07:37:48 2013/-kk/
 /syscall_stats.h/1.4/Wed Nov 12 12:36:28 2008/-kk/
-/syscallargs.h/1.249/Tue Dec 17 04:13:40 2013/-kk/
+/syscallargs.h/1.250/Wed Dec 25 07:37:48 2013/-kk/
 /syscallvar.h/1.8/Thu Oct 24 10:28:58 2013/-kk/
 /sysctl.h/1.209/Thu Oct 24 10:28:58 2013/-kk/
 /syslimits.h/1.27/Fri Dec  7 07:06:39 2012/-kk/
@@ -229,13 +230,13 @@
 /ttycom.h/1.20/Fri Oct 19 16:49:21 2012/-kk/
 /ttydefaults.h/1.16/Sat May 24 14:06:39 2008/-kk/
 /ttydev.h/1.9/Sun Dec 11 12:25:21 2005/-kk/
-/types.h/1.90/Thu Oct 24 10:28:58 2013/-kk/
+/types.h/1.91/Wed Dec 25 07:37:48 2013/-kk/
 /ucontext.h/1.18/Thu Oct 24 10:28:58 2013/-kk/
 /ucred.h/1.36/Wed Oct 12 23:03:36 2011/-kk/
 /uidinfo.h/1.3/Sat Jun  9 02:31:15 2012/-kk/
 /uio.h/1.36/Wed Jul 27 13:20:07 2011/-kk/
 /un.h/1.46/Sun Jun 26 16:43:12 2011/-kk/
-/unistd.h/1.54/Fri Nov  2 21:41:26 2012/-kk/
+/unistd.h/1.55/Wed Dec 25 07:37:48 2013/-kk/
 /unpcb.h/1.17/Thu Apr 24 11:38:39 2008/-kk/
 /user.h/1.18/Fri Jan 14 02:06:34 2011/-kk/
 /userconf.h/1.7/Tue May 31 23:28:53 2011/-kk/

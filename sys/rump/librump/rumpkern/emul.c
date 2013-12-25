@@ -277,7 +277,7 @@ void
 syscall_intern(struct proc *p)
 {
 
-	/* no you don't */
+	p->p_emuldata = NULL;
 }
 #endif
 

@@ -140,7 +140,17 @@
 /* linux/include/asm-mips/errno.h states theses are Linux extensions */
 #define LINUX_ENOMEDIUM		159
 #define LINUX_EMEDIUMTYPE	160
+#define LINUX_ENOKEY		161
+#define LINUX_EKEYEXPIRED	162
+#define LINUX_EKEYREVOKED	163
+#define LINUX_EKEYREJECTED	164
+#define LINUX_EOWNERDEAD	165
+#define LINUX_ENOTRECOVERABLE	166
+#define LINUX_ERFKILL		167
+#define LINUX_EHWPOISON		168
+
 #define LINUX_EDQUOT		1133
+
 /* Biggest errno */
 #define LINUX_EMAXERRNO		1133
 

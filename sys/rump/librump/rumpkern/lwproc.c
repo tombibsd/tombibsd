@@ -137,6 +137,9 @@ lwproc_newproc(struct proc *parent, int flags)
 
 	p->p_vmspace = vmspace_kernel();
 	p->p_emul = emul_default;
+#ifdef __HAVE_SYSCALL_INTERN
+	p->p_emul->e_syscall_intern(p);
+#endif
 	if (*parent->p_comm)
 		strcpy(p->p_comm, parent->p_comm);
 	else

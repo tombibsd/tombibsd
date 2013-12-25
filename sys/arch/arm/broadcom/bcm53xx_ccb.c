@@ -81,13 +81,13 @@ bcmccb_print(void *aux, const char *pnp)
 	return QUIET;
 }
 
-static inline uint32_t
+__unused static inline uint32_t
 bcmccb_read_4(struct bcmccb_softc *sc, bus_size_t o)
 {
 	return bus_space_read_4(sc->sc_bst, sc->sc_bsh, o);
 }
 
-static inline void
+__unused static inline void
 bcmccb_write_4(struct bcmccb_softc *sc, bus_size_t o, uint32_t v)
 {
 	return bus_space_write_4(sc->sc_bst, sc->sc_bsh, o, v);

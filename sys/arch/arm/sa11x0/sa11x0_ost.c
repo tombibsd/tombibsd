@@ -308,7 +308,7 @@ delay(u_int usecs)
 	    + (TIMER_FREQUENCY / 100) * usec / 10000;
 
 	if (saost_sc == NULL) {
-		volatile int k;
+		volatile int k = 0;
 		int j;
 		/* clock isn't initialized yet */
 		for (; usecs > 0; usecs--)

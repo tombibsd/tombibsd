@@ -146,7 +146,7 @@ int option_chain_head_dereference (ptr, file, line)
 		cdr = car -> cdr;
 		if (car -> car)
 			option_cache_dereference ((struct option_cache **)
-						  (&car -> car), MDL);
+						  (void *)(&car -> car), MDL);
 		dfree (car, MDL);
 		car = cdr;
 	}

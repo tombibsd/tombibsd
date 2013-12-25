@@ -485,7 +485,7 @@ emit_pkt_read(struct sljit_compiler* compiler,
     struct bpf_insn *pc, struct sljit_jump *to_mchain_jump,
     struct sljit_jump **ret0, size_t *ret0_size)
 {
-	int status;
+	int status = 0; /* XXX gcc 4.1 */
 	uint32_t width;
 	struct sljit_jump *jump;
 #ifdef _KERNEL

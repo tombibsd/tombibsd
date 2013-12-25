@@ -146,14 +146,6 @@ pxa2x0_intr_bootstrap(vaddr_t addr)
 	pxaic_base = addr;
 }
 
-static inline void
-__raise(int ipl)
-{
-
-	if (curcpu()->ci_cpl < ipl)
-		pxa2x0_setipl(ipl);
-}
-
 /*
  * called from irq_entry.
  */

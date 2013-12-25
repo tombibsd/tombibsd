@@ -154,10 +154,7 @@ extern vaddr_t avail_end;
 #ifdef MODULAR
 vaddr_t module_start, module_end;
 static struct vm_map module_map_store;
-extern struct vm_map *module_map;
 #endif
-
-extern	void *msgbufaddr;
 
 /*
  * Maximum number of DMA segments we'll allow in dmamem_load()
@@ -592,8 +589,6 @@ cpu_reboot(int howto, char *user_boot_string)
 	maybe_dump(howto);
 
 	if ((howto & RB_NOSYNC) == 0 && !syncdone) {
-		extern struct lwp lwp0;
-
 		if (!syncdone) {
 		syncdone = true;
 		vfs_shutdown();

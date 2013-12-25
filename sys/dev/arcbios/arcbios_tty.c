@@ -235,11 +235,11 @@ void
 arcbios_tty_poll(void *v)
 {
 	struct tty *tp = v;
-	int c, l_r;
+	int c;
 
 	while (arcbios_tty_getchar(&c)) {
 		if (tp->t_state & TS_ISOPEN)
-			l_r = (*tp->t_linesw->l_rint)(c, tp);
+			(void)(*tp->t_linesw->l_rint)(c, tp);
 	}
 	callout_reset(&arcbios_tty_ch, 1, arcbios_tty_poll, tp);
 }

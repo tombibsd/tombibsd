@@ -295,13 +295,11 @@ mace_intr_disestablish(void *cookie)
 void
 mace_intr(int irqs)
 {
-	uint64_t isa_irq, isa_mask;
+	uint64_t isa_irq;
 	int i;
 
 	/* irq 4 is the ISA cascade interrupt.  Must handle with care. */
 	if (irqs & (1 << 4)) {
-		isa_mask = mips3_ld((volatile uint64_t *)MIPS_PHYS_TO_KSEG1(MACE_BASE
-		    + MACE_ISA_INT_MASK));
 		isa_irq = mips3_ld((volatile uint64_t *)MIPS_PHYS_TO_KSEG1(MACE_BASE
 		    + MACE_ISA_INT_STATUS));
 		for (i = 0; i < MACE_NINTR; i++) {

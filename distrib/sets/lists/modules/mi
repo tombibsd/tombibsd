@@ -98,10 +98,12 @@
 ./@MODULEDIR@/lfs/lfs.kmod			base-kernel-modules	kmod
 ./@MODULEDIR@/lua				base-kernel-modules	kmod
 ./@MODULEDIR@/lua/lua.kmod			base-kernel-modules	kmod
-./@MODULEDIR@/luacore				base-kernel-modules	kmod
-./@MODULEDIR@/luacore/luacore.kmod		base-kernel-modules	kmod
+./@MODULEDIR@/luacore				base-obsolete		obsolete
+./@MODULEDIR@/luacore/luacore.kmod		base-obsolete		obsolete
 ./@MODULEDIR@/luapmf				base-kernel-modules	kmod
 ./@MODULEDIR@/luapmf/luapmf.kmod		base-kernel-modules	kmod
+./@MODULEDIR@/luasystm				base-kernel-modules	kmod
+./@MODULEDIR@/luasystm/luasystm.kmod		base-kernel-modules	kmod
 ./@MODULEDIR@/mfs				base-kernel-modules	kmod
 ./@MODULEDIR@/mfs/mfs.kmod			base-kernel-modules	kmod
 ./@MODULEDIR@/miiverbose			base-kernel-modules	kmod

@@ -97,7 +97,7 @@ bcmrng_read_multi_4(struct bcmrng_softc *sc, bus_size_t o, uint32_t *p,
 	return bus_space_read_multi_4(sc->sc_bst, sc->sc_bsh, o, p, c);
 }
 
-static inline void
+__unused static inline void
 bcmrng_write_4(struct bcmrng_softc *sc, bus_size_t o, uint32_t v)
 {
 	bus_space_write_4(sc->sc_bst, sc->sc_bsh, o, v);

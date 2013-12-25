@@ -57,15 +57,15 @@ __RCSID("$NetBSD$");
 #define startcomment(where) (where[0] == '/' && where[1] == '*')
 #define endcomment(where) (where[-1] == '*' && where[0] == '/')
 
-static void unget_token __P((token *));
-static void findstrconst __P((char **, const char **));
-static void findchrconst __P((char **, const char **));
-static void findconst __P((char **, const char **));
-static void findkind __P((char **, token *));
-static int cppline __P((const char *));
-static int directive __P((const char *));
-static void printdirective __P((const char *));
-static void docppline __P((char *, int *, const char **));
+static void unget_token(token *);
+static void findstrconst(char **, const char **);
+static void findchrconst(char **, const char **);
+static void findconst(char **, const char **);
+static void findkind(char **, token *);
+static int cppline(const char *);
+static int directive(const char *);
+static void printdirective(const char *);
+static void docppline(char *, int *, const char **);
 
 static int pushed = 0;		/* is a token pushed */
 static token lasttok;		/* last token, if pushed */

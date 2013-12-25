@@ -143,11 +143,13 @@ armgic_ipl_to_priority(int ipl)
 	return (IPL_HIGH - ipl) * GICC_PMR_PRIORITIES / NIPL;
 }
 
+#if 0
 static inline int
 armgic_priority_to_ipl(uint32_t priority)
 {
 	return IPL_HIGH - priority * NIPL / GICC_PMR_PRIORITIES;
 }
+#endif
 
 static void
 armgic_unblock_irqs(struct pic_softc *pic, size_t irq_base, uint32_t irq_mask)

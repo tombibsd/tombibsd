@@ -212,7 +212,7 @@ CLEANFILES+=	${DPSRCS} gen-fac gen-fib gen-bases gen-jacobitab \
 dummy:
 	mkdir dummy
 ${.OBJDIR}/config.m4: ${.CURDIR}/arch/${GMP_MACHINE_ARCH}/config.m4
-	cp ${.CURDIR}/arch/${GMP_MACHINE_ARCH}/config.m4 ${.OBJDIR}/config.m4
+	rm -f ${.OBJDIR}/config.m4 && cp ${.CURDIR}/arch/${GMP_MACHINE_ARCH}/config.m4 ${.OBJDIR}/config.m4
 
 CLEANFILES+=	config.m4
 clean: cleandummy

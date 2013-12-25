@@ -169,7 +169,7 @@ nb_name_encode(struct nb_name *np, u_char *dst)
 		memsetw(cp + 2, NB_NAMELEN - 1, NBENCODE(' '));
 		cp += NB_ENCNAMELEN;
 	} else {
-		for (i = 0; *name && i < NB_NAMELEN; i++, cp += 2, name++) {
+		for (i = 0; *name && i < NB_NAMELEN - 1; i++, cp += 2, name++) {
 			ch = NBENCODE(toupper(*name));
 			memcpy(cp, &ch, 2);
 		}
@@ -183,7 +183,7 @@ nb_name_encode(struct nb_name *np, u_char *dst)
 		cp += 2;
 	}
 	*cp = 0;
-	if (np->nn_scope == NULL)
+	if (np->nn_scope == NULL || *np->nn_scope == 0)
 		return nb_encname_len(dst);
 	plen = cp++;
 	lblen = 0;

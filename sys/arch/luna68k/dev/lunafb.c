@@ -461,6 +461,7 @@ omfb_getdevconfig(paddr_t paddr, struct om_hwdevconfig *dc)
 	omfb_stdscreen.nrows = ri->ri_rows;
 	omfb_stdscreen.ncols = ri->ri_cols;
 	omfb_stdscreen.textops = &ri->ri_ops;
+	omfb_stdscreen.capabilities = ri->ri_caps;
 	omfb_stdscreen.fontwidth = ri->ri_font->fontwidth;
 	omfb_stdscreen.fontheight = ri->ri_font->fontheight;
 }

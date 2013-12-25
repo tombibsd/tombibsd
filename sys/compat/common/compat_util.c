@@ -139,6 +139,7 @@ emul_find_interp(struct lwp *l, struct exec_package *epp, const char *itp)
 	error = namei(&nd);
 	if (error != 0) {
 		epp->ep_interp = NULL;
+		pathbuf_destroy(pb);
 		return error;
 	}
 

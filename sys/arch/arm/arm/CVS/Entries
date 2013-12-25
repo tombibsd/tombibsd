@@ -12,12 +12,12 @@
 /compat_16_machdep.c/1.17/Thu Oct 24 10:28:57 2013/-kk/
 /copystr.S/1.11/Thu Oct 24 10:28:57 2013/-kk/
 /core_machdep.c/1.2/Sat Aug 15 23:44:58 2009/-kk/
-/cpu_exec.c/1.7/Tue Oct 29 12:11:43 2013/-kk/
-/cpu_in_cksum.S/1.6/Thu Oct 24 10:28:57 2013/-kk/
+/cpu_exec.c/1.8/Wed Dec 25 07:37:18 2013/-kk/
+/cpu_in_cksum.S/1.7/Wed Dec 25 07:37:18 2013/-kk/
 /cpu_in_cksum_buffer.S/1.8/Sun Dec 23 13:24:22 2012/-kk/
 /cpu_in_cksum_fold.S/1.4/Sun Dec 23 13:26:21 2012/-kk/
 /cpu_in_cksum_v4hdr.S/1.4/Thu Dec 20 07:16:01 2012/-kk/
-/cpufunc.c/1.130/Mon Nov 18 05:31:32 2013/-kk/
+/cpufunc.c/1.132/Wed Dec 25 07:37:18 2013/-kk/
 /cpufunc_asm.S/1.16/Thu Oct 24 10:28:57 2013/-kk/
 /cpufunc_asm_arm10.S/1.10/Thu Oct 24 10:28:57 2013/-kk/
 /cpufunc_asm_arm11.S/1.10/Thu Oct 24 10:28:57 2013/-kk/

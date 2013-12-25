@@ -38,7 +38,10 @@
 #include <sys/featuretest.h>
 #include <machine/ansi.h>
 
+#ifdef	_BSD_PTRDIFF_T_
 typedef	_BSD_PTRDIFF_T_	ptrdiff_t;
+#undef	_BSD_PTRDIFF_T_
+#endif
 
 #ifdef	_BSD_SIZE_T_
 typedef	_BSD_SIZE_T_	size_t;

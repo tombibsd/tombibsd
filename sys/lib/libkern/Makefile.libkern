@@ -98,6 +98,10 @@ SRCS+=	heapsort.c ptree.c rb.c
 # for crypto
 SRCS+=	explicit_memset.c consttime_memequal.c
 
+.PATH:	${NETBSDSRCDIR}/common/lib/libc/cdb
+SRCS+=	cdbr.c
+SRCS+=	mi_vector_hash.c
+
 # Files to clean up
 CLEANFILES+= lib${LIB}.o lib${LIB}.po
 

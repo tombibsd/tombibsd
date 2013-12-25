@@ -172,7 +172,10 @@ mach_init(int argc, char *argv[], u_int bim, void *bip)
 {
 	const char *cp;
 	int i;
-	paddr_t kernstartpfn, kernendpfn, first, last;
+#if 0
+	paddr_t kernstartpfn;
+#endif
+	paddr_t first, last, kernendpfn;
 	char *kernend;
 #if NKSYMS > 0 || defined(DDB) || defined(MODULAR)
 	char *ssym = NULL;
@@ -367,10 +370,10 @@ mach_init(int argc, char *argv[], u_int bim, void *bip)
 	/*
 	 * Load the rest of the pages into the VM system.
 	 */
-	kernstartpfn = atop(trunc_page(
-	    MIPS_KSEG0_TO_PHYS((kernel_text) - UPAGES * PAGE_SIZE)));
 	kernendpfn = atop(round_page(MIPS_KSEG0_TO_PHYS(kernend)));
 #if 0
+	kernstartpfn = atop(trunc_page(
+	    MIPS_KSEG0_TO_PHYS((kernel_text) - UPAGES * PAGE_SIZE)));
 	/* give all free memory to VM */
 	/* XXX - currently doesn't work, due to "panic: pmap_enter: pmap" */
 	for (i = 0; i < mem_cluster_cnt; i++) {

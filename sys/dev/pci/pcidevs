@@ -1162,6 +1162,7 @@ product ASMEDIA ASM1061_01	0x0601	ASM1061 AHCI SATA III Controller
 product ASMEDIA ASM1061_02	0x0602	ASM1061 AHCI SATA III Controller
 product ASMEDIA ASM1061_11	0x0611	ASM1061 AHCI SATA III Controller
 product ASMEDIA ASM1061_12	0x0612	ASM1061 AHCI SATA III Controller
+product	ASMEDIA	ASM1042		0x1042	ASM1042 xHCI USB 3.0
 
 /* Asustek products */
 product ASUSTEK HFCPCI		0x0675	ISDN
@@ -1510,6 +1511,7 @@ product ATI RADEON_HD6520G	0x9647	Radeon HD6520G
 product ATI RADEON_HD4200	0x9712	Radeon HD4200 Mobility
 product ATI RADEON_HD4250	0x9715	Radeon HD4250 GPU (RS880)
 product ATI RADEON_HD6310	0x9802	Radeon HD6310 Graphics
+product ATI RADEON_HD6320	0x9806	Radeon HD6320 Graphics
 product ATI RADEON_HD7340	0x9808	Radeon HD7340 Graphics
 product ATI RADEON_HD2600_HD	0xaa08	Radeon HD2600 HD Audio Controller
 product ATI RADEON_HD4350_HD	0xaa38	Radeon HD4350 HD Audio Controller
@@ -1556,6 +1558,7 @@ product ATHEROS AR9227		0x002d AR9227 Wireless LAN
 product ATHEROS AR9287		0x002e AR9287 Wireless LAN
 product ATHEROS AR9300		0x0030 AR9300 Wireless LAN
 product ATHEROS AR9485		0x0032 AR9485 Wireless LAN
+product ATHEROS AR9462		0x0034 AR9462 Wireless LAN
 product ATHEROS AR5201_AP	0x0207 AR5201 Wireless LAN Reference Card (Early AP11)
 product ATHEROS AR5201_DEFAULT	0x1107 AR5201 Wireless LAN (no eeprom)
 product ATHEROS AR5212_DEFAULT	0x1113 AR5212 Wireless LAN (no eeprom)
@@ -2546,6 +2549,7 @@ product INTEL SRCZCRX		0x0407	RAID Controller
 product INTEL SRCU42E		0x0408	SCSI RAID Controller
 product INTEL SRCS28X		0x0409	SATA RAID Controller
 product INTEL HASWELL_IGD	0x0402	Haswell Integrated Graphics Device
+product INTEL HASWELL_IGD_1	0x0412	Haswell Integrated Graphics Device
 product INTEL I347AT4		0x0438	I347-AT4 Gigabit Network Connection
 product INTEL PCEB		0x0482	82375EB/SB PCI-EISA Bridge
 product INTEL CDC		0x0483	82424ZX Cache and DRAM Controller

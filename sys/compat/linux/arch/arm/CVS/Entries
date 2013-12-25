@@ -1,7 +1,7 @@
 /Makefile/1.1/Mon Jan 14 23:14:35 2002/-kk/
 /files.linux_arm/1.4/Wed Aug 30 11:14:39 2006/-kk/
 /linux_commons.c/1.12/Tue May 31 22:35:22 2011/-kk/
-/linux_errno.h/1.6/Mon Apr 28 20:23:42 2008/-kk/
+/linux_errno.h/1.7/Wed Dec 25 07:37:36 2013/-kk/
 /linux_exec.h/1.8/Mon Apr 28 20:23:42 2008/-kk/
 /linux_fcntl.h/1.4/Tue Nov  2 18:01:25 2010/-kk/
 /linux_ioctl.h/1.2/Mon Apr 28 20:23:42 2008/-kk/

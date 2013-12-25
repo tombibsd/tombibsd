@@ -271,6 +271,8 @@ YFLAGS+=	${YPREFIX:D-p${YPREFIX}} ${YHEADER:D-d}
 .endif
 
 # Objcopy
-OBJCOPYLIBFLAGS?=${"${.TARGET:M*.po}" != "":?-X:-x}
+# ARM big endian needs to preserve $a/$d/$t symbols for the linker.
+OBJCOPYLIBFLAGS?=${"${.TARGET:M*.po}" != "":?-X:-x} \
+	${"${MACHINE_ARCH:M*arm*eb}" != "":?-K '\$a' -K '\$d' -K '\$t':}
 
 .endif	# !defined(_BSD_SYS_MK_)

@@ -5,8 +5,9 @@
 /linux_cdrom.h/1.8/Mon Apr 28 20:23:43 2008/-kk/
 /linux_dirent.h/1.12/Sat Sep 11 20:53:04 2010/-kk/
 /linux_emuldata.h/1.18/Tue Nov  2 18:18:07 2010/-kk/
-/linux_errno.c/1.13/Mon Apr 28 20:23:43 2008/-kk/
-/linux_errno.h/1.13/Mon Apr 28 20:23:43 2008/-kk/
+/linux_errno.c/1.14/Wed Dec 25 07:37:37 2013/-kk/
+/linux_errno.h/1.14/Wed Dec 25 07:37:37 2013/-kk/
+/linux_errno_generic.h/1.1/Tue Dec 17 22:14:24 2013/-kk/
 /linux_exec.c/1.116/Sun Feb 19 21:06:37 2012/-kk/
 /linux_exec.h/1.49/Tue Nov 26 03:29:51 2013/-kk/
 /linux_exec_aout.c/1.66/Sat Aug 15 23:39:35 2009/-kk/

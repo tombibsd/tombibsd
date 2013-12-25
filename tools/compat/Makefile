@@ -48,6 +48,7 @@ CPPFLAGS+=	-I. -I./include -I${.CURDIR} -I${.CURDIR}/sys \
 		${.CURDIR}/../../lib/libc/stdlib \
 		${.CURDIR}/../../lib/libc/string \
 		${.CURDIR}/../../lib/libutil \
+		${.CURDIR}/../../common/lib/libc/cdb \
 		${.CURDIR}/../../common/lib/libc/string \
 		${.CURDIR}/../../common/lib/libc/hash/rmd160 \
 		${.CURDIR}/../../common/lib/libc/hash/sha1 \

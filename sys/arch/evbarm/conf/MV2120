@@ -5,7 +5,7 @@
 include 	"arch/evbarm/conf/std.mv2120"
 
 options 	INCLUDE_CONFIG_FILE	# embed config file in kernel binary
-options 	SYMTAB_SPACE="(1024 * 1000)"
+options 	SYMTAB_SPACE=1024000
 
 makeoptions	DEBUG="-g"
 

@@ -345,6 +345,8 @@ sysconf(int name)
 		return _PASSWORD_LEN;
 	case _SC_REGEXP:
 		return _POSIX_REGEXP;
+	case _SC_SHARED_MEMORY_OBJECTS:
+		return _POSIX_SHARED_MEMORY_OBJECTS;
 	case _SC_SHELL:
 		return _POSIX_SHELL;
 	case _SC_SPAWN:

@@ -357,7 +357,6 @@ osiop_scsipi_request(struct scsipi_channel *chan, scsipi_adapter_req_t req,
     void *arg)
 {
 	struct scsipi_xfer *xs;
-	struct scsipi_periph *periph;
 	struct osiop_acb *acb;
 	struct osiop_softc *sc;
 	int err, flags, s;
@@ -367,7 +366,6 @@ osiop_scsipi_request(struct scsipi_channel *chan, scsipi_adapter_req_t req,
 	switch (req) {
 	case ADAPTER_REQ_RUN_XFER:
 		xs = arg;
-		periph = xs->xs_periph;
 		flags = xs->xs_control;
 
 		/* XXXX ?? */
@@ -389,7 +387,7 @@ osiop_scsipi_request(struct scsipi_channel *chan, scsipi_adapter_req_t req,
 		}
 #ifdef DIAGNOSTIC
 		else {
-			scsipi_printaddr(periph);
+			scsipi_printaddr(xs->xs_periph);
 			printf("unable to allocate acb\n");
 			panic("osiop_scsipi_request");
 		}

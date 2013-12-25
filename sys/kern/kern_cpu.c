@@ -159,8 +159,8 @@ mi_cpu_attach(struct cpu_info *ci)
 	    cpu_index(ci));
 
 	if (__predict_false(cpu_infos == NULL)) {
-		size_t nslots = maxcpus * sizeof(struct cpu_info *) + 1;
-		cpu_infos = kmem_zalloc(nslots, KM_SLEEP);
+		size_t ci_bufsize = (maxcpus + 1) * sizeof(struct cpu_info *);
+		cpu_infos = kmem_zalloc(ci_bufsize, KM_SLEEP);
 	}
 	cpu_infos[cpu_index(ci)] = ci;
 

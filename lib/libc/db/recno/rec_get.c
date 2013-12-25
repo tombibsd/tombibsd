@@ -127,11 +127,10 @@ __rec_fpipe(BTREE *t, recno_t top)
 	uint8_t *p;
 
 	if (t->bt_rdata.size < t->bt_reclen) {
-		t->bt_rdata.data = t->bt_rdata.data == NULL ?
-		    malloc(t->bt_reclen) :
-		    realloc(t->bt_rdata.data, t->bt_reclen);
-		if (t->bt_rdata.data == NULL)
+		void *np = realloc(t->bt_rdata.data, t->bt_reclen);
+		if (np == NULL)
 			return (RET_ERROR);
+		t->bt_rdata.data = np;
 		t->bt_rdata.size = t->bt_reclen;
 	}
 	data.data = t->bt_rdata.data;
@@ -196,13 +195,14 @@ __rec_vpipe(BTREE *t, recno_t top)
 				break;
 			}
 			if (sz == 0) {
+				void *np;
 				len = p - (uint8_t *)t->bt_rdata.data;
-				t->bt_rdata.size += (sz = 256);
-				t->bt_rdata.data = t->bt_rdata.data == NULL ?
-				    malloc(t->bt_rdata.size) :
-				    realloc(t->bt_rdata.data, t->bt_rdata.size);
-				if (t->bt_rdata.data == NULL)
+				sz = t->bt_rdata.size + 256;
+				np = realloc(t->bt_rdata.data, sz);
+				if (np == NULL)
 					return (RET_ERROR);
+				t->bt_rdata.size = sz;
+				t->bt_rdata.data = np;
 				p = (uint8_t *)t->bt_rdata.data + len;
 			}
 		}
@@ -235,11 +235,10 @@ __rec_fmap(BTREE *t, recno_t top)
 	size_t len;
 
 	if (t->bt_rdata.size < t->bt_reclen) {
-		t->bt_rdata.data = t->bt_rdata.data == NULL ?
-		    malloc(t->bt_reclen) :
-		    realloc(t->bt_rdata.data, t->bt_reclen);
-		if (t->bt_rdata.data == NULL)
+		void *np = realloc(t->bt_rdata.data, t->bt_reclen);
+		if (np == NULL)
 			return (RET_ERROR);
+		t->bt_rdata.data = np;
 		t->bt_rdata.size = t->bt_reclen;
 	}
 	data.data = t->bt_rdata.data;

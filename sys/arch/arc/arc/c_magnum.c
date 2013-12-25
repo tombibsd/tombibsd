@@ -105,9 +105,8 @@ static const struct ipl_sr_map magnum_ipl_sr_map = {
 uint32_t
 timer_magnum_intr(uint32_t mask, struct clockframe *cf)
 {
-	int temp;
 
-	temp = inw(R4030_SYS_IT_STAT);
+	(void)inw(R4030_SYS_IT_STAT);
 	last_cp0_count = mips3_cp0_count_read();
 	hardclock(cf);
 	timer_jazzio_ev.ev_count++;

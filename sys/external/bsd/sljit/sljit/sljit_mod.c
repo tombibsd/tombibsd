@@ -32,9 +32,13 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/param.h>
 #include <sys/kernel.h>
 #include <sys/module.h>
+#include <sys/mutex.h>
 
 MODULE(MODULE_CLASS_MISC, sljit, NULL)
 
+/* Used in sljitUtils.c */
+kmutex_t sljit_allocator_mutex;
+kmutex_t sljit_global_mutex;
 
 static int
 sljit_modcmd(modcmd_t cmd, void *arg)
@@ -42,9 +46,13 @@ sljit_modcmd(modcmd_t cmd, void *arg)
 
 	switch (cmd) {
 	case MODULE_CMD_INIT:
+		mutex_init(&sljit_allocator_mutex, MUTEX_DEFAULT, IPL_NONE);
+		mutex_init(&sljit_global_mutex, MUTEX_DEFAULT, IPL_NONE);
 		return 0;
 
 	case MODULE_CMD_FINI:
+		mutex_destroy(&sljit_global_mutex);
+		mutex_destroy(&sljit_allocator_mutex);
 		return EOPNOTSUPP;
 
 	default:

@@ -63,6 +63,7 @@ struct shmif_pkthdr {
 
 #if 0
 #ifdef _KERNEL
+#include <rump/rumpuser.h>
 #define DPRINTF(x) rumpuser_dprintf x
 #else
 #define DPRINTF(x) printf x

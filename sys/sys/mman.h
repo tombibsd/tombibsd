@@ -185,6 +185,8 @@ int	minherit(void *, size_t, int);
 void *	mremap(void *, size_t, void *, size_t, int);
 #endif
 int	posix_madvise(void *, size_t, int);
+int	shm_open(const char *, int, mode_t);
+int	shm_unlink(const char *);
 __END_DECLS
 
 #endif /* !_KERNEL */

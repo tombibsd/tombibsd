@@ -153,7 +153,7 @@ dec_1000a_intr_map(const struct pci_attach_args *pa, pci_intr_handle_t *ihp)
 	pcitag_t bustag = pa->pa_intrtag;
 	int buspin = pa->pa_intrpin;
 	pci_chipset_tag_t pc = pa->pa_pc;
-	int imrbit, device;
+	int imrbit, device = 0;	/* XXX gcc */
 	/*
 	 * Get bit number in mystery ICU imr
 	 */

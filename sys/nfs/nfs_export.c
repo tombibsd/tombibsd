@@ -877,3 +877,10 @@ netexport_wrunlock(void)
 
 	rw_exit(&netexport_lock);
 }
+
+bool
+netexport_hasexports(void)
+{
+	
+	return nfs_pub.np_valid || !TAILQ_EMPTY(&netexport_list);
+}

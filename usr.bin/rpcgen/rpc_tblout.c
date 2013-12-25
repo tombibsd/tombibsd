@@ -68,8 +68,8 @@ static const char null_entry[] = "\t(char *(*)())0,\n\
 static const char tbl_nproc[] =
     "u_int %s_nproc =\n\t(u_int)(sizeof(%s_table)/sizeof(%s_table[0]));\n\n";
 
-static void write_table __P((definition *));
-static void printit __P((const char *, const char *));
+static void write_table(definition *);
+static void printit(const char *, const char *);
 
 void
 write_tables(void)

@@ -56,18 +56,18 @@ __RCSID("$NetBSD$");
 
 #define ARGNAME "arg"
 
-static void isdefined __P((definition *));
-static void def_struct __P((definition *));
-static void def_program __P((definition *));
-static void def_enum __P((definition *));
-static void def_const __P((definition *));
-static void def_union __P((definition *));
-static void check_type_name __P((const char *, int));
-static void def_typedef __P((definition *));
-static void get_declaration __P((declaration *, defkind));
-static void get_prog_declaration __P((declaration *, defkind, int));
-static void get_type __P((const char **, const char **, defkind));
-static void unsigned_dec __P((const char **));
+static void isdefined(definition *);
+static void def_struct(definition *);
+static void def_program(definition *);
+static void def_enum(definition *);
+static void def_const(definition *);
+static void def_union(definition *);
+static void check_type_name(const char *, int);
+static void def_typedef(definition *);
+static void get_declaration(declaration *, defkind);
+static void get_prog_declaration(declaration *, defkind, int);
+static void get_type(const char **, const char **, defkind);
+static void unsigned_dec(const char **);
 
 /*
  * return the next definition you see

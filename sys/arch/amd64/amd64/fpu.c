@@ -192,8 +192,6 @@ fputrap(struct trapframe *frame)
 	 */
 	KASSERT(l == curlwp);
 	fxsave(sfp);
-	pcb->pcb_savefpu_i387.fp_ex_tw = sfp->fp_fxsave.fx_ftw;
-	pcb->pcb_savefpu_i387.fp_ex_sw = sfp->fp_fxsave.fx_fsw;
 
 	if (frame->tf_trapno == T_XMM) {
 		mxcsr = sfp->fp_fxsave.fx_mxcsr;

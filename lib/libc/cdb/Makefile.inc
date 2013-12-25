@@ -3,6 +3,7 @@
 # Constant database reader/writer
 
 .PATH:	${.CURDIR}/cdb
+.PATH:	${NETBSDSRCDIR}/common/lib/libc/cdb
 
 SRCS+=		cdbr.c cdbw.c
 

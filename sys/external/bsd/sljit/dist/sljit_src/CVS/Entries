@@ -1,6 +1,6 @@
-/sljitConfig.h/1.7/Tue Nov 26 03:29:57 2013/-kk/
+/sljitConfig.h/1.8/Wed Dec 25 07:37:43 2013/-kk/
 /sljitConfigInternal.h/1.6/Sun Nov 18 14:36:37 2012/-kk/
-/sljitExecAllocator.c/1.1.1.1/Sat Oct  6 18:24:25 2012/-kk/
+/sljitExecAllocator.c/1.2/Wed Dec 25 07:37:43 2013/-kk/
 /sljitLir.c/1.2/Sun Nov 18 14:36:37 2012/-kk/
 /sljitLir.h/1.1.1.2/Sun Oct 28 09:36:21 2012/-kk/
 /sljitNativeARM_Thumb2.c/1.1.1.3/Sun Oct 28 09:36:24 2012/-kk/
@@ -15,5 +15,5 @@
 /sljitNativeX86_32.c/1.2/Sun Nov 18 14:36:38 2012/-kk/
 /sljitNativeX86_64.c/1.1.1.2/Sun Oct 28 09:36:24 2012/-kk/
 /sljitNativeX86_common.c/1.4/Sun Nov 18 14:36:38 2012/-kk/
-/sljitUtils.c/1.2/Sat Oct  6 19:23:01 2012/-kk/
+/sljitUtils.c/1.3/Wed Dec 25 07:37:43 2013/-kk/
 D

@@ -65,9 +65,8 @@ struct timer_jazzio_config timer_nec_jazz_conf = {
 uint32_t
 timer_nec_jazz_intr(uint32_t mask, struct clockframe *cf)
 {
-	int temp;
 
-	temp = in32(RD94_SYS_INTSTAT3);
+	(void)in32(RD94_SYS_INTSTAT3);
 	last_cp0_count = mips3_cp0_count_read();
 	hardclock(cf);
 	timer_jazzio_ev.ev_count++;

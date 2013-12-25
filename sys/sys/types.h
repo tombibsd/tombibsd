@@ -275,6 +275,11 @@ typedef	_BSD_CLOCK_T_		clock_t;
 #undef	_BSD_CLOCK_T_
 #endif
 
+#ifdef	_BSD_PTRDIFF_T_
+typedef	_BSD_PTRDIFF_T_		ptrdiff_t;
+#undef	_BSD_PTRDIFF_T_
+#endif
+
 #ifdef	_BSD_SIZE_T_
 typedef	_BSD_SIZE_T_		size_t;
 #define _SIZE_T

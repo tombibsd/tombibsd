@@ -2297,7 +2297,7 @@ db_assign(struct inode *ip, int loc, daddr_t val)
 		ip->i_ffs2_db[loc] = ufs_rw64(val, UFS_IPNEEDSWAP(ip));
 }
 
-static inline daddr_t
+__unused static inline daddr_t
 ib_get(struct inode *ip, int loc)
 {
 	if (ip->i_ump->um_fstype == UFS1)

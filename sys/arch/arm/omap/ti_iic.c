@@ -559,7 +559,7 @@ ti_iic_handle_intr(struct ti_iic_softc *sc, uint32_t stat)
 void
 ti_iic_do_read(struct ti_iic_softc *sc, uint32_t stat)
 {
-	int len;
+	int len = 0;
 
 	KASSERT(mutex_owned(&sc->sc_mtx));
 	DPRINTF(("ti_iic_do_read stat %#x\n", stat));
@@ -586,7 +586,7 @@ ti_iic_do_read(struct ti_iic_softc *sc, uint32_t stat)
 void
 ti_iic_do_write(struct ti_iic_softc *sc, uint32_t stat)
 {
-	int len;
+	int len = 0;
 
 	DPRINTF(("ti_iic_do_write stat %#x\n", stat));
 	KASSERT(mutex_owned(&sc->sc_mtx));

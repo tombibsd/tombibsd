@@ -43,9 +43,9 @@
 /mcpcia_pci.c/1.11/Mon Feb  6 02:14:14 2012/-kk/
 /mcpciareg.h/1.8/Mon Feb  6 02:14:14 2012/-kk/
 /mcpciavar.h/1.6/Tue Jun 14 15:34:22 2011/-kk/
-/pci_1000.c/1.24/Mon Feb  6 02:14:14 2012/-kk/
+/pci_1000.c/1.25/Wed Dec 25 07:37:16 2013/-kk/
 /pci_1000.h/1.3/Sat Mar 14 14:45:53 2009/-kk/
-/pci_1000a.c/1.26/Mon Feb  6 02:14:15 2012/-kk/
+/pci_1000a.c/1.27/Wed Dec 25 07:37:16 2013/-kk/
 /pci_1000a.h/1.4/Sat Mar 14 14:45:53 2009/-kk/
 /pci_2100_a50.c/1.40/Mon Feb  6 02:14:15 2012/-kk/
 /pci_2100_a50.h/1.5/Sat Mar 14 14:45:53 2009/-kk/

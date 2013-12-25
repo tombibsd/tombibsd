@@ -56,7 +56,7 @@ __RCSID("$NetBSD$");
 
 #define ARGEXT "argument"
 
-static void printwhere __P((void));
+static void printwhere(void);
 
 char    curline[MAXLINESIZE];	/* current read line */
 char   *where = curline;	/* current point in line */
@@ -73,12 +73,12 @@ FILE   *fin;			/* file pointer of current input */
 
 list   *defined;		/* list of defined things */
 
-static const char *toktostr __P((tok_kind));
-static void printbuf __P((void));
-static void printwhere __P((void));
-static int findit __P((definition *, const char *));
-static const char *fixit __P((const char *, const char *));
-static int typedefed __P((definition *, const char *));
+static const char *toktostr(tok_kind);
+static void printbuf(void);
+static void printwhere(void);
+static int findit(definition *, const char *);
+static const char *fixit(const char *, const char *);
+static int typedefed(definition *, const char *);
 
 /*
  * Reinitialize the world

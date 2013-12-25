@@ -26,6 +26,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+bool	tsc_is_invariant(void);
 void	tsc_tc_init(void);
 void	tsc_sync_ap(struct cpu_info *);
 void	tsc_sync_bp(struct cpu_info *);

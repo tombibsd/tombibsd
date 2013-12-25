@@ -40,8 +40,8 @@
 /syscall.c/1.12/Thu Oct 24 10:28:57 2013/-kk/
 /tprof_amdpmi.c/1.4/Mon Nov 18 05:31:36 2013/-kk/
 /tprof_pmi.c/1.13/Mon Nov 18 05:31:36 2013/-kk/
-/tsc.c/1.34/Tue Dec 17 04:13:30 2013/-kk/
-/tsc.h/1.4/Sat May 10 16:12:32 2008/-kk/
+/tsc.c/1.36/Wed Dec 25 07:37:35 2013/-kk/
+/tsc.h/1.5/Wed Dec 25 07:37:35 2013/-kk/
 /vga_post.c/1.18/Sat Feb 12 19:13:30 2011/-kk/
 /via_padlock.c/1.21/Thu Feb  2 19:43:01 2012/-kk/
 /viac7temp.c/1.7/Mon Nov 18 05:31:36 2013/-kk/

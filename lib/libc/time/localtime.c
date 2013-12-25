@@ -46,6 +46,16 @@ __weak_alias(tzname,_tzname)
 #define TZ_ABBR_ERR_CHAR	'_'
 #endif /* !defined TZ_ABBR_ERR_CHAR */
 
+/* The minimum and maximum finite time values.  */
+static time_t const time_t_min =
+  (TYPE_SIGNED(time_t)
+   ? (time_t) -1 << (int)(CHAR_BIT * sizeof (time_t) - 1)
+   : 0);
+static time_t const time_t_max =
+  (TYPE_SIGNED(time_t)
+   ? - (~ 0 < 0) - ((time_t) -1 << (int)(CHAR_BIT * sizeof (time_t) - 1))
+   : -1);
+
 /*
 ** SunOS 4.1.1 headers lack O_BINARY.
 */
@@ -1108,7 +1118,7 @@ tzparse(timezone_t sp, const char *name, const int lastditch)
 				}
 				if (time_t_max - janfirst < yearsecs)
 					break;
-				janfirst += yearsecs;
+				janfirst += (time_t)yearsecs;
 			}
 			_DIAGASSERT(__type_fit(int, atp - sp->ats));
 			sp->timecnt = (int)(atp - sp->ats);

@@ -76,7 +76,7 @@ static uint32_t counts_per_hz;
 
 int	clockhandler(void *);
 
-static inline uint32_t
+__unused static inline uint32_t
 tmr0_read(void)
 {
 	uint32_t rv;
@@ -123,7 +123,7 @@ trr0_write(uint32_t val)
 		: "r" (val));
 }
 
-static inline uint32_t
+__unused static inline uint32_t
 tmr1_read(void)
 {
 	uint32_t rv;

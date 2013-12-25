@@ -786,7 +786,11 @@ static int str_format (lua_State *L) {
         }
         case 'o':  case 'u':  case 'x':  case 'X': {
           addintlen(form);
+#ifndef _KERNEL
           sprintf(buff, form, (unsigned LUA_INTFRM_T)luaL_checknumber(L, arg));
+#else
+          sprintf(buff, form, (LUA_UINTFRM_T)luaL_checknumber(L, arg));
+#endif
           break;
         }
 #ifndef _KERNEL

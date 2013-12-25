@@ -881,6 +881,7 @@ udf_estimate_walk(fsinfo_t *fsopts,
 		case S_IFLNK:
 		case S_IFREG:
 			/* create dummy FID to see how long name will become */
+			memset(&dummy_ref, 0, sizeof(dummy_ref));
 			udf_create_fid(ddoff, fid, cur->name, 0, &dummy_ref);
 
 			nentries++;

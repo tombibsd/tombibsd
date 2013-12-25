@@ -1845,17 +1845,18 @@ do_varshm()
 	op="$1"
 	failed=0
 
+	[ -f "${DEST_DIR}/etc/fstab" ] || return 0
 	if ${GREP} -w "/var/shm" "${DEST_DIR}/etc/fstab" >/dev/null 2>&1;
 	then
 		failed = 0;
 	else
 		if [ "${op}" = "check" ]; then
 			failed=1
-			echo "No /var/shm mount found in ${DEST_DIR}/etc/fstab"
+			msg "No /var/shm mount found in ${DEST_DIR}/etc/fstab"
 		elif [ "${op}" = "fix" ]; then
 			printf '\ntmpfs\t/var/shm\ttmpfs\trw,-m1777,-sram%%25\n' \
 				>> "${DEST_DIR}/etc/fstab"
-			echo "Added tmpfs with 25% ram limit as /var/shm"
+			msg "Added tmpfs with 25% ram limit as /var/shm"
 
 		fi
 	fi

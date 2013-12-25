@@ -39,6 +39,7 @@
 #include <sys/reboot.h>
 
 #include <lua.h>
+#include <lauxlib.h>
 
 #ifdef _MODULE
 MODULE(MODULE_CLASS_MISC, luapmf, "lua");
@@ -80,29 +81,18 @@ get_platform(lua_State *L)
 
 }
 
-struct pmf_reg {
-	const char *n;
-	int (*f)(lua_State *);
-};
-
 static int
 luaopen_pmf(void *ls)
 {
 	lua_State *L = (lua_State *)ls;
-	int n, nfunc;
-	struct pmf_reg pmf[] = {
+	const luaL_Reg pmf_lib[ ] = {
 		{ "system_shutdown",	system_shutdown },
 		{ "set_platform",	set_platform },
-		{ "get_platform",	get_platform }
+		{ "get_platform",	get_platform },
+		{ NULL, NULL }
 	};
 
-	nfunc = sizeof(pmf)/sizeof(pmf[1]);
-
-	lua_createtable(L, nfunc, 0);
-	for (n = 0; n < nfunc; n++) {
-		lua_pushcfunction(L, pmf[n].f);
-		lua_setfield(L, -2, pmf[n].n);
-	}
+	luaL_register(L, "pmf", pmf_lib);
 
 	/* some integer values */
 	lua_pushinteger(L, PMFE_DISPLAY_ON);
@@ -152,7 +142,6 @@ luaopen_pmf(void *ls)
 	lua_pushinteger(L, RB_USERCONF);
 	lua_setfield(L, -2, "RB_USERCONF");
 
-	lua_setglobal(L, "pmf");
 	return 1;
 }
 

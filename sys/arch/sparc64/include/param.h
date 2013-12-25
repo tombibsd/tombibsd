@@ -230,9 +230,15 @@ extern void	delay(unsigned int);
 
 extern int cputyp;
 
+#if defined (SUN4US) || defined (SUN4V)
 #define CPU_ISSUN4U     (cputyp == CPU_SUN4U)
 #define CPU_ISSUN4US    (cputyp == CPU_SUN4US)
 #define CPU_ISSUN4V     (cputyp == CPU_SUN4V)
+#else
+#define CPU_ISSUN4U	(1)
+#define CPU_ISSUN4US	(0)
+#define CPU_ISSUN4V	(0)
+#endif
 
 #endif /* _LOCORE */
 #endif /* _KERNEL */

@@ -133,7 +133,6 @@ typedef struct vfsops	vfsops_t;
 
 typedef	short		index_t;
 typedef	off_t		offset_t;
-typedef	long		ptrdiff_t;	/* pointer difference */
 typedef	int64_t		rlim64_t;
 typedef __caddr_t	caddr_t;	/* core address */
 

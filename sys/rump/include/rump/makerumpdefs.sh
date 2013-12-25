@@ -6,7 +6,7 @@
 
 echo Generating rumpdefs.h
 rm -f rumpdefs.h
-exec > rumpdefs.h
+exec 3>&1 > rumpdefs.h
 
 printf '/*	$NetBSD$	*/\n\n'
 printf '/*\n *\tAUTOMATICALLY GENERATED.  DO NOT EDIT.\n */\n\n'
@@ -107,6 +107,7 @@ fromvers ../../../sys/ktrace.h
 sed -n '/#define[ 	]*KTROP_[A-Z_]/s/KTROP_/RUMP_&/gp' <../../../sys/ktrace.h | sed 's,/\*.*$,,'
 sed -n '/#define[ 	]*KTR_[A-Z_]/s/KTR_/RUMP_&/gp' <../../../sys/ktrace.h | sed 's,/\*.*$,,'
 sed -n '/#define[ 	]*KTRFAC_[A-Z_]/{s/KTRFAC_/RUMP_&/g;s/KTR_/RUMP_&/g;p;}' <../../../sys/ktrace.h | sed 's,/\*.*$,,'
+sed -n '/#define[ 	]*KTRFACv[0-9]/{s/KTRFACv/RUMP_&/g;s/KTRFAC_/RUMP_&/g;p;}' <../../../sys/ktrace.h | sed 's,/\*.*$,,'
 
 fromvers ../../../sys/module.h
 getstruct ../../../sys/module.h modctl_load
@@ -122,3 +123,48 @@ fromvers ../../../sys/dirent.h
 getstruct ../../../sys/dirent.h dirent
 
 printf '\n#endif /* _RUMP_RUMPDEFS_H_ */\n'
+
+exec 1>&3
+echo Generating rumperr.h
+rm -f rumperr.h
+exec > rumperr.h
+
+printf '/*	$NetBSD$	*/\n\n'
+printf '/*\n *\tAUTOMATICALLY GENERATED.  DO NOT EDIT.\n */\n'
+
+fromvers ../../../sys/errno.h
+
+printf "\nstatic inline const char *\nrump_strerror(int error)\n{\n\n"
+printf "\tswitch (error) {\n\tcase 0:\n"
+printf "\t\t return \"No error: zero, zip, zilch, none!\";\n"
+awk '/^#define[ 	]*E.*[0-9]/{
+	ename = $2
+	evalue = $3
+	error = 1
+	if (ename == "ELAST") {
+		printf "\tdefault:\n"
+		printf "\t\treturn \"Invalid error!\";\n\t}\n}\n"
+		error = 0
+		exit 0
+	}
+	if (preverror + 1 != evalue)
+		exit 1
+	preverror = evalue
+	printf "\tcase %d: /* (%s) */\n\t\treturn \"", evalue, ename
+	sp = ""
+	for (i = 5; i < NF; i++) {
+		printf "%s%s", sp, $i
+		sp = " "
+	}
+	printf "\";\n"
+}
+END {
+	exit error
+}' < ../../../sys/errno.h
+if [ $? -ne 0 ]; then
+	echo 'Parsing errno.h failed!' 1>&3
+	rm -f rumpdefs.h rumperr.h
+	exit 1
+fi
+
+exit 0

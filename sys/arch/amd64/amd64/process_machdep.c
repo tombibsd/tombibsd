@@ -130,7 +130,7 @@ process_read_fpregs(struct lwp *l, struct fpreg *regs)
 		l->l_md.md_flags |= MDL_USEDFPU;
 	}
 
-	memcpy(&regs->fxstate, frame, sizeof(*regs));
+	regs->fxstate = *frame;
 	return (0);
 }
 

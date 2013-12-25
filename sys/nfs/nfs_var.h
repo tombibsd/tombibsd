@@ -349,4 +349,5 @@ void netexport_rdlock(void);
 void netexport_rdunlock(void);
 void netexport_init(void);
 void netexport_fini(void);
+bool netexport_hasexports(void);
 #endif /* _KERNEL */

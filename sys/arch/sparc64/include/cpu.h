@@ -348,6 +348,9 @@ void	*sparc_softintr_establish(int, int (*)(void *), void *);
 void	sparc_softintr_schedule(void *);
 void	sparc_softintr_disestablish(void *);
 
+/* cpu.c */
+int	cpu_myid(void);
+
 /* disksubr.c */
 struct dkbad;
 int isbad(struct dkbad *bt, int, int, int);

@@ -150,7 +150,7 @@
 /clmpcc.c/1.46/Sat Oct 27 17:18:19 2012/-kk/
 /clmpccreg.h/1.4/Mon Apr 28 20:23:49 2008/-kk/
 /clmpccvar.h/1.13/Sat Oct 27 17:18:20 2012/-kk/
-/com.c/1.317/Thu Oct 24 10:28:57 2013/-kk/
+/com.c/1.321/Wed Dec 25 07:37:38 2013/-kk/
 /com_cpcbus.c/1.11/Mon Apr 28 20:23:49 2008/-kk/
 /com_upc.c/1.11/Sun Jan 25 14:34:14 2009/-kk/
 /comreg.h/1.22/Thu Oct 24 10:28:57 2013/-kk/
@@ -430,7 +430,7 @@
 /oplinstrs.c/1.7/Fri Oct 19 11:59:58 2007/-kk/
 /oplreg.h/1.6/Mon Apr 28 20:23:51 2008/-kk/
 /oplvar.h/1.17/Mon Apr  9 10:18:16 2012/-kk/
-/osiop.c/1.39/Sat Nov 13 13:52:02 2010/-kk/
+/osiop.c/1.40/Wed Dec 25 07:37:38 2013/-kk/
 /osiopreg.h/1.6/Fri Aug 24 09:01:23 2012/-kk/
 /osiopvar.h/1.13/Wed May 14 13:29:28 2008/-kk/
 /pca9564.c/1.1/Fri Apr  9 10:09:50 2010/-kk/
@@ -470,7 +470,7 @@
 /rtl8169.c/1.139/Thu Oct 24 10:28:58 2013/-kk/
 /rtl8169var.h/1.4/Tue May 12 14:25:18 2009/-kk/
 /rtl81x9.c/1.94/Sun Jul 22 14:32:58 2012/-kk/
-/rtl81x9reg.h/1.44/Thu Oct 24 10:28:58 2013/-kk/
+/rtl81x9reg.h/1.45/Wed Dec 25 07:37:38 2013/-kk/
 /rtl81x9var.h/1.53/Thu Feb  2 19:43:03 2012/-kk/
 /rtw.c/1.120/Thu Oct 24 10:28:58 2013/-kk/
 /rtwphy.c/1.16/Mon Nov 18 05:31:38 2013/-kk/

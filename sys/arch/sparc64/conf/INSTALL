@@ -8,7 +8,7 @@ include "arch/sparc64/conf/GENERIC"
 
 #ident 		"INSTALL-$Revision$"
 
-makeoptions	COPTS="-Os"
+makeoptions	COPTS="-Os -Wno-uninitialized"
 
 options 	PIPE_SOCKETPAIR		# smaller, but slower pipe(2)
 

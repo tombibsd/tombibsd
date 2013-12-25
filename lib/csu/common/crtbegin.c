@@ -39,7 +39,7 @@ __weakref_visible void Jv_RegisterClasses(const fptr_t *)
 	__weak_reference(_Jv_RegisterClasses);
 
 #if !defined(HAVE_INITFINI_ARRAY)
-__dso_hidden const fptr_t __CTOR_LIST__[] __section(".ctors") = {
+__dso_hidden const fptr_t __aligned(sizeof(void *)) __CTOR_LIST__[] __section(".ctors") = {
 	(fptr_t) -1,
 };
 __dso_hidden extern const fptr_t __CTOR_LIST_END__[];

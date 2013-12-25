@@ -105,7 +105,7 @@ ENTRY(__aeabi_uldivmod)
 #else
 	mvn	r0, #0
 #endif
-	mvns	r1, r0
+	movs	r1, r0
 	bl	PLT_SYM(__aeabi_ldiv0)
 	pop	{r2-r4,pc}
 #endif

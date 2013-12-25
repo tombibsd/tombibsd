@@ -34,11 +34,6 @@ struct savefpu {
 	struct fxsave64 fp_fxsave;	/* see above */
 };
 
-struct savefpu_i387 {
-	uint16_t fp_ex_sw;		/* saved status from last exception */
-	uint16_t fp_ex_tw;		/* saved tag from last exception */
-};
-
 /*
  * The i387 defaults to Intel extended precision mode and round to nearest,
  * with all exceptions masked.

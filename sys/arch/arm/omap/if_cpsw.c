@@ -494,7 +494,6 @@ cpsw_start(struct ifnet *ifp)
 	uint32_t * const dw = bd.word;
 	struct mbuf *m;
 	bus_dmamap_t dm;
-	u_int sopi;	/* Start of Packet Index */
 	u_int eopi = ~0;
 	u_int seg;
 	u_int txfree;
@@ -556,7 +555,7 @@ cpsw_start(struct ifnet *ifp)
 
 		if (txstart == -1)
 			txstart = sc->sc_txnext;
-		sopi = eopi = sc->sc_txnext;
+		eopi = sc->sc_txnext;
 		for (seg = 0; seg < dm->dm_nsegs; seg++) {
 			dw[0] = cpsw_txdesc_paddr(sc,
 			    TXDESC_NEXT(sc->sc_txnext));

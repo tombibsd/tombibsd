@@ -419,13 +419,11 @@ crmfb_ioctl(void *v, void *vs, u_long cmd, void *data, int flag, struct lwp *l)
 {
 	struct vcons_data *vd;
 	struct crmfb_softc *sc;
-	struct vcons_screen *ms;
 	struct wsdisplay_fbinfo *wdf;
 	int nmode;
 
 	vd = (struct vcons_data *)v;
 	sc = (struct crmfb_softc *)vd->cookie;
-	ms = (struct vcons_screen *)vd->active;
 
 	switch (cmd) {
 	case WSDISPLAYIO_GTYPE:

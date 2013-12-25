@@ -530,7 +530,8 @@ ntfs_unmount(
 	if (ntmp->ntm_devvp->v_type != VBAD)
 		spec_node_setmountedfs(ntmp->ntm_devvp, NULL);
 
-	vinvalbuf(ntmp->ntm_devvp, V_SAVE, NOCRED, l, 0, 0);
+	error = vinvalbuf(ntmp->ntm_devvp, V_SAVE, NOCRED, l, 0, 0);
+	KASSERT(error == 0);
 
 	/* lock the device vnode before calling VOP_CLOSE() */
 	vn_lock(ntmp->ntm_devvp, LK_EXCLUSIVE | LK_RETRY);

@@ -69,9 +69,11 @@ static void *ebus_mainbus_intr_establish(bus_space_tag_t, int, int,
 static bus_space_tag_t ebus_mainbus_alloc_bus_tag(struct ebus_softc *,
 	bus_space_tag_t, int);
 #ifdef SUN4V
+#if 0
+XXX
 static void ebus_mainbus_intr_ack(struct intrhand *);
 #endif
-
+#endif
 int
 ebus_mainbus_match(device_t parent, cfdata_t cf, void *aux)
 {
@@ -280,6 +282,8 @@ ebus_mainbus_intr_establish(bus_space_tag_t t, int ihandle, int level,
 	int ino;
 
 #ifdef SUN4V
+#if 0
+XXX
 	if (CPU_ISSUN4V) {
 		struct upa_reg reg;
 		u_int64_t devhandle, devino = INTINO(ihandle);
@@ -329,7 +333,7 @@ ebus_mainbus_intr_establish(bus_space_tag_t t, int ihandle, int level,
 		return (ih);
 	}
 #endif
-
+#endif
 	ihandle |= sc->sc_ign;
 	ino = INTINO(ihandle);
 
@@ -372,11 +376,12 @@ ebus_mainbus_intr_establish(bus_space_tag_t t, int ihandle, int level,
 }
 
 #ifdef SUN4V
-
+#if 0
+XXX
 static void
 ebus_mainbus_intr_ack(struct intrhand *ih)
 {
 	hv_intr_setstate(ih->ih_number, INTR_IDLE);
 }
-
+#endif
 #endif

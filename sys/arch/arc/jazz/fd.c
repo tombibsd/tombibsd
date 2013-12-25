@@ -245,12 +245,8 @@ void
 fdcattach(struct fdc_softc *fdc)
 {
 	struct fdc_attach_args fa;
-	bus_space_tag_t iot;
-	bus_space_handle_t ioh;
 	int type;
 
-	iot = fdc->sc_iot;
-	ioh = fdc->sc_ioh;
 	callout_init(&fdc->sc_timo_ch, 0);
 	callout_init(&fdc->sc_intr_ch, 0);
 

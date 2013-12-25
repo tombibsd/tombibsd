@@ -43,7 +43,7 @@ vers.c: ${.CURDIR}/version
 CPPFLAGS+=	-D_STANDALONE 
 CPPFLAGS+=	-I. -I${.CURDIR}/../../.. -I${.CURDIR}/../../../..
 CPPFLAGS+=	-I${.CURDIR}/../lib
-CPPFLAGS+=	-mabi=apcs-gnu -mfloat-abi=soft -march=armv3m
+CPPFLAGS+=	${ARM_APCS_FLAGS} -march=armv3m
 .if ${HAVE_GCC} < 48
 CPPFLAGS+=	-mno-thumb -mno-thumb-interwork
 .else

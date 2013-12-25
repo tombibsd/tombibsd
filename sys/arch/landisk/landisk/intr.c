@@ -252,7 +252,7 @@ void
 extintr_enable(void *aux)
 {
 	struct intrhand *ih = aux;
-	struct intrhand *p, *q;
+	struct intrhand *p, *q __diagused;
 	struct extintr_handler *eih;
 	int irq;
 	int cnt;
@@ -288,7 +288,7 @@ void
 extintr_disable(void *aux)
 {
 	struct intrhand *ih = aux;
-	struct intrhand *p, *q;
+	struct intrhand *p, *q __diagused;
 	struct extintr_handler *eih;
 	int irq;
 	int cnt;

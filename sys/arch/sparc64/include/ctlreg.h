@@ -663,6 +663,8 @@ SPARC64_LD_DEF(lduba, uint8_t, uint32_t)
 SPARC64_LD_DEF(lduha, uint16_t, uint32_t)
 /* load unsigned int from alternate address space */
 SPARC64_LD_DEF(lda, uint32_t, uint32_t)
+/* load unsigned word from alternate address space */
+SPARC64_LD_DEF(lduwa, uint32_t, uint32_t)
 /* load signed int from alternate address space */
 SPARC64_LD_DEF(ldswa, int, int)
 /* load 64-bit unsigned int from alternate address space */

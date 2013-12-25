@@ -511,7 +511,7 @@ WITHOUT_MAN=	yes
 .include <bsd.lib.mk>
 
 mparam.h: mparam_h.in
-	cp ${.ALLSRC} ${.TARGET}
+	rm -f ${.TARGET} && cp ${.ALLSRC} ${.TARGET}
 
 ${SRCS}: mparam.h
 CLEANFILES+= mparam.h

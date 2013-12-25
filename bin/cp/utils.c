@@ -174,7 +174,6 @@ copy_file(FTSENT *entp, int dne)
 		}
 		return (0);
 	}
-	/* NOTREACHED */
 
 	/*
 	 * There's no reason to do anything other than close the file

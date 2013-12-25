@@ -144,6 +144,10 @@ nfsserver_modcmd(modcmd_t cmd, void *arg)
 		nfsrv_finicache();
 		nfs_fini();
 		return 0;
+	case MODULE_CMD_AUTOUNLOAD:
+		if (netexport_hasexports())
+			return EBUSY;
+		/*FALLTHROUGH*/
 	default:
 		return ENOTTY;
 	}

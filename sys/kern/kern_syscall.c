@@ -190,6 +190,7 @@ sys_nomodule(struct lwp *l, const void *v, register_t *retval)
 	    { SYS_compat_50___ntp_gettime30, "compat" },
 	    { SYS_compat_50___fhstat40, "compat" },
 	    { SYS_compat_50_aio_suspend, "compat" },
+	    { SYS_compat_60__lwp_park, "compat" },
 	    { SYS__ksem_init, "ksem" },
 	    { SYS__ksem_open, "ksem" },
 	    { SYS__ksem_unlink, "ksem" },

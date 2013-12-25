@@ -6,12 +6,6 @@
  * Maybe should try to use the infrastructure in tools/compat instead?
  */
 
-/*
- * XXX:
- * There is currently no errno translation for the error values reported
- * by the hypercall layer.
- */
-
 #ifndef _LIB_LIBRUMPUSER_RUMPUSER_PORT_H_
 #define _LIB_LIBRUMPUSER_RUMPUSER_PORT_H_
 

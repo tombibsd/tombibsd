@@ -7,4 +7,4 @@ SRCS+=	libunwind.cxx \
 
 INCS+=	unwind.h
 
-COPTS.libuwind.cxx+=	-funwind-tables -fno-rtti -fno-exceptions -fvisibility=hidden -Wno-old-style-cast
+COPTS.libunwind.cxx+=	-funwind-tables -fno-rtti -fno-exceptions -fvisibility=hidden -Wno-old-style-cast

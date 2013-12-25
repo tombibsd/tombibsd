@@ -2,10 +2,11 @@
 
 .include "../Makefile.inc"
 
-KMOD=		luacore
-SRCS=		luacore.c
+KMOD=		luasystm
+SRCS=		luasystm.c
 
 CPPFLAGS+=	-I${S}/../external/mit/lua/dist/src \
-		-I${S}/modules/lua
+		-I${S}/modules/lua \
+		-I${S}/sys
 
 .include <bsd.kmodule.mk>

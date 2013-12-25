@@ -64,9 +64,8 @@ extern struct platform platform;
 void
 cpu_configure(void)
 {
-	int s;
 
-	s = splhigh();
+	(void)splhigh();
 	if (config_rootfound("mainbus", NULL) == NULL)
 		panic("no mainbus found");
 

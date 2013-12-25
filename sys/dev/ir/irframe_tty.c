@@ -914,7 +914,7 @@ void
 irt_ioctl(struct tty *tp, u_long cmd, void *arg)
 {
 	const struct cdevsw *cdev;
-	int error;
+	int error __diagused;
 	dev_t dev;
 
 	dev = tp->t_dev;

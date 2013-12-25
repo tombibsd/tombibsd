@@ -258,11 +258,9 @@ ixp12x0_intr_calculate_masks(void)
 inline void
 splx(int new)
 {
-	int	old;
 	u_int	oldirqstate;
 
 	oldirqstate = disable_interrupts(I32_bit);
-	old = curcpl();
 	set_curcpl(new);
 	if (new != hardware_spl_level) {
 		hardware_spl_level = new;

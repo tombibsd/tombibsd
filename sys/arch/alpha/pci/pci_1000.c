@@ -149,7 +149,7 @@ dec_1000_intr_map(const struct pci_attach_args *pa, pci_intr_handle_t *ihp)
 	pcitag_t bustag = pa->pa_intrtag;
 	int buspin = pa->pa_intrpin;
 	pci_chipset_tag_t pc = pa->pa_pc;
-	int	device;
+	int	device = 0;	/* XXX gcc */
 
 	if (buspin == 0)	/* No IRQ used. */
 		return 1;

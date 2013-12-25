@@ -62,9 +62,9 @@
 #define	EXT_FRACBITS	(EXT_FRACLBITS + EXT_FRACHBITS)
 
 struct ieee_ext {
-	uint64_t	ext_sign:1;
-	uint64_t	ext_exp:EXT_EXPBITS;
-	uint64_t	ext_frach:EXT_FRACHBITS;
+	/*LINTED35*/	uint64_t	ext_sign:1;
+	/*LINTED35*/	uint64_t	ext_exp:EXT_EXPBITS;
+	/*LINTED35*/	uint64_t	ext_frach:EXT_FRACHBITS;
 	uint64_t	ext_fracl;
 };
 __CTASSERT(sizeof(struct ieee_ext) == 16);

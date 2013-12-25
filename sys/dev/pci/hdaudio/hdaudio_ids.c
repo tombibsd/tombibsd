@@ -134,6 +134,7 @@ static const struct hdaudio_id {
 	{ HDA_VENDOR_VIA, 0x4438, "VT2002P" },
 	{ HDA_VENDOR_VIA, 0x0448, "VT1812" },
 	{ HDA_VENDOR_VIA, 0x0440, "VT1818S" },
+	{ HDA_VENDOR_VIA, 0x4760, "VT1705" },
 	{ HDA_VENDOR_VIA, HDA_PRODUCT_ANY, "VIA" },
 	/* Analog Devices */
 	{ HDA_VENDOR_ANALOG_DEVICES, 0x184a, "AD1884A" },

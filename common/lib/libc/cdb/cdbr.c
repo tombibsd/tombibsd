@@ -38,7 +38,9 @@
 #include <sys/cdefs.h>
 __RCSID("$NetBSD$");
 
+#if !defined(_KERNEL) && !defined(_STANDALONE)
 #include "namespace.h"
+#endif
 
 #if !HAVE_NBTOOL_CONFIG_H
 #include <sys/bitops.h>
@@ -47,6 +49,15 @@ __RCSID("$NetBSD$");
 #include <sys/endian.h>
 #endif
 
+#if defined(_KERNEL) || defined(_STANDALONE)
+#include <sys/cdbr.h>
+#include <sys/kmem.h>
+#include <sys/systm.h>
+#include <lib/libkern/libkern.h>
+#define SET_ERRNO(val)
+#define malloc(size) kmem_alloc(size, KM_SLEEP)
+#define free(ptr) kmem_free(ptr, sizeof(struct cdbr))
+#else
 #include <sys/mman.h>
 #include <sys/stat.h>
 #include <cdbr.h>
@@ -57,13 +68,17 @@ __RCSID("$NetBSD$");
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#define SET_ERRNO(val) errno = (val)
+#endif
 
+#if !defined(_KERNEL) && !defined(_STANDALONE)
 #ifdef __weak_alias
 __weak_alias(cdbr_close,_cdbr_close)
 __weak_alias(cdbr_find,_cdbr_find)
 __weak_alias(cdbr_get,_cdbr_get)
 __weak_alias(cdbr_open,_cdbr_open)
 __weak_alias(cdbr_open_mem,_cdbr_open_mem)
+#endif
 #endif
 
 #if HAVE_NBTOOL_CONFIG_H
@@ -95,6 +110,7 @@ struct cdbr {
 	uint8_t entries_index_s1, entries_index_s2;
 };
 
+#if !defined(_KERNEL) && !defined(_STANDALONE)
 static void
 cdbr_unmap(void *cookie __unused, void *base, size_t size)
 {
@@ -119,7 +135,8 @@ cdbr_open(const char *path, int flags)
 	}
 
 	if (sb.st_size >= SSIZE_MAX) {
-		errno = EINVAL;
+		close(fd);
+		SET_ERRNO(EINVAL);
 		return NULL;
 	}
 
@@ -136,6 +153,7 @@ cdbr_open(const char *path, int flags)
 		munmap(base, size);
 	return cdbr;
 }
+#endif
 
 struct cdbr *
 cdbr_open_mem(void *base, size_t size, int flags,
@@ -144,7 +162,7 @@ cdbr_open_mem(void *base, size_t size, int flags,
 	struct cdbr *cdbr;
 	uint8_t *buf = base;
 	if (size < 40 || memcmp(buf, "NBCDB\n\0\001", 8)) {
-		errno = EINVAL;
+		SET_ERRNO(EINVAL);
 		return NULL;
 	}
 
@@ -187,7 +205,7 @@ cdbr_open_mem(void *base, size_t size, int flags,
 	    cdbr->data_base + cdbr->data_size < cdbr->mmap_base ||
 	    cdbr->data_base + cdbr->data_size >
 	    cdbr->mmap_base + cdbr->mmap_size) {
-		errno = EINVAL;
+		SET_ERRNO(EINVAL);
 		free(cdbr);
 		return NULL;
 	}
@@ -231,7 +249,7 @@ cdbr_get(struct cdbr *cdbr, uint32_t idx, const void **data, size_t *data_len)
 	uint32_t start, end;
 
 	if (idx >= cdbr->entries) {
-		errno = EINVAL;
+		SET_ERRNO(EINVAL);
 		return -1;
 	}
 
@@ -239,12 +257,12 @@ cdbr_get(struct cdbr *cdbr, uint32_t idx, const void **data, size_t *data_len)
 	end = get_uintX(cdbr->offset_base, idx + 1, cdbr->offset_size);
 
 	if (start > end) {
-		errno = EIO;
+		SET_ERRNO(EIO);
 		return -1;
 	}
 
 	if (end > cdbr->data_size) {
-		errno = EIO;
+		SET_ERRNO(EIO);
 		return -1;
 	}
 
@@ -261,7 +279,7 @@ cdbr_find(struct cdbr *cdbr, const void *key, size_t key_len,
 	uint32_t hashes[3], idx;
 
 	if (cdbr->entries_index == 0) {
-		errno = EINVAL;
+		SET_ERRNO(EINVAL);
 		return -1;
 	}
 

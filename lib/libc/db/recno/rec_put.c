@@ -87,11 +87,10 @@ __rec_put(const DB *dbp, DBT *key, const DBT *data, u_int flags)
 			goto einval;
 
 		if (t->bt_rdata.size < t->bt_reclen) {
-			t->bt_rdata.data = t->bt_rdata.data == NULL ?
-			    malloc(t->bt_reclen) :
-			    realloc(t->bt_rdata.data, t->bt_reclen);
-			if (t->bt_rdata.data == NULL)
+			void *np = realloc(t->bt_rdata.data, t->bt_reclen);
+			if (np == NULL)
 				return (RET_ERROR);
+			t->bt_rdata.data = np;
 			t->bt_rdata.size = t->bt_reclen;
 		}
 		memmove(t->bt_rdata.data, data->data, data->size);

@@ -277,7 +277,7 @@ clockhandler(void *arg)
 	 * adjust for jitter.
 	 */
 	delta -= sc->sc_autoinc;
-	if (delta < 0 || delta >= sc->sc_autoinc) {
+	if (delta >= sc->sc_autoinc) {
 		delta = 0;
 	}
 	armreg_cntv_tval_write(sc->sc_autoinc - delta);

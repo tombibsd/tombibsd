@@ -231,7 +231,7 @@ OF_close(int handle)
 	
 	args.name = ADR2CELL("close");
 	args.nargs = 1;
-	args.nreturns = 1;
+	args.nreturns = 0;
 	args.handle = HDL2CELL(handle);
 	openfirmware(&args);
 }

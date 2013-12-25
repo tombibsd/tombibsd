@@ -1121,7 +1121,7 @@ decl1str(sym_t *dsym)
 			 */
 			if (bitfieldtype_ok == 0 || isityp(t) == 0) {
 				/* illegal bit-field type */
-				error(35);
+				warning(35);
 				sz = tp->t_flen;
 				dsym->s_type = tp = duptyp(gettyp(t = INT));
 				if ((tp->t_flen = sz) > size(t))

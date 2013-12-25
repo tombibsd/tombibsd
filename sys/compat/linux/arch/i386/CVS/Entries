@@ -1,7 +1,7 @@
 /Makefile/1.2/Sat Oct  3 20:17:38 1998/-kk/
 /files.linux_i386/1.10/Mon Feb 23 20:28:58 2009/-kk/
 /linux_commons.c/1.16/Tue May 31 22:35:22 2011/-kk/
-/linux_errno.h/1.10/Mon Apr 28 20:23:42 2008/-kk/
+/linux_errno.h/1.11/Wed Dec 25 07:37:36 2013/-kk/
 /linux_exec.h/1.11/Wed Mar 21 03:20:22 2012/-kk/
 /linux_exec_machdep.c/1.17/Tue Mar 29 20:10:31 2011/-kk/
 /linux_fcntl.h/1.7/Tue Nov  2 18:01:26 2010/-kk/

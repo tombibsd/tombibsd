@@ -21,7 +21,7 @@ CPUFLAGS=
 COPTS=		-Os
 CFLAGS+=	-fno-strict-aliasing
 CFLAGS+=	-DMACHINE=\"${MACHINE}\" -DUTS_RELEASE=\"2.4.20\"
-CPPFLAGS+=	-mabi=apcs-gnu -mfloat-abi=soft -mcpu=xscale
+CPPFLAGS+=	${ARM_APCS_FLAGS} -mcpu=xscale
 CPPFLAGS+=      -nostdinc -D_STANDALONE
 CPPFLAGS+=	-I${.OBJDIR} -I${S}
 
