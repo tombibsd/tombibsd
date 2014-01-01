@@ -29,7 +29,7 @@
 /acpi_slit.h/1.3/Fri Mar  5 08:30:48 2010/-kk/
 /acpi_srat.c/1.3/Fri Mar  5 14:00:17 2010/-kk/
 /acpi_srat.h/1.3/Fri Mar  5 08:30:48 2010/-kk/
-/acpi_timer.c/1.21/Mon Aug  8 11:27:44 2011/-kk/
+/acpi_timer.c/1.22/Wed Jan  1 02:45:27 2014/-kk/
 /acpi_timer.h/1.6/Sat Jul 10 19:37:38 2010/-kk/
 /acpi_tz.c/1.87/Sun Jul 29 02:58:27 2012/-kk/
 /acpi_util.c/1.8/Tue Jun 21 03:37:21 2011/-kk/
@@ -37,7 +37,7 @@
 /acpi_verbose.c/1.17/Sun Oct 27 08:20:01 2013/-kk/
 /acpi_wakedev.c/1.25/Tue Aug 14 14:38:02 2012/-kk/
 /acpi_wakedev.h/1.6/Sat Feb 19 09:52:32 2011/-kk/
-/acpi_wdrt.c/1.2/Mon Jan 17 17:32:11 2011/-kk/
+/acpi_wdrt.c/1.3/Wed Jan  1 02:45:27 2014/-kk/
 /acpica.h/1.5/Thu Feb 17 07:34:42 2011/-kk/
 /acpidevs/1.35/Wed Jun 22 19:26:22 2011/-kk/
 /acpidevs_data.h/1.26/Wed Jun 22 19:26:36 2011/-kk/

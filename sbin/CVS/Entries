@@ -1,5 +1,5 @@
 /Makefile.inc/1.22/Wed Mar 21 05:47:53 2012/-kk/
-/Makefile/1.125/Thu Oct 31 06:59:52 2013/-kk/
+/Makefile/1.126/Wed Jan  1 02:45:15 2014/-kk/
 D/amrctl////
 D/apmlabel////
 D/atactl////
@@ -64,7 +64,6 @@ D/mount_portal////
 D/mount_procfs////
 D/mount_ptyfs////
 D/mount_puffs////
-D/mount_smbfs////
 D/mount_sysvbfs////
 D/mount_tmpfs////
 D/mount_udf////

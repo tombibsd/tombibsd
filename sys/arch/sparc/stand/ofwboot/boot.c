@@ -478,7 +478,10 @@ check_boot_config(void)
 	if (!root_fs_quickseekable) return;
 	DPRINTF(("checking for /boot.cfg...\n"));
 	fd = open("/boot.cfg", 0);
-	if (fd < 0) return;
+	if (fd < 0) {
+		DPRINTF(("no /boot.cfg found\n"));
+		return;
+	}
 	DPRINTF(("found /boot.cfg\n"));
 	if (fstat(fd, &st) == -1 || st.st_size > 32*1024) {
 		close(fd);

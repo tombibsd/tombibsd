@@ -93,6 +93,7 @@ short *symbol_prec;
 char *symbol_assoc;
 
 int pure_parser;
+int token_table;
 int exit_code;
 
 Value_t *ritem;

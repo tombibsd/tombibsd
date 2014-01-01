@@ -21,7 +21,9 @@
 # define OPENLOG_FAC	LOG_DAEMON
 #endif
 
-void init_logging(void);
+void sntp_init_logging(const char *program);
 void open_logfile(const char *logfile);
+
+extern char *progname;		/* for msyslog use too */
 
 #endif

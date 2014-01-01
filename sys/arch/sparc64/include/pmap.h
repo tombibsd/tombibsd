@@ -212,6 +212,12 @@ void		pmap_kprotect(vaddr_t, vm_prot_t);
 void		pmap_copy_page_phys(paddr_t, paddr_t);
 void		pmap_zero_page_phys(paddr_t);
 
+#ifdef SUN4V
+/* sun4v specific */
+void		pmap_setup_intstack_sun4v(paddr_t);
+void		pmap_setup_tsb_sun4v(void);
+#endif
+
 /* Installed physical memory, as discovered during bootstrap. */
 extern int phys_installed_size;
 extern struct mem_region *phys_installed;

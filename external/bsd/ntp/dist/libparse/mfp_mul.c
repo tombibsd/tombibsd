@@ -5,7 +5,7 @@
  *
  * mfp_mul.c,v 4.9 2005/07/17 20:34:40 kardel RELEASE_20050717_A
  *
- * Created: Sat Aug 16 20:35:08 1997
+ * $Created: Sat Aug 16 20:35:08 1997 $
  *
  * Copyright (c) 1997-2005 by Frank Kardel <kardel <AT> ntp.org>
  *
@@ -34,6 +34,7 @@
  * SUCH DAMAGE.
  *
  */
+#include <config.h>
 #include <stdio.h>
 #include "ntp_stdlib.h"
 #include "ntp_types.h"

@@ -35,3 +35,5 @@ int	aprint_error_dev(const char *, const char *, ...) __printflike(2, 3);
 
 void	identifycpu(int, const char *);
 int	ucodeupdate_check(int, struct cpu_ucode *);
+
+extern int verbose;

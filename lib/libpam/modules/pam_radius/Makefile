@@ -28,7 +28,6 @@
 LIB=	pam_radius
 SRCS=	pam_radius.c
 MAN=	pam_radius.8
-WARNS=	0
 
 # XXX: libradius doesn't exist yet
 LIBDPLIBS+=	radius	${.CURDIR}/../../../libradius

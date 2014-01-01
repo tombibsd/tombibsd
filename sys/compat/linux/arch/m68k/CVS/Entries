@@ -1,5 +1,5 @@
 /Makefile/1.2/Sat Oct  3 20:17:39 1998/-kk/
-/files.linux_m68k/1.6/Mon May 30 17:50:31 2011/-kk/
+/files.linux_m68k/1.7/Wed Jan  1 02:45:27 2014/-kk/
 /linux_errno.h/1.5/Wed Dec 25 07:37:36 2013/-kk/
 /linux_exec.h/1.10/Mon Apr 28 20:23:42 2008/-kk/
 /linux_fcntl.h/1.4/Tue Nov  2 18:01:26 2010/-kk/
@@ -12,12 +12,12 @@
 /linux_siginfo.h/1.6/Fri Nov 18 04:07:44 2011/-kk/
 /linux_signal.h/1.7/Mon Apr 28 20:23:42 2008/-kk/
 /linux_socket.h/1.4/Mon Apr 28 20:23:42 2008/-kk/
-/linux_syscall.h/1.85/Tue Dec 17 04:13:30 2013/-kk/
-/linux_syscallargs.h/1.84/Tue Dec 17 04:13:30 2013/-kk/
-/linux_syscalls.c/1.85/Tue Dec 17 04:13:30 2013/-kk/
-/linux_sysent.c/1.85/Tue Dec 17 04:13:30 2013/-kk/
+/linux_syscall.h/1.86/Wed Jan  1 02:45:27 2014/-kk/
+/linux_syscallargs.h/1.85/Wed Jan  1 02:45:27 2014/-kk/
+/linux_syscalls.c/1.86/Wed Jan  1 02:45:27 2014/-kk/
+/linux_sysent.c/1.86/Wed Jan  1 02:45:27 2014/-kk/
 /linux_termios.h/1.6/Mon Apr 28 20:23:42 2008/-kk/
 /linux_types.h/1.9/Sun Jan 11 02:45:48 2009/-kk/
 /syscalls.conf/1.5/Sun Dec 11 12:20:16 2005/-kk/
-/syscalls.master/1.79/Tue Dec 17 04:13:30 2013/-kk/
+/syscalls.master/1.80/Wed Jan  1 02:45:27 2014/-kk/
 D

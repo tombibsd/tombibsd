@@ -504,7 +504,7 @@
 ./usr/share/man/cat1/sha1.0			man-util-catman		.cat
 ./usr/share/man/cat1/shar.0			man-util-catman		.cat
 ./usr/share/man/cat1/shlock.0			man-util-catman		.cat
-./usr/share/man/cat1/shmif_dumpbus.0			man-util-catman		.cat
+./usr/share/man/cat1/shmif_dumpbus.0		man-util-catman		rump,.cat
 ./usr/share/man/cat1/shuffle.0			man-util-catman		.cat
 ./usr/share/man/cat1/skey.0			man-util-catman		skey,.cat
 ./usr/share/man/cat1/skeyaudit.0		man-util-catman		skey,.cat
@@ -512,6 +512,7 @@
 ./usr/share/man/cat1/skeyinit.0			man-util-catman		skey,.cat
 ./usr/share/man/cat1/sleep.0			man-util-catman		.cat
 ./usr/share/man/cat1/slogin.0			man-secsh-catman	crypto,.cat
+./usr/share/man/cat1/smbutil.0			man-util-catman		.cat
 ./usr/share/man/cat1/sntp.0			man-ntp-catman		.cat
 ./usr/share/man/cat1/sockstat.0			man-util-catman		.cat
 ./usr/share/man/cat1/sort.0			man-util-catman		.cat
@@ -768,6 +769,7 @@
 ./usr/share/man/cat4/amdtemp.0			man-sys-catman		.cat
 ./usr/share/man/cat4/amhphy.0			man-sys-catman		.cat
 ./usr/share/man/cat4/amiga/a1k2cp.0		man-sys-catman		.cat
+./usr/share/man/cat4/amiga/acafh.0		man-sys-catman		.cat
 ./usr/share/man/cat4/amiga/afsc.0		man-sys-catman		.cat
 ./usr/share/man/cat4/amiga/ahsc.0		man-sys-catman		.cat
 ./usr/share/man/cat4/amiga/amidisplaycc.0	man-sys-catman		.cat
@@ -2084,6 +2086,8 @@
 ./usr/share/man/cat5/nologin.0			man-sysutil-catman	.cat
 ./usr/share/man/cat5/npf.conf.0			man-npf-catman		.cat,npf
 ./usr/share/man/cat5/nsswitch.conf.0		man-net-catman		.cat
+./usr/share/man/cat5/ntp.conf.0			man-ntp-catman		.cat
+./usr/share/man/cat5/ntp.keys.0			man-ntp-catman		.cat
 ./usr/share/man/cat5/openssl.cnf.0		man-crypto-catman	crypto,.cat
 ./usr/share/man/cat5/pam.conf.0			man-sys-catman		.cat
 ./usr/share/man/cat5/passwd.0			man-sys-catman		.cat
@@ -3566,7 +3570,7 @@
 ./usr/share/man/html1/sha1.html			man-util-htmlman	html
 ./usr/share/man/html1/shar.html			man-util-htmlman	html
 ./usr/share/man/html1/shlock.html		man-util-htmlman	html
-./usr/share/man/html1/shmif_dumpbus.html		man-util-htmlman	html
+./usr/share/man/html1/shmif_dumpbus.html	man-util-htmlman	rump,html
 ./usr/share/man/html1/shuffle.html		man-util-htmlman	html
 ./usr/share/man/html1/skey.html			man-util-htmlman	skey,html
 ./usr/share/man/html1/skeyaudit.html		man-util-htmlman	skey,html
@@ -3574,6 +3578,7 @@
 ./usr/share/man/html1/skeyinit.html		man-util-htmlman	skey,html
 ./usr/share/man/html1/sleep.html		man-util-htmlman	html
 ./usr/share/man/html1/slogin.html		man-secsh-htmlman	crypto,html
+./usr/share/man/html1/smbutil.html		man-util-htmlman	html
 ./usr/share/man/html1/sntp.html			man-ntp-htmlman		html
 ./usr/share/man/html1/sockstat.html		man-util-htmlman	html
 ./usr/share/man/html1/sort.html			man-util-htmlman	html
@@ -3809,6 +3814,7 @@
 ./usr/share/man/html4/amdtemp.html		man-sys-htmlman		html
 ./usr/share/man/html4/amhphy.html		man-sys-htmlman		html
 ./usr/share/man/html4/amiga/a1k2cp.html		man-sys-htmlman		html
+./usr/share/man/html4/amiga/acafh.html		man-sys-htmlman		html
 ./usr/share/man/html4/amiga/afsc.html		man-sys-htmlman		html
 ./usr/share/man/html4/amiga/ahsc.html		man-sys-htmlman		html
 ./usr/share/man/html4/amiga/amidisplaycc.html	man-sys-htmlman		html
@@ -4998,6 +5004,8 @@
 ./usr/share/man/html5/nologin.html		man-sysutil-htmlman	html
 ./usr/share/man/html5/npf.conf.html		man-npf-htmlman		html,npf
 ./usr/share/man/html5/nsswitch.conf.html	man-net-htmlman		html
+./usr/share/man/html5/ntp.conf.html		man-ntp-htmlman		html
+./usr/share/man/html5/ntp.keys.html		man-ntp-htmlman		html
 ./usr/share/man/html5/openssl.cnf.html		man-crypto-htmlman	crypto,html
 ./usr/share/man/html5/pam.conf.html		man-sys-htmlman		html
 ./usr/share/man/html5/passwd.conf.html		man-sys-htmlman		html
@@ -6278,7 +6286,7 @@
 ./usr/share/man/man1/sha1.1			man-util-man		.man
 ./usr/share/man/man1/shar.1			man-util-man		.man
 ./usr/share/man/man1/shlock.1			man-util-man		.man
-./usr/share/man/man1/shmif_dumpbus.1			man-util-man		.man
+./usr/share/man/man1/shmif_dumpbus.1		man-util-man		rump,.man
 ./usr/share/man/man1/shuffle.1			man-util-man		.man
 ./usr/share/man/man1/skey.1			man-util-man		skey,.man
 ./usr/share/man/man1/skeyaudit.1		man-util-man		skey,.man
@@ -6286,6 +6294,7 @@
 ./usr/share/man/man1/skeyinit.1			man-util-man		skey,.man
 ./usr/share/man/man1/sleep.1			man-util-man		.man
 ./usr/share/man/man1/slogin.1			man-secsh-man		crypto,.man
+./usr/share/man/man1/smbutil.1			man-util-man		.man
 ./usr/share/man/man1/sntp.1			man-ntp-man		.man
 ./usr/share/man/man1/sockstat.1			man-util-man		.man
 ./usr/share/man/man1/sort.1			man-util-man		.man
@@ -6542,6 +6551,7 @@
 ./usr/share/man/man4/amdtemp.4			man-sys-man		.man
 ./usr/share/man/man4/amhphy.4			man-sys-man		.man
 ./usr/share/man/man4/amiga/a1k2cp.4		man-sys-man		.man
+./usr/share/man/man4/amiga/acafh.4		man-sys-man		.man
 ./usr/share/man/man4/amiga/afsc.4		man-sys-man		.man
 ./usr/share/man/man4/amiga/ahsc.4		man-sys-man		.man
 ./usr/share/man/man4/amiga/amidisplaycc.4	man-sys-man		.man
@@ -7858,6 +7868,8 @@
 ./usr/share/man/man5/nologin.5			man-sysutil-man		.man
 ./usr/share/man/man5/npf.conf.5			man-npf-man		.man,npf
 ./usr/share/man/man5/nsswitch.conf.5		man-net-man		.man
+./usr/share/man/man5/ntp.conf.5			man-ntp-man		.man
+./usr/share/man/man5/ntp.keys.5			man-ntp-man		.man
 ./usr/share/man/man5/openssl.cnf.5		man-crypto-man		crypto,.man
 ./usr/share/man/man5/pam.conf.5			man-sys-man		.man
 ./usr/share/man/man5/passwd.5			man-sys-man		.man

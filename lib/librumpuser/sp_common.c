@@ -714,7 +714,7 @@ success(void)
 	return 0;
 }
 
-struct {
+static struct {
 	const char *id;
 	int domain;
 	socklen_t slen;

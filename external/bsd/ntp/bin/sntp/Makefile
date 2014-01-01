@@ -4,14 +4,23 @@ USE_FORT?= yes	# network client/server
 
 PROG=	sntp
 MAN=	sntp.1
-SRCS=	crypto.c kod_management.c log.c main.c networking.c sntp-opts.c utilities.c sntp.c
+SRCS= \
+	crypto.c \
+	kod_management.c \
+	log.c \
+	main.c \
+	networking.c \
+	sntp-opts.c \
+	sntp.c \
+	utilities.c
+
 BINDIR=	/usr/sbin
 
 .include "${.CURDIR}/../Makefile.inc"
 
 DIST=${IDIST}/sntp
 
-CPPFLAGS+=-I${IDIST}/sntp -I${IDIST}/sntp/libopts
+CPPFLAGS+=-I${DIST} -I${DIST}/libopts
 
 .PATH: ${DIST}
 
@@ -19,7 +28,7 @@ CPPFLAGS+=-I${IDIST}/sntp -I${IDIST}/sntp/libopts
 
 CPPFLAGS+= -DLOCKNAME=\"/var/run/sntp.pid\"
 CPPFLAGS+= -DSAVENAME=\"/var/db/sntp.state\"
-LDADD+=	-lm -L${LIBISC} -liscntp
-DPADD+=	${LIBM}
+LDADD+= -L${LIBISC} -liscntp -levent -lm
+DPADD+=	${LIBM} ${LIBEVENT}
 
 .include <bsd.prog.mk>

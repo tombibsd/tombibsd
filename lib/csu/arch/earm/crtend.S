@@ -32,7 +32,6 @@
 
 RCSID("$NetBSD$")
 
-	.fpu softvfp
 	.eabi_attribute 18, 4		/* sizeof(wchar_t) */
 	.eabi_attribute 23, 0		/* doesn't use floating point */
 	.eabi_attribute 24, 1		/* 8 byte alignment permitted */

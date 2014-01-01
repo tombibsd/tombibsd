@@ -13,6 +13,8 @@ DIST=	${IDIST}/lib/isc
 .PATH.c::  ${DIST} ${DIST}/nls ${DIST}/unix ${DIST}/nothreads
 
 SRCS=   assertions.c               \
+	backtrace.c		   \
+	backtrace-emptytbl.c	   \
         buffer.c                   \
         condition.c                \
         dir.c                      \

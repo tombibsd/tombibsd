@@ -67,8 +67,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <compat/linux/linux_syscallargs.h>
 
-#ifndef alpha
-
 static void bsd_to_linux_stat(struct stat *, struct linux_stat64 *);
 
 /*
@@ -197,6 +195,7 @@ linux_sys_fstatat64(struct lwp *l, const struct linux_sys_fstatat64_args *uap, r
 	return copyout(&tmplst, SCARG(uap, sp), sizeof tmplst);
 }
 
+#ifndef __alpha__
 int
 linux_sys_truncate64(struct lwp *l, const struct linux_sys_truncate64_args *uap, register_t *retval)
 {
@@ -230,7 +229,7 @@ linux_sys_ftruncate64(struct lwp *l, const struct linux_sys_ftruncate64_args *ua
 
 	return sys_ftruncate(l, &ta, retval);
 }
-#endif /* !alpha */
+#endif /* __alpha__ */
 
 /*
  * Linux 'readdir' call. This code is mostly taken from the

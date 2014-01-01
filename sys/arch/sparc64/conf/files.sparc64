@@ -8,7 +8,7 @@ maxpartitions 8
 
 maxusers 2 8 1024
 
-defflag	opt_sparc_arch.h	SUN4U
+defflag	opt_sparc_arch.h	SUN4U SUN4V
 
 define mainbus {}
 device mainbus: mainbus

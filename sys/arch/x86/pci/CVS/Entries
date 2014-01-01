@@ -17,7 +17,7 @@
 /pci_bus_fixup.c/1.2/Fri Jul  1 18:22:08 2011/-kk/
 /pci_bus_fixup.h/1.1/Sun May 18 02:06:14 2008/-kk/
 /pci_intr_machdep.c/1.26/Thu Oct 24 10:28:57 2013/-kk/
-/pci_machdep.c/1.62/Thu Oct 24 10:28:57 2013/-kk/
+/pci_machdep.c/1.63/Wed Jan  1 02:45:26 2014/-kk/
 /pci_ranges.c/1.4/Sat Oct 27 17:18:14 2012/-kk/
 /pcib.c/1.15/Fri Apr  6 20:38:52 2012/-kk/
 /pcibvar.h/1.2/Tue Aug 18 17:15:10 2009/-kk/

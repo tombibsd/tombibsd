@@ -861,15 +861,15 @@ log_krb5(krb5_context ctx, krb5_error_code err,
 	else
 		errtxt = NULL;
 	if (errtxt != NULL) {
+		snprintf(b2, sizeof(b2), "%s", errtxt);
 		krb5_free_error_message(ctx, errtxt);
-		snprintf(b2, sizeof(b2), "%s (%s)", b1, errtxt);
 	} else {
-		snprintf(b2, sizeof(b2), "%s (unknown %d)", b1, (int)err);
+		snprintf(b2, sizeof(b2), "unknown %d", (int)err);
 	}
 	if (data)
-		syslog_r(LOG_DEBUG, data, "%s", b2);
+		syslog_r(LOG_DEBUG, data, "%s (%s)", b1, b2);
 	else
-		PAM_LOG(b2);
+		PAM_LOG("%s (%s)", b1, b2);
 }
 
 /*

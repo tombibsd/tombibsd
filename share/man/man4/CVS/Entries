@@ -191,7 +191,7 @@
 /exphy.4/1.6/Wed Apr 30 13:10:54 2008/-kk/
 /faith.4/1.14/Fri Jan 15 19:24:49 2010/-kk/
 /fast_ipsec.4/1.14/Thu Oct 24 10:28:54 2013/-kk/
-/fd.4/1.5/Thu Aug  7 10:31:02 2003/-kk/
+/fd.4/1.6/Wed Jan  1 02:45:17 2014/-kk/
 /filemon.4/1.8/Sat Apr 21 12:27:28 2012/-kk/
 /finsio.4/1.2/Thu Apr 28 16:10:37 2011/-kk/
 /flash.4/1.5/Thu Oct 24 10:28:54 2013/-kk/
@@ -423,7 +423,7 @@
 /rcons.4/1.3/Wed Apr 30 13:10:54 2008/-kk/
 /rdcphy.4/1.1/Wed Jan 26 18:48:12 2011/-kk/
 /re.4/1.15/Thu Oct 24 10:28:54 2013/-kk/
-/rgephy.4/1.2/Tue Oct 29 08:21:31 2013/-kk/
+/rgephy.4/1.3/Wed Jan  1 02:45:19 2014/-kk/
 /rlphy.4/1.2/Thu Jan  5 12:32:27 2006/-kk/
 /rnd.4/1.20/Tue Apr 17 08:28:20 2012/-kk/
 /route.4/1.22/Thu Oct 24 10:28:54 2013/-kk/
@@ -611,7 +611,7 @@
 /wds.4/1.5/Tue Sep 11 23:18:55 2001/-kk/
 /we.4/1.18/Tue Mar 23 16:03:33 2010/-kk/
 /wi.4/1.39/Thu Oct 24 10:28:54 2013/-kk/
-/wm.4/1.28/Thu Oct 24 10:28:54 2013/-kk/
+/wm.4/1.29/Wed Jan  1 02:45:20 2014/-kk/
 /wpi.4/1.15/Thu Oct 24 10:28:54 2013/-kk/
 /wscons.4/1.31/Tue Jun  5 08:49:16 2012/-kk/
 /wsdisplay.4/1.41/Sat Jun  2 10:25:07 2012/-kk/

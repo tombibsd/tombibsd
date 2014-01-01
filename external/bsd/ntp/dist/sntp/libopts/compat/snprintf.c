@@ -3,6 +3,7 @@
 
 #ifndef HAVE_VPRINTF
 #include "choke-me: no vprintf and no snprintf"
+  choke me.
 #endif
 
 #if defined(HAVE_STDARG_H)
@@ -23,6 +24,7 @@
 
 #else
 #  include "must-have-stdarg-or-varargs"
+  choke me.
 #endif
 
 static int

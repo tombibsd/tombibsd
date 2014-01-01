@@ -45,6 +45,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/vnode.h>
 #include <sys/fcntl.h>
 #include <sys/namei.h>
+#include <sys/module.h>
 
 #include <dev/dkvar.h>
 
@@ -63,6 +64,8 @@ int	dkdebug = 0;
 #define DPRINTF(x,y)
 #define DPRINTF_FOLLOW(y)
 #endif
+
+static int dk_subr_modcmd(modcmd_t, void *);
 
 #define DKLABELDEV(dev)	\
 	(MAKEDISKDEV(major((dev)), DISKUNIT((dev)), RAW_PART))
@@ -679,4 +682,20 @@ out:
 	VOP_UNLOCK(vp);
 	(void) vn_close(vp, FREAD | FWRITE, l->l_cred);
 	return error;
+}
+
+MODULE(MODULE_CLASS_MISC, dk_subr, NULL);
+
+static int
+dk_subr_modcmd(modcmd_t cmd, void *arg)
+{
+	switch (cmd) {
+	case MODULE_CMD_INIT:
+	case MODULE_CMD_FINI:
+		return 0;
+	case MODULE_CMD_STAT:
+	case MODULE_CMD_AUTOUNLOAD:
+	default:
+		return ENOTTY;
+	}
 }

@@ -44,7 +44,7 @@ DIST=   ${NETBSDSRCDIR}/external/bsd/openpam/dist
 LIB=	pam
 NOPROFILE=
 
-WARNS=	4
+WARNS=	6
 # 233: Struct/union never defined
 LINTFLAGS+= -Sw -X 233
 

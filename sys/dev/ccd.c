@@ -1555,7 +1555,7 @@ printiinfo(struct ccdiinfo *ii)
 }
 #endif
 
-MODULE(MODULE_CLASS_DRIVER, ccd, NULL);
+MODULE(MODULE_CLASS_DRIVER, ccd, "dk_subr");
 
 static int
 ccd_modcmd(modcmd_t cmd, void *arg)

@@ -16,6 +16,14 @@ See also: BUILDING, build.sh, Makefile.
 Recent changes:
 ^^^^^^^^^^^^^^^
 
+20131227:
+	1. The new ntpd runs in a restricted mode to prevent amplification
+	   attacks. If you need ntpdc to work you need to explicitly enable
+	   mode7 in your config file. Make sure you put the necessary restrict
+	   statements to avoid being exposed.
+	2. strncat has moved from lib/libc to common/lib/libc; you might need
+	   to make clean in libc
+
 20131129:
 	The GMP sources were updated, and builds will likely fail without
 	cleaning their build trees for both tools and in-tree, like below.

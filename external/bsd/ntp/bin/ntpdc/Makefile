@@ -22,10 +22,4 @@ CPPFLAGS+=-I${IDIST}/include -I${IDIST}/sntp/libopts
 
 .PATH: ${DIST}
 
-ntpdc.8:	ntpdc.1
-	${_MKTARGET_BUILD}
-	${TOOL_SED} -e "s,NTPDC 1,NTPDC 8," $? > $@
-
-CLEANFILES+=ntpdc.8
-
 .include <bsd.prog.mk>

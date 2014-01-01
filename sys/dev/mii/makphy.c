@@ -122,6 +122,9 @@ static const struct mii_phydesc makphys[] = {
 	{ MII_OUI_xxMARVELL,		MII_MODEL_xxMARVELL_E1116R_29,
 	  MII_STR_xxMARVELL_E1116R_29 },
 
+	{ MII_OUI_xxMARVELL,		MII_MODEL_xxMARVELL_E1543,
+	  MII_STR_xxMARVELL_E1543 },
+
 	{ 0,				0,
 	  NULL },
 };

@@ -1,7 +1,7 @@
 /Makefile.inc/1.25/Thu Oct 24 10:28:41 2013/-kk/
 /Makefile/1.24/Thu Oct 24 10:28:41 2013/-kk/
 /getgrent.c/1.12/Wed Sep 14 15:54:53 2005/-kk/
-/gethost.c/1.11/Thu Oct 24 10:28:41 2013/-kk/
+/gethost.c/1.12/Wed Jan  1 02:41:53 2014/-kk/
 /getnet.c/1.4/Sun May  9 01:49:56 2004/-kk/
 /getnetgr.c/1.4/Fri Jun 15 17:26:51 2001/-kk/
 /getpwent.c/1.12/Wed Jan 12 23:34:00 2011/-kk/

@@ -18,6 +18,10 @@ file	arch/amiga/clockport/a1k2cp.c		a1k2cp
 attach	gencp at xsurfbus with gencp_xsurf
 file	arch/amiga/clockport/gencp_xsurf.c	gencp_xsurf needs-flag
 
+# ACA500 clockport
+attach	gencp at acafhbus with gencp_acafh
+file	arch/amiga/clockport/gencp_acafh.c	gencp_acafh needs-flag
+
 # more zbus clockports should be added, like:
 # Highway clockport
 # attach gencp at highwaybus with gencp_highway

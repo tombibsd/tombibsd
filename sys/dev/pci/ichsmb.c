@@ -115,6 +115,7 @@ ichsmb_match(device_t parent, cfdata_t match, void *aux)
 		case PCI_PRODUCT_INTEL_C600_SMB_0:
 		case PCI_PRODUCT_INTEL_C600_SMB_1:
 		case PCI_PRODUCT_INTEL_C600_SMB_2:
+		case PCI_PRODUCT_INTEL_C2000_PCU_SMBUS:
 			return 1;
 		}
 	}

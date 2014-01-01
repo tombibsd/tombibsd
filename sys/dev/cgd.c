@@ -973,7 +973,7 @@ hexprint(const char *start, void *buf, int len)
 }
 #endif
 
-MODULE(MODULE_CLASS_DRIVER, cgd, NULL);
+MODULE(MODULE_CLASS_DRIVER, cgd, "dk_subr");
 
 #ifdef _MODULE
 CFDRIVER_DECL(cgd, DV_DISK, NULL);

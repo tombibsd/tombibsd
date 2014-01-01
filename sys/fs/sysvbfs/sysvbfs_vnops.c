@@ -185,14 +185,10 @@ sysvbfs_open(void *arg)
 	struct vnode *v = a->a_vp;
 	struct sysvbfs_node *bnode = v->v_data;
 	struct bfs_inode *inode = bnode->inode;
-	struct bfs *bfs = bnode->bmp->bfs;
-	struct bfs_dirent *dirent;
 
 	DPRINTF("%s:\n", __func__);
 	KDASSERT(v->v_type == VREG || v->v_type == VDIR);
 
-	if (!bfs_dirent_lookup_by_inode(bfs, inode->number, &dirent))
-		return ENOENT;
 	bnode->update_atime = true;
 	if ((a->a_mode & FWRITE) && !(a->a_mode & O_APPEND)) {
 		bnode->size = 0;

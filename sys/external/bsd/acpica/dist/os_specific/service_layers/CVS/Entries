@@ -1,6 +1,9 @@
-/osunixdir.c/1.1.1.2/Thu Feb 17 10:01:27 2011/-kk/
-/osunixxf.c/1.1.1.3/Tue Jun 28 09:02:14 2011/-kk/
-/oswindir.c/1.1.1.2/Thu Feb 17 10:01:27 2011/-kk/
-/oswintbl.c/1.1.1.2/Thu Feb 17 10:01:27 2011/-kk/
-/oswinxf.c/1.1.1.3/Tue Jun 28 09:02:15 2011/-kk/
+/osfreebsdtbl.c/1.1.1.1/Fri Dec 27 18:46:14 2013/-kk/
+/oslinuxtbl.c/1.1.1.1/Fri Dec 27 18:46:14 2013/-kk/
+/osunixdir.c/1.1.1.3/Wed Jan  1 02:45:34 2014/-kk/
+/osunixmap.c/1.1.1.1/Fri Dec 27 18:46:14 2013/-kk/
+/osunixxf.c/1.1.1.4/Wed Jan  1 02:45:34 2014/-kk/
+/oswindir.c/1.1.1.3/Wed Jan  1 02:45:34 2014/-kk/
+/oswintbl.c/1.1.1.3/Wed Jan  1 02:45:34 2014/-kk/
+/oswinxf.c/1.1.1.4/Wed Jan  1 02:45:34 2014/-kk/
 D

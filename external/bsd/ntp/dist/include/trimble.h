@@ -5,7 +5,7 @@
  *
  * trimble.h,v 4.6 2005/04/16 17:32:10 kardel RELEASE_20050508_A
  *
- * Created: Sun Aug  2 16:16:49 1998
+ * $Created: Sun Aug  2 16:16:49 1998 $
  *
  * Copyright (c) 1998-2005 by Frank Kardel <kardel <AT> ntp.org>
  *

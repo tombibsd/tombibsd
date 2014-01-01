@@ -24,7 +24,7 @@ FindConfig(
 	struct utsname unamebuf; 
 
 	/* All keyed by initial target being a directory */
-	(void) strcpy(result, base);
+	strlcpy(result, base, sizeof(result));
 	if (stat(result, &sbuf) == 0) {
 		if (S_ISDIR(sbuf.st_mode)) {
 
@@ -51,7 +51,9 @@ FindConfig(
 						if (stat(result, &sbuf) == 0) {
 							goto outahere;
 						} else {
-							(void) strcpy(result, "/not/found");
+							strlcpy(result,
+								"/not/found",
+								sizeof(result));
 						}
 					}
 				}

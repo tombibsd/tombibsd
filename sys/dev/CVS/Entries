@@ -11,9 +11,9 @@
 /aurateconv.c/1.19/Wed Nov 23 23:07:31 2011/-kk/
 /bio.c/1.9/Thu May  7 12:15:33 2009/-kk/
 /biovar.h/1.8/Thu May  7 12:15:33 2009/-kk/
-/ccd.c/1.145/Thu Oct 24 10:28:57 2013/-kk/
+/ccd.c/1.146/Wed Jan  1 02:45:27 2014/-kk/
 /ccdvar.h/1.33/Thu Oct 24 10:28:57 2013/-kk/
-/cgd.c/1.82/Thu Oct 24 10:28:57 2013/-kk/
+/cgd.c/1.83/Wed Jan  1 02:45:27 2014/-kk/
 /cgd_crypto.c/1.12/Thu Oct 24 10:28:57 2013/-kk/
 /cgd_crypto.h/1.7/Wed Dec  5 02:23:20 2012/-kk/
 /cgdvar.h/1.16/Wed Dec  5 02:23:20 2012/-kk/
@@ -21,9 +21,9 @@
 /clock_subr.h/1.21/Sat Dec 12 15:10:34 2009/-kk/
 /clockctl.c/1.30/Sat Oct 27 17:18:14 2012/-kk/
 /cninit.c/1.11/Tue Feb  8 20:20:26 2011/-kk/
-/cons.c/1.69/Tue Mar 13 18:40:29 2012/-kk/
+/cons.c/1.70/Wed Jan  1 02:45:27 2014/-kk/
 /cons.h/1.27/Tue Feb  8 20:20:26 2011/-kk/
-/dksubr.c/1.48/Thu Oct 24 10:28:57 2013/-kk/
+/dksubr.c/1.49/Wed Jan  1 02:45:27 2014/-kk/
 /dkvar.h/1.18/Thu Oct 24 10:28:57 2013/-kk/
 /firmload.c/1.17/Sun Apr 29 20:27:31 2012/-kk/
 /firmload.h/1.2/Mon Apr 28 20:23:46 2008/-kk/
@@ -63,7 +63,7 @@
 /verified_exec.c/1.67/Tue Mar 13 18:40:30 2012/-kk/
 /video.c/1.30/Thu Oct 24 10:28:58 2013/-kk/
 /video_if.h/1.7/Fri Dec 24 20:54:28 2010/-kk/
-/vnd.c/1.226/Thu Oct 24 10:28:58 2013/-kk/
+/vnd.c/1.227/Wed Jan  1 02:45:27 2014/-kk/
 /vndvar.h/1.33/Thu Oct 24 10:28:58 2013/-kk/
 D/acpi////
 D/adb////

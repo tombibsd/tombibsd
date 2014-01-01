@@ -193,3 +193,9 @@ GMP_LIMB_BITS=32
 
 M4FLAGS= -DPIC
 COPTS+= -fPIC
+
+AFLAGS.addmul_1.s=	-march=armv6
+AFLAGS.invert_limb.s=	-march=armv6
+AFLAGS.mode1o.s=	-march=armv6
+AFLAGS.mul_1.s=		-march=armv6
+AFLAGS.submul_1.s=	-march=armv6

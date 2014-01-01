@@ -104,7 +104,7 @@ ENTRY(cpu_in_cksum)
 #ifdef __thumb__
 	it	ne
 #endif
-	blne	_ASM_LABEL(.L_cksumdata)
+	blne	_ASM_LABEL(arm_cksumdata)
 	tst	r11, #0x01
 #ifdef __thumb__
 	it	ne
@@ -129,15 +129,14 @@ ENTRY(cpu_in_cksum)
 	mvn	r0, r8
 	lsr	r0, r0, #16
 #endif
-	pop	{r4-r11, lr}
-	RET
+	pop	{r4-r11, pc}
 
 .Lin_cksum_whoops:
 	adr	r0, .Lin_cksum_whoops_str
 	bl	_C_LABEL(panic)
 .Lin_cksum_whoops_str:
 	.asciz	"in_cksum: out of mbufs\n"
-	.align	5
+	.p2align	5
 END(cpu_in_cksum)
 
 
@@ -156,7 +155,7 @@ END(cpu_in_cksum)
  *	r0-r7
  */
 /* LINTSTUB: Ignore */
-ASENTRY_NP(.L_cksumdata)
+ASENTRY_NP(arm_cksumdata)
 #ifdef __PROG26
 	str	lr, [sp, #-4]!		/* for SVC26 mode */
 #endif
@@ -410,4 +409,4 @@ ASENTRY_NP(.L_cksumdata)
 #else
 	RET
 #endif
-ASEND(.L_cksumdata)
+ASEND(arm_cksumdata)

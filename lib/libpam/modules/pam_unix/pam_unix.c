@@ -299,8 +299,8 @@ yp_set_password(pam_handle_t *pamh, struct passwd *opwd,
 		goto malloc_failure;
 	if ((yppwd.newpw.pw_name = strdup(pwd->pw_name)) == NULL)
 		goto malloc_failure;
-	yppwd.newpw.pw_uid = pwd->pw_uid;
-	yppwd.newpw.pw_gid = pwd->pw_gid;
+	yppwd.newpw.pw_uid = (int)pwd->pw_uid;
+	yppwd.newpw.pw_gid = (int)pwd->pw_gid;
 	if ((yppwd.newpw.pw_gecos = strdup(pwd->pw_gecos)) == NULL)
 		goto malloc_failure;
 	if ((yppwd.newpw.pw_dir = strdup(pwd->pw_dir)) == NULL)

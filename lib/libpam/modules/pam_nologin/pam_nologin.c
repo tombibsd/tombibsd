@@ -74,7 +74,7 @@ pam_sm_authenticate(pam_handle_t *pamh, int flags __unused,
 	struct stat st;
 	int retval, fd;
 	int ignorenologin = 0;
-	int rootlogin = 0;
+	u_int rootlogin = 0;
 	const char *user, *nologin;
 	char *mtmp;
 	char pwbuf[1024];
@@ -132,10 +132,11 @@ pam_sm_authenticate(pam_handle_t *pamh, int flags __unused,
 		return PAM_AUTH_ERR;
 	}
 
-	mtmp = malloc(st.st_size + 1);
+	size_t len = (size_t)st.st_size;
+	mtmp = malloc(len + 1);
 	if (mtmp != NULL) {
-		read(fd, mtmp, st.st_size);
-		mtmp[st.st_size] = '\0';
+		read(fd, mtmp, len);
+		mtmp[len] = '\0';
 		pam_error(pamh, "%s", mtmp);
 		free(mtmp);
 	}

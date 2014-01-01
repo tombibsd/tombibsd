@@ -42,7 +42,6 @@ SRCS+=		lbaselib.c \
 
 # Compatability code
 SRCS+=		strcspn.c \
-		strncat.c \
 		strpbrk.c \
 		strspn.c
 

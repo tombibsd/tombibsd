@@ -1,4 +1,4 @@
-/Makefile/1.69/Sat Apr 21 12:27:28 2012/-kk/
+/Makefile/1.70/Wed Jan  1 02:45:20 2014/-kk/
 /a.out.5/1.20/Mon Mar 22 18:58:32 2010/-kk/
 /acct.5/1.9/Fri Dec 22 08:00:20 2006/-kk/
 /ar.5/1.7/Thu Aug  7 10:31:16 2003/-kk/
@@ -37,7 +37,6 @@
 /networks.5/1.16/Sun Sep  7 16:22:28 2003/-kk/
 /nologin.5/1.2/Fri May  2 19:09:56 2008/-kk/
 /nsswitch.conf.5/1.28/Sun Oct 25 01:30:48 2009/-kk/
-/pam.conf.5/1.9/Wed Apr 30 13:10:57 2008/-kk/
 /passwd.5/1.31/Thu Oct 24 10:28:54 2013/-kk/
 /passwd.conf.5/1.10/Fri Dec  3 21:41:40 2010/-kk/
 /phones.5/1.8/Thu Jan  6 16:37:35 2011/-kk/

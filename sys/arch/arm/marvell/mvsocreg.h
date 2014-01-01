@@ -78,16 +78,6 @@
 #define MVSOC_COM1_BASE		(MVSOC_DEVBUS_BASE + 0x2100)
 
 /*
- * Miscellanseous Register
- */
-#define MVSOC_MISC_BASE		(MVSOC_DEVBUS_BASE + 0x8200) /* For Armada XP */
-
-#define MVSOC_MISC_RSTOUTNMASKR		  0x60 /* RSTOUTn Mask Register */
-#define MVSOC_MISC_RSTOUTNMASKR_GLOBALSOFTRSTOUTEN (1 << 0)
-#define MVSOC_MISC_SSRR			  0x64	/* System Soft Reset Register */
-#define MVSOC_MISC_SSRR_GLOBALSOFTRST           (1 << 0)
-
-/*
  * Mbus-L to Mbus Bridge Registers
  */
 #define MVSOC_MLMB_BASE		(UNITID2PHYS(MLMB))	/* 0x20000 */
@@ -122,6 +112,10 @@
 #define MVSOC_MLMB_MLMBIMR		  0x114	/*Mb-L to Mb Bridge Intr Mask */
 
 #define MVSOC_MLMB_CLKGATING		  0x11c	/* Clock Gating Control */
+#define MVSOC_MLMB_CLKGATING_LNR	  (1 << 13) /* Load New Ratio */
+#define MVSOC_MLMB_CLKGATING_GPH	  (1 << 12) /* Go To Power Half */
+#define MVSOC_MLMB_CLKGATING_GPS	  (1 << 11) /* Go To Power Save */
+#define MVSOC_MLMB_CLKGATING_CR		  (1 << 10) /* Production Realignment */
 #define MVSOC_MLMB_CLKGATING_BIT(n)	  (1 << (n))
 
 #define MVSOC_MLMB_L2CFG		  0x128	/* L2 Cache Config */

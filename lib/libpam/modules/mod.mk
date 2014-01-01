@@ -13,7 +13,7 @@ LIBDIR=/usr/lib/${MLIBDIR}/security
 .else
 LIBDIR=/usr/lib/security
 .endif
-WARNS=3
+WARNS=6
 
 .if ${MKPIC} != "no"
 LIBDPLIBS+=   pam     ${.CURDIR}/../../libpam

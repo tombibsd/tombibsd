@@ -58,6 +58,9 @@ file	arch/amiga/amiga/amiga_bus_simple_16.c	amibus_b16
 define	amibus_b800
 file	arch/amiga/amiga/amiga_bus_simple_0x800.c	amibus_b800
 
+define	amibus_b4000
+file	arch/amiga/amiga/amiga_bus_simple_0x4000.c	amibus_b4000
+
 define  amibus_empb
 file	arch/amiga/pci/empb_bsm.c	amibus_empb
 
@@ -578,6 +581,15 @@ file	arch/amiga/dev/z3rambd.c	z3rambd needs-flag
 
 attach	slhci at zbus with slhci_zbus
 file	arch/amiga/dev/slhci_zbus.c	slhci_zbus
+
+define	acafhbus {}
+
+device	acafh: acafhbus, amibus_b4000
+attach	acafh at mainbus 
+file	arch/amiga/dev/acafh.c		acafh needs-count 
+
+attach	wdc at acafhbus with wdc_acafh
+file	arch/amiga/dev/wdc_acafh.c	wdc_acafh & acafh 
 
 include "arch/amiga/clockport/files.clockport"
 

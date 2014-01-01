@@ -70,7 +70,7 @@ v_exaddr(SCR *sp, VICMD *vp, dir_t dir)
 	TEXT *tp;
 	db_recno_t s_lno;
 	size_t len, s_cno, tlen;
-	int err, nb, type;
+	int error, nb, type;
 	char buf[20];
 	CHAR_T *cmd, *t;
 	const CHAR_T *w;
@@ -174,7 +174,7 @@ v_exaddr(SCR *sp, VICMD *vp, dir_t dir)
 	 * confused the parser.  We're not that compatible.
 	 */
 	cmdp = &wp->excmd;
-	if (ex_range(sp, cmdp, &err))
+	if (ex_range(sp, cmdp, &error))
 		return (1);
 	
 	/*
@@ -185,7 +185,7 @@ v_exaddr(SCR *sp, VICMD *vp, dir_t dir)
 	len = cmdp->clen;
 	wp->excmd.clen = 0;
 
-	if (err)
+	if (error)
 		goto err2;
 
 	/* Copy out the new cursor position and make sure it's okay. */

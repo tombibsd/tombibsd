@@ -5,7 +5,7 @@
 /linux_cdrom.h/1.8/Mon Apr 28 20:23:43 2008/-kk/
 /linux_dirent.h/1.12/Sat Sep 11 20:53:04 2010/-kk/
 /linux_emuldata.h/1.18/Tue Nov  2 18:18:07 2010/-kk/
-/linux_errno.c/1.14/Wed Dec 25 07:37:37 2013/-kk/
+/linux_errno.c/1.15/Wed Jan  1 02:45:27 2014/-kk/
 /linux_errno.h/1.14/Wed Dec 25 07:37:37 2013/-kk/
 /linux_errno_generic.h/1.1/Tue Dec 17 22:14:24 2013/-kk/
 /linux_exec.c/1.116/Sun Feb 19 21:06:37 2012/-kk/
@@ -20,7 +20,7 @@
 /linux_fdio.c/1.13/Fri Mar 21 21:54:58 2008/-kk/
 /linux_fdio.h/1.4/Sun Mar  4 06:01:23 2007/-kk/
 /linux_file.c/1.108/Tue Dec 17 04:13:30 2013/-kk/
-/linux_file64.c/1.54/Tue Nov 26 03:29:51 2013/-kk/
+/linux_file64.c/1.55/Wed Jan  1 02:45:27 2014/-kk/
 /linux_futex.c/1.32/Thu Oct 24 10:28:57 2013/-kk/
 /linux_futex.h/1.7/Thu Oct 24 10:28:57 2013/-kk/
 /linux_hdio.c/1.16/Fri Mar 21 21:54:58 2008/-kk/
@@ -29,8 +29,8 @@
 /linux_ioctl.h/1.27/Thu Oct 24 10:28:57 2013/-kk/
 /linux_ipc.c/1.55/Sat May 28 23:24:58 2011/-kk/
 /linux_ipc.h/1.9/Mon Apr 28 20:23:43 2008/-kk/
-/linux_ipccall.c/1.32/Tue Aug 18 11:22:09 2009/-kk/
-/linux_ipccall.h/1.15/Tue Aug 18 11:22:09 2009/-kk/
+/linux_ipccall.c/1.33/Wed Jan  1 02:45:27 2014/-kk/
+/linux_ipccall.h/1.16/Wed Jan  1 02:45:27 2014/-kk/
 /linux_limit.h/1.6/Sat Sep 22 22:34:02 2012/-kk/
 /linux_llseek.c/1.33/Wed Jun 18 12:24:17 2008/-kk/
 /linux_machdep.h/1.19/Wed Jul  7 01:30:35 2010/-kk/
@@ -69,13 +69,13 @@
 /linux_signo.c/1.6/Mon Apr 28 20:23:44 2008/-kk/
 /linux_socket.c/1.115/Thu Oct 24 10:28:57 2013/-kk/
 /linux_socket.h/1.21/Thu Jun 30 20:09:39 2011/-kk/
-/linux_socketcall.c/1.42/Fri Jun 22 08:47:47 2012/-kk/
-/linux_socketcall.h/1.16/Wed Jun 17 14:18:51 2009/-kk/
+/linux_socketcall.c/1.43/Wed Jan  1 02:45:27 2014/-kk/
+/linux_socketcall.h/1.17/Wed Jan  1 02:45:27 2014/-kk/
 /linux_sockio.h/1.19/Thu Oct 24 10:28:57 2013/-kk/
 /linux_statfs.h/1.6/Thu Sep 13 13:59:33 2012/-kk/
 /linux_sysctl.c/1.41/Tue Nov 26 03:29:51 2013/-kk/
 /linux_sysctl.h/1.5/Wed Nov 19 18:36:04 2008/-kk/
-/linux_termios.c/1.36/Fri Jul  4 10:13:52 2008/-kk/
+/linux_termios.c/1.37/Wed Jan  1 02:45:27 2014/-kk/
 /linux_termios.h/1.21/Sun Sep 25 13:40:07 2011/-kk/
 /linux_time.c/1.36/Tue Oct  2 01:44:28 2012/-kk/
 /linux_types.h/1.31/Tue Nov 26 03:29:51 2013/-kk/

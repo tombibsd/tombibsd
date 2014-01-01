@@ -715,13 +715,14 @@
 ./usr/libdata/debug/usr/bin/seq.debug		comp-util-debug		debug
 ./usr/libdata/debug/usr/bin/sftp.debug		comp-secsh-debug	crypto,debug
 ./usr/libdata/debug/usr/bin/shlock.debug	comp-util-debug		debug
-./usr/libdata/debug/usr/bin/shmif_dumpbus.debug	comp-util-debug		debug
+./usr/libdata/debug/usr/bin/shmif_dumpbus.debug	comp-util-debug		debug,rump
 ./usr/libdata/debug/usr/bin/showmount.debug	comp-nfsclient-debug	debug
 ./usr/libdata/debug/usr/bin/shuffle.debug	comp-util-debug		debug
 ./usr/libdata/debug/usr/bin/size.debug		comp-util-debug		binutils,debug
 ./usr/libdata/debug/usr/bin/skey.debug		comp-util-debug		skey,debug
 ./usr/libdata/debug/usr/bin/skeyinfo.debug	comp-util-debug		skey,debug
 ./usr/libdata/debug/usr/bin/skeyinit.debug	comp-util-debug		skey,debug
+./usr/libdata/debug/usr/bin/smbutil.debug	comp-util-debug		debug
 ./usr/libdata/debug/usr/bin/sockstat.debug	comp-util-debug		debug
 ./usr/libdata/debug/usr/bin/soelim.debug	comp-groff-debug	debug
 ./usr/libdata/debug/usr/bin/sort.debug		comp-util-debug		debug

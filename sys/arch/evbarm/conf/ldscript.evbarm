@@ -42,6 +42,7 @@ SECTIONS
     *(.sdata)
     *(.sdata.*)
   }
+  . = ALIGN(8);
   _edata = .;
   PROVIDE (edata = .);
   __bss_start = .;

@@ -145,7 +145,7 @@ sockaddr_snprintf(char * const sbuf, const size_t len, const char * const fmt,
 		break;
 	case AF_LOCAL:
 		sun = ((const struct sockaddr_un *)(const void *)sa);
-		(void)strlcpy(addr = abuf, sun->sun_path, SUN_LEN(sun));
+		(void)strlcpy(addr = abuf, sun->sun_path, sizeof(abuf));
 		break;
 	case AF_INET:
 		sin4 = ((const struct sockaddr_in *)(const void *)sa);

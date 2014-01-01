@@ -163,13 +163,17 @@ static void axp_device_register(device_t dev, void *aux);
 static void
 axp_system_reset(void)
 {
+	extern vaddr_t misc_base;
+
+#define write_miscreg(r, v)	(*(volatile uint32_t *)(misc_base + (r)) = (v))
+
 	cpu_reset_address = 0;
 
 	/* Unmask soft reset */
-	write_miscreg(MVSOC_MISC_RSTOUTNMASKR,
-	    MVSOC_MISC_RSTOUTNMASKR_GLOBALSOFTRSTOUTEN);
+	write_miscreg(ARMADAXP_MISC_RSTOUTNMASKR,
+	    ARMADAXP_MISC_RSTOUTNMASKR_GLOBALSOFTRSTOUTEN);
 	/* Assert soft reset */
-	write_miscreg(MVSOC_MISC_SSRR, MVSOC_MISC_SSRR_GLOBALSOFTRST);
+	write_miscreg(ARMADAXP_MISC_SSRR, ARMADAXP_MISC_SSRR_GLOBALSOFTRST);
 
 	while (1);
 }
@@ -349,7 +353,10 @@ initarm(void *arg)
 	reset_axp_pcie_win();
 
 	/* Get CPU, system and timebase frequencies */
+	extern vaddr_t misc_base;
+	misc_base = MARVELL_INTERREGS_VBASE + ARMADAXP_MISC_BASE;
 	armadaxp_getclks();
+	mvsoc_clkgating = armadaxp_clkgating;
 
 	/* Preconfigure interrupts */
 	armadaxp_intr_bootstrap(MARVELL_INTERREGS_PBASE);

@@ -40,16 +40,17 @@
 #
 
 Package:	acpica
-Version:	20110623
-Current Vers:	20131115
+Version:	20131218
+Current Vers:	20131218
 Maintainer:	Intel
-Archive Site:	http://www.acpica.org/downloads/unix2_source_code.php
+Archive Site:	http://www.acpica.org/downloads/
 Home Page:	http://www.acpica.org/
 Mailing List:	devel@acpica.org
 License:	BSD-like
 Responsible:	jruoho
 Location:	sys/external/bsd/acpica/dist
 Notes:
+You want the unix2 (dual-licensed) tar file.
 Please read src/sys/dev/acpi/acpica/README before any modification.
 
 Package:	am-utils [amd]
@@ -838,8 +839,8 @@ and ndbootd-raw.c.  Restore saved config.h, and force it to define
 HAVE_STRICT_ALIGNMENT.  Fix RCS IDs, import.
 
 Package:	ntp
-Version:	4.2.6p5
-Current Vers:	4.2.6p5
+Version:	4.2.7p404
+Current Vers:	4.2.6p5/4.2.7p404
 Maintainer:	David L. Mills <mills@udel.edu>
 Archive Site:	http://www.ntp.org/
 Home Page:	http://www.ntp.org/, http://support.ntp.org/
@@ -876,7 +877,7 @@ Location:	external/bsd/openldap/dist
 Notes:
 
 Package:	OpenPAM
-Version:	20120526 (Micrampelis)
+Version:	20130907 (Nummularia)
 Current Vers:	20130907 (Nummularia)
 Maintainer:	Dag-Erling Smørgrav <des@FreeBSD.org>
 Archive Site:	http://www.openpam.org/
@@ -886,7 +887,7 @@ Responsible:	christos
 License:	BSD (3-clause)
 Location:	external/bsd/openpam/dist
 Notes:
-Next import will need $ Id removal..
+Next import will need moving lib sources to lib/libpam
 
 Package:	openresolv
 Version:	3.5.6
@@ -1256,8 +1257,8 @@ Notes:
 Added changes from a5 -> a12 manually.
 
 Package:	tz
-Version:	tzcode2013e / tzdata2013d
-Current Vers:	tzcode2013e / tzdata2013e
+Version:	tzcode2013i / tzdata2013i
+Current Vers:	tzcode2013i / tzdata2013i
 Maintainer:	Paul Eggert <eggert@cs.ucla.edu>
 Archive Site:	ftp://ftp.iana.org/tz/releases/
 Archive Site:	ftp://munnari.oz.au/pub/oldtz/
@@ -1268,11 +1269,10 @@ Responsible:	kleink, christos, apb
 License:	Public domain
 Location:	lib/libc/time,share/zoneinfo
 Notes:
-Use src/lib/libc/time/tzcode2netbsd to prepare the source tree for import.
-The tzcode2012f -> 2012g patch was applied by hand, since we have too
-many diffs (re-entrant tzcode) to apply. The diffs have been submitted
-upstream but there is too much inertia to apply them. Check for .gitignore
-files.
+Don't use src/lib/libc/time/tzcode2netbsd to prepare the source tree for import.
+Diffs are now applied by hand, since we have too many diffs (re-entrant tzcode,
+register removal) to apply. The diffs have been submitted upstream but there
+is too much inertia to apply them. Check for .gitignore files.
 
 Package:	wpa_supplicant/hostapd
 Version:	1.1
@@ -1469,3 +1469,18 @@ Location:	sys/external/bsd/libdwarf/dist
 Notes:
 		Run prepare-import.sh; next time use svn id.
 		Ask jkoshy who the upstream will be.
+
+Package:	smbfs
+Version:	smbfs-1.4.1.tar.gz + FreeBSD-2003-02-16
+Current Vers:	FreeBSD-XXXX-YY-ZZ
+Maintainer:	Boris Popov <bp@FreeBSD.org>
+Archive Site:	none
+Home Page:	http://people.freebsd.org/~bp/pub/smbfs/smbfs-1.4.1.tar.gz
+Mailing List:	?
+Responsible:	christos
+License:	BSD-like (4-clause)
+Location:	external/bsd/smbfs
+Notes:
+		The kernel portion has been removed from the tar file.
+		Our kernel smbfs and netsmb directories could move to
+		external, but this is just make-work.

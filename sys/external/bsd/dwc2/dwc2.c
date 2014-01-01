@@ -342,6 +342,9 @@ dwc2_softintr(void *v)
 
 	mutex_spin_enter(&hsotg->lock);
 	while ((dxfer = TAILQ_FIRST(&sc->sc_complete)) != NULL) {
+
+    		KASSERT(!callout_pending(&dxfer->xfer.timeout_handle));
+
 		/*
 		 * dwc2_abort_xfer will remove this transfer from the
 		 * sc_complete queue
@@ -353,8 +356,6 @@ dwc2_softintr(void *v)
 		}
 
 		TAILQ_REMOVE(&sc->sc_complete, dxfer, xnext);
-		/* XXXNH Already done - can I assert this? */
-		callout_stop(&dxfer->xfer.timeout_handle);
 
 		mutex_spin_exit(&hsotg->lock);
 		usb_transfer_complete(&dxfer->xfer);

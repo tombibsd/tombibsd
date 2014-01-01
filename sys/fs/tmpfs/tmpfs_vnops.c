@@ -176,6 +176,15 @@ tmpfs_lookup(void *v)
 		goto out;
 	}
 
+	/*
+	 * Treat an unlinked directory as empty (no "." or "..")
+	 */
+	if (dnode->tn_links == 0) {
+		KASSERT(dnode->tn_size == 0);
+		error = ENOENT;
+		goto out;
+	}
+
 	if (cnp->cn_flags & ISDOTDOT) {
 		tmpfs_node_t *pnode;
 
@@ -352,14 +361,6 @@ tmpfs_open(void *v)
 	KASSERT(VOP_ISLOCKED(vp));
 
 	node = VP_TO_TMPFS_NODE(vp);
-	if (node->tn_links < 1) {
-		/*
-		 * The file is still active, but all its names have been
-		 * removed (e.g. by a "rmdir $(pwd)").  It cannot be opened
-		 * any more, as it is about to be destroyed.
-		 */
-		return ENOENT;
-	}
 
 	/* If the file is marked append-only, deny write requests. */
 	if ((node->tn_flags & APPEND) != 0 &&

@@ -58,6 +58,8 @@
 #	- check for and remove img tags in html docs.
 #	- update distrib/sets if necessary.
 #       - update src/external/bsd/ntp/importdate to match the date of this import
+#	- build in the original distribution directory, then copy all the
+#	  generated man pages in the respective program directories
 #
 if [ $# -ne 2 ]; then echo "ntp2netbsd src dest"; exit 1; fi
 

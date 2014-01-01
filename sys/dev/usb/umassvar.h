@@ -226,6 +226,9 @@ struct umass_softc {
 	usbd_xfer_handle	transfer_xfer[XFER_NR]; /* for ctrl xfers */
 
 	void			*data_buffer;
+	void			*cmd_buffer;
+	void			*s1_buffer;
+	void			*s2_buffer;
 
 	int			transfer_dir;		/* data direction */
 	void			*transfer_data;		/* data buffer */

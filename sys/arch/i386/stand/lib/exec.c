@@ -362,6 +362,8 @@ exec_netbsd(const char *file, physaddr_t loadaddr, int boothowto, int floppy,
 
 	howto = boothowto;
 
+	memset(marks, 0, sizeof(marks));
+
 	if (common_load_kernel(file, &basemem, &extmem, loadaddr, floppy, marks))
 		goto out;
 

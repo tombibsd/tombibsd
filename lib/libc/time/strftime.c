@@ -13,6 +13,7 @@ __RCSID("$NetBSD$");
 #include "namespace.h"
 
 #include <stddef.h>
+#include <assert.h>
 #include <locale.h>
 #include "setlocale_local.h"
 
@@ -495,7 +496,7 @@ label:
 				continue;
 			case 'z':
 				{
-				int		diff;
+				long		diff;
 				char const *	sign;
 
 				if (t->tm_isdst < 0)
@@ -573,7 +574,8 @@ label:
 				diff /= SECSPERMIN;
 				diff = (diff / MINSPERHOUR) * 100 +
 					(diff % MINSPERHOUR);
-				pt = _conv(diff, "%04d", pt, ptlim);
+				_DIAGASSERT(__type_fit(int, diff));
+				pt = _conv((int)diff, "%04d", pt, ptlim);
 				}
 				continue;
 #if 0

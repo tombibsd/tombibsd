@@ -147,7 +147,7 @@ static const struct cmd_function cmd_fn[] = {
 /* Autoconf defines */
 CFDRIVER_DECL(dm, DV_DISK, NULL);
 
-MODULE(MODULE_CLASS_DRIVER, dm, NULL);
+MODULE(MODULE_CLASS_DRIVER, dm, "dk_subr");
 
 /* New module handle routine */
 static int

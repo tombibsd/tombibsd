@@ -253,5 +253,8 @@ SUBDIR+=	../sys/rump/net/lib
 # Lua bindings come last, they might depend on anything
 SUBDIR+=	lua
 
+# Needed by rump and rescue which are outside the smbfs tree
+SUBDIR+=	../external/bsd/smbfs/lib
+
 .include <bsd.buildinstall.mk>
 .include <bsd.subdir.mk>

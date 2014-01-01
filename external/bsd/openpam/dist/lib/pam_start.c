@@ -34,7 +34,7 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  *
- * Id: pam_start.c 503 2011-12-18 14:00:33Z des 
+ * Id: pam_start.c 648 2013-03-05 17:54:27Z des 
  */
 
 #ifdef HAVE_CONFIG_H
@@ -75,7 +75,7 @@ pam_start(const char *service,
 #else
 	h = -1;
 #endif
-	hostname_size = (h < 10 ? 1024 : h) + 1;
+	hostname_size = (size_t)(h < 10 ? 1024 : h) + 1;
 
 	ENTER();
 	if ((ph = calloc((size_t)1, sizeof *ph)) == NULL)

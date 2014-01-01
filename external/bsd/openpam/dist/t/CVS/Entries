@@ -1,7 +1,8 @@
-/Makefile.am/1.1.1.1/Thu Oct 24 10:28:47 2013/-kk/
-/Makefile.in/1.1.1.1/Thu Oct 24 10:28:47 2013/-kk/
-/t.h/1.1.1.1/Thu Oct 24 10:28:47 2013/-kk/
-/t_main.c/1.1.1.1/Thu Oct 24 10:28:47 2013/-kk/
-/t_openpam_readlinev.c/1.1.1.1/Thu Oct 24 10:28:47 2013/-kk/
-/t_openpam_readword.c/1.1.1.1/Thu Oct 24 10:28:47 2013/-kk/
+/Makefile.am/1.1.1.2/Wed Jan  1 02:42:57 2014/-kk/
+/Makefile.in/1.1.1.2/Wed Jan  1 02:42:57 2014/-kk/
+/t.h/1.1.1.2/Wed Jan  1 02:42:57 2014/-kk/
+/t_file.c/1.1.1.1/Fri Dec 27 19:16:12 2013/-kk/
+/t_main.c/1.1.1.2/Wed Jan  1 02:42:57 2014/-kk/
+/t_openpam_readlinev.c/1.1.1.2/Wed Jan  1 02:42:57 2014/-kk/
+/t_openpam_readword.c/1.1.1.2/Wed Jan  1 02:42:57 2014/-kk/
 D

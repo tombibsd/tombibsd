@@ -184,3 +184,16 @@ AcpiOsGetTimer(void)
 
 	return t;
 }
+
+/*
+ *
+ * AcpiOsWaitEventsComplete:
+ *
+ * 	Wait for all asynchronous events to complete. This implementation
+ *	does nothing.
+ */
+void
+AcpiOsWaitEventsComplete(void)
+{
+	return;
+}

@@ -176,7 +176,7 @@ mmu_init_table:
 #ifdef BCM5301X
 	MMU_INIT(KERNEL_BASE, 0x80000000, 128,
 	    L1_S_PROTO | L1_S_APv7_KRW | L1_S_B | L1_S_C | L1_S_V6_S)
-#elif defined(BCM56340)
+#elif defined(BCM563XX)
 	MMU_INIT(KERNEL_BASE, 0x60000000, 128,
 	    L1_S_PROTO | L1_S_APv7_KRW | L1_S_B | L1_S_C | L1_S_V6_S)
 #endif

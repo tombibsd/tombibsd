@@ -34,8 +34,7 @@
  */
 
 #include <machine/asm.h>
-
-#define	CR0_PE		1
+#include <x86/specialreg.h>
 
 	.text
 	.align  16

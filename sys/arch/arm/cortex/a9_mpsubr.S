@@ -150,7 +150,7 @@ arm_cpuinit:
 
 	XPUTC(#70)
 	mov	r1, #0
-	mcr	p15, 0, r1, c7, c10, 4	/* Drain the write buffers. */
+	dsb				/* Drain the write buffers. */
 
 	XPUTC(#71)
 	mrc	p15, 0, r2, c0, c0, 5	/* get MPIDR */

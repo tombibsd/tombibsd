@@ -1,9 +1,6 @@
 #	$NetBSD$
 
-NOGCCERROR=yes
-
 .include <bsd.own.mk>
-
 
 PROG=	ntptime
 MAN=	ntptime.8

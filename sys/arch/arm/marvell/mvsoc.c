@@ -67,10 +67,10 @@ static int mvsoc_search(device_t, cfdata_t, const int *, void *);
 uint32_t mvPclk, mvSysclk, mvTclk = 0;
 int nwindow = 0, nremap = 0;
 static vaddr_t regbase = 0xffffffff, dsc_base, pex_base;
-vaddr_t misc_base;
 vaddr_t mlmb_base;
 
 void (*mvsoc_intr_init)(void);
+int (*mvsoc_clkgating)(struct marvell_attach_args *);
 
 
 #ifdef MVSOC_CONSOLE_EARLY
@@ -346,7 +346,6 @@ static const struct mvsoc_periph {
 	int unit;
 	bus_size_t offset;
 	int irq;
-	uint32_t clkpwr_bit;
 } mvsoc_periphs[] = {
 #if defined(ORION)
 #define ORION_IRQ_TMR		(32 + MVSOC_MLMB_MLMBI_CPUTIMER0INTREQ)
@@ -491,23 +490,15 @@ static const struct mvsoc_periph {
     { KIRKWOOD(88F6281),"mvsocrtc",0, KIRKWOOD_RTC_BASE,IRQ_DEFAULT },
     { KIRKWOOD(88F6281),"com",     0, MVSOC_COM0_BASE,	KIRKWOOD_IRQ_UART0INT },
     { KIRKWOOD(88F6281),"com",     1, MVSOC_COM1_BASE,	KIRKWOOD_IRQ_UART1INT },
-    { KIRKWOOD(88F6281),"ehci",    0, KIRKWOOD_USB_BASE,KIRKWOOD_IRQ_USB0CNT,
-					MVSOC_MLMB_CLKGATING_BIT(3) },
+    { KIRKWOOD(88F6281),"ehci",    0, KIRKWOOD_USB_BASE,KIRKWOOD_IRQ_USB0CNT },
     { KIRKWOOD(88F6281),"gtidmac", 0, KIRKWOOD_IDMAC_BASE,IRQ_DEFAULT },
     { KIRKWOOD(88F6281),"gttwsi",  0, MVSOC_TWSI_BASE,	KIRKWOOD_IRQ_TWSI },
-    { KIRKWOOD(88F6281),"mvcesa",  0, KIRKWOOD_CESA_BASE,KIRKWOOD_IRQ_SECURITYINT,
-					MVSOC_MLMB_CLKGATING_BIT(17) },
-    { KIRKWOOD(88F6281),"mvgbec",  0, KIRKWOOD_GBE0_BASE,IRQ_DEFAULT,
-					MVSOC_MLMB_CLKGATING_BIT(0) },
-    { KIRKWOOD(88F6281),"mvgbec",  1, KIRKWOOD_GBE1_BASE,IRQ_DEFAULT,
-					MVSOC_MLMB_CLKGATING_BIT(19) },
-    { KIRKWOOD(88F6281),"mvpex",   0, MVSOC_PEX_BASE,	KIRKWOOD_IRQ_PEX0INT,
-					MVSOC_MLMB_CLKGATING_BIT(2) },
-    { KIRKWOOD(88F6281),"mvsata",  0, KIRKWOOD_SATAHC_BASE,KIRKWOOD_IRQ_SATA,
-					MVSOC_MLMB_CLKGATING_BIT(14) |
-					MVSOC_MLMB_CLKGATING_BIT(15) },
-    { KIRKWOOD(88F6281),"mvsdio",  0, KIRKWOOD_SDIO_BASE,KIRKWOOD_IRQ_SDIOINT,
-					MVSOC_MLMB_CLKGATING_BIT(4) },
+    { KIRKWOOD(88F6281),"mvcesa",  0, KIRKWOOD_CESA_BASE,KIRKWOOD_IRQ_SECURITYINT },
+    { KIRKWOOD(88F6281),"mvgbec",  0, KIRKWOOD_GBE0_BASE,IRQ_DEFAULT },
+    { KIRKWOOD(88F6281),"mvgbec",  1, KIRKWOOD_GBE1_BASE,IRQ_DEFAULT },
+    { KIRKWOOD(88F6281),"mvpex",   0, MVSOC_PEX_BASE,	KIRKWOOD_IRQ_PEX0INT },
+    { KIRKWOOD(88F6281),"mvsata",  0, KIRKWOOD_SATAHC_BASE,KIRKWOOD_IRQ_SATA },
+    { KIRKWOOD(88F6281),"mvsdio",  0, KIRKWOOD_SDIO_BASE,KIRKWOOD_IRQ_SDIOINT },
 
     { KIRKWOOD(88F6282),"mvsoctmr",0, MVSOC_TMR_BASE,	KIRKWOOD_IRQ_TMR },
     { KIRKWOOD(88F6282),"mvsocgpp",0, MVSOC_GPP_BASE,	KIRKWOOD_IRQ_GPIOLO7_0},
@@ -562,7 +553,7 @@ static const struct mvsoc_periph {
     { ARMADAXP(MV78130), "com",    1, MVSOC_COM1_BASE,	ARMADAXP_IRQ_UART1 },
     { ARMADAXP(MV78130), "com",    2, ARMADAXP_COM2_BASE,ARMADAXP_IRQ_UART2 },
     { ARMADAXP(MV78130), "com",    3, ARMADAXP_COM3_BASE,ARMADAXP_IRQ_UART3 },
-    { ARMADAXP(MV78130), "mvsocrtc",0, ARMADAXP_RTC_BASE,ARMADAXP_IRQ_RTC },
+    { ARMADAXP(MV78130), "mvsocrtc",0,ARMADAXP_RTC_BASE,ARMADAXP_IRQ_RTC },
     { ARMADAXP(MV78130), "gttwsi", 0, MVSOC_TWSI_BASE,	ARMADAXP_IRQ_TWSI0 },
     { ARMADAXP(MV78130), "gttwsi", 1, ARMADAXP_TWSI1_BASE,ARMADAXP_IRQ_TWSI1 },
     { ARMADAXP(MV78130), "gtidmac",0, ARMADAXP_XORE0_BASE,IRQ_DEFAULT },
@@ -588,7 +579,7 @@ static const struct mvsoc_periph {
     { ARMADAXP(MV78160), "com",    1, MVSOC_COM1_BASE,	ARMADAXP_IRQ_UART1 },
     { ARMADAXP(MV78160), "com",    2, ARMADAXP_COM2_BASE,ARMADAXP_IRQ_UART2 },
     { ARMADAXP(MV78160), "com",    3, ARMADAXP_COM3_BASE,ARMADAXP_IRQ_UART3 },
-    { ARMADAXP(MV78160), "mvsocrtc",0, ARMADAXP_RTC_BASE,ARMADAXP_IRQ_RTC },
+    { ARMADAXP(MV78160), "mvsocrtc",0,ARMADAXP_RTC_BASE,ARMADAXP_IRQ_RTC },
     { ARMADAXP(MV78160), "gttwsi", 0, MVSOC_TWSI_BASE,	ARMADAXP_IRQ_TWSI0 },
     { ARMADAXP(MV78160), "gttwsi", 1, ARMADAXP_TWSI1_BASE,ARMADAXP_IRQ_TWSI1 },
     { ARMADAXP(MV78160), "gtidmac",0, ARMADAXP_XORE0_BASE,IRQ_DEFAULT },
@@ -616,7 +607,7 @@ static const struct mvsoc_periph {
     { ARMADAXP(MV78230), "com",    1, MVSOC_COM1_BASE,	ARMADAXP_IRQ_UART1 },
     { ARMADAXP(MV78230), "com",    2, ARMADAXP_COM2_BASE,ARMADAXP_IRQ_UART2 },
     { ARMADAXP(MV78230), "com",    3, ARMADAXP_COM3_BASE,ARMADAXP_IRQ_UART3 },
-    { ARMADAXP(MV78230), "mvsocrtc",0, ARMADAXP_RTC_BASE,ARMADAXP_IRQ_RTC },
+    { ARMADAXP(MV78230), "mvsocrtc",0,ARMADAXP_RTC_BASE,ARMADAXP_IRQ_RTC },
     { ARMADAXP(MV78230), "gttwsi", 0, MVSOC_TWSI_BASE,	ARMADAXP_IRQ_TWSI0 },
     { ARMADAXP(MV78230), "gttwsi", 1, ARMADAXP_TWSI1_BASE,ARMADAXP_IRQ_TWSI1 },
     { ARMADAXP(MV78230), "gtidmac",0, ARMADAXP_XORE0_BASE,IRQ_DEFAULT },
@@ -643,7 +634,7 @@ static const struct mvsoc_periph {
     { ARMADAXP(MV78260), "com",    1, MVSOC_COM1_BASE,	ARMADAXP_IRQ_UART1 },
     { ARMADAXP(MV78260), "com",    2, ARMADAXP_COM2_BASE,ARMADAXP_IRQ_UART2 },
     { ARMADAXP(MV78260), "com",    3, ARMADAXP_COM3_BASE,ARMADAXP_IRQ_UART3 },
-    { ARMADAXP(MV78260), "mvsocrtc",0, ARMADAXP_RTC_BASE,ARMADAXP_IRQ_RTC },
+    { ARMADAXP(MV78260), "mvsocrtc",0,ARMADAXP_RTC_BASE,ARMADAXP_IRQ_RTC },
     { ARMADAXP(MV78260), "gttwsi", 0, MVSOC_TWSI_BASE,	ARMADAXP_IRQ_TWSI0 },
     { ARMADAXP(MV78260), "gttwsi", 1, ARMADAXP_TWSI1_BASE,ARMADAXP_IRQ_TWSI1 },
     { ARMADAXP(MV78260), "gtidmac",0, ARMADAXP_XORE0_BASE,IRQ_DEFAULT },
@@ -671,7 +662,7 @@ static const struct mvsoc_periph {
     { ARMADAXP(MV78460), "com",    1, MVSOC_COM1_BASE,	ARMADAXP_IRQ_UART1 },
     { ARMADAXP(MV78460), "com",    2, ARMADAXP_COM2_BASE,ARMADAXP_IRQ_UART2 },
     { ARMADAXP(MV78460), "com",    3, ARMADAXP_COM3_BASE,ARMADAXP_IRQ_UART3 },
-    { ARMADAXP(MV78460), "mvsocrtc",0, ARMADAXP_RTC_BASE,ARMADAXP_IRQ_RTC },
+    { ARMADAXP(MV78460), "mvsocrtc",0,ARMADAXP_RTC_BASE,ARMADAXP_IRQ_RTC },
     { ARMADAXP(MV78460), "gttwsi", 0, MVSOC_TWSI_BASE,	ARMADAXP_IRQ_TWSI0 },
     { ARMADAXP(MV78460), "gttwsi", 1, ARMADAXP_TWSI1_BASE,ARMADAXP_IRQ_TWSI1 },
     { ARMADAXP(MV78460), "gtidmac",0, ARMADAXP_XORE0_BASE,IRQ_DEFAULT },
@@ -717,7 +708,6 @@ mvsoc_attach(device_t parent, device_t self, void *aux)
 	struct marvell_attach_args mva;
 	uint16_t model;
 	uint8_t rev;
-	uint32_t clkpwr, clkpwrbit;
 	int i;
 
 	sc->sc_dev = self;
@@ -757,20 +747,6 @@ mvsoc_attach(device_t parent, device_t self, void *aux)
 		if (mvsoc_periphs[i].model != model)
 			continue;
 
-		/* Skip clock disabled devices */
-		clkpwrbit = mvsoc_periphs[i].clkpwr_bit;
-		if (clkpwrbit != 0) {
-			clkpwr = read_mlmbreg(MVSOC_MLMB_CLKGATING);
-
-			if ((clkpwr & clkpwrbit) == 0) {
-				aprint_normal("%s: %s%d clock disabled\n",
-				    device_xname(self),
-				    mvsoc_periphs[i].name,
-				    mvsoc_periphs[i].unit);
-				continue;
-			}
-		}
-
 		mva.mva_name = mvsoc_periphs[i].name;
 		mva.mva_model = model;
 		mva.mva_revision = rev;
@@ -782,6 +758,13 @@ mvsoc_attach(device_t parent, device_t self, void *aux)
 		mva.mva_size = 0;
 		mva.mva_dmat = sc->sc_dmat;
 		mva.mva_irq = mvsoc_periphs[i].irq;
+
+		/* Skip clock disabled devices */
+		if (mvsoc_clkgating != NULL && mvsoc_clkgating(&mva)) {
+			aprint_normal_dev(self, "%s%d clock disabled\n",
+			    mvsoc_periphs[i].name, mvsoc_periphs[i].unit);
+			continue;
+		}
 
 		config_found_sm_loc(sc->sc_dev, "mvsoc", NULL, &mva,
 		    mvsoc_print, mvsoc_search);
@@ -846,7 +829,6 @@ mvsoc_bootstrap(bus_addr_t iobase)
 
 	regbase = iobase;
 	dsc_base = iobase + MVSOC_DSC_BASE;
-	misc_base = iobase + MVSOC_MISC_BASE;
 	mlmb_base = iobase + MVSOC_MLMB_BASE;
 	pex_base = iobase + MVSOC_PEX_BASE;
 #ifdef MVSOC_CONSOLE_EARLY
@@ -879,6 +861,14 @@ mvsoc_model(void)
 		    ORION_PMI_SAMPLE_AT_RESET);
 		if ((reg & ORION_PMISMPL_TCLK_MASK) == 0)
 			model = PCI_PRODUCT_MARVELL_88F5082;
+	}
+#endif
+#if defined(KIRKWOOD)
+	if (model == PCI_PRODUCT_MARVELL_88F6281) {
+		reg = *(volatile uint32_t *)(regbase + KIRKWOOD_MISC_BASE +
+		    KIRKWOOD_MISC_DEVICEID);
+		if (reg == 1)	/* 88F6192 is 1 */
+			model = MARVELL_KIRKWOOD_88F6192;
 	}
 #endif
 

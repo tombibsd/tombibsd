@@ -3,6 +3,7 @@
 /*
  * modetoa - return an asciized mode
  */
+#include <config.h>
 #include <stdio.h>
 
 #include "lib_strbuf.h"
@@ -14,7 +15,7 @@ modetoa(
 	)
 {
 	char *bp;
-	static const char *modestrings[] = {
+	static const char * const modestrings[] = {
 		"unspec",
 		"sym_active",
 		"sym_passive",

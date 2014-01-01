@@ -348,6 +348,22 @@ linux_ioctl_termios(struct lwp *l, const struct linux_sys_ioctl_args *uap, regis
 			DPRINTF(("TIOCSPTLCK %d\n", idat));
 			return 0;
 #endif
+	case LINUX_TCXONC:
+		idat = (u_long)SCARG(uap, data);
+		switch (idat) {
+		case LINUX_TCOOFF:
+			SCARG(&ia, com) = TIOCSTOP;
+			break;
+		case LINUX_TCOON:
+			SCARG(&ia, com) = TIOCSTART;
+			break;
+		case LINUX_TCIOFF:
+		case LINUX_TCION:
+		default:
+			error = EINVAL;
+			goto out;
+		}
+		break;
 	default:
 		error = EINVAL;
 		goto out;

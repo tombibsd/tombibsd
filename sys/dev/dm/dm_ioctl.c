@@ -712,6 +712,7 @@ dm_table_load_ioctl(prop_dictionary_t dm_dict)
 
 	if ((dmv = dm_dev_lookup(name, uuid, minor)) == NULL) {
 		DM_REMOVE_FLAG(flags, DM_EXISTS_FLAG);
+		prop_object_iterator_release(iter);
 		return ENOENT;
 	}
 	aprint_debug("Loading table to device: %s--%d\n", name,
@@ -743,12 +744,14 @@ dm_table_load_ioctl(prop_dictionary_t dm_dict)
 		    ((target = dm_target_autoload(type)) == NULL)) {
 			dm_table_release(&dmv->table_head, DM_TABLE_INACTIVE);
 			dm_dev_unbusy(dmv);
+			prop_object_iterator_release(iter);
 			return ENOENT;
 		}
 		if ((table_en = kmem_alloc(sizeof(dm_table_entry_t),
 			    KM_SLEEP)) == NULL) {
 			dm_table_release(&dmv->table_head, DM_TABLE_INACTIVE);
 			dm_dev_unbusy(dmv);
+			prop_object_iterator_release(iter);
 			return ENOMEM;
 		}
 		prop_dictionary_get_uint64(target_dict, DM_TABLE_START,
@@ -791,6 +794,7 @@ dm_table_load_ioctl(prop_dictionary_t dm_dict)
 
 			dm_dev_unbusy(dmv);
 			dm_target_unbusy(target);
+			prop_object_iterator_release(iter);
 			return ret;
 		}
 		last_table = table_en;

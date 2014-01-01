@@ -48,5 +48,5 @@ struct sioreg {
 #define sio_stat sio_cmd
 };
 
-int  getsiocsr(struct sioreg *);
+uint16_t getsiocsr(struct sioreg *);
 void setsioreg(struct sioreg *, int, int);

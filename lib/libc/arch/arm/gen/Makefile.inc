@@ -20,6 +20,9 @@ SRCS+=	__aeabi_idiv0.c __aeabi_ldiv0.c
 SRCS+=	modsi3.S umodsi3.S
 .endif
 
+AFLAGS._setjmp.S=	-mfpu=vfp
+AFLAGS.setjmp.S=	-mfpu=vfp
+
 SRCS+=	nanf.c
 
 SRCS+=	setjmp.S

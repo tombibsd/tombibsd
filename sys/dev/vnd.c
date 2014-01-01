@@ -2014,7 +2014,7 @@ vnd_set_geometry(struct vnd_softc *vnd)
 
 #include <sys/module.h>
 
-MODULE(MODULE_CLASS_DRIVER, vnd, NULL);
+MODULE(MODULE_CLASS_DRIVER, vnd, "zlib");
 CFDRIVER_DECL(vnd, DV_DISK, NULL);
 
 static int

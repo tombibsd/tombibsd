@@ -554,11 +554,10 @@ tps65217pmic_print_ldos(struct tps65217pmic_softc *sc)
 static void
 tps65217pmic_print_ppath(struct tps65217pmic_softc *sc)
 {
-	uint8_t status, ppath, regenable;
+	uint8_t status, ppath;
 
 	ppath = tps65217pmic_reg_read(sc, TPS65217PMIC_PPATH);
 	status = tps65217pmic_reg_read(sc, TPS65217PMIC_STATUS);
-	regenable = tps65217pmic_reg_read(sc, TPS65217PMIC_ENABLE);
 
 	aprint_normal_dev(sc->sc_dev, "power sources ");
 

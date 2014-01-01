@@ -78,7 +78,7 @@ login_access(const char *user, const char *from)
     char   *users;			/* becomes list of login names */
     char   *froms;			/* becomes list of terminals or hosts */
     int     match = NO;
-    int     end;
+    size_t  end;
     int     lineno = 0;			/* for diagnostics */
 
     /*
@@ -92,7 +92,7 @@ login_access(const char *user, const char *from)
     if ((fp = fopen(_PATH_LOGACCESS, "r")) != NULL) {
 	while (!match && fgets(line, sizeof(line), fp)) {
 	    lineno++;
-	    if (line[end = strlen(line) - 1] != '\n') {
+	    if ((end = strlen(line)) == 0 || line[end - 1] != '\n') {
 		logit(LOG_ERR, "%s: line %d: missing newline or line too long",
 		       _PATH_LOGACCESS, lineno);
 		continue;
@@ -203,8 +203,8 @@ user_match(const char *tok, const char *string)
 static int
 from_match(const char *tok, const char *string)
 {
-    int     tok_len;
-    int     str_len;
+    size_t     tok_len;
+    size_t     str_len;
 
     /*
      * If a token has the magic value "ALL" the match always succeeds. Return

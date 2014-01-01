@@ -81,7 +81,7 @@ sysvbfs_mount(struct mount *mp, const char *path, void *data, size_t *data_len)
 		return EINVAL;
 
 	if (mp->mnt_flag & MNT_GETARGS) {
-		if ((bmp = (void *)mp->mnt_data) == NULL)
+		if ((bmp = (struct sysvbfs_mount *)mp->mnt_data) == NULL)
 			return EIO;
 		args->fspec = NULL;
 		*data_len = sizeof *args;
@@ -116,6 +116,7 @@ sysvbfs_mount(struct mount *mp, const char *path, void *data, size_t *data_len)
 			 * Be sure we're still naming the same device
 			 * used for our initial mount
 			 */
+			bmp = (struct sysvbfs_mount *)mp->mnt_data;
 			if (devvp != bmp->devvp)
 				error = EINVAL;
 		}

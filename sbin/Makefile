@@ -44,7 +44,6 @@ SUBDIR+= mount_portal
 SUBDIR+= mount_procfs
 SUBDIR+= mount_ptyfs
 SUBDIR+= mount_puffs
-SUBDIR+= mount_smbfs
 SUBDIR+= mount_sysvbfs
 SUBDIR+= mount_tmpfs
 SUBDIR+= mount_umap

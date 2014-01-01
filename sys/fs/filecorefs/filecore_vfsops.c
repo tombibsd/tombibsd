@@ -290,6 +290,7 @@ filecore_mount(struct mount *mp, const char *path, void *data, size_t *data_len)
 	if ((mp->mnt_flag & MNT_UPDATE) == 0)
 		error = filecore_mountfs(devvp, mp, l, args);
 	else {
+		fcmp = VFSTOFILECORE(mp);
 		if (devvp != fcmp->fc_devvp)
 			error = EINVAL;	/* needs translation */
 		else

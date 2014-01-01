@@ -258,7 +258,7 @@ ENTRY(cpu_switchto)
 	ldr	r0, [r3, #(CI_VFP_ID)]
 	cmp	r0, #0
 	ldrne	r0, [r7, #(PCB_VFP_FPEXC)]
-	mcrne	p10, 7, r0, c8, c0, 0
+	vmsrne	fpexc, r0
 #endif
 
 	ldr	r5, [r6, #(L_PROC)]	/* fetch the proc for below */

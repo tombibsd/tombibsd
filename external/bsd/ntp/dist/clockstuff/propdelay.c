@@ -49,6 +49,9 @@
  * to find delays to GOES via each of the three satellites.
  */
 
+#ifdef HAVE_CONFIG_H
+# include <config.h>
+#endif
 #include <stdio.h>
 #include <string.h>
 
@@ -117,7 +120,6 @@ int Gflag = 0;
 int height;
 
 char *progname;
-volatile int debug;
 
 static	void	doit		(double, double, double, double, double, char *);
 static	double	latlong		(char *, int);
@@ -143,6 +145,8 @@ main(
 	double lat1, long1;
 	double lat2, long2;
 	double lat3, long3;
+
+	init_lib();
 
 	progname = argv[0];
 	while ((c = ntp_getopt(argc, argv, "dh:CWG")) != EOF)

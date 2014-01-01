@@ -1,10 +1,3 @@
-/Makefile.am/1.1.1.1/Sun Dec 13 16:54:56 2009/-kk/
-/Makefile.in/1.1.1.2/Tue Jan 31 21:23:34 2012/-kk/
-/README/1.1.1.1/Sun Dec 13 16:54:56 2009/-kk/
-/chuinit.c/1.1.1.1/Sun Dec 13 16:54:57 2009/-kk/
-/clkinit.c/1.1.1.1/Sun Dec 13 16:54:57 2009/-kk/
-/tty_chu.c/1.1.1.1/Sun Dec 13 16:54:57 2009/-kk/
-/tty_chu_STREAMS.c/1.1.1.1/Sun Dec 13 16:54:56 2009/-kk/
-/tty_clk.c/1.1.1.1/Sun Dec 13 16:54:57 2009/-kk/
-/tty_clk_STREAMS.c/1.1.1.1/Sun Dec 13 16:54:56 2009/-kk/
+/Makefile.am/1.1.1.2/Wed Jan  1 02:42:41 2014/-kk/
+/Makefile.in/1.1.1.3/Wed Jan  1 02:42:41 2014/-kk/
 D/sys////

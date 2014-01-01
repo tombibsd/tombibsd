@@ -1,31 +1,36 @@
-/Makefile.am/1.1.1.2/Tue Jan 31 21:27:11 2012/-kk/
-/Makefile.in/1.1.1.2/Tue Jan 31 21:27:11 2012/-kk/
-/README/1.1.1.1/Sun Dec 13 16:56:36 2009/-kk/
-/UpdatePoint/1.1.1.1/Tue Jan 31 21:27:11 2012/-kk/
-/VersionName/1.1.1.2/Tue Jan 31 21:27:10 2012/-kk/
-/calc_tickadj.in/1.1.1.1/Sun Dec 13 16:56:36 2009/-kk/
-/check--help/1.1.1.1/Tue Jan 31 21:27:10 2012/-kk/
-/checkChangeLog/1.1.1.1/Tue Jan 31 21:27:10 2012/-kk/
-/checktime.in/1.1.1.1/Sun Dec 13 16:56:37 2009/-kk/
-/cvo.sh/1.1.1.2/Tue Jan 31 21:27:11 2012/-kk/
-/fixautomakedepsmagic/1.1.1.1/Sun Dec 13 16:56:38 2009/-kk/
-/freq_adj.in/1.1.1.1/Sun Dec 13 16:56:37 2009/-kk/
-/genCommitLog/1.1.1.2/Tue Jan 31 21:27:11 2012/-kk/
-/genver/1.1.1.1/Sun Dec 13 16:56:37 2009/-kk/
-/hpadjtime.sh/1.1.1.1/Sun Dec 13 16:56:38 2009/-kk/
-/html2man.in/1.1.1.2/Tue Jan 31 21:27:09 2012/-kk/
-/mkver.in/1.1.1.2/Tue Jan 31 21:27:10 2012/-kk/
-/ntp-close/1.1.1.1/Sun Dec 13 16:56:38 2009/-kk/
-/ntp-groper/1.1.1.1/Sun Dec 13 16:56:38 2009/-kk/
-/ntp-restart/1.1.1.1/Sun Dec 13 16:56:38 2009/-kk/
-/ntp-status/1.1.1.1/Sun Dec 13 16:56:38 2009/-kk/
-/ntp-wait.in/1.1.1.1/Sun Dec 13 16:56:37 2009/-kk/
-/ntpsweep.in/1.1.1.1/Sun Dec 13 16:56:37 2009/-kk/
-/ntptrace.in/1.1.1.1/Sun Dec 13 16:56:37 2009/-kk/
-/ntpver.in/1.1.1.1/Sun Dec 13 16:56:37 2009/-kk/
-/plot_summary.in/1.1.1.1/Sun Dec 13 16:56:36 2009/-kk/
-/summary.in/1.1.1.1/Sun Dec 13 16:56:37 2009/-kk/
+/Makefile.am/1.1.1.3/Wed Jan  1 02:42:46 2014/-kk/
+/Makefile.in/1.1.1.3/Wed Jan  1 02:42:46 2014/-kk/
+/README/1.1.1.2/Wed Jan  1 02:42:46 2014/-kk/
+/invoke-plot_summary.menu/1.1.1.1/Fri Dec 27 23:31:08 2013/-kk/
+/invoke-plot_summary.texi/1.1.1.1/Fri Dec 27 23:31:08 2013/-kk/
+/invoke-summary.menu/1.1.1.1/Fri Dec 27 23:31:08 2013/-kk/
+/invoke-summary.texi/1.1.1.1/Fri Dec 27 23:31:08 2013/-kk/
+/ntpver.in/1.1.1.2/Wed Jan  1 02:42:46 2014/-kk/
+/plot_summary-opts.def/1.1.1.1/Fri Dec 27 23:31:08 2013/-kk/
+/plot_summary-opts/1.1.1.1/Fri Dec 27 23:31:08 2013/-kk/
+/plot_summary.1plot_summaryman/1.1.1.1/Fri Dec 27 23:31:08 2013/-kk/
+/plot_summary.1plot_summarymdoc/1.1.1.1/Fri Dec 27 23:31:08 2013/-kk/
+/plot_summary.html/1.1.1.1/Fri Dec 27 23:31:08 2013/-kk/
+/plot_summary.in/1.1.1.2/Wed Jan  1 02:42:46 2014/-kk/
+/plot_summary.man.in/1.1.1.1/Fri Dec 27 23:31:08 2013/-kk/
+/plot_summary.mdoc.in/1.1.1.1/Fri Dec 27 23:31:08 2013/-kk/
+/plot_summary.texi/1.1.1.1/Fri Dec 27 23:31:08 2013/-kk/
+/summary-opts.def/1.1.1.1/Fri Dec 27 23:31:08 2013/-kk/
+/summary-opts/1.1.1.1/Fri Dec 27 23:31:08 2013/-kk/
+/summary.1summaryman/1.1.1.1/Fri Dec 27 23:31:08 2013/-kk/
+/summary.1summarymdoc/1.1.1.1/Fri Dec 27 23:31:08 2013/-kk/
+/summary.html/1.1.1.1/Fri Dec 27 23:31:08 2013/-kk/
+/summary.in/1.1.1.2/Wed Jan  1 02:42:46 2014/-kk/
+/summary.man.in/1.1.1.1/Fri Dec 27 23:31:08 2013/-kk/
+/summary.mdoc.in/1.1.1.1/Fri Dec 27 23:31:08 2013/-kk/
+/summary.texi/1.1.1.1/Fri Dec 27 23:31:08 2013/-kk/
+D/build////
+D/calc_tickadj////
+D/deprecated////
+D/lib////
 D/monitoring////
-D/rc1////
-D/rc2////
+D/ntp-wait////
+D/ntpsweep////
+D/ntptrace////
+D/rc////
 D/stats////

@@ -583,6 +583,8 @@ mygetpropstring(int node, char *name)
 static	char buf[64];
 
 	len = prom_proplen(node, name);
+	if (len > sizeof(buf))
+		len = sizeof(buf)-1;
 	if (len > 0)
 		_prom_getprop(node, name, buf, len);
 	else

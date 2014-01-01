@@ -239,7 +239,15 @@ cngetc(void)
 {
 	if (cn_tab == NULL)
 		return (0);
-	return ((*cn_tab->cn_getc)(cn_tab->cn_dev));
+	int s = splhigh();
+	for (;;) {
+		const int rv = (*cn_tab->cn_getc)(cn_tab->cn_dev);
+		if (rv >= 0) {
+			splx(s);
+			return rv;
+		}
+		docritpollhooks();
+	}
 }
 
 int
@@ -297,8 +305,10 @@ cnputc(int c)
 
 	if (c) {
 		(*cn_tab->cn_putc)(cn_tab->cn_dev, c);
-		if (c == '\n')
+		if (c == '\n') {
+			docritpollhooks();
 			(*cn_tab->cn_putc)(cn_tab->cn_dev, '\r');
+		}
 	}
 }
 

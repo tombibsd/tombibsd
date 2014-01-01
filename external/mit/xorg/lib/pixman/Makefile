@@ -65,12 +65,13 @@ CPPFLAGS+=		-DUSE_VMX
 MKDEPFLAGS+=		-maltivec
 .endif
 
-.if ${MACHINE_ARCH} == "earm" || ${MACHINE_ARCH} == "earmhf"
+
+.if !empty(MACHINE_ARCH:Mearm*)
 # ARM SIMD
-#SRCS+=		pixman-arm-simd.c 		\
-#		pixman-arm-simd-asm.S		\
-#		pixman-arm-simd-asm-scaled.S
-#CPPFLAGS+=	-DUSE_ARM_SIMD
+SRCS+=		pixman-arm-simd.c 		\
+		pixman-arm-simd-asm.S		\
+		pixman-arm-simd-asm-scaled.S
+CPPFLAGS+=	-DUSE_ARM_SIMD
 # ARM NEON
 SRCS+=		pixman-arm-neon.c		\
 		pixman-arm-neon-asm.S		\

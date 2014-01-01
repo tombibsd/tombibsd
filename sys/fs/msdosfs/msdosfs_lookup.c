@@ -300,8 +300,10 @@ msdosfs_lookup(void *v)
 				 * Check for a checksum or name match
 				 */
 				chksum_ok = (chksum == winChksum(dep->deName));
-				if (!chksum_ok
-				    && (!olddos || memcmp(dosfilename, dep->deName, 11))) {
+				if (!chksum_ok && (
+					!olddos ||
+					memcmp(&dosfilename[0],dep->deName,8) ||
+					memcmp(&dosfilename[8],dep->deExtension,3))) {
 					chksum = -1;
 					continue;
 				}

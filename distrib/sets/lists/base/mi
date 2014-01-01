@@ -689,7 +689,7 @@
 ./usr/bin/sha1					base-util-bin
 ./usr/bin/shar					base-util-bin
 ./usr/bin/shlock				base-util-bin
-./usr/bin/shmif_dumpbus				base-util-bin
+./usr/bin/shmif_dumpbus				base-util-bin		rump
 ./usr/bin/showmount				base-nfsclient-bin
 ./usr/bin/shuffle				base-util-bin
 ./usr/bin/skey					base-util-bin		skey
@@ -697,6 +697,7 @@
 ./usr/bin/skeyinfo				base-util-bin		skey
 ./usr/bin/skeyinit				base-util-bin		skey
 ./usr/bin/slogin				base-secsh-bin		crypto
+./usr/bin/smbutil				base-util-bin
 ./usr/bin/sockstat				base-util-bin
 ./usr/bin/sort					base-util-bin
 ./usr/bin/spell					base-util-bin
@@ -5091,9 +5092,9 @@
 ./usr/share/zoneinfo/Asia/Qyzylorda		base-sys-share		share
 ./usr/share/zoneinfo/Asia/Rangoon		base-sys-share		share
 ./usr/share/zoneinfo/Asia/Riyadh		base-sys-share		share
-./usr/share/zoneinfo/Asia/Riyadh87		base-sys-share		share
-./usr/share/zoneinfo/Asia/Riyadh88		base-sys-share		share
-./usr/share/zoneinfo/Asia/Riyadh89		base-sys-share		share
+./usr/share/zoneinfo/Asia/Riyadh87		base-obsolete		obsolete
+./usr/share/zoneinfo/Asia/Riyadh88		base-obsolete		obsolete
+./usr/share/zoneinfo/Asia/Riyadh89		base-obsolete		obsolete
 ./usr/share/zoneinfo/Asia/Saigon		base-sys-share		share
 ./usr/share/zoneinfo/Asia/Sakhalin		base-sys-share		share
 ./usr/share/zoneinfo/Asia/Samarkand		base-sys-share		share
@@ -5353,10 +5354,10 @@
 ./usr/share/zoneinfo/Mexico/BajaNorte		base-sys-share		share
 ./usr/share/zoneinfo/Mexico/BajaSur		base-sys-share		share
 ./usr/share/zoneinfo/Mexico/General		base-sys-share		share
-./usr/share/zoneinfo/Mideast			base-sys-share
-./usr/share/zoneinfo/Mideast/Riyadh87		base-sys-share		share
-./usr/share/zoneinfo/Mideast/Riyadh88		base-sys-share		share
-./usr/share/zoneinfo/Mideast/Riyadh89		base-sys-share		share
+./usr/share/zoneinfo/Mideast			base-obsolete		obsolete
+./usr/share/zoneinfo/Mideast/Riyadh87		base-obsolete		obsolete
+./usr/share/zoneinfo/Mideast/Riyadh88		base-obsolete		obsolete
+./usr/share/zoneinfo/Mideast/Riyadh89		base-obsolete		obsolete
 ./usr/share/zoneinfo/Moscow			base-obsolete		obsolete
 ./usr/share/zoneinfo/NZ				base-sys-share		share
 ./usr/share/zoneinfo/NZ-CHAT			base-sys-share		share

@@ -45,7 +45,7 @@ static struct timecounter acpi_timecounter = {
 	acpitimer_read_safe,
 	0,
 	0x00ffffff,
-	PM_TIMER_FREQUENCY,
+	ACPI_PM_TIMER_FREQUENCY,
 	"ACPI-Safe",
 	900,
 	NULL,

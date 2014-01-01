@@ -35,6 +35,6 @@ SUBDIR+= llvm
 SUBDIR+= pcc
 .endif
 
-SUBDIR+= pdisk dhcp nvi ppp
+SUBDIR+= pdisk dhcp nvi ppp smbfs
 
 .include <bsd.subdir.mk>

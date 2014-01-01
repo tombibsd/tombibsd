@@ -319,8 +319,9 @@ check_exec(struct lwp *l, struct exec_package *epp, struct pathbuf *pb)
 	if ((error = namei(&nd)) != 0)
 		return error;
 	epp->ep_vp = vp = nd.ni_vp;
-	/* this cannot overflow as both are size PATH_MAX */
-	strcpy(epp->ep_resolvedname, nd.ni_pnbuf);
+	/* normally this can't fail */
+	if ((error = copystr(nd.ni_pnbuf, epp->ep_resolvedname, PATH_MAX, NULL)))
+		goto bad1;
 
 #ifdef DIAGNOSTIC
 	/* paranoia (take this out once namei stuff stabilizes) */
@@ -640,11 +641,7 @@ execve_loadvm(struct lwp *l, const char *path, char * const *args,
 		goto clrflg;
 	}
 	data->ed_pathstring = pathbuf_stringcopy_get(data->ed_pathbuf);
-
 	data->ed_resolvedpathbuf = PNBUF_GET();
-#ifdef DIAGNOSTIC
-	strcpy(data->ed_resolvedpathbuf, "/wrong");
-#endif
 
 	/*
 	 * initialize the fields of the exec package.

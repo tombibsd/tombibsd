@@ -73,7 +73,7 @@ __weak_alias(gethostbyaddr,_gethostbyaddr);
 __weak_alias(gethostbyname,_gethostbyname);
 #endif
 
-extern int h_errno;
+int h_errno;
 FILE *_h_file;
 static struct hostent h_ent;
 static char h_buf[4096]; 

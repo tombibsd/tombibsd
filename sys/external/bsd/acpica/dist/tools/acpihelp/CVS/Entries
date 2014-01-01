@@ -1,9 +1,7 @@
-/Makefile/1.1.1.1/Tue Jun 28 09:02:25 2011/-kk/
-/acpihelp.h/1.1.1.1/Tue Jun 28 09:02:24 2011/-kk/
-/ahamlops.c/1.1.1.1/Tue Jun 28 09:02:24 2011/-kk/
-/ahaslkey.c/1.1.1.1/Tue Jun 28 09:02:24 2011/-kk/
-/ahaslops.c/1.1.1.1/Tue Jun 28 09:02:24 2011/-kk/
-/ahdecode.c/1.1.1.1/Tue Jun 28 09:02:24 2011/-kk/
-/ahmain.c/1.1.1.1/Tue Jun 28 09:02:25 2011/-kk/
-/ahpredef.c/1.1.1.1/Tue Jun 28 09:02:25 2011/-kk/
+/acpihelp.h/1.1.1.2/Wed Jan  1 02:45:34 2014/-kk/
+/ahamlops.c/1.1.1.2/Wed Jan  1 02:45:34 2014/-kk/
+/ahaslkey.c/1.1.1.2/Wed Jan  1 02:45:34 2014/-kk/
+/ahaslops.c/1.1.1.2/Wed Jan  1 02:45:34 2014/-kk/
+/ahdecode.c/1.1.1.2/Wed Jan  1 02:45:34 2014/-kk/
+/ahmain.c/1.1.1.2/Wed Jan  1 02:45:34 2014/-kk/
 D

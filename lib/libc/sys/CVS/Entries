@@ -50,10 +50,10 @@
 /clone.2/1.13/Sun Jan 29 11:44:54 2012/-kk/
 /close.2/1.17/Tue Jun  1 16:14:10 2004/-kk/
 /connect.2/1.28/Mon May 31 12:16:20 2010/-kk/
-/dup.2/1.28/Wed Jan 25 00:28:35 2012/-kk/
+/dup.2/1.30/Wed Jan  1 02:45:14 2014/-kk/
 /execve.2/1.40/Mon May 31 12:16:20 2010/-kk/
 /extattr_get_file.2/1.5/Wed Aug  3 09:48:12 2011/-kk/
-/fcntl.2/1.40/Wed Jan 25 00:28:35 2012/-kk/
+/fcntl.2/1.41/Wed Jan  1 02:45:14 2014/-kk/
 /fdatasync.2/1.16/Wed Apr 30 13:10:51 2008/-kk/
 /fhopen.2/1.17/Wed Aug  5 23:15:52 2009/-kk/
 /flock.2/1.22/Sat Oct 15 21:35:50 2011/-kk/
@@ -115,7 +115,7 @@
 /msgsnd.2/1.20/Thu Oct 24 10:28:53 2013/-kk/
 /msync.2/1.24/Sat Oct 15 21:35:50 2011/-kk/
 /munmap.2/1.20/Sat Oct 15 21:35:50 2011/-kk/
-/nanosleep.2/1.13/Mon Oct  8 18:08:40 2012/-kk/
+/nanosleep.2/1.14/Wed Jan  1 02:45:14 2014/-kk/
 /nfssvc.2/1.24/Tue Mar 10 21:00:47 2009/-kk/
 /ntp_adjtime.2/1.10/Mon May 18 09:28:51 2009/-kk/
 /ntp_adjtime.c/1.13/Tue Mar 20 16:26:12 2012/-kk/

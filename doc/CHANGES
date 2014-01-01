@@ -314,3 +314,14 @@ Changes from NetBSD 6.0 to NetBSD 7.0:
 	GMP: Updated to GMP 5.1.3.  [mrg 20131129]
 	file(1): Updated to 5.16. [christos 20131201]
 	librt: Added shm_open(3) and shm_unlink(3). [rmind 20131219]
+	acafh(4): Added driver for Individual Computers ACA500. Enjoy NetBSD
+		on an Amiga 500.  [rkujawa 20131222] 
+	libc: Update to tzcode2013i. [christos 20131226]
+	zoneinfo: Import tzdata2013i. [apb 20131226]
+	acpi(4): Updated ACPICA to 20131218. [christos 20131227]
+	openpam: Import 20130907 (Nummularia) [christos 20131227]
+	ntp: import ntp 4.2.7p404.  [christos 20131227]
+	luna68k: Add preleminary support of 4bpp framebuffer.
+		[tsutsui 20131227]
+	wm(4): Add support for I354 (C2000 Internal) Ethernet
+		[msaitoh 20131230]

@@ -213,6 +213,15 @@ reswitch:
 #endif
 				lflag |= LONG;
 			goto reswitch;
+		case 'j':
+#ifdef LIBSA_PRINTF_LONGLONG_SUPPORT
+			if (sizeof(intmax_t) == sizeof(long long))
+				lflag |= LLONG;
+			else
+#endif
+			if (sizeof(intmax_t) == sizeof(long))
+				lflag |= LONG;
+			goto reswitch;
 		case 't':
 			if (sizeof(PTRDIFF_T) == sizeof(long))
 				lflag |= LONG;

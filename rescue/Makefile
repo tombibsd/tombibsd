@@ -47,6 +47,9 @@ LDD_ELF32DIR!=	cd ${NETBSDSRCDIR}/usr.bin/ldd/elf32 && ${PRINTOBJDIR}
 LDD_ELF64DIR!=	cd ${NETBSDSRCDIR}/usr.bin/ldd/elf64 && ${PRINTOBJDIR}
 PARSELISTENV+=	LDD_ELF32DIR=${LDD_ELF32DIR} LDD_ELF64DIR=${LDD_ELF64DIR}
 
+SMB_LIBDIR!=	cd ${NETBSDSRCDIR}/external/bsd/smbfs/lib/libsmb && ${PRINTOBJDIR}
+PARSELISTENV+=	SMB_LIBDIR=${SMB_LIBDIR}
+
 #	Specially built objects to override the behaviour of
 #	various library functions
 #

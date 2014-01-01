@@ -292,6 +292,7 @@ char	*strsep(char **, const char *);
 /* These exist in GCC 3.x, but we don't bother. */
 char	*strcat(char *, const char *);
 char	*strncpy(char *, const char *, size_t);
+char	*strncat(char *, const char *, size_t);
 int	 strncmp(const char *, const char *, size_t);
 char	*strchr(const char *, int);
 char	*strrchr(const char *, int);

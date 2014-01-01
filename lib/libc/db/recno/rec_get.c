@@ -175,7 +175,6 @@ __rec_vpipe(BTREE *t, recno_t top)
 {
 	DBT data;
 	recno_t nrec;
-	ptrdiff_t len;
 	size_t sz;
 	int bval, ch;
 	uint8_t *p;
@@ -195,13 +194,12 @@ __rec_vpipe(BTREE *t, recno_t top)
 				break;
 			}
 			if (sz == 0) {
-				void *np;
-				len = p - (uint8_t *)t->bt_rdata.data;
-				sz = t->bt_rdata.size + 256;
-				np = realloc(t->bt_rdata.data, sz);
+				ptrdiff_t len = p - (uint8_t *)t->bt_rdata.data;
+				size_t tot = t->bt_rdata.size + (sz = 256);
+				void *np = realloc(t->bt_rdata.data, tot);
 				if (np == NULL)
 					return (RET_ERROR);
-				t->bt_rdata.size = sz;
+				t->bt_rdata.size = tot;
 				t->bt_rdata.data = np;
 				p = (uint8_t *)t->bt_rdata.data + len;
 			}

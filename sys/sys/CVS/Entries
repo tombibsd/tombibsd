@@ -159,7 +159,7 @@
 /ptrace.h/1.44/Fri Sep  2 20:10:19 2011/-kk/
 /ptree.h/1.8/Sat Oct  6 22:15:09 2012/-kk/
 /pty.h/1.8/Mon Apr 28 20:24:11 2008/-kk/
-/queue.h/1.64/Tue Dec 17 04:05:17 2013/-kk/
+/queue.h/1.65/Wed Jan  1 02:45:36 2014/-kk/
 /quota.h/1.12/Mon Jan 30 00:56:19 2012/-kk/
 /quotactl.h/1.36/Sat Dec  1 11:41:50 2012/-kk/
 /radioio.h/1.2/Mon Dec 26 18:41:36 2005/-kk/

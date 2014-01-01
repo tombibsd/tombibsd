@@ -63,9 +63,9 @@ DBG=-g3 -gstabs
 .if !defined(LIB) || empty(LIB)
 # NOTE: the order of these libraries is important...
 .if defined(NAMED_DEBUG)
-LDADD+=		-lbind9_g -ldns_g -llwres_g -lisccfg_g -lisccc_g -lisc_g
+LDADD+=		-lbind9_g -llwres_g -lisccfg_g -ldns_g -lisccc_g -lisc_g
 .else
-LDADD+=		-lbind9 -ldns -llwres -lisccfg -lisccc -lisc
+LDADD+=		-lbind9 -llwres -lisccfg -ldns -lisccc -lisc
 DPADD+=		${LIBBIND9} ${LIBDNS} ${LIBLWRES}
 DPADD+=		${LIBISCCFG} ${LIBISCCC} ${LIBISC}
 .endif
@@ -95,7 +95,7 @@ CPPFLAGS+=-DGSSAPI
 .endif
 .if ${MKKERBEROS} != "no"
 .if !defined (LIB) || empty(LIB)
-LDADD+= -lgssapi -lkrb5 -lhx509 -lheimntlm -lheimbase \
+LDADD+= -lgssapi -lheimntlm -lkrb5 -lhx509 -lheimbase \
 	-lcom_err  -lroken -lasn1 -lwind
 DPADD+= ${LIBGSSAPI} ${LIBKRB5} ${LIBHX509} ${LIBHEIMNTLM} ${LIBHEIMBASE} \
 	${LIBCOM_ERR} ${LIBROKEN} ${LIBASN1} ${LIBWIND}

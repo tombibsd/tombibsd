@@ -5,7 +5,7 @@
  *
  * ascii.h,v 4.4 2005/04/16 17:32:10 kardel RELEASE_20050508_A
  *
- * Created: Sun Jul 20 11:42:53 1997
+ * $Created: Sun Jul 20 11:42:53 1997 $
  *
  * Copyright (c) 1997-2005 by Frank Kardel <kardel <AT> ntp.org>
  *

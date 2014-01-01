@@ -970,7 +970,7 @@ cpu_comcnprobe(struct consdev *cn, struct pci_attach_args *pa)
 	pci_mode_detect();
 	pa->pa_iot = x86_bus_space_io;
 	pa->pa_pc = 0;
-	pa->pa_tag = pci_make_tag(0, 0, 31, 0);
+	pa->pa_tag = pci_make_tag(0, 0, pci_bus_maxdevs(NULL, 0) - 1, 0);
 	return 0;
 }
 #endif

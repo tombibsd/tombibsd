@@ -15,6 +15,7 @@
 
 /*LINTLIBRARY*/
 
+#include <config.h>
 #include <stdio.h>
 
 #include "ntp_stdlib.h"

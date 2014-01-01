@@ -322,6 +322,8 @@ keyword(void)
 	    return (PARSE_PARAM);
 	if (matchec("lex-param"))
 	    return (LEX_PARAM);
+	if (matchec("token-table"))
+	    return (TOKEN_TABLE);
 	if (matchec("yacc"))
 	    return (POSIX_YACC);
     }
@@ -1305,6 +1307,10 @@ read_declarations(void)
 	case PARSE_PARAM:
 	case LEX_PARAM:
 	    copy_param(k);
+	    break;
+
+	case TOKEN_TABLE:
+	    token_table = 1;
 	    break;
 
 	case POSIX_YACC:

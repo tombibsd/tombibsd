@@ -239,11 +239,11 @@ cl_end(CL_PRIVATE *clp)
 static void
 term_init(const char *name, const char *ttype)
 {
-	int err;
+	int error;
 
 	/* Set up the terminal database information. */
-	setupterm(__UNCONST(ttype), STDOUT_FILENO, &err);
-	switch (err) {
+	setupterm(__UNCONST(ttype), STDOUT_FILENO, &error);
+	switch (error) {
 	case -1:
 		(void)fprintf(stderr,
 		    "%s: No terminal database found\n", name);

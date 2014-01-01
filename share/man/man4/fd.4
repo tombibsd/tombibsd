@@ -29,7 +29,7 @@
 .\"
 .\"     @(#)fd.4	8.1 (Berkeley) 6/9/93
 .\"
-.Dd June 9, 1993
+.Dd December 29, 2013
 .Dt FD 4
 .Os
 .Sh NAME
@@ -86,4 +86,11 @@ are ignored.
 .It Pa /dev/stderr
 .El
 .Sh SEE ALSO
-.Xr tty 4
+.Xr tty 4 ,
+.Xr mount_fdesc 8
+.Ss NOTE
+The floppy disk driver on some ports is also called
+.Nm fd ;
+see
+.Xr fdc 4
+for its documentation.

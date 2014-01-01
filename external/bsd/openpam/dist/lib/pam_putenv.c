@@ -34,7 +34,7 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  *
- * Id: pam_putenv.c 539 2012-03-31 20:53:22Z des 
+ * Id: pam_putenv.c 648 2013-03-05 17:54:27Z des 
  */
 
 #ifdef HAVE_CONFIG_H
@@ -83,7 +83,7 @@ pam_putenv(pam_handle_t *pamh,
 	/* grow the environment list if necessary */
 	if (pamh->env_count == pamh->env_size) {
 		env = realloc(pamh->env,
-		    sizeof(char *) * (pamh->env_size * 2 + 1));
+		    sizeof(*env) * ((size_t)pamh->env_size * 2 + 1));
 		if (env == NULL)
 			RETURNC(PAM_BUF_ERR);
 		pamh->env = env;

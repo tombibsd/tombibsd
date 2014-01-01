@@ -1,7 +1,5 @@
 #	$NetBSD$
 
-# NOGCCERROR=yes
-
 .include <bsd.own.mk>
 
 PROG=	ntpq
@@ -22,11 +20,5 @@ DIST=${IDIST}/ntpq
 CPPFLAGS+=-I${IDIST}/include -I${IDIST}/sntp/libopts
 
 .PATH: ${DIST}
-
-ntpq.8:	ntpq.1
-	${_MKTARGET_BUILD}
-	${TOOL_SED} -e "s,NTPQ 1,NTPQ 8," $? > $@
-
-CLEANFILES+=ntpq.8
 
 .include <bsd.prog.mk>

@@ -26,4 +26,5 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-int omrasops_init(struct rasops_info *, int, int);
+int omrasops1_init(struct rasops_info *, int, int);
+int omrasops4_init(struct rasops_info *, int, int);

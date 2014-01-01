@@ -169,6 +169,9 @@
 #define	SVR4_EFTYPE		SVR4_ENOSYS
 #define	SVR4_EAUTH		SVR4_ENOSYS
 #define	SVR4_ENEEDAUTH		SVR4_ENOSYS
+#define	SVR4_ENOTSUP		SVR4_ENOSYS
+#define	SVR4_ECANCELED		SVR4_ENOSYS
+#define	SVR4_ENOATTR		SVR4_ENOSYS
 
 extern const int native_to_svr4_errno[];
 

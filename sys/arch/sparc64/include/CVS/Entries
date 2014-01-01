@@ -53,7 +53,7 @@
 /param.h/1.52/Wed Dec 25 07:37:33 2013/-kk/
 /pcb.h/1.16/Tue Oct 13 22:41:57 2009/-kk/
 /pci_machdep.h/1.26/Sat Oct 27 17:18:12 2012/-kk/
-/pmap.h/1.56/Thu Oct 24 10:28:57 2013/-kk/
+/pmap.h/1.57/Wed Jan  1 02:45:26 2014/-kk/
 /pmc.h/1.1/Wed Aug  7 05:16:11 2002/-kk/
 /proc.h/1.13/Fri Jan 14 02:06:32 2011/-kk/
 /profile.h/1.6/Sat Jul 20 11:52:22 2002/-kk/

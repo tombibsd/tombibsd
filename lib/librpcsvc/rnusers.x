@@ -82,12 +82,12 @@
 %
 %#include <sys/cdefs.h>
 %__BEGIN_DECLS
-%bool_t xdr_utmp __P((XDR *, struct ru_utmp *));
-%bool_t xdr_utmpptr __P((XDR *, struct ru_utmp **));
-%bool_t xdr_utmparr __P((XDR *, struct utmparr *));
-%bool_t xdr_utmpidle __P((XDR *, struct utmpidle *));
-%bool_t xdr_utmpidleptr __P((XDR *, struct utmpidle **));
-%bool_t xdr_utmpidlearr __P((XDR *, struct utmpidlearr *));
+%bool_t xdr_utmp(XDR *, struct ru_utmp *);
+%bool_t xdr_utmpptr(XDR *, struct ru_utmp **);
+%bool_t xdr_utmparr(XDR *, struct utmparr *);
+%bool_t xdr_utmpidle(XDR *, struct utmpidle *);
+%bool_t xdr_utmpidleptr(XDR *, struct utmpidle **);
+%bool_t xdr_utmpidlearr(XDR *, struct utmpidlearr *);
 %__END_DECLS
 %
 %#define RUSERSVERS_1 ((u_long)1)

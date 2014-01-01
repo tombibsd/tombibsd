@@ -5855,3 +5855,31 @@ uLong ZEXPORT adler32(uLong adler, const Bytef *buf, uInt len)
 }
 /* --- adler32.c */
 
+#if defined(_KERNEL)
+
+/*
+ * NetBSD module glue - this code is required for the vnd and swcrypto
+ * pseudo-devices.
+ */
+#include <sys/module.h>
+
+static int zlib_modcmd(modcmd_t, void *);
+
+MODULE(MODULE_CLASS_MISC, zlib, NULL);
+ 
+static int
+zlib_modcmd(modcmd_t cmd, void *arg)
+{
+
+	switch (cmd) {
+	case MODULE_CMD_INIT:
+	case MODULE_CMD_FINI:
+		return 0;
+	case MODULE_CMD_STAT:
+	case MODULE_CMD_AUTOUNLOAD:
+	default:
+		return ENOTTY;
+	}
+}
+
+#endif	/* defined(_KERNEL) */

@@ -86,6 +86,8 @@ PROG	mount_null
 PROG	mount_overlay
 PROG	mount_procfs
 PROG	mount_smbfs
+SPECIAL	mount_smbfs	srcdir	external/bsd/smbfs/sbin/mount_smbfs
+LIBS	${SMB_LIBDIR}/libsmb.a
 PROG	mount_tmpfs
 PROG	mount_umap
 PROG	mount_union

@@ -34,6 +34,8 @@
 #include <sys/cdefs.h>
 __KERNEL_RCSID(0, "$NetBSD$");
 
+#include <sys/errno.h>
+
 #include <compat/ibcs2/ibcs2_errno.h>
 
 int const native_to_ibcs2_errno[] = {
@@ -121,4 +123,18 @@ int const native_to_ibcs2_errno[] = {
 	0,			/* 81 */
 	IBCS2_EIDRM,		/* 82 */
 	IBCS2_ENOMSG,		/* 83 */
+	IBCS2_EOVERFLOW,	/* 84 */
+	IBCS2_EILSEQ,		/* 85 */
+	0,			/* 86 ENOTSUP */	
+	0,			/* 87 ECANCELED */
+	IBCS2_EBADMSG,		/* 88 */
+	IBCS2_ENODATA,		/* 89 */
+	IBCS2_ENOSR,		/* 90 */
+	IBCS2_ENOSTR,		/* 91 */
+	IBCS2_ETIME,		/* 92 */
+	0,			/* 93 ENOATTR */
+	IBCS2_EMULTIHOP,	/* 94 */
+	IBCS2_ENOLINK,		/* 95 */
+	IBCS2_EPROTO,		/* 96 */
 };
+__CTASSERT(__arraycount(native_to_ibcs2_errno) == ELAST + 1);

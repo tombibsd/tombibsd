@@ -36,7 +36,7 @@ GENASSYM_CONF=	${ARM}/arm32/genassym.cf
 AFLAGS+=	-x assembler-with-cpp
 COPTS.arm32_kvminit.c+=		-fno-stack-protector
 AFLAGS.bcopyinout.S+=-marm
-AFLAGS.cpuswitch.S+=-marm
+AFLAGS.cpuswitch.S+=-marm -mfpu=vfp
 AFLAGS.locore.S+=-marm
 AFLAGS.fusu.S+=-marm
 AFLAGS.exception.S+=-marm

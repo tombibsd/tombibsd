@@ -2,8 +2,8 @@
 /files.svr4/1.17/Sun Feb 14 11:54:03 2010/-kk/
 /svr4_acl.h/1.5/Mon Apr 28 20:23:45 2008/-kk/
 /svr4_dirent.h/1.7/Mon Apr 28 20:23:45 2008/-kk/
-/svr4_errno.c/1.10/Mon Apr 28 20:23:45 2008/-kk/
-/svr4_errno.h/1.7/Mon Apr 28 20:23:45 2008/-kk/
+/svr4_errno.c/1.11/Wed Jan  1 02:45:27 2014/-kk/
+/svr4_errno.h/1.8/Wed Jan  1 02:45:27 2014/-kk/
 /svr4_exec.c/1.66/Sun Feb 19 21:06:45 2012/-kk/
 /svr4_exec.h/1.28/Thu Dec 10 14:13:53 2009/-kk/
 /svr4_exec_elf32.c/1.14/Mon Apr 28 20:23:45 2008/-kk/

@@ -10,7 +10,7 @@
 /core_netbsd.c/1.18/Wed Feb  2 20:10:09 2011/-kk/
 /exec_aout.c/1.36/Thu Oct 24 10:28:58 2013/-kk/
 /exec_ecoff.c/1.30/Thu Oct 24 10:28:58 2013/-kk/
-/exec_elf.c/1.51/Mon Nov 18 05:31:46 2013/-kk/
+/exec_elf.c/1.53/Wed Jan  1 02:45:35 2014/-kk/
 /exec_elf32.c/1.138/Thu Oct 24 10:28:58 2013/-kk/
 /exec_elf64.c/1.4/Thu Oct 24 10:28:58 2013/-kk/
 /exec_script.c/1.67/Thu Oct 24 10:28:58 2013/-kk/
@@ -32,7 +32,7 @@
 /kern_descrip.c/1.222/Thu Oct 24 10:28:58 2013/-kk/
 /kern_drvctl.c/1.34/Thu Oct 24 10:28:58 2013/-kk/
 /kern_event.c/1.79/Sat Nov 24 15:14:32 2012/-kk/
-/kern_exec.c/1.367/Tue Dec 17 04:05:10 2013/-kk/
+/kern_exec.c/1.368/Wed Jan  1 02:45:35 2014/-kk/
 /kern_exit.c/1.243/Thu Oct 24 10:28:58 2013/-kk/
 /kern_fileassoc.c/1.35/Sun Jan 22 03:48:51 2012/-kk/
 /kern_fork.c/1.193/Tue Dec 17 04:05:10 2013/-kk/
@@ -129,7 +129,7 @@
 /subr_syscall_stats.c/1.2/Tue Apr 29 06:53:03 2008/-kk/
 /subr_tftproot.c/1.12/Sat Dec  1 11:41:50 2012/-kk/
 /subr_time.c/1.17/Thu Oct 24 10:28:58 2013/-kk/
-/subr_userconf.c/1.25/Mon Aug  1 10:33:26 2011/-kk/
+/subr_userconf.c/1.26/Wed Jan  1 02:45:35 2014/-kk/
 /subr_vmem.c/1.87/Tue Dec 17 04:05:10 2013/-kk/
 /subr_workqueue.c/1.33/Sun Oct  7 22:16:21 2012/-kk/
 /subr_xcall.c/1.18/Tue Dec 17 04:05:10 2013/-kk/

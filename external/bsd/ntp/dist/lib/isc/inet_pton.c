@@ -21,7 +21,7 @@
 
 #if defined(LIBC_SCCS) && !defined(lint)
 static char rcsid[] =
-	"Id: inet_pton.c,v 1.19 2007/06/19 23:47:17 tbox Exp";
+	"Id: inet_pton.c,v 1.19 2007/06/19 23:47:17 tbox Exp ";
 #endif /* LIBC_SCCS and not lint */
 
 #include <config.h>
@@ -46,6 +46,7 @@ static char rcsid[] =
 #ifdef notdef
 static int inet_pton4(const char *src, unsigned char *dst);
 static int inet_pton6(const char *src, unsigned char *dst);
+int isc_net_pton(int af, const char *src, void *dst);
 
 /*% 
  *	convert from presentation format (which usually means ASCII printable)

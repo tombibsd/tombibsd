@@ -98,6 +98,10 @@ extern clockformat_t clock_wharton_400a;
 extern clockformat_t clock_varitext;
 #endif
 
+#ifdef CLOCK_SEL240X
+extern clockformat_t clock_sel240x;
+#endif
+
 /*
  * format definitions
  */
@@ -137,6 +141,9 @@ clockformat_t *clockformats[] =
 #endif
 #ifdef CLOCK_VARITEXT
         &clock_varitext,
+#endif
+#ifdef CLOCK_SEL240X
+        &clock_sel240x,
 #endif
 	0};
 

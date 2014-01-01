@@ -426,7 +426,7 @@
 236	UNIMPL		sendfile64
 237	UNIMPL		mincore
 238	UNIMPL		madvise
-239	UNIMPL		fcntl64
+239	STD		{ int|linux_sys||fcntl64(int fd, int cmd, void *arg); }
 240	UNIMPL		readahead
 241	UNIMPL		io_setup
 242	UNIMPL		io_destroy

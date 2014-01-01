@@ -23,7 +23,7 @@ SUBDIR= apply asa at audio audiocfg \
 	printenv printf progress pwhash qsubst quota radioctl rdist \
 	renice rev revoke rfcomm_sppd rlogin rpcgen rpcinfo rs rsh \
 	rup ruptime rusers rwall rwho \
-	script sdiff sdpquery sed seq shar shlock shmif_dumpbus \
+	script sdiff sdpquery sed seq shar shlock \
 	showmount shuffle sockstat sort spell split stat su systat \
 	tabs tail talk tcopy tee telnet tftp tic time tip touch tpfmt tput \
 	tr true tset tsort tty ul uname unexpand unifdef \
@@ -44,7 +44,7 @@ SUBDIR+= apropos whatis
 .endif
 
 .if (${MKRUMP} != "no")
-SUBDIR+= rump_allserver rump_dhcpclient rump_halt rump_server
+SUBDIR+= rump_allserver rump_dhcpclient rump_halt rump_server shmif_dumpbus
 .endif
 
 .if (${MKBSDGREP} != "no")
