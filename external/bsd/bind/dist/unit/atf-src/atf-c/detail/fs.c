@@ -3,7 +3,7 @@
 /*
  * Automated Testing Framework (atf)
  *
- * Copyright (c) 2007, 2008, 2009, 2010 The NetBSD Foundation, Inc.
+ * Copyright (c) 2007 The NetBSD Foundation, Inc.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -48,6 +48,7 @@
 #include <string.h>
 #include <unistd.h>
 
+#include "atf-c/defs.h"
 #include "atf-c/error.h"
 
 #include "fs.h"
@@ -586,7 +587,7 @@ atf_fs_stat_copy(atf_fs_stat_t *dest, const atf_fs_stat_t *src)
 }
 
 void
-atf_fs_stat_fini(atf_fs_stat_t *st)
+atf_fs_stat_fini(atf_fs_stat_t *st ATF_DEFS_ATTRIBUTE_UNUSED)
 {
 }
 

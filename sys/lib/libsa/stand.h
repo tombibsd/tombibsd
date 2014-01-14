@@ -110,7 +110,7 @@ struct open_file;
  * This structure is used to define file system operations in a file system
  * independent way.
  */
-extern char *fsmod;
+extern const char *fsmod;
 
 #if !defined(LIBSA_SINGLE_FILESYSTEM)
 struct fs_ops {

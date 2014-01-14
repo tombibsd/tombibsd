@@ -1,6 +1,6 @@
 #	$NetBSD$
 
-SUBDIR=		floppies
+SUBDIR=		floppies cdroms
 TARGETS+=	release
 
 iso_image:

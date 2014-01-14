@@ -10,7 +10,7 @@
 /atf_check_test.sh/1.1.1.4/Thu Oct 24 10:28:41 2013/-kk/
 /config_test.sh/1.1.1.4/Mon Jan 16 22:36:53 2012/-kk/
 /integration_test.sh/1.1.1.2/Sun Nov  7 17:43:29 2010/-kk/
-/libatf-sh.subr/1.1.1.5/Mon Jan 16 22:36:53 2012/-kk/
+/libatf-sh.subr/1.3/Tue Jan 14 16:01:14 2014/-kk/
 /misc_helpers.sh/1.1.1.4/Mon Jan 16 22:36:53 2012/-kk/
 /normalize_test.sh/1.1.1.3/Mon Jan 16 22:36:53 2012/-kk/
 /tc_test.sh/1.1.1.5/Mon Jan 16 22:36:54 2012/-kk/

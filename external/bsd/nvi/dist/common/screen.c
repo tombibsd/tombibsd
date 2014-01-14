@@ -139,9 +139,14 @@ screen_end1(SCR *sp, int init)
 	 *
 	 * If a created screen failed during initialization, it may not
 	 * be linked into the chain.
+	 *
+	 * XXX screen_end can be called multiple times, abuse the tqe_prev pointer
+	 * to signal wether the tailq node is on-list.
 	 */
-	if (init)
+	if (init && sp->q.tqe_prev) {
 		TAILQ_REMOVE(&sp->wp->scrq, sp, q);
+		sp->q.tqe_prev = NULL;
+	}
 
 	/* The screen is no longer real. */
 	F_CLR(sp, SC_SCR_EX | SC_SCR_VI);

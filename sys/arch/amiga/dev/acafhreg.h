@@ -29,9 +29,11 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <amiga/amiga/gayle.h>
+
 #ifndef _AMIGA_ACAFHREG_H_
 
-#define GAYLE_IDE_BASE		0xDA0000 /* ACA500 has Gayle-compatible IDE */
+#define ACAFH_IDE_BASE		GAYLE_IDE_BASE /* ACA500 has Gayle-compatible IDE */
 #define ACAFH_CLOCKPORT_BASE	0xD80001
 
 #define ACAFH_MSB_SHIFT		0xF

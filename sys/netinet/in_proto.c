@@ -200,7 +200,6 @@ const struct protosw inetsw[] = {
 	.pr_usrreq = tcp_usrreq,
 	.pr_init = tcp_init,
 	.pr_fasttimo = tcp_fasttimo,
-	.pr_slowtimo = tcp_slowtimo,
 	.pr_drain = tcp_drainstub,
 },
 {	.pr_type = SOCK_RAW,

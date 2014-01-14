@@ -111,8 +111,8 @@ Notes:
 bc includes dc, both of which are in the NetBSD tree.
 
 Package:	bind [named and utils]
-Version:	9.9.3-P2
-Current Vers:	9.9.4-P1
+Version:	9.9.5b1
+Current Vers:	9.9.4-P1/9.9.5b1
 Maintainer:	Paul Vixie <vixie@vix.com>
 Archive Site:	ftp://ftp.isc.org/isc/bind9/
 Home Page:	http://www.isc.org/software/bind/
@@ -300,8 +300,8 @@ Notes:
 Use the dhcp2netbsd script.
 
 Package:	dhcpcd
-Version:	6.1.0
-Current Vers:	6.1.0
+Version:	6.2.0
+Current Vers:	6.2.0
 Maintainer:	roy
 Archive Site:	ftp://roy.marples.name/pub/dhcpcd/
 Home Page:	http://roy.marples.name/projects/dhcpcd/
@@ -444,7 +444,7 @@ Notes:
 
 Package:	grep
 Version:	2.5.1
-Current Vers:	2.15
+Current Vers:	2.16
 Maintainer:	FSF
 Archive Site:	ftp://ftp.gnu.org/gnu/grep/
 Home Page:	http://www.gnu.org/software/grep/
@@ -691,8 +691,8 @@ We maintain our own version of libdevmapper ioctl protocol code, therefore we
 should test it before import. Talk to haad before importing new version.
 
 Package:	libpcap
-Version:	1.3.0
-Current Vers:	1.5.1
+Version:	1.5.2
+Current Vers:	1.5.2
 Maintainer:	tcpdump-workers@tcpdump.org
 Archive Site:	http://www.tcpdump.org/release/
 Home Page:	http://www.tcpdump.org/
@@ -1178,7 +1178,7 @@ Initial import uses a pre-release with a number of bug fixes to avoid
 unnecessary local changes.
 
 Package:	tcpdump
-Version:	4.3.0
+Version:	4.5.1
 Current Vers:	4.5.1
 Maintainer:	tcpdump-workers@lists.tcpdump.org
 Archive Site:	http://www.tcpdump.org/release/
@@ -1275,7 +1275,7 @@ register removal) to apply. The diffs have been submitted upstream but there
 is too much inertia to apply them. Check for .gitignore files.
 
 Package:	wpa_supplicant/hostapd
-Version:	1.1
+Version:	2.0
 Current Vers:	2.0
 Maintainer:	Jouni Malinen <jkmaline@cc.hut.fi>
 Archive Site:	http://hostap.epitest.fi/releases/

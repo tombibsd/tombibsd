@@ -36,6 +36,8 @@ __RCSID("$NetBSD$");
 
 #include "namespace.h"
 #include <fcntl.h>
+#include <string.h>
+#include <errno.h>
 #include <stdlib.h>
 #include <sys/ioctl.h>
 
@@ -63,4 +65,17 @@ ptsname(int fildes)
 		return NULL;
 
 	return pm.sn;
+}
+
+int
+ptsname_r(int fildes, char *buf, size_t buflen) {
+	struct ptmget pm;
+
+	if (buf == NULL)
+		return EINVAL;
+	if (ioctl(fildes, TIOCPTSNAME, &pm) == -1)
+		return errno;
+	if (strlcpy(buf, pm.sn, buflen) > buflen)
+		return ERANGE;
+	return 0;
 }

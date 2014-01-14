@@ -3,7 +3,7 @@
 /aout_machdep.h/1.10/Tue Oct  8 13:07:26 1996/-kk/
 /asm.h/1.4/Wed Oct 26 02:05:57 1994/-kk/
 /bswap.h/1.2/Sat Aug 21 05:39:52 1999/-kk/
-/bus.h/1.28/Wed Jan  1 02:45:22 2014/-kk/
+/bus.h/1.29/Tue Jan 14 16:04:51 2014/-kk/
 /cdefs.h/1.1/Thu Jan 19 01:38:36 1995/-kk/
 /cpu.h/1.80/Thu Oct 24 10:28:57 2013/-kk/
 /cpufunc.h/1.7/Wed Oct 26 02:06:02 1994/-kk/

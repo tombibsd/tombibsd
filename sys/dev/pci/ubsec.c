@@ -592,7 +592,7 @@ ubsec_detach(device_t self, int flags)
 	return 0;
 }
 
-MODULE(MODULE_CLASS_DRIVER, ubsec, "pci");
+MODULE(MODULE_CLASS_DRIVER, ubsec, "pci,opencrypto");
 
 #ifdef _MODULE
 #include "ioconf.c"

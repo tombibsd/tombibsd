@@ -95,10 +95,10 @@ get_memory_handle(void)
 
 
 /* 
- * Point prom to our trap table.  This stops the prom from mapping us.
+ * Point prom to our sun4u trap table.  This stops the prom from mapping us.
  */
 int
-prom_set_trap_table(vaddr_t tba)
+prom_set_trap_table_sun4u(vaddr_t tba)
 {
 	struct {
 		cell_t name;
@@ -113,6 +113,30 @@ prom_set_trap_table(vaddr_t tba)
 	args.tba = ADR2CELL(tba);
 	return openfirmware(&args);
 }
+
+#ifdef SUN4V
+/* 
+ * Point prom to our sun4v trap table.  This stops the prom from mapping us.
+ */
+int
+prom_set_trap_table_sun4v(vaddr_t tba, paddr_t mmfsa)
+{
+	struct {
+		cell_t name;
+		cell_t nargs;
+		cell_t nreturns;
+		cell_t tba;
+		cell_t mmfsa; 
+	} args;
+
+	args.name = ADR2CELL("SUNW,set-trap-table");
+	args.nargs = 2;
+	args.nreturns = 0;
+	args.tba = ADR2CELL(tba);
+	args.mmfsa = ADR2CELL(mmfsa);
+	return openfirmware(&args);
+}
+#endif
 
 /* 
  * Have the prom convert from virtual to physical addresses.

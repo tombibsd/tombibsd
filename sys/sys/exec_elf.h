@@ -73,8 +73,6 @@ typedef uint64_t	Elf64_Addr;
 typedef uint64_t	Elf64_Off;
 typedef int64_t		Elf64_SOff;
 #define ELF64_FSZ_OFF	8
-typedef int32_t		Elf64_Shalf;
-#define ELF64_FSZ_SHALF 4
 
 typedef int32_t		Elf64_Sword;
 #define ELF64_FSZ_SWORD 4
@@ -418,7 +416,10 @@ typedef struct {
 #define SHT_NUM		     19
 
 #define SHT_LOOS	     0x60000000 /* Operating system specific range */
+#define SHT_GNU_INCREMENTAL_INPUTS 0x6fff4700   /* GNU incremental build data */
+#define	SHT_GNU_ATTRIBUTES   0x6ffffff5	/* GNU object attributes */
 #define SHT_GNU_HASH	     0x6ffffff6 /* GNU style symbol hash table */
+#define SHT_GNU_LIBLIST	     0x6ffffff7 /* GNU list of prelink dependencies */
 #define SHT_SUNW_move	     0x6ffffffa
 #define SHT_SUNW_syminfo     0x6ffffffc
 #define SHT_SUNW_verdef	     0x6ffffffd /* Versions defined by file */
@@ -1248,15 +1249,17 @@ struct elf_args {
 #endif
 
 struct ps_strings;
+struct coredump_iostate;
+struct note_state;
 
 #ifdef EXEC_ELF32
 int	exec_elf32_makecmds(struct lwp *, struct exec_package *);
 int	elf32_copyargs(struct lwp *, struct exec_package *,
     struct ps_strings *, char **, void *);
 
-int	coredump_elf32(struct lwp *, void *);
-int	coredump_writenote_elf32(struct proc *, void *, Elf32_Nhdr *,
-    const char *, void *);
+int	coredump_elf32(struct lwp *, struct coredump_iostate *);
+void	coredump_savenote_elf32(struct note_state *, unsigned int,
+	    const char *, void *, size_t);
 
 int	elf32_check_header(Elf32_Ehdr *, int);
 #endif
@@ -1266,9 +1269,9 @@ int	exec_elf64_makecmds(struct lwp *, struct exec_package *);
 int	elf64_copyargs(struct lwp *, struct exec_package *,
     struct ps_strings *, char **, void *);
 
-int	coredump_elf64(struct lwp *, void *);
-int	coredump_writenote_elf64(struct proc *, void *, Elf64_Nhdr *,
-    const char *, void *);
+int	coredump_elf64(struct lwp *, struct coredump_iostate *);
+void	coredump_savenote_elf64(struct note_state *, unsigned int,
+	    const char *, void *, size_t);
 
 int	elf64_check_header(Elf64_Ehdr *, int);
 #endif

@@ -2,13 +2,13 @@
 /default.pass.cpp/1.1.1.1/Thu Oct 24 10:28:46 2013/-kk/
 /nullptr_t.pass.cpp/1.1.1.1/Thu Oct 24 10:28:46 2013/-kk/
 /nullptr_t_deleter.pass.cpp/1.1.1.1/Thu Oct 24 10:28:46 2013/-kk/
-/nullptr_t_deleter_allocator.pass.cpp/1.1.1.1/Thu Oct 24 10:28:46 2013/-kk/
-/nullptr_t_deleter_allocator_throw.pass.cpp/1.1.1.1/Thu Oct 24 10:28:46 2013/-kk/
+/nullptr_t_deleter_allocator.pass.cpp/1.1.1.2/Tue Jan 14 16:01:34 2014/-kk/
+/nullptr_t_deleter_allocator_throw.pass.cpp/1.1.1.2/Tue Jan 14 16:01:34 2014/-kk/
 /nullptr_t_deleter_throw.pass.cpp/1.1.1.1/Thu Oct 24 10:28:46 2013/-kk/
 /pointer.pass.cpp/1.1.1.1/Thu Oct 24 10:28:46 2013/-kk/
 /pointer_deleter.pass.cpp/1.1.1.1/Thu Oct 24 10:28:46 2013/-kk/
-/pointer_deleter_allocator.pass.cpp/1.1.1.1/Thu Oct 24 10:28:46 2013/-kk/
-/pointer_deleter_allocator_throw.pass.cpp/1.1.1.1/Thu Oct 24 10:28:46 2013/-kk/
+/pointer_deleter_allocator.pass.cpp/1.1.1.2/Tue Jan 14 16:01:34 2014/-kk/
+/pointer_deleter_allocator_throw.pass.cpp/1.1.1.2/Tue Jan 14 16:01:34 2014/-kk/
 /pointer_deleter_throw.pass.cpp/1.1.1.1/Thu Oct 24 10:28:46 2013/-kk/
 /pointer_throw.pass.cpp/1.1.1.1/Thu Oct 24 10:28:46 2013/-kk/
 /shared_ptr.pass.cpp/1.1.1.1/Thu Oct 24 10:28:46 2013/-kk/

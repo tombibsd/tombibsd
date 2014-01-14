@@ -55,6 +55,7 @@
 /iterationCount_zext_or_trunc.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /iv-fold.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /iv-sext.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/iv-widen.ll/1.1.1.1/Sun Jan  5 16:16:56 2014/-kk/
 /iv-zext.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /lftr-address-space-pointers.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /lftr-extend-const.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
@@ -76,6 +77,7 @@
 /loop_evaluate_6.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /masked-iv.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /no-iv-rewrite.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/overflowcheck.ll/1.1.1.1/Sun Jan  5 16:16:56 2014/-kk/
 /phi-uses-value-multiple-times.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /polynomial-expand.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /preserve-signed-wrap.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/

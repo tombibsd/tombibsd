@@ -233,6 +233,7 @@ discover_interfaces(int argc, char * const *argv)
 	const struct sockaddr_in *addr;
 	const struct sockaddr_in *net;
 	const struct sockaddr_in *dst;
+#endif
 #ifdef INET6
 	const struct sockaddr_in6 *sin6;
 	int ifa_flags;
@@ -490,7 +491,6 @@ discover_interfaces(int argc, char * const *argv)
 #endif
 		}
 	}
-#endif
 
 	freeifaddrs(ifaddrs);
 

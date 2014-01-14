@@ -8,7 +8,7 @@
 /dlv_32769.h/1.3/Tue Jun  5 00:42:08 2012/-kk/
 /dname_39.c/1.3/Tue Jun  5 00:42:08 2012/-kk/
 /dname_39.h/1.3/Tue Jun  5 00:42:08 2012/-kk/
-/dnskey_48.c/1.4/Tue Jun  5 00:42:08 2012/-kk/
+/dnskey_48.c/1.5/Tue Jan 14 16:01:26 2014/-kk/
 /dnskey_48.h/1.3/Tue Jun  5 00:42:08 2012/-kk/
 /ds_43.c/1.5/Tue Dec  4 23:38:43 2012/-kk/
 /ds_43.h/1.3/Tue Jun  5 00:42:08 2012/-kk/
@@ -20,15 +20,15 @@
 /gpos_27.h/1.3/Tue Jun  5 00:42:09 2012/-kk/
 /hinfo_13.c/1.3/Tue Jun  5 00:42:09 2012/-kk/
 /hinfo_13.h/1.3/Tue Jun  5 00:42:09 2012/-kk/
-/hip_55.c/1.3/Tue Jun  5 00:42:09 2012/-kk/
+/hip_55.c/1.4/Tue Jan 14 16:01:26 2014/-kk/
 /hip_55.h/1.3/Tue Jun  5 00:42:09 2012/-kk/
 /ipseckey_45.c/1.4/Tue Jun  5 00:42:09 2012/-kk/
 /ipseckey_45.h/1.3/Tue Jun  5 00:42:09 2012/-kk/
-/isdn_20.c/1.3/Tue Jun  5 00:42:09 2012/-kk/
+/isdn_20.c/1.4/Tue Jan 14 16:01:26 2014/-kk/
 /isdn_20.h/1.3/Tue Jun  5 00:42:10 2012/-kk/
-/key_25.c/1.4/Tue Jun  5 00:42:10 2012/-kk/
+/key_25.c/1.5/Tue Jan 14 16:01:26 2014/-kk/
 /key_25.h/1.3/Tue Jun  5 00:42:10 2012/-kk/
-/keydata_65533.c/1.5/Thu Oct 24 10:28:41 2013/-kk/
+/keydata_65533.c/1.6/Tue Jan 14 16:01:26 2014/-kk/
 /keydata_65533.h/1.3/Tue Jun  5 00:42:10 2012/-kk/
 /l32_105.c/1.1.1.1/Thu Oct 24 10:28:41 2013/-kk/
 /l32_105.h/1.1.1.1/Thu Oct 24 10:28:41 2013/-kk/
@@ -68,7 +68,7 @@
 /null_10.h/1.3/Tue Jun  5 00:42:13 2012/-kk/
 /nxt_30.c/1.3/Tue Jun  5 00:42:13 2012/-kk/
 /nxt_30.h/1.3/Tue Jun  5 00:42:13 2012/-kk/
-/opt_41.c/1.4/Tue Jun  5 00:42:13 2012/-kk/
+/opt_41.c/1.5/Tue Jan 14 16:01:26 2014/-kk/
 /opt_41.h/1.3/Tue Jun  5 00:42:13 2012/-kk/
 /proforma.c/1.3/Tue Jun  5 00:42:14 2012/-kk/
 /proforma.h/1.3/Tue Jun  5 00:42:14 2012/-kk/

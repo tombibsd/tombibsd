@@ -60,7 +60,8 @@ __KERNEL_RCSID(0, "$NetBSD$");
  * Write the machine-dependent part of a core dump.
  */
 int
-cpu_coredump(struct lwp *l, void *iocookie, struct core *chdr)
+cpu_coredump(struct lwp *l, struct coredump_iostate *iocookie,
+    struct core *chdr)
 {
 	struct coreseg cseg;
 	struct md_coredump md_core;

@@ -463,8 +463,19 @@ setifpowersavesleep(prop_dictionary_t env, prop_dictionary_t oenv)
 static int
 scan_exec(prop_dictionary_t env, prop_dictionary_t oenv)
 {
+	struct ifreq ifr;
+
+	if (direct_ioctl(env, SIOCGIFFLAGS, &ifr) == -1) {
+		warn("ioctl(SIOCGIFFLAGS)");
+		return -1;
+	}
+
+	if ((ifr.ifr_flags & IFF_UP) == 0) 
+		errx(EXIT_FAILURE, "The interface must be up before scanning.");
+
 	scan_and_wait(env);
 	list_scan(env);
+
 	return 0;
 }
 
@@ -728,7 +739,7 @@ scan_and_wait(prop_dictionary_t env)
 
 	sroute = prog_socket(PF_ROUTE, SOCK_RAW, 0);
 	if (sroute < 0) {
-		perror("socket(PF_ROUTE,SOCK_RAW)");
+		warn("socket(PF_ROUTE,SOCK_RAW)");
 		return;
 	}
 	/* NB: only root can trigger a scan so ignore errors */
@@ -739,7 +750,7 @@ scan_and_wait(prop_dictionary_t env)
 
 		do {
 			if (prog_read(sroute, buf, sizeof(buf)) < 0) {
-				perror("read(PF_ROUTE)");
+				warn("read(PF_ROUTE)");
 				break;
 			}
 			rtm = (struct rt_msghdr *) buf;

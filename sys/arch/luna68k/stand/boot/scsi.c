@@ -84,18 +84,18 @@
 
 int scsi_device = 6;
 
-#define SENSBUFF 8					/* 6/10/93P%$%98.1i%$%P$G%;%s%9%G!<%? */
-							/* $ND9$5$r#8/usr/src/sys/luna68k/stand/SCCS/s.scsi.c$%H0JFb$K8GDj$7$F */
-u_char	sensbuff[SENSBUFF];				/* #80J>e$OL50UL#$G$"$k!#         */
+#define SENSBUFF 8					/* デバイスドライバでセンスデータ */
+							/* の長さを８バイト以内に固定して */
+u_char	sensbuff[SENSBUFF];				/* ８以上は無意味である。         */
 
 static struct scsi_inquiry inquirybuf;
-static struct scsi_fmt_cdb inquiry = {
+static struct scsi_generic_cdb inquiry = {
 	6,
 	{ CMD_INQUIRY, 0, 0, 0, sizeof(inquirybuf), 0 }
 };
 
 static u_long capacitybuf[2];
-struct scsi_fmt_cdb capacity = {
+struct scsi_generic_cdb capacity = {
 	10,
 	{ CMD_READ_CAPACITY, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
 };
@@ -187,7 +187,7 @@ scsi(int argc, char *argv[])
 	return(ST_NORMAL);
 }
 
-static struct scsi_fmt_cdb scsi_cdb = {
+static struct scsi_generic_cdb scsi_cdb = {
 	10,
 	{ 0,  0, 0, 0, 0, 0, 0, 0, 0, 0 }
 };
@@ -195,7 +195,7 @@ static struct scsi_fmt_cdb scsi_cdb = {
 int
 scsi_read_raw(u_int target, u_int blk, u_int nblk, u_char *buff, u_int len)
 {
-	struct scsi_fmt_cdb *cdb = &scsi_cdb;
+	struct scsi_generic_cdb *cdb = &scsi_cdb;
 
 	cdb->cdb[0] = CMD_READ_EXT;
 	
@@ -224,7 +224,7 @@ scsi_read(u_int blk, u_char *buff, u_int len)
 int
 scsi_write(u_int blk, u_char *buff, u_int len)
 {
-	struct scsi_fmt_cdb *cdb = &scsi_cdb;
+	struct scsi_generic_cdb *cdb = &scsi_cdb;
 
 	cdb->cdb[0] = CMD_WRITE_EXT;
 	

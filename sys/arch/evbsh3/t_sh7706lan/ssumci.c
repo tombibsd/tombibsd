@@ -151,7 +151,7 @@ do {									\
 #define SCPDR_CMD	0x04
 #define	SCPCR_CS_MASK	0x000C
 #define	SCPCR_CS_OUT	0x0004
-#define	SCPDR_CS	0x08
+#define	SCPDR_CS	0x02
 #define	SCPCR_EJECT	0x00C0
 #define	SCPDR_EJECT	0x08
 

@@ -35,7 +35,7 @@
 /fmemopen.c/1.8/Thu Mar 29 14:27:33 2012/-kk/
 /fopen.3/1.29/Thu Nov 15 03:50:36 2012/-kk/
 /fopen.c/1.15/Thu Mar 15 18:22:30 2012/-kk/
-/fparseln.3/1.4/Wed Oct 21 01:07:45 2009/-kk/
+/fparseln.3/1.5/Tue Jan 14 16:04:41 2014/-kk/
 /fparseln.c/1.10/Wed Oct 21 01:07:45 2009/-kk/
 /fprintf.c/1.13/Thu Oct 24 10:28:53 2013/-kk/
 /fpurge.c/1.14/Thu Mar 15 18:22:30 2012/-kk/

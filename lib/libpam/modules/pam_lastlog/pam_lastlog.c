@@ -95,6 +95,7 @@ static void domsg(pam_handle_t *, time_t, const char *, size_t, const char *,
     size_t);
 #endif
 
+__printflike(2, 3)
 static void
 logit(int level, const char *fmt, ...)
 {

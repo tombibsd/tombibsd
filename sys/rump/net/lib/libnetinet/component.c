@@ -46,11 +46,10 @@ int carpattach(int);
 
 RUMP_COMPONENT(RUMP_COMPONENT_NET)
 {
-	extern struct domain arpdomain, inetdomain, inet6domain;
+	extern struct domain arpdomain, inetdomain;
 
 	DOMAINADD(arpdomain);
 	DOMAINADD(inetdomain);
-	DOMAINADD(inet6domain);
 
 	carpattach(1);
 }

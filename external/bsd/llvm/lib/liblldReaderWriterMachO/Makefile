@@ -8,8 +8,8 @@ LIB=	lldReaderWriterMachO
 
 SRCS+=	MachOLinkingContext.cpp \
 	MachONormalizedFileBinaryReader.cpp \
-	MachONormalizedFileFromAtoms.cpp \
 	MachONormalizedFileBinaryWriter.cpp \
+	MachONormalizedFileFromAtoms.cpp \
 	MachONormalizedFileYAML.cpp \
 	ReferenceKinds.cpp \
 	WriterMachO.cpp

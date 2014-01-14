@@ -105,7 +105,7 @@ dupstr(const char *str)
 }
 
 
-static void
+static __printflike(1, 2) void
 mywarnx(const char *fmt, ...)
 {
 	va_list args;

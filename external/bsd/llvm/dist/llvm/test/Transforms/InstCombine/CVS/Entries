@@ -215,7 +215,7 @@
 /add3.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /add4.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /addnegneg.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
-/addrspacecast.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/addrspacecast.ll/1.1.1.2/Tue Jan 14 16:02:16 2014/-kk/
 /adjust-for-sminmax.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /align-2d-gep.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /align-addr.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
@@ -297,14 +297,14 @@
 /crash.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /dce-iterate.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /deadcode.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
-/debug-line.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
-/debuginfo.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/debug-line.ll/1.1.1.2/Tue Jan 14 16:02:16 2014/-kk/
+/debuginfo.ll/1.1.1.2/Tue Jan 14 16:02:16 2014/-kk/
 /devirt.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /disable-simplify-libcalls.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /div-shift-crash.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /div-shift.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /div.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
-/double-float-shrink-1.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/double-float-shrink-1.ll/1.1.1.2/Tue Jan 14 16:02:16 2014/-kk/
 /double-float-shrink-2.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /enforce-known-alignment.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /err-rep-cold.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
@@ -318,7 +318,7 @@
 /fcmp.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /fdiv.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /ffs-1.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
-/float-shrink-compare.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/float-shrink-compare.ll/1.1.1.2/Tue Jan 14 16:02:16 2014/-kk/
 /fmul.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /fneg-ext.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /fold-bin-operand.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
@@ -330,7 +330,8 @@
 /fold-vector-zero.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /fp-ret-bitcast.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /fpcast.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
-/fpextend.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/fpextend.ll/1.1.1.2/Tue Jan 14 16:02:16 2014/-kk/
+/fpextend_x86.ll/1.1.1.1/Sun Jan  5 16:16:50 2014/-kk/
 /fprintf-1.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /fputs-1.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /fsub.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
@@ -401,8 +402,9 @@
 /osx-names.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /overflow.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /phi-merge-gep.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/phi-select-constexpr.ll/1.1.1.1/Sun Jan  5 16:16:50 2014/-kk/
 /phi.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
-/pow-1.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/pow-1.ll/1.1.1.2/Tue Jan 14 16:02:17 2014/-kk/
 /pow-2.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /pow-3.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /pr12251.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/

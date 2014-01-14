@@ -25,7 +25,7 @@
 /annotate-tokens-with-default-args.cpp/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 /annotate-tokens-with-default-args.h/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 /annotate-tokens.c/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
-/annotate-tokens.cpp/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
+/annotate-tokens.cpp/1.1.1.2/Tue Jan 14 16:01:49 2014/-kk/
 /annotate-tokens.m/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 /annotate-toplevel-in-objccontainer.m.h/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 /annotate-toplevel-in-objccontainer.m/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
@@ -57,10 +57,10 @@
 /comment-custom-block-command.cpp/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 /comment-misc-tags.m/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 /comment-objc-decls.m/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
-/comment-to-html-xml-conversion.cpp/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
+/comment-to-html-xml-conversion.cpp/1.1.1.2/Tue Jan 14 16:01:49 2014/-kk/
 /comment-unqualified-objc-pointer.m/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 /comment-with-preamble.c/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
-/comment-xml-schema.c/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
+/comment-xml-schema.c/1.1.1.2/Tue Jan 14 16:01:49 2014/-kk/
 /compile_commands.json/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 /complete-access-checks.cpp/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 /complete-at-directives.m/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
@@ -105,7 +105,7 @@
 /complete-property-getset.m/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 /complete-protocols.m/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 /complete-qualified.cpp/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
-/complete-recovery.m/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
+/complete-recovery.m/1.1.1.2/Tue Jan 14 16:01:49 2014/-kk/
 /complete-stmt.c/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 /complete-super.cpp/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 /complete-super.m/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
@@ -115,10 +115,10 @@
 /complete-type-factors.m/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 /complete-unterminated.c/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 /complete-with-annotations.cpp/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
-/crash-recovery-code-complete.c/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
+/crash-recovery-code-complete.c/1.1.1.2/Tue Jan 14 16:01:49 2014/-kk/
 /crash-recovery-modules.m/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
-/crash-recovery-reparse.c/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
-/crash-recovery.c/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
+/crash-recovery-reparse.c/1.1.1.2/Tue Jan 14 16:01:49 2014/-kk/
+/crash-recovery.c/1.1.1.2/Tue Jan 14 16:01:49 2014/-kk/
 /create-tu-fail.c/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 /cursor-dynamic-call.mm/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 /cursor-ref-names.cpp/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
@@ -132,7 +132,7 @@
 /file-refs.cpp/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 /file-refs.m/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 /fix-its.c/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
-/fix-its.m/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
+/fix-its.m/1.1.1.2/Tue Jan 14 16:01:49 2014/-kk/
 /format-comment-cdecls.c/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 /get-cursor-includes.c/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 /get-cursor-macro-args.h/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
@@ -194,21 +194,21 @@
 /preamble-reparse-chained.c/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 /preamble-reparse-cmd-define.c.h/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 /preamble-reparse-cmd-define.c.remap/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
-/preamble-reparse-cmd-define.c/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
+/preamble-reparse-cmd-define.c/1.1.1.2/Tue Jan 14 16:01:49 2014/-kk/
 /preamble-reparse-import.m-1.h/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 /preamble-reparse-import.m-2.h/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 /preamble-reparse-import.m-3.h/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 /preamble-reparse-import.m/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 /preamble-reparse-with-BOM.m/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
-/preamble-reparse.c/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
+/preamble-reparse.c/1.1.1.2/Tue Jan 14 16:01:49 2014/-kk/
 /preamble.c/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 /preamble_macro_template.cpp/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 /print-bitwidth.c/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 /print-display-names.cpp/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
-/print-type-cxx11.cpp/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
+/print-type-cxx11.cpp/1.1.1.2/Tue Jan 14 16:01:49 2014/-kk/
 /print-type-size.cpp/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 /print-type.c/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
-/print-type.cpp/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
+/print-type.cpp/1.1.1.2/Tue Jan 14 16:01:49 2014/-kk/
 /print-type.m/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 /print-usrs.c/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 /properties-class-extensions.m/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
@@ -218,12 +218,13 @@
 /recursive-cxx-member-calls.cpp/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 /recursive-member-access.c/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 /redeclarations.cpp/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
-/remap-complete.c/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
-/remap-cursor-at.c/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
-/remap-load.c/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
+/remap-complete.c/1.1.1.2/Tue Jan 14 16:01:49 2014/-kk/
+/remap-cursor-at.c/1.1.1.2/Tue Jan 14 16:01:49 2014/-kk/
+/remap-load.c/1.1.1.2/Tue Jan 14 16:01:49 2014/-kk/
 /reparse-instantiate.cpp/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 /retain-comments-from-system-headers.c/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 /retain-target-options.c/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
+/skipped-ranges.c/1.1.1.1/Sun Jan  5 15:39:45 2014/-kk/
 /subclass-comment.mm/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 /targeted-annotation.c/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 /targeted-cursor.c/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
@@ -242,4 +243,5 @@
 /warning-flags.c/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 /werror.c/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 D/Inputs////
+D/reparse-with-remaps////
 D/skip-parsed-bodies////

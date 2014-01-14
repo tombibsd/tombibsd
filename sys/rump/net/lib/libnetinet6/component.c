@@ -38,14 +38,12 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include "rump_private.h"
 #include "rump_net_private.h"
 
-#ifdef notyet
 RUMP_COMPONENT(RUMP_COMPONENT_NET)
 {
 	extern struct domain inet6domain;
 
 	DOMAINADD(inet6domain);
 }
-#endif
 
 RUMP_COMPONENT(RUMP_COMPONENT_NET_IFCFG)
 {

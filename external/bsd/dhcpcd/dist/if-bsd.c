@@ -385,7 +385,7 @@ if_route6(const struct rt6 *rt, int action)
 		if (IN6_IS_ADDR_LINKLOCAL(&su.sin.sin6_addr)) {		      \
 			uint16_t scope = htons(su.sin.sin6_scope_id);	      \
 			memcpy(&su.sin.sin6_addr.s6_addr[2], &scope,	      \
-			    sizeof(scope)); 				      \
+			    sizeof(scope));				      \
 			su.sin.sin6_scope_id = 0;			      \
 		}							      \
 	}

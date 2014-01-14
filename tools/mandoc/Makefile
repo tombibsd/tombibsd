@@ -17,20 +17,7 @@ DPSRCS+=	config.h
 
 CLEANFILES+=	config.log config.h
 
-config.h: config.h.pre config.h.post
-	rm -f config.log
-	( cat ${DISTDIR}/config.h.pre; \
-	echo; \
-	if $(CC) $(CFLAGS) -Werror -c ${DISTDIR}/test-strlcat.c >> config.log 2>&1; then \
-		echo '#define HAVE_STRLCAT'; \
-		rm test-strlcat.o; \
-	fi; \
-	if $(CC) $(CFLAGS) -Werror -c ${DISTDIR}/test-strlcpy.c >> config.log 2>&1; then \
-		echo '#define HAVE_STRLCPY'; \
-		rm test-strlcpy.o; \
-	fi; \
-	echo; \
-	cat ${DISTDIR}/config.h.post \
-	) > $@
+config.h: configure config.h.pre config.h.post
+	SRCDIR=${DISTDIR} ${HOST_SH} -x ${DISTDIR}/configure
 
 .include "${.CURDIR}/../Makefile.host"

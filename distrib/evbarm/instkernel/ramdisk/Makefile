@@ -13,7 +13,11 @@ DBG=		-Os
 CRUNCHBIN=	ramdiskbin
 LISTS=		${.CURDIR}/list ${DISTRIBDIR}/common/list.sysinst
 MTREECONF=	${DISTRIBDIR}/common/mtree.common
+.if empty(MACHINE_ARCH:M*eb)
 IMAGEENDIAN=	le
+.else
+IMAGEENDIAN=	be
+.endif
 MAKEDEVTARGETS=	ramdisk
 IMAGEDEPENDS=	${CRUNCHBIN} \
 		dot.profile \

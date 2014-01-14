@@ -123,6 +123,9 @@ udp6_init(void)
 {
 
 	sysctl_net_inet6_udp6_setup(NULL);
+	udp6stat_percpu = percpu_alloc(sizeof(uint64_t) * UDP6_NSTATS);
+
+	udp_init_common();
 }
 
 /*

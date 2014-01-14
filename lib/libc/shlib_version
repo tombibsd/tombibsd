@@ -39,4 +39,4 @@
 # - switch to DT_INIT_ARRAY on all platforms
 # - consolidate ownership with crt0.o and avoid common symbols
 major=12
-minor=187
+minor=188

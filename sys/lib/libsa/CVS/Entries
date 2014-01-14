@@ -35,7 +35,7 @@
 /fstat.c/1.7/Sun Dec  2 04:59:25 2007/-kk/
 /getfile.c/1.9/Sat Nov 24 13:20:55 2007/-kk/
 /gets.c/1.10/Sat Nov 24 13:20:55 2007/-kk/
-/globals.c/1.9/Mon May 21 21:34:16 2012/-kk/
+/globals.c/1.10/Tue Jan 14 16:05:07 2014/-kk/
 /ioctl.c/1.11/Sun Dec  2 04:59:25 2007/-kk/
 /iodesc.h/1.9/Sat Jan 17 14:00:36 2009/-kk/
 /ip.c/1.2/Fri May 13 23:35:09 2011/-kk/
@@ -76,7 +76,7 @@
 /saioctl.h/1.4/Sun Dec 11 12:24:46 2005/-kk/
 /snprintf.c/1.5/Sun Jul 17 20:54:52 2011/-kk/
 /sprintf.c/1.5/Sun Jul 17 20:54:52 2011/-kk/
-/stand.h/1.76/Mon May 21 21:34:16 2012/-kk/
+/stand.h/1.77/Tue Jan 14 16:05:07 2014/-kk/
 /stat.c/1.7/Sat Nov 24 13:20:57 2007/-kk/
 /strerror.c/1.20/Sat Nov 24 13:20:57 2007/-kk/
 /subr_prf.c/1.23/Wed Jan  1 02:45:35 2014/-kk/

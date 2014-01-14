@@ -38,7 +38,10 @@ struct mem_region {
 	uint64_t size;
 };
 
-int prom_set_trap_table(vaddr_t);
+int prom_set_trap_table_sun4u(vaddr_t);
+#ifdef SUN4V
+int prom_set_trap_table_sun4v(vaddr_t, paddr_t);
+#endif
 paddr_t prom_vtop(vaddr_t);
 vaddr_t prom_claim_virt(vaddr_t, int);
 vaddr_t prom_alloc_virt(int, int);

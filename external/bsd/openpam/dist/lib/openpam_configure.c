@@ -109,9 +109,9 @@ parse_facility_name(const char *name)
 static pam_control_t
 parse_control_flag(const char *name)
 {
-	int i;
+	pam_control_t i;
 
-	for (i = 0; i < PAM_NUM_CONTROL_FLAGS; ++i)
+	for (i = PAM_BINDING; i < PAM_NUM_CONTROL_FLAGS; ++i)
 		if (strcmp(pam_control_flag_name[i], name) == 0)
 			return (i);
 	return ((pam_control_t)-1);

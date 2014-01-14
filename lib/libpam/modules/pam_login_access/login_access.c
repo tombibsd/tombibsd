@@ -56,6 +56,7 @@ static int	user_match(const char *, const char *);
 
 /* login_access - match username/group and host/tty with access control file */
 
+__printflike(2, 3)
 static void
 logit(int level, const char *fmt, ...)
 {

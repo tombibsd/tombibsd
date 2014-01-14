@@ -302,6 +302,7 @@ void	 cfree(void *);
 int	 heapsort(void *, size_t, size_t, int (*)(const void *, const void *));
 int	 mergesort(void *, size_t, size_t,
 	    int (*)(const void *, const void *));
+int	 ptsname_r(int, char *, size_t);
 int	 radixsort(const unsigned char **, int, const unsigned char *,
 	    unsigned);
 int	 sradixsort(const unsigned char **, int, const unsigned char *,

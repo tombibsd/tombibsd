@@ -2,6 +2,7 @@
 
 define	des
 
+file	crypto/des/des_module.c		des
 file	crypto/des/des_ecb.c		des
 file	crypto/des/des_setkey.c		des
 file	crypto/des/des_enc.c		des

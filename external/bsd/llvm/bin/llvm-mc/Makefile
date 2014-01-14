@@ -33,12 +33,14 @@ LLVM_LIBS+= \
 	MipsAsmPrinter \
 	PowerPCCodeGen \
 	PowerPCAsmParser \
+	PowerPCDisassembler \
 	PowerPCTargetInfo \
 	PowerPCMCTargetDesc \
 	PowerPCAsmPrinter \
 	SparcCodeGen \
 	SparcTargetInfo \
 	SparcMCTargetDesc \
+	SparcAsmPrinter \
 	X86CodeGen \
 	X86TargetInfo \
 	X86MCTargetDesc \

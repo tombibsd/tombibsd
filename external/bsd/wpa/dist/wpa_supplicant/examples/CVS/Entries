@@ -1,4 +1,5 @@
 /60_wpa_supplicant/1.1.1.1/Wed Aug  4 10:24:14 2010/-kk/
+/dbus-listen-preq.py/1.1.1.1/Fri Jan  3 02:05:33 2014/-kk/
 /ieee8021x.conf/1.1.1.1/Wed Aug  4 10:24:14 2010/-kk/
 /openCryptoki.conf/1.1.1.1/Wed Aug  4 10:24:14 2010/-kk/
 /p2p-action-udhcp.sh/1.1.1.1/Sun Oct  7 23:48:08 2012/-kk/
@@ -13,4 +14,6 @@
 /wpas-dbus-new-wps.py/1.1.1.1/Wed Aug  4 10:24:13 2010/-kk/
 /wpas-dbus-new.py/1.1.1.1/Wed Aug  4 10:24:14 2010/-kk/
 /wpas-test.py/1.1.1.1/Wed Aug  4 10:24:13 2010/-kk/
-D
+/wps-ap-cli/1.1.1.1/Fri Jan  3 02:05:33 2014/-kk/
+/wps-nfc.py/1.1.1.1/Fri Jan  3 02:05:33 2014/-kk/
+D/p2p////

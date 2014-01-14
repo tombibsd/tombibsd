@@ -103,6 +103,7 @@ D/NotAModule.framework////
 D/StdDef////
 D/System////
 D/declare-use////
+D/malformed////
 D/modular_maps////
 D/normal-module-map////
 D/odr////
@@ -112,6 +113,8 @@ D/private0////
 D/private1////
 D/private2////
 D/separate_map_tree////
+D/string_names////
 D/subdir////
 D/submodules////
+D/unnecessary-module-map-parsing////
 D/wildcard-submodule-exports////

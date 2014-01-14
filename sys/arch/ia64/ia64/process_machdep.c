@@ -53,7 +53,7 @@ printf("%s: not yet\n", __func__);
 
 
 int
-process_read_fpregs(struct lwp *l, struct fpreg *fpregs)
+process_read_fpregs(struct lwp *l, struct fpreg *fpregs, size_t *sz)
 {
 printf("%s: not yet\n", __func__);
 	return 0;
@@ -61,7 +61,7 @@ printf("%s: not yet\n", __func__);
 
 
 int
-process_write_fpregs(struct lwp *l, const struct fpreg *fpregs)
+process_write_fpregs(struct lwp *l, const struct fpreg *fpregs, size_t sz)
 {
 printf("%s: not yet\n", __func__);
 	return 0;

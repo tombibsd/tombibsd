@@ -14,9 +14,9 @@
 /metadata-test-1.m/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
 /metadata-test-2.m/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
 /method-encoding-1.m/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
-/missing-dllimport.c/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
+/missing-dllimport.c/1.1.1.2/Tue Jan 14 16:01:51 2014/-kk/
 /modern-write-bf-abi.mm/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
-/no-integrated-preprocessing-64bit.m/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
+/no-integrated-preprocessing-64bit.m/1.1.1.2/Tue Jan 14 16:01:51 2014/-kk/
 /no-integrated-preprocessing.m/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
 /objc-bool-literal-check-modern.mm/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
 /objc-bool-literal-modern-1.mm/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
@@ -44,7 +44,7 @@
 /objc-synchronized-1.m/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
 /properties.m/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
 /property-dot-syntax.mm/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
-/protocol-rewrite-1.m/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
+/protocol-rewrite-1.m/1.1.1.2/Tue Jan 14 16:01:51 2014/-kk/
 /protocol-rewrite-2.m/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
 /rewrite-anonymous-union.m/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
 /rewrite-api-bug.m/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/

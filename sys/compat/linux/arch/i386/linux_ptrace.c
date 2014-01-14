@@ -137,6 +137,7 @@ linux_sys_ptrace_arch(struct lwp *l, const struct linux_sys_ptrace_args *uap,
 	struct linux_fpctx *linux_fpregs = NULL;
 	struct linux_emuldata *led;
 	int request, error, addr;
+	size_t fp_size;
 
 	if (linux_ptrace_disabled)
 		return ENOSYS;
@@ -264,17 +265,18 @@ linux_sys_ptrace_arch(struct lwp *l, const struct linux_sys_ptrace_args *uap,
 		break;
 
 	case LINUX_PTRACE_GETFPREGS:
-		error = process_read_fpregs(lt, fpregs);
+		fp_size = sizeof fpregs;
+		error = process_read_fpregs(lt, fpregs, &fp_size);
 		mutex_exit(t->p_lock);
 		if (error) {
 			break;
 		}
 		/* Zero the contents if NetBSD fpreg structure is smaller */
-		if (sizeof(struct fpreg) < sizeof(struct linux_fpctx)) {
+		if (fp_size < sizeof(struct linux_fpctx)) {
 			memset(linux_fpregs, '\0', sizeof(struct linux_fpctx));
 		}
 		memcpy(linux_fpregs, fpregs,
-		    min(sizeof(struct linux_fpctx), sizeof(struct fpreg)));
+		    min(sizeof(struct linux_fpctx), fp_size));
 		error = copyout(linux_fpregs, (void *)SCARG(uap, data),
 		    sizeof(struct linux_fpctx));
 		break;

@@ -303,9 +303,9 @@ coredump_buildname(struct proc *p, char *dst, const char *src, size_t len)
 }
 
 int
-coredump_write(void *cookie, enum uio_seg segflg, const void *data, size_t len)
+coredump_write(struct coredump_iostate *io, enum uio_seg segflg,
+    const void *data, size_t len)
 {
-	struct coredump_iostate *io = cookie;
 	int error;
 
 	error = vn_rdwr(UIO_WRITE, io->io_vp, __UNCONST(data), len,
@@ -322,4 +322,10 @@ coredump_write(void *cookie, enum uio_seg segflg, const void *data, size_t len)
 
 	io->io_offset += len;
 	return (0);
+}
+
+off_t
+coredump_offset(struct coredump_iostate *io)
+{
+	return io->io_offset; 
 }

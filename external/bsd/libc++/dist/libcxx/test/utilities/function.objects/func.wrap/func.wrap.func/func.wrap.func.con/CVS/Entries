@@ -1,11 +1,11 @@
 /F.pass.cpp/1.1.1.1/Thu Oct 24 10:28:46 2013/-kk/
 /F_assign.pass.cpp/1.1.1.1/Thu Oct 24 10:28:46 2013/-kk/
 /F_incomplete.pass.cpp/1.1.1.2/Thu Oct 24 10:28:46 2013/-kk/
-/alloc.pass.cpp/1.1.1.1/Thu Oct 24 10:28:46 2013/-kk/
-/alloc_F.pass.cpp/1.1.1.1/Thu Oct 24 10:28:46 2013/-kk/
-/alloc_function.pass.cpp/1.1.1.1/Thu Oct 24 10:28:46 2013/-kk/
-/alloc_nullptr.pass.cpp/1.1.1.1/Thu Oct 24 10:28:46 2013/-kk/
-/alloc_rfunction.pass.cpp/1.1.1.1/Thu Oct 24 10:28:46 2013/-kk/
+/alloc.pass.cpp/1.1.1.2/Tue Jan 14 16:01:34 2014/-kk/
+/alloc_F.pass.cpp/1.1.1.2/Tue Jan 14 16:01:34 2014/-kk/
+/alloc_function.pass.cpp/1.1.1.2/Tue Jan 14 16:01:34 2014/-kk/
+/alloc_nullptr.pass.cpp/1.1.1.2/Tue Jan 14 16:01:34 2014/-kk/
+/alloc_rfunction.pass.cpp/1.1.1.2/Tue Jan 14 16:01:34 2014/-kk/
 /copy.pass.cpp/1.1.1.1/Thu Oct 24 10:28:46 2013/-kk/
 /copy_assign.pass.cpp/1.1.1.1/Thu Oct 24 10:28:46 2013/-kk/
 /default.pass.cpp/1.1.1.1/Thu Oct 24 10:28:46 2013/-kk/

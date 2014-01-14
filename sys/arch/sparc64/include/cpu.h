@@ -174,6 +174,12 @@ struct cpu_info {
 	pte_t			*ci_tsb_dmmu;
 	pte_t			*ci_tsb_immu;
 
+	/* MMU Fault Status Area (sun4v).
+	 * Will be initialized to the physical address of the bottom of
+	 * the interrupt stack.
+	 */
+	paddr_t			ci_mmfsa;
+
 	/* probe fault in PCI config space reads */
 	bool			ci_pci_probe;
 	bool			ci_pci_fault;

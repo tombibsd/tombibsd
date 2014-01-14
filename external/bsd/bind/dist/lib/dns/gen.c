@@ -311,7 +311,8 @@ find_typename(int type) {
 static void
 insert_into_typenames(int type, const char *typename, const char *attr) {
 	struct ttnam *ttn = NULL;
-	int c, i, n;
+	size_t c;
+	int i, n;
 	char tmp[256];
 
 	INSIST(strlen(typename) < TYPECLASSBUF);
@@ -487,7 +488,7 @@ sd(int rdclass, const char *classname, const char *dirname, char filetype) {
 
 static unsigned int
 HASH(char *string) {
-	unsigned int n;
+	size_t n;
 	unsigned char a, b;
 
 	n = strlen(string);
@@ -780,6 +781,14 @@ main(int argc, char **argv) {
 		for (i = 0; i <= maxtype; i++) {
 			ttn = find_typename(i);
 			if (ttn == NULL)
+				continue;
+			/*
+			 * Remove KEYDATA (65533) from the type to memonic
+			 * translation as it is internal use only.  This
+			 * stops the tools from displaying KEYDATA instead
+			 * of TYPE65533.
+			 */
+			if (i == 65533U)
 				continue;
 			fprintf(stdout, "\tcase %u: return "
 				"(str_totext(\"%s\", target)); \\\n",

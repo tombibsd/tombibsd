@@ -228,29 +228,6 @@
 		? 0 : (CPUID_TO_EXTMODEL(cpuid) << 4)))
 
 /*
- * CPUID Processor extended state Enumeration Fn0000000d
- *
- * %ecx == 0: supported features info:
- *	%edx:%eax bits valid for XCR0
- *	%ebx Save area size for features enabled in XCR0
- *	%ecx Maximim save area size for all cpu features
- *
- * %ecx == 1:
- *	%eax: Bit 0 => xsaveopt instruction avalaible (sandy bridge onwards)
- *
- * %ecx >= 2: Save area details for XCR0 bit n
- *	%eax: size of save area for this feature
- *	%ebx: offset of save area for this feature
- *	%ecx, %edx: reserved
- *	All of %eax, %ebx, %ecx and %edx are zero for unsupported features.
- */
-
-#define	CPUID_PES1_XSAVEOPT	0x00000001	/* xsaveopt instruction */
-
-#define CPUID_PES1_FLAGS	"\20" \
-	"\1" "XSAVEOPT"
-
-/*
  * Intel Deterministic Cache Parameter Leaf
  * Fn0000_0004
  */
@@ -299,8 +276,9 @@
  * Power Management, Fn0000_0006 - %ecx.
  */
 #define CPUID_DSPM_HWF	0x00000001	/* MSR_APERF/MSR_MPERF available */
+#define CPUID_DSPM_EPB	0x00000008	/* Energy Performance Bias */
 
-#define CPUID_DSPM_FLAGS1	"\20" "\1" "HWF"
+#define CPUID_DSPM_FLAGS1	"\20" "\1" "HWF" "\4" "EPB"
 
 /*
  * Intel Structured Extended Feature leaf
@@ -340,32 +318,22 @@
 	"\35" "AVX512CD""\36" "SHA"
 
 /*
- * CPUID Processor extended state Enumeration Fn0000000d %eax
- *
- * Extended Control Register XCR0
- */
-#define	XCR0_X87	0x00000001	/* x87 FPU/MMX state */
-#define	XCR0_SSE	0x00000002	/* SSE state */
-#define	XCR0_AVX	0x00000004	/* AVX state (ymmn registers) */
-
-#define XCR0_FLAGS1	"\20" \
-	"\1" "x87"	"\2" "SSE"	"\3" "AVX"	"\4" "B03"
-
-/*
  * CPUID Processor extended state Enumeration Fn0000000d
  *
  * %ecx == 0: supported features info:
- *	%edx:%eax bits valid for XCR0
+ *	%eax: Valid bits of lower 32bits of XCR0
  *	%ebx Save area size for features enabled in XCR0
  *	%ecx Maximim save area size for all cpu features
+ *	%edx: Valid bits of upper 32bits of XCR0
  *
- * %ecx == 1: Bit 0 => xsaveopt instruction avalaible (sandy bridge onwards)
+ * %ecx == 1:
+ *	%eax: Bit 0 => xsaveopt instruction avalaible (sandy bridge onwards)
  *
  * %ecx >= 2: Save area details for XCR0 bit n
  *	%eax: size of save area for this feature
  *	%ebx: offset of save area for this feature
  *	%ecx, %edx: reserved
- *	All of %eax, %ebx, %ecx and %edx zero for unsupported features.
+ *	All of %eax, %ebx, %ecx and %edx are zero for unsupported features.
  */
 
 #define	CPUID_PES1_XSAVEOPT	0x00000001	/* xsaveopt instruction */

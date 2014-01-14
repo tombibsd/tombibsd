@@ -15,10 +15,11 @@
 /cross_block_slp.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /cse.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /cycle_dup.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
-/debug_info.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/debug_info.ll/1.1.1.2/Tue Jan 14 16:02:17 2014/-kk/
 /diamond.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /external_user.ll/1.1.1.2/Tue Dec 17 04:11:02 2013/-kk/
 /extract.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/extractcost.ll/1.1.1.1/Sun Jan  5 16:16:41 2014/-kk/
 /flag.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /hoist.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /horizontal.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
@@ -28,10 +29,12 @@
 /lit.local.cfg/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /long_chains.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /loopinvariant.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/metadata.ll/1.1.1.1/Sun Jan  5 16:16:41 2014/-kk/
 /multi_block.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /multi_user.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /odd_store.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /operandorder.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/opt.ll/1.1.1.1/Sun Jan  5 16:16:41 2014/-kk/
 /ordering.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /phi.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /phi3.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/

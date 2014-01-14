@@ -335,7 +335,7 @@ main(int argc, char *argv[])
 	memset(&rec, 0, sizeof(rec));
 
 	init_secbuffs(&rec);
-	mp = mparse_alloc(MPARSE_AUTO, MANDOCLEVEL_FATAL, NULL, NULL);
+	mp = mparse_alloc(MPARSE_AUTO, MANDOCLEVEL_FATAL, NULL, NULL, NULL);
 
 	if (manconf) {
 		char *arg;

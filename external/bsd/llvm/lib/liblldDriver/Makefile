@@ -10,8 +10,10 @@ SRCS+=	CoreDriver.cpp \
 	DarwinLdDriver.cpp \
 	Driver.cpp \
 	GnuLdDriver.cpp \
+	GnuLdInputGraph.cpp \
 	UniversalDriver.cpp \
-	WinLinkDriver.cpp
+	WinLinkDriver.cpp \
+	WinLinkInputGraph.cpp
 
 TABLEGEN_SRC=	CoreOptions.td DarwinLdOptions.td GnuLdOptions.td \
 	UniversalDriverOptions.td WinLinkOptions.td

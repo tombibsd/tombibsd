@@ -52,7 +52,6 @@ struct fs_ops fs_tftp  = FS_OPS(tftp);
 struct fs_ops fs_ffsv2 = FS_OPS(ffsv2);
 struct fs_ops fs_ffsv1 = FS_OPS(ffsv1);
 struct fs_ops fs_mem   = FS_OPS(mem);
-extern char *fsmod;
 
 static void parseunit(const char *, int *, int *, char **);
 

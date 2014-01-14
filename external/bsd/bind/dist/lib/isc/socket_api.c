@@ -348,6 +348,16 @@ isc_socket_sendtov(isc_socket_t *sock, isc_bufferlist_t *buflist,
 }
 
 isc_result_t
+isc_socket_sendtov2(isc_socket_t *sock, isc_bufferlist_t *buflist,
+		    isc_task_t *task, isc_taskaction_t action, const void *arg,
+		    isc_sockaddr_t *address, struct in6_pktinfo *pktinfo,
+		    unsigned int flags) {
+	REQUIRE(ISCAPI_SOCKET_VALID(sock));
+
+	return(sock->methods->sendtov2(sock, buflist, task, action, arg,
+				       address, pktinfo, flags));
+}
+isc_result_t
 isc_socket_recvv(isc_socket_t *sock, isc_bufferlist_t *buflist,
 		 unsigned int minimum,
 		 isc_task_t *task, isc_taskaction_t action, const void *arg) {

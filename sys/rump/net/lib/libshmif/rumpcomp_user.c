@@ -42,7 +42,8 @@
  * good chance of doing the fd->path mapping on Linux thanks to dcache,
  * so just keep the existing interfaces for now.
  */
-#if defined(__NetBSD__) || defined(__FreeBSD__) || defined(__DragonFly__)
+#if defined(__NetBSD__) || defined(__FreeBSD__) || defined(__DragonFly__) \
+    || defined(__OpenBSD__)
 #include <sys/event.h>
 
 #include <stdlib.h>

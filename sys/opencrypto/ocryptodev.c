@@ -90,7 +90,10 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/poll.h>
 #include <sys/atomic.h>
 
+#ifdef _KERNEL_OPT
 #include "opt_ocf.h"
+#endif
+
 #include <opencrypto/cryptodev.h>
 #include <opencrypto/cryptodev_internal.h>
 #include <opencrypto/ocryptodev.h>

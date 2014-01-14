@@ -14,6 +14,7 @@ SRCS+=	DelaySlotFiller.cpp \
 	SparcISelLowering.cpp \
 	SparcJITInfo.cpp \
 	SparcFrameLowering.cpp \
+	SparcMCInstLower.cpp \
 	SparcMachineFunctionInfo.cpp \
 	SparcRegisterInfo.cpp \
 	SparcSubtarget.cpp \

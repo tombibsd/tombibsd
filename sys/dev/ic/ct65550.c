@@ -159,7 +159,7 @@ chipsfb_read_indexed(struct chipsfb_softc *sc, uint32_t reg, uint8_t index)
 	return chipsfb_read_vga(sc, reg | 0x0001);
 }
 
-static inline void
+__unused static inline void
 chipsfb_write_indexed(struct chipsfb_softc *sc, uint32_t reg, uint8_t index,
     uint8_t val)
 {

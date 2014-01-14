@@ -37,7 +37,7 @@
 /msyslog.c/1.1.1.3/Wed Jan  1 02:42:42 2014/-kk/
 /netof.c/1.1.1.2/Wed Jan  1 02:42:42 2014/-kk/
 /ntp_calendar.c/1.2/Sat Dec 28 03:20:13 2013/-kk/
-/ntp_intres.c/1.1.1.1/Fri Dec 27 23:30:47 2013/-kk/
+/ntp_intres.c/1.3/Tue Jan 14 16:02:19 2014/-kk/
 /ntp_libopts.c/1.1.1.2/Wed Jan  1 02:42:42 2014/-kk/
 /ntp_lineedit.c/1.4/Wed Jan  1 02:42:42 2014/-kk/
 /ntp_random.c/1.1.1.2/Wed Jan  1 02:42:42 2014/-kk/
@@ -46,12 +46,12 @@
 /numtoa.c/1.1.1.2/Wed Jan  1 02:42:42 2014/-kk/
 /numtohost.c/1.1.1.2/Wed Jan  1 02:42:42 2014/-kk/
 /octtoint.c/1.3/Wed Jan  1 02:42:42 2014/-kk/
-/prettydate.c/1.2/Wed Jan  1 02:42:42 2014/-kk/
+/prettydate.c/1.3/Tue Jan 14 16:02:19 2014/-kk/
 /recvbuff.c/1.1.1.2/Wed Jan  1 02:42:42 2014/-kk/
 /refnumtoa.c/1.1.1.2/Wed Jan  1 02:42:42 2014/-kk/
 /snprintf.c/1.1.1.2/Wed Jan  1 02:42:42 2014/-kk/
 /socket.c/1.1.1.1/Fri Dec 27 23:30:47 2013/-kk/
-/socktoa.c/1.1.1.3/Wed Jan  1 02:42:42 2014/-kk/
+/socktoa.c/1.2/Tue Jan 14 16:02:19 2014/-kk/
 /socktohost.c/1.1.1.3/Wed Jan  1 02:42:42 2014/-kk/
 /ssl_init.c/1.4/Wed Jan  1 02:42:42 2014/-kk/
 /statestr.c/1.1.1.2/Wed Jan  1 02:42:42 2014/-kk/
@@ -60,7 +60,7 @@
 /syssignal.c/1.1.1.2/Wed Jan  1 02:42:42 2014/-kk/
 /systime.c/1.1.1.3/Wed Jan  1 02:42:42 2014/-kk/
 /systime_s.c/1.1.1.1/Sun Dec 13 16:55:06 2009/-kk/
-/timetoa.c/1.1.1.1/Fri Dec 27 23:30:48 2013/-kk/
+/timetoa.c/1.2/Tue Jan 14 16:02:19 2014/-kk/
 /timevalops.c/1.1.1.1/Fri Dec 27 23:30:47 2013/-kk/
 /uglydate.c/1.1.1.3/Wed Jan  1 02:42:42 2014/-kk/
 /work_fork.c/1.1.1.1/Fri Dec 27 23:30:48 2013/-kk/

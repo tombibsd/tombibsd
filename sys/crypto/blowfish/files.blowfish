@@ -2,6 +2,7 @@
 
 define	blowfish
 
+file	crypto/blowfish/bf_module.c	blowfish
 file	crypto/blowfish/bf_ecb.c	blowfish
 file	crypto/blowfish/bf_enc.c	blowfish
 file	crypto/blowfish/bf_cbc.c	blowfish

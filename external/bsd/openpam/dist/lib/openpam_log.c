@@ -96,6 +96,7 @@ openpam_log(int level, const char *fmt, ...)
 
 #else
 
+#pragma GCC diagnostic ignored "-Wformat-nonliteral"
 void
 _openpam_log(int level, const char *func, const char *fmt, ...)
 {

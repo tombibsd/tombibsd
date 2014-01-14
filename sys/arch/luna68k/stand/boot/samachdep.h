@@ -45,8 +45,6 @@
 #define MHZ_33		4
 #define MHZ_50		6
 
-#define MAXDEVNAME	16
-
 struct consdev;
 struct frame;
 typedef struct label_t {
@@ -86,10 +84,6 @@ void cninit(void);
 int cngetc(void);
 void cnputc(int);
 
-/* devopen.c */
-extern	u_int opendev;
-int atoi(char *);
-
 /* disklabel.c */
 extern u_char lbl_buff[];
 int disklabel(int, char **);
@@ -98,17 +92,17 @@ int disklabel(int, char **);
 void exec_hp300(char *, u_long, int);
 
 /* font.c */
-extern u_short bmdfont[][20];
+extern const uint16_t bmdfont[][20];
 
 /* fsdump.c */
 int fsdump(int, char **);
 int fsrestore(int, char **);
 
 /* getline.c */
-int getline(char *, char *);
+int getline(const char *, char *);
 
 /* if_le.c */
-int leinit(void *);
+int leinit(int, void *);
 
 /* init_main.c */
 extern int cpuspeed;
@@ -173,8 +167,11 @@ int  romcngetc(dev_t);
 void romcnputc(dev_t, int);
 
 /* sc.c */
-struct scsi_fmt_cdb;
-int scsi_immed_command(int, int, int, struct scsi_fmt_cdb *, u_char *,
+int scinit(int, void *);
+struct scsi_inquiry;
+bool scident(uint, uint, uint, struct scsi_inquiry *, uint32_t *);
+struct scsi_generic_cdb;
+int scsi_immed_command(int, int, int, struct scsi_generic_cdb *, u_char *,
     unsigned int);
 int scsi_request_sense(int, int, int, u_char *, unsigned int);
 int scsi_test_unit_rdy(int, int, int);
@@ -215,6 +212,11 @@ void trap(int, unsigned int, unsigned int, struct frame);
 /* ufs_disklabel.c */
 char *readdisklabel(int, int, struct disklabel *);
 
+
+/* use following device unit number strategy to make parser easier */
+#define	UNIT(ctlr, target)	((ctlr) * 10 + (target))
+#define	CTLR(unit)		((unit) / 10)
+#define	TARGET(unit)		((unit) % 10)
 
 #define DELAY(n)							\
 do {									\

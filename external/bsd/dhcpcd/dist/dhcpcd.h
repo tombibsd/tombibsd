@@ -46,7 +46,7 @@
 #define LINK_DOWN	-1
 
 #define IF_DATA_IPV4	0
-#define IF_DATA_DHCP	1	
+#define IF_DATA_DHCP	1
 #define IF_DATA_IPV6	2
 #define IF_DATA_IPV6ND	3
 #define IF_DATA_DHCP6	4

@@ -9,9 +9,3 @@ and slightly different encoding of the lock stubs.
 
 Various places use NOCLANGERROR or CWARNFLAGS.clang to disable errors or
 warnings.
-
-Issues with CMSG_SPACE() used inside a union:
-src/external/tmux/dist/compat/imsg-buffer.c
-src/external/tmux/dist/compat/imsg.c
-src/external/ibm-public/postfix/dist/src/util/unix_recv_fd.c
-src/external/ibm-public/postfix/dist/src/util/unix_send_fd.c

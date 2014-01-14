@@ -1,10 +1,10 @@
 /adaptive_global_redzones.ll/1.1.1.1/Thu Nov 28 14:18:09 2013/-kk/
 /asan-vs-gvn.ll/1.1.1.1/Thu Nov 28 14:18:09 2013/-kk/
-/basic.ll/1.1.1.1/Thu Nov 28 14:18:09 2013/-kk/
+/basic.ll/1.1.1.2/Tue Jan 14 16:02:15 2014/-kk/
 /coverage.ll/1.1.1.1/Thu Nov 28 14:18:09 2013/-kk/
-/debug_info.ll/1.1.1.1/Thu Nov 28 14:18:09 2013/-kk/
+/debug_info.ll/1.1.1.2/Tue Jan 14 16:02:15 2014/-kk/
 /different_scale_and_offset.ll/1.1.1.1/Thu Nov 28 14:18:09 2013/-kk/
-/do-not-instrument-internal-globals.ll/1.1.1.1/Thu Nov 28 14:18:09 2013/-kk/
+/do-not-instrument-internal-globals.ll/1.1.1.2/Tue Jan 14 16:02:15 2014/-kk/
 /do-not-touch-odr-global.ll/1.1.1.1/Thu Nov 28 14:18:09 2013/-kk/
 /do-not-touch-threadlocal.ll/1.1.1.1/Thu Nov 28 14:18:09 2013/-kk/
 /instrument-no-return.ll/1.1.1.1/Thu Nov 28 14:18:09 2013/-kk/
@@ -14,5 +14,7 @@
 /keep-instrumented_functions.ll/1.1.1.1/Thu Nov 28 14:18:09 2013/-kk/
 /lifetime-uar.ll/1.1.1.1/Thu Nov 28 14:18:09 2013/-kk/
 /lifetime.ll/1.1.1.1/Thu Nov 28 14:18:09 2013/-kk/
+/stack-poisoning.ll/1.1.1.1/Sun Jan  5 16:17:28 2014/-kk/
+/stack_layout.ll/1.1.1.1/Sun Jan  5 16:17:28 2014/-kk/
 /test64.ll/1.1.1.1/Thu Nov 28 14:18:09 2013/-kk/
 D/X86////

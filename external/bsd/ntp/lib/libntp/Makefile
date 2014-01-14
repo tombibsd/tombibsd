@@ -75,10 +75,8 @@ work_fork.c \
 work_thread.c \
 ymd2yd.c
 
-COPTS.msyslog.c+= -Wno-format-nonliteral
-COPTS.prettydate.c=-Wno-format-nonliteral
-COPTS.timetoa.c=-Wno-format-nonliteral
 CPPFLAGS+= -I${IDIST}/sntp/libopts
 
+COPTS.msyslog.c+=	-Wno-error=format-nonliteral
 
 .include <bsd.lib.mk>

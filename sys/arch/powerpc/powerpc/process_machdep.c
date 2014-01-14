@@ -82,7 +82,7 @@ process_write_regs(struct lwp *l, const struct reg *regs)
 }
 
 int
-process_read_fpregs(struct lwp *l, struct fpreg *fpregs)
+process_read_fpregs(struct lwp *l, struct fpreg *fpregs, size_t *sz)
 {
 	struct pcb * const pcb = lwp_getpcb(l);
 
@@ -105,7 +105,7 @@ process_read_fpregs(struct lwp *l, struct fpreg *fpregs)
 }
 
 int
-process_write_fpregs(struct lwp *l, const struct fpreg *fpregs)
+process_write_fpregs(struct lwp *l, const struct fpreg *fpregs, size_t sz)
 {
 	struct pcb * const pcb = lwp_getpcb(l);
 

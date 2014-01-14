@@ -421,7 +421,7 @@ char *xstrdup(const char *);
 void *xrealloc(void *, size_t);
 void *xcalloc(size_t, size_t);
 void *xmalloc(size_t);
-char *xasprintf(const char *, ...);
+char *xasprintf(const char *, ...) __printflike(1, 2);
 
 /* Externs */
 extern Boolean Verbose;

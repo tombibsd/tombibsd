@@ -65,6 +65,7 @@
 /weakdef.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /x86-data-in-code.ll/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /x86_32-optimal_nop.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
+/x86_32-scattered-reloc-fallback.s/1.1.1.1/Sun Jan  5 16:17:09 2014/-kk/
 /x86_32-sections.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /x86_32-symbols.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /x86_64-reloc-arithmetic.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/

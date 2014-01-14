@@ -111,6 +111,42 @@ pmap_bootstrap(paddr_t nextpa, paddr_t firstpa)
 #endif
 
 	/*
+	 * Initialize the mem_clusters[] array for the crash dump
+	 * code.  While we're at it, compute the total amount of
+	 * physical memory in the system.
+	 */
+	for (i = 0; i < VM_PHYSSEG_MAX; i++) {
+		if (RELOC(phys_seg_list[i].ps_start, paddr_t) ==
+		    RELOC(phys_seg_list[i].ps_end, paddr_t)) {
+			/*
+			 * No more memory.
+			 */
+			break;
+		}
+
+		/*
+		 * Make sure these are properly rounded.
+		 */
+		RELOC(phys_seg_list[i].ps_start, paddr_t) =
+		    m68k_round_page(RELOC(phys_seg_list[i].ps_start,
+					  paddr_t));
+		RELOC(phys_seg_list[i].ps_end, paddr_t) =
+		    m68k_trunc_page(RELOC(phys_seg_list[i].ps_end,
+					  paddr_t));
+
+		size = RELOC(phys_seg_list[i].ps_end, paddr_t) -
+		    RELOC(phys_seg_list[i].ps_start, paddr_t);
+
+		RELOC(mem_clusters[i].start, u_quad_t) =
+		    RELOC(phys_seg_list[i].ps_start, paddr_t);
+		RELOC(mem_clusters[i].size, u_quad_t) = size;
+
+		RELOC(physmem, int) += size >> PGSHIFT;
+
+		RELOC(mem_cluster_cnt, int) += 1;
+	}
+
+	/*
 	 * Calculate important physical addresses:
 	 *
 	 *	lwp0upa		lwp0 u-area		UPAGES pages
@@ -482,42 +518,6 @@ pmap_bootstrap(paddr_t nextpa, paddr_t firstpa)
 	 * via uvm_lwp_setuarea() later in pmap_bootstrap_finalize().
 	 */
 	RELOC(lwp0uarea, vaddr_t) = lwp0upa - firstpa;
-
-	/*
-	 * Initialize the mem_clusters[] array for the crash dump
-	 * code.  While we're at it, compute the total amount of
-	 * physical memory in the system.
-	 */
-	for (i = 0; i < VM_PHYSSEG_MAX; i++) {
-		if (RELOC(phys_seg_list[i].ps_start, paddr_t) ==
-		    RELOC(phys_seg_list[i].ps_end, paddr_t)) {
-			/*
-			 * No more memory.
-			 */
-			break;
-		}
-
-		/*
-		 * Make sure these are properly rounded.
-		 */
-		RELOC(phys_seg_list[i].ps_start, paddr_t) =
-		    m68k_round_page(RELOC(phys_seg_list[i].ps_start,
-					  paddr_t));
-		RELOC(phys_seg_list[i].ps_end, paddr_t) =
-		    m68k_trunc_page(RELOC(phys_seg_list[i].ps_end,
-					  paddr_t));
-
-		size = RELOC(phys_seg_list[i].ps_end, paddr_t) -
-		    RELOC(phys_seg_list[i].ps_start, paddr_t);
-
-		RELOC(mem_clusters[i].start, u_quad_t) =
-		    RELOC(phys_seg_list[i].ps_start, paddr_t);
-		RELOC(mem_clusters[i].size, u_quad_t) = size;
-
-		RELOC(physmem, int) += size >> PGSHIFT;
-
-		RELOC(mem_cluster_cnt, int) += 1;
-	}
 
 	/*
 	 * Scoot the start of available on-board RAM forward to

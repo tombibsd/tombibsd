@@ -134,7 +134,7 @@ CTASSERT(sizeof(struct fpreg_oabi) <= sizeof(struct fpreg));
 #endif
 
 int
-process_read_xfpregs(struct lwp *l, struct fpreg *regs, size_t *regslen_p)
+process_read_fpregs(struct lwp *l, struct fpreg *regs, size_t *regslen_p)
 {
 	struct pcb * const pcb = lwp_getpcb(l);
 	KASSERT(*regslen_p == sizeof(struct fpreg));
@@ -150,7 +150,7 @@ process_read_xfpregs(struct lwp *l, struct fpreg *regs, size_t *regslen_p)
 }
 
 int
-process_write_xfpregs(struct lwp *l, const struct fpreg *regs, size_t regslen)
+process_write_fpregs(struct lwp *l, const struct fpreg *regs, size_t regslen)
 {
 	struct pcb * const pcb = lwp_getpcb(l);
 

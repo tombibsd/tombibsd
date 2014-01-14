@@ -37,6 +37,7 @@ SRCS+=	ADCE.cpp \
 	SampleProfile.cpp \
 	Scalar.cpp \
 	ScalarReplAggregates.cpp \
+	Scalarizer.cpp \
 	SimplifyCFGPass.cpp \
 	Sink.cpp \
 	StructurizeCFG.cpp \

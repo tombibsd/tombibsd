@@ -17,6 +17,8 @@ SRCS+=	AsmWriter.cpp \
 	DataLayout.cpp \
 	DebugInfo.cpp \
 	DebugLoc.cpp \
+	DiagnosticInfo.cpp \
+	DiagnosticPrinter.cpp \
 	Dominators.cpp \
 	Function.cpp \
 	GCOV.cpp \

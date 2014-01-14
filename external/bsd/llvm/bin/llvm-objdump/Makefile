@@ -29,12 +29,14 @@ LLVM_LIBS+= \
 	MipsMCTargetDesc \
 	MipsAsmPrinter \
 	MipsAsmParser \
+	PowerPCDisassembler \
 	PowerPCAsmParser \
 	PowerPCTargetInfo \
 	PowerPCMCTargetDesc \
 	PowerPCAsmPrinter \
 	SparcTargetInfo \
 	SparcMCTargetDesc \
+	SparcAsmPrinter \
 	X86Disassembler \
 	X86MCTargetDesc \
 	X86TargetInfo \

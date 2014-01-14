@@ -10,7 +10,7 @@
 /bus_funcs.h/1.2/Sun Jul 17 23:29:10 2011/-kk/
 /cdefs.h/1.4/Sat Jul 20 11:52:21 2002/-kk/
 /cgtworeg.h/1.2/Sat Jul 20 11:52:21 2002/-kk/
-/cpu.h/1.106/Wed Dec 25 07:37:33 2013/-kk/
+/cpu.h/1.109/Tue Jan 14 16:05:01 2014/-kk/
 /cpu_counter.h/1.8/Sat May 16 19:15:34 2009/-kk/
 /cpuset.h/1.8/Mon Apr 28 20:23:37 2008/-kk/
 /ctlreg.h/1.60/Wed Dec 25 07:37:33 2013/-kk/
@@ -46,7 +46,7 @@
 /math.h/1.7/Mon Dec 15 00:25:05 2008/-kk/
 /mcontext.h/1.9/Wed Sep 12 02:00:54 2012/-kk/
 /mutex.h/1.4/Mon Apr 28 20:23:37 2008/-kk/
-/netbsd32_machdep.h/1.27/Thu May 29 14:51:26 2008/-kk/
+/netbsd32_machdep.h/1.28/Tue Jan 14 16:05:01 2014/-kk/
 /oldmon.h/1.4/Sun Dec 11 12:19:10 2005/-kk/
 /openfirm.h/1.13/Sun Dec 11 12:19:10 2005/-kk/
 /openpromio.h/1.3/Sat Jul 20 11:52:21 2002/-kk/
@@ -68,7 +68,7 @@
 /rwlock.h/1.5/Mon Apr 28 20:23:37 2008/-kk/
 /setjmp.h/1.3/Sat Jul 20 11:52:22 2002/-kk/
 /signal.h/1.11/Thu Jan  9 23:25:24 2003/-kk/
-/sparc64.h/1.11/Sat Feb 20 16:46:38 2010/-kk/
+/sparc64.h/1.12/Tue Jan 14 16:05:01 2014/-kk/
 /sunos_machdep.h/1.2/Sun Dec 11 12:19:10 2005/-kk/
 /svr4_32_machdep.h/1.9/Mon Apr 28 20:23:37 2008/-kk/
 /svr4_machdep.h/1.12/Mon Apr 28 20:23:37 2008/-kk/

@@ -3036,7 +3036,7 @@ mrulist(
 		LFPTOD(&interval, favgint);
 		favgint /= recent->count;
 		avgint = (int)(favgint + 0.5);
-		fprintf(fp, "%6d %6d %4hx %c %d %d %6d %5hu %s\n",
+		fprintf(fp, "%6d %6d %4hx %c %d %d %6d %5u %s\n",
 			lstint, avgint, recent->rs,
 			(RES_KOD & recent->rs)
 			    ? 'K'

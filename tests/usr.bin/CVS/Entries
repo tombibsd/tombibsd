@@ -1,4 +1,4 @@
-/Makefile/1.18/Thu Oct 24 10:28:58 2013/-kk/
+/Makefile/1.19/Tue Jan 14 16:05:15 2014/-kk/
 D/awk////
 D/basename////
 D/bzip2////
@@ -28,4 +28,5 @@ D/sort////
 D/tmux////
 D/tr////
 D/unifdef////
+D/vmstat////
 D/xlint////

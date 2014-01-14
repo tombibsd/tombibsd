@@ -1,4 +1,4 @@
-/CMakeLists.txt/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
+/CMakeLists.txt/1.1.1.2/Tue Jan 14 16:01:37 2014/-kk/
 /Intrin.h/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 /Makefile/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 /__wmmintrin_aes.h/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
@@ -9,7 +9,7 @@
 /avxintrin.h/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 /bmi2intrin.h/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 /bmiintrin.h/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
-/cpuid.h/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
+/cpuid.h/1.1.1.2/Tue Jan 14 16:01:37 2014/-kk/
 /emmintrin.h/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 /f16cintrin.h/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 /float.h/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/

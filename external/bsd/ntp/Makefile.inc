@@ -7,7 +7,6 @@ USE_FORT?= yes	# network client/server
 
 CWARNFLAGS+=	-Wno-missing-noreturn
 CWARNFLAGS.clang+=	-Wno-unneeded-internal-declaration \
-			-Wno-format-security \
 			-Wno-parentheses -Wno-constant-logical-operand \
 			-Wno-error=unused-const-variable
 

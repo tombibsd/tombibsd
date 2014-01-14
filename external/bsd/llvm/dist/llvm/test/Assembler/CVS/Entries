@@ -82,8 +82,10 @@
 /2010-02-05-FunctionLocalMetadataBecomesNull.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /ConstantExprFold.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /ConstantExprFoldCast.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/ConstantExprFoldSelect.ll/1.1.1.1/Sun Jan  5 16:18:22 2014/-kk/
 /ConstantExprNoFold.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /MultipleReturnValueType.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/addrspacecast-alias.ll/1.1.1.1/Sun Jan  5 16:18:22 2014/-kk/
 /aggregate-constant-values.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /aggregate-return-single-value.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /align-inst-alloca.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
@@ -101,7 +103,7 @@
 /extractvalue-invalid-idx.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /fast-math-flags.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /flags.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
-/functionlocal-metadata.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/functionlocal-metadata.ll/1.1.1.2/Tue Jan 14 16:01:57 2014/-kk/
 /getelementptr.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /getelementptr_struct.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /getelementptr_vec_idx1.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
@@ -116,6 +118,7 @@
 /insertextractvalue.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /insertvalue-invalid-idx.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /invalid-fwdref1.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/invalid-name.ll/1.1.1.1/Sun Jan  5 16:18:22 2014/-kk/
 /invalid_cast.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /invalid_cast2.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /metadata.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/

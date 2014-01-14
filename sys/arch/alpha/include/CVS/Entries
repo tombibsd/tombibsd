@@ -52,7 +52,7 @@
 /pcb.h/1.21/Mon Feb  6 02:14:13 2012/-kk/
 /pci_machdep.h/1.15/Mon Feb  6 02:14:13 2012/-kk/
 /pio.h/1.10/Mon Feb  6 02:14:13 2012/-kk/
-/pmap.h/1.78/Tue Nov 12 02:18:33 2013/-kk/
+/pmap.h/1.79/Tue Jan 14 16:04:51 2014/-kk/
 /pmc.h/1.1/Wed Aug  7 05:14:51 2002/-kk/
 /proc.h/1.21/Mon Feb  6 02:14:13 2012/-kk/
 /profile.h/1.11/Mon Feb  6 02:14:13 2012/-kk/

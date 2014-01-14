@@ -37,14 +37,15 @@
 This section provides an overview of the Lua modules, their
 functions, error returns and other common definitions and concepts.
 .Pp
-The Lua modules provided by NetBSD are:
+The Lua modules provided by
+.Nx
+are:
 .Pp
-.Bl -tag -width XXXX -compact
+.Bl -tag -width syslog -compact
 .It Em gpio
 Access
 .Xr gpio 4
 pins.
-.Pp
 .It Em sqlite
 Access
 .Xr sqlite3 1

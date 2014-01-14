@@ -93,8 +93,8 @@ sockporttoa(
 	LIB_GETBUF(buf);
 	snprintf(buf, LIB_BUFLENGTH,
 		 (IS_IPV6(sock))
-		     ? "[%s]:%hu"
-		     : "%s:%hu",
+		     ? "[%s]:%u"
+		     : "%s:%u",
 		 atext, SRCPORT(sock));
 	errno = saved_errno;
 

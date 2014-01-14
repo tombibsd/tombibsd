@@ -578,9 +578,12 @@ rpcb_set(rpcprog_t program, rpcvers_t version,
 	(void) snprintf(uidbuf, sizeof uidbuf, "%d", geteuid());
 	parms.r_owner = uidbuf;
 
-	CLNT_CALL(client, (rpcproc_t)RPCBPROC_SET, (xdrproc_t) xdr_rpcb,
+	if (CLNT_CALL(client, (rpcproc_t)RPCBPROC_SET, (xdrproc_t) xdr_rpcb,
 	    (char *)(void *)&parms, (xdrproc_t) xdr_bool,
-	    (char *)(void *)&rslt, tottimeout);
+	    (char *)(void *)&rslt, tottimeout) != RPC_SUCCESS) {
+		rpc_createerr.cf_stat = RPC_PMAPFAILURE;
+		clnt_geterr(client, &rpc_createerr.cf_error);
+	}
 
 	CLNT_DESTROY(client);
 	free(parms.r_addr);
@@ -617,9 +620,12 @@ rpcb_unset(rpcprog_t program, rpcvers_t version, const struct netconfig *nconf)
 	(void) snprintf(uidbuf, sizeof uidbuf, "%d", geteuid());
 	parms.r_owner = uidbuf;
 
-	CLNT_CALL(client, (rpcproc_t)RPCBPROC_UNSET, (xdrproc_t) xdr_rpcb,
+	if (CLNT_CALL(client, (rpcproc_t)RPCBPROC_UNSET, (xdrproc_t) xdr_rpcb,
 	    (char *)(void *)&parms, (xdrproc_t) xdr_bool,
-	    (char *)(void *)&rslt, tottimeout);
+	    (char *)(void *)&rslt, tottimeout) != RPC_SUCCESS) {
+		rpc_createerr.cf_stat = RPC_PMAPFAILURE;
+		clnt_geterr(client, &rpc_createerr.cf_error);
+	}
 
 	CLNT_DESTROY(client);
 	return (rslt);
@@ -1218,9 +1224,13 @@ rpcb_taddr2uaddr(struct netconfig *nconf, struct netbuf *taddr)
 		return (NULL);
 	}
 
-	CLNT_CALL(client, (rpcproc_t)RPCBPROC_TADDR2UADDR,
+	if (CLNT_CALL(client, (rpcproc_t)RPCBPROC_TADDR2UADDR,
 	    (xdrproc_t) xdr_netbuf, (char *)(void *)taddr,
-	    (xdrproc_t) xdr_wrapstring, (char *)(void *)&uaddr, tottimeout);
+	    (xdrproc_t) xdr_wrapstring, (char *)(void *)&uaddr, tottimeout) 
+	    != RPC_SUCCESS) {
+		rpc_createerr.cf_stat = RPC_PMAPFAILURE;
+		clnt_geterr(client, &rpc_createerr.cf_error);
+	}
 	CLNT_DESTROY(client);
 	return (uaddr);
 }
@@ -1259,6 +1269,8 @@ rpcb_uaddr2taddr(struct netconfig *nconf, char *uaddr)
 	    (xdrproc_t) xdr_wrapstring, (char *)(void *)&uaddr,
 	    (xdrproc_t) xdr_netbuf, (char *)(void *)taddr,
 	    tottimeout) != RPC_SUCCESS) {
+		rpc_createerr.cf_stat = RPC_PMAPFAILURE;
+		clnt_geterr(client, &rpc_createerr.cf_error);
 		free(taddr);
 		taddr = NULL;
 	}

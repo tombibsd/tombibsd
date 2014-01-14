@@ -3,8 +3,9 @@
 /basic-coff-64.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /basic-coff.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /bss.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
-/bss_section.ll/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
+/bss_section.ll/1.1.1.2/Tue Jan 14 16:02:15 2014/-kk/
 /comm.ll/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
+/comm.s/1.1.1.1/Sun Jan  5 16:17:14 2014/-kk/
 /diff.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /eh-frame.s/1.1.1.1/Fri Dec  6 23:19:10 2013/-kk/
 /feat00.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
@@ -17,6 +18,7 @@
 /module-asm.ll/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /rdata.ll/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /relocation-imgrel.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
+/secidx.s/1.1.1.1/Sun Jan  5 16:17:14 2014/-kk/
 /secrel-variant.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /secrel32.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /section-comdat.s/1.1.1.1/Fri Dec  6 23:19:10 2013/-kk/
@@ -34,7 +36,8 @@
 /symbol-fragment-offset-64.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /symbol-fragment-offset.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /symbol-mangling.ll/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
-/tricky-names.ll/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
-/weak-symbol.ll/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
+/timestamp.s/1.1.1.1/Sun Jan  5 16:17:14 2014/-kk/
+/tricky-names.ll/1.1.1.2/Tue Jan 14 16:02:15 2014/-kk/
+/weak-symbol.ll/1.1.1.2/Tue Jan 14 16:02:15 2014/-kk/
 /weak.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 D

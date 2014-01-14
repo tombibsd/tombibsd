@@ -13,6 +13,7 @@ DIST=${IDIST}/bin/named
 CPPFLAGS+=-I${DIST}/include -I${DIST}/unix/include -DCONFIGARGS=\"defaults\"
 CPPFLAGS+=-DNO_VERSION_DATE -DPRODUCT=\"BIND\" -DSRCID=\"${SRCID}\"
 CPPFLAGS+=-DDESCRIPTION=\"\(Extended\ Support\ Version\)\"
+CPPFLAGS+=-DBUILDER=\"make\"	# I am tempted to say Bob
 
 .include "${IDIST}/srcid"
 

@@ -52,11 +52,14 @@
 /inline_cleanup.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /inline_constprop.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /inline_dce.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
-/inline_invoke.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/inline_invoke.ll/1.1.1.2/Tue Jan 14 16:02:16 2014/-kk/
 /inline_minisize.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /inline_prune.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
-/inline_returns_twice.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/inline_returns_twice.ll/1.1.1.2/Tue Jan 14 16:02:16 2014/-kk/
 /inline_ssp.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/invoke-cleanup.ll/1.1.1.1/Sun Jan  5 16:16:52 2014/-kk/
+/invoke-combine-clauses.ll/1.1.1.1/Sun Jan  5 16:16:53 2014/-kk/
+/invoke-cost.ll/1.1.1.1/Sun Jan  5 16:16:53 2014/-kk/
 /invoke_test-1.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /invoke_test-2.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /invoke_test-3.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/

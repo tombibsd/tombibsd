@@ -56,7 +56,8 @@ __KERNEL_RCSID(0, "$NetBSD$");
  * Dump the machine specific header information at the start of a core dump.
  */
 int
-cpu_coredump(struct lwp *l, void *iocookie, struct core *core)
+cpu_coredump(struct lwp *l, struct coredump_iostate *iocookie,
+    struct core *core)
 {
 	struct md_coredump md_core;
 	struct coreseg cseg;
@@ -76,7 +77,7 @@ cpu_coredump(struct lwp *l, void *iocookie, struct core *core)
 		return error;
 
 	/* Save floating point registers. */
-	error = process_read_fpregs(l, &md_core.md_fpreg);
+	error = process_read_fpregs(l, &md_core.md_fpreg, NULL);
 	if (error)
 		return error;
 

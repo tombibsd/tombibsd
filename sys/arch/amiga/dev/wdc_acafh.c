@@ -81,7 +81,6 @@ struct wdc_acafh_softc {
 	struct wdc_acafh_slot	sc_slots[WDC_ACAFH_SLOTS];
 
 	struct isr		sc_isr;
-	volatile u_char		*sc_intreg;
 
 	struct bus_space_tag	cmd_iot;
 
@@ -119,7 +118,6 @@ wdc_acafh_attach(device_t parent, device_t self, void *aux)
 	sc->aca_sc = device_private(parent);
 
 	gayle_init();
-	sc->sc_intreg = &gayle.intreq;
 
 	/* XXX: take addr from attach args? */
 	sc->cmd_iot.base = (u_long) ztwomap(GAYLE_IDE_BASE + 2);
@@ -143,7 +141,7 @@ wdc_acafh_attach(device_t parent, device_t self, void *aux)
 	sc->sc_isr.isr_ipl = 2;
 	add_isr (&sc->sc_isr);
 
-	gayle.intena |= GAYLE_INT_IDE;
+	gayle_intr_enable_set(GAYLE_INT_IDE);
 
 }
 
@@ -205,9 +203,13 @@ wdc_acafh_map_channel(struct wdc_acafh_softc *sc, int chnum)
 int
 wdc_acafh_intr(void *arg)
 {
-	struct wdc_acafh_softc *sc = (struct wdc_acafh_softc *)arg;
-	int ret = 0;
-	u_char intreq = *sc->sc_intreg;
+	struct wdc_acafh_softc *sc;
+	uint8_t intreq;
+	int ret;
+
+	sc = (struct wdc_acafh_softc *) arg;
+	intreq = gayle_intr_status();
+	ret = 0;
 
 	if (intreq & GAYLE_INT_IDE) {
 		if (acafh_cf_intr_status(sc->aca_sc, 1) == 1) {
@@ -216,7 +218,7 @@ wdc_acafh_intr(void *arg)
 		if (acafh_cf_intr_status(sc->aca_sc, 0) == 1) {
 			ret = wdcintr(&sc->sc_slots[0].channel);
 		}
-		gayle.intreq = 0x7c | (intreq & 0x03);
+		gayle_intr_ack(0x7C | (intreq & GAYLE_INT_IDEACK));
 	}
 
 	return ret;

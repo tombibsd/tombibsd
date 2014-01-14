@@ -6,9 +6,9 @@ LLVM_TOPLEVEL_MK=
 .include <bsd.own.mk>
 
 SVN_ROOT=		http://llvm.org/svn/llvm-project
-SVN_BRANCH=		branches/release_34
+SVN_BRANCH=		trunk
 
-COMMON_REVISION=	196603
+COMMON_REVISION=	198450
 CLANG_REVISION=		${COMMON_REVISION}
 COMPILER_RT_REVISION=	${COMMON_REVISION}
 LLD_REVISION=		${COMMON_REVISION}
@@ -18,8 +18,8 @@ LLVM_REVISION=		${COMMON_REVISION}
 MCLINKER_REVISION=	deeb2a77b4165827316f88e0a7ba4ba6b743a080
 MCLINKER_ROOT=		https://code.google.com/p/mclinker/
 
-LLVM_VERSION=		3.4
-CLANG_VERSION=		3.4
+LLVM_VERSION=		3.5
+CLANG_VERSION=		3.5
 
 COMPILER_RT_SRCDIR:=	${.PARSEDIR}/dist/compiler-rt
 CLANG_SRCDIR:=	${.PARSEDIR}/dist/clang
@@ -42,7 +42,7 @@ MCLINKER_INCLUDE_CONFIG= ${LLVM_TOPLEVEL}/config/mclinker
 LLVM_INCLUDE_OBJDIR!=	cd ${NETBSDSRCDIR}/tools/llvm-include && ${PRINTOBJDIR}
 LLVM_TOOLCONF_OBJDIR!=	cd ${NETBSDSRCDIR}/tools/llvm && ${PRINTOBJDIR}
 HOST_CPPFLAGS+=	${CPPFLAGS}
-HOST_CXXFLAGS+=	-O2 -g -fno-rtti -fno-exceptions
+HOST_CXXFLAGS+=	-O2 -fno-rtti -fno-exceptions
 .if ${MKLLD:Uno} == "yes"
 HOST_CPPFLAGS+=	-std=c++11
 .endif
@@ -65,12 +65,14 @@ LDFLAGS+=	-Wl,--gc-sections
 CPPFLAGS+=	-I${LLVM_INCLUDE_OBJDIR} -I${LLVM_INCLUDE_CONFIG} \
 		-I${CLANG_INCLUDE_CONFIG} -I${MCLINKER_INCLUDE_CONFIG}
 
+LLVM_PLATFORM=${MACHINE_GNU_ARCH}--netbsd
+
 LLVM_CONFIGURE_ARGS=	\
 	--enable-targets=x86,powerpc,sparc,aarch64,arm,mips \
 	--with-c-include-dirs=/usr/include/clang-${CLANG_VERSION}:/usr/include \
 	--disable-timestamps --prefix=/usr --sysconfdir=/etc/llvm \
 	--with-clang-srcdir=${CLANG_SRCDIR} \
-	--host=${MACHINE_GNU_PLATFORM} \
+	--host=${LLVM_PLATFORM} \
 	llvm_cv_gnu_make_command=${MAKE}
 
 .for tool in circo dot dotty fdp neato twopi xdot

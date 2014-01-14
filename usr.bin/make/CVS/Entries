@@ -3,7 +3,7 @@
 /arch.c/1.63/Tue Jun 12 19:21:50 2012/-kk/
 /buf.c/1.25/Tue Apr 24 20:26:58 2012/-kk/
 /buf.h/1.17/Tue Apr 24 20:26:58 2012/-kk/
-/compat.c/1.93/Thu Oct 24 10:28:59 2013/-kk/
+/compat.c/1.94/Tue Jan 14 16:05:16 2014/-kk/
 /cond.c/1.67/Sat Nov  3 13:59:27 2012/-kk/
 /config.h/1.21/Sat Mar 31 00:12:24 2012/-kk/
 /dir.c/1.67/Thu Oct 24 10:28:59 2013/-kk/

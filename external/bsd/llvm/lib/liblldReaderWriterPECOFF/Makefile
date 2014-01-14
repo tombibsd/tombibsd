@@ -6,9 +6,13 @@ LIB=	lldReaderWriterPECOFF
 
 .PATH: ${LLD_SRCDIR}/lib/ReaderWriter/PECOFF
 
-SRCS+=	PECOFFLinkingContext.cpp \
+SRCS+=	EdataPass.cpp \
+	IdataPass.cpp \
+	PECOFFLinkingContext.cpp \
+	Pass.cpp \
 	ReaderCOFF.cpp \
 	ReaderImportHeader.cpp \
+	WriterImportLibrary.cpp \
 	WriterPECOFF.cpp
 
 .if defined(HOSTLIB)

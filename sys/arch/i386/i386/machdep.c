@@ -842,6 +842,7 @@ haltsys:
 		cnpollc(1);	/* for proper keyboard command handling */
 		if (cngetc() == 0) {
 			/* no console attached, so just hlt */
+			printf("No keyboard - cannot reboot after all.\n");
 			for(;;) {
 				x86_hlt();
 			}

@@ -13,7 +13,7 @@
 /clock.c/1.103/Fri Jul  1 18:51:51 2011/-kk/
 /compat_13_machdep.c/1.12/Sat Nov 21 04:16:51 2009/-kk/
 /compat_16_machdep.c/1.4/Sat Nov 21 04:16:51 2009/-kk/
-/core_machdep.c/1.5/Fri Jan 14 02:06:31 2011/-kk/
+/core_machdep.c/1.6/Tue Jan 14 16:05:01 2014/-kk/
 /cpu.c/1.240/Tue Nov 26 03:29:49 2013/-kk/
 /cpu_in_cksum.c/1.1/Mon Sep 20 10:21:10 2010/-kk/
 /cpuunit.c/1.15/Sun Jul 17 23:18:23 2011/-kk/
@@ -50,7 +50,7 @@
 /pci_fixup.h/1.1/Thu Oct 24 10:28:57 2013/-kk/
 /pci_machdep.c/1.18/Thu Oct 24 10:28:57 2013/-kk/
 /pmap.c/1.357/Wed Dec 25 07:37:33 2013/-kk/
-/process_machdep.c/1.17/Sat Nov 21 04:16:51 2009/-kk/
+/process_machdep.c/1.18/Tue Jan 14 16:05:01 2014/-kk/
 /procfs_machdep.c/1.4/Sun Dec 11 12:19:08 2005/-kk/
 /promlib.c/1.43/Sun Jul 17 20:54:47 2011/-kk/
 /sigcode_state.s/1.1/Fri Jun  8 04:49:46 2001/-kk/

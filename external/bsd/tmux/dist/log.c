@@ -39,7 +39,7 @@ FILE   *log_file;
 /* Debug level. */
 int	log_level;
 
-void		 log_vwrite(int, const char *, va_list);
+void		 log_vwrite(int, const char *, va_list) __printflike(2, 0);
 __dead void	 log_vfatal(const char *, va_list);
 
 /* Open logging to tty. */
@@ -105,6 +105,10 @@ log_vwrite(int pri, const char *msg, va_list ap)
 }
 
 /* Log a warning with error string. */
+#if __GNUC_PREREQ__(4, 6) || defined(__clang__)
+#pragma GCC diagnostic push
+#endif
+#pragma GCC diagnostic ignored "-Wformat-nonliteral"
 void printflike1
 log_warn(const char *msg, ...)
 {
@@ -118,6 +122,9 @@ log_warn(const char *msg, ...)
 	free(fmt);
 	va_end(ap);
 }
+#if __GNUC_PREREQ__(4, 6) || defined(__clang__)
+#pragma GCC diagnostic push
+#endif
 
 /* Log a warning. */
 void printflike1

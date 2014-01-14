@@ -114,11 +114,12 @@ struct sigctx {
 extern sigset_t contsigmask, sigcantmask;
 
 struct vnode;
+struct coredump_iostate;
 
 /*
  * Machine-independent functions:
  */
-int	coredump_netbsd(struct lwp *, void *);
+int	coredump_netbsd(struct lwp *, struct coredump_iostate *);
 void	execsigs(struct proc *);
 int	issignal(struct lwp *);
 void	pgsignal(struct pgrp *, int, int);

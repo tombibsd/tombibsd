@@ -1,0 +1,10 @@
+#	$NetBSD$
+
+ioconf hifn
+
+include "conf/files"
+include "dev/pci/files.pci"
+
+pseudo-root pci*
+
+hifn* at pci? dev ? function ?

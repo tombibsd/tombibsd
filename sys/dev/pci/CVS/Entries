@@ -19,7 +19,7 @@
 /agpreg.h/1.20/Sat Nov 29 23:48:12 2008/-kk/
 /agpvar.h/1.18/Wed May  6 10:34:32 2009/-kk/
 /ahc_pci.c/1.68/Thu Nov 26 15:17:08 2009/-kk/
-/ahcisata_pci.c/1.31/Sun Oct 21 23:09:53 2012/-kk/
+/ahcisata_pci.c/1.34/Tue Jan 14 16:05:04 2014/-kk/
 /ahd_pci.c/1.34/Thu Oct 24 10:28:58 2013/-kk/
 /alipm.c/1.10/Sun Mar 18 12:47:01 2012/-kk/
 /amdpm.c/1.37/Thu Oct 24 10:28:58 2013/-kk/
@@ -122,9 +122,9 @@
 /gffb.c/1.7/Sun Oct 27 08:20:01 2013/-kk/
 /gffbreg.h/1.3/Sun Oct 27 08:20:01 2013/-kk/
 /gtp.c/1.19/Sat Oct 27 17:18:32 2012/-kk/
-/hifn7751.c/1.52/Thu Oct 24 10:28:58 2013/-kk/
+/hifn7751.c/1.53/Tue Jan 14 16:05:04 2014/-kk/
 /hifn7751reg.h/1.8/Sun Dec 11 12:22:49 2005/-kk/
-/hifn7751var.h/1.10/Thu Oct 24 10:28:58 2013/-kk/
+/hifn7751var.h/1.11/Tue Jan 14 16:05:04 2014/-kk/
 /hptide.c/1.34/Thu Oct 24 10:28:58 2013/-kk/
 /i82365_pci.c/1.33/Sat Oct 27 17:18:32 2012/-kk/
 /i82365_pcivar.h/1.7/Thu Sep 17 18:14:41 2009/-kk/
@@ -230,7 +230,7 @@
 /if_vtereg.h/1.2/Thu Apr 28 17:32:48 2011/-kk/
 /if_vtevar.h/1.3/Thu Feb  2 19:43:05 2012/-kk/
 /if_wi_pci.c/1.54/Mon Jan 30 19:41:21 2012/-kk/
-/if_wm.c/1.265/Wed Jan  1 02:45:32 2014/-kk/
+/if_wm.c/1.266/Tue Jan 14 16:05:04 2014/-kk/
 /if_wmreg.h/1.55/Wed Jan  1 02:45:32 2014/-kk/
 /if_wmvar.h/1.17/Wed Jan  1 02:45:32 2014/-kk/
 /if_wpi.c/1.56/Thu Oct 24 10:28:58 2013/-kk/
@@ -316,9 +316,9 @@
 /pcibusprint.c/1.3/Sun Dec 11 12:22:50 2005/-kk/
 /pciconf.c/1.36/Sat Oct 20 06:09:07 2012/-kk/
 /pciconf.h/1.12/Sat Sep  8 05:02:41 2012/-kk/
-/pcidevs.h/1.1168/Wed Jan  1 02:45:32 2014/-kk/
-/pcidevs/1.1175/Wed Jan  1 02:45:32 2014/-kk/
-/pcidevs_data.h/1.1167/Wed Jan  1 02:45:32 2014/-kk/
+/pcidevs.h/1.1173/Tue Jan 14 16:05:04 2014/-kk/
+/pcidevs/1.1180/Tue Jan 14 16:05:04 2014/-kk/
+/pcidevs_data.h/1.1172/Tue Jan 14 16:05:05 2014/-kk/
 /pciide.c/1.219/Sat Nov  6 00:29:09 2010/-kk/
 /pciide_acard_reg.h/1.8/Wed May 14 13:29:29 2008/-kk/
 /pciide_acer_reg.h/1.12/Mon Oct 19 18:41:15 2009/-kk/
@@ -410,7 +410,7 @@
 /tweio.h/1.5/Sun Dec 11 12:22:51 2005/-kk/
 /twereg.h/1.15/Mon Sep  8 23:36:54 2008/-kk/
 /twevar.h/1.30/Sat Oct 27 17:18:35 2012/-kk/
-/ubsec.c/1.35/Wed Jan  1 02:45:32 2014/-kk/
+/ubsec.c/1.36/Tue Jan 14 16:05:05 2014/-kk/
 /ubsecreg.h/1.3/Tue Nov 26 03:29:56 2013/-kk/
 /ubsecvar.h/1.7/Tue Nov 26 03:29:56 2013/-kk/
 /uhci_pci.c/1.56/Thu Oct 24 10:28:58 2013/-kk/

@@ -63,10 +63,12 @@ SUBDIR+= \
 SUBDIR+= \
 	libLLVMPowerPCAsmParser \
 	libLLVMPowerPCAsmPrinter \
+	libLLVMPowerPCDisassembler \
 	libLLVMPowerPCMCTargetDesc \
 	libLLVMPowerPCTargetInfo
 
 SUBDIR+= \
+	libLLVMSparcAsmPrinter \
 	libLLVMSparcMCTargetDesc \
 	libLLVMSparcTargetInfo
 
@@ -135,6 +137,7 @@ SUBDIR+= \
 	liblldReaderWriter \
 	liblldReaderWriterELF \
 	liblldReaderWriterELFHexagon \
+	liblldReaderWriterELFMips \
 	liblldReaderWriterELFPPC \
 	liblldReaderWriterELFX86 \
 	liblldReaderWriterELFX86_64 \

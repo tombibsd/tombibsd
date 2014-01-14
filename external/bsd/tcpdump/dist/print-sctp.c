@@ -68,7 +68,7 @@ __RCSID("$NetBSD$");
 #define CHAN_MP 6705
 #define CHAN_LP 6706
 
-struct tok ForCES_channels[] = {
+static const struct tok ForCES_channels[] = {
 	{ CHAN_HP, "ForCES HP" },
 	{ CHAN_MP, "ForCES MP" },
 	{ CHAN_LP, "ForCES LP" },
@@ -348,11 +348,8 @@ void sctp_print(const u_char *bp,        /* beginning of sctp packet */
 	    break;
 	  }
 	case SCTP_HEARTBEAT_REQUEST :
-	  {
-	    printf("[HB REQ] ");
-
-	    break;
-	  }
+	  printf("[HB REQ] ");
+	  break;
 	case SCTP_HEARTBEAT_ACK :
 	  printf("[HB ACK] ");
 	  break;

@@ -55,7 +55,7 @@ __RCSID("$NetBSD$");
 #define PIMV2_TYPE_CANDIDATE_RP  8
 #define PIMV2_TYPE_PRUNE_REFRESH 9
 
-static struct tok pimv2_type_values[] = {
+static const struct tok pimv2_type_values[] = {
     { PIMV2_TYPE_HELLO,         "Hello" },
     { PIMV2_TYPE_REGISTER,      "Register" },
     { PIMV2_TYPE_REGISTER_STOP, "Register Stop" },
@@ -79,7 +79,7 @@ static struct tok pimv2_type_values[] = {
 #define PIMV2_HELLO_OPTION_ADDRESS_LIST        24
 #define PIMV2_HELLO_OPTION_ADDRESS_LIST_OLD 65001
 
-static struct tok pimv2_hello_option_values[] = {
+static const struct tok pimv2_hello_option_values[] = {
     { PIMV2_HELLO_OPTION_HOLDTIME,         "Hold Time" },
     { PIMV2_HELLO_OPTION_LANPRUNEDELAY,    "LAN Prune Delay" },
     { PIMV2_HELLO_OPTION_DR_PRIORITY_OLD,  "DR Priority (Old)" },
@@ -96,7 +96,7 @@ static struct tok pimv2_hello_option_values[] = {
 #define PIMV2_REGISTER_FLAG_BORDER 0x80000000
 #define PIMV2_REGISTER_FLAG_NULL   0x40000000
 
-static struct tok pimv2_register_flag_values[] = {
+static const struct tok pimv2_register_flag_values[] = {
     { PIMV2_REGISTER_FLAG_BORDER, "Border" },
     { PIMV2_REGISTER_FLAG_NULL, "Null" },
     { 0, NULL}

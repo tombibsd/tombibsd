@@ -71,6 +71,7 @@ void     debug3(const char *, ...) __attribute__((format(printf, 1, 2)));
 void	 set_log_handler(log_handler_fn *, void *);
 void	 do_log2(LogLevel, const char *, ...)
     __attribute__((format(printf, 2, 3)));
-void	 do_log(LogLevel, const char *, va_list);
+void	 do_log(LogLevel, const char *, va_list)
+    __attribute__((format(printf, 2, 0)));
 void	 cleanup_exit(int) __attribute__((noreturn));
 #endif

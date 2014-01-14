@@ -7,6 +7,7 @@
 /gcc-examples.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /illegal-parallel-loop-uniform-write.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /lit.local.cfg/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/metadata-enable.ll/1.1.1.1/Sun Jan  5 16:16:58 2014/-kk/
 /min-trip-count-switch.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /no-vector.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /parallel-loops-after-reg2mem.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/

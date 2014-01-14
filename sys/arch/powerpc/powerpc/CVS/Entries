@@ -4,7 +4,7 @@
 /compat_13_machdep.c/1.21/Tue Dec 13 11:03:52 2011/-kk/
 /compat_16_machdep.c/1.19/Mon Jun 20 05:50:39 2011/-kk/
 /copystr.c/1.6/Sun Dec 11 12:18:46 2005/-kk/
-/core_machdep.c/1.8/Mon Jun 13 21:32:43 2011/-kk/
+/core_machdep.c/1.9/Tue Jan 14 16:04:57 2014/-kk/
 /db_disasm.c/1.28/Thu Oct 24 10:28:57 2013/-kk/
 /db_interface.c/1.52/Thu Oct 24 10:28:57 2013/-kk/
 /db_memrw.c/1.9/Sun Dec 11 12:18:46 2005/-kk/
@@ -34,7 +34,7 @@
 /pio_subr.S/1.14/Fri Jul  1 18:59:19 2011/-kk/
 /pmap_subr.c/1.27/Wed Feb  1 09:54:03 2012/-kk/
 /powerpc_machdep.c/1.66/Tue Nov 12 02:18:41 2013/-kk/
-/process_machdep.c/1.35/Tue Sep 27 01:02:36 2011/-kk/
+/process_machdep.c/1.36/Tue Jan 14 16:04:57 2014/-kk/
 /procfs_machdep.c/1.7/Wed Oct 17 19:56:48 2007/-kk/
 /rtas.c/1.13/Sun Jul 17 20:54:46 2011/-kk/
 /setfault.S/1.9/Fri Jun 17 05:07:17 2011/-kk/

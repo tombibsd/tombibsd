@@ -1014,22 +1014,14 @@ process_dofpregs(struct lwp *curl /*tracer*/,
 	if ((size_t)kl > uio->uio_resid)
 		kl = uio->uio_resid;
 
-#ifdef __HAVE_PROCESS_XFPREGS
-	error = process_read_xfpregs(l, &r, &kl);
-#else
-	error = process_read_fpregs(l, &r);
-#endif
+	error = process_read_fpregs(l, &r, &kl);
 	if (error == 0)
 		error = uiomove(kv, kl, uio);
 	if (error == 0 && uio->uio_rw == UIO_WRITE) {
 		if (l->l_stat != LSSTOP)
 			error = EBUSY;
 		else
-#ifdef __HAVE_PROCESS_XFPREGS
-			error = process_write_xfpregs(l, &r, kl);
-#else
-			error = process_write_fpregs(l, &r);
-#endif
+			error = process_write_fpregs(l, &r, kl);
 	}
 	uio->uio_offset = 0;
 	return (error);

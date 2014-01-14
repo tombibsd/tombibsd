@@ -13,6 +13,7 @@ LLD_LIBS+= \
 	lldDriver \
 	lldReaderWriterELF \
 	lldReaderWriterELFHexagon \
+	lldReaderWriterELFMips \
 	lldReaderWriterELFPPC \
 	lldReaderWriterELFX86 \
 	lldReaderWriterELFX86_64 \

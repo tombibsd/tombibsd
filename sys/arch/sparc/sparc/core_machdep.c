@@ -76,7 +76,8 @@ __KERNEL_RCSID(0, "$NetBSD$");
  * cpu_coredump is called to write a core dump header.
  */
 int
-cpu_coredump(struct lwp *l, void *iocookie, struct core *chdr)
+cpu_coredump(struct lwp *l, struct coredump_iostate *iocookie,
+    struct core *chdr)
 {
 	int error;
 	struct md_coredump md_core;

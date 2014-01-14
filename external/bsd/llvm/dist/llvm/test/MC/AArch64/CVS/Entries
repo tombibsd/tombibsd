@@ -75,6 +75,7 @@
 /neon-simd-misc.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /neon-simd-post-ldst-multi-elem.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /neon-simd-shift.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
+/neon-sxtl.s/1.1.1.1/Sun Jan  5 16:17:12 2014/-kk/
 /neon-tbl.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /noneon-diagnostics.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /tls-relocs.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/

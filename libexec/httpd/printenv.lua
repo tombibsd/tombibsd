@@ -1,3 +1,5 @@
+-- $NetBSD$
+
 -- this small Lua script demonstrates the use of Lua in (bozo)httpd
 -- it will simply output the "environment"
 

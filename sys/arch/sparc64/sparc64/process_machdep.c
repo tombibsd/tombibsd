@@ -199,7 +199,7 @@ process_set_pc(struct lwp *l, void *addr)
 }
 
 int
-process_read_fpregs(struct lwp *l, struct fpreg *regs)
+process_read_fpregs(struct lwp *l, struct fpreg *regs, size_t *sz)
 {
 	extern const struct fpstate64 initfpstate;
 	const struct fpstate64	*statep = &initfpstate;
@@ -225,7 +225,7 @@ process_read_fpregs(struct lwp *l, struct fpreg *regs)
 }
 
 int
-process_write_fpregs(struct lwp *l, const struct fpreg *regs)
+process_write_fpregs(struct lwp *l, const struct fpreg *regs, size_t sz)
 {
 	struct fpstate64	*statep;
 	const struct fpreg32	*regp = (const struct fpreg32 *)regs;

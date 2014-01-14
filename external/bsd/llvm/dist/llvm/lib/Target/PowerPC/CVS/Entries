@@ -1,9 +1,9 @@
-/CMakeLists.txt/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
-/LLVMBuild.txt/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
-/Makefile/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
+/CMakeLists.txt/1.1.1.2/Tue Jan 14 16:01:56 2014/-kk/
+/LLVMBuild.txt/1.1.1.2/Tue Jan 14 16:01:56 2014/-kk/
+/Makefile/1.1.1.2/Tue Jan 14 16:01:56 2014/-kk/
 /PPC.h/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
-/PPC.td/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
-/PPCAsmPrinter.cpp/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
+/PPC.td/1.1.1.2/Tue Jan 14 16:01:56 2014/-kk/
+/PPCAsmPrinter.cpp/1.1.1.2/Tue Jan 14 16:01:56 2014/-kk/
 /PPCBranchSelector.cpp/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
 /PPCCTRLoops.cpp/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
 /PPCCallingConv.td/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
@@ -11,21 +11,21 @@
 /PPCFastISel.cpp/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
 /PPCFrameLowering.cpp/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
 /PPCFrameLowering.h/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
-/PPCHazardRecognizers.cpp/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
-/PPCHazardRecognizers.h/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
-/PPCISelDAGToDAG.cpp/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
-/PPCISelLowering.cpp/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
-/PPCISelLowering.h/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
-/PPCInstr64Bit.td/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
-/PPCInstrAltivec.td/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
+/PPCHazardRecognizers.cpp/1.1.1.2/Tue Jan 14 16:01:56 2014/-kk/
+/PPCHazardRecognizers.h/1.1.1.2/Tue Jan 14 16:01:56 2014/-kk/
+/PPCISelDAGToDAG.cpp/1.1.1.2/Tue Jan 14 16:01:56 2014/-kk/
+/PPCISelLowering.cpp/1.1.1.2/Tue Jan 14 16:01:56 2014/-kk/
+/PPCISelLowering.h/1.1.1.2/Tue Jan 14 16:01:56 2014/-kk/
+/PPCInstr64Bit.td/1.1.1.2/Tue Jan 14 16:01:56 2014/-kk/
+/PPCInstrAltivec.td/1.1.1.2/Tue Jan 14 16:01:56 2014/-kk/
 /PPCInstrBuilder.h/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
-/PPCInstrFormats.td/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
-/PPCInstrInfo.cpp/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
-/PPCInstrInfo.h/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
-/PPCInstrInfo.td/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
+/PPCInstrFormats.td/1.1.1.2/Tue Jan 14 16:01:56 2014/-kk/
+/PPCInstrInfo.cpp/1.1.1.2/Tue Jan 14 16:01:56 2014/-kk/
+/PPCInstrInfo.h/1.1.1.2/Tue Jan 14 16:01:56 2014/-kk/
+/PPCInstrInfo.td/1.1.1.2/Tue Jan 14 16:01:56 2014/-kk/
 /PPCJITInfo.cpp/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
 /PPCJITInfo.h/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
-/PPCMCInstLower.cpp/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
+/PPCMCInstLower.cpp/1.1.1.2/Tue Jan 14 16:01:56 2014/-kk/
 /PPCMachineFunctionInfo.cpp/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
 /PPCMachineFunctionInfo.h/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
 /PPCPerfectShuffle.h/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
@@ -33,20 +33,21 @@
 /PPCRegisterInfo.h/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
 /PPCRegisterInfo.td/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
 /PPCRelocations.h/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
-/PPCSchedule.td/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
-/PPCSchedule440.td/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
-/PPCScheduleA2.td/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
-/PPCScheduleE500mc.td/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
-/PPCScheduleE5500.td/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
-/PPCScheduleG3.td/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
-/PPCScheduleG4.td/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
-/PPCScheduleG4Plus.td/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
-/PPCScheduleG5.td/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
+/PPCSchedule.td/1.1.1.2/Tue Jan 14 16:01:56 2014/-kk/
+/PPCSchedule440.td/1.1.1.2/Tue Jan 14 16:01:56 2014/-kk/
+/PPCScheduleA2.td/1.1.1.2/Tue Jan 14 16:01:56 2014/-kk/
+/PPCScheduleE500mc.td/1.1.1.2/Tue Jan 14 16:01:56 2014/-kk/
+/PPCScheduleE5500.td/1.1.1.2/Tue Jan 14 16:01:56 2014/-kk/
+/PPCScheduleG3.td/1.1.1.2/Tue Jan 14 16:01:56 2014/-kk/
+/PPCScheduleG4.td/1.1.1.2/Tue Jan 14 16:01:56 2014/-kk/
+/PPCScheduleG4Plus.td/1.1.1.2/Tue Jan 14 16:01:56 2014/-kk/
+/PPCScheduleG5.td/1.1.1.2/Tue Jan 14 16:01:56 2014/-kk/
+/PPCScheduleP7.td/1.1.1.1/Sun Jan  5 16:14:32 2014/-kk/
 /PPCSelectionDAGInfo.cpp/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
 /PPCSelectionDAGInfo.h/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
-/PPCSubtarget.cpp/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
-/PPCSubtarget.h/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
-/PPCTargetMachine.cpp/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
+/PPCSubtarget.cpp/1.1.1.2/Tue Jan 14 16:01:56 2014/-kk/
+/PPCSubtarget.h/1.1.1.2/Tue Jan 14 16:01:56 2014/-kk/
+/PPCTargetMachine.cpp/1.1.1.2/Tue Jan 14 16:01:56 2014/-kk/
 /PPCTargetMachine.h/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
 /PPCTargetObjectFile.cpp/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
 /PPCTargetObjectFile.h/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
@@ -55,6 +56,7 @@
 /README.txt/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
 /README_ALTIVEC.txt/1.1.1.1/Thu Nov 28 14:18:20 2013/-kk/
 D/AsmParser////
+D/Disassembler////
 D/InstPrinter////
 D/MCTargetDesc////
 D/TargetInfo////

@@ -142,7 +142,6 @@ typedef	volatile unsigned int	__cpu_simple_lock_t;
 #define	__HAVE_FAST_SOFTINTS
 #define	__HAVE_AST_PERPROC
 #define	__HAVE_SYSCALL_INTERN
-#define	__HAVE_PROCESS_XFPREGS
 #define	__HAVE_CPU_LWP_SETPRIVATE
 #define	__HAVE_CPU_DATA_FIRST
 #define	__HAVE_MD_CPU_OFFLINE

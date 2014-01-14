@@ -17,7 +17,7 @@
 /elf-reloc-no-sym.test/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /extract.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /lit.local.cfg/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
-/nm-archive.test/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
+/nm-archive.test/1.1.1.2/Tue Jan 14 16:02:15 2014/-kk/
 /nm-error.test/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /nm-shared-object.test/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /nm-trivial-object.test/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/

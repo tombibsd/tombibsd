@@ -523,7 +523,7 @@ sysvbfs_remove(void *arg)
 	if (vp->v_type == VDIR)
 		return EPERM;
 
-	if ((err = bfs_file_delete(bfs, ap->a_cnp->cn_nameptr)) != 0)
+	if ((err = bfs_file_delete(bfs, ap->a_cnp->cn_nameptr, true)) != 0)
 		DPRINTF("%s: bfs_file_delete failed.\n", __func__);
 
 	VN_KNOTE(ap->a_vp, NOTE_DELETE);
@@ -694,8 +694,13 @@ sysvbfs_reclaim(void *v)
 	} */ *ap = v;
 	struct vnode *vp = ap->a_vp;
 	struct sysvbfs_node *bnode = vp->v_data;
+	struct bfs *bfs = bnode->bmp->bfs;
 
 	DPRINTF("%s:\n", __func__);
+	if (bnode->removed) {
+		if (bfs_inode_delete(bfs, bnode->inode->number) != 0)
+			DPRINTF("%s: delete inode failed\n", __func__);
+	}
 	mutex_enter(&mntvnode_lock);
 	LIST_REMOVE(bnode, link);
 	mutex_exit(&mntvnode_lock);

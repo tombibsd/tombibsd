@@ -2710,12 +2710,12 @@ bitmask_print(const bitmap *o)
 			else
 			    	rv = asprintf(&s, "%zu", i);
 			if (rv == -1)
-				err(1, "");
+				err(1, "bitmask_print 1");
 			free(os);
 			os = s;
 		}
 	if (s == NULL && (s = strdup("")) == NULL)
-		err(1, "");
+		err(1, "bitmask_print 2");
 	return s;
 }
 
@@ -2724,7 +2724,7 @@ bitmask_scan(const void *v, bitmap *o)
 {
 	char *s = strdup(v);
 	if (s == NULL)
-		err(1, "");
+		err(1, "bitmask_scan");
 
 	__BITMAP_ZERO(o);
 	for (s = strtok(s, ","); s; s = strtok(NULL, ",")) {

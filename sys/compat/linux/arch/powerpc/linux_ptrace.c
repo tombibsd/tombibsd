@@ -237,7 +237,7 @@ linux_sys_ptrace_arch(struct lwp *l, const struct linux_sys_ptrace_args *uap,
 		break;
 
 	case LINUX_PTRACE_GETFPREGS:
-		error = process_read_fpregs(lt, fpregs);
+		error = process_read_fpregs(lt, fpregs, NULL);
 		mutex_exit(t->p_lock);
 		if (error) {
 			break;
@@ -256,7 +256,7 @@ linux_sys_ptrace_arch(struct lwp *l, const struct linux_sys_ptrace_args *uap,
 		memset(fpregs, '\0', sizeof(struct fpreg));
 		memcpy(fpregs, linux_fpreg,
 		    min(32 * sizeof(double), sizeof(struct fpreg)));
-		error = process_write_fpregs(lt, fpregs);
+		error = process_write_fpregs(lt, fpregs, sizeof fpregs);
 		mutex_exit(t->p_lock);
 		break;
 

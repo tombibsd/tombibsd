@@ -30,7 +30,8 @@
 #define FETCH struct fetch_connect
 struct fetch_connect;
 
-int fetch_printf(struct fetch_connect *, const char *fmt, ...);
+int fetch_printf(struct fetch_connect *, const char *fmt, ...)
+    __printflike(2, 3);
 int fetch_fileno(struct fetch_connect *);
 int fetch_error(struct fetch_connect *);
 int fetch_flush(struct fetch_connect *);

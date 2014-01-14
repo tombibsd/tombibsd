@@ -162,6 +162,8 @@ static uint32_t net_mask(struct in_addr);
 static struct timespec __res_conf_time;
 static const struct timespec ts = { 0, 0 };
 
+const char *__res_conf_name = _PATH_RESCONF;
+
 /*
  * Resolver state default settings.
  */
@@ -346,7 +348,7 @@ __res_vinit(res_state statp, int preinit) {
 	 line[sizeof(name) - 1] == '\t'))
 
 	nserv = 0;
-	if ((fp = fopen(_PATH_RESCONF, "re")) != NULL) {
+	if ((fp = fopen(__res_conf_name, "re")) != NULL) {
 	    struct stat st;
 	    struct kevent kc;
 

@@ -93,6 +93,12 @@ renamerace(const atf_tc_t *tc, const char *mp)
 	pthread_t pt1[NWRK], pt2[NWRK];
 	int i;
 
+	/*
+	 * Sysvbfs supports only 8 inodes so this test would exhaust
+	 * the inode table and creating files would fail with ENOSPC.
+	 */
+	if (FSTYPE_SYSVBFS(tc))
+		atf_tc_skip("filesystem has not enough inodes");
 	if (FSTYPE_RUMPFS(tc))
 		atf_tc_skip("rename not supported by file system");
 

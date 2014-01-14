@@ -525,7 +525,7 @@ v_correct(SCR *sp, VICMD *vp, int isdelta)
 		m = vp->m_start;
 		vp->m_start = vp->m_stop;
 		vp->m_stop = m;
-	} else
+	}
 
 	/*
 	 * BACKWARD:

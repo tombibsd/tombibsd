@@ -17,7 +17,8 @@ SRCS=		atoll.c basename.c cdbr.c cdbw.c dirname.c \
 		setenv.c setgroupent.c \
 		setpassent.c setprogname.c sha1.c sha1hl.c sha2.c \
 		sha256hl.c sha384hl.c sha512hl.c snprintb.c snprintf.c \
-		stat_flags.c strlcat.c strlcpy.c strmode.c strndup.c \
+		stat_flags.c strlcat.c strlcpy.c strmode.c \
+		strndup.c strnlen.c \
 		strsep.c strsuftoll.c strtoll.c \
 		unvis.c vis.c err.c errx.c verr.c verrx.c \
 		vwarn.c vwarnx.c warn.c warnx.c fts.c glob.c efun.c

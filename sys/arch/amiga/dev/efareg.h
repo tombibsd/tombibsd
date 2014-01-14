@@ -31,7 +31,6 @@
 
 #ifndef _AMIGA_EFAREG_H_
 
-#define GAYLE_IDE_BASE		0xDA0000
 #define FATA1_BASE		0xDA2000
 
 /* Offsets. Stride of 4 is used, so multiply any offset by 4. */

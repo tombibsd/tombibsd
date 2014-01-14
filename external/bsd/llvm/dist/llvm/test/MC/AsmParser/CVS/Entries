@@ -12,6 +12,8 @@
 /directive_darwin_section.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /directive_desc.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /directive_elf_size.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
+/directive_end-2.s/1.1.1.1/Sun Jan  5 16:17:14 2014/-kk/
+/directive_end.s/1.1.1.1/Sun Jan  5 16:17:14 2014/-kk/
 /directive_file-errors.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /directive_file.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /directive_fill.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
@@ -22,6 +24,8 @@
 /directive_loc.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /directive_lsym.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /directive_org.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
+/directive_rept-diagnostics.s/1.1.1.1/Sun Jan  5 16:17:14 2014/-kk/
+/directive_rept.s/1.1.1.1/Sun Jan  5 16:17:14 2014/-kk/
 /directive_seh.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /directive_set.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /directive_space.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/

@@ -32,6 +32,8 @@
 
 #ifndef NO_LUA_SUPPORT
 
+#include <sys/param.h>
+
 #include <lua.h>
 #include <lauxlib.h>
 #include <lualib.h>
@@ -180,17 +182,17 @@ void
 bozo_add_lua_map(bozohttpd_t *httpd, const char *prefix, const char *script)
 {
 	lua_state_map_t *map;
-	char *cwd, *path;
 
 	map = bozomalloc(httpd, sizeof(lua_state_map_t));
 	map->prefix = bozostrdup(httpd, prefix);
 	if (*script == '/')
 		map->script = bozostrdup(httpd, script);
 	else {
-		cwd = getwd(NULL);
+		char cwd[MAXPATHLEN], *path;
+
+		getcwd(cwd, sizeof(cwd) - 1);
 		asprintf(&path, "%s/%s", cwd, script);
 		map->script = path;
-		free(cwd);
 	}
 	map->L = luaL_newstate();
 	if (map->L == NULL)

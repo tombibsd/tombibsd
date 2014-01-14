@@ -46,7 +46,7 @@ __RCSID("$NetBSD$");
 #include "ether.h"
 #include "sll.h"
 
-const struct tok sll_pkttype_values[] = {
+static const struct tok sll_pkttype_values[] = {
     { LINUX_SLL_HOST, "In" },
     { LINUX_SLL_BROADCAST, "B" },
     { LINUX_SLL_MULTICAST, "M" },

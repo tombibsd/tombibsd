@@ -282,6 +282,7 @@ tmpfs_fhtovp(struct mount *mp, struct fid *fhp, vnode_t **vpp)
 	tmpfs_mount_t *tmp = VFS_TO_TMPFS(mp);
 	tmpfs_node_t *node;
 	tmpfs_fid_t tfh;
+	int error;
 
 	if (fhp->fid_len != sizeof(tmpfs_fid_t)) {
 		return EINVAL;
@@ -290,19 +291,25 @@ tmpfs_fhtovp(struct mount *mp, struct fid *fhp, vnode_t **vpp)
 
 	mutex_enter(&tmp->tm_lock);
 	LIST_FOREACH(node, &tmp->tm_nodes, tn_entries) {
-		if (node->tn_id != tfh.tf_id) {
-			continue;
+		if (node->tn_id == tfh.tf_id) {
+			mutex_enter(&node->tn_vlock);
+			break;
 		}
-		if (TMPFS_NODE_GEN(node) != tfh.tf_gen) {
-			continue;
-		}
-		mutex_enter(&node->tn_vlock);
-		break;
 	}
 	mutex_exit(&tmp->tm_lock);
 
+	if (node == NULL)
+		return ESTALE;
 	/* Will release the tn_vlock. */
-	return node ? tmpfs_vnode_get(mp, node, vpp) : ESTALE;
+	if ((error = tmpfs_vnode_get(mp, node, vpp)) != 0)
+		return error;
+	if (TMPFS_NODE_GEN(node) != tfh.tf_gen) {
+		vput(*vpp);
+		*vpp = NULL;
+		return ESTALE;
+	}
+
+	return 0;
 }
 
 static int

@@ -119,6 +119,7 @@
 /multiple-return-values-cross-block-with-invoke.ll/1.1.1.1/Thu Nov 28 14:18:09 2013/-kk/
 /negintconst.ll/1.1.1.1/Thu Nov 28 14:18:09 2013/-kk/
 /nested-select.ll/1.1.1.1/Thu Nov 28 14:18:10 2013/-kk/
+/no-target.ll/1.1.1.1/Sun Jan  5 16:17:33 2014/-kk/
 /overflow.ll/1.1.1.1/Thu Nov 28 14:18:10 2013/-kk/
 /pr12507.ll/1.1.1.1/Thu Nov 28 14:18:10 2013/-kk/
 /pr2625.ll/1.1.1.1/Thu Nov 28 14:18:10 2013/-kk/

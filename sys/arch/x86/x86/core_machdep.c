@@ -110,10 +110,12 @@ struct md_core {
 };
 
 int
-cpu_coredump(struct lwp *l, void *iocookie, struct core *chdr)
+cpu_coredump(struct lwp *l, struct coredump_iostate *iocookie,
+    struct core *chdr)
 {
 	struct md_core md_core;
 	struct coreseg cseg;
+	size_t fp_size;
 	int error;
 
 	if (iocookie == NULL) {
@@ -131,7 +133,8 @@ cpu_coredump(struct lwp *l, void *iocookie, struct core *chdr)
 		return error;
 
 	/* Save floating point registers. */
-	error = process_read_fpregs(l, &md_core.freg);
+	fp_size = sizeof md_core.freg;
+	error = process_read_fpregs(l, &md_core.freg, &fp_size);
 	if (error)
 		return error;
 

@@ -10,7 +10,7 @@
 /2009-12-17-pre-regalloc-taildup.ll/1.1.1.1/Thu Nov 28 14:18:10 2013/-kk/
 /2010-06-18-SibCallCrash.ll/1.1.1.1/Thu Nov 28 14:18:10 2013/-kk/
 /2010-07-01-FuncAlign.ll/1.1.1.1/Thu Nov 28 14:18:10 2013/-kk/
-/2010-07-15-debugOrdering.ll/1.1.1.1/Thu Nov 28 14:18:10 2013/-kk/
+/2010-07-15-debugOrdering.ll/1.1.1.2/Tue Jan 14 16:02:02 2014/-kk/
 /2011-05-11-DAGLegalizer.ll/1.1.1.1/Thu Nov 28 14:18:10 2013/-kk/
 /2011-06-16-NoGPRs.ll/1.1.1.1/Thu Nov 28 14:18:10 2013/-kk/
 /2011-EpilogueBug.ll/1.1.1.1/Thu Nov 28 14:18:10 2013/-kk/
@@ -43,7 +43,8 @@
 /stack-frame.ll/1.1.1.1/Thu Nov 28 14:18:10 2013/-kk/
 /thumb-imm.ll/1.1.1.1/Thu Nov 28 14:18:10 2013/-kk/
 /trap.ll/1.1.1.1/Thu Nov 28 14:18:10 2013/-kk/
+/triple.ll/1.1.1.1/Sun Jan  5 16:17:51 2014/-kk/
 /tst_teq.ll/1.1.1.1/Thu Nov 28 14:18:10 2013/-kk/
-/unord.ll/1.1.1.1/Thu Nov 28 14:18:10 2013/-kk/
+/unord.ll/1.1.1.2/Tue Jan 14 16:02:02 2014/-kk/
 /vargs.ll/1.1.1.1/Thu Nov 28 14:18:10 2013/-kk/
 D

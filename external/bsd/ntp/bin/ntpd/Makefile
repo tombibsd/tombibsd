@@ -73,7 +73,7 @@ SRCS=	cmd_args.c				\
 LDADD+=		-L${LIBPARSE} -lparse -L${LIBISC} -liscntp -lm -lutil
 DPADD+=		${LIBPARSE}/libparse.a ${LIBISC}/libiscntp.a ${LIBOPTS}/libopts.a  ${LIBNTP}/libntp.a ${LIBM} ${LIBUTIL}
 
-CWARNFLAGS.clang+=	-Wno-strncat-size
+COPTS.ntp_control.c+=	${${ACTIVE_CC} == "gcc":? -Wno-error=format-nonliteral :}
 
 .include "${.CURDIR}/../Makefile.inc"
 
@@ -82,8 +82,6 @@ DIST=${IDIST}/ntpd
 CPPFLAGS+=-I${IDIST}/include -I${IDIST}/sntp/libopts -I${IDIST}/ntpd
 
 .PATH: ${DIST}
-
-COPTS.ntp_control.c+= -Wno-format-nonliteral
 
 .include <bsd.prog.mk>
 

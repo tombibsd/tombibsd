@@ -1978,11 +1978,13 @@
 ./usr/tests/lib/libc/net/getaddrinfo/data/unsup_fam.exp		tests-lib-tests	atf
 ./usr/tests/lib/libc/net/getaddrinfo/h_gai	tests-lib-tests		atf
 ./usr/tests/lib/libc/net/getaddrinfo/t_getaddrinfo tests-lib-tests	atf
+./usr/tests/lib/libc/net/h_dns_server		tests-lib-tests	atf
 ./usr/tests/lib/libc/net/h_hostent		tests-lib-tests	atf
 ./usr/tests/lib/libc/net/h_nsd_recurse		tests-lib-tests	atf
 ./usr/tests/lib/libc/net/h_protoent		tests-lib-tests		atf
 ./usr/tests/lib/libc/net/h_servent		tests-lib-tests		atf
-./usr/tests/lib/libc/net/hosts		tests-lib-tests	atf
+./usr/tests/lib/libc/net/hosts			tests-lib-tests	atf
+./usr/tests/lib/libc/net/resolv.conf		tests-lib-tests	atf
 ./usr/tests/lib/libc/net/t_ether_aton		tests-lib-tests		atf
 ./usr/tests/lib/libc/net/t_getprotoent		tests-lib-tests		atf
 ./usr/tests/lib/libc/net/t_hostent		tests-lib-tests		atf
@@ -3064,6 +3066,9 @@
 ./usr/tests/usr.bin/unifdef/d_basic.in		tests-usr.bin-tests	atf
 ./usr/tests/usr.bin/unifdef/d_basic.out		tests-usr.bin-tests	atf
 ./usr/tests/usr.bin/unifdef/t_basic		tests-usr.bin-tests	atf
+./usr/tests/usr.bin/vmstat			tests-usr.bin-tests
+./usr/tests/usr.bin/vmstat/Atffile		tests-usr.bin-tests	atf
+./usr/tests/usr.bin/vmstat/t_vmstat		tests-usr.bin-tests	atf
 ./usr/tests/usr.bin/xlint			tests-usr.bin-tests
 ./usr/tests/usr.bin/xlint/Atffile		tests-usr.bin-tests	atf
 ./usr/tests/usr.bin/xlint/Kyuafile		tests-usr.bin-tests	atf,kyua

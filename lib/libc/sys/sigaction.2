@@ -318,14 +318,12 @@ points to memory that is not a valid part of the process
 address space.
 .It Bq Er EINVAL
 .Fa sig
-is not a valid signal number.
-.It Bq Er EINVAL
-An attempt is made to ignore or supply a handler for
+is not a valid signal number;
+or an attempt is made to ignore or supply a handler for
 .Dv SIGKILL
 or
-.Dv SIGSTOP .
-.It Bq Er EINVAL
-The
+.Dv SIGSTOP ;
+or the
 .Em sa_flags
 word contains bits other than
 .Dv SA_NOCLDSTOP ,

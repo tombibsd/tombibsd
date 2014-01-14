@@ -26,6 +26,10 @@
  * SUCH DAMAGE.
  */
 
+#if HAVE_NBTOOL_CONFIG_H
+#include "nbtool_config.h"
+#endif
+
 #include <sys/cdefs.h>
 #if defined(LIBC_SCCS) && !defined(lint)
 __RCSID("$NetBSD$");
@@ -38,6 +42,7 @@ __RCSID("$NetBSD$");
 #include <lib/libkern/libkern.h>
 #endif
 
+#if !HAVE_STRNLEN
 size_t
 strnlen(const char *s, size_t maxlen)
 {
@@ -49,3 +54,4 @@ strnlen(const char *s, size_t maxlen)
 	}
 	return (len);
 }
+#endif /* !HAVE_STRNLEN */

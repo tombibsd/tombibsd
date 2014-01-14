@@ -12,6 +12,9 @@
 __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <sys/types.h>
+#include <sys/errno.h>
+#include <sys/module.h>
+
 #include <crypto/cast128/cast128.h>
 #include <crypto/cast128/cast128sb.h>
 
@@ -246,3 +249,23 @@ void cast128_setkey(cast128_key* key, const u_int8_t* rawkey, int keybytes)
 }
 
 /* Made in Canada */
+
+#if defined(_KERNEL)
+
+MODULE(MODULE_CLASS_MISC, cast128, NULL);
+
+static int
+cast128_modcmd(modcmd_t cmd, void *opaque)
+{
+
+	switch (cmd) {
+	case MODULE_CMD_INIT:
+		return 0;
+	case MODULE_CMD_FINI:
+		return 0;
+	default:
+		return ENOTTY;
+	}
+}
+
+#endif /* defined(KERNEL) */

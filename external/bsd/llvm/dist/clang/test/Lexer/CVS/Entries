@@ -1,6 +1,6 @@
 /11-27-2007-FloatLiterals.c/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /badstring_in_if0.c/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
-/bcpl-escaped-newline.c/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
+/bcpl-escaped-newline.c/1.1.1.2/Tue Jan 14 16:01:49 2014/-kk/
 /block_cmt_end.c/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /builtin_redef.c/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /c90.c/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
@@ -41,7 +41,7 @@
 /has_feature_thread_sanitizer.cpp/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /has_feature_type_traits.cpp/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /header.cpp/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
-/hexfloat.cpp/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
+/hexfloat.cpp/1.1.1.2/Tue Jan 14 16:01:49 2014/-kk/
 /long-long.cpp/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /ms-extensions.c/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /ms-extensions.cpp/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/

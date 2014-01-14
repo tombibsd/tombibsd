@@ -4,7 +4,7 @@
 /Lint_labs.c/1.2/Wed Jun 14 06:49:07 2000/-kk/
 /Lint_ldiv.c/1.2/Wed Jun 14 06:49:07 2000/-kk/
 /Lint_llabs.c/1.2/Tue Mar  7 20:02:00 2000/-kk/
-/Makefile.inc/1.80/Tue Dec 17 04:13:15 2013/-kk/
+/Makefile.inc/1.81/Tue Jan 14 16:04:41 2014/-kk/
 /_env.c/1.8/Tue Oct 29 12:11:37 2013/-kk/
 /_rand48.c/1.7/Sun Jun 12 05:21:27 2005/-kk/
 /a64l.3/1.10/Thu May  6 18:55:34 2010/-kk/
@@ -73,8 +73,8 @@
 /posix_memalign.3/1.1/Mon Nov 19 14:48:43 2007/-kk/
 /posix_openpt.3/1.6/Thu May  5 07:36:44 2011/-kk/
 /posix_openpt.c/1.2/Mon Apr 28 20:23:00 2008/-kk/
-/ptsname.3/1.6/Fri Oct 19 10:44:34 2012/-kk/
-/pty.c/1.2/Mon Apr 28 20:23:00 2008/-kk/
+/ptsname.3/1.9/Tue Jan 14 16:04:42 2014/-kk/
+/pty.c/1.4/Tue Jan 14 16:04:42 2014/-kk/
 /putenv.c/1.20/Thu Oct 24 10:28:53 2013/-kk/
 /qabs.3/1.9/Mon Aug  4 21:29:27 2008/-kk/
 /qabs.c/1.7/Mon Jun 25 22:32:45 2012/-kk/

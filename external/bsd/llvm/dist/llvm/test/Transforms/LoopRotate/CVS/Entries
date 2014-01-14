@@ -1,10 +1,11 @@
 /2009-01-25-SingleEntryPhi.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /PhiRename-1.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/PhiSelfReference-1.ll/1.1.1.1/Sun Jan  5 16:16:43 2014/-kk/
 /PhiSelfRefernce-1.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /alloca.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /basic.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /crash.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
-/dbgvalue.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/dbgvalue.ll/1.1.1.2/Tue Jan 14 16:02:17 2014/-kk/
 /indirectbr.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /multiple-exits.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /phi-duplicate.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/

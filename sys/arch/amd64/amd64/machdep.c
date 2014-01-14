@@ -728,7 +728,13 @@ haltsys:
 		printf("The operating system has halted.\n");
 		printf("Please press any key to reboot.\n\n");
 		cnpollc(1);	/* for proper keyboard command handling */
-		cngetc();
+		if (cngetc() == 0) {
+			/* no console attached, so just hlt */
+			printf("No keyboard - cannot reboot after all.\n");
+			for(;;) {
+				x86_hlt();
+			}
+		}
 		cnpollc(0);
 	}
 

@@ -47,6 +47,8 @@ __RCSID("$NetBSD$");
 
 #include "hostent.h"
 
+extern const char *__res_conf_name;
+
 static void
 phostent(const struct hostent *h)
 {
@@ -123,7 +125,7 @@ main(int argc, char *argv[])
 	info.buflen = sizeof(buf);
 	info.he = &e;
 
-	while ((c = getopt(argc, argv, "46af:t:")) != -1) {
+	while ((c = getopt(argc, argv, "46af:r:t:")) != -1) {
 		switch (c) {
 		case '4':
 			af = AF_INET;
@@ -134,11 +136,14 @@ main(int argc, char *argv[])
 		case 'a':
 			byaddr++;
 			break;
-		case 't':
-			type = optarg;
-			break;
 		case 'f':
 			_hf_sethostsfile(optarg);
+			break;
+		case 'r':
+			__res_conf_name = optarg;
+			break;
+		case 't':
+			type = optarg;
 			break;
 		default:
 			usage();

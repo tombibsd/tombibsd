@@ -641,7 +641,7 @@ netbsd32_process_write_regs(struct lwp *l, const struct reg32 *regs)
 #endif
 
 int
-netbsd32_process_read_fpregs(struct lwp *l, struct fpreg32 *regs)
+netbsd32_process_read_fpregs(struct lwp *l, struct fpreg32 *regs, size_t *sz)
 {
 	extern const struct fpstate64 initfpstate;
 	const struct fpstate64	*statep = &initfpstate;
@@ -679,7 +679,8 @@ netbsd32_process_write_fpregs(struct lwp *l, const struct fpreg32 *regs)
  * 32-bit version of cpu_coredump.
  */
 int
-cpu_coredump32(struct lwp *l, void *iocookie, struct core32 *chdr)
+cpu_coredump32(struct lwp *l, struct coredump_iostate *iocookie,
+    struct core32 *chdr)
 {
 	int i, error;
 	struct md_coredump32 md_core;

@@ -146,12 +146,10 @@ struct pmap {
 };
 
 /*
- * Compute the sizeof of a pmap structure.  Subtract one because one
- * ASN info structure is already included in the pmap structure itself.
+ * Compute the sizeof of a pmap structure.
  */
 #define	PMAP_SIZEOF(x)							\
-	(ALIGN(sizeof(struct pmap) +					\
-	       (sizeof(struct pmap_asn_info) * ((x) - 1))))
+	(ALIGN(offsetof(struct pmap, pm_asni[(x)])))
 
 #define	PMAP_ASN_RESERVED	0	/* reserved for Lev1map users */
 

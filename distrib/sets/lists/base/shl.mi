@@ -15,7 +15,7 @@
 #
 ./lib/libc.so					base-sys-shlib		dynamicroot
 ./lib/libc.so.12				base-sys-shlib		dynamicroot
-./lib/libc.so.12.187				base-sys-shlib		dynamicroot
+./lib/libc.so.12.188				base-sys-shlib		dynamicroot
 ./lib/libcrypt.so				base-sys-shlib		dynamicroot
 ./lib/libcrypt.so.1				base-sys-shlib		dynamicroot
 ./lib/libcrypt.so.1.0				base-sys-shlib		dynamicroot
@@ -197,7 +197,7 @@
 ./usr/lib/libc++.so.1.0				base-sys-shlib		libcxx
 ./usr/lib/libc.so				base-sys-shlib
 ./usr/lib/libc.so.12				base-sys-shlib
-./usr/lib/libc.so.12.187			base-sys-shlib
+./usr/lib/libc.so.12.188			base-sys-shlib
 ./usr/lib/libcdk.so				base-obsolete		obsolete
 ./usr/lib/libcom_err.so				base-krb5-shlib		kerberos
 ./usr/lib/libcom_err.so.7			base-krb5-shlib		kerberos
@@ -215,7 +215,7 @@
 ./usr/lib/libcrypto_rc5.so			base-crypto-shlib	crypto,crypto_rc5
 ./usr/lib/libcrypto_rc5.so.7			base-crypto-shlib	crypto,crypto_rc5
 ./usr/lib/libcrypto_rc5.so.7.0			base-crypto-shlib	crypto,crypto_rc5
-./usr/lib/libcrypto_rc5_pic.a			base-crypto-shlib	crypto,crypto_rc5
+./usr/lib/libcrypto_rc5_pic.a			base-crypto-shlib	crypto,crypto_rc5,picinstall
 ./usr/lib/libctf.so				base-sys-shlib		dtrace
 ./usr/lib/libctf.so.2				base-sys-shlib		dtrace
 ./usr/lib/libctf.so.2.0				base-sys-shlib		dtrace
@@ -308,7 +308,7 @@
 ./usr/lib/libipsec.so.3.0			base-net-shlib
 ./usr/lib/libisc.so				base-bind-shlib
 ./usr/lib/libisc.so.7				base-bind-shlib
-./usr/lib/libisc.so.7.0				base-bind-shlib
+./usr/lib/libisc.so.7.1				base-bind-shlib
 ./usr/lib/libisccc.so				base-bind-shlib
 ./usr/lib/libisccc.so.7				base-bind-shlib
 ./usr/lib/libisccc.so.7.0			base-bind-shlib
@@ -784,7 +784,7 @@
 ./usr/lib/libzpool.so				base-zfs-shlib		dynamicroot,zfs
 ./usr/lib/libzpool.so.0				base-zfs-shlib		dynamicroot,zfs
 ./usr/lib/libzpool.so.0.0			base-zfs-shlib		zfs,dynamicroot
-./usr/lib/libzpool_pic.a			base-zfs-shlib		zfs,dynamicroot
+./usr/lib/libzpool_pic.a			base-zfs-shlib		zfs,dynamicroot,picinstall
 ./usr/lib/lua/5.1/gpio.so                    	base-sys-shlib
 ./usr/lib/lua/5.1/sqlite.so                    	base-sys-shlib
 ./usr/lib/lua/5.1/syslog.so                    	base-sys-shlib

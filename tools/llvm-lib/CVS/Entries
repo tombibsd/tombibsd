@@ -39,11 +39,13 @@ D/libLLVMOption////
 D/libLLVMPowerPCAsmParser////
 D/libLLVMPowerPCAsmPrinter////
 D/libLLVMPowerPCCodeGen////
+D/libLLVMPowerPCDisassembler////
 D/libLLVMPowerPCMCTargetDesc////
 D/libLLVMPowerPCTargetInfo////
 D/libLLVMRuntimeDyld////
 D/libLLVMScalarOpts////
 D/libLLVMSelectionDAG////
+D/libLLVMSparcAsmPrinter////
 D/libLLVMSparcCodeGen////
 D/libLLVMSparcMCTargetDesc////
 D/libLLVMSparcTargetInfo////
@@ -101,6 +103,7 @@ D/liblldPasses////
 D/liblldReaderWriter////
 D/liblldReaderWriterELF////
 D/liblldReaderWriterELFHexagon////
+D/liblldReaderWriterELFMips////
 D/liblldReaderWriterELFPPC////
 D/liblldReaderWriterELFX86////
 D/liblldReaderWriterELFX86_64////

@@ -32,7 +32,6 @@ pmksa_cache.c \
 preauth.c \
 random.c \
 scan.c \
-sha1.c \
 wpa.c \
 wpa_common.c \
 wpa_debug.c \
@@ -98,8 +97,8 @@ eap_tls_common.c \
 eap_ttls.c \
 ms_funcs.c \
 mschapv2.c \
-sha1-pbkdf2.c \
 sha1-tlsprf.c \
+sha1-prf.c \
 tls_openssl.c
 
 SRCS+=aes-ctr.c \

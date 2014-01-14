@@ -27,7 +27,7 @@
 /bzero.9/1.7/Thu Aug  7 10:31:30 2003/-kk/
 /callback.9/1.5/Thu Dec  2 12:54:13 2010/-kk/
 /callout.9/1.26/Thu Oct 24 10:28:54 2013/-kk/
-/cardbus.9/1.17/Mon May 30 01:48:40 2011/-kk/
+/cardbus.9/1.18/Tue Jan 14 16:04:50 2014/-kk/
 /cnmagic.9/1.14/Tue Jun  8 19:44:28 2010/-kk/
 /condvar.9/1.14/Thu Dec  2 12:54:13 2010/-kk/
 /config.9/1.29/Thu Dec  2 12:54:13 2010/-kk/
@@ -51,7 +51,7 @@
 /csf.9/1.7/Thu Dec  2 12:54:13 2010/-kk/
 /ctod.9/1.4/Fri Apr  8 07:55:04 2011/-kk/
 /curproc.9/1.5/Thu Jul  1 15:12:31 2010/-kk/
-/ddc.9/1.6/Tue Oct 29 12:11:42 2013/-kk/
+/ddc.9/1.7/Tue Jan 14 16:04:50 2014/-kk/
 /delay.9/1.7/Wed Jul 20 05:20:54 2011/-kk/
 /deviter.9/1.4/Tue Oct 29 12:11:42 2013/-kk/
 /disk.9/1.36/Thu Dec  2 12:54:13 2010/-kk/
@@ -62,7 +62,7 @@
 /dopowerhooks.9/1.6/Mon Apr  5 19:31:29 2010/-kk/
 /doshutdownhooks.9/1.12/Mon Apr  5 19:32:55 2010/-kk/
 /driver.9/1.27/Sat Jul 23 16:04:35 2011/-kk/
-/edid.9/1.8/Tue Oct 29 12:11:42 2013/-kk/
+/edid.9/1.9/Tue Jan 14 16:04:50 2014/-kk/
 /errno.9/1.5/Mon Mar 22 18:58:33 2010/-kk/
 /ethersubr.9/1.25/Thu Oct 24 10:28:54 2013/-kk/
 /evcnt.9/1.21/Fri Jan 14 18:34:44 2011/-kk/

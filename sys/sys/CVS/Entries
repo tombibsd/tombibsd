@@ -62,11 +62,11 @@
 /evcnt.h/1.8/Sat Jan 29 18:21:22 2011/-kk/
 /event.h/1.23/Sun Jun 26 16:43:12 2011/-kk/
 /eventvar.h/1.8/Fri Mar 21 21:53:35 2008/-kk/
-/exec.h/1.142/Mon Nov 18 05:31:47 2013/-kk/
+/exec.h/1.144/Tue Jan 14 16:05:13 2014/-kk/
 /exec_aout.h/1.40/Sat Mar 17 21:54:12 2012/-kk/
 /exec_coff.h/1.7/Sun Dec 11 12:25:20 2005/-kk/
 /exec_ecoff.h/1.20/Thu Dec 10 14:13:54 2009/-kk/
-/exec_elf.h/1.132/Tue Nov 12 02:18:53 2013/-kk/
+/exec_elf.h/1.137/Tue Jan 14 16:05:13 2014/-kk/
 /exec_script.h/1.12/Sun Dec 11 12:25:20 2005/-kk/
 /extattr.h/1.9/Tue Mar 13 18:41:02 2012/-kk/
 /extent.h/1.19/Fri Jan 27 18:53:10 2012/-kk/
@@ -156,7 +156,7 @@
 /protosw.h/1.44/Wed Aug  6 15:01:24 2008/-kk/
 /pserialize.h/1.1/Sat Jul 30 17:01:04 2011/-kk/
 /pset.h/1.4/Thu Oct 24 10:28:58 2013/-kk/
-/ptrace.h/1.44/Fri Sep  2 20:10:19 2011/-kk/
+/ptrace.h/1.45/Tue Jan 14 16:05:14 2014/-kk/
 /ptree.h/1.8/Sat Oct  6 22:15:09 2012/-kk/
 /pty.h/1.8/Mon Apr 28 20:24:11 2008/-kk/
 /queue.h/1.65/Wed Jan  1 02:45:36 2014/-kk/
@@ -187,7 +187,7 @@
 /shm.h/1.48/Mon Jan 19 19:39:41 2009/-kk/
 /siginfo.h/1.25/Tue Dec 17 04:05:17 2013/-kk/
 /signal.h/1.67/Mon Jan 10 13:56:44 2011/-kk/
-/signalvar.h/1.84/Tue Dec 17 04:05:17 2013/-kk/
+/signalvar.h/1.85/Tue Jan 14 16:05:14 2014/-kk/
 /sigtypes.h/1.10/Sun Feb 19 21:07:00 2012/-kk/
 /simplelock.h/1.8/Mon Apr 28 20:24:11 2008/-kk/
 /sleepq.h/1.22/Sun Feb 19 21:07:00 2012/-kk/

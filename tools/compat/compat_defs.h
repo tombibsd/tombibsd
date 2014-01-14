@@ -415,6 +415,9 @@ int pwcache_groupdb(int (*)(int), void (*)(void),
 #if !HAVE_DECL_STRNDUP
 char		*strndup(const char *, size_t);
 #endif
+#if !HAVE_DECL_STRNLEN
+size_t		strnlen(const char *, size_t);
+#endif
 #if !HAVE_DECL_LCHFLAGS
 int		lchflags(const char *, unsigned long);
 #endif

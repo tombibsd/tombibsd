@@ -25,7 +25,7 @@
 /ListSlices.td/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /LoLoL.td/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /MultiClass.td/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
-/MultiClassDefName.td/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/MultiClassDefName.td/1.1.1.2/Tue Jan 14 16:02:16 2014/-kk/
 /MultiClassInherit.td/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /MultiPat.td/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /NestedForeach.td/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
@@ -43,6 +43,7 @@
 /TwoLevelName.td/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /UnsetBitInit.td/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /UnterminatedComment.td/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/ValidIdentifiers.td/1.1.1.1/Sun Jan  5 16:18:22 2014/-kk/
 /cast.td/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /defmclass.td/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /eq.td/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/

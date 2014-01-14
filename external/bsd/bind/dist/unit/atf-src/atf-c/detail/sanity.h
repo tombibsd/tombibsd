@@ -58,14 +58,17 @@ void atf_sanity_post(const char *, int, const char *);
 
 #define INV(x) \
     do { \
+	(void)(x); \
     } while (/*CONSTCOND*/0)
 
 #define PRE(x) \
     do { \
+	(void)(x); \
     } while (/*CONSTCOND*/0)
 
 #define POST(x) \
     do { \
+	(void)(x); \
     } while (/*CONSTCOND*/0)
 
 #endif /* !defined(NDEBUG) */

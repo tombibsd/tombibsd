@@ -5,7 +5,8 @@
 ./usr/include/clang-3.0/altivec.h		comp-obsolete		obsolete
 ./usr/include/clang-3.2/altivec.h		comp-obsolete		obsolete
 ./usr/include/clang-3.3/altivec.h		comp-obsolete		obsolete
-./usr/include/clang-3.4/altivec.h		comp-c-include		llvm
+./usr/include/clang-3.4/altivec.h		comp-obsolete		obsolete
+./usr/include/clang-3.5/altivec.h		comp-c-include		llvm
 ./usr/include/gcc-4.1/altivec.h			comp-c-include		gcccmds,gcc=4
 ./usr/include/gcc-4.1/altivec.h			comp-obsolete		gcc=45,obsolete
 ./usr/include/gcc-4.1/altivec.h			comp-obsolete		gcc=48,obsolete

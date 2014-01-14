@@ -51,7 +51,8 @@ __KERNEL_RCSID(0, "$NetBSD$");
  * Dump the machine specific header information at the start of a core dump.
  */
 int
-cpu_coredump(struct lwp *l, void *iocookie, struct core *chdr)
+cpu_coredump(struct lwp *l, struct coredump_iostate *iocookie,
+    struct core *chdr)
 {
 	int error;
 	struct md_coredump cpustate;

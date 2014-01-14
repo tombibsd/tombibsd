@@ -343,7 +343,8 @@ dwc2_softintr(void *v)
 	mutex_spin_enter(&hsotg->lock);
 	while ((dxfer = TAILQ_FIRST(&sc->sc_complete)) != NULL) {
 
-    		KASSERT(!callout_pending(&dxfer->xfer.timeout_handle));
+    		KASSERTMSG(!callout_pending(&dxfer->xfer.timeout_handle), 
+		    "xfer %p pipe %p\n", dxfer, dxfer->xfer.pipe);
 
 		/*
 		 * dwc2_abort_xfer will remove this transfer from the
@@ -1298,7 +1299,6 @@ dwc2_device_start(usbd_xfer_handle xfer)
 	memset(dwc2_urb, 0, sizeof(*dwc2_urb) +
 	    sizeof(dwc2_urb->iso_descs[0]) * DWC2_MAXISOCPACKETS);
 
-	dwc2_urb->priv = xfer;
 	dwc2_hcd_urb_set_pipeinfo(hsotg, dwc2_urb, addr, epnum, xfertype, dir,
 				  mps);
 
@@ -1313,14 +1313,15 @@ dwc2_device_start(usbd_xfer_handle xfer)
 	}
 	flags |= URB_GIVEBACK_ASAP;
 
-	/* XXXNH this shouldn't be required */
-	if (xfertype == UE_CONTROL && len == 0) {
-		dwc2_urb->usbdma = &dpipe->req_dma;
-	} else {
-		dwc2_urb->usbdma = &xfer->dmabuf;
-	}
-	dwc2_urb->buf = KERNADDR(dwc2_urb->usbdma, 0);
-	dwc2_urb->dma = DMAADDR(dwc2_urb->usbdma, 0);
+	/*
+	 * control transfers with no data phase don't touch usbdma, but
+	 * everything else does.
+	 */
+	if (!(xfertype == UE_CONTROL && len == 0)) {
+    		dwc2_urb->usbdma = &xfer->dmabuf;
+		dwc2_urb->buf = KERNADDR(dwc2_urb->usbdma, 0);
+		dwc2_urb->dma = DMAADDR(dwc2_urb->usbdma, 0);
+ 	}
 	dwc2_urb->length = len;
  	dwc2_urb->flags = flags;
 	dwc2_urb->status = -EINPROGRESS;
@@ -1379,24 +1380,27 @@ dwc2_device_start(usbd_xfer_handle xfer)
 	}
 
 	/* might need to check cpu_intr_p */
-	retval = dwc2_hcd_urb_enqueue(hsotg, dwc2_urb, &dpipe->priv, 0);
-	if (retval)
-		goto fail;
+	mutex_spin_enter(&hsotg->lock);
 
 	if (xfer->timeout && !sc->sc_bus.use_polling) {
 		callout_reset(&xfer->timeout_handle, mstohz(xfer->timeout),
 		    dwc2_timeout, xfer);
 	}
 
+	dwc2_urb->priv = xfer;
+	retval = dwc2_hcd_urb_enqueue(hsotg, dwc2_urb, &dpipe->priv, 0);
+	if (retval)
+		goto fail;
+
 	if (alloc_bandwidth) {
-		mutex_spin_enter(&hsotg->lock);
 		dwc2_allocate_bus_bandwidth(hsotg,
 				dwc2_hcd_get_ep_bandwidth(hsotg, dpipe),
 				xfer);
-		mutex_spin_exit(&hsotg->lock);
 	}
 
 fail:
+	mutex_spin_exit(&hsotg->lock);
+
 // 	mutex_exit(&sc->sc_lock);
 
 	switch (retval) {
@@ -1699,6 +1703,8 @@ void dwc2_host_complete(struct dwc2_hsotg *hsotg, struct dwc2_qtd *qtd,
 	xfertype = UE_GET_XFERTYPE(ed->bmAttributes);
 
 	xfer->actlen = dwc2_hcd_urb_get_actual_length(qtd->urb);
+
+	DPRINTFN(3, "xfer=%p actlen=%d\n", xfer, xfer->actlen);
 
 	if (xfertype == UE_ISOCHRONOUS && dbg_perio()) {
 		int i;

@@ -177,7 +177,7 @@ strcat_body()
 	prog="$(atf_get_srcdir)/h_strcat"
 
 	h_pass "$prog 0123456"
-	h_fail "$prog 012345678"
+	h_fail "$prog 0123456789ABCDEF"
 }
 
 atf_test_case strncpy

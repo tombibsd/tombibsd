@@ -1,3 +1,5 @@
+/avx-512.txt/1.1.1.1/Sun Jan  5 16:17:15 2014/-kk/
+/fp-stack.txt/1.1.1.1/Sun Jan  5 16:17:15 2014/-kk/
 /hex-immediates.txt/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /intel-syntax-32.txt/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /intel-syntax.txt/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
@@ -6,7 +8,7 @@
 /lit.local.cfg/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /marked-up.txt/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /prefixes.txt/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
-/simple-tests.txt/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
+/simple-tests.txt/1.1.1.2/Tue Jan 14 16:02:15 2014/-kk/
 /truncated-input.txt/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /x86-32.txt/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /x86-64.txt/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/

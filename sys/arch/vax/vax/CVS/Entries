@@ -7,7 +7,7 @@
 /compat_13_machdep.c/1.4/Sun Jul  3 02:18:21 2011/-kk/
 /compat_16_machdep.c/1.4/Sun Jul  3 02:18:21 2011/-kk/
 /conf.c/1.67/Tue Dec 14 23:44:49 2010/-kk/
-/core_machdep.c/1.5/Sun Jul  3 02:18:21 2011/-kk/
+/core_machdep.c/1.6/Tue Jan 14 16:05:01 2014/-kk/
 /crl.c/1.30/Wed Oct 26 20:24:41 2011/-kk/
 /crl.h/1.2/Mon Apr 12 20:57:52 1999/-kk/
 /crx.c/1.13/Tue Mar 11 05:34:03 2008/-kk/

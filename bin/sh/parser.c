@@ -432,7 +432,17 @@ TRACE(("expecting DO got %s %s\n", tokname[got], got == TWORD ? wordtext : ""));
 		cpp = &n1->ncase.cases;
 		noalias = 1;
 		checkkwd = 2, readtoken();
-		do {
+		/*
+		 * Both ksh and bash accept 'case x in esac'
+		 * so configure scripts started taking advantage of this.
+		 * The page: http://pubs.opengroup.org/onlinepubs/\
+		 * 009695399/utilities/xcu_chap02.html contradicts itself,
+		 * as to if this is legal; the "Case Conditional Format"
+		 * paragraph shows one case is required, but the "Grammar"
+		 * section shows a grammar that explicitly allows the no
+		 * case option.
+		 */
+		while (lasttoken != TESAC) {
 			*cpp = cp = (union node *)stalloc(sizeof (struct nclist));
 			if (lasttoken == TLP)
 				readtoken();
@@ -467,7 +477,7 @@ TRACE(("expecting DO got %s %s\n", tokname[got], got == TWORD ? wordtext : ""));
 				}
 			}
 			cpp = &cp->nclist.next;
-		} while(lasttoken != TESAC);
+		}
 		noalias = 0;
 		*cpp = NULL;
 		checkkwd = 1;
@@ -678,7 +688,8 @@ parsefname(void)
 		if (heredoclist == NULL)
 			heredoclist = here;
 		else {
-			for (p = heredoclist ; p->next ; p = p->next);
+			for (p = heredoclist ; p->next ; p = p->next)
+				continue;
 			p->next = here;
 		}
 	} else if (n->type == NTOFD || n->type == NFROMFD) {
@@ -762,13 +773,13 @@ readtoken(void)
 			for (pp = parsekwd; *pp; pp++) {
 				if (**pp == *wordtext && equal(*pp, wordtext))
 				{
-					lasttoken = t = pp - 
+					lasttoken = t = pp -
 					    parsekwd + KWDOFFSET;
 					TRACE(("keyword %s recognized\n", tokname[t]));
 					goto out;
 				}
 			}
-			if(!noalias &&
+			if (!noalias &&
 			    (ap = lookupalias(wordtext, 1)) != NULL) {
 				pushstring(ap->val, strlen(ap->val), ap);
 				checkkwd = savecheckkwd;
@@ -823,7 +834,8 @@ xxreadtoken(void)
 		case ' ': case '\t':
 			continue;
 		case '#':
-			while ((c = pgetc()) != '\n' && c != PEOF);
+			while ((c = pgetc()) != '\n' && c != PEOF)
+				continue;
 			pungetc();
 			continue;
 		case '\\':
@@ -990,6 +1002,7 @@ readtoken1(int firstc, char const *syn, char *eofmark, int striptabs)
 					break;
 				}
 				if (c == '\n') {
+					plinno++;
 					if (doprompt)
 						setprompt(2);
 					else
@@ -1172,7 +1185,8 @@ checkend: {
 				char *p, *q;
 
 				p = line;
-				for (q = eofmark + 1 ; *q && *p == *q ; p++, q++);
+				for (q = eofmark + 1 ; *q && *p == *q ; p++, q++)
+					continue;
 				if ((*p == '\0' || *p == '\n') && *q == '\0') {
 					c = PEOF;
 					plinno++;

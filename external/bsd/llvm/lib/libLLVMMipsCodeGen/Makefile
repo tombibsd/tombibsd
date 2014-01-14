@@ -26,6 +26,7 @@ SRCS+=	Mips16ISelDAGToDAG.cpp \
 	MipsMachineFunction.cpp \
 	MipsModuleISelDAGToDAG.cpp \
 	MipsMCInstLower.cpp \
+	MipsOptimizePICCall.cpp \
 	MipsOs16.cpp \
 	MipsRegisterInfo.cpp \
 	MipsSEISelLowering.cpp \

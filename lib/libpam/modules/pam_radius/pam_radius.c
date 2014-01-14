@@ -76,6 +76,7 @@ static int	 do_accept(pam_handle_t *, struct rad_handle *);
 static int	 do_challenge(pam_handle_t *, struct rad_handle *,
 		    const char *);
 
+__printflike(2, 3)
 static void
 logit(int level, const char *fmt, ...)
 {

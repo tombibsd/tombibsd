@@ -130,7 +130,7 @@ Compat_Init(void)
 
     Shell_Init();		/* setup default shell */
     
-    for (cp = "#=|^(){};&<>*?[]:$`\\\n"; *cp != '\0'; cp++) {
+    for (cp = "~#=|^(){};&<>*?[]:$`\\\n"; *cp != '\0'; cp++) {
 	meta[(unsigned char) *cp] = 1;
     }
     /*

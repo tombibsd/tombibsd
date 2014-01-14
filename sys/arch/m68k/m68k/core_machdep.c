@@ -68,7 +68,8 @@ struct md_core {
 };
 
 int
-cpu_coredump(struct lwp *l, void *iocookie, struct core *chdr)
+cpu_coredump(struct lwp *l, struct coredump_iostate *iocookie,
+    struct core *chdr)
 {
 	struct md_core md_core;
 	struct coreseg cseg;
@@ -90,7 +91,7 @@ cpu_coredump(struct lwp *l, void *iocookie, struct core *chdr)
 
 	if (fputype) {
 		/* Save floating point registers. */
-		error = process_read_fpregs(l, &md_core.freg);
+		error = process_read_fpregs(l, &md_core.freg, NULL);
 		if (error)
 			return error;
 	} else {

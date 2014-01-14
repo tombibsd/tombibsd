@@ -29,6 +29,7 @@
 /intrinsics.ll/1.1.1.1/Thu Nov 28 14:18:10 2013/-kk/
 /ld-addrspace.ll/1.1.1.1/Thu Nov 28 14:18:10 2013/-kk/
 /ld-generic.ll/1.1.1.1/Thu Nov 28 14:18:10 2013/-kk/
+/ldparam-v4.ll/1.1.1.1/Sun Jan  5 16:17:46 2014/-kk/
 /ldu-i8.ll/1.1.1.1/Thu Nov 28 14:18:10 2013/-kk/
 /ldu-reg-plus-offset.ll/1.1.1.1/Thu Nov 28 14:18:10 2013/-kk/
 /lit.local.cfg/1.1.1.1/Thu Nov 28 14:18:10 2013/-kk/

@@ -150,9 +150,9 @@ computc_d(int c, int combase)
 
 	/* check for new XOFF */
 	if (comstatus_d(combase)) {
-		int c = comgetc_d(combase);	/* XOFF handled in comgetc_d */
+		int x = comgetc_d(combase);	/* XOFF handled in comgetc_d */
 		/* stuff char into preread buffer */
-		serbuf[serbuf_write++] = c;
+		serbuf[serbuf_write++] = x;
 		if (serbuf_write >= SERBUFSIZE)
 			serbuf_write = 0;
 	}

@@ -20,9 +20,12 @@
 /fixit-missing-self-in-block.m/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
 /fixit-newline-style.c/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
 /fixit-nsstring-compare.m/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
+/fixit-objc-arc.m/1.1.1.1/Sun Jan  5 15:39:47 2014/-kk/
+/fixit-objc-bridge-related-attr.m/1.1.1.1/Sun Jan  5 15:39:47 2014/-kk/
+/fixit-objc-bridge-related-property.m/1.1.1.1/Sun Jan  5 15:39:47 2014/-kk/
 /fixit-objc-message-comma-separator.m/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
 /fixit-objc-message.m/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
-/fixit-objc.m/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
+/fixit-objc.m/1.1.1.2/Tue Jan 14 16:01:49 2014/-kk/
 /fixit-pmem.cpp/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
 /fixit-recompile.c/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
 /fixit-recursive-block.c/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
@@ -43,6 +46,7 @@
 /format.mm/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
 /lit.local.cfg/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
 /messages.cpp/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
+/no-diagnostics-fixit-info.c/1.1.1.1/Sun Jan  5 15:39:47 2014/-kk/
 /no-fixit.cpp/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
 /no-macro-fixit.c/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
 /no-typo.c/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/

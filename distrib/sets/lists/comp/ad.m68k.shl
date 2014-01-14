@@ -1,2 +1,2 @@
 # $NetBSD$
-./usr/lib/libm68k_pic.a				comp-c-piclib
+./usr/lib/libm68k_pic.a				comp-c-piclib	picinstall

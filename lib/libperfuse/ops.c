@@ -644,13 +644,23 @@ fuse_to_dirent(struct puffs_usermount *pu, puffs_cookie_t opc,
 		 */
 		if (fd->ino == PERFUSE_UNKNOWN_INO) {
 			struct puffs_node *pn;
+			struct perfuse_node_data *pnd = PERFUSE_NODE_DATA(opc);
 
-			if (node_lookup_common(pu, opc, NULL, fd->name,
-					       NULL, &pn) != 0) {
-				DWARNX("node_lookup_common failed");
+			/* 
+			 * Avoid breaking out of fs 
+			 * by lookup to .. on root
+			 */
+			if ((strcmp(fd->name, "..") == 0) && 
+			    (pnd->pnd_nodeid == FUSE_ROOT_ID)) {
+				fd->ino = FUSE_ROOT_ID;
 			} else {
-				fd->ino = pn->pn_va.va_fileid;
-				(void)perfuse_node_reclaim(pu, pn);
+				if (node_lookup_common(pu, opc, NULL, fd->name,
+						       NULL, &pn) != 0) {
+					DWARNX("node_lookup_common failed");
+				} else {
+					fd->ino = pn->pn_va.va_fileid;
+					(void)perfuse_node_reclaim(pu, pn);
+				}
 			}
 		}
 

@@ -46,7 +46,7 @@
 /pte_coldfire.h/1.1/Thu Oct 24 10:28:57 2013/-kk/
 /pte_motorola.h/1.8/Tue Feb  8 20:20:16 2011/-kk/
 /ptrace.h/1.8/Fri Jan 25 12:03:36 2008/-kk/
-/reg.h/1.18/Tue Feb  8 20:20:16 2011/-kk/
+/reg.h/1.19/Tue Jan 14 16:04:54 2014/-kk/
 /rwlock.h/1.5/Mon Apr 28 20:23:26 2008/-kk/
 /setjmp.h/1.2/Tue Sep 15 23:06:41 1998/-kk/
 /signal.h/1.25/Tue Jan 27 20:30:12 2009/-kk/

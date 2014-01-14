@@ -169,7 +169,7 @@ mark(SCR *sp, VICMD *vp, int getmark, enum which cmd)
 		m = vp->m_start;
 		vp->m_start = vp->m_stop;
 		vp->m_stop = m;
-	} else
+	}
 
 	/*
 	 * Yank cursor motion, when associated with marks as motion commands,

@@ -4,6 +4,7 @@
 
 SUBDIR=mech
 
+.if ${MKSHARE} != "no"
 FILESDIR=/usr/share/examples/libsaslc
 FILESOWN=root
 FILESGRP=wheel
@@ -19,6 +20,7 @@ CFG_MECH+= EXTERNAL.conf
 CFG_MECH+= GSSAPI.conf
 CFG_MECH+= LOGIN.conf
 CFG_MECH+= PLAIN.conf
+.endif
 
 .include <bsd.files.mk>
 .include <bsd.subdir.mk>

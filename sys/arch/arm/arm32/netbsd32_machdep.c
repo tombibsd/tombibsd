@@ -48,7 +48,8 @@ const char machine32[] = MACHINE;
 const char machine_arch32[] = MACHINE_ARCH;
 
 int
-cpu_coredump32(struct lwp *l, void *iocookie, struct core32 *chdr)
+cpu_coredump32(struct lwp *l, struct coredump_iostate *iocookie,
+    struct core32 *chdr)
 {
 	return cpu_coredump(l, iocookie, (struct core *)chdr);
 }

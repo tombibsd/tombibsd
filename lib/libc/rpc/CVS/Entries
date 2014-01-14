@@ -46,7 +46,7 @@
 /rpc_svc_err.3/1.6/Wed Apr 16 13:34:43 2003/-kk/
 /rpc_svc_reg.3/1.10/Thu Oct 24 10:28:53 2013/-kk/
 /rpc_xdr.3/1.8/Sat Apr 11 16:03:29 2009/-kk/
-/rpcb_clnt.c/1.29/Thu Oct 24 10:28:53 2013/-kk/
+/rpcb_clnt.c/1.30/Tue Jan 14 16:04:41 2014/-kk/
 /rpcb_prot.c/1.11/Thu Oct 24 10:28:53 2013/-kk/
 /rpcb_st_xdr.c/1.10/Thu Oct 24 10:28:53 2013/-kk/
 /rpcbind.3/1.11/Sat Apr 11 16:07:20 2009/-kk/

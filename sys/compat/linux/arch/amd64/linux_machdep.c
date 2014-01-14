@@ -229,7 +229,8 @@ linux_sendsig(const ksiginfo_t *ksi, const sigset_t *mask)
 	 * Save FPU state, if any 
 	 */
 	if (fpsp != NULL) {
-		(void)process_read_fpregs(l, &fpregs);
+		size_t fp_size = sizeof fpregs;
+		(void)process_read_fpregs(l, &fpregs, &fp_size);
 		memset(&fpstate, 0, sizeof(fpstate));
 		fpstate.cwd = fpregs.fp_fcw;
 		fpstate.swd = fpregs.fp_fsw;

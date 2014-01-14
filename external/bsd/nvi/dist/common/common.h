@@ -57,6 +57,8 @@ typedef struct _tagq		TAGQ;
 typedef struct _text		TEXT;
 typedef struct _win		WIN;
 
+int ex_printf(SCR *, const char *, ...) __printflike(2, 3);
+
 /* Autoindent state. */
 typedef enum { C_NOTSET, C_CARATSET, C_ZEROSET } carat_t;
 

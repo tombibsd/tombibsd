@@ -86,7 +86,7 @@
 ./usr/lib/i386/libc++.so.1			base-compat-shlib	compat,pic,libcxx
 ./usr/lib/i386/libc++.so.1.0			base-compat-shlib	compat,pic,libcxx
 ./usr/lib/i386/libc.so.12			base-compat-shlib	compat,pic
-./usr/lib/i386/libc.so.12.187			base-compat-shlib	compat,pic
+./usr/lib/i386/libc.so.12.188			base-compat-shlib	compat,pic
 ./usr/lib/i386/libcom_err.so.7			base-compat-shlib	compat,pic,kerberos
 ./usr/lib/i386/libcom_err.so.7.0		base-compat-shlib	compat,pic,kerberos
 ./usr/lib/i386/libcrypt.so.1			base-compat-shlib	compat,pic
@@ -159,7 +159,7 @@
 ./usr/lib/i386/libipsec.so.3			base-compat-shlib	compat,pic
 ./usr/lib/i386/libipsec.so.3.0			base-compat-shlib	compat,pic
 ./usr/lib/i386/libisc.so.7			base-compat-shlib	compat,pic
-./usr/lib/i386/libisc.so.7.0			base-compat-shlib	compat,pic
+./usr/lib/i386/libisc.so.7.1			base-compat-shlib	compat,pic
 ./usr/lib/i386/libisccc.so.7			base-compat-shlib	compat,pic
 ./usr/lib/i386/libisccc.so.7.0			base-compat-shlib	compat,pic
 ./usr/lib/i386/libisccfg.so.7			base-compat-shlib	compat,pic

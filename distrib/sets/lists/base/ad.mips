@@ -94,7 +94,7 @@
 ./usr/lib/64/libc++.so.1			base-compat-shlib	compat,pic,libcxx,arch64
 ./usr/lib/64/libc++.so.1.0			base-compat-shlib	compat,pic,libcxx,arch64
 ./usr/lib/64/libc.so.12				base-compat-shlib	compat,pic,arch64
-./usr/lib/64/libc.so.12.187			base-compat-shlib	compat,pic,arch64
+./usr/lib/64/libc.so.12.188			base-compat-shlib	compat,pic,arch64
 ./usr/lib/64/libcom_err.so.7			base-compat-shlib	compat,pic,kerberos,arch64
 ./usr/lib/64/libcom_err.so.7.0			base-compat-shlib	compat,pic,kerberos,arch64
 ./usr/lib/64/libcrypt.so.1			base-compat-shlib	compat,pic,arch64
@@ -164,7 +164,7 @@
 ./usr/lib/64/libipsec.so.3			base-compat-shlib	compat,pic,arch64
 ./usr/lib/64/libipsec.so.3.0			base-compat-shlib	compat,pic,arch64
 ./usr/lib/64/libisc.so.7			base-compat-shlib	compat,pic,arch64
-./usr/lib/64/libisc.so.7.0			base-compat-shlib	compat,pic,arch64
+./usr/lib/64/libisc.so.7.1			base-compat-shlib	compat,pic,arch64
 ./usr/lib/64/libisccc.so.7			base-compat-shlib	compat,pic,arch64
 ./usr/lib/64/libisccc.so.7.0			base-compat-shlib	compat,pic,arch64
 ./usr/lib/64/libisccfg.so.7			base-compat-shlib	compat,pic,arch64
@@ -434,7 +434,7 @@
 ./usr/lib/o32/libc++.so.1			base-compat-shlib	compat,pic,libcxx,arch64
 ./usr/lib/o32/libc++.so.1.0			base-compat-shlib	compat,pic,libcxx,arch64
 ./usr/lib/o32/libc.so.12			base-compat-shlib	compat,pic,arch64
-./usr/lib/o32/libc.so.12.187			base-compat-shlib	compat,pic,arch64
+./usr/lib/o32/libc.so.12.188			base-compat-shlib	compat,pic,arch64
 ./usr/lib/o32/libcom_err.so.7			base-compat-shlib	compat,pic,kerberos,arch64
 ./usr/lib/o32/libcom_err.so.7.0			base-compat-shlib	compat,pic,kerberos,arch64
 ./usr/lib/o32/libcrypt.so.1			base-compat-shlib	compat,pic,arch64
@@ -498,7 +498,7 @@
 ./usr/lib/o32/libipsec.so.3			base-compat-shlib	compat,pic,arch64
 ./usr/lib/o32/libipsec.so.3.0			base-compat-shlib	compat,pic,arch64
 ./usr/lib/o32/libisc.so.7			base-compat-shlib	compat,pic,arch64
-./usr/lib/o32/libisc.so.7.0			base-compat-shlib	compat,pic,arch64
+./usr/lib/o32/libisc.so.7.1			base-compat-shlib	compat,pic,arch64
 ./usr/lib/o32/libisccc.so.7			base-compat-shlib	compat,pic,arch64
 ./usr/lib/o32/libisccc.so.7.0			base-compat-shlib	compat,pic,arch64
 ./usr/lib/o32/libisccfg.so.7			base-compat-shlib	compat,pic,arch64

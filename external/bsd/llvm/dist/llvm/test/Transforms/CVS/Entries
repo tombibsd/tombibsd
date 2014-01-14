@@ -52,6 +52,7 @@ D/SLPVectorizer////
 D/SROA////
 D/SampleProfile////
 D/ScalarRepl////
+D/Scalarizer////
 D/SimplifyCFG////
 D/Sink////
 D/StripSymbols////

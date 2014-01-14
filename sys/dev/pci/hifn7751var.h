@@ -144,6 +144,9 @@ struct hifn_softc {
 
 	bus_space_handle_t	sc_sh0, sc_sh1;
 	bus_space_tag_t		sc_st0, sc_st1;
+#ifdef __NetBSD__
+	bus_size_t		sc_iosz0, sc_iosz1;
+#endif
 	bus_dma_tag_t		sc_dmat;
 
 	struct hifn_dma *sc_dma;

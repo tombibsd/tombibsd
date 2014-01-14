@@ -247,6 +247,7 @@ SUBST="${SUBST};s#@MACHINE@#${MACHINE}#g"
 #	pcc			${MKPCC} != no
 #	pf			${MKPF} != no
 #	pic			${MKPIC} != no
+#	picinstall		${MKPICINSTALL} != no
 #	postfix			${MKPOSTFIX} != no
 #	profile			${MKPROFILE} != no
 #	perfuse			${MKPERFUSE} != no

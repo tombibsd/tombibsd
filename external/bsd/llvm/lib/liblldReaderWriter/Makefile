@@ -7,9 +7,9 @@ LIB=	lldReaderWriter
 .PATH: ${LLD_SRCDIR}/lib/ReaderWriter
 
 SRCS+=	CoreLinkingContext.cpp \
+	FileArchive.cpp \
 	LinkerScript.cpp \
 	Reader.cpp \
-	ReaderLinkerScript.cpp \
 	Writer.cpp
 
 .if defined(HOSTLIB)

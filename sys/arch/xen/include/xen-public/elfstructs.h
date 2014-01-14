@@ -37,7 +37,6 @@ typedef uint16_t	Elf32_Half;	/* Unsigned medium integer */
 
 typedef uint64_t	Elf64_Addr;
 typedef uint64_t	Elf64_Off;
-typedef int32_t		Elf64_Shalf;
 
 typedef int32_t		Elf64_Sword;
 typedef uint32_t	Elf64_Word;

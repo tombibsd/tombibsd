@@ -5,11 +5,11 @@
 /2008-01-16-VarargsParamAttrs.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /2008-06-23-DeadAfterLive.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /2009-03-17-MRE-Invoke.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
-/2010-04-30-DbgInfo.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/2010-04-30-DbgInfo.ll/1.1.1.2/Tue Jan 14 16:02:16 2014/-kk/
 /2013-05-17-VarargsAndBlockAddress.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /basictest.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /canon.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
-/dbginfo.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/dbginfo.ll/1.1.1.2/Tue Jan 14 16:02:16 2014/-kk/
 /dead_vaargs.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /deadexternal.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /deadretval.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/

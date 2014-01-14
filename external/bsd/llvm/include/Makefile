@@ -69,6 +69,7 @@ CLANG_TABLEGEN_OUTPUT.Attr.td= \
 	clang/AST/Attrs.inc|-gen-clang-attr-classes \
 	clang/AST/AttrDump.inc|-gen-clang-attr-dump \
 	clang/AST/AttrImpl.inc|-gen-clang-attr-impl \
+	clang/AST/AttrVisitor.inc|-gen-clang-attr-ast-visitor \
 	clang/Basic/AttrList.inc|-gen-clang-attr-list \
 	clang/Lex/AttrSpellings.inc|-gen-clang-attr-spelling-list \
 	clang/Parse/AttrIdentifierArg.inc|-gen-clang-attr-identifier-arg-list \
@@ -149,8 +150,7 @@ CLEANFILES+=	llvm/Config/config.h llvm/Config/llvm-config.h
 llvm/Config/config.h: ${LLVM_TOPLEVEL}/Makefile.inc ${LLVM_TOPLEVEL}/config/llvm/Config/config.h.in
 	mkdir -p ${.TARGET:H}
 	${TOOL_SED} -e /LLVM_DEFAULT_TARGET_TRIPLE/d -e /LLVM_NATIVE_/d \
-	    -e /LLVM_VERSION_/d -e /PACKAGE_VERSION/d \
-	    -e /^\#endif/d \
+	    -e /LLVM_VERSION_/d -e /PACKAGE_VERSION/d -e 'x' \
 	    < ${LLVM_TOPLEVEL}/config/llvm/Config/config.h.in \
 	    > ${.TARGET}.tmp
 	printf '#define LLVM_DEFAULT_TARGET_TRIPLE "${MACHINE_GNU_PLATFORM}"\n' >> ${.TARGET}.tmp
@@ -163,8 +163,7 @@ llvm/Config/config.h: ${LLVM_TOPLEVEL}/Makefile.inc ${LLVM_TOPLEVEL}/config/llvm
 llvm/Config/llvm-config.h: ${LLVM_TOPLEVEL}/Makefile.inc ${LLVM_TOPLEVEL}/config/llvm/Config/llvm-config.h.in
 	mkdir -p ${.TARGET:H}
 	${TOOL_SED} -e /LLVM_DEFAULT_TARGET_TRIPLE/d -e /LLVM_NATIVE_/d \
-	    -e /LLVM_VERSION_/d -e /PACKAGE_VERSION/d \
-	    -e /\#endif/d \
+	    -e /LLVM_VERSION_/d -e /PACKAGE_VERSION/d -e 'x' \
 	    < ${LLVM_TOPLEVEL}/config/llvm/Config/llvm-config.h.in \
 	    > ${.TARGET}.tmp
 	printf '#define LLVM_DEFAULT_TARGET_TRIPLE "${MACHINE_GNU_PLATFORM}"\n' >> ${.TARGET}.tmp

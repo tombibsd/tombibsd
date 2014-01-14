@@ -301,7 +301,8 @@ cpu_setmcontext32(struct lwp *l, const mcontext32_t *mc32, unsigned int flags)
  * Dump the machine specific segment at the start of a core dump.
  */
 int
-cpu_coredump32(struct lwp *l, void *iocookie, struct core32 *chdr)
+cpu_coredump32(struct lwp *l, struct coredump_iostate *iocookie,
+    struct core32 *chdr)
 {
 	int error;
 	struct coreseg cseg;

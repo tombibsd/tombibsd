@@ -2,6 +2,7 @@
 
 .include <bsd.own.mk>
 
+.if ${MKSHARE} != "no"
 FILESDIR=/usr/share/examples/libsaslc/mech
 FILESOWN=root
 FILESGRP=wheel
@@ -15,5 +16,6 @@ FILES+= EXTERNAL.conf
 FILES+= GSSAPI.conf
 FILES+= LOGIN.conf
 FILES+= PLAIN.conf
+.endif
 
 .include <bsd.prog.mk>

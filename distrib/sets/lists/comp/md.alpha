@@ -75,5 +75,5 @@
 ./usr/lib/crtfm.o				comp-c-lib
 ./usr/lib/libalpha.a				comp-c-lib
 ./usr/lib/libalpha_p.a				comp-c-proflib		profile
-./usr/lib/libalpha_pic.a			comp-c-piclib
+./usr/lib/libalpha_pic.a			comp-c-piclib	picinstall
 ./usr/libdata/lint/llib-lalpha.ln		comp-c-lintlib		lint

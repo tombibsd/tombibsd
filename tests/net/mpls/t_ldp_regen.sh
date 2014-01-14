@@ -41,7 +41,7 @@ RUMP_SERVER2=unix://./r2
 RUMP_SERVER3=unix://./r3
 RUMP_SERVER4=unix://./r4
 
-RUMP_LIBS="-lrumpnet -lrumpnet_net -lrumpnet_netmpls -lrumpnet_netinet -lrumpnet_shmif"
+RUMP_LIBS="-lrumpnet -lrumpnet_net -lrumpnet_netmpls -lrumpnet_netinet -lrumpnet_netinet6 -lrumpnet_shmif"
 LDP_FLAGS=""
 
 atf_test_case ldp_regen cleanup

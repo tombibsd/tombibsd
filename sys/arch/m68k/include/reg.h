@@ -97,7 +97,7 @@ struct fpreg {
 
 struct lwp;
 int	process_read_regs(struct lwp *, struct reg *);
-int	process_read_fpregs(struct lwp *, struct fpreg *);
+int	process_read_fpregs(struct lwp *, struct fpreg *, size_t *);
 
 #endif
 

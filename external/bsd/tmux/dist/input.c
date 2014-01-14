@@ -49,7 +49,7 @@
 /* Helper functions. */
 int	input_split(struct input_ctx *);
 int	input_get(struct input_ctx *, u_int, int, int);
-void	input_reply(struct input_ctx *, const char *, ...);
+void	input_reply(struct input_ctx *, const char *, ...) __printflike(2, 3);
 
 /* Transition entry/exit handlers. */
 void	input_clear(struct input_ctx *);

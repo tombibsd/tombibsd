@@ -50,7 +50,8 @@ __KERNEL_RCSID(0, "$NetBSD$");
  * way to do this, but good for my purposes so far.
  */
 int
-cpu_coredump(struct lwp *l, void *iocookie, struct core *chdr)
+cpu_coredump(struct lwp *l, struct coredump_iostate *iocookie,
+    struct core *chdr)
 {
 	struct md_coredump md_core;
 	struct coreseg cseg;

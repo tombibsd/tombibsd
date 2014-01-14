@@ -1,12 +1,13 @@
 /address-spaces.cl/1.1.1.1/Thu Nov 28 14:14:58 2013/-kk/
 /cond.cl/1.1.1.1/Thu Nov 28 14:14:58 2013/-kk/
 /endian-attr.cl/1.1.1.1/Thu Nov 28 14:14:58 2013/-kk/
-/event_t.cl/1.1.1.1/Thu Nov 28 14:14:58 2013/-kk/
+/event_t.cl/1.1.1.2/Tue Jan 14 16:01:54 2014/-kk/
 /event_t_overload.cl/1.1.1.1/Thu Nov 28 14:14:58 2013/-kk/
 /extension-fp64.cl/1.1.1.1/Thu Nov 28 14:14:58 2013/-kk/
 /half.cl/1.1.1.1/Thu Nov 28 14:14:58 2013/-kk/
 /init.cl/1.1.1.1/Thu Nov 28 14:14:58 2013/-kk/
-/invalid-kernel-attrs.cl/1.1.1.1/Thu Nov 28 14:14:58 2013/-kk/
+/invalid-constant.cl/1.1.1.1/Sun Jan  5 15:40:04 2014/-kk/
+/invalid-kernel-attrs.cl/1.1.1.2/Tue Jan 14 16:01:54 2014/-kk/
 /invalid-kernel-parameters.cl/1.1.1.1/Thu Nov 28 14:14:58 2013/-kk/
 /invalid-kernel.cl/1.1.1.1/Thu Nov 28 14:14:58 2013/-kk/
 /invalid-logical-ops-1.1.cl/1.1.1.1/Thu Nov 28 14:14:58 2013/-kk/
@@ -14,6 +15,7 @@
 /sampler_t.cl/1.1.1.1/Thu Nov 28 14:14:58 2013/-kk/
 /sampler_t_overload.cl/1.1.1.1/Thu Nov 28 14:14:58 2013/-kk/
 /shifts.cl/1.1.1.1/Thu Nov 28 14:14:58 2013/-kk/
+/sizeof.cl/1.1.1.1/Sun Jan  5 15:40:04 2014/-kk/
 /storageclass.cl/1.1.1.1/Thu Nov 28 14:14:58 2013/-kk/
 /str_literals.cl/1.1.1.1/Thu Nov 28 14:14:58 2013/-kk/
 /unsupported.cl/1.1.1.1/Thu Nov 28 14:14:58 2013/-kk/

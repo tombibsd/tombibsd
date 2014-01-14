@@ -87,6 +87,10 @@ _libelf_xlate_shtype(uint32_t sht)
 	case SHT_SUNW_syminfo:
 		return (ELF_T_SYMINFO);
 #endif /* __LIBELF_HAVE_ELF_SYMINFO */
+#if defined(__LIBELF_HAVE_ELF_ATTRIBUTES)
+	case SHT_GNU_ATTRIBUTES:
+		return (ELF_T_BYTE);	/* XXX */
+#endif /* __LIBELF_HAVE_ELF_ATTRIBUTES */
 	default:
 		if (sht >= SHT_LOPROC && sht <= SHT_HIPROC)
 			return (ELF_T_BYTE);

@@ -68,7 +68,6 @@ CFLAGS+=	-Wold-style-definition
 CFLAGS+=	-Wconversion
 .endif
 CFLAGS+=	-Wsign-compare -Wformat=2
-CFLAGS+=	${${ACTIVE_CC} == "clang":? -Wno-error=format-nonliteral :}
 CFLAGS+=	${${ACTIVE_CC} == "gcc":? -Wno-format-zero-length :}
 .endif
 .if ${WARNS} > 3 && defined(HAVE_LLVM)

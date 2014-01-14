@@ -57,7 +57,7 @@ static char sccsid[] = "@(#)regfree.c	8.2 (Berkeley) 3/16/94";
 void
 regfree(regex_t *preg)
 {
-	register struct re_guts *g;
+	struct re_guts *g;
 
 	if (preg->re_magic != MAGIC1)	/* oops */
 		return;			/* nice to complain, but hard */

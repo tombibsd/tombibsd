@@ -8,8 +8,6 @@ PROG=	wpa_passphrase
 SRCS= \
 md5.c \
 os_unix.c \
-sha1-pbkdf2.c \
-sha1.c \
 wpa_debug.c \
 wpa_passphrase.c \
 wpabuf.c 

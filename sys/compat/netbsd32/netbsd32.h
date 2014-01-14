@@ -993,7 +993,8 @@ int	netbsd32_kevent(struct lwp *, void *, register_t *);
 
 #define	SCARG_P32(uap, name) NETBSD32PTR64(SCARG(uap, name))
 
-int	coredump_netbsd32(struct lwp *, void *);
+struct coredump_iostate;
+int	coredump_netbsd32(struct lwp *, struct coredump_iostate *);
 
 /*
  * random other stuff

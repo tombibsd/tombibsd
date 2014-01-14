@@ -21,8 +21,6 @@
 #define PLATFORM_HAS_NBSYSCTL
 #define PLATFORM_HAS_NBFILEHANDLE
 
-#define PLATFORM_HAS_DISKLABEL
-#define PLATFORM_HAS_NBMODULES
 #define PLATFORM_HAS_STRSUFTOLL
 #define PLATFORM_HAS_SETGETPROGNAME
 
@@ -92,9 +90,8 @@ clock_gettime(clockid_t clk, struct timespec *ts)
 #include <sys/types.h>
 #include <sys/param.h>
 
-/* maybe this should be !__NetBSD__ ? */
-#if defined(__linux__) || defined(__sun__) || defined(__FreeBSD__)	\
-    || defined(__DragonFly__) || defined(__APPLE__) || defined(__CYGWIN__)
+/* NetBSD is the only(?) platform with getenv_r() */
+#if !defined(__NetBSD__)
 #include <errno.h>
 #include <stdlib.h>
 #include <string.h>

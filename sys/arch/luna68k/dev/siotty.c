@@ -187,7 +187,6 @@ siotty_attach(device_t parent, device_t self, void *aux)
 	tp->t_oproc = siostart;
 	tp->t_param = sioparam;
 	tp->t_hwiflow = NULL /* XXX siohwiflow XXX */;
-	tp->t_softc = sc;
 	if ((sc->sc_hwflags & SIOTTY_HW_CONSOLE) != 0)
 		tp->t_dev = cn_tab->cn_dev;
 	sc->sc_tty = tp;

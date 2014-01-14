@@ -217,10 +217,12 @@ pt_entry_t	*kernel_lev1map;
  */
 static pt_entry_t *VPT;
 
-static struct pmap	kernel_pmap_store
-	[(PMAP_SIZEOF(ALPHA_MAXPROCS) + sizeof(struct pmap) - 1)
-		/ sizeof(struct pmap)];
-struct pmap *const kernel_pmap_ptr = kernel_pmap_store;
+static struct {
+	struct pmap k_pmap;
+	struct pmap_asn_info k_asni[ALPHA_MAXPROCS];
+} kernel_pmap_store;
+
+struct pmap *const kernel_pmap_ptr = &kernel_pmap_store.k_pmap;
 
 paddr_t    	avail_start;	/* PA of first available physical page */
 paddr_t		avail_end;	/* PA of last available physical page */

@@ -16,6 +16,7 @@ SRCS= parse.c          \
       parse_conf.c     \
       clk_meinberg.c   \
       clk_schmid.c     \
+      clk_sel240x.c    \
       clk_rawdcf.c     \
       clk_trimtsip.c   \
       clk_dcf7000.c    \

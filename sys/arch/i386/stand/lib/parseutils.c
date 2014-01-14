@@ -64,7 +64,7 @@ gettrailer(char *arg)
 		break;
 	}
 	if (*options == '\0')
-		return "";
+		return options;
 
 	/* trim leading blanks/tabs */
 	while (*options == ' ' || *options == '\t')

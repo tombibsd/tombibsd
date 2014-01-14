@@ -43,6 +43,6 @@ SRCS=   assertions.c               \
         time.c                     \
         sockaddr.c
 
-COPTS.log.c+=	-Wno-format-nonliteral
+COPTS.log.c+=	-Wno-error=format-nonliteral
 
 .include <bsd.lib.mk>

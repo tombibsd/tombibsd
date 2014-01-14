@@ -73,7 +73,7 @@ int chipsfb_ofbus_cnattach(bus_space_tag_t, bus_space_tag_t);
 CFATTACH_DECL_NEW(chipsfb_ofbus, sizeof(struct chipsfb_softc),
     chipsfb_ofbus_match, chipsfb_ofbus_attach, NULL, NULL);
     
-static const char const *compat_strings[] = { "CHPS,ct65550", NULL };
+static const char * const compat_strings[] = { "CHPS,ct65550", NULL };
 
 vaddr_t chipsfb_mem_vaddr = 0, chipsfb_mmio_vaddr = 0;
 paddr_t chipsfb_mem_paddr;

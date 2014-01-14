@@ -160,7 +160,10 @@ struct mem_node {
 	TAILQ_ENTRY(mem_node) link; 
 	TAILQ_ENTRY(mem_node) free_link;
 	u_long size;		/* size of memory following node. */
+	u_char type;		/* free, used */
 };
+#define MNODE_FREE 0
+#define MNODE_USED 1
 
 #define CM_BLOCKSIZE 0x4
 #define CM_BLOCKMASK (~(CM_BLOCKSIZE - 1))

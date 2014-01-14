@@ -40,7 +40,7 @@ ${SA_PROG}.bin : ${SA_PROG}
 
 ${SA_PROG} : ${OBJS} ${DPADD} ${SRTLIB}
 	${LD} -N -Ttext ${RELOC} -e start ${SA_LDFLAGS} -o $@ \
-	  ${SRTOBJ} ${OBJS} ${LDADD} ${SRTLIB}
+	    ${SRTOBJ} ${OBJS} ${LDADD} ${SRTLIB}
 	@${SIZE} $@
 
 .if !target(proginstall)

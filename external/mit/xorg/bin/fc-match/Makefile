@@ -6,8 +6,8 @@ PROG=	fc-match
 
 CPPFLAGS+=	-I${X11SRCDIR.fontconfig} -I.
 
-LDADD+=	-lfontconfig -lfreetype -lexpat
-DPADD+=	${LIBFONTCONFIG} ${LIBFREETYPE} ${LIBEXPAT}
+LDADD+=	-lfontconfig -lfreetype -lexpat -lbz2 -lz
+DPADD+=	${LIBFONTCONFIG} ${LIBFREETYPE} ${LIBEXPAT} ${LIBBZ2} ${LIBZ}
 
 .PATH:	${X11SRCDIR.fontconfig}/${PROG}
 

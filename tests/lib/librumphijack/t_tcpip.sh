@@ -37,7 +37,7 @@ http_head()
 http_body()
 {
 
-	atf_check -s exit:0 ${rumpnetsrv} ${RUMP_SERVER}
+	atf_check -s exit:0 ${rumpnetsrv} -lrumpnet_netinet6 ${RUMP_SERVER}
 
 	# start bozo in daemon mode
 	atf_check -s exit:0 env LD_PRELOAD=/usr/lib/librumphijack.so \
