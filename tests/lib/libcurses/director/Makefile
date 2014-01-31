@@ -12,11 +12,11 @@ NOMAN=	"true"
 SRCS=	testlang_parse.y testlang_conf.l director.c
 
 YHEADER=	1
-CPPFLAGS+=	-O0 -g -I${.CURDIR} -I.
-LDFLAGS+=	-g
+CPPFLAGS+=	-I${.CURDIR} -I.
 DPADD+=		${LIBL}
 LDADD+=		-ll -lutil -lc
 
+COPTS.testlang_parse.c += -Wno-uninitialized
 CWARNFLAGS.clang+=	-Wno-format -Wno-conversion
 
 .include <bsd.test.mk>

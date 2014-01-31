@@ -20,4 +20,8 @@ CPPFLAGS+=	-DMAGIC='"${MAGIC}"' -DHAVE_CONFIG_H -DQUICK -DBUILTIN_ELF \
 		-DELFCORE -DVERSION='"${VERSION}"'
 CPPFLAGS+=	-I${.CURDIR}/../include -I${DIST}/src
 
+.if ${ACTIVE_CC}=="gcc" && ${HAVE_GCC}=="48"
+CPPFLAGS.readelf.c	+= -Wno-error=maybe-uninitialized
+.endif
+
 .PATH:		${DIST}/src ${DIST}/doc

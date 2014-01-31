@@ -57,13 +57,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <compat/common/compat_util.h>
 
 /*
- * This is not implemented for alpha yet
- */
-#if defined (__i386__) || defined (__m68k__) || \
-    defined (__powerpc__) || defined (__mips__) || \
-    defined(__arm__) || defined(__amd64__)
-
-/*
  * Linux keeps track of a system timezone in the kernel. It is readen
  * by gettimeofday and set by settimeofday. This emulates this behavior
  * See linux/kernel/time.c
@@ -121,8 +114,6 @@ linux_sys_settimeofday(struct lwp *l, const struct linux_sys_settimeofday_args *
 
 	return (0);
 }
-
-#endif /* __i386__ || __m68k__ || __powerpc__ || __mips__ || __arm__ */
 
 void
 native_to_linux_timespec(struct linux_timespec *ltp, struct timespec *ntp)

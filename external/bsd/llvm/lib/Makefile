@@ -68,7 +68,9 @@ SUBDIR+= \
 	libLLVMPowerPCTargetInfo
 
 SUBDIR+= \
+	libLLVMSparcAsmParser \
 	libLLVMSparcAsmPrinter \
+	libLLVMSparcDisassembler \
 	libLLVMSparcMCTargetDesc \
 	libLLVMSparcTargetInfo
 

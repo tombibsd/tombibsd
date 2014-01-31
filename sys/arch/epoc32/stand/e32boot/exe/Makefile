@@ -1,7 +1,6 @@
 #	$NetBSD$
 
 .include <bsd.own.mk>
-.include <bsd.sys.mk>
 .include <bsd.obj.mk>
 .include <bsd.inc.mk>
 
@@ -70,3 +69,4 @@ clean:
 	rm -f $(PROG) $(OBJS) vers.c $(IN) $(MAP)
 	rm -f $(PROG:.exe=.bas) $(PROG:.exe=.exp)
 
+.include <bsd.files.mk>

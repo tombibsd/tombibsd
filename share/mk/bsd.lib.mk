@@ -518,7 +518,7 @@ _YLSRCS=	${SRCS:M*.[ly]:C/\..$/.c/} ${YHEADER:D${SRCS:M*.y:.y=.h}}
 
 realall: ${SRCS} ${ALLOBJS:O} ${_LIBS} ${_LIB.so.debug}
 
-MKARZERO?=no
+MKARZERO?= ${MKREPRO:Uno}
 
 .if ${MKARZERO} == "yes"
 _ARFL=crsD

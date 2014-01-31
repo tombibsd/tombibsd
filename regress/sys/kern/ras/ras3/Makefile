@@ -1,8 +1,10 @@
 #	$NetBSD$
 
 NOMAN=	#defined
+
+.include <bsd.own.mk>	# ACTIVE_CC
+
 PROG=	ras3
-WARNS=	2
 
 regress:
 	@if ./${PROG} ; then		\

@@ -249,6 +249,10 @@ static struct cryptostats cryptostats;
 static	int crypto_timing = 0;
 #endif
 
+#ifdef _MODULE
+	static struct sysctllog *sysctl_opencrypto_clog;
+#endif
+
 static int
 crypto_init0(void)
 {
@@ -282,6 +286,9 @@ crypto_init0(void)
 		crypto_destroy();
 	}
 
+#ifdef _MODULE
+	sysctl_opencrypto_setup(&sysctl_opencrypto_clog);
+#endif
 	return 0;
 }
 
@@ -1345,8 +1352,14 @@ opencrypto_modcmd(modcmd_t cmd, void *opaque)
 
 	switch (cmd) {
 	case MODULE_CMD_INIT:
+#ifdef _MODULE
+		crypto_init();
+#endif
 		return 0;
 	case MODULE_CMD_FINI:
+#ifdef _MODULE
+		sysctl_teardown(&sysctl_opencrypto_clog);
+#endif
 		return 0;
 	default:
 		return ENOTTY;

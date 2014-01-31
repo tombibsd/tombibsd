@@ -138,7 +138,11 @@ wakeup_16:
 1:
 
 	/* Load temporary 32bit GDT */
+#ifdef __clang__
+	lgdt	tmp_gdt
+#else
 	data32 addr32 lgdt	tmp_gdt
+#endif
 
 	/* Enable protected mode w/o paging */
 	mov	%cr0,%eax

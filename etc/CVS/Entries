@@ -1,8 +1,8 @@
 /MAKEDEV.awk/1.24/Thu Oct 24 10:28:41 2013/-kk/
 /MAKEDEV.local/1.14/Wed Apr 30 13:10:49 2008/-kk/
 /MAKEDEV.tmpl/1.172/Thu Oct 31 06:57:20 2013/-kk/
-/Makefile.params/1.7/Mon Nov 11 15:18:14 2013/-kk/
-/Makefile/1.410/Thu Oct 24 10:28:41 2013/-kk/
+/Makefile.params/1.8/Fri Jan 31 08:45:08 2014/-kk/
+/Makefile/1.411/Fri Jan 31 08:45:08 2014/-kk/
 /aliases/1.22/Wed Aug 25 15:38:44 2010/-kk/
 /bootptab/1.6/Tue Apr 24 21:55:06 2001/-kk/
 /changelist/1.25/Tue Jan 27 10:32:18 2009/-kk/
@@ -45,7 +45,7 @@
 /networks/1.5/Fri Jul 10 06:22:15 1998/-kk/
 /newsyslog.conf/1.21/Mon Sep 18 22:39:37 2006/-kk/
 /nsswitch.conf/1.6/Sun Oct 25 00:17:06 2009/-kk/
-/ntp.conf/1.18/Tue Jan 14 16:01:13 2014/-kk/
+/ntp.conf/1.19/Fri Jan 31 08:45:08 2014/-kk/
 /passwd.conf/1.3/Fri Dec  3 21:40:04 2010/-kk/
 /phones/1.4/Sat Feb 15 10:02:21 1997/-kk/
 /pkgpath.conf/1.1/Thu Oct 24 10:28:41 2013/-kk/

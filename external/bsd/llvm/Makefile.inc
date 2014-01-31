@@ -8,9 +8,8 @@ LLVM_TOPLEVEL_MK=
 SVN_ROOT=		http://llvm.org/svn/llvm-project
 SVN_BRANCH=		trunk
 
-COMMON_REVISION=	198450
+COMMON_REVISION=	199312
 CLANG_REVISION=		${COMMON_REVISION}
-COMPILER_RT_REVISION=	${COMMON_REVISION}
 LLD_REVISION=		${COMMON_REVISION}
 LLDB_REVISION=		${COMMON_REVISION}
 LLVM_REVISION=		${COMMON_REVISION}
@@ -21,7 +20,6 @@ MCLINKER_ROOT=		https://code.google.com/p/mclinker/
 LLVM_VERSION=		3.5
 CLANG_VERSION=		3.5
 
-COMPILER_RT_SRCDIR:=	${.PARSEDIR}/dist/compiler-rt
 CLANG_SRCDIR:=	${.PARSEDIR}/dist/clang
 LLD_SRCDIR:=	${.PARSEDIR}/dist/lld
 LLDB_SRCDIR:=	${.PARSEDIR}/dist/lldb
@@ -72,7 +70,7 @@ LLVM_CONFIGURE_ARGS=	\
 	--with-c-include-dirs=/usr/include/clang-${CLANG_VERSION}:/usr/include \
 	--disable-timestamps --prefix=/usr --sysconfdir=/etc/llvm \
 	--with-clang-srcdir=${CLANG_SRCDIR} \
-	--host=${LLVM_PLATFORM} \
+	--host=${LLVM_PLATFORM} --disable-compiler-version-checks \
 	llvm_cv_gnu_make_command=${MAKE}
 
 .for tool in circo dot dotty fdp neato twopi xdot

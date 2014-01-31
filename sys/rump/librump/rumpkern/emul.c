@@ -52,6 +52,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/syscallvar.h>
 #include <sys/xcall.h>
 #include <sys/sleepq.h>
+#include <sys/cprng.h>
 
 #include <dev/cons.h>
 
@@ -139,6 +140,8 @@ struct emul emul_netbsd = {
 };
 
 u_int nprocs = 1;
+
+cprng_strong_t *kern_cprng;
 
 int
 kpause(const char *wmesg, bool intr, int timeo, kmutex_t *mtx)

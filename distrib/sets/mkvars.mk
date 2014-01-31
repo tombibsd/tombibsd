@@ -35,7 +35,6 @@ MKEXTRAVARS= \
 #####
 
 .include <bsd.own.mk>
-.include <bsd.sys.mk>
 .include <bsd.endian.mk>
 
 .if (${MKMAN} == "no" || empty(MANINSTALL:Mmaninstall))
@@ -88,3 +87,5 @@ mksolaris: .PHONY
 .else
 	@echo MKSOLARIS="no"
 .endif
+
+.include <bsd.files.mk>

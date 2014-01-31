@@ -74,7 +74,6 @@
 #include <sys/boot_flag.h>
 #include <machine/cpu.h>
 #include <luna68k/stand/boot/samachdep.h>
-#include <luna68k/stand/boot/stinger.h>
 #include <luna68k/stand/boot/romvec.h>
 #include <luna68k/stand/boot/status.h>
 #include <lib/libsa/loadfile.h>
@@ -93,11 +92,6 @@ char default_file[64];
 #define	VERS_LOCAL	"Phase-31"
 
 int nplane;
-
-/* KIFF */
-
-struct KernInter  KIFF;
-struct KernInter *kiff = &KIFF;
 
 /* for command parser */
 
@@ -176,9 +170,10 @@ struct luna2_bootinfo {
 void
 main(void)
 {
-	int i, status = 0;
+	int i, status = ST_NORMAL;
 	const char *machstr;
 	const char *bootdev;
+	uint32_t howto;
 	int unit, part;
 	int bdev, ctlr, id;
 
@@ -197,7 +192,7 @@ main(void)
 		hz = 100;
 	}
 
-	nplane   = get_plane_numbers();
+	nplane = get_plane_numbers();
 
 	cninit();
 
@@ -206,11 +201,7 @@ main(void)
 	printf(">> (based on Stinger ver 0.0 [%s])\n", VERS_LOCAL);
 	printf("\n");
 
-	kiff->maxaddr = (void *) (ROM_memsize -1);
-	kiff->dipsw   = ~((dipsw2 << 8) | dipsw1) & 0xFFFF;
-	kiff->plane   = nplane;
-
-	i = (int) kiff->maxaddr + 1;
+	i = ROM_memsize;
 	printf("Machine model   = %s\n", machstr);
 	printf("Physical Memory = 0x%x  ", i);
 	i >>= 20;
@@ -307,7 +298,7 @@ main(void)
 		c = awaitkey("%d seconds. ", boot_timeout, true);
 		if (c == '\r' || c == '\n' || c == 0) {
 			printf("auto-boot %s\n", default_file);
-			bootnetbsd(default_file);
+			bootnetbsd(default_file, 0);
 		}
 	}
 
@@ -320,13 +311,15 @@ main(void)
 	do {
 		memset(buffer, 0, BUFFSIZE);
 		if (getline(prompt, buffer) > 0) {
-			argc = getargs(buffer, argv, sizeof(argv)/sizeof(char *));
+			argc = getargs(buffer, argv,
+			    sizeof(argv) / sizeof(char *));
 
 			status = parse(argc, argv);
 			if (status == ST_NOTFOUND)
-				printf("Command \"%s\" is not found !!\n", argv[0]);
+				printf("Command \"%s\" is not found !!\n",
+				    argv[0]);
 		}
-	} while(status != ST_EXIT);
+	} while (status != ST_EXIT);
 
 	exit(0);
 }
@@ -341,7 +334,7 @@ get_plane_numbers(void)
 		if (r & 0x1)
 			n++;
 
-	return(n);
+	return n;
 }
 
 int
@@ -360,5 +353,5 @@ reorder_dipsw(int dipsw)
 		dipsw >>= 1;
 	}
 
-	return(sw);
+	return sw;
 }

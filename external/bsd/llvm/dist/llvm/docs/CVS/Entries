@@ -1,16 +1,16 @@
 /AliasAnalysis.rst/1.1.1.1/Thu Nov 28 14:18:15 2013/-kk/
 /Atomics.rst/1.1.1.1/Thu Nov 28 14:18:15 2013/-kk/
-/BitCodeFormat.rst/1.1.1.1/Thu Nov 28 14:18:15 2013/-kk/
+/BitCodeFormat.rst/1.1.1.2/Fri Jan 31 08:45:36 2014/-kk/
 /BranchWeightMetadata.rst/1.1.1.1/Thu Nov 28 14:18:15 2013/-kk/
 /Bugpoint.rst/1.1.1.1/Thu Nov 28 14:18:15 2013/-kk/
 /CMake.rst/1.1.1.2/Tue Jan 14 16:01:54 2014/-kk/
 /CMakeLists.txt/1.1.1.1/Thu Nov 28 14:18:15 2013/-kk/
-/CodeGenerator.rst/1.1.1.1/Thu Nov 28 14:18:15 2013/-kk/
+/CodeGenerator.rst/1.1.1.2/Fri Jan 31 08:45:36 2014/-kk/
 /CodingStandards.rst/1.1.1.2/Tue Jan 14 16:01:54 2014/-kk/
 /CommandLine.rst/1.1.1.2/Tue Jan 14 16:01:54 2014/-kk/
 /CompilerWriterInfo.rst/1.1.1.2/Tue Jan 14 16:01:54 2014/-kk/
 /DebuggingJITedCode.rst/1.1.1.1/Thu Nov 28 14:18:15 2013/-kk/
-/DeveloperPolicy.rst/1.1.1.1/Thu Nov 28 14:18:15 2013/-kk/
+/DeveloperPolicy.rst/1.1.1.2/Fri Jan 31 08:45:36 2014/-kk/
 /Dummy.html/1.1.1.1/Thu Nov 28 14:18:15 2013/-kk/
 /ExceptionHandling.rst/1.1.1.1/Thu Nov 28 14:18:15 2013/-kk/
 /ExtendedIntegerResults.txt/1.1.1.1/Thu Nov 28 14:18:15 2013/-kk/
@@ -33,7 +33,7 @@
 /InAlloca.rst/1.1.1.1/Sun Jan  5 16:13:18 2014/-kk/
 /LLVMBuild.rst/1.1.1.2/Tue Jan 14 16:01:54 2014/-kk/
 /LLVMBuild.txt/1.1.1.1/Thu Nov 28 14:18:15 2013/-kk/
-/LangRef.rst/1.1.1.3/Tue Jan 14 16:01:54 2014/-kk/
+/LangRef.rst/1.1.1.4/Fri Jan 31 08:45:36 2014/-kk/
 /Lexicon.rst/1.1.1.1/Thu Nov 28 14:18:15 2013/-kk/
 /LinkTimeOptimization.rst/1.1.1.1/Thu Nov 28 14:18:15 2013/-kk/
 /MCJIT-creation.png/1.1.1.1/Thu Nov 28 14:18:15 2013/-kk/
@@ -54,7 +54,7 @@
 /ProgrammersManual.rst/1.1.1.1/Thu Nov 28 14:18:15 2013/-kk/
 /Projects.rst/1.1.1.1/Thu Nov 28 14:18:15 2013/-kk/
 /README.txt/1.1.1.1/Thu Nov 28 14:18:15 2013/-kk/
-/ReleaseNotes.rst/1.1.1.3/Tue Jan 14 16:01:54 2014/-kk/
+/ReleaseNotes.rst/1.1.1.4/Fri Jan 31 08:45:36 2014/-kk/
 /ReleaseProcess.rst/1.1.1.2/Tue Jan 14 16:01:55 2014/-kk/
 /SegmentedStacks.rst/1.1.1.1/Thu Nov 28 14:18:15 2013/-kk/
 /SourceLevelDebugging.rst/1.1.1.2/Tue Jan 14 16:01:55 2014/-kk/
@@ -63,7 +63,7 @@
 /SystemLibrary.rst/1.1.1.1/Thu Nov 28 14:18:15 2013/-kk/
 /TableGenFundamentals.rst/1.1.1.2/Tue Jan 14 16:01:55 2014/-kk/
 /TestSuiteMakefileGuide.rst/1.1.1.1/Thu Nov 28 14:18:15 2013/-kk/
-/TestingGuide.rst/1.1.1.1/Thu Nov 28 14:18:15 2013/-kk/
+/TestingGuide.rst/1.1.1.2/Fri Jan 31 08:45:36 2014/-kk/
 /Vectorizers.rst/1.1.1.1/Thu Nov 28 14:18:15 2013/-kk/
 /WritingAnLLVMBackend.rst/1.1.1.2/Tue Jan 14 16:01:55 2014/-kk/
 /WritingAnLLVMPass.rst/1.1.1.1/Thu Nov 28 14:18:15 2013/-kk/

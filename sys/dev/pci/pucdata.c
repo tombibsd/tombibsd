@@ -1852,7 +1852,7 @@ const struct puc_device_description puc_devices[] = {
 
 	/* Intel EG20T UART */
 	{   "Intel EG20T UART #1",
-	    {	PCI_VENDOR_INTEL, PCI_PRODUCT_INTEL_EG20T_UART_1, 0, 1 },
+	    {	PCI_VENDOR_INTEL, PCI_PRODUCT_INTEL_EG20T_UART_1, 0, 0 },
 	    {	0xffff,	0xffff,	0,	0	},
 	    {
 		{ PUC_PORT_TYPE_COM, 0x10, 0x00, COM_FREQ },
@@ -1861,7 +1861,7 @@ const struct puc_device_description puc_devices[] = {
 
 	/* Intel EG20T UART */
 	{   "Intel EG20T UART #2",
-	    {	PCI_VENDOR_INTEL, PCI_PRODUCT_INTEL_EG20T_UART_2, 0, 2 },
+	    {	PCI_VENDOR_INTEL, PCI_PRODUCT_INTEL_EG20T_UART_2, 0, 0 },
 	    {	0xffff,	0xffff,	0,	0	},
 	    {
 		{ PUC_PORT_TYPE_COM, 0x10, 0x00, COM_FREQ },
@@ -1870,7 +1870,7 @@ const struct puc_device_description puc_devices[] = {
 
 	/* Intel EG20T UART */
 	{   "Intel EG20T UART #3",
-	    {	PCI_VENDOR_INTEL, PCI_PRODUCT_INTEL_EG20T_UART_3, 0, 3 },
+	    {	PCI_VENDOR_INTEL, PCI_PRODUCT_INTEL_EG20T_UART_3, 0, 0 },
 	    {	0xffff,	0xffff,	0,	0	},
 	    {
 		{ PUC_PORT_TYPE_COM, 0x10, 0x00, COM_FREQ },

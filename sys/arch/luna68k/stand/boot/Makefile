@@ -4,7 +4,6 @@
 NOMAN= # defined
 
 .include <bsd.own.mk>
-.include <bsd.sys.mk>
 
 S= ${.CURDIR}/../../../..
 LIBSADIR=	${S}/lib/libsa

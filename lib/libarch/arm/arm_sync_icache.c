@@ -38,9 +38,7 @@
 #include <machine/sysarch.h>
 
 int
-arm_sync_icache(addr, len)
-	u_int addr;
-	int len;
+arm_sync_icache(uintptr_t addr, size_t len)
 {
 	struct arm_sync_icache_args p;
 

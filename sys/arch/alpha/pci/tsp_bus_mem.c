@@ -57,7 +57,8 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #define	CHIP_MEM_EX_STORE_SIZE(v)					\
 	(sizeof (((struct tsp_config *)(v))->pc_mem_exstorage))
 
-#define CHIP_MEM_SYS_START(v)    (((struct tsp_config *)(v))->pc_iobase)
+#define CHIP_MEM_SYS_START(v)						\
+	(((struct tsp_config *)(v))->pc_iobase | P_PCI_MEM)
 
 /*
  * Tsunami core logic appears on EV6.  We require at least EV56

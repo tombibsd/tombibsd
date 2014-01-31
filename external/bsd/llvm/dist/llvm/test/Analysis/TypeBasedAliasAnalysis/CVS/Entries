@@ -7,7 +7,7 @@
 /gvn-nonlocal-type-mismatch.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /intrinsics.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /licm.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
-/memcpyopt.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/memcpyopt.ll/1.1.1.2/Fri Jan 31 08:45:41 2014/-kk/
 /placement-tbaa.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /precedence.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /sink.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/

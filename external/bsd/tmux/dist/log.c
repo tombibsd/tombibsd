@@ -108,7 +108,9 @@ log_vwrite(int pri, const char *msg, va_list ap)
 #if __GNUC_PREREQ__(4, 6) || defined(__clang__)
 #pragma GCC diagnostic push
 #endif
+#if __GNUC_PREREQ__(4, 5) 
 #pragma GCC diagnostic ignored "-Wformat-nonliteral"
+#endif
 void printflike1
 log_warn(const char *msg, ...)
 {

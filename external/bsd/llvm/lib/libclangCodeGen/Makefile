@@ -41,6 +41,7 @@ SRCS+=	BackendUtil.cpp \
 	CodeGenAction.cpp \
 	CodeGenFunction.cpp \
 	CodeGenModule.cpp \
+	CodeGenPGO.cpp \
 	CodeGenTBAA.cpp \
 	CodeGenTypes.cpp \
 	ItaniumCXXABI.cpp \

@@ -8,7 +8,7 @@ ACPI_GENCMD=		AWK=${TOOL_AWK:Q} \
 			SED=${TOOL_SED:Q} \
 			${HOST_SH}
 
-AFLAGS.acpi_wakecode.S= ${${ACTIVE_CC} == "clang":?-no-integrated-as:} -I${.CURDIR}
+AFLAGS.acpi_wakecode.S= -I${.CURDIR}
 
 
 acpi_wakecode.h: ${ACPI_WAKECODE_S} ${ACPI_GENWAKECODE}

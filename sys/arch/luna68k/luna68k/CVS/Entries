@@ -1,12 +1,12 @@
-/autoconf.c/1.14/Sat Oct 13 06:16:19 2012/-kk/
+/autoconf.c/1.15/Fri Jan 31 08:48:37 2014/-kk/
 /clock.c/1.9/Thu Oct 24 10:28:57 2013/-kk/
 /disksubr.c/1.30/Thu Oct 24 10:28:57 2013/-kk/
 /genassym.cf/1.20/Sat Nov  5 15:37:17 2011/-kk/
 /isr.c/1.21/Sat Nov 26 04:40:51 2011/-kk/
 /isr.h/1.4/Sat Mar 14 14:46:01 2009/-kk/
-/locore.s/1.53/Thu Oct 24 10:28:57 2013/-kk/
-/machdep.c/1.95/Thu Oct 24 10:28:57 2013/-kk/
-/mainbus.c/1.12/Thu Oct 24 10:28:57 2013/-kk/
+/locore.s/1.54/Fri Jan 31 08:48:37 2014/-kk/
+/machdep.c/1.97/Fri Jan 31 08:48:37 2014/-kk/
+/mainbus.c/1.13/Fri Jan 31 08:48:37 2014/-kk/
 /pmap_bootstrap.c/1.36/Thu Oct 24 10:28:57 2013/-kk/
 /trap.c/1.68/Sun Feb 19 21:06:13 2012/-kk/
 /vectors.s/1.4/Thu Oct 24 10:28:57 2013/-kk/

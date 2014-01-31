@@ -524,7 +524,6 @@ install-${dir}: .PHONY
 dependall-distrib depend-distrib all-distrib: .PHONY
 	@true
 
-.include <bsd.sys.mk>
 .include <bsd.obj.mk>
 .include <bsd.kernobj.mk>
 .include <bsd.subdir.mk>

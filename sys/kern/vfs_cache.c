@@ -968,8 +968,6 @@ cache_prune(int incache, int target)
 			break;
 		items++;
 		nxtcp = TAILQ_NEXT(ncp, nc_lru);
-		if (ncp->nc_dvp == NULL)
-			continue;
 		if (ncp == sentinel) {
 			/*
 			 * If we looped back on ourself, then ignore
@@ -977,6 +975,8 @@ cache_prune(int incache, int target)
 			 */
 			tryharder = 1;
 		}
+		if (ncp->nc_dvp == NULL)
+			continue;
 		if (!tryharder && (ncp->nc_hittime - recent) > 0) {
 			if (sentinel == NULL)
 				sentinel = ncp;

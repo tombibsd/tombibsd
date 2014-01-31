@@ -11,6 +11,7 @@ HEAP_LIMIT=0x1c0000
 #DEBUGLIBS=	no
 
 LIBCRT0=	# nothing
+LIBCRTI=	# nothing
 LIBCRTBEGIN=	# nothing
 LIBCRTEND=	# nothing
 LIBC=		# nothing

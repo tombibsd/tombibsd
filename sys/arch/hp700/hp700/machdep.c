@@ -685,9 +685,13 @@ cpuid(void)
 	error = pdcproc_model_cpuid(&pdc_cpuid);
 	if (error < 0) {
 		DPRINTF(("WARNING: PDC_MODEL_CPUID error %d. "
-		    "Using cpu_modelno based cpu_type.\n", error));
+		    "Using cpu_modelno (%#x) based cpu_type.\n", error, cpu_modelno));
 
 		cpu_type = cpu_model_cpuid(cpu_modelno);
+		if (cpu_type == hpc_unknown) {
+			printf("WARNING: Unknown cpu_type for cpu_modelno %x\n",
+			   cpu_modelno);
+		}
 	} else {
 		DPRINTF(("%s: cpuid.version  = %x\n", __func__,
 		    pdc_cpuid.version));
@@ -774,24 +778,31 @@ cpuid(void)
 		pmap_hptsize = 0;
 	}
 
+	bool cpu_found = false;
 	if (cpu_version) {
+		DPRINTF(("%s: looking for cpu_version %x\n", __func__,
+		    cpu_version));
 		for (i = 0, p = cpu_types; i < __arraycount(cpu_types);
 		     i++, p++) {
-			if (p->hci_cpuversion == cpu_version)
+			if (p->hci_cpuversion == cpu_version) {
+				cpu_found = true;
 				break;
+			}
 		}
 	} else if (cpu_type != hpc_unknown) {
+		DPRINTF(("%s: looking for cpu_type %d\n", __func__,
+		    cpu_type));
 		for (i = 0, p = cpu_types; i < __arraycount(cpu_types);
 		     i++, p++) {
-			if (p->hci_cputype == cpu_type)
+			if (p->hci_cputype == cpu_type) {
+				cpu_found = true;
 				break;
+			}
 		}
-	} else {
-		for (i = 0, p = cpu_types; i < __arraycount(cpu_types);
-		     i++, p++) {
-			if (p->hci_features == cpu_features)
-				break;
-		}
+	}
+
+	if (!cpu_found) {
+		panic("CPU detection failed. Please report the problem.");
 	}
 
 	hppa_cpu_info = p;
@@ -850,6 +861,13 @@ cpu_model_cpuid(int modelno)
 	case HPPA_BOARD_HPE25:
 	case HPPA_BOARD_HPE35:
 	case HPPA_BOARD_HPE45:
+	case HPPA_BOARD_HP715_80:
+	case HPPA_BOARD_HP715_64:
+	case HPPA_BOARD_HP715_100:
+	case HPPA_BOARD_HP715_100XC:
+	case HPPA_BOARD_HP715_100L:
+	case HPPA_BOARD_HP715_120L:
+	case HPPA_BOARD_HP715_80M:
 		return hpcxl;
 
 	case HPPA_BOARD_HP735_99:

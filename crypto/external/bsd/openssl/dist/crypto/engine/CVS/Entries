@@ -1,3 +1,4 @@
+/Makefile.save/1.1.1.1/Sat Jan 11 18:11:15 2014/-kk/
 /Makefile/1.4/Thu Jul 26 19:58:38 2012/-kk/
 /README/1.1.1.1/Sun Jul 19 23:03:56 2009/-kk/
 /eng_aesni.c/1.6/Thu Jul 26 20:21:20 2012/-kk/
@@ -14,7 +15,7 @@
 /eng_list.c/1.1.1.2/Sun Jun  5 14:58:47 2011/-kk/
 /eng_openssl.c/1.1.1.1/Sun Jul 19 23:03:57 2009/-kk/
 /eng_pkey.c/1.1.1.1/Sun Jul 19 23:03:58 2009/-kk/
-/eng_rdrand.c/1.1.1.1/Thu Jul 26 15:01:45 2012/-kk/
+/eng_rdrand.c/1.1.1.2/Fri Jan 31 08:44:59 2014/-kk/
 /eng_rsax.c/1.1.1.1/Thu Jul 26 15:01:45 2012/-kk/
 /eng_table.c/1.1.1.2/Sun Jun  5 14:58:47 2011/-kk/
 /engine.h/1.5/Thu Jul 26 20:21:20 2012/-kk/

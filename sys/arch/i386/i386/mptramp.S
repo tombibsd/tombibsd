@@ -125,7 +125,11 @@ LABEL(cpu_spinup_trampoline)
 	movw    %ax, %ds
 	movw    %ax, %es
 	movw    %ax, %ss
+#ifdef __clang__
+	lgdt    (gdt_desc)      # load flat descriptor table
+#else
 	data32 addr32 lgdt    (gdt_desc)      # load flat descriptor table
+#endif
 	movl    %cr0, %eax      # get cr0
 	orl     $CR0_PE, %eax   # enable protected mode
 	movl    %eax, %cr0      # doit

@@ -84,13 +84,13 @@
 ./usr/lib/sparc/libc++.so.1			base-compat-shlib	compat,pic,libcxx
 ./usr/lib/sparc/libc++.so.1.0			base-compat-shlib	compat,pic,libcxx
 ./usr/lib/sparc/libc.so.12			base-compat-shlib	compat,pic
-./usr/lib/sparc/libc.so.12.188			base-compat-shlib	compat,pic
+./usr/lib/sparc/libc.so.12.189			base-compat-shlib	compat,pic
 ./usr/lib/sparc/libcom_err.so.7			base-compat-shlib	compat,pic,kerberos
 ./usr/lib/sparc/libcom_err.so.7.0		base-compat-shlib	compat,pic,kerberos
 ./usr/lib/sparc/libcrypt.so.1			base-compat-shlib	compat,pic
 ./usr/lib/sparc/libcrypt.so.1.0			base-compat-shlib	compat,pic
 ./usr/lib/sparc/libcrypto.so.8			base-compat-shlib	compat,pic,crypto
-./usr/lib/sparc/libcrypto.so.8.1		base-compat-shlib	compat,pic,crypto
+./usr/lib/sparc/libcrypto.so.8.2		base-compat-shlib	compat,pic,crypto
 ./usr/lib/sparc/libcrypto_idea.so.7		base-obsolete		obsolete
 ./usr/lib/sparc/libcrypto_idea.so.7.0		base-obsolete		obsolete
 ./usr/lib/sparc/libcrypto_mdc2.so.7		base-obsolete		obsolete
@@ -100,7 +100,7 @@
 ./usr/lib/sparc/libcurses.so.7			base-compat-shlib	compat,pic
 ./usr/lib/sparc/libcurses.so.7.0		base-compat-shlib	compat,pic
 ./usr/lib/sparc/libdes.so.8			base-compat-shlib	compat,pic,crypto
-./usr/lib/sparc/libdes.so.8.1			base-compat-shlib	compat,pic,crypto
+./usr/lib/sparc/libdes.so.8.2			base-compat-shlib	compat,pic,crypto
 ./usr/lib/sparc/libdevmapper.so.1		base-compat-shlib	compat,pic,lvm
 ./usr/lib/sparc/libdevmapper.so.1.0		base-compat-shlib	compat,pic,lvm
 ./usr/lib/sparc/libdm.so.0			base-compat-shlib	compat,pic
@@ -289,7 +289,7 @@
 ./usr/lib/sparc/libssh.so.22			base-compat-shlib	compat,pic,crypto
 ./usr/lib/sparc/libssh.so.22.0			base-compat-shlib	compat,pic,crypto
 ./usr/lib/sparc/libssl.so.10			base-compat-shlib	compat,pic,crypto
-./usr/lib/sparc/libssl.so.10.1			base-compat-shlib	compat,pic,crypto
+./usr/lib/sparc/libssl.so.10.2			base-compat-shlib	compat,pic,crypto
 ./usr/lib/sparc/libstdc++.so.7			base-compat-shlib	compat,pic,gcccmds,libstdcxx
 ./usr/lib/sparc/libstdc++.so.7.0		base-compat-shlib	gcc=4,compat,pic,libstdcxx
 ./usr/lib/sparc/libstdc++.so.7.1		base-compat-shlib	gcc=45,compat,pic,libstdcxx

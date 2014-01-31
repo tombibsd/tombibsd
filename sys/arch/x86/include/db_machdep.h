@@ -11,6 +11,7 @@
 #define INTERRUPT	3
 #define INTERRUPT_TSS	4
 #define TRAP_TSS	5
+#define SOFTINTR	6
 
 #define MAXNARG		16
 

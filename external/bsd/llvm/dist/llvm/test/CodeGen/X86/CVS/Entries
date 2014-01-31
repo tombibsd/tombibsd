@@ -180,7 +180,7 @@
 /2008-08-19-SubAndFetch.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /2008-08-23-64Bit-maskmovq.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
 /2008-08-31-EH_RETURN32.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
-/2008-08-31-EH_RETURN64.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
+/2008-08-31-EH_RETURN64.ll/1.1.1.2/Fri Jan 31 08:45:47 2014/-kk/
 /2008-09-05-sinttofp-2xi32.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
 /2008-09-09-LinearScanBug.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /2008-09-11-CoalescerBug.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
@@ -442,7 +442,7 @@
 /2011-10-12-MachineCSE.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /2011-10-18-FastISel-VectorParams.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
 /2011-10-19-LegelizeLoad.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
-/2011-10-19-widen_vselect.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
+/2011-10-19-widen_vselect.ll/1.1.1.2/Fri Jan 31 08:45:50 2014/-kk/
 /2011-10-21-widen-cmp.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /2011-10-27-tstore.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
 /2011-10-30-padd.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
@@ -516,7 +516,7 @@
 /Atomics-64.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /DbgValueOtherTargets.test/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /MachineSink-CritEdge.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
-/MachineSink-DbgValue.ll/1.1.1.2/Tue Jan 14 16:02:07 2014/-kk/
+/MachineSink-DbgValue.ll/1.1.1.3/Fri Jan 31 08:45:50 2014/-kk/
 /MachineSink-PHIUse.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
 /MachineSink-eflags.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /MergeConsecutiveStores.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
@@ -546,7 +546,7 @@
 /andimm8.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /anyext.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /anyregcc-crash.ll/1.1.1.2/Tue Jan 14 16:02:07 2014/-kk/
-/anyregcc.ll/1.1.1.2/Tue Jan 14 16:02:07 2014/-kk/
+/anyregcc.ll/1.1.1.3/Fri Jan 31 08:45:50 2014/-kk/
 /apm.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /arg-cast.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
 /asm-block-labels.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
@@ -642,22 +642,22 @@
 /avx2-vperm2i128.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
 /avx512-arith.ll/1.1.1.2/Tue Jan 14 16:02:07 2014/-kk/
 /avx512-build-vector.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
-/avx512-cmp.ll/1.1.1.2/Tue Jan 14 16:02:07 2014/-kk/
-/avx512-cvt.ll/1.1.1.2/Tue Jan 14 16:02:07 2014/-kk/
+/avx512-cmp.ll/1.1.1.3/Fri Jan 31 08:45:51 2014/-kk/
+/avx512-cvt.ll/1.1.1.3/Fri Jan 31 08:45:51 2014/-kk/
 /avx512-fma-intrinsics.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
 /avx512-fma.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /avx512-gather-scatter-intrin.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /avx512-insert-extract.ll/1.1.1.2/Tue Jan 14 16:02:07 2014/-kk/
-/avx512-intrinsics.ll/1.1.1.2/Tue Jan 14 16:02:07 2014/-kk/
+/avx512-intrinsics.ll/1.1.1.3/Fri Jan 31 08:45:51 2014/-kk/
 /avx512-mask-op.ll/1.1.1.2/Tue Jan 14 16:02:08 2014/-kk/
 /avx512-mov.ll/1.1.1.2/Tue Jan 14 16:02:08 2014/-kk/
 /avx512-select.ll/1.1.1.2/Tue Jan 14 16:02:08 2014/-kk/
 /avx512-shift.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
 /avx512-shuffle.ll/1.1.1.2/Tue Jan 14 16:02:08 2014/-kk/
-/avx512-trunc-ext.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
+/avx512-trunc-ext.ll/1.1.1.2/Fri Jan 31 08:45:51 2014/-kk/
 /avx512-vbroadcast.ll/1.1.1.2/Tue Jan 14 16:02:08 2014/-kk/
 /avx512-vec-cmp.ll/1.1.1.2/Tue Jan 14 16:02:08 2014/-kk/
-/avx512-vselect-crash.ll/1.1.1.1/Sun Jan  5 16:18:09 2014/-kk/
+/avx512-vselect-crash.ll/1.1.1.2/Fri Jan 31 08:45:51 2014/-kk/
 /avx512-zext-load-crash.ll/1.1.1.1/Sun Jan  5 16:17:53 2014/-kk/
 /barrier-sse.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
 /barrier.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
@@ -683,7 +683,7 @@
 /bss_pagealigned.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
 /bswap-inline-asm.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /bswap.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
-/bt.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
+/bt.ll/1.1.1.2/Fri Jan 31 08:45:51 2014/-kk/
 /btq.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /buildvec-insertvec.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
 /byval-align.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
@@ -697,6 +697,7 @@
 /call-imm.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /call-push.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /cas.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
+/catch.ll/1.1.1.1/Wed Jan 15 21:24:23 2014/-kk/
 /cfstring.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /chain_order.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /change-compare-stride-1.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
@@ -772,7 +773,10 @@
 /divide-by-constant.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /divrem.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /dll-linkage.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
-/dllexport.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
+/dllexport-x86_64.ll/1.1.1.1/Wed Jan 15 21:24:23 2014/-kk/
+/dllexport.ll/1.1.1.2/Fri Jan 31 08:45:52 2014/-kk/
+/dllimport-x86_64.ll/1.1.1.1/Wed Jan 15 21:24:23 2014/-kk/
+/dllimport.ll/1.1.1.1/Wed Jan 15 21:24:23 2014/-kk/
 /dollar-name.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /dwarf-comp-dir.ll/1.1.1.2/Tue Jan 14 16:02:08 2014/-kk/
 /dyn-stackalloc.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
@@ -828,7 +832,7 @@
 /fast-isel-tailcall.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /fast-isel-tls.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /fast-isel-x86-64.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
-/fast-isel-x86.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
+/fast-isel-x86.ll/1.1.1.2/Fri Jan 31 08:45:52 2014/-kk/
 /fast-isel.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /fastcall-correct-mangling.ll/1.1.1.2/Tue Jan 14 16:02:09 2014/-kk/
 /fastcc-2.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
@@ -854,6 +858,7 @@
 /fold-and-shift.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /fold-call-2.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /fold-call-3.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
+/fold-call-oper.ll/1.1.1.1/Wed Jan 15 21:24:23 2014/-kk/
 /fold-call.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /fold-imm.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /fold-load-vec.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
@@ -932,7 +937,7 @@
 /i256-add.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /i2k.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /i486-fence-loop.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
-/i64-mem-copy.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
+/i64-mem-copy.ll/1.1.1.2/Fri Jan 31 08:45:53 2014/-kk/
 /iabs.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /ident-metadata.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /illegal-insert.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
@@ -1058,6 +1063,7 @@
 /mfence.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /mingw-alloca.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /misaligned-memset.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
+/misched-aa-mmos.ll/1.1.1.1/Wed Jan 15 21:24:23 2014/-kk/
 /misched-balance.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
 /misched-copy.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /misched-crash.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
@@ -1174,7 +1180,7 @@
 /postra-licm.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /powi.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /pr10068.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
-/pr10420.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
+/pr10420.ll/1.1.1.2/Fri Jan 31 08:45:55 2014/-kk/
 /pr10475.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /pr10499.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
 /pr10523.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
@@ -1212,7 +1218,7 @@
 /pr15267.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /pr15296.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /pr15309.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
-/pr16031.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
+/pr16031.ll/1.1.1.2/Fri Jan 31 08:45:55 2014/-kk/
 /pr16360.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /pr16807.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /pr17546.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
@@ -1303,6 +1309,7 @@
 /setcc-narrowing.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /setcc-sentinals.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /setcc.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
+/setjmp-spills.ll/1.1.1.1/Wed Jan 15 21:24:23 2014/-kk/
 /setoeq.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
 /setuge.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
 /sext-i1.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
@@ -1328,7 +1335,7 @@
 /shl-anyext.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /shl-i64.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /shl_elim.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
-/shl_undef.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
+/shl_undef.ll/1.1.1.2/Fri Jan 31 08:45:56 2014/-kk/
 /shrink-compare.ll/1.1.1.2/Tue Jan 14 16:02:12 2014/-kk/
 /shrink-fp-const1.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /shrink-fp-const2.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
@@ -1338,7 +1345,7 @@
 /sibcall-5.ll/1.1.1.2/Tue Jan 14 16:02:12 2014/-kk/
 /sibcall-6.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
 /sibcall-byval.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
-/sibcall.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
+/sibcall.ll/1.1.1.2/Fri Jan 31 08:45:56 2014/-kk/
 /simple-zext.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
 /sincos-opt.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
 /sincos.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
@@ -1381,7 +1388,7 @@
 /sse2-intrinsics-x86.ll/1.1.1.2/Tue Jan 14 16:02:12 2014/-kk/
 /sse2-mul.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /sse2-vector-shifts.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
-/sse2.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
+/sse2.ll/1.1.1.2/Fri Jan 31 08:45:57 2014/-kk/
 /sse3-intrinsics-x86.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /sse3.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
 /sse41-blend.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
@@ -1404,10 +1411,10 @@
 /stack-update-frame-opcode.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /stackmap-liveness.ll/1.1.1.1/Sun Jan  5 16:18:04 2014/-kk/
 /stackmap-nops.ll/1.1.1.1/Sun Jan  5 16:18:10 2014/-kk/
-/stackmap.ll/1.1.1.2/Tue Jan 14 16:02:12 2014/-kk/
+/stackmap.ll/1.1.1.3/Fri Jan 31 08:45:57 2014/-kk/
 /stdarg.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
-/stdcall-notailcall.ll/1.1.1.2/Tue Jan 14 16:02:12 2014/-kk/
-/stdcall.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
+/stdcall-notailcall.ll/1.1.1.3/Fri Jan 31 08:45:57 2014/-kk/
+/stdcall.ll/1.1.1.2/Fri Jan 31 08:45:57 2014/-kk/
 /store-empty-member.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /store-fp-constant.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /store-global-address.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
@@ -1497,7 +1504,7 @@
 /utf8.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /v-binop-widen.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
 /v-binop-widen2.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
-/v2f32.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
+/v2f32.ll/1.1.1.2/Fri Jan 31 08:45:57 2014/-kk/
 /v4f32-immediate.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
 /v4i32load-crash.ll/1.1.1.1/Sun Jan  5 16:18:11 2014/-kk/
 /v8i1-masks.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
@@ -1542,7 +1549,7 @@
 /vec_loadsingles.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /vec_logical.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /vec_return.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
-/vec_round.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
+/vec_round.ll/1.1.1.2/Fri Jan 31 08:45:58 2014/-kk/
 /vec_sdiv_to_shift.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
 /vec_set-2.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /vec_set-3.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
@@ -1605,7 +1612,7 @@
 /vec_zero.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /vec_zero_cse.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
 /vec_zext.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
-/vector-gep.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
+/vector-gep.ll/1.1.1.2/Fri Jan 31 08:45:58 2014/-kk/
 /vector-intrinsics.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
 /vector-rem.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
 /vector-variable-idx.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
@@ -1618,12 +1625,13 @@
 /volatile.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
 /vortex-bug.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /vselect-minmax.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
-/vselect.ll/1.1.1.1/Sun Jan  5 16:18:11 2014/-kk/
+/vselect.ll/1.1.1.2/Fri Jan 31 08:45:58 2014/-kk/
 /vshift-1.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
 /vshift-2.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /vshift-3.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
 /vshift-4.ll/1.1.1.2/Tue Jan 14 16:02:14 2014/-kk/
 /vshift-5.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
+/vshift-6.ll/1.1.1.1/Wed Jan 15 21:24:23 2014/-kk/
 /vshift_scalar.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /vshift_split.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
 /vshift_split2.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
@@ -1654,7 +1662,7 @@
 /widen_load-1.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /widen_load-2.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /widen_shuffle-1.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
-/win32_sret.ll/1.1.1.2/Tue Jan 14 16:02:14 2014/-kk/
+/win32_sret.ll/1.1.1.3/Fri Jan 31 08:45:58 2014/-kk/
 /win64_alloca_dynalloca.ll/1.1.1.2/Tue Jan 14 16:02:14 2014/-kk/
 /win64_params.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
 /win64_vararg.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/

@@ -59,6 +59,7 @@ double	 getpmem(const struct kinfo_proc2 *);
 void	 gname(void *, VARENT *, int);
 void	 groups(void *, VARENT *, int);
 void	 groupnames(void *, VARENT *, int);
+void	 lcputime(void *, VARENT *, int);
 void	 logname(void *, VARENT *, int);
 void	 longtname(void *, VARENT *, int);
 void	 lname(void *, VARENT *, int);

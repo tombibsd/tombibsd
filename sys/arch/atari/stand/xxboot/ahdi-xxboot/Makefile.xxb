@@ -4,6 +4,7 @@ PROG=	xxboot.ahdi
 SRCS=	xxboot.ahdi.S
 NOMAN=	# defined
 LIBCRT0=
+LIBCRTI=
 .PATH: ${.CURDIR}/..
 
 .include <../../Makefile.xxboot>

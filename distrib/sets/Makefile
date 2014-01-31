@@ -336,4 +336,4 @@ sets: .PHONY maketars .WAIT makesums
 sourcesets: .PHONY makesrctars
 	@true
 
-.include <bsd.sys.mk>
+.include <bsd.files.mk>

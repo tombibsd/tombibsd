@@ -33,7 +33,7 @@
 /float.h/1.12/Wed Feb 26 21:29:00 2003/-kk/
 /frame.h/1.35/Sun Feb 19 21:06:11 2012/-kk/
 /frameasm.h/1.15/Tue Jul 26 12:57:35 2011/-kk/
-/freebsd_machdep.h/1.11/Tue Dec 17 04:13:27 2013/-kk/
+/freebsd_machdep.h/1.12/Fri Jan 31 08:48:37 2014/-kk/
 /gdt.h/1.13/Mon Apr 28 20:23:24 2008/-kk/
 /i82093reg.h/1.8/Thu Jul  3 14:02:25 2008/-kk/
 /i82093var.h/1.7/Wed Feb 26 21:29:00 2003/-kk/
@@ -69,9 +69,9 @@
 /mtrr.h/1.8/Wed Feb 26 21:29:02 2003/-kk/
 /multiboot.h/1.8/Sun Feb 22 18:05:42 2009/-kk/
 /mutex.h/1.2/Fri Feb  9 21:55:05 2007/-kk/
-/npx.h/1.27/Tue Dec 17 04:13:27 2013/-kk/
+/npx.h/1.29/Fri Jan 31 08:48:37 2014/-kk/
 /param.h/1.77/Fri Apr 20 22:23:24 2012/-kk/
-/pcb.h/1.50/Tue Dec 17 04:13:27 2013/-kk/
+/pcb.h/1.51/Fri Jan 31 08:48:37 2014/-kk/
 /pci_machdep.h/1.19/Wed Feb 26 21:29:02 2003/-kk/
 /pic.h/1.2/Wed Feb 26 21:29:02 2003/-kk/
 /pio.h/1.20/Wed Feb 26 21:29:02 2003/-kk/

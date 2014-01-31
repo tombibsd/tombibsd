@@ -20,8 +20,9 @@ SRCS=		atoll.c basename.c cdbr.c cdbw.c dirname.c \
 		stat_flags.c strlcat.c strlcpy.c strmode.c \
 		strndup.c strnlen.c \
 		strsep.c strsuftoll.c strtoll.c \
-		unvis.c vis.c err.c errx.c verr.c verrx.c \
-		vwarn.c vwarnx.c warn.c warnx.c fts.c glob.c efun.c
+		unvis.c vis.c err.c errx.c errc.c verr.c verrx.c verrc.c \
+		vwarn.c vwarnx.c vwarnc.c warn.c warnx.c warnc.c \
+		fts.c glob.c efun.c
 
 BUILD_OSTYPE!=  uname -s
 

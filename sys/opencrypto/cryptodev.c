@@ -2205,6 +2205,8 @@ crypto_modcmd(modcmd_t cmd, void *arg)
 		return error;
 	case MODULE_CMD_FINI:
 #ifdef _MODULE
+#ifdef notyet
+		/* We need to keep track of open instances before we do this */
 		error = config_cfdata_detach(crypto_cfdata);
 		if (error) {
 			return error;
@@ -2213,6 +2215,9 @@ crypto_modcmd(modcmd_t cmd, void *arg)
 		config_cfattach_detach(crypto_cd.cd_name, &crypto_ca);
 		config_cfdriver_detach(&crypto_cd);
 		devsw_detach(NULL, &crypto_cdevsw);
+#else
+		return EOPNOTSUPP;
+#endif
 #endif
 
 		return error;

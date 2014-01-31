@@ -597,12 +597,14 @@ pckbcintr(void *vsc)
 		if (!(stat & KBS_DIB))
 			break;
 
-		served = 1;
-
 		slot = (t->t_haveaux && (stat & 0x20)) ?
 		    PCKBC_AUX_SLOT : PCKBC_KBD_SLOT;
 		q = t->t_slotdata[slot];
 
+		if (q != NULL && q->polling)
+			return 0;
+
+		served = 1;
 		KBD_DELAY;
 		data = bus_space_read_1(t->t_iot, t->t_ioh_d, 0);
 

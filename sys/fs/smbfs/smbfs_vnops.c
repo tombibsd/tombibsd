@@ -573,7 +573,7 @@ smbfs_write(void *v)
 int
 smbfs_create(void *v)
 {
-	struct vop_create_args /* {
+	struct vop_create_v2_args /* {
 		struct vnode *a_dvp;
 		struct vnode **a_vpp;
 		struct componentname *a_cnp;
@@ -610,7 +610,6 @@ smbfs_create(void *v)
 
   out:
 	VN_KNOTE(dvp, NOTE_WRITE);
-	vput(dvp);
 	return (error);
 }
 
@@ -775,7 +774,7 @@ smbfs_symlink(void *v)
 int
 smbfs_mkdir(void *v)
 {
-	struct vop_mkdir_args /* {
+	struct vop_mkdir_v2_args /* {
 		struct vnode *a_dvp;
 		struct vnode **a_vpp;
 		struct componentname *a_cnp;
@@ -811,7 +810,6 @@ smbfs_mkdir(void *v)
 
  out:
 	VN_KNOTE(dvp, NOTE_WRITE | NOTE_LINK);
-	vput(dvp);
 
 	return (error);
 }

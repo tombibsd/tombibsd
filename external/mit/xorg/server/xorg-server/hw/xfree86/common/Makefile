@@ -1,6 +1,6 @@
 #	$NetBSD$
 
-.include <bsd.sys.mk> # for HOST_SH
+.include <bsd.own.mk>
 
 .include "../../../Makefile.serverlib"
 .include "../../../Makefile.servermod"

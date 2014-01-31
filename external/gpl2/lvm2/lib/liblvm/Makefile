@@ -15,7 +15,6 @@ CPPFLAGS+=	-I${LVM2_DISTDIR}/lib -I${LVM2_DISTDIR}/include \
 		-I. 
 
 .include <bsd.own.mk>
-.include <bsd.sys.mk> # for USE_SSP
 
 # Some parts of liblvm can't be protected because if its
 # alloca() usage.

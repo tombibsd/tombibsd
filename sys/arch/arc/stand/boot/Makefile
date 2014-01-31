@@ -1,7 +1,6 @@
 # $NetBSD$
 
 .include <bsd.own.mk>
-.include <bsd.sys.mk>	# for ${HOST_SH}
 
 S!= cd ${.CURDIR}/../../../..; pwd
 
@@ -21,6 +20,7 @@ SRCS+=	boot.c bootinfo.c conf.c devopen.c disk.c getchar.c getopt.c putchar.c
 
 # XXX SHOULD NOT NEED TO DEFINE THESE!
 LIBCRT0=
+LIBCRTI=
 LIBC=
 LIBCRTBEGIN=
 LIBCRTEND=

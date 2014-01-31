@@ -59,6 +59,7 @@
 /global-offset.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /got.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /ident.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
+/ifunc-reloc.s/1.1.1.1/Wed Jan 15 21:24:18 2014/-kk/
 /invalid-symver.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /lcomm.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /leb128.s/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
@@ -79,9 +80,9 @@
 /relax-arith.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /relax-crash.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /relax.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
-/relocation-386.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
+/relocation-386.s/1.1.1.2/Fri Jan 31 08:45:59 2014/-kk/
 /relocation-pc.s/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
-/relocation.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
+/relocation.s/1.1.1.2/Fri Jan 31 08:45:59 2014/-kk/
 /rename.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /section-quoting.s/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /section.s/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
@@ -92,7 +93,7 @@
 /symref.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /tls-i386.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /tls.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
-/type.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
+/type.s/1.1.1.2/Fri Jan 31 08:45:59 2014/-kk/
 /uleb.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /undef.s/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /undef2.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/

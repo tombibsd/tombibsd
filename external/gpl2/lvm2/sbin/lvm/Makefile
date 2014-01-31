@@ -31,7 +31,6 @@ CPPFLAGS+=	-I${LVM2_DISTDIR}/lib -I${LVM2_DISTDIR}/include \
 CPPFLAGS+=	-DLVM_SHARED_PATH=\"$(BINDIR)/lvm\"
 
 .include <bsd.own.mk>
-.include <bsd.sys.mk> # for USE_SSP
 
 # Some parts of the code can't be protected because if its
 # alloca() usage.

@@ -36,7 +36,6 @@
 # For MK* vars
 .include <bsd.own.mk>
 
-.include <bsd.sys.mk>		# for HOST_SH, TOOL_AWK, ...
 .include <bsd.kernobj.mk>	# For KERNSRCDIR, KERNOBJDIR, ...
 .include <bsd.endian.mk>	# For TARGET_ENDIANNESS
 

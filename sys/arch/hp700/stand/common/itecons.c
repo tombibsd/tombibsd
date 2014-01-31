@@ -189,7 +189,7 @@ ite_getc(dev_t dev)
 		if (!i-- && (dev & 0x80) && l == 0) {
 #ifdef DEBUG
 			if (debug > 2)
-				printf("ite_getc(0x%x): no char %d(%x)\n",
+				printf("ite_getc(%llx): no char %d(%x)\n",
 				       dev, l, c);
 #endif
 			return (0);

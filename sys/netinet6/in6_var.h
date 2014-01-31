@@ -694,8 +694,6 @@ void	in6_ifaddloop(struct ifaddr *);
 void	in6_createmkludge(struct ifnet *);
 void	in6_purgemkludge(struct ifnet *);
 struct in6_ifaddr *in6ifa_ifpforlinklocal(const struct ifnet *, int);
-struct in6_ifaddr *in6ifa_ifplocaladdr(const struct ifnet *,
-    const struct in6_addr *);
 struct in6_ifaddr *in6ifa_ifpwithaddr(const struct ifnet *,
     const struct in6_addr *);
 char	*ip6_sprintf(const struct in6_addr *);

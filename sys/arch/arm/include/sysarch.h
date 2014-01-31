@@ -70,7 +70,7 @@ struct arm_unaligned_faults_args {
 
 #ifndef _KERNEL
 __BEGIN_DECLS
-int	arm_sync_icache(u_int addr, int len);
+int	arm_sync_icache(uintptr_t, size_t);
 int	arm_drain_writebuf(void);
 int	sysarch(int, void *);
 __END_DECLS

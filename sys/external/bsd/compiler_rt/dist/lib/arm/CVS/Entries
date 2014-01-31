@@ -12,11 +12,11 @@
 /aeabi_uldivmod.S/1.1.1.1/Thu Oct 24 10:28:58 2013/-kk/
 /bswapdi2.S/1.1.1.1/Thu Oct 24 10:28:58 2013/-kk/
 /bswapsi2.S/1.1.1.1/Thu Oct 24 10:28:58 2013/-kk/
-/comparesf2.S/1.1.1.1/Thu Oct 24 10:28:58 2013/-kk/
+/comparesf2.S/1.1.1.2/Fri Jan 31 08:48:49 2014/-kk/
 /divdf3vfp.S/1.1.1.1/Thu Oct 24 10:28:58 2013/-kk/
-/divmodsi4.S/1.1.1.1/Thu Oct 24 10:28:58 2013/-kk/
+/divmodsi4.S/1.1.1.2/Fri Jan 31 08:48:49 2014/-kk/
 /divsf3vfp.S/1.1.1.1/Thu Oct 24 10:28:58 2013/-kk/
-/divsi3.S/1.1.1.1/Thu Oct 24 10:28:58 2013/-kk/
+/divsi3.S/1.1.1.2/Fri Jan 31 08:48:49 2014/-kk/
 /eqdf2vfp.S/1.1.1.1/Thu Oct 24 10:28:58 2013/-kk/
 /eqsf2vfp.S/1.1.1.1/Thu Oct 24 10:28:58 2013/-kk/
 /extendsfdf2vfp.S/1.1.1.1/Thu Oct 24 10:28:58 2013/-kk/
@@ -36,7 +36,7 @@
 /lesf2vfp.S/1.1.1.1/Thu Oct 24 10:28:58 2013/-kk/
 /ltdf2vfp.S/1.1.1.1/Thu Oct 24 10:28:58 2013/-kk/
 /ltsf2vfp.S/1.1.1.1/Thu Oct 24 10:28:58 2013/-kk/
-/modsi3.S/1.1.1.1/Thu Oct 24 10:28:58 2013/-kk/
+/modsi3.S/1.1.1.2/Fri Jan 31 08:48:49 2014/-kk/
 /muldf3vfp.S/1.1.1.1/Thu Oct 24 10:28:58 2013/-kk/
 /mulsf3vfp.S/1.1.1.1/Thu Oct 24 10:28:58 2013/-kk/
 /nedf2vfp.S/1.1.1.1/Thu Oct 24 10:28:58 2013/-kk/
@@ -48,15 +48,15 @@
 /softfloat-alias.list/1.1.1.1/Thu Oct 24 10:28:58 2013/-kk/
 /subdf3vfp.S/1.1.1.1/Thu Oct 24 10:28:58 2013/-kk/
 /subsf3vfp.S/1.1.1.1/Thu Oct 24 10:28:58 2013/-kk/
-/switch16.S/1.1.1.1/Thu Oct 24 10:28:58 2013/-kk/
-/switch32.S/1.1.1.1/Thu Oct 24 10:28:58 2013/-kk/
-/switch8.S/1.1.1.1/Thu Oct 24 10:28:58 2013/-kk/
-/switchu8.S/1.1.1.1/Thu Oct 24 10:28:58 2013/-kk/
+/switch16.S/1.1.1.2/Fri Jan 31 08:48:49 2014/-kk/
+/switch32.S/1.1.1.2/Fri Jan 31 08:48:49 2014/-kk/
+/switch8.S/1.1.1.2/Fri Jan 31 08:48:49 2014/-kk/
+/switchu8.S/1.1.1.2/Fri Jan 31 08:48:49 2014/-kk/
 /sync_synchronize.S/1.1.1.1/Thu Oct 24 10:28:58 2013/-kk/
 /truncdfsf2vfp.S/1.1.1.1/Thu Oct 24 10:28:58 2013/-kk/
-/udivmodsi4.S/1.1.1.1/Thu Oct 24 10:28:58 2013/-kk/
-/udivsi3.S/1.1.1.1/Thu Oct 24 10:28:58 2013/-kk/
-/umodsi3.S/1.1.1.1/Thu Oct 24 10:28:58 2013/-kk/
+/udivmodsi4.S/1.1.1.2/Fri Jan 31 08:48:49 2014/-kk/
+/udivsi3.S/1.1.1.2/Fri Jan 31 08:48:49 2014/-kk/
+/umodsi3.S/1.1.1.2/Fri Jan 31 08:48:49 2014/-kk/
 /unorddf2vfp.S/1.1.1.1/Thu Oct 24 10:28:58 2013/-kk/
 /unordsf2vfp.S/1.1.1.1/Thu Oct 24 10:28:58 2013/-kk/
 D

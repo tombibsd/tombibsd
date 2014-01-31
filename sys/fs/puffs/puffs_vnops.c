@@ -755,7 +755,7 @@ do {									\
 int
 puffs_vnop_create(void *v)
 {
-	struct vop_create_args /* {
+	struct vop_create_v2_args /* {
 		const struct vnodeop_desc *a_desc;
 		struct vnode *a_dvp;
 		struct vnode **a_vpp;
@@ -809,8 +809,6 @@ puffs_vnop_create(void *v)
 		update_parent(*ap->a_vpp, dvp);
 
  out:
-	vput(dvp);
-
 	DPRINTF(("puffs_create: return %d\n", error));
 	PUFFS_MSG_RELEASE(create);
 	return error;
@@ -819,7 +817,7 @@ puffs_vnop_create(void *v)
 int
 puffs_vnop_mknod(void *v)
 {
-	struct vop_mknod_args /* {
+	struct vop_mknod_v2_args /* {
 		const struct vnodeop_desc *a_desc;
 		struct vnode *a_dvp;
 		struct vnode **a_vpp;
@@ -872,7 +870,6 @@ puffs_vnop_mknod(void *v)
 		update_parent(*ap->a_vpp, dvp);
 
  out:
-	vput(dvp);
 	PUFFS_MSG_RELEASE(mknod);
 	return error;
 }
@@ -1816,7 +1813,7 @@ puffs_vnop_remove(void *v)
 int
 puffs_vnop_mkdir(void *v)
 {
-	struct vop_mkdir_args /* {
+	struct vop_mkdir_v2_args /* {
 		const struct vnodeop_desc *a_desc;
 		struct vnode *a_dvp;
 		struct vnode **a_vpp;
@@ -1868,7 +1865,6 @@ puffs_vnop_mkdir(void *v)
 		update_parent(*ap->a_vpp, dvp);
 
  out:
-	vput(dvp);
 	PUFFS_MSG_RELEASE(mkdir);
 	return error;
 }
@@ -1981,7 +1977,7 @@ puffs_vnop_link(void *v)
 int
 puffs_vnop_symlink(void *v)
 {
-	struct vop_symlink_args /* {
+	struct vop_symlink_v2_args /* {
 		const struct vnodeop_desc *a_desc;
 		struct vnode *a_dvp;
 		struct vnode **a_vpp;
@@ -2038,7 +2034,6 @@ puffs_vnop_symlink(void *v)
 		update_parent(*ap->a_vpp, dvp);
 
  out:
-	vput(dvp);
 	PUFFS_MSG_RELEASE(symlink);
 
 	return error;

@@ -81,7 +81,7 @@ GENERIC_SRCS+= \
 	umodti3.c
 
 .if ${MACHINE_CPU} == "arm"
-.  if !empty(LIBC_MACHINE_ARCH:Mearm*)
+.  if !empty(MACHINE_ARCH:Mearm*)
 GENERIC_SRCS+= \
 	aeabi_idivmod.S \
 	aeabi_ldivmod.S \

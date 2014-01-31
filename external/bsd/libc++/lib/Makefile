@@ -46,4 +46,18 @@ CWARNFLAGS.clang+=	-Wno-error=implicit-exception-spec-mismatch
 
 LDADD+=	-Wl,-z,defs
 
+.if !empty(MACHINE_ARCH:M*arm*)
+# Missing __sync_fetch_and_add_4
+# Missing __sync_lock_test_and_set_4
+# Missing __sync_val_compare_and_swap_4
+# Missing __atomic_fetch_add_4
+COPTS.ios.cpp+= -march=armv6
+COPTS.locale.cpp+= -march=armv6
+COPTS.memory.cpp+= -march=armv6
+COPTS.new.cpp+= -march=armv6
+COPTS.rt_exception.cc+= -march=armv6
+COPTS.rt_guard.cc+= -march=armv6
+COPTS.stdexcept.cpp+= -march=armv6
+.endif
+
 .include <bsd.lib.mk>

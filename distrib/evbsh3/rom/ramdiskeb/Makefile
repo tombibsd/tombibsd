@@ -84,4 +84,4 @@ clean cleandir distclean:
 .include <bsd.own.mk>
 .include <bsd.obj.mk>
 .include <bsd.subdir.mk>
-.include <bsd.sys.mk>
+.include <bsd.files.mk>

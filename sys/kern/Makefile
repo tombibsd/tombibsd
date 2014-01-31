@@ -4,7 +4,7 @@
 
 # Makefile for kernel tags files, init_sysent, etc.
 
-.include <bsd.sys.mk>		# for HOST_SH
+.include <bsd.own.mk>		# for HOST_SH
 
 all:
 	@echo "make tags, links, init_sysent.c, or vnode_if.c only"
@@ -59,3 +59,5 @@ links::
 	    (cd ../$$i && { rm -f tags; ln -s ${SYSTAGS} tags; }); done
 	-for i in ${ARCH}; do \
 	    (cd ../arch/$$i && ${MAKE} ${MFLAGS} SYSTAGS=${SYSTAGS} links); done
+
+.include <bsd.files.mk>

@@ -55,7 +55,6 @@ CDRELEASE_EXCLUDE+=	-s ',./installation/liveimage.*,,gp'
 CDRELEASE_EXCLUDE+=	-s ',./installation/installimage.*,,gp'
 .endif
 
-.include <bsd.sys.mk>		# for HOST_SH
 .include <bsd.own.mk> 		# For PRINTOBJDIR
 .include <bsd.kernobj.mk>	# For KERNSRCDIR
 

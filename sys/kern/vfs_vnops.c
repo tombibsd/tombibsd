@@ -184,6 +184,7 @@ vn_open(struct nameidata *ndp, int fmode, int cmode)
 				 va.va_vaflags |= VA_EXCLUSIVE;
 			error = VOP_CREATE(ndp->ni_dvp, &ndp->ni_vp,
 					   &ndp->ni_cnd, &va);
+			vput(ndp->ni_dvp);
 			if (error)
 				goto out;
 			fmode &= ~O_TRUNC;

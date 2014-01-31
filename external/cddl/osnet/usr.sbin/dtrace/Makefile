@@ -6,6 +6,7 @@
 .include	"../../Makefile.inc"
 
 PROG=		dtrace
+MAN=		dtrace.1
 
 BINDIR?=	/usr/sbin
 
@@ -28,6 +29,7 @@ CFLAGS+=	-I${OSNETDIR}/sys \
 #YFLAGS+=	-d
 
 COPTS.dtrace.c += -Wno-stack-protector
+COPTS.dtrace.c += -Wno-stack-protector -Wno-format-extra-args
 
 LDFLAGS+=	-pthread
 
@@ -38,5 +40,6 @@ LIBDTRACE_OBJDIR!= cd ${.CURDIR}/../../lib/libdtrace && ${PRINTOBJDIR}
 LDFLAGS+=	-L${LIBCTF_OBJDIR} -lctf
 
 LDADD+=		-ly -ll -lelf -lz
+
 
 .include <bsd.prog.mk>

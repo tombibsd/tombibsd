@@ -36,7 +36,6 @@
 #
 
 .include <bsd.own.mk>	# for some variables
-.include <bsd.sys.mk>	# for more variables
 
 RELEASEVARS=	BSDOBJDIR BSDSRCDIR BUILDID \
 		DESTDIR DISTRIBVER EXTERNAL_TOOLCHAIN HAVE_GCC HAVE_GDB \

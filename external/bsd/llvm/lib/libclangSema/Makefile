@@ -50,7 +50,6 @@ SRCS+=	AnalysisBasedWarnings.cpp \
 	SemaTemplateInstantiateDecl.cpp \
 	SemaTemplateVariadic.cpp \
 	SemaType.cpp \
-	TargetAttributesSema.cpp \
 	TypeLocBuilder.cpp
 
 .if defined(HOSTLIB)

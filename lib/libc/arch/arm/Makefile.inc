@@ -30,7 +30,7 @@ SOFTFLOAT_BITS=32
 .include <softfloat/Makefile.inc>
 .else
 .PATH : ${ARCHDIR}/hardfloat
-SRCS.hardfloat+=	fpgetround.c fpgetsticky.S fpgetmask.S
+SRCS.hardfloat+=	fpgetround.c fpgetsticky.S fpgetmask.S fabs_ieee754.S
 SRCS.hardfloat+=	fpsetround.c fpsetmask.S fpsetsticky.S
 .for f in ${SRCS.hardfloat}
 CPPFLAGS.${f} += -mfpu=vfp

@@ -143,10 +143,13 @@ nd6_ns_input(struct mbuf *m, int off, int icmp6len)
 			goto bad;
 		}
 	} else {
+		struct sockaddr_in6 ssin6;
+
 		/*
 		 * Make sure the source address is from a neighbor's address.
 		 */
-		if (in6ifa_ifplocaladdr(ifp, &saddr6) == NULL) {
+		sockaddr_in6_init(&ssin6, &saddr6, 0, 0, 0);
+		if (nd6_is_addr_neighbor(&ssin6, ifp) == 0) {
 			nd6log((LOG_INFO, "nd6_ns_input: "
 			    "NS packet from non-neighbor\n"));
 			goto bad;
@@ -563,6 +566,7 @@ nd6_na_input(struct mbuf *m, int off, int icmp6len)
 	struct rtentry *rt;
 	struct sockaddr_dl *sdl;
 	union nd_opts ndopts;
+	struct sockaddr_in6 ssin6;
 
 	if (ip6->ip6_hlim != 255) {
 		nd6log((LOG_ERR,
@@ -637,11 +641,13 @@ nd6_na_input(struct mbuf *m, int off, int icmp6len)
 		    ip6_sprintf(&taddr6));
 		goto freeit;
 	}
+
 	/*
 	 * Make sure the source address is from a neighbor's address.
 	 */
-	if (in6ifa_ifplocaladdr(ifp, &saddr6) == NULL) {
-		nd6log((LOG_INFO, "nd6_ns_input: "
+	sockaddr_in6_init(&ssin6, &saddr6, 0, 0, 0);
+	if (nd6_is_addr_neighbor(&ssin6, ifp) == 0) {
+		nd6log((LOG_INFO, "nd6_na_input: "
 		    "ND packet from non-neighbor\n"));
 		goto bad;
 	}

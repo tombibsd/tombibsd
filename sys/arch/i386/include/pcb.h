@@ -104,12 +104,4 @@ struct pcb {
 	char	*pcb_iomap;		/* I/O permission bitmap */
 };
 
-/*    
- * The pcb is augmented with machine-dependent additional data for 
- * core dumps. For the i386, there is nothing to add.
- */     
-struct md_coredump {
-	long	md_pad[8];
-};    
-
 #endif /* _I386_PCB_H_ */

@@ -36,8 +36,6 @@
 #include <lib/libsa/stand.h>
 
 #define	NSCSI		2
-#define NSD		8
-#define DK_NDRIVE	8
 
 #define MHZ_8		1
 #define MHZ_16		2
@@ -52,8 +50,8 @@ typedef struct label_t {
 } label_t;
 
 /* autoconf.c */
-void configure(void);
 void find_devs(void);
+extern const int dev2adpt[];
 
 /* awaitkey.c */
 char awaitkey(const char *, int, bool);
@@ -71,25 +69,20 @@ void bmdadjust(short, short);
 void bmdclear(void);
 
 /* boot.c */
-extern int howto;
-int how_to_boot(int, char **);
 int boot(int, char **);
-int bootnetbsd(char *);
-
-/* clock.c */
-/* not yet */
+int bootnetbsd(char *, int);
 
 /* cons.c */
 void cninit(void);
 int cngetc(void);
 void cnputc(int);
 
+/* devopen.c */
+int make_device(const char *, int *, int *, int *, char **);
+
 /* disklabel.c */
 extern u_char lbl_buff[];
 int disklabel(int, char **);
-
-/* exec.c */
-void exec_hp300(char *, u_long, int);
 
 /* font.c */
 extern const uint16_t bmdfont[][20];
@@ -125,7 +118,6 @@ bool lance_end(void *);
 int lance_intr(void);
 
 /* locore.S */
-extern	u_int bootdev;
 extern int dipsw1, dipsw2;
 extern int cputype;
 extern volatile uint32_t tick;

@@ -45,9 +45,7 @@ dir="$(atf_get_srcdir)"
 res="-r ${dir}/resolv.conf"
 
 # Hijack DNS traffic using a single rump server instance and a DNS
-# server listening on its loopback address.  Also hijack file system
-# call to /etc, mapping them to the root file system of the rump 
-# server, so that we can control the contents of /etc/resolv.conf.
+# server listening on its loopback address.
 
 start_dns_server() {
 	export RUMP_SERVER=unix:///tmp/rumpserver
@@ -71,7 +69,7 @@ gethostbyname4_head()
 gethostbyname4_body()
 {
 	start_dns_server 4
-	atf_check -o inline:"$ans4" -x "$HIJACK_DNS ${dir}/h_hostent $res -t auto -4 $n4"
+	atf_check -o inline:"$ans4" -x "$HIJACK_DNS ${dir}/h_hostent ${res} -t auto -4 $n4"
 }
 gethostbyname4_cleanup()
 {
@@ -116,7 +114,7 @@ gethostbyaddr6_head()
 gethostbyaddr6_body()
 {
 	start_dns_server 4
-	atf_check -o inline:"$ans6" -x "$HIJACK_DNS ${dir}/h_hostent -t auto -a $a6"
+	atf_check -o inline:"$ans6" -x "$HIJACK_DNS ${dir}/h_hostent ${res} -t auto -a $a6"
 }
 gethostbyaddr6_cleanup()
 {

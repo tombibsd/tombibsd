@@ -672,6 +672,7 @@
 ./usr/bin/rump.sockstat				base-util-bin		rump
 ./usr/bin/rump_allserver			base-util-bin		rump
 ./usr/bin/rump_server				base-util-bin		rump
+./usr/bin/rump_wmd				base-util-bin		rump
 ./usr/bin/rup					base-netutil-bin
 ./usr/bin/ruptime				base-netutil-bin
 ./usr/bin/rusers				base-netutil-bin
@@ -4312,6 +4313,7 @@
 ./usr/share/mk/bsd.endian.mk			base-mk-share		share
 ./usr/share/mk/bsd.files.mk			base-mk-share		share
 ./usr/share/mk/bsd.gcc.mk			base-mk-share		share
+./usr/share/mk/bsd.host.mk			base-mk-share		share
 ./usr/share/mk/bsd.hostlib.mk			base-mk-share		share
 ./usr/share/mk/bsd.hostprog.mk			base-mk-share		share
 ./usr/share/mk/bsd.inc.mk			base-mk-share		share
@@ -4337,6 +4339,7 @@
 ./usr/share/mk/bsd.shlib.mk			base-mk-share		share
 ./usr/share/mk/bsd.subdir.mk			base-mk-share		share
 ./usr/share/mk/bsd.sys.mk			base-mk-share		share
+./usr/share/mk/bsd.syscall.mk			base-mk-share		share
 ./usr/share/mk/bsd.test.mk			base-mk-share		share
 ./usr/share/mk/bsd.x11.mk			base-mk-share		share
 ./usr/share/mk/sys.mk				base-mk-share		share

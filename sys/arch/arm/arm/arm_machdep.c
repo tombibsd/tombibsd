@@ -174,12 +174,21 @@ setregs(struct lwp *l, struct exec_package *pack, vaddr_t stack)
 	tf->tf_svc_lr = 0x77777777;		/* Something we can see */
 	tf->tf_pc = pack->ep_entry;
 #ifdef __PROG32
+#if defined(__ARMEB__)
+	/*
+	 * If we are running on ARMv7, we need to set the E bit to force
+	 * programs to start as big endian.
+	 */
+	tf->tf_spsr = PSR_USR32_MODE | (CPU_IS_ARMV7_P() ? PSR_E_BIT : 0);
+#else
 	tf->tf_spsr = PSR_USR32_MODE;
+#endif /* __ARMEB__ */ 
+
 #ifdef THUMB_CODE
 	if (pack->ep_entry & 1)
 		tf->tf_spsr |= PSR_T_bit;
 #endif
-#endif
+#endif /* __PROG32 */
 
 	l->l_md.md_flags = 0;
 #ifdef EXEC_AOUT

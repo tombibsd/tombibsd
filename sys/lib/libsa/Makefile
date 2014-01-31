@@ -28,10 +28,6 @@ SRCS+=	alloc.c errno.c exit.c files.c \
 	panic.c printf.c qsort.c snprintf.c sprintf.c strerror.c \
 	subr_prf.c twiddle.c vsprintf.c checkpasswd.c
 
-.if (${MACHINE_CPU} != "mips")
-SRCS+=	exec.c
-.endif
-
 # string routines
 .if ${MACHINE_ARCH} != "i386" && ${MACHINE_ARCH} != "x86_64"
 SRCS+=	memcmp.c memcpy.c memmove.c memset.c strchr.c

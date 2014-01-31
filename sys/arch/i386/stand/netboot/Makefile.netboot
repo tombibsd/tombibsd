@@ -4,8 +4,6 @@ NOMAN=	# defined
 
 UNSUPPORTED_COMPILER.clang=	# defined
 
-AFLAGS.start_rom.S= ${${ACTIVE_CC} == "clang":?-no-integrated-as:}
-
 PIE_CFLAGS=
 PIE_LDFLAGS=
 PIE_AFLAGS=

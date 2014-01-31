@@ -2,7 +2,8 @@
 #
 
 RUMPDEVCOMP=	audio bpf cgd disk dm drvctl fss md netsmb pad pud	\
-		putter raidframe rnd scsipi scsitest sysmon wscons
+		putter raidframe rnd scsipi scsitest sysmon wscons	\
+		opencrypto
 
 RUMPUSBDEVS=	ubt ucom ugenhc ulpt umass usb
 

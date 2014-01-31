@@ -1,7 +1,6 @@
 #	$NetBSD$
 
 .include <bsd.own.mk>
-.include <bsd.sys.mk>
 
 diodevs.h diodevs_data.h: diodevs devlist2h.awk
 	/bin/rm -f diodevs.h diodevs_data.h

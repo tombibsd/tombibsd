@@ -46,6 +46,10 @@ __dead void	errx(int, const char *, ...)
 		     __printflike(2, 3) __dead;
 __dead void	verrx(int, const char *, va_list)
 		    __printflike(2, 0) __dead;
+__dead void	errc(int, int, const char *, ...)
+		     __printflike(3, 4) __dead;
+__dead void	verrc(int, int, const char *, va_list)
+		    __printflike(3, 0) __dead;
 void		warn(const char *, ...)
 		    __printflike(1, 2);
 void		vwarn(const char *, va_list)
@@ -54,6 +58,10 @@ void		warnx(const char *, ...)
 		    __printflike(1, 2);
 void		vwarnx(const char *, va_list)
 		    __printflike(1, 0);
+void		warnc(int, const char *, ...)
+		    __printflike(2, 3);
+void		vwarnc(int, const char *, va_list)
+		    __printflike(2, 0);
 __END_DECLS
 
 #endif /* !_ERR_H_ */

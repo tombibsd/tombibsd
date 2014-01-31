@@ -34,6 +34,7 @@ LDFLAGS+=	-nostdlib -Bstatic
 CLEANFILES+=	vers.c vers.o
 
 LIBCRT0=	crt0.o
+LIBCRTI=	# nothing
 LIBC=		# nothing
 LIBCRTBEGIN=	# nothing
 LIBCRTEND=	# nothing

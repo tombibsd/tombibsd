@@ -31,7 +31,7 @@
 .\"
 .\"	@(#)sh.1	8.6 (Berkeley) 5/4/95
 .\"
-.Dd October 2, 2013
+.Dd January 20, 2014
 .Dt SH 1
 .Os
 .Sh NAME
@@ -1157,6 +1157,15 @@ matches a
 .Dq \&[
 rather than introducing a character class.
 A character class matches any of the characters between the square brackets.
+A named class of characters (see
+.Xr wctype 3 )
+may be specified by surrounding the name with
+.Pq Dq [:
+and
+.Pq Dq :] .
+For example,
+.Pq Dq [[:alpha:]]
+is a shell pattern that matches a single letter.
 A range of characters may be specified using a minus sign
 .Pq Dq - .
 The character class may be complemented

@@ -852,8 +852,8 @@ union_mkshadow(struct union_mount *um, struct vnode *dvp,
 	va.va_type = VDIR;
 	va.va_mode = um->um_cmode;
 
-	vref(dvp);
 	error = VOP_MKDIR(dvp, vpp, &cn, &va);
+	VOP_UNLOCK(dvp);
 	PNBUF_PUT(pnbuf);
 	return error;
 }

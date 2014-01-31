@@ -1,7 +1,7 @@
 #	$NetBSD$
 #
 
-.include <bsd.sys.mk>		# for HOST_SH
+.include <bsd.own.mk>
 
 PROJECT_DIRS=	hpcboot libz libsa
 

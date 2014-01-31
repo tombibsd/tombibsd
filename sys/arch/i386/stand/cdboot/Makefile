@@ -14,6 +14,7 @@ NOMAN=		# defined
 STRIPFLAG=	# nothing
 
 LIBCRT0=	# nothing
+LIBCRTI=	# nothing
 LIBCRTBEGIN=	# nothing
 LIBCRTEND=	# nothing
 LIBC=		# nothing

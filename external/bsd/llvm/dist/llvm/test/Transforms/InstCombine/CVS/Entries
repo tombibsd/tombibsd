@@ -338,7 +338,7 @@
 /fwrite-1.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /gep-addrspace.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /gepgep.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
-/getelementptr.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/getelementptr.ll/1.1.1.2/Fri Jan 31 08:46:01 2014/-kk/
 /hoist_instr.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /icmp-logical.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /icmp.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
@@ -504,9 +504,9 @@
 /vec_extract_var_elt.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /vec_insertelt.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /vec_narrow.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
-/vec_phi_extract.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/vec_phi_extract.ll/1.1.1.2/Fri Jan 31 08:46:01 2014/-kk/
 /vec_sext.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
-/vec_shuffle.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/vec_shuffle.ll/1.1.1.2/Fri Jan 31 08:46:01 2014/-kk/
 /vector-casts.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /vector-mul.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /vector-srem.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/

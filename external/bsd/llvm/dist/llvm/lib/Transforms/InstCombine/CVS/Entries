@@ -3,7 +3,7 @@
 /InstCombineAddSub.cpp/1.1.1.1/Thu Nov 28 14:18:22 2013/-kk/
 /InstCombineAndOrXor.cpp/1.1.1.1/Thu Nov 28 14:18:22 2013/-kk/
 /InstCombineCalls.cpp/1.1.1.1/Thu Nov 28 14:18:22 2013/-kk/
-/InstCombineCasts.cpp/1.1.1.2/Tue Jan 14 16:01:57 2014/-kk/
+/InstCombineCasts.cpp/1.1.1.3/Fri Jan 31 08:45:41 2014/-kk/
 /InstCombineCompares.cpp/1.1.1.3/Tue Jan 14 16:01:57 2014/-kk/
 /InstCombineLoadStoreAlloca.cpp/1.1.1.2/Tue Jan 14 16:01:57 2014/-kk/
 /InstCombineMulDivRem.cpp/1.1.1.1/Thu Nov 28 14:18:23 2013/-kk/
@@ -11,7 +11,7 @@
 /InstCombineSelect.cpp/1.1.1.1/Thu Nov 28 14:18:22 2013/-kk/
 /InstCombineShifts.cpp/1.1.1.1/Thu Nov 28 14:18:22 2013/-kk/
 /InstCombineSimplifyDemanded.cpp/1.1.1.1/Thu Nov 28 14:18:22 2013/-kk/
-/InstCombineVectorOps.cpp/1.1.1.1/Thu Nov 28 14:18:22 2013/-kk/
+/InstCombineVectorOps.cpp/1.1.1.2/Fri Jan 31 08:45:41 2014/-kk/
 /InstCombineWorklist.h/1.1.1.1/Thu Nov 28 14:18:22 2013/-kk/
 /InstructionCombining.cpp/1.1.1.2/Tue Jan 14 16:01:57 2014/-kk/
 /LLVMBuild.txt/1.1.1.1/Thu Nov 28 14:18:22 2013/-kk/

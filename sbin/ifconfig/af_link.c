@@ -59,7 +59,7 @@ static const struct kwinst linkkw[] = {
 	   .k_bool = true, .k_nextparser = &command_root.pb_parser}
 };
 
-struct pkw link = PKW_INITIALIZER(&link, "link", NULL, NULL,
+struct pkw link_pkw = PKW_INITIALIZER(&link_pkw, "link", NULL, NULL,
     linkkw, __arraycount(linkkw), NULL);
 
 static struct afswtch af = {
@@ -127,6 +127,6 @@ static void
 link_constructor(void)
 {
 	register_family(&af);
-	cmdloop_branch_init(&branch, &link.pk_parser);
+	cmdloop_branch_init(&branch, &link_pkw.pk_parser);
 	register_cmdloop_branch(&branch);
 }

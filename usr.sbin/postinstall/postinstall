@@ -796,6 +796,30 @@ do_dhcpcd()
 }
 
 #
+#	dhcpcdrundir
+#
+additem dhcpcdrundir "accientaly created /@RUNDIR@ does not exist"
+do_dhcpcdrundir()
+{
+	[ -n "$1" ] || err 3 "USAGE: do_dhcpcdrundir fix|check"
+	op="$1"
+	failed=0
+
+	if [ -d /@RUNDIR@ ]; then
+		if [ "${op}" = "check" ]; then
+			msg "Remove eroneously created /@RUNDIR@"
+			failed=1
+		elif ! eval "rm -r /@RUNDIR@"; then
+			msg "Failed to remove /@RUNDIR@"
+			failed=1
+		else
+			msg "Removed eroneously created /@RUNDIR@"
+		fi
+	fi
+	return ${failed}
+}
+
+#
 #	envsys
 #
 additem envsys "envsys configuration is up to date"

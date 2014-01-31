@@ -1,6 +1,6 @@
 # $NetBSD$
 
-.include <bsd.sys.mk>		# for HOST_SH
+.include <bsd.own.mk>
 
 # $S must correspond to the top of the 'sys' tree
 S=	${.CURDIR}/../../../..
@@ -9,6 +9,7 @@ BINMODE?=	444
 
 # XXX SHOULD NOT NEED TO DEFINE THESE!
 LIBCRT0=
+LIBCRTI=
 LIBC=
 LIBCRTBEGIN=
 LIBCRTEND=

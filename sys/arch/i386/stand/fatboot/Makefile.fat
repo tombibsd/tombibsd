@@ -6,6 +6,7 @@ PROG?=		fatboot
 NOMAN=		# defined
 
 LIBCRT0=	# nothing
+LIBCRTI=	# nothing
 LIBCRTBEGIN=	# nothing
 LIBCRTEND=	# nothing
 LIBC=		# nothing

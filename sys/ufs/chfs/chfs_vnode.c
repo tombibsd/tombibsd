@@ -257,7 +257,6 @@ chfs_makeinode(int mode, struct vnode *dvp, struct vnode **vpp,
 	if (error) {
 		mutex_exit(&chmp->chm_lock_mountfields);
 		vput(vp);
-		vput(dvp);
 		return error;
 	}
 
@@ -269,10 +268,8 @@ chfs_makeinode(int mode, struct vnode *dvp, struct vnode **vpp,
 	if (error) {
 		mutex_exit(&chmp->chm_lock_mountfields);
 		vput(vp);
-		vput(dvp);
 		return error;
 	}
-	vput(dvp);
 
 	/* setup directory entry */
 	nfd = chfs_alloc_dirent(cnp->cn_namelen + 1);

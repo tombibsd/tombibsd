@@ -151,13 +151,11 @@ static void in6_unlink_ifa(struct in6_ifaddr *, struct ifnet *);
 static void
 in6_ifloop_request(int cmd, struct ifaddr *ifa)
 {
-	struct sockaddr_in6 lo_sa;
 	struct sockaddr_in6 all1_sa;
 	struct rtentry *nrt = NULL;
 	int e;
 
 	sockaddr_in6_init(&all1_sa, &in6mask128, 0, 0, 0);
-	sockaddr_in6_init(&lo_sa, &in6addr_loopback, 0, 0, 0);
 
 	/*
 	 * We specify the address itself as the gateway, and set the
@@ -1866,32 +1864,6 @@ bestia(struct in6_ifaddr *best_ia, struct in6_ifaddr *ia)
 	if (best_ia == NULL ||
 	    best_ia->ia_ifa.ifa_preference < ia->ia_ifa.ifa_preference)
 		return ia;
-	return best_ia;
-}
-
-/*
- * find the internet address on a given interface corresponding to a neighbor's
- * address.
- */
-struct in6_ifaddr *
-in6ifa_ifplocaladdr(const struct ifnet *ifp, const struct in6_addr *addr)
-{
-	struct ifaddr *ifa;
-	struct in6_ifaddr *best_ia = NULL, *ia;
-
-	IFADDR_FOREACH(ifa, ifp) {
-		if (ifa->ifa_addr == NULL)
-			continue;	/* just for safety */
-		if (ifa->ifa_addr->sa_family != AF_INET6)
-			continue;
-		ia = (struct in6_ifaddr *)ifa;
-		if (!IN6_ARE_MASKED_ADDR_EQUAL(addr,
-				&ia->ia_addr.sin6_addr,
-				&ia->ia_prefixmask.sin6_addr))
-			continue;
-		best_ia = bestia(best_ia, ia);
-	}
-
 	return best_ia;
 }
 

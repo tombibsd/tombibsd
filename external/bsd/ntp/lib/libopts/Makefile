@@ -19,6 +19,8 @@ SRCS=libopts.c
 COPTS.libopts.c += -DPOSIX_SHELL="\"/bin/sh\"" -Wno-format-nonliteral
 .if ${HAVE_GCC:U} >= 45
 COPTS.libopts.c+=	${${ACTIVE_CC} == "gcc":? -Wno-format-contains-nul :}
+.else
+COPTS.libopts.c+=	-Wno-format
 .endif
 
 .include <bsd.lib.mk>

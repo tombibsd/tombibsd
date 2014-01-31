@@ -3249,7 +3249,7 @@ sa110_setup(char *args)
 	 * enable clockswitching, note that this doesn't read or write to r0,
 	 * r0 is just to make it valid asm
 	 */
-	__asm volatile ("mcr 15, 0, r0, c15, c1, 2");
+	__asm volatile ("mcr p15, 0, r0, c15, c1, 2");
 }
 #endif	/* CPU_SA110 */
 

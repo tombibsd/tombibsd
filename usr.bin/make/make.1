@@ -29,7 +29,7 @@
 .\"
 .\"	from: @(#)make.1	8.4 (Berkeley) 3/19/94
 .\"
-.Dd October 25, 2013
+.Dd January 19, 2014
 .Dt MAKE 1
 .Os
 .Sh NAME
@@ -638,6 +638,10 @@ target is to be transformed (the
 source); also known as
 .Ql Va \&\*[Lt] .
 It is not defined in explicit rules.
+.It Va .INCLUDEDFROMDIR
+The directory of the file this Makefile was included from.
+.It Va .INCLUDEDFROMFILE
+The filename of the file this Makefile was included from.
 .It Va .MEMBER
 The name of the archive member.
 .It Va .OODATE
@@ -1246,6 +1250,15 @@ and
 are orthogonal; the former specifies whether multiple words are
 potentially affected, the latter whether multiple substitutions can
 potentially occur within each affected word.
+.Pp
+As for the
+.Cm \&:S
+modifier, the
+.Ar pattern
+and
+.Ar replacement
+are subjected to variable expansion before being parsed as
+regular expressions.
 .It Cm \&:T
 Replaces each word in the variable with its last component.
 .It Cm \&:u

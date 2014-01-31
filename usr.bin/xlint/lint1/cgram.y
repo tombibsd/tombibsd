@@ -1171,6 +1171,7 @@ init_expr:
 		mkinit($1);
 	  }
 	| init_by_name init_expr	%prec T_COMMA
+	| init_lbrace init_rbrace
 	| init_lbrace init_expr_list init_rbrace
 	| init_lbrace init_expr_list T_COMMA init_rbrace
 	| error

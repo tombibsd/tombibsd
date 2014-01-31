@@ -4,7 +4,7 @@
 /ansi.h/1.15/Thu Oct 24 10:28:57 2013/-kk/
 /aout_machdep.h/1.5/Sun Dec 11 12:16:46 2005/-kk/
 /apmvar.h/1.1/Thu Oct 24 10:28:57 2013/-kk/
-/armreg.h/1.84/Wed Jan  1 02:45:22 2014/-kk/
+/armreg.h/1.85/Fri Jan 31 08:48:34 2014/-kk/
 /asm.h/1.25/Tue Dec 17 04:13:25 2013/-kk/
 /atomic.h/1.11/Wed Nov 19 06:39:17 2008/-kk/
 /blockio.h/1.2/Sat Jun  2 10:44:56 2001/-kk/
@@ -41,7 +41,7 @@
 /kcore.h/1.1/Tue Jan  1 14:06:43 2008/-kk/
 /limits.h/1.13/Thu Oct 24 10:28:57 2013/-kk/
 /lock.h/1.25/Thu Oct 24 10:28:57 2013/-kk/
-/locore.h/1.6/Wed Dec 25 07:37:18 2013/-kk/
+/locore.h/1.7/Fri Jan 31 08:48:34 2014/-kk/
 /math.h/1.2/Tue Feb 19 13:08:14 2002/-kk/
 /mcontext.h/1.16/Thu Oct 24 10:28:57 2013/-kk/
 /mutex.h/1.13/Tue Sep 25 05:24:00 2012/-kk/
@@ -61,7 +61,7 @@
 /setjmp.h/1.5/Thu Oct 24 10:28:57 2013/-kk/
 /signal.h/1.12/Thu Jun 30 20:09:20 2011/-kk/
 /swi.h/1.1/Sun Jan 13 15:03:06 2002/-kk/
-/sysarch.h/1.10/Thu Oct 24 10:28:57 2013/-kk/
+/sysarch.h/1.11/Fri Jan 31 08:48:34 2014/-kk/
 /trap.h/1.8/Sat Jan 19 13:11:09 2008/-kk/
 /types.h/1.25/Thu Oct 24 10:28:57 2013/-kk/
 /undefined.h/1.12/Sat Mar 14 14:45:55 2009/-kk/

@@ -3,7 +3,6 @@
 NOMAN=		# defined
 
 .include <bsd.own.mk>
-.include <bsd.sys.mk>
 
 S=		${.CURDIR}/../../../..
 
@@ -48,6 +47,7 @@ CPPFLAGS+=	-DNETBSD_VERS='"${NETBSD_VERS}"'
 
 # XXX SHOULD NOT NEED TO DEFINE THESE!
 LIBCRT0=
+LIBCRTI=
 LIBC=
 LIBCRTBEGIN=
 LIBCRTEND=

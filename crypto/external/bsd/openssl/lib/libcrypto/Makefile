@@ -23,7 +23,6 @@ USE_FIPS=	no
 
 .include <bsd.own.mk>
 .include <bsd.shlib.mk>
-.include <bsd.sys.mk>		# for HOST_SH
 
 # XXX There's a bit of work to do before we can enable warnings.
 WARNS=0

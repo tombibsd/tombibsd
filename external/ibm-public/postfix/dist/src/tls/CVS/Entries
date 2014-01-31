@@ -7,7 +7,7 @@
 /tls_level.c/1.1.1.1/Tue Jun 23 10:08:57 2009/-kk/
 /tls_mgr.c/1.1.1.1/Tue Jun 23 10:08:57 2009/-kk/
 /tls_mgr.h/1.1.1.1/Tue Jun 23 10:08:57 2009/-kk/
-/tls_misc.c/1.1.1.7/Thu Oct 24 10:28:53 2013/-kk/
+/tls_misc.c/1.1.1.8/Fri Jan 31 08:47:45 2014/-kk/
 /tls_prng.h/1.1.1.1/Tue Jun 23 10:08:57 2009/-kk/
 /tls_prng_dev.c/1.1.1.1/Tue Jun 23 10:08:57 2009/-kk/
 /tls_prng_egd.c/1.1.1.1/Tue Jun 23 10:08:57 2009/-kk/

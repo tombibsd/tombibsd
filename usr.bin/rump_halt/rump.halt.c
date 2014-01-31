@@ -25,6 +25,8 @@
  * SUCH DAMAGE.
  */
 
+#include <rump/rumpuser_port.h>
+
 #include <sys/cdefs.h>
 #ifndef lint
 __RCSID("$NetBSD$");
@@ -44,6 +46,10 @@ __RCSID("$NetBSD$");
 #include <unistd.h>
 
 #define ARGFLAGS "dhn"
+
+#ifndef PLATFORM_HAS_SETGETPROGNAME
+#define getprogname() "rump_halt"
+#endif
 
 __dead static void
 usage(void)

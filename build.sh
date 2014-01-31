@@ -1286,7 +1286,7 @@ sanitycheck()
 	#
 	if ! ${do_expertmode} && \
 	    [ "$id_u" -ne 0 ] && \
-	    [ "${MKUNPRIVED}" = "no" ] ; then
+	    [ "${MKUNPRIVED:-no}" = "no" ] ; then
 		bomb "-U or -E must be set for build as an unprivileged user."
 	fi
 

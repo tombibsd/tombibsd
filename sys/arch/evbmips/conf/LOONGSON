@@ -152,6 +152,7 @@ options		WSDISPLAY_SCROLLSUPPORT
 options		WS_KERNEL_FG=WSCOL_GREEN
 #options 	WSDISPLAY_DEFAULTSCREENS=4
 options 	FONT_GALLANT12x22
+options 	FONT_BOLD8x16
 # compatibility to other console drivers
 options 	WSDISPLAY_COMPAT_RAWKBD		# can get raw scancodes
 #

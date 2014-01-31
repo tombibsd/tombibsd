@@ -336,19 +336,16 @@ rump_init(void)
 	kauth_init();
 
 	secmodel_init();
+	sysctl_init();
 
 	rnd_init();
-
-	/*
-	 * Create the kernel cprng.  Yes, it's currently stubbed out
-	 * to arc4random() for RUMP, but this won't always be so.
-	 */
+	cprng_init();
 	kern_cprng = cprng_strong_create("kernel", IPL_VM,
-					 CPRNG_INIT_ANY|CPRNG_REKEY_ANY);
+	    CPRNG_INIT_ANY|CPRNG_REKEY_ANY);
+	rump_hyperentropy_init();
 
 	procinit();
 	proc0_init();
-	sysctl_init();
 	uid_init();
 	chgproccnt(0, 1);
 
@@ -403,6 +400,8 @@ rump_init(void)
 
 	/* CPUs are up.  allow kernel threads to run */
 	rump_thread_allow();
+
+	rnd_init_softint();
 
 	mksysctls();
 	kqueue_init();

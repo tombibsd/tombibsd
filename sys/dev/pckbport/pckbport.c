@@ -396,6 +396,7 @@ pckbport_start(struct pckbport_tag *t, pckbport_slot_t slot)
 	struct pckbport_slotdata *q = t->t_slotdata[slot];
 	struct pckbport_devcmd *cmd = TAILQ_FIRST(&q->cmdqueue);
 
+	KASSERT(cmd != NULL);
 	if (q->polling) {
 		do {
 			pckbport_poll_cmd1(t, slot, cmd);
@@ -432,10 +433,7 @@ pckbport_cmdresponse(struct pckbport_tag *t, pckbport_slot_t slot, u_char data)
 	struct pckbport_slotdata *q = t->t_slotdata[slot];
 	struct pckbport_devcmd *cmd = TAILQ_FIRST(&q->cmdqueue);
 
-#ifdef DIAGNOSTIC
-	if (!cmd)
-		panic("pckbport_cmdresponse: no active command");
-#endif
+	KASSERT(cmd != NULL);
 	if (cmd->cmdidx < cmd->cmdlen) {
 		if (data != KBR_ACK && data != KBR_RESEND)
 			return 0;

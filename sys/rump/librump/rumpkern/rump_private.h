@@ -150,4 +150,6 @@ void	rump_thread_allow(void);
 
 void	rump_consdev_init(void);
 
+void	rump_hyperentropy_init(void);
+
 #endif /* _SYS_RUMP_PRIVATE_H_ */

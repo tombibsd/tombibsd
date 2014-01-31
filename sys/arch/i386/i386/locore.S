@@ -881,8 +881,9 @@ END(lgdt_finish)
  *
  * This is a trampoline function pushed onto the stack of a newly created
  * process in order to do some additional setup.  The trampoline is entered by
- * cpu_switch()ing to the process, so we abuse the callee-saved registers used
- * by cpu_switch() to store the information about the stub to call.
+ * cpu_switchto()ing to the process, so we abuse the callee-saved
+ * registers used by cpu_switchto() to store the information about the
+ * stub to call.
  * NOTE: This function does not have a normal calling sequence!
  */
 NENTRY(lwp_trampoline)

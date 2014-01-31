@@ -149,6 +149,7 @@ VAR var[] = {
 	VAR3("logname", "login", ALIAS),
 	VAR6("lstart", "STARTED", LJUST, lstarted, POFF(p_ustart_sec), UINT32),
 	VAR4("lstate", "STAT", LJUST|LWP, lstate),
+	VAR6("ltime", "LTIME", LWP, lcputime, 0, CPUTIME),
 	PUVAR("majflt", "MAJFLT", 0, p_uru_majflt, UINT64, PRIu64),
 	PUVAR("minflt", "MINFLT", 0, p_uru_minflt, UINT64, PRIu64),
 	PUVAR("msgrcv", "MSGRCV", 0, p_uru_msgrcv, UINT64, PRIu64),

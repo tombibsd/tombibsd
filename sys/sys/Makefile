@@ -1,6 +1,6 @@
 #	$NetBSD$
 
-.include <bsd.sys.mk>
+.include <bsd.own.mk>
 
 INCSDIR= /usr/include/sys
 

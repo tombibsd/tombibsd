@@ -3,7 +3,7 @@
 
 /*
  * dhcpcd - DHCP client daemon
- * Copyright (c) 2006-2013 Roy Marples <roy@marples.name>
+ * Copyright (c) 2006-2014 Roy Marples <roy@marples.name>
  * All rights reserved
 
  * Redistribution and use in source and binary forms, with or without
@@ -107,7 +107,7 @@ static const struct dhcp_op dhcp_ops[] = {
 	{ 0, NULL }
 };
 
-static const char *dhcp_params[] = {
+static const char * const dhcp_params[] = {
 	"ip_address",
 	"subnet_cidr",
 	"network_number",
@@ -133,7 +133,7 @@ static int dhcp_open(struct interface *);
 void
 dhcp_printoptions(void)
 {
-	const char **p;
+	const char * const *p;
 	size_t i;
 	const struct dhcp_opt *opt;
 

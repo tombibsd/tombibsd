@@ -203,9 +203,8 @@ do_load(const char *const filename)
 	}
 
 	memset(&rszero, 0, sizeof(rszero));
-	if (write(fd, &rszero, sizeof(rszero) != sizeof(rszero))) {
+	if (pwrite(fd, &rszero, sizeof(rszero), (off_t)0) != sizeof(rszero))
 		err(1, "overwrite");
-	}
 	fsync_range(fd, FDATASYNC|FDISKSYNC, (off_t)0, (off_t)0);
 	close(fd);
 

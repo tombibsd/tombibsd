@@ -27,6 +27,7 @@ DBG=		-Os
 CWARNFLAGS.clang+=	-Wno-asm-operand-widths
 
 LIBCRT0=	# nothing
+LIBCRTI=	# nothing
 LIBCRTBEGIN=	# nothing
 LIBCRTEND=	# nothing
 LIBC=		# nothing

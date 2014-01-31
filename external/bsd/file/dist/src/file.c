@@ -127,8 +127,14 @@ private const struct {
 
 private char *progname;		/* used throughout 		*/
 
+#ifdef __dead
+__dead
+#endif
 private void usage(void);
 private void docprint(const char *);
+#ifdef __dead
+__dead
+#endif
 private void help(void);
 
 private int unwrap(struct magic_set *, const char *);

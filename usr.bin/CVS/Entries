@@ -1,5 +1,5 @@
 /Makefile.inc/1.10/Wed Mar 21 05:47:53 2012/-kk/
-/Makefile/1.215/Wed Jan  1 02:45:38 2014/-kk/
+/Makefile/1.216/Fri Jan 31 08:49:00 2014/-kk/
 D/apply////
 D/apropos////
 D/asa////
@@ -161,6 +161,7 @@ D/rump_allserver////
 D/rump_dhcpclient////
 D/rump_halt////
 D/rump_server////
+D/rump_wmd////
 D/rup////
 D/ruptime////
 D/rusers////

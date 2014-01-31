@@ -69,9 +69,6 @@ ASM_GLUE+= tmp___${glue:.c=}50.S
 . endif
 .endfor
 
-# namespace purity wrappers
-SRCS+=	_brk.c _fork.c _getcontext.c _pipe.c _sbrk.c
-
 # modules with default implementations on all architectures:
 ASM=	access.S acct.S \
 	bind.S \

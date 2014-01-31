@@ -16,6 +16,7 @@ SECONDARY_LOAD_ADDRESS?=0x8ff00000
 STRIPFLAG=	# override
 
 LIBCRT0=	# nothing
+LIBCRTI=	# nothing
 LIBCRTBEGIN=	# nothing
 LIBCRTEND=	# nothing
 LIBC=		# nothing

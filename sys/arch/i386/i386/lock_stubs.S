@@ -264,7 +264,7 @@ ENTRY(mutex_spin_exit)
 	movl	%ecx, CPUVAR(ILEVEL)
 	sti
 1:	ret
-	nop					/* XXX round up */
+	.space 32
 	.align	32
 LABEL(mutex_spin_exit_end)
 END(mutex_spin_exit)
@@ -295,6 +295,7 @@ ENTRY(i686_mutex_spin_exit)
 	movl	%ecx,4(%esp)
 LABEL(i686_mutex_spin_exit_patch)
 	jmp	_C_LABEL(Xspllower)
+	.space 16
 	.align	32
 LABEL(i686_mutex_spin_exit_end)
 END(i686_mutex_spin_exit)

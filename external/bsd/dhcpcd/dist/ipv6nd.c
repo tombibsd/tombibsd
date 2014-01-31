@@ -3,7 +3,7 @@
 
 /*
  * dhcpcd - DHCP client daemon
- * Copyright (c) 2006-2013 Roy Marples <roy@marples.name>
+ * Copyright (c) 2006-2014 Roy Marples <roy@marples.name>
  * All rights reserved
 
  * Redistribution and use in source and binary forms, with or without
@@ -369,7 +369,7 @@ ipv6nd_sendrsprobe(void *arg)
 
 	if (ipv6_linklocal(ifp) == NULL) {
 		syslog(LOG_DEBUG,
-		    "%s: delaying Router Soliciation for LL address",
+		    "%s: delaying Router Solicitation for LL address",
 		    ifp->name);
 		ipv6_addlinklocalcallback(ifp, ipv6nd_sendrsprobe, ifp);
 		return;

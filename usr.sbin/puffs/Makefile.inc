@@ -3,7 +3,6 @@
 WARNS?=	4
 
 .include <bsd.own.mk>
-.include <bsd.sys.mk>
 
 USE_FORT?= yes	# network client
 

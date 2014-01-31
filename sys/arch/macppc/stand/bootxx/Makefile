@@ -7,6 +7,7 @@ NOMAN=		# defined
 BINMODE=	444
 
 LIBCRT0=	# nothing
+LIBCRTI=	# nothing
 LIBCRTBEGIN=	# nothing
 LIBCRTEND=	# nothing
 LIBC=		# nothing

@@ -142,10 +142,10 @@ linux_setregs(struct lwp *l, struct exec_package *epp, vaddr_t stack)
 	l->l_md.md_flags &= ~MDL_USEDFPU;
 
 	if (i386_use_fxsave) {
-		pcb->pcb_savefpu.sv_xmm.sv_env.fx_cw = __Linux_NPXCW__;
-		pcb->pcb_savefpu.sv_xmm.sv_env.fx_mxcsr = __INITIAL_MXCSR__;
+		pcb->pcb_savefpu.sv_xmm.fx_cw = __Linux_NPXCW__;
+		pcb->pcb_savefpu.sv_xmm.fx_mxcsr = __INITIAL_MXCSR__;
 	} else
-		pcb->pcb_savefpu.sv_87.sv_env.en_cw = __Linux_NPXCW__;
+		pcb->pcb_savefpu.sv_87.s87_cw = __Linux_NPXCW__;
 
 	tf = l->l_md.md_regs;
 	tf->tf_gs = 0;

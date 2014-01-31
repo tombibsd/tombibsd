@@ -1,5 +1,5 @@
 /Make.tags.inc/1.24/Fri Jan 21 23:23:44 2011/-kk/
-/Makefile/1.16/Fri Sep  2 22:15:16 2011/-kk/
+/Makefile/1.17/Fri Jan 31 08:48:50 2014/-kk/
 /bufq_disksort.c/1.11/Mon Jan 19 14:54:28 2009/-kk/
 /bufq_fcfs.c/1.10/Mon Jan 19 14:54:28 2009/-kk/
 /bufq_priocscan.c/1.17/Fri Feb 17 08:45:11 2012/-kk/
@@ -17,7 +17,7 @@
 /exec_subr.c/1.70/Mon Aug  8 06:30:43 2011/-kk/
 /genlintstub.awk/1.10/Sun Jan 22 05:11:11 2006/-kk/
 /init_main.c/1.454/Thu Oct 24 10:28:58 2013/-kk/
-/init_sysctl.c/1.198/Thu Oct 24 10:28:58 2013/-kk/
+/init_sysctl.c/1.199/Fri Jan 31 08:48:50 2014/-kk/
 /init_sysctl_base.c/1.1/Wed Sep 16 15:03:56 2009/-kk/
 /init_sysent.c/1.280/Wed Dec 25 07:37:44 2013/-kk/
 /kern_acct.c/1.94/Thu Oct 24 10:28:58 2013/-kk/
@@ -74,7 +74,7 @@
 /kern_subr.c/1.214/Tue Dec 17 04:13:38 2013/-kk/
 /kern_synch.c/1.307/Thu Oct 24 07:31:55 2013/-kk/
 /kern_syscall.c/1.9/Wed Dec 25 07:37:44 2013/-kk/
-/kern_sysctl.c/1.243/Thu Oct 24 10:28:58 2013/-kk/
+/kern_sysctl.c/1.244/Fri Jan 31 08:48:50 2014/-kk/
 /kern_tc.c/1.46/Thu Oct 24 10:28:58 2013/-kk/
 /kern_time.c/1.179/Thu Oct 24 10:28:58 2013/-kk/
 /kern_timeout.c/1.47/Thu Oct 24 10:28:58 2013/-kk/
@@ -82,7 +82,7 @@
 /kern_turnstile.c/1.32/Fri Jun 15 13:51:40 2012/-kk/
 /kern_uidinfo.c/1.8/Thu Oct 24 10:28:58 2013/-kk/
 /kern_uuid.c/1.18/Sat Nov 19 22:51:25 2011/-kk/
-/kern_verifiedexec.c/1.131/Tue Dec 17 04:05:10 2013/-kk/
+/kern_verifiedexec.c/1.132/Fri Jan 31 08:48:50 2014/-kk/
 /kern_xxx.c/1.72/Thu Sep  1 18:25:44 2011/-kk/
 /kgdb_stub.c/1.26/Thu Oct 24 10:28:58 2013/-kk/
 /makesyscalls.sh/1.139/Tue Dec 17 04:13:38 2013/-kk/
@@ -93,7 +93,7 @@
 /subr_bufq.c/1.20/Thu Sep 17 09:54:27 2009/-kk/
 /subr_callback.c/1.7/Tue Nov 24 20:11:50 2009/-kk/
 /subr_copy.c/1.1/Wed Nov  4 16:54:00 2009/-kk/
-/subr_cprng.c/1.22/Thu Oct 24 10:28:58 2013/-kk/
+/subr_cprng.c/1.23/Fri Jan 31 08:48:50 2014/-kk/
 /subr_cpufreq.c/1.8/Thu Oct 27 05:25:07 2011/-kk/
 /subr_debug.c/1.7/Wed Apr 30 20:20:53 2008/-kk/
 /subr_device.c/1.2/Sun Jan 31 15:10:12 2010/-kk/
@@ -121,7 +121,7 @@
 /subr_percpu.c/1.16/Fri Jan 27 19:48:40 2012/-kk/
 /subr_physmap.c/1.2/Thu Oct 24 10:28:58 2013/-kk/
 /subr_pool.c/1.200/Thu Oct 24 10:28:58 2013/-kk/
-/subr_prf.c/1.150/Thu Oct 24 10:28:58 2013/-kk/
+/subr_prf.c/1.152/Fri Jan 31 08:48:50 2014/-kk/
 /subr_prof.c/1.45/Thu Dec 17 01:25:10 2009/-kk/
 /subr_pserialize.c/1.7/Thu Oct 24 10:28:58 2013/-kk/
 /subr_specificdata.c/1.13/Mon Apr 28 20:24:04 2008/-kk/
@@ -171,9 +171,9 @@
 /uipc_socket.c/1.220/Mon Nov 11 15:21:42 2013/-kk/
 /uipc_socket2.c/1.115/Thu Oct 24 10:28:58 2013/-kk/
 /uipc_syscalls.c/1.165/Thu Oct 24 10:28:58 2013/-kk/
-/uipc_usrreq.c/1.148/Thu Oct 31 07:00:29 2013/-kk/
+/uipc_usrreq.c/1.149/Fri Jan 31 08:48:50 2014/-kk/
 /vfs_bio.c/1.248/Tue Oct 29 08:21:47 2013/-kk/
-/vfs_cache.c/1.92/Thu Oct 31 07:00:29 2013/-kk/
+/vfs_cache.c/1.93/Fri Jan 31 08:48:50 2014/-kk/
 /vfs_cwd.c/1.4/Tue Feb 15 15:54:28 2011/-kk/
 /vfs_dirhash.c/1.11/Thu Oct 24 10:28:58 2013/-kk/
 /vfs_getcwd.c/1.49/Thu Oct 24 10:28:58 2013/-kk/
@@ -184,13 +184,13 @@
 /vfs_mount.c/1.25/Tue Dec 17 04:05:10 2013/-kk/
 /vfs_quotactl.c/1.38/Wed Feb  1 05:43:54 2012/-kk/
 /vfs_subr.c/1.441/Tue Dec 17 04:05:10 2013/-kk/
-/vfs_syscalls.c/1.471/Tue Dec 17 04:05:10 2013/-kk/
+/vfs_syscalls.c/1.472/Fri Jan 31 08:48:50 2014/-kk/
 /vfs_trans.c/1.29/Tue Dec 17 04:05:10 2013/-kk/
 /vfs_vnode.c/1.30/Tue Dec 17 04:13:38 2013/-kk/
-/vfs_vnops.c/1.186/Mon Nov 12 11:00:07 2012/-kk/
+/vfs_vnops.c/1.187/Fri Jan 31 08:48:50 2014/-kk/
 /vfs_wapbl.c/1.58/Thu Oct 24 10:28:58 2013/-kk/
 /vfs_xattr.c/1.31/Tue May  1 07:48:25 2012/-kk/
-/vnode_if.c/1.89/Thu Oct 24 10:28:58 2013/-kk/
-/vnode_if.sh/1.59/Thu Oct 24 10:28:58 2013/-kk/
-/vnode_if.src/1.63/Fri Oct 14 09:23:31 2011/-kk/
+/vnode_if.c/1.90/Fri Jan 31 08:48:50 2014/-kk/
+/vnode_if.sh/1.60/Fri Jan 31 08:48:50 2014/-kk/
+/vnode_if.src/1.64/Fri Jan 31 08:48:50 2014/-kk/
 D

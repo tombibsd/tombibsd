@@ -36,6 +36,7 @@
  */
 
 #include "gen_locl.h"
+#include <libgen.h>
 
 __RCSID("$NetBSD$");
 
@@ -155,7 +156,7 @@ init_generate (const char *filename, const char *base)
     fprintf (headerfile,
 	     "/* Generated from %s */\n"
 	     "/* Do not edit */\n\n",
-	     filename);
+	     basename(filename));
     fprintf (headerfile,
 	     "#ifndef __%s_h__\n"
 	     "#define __%s_h__\n\n", headerbase, headerbase);
@@ -268,7 +269,7 @@ init_generate (const char *filename, const char *base)
 	     "#include <errno.h>\n"
 	     "#include <limits.h>\n"
 	     "#include <krb5/krb5-types.h>\n",
-	     filename);
+	     basename(filename));
 
     fprintf (templatefile,
 	     "#include <%s>\n"
@@ -366,7 +367,7 @@ generate_header_of_codefile(const char *name)
 	     "#include <errno.h>\n"
 	     "#include <limits.h>\n"
 	     "#include <krb5/krb5-types.h>\n",
-	     orig_filename);
+	     basename(orig_filename));
 
     fprintf (codefile,
 	     "#include <%s>\n"

@@ -23,6 +23,7 @@ CPPFLAGS+=	-mno-thumb -mno-thumb-interwork
 DBG=		-g
 
 LIBCRT0=	# nothing
+LIBCRTI=	# nothing
 LIBCRTBEGIN=	# nothing
 LIBCRTEND=	# nothing
 LIBC=		# nothing

@@ -104,7 +104,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 int
 msdosfs_create(void *v)
 {
-	struct vop_create_args /* {
+	struct vop_create_v2_args /* {
 		struct vnode *a_dvp;
 		struct vnode **a_vpp;
 		struct componentname *a_cnp;
@@ -155,13 +155,11 @@ msdosfs_create(void *v)
 		goto bad;
 	fstrans_done(ap->a_dvp->v_mount);
 	VN_KNOTE(ap->a_dvp, NOTE_WRITE);
-	vput(ap->a_dvp);
 	*ap->a_vpp = DETOV(dep);
 	return (0);
 
 bad:
 	fstrans_done(ap->a_dvp->v_mount);
-	vput(ap->a_dvp);
 	return (error);
 }
 
@@ -1168,7 +1166,7 @@ static const struct {
 int
 msdosfs_mkdir(void *v)
 {
-	struct vop_mkdir_args /* {
+	struct vop_mkdir_v2_args /* {
 		struct vnode *a_dvp;
 		struvt vnode **a_vpp;
 		struvt componentname *a_cnp;
@@ -1269,7 +1267,6 @@ msdosfs_mkdir(void *v)
 	if ((error = createde(&ndirent, pdep, &dep, cnp)) != 0)
 		goto bad;
 	VN_KNOTE(ap->a_dvp, NOTE_WRITE | NOTE_LINK);
-	vput(ap->a_dvp);
 	*ap->a_vpp = DETOV(dep);
 	fstrans_done(ap->a_dvp->v_mount);
 	return (0);
@@ -1277,7 +1274,6 @@ msdosfs_mkdir(void *v)
 bad:
 	clusterfree(pmp, newcluster, NULL);
 bad2:
-	vput(ap->a_dvp);
 	fstrans_done(ap->a_dvp->v_mount);
 	return (error);
 }

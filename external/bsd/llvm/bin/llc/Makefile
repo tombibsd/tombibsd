@@ -38,6 +38,7 @@ LLVM_LIBS+= \
 	SparcCodeGen \
 	SparcTargetInfo \
 	SparcMCTargetDesc \
+	SparcAsmParser \
 	SparcAsmPrinter \
 	X86CodeGen \
 	X86TargetInfo \

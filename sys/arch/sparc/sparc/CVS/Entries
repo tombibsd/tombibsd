@@ -60,12 +60,12 @@
 /svr4_sigcode.s/1.1/Fri Jun  8 04:49:46 2001/-kk/
 /sys_machdep.c/1.16/Thu Dec 20 23:02:42 2007/-kk/
 /syscall.c/1.28/Thu Oct 24 10:28:57 2013/-kk/
-/timer.c/1.31/Thu Oct 24 10:28:57 2013/-kk/
+/timer.c/1.32/Fri Jan 31 08:48:43 2014/-kk/
 /timer_msiiep.c/1.28/Tue Nov 26 03:29:49 2013/-kk/
 /timer_sun4.c/1.19/Sun Jul 17 23:18:23 2011/-kk/
-/timer_sun4m.c/1.29/Tue Nov 26 03:29:49 2013/-kk/
+/timer_sun4m.c/1.30/Fri Jan 31 08:48:43 2014/-kk/
 /timerreg.h/1.9/Wed Nov 16 03:00:23 2005/-kk/
-/timervar.h/1.11/Sun Jul 29 00:04:05 2012/-kk/
+/timervar.h/1.12/Fri Jan 31 08:48:43 2014/-kk/
 /trap.c/1.191/Mon Nov 11 15:21:33 2013/-kk/
 /vaddrs.h/1.11/Mon Dec 10 23:10:34 2001/-kk/
 /vm_machdep.c/1.107/Sun Feb 19 21:06:30 2012/-kk/

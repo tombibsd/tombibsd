@@ -102,14 +102,6 @@ struct pcb {
 	int pcb_iopl;
 };
 
-/*    
- * The pcb is augmented with machine-dependent additional data for 
- * core dumps. For the i386, there is nothing to add.
- */     
-struct md_coredump {
-	long	md_pad[8];
-};    
-
 #else	/*	__x86_64__	*/
 
 #include <i386/pcb.h>

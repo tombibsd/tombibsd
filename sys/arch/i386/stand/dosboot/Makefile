@@ -9,9 +9,6 @@ NEWVERSWHAT=	"DOS Boot"
 STARTFILE=	${DOSSTART}
 RELOC=		0x100
 
-AFLAGS.dosboot.S= ${${ACTIVE_CC} == "clang":?-no-integrated-as:}
-AFLAGS.start_dos.S= ${${ACTIVE_CC} == "clang":?-no-integrated-as:}
-
 SRCS= main.c devopen.c exec.c
 
 CPPFLAGS+= -DSLOW	# for libz

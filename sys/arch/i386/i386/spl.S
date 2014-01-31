@@ -226,7 +226,6 @@ IDTVEC(spllower)
 	ret
 #if defined(DEBUG)
 .Lspllower_panic:
-	addl $8, %esp
 	pushl	$1f
 	call	_C_LABEL(panic)
 1:	.asciz	"SPLLOWER: INTERRUPT ENABLED"

@@ -9,6 +9,8 @@ NOMAN=		yes
 
 SRCS=	AnalysisWrappers.cpp \
 	GraphPrinters.cpp \
+	NewPMDriver.cpp \
+	Passes.cpp \
 	PrintSCC.cpp \
 	opt.cpp
 

@@ -70,9 +70,9 @@ write-tcl.c
 .PATH:	${DIST}/gettext/gettext-tools/src ${DIST}/gettext/gettext-tools/lib
 CPPFLAGS+=-I${DIST}/gettext/gettext-runtime/intl
 CPPFLAGS+=-I${DIST}/gettext/gettext-tools/src
-CPPFLAGS+=-DLIBDIR=\"${DESTDIR}/usr/share\"
-CPPFLAGS+=-DGETTEXTJAR=\"${DESTDIR}/usr/share/gettext/gettext.jar\"
-CPPFLAGS+=-DGETTEXTDATADIR=\"${DESTDIR}/usr/share/gettext\"
+CPPFLAGS+=-DLIBDIR=\"/usr/share\"
+CPPFLAGS+=-DGETTEXTJAR=\"/usr/share/gettext/gettext.jar\"
+CPPFLAGS+=-DGETTEXTDATADIR=\"/usr/share/gettext\"
 
 COPTS.format-java.c = -Wno-stack-protector
 COPTS.msgl-cat.c = -Wno-stack-protector

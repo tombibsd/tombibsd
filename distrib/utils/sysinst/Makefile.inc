@@ -29,7 +29,6 @@ MSG_MD?=	msg.md.${SYSINSTLANG}
 MENUS_MD?=	menus.md.${SYSINSTLANG}
 
 .include <bsd.own.mk>		# for mk.conf
-.include <bsd.sys.mk>		# for HOST_SH, TOOL_*
 .include "${NETBSDSRCDIR}/distrib/common/Makefile.distrib"
 
 _MKSHTARGET_CREATE?=	${_MKSHMSG_CREATE} ${.CURDIR:T}/${.TARGET}

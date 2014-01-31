@@ -1,6 +1,6 @@
 #	$NetBSD$
 
-.include <bsd.sys.mk>
+.include <bsd.own.mk>
 
 giodevs.h: giodevs devlist2h.awk
 	/bin/rm -f giodevs.h giodevs_data.h

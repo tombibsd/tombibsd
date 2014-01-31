@@ -553,7 +553,7 @@ lfs_unmark_vnode(struct vnode *vp)
 int
 lfs_symlink(void *v)
 {
-	struct vop_symlink_args /* {
+	struct vop_symlink_v2_args /* {
 		struct vnode *a_dvp;
 		struct vnode **a_vpp;
 		struct componentname *a_cnp;
@@ -563,7 +563,6 @@ lfs_symlink(void *v)
 	int error;
 
 	if ((error = SET_DIROP_CREATE(ap->a_dvp, ap->a_vpp)) != 0) {
-		vput(ap->a_dvp);
 		return error;
 	}
 	error = ulfs_symlink(ap);
@@ -574,7 +573,7 @@ lfs_symlink(void *v)
 int
 lfs_mknod(void *v)
 {
-	struct vop_mknod_args	/* {
+	struct vop_mknod_v2_args	/* {
 		struct vnode *a_dvp;
 		struct vnode **a_vpp;
 		struct componentname *a_cnp;
@@ -596,7 +595,6 @@ lfs_mknod(void *v)
 	ULFS_CHECK_CRAPCOUNTER(VTOI(ap->a_dvp));
 
 	if ((error = SET_DIROP_CREATE(ap->a_dvp, ap->a_vpp)) != 0) {
-		vput(ap->a_dvp);
 		return error;
 	}
 
@@ -669,7 +667,7 @@ lfs_mknod(void *v)
 int
 lfs_create(void *v)
 {
-	struct vop_create_args	/* {
+	struct vop_create_v2_args	/* {
 		struct vnode *a_dvp;
 		struct vnode **a_vpp;
 		struct componentname *a_cnp;
@@ -678,7 +676,6 @@ lfs_create(void *v)
 	int error;
 
 	if ((error = SET_DIROP_CREATE(ap->a_dvp, ap->a_vpp)) != 0) {
-		vput(ap->a_dvp);
 		return error;
 	}
 	error = ulfs_create(ap);
@@ -689,7 +686,7 @@ lfs_create(void *v)
 int
 lfs_mkdir(void *v)
 {
-	struct vop_mkdir_args	/* {
+	struct vop_mkdir_v2_args	/* {
 		struct vnode *a_dvp;
 		struct vnode **a_vpp;
 		struct componentname *a_cnp;
@@ -698,7 +695,6 @@ lfs_mkdir(void *v)
 	int error;
 
 	if ((error = SET_DIROP_CREATE(ap->a_dvp, ap->a_vpp)) != 0) {
-		vput(ap->a_dvp);
 		return error;
 	}
 	error = ulfs_mkdir(ap);

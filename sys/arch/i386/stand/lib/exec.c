@@ -386,7 +386,7 @@ exec_netbsd(const char *file, physaddr_t loadaddr, int boothowto, int floppy,
 	userconf_init();
 	if (btinfo_userconfcommands != NULL)
 		BI_ADD(btinfo_userconfcommands, BTINFO_USERCONFCOMMANDS,
-	btinfo_userconfcommands_size);
+		    btinfo_userconfcommands_size);
 
 #ifdef DEBUG
 	printf("Start @ 0x%lx [%ld=0x%lx-0x%lx]...\n", marks[MARK_ENTRY],
@@ -458,7 +458,7 @@ module_path(boot_module_t *bm, const char *kdev)
 		}
 	} else {
 		/* device not specified; load from kernel device if known */
- 		if (name[0] == '/')
+		if (name[0] == '/')
 			snprintf(buf, sizeof(buf), "%s%s", kdev, name);
 		else
 			snprintf(buf, sizeof(buf), "%s%s/%s/%s.kmod",

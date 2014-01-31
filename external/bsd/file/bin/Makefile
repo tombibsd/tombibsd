@@ -1,7 +1,6 @@
 #	$NetBSD$
 
 .include <bsd.own.mk>
-.include <bsd.sys.mk>
 
 .include "../Makefile.inc"
 

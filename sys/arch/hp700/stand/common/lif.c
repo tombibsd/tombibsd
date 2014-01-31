@@ -167,7 +167,7 @@ lif_read(struct open_file *f, void *buf, size_t size, size_t *resid)
 
 #ifdef LIFDEBUG
 	if (debug)
-		printf("lif_read(%p, %p, %u, %p)\n", f, buf, size, resid);
+		printf("lif_read(%p, %p, %zu, %p)\n", f, buf, size, resid);
 #endif
 
 	for (p = bbuf; size; fp->f_seek += bsize, p += bsize) {

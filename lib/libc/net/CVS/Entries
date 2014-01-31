@@ -10,7 +10,7 @@
 /gai_strerror.3/1.5/Mon Mar 22 19:30:54 2010/-kk/
 /getaddrinfo.3/1.57/Thu Oct 24 10:28:53 2013/-kk/
 /getaddrinfo.c/1.106/Wed Jan  1 02:45:13 2014/-kk/
-/gethnamaddr.c/1.85/Wed Jan  1 02:45:13 2014/-kk/
+/gethnamaddr.c/1.89/Fri Jan 31 08:48:24 2014/-kk/
 /gethostbyname.3/1.29/Thu Oct 24 10:28:53 2013/-kk/
 /getifaddrs.3/1.14/Thu Oct 24 10:28:53 2013/-kk/
 /getifaddrs.c/1.15/Tue Mar 13 21:13:40 2012/-kk/

@@ -1,4 +1,4 @@
-/Makefile/1.90/Tue Nov  5 03:34:36 2013/-kk/
+/Makefile/1.91/Fri Jan 31 08:45:05 2014/-kk/
 /README/1.13/Thu Oct 24 10:28:41 2013/-kk/
 /TODO/1.4/Thu Nov 11 14:59:45 2004/-kk/
 /attrs/1.1/Thu Jun 12 20:04:00 2003/-kk/
@@ -17,7 +17,7 @@
 /makesums/1.16/Sat Sep 19 07:09:54 2009/-kk/
 /maketars/1.80/Thu Oct 24 10:28:41 2013/-kk/
 /metalog.subr/1.2/Thu Feb 17 08:41:35 2011/-kk/
-/mkvars.mk/1.13/Tue Oct 29 12:08:09 2013/-kk/
+/mkvars.mk/1.14/Fri Jan 31 08:45:05 2014/-kk/
 /regpkg/1.20/Sat Nov  3 07:59:46 2012/-kk/
 /regpkgset/1.12/Tue Dec  1 15:49:21 2009/-kk/
 /sets.subr/1.157/Tue Jan 14 16:01:09 2014/-kk/

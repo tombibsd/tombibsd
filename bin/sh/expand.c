@@ -51,6 +51,7 @@ __RCSID("$NetBSD$");
 #include <limits.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <wctype.h>
 
 /*
  * Routines to expand arguments to commands.  We have to deal with
@@ -1365,6 +1366,37 @@ msort(struct strlist *list, int len)
 }
 
 
+/*
+ * See if a character matches a character class, starting at the first colon
+ * of "[:class:]".
+ * If a valid character class is recognized, a pointer to the next character
+ * after the final closing bracket is stored into *end, otherwise a null
+ * pointer is stored into *end.
+ */
+static int
+match_charclass(char *p, wchar_t chr, char **end)
+{
+	char name[20];
+	char *nameend;
+	wctype_t cclass;
+
+	*end = NULL;
+	p++;
+	nameend = strstr(p, ":]");
+	if (nameend == NULL || (size_t)(nameend - p) >= sizeof(name) ||
+	    nameend == p)
+		return 0;
+	memcpy(name, p, nameend - p);
+	name[nameend - p] = '\0';
+	*end = nameend + 2;
+	cclass = wctype(name);
+	/* An unknown class matches nothing but is valid nevertheless. */
+	if (cclass == 0)
+		return 0;
+	return iswctype(chr, cclass);
+}
+
+
 
 /*
  * Returns true if the pattern matches the string.
@@ -1385,7 +1417,7 @@ patmatch(char *pattern, char *string, int squoted)
 STATIC int
 pmatch(char *pattern, char *string, int squoted)
 {
-	char *p, *q;
+	char *p, *q, *end;
 	char c;
 
 	p = pattern;
@@ -1465,6 +1497,11 @@ pmatch(char *pattern, char *string, int squoted)
 			do {
 				if (c == CTLQUOTEMARK)
 					continue;
+				if (c == '[' && *p == ':') {
+					found |= match_charclass(p, chr, &end);
+					if (end != NULL)
+						p = end;
+				}
 				if (c == CTLESC)
 					c = *p++;
 				if (*p == '-' && p[1] != ']') {

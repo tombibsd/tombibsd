@@ -103,7 +103,8 @@
 /extractvalue-invalid-idx.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /fast-math-flags.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /flags.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
-/functionlocal-metadata.ll/1.1.1.2/Tue Jan 14 16:01:57 2014/-kk/
+/functionlocal-metadata.ll/1.1.1.3/Fri Jan 31 08:45:41 2014/-kk/
+/getInt.ll/1.1.1.1/Wed Jan 15 21:24:15 2014/-kk/
 /getelementptr.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /getelementptr_struct.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /getelementptr_vec_idx1.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/

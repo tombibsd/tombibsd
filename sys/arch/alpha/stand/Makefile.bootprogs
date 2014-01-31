@@ -3,7 +3,6 @@
 NOMAN=			# defined
 
 .include <bsd.own.mk>
-.include <bsd.sys.mk>		# for HOST_SH
 
 S=	${.CURDIR}/../../../..
 
@@ -15,6 +14,7 @@ STRIP?=	strip
 
 # XXX SHOULD NOT NEED TO DEFINE THESE!
 LIBCRT0=
+LIBCRTI=
 LIBC=
 LIBCRTBEGIN=
 LIBCRTEND=

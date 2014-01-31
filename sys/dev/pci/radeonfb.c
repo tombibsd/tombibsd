@@ -627,6 +627,10 @@ radeonfb_attach(device_t parent, device_t dev, void *aux)
 
 	radeonfb_set_fbloc(sc);
 
+	/* 64 MB should be enough -- more just wastes map entries */
+	if (sc->sc_memsz > (64 << 20))
+		sc->sc_memsz = (64 << 20);
+
 	for (i = 0; radeonfb_limits[i].size; i++) {
 		if (sc->sc_memsz >= radeonfb_limits[i].size) {
 			sc->sc_maxx = radeonfb_limits[i].maxx;
@@ -748,10 +752,6 @@ radeonfb_attach(device_t parent, device_t dev, void *aux)
 		goto error;
 	}
 
-	/* 64 MB should be enough -- more just wastes map entries */
-	if (sc->sc_memsz > (64 << 20))
-		sc->sc_memsz = (64 << 20);
-
 	sc->sc_memt = pa->pa_memt;
 	if (bus_space_map(sc->sc_memt, sc->sc_memaddr, sc->sc_memsz,
 		BUS_SPACE_MAP_LINEAR, &sc->sc_memh) != 0) {
@@ -816,7 +816,8 @@ radeonfb_attach(device_t parent, device_t dev, void *aux)
 		aprint_normal("%s: display %d: "
 		    "initial virtual resolution %dx%d at %d bpp\n",
 		    XNAME(sc), i, dp->rd_virtx, dp->rd_virty, dp->rd_bpp);
-
+		aprint_normal_dev(sc->sc_dev, "using %d MB per display\n",
+		    sc->sc_fboffset >> 20);
 		/* now select the *video mode* that we will use */
 		for (j = 0; j < dp->rd_ncrtcs; j++) {
 			const struct videomode *vmp;
@@ -848,7 +849,7 @@ radeonfb_attach(device_t parent, device_t dev, void *aux)
 		dp->rd_offset = sc->sc_fboffset * i;
 		dp->rd_fbptr = (vaddr_t)bus_space_vaddr(sc->sc_memt,
 		    sc->sc_memh) + dp->rd_offset;
-		dp->rd_curoff = sc->sc_fbsize;
+		dp->rd_curoff = sc->sc_fboffset - 4096;	/* 4KB cursor space */
 		dp->rd_curptr = dp->rd_fbptr + dp->rd_curoff;
 
 		DPRINTF(("fpbtr = %p\n", (void *)dp->rd_fbptr));
@@ -924,8 +925,13 @@ radeonfb_attach(device_t parent, device_t dev, void *aux)
 		dp->rd_gc.gc_rectfill = radeonfb_rectfill_a;
 		dp->rd_gc.gc_rop = RADEON_ROP3_S;
 		dp->rd_gc.gc_blitcookie = dp;
+		/*
+		 * use memory between framebuffer and cursor area as glyph
+		 * cache, cap at 4096 lines
+		 */
 		glyphcache_init(&dp->rd_gc, dp->rd_virty + 4,
-		    (0x800000 / dp->rd_stride) - (dp->rd_virty + 4),
+		    min(4096, 
+		        (dp->rd_curoff / dp->rd_stride) - (dp->rd_virty + 4)),
 		    dp->rd_virtx,
 		    ri->ri_font->fontwidth,
 		    ri->ri_font->fontheight,

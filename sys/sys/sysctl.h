@@ -61,10 +61,6 @@
 #include <stdbool.h>
 #endif
 
-#ifdef SYSCTL_PRIVATE
-#include <sys/cprng.h>
-#endif
-
 /*
  * Definitions for sysctl call.  The sysctl call uses a hierarchical name
  * for objects that can be examined or modified.  The name is expressed as
@@ -1250,10 +1246,6 @@ MALLOC_DECLARE(M_SYSCTLNODE);
 MALLOC_DECLARE(M_SYSCTLDATA);
 
 extern const u_int sysctl_lwpflagmap[];
-
-#ifdef SYSCTL_PRIVATE
-extern cprng_strong_t *sysctl_prng;
-#endif
 
 #else	/* !_KERNEL */
 #include <sys/cdefs.h>

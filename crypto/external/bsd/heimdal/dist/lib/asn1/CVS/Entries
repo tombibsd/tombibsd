@@ -32,7 +32,7 @@
 /der_put.c/1.1.1.1/Wed Apr 13 18:14:40 2011/-kk/
 /digest.asn1/1.1.1.2/Thu Apr 14 14:08:21 2011/-kk/
 /extra.c/1.1.1.1/Wed Apr 13 18:14:40 2011/-kk/
-/gen.c/1.1.1.1/Wed Apr 13 18:14:40 2011/-kk/
+/gen.c/1.2/Fri Jan 31 08:44:55 2014/-kk/
 /gen_copy.c/1.1.1.1/Wed Apr 13 18:14:40 2011/-kk/
 /gen_decode.c/1.1.1.1/Wed Apr 13 18:14:40 2011/-kk/
 /gen_encode.c/1.1.1.1/Wed Apr 13 18:14:41 2011/-kk/

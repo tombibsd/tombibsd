@@ -993,7 +993,7 @@ rump_vop_setattr(void *v)
 static int
 rump_vop_mkdir(void *v)
 {
-	struct vop_mkdir_args /* {
+	struct vop_mkdir_v2_args /* {
 		struct vnode *a_dvp;
 		struct vnode **a_vpp;
 		struct componentname *a_cnp;
@@ -1012,12 +1012,10 @@ rump_vop_mkdir(void *v)
 	rn->rn_parent = rnd;
 	rv = makevnode(dvp->v_mount, rn, vpp);
 	if (rv)
-		goto out;
+		return rv;
 
 	makedir(rnd, cnp, rn);
 
- out:
-	vput(dvp);
 	return rv;
 }
 
@@ -1091,7 +1089,7 @@ rump_vop_remove(void *v)
 static int
 rump_vop_mknod(void *v)
 {
-	struct vop_mknod_args /* {
+	struct vop_mknod_v2_args /* {
 		struct vnode *a_dvp;
 		struct vnode **a_vpp;
 		struct componentname *a_cnp;
@@ -1110,19 +1108,17 @@ rump_vop_mknod(void *v)
 		rn->rn_va.va_flags |= UF_OPAQUE;
 	rv = makevnode(dvp->v_mount, rn, vpp);
 	if (rv)
-		goto out;
+		return rv;
 
 	makedir(rnd, cnp, rn);
 
- out:
-	vput(dvp);
 	return rv;
 }
 
 static int
 rump_vop_create(void *v)
 {
-	struct vop_create_args /* {
+	struct vop_create_v2_args /* {
 		struct vnode *a_dvp;
 		struct vnode **a_vpp;
 		struct componentname *a_cnp;
@@ -1143,19 +1139,17 @@ rump_vop_create(void *v)
 		rn->rn_va.va_flags |= UF_OPAQUE;
 	rv = makevnode(dvp->v_mount, rn, vpp);
 	if (rv)
-		goto out;
+		return rv;
 
 	makedir(rnd, cnp, rn);
 
- out:
-	vput(dvp);
 	return rv;
 }
 
 static int
 rump_vop_symlink(void *v)
 {
-	struct vop_symlink_args /* {
+	struct vop_symlink_v2_args /* {
 		struct vnode *a_dvp;
 		struct vnode **a_vpp;
 		struct componentname *a_cnp;
@@ -1178,7 +1172,7 @@ rump_vop_symlink(void *v)
 		rn->rn_va.va_flags |= UF_OPAQUE;
 	rv = makevnode(dvp->v_mount, rn, vpp);
 	if (rv)
-		goto out;
+		return rv;
 
 	makedir(rnd, cnp, rn);
 
@@ -1187,8 +1181,6 @@ rump_vop_symlink(void *v)
 	rn->rn_linklen = linklen;
 	strcpy(rn->rn_linktarg, target);
 
- out:
-	vput(dvp);
 	return rv;
 }
 

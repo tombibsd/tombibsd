@@ -36,7 +36,9 @@
 /lint.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /llvm-cov.test/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /llvm-nm-without-aliases.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/new-pass-manager.ll/1.1.1.1/Wed Jan 15 21:24:15 2014/-kk/
 /optimize-options.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/pass-pipeline-parsing.ll/1.1.1.1/Wed Jan 15 21:24:15 2014/-kk/
 /pipefail.txt/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /spir_cc.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /umask.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/

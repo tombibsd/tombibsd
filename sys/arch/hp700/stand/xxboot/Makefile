@@ -27,6 +27,7 @@ BINMODE=	444
 # standalone program
 LIBCRTBEGIN=
 LIBCRT0=
+LIBCRTI=
 LIBCRTEND=
 LIBC=
 

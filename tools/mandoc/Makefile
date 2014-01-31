@@ -6,7 +6,6 @@ HOST_SRCDIR=	external/bsd/mdocml/bin/mandoc
 NOMAN=		# defined
 
 .include <bsd.own.mk>
-.include <bsd.sys.mk>
 
 NETBSD_MINOR!=	${HOST_SH} ${NETBSDSRCDIR}/sys/conf/osrelease.sh -n
 NETBSD_OSNAME=	"NetBSD ${NETBSD_MINOR}"

@@ -3,7 +3,6 @@
 S=	${.CURDIR}/../../../../..
 
 AFLAGS.bootxx.S= ${${ACTIVE_CC} == "clang":?-no-integrated-as:}
-AFLAGS.label.S= ${${ACTIVE_CC} == "clang":?-no-integrated-as:}
 AFLAGS.pbr.S= ${${ACTIVE_CC} == "clang":?-no-integrated-as:}
 
 PIE_CFLAGS=
@@ -29,6 +28,7 @@ SRCS= pbr.S label.S bootxx.S boot1.c
 STRIPFLAG=	# nothing
 
 LIBCRT0=	# nothing
+LIBCRTI=	# nothing
 LIBCRTBEGIN=	# nothing
 LIBCRTEND=	# nothing
 LIBC=		# nothing

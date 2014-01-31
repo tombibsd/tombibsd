@@ -712,7 +712,10 @@ WDECL(__vf,printf_unlocked_l)(FILE *fp, locale_t loc, const CHAR_T *fmt0, va_lis
 #ifndef NARROW
 #define	PRINT(ptr, len)	do {			\
 	for (n3 = 0; n3 < (len); n3++)		\
-		__xfputwc((ptr)[n3], fp, loc);	\
+		if (__xfputwc((ptr)[n3], fp, loc) == END_OF_FILE) { \
+			fp->_flags |= __SERR;	\
+			goto error;		\
+		}				\
 } while (/*CONSTCOND*/0)
 #define FLUSH()
 #else

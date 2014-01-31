@@ -46,7 +46,7 @@
 /got-abuse.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /i128-align.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /illegal-float-ops.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
-/init-array.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
+/init-array.ll/1.1.1.2/Fri Jan 31 08:45:41 2014/-kk/
 /inline-asm-constraints-badI.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /inline-asm-constraints-badK.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /inline-asm-constraints-badK2.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
@@ -66,6 +66,7 @@
 /logical_shifted_reg.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /movw-consts.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /movw-shift-encoding.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
+/mul-lohi.ll/1.1.1.1/Wed Jan 15 21:24:23 2014/-kk/
 /neon-2velem-high.ll/1.1.1.1/Sun Jan  5 16:18:14 2014/-kk/
 /neon-2velem.ll/1.1.1.3/Tue Jan 14 16:01:57 2014/-kk/
 /neon-3vdiff.ll/1.1.1.2/Tue Jan 14 16:01:57 2014/-kk/
@@ -74,10 +75,11 @@
 /neon-add-pairwise.ll/1.1.1.2/Tue Jan 14 16:01:57 2014/-kk/
 /neon-add-sub.ll/1.1.1.2/Tue Jan 14 16:01:57 2014/-kk/
 /neon-bitcast.ll/1.1.1.2/Tue Jan 14 16:01:57 2014/-kk/
-/neon-bitwise-instructions.ll/1.1.1.2/Tue Jan 14 16:01:57 2014/-kk/
+/neon-bitwise-instructions.ll/1.1.1.3/Fri Jan 31 08:45:41 2014/-kk/
 /neon-bsl.ll/1.1.1.1/Fri Dec  6 23:19:14 2013/-kk/
 /neon-compare-instructions.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
-/neon-copy.ll/1.1.1.2/Tue Jan 14 16:01:57 2014/-kk/
+/neon-copy.ll/1.1.1.3/Fri Jan 31 08:45:41 2014/-kk/
+/neon-copyPhysReg-tuple.ll/1.1.1.1/Wed Jan 15 21:24:23 2014/-kk/
 /neon-crypto.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /neon-diagnostics.ll/1.1.1.2/Tue Dec 17 04:10:40 2013/-kk/
 /neon-extract.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
@@ -92,7 +94,8 @@
 /neon-mla-mls.ll/1.1.1.2/Tue Jan 14 16:01:57 2014/-kk/
 /neon-mov.ll/1.1.1.2/Tue Jan 14 16:01:57 2014/-kk/
 /neon-mul-div.ll/1.1.1.2/Tue Jan 14 16:01:57 2014/-kk/
-/neon-perm.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
+/neon-or-combine.ll/1.1.1.1/Wed Jan 15 21:24:23 2014/-kk/
+/neon-perm.ll/1.1.1.2/Fri Jan 31 08:45:41 2014/-kk/
 /neon-rounding-halving-add.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /neon-rounding-shift.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /neon-saturating-add-sub.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
@@ -131,7 +134,7 @@
 /neon-simd-tbl.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /neon-simd-vget.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /neon-truncStore-extLoad.ll/1.1.1.1/Sun Jan  5 16:18:16 2014/-kk/
-/neon-vector-list-spill.ll/1.1.1.1/Sun Jan  5 16:18:17 2014/-kk/
+/neon-vector-list-spill.ll/1.1.1.2/Fri Jan 31 08:45:41 2014/-kk/
 /pic-eh-stubs.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /regress-bitcast-formals.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /regress-f128csel-flags.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
@@ -142,6 +145,7 @@
 /regress-wzr-allocatable.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /returnaddr.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /setcc-takes-i32.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
+/sext_inreg.ll/1.1.1.1/Wed Jan 15 21:24:23 2014/-kk/
 /sibling-call.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /sincos-expansion.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /tail-call.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
@@ -149,6 +153,6 @@
 /tls-dynamics.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /tls-execs.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /tst-br.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
-/variadic.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
+/variadic.ll/1.1.1.2/Fri Jan 31 08:45:41 2014/-kk/
 /zero-reg.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 D

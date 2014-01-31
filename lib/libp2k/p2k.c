@@ -804,7 +804,7 @@ do_makenode(struct puffs_usermount *pu, struct p2k_node *p2n_dir,
 	} else {
 		rv = symfn(dvp, &vp, cn, va_x, link_target);
 	}
-	assert(RUMP_VOP_ISLOCKED(dvp) == 0);
+	RUMP_VOP_UNLOCK(dvp);
 	freecn(cn);
 
 	if (rv == 0) {

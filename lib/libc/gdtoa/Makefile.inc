@@ -36,10 +36,6 @@ SRCS+=	dmisc.c \
 	smisc.c strtodg.c sum.c \
 	ulp.c
 
-# wrappers
-SRCS+=	_strtof.c _strtold.c
-#SRCS+=	_hdtoa.c _ldtoa.c
-
 # XXX no hexadecimal floating-point string conversion for VAX FP yet
 .if ${MACHINE_ARCH} != "vax"
 SRCS+=	strtord.c

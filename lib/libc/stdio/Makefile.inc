@@ -26,9 +26,6 @@ SRCS+=	fmemopen.c
 SRCS+=	gets.c vsprintf.c tempnam.c tmpnam.c mktemp.c
 .endif
 
-# namespace purity wrappers
-SRCS+=	_fileno.c _fseeko.c _ftello.c
-
 MAN+=	fclose.3 ferror.3 fflush.3 fgetln.3 fgets.3 fgetwln.3 fgetws.3 \
 	flockfile.3 fmemopen.3 fopen.3 fparseln.3 fputs.3 fputws.3 fread.3 \
 	fseek.3 funopen.3 fwide.3 getc.3 getdelim.3 getwc.3 mktemp.3 printf.3 \

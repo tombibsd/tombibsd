@@ -114,8 +114,6 @@
 	.global _C_LABEL(mp_pdirpa)
 	.global _C_LABEL(local_apic)
 
-	.globl	gdt64
-
 	.text
 	.align 4,0x0
 	.code16
@@ -126,7 +124,11 @@ LABEL(cpu_spinup_trampoline)
 	movw    %ax, %ds
 	movw    %ax, %es
 	movw    %ax, %ss
+#ifdef __clang__
+	lgdt (mptramp_gdt32_desc)   # load flat descriptor table
+#else
 	data32 addr32 lgdt (mptramp_gdt32_desc)   # load flat descriptor table
+#endif
 	movl    %cr0, %eax       # get cr0
 	orl     $0x1, %eax      # enable protected mode
 	movl    %eax, %cr0      # doit

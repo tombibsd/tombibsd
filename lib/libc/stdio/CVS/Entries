@@ -1,7 +1,4 @@
-/Makefile.inc/1.42/Thu Oct 24 10:28:53 2013/-kk/
-/_fileno.c/1.5/Wed Oct 21 01:07:45 2009/-kk/
-/_fseeko.c/1.5/Wed Oct 21 01:07:45 2009/-kk/
-/_ftello.c/1.5/Wed Oct 21 01:07:45 2009/-kk/
+/Makefile.inc/1.43/Fri Jan 31 08:48:24 2014/-kk/
 /clrerr.c/1.11/Thu Mar 15 18:22:30 2012/-kk/
 /dprintf.c/1.2/Thu Oct 24 10:28:53 2013/-kk/
 /fclose.3/1.9/Thu Aug  7 16:43:21 2003/-kk/
@@ -124,7 +121,7 @@
 /vdprintf.c/1.4/Thu Oct 24 10:28:53 2013/-kk/
 /vfprintf.c/1.60/Thu Oct 24 10:28:53 2013/-kk/
 /vfscanf.c/1.45/Thu Oct 24 10:28:53 2013/-kk/
-/vfwprintf.c/1.33/Thu Oct 24 10:28:53 2013/-kk/
+/vfwprintf.c/1.34/Fri Jan 31 08:48:24 2014/-kk/
 /vfwscanf.c/1.11/Thu Oct 24 10:28:53 2013/-kk/
 /vprintf.c/1.13/Thu Oct 24 10:28:53 2013/-kk/
 /vscanf.c/1.15/Thu Oct 24 10:28:53 2013/-kk/

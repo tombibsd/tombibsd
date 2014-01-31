@@ -311,7 +311,7 @@ out:
 int
 tmpfs_create(void *v)
 {
-	struct vop_create_args /* {
+	struct vop_create_v2_args /* {
 		struct vnode		*a_dvp;
 		struct vnode		**a_vpp;
 		struct componentname	*a_cnp;
@@ -329,7 +329,7 @@ tmpfs_create(void *v)
 int
 tmpfs_mknod(void *v)
 {
-	struct vop_mknod_args /* {
+	struct vop_mknod_v2_args /* {
 		struct vnode		*a_dvp;
 		struct vnode		**a_vpp;
 		struct componentname	*a_cnp;
@@ -804,7 +804,7 @@ out:
 int
 tmpfs_mkdir(void *v)
 {
-	struct vop_mkdir_args /* {
+	struct vop_mkdir_v2_args /* {
 		struct vnode		*a_dvp;
 		struct vnode		**a_vpp;
 		struct componentname	*a_cnp;
@@ -837,7 +837,6 @@ tmpfs_rmdir(void *v)
 
 	KASSERT(VOP_ISLOCKED(dvp));
 	KASSERT(VOP_ISLOCKED(vp));
-	KASSERT(node->tn_spec.tn_dir.tn_parent == dnode);
 
 	/*
 	 * Directories with more than two entries ('.' and '..') cannot be
@@ -860,6 +859,8 @@ tmpfs_rmdir(void *v)
 		}
 		KASSERT(error == 0);
 	}
+
+	KASSERT(node->tn_spec.tn_dir.tn_parent == dnode);
 
 	/* Lookup the directory entry (check the cached hint first). */
 	de = tmpfs_dir_cached(node);
@@ -915,7 +916,7 @@ out:
 int
 tmpfs_symlink(void *v)
 {
-	struct vop_symlink_args /* {
+	struct vop_symlink_v2_args /* {
 		struct vnode		*a_dvp;
 		struct vnode		**a_vpp;
 		struct componentname	*a_cnp;

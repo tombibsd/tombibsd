@@ -18,8 +18,6 @@ WARNS?=		5
 # a stack frame
 COPTS.hijackdlsym.c+=	-O0
 
-.include <bsd.sys.mk>
+.include <bsd.lib.mk>
 
 CPPFLAGS+=	-U_FORTIFY_SOURCE
-
-.include <bsd.lib.mk>

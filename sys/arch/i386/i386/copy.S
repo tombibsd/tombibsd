@@ -270,9 +270,9 @@ ENTRY(copyin)
 	movl	16(%esp),%edi
 	movl	20(%esp),%eax
 	/*
-	 * We check that the end of the destination buffer is not past the end
-	 * of the user's address space.  If it's not, then we only need to
-	 * check that each page is readable, and the CPU will do that for us.
+	 * We check that the end of the source buffer is not past the end of
+	 * the user's address space.  If it's not, then we only need to check
+	 * that each page is readable, and the CPU will do that for us.
 	 */
 .Lcopyin_start:
 	movl	%esi,%edx

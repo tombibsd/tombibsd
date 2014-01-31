@@ -4,6 +4,7 @@ PROG=	fdboot
 SRCS=	fdboot.S
 NOMAN=	# defined
 LIBCRT0=
+LIBCRTI=
 
 .PATH: ${.CURDIR}/..
 

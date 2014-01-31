@@ -34,6 +34,8 @@ LLVM_LIBS+= \
 	PowerPCTargetInfo \
 	PowerPCMCTargetDesc \
 	PowerPCAsmPrinter \
+	SparcDisassembler \
+	SparcAsmParser \
 	SparcTargetInfo \
 	SparcMCTargetDesc \
 	SparcAsmPrinter \

@@ -17,9 +17,9 @@ LDADD+=	-lm
 DPADD+=	${LIBM}
 .endif
 YHEADER=	yes
-COPTS+=	-Wno-pointer-sign
-COPTS.run.c += -Wno-format-nonliteral
-COPTS.tran.c += -Wno-format-nonliteral
+CWARNFLAGS+=	-Wno-pointer-sign
+COPTS.run.c+=	-Wno-format-nonliteral
+COPTS.tran.c+=	-Wno-format-nonliteral
 
 # info file originally from GNU awk 3.1.3, adjusted for nawk slightly
 .PATH:	${NETBSDSRCDIR}/external/gpl2/gawk/dist

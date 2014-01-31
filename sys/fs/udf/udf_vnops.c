@@ -1453,7 +1453,7 @@ udf_access(void *v)
 int
 udf_create(void *v)
 {
-	struct vop_create_args /* {
+	struct vop_create_v2_args /* {
 		struct vnode *a_dvp;
 		struct vnode **a_vpp;
 		struct componentname *a_cnp;
@@ -1468,7 +1468,6 @@ udf_create(void *v)
 	DPRINTF(CALL, ("udf_create called\n"));
 	error = udf_create_node(dvp, vpp, vap, cnp);
 
-	vput(dvp);
 	return error;
 }
 
@@ -1477,7 +1476,7 @@ udf_create(void *v)
 int
 udf_mknod(void *v)
 {
-	struct vop_mknod_args /* {
+	struct vop_mknod_v2_args /* {
 		struct vnode *a_dvp;
 		struct vnode **a_vpp;
 		struct componentname *a_cnp;
@@ -1492,7 +1491,6 @@ udf_mknod(void *v)
 	DPRINTF(CALL, ("udf_mknod called\n"));
 	error = udf_create_node(dvp, vpp, vap, cnp);
 
-	vput(dvp);
 	return error;
 }
 
@@ -1501,7 +1499,7 @@ udf_mknod(void *v)
 int
 udf_mkdir(void *v)
 {
-	struct vop_mkdir_args /* {
+	struct vop_mkdir_v2_args /* {
 		struct vnode *a_dvp;
 		struct vnode **a_vpp;
 		struct componentname *a_cnp;
@@ -1516,7 +1514,6 @@ udf_mkdir(void *v)
 	DPRINTF(CALL, ("udf_mkdir called\n"));
 	error = udf_create_node(dvp, vpp, vap, cnp);
 
-	vput(dvp);
 	return error;
 }
 
@@ -1699,7 +1696,7 @@ udf_do_symlink(struct udf_node *udf_node, char *target)
 int
 udf_symlink(void *v)
 {
-	struct vop_symlink_args /* {
+	struct vop_symlink_v2_args /* {
 		struct vnode *a_dvp;
 		struct vnode **a_vpp;
 		struct componentname *a_cnp;
@@ -1729,7 +1726,6 @@ udf_symlink(void *v)
 			udf_dir_detach(udf_node->ump, dir_node, udf_node, cnp);
 		}
 	}
-	vput(dvp);
 	return error;
 }
 

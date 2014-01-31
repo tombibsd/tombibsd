@@ -1,7 +1,4 @@
-/Makefile.inc/1.4/Sun Jan 28 02:14:05 2007/-kk/
-/__dn_comp.c/1.5/Wed Jan 17 16:39:20 2007/-kk/
-/__res_close.c/1.4/Tue Sep 13 01:44:10 2005/-kk/
-/__res_send.c/1.4/Tue Sep 13 01:44:10 2005/-kk/
+/Makefile.inc/1.5/Fri Jan 31 08:48:24 2014/-kk/
 /h_errno.c/1.3/Sat Jun 21 20:41:48 2008/-kk/
 /herror.c/1.9/Tue Mar 13 21:13:43 2012/-kk/
 /mtctxres.c/1.4/Fri Mar 30 20:40:52 2007/-kk/

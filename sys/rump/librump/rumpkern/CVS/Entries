@@ -1,10 +1,10 @@
-/Makefile.rumpkern/1.134/Tue Dec 17 04:13:40 2013/-kk/
+/Makefile.rumpkern/1.135/Fri Jan 31 08:48:56 2014/-kk/
 /Makefile/1.43/Tue Jul 29 13:17:47 2008/-kk/
 /atomic_cas_generic.c/1.2/Fri Dec 18 22:37:18 2009/-kk/
 /cons.c/1.3/Thu Oct 24 10:28:58 2013/-kk/
-/cprng_stub.c/1.8/Thu Oct 24 10:28:58 2013/-kk/
 /devsw.c/1.7/Fri Feb 25 18:56:20 2011/-kk/
-/emul.c/1.160/Wed Dec 25 07:37:48 2013/-kk/
+/emul.c/1.161/Fri Jan 31 08:48:56 2014/-kk/
+/hyperentropy.c/1.2/Fri Jan 17 14:57:04 2014/-kk/
 /hyperstubs.c/1.2/Thu Oct 24 10:28:58 2013/-kk/
 /intr.c/1.42/Mon Nov 18 05:31:47 2013/-kk/
 /klock.c/1.8/Thu Oct 24 10:28:58 2013/-kk/
@@ -16,9 +16,9 @@
 /lwproc.c/1.26/Wed Dec 25 07:37:48 2013/-kk/
 /memalloc.c/1.21/Thu Oct 24 10:28:58 2013/-kk/
 /pmap_stub.c/1.25/Wed Mar  2 13:11:52 2011/-kk/
-/rump.c/1.281/Wed Dec 25 07:37:48 2013/-kk/
+/rump.c/1.283/Fri Jan 31 08:48:56 2014/-kk/
 /rump_atomic_cas_up.c/1.2/Tue Nov 23 12:51:10 2010/-kk/
-/rump_private.h/1.78/Tue Oct 29 12:12:01 2013/-kk/
+/rump_private.h/1.79/Fri Jan 31 08:48:56 2014/-kk/
 /rump_syscalls.c/1.97/Wed Dec 25 07:37:48 2013/-kk/
 /rumpcopy.c/1.18/Thu Oct 24 10:28:58 2013/-kk/
 /rumpcpu_generic.c/1.4/Fri Jun 22 12:45:43 2012/-kk/

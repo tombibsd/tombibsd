@@ -200,6 +200,15 @@ lasiattach(device_t parent, device_t self, void *aux)
 
 	/* Attach the GSC bus. */
 	ga.ga_ca = *ca;	/* clone from us */
+	if (strcmp(device_xname(parent), "mainbus0") == 0) {
+		ga.ga_dp.dp_bc[0] = ga.ga_dp.dp_bc[1];
+		ga.ga_dp.dp_bc[1] = ga.ga_dp.dp_bc[2];
+		ga.ga_dp.dp_bc[2] = ga.ga_dp.dp_bc[3];
+		ga.ga_dp.dp_bc[3] = ga.ga_dp.dp_bc[4];
+		ga.ga_dp.dp_bc[4] = ga.ga_dp.dp_bc[5];
+		ga.ga_dp.dp_bc[5] = ga.ga_dp.dp_mod;
+		ga.ga_dp.dp_mod = 0;
+	}
 
 	ga.ga_name = "gsc";
 	ga.ga_ir = &sc->sc_ir;

@@ -3,7 +3,6 @@
 NOMAN= # defined
 
 .include <bsd.own.mk>
-.include <bsd.sys.mk>		# for HOST_SH
 
 S=	${.CURDIR}/../../../..
 MIPS=	${S}/arch/mips
@@ -16,6 +15,7 @@ BINMODE?= 444
 
 # XXX SHOULD NOT NEED TO DEFINE THESE!
 LIBCRT0=
+LIBCRTI=
 LIBC=
 LIBCRTBEGIN=
 LIBCRTEND=

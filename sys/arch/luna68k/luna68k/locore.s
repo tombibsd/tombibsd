@@ -102,12 +102,6 @@ ASENTRY_NOPROFILE(start)
 	ASRELOC(tmpstk,%a0)
 	movl	%a0,%sp			| give ourselves a temporary stack
 
-#if 0 /* not sure useful values, need a bootloader tailored for us */
-	RELOC(boothowto,%a0)
-	movl	%d7,%a0@		| save boothowto
-	RELOC(bootdev,%a0)
-	movl	%d6,%a0@		| save bootdev
-#endif
 	RELOC(edata,%a0)		| clear out BSS
 	movl	#_C_LABEL(end)-4,%d0	| (must be <= 256 kB)
 	subl	#_C_LABEL(edata),%d0
@@ -115,6 +109,10 @@ ASENTRY_NOPROFILE(start)
 1:	clrl	%a0@+
 	dbra	%d0,1b
 
+	RELOC(boothowto,%a0)
+	movl	%d7,%a0@		| save boothowto
+	RELOC(bootdev,%a0)
+	movl	%d6,%a0@		| save bootdev
 	RELOC(lowram,%a0)
 	movl	%a5,%a0@		| store start of physical memory
 

@@ -42,6 +42,7 @@
 #define difftime	_difftime
 #define devname_r	_devname_r
 #define err		_err
+#define errc		_errc
 #define errx		_errx
 #ifdef _REENTRANT
 #define fileno		_fileno
@@ -80,10 +81,13 @@
 #define	sys_nsig	_sys_nsig
 #define sysconf		__sysconf
 #define verr		_verr
+#define verrc		_verrc
 #define verrx		_verrx
 #define vwarn		_vwarn
+#define vwarnc		_vwarnc
 #define vwarnx		_vwarnx
 #define warn		_warn
+#define warnc		_warnc
 #define warnx		_warnx
 
 #ifdef __weak_alias

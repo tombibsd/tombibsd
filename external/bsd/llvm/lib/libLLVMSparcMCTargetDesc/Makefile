@@ -9,7 +9,10 @@ CPPFLAGS+=	-I${SPARC_OBJDIR} -I${LLVM_SRCDIR}/lib/Target/Sparc
 
 .PATH: ${LLVM_SRCDIR}/lib/Target/Sparc/MCTargetDesc
 
-SRCS+=	SparcMCAsmInfo.cpp \
+SRCS+=	SparcAsmBackend.cpp \
+	SparcELFObjectWriter.cpp \
+	SparcMCAsmInfo.cpp \
+	SparcMCCodeEmitter.cpp \
 	SparcMCExpr.cpp \
 	SparcMCTargetDesc.cpp \
 	SparcTargetStreamer.cpp

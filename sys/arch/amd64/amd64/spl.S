@@ -212,16 +212,11 @@ ENTRY(spllower)
 2:
 	popf
 	jmp	_C_LABEL(Xspllower)
-	nop
-	nop
+3:
+	.space 16
 	.align	16
-#ifdef GPROF
-	nop
-	.align	16
-#endif
 END(spllower)
 LABEL(spllower_end)
-
 #endif /* !XEN */
 
 /*

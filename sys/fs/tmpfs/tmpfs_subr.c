@@ -424,7 +424,6 @@ tmpfs_construct_node(vnode_t *dvp, vnode_t **vpp, struct vattr *vap,
 	/* Update the parent's timestamps. */
 	tmpfs_update(dvp, TMPFS_UPDATE_MTIME | TMPFS_UPDATE_CTIME);
 out:
-	vput(dvp);
 	return error;
 }
 

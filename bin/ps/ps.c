@@ -136,7 +136,7 @@ char dfmt[] = "pid tt state time command";
 char jfmt[] = "user pid ppid pgid sess jobc state tt time command";
 char lfmt[] = "uid pid ppid cpu pri nice vsz rss wchan state tt time command";
 char sfmt[] = "uid pid ppid cpu lid nlwp pri nice vsz rss wchan lstate tt "
-		"time command";
+		"ltime command";
 char ufmt[] = "user pid %cpu %mem vsz rss tt state start time command";
 char vfmt[] = "pid state time sl re pagein vsz rss lim tsiz %cpu %mem command";
 

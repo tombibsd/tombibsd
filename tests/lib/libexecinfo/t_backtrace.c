@@ -34,6 +34,7 @@ __RCSID("$NetBSD$");
 #include <atf-c.h>
 #include <atf-c/config.h>
 #include <string.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <execinfo.h>
 #include <unistd.h>
@@ -55,7 +56,7 @@ myfunc3(size_t ncalls)
 	static const char *top[] = { "myfunc", "atfu_backtrace_fmt_basic_body",
 	    "atf_tc_run", "atf_tp_run", "atf_tp_main", "main", "___start" };
 	static bool optional_frame[] = { false, false, false, true, false,
-	    false, true };
+	    true, true };
 	size_t j, nptrs, min_frames, max_frames;
 	void *buffer[ncalls + 10];
 	char **strings;
@@ -69,12 +70,19 @@ myfunc3(size_t ncalls)
 		++max_frames;
 	}
 	nptrs = backtrace(buffer, __arraycount(buffer));
-	ATF_REQUIRE(nptrs >= ncalls + 2 + min_frames);
-	ATF_REQUIRE(nptrs <= ncalls + 2 + max_frames);
-
 	strings = backtrace_symbols_fmt(buffer, nptrs, "%n");
 
 	ATF_CHECK(strings != NULL);
+
+	printf("got nptrs=%zu ncalls=%zu (min_frames: %zu, max_frames: %zu)\n",
+	    nptrs, ncalls, min_frames, max_frames);
+	printf("backtrace is:\n");
+	for (j = 0; j < nptrs; j++) {
+		printf("#%zu: %s\n", j, strings[j]);
+	}
+
+	ATF_REQUIRE(nptrs >= ncalls + 2 + min_frames);
+	ATF_REQUIRE(nptrs <= ncalls + 2 + max_frames);
 	ATF_CHECK_STREQ(strings[0], "myfunc3");
 	ATF_CHECK_STREQ(strings[1], "myfunc2");
 

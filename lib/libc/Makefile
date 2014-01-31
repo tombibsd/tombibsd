@@ -80,7 +80,7 @@ CPPFLAGS+=	-D__BUILD_LEGACY
 .include "${.CURDIR}/net/Makefile.inc"
 .include "${.CURDIR}/nameser/Makefile.inc"
 .include "${.CURDIR}/nls/Makefile.inc"
-.if (${MACHINE_ARCH} != "alpha") && (${ARCHSUBDIR} != "sparc64")
+.if ${HAVE_LIBGCC} != "no" && ${MACHINE_ARCH} != "alpha" && ${ARCHSUBDIR} != "sparc64"
 .include "${.CURDIR}/quad/Makefile.inc"
 .endif
 .if (${USE_LIBTRE} == "yes")
@@ -99,7 +99,7 @@ CPPFLAGS+=	-D__BUILD_LEGACY
 .include "${.CURDIR}/time/Makefile.inc"
 .include "${.CURDIR}/tls/Makefile.inc"
 .include "${.CURDIR}/sys/Makefile.inc"
-.if ${HAVE_LIBGCC} == "no"
+.if ${HAVE_LIBGCC_EH} == "no"
 .include "${NETBSDSRCDIR}/sys/lib/libunwind/Makefile.inc"
 .endif
 .include "${.CURDIR}/uuid/Makefile.inc"
@@ -130,13 +130,24 @@ LSRCS := ${LSRCS} ${unwanted_file}
 NLS=	C.msg Pig.msg ca.msg cs.msg de.msg es.msg fi.msg fr.msg nl.msg \
 	no.msg pl.msg sk.msg sv.msg
 
+.if ${MKREPRO:Uno} == "yes"
+REGEX_SPECIALS=[][)(^$$.?*\\;]
+MKREPRO_SED=   -e 's;${NETBSDSRCDIR:C/${REGEX_SPECIALS}/\\\\&/g};/usr/src;'
+.endif
+
 realall: tags
 tags: ${SRCS}
 	${_MKTARGET_CREATE}
-	-${TOOL_CTAGS} -w ${.ALLSRC:M*.c}
+	-${TOOL_CTAGS} -f ${.TARGET}.tmp -w ${.ALLSRC:M*.c}
 	-egrep "^ENTRY(.*)|^FUNC(.*)|^SYSCALL(.*)" /dev/null ${.ALLSRC:M*.S} | \
 	    sed "s;\([^:]*\):\([^(]*\)(\([^, )]*\)\(.*\);\3 \1 /^\2(\3\4$$/;" \
-	    >> ${.TARGET}; sort -o ${.TARGET} ${.TARGET}
+           >> ${.TARGET}.tmp
+.if ${MKREPRO:Uno} == "yes"
+	sed ${MKREPRO_SED} <${.TARGET}.tmp | sort -o ${.TARGET}
+.else
+	sort -o ${.TARGET} ${.TARGET}.tmp
+.endif
+	rm -f ${.TARGET}.tmp
 
 FILES=		tags
 FILESNAME=	libc.tags

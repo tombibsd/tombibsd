@@ -78,5 +78,6 @@
 /unreachable-code.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /unsimplified-loop.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /xor-and.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/zext-signed-addrec.ll/1.1.1.1/Wed Jan 15 21:24:15 2014/-kk/
 /zext-wrap.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 D

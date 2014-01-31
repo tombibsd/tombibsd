@@ -26,10 +26,13 @@ TABLEGEN_SRC=		Sparc.td
 TABLEGEN_INCLUDES=	-I${LLVM_SRCDIR}/lib/Target/Sparc
 TABLEGEN_OUTPUT= \
 	SparcGenDAGISel.inc|-gen-dag-isel \
+	SparcGenAsmMatcher.inc|-gen-asm-matcher \
 	SparcGenAsmWriter.inc|-gen-asm-writer \
 	SparcGenCallingConv.inc|-gen-callingconv \
 	SparcGenCodeEmitter.inc|-gen-emitter \
+	SparcGenDisassemblerTables.inc|-gen-disassembler \
 	SparcGenInstrInfo.inc|-gen-instr-info \
+	SparcGenMCCodeEmitter.inc|-gen-emitter^-mc-emitter \
 	SparcGenRegisterInfo.inc|-gen-register-info \
 	SparcGenSubtargetInfo.inc|-gen-subtarget
 

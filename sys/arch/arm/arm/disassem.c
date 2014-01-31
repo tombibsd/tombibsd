@@ -324,6 +324,9 @@ disasm(const disasm_interface_t *di, vaddr_t loc, int altfmt)
 	fmt = 0;
 	matchp = 0;
 	insn = di->di_readword(loc);
+#if defined(__ARMEB__) && defined(CPU_ARMV7)
+	insn = bswap32(insn);
+#endif
 	char neonfmt = 'd';
 	char neonsign = 'u';
 

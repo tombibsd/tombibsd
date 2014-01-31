@@ -15,7 +15,7 @@
 ##
 ##    This is derived from work done by Brian Grayson, submitted in PR 6706.
 
-.include <bsd.sys.mk>		# for HOST_SH
+.include <bsd.own.mk>
 
 TMPL=/tmp/ffstemplate
 TMPMP=/tmp/ffsregresstest_mount

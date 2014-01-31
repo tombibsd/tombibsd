@@ -36,7 +36,7 @@
 /invariant_value_first.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /invariant_value_first_arg.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /ivchain.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
-/lsr-expand-quadratic.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/lsr-expand-quadratic.ll/1.1.1.2/Fri Jan 31 08:46:01 2014/-kk/
 /nested-reduce.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /nonlinear-postinc.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /ops_after_indvar.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/

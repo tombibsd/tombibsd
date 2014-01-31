@@ -228,6 +228,11 @@ cpu_lwp_fork(struct lwp *l1, struct lwp *l2, void *stack, size_t stacksize,
 	pcb2->pcb_rsp = (uint64_t)sf;
 	pcb2->pcb_rbp = (uint64_t)l2;
 #else
+	/*
+	 * XXX Is there a reason sf->sf_edi isn't initialized here?
+	 * Could this leak potentially sensitive information to new
+	 * userspace processes?
+	 */
 	sf->sf_esi = (int)func;
 	sf->sf_ebx = (int)arg;
 	sf->sf_eip = (int)lwp_trampoline;

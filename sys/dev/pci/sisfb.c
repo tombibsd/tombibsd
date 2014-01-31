@@ -571,7 +571,7 @@ sisfb_setup(struct sisfb *fb)
 		sisfb_loadcmap(fb, 0, 256);
 	}
 
-	rasops_init(ri, 30, 80);
+	rasops_init(ri, 25, 80);
 	rasops_reconfig(ri, ri->ri_height / ri->ri_font->fontheight,
 	    ri->ri_width / ri->ri_font->fontwidth);
 

@@ -10,12 +10,9 @@
 /Lint_ptrace.c/1.2/Wed Jun 14 06:49:10 2000/-kk/
 /Lint_sbrk.c/1.3/Wed Jun 14 06:49:10 2000/-kk/
 /Lint_syscall.c/1.4/Sat Jan 18 11:32:58 2003/-kk/
-/Makefile.inc/1.221/Tue Nov 12 02:18:28 2013/-kk/
+/Makefile.inc/1.222/Fri Jan 31 08:48:24 2014/-kk/
 /__quotactl.2/1.3/Mon Feb 13 19:50:15 2012/-kk/
-/_brk.c/1.6/Wed Oct 21 01:07:45 2009/-kk/
 /_exit.2/1.18/Mon Sep  8 17:54:34 2003/-kk/
-/_fork.c/1.5/Wed Oct 21 01:07:45 2009/-kk/
-/_getcontext.c/1.5/Wed Oct 21 01:07:45 2009/-kk/
 /_lwp_create.2/1.5/Mon May 21 14:15:16 2012/-kk/
 /_lwp_ctl.2/1.5/Fri Apr 13 15:14:58 2012/-kk/
 /_lwp_detach.2/1.4/Wed Apr 30 13:10:51 2008/-kk/
@@ -31,8 +28,6 @@
 /_lwp_unpark_all.2/1.6/Tue Nov  2 20:49:47 2010/-kk/
 /_lwp_wait.2/1.4/Wed Apr 30 13:10:51 2008/-kk/
 /_lwp_wakeup.2/1.5/Wed Apr 30 13:10:51 2008/-kk/
-/_pipe.c/1.7/Wed Oct 21 01:07:45 2009/-kk/
-/_sbrk.c/1.6/Wed Oct 21 01:07:45 2009/-kk/
 /accept.2/1.31/Thu Oct 24 10:28:53 2013/-kk/
 /access.2/1.32/Thu Oct 24 10:28:53 2013/-kk/
 /acct.2/1.19/Mon May 31 12:16:20 2010/-kk/

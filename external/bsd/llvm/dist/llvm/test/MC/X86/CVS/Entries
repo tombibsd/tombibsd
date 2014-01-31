@@ -1,6 +1,6 @@
 /2011-09-06-NoNewline.s/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /3DNow.s/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
-/address-size.s/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/address-size.s/1.1.1.2/Fri Jan 31 08:46:00 2014/-kk/
 /avx512-encodings.s/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /cfi_def_cfa-crash.s/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /fde-reloc.s/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
@@ -12,14 +12,18 @@
 /intel-syntax.s/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /lit.local.cfg/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /padlock.s/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/relax-insn.s/1.1.1.1/Wed Jan 15 21:24:17 2014/-kk/
+/ret.s/1.1.1.1/Wed Jan 15 21:24:17 2014/-kk/
 /shuffle-comments.s/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /stackmap-nops.ll/1.1.1.1/Sun Jan  5 16:16:59 2014/-kk/
+/x86-16.s/1.1.1.1/Wed Jan 15 21:24:17 2014/-kk/
 /x86-32-avx.s/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /x86-32-coverage.s/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /x86-32-fma3.s/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /x86-32-ms-inline-asm.s/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
-/x86-32.s/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
-/x86-64.s/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/x86-32.s/1.1.1.2/Fri Jan 31 08:46:00 2014/-kk/
+/x86-64.s/1.1.1.2/Fri Jan 31 08:46:00 2014/-kk/
+/x86-target-directives.s/1.1.1.1/Wed Jan 15 21:24:17 2014/-kk/
 /x86_64-avx-clmul-encoding.s/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /x86_64-avx-encoding.s/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /x86_64-bmi-encoding.s/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
@@ -34,7 +38,7 @@
 /x86_64-tbm-encoding.s/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /x86_64-xop-encoding.s/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /x86_directives.s/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
-/x86_errors.s/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/x86_errors.s/1.1.1.2/Fri Jan 31 08:46:00 2014/-kk/
 /x86_long_nop.s/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /x86_nop.s/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /x86_operands.s/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/

@@ -50,7 +50,7 @@ static const struct mainbus_attach_args luna_devs[] = {
 
 static const struct mainbus_attach_args luna2_devs[] = {
 	{ "clock",  0x45000000, -1 },	/* Dallas TimeKeeper */
-	{ "le",	    0xf0000000, 3 },	/* Am7990 */
+	{ "le",	    0xf1000000, 3 },	/* Am7990 */
 	{ "sio",    0x51000000, 6 },	/* uPD7201A */
 	{ "fb",	    0xc1100000, -1 },	/* BrookTree RAMDAC */
 	{ "spc",    0xe1000000, 2 },	/* internal MB89352 */

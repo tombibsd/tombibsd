@@ -4,6 +4,7 @@ PROG=	sdboot
 SRCS=	sdboot.S
 NOMAN=	# defined
 LIBCRT0=
+LIBCRTI=
 
 .PATH: ${.CURDIR}/..
 

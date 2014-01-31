@@ -60,7 +60,7 @@
 /pci_axppci_33.c/1.37/Mon Feb  6 02:14:15 2012/-kk/
 /pci_axppci_33.h/1.5/Sat Mar 14 14:45:53 2009/-kk/
 /pci_bwx_bus_io_chipdep.c/1.21/Mon Feb  6 02:14:15 2012/-kk/
-/pci_bwx_bus_mem_chipdep.c/1.25/Mon Feb  6 02:14:15 2012/-kk/
+/pci_bwx_bus_mem_chipdep.c/1.27/Fri Jan 31 08:48:34 2014/-kk/
 /pci_eb164.c/1.44/Mon Feb  6 02:14:15 2012/-kk/
 /pci_eb164.h/1.4/Sat Mar 14 14:45:53 2009/-kk/
 /pci_eb164_intr.s/1.6/Wed Jan 23 21:33:19 2002/-kk/
@@ -92,7 +92,7 @@
 /siovar.h/1.11/Sat Mar 14 14:45:53 2009/-kk/
 /tsc.c/1.22/Thu Oct 24 10:28:57 2013/-kk/
 /tsp_bus_io.c/1.8/Fri Jul  1 19:19:50 2011/-kk/
-/tsp_bus_mem.c/1.12/Mon Feb  6 02:14:15 2012/-kk/
+/tsp_bus_mem.c/1.13/Fri Jan 31 08:48:34 2014/-kk/
 /tsp_dma.c/1.13/Thu Oct 24 10:28:57 2013/-kk/
 /tsp_pci.c/1.9/Tue Jun 14 15:34:22 2011/-kk/
 /tsreg.h/1.6/Thu Oct 24 10:28:57 2013/-kk/

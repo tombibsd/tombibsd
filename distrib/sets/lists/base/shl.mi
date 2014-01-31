@@ -15,13 +15,13 @@
 #
 ./lib/libc.so					base-sys-shlib		dynamicroot
 ./lib/libc.so.12				base-sys-shlib		dynamicroot
-./lib/libc.so.12.188				base-sys-shlib		dynamicroot
+./lib/libc.so.12.189				base-sys-shlib		dynamicroot
 ./lib/libcrypt.so				base-sys-shlib		dynamicroot
 ./lib/libcrypt.so.1				base-sys-shlib		dynamicroot
 ./lib/libcrypt.so.1.0				base-sys-shlib		dynamicroot
 ./lib/libcrypto.so				base-crypto-shlib	crypto,dynamicroot
 ./lib/libcrypto.so.8				base-crypto-shlib	crypto,dynamicroot
-./lib/libcrypto.so.8.1				base-crypto-shlib	crypto,dynamicroot
+./lib/libcrypto.so.8.2				base-crypto-shlib	crypto,dynamicroot
 ./lib/libdevmapper.so				base-lvm-shlib		lvm,dynamicroot
 ./lib/libdevmapper.so.1				base-lvm-shlib		lvm,dynamicroot
 ./lib/libdevmapper.so.1.0			base-lvm-shlib		lvm,dynamicroot
@@ -197,7 +197,7 @@
 ./usr/lib/libc++.so.1.0				base-sys-shlib		libcxx
 ./usr/lib/libc.so				base-sys-shlib
 ./usr/lib/libc.so.12				base-sys-shlib
-./usr/lib/libc.so.12.188			base-sys-shlib
+./usr/lib/libc.so.12.189			base-sys-shlib
 ./usr/lib/libcdk.so				base-obsolete		obsolete
 ./usr/lib/libcom_err.so				base-krb5-shlib		kerberos
 ./usr/lib/libcom_err.so.7			base-krb5-shlib		kerberos
@@ -207,7 +207,7 @@
 ./usr/lib/libcrypt.so.1.0			base-sys-shlib
 ./usr/lib/libcrypto.so				base-crypto-shlib	crypto
 ./usr/lib/libcrypto.so.8			base-crypto-shlib	crypto
-./usr/lib/libcrypto.so.8.1			base-crypto-shlib	crypto
+./usr/lib/libcrypto.so.8.2			base-crypto-shlib	crypto
 ./usr/lib/libcrypto_idea.so.7			base-obsolete		obsolete
 ./usr/lib/libcrypto_idea.so.7.0			base-obsolete		obsolete
 ./usr/lib/libcrypto_mdc2.so.7			base-obsolete		obsolete
@@ -224,7 +224,7 @@
 ./usr/lib/libcurses.so.7.0			base-sys-shlib
 ./usr/lib/libdes.so				base-crypto-shlib	crypto
 ./usr/lib/libdes.so.8				base-crypto-shlib	crypto
-./usr/lib/libdes.so.8.1				base-crypto-shlib	crypto
+./usr/lib/libdes.so.8.2				base-crypto-shlib	crypto
 ./usr/lib/libdevmapper.so			base-lvm-shlib		lvm
 ./usr/lib/libdevmapper.so.1			base-lvm-shlib		lvm
 ./usr/lib/libdevmapper.so.1.0			base-lvm-shlib		lvm
@@ -499,6 +499,9 @@
 ./usr/lib/librumpdev_netsmb.so			base-rump-shlib	rump
 ./usr/lib/librumpdev_netsmb.so.0		base-rump-shlib	rump
 ./usr/lib/librumpdev_netsmb.so.0.0		base-rump-shlib	rump
+./usr/lib/librumpdev_opencrypto.so		base-rump-shlib	rump
+./usr/lib/librumpdev_opencrypto.so.0		base-rump-shlib	rump
+./usr/lib/librumpdev_opencrypto.so.0.0		base-rump-shlib	rump
 ./usr/lib/librumpdev_pad.so			base-rump-shlib	rump
 ./usr/lib/librumpdev_pad.so.0			base-rump-shlib	rump
 ./usr/lib/librumpdev_pad.so.0.0			base-rump-shlib	rump
@@ -725,7 +728,7 @@
 ./usr/lib/libssh.so.22.0			base-secsh-shlib	crypto
 ./usr/lib/libssl.so				base-crypto-shlib	crypto
 ./usr/lib/libssl.so.10				base-crypto-shlib	crypto
-./usr/lib/libssl.so.10.1				base-crypto-shlib	crypto
+./usr/lib/libssl.so.10.2				base-crypto-shlib	crypto
 ./usr/lib/libstdc++.so				base-sys-shlib		gcc,cxx,libstdcxx
 ./usr/lib/libstdc++.so.5			base-sys-shlib		gcc=3,libstdcxx
 ./usr/lib/libstdc++.so.5.0			base-sys-shlib		gcc=3,cxx,libstdcxx

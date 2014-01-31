@@ -47,7 +47,6 @@
 #ifdef __linux__
 #define _XOPEN_SOURCE 600
 #define _BSD_SOURCE
-#define _FILE_OFFSET_BITS 64
 #define _GNU_SOURCE
 #include <features.h>
 #endif
@@ -55,8 +54,6 @@
 #if defined(__sun__)
 #  if defined(RUMPUSER_NO_FILE_OFFSET_BITS)
 #    undef _FILE_OFFSET_BITS
-#  else
-#    define _FILE_OFFSET_BITS 64
 #  endif
 #endif
 
@@ -235,6 +232,10 @@ do {						\
 	(ts)->tv_sec  = (tv)->tv_sec;		\
 	(ts)->tv_nsec = (tv)->tv_usec * 1000;	\
 } while (/*CONSTCOND*/0)
+#endif
+
+#ifndef PLATFORM_HAS_SETGETPROGNAME
+#define setprogname(a)
 #endif
 
 #endif /* _LIB_LIBRUMPUSER_RUMPUSER_PORT_H_ */

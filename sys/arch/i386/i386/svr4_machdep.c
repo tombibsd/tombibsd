@@ -116,9 +116,9 @@ svr4_setregs(struct lwp *l, struct exec_package *epp, vaddr_t stack)
 
 	setregs(l, epp, stack);
 	if (i386_use_fxsave)
-		pcb->pcb_savefpu.sv_xmm.sv_env.fx_cw = __SVR4_NPXCW__;
+		pcb->pcb_savefpu.sv_xmm.fx_cw = __SVR4_NPXCW__;
 	else
-		pcb->pcb_savefpu.sv_87.sv_env.en_cw = __SVR4_NPXCW__;
+		pcb->pcb_savefpu.sv_87.s87_cw = __SVR4_NPXCW__;
 	tf->tf_cs = GSEL(GUCODEBIG_SEL, SEL_UPL);
 }
 

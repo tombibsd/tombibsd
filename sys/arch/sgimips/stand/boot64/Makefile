@@ -10,7 +10,6 @@ SRCS=	start.S boot.c bootinfo.c conf.c devopen.c putchar.c getchar.c \
 CLEANFILES+=	boot.map
 
 .include <bsd.own.mk>
-.include <bsd.sys.mk>		# for HOST_SH
 
 # $S must correspond to the top of the 'sys' tree
 S=	${.CURDIR}/../../../..

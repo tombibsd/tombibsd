@@ -20,7 +20,7 @@
 /lfs_subr.c/1.80/Thu Oct 24 10:28:58 2013/-kk/
 /lfs_syscalls.c/1.150/Thu Oct 31 07:00:37 2013/-kk/
 /lfs_vfsops.c/1.317/Tue Dec 17 04:05:17 2013/-kk/
-/lfs_vnops.c/1.259/Thu Oct 24 10:28:58 2013/-kk/
+/lfs_vnops.c/1.260/Fri Jan 31 08:48:58 2014/-kk/
 /ulfs_bmap.c/1.5/Thu Oct 24 10:28:58 2013/-kk/
 /ulfs_bswap.h/1.6/Thu Oct 24 10:28:58 2013/-kk/
 /ulfs_dinode.h/1.11/Thu Oct 24 10:28:58 2013/-kk/
@@ -45,6 +45,6 @@
 /ulfs_readwrite.c/1.7/Thu Oct 24 10:28:58 2013/-kk/
 /ulfs_snapshot.c/1.2/Thu Oct 24 10:28:58 2013/-kk/
 /ulfs_vfsops.c/1.8/Thu Oct 24 10:28:58 2013/-kk/
-/ulfs_vnops.c/1.18/Thu Oct 24 10:28:58 2013/-kk/
+/ulfs_vnops.c/1.19/Fri Jan 31 08:48:58 2014/-kk/
 /ulfsmount.h/1.12/Thu Oct 24 10:28:58 2013/-kk/
 D

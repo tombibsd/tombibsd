@@ -24,4 +24,3 @@ makedb:
 .endif
 
 .include <bsd.subdir.mk>
-.include <bsd.sys.mk>

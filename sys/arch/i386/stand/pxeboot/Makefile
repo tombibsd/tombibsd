@@ -9,9 +9,6 @@ NEWVERSWHAT=	"PXE Boot"
 STARTFILE=	${PXESTART}
 RELOC=		0x0
 
-AFLAGS.pxe_call.S= ${${ACTIVE_CC} == "clang":?-no-integrated-as:}
-AFLAGS.start_pxe.S= ${${ACTIVE_CC} == "clang":?-no-integrated-as:}
-
 .if (${BASE} != "pxeboot_ia32")
 .PATH.c: ${.CURDIR}/../pxeboot
 .PATH.S: ${.CURDIR}/../pxeboot

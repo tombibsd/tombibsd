@@ -122,7 +122,6 @@
 #		(default: no)
 #
 
-.include <bsd.sys.mk>		# for HOST_SH
 .include <bsd.own.mk> 		#
 .include <bsd.endian.mk>	# for TARGET_ENDIANNESS
 
