@@ -1,6 +1,10 @@
 #	$NetBSD$
 CPPFLAGS+= -mcpu=cortex-a8 -mfpu=neon
 
+.if !empty(MACHINE_ARCH:M*eb)
+EXTRA_LINKFLAGS+=	--be8
+.endif
+
 SYSTEM_FIRST_OBJ=	cubie_start.o
 SYSTEM_FIRST_SFILE=	${THISARM}/cubie/cubie_start.S
 

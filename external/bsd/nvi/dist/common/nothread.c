@@ -8,9 +8,14 @@
 
 #include "config.h"
 
+#include <sys/cdefs.h>
+#if 0
 #ifndef lint
 static const char sccsid[] = "Id: nothread.c,v 1.4 2000/07/22 14:52:37 skimo Exp  (Berkeley) Date: 2000/07/22 14:52:37 ";
 #endif /* not lint */
+#else
+__RCSID("$NetBSD$");
+#endif
 
 #include <sys/types.h>
 #include <sys/queue.h>

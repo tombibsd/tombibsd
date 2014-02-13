@@ -81,7 +81,7 @@ LEAF(setjmp, 1)
 	mov	s0, a0
 	ldq	s0, (( 9 + 4) * 8)(a0)
 
-	ldiq	t0, 0xacedbade			/* sigcontext magic number */
+	ldq	t0, magic 			/* sigcontext magic number */
 	stq	t0, ((31 + 4) * 8)(a0)		/* magic in sc_regs[31] */
 	/* Too bad we can't check if we actually used FP */
 	ldiq	t0, 1
@@ -121,4 +121,6 @@ botch:
 	CALL(longjmperror)
 	CALL(abort)
 	RET					/* "can't" get here... */
+magic:
+	.quad	0xacedbade			/* sigcontext magic number */
 END(longjmp)

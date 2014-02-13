@@ -354,6 +354,7 @@ static inline unsigned char RGfx(volatile void *, short);
 	do {	\
 		unsigned char tmp;\
 		tmp = vgar(ba, ACT_ADDRESS_RESET);\
+		__USE(tmp);\
 		vgaw(ba, ACT_ADDRESS_W, idx);\
 		vgaw(ba, ACT_ADDRESS_W, val);\
 	} while (0)

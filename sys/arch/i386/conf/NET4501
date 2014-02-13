@@ -204,11 +204,6 @@ atw*	at cardbus? function ?	# ADMtek ADM8211 (802.11)
 ral*	at cardbus? function ?	# Ralink RT2x60 (802.11)
 rtw*	at cardbus? function ?	# Realtek RTL8180 (802.11)
 
-# Coprocessor Support
-
-# Math Coprocessor support
-npx0	at isa? port 0xf0 irq 13	# x86 math coprocessor
-
 # ISA serial interfaces
 com0	at isa? port 0x3f8 irq 4	# Standard PC serial ports
 com1	at isa? port 0x2f8 irq 3

@@ -109,7 +109,7 @@ static void
 orion_intr_init(void)
 {
 	extern struct pic_softc mvsoc_bridge_pic;
-	void *ih;
+	void *ih __diagused;
 
 	pic_add(&orion_pic, 0);
 

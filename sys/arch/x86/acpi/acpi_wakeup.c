@@ -268,12 +268,10 @@ acpi_cpu_sleep(struct cpu_info *ci)
 		return;
 
 	/* Execute Wakeup */
-#ifdef __i386__
-	npxinit(ci);
-#else
+#ifndef __i386__
 	cpu_init_msrs(ci, false);
-	fpuinit(ci);
 #endif
+	fpuinit(ci);
 #if NLAPIC > 0
 	lapic_enable();
 	lapic_set_lvt();
@@ -309,11 +307,7 @@ acpi_md_sleep(int state)
 	AcpiSetFirmwareWakingVector(acpi_wakeup_paddr);
 
 	s = splhigh();
-#ifdef __i386__
-	npxsave_cpu(true);
-#else
 	fpusave_cpu(true);
-#endif
 	x86_disable_intr();
 
 #ifdef MULTIPROCESSOR
@@ -329,12 +323,10 @@ acpi_md_sleep(int state)
 		goto out;
 
 	/* Execute Wakeup */
-#ifdef __i386__
-	npxinit(&cpu_info_primary);
-#else
+#ifndef __i386__
 	cpu_init_msrs(&cpu_info_primary, false);
-	fpuinit(&cpu_info_primary);
 #endif
+	fpuinit(&cpu_info_primary);
 	i8259_reinit();
 #if NLAPIC > 0
 	lapic_enable();

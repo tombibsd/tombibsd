@@ -10,6 +10,8 @@
 
 #include "config.h"
 
+#include <sys/cdefs.h>
+#if 0
 #ifndef lint
 static const char copyright[] =
 "%Z% Copyright (c) 1992, 1993, 1994\n\
@@ -17,10 +19,18 @@ static const char copyright[] =
 %Z% Copyright (c) 1992, 1993, 1994, 1995, 1996\n\
 	Keith Bostic.  All rights reserved.\n";
 #endif /* not lint */
+#else
+__RCSID("$NetBSD$");
+#endif
 
+#include <sys/cdefs.h>
+#if 0
 #ifndef lint
 static const char sccsid[] = "Id: main.c,v 10.63 2001/11/01 15:24:43 skimo Exp  (Berkeley) Date: 2001/11/01 15:24:43 ";
 #endif /* not lint */
+#else
+__RCSID("$NetBSD$");
+#endif
 
 #include <sys/types.h>
 #include <sys/queue.h>

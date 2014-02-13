@@ -959,7 +959,7 @@ process_server_config_line(ServerOptions *options, char *line,
 #ifdef WITH_LDAP_PUBKEY
  	unsigned long lvalue;
 #endif
-	time_t *timetptr;
+	time_t *timetptr __unused;
 	ServerOpCodes opcode;
 	u_int i, flags = 0;
 	size_t len;

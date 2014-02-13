@@ -448,6 +448,7 @@ zzzz:
 #endif
 		smc->b0.bsr = BSR_BANK0;
 		ephsr = smc->b0.ephsr;		/* get EPHSR */
+		__USE(ephsr);
 		tcr = smc->b0.tcr;		/* and TCR */
 		smc->b2.bsr = BSR_BANK2;
 		save_ptr = smc->b2.ptr;

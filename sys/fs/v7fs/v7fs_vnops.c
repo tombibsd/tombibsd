@@ -189,7 +189,7 @@ v7fs_lookup(void *v)
 int
 v7fs_create(void *v)
 {
-	struct vop_create_v2_args /* {
+	struct vop_create_v3_args /* {
 				  struct vnode *a_dvp;
 				  struct vnode **a_vpp;
 				  struct componentname *a_cnp;
@@ -238,13 +238,16 @@ v7fs_create(void *v)
 	newnode->update_atime = true;
 	DPRINTF("allocated %s->#%d\n", a->a_cnp->cn_nameptr, ino);
 
+	if (error == 0)
+		VOP_UNLOCK(*a->a_vpp);
+
 	return error;
 }
 
 int
 v7fs_mknod(void *v)
 {
-	struct vop_mknod_v2_args /* {
+	struct vop_mknod_v3_args /* {
 				 struct vnode		*a_dvp;
 				 struct vnode		**a_vpp;
 				 struct componentname	*a_cnp;
@@ -285,6 +288,9 @@ v7fs_mknod(void *v)
 	newnode->update_ctime = true;
 	newnode->update_mtime = true;
 	newnode->update_atime = true;
+
+	if (error == 0)
+		VOP_UNLOCK(*a->a_vpp);
 
 	return error;
 }
@@ -803,7 +809,7 @@ out:
 int
 v7fs_mkdir(void *v)
 {
-	struct vop_mkdir_v2_args /* {
+	struct vop_mkdir_v3_args /* {
 				 struct vnode		*a_dvp;
 				 struct vnode		**a_vpp;
 				 struct componentname	*a_cnp;
@@ -840,6 +846,9 @@ v7fs_mkdir(void *v)
 	newnode->update_ctime = true;
 	newnode->update_mtime = true;
 	newnode->update_atime = true;
+
+	if (error == 0)
+		VOP_UNLOCK(*a->a_vpp);
 
 	return error;
 }
@@ -1225,7 +1234,7 @@ v7fs_update(struct vnode *vp, const struct timespec *acc,
 int
 v7fs_symlink(void *v)
 {
-	struct vop_symlink_v2_args /* {
+	struct vop_symlink_v3_args /* {
 				   struct vnode		*a_dvp;
 				   struct vnode		**a_vpp;
 				   struct componentname	*a_cnp;
@@ -1275,6 +1284,9 @@ v7fs_symlink(void *v)
 	newnode->update_ctime = true;
 	newnode->update_mtime = true;
 	newnode->update_atime = true;
+
+	if (error == 0)
+		VOP_UNLOCK(*a->a_vpp);
 
 	return error;
 }

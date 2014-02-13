@@ -189,6 +189,7 @@ vn_open(struct nameidata *ndp, int fmode, int cmode)
 				goto out;
 			fmode &= ~O_TRUNC;
 			vp = ndp->ni_vp;
+			vn_lock(vp, LK_EXCLUSIVE | LK_RETRY);
 		} else {
 			VOP_ABORTOP(ndp->ni_dvp, &ndp->ni_cnd);
 			if (ndp->ni_dvp == ndp->ni_vp)

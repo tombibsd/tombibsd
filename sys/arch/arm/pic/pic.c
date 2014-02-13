@@ -288,7 +288,7 @@ pic_deliver_irqs(struct pic_softc *pic, int ipl, void *frame)
 	uint32_t pending_irqs;
 	uint32_t blocked_irqs;
 	int irq;
-	bool progress = false;
+	bool progress __diagused = false;
 	
 	KASSERT(pic->pic_pending_ipls & ipl_mask);
 

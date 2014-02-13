@@ -243,7 +243,6 @@ puffs_newnode(struct mount *mp, struct vnode *dvp, struct vnode **vpp,
 		return error;
 
 	vp->v_type = type;
-	vn_lock(vp, LK_EXCLUSIVE | LK_RETRY);
 	*vpp = vp;
 
 	if (PUFFS_USE_NAMECACHE(pmp))

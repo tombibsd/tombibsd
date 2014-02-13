@@ -19,7 +19,7 @@
 /agpreg.h/1.20/Sat Nov 29 23:48:12 2008/-kk/
 /agpvar.h/1.18/Wed May  6 10:34:32 2009/-kk/
 /ahc_pci.c/1.68/Thu Nov 26 15:17:08 2009/-kk/
-/ahcisata_pci.c/1.34/Tue Jan 14 16:05:04 2014/-kk/
+/ahcisata_pci.c/1.35/Thu Feb 13 15:22:30 2014/-kk/
 /ahd_pci.c/1.34/Thu Oct 24 10:28:58 2013/-kk/
 /alipm.c/1.10/Sun Mar 18 12:47:01 2012/-kk/
 /amdpm.c/1.37/Thu Oct 24 10:28:58 2013/-kk/
@@ -110,13 +110,13 @@
 /esoreg.h/1.8/Sun Dec 11 12:22:49 2005/-kk/
 /esovar.h/1.11/Sat Oct 27 17:18:32 2012/-kk/
 /files.agp/1.6/Sat Aug  4 09:34:43 2007/-kk/
-/files.pci/1.367/Thu Oct 24 10:28:58 2013/-kk/
+/files.pci/1.369/Thu Feb 13 15:22:30 2014/-kk/
 /fms.c/1.41/Sat Oct 27 17:18:32 2012/-kk/
 /fmsvar.h/1.7/Sat Oct 27 17:18:32 2012/-kk/
 /fwohci_pci.c/1.41/Sat Aug  4 03:55:44 2012/-kk/
-/gcscaudio.c/1.12/Fri Mar  2 11:41:36 2012/-kk/
+/gcscaudio.c/1.13/Thu Feb 13 15:22:30 2014/-kk/
 /gcscaudioreg.h/1.1/Sun Dec 28 15:16:25 2008/-kk/
-/genfb_pci.c/1.35/Fri Jan 31 08:48:47 2014/-kk/
+/genfb_pci.c/1.36/Thu Feb 13 15:22:30 2014/-kk/
 /genfb_pcivar.h/1.2/Tue Oct 18 23:05:17 2011/-kk/
 /geodeide.c/1.25/Thu Oct 24 10:28:58 2013/-kk/
 /gffb.c/1.7/Sun Oct 27 08:20:01 2013/-kk/
@@ -240,6 +240,9 @@
 /if_xgereg.h/1.2/Sun Dec 11 12:22:50 2005/-kk/
 /ifpci.c/1.31/Sat Oct 27 17:18:34 2012/-kk/
 /ifpci2.c/1.20/Sat Oct 27 17:18:34 2012/-kk/
+/igma.c/1.1/Tue Jan 21 14:52:07 2014/-kk/
+/igmareg.h/1.1/Tue Jan 21 14:52:07 2014/-kk/
+/igmavar.h/1.1/Tue Jan 21 14:52:07 2014/-kk/
 /igsfb_pci.c/1.23/Mon Jan 30 19:41:21 2012/-kk/
 /igsfb_pcivar.h/1.1/Sat May 10 01:51:56 2003/-kk/
 /iha_pci.c/1.18/Mon Jan 30 19:41:21 2012/-kk/
@@ -295,7 +298,7 @@
 /nside.c/1.9/Thu Oct 24 10:28:58 2013/-kk/
 /oboe.c/1.39/Sat Oct 27 17:18:35 2012/-kk/
 /oboereg.h/1.2/Mon Apr 28 20:23:55 2008/-kk/
-/ohci_pci.c/1.50/Sun Jun 10 06:15:53 2012/-kk/
+/ohci_pci.c/1.51/Thu Feb 13 15:22:31 2014/-kk/
 /opl_cmpci.c/1.17/Mon Apr  9 10:18:17 2012/-kk/
 /opl_eso.c/1.18/Mon Apr  9 10:18:17 2012/-kk/
 /opl_fms.c/1.17/Mon Apr  9 10:18:17 2012/-kk/
@@ -316,9 +319,9 @@
 /pcibusprint.c/1.3/Sun Dec 11 12:22:50 2005/-kk/
 /pciconf.c/1.36/Sat Oct 20 06:09:07 2012/-kk/
 /pciconf.h/1.12/Sat Sep  8 05:02:41 2012/-kk/
-/pcidevs.h/1.1173/Tue Jan 14 16:05:04 2014/-kk/
-/pcidevs/1.1180/Tue Jan 14 16:05:04 2014/-kk/
-/pcidevs_data.h/1.1172/Tue Jan 14 16:05:05 2014/-kk/
+/pcidevs.h/1.1175/Thu Feb 13 15:22:31 2014/-kk/
+/pcidevs/1.1182/Thu Feb 13 15:22:31 2014/-kk/
+/pcidevs_data.h/1.1174/Thu Feb 13 15:22:31 2014/-kk/
 /pciide.c/1.219/Sat Nov  6 00:29:09 2010/-kk/
 /pciide_acard_reg.h/1.8/Wed May 14 13:29:29 2008/-kk/
 /pciide_acer_reg.h/1.12/Mon Oct 19 18:41:15 2009/-kk/
@@ -360,18 +363,18 @@
 /ppb.c/1.52/Thu Oct 24 10:28:58 2013/-kk/
 /ppbreg.h/1.6/Sun Dec 11 12:22:50 2005/-kk/
 /puc.c/1.36/Thu Oct 24 10:28:58 2013/-kk/
-/puccn.c/1.11/Thu Oct 24 10:28:58 2013/-kk/
-/puccn.h/1.5/Thu Oct 24 10:28:58 2013/-kk/
-/pucdata.c/1.90/Fri Jan 31 08:48:48 2014/-kk/
+/puccn.c/1.13/Thu Feb 13 15:22:31 2014/-kk/
+/puccn.h/1.6/Thu Feb 13 15:22:31 2014/-kk/
+/pucdata.c/1.92/Thu Feb 13 15:22:31 2014/-kk/
 /pucvar.h/1.10/Thu Oct 24 10:28:58 2013/-kk/
 /pwdog.c/1.7/Tue Aug 30 07:22:12 2011/-kk/
 /r128fb.c/1.38/Thu Oct 24 10:28:58 2013/-kk/
 /r128fbreg.h/1.5/Fri Jan  6 13:59:50 2012/-kk/
-/radeonfb.c/1.81/Fri Jan 31 08:48:48 2014/-kk/
+/radeonfb.c/1.82/Thu Feb 13 15:22:31 2014/-kk/
 /radeonfb_bios.c/1.4/Wed Nov  3 00:49:02 2010/-kk/
 /radeonfb_i2c.c/1.2/Fri Oct 19 12:00:55 2007/-kk/
 /radeonfbreg.h/1.5/Sun Dec 30 09:45:05 2012/-kk/
-/radeonfbvar.h/1.18/Thu Oct 24 10:28:58 2013/-kk/
+/radeonfbvar.h/1.19/Thu Feb 13 15:22:31 2014/-kk/
 /rccide.c/1.27/Thu Oct 24 10:28:58 2013/-kk/
 /rdcide.c/1.7/Tue Jul 31 15:50:36 2012/-kk/
 /rdcide_reg.h/1.1/Mon Apr  4 14:33:51 2011/-kk/
@@ -382,7 +385,7 @@
 /siop_pci.c/1.27/Sat Nov 13 13:52:08 2010/-kk/
 /siop_pci_common.c/1.34/Sat Nov 13 13:52:08 2010/-kk/
 /siop_pci_common.h/1.9/Mon Oct 19 18:41:16 2009/-kk/
-/sisfb.c/1.3/Fri Jan 31 08:48:48 2014/-kk/
+/sisfb.c/1.5/Thu Feb 13 15:22:31 2014/-kk/
 /sisfb.h/1.1/Sat Aug 27 13:28:37 2011/-kk/
 /siside.c/1.34/Thu Oct 24 10:28:58 2013/-kk/
 /slide.c/1.29/Thu Oct 24 10:28:58 2013/-kk/
@@ -449,6 +452,7 @@
 D/bktr////
 D/cxgb////
 D/hdaudio////
+D/igma////
 D/ixgbe////
 D/n8////
 D/voyager////

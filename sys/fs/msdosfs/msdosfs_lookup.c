@@ -711,7 +711,12 @@ createde(struct denode *dep, struct denode *ddep, struct denode **depp, struct c
 			else
 				diroffset = 0;
 		}
-		return deget(pmp, dirclust, diroffset, depp);
+		error = deget(pmp, dirclust, diroffset, depp);
+#ifndef MAKEFS
+		if (error == 0)
+			VOP_UNLOCK(DETOV(*depp));
+#endif
+		return error;
 	}
 
 	return 0;

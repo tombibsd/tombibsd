@@ -23,6 +23,7 @@ CPPFLAGS+=-DNLIST_ELF32 -DNLIST_ELF64
 .elif	${MACHINE_ARCH} == "sparc64"
 CPPFLAGS+=-DNLIST_AOUT -DNLIST_ELF32 -DNLIST_ELF64
 .elif	${MACHINE_CPU} == "arm" || \
+	${MACHINE_ARCH} == "coldfire" || \
 	${MACHINE_ARCH} == "i386" || \
 	${MACHINE_ARCH} == "m68k" || \
 	${MACHINE_ARCH} == "m68000" || \

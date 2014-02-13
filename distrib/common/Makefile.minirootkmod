@@ -46,7 +46,7 @@ ${MINIROOT}.kmod:	${RAMDISKFS} ${SRCMOD}
 		${OBJCOPY} --add-section miniroot=${RAMDISKFS} \
 		    --set-section-flags miniroot=alloc,contents,load,data \
 		    ${SRCMOD} ${DSTMOD}.tmp
-		gzip -9nc < ${DSTMOD}.tmp > ${DSTMOD}
+		${TOOL_GZIP} -9nc < ${DSTMOD}.tmp > ${DSTMOD}
 		rm -f ${DSTMOD}.tmp
 
 .include <bsd.prog.mk>

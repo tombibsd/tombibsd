@@ -334,8 +334,17 @@ sys_mmap(struct lwp *l, const struct sys_mmap_args *uap, register_t *retval)
 	 * Fixup the old deprecated MAP_COPY into MAP_PRIVATE, and
 	 * validate the flags.
 	 */
-	if (flags & MAP_COPY)
+	if (flags & MAP_COPY) {
 		flags = (flags & ~MAP_COPY) | MAP_PRIVATE;
+#if defined(COMPAT_10) && defined(__i386__)
+		/*
+		 * Ancient kernel on x86 did not obey PROT_EXEC on i386 at least
+		 * and ld.so did not turn it on. We take care of this on amd64
+		 * in compat32.
+		 */
+		prot |= PROT_EXEC;
+#endif
+	}
 	if ((flags & (MAP_SHARED|MAP_PRIVATE)) == (MAP_SHARED|MAP_PRIVATE))
 		return (EINVAL);
 
@@ -1253,5 +1262,8 @@ vaddr_t
 uvm_default_mapaddr(struct proc *p, vaddr_t base, vsize_t sz)
 {
 
-	return VM_DEFAULT_ADDRESS(base, sz);
+	if (p->p_vmspace->vm_map.flags & VM_MAP_TOPDOWN)
+		return VM_DEFAULT_ADDRESS_TOPDOWN(base, sz);
+	else
+		return VM_DEFAULT_ADDRESS_BOTTOMUP(base, sz);
 }

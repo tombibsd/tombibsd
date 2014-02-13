@@ -2,7 +2,10 @@
 
 #include <machine/asm.h>
 
-.globl	return_one, return_one_end;
-
-return_one: return_one_end:
-	nop
+ENTRY_NP(return_one)
+	mov	r0, #1
+	RET
+	.align	0
+	.globl	return_one_end
+return_one_end:
+END(return_one)

@@ -32,8 +32,8 @@
  * SUCH DAMAGE.
  */
 
-#ifndef	_ARM32_PROC_H_
-#define	_ARM32_PROC_H_
+#ifndef	_ARM_PROC_H_
+#define	_ARM_PROC_H_
 
 /*
  * Machine-dependent part of the proc structure for arm.
@@ -61,4 +61,4 @@ struct mdproc {
 
 #define	PROC0_MD_INITIALIZERS .p_md = { .md_march = MACHINE_ARCH },
 
-#endif /* _ARM32_PROC_H_ */
+#endif /* _ARM_PROC_H_ */

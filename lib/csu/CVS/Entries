@@ -1,15 +1,11 @@
 /Makefile/1.33/Thu Oct 24 10:28:53 2013/-kk/
 /README/1.5/Thu Oct 24 10:28:53 2013/-kk/
-D/alpha////
 D/arch////
 D/common////
 D/common_elf////
 D/ia64////
 D/m68k_elf////
-D/mips////
-D/powerpc////
 D/powerpc64////
 D/sh3_elf////
 D/sparc64////
 D/sparc_elf////
-D/vax_elf////

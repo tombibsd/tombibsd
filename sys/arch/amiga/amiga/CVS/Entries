@@ -9,7 +9,7 @@
 /autoconf.c/1.116/Wed Jan  1 02:45:21 2014/-kk/
 /bus.c/1.1/Thu Aug  4 17:48:50 2011/-kk/
 /busfuncs.c/1.12/Tue Jul 19 15:55:26 2011/-kk/
-/cc.c/1.25/Tue Jan 14 16:04:51 2014/-kk/
+/cc.c/1.26/Thu Feb 13 15:22:11 2014/-kk/
 /cc.h/1.18/Tue Jan 14 16:04:51 2014/-kk/
 /cc_registers.h/1.3/Wed Oct 26 02:01:38 1994/-kk/
 /cfdev.h/1.6/Sun Mar  4 05:59:15 2007/-kk/
@@ -19,7 +19,7 @@
 /conf.c/1.73/Thu Dec 15 14:25:12 2011/-kk/
 /custom.h/1.12/Thu Apr 25 09:20:27 2002/-kk/
 /device.h/1.14/Sat Oct 27 17:17:26 2012/-kk/
-/disksubr.c/1.60/Sat Sep 12 09:18:42 2009/-kk/
+/disksubr.c/1.61/Thu Feb 13 15:22:11 2014/-kk/
 /dkbad.c/1.12/Sat Mar 14 21:04:03 2009/-kk/
 /drcustom.h/1.8/Wed Apr  9 01:54:43 2003/-kk/
 /gayle.c/1.7/Tue Jan 14 16:04:51 2014/-kk/

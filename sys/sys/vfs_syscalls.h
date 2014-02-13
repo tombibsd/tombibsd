@@ -59,6 +59,9 @@ int do_sys_utimens(struct lwp *, struct vnode *, const char *, int,
 int do_sys_utimensat(struct lwp *, int, struct vnode *, const char *, int,
     const struct timespec *, enum uio_seg);
 
+struct pathbuf;
+int do_open(struct lwp *, struct vnode *, struct pathbuf *, int, int, int *);
+
 int	vfs_copyinfh_alloc(const void *, size_t, fhandle_t **);
 void	vfs_copyinfh_free(fhandle_t *);
 

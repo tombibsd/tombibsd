@@ -535,5 +535,6 @@ wstsc_intr(void *arg)
 	if ((*(dev->sci_csr + 0x10) & SCI_CSR_INT) == 0)
 		return (0);
 	stat = *(dev->sci_iack + 0x10);
+	__USE(stat);
 	return (1);
 }

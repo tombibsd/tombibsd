@@ -6,7 +6,6 @@
 
 .include <bsd.kernobj.mk>
 
-
 # we use spark, so that we get filetypes.
 ARCHIVE=BtNetBSD.spk
 
@@ -123,4 +122,3 @@ localclean:
 	-if [ -d tmp ]; then rm -rf tmp; fi
 
 .include <bsd.files.mk>
-.include <bsd.prog.mk>

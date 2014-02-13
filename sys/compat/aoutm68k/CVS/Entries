@@ -3,10 +3,10 @@
 /aoutm68k_mod.c/1.2/Thu Oct 24 10:28:57 2013/-kk/
 /aoutm68k_stat.c/1.24/Mon Apr 28 20:23:41 2008/-kk/
 /aoutm68k_stat.h/1.8/Sun Jan 11 22:54:16 2009/-kk/
-/aoutm68k_syscall.h/1.42/Mon Mar  7 19:27:27 2011/-kk/
-/aoutm68k_syscallargs.h/1.40/Mon Mar  7 19:27:27 2011/-kk/
-/aoutm68k_syscalls.c/1.39/Mon Mar  7 19:27:27 2011/-kk/
-/aoutm68k_sysent.c/1.44/Mon Mar  7 19:27:27 2011/-kk/
+/aoutm68k_syscall.h/1.43/Thu Feb 13 15:22:27 2014/-kk/
+/aoutm68k_syscallargs.h/1.41/Thu Feb 13 15:22:27 2014/-kk/
+/aoutm68k_syscalls.c/1.40/Thu Feb 13 15:22:27 2014/-kk/
+/aoutm68k_sysent.c/1.45/Thu Feb 13 15:22:27 2014/-kk/
 /aoutm68k_util.h/1.2/Mon Apr 28 20:23:41 2008/-kk/
 /files.aoutm68k/1.6/Wed Nov 19 18:36:02 2008/-kk/
 /syscalls.conf/1.2/Fri Nov  1 20:39:17 2002/-kk/

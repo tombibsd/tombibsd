@@ -1538,11 +1538,9 @@ sfasintr(struct sfas_softc *dev)
 void
 sfasicmd(struct sfas_softc *dev, struct sfas_pending *pendp)
 {
-	sfas_regmap_p	 rp;
 	struct nexus	*nexus;
 
 	nexus = &dev->sc_nexus[pendp->xs->xs_periph->periph_target];
-	rp = dev->sc_fas;
 
 	if (!sfasselect(dev, pendp, (char *)pendp->xs->cmd, pendp->xs->cmdlen,
 			(char *)pendp->xs->data, pendp->xs->datalen,

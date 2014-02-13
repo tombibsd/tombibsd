@@ -133,7 +133,8 @@ exec_netbsd32_makecmds(struct lwp *l, struct exec_package *epp)
 	if (error) {
 		kill_vmcmds(&epp->ep_vmcmds);
 		epp->ep_flags &= ~EXEC_32;
-	}
+	} else
+		epp->ep_flags &= ~EXEC_TOPDOWN_VM;
 	return error;
 }
 

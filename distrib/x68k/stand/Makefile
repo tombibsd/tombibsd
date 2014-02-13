@@ -25,4 +25,3 @@ release:
 .endfor
 
 .include <bsd.files.mk>
-.include <bsd.prog.mk>

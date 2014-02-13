@@ -609,6 +609,7 @@ struct	ifreq {
 #define	ifreq_getbroadaddr	ifreq_getaddr
 
 static inline const struct sockaddr *
+/*ARGSUSED*/
 ifreq_getaddr(u_long cmd, const struct ifreq *ifr)
 {
 	return &ifr->ifr_addr;

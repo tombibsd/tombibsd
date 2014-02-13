@@ -199,18 +199,14 @@ debugprintf(const char *msg, res_state res, ...)
 #define BOUNDED_INCR(x) \
 	do { \
 		cp += (x); \
-		if (cp > eom) { \
-			h_errno = NO_RECOVERY; \
-			return NULL; \
-		} \
+		if (cp > eom) \
+			goto no_recovery; \
 	} while (/*CONSTCOND*/0)
 
 #define BOUNDS_CHECK(ptr, count) \
 	do { \
-		if ((ptr) + (count) > eom) { \
-			h_errno = NO_RECOVERY; \
-			return NULL; \
-		} \
+		if ((ptr) + (count) > eom) \
+			goto no_recovery; \
 	} while (/*CONSTCOND*/0)
 
 static struct hostent *
@@ -503,6 +499,7 @@ success:
 	hent->h_aliases = (void *)bp;
 	memcpy(bp, aliases, qlen);
 	free(aliases);
+	aliases = NULL;
 
 	bp += qlen;
 	n = (int)(hap - addr_ptrs);

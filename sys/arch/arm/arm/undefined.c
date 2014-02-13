@@ -303,17 +303,10 @@ undefinedinstruction(trapframe_t *frame)
 
 #ifdef THUMB_CODE
 	if (frame->tf_spsr & PSR_T_bit) {
-		const uint16_t * const pc = (const uint16_t *)(fault_pc & ~1);
-		fault_instruction = pc[0];
-#if defined(__ARMEB__) && defined(_ARM_ARCH_7)
-		fault_instruction = le16toh(fault_instruction);
-#endif
+		fault_instruction = read_thumb_insn(fault_pc, user);
 		if (fault_instruction >= 0xe000) {
-			uint16_t tmp = pc[1];
-#if defined(__ARMEB__) && defined(_ARM_ARCH_7)
-			tmp = le16toh(tmp);
-#endif
-			fault_instruction = (fault_instruction << 16) | tmp;
+			fault_instruction = (fault_instruction << 16)
+			    | read_thumb_insn(fault_pc + 2, user);
 		}
 	}
 	else
@@ -342,11 +335,7 @@ undefinedinstruction(trapframe_t *frame)
 		 * the kernel is screwed up in which case it does
 		 * not really matter does it ?
 		 */
-
-		fault_instruction = *(const uint32_t *)fault_pc;
-#if defined(__ARMEB__) && defined(_ARM_ARCH_7)
-		fault_instruction = le32toh(fault_instruction);
-#endif
+		fault_instruction = read_insn(fault_pc, user);
 	}
 
 	/* Update vmmeter statistics */

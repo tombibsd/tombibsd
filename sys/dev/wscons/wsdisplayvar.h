@@ -163,6 +163,7 @@ void	wsdisplay_cnattach(const struct wsscreen_descr *, void *, int, int,
             long);
 void	wsdisplay_preattach(const struct wsscreen_descr *, void *, int, int,
             long);
+void	wsdisplay_cndetach(void);
 
 int	wsdisplaydevprint(void *, const char *);
 int	wsemuldisplaydevprint(void *, const char *);

@@ -197,6 +197,7 @@ iee_sbdio_channel_attention(void *cookie)
 	/* Issue a Channel Attention */
 	dummy = *sc->sc_port;
 	dummy = *sc->sc_port;
+	__USE(dummy);
 }
 
 static void

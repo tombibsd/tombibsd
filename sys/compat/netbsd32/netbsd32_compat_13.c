@@ -62,11 +62,14 @@ compat_13_netbsd32_sigprocmask(struct lwp *l, const struct compat_13_netbsd32_si
 	} */
 	sigset13_t ness, oess;
 	sigset_t nbss, obss;
+	struct proc *p = l->l_proc;
 	int error;
 
 	ness = SCARG(uap, mask);
 	native_sigset13_to_sigset(&ness, &nbss);
+	mutex_enter(p->p_lock);
 	error = sigprocmask1(l, SCARG(uap, how), &nbss, &obss);
+	mutex_exit(p->p_lock);
 	if (error)
 		return (error);
 	native_sigset_to_sigset13(&obss, &oess);

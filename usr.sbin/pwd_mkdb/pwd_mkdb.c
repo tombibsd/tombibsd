@@ -741,7 +741,7 @@ getversion(const char *fname)
 	db = dbopen(fname, O_RDONLY, PERM_INSECURE, DB_HASH, NULL);
 	if (db == NULL) {
 		/* If we are building on a separate root, assume version 1 */
-		if ((errno == EACCES || errno == ENOENT) && prefix[0])
+		if ((errno == EACCES && prefix[0]) || errno == ENOENT)
 			return 1;
 		mkpw_warning("Cannot open database `%s'", fname);
 		bailout();

@@ -822,8 +822,8 @@ run_load_microcode(struct run_softc *sc)
 {
 	usb_device_request_t req;
 	const char *fwname;
-	u_char *ucode;
-	size_t size;
+	u_char *ucode = NULL;	/* XXX gcc 4.8.3: maybe-uninitialized */
+	size_t size = 0;	/* XXX gcc 4.8.3: maybe-uninitialized */
 	uint32_t tmp;
 	int ntries, error;
 

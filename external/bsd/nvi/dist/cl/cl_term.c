@@ -10,9 +10,14 @@
 
 #include "config.h"
 
+#include <sys/cdefs.h>
+#if 0
 #ifndef lint
 static const char sccsid[] = "Id: cl_term.c,v 10.31 2001/07/08 13:06:56 skimo Exp  (Berkeley) Date: 2001/07/08 13:06:56 ";
 #endif /* not lint */
+#else
+__RCSID("$NetBSD$");
+#endif
 
 #include <sys/types.h>
 #include <sys/ioctl.h>

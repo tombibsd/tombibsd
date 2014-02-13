@@ -61,7 +61,7 @@ ENTRY_NP(_atomic_swap_32)
 #else
 	swp	r0, r1, [ip]
 	cmp	r0, r1
-	movnes	r3, #0
+	movsne	r3, #0
 	cmpne	r3, #0
 #endif
 	bne	1b

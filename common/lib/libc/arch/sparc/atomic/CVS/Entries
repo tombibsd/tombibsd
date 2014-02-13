@@ -1,6 +1,6 @@
-/Makefile.inc/1.15/Wed Nov 28 21:39:59 2012/-kk/
+/Makefile.inc/1.16/Thu Feb 13 15:18:39 2014/-kk/
 /atomic_cas.S/1.12/Thu Oct 24 10:28:41 2013/-kk/
-/atomic_cas_up.S/1.1/Wed Nov 28 21:39:59 2012/-kk/
+/atomic_cas_up.S/1.2/Thu Feb 13 15:18:39 2014/-kk/
 /atomic_op_asm.h/1.6/Mon Jan 17 18:11:09 2011/-kk/
 /membar_ops.S/1.4/Sun May 25 15:56:12 2008/-kk/
 D

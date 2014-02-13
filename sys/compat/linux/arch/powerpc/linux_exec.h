@@ -77,7 +77,7 @@
 
 /*
  * Size of the auxiliary ELF table. On the PowerPC we need 16 extra bytes
- * in order to force an alignement on a 16 bytes boundary (this is expected
+ * in order to force an alignment on a 16 bytes boundary (this is expected
  * by PowerPC GNU ld.so).
  */
 #define LINUX_ELF_AUX_ARGSIZ \

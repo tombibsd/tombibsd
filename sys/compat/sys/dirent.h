@@ -34,6 +34,13 @@
 #ifndef _COMPAT_SYS_DIRENT_H_
 #define _COMPAT_SYS_DIRENT_H_
 
+struct dirent43 {
+	u_int32_t d_fileno;		/* file number of entry */
+	u_int16_t d_reclen;		/* length of this record */
+	u_int16_t d_namlen;		/* length of string in d_name */
+	char	d_name[255 + 1];	/* name must be no longer than this */
+};
+
 struct dirent12 {
 	u_int32_t d_fileno;		/* file number of entry */
 	u_int16_t d_reclen;		/* length of this record */

@@ -211,7 +211,6 @@ hypervisor*	at mainbus?		# Xen hypervisor
 
 vcpu*		at hypervisor?		# Xen virtual CPUs
 xenbus* 	at hypervisor?		# Xen virtual bus
-npx0		at hypervisor?		# x86 math coprocessor
 
 xencons*	at hypervisor?		# Xen virtual console
 #xennet* 	at hypervisor?		# Xen virtual network interface

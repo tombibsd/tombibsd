@@ -62,7 +62,6 @@
 
 #define BLKDEV_IOSIZE	2048
 #define	MAXPHYS		(64 * 1024)	/* max raw I/O transfer size */
-#define	MAXBSIZE	0x4000		/* max FS block size - XXX */
 
 #define	UPAGES		2		/* pages of u-area */
 #define USPACE		(NBPG*UPAGES)

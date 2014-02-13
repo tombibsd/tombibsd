@@ -5,7 +5,7 @@
 /atomic.h/1.1/Tue Jul 21 09:49:15 2009/-kk/
 /autoconf.h/1.1/Tue Jul 21 09:49:15 2009/-kk/
 /bswap.h/1.1/Thu May 25 22:11:59 2000/-kk/
-/bus_defs.h/1.5/Mon Sep 19 00:23:14 2011/-kk/
+/bus_defs.h/1.6/Thu Feb 13 15:22:12 2014/-kk/
 /bus_funcs.h/1.1/Mon Jul 18 17:51:17 2011/-kk/
 /cdefs.h/1.1/Thu May 25 22:11:59 2000/-kk/
 /cpu.h/1.20/Mon Jun 20 06:35:39 2011/-kk/

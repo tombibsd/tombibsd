@@ -797,6 +797,8 @@ uvideo_init_control(struct uvideo_softc *sc,
 		return USBD_NORMAL_COMPLETION;
 	}
 
+	i = 0;
+
 	/* allocate space for units */
 	sc->sc_nunits = nunits;
 	sc->sc_unit = kmem_alloc(sizeof(*sc->sc_unit) * nunits, KM_SLEEP);
@@ -807,7 +809,6 @@ uvideo_init_control(struct uvideo_softc *sc,
 	memcpy(iter, &orig, sizeof(orig));
 
 	/* iterate again, initializing the units */
-	i = 0;
 	while ((desc = usb_desc_iter_next_non_interface(iter)) != NULL) {
 		uvdesc = (const uvideo_descriptor_t *)desc;
 

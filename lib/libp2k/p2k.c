@@ -808,7 +808,6 @@ do_makenode(struct puffs_usermount *pu, struct p2k_node *p2n_dir,
 	freecn(cn);
 
 	if (rv == 0) {
-		RUMP_VOP_UNLOCK(vp);
 		p2n = getp2n(p2m, vp, true, p2n);
 		puffs_newinfo_setcookie(pni, p2n);
 	} else {

@@ -91,6 +91,8 @@
 #include <powerpc/oea/bat.h>
 #include <powerpc/oea/pte.h>
 
+__RCSID("$NetBSD$");
+
 static int	_kvm_match_601bat(kvm_t *, vaddr_t, paddr_t *, int *);
 static int	_kvm_match_bat(kvm_t *, vaddr_t, paddr_t *, int *);
 static int	_kvm_match_sr(kvm_t *, vaddr_t, paddr_t *, int *);

@@ -240,11 +240,6 @@ isapnp0 at isa?
 # ISA Plug-and-Play PCMCIA controllers
 pcic*	at isapnp?
 
-# Coprocessor Support
-
-# Math Coprocessor support
-npx0	at isa? port 0xf0 irq 13	# x86 math coprocessor
-
 
 # Console Devices
 

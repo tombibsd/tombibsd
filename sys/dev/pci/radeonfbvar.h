@@ -196,11 +196,9 @@ struct radeonfb_display {
 	void (*rd_putchar)(void *, int, int, u_int, long);
 	glyphcache		rd_gc;
 
-#if 0
 	uint8_t			rd_cmap_red[256];
 	uint8_t			rd_cmap_green[256];
 	uint8_t			rd_cmap_blue[256];
-#endif
 
 #ifdef SPLASHSCREEN
 	struct splash_info	rd_splash;

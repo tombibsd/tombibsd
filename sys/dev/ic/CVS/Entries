@@ -88,7 +88,7 @@
 /arn9287.c/1.3/Tue Oct 29 12:11:53 2013/-kk/
 /arn9287.h/1.1/Thu Oct 24 10:28:57 2013/-kk/
 /arn9287reg.h/1.1/Thu Oct 24 10:28:57 2013/-kk/
-/arn9380.c/1.2/Thu Oct 24 10:28:57 2013/-kk/
+/arn9380.c/1.3/Thu Feb 13 15:22:29 2014/-kk/
 /arn9380.h/1.1/Thu Oct 24 10:28:57 2013/-kk/
 /arn9380reg.h/1.1/Thu Oct 24 10:28:57 2013/-kk/
 /ath.c/1.116/Thu Oct 24 10:28:57 2013/-kk/
@@ -357,7 +357,7 @@
 /mc68450reg.h/1.5/Mon Apr 28 20:23:50 2008/-kk/
 /mc6845reg.h/1.4/Sun Dec 11 12:21:27 2005/-kk/
 /mc6854reg.h/1.1/Mon Sep 10 23:41:49 2001/-kk/
-/mfi.c/1.50/Thu Oct 24 10:28:58 2013/-kk/
+/mfi.c/1.51/Thu Feb 13 15:22:29 2014/-kk/
 /mfiio.h/1.1/Wed Sep 19 21:24:29 2012/-kk/
 /mfireg.h/1.8/Wed Sep 19 21:24:29 2012/-kk/
 /mfivar.h/1.20/Wed Sep 19 21:24:29 2012/-kk/
@@ -440,7 +440,7 @@
 /pcdisplay_chars.c/1.16/Thu Feb 25 11:20:10 2010/-kk/
 /pcdisplay_subr.c/1.35/Tue Oct 19 22:27:19 2010/-kk/
 /pcdisplayvar.h/1.19/Sun Mar 15 15:52:12 2009/-kk/
-/pcf8584.c/1.10/Thu Oct 24 10:28:58 2013/-kk/
+/pcf8584.c/1.11/Thu Feb 13 15:22:29 2014/-kk/
 /pcf8584reg.h/1.1/Sat Apr 14 19:33:30 2007/-kk/
 /pcf8584var.h/1.4/Sun Feb 28 11:47:28 2010/-kk/
 /pckbc.c/1.56/Fri Jan 31 08:48:47 2014/-kk/
@@ -567,7 +567,7 @@
 /w83l518d_sdmmc.h/1.2/Thu Aug 19 14:58:22 2010/-kk/
 /w83l518dreg.h/1.1/Wed Sep 30 20:44:50 2009/-kk/
 /w83l518dvar.h/1.2/Thu Aug 19 14:58:22 2010/-kk/
-/wd33c93.c/1.24/Sat Nov 13 13:52:02 2010/-kk/
+/wd33c93.c/1.25/Thu Feb 13 15:22:30 2014/-kk/
 /wd33c93reg.h/1.4/Thu Feb 12 06:24:45 2009/-kk/
 /wd33c93var.h/1.11/Sat Jul 28 23:04:45 2012/-kk/
 /wdc.c/1.279/Thu Oct 24 10:28:58 2013/-kk/

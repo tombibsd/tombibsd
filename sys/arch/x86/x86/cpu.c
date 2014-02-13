@@ -72,10 +72,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include "lapic.h"
 #include "ioapic.h"
 
-#ifdef i386
-#include "npx.h"
-#endif
-
 #include <sys/param.h>
 #include <sys/proc.h>
 #include <sys/systm.h>
@@ -849,13 +845,7 @@ cpu_hatch(void *v)
 	lapic_set_lvt();
 	lapic_initclocks();
 
-#ifdef i386
-#if NNPX > 0
-	npxinit(ci);
-#endif
-#else
 	fpuinit(ci);
-#endif
 	lldt(GSYSSEL(GLDT_SEL, SEL_KPL));
 	ltr(ci->ci_tss_sel);
 
@@ -1123,13 +1113,7 @@ cpu_offline_md(void)
 	int s;
 
 	s = splhigh();
-#ifdef i386
-#if NNPX > 0
-	npxsave_cpu(true);
-#endif
-#else
 	fpusave_cpu(true);
-#endif
 	splx(s);
 }
 

@@ -109,3 +109,4 @@ void	pci_display_console(bus_space_tag_t, bus_space_tag_t,
     ((c)->pc_pciide_compat_intr_establish == NULL ? NULL :		\
      (*(c)->pc_pciide_compat_intr_establish)((c)->pc_conf_v, (d), (p),	\
 	(ch), (f), (a)))
+void	device_pci_register(device_t, void *);

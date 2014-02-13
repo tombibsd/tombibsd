@@ -306,7 +306,7 @@ initarm(void *arg)
 	consinit();
 
 #ifdef VERBOSE_INIT_ARM
-	printf("\nuboot arg = %#x, %#x, %#x, %#x\n",
+	printf("\nuboot arg = %#"PRIxPTR", %#"PRIxPTR", %#"PRIxPTR", %#"PRIxPTR"\n",
 	    uboot_args[0], uboot_args[1], uboot_args[2], uboot_args[3]);
 #endif
 
@@ -358,7 +358,12 @@ initarm(void *arg)
 
 #ifdef __HAVE_MM_MD_DIRECT_MAPPED_PHYS
 	const bool mapallmem_p = true;
-	KASSERT(ram_size <= KERNEL_VM_BASE - KERNEL_BASE);
+	if (ram_size > KERNEL_VM_BASE - KERNEL_BASE) {
+		printf("%s: dropping RAM size from %luMB to %uMB\n",
+		   __func__, (unsigned long) (ram_size >> 20),
+		   (KERNEL_VM_BASE - KERNEL_BASE) >> 20);
+		ram_size = KERNEL_VM_BASE - KERNEL_BASE;
+	}
 #else
 	const bool mapallmem_p = false;
 #endif

@@ -8,9 +8,14 @@
 
 #include "config.h"
 
+#include <sys/cdefs.h>
+#if 0
 #ifndef lint
 static const char sccsid[] = "Id: ip_send.c,v 8.10 2001/06/25 15:19:25 skimo Exp  (Berkeley) Date: 2001/06/25 15:19:25 ";
 #endif /* not lint */
+#else
+__RCSID("$NetBSD$");
+#endif
 
 #include <sys/types.h>
 #include <sys/queue.h>

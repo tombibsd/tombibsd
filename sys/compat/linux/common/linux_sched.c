@@ -418,7 +418,7 @@ linux_sys_sched_setparam(struct lwp *l, const struct linux_sys_sched_setparam_ar
 		goto out;
 
 	/* We need the current policy in Linux terms. */
-	error = do_sched_getparam(0, SCARG(uap, pid), &policy, NULL);
+	error = do_sched_getparam(SCARG(uap, pid), 0, &policy, NULL);
 	if (error)
 		goto out;
 	error = sched_native2linux(policy, NULL, &policy, NULL);
@@ -429,7 +429,7 @@ linux_sys_sched_setparam(struct lwp *l, const struct linux_sys_sched_setparam_ar
 	if (error)
 		goto out;
 
-	error = do_sched_setparam(0, SCARG(uap, pid), policy, &sp);
+	error = do_sched_setparam(SCARG(uap, pid), 0, policy, &sp);
 	if (error)
 		goto out;
 
@@ -453,7 +453,7 @@ linux_sys_sched_getparam(struct lwp *l, const struct linux_sys_sched_getparam_ar
 		goto out;
 	}
 
-	error = do_sched_getparam(0, SCARG(uap, pid), &policy, &sp);
+	error = do_sched_getparam(SCARG(uap, pid), 0, &policy, &sp);
 	if (error)
 		goto out;
 	DPRINTF(("%s: native: policy %d, priority %d\n",
@@ -502,7 +502,7 @@ linux_sys_sched_setscheduler(struct lwp *l, const struct linux_sys_sched_setsche
 	DPRINTF(("%s: native: policy %d, priority %d\n",
 	    __func__, policy, sp.sched_priority));
 
-	error = do_sched_setparam(0, SCARG(uap, pid), policy, &sp);
+	error = do_sched_setparam(SCARG(uap, pid), 0, policy, &sp);
 	if (error)
 		goto out;
 
@@ -520,7 +520,7 @@ linux_sys_sched_getscheduler(struct lwp *l, const struct linux_sys_sched_getsche
 
 	*retval = -1;
 
-	error = do_sched_getparam(0, SCARG(uap, pid), &policy, NULL);
+	error = do_sched_getparam(SCARG(uap, pid), 0, &policy, NULL);
 	if (error)
 		goto out;
 

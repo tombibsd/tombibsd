@@ -1059,11 +1059,7 @@ cpu_offline_md(void)
         int s;
 
         s = splhigh();
-#ifdef __i386__
-        npxsave_cpu(true);
-#else   
         fpusave_cpu(true);
-#endif
         splx(s);
 }
 

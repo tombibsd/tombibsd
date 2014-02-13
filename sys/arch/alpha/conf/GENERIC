@@ -359,6 +359,8 @@ pcn*	at	pci? dev ? function ?		# AMD PCnet-PCI Ethernet
 pcscp*	at	pci? dev ? function ?		# AMD Am53c974 PCscsi-PCI
 ppb*	at	pci? dev ? function ?		# PCI-PCI Bridges
 puc*	at 	pci? dev ? function ?		# PCI "universal" comm. cards
+radeonfb* at	pci? dev ? function ?		# ATI/AMD Radeon Graphics
+options 	RADEONFB_DEPTH_32
 re*	at	pci? dev ? function ?		# Realtek 8169 Ethernet
 rtk*	at	pci? dev ? function ?		# Realtek 8129/8139 Ethernet
 sio*	at	pci? dev ? function ?		# Intel PCI-ISA Bridges
@@ -695,6 +697,7 @@ wsdisplay*	at	sfb?
 #wsdisplay*	at	sfbp?
 wsdisplay*	at	px?
 wsdisplay*	at	pxg?
+wsdisplay*	at	radeonfb?
 wsdisplay*	at	vga?
 wsdisplay*	at	tga?
 wskbd*		at	lkkbd? console ?

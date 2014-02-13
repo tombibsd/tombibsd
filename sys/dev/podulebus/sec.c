@@ -446,6 +446,7 @@ sec_reset(struct wd33c93_softc *sc_sbic)
 		GET_SBIC_asr(sc_sbic, asr);
 	while (!(asr & SBIC_ASR_INT));
 	GET_SBIC_csr(sc_sbic, csr);
+	__USE(csr);
 	dmac_write(sc, NEC71071_DCTRL1, DCTRL1_CMP | DCTRL1_RQL);
 	dmac_write(sc, NEC71071_DCTRL2, 0);
 	sec_cli(sc);

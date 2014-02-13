@@ -1,7 +1,11 @@
-/Makefile/1.4/Thu Oct 24 10:28:59 2013/-kk/
-/common.h/1.1/Thu Oct 24 10:28:59 2013/-kk/
-/main.c/1.1/Thu Oct 24 10:28:59 2013/-kk/
-/vndcompress.1/1.10/Thu Oct 24 10:28:59 2013/-kk/
-/vndcompress.c/1.13/Thu Oct 24 10:28:59 2013/-kk/
-/vnduncompress.c/1.2/Thu Oct 24 10:28:59 2013/-kk/
+/Makefile/1.13/Thu Feb 13 15:22:43 2014/-kk/
+/common.h/1.6/Thu Feb 13 15:22:43 2014/-kk/
+/main.c/1.3/Thu Feb 13 15:22:43 2014/-kk/
+/offtab.c/1.13/Sat Jan 25 16:38:15 2014/-kk/
+/offtab.h/1.2/Wed Jan 22 06:15:22 2014/-kk/
+/utils.c/1.4/Wed Jan 22 06:15:31 2014/-kk/
+/utils.h/1.3/Wed Jan 22 06:15:22 2014/-kk/
+/vndcompress.1/1.14/Thu Feb 13 15:22:43 2014/-kk/
+/vndcompress.c/1.24/Thu Feb 13 15:22:43 2014/-kk/
+/vnduncompress.c/1.11/Thu Feb 13 15:22:43 2014/-kk/
 D

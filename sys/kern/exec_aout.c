@@ -132,6 +132,8 @@ exec_aout_makecmds(struct lwp *l, struct exec_package *epp)
 
 	if (error)
 		kill_vmcmds(&epp->ep_vmcmds);
+	else
+		epp->ep_flags &= ~EXEC_TOPDOWN_VM;
 
 	return error;
 }

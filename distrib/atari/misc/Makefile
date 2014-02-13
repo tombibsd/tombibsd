@@ -15,4 +15,3 @@ UUDECODE_FILES=chg_pid.ttp gzip.ttp rawwrite.ttp aptck.ttp file2swp.ttp
 UUDECODE_FILES+=loadbsd.ttp
 
 .include <bsd.files.mk>
-.include <bsd.prog.mk>

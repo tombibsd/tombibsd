@@ -57,7 +57,7 @@ void db_panic(void)
 			    cpu_index(curcpu()));
 			intrace = 0;
 		} else
-			printf("Faulted in mid-traceback; aborting...");
+			printf("Faulted in mid-traceback; aborting...\n");
 		if (db_onpanic == 2)
 			Debugger();
 	}

@@ -175,5 +175,6 @@ extern const struct amiga_bus_space_methods amiga_bus_stride_2;
 extern const struct amiga_bus_space_methods amiga_bus_stride_4;
 extern const struct amiga_bus_space_methods amiga_bus_stride_4swap;
 extern const struct amiga_bus_space_methods amiga_bus_stride_16;
+extern const struct amiga_bus_space_methods amiga_bus_stride_0x1000;
 
 #endif /* _AMIGAPPC_BUS_DEFS_H_ */

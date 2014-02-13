@@ -1,13 +1,13 @@
-/DD.h/1.1.1.1/Thu Oct 24 10:28:58 2013/-kk/
+/DD.h/1.1.1.2/Thu Feb 13 15:22:32 2014/-kk/
 /divtc3.c/1.1.1.1/Thu Oct 24 10:28:58 2013/-kk/
 /fixtfdi.c/1.1.1.1/Thu Oct 24 10:28:58 2013/-kk/
 /fixunstfdi.c/1.1.1.1/Thu Oct 24 10:28:58 2013/-kk/
 /floatditf.c/1.1.1.1/Thu Oct 24 10:28:58 2013/-kk/
 /floatunditf.c/1.1.1.1/Thu Oct 24 10:28:58 2013/-kk/
-/gcc_qadd.c/1.1.1.1/Thu Oct 24 10:28:58 2013/-kk/
+/gcc_qadd.c/1.1.1.2/Thu Feb 13 15:22:32 2014/-kk/
 /gcc_qdiv.c/1.1.1.1/Thu Oct 24 10:28:58 2013/-kk/
 /gcc_qmul.c/1.1.1.1/Thu Oct 24 10:28:58 2013/-kk/
-/gcc_qsub.c/1.1.1.1/Thu Oct 24 10:28:58 2013/-kk/
+/gcc_qsub.c/1.1.1.2/Thu Feb 13 15:22:32 2014/-kk/
 /multc3.c/1.1.1.1/Thu Oct 24 10:28:58 2013/-kk/
 /restFP.S/1.1.1.1/Thu Oct 24 10:28:58 2013/-kk/
 /saveFP.S/1.1.1.1/Thu Oct 24 10:28:58 2013/-kk/

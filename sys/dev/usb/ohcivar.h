@@ -117,6 +117,9 @@ typedef struct ohci_softc {
 #define	OHCI_BIG_ENDIAN		1	/* big endian OHCI? never seen it */
 #define	OHCI_HOST_ENDIAN	2	/* if OHCI always matches CPU */
 
+	int sc_flags;
+#define OHCIF_SUPERIO		0x0001
+
 	char sc_softwake;
 	kcondvar_t sc_softwake_cv;
 

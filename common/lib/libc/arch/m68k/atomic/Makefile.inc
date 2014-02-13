@@ -35,7 +35,8 @@ SRCS+=	atomic_init_cas.c
 
 SRCS+=	atomic_init_testset.c
 SRCS+=	atomic_cas_68000.S
-CPPFLAGS+= -D__HAVE_ASM_ATOMIC_CAS_UP
+CPPFLAGS+= -D__HAVE_ASM_ATOMIC_CAS_UP -D__HAVE_ASM_ATOMIC_CAS_16_UP \
+	 -D__HAVE_ASM_ATOMIC_CAS_8_UP
 
 .endif
 .endif

@@ -64,6 +64,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <machine/intr.h>
 #include <machine/pcb.h>
 #include <machine/cpufunc.h>
+#include <machine/npx.h>
 
 #include "ioapic.h"
 #include "lapic.h"
@@ -118,6 +119,7 @@ cpu_configure(void)
 #if NIOAPIC > 0
 	ioapic_enable();
 #endif
+	fpuinit(&cpu_info_primary);
 	/* resync cr0 after FPU configuration */
 	pcb = lwp_getpcb(&lwp0);
 	pcb->pcb_cr0 = rcr0() & ~CR0_TS;

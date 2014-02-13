@@ -1,15 +1,15 @@
 /TODO/1.1.1.1/Fri Nov 22 14:55:19 2013/-kk/
-/m_copypaste.c/1.1.1.1/Fri Nov 22 14:55:19 2013/-kk/
-/m_func.c/1.1.1.1/Fri Nov 22 14:55:19 2013/-kk/
-/m_menu.c/1.1.1.1/Fri Nov 22 14:55:19 2013/-kk/
+/m_copypaste.c/1.2/Thu Feb 13 15:19:35 2014/-kk/
+/m_func.c/1.2/Thu Feb 13 15:19:35 2014/-kk/
+/m_menu.c/1.2/Thu Feb 13 15:19:35 2014/-kk/
 /m_motif.h/1.2/Fri Nov 22 15:52:06 2013/-kk/
-/m_options.c/1.1.1.1/Fri Nov 22 14:55:19 2013/-kk/
-/m_prompt.c/1.1.1.1/Fri Nov 22 14:55:19 2013/-kk/
-/m_ruler.c/1.2/Fri Nov 22 15:52:06 2013/-kk/
-/m_search.c/1.1.1.1/Fri Nov 22 14:55:19 2013/-kk/
-/m_tags.c/1.1.1.1/Fri Nov 22 14:55:19 2013/-kk/
-/m_util.c/1.1.1.1/Fri Nov 22 14:55:19 2013/-kk/
-/m_vi.c/1.2/Fri Nov 22 15:52:06 2013/-kk/
+/m_options.c/1.2/Thu Feb 13 15:19:35 2014/-kk/
+/m_prompt.c/1.2/Thu Feb 13 15:19:35 2014/-kk/
+/m_ruler.c/1.3/Thu Feb 13 15:19:35 2014/-kk/
+/m_search.c/1.2/Thu Feb 13 15:19:35 2014/-kk/
+/m_tags.c/1.2/Thu Feb 13 15:19:35 2014/-kk/
+/m_util.c/1.2/Thu Feb 13 15:19:35 2014/-kk/
+/m_vi.c/1.3/Thu Feb 13 15:19:35 2014/-kk/
 /vi_mextern.h/1.2/Fri Nov 22 15:52:06 2013/-kk/
 /xtabbed.c/1.1.1.1/Fri Nov 22 14:55:20 2013/-kk/
 D

@@ -845,15 +845,17 @@ evalcommand(union node *cmd, int flgs, struct backcmd *backcmd)
 		 */
 		if (cmdentry.cmdtype == CMDNORMAL) {
 			pid_t	pid;
+			int serrno;
 
 			savelocalvars = localvars;
 			localvars = NULL;
 			vforked = 1;
 			switch (pid = vfork()) {
 			case -1:
-				TRACE(("Vfork failed, errno=%d\n", errno));
+				serrno = errno;
+				TRACE(("Vfork failed, errno=%d\n", serrno));
 				INTON;
-				error("Cannot vfork");
+				error("Cannot vfork (%s)", strerror(serrno));
 				break;
 			case 0:
 				/* Make sure that exceptions only unwind to

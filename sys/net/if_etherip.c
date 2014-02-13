@@ -397,6 +397,7 @@ etheripintr(void *arg)
 		} else  m_freem(m);
 	}
 	mutex_exit(softnet_lock);
+	__USE(error);
 }
 
 static int

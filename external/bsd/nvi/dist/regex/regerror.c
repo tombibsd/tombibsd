@@ -38,9 +38,14 @@
  *	@(#)regerror.c	8.3 (Berkeley) 3/19/94
  */
 
+#include <sys/cdefs.h>
+#if 0
 #if defined(LIBC_SCCS) && !defined(lint)
 static char sccsid[] = "@(#)regerror.c	8.3 (Berkeley) 3/19/94";
 #endif /* LIBC_SCCS and not lint */
+#else
+__RCSID("$NetBSD$");
+#endif
 
 #include <sys/types.h>
 #include <stdio.h>

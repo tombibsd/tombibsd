@@ -419,10 +419,13 @@ iq80310_intr_dispatch(struct trapframe *frame)
 {
 	struct intrq *iq;
 	struct intrhand *ih;
-	int oldirqstate, pcpl, irq, ibit, hwpend, rv, stray;
+	int oldirqstate, pcpl, irq, ibit, hwpend, rv;
 	struct cpu_info * const ci = curcpu();
+#if 0
+	int stray;
 
 	stray = 1;
+#endif
 
 	/* First, disable external IRQs. */
 	i80200_intr_disable(INTCTL_IM | INTCTL_PM);
@@ -433,7 +436,9 @@ iq80310_intr_dispatch(struct trapframe *frame)
 		irq = ffs(hwpend) - 1;
 		ibit = (1U << irq);
 
+#if 0
 		stray = 0;
+#endif
 
 		hwpend &= ~ibit;
 

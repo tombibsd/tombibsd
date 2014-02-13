@@ -126,7 +126,7 @@ union _qcvt {
 int
 ext2fs_create(void *v)
 {
-	struct vop_create_v2_args /* {
+	struct vop_create_v3_args /* {
 		struct vnode *a_dvp;
 		struct vnode **a_vpp;
 		struct componentname *a_cnp;
@@ -141,6 +141,7 @@ ext2fs_create(void *v)
 	if (error)
 		return (error);
 	VN_KNOTE(ap->a_dvp, NOTE_WRITE);
+	VOP_UNLOCK(*ap->a_vpp);
 	return (0);
 }
 
@@ -151,7 +152,7 @@ ext2fs_create(void *v)
 int
 ext2fs_mknod(void *v)
 {
-	struct vop_mknod_v2_args /* {
+	struct vop_mknod_v3_args /* {
 		struct vnode *a_dvp;
 		struct vnode **a_vpp;
 		struct componentname *a_cnp;
@@ -184,14 +185,15 @@ ext2fs_mknod(void *v)
 	 * checked to see if it is an alias of an existing entry in
 	 * the inode cache.
 	 */
-	VOP_UNLOCK(*vpp);
 	(*vpp)->v_type = VNON;
+	VOP_UNLOCK(*vpp);
 	vgone(*vpp);
 	error = VFS_VGET(mp, ino, vpp);
 	if (error != 0) {
 		*vpp = NULL;
 		return (error);
 	}
+	VOP_UNLOCK(*vpp);
 	return (0);
 }
 
@@ -649,7 +651,7 @@ out2:
 int
 ext2fs_mkdir(void *v)
 {
-	struct vop_mkdir_v2_args /* {
+	struct vop_mkdir_v3_args /* {
 		struct vnode *a_dvp;
 		struct vnode **a_vpp;
 		struct componentname *a_cnp;
@@ -765,6 +767,7 @@ bad:
 		vput(tvp);
 	} else {
 		VN_KNOTE(dvp, NOTE_WRITE | NOTE_LINK);
+		VOP_UNLOCK(tvp);
 		*ap->a_vpp = tvp;
 	}
 out:
@@ -864,7 +867,7 @@ out:
 int
 ext2fs_symlink(void *v)
 {
-	struct vop_symlink_v2_args /* {
+	struct vop_symlink_v3_args /* {
 		struct vnode *a_dvp;
 		struct vnode **a_vpp;
 		struct componentname *a_cnp;
@@ -898,8 +901,9 @@ ext2fs_symlink(void *v)
 		    UIO_SYSSPACE, IO_NODELOCKED, ap->a_cnp->cn_cred,
 		    (size_t *)0, NULL);
 bad:
+	VOP_UNLOCK(vp);
 	if (error)
-		vput(vp);
+		vrele(vp);
 	return (error);
 }
 

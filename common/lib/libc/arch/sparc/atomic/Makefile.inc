@@ -29,7 +29,8 @@ SRCS+=	atomic_cas.S
 .  endif
 
 .  if (${LIB} == "c" || ${LIB} == "pthread")
-CPPFLAGS+= -D__HAVE_ASM_ATOMIC_CAS_UP
+CPPFLAGS+= -D__HAVE_ASM_ATOMIC_CAS_UP -D__HAVE_ASM_ATOMIC_CAS_16_UP	\
+	-D__HAVE_ASM_ATOMIC_CAS_8_UP
 SRCS+=	atomic_init_testset.c atomic_cas_up.S
 .  endif
 

@@ -127,7 +127,7 @@ sysvbfs_lookup(void *arg)
 int
 sysvbfs_create(void *arg)
 {
-	struct vop_create_v2_args /* {
+	struct vop_create_v3_args /* {
 		struct vnode *a_dvp;
 		struct vnode **a_vpp;
 		struct componentname *a_cnp;
@@ -166,6 +166,7 @@ sysvbfs_create(void *arg)
 	bnode->update_ctime = true;
 	bnode->update_mtime = true;
 	bnode->update_atime = true;
+	VOP_UNLOCK(*a->a_vpp);
 
 	return err;
 }

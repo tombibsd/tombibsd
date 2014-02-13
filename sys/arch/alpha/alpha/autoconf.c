@@ -44,6 +44,8 @@
 
 __KERNEL_RCSID(0, "$NetBSD$");
 
+#include "pci.h"
+
 #include <sys/param.h>
 #include <sys/systm.h>
 #include <sys/buf.h>
@@ -52,6 +54,8 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/device.h>
 #include <sys/conf.h>
 #include <dev/cons.h>
+
+#include <dev/pci/pcivar.h>
 
 #include <machine/autoconf.h>
 #include <machine/alpha.h>
@@ -172,6 +176,13 @@ atoi(const char *s)
 void
 device_register(device_t dev, void *aux)
 {
+#if NPCI > 0
+	device_t parent = device_parent(dev);
+
+	if (parent != NULL && device_is_a(parent, "pci"))
+		device_pci_register(dev, aux);
+#endif
+
 	if (bootdev_data == NULL) {
 		/*
 		 * There is no hope.

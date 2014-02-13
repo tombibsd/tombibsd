@@ -34,8 +34,8 @@
  *	from: @(#)asm.h	5.5 (Berkeley) 5/7/91
  */
 
-#ifndef _ARM32_ASM_H_
-#define _ARM32_ASM_H_
+#ifndef _ARM_ASM_H_
+#define _ARM_ASM_H_
 
 #include <arm/cdefs.h>
 

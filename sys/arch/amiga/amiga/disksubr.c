@@ -536,7 +536,6 @@ setdisklabel(struct disklabel *olp, struct disklabel *nlp, u_long openmask, stru
 int
 writedisklabel(dev_t dev, void (*strat)(struct buf *), struct disklabel *lp, struct cpu_disklabel *clp)
 {
-	struct rdbmap *bmap;
 	struct buf *bp;
 	struct disklabel *dlp;
 	int error = 0;
@@ -576,7 +575,7 @@ done:
 	    (clp->rdblock <= 0 || clp->rdblock >= RDB_MAXBLOCKS))
 		return(EINVAL);
 
-	bmap = getrdbmap(dev, strat, lp, clp);
+	(void)getrdbmap(dev, strat, lp, clp);
 	return(EINVAL);
 }
 

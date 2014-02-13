@@ -1853,7 +1853,6 @@ bozo_http_error(bozohttpd_t *httpd, int code, bozo_httpreq_t *request,
 	const char *reason = http_errors_long(code);
 	const char *proto = (request && request->hr_proto) ?
 				request->hr_proto : httpd->consts.http_11;
-	const char *hostname = BOZOHOST(httpd, request);
 	int	size;
 
 	debug((httpd, DEBUG_FAT, "bozo_http_error %d: %s", code, msg));
@@ -1873,6 +1872,7 @@ bozo_http_error(bozohttpd_t *httpd, int code, bozo_httpreq_t *request,
 
 	if (request && request->hr_file) {
 		char *file = NULL;
+		const char *hostname = BOZOHOST(httpd, request);
 
 		/* bozo_escape_html() failure here is just too bad. */
 		file = bozo_escape_html(NULL, request->hr_file);

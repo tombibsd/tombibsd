@@ -1,4 +1,4 @@
-/Makefile.inc/1.14/Tue Nov 12 02:15:38 2013/-kk/
+/Makefile.inc/1.15/Thu Feb 13 15:18:39 2014/-kk/
 /atomic_add_16.S/1.1/Fri Nov  8 22:42:52 2013/-kk/
 /atomic_add_32.S/1.6/Tue Nov 12 02:15:38 2013/-kk/
 /atomic_add_64.S/1.10/Tue Dec 17 04:10:06 2013/-kk/
@@ -11,7 +11,7 @@
 /atomic_cas_32.S/1.6/Tue Nov 12 02:15:38 2013/-kk/
 /atomic_cas_64.S/1.5/Tue Dec 17 04:10:06 2013/-kk/
 /atomic_cas_8.S/1.6/Tue Nov 12 02:15:38 2013/-kk/
-/atomic_cas_up.S/1.4/Thu Oct 24 10:28:41 2013/-kk/
+/atomic_cas_up.S/1.5/Thu Feb 13 15:18:39 2014/-kk/
 /atomic_dec_32.S/1.5/Thu Oct 24 10:28:41 2013/-kk/
 /atomic_dec_64.S/1.7/Tue Dec 17 04:10:06 2013/-kk/
 /atomic_inc_32.S/1.7/Tue Nov 12 02:15:38 2013/-kk/
@@ -27,7 +27,7 @@
 /atomic_or_8.S/1.1/Fri Nov  8 22:42:52 2013/-kk/
 /atomic_simplelock.c/1.2/Thu Oct 24 10:28:41 2013/-kk/
 /atomic_sub_64.S/1.1/Fri Nov  8 22:42:52 2013/-kk/
-/atomic_swap.S/1.8/Tue Nov 12 02:15:38 2013/-kk/
+/atomic_swap.S/1.9/Thu Feb 13 15:18:39 2014/-kk/
 /atomic_swap_16.S/1.1/Fri Nov  8 22:42:52 2013/-kk/
 /atomic_swap_64.S/1.7/Tue Dec 17 04:10:06 2013/-kk/
 /atomic_xor_16.S/1.1/Fri Nov  8 22:42:52 2013/-kk/

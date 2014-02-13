@@ -30,8 +30,8 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef _ARM32_ISA_MACHDEP_H_
-#define _ARM32_ISA_MACHDEP_H_
+#ifndef _ARM_ISA_MACHDEP_H_
+#define _ARM_ISA_MACHDEP_H_
 
 #include <sys/bus.h>
 #include <dev/isa/isadmavar.h>
@@ -143,4 +143,4 @@ void	isa_intr_init(void);
 void sysbeep(int, int);		/* beep with the system speaker */
 void isa_fillw(u_int val, void *addr, size_t len);
 
-#endif	/* _ARM32_ISA_MACHDEP_H_ XXX */
+#endif	/* _ARM_ISA_MACHDEP_H_ */

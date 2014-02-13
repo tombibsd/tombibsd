@@ -52,7 +52,6 @@ ENTRY(fpsetmask)
 	bic	r1, r1, #VFP_FPSCR_ESUM
 	orr	r1, r1, r2, lsl #8
 	vmsr	fpscr, r1
-	mcr	p10, 7, r1, c1, c0, 0
 	and	r0, r0, #VFP_FPSCR_CSUM
 	RET
 END(fpsetmask)

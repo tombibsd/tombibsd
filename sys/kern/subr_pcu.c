@@ -352,7 +352,10 @@ pcu_load(const pcu_ops_t *pcu)
 	/* Does this CPU already have our PCU state loaded? */
 	if (ci == curci) {
 		KASSERT(curci->ci_pcu_curlwp[id] == l);
-		pcu->pcu_state_load(l, PCU_ENABLE);	/* Re-enable */
+		KASSERT(pcu_used_p(pcu));
+
+		/* Re-enable */
+		pcu->pcu_state_load(l, PCU_LOADED | PCU_ENABLE);
 		splx(s);
 		return;
 	}

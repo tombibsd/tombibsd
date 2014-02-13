@@ -109,6 +109,19 @@ LINTFLAGS+=	${DESTDIR:D-d ${DESTDIR}/usr/include}
 CPPFLAGS+=	-D_FORTIFY_SOURCE=2
 .endif
 COPTS+=	-fstack-protector -Wstack-protector 
+
+# gcc 4.8 on m68k erroneously does not protect functions with
+# variables needing special alignement, see
+#	http://gcc.gnu.org/bugzilla/show_bug.cgi?id=59674
+# (the underlying issue for sh and vax may be different, needs more
+# investigation, symptoms are similar but for different sources)
+.if "${ACTIVE_CC}" == "gcc" && "${HAVE_GCC}" == "48" && \
+	( ${MACHINE_CPU} == "sh3" || \
+	  ${MACHINE_ARCH} == "vax" || \
+	  ${MACHINE_CPU} == "m68k" )
+COPTS+=	-Wno-error=stack-protector 
+.endif
+
 COPTS+=	${${ACTIVE_CC} == "clang":? --param ssp-buffer-size=1 :}
 COPTS+=	${${ACTIVE_CC} == "gcc":? --param ssp-buffer-size=1 :}
 .endif

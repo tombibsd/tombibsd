@@ -58,6 +58,8 @@ CPUFLAGS.atomic_simplelock.c+=	-marm
 SRCS.atomic+=	atomic_init_testset.c
 SRCS.atomic+=	atomic_cas_up.S
 CPPFLAGS+= -D__HAVE_ASM_ATOMIC_CAS_UP
+CPPFLAGS+= -D__HAVE_ASM_ATOMIC_CAS_16_UP
+CPPFLAGS+= -D__HAVE_ASM_ATOMIC_CAS_8_UP
 .else
 SRCS.atomic+=	atomic_init_cas.c
 .endif

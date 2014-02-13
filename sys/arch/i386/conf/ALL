@@ -388,7 +388,6 @@ hpet*		at acpinodebus?		# High Precision Event Timer (device)
 joy*		at acpi?		# Joystick/Game port
 lpt*		at acpi?		# Parallel port
 mpu*		at acpi?		# Roland MPU-401 MIDI UART
-npx*		at acpi?		# Math coprocessor
 pckbc*		at acpi?		# PC keyboard controller
 pcppi*		at acpi?		# AT-style speaker sound
 thinkpad*	at acpi?		# IBM/Lenovo Thinkpad hotkeys
@@ -437,7 +436,6 @@ lpt*		at pnpbios? index ?	# parallel ports
 
 pckbc*		at pnpbios? index ?	# PC keyboard/mouse controller
 fdc*		at pnpbios? index ?	# floppy controller
-npx*		at pnpbios? index ?	# Math coprocessor
 
 # IDE controller on Toshiba Portege 3000 series (crippled PCI device)
 pciide* 	at pnpbios? index ?
@@ -556,12 +554,6 @@ cardslot*	at cbb?
 # CardBus bus support
 cardbus*	at cardslot?
 pcmcia* 	at cardslot?
-
-# Coprocessor Support
-
-# Math Coprocessor support
-npx0	at isa? port 0xf0 irq 13	# x86 math coprocessor
-
 
 # Console Devices
 

@@ -425,7 +425,7 @@ elf_load_file(struct lwp *l, struct exec_package *epp, char *path,
 	if (__predict_true(p->p_vmspace != proc0.p_vmspace)) {
 		use_topdown = p->p_vmspace->vm_map.flags & VM_MAP_TOPDOWN;
 	} else {
-#ifdef __USING_TOPDOWN_VM
+#ifdef __USE_TOPDOWN_VM
 		use_topdown = epp->ep_flags & EXEC_TOPDOWN_VM;
 #else
 		use_topdown = false;

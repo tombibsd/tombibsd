@@ -6,7 +6,7 @@ SRCS+=	makecontext.c resumecontext.c swapcontext.S
 
 SRCS+=	_lwp.c
 
-SRCS+=	fabs.c flt_rounds.c bswap16.c bswap32.c bswap64.c
+SRCS+=	fabs_ieee754.c flt_rounds.c bswap16.c bswap32.c bswap64.c
 
 # Common ieee754 constants and functions
 SRCS+=	infinityf_ieee754.c infinity_ieee754.c infinityl_dbl_ieee754.c

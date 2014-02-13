@@ -260,8 +260,6 @@ layer_node_create(struct mount *mp, struct vnode *lowervp, struct vnode **nvpp)
 	struct vnode *aliasvp;
 	struct layer_mount *lmp = MOUNTTOLAYERMOUNT(mp);
 
-	KASSERT(VOP_ISLOCKED(lowervp));
-
 	mutex_enter(&lmp->layerm_hashlock);
 	aliasvp = layer_node_find(mp, lowervp);
 	if (aliasvp != NULL) {

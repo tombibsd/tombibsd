@@ -40,6 +40,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/device.h>
 #include <sys/queue.h>
 #include <sys/file.h>
+#include <sys/filedesc.h>
 #include <sys/cpu.h>
 #include <sys/kmem.h>
 #include <sys/poll.h>
@@ -73,7 +74,11 @@ int physmem = PHYSMEM;
 int nkmempages = PHYSMEM/2; /* from le chapeau */
 #undef PHYSMEM
 
-struct lwp lwp0;
+struct lwp lwp0 = {
+	.l_lid = 1,
+	.l_proc = &proc0,
+	.l_fd = &filedesc0,
+};
 struct vnode *rootvp;
 dev_t rootdev = NODEV;
 

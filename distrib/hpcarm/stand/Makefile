@@ -16,5 +16,5 @@ release:: check_RELEASEDIR .WAIT ${HPCBOOT}
 	${INSTALL} -c -m ${NONBINMODE} \
 		${HPCBOOT} ${RELEASEDIR}/${RELEASEMACHINEDIR}/installation
 
-.include <bsd.files.mk>
 .include <bsd.obj.mk>
+.include <bsd.files.mk>

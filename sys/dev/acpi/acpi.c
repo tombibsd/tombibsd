@@ -1853,7 +1853,9 @@ acpi_allocate_resources(ACPI_HANDLE handle)
 	ACPI_BUFFER bufp, bufc, bufn;
 	ACPI_RESOURCE *resp, *resc, *resn;
 	ACPI_RESOURCE_IRQ *irq;
+#if 0
 	ACPI_RESOURCE_EXTENDED_IRQ *xirq;
+#endif
 	ACPI_STATUS rv;
 	uint delta;
 
@@ -1891,8 +1893,8 @@ acpi_allocate_resources(ACPI_HANDLE handle)
 		case ACPI_RESOURCE_TYPE_EXTENDED_IRQ:
 			memcpy(&resn->Data, &resp->Data,
 			       sizeof(ACPI_RESOURCE_EXTENDED_IRQ));
-			xirq = (ACPI_RESOURCE_EXTENDED_IRQ *)&resn->Data;
 #if 0
+			xirq = (ACPI_RESOURCE_EXTENDED_IRQ *)&resn->Data;
 			/*
 			 * XXX:	Not duplicating the interrupt logic above
 			 *	because its not clear what it accomplishes.

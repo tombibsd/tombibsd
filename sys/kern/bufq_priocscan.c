@@ -144,7 +144,7 @@ cscan_empty(struct cscan_queue *q)
 static void
 cscan_put(struct cscan_queue *q, struct buf *bp)
 {
-	struct buf *obp;
+	struct buf *obp __diagused;
 
 	obp = rb_tree_insert_node(&q->cq_buffers, bp);
 	KASSERT(obp == bp); /* see cscan_tree_compare_nodes */

@@ -16,6 +16,15 @@ See also: BUILDING, build.sh, Makefile.
 Recent changes:
 ^^^^^^^^^^^^^^^
 
+20140131:
+	The new compiler_rt/libc integration moved a few things. If not
+	starting with a clean objdir, cd to the objdir and do:
+		rm -rf lib/libc
+	and if you are on a 64bit arch with 32bit compat, additionally:
+		rm -rf compat/sparc64/sparc/lib/libc
+	(substitute proper archs for sparc/sparc64)
+
+
 20131227:
 	1. The new ntpd runs in a restricted mode to prevent amplification
 	   attacks. If you need ntpdc to work you need to explicitly enable

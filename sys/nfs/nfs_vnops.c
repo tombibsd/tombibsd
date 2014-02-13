@@ -1549,6 +1549,7 @@ nfs_mknodrpc(struct vnode *dvp, struct vnode **vpp, struct componentname *cnp, s
 	} else {
 		nfs_cache_enter(dvp, newvp, cnp);
 		*vpp = newvp;
+		VOP_UNLOCK(newvp);
 	}
 	VTONFS(dvp)->n_flag |= NMODIFIED;
 	if (!wccflag)
@@ -1564,7 +1565,7 @@ nfs_mknodrpc(struct vnode *dvp, struct vnode **vpp, struct componentname *cnp, s
 int
 nfs_mknod(void *v)
 {
-	struct vop_mknod_v2_args /* {
+	struct vop_mknod_v3_args /* {
 		struct vnode *a_dvp;
 		struct vnode **a_vpp;
 		struct componentname *a_cnp;
@@ -1587,7 +1588,7 @@ nfs_mknod(void *v)
 int
 nfs_create(void *v)
 {
-	struct vop_create_v2_args /* {
+	struct vop_create_v3_args /* {
 		struct vnode *a_dvp;
 		struct vnode **a_vpp;
 		struct componentname *a_cnp;
@@ -1706,6 +1707,7 @@ again:
 		else
 			cache_purge1(dvp, cnp->cn_nameptr, cnp->cn_namelen, 0);
 		*ap->a_vpp = newvp;
+		VOP_UNLOCK(newvp);
 	} else {
 		if (newvp)
 			vput(newvp);
@@ -2081,7 +2083,7 @@ nfs_link(void *v)
 int
 nfs_symlink(void *v)
 {
-	struct vop_symlink_v2_args /* {
+	struct vop_symlink_v3_args /* {
 		struct vnode *a_dvp;
 		struct vnode **a_vpp;
 		struct componentname *a_cnp;
@@ -2156,6 +2158,7 @@ nfs_symlink(void *v)
 			vput(newvp);
 	} else {
 		*ap->a_vpp = newvp;
+		VOP_UNLOCK(newvp);
 	}
 	VTONFS(dvp)->n_flag |= NMODIFIED;
 	if (!wccflag)
@@ -2170,7 +2173,7 @@ nfs_symlink(void *v)
 int
 nfs_mkdir(void *v)
 {
-	struct vop_mkdir_v2_args /* {
+	struct vop_mkdir_v3_args /* {
 		struct vnode *a_dvp;
 		struct vnode **a_vpp;
 		struct componentname *a_cnp;
@@ -2250,6 +2253,7 @@ nfs_mkdir(void *v)
 		VN_KNOTE(dvp, NOTE_WRITE | NOTE_LINK);
 		nfs_cache_enter(dvp, newvp, cnp);
 		*ap->a_vpp = newvp;
+		VOP_UNLOCK(newvp);
 	}
 	return (error);
 }

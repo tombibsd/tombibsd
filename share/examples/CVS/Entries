@@ -1,4 +1,4 @@
-/Makefile/1.21/Wed Aug 22 06:45:16 2012/-kk/
+/Makefile/1.22/Thu Feb 13 15:22:07 2014/-kk/
 D/amd////
 D/apm////
 D/asm////
@@ -20,4 +20,5 @@ D/rump////
 D/secmodel////
 D/supfiles////
 D/syslogd////
+D/wpa_supplicant////
 D/wsmoused////

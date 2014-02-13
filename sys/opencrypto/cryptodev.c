@@ -143,6 +143,8 @@ static int	cryptoread(dev_t dev, struct uio *uio, int ioflag);
 static int	cryptowrite(dev_t dev, struct uio *uio, int ioflag);
 static int	cryptoselect(dev_t dev, int rw, struct lwp *l);
 
+static int	crypto_refcount = 0;	/* Prevent detaching while in use */
+
 /* Declaration of cloned-device (per-ctxt) entrypoints */
 static int	cryptof_read(struct file *, off_t *, struct uio *,
     kauth_cred_t, int);
@@ -262,6 +264,7 @@ cryptof_ioctl(struct file *fp, u_long cmd, void *data)
                  */
 		criofcr->sesn = 1;
 		criofcr->requestid = 1;
+		crypto_refcount++;
 		mutex_exit(&crypto_mtx);
 		(void)fd_clone(criofp, criofd, (FREAD|FWRITE),
 			      &cryptofops, criofcr);
@@ -951,6 +954,7 @@ cryptof_close(struct file *fp)
 	}
 	seldestroy(&fcr->sinfo);
 	fp->f_data = NULL;
+	crypto_refcount--;
 	mutex_exit(&crypto_mtx);
 
 	pool_put(&fcrpl, fcr);
@@ -1080,6 +1084,7 @@ cryptoopen(dev_t dev, int flag, int mode,
 	 */
 	fcr->sesn = 1;
 	fcr->requestid = 1;
+	crypto_refcount++;
 	mutex_exit(&crypto_mtx);
 	return fd_clone(fp, fd, flag, &cryptofops, fcr);
 }
@@ -2109,6 +2114,7 @@ int	crypto_detach(device_t, int);
 int
 crypto_detach(device_t self, int num)
 {
+
 	pool_destroy(&fcrpl);
 	pool_destroy(&csepl);
 
@@ -2205,8 +2211,6 @@ crypto_modcmd(modcmd_t cmd, void *arg)
 		return error;
 	case MODULE_CMD_FINI:
 #ifdef _MODULE
-#ifdef notyet
-		/* We need to keep track of open instances before we do this */
 		error = config_cfdata_detach(crypto_cfdata);
 		if (error) {
 			return error;
@@ -2215,12 +2219,20 @@ crypto_modcmd(modcmd_t cmd, void *arg)
 		config_cfattach_detach(crypto_cd.cd_name, &crypto_ca);
 		config_cfdriver_detach(&crypto_cd);
 		devsw_detach(NULL, &crypto_cdevsw);
-#else
-		return EOPNOTSUPP;
-#endif
 #endif
 
 		return error;
+#ifdef _MODULE
+	case MODULE_CMD_AUTOUNLOAD:
+#if 0	/*
+	 * XXX Completely disable auto-unload for now, since there is still
+	 * XXX a (small) window where in-module ref-counting doesn't help
+	 */
+		if (crypto_refcount != 0)
+#endif
+			return EBUSY;
+	/* FALLTHROUGH */
+#endif
 	default:
 		return ENOTTY;
 	}

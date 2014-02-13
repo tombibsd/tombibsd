@@ -38,9 +38,14 @@
  *	@(#)regexec.c	8.2 (Berkeley) 3/16/94
  */
 
+#include <sys/cdefs.h>
+#if 0
 #if defined(LIBC_SCCS) && !defined(lint)
 static char sccsid[] = "@(#)regexec.c	8.2 (Berkeley) 3/16/94";
 #endif /* LIBC_SCCS and not lint */
+#else
+__RCSID("$NetBSD$");
+#endif
 
 /*
  * the outer shell of regexec()

@@ -221,11 +221,6 @@ isa0	at mainbus?
 # ISA Plug-and-Play bus support
 #isapnp0 at isa?
 
-# Coprocessor Support
-
-# Math Coprocessor support
-npx0	at isa? port 0xf0 irq 13	# x86 math coprocessor
-
 
 # Console Devices
 

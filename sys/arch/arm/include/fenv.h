@@ -8,7 +8,15 @@
 #ifndef _ARM_FENV_H_
 #define _ARM_FENV_H_
 
-typedef int fenv_t;
+#ifdef __ARM_PCS_AAPCS64
+/* AArch64 split FPSCR into two registers FPCR and FPSR */
+typedef struct {
+	unsigned int __fpcr;
+	unsigned int __fpsr;
+} fenv_t;
+#else
+typedef int fenv_t;		/* FPSCR */
+#endif
 typedef int fexcept_t;
 
 #define	FE_INVALID	0x01	/* invalid operation exception */

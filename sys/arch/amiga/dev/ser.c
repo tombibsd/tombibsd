@@ -224,6 +224,7 @@ serattach(device_t parent, device_t self, void *aux)
 	sc = device_private(self);
 
 	ir = custom.intenar;
+	__USE(ir);
 	if (serconsole == 0)
 		DELAY(100000);
 
@@ -422,6 +423,7 @@ ser_shutdown(struct ser_softc *sc)
 	}
 #endif
 	ser_open_speed = tp->t_ispeed;
+	splx(s);
 	return;
 }
 

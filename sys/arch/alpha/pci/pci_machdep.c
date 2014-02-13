@@ -59,6 +59,8 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <dev/pci/tgavar.h>
 #endif
 
+#include <machine/rpb.h>
+
 void
 pci_display_console(bus_space_tag_t iot, bus_space_tag_t memt, pci_chipset_tag_t pc, int bus, int device, int function)
 {
@@ -100,4 +102,21 @@ pci_display_console(bus_space_tag_t iot, bus_space_tag_t memt, pci_chipset_tag_t
 	else
 		panic("pci_display_console: unconfigured device at %d/%d/%d",
 		    bus, device, function);
+}
+
+void
+device_pci_register(device_t dev, void *aux)
+{
+	struct pci_attach_args *pa = aux;
+	struct ctb *ctb;
+	prop_dictionary_t dict;
+
+	/* set properties for PCI framebuffers */
+	ctb = (struct ctb *)(((char *)hwrpb) + hwrpb->rpb_ctb_off);
+	if (PCI_CLASS(pa->pa_class) == PCI_CLASS_DISPLAY &&
+	    ctb->ctb_term_type == CTB_GRAPHICS) {
+		/* XXX should consider multiple displays? */
+		dict = device_properties(dev);
+		prop_dictionary_set_bool(dict, "is_console", true);
+	}
 }

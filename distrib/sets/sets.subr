@@ -229,7 +229,7 @@ SUBST="${SUBST};s#@MACHINE@#${MACHINE}#g"
 #	ldap			${MKLDAP} != no
 #	lint			${MKLINT} != no
 #	libcxx			${MKLIBCXX} != no
-#	libgcc			${HAVE_LIBGCC} != no
+#	libgcc_eh		${HAVE_LIBGCC_EH} != no
 #	libstdcxx		${MKLIBSTDCXX} != no
 #	lld			${MKLLD} != no
 #	lldb			${MKLLDB} != no
@@ -300,7 +300,7 @@ list_set_files()
 				sub(/^mk/, "", kw)
 				sub(/^have_/, "", kw)
 				sub(/^target_endianness/, "endian", kw)
-				if (nv != "HAVE_GCC" && ENVIRON[nv] != "no")
+				if (nv != "HAVE_GCC" && nv != "HAVE_GDB" && ENVIRON[nv] != "no")
 					wanted[kw] = 1 
 			}
 

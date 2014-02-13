@@ -290,17 +290,16 @@ coscattach(device_t parent, device_t self, void *aux)
 void
 cosc_led(struct esc_softc *sc, int mode)
 {
-	cosc_regmap_p		rp;
-
-	rp = (cosc_regmap_p)sc->sc_esc;
-
 	if (mode) {
 		sc->sc_led_status++;
 	} else {
 		if (sc->sc_led_status)
 			sc->sc_led_status--;
 	}
-/*	*rp->led = (sc->sc_led_status?1:0);*/
+#if 0
+	cosc_regmap_p		rp = (cosc_regmap_p)sc->sc_esc;
+	*rp->led = c->sc_led_status ? 1 : 0;
+#endif
 }
 
 

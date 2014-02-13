@@ -473,11 +473,9 @@ int
 toccata_halt_input(void *addr)
 {
 	struct toccata_softc *sc;
-	struct ad1848_softc *asc;
 	unsigned reg;
 
 	sc = addr;
-	asc = &sc->sc_ad;
 
 	/* we're half_duplex; be brutal */
 	*sc->sc_boardp = TOCC_CP_TAIL;
@@ -525,11 +523,9 @@ int
 toccata_halt_output(void *addr)
 {
 	struct toccata_softc *sc;
-	struct ad1848_softc *asc;
 	unsigned int reg;
 
 	sc = addr;
-	asc = &sc->sc_ad;
 
 	/* we're half_duplex; be brutal */
 	*sc->sc_boardp = TOCC_PB_TAIL;

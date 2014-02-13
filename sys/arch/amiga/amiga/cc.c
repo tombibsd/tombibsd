@@ -348,11 +348,10 @@ cc_init_audio(void)
 void
 audio_handler(void)
 {
-	u_short audio_dma, disable_dma, flag, ir;
+	u_short audio_dma, flag, ir;
 	int i;
 
 	audio_dma = custom.dmaconr;
-	disable_dma = 0;
 
 	/*
 	 * only check channels who have DMA enabled.

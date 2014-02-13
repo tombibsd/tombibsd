@@ -298,6 +298,7 @@ chfs_makeinode(int mode, struct vnode *dvp, struct vnode **vpp,
 
 	mutex_exit(&chmp->chm_lock_mountfields);
 
+	VOP_UNLOCK(vp);
 	*vpp = vp;
 	return (0);
 }

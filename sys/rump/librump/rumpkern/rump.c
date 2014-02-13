@@ -271,9 +271,7 @@ rump_init(void)
 
 	/* init minimal lwp/cpu context */
 	l = &lwp0;
-	l->l_lid = 1;
 	l->l_cpu = l->l_target_cpu = rump_cpu;
-	l->l_fd = &filedesc0;
 
 	/* lwp0 isn't created like other threads, so notify hypervisor here */
 	rumpuser_curlwpop(RUMPUSER_LWP_CREATE, l);

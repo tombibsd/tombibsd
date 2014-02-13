@@ -894,7 +894,7 @@ _MKVARS.yes= \
 	MKBINUTILS \
 	MKCRYPTO MKCOMPLEX MKCVS MKCXX \
 	MKDOC \
-	MKGCC MKGCCCMDS MKGDB MKGROFF \
+	MKGCC MKGDB MKGROFF \
 	MKHESIOD MKHTML \
 	MKIEEEFP MKINET6 MKINFO MKIPFILTER MKISCSI \
 	MKKERBEROS \
@@ -915,6 +915,12 @@ _MKVARS.yes= \
 .for var in ${_MKVARS.yes}
 ${var}?=	yes
 .endfor
+
+#
+# MKGCCCMDS is only valid if we are building GCC so make it dependent on that.
+#
+_MKVARS.yes += MKGCCCMDS
+MKGCCCMDS?=	${MKGCC}
 
 #
 # Exceptions to the above:

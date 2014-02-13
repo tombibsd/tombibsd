@@ -96,7 +96,7 @@ openpam_log(int level, const char *fmt, ...)
 
 #else
 
-#if __GNUC_PREREQ__(4, 5)
+#if defined(__clang__) || __GNUC_PREREQ__(4, 5)
 #pragma GCC diagnostic ignored "-Wformat-nonliteral"
 #endif
 void

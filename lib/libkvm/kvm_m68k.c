@@ -59,6 +59,8 @@
 #include "kvm_private.h"
 #include "kvm_m68k.h"
 
+__RCSID("$NetBSD$");
+
 struct name_ops {
 	const char *name;
 	struct kvm_ops *ops;

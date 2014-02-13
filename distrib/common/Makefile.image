@@ -103,7 +103,7 @@ fsimage: ${IMAGE}
 ${IMAGE}.gz: ${IMAGE}
 	${_MKTARGET_CREATE}
 	-rm -f ${.TARGET}
-	gzip -9nc ${.ALLSRC} > ${.TARGET}
+	${TOOL_GZIP} -9nc ${.ALLSRC} > ${.TARGET}
 
 realall: ${IMAGE}
 

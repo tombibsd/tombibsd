@@ -43,11 +43,8 @@ struct krwlock {
 #define	RW_RECEIVE(rw)			/* nothing */
 #define	RW_GIVE(rw)			/* nothing */
 
-unsigned long	_lock_cas(volatile unsigned long *,
-    unsigned long, unsigned long);
-
 #define	RW_CAS(p, o, n)			\
-    (_lock_cas((volatile unsigned long *)(p), (o), (n)) == (o))
+    (atomic_cas_ulong((volatile unsigned long *)(p), (o), (n)) == (o))
 
 #endif	/* __RWLOCK_PRIVATE */
 

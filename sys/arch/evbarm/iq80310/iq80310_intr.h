@@ -90,12 +90,10 @@ static inline void __attribute__((__unused__))
 iq80310_splx(int new)
 {
 	extern volatile int iq80310_ipending;
-	int old;
 
 	/* Don't let the compiler re-order this code with preceding code */
 	__insn_barrier();
 
-	old = curcpl();
 	set_curcpl(new);
 
 #ifdef __HAVE_FAST_SOFTINTS

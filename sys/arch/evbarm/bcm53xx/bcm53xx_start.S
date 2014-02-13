@@ -76,6 +76,7 @@ _C_LABEL(bcm53xx_start):
 	 */
 	movw	r4, #:lower16:(uboot_args-.LPIC0)
 	movt	r4, #:upper16:(uboot_args-.LPIC0)
+	bic	r4, r4, #0xf0000000
 	add	r4, r4, pc
 	stmia	r4, {r0-r3}
 .LPIC0:

@@ -426,8 +426,8 @@ void	i8254_initclocks(void);
 void	cpu_probe_features(struct cpu_info *);
 
 /* npx.c */
-void	npxsave_lwp(struct lwp *, bool);
-void	npxsave_cpu(bool);
+void	fpusave_lwp(struct lwp *, bool);
+void	fpusave_cpu(bool);
 
 /* vm_machdep.c */
 paddr_t	kvtop(void *);

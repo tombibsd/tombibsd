@@ -12,6 +12,7 @@ TESTS_C+=	t_basedirname
 TESTS_C+=	t_closefrom
 TESTS_C+=	t_cpuset
 TESTS_C+=	t_dir
+TESTS_C+=	t_floatunditf
 TESTS_C+=	t_fmtcheck
 TESTS_C+=	t_fnmatch
 TESTS_C+=	t_fpclassify

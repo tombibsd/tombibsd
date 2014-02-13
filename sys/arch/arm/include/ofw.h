@@ -33,8 +33,8 @@
  *    even if advised of the possibility of such damage.
  */
 
-#ifndef _MACHINE_OFW_H_
-#define _MACHINE_OFW_H_
+#ifndef _ARM_OFW_H_
+#define _ARM_OFW_H_
 
 
 /* Virtual address range reserved for OFW. */
@@ -67,4 +67,4 @@ extern void cpu_reboot(int, char *);
 extern void ofrootfound(void);
 #endif
 
-#endif /* !_MACHINE_OFW_H_ */
+#endif /* !_ARM_OFW_H_ */

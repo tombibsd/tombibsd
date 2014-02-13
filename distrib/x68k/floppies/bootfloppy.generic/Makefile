@@ -28,7 +28,7 @@ ${BOOTNAME}: ${MDEC}/boot
 
 netbsd.gz:	${KERNOBJDIR}/GENERIC/netbsd
 	@rm -f ${.TARGET}
-	gzip -9nc ${.ALLSRC} > ${.TARGET}
+	${TOOL_GZIP} -9nc ${.ALLSRC} > ${.TARGET}
 
 .include "${DISTRIBDIR}/common/Makefile.tarfloppy"
 

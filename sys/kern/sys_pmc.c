@@ -71,6 +71,7 @@ sys_pmc_control(struct lwp *l, const struct sys_pmc_control_args *uap, register_
 	int ctr, operation, error=0;
 
 	ctr = SCARG(uap, ctr);
+	__USE(ctr);
 	operation = SCARG(uap, op);
 
 	KERNEL_LOCK(1, NULL);
@@ -140,6 +141,7 @@ sys_pmc_get_info(struct lwp *l, const struct sys_pmc_get_info_args *uap, registe
 	ctr = SCARG(uap, ctr);
 	request = SCARG(uap, op);
 	args = SCARG(uap, args);
+	__USE(flags);
 
 	KERNEL_LOCK(1, NULL);
 	nctrs = pmc_get_num_counters();

@@ -1042,9 +1042,12 @@ cpu_mcontext32_validate(struct lwp *l, const mcontext32_t *mcp)
 }
 
 vaddr_t
-netbsd32_vm_default_addr(struct proc *p, vaddr_t base, vsize_t size)
+netbsd32_vm_default_addr(struct proc *p, vaddr_t base, vsize_t sz)
 {
-	return VM_DEFAULT_ADDRESS32(base, size);
+        if (p->p_vmspace->vm_map.flags & VM_MAP_TOPDOWN)
+                return VM_DEFAULT_ADDRESS32_TOPDOWN(base, sz);
+        else
+                return VM_DEFAULT_ADDRESS32_BOTTOMUP(base, sz);
 }
 
 #ifdef COMPAT_13

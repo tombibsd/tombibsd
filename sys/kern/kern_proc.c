@@ -484,7 +484,7 @@ proc0_init(void)
 	 */
 	uvmspace_init(&vmspace0, pmap_kernel(), round_page(VM_MIN_ADDRESS),
 	    trunc_page(VM_MAX_ADDRESS),
-#ifdef __USING_TOPDOWN_VM
+#ifdef __USE_TOPDOWN_VM
 	    true
 #else
 	    false

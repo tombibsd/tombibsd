@@ -222,11 +222,7 @@ xen_ipi_synch_fpu(struct cpu_info *ci, struct intrframe *intrf)
 	KASSERT(ci != NULL);
 	KASSERT(intrf != NULL);
 
-#ifdef __x86_64__
 	fpusave_cpu(true);
-#else
-	npxsave_cpu(true);
-#endif /* __x86_64__ */
 }
 
 static void

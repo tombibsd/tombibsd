@@ -274,7 +274,7 @@
 ./usr/libdata/debug/usr/lib/o32/libgmp.so.10.2.debug	comp-sys-debug	obsolete
 ./usr/libdata/debug/usr/lib/o32/libgnumalloc.so.1.0.debug	comp-sys-debug	debug,compat,arch64
 ./usr/libdata/debug/usr/lib/o32/libgomp.so.1.0.debug	comp-sys-debug	debug,compat,gcc=45,arch64
-./usr/libdata/debug/usr/lib/o32/libgomp.so.1.0.debug	comp-sys-debug	debug,compat,gcc=48,arch64
+./usr/libdata/debug/usr/lib/o32/libgomp.so.1.1.debug	comp-sys-debug	debug,compat,gcc=48,arch64
 ./usr/libdata/debug/usr/lib/o32/libgssapi.so.10.0.debug	comp-compat-shlib	 compat,pic,kerberos,debug,arch64
 ./usr/libdata/debug/usr/lib/o32/libgssapi.so.9.0.debug	comp-compat-shlib	 compat,pic,kerberos,debug,obsolete,arch64
 ./usr/libdata/debug/usr/lib/o32/libhdb.so.13.0.debug		comp-compat-shlib	 compat,pic,kerberos,debug,obsolete,arch64

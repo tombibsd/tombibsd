@@ -109,7 +109,7 @@ struct cpu_info {
 	 */
 	struct lwp *ci_curlwp;		/* current owner of the processor */
 	struct cpu_data ci_data;	/* MI per-cpu data */
-#ifndef _KMEMUSER
+#if !defined(_KMEMUSER)
 	struct cctr_state ci_cc;	/* cycle counter state */
 	struct cpu_info *ci_next;	/* next cpu_info structure */
 	int ci_mtx_count;
@@ -130,7 +130,7 @@ struct cpu_info {
 	volatile u_long ci_flags;	/* flags; see below */
 	volatile u_long ci_ipis;	/* interprocessor interrupts pending */
 #endif
-#endif /* _KMEMUSER */
+#endif /* !_KMEMUSER */
 };
 
 #endif /* _KERNEL || _KMEMUSER */

@@ -1,16 +1,16 @@
-/bsearch.c/1.1.1.1/Fri Nov 22 14:55:12 2013/-kk/
-/env.c/1.1.1.1/Fri Nov 22 14:55:12 2013/-kk/
+/bsearch.c/1.2/Thu Feb 13 15:19:35 2014/-kk/
+/env.c/1.2/Thu Feb 13 15:19:35 2014/-kk/
 /gethostname.c/1.1.1.1/Fri Nov 22 14:55:12 2013/-kk/
-/iswblank.c/1.1.1.1/Fri Nov 22 14:55:12 2013/-kk/
-/memchr.c/1.1.1.1/Fri Nov 22 14:55:12 2013/-kk/
-/memset.c/1.1.1.1/Fri Nov 22 14:55:12 2013/-kk/
-/mkstemp.c/1.1.1.1/Fri Nov 22 14:55:12 2013/-kk/
+/iswblank.c/1.2/Thu Feb 13 15:19:35 2014/-kk/
+/memchr.c/1.2/Thu Feb 13 15:19:35 2014/-kk/
+/memset.c/1.2/Thu Feb 13 15:19:35 2014/-kk/
+/mkstemp.c/1.2/Thu Feb 13 15:19:35 2014/-kk/
 /mmap.c/1.1.1.1/Fri Nov 22 14:55:12 2013/-kk/
 /snprintf.c/1.1.1.1/Fri Nov 22 14:55:12 2013/-kk/
-/strdup.c/1.1.1.1/Fri Nov 22 14:55:12 2013/-kk/
-/strpbrk.c/1.1.1.1/Fri Nov 22 14:55:12 2013/-kk/
-/strsep.c/1.1.1.1/Fri Nov 22 14:55:12 2013/-kk/
-/strtol.c/1.1.1.1/Fri Nov 22 14:55:12 2013/-kk/
-/strtoul.c/1.1.1.1/Fri Nov 22 14:55:12 2013/-kk/
+/strdup.c/1.2/Thu Feb 13 15:19:35 2014/-kk/
+/strpbrk.c/1.2/Thu Feb 13 15:19:35 2014/-kk/
+/strsep.c/1.2/Thu Feb 13 15:19:35 2014/-kk/
+/strtol.c/1.2/Thu Feb 13 15:19:35 2014/-kk/
+/strtoul.c/1.2/Thu Feb 13 15:19:35 2014/-kk/
 /vsnprintf.c/1.1.1.1/Fri Nov 22 14:55:12 2013/-kk/
 D

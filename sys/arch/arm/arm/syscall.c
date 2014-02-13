@@ -148,14 +148,10 @@ swi_handler(trapframe_t *tf)
 	else
 #endif
 	{
-	/* XXX fuword? */
 #ifdef __PROG32
-		insn = *(uint32_t *)(tf->tf_pc - INSN_SIZE);
-#if defined(__ARMEB__) && defined(_ARM_ARCH_7)
-		insn = le32toh(insn);	/* BE armv7 insn are in LE */
-#endif
+		insn = read_insn(tf->tf_pc - INSN_SIZE, true);
 #else
-		insn = *(uint32_t *)((tf->tf_r15 & R15_PC) - INSN_SIZE);
+		insn = read_insn((tf->tf_r15 & R15_PC) - INSN_SIZE, true);
 #endif
 	}
 

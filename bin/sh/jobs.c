@@ -858,14 +858,16 @@ makejob(union node *node, int nprocs)
 int
 forkshell(struct job *jp, union node *n, int mode)
 {
-	int pid;
+	pid_t pid;
+	int serrno;
 
 	TRACE(("forkshell(%%%d, %p, %d) called\n", jp - jobtab, n, mode));
 	switch ((pid = fork())) {
 	case -1:
-		TRACE(("Fork failed, errno=%d\n", errno));
+		serrno = errno;
+		TRACE(("Fork failed, errno=%d\n", serrno));
 		INTON;
-		error("Cannot fork");
+		error("Cannot fork (%s)", strerror(serrno));
 		break;
 	case 0:
 		forkchild(jp, n, mode, 0);

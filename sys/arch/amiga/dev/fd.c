@@ -644,12 +644,10 @@ fdidxintr(void)
 void
 fdstrategy(struct buf *bp)
 {
-	struct disklabel *lp;
 	struct fd_softc *sc;
-	int unit, part, s;
+	int unit, s;
 
 	unit = FDUNIT(bp->b_dev);
-	part = FDPART(bp->b_dev);
 	sc = getsoftc(fd_cd, unit);
 
 #ifdef FDDEBUG
@@ -658,7 +656,6 @@ fdstrategy(struct buf *bp)
 	/*
 	 * check for valid partition and bounds
 	 */
-	lp = sc->dkdev.dk_label;
 	if ((sc->flags & FDF_HAVELABEL) == 0) {
 		bp->b_error = EIO;
 		goto done;
@@ -1653,12 +1650,11 @@ void
 fdminphys(struct buf *bp)
 {
 	struct fd_softc *sc;
-	int trk, sec, toff, tsz;
+	int sec, toff, tsz;
 
 	if ((sc = getsoftc(fd_cd, FDUNIT(bp->b_dev))) == NULL)
 		panic("fdminphys: couldn't get softc");
 
-	trk = bp->b_blkno / sc->nsectors;
 	sec = bp->b_blkno % sc->nsectors;
 
 	toff = sec * FDSECSIZE;
@@ -1705,7 +1701,7 @@ void
 amcachetoraw(struct fd_softc *sc)
 {
 	static u_long mfmnull[4];
-	u_long *rp, *crp, *dp, hcksum, dcksum, info, zero;
+	u_long *rp, *crp, *dp, hcksum, dcksum, info;
 	int sec, i;
 
 	rp = fdc_dmap;
@@ -1720,7 +1716,6 @@ amcachetoraw(struct fd_softc *sc)
 	 * process sectors
 	 */
 	dp = sc->cachep;
-	zero = 0;
 	info = 0xff000000 | (sc->cachetrk << 16) | sc->nsectors;
 	for (sec = 0; sec < sc->nsectors; sec++, info += (1 << 8) - 1) {
 		hcksum = dcksum = 0;
@@ -1938,11 +1933,11 @@ mscachetoraw(struct fd_softc *sc)
 int
 msrawtocache(struct fd_softc *sc)
 {
-	u_short *rp, *srp, *erp;
+	u_short *rp, *erp;
 	u_char tb[5], *cp;
 	int ct, sec, retry;
 
-	srp = rp = (u_short *)fdc_dmap;
+	rp = (u_short *)fdc_dmap;
 	erp = rp + sc->type->nreadw;
 	cp = sc->cachep;
 

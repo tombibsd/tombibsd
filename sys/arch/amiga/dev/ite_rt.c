@@ -436,10 +436,8 @@ retina_clear(struct ite_softc *ip, int sy, int sx, int h, int w)
 void
 retina_scroll(struct ite_softc *ip, int sy, int sx, int count, int dir)
 {
-	volatile void *ba;
 	u_long *fb;
 
-	ba = ip->grf->g_regkva;
 	fb = (u_long *)__UNVOLATILE(ip->grf->g_fbkva);
 
 	retina_cursor(ip, ERASE_CURSOR);

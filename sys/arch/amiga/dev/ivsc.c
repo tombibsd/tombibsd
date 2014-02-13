@@ -329,6 +329,7 @@ ivsc_intr(void *arg)
 	if ((*dev->sci_csr & SCI_CSR_INT) == 0)
 		return(0);
 	stat = *dev->sci_iack;
+	__USE(stat);
 	/* XXXX is: something is missing here, at least a: */
 	return(1);
 }

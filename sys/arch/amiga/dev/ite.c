@@ -593,11 +593,10 @@ void
 itestart(struct tty *tp)
 {
 	struct clist *rbp;
-	struct ite_softc *ip;
 	u_char buf[ITEBURST];
 	int s, len;
 
-	ip = getitesp(tp->t_dev);
+	(void)getitesp(tp->t_dev);
 
 	KDASSERT(tp);
 
@@ -630,9 +629,7 @@ void
 ite_on(dev_t dev, int flag)
 {
 	struct ite_softc *ip;
-	int unit;
 
-	unit = ITEUNIT(dev);
 	ip = getitesp(dev);
 
 	/* force ite active, overriding graphics mode */

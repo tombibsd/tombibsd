@@ -316,16 +316,14 @@ layer_bypass(void *v)
 		vppp = VOPARG_OFFSETTO(struct vnode***,
 				 descp->vdesc_vpp_offset, ap);
 		/*
-		 * Only vop_lookup, vop_create, vop_makedir, vop_bmap,
-		 * vop_mknod, and vop_symlink return vpp's. vop_bmap
-		 * doesn't call bypass as the lower vpp is fine (we're just
-		 * going to do i/o on it). vop_lookup doesn't call bypass
+		 * Only vop_lookup, vop_create, vop_makedir, vop_mknod
+		 * and vop_symlink return vpp's. vop_lookup doesn't call bypass
 		 * as a lookup on "." would generate a locking error.
-		 * So all the calls which get us here have a locked vpp. :-)
+		 * So all the calls which get us here have a unlocked vpp. :-)
 		 */
 		error = layer_node_create(mp, **vppp, *vppp);
 		if (error) {
-			vput(**vppp);
+			vrele(**vppp);
 			**vppp = NULL;
 		}
 	}

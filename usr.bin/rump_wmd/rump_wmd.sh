@@ -1,5 +1,7 @@
 #!/bin/sh
 #
+#	$NetBSD$
+#
 # Copyright (c) 2014 Antti Kantee <pooka@iki.fi>
 #
 # Redistribution and use in source and binary forms, with or without
@@ -42,7 +44,7 @@ usage ()
 }
 
 unset FIRSTLIB
-while getopts 'l:L:v' opt; do
+while getopts 'hl:L:v' opt; do
 	case "${opt}" in
 	l)
 		: ${FIRSTLIB:=${OPTIND}}
@@ -60,6 +62,7 @@ while getopts 'l:L:v' opt; do
 		;;
 	esac
 done
+[ -z "${FIRSTLIB}" ] && usage
 shift $((${FIRSTLIB} - 2))
 [ $# -eq 0 ] && usage
 

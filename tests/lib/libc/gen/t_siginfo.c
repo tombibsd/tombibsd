@@ -45,7 +45,9 @@
 #include <setjmp.h>
 #include <float.h>
 
-#ifdef _FLOAT_IEEE754
+#ifdef HAVE_FENV
+#include <fenv.h>
+#elif defined(_FLOAT_IEEE754)
 #include <ieeefp.h>
 #endif
 
@@ -314,7 +316,9 @@ ATF_TC_BODY(sigfpe_flt, tc)
 		sa.sa_sigaction = sigfpe_flt_action;
 		sigemptyset(&sa.sa_mask);
 		sigaction(SIGFPE, &sa, NULL);
-#ifdef _FLOAT_IEEE754
+#ifdef HAVE_FENV
+		feenableexcept(FE_ALL_EXCEPT);
+#elif defined(_FLOAT_IEEE754)
 		fpsetmask(FP_X_INV|FP_X_DZ|FP_X_OFL|FP_X_UFL|FP_X_IMP);
 #endif
 		printf("%g\n", 1 / d);
@@ -362,7 +366,9 @@ ATF_TC_BODY(sigfpe_int, tc)
 		sa.sa_sigaction = sigfpe_int_action;
 		sigemptyset(&sa.sa_mask);
 		sigaction(SIGFPE, &sa, NULL);
-#ifdef _FLOAT_IEEE754
+#ifdef HAVE_FENV
+		feenableexcept(FE_ALL_EXCEPT);
+#elif defined(_FLOAT_IEEE754)
 		fpsetmask(FP_X_INV|FP_X_DZ|FP_X_OFL|FP_X_UFL|FP_X_IMP);
 #endif
 		printf("%ld\n", 1 / l);
@@ -460,7 +466,7 @@ ATF_TC_BODY(sigbus_adraln, tc)
 	sigemptyset(&sa.sa_mask);
 	sigaction(SIGBUS, &sa, NULL);
 
-	/* Enable alignement checks for x86. 0x40000 is PSL_AC. */
+	/* Enable alignment checks for x86. 0x40000 is PSL_AC. */
 #if defined(__i386__)
 	__asm__("pushf; orl $0x40000, (%esp); popf");
 #elif defined(__amd64__)

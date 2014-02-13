@@ -22,6 +22,12 @@ CLEANFILES+=	minigzip
 INCS=		zconf.h zlib.h
 INCSDIR=	/usr/include
 
+FILES+=			zlib.pc
+FILESOWN_zlib.pc=	${BINOWN}
+FILESGRP_zlib.pc=	${BINGRP}
+FILESMODE_zlib.pc=	${NONBINMODE}
+FILESDIR_zlib.pc=	/usr/lib/pkgconfig
+
 .include <bsd.lib.mk>
 
 test: minigzip

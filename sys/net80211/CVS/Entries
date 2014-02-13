@@ -14,7 +14,7 @@
 /ieee80211_crypto_tkip.c/1.11/Sun Apr  3 10:04:32 2011/-kk/
 /ieee80211_crypto_wep.c/1.8/Wed Dec 17 20:51:37 2008/-kk/
 /ieee80211_input.c/1.77/Thu Oct 24 10:28:58 2013/-kk/
-/ieee80211_ioctl.c/1.58/Thu Oct 24 10:28:58 2013/-kk/
+/ieee80211_ioctl.c/1.59/Thu Feb 13 15:22:35 2014/-kk/
 /ieee80211_ioctl.h/1.20/Sun Jun 12 00:07:19 2011/-kk/
 /ieee80211_netbsd.c/1.24/Thu Oct 24 10:28:58 2013/-kk/
 /ieee80211_netbsd.h/1.18/Thu Oct 24 10:28:58 2013/-kk/

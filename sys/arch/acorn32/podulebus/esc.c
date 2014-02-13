@@ -1618,11 +1618,9 @@ escintr(struct esc_softc *dev)
 void
 escicmd(struct esc_softc *dev, struct esc_pending *pendp)
 {
-	esc_regmap_p	 rp;
 	struct nexus	*nexus;
 
 	nexus = &dev->sc_nexus[pendp->xs->xs_periph->periph_target];
-	rp = dev->sc_esc;
 
 	if (!escselect(dev, pendp, (char *)pendp->xs->cmd, pendp->xs->cmdlen,
 			(char *)pendp->xs->data, pendp->xs->datalen,

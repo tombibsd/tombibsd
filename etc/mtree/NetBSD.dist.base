@@ -402,6 +402,7 @@
 ./usr/share/examples/supfiles
 ./usr/share/examples/syslogd
 ./usr/share/examples/tmux
+./usr/share/examples/wpa_supplicant
 ./usr/share/examples/wsmoused
 ./usr/share/games
 ./usr/share/games/atc

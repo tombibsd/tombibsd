@@ -45,6 +45,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/bus.h>
 
 #include <dev/pci/pcivar.h>
+#include <dev/pci/pcidevs.h>
 #include <dev/pci/usb_pci.h>
 
 #include <dev/usb/usb.h>
@@ -93,6 +94,11 @@ ohci_pci_attach(device_t parent, device_t self, void *aux)
 
 	sc->sc.sc_dev = self;
 	sc->sc.sc_bus.hci_private = sc;
+
+	if (PCI_VENDOR(pa->pa_id) == PCI_VENDOR_NS &&
+	    PCI_PRODUCT(pa->pa_id) == PCI_PRODUCT_NS_USB) {
+		sc->sc.sc_flags = OHCIF_SUPERIO;
+	}
 
 	pci_aprint_devinfo(pa, "USB Controller");
 

@@ -884,6 +884,15 @@ wsdisplay_preattach(const struct wsscreen_descr *type, void *cookie,
 	wsdisplay_console_initted = 1;
 }
 
+void
+wsdisplay_cndetach(void)
+{
+	KASSERT(wsdisplay_console_initted == 2);
+
+	cn_tab = NULL;
+	wsdisplay_console_initted = 0;
+}
+
 /*
  * Tty and cdevsw functions.
  */

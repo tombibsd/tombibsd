@@ -119,7 +119,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 static int change_flags(struct vnode *, u_long, struct lwp *);
 static int change_mode(struct vnode *, int, struct lwp *l);
 static int change_owner(struct vnode *, uid_t, gid_t, struct lwp *, int);
-static int do_open(lwp_t *, struct vnode *, struct pathbuf *, int, int, int *);
 static int do_sys_openat(lwp_t *, int, const char *, int, int, int *);
 static int do_sys_mkdirat(struct lwp *l, int, const char *, mode_t,
     enum uio_seg);
@@ -1534,7 +1533,7 @@ chdir_lookup(const char *path, int where, struct vnode **vpp, struct lwp *l)
  * (so we can easily reuse this function from other parts of the kernel,
  * like posix_spawn post-processing).
  */
-static int
+int
 do_open(lwp_t *l, struct vnode *dvp, struct pathbuf *pb, int open_flags, 
 	int open_mode, int *fd)
 {
@@ -1624,9 +1623,16 @@ do_sys_openat(lwp_t *l, int fdat, const char *path, int flags,
 	struct pathbuf *pb;
 	int error;
 
-	error = pathbuf_copyin(path, &pb);
-	if (error)
-		return error;
+#ifdef COMPAT_10	/* XXX: and perhaps later */
+	if (path == NULL)
+		pb = pathbuf_create(".");
+	else
+#endif
+	{
+		error = pathbuf_copyin(path, &pb);
+		if (error)
+			return error;
+	}
 
 	if (fdat != AT_FDCWD) {
 		/* fd_getvnode() will use the descriptor for us */
@@ -2253,7 +2259,7 @@ do_sys_mknodat(struct lwp *l, int fdat, const char *pathname, mode_t mode,
 			error = VOP_MKNOD(nd.ni_dvp, &nd.ni_vp,
 						&nd.ni_cnd, &vattr);
 			if (error == 0)
-				vput(nd.ni_vp);
+				vrele(nd.ni_vp);
 			vput(nd.ni_dvp);
 			break;
 
@@ -2261,7 +2267,7 @@ do_sys_mknodat(struct lwp *l, int fdat, const char *pathname, mode_t mode,
 			error = VOP_CREATE(nd.ni_dvp, &nd.ni_vp,
 						&nd.ni_cnd, &vattr);
 			if (error == 0)
-				vput(nd.ni_vp);
+				vrele(nd.ni_vp);
 			vput(nd.ni_dvp);
 			break;
 		}
@@ -2343,7 +2349,7 @@ do_sys_mkfifoat(struct lwp *l, int fdat, const char *path, mode_t mode)
 	vattr.va_mode = (mode & ALLPERMS) &~ p->p_cwdi->cwdi_cmask;
 	error = VOP_MKNOD(nd.ni_dvp, &nd.ni_vp, &nd.ni_cnd, &vattr);
 	if (error == 0)
-		vput(nd.ni_vp);
+		vrele(nd.ni_vp);
 	vput(nd.ni_dvp);
 	pathbuf_destroy(pb);
 	return (error);
@@ -2501,7 +2507,7 @@ do_sys_symlinkat(struct lwp *l, const char *patharg, int fdat,
 	vattr.va_mode = ACCESSPERMS &~ p->p_cwdi->cwdi_cmask;
 	error = VOP_SYMLINK(nd.ni_dvp, &nd.ni_vp, &nd.ni_cnd, &vattr, path);
 	if (error == 0)
-		vput(nd.ni_vp);
+		vrele(nd.ni_vp);
 	vput(nd.ni_dvp);
 out2:
 	pathbuf_destroy(linkpb);
@@ -4561,7 +4567,7 @@ do_sys_mkdirat(struct lwp *l, int fdat, const char *path, mode_t mode,
 	vattr.va_mode = (mode & ACCESSPERMS) &~ p->p_cwdi->cwdi_cmask;
 	error = VOP_MKDIR(nd.ni_dvp, &nd.ni_vp, &nd.ni_cnd, &vattr);
 	if (!error)
-		vput(nd.ni_vp);
+		vrele(nd.ni_vp);
 	vput(nd.ni_dvp);
 	pathbuf_destroy(pb);
 	return (error);

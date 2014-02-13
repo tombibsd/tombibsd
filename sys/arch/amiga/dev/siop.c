@@ -225,7 +225,9 @@ siop_scsipi_request(struct scsipi_channel *chan, scsipi_adapter_req_t req,
                     void *arg)
 {
 	struct scsipi_xfer *xs;
+#ifdef DIAGNOSTIC
 	struct scsipi_periph *periph;
+#endif
 	struct siop_acb *acb;
 	struct siop_softc *sc = device_private(chan->chan_adapter->adapt_dev);
 	int flags, s;
@@ -233,7 +235,9 @@ siop_scsipi_request(struct scsipi_channel *chan, scsipi_adapter_req_t req,
 	switch (req) {
 	case ADAPTER_REQ_RUN_XFER:
 		xs = arg;
+#ifdef DIAGNOSTIC
 		periph = xs->xs_periph;
+#endif
 		flags = xs->xs_control;
 
 		/* XXXX ?? */
@@ -680,6 +684,7 @@ siopreset(struct siop_softc *sc)
 	if (i & SIOP_ISTAT_DIP)
 		dummy = rp->siop_dstat;
 
+	__USE(dummy);
 	splx (s);
 
 	delay (siop_reset_delay * 1000);

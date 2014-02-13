@@ -29,4 +29,3 @@ release:: ${UUDECODE_FILES}
 		${HPCBOOT_SH4} ${RELEASEDIR}/${RELEASEMACHINEDIR}/installation
 
 .include <bsd.files.mk>
-.include <bsd.obj.mk>

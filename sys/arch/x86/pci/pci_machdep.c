@@ -110,6 +110,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include "opt_acpi.h"
 #include "opt_ddb.h"
 #include "opt_mpbios.h"
+#include "opt_puc.h"
 #include "opt_vga.h"
 #include "pci.h"
 #include "wsdisplay.h"
@@ -937,6 +938,13 @@ device_pci_register(device_t dev, void *aux)
 				}
 #endif
 			}
+#if 1 && NWSDISPLAY > 0 && NGENFB > 0
+			/* XXX */
+			if (device_is_a(dev, "genfb")) {
+				prop_dictionary_set_bool(dict, "is_console",
+				    genfb_is_console());
+			} else
+#endif
 			prop_dictionary_set_bool(dict, "is_console", true);
 
 			prop_dictionary_set_bool(dict, "clear-screen", false);
@@ -963,14 +971,21 @@ device_pci_register(device_t dev, void *aux)
 	return NULL;
 }
 
+#ifndef PUC_CNBUS
+#define PUC_CNBUS 0
+#endif
+
 #if NCOM > 0
 int
-cpu_comcnprobe(struct consdev *cn, struct pci_attach_args *pa)
+cpu_puc_cnprobe(struct consdev *cn, struct pci_attach_args *pa)
 {
 	pci_mode_detect();
 	pa->pa_iot = x86_bus_space_io;
+	pa->pa_memt = x86_bus_space_mem;
 	pa->pa_pc = 0;
-	pa->pa_tag = pci_make_tag(0, 0, pci_bus_maxdevs(NULL, 0) - 1, 0);
+	pa->pa_tag = pci_make_tag(0, PUC_CNBUS, pci_bus_maxdevs(NULL, 0) - 1,
+				  0);
+
 	return 0;
 }
 #endif

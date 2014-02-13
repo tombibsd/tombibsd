@@ -31,7 +31,9 @@
 
 __RCSID("$NetBSD$");
 
-#if !defined(_KERNEL) && !defined(_STANDALONE)
+#if defined(_KERNEL) || defined(_STANDALONE)
+#include <sys/systm.h>
+#else
 #include <string.h>
 #include <unistd.h>
 #include <sys/types.h>
@@ -44,7 +46,9 @@ __RCSID("$NetBSD$");
 int
 __aeabi_idiv0(int result)
 {
-#if !defined(_KERNEL) || !defined(_STANDALONE)
+#if defined(_KERNEL) || defined(_STANDALONE)
+	panic("divide by 0");
+#else
 	siginfo_t info;
 	
 	memset(&info, 0, sizeof info);

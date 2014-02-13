@@ -156,7 +156,6 @@ IDTVEC(trap06)
 IDTVEC_END(trap06)
 #endif
 IDTVEC(trap07)
-#if NNPX > 0
 	pushl	$0			# dummy error code
 	pushl	$T_DNA
 	INTRENTRY
@@ -169,12 +168,6 @@ IDTVEC(trap07)
 	testl	%eax,%eax
 	jz	calltrap
 	jmp	_C_LABEL(trapreturn)
-#else
-#ifndef XEN
-	sti
-#endif
-	ZTRAP(T_DNA)
-#endif
 IDTVEC_END(trap07)
 IDTVEC(trap08)
 	TRAP(T_DOUBLEFLT)
@@ -234,7 +227,6 @@ IDTVEC_END(trap0f)
 IDTVEC_END(intrspurious)
 
 IDTVEC(trap10)
-#if NNPX > 0
 	/*
 	 * Handle like an interrupt so that we can call npxintr to clear the
 	 * error.  It would be better to handle npx interrupts as traps but
@@ -252,10 +244,6 @@ IDTVEC(trap10)
 	call	_C_LABEL(npxintr)
 	addl	$12,%esp
 	jmp	_C_LABEL(trapreturn)
-#else
-	sti
-	ZTRAP(T_ARITHTRAP)
-#endif
 IDTVEC_END(trap10)
 IDTVEC(trap11)
 	TRAP(T_ALIGNFLT)

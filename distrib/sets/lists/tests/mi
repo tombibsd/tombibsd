@@ -1890,6 +1890,7 @@
 ./usr/tests/lib/libc/gen/t_closefrom		tests-lib-tests		atf
 ./usr/tests/lib/libc/gen/t_cpuset		tests-lib-tests		atf
 ./usr/tests/lib/libc/gen/t_dir			tests-lib-tests		atf
+./usr/tests/lib/libc/gen/t_floatunditf		tests-lib-tests		atf
 ./usr/tests/lib/libc/gen/t_fmtcheck		tests-lib-tests		atf
 ./usr/tests/lib/libc/gen/t_fnmatch		tests-lib-tests		atf
 ./usr/tests/lib/libc/gen/t_fpclassify		tests-lib-tests		atf

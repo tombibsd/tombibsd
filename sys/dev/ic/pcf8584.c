@@ -175,9 +175,8 @@ pcfiic_i2c_exec(void *arg, i2c_op_t op, i2c_addr_t addr,
 	if (sc->sc_master)
 		pcfiic_choose_bus(sc, addr >> 7);
 
-	if (cmdlen > 0)
-		if (pcfiic_xmit(sc, addr & 0x7f, cmdbuf, cmdlen) != 0)
-			return (1);
+	if (pcfiic_xmit(sc, addr & 0x7f, cmdbuf, cmdlen) != 0)
+		return (1);
 
 	if (len > 0) {
 		if (I2C_OP_WRITE_P(op))

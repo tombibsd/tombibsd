@@ -88,7 +88,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include "ioapic.h"
 #include "lapic.h"
 
-#include "npx.h"
 #include "assym.h"
 
 /*

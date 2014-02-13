@@ -40,6 +40,10 @@ struct cpu_info {
 
 	struct cpu_info *ci_next;
 
+#ifdef __alpha__
+	uint64_t ci_pcc_freq;
+#endif
+
 /*
  * XXX: horrible workaround for vax lock.h.
  * I eventually want to nuke rump include/machine, so don't waste

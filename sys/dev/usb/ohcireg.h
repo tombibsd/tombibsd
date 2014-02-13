@@ -107,6 +107,7 @@
 #define  OHCI_OCPM		0x0800     /* Overcurrent Protection Mode */
 #define  OHCI_NOCP		0x1000     /* No Overcurrent Protection */
 #define  OHCI_GET_POTPGT(s)	((s) >> 24)
+#define  OHCI_POTPGT_MASK	0xff000000
 #define OHCI_RH_DESCRIPTOR_B	0x4c
 #define OHCI_RH_STATUS		0x50
 #define  OHCI_LPS		0x00000001 /* Local Power Status */

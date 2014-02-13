@@ -12,7 +12,7 @@ BOOTLOADER?=	${MDEC}/boot_com0
 TMPKERNEL=	${.OBJDIR}/netbsd
 
 ${IMAGE}: ${KERNEL}
-	gzip -cd ${KERNEL} > ${TMPKERNEL}
+	${TOOL_GZIP} -cd ${KERNEL} > ${TMPKERNEL}
 	${TOOL_POWERPCMKBOOTIMAGE} -m ${MACHINE} -b ${BOOTLOADER} 	\
 		-k ${TMPKERNEL} ${.TARGET}
 	-rm -f ${TMPKERNEL}

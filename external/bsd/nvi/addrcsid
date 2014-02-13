@@ -1,0 +1,15 @@
+#!/bin/sh
+
+for i
+do
+sed -e '/^#ifndef lint/ {
+i\
+#include <sys/cdefs.h>\
+#if 0
+}' -e '/^#endif.*not\ lint.*/ {
+a\
+#else\
+__RCSID("$NetBSD$");\
+#endif
+}' $i > tmp$$ && mv tmp$$ $i
+done

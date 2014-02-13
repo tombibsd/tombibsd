@@ -134,7 +134,7 @@ static const struct dirtemplate mastertemplate = {
 int
 ufs_create(void *v)
 {
-	struct vop_create_v2_args /* {
+	struct vop_create_v3_args /* {
 		struct vnode		*a_dvp;
 		struct vnode		**a_vpp;
 		struct componentname	*a_cnp;
@@ -163,6 +163,7 @@ ufs_create(void *v)
 	UFS_WAPBL_END1(dvp->v_mount, dvp);
 	fstrans_done(dvp->v_mount);
 	VN_KNOTE(dvp, NOTE_WRITE);
+	VOP_UNLOCK(*ap->a_vpp);
 	return (0);
 }
 
@@ -173,7 +174,7 @@ ufs_create(void *v)
 int
 ufs_mknod(void *v)
 {
-	struct vop_mknod_v2_args /* {
+	struct vop_mknod_v3_args /* {
 		struct vnode		*a_dvp;
 		struct vnode		**a_vpp;
 		struct componentname	*a_cnp;
@@ -238,6 +239,7 @@ out:
 		*vpp = NULL;
 		return (error);
 	}
+	VOP_UNLOCK(*vpp);
 	return (0);
 }
 
@@ -969,7 +971,7 @@ ufs_whiteout(void *v)
 int
 ufs_mkdir(void *v)
 {
-	struct vop_mkdir_v2_args /* {
+	struct vop_mkdir_v3_args /* {
 		struct vnode		*a_dvp;
 		struct vnode		**a_vpp;
 		struct componentname	*a_cnp;
@@ -1101,6 +1103,7 @@ ufs_mkdir(void *v)
  bad:
 	if (error == 0) {
 		VN_KNOTE(dvp, NOTE_WRITE | NOTE_LINK);
+		VOP_UNLOCK(tvp);
 		UFS_WAPBL_END(dvp->v_mount);
 	} else {
 		dp->i_nlink--;
@@ -1230,7 +1233,7 @@ ufs_rmdir(void *v)
 int
 ufs_symlink(void *v)
 {
-	struct vop_symlink_v2_args /* {
+	struct vop_symlink_v3_args /* {
 		struct vnode		*a_dvp;
 		struct vnode		**a_vpp;
 		struct componentname	*a_cnp;
@@ -1282,8 +1285,9 @@ ufs_symlink(void *v)
 		    UIO_SYSSPACE, IO_NODELOCKED | IO_JOURNALLOCKED,
 		    ap->a_cnp->cn_cred, NULL, NULL);
 	UFS_WAPBL_END1(ap->a_dvp->v_mount, ap->a_dvp);
+	VOP_UNLOCK(vp);
 	if (error)
-		vput(vp);
+		vrele(vp);
 out:
 	fstrans_done(ap->a_dvp->v_mount);
 	return (error);

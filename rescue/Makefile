@@ -6,7 +6,7 @@
 WARNS=		1
 # XXX
 .if ${MACHINE_ARCH} != "m68000"
-DBG=		-Os
+DBG+=		-Os
 .endif
 
 CRUNCHGEN_FLAGS=-d "${DBG}"

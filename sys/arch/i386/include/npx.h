@@ -57,16 +57,15 @@ union fp_addr {
 	} fa_32;
 } __packed;
 
-/* Contents of each floating point accumulator */
+/* The x87 registers are 80 bits (in ST(n) order) */
 struct fpacc87 {
-#ifdef dontdef	/* too unportable */
-	uint32_t fp_mantlo;	/* mantissa low (31:0) */
-	uint32_t fp_manthi;	/* mantissa high (63:32) */
-	int	 fp_exp:15;	/* exponent */
-	int	 fp_sgn:1;	/* mantissa sign */
-#else
-	uint8_t	 fp_bytes[10];
-#endif
+	uint64_t	f87_mantissa;	/* mantissa */
+	uint16_t	f87_exp_sign;	/* exponent and sign */
+} __packed;
+
+/* The x87 registers padded out for fxsave */
+struct fpaccfx {
+	struct fpacc87 r __aligned(16);
 };
 
 /*
@@ -91,13 +90,10 @@ struct save87 {
 	uint8_t		s87_pad[8 * 2 - 2 * 4];	/* bogus historical padding */
 #endif
 };
+#ifndef __lint__
+// Has different packing semantics, adding packed to save87 works
 __CTASSERT(sizeof (struct save87) == 108 + 16);
-
-/* FPU regsters in the extended save format. */
-struct fpaccxmm {
-	uint8_t fp_bytes[10];
-	uint8_t fp_rsvd[6];
-};
+#endif
 
 /* SSE/SSE2 registers. */
 struct xmmreg {
@@ -115,14 +111,17 @@ struct fxsave {
 /*16*/	union fp_addr fx_dp;	/* FPU Data pointer */
 	uint32_t fx_mxcsr;	/* MXCSR Register State */
 	uint32_t fx_mxcsr_mask;
-	struct fpaccxmm sv_ac[8];	/* ST/MM regs */
+	struct fpaccfx fx_87_ac[8];	/* 8 x87 registers */
 	struct xmmreg sv_xmmregs[8];	/* XMM regs */
 	uint8_t sv_rsvd[16 * 14];
 	/* 512-bytes --- end of hardware portion of save area */
 	uint32_t sv_ex_sw;		/* saved SW from last exception */
 	uint32_t sv_ex_tw;		/* saved TW from last exception */
 } __aligned(16);
+#ifndef __lint__
+// lint does not know aligned
 __CTASSERT(sizeof (struct fxsave) == 512 + 16);
+#endif
 
 
 union savefpu {
@@ -194,10 +193,8 @@ union savefpu {
 
 #ifdef _KERNEL
 
-void	probeintr(void);
-void	probetrap(void);
 int	npx586bug1(int, int);
-void 	npxinit(struct cpu_info *);
+void 	fpuinit(struct cpu_info *);
 void	process_xmm_to_s87(const struct fxsave *, struct save87 *);
 void	process_s87_to_xmm(const struct save87 *, struct fxsave *);
 struct lwp;

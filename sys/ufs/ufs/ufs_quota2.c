@@ -42,6 +42,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/wapbl.h>
 #include <sys/quota.h>
 #include <sys/quotactl.h>
+#include <sys/timevar.h>
 
 #include <ufs/ufs/quota2.h>
 #include <ufs/ufs/inode.h>
@@ -627,6 +628,15 @@ quota2_handle_cmd_put(struct ufsmount *ump, const struct quotakey *key,
 		goto out_il;
 	
 	quota2_ufs_rwq2e(q2ep, &q2e, needswap);
+	/*
+	 * Reset time limit if previously had no soft limit or were
+	 * under it, but now have a soft limit and are over it.
+	 */
+	if (val->qv_softlimit &&
+	    q2e.q2e_val[key->qk_objtype].q2v_cur >= val->qv_softlimit &&
+	    (q2e.q2e_val[key->qk_objtype].q2v_softlimit == 0 ||
+	     q2e.q2e_val[key->qk_objtype].q2v_cur < q2e.q2e_val[key->qk_objtype].q2v_softlimit))
+		q2e.q2e_val[key->qk_objtype].q2v_time = time_second + val->qv_grace;
 	quota2_dict_update_q2e_limits(key->qk_objtype, val, &q2e);
 	quota2_ufs_rwq2e(&q2e, q2ep, needswap);
 	quota2_bwrite(ump->um_mountp, bp);

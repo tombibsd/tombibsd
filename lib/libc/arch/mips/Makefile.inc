@@ -11,7 +11,7 @@ CPPFLAGS.assym.h+=-D__LIBC12_SOURCE__
 .include <softfloat/Makefile.inc>
 CPPFLAGS+= -DSOFTFLOAT
 
-SRCS+=	fixunsgen_ieee754.c fixunssfsi_ieee754.c fixunsdfsi_ieee754.c
+SRCS+=	fixunsgen_ieee754.c
 SRCS+=	fixunsgen64_ieee754.c #fixunssfdi.c fixunsdfdi.c
 .if (${MACHINE_ARCH} == "mips64eb" || ${MACHINE_ARCH} == "mips64el") \
     && (!defined(CPUFLAGS) || empty(CPUFLAGS:M-mabi=32))

@@ -105,13 +105,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #ifdef __x86_64__
 #include <machine/fpu.h>
-#else
-#include "npx.h"
-#if NNPX > 0
-#define fpusave_lwp(x, y)	npxsave_lwp(x, y)
-#else
-#define fpusave_lwp(x, y)
-#endif
 #endif
 
 void

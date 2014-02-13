@@ -53,7 +53,7 @@ ATF_TC_HEAD(bad_big5_wprintf, tc)
 
 ATF_TC_BODY(bad_big5_wprintf, tc)
 {
-	/* XXX implementation detail knowledge (wchat_t encoding) */
+	/* XXX implementation detail knowledge (wchar_t encoding) */
 	wchar_t ibuf[] = { 0xcf10, 0 };
 	setlocale(LC_CTYPE, "zh_TW.Big5");
 	ATF_REQUIRE_ERRNO(EILSEQ, wprintf(L"%ls\n", ibuf) < 0);
@@ -68,7 +68,7 @@ ATF_TC_HEAD(bad_big5_swprintf, tc)
 
 ATF_TC_BODY(bad_big5_swprintf, tc)
 {
-	/* XXX implementation detail knowledge (wchat_t encoding) */
+	/* XXX implementation detail knowledge (wchar_t encoding) */
 	wchar_t ibuf[] = { 0xcf10, 0 };
 	wchar_t obuf[20];
 	setlocale(LC_CTYPE, "zh_TW.Big5");
@@ -84,7 +84,7 @@ ATF_TC_HEAD(good_big5_wprintf, tc)
 
 ATF_TC_BODY(good_big5_wprintf, tc)
 {
-	/* XXX implementation detail knowledge (wchat_t encoding) */
+	/* XXX implementation detail knowledge (wchar_t encoding) */
 	wchar_t ibuf[] = { 0xcf40, 0 };
 	setlocale(LC_CTYPE, "zh_TW.Big5");
 	ATF_REQUIRE_EQ(wprintf(L"%ls\n", ibuf), 2);
@@ -98,7 +98,7 @@ ATF_TC_HEAD(good_big5_swprintf, tc)
 
 ATF_TC_BODY(good_big5_swprintf, tc)
 {
-	/* XXX implementation detail knowledge (wchat_t encoding) */
+	/* XXX implementation detail knowledge (wchar_t encoding) */
 	wchar_t ibuf[] = { 0xcf40, 0 };
 	wchar_t obuf[20];
 	setlocale(LC_CTYPE, "zh_TW.Big5");
@@ -139,7 +139,7 @@ ATF_TC_BODY(good_big5_getwc, tc)
 
 	ATF_REQUIRE(fp != NULL);
 	setlocale(LC_CTYPE, "zh_TW.Big5");
-	/* XXX implementation detail knowledge (wchat_t encoding) */
+	/* XXX implementation detail knowledge (wchar_t encoding) */
 	ATF_REQUIRE_EQ(getwc(fp), 0xcf40);
 	fclose(fp);
 }

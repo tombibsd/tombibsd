@@ -702,7 +702,7 @@ kloader_pagetag_dump(void)
 			break;
 		}
 		if ((p->src & 3) || (p->dst & 3)) {
-			printf("data alignement error.\n");
+			printf("data alignment error.\n");
 			print = TRUE;
 		}
 

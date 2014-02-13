@@ -150,8 +150,6 @@ config		netbsd root on ? type ?
 mca0	at mainbus0
 isa0	at mainbus0
 
-#npx0	at isa? port 0xf0 irq 13	# x86 math coprocessor
-
 # wscons
 pckbc0		at isa?			# PC keyboard controller
 options 	PCKBCDEBUG

@@ -3,6 +3,10 @@
 # Sharp Netwalker
 #
 
+file   arch/arm/arm32/arm32_boot.c
+file   arch/arm/arm32/arm32_kvminit.c
+file   arch/arm/arm32/arm32_reboot.c
+
 file	arch/evbarm/netwalker/netwalker_machdep.c
 
 # Kernel boot arguments

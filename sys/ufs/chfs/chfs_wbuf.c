@@ -181,7 +181,7 @@ chfs_write_wbuf(struct chfs_mount* chmp, const struct iovec *invecs, long count,
 	/* adjust alignment offset */
 	if (chmp->chm_wbuf_len != PAGE_MOD(to)) {
 		chmp->chm_wbuf_len = PAGE_MOD(to);
-		/* take care of alignement to next page */
+		/* take care of alignment to next page */
 		if (!chmp->chm_wbuf_len) {
 			chmp->chm_wbuf_len += chmp->chm_wbuf_pagesize;
 			ret = chfs_flush_wbuf(chmp, WBUF_NOPAD);

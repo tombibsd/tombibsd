@@ -86,7 +86,9 @@ GENERIC_SRCS+= \
 	aeabi_idivmod.S \
 	aeabi_ldivmod.S \
 	aeabi_uidivmod.S \
-	aeabi_uldivmod.S
+	aeabi_uldivmod.S \
+	__aeabi_idiv0.c \
+	__aeabi_ldiv0.c
 .  endif
 .endif
 

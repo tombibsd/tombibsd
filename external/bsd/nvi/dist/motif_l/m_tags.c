@@ -9,9 +9,14 @@
 
 #include "config.h"
 
+#include <sys/cdefs.h>
+#if 0
 #ifndef lint
 static const char sccsid[] = "Id: m_tags.c,v 8.9 2003/11/05 17:10:00 skimo Exp  (Berkeley) Date: 2003/11/05 17:10:00 ";
 #endif /* not lint */
+#else
+__RCSID("$NetBSD$");
+#endif
 
 /*
  * This module implements a dialog for navigating the tag stack

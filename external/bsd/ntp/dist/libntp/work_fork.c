@@ -100,8 +100,10 @@ interrupt_worker_sleep(void)
 
 	for (idx = 0; idx < blocking_children_alloc; idx++) {
 		c = blocking_children[idx];
-		if (NULL == c)
+
+		if (NULL == c || c->reusable == TRUE)
 			continue;
+
 		rc = kill(c->pid, SIGHUP);
 		if (rc < 0)
 			msyslog(LOG_ERR,

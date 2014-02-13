@@ -35,8 +35,11 @@
 
 #ifdef __HAVE_ATOMIC64_OPS
 
-void
-atomic_or_64(volatile uint64_t *addr, uint64_t val)
+uint64_t fetch_and_or_8(volatile uint64_t *addr, uint64_t val, ...)
+    asm("__sync_fetch_and_or_8");
+
+uint64_t
+fetch_and_or_8(volatile uint64_t *addr, uint64_t val, ...)
 {
 	uint64_t old, new;
 
@@ -44,10 +47,18 @@ atomic_or_64(volatile uint64_t *addr, uint64_t val)
 		old = *addr;
 		new = old | val;
 	} while (atomic_cas_64(addr, old, new) != old);
+	return old;
+}
+
+void
+atomic_or_64(volatile uint64_t *addr, uint64_t val)
+{
+	(void) fetch_and_or_8(addr, val);
 }
 
 #undef atomic_or_64
 atomic_op_alias(atomic_or_64,_atomic_or_64)
+
 #if defined(_LP64)
 #undef atomic_or_ulong
 atomic_op_alias(atomic_or_ulong,_atomic_or_64)

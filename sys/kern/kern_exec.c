@@ -113,7 +113,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <compat/common/compat_util.h>
 
 #ifndef MD_TOPDOWN_INIT
-#ifdef __USING_TOPDOWN_VM
+#ifdef __USE_TOPDOWN_VM
 #define	MD_TOPDOWN_INIT(epp)	(epp)->ep_flags |= EXEC_TOPDOWN_VM
 #else
 #define	MD_TOPDOWN_INIT(epp)

@@ -60,6 +60,7 @@
 
 #include "kvm_private.h"
 
+__RCSID("$NetBSD$");
 
 struct vmstate {
 	u_long end;

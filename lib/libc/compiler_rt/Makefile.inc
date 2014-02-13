@@ -166,7 +166,6 @@ GENERIC_SRCS+= \
 	GCDAProfiling.c \
 	PGOProfiling.c
 
-.if ${HAVE_LIBGCC} == "no"
 .if ${MACHINE_ARCH} == "powerpc"
 GENERIC_SRCS+= \
 	fixtfdi.c \
@@ -177,7 +176,6 @@ GENERIC_SRCS+= \
 	gcc_qdiv.c \
 	gcc_qmul.c \
 	gcc_qsub.c
-.endif
 .endif
 
 .if ${MACHINE_CPU} == "arm"

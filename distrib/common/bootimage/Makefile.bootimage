@@ -390,7 +390,7 @@ ${IMGBASE}.img:	${TARGETFS} ${WORKLABEL}
 CLEANFILES+=	${IMGBASE}.img.gz ${IMGBASE}.img.gz.tmp
 
 ${IMGBASE}.img.gz:	${IMGBASE}.img
-	${TOOL_GZIP} -9c ${IMGBASE}.img > ${.TARGET}.tmp
+	${TOOL_GZIP} -9nc ${IMGBASE}.img > ${.TARGET}.tmp
 	mv ${.TARGET}.tmp ${.TARGET}
 
 clean:

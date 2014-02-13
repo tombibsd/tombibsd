@@ -51,6 +51,8 @@
 
 #include "kvm_private.h"
 
+__RCSID("$NetBSD$");
+
 /*ARGSUSED*/
 void
 _kvm_freevtop(kvm_t *kd)

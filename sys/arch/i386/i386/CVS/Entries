@@ -1,5 +1,5 @@
 /aout_machdep.c/1.1/Thu Nov 20 10:53:09 2008/-kk/
-/autoconf.c/1.98/Wed Oct  3 18:58:31 2012/-kk/
+/autoconf.c/1.99/Thu Feb 13 15:22:18 2014/-kk/
 /bios32.c/1.29/Fri Jun 15 23:01:16 2012/-kk/
 /bioscall.S/1.9/Sat Jul 24 00:45:54 2010/-kk/
 /busfunc.S/1.9/Thu Oct 24 10:28:57 2013/-kk/
@@ -18,7 +18,7 @@
 /freebsd_syscall.c/1.39/Thu Jul 12 18:13:08 2012/-kk/
 /gdt.c/1.53/Fri Feb 24 08:06:07 2012/-kk/
 /genassym.cf/1.96/Tue Dec 17 04:13:27 2013/-kk/
-/i386_trap.S/1.1/Thu Oct 24 10:28:57 2013/-kk/
+/i386_trap.S/1.2/Thu Feb 13 15:22:18 2014/-kk/
 /i386_trap_ipkdb.S/1.2/Tue Dec 17 04:05:02 2013/-kk/
 /i386func.S/1.17/Wed Aug 29 22:43:35 2012/-kk/
 /ibcs2_machdep.c/1.42/Fri Jan 31 08:48:36 2014/-kk/
@@ -30,21 +30,21 @@
 /linux_sigcode.S/1.8/Mon Apr 28 20:23:24 2008/-kk/
 /linux_syscall.c/1.51/Wed Sep 28 17:27:21 2011/-kk/
 /lock_stubs.S/1.26/Fri Jan 31 08:48:36 2014/-kk/
-/locore.S/1.109/Fri Jan 31 08:48:36 2014/-kk/
+/locore.S/1.110/Thu Feb 13 15:22:18 2014/-kk/
 /longrun.c/1.4/Sun Oct 23 13:02:32 2011/-kk/
-/machdep.c/1.742/Fri Jan 31 08:48:36 2014/-kk/
+/machdep.c/1.743/Thu Feb 13 15:22:18 2014/-kk/
 /mainbus.c/1.98/Tue Nov 12 02:18:40 2013/-kk/
 /mptramp.S/1.26/Fri Jan 31 08:48:36 2014/-kk/
 /mtrr_k6.c/1.13/Fri Apr  4 22:07:22 2008/-kk/
 /multiboot.c/1.22/Fri Dec  7 04:49:08 2012/-kk/
 /pmc.c/1.21/Tue Dec 17 04:05:02 2013/-kk/
-/process_machdep.c/1.77/Fri Jan 31 08:48:36 2014/-kk/
+/process_machdep.c/1.80/Thu Feb 13 15:22:18 2014/-kk/
 /rbus_machdep.c/1.26/Fri Jul  1 18:14:15 2011/-kk/
 /spl.S/1.40/Fri Jan 31 08:48:36 2014/-kk/
 /svr4_machdep.c/1.98/Fri Jan 31 08:48:36 2014/-kk/
 /svr4_sigcode.S/1.13/Wed Nov 19 18:35:59 2008/-kk/
 /svr4_syscall.c/1.47/Thu Jul 12 18:13:08 2012/-kk/
-/trap.c/1.268/Fri Jan 31 08:48:36 2014/-kk/
-/vector.S/1.63/Tue Dec 17 04:05:02 2013/-kk/
+/trap.c/1.269/Thu Feb 13 15:22:18 2014/-kk/
+/vector.S/1.64/Thu Feb 13 15:22:18 2014/-kk/
 /vm86.c/1.51/Sat Nov 21 03:11:00 2009/-kk/
 D

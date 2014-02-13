@@ -142,14 +142,18 @@ sci_scsipi_request(struct scsipi_channel *chan, scsipi_adapter_req_t req,
                    void *arg)
 {
 	struct scsipi_xfer *xs;
+#ifdef DIAGNOSTIC
 	struct scsipi_periph *periph;
+#endif
 	struct sci_softc *dev = device_private(chan->chan_adapter->adapt_dev);
 	int flags, s;
 
 	switch (req) {
 	case ADAPTER_REQ_RUN_XFER:
 		xs = arg;
+#ifdef DIAGNOSTIC
 		periph = xs->xs_periph;
+#endif
 		flags = xs->xs_control;
 
 		if (flags & XS_CTL_DATA_UIO)
@@ -502,7 +506,7 @@ sciicmd(struct sci_softc *dev, int target, void *cbuf, int clen, void *buf,
         int len, u_char xferphase)
 {
 	u_char phase;
-	register int wait;
+	int wait;
 
 	/* select the SCSI bus (it's an error if bus isn't free) */
 	if (sciselectbus (dev, target, dev->sc_scsi_addr))
@@ -577,6 +581,8 @@ sciicmd(struct sci_softc *dev, int target, void *cbuf, int clen, void *buf,
 #if 0
 		if (wait <= 0)
 			goto abort;
+#else
+		__USE(wait);
 #endif
 	}
 

@@ -188,6 +188,7 @@ mlhsc_dma_xfer_in(struct sci_softc *dev, int len, register u_char *buf,
 #endif
 
 	csr = *dev->sci_bus_csr;
+	__USE(csr);
 
 	QPRINTF(("mlhdma_in %d, csr=%02x\n", len, csr));
 
@@ -270,6 +271,7 @@ mlhsc_dma_xfer_out(struct sci_softc *dev, int len, register u_char *buf,
 	volatile register u_char *sci_csr = dev->sci_csr;
 
 	csr = *dev->sci_bus_csr;
+	__USE(csr);
 
 	QPRINTF(("mlhdma_xfer %d, csr=%02x\n", len, csr));
 

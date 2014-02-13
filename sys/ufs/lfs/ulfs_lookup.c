@@ -1395,7 +1395,7 @@ ulfs_parentcheck(struct vnode *upper, struct vnode *lower, kauth_cred_t cred,
 		int *found_ret, struct vnode **upperchild_ret)
 {
 	const int needswap = ULFS_IPNEEDSWAP(VTOI(lower));
-	ino_t upper_ino, found_ino;
+	ino_t upper_ino, found_ino = -1;	/* XXX gcc 4.8 */
 	struct vnode *current, *next;
 	int error;
 

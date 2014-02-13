@@ -553,7 +553,7 @@ lfs_unmark_vnode(struct vnode *vp)
 int
 lfs_symlink(void *v)
 {
-	struct vop_symlink_v2_args /* {
+	struct vop_symlink_v3_args /* {
 		struct vnode *a_dvp;
 		struct vnode **a_vpp;
 		struct componentname *a_cnp;
@@ -573,7 +573,7 @@ lfs_symlink(void *v)
 int
 lfs_mknod(void *v)
 {
-	struct vop_mknod_v2_args	/* {
+	struct vop_mknod_v3_args	/* {
 		struct vnode *a_dvp;
 		struct vnode **a_vpp;
 		struct componentname *a_cnp;
@@ -661,13 +661,14 @@ lfs_mknod(void *v)
 		*vpp = NULL;
 		return (error);
 	}
+	VOP_UNLOCK(*vpp);
 	return (0);
 }
 
 int
 lfs_create(void *v)
 {
-	struct vop_create_v2_args	/* {
+	struct vop_create_v3_args	/* {
 		struct vnode *a_dvp;
 		struct vnode **a_vpp;
 		struct componentname *a_cnp;
@@ -686,7 +687,7 @@ lfs_create(void *v)
 int
 lfs_mkdir(void *v)
 {
-	struct vop_mkdir_v2_args	/* {
+	struct vop_mkdir_v3_args	/* {
 		struct vnode *a_dvp;
 		struct vnode **a_vpp;
 		struct componentname *a_cnp;

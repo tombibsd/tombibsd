@@ -71,16 +71,16 @@ pdinfo_valid(const struct pdinfo_sector *disk)
 bool
 pdinfo_sanity(const struct pdinfo_sector *disk)
 {
-	const struct disk_geometory *geom;
-	const struct disk_ux *ux;
 
 	if (!pdinfo_valid(disk)) {
 		DPRINTF("no physical disk info.\n");
 		return false;
 	}
 
-	geom = &disk->geometory;
-	ux = &disk->ux;
+#ifdef PDINFO_DEBUG
+	const struct disk_geometory *geom = &disk->geometory;
+	const struct disk_ux *ux = &disk->ux;
+#endif
 	DPRINTF("physical disk sector size %dbyte\n", sizeof *disk);
 	DPRINTF("[disk]\n");
 	DPRINTF("drive_id = %#x\n", disk->drive_id);

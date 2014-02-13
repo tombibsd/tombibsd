@@ -112,8 +112,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <sys/kgdb.h>
 
-#include "npx.h"
-
 #ifdef KDTRACE_HOOKS
 #include <sys/dtrace_bsd.h>
 
@@ -586,11 +584,9 @@ kernelfault:
 		case T_DIVIDE|T_USER:
 			ksi.ksi_code = FPE_INTDIV;
 			break;
-#if NNPX > 0
 		case T_ARITHTRAP|T_USER:
 			ksi.ksi_code = npxtrap(l);
 			break;
-#endif
 		default:
 			ksi.ksi_code = 0;
 			break;

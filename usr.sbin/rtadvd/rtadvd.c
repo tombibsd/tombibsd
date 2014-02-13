@@ -1080,7 +1080,7 @@ ra_input(int len, struct nd_router_advert *ra,
 	}
 	if (rai->leaving) {
 		syslog(LOG_DEBUG,
-		       "<%s> recieved RA on re-configuring interface (%s)",
+		       "<%s> received RA on re-configuring interface (%s)",
 			__func__, rai->ifname);
 		goto done;
 	}

@@ -51,9 +51,12 @@ TOC.html=	${TOCS:M*.HTML.*}
 TOC.more=	${TOCS:M*.more.*}
 .endif
 
+REMOVE_CREATION_DATE= ${TOOL_SED} -e '/^%%CreationDate:/d'
 
 ${TARG}.ps: ${SRCS} ${TOC.ps} ${DISTRIBVERDEP}
-	${TOOL_GROFF} ${ARGS_PS}   -mdoc      ${MAIN} > $@
+	${TOOL_GROFF} ${ARGS_PS}   -mdoc      ${MAIN} \
+	    ${${MKREPRO:Uno} == "yes":? | ${REMOVE_CREATION_DATE} :} \
+	    > $@
 
 ${TARG}.pdf: ${TARG}.ps
 	ps2pdf ${TARG}.ps $@

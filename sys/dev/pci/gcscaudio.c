@@ -530,9 +530,9 @@ gcscaudio_set_params_ch(struct gcscaudio_softc *sc,
 
 	if (mode == AUMODE_PLAY) {
 		if (!AC97_IS_FIXED_RATE(sc->codec_if)) {
-			/* setup rate of DAC/ADC */
+			/* setup rate of DAC */
 			if ((error = sc->codec_if->vtbl->set_rate(sc->codec_if,
-			    AC97_REG_PCM_LR_ADC_RATE, &p->sample_rate)) != 0)
+			    AC97_REG_PCM_FRONT_DAC_RATE, &p->sample_rate)) != 0)
 				return error;
 
 			/* additional rate of DAC for Surround */
@@ -551,9 +551,9 @@ gcscaudio_set_params_ch(struct gcscaudio_softc *sc,
 
 	if (mode == AUMODE_RECORD) {
 		if (!AC97_IS_FIXED_RATE(sc->codec_if)) {
-			/* setup rate of DAC/ADC */
+			/* setup rate of ADC */
 			if ((error = sc->codec_if->vtbl->set_rate(sc->codec_if,
-			    AC97_REG_PCM_FRONT_DAC_RATE, &p->sample_rate)) != 0)
+			    AC97_REG_PCM_LR_ADC_RATE, &p->sample_rate)) != 0)
 				return error;
 		}
 	}

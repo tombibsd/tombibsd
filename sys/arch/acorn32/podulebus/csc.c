@@ -289,9 +289,6 @@ void
 csc_led(void *v, int mode)
 {
 	struct sfas_softc *sc = v;
-	csc_regmap_p		rp;
-
-	rp = (csc_regmap_p)sc->sc_fas;
 
 	if (mode) {
 		sc->sc_led_status++;

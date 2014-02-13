@@ -33,8 +33,11 @@
 
 #include <sys/atomic.h>
 
-void
-atomic_add_32(volatile uint32_t *addr, int32_t val)
+uint32_t fetch_and_add_4(volatile uint32_t *, uint32_t, ...)
+    asm("__sync_fetch_and_add_4");
+
+uint32_t
+fetch_and_add_4(volatile uint32_t *addr, uint32_t val, ...)
 {
 	uint32_t old, new;
 
@@ -42,6 +45,13 @@ atomic_add_32(volatile uint32_t *addr, int32_t val)
 		old = *addr;
 		new = old + val;
 	} while (atomic_cas_32(addr, old, new) != old);
+	return old;
+}
+
+void
+atomic_add_32(volatile uint32_t *addr, int32_t val)
+{
+	(void) fetch_and_add_4(addr, val);
 }
 
 #undef atomic_add_32

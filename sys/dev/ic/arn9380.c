@@ -224,25 +224,25 @@ ar9380_swap_rom(struct athn_softc *sc)
 	struct ar9380_modal_eep_header *modal;
 	int i;
 
-	base->regDmn[0] = swap16(base->regDmn[0]);
-	base->regDmn[1] = swap16(base->regDmn[1]);
-	base->swreg = swap32(base->swreg);
+	base->regDmn[0] = bswap16(base->regDmn[0]);
+	base->regDmn[1] = bswap16(base->regDmn[1]);
+	base->swreg = bswap32(base->swreg);
 
 	modal = &eep->modalHeader2G;
-	modal->antCtrlCommon = swap32(modal->antCtrlCommon);
-	modal->antCtrlCommon2 = swap32(modal->antCtrlCommon2);
-	modal->papdRateMaskHt20 = swap32(modal->papdRateMaskHt20);
-	modal->papdRateMaskHt40 = swap32(modal->papdRateMaskHt40);
+	modal->antCtrlCommon = bswap32(modal->antCtrlCommon);
+	modal->antCtrlCommon2 = bswap32(modal->antCtrlCommon2);
+	modal->papdRateMaskHt20 = bswap32(modal->papdRateMaskHt20);
+	modal->papdRateMaskHt40 = bswap32(modal->papdRateMaskHt40);
 	for (i = 0; i < AR9380_MAX_CHAINS; i++)
-		modal->antCtrlChain[i] = swap16(modal->antCtrlChain[i]);
+		modal->antCtrlChain[i] = bswap16(modal->antCtrlChain[i]);
 
 	modal = &eep->modalHeader5G;
-	modal->antCtrlCommon = swap32(modal->antCtrlCommon);
-	modal->antCtrlCommon2 = swap32(modal->antCtrlCommon2);
-	modal->papdRateMaskHt20 = swap32(modal->papdRateMaskHt20);
-	modal->papdRateMaskHt40 = swap32(modal->papdRateMaskHt40);
+	modal->antCtrlCommon = bswap32(modal->antCtrlCommon);
+	modal->antCtrlCommon2 = bswap32(modal->antCtrlCommon2);
+	modal->papdRateMaskHt20 = bswap32(modal->papdRateMaskHt20);
+	modal->papdRateMaskHt40 = bswap32(modal->papdRateMaskHt40);
 	for (i = 0; i < AR9380_MAX_CHAINS; i++)
-		modal->antCtrlChain[i] = swap16(modal->antCtrlChain[i]);
+		modal->antCtrlChain[i] = bswap16(modal->antCtrlChain[i]);
 #endif
 }
 

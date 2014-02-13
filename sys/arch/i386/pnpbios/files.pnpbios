@@ -44,8 +44,5 @@ file	arch/i386/pnpbios/pckbc_pnpbios.c	pckbc_pnpbios
 attach	fdc at pnpbios with fdc_pnpbios
 file	arch/i386/pnpbios/fdc_pnpbios.c		fdc_pnpbios
 
-attach	npx at pnpbios with npx_pnpbios
-file	arch/i386/pnpbios/npx_pnpbios.c		npx_pnpbios
-
 attach	joy at pnpbios with joy_pnpbios
 file	arch/i386/pnpbios/joy_pnpbios.c		joy_pnpbios

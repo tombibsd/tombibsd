@@ -78,7 +78,7 @@
 #define VFP_FPEXC_OFF		0x00000004	/* Potential overflow flag */
 #define VFP_FPEXC_DZF		0x00000002	/* Potential DivByZero flag */
 #define VFP_FPEXC_IOF		0x00000001	/* Potential inv. op. flag */
-#define VFP_FPEXE_FSUM		0x000000ff	/* all flag bits */
+#define VFP_FPEXC_FSUM		0x000000ff	/* all flag bits */
 
 #define VFP_FPSCR_N	0x80000000	/* set if compare <= result */
 #define VFP_FPSCR_Z	0x40000000	/* set if compare = result */

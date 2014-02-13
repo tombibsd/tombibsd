@@ -2837,6 +2837,9 @@ ieee80211_ioctl(struct ieee80211com *ic, u_long cmd, void *data)
 				if (ic->ic_des_chan != IEEE80211_CHAN_ANYC &&
 				    ic->ic_bss->ni_chan != ic->ic_des_chan)
 					error = ENETRESET;
+			} else if (ic->ic_opmode == IEEE80211_M_MONITOR) {
+				ic->ic_curchan = ic->ic_ibss_chan;
+				error = ENETRESET;
 			} else {
 				if (ic->ic_bss->ni_chan != ic->ic_ibss_chan)
 					error = ENETRESET;

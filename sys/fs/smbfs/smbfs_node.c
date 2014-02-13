@@ -231,7 +231,7 @@ int
 smbfs_nget(struct mount *mp, struct vnode *dvp, const char *name, int nmlen,
 	struct smbfattr *fap, struct vnode **vpp)
 {
-	struct vnode *vp;
+	struct vnode *vp = NULL;	/* XXX gcc 4.8: maybe-uninitialized */
 	int error;
 
 	error = smbfs_node_alloc(mp, dvp, name, nmlen, fap, &vp);

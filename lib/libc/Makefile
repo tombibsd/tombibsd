@@ -63,9 +63,7 @@ CPPFLAGS+=	-D__BUILD_LEGACY
 .include "${.CURDIR}/db/Makefile.inc"
 .include "${.CURDIR}/citrus/Makefile.inc"
 .include "${.CURDIR}/compat-43/Makefile.inc"
-.if ${HAVE_LIBGCC} == "no"
 .include "${.CURDIR}/compiler_rt/Makefile.inc"
-.endif
 .include "${.CURDIR}/dlfcn/Makefile.inc"
 .include "${.CURDIR}/gdtoa/Makefile.inc"
 .include "${.CURDIR}/gen/Makefile.inc"
@@ -80,9 +78,6 @@ CPPFLAGS+=	-D__BUILD_LEGACY
 .include "${.CURDIR}/net/Makefile.inc"
 .include "${.CURDIR}/nameser/Makefile.inc"
 .include "${.CURDIR}/nls/Makefile.inc"
-.if ${HAVE_LIBGCC} != "no" && ${MACHINE_ARCH} != "alpha" && ${ARCHSUBDIR} != "sparc64"
-.include "${.CURDIR}/quad/Makefile.inc"
-.endif
 .if (${USE_LIBTRE} == "yes")
 .include "${NETBSDSRCDIR}/external/bsd/tre/Makefile.inc"
 .else

@@ -1482,6 +1482,9 @@ clear_history(void)
 {
 	HistEvent ev;
 
+	if (h == NULL || e == NULL)
+		rl_initialize();
+
 	(void)history(h, &ev, H_CLEAR);
 	history_length = 0;
 }

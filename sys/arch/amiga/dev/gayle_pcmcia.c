@@ -209,6 +209,7 @@ pccard_attach(device_t parent, device_t self, void *aux)
 		*reset_card_reg = 0x0;
 		delay(1000);
 		x = *reset_card_reg;
+		__USE(x);
 		gayle_pcmcia_status_write(GAYLE_CCMEM_WP | GAYLE_CCIO_SPKR);
 	}
 

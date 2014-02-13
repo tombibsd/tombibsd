@@ -90,6 +90,8 @@
 #include <powerpc/oea/bat.h>
 #include <powerpc/oea/pte.h>
 
+__RCSID("$NetBSD$");
+
 void
 _kvm_freevtop(kvm_t *kd)
 {

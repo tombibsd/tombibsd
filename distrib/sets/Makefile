@@ -15,11 +15,8 @@ all:
 .include <bsd.own.mk>
 .include "${NETBSDSRCDIR}/distrib/common/Makefile.distrib"
 
-.if ${USE_PIGZGZIP} != "no"
-COMPRESS_PROGRAM=${TOOL_PIGZ:Q}
-.else
-COMPRESS_PROGRAM=gzip
-.endif
+COMPRESS_PROGRAM=${TOOL_GZIP}
+GZIP_FLAGS= -n
 
 SETSENV=	DESTDIR=${DESTDIR:Q} \
 		MACHINE=${MACHINE:Q} \
@@ -33,6 +30,7 @@ SETSENV=	DESTDIR=${DESTDIR:Q} \
 		MTREE=${TOOL_MTREE:Q} \
 		PAX=${TOOL_PAX:Q} \
 		COMPRESS_PROGRAM=${COMPRESS_PROGRAM:Q} \
+		GZIP=${GZIP_FLAGS:Q} \
 		PKG_CREATE=${TOOL_PKG_CREATE:Q} \
 		SED=${TOOL_SED:Q} \
 		TSORT=${TSORT:Q}
@@ -101,18 +99,24 @@ list_set_files_base list_set_files_x list_set_files_ext \
 # MKUNPRIVED flag.
 #
 # The sanitise_METALOG target creates METALOG.sanitised from METALOG,
-# without modifying METALOG itself.  METALOG.sanitised is sorted, and
-# has duplicates merged.  This is used near the end of a build, after
-# build products have been installed in DESTDIR and corresponding lines
-# have been added to METALOG, but before METALOG.sanitised is used in
-# the creation of sets in RELEASEDIR.
+# without modifying METALOG itself.  This is used near the end of
+# a build, after build products have been installed in DESTDIR
+# and corresponding lines have been added to METALOG, but before
+# METALOG.sanitised is used in the creation of sets in RELEASEDIR.
+# For update builds, METALOG.sanitised has duplicates merged (keeping
+# only the last of multiple entries for the same item), but for clean
+# builds it's an error if a file or directory name appears twice.
+# METALOG.sanitised is always sorted and has timestamps removed.
 #
-# The clean_METALOG either deletes METALOG or replaces METALOG with
+# The clean_METALOG target either deletes METALOG, or replaces METALOG with
 # a sanitised version of itself, depending on the MKUPDATE flag, and
 # deletes old METALOG.* files.  This is intended to be used at the start
 # of a build, to ensure that repeated MKUPDATE builds do not cause
 # unbounded growth of METALOG.
 #
+
+METALOG_REMOVE_DUPLICATES= \
+	${TOOL_AWK} '{ a[$$1] = $$0; } END { for (f in a) print a[f]; }'
 
 .if ${MKUNPRIVED} == "no"
 METALOG.unpriv=
@@ -124,17 +128,10 @@ clean_METALOG: .PHONY
 METALOG.unpriv= -M ${METALOG}.sanitised
 sanitise_METALOG: .PHONY ${METALOG}.sanitised
 ${METALOG}.sanitised: ${METALOG}
-# We keep only the last entry for update builds, but for clean builds we
-# want to make sure we install files only once.
-.if ${MKUPDATE} != "no"
-	${TOOL_AWK} \
-	    '{ a[$$1] = $$0; } END { for (f in a) print a[f]; }' ${METALOG} | \
-	    sort | ${TOOL_MTREE} -CSM -k all -N ${NETBSDSRCDIR}/etc \
+	<${METALOG} \
+	    ${${MKUPDATE} != "no" :? ${METALOG_REMOVE_DUPLICATES} | :} \
+	    sort | ${TOOL_MTREE} -CSM -k all -R time -N ${NETBSDSRCDIR}/etc \
 	    >${METALOG}.new
-.else
-	    sort ${METALOG} | ${TOOL_MTREE} -CSM -k all -N ${NETBSDSRCDIR}/etc \
-	    >${METALOG}.new
-.endif
 	mv ${METALOG}.new ${METALOG}.sanitised
 .if defined(RCSMETALOG)
 	. ./metalog.subr; \

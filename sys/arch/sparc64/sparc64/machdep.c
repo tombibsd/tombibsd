@@ -2754,7 +2754,7 @@ sparc64_elf_mcmodel_check(struct exec_package *epp, const char *model,
 	if (epp->ep_flags & EXEC_32)
 		return;
 
-#ifdef __USING_TOPDOWN_VM
+#ifdef __USE_TOPDOWN_VM
 	/*
 	 * we allow TOPDOWN_VM for all processes where the binary is compiled
 	 * with the medany or medmid code model.

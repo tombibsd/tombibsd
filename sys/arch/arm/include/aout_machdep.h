@@ -32,8 +32,8 @@
  * SUCH DAMAGE.
  */
 
-#ifndef	_ARM32_AOUT_MACHDEP_H_
-#define	_ARM32_AOUT_MACHDEP_H_
+#ifndef	_ARM_AOUT_MACHDEP_H_
+#define	_ARM_AOUT_MACHDEP_H_
 
 #define	AOUT_LDPGSZ	4096
 
@@ -56,4 +56,4 @@ struct relocation_info_arm6 {
 /* No special executable format */
 #define	cpu_exec_aout_makecmds(a, b)	ENOEXEC
 
-#endif	/* _ARM32_AOUT_MACHDEP_H_ */
+#endif	/* _ARM_AOUT_MACHDEP_H_ */

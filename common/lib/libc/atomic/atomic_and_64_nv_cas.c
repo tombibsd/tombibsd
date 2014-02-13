@@ -50,6 +50,8 @@ atomic_and_64_nv(volatile uint64_t *addr, uint64_t val)
 
 #undef atomic_and_64_nv
 atomic_op_alias(atomic_and_64_nv,_atomic_and_64_nv)
+__strong_alias(__sync_and_and_fetch_8,_atomic_add_64_nv)
+
 #if defined(_LP64)
 #undef atomic_and_ulong_nv
 atomic_op_alias(atomic_and_ulong_nv,_atomic_and_64_nv)

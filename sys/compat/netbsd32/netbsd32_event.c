@@ -86,7 +86,7 @@ netbsd32_kevent_put_events(void *private, struct kevent *events,
 
 	for (i = 0, kev32 = events32; i < n; i++, kev32++, events++)
 		netbsd32_from_kevent(events, kev32);
-	kev32 = (struct netbsd32_kevent *)eventlist;
+	kev32 = ((struct netbsd32_kevent *)eventlist) + index;
 	return  copyout(events32, kev32, n * sizeof(*events32));
 }
 

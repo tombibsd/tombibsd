@@ -36,6 +36,9 @@
 #if defined(LIBC_SCCS) && !defined(lint)
 static const char sccsid[] = "@(#)strtol.c	8.1 (Berkeley) 6/4/93";
 #endif /* LIBC_SCCS and not lint */
+#else
+__RCSID("$NetBSD$");
+#endif
 
 #include <limits.h>
 #include <ctype.h>

@@ -129,11 +129,10 @@ linux_setregs(struct lwp *l, struct exec_package *epp, vaddr_t stack)
 	struct pcb *pcb = lwp_getpcb(l);
 	struct trapframe *tf;
 
-#if NNPX > 0
 	/* If we were using the FPU, forget about it. */
-	if (npxproc == l)
-		npxdrop();
-#endif
+	if (pcb->pcb_fpcpu != NULL)
+		fpusave_lwp(l, false);
+
 
 #ifdef USER_LDT
 	pmap_ldt_cleanup(l);

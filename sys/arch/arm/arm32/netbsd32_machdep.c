@@ -93,5 +93,5 @@ netbsd32_sysarch(struct lwp *l, const struct netbsd32_sysarch_args *uap,
 vaddr_t
 netbsd32_vm_default_addr(struct proc *p, vaddr_t base, vsize_t size)
 {
-	return VM_DEFAULT_ADDRESS(base, size);
+	return round_page((vaddr_t)(base) + (vsize_t)MAXDSIZ32);
 }

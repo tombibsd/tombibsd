@@ -31,8 +31,8 @@
  *	from: @(#)ansi.h	8.2 (Berkeley) 1/4/94
  */
 
-#ifndef	_ANSI_H_
-#define	_ANSI_H_
+#ifndef	_ARM_ANSI_H_
+#define	_ARM_ANSI_H_
 
 #include <sys/cdefs.h>
 
@@ -76,4 +76,4 @@
 #define	_BSD_WINT_T_		int		/* wint_t */
 #endif
 
-#endif	/* _ANSI_H_ */
+#endif	/* _ARM_ANSI_H_ */

@@ -52,7 +52,7 @@
 /if_rum.c/1.47/Thu Oct 24 10:28:58 2013/-kk/
 /if_rumreg.h/1.4/Mon Feb 21 23:50:42 2011/-kk/
 /if_rumvar.h/1.9/Mon Feb 21 23:50:42 2011/-kk/
-/if_run.c/1.9/Thu Oct 24 10:28:58 2013/-kk/
+/if_run.c/1.10/Thu Feb 13 15:22:32 2014/-kk/
 /if_runvar.h/1.1/Wed May 30 14:30:35 2012/-kk/
 /if_smsc.c/1.12/Mon Nov 11 15:21:40 2013/-kk/
 /if_smscreg.h/1.3/Thu Oct 24 10:28:58 2013/-kk/
@@ -80,9 +80,9 @@
 /irmce.c/1.1/Tue Jul 19 12:23:04 2011/-kk/
 /kue_fw.h/1.5/Mon Aug 16 09:52:11 2010/-kk/
 /moscom.c/1.8/Sun Sep 23 01:08:17 2012/-kk/
-/ohci.c/1.248/Wed Dec 25 07:37:43 2013/-kk/
-/ohcireg.h/1.23/Mon Apr 28 20:23:59 2008/-kk/
-/ohcivar.h/1.54/Thu Oct 24 10:28:58 2013/-kk/
+/ohci.c/1.249/Thu Feb 13 15:22:32 2014/-kk/
+/ohcireg.h/1.24/Thu Feb 13 15:22:32 2014/-kk/
+/ohcivar.h/1.55/Thu Feb 13 15:22:32 2014/-kk/
 /pseye.c/1.21/Tue May 24 16:42:31 2011/-kk/
 /slurm.c/1.1/Thu Oct 24 10:28:58 2013/-kk/
 /stuirda.c/1.15/Tue Jun 12 20:25:58 2012/-kk/
@@ -148,7 +148,7 @@
 /umodem.c/1.65/Wed Oct  3 07:07:04 2012/-kk/
 /umodem_common.c/1.22/Wed Nov  3 22:34:24 2010/-kk/
 /umodemvar.h/1.8/Wed Nov  3 22:34:24 2010/-kk/
-/ums.c/1.86/Thu Oct 24 10:28:58 2013/-kk/
+/ums.c/1.87/Thu Feb 13 15:22:32 2014/-kk/
 /uplcom.c/1.73/Fri Dec 23 00:51:48 2011/-kk/
 /urio.c/1.40/Thu Dec 27 16:42:32 2012/-kk/
 /urio.h/1.3/Mon Apr 28 20:24:00 2008/-kk/
@@ -184,7 +184,7 @@
 /utoppy.c/1.22/Thu Oct 24 10:28:58 2013/-kk/
 /utoppy.h/1.2/Mon Apr 28 20:24:01 2008/-kk/
 /uts.c/1.3/Thu Oct 24 10:28:58 2013/-kk/
-/uvideo.c/1.39/Thu Oct 24 10:28:58 2013/-kk/
+/uvideo.c/1.40/Thu Feb 13 15:22:32 2014/-kk/
 /uvideoreg.h/1.4/Fri Dec 23 00:51:49 2011/-kk/
 /uvisor.c/1.45/Fri Dec 23 00:51:49 2011/-kk/
 /uvscom.c/1.28/Fri Feb 24 06:48:28 2012/-kk/

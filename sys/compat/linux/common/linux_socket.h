@@ -78,8 +78,8 @@
 #define LINUX_SOL_IP		0
 #define LINUX_SOL_TCP		6
 #define LINUX_SOL_UDP		17
-/* Unused for now: */
 #define LINUX_SOL_IPV6		41
+/* Unused for now: */
 #define LINUX_SOL_ICMPV6	58
 #define LINUX_SOL_RAW		255
 #define LINUX_SOL_IPX		256
@@ -109,6 +109,12 @@
 #define	LINUX_IP_MULTICAST_LOOP	34
 #define	LINUX_IP_ADD_MEMBERSHIP	35
 #define	LINUX_IP_DROP_MEMBERSHIP 36
+
+/*
+ * Options for [gs]etsockopt(2), IPV6 level.
+ */
+
+#define LINUX_IPV6_V6ONLY		26
 
 /*
  * Options for [gs]etsockopt(2), TCP level.

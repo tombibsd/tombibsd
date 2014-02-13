@@ -1364,11 +1364,9 @@ cmalo_cmd_rsp_scan(struct malo_softc *sc)
 	struct malo_cmd_header *hdr = (struct malo_cmd_header *)sc->sc_cmd;
 	struct malo_cmd_body_rsp_scan *body;
 	struct malo_cmd_body_rsp_scan_set *set;
-	uint16_t psize;
 	int i;
 
 	memset(sc->sc_net, 0, sizeof(sc->sc_net));
-	psize = sizeof(*hdr) + sizeof(*body);
 
 	body = (struct malo_cmd_body_rsp_scan *)(hdr + 1);
 	body->bufsize = le16toh(body->bufsize);

@@ -509,6 +509,8 @@ ptsstop(struct tty *tp, int flush)
 	KASSERT(mutex_owned(&tty_lock));
 
 	/* note: FLUSHREAD and FLUSHWRITE already ok */
+	CTASSERT(TIOCPKT_FLUSHREAD == FREAD);
+	CTASSERT(TIOCPKT_FLUSHWRITE == FWRITE);
 	if (flush == 0) {
 		flush = TIOCPKT_STOP;
 		pti->pt_flags |= PF_STOPPED;

@@ -49,11 +49,10 @@ fileread(const char *fname, size_t *size)
 	struct ux_partition *partition = vtoc->partition;
 	struct bfs_inode *inode = (void *)SDBOOT_INODEADDR;
 	struct bfs_dirent *dirent = (void *)SDBOOT_DIRENTADDR;
-	int i, n, err, block_size, bfs_sector;
+	int i, n, err, bfs_sector;
 
 	if (pdinfo->magic != PDINFO_MAGIC)
 		return BERR_PDINFO;
-	block_size = pdinfo->geometory.bytes_per_sector;
 
 #if 0
 {

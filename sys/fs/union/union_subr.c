@@ -934,6 +934,7 @@ union_vn_create(struct vnode **vpp, struct union_node *un, struct lwp *l)
 	if (error)
 		return error;
 
+	vn_lock(vp, LK_EXCLUSIVE | LK_RETRY);
 	error = VOP_OPEN(vp, fmode, cred);
 	if (error) {
 		vput(vp);

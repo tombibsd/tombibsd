@@ -216,6 +216,7 @@ lepcnet_reset(struct lance_softc *sc)
 	volatile int dummy;
 
 	dummy = ler1->ler1_reset;	/* Reset PCNet-ISA */
+	__USE(dummy);
 }
 
 void

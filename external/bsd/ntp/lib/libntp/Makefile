@@ -77,7 +77,7 @@ ymd2yd.c
 
 CPPFLAGS+= -I${IDIST}/sntp/libopts
 
-.if defined(HAVE_GCC) && ${HAVE_GCC} >= 45
+.if !defined(HAVE_GCC) || ${HAVE_GCC} >= 45
 COPTS.msyslog.c+=	-Wno-error=format-nonliteral
 .endif
 
@@ -89,9 +89,9 @@ COPTS.msyslog.c+=	-Wno-error=format-nonliteral
 #
 .if ${MKREPRO} == "yes"
 IMPORTDATE_FILE := ${.PARSEDIR}/../../importdate
-MKREPRO_DATE != ${TOOL_AWK} '{printf "%3s %2d %4d", $2, $3, $6}' \
+MKREPRO_DATE != ${TOOL_AWK} '{printf "%3s %2d %4d", $$2, $$3, $$6}' \
 	<${IMPORTDATE_FILE} # "Mmm DD YYYY"
-MKREPRO_TIME != ${TOOL_AWK} '{print $4}' \
+MKREPRO_TIME != ${TOOL_AWK} '{print $$4}' \
 	<${IMPORTDATE_FILE} # "HH:MM:SS"
 CPPFLAGS.ntp_calendar.c += -DMKREPRO_DATE=\"${MKREPRO_DATE:Q}\"
 CPPFLAGS.ntp_calendar.c += -DMKREPRO_TIME=\"${MKREPRO_TIME:Q}\"

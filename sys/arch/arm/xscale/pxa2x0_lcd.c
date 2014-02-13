@@ -475,8 +475,6 @@ int
 pxa2x0_lcd_new_screen(struct pxa2x0_lcd_softc *sc, int depth,
      struct pxa2x0_lcd_screen **scrpp)
 {
-	bus_space_tag_t iot;
-	bus_space_handle_t ioh;
 	bus_dma_tag_t dma_tag;
 	const struct lcd_panel_geometry *geometry;
 	struct pxa2x0_lcd_screen *scr = NULL;
@@ -487,8 +485,6 @@ pxa2x0_lcd_new_screen(struct pxa2x0_lcd_softc *sc, int depth,
 	struct lcd_dma_descriptor *desc;
 	paddr_t buf_pa, desc_pa;
 
-	iot = sc->iot;
-	ioh = sc->ioh;
 	dma_tag = sc->dma_tag;
 	geometry = sc->geometry;
 

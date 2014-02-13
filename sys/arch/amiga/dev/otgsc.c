@@ -285,6 +285,7 @@ otgsc_intr(void *arg)
 	if ((*dev->sci_csr & SCI_CSR_INT) == 0)
 		return (1);
 	stat = *dev->sci_iack;
+	__USE(stat);
 	*dev->sci_mode = 0;
 	return (1);
 }

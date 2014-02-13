@@ -1872,7 +1872,7 @@ do_varshm()
 	[ -f "${DEST_DIR}/etc/fstab" ] || return 0
 	if ${GREP} -w "/var/shm" "${DEST_DIR}/etc/fstab" >/dev/null 2>&1;
 	then
-		failed = 0;
+		failed=0;
 	else
 		if [ "${op}" = "check" ]; then
 			failed=1

@@ -43,8 +43,8 @@
  * Created      : 30/09/94
  */
 
-#ifndef _ARM32_SIGNAL_H_
-#define _ARM32_SIGNAL_H_
+#ifndef _ARM_SIGNAL_H_
+#define _ARM_SIGNAL_H_
 
 #include <sys/featuretest.h>
 

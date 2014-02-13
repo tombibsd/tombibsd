@@ -859,6 +859,18 @@ ohci_init(ohci_softc_t *sc)
 	per = OHCI_PERIODIC(ival); /* 90% periodic */
 	OWRITE4(sc, OHCI_PERIODIC_START, per);
 
+	if (sc->sc_flags & OHCIF_SUPERIO) {
+		/* no overcurrent protection */
+		desca |= OHCI_NOCP;
+		/*
+		 * Clear NoPowerSwitching and PowerOnToPowerGoodTime meaning
+		 * that
+		 *  - ports are always power switched
+		 *  - don't wait for powered root hub port
+		 */
+		desca &= ~(__SHIFTIN(0xff, OHCI_POTPGT_MASK) | OHCI_NPS);
+	}
+
 	/* Fiddle the No OverCurrent Protection bit to avoid chip bug. */
 	OWRITE4(sc, OHCI_RH_DESCRIPTOR_A, desca | OHCI_NOCP);
 	OWRITE4(sc, OHCI_RH_STATUS, OHCI_LPSC); /* Enable port power */

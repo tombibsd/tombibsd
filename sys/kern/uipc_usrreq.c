@@ -967,6 +967,7 @@ unp_bind(struct socket *so, struct mbuf *nam, struct lwp *l)
 		goto bad;
 	}
 	vp = nd.ni_vp;
+	vn_lock(vp, LK_EXCLUSIVE | LK_RETRY);
 	solock(so);
 	vp->v_socket = unp->unp_socket;
 	unp->unp_vnode = vp;

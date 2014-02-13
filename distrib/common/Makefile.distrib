@@ -29,7 +29,4 @@ DISTRIBVERDEP=	${NETBSDSRCDIR}/sys/sys/param.h \
 MAKESUMS=	MAKE=${MAKE:Q} CKSUM=${TOOL_CKSUM:Q} ${HOST_SH} ${DISTRIBDIR}/sets/makesums
 RELEASE_INSTALL=${INSTALL} ${RENAME} ${PRESERVE} ${COPY} -m ${NONBINMODE}
 
-.include <bsd.files.mk>
-
-
 .endif	# _MAKEFILE_DISTRIB_
