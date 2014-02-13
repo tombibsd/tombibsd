@@ -522,10 +522,8 @@ END(PutChar)
 LEAF(switch_stack_and_call)
     /* Get a stack and jump. It would be a very bad idea to return but..
      */
-#ifdef __GP_SUPPORT__
-    la      gp, _C_LABEL (_gp)
-#endif
-    la    sp,_end
+    lui   sp,%hi(_end)
+    addiu sp,%lo(_end)
     jr    a1
 	addiu sp,sp,(2*1024)          /* BUGBUG arbitrary */
 

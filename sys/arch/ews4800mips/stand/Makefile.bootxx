@@ -54,7 +54,7 @@ ${PROG}: ${OBJS} ${LIBS}
 	ls -al ${PROG}
 #	-rm -f ${BASE}.tmp
 
-clean cleandir distclean: .WAIT cleanlibdir
+cleandir distclean: .WAIT cleanlibdir
 
 cleanlibdir:
 	-rm -rf lib

@@ -110,12 +110,8 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/cpu.h>
 #include <sys/file.h>
 #include <sys/proc.h>
-#include <sys/ioctl.h>
-#include <sys/device.h>
-#include <sys/vmmeter.h>
 #include <sys/kernel.h>
 
-#include <sys/bus.h>
 #include <machine/cpu.h>
 #include <machine/intr.h>
 #include <machine/cpufunc.h>
@@ -123,11 +119,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <machine/trap.h>
 #include <machine/specialreg.h>
 #include <machine/fpu.h>
-
-#ifndef XEN
-#include <dev/isa/isareg.h>
-#include <dev/isa/isavar.h>
-#endif
 
 #ifdef XEN
 #define clts() HYPERVISOR_fpu_taskswitch(0)
@@ -153,7 +144,83 @@ __KERNEL_RCSID(0, "$NetBSD$");
  */
 
 void		fpudna(struct cpu_info *);
-static int	x86fpflags_to_ksiginfo(uint32_t);
+
+/* 
+ * The following table is used to ensure that the FPE_... value
+ * that is passed as a trapcode to the signal handler of the user
+ * process does not have more than one bit set.
+ * 
+ * Multiple bits may be set if SSE simd instructions generate errors
+ * on more than one value or if the user process modifies the control
+ * word while a status word bit is already set (which this is a sign
+ * of bad coding).
+ * We have no choise than to narrow them down to one bit, since we must
+ * not send a trapcode that is not exactly one of the FPE_ macros.
+ *
+ * The mechanism has a static table with 127 entries.  Each combination
+ * of the 7 FPU status word exception bits directly translates to a
+ * position in this table, where a single FPE_... value is stored.
+ * This FPE_... value stored there is considered the "most important"
+ * of the exception bits and will be sent as the signal code.  The
+ * precedence of the bits is based upon Intel Document "Numerical
+ * Applications", Chapter "Special Computational Situations".
+ *
+ * The code to choose one of these values does these steps:
+ * 1) Throw away status word bits that cannot be masked.
+ * 2) Throw away the bits currently masked in the control word,
+ *    assuming the user isn't interested in them anymore.
+ * 3) Reinsert status word bit 7 (stack fault) if it is set, which
+ *    cannot be masked but must be presered.
+ *    'Stack fault' is a sub-class of 'invalid operation'.
+ * 4) Use the remaining bits to point into the trapcode table.
+ *
+ * The 6 maskable bits in order of their preference, as stated in the
+ * above referenced Intel manual:
+ * 1  Invalid operation (FP_X_INV)
+ * 1a   Stack underflow
+ * 1b   Stack overflow
+ * 1c   Operand of unsupported format
+ * 1d   SNaN operand.
+ * 2  QNaN operand (not an exception, irrelavant here)
+ * 3  Any other invalid-operation not mentioned above or zero divide
+ *      (FP_X_INV, FP_X_DZ)
+ * 4  Denormal operand (FP_X_DNML)
+ * 5  Numeric over/underflow (FP_X_OFL, FP_X_UFL)
+ * 6  Inexact result (FP_X_IMP) 
+ *
+ * NB: the above seems to mix up the mxscr error bits and the x87 ones.
+ * They are in the same order, but there is no EN_SW_STACK_FAULT in the mmx
+ * status.
+ *
+ * The table is nearly, but not quite, in bit order (ZERODIV and DENORM
+ * are swapped).
+ *
+ * This table assumes that any stack fault is cleared - so that an INVOP
+ * fault will only be reported as FLTSUB once.
+ * This might not happen if the mask is being changed.
+ */
+#define FPE_xxx1(f) (f & EN_SW_INVOP \
+		? (f & EN_SW_STACK_FAULT ? FPE_FLTSUB : FPE_FLTINV) \
+	: f & EN_SW_ZERODIV ? FPE_FLTDIV \
+	: f & EN_SW_DENORM ? FPE_FLTUND \
+	: f & EN_SW_OVERFLOW ? FPE_FLTOVF \
+	: f & EN_SW_UNDERFLOW ? FPE_FLTUND \
+	: f & EN_SW_PRECLOSS ? FPE_FLTRES \
+	: f & EN_SW_STACK_FAULT ? FPE_FLTSUB : 0)
+#define	FPE_xxx2(f)	FPE_xxx1(f),	FPE_xxx1((f + 1))
+#define	FPE_xxx4(f)	FPE_xxx2(f),	FPE_xxx2((f + 2))
+#define	FPE_xxx8(f)	FPE_xxx4(f),	FPE_xxx4((f + 4))
+#define	FPE_xxx16(f)	FPE_xxx8(f),	FPE_xxx8((f + 8))
+#define	FPE_xxx32(f)	FPE_xxx16(f),	FPE_xxx16((f + 16))
+static const uint8_t fpetable[128] = {
+	FPE_xxx32(0), FPE_xxx32(32), FPE_xxx32(64), FPE_xxx32(96)
+};
+#undef FPE_xxx1
+#undef FPE_xxx2
+#undef FPE_xxx4
+#undef FPE_xxx8
+#undef FPE_xxx16
+#undef FPE_xxx32
 
 /*
  * Init the FPU.
@@ -167,77 +234,76 @@ fpuinit(struct cpu_info *ci)
 }
 
 /*
- * Record the FPU state and reinitialize it all except for the control word.
- * Then generate a SIGFPE.
+ * This is a synchronous trap on either an x87 instruction (due to an
+ * unmasked error on the previous x87 instruction) or on an SSE/SSE2 etc
+ * instruction due to an error on the instruction itself.
  *
- * Reinitializing the state allows naive SIGFPE handlers to longjmp without
- * doing any fixups.
+ * If trap actually generates a signal, then the fpu state is saved
+ * and then copied onto the process's user-stack, and then recovered
+ * from there when the signal returns (or from the jmp_buf if the
+ * signal handler exits with a longjmp()).
+ *
+ * All this code need to do is save the reason for the trap.
+ * For x87 interrupts the status word bits need clearing to stop the
+ * trap re-occurring.
+ *
+ * The mxcsr bits are 'sticky' and need clearing to not confuse a later trap.
+ *
+ * Since this is a synchronous trap, the fpu registers must still belong
+ * to the correct process (we trap through an interrupt gate so that
+ * interrupts are disabled on entry).
+ * Interrupts (these better include IPIs) are left disabled until we've
+ * finished looking at fpu registers.
+ *
+ * For amd64 the calling code (in amd64_trap.S) has already checked
+ * that we trapped from usermode.
  */
 
 void
 fputrap(struct trapframe *frame)
 {
-	struct lwp *l = curlwp;
-	struct pcb *pcb = lwp_getpcb(l);
-	struct savefpu *sfp = &pcb->pcb_savefpu;
-	uint32_t mxcsr, statbits;
+	uint32_t statbits;
 	ksiginfo_t ksi;
-
-	KPREEMPT_DISABLE(l);
-	x86_enable_intr();
 
 	/*
 	 * At this point, fpcurlwp should be curlwp.  If it wasn't, the TS bit
 	 * should be set, and we should have gotten a DNA exception.
 	 */
-	KASSERT(l == curlwp);
-	fxsave(sfp);
+	KASSERT(curcpu()->ci_fpcurlwp == curlwp);
 
 	if (frame->tf_trapno == T_XMM) {
-		mxcsr = sfp->fp_fxsave.fx_mxcsr;
+		uint32_t mxcsr;
+		x86_stmxcsr(&mxcsr);
 		statbits = mxcsr;
+		/* Clear the sticky status bits */
 		mxcsr &= ~0x3f;
 		x86_ldmxcsr(&mxcsr);
-	} else {
-		uint16_t cw;
 
-		fninit();
-		fwait();
-		cw = sfp->fp_fxsave.fx_fcw;
-		fldcw(&cw);
-		fwait();
-		statbits = sfp->fp_fxsave.fx_fsw;
+		/* Remove masked interrupts and non-status bits */
+		statbits &= ~(statbits >> 7) & 0x3f;
+		/* Mark this is an XMM status */
+		statbits |= 0x10000;
+	} else {
+		uint16_t cw, sw;
+		/* Get current control and status words */
+		fnstcw(&cw);
+		fnstsw(&sw);
+		/* Clear any pending exceptions from status word */
+		fnclex();
+
+		/* Removed masked interrupts */
+		statbits = sw & ~(cw & 0x3f);
 	}
-	KPREEMPT_ENABLE(l);
+
+	/* Doesn't matter now if we get pre-empted */
+	x86_enable_intr();
 
 	KSI_INIT_TRAP(&ksi);
 	ksi.ksi_signo = SIGFPE;
 	ksi.ksi_addr = (void *)frame->tf_rip;
-	ksi.ksi_code = x86fpflags_to_ksiginfo(statbits);
+	ksi.ksi_code = fpetable[statbits & 0x7f];
 	ksi.ksi_trap = statbits;
-	(*l->l_proc->p_emul->e_trapsignal)(l, &ksi);
-}
-
-static int
-x86fpflags_to_ksiginfo(uint32_t flags)
-{
-	static int x86fp_ksiginfo_table[] = {
-		FPE_FLTINV, /* bit 0 - invalid operation */
-		FPE_FLTRES, /* bit 1 - denormal operand */
-		FPE_FLTDIV, /* bit 2 - divide by zero	*/
-		FPE_FLTOVF, /* bit 3 - fp overflow	*/
-		FPE_FLTUND, /* bit 4 - fp underflow	*/
-		FPE_FLTRES, /* bit 5 - fp precision	*/
-		FPE_FLTINV, /* bit 6 - stack fault	*/
-	};
-
-	for (u_int i = 0; i < __arraycount(x86fp_ksiginfo_table); i++) {
-		if (flags & (1U << i))
-			return x86fp_ksiginfo_table[i];
-	}
-
-	/* Punt if flags not set. */
-	return FPE_FLTINV;
+	(*curlwp->l_proc->p_emul->e_trapsignal)(curlwp, &ksi);
 }
 
 /*
@@ -255,12 +321,6 @@ fpudna(struct cpu_info *ci)
 	struct lwp *l, *fl;
 	struct pcb *pcb;
 	int s;
-
-	if (ci->ci_fpsaving) {
-		/* Recursive trap. */
-		x86_enable_intr();
-		return;
-	}
 
 	/* Lock out IPIs and disable preemption. */
 	s = splhigh();
@@ -306,9 +366,9 @@ fpudna(struct cpu_info *ci)
 	pcb->pcb_fpcpu = ci;
 	if ((l->l_md.md_flags & MDL_USEDFPU) == 0) {
 		fninit();
-		cw = pcb->pcb_savefpu.fp_fxsave.fx_fcw;
+		cw = pcb->pcb_savefpu.sv_xmm.fx_cw;
 		fldcw(&cw);
-		mxcsr = pcb->pcb_savefpu.fp_fxsave.fx_mxcsr;
+		mxcsr = pcb->pcb_savefpu.sv_xmm.fx_mxcsr;
 		x86_ldmxcsr(&mxcsr);
 		l->l_md.md_flags |= MDL_USEDFPU;
 	} else {
@@ -318,7 +378,7 @@ fpudna(struct cpu_info *ci)
 		 * manually.
 		 */
 		static const double zero = 0.0;
-		int status;
+		uint16_t status;
 
 		/*
 		 * Clear the ES bit in the x87 status word if it is currently
@@ -361,16 +421,8 @@ fpusave_cpu(bool save)
 	pcb = lwp_getpcb(l);
 
 	if (save) {
-		 /*
-		  * Set ci->ci_fpsaving, so that any pending exception will
-		  * be thrown away.  It will be caught again if/when the
-		  * FPU state is restored.
-		  */
-		KASSERT(ci->ci_fpsaving == 0);
 		clts();
-		ci->ci_fpsaving = 1;
 		fxsave(&pcb->pcb_savefpu);
-		ci->ci_fpsaving = 0;
 	}
 
 	stts();

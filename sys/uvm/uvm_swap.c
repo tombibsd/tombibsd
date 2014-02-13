@@ -237,8 +237,6 @@ static void		 swaplist_trim(void);
 static int swap_on(struct lwp *, struct swapdev *);
 static int swap_off(struct lwp *, struct swapdev *);
 
-static void uvm_swap_stats(int, struct swapent *, int, register_t *);
-
 static void sw_reg_strategy(struct swapdev *, struct buf *, int);
 static void sw_reg_biodone(struct buf *);
 static void sw_reg_iodone(struct work *wk, void *dummy);
@@ -733,7 +731,7 @@ out:
  * is not known at build time. Hence it would not be possible to
  * ensure it would fit in the stackgap in any case.
  */
-static void
+void
 uvm_swap_stats(int cmd, struct swapent *sep, int sec, register_t *retval)
 {
 	struct swappri *spp;

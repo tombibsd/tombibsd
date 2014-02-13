@@ -150,7 +150,7 @@ saioopen(struct open_file *f, ...)
 	int i;
 	char *msg;
 	char buf[DEV_BSIZE];
-	int cnt;
+	size_t cnt;
 	static char device[] = "dksd(0,0,10)";
 
 	va_list ap;

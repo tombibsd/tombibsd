@@ -1,7 +1,7 @@
 /*	$NetBSD$	*/
 
 /*-
- * Copyright (c) 2010-2013 The NetBSD Foundation, Inc.
+ * Copyright (c) 2010-2014 The NetBSD Foundation, Inc.
  * All rights reserved.
  *
  * This material is based upon work partially supported by The
@@ -874,6 +874,16 @@ npf_nat_gettype(nl_nat_t *nt)
 	return type;
 }
 
+u_int
+npf_nat_getflags(nl_nat_t *nt)
+{
+	prop_dictionary_t rldict = nt->nrl_dict;
+	unsigned flags = 0;
+
+	prop_dictionary_get_uint32(rldict, "flags", &flags);
+	return flags;
+}
+
 void
 npf_nat_getmap(nl_nat_t *nt, npf_addr_t *addr, size_t *alen, in_port_t *port)
 {
@@ -961,8 +971,22 @@ npf_table_add_entry(nl_table_t *tl, int af, const npf_addr_t *addr,
 	return 0;
 }
 
-bool
-npf_table_exists_p(nl_config_t *ncf, const char *name)
+int
+npf_table_setdata(nl_table_t *tl, const void *blob, size_t len)
+{
+	prop_dictionary_t tldict = tl->ntl_dict;
+	prop_data_t bobj;
+
+	if ((bobj = prop_data_create_data(blob, len)) == NULL) {
+		return ENOMEM;
+	}
+	prop_dictionary_set(tldict, "data", bobj);
+	prop_object_release(bobj);
+	return 0;
+}
+
+static bool
+_npf_table_exists_p(nl_config_t *ncf, const char *name)
 {
 	prop_dictionary_t tldict;
 	prop_object_iterator_t it;
@@ -988,7 +1012,7 @@ npf_table_insert(nl_config_t *ncf, nl_table_t *tl)
 	if (!prop_dictionary_get_cstring_nocopy(tldict, "name", &name)) {
 		return EINVAL;
 	}
-	if (npf_table_exists_p(ncf, name)) {
+	if (_npf_table_exists_p(ncf, name)) {
 		return EEXIST;
 	}
 	prop_array_add(ncf->ncf_table_list, tldict);

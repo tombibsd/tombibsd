@@ -1059,7 +1059,8 @@ mvgbe_start(struct ifnet *ifp)
 		 * for the NIC to drain the ring.
 		 */
 		if (mvgbe_encap(sc, m_head, &idx)) {
-			ifp->if_flags |= IFF_OACTIVE;
+			if (sc->sc_cdata.mvgbe_tx_cnt > 0)
+				ifp->if_flags |= IFF_OACTIVE;
 			break;
 		}
 

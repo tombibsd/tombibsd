@@ -272,7 +272,6 @@ static int
 tmpfs_vget(struct mount *mp, ino_t ino, vnode_t **vpp)
 {
 
-	printf("tmpfs_vget called; need for it unknown yet\n");
 	return EOPNOTSUPP;
 }
 

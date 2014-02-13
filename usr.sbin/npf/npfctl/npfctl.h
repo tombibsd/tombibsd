@@ -112,7 +112,7 @@ void		npfctl_parse_string(const char *);
 void		npfctl_print_error(const nl_error_t *);
 char *		npfctl_print_addrmask(int, const npf_addr_t *, npf_netmask_t);
 void		npfctl_note_interface(const char *);
-bool		npfctl_table_exists_p(const char *);
+unsigned	npfctl_table_getid(const char *);
 int		npfctl_protono(const char *);
 in_port_t	npfctl_portno(const char *);
 uint8_t		npfctl_icmpcode(int, uint8_t, const char *);

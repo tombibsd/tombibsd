@@ -47,7 +47,8 @@
 /*
  * Alpha specific ELF defines.
  */
-#define LINUX_ELF_AUX_ARGSIZ howmany(sizeof(Aux64Info) * LINUX_ELF_AUX_ENTRIES, sizeof(char *))
+#define LINUX_ELF_AUX_ARGSIZ \
+	(howmany(sizeof(Aux64Info) * LINUX_ELF_AUX_ENTRIES, sizeof(char *)) + LINUX_RANDOM_BYTES)
 
 #define linux_exec_setup_stack	exec_setup_stack
 

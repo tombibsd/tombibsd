@@ -504,6 +504,10 @@ ENTRY(xrstor)
 	xrstor	(%rdi)
 	ret
 
+ENTRY(x86_stmxcsr)
+	stmxcsr	(%rdi)
+	ret
+
 ENTRY(x86_ldmxcsr)
 	ldmxcsr	(%rdi)
 	ret

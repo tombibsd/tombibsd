@@ -468,7 +468,7 @@ kernfs_xwrite(const struct kernfs_node *kfs, char *bf, size_t len)
 int
 kernfs_lookup(void *v)
 {
-	struct vop_lookup_args /* {
+	struct vop_lookup_v2_args /* {
 		struct vnode * a_dvp;
 		struct vnode ** a_vpp;
 		struct componentname * a_cnp;
@@ -520,7 +520,10 @@ kernfs_lookup(void *v)
 
 	found:
 		error = kernfs_allocvp(dvp->v_mount, vpp, kt->kt_tag, kt, 0);
-		return (error);
+		if (error)
+			return error;
+		VOP_UNLOCK(*vpp);
+		return 0;
 
 	case KFSsubdir:
 		ks = (struct kernfs_subdir *)kfs->kfs_kt->kt_data;

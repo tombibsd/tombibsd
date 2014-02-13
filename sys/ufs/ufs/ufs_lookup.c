@@ -112,7 +112,7 @@ int	dirchk = 0;
 int
 ufs_lookup(void *v)
 {
-	struct vop_lookup_args /* {
+	struct vop_lookup_v2_args /* {
 		struct vnode *a_dvp;
 		struct vnode **a_vpp;
 		struct componentname *a_cnp;
@@ -684,6 +684,8 @@ found:
 	error = 0;
 
 out:
+	if (error == 0 && *vpp != vdp)
+		VOP_UNLOCK(*vpp);
 	fstrans_done(vdp->v_mount);
 	return error;
 }

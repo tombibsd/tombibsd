@@ -163,10 +163,8 @@ IDTVEC(trap07)
 	movl	CPUVAR(ILEVEL),%ebx
 #endif
 	pushl	CPUVAR(SELF)
-	call	*_C_LABEL(npxdna_func)
+	call	_C_LABEL(fpudna)
 	addl	$4,%esp
-	testl	%eax,%eax
-	jz	calltrap
 	jmp	_C_LABEL(trapreturn)
 IDTVEC_END(trap07)
 IDTVEC(trap08)

@@ -41,6 +41,7 @@
 #include <compat/linux/common/linux_siginfo.h>
 
 /* From <asm/sigcontext.h> */
+/* Matches the cpu's fxsave format */
 struct linux__fpstate {
 	u_int16_t cwd;
 	u_int16_t swd;
@@ -54,6 +55,7 @@ struct linux__fpstate {
 	u_int32_t xmm_space[64];
 	u_int32_t reserved2[24];
 };
+__CTASSERT(sizeof (struct linux__fpstate) == 512);
 
 /* From <asm/sigcontext.h> */
 struct linux_sigcontext {

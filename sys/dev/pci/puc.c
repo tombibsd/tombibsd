@@ -164,7 +164,7 @@ puc_attach(device_t parent, device_t self, void *aux)
 		printf(": unknown PCI communications device\n");
 		printf("%s: compile kernel with PUC_PRINT_REGS and larger\n",
 		    device_xname(self));
-		printf("%s: mesage buffer (via 'options MSGBUFSIZE=...'),\n",
+		printf("%s: message buffer (via 'options MSGBUFSIZE=...'),\n",
 		    device_xname(self));
 		printf("%s: and report the result with send-pr\n",
 		    device_xname(self));

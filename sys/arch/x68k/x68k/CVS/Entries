@@ -9,7 +9,7 @@
 /kgdb_glue.c/1.10/Wed Oct 17 19:58:04 2007/-kk/
 /kgdb_proto.h/1.3/Sun Dec 11 12:19:45 2005/-kk/
 /kgdb_stub.c/1.18/Fri Nov 27 03:23:15 2009/-kk/
-/locore.s/1.111/Tue Oct 29 08:27:19 2013/-kk/
+/locore.s/1.113/Thu Feb 13 15:35:57 2014/-kk/
 /machdep.c/1.187/Tue Oct 29 08:27:19 2013/-kk/
 /mainbus.c/1.5/Tue May 15 12:14:59 2012/-kk/
 /pmap_bootstrap.c/1.60/Tue Oct 29 08:27:19 2013/-kk/

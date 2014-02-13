@@ -43,7 +43,7 @@ main(void)
 	size_t buflen;
 	ssize_t len;
 
-	while ((len = getline(&line, &len, stdin)) > 0) {
+	while ((len = getline(&line, &buflen, stdin)) > 0) {
 		if (len && line[len - 1] == '\n')
 			--len;
 		printf("%" PRId32 "\n", hash(line, len));

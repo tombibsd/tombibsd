@@ -223,10 +223,15 @@ com_arbus_attach(device_t parent, device_t self, void *aux)
 void
 com_arbus_initmap(struct com_regs *regsp)
 {
+#if _BYTE_ORDER == _BIG_ENDIAN
+	int off = 3;
+#else
+	int off = 0;
+#endif;
 
 	/* rewrite the map to shift for alignment */
 	for (size_t i = 0; i < __arraycount(regsp->cr_map); i++) {
-		regsp->cr_map[i] = (com_std_map[i] * 4) + 3;
+		regsp->cr_map[i] = (com_std_map[i] * 4) + off;
 	}
 }
 

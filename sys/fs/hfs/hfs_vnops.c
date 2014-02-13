@@ -320,7 +320,7 @@ const struct vnodeopv_desc hfs_fifoop_opv_desc =
 int
 hfs_vop_lookup(void *v)
 {
-	struct vop_lookup_args /* {
+	struct vop_lookup_v2_args /* {
 		struct vnode * a_dvp;
 		struct vnode ** a_vpp;
 		struct componentname * a_cnp;
@@ -475,6 +475,8 @@ hfs_vop_lookup(void *v)
 	cache_enter(vdp, *vpp, cnp);
 #endif
 	
+	if (*vpp != vdp)
+		VOP_UNLOCK(*vpp);
 	error = 0;
 
 	/* FALLTHROUGH */

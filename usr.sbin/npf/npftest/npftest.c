@@ -15,12 +15,15 @@
 #include <fcntl.h>
 #include <err.h>
 
+#include <sys/mman.h>
 #include <sys/ioctl.h>
 #include <net/if.h>
 #include <arpa/inet.h>
 
 #include <rump/rump.h>
 #include <rump/rump_syscalls.h>
+
+#include <cdbw.h>
 
 #include "npftest.h"
 
@@ -121,13 +124,49 @@ load_npf_config(const char *config)
 	}
 }
 
-/*
- * Need to override for cprng_fast32(), since RUMP uses arc4random() for it.
- */
-uint32_t
-arc4random(void)
+static void *
+generate_test_cdb(size_t *size)
 {
-	return random();
+	in_addr_t addr;
+	struct cdbw *cdbw;
+	struct stat sb;
+	char sfn[32];
+	int alen, fd;
+	void *cdb;
+
+	if ((cdbw = cdbw_open()) == NULL) {
+		err(EXIT_FAILURE, "cdbw_open");
+	}
+	strlcpy(sfn, "/tmp/npftest_cdb.XXXXXX", sizeof(sfn));
+	if ((fd = mkstemp(sfn)) == -1) {
+		err(EXIT_FAILURE, "mkstemp");
+	}
+	unlink(sfn);
+
+	addr = inet_addr("192.168.1.1"), alen = sizeof(struct in_addr);
+	if (cdbw_put(cdbw, &addr, alen, &addr, alen) == -1)
+		err(EXIT_FAILURE, "cdbw_put");
+
+	addr = inet_addr("10.0.0.2"), alen = sizeof(struct in_addr);
+	if (cdbw_put(cdbw, &addr, alen, &addr, alen) == -1)
+		err(EXIT_FAILURE, "cdbw_put");
+
+	if (cdbw_output(cdbw, fd, "npf-table-cdb", NULL) == -1) {
+		err(EXIT_FAILURE, "cdbw_output");
+	}
+	cdbw_close(cdbw);
+
+	if (fstat(fd, &sb) == -1) {
+		err(EXIT_FAILURE, "fstat");
+	}
+	if ((cdb = mmap(NULL, sb.st_size, PROT_READ,
+	    MAP_FILE | MAP_PRIVATE, fd, 0)) == MAP_FAILED) {
+		err(EXIT_FAILURE, "mmap");
+	}
+	close(fd);
+
+	*size = sb.st_size;
+	return cdb;
 }
 
 int
@@ -216,7 +255,7 @@ main(int argc, char **argv)
 	rump_init();
 	rump_schedule();
 
-	rumpns_npf_test_init();
+	rumpns_npf_test_init(random);
 
 	if (config) {
 		load_npf_config(config);
@@ -242,9 +281,14 @@ main(int argc, char **argv)
 		}
 
 		if (!testname || strcmp("table", testname) == 0) {
-			ok = rumpns_npf_table_test(verbose);
+			void *cdb;
+			size_t len;
+
+			cdb = generate_test_cdb(&len);
+			ok = rumpns_npf_table_test(verbose, cdb, len);
 			fail |= result("table", ok);
 			tname_matched = true;
+			munmap(cdb, len);
 		}
 
 		if (!testname || strcmp("state", testname) == 0) {

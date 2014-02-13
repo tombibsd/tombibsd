@@ -613,7 +613,7 @@ nilfs_readdir(void *v)
 int
 nilfs_lookup(void *v)
 {
-	struct vop_lookup_args /* {
+	struct vop_lookup_v2_args /* {
 		struct vnode *a_dvp;
 		struct vnode **a_vpp;
 		struct componentname *a_cnp;
@@ -771,7 +771,11 @@ out:
 
 	DPRINTFIF(LOOKUP, error, ("nilfs_lookup returing error %d\n", error));
 
-	return error;
+	if (error)
+		return error;
+	if (*vpp != dvp)
+		VOP_UNLOCK(*vpp);
+	return 0;
 }
 
 /* --------------------------------------------------------------------- */

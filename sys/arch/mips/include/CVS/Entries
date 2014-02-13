@@ -29,7 +29,7 @@
 /endian_machdep.h/1.3/Thu Oct 24 10:28:57 2013/-kk/
 /float.h/1.17/Thu Oct 24 10:28:57 2013/-kk/
 /frame.h/1.9/Sun Feb 19 21:06:16 2012/-kk/
-/ieee.h/1.10/Thu Feb 13 15:22:19 2014/-kk/
+/ieee.h/1.11/Thu Feb 13 15:35:51 2014/-kk/
 /ieeefp.h/1.7/Mon Mar 19 22:24:07 2012/-kk/
 /int_const.h/1.4/Sat May 29 17:33:57 2010/-kk/
 /int_fmtio.h/1.5/Mon Dec 14 00:46:04 2009/-kk/
@@ -43,7 +43,7 @@
 /limits.h/1.25/Thu Oct 24 10:28:57 2013/-kk/
 /lock.h/1.18/Sun Feb 20 07:45:47 2011/-kk/
 /locore.h/1.93/Sun Feb 19 21:06:16 2012/-kk/
-/math.h/1.6/Thu Oct 24 10:28:57 2013/-kk/
+/math.h/1.7/Thu Feb 13 15:35:51 2014/-kk/
 /mcontext.h/1.20/Wed Sep 12 15:09:49 2012/-kk/
 /mips1_pte.h/1.19/Sun Feb 20 07:45:47 2011/-kk/
 /mips3_clock.h/1.5/Tue Jan  8 14:46:28 2008/-kk/

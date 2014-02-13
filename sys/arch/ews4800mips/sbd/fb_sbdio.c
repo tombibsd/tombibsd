@@ -294,12 +294,10 @@ _fb_ioctl(void *v, void *vs, u_long cmd, void *data, int flag, struct lwp *l)
 		fbinfo->cmsize = 256;
 		return 0;
 
-#if 1
 	case WSDISPLAYIO_LINEBYTES:
 		*(u_int *)data = ri->ri_stride;
 		return 0;
 
-#endif
 	case WSDISPLAYIO_GETCMAP:
 		if (ri->ri_flg == RI_FORCEMONO)
 			break;

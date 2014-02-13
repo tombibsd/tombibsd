@@ -697,8 +697,8 @@ try586:	/* Use the `cpuid' instruction. */
 	 * 2. Enable paging and the rest of it.
 	 */
 	movl	%cr0,%eax		# get control word
-					# enable paging & NPX emulation
-	orl	$(CR0_PE|CR0_PG|CR0_NE|CR0_TS|CR0_EM|CR0_MP|CR0_WP|CR0_AM),%eax
+					# enable paging & NPX
+	orl	$(CR0_PE|CR0_PG|CR0_NE|CR0_TS|CR0_MP|CR0_WP|CR0_AM),%eax
 	movl	%eax,%cr0		# and page NOW!
 
 	pushl	$begin			# jump to high mem

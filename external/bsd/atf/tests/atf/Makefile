@@ -10,9 +10,7 @@ TESTS_SUBDIRS=	atf-c \
 		test-programs
 
 .if !(${MKKYUA} != "no")
-TESTS_SUBDIRS+=	atf-config \
-		atf-report \
-		atf-run
+TESTS_SUBDIRS+=	tools
 .endif
 
 SRCDIR=		${NETBSDSRCDIR}/external/bsd/atf/dist

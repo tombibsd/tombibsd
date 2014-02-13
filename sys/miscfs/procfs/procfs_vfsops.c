@@ -199,8 +199,18 @@ procfs_unmount(struct mount *mp, int mntflags)
 int
 procfs_root(struct mount *mp, struct vnode **vpp)
 {
+	int error;
 
-	return (procfs_allocvp(mp, vpp, 0, PFSroot, -1, NULL));
+	error = procfs_allocvp(mp, vpp, 0, PFSroot, -1, NULL);
+	if (error == 0) {
+		error = vn_lock(*vpp, LK_EXCLUSIVE);
+		if (error != 0) {
+			vrele(*vpp);
+			*vpp = NULL;
+		}
+	}
+
+	return error;
 }
 
 /* ARGSUSED */

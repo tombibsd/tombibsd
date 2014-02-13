@@ -1,13 +1,13 @@
 /if_le.c/1.7/Thu Oct 24 10:28:57 2013/-kk/
 /lcd.c/1.7/Sat Nov 12 13:44:26 2011/-kk/
 /lunafb.c/1.30/Wed Jan  1 02:45:24 2014/-kk/
-/lunaws.c/1.27/Thu Oct 24 10:28:57 2013/-kk/
+/lunaws.c/1.28/Thu Feb 13 15:35:51 2014/-kk/
 /omrasops.c/1.16/Wed Jan  1 02:45:24 2014/-kk/
 /omrasopsvar.h/1.2/Wed Jan  1 02:45:24 2014/-kk/
-/sio.c/1.12/Thu Oct 24 10:28:57 2013/-kk/
+/sio.c/1.13/Thu Feb 13 15:35:51 2014/-kk/
 /sioreg.h/1.4/Wed Jul 27 14:17:54 2011/-kk/
-/siotty.c/1.38/Tue Jan 14 16:04:54 2014/-kk/
-/siovar.h/1.7/Wed Jan  1 02:45:24 2014/-kk/
+/siotty.c/1.39/Thu Feb 13 15:35:51 2014/-kk/
+/siovar.h/1.8/Thu Feb 13 15:35:51 2014/-kk/
 /spc.c/1.10/Thu Oct 24 10:28:57 2013/-kk/
 /timekeeper.c/1.13/Thu Oct 24 10:28:57 2013/-kk/
 /timekeeper.h/1.3/Thu Oct 24 10:28:57 2013/-kk/

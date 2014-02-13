@@ -43,6 +43,8 @@
 
 #define LINUX32_ELF_AUX_ENTRIES 14
 
+#define LINUX32_RANDOM_BYTES 16		/* 16 bytes for AT_RANDOM */
+
 #if 0
 
 /* Hardware platform identifier string */
@@ -75,7 +77,7 @@ struct linux32_extra_stack_data {
 #endif
 
 #define LINUX32_ELF_AUX_ARGSIZ \
-	(howmany(LINUX32_ELF_AUX_ENTRIES * sizeof(Aux32Info), sizeof(Elf32_Addr)))
+	(howmany(LINUX32_ELF_AUX_ENTRIES * sizeof(Aux32Info), sizeof(Elf32_Addr)) + LINUX32_RANDOM_BYTES)
 
 #ifdef _KERNEL
 int linux32_exec_setup_stack(struct lwp *, struct exec_package *);

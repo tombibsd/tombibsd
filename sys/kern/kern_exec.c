@@ -178,7 +178,11 @@ void	syscall(void);
 /* NetBSD emul struct */
 struct emul emul_netbsd = {
 	.e_name =		"netbsd",
+#ifdef EMUL_NATIVEROOT
+	.e_path =		EMUL_NATIVEROOT,
+#else
 	.e_path =		NULL,
+#endif
 #ifndef __HAVE_MINIMAL_EMUL
 	.e_flags =		EMUL_HAS_SYS___syscall,
 	.e_errno =		NULL,
@@ -904,7 +908,7 @@ execve_runproc(struct lwp *l, struct execve_data * restrict data,
 	KASSERT(no_local_exec_lock || rw_lock_held(&exec_lock));
 	KASSERT(data != NULL);
 	if (data == NULL)
-		return (EINVAL);
+		return EINVAL;
 
 	p = l->l_proc;
 	if (no_local_exec_lock)
@@ -1423,7 +1427,7 @@ execve_runproc(struct lwp *l, struct execve_data * restrict data,
 	pathbuf_destroy(data->ed_pathbuf);
 	PNBUF_PUT(data->ed_resolvedpathbuf);
 	DPRINTF(("%s finished\n", __func__));
-	return (EJUSTRETURN);
+	return EJUSTRETURN;
 
  exec_abort:
 	SDT_PROBE(proc,,,exec_failure, error, 0, 0, 0, 0);
@@ -1753,7 +1757,7 @@ exec_sigcode_map(struct proc *p, const struct emul *e)
 				printf("kernel mapping failed %d\n", error);
 				(*uobj->pgops->pgo_detach)(uobj);
 				mutex_exit(&sigobject_lock);
-				return (error);
+				return error;
 			}
 			memcpy((void *)va, e->e_sigcode, sz);
 #ifdef PMAP_NEED_PROCWR
@@ -1791,10 +1795,10 @@ exec_sigcode_map(struct proc *p, const struct emul *e)
 		    __func__, __LINE__, &p->p_vmspace->vm_map, round_page(sz),
 		    va, error));
 		(*uobj->pgops->pgo_detach)(uobj);
-		return (error);
+		return error;
 	}
 	p->p_sigctx.ps_sigcode = (void *)va;
-	return (0);
+	return 0;
 }
 
 /*
@@ -2061,7 +2065,7 @@ posix_spawn_fa_free(struct posix_spawn_file_actions *fa, size_t len)
 
 static int
 posix_spawn_fa_alloc(struct posix_spawn_file_actions **fap,
-    const struct posix_spawn_file_actions *ufa)
+    const struct posix_spawn_file_actions *ufa, rlim_t lim)
 {
 	struct posix_spawn_file_actions *fa;
 	struct posix_spawn_file_actions_entry *fae;
@@ -2074,6 +2078,11 @@ posix_spawn_fa_alloc(struct posix_spawn_file_actions **fap,
 	if (error || fa->len == 0) {
 		kmem_free(fa, sizeof(*fa));
 		return error;	/* 0 if not an error, and len == 0 */
+	}
+
+	if (fa->len > lim) {
+		kmem_free(fa, sizeof(*fa));
+		return EINVAL;
 	}
 
 	fa->size = fa->len;
@@ -2433,6 +2442,8 @@ sys_posix_spawn(struct lwp *l1, const struct sys_posix_spawn_args *uap,
 	struct posix_spawnattr *sa = NULL;
 	pid_t pid;
 	bool child_ok = false;
+	rlim_t max_fileactions;
+	proc_t *p = l1->l_proc;
 
 	error = check_posix_spawn(l1);
 	if (error) {
@@ -2442,7 +2453,10 @@ sys_posix_spawn(struct lwp *l1, const struct sys_posix_spawn_args *uap,
 
 	/* copy in file_actions struct */
 	if (SCARG(uap, file_actions) != NULL) {
-		error = posix_spawn_fa_alloc(&fa, SCARG(uap, file_actions));
+		max_fileactions = 2 * min(p->p_rlimit[RLIMIT_NOFILE].rlim_cur,
+		    maxfiles);
+		error = posix_spawn_fa_alloc(&fa, SCARG(uap, file_actions),
+		    max_fileactions);
 		if (error)
 			goto error_exit;
 	}

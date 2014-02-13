@@ -121,17 +121,15 @@ ATF_TC_HEAD(paths, tc)
 
 ATF_TC_BODY(paths, tc)
 {
-	const char *arch;
 	struct stat st;
 	uid_t uid;
 	mode_t m;
 	size_t i;
 	int fd;
 
-	arch = atf_config_get("atf_arch");
-
-	if (strcmp(arch, "sparc") == 0)
-		atf_tc_skip("PR port-sparc/45580");
+#if defined(__sparc__)
+	atf_tc_skip("PR port-sparc/45580");
+#endif
 
 	uid = getuid();
 

@@ -36,7 +36,12 @@ GENASSYM_CONF=	${AMD64}/amd64/genassym.cf
 DEFCOPTS=	-O2
 CPPFLAGS+=	-Damd64 -Dx86_64
 CFLAGS+=	-mcmodel=kernel
-CFLAGS+=	-mno-red-zone -mno-sse -mno-sse2 -mno-sse3
+# -mno-sse implies -mno-sse2 (etc), explicitly disable avx to be extra sure
+CFLAGS+=	-mno-red-zone -mno-mmx -mno-sse -mno-avx
+# make absolutely sure we don't get x87 registers used as well
+CFLAGS+=	-msoft-float
+# For gcc we might need this, but other compilers barf
+# CFLAGS+=	-mno-fp-ret-in-387
 
 ##
 ## (3) libkern and compat

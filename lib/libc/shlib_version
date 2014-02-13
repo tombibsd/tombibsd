@@ -40,4 +40,4 @@
 # - consolidate ownership with crt0.o and avoid common symbols
 # - redo stdin/stdout/stderr to not require copy relocations
 major=12
-minor=189
+minor=190

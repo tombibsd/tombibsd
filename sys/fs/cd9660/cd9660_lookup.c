@@ -94,7 +94,7 @@ struct	nchstats iso_nchstats;
 int
 cd9660_lookup(void *v)
 {
-	struct vop_lookup_args /* {
+	struct vop_lookup_v2_args /* {
 		struct vnode *a_dvp;
 		struct vnode **a_vpp;
 		struct componentname *a_cnp;
@@ -402,6 +402,9 @@ found:
 	 * Insert name into cache if appropriate.
 	 */
 	cache_enter(vdp, *vpp, cnp->cn_nameptr, cnp->cn_namelen, cnp->cn_flags);
+
+	if (*vpp != vdp)
+		VOP_UNLOCK(*vpp);
 	return 0;
 }
 

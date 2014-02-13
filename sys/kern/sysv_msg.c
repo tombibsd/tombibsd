@@ -249,7 +249,7 @@ msgrealloc(int newmsgmni, int newmsgseg)
 	}
 
 	/*
-	 * Copy all message queue identifiers, mesage headers and buffer
+	 * Copy all message queue identifiers, message headers and buffer
 	 * pools to the new memory location.
 	 */
 	for (msqid = 0; msqid < msginfo.msgmni; msqid++) {

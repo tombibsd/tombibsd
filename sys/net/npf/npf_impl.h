@@ -229,7 +229,7 @@ npf_table_t *	npf_tableset_getbyid(npf_tableset_t *, u_int);
 void		npf_tableset_reload(npf_tableset_t *, npf_tableset_t *);
 void		npf_tableset_syncdict(const npf_tableset_t *, prop_dictionary_t);
 
-npf_table_t *	npf_table_create(const char *, u_int, int, size_t);
+npf_table_t *	npf_table_create(const char *, u_int, int, void *, size_t);
 void		npf_table_destroy(npf_table_t *);
 
 int		npf_table_check(npf_tableset_t *, const char *, u_int, int);

@@ -111,7 +111,7 @@ int		npf_nat_insert(nl_config_t *, nl_nat_t *, pri_t);
 nl_table_t *	npf_table_create(const char *, u_int, int);
 int		npf_table_add_entry(nl_table_t *, int,
 		    const npf_addr_t *, const npf_netmask_t);
-bool		npf_table_exists_p(nl_config_t *, const char *);
+int		npf_table_setdata(nl_table_t *, const void *, size_t);
 int		npf_table_insert(nl_config_t *, nl_table_t *);
 void		npf_table_destroy(nl_table_t *);
 
@@ -136,6 +136,7 @@ int		npf_table_gettype(nl_table_t *);
 
 nl_nat_t *	npf_nat_iterate(nl_config_t *);
 int		npf_nat_gettype(nl_nat_t *);
+unsigned	npf_nat_getflags(nl_nat_t *);
 void		npf_nat_getmap(nl_nat_t *, npf_addr_t *, size_t *, in_port_t *);
 
 nl_rproc_t *	npf_rproc_iterate(nl_config_t *);

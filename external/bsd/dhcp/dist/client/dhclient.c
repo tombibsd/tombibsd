@@ -60,6 +60,7 @@ isc_boolean_t hw_mismatch_drop = ISC_TRUE;
 int dhcp_max_agent_option_packet_length = 0;
 
 int interfaces_requested = 0;
+int interfaces_left = 0;
 
 struct iaddr iaddr_broadcast = { 4, { 255, 255, 255, 255 } };
 struct iaddr iaddr_any = { 4, { 0, 0, 0, 0 } };
@@ -367,8 +368,10 @@ main(int argc, char **argv) {
 	 */
 	go_daemon();
 	setup();
-	if (interfaces_requested > 0)
+	if (interfaces_requested > 0) {
 		add_interfaces(ifaces, interfaces_requested);
+		interfaces_left = interfaces_requested;
+	}
 	free(ifaces);
 	if (wanted_ia_na < 0) {
 		wanted_ia_na = 1;
@@ -3484,6 +3487,9 @@ void finish_daemon (void)
 	static int state = 0;
 
 	if (no_daemon)
+		return;
+
+	if (interfaces_left && --interfaces_left)
 		return;
 
 	/* Only do it once. */

@@ -3,7 +3,7 @@
 .include <bsd.own.mk>
 
 SRCDIR=		${NETBSDSRCDIR}/external/bsd/atf/dist
-.PATH:		${SRCDIR}/atf-run/sample
+.PATH:		${SRCDIR}/tools/sample
 
 CONFIGFILES=	NetBSD.conf atf-run.hooks common.conf
 FILESDIR=	/etc/atf

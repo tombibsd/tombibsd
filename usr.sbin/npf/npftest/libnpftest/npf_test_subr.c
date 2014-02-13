@@ -7,6 +7,7 @@
  */
 
 #include <sys/types.h>
+#include <sys/cprng.h>
 #include <net/if.h>
 #include <net/if_types.h>
 
@@ -19,11 +20,13 @@ static void *		cstream_ptr;
 static bool		cstream_retval;
 
 static void		npf_state_sample(npf_state_t *, bool);
+static long		(*npf_random_func)(void) = NULL;
 
 void
-npf_test_init(void)
+npf_test_init(long (*rndfunc)(void))
 {
 	npf_state_setsampler(npf_state_sample);
+	npf_random_func = rndfunc;
 }
 
 int
@@ -113,4 +116,13 @@ npf_test_statetrack(const void *data, size_t len, ifnet_t *ifp,
 	result[i++] = tstate->nst_wscale;
 
 	return 0;
+}
+
+/*
+ * Need to override for cprng_fast32() -- we need deterministic PRNG.
+ */
+uint32_t
+_arc4random(void)
+{
+	return (uint32_t)(npf_random_func ? npf_random_func() : random());
 }

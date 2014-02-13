@@ -97,6 +97,35 @@ RR(unsigned int x, unsigned int constant)
         return R(x + RND(constant)) + (constant - RND(constant));
 }
 
+/*
+ * It is possible for the compiler to emit relocations for unaligned data.
+ * We handle this situation with these inlines.
+ */
+#define	RELOC_ALIGNED_P(x) \
+	(((uintptr_t)(x) & (sizeof(void *) - 1)) == 0)
+
+static inline Elf_Addr
+load_ptr(void *where)
+{
+	if (__predict_true(RELOC_ALIGNED_P(where)))
+		return *(Elf_Addr *)where;
+	else {
+		Elf_Addr res;
+
+		(void)memcpy(&res, where, sizeof(res));
+		return res;
+	}
+}
+
+static inline void
+store_ptr(void *where, Elf_Addr val)
+{
+	if (__predict_true(RELOC_ALIGNED_P(where)))
+		*(Elf_Addr *)where = val;
+	else
+		(void)memcpy(where, &val, sizeof(val));
+}
+
 int
 kobj_reloc(kobj_t ko, uintptr_t relocbase, const void *data,
     bool isrela, bool local)
@@ -185,7 +214,7 @@ kobj_reloc(kobj_t ko, uintptr_t relocbase, const void *data,
 	case R_TYPE(PCREL32):
 	case R_TYPE(PLABEL32):
 	case R_TYPE(SEGREL32):
-		*where = value;
+		store_ptr(where, value);
 		break;
 
 	case R_TYPE(DIR14R):

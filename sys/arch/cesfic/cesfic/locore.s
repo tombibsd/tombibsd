@@ -247,7 +247,7 @@ Lmemok:
 	movl	%d1,%a0@		| and physmem
 /* configure kernel and lwp0 VA space so we can get going */
 	.globl	_Sysseg_pa, _pmap_bootstrap, _avail_start
-#if NKSYMS || defined(DDB) || defined(LKM)
+#if NKSYMS || defined(DDB) || defined(MODULAR)
 	RELOC(esym,%a0)			| end of static kernel test/data/syms
 	movl	%a0@,%d5
 	jne	Lstart2

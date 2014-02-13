@@ -37,6 +37,9 @@ static const struct {
 	long double ld;
 } testcases[] = {
 	{ 0xffffffffffffffffULL, 0xf.fffffffffffffffp+60L },
+	{ 0xfffffffffffffffeULL, 0xf.ffffffffffffffep+60L },
+	{ 0xfffffffffffffffdULL, 0xf.ffffffffffffffdp+60L },
+	{ 0xfffffffffffffffcULL, 0xf.ffffffffffffffcp+60L },
 	{ 0x7fffffffffffffffULL, 0xf.ffffffffffffffep+59L },
 	{ 0x3fffffffffffffffULL, 0xf.ffffffffffffffcp+58L },
 	{ 0x1fffffffffffffffULL, 0xf.ffffffffffffff8p+57L },
@@ -101,6 +104,7 @@ static const struct {
 	{ 0x3ULL, 0xcp-2L },
 	{ 0x1ULL, 0x8p-3L },
 };
+#endif
 
 ATF_TC(floatunditf);
 ATF_TC_HEAD(floatunditf, tc)
@@ -111,20 +115,22 @@ ATF_TC_HEAD(floatunditf, tc)
 
 ATF_TC_BODY(floatunditf, tc)
 {
+#ifndef __HAVE_LONG_DOUBLE
+	atf_tc_skip("Requires long double support");
+#else
 	size_t i;
 
 	for (i = 0; i < __arraycount(testcases); ++i)
-		ATF_CHECK(testcases[i].ld == (long double)testcases[i].u64);
-}
+		ATF_CHECK_MSG(
+		    testcases[i].ld == (long double)testcases[i].u64,
+		    "#%zu: expected %.20Lf, got %.20Lf\n", i,
+		    testcases[i].ld,
+		    (long double)testcases[i].u64);
 #endif
+}
 
 ATF_TP_ADD_TCS(tp)
 {
-#ifdef __HAVE_LONG_DOUBLE
 	ATF_TP_ADD_TC(tp, floatunditf);
-#else
-	atf_tc_skip("No real long double");
-#endif
-
 	return atf_no_error();
 }

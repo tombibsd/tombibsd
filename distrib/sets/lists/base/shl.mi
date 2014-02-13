@@ -15,7 +15,7 @@
 #
 ./lib/libc.so					base-sys-shlib		dynamicroot
 ./lib/libc.so.12				base-sys-shlib		dynamicroot
-./lib/libc.so.12.189				base-sys-shlib		dynamicroot
+./lib/libc.so.12.190				base-sys-shlib		dynamicroot
 ./lib/libcrypt.so				base-sys-shlib		dynamicroot
 ./lib/libcrypt.so.1				base-sys-shlib		dynamicroot
 ./lib/libcrypt.so.1.0				base-sys-shlib		dynamicroot
@@ -170,8 +170,8 @@
 ./usr/lib/libasn1.so.9				base-krb5-shlib		kerberos
 ./usr/lib/libasn1.so.9.0			base-krb5-shlib		kerberos
 ./usr/lib/libatf-c++.so				base-atf-shlib		atf
-./usr/lib/libatf-c++.so.0			base-atf-shlib		atf
-./usr/lib/libatf-c++.so.0.0			base-atf-shlib		atf
+./usr/lib/libatf-c++.so.1			base-atf-shlib		atf
+./usr/lib/libatf-c++.so.1.0			base-atf-shlib		atf
 ./usr/lib/libatf-c.so				base-atf-shlib		atf
 ./usr/lib/libatf-c.so.0				base-atf-shlib		atf
 ./usr/lib/libatf-c.so.0.0			base-atf-shlib		atf
@@ -197,7 +197,7 @@
 ./usr/lib/libc++.so.1.0				base-sys-shlib		libcxx
 ./usr/lib/libc.so				base-sys-shlib
 ./usr/lib/libc.so.12				base-sys-shlib
-./usr/lib/libc.so.12.189			base-sys-shlib
+./usr/lib/libc.so.12.190			base-sys-shlib
 ./usr/lib/libcdk.so				base-obsolete		obsolete
 ./usr/lib/libcom_err.so				base-krb5-shlib		kerberos
 ./usr/lib/libcom_err.so.7			base-krb5-shlib		kerberos

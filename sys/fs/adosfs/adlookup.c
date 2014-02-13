@@ -64,7 +64,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 int
 adosfs_lookup(void *v)
 {
-	struct vop_lookup_args /* {
+	struct vop_lookup_v2_args /* {
 		struct vnode *a_dvp;
 		struct vnode **a_vpp;
 		struct componentname *a_cnp;
@@ -243,6 +243,8 @@ found:
 	if (vdp == *vpp)
 		vref(vdp);
 found_lockdone:
+	if (*vpp != vdp)
+		VOP_UNLOCK(*vpp);
 	if (nocache == 0)
 		cache_enter(vdp, *vpp, cnp->cn_nameptr, cnp->cn_namelen,
 			    cnp->cn_flags);

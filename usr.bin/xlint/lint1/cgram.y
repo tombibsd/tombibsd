@@ -1340,7 +1340,7 @@ stmnt_d_list:
 
 comp_stmnt:
 	  comp_stmnt_lbrace comp_stmnt_rbrace
-	| comp_stmnt_lbrace stmnt_list comp_stmnt_rbrace
+	| comp_stmnt_lbrace stmnt_d_list comp_stmnt_rbrace
 	| comp_stmnt_lbrace declaration_list comp_stmnt_rbrace
 	| comp_stmnt_lbrace declaration_list stmnt_d_list comp_stmnt_rbrace
 	;

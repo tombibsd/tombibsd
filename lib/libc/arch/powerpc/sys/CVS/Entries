@@ -1,7 +1,7 @@
 /__clone.S/1.5/Thu Oct 24 10:28:53 2013/-kk/
 /__sigaction14_sigtramp.c/1.9/Mon Apr 28 20:22:57 2008/-kk/
 /__sigtramp2.S/1.3/Sat Jan 15 07:31:12 2011/-kk/
-/__syscall.S/1.1/Wed Dec 13 07:50:48 2000/-kk/
+/__syscall.S/1.2/Thu Feb 13 15:35:37 2014/-kk/
 /__vfork14.S/1.4/Sat Jan 15 07:31:12 2011/-kk/
 /brk.S/1.13/Thu Oct 24 10:28:53 2013/-kk/
 /cerror.S/1.11/Thu Oct 24 10:28:53 2013/-kk/
@@ -12,5 +12,5 @@
 /ptrace.S/1.7/Thu Oct 24 10:28:53 2013/-kk/
 /sbrk.S/1.12/Thu Oct 24 10:28:53 2013/-kk/
 /shmat.S/1.1/Fri Jul  7 08:20:53 2000/-kk/
-/syscall.S/1.2/Mon May 25 15:28:04 1998/-kk/
+/syscall.S/1.3/Thu Feb 13 15:35:37 2014/-kk/
 D

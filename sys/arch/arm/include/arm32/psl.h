@@ -70,10 +70,6 @@ int raisespl	(int);
 int lowerspl	(int);
 void splx	(int);
 
-#ifdef __HAVE_FAST_SOFTINTS
-void _setsoftintr	(int si);
-#endif
-
 typedef uint8_t ipl_t;
 typedef struct {
 	uint8_t _ipl;

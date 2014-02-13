@@ -12,7 +12,7 @@ SRCDIR=		${NETBSDSRCDIR}/external/bsd/atf/dist
 .PATH:		${SRCDIR}/atf-c++/detail
 
 CPPFLAGS+=	-DHAVE_CONFIG_H
-CPPFLAGS+=	-I${NETBSDSRCDIR}/lib/libatf-c++
+CPPFLAGS+=	-I${SRCDIR:H}/lib/libatf-c  # For bconfig.h.
 
 FILESDIR=	${TESTSDIR}
 FILES=		macros_hpp_test.cpp

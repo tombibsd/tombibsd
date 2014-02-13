@@ -649,7 +649,7 @@ ntfs_readdir(void *v)
 int
 ntfs_lookup(void *v)
 {
-	struct vop_lookup_args /* {
+	struct vop_lookup_v2_args /* {
 		struct vnode *a_dvp;
 		struct vnode **a_vpp;
 		struct componentname *a_cnp;
@@ -729,6 +729,9 @@ ntfs_lookup(void *v)
 
 	cache_enter(dvp, *ap->a_vpp, cnp->cn_nameptr, cnp->cn_namelen,
 		    cnp->cn_flags);
+
+	if (*ap->a_vpp != dvp)
+		VOP_UNLOCK(*ap->a_vpp);
 
 	return error;
 }

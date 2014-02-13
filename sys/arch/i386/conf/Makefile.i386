@@ -34,7 +34,9 @@ GENASSYM_CONF=	${I386}/i386/genassym.cf
 ## (2) compile settings
 ##
 CPPFLAGS+=	-Di386
-CFLAGS+=	-mno-sse -mno-sse2 -mno-sse3
+CFLAGS+=	-msoft-float
+## no-sse implies no-sse2 but not no-avx
+CFLAGS+=	-mno-mmx -mno-sse -mno-avx
 
 ##
 ## (3) libkern and compat

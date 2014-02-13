@@ -65,7 +65,7 @@ static void sysvbfs_file_setsize(struct vnode *, size_t);
 int
 sysvbfs_lookup(void *arg)
 {
-	struct vop_lookup_args /* {
+	struct vop_lookup_v2_args /* {
 		struct vnode *a_dvp;
 		struct vnode **a_vpp;
 		struct componentname *a_cnp;
@@ -118,6 +118,7 @@ sysvbfs_lookup(void *arg)
 			DPRINTF("%s: can't get vnode.\n", __func__);
 			return error;
 		}
+		VOP_UNLOCK(vpp);
 		*a->a_vpp = vpp;
 	}
 

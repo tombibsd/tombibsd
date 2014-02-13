@@ -115,7 +115,7 @@ pcq_put(pcq_t *pcq, void *item)
 	 * that the caller made to the data item are globally visible
 	 * before we put it onto the list.
 	 */
-#ifndef _HAVE_ATOMIC_AS_MEMBAR
+#ifndef __HAVE_ATOMIC_AS_MEMBAR
 	membar_producer();
 #endif
 	pcq->pcq_items[op] = item;
@@ -180,7 +180,7 @@ pcq_get(pcq_t *pcq)
 	 * after it, we could in theory wipe out a modification made
 	 * to pcq_items[] by pcq_put().
 	 */
-#ifndef _HAVE_ATOMIC_AS_MEMBAR
+#ifndef __HAVE_ATOMIC_AS_MEMBAR
 	membar_producer();
 #endif
 	while (__predict_false(atomic_cas_32(&pcq->pcq_pc, v, nv) != v)) {

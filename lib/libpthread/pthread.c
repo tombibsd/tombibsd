@@ -1177,7 +1177,8 @@ pthread__park(pthread_t self, pthread_mutex_t *lock,
 		 * If we deferred unparking a thread, arrange to
 		 * have _lwp_park() restart it before blocking.
 		 */
-		error = _lwp_park(abstime, self->pt_unpark, hint, hint);
+		error = _lwp_park(CLOCK_REALTIME, TIMER_ABSTIME, abstime,
+		    self->pt_unpark, hint, hint);
 		self->pt_unpark = 0;
 		if (error != 0) {
 			switch (rv = errno) {

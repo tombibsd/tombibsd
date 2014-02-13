@@ -132,10 +132,7 @@ getcwd_scandir(struct vnode **lvpp, struct vnode **uvpp, char **bpp,
 	cn.cn_namelen = 2;
 	cn.cn_consume = 0;
 
-	/*
-	 * At this point, lvp is locked.
-	 * On successful return, *uvpp will be locked
-	 */
+	/* At this point, lvp is locked  */
 	error = VOP_LOOKUP(lvp, uvpp, &cn);
 	vput(lvp);
 	if (error) {
@@ -144,6 +141,13 @@ getcwd_scandir(struct vnode **lvpp, struct vnode **uvpp, char **bpp,
 		return error;
 	}
 	uvp = *uvpp;
+	/* Now lvp is unlocked, try to lock uvp */
+	error = vn_lock(uvp, LK_EXCLUSIVE);
+	if (error) {
+		*lvpp = NULL;
+		*uvpp = NULL;
+		return error;
+	}
 
 	/* If we don't care about the pathname, we're done */
 	if (bufp == NULL) {

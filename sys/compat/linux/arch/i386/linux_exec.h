@@ -37,7 +37,7 @@
 #define LINUX_USRSTACK		0xC0000000
 
 #define LINUX_ELF_AUX_ARGSIZ 	\
-	(howmany(LINUX_ELF_AUX_ENTRIES * sizeof(Aux32Info), sizeof(Elf32_Addr)))
+	(howmany(LINUX_ELF_AUX_ENTRIES * sizeof(Aux32Info), sizeof(Elf32_Addr)) + LINUX_RANDOM_BYTES)
 
 #define LINUX_DEBUGLINK_SIGNATURE
 

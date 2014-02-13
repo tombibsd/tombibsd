@@ -3,7 +3,7 @@
 .include <bsd.own.mk>
 
 SRCDIR=		${NETBSDSRCDIR}/external/bsd/atf/dist
-.PATH:		${SRCDIR}/admin ${SRCDIR}/atf-version
+.PATH:		${SRCDIR}/tools
 
 BINDIR=		/usr/bin
 PROG_CXX=	atf-version
@@ -11,11 +11,11 @@ SRCS=		atf-version.cpp
 MAN=		atf-version.1
 
 CPPFLAGS+=	-DHAVE_CONFIG_H
-CPPFLAGS+=	-I${SRCDIR}
-CPPFLAGS+=	-I${.CURDIR}/../../lib/libatf-c
+CPPFLAGS+=	-I${SRCDIR}/tools
+CPPFLAGS+=	-I${SRCDIR:H}/lib/libatf-c  # For bconfig.h.
 CPPFLAGS+=	-I${.CURDIR}
-LDADD+=		-latf-c++ -latf-c
-DPADD+=		${LIBATF_CXX} ${LIBATF_C}
+
+USE_ATF_LIBTOOLS=	yes
 
 WARNS?=		2
 

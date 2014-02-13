@@ -639,7 +639,7 @@ udf_readdir(void *v)
 int
 udf_lookup(void *v)
 {
-	struct vop_lookup_args /* {
+	struct vop_lookup_v2_args /* {
 		struct vnode *a_dvp;
 		struct vnode **a_vpp;
 		struct componentname *a_cnp;
@@ -834,6 +834,8 @@ done:
 			    cnp->cn_flags);
 
 out:
+	if (error == 0 && *vpp != dvp)
+		VOP_UNLOCK(*vpp);
 	DPRINTFIF(LOOKUP, error, ("udf_lookup returing error %d\n", error));
 
 	return error;

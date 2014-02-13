@@ -26,6 +26,8 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <sys/param.h>
+
 #include <atf-c.h>
 #include <atf-c/config.h>
 
@@ -295,7 +297,7 @@ sigfpe(int s, siginfo_t *si, void *c)
 									\
 	ATF_TC_BODY(m##_##t, tc)					\
 	{								\
-		if (strcmp(atf_config_get("atf_arch"), "macppc") == 0)	\
+		if (strcmp(MACHINE, "macppc") == 0)			\
 			atf_tc_expect_fail("PR port-macppc/46319");	\
 									\
 		if (isQEMU())						\

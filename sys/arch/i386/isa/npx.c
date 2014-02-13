@@ -98,12 +98,6 @@
 #include <sys/cdefs.h>
 __KERNEL_RCSID(0, "$NetBSD$");
 
-#if 0
-#define IPRINTF(x)	printf x
-#else
-#define	IPRINTF(x)
-#endif
-
 #include "opt_multiprocessor.h"
 #include "opt_xen.h"
 
@@ -127,12 +121,17 @@ __KERNEL_RCSID(0, "$NetBSD$");
  * an external fpu, only the one that is part of the cpu fabric.
  * A 486 might not have an fpu, but the 487 is a full 486.
  *
+ * Since we set CR0.NE a FP exception can only happen when a user process
+ * executes a FP instruction. The DNA exception takes precedence, so
+ * the execption can only happen when the lwp already owns the fpu.
+ * In particular the exceptions won't happen in-kernel while saving state.
+ *
  * We do lazy initialization and switching using the TS bit in cr0 and the
  * MDL_USEDFPU bit in mdlwp.
  *
  * DNA exceptions are handled like this:
  *
- * 1) If there is no NPX, return and go to the emulator.
+ * 1) If there is no NPX, we ought to kill the process.
  * 2) If someone else has used the NPX, save its state into that process's PCB.
  * 3a) If MDL_USEDFPU is not set, set it and initialize the NPX.
  * 3b) Otherwise, reload the process's previous NPX state.
@@ -145,61 +144,40 @@ __KERNEL_RCSID(0, "$NetBSD$");
  */
 
 static int	x86fpflags_to_ksiginfo(uint32_t flags);
-static int	npxdna(struct cpu_info *);
+/* Called directly from i386_trap.S */
+void	fpudna(struct cpu_info *);
 
 #ifdef XEN
 #define	clts() HYPERVISOR_fpu_taskswitch(0)
 #define	stts() HYPERVISOR_fpu_taskswitch(1)
 #endif
 
-volatile u_int			npx_intrs_while_probing;
-volatile u_int			npx_traps_while_probing;
-
 extern int i386_fpu_present;
-extern int i386_fpu_exception;
 extern int i386_fpu_fdivbug;
 
 struct npx_softc		*npx_softc;
 
-static inline void
-fpu_save(union savefpu *addr)
-{
-	if (i386_use_fxsave)
-	{
-                fxsave(&addr->sv_xmm);
-
-		/* FXSAVE doesn't FNINIT like FNSAVE does -- so do it here. */
-		fninit();
-	} else
-		fnsave(&addr->sv_87);
-}
-
-int    (*npxdna_func)(struct cpu_info *) = npxdna;
-
+#ifndef XEN
+/* Initialise fpu, might be boot cpu or a later cpu coming online */
 void
 fpuinit(struct cpu_info *ci)
 {
 	uint16_t control;
-	uint32_t cr0;
 
-	/* Assume we have an FPU */
-	cr0 = rcr0();
-	cr0 &= ~(CR0_EM | CR0_TS);
-	cr0 |= CR0_NE | CR0_MP;
-	lcr0(cr0);
-	/* Read back the default contol word */
+	/* The default cr0 has the fpu enabled */
+	clts();
 	fninit();
+
+	/* Read the default control word */
 	fnstcw(&control);
 
 	if (control != __INITIAL_NPXCW__) {
-		/* Must be a 486SX, emulate FP instructions */
-		lcr0((cr0 & ~CR0_MP) | CR0_EM);
-		aprint_normal_dev(ci->ci_dev, "no fpu\n");
+		/* Must be a 486SX, trap FP instructions */
+		lcr0((rcr0() & ~CR0_MP) | CR0_EM);
+		aprint_normal_dev(ci->ci_dev, "no fpu (control %x)\n", control);
+		i386_fpu_present = 0;
 		return;
 	}
-
-	/* We have a valid FPU */
-	i386_fpu_present = 1;
 
 	if (npx586bug1(4195835, 3145727) != 0) {
 		/* NB 120+MHz cpus are not affected */
@@ -209,8 +187,9 @@ fpuinit(struct cpu_info *ci)
 	}
 
 	/* Set TS so first fp instruction faults */
-	lcr0(cr0 | CR0_TS);
+	stts();
 }
+#endif
 
 /*
  * Record the FPU state and reinitialize it all except for the control word.
@@ -225,7 +204,11 @@ fpuinit(struct cpu_info *ci)
  * best a handler could do an fninit followed by an fldcw of a static value.
  * fnclex would be of little use because it would leave junk on the FPU stack.
  *
- * Only called dircetly from i386_trap.S
+ * Only called directly from i386_trap.S (with interrupts disabled)
+ *
+ * Since we have CR0.NE set this can only happen as a result of
+ * executing an FP instruction (and after CR0.TS has been checked).
+ * This means this must be from userspace on the current lwp.
  */
 int npxintr(void *, struct intrframe *);
 int
@@ -235,7 +218,11 @@ npxintr(void *arg, struct intrframe *frame)
 	struct lwp *l = ci->ci_fpcurlwp;
 	union savefpu *addr;
 	struct pcb *pcb;
+	uint32_t statbits;
 	ksiginfo_t ksi;
+
+	if (!USERMODE(frame->if_cs, frame->if_eflags))
+		panic("fpu trap from kernel\n");
 
 	kpreempt_disable();
 #ifndef XEN
@@ -243,19 +230,11 @@ npxintr(void *arg, struct intrframe *frame)
 	x86_enable_intr();
 #endif
 
-	curcpu()->ci_data.cpu_ntrap++;
-	IPRINTF(("%s: fp intr\n", device_xname(ci->ci_dev)));
-
 	/*
-	 * If we're saving, ignore the interrupt.  The FPU will generate
-	 * another one when we restore the state later.
+	 * At this point, fpcurlwp should be curlwp.  If it wasn't, the TS
+	 * bit should be set, and we should have gotten a DNA exception.
 	 */
-	if (ci->ci_fpsaving) {
-		kpreempt_enable();
-		return (1);
-	}
-
-	if (l == NULL || !i386_fpu_present) {
+	if (l != curlwp || !i386_fpu_present) {
 		printf("npxintr: l = %p, curproc = %p, fpu_present = %d\n",
 		    l, curproc, i386_fpu_present);
 		printf("npxintr: came from nowhere");
@@ -263,89 +242,77 @@ npxintr(void *arg, struct intrframe *frame)
 		return 1;
 	}
 
-	/*
-	 * At this point, fpcurlwp should be curlwp.  If it wasn't, the TS
-	 * bit should be set, and we should have gotten a DNA exception.
-	 */
-	KASSERT(l == curlwp);
+	/* Find the address of fpcurproc's saved FPU state. */
 	pcb = lwp_getpcb(l);
-
-	/*
-	 * Find the address of fpcurproc's saved FPU state.  (Given the
-	 * invariant above, this is always the one in curpcb.)
-	 */
 	addr = &pcb->pcb_savefpu;
 
 	/*
-	 * Save state.  This does an implied fninit.  It had better not halt
-	 * the CPU or we'll hang.
+	 * XXX: (dsl) I think this is all borked.
+	 * We need to save the status word (which contains the cause)
+	 * of the fault, and clear the relevant error bits so that
+	 * the fp instruction doesn't trap again when the signal handler
+	 * returns (or if the signal is ignored).
+	 * What the code actually does is to reset the FPU, this clears
+	 * the FP stack pointer so I suspect the code then gets the
+	 * wrong register values for an later operations.
+	 * Any code that enabled the stack under/overflow traps is doomed.
+	 *
+	 * I think this code should just save the status word and clear
+	 * the pending errors.
+	 * If the signal is generated then the FP state can be saved in
+	 * the context stashed on the user stack, and restrored from
+	 * there later. So this code need not do a fsave or finit.
 	 */
-	fpu_save(addr);
-	fwait();
-        if (i386_use_fxsave) {
+	if (i386_use_fxsave) {
+		fxsave(&addr->sv_xmm);
+		/* FXSAVE doesn't FNINIT like FNSAVE does -- so do it here. */
+		fninit();
+		fwait();
 		fldcw(&addr->sv_xmm.fx_cw);
 		/*
 		 * FNINIT doesn't affect MXCSR or the XMM registers;
 		 * no need to re-load MXCSR here.
 		 */
-        } else
-                fldcw(&addr->sv_87.s87_cw);
-	fwait();
-	/*
-	 * Remember the exception status word and tag word.  The current
-	 * (almost fninit'ed) fpu state is in the fpu and the exception
-	 * state just saved will soon be junk.  However, the implied fninit
-	 * doesn't change the error pointers or register contents, and we
-	 * preserved the control word and will copy the status and tag
-	 * words, so the complete exception state can be recovered.
-	 */
-        if (i386_use_fxsave) {
-		addr->sv_xmm.sv_ex_sw = addr->sv_xmm.fx_sw;
-		addr->sv_xmm.sv_ex_tw = addr->sv_xmm.fx_tw;
+		statbits = addr->sv_xmm.fx_sw;
 	} else {
-		addr->sv_87.s87_ex_sw = addr->sv_87.s87_sw;
-		addr->sv_87.s87_ex_tw = addr->sv_87.s87_tw;
+		fnsave(&addr->sv_87);
+		/* fnsave has done an fninit() */
+		fwait();
+		fldcw(&addr->sv_87.s87_cw);
+		statbits = addr->sv_87.s87_sw;
 	}
+	fwait();
+
 	/*
 	 * Pass exception to process.
 	 */
-	if (USERMODE(frame->if_cs, frame->if_eflags)) {
-		/*
-		 * Interrupt is essentially a trap, so we can afford to call
-		 * the SIGFPE handler (if any) as soon as the interrupt
-		 * returns.
-		 *
-		 * XXX little or nothing is gained from this, and plenty is
-		 * lost - the interrupt frame has to contain the trap frame
-		 * (this is otherwise only necessary for the rescheduling trap
-		 * in doreti, and the frame for that could easily be set up
-		 * just before it is used).
-		 */
-		l->l_md.md_regs = (struct trapframe *)&frame->if_gs;
 
-		KSI_INIT_TRAP(&ksi);
-		ksi.ksi_signo = SIGFPE;
-		ksi.ksi_addr = (void *)frame->if_eip;
+	/*
+	 * Interrupt is essentially a trap, so we can afford to call
+	 * the SIGFPE handler (if any) as soon as the interrupt
+	 * returns.
+	 *
+	 * XXX little or nothing is gained from this, and plenty is
+	 * lost - the interrupt frame has to contain the trap frame
+	 * (this is otherwise only necessary for the rescheduling trap
+	 * in doreti, and the frame for that could easily be set up
+	 * just before it is used).
+	 */
+	l->l_md.md_regs = (struct trapframe *)&frame->if_gs;
 
-		/*
-		 * Encode the appropriate code for detailed information on
-		 * this exception.
-		 */
+	KSI_INIT_TRAP(&ksi);
+	ksi.ksi_signo = SIGFPE;
+	ksi.ksi_addr = (void *)frame->if_eip;
 
-		if (i386_use_fxsave) {
-			ksi.ksi_code =
-				x86fpflags_to_ksiginfo(addr->sv_xmm.sv_ex_sw);
-			ksi.ksi_trap = (int)addr->sv_xmm.sv_ex_sw;
-		} else {
-			ksi.ksi_code =
-				x86fpflags_to_ksiginfo(addr->sv_87.s87_ex_sw);
-			ksi.ksi_trap = (int)addr->sv_87.s87_ex_sw;
-		}
+	/*
+	 * Encode the appropriate code for detailed information on
+	 * this exception.
+	 */
 
-		trapsignal(l, &ksi);
-	} else {
-		panic("fpu trap from kernel\n");
-	}
+	ksi.ksi_code = x86fpflags_to_ksiginfo(statbits);
+	ksi.ksi_trap = statbits;
+
+	trapsignal(l, &ksi);
 
 	kpreempt_enable();
 	return (1);
@@ -380,21 +347,20 @@ x86fpflags_to_ksiginfo(uint32_t flags)
 /*
  * Implement device not available (DNA) exception
  *
+ * Called directly from i386_trap.S with interrupts still disabled
+ *
  * If we were the last lwp to use the FPU, we can simply return.
  * Otherwise, we save the previous state, if necessary, and restore
  * our last saved state.
  */
-static int
-npxdna(struct cpu_info *ci)
+void
+fpudna(struct cpu_info *ci)
 {
 	struct lwp *l, *fl;
 	struct pcb *pcb;
 	int s;
 
-	if (ci->ci_fpsaving) {
-		/* Recursive trap. */
-		return 1;
-	}
+	/* XXX generate signal if no fpu */
 
 	/* Lock out IPIs and disable preemption. */
 	s = splhigh();
@@ -416,7 +382,7 @@ npxdna(struct cpu_info *ci)
 			ci->ci_fpused = 1;
 			clts();
 			splx(s);
-			return 1;
+			return;
 		}
 		KASSERT(fl != l);
 		fpusave_cpu(true);
@@ -458,7 +424,7 @@ npxdna(struct cpu_info *ci)
 		 * manually.
 		 */
 		static const double zero = 0.0;
-		int status;
+		uint16_t status;
 		/*
 		 * Clear the ES bit in the x87 status word if it is currently
 		 * set, in order to avoid causing a fault in the upcoming load.
@@ -479,7 +445,6 @@ npxdna(struct cpu_info *ci)
 
 	KASSERT(ci == curcpu());
 	splx(s);
-	return 1;
 }
 
 /*
@@ -502,20 +467,12 @@ fpusave_cpu(bool save)
 	pcb = lwp_getpcb(l);
 
 	if (save) {
-		 /*
-		  * Set ci->ci_fpsaving, so that any pending exception will
-		  * be thrown away.  It will be caught again if/when the
-		  * FPU state is restored.
-		  */
-		KASSERT(ci->ci_fpsaving == 0);
 		clts();
-		ci->ci_fpsaving = 1;
 		if (i386_use_fxsave) {
 			fxsave(&pcb->pcb_savefpu.sv_xmm);
 		} else {
 			fnsave(&pcb->pcb_savefpu.sv_87);
 		}
-		ci->ci_fpsaving = 0;
 	}
 
 	stts();
@@ -562,8 +519,7 @@ fpusave_lwp(struct lwp *l, bool save)
 #else /* XEN */
 		x86_send_ipi(oci, X86_IPI_SYNCH_FPU);
 #endif
-		while (pcb->pcb_fpcpu == oci &&
-		    ticks == hardclock_ticks) {
+		while (pcb->pcb_fpcpu == oci && ticks == hardclock_ticks) {
 			x86_pause();
 			spins++;
 		}
@@ -617,137 +573,40 @@ fpusave_lwp(struct lwp *l, bool save)
  * 4  Denormal operand (FP_X_DNML)
  * 5  Numeric over/underflow (FP_X_OFL, FP_X_UFL)
  * 6  Inexact result (FP_X_IMP) 
+ *
+ * NB: the above seems to mix up the mxscr error bits and the x87 ones.
+ * They are in the same order, but there is no EN_SW_STACK_FAULT in the mmx
+ * status.
+ *
+ * The table is nearly, but not quite, in bit order (ZERODIV and DENORM
+ * are swapped).
+ *
+ * This table assumes that any stack fault is cleared - so that an INVOP
+ * fault will only be reported as FLTSUB once.
+ * This might not happen if the mask is being changed.
  */
+#define FPE_xxx1(f) (f & EN_SW_INVOP \
+		? (f & EN_SW_STACK_FAULT ? FPE_FLTSUB : FPE_FLTINV) \
+	: f & EN_SW_ZERODIV ? FPE_FLTDIV \
+	: f & EN_SW_DENORM ? FPE_FLTUND \
+	: f & EN_SW_OVERFLOW ? FPE_FLTOVF \
+	: f & EN_SW_UNDERFLOW ? FPE_FLTUND \
+	: f & EN_SW_PRECLOSS ? FPE_FLTRES \
+	: f & EN_SW_STACK_FAULT ? FPE_FLTSUB : 0)
+#define	FPE_xxx2(f)	FPE_xxx1(f),	FPE_xxx1((f + 1))
+#define	FPE_xxx4(f)	FPE_xxx2(f),	FPE_xxx2((f + 2))
+#define	FPE_xxx8(f)	FPE_xxx4(f),	FPE_xxx4((f + 4))
+#define	FPE_xxx16(f)	FPE_xxx8(f),	FPE_xxx8((f + 8))
+#define	FPE_xxx32(f)	FPE_xxx16(f),	FPE_xxx16((f + 16))
 static const uint8_t fpetable[128] = {
-	0,
-	FPE_FLTINV,	/*  1 - INV */
-	FPE_FLTUND,	/*  2 - DNML */
-	FPE_FLTINV,	/*  3 - INV | DNML */
-	FPE_FLTDIV,	/*  4 - DZ */
-	FPE_FLTINV,	/*  5 - INV | DZ */
-	FPE_FLTDIV,	/*  6 - DNML | DZ */
-	FPE_FLTINV,	/*  7 - INV | DNML | DZ */
-	FPE_FLTOVF,	/*  8 - OFL */
-	FPE_FLTINV,	/*  9 - INV | OFL */
-	FPE_FLTUND,	/*  A - DNML | OFL */
-	FPE_FLTINV,	/*  B - INV | DNML | OFL */
-	FPE_FLTDIV,	/*  C - DZ | OFL */
-	FPE_FLTINV,	/*  D - INV | DZ | OFL */
-	FPE_FLTDIV,	/*  E - DNML | DZ | OFL */
-	FPE_FLTINV,	/*  F - INV | DNML | DZ | OFL */
-	FPE_FLTUND,	/* 10 - UFL */
-	FPE_FLTINV,	/* 11 - INV | UFL */
-	FPE_FLTUND,	/* 12 - DNML | UFL */
-	FPE_FLTINV,	/* 13 - INV | DNML | UFL */
-	FPE_FLTDIV,	/* 14 - DZ | UFL */
-	FPE_FLTINV,	/* 15 - INV | DZ | UFL */
-	FPE_FLTDIV,	/* 16 - DNML | DZ | UFL */
-	FPE_FLTINV,	/* 17 - INV | DNML | DZ | UFL */
-	FPE_FLTOVF,	/* 18 - OFL | UFL */
-	FPE_FLTINV,	/* 19 - INV | OFL | UFL */
-	FPE_FLTUND,	/* 1A - DNML | OFL | UFL */
-	FPE_FLTINV,	/* 1B - INV | DNML | OFL | UFL */
-	FPE_FLTDIV,	/* 1C - DZ | OFL | UFL */
-	FPE_FLTINV,	/* 1D - INV | DZ | OFL | UFL */
-	FPE_FLTDIV,	/* 1E - DNML | DZ | OFL | UFL */
-	FPE_FLTINV,	/* 1F - INV | DNML | DZ | OFL | UFL */
-	FPE_FLTRES,	/* 20 - IMP */
-	FPE_FLTINV,	/* 21 - INV | IMP */
-	FPE_FLTUND,	/* 22 - DNML | IMP */
-	FPE_FLTINV,	/* 23 - INV | DNML | IMP */
-	FPE_FLTDIV,	/* 24 - DZ | IMP */
-	FPE_FLTINV,	/* 25 - INV | DZ | IMP */
-	FPE_FLTDIV,	/* 26 - DNML | DZ | IMP */
-	FPE_FLTINV,	/* 27 - INV | DNML | DZ | IMP */
-	FPE_FLTOVF,	/* 28 - OFL | IMP */
-	FPE_FLTINV,	/* 29 - INV | OFL | IMP */
-	FPE_FLTUND,	/* 2A - DNML | OFL | IMP */
-	FPE_FLTINV,	/* 2B - INV | DNML | OFL | IMP */
-	FPE_FLTDIV,	/* 2C - DZ | OFL | IMP */
-	FPE_FLTINV,	/* 2D - INV | DZ | OFL | IMP */
-	FPE_FLTDIV,	/* 2E - DNML | DZ | OFL | IMP */
-	FPE_FLTINV,	/* 2F - INV | DNML | DZ | OFL | IMP */
-	FPE_FLTUND,	/* 30 - UFL | IMP */
-	FPE_FLTINV,	/* 31 - INV | UFL | IMP */
-	FPE_FLTUND,	/* 32 - DNML | UFL | IMP */
-	FPE_FLTINV,	/* 33 - INV | DNML | UFL | IMP */
-	FPE_FLTDIV,	/* 34 - DZ | UFL | IMP */
-	FPE_FLTINV,	/* 35 - INV | DZ | UFL | IMP */
-	FPE_FLTDIV,	/* 36 - DNML | DZ | UFL | IMP */
-	FPE_FLTINV,	/* 37 - INV | DNML | DZ | UFL | IMP */
-	FPE_FLTOVF,	/* 38 - OFL | UFL | IMP */
-	FPE_FLTINV,	/* 39 - INV | OFL | UFL | IMP */
-	FPE_FLTUND,	/* 3A - DNML | OFL | UFL | IMP */
-	FPE_FLTINV,	/* 3B - INV | DNML | OFL | UFL | IMP */
-	FPE_FLTDIV,	/* 3C - DZ | OFL | UFL | IMP */
-	FPE_FLTINV,	/* 3D - INV | DZ | OFL | UFL | IMP */
-	FPE_FLTDIV,	/* 3E - DNML | DZ | OFL | UFL | IMP */
-	FPE_FLTINV,	/* 3F - INV | DNML | DZ | OFL | UFL | IMP */
-	FPE_FLTSUB,	/* 40 - STK */
-	FPE_FLTSUB,	/* 41 - INV | STK */
-	FPE_FLTUND,	/* 42 - DNML | STK */
-	FPE_FLTSUB,	/* 43 - INV | DNML | STK */
-	FPE_FLTDIV,	/* 44 - DZ | STK */
-	FPE_FLTSUB,	/* 45 - INV | DZ | STK */
-	FPE_FLTDIV,	/* 46 - DNML | DZ | STK */
-	FPE_FLTSUB,	/* 47 - INV | DNML | DZ | STK */
-	FPE_FLTOVF,	/* 48 - OFL | STK */
-	FPE_FLTSUB,	/* 49 - INV | OFL | STK */
-	FPE_FLTUND,	/* 4A - DNML | OFL | STK */
-	FPE_FLTSUB,	/* 4B - INV | DNML | OFL | STK */
-	FPE_FLTDIV,	/* 4C - DZ | OFL | STK */
-	FPE_FLTSUB,	/* 4D - INV | DZ | OFL | STK */
-	FPE_FLTDIV,	/* 4E - DNML | DZ | OFL | STK */
-	FPE_FLTSUB,	/* 4F - INV | DNML | DZ | OFL | STK */
-	FPE_FLTUND,	/* 50 - UFL | STK */
-	FPE_FLTSUB,	/* 51 - INV | UFL | STK */
-	FPE_FLTUND,	/* 52 - DNML | UFL | STK */
-	FPE_FLTSUB,	/* 53 - INV | DNML | UFL | STK */
-	FPE_FLTDIV,	/* 54 - DZ | UFL | STK */
-	FPE_FLTSUB,	/* 55 - INV | DZ | UFL | STK */
-	FPE_FLTDIV,	/* 56 - DNML | DZ | UFL | STK */
-	FPE_FLTSUB,	/* 57 - INV | DNML | DZ | UFL | STK */
-	FPE_FLTOVF,	/* 58 - OFL | UFL | STK */
-	FPE_FLTSUB,	/* 59 - INV | OFL | UFL | STK */
-	FPE_FLTUND,	/* 5A - DNML | OFL | UFL | STK */
-	FPE_FLTSUB,	/* 5B - INV | DNML | OFL | UFL | STK */
-	FPE_FLTDIV,	/* 5C - DZ | OFL | UFL | STK */
-	FPE_FLTSUB,	/* 5D - INV | DZ | OFL | UFL | STK */
-	FPE_FLTDIV,	/* 5E - DNML | DZ | OFL | UFL | STK */
-	FPE_FLTSUB,	/* 5F - INV | DNML | DZ | OFL | UFL | STK */
-	FPE_FLTRES,	/* 60 - IMP | STK */
-	FPE_FLTSUB,	/* 61 - INV | IMP | STK */
-	FPE_FLTUND,	/* 62 - DNML | IMP | STK */
-	FPE_FLTSUB,	/* 63 - INV | DNML | IMP | STK */
-	FPE_FLTDIV,	/* 64 - DZ | IMP | STK */
-	FPE_FLTSUB,	/* 65 - INV | DZ | IMP | STK */
-	FPE_FLTDIV,	/* 66 - DNML | DZ | IMP | STK */
-	FPE_FLTSUB,	/* 67 - INV | DNML | DZ | IMP | STK */
-	FPE_FLTOVF,	/* 68 - OFL | IMP | STK */
-	FPE_FLTSUB,	/* 69 - INV | OFL | IMP | STK */
-	FPE_FLTUND,	/* 6A - DNML | OFL | IMP | STK */
-	FPE_FLTSUB,	/* 6B - INV | DNML | OFL | IMP | STK */
-	FPE_FLTDIV,	/* 6C - DZ | OFL | IMP | STK */
-	FPE_FLTSUB,	/* 6D - INV | DZ | OFL | IMP | STK */
-	FPE_FLTDIV,	/* 6E - DNML | DZ | OFL | IMP | STK */
-	FPE_FLTSUB,	/* 6F - INV | DNML | DZ | OFL | IMP | STK */
-	FPE_FLTUND,	/* 70 - UFL | IMP | STK */
-	FPE_FLTSUB,	/* 71 - INV | UFL | IMP | STK */
-	FPE_FLTUND,	/* 72 - DNML | UFL | IMP | STK */
-	FPE_FLTSUB,	/* 73 - INV | DNML | UFL | IMP | STK */
-	FPE_FLTDIV,	/* 74 - DZ | UFL | IMP | STK */
-	FPE_FLTSUB,	/* 75 - INV | DZ | UFL | IMP | STK */
-	FPE_FLTDIV,	/* 76 - DNML | DZ | UFL | IMP | STK */
-	FPE_FLTSUB,	/* 77 - INV | DNML | DZ | UFL | IMP | STK */
-	FPE_FLTOVF,	/* 78 - OFL | UFL | IMP | STK */
-	FPE_FLTSUB,	/* 79 - INV | OFL | UFL | IMP | STK */
-	FPE_FLTUND,	/* 7A - DNML | OFL | UFL | IMP | STK */
-	FPE_FLTSUB,	/* 7B - INV | DNML | OFL | UFL | IMP | STK */
-	FPE_FLTDIV,	/* 7C - DZ | OFL | UFL | IMP | STK */
-	FPE_FLTSUB,	/* 7D - INV | DZ | OFL | UFL | IMP | STK */
-	FPE_FLTDIV,	/* 7E - DNML | DZ | OFL | UFL | IMP | STK */
-	FPE_FLTSUB,	/* 7F - INV | DNML | DZ | OFL | UFL | IMP | STK */
+	FPE_xxx32(0), FPE_xxx32(32), FPE_xxx32(64), FPE_xxx32(96)
 };
+#undef FPE_xxx1
+#undef FPE_xxx2
+#undef FPE_xxx4
+#undef FPE_xxx8
+#undef FPE_xxx16
+#undef FPE_xxx32
 
 /*
  * Preserve the FP status word, clear FP exceptions, then generate a SIGFPE.

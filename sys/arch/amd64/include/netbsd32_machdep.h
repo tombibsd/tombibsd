@@ -133,33 +133,6 @@ struct x86_64_set_mtrr_args32 {
 	uint32_t n;
 };
 
-struct env87 {
-	int32_t		en_cw;
-	int32_t		en_sw;
-	int32_t		en_tw;
-	int32_t		en_fip;
-	uint16_t	en_fcs;
-	uint16_t	en_opcode;
-	int32_t		en_foo;
-	int32_t		en_fos;
-} __packed;
-
-struct fpacc87 {
-	uint8_t 	fp_bytes[10];
-} __packed;
-
-struct save87 {
-	struct env87	sv_env;
-	struct fpacc87	sv_ac[8];
-	/*
-	 * The fields below are not in the 'struct fpreg32' that is
-	 * otherwise the same as this structure (for coredumps).
-	 */
-	int32_t		sv_ex_sw;
-	int32_t		sv_ex_tw;
-	uint8_t		sv_pad[8 * 2 - 2 * 4];
-} __packed;
-
 #define NETBSD32_MID_MACHINE MID_I386
 
 int netbsd32_process_read_regs(struct lwp *, struct reg32 *);

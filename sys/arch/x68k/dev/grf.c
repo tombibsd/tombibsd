@@ -271,7 +271,7 @@ grfmap(dev_t dev, void **addrp, struct proc *p)
 		flags |= MAP_FIXED;
 	else
 		*addrp = (void *)p->p_emul->e_vm_default_addr(p, 
-		    p->p_vmspace->vm_daddr, len);
+		    (vaddr_t)p->p_vmspace->vm_daddr, len);
 
 	vn.v_type = VCHR;			/* XXX */
 	vn.v_rdev = dev;			/* XXX */

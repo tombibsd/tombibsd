@@ -263,7 +263,7 @@ loop:
 int
 fdesc_lookup(void *v)
 {
-	struct vop_lookup_args /* {
+	struct vop_lookup_v2_args /* {
 		struct vnode * a_dvp;
 		struct vnode ** a_vpp;
 		struct componentname * a_cnp;
@@ -397,6 +397,7 @@ bad:
 	return (error);
 
 good:
+	VOP_UNLOCK(*vpp);
 	return (0);
 }
 

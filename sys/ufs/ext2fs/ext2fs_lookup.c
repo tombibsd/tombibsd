@@ -261,7 +261,7 @@ ext2fs_readdir(void *v)
 int
 ext2fs_lookup(void *v)
 {
-	struct vop_lookup_args /* {
+	struct vop_lookup_v2_args /* {
 		struct vnode *a_dvp;
 		struct vnode **a_vpp;
 		struct componentname *a_cnp;
@@ -630,6 +630,8 @@ found:
 				return (EPERM);
 			}
 		}
+		if (tdp != vdp)
+			VOP_UNLOCK(tdp);
 		*vpp = tdp;
 		return (0);
 	}
@@ -657,6 +659,8 @@ found:
 			vn_lock(vdp, LK_EXCLUSIVE | LK_RETRY);
 		if (error)
 			return (error);
+		if (tdp != vdp)
+			VOP_UNLOCK(tdp);
 		*vpp = tdp;
 		return (0);
 	}
@@ -703,6 +707,8 @@ found:
 	 * Insert name into cache if appropriate.
 	 */
 	cache_enter(vdp, *vpp, cnp->cn_nameptr, cnp->cn_namelen, cnp->cn_flags);
+	if (*vpp != vdp)
+		VOP_UNLOCK(*vpp);
 	return 0;
 }
 

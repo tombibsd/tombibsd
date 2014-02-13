@@ -69,8 +69,8 @@
 ./usr/lib/i386/libarchive.so.3.1		base-compat-shlib	compat,pic
 ./usr/lib/i386/libasn1.so.9			base-compat-shlib	compat,pic,kerberos
 ./usr/lib/i386/libasn1.so.9.0			base-compat-shlib	compat,pic,kerberos
-./usr/lib/i386/libatf-c++.so.0			base-compat-shlib	compat,pic,atf
-./usr/lib/i386/libatf-c++.so.0.0		base-compat-shlib	compat,pic,atf
+./usr/lib/i386/libatf-c++.so.1			base-compat-shlib	compat,pic,atf
+./usr/lib/i386/libatf-c++.so.1.0		base-compat-shlib	compat,pic,atf
 ./usr/lib/i386/libatf-c.so.0			base-compat-shlib	compat,pic,atf
 ./usr/lib/i386/libatf-c.so.0.0			base-compat-shlib	compat,pic,atf
 ./usr/lib/i386/libbfd.so.13			base-compat-shlib	compat,pic,binutils
@@ -86,7 +86,7 @@
 ./usr/lib/i386/libc++.so.1			base-compat-shlib	compat,pic,libcxx
 ./usr/lib/i386/libc++.so.1.0			base-compat-shlib	compat,pic,libcxx
 ./usr/lib/i386/libc.so.12			base-compat-shlib	compat,pic
-./usr/lib/i386/libc.so.12.189			base-compat-shlib	compat,pic
+./usr/lib/i386/libc.so.12.190			base-compat-shlib	compat,pic
 ./usr/lib/i386/libcom_err.so.7			base-compat-shlib	compat,pic,kerberos
 ./usr/lib/i386/libcom_err.so.7.0		base-compat-shlib	compat,pic,kerberos
 ./usr/lib/i386/libcrypt.so.1			base-compat-shlib	compat,pic

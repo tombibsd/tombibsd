@@ -1,5 +1,7 @@
 #	$NetBSD$
 
+NOMAN=		# defined
+
 .include <bsd.own.mk>
 
 S=	${.CURDIR}/../../../..
@@ -8,7 +10,6 @@ MIPSCO=	${S}/arch/mipsco
 
 .PATH:	${.CURDIR}/../common
 
-NOMAN=		# defined
 BINMODE?= 444
 
 # XXX SHOULD NOT NEED TO DEFINE THESE!

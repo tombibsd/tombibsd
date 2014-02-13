@@ -286,9 +286,9 @@ linux32_setregs(struct lwp *l, struct exec_package *pack, u_long stack)
 	l->l_md.md_flags &= ~MDL_USEDFPU;
 	l->l_md.md_flags |= MDL_COMPAT32;	/* Forces iret not sysret */
 	pcb->pcb_flags = PCB_COMPAT32;
-	pcb->pcb_savefpu.fp_fxsave.fx_fcw = __Linux_NPXCW__;
-	pcb->pcb_savefpu.fp_fxsave.fx_mxcsr = __INITIAL_MXCSR__;
-	pcb->pcb_savefpu.fp_fxsave.fx_mxcsr_mask = __INITIAL_MXCSR_MASK__;
+	pcb->pcb_savefpu.sv_xmm.fx_cw = __Linux_NPXCW__;
+	pcb->pcb_savefpu.sv_xmm.fx_mxcsr = __INITIAL_MXCSR__;
+	pcb->pcb_savefpu.sv_xmm.fx_mxcsr_mask = __INITIAL_MXCSR_MASK__;
 
 	p->p_flag |= PK_32;
 

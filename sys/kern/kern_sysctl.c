@@ -1549,13 +1549,11 @@ sysctl_lookup(SYSCTLFN_ARGS)
 			return EINVAL;
 		}
 		error = sysctl_copyin(l, newp, &tmp, sz);
+		if (error)
+			break;
 		if (tmp != true && tmp != false) {
 			DPRINTF(("%s: tmp %d\n", __func__, tmp));
 			return EINVAL;
-		}
-		if (error) {
-			DPRINTF(("%s: copyin %d\n", __func__, error));
-			break;
 		}
 		*(bool *)d = tmp;
 		break;

@@ -31,6 +31,8 @@
 #include <sys/cdefs.h>
 __RCSID("$NetBSD$");
 
+#include <sys/param.h>
+
 #include <atf-c.h>
 #include <atf-c/config.h>
 
@@ -457,11 +459,8 @@ ATF_TC_BODY(ldexpf_zero_pos, tc)
 	}								\
 	ATF_TC_BODY(name, tc)						\
 	{								\
-		const char *machine;					\
-									\
-		machine = atf_config_get("atf_machine");		\
-		if (strcmp("vax", machine) == 0)			\
-			atf_tc_skip("Test not valid for %s", machine);	\
+		if (strcmp("vax", MACHINE_ARCH) == 0)			\
+			atf_tc_skip("Test not valid for " MACHINE_ARCH); \
 		run_test(name);						\
 	}
 

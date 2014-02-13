@@ -4,8 +4,8 @@
 
 .if ${MKSHARE} != "no"
 SRCDIR=		${NETBSDSRCDIR}/external/bsd/atf/dist
-.PATH:		${SRCDIR}/atf-report
-.PATH:		${SRCDIR}/atf-run/sample
+.PATH:		${SRCDIR}/tools
+.PATH:		${SRCDIR}/tools/sample
 
 FILESDIR=	/usr/share/examples/atf
 FILESMODE=	444

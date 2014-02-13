@@ -205,28 +205,27 @@ umapfs_mount(struct mount *mp, const char *path, void *data, size_t *data_len)
 	/*
 	 * fix up umap node for root vnode.
 	 */
+	VOP_UNLOCK(lowerrootvp);
 	error = layer_node_create(mp, lowerrootvp, &vp);
 	/*
 	 * Make sure the node alias worked
 	 */
 	if (error) {
-		vput(lowerrootvp);
+		vrele(lowerrootvp);
 		hashdone(amp->umapm_node_hashtbl, HASH_LIST,
 		    amp->umapm_node_hash);
 		kmem_free(amp, sizeof(struct umap_mount));
 		return error;
 	}
-	/*
-	 * Unlock the node (either the lower or the alias)
-	 */
-	vp->v_vflag |= VV_ROOT;
-	VOP_UNLOCK(vp);
 
 	/*
 	 * Keep a held reference to the root vnode.
 	 * It is vrele'd in umapfs_unmount.
 	 */
+	vn_lock(vp, LK_EXCLUSIVE | LK_RETRY);
+	vp->v_vflag |= VV_ROOT;
 	amp->umapm_rootvp = vp;
+	VOP_UNLOCK(vp);
 
 	error = set_statvfs_info(path, UIO_USERSPACE, args->umap_target,
 	    UIO_USERSPACE, mp->mnt_op->vfs_name, mp, l);

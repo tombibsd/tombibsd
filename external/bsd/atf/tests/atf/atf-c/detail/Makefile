@@ -11,10 +11,14 @@ SRCDIR=		${NETBSDSRCDIR}/external/bsd/atf/dist
 CPPFLAGS+=	-DHAVE_CONFIG_H
 CPPFLAGS+=	-I${NETBSDSRCDIR}/external/bsd/atf/lib/libatf-c
 
-PROGS=			process_helpers
-SRCS.process_helpers=	process_helpers.c
-MAN.process_helpers=	# defined
-BINDIR.process_helpers=	${TESTSDIR}
+PROGS=
+.for prog in	process_helpers \
+		version_helper
+PROGS+=		${prog}
+SRCS.${prog}=	${prog}.c
+MAN.${prog}=	# defined
+BINDIR.${prog}=	${TESTSDIR}
+.endfor
 
 TESTS_C=
 .for test in	dynstr_test \

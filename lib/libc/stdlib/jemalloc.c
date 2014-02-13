@@ -228,6 +228,7 @@ __strerror_r(int e, char *s, size_t l)
 #ifdef __alpha__
 #  define QUANTUM_2POW_MIN	4
 #  define SIZEOF_PTR_2POW	3
+#  define TINY_MIN_2POW		3
 #  define NO_TLS
 #endif
 #ifdef __sparc64__
@@ -243,6 +244,9 @@ __strerror_r(int e, char *s, size_t l)
 #  define QUANTUM_2POW_MIN	3
 #  define SIZEOF_PTR_2POW	2
 #  define USE_BRK
+#  ifdef __ARM_EABI__
+#    define TINY_MIN_2POW	3
+#  endif
 #  define NO_TLS
 #endif
 #ifdef __powerpc__
@@ -303,7 +307,9 @@ __strerror_r(int e, char *s, size_t l)
 #define	CACHELINE		((size_t)(1 << CACHELINE_2POW))
 
 /* Smallest size class to support. */
-#define	TINY_MIN_2POW		1
+#ifndef TINY_MIN_2POW
+#define	TINY_MIN_2POW		2
+#endif
 
 /*
  * Maximum size class that is a multiple of the quantum, but not (necessarily)

@@ -212,7 +212,7 @@ Lstart2:
 	movl	%d1,%a0@		| and physmem
 
 /* check if symbol table is loaded and set esym address */
-#if NKSYMS || defined(DDB) || defined(LKM)
+#if NKSYMS || defined(DDB) || defined(MODULAR)
 	RELOC(end,%a0)
 	pea	%a0@
 	RELOC(_C_LABEL(symtab_size),%a0)
@@ -230,7 +230,7 @@ Lstart2:
 	movl	%d0,%a0@
 
 /* configure kernel and lwp0 VA space so we can get going */
-#if NKSYMS || defined(DDB) || defined(LKM)
+#if NKSYMS || defined(DDB) || defined(MODULAR)
 	RELOC(esym,%a0)			| end of static kernel test/data/syms
 	movl	%a0@,%d2
 	jne	Lstart3

@@ -53,9 +53,9 @@
 int
 chfs_lookup(void *v)
 {
-	struct vnode *dvp = ((struct vop_lookup_args *) v)->a_dvp;
-	struct vnode **vpp = ((struct vop_lookup_args *) v)->a_vpp;
-	struct componentname *cnp = ((struct vop_lookup_args *) v)->a_cnp;
+	struct vnode *dvp = ((struct vop_lookup_v2_args *) v)->a_dvp;
+	struct vnode **vpp = ((struct vop_lookup_v2_args *) v)->a_vpp;
+	struct componentname *cnp = ((struct vop_lookup_v2_args *) v)->a_cnp;
 
 	int error;
 	struct chfs_inode* ip;
@@ -161,12 +161,15 @@ chfs_lookup(void *v)
 	}
 
 out:
-	/* If there were no errors, *vpp cannot be null and it must be
-	 * locked. */
-	KASSERT(IFF(error == 0, *vpp != NULL && VOP_ISLOCKED(*vpp)));
+	/* If there were no errors, *vpp cannot be NULL. */
+	KASSERT(IFF(error == 0, *vpp != NULL));
 	KASSERT(VOP_ISLOCKED(dvp));
 
-	return error;
+	if (error)
+		return error;
+	if (*vpp != dvp)
+		VOP_UNLOCK(*vpp);
+	return 0;
 }
 
 /* --------------------------------------------------------------------- */

@@ -80,7 +80,7 @@ void	fldcw(void *);
 void	fnclex(void);
 void	fninit(void);
 void	fnsave(void *);
-void	fnstcw(void *);
+void	fnstcw(uint16_t *);
 void	fnstsw(void *);
 void	fp_divide_by_0(void);
 void	frstor(void *);
@@ -92,7 +92,8 @@ void	fxsave(void *);
 void	fxrstor(void *);
 void	x86_monitor(const void *, uint32_t, uint32_t);
 void	x86_mwait(uint32_t, uint32_t);
-void	x86_ldmxcsr(void *);
+void	x86_ldmxcsr(const uint32_t *);
+void	x86_stmxcsr(uint32_t *);
 /* x86_cpuid2() writes four 32bit values, %eax, %ebx, %ecx and %edx */
 #define	x86_cpuid(a,b)	x86_cpuid2((a),0,(b))
 void	x86_cpuid2(uint32_t, uint32_t, uint32_t *);

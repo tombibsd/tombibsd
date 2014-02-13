@@ -245,7 +245,7 @@ main(int argc, char **argv)
 
 		lfd = open(file, O_RDONLY|O_EXLOCK, 0);
 		if (lfd == -1)
-			err(1, "Cannot open `%s'", argv[1]);
+			err(1, "Cannot open `%s'", file);
 
 		yyin = fdopen(lfd, "r");
 

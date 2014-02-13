@@ -131,7 +131,7 @@
 /getprogname.c/1.4/Thu Oct  6 20:31:41 2011/-kk/
 /getpwent.3/1.38/Thu Apr 28 16:35:05 2011/-kk/
 /getpwent.c/1.81/Sat Sep  8 15:15:06 2012/-kk/
-/getttyent.3/1.20/Sun Apr 22 10:14:18 2012/-kk/
+/getttyent.3/1.21/Thu Feb 13 15:35:38 2014/-kk/
 /getttyent.c/1.26/Thu Oct 24 10:28:53 2013/-kk/
 /getusershell.3/1.10/Tue Nov 23 04:38:19 2004/-kk/
 /getusershell.c/1.29/Tue Mar 13 21:13:36 2012/-kk/
@@ -198,11 +198,11 @@
 /pause.c/1.11/Sun Jun 24 15:26:03 2012/-kk/
 /popen.3/1.18/Mon Jun 27 08:21:07 2011/-kk/
 /popen.c/1.32/Mon Jun 25 22:32:43 2012/-kk/
-/posix_spawn.3/1.4/Tue Oct 29 12:11:37 2013/-kk/
-/posix_spawn_file_actions_addopen.3/1.3/Tue Oct 29 12:11:37 2013/-kk/
-/posix_spawn_file_actions_init.3/1.3/Tue Oct 29 12:11:37 2013/-kk/
-/posix_spawn_fileactions.c/1.2/Sun Apr  8 11:27:44 2012/-kk/
-/posix_spawn_sched.c/1.1/Sat Feb 11 23:31:24 2012/-kk/
+/posix_spawn.3/1.6/Thu Feb 13 15:35:38 2014/-kk/
+/posix_spawn_file_actions_addopen.3/1.5/Thu Feb 13 15:35:38 2014/-kk/
+/posix_spawn_file_actions_init.3/1.5/Thu Feb 13 15:35:38 2014/-kk/
+/posix_spawn_fileactions.c/1.4/Thu Feb 13 15:35:38 2014/-kk/
+/posix_spawn_sched.c/1.2/Thu Feb 13 15:35:38 2014/-kk/
 /posix_spawnattr_getflags.3/1.3/Tue Oct 29 12:11:37 2013/-kk/
 /posix_spawnattr_getpgroup.3/1.3/Tue Oct 29 12:11:37 2013/-kk/
 /posix_spawnattr_getschedparam.3/1.3/Tue Oct 29 12:11:37 2013/-kk/

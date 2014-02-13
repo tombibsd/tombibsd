@@ -77,8 +77,8 @@
 ./usr/lib/64/libarchive.so.3.1			base-compat-shlib	compat,pic,arch64
 ./usr/lib/64/libasn1.so.9			base-compat-shlib	compat,pic,kerberos,arch64
 ./usr/lib/64/libasn1.so.9.0			base-compat-shlib	compat,pic,kerberos,arch64
-./usr/lib/64/libatf-c++.so.0			base-compat-shlib	compat,pic,atf,arch64
-./usr/lib/64/libatf-c++.so.0.0			base-compat-shlib	compat,pic,atf,arch64
+./usr/lib/64/libatf-c++.so.1			base-compat-shlib	compat,pic,atf,arch64
+./usr/lib/64/libatf-c++.so.1.0			base-compat-shlib	compat,pic,atf,arch64
 ./usr/lib/64/libatf-c.so.0			base-compat-shlib	compat,pic,atf,arch64
 ./usr/lib/64/libatf-c.so.0.0			base-compat-shlib	compat,pic,atf,arch64
 ./usr/lib/64/libbfd.so.13			base-compat-shlib	compat,pic,binutils,arch64
@@ -94,7 +94,7 @@
 ./usr/lib/64/libc++.so.1			base-compat-shlib	compat,pic,libcxx,arch64
 ./usr/lib/64/libc++.so.1.0			base-compat-shlib	compat,pic,libcxx,arch64
 ./usr/lib/64/libc.so.12				base-compat-shlib	compat,pic,arch64
-./usr/lib/64/libc.so.12.189			base-compat-shlib	compat,pic,arch64
+./usr/lib/64/libc.so.12.190			base-compat-shlib	compat,pic,arch64
 ./usr/lib/64/libcom_err.so.7			base-compat-shlib	compat,pic,kerberos,arch64
 ./usr/lib/64/libcom_err.so.7.0			base-compat-shlib	compat,pic,kerberos,arch64
 ./usr/lib/64/libcrypt.so.1			base-compat-shlib	compat,pic,arch64
@@ -417,8 +417,8 @@
 ./usr/lib/o32/libarchive.so.3.1			base-compat-shlib	compat,pic,arch64
 ./usr/lib/o32/libasn1.so.9			base-compat-shlib	compat,pic,kerberos,arch64
 ./usr/lib/o32/libasn1.so.9.0			base-compat-shlib	compat,pic,kerberos,arch64
-./usr/lib/o32/libatf-c++.so.0			base-compat-shlib	compat,pic,atf,arch64
-./usr/lib/o32/libatf-c++.so.0.0			base-compat-shlib	compat,pic,atf,arch64
+./usr/lib/o32/libatf-c++.so.1			base-compat-shlib	compat,pic,atf,arch64
+./usr/lib/o32/libatf-c++.so.1.0			base-compat-shlib	compat,pic,atf,arch64
 ./usr/lib/o32/libatf-c.so.0			base-compat-shlib	compat,pic,atf,arch64
 ./usr/lib/o32/libatf-c.so.0.0			base-compat-shlib	compat,pic,atf,arch64
 ./usr/lib/o32/libbfd.so.13			base-compat-shlib	compat,pic,binutils,arch64
@@ -434,7 +434,7 @@
 ./usr/lib/o32/libc++.so.1			base-compat-shlib	compat,pic,libcxx,arch64
 ./usr/lib/o32/libc++.so.1.0			base-compat-shlib	compat,pic,libcxx,arch64
 ./usr/lib/o32/libc.so.12			base-compat-shlib	compat,pic,arch64
-./usr/lib/o32/libc.so.12.189			base-compat-shlib	compat,pic,arch64
+./usr/lib/o32/libc.so.12.190			base-compat-shlib	compat,pic,arch64
 ./usr/lib/o32/libcom_err.so.7			base-compat-shlib	compat,pic,kerberos,arch64
 ./usr/lib/o32/libcom_err.so.7.0			base-compat-shlib	compat,pic,kerberos,arch64
 ./usr/lib/o32/libcrypt.so.1			base-compat-shlib	compat,pic,arch64

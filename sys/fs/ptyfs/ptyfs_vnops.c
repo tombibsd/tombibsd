@@ -582,7 +582,7 @@ ptyfs_access(void *v)
 int
 ptyfs_lookup(void *v)
 {
-	struct vop_lookup_args /* {
+	struct vop_lookup_v2_args /* {
 		struct vnode * a_dvp;
 		struct vnode ** a_vpp;
 		struct componentname * a_cnp;
@@ -621,7 +621,10 @@ ptyfs_lookup(void *v)
 
 		error = ptyfs_allocvp(dvp->v_mount, vpp, PTYFSpts, pty,
 		    curlwp);
-		return error;
+		if (error)
+			return error;
+		VOP_UNLOCK(*vpp);
+		return 0;
 
 	default:
 		return ENOTDIR;

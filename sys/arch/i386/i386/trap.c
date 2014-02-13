@@ -220,8 +220,6 @@ xmm_si_code(struct lwp *l)
 		return FPE_FLTOVF;
 	case EN_SW_UNDERFLOW:
 		return FPE_FLTUND;
-	case EN_SW_DATACHAIN:
-		return FPE_FLTSUB;
 	case 0:
 	default:
 		return 0;

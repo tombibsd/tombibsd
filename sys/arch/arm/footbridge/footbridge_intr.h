@@ -141,14 +141,12 @@ footbridge_spllower(int ipl)
 #define splx(newspl)		footbridge_splx(newspl)
 #define	_spllower(ipl)		footbridge_spllower(ipl)
 #define	_splraise(ipl)		footbridge_splraise(ipl)
-void	_setsoftintr(int);
 
 #else
 
 int	_splraise(int);
 int	_spllower(int);
 void	splx(int);
-void	_setsoftintr(int);
 
 #endif /* ! ARM_SPL_NOINLINE */
 

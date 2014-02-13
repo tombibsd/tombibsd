@@ -17,7 +17,7 @@ INCS=	ansi.h aout_machdep.h asm.h autoconf.h \
 	oldmon.h openpromio.h \
 	param.h pcb.h pmap.h pmc.h proc.h profile.h psl.h pte.h ptrace.h \
 	reg.h reloc.h remote-sl.h rwlock.h \
-	setjmp.h signal.h svr4_machdep.h \
+	setjmp.h signal.h sljitarch.h svr4_machdep.h \
 	trap.h types.h \
 	vmparam.h vuid_event.h \
 	wchar_limits.h \

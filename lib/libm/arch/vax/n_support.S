@@ -31,6 +31,8 @@
  */
 #include <machine/asm.h>
 
+WEAK_ALIAS(logbl,logb)
+
 	.text
 _sccsid:
 	.asciz "@(#)support.s\t1.3 (Berkeley) 8/21/85; 8.1 (ucb.elefunt) 6/4/93"
@@ -57,6 +59,15 @@ ENTRY(copysign, 0)
 	bicw2	$0x8000,%r0		# replace x by |x|
 	bisw2	%r2,%r0			# copy the sign bit of y to x
 Lz:	ret
+
+/*
+ * float logbf(float x);
+ */
+ENTRY(logbf, 0)
+	cvtfd   4(%ap),-(%sp)
+	calls   $2,_C_LABEL(logb)
+	cvtdf   %r0,%r0
+	ret
 
 /*
  * double logb(double x);

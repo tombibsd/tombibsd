@@ -82,6 +82,7 @@ test_case check_valid gcc_variable_array_init "Checks GCC variable array" \
     "initializers"
 test_case check_valid c9x_array_init "Checks C9X array initializers"
 test_case check_valid c99_decls_after_stmt "Checks C99 decls after statements"
+test_case check_valid c99_decls_after_stmt3 "Checks C99 decls after statements"
 test_case check_valid nolimit_init "Checks no limit initializers"
 test_case check_valid zero_sized_arrays "Checks zero sized arrays"
 

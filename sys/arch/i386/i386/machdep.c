@@ -229,8 +229,7 @@ struct mtrr_funcs *mtrr_funcs;
 
 int	cpu_class;
 int	use_pae;
-int	i386_fpu_present;
-int	i386_fpu_exception;
+int	i386_fpu_present = 1;
 int	i386_fpu_fdivbug;
 
 int	i386_use_fxsave;
@@ -1645,14 +1644,18 @@ cpu_getmcontext(struct lwp *l, mcontext_t *mcp, unsigned int *flags)
 		if (pcb->pcb_fpcpu)
 			fpusave_lwp(l, true);
 		if (i386_use_fxsave) {
-			memcpy(&mcp->__fpregs.__fp_reg_set.__fp_xmm_state.__fp_xmm,
+			__CTASSERT(sizeof pcb->pcb_savefpu.sv_xmm ==
+			    sizeof mcp->__fpregs.__fp_reg_set.__fp_xmm_state);
+			memcpy(&mcp->__fpregs.__fp_reg_set.__fp_xmm_state,
 			    &pcb->pcb_savefpu.sv_xmm,
-			    sizeof (mcp->__fpregs.__fp_reg_set.__fp_xmm_state.__fp_xmm));
+			    sizeof (mcp->__fpregs.__fp_reg_set.__fp_xmm_state));
 			*flags |= _UC_FXSAVE;
 		} else {
-			memcpy(&mcp->__fpregs.__fp_reg_set.__fpchip_state.__fp_state,
+			__CTASSERT(sizeof pcb->pcb_savefpu.sv_87 ==
+			    sizeof mcp->__fpregs.__fp_reg_set.__fpchip_state);
+			memcpy(&mcp->__fpregs.__fp_reg_set.__fpchip_state,
 			    &pcb->pcb_savefpu.sv_87,
-			    sizeof (mcp->__fpregs.__fp_reg_set.__fpchip_state.__fp_state));
+			    sizeof (mcp->__fpregs.__fp_reg_set.__fpchip_state));
 		}
 #if 0
 		/* Apparently nothing ever touches this. */
@@ -1743,26 +1746,30 @@ cpu_setmcontext(struct lwp *l, const mcontext_t *mcp, unsigned int flags)
 
 	/* Restore floating point register context, if any. */
 	if ((flags & _UC_FPU) != 0) {
+		__CTASSERT(sizeof pcb->pcb_savefpu.sv_xmm ==
+		    sizeof mcp->__fpregs.__fp_reg_set.__fp_xmm_state);
+		__CTASSERT(sizeof pcb->pcb_savefpu.sv_87 ==
+		    sizeof mcp->__fpregs.__fp_reg_set.__fpchip_state);
+
 		if (flags & _UC_FXSAVE) {
 			if (i386_use_fxsave) {
-				memcpy(
-					&pcb->pcb_savefpu.sv_xmm,
-					&mcp->__fpregs.__fp_reg_set.__fp_xmm_state.__fp_xmm,
-					sizeof (pcb->pcb_savefpu.sv_xmm));
+				memcpy(&pcb->pcb_savefpu.sv_xmm,
+				    &mcp->__fpregs.__fp_reg_set.__fp_xmm_state,
+				    sizeof (pcb->pcb_savefpu.sv_xmm));
 			} else {
 				/* This is a weird corner case */
-				process_xmm_to_s87((struct fxsave *)
-				    &mcp->__fpregs.__fp_reg_set.__fp_xmm_state.__fp_xmm,
+				process_xmm_to_s87((const struct fxsave *)
+				    &mcp->__fpregs.__fp_reg_set.__fp_xmm_state,
 				    &pcb->pcb_savefpu.sv_87);
 			}
 		} else {
 			if (i386_use_fxsave) {
-				process_s87_to_xmm((struct save87 *)
-				    &mcp->__fpregs.__fp_reg_set.__fpchip_state.__fp_state,
+				process_s87_to_xmm((const struct save87 *)
+				    &mcp->__fpregs.__fp_reg_set.__fpchip_state,
 				    &pcb->pcb_savefpu.sv_xmm);
 			} else {
 				memcpy(&pcb->pcb_savefpu.sv_87,
-				    &mcp->__fpregs.__fp_reg_set.__fpchip_state.__fp_state,
+				    &mcp->__fpregs.__fp_reg_set.__fpchip_state,
 				    sizeof (pcb->pcb_savefpu.sv_87));
 			}
 		}

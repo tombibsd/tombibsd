@@ -81,8 +81,7 @@
  * by PowerPC GNU ld.so).
  */
 #define LINUX_ELF_AUX_ARGSIZ \
-    ((howmany(LINUX_ELF_AUX_ENTRIES * sizeof(Aux32Info), sizeof(Elf32_Addr))) \
-    + 16)
+	(howmany(LINUX_ELF_AUX_ENTRIES * sizeof(Aux32Info), sizeof(Elf32_Addr)) + LINUX_RANDOM_BYTES + 16)
 
 /* we have special powerpc ELF copyargs */
 #define LINUX_MACHDEP_ELF_COPYARGS

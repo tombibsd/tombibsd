@@ -91,6 +91,7 @@ yyerror(const char *fmt, ...)
 %token			ARROWLEFT
 %token			ARROWRIGHT
 %token			BLOCK
+%token			CDB
 %token			CURLY_CLOSE
 %token			CURLY_OPEN
 %token			CODE
@@ -107,7 +108,6 @@ yyerror(const char *fmt, ...)
 %token			HASH
 %token			ICMPTYPE
 %token			ID
-%token			IFNET
 %token			IN
 %token			INET4
 %token			INET6
@@ -278,6 +278,7 @@ table
 table_type
 	: HASH		{ $$ = NPF_TABLE_HASH; }
 	| TREE		{ $$ = NPF_TABLE_TREE; }
+	| CDB		{ $$ = NPF_TABLE_CDB; }
 	;
 
 table_store

@@ -101,7 +101,7 @@ LIBS		= ${LIBSA} ${LIBZ} ${LIBKERN}
 coffhdrfix:	${COMMON}/coffhdrfix.c
 	${HOST_CC} -o ${COFFHDRFIX} ${COMMON}/coffhdrfix.c
 
-clean cleandir distclean: .WAIT cleanlibdir
+cleandir distclean: .WAIT cleanlibdir
 
 cleanlibdir:
 	-rm -rf lib

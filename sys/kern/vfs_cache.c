@@ -465,28 +465,6 @@ cache_lookup(struct vnode *dvp, const char *name, size_t namelen,
 	ncp = NULL;
 #endif /* DEBUG */
 
-	if (vp == dvp) {	/* lookup on "." */
-		error = 0;
-	} else if (cnflags & ISDOTDOT) {
-		VOP_UNLOCK(dvp);
-		error = vn_lock(vp, LK_EXCLUSIVE);
-		vn_lock(dvp, LK_EXCLUSIVE | LK_RETRY);
-	} else {
-		error = vn_lock(vp, LK_EXCLUSIVE);
-	}
-
-	/*
-	 * Check that the lock succeeded.
-	 */
-	if (error) {
-		/* We don't have the right lock, but this is only for stats. */
-		COUNT(cpup->cpu_stats, ncs_badhits);
-
-		vrele(vp);
-		/* found nothing */
-		return 0;
-	}
-
 	/* We don't have the right lock, but this is only for stats. */
 	COUNT(cpup->cpu_stats, ncs_goodhits);
 

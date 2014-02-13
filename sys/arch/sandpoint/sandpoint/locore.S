@@ -129,20 +129,6 @@ __start:
 
 loop:	b	loop			/* not reached */
 
-	.globl	_C_LABEL(enable_intr)
-_C_LABEL(enable_intr):
-	mfmsr	3
-	ori	3,3,PSL_EE@l
-	mtmsr	3
-	blr
-
-	.globl	_C_LABEL(disable_intr)
-_C_LABEL(disable_intr):
-	mfmsr	3
-	andi.	3,3,~PSL_EE@l
-	mtmsr	3
-	blr
-
 	.globl	_C_LABEL(jump_to_ppc_reset_entry)
 _C_LABEL(jump_to_ppc_reset_entry):
 	mfmsr	3

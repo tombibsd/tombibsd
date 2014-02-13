@@ -48,8 +48,10 @@ int	uvm_swap_alloc(int *, bool);
 void	uvm_swap_free(int, int);
 void	uvm_swap_markbad(int, int);
 bool	uvm_swapisfull(void);
+void	uvm_swap_stats(int, struct swapent *, int, register_t *);
 #else /* defined(VMSWAP) */
 #define	uvm_swapisfull()	true
+#define uvm_swap_stats(c, sep, count, retval) { *retval = 0; }
 #endif /* defined(VMSWAP) */
 void	uvm_swap_shutdown(struct lwp *);
 

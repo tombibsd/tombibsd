@@ -111,7 +111,7 @@ print_family(npf_conf_info_t *ctx, const uint32_t *words)
 
 	switch (af) {
 	case AF_INET:
-		return estrdup("inet");
+		return estrdup("inet4");
 	case AF_INET6:
 		return estrdup("inet6");
 	default:
@@ -378,6 +378,7 @@ npfctl_print_nat(npf_conf_info_t *ctx, nl_nat_t *nt)
 	npf_addr_t addr;
 	in_port_t port;
 	size_t alen;
+	u_int flags;
 	char *seg;
 
 	/* Get the interface. */
@@ -405,12 +406,14 @@ npfctl_print_nat(npf_conf_info_t *ctx, nl_nat_t *nt)
 		seg2 = seg;
 		break;
 	default:
-		assert(false);
+		abort();
 	}
+	flags = npf_nat_getflags(nt);
 
 	/* Print out the NAT policy with the filter criteria. */
-	fprintf(ctx->fp, "map %s dynamic %s %s %s pass ",
-	    ifname, seg1, arrow, seg2);
+	fprintf(ctx->fp, "map %s %s %s %s %s pass ",
+	    ifname, (flags & NPF_NAT_STATIC) ? "static" : "dynamic",
+	    seg1, arrow, seg2);
 	npfctl_print_filter(ctx, rl);
 	fputs("\n", ctx->fp);
 	free(seg);

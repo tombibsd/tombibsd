@@ -1,4 +1,4 @@
-/ace.c/1.2/Sun Jul 17 20:54:39 2011/-kk/
+/ace.c/1.3/Thu Feb 13 15:35:49 2014/-kk/
 /ace.h/1.1/Wed Jan 26 01:18:54 2011/-kk/
 /boot.c/1.1/Wed Jan 26 01:18:54 2011/-kk/
 /bootinfo.c/1.1/Wed Jan 26 01:18:54 2011/-kk/
@@ -6,7 +6,7 @@
 /bootxx.c/1.1/Wed Jan 26 01:18:54 2011/-kk/
 /checksize.sh/1.1/Wed Jan 26 01:18:54 2011/-kk/
 /clock.c/1.1/Wed Jan 26 01:18:54 2011/-kk/
-/common.h/1.1/Wed Jan 26 01:18:54 2011/-kk/
+/common.h/1.2/Thu Feb 13 15:35:49 2014/-kk/
 /conf.c/1.1/Wed Jan 26 01:18:54 2011/-kk/
 /dev_net.c/1.1/Wed Jan 26 01:18:54 2011/-kk/
 /devopen.c/1.1/Wed Jan 26 01:18:54 2011/-kk/
@@ -18,6 +18,6 @@
 /putchar.c/1.1/Wed Jan 26 01:18:54 2011/-kk/
 /raw.c/1.2/Sun Jul 17 20:54:39 2011/-kk/
 /raw.h/1.1/Wed Jan 26 01:18:54 2011/-kk/
-/start.S/1.2/Thu Mar 10 18:18:00 2011/-kk/
+/start.S/1.3/Thu Feb 13 15:35:49 2014/-kk/
 /start.h/1.1/Wed Jan 26 01:18:54 2011/-kk/
 D

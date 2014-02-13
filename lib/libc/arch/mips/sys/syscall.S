@@ -42,4 +42,6 @@
 #endif
 #endif /* LIBC_SCCS and not lint */
 
+#ifdef __mips_o32
 RSYSCALL(syscall)
+#endif

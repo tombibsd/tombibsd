@@ -59,7 +59,7 @@
 #define LINUX_GCC_SIGNATURE 1
 
 #define LINUX_ELF_AUX_ARGSIZ \
-    ((howmany(LINUX_ELF_AUX_ENTRIES * sizeof(Aux32Info), sizeof(Elf32_Addr))))
+	(howmany(LINUX_ELF_AUX_ENTRIES * sizeof(Aux32Info), sizeof(Elf32_Addr)) + LINUX_RANDOM_BYTES)
 
 #define linux_exec_setup_stack	exec_setup_stack
 

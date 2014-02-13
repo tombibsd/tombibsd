@@ -552,7 +552,7 @@ Lstart1:
 /*
  * configure kernel and lwp0 VA space so we can get going
  */
-#if NKSYMS || defined(DDB) || defined(LKM)
+#if NKSYMS || defined(DDB) || defined(MODULAR)
 	RELOC(esym,%a0)			| end of static kernel text/data syms
 	movl	%a0@,%d2
 	jne	Lstart2

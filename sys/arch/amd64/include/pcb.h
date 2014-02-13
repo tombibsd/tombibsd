@@ -93,7 +93,7 @@ struct pcb {
 	uint64_t pcb_rbp;
 	uint64_t pcb_usersp;
 	uint32_t pcb_unused[2];		/* unused */
-	struct	savefpu pcb_savefpu __aligned(16); /* floating point state */
+	union	savefpu pcb_savefpu __aligned(16); /* floating point state */
 	uint32_t pcb_unused_1[4];	/* unused */
 	void     *pcb_onfault;		/* copyin/out fault recovery */
 	struct cpu_info *pcb_fpcpu;	/* cpu holding our fp state. */

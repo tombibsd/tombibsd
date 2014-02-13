@@ -1,4 +1,4 @@
-/*	cpu.h,v 1.45.4.7 2008/01/28 18:20:39 matt Exp	*/
+/*	$NetBSD$	*/
 
 /*
  * Copyright (c) 1994-1996 Mark Brinicombe.
@@ -171,7 +171,7 @@ extern bool cpu_armv6_p;
 #endif
 
 /*
- * User by the fault code to read the current instruction.
+ * Used by the fault code to read the current instruction.
  */
 static inline uint32_t
 read_insn(vaddr_t va, bool user_p)
@@ -189,7 +189,7 @@ read_insn(vaddr_t va, bool user_p)
 }
 
 /*
- * User by the fault code to read the current thumb instruction.
+ * Used by the fault code to read the current thumb instruction.
  */
 static inline uint32_t
 read_thumb_insn(vaddr_t va, bool user_p)
@@ -198,7 +198,7 @@ read_thumb_insn(vaddr_t va, bool user_p)
 	uint32_t insn;
 	if (user_p) {
 #ifdef _ARM_ARCH_T2
-		__asm __volatile("ldrht %0, [%1]" : "=&r"(insn) : "r"(va));
+		__asm __volatile("ldrht %0, [%1], #0" : "=&r"(insn) : "r"(va));
 #else
 		__asm __volatile("ldrt %0, [%1]" : "=&r"(insn) : "r"(va & ~3));
 #ifdef __ARMEB__

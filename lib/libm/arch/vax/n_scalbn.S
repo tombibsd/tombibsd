@@ -33,6 +33,8 @@
 RCSID("$NetBSD$")
 
 WEAK_ALIAS(scalbn,_scalbn)
+WEAK_ALIAS(scalbnl,_scalbnl)
+WEAK_ALIAS(scalbnf,_scalbnf)
 WEAK_ALIAS(ldexp,_scalbn)
 WEAK_ALIAS(ldexpf,_scalbnf)
 WEAK_ALIAS(ldexpl,_scalbnl)

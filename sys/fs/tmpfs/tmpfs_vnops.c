@@ -124,7 +124,7 @@ const struct vnodeopv_desc tmpfs_vnodeop_opv_desc = {
 int
 tmpfs_lookup(void *v)
 {
-	struct vop_lookup_args /* {
+	struct vop_lookup_v2_args /* {
 		struct vnode *a_dvp;
 		struct vnode **a_vpp;
 		struct componentname *a_cnp;
@@ -171,10 +171,10 @@ tmpfs_lookup(void *v)
 	if (cachefound && *vpp == NULLVP) {
 		/* Negative cache hit. */
 		error = ENOENT;
-		goto out;
+		goto out_unlocked;
 	} else if (cachefound) {
 		error = 0;
-		goto out;
+		goto out_unlocked;
 	}
 
 	/*
@@ -302,7 +302,9 @@ done:
 			    cnp->cn_flags);
 	}
 out:
-	KASSERT((*vpp && VOP_ISLOCKED(*vpp)) || error);
+	if (error == 0 && *vpp != dvp)
+		VOP_UNLOCK(*vpp);
+out_unlocked:
 	KASSERT(VOP_ISLOCKED(dvp));
 
 	return error;

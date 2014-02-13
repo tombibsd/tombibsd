@@ -214,9 +214,16 @@ layerfs_vget(struct mount *mp, ino_t ino, struct vnode **vpp)
 		*vpp = NULL;
 		return error;
 	}
+	VOP_UNLOCK(vp);
 	error = layer_node_create(mp, vp, vpp);
 	if (error) {
-		vput(vp);
+		vrele(vp);
+		*vpp = NULL;
+		return error;
+	}
+	error = vn_lock(*vpp, LK_EXCLUSIVE);
+	if (error) {
+		vrele(*vpp);
 		*vpp = NULL;
 		return error;
 	}
@@ -231,13 +238,21 @@ layerfs_fhtovp(struct mount *mp, struct fid *fidp, struct vnode **vpp)
 
 	error = VFS_FHTOVP(MOUNTTOLAYERMOUNT(mp)->layerm_vfs, fidp, &vp);
 	if (error) {
+		*vpp = NULL;
 		return error;
 	}
+	VOP_UNLOCK(vp);
 	error = layer_node_create(mp, vp, vpp);
 	if (error) {
 		vput(vp);
 		*vpp = NULL;
 		return (error);
+	}
+	error = vn_lock(*vpp, LK_EXCLUSIVE);
+	if (error) {
+		vrele(*vpp);
+		*vpp = NULL;
+		return error;
 	}
 	return 0;
 }

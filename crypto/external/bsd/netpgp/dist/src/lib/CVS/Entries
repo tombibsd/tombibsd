@@ -31,7 +31,7 @@
 /readerwriter.h/1.13/Sun Nov  7 08:39:59 2010/-kk/
 /signature.c/1.34/Mon Mar  5 02:20:18 2012/-kk/
 /signature.h/1.21/Sun Nov  7 08:39:59 2010/-kk/
-/ssh2pgp.c/1.22/Sat Jan  1 19:53:53 2011/-kk/
+/ssh2pgp.c/1.23/Thu Feb 13 15:32:19 2014/-kk/
 /ssh2pgp.h/1.1/Sun Nov  7 21:41:39 2010/-kk/
 /symmetric.c/1.18/Sun Nov  7 08:39:59 2010/-kk/
 /types.h/1.11/Mon Nov 15 08:56:30 2010/-kk/

@@ -2,5 +2,5 @@
 
 #define	__HAVE_NANF
 #ifdef __ARM_PCS_AAPCS64
-#define __HAVE_LONG_DOUBLE
+#define __HAVE_LONG_DOUBLE	128
 #endif

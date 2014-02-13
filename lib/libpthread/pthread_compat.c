@@ -85,10 +85,11 @@ _lwp_detach(lwpid_t a)
 }
 
 int
-_lwp_park(const struct timespec *a, lwpid_t b, const void *c, const void *d)
+_lwp_park(clockid_t a, int b, const struct timespec *c, lwpid_t d,
+    const void *e, const void *f)
 {
 
-	return syscall(SYS__lwp_park, a, b, c, d);
+	return syscall(SYS____lwp_park60, a, b, c, d, e, f);
 }
 
 int

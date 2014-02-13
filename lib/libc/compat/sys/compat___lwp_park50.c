@@ -43,11 +43,6 @@ __RCSID("$NetBSD$");
 #include <compat/sys/mount.h>
 #include <compat/include/lwp.h>
 
-#ifndef notyet
-#include <unistd.h>
-#include <sys/syscall.h>
-#endif
-
 __warn_references(fhstat,
     "warning: reference to compatibility ___lwp_park50(); include <lwp.h> to generate correct reference")
 
@@ -58,10 +53,6 @@ int
 ___lwp_park50(const struct timespec *ts, lwpid_t unpark, const void *hint,
 	const void *unparkhint)
 {
-#ifdef notyet
 	return ___lwp_park60(CLOCK_REALTIME, TIMER_ABSTIME, ts,  unpark,
 	    hint, unparkhint);
-#else
-	return syscall(SYS_compat_60__lwp_park, ts, unpark, hint, unparkhint);
-#endif
 }

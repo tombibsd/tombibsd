@@ -65,6 +65,7 @@
 
 #include "common.h"
 #include "ace.h"
+#include "start.h"
 
 #define NSAC 2
 #define SAC0 ((struct _Sac  *)IDE_DEFAULT_ADDRESS)
@@ -618,7 +619,7 @@ aceopen(struct open_file *f, ...)
 	int i;
 	char *msg;
 	char buf[DEV_BSIZE];
-	int cnt;
+	size_t cnt;
 	va_list ap;
 
 	va_start(ap, f);

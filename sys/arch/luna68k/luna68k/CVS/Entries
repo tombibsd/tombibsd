@@ -4,7 +4,7 @@
 /genassym.cf/1.20/Sat Nov  5 15:37:17 2011/-kk/
 /isr.c/1.21/Sat Nov 26 04:40:51 2011/-kk/
 /isr.h/1.4/Sat Mar 14 14:46:01 2009/-kk/
-/locore.s/1.54/Fri Jan 31 08:48:37 2014/-kk/
+/locore.s/1.55/Thu Feb 13 15:35:51 2014/-kk/
 /machdep.c/1.97/Fri Jan 31 08:48:37 2014/-kk/
 /mainbus.c/1.13/Fri Jan 31 08:48:37 2014/-kk/
 /pmap_bootstrap.c/1.36/Thu Oct 24 10:28:57 2013/-kk/

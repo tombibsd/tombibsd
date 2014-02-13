@@ -16,6 +16,8 @@
 
 #define	NPF_BINAT	(NPF_NATIN | NPF_NATOUT)
 
+#define	RANDOM_PORT	53472
+
 static const struct test_case {
 	const char *	src;
 	in_port_t	sport;
@@ -36,12 +38,12 @@ static const struct test_case {
 	{
 		LOCAL_IP1,	15000,		REMOTE_IP1,	7000,
 		NPF_NATOUT,	IFNAME_EXT,	PFIL_OUT,
-		RESULT_PASS,	PUB_IP1,	53472
+		RESULT_PASS,	PUB_IP1,	RANDOM_PORT
 	},
 	{
 		LOCAL_IP1,	15000,		REMOTE_IP1,	7000,
 		NPF_NATOUT,	IFNAME_EXT,	PFIL_OUT,
-		RESULT_PASS,	PUB_IP1,	53472
+		RESULT_PASS,	PUB_IP1,	RANDOM_PORT
 	},
 	{
 		LOCAL_IP1,	15000,		REMOTE_IP1,	7000,
@@ -54,19 +56,19 @@ static const struct test_case {
 		RESULT_BLOCK,	NULL,		0
 	},
 	{
-		REMOTE_IP1,	7000,		PUB_IP1,	53472,
+		REMOTE_IP1,	7000,		PUB_IP1,	RANDOM_PORT,
 		NPF_NATOUT,	IFNAME_INT,	PFIL_IN,
 		RESULT_BLOCK,	NULL,		0
 	},
 	{
-		REMOTE_IP1,	7000,		PUB_IP1,	53472,
+		REMOTE_IP1,	7000,		PUB_IP1,	RANDOM_PORT,
 		NPF_NATOUT,	IFNAME_EXT,	PFIL_IN,
 		RESULT_PASS,	LOCAL_IP1,	15000
 	},
 
 	/*
 	 * NAT redirect (inbound NAT):
-	 *	map $ext_if dynamic $local_ip1 port 8000 <- $pub_ip1 port 8000
+	 *	map $ext_if dynamic $local_ip1 port 6000 <- $pub_ip1 port 8000
 	 */
 	{
 		REMOTE_IP2,	16000,		PUB_IP1,	8000,
@@ -102,6 +104,21 @@ static const struct test_case {
 		REMOTE_IP2,	9000,		PUB_IP2,	18000,
 		NPF_BINAT,	IFNAME_EXT,	PFIL_IN,
 		RESULT_PASS,	LOCAL_IP2,	18000
+	},
+
+	/*
+	 * Static NAT: plain translation both ways.
+	 *	map $ext_if static $local_ip3 <-> $pub_ip3
+	 */
+	{
+		LOCAL_IP3,	19000,		REMOTE_IP3,	10000,
+		NPF_BINAT,	IFNAME_EXT,	PFIL_OUT,
+		RESULT_PASS,	PUB_IP3,	19000
+	},
+	{
+		REMOTE_IP3,	10000,		PUB_IP3,	19000,
+		NPF_BINAT,	IFNAME_EXT,	PFIL_IN,
+		RESULT_PASS,	LOCAL_IP3,	19000
 	},
 
 };

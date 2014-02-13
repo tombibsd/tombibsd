@@ -653,7 +653,7 @@ freedir(struct rumpfs_node *rnd, struct componentname *cnp)
 static int
 rump_vop_lookup(void *v)
 {
-	struct vop_lookup_args /* {
+	struct vop_lookup_v2_args /* {
 		struct vnode *a_dvp;
 		struct vnode **a_vpp;
 		struct componentname *a_cnp;
@@ -797,30 +797,18 @@ rump_vop_lookup(void *v)
 
  getvnode:
 	KASSERT(rn);
-	if (dotdot)
-		VOP_UNLOCK(dvp);
 	mutex_enter(&reclock);
 	if ((vp = rn->rn_vp)) {
 		mutex_enter(vp->v_interlock);
 		mutex_exit(&reclock);
-		if (vget(vp, LK_EXCLUSIVE)) {
-			vn_lock(dvp, LK_EXCLUSIVE | LK_RETRY);
+		if (vget(vp, 0)) {
 			goto getvnode;
 		}
 		*vpp = vp;
 	} else {
 		mutex_exit(&reclock);
 		rv = makevnode(dvp->v_mount, rn, vpp);
-		if (rv == 0) {
-			rv = vn_lock(*vpp, LK_EXCLUSIVE);
-			if (rv != 0) {
-				vrele(*vpp);
-				*vpp = NULL;
-			}
-		}
 	}
-	if (dotdot)
-		vn_lock(dvp, LK_EXCLUSIVE | LK_RETRY);
 
 	return rv;
 }

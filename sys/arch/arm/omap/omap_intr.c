@@ -428,16 +428,6 @@ _spllower(int ipl)
 	return omap_spllower(ipl);
 }
 
-#ifdef __HAVE_FAST_SOFTINTS
-#undef _setsoftintr
-void
-_setsoftintr(int si)
-{
-
-	return omap_setsoftintr(si);
-}
-#endif
-
 void *
 omap_intr_establish(int irqno, int level, const char *name,
 		    int (*func)(void *), void *cookie)

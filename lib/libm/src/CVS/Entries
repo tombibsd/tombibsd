@@ -130,7 +130,7 @@
 /s_nearbyint.c/1.3/Thu Oct 24 10:28:53 2013/-kk/
 /s_nextafter.c/1.13/Thu Oct 24 10:28:53 2013/-kk/
 /s_nextafterf.c/1.8/Mon Apr 18 15:59:09 2011/-kk/
-/s_nextafterl.c/1.4/Thu Oct 24 10:28:53 2013/-kk/
+/s_nextafterl.c/1.5/Thu Feb 13 15:35:39 2014/-kk/
 /s_nexttoward.c/1.2/Thu Oct 24 10:28:53 2013/-kk/
 /s_nexttowardf.c/1.3/Thu Oct 24 10:28:53 2013/-kk/
 /s_remquo.c/1.1/Sun Feb  6 01:53:38 2011/-kk/

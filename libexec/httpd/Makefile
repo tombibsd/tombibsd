@@ -83,9 +83,9 @@ export-distfile:
 	  find . -name .CVS | xargs rm -r; \
 	); \
 	pax -wf ${TAR} ${BASE}; \
-	${TOOL_GZIP} -nc9 ${TAR} > ${TAR}.gz; \
+	gzip -nc9 ${TAR} > ${TAR}.gz; \
 	bzip2 -9 ${TAR}
-	@echo "Exported two files:"
+	@echo "Exported two files in ${dir}:"
 	@echo ${TAR}.gz
 	@echo ${TAR}.bz2
 

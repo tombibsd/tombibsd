@@ -731,7 +731,6 @@ p2k_node_lookup(struct puffs_usermount *pu, puffs_cookie_t opc,
 		}
 		return rv;
 	}
-	RUMP_VOP_UNLOCK(vp);
 
 	p2n = getp2n(p2m, vp, false, NULL);
 	if (p2n == NULL) {

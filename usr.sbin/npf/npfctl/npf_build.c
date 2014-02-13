@@ -1,7 +1,7 @@
 /*	$NetBSD$	*/
 
 /*-
- * Copyright (c) 2011-2013 The NetBSD Foundation, Inc.
+ * Copyright (c) 2011-2014 The NetBSD Foundation, Inc.
  * All rights reserved.
  *
  * This material is based upon work partially supported by The
@@ -37,16 +37,19 @@
 __RCSID("$NetBSD$");
 
 #include <sys/types.h>
-#include <sys/ioctl.h>
+#include <sys/mman.h>
+#include <sys/stat.h>
 
 #include <stdlib.h>
 #include <inttypes.h>
 #include <string.h>
 #include <ctype.h>
+#include <unistd.h>
 #include <errno.h>
 #include <err.h>
 
 #include <pcap/pcap.h>
+#include <cdbw.h>
 
 #include "npfctl.h"
 
@@ -123,10 +126,25 @@ npfctl_debug_addif(const char *ifname)
 	return 0;
 }
 
-bool
-npfctl_table_exists_p(const char *name)
+unsigned
+npfctl_table_getid(const char *name)
 {
-	return npf_conf ? npf_table_exists_p(npf_conf, name) : false;
+	unsigned tid = (unsigned)-1;
+	nl_table_t *tl;
+
+	/* XXX dynamic ruleset */
+	if (!npf_conf) {
+		return (unsigned)-1;
+	}
+
+	/* XXX: Iterating all as we need to rewind for the next call. */
+	while ((tl = npf_table_iterate(npf_conf)) != NULL) {
+		const char *tname = npf_table_getname(tl);
+		if (strcmp(tname, name) == 0) {
+			tid = npf_table_getid(tl);
+		}
+	}
+	return tid;
 }
 
 static in_port_t
@@ -217,7 +235,8 @@ npfctl_build_vars(npf_bpf_t *ctx, sa_family_t family, npfvar_t *vars, int opts)
 			break;
 		}
 		case NPFVAR_TABLE: {
-			u_int tid = atoi(data);
+			u_int tid;
+			memcpy(&tid, data, sizeof(u_int));
 			npfctl_bpf_table(ctx, opts, tid);
 			break;
 		}
@@ -516,7 +535,7 @@ npfctl_build_rule(uint32_t attr, const char *ifname, sa_family_t family,
  */
 static void
 npfctl_build_nat(int type, const char *ifname, sa_family_t family,
-    const addr_port_t *ap, const filt_opts_t *fopts, bool binat)
+    const addr_port_t *ap, const filt_opts_t *fopts, u_int flags)
 {
 	const opt_proto_t op = { .op_proto = -1, .op_opts = NULL };
 	fam_addr_mask_t *am;
@@ -532,36 +551,16 @@ npfctl_build_nat(int type, const char *ifname, sa_family_t family,
 		yyerror("IPv6 NAT is not supported");
 	}
 
-	switch (type) {
-	case NPF_NATOUT:
-		/*
-		 * Outbound NAT (or source NAT) policy, usually used for the
-		 * traditional NAPT.  If it is a half for bi-directional NAT,
-		 * then no port translation with mapping.
-		 */
-		nat = npf_nat_create(NPF_NATOUT, !binat ?
-		    (NPF_NAT_PORTS | NPF_NAT_PORTMAP) : 0,
-		    ifname, &am->fam_addr, am->fam_family, 0);
-		break;
-	case NPF_NATIN:
-		/*
-		 * Inbound NAT (or destination NAT).  Unless bi-NAT, a port
-		 * must be specified, since it has to be redirection.
-		 */
+	if (ap->ap_portrange) {
+		port = npfctl_get_singleport(ap->ap_portrange);
+		flags &= ~NPF_NAT_PORTMAP;
+		flags |= NPF_NAT_PORTS;
+	} else {
 		port = 0;
-		if (!binat) {
-			if (!ap->ap_portrange) {
-				yyerror("inbound port is not specified");
-			}
-			port = npfctl_get_singleport(ap->ap_portrange);
-		}
-		nat = npf_nat_create(NPF_NATIN, !binat ? NPF_NAT_PORTS : 0,
-		    ifname, &am->fam_addr, am->fam_family, port);
-		break;
-	default:
-		assert(false);
 	}
 
+	nat = npf_nat_create(type, flags, ifname,
+	    &am->fam_addr, am->fam_family, port);
 	npfctl_build_code(nat, family, &op, fopts);
 	npf_nat_insert(npf_conf, nat, NPF_PRI_LAST);
 }
@@ -576,20 +575,32 @@ npfctl_build_natseg(int sd, int type, const char *ifname,
 {
 	sa_family_t af = AF_INET;
 	filt_opts_t imfopts;
+	u_int flags;
 	bool binat;
 
-	if (sd == NPFCTL_NAT_STATIC) {
-		yyerror("static NAT is not yet supported");
-	}
-	assert(sd == NPFCTL_NAT_DYNAMIC);
 	assert(ifname != NULL);
 
 	/*
 	 * Bi-directional NAT is a combination of inbound NAT and outbound
-	 * NAT policies.  Note that the translation address is local IP and
-	 * the filter criteria is inverted accordingly.
+	 * NAT policies with the translation segments inverted respectively.
 	 */
 	binat = (NPF_NATIN | NPF_NATOUT) == type;
+
+	switch (sd) {
+	case NPFCTL_NAT_DYNAMIC:
+		/*
+		 * Dynamic NAT: traditional NAPT is expected.  Unless it
+		 * is bi-directional NAT, perform port mapping.
+		 */
+		flags = !binat ? (NPF_NAT_PORTS | NPF_NAT_PORTMAP) : 0;
+		break;
+	case NPFCTL_NAT_STATIC:
+		/* Static NAT: mechanic translation. */
+		flags = NPF_NAT_STATIC;
+		break;
+	default:
+		abort();
+	}
 
 	/*
 	 * If the filter criteria is not specified explicitly, apply implicit
@@ -604,12 +615,12 @@ npfctl_build_natseg(int sd, int type, const char *ifname,
 	if (type & NPF_NATIN) {
 		memset(&imfopts, 0, sizeof(filt_opts_t));
 		memcpy(&imfopts.fo_to, ap2, sizeof(addr_port_t));
-		npfctl_build_nat(NPF_NATIN, ifname, af, ap1, fopts, binat);
+		npfctl_build_nat(NPF_NATIN, ifname, af, ap1, fopts, flags);
 	}
 	if (type & NPF_NATOUT) {
 		memset(&imfopts, 0, sizeof(filt_opts_t));
 		memcpy(&imfopts.fo_from, ap1, sizeof(addr_port_t));
-		npfctl_build_nat(NPF_NATOUT, ifname, af, ap2, fopts, binat);
+		npfctl_build_nat(NPF_NATOUT, ifname, af, ap2, fopts, flags);
 	}
 }
 
@@ -619,11 +630,15 @@ npfctl_build_natseg(int sd, int type, const char *ifname,
 static void
 npfctl_fill_table(nl_table_t *tl, u_int type, const char *fname)
 {
+	struct cdbw *cdbw = NULL;	/* XXX: gcc */
 	char *buf = NULL;
 	int l = 0;
 	FILE *fp;
 	size_t n;
 
+	if (type == NPF_TABLE_CDB && (cdbw = cdbw_open()) == NULL) {
+		err(EXIT_FAILURE, "cdbw_open");
+	}
 	fp = fopen(fname, "r");
 	if (fp == NULL) {
 		err(EXIT_FAILURE, "open '%s'", fname);
@@ -640,17 +655,55 @@ npfctl_fill_table(nl_table_t *tl, u_int type, const char *fname)
 			errx(EXIT_FAILURE,
 			    "%s:%d: invalid table entry", fname, l);
 		}
-		if (type == NPF_TABLE_HASH && fam.fam_mask != NPF_NO_NETMASK) {
-			errx(EXIT_FAILURE,
-			    "%s:%d: mask used with the hash table", fname, l);
+		if (type != NPF_TABLE_TREE && fam.fam_mask != NPF_NO_NETMASK) {
+			errx(EXIT_FAILURE, "%s:%d: mask used with the "
+			    "non-tree table", fname, l);
 		}
 
-		/* Create and add a table entry. */
-		npf_table_add_entry(tl, fam.fam_family,
-		    &fam.fam_addr, fam.fam_mask);
+		/*
+		 * Create and add a table entry.
+		 */
+		if (type == NPF_TABLE_CDB) {
+			const npf_addr_t *addr = &fam.fam_addr;
+			if (cdbw_put(cdbw, addr, alen, addr, alen) == -1) {
+				err(EXIT_FAILURE, "cdbw_put");
+			}
+		} else {
+			npf_table_add_entry(tl, fam.fam_family,
+			    &fam.fam_addr, fam.fam_mask);
+		}
 	}
 	if (buf != NULL) {
 		free(buf);
+	}
+
+	if (type == NPF_TABLE_CDB) {
+		struct stat sb;
+		char sfn[32];
+		void *cdb;
+		int fd;
+
+		strlcpy(sfn, "/tmp/npfcdb.XXXXXX", sizeof(sfn));
+		if ((fd = mkstemp(sfn)) == -1) {
+			err(EXIT_FAILURE, "mkstemp");
+		}
+		unlink(sfn);
+
+		if (cdbw_output(cdbw, fd, "npf-table-cdb", NULL) == -1) {
+			err(EXIT_FAILURE, "cdbw_output");
+		}
+		cdbw_close(cdbw);
+
+		if (fstat(fd, &sb) == -1) {
+			err(EXIT_FAILURE, "fstat");
+		}
+		if ((cdb = mmap(NULL, sb.st_size, PROT_READ,
+		    MAP_FILE | MAP_PRIVATE, fd, 0)) == MAP_FAILED) {
+			err(EXIT_FAILURE, "mmap");
+		}
+		npf_table_setdata(tl, cdb, sb.st_size);
+
+		close(fd);
 	}
 }
 
@@ -673,6 +726,8 @@ npfctl_build_table(const char *tname, u_int type, const char *fname)
 
 	if (fname) {
 		npfctl_fill_table(tl, type, fname);
+	} else if (type == NPF_TABLE_CDB) {
+		errx(EXIT_FAILURE, "tables of cdb type must be static");
 	}
 }
 

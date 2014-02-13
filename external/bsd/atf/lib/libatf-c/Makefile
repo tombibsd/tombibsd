@@ -6,6 +6,7 @@ NOLINT=		# defined
 
 LIB=		atf-c
 
+CWARNFLAGS+=	-Wno-format
 CWARNFLAGS+=	-Wno-missing-noreturn
 
 .PATH:		${SRCDIR}

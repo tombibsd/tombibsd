@@ -8,7 +8,7 @@
 /ad.sh3/1.29/Mon Nov 11 15:18:11 2013/-kk/
 /md.algor/1.16/Sun Jul 17 20:54:31 2011/-kk/
 /md.alpha/1.66/Tue Jan 14 16:01:10 2014/-kk/
-/md.amd64/1.212/Tue Jan 14 16:01:10 2014/-kk/
+/md.amd64/1.213/Thu Feb 13 15:32:25 2014/-kk/
 /md.amiga/1.59/Thu Oct 24 10:28:41 2013/-kk/
 /md.amigappc/1.11/Tue Nov 26 03:26:43 2013/-kk/
 /md.arc/1.24/Sun Jul 17 20:54:31 2011/-kk/
@@ -27,7 +27,7 @@
 /md.hp700/1.10/Thu Oct 24 10:28:41 2013/-kk/
 /md.hpcmips/1.31/Thu Oct 24 10:28:41 2013/-kk/
 /md.hpcsh/1.27/Thu Oct 24 10:28:41 2013/-kk/
-/md.i386/1.142/Tue Jan 14 16:01:10 2014/-kk/
+/md.i386/1.143/Thu Feb 13 15:32:25 2014/-kk/
 /md.ibmnws/1.11/Tue Nov 26 03:26:43 2013/-kk/
 /md.landisk/1.5/Thu Oct 24 10:28:41 2013/-kk/
 /md.luna68k/1.19/Sun Jul 17 20:54:31 2011/-kk/
@@ -47,13 +47,13 @@
 /md.sandpoint/1.17/Tue Nov 26 03:26:43 2013/-kk/
 /md.sbmips/1.15/Sun Nov 25 21:55:50 2012/-kk/
 /md.sgimips/1.19/Thu Oct 24 10:28:41 2013/-kk/
-/md.sparc/1.82/Tue Nov 12 02:15:52 2013/-kk/
-/md.sparc64/1.178/Tue Jan 14 16:01:10 2014/-kk/
+/md.sparc/1.83/Thu Feb 13 15:32:25 2014/-kk/
+/md.sparc64/1.179/Thu Feb 13 15:32:25 2014/-kk/
 /md.sun2/1.20/Thu Oct 24 10:28:41 2013/-kk/
 /md.sun3/1.62/Thu Oct 24 10:28:41 2013/-kk/
 /md.vax/1.40/Mon Nov 11 15:18:11 2013/-kk/
 /md.x68k/1.60/Thu Oct 24 10:28:41 2013/-kk/
-/mi/1.1877/Thu Feb 13 15:18:51 2014/-kk/
+/mi/1.1878/Thu Feb 13 15:32:25 2014/-kk/
 /shl.mi/1.261/Fri Jan 31 08:45:05 2014/-kk/
 /stl.mi/1.1/Fri Jul  2 21:19:00 2010/-kk/
 D

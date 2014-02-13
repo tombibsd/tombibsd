@@ -168,9 +168,6 @@ omap_spllower(int ipl)
 int	_splraise(int);
 int	_spllower(int);
 void	splx(int);
-#ifdef __HAVE_FAST_SOFTINTS
-void	_setsoftintr(int);
-#endif
 
 #if !defined(EVBARM_SPL_NOINLINE)
 #define splx(new)		omap_splx(new)

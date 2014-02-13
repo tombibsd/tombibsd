@@ -151,7 +151,7 @@ ASENTRY_NOPROFILE(start)
 	movl %a0@(128),_ASM_LABEL(romcallvec)| save trap #0 to use PROM calls
 
 	RELOC(esym, %a0)
-#if NKSYMS || defined(DDB) || defined(LKM)
+#if NKSYMS || defined(DDB) || defined(MODULAR)
 	movl	%d2,%a0@		| store end of symbol table
 #else
 	clrl	%a0@
@@ -331,7 +331,7 @@ Lstart1:
  */
 	.globl	_Sysseg_pa, _pmap_bootstrap, _avail_start
 
-#if NKSYMS || defined(DDB) || defined(LKM)
+#if NKSYMS || defined(DDB) || defined(MODULAR)
 	RELOC(esym,%a0)			| end of static kernel test/data/syms
 	movl	%a0@,%d2
 	jne	Lstart2

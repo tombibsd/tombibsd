@@ -69,8 +69,8 @@ Fix symbolic links before import.
 Check external/bsd/am-utils/include/config.h is correct after import.
 
 Package:	Automated Testing Framework (ATF)
-Version:	0.17
-Current Vers:	0.17
+Version:	0.19
+Current Vers:	0.19
 Maintainer:	Julio Merino <jmmv@NetBSD.org>
 Archive site:	http://code.google.com/p/kyua/downloads/list?can=1
 Home page:	http://code.google.com/p/kyua/wiki/ATF
@@ -386,7 +386,7 @@ before importing:
 
 Package:	gdb
 Version:	7.6.1
-Current Vers:	7.6.1
+Current Vers:	7.7
 Maintainer:	FSF
 Archive Site:	ftp://ftp.gnu.org/gnu/gdb/
 Home Page:	http://www.gnu.org/software/gdb/

@@ -119,14 +119,12 @@ i80321_spllower(int ipl)
 #define splx(new)		i80321_splx(new)
 #define	_spllower(ipl)		i80321_spllower(ipl)
 #define	_splraise(ipl)		i80321_splraise(ipl)
-void	_setsoftintr(int);
 
 #else
 
 int	_splraise(int);
 int	_spllower(int);
 void	splx(int);
-void	_setsoftintr(int);
 
 #endif /* ! EVBARM_SPL_NOINLINE */
 

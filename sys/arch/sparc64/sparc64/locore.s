@@ -6578,7 +6578,7 @@ ENTRY(sparc64_ipi_ccall)
 
 	.data
 	_ALIGN
-#if NKSYMS || defined(DDB) || defined(LKM)
+#if NKSYMS || defined(DDB) || defined(MODULAR)
 	.globl	_C_LABEL(esym)
 _C_LABEL(esym):
 	POINTER	0

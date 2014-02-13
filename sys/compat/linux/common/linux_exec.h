@@ -100,6 +100,8 @@
 #define LINUX_AT_SYSINFO	32	/* pointer to __kernel_vsyscall */
 #define LINUX_AT_SYSINFO_EHDR	33	/* pointer to ELF header */
 
+#define LINUX_RANDOM_BYTES	16	/* 16 bytes for AT_RANDOM */
+
 /*
  * Emulation specific sysctls.
  */

@@ -338,7 +338,7 @@ layer_bypass(void *v)
 int
 layer_lookup(void *v)
 {
-	struct vop_lookup_args /* {
+	struct vop_lookup_v2_args /* {
 		struct vnodeop_desc *a_desc;
 		struct vnode * a_dvp;
 		struct vnode ** a_vpp;
@@ -381,10 +381,10 @@ layer_lookup(void *v)
 		*ap->a_vpp = dvp;
 		vrele(lvp);
 	} else if (lvp != NULL) {
-		/* Note: dvp, ldvp and lvp are all locked. */
+		/* Note: dvp and ldvp are both locked. */
 		error = layer_node_create(dvp->v_mount, lvp, ap->a_vpp);
 		if (error) {
-			vput(lvp);
+			vrele(lvp);
 		}
 	}
 	return error;

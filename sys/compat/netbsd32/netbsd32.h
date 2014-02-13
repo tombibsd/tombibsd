@@ -384,6 +384,16 @@ struct netbsd32_loadavg {
 	netbsd32_long	fscale;
 };
 
+/* from <sys/swap.h> */
+struct netbsd32_swapent {
+	netbsd32_dev_t	se_dev;		/* device id */
+	int	se_flags;		/* flags */
+	int	se_nblks;		/* total blocks */
+	int	se_inuse;		/* blocks in use */
+	int	se_priority;		/* priority of this device */
+	char	se_path[PATH_MAX+1];	/* path	name */
+};
+
 /* from <sys/ipc.h> */
 typedef netbsd32_pointer_t netbsd32_ipc_permp_t;
 struct netbsd32_ipc_perm {

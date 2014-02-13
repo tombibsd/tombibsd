@@ -27,5 +27,5 @@
  */
 #define	__HAVE_NANF
 #if defined(__mips_n32) || defined(__mips_n64)
-#define __HAVE_LONG_DOUBLE
+#define __HAVE_LONG_DOUBLE	128
 #endif

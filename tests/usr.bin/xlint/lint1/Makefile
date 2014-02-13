@@ -13,6 +13,7 @@ FILES+=		d_alignof.c
 FILES+=		d_c99_complex_num.c
 FILES+=		d_c99_decls_after_stmt.c
 FILES+=		d_c99_decls_after_stmt2.c
+FILES+=		d_c99_decls_after_stmt3.c
 FILES+=		d_c99_for_loops.c
 FILES+=		d_c99_func.c
 FILES+=		d_c99_recursive_init.c

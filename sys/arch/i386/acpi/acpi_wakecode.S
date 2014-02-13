@@ -165,7 +165,7 @@ wakeup_32:
 	movl	WAKEUP_r_cr3 + ACPI_WAKEUP_ADDR,%eax
 	movl	%eax,%cr3
 	movl	%cr0,%eax
-	orl	$(CR0_PE|CR0_PG|CR0_NE|CR0_TS|CR0_EM|CR0_MP|CR0_WP|CR0_AM),%eax
+	orl	$(CR0_PE|CR0_PG|CR0_NE|CR0_TS|CR0_MP|CR0_WP|CR0_AM),%eax
 	movl	%eax,%cr0
 
 	/* Flush the prefetch queue */

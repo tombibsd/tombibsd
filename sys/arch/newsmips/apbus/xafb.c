@@ -268,6 +268,10 @@ xafb_ioctl(void *v, void *vs, u_long cmd, void *data, int flag, struct lwp *l)
 		wdf->cmsize = 256;
 		return 0;
 
+	case WSDISPLAYIO_LINEBYTES:
+		*(u_int *)data = dc->dc_ri.ri_stride;
+		return 0;
+		
 	case WSDISPLAYIO_GETCMAP:
 		return xafb_getcmap(sc, (struct wsdisplay_cmap *)data);
 

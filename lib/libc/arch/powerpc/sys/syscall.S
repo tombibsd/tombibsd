@@ -1,5 +1,3 @@
 /*	$NetBSD$	*/
 
-#include "SYS.h"
-
-RSYSCALL(syscall)
+/* aliased to __syscall */

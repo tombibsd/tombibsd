@@ -255,6 +255,10 @@ fb_ioctl(void *v, void *vs, u_long cmd, void *data, int flag, struct lwp *l)
 		wdf->cmsize = 2;
 		return 0;
 
+	case WSDISPLAYIO_LINEBYTES:
+		*(u_int *)data = dc->dc_ri.ri_stride;
+		return 0;
+
 	case WSDISPLAYIO_SVIDEO:
 		if (*(int *)data == WSDISPLAYIO_VIDEO_OFF) {
 			volatile u_short *ctlreg = NWB253_CTLREG;

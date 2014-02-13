@@ -17,7 +17,7 @@
 /t_fpu.c/1.2/Thu Oct 24 10:28:58 2013/-kk/
 /t_join.c/1.8/Mon Mar 12 20:17:16 2012/-kk/
 /t_kill.c/1.1/Fri Jul 16 15:42:53 2010/-kk/
-/t_mutex.c/1.5/Mon Apr  4 14:47:22 2011/-kk/
+/t_mutex.c/1.6/Thu Feb 13 15:36:04 2014/-kk/
 /t_name.c/1.1/Fri Jul 16 15:42:53 2010/-kk/
 /t_once.c/1.1/Fri Jul 16 15:42:53 2010/-kk/
 /t_preempt.c/1.2/Wed Nov  3 16:10:22 2010/-kk/

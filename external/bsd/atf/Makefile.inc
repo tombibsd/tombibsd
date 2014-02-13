@@ -5,3 +5,10 @@ SRCDIR=		${TOPDIR}/dist
 
 ATF_VERSION!=	grep 'define VERSION' ${TOPDIR}/lib/libatf-c/bconfig.h \
 		| cut -d '"' -f 2
+
+.if defined(USE_ATF_LIBTOOLS)
+PRIVATELIBDIR!= cd ${TOPDIR}/lib; ${PRINTOBJDIR}
+CPPFLAGS+=	-I${PRIVATELIBDIR}/tools
+LDADD+=		${PRIVATELIBDIR}/tools/libtools.a
+DPADD+=		${PRIVATELIBDIR}/tools/libtools.a
+.endif

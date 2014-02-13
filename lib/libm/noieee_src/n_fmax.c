@@ -31,6 +31,10 @@ __RCSID("$NetBSD$");
 
 #include <math.h>
 
+#ifdef __weak_alias
+__weak_alias(fmaxl, fmax);
+#endif
+
 double
 fmax(double x, double y)
 {

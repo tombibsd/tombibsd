@@ -108,7 +108,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/signalvar.h>
 #include <sys/kauth.h>
 #include <sys/syslog.h>
-#include <sys/fstrans.h>
 
 #include <uvm/uvm.h>
 #include <uvm/uvm_pmap.h>
@@ -518,8 +517,6 @@ ulfs_gro_remove(struct mount *mp, kauth_cred_t cred,
 	KASSERT(VOP_ISLOCKED(vp) == LK_EXCLUSIVE);
 	KASSERT(cnp->cn_nameiop == DELETE);
 
-	fstrans_start(mp, FSTRANS_SHARED);
-
 	/* XXX ulfs_dirremove decrements vp's link count for us.  */
 	error = ulfs_dirremove(dvp, ulr, VTOI(vp), cnp->cn_flags, 0);
 	if (error)
@@ -529,7 +526,6 @@ ulfs_gro_remove(struct mount *mp, kauth_cred_t cred,
 	VN_KNOTE(vp, (VTOI(vp)->i_nlink? NOTE_LINK : NOTE_DELETE));
 
 out1:
-	fstrans_done(mp);
 	return error;
 }
 
@@ -831,7 +827,6 @@ ulfs_gro_rename(struct mount *mp, kauth_cred_t cred,
 	 * Commence hacking of the data on disk.
 	 */
 
-	fstrans_start(mp, FSTRANS_SHARED);
 	error = 0;
 
 	/*
@@ -1046,7 +1041,6 @@ whymustithurtsomuch:
 
 arghmybrainhurts:
 /*ihateyou:*/
-	fstrans_done(mp);
 	return error;
 }
 

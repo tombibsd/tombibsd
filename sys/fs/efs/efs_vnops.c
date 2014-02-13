@@ -58,7 +58,7 @@ MALLOC_DECLARE(M_EFSTMP);
 static int
 efs_lookup(void *v)
 {
-	struct vop_lookup_args /* {
+	struct vop_lookup_v2_args /* {
 		struct vnode *a_dvp;
 		struct vnode **a_vpp;
 		struct componentname *a_cnp;
@@ -124,6 +124,9 @@ efs_lookup(void *v)
 
 	cache_enter(ap->a_dvp, *ap->a_vpp, cnp->cn_nameptr, cnp->cn_namelen,
 		    cnp->cn_flags);
+
+	if (*ap->a_vpp != ap->a_dvp)
+		VOP_UNLOCK(*ap->a_vpp);
 
 	return 0;
 }

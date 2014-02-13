@@ -188,14 +188,15 @@
 ./usr/libdata/debug/usr/lib/sparc/libarchive.so.3.1.debug		comp-compat-shlib	compat,pic,debug
 ./usr/libdata/debug/usr/lib/sparc/libasn1.so.8.0.debug		comp-compat-shlib	compat,pic,kerberos,debug,obsolete
 ./usr/libdata/debug/usr/lib/sparc/libasn1.so.9.0.debug		comp-compat-shlib	compat,pic,kerberos,debug
-./usr/libdata/debug/usr/lib/sparc/libatf-c++.so.0.0.debug		comp-compat-shlib	compat,pic,atf,debug
+./usr/libdata/debug/usr/lib/sparc/libatf-c++.so.0.0.debug		comp-compat-shlib	compat,pic,atf,debug,obsolete
+./usr/libdata/debug/usr/lib/sparc/libatf-c++.so.1.0.debug		comp-compat-shlib	compat,pic,atf,debug
 ./usr/libdata/debug/usr/lib/sparc/libatf-c.so.0.0.debug			comp-compat-shlib	compat,pic,atf,debug
 ./usr/libdata/debug/usr/lib/sparc/libbfd.so.13.0.debug			comp-compat-shlib	compat,pic,binutils,debug
 ./usr/libdata/debug/usr/lib/sparc/libbind9.so.7.0.debug			comp-compat-shlib	compat,pic,debug
 ./usr/libdata/debug/usr/lib/sparc/libbluetooth.so.4.2.debug		comp-compat-shlib	compat,pic,debug
 ./usr/libdata/debug/usr/lib/sparc/libbsdmalloc.so.0.0.debug		comp-compat-shlib	compat,pic,debug
 ./usr/libdata/debug/usr/lib/sparc/libbz2.so.1.1.debug			comp-compat-shlib	compat,pic,debug
-./usr/libdata/debug/usr/lib/sparc/libc.so.12.189.debug			comp-compat-shlib	compat,pic,debug
+./usr/libdata/debug/usr/lib/sparc/libc.so.12.190.debug			comp-compat-shlib	compat,pic,debug
 ./usr/libdata/debug/usr/lib/sparc/libcom_err.so.6.0.debug	comp-compat-shlib	compat,pic,kerberos,debug,obsolete
 ./usr/libdata/debug/usr/lib/sparc/libcom_err.so.7.0.debug	comp-compat-shlib	compat,pic,kerberos,debug
 ./usr/libdata/debug/usr/lib/sparc/libcrypt.so.1.0.debug			comp-compat-shlib	compat,pic,debug

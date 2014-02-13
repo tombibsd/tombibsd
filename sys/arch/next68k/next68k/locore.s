@@ -303,7 +303,7 @@ Lstart2:
 	movc	%d0,%sfc		|   as source
 	movc	%d0,%dfc		|   and destination of transfers
 /* configure kernel and lwp0 VA space so we can get going */
-#if NKSYMS || defined(DDB) || defined(LKM)
+#if NKSYMS || defined(DDB) || defined(MODULAR)
 	RELOC(esym,%a0)			| end of static kernel test/data/syms
 	movl	%a0@,%d5
 	jne	Lstart3

@@ -54,6 +54,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/exec_elf.h>
 #include <sys/stat.h>
 #include <sys/kauth.h>
+#include <sys/cprng.h>
 
 #include <sys/mman.h>
 #include <sys/syscallargs.h>
@@ -483,10 +484,10 @@ ELFNAME2(linux,copyargs)(struct lwp *l, struct exec_package *pack,
 	a->a_v = 0;
 	a++;
 
-	randbytes[0] = random();
-	randbytes[1] = random();
-	randbytes[2] = random();
-	randbytes[3] = random();
+	randbytes[0] = cprng_strong32();
+	randbytes[1] = cprng_strong32();
+	randbytes[2] = cprng_strong32();
+	randbytes[3] = cprng_strong32();
 
 	len = sizeof(randbytes);
 	if ((error = copyout(randbytes, *stackp, len)) != 0)

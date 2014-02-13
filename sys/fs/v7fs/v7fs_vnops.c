@@ -90,7 +90,7 @@ v7fs_mode_to_d_type(v7fs_mode_t mode)
 int
 v7fs_lookup(void *v)
 {
-	struct vop_lookup_args /* {
+	struct vop_lookup_v2_args /* {
 				  struct vnode *a_dvp;
 				  struct vnode **a_vpp;
 				  struct componentname *a_cnp;
@@ -180,6 +180,8 @@ v7fs_lookup(void *v)
 	if (isdotdot) {
 		vn_lock(dvp, LK_EXCLUSIVE | LK_RETRY);
 	}
+	if (vpp != dvp)
+		VOP_UNLOCK(vpp);
 	*a->a_vpp = vpp;
 	DPRINTF("done.(%s)\n", name);
 

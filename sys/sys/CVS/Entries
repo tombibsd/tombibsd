@@ -21,7 +21,7 @@
 /callout.h/1.31/Mon Apr 28 20:24:10 2008/-kk/
 /cctr.h/1.3/Mon Apr 28 20:24:10 2008/-kk/
 /cdbr.h/1.1/Wed Dec 11 01:24:08 2013/-kk/
-/cdefs.h/1.116/Tue Oct 29 07:54:16 2013/-kk/
+/cdefs.h/1.118/Thu Feb 13 15:36:03 2014/-kk/
 /cdefs_aout.h/1.20/Thu May 18 17:55:38 2006/-kk/
 /cdefs_elf.h/1.43/Thu Oct 24 10:28:58 2013/-kk/
 /cdio.h/1.33/Thu Jan 29 19:36:28 2009/-kk/
@@ -88,7 +88,7 @@
 /gpio.h/1.13/Sun Nov 13 16:56:15 2011/-kk/
 /hash.h/1.7/Sun Jul  8 01:24:08 2012/-kk/
 /idle.h/1.4/Tue May 27 14:48:52 2008/-kk/
-/ieee754.h/1.9/Thu Oct 24 10:28:58 2013/-kk/
+/ieee754.h/1.15/Thu Feb 13 15:36:03 2014/-kk/
 /intr.h/1.16/Thu Oct 24 10:28:58 2013/-kk/
 /inttypes.h/1.6/Thu Oct 24 10:28:58 2013/-kk/
 /ioccom.h/1.11/Wed Oct 19 10:53:12 2011/-kk/
@@ -138,7 +138,7 @@
 /null.h/1.9/Tue Jul  6 11:56:20 2010/-kk/
 /once.h/1.5/Thu Oct  9 10:48:21 2008/-kk/
 /optstr.h/1.3/Mon Apr 28 20:24:11 2008/-kk/
-/param.h/1.439/Thu Feb 13 15:22:36 2014/-kk/
+/param.h/1.440/Thu Feb 13 15:36:03 2014/-kk/
 /pax.h/1.11/Thu Dec 27 15:21:53 2007/-kk/
 /pcq.h/1.1/Tue Nov 11 20:17:27 2008/-kk/
 /pcu.h/1.11/Thu Oct 24 10:28:58 2013/-kk/
@@ -211,7 +211,7 @@
 /sysctl.h/1.210/Fri Jan 31 08:48:58 2014/-kk/
 /syslimits.h/1.27/Fri Dec  7 07:06:39 2012/-kk/
 /syslog.h/1.35/Wed Oct 10 22:51:55 2012/-kk/
-/systm.h/1.259/Tue Oct 29 08:27:26 2013/-kk/
+/systm.h/1.260/Thu Feb 13 15:36:03 2014/-kk/
 /tape.h/1.3/Mon Dec 26 18:41:36 2005/-kk/
 /termios.h/1.32/Thu Oct 24 10:28:58 2013/-kk/
 /time.h/1.65/Thu Oct 27 16:12:52 2011/-kk/
@@ -251,7 +251,7 @@
 /vmem_impl.h/1.3/Tue Dec 17 04:05:17 2013/-kk/
 /vmmeter.h/1.19/Wed Oct 21 21:12:07 2009/-kk/
 /vnode.h/1.243/Tue Dec 17 04:13:40 2013/-kk/
-/vnode_if.h/1.86/Thu Feb 13 15:22:40 2014/-kk/
+/vnode_if.h/1.87/Thu Feb 13 15:36:03 2014/-kk/
 /wait.h/1.26/Sun Jan 11 02:45:56 2009/-kk/
 /wapbl.h/1.15/Thu Oct 24 10:28:58 2013/-kk/
 /wapbl_replay.h/1.1/Mon Nov 24 16:05:21 2008/-kk/

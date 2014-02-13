@@ -28,8 +28,10 @@ GENERIC_SRCS+= \
 SRCS+=	${src:R}.S
 .  else
 SRCS+=	${src}
-.    if ${ACTIVE_CC} == "gcc" && ${HAVE_GCC} != "4"
+.    if ${HAVE_GCC:U} != "4"
 COPTS.${src}+=	-Wno-error=missing-prototypes
+.    else
+COPTS.${src}+=	-Wno-missing-prototypes
 .    endif
 .  endif
 .endfor

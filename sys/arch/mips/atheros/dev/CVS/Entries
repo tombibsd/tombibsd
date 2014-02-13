@@ -6,7 +6,7 @@
 /arspi.c/1.10/Sat Oct 27 17:18:02 2012/-kk/
 /arspireg.h/1.1/Sat Oct 14 15:33:23 2006/-kk/
 /athflash.c/1.6/Sat Oct 27 17:18:02 2012/-kk/
-/com_arbus.c/1.10/Thu Jul  7 05:06:44 2011/-kk/
+/com_arbus.c/1.11/Thu Feb 13 15:35:51 2014/-kk/
 /ehci_arbus.c/1.2/Fri Jul 20 02:14:02 2012/-kk/
 /if_ae.c/1.24/Sat Oct 27 17:18:02 2012/-kk/
 /if_ath_arbus.c/1.22/Sun Feb 12 16:34:09 2012/-kk/
