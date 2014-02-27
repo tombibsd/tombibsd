@@ -98,7 +98,8 @@ SUBDIR+= \
 	libLLVMCppBackendInfo \
 	libLLVMHello \
 	libLLVMInterpreter \
-	libLLVMLTO
+	libLLVMLTO \
+	libLLVMLineEditor
 .endif
 
 SUBDIR+= \

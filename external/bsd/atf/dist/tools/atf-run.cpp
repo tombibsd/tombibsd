@@ -27,10 +27,6 @@
 // IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#if defined(HAVE_CONFIG_H)
-#include "bconfig.h"
-#endif
-
 extern "C" {
 #include <sys/types.h>
 #include <sys/param.h>
@@ -67,12 +63,6 @@ namespace {
 typedef std::map< std::string, std::string > vars_map;
 
 } // anonymous namespace
-
-#if defined(MAXCOMLEN)
-static const std::string::size_type max_core_name_length = MAXCOMLEN;
-#else
-static const std::string::size_type max_core_name_length = std::string::npos;
-#endif
 
 class atf_run : public tools::application::app {
     static const char* m_description;
@@ -131,7 +121,7 @@ dump_stacktrace(const tools::fs::path& tp, const tools::process::status& s,
     w.stderr_tc("Test program crashed; attempting to get stack trace");
 
     const tools::fs::path corename = workdir /
-        (tp.leaf_name().substr(0, max_core_name_length) + ".core");
+        (tp.leaf_name().substr(0, MAXCOMLEN) + ".core");
     if (!tools::fs::exists(corename)) {
         w.stderr_tc("Expected file " + corename.str() + " not found");
         return;

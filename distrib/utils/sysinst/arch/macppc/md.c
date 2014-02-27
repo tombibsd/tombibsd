@@ -175,7 +175,7 @@ md_post_newfs(void)
 	if (bsdlabel[PART_A].pi_offset != 0)
 		return 0;
 
-	printf (msg_string(MSG_dobootblks), diskdev);
+	msg_display(MSG_dobootblks, diskdev);
 	cp_to_target("/usr/mdec/ofwboot", bootfile);
 	sync();
 	run_program(RUN_DISPLAY, "/usr/sbin/installboot /dev/r%sa %s %s",

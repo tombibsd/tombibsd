@@ -145,7 +145,7 @@ brk_string(const char *str, int *store_argc, Boolean expand, char **buffer)
 	const char *p;
 	int len;
 	int argmax = 50, curlen = 0;
-    	char **argv = bmake_malloc((argmax + 1) * sizeof(char *));
+    	char **argv;
 
 	/* skip leading space chars. */
 	for (; *str == ' ' || *str == '\t'; ++str)
@@ -154,6 +154,12 @@ brk_string(const char *str, int *store_argc, Boolean expand, char **buffer)
 	/* allocate room for a copy of the string */
 	if ((len = strlen(str) + 1) > curlen)
 		*buffer = bmake_malloc(curlen = len);
+
+	/*
+	 * initial argmax based on len
+	 */
+	argmax = MAX((len / 5), 50);
+	argv = bmake_malloc((argmax + 1) * sizeof(char *));
 
 	/*
 	 * copy the string; at the same time, parse backslashes,

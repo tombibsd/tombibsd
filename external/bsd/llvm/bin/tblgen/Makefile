@@ -35,7 +35,6 @@ SRCS=	AsmMatcherEmitter.cpp \
 	RegisterInfoEmitter.cpp \
 	SetTheory.cpp \
 	SubtargetEmitter.cpp \
-	TGValueTypes.cpp \
 	TableGen.cpp \
 	X86DisassemblerTables.cpp \
 	X86ModRMFilters.cpp \

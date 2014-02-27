@@ -1,17 +1,14 @@
 # $NetBSD$
 
-.include <bsd.own.mk>
+USE_ATF_LIBTOOLS=	yes
+
+.include <bsd.init.mk>
 
 TESTSDIR=	${TESTSBASE}/atf/tools
 ATFFILE=	yes
+KYUAFILE=	yes
 
-SRCDIR=		${NETBSDSRCDIR}/external/bsd/atf/dist
 .PATH:		${SRCDIR}/tools
-
-CPPFLAGS+=	-DHAVE_CONFIG_H
-CPPFLAGS+=	-I${SRCDIR:H}/lib/libatf-c  # For bconfig.h.
-
-USE_ATF_LIBTOOLS=	yes
 
 PROGS=
 .for prog in	bad_metadata_helper \
@@ -52,5 +49,4 @@ TESTS_SH=	atf-config_test \
 		atf-report_test \
 		atf-run_test \
 
-.include "../../../Makefile.inc"
 .include <bsd.test.mk>

@@ -53,12 +53,7 @@ mvderwin(WINDOW *win, int dy, int dx)
 {
 	WINDOW *parent;
 	int x, i;
-	__LINE *lp, *olp;
-#ifdef HAVE_WCHAR
-	__LDATA *cp;
-	int j;
-	nschar_t *np;
-#endif /* HAVE_WCHAR */
+	__LINE *plp;
 
 	if (win == NULL)
 		return ERR;
@@ -72,39 +67,26 @@ mvderwin(WINDOW *win, int dy, int dx)
 	    ((win->maxy + dy) > parent->maxy))
 		return ERR;
 
+	win->flags |= __ISDERWIN;
+	win->derx = dx;
+	win->dery = dy;
+
 	x = parent->begx + dx;
 
-	win->ch_off = x;
-	/* Point the line pointers to line space */
-	for (lp = win->lspace, i = 0; i < win->maxy; i++, lp++) {
-		lp->flags = __ISDIRTY;
-		win->alines[i] = lp;
-		olp = parent->alines[i + dy];
+	/*
+	 * Mark the source area for the derwin as changed so it will be
+	 * copied to the destination window on refresh.
+	 */
+	for (i = 0; i < win->maxy; i++) {
+		plp = parent->alines[i + dy];
+		plp->flags = __ISDIRTY;
+		if (*plp->firstchp > x)
+			*plp->firstchp = x;
+		if (*plp->lastchp < x + win->maxx)
+			*plp->lastchp = x + win->maxx;
 #ifdef DEBUG
-		lp->sentinel = SENTINEL_VALUE;
+		__CTRACE(__CTRACE_REFRESH, "mvderwin: firstchp = %d, lastchp = %d\n", *plp->firstchp, *plp->lastchp);
 #endif
-		lp->line = &olp->line[win->ch_off];
-		lp->firstchp = &olp->firstch;
-		lp->lastchp = &olp->lastch;
-#ifndef HAVE_WCHAR
-		lp->hash = __hash((char *)(void *)lp->line,
-		    (size_t) (win->maxx * __LDATASIZE));
-#else
-		for (cp = lp->line, j = 0; j < win->maxx; j++, cp++) {
-			lp->hash = __hash_more(&cp->ch, sizeof(wchar_t),
-			    lp->hash);
-			lp->hash = __hash_more(&cp->attr, sizeof(wchar_t),
-			    lp->hash);
-			if (cp->nsp) {
-				np = cp->nsp;
-				while (np) {
-					lp->hash = __hash_more(&np->ch,
-					    sizeof(wchar_t), lp->hash);
-					np = np->next;
-				}
-			}
-		}
-#endif /* HAVE_WCHAR */
 	}
 
 	return OK;

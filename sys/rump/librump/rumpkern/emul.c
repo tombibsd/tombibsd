@@ -280,6 +280,13 @@ cnflush(void)
 	/* done */
 }
 
+void
+resettodr(void)
+{
+
+	/* setting clocks is not in the jurisdiction of rump kernels */
+}
+
 #ifdef __HAVE_SYSCALL_INTERN
 void
 syscall_intern(struct proc *p)

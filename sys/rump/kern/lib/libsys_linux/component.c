@@ -71,7 +71,6 @@ __weak_alias(sys_mmap,rumplinux__stub);
 __weak_alias(vm_map_unlock,rumplinux__stub);
 __weak_alias(uvm_map_lookup_entry,rumplinux__stub);
 __weak_alias(sys_obreak,rumplinux__stub);
-__weak_alias(sys_swapctl,rumplinux__stub);
 __weak_alias(vm_map_lock,rumplinux__stub);
 __weak_alias(uvm_mremap,rumplinux__stub);
 

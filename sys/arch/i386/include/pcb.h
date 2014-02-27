@@ -78,7 +78,7 @@
 
 #include <machine/segments.h>
 #include <machine/tss.h>
-#include <i386/npx.h>
+#include <x86/fpu.h>
 #include <i386/sysarch.h>
 
 struct pcb {

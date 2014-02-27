@@ -130,6 +130,7 @@ struct __window {		/* Window structure. */
 #define	__NOTIMEOUT	0x00020000	/* Wait indefinitely for func keys */
 #define __IDCHAR	0x00040000	/* insert/delete char sequences */
 #define __ISPAD		0x00080000	/* "window" is a pad */
+#define __ISDERWIN	0x00100000	/* "window" is derived from parent */
 	unsigned int flags;
 	int	delay;			/* delay for getch() */
 	attr_t	wattr;			/* Character attributes */
@@ -140,6 +141,9 @@ struct __window {		/* Window structure. */
 	int	pbegy, pbegx,
 		sbegy, sbegx,
 		smaxy, smaxx;		/* Saved prefresh() values */
+	int	dery, derx;		/* derived window coordinates
+					   - top left corner of source 
+					   relative to parent win */
 #ifdef HAVE_WCHAR
 	nschar_t *bnsp;			/* Background non-spacing char list */
 #endif /* HAVE_WCHAR */

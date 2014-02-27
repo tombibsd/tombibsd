@@ -181,7 +181,7 @@
 ./usr/libdata/debug/usr/lib/oabi/libsaslc.so.0.0.debug	comp-sys-debug	crypto,debug,compat
 ./usr/libdata/debug/usr/lib/oabi/libskey.so.2.0.debug	comp-sys-debug	skey,debug,compat
 ./usr/libdata/debug/usr/lib/oabi/libsl.so.5.0.debug		comp-krb5-debug	kerberos,debug,compat
-./usr/libdata/debug/usr/lib/oabi/libsqlite3.so.1.1.debug	comp-sys-debug	debug,compat
+./usr/libdata/debug/usr/lib/oabi/libsqlite3.so.1.2.debug	comp-sys-debug	debug,compat
 ./usr/libdata/debug/usr/lib/oabi/libss.so.6.0.debug		comp-krb5-debug	obsolete
 ./usr/libdata/debug/usr/lib/oabi/libssh.so.22.0.debug	comp-secsh-debug	crypto,debug,compat
 ./usr/libdata/debug/usr/lib/oabi/libssl.so.10.2.debug		comp-crypto-debug	crypto,debug,compat

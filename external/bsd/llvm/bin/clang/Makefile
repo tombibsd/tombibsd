@@ -56,9 +56,9 @@ LLVM_LIBS+= \
 	ARMAsmPrinter \
 	MipsCodeGen \
 	MipsTargetInfo \
-	MipsMCTargetDesc \
 	MipsAsmPrinter \
 	MipsAsmParser \
+	MipsMCTargetDesc \
 	PowerPCCodeGen \
 	PowerPCTargetInfo \
 	PowerPCMCTargetDesc \

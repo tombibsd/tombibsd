@@ -327,7 +327,7 @@
 ./usr/include/i386/mtrr.h			comp-c-include
 ./usr/include/i386/multiboot.h			comp-c-include
 ./usr/include/i386/mutex.h			comp-c-include
-./usr/include/i386/npx.h			comp-c-include
+./usr/include/i386/npx.h			comp-c-include		obsolete
 ./usr/include/i386/param.h			comp-c-include
 ./usr/include/i386/pcb.h			comp-c-include
 ./usr/include/i386/pio.h			comp-c-include
@@ -431,6 +431,7 @@
 ./usr/include/x86/cputypes.h			comp-c-include
 ./usr/include/x86/cpuvar.h			comp-c-include
 ./usr/include/x86/float.h			comp-c-include
+./usr/include/x86/fpu.h				comp-c-include
 ./usr/include/x86/ieee.h			comp-c-include
 ./usr/include/x86/ieeefp.h			comp-c-include
 ./usr/include/x86/intr.h			comp-c-include

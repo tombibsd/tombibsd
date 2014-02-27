@@ -66,6 +66,7 @@
 /2011-07-07-ScheduleDAGCrash.ll/1.1.1.1/Thu Nov 28 14:18:10 2013/-kk/
 /2012-06-08-APIntCrash.ll/1.1.1.1/Thu Nov 28 14:18:10 2013/-kk/
 /2013-03-20-APFloatCrash.ll/1.1.1.1/Thu Nov 28 14:18:09 2013/-kk/
+/2014-02-05-OpaqueConstants.ll/1.1.1.1/Fri Feb 14 20:12:34 2014/-kk/
 /APIntLoadStore.ll/1.1.1.1/Thu Nov 28 14:18:09 2013/-kk/
 /APIntParam.ll/1.1.1.1/Thu Nov 28 14:18:09 2013/-kk/
 /APIntSextParam.ll/1.1.1.1/Thu Nov 28 14:18:10 2013/-kk/

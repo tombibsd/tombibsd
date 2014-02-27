@@ -35,7 +35,6 @@ __RCSID("$NetBSD$");
 /* System call stats */
 
 #include <sys/param.h>
-#include <sys/user.h>
 #include <sys/namei.h>
 #include <sys/sysctl.h>
 

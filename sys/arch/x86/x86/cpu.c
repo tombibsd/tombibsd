@@ -103,6 +103,8 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <machine/pio.h>
 #include <machine/cpu_counter.h>
 
+#include <x86/fpu.h>
+
 #ifdef i386
 #include <machine/tlog.h>
 #endif

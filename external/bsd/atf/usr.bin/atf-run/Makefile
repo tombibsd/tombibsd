@@ -1,8 +1,9 @@
 # $NetBSD$
 
-.include <bsd.own.mk>
+USE_ATF_LIBTOOLS=	yes
 
-SRCDIR=		${NETBSDSRCDIR}/external/bsd/atf/dist
+.include <bsd.init.mk>
+
 .PATH:		${SRCDIR}/tools
 .PATH:		${SRCDIR}/tools/share
 
@@ -12,11 +13,7 @@ SRCS=		atf-run.cpp
 MAN=		atf-run.1
 
 CPPFLAGS+=	-DGDB=\"/usr/bin/gdb\"
-CPPFLAGS+=	-DHAVE_CONFIG_H
 CPPFLAGS+=	-I${SRCDIR}/tools
-CPPFLAGS+=	-I${SRCDIR:H}/lib/libatf-c  # For bconfig.h.
-
-USE_ATF_LIBTOOLS=	yes
 
 CWARNFLAGS.clang+=	-Wno-error=unused-private-field
 

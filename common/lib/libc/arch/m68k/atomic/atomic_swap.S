@@ -50,3 +50,29 @@ ATOMIC_OP_ALIAS(atomic_swap_ulong,_atomic_swap_32)
 STRONG_ALIAS(_atomic_swap_ulong,_atomic_swap_32)
 ATOMIC_OP_ALIAS(atomic_swap_ptr,_atomic_swap_32)
 STRONG_ALIAS(_atomic_swap_ptr,_atomic_swap_32)
+STRONG_ALIAS(__sync_lock_test_and_set_4,_atomic_swap_32)
+
+
+ENTRY(_atomic_swap_16)
+	movl	4(%sp), %a0
+1:	movw	(%a0), %d0
+	movw	8(%sp), %d1
+	casw	%d0, %d1, (%a0)
+	bne	1b
+	/* %d0 now contains the old value */
+	rts
+END(_atomic_swap_16)
+ATOMIC_OP_ALIAS(atomic_swap_16,_atomic_swap_16)
+STRONG_ALIAS(__sync_lock_test_and_set_2,_atomic_swap_16)
+
+ENTRY(_atomic_swap_8)
+	movl	4(%sp), %a0
+1:	movb	(%a0), %d0
+	movb	8(%sp), %d1
+	casb	%d0, %d1, (%a0)
+	bne	1b
+	/* %d0 now contains the old value */
+	rts
+END(_atomic_swap_8)
+ATOMIC_OP_ALIAS(atomic_swap_8,_atomic_swap_8)
+STRONG_ALIAS(__sync_lock_test_and_set_1,_atomic_swap_8)

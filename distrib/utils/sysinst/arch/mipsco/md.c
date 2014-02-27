@@ -160,7 +160,7 @@ md_post_newfs(void)
 		return 0;
 	}
 
-	printf(msg_string(MSG_dobootblks), diskdev);
+	msg_display(MSG_dobootblks, diskdev);
 	cp_to_target("/usr/mdec/boot", "/boot");
 	if (run_program(RUN_DISPLAY | RUN_NO_CLEAR,
 	    "/usr/mdec/installboot /dev/r%sc /usr/mdec/bootxx_ffs", diskdev))

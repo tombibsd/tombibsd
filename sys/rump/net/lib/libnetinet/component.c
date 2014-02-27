@@ -36,8 +36,11 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/socketvar.h>
 
 #include <net/if.h>
+#include <net/netisr.h>
 #include <netinet/in.h>
 #include <netinet/in_var.h>
+#include <netinet/ip_var.h>
+#include <netinet/if_inarp.h>
 
 #include "rump_private.h"
 #include "rump_net_private.h"
@@ -52,6 +55,9 @@ RUMP_COMPONENT(RUMP_COMPONENT_NET)
 	DOMAINADD(inetdomain);
 
 	carpattach(1);
+
+	rump_netisr_register(NETISR_IP, ipintr);
+	rump_netisr_register(NETISR_ARP, arpintr);
 }
 
 RUMP_COMPONENT(RUMP_COMPONENT_NET_IFCFG)

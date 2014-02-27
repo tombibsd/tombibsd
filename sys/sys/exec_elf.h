@@ -700,7 +700,7 @@ typedef struct {
 #define DF_SYMBOLIC	0x00000002	/* */
 #define DF_TEXTREL	0x00000004	/* */
 #define DF_BIND_NOW	0x00000008	/* */
-#define DF_STATICT_LS	0x00000010	/* */
+#define DF_STATIC_TLS	0x00000010	/* */
 
 /* Flag values for DT_FLAGS_1 (incomplete) */
 #define DF_1_BIND_NOW	0x00000001	/* Same as DF_BIND_NOW */
@@ -1261,7 +1261,7 @@ int	coredump_elf32(struct lwp *, struct coredump_iostate *);
 void	coredump_savenote_elf32(struct note_state *, unsigned int,
 	    const char *, void *, size_t);
 
-int	elf32_check_header(Elf32_Ehdr *, int);
+int	elf32_check_header(Elf32_Ehdr *);
 #endif
 
 #ifdef EXEC_ELF64
@@ -1273,7 +1273,7 @@ int	coredump_elf64(struct lwp *, struct coredump_iostate *);
 void	coredump_savenote_elf64(struct note_state *, unsigned int,
 	    const char *, void *, size_t);
 
-int	elf64_check_header(Elf64_Ehdr *, int);
+int	elf64_check_header(Elf64_Ehdr *);
 #endif
 
 #endif /* _KERNEL */

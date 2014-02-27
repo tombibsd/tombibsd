@@ -195,12 +195,12 @@ IDTVEC(trap06)
 IDTVEC_END(trap06)
 
 IDTVEC(trap07)
-	ZTRAP_NJ(T_ASTFLT)
+	ZTRAP_NJ(T_DNA)
 	INTRENTRY
 #ifdef DIAGNOSTIC
 	movl	CPUVAR(ILEVEL),%ebx
 #endif /* DIAGNOSTIC */
-	movq	CPUVAR(SELF),%rdi
+	movq	%rsp,%rdi
 	call	_C_LABEL(fpudna)
 	jmp	.Lalltraps_checkusr
 IDTVEC_END(trap07)
@@ -290,14 +290,9 @@ IDTVEC(trap10)
 #ifdef DIAGNOSTIC
 	movl	CPUVAR(ILEVEL),%ebx
 #endif /* DIAGNOSTIC */
-	testb	$SEL_RPL,TF_CS(%rsp)
-	jz	1f
 	movq	%rsp,%rdi
 	call	_C_LABEL(fputrap)
 	jmp	.Lalltraps_checkusr
-1:
-  	STI(si)
-	jmp	calltrap
 IDTVEC_END(trap10)
 
 IDTVEC(trap11)

@@ -30,6 +30,8 @@
  */
 
 #include "SYS.h"
+#include "assym.h"
+
 #include <machine/mcontext.h>
 
 #if defined(SYSLIBC_SCCS) && !defined(lint)

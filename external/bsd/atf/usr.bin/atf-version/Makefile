@@ -1,8 +1,9 @@
 # $NetBSD$
 
-.include <bsd.own.mk>
+USE_ATF_LIBTOOLS=	yes
 
-SRCDIR=		${NETBSDSRCDIR}/external/bsd/atf/dist
+.include <bsd.init.mk>
+
 .PATH:		${SRCDIR}/tools
 
 BINDIR=		/usr/bin
@@ -10,13 +11,11 @@ PROG_CXX=	atf-version
 SRCS=		atf-version.cpp
 MAN=		atf-version.1
 
-CPPFLAGS+=	-DHAVE_CONFIG_H
 CPPFLAGS+=	-I${SRCDIR}/tools
-CPPFLAGS+=	-I${SRCDIR:H}/lib/libatf-c  # For bconfig.h.
-CPPFLAGS+=	-I${.CURDIR}
-
-USE_ATF_LIBTOOLS=	yes
 
 WARNS?=		2
+
+CPPFLAGS+=	-DATF_VERSION=\"$(ATF_VERSION)\"
+atf-version.o:	atf-version.txt
 
 .include <bsd.prog.mk>

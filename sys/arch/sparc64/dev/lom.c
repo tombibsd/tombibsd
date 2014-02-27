@@ -352,8 +352,12 @@ lom_attach(device_t parent, device_t self, void *aux)
 	for (i = 0; i < sc->sc_num_alarm; i++) {
 		sc->sc_alarm[i].units = ENVSYS_INDICATOR;
 		sc->sc_alarm[i].state = ENVSYS_SINVALID;
-		snprintf(sc->sc_alarm[i].desc, sizeof(sc->sc_alarm[i].desc),
-		    i == 0 ? "Fault LED" : "Alarm%d", i);
+		if (i == 0)
+			strlcpy(sc->sc_alarm[i].desc, "Fault LED",
+			    sizeof(sc->sc_alarm[i].desc));
+		else
+			snprintf(sc->sc_alarm[i].desc,
+			    sizeof(sc->sc_alarm[i].desc), "Alarm%d", i);
 		if (sysmon_envsys_sensor_attach(sc->sc_sme, &sc->sc_alarm[i])) {
 			sysmon_envsys_destroy(sc->sc_sme);
 			aprint_error_dev(self, "can't attach alarm sensor\n");

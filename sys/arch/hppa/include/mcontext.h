@@ -69,8 +69,6 @@ __lwp_getprivate_fast(void)
 
 #endif /* !__ASSEMBLER__ */
 
-#define	_OFFSETOF_UC_GREGS 40
-
 #define	_UC_SETSTACK	0x00010000
 #define	_UC_CLRSTACK	0x00020000
 #define	_UC_TLSBASE	0x00040000

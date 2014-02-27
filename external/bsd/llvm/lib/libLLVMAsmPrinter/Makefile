@@ -19,7 +19,8 @@ SRCS+=	ARMException.cpp \
 	DwarfUnit.cpp \
 	ErlangGCPrinter.cpp \
 	OcamlGCPrinter.cpp \
-	Win64Exception.cpp
+	Win64Exception.cpp \
+	WinCodeViewLineTables.cpp
 
 .if defined(HOSTLIB)
 .include <bsd.hostlib.mk>

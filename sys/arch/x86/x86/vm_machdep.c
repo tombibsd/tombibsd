@@ -103,10 +103,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <machine/mtrr.h>
 #endif
 
-#ifdef __x86_64__
-#include <machine/fpu.h>
-#endif
-
 void
 cpu_proc_fork(struct proc *p1, struct proc *p2)
 {
@@ -141,9 +137,7 @@ cpu_lwp_fork(struct lwp *l1, struct lwp *l2, void *stack, size_t stacksize,
 	 * If parent LWP was using FPU, then we have to save the FPU h/w
 	 * state to PCB so that we can copy it.
 	 */
-	if (pcb1->pcb_fpcpu != NULL) {
-		fpusave_lwp(l1, true);
-	}
+	fpusave_lwp(l1, true);
 
 	/*
 	 * Sync the PCB before we copy it.
@@ -242,12 +236,9 @@ cpu_lwp_fork(struct lwp *l1, struct lwp *l2, void *stack, size_t stacksize,
 void
 cpu_lwp_free(struct lwp *l, int proc)
 {
-	struct pcb *pcb = lwp_getpcb(l);
 
 	/* If we were using the FPU, forget about it. */
-	if (pcb->pcb_fpcpu != NULL) {
-		fpusave_lwp(l, false);
-	}
+	fpusave_lwp(l, false);
 
 #ifdef MTRR
 	if (proc && l->l_proc->p_md.md_flags & MDP_USEDMTRR)

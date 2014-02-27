@@ -43,6 +43,6 @@
 /* CPU Timers Control Register (MVSOCTMR_CTCR) */
 #define MVSOCTMR_CTCR_CPUTIMEREN(n)	(1 << ((n) * 2))
 #define MVSOCTMR_CTCR_CPUTIMERAUTO(n)	(1 << ((n) * 2 + 1))
-#define MVSOCTMR_CTCR_25MHZEN(n)	(1 << ((n) + 11))
+#define MVSOCTMR_CTCR_25MHZEN(n)	(1 << ((n) + 11)) /* Armada XP only */
 
 #endif	/* !_MVSOCTMRREG_H_ */

@@ -8,6 +8,7 @@ NOMAN=		yes
 .PATH: ${LLVM_SRCDIR}/tools/llvm-readobj
 
 SRCS=	llvm-readobj.cpp \
+	ARMAttributeParser.cpp \
 	COFFDumper.cpp \
 	ELFDumper.cpp \
 	Error.cpp \

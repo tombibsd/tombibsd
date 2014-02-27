@@ -3,16 +3,16 @@
 /bufgap.c/1.5/Mon Nov 29 06:21:40 2010/-kk/
 /bufgap.h/1.2/Sun Dec  6 17:43:05 2009/-kk/
 /compress.c/1.23/Mon Mar  5 02:20:18 2012/-kk/
-/config.h.in/1.16/Sun Nov  7 08:39:59 2010/-kk/
+/config.h.in/1.17/Thu Feb 27 08:51:16 2014/-kk/
 /create.c/1.38/Mon Nov 15 08:03:39 2010/-kk/
 /create.h/1.12/Sun Nov  7 08:39:59 2010/-kk/
-/crypto.c/1.35/Sun Jan  2 18:13:10 2011/-kk/
+/crypto.c/1.36/Thu Feb 27 08:51:16 2014/-kk/
 /crypto.h/1.30/Mon Nov 29 04:20:12 2010/-kk/
 /defs.h/1.2/Sun Dec  6 17:43:05 2009/-kk/
 /errors.h/1.8/Tue Jan 14 16:00:58 2014/-kk/
 /keyring.c/1.50/Sat Jun 25 00:37:44 2011/-kk/
 /keyring.h/1.32/Sun Nov  7 08:39:59 2010/-kk/
-/libnetpgp.3/1.15/Thu Oct 24 10:28:41 2013/-kk/
+/libnetpgp.3/1.16/Thu Feb 27 08:51:16 2014/-kk/
 /memory.h/1.8/Sun Nov  7 08:39:59 2010/-kk/
 /misc.c/1.41/Mon Mar  5 02:20:18 2012/-kk/
 /mkinstalldirs/1.1.1.1/Thu Apr 23 06:32:03 2009/-kk/
@@ -37,7 +37,7 @@
 /types.h/1.11/Mon Nov 15 08:56:30 2010/-kk/
 /validate.c/1.44/Mon Mar  5 02:20:18 2012/-kk/
 /validate.h/1.15/Sun Nov  7 08:40:00 2010/-kk/
-/version.h/1.45/Thu Nov 11 00:58:05 2010/-kk/
+/version.h/1.46/Thu Feb 27 08:51:16 2014/-kk/
 /writer.c/1.33/Mon Mar  5 02:20:18 2012/-kk/
 /writer.h/1.11/Sun Nov  7 08:40:00 2010/-kk/
 D

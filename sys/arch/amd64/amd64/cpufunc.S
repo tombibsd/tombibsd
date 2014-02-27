@@ -441,6 +441,10 @@ ENTRY(fnstcw)
 	fnstcw	(%rdi)
 	ret
 
+ENTRY(fngetsw)
+	fnstsw	%ax
+	ret
+
 ENTRY(fnstsw)
 	fnstsw	(%rdi)
 	ret
@@ -480,7 +484,7 @@ ENTRY(fxrstor)
 
 ENTRY(fldummy)
 	ffree	%st(7)
-	flds	(%rdi)
+	fldz
 	ret
 
 ENTRY(xsave)

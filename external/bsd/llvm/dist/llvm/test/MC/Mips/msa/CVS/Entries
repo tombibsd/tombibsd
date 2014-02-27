@@ -1,13 +1,17 @@
 /test_2r.s/1.1.1.2/Tue Jan 14 16:02:15 2014/-kk/
+/test_2r_msa64.s/1.1.1.1/Fri Feb 14 20:12:53 2014/-kk/
 /test_2rf.s/1.1.1.2/Tue Jan 14 16:02:15 2014/-kk/
 /test_3r.s/1.1.1.2/Tue Jan 14 16:02:15 2014/-kk/
 /test_3rf.s/1.1.1.2/Tue Jan 14 16:02:15 2014/-kk/
 /test_bit.s/1.1.1.2/Tue Jan 14 16:02:15 2014/-kk/
 /test_cbranch.s/1.1.1.2/Tue Jan 14 16:02:15 2014/-kk/
 /test_ctrlregs.s/1.1.1.2/Tue Jan 14 16:02:15 2014/-kk/
+/test_dlsa.s/1.1.1.1/Fri Feb 14 20:12:53 2014/-kk/
 /test_elm.s/1.1.1.2/Tue Jan 14 16:02:15 2014/-kk/
 /test_elm_insert.s/1.1.1.2/Tue Jan 14 16:02:15 2014/-kk/
+/test_elm_insert_msa64.s/1.1.1.1/Fri Feb 14 20:12:53 2014/-kk/
 /test_elm_insve.s/1.1.1.2/Tue Jan 14 16:02:15 2014/-kk/
+/test_elm_msa64.s/1.1.1.1/Fri Feb 14 20:12:53 2014/-kk/
 /test_i10.s/1.1.1.2/Tue Jan 14 16:02:15 2014/-kk/
 /test_i5.s/1.1.1.2/Tue Jan 14 16:02:15 2014/-kk/
 /test_i8.s/1.1.1.2/Tue Jan 14 16:02:15 2014/-kk/

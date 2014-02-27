@@ -1,8 +1,7 @@
 # $NetBSD$
 
-.include <bsd.own.mk>
+.include <bsd.init.mk>
 
-SRCDIR=		${NETBSDSRCDIR}/external/bsd/atf/dist
 .PATH:		${SRCDIR}/atf-sh
 
 BINDIR=		/usr/libexec
@@ -12,9 +11,6 @@ MAN=		atf-check.1
 
 LDADD+=		-latf-c++ -latf-c
 DPADD+=		${LIBATF_CXX} ${LIBATF_C}
-
-CPPFLAGS+=	-DHAVE_CONFIG_H
-CPPFLAGS+=	-I${SRCDIR}
 
 WARNS?=		2
 

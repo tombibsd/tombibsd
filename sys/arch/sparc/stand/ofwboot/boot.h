@@ -69,4 +69,7 @@ void	freeall(void);
 /* ofdev.c */
 char *filename(char *, char *);
 
+/* boot.c */
+void main(void *);
+
 #endif /* _BOOT_H_ */

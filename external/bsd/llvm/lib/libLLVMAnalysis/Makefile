@@ -30,6 +30,7 @@ SRCS+=	AliasAnalysis.cpp \
 	InstructionSimplify.cpp \
 	Interval.cpp \
 	IntervalPartition.cpp \
+	LazyCallGraph.cpp \
 	LazyValueInfo.cpp \
 	LibCallAliasAnalysis.cpp \
 	LibCallSemantics.cpp \

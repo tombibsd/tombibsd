@@ -20,10 +20,5 @@ FILESDIR=	${TESTSBASE}/libexec/ld.elf_so/h_helper_symver_dso1
 
 LDFLAGS.lib${LIB} += -Wl,--version-script=${.CURDIR}/h_helper_symver_dso1.map
 
-.if !empty(MACHINE_ARCH:M*arm*)
-# LLVM PR 18273
-COPTS.h_helper_symver_dso1.c=	${${ACTIVE_CC} == "clang":?-no-integrated-as :}
-.endif
-
 .include <bsd.lib.mk>
 

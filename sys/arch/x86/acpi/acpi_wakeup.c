@@ -97,15 +97,11 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #define ACPI_MACHDEP_PRIVATE
 #include <machine/acpi_machdep.h>
 #include <machine/cpu.h>
-#ifdef __i386__
-#  include <machine/npx.h>
-#else
-#  include <machine/fpu.h>
-#endif
 #include <machine/mtrr.h>
 
 #include <x86/cpuvar.h>
 #include <x86/x86/tsc.h>
+#include <x86/fpu.h>
 
 #include "opt_vga.h"
 

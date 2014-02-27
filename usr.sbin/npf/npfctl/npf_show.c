@@ -390,7 +390,7 @@ npfctl_print_nat(npf_conf_info_t *ctx, nl_nat_t *nt)
 	seg = npfctl_print_addrmask(alen, &addr, NPF_NO_NETMASK);
 	if (port) {
 		char *p;
-		easprintf(&p, "%s port %u", seg, port);
+		easprintf(&p, "%s port %u", seg, ntohs(port));
 		free(seg), seg = p;
 	}
 	seg1 = seg2 = "any";
@@ -423,17 +423,19 @@ static void
 npfctl_print_table(npf_conf_info_t *ctx, nl_table_t *tl)
 {
 	const char *name = npf_table_getname(tl);
-	const int type = npf_table_gettype(tl);
+	const unsigned type = npf_table_gettype(tl);
+	const char *table_types[] = {
+		[NPF_TABLE_HASH] = "hash",
+		[NPF_TABLE_TREE] = "tree",
+		[NPF_TABLE_CDB]  = "cdb",
+	};
 
 	if (name[0] == '.') {
 		/* Internal tables use dot and are hidden. */
 		return;
 	}
-
-	fprintf(ctx->fp, "table <%s> type %s\n", name,
-	    (type == NPF_TABLE_HASH) ? "hash" :
-	    (type == NPF_TABLE_TREE) ? "tree" :
-	    "unknown");
+	assert(type < __arraycount(table_types));
+	fprintf(ctx->fp, "table <%s> type %s\n", name, table_types[type]);
 }
 
 int

@@ -561,9 +561,10 @@ pool_init(struct pool *pp, size_t size, u_int align, u_int ioff, int flags,
 	/* See the comment below about reserved bytes. */
 	trysize = palloc->pa_pagesz - ((align - ioff) % align);
 	phsize = ALIGN(sizeof(struct pool_item_header));
-	if ((pp->pr_roflags & (PR_NOTOUCH | PR_NOALIGN)) == 0 &&
+	if (pp->pr_roflags & PR_PHINPAGE ||
+	    ((pp->pr_roflags & (PR_NOTOUCH | PR_NOALIGN)) == 0 &&
 	    (pp->pr_size < MIN(palloc->pa_pagesz / 16, phsize << 3) ||
-	    trysize / pp->pr_size == (trysize - phsize) / pp->pr_size)) {
+	    trysize / pp->pr_size == (trysize - phsize) / pp->pr_size))) {
 		/* Use the end of the page for the page header */
 		pp->pr_roflags |= PR_PHINPAGE;
 		pp->pr_phoffset = off = palloc->pa_pagesz - phsize;

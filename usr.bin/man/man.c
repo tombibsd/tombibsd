@@ -714,6 +714,18 @@ next:				anyfound = 1;
 	return anyfound;
 }
 
+/*
+ * A do-nothing counterpart to fmtcheck(3) that only supplies the
+ * __format_arg marker.  Actual fmtcheck(3) call is done once in
+ * config().
+ */
+__always_inline __format_arg(2)
+static inline const char *
+fmtcheck_ok(const char *userfmt, const char *template)
+{
+	return userfmt;
+}
+
 /* 
  * build_page --
  *	Build a man page for display.
@@ -788,7 +800,7 @@ build_page(const char *fmt, char **pathp, struct manstate *mp)
 		exit(EXIT_FAILURE);
 	}
 	(void)snprintf(buf, sizeof(buf), "%s > %s", fmt, tpath);
-	(void)snprintf(cmd, sizeof(cmd), buf, p);
+	(void)snprintf(cmd, sizeof(cmd), fmtcheck_ok(buf, "%s"), p);
 	(void)system(cmd);
 	(void)close(fd);
 	if ((*pathp = strdup(tpath)) == NULL) {

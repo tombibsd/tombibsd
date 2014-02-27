@@ -47,11 +47,11 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <machine/reg.h>
 #include <machine/pcb.h>
-#include <machine/fpu.h>
 #include <machine/mcontext.h>
 #include <machine/specialreg.h>
 #include <machine/vmparam.h>
 #include <machine/cpufunc.h>
+#include <x86/include/sysarch.h>
 
 /* 
  * To see whether wscons is configured (for virtual console ioctl calls).
@@ -84,15 +84,8 @@ linux_setregs(struct lwp *l, struct exec_package *epp, vaddr_t stack)
 	struct pcb *pcb = lwp_getpcb(l);
 	struct trapframe *tf;
 
-	/* If we were using the FPU, forget about it. */
-	if (pcb->pcb_fpcpu != NULL)
-		fpusave_lwp(l, 0);
-
-	l->l_md.md_flags &= ~MDL_USEDFPU;
+	fpu_save_area_clear(l, __NetBSD_NPXCW__);
 	pcb->pcb_flags = 0;
-	pcb->pcb_savefpu.sv_xmm.fx_cw = __NetBSD_NPXCW__;
-	pcb->pcb_savefpu.sv_xmm.fx_mxcsr = __INITIAL_MXCSR__;
-	pcb->pcb_savefpu.sv_xmm.fx_mxcsr_mask = __INITIAL_MXCSR_MASK__;
 
 	l->l_proc->p_flag &= ~PK_32;
 
@@ -153,15 +146,9 @@ linux_sendsig(const ksiginfo_t *ksi, const sigset_t *mask)
 	else
 		sp = (char *)tf->tf_rsp - 128;
 
-	/* 
-	 * Save FPU state, if any 
-	 */
-	if (l->l_md.md_flags & MDL_USEDFPU) {
-		sp = (char *)
-		    (((long)sp - sizeof (*fpsp)) & ~0xfUL);
-		fpsp = (struct linux__fpstate *)sp;
-	} else
-		fpsp = NULL;
+	/* Save FPU state */
+	sp = (char *) (((long)sp - sizeof (*fpsp)) & ~0xfUL);
+	fpsp = (struct linux__fpstate *)sp;
 
 	/* 
 	 * Populate the rt_sigframe 

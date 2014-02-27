@@ -286,8 +286,11 @@ write_parsed_cb(const pgp_packet_t *pkt, pgp_cbdata_t *cbinfo)
 			puts("Skipping...");
 			cbinfo->printstate.skipping = 1;
 		}
-		fwrite(content->unarmoured_text.data, 1,
-		       content->unarmoured_text.length, stdout);
+		if (fwrite(content->unarmoured_text.data, 1,
+		       content->unarmoured_text.length, stdout) != content->unarmoured_text.length) {
+			fprintf(stderr, "unable to write unarmoured text data\n");
+			cbinfo->printstate.skipping = 1;
+		}
 		break;
 
 	case PGP_PTAG_CT_PK_SESSION_KEY:

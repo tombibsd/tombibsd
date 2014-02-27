@@ -57,11 +57,12 @@
 /iv-sext.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /iv-widen.ll/1.1.1.2/Fri Jan 31 08:46:00 2014/-kk/
 /iv-zext.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/lcssa-preservation.ll/1.1.1.1/Fri Feb 14 20:12:47 2014/-kk/
 /lftr-address-space-pointers.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /lftr-extend-const.ll/1.1.1.2/Fri Jan 31 08:46:00 2014/-kk/
 /lftr-other-uses.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /lftr-promote.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
-/lftr-reuse.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/lftr-reuse.ll/1.1.1.2/Thu Feb 27 08:52:24 2014/-kk/
 /lftr-zext.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /lftr_simple.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /loop_evaluate10.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/

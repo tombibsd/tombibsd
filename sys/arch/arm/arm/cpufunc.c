@@ -3055,20 +3055,13 @@ armv7_setup(char *args)
 #ifdef __ARMEB__
 	    | CPU_CONTROL_EX_BEND
 #endif
+#ifndef ARM32_DISABLE_ALIGNMENT_FAULTS
+	    | CPU_CONTROL_AFLT_ENABLE;
+#endif
 	    | CPU_CONTROL_UNAL_ENABLE;
 
-#if 0
-	int cpuctrlmask = CPU_CONTROL_MMU_ENABLE | CPU_CONTROL_SYST_ENABLE
-	    | CPU_CONTROL_IC_ENABLE | CPU_CONTROL_DC_ENABLE
-	    | CPU_CONTROL_ROM_ENABLE | CPU_CONTROL_BPRD_ENABLE
-	    | CPU_CONTROL_BEND_ENABLE | CPU_CONTROL_AFLT_ENABLE
-	    | CPU_CONTROL_ROUNDROBIN | CPU_CONTROL_CPCLK;
-#endif
+	int cpuctrlmask = cpuctrl | CPU_CONTROL_AFLT_ENABLE;
 
-#ifdef ARM32_DISABLE_ALIGNMENT_FAULTS
-#else
-	cpuctrl |= CPU_CONTROL_AFLT_ENABLE;
-#endif
 
 	cpuctrl = parse_cpu_options(args, armv7_options, cpuctrl);
 
@@ -3082,7 +3075,7 @@ armv7_setup(char *args)
 
 	/* Set the control register */
 	curcpu()->ci_ctrl = cpuctrl;
-	cpu_control(cpuctrl, cpuctrl);
+	cpu_control(cpuctrlmask, cpuctrl);
 }
 #endif /* CPU_CORTEX */
 

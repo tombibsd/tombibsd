@@ -10,10 +10,10 @@
 /core_netbsd.c/1.22/Tue Jan 14 16:05:06 2014/-kk/
 /exec_aout.c/1.38/Thu Feb 13 15:22:33 2014/-kk/
 /exec_ecoff.c/1.30/Thu Oct 24 10:28:58 2013/-kk/
-/exec_elf.c/1.54/Thu Feb 13 15:22:33 2014/-kk/
+/exec_elf.c/1.59/Thu Feb 27 08:56:07 2014/-kk/
 /exec_elf32.c/1.138/Thu Oct 24 10:28:58 2013/-kk/
 /exec_elf64.c/1.4/Thu Oct 24 10:28:58 2013/-kk/
-/exec_script.c/1.67/Thu Oct 24 10:28:58 2013/-kk/
+/exec_script.c/1.68/Thu Feb 27 08:56:07 2014/-kk/
 /exec_subr.c/1.70/Mon Aug  8 06:30:43 2011/-kk/
 /genlintstub.awk/1.10/Sun Jan 22 05:11:11 2006/-kk/
 /init_main.c/1.454/Thu Oct 24 10:28:58 2013/-kk/
@@ -32,7 +32,7 @@
 /kern_descrip.c/1.222/Thu Oct 24 10:28:58 2013/-kk/
 /kern_drvctl.c/1.34/Thu Oct 24 10:28:58 2013/-kk/
 /kern_event.c/1.79/Sat Nov 24 15:14:32 2012/-kk/
-/kern_exec.c/1.374/Thu Feb 13 15:36:02 2014/-kk/
+/kern_exec.c/1.377/Thu Feb 27 08:56:07 2014/-kk/
 /kern_exit.c/1.243/Thu Oct 24 10:28:58 2013/-kk/
 /kern_fileassoc.c/1.35/Sun Jan 22 03:48:51 2012/-kk/
 /kern_fork.c/1.193/Tue Dec 17 04:05:10 2013/-kk/
@@ -94,7 +94,7 @@
 /subr_callback.c/1.7/Tue Nov 24 20:11:50 2009/-kk/
 /subr_copy.c/1.1/Wed Nov  4 16:54:00 2009/-kk/
 /subr_cprng.c/1.23/Fri Jan 31 08:48:50 2014/-kk/
-/subr_cpufreq.c/1.8/Thu Oct 27 05:25:07 2011/-kk/
+/subr_cpufreq.c/1.9/Thu Feb 27 08:56:07 2014/-kk/
 /subr_debug.c/1.7/Wed Apr 30 20:20:53 2008/-kk/
 /subr_device.c/1.2/Sun Jan 31 15:10:12 2010/-kk/
 /subr_devsw.c/1.30/Sat Feb 18 06:29:10 2012/-kk/
@@ -120,7 +120,7 @@
 /subr_pcu.c/1.17/Thu Feb 13 15:22:33 2014/-kk/
 /subr_percpu.c/1.16/Fri Jan 27 19:48:40 2012/-kk/
 /subr_physmap.c/1.2/Thu Oct 24 10:28:58 2013/-kk/
-/subr_pool.c/1.200/Thu Oct 24 10:28:58 2013/-kk/
+/subr_pool.c/1.201/Thu Feb 27 08:56:07 2014/-kk/
 /subr_prf.c/1.152/Fri Jan 31 08:48:50 2014/-kk/
 /subr_prof.c/1.45/Thu Dec 17 01:25:10 2009/-kk/
 /subr_pserialize.c/1.7/Thu Oct 24 10:28:58 2013/-kk/
@@ -130,7 +130,7 @@
 /subr_tftproot.c/1.12/Sat Dec  1 11:41:50 2012/-kk/
 /subr_time.c/1.17/Thu Oct 24 10:28:58 2013/-kk/
 /subr_userconf.c/1.26/Wed Jan  1 02:45:35 2014/-kk/
-/subr_vmem.c/1.87/Tue Dec 17 04:05:10 2013/-kk/
+/subr_vmem.c/1.88/Thu Feb 27 08:56:07 2014/-kk/
 /subr_workqueue.c/1.33/Sun Oct  7 22:16:21 2012/-kk/
 /subr_xcall.c/1.18/Tue Dec 17 04:05:10 2013/-kk/
 /sys_aio.c/1.38/Tue Oct 29 08:21:47 2013/-kk/
@@ -145,7 +145,7 @@
 /sys_pset.c/1.17/Sun Aug  7 21:13:05 2011/-kk/
 /sys_sched.c/1.42/Fri Apr 20 22:23:25 2012/-kk/
 /sys_select.c/1.37/Thu Oct 24 10:28:58 2013/-kk/
-/sys_sig.c/1.41/Thu Oct 24 10:28:58 2013/-kk/
+/sys_sig.c/1.42/Thu Feb 27 08:56:07 2014/-kk/
 /sys_socket.c/1.65/Tue Dec 20 23:56:28 2011/-kk/
 /sys_syscall.c/1.10/Sat May  5 19:44:02 2012/-kk/
 /syscalls.c/1.271/Wed Dec 25 07:37:45 2013/-kk/
@@ -184,7 +184,7 @@
 /vfs_mount.c/1.25/Tue Dec 17 04:05:10 2013/-kk/
 /vfs_quotactl.c/1.38/Wed Feb  1 05:43:54 2012/-kk/
 /vfs_subr.c/1.441/Tue Dec 17 04:05:10 2013/-kk/
-/vfs_syscalls.c/1.475/Thu Feb 13 15:22:34 2014/-kk/
+/vfs_syscalls.c/1.476/Thu Feb 27 08:56:08 2014/-kk/
 /vfs_trans.c/1.29/Tue Dec 17 04:05:10 2013/-kk/
 /vfs_vnode.c/1.30/Tue Dec 17 04:13:38 2013/-kk/
 /vfs_vnops.c/1.188/Thu Feb 13 15:22:34 2014/-kk/

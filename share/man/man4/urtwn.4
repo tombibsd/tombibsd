@@ -15,7 +15,7 @@
 .\" ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 .\" OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 .\"
-.Dd August 10, 2013
+.Dd February 13, 2014
 .Dt URTWN 4
 .Os
 .Sh NAME
@@ -51,6 +51,18 @@ Also known as
 mode, this is used when associating with an access point, through
 which all traffic passes.
 This mode is the default.
+.It IBSS mode
+Also known as
+.Em IEEE ad-hoc
+mode or
+.Em peer-to-peer
+mode.
+This is the standardized method of operating without an access point.
+Stations associate with a service set.
+However, actual connections between stations are peer-to-peer.
+.It Host AP
+In this mode the driver acts as an access point (base station)
+for other cards.
 .It monitor mode
 In this mode the driver is able to receive packets without
 associating with an access point.

@@ -56,9 +56,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include "acpica.h"
 
-#ifdef __x86_64__
-#include <machine/fpu.h>
-#endif
+#include <x86/fpu.h>
 
 static void	x86_ipi_halt(struct cpu_info *);
 static void	x86_ipi_kpreempt(struct cpu_info *);

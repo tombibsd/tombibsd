@@ -594,7 +594,12 @@ make_bsd_partitions(void)
 		i = (i + dlcylsize * sectorsize - 1) / (dlcylsize * sectorsize);
 		i *= dlcylsize;
 	}
+#if defined(PART_BOOT_FFS)
+	bsdlabel[PART_BOOT].pi_fstype = FS_BSDFFS;
+	bsdlabel[PART_BOOT].pi_flags = PIF_NEWFS;
+#else
 	bsdlabel[PART_BOOT].pi_fstype = FS_BOOT;
+#endif
 	bsdlabel[PART_BOOT].pi_size = i;
 #ifdef BOOT_HIGH
 	bsdlabel[PART_BOOT].pi_offset = ptend - i;

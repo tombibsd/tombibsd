@@ -47,7 +47,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <machine/cpu.h>
 #include <machine/cpufunc.h>
 #include <machine/psl.h>
-#include <machine/npx.h>
+#include <x86/fpu.h>
 #include <machine/reg.h>
 #include <machine/vmparam.h>
 #include <machine/ibcs2_machdep.h>

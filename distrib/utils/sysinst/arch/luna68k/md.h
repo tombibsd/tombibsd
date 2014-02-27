@@ -43,8 +43,12 @@
 #define PART_ROOT	PART_A
 #define PART_SWAP	PART_B
 #define PART_RAW	PART_C
+#define PART_BOOT	PART_D
 #define PART_USR	PART_G	/* Can be after PART_FIRST_FREE */
-#define PART_FIRST_FREE	PART_D
+#define PART_FIRST_FREE	PART_E
+
+#define PART_BOOT_FFS
+#define BOOT_SIZE	(8 * 1024 * 1024)	/* for a.out kernel and boot */
 
 #define DEFSWAPRAM	8	/* Assume at least this RAM for swap calc */
 #define DEFROOTSIZE	64	/* Default root size */

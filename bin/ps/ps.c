@@ -73,7 +73,6 @@ __RCSID("$NetBSD$");
 #endif /* not lint */
 
 #include <sys/param.h>
-#include <sys/user.h>
 #include <sys/time.h>
 #include <sys/resource.h>
 #include <sys/lwp.h>

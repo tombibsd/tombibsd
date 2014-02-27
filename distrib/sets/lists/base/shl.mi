@@ -721,7 +721,7 @@
 ./usr/lib/libsl.so.5.0				base-krb5-shlib		kerberos
 ./usr/lib/libsqlite3.so				base-sys-shlib
 ./usr/lib/libsqlite3.so.1			base-sys-shlib
-./usr/lib/libsqlite3.so.1.1			base-sys-shlib
+./usr/lib/libsqlite3.so.1.2			base-sys-shlib
 ./usr/lib/libss.so				base-obsolete		obsolete
 ./usr/lib/libssh.so				base-secsh-shlib	crypto
 ./usr/lib/libssh.so.22				base-secsh-shlib	crypto

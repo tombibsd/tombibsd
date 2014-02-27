@@ -41,7 +41,6 @@
 #define _FREEBSD_MACHDEP_H
 
 #include <compat/sys/sigtypes.h>
-#include <machine/npx.h>
 
 /*
  * signal support

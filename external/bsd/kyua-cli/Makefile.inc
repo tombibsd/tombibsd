@@ -51,10 +51,10 @@ CPPFLAGS+=	-I${TOPDIR}		# For config.h.
 CPPFLAGS+=	-I${TOPDIR}/lib		# For utils/defs.hpp.
 CPPFLAGS+=	-I${SRCDIR}
 
-PRIVATELIBDIR!=	cd ${TOPDIR}/lib; ${PRINTOBJDIR}
 .for lib in ${KYUA_LIBS}
-LDADD+=		${PRIVATELIBDIR}/${lib}/lib${lib}.a
-DPADD+=		${PRIVATELIBDIR}/${lib}/lib${lib}.a
+LIBOBJDIR_${lib}!=	cd ${TOPDIR}/lib/${lib}; ${PRINTOBJDIR}
+LDADD+=			${LIBOBJDIR_${lib}}/lib${lib}.a
+DPADD+=			${LIBOBJDIR_${lib}}/lib${lib}.a
 .endfor
 
 .if !empty(KYUA_LIBS:Mutils)

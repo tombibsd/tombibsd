@@ -11,6 +11,7 @@ NOGCCERROR=	yes
 SRCS+=	APFloat.cpp \
 	APInt.cpp \
 	APSInt.cpp \
+	ARMBuildAttrs.cpp \
 	Allocator.cpp \
 	BlockFrequency.cpp \
 	BranchProbability.cpp \

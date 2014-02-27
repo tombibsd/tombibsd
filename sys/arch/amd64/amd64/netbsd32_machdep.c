@@ -61,7 +61,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/ptrace.h>
 #include <sys/kauth.h>
 
-#include <machine/fpu.h>
+#include <x86/fpu.h>
 #include <machine/frame.h>
 #include <machine/reg.h>
 #include <machine/vmparam.h>
@@ -128,26 +128,17 @@ netbsd32_setregs(struct lwp *l, struct exec_package *pack, vaddr_t stack)
 
 	pcb = lwp_getpcb(l);
 
-	/* If we were using the FPU, forget about it. */
-	if (pcb->pcb_fpcpu != NULL) {
-		fpusave_lwp(l, false);
-	}
-
 #if defined(USER_LDT) && 0
 	pmap_ldt_cleanup(p);
 #endif
 
 	netbsd32_adjust_limits(p);
 
-	l->l_md.md_flags &= ~MDL_USEDFPU;
 	l->l_md.md_flags |= MDL_COMPAT32;	/* Force iret not sysret */
 	pcb->pcb_flags = PCB_COMPAT32;
-	if (pack->ep_osversion >= 699002600)
-		pcb->pcb_savefpu.sv_xmm.fx_cw = __NetBSD_NPXCW__;
-	else
-		pcb->pcb_savefpu.sv_xmm.fx_cw = __NetBSD_COMPAT_NPXCW__;
-	pcb->pcb_savefpu.sv_xmm.fx_mxcsr = __INITIAL_MXCSR__;  
-	pcb->pcb_savefpu.sv_xmm.fx_mxcsr_mask = __INITIAL_MXCSR_MASK__;
+
+	fpu_save_area_clear(l, pack->ep_osversion >= 699002600
+	    ?  __NetBSD_NPXCW__ : __NetBSD_COMPAT_NPXCW__);
 
 	p->p_flag |= PK_32;
 
@@ -263,8 +254,8 @@ netbsd32_sendsig_sigcontext(const ksiginfo_t *ksi, const sigset_t *mask)
 	tf->tf_fs = GSEL(GUDATA32_SEL, SEL_UPL);
 	tf->tf_gs = GSEL(GUDATA32_SEL, SEL_UPL);
 
-	/* Ensure FP state is reset, if FP is used. */
-	l->l_md.md_flags &= ~MDL_USEDFPU;
+	/* Ensure FP state is sane. */
+	fpu_save_area_reset(l);
 
 	tf->tf_rip = (uint64_t)catcher;
 	tf->tf_cs = GSEL(GUCODE32_SEL, SEL_UPL);
@@ -366,8 +357,8 @@ netbsd32_sendsig_siginfo(const ksiginfo_t *ksi, const sigset_t *mask)
 	tf->tf_rsp = (uint64_t)fp;
 	tf->tf_ss = GSEL(GUDATA32_SEL, SEL_UPL);
 
-	/* Ensure FP state is reset, if FP is used. */
-	l->l_md.md_flags &= ~MDL_USEDFPU;
+	/* Ensure FP state is sane. */
+	fpu_save_area_reset(l);
 
 	/* Remember that we're now on the signal stack. */
 	if (onstack)
@@ -815,18 +806,9 @@ cpu_setmcontext32(struct lwp *l, const mcontext32_t *mcp, unsigned int flags)
 
 	/* Restore floating point register context, if any. */
 	if ((flags & _UC_FPU) != 0) {
-		struct pcb *pcb = lwp_getpcb(l);
-
-		/*
-		 * If we were using the FPU, forget that we were.
-		 */
-		if (pcb->pcb_fpcpu != NULL) {
-			fpusave_lwp(l, false);
-		}
-		memcpy(&pcb->pcb_savefpu.sv_xmm, &mcp->__fpregs,
-		    sizeof (pcb->pcb_savefpu.sv_xmm));
-		/* If not set already. */
-		l->l_md.md_flags |= MDL_USEDFPU;
+		/* Assume fxsave context */
+		process_write_fpregs_xmm(l, (const struct fxsave *)
+		    &mcp->__fpregs.__fp_reg_set.__fp_xmm_state);
 	}
 
 	mutex_enter(p->p_lock);
@@ -876,17 +858,11 @@ cpu_getmcontext32(struct lwp *l, mcontext32_t *mcp, unsigned int *flags)
 	mcp->_mc_tlsbase = (uint32_t)(uintptr_t)l->l_private;
 	*flags |= _UC_TLSBASE;
 
-	/* Save floating point register context, if any. */
-	if ((l->l_md.md_flags & MDL_USEDFPU) != 0) {
-		struct pcb *pcb = lwp_getpcb(l);
-
-		if (pcb->pcb_fpcpu) {
-			fpusave_lwp(l, true);
-		}
-		memcpy(&mcp->__fpregs, &pcb->pcb_savefpu.sv_xmm,
-		    sizeof (pcb->pcb_savefpu.sv_xmm));
-		*flags |= _UC_FPU;
-	}
+	/* Save floating point register context. */
+	process_read_fpregs_xmm(l, (struct fxsave *)
+	    &mcp->__fpregs.__fp_reg_set.__fp_xmm_state);
+	memset(&mcp->__fpregs.__fp_pad, 0, sizeof mcp->__fpregs.__fp_pad);
+	*flags |= _UC_FXSAVE | _UC_FPU;
 }
 
 void

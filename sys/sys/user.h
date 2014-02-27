@@ -38,10 +38,4 @@
 #error "This header has been obsoleted and will be removed."
 #endif
 
-#include <machine/pcb.h>
-
-struct user {
-	struct pcb u_pcb;
-};
-
 #endif /* !_SYS_USER_H_ */

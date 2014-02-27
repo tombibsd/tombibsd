@@ -7,6 +7,7 @@ D/Delinearization////
 D/DependenceAnalysis////
 D/Dominators////
 D/GlobalsModRef////
+D/LazyCallGraph////
 D/Lint////
 D/LoopInfo////
 D/MemoryDependenceAnalysis////

@@ -623,6 +623,7 @@ urndis* at uhub? port ?		# Microsoft RNDIS specification
 atu*	at uhub? port ?		# Atmel AT76C50XX based adapters
 ural*	at uhub? port ?		# Ralink Technology RT2500USB 802.11a/b/g
 rum*	at uhub? port ?		# Ralink Technology RT2501/RT2601 802.11a/b/g
+urtw*	at uhub? port ?		# Realtek RTL8187/RTL8187B 802.11b/g
 
 # Prolific PL2301/PL2302 host-to-host adapter
 upl*	at uhub? port ?

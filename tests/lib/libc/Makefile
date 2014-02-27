@@ -3,7 +3,7 @@
 .include "Makefile.inc"
 .include <bsd.own.mk>
 
-SUBDIR+=	tls_dso .WAIT
+SUBDIR+=	tls_dso .WAIT sync
 
 TESTS_SUBDIRS+=	c063 db gen hash inet locale net regex rpc setjmp stdlib
 TESTS_SUBDIRS+=	stdio string sys termios time tls ttyio

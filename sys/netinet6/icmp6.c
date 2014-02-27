@@ -630,6 +630,8 @@ icmp6_input(struct mbuf **mp, int *offp, int proto)
 		}
 		IP6_EXTHDR_GET(nicmp6, struct icmp6_hdr *, n, off,
 		    sizeof(*nicmp6));
+		if (nicmp6 == NULL)
+			goto freeit;
 		nicmp6->icmp6_type = ICMP6_ECHO_REPLY;
 		nicmp6->icmp6_code = 0;
 		if (n) {

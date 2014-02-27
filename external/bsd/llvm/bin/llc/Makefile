@@ -28,8 +28,8 @@ LLVM_LIBS+= \
 	MipsCodeGen \
 	MipsTargetInfo \
 	MipsAsmParser \
-	MipsMCTargetDesc \
 	MipsAsmPrinter \
+	MipsMCTargetDesc \
 	PowerPCCodeGen \
 	PowerPCTargetInfo \
 	PowerPCMCTargetDesc \

@@ -163,7 +163,7 @@ static void radeonfb_engine_idle(struct radeonfb_softc *);
 static void radeonfb_engine_flush(struct radeonfb_softc *);
 static void radeonfb_engine_reset(struct radeonfb_softc *);
 static void radeonfb_engine_init(struct radeonfb_display *);
-static inline void radeonfb_unclip(struct radeonfb_softc *);
+static inline void radeonfb_unclip(struct radeonfb_softc *) __unused;
 
 static void radeonfb_eraserows(void *, int, int, long);
 static void radeonfb_erasecols(void *, int, int, int, long);

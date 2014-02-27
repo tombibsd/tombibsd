@@ -130,6 +130,8 @@ static inline void RESTORE(const char *file, size_t line)
 %token	<y_op>		T_UNOP
 %token	<y_op>		T_INCDEC
 %token			T_SIZEOF
+%token			T_TYPEOF
+%token			T_EXTENSION
 %token			T_ALIGNOF
 %token	<y_op>		T_MULT
 %token	<y_op>		T_DIVOP
@@ -552,6 +554,9 @@ typespec:
 notype_typespec:
 	  T_TYPE {
 		$$ = gettyp($1);
+	  }
+	| T_TYPEOF T_LPARN term T_RPARN {
+		$$ = $3->tn_type;
 	  }
 	| struct_spec {
 		popdecl();
@@ -1731,6 +1736,9 @@ term:
 	  }
 	| T_IMAG T_LPARN term T_RPARN {
 		$$ = build(IMAG, $3, NULL);
+	  }
+	| T_EXTENSION T_LPARN term T_RPARN {
+		$$ = $3;
 	  }
 	| T_SIZEOF term					%prec T_SIZEOF {
 		if (($$ = $2 == NULL ? NULL : bldszof($2->tn_type)) != NULL)

@@ -14,11 +14,11 @@
 /parallel-loops.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /rauw-bug.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /reduction-crash.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
-/small-size.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/small-size.ll/1.1.1.2/Thu Feb 27 08:52:26 2014/-kk/
 /struct-store.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /tripcount.ll/1.1.1.1/Fri Dec  6 23:19:07 2013/-kk/
 /unroll-pm.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
-/unroll-small-loops.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/unroll-small-loops.ll/1.1.1.2/Thu Feb 27 08:52:26 2014/-kk/
 /unroll_selection.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /vector-scalar-select-cost.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /vector_ptr_load_store.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/

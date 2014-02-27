@@ -55,13 +55,13 @@ union fp_addr {
 		uint16_t fa_seg;	/* code/data (etc) segment */
 		uint16_t fa_opcode;	/* last opcode (sometimes) */
 	} fa_32;
-} __packed;
+} __packed __aligned(4);
 
 /* The x87 registers are 80 bits */
 struct fpacc87 {
 	uint64_t	f87_mantissa;	/* mantissa */
 	uint16_t	f87_exp_sign;	/* exponent and sign */
-} __packed;
+} __packed __aligned(2);
 
 /* The x87 registers padded out to 16 bytes for fxsave */
 struct fpaccfx {
@@ -88,9 +88,9 @@ struct ymmreg {
  * The fxsave 'Abridged tag word' in inverted.
  */
 struct save87 {
-	uint32_t	s87_cw;		/* control word (16bits) */
-	uint32_t	s87_sw;		/* status word (16bits) */
-	uint32_t	s87_tw;		/* tag word (16bits) */
+	uint16_t	s87_cw __aligned(4);	/* control word (16bits) */
+	uint16_t	s87_sw __aligned(4);	/* status word (16bits) */
+	uint16_t	s87_tw __aligned(4);	/* tag word (16bits) */
 	union fp_addr	s87_ip;		/* floating point instruction pointer */
 #define s87_opcode s87_ip.fa_32.fa_opcode	/* opcode last executed (11bits) */
 	union fp_addr	s87_dp;		/* floating operand offset */
@@ -103,7 +103,6 @@ struct fxsave {
 /*0*/	uint16_t	fx_cw;		/* FPU Control Word */
 	uint16_t	fx_sw;		/* FPU Status Word */
 	uint8_t		fx_tw;		/* FPU Tag Word (abridged) */
-	uint8_t		fx_reserved1;
 	uint16_t	fx_opcode;	/* FPU Opcode */
 	union fp_addr	fx_ip;		/* FPU Instruction Pointer */
 /*16*/	union fp_addr	fx_dp;		/* FPU Data pointer */
@@ -116,15 +115,11 @@ struct fxsave {
 } __aligned(16);
 __CTASSERT_NOLINT(sizeof (struct fxsave) == 512);
 
-#ifndef _KERNEL
-/* Backwards compatibility for firefox (looks at fx_xmm) */
-#define fxsave64 fxsave
-#endif
-
 /* The end of the fsave buffer can be used by the operating system */
 struct fxsave_os {
-	uint8_t	fxo_fxsave[512 - 48];
-	/* 48 bytes available */
+	uint8_t		fxo_fxsave[512 - 48];
+	/* 48 bytes available, NB copied to/from userspace */
+	uint16_t	fxo_dflt_cw;	/* Control word for signal handlers */
 };
 
 union savefpu {
@@ -247,11 +242,5 @@ __CTASSERT(sizeof (struct xsave_ymm) == 256);
  */
 #define	__INITIAL_MXCSR__	0x1f80
 #define	__INITIAL_MXCSR_MASK__	0xffbf
-
-#ifdef _KERNEL
-void process_xmm_to_s87(const struct fxsave *, struct save87 *);
-void process_s87_to_xmm(const struct save87 *, struct fxsave *);
-#endif
-
 
 #endif /* _X86_CPU_EXTENDED_STATE_H_ */

@@ -29,16 +29,12 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <sys/errno.h>
-#include <machine/mcontext.h>
 #include "SYS.h"
+#include "assym.h"
 
 #ifdef WEAK_ALIAS
 WEAK_ALIAS(getcontext, _getcontext)
 #endif
-
-#define _OFFSETOF_UC_GREGS (10 * 4)
-#define SZREG 4
 
 ENTRY(_getcontext, 0)
 	SYSCALL(getcontext)

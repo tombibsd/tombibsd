@@ -983,27 +983,6 @@ child_return(void *arg)
 void
 cpu_spawn_return(struct lwp *l)
 {
-	struct proc *p = l->l_proc;
-	pmap_t pmap = p->p_vmspace->vm_map.pmap;
-	pa_space_t space = pmap->pm_space;
-	struct trapframe *tf = l->l_md.md_regs;
-
-	/* Load all of the user's space registers. */
-	tf->tf_sr0 = tf->tf_sr1 = tf->tf_sr3 = tf->tf_sr2 =
-	tf->tf_sr4 = tf->tf_sr5 = tf->tf_sr6 = space;
-	tf->tf_iisq_head = tf->tf_iisq_tail = space;
-
-	/* Load the protection registers */
-	tf->tf_pidr1 = tf->tf_pidr2 = pmap->pm_pid;
-
-	/*
-	 * theoretically these could be inherited from the father,
-	 * but just in case.
-	 */
-	tf->tf_sr7 = HPPA_SID_KERNEL;
-	mfctl(CR_EIEM, tf->tf_eiem);
-	tf->tf_ipsw = PSW_C | PSW_Q | PSW_P | PSW_D | PSW_I /* | PSW_L */ |
-	    (curcpu()->ci_psw & PSW_O);
 
 	userret(l, l->l_md.md_regs->tf_iioq_head, 0);
 #ifdef DEBUG

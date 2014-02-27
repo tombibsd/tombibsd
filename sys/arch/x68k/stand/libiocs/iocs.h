@@ -224,7 +224,10 @@ struct iocs_inquiry {
 	unsigned char	ver;
 	unsigned char	reserve;
 	unsigned char	size;
-	unsigned char	buff[0];	/* actually longer */
+	unsigned char	class[3];
+	char		vendor[8];
+	char		product[16];
+	char		revision[4];
 };
 
 /*

@@ -17,10 +17,10 @@
 /netcmds.c/1.21/Sat Feb 26 22:12:33 2005/-kk/
 /netstat.c/1.29/Tue Dec 17 04:05:19 2013/-kk/
 /pigs.c/1.33/Fri Nov 23 03:46:35 2012/-kk/
-/ps.c/1.35/Wed Aug 17 13:26:49 2011/-kk/
+/ps.c/1.36/Thu Feb 27 08:56:26 2014/-kk/
 /ps.h/1.4/Fri Nov 23 03:33:05 2012/-kk/
 /swap.c/1.20/Fri May 30 02:29:37 2008/-kk/
-/syscall.c/1.8/Fri Nov 23 00:05:18 2012/-kk/
+/syscall.c/1.9/Thu Feb 27 08:56:27 2014/-kk/
 /systat.1/1.43/Thu Oct 24 10:28:59 2013/-kk/
 /systat.h/1.11/Sat Feb 26 22:12:34 2005/-kk/
 /tcp.c/1.15/Thu Apr 10 17:16:39 2008/-kk/

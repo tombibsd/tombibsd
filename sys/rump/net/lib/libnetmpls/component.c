@@ -38,7 +38,10 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/protosw.h>
 
 #include <net/if.h>
+#include <net/netisr.h>
 #include <net/route.h>
+
+#include <netmpls/mpls_var.h>
 
 #include "rump_private.h"
 #include "rump_net_private.h"
@@ -50,6 +53,8 @@ RUMP_COMPONENT(RUMP_COMPONENT_NET)
 	extern struct domain mplsdomain;
 
 	DOMAINADD(mplsdomain);
+
+	rump_netisr_register(NETISR_MPLS, mplsintr);
 }
 
 RUMP_COMPONENT(RUMP_COMPONENT_NET_IF)

@@ -39,7 +39,7 @@
 
 #ifdef __x86_64__
 
-#include <machine/fpu.h>
+#include <x86/fpu.h>
 #include <machine/mcontext.h>
 
 /*

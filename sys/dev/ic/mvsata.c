@@ -1694,7 +1694,7 @@ again:
 		ata_c->flags |= AT_TIMEOU;
 		goto out;
 	}
-	delay(10);	/* XXXXX: Delay more times. */
+	delay(20);	/* XXXXX: Delay more times. */
 	if (ata_c->flags & AT_READ) {
 		if ((chp->ch_status & WDCS_DRQ) == 0) {
 			ata_c->flags |= AT_TIMEOU;

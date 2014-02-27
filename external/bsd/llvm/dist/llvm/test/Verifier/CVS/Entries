@@ -12,7 +12,7 @@
 /2009-05-29-InvokeResult1.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /2009-05-29-InvokeResult2.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /2009-05-29-InvokeResult3.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
-/2010-08-07-PointerIntrinsic.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
+/2010-08-07-PointerIntrinsic.ll/1.1.1.2/Thu Feb 27 08:52:26 2014/-kk/
 /AmbiguousPhi.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /PhiGrouping.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /README.txt/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
@@ -41,8 +41,9 @@
 /ident-meta1.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /ident-meta2.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /ident-meta3.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
-/inalloca1.ll/1.1.1.1/Sun Jan  5 16:18:20 2014/-kk/
-/inalloca2.ll/1.1.1.1/Sun Jan  5 16:18:20 2014/-kk/
+/inalloca-vararg.ll/1.1.1.1/Fri Feb 14 20:12:44 2014/-kk/
+/inalloca1.ll/1.1.1.2/Thu Feb 27 08:52:26 2014/-kk/
+/inalloca2.ll/1.1.1.2/Thu Feb 27 08:52:26 2014/-kk/
 /invoke.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /llvm.compiler_used-invalid-type.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /llvm.used-invalid-init.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/

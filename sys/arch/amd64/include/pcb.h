@@ -76,7 +76,7 @@
 
 #include <machine/segments.h>
 #include <machine/tss.h>
-#include <machine/fpu.h>
+#include <x86/fpu.h>
 #include <machine/sysarch.h>
 
 #define	NIOPORTS	1024		/* # of ports we allow to be mapped */

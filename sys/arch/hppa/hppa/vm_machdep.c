@@ -116,7 +116,7 @@ cpu_lwp_fork(struct lwp *l1, struct lwp *l2, void *stack, size_t stacksize,
 
 	uv = uvm_lwp_getuarea(l2);
 	sp = (register_t)uv + PAGE_SIZE;
-	l2->l_md.md_regs = tf = (struct trapframe *)sp;
+	tf = l2->l_md.md_regs = (struct trapframe *)sp;
 	sp += sizeof(struct trapframe);
 
 	/* copy the l1's trapframe to l2 */

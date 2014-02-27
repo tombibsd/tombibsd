@@ -19,6 +19,7 @@ SRCS+=	DelaySlotFiller.cpp \
 	SparcRegisterInfo.cpp \
 	SparcSubtarget.cpp \
 	SparcTargetMachine.cpp \
+	SparcTargetObjectFile.cpp \
 	SparcSelectionDAGInfo.cpp
 
 

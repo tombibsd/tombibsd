@@ -1237,6 +1237,16 @@ usbd_new_device(device_t parent, usbd_bus_handle bus, int depth,
 
 	USETW(dev->def_ep_desc.wMaxPacketSize, dd->bMaxPacketSize);
 
+	/* Re-establish the default pipe with the new MPS. */
+	usbd_kill_pipe(dev->default_pipe);
+	err = usbd_setup_pipe_flags(dev, 0, &dev->def_ep, USBD_DEFAULT_INTERVAL,
+	    &dev->default_pipe, USBD_MPSAFE);
+	if (err) {
+		DPRINTFN(-1, ("usbd_new_device: setup default pipe failed\n"));
+		usbd_remove_device(dev, up);
+		return err;
+	}
+
 	/* Set the address */
 	DPRINTFN(5, ("usbd_new_device: setting device address=%d\n", addr));
 	err = usbd_set_address(dev, addr);

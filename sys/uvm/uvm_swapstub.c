@@ -53,3 +53,10 @@ sys_swapctl(struct lwp *l, const struct sys_swapctl_args *v, register_t *retval)
 
 	return ENOSYS;
 }
+
+void
+uvm_swap_shutdown(struct lwp *l)
+{
+
+	/* nothing */
+}

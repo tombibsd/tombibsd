@@ -156,7 +156,7 @@ md_post_disklabel(void)
 int
 md_post_newfs(void)
 {
-	printf(msg_string(MSG_dobootblks), diskdev);
+	msg_display(MSG_dobootblks, diskdev);
 	run_program(0, "/usr/sbin/installboot /dev/r%s%c /usr/mdec/%.2sboot",
 	    diskdev, 'a' + getrawpartition(), diskdev);
 	return 0;

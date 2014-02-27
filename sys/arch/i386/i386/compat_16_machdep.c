@@ -55,6 +55,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <machine/pmap.h>
 #include <machine/vmparam.h>
+#include <x86/fpu.h>
 
 #if defined(COMPAT_16) || defined(COMPAT_IBCS2)
 
@@ -260,9 +261,8 @@ sendsig_sigcontext(const ksiginfo_t *ksi, const sigset_t *mask)
 		/* NOTREACHED */
 	}
 
-	int svufpu = l->l_md.md_flags & MDL_USEDFPU;
+	fpu_save_area_reset(l);
 	buildcontext(l, sel, catcher, fp);
-	l->l_md.md_flags |= svufpu;
 
 	/* Remember that we're now on the signal stack. */
 	if (onstack)

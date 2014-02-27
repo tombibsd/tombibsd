@@ -34,6 +34,12 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/socketvar.h>
 
 #include <net/if.h>
+#include <net/netisr.h>
+
+#include <netinet/in.h>
+#include <netinet/ip_var.h>
+#include <netinet/ip6.h>
+#include <netinet6/ip6_var.h>
 
 #include "rump_private.h"
 #include "rump_net_private.h"
@@ -43,6 +49,8 @@ RUMP_COMPONENT(RUMP_COMPONENT_NET)
 	extern struct domain inet6domain;
 
 	DOMAINADD(inet6domain);
+
+	rump_netisr_register(NETISR_IPV6, ip6intr);
 }
 
 RUMP_COMPONENT(RUMP_COMPONENT_NET_IFCFG)

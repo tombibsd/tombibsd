@@ -96,6 +96,7 @@
 /debug-info-limited-struct.h/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /designated-init.c.h/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /designated-init.c/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
+/different-diagnostic-level.c/1.1.1.1/Fri Feb 14 20:07:42 2014/-kk/
 /empty-with-headers.c/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /enum.c/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /enum.h/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
@@ -119,6 +120,8 @@
 /irgen-rdar13114142.mm/1.1.1.2/Fri Jan 31 08:45:30 2014/-kk/
 /line-directive.c/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /line-directive.h/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
+/local_static.cpp/1.1.1.1/Fri Feb 14 20:07:42 2014/-kk/
+/local_static.h/1.1.1.1/Fri Feb 14 20:07:42 2014/-kk/
 /macro-redef.c/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /method-redecls.m/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /method_pool.h/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
@@ -127,6 +130,8 @@
 /modified-header-crash.c/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /modified-header-crash.h/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /modified-header-error.c/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
+/modified-module-dependency.m/1.1.1.1/Fri Feb 14 20:07:42 2014/-kk/
+/modified-module-dependency.module.map/1.1.1.1/Fri Feb 14 20:07:42 2014/-kk/
 /ms-if-exists.cpp/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /multiple-include-pch.c/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /multiple_decls.c/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
@@ -207,6 +212,7 @@
 /va_arg.h/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /variables.c/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /variables.h/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
+/verify_pch.m/1.1.1.1/Fri Feb 14 20:07:42 2014/-kk/
 /working-directory.cpp/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /working-directory.h/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 D/Inputs////

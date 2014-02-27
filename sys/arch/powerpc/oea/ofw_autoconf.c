@@ -168,12 +168,15 @@ canonicalize_bootpath(void)
 	/*
 	 * OF_1.x (at least) always returns addr == 0 for
 	 * SCSI disks (i.e. "/bandit@.../.../sd@0,0").
+	 * also check for .../disk@ which some Adaptec firmware uses
 	 */
 	lastp = strrchr(cbootpath, '/');
 	if (lastp != NULL) {
 		lastp++;
-		if (strncmp(lastp, "sd@", 3) == 0
-		    && strncmp(last, "sd@", 3) == 0)
+		if ((strncmp(lastp, "sd@", 3) == 0
+		     && strncmp(last, "sd@", 3) == 0) ||
+		    (strncmp(lastp, "disk@", 5) == 0
+		     && strncmp(last, "disk@", 5) == 0))
 			strcpy(lastp, last);
 	} else {
 		lastp = cbootpath;

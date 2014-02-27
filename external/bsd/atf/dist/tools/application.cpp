@@ -27,10 +27,6 @@
 // IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#if defined(HAVE_CONFIG_H)
-#include "bconfig.h"
-#endif
-
 extern "C" {
 #include <unistd.h>
 }
@@ -43,14 +39,11 @@ extern "C" {
 #include <iostream>
 
 #include "application.hpp"
-#include "defs.hpp"
 #include "ui.hpp"
 
-#if !defined(HAVE_VSNPRINTF_IN_STD)
 namespace std {
 using ::vsnprintf;
 }
-#endif // !defined(HAVE_VSNPRINTF_IN_STD)
 
 namespace impl = tools::application;
 #define IMPL_NAME "tools::application"
@@ -148,8 +141,8 @@ impl::app::specific_options(void)
 }
 
 void
-impl::app::process_option(int ch ATF_DEFS_ATTRIBUTE_UNUSED,
-                          const char* arg ATF_DEFS_ATTRIBUTE_UNUSED)
+impl::app::process_option(int ch __attribute__((__unused__)),
+                          const char* arg __attribute__((__unused__)))
 {
 }
 
@@ -158,11 +151,7 @@ impl::app::process_options(void)
 {
     assert(inited());
 
-    std::string optstr;
-#if defined(HAVE_GNU_GETOPT)
-    optstr += '+'; // Turn on POSIX behavior.
-#endif
-    optstr += ':';
+    std::string optstr = ":";
     {
         options_set opts = options();
         for (options_set::const_iterator iter = opts.begin();
@@ -201,9 +190,7 @@ impl::app::process_options(void)
     // Clear getopt state just in case the test wants to use it.
     opterr = old_opterr;
     optind = 1;
-#if defined(HAVE_OPTRESET)
     optreset = 1;
-#endif
 }
 
 void
@@ -276,9 +263,8 @@ impl::app::run(int argc, char* const* argv)
 
     const std::string bug =
         std::string("This is probably a bug in ") + m_prog_name +
-        " or one of the libraries it uses.  Please report this problem to "
-        PACKAGE_BUGREPORT " and provide as many details as possible "
-        "describing how you got to this condition.";
+        " Please use send-pr(1) to report this issue and provide as many"
+	" details as possible describing how you got to this condition.";
 
     int errcode;
     try {

@@ -41,7 +41,6 @@
  */
 
 #include <sys/param.h>
-#include <sys/user.h>
 #include <sys/proc.h>
 #include <sys/stat.h>
 #include <sys/types.h>

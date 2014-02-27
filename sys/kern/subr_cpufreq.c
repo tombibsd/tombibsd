@@ -361,7 +361,7 @@ cpufreq_get_state_index(uint32_t index, struct cpufreq_state *cfs)
 	}
 
 	if (index >= cf->cf_state_count) {
-		mutex_exit(&cpu_lock);
+		mutex_exit(&cpufreq_lock);
 		return EINVAL;
 	}
 

@@ -93,7 +93,6 @@ __RCSID("$NetBSD$");
 #include <sys/socket.h>
 #include <sys/sysctl.h>
 #include <sys/time.h>
-#include <sys/user.h>
 #include <sys/queue.h>
 #include <sys/kernhist.h>
 

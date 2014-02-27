@@ -117,7 +117,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <nfs/nfs_var.h>
 
 static int change_flags(struct vnode *, u_long, struct lwp *);
-static int change_mode(struct vnode *, int, struct lwp *l);
+static int change_mode(struct vnode *, int, struct lwp *);
 static int change_owner(struct vnode *, uid_t, gid_t, struct lwp *, int);
 static int do_sys_openat(lwp_t *, int, const char *, int, int, int *);
 static int do_sys_mkdirat(struct lwp *l, int, const char *, mode_t,

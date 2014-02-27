@@ -27,7 +27,7 @@
 .\" ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 .\" POSSIBILITY OF SUCH DAMAGE.
 .\"
-.Dd February 8, 2014
+.Dd February 14, 2014
 .Dt NPF.CONF 5
 .Os
 .Sh NAME
@@ -229,7 +229,8 @@ table-def	= "table" table-id "type" ( "hash" | "tree" | "cdb" )
 
 ; Mapping for address translation.
 
-map		= "map" interface ( "static" | "dynamic" )
+map		= "map" interface
+		  ( "static" [ "algo" algorithm ] | "dynamic" )
 		  net-seg ( "->" | "<-" | "<->" ) net-seg
 		  [ "pass" filt-opts ]
 

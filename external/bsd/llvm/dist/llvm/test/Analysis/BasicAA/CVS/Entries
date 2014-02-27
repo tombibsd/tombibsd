@@ -44,6 +44,7 @@
 /modref.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /must-and-partial.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /no-escape-call.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/noalias-bugs.ll/1.1.1.1/Fri Feb 14 20:12:45 2014/-kk/
 /noalias-geps.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /noalias-param.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /nocapture.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/

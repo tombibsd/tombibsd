@@ -161,7 +161,7 @@ md_post_newfs(void)
 		return 0;
 	}
 
-	printf(msg_string(MSG_dobootblks), diskdev);
+	msg_display(MSG_dobootblks, diskdev);
 	cp_to_target("/usr/mdec/boot.pmax", "/boot.pmax");
 	bootxx = bootxx_name();
 	if (bootxx != NULL) {

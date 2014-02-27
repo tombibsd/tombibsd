@@ -185,7 +185,6 @@ define	PCB_USERSP		offsetof(struct pcb, pcb_usersp)
 define	PCB_RSP0		offsetof(struct pcb, pcb_rsp0)
 define	PCB_CR0			offsetof(struct pcb, pcb_cr0)
 define	PCB_ONFAULT		offsetof(struct pcb, pcb_onfault)
-define	PCB_FPCPU		offsetof(struct pcb, pcb_fpcpu)
 define	PCB_FLAGS		offsetof(struct pcb, pcb_flags)
 define	PCB_COMPAT32		PCB_COMPAT32
 define	PCB_FS			offsetof(struct pcb, pcb_fs)

@@ -492,8 +492,11 @@ cpu_startup(void)
 void
 i386_proc0_tss_ldt_init(void)
 {
-	struct lwp *l = &lwp0;
-	struct pcb *pcb = lwp_getpcb(l);
+	struct lwp *l;
+	struct pcb *pcb __diagused;
+
+	l = &lwp0;
+	pcb = lwp_getpcb(l);
 
 	pmap_kernel()->pm_ldt_sel = GSEL(GLDT_SEL, SEL_KPL);
 	pcb->pcb_cr0 = rcr0() & ~CR0_TS;
@@ -667,8 +670,8 @@ buildcontext(struct lwp *l, int sel, void *catcher, void *fp)
 	tf->tf_esp = (int)fp;
 	tf->tf_ss = GSEL(GUDATA_SEL, SEL_UPL);
 
-	/* Ensure FP state is reset, if FP is used. */
-	l->l_md.md_flags &= ~MDL_USEDFPU;
+	/* Ensure FP state is reset. */
+	fpu_save_area_reset(l);
 }
 
 void
@@ -865,27 +868,14 @@ setregs(struct lwp *l, struct exec_package *pack, vaddr_t stack)
 	struct pmap *pmap = vm_map_pmap(&l->l_proc->p_vmspace->vm_map);
 	struct pcb *pcb = lwp_getpcb(l);
 	struct trapframe *tf;
-	uint16_t control;
-
-	/* If we were using the FPU, forget about it. */
-	if (pcb->pcb_fpcpu != NULL)
-		fpusave_lwp(l, false);
 
 #ifdef USER_LDT
 	pmap_ldt_cleanup(l);
 #endif
 
-	if (pack->ep_osversion >= 699002600)
-		control = __INITIAL_NPXCW__;
-	else
-		control = __NetBSD_COMPAT_NPXCW__;
+	fpu_save_area_clear(l, pack->ep_osversion >= 699002600
+	    ? __INITIAL_NPXCW__ : __NetBSD_COMPAT_NPXCW__);
 
-	l->l_md.md_flags &= ~MDL_USEDFPU;
-	if (i386_use_fxsave) {
-		pcb->pcb_savefpu.sv_xmm.fx_cw = control;
-		pcb->pcb_savefpu.sv_xmm.fx_mxcsr = __INITIAL_MXCSR__;
-	} else
-		pcb->pcb_savefpu.sv_87.s87_cw = control;
 	memcpy(&pcb->pcb_fsd, &gdt[GUDATA_SEL], sizeof(pcb->pcb_fsd));
 	memcpy(&pcb->pcb_gsd, &gdt[GUDATA_SEL], sizeof(pcb->pcb_gsd));
 
@@ -1590,6 +1580,7 @@ cpu_getmcontext(struct lwp *l, mcontext_t *mcp, unsigned int *flags)
 {
 	const struct trapframe *tf = l->l_md.md_regs;
 	__greg_t *gr = mcp->__gregs;
+	struct pcb *pcb;
 	__greg_t ras_eip;
 
 	/* Save register context. */
@@ -1633,36 +1624,21 @@ cpu_getmcontext(struct lwp *l, mcontext_t *mcp, unsigned int *flags)
 	mcp->_mc_tlsbase = (uintptr_t)l->l_private;
 	*flags |= _UC_TLSBASE;
 
-	/* Save floating point register context, if any. */
-	if ((l->l_md.md_flags & MDL_USEDFPU) != 0) {
-		struct pcb *pcb = lwp_getpcb(l);
-
-		/*
-		 * If this process is the current FP owner, dump its
-		 * context to the PCB first.
-		 */
-		if (pcb->pcb_fpcpu)
-			fpusave_lwp(l, true);
-		if (i386_use_fxsave) {
-			__CTASSERT(sizeof pcb->pcb_savefpu.sv_xmm ==
-			    sizeof mcp->__fpregs.__fp_reg_set.__fp_xmm_state);
-			memcpy(&mcp->__fpregs.__fp_reg_set.__fp_xmm_state,
-			    &pcb->pcb_savefpu.sv_xmm,
-			    sizeof (mcp->__fpregs.__fp_reg_set.__fp_xmm_state));
-			*flags |= _UC_FXSAVE;
-		} else {
-			__CTASSERT(sizeof pcb->pcb_savefpu.sv_87 ==
-			    sizeof mcp->__fpregs.__fp_reg_set.__fpchip_state);
-			memcpy(&mcp->__fpregs.__fp_reg_set.__fpchip_state,
-			    &pcb->pcb_savefpu.sv_87,
-			    sizeof (mcp->__fpregs.__fp_reg_set.__fpchip_state));
-		}
-#if 0
-		/* Apparently nothing ever touches this. */
-		ucp->mcp.mc_fp.fp_emcsts = pcb->pcb_saveemc;
-#endif
-		*flags |= _UC_FPU;
-	}
+	/*
+	 * Save floating point register context.
+	 *
+	 * If the cpu doesn't support fxsave we must still write to
+	 * the entire 512 byte area - otherwise we leak kernel memory
+	 * contents to userspace.
+	 * It wouldn't matter if we were doing the copyout here.
+	 * So we might as well convert to fxsave format.
+	 */
+	__CTASSERT(sizeof pcb->pcb_savefpu.sv_xmm ==
+	    sizeof mcp->__fpregs.__fp_reg_set.__fp_xmm_state);
+	process_read_fpregs_xmm(l, (struct fxsave *)
+	    &mcp->__fpregs.__fp_reg_set.__fp_xmm_state);
+	memset(&mcp->__fpregs.__fp_pad, 0, sizeof mcp->__fpregs.__fp_pad);
+	*flags |= _UC_FXSAVE | _UC_FPU;
 }
 
 int
@@ -1738,13 +1714,7 @@ cpu_setmcontext(struct lwp *l, const mcontext_t *mcp, unsigned int flags)
 	if ((flags & _UC_TLSBASE) != 0)
 		lwp_setprivate(l, (void *)(uintptr_t)mcp->_mc_tlsbase);
 
-	/*
-	 * If we were using the FPU, forget that we were.
-	 */
-	if (pcb->pcb_fpcpu != NULL)
-		fpusave_lwp(l, false);
-
-	/* Restore floating point register context, if any. */
+	/* Restore floating point register context, if given. */
 	if ((flags & _UC_FPU) != 0) {
 		__CTASSERT(sizeof pcb->pcb_savefpu.sv_xmm ==
 		    sizeof mcp->__fpregs.__fp_reg_set.__fp_xmm_state);
@@ -1752,29 +1722,14 @@ cpu_setmcontext(struct lwp *l, const mcontext_t *mcp, unsigned int flags)
 		    sizeof mcp->__fpregs.__fp_reg_set.__fpchip_state);
 
 		if (flags & _UC_FXSAVE) {
-			if (i386_use_fxsave) {
-				memcpy(&pcb->pcb_savefpu.sv_xmm,
-				    &mcp->__fpregs.__fp_reg_set.__fp_xmm_state,
-				    sizeof (pcb->pcb_savefpu.sv_xmm));
-			} else {
-				/* This is a weird corner case */
-				process_xmm_to_s87((const struct fxsave *)
-				    &mcp->__fpregs.__fp_reg_set.__fp_xmm_state,
-				    &pcb->pcb_savefpu.sv_87);
-			}
+			process_write_fpregs_xmm(l, (const struct fxsave *)
+				    &mcp->__fpregs.__fp_reg_set.__fp_xmm_state);
 		} else {
-			if (i386_use_fxsave) {
-				process_s87_to_xmm((const struct save87 *)
-				    &mcp->__fpregs.__fp_reg_set.__fpchip_state,
-				    &pcb->pcb_savefpu.sv_xmm);
-			} else {
-				memcpy(&pcb->pcb_savefpu.sv_87,
-				    &mcp->__fpregs.__fp_reg_set.__fpchip_state,
-				    sizeof (pcb->pcb_savefpu.sv_87));
-			}
+			process_write_fpregs_s87(l, (const struct save87 *)
+				    &mcp->__fpregs.__fp_reg_set.__fpchip_state);
 		}
-		l->l_md.md_flags |= MDL_USEDFPU;
 	}
+
 	mutex_enter(p->p_lock);
 	if (flags & _UC_SETSTACK)
 		l->l_sigstk.ss_flags |= SS_ONSTACK;

@@ -1,8 +1,7 @@
 # $NetBSD$
 
-.include <bsd.own.mk>
+.include <bsd.init.mk>
 
-SRCDIR=	${NETBSDSRCDIR}/external/bsd/atf/dist
 .PATH:	${SRCDIR}
 .PATH:	${SRCDIR}/atf-c
 .PATH:	${SRCDIR}/atf-c++

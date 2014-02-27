@@ -4,6 +4,7 @@ D/basic_android_tree////
 D/basic_cross_linux_tree////
 D/basic_freebsd64_tree////
 D/basic_freebsd_tree////
+D/basic_linux_libcxx_tree////
 D/basic_linux_tree////
 D/debian_6_mips_tree////
 D/debian_multiarch_tree////

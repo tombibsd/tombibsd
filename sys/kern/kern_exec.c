@@ -516,7 +516,7 @@ sys_execve(struct lwp *l, const struct sys_execve_args *uap, register_t *retval)
 	    SCARG(uap, envp), execve_fetch_element);
 }
 
-int   
+int
 sys_fexecve(struct lwp *l, const struct sys_fexecve_args *uap,
     register_t *retval)
 {
@@ -571,9 +571,9 @@ exec_autoload(void)
 	list = (nexecs == 0 ? native : compat);
 	for (i = 0; list[i] != NULL; i++) {
 		if (module_autoload(list[i], MODULE_CLASS_EXEC) != 0) {
-		    	continue;
+			continue;
 		}
-	   	yield();
+		yield();
 	}
 #endif
 }
@@ -593,7 +593,7 @@ execve_loadvm(struct lwp *l, const char *path, char * const *args,
 	KASSERT(data != NULL);
 
 	p = l->l_proc;
- 	modgen = 0;
+	modgen = 0;
 
 	SDT_PROBE(proc,,,exec, path, 0, 0, 0, 0);
 
@@ -658,8 +658,7 @@ execve_loadvm(struct lwp *l, const char *path, char * const *args,
 	data->ed_pack.ep_hdrvalid = 0;
 	data->ed_pack.ep_emul_arg = NULL;
 	data->ed_pack.ep_emul_arg_free = NULL;
-	data->ed_pack.ep_vmcmds.evs_cnt = 0;
-	data->ed_pack.ep_vmcmds.evs_used = 0;
+	memset(&data->ed_pack.ep_vmcmds, 0, sizeof(data->ed_pack.ep_vmcmds));
 	data->ed_pack.ep_vap = &data->ed_attr;
 	data->ed_pack.ep_flags = 0;
 	MD_TOPDOWN_INIT(&data->ed_pack);
@@ -951,8 +950,8 @@ execve_runproc(struct lwp *l, struct execve_data * restrict data,
 		    data->ed_pack.ep_flags & EXEC_TOPDOWN_VM);
 
 	/* record proc's vnode, for use by procfs and others */
-        if (p->p_textvp)
-                vrele(p->p_textvp);
+	if (p->p_textvp)
+		vrele(p->p_textvp);
 	vref(data->ed_pack.ep_vp);
 	p->p_textvp = data->ed_pack.ep_vp;
 
@@ -1885,8 +1884,8 @@ spawn_return(void *arg)
 				}
 				error = fd_open(fae->fae_path, fae->fae_oflag,
 				    fae->fae_mode, &newfd);
- 				if (error)
- 					break;
+				if (error)
+					break;
 				if (newfd != fae->fae_fildes) {
 					error = dodup(l, newfd,
 					    fae->fae_fildes, 0, &retval);
@@ -1977,6 +1976,16 @@ spawn_return(void *arg)
 		}
 
 		if (spawn_data->sed_attrs->sa_flags & POSIX_SPAWN_SETSIGDEF) {
+			/*
+			 * The following sigaction call is using a sigaction
+			 * version 0 trampoline which is in the compatibility
+			 * code only. This is not a problem because for SIG_DFL
+			 * and SIG_IGN, the trampolines are now ignored. If they
+			 * were not, this would be a problem because we are
+			 * holding the exec_lock, and the compat code needs
+			 * to do the same in order to replace the trampoline
+			 * code of the process.
+			 */
 			for (i = 1; i <= NSIG; i++) {
 				if (sigismember(
 				    &spawn_data->sed_attrs->sa_sigdefault, i))
@@ -2012,8 +2021,8 @@ spawn_return(void *arg)
 	return;
 
  report_error:
- 	if (have_reflock) {
- 		/*
+	if (have_reflock) {
+		/*
 		 * We have not passed through execve_runproc(),
 		 * which would have released the p_reflock and also
 		 * taken ownership of the sed_exec part of spawn_data,
@@ -2413,14 +2422,14 @@ do_posix_spawn(struct lwp *l1, pid_t *pid_res, bool *child_ok, const char *path,
 	return error;
 
  error_exit:
- 	if (have_exec_lock) {
+	if (have_exec_lock) {
 		execve_free_data(&spawn_data->sed_exec);
 		rw_exit(&p1->p_reflock);
- 		rw_exit(&exec_lock);
+		rw_exit(&exec_lock);
 	}
 	mutex_exit(&spawn_data->sed_mtx_child);
 	spawn_exec_data_release(spawn_data);
- 
+
 	return error;
 }
 

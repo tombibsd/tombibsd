@@ -424,12 +424,8 @@ npfctl_bpf_cidr(npf_bpf_t *ctx, u_int opts, sa_family_t af,
 			wordmask = 0xffffffff << (maxmask - length);
 			length = 0;
 		} else {
-			/*
-			 * The mask is zero - just compare the word
-			 * against zero.
-			 */
-			wordmask = 0;
-			word = 0;
+			/* The mask became zero - skip the rest. */
+			break;
 		}
 
 		/* A <- IP address (or one word of it) */

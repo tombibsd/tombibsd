@@ -133,7 +133,9 @@ main(int argc, char **argv)
 			--argc;
 		}
 
-	}
+	} else
+		kernel = NULL;
+
 	if (dev == NULL) {
 		(void) devsplit(argv[0], bootname);
 		dev = bootname;
@@ -156,7 +158,7 @@ main(int argc, char **argv)
 			}
 		}
 	}
-	if (!win)
+	if (!win || !kernel)
 		goto fail;
 
 	strncpy(bi_bpath.bootpath, kernel, BTINFO_BOOTPATH_LEN);

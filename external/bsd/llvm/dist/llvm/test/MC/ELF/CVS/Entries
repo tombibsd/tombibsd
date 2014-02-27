@@ -6,6 +6,7 @@
 /align-size.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /align-text.s/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /align.s/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/bad-expr.s/1.1.1.1/Fri Feb 14 20:12:52 2014/-kk/
 /bad-relocation.s/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /bad-section.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /basic-elf-32.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
@@ -34,7 +35,7 @@
 /cfi-undefined.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /cfi-window-save.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /cfi-zero-addr-delta.s/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
-/cfi.s/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/cfi.s/1.1.1.2/Thu Feb 27 08:52:24 2014/-kk/
 /comdat-dup-group-name.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /comdat-reloc.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /comdat.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/

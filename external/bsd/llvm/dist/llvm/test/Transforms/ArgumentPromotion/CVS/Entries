@@ -12,6 +12,8 @@
 /control-flow.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /control-flow2.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /crash.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/inalloca.ll/1.1.1.1/Fri Feb 14 20:12:49 2014/-kk/
 /pr3085.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /reserve-tbaa.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/tail.ll/1.1.1.1/Fri Feb 14 20:12:49 2014/-kk/
 D

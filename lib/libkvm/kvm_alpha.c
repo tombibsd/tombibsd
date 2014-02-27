@@ -30,7 +30,6 @@
 #define	__KVM_ALPHA_PRIVATE		/* see <machine/pte.h> */
 
 #include <sys/param.h>
-#include <sys/user.h>
 #include <sys/proc.h>
 #include <sys/stat.h>
 #include <sys/kcore.h>

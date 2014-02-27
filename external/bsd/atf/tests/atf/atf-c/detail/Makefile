@@ -1,15 +1,10 @@
 # $NetBSD$
 
-.include <bsd.own.mk>
+.include <bsd.init.mk>
 
 TESTSDIR=	${TESTSBASE}/atf/atf-c/detail
-ATFFILE=	yes
 
-SRCDIR=		${NETBSDSRCDIR}/external/bsd/atf/dist
 .PATH:		${SRCDIR}/atf-c/detail
-
-CPPFLAGS+=	-DHAVE_CONFIG_H
-CPPFLAGS+=	-I${NETBSDSRCDIR}/external/bsd/atf/lib/libatf-c
 
 PROGS=
 .for prog in	process_helpers \

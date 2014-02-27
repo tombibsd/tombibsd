@@ -1,9 +1,8 @@
 # $NetBSD$
 
-.include <bsd.own.mk>
+.include <bsd.init.mk>
 
 .if ${MKSHARE} != "no"
-SRCDIR=		${NETBSDSRCDIR}/external/bsd/atf/dist
 .PATH:		${SRCDIR}/tools
 .PATH:		${SRCDIR}/tools/sample
 

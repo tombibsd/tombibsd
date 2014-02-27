@@ -26,9 +26,9 @@ LLVM_LIBS+= \
 	ARMAsmPrinter \
 	MipsDisassembler \
 	MipsTargetInfo \
+	MipsAsmParser \
 	MipsMCTargetDesc \
 	MipsAsmPrinter \
-	MipsAsmParser \
 	PowerPCDisassembler \
 	PowerPCAsmParser \
 	PowerPCTargetInfo \

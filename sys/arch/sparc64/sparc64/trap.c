@@ -577,7 +577,7 @@ dopanic:
 				printf(" npc=%lx pstate=%s\n",
 				       (long)tf->tf_npc, sb);
 				DEBUGGER(type, tf);
-				panic(type < N_TRAP_TYPES ? trap_type[type] : T);
+				panic("%s", type < N_TRAP_TYPES ? trap_type[type] : T);
 			}
 			/* NOTREACHED */
 		}

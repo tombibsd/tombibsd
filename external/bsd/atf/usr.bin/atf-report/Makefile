@@ -1,8 +1,9 @@
 # $NetBSD$
 
-.include <bsd.own.mk>
+USE_ATF_LIBTOOLS=	yes
 
-SRCDIR=		${NETBSDSRCDIR}/external/bsd/atf/dist
+.include <bsd.init.mk>
+
 .PATH:		${SRCDIR}/tools
 
 BINDIR=		/usr/bin
@@ -10,9 +11,6 @@ PROG_CXX=	atf-report
 SRCS=		atf-report.cpp
 MAN=		atf-report.1
 
-USE_ATF_LIBTOOLS=	yes
-
-CPPFLAGS+=	-DHAVE_CONFIG_H
 CPPFLAGS+=	-I${SRCDIR}/tools
 
 WARNS?=		2

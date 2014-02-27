@@ -643,28 +643,14 @@ rumpuser_dprintf(const char *format, ...)
 }
 
 int
-rumpuser_kill(int64_t pid, int sig)
+rumpuser_kill(int64_t pid, int rumpsig)
 {
-	int rv;
+	int sig;
 
-#ifdef __NetBSD__
-	int error;
-
-	if (pid == RUMPUSER_PID_SELF) {
-		error = raise(sig);
-	} else {
-		error = kill((pid_t)pid, sig);
-	}
-	if (error == -1)
-		rv = errno;
-	else
-		rv = 0;
-#else
-	/* XXXfixme: signal numbers may not match on non-NetBSD */
-	rv = EOPNOTSUPP;
-#endif
-
-	ET(rv);
+	sig = rumpuser__sig_rump2host(rumpsig);
+	if (sig > 0)
+		raise(sig);
+	return 0;
 }
 
 int

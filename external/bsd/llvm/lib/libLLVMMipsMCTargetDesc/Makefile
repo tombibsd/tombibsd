@@ -13,8 +13,8 @@ SRCS+=	MipsAsmBackend.cpp \
 	MipsELFObjectWriter.cpp \
 	MipsMCAsmInfo.cpp \
 	MipsMCCodeEmitter.cpp \
+	MipsMCExpr.cpp \
 	MipsMCTargetDesc.cpp \
-	MipsReginfo.cpp \
 	MipsTargetStreamer.cpp
 
 .if defined(HOSTLIB)

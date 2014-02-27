@@ -36,7 +36,6 @@ __RCSID("$NetBSD$");
 #define PAE
 
 #include <sys/param.h>
-#include <sys/user.h>
 #include <sys/stat.h>
 #include <sys/kcore.h>
 #include <sys/types.h>

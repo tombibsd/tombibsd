@@ -124,7 +124,7 @@ md_post_newfs(void)
 	char *bootxx;
 	int error;
 
-	printf (msg_string(MSG_dobootblks), diskdev);
+	msg_display(MSG_dobootblks, diskdev);
 	cp_to_target("/usr/mdec/boot", "/boot");
 	bootxx = bootxx_name();
 	if (bootxx != NULL) {

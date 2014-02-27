@@ -1,4 +1,4 @@
-/Makefile/1.18/Thu Feb 13 15:35:57 2014/-kk/
+/Makefile/1.19/Thu Feb 27 08:55:55 2014/-kk/
 /acpi_machdep.h/1.11/Sun Sep 23 00:31:05 2012/-kk/
 /aout_machdep.h/1.1/Wed Feb 26 21:26:10 2003/-kk/
 /apicvar.h/1.5/Mon Apr 28 20:23:40 2008/-kk/
@@ -10,17 +10,18 @@
 /bus_private.h/1.14/Thu Sep  1 15:10:31 2011/-kk/
 /busdefs.h/1.2/Mon Apr 28 20:23:40 2008/-kk/
 /cacheinfo.h/1.17/Tue Oct 29 12:11:52 2013/-kk/
-/cpu.h/1.60/Thu Feb 13 15:35:57 2014/-kk/
+/cpu.h/1.62/Thu Feb 27 08:55:55 2014/-kk/
 /cpu_counter.h/1.5/Wed Feb  2 12:26:42 2011/-kk/
-/cpu_extended_state.h/1.4/Sun Feb  9 14:44:42 2014/-kk/
+/cpu_extended_state.h/1.8/Thu Feb 27 08:55:55 2014/-kk/
 /cpu_msr.h/1.7/Mon Oct  5 23:59:31 2009/-kk/
 /cpu_ucode.h/1.3/Wed Oct 17 20:19:55 2012/-kk/
-/cpufunc.h/1.15/Thu Feb 13 15:35:57 2014/-kk/
+/cpufunc.h/1.17/Thu Feb 27 08:55:55 2014/-kk/
 /cputypes.h/1.4/Tue Dec 17 04:13:30 2013/-kk/
 /cpuvar.h/1.46/Fri Apr 20 22:23:24 2012/-kk/
 /db_machdep.h/1.4/Fri Jan 31 08:48:44 2014/-kk/
 /est.h/1.1/Wed Feb 23 11:43:22 2011/-kk/
 /float.h/1.6/Thu Oct 24 10:28:57 2013/-kk/
+/fpu.h/1.4/Sat Feb 15 22:20:42 2014/-kk/
 /genfb_machdep.h/1.3/Wed Feb  9 13:24:23 2011/-kk/
 /i82093reg.h/1.4/Thu Oct 24 10:28:57 2013/-kk/
 /i82093var.h/1.12/Fri Jun 15 13:55:22 2012/-kk/

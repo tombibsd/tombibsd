@@ -216,6 +216,14 @@ __strerror_r(int e, char *s, size_t l)
 #define	STRERROR_BUF		64
 
 /* Minimum alignment of allocations is 2^QUANTUM_2POW_MIN bytes. */
+
+/*
+ * If you touch the TINY_MIN_2POW definition for any architecture, please
+ * make sure to adjust the corresponding definition for JEMALLOC_TINY_MIN_2POW
+ * in the gcc 4.8 tree in dist/gcc/tree-ssa-ccp.c and verify that a native
+ * gcc is still buildable!
+ */
+
 #ifdef __i386__
 #  define QUANTUM_2POW_MIN	4
 #  define SIZEOF_PTR_2POW	2
@@ -234,11 +242,13 @@ __strerror_r(int e, char *s, size_t l)
 #ifdef __sparc64__
 #  define QUANTUM_2POW_MIN	4
 #  define SIZEOF_PTR_2POW	3
+#  define TINY_MIN_2POW		3
 #  define NO_TLS
 #endif
 #ifdef __amd64__
 #  define QUANTUM_2POW_MIN	4
 #  define SIZEOF_PTR_2POW	3
+#  define TINY_MIN_2POW		3
 #endif
 #ifdef __arm__
 #  define QUANTUM_2POW_MIN	3

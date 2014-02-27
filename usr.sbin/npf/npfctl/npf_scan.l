@@ -99,6 +99,8 @@ map			return MAP;
 "<->"			return ARROWBOTH;
 "<-"			return ARROWLEFT;
 "->"			return ARROWRIGHT;
+algo			return ALGO;
+npt66			return NPT66;
 "-"			return MINUS;
 procedure		return PROCEDURE;
 \\\n			yylineno++; yycolumn = 0;

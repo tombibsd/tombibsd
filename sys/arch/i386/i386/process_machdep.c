@@ -71,6 +71,8 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <machine/reg.h>
 #include <machine/segments.h>
 
+#include <x86/fpu.h>
+
 #ifdef VM86
 #include <machine/vm86.h>
 #endif
@@ -80,14 +82,6 @@ process_frame(struct lwp *l)
 {
 
 	return (l->l_md.md_regs);
-}
-
-static inline union savefpu *
-process_fpframe(struct lwp *l)
-{
-	struct pcb *pcb = lwp_getpcb(l);
-
-	return &pcb->pcb_savefpu;
 }
 
 int
@@ -129,43 +123,10 @@ process_read_regs(struct lwp *l, struct reg *regs)
 int
 process_read_fpregs(struct lwp *l, struct fpreg *regs, size_t *sz)
 {
-	union savefpu *frame = process_fpframe(l);
-
-	if (l->l_md.md_flags & MDL_USEDFPU) {
-		fpusave_lwp(l, true);
-	} else {
-		/*
-		 * Fake a FNINIT.
-		 * The initial control word was already set by setregs(), so
-		 * save it temporarily.
-		 */
-		if (i386_use_fxsave) {
-			uint32_t mxcsr = frame->sv_xmm.fx_mxcsr;
-			uint16_t cw = frame->sv_xmm.fx_cw;
-
-			/* XXX Don't zero XMM regs? */
-			memset(&frame->sv_xmm, 0, sizeof(frame->sv_xmm));
-			frame->sv_xmm.fx_cw = cw;
-			frame->sv_xmm.fx_mxcsr = mxcsr;
-			frame->sv_xmm.fx_sw = 0x0000;
-			frame->sv_xmm.fx_tw = 0x00;
-		} else {
-			uint16_t cw = frame->sv_87.s87_cw;
-
-			memset(&frame->sv_87, 0, sizeof(frame->sv_87));
-			frame->sv_87.s87_cw = cw;
-			frame->sv_87.s87_sw = 0x0000;
-			frame->sv_87.s87_tw = 0xffff;
-		}
-		l->l_md.md_flags |= MDL_USEDFPU;
-	}
 
 	__CTASSERT(sizeof *regs == sizeof (struct save87));
-	if (i386_use_fxsave) {
-		process_xmm_to_s87(&frame->sv_xmm, (struct save87 *)regs);
-	} else
-		memcpy(regs, &frame->sv_87, sizeof(*regs));
-	return (0);
+	process_read_fpregs_s87(l, (struct save87 *)regs);
+	return 0;
 }
 
 #ifdef PTRACE
@@ -227,20 +188,12 @@ process_write_regs(struct lwp *l, const struct reg *regs)
 int
 process_write_fpregs(struct lwp *l, const struct fpreg *regs, size_t sz)
 {
-	union savefpu *frame = process_fpframe(l);
 
-	if (l->l_md.md_flags & MDL_USEDFPU) {
-		fpusave_lwp(l, false);
-	} else {
-		l->l_md.md_flags |= MDL_USEDFPU;
-	}
-
-	if (i386_use_fxsave) {
-		process_s87_to_xmm((const struct save87 *)regs, &frame->sv_xmm);
-	} else
-		memcpy(&frame->sv_87, regs, sizeof(*regs));
-	return (0);
+	__CTASSERT(sizeof *regs == sizeof (struct save87));
+	process_write_fpregs_s87(l, (const struct save87 *)regs);
+	return 0;
 }
+
 
 int
 process_sstep(struct lwp *l, int sstep)
@@ -269,61 +222,19 @@ process_set_pc(struct lwp *l, void *addr)
 static int
 process_machdep_read_xmmregs(struct lwp *l, struct xmmregs *regs)
 {
-	union savefpu *frame = process_fpframe(l);
 
-	if (i386_use_fxsave == 0)
-		return (EINVAL);
-
-	if (l->l_md.md_flags & MDL_USEDFPU) {
-		struct pcb *pcb = lwp_getpcb(l);
-
-		if (pcb->pcb_fpcpu != NULL) {
-			fpusave_lwp(l, true);
-		}
-	} else {
-		/*
-		 * Fake a FNINIT.
-		 * The initial control word was already set by setregs(),
-		 * so save it temporarily.
-		 */
-		uint32_t mxcsr = frame->sv_xmm.fx_mxcsr;
-		uint16_t cw = frame->sv_xmm.fx_cw;
-
-		/* XXX Don't zero XMM regs? */
-		memset(&frame->sv_xmm, 0, sizeof(frame->sv_xmm));
-		frame->sv_xmm.fx_cw = cw;
-		frame->sv_xmm.fx_mxcsr = mxcsr;
-		frame->sv_xmm.fx_sw = 0x0000;
-		frame->sv_xmm.fx_tw = 0x00;
-
-		l->l_md.md_flags |= MDL_USEDFPU;  
-	}
-
-	memcpy(regs, &frame->sv_xmm, sizeof(*regs));
-	return (0);
+	__CTASSERT(sizeof *regs == sizeof (struct fxsave));
+	process_read_fpregs_xmm(l, (struct fxsave *)regs);
+	return 0;
 }
 
 static int
 process_machdep_write_xmmregs(struct lwp *l, struct xmmregs *regs)
 {
-	union savefpu *frame = process_fpframe(l);
 
-	if (i386_use_fxsave == 0)
-		return (EINVAL);
-
-	if (l->l_md.md_flags & MDL_USEDFPU) {
-		struct pcb *pcb = lwp_getpcb(l);
-
-		/* If we were using the FPU, drop it. */
-		if (pcb->pcb_fpcpu != NULL) {
-			fpusave_lwp(l, false);
-		}
-	} else {
-		l->l_md.md_flags |= MDL_USEDFPU;
-	}
-
-	memcpy(&frame->sv_xmm, regs, sizeof(*regs));
-	return (0);
+	__CTASSERT(sizeof *regs == sizeof (struct fxsave));
+	process_write_fpregs_xmm(l, (const struct fxsave *)regs);
+	return 0;
 }
 
 int

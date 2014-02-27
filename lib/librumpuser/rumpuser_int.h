@@ -94,6 +94,7 @@ do {									\
 	}								\
 } while (/*CONSTCOND*/0)
 
+int  rumpuser__sig_rump2host(int);
 int  rumpuser__errtrans(int);
 #ifdef __NetBSD__
 #define ET(_v_) return (_v_);

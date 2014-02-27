@@ -49,7 +49,6 @@ __RCSID("$NetBSD$");
  */
 
 #include <sys/param.h>
-#include <sys/user.h>
 #include <sys/proc.h>
 #include <sys/stat.h>
 #include <sys/kcore.h>

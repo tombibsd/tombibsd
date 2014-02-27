@@ -11,6 +11,7 @@ INCS=	aout_machdep.h \
 	cputypes.h \
 	cpuvar.h \
 	float.h \
+	fpu.h \
 	ieee.h ieeefp.h \
 	intr.h intrdefs.h \
 	lock.h \

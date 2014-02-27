@@ -101,8 +101,7 @@ struct cpu_info {
 	struct cpu_info *ci_next;	/* next cpu */
 	struct lwp *ci_curlwp;		/* current owner of the processor */
 	struct lwp *ci_fpcurlwp;	/* current owner of the FPU */
-	int	_unused1;
-	int	ci_fpused;		/* XEN: FPU was used by curlwp */
+	int	_unused1[2];
 	cpuid_t ci_cpuid;		/* our CPU ID */
 	int	_unused;
 	uint32_t ci_acpiid;		/* our ACPI/MADT ID */
@@ -365,9 +364,20 @@ extern int cpu_class;
 extern char cpu_brand_string[];
 extern int use_pae;
 
+#ifdef __i386__
+extern int i386_fpu_present;
+int npx586bug1(int, int);
+extern int i386_fpu_fdivbug;
 extern int i386_use_fxsave;
 extern int i386_has_sse;
 extern int i386_has_sse2;
+#else
+#define	i386_fpu_present	1
+#define	i386_fpu_fdivbug	0
+#define	i386_use_fxsave		1
+#define	i386_has_sse		1
+#define	i386_has_sse2		1
+#endif
 
 extern void (*x86_cpu_idle)(void);
 #define	cpu_idle() (*x86_cpu_idle)()
@@ -424,10 +434,6 @@ void	i8254_initclocks(void);
 /* cpu.c */
 
 void	cpu_probe_features(struct cpu_info *);
-
-/* npx.c */
-void	fpusave_lwp(struct lwp *, bool);
-void	fpusave_cpu(bool);
 
 /* vm_machdep.c */
 paddr_t	kvtop(void *);

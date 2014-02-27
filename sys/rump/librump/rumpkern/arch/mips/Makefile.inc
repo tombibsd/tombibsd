@@ -1,5 +1,6 @@
 # $NetBSD$
 
 CPPFLAGS+=	-DARCH_ELFSIZE=32
-SRCS+=  	kobj_stubs.c rumpcpu_generic.c
 
+.PATH:	${RUMPTOP}/librump/rumpkern/arch/generic
+SRCS+= 	rump_generic_cpu.c rump_generic_kobj.c rump_generic_pmap.c

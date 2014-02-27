@@ -95,7 +95,7 @@ exec_script_modcmd(modcmd_t cmd, void *arg)
 
 	default:
 		return ENOTTY;
-        }
+	}
 }
 
 /*
@@ -345,10 +345,10 @@ fail:
 #endif
 
 	/* kill the opened file descriptor, else close the file */
-        if (epp->ep_flags & EXEC_HASFD) {
-                epp->ep_flags &= ~EXEC_HASFD;
-                fd_close(epp->ep_fd);
-        } else if (scriptvp) {
+	if (epp->ep_flags & EXEC_HASFD) {
+		epp->ep_flags &= ~EXEC_HASFD;
+		fd_close(epp->ep_fd);
+	} else if (scriptvp) {
 		vn_lock(scriptvp, LK_EXCLUSIVE | LK_RETRY);
 		VOP_CLOSE(scriptvp, FREAD, l->l_cred);
 		vput(scriptvp);
@@ -363,11 +363,11 @@ fail:
 		kmem_free(shellargp, shellargp_len);
 	}
 
-        /*
-         * free any vmspace-creation commands,
-         * and release their references
-         */
-        kill_vmcmds(&epp->ep_vmcmds);
+	/*
+	 * free any vmspace-creation commands,
+	 * and release their references
+	 */
+	kill_vmcmds(&epp->ep_vmcmds);
 
-        return error;
+	return error;
 }

@@ -255,7 +255,7 @@ main(int argc, char **argv)
 	rump_init();
 	rump_schedule();
 
-	rumpns_npf_test_init(random);
+	rumpns_npf_test_init(inet_pton, inet_ntop, random);
 
 	if (config) {
 		load_npf_config(config);

@@ -9,7 +9,7 @@
 /AndOrXor.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /call-callconv.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /call.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
-/compare.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/compare.ll/1.1.1.2/Thu Feb 27 08:52:25 2014/-kk/
 /exact-nsw-nuw.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /fast-math.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /fdiv.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
@@ -20,6 +20,6 @@
 /ptr_diff.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /reassociate.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /rem.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
-/undef.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
-/vector_gep.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/undef.ll/1.1.1.2/Thu Feb 27 08:52:25 2014/-kk/
+/vector_gep.ll/1.1.1.2/Thu Feb 27 08:52:25 2014/-kk/
 D

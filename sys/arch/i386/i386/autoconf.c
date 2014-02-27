@@ -64,7 +64,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <machine/intr.h>
 #include <machine/pcb.h>
 #include <machine/cpufunc.h>
-#include <machine/npx.h>
+#include <x86/fpu.h>
 
 #include "ioapic.h"
 #include "lapic.h"

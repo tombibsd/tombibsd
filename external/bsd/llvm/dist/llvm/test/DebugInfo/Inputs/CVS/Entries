@@ -24,6 +24,8 @@
 /dwarfdump-test4.elf-x86-64/1.1.1.1/Thu Nov 28 14:18:09 2013/-kk/
 /dwarfdump-type-units.cc/1.1.1.1/Thu Nov 28 14:18:09 2013/-kk/
 /dwarfdump-type-units.elf-x86-64/1.1.1.1/Thu Nov 28 14:18:09 2013/-kk/
+/llvm-symbolizer-test.c/1.1.1.1/Fri Feb 14 20:12:31 2014/-kk/
+/llvm-symbolizer-test.elf-x86-64/1.1.1.1/Fri Feb 14 20:12:31 2014/-kk/
 /macho-universal.cc/1.1.1.1/Thu Nov 28 14:18:09 2013/-kk/
 /macho-universal/1.1.1.1/Thu Nov 28 14:18:09 2013/-kk/
 D

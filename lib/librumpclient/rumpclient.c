@@ -99,6 +99,7 @@ int	(*host_kevent)(int, const struct kevent *, size_t,
 int	(*host_execve)(const char *, char *const[], char *const[]);
 
 #include "sp_common.c"
+#include "rumpuser_sigtrans.c"
 
 static struct spclient clispc = {
 	.spc_fd = -1,
@@ -590,6 +591,7 @@ handlereq(struct spclient *spc)
 	void *mapaddr;
 	size_t maplen;
 	int reqtype = spc->spc_hdr.rsp_type;
+	int sig;
 
 	switch (reqtype) {
 	case RUMPSP_COPYIN:
@@ -623,8 +625,9 @@ handlereq(struct spclient *spc)
 		send_anonmmap_resp(spc, spc->spc_hdr.rsp_reqno, mapaddr);
 		break;
 	case RUMPSP_RAISE:
-		DPRINTF(("rump_sp handlereq: raise sig %d\n", rhdr->rsp_signo));
-		raise((int)rhdr->rsp_signo);
+		sig = rumpuser__sig_rump2host(rhdr->rsp_signo);
+		DPRINTF(("rump_sp handlereq: raise sig %d\n", sig));
+		raise(sig);
 		/*
 		 * We most likely have signals blocked, but the signal
 		 * will be handled soon enough when we return.

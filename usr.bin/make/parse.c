@@ -2236,7 +2236,7 @@ ParseDoInclude(char *line)
  * Side Effects:
  *	The .INCLUDEDFROMFILE variable is overwritten by the contents
  *	of .PARSEFILE and the .INCLUDEDFROMDIR variable is overwriten
- *	but the contents of .PARSEDIR
+ *	by the contents of .PARSEDIR
  *---------------------------------------------------------------------
  */
 static void
@@ -2569,7 +2569,8 @@ ParseEOF(void)
 	/* We've run out of input */
 	Var_Delete(".PARSEDIR", VAR_GLOBAL);
 	Var_Delete(".PARSEFILE", VAR_GLOBAL);
-	Var_Delete(".INCLUDED_FROM", VAR_GLOBAL);
+	Var_Delete(".INCLUDEDFROMDIR", VAR_GLOBAL);
+	Var_Delete(".INCLUDEDFROMFILE", VAR_GLOBAL);
 	return DONE;
     }
 

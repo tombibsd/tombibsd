@@ -1,8 +1,7 @@
 # $NetBSD$
 
-.include <bsd.own.mk>
+.include <bsd.init.mk>
 
-SRCDIR=		${NETBSDSRCDIR}/external/bsd/atf/dist
 .PATH:		${SRCDIR}/tools/sample
 
 CONFIGFILES=	NetBSD.conf atf-run.hooks common.conf

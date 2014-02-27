@@ -102,11 +102,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <machine/mtrr.h>
 #include <machine/pio.h>
 
-#ifdef i386
-#include <machine/npx.h>
-#else
-#include <machine/fpu.h>
-#endif
+#include <x86/fpu.h>
 
 #include <xen/xen.h>
 #include <xen/xen-public/vcpu.h>

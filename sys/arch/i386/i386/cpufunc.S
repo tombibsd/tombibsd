@@ -332,6 +332,11 @@ ENTRY(fnstcw)
 	ret
 END(fnstcw)
 
+ENTRY(fngetsw)
+	fnstsw	%ax
+	ret
+END(fngetsw)
+
 ENTRY(fnstsw)
 	movl	4(%esp), %eax
 	fnstsw	(%eax)
@@ -384,10 +389,19 @@ ENTRY(fxrstor)
 	ret
 END(fxrstor)
 
-ENTRY(fldummy)
+ENTRY(x86_stmxcsr)
 	movl	4(%esp), %eax
+	stmxcsr	(%eax)
+	ret
+
+ENTRY(x86_ldmxcsr)
+	movl	4(%esp), %eax
+	ldmxcsr	(%eax)
+	ret
+
+ENTRY(fldummy)
 	ffree	%st(7)
-	flds	(%eax)
+	fldz
 	ret
 END(fldummy)
 

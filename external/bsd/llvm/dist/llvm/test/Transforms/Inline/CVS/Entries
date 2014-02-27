@@ -43,7 +43,9 @@
 /dynamic_alloca_test.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /externally_available.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /gvn-inline-iteration.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/ignore-debug-info.ll/1.1.1.1/Fri Feb 14 20:12:46 2014/-kk/
 /inline-byval-bonus.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/inline-cold.ll/1.1.1.1/Fri Feb 14 20:12:46 2014/-kk/
 /inline-invoke-tail.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /inline-invoke-with-asm-call.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /inline-optnone.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
@@ -68,6 +70,6 @@
 /nested-inline.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /noinline-recursive-fn.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /noinline.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
-/ptr-diff.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/ptr-diff.ll/1.1.1.2/Thu Feb 27 08:52:25 2014/-kk/
 /recursive.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 D

@@ -2332,6 +2332,7 @@ bldri(op_t op, tnode_t *ln)
 		return NULL;
 	}
 	ntn = mktnode(op, cn->tn_type, ln, cn);
+	ntn->tn_lvalue = 1;
 
 	return (ntn);
 }
@@ -3170,8 +3171,9 @@ funccall(tnode_t *func, tnode_t *args)
 
 	if (func->tn_type->t_tspec != PTR ||
 	    func->tn_type->t_subt->t_tspec != FUNC) {
+		char buf[256];
 		/* illegal function */
-		error(149);
+		error(149, tyname(buf, sizeof(buf), func->tn_type));
 		return (NULL);
 	}
 

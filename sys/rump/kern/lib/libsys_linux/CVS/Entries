@@ -1,5 +1,5 @@
 /Makefile/1.5/Thu Feb 13 15:22:35 2014/-kk/
-/component.c/1.10/Wed Dec 25 07:37:47 2013/-kk/
+/component.c/1.11/Thu Feb 27 08:56:16 2014/-kk/
 /linux_rump.c/1.2/Fri Jan 31 08:48:56 2014/-kk/
 /rump_linux_syscall.h/1.11/Thu Feb 13 15:22:35 2014/-kk/
 /rump_linux_syscallargs.h/1.14/Thu Feb 13 15:22:35 2014/-kk/

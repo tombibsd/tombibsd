@@ -2,7 +2,7 @@
 #
 # Process this file with autoconf to produce a configure script.
 
-AC_INIT([netpgp],[20101105],[Alistair Crooks <agc@netbsd.org> c0596823])
+AC_INIT([netpgp],[20140210],[Alistair Crooks <agc@netbsd.org> c0596823])
 AC_PREREQ(2.63)
 AC_REVISION([$Revision$])
 
@@ -110,7 +110,6 @@ AC_CONFIG_FILES([
         src/lib/Makefile
         src/netpgp/Makefile
         src/netpgpkeys/Makefile
-        src/netpgpverify/Makefile
         tests/Makefile
         tests/atlocal
 ])

@@ -26,7 +26,7 @@
 /iommureg.h/1.19/Sun Mar 20 20:42:06 2011/-kk/
 /iommuvar.h/1.21/Sun Mar 25 03:51:33 2012/-kk/
 /kd.c/1.51/Sat Oct 27 17:18:12 2012/-kk/
-/lom.c/1.11/Thu Oct 24 10:28:57 2013/-kk/
+/lom.c/1.12/Thu Feb 27 08:55:55 2014/-kk/
 /lpt_ebus.c/1.23/Fri Jul  1 18:48:36 2011/-kk/
 /mkclock.c/1.12/Sat Oct 27 17:18:12 2012/-kk/
 /pcf8591_envctrl.c/1.6/Sun Mar 18 05:26:58 2012/-kk/

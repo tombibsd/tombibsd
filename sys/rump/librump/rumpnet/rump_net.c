@@ -50,7 +50,6 @@ RUMP_COMPONENT(RUMP__FACTION_NET)
 	soinit();
 
 	domaininit(false);
-	rump_netisr_init();
 
 	rump_component_init(RUMP_COMPONENT_NET);
 	rump_component_init(RUMP_COMPONENT_NET_ROUTE);

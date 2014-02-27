@@ -48,11 +48,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/errno.h>
 #include <sys/systm.h>
 
-#ifdef __x86_64__
-#include <machine/fpu.h>
-#else
-#include <machine/npx.h>
-#endif /* __x86_64__ */
+#include <x86/fpu.h>
 #include <machine/frame.h>
 #include <machine/segments.h>
 

@@ -96,8 +96,8 @@ loadfile_aout(int fd, struct exec *x, u_long *marks, int flags)
 	int sub;
 	ssize_t nr;
 
-	/* some ports dont use the offset */
-	offset = offset;
+	/* some ports don't use the offset */
+	(void)offset;
 
 	/* In OMAGIC and NMAGIC, exec header isn't part of text segment */
 	if (magic == OMAGIC || magic == NMAGIC)

@@ -386,19 +386,21 @@ union_root(struct mount *mp, struct vnode **vpp)
 	 * Return locked reference to root.
 	 */
 	vref(um->um_uppervp);
-	vn_lock(um->um_uppervp, LK_EXCLUSIVE | LK_RETRY);
 	if (um->um_lowervp)
 		vref(um->um_lowervp);
 	error = union_allocvp(vpp, mp, NULL, NULL, NULL,
 			      um->um_uppervp, um->um_lowervp, 1);
 
 	if (error) {
-		vput(um->um_uppervp);
+		vrele(um->um_uppervp);
 		if (um->um_lowervp)
 			vrele(um->um_lowervp);
+		return error;
 	}
 
-	return (error);
+	vn_lock(*vpp, LK_EXCLUSIVE | LK_RETRY);
+
+	return 0;
 }
 
 int

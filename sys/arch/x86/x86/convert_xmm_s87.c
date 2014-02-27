@@ -35,7 +35,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <sys/param.h>
 #include <sys/systm.h>
-#include <x86/cpu_extended_state.h>
+#include <x86/fpu.h>
 
 void
 process_xmm_to_s87(const struct fxsave *sxmm, struct save87 *s87)
@@ -131,10 +131,11 @@ process_s87_to_xmm(const struct save87 *s87, struct fxsave *sxmm)
 	sxmm->fx_dp = s87->s87_dp;
 
 	/* Tag word */
-	tag = s87->s87_tw & 0xffff;	/* 0b11 => unused */
+	tag = s87->s87_tw;	/* 0b11 => unused */
 	if (tag == 0xffff) {
-		/* All unused - values don't matter */
+		/* All unused - values don't matter, zero for safety */
 		sxmm->fx_tw = 0;
+		memset(&sxmm->fx_87_ac, 0, sizeof sxmm->fx_87_ac);
 		return;
 	}
 

@@ -46,7 +46,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <compat/sys/signal.h>
 
 #include <machine/cpufunc.h>
-#include <machine/npx.h>
+#include <x86/fpu.h>
 #include <machine/reg.h>
 #include <machine/vm86.h>
 #include <machine/vmparam.h>

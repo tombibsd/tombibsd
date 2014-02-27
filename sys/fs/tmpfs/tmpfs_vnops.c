@@ -534,10 +534,10 @@ tmpfs_read(void *v)
 
 	KASSERT(VOP_ISLOCKED(vp));
 
-	if (vp->v_type != VREG) {
+	if (vp->v_type == VDIR) {
 		return EISDIR;
 	}
-	if (uio->uio_offset < 0) {
+	if (uio->uio_offset < 0 || vp->v_type != VREG) {
 		return EINVAL;
 	}
 

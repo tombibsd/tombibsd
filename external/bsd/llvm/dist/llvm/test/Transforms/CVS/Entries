@@ -5,6 +5,7 @@ D/BranchFolding////
 D/CodeExtractor////
 D/CodeGenPrepare////
 D/ConstProp////
+D/ConstantHoisting////
 D/ConstantMerge////
 D/CorrelatedValuePropagation////
 D/DeadArgElim////

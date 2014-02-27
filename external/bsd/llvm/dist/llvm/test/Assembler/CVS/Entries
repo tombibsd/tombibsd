@@ -116,12 +116,14 @@
 /half-conv.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /half.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /huge-array.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/inalloca.ll/1.1.1.1/Fri Feb 14 20:12:45 2014/-kk/
 /insertextractvalue.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /insertvalue-invalid-idx.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /invalid-fwdref1.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /invalid-name.ll/1.1.1.1/Sun Jan  5 16:18:22 2014/-kk/
 /invalid_cast.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /invalid_cast2.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/invalid_cast3.ll/1.1.1.1/Fri Feb 14 20:12:45 2014/-kk/
 /metadata.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /named-metadata.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /numbered-values.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/

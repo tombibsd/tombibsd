@@ -31,12 +31,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/param.h>
 #include <sys/intr.h>
 
-#include <netinet/in.h>
-#include <netinet/ip_var.h>
-#include <netinet/if_inarp.h>
-#include <netinet/ip6.h>
-#include <netinet6/ip6_var.h>
-#include <netmpls/mpls_var.h>
 #include <net/netisr.h>
 
 #include <rump/rumpuser.h>
@@ -51,48 +45,10 @@ schednetisr(int isr)
 	softint_schedule(netisrs[isr]);
 }
 
-/*
- * Aliases are needed only for static linking (dlsym() is not supported).
- */
-void __netisr_stub(void);
 void
-__netisr_stub(void)
+rump_netisr_register(int level, void (*handler)(void))
 {
 
-	panic("netisr called but networking stack missing");
-}
-__weak_alias(ipintr,__netisr_stub);
-__weak_alias(arpintr,__netisr_stub);
-__weak_alias(ip6intr,__netisr_stub);
-__weak_alias(mplsintr,__netisr_stub);
-
-void
-rump_netisr_init(void)
-{
-	void *iphand, *arphand, *ip6hand, *mplshand, *sym;
-
-	iphand = ipintr;
-	if ((sym = rumpuser_dl_globalsym("rumpns_ipintr")) != NULL)
-		iphand = sym;
-
-	arphand = arpintr;
-	if ((sym = rumpuser_dl_globalsym("rumpns_arpintr")) != NULL)
-		arphand = sym;
-
-	ip6hand = ip6intr;
-	if ((sym = rumpuser_dl_globalsym("rumpns_ip6intr")) != NULL)
-		ip6hand = sym;
-
-	mplshand = mplsintr;
-	if ((sym = rumpuser_dl_globalsym("rumpns_mplsintr")) != NULL)
-		mplshand = sym;
-		
-	netisrs[NETISR_IP] = softint_establish(SOFTINT_NET | SOFTINT_MPSAFE,
-	    (void (*)(void *))iphand, NULL);
-	netisrs[NETISR_ARP] = softint_establish(SOFTINT_NET | SOFTINT_MPSAFE,
-	    (void (*)(void *))arphand, NULL);
-	netisrs[NETISR_IPV6] = softint_establish(SOFTINT_NET | SOFTINT_MPSAFE,
-	    (void (*)(void *))ip6hand, NULL);
-	netisrs[NETISR_MPLS] = softint_establish(SOFTINT_NET | SOFTINT_MPSAFE,
-	    (void (*)(void *))mplshand, NULL);
+	netisrs[level] = softint_establish(SOFTINT_NET | SOFTINT_MPSAFE,
+	    (void (*)(void *))handler, NULL);
 }

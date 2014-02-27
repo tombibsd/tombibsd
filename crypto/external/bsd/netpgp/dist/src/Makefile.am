@@ -1,3 +1,3 @@
 ## $NetBSD$
 
-SUBDIRS = libmj lib netpgp netpgpkeys netpgpverify
+SUBDIRS = libmj lib netpgp netpgpkeys

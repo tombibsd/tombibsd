@@ -1,15 +1,12 @@
 # $NetBSD$
 
-.include <bsd.own.mk>
+.include <bsd.init.mk>
 
 TESTSDIR=	${TESTSBASE}/atf/test-programs
 ATFFILE=	yes
+KYUAFILE=	yes
 
-SRCDIR=		${NETBSDSRCDIR}/external/bsd/atf/dist
 .PATH:		${SRCDIR}/test-programs
-
-CPPFLAGS+=	-DHAVE_CONFIG_H
-CPPFLAGS+=	-I${SRCDIR}/libs -I${SRCDIR}
 
 TESTS_C=	c_helpers
 

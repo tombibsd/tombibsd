@@ -833,20 +833,22 @@ ahc_pci_attach(device_t parent, device_t self, void *aux)
 	ioh_valid = (pci_mapreg_map(pa, AHC_PCI_IOADDR,
 				    PCI_MAPREG_TYPE_IO, 0, &iot,
 				    &ioh, NULL, NULL) == 0);
+
 #if 0
 	printf("%s: bus info: memt 0x%lx, memh 0x%lx, iot 0x%lx, ioh 0x%lx\n",
 	    ahc_name(ahc), (u_long)memt, (u_long)memh, (u_long)iot,
 	    (u_long)ioh);
 #endif
 
+#ifdef AHC_ALLOW_MEMIO
+	if (memh_valid) {
+		st = memt;
+		sh = memh;
+	} else
+#endif
 	if (ioh_valid) {
 		st = iot;
 		sh = ioh;
-#ifdef AHC_ALLOW_MEMIO
-	} else if (memh_valid) {
-		st = memt;
-		sh = memh;
-#endif
 	} else {
 		printf(": unable to map registers\n");
 		return;

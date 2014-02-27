@@ -610,7 +610,7 @@ futex_atomic_op(lwp_t *l, int encoded_op, void *uaddr)
 		}
 
 		error = ucas_int(uaddr, cval, nval, &oldval);
-		if (oldval == cval || error) {
+		if (error || oldval == cval) {
 			break;
 		}
 		cval = oldval;

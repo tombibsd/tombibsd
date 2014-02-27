@@ -665,8 +665,8 @@ ite_switch(int unit)
 	struct ite_softc	*sc;
 	extern const struct cdevsw view_cdevsw;
 
-	sc = getitesp(unit);
-	if ((sc->flags & (ITE_ATTACHED | ITE_INITED)) == 0)
+	sc = device_lookup_private(&ite_cd, unit);
+	if (sc == NULL || (sc->flags & (ITE_ATTACHED | ITE_INITED)) == 0)
 		return;
 
 	/*

@@ -1,7 +1,7 @@
 #	$NetBSD$
 #
 
-SRCS+=	rumpcpu.c rumpspl.c cpu_counter.c spinlock.c pmap_x86.c
+.include "${RUMPTOP}/librump/rumpkern/arch/x86/Makefile.inc"
 
 .PATH:	${RUMPTOP}/../arch/i386/i386
 SRCS+=	kobj_machdep.c

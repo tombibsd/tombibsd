@@ -321,6 +321,7 @@ ALIAS(atomic_cas_ptr_ni,_atomic_cas_32_ni)
 
 ALIAS(atomic_cas_64,_atomic_cas_64)
 ALIAS(atomic_cas_64_ni,_atomic_cas_64)
+ALIAS(__sync_val_compare_and_swap_8,_atomic_cas_64)
 
 ALIAS(membar_consumer,_membar_consumer)
 ALIAS(membar_producer,_membar_producer)
