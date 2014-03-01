@@ -49,6 +49,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/exec.h>
 #include <sys/stat.h>
 #include <sys/kauth.h>
+#include <sys/cprng.h>
 
 #include <sys/cpu.h>
 #include <machine/vmparam.h>
@@ -225,21 +226,16 @@ ELFNAME2(linux,copyargs)(struct lwp *l, struct exec_package *pack,
 
 	esd.ai[i].a_type = LINUX_AT_RANDOM;
 	esd.ai[i++].a_v = (Elf_Addr)&esdp->randbytes[0];
-	esd.randbytes[0] = random();
-	esd.randbytes[1] = random();
-	esd.randbytes[2] = random();
-	esd.randbytes[3] = random();
+	esd.randbytes[0] = cprng_strong32();
+	esd.randbytes[1] = cprng_strong32();
+	esd.randbytes[2] = cprng_strong32();
+	esd.randbytes[3] = cprng_strong32();
 
 	esd.ai[i].a_type = AT_NULL;
 	esd.ai[i++].a_v = 0;
 
-#ifdef DEBUG_LINUX
-	if (i != LINUX_ELF_AUX_ENTRIES) {
-		printf("linux_elf64_copyargs: %d Aux entries\n", i);
-		return EINVAL;
-	}
-#endif
-		
+	KASSERT(i == LINUX_ELF_AUX_ENTRIES);
+
 	strcpy(esd.hw_platform, LINUX_PLATFORM); 
 
 	exec_free_emul_arg(pack);

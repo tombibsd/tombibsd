@@ -321,14 +321,6 @@ btmagic_attach(device_t parent, device_t self, void *aux)
 	sc->sc_dist = 130;
 	sc->sc_scale = 20;
 
-	sysctl_createv(&sc->sc_log, 0, NULL, NULL,
-		CTLFLAG_PERMANENT,
-		CTLTYPE_NODE, "hw",
-		NULL,
-		NULL, 0,
-		NULL, 0,
-		CTL_HW, CTL_EOL);
-
 	sysctl_createv(&sc->sc_log, 0, NULL, &node,
 		0,
 		CTLTYPE_NODE, device_xname(self),

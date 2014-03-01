@@ -28,6 +28,7 @@ options 	CPU_CORTEXA9
 options 	BCM563XX
 options 	PMAPCOUNTERS
 options 	BUSDMA_COUNTERS
+makeoptions	KERNEL_BASE_PHYS="0x60100000"
 
 # Architecture options
 
@@ -151,7 +152,7 @@ options 	DDB_COMMANDONENTER="show event"
 options 	DB_MAX_LINE=INT_MAX
 #options 	KGDB
 makeoptions	DEBUG="-g"	# compile full symbol table
-options 	SYMTAB_SPACE=575000
+options 	SYMTAB_SPACE=590000
 
 ## USB Debugging options
 options USB_DEBUG

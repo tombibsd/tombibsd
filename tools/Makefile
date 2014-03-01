@@ -157,8 +157,8 @@ SUBDIR+=	autoconf .WAIT gettext
 SUBDIR+=	pigz
 .endif
 
-.if ${MACHINE} == "hp700"
-SUBDIR+=	hp700-mkboot
+.if ${MACHINE} == "hppa"
+SUBDIR+=	hppa-mkboot
 .endif
 
 .if ${MACHINE} == "ibmnws"

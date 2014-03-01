@@ -32,8 +32,8 @@
  * SUCH DAMAGE.
  */
 
-#ifndef	_ARM_AOUT_MACHDEP_H_
-#define	_ARM_AOUT_MACHDEP_H_
+#ifndef _ARM_AOUT_MACHDEP_H_
+#define _ARM_AOUT_MACHDEP_H_
 
 #define	AOUT_LDPGSZ	4096
 

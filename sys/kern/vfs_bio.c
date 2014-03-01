@@ -1806,11 +1806,6 @@ sysctl_kern_buf_setup(void)
 
 	sysctl_createv(&vfsbio_sysctllog, 0, NULL, NULL,
 		       CTLFLAG_PERMANENT,
-		       CTLTYPE_NODE, "kern", NULL,
-		       NULL, 0, NULL, 0,
-		       CTL_KERN, CTL_EOL);
-	sysctl_createv(&vfsbio_sysctllog, 0, NULL, NULL,
-		       CTLFLAG_PERMANENT,
 		       CTLTYPE_NODE, "buf",
 		       SYSCTL_DESCR("Kernel buffer cache information"),
 		       sysctl_dobuf, 0, NULL, 0,
@@ -1821,11 +1816,6 @@ static void
 sysctl_vm_buf_setup(void)
 {
 
-	sysctl_createv(&vfsbio_sysctllog, 0, NULL, NULL,
-		       CTLFLAG_PERMANENT,
-		       CTLTYPE_NODE, "vm", NULL,
-		       NULL, 0, NULL, 0,
-		       CTL_VM, CTL_EOL);
 	sysctl_createv(&vfsbio_sysctllog, 0, NULL, NULL,
 		       CTLFLAG_PERMANENT|CTLFLAG_READWRITE,
 		       CTLTYPE_INT, "bufcache",

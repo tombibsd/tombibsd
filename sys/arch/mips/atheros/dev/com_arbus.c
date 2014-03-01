@@ -227,7 +227,7 @@ com_arbus_initmap(struct com_regs *regsp)
 	int off = 3;
 #else
 	int off = 0;
-#endif;
+#endif
 
 	/* rewrite the map to shift for alignment */
 	for (size_t i = 0; i < __arraycount(regsp->cr_map); i++) {

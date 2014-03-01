@@ -381,6 +381,7 @@ void	loadfpstate(struct fpstate64 *);
 void	clearfpstate(void);
 uint64_t	probeget(paddr_t, int, int);
 int	probeset(paddr_t, int, int, uint64_t);
+void	setcputyp(int);
 
 #define	 write_all_windows() __asm volatile("flushw" : : )
 #define	 write_user_windows() __asm volatile("flushw" : : )

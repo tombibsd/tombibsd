@@ -211,7 +211,7 @@ tdvfb_attach(device_t parent, device_t self, void *aux)
 	 */
 	sc->sc_memsize = tdvfb_mem_size(sc);
 
-	aprint_normal_dev(sc->sc_dev, "%d MB framebuffer memory present\n", 
+	aprint_normal_dev(sc->sc_dev, "%zu MB framebuffer memory present\n", 
 	    sc->sc_memsize / 1024 / 1024);
 
 	/* Select video mode, 800x600 32bpp 60Hz by default... */

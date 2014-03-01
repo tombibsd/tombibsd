@@ -154,11 +154,6 @@ sysctl_vfs_setup(void)
 
 	sysctl_createv(&vfs_sysctllog, 0, NULL, NULL,
 		       CTLFLAG_PERMANENT,
-		       CTLTYPE_NODE, "vfs", NULL,
-		       NULL, 0, NULL, 0,
-		       CTL_VFS, CTL_EOL);
-	sysctl_createv(&vfs_sysctllog, 0, NULL, NULL,
-		       CTLFLAG_PERMANENT,
 		       CTLTYPE_NODE, "generic",
 		       SYSCTL_DESCR("Non-specific vfs related information"),
 		       NULL, 0, NULL, 0,

@@ -287,10 +287,6 @@ overlay_modcmd(modcmd_t cmd, void *arg)
 		if (error != 0)
 			break;
 		sysctl_createv(&overlay_sysctl_log, 0, NULL, NULL,
-			       CTLFLAG_PERMANENT, CTLTYPE_NODE, "vfs", NULL,
-			       NULL, 0, NULL, 0,
-			       CTL_VFS, CTL_EOL);
-		sysctl_createv(&overlay_sysctl_log, 0, NULL, NULL,
 			       CTLFLAG_PERMANENT, CTLTYPE_NODE, "overlay",
 			       SYSCTL_DESCR("Overlay file system"),
 			       NULL, 0, NULL, 0,

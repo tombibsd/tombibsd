@@ -220,7 +220,7 @@ KERNMISCCPPFLAGS+=	-D_RUMPKERNEL
 # compare-and-swap.  This is because the kernel version is using
 # instructions or routines unavailable to us in userspace.
 #
-.if (${MACHINE_CPU} == "arm" && empty(ARMV6) && empty(ARMV7)) \
+.if (${MACHINE_CPU} == "arm" && "${FEAT_LDREX}" != "yes") \
     || ${MACHINE_ARCH} == "coldfire" || ${MACHINE_CPU} == "hppa" \
     || ${MACHINE_CPU} == "mips" || ${MACHINE_CPU} == "sh3" \
     || ${MACHINE_ARCH} == "vax" || ${MACHINE_ARCH} == "m68000"

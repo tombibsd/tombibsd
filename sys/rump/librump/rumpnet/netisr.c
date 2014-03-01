@@ -42,7 +42,14 @@ void
 schednetisr(int isr)
 {
 
-	softint_schedule(netisrs[isr]);
+	/*
+	 * Do not schedule a softint that is not registered.
+	 * This might cause the inq to fill, but the one calling us
+	 * should start dropping packets once the inq is full,
+	 * so no big harm done.
+	 */
+	if (__predict_true(netisrs[isr]))
+		softint_schedule(netisrs[isr]);
 }
 
 void

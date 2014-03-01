@@ -481,11 +481,6 @@ SYSCTL_SETUP(sysctl_net_inet_ipsec_setup, "sysctl net.inet.ipsec subtree setup")
 
 	sysctl_createv(clog, 0, NULL, NULL,
 		       CTLFLAG_PERMANENT,
-		       CTLTYPE_NODE, "net", NULL,
-		       NULL, 0, NULL, 0,
-		       CTL_NET, CTL_EOL);
-	sysctl_createv(clog, 0, NULL, NULL,
-		       CTLFLAG_PERMANENT,
 		       CTLTYPE_NODE, "inet", NULL,
 		       NULL, 0, NULL, 0,
 		       CTL_NET, PF_INET, CTL_EOL);
@@ -688,11 +683,6 @@ SYSCTL_SETUP(sysctl_net_inet6_ipsec6_setup,
 	     "sysctl net.inet6.ipsec6 subtree setup")
 {
 
-	sysctl_createv(clog, 0, NULL, NULL,
-		       CTLFLAG_PERMANENT,
-		       CTLTYPE_NODE, "net", NULL,
-		       NULL, 0, NULL, 0,
-		       CTL_NET, CTL_EOL);
 	sysctl_createv(clog, 0, NULL, NULL,
 		       CTLFLAG_PERMANENT,
 		       CTLTYPE_NODE, "inet6", NULL,

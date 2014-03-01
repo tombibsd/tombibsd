@@ -179,14 +179,6 @@ toastersensors_attach(device_t parent, device_t self, void *aux)
 	aprint_normal_dev(self, "using signals DIO_1-DIO_5 for panel buttons\n");
 	aprint_normal_dev(self, "using 12-bit MAX197-ADC channel 0 for burnlevel knob\n");
 
-	if (sysctl_createv(NULL, 0, NULL, NULL,
-				CTLFLAG_PERMANENT, CTLTYPE_NODE, "hw",
-				NULL, NULL, 0, NULL, 0,
-				CTL_HW, CTL_EOL) != 0) {
-		printf("%s: could not create sysctl\n",
-			device_xname(self));
-		return;
-	}
 	if (sysctl_createv(NULL, 0, NULL, &node,
         			0, CTLTYPE_NODE, device_xname(self),
         			NULL,

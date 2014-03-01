@@ -17,10 +17,10 @@
 /md.emips/1.1/Wed Jan 26 01:18:45 2011/-kk/
 /md.ews4800mips/1.6/Thu Oct 24 10:28:41 2013/-kk/
 /md.hp300/1.41/Mon Feb  7 18:11:28 2011/-kk/
-/md.hp700/1.6/Sat Nov 29 17:57:33 2008/-kk/
 /md.hpcarm/1.12/Thu Oct 24 10:28:41 2013/-kk/
 /md.hpcmips/1.10/Sat Nov 29 17:57:33 2008/-kk/
 /md.hpcsh/1.9/Sat Nov 29 17:57:33 2008/-kk/
+/md.hppa/1.1/Mon Feb 24 07:23:39 2014/-kk/
 /md.i386/1.141/Sun Mar 11 06:53:18 2012/-kk/
 /md.landisk/1.5/Wed Apr 22 17:20:15 2009/-kk/
 /md.luna68k/1.5/Thu Oct 24 10:28:41 2013/-kk/
@@ -48,7 +48,7 @@
 /md.sun3/1.46/Sat Feb 14 11:33:56 2009/-kk/
 /md.vax/1.28/Sat Nov 29 17:57:34 2008/-kk/
 /md.x68k/1.46/Thu Oct 24 10:28:41 2013/-kk/
-/mi/1.1061/Thu Feb 13 15:18:51 2014/-kk/
+/mi/1.1062/Sat Mar  1 05:58:12 2014/-kk/
 /module.mi/1.13/Fri Dec 11 15:22:33 2009/-kk/
 /rescue.ad.arm/1.3/Thu Oct 24 10:28:41 2013/-kk/
 /rescue.ad.m68k.shl/1.2/Sun Jan 11 10:24:59 2004/-kk/

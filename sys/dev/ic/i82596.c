@@ -146,7 +146,7 @@ static void iee_cb_setup(struct iee_softc *, uint32_t);
  * sc->sc_cl_align must be set to 1 or to the cache line size. When set to
  * 1 no special alignment of DMA descriptors is done. If sc->sc_cl_align != 1
  * it forces alignment of the data structures in the shared memory to a multiple
- * of sc->sc_cl_align. This is needed on archs like hp700 that have non DMA
+ * of sc->sc_cl_align. This is needed on some hppa machines that have non DMA
  * I/O coherent caches and are unable to map the shared memory uncachable.
  * (At least pre PA7100LC CPUs are unable to map memory uncachable.)
  * 
@@ -172,7 +172,7 @@ static void iee_cb_setup(struct iee_softc *, uint32_t);
  * 
  * The MD backend may call iee_detach() to detach the device.
  * 
- * See sys/arch/hp700/gsc/if_iee_gsc.c for an example.
+ * See sys/arch/hppa/gsc/if_iee_gsc.c for an example.
  */
 
 

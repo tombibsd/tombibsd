@@ -117,8 +117,6 @@ __eclock_init(device_t dev)
  * NB: At 10MHz, our 64bits FreeRunning is worth 58,426 years.
  */
 
-extern u_quad_t __qdivrem(u_quad_t uq, u_quad_t vq, u_quad_t *arq);
-
 
 static int
 eclock_gettime(struct todr_chip_handle *todr, struct timeval *tv)
@@ -140,14 +138,14 @@ eclock_gettime(struct todr_chip_handle *todr, struct timeval *tv)
 	/*
 	 * Big fight with the compiler here, it gets very confused by 64bits.
 	 */
-#if 0
+#if 1
 	/*
 	 * This is in C: 
 	 */
 	{
 		uint64_t freeS, freeU;
-		freeS = free / (10 * 1000 * 1000);
-		freeU = free % (10 * 1000 * 1000);
+		freeS = free / 10000000UL;
+		freeU = free % 10000000UL;
 		tv->tv_sec  = freeS;
 		tv->tv_usec = freeU / 10;
 #if 0

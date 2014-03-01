@@ -221,11 +221,6 @@ fdesc_modcmd(modcmd_t cmd, void *arg)
 			break;
 		sysctl_createv(&fdesc_sysctl_log, 0, NULL, NULL,
 			       CTLFLAG_PERMANENT,
-			       CTLTYPE_NODE, "vfs", NULL,
-			       NULL, 0, NULL, 0,
-			       CTL_VFS, CTL_EOL);
-		sysctl_createv(&fdesc_sysctl_log, 0, NULL, NULL,
-			       CTLFLAG_PERMANENT,
 			       CTLTYPE_NODE, "fdesc",
 			       SYSCTL_DESCR("File-descriptor file system"),
 			       NULL, 0, NULL, 0,

@@ -37,6 +37,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <machine/intr.h>
 
+#include <arm/armreg.h>
 #include <arm/cpu.h>
 #include <arm/pic/picvar.h>
 #include <arm/marvell/mvsocreg.h>

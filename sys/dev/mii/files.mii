@@ -148,3 +148,7 @@ file	dev/mii/etphy.c				etphy
 device	rdcphy: mii_phy
 attach	rdcphy at mii
 file	dev/mii/rdcphy.c			rdcphy
+
+device	micphy: mii_phy, ukphy_subr
+attach	micphy at mii
+file	dev/mii/micphy.c			micphy

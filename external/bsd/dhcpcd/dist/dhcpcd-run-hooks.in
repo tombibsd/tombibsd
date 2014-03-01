@@ -61,6 +61,21 @@ list_interfaces()
 	echo "$ifaces"
 }
 
+# Trim function
+trim()
+{
+	local var="$*"
+
+	var=${var#"${var%%[![:space:]]*}"}
+	var=${var%"${var##*[![:space:]]}"}
+	if [ -z "$var" ]; then
+		# So it seems our shell doesn't support wctype(3) patterns
+		# Fall back to sed
+		var=$(echo "$*" | sed -e 's/^[[:space:]]*//;s/[[:space:]]*$//')
+	fi
+	printf %s "$var"
+}
+
 # We normally use sed to extract values using a key from a list of files
 # but sed may not always be available at the time.
 key_get_value()

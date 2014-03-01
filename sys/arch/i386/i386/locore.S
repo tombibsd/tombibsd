@@ -727,8 +727,8 @@ begin:
 	/* Set up bootstrap stack. */
 	leal	(PROC0_STK_OFF+KERNBASE)(%esi),%eax
 	movl	%eax,_C_LABEL(lwp0uarea)
-	leal	(KSTACK_SIZE-FRAMESIZE)(%eax),%esp
-	movl	%esi,(KSTACK_SIZE+PCB_CR3)(%eax)	# pcb->pcb_cr3
+	leal	(USPACE-FRAMESIZE)(%eax),%esp
+	movl	%esi,PCB_CR3(%eax)	# pcb->pcb_cr3
 	xorl	%ebp,%ebp		# mark end of frames
 
 #if defined(MULTIBOOT)
@@ -825,7 +825,7 @@ begin:
 	movl	%esi, _C_LABEL(lwp0uarea)
 
 	/* Set up bootstrap stack. */
-	leal	(KSTACK_SIZE-FRAMESIZE)(%eax),%esp
+	leal	(USPACE-FRAMESIZE)(%eax),%esp
 	xorl	%ebp,%ebp		# mark end of frames
 
 	addl	$USPACE, %esi

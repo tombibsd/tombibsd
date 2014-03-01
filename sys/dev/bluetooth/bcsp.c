@@ -287,11 +287,6 @@ bcsp_attach(device_t parent __unused, device_t self, void *aux __unused)
 	/* Attach Bluetooth unit */
 	sc->sc_unit = hci_attach(&bcsp_hci, self, 0);
 
-	if ((rc = sysctl_createv(&sc->sc_log, 0, NULL, NULL,
-	    CTLFLAG_PERMANENT, CTLTYPE_NODE, "hw", NULL,
-	    NULL, 0, NULL, 0, CTL_HW, CTL_EOL)) != 0) {
-		goto err;
-	}
 	if ((rc = sysctl_createv(&sc->sc_log, 0, NULL, &node,
 	    0, CTLTYPE_NODE, device_xname(self),
 	    SYSCTL_DESCR("bcsp controls"),

@@ -1657,11 +1657,6 @@ sysctl_net_inet6_ip6_setup(struct sysctllog **clog)
 
 	sysctl_createv(clog, 0, NULL, NULL,
 		       CTLFLAG_PERMANENT,
-		       CTLTYPE_NODE, "net", NULL,
-		       NULL, 0, NULL, 0,
-		       CTL_NET, CTL_EOL);
-	sysctl_createv(clog, 0, NULL, NULL,
-		       CTLFLAG_PERMANENT,
 		       CTLTYPE_NODE, "inet6",
 		       SYSCTL_DESCR("PF_INET6 related settings"),
 		       NULL, 0, NULL, 0,

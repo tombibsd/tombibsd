@@ -1,5 +1,5 @@
 /Makefile.inc/1.42/Thu Feb 13 15:18:50 2014/-kk/
-/Makefile/1.43/Sun Jan 29 15:54:35 2012/-kk/
+/Makefile/1.44/Sat Mar  1 05:58:08 2014/-kk/
 D/acorn26////
 D/acorn32////
 D/alpha////
@@ -15,10 +15,10 @@ D/evbarm////
 D/evbppc////
 D/ews4800mips////
 D/hp300////
-D/hp700////
 D/hpcarm////
 D/hpcmips////
 D/hpcsh////
+D/hppa////
 D/i386////
 D/landisk////
 D/mac68k////

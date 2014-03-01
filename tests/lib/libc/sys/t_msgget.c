@@ -178,7 +178,7 @@ ATF_TC_BODY(msgget_init, tc)
 	ATF_CHECK(msgds.msg_perm.cgid == gid);
 	ATF_CHECK(msgds.msg_perm.mode == 0600);
 
-	if (abs(t - msgds.msg_ctime) > 5)
+	if (llabs(t - msgds.msg_ctime) > 5)
 		atf_tc_fail("msgget(2) initialized current time incorrectly");
 
 	ATF_REQUIRE(msgctl(id, IPC_RMID, 0) == 0);

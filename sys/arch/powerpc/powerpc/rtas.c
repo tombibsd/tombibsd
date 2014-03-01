@@ -101,7 +101,7 @@ rtas_attach(device_t parent, device_t self, void *aux)
 	int ph = ca->ca_node;
 	int ih;
 	int rtas_size;
-	int rtas_entry;
+	uintptr_t rtas_entry;
 	struct pglist pglist;
 	char buf[4];
 	int i;
@@ -157,8 +157,8 @@ rtas_attach(device_t parent, device_t self, void *aux)
 
 	rtas0_softc = sc;
 
-	printf(": version %d, entry @pa 0x%x\n", sc->ra_version,
-		(unsigned) rtas_entry);
+	printf(": version %d, entry @pa 0x%"PRIxPTR"\n", sc->ra_version,
+		rtas_entry);
 
 	/*
 	 * Initialise TODR support

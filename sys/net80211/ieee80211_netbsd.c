@@ -150,14 +150,9 @@ ieee80211_sysctl_treetop(struct sysctllog **log)
 	const struct sysctlnode *rnode;
 
 	if ((rc = sysctl_createv(log, 0, NULL, &rnode,
-	    CTLFLAG_PERMANENT, CTLTYPE_NODE, "net", NULL,
-	    NULL, 0, NULL, 0, CTL_NET, CTL_EOL)) != 0)
-		goto err;
-
-	if ((rc = sysctl_createv(log, 0, &rnode, &rnode,
 	    CTLFLAG_PERMANENT, CTLTYPE_NODE, "link",
 	    "link-layer statistics and controls",
-	    NULL, 0, NULL, 0, PF_LINK, CTL_EOL)) != 0)
+	    NULL, 0, NULL, 0, CTL_NET, PF_LINK, CTL_EOL)) != 0)
 		goto err;
 
 	if ((rc = sysctl_createv(log, 0, &rnode, &rnode,

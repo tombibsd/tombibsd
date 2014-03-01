@@ -560,14 +560,9 @@ SYSCTL_SETUP(sysctl_j720tp, "sysctl j720tp subtree setup")
 	int rc;
 
 	if ((rc = sysctl_createv(clog, 0, NULL, &rnode,
-	    CTLFLAG_PERMANENT, CTLTYPE_NODE, "hw", NULL,
-	    NULL, 0, NULL, 0, CTL_HW, CTL_EOL)) != 0)
-		goto err;
-
-	if ((rc = sysctl_createv(clog, 0, &rnode, &rnode,
 	    CTLFLAG_PERMANENT, CTLTYPE_NODE, "j720tp",
 	    SYSCTL_DESCR("Jornada 720 touch panel controls"),
-	    NULL, 0, NULL, 0, CTL_CREATE, CTL_EOL)) != 0)
+	    NULL, 0, NULL, 0, CTL_HW, CTL_CREATE, CTL_EOL)) != 0)
 		goto err;
 
 #ifdef J720TP_DEBUG

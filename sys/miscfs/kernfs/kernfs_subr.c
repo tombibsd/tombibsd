@@ -322,9 +322,11 @@ void
 kernfs_hashins(struct kernfs_node *pp)
 {
 	struct kfs_hashhead *ppp;
+	int error __diagused;
 
 	/* lock the kfsnode, then put it on the appropriate hash list */
-	VOP_LOCK(KERNFSTOV(pp), LK_EXCLUSIVE);
+	error = VOP_LOCK(KERNFSTOV(pp), LK_EXCLUSIVE);
+	KASSERT(error == 0);
 
 	mutex_enter(&kfs_ihash_lock);
 	ppp = &kfs_hashtbl[KFSVALUEHASH(pp->kfs_value)];

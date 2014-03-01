@@ -32,7 +32,8 @@ precho src/external/cddl/	osnet
 precho src/external/historical/	nawk
 precho src/usr.bin/		make xinstall config mktemp sed tsort
 precho src/usr.bin/		lorder join cksum m4 mkdep Makefile.inc
-precho src/usr.bin/		rump_server rump_allserver shmif_dumpbus
+precho src/usr.bin/		rump_server rump_allserver rump_wmd
+precho src/usr.bin/		shmif_dumpbus
 precho src/usr.sbin/		mtree
 
 # If -c is given, use CVS syntax to exclude large subdirectories

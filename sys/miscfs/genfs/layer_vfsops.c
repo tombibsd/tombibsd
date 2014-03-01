@@ -289,15 +289,6 @@ SYSCTL_SETUP(sysctl_vfs_layerfs_setup, "sysctl vfs.layerfs subtree setup")
 {
 	const struct sysctlnode *layerfs_node = NULL;
 
-	sysctl_createv(clog, 0, NULL, NULL,
-#ifdef _MODULE
-		       0,
-#else
-		       CTLFLAG_PERMANENT,
-#endif
-		       CTLTYPE_NODE, "vfs", NULL,
-		       NULL, 0, NULL, 0,
-		       CTL_VFS, CTL_EOL);
 	sysctl_createv(clog, 0, NULL, &layerfs_node,
 #ifdef _MODULE
 		       0,
@@ -307,7 +298,7 @@ SYSCTL_SETUP(sysctl_vfs_layerfs_setup, "sysctl vfs.layerfs subtree setup")
 		       CTLTYPE_NODE, "layerfs",
 		       SYSCTL_DESCR("Generic layered file system"),
 		       NULL, 0, NULL, 0,
-		       CTL_VFS, CTL_CREATE);
+		       CTL_VFS, CTL_CREATE, CTL_EOL);
 
 #ifdef LAYERFS_DIAGNOSTIC
 	sysctl_createv(clog, 0, &layerfs_node, NULL,

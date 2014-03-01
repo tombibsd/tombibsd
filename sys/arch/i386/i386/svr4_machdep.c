@@ -69,6 +69,8 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <machine/vmparam.h>
 #include <machine/svr4_machdep.h>
 
+#include <x86/fpu.h>
+
 static void svr4_getsiginfo(union svr4_siginfo *, int, u_long, void *);
 extern void (*svr4_fasttrap_vec)(void);
 void svr4_fasttrap(struct trapframe);
@@ -111,14 +113,11 @@ svr4_printmcontext(const char *fun, svr4_mcontext_t *mc)
 void
 svr4_setregs(struct lwp *l, struct exec_package *epp, vaddr_t stack)
 {
-	struct pcb *pcb = lwp_getpcb(l);
 	struct trapframe *tf = l->l_md.md_regs;
 
 	setregs(l, epp, stack);
-	if (i386_use_fxsave)
-		pcb->pcb_savefpu.sv_xmm.fx_cw = __SVR4_NPXCW__;
-	else
-		pcb->pcb_savefpu.sv_87.s87_cw = __SVR4_NPXCW__;
+	fpu_set_default_cw(l, __SVR4_NPXCW__);
+
 	tf->tf_cs = GSEL(GUCODEBIG_SEL, SEL_UPL);
 }
 

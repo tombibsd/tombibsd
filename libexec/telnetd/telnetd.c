@@ -650,9 +650,6 @@ terminaltypeok(char *s)
 {
     char buf[1024];
 
-    if (terminaltype == NULL)
-	return(1);
-
     /*
      * tgetent() will return 1 if the type is known, and
      * 0 if it is not known.  If it returns -1, it couldn't

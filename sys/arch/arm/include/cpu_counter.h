@@ -54,7 +54,7 @@ static __inline uint32_t
 cpu_counter32(void)
 {
 #if defined(CPU_CORTEX) && defined(CPU_ARM11)
-	const bool cortex_p = CPU_ID_CORTEX_P(curcpu()->ci_cpu_id);
+	const bool cortex_p = CPU_ID_CORTEX_P(curcpu()->ci_arm_cpuid);
 #elif defined(CPU_CORTEX)
 	const bool cortex_p = true;
 #elif defined(CPU_ARM11)

@@ -1040,11 +1040,6 @@ sysctl_proc_setup(void)
 {
 
 	sysctl_createv(&proc_sysctllog, 0, NULL, NULL,
-		       CTLFLAG_PERMANENT,
-		       CTLTYPE_NODE, "proc", NULL,
-		       NULL, 0, NULL, 0,
-		       CTL_PROC, CTL_EOL);
-	sysctl_createv(&proc_sysctllog, 0, NULL, NULL,
 		       CTLFLAG_PERMANENT|CTLFLAG_ANYNUMBER,
 		       CTLTYPE_NODE, "curproc",
 		       SYSCTL_DESCR("Per-process settings"),

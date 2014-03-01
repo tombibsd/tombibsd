@@ -25,11 +25,11 @@
 /t_mkdir.c/1.2/Sat Oct 15 07:38:31 2011/-kk/
 /t_mkfifo.c/1.2/Wed Nov  2 06:04:48 2011/-kk/
 /t_mknod.c/1.2/Sun Mar 18 07:00:52 2012/-kk/
-/t_mlock.c/1.4/Sat Sep  8 12:25:05 2012/-kk/
+/t_mlock.c/1.5/Sat Mar  1 06:05:17 2014/-kk/
 /t_mmap.c/1.7/Thu Jun 14 17:47:58 2012/-kk/
 /t_mprotect.c/1.3/Wed Jul 20 22:53:44 2011/-kk/
-/t_msgctl.c/1.3/Fri Nov 11 05:06:01 2011/-kk/
-/t_msgget.c/1.1/Sat Nov  5 07:45:41 2011/-kk/
+/t_msgctl.c/1.4/Sat Mar  1 06:05:17 2014/-kk/
+/t_msgget.c/1.2/Sat Mar  1 06:05:17 2014/-kk/
 /t_msgrcv.c/1.3/Thu Oct 24 10:28:58 2013/-kk/
 /t_msgsnd.c/1.2/Sat Nov  5 08:47:54 2011/-kk/
 /t_msync.c/1.2/Fri Mar 16 06:15:17 2012/-kk/

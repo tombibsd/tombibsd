@@ -49,6 +49,7 @@ atomic_swap_64(volatile uint64_t *addr, uint64_t new)
 
 #undef atomic_swap_64
 atomic_op_alias(atomic_swap_64,_atomic_swap_64)
+crt_alias(__sync_lock_test_and_set_8,_atomic_swap_64)
 #if defined(_LP64)
 #undef atomic_swap_ulong
 atomic_op_alias(atomic_swap_ulong,_atomic_swap_64)

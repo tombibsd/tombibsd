@@ -426,14 +426,10 @@ pr_args(struct kinfo_proc2 *kp)
 	left = argwidth;
 	argv = kvm_getargv2(kd, kp, (argwidth < 0) ? 0 : argwidth);
 	if (argv == 0) {
-		if (kp->p_comm == 0) {
-			goto nothing;
-		} else {
-			fmt_putc('(', &left);
-			fmt_puts((char *)kp->p_comm, &left);
-			fmt_putc(')', &left);
-			return;
-		}
+		fmt_putc('(', &left);
+		fmt_puts((char *)kp->p_comm, &left);
+		fmt_putc(')', &left);
+		return;
 	}
 	while (*argv) {
 		fmt_puts(*argv, &left);

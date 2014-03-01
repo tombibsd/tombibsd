@@ -141,7 +141,6 @@ ixp12x0_bs_map(void *t, bus_addr_t bpa, bus_size_t size,
 	paddr_t		pa;
 	paddr_t		offset;
 	vaddr_t		va;
-	pt_entry_t	*pte;
 
 	if ((pd = pmap_devmap_find_pa(bpa, size)) != NULL) {
 		/* Device was statically mapped. */
@@ -160,11 +159,12 @@ ixp12x0_bs_map(void *t, bus_addr_t bpa, bus_size_t size,
 
 	*bshp = va + offset;
 
+	const int pmapflags =
+	    (flags & (BUS_SPACE_MAP_CACHEABLE|BUS_SPACE_MAP_PREFETCHABLE))
+		? 0
+		: PMAP_NOCACHE;
 	for (pa = startpa; pa < endpa; pa += PAGE_SIZE, va += PAGE_SIZE) {
-		pmap_kenter_pa(va, pa, VM_PROT_READ | VM_PROT_WRITE, 0);
-		pte = vtopte(va);
-		*pte &= ~L2_S_CACHE_MASK;
-		PTE_SYNC(pte);
+		pmap_kenter_pa(va, pa, VM_PROT_READ | VM_PROT_WRITE, pmapflags);
 	}
 	pmap_update(pmap_kernel());
 

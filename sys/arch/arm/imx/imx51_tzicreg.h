@@ -25,7 +25,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 #ifndef _ARM_IMX_IMX51_TZICREG_H_
-#define	_ARM_IMX_IMX51_TZICRREG_H_
+#define	_ARM_IMX_IMX51_TZICREG_H_
 
 #include <sys/cdefs.h>
 
@@ -50,4 +50,4 @@
 #define	TZIC_SWINT		0x0f00
 
 #define	TZIC_INTNUM		128
-#endif /* _ARM_IMX_IMX51_TZICRREG_H_ */
+#endif /* _ARM_IMX_IMX51_TZICREG_H_ */

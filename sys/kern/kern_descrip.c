@@ -155,9 +155,6 @@ fd_sys_init(void)
 	KASSERT(filedesc_cache != NULL);
 
 	sysctl_createv(&clog, 0, NULL, NULL,
-		       CTLFLAG_PERMANENT, CTLTYPE_NODE, "kern", NULL,
-		       NULL, 0, NULL, 0, CTL_KERN, CTL_EOL);
-	sysctl_createv(&clog, 0, NULL, NULL,
 		       CTLFLAG_PERMANENT,
 		       CTLTYPE_STRUCT, "file",
 		       SYSCTL_DESCR("System open file table"),

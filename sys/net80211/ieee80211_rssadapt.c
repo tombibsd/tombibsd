@@ -148,13 +148,8 @@ SYSCTL_SETUP(sysctl_ieee80211_rssadapt,
 	const struct sysctlnode *node;
 
 	if ((rc = sysctl_createv(clog, 0, NULL, &node,
-	    CTLFLAG_PERMANENT, CTLTYPE_NODE, "net", NULL,
-	    NULL, 0, NULL, 0, CTL_NET, CTL_EOL)) != 0)
-		goto err;
-
-	if ((rc = sysctl_createv(clog, 0, &node, &node,
 	    CTLFLAG_PERMANENT, CTLTYPE_NODE, "link", NULL,
-	    NULL, 0, NULL, 0, PF_LINK, CTL_EOL)) != 0)
+	    NULL, 0, NULL, 0, CTL_NET, PF_LINK, CTL_EOL)) != 0)
 		goto err;
 
 	if ((rc = sysctl_createv(clog, 0, &node, &node,

@@ -53,6 +53,8 @@ extern int f_statustime;	/* use time of last mode change */
 extern int f_type;		/* add type character for non-regular files */
 extern int f_typedir;		/* add type character for directories */
 extern int f_nonprint;		/* show unprintables as ? */
+extern int f_fullpath;		/* print full pathname, not filename */
+extern int f_leafonly;		/* when recursing, print leaf names only */
 
 typedef struct {
 	FTSENT *list;

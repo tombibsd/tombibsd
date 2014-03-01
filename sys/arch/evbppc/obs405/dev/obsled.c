@@ -99,15 +99,6 @@ obsled_attach(device_t parent, device_t self, void *aux)
 
 	/* add sysctl interface */
 	err = sysctl_createv(NULL, 0,
-			NULL, NULL,
-			0, CTLTYPE_NODE,
-			"hw",
-			NULL,
-			NULL, 0, NULL, 0,
-			CTL_HW, CTL_EOL);
-	if (err != 0)
-		return;
-	err = sysctl_createv(NULL, 0,
 			NULL, (const struct sysctlnode **)&node,
 			0, CTLTYPE_NODE,
 			"obsled",

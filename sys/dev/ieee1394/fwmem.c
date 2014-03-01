@@ -73,12 +73,6 @@ SYSCTL_SETUP(sysctl_fwmem, "sysctl fwmem subtree setup")
 	int rc, fwmem_node_num;
 	const struct sysctlnode *node;
 
-	if ((rc = sysctl_createv(clog, 0, NULL, NULL,
-	    CTLFLAG_PERMANENT, CTLTYPE_NODE, "hw", NULL,
-	    NULL, 0, NULL, 0, CTL_HW, CTL_EOL)) != 0) {
-		goto err;
-	}
-
 	if ((rc = sysctl_createv(clog, 0, NULL, &node,
 	    CTLFLAG_PERMANENT, CTLTYPE_NODE, "fwmem",
 	    SYSCTL_DESCR("IEEE1394 Memory Access"),

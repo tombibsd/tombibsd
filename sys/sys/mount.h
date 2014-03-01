@@ -410,7 +410,6 @@ void	vfs_reinit(void);
 struct vfsops *vfs_getopsbyname(const char *);
 void	vfs_delref(struct vfsops *);
 void	vfs_destroy(struct mount *);
-void	vfs_scrubvnlist(struct mount *);
 struct mount *vfs_mountalloc(struct vfsops *, struct vnode *);
 int	vfs_stdextattrctl(struct mount *, int, struct vnode *,
 	    int, const char *);

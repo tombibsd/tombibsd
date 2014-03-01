@@ -145,10 +145,6 @@ cd9660_modcmd(modcmd_t cmd, void *arg)
 		if (error != 0)
 			break;
 		sysctl_createv(&cd9660_sysctl_log, 0, NULL, NULL,
-			       CTLFLAG_PERMANENT, CTLTYPE_NODE, "vfs", NULL,
-			       NULL, 0, NULL, 0,
-			       CTL_VFS, CTL_EOL);
-		sysctl_createv(&cd9660_sysctl_log, 0, NULL, NULL,
 			       CTLFLAG_PERMANENT, CTLTYPE_NODE, "cd9660",
 			       SYSCTL_DESCR("ISO-9660 file system"),
 			       NULL, 0, NULL, 0,

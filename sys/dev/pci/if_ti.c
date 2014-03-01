@@ -484,9 +484,6 @@ ti_handle_events(struct ti_softc *sc)
 {
 	struct ti_event_desc	*e;
 
-	if (sc->ti_rdata->ti_event_ring == NULL)
-		return;
-
 	while (sc->ti_ev_saved_considx != sc->ti_ev_prodidx.ti_idx) {
 		e = &sc->ti_rdata->ti_event_ring[sc->ti_ev_saved_considx];
 		switch (TI_EVENT_EVENT(e)) {
@@ -1009,9 +1006,6 @@ ti_free_tx_ring(struct ti_softc *sc)
 {
 	int		i;
 	struct txdmamap_pool_entry *dma;
-
-	if (sc->ti_rdata->ti_tx_ring == NULL)
-		return;
 
 	for (i = 0; i < TI_TX_RING_CNT; i++) {
 		if (sc->ti_cdata.ti_tx_chain[i] != NULL) {

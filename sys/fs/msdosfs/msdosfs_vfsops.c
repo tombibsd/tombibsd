@@ -158,11 +158,6 @@ msdos_modcmd(modcmd_t cmd, void *arg)
 			break;
 		sysctl_createv(&msdosfs_sysctl_log, 0, NULL, NULL,
 			       CTLFLAG_PERMANENT,
-			       CTLTYPE_NODE, "vfs", NULL,
-			       NULL, 0, NULL, 0,
-			       CTL_VFS, CTL_EOL);
-		sysctl_createv(&msdosfs_sysctl_log, 0, NULL, NULL,
-			       CTLFLAG_PERMANENT,
 			       CTLTYPE_NODE, "msdosfs",
 			       SYSCTL_DESCR("MS-DOS file system"),
 			       NULL, 0, NULL, 0,

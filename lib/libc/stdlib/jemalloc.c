@@ -263,6 +263,7 @@ __strerror_r(int e, char *s, size_t l)
 #  define QUANTUM_2POW_MIN	4
 #  define SIZEOF_PTR_2POW	2
 #  define USE_BRK
+#  define TINY_MIN_2POW		3
 #endif
 #if defined(__sparc__) && !defined(__sparc64__)
 #  define QUANTUM_2POW_MIN	4

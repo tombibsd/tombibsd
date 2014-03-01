@@ -792,7 +792,7 @@ TOOL_HEXDUMP		Ascii, decimal, hexadecimal, octal dump.  [hexdump]
 
 TOOL_HP300MKBOOT	Make bootable image for hp300.  [hp300-mkboot]
 
-TOOL_HP700MKBOOT	Make bootable image for hp700.  [hp700-mkboot]
+TOOL_HPPAMKBOOT		Make bootable image for hppa.  [hppa-mkboot]
 
 TOOL_INDXBIB		Make bibliographic database's inverted index.  [indxbib]
 

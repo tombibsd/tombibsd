@@ -32,8 +32,8 @@
  * SUCH DAMAGE.
  */
 
-#ifndef	_ARM_PROC_H_
-#define	_ARM_PROC_H_
+#ifndef _ARM_PROC_H_
+#define _ARM_PROC_H_
 
 /*
  * Machine-dependent part of the proc structure for arm.

@@ -1534,7 +1534,7 @@ udl_cmd_send_async_cb(usbd_xfer_handle xfer, usbd_private_handle priv,
 	TAILQ_REMOVE(&sc->sc_xfercmd, cmdq, cq_chain);
 	udl_cmdq_put(sc, cmdq);
 
-	/* wakeup xfer op that sleeps for a free xfer buffer */
+	/* signal xfer op that sleeps for a free xfer buffer */
 	cv_signal(&sc->sc_cv);
 	mutex_exit(&sc->sc_mtx);
 }

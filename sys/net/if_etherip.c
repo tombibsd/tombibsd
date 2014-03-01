@@ -643,14 +643,6 @@ SYSCTL_SETUP(sysctl_etherip_setup, "sysctl net.link.etherip subtree setup")
 
 	error = sysctl_createv(clog, 0, NULL, NULL,
 			       CTLFLAG_PERMANENT,
-			       CTLTYPE_NODE, "net", NULL,
-			       NULL, 0, NULL, 0,
-			       CTL_NET, CTL_EOL);
-	if (error)
-		return;
-
-	error = sysctl_createv(clog, 0, NULL, NULL,
-			       CTLFLAG_PERMANENT,
 			       CTLTYPE_NODE, "link", NULL,
 			       NULL, 0, NULL, 0,
 			       CTL_NET, AF_LINK, CTL_EOL);

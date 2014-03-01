@@ -179,14 +179,10 @@ sony_walk_cb(ACPI_HANDLE hnd, uint32_t v, void *context, void **status)
 	for (ptr = buf; *ptr; ptr++)
 		*ptr = tolower(*ptr);
 
-	if ((rv = sysctl_createv(&sc->sc_log, 0, NULL, &node, CTLFLAG_PERMANENT,
-	    CTLTYPE_NODE, "hw", NULL, NULL, 0, NULL, 0, CTL_HW, CTL_EOL)) != 0)
-		goto out;
-
-	if ((rv = sysctl_createv(&sc->sc_log, 0, &node, &snode, 0,
+	if ((rv = sysctl_createv(&sc->sc_log, 0, NULL, &snode, 0,
 	    CTLTYPE_NODE, device_xname(sc->sc_dev),
 	    SYSCTL_DESCR("sony controls"),
-	    NULL, 0, NULL, 0, CTL_CREATE, CTL_EOL)) != 0)
+	    NULL, 0, NULL, 0, CTL_HW, CTL_CREATE, CTL_EOL)) != 0)
 		goto out;
 
 	if ((rv = sysctl_createv(&sc->sc_log, 0, &snode, &node,

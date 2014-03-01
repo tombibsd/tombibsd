@@ -64,6 +64,7 @@ __RCSID("$NetBSD$");
 #include <machine/pmap.h>
 #include <machine/kcore.h>
 #include <machine/vmparam.h>
+#include <machine/param.h>
 
 #include <limits.h>
 #include <db.h>
@@ -210,7 +211,7 @@ _kvm_kvatop(kvm_t *kd, vaddr_t va, paddr_t *pa)
 	 * XXXX -- We could support multiple page sizes.
 	 */
 	va = va & (kd->nbpg - 1);
-	data &= TLB_PA_MASK;
+	data &= SUN4U_TLB_PA_MASK; /* XXX handle sun4u/sun4v */
 	*pa = data + va;
 
 	/*

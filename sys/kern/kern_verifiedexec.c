@@ -199,16 +199,10 @@ SYSCTL_SETUP(sysctl_kern_veriexec_setup, "sysctl kern.veriexec setup")
 
 	sysctl_createv(clog, 0, NULL, &rnode,
 		       CTLFLAG_PERMANENT,
-		       CTLTYPE_NODE, "kern", NULL,
-		       NULL, 0, NULL, 0,
-		       CTL_KERN, CTL_EOL);
-
-	sysctl_createv(clog, 0, &rnode, &rnode,
-		       CTLFLAG_PERMANENT,
 		       CTLTYPE_NODE, "veriexec",
 		       SYSCTL_DESCR("Veriexec"),
 		       NULL, 0, NULL, 0,
-		       CTL_CREATE, CTL_EOL);
+		       CTL_KERN, CTL_CREATE, CTL_EOL);
 
 	sysctl_createv(clog, 0, &rnode, NULL,
 		       CTLFLAG_PERMANENT|CTLFLAG_READWRITE,

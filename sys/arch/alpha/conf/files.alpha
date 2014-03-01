@@ -275,6 +275,10 @@ file	arch/alpha/pci/tsp_pci.c	tsp
 file	arch/alpha/pci/tsp_bus_io.c	tsp
 file	arch/alpha/pci/tsp_bus_mem.c	tsp
 
+device	tsciic: i2cbus, i2c_bitbang
+attach	tsciic at tsc
+file	arch/alpha/pci/tsciic.c	tsciic	needs-flag
+
 device	ttwoga { hose = -1 }
 attach	ttwoga at mainbus
 # identical to pcibus

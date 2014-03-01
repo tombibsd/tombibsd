@@ -2,7 +2,7 @@
 #
 # Process this file with autoconf to produce a configure script.
 
-AC_INIT([netpgp],[20140210],[Alistair Crooks <agc@netbsd.org> c0596823])
+AC_INIT([netpgp],[20140220],[Alistair Crooks <agc@netbsd.org> c0596823])
 AC_PREREQ(2.63)
 AC_REVISION([$Revision$])
 
@@ -22,6 +22,7 @@ AC_SUBST([CANONICAL_HOST])
 # Checks for programs.
 #
 AC_PROG_MAKE_SET
+AM_PROG_AR
 AC_PROG_AWK
 AC_PROG_CC
 AC_PROG_INSTALL

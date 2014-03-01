@@ -132,11 +132,6 @@ lua_attach(device_t parent, device_t self, void *aux)
 	pmf_device_register(self, NULL, NULL);
 
 	/* Sysctl to provide some control over behaviour */
-	sysctl_createv(NULL, 0, NULL, NULL,
-            CTLFLAG_PERMANENT,
-            CTLTYPE_NODE, "kern", NULL,
-            NULL, 0, NULL, 0,
-            CTL_KERN, CTL_EOL);
         sysctl_createv(&sc->sc_log, 0, NULL, &node,
             CTLFLAG_OWNDESC,
             CTLTYPE_NODE, "lua",

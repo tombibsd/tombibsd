@@ -17,7 +17,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 extern const struct cdevsw npf_cdevsw;
 
-RUMP_COMPONENT(RUMP_COMPONENT_DEV)
+RUMP_COMPONENT(RUMP_COMPONENT_NET)
 {
 	devmajor_t bmajor = NODEVMAJOR, cmajor = NODEVMAJOR;
 	int error;

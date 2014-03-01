@@ -125,6 +125,15 @@ el_set(EditLine *el, int op, ...)
 		break;
 	}
 
+	case EL_PROMPT_ESC:
+	case EL_RPROMPT_ESC: {
+		el_pfunc_t p = va_arg(ap, el_pfunc_t);
+		int c = va_arg(ap, int);
+
+		ret = prompt_set(el, p, c, op, 0);
+		break;
+	}
+
 	case EL_TERMINAL:       /* const char * */
 		ret = el_wset(el, op, va_arg(ap, char *));
 		break;
@@ -220,27 +229,31 @@ el_set(EditLine *el, int op, ...)
 		el->el_flags |= NARROW_HISTORY;
 		break;
 	}
+
 	/* XXX: do we need to change el_rfunc_t? */
 	case EL_GETCFN:         /* el_rfunc_t */
 		ret = el_wset(el, op, va_arg(ap, el_rfunc_t));
 		el->el_flags |= NARROW_READ;
 		break;
+
 	case EL_CLIENTDATA:     /* void * */
 		ret = el_wset(el, op, va_arg(ap, void *));
 		break;
+
 	case EL_SETFP: {          /* int, FILE * */
 		int what = va_arg(ap, int);
 		FILE *fp = va_arg(ap, FILE *);
 		ret = el_wset(el, op, what, fp);
 		break;
 	}
-	case EL_PROMPT_ESC: /* el_pfunc_t, char */
-	case EL_RPROMPT_ESC: {
-		el_pfunc_t p = va_arg(ap, el_pfunc_t);
-		char c = (char)va_arg(ap, int);
-		ret = prompt_set(el, p, c, op, 0);
+
+	case EL_REFRESH:
+		re_clear_display(el);
+		re_refresh(el);
+		terminal__flush(el);
+		ret = 0;
 		break;
-	}
+
 	default:
 		ret = -1;
 		break;

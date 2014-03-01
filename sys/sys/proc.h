@@ -453,8 +453,6 @@ extern const struct proclist_desc proclists[];
 
 extern struct pool	ptimer_pool;	/* Memory pool for ptimers */
 
-struct simplelock;
-
 proc_t *	proc_find_raw(pid_t);
 proc_t *	proc_find(pid_t);		/* Find process by ID */
 struct pgrp *	pgrp_find(pid_t);		/* Find process group by ID */

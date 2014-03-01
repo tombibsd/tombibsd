@@ -134,15 +134,9 @@ sysctl_security_overlay_setup(struct sysctllog **clog)
 
 	sysctl_createv(clog, 0, NULL, &rnode,
 		       CTLFLAG_PERMANENT,
-		       CTLTYPE_NODE, "security", NULL,
-		       NULL, 0, NULL, 0,
-		       CTL_SECURITY, CTL_EOL);
-
-	sysctl_createv(clog, 0, &rnode, &rnode,
-		       CTLFLAG_PERMANENT,
 		       CTLTYPE_NODE, "models", NULL,
 		       NULL, 0, NULL, 0,
-		       CTL_CREATE, CTL_EOL);
+		       CTL_SECURITY, CTL_CREATE, CTL_EOL);
 
 	sysctl_createv(clog, 0, &rnode, &rnode,
 		       CTLFLAG_PERMANENT,

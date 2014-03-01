@@ -161,7 +161,11 @@ posix_memalign(void **ptr, size_t align, size_t size)
 #endif
 
 #ifndef __printflike
+#ifdef __GNUC__
+#define __printflike(a,b) __attribute__((__format__ (__printf__,a,b)))
+#else
 #define __printflike(a,b)
+#endif
 #endif
 
 #ifndef __noinline

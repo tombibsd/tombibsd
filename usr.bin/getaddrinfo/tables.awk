@@ -38,7 +38,7 @@ BEGIN {
 	next
 }
 
-$2 ~ /^AF_[A-Z0-9_]*$/ {
+($2 ~ /^AF_[A-Z0-9_]*$/) && ($2 != "AF_MAX") {
 	afs[n_afs++] = substr($2, 4)
 }
 

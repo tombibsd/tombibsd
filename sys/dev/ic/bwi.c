@@ -610,14 +610,9 @@ SYSCTL_SETUP(sysctl_bwi, "sysctl bwi(4) subtree setup")
 	const struct sysctlnode *cnode;
 
 	if ((rc = sysctl_createv(clog, 0, NULL, &rnode,
-	    CTLFLAG_PERMANENT, CTLTYPE_NODE, "hw", NULL,
-	    NULL, 0, NULL, 0, CTL_HW, CTL_EOL)) != 0)
-		goto err;
-
-	if ((rc = sysctl_createv(clog, 0, &rnode, &rnode,
 	    CTLFLAG_PERMANENT, CTLTYPE_NODE, "bwi",
 	    SYSCTL_DESCR("bwi global controls"),
-	    NULL, 0, NULL, 0, CTL_CREATE, CTL_EOL)) != 0)
+	    NULL, 0, NULL, 0, CTL_HW, CTL_CREATE, CTL_EOL)) != 0)
 		goto err;
 
 	if ((rc = sysctl_createv(clog, 0, &rnode, &cnode,
@@ -643,14 +638,9 @@ bwi_sysctlattach(struct bwi_softc *sc)
 	struct sysctllog **clog = &sc->sc_sysctllog;
 
 	if ((rc = sysctl_createv(clog, 0, NULL, &rnode,
-	    CTLFLAG_PERMANENT, CTLTYPE_NODE, "hw", NULL,
-	    NULL, 0, NULL, 0, CTL_HW, CTL_EOL)) != 0)
-		goto err;
-
-	if ((rc = sysctl_createv(clog, 0, &rnode, &rnode,
 	    CTLFLAG_PERMANENT, CTLTYPE_NODE, device_xname(sc->sc_dev),
 	    SYSCTL_DESCR("bwi controls and statistics"),
-	    NULL, 0, NULL, 0, CTL_CREATE, CTL_EOL)) != 0)
+	    NULL, 0, NULL, 0, CTL_HW, CTL_CREATE, CTL_EOL)) != 0)
 		goto err;
 
 	if ((rc = sysctl_createv(clog, 0, &rnode, &cnode,

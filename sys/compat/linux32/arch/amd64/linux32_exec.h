@@ -41,7 +41,8 @@
 
 #define LINUX32_DEBUGLINK_SIGNATURE	1
 
-#define LINUX32_ELF_AUX_ENTRIES 14
+/* Counted from common/linux32_exec_elf32.c */
+#define LINUX32_ELF_AUX_ENTRIES 15
 
 #define LINUX32_RANDOM_BYTES 16		/* 16 bytes for AT_RANDOM */
 

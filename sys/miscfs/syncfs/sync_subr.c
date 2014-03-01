@@ -304,16 +304,10 @@ sysctl_vfs_syncfs_setup(struct sysctllog **clog)
 
 	sysctl_createv(clog, 0, NULL, &rnode,
 			CTLFLAG_PERMANENT,
-			CTLTYPE_NODE, "vfs", NULL,
-			NULL, 0, NULL, 0,
-			CTL_VFS, CTL_EOL);
-
-	sysctl_createv(clog, 0, &rnode, &rnode,
-			CTLFLAG_PERMANENT,
 			CTLTYPE_NODE, "sync",
 			SYSCTL_DESCR("syncer options"),
 			NULL, 0, NULL, 0,
-			CTL_CREATE, CTL_EOL);
+			CTL_VFS, CTL_CREATE, CTL_EOL);
 
 	sysctl_createv(clog, 0, &rnode, &cnode,
 			CTLFLAG_PERMANENT|CTLFLAG_READWRITE,

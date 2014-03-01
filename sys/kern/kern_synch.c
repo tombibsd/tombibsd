@@ -95,7 +95,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/intr.h>
 #include <sys/lwpctl.h>
 #include <sys/atomic.h>
-#include <sys/simplelock.h>
 #include <sys/syslog.h>
 
 #include <uvm/uvm_extern.h>

@@ -157,7 +157,7 @@ uvm_kmguard_free(struct uvm_kmguard *kg, size_t len, void *p)
 {
 	vaddr_t va;
 	u_int rotor;
-	void **c;
+	void **c __diagused;
 
 	if (len > MAXSIZE) {
 		return false;

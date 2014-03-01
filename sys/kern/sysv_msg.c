@@ -1253,11 +1253,6 @@ SYSCTL_SETUP(sysctl_ipc_msg_setup, "sysctl kern.ipc subtree setup")
 {
 	const struct sysctlnode *node = NULL;
 
-	sysctl_createv(clog, 0, NULL, NULL,
-		CTLFLAG_PERMANENT,
-		CTLTYPE_NODE, "kern", NULL,
-		NULL, 0, NULL, 0,
-		CTL_KERN, CTL_EOL);
 	sysctl_createv(clog, 0, NULL, &node,
 		CTLFLAG_PERMANENT,
 		CTLTYPE_NODE, "ipc",

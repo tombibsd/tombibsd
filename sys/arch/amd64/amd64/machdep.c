@@ -467,7 +467,7 @@ x86_64_proc0_tss_ldt_init(void)
 	pcb->pcb_flags = 0;
 	pcb->pcb_fs = 0;
 	pcb->pcb_gs = 0;
-	pcb->pcb_rsp0 = (uvm_lwp_getuarea(l) + KSTACK_SIZE - 16) & ~0xf;
+	pcb->pcb_rsp0 = (uvm_lwp_getuarea(l) + USPACE - 16) & ~0xf;
 	pcb->pcb_iopl = SEL_KPL;
 
 	pmap_kernel()->pm_ldt_sel = GSYSSEL(GLDT_SEL, SEL_KPL);
@@ -509,27 +509,6 @@ cpu_init_tss(struct cpu_info *ci)
 	p = uvm_km_alloc(kernel_map, PAGE_SIZE, 0, UVM_KMF_WIRED);
 	tss->tss_ist[2] = p + PAGE_SIZE - 16;
 	ci->ci_tss_sel = tss_alloc(tss);
-}
-
-SYSCTL_SETUP(sysctl_machdep_setup, "sysctl machdep subtree setup")
-{
-	x86_sysctl_machdep_setup(clog);
-
-	sysctl_createv(clog, 0, NULL, NULL,
-		       CTLFLAG_PERMANENT | CTLFLAG_IMMEDIATE,
-		       CTLTYPE_INT, "fpu_present", NULL,
-		       NULL, 1, NULL, 0,
-		       CTL_MACHDEP, CPU_FPU_PRESENT, CTL_EOL);
-	sysctl_createv(clog, 0, NULL, NULL,
-		       CTLFLAG_PERMANENT | CTLFLAG_IMMEDIATE,
-		       CTLTYPE_INT, "sse", NULL,
-		       NULL, 1, NULL, 0,
-		       CTL_MACHDEP, CPU_SSE, CTL_EOL);
-	sysctl_createv(clog, 0, NULL, NULL,
-		       CTLFLAG_PERMANENT | CTLFLAG_IMMEDIATE,
-		       CTLTYPE_INT, "sse2", NULL,
-		       NULL, 1, NULL, 0,
-		       CTL_MACHDEP, CPU_SSE2, CTL_EOL);
 }
 
 void

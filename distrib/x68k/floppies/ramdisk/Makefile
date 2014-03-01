@@ -4,7 +4,7 @@
 .include "${NETBSDSRCDIR}/distrib/common/Makefile.distrib"
 
 IMAGE=			inst.fs
-IMAGESIZE=		1500k
+IMAGESIZE=		1600k
 # `floppy-root' cannot be used now, due to size issue.
 #IMAGE_RELEASEDIR=	installation/floppy
 

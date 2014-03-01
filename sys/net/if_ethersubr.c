@@ -852,6 +852,10 @@ ether_input(struct ifnet *ifp, struct mbuf *m)
 #endif
 #ifdef INET6
 		case ETHERTYPE_IPV6:
+			if (__predict_false(!in6_present)) {
+				m_freem(m);
+				return;
+			}
 #ifdef GATEWAY  
 			if (ip6flow_fastforward(&m))
 				return;

@@ -1,4 +1,4 @@
-/Makefile/1.607/Thu Feb 13 15:22:08 2014/-kk/
+/Makefile/1.608/Sat Mar  1 06:04:18 2014/-kk/
 /aac.4/1.14/Sat Feb 19 10:54:31 2011/-kk/
 /ac97.4/1.2/Wed Jun 22 04:19:09 2005/-kk/
 /acardide.4/1.4/Mon Oct 19 18:41:08 2009/-kk/
@@ -142,7 +142,7 @@
 /cz.4/1.6/Thu Oct 24 10:28:54 2013/-kk/
 /daic.4/1.10/Wed Apr 30 13:10:53 2008/-kk/
 /dbcool.4/1.10/Sat Mar 12 13:24:15 2011/-kk/
-/ddb.4/1.154/Thu Oct 24 10:28:54 2013/-kk/
+/ddb.4/1.155/Sat Mar  1 06:04:18 2014/-kk/
 /ddc.4/1.4/Tue Jan 14 16:04:49 2014/-kk/
 /de.4/1.10/Tue Mar 13 19:25:39 2012/-kk/
 /dge.4/1.9/Thu Oct 24 10:28:54 2013/-kk/
@@ -227,7 +227,7 @@
 /hcide.4/1.7/Fri Apr 10 15:23:31 2009/-kk/
 /hdaudio.4/1.13/Thu Oct 24 10:28:54 2013/-kk/
 /hifn.4/1.7/Tue Mar 13 19:25:40 2012/-kk/
-/hil.4/1.1/Wed Feb  9 15:12:41 2011/-kk/
+/hil.4/1.2/Sat Mar  1 06:04:18 2014/-kk/
 /hilid.4/1.1/Wed Feb  9 15:12:41 2011/-kk/
 /hilkbd.4/1.1/Wed Feb  9 15:12:41 2011/-kk/
 /hilms.4/1.1/Wed Feb  9 15:12:41 2011/-kk/
@@ -243,7 +243,7 @@
 /icmp6.4/1.17/Mon Mar 22 18:58:31 2010/-kk/
 /icp.4/1.6/Sun Oct 14 10:05:55 2012/-kk/
 /icsphy.4/1.4/Wed Apr 30 13:10:54 2008/-kk/
-/iee.4/1.7/Tue Dec 17 04:13:19 2013/-kk/
+/iee.4/1.8/Sat Mar  1 06:04:18 2014/-kk/
 /ieee1394if.4/1.3/Sun Aug 28 15:22:06 2005/-kk/
 /ieee80211.4/1.4/Thu Feb 26 12:53:35 2009/-kk/
 /ifmedia.4/1.29/Fri Apr 10 17:07:15 2009/-kk/
@@ -342,7 +342,7 @@
 /msm6242b.4/1.3/Wed Nov 14 23:16:18 2012/-kk/
 /mtd.4/1.5/Thu Oct 24 10:28:54 2013/-kk/
 /mtio.4/1.17/Mon Mar 22 18:58:31 2010/-kk/
-/multicast.4/1.6/Tue Mar 13 19:25:40 2012/-kk/
+/multicast.4/1.7/Sat Mar  1 06:04:19 2014/-kk/
 /mvsata.4/1.4/Thu Oct 24 10:28:54 2013/-kk/
 /nadb.4/1.3/Mon Mar  9 19:24:28 2009/-kk/
 /nca.4/1.6/Thu Apr  1 04:04:11 2010/-kk/
@@ -366,11 +366,11 @@
 /ofisa.4/1.4/Wed Apr 30 13:10:54 2008/-kk/
 /ohci.4/1.8/Wed Apr 30 13:10:54 2008/-kk/
 /onewire.4/1.4/Thu Oct 24 10:28:54 2013/-kk/
-/oosiop.4/1.5/Wed May 14 13:29:27 2008/-kk/
+/oosiop.4/1.6/Sat Mar  1 06:04:19 2014/-kk/
 /opl.4/1.21/Sat Jan  3 18:27:19 2009/-kk/
 /optiide.4/1.3/Mon Oct 19 18:41:09 2009/-kk/
 /options.4/1.434/Thu Feb 13 15:35:43 2014/-kk/
-/osiop.4/1.6/Wed May 14 13:29:27 2008/-kk/
+/osiop.4/1.7/Sat Mar  1 06:04:19 2014/-kk/
 /otus.4/1.6/Thu Oct 24 10:28:54 2013/-kk/
 /owtemp.4/1.3/Thu Oct 24 10:28:54 2013/-kk/
 /pad.4/1.4/Thu Oct 24 10:28:54 2013/-kk/
@@ -465,7 +465,7 @@
 /shpcic.4/1.1/Thu Sep 15 15:04:55 2005/-kk/
 /si.4/1.10/Mon Jun 20 13:25:24 2005/-kk/
 /siisata.4/1.4/Thu Oct 24 10:28:54 2013/-kk/
-/siop.4/1.18/Thu Apr 28 16:11:37 2011/-kk/
+/siop.4/1.19/Sat Mar  1 06:04:19 2014/-kk/
 /sip.4/1.5/Wed Apr 30 13:10:54 2008/-kk/
 /siside.4/1.3/Mon Oct 19 18:41:09 2009/-kk/
 /sk.4/1.17/Thu Oct 24 10:28:54 2013/-kk/
@@ -650,10 +650,10 @@ D/man4.evbarm////
 D/man4.evbmips////
 D/man4.evbppc////
 D/man4.hp300////
-D/man4.hp700////
 D/man4.hpcarm////
 D/man4.hpcmips////
 D/man4.hpcsh////
+D/man4.hppa////
 D/man4.i386////
 D/man4.mac68k////
 D/man4.macppc////

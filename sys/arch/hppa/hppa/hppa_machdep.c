@@ -50,7 +50,7 @@ char	machine_arch[] = MACHINE_ARCH;	/* from <machine/param.h> */
 
 /*
  * XXX fredette - much of the TLB trap handler setup should
- * probably be moved here from hp700/hp700/machdep.c, seeing
+ * probably be moved here from hppa/hppa/machdep.c, seeing
  * that there's related code already in hppa/hppa/trap.S.
  */
 

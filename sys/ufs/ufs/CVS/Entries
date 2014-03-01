@@ -11,10 +11,10 @@
 /quota2_subr.c/1.5/Sun Feb  5 14:19:04 2012/-kk/
 /ufs_bmap.c/1.50/Thu Oct 24 10:28:58 2013/-kk/
 /ufs_bswap.h/1.20/Thu Oct 24 10:28:58 2013/-kk/
-/ufs_dirhash.c/1.35/Thu Oct 24 10:28:58 2013/-kk/
+/ufs_dirhash.c/1.36/Sat Mar  1 06:05:16 2014/-kk/
 /ufs_extattr.c/1.43/Thu Feb 13 15:36:03 2014/-kk/
 /ufs_extern.h/1.73/Thu Oct 24 10:28:58 2013/-kk/
-/ufs_ihash.c/1.31/Sun Jun 12 03:36:02 2011/-kk/
+/ufs_ihash.c/1.32/Sat Mar  1 06:05:16 2014/-kk/
 /ufs_inode.c/1.89/Thu Oct 24 10:28:58 2013/-kk/
 /ufs_lookup.c/1.129/Thu Feb 13 15:36:03 2014/-kk/
 /ufs_quota.c/1.115/Tue Nov 26 03:29:59 2013/-kk/

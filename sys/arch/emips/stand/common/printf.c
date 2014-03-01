@@ -19,6 +19,7 @@
  */
 
 #include <lib/libsa/stand.h>
+#include "common.h"
 
 void
 xputchar(int ch)

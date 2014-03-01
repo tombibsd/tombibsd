@@ -12,7 +12,7 @@ DPADD+=	${LIBUTIL} ${LIBKVM} ${LIBEDIT} ${LIBTERMINFO}
 # some ddb kernel components need limited modifications.  for now,
 # punt if not noted as implemented here.
 .if    ${MACHINE} == "amd64" \
-    || ${MACHINE} == "hp700" \
+    || ${MACHINE} == "hppa" \
     || ${MACHINE} == "i386" \
     || ${MACHINE} == "sparc64" \
     || (${MACHINE_ARCH} == "arm" && ${MACHINE} != "acorn26") \

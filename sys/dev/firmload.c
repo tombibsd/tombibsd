@@ -122,13 +122,6 @@ SYSCTL_SETUP_PROTO(sysctl_hw_firmware_setup);
 SYSCTL_SETUP(sysctl_hw_firmware_setup, "sysctl hw.firmware subtree setup")
 {
 	const struct sysctlnode *firmware_node;
-
-	if (sysctl_createv(clog, 0, NULL, NULL,
-	    CTLFLAG_PERMANENT,
-	    CTLTYPE_NODE, "hw", NULL,
-	    NULL, 0, NULL, 0,
-	    CTL_HW, CTL_EOL) != 0)
-	    	return;
 	
 	if (sysctl_createv(clog, 0, NULL, &firmware_node,
 	    CTLFLAG_PERMANENT,

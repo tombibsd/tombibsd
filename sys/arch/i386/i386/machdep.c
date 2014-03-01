@@ -142,6 +142,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <machine/mtrr.h>
 #include <x86/x86/tsc.h>
 
+#include <x86/fpu.h>
 #include <x86/machdep.h>
 
 #include <machine/multiboot.h>
@@ -500,7 +501,7 @@ i386_proc0_tss_ldt_init(void)
 
 	pmap_kernel()->pm_ldt_sel = GSEL(GLDT_SEL, SEL_KPL);
 	pcb->pcb_cr0 = rcr0() & ~CR0_TS;
-	pcb->pcb_esp0 = uvm_lwp_getuarea(l) + KSTACK_SIZE - 16;
+	pcb->pcb_esp0 = uvm_lwp_getuarea(l) + USPACE - 16;
 	pcb->pcb_iopl = SEL_KPL;
 	l->l_md.md_regs = (struct trapframe *)pcb->pcb_esp0 - 1;
 	memcpy(&pcb->pcb_fsd, &gdt[GUDATA_SEL], sizeof(pcb->pcb_fsd));
@@ -588,47 +589,6 @@ cpu_init_tss(struct cpu_info *ci)
 	ci->ci_tss_sel = tss_alloc(tss);
 }
 #endif /* XEN */
-
-/*
- * machine dependent system variables.
- */
-SYSCTL_SETUP(sysctl_machdep_setup, "sysctl machdep subtree setup")
-{
-	x86_sysctl_machdep_setup(clog);
-
-#ifndef XEN
-	sysctl_createv(clog, 0, NULL, NULL,
-		       CTLFLAG_PERMANENT,
-		       CTLTYPE_INT, "biosbasemem", NULL,
-		       NULL, 0, &biosbasemem, 0,
-		       CTL_MACHDEP, CPU_BIOSBASEMEM, CTL_EOL);
-	sysctl_createv(clog, 0, NULL, NULL,
-		       CTLFLAG_PERMANENT,
-		       CTLTYPE_INT, "biosextmem", NULL,
-		       NULL, 0, &biosextmem, 0,
-		       CTL_MACHDEP, CPU_BIOSEXTMEM, CTL_EOL);
-#endif /* XEN */
-	sysctl_createv(clog, 0, NULL, NULL,
-		       CTLFLAG_PERMANENT,
-		       CTLTYPE_INT, "osfxsr", NULL,
-		       NULL, 0, &i386_use_fxsave, 0,
-		       CTL_MACHDEP, CPU_OSFXSR, CTL_EOL);
-	sysctl_createv(clog, 0, NULL, NULL,
-		       CTLFLAG_PERMANENT,
-		       CTLTYPE_INT, "fpu_present", NULL,
-		       NULL, 0, &i386_fpu_present, 0,
-		       CTL_MACHDEP, CPU_FPU_PRESENT, CTL_EOL);
-	sysctl_createv(clog, 0, NULL, NULL,
-		       CTLFLAG_PERMANENT,
-		       CTLTYPE_INT, "sse", NULL,
-		       NULL, 0, &i386_has_sse, 0,
-		       CTL_MACHDEP, CPU_SSE, CTL_EOL);
-	sysctl_createv(clog, 0, NULL, NULL,
-		       CTLFLAG_PERMANENT,
-		       CTLTYPE_INT, "sse2", NULL,
-		       NULL, 0, &i386_has_sse2, 0,
-		       CTL_MACHDEP, CPU_SSE2, CTL_EOL);
-}
 
 void *
 getframe(struct lwp *l, int sig, int *onstack)
@@ -1225,12 +1185,6 @@ init386(paddr_t first_avail)
 	uvm_setpagesize();
 
 	/*
-	 * Saving SSE registers won't work if the save area isn't
-	 * 16-byte aligned.
-	 */
-	KASSERT((offsetof(struct pcb, pcb_savefpu) & 0xf) == 0);
-
-	/*
 	 * Start with 2 color bins -- this is just a guess to get us
 	 * started.  We'll recolor when we determine the largest cache
 	 * sizes on the system.
@@ -1580,7 +1534,6 @@ cpu_getmcontext(struct lwp *l, mcontext_t *mcp, unsigned int *flags)
 {
 	const struct trapframe *tf = l->l_md.md_regs;
 	__greg_t *gr = mcp->__gregs;
-	struct pcb *pcb;
 	__greg_t ras_eip;
 
 	/* Save register context. */
@@ -1633,7 +1586,7 @@ cpu_getmcontext(struct lwp *l, mcontext_t *mcp, unsigned int *flags)
 	 * It wouldn't matter if we were doing the copyout here.
 	 * So we might as well convert to fxsave format.
 	 */
-	__CTASSERT(sizeof pcb->pcb_savefpu.sv_xmm ==
+	__CTASSERT(sizeof (struct fxsave) ==
 	    sizeof mcp->__fpregs.__fp_reg_set.__fp_xmm_state);
 	process_read_fpregs_xmm(l, (struct fxsave *)
 	    &mcp->__fpregs.__fp_reg_set.__fp_xmm_state);
@@ -1666,7 +1619,6 @@ cpu_setmcontext(struct lwp *l, const mcontext_t *mcp, unsigned int flags)
 {
 	struct trapframe *tf = l->l_md.md_regs;
 	const __greg_t *gr = mcp->__gregs;
-	struct pcb *pcb = lwp_getpcb(l);
 	struct proc *p = l->l_proc;
 	int error;
 
@@ -1716,9 +1668,9 @@ cpu_setmcontext(struct lwp *l, const mcontext_t *mcp, unsigned int flags)
 
 	/* Restore floating point register context, if given. */
 	if ((flags & _UC_FPU) != 0) {
-		__CTASSERT(sizeof pcb->pcb_savefpu.sv_xmm ==
+		__CTASSERT(sizeof (struct fxsave) ==
 		    sizeof mcp->__fpregs.__fp_reg_set.__fp_xmm_state);
-		__CTASSERT(sizeof pcb->pcb_savefpu.sv_87 ==
+		__CTASSERT(sizeof (struct save87) ==
 		    sizeof mcp->__fpregs.__fp_reg_set.__fpchip_state);
 
 		if (flags & _UC_FXSAVE) {

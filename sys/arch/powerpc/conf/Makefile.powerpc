@@ -17,7 +17,7 @@
 #
 #	makeoptions DEBUGLIST="uvm* trap if_*"
 
-MACHINE_ARCH=powerpc
+MACHINE_ARCH?=powerpc
 USETOOLS?=	no
 NEED_OWN_INSTALL_TARGET?=no
 .include <bsd.own.mk>

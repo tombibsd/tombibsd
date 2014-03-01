@@ -188,13 +188,15 @@ void
 filecore_ihashins(struct filecore_node *ip)
 {
 	struct ihashhead *ipp;
+	int error __diagused;
 
 	mutex_enter(&filecore_ihash_lock);
 	ipp = &filecorehashtbl[INOHASH(ip->i_dev, ip->i_number)];
 	LIST_INSERT_HEAD(ipp, ip, i_hash);
 	mutex_exit(&filecore_ihash_lock);
 
-	VOP_LOCK(ITOV(ip), LK_EXCLUSIVE);
+	error = VOP_LOCK(ITOV(ip), LK_EXCLUSIVE);
+	KASSERT(error == 0);
 }
 
 /*

@@ -583,11 +583,6 @@ SYSCTL_SETUP(sysctl_net_atalk_ddp_setup, "sysctl net.atalk.ddp subtree setup")
 
 	sysctl_createv(clog, 0, NULL, NULL,
 		       CTLFLAG_PERMANENT,
-		       CTLTYPE_NODE, "net", NULL,
-		       NULL, 0, NULL, 0,
-		       CTL_NET, CTL_EOL);
-	sysctl_createv(clog, 0, NULL, NULL,
-		       CTLFLAG_PERMANENT,
 		       CTLTYPE_NODE, "atalk", NULL,
 		       NULL, 0, NULL, 0,
 		       CTL_NET, PF_APPLETALK, CTL_EOL);

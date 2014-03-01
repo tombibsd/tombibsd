@@ -57,7 +57,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/conf.h>
 #include <sys/kthread.h>
 #include <sys/fstrans.h>
-#include <sys/simplelock.h>
 #include <sys/vfs_syscalls.h>		/* For do_sys_unlink(). */
 
 #include <miscfs/specfs/specdev.h>

@@ -44,10 +44,16 @@
 #if defined(_KERNEL)
 
 #define	ATOMIC_OP_ALIAS(a,s)	STRONG_ALIAS(a,s)
+#ifdef _HARDKERNEL
+#define	CRT_ALIAS(a,s)	STRONG_ALIAS(a,s)
+#endif
 
 #else /* _KERNEL */
 
 #define	ATOMIC_OP_ALIAS(a,s)	WEAK_ALIAS(a,s)
+#ifdef _LIBC
+#define	CRT_ALIAS(a,s)	STRONG_ALIAS(a,s)
+#endif
 
 #endif /* _KERNEL */
 
@@ -65,6 +71,10 @@
 #define	NHI	r3
 #define	TLO	r4
 #define	THI	r5
+#endif
+
+#ifndef CRT_ALIAS
+#define	CRT_ALIAS(a,s)
 #endif
 
 #endif /* _ATOMIC_OP_ASM_H_ */

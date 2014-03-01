@@ -938,17 +938,11 @@ pollsock(struct socket *so, const struct timespec *tsp, int events)
  */
 SYSCTL_SETUP(sysctl_select_setup, "sysctl select setup")
 {
-	const struct sysctlnode *node = NULL;
 
-	sysctl_createv(clog, 0, NULL, &node,
-		CTLFLAG_PERMANENT,
-		CTLTYPE_NODE, "kern", NULL,
-		NULL, 0, NULL, 0,
-		CTL_KERN, CTL_EOL);
-	sysctl_createv(clog, 0, &node, NULL,
+	sysctl_createv(clog, 0, NULL, NULL,
 		CTLFLAG_PERMANENT | CTLFLAG_READWRITE,
 		CTLTYPE_INT, "direct_select",
 		SYSCTL_DESCR("Enable/disable direct select (for testing)"),
 		NULL, 0, &direct_select, 0,
-		CTL_CREATE, CTL_EOL);
+		CTL_KERN, CTL_CREATE, CTL_EOL);
 }

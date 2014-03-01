@@ -131,8 +131,8 @@ vntblinit(void)
 {
 
 	vn_initialize_syncerd();
-	vfs_vnode_sysinit();
 	vfs_mount_sysinit();
+	vfs_vnode_sysinit();
 }
 
 /*

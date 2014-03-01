@@ -397,9 +397,11 @@ static void
 ptyfs_hashins(struct ptyfsnode *pp)
 {
 	struct ptyfs_hashhead *ppp;
+	int error __diagused;
 
 	/* lock the ptyfsnode, then put it on the appropriate hash list */
-	VOP_LOCK(PTYFSTOV(pp), LK_EXCLUSIVE);
+	error = VOP_LOCK(PTYFSTOV(pp), LK_EXCLUSIVE);
+	KASSERT(error == 0);
 
 	mutex_enter(&ptyfs_used_slock);
 	ppp = &ptyfs_used_tbl[PTYHASH(pp->ptyfs_type, pp->ptyfs_pty,

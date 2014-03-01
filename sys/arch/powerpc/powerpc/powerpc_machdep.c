@@ -103,6 +103,7 @@ setregs(struct lwp *l, struct exec_package *pack, vaddr_t stack)
 	struct trapframe * const tf = l->l_md.md_utf;
 	struct pcb * const pcb = lwp_getpcb(l);
 	struct ps_strings arginfo;
+	vaddr_t func = pack->ep_entry;
 
 	memset(tf, 0, sizeof *tf);
 	tf->tf_fixreg[1] = -roundup(-stack + 8, 16);
@@ -134,7 +135,20 @@ setregs(struct lwp *l, struct exec_package *pack, vaddr_t stack)
 	tf->tf_fixreg[7] = 0;			/* termination vector */
 	tf->tf_fixreg[8] = p->p_psstrp;	/* NetBSD extension */
 
-	tf->tf_srr0 = pack->ep_entry;
+#ifdef _LP64
+	if (l->l_proc->p_emul == &emul_netbsd) {
+		/*
+		 * For native ELF64, entry point to the function
+		 * descriptor which contains the real function address
+		 * and its TOC base address.
+		 */
+		uintptr_t fdesc[3] = { [0] = func, [1] = 0, [2] = 0 };
+		copyin((void *)func, fdesc, sizeof(fdesc));
+		tf->tf_fixreg[2] = fdesc[1];
+		func = fdesc[0];
+	}
+#endif
+	tf->tf_srr0 = func;
 	tf->tf_srr1 = PSL_MBO | PSL_USERSET;
 #ifdef ALTIVEC
 	tf->tf_vrsave = 0;

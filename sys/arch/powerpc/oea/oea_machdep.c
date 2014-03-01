@@ -915,7 +915,7 @@ oea_install_extint(void (*handler)(void))
 		}
 	}
 #endif
-	__syncicache((void *)exc_exi_base, (int)extsize);
+	__syncicache((void *)exc_exi_base, (size_t)extsize);
 
 	__asm volatile ("mtmsr %0" :: "r"(omsr));
 }

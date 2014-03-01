@@ -48,7 +48,6 @@
 #include <sys/systm.h>
 #include <sys/proc.h>
 #include <sys/kthread.h>
-#include <sys/simplelock.h>
 #include <sys/mutex.h>
 
 #include <dev/raidframe/raidframevar.h>

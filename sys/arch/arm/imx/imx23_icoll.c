@@ -36,6 +36,8 @@
 #include <sys/errno.h>
 #include <sys/systm.h>
 
+#include <arm/cpufunc.h>
+
 #define _INTR_PRIVATE
 #include <arm/pic/picvar.h>
 

@@ -7,13 +7,13 @@
 /compat_16_machdep.c/1.26/Thu Feb 27 08:55:46 2014/-kk/
 /copy.S/1.23/Fri Jan 31 08:48:36 2014/-kk/
 /cpu_in_cksum.S/1.4/Mon Apr 28 20:23:24 2008/-kk/
-/cpufunc.S/1.18/Thu Feb 27 08:55:46 2014/-kk/
+/cpufunc.S/1.19/Sat Mar  1 06:04:31 2014/-kk/
 /db_dbgreg.S/1.7/Tue Dec 11 23:31:07 2007/-kk/
 /db_disasm.c/1.40/Sat Mar 14 21:04:10 2009/-kk/
-/db_interface.c/1.70/Sat Dec  8 14:40:10 2012/-kk/
+/db_interface.c/1.71/Sat Mar  1 06:04:31 2014/-kk/
 /db_machdep.c/1.5/Fri Jan 31 08:48:36 2014/-kk/
 /dumpsys.c/1.16/Mon Dec 12 19:03:09 2011/-kk/
-/freebsd_machdep.c/1.59/Thu Feb 27 08:55:46 2014/-kk/
+/freebsd_machdep.c/1.60/Sat Mar  1 06:04:31 2014/-kk/
 /freebsd_sigcode.S/1.5/Mon Apr 28 20:23:24 2008/-kk/
 /freebsd_syscall.c/1.39/Thu Jul 12 18:13:08 2012/-kk/
 /gdt.c/1.53/Fri Feb 24 08:06:07 2012/-kk/
@@ -21,7 +21,7 @@
 /i386_trap.S/1.5/Thu Feb 27 08:55:46 2014/-kk/
 /i386_trap_ipkdb.S/1.2/Tue Dec 17 04:05:02 2013/-kk/
 /i386func.S/1.17/Wed Aug 29 22:43:35 2012/-kk/
-/ibcs2_machdep.c/1.43/Thu Feb 27 08:55:46 2014/-kk/
+/ibcs2_machdep.c/1.44/Sat Mar  1 06:04:31 2014/-kk/
 /ibcs2_sigcode.S/1.5/Mon Apr 28 20:23:24 2008/-kk/
 /ibcs2_syscall.c/1.48/Thu Jul 12 18:13:08 2012/-kk/
 /ipkdb_glue.c/1.14/Wed Apr 28 19:17:03 2010/-kk/
@@ -30,9 +30,9 @@
 /linux_sigcode.S/1.8/Mon Apr 28 20:23:24 2008/-kk/
 /linux_syscall.c/1.51/Wed Sep 28 17:27:21 2011/-kk/
 /lock_stubs.S/1.26/Fri Jan 31 08:48:36 2014/-kk/
-/locore.S/1.111/Thu Feb 13 15:35:50 2014/-kk/
+/locore.S/1.112/Sat Mar  1 06:04:31 2014/-kk/
 /longrun.c/1.4/Sun Oct 23 13:02:32 2011/-kk/
-/machdep.c/1.749/Thu Feb 27 08:55:46 2014/-kk/
+/machdep.c/1.752/Sat Mar  1 06:04:31 2014/-kk/
 /mainbus.c/1.98/Tue Nov 12 02:18:40 2013/-kk/
 /mptramp.S/1.27/Thu Feb 13 15:35:50 2014/-kk/
 /mtrr_k6.c/1.13/Fri Apr  4 22:07:22 2008/-kk/
@@ -41,7 +41,7 @@
 /process_machdep.c/1.85/Thu Feb 27 08:55:46 2014/-kk/
 /rbus_machdep.c/1.26/Fri Jul  1 18:14:15 2011/-kk/
 /spl.S/1.40/Fri Jan 31 08:48:36 2014/-kk/
-/svr4_machdep.c/1.98/Fri Jan 31 08:48:36 2014/-kk/
+/svr4_machdep.c/1.99/Sat Mar  1 06:04:31 2014/-kk/
 /svr4_sigcode.S/1.13/Wed Nov 19 18:35:59 2008/-kk/
 /svr4_syscall.c/1.47/Thu Jul 12 18:13:08 2012/-kk/
 /trap.c/1.271/Thu Feb 27 08:55:46 2014/-kk/

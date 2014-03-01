@@ -24,9 +24,9 @@
 /md.evbsh3/1.28/Tue Jul 19 15:44:52 2011/-kk/
 /md.ews4800mips/1.7/Thu Oct 24 10:28:41 2013/-kk/
 /md.hp300/1.62/Thu Oct 24 10:28:41 2013/-kk/
-/md.hp700/1.10/Thu Oct 24 10:28:41 2013/-kk/
 /md.hpcmips/1.31/Thu Oct 24 10:28:41 2013/-kk/
 /md.hpcsh/1.27/Thu Oct 24 10:28:41 2013/-kk/
+/md.hppa/1.1/Mon Feb 24 07:23:39 2014/-kk/
 /md.i386/1.145/Thu Feb 27 08:51:20 2014/-kk/
 /md.ibmnws/1.11/Tue Nov 26 03:26:43 2013/-kk/
 /md.landisk/1.5/Thu Oct 24 10:28:41 2013/-kk/
@@ -48,7 +48,7 @@
 /md.sbmips/1.15/Sun Nov 25 21:55:50 2012/-kk/
 /md.sgimips/1.19/Thu Oct 24 10:28:41 2013/-kk/
 /md.sparc/1.83/Thu Feb 13 15:32:25 2014/-kk/
-/md.sparc64/1.179/Thu Feb 13 15:32:25 2014/-kk/
+/md.sparc64/1.182/Sat Mar  1 05:58:12 2014/-kk/
 /md.sun2/1.20/Thu Oct 24 10:28:41 2013/-kk/
 /md.sun3/1.62/Thu Oct 24 10:28:41 2013/-kk/
 /md.vax/1.40/Mon Nov 11 15:18:11 2013/-kk/

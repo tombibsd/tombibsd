@@ -408,15 +408,8 @@ SYSCTL_SETUP(sysctl_md_acpi_setup, "ACPI x86 sysctl setup")
 	int err;
 
 	err = sysctl_createv(clog, 0, NULL, &rnode,
-	    CTLFLAG_PERMANENT, CTLTYPE_NODE, "hw",
-	    NULL, NULL, 0, NULL, 0, CTL_HW, CTL_EOL);
-
-	if (err != 0)
-		return;
-
-	err = sysctl_createv(clog, 0, &rnode, &rnode,
 	    CTLFLAG_PERMANENT, CTLTYPE_NODE, "acpi", NULL,
-	    NULL, 0, NULL, 0, CTL_CREATE, CTL_EOL);
+	    NULL, 0, NULL, 0, CTL_HW, CTL_CREATE, CTL_EOL);
 
 	if (err != 0)
 		return;

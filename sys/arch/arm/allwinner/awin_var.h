@@ -58,6 +58,7 @@ struct awinio_attach_args {
 	bus_space_handle_t aio_core_bsh;
 	bus_space_handle_t aio_ccm_bsh;
 	bus_dma_tag_t aio_dmat;
+	bus_dma_tag_t aio_coherent_dmat;
 };
 
 struct awin_gpio_pinset {
@@ -75,10 +76,13 @@ extern struct bus_space awin_bs_tag;
 extern struct bus_space awin_a4x_bs_tag;
 extern bus_space_handle_t awin_core_bsh;
 extern struct arm32_bus_dma_tag awin_dma_tag;
+extern struct arm32_bus_dma_tag awin_coherent_dma_tag;
 
 psize_t awin_memprobe(void);
 void	awin_bootstrap(vaddr_t, vaddr_t); 
+void	awin_dma_bootstrap(psize_t);
 void	awin_pll6_enable(void);
+void	awin_cpu_hatch(struct cpu_info *);
 
 void	awin_gpio_init(void);
 bool	awin_gpio_pinset_available(const struct awin_gpio_pinset *);
@@ -92,6 +96,12 @@ static inline void
 awin_gpio_pindata_write(const struct awin_gpio_pindata *pd, int value)
 {
 	gpiobus_pin_write(pd->pd_gc, pd->pd_pin, value);
+}
+
+static inline int
+awin_gpio_pindata_read(const struct awin_gpio_pindata *pd)
+{
+	return gpiobus_pin_read(pd->pd_gc, pd->pd_pin);
 }
 
 static void inline

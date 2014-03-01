@@ -31,6 +31,8 @@
  */
 
 #include <sys/types.h>
+#include "start.h"
+#include "common.h"
 
 /* Write a character to the USART
  */

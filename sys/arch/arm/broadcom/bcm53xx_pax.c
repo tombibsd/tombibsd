@@ -48,6 +48,8 @@ __KERNEL_RCSID(1, "$NetBSD$");
 #include <dev/pci/pcivar.h>
 #include <dev/pci/pciconf.h>
 
+#include <arm/locore.h>
+
 #include <arm/broadcom/bcm53xx_reg.h>
 #include <arm/broadcom/bcm53xx_var.h>
 

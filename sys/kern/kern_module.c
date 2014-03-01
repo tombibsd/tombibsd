@@ -433,11 +433,6 @@ sysctl_module_setup(void)
 {
 	const struct sysctlnode *node = NULL;
 
-	sysctl_createv(&module_sysctllog, 0, NULL, NULL,
-		CTLFLAG_PERMANENT,
-		CTLTYPE_NODE, "kern", NULL,
-		NULL, 0, NULL, 0,
-		CTL_KERN, CTL_EOL);
 	sysctl_createv(&module_sysctllog, 0, NULL, &node,
 		CTLFLAG_PERMANENT,
 		CTLTYPE_NODE, "module",

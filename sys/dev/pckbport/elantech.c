@@ -92,11 +92,6 @@ pms_sysctl_elantech(struct sysctllog **clog)
 	const struct sysctlnode *node;
 	int rc, root_num;
 
-	if ((rc = sysctl_createv(clog, 0, NULL, NULL,
-	    CTLFLAG_PERMANENT, CTLTYPE_NODE, "hw", NULL,
-	    NULL, 0, NULL, 0, CTL_HW, CTL_EOL)) != 0)
-		goto err;
-
 	if ((rc = sysctl_createv(clog, 0, NULL, &node,
 	    CTLFLAG_PERMANENT, CTLTYPE_NODE, "elantech",
 	    SYSCTL_DESCR("Elantech touchpad controls"),

@@ -1549,7 +1549,7 @@ ale_rxeof(struct ale_softc *sc)
 		bpf_mtap(ifp, m);
 
 		/* Pass it to upper layer. */
-		ether_input(ifp, m);
+		(*ifp->if_input)(ifp, m);
 
 		ale_rx_update_page(sc, &rx_page, length, &prod);
 	}

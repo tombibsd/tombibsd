@@ -64,14 +64,11 @@ __KERNEL_RCSID(0, "$NetBSD$");
 void
 ibcs2_setregs(struct lwp *l, struct exec_package *epp, vaddr_t stack)
 {
-	struct pcb *pcb = lwp_getpcb(l);
 	struct trapframe *tf;
 
 	setregs(l, epp, stack);
-	if (i386_use_fxsave)
-		pcb->pcb_savefpu.sv_xmm.fx_cw = __iBCS2_NPXCW__;
-	else
-		pcb->pcb_savefpu.sv_87.s87_cw = __iBCS2_NPXCW__;
+	fpu_set_default_cw(l, __iBCS2_NPXCW__);
+
 	tf = l->l_md.md_regs;
 	tf->tf_eax = 0x2000000;		/* XXX base of heap */
 	tf->tf_cs = GSEL(GUCODEBIG_SEL, SEL_UPL);

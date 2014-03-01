@@ -150,11 +150,6 @@ filecore_modcmd(modcmd_t cmd, void *arg)
 			break;
 		sysctl_createv(&filecore_sysctl_log, 0, NULL, NULL,
 			       CTLFLAG_PERMANENT,
-			       CTLTYPE_NODE, "vfs", NULL,
-			       NULL, 0, NULL, 0,
-			       CTL_VFS, CTL_EOL);
-		sysctl_createv(&filecore_sysctl_log, 0, NULL, NULL,
-			       CTLFLAG_PERMANENT,
 			       CTLTYPE_NODE, "filecore",
 			       SYSCTL_DESCR("Acorn FILECORE file system"),
 			       NULL, 0, NULL, 0,

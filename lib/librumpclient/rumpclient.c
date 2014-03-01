@@ -618,7 +618,7 @@ handlereq(struct spclient *spc)
 		/*LINTED*/
 		maplen = *(size_t *)spc->spc_buf;
 		mapaddr = mmap(NULL, maplen, PROT_READ|PROT_WRITE,
-		    MAP_ANON, -1, 0);
+		    MAP_ANON|MAP_PRIVATE, -1, 0);
 		if (mapaddr == MAP_FAILED)
 			mapaddr = NULL;
 		DPRINTF(("rump_sp handlereq: anonmmap: %p\n", mapaddr));

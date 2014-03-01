@@ -15,6 +15,8 @@ void fpuinit(struct cpu_info *);
 void fpusave_lwp(struct lwp *, bool);
 void fpusave_cpu(bool);
 
+void fpu_set_default_cw(struct lwp *, unsigned int);
+
 void fputrap(struct trapframe *);
 void fpudna(struct trapframe *);
 
@@ -25,6 +27,9 @@ void process_s87_to_xmm(const struct save87 *, struct fxsave *);
 void fpu_save_area_clear(struct lwp *, unsigned int);
 /* Reset control words only - for signal handlers */
 void fpu_save_area_reset(struct lwp *);
+
+/* Copy data outside pcb during fork */
+void fpu_save_area_fork(struct pcb *, const struct pcb *);
 
 /* Load FP registers with user-supplied values */
 void process_write_fpregs_xmm(struct lwp *lwp, const struct fxsave *fpregs);

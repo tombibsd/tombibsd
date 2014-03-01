@@ -33,6 +33,8 @@
  * Machine dependent constants for PA-RISC.
  */
 
+#define	_MACHINE	hppa
+#define	MACHINE		"hppa"
 #define	_MACHINE_ARCH	hppa
 #define	MACHINE_ARCH	"hppa"
 #define	MID_MACHINE	MID_HPPA

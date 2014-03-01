@@ -46,7 +46,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/reboot.h>
 #include <sys/systm.h>
 #include <sys/atomic.h>
-#include <sys/simplelock.h>
 #include <sys/cpu.h>
 
 #include <uvm/uvm_extern.h>

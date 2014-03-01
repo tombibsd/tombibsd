@@ -978,7 +978,7 @@ fixup_stats(struct resp_buf *basep, struct resp_buf *prev, struct resp_buf *new)
     /* Check for byte-swappers */
     while (--rno >= 0) {
 	--n; --p; --b; --s;
-	if (*s || abs(ntohl(n->tr_vifout) - ntohl(p->tr_vifout)) > 100000) {
+	if (*s || (ntohl(n->tr_vifout) - ntohl(p->tr_vifout)) > 100000) {
 	    /* This host sends byteswapped reports; swap 'em */
 	    if (!*s) {
 		*s = 1;

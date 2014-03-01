@@ -224,11 +224,6 @@ SYSCTL_SETUP(sysctl_vm_setup, "sysctl vm subtree setup")
 
 	sysctl_createv(clog, 0, NULL, NULL,
 		       CTLFLAG_PERMANENT,
-		       CTLTYPE_NODE, "vm", NULL,
-		       NULL, 0, NULL, 0,
-		       CTL_VM, CTL_EOL);
-	sysctl_createv(clog, 0, NULL, NULL,
-		       CTLFLAG_PERMANENT,
 		       CTLTYPE_STRUCT, "vmmeter",
 		       SYSCTL_DESCR("Simple system-wide virtual memory "
 				    "statistics"),
@@ -273,6 +268,18 @@ SYSCTL_SETUP(sysctl_vm_setup, "sysctl vm subtree setup")
 		       SYSCTL_DESCR("Whether try to zero pages in idle loop"),
 		       NULL, 0, &vm_page_zero_enable, 0,
 		       CTL_VM, CTL_CREATE, CTL_EOL);
+	sysctl_createv(clog, 0, NULL, NULL,
+		       CTLFLAG_PERMANENT|CTLFLAG_IMMEDIATE,
+		       CTLTYPE_LONG, "minaddress",
+		       SYSCTL_DESCR("Minimum user address"),
+		       NULL, VM_MIN_ADDRESS, NULL, 0,
+		       CTL_VM, VM_MINADDRESS, CTL_EOL);
+	sysctl_createv(clog, 0, NULL, NULL,
+		       CTLFLAG_PERMANENT|CTLFLAG_IMMEDIATE,
+		       CTLTYPE_LONG, "maxaddress",
+		       SYSCTL_DESCR("Maximum user address"),
+		       NULL, VM_MAX_ADDRESS, NULL, 0,
+		       CTL_VM, VM_MAXADDRESS, CTL_EOL);
 
 	uvmpdpol_sysctlsetup();
 }

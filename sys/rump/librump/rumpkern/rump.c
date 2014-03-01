@@ -70,7 +70,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/uidinfo.h>
 #include <sys/vmem.h>
 #include <sys/xcall.h>
-#include <sys/simplelock.h>
 #include <sys/cprng.h>
 #include <sys/ktrace.h>
 
@@ -168,22 +167,7 @@ static void
 mksysctls(void)
 {
 
-	/* kern.hostname */
-	sysctl_createv(NULL, 0, NULL, NULL,
-	    CTLFLAG_PERMANENT, CTLTYPE_NODE, "kern", NULL,
-	    NULL, 0, NULL, 0, CTL_KERN, CTL_EOL);
-	/* XXX: setting hostnamelen is missing */
-	sysctl_createv(NULL, 0, NULL, NULL,
-	    CTLFLAG_PERMANENT|CTLFLAG_READWRITE, CTLTYPE_STRING, "hostname",
-	    SYSCTL_DESCR("System hostname"), NULL, 0,
-	    hostname, MAXHOSTNAMELEN, CTL_KERN, KERN_HOSTNAME, CTL_EOL);
-
 	/* hw.pagesize */
-	sysctl_createv(NULL, 0, NULL, NULL,
-	    CTLFLAG_PERMANENT,
-	    CTLTYPE_NODE, "hw", NULL,
-	    NULL, 0, NULL, 0,
-	    CTL_HW, CTL_EOL);
 	sysctl_createv(NULL, 0, NULL, NULL,
 	    CTLFLAG_PERMANENT|CTLFLAG_IMMEDIATE,
 	    CTLTYPE_INT, "pagesize",

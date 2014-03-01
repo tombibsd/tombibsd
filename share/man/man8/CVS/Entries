@@ -1,9 +1,9 @@
 /MAKEDEV.8.template/1.20/Sat Aug  6 12:32:29 2011/-kk/
-/MAKEDEV.8/1.44/Sat Feb 25 10:55:28 2012/-kk/
+/MAKEDEV.8/1.45/Sat Mar  1 06:04:20 2014/-kk/
 /MAKEDEV.local.8/1.8/Sat Aug  6 12:32:29 2011/-kk/
 /MAKEDEV2manpage.awk/1.13/Tue Mar 23 19:19:03 2010/-kk/
 /MAKEDEV2manpage.sh/1.5/Wed Dec 28 03:54:07 2005/-kk/
-/Makefile/1.103/Thu Oct 24 10:28:54 2013/-kk/
+/Makefile/1.104/Sat Mar  1 06:04:20 2014/-kk/
 /afterboot.8/1.52/Fri Oct  5 21:28:38 2012/-kk/
 /boot.8/1.12/Fri Sep  4 23:29:02 2009/-kk/
 /compat_30.8/1.9/Tue Sep 13 09:16:00 2011/-kk/
@@ -36,10 +36,10 @@ D/man8.dreamcast////
 D/man8.emips////
 D/man8.evbarm////
 D/man8.hp300////
-D/man8.hp700////
 D/man8.hpcarm////
 D/man8.hpcmips////
 D/man8.hpcsh////
+D/man8.hppa////
 D/man8.mac68k////
 D/man8.macppc////
 D/man8.mvme68k////

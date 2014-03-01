@@ -153,6 +153,8 @@ extern int cpu_do_powersave;
 extern int cpu_fpu_present;
 extern int cpu_hwdiv_present;
 
+extern u_int arm_cpu_max;
+
 #if !defined(CPU_ARMV7)
 #define	CPU_IS_ARMV7_P()		false
 #elif defined(CPU_ARMV6) || defined(CPU_PRE_ARMV6)

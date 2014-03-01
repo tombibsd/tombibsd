@@ -43,7 +43,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/proc.h>
 #include <sys/reboot.h>
 #include <sys/systm.h>
-#include <sys/simplelock.h>
 
 #include <dev/cons.h>
 

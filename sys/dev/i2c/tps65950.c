@@ -273,13 +273,8 @@ tps65950_sysctl_attach(struct tps65950_softc *sc)
 	int error;
 
 	error = sysctl_createv(log, 0, NULL, &rnode, CTLFLAG_PERMANENT,
-	    CTLTYPE_NODE, "hw", NULL, NULL, 0, NULL, 0, CTL_HW, CTL_EOL);
-	if (error)
-		return;
-
-	error = sysctl_createv(log, 0, &rnode, &rnode, CTLFLAG_PERMANENT,
 	    CTLTYPE_NODE, "tps65950", SYSCTL_DESCR("tps65950 control"),
-	    NULL, 0, NULL, 0, CTL_CREATE, CTL_EOL);
+	    NULL, 0, NULL, 0, CTL_HW, CTL_CREATE, CTL_EOL);
 	if (error)
 		return;
 

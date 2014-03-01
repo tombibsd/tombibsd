@@ -90,6 +90,9 @@ typedef	volatile int		__cpu_simple_lock_t;
 #define	__HAVE_COMMON___TLS_GET_ADDR
 #define	__HAVE_TLS_VARIANT_I
 #define	__HAVE_OLD_DISKLABEL
+#if defined(__ARM_EABI__) && defined(_ARM_ARCH_6)
+#define	__HAVE_ATOMIC64_OPS
+#endif
 
 #if defined(_KERNEL) || defined(_KMEMUSER)
 #define	PCU_FPU			0

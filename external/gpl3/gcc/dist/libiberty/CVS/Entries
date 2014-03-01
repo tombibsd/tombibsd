@@ -1,6 +1,6 @@
 /COPYING.LIB/1.1.1.1/Tue Jun 21 01:23:30 2011/-kk/
 /ChangeLog/1.1.1.2/Tue Sep 18 06:16:09 2012/-kk/
-/Makefile.in/1.1.1.1/Tue Jun 21 01:23:30 2011/-kk/
+/Makefile.in/1.2/Sat Mar  1 05:59:52 2014/-kk/
 /README/1.1.1.1/Tue Jun 21 01:23:29 2011/-kk/
 /_doprnt.c/1.1.1.1/Tue Jun 21 01:23:31 2011/-kk/
 /aclocal.m4/1.1.1.1/Tue Jun 21 01:23:29 2011/-kk/
@@ -20,9 +20,9 @@
 /concat.c/1.1.1.1/Tue Jun 21 01:23:29 2011/-kk/
 /config.h-vms/1.1.1.1/Tue Jun 21 01:23:30 2011/-kk/
 /config.in/1.1.1.1/Tue Jun 21 01:23:31 2011/-kk/
-/configure.ac/1.1.1.1/Tue Jun 21 01:23:29 2011/-kk/
+/configure.ac/1.2/Sat Mar  1 05:59:52 2014/-kk/
 /configure.com/1.1.1.1/Tue Jun 21 01:23:31 2011/-kk/
-/configure/1.1.1.1/Tue Jun 21 01:23:29 2011/-kk/
+/configure/1.2/Sat Mar  1 05:59:52 2014/-kk/
 /copying-lib.texi/1.1.1.1/Tue Jun 21 01:23:28 2011/-kk/
 /copysign.c/1.1.1.1/Tue Jun 21 01:23:29 2011/-kk/
 /cp-demangle.c/1.1.1.1/Tue Jun 21 01:23:28 2011/-kk/
@@ -129,4 +129,3 @@
 /xstrerror.c/1.1.1.1/Tue Jun 21 01:23:30 2011/-kk/
 /xstrndup.c/1.1.1.1/Tue Jun 21 01:23:28 2011/-kk/
 D/config////
-D/testsuite////

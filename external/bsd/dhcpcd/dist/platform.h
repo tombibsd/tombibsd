@@ -2,7 +2,7 @@
 
 /*
  * dhcpcd - DHCP client daemon
- * Copyright (c) 2006-2013 Roy Marples <roy@marples.name>
+ * Copyright (c) 2006-2014 Roy Marples <roy@marples.name>
  * All rights reserved
 
  * Redistribution and use in source and binary forms, with or without
@@ -30,12 +30,14 @@
 #ifndef PLATFORM_H
 #define PLATFORM_H
 
-char *hardware_platform(void);
+int hardware_platform(char *, size_t);
 #ifdef INET6
-int check_ipv6(const char *, int);
+int check_ipv6(struct dhcpcd_ctx *ctx, const char *, int);
 int ipv6_dadtransmits(const char *);
+void restore_kernel_ra(struct dhcpcd_ctx *);
 #else
-#define check_ipv6(a, b) -1
+#define check_ipv6(a, b,c ) -1
+#define restore_kernel_ra(a)
 #endif
 
 #endif

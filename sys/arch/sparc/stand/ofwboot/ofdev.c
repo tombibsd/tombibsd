@@ -353,7 +353,7 @@ search_label(struct of_dev *devp, u_long off, char *buf,
 		return (disklabel_sun_to_bsd(buf, lp));
 
 
-	memset(buf, 0, sizeof(buf));
+	memset(buf, 0, DEV_BSIZE);
 	return ("no disk label");
 }
 

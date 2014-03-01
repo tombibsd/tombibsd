@@ -2,7 +2,7 @@
 /h_atexit.c/1.1/Wed Jan 12 19:44:08 2011/-kk/
 /h_getopt.c/1.1/Sat Jan  1 23:56:49 2011/-kk/
 /h_getopt_long.c/1.1/Sat Jan  1 23:56:49 2011/-kk/
-/t_abs.c/1.1/Thu Mar 29 06:16:56 2012/-kk/
+/t_abs.c/1.2/Sat Mar  1 06:05:17 2014/-kk/
 /t_atexit.sh/1.1/Wed Jan 12 19:44:08 2011/-kk/
 /t_atoi.c/1.2/Thu Mar 29 05:56:36 2012/-kk/
 /t_div.c/1.2/Thu Jul  7 11:12:18 2011/-kk/

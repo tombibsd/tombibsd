@@ -155,6 +155,7 @@ const struct vnodeopv_entry_desc overlay_vnodeop_entries[] = {
 	{ &vop_fsync_desc,    layer_fsync },
 	{ &vop_inactive_desc, layer_inactive },
 	{ &vop_reclaim_desc,  layer_reclaim },
+	{ &vop_lock_desc,     layer_lock },
 	{ &vop_print_desc,    layer_print },
 	{ &vop_remove_desc,   layer_remove },
 	{ &vop_rename_desc,   layer_rename },

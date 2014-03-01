@@ -385,12 +385,6 @@ sysctl_io_stats_setup(struct sysctllog **clog)
 
 	sysctl_createv(clog, 0, NULL, NULL,
 		       CTLFLAG_PERMANENT,
-		       CTLTYPE_NODE, "hw", NULL,
-		       NULL, 0, NULL, 0,
-		       CTL_HW, CTL_EOL);
-
-	sysctl_createv(clog, 0, NULL, NULL,
-		       CTLFLAG_PERMANENT,
 		       CTLTYPE_STRING, "disknames",
 		       SYSCTL_DESCR("List of disk drives present"),
 		       sysctl_hw_disknames, 0, NULL, 0,

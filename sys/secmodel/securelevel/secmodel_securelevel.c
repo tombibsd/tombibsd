@@ -99,15 +99,9 @@ sysctl_security_securelevel_setup(struct sysctllog **clog)
 
 	sysctl_createv(clog, 0, NULL, &rnode,
 		       CTLFLAG_PERMANENT,
-		       CTLTYPE_NODE, "security", NULL,
-		       NULL, 0, NULL, 0,
-		       CTL_SECURITY, CTL_EOL);
-
-	sysctl_createv(clog, 0, &rnode, &rnode,
-		       CTLFLAG_PERMANENT,
 		       CTLTYPE_NODE, "models", NULL,
 		       NULL, 0, NULL, 0,
-		       CTL_CREATE, CTL_EOL);
+		       CTL_SECURITY, CTL_CREATE, CTL_EOL);
 
 	/* Compatibility: security.models.bsd44 */
 	rnode2 = rnode;
@@ -145,11 +139,6 @@ sysctl_security_securelevel_setup(struct sysctllog **clog)
 		       CTL_CREATE, CTL_EOL);
 
 	/* Compatibility: kern.securelevel */
-	sysctl_createv(clog, 0, NULL, NULL,
-		       CTLFLAG_PERMANENT,
-		       CTLTYPE_NODE, "kern", NULL,
-		       NULL, 0, NULL, 0,
-		       CTL_KERN, CTL_EOL);
 
 	sysctl_createv(clog, 0, NULL, NULL,
 		       CTLFLAG_PERMANENT|CTLFLAG_READWRITE,

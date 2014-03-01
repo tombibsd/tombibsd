@@ -87,11 +87,6 @@ linux32_sysctl_init(void)
 
 	sysctl_createv(&linux32_clog1, 0, NULL, NULL,
 		       CTLFLAG_PERMANENT,
-		       CTLTYPE_NODE, "emul", NULL,
-		       NULL, 0, NULL, 0,
-		       CTL_EMUL, CTL_EOL);
-	sysctl_createv(&linux32_clog1, 0, NULL, NULL,
-		       CTLFLAG_PERMANENT,
 		       CTLTYPE_NODE, "linux32",
 		       SYSCTL_DESCR("Linux 32 bit emulation settings"),
 		       NULL, 0, NULL, 0,

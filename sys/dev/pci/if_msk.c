@@ -2412,12 +2412,6 @@ SYSCTL_SETUP(sysctl_msk, "sysctl msk subtree setup")
 	int rc;
 	const struct sysctlnode *node;
 
-	if ((rc = sysctl_createv(clog, 0, NULL, NULL,
-	    0, CTLTYPE_NODE, "hw", NULL,
-	    NULL, 0, NULL, 0, CTL_HW, CTL_EOL)) != 0) {
-		goto err;
-	}
-
 	if ((rc = sysctl_createv(clog, 0, NULL, &node,
 	    0, CTLTYPE_NODE, "msk",
 	    SYSCTL_DESCR("msk interface controls"),

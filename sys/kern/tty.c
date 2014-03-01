@@ -297,11 +297,6 @@ sysctl_kern_tty_setup(void)
 	kern_tkstat_sysctllog = NULL;
 	sysctl_createv(&kern_tkstat_sysctllog, 0, NULL, NULL,
 		       CTLFLAG_PERMANENT,
-		       CTLTYPE_NODE, "kern", NULL,
-		       NULL, 0, NULL, 0,
-		       CTL_KERN, CTL_EOL);
-	sysctl_createv(&kern_tkstat_sysctllog, 0, NULL, NULL,
-		       CTLFLAG_PERMANENT,
 		       CTLTYPE_NODE, "tkstat",
 		       SYSCTL_DESCR("Number of characters sent and and "
 				    "received on ttys"),
@@ -927,12 +922,15 @@ int
 ttioctl(struct tty *tp, u_long cmd, void *data, int flag, struct lwp *l)
 {
 	extern struct tty *constty;	/* Temporary virtual console. */
-	struct proc *p = l ? l->l_proc : NULL;
+	struct proc *p;
 	struct linesw	*lp;
 	int		s, error;
 	struct pathbuf *pb;
 	struct nameidata nd;
 	char		infobuf[200];
+
+	KASSERT(l != NULL);
+	p = l->l_proc;
 
 	/* If the ioctl involves modification, hang if in the background. */
 	switch (cmd) {

@@ -77,15 +77,9 @@ sysctl_security_extensions_setup(struct sysctllog **clog)
 
 	sysctl_createv(clog, 0, NULL, &rnode,
 		       CTLFLAG_PERMANENT,
-		       CTLTYPE_NODE, "security", NULL,
-		       NULL, 0, NULL, 0,
-		       CTL_SECURITY, CTL_EOL);
-
-	sysctl_createv(clog, 0, &rnode, &rnode,
-		       CTLFLAG_PERMANENT,
 		       CTLTYPE_NODE, "models", NULL,
 		       NULL, 0, NULL, 0,
-		       CTL_CREATE, CTL_EOL);
+		       CTL_SECURITY, CTL_CREATE, CTL_EOL);
 
 	/* Compatibility: security.models.bsd44 */
 	rnode2 = rnode;
@@ -144,12 +138,6 @@ sysctl_security_extensions_setup(struct sysctllog **clog)
 	/* Compatibility: vfs.generic.usermount */
 	sysctl_createv(clog, 0, NULL, NULL,
 		       CTLFLAG_PERMANENT,
-		       CTLTYPE_NODE, "vfs", NULL,
-		       NULL, 0, NULL, 0,
-		       CTL_VFS, CTL_EOL);
-
-	sysctl_createv(clog, 0, NULL, NULL,
-		       CTLFLAG_PERMANENT,
 		       CTLTYPE_NODE, "generic",
 		       SYSCTL_DESCR("Non-specific vfs related information"),
 		       NULL, 0, NULL, 0,
@@ -164,19 +152,13 @@ sysctl_security_extensions_setup(struct sysctllog **clog)
 		       CTL_VFS, VFS_GENERIC, VFS_USERMOUNT, CTL_EOL);
 
 	/* Compatibility: security.curtain */
-	sysctl_createv(clog, 0, NULL, &rnode,
-		       CTLFLAG_PERMANENT,
-		       CTLTYPE_NODE, "security", NULL,
-		       NULL, 0, NULL, 0,
-		       CTL_SECURITY, CTL_EOL);
-
-	sysctl_createv(clog, 0, &rnode, NULL,
+	sysctl_createv(clog, 0, NULL, NULL,
 		       CTLFLAG_PERMANENT|CTLFLAG_READWRITE,
 		       CTLTYPE_INT, "curtain",
 		       SYSCTL_DESCR("Curtain information about objects to "\
 		       		    "users not owning them."),
 		       sysctl_extensions_curtain_handler, 0, &curtain, 0,
-		       CTL_CREATE, CTL_EOL);
+		       CTL_SECURITY, CTL_CREATE, CTL_EOL);
 }
 
 static int

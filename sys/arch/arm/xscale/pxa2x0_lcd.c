@@ -550,7 +550,6 @@ pxa2x0_lcd_new_screen(struct pxa2x0_lcd_softc *sc, int depth,
 
 	/* XXX: should we have BUS_DMA_WRITETHROUGH in MI bus_dma(9) API? */
 	if (pxa2x0_lcd_writethrough) {
-		pt_entry_t *ptep;
 		vaddr_t va, eva;
 
 		va = (vaddr_t)scr->buf_va;
@@ -559,13 +558,15 @@ pxa2x0_lcd_new_screen(struct pxa2x0_lcd_softc *sc, int depth,
 			/* taken from arm/arm32/bus_dma.c:_bus_dmamem_map() */
 			cpu_dcache_wbinv_range(va, PAGE_SIZE);
 			cpu_drain_writebuf();
-			ptep = vtopte(va);
-			*ptep &= ~L2_S_CACHE_MASK;
-			*ptep |= L2_C;
+			pt_entry_t * const ptep = vtopte(va);
+			const pt_entry_t opte = *ptep;
+			const pt_entry_t npte = (opte & ~L2_S_CACHE_MASK)
+			    | L2_C;
+			l2pte_set(ptep, npte, opte);
 			PTE_SYNC(ptep);
-			tlb_flush();
 			va += PAGE_SIZE;
 		}
+		tlb_flush();
 	}
 
 	memset(scr->buf_va, 0, scr->buf_size);

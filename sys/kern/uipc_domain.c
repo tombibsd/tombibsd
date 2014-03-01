@@ -556,11 +556,6 @@ sysctl_net_setup(void)
 	KASSERT(domain_sysctllog == NULL);
 	sysctl_createv(&domain_sysctllog, 0, NULL, NULL,
 		       CTLFLAG_PERMANENT,
-		       CTLTYPE_NODE, "net", NULL,
-		       NULL, 0, NULL, 0,
-		       CTL_NET, CTL_EOL);
-	sysctl_createv(&domain_sysctllog, 0, NULL, NULL,
-		       CTLFLAG_PERMANENT,
 		       CTLTYPE_NODE, "local",
 		       SYSCTL_DESCR("PF_LOCAL related settings"),
 		       NULL, 0, NULL, 0,

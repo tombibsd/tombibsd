@@ -102,7 +102,6 @@
 #include <sys/uio.h>
 #include <sys/param.h>
 #include <sys/proc.h>
-#include <sys/simplelock.h>
 
 #include <sys/mallocvar.h>
 #endif

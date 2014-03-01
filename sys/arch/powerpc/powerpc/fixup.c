@@ -146,7 +146,7 @@ powerpc_fixup_stubs(uint32_t *start, uint32_t *end,
 			case OPC_ADDIS: {
 				const u_int rs = i.i_d.i_rs;
 				const u_int ra = i.i_d.i_ra;
-				int d = i.i_d.i_d << ((i.i_d.i_opcd & 1) * 16);
+				register_t d = i.i_d.i_d << ((i.i_d.i_opcd & 1) * 16);
 				if (ra) {
 					KASSERT(valid_mask & (1 << ra));
 					d += fixreg[ra];
@@ -158,7 +158,7 @@ powerpc_fixup_stubs(uint32_t *start, uint32_t *end,
 			case OPC_LWZ: {
 				const u_int rs = i.i_d.i_rs;
 				const u_int ra = i.i_d.i_ra;
-				int addr = i.i_d.i_d;
+				register_t addr = i.i_d.i_d;
 				if (ra) {
 					KASSERT(valid_mask & (1 << ra));
 					addr += fixreg[ra];

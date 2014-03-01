@@ -36,15 +36,23 @@ RCSID("$NetBSD$")
 #include "sysident.S"
 
 	.section ".init", "ax", @progbits
-	.align 2; .globl _init; .type _init,@function
-_init:
+_ENTRY(_init)
 	mflr	%r0
+#ifdef _LP64
+	stdu	%r1, -(6*SZREG)(%r1)
+	std	%r0, (2*SZREG)(%r1)
+#else
 	stw	%r0, (1*SZREG)(%r1)
 	stwu	%r1, -(4*SZREG)(%r1)
+#endif
 
 	.section ".fini", "ax", @progbits
-	.align 2; .globl _fini; .type _fini,@function
-_fini:
+_ENTRY(_fini)
 	mflr	%r0
+#ifdef _LP64
+	stdu	%r1, -(6*SZREG)(%r1)
+	std	%r0, (2*SZREG)(%r1)
+#else
 	stw	%r0, (1*SZREG)(%r1)
 	stwu	%r1, -(4*SZREG)(%r1)
+#endif

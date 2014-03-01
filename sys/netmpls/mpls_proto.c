@@ -144,11 +144,6 @@ sysctl_net_mpls_setup(struct sysctllog **clog)
 
         sysctl_createv(clog, 0, NULL, NULL,
                        CTLFLAG_PERMANENT,
-                       CTLTYPE_NODE, "net", NULL,
-                       NULL, 0, NULL, 0,
-                       CTL_NET, CTL_EOL);
-        sysctl_createv(clog, 0, NULL, NULL,
-                       CTLFLAG_PERMANENT,
                        CTLTYPE_NODE, "mpls", NULL,
                        NULL, 0, NULL, 0,
                        CTL_NET, PF_MPLS, CTL_EOL);

@@ -28,6 +28,7 @@ options 	CPU_CORTEXA9
 options 	BCM5301X
 options 	PMAPCOUNTERS
 options 	BUSDMA_COUNTERS
+makeoptions	KERNEL_BASE_PHYS="0x80100000"
 
 # Architecture options
 

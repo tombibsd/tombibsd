@@ -29,8 +29,8 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef	_ARM_INT_TYPES_H_
-#define	_ARM_INT_TYPES_H_
+#ifndef _ARM_INT_TYPES_H_
+#define _ARM_INT_TYPES_H_
 
 #include <sys/cdefs.h>
 

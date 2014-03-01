@@ -73,7 +73,7 @@
 #ifdef __x86_64__
 
 #include <sys/signal.h>
-#include <x86/fpu.h>
+#include <sys/ucontext.h>
 #include <machine/frame_regs.h>
 
 /*
@@ -119,6 +119,7 @@ struct sigframe_siginfo {
 };
 
 #ifdef _KERNEL
+struct lwp;
 void buildcontext(struct lwp *, void *, void *);
 #endif
 

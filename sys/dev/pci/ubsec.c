@@ -632,11 +632,6 @@ ubsec_sysctl_init(void)
 
 	ubsec_sysctllog = NULL;
 
-	sysctl_createv(&ubsec_sysctllog, 0, NULL, NULL,
-		CTLFLAG_PERMANENT,
-		CTLTYPE_NODE, "hw", NULL,
-		NULL, 0, NULL, 0,
-		CTL_HW, CTL_EOL);
 	sysctl_createv(&ubsec_sysctllog, 0, NULL, &node,
 		CTLFLAG_PERMANENT,
 		CTLTYPE_NODE, "ubsec", 

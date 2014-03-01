@@ -118,7 +118,7 @@ static const struct disklabel_location {
 			   luna68k, mac68k, macppc, news68k, newsmips,
 			   pc532, pdp11, pmax, vax, x68k */
 	{ 0,	128 },	/* sparc, sun68k */
-	{ 1,	0 },	/* amd64, arc, arm, bebox, cobalt, evbppc, hp700,
+	{ 1,	0 },	/* amd64, arc, arm, bebox, cobalt, evbppc, hppa,
 			   hpcarm, hpcmips, i386, ibmnws, mipsco, mvmeppc,
 			   ofppc, pmppc, prep, sandpoint,
 			   sbmips, sgimips, sh3 */

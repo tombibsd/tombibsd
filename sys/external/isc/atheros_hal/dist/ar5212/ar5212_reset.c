@@ -2510,7 +2510,7 @@ ar5212GetLowerUpperValues(uint16_t v, uint16_t *lp, uint16_t listSize,
 		 * If value is close to the current value of the list
 		 * then target is not between values, it is one of the values
 		 */
-		if (abs(lp[0] * EEP_SCALE - target) < EEP_DELTA) {
+		if (lp[0] * EEP_SCALE - target < EEP_DELTA) {
 			*vlo = *vhi = lp[0];
 			return;
 		}

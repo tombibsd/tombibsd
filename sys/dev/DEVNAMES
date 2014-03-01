@@ -767,6 +767,7 @@ lkms			vax
 lm			MI
 lm700x			MI
 lmc			MI
+lmenv			MI
 lms			bebox
 lms			i386
 lockstat		MI
@@ -1344,6 +1345,7 @@ tra			MI
 trm			MI
 ts			MI
 tsc			alpha
+tsciic			alpha
 tscs			MI
 tsec			powerpc
 tslcd			evbarm

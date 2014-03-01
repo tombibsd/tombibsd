@@ -2209,6 +2209,8 @@ product MOSCHIP MCS7703		0x7703	MCS7703 USB Serial Adapter
 product MOSCHIP MCS7780		0x7780	Fast IrDA Adapter
 product MOSCHIP MCS7781		0x7781	Fast IrDA Adapter
 product MOSCHIP MCS7784		0x7784	Slow IrDA Adapter
+product MOSCHIP MCS7810		0x7810	MCS7810 USB Serial Adapter
+product MOSCHIP MCS7820		0x7820	MCS7820 USB Serial Adapter
 product MOSCHIP MCS7830		0x7830	Ethernet Adapter
 product MOSCHIP MCS7840		0x7840	MCS7840 USB Serial Adapter
 

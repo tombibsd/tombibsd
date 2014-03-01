@@ -2876,21 +2876,11 @@ null_childdetached(device_t self, device_t child)
 static void
 sysctl_detach_setup(struct sysctllog **clog)
 {
-	const struct sysctlnode *node = NULL;
 
-	sysctl_createv(clog, 0, NULL, &node,
-		CTLFLAG_PERMANENT,
-		CTLTYPE_NODE, "kern", NULL,
-		NULL, 0, NULL, 0,
-		CTL_KERN, CTL_EOL);
-
-	if (node == NULL)
-		return;
-
-	sysctl_createv(clog, 0, &node, NULL,
+	sysctl_createv(clog, 0, NULL, NULL,
 		CTLFLAG_PERMANENT | CTLFLAG_READWRITE,
 		CTLTYPE_BOOL, "detachall",
 		SYSCTL_DESCR("Detach all devices at shutdown"),
 		NULL, 0, &detachall, 0,
-		CTL_CREATE, CTL_EOL);
+		CTL_KERN, CTL_CREATE, CTL_EOL);
 }

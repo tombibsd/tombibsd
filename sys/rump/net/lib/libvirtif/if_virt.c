@@ -278,7 +278,7 @@ virtif_receiver(void *arg)
 		m->m_len = m->m_pkthdr.len = n;
 		m->m_pkthdr.rcvif = ifp;
 		bpf_mtap(ifp, m);
-		ether_input(ifp, m);
+		(*ifp->if_input)(ifp, m);
 	}
 
 	kthread_exit(0);

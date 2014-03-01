@@ -36,9 +36,7 @@
 #include <sys/syscall.h>
 #include <sys/errno.h>
 #include <machine/asm.h>
-#include <machine/cpu.h>
 #include <machine/frame.h>
-#include <machine/param.h>
 #if defined(CPU_XSCALE_PXA250) || defined(CPU_XSCALE_PXA270)
 #include <arm/armreg.h>
 #endif

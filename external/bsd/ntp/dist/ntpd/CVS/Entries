@@ -81,7 +81,7 @@
 /refclock_hopfpci.c/1.1.1.3/Wed Jan  1 02:42:45 2014/-kk/
 /refclock_hopfser.c/1.1.1.3/Wed Jan  1 02:42:45 2014/-kk/
 /refclock_hpgps.c/1.1.1.3/Wed Jan  1 02:42:45 2014/-kk/
-/refclock_irig.c/1.3/Wed Jan  1 02:42:45 2014/-kk/
+/refclock_irig.c/1.4/Sat Mar  1 05:58:59 2014/-kk/
 /refclock_jjy.c/1.5/Wed Jan  1 02:42:45 2014/-kk/
 /refclock_jupiter.c/1.5/Wed Jan  1 02:42:45 2014/-kk/
 /refclock_leitch.c/1.1.1.3/Wed Jan  1 02:42:45 2014/-kk/
@@ -103,7 +103,7 @@
 /refclock_tsyncpci.c/1.1.1.1/Fri Dec 27 23:30:52 2013/-kk/
 /refclock_tt560.c/1.1.1.2/Wed Jan  1 02:42:45 2014/-kk/
 /refclock_ulink.c/1.1.1.2/Wed Jan  1 02:42:45 2014/-kk/
-/refclock_wwv.c/1.1.1.2/Wed Jan  1 02:42:45 2014/-kk/
+/refclock_wwv.c/1.2/Sat Mar  1 05:58:59 2014/-kk/
 /refclock_wwvb.c/1.3/Wed Jan  1 02:42:45 2014/-kk/
 /refclock_zyfer.c/1.1.1.2/Wed Jan  1 02:42:45 2014/-kk/
 D

@@ -389,11 +389,6 @@ sysctl_kern_mbuf_setup(void)
 	KASSERT(mbuf_sysctllog == NULL);
 	sysctl_createv(&mbuf_sysctllog, 0, NULL, NULL,
 		       CTLFLAG_PERMANENT,
-		       CTLTYPE_NODE, "kern", NULL,
-		       NULL, 0, NULL, 0,
-		       CTL_KERN, CTL_EOL);
-	sysctl_createv(&mbuf_sysctllog, 0, NULL, NULL,
-		       CTLFLAG_PERMANENT,
 		       CTLTYPE_NODE, "mbuf",
 		       SYSCTL_DESCR("mbuf control variables"),
 		       NULL, 0, NULL, 0,

@@ -48,7 +48,7 @@ atomic_and_32_nv(volatile uint32_t *addr, uint32_t val)
 
 #undef atomic_and_32_nv
 atomic_op_alias(atomic_and_32_nv,_atomic_and_32_nv)
-__strong_alias(__sync_and_and_fetch_4,_atomic_and_32_nv)
+crt_alias(__sync_and_and_fetch_4,_atomic_and_32_nv)
 
 #undef atomic_and_uint_nv
 atomic_op_alias(atomic_and_uint_nv,_atomic_and_32_nv)

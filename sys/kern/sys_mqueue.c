@@ -1138,11 +1138,6 @@ mqueue_sysctl_init(void)
 	mqsysctl_log = NULL;
 
 	sysctl_createv(&mqsysctl_log, 0, NULL, NULL,
-		CTLFLAG_PERMANENT,
-		CTLTYPE_NODE, "kern", NULL,
-		NULL, 0, NULL, 0,
-		CTL_KERN, CTL_EOL);
-	sysctl_createv(&mqsysctl_log, 0, NULL, NULL,
 		CTLFLAG_PERMANENT|CTLFLAG_IMMEDIATE,
 		CTLTYPE_INT, "posix_msg",
 		SYSCTL_DESCR("Version of IEEE Std 1003.1 and its "

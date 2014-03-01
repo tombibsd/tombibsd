@@ -1506,7 +1506,7 @@ age_rxeof(struct age_softc *sc, struct rx_rdesc *rxrd)
 
 			bpf_mtap(ifp, m);
 			/* Pass it on. */
-			ether_input(ifp, m);
+			(*ifp->if_input)(ifp, m);
 
 			/* Reset mbuf chains. */
 			AGE_RXCHAIN_RESET(sc);

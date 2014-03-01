@@ -185,6 +185,14 @@ mvsoctmr_attach(device_t parent, device_t self, void *aux)
 	db_trap_callback = mvsoctmr_wdog_ddb_trap;
 #endif
 
+	if (sc->sc_flags & TMR_FLAGS_25MHZ)
+		/* We set global timer and counter to 25 MHz mode */
+		mvsoctmr_freq = 25000000;
+	else if (sc->sc_flags & TMR_FLAGS_SYSCLK)
+		mvsoctmr_freq = mvSysclk;
+	else
+		mvsoctmr_freq = mvTclk;
+
 	sc->sc_wdog.smw_name = device_xname(self);
 	sc->sc_wdog.smw_cookie = sc;
 	sc->sc_wdog.smw_setmode = mvsoctmr_wdog_setmode;
@@ -247,14 +255,6 @@ cpu_initclocks(void)
 	sc = mvsoctmr_sc;
 	if (sc == NULL)
 		panic("cpu_initclocks: mvsoctmr not found");
-
-	if (sc->sc_flags & TMR_FLAGS_25MHZ)
-		/* We set global timer and counter to 25 MHz mode */
-		mvsoctmr_freq = 25000000;
-	else if (sc->sc_flags & TMR_FLAGS_SYSCLK)
-		mvsoctmr_freq = mvSysclk;
-	else
-		mvsoctmr_freq = mvTclk;
 
 	mvsoctmr_timecounter.tc_priv = sc;
 	mvsoctmr_timecounter.tc_frequency = mvsoctmr_freq;

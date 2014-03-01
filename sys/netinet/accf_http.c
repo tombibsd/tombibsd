@@ -95,11 +95,6 @@ accf_httpready_modcmd(modcmd_t cmd, void *arg)
 		}
 		sysctl_createv(&clog, 0, NULL, NULL,
 		       CTLFLAG_PERMANENT,
-		       CTLTYPE_NODE, "net", NULL,
-		       NULL, 0, NULL, 0,
-		       CTL_NET, CTL_EOL);
-		sysctl_createv(&clog, 0, NULL, NULL,
-		       CTLFLAG_PERMANENT,
 		       CTLTYPE_NODE, "inet", NULL,
 		       NULL, 0, NULL, 0,
 		       CTL_NET, PF_INET, CTL_EOL);

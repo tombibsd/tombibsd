@@ -89,13 +89,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 volatile uint32_t *s3c2xx0_intr_mask_reg;
 
-static inline void
-__raise(int ipl)
-{
-	if (curcpl() < ipl) {
-		s3c2xx0_setipl(ipl);
-	}
-}
 /*
  * modify interrupt mask table for SPL levels
  */

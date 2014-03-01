@@ -1111,19 +1111,6 @@ dbcool_read_volt(struct dbcool_softc *sc, uint8_t reg, int nom_idx, bool extres)
 	return ret;
 }
 
-SYSCTL_SETUP(sysctl_dbcoolsetup, "sysctl dBCool subtree setup")
-{
-	sysctl_createv(clog, 0, NULL, NULL,
-#ifdef _MODULE
-		       0,
-#else
-		       CTLFLAG_PERMANENT,
-#endif
-		       CTLTYPE_NODE, "hw", NULL,
-		       NULL, 0, NULL, 0,
-		       CTL_HW, CTL_EOL);
-}
-
 static int
 sysctl_dbcool_temp(SYSCTLFN_ARGS)
 {

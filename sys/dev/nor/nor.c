@@ -1009,12 +1009,6 @@ SYSCTL_SETUP(sysctl_nor, "sysctl nor subtree setup")
 	int rc, nor_root_num;
 	const struct sysctlnode *node;
 
-	if ((rc = sysctl_createv(clog, 0, NULL, NULL,
-	    CTLFLAG_PERMANENT, CTLTYPE_NODE, "hw", NULL,
-	    NULL, 0, NULL, 0, CTL_HW, CTL_EOL)) != 0) {
-		goto error;
-	}
-
 	if ((rc = sysctl_createv(clog, 0, NULL, &node,
 	    CTLFLAG_PERMANENT, CTLTYPE_NODE, "nor",
 	    SYSCTL_DESCR("NOR driver controls"),

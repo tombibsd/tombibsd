@@ -397,7 +397,7 @@ swaplist_trim(void)
 	struct swappri *spp, *nextspp;
 
 	LIST_FOREACH_SAFE(spp, &swap_priority, spi_swappri, nextspp) {
-		if (TAILQ_EMPTY(&spp->spi_swapdev))
+		if (!TAILQ_EMPTY(&spp->spi_swapdev))
 			continue;
 		LIST_REMOVE(spp, spi_swappri);
 		kmem_free(spp, sizeof(*spp));

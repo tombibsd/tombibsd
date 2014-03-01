@@ -232,7 +232,6 @@ struct vm_anon;
 struct vmspace;
 struct pmap;
 struct vnode;
-struct simplelock;
 struct vm_map_entry;
 struct vm_map;
 struct vm_page;

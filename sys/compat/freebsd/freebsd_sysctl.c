@@ -62,11 +62,6 @@ void
 freebsd_sysctl_init(void)
 {
 
-	sysctl_createv(&freebsd_clog, 0, NULL, NULL,
-			CTLFLAG_PERMANENT,
-			CTLTYPE_NODE, "kern", NULL,
-			NULL, 0, NULL, 0,
-			CTL_KERN, CTL_EOL);
         sysctl_createv(&freebsd_clog, 0, NULL, NULL,
 			CTLFLAG_PERMANENT|CTLFLAG_IMMEDIATE,
 			CTLTYPE_INT, "osreldate",

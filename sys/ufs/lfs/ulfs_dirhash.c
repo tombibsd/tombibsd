@@ -1099,16 +1099,10 @@ ulfsdirhash_sysctl_init(void)
 
 	sysctl_createv(&ulfsdirhash_sysctl_log, 0, NULL, &rnode,
 		       CTLFLAG_PERMANENT,
-		       CTLTYPE_NODE, "vfs", NULL,
-		       NULL, 0, NULL, 0,
-		       CTL_VFS, CTL_EOL);
-
-	sysctl_createv(&ulfsdirhash_sysctl_log, 0, &rnode, &rnode,
-		       CTLFLAG_PERMANENT,
 		       CTLTYPE_NODE, "ulfs",
 		       SYSCTL_DESCR("ulfs"),
 		       NULL, 0, NULL, 0,
-		       CTL_CREATE, CTL_EOL);
+		       CTL_VFS, CTL_CREATE, CTL_EOL);
 
 	sysctl_createv(&ulfsdirhash_sysctl_log, 0, &rnode, &rnode,
 		       CTLFLAG_PERMANENT,

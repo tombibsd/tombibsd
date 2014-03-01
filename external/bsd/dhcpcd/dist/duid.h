@@ -2,7 +2,7 @@
 
 /*
  * dhcpcd - DHCP client daemon
- * Copyright (c) 2006-2013 Roy Marples <roy@marples.name>
+ * Copyright (c) 2006-2014 Roy Marples <roy@marples.name>
  * All rights reserved
 
  * Redistribution and use in source and binary forms, with or without
@@ -32,8 +32,9 @@
 
 #include "net.h"
 
-extern unsigned char *duid;
-extern size_t duid_len;
+#ifndef DUID_LEN
+#  define DUID_LEN	128 + 2
+#endif
 
 size_t duid_init(const struct interface *);
 

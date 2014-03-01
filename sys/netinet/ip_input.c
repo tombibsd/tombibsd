@@ -1583,11 +1583,6 @@ sysctl_net_inet_ip_setup(struct sysctllog **clog)
 
 	sysctl_createv(clog, 0, NULL, NULL,
 		       CTLFLAG_PERMANENT,
-		       CTLTYPE_NODE, "net", NULL,
-		       NULL, 0, NULL, 0,
-		       CTL_NET, CTL_EOL);
-	sysctl_createv(clog, 0, NULL, NULL,
-		       CTLFLAG_PERMANENT,
 		       CTLTYPE_NODE, "inet",
 		       SYSCTL_DESCR("PF_INET related settings"),
 		       NULL, 0, NULL, 0,

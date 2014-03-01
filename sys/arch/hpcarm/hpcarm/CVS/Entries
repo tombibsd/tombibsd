@@ -4,7 +4,7 @@
 /intr.c/1.19/Fri Jul 27 05:36:10 2012/-kk/
 /kloader_machdep.c/1.1/Sat Mar 31 14:02:54 2012/-kk/
 /kloader_pxa2x0.S/1.1/Sat Mar 31 14:02:54 2012/-kk/
-/locore.S/1.15/Tue Dec 17 04:13:27 2013/-kk/
+/locore.S/1.16/Sat Mar  1 06:04:30 2014/-kk/
 /netbookpro_machdep.c/1.1/Sat Aug  6 03:53:40 2011/-kk/
 /pxa2x0_hpc_machdep.c/1.20/Thu Oct 24 10:28:57 2013/-kk/
 /sa11x0_hpc_machdep.c/1.8/Thu Oct 24 10:28:57 2013/-kk/

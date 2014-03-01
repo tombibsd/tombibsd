@@ -651,17 +651,9 @@ SYSCTL_SETUP(sysctl_acpi_power_setup, "sysctl hw.acpi.power subtree setup")
 	int err;
 
 	err = sysctl_createv(NULL, 0, NULL, &anode,
-	    CTLFLAG_PERMANENT, CTLTYPE_NODE, "hw",
-	    NULL, NULL, 0, NULL, 0,
-	    CTL_HW, CTL_EOL);
-
-	if (err != 0)
-		return;
-
-	err = sysctl_createv(NULL, 0, &anode, &anode,
 	    CTLFLAG_PERMANENT, CTLTYPE_NODE, "acpi",
 	    NULL, NULL, 0, NULL, 0,
-	    CTL_CREATE, CTL_EOL);
+	    CTL_HW, CTL_CREATE, CTL_EOL);
 
 	if (err != 0)
 		return;

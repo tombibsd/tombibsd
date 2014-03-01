@@ -108,11 +108,6 @@ linux_sysctl_init(void)
 
 	sysctl_createv(&linux_clog2, 0, NULL, NULL,
 		       CTLFLAG_PERMANENT,
-		       CTLTYPE_NODE, "emul", NULL,
-		       NULL, 0, NULL, 0,
-		       CTL_EMUL, CTL_EOL);
-	sysctl_createv(&linux_clog2, 0, NULL, NULL,
-		       CTLFLAG_PERMANENT,
 		       CTLTYPE_NODE, "linux",
 		       SYSCTL_DESCR("Linux emulation settings"),
 		       NULL, 0, NULL, 0,

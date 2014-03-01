@@ -45,7 +45,6 @@
 #define	_DEV_SPI_SPIVAR_H_
 
 #include <sys/queue.h>
-#include <sys/simplelock.h>
 
 /*
  * Serial Peripheral Interface bus.  This is a 4-wire bus common for

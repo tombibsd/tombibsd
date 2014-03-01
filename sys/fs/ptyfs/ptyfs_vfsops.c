@@ -391,11 +391,6 @@ ptyfs_modcmd(modcmd_t cmd, void *arg)
 			break;
 		sysctl_createv(&ptyfs_sysctl_log, 0, NULL, NULL,
 			       CTLFLAG_PERMANENT,
-			       CTLTYPE_NODE, "vfs", NULL,
-			       NULL, 0, NULL, 0,
-			       CTL_VFS, CTL_EOL);
-		sysctl_createv(&ptyfs_sysctl_log, 0, NULL, NULL,
-			       CTLFLAG_PERMANENT,
 			       CTLTYPE_NODE, "ptyfs",
 			       SYSCTL_DESCR("Pty file system"),
 			       NULL, 0, NULL, 0,

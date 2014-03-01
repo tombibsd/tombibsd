@@ -8207,11 +8207,6 @@ SYSCTL_SETUP(sysctl_net_keyv2_setup, "sysctl net.keyv2 subtree setup")
 
 	sysctl_createv(clog, 0, NULL, NULL,
 		       CTLFLAG_PERMANENT,
-		       CTLTYPE_NODE, "net", NULL,
-		       NULL, 0, NULL, 0,
-		       CTL_NET, CTL_EOL);
-	sysctl_createv(clog, 0, NULL, NULL,
-		       CTLFLAG_PERMANENT,
 		       CTLTYPE_NODE, IPSEC_PFKEY_NAME, NULL,
 		       NULL, 0, NULL, 0,
 		       CTL_NET, IPSEC_PFKEY, CTL_EOL);
@@ -8292,12 +8287,6 @@ SYSCTL_SETUP(sysctl_net_keyv2_setup, "sysctl net.keyv2 subtree setup")
 SYSCTL_SETUP(sysctl_net_key_compat_setup, "sysctl net.key subtree setup for IPSEC")
 {
 
-	/* Make sure net.key exists before we register nodes underneath it. */
-	sysctl_createv(clog, 0, NULL, NULL,
-		       CTLFLAG_PERMANENT,
-		       CTLTYPE_NODE, "net", NULL,
-		       NULL, 0, NULL, 0,
-		       CTL_NET, CTL_EOL);
 	sysctl_createv(clog, 0, NULL, NULL,
 		       CTLFLAG_PERMANENT,
 		       CTLTYPE_NODE, "key", NULL,

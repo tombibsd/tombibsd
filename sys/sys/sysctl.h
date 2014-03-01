@@ -1148,6 +1148,7 @@ void	fill_eproc(struct proc *, struct eproc *, bool);
  * subsystem setup
  */
 void	sysctl_init(void);
+void	sysctl_basenode_init(void);
 void	sysctl_finalize(void);
 
 /*

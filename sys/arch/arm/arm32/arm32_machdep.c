@@ -502,11 +502,6 @@ SYSCTL_SETUP(sysctl_machdep_setup, "sysctl machdep subtree setup")
 	 * return the right machine_arch based on the running executable.
 	 */
 	sysctl_createv(clog, 0, NULL, NULL,
-		       CTLFLAG_PERMANENT,
-		       CTLTYPE_NODE, "hw", NULL,
-		       NULL, 0, NULL, 0,
-		       CTL_HW, CTL_EOL);
-	sysctl_createv(clog, 0, NULL, NULL,
 		       CTLFLAG_PERMANENT|CTLFLAG_READONLY,
 		       CTLTYPE_STRING, "machine_arch",
 		       SYSCTL_DESCR("Machine CPU class"),

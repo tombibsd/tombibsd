@@ -18,6 +18,9 @@ cross-generated.  Though a $MACHINE_ARCH all uses the same config files, you
 must pick a specific $MACHINE so that building the requisite bits below will
 work.
 
+0. Note that example paths like src/external/gpl3/gcc/lib/libgcc/arch will
+   really be src/external/gpl3/gcc.old/lib/libgcc/arch for the previous GCC.
+
 1. Set MKMAINTAINERTOOLS=yes in mk.conf.  (Needed so that src/tools/gettext
    gets built, eliciting proper HAVE_*GETTEXT* defns in config.h files.)
 

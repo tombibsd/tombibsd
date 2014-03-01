@@ -20,6 +20,10 @@ int	genfs_nolock(void *);
 int	genfs_noislocked(void *);
 int	genfs_nounlock(void *);
 
+int	genfs_deadlock(void *);
+#define	genfs_deadislocked genfs_islocked
+int	genfs_deadunlock(void *);
+
 int	genfs_poll(void *);
 int	genfs_kqfilter(void *);
 int	genfs_fcntl(void *);

@@ -275,10 +275,10 @@ evbppc		scw
 evbsh3		core
 ews4800mips	tsutsui
 hp300		tsutsui
-hp700		skrll
 hpcarm		core
 hpcmips		core
 hpcsh		uwe
+hppa		skrll
 i386		dsl
 ibmnws		matt
 iyonix		gavan

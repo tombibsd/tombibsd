@@ -82,6 +82,7 @@
 #define LINUX_N_BSSADDR(x,m) (LINUX_N_DATADDR(x,m) + (x).a_data)
 
 #ifndef LINUX_MACHDEP_ELF_COPYARGS
+/* Counted from linux_exec_elf32.c */
 #define LINUX_ELF_AUX_ENTRIES	14
 #endif
 

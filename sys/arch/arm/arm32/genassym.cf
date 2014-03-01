@@ -213,6 +213,7 @@ define	CI_CC_NSOFT		offsetof(struct cpu_info, ci_data.cpu_nsoft)
 ifdef FPU_VFP
 define	CI_VFP_ID		offsetof(struct cpu_info, ci_vfp_id)
 endif
+define	CI_LASTLWP		offsetof(struct cpu_info, ci_lastlwp)
 
 define	VFP_FPEXC_EN		VFP_FPEXC_EN
 

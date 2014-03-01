@@ -115,14 +115,6 @@ SYSCTL_SETUP(sysctl_hw_ubt_debug_setup, "sysctl hw.ubt_debug setup")
 {
 
 	sysctl_createv(NULL, 0, NULL, NULL,
-		CTLFLAG_PERMANENT,
-		CTLTYPE_NODE, "hw",
-		NULL,
-		NULL, 0,
-		NULL, 0,
-		CTL_HW, CTL_EOL);
-
-	sysctl_createv(NULL, 0, NULL, NULL,
 		CTLFLAG_PERMANENT | CTLFLAG_READWRITE,
 		CTLTYPE_INT, "ubt_debug",
 		SYSCTL_DESCR("ubt debug level"),
@@ -485,14 +477,6 @@ ubt_attach(device_t parent, device_t self, void *aux)
 			   sc->sc_dev);
 
 	/* sysctl set-up for alternate configs */
-	sysctl_createv(&sc->sc_log, 0, NULL, NULL,
-		CTLFLAG_PERMANENT,
-		CTLTYPE_NODE, "hw",
-		NULL,
-		NULL, 0,
-		NULL, 0,
-		CTL_HW, CTL_EOL);
-
 	sysctl_createv(&sc->sc_log, 0, NULL, &node,
 		0,
 		CTLTYPE_NODE, device_xname(sc->sc_dev),

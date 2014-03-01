@@ -1,0 +1,37 @@
+/Makefile.in/1.1.1.1/Tue Feb 25 18:40:39 2014/-kk/
+/aclocal.m4/1.1.1.1/Tue Feb 25 18:40:39 2014/-kk/
+/config.in/1.1.1.1/Tue Feb 25 18:40:39 2014/-kk/
+/configure.ac/1.1.1.1/Tue Feb 25 18:40:39 2014/-kk/
+/configure/1.1.1.1/Tue Feb 25 18:40:39 2014/-kk/
+/dconfig.h/1.1.1.1/Tue Feb 25 18:40:39 2014/-kk/
+/decBasic.c/1.1.1.1/Tue Feb 25 18:40:39 2014/-kk/
+/decCommon.c/1.1.1.1/Tue Feb 25 18:40:41 2014/-kk/
+/decCommonSymbols.h/1.1.1.1/Tue Feb 25 18:40:39 2014/-kk/
+/decContext.c/1.1.1.1/Tue Feb 25 18:40:41 2014/-kk/
+/decContext.h/1.1.1.1/Tue Feb 25 18:40:41 2014/-kk/
+/decContextSymbols.h/1.1.1.1/Tue Feb 25 18:40:41 2014/-kk/
+/decDPD.h/1.1.1.1/Tue Feb 25 18:40:41 2014/-kk/
+/decDPDSymbols.h/1.1.1.1/Tue Feb 25 18:40:41 2014/-kk/
+/decDouble.c/1.1.1.1/Tue Feb 25 18:40:41 2014/-kk/
+/decDouble.h/1.1.1.1/Tue Feb 25 18:40:41 2014/-kk/
+/decDoubleSymbols.h/1.1.1.1/Tue Feb 25 18:40:41 2014/-kk/
+/decExcept.c/1.1.1.1/Tue Feb 25 18:40:41 2014/-kk/
+/decExcept.h/1.1.1.1/Tue Feb 25 18:40:41 2014/-kk/
+/decLibrary.c/1.1.1.1/Tue Feb 25 18:40:41 2014/-kk/
+/decNumber.c/1.1.1.1/Tue Feb 25 18:40:42 2014/-kk/
+/decNumber.h/1.1.1.1/Tue Feb 25 18:40:42 2014/-kk/
+/decNumberLocal.h/1.1.1.1/Tue Feb 25 18:40:41 2014/-kk/
+/decNumberSymbols.h/1.1.1.1/Tue Feb 25 18:40:42 2014/-kk/
+/decPacked.c/1.1.1.1/Tue Feb 25 18:40:42 2014/-kk/
+/decPacked.h/1.1.1.1/Tue Feb 25 18:40:42 2014/-kk/
+/decPackedSymbols.h/1.1.1.1/Tue Feb 25 18:40:42 2014/-kk/
+/decQuad.c/1.1.1.1/Tue Feb 25 18:40:42 2014/-kk/
+/decQuad.h/1.1.1.1/Tue Feb 25 18:40:42 2014/-kk/
+/decQuadSymbols.h/1.1.1.1/Tue Feb 25 18:40:42 2014/-kk/
+/decRound.c/1.1.1.1/Tue Feb 25 18:40:42 2014/-kk/
+/decRound.h/1.1.1.1/Tue Feb 25 18:40:42 2014/-kk/
+/decSingle.c/1.1.1.1/Tue Feb 25 18:40:42 2014/-kk/
+/decSingle.h/1.1.1.1/Tue Feb 25 18:40:42 2014/-kk/
+/decSingleSymbols.h/1.1.1.1/Tue Feb 25 18:40:42 2014/-kk/
+D/bid////
+D/dpd////

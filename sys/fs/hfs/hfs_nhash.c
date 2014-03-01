@@ -148,9 +148,11 @@ void
 hfs_nhashinsert(struct hfsnode *hp)
 {
 	struct nhashhead *hpp;
+	int error __diagused;
 
 	/* lock the inode, then put it on the appropriate hash list */
-	VOP_LOCK(HTOV(hp), LK_EXCLUSIVE);
+	error = VOP_LOCK(HTOV(hp), LK_EXCLUSIVE);
+	KASSERT(error == 0);
 
 	mutex_enter(&hfs_nhash_lock);
 	hpp = &nhashtbl[HNOHASH(hp->h_dev, hp->h_rec.u.cnid, hp->h_fork)];

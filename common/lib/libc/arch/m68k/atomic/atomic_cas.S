@@ -50,7 +50,7 @@ ATOMIC_OP_ALIAS(atomic_cas_ulong,_atomic_cas_32)
 STRONG_ALIAS(_atomic_cas_ulong,_atomic_cas_32)
 ATOMIC_OP_ALIAS(atomic_cas_ptr,_atomic_cas_32)
 STRONG_ALIAS(_atomic_cas_ptr,_atomic_cas_32)
-STRONG_ALIAS(__sync_val_compare_and_swap_4,_atomic_cas_32)
+CRT_ALIAS(__sync_val_compare_and_swap_4,_atomic_cas_32)
 
 ATOMIC_OP_ALIAS(atomic_cas_32_ni,_atomic_cas_32)
 STRONG_ALIAS(_atomic_cas_32_ni,_atomic_cas_32)
@@ -68,11 +68,11 @@ ENTRY(__sync_bool_compare_and_swap_4)
 	movl	12(%sp), %d1
 	casl	%d3, %d1, (%a0)
 	/* %d3 now contains the old value */
-	clrl	%d0	/* assume it did not work */
-	cmpl	%d3, %d2
-	bne	1f
-	movl	#1, %d0	/* return success */
-1:	rts
+	beq	1f
+	clrl	%d0	/* return false */
+	rts
+1:	movl	#1, %d0	/* return success */
+	rts
 END(__sync_bool_compare_and_swap_4)
 
 ENTRY(_atomic_cas_16)
@@ -85,7 +85,7 @@ ENTRY(_atomic_cas_16)
 END(_atomic_cas_16)
 
 ATOMIC_OP_ALIAS(atomic_cas_16,_atomic_cas_16)
-STRONG_ALIAS(__sync_val_compare_and_swap_2,_atomic_cas_16)
+CRT_ALIAS(__sync_val_compare_and_swap_2,_atomic_cas_16)
 
 ENTRY(__sync_bool_compare_and_swap_2)
 	movl	4(%sp), %a0
@@ -94,11 +94,11 @@ ENTRY(__sync_bool_compare_and_swap_2)
 	movw	10(%sp), %d1
 	casw	%d3, %d1, (%a0)
 	/* %d3 now contains the old value */
-	clrl	%d0	/* assume it did not work */
-	cmpw	%d3, %d2
-	bne	1f
-	movl	#1, %d0	/* return success */
-1:	rts
+	beq	1f
+	clrl	%d0	/* return failure */
+	rts
+1:	movl	#1, %d0	/* return success */
+	rts
 END(__sync_bool_compare_and_swap_2)
 
 ENTRY(_atomic_cas_8)
@@ -111,7 +111,7 @@ ENTRY(_atomic_cas_8)
 END(_atomic_cas_8)
 
 ATOMIC_OP_ALIAS(atomic_cas_8,_atomic_cas_8)
-STRONG_ALIAS(__sync_val_compare_and_swap_1,_atomic_cas_8)
+CRT_ALIAS(__sync_val_compare_and_swap_1,_atomic_cas_8)
 
 
 ENTRY(__sync_bool_compare_and_swap_1)
@@ -121,10 +121,10 @@ ENTRY(__sync_bool_compare_and_swap_1)
 	movb	9(%sp), %d1
 	casb	%d3, %d1, (%a0)
 	/* %d3 now contains the old value */
-	clrl	%d0	/* assume it did not work */
-	cmpb	%d3, %d2
-	bne	1f
-	movl	#1, %d0	/* return success */
-1:	rts
+	beq	1f
+	clrl	%d0	/* return failure */
+	rts
+1:	movl	#1, %d0	/* return success */
+	rts
 END(__sync_bool_compare_and_swap_1)
 

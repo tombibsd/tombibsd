@@ -532,7 +532,11 @@
 #define FAULT_PERM_S    0x0d /* Permission -- Section */
 #define FAULT_PERM_P    0x0f /* Permission -- Page */
 
-#define	FAULT_IMPRECISE	0x400	/* Imprecise exception (XSCALE) */
+#define FAULT_LPAE	0x0200	/* (SW) used long descriptors */
+#define FAULT_IMPRECISE	0x0400	/* Imprecise exception (XSCALE) */
+#define FAULT_WRITE	0x0800	/* fault was due to write (ARMv6+) */
+#define FAULT_EXT	0x1000	/* fault was due to external abort (ARMv6+) */
+#define FAULT_CM	0x2000	/* fault was due to cache maintenance (ARMv7+) */
 
 /*
  * Address of the vector page, low and high versions.
@@ -608,6 +612,10 @@
 #define CORTEX_CNTENC_C __BIT(31)	/* Disables the cycle counter */
 #define CORTEX_CNTOFL_C __BIT(31)	/* Cycle counter overflow flag */
 
+/* Defines for ARM Cortex A7/A15 L2CTRL */
+#define L2CTRL_NUMCPU	__BITS(25,24)	// numcpus - 1
+#define L2CTRL_ICPRES	__BIT(23)	// Interrupt Controller is present
+
 /* Translate Table Base Control Register */
 #define TTBCR_S_EAE	__BIT(31)	// Extended Address Extension
 #define TTBCR_S_PD1	__BIT(5)	// Don't use TTBR1
@@ -626,6 +634,22 @@
 #define TTBCR_L_IRGN0	__BITS(9,8)	// TTBR0 inner cacheability
 #define TTBCR_L_EPD0	__BIT(7)	// Don't use TTBR0
 #define TTBCR_L_T0SZ	__BITS(2,0)	// TTBR0 size offset
+
+#define NRRR_ORn(n)	__BITS(17+2*(n),16+2*(n)) // Outer Cacheable mappings
+#define NRRR_IRn(n)	__BITS(1+2*(n),0+2*(n)) // Inner Cacheable mappings
+#define NRRR_NC		0		// non-cacheable
+#define NRRR_WB_WA	1		// write-back write-allocate
+#define NRRR_WT		2		// write-through
+#define NRRR_WB		3		// write-back
+#define PRRR_NOSn(n)	__BITS(24+2*(n))// Memory region is Inner Shareable
+#define PRRR_NS1	__BIT(19)	// Normal Shareable S=1 is Shareable
+#define PRRR_NS0	__BIT(18)	// Normal Shareable S=0 is Shareable
+#define PRRR_DS1	__BIT(17)	// Device Shareable S=1 is Shareable
+#define PRRR_DS0	__BIT(16)	// Device Shareable S=0 is Shareable
+#define PRRR_TRn(n)	__BITS(1+2*(n),0+2*(n))
+#define PRRR_TR_STRONG	0		// Strongly Ordered
+#define PRRR_TR_DEVICE	1		// Device
+#define PRRR_TR_NORMAL	2		// Normal Memory
 
 /* Defines for ARM Generic Timer */
 #define ARM_CNTCTL_ENABLE		__BIT(0) // Timer Enabled
@@ -736,6 +760,9 @@ ARMREG_READ_INLINE(ttbr1, "p15,0,%0,c2,c0,1") /* Translation Table Base Register
 ARMREG_WRITE_INLINE(ttbr1, "p15,0,%0,c2,c0,1") /* Translation Table Base Register 1 */
 ARMREG_READ_INLINE(ttbcr, "p15,0,%0,c2,c0,2") /* Translation Table Base Register */
 ARMREG_WRITE_INLINE(ttbcr, "p15,0,%0,c2,c0,2") /* Translation Table Base Register */
+/* cp15 c3 registers */
+ARMREG_READ_INLINE(dacr, "p15,0,%0,c3,c0,0") /* Domain Access Control Register */
+ARMREG_WRITE_INLINE(dacr, "p15,0,%0,c3,c0,0") /* Domain Access Control Register */
 /* cp15 c5 registers */
 ARMREG_READ_INLINE(dfsr, "p15,0,%0,c5,c0,0") /* Data Fault Status Register */
 ARMREG_READ_INLINE(ifsr, "p15,0,%0,c5,c0,1") /* Instruction Fault Status Register */
@@ -753,6 +780,9 @@ ARMREG_WRITE_INLINE(bpiall, "p15,0,%0,c5,c1,6") /* Breakpoint Invalidate All */
 ARMREG_WRITE_INLINE(dcimvac, "p15,0,%0,c7,c6,1") /* Data Invalidate MVA to PoC */
 ARMREG_WRITE_INLINE(dcisw, "p15,0,%0,c7,c6,2") /* Data Invalidate Set/Way */
 ARMREG_WRITE_INLINE(ats1cpr, "p15,0,%0,c7,c8,0") /* AddrTrans CurState PL1 Read */
+ARMREG_WRITE_INLINE(ats1cpw, "p15,0,%0,c7,c8,1") /* AddrTrans CurState PL1 Write */
+ARMREG_WRITE_INLINE(ats1cur, "p15,0,%0,c7,c8,2") /* AddrTrans CurState PL0 Read */
+ARMREG_WRITE_INLINE(ats1cuw, "p15,0,%0,c7,c8,3") /* AddrTrans CurState PL0 Write */
 ARMREG_WRITE_INLINE(dccmvac, "p15,0,%0,c7,c10,1") /* Data Clean MVA to PoC */
 ARMREG_WRITE_INLINE(dccsw, "p15,0,%0,c7,c10,2") /* Data Clean Set/Way */
 ARMREG_WRITE_INLINE(dsb, "p15,0,%0,c7,c10,4") /* Data Synchronization Barrier */
@@ -788,6 +818,12 @@ ARMREG_READ_INLINE(pmccntr, "p15,0,%0,c9,c13,0") /* PMC Cycle Counter */
 ARMREG_WRITE_INLINE(pmccntr, "p15,0,%0,c9,c13,0") /* PMC Cycle Counter */
 ARMREG_READ_INLINE(pmuserenr, "p15,0,%0,c9,c14,0") /* PMC User Enable */
 ARMREG_WRITE_INLINE(pmuserenr, "p15,0,%0,c9,c14,0") /* PMC User Enable */
+ARMREG_READ_INLINE(l2ctrl, "p15,1,%0,c9,c0,2") /* A7/A15 L2 Control Register */
+/* cp10 c10 registers */
+ARMREG_READ_INLINE(prrr, "p15,0,%0,c10,c2,0") /* Primary Region Remap Register */
+ARMREG_WRITE_INLINE(prrr, "p15,0,%0,c10,c2,0") /* Primary Region Remap Register */
+ARMREG_READ_INLINE(nrrr, "p15,0,%0,c10,c2,1") /* Normal Region Remap Register */
+ARMREG_WRITE_INLINE(nrrr, "p15,0,%0,c10,c2,1") /* Normal Region Remap Register */
 /* cp15 c13 registers */
 ARMREG_READ_INLINE(contextidr, "p15,0,%0,c13,c0,1") /* Context ID Register */
 ARMREG_WRITE_INLINE(contextidr, "p15,0,%0,c13,c0,1") /* Context ID Register */

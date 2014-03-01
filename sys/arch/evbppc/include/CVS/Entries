@@ -34,6 +34,7 @@
 /math.h/1.1/Mon Dec  9 12:16:09 2002/-kk/
 /mcontext.h/1.2/Fri Jan 17 22:48:43 2003/-kk/
 /mutex.h/1.2/Fri Feb  9 21:55:03 2007/-kk/
+/netbsd32_machdep.h/1.1/Fri Feb 28 05:52:09 2014/-kk/
 /obs200.h/1.2/Sun Dec 11 12:17:12 2005/-kk/
 /obs266.h/1.2/Sun Dec 11 12:17:12 2005/-kk/
 /obs405.h/1.8/Sat Jun 18 06:44:26 2011/-kk/

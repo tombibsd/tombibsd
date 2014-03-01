@@ -213,11 +213,6 @@ ffs_modcmd(modcmd_t cmd, void *arg)
 
 		sysctl_createv(&ffs_sysctl_log, 0, NULL, NULL,
 			       CTLFLAG_PERMANENT,
-			       CTLTYPE_NODE, "vfs", NULL,
-			       NULL, 0, NULL, 0,
-			       CTL_VFS, CTL_EOL);
-		sysctl_createv(&ffs_sysctl_log, 0, NULL, NULL,
-			       CTLFLAG_PERMANENT,
 			       CTLTYPE_NODE, "ffs",
 			       SYSCTL_DESCR("Berkeley Fast File System"),
 			       NULL, 0, NULL, 0,

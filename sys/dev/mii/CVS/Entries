@@ -15,7 +15,7 @@
 /dmphyreg.h/1.2/Mon Apr 28 20:23:53 2008/-kk/
 /etphy.c/1.1/Sat Nov 13 00:47:24 2010/-kk/
 /exphy.c/1.53/Thu Oct 24 10:28:58 2013/-kk/
-/files.mii/1.48/Wed Jan 26 18:48:12 2011/-kk/
+/files.mii/1.49/Sat Mar  1 06:04:42 2014/-kk/
 /gentbi.c/1.24/Mon Oct 19 18:41:13 2009/-kk/
 /glxtphy.c/1.23/Mon Oct 19 18:41:13 2009/-kk/
 /glxtphyreg.h/1.2/Mon Apr 28 20:23:53 2008/-kk/
@@ -40,6 +40,7 @@
 /makphy.c/1.38/Wed Jan  1 02:45:29 2014/-kk/
 /makphyreg.h/1.5/Sun Apr 19 11:17:46 2009/-kk/
 /mdio.h/1.3/Thu Oct 24 10:28:58 2013/-kk/
+/micphy.c/1.1/Wed Feb 26 04:13:44 2014/-kk/
 /mii.c/1.50/Fri Dec  4 22:37:35 2009/-kk/
 /mii.h/1.17/Thu Oct 24 10:28:58 2013/-kk/
 /mii_bitbang.c/1.12/Sun May  4 17:06:09 2008/-kk/
@@ -48,9 +49,9 @@
 /mii_physubr.c/1.80/Thu Oct 24 10:28:58 2013/-kk/
 /mii_verbose.c/1.3/Sun Jul 25 14:44:34 2010/-kk/
 /mii_verbose.h/1.2/Sun Jun  6 18:58:22 2010/-kk/
-/miidevs.h/1.120/Wed Jan  1 02:45:29 2014/-kk/
-/miidevs/1.117/Wed Jan  1 02:45:29 2014/-kk/
-/miidevs_data.h/1.108/Wed Jan  1 02:45:29 2014/-kk/
+/miidevs.h/1.121/Sat Mar  1 06:04:42 2014/-kk/
+/miidevs/1.118/Sat Mar  1 06:04:42 2014/-kk/
+/miidevs_data.h/1.109/Sat Mar  1 06:04:42 2014/-kk/
 /miivar.h/1.61/Thu Oct 24 10:28:58 2013/-kk/
 /mvphy.c/1.9/Thu Jun 18 08:40:26 2009/-kk/
 /mvphyreg.h/1.1/Fri Jul 21 23:55:27 2006/-kk/

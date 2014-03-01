@@ -809,7 +809,7 @@ ATF_TC_BODY(logf_base, tc)
 {
 	const float eps = 1.0e-7;
 
-	if (fabsf(logf(M_E) - 1.0) > eps)
+	if (fabsf(logf(M_E) - 1.0f) > eps)
 		atf_tc_fail_nonfatal("logf(e) != 1");
 }
 

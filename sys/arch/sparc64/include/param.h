@@ -228,7 +228,8 @@ extern void	delay(unsigned int);
 #define mstohz(ms) ((ms + 0UL) * hz / 1000)
 #endif
 
-extern int cputyp;
+/* Keep this a const so compiler optimization is done */
+extern const int cputyp;
 
 #if defined (SUN4US) || defined (SUN4V)
 #define CPU_ISSUN4U     (cputyp == CPU_SUN4U)

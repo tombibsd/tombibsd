@@ -139,12 +139,11 @@ struct bus_space sa11x0_bs_tag = {
 /* bus space functions */
 
 int
-sa11x0_bs_map(void *t, bus_addr_t bpa, bus_size_t size, int cacheable,
+sa11x0_bs_map(void *t, bus_addr_t bpa, bus_size_t size, int flags,
     bus_space_handle_t *bshp)
 {
 	u_long startpa, endpa, pa;
 	vaddr_t va;
-	pt_entry_t *pte;
 	const struct pmap_devmap *pd;
 
 	if ((pd = pmap_devmap_find_pa(bpa, size)) != NULL) {
@@ -165,13 +164,13 @@ sa11x0_bs_map(void *t, bus_addr_t bpa, bus_size_t size, int cacheable,
 
 	*bshp = (bus_space_handle_t)(va + (bpa - startpa));
 
+	const int pmapflags =
+	    (flags & (BUS_SPACE_MAP_CACHEABLE|BUS_SPACE_MAP_PREFETCHABLE))
+		? 0
+		: PMAP_NOCACHE;
+
 	for (pa = startpa; pa < endpa; pa += PAGE_SIZE, va += PAGE_SIZE) {
-		pmap_kenter_pa(va, pa, VM_PROT_READ | VM_PROT_WRITE, 0);
-		pte = vtopte(va);
-		if (cacheable == 0) {
-			*pte &= ~L2_S_CACHE_MASK;
-			PTE_SYNC(pte);
-		}
+		pmap_kenter_pa(va, pa, VM_PROT_READ | VM_PROT_WRITE, pmapflags);
 	}
 	pmap_update(pmap_kernel());
 

@@ -2425,11 +2425,6 @@ sysctl_kern_socket_setup(void)
 {
 
 	KASSERT(socket_sysctllog == NULL);
-	sysctl_createv(&socket_sysctllog, 0, NULL, NULL,
-		       CTLFLAG_PERMANENT,
-		       CTLTYPE_NODE, "kern", NULL,
-		       NULL, 0, NULL, 0,
-		       CTL_KERN, CTL_EOL);
 
 	sysctl_createv(&socket_sysctllog, 0, NULL, NULL,
 		       CTLFLAG_PERMANENT|CTLFLAG_READWRITE,

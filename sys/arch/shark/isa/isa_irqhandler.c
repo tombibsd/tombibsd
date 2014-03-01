@@ -81,10 +81,11 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/systm.h>
 #include <sys/syslog.h>
 #include <sys/malloc.h>
+#include <sys/intr.h>
 
-#include <machine/intr.h>
+#include <arm/locore.h>
+
 #include <machine/irqhandler.h>
-#include <machine/cpu.h>
 
 irqhandler_t *irqhandlers[NIRQS];
 

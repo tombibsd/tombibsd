@@ -188,11 +188,6 @@ udf_modcmd(modcmd_t cmd, void *arg)
 		 * more instance of the "number to vfs" mapping problem, but
 		 * "24" is the order as taken from sys/mount.h
 		 */
-		sysctl_createv(&udf_sysctl_log, 0, NULL, NULL,
-			       CTLFLAG_PERMANENT,
-			       CTLTYPE_NODE, "vfs", NULL,
-			       NULL, 0, NULL, 0,
-			       CTL_VFS, CTL_EOL);
 		sysctl_createv(&udf_sysctl_log, 0, NULL, &node,
 			       CTLFLAG_PERMANENT,
 			       CTLTYPE_NODE, "udf",

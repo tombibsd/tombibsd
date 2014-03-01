@@ -1030,11 +1030,6 @@ nfs_sysctl_init(void)
 
 	sysctl_createv(&nfs_clog, 0, NULL, NULL,
 		       CTLFLAG_PERMANENT,
-		       CTLTYPE_NODE, "vfs", NULL,
-		       NULL, 0, NULL, 0,
-		       CTL_VFS, CTL_EOL);
-	sysctl_createv(&nfs_clog, 0, NULL, NULL,
-		       CTLFLAG_PERMANENT,
 		       CTLTYPE_NODE, "nfs",
 		       SYSCTL_DESCR("NFS vfs options"),
 		       NULL, 0, NULL, 0,

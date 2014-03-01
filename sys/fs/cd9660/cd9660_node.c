@@ -170,6 +170,7 @@ void
 cd9660_ihashins(struct iso_node *ip)
 {
 	struct ihashhead *ipp;
+	int error __diagused;
 
 	KASSERT(mutex_owned(&cd9660_hashlock));
 
@@ -178,7 +179,8 @@ cd9660_ihashins(struct iso_node *ip)
 	LIST_INSERT_HEAD(ipp, ip, i_hash);
 	mutex_exit(&cd9660_ihash_lock);
 
-	VOP_LOCK(ITOV(ip), LK_EXCLUSIVE);
+	error = VOP_LOCK(ITOV(ip), LK_EXCLUSIVE);
+	KASSERT(error == 0);
 }
 
 /*

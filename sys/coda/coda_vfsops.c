@@ -550,11 +550,7 @@ coda_done(void)
 
 SYSCTL_SETUP(sysctl_vfs_coda_setup, "sysctl vfs.coda subtree setup")
 {
-	sysctl_createv(clog, 0, NULL, NULL,
-		       CTLFLAG_PERMANENT,
-		       CTLTYPE_NODE, "vfs", NULL,
-		       NULL, 0, NULL, 0,
-		       CTL_VFS, CTL_EOL);
+
 	sysctl_createv(clog, 0, NULL, NULL,
 		       CTLFLAG_PERMANENT,
 		       CTLTYPE_NODE, "coda",

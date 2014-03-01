@@ -1,8 +1,7 @@
 #	$NetBSD$
 
 
-CPUFLAGS+=-march=armv4
-CPUFLAGS+=-mlittle-endian
+CPPFLAGS+=-march=armv4
 
 SYSTEM_FIRST_OBJ=	gemini_start.o
 SYSTEM_FIRST_SFILE=	${THISARM}/gemini/gemini_start.S

@@ -5915,12 +5915,6 @@ bge_sysctl_init(struct bge_softc *sc)
 	int rc, bge_root_num;
 	const struct sysctlnode *node;
 
-	if ((rc = sysctl_createv(&sc->bge_log, 0, NULL, NULL,
-	    CTLFLAG_PERMANENT, CTLTYPE_NODE, "hw", NULL,
-	    NULL, 0, NULL, 0, CTL_HW, CTL_EOL)) != 0) {
-		goto out;
-	}
-
 	if ((rc = sysctl_createv(&sc->bge_log, 0, NULL, &node,
 	    0, CTLTYPE_NODE, "bge",
 	    SYSCTL_DESCR("BGE interface controls"),

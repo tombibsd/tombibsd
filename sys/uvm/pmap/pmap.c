@@ -1479,7 +1479,7 @@ pmap_enter_pv(pmap_t pmap, vaddr_t va, struct vm_page *pg, u_int *npte)
 	struct vm_page_md * const mdpg = VM_PAGE_TO_MD(pg);
 	pv_entry_t pv, npv, apv;
 	int16_t gen;
-	bool first = false;
+	bool first __unused = false;
 
 	UVMHIST_FUNC(__func__); UVMHIST_CALLED(pmaphist);
 	UVMHIST_LOG(pmaphist,

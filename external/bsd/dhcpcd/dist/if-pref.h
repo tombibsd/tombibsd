@@ -32,5 +32,5 @@
 
 #include "dhcpcd.h"
 
-void sort_interfaces(void);
+void sort_interfaces(struct dhcpcd_ctx *);
 #endif

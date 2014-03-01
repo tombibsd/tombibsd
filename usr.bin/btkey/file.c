@@ -67,8 +67,8 @@ list_file(void)
 		goto done;
 
 	while ((sym = prop_object_iterator_next(iter)) != NULL) {
-		memset(&bdaddr, 0, sizeof(bdaddr));
-		bt_aton(prop_dictionary_keysym_cstring_nocopy(sym), &bdaddr);
+		if (bt_aton(prop_dictionary_keysym_cstring_nocopy(sym), &bdaddr) == 0)
+			continue;
 		if (bdaddr_any(&bdaddr))
 			continue;
 

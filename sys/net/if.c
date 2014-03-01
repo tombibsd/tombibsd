@@ -2270,17 +2270,10 @@ sysctl_sndq_setup(struct sysctllog **clog, const char *ifname,
 
 	if (sysctl_createv(clog, 0, NULL, &rnode,
 		       CTLFLAG_PERMANENT,
-		       CTLTYPE_NODE, "net", NULL,
-		       NULL, 0, NULL, 0,
-		       CTL_NET, CTL_EOL) != 0)
-		goto bad;
-
-	if (sysctl_createv(clog, 0, &rnode, &rnode,
-		       CTLFLAG_PERMANENT,
 		       CTLTYPE_NODE, "interfaces",
 		       SYSCTL_DESCR("Per-interface controls"),
 		       NULL, 0, NULL, 0,
-		       CTL_CREATE, CTL_EOL) != 0)
+		       CTL_NET, CTL_CREATE, CTL_EOL) != 0)
 		goto bad;
 
 	if (sysctl_createv(clog, 0, &rnode, &rnode,
@@ -2337,11 +2330,6 @@ sysctl_net_ifq_setup(struct sysctllog **clog,
 		     int qid, struct ifqueue *ifq)
 {
 
-	sysctl_createv(clog, 0, NULL, NULL,
-		       CTLFLAG_PERMANENT,
-		       CTLTYPE_NODE, "net", NULL,
-		       NULL, 0, NULL, 0,
-		       CTL_NET, CTL_EOL);
 	sysctl_createv(clog, 0, NULL, NULL,
 		       CTLFLAG_PERMANENT,
 		       CTLTYPE_NODE, pfname, NULL,

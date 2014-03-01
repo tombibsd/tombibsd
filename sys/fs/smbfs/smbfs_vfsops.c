@@ -116,11 +116,6 @@ smbfs_modcmd(modcmd_t cmd, void *arg)
 		error = vfs_attach(&smbfs_vfsops);
 		if (error != 0)
 			break;
-		sysctl_createv(&smbfs_sysctl_log, 0, NULL, NULL,
-			       CTLFLAG_PERMANENT,
-			       CTLTYPE_NODE, "vfs", NULL,
-			       NULL, 0, NULL, 0,
-			       CTL_VFS, CTL_EOL);
 		sysctl_createv(&smbfs_sysctl_log, 0, NULL, &smb,
 			       CTLFLAG_PERMANENT,
 			       CTLTYPE_NODE, "samba",

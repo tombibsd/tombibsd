@@ -1249,7 +1249,7 @@ prefix_check(struct nd_opt_prefix_info *pinfo,
 		preferred_time += now.tv_sec;
 
 		if (!pp->timer && rai->clockskew &&
-		    abs(preferred_time - pp->pltimeexpire) > rai->clockskew) {
+		    llabs((long long)preferred_time - pp->pltimeexpire) > rai->clockskew) {
 			syslog(LOG_INFO,
 			       "<%s> preferred lifetime for %s/%d"
 			       " (decr. in real time) inconsistent on %s:"
@@ -1285,7 +1285,7 @@ prefix_check(struct nd_opt_prefix_info *pinfo,
 		valid_time += now.tv_sec;
 
 		if (!pp->timer && rai->clockskew &&
-		    abs(valid_time - pp->vltimeexpire) > rai->clockskew) {
+		    llabs((long long)valid_time - pp->vltimeexpire) > rai->clockskew) {
 			syslog(LOG_INFO,
 			       "<%s> valid lifetime for %s/%d"
 			       " (decr. in real time) inconsistent on %s:"

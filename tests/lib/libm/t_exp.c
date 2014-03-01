@@ -245,7 +245,7 @@ ATF_TC_BODY(exp2f_zero_neg, tc)
 #ifndef __vax__
 	const float x = -0.0L;
 
-	if (fabsf(exp2f(x) - 1.0) > 0.0)
+	if (fabsf(exp2f(x) - 1.0f) > 0.0)
 		atf_tc_fail_nonfatal("exp2f(-0.0) != 1.0");
 #endif
 }
@@ -261,7 +261,7 @@ ATF_TC_BODY(exp2f_zero_pos, tc)
 #ifndef __vax__
 	const float x = 0.0L;
 
-	if (fabsf(exp2f(x) - 1.0) > 0.0)
+	if (fabsf(exp2f(x) - 1.0f) > 0.0)
 		atf_tc_fail_nonfatal("exp2f(+0.0) != 1.0");
 #endif
 }
@@ -465,7 +465,7 @@ ATF_TC_BODY(expf_zero_neg, tc)
 #ifndef __vax__
 	const float x = -0.0L;
 
-	if (fabsf(expf(x) - 1.0) > 0.0)
+	if (fabsf(expf(x) - 1.0f) > 0.0)
 		atf_tc_fail_nonfatal("expf(-0.0) != 1.0");
 #endif
 }
@@ -481,7 +481,7 @@ ATF_TC_BODY(expf_zero_pos, tc)
 #ifndef __vax__
 	const float x = 0.0L;
 
-	if (fabsf(expf(x) - 1.0) > 0.0)
+	if (fabsf(expf(x) - 1.0f) > 0.0)
 		atf_tc_fail_nonfatal("expf(+0.0) != 1.0");
 #endif
 }

@@ -139,9 +139,6 @@ void *bootinfo = 0;
 int kgdb_break_at_attach;
 #endif
 
-/* Default to sun4u */
-int cputyp = CPU_SUN4U;
-
 #define	OFPATHLEN	128
 #define	OFNODEKEY	"OFpnode"
 
@@ -344,12 +341,11 @@ die_old_boot_loader:
 #endif
 #endif
 #endif
-
 	if (OF_getprop(findroot(), "compatible", buf, sizeof(buf)) > 0) {
 		if (strcmp(buf, "sun4us") == 0)
-			cputyp = CPU_SUN4US;
+			setcputyp(CPU_SUN4US);
 		else if (strcmp(buf, "sun4v") == 0)
-			cputyp = CPU_SUN4V;
+			setcputyp(CPU_SUN4V);
 	}
 
 	bi_howto = lookup_bootinfo(BTINFO_BOOTHOWTO);

@@ -78,17 +78,9 @@ acpi_debug_init(void)
 		goto fail;
 
 	rv = sysctl_createv(NULL, 0, NULL, &rnode,
-	    CTLFLAG_PERMANENT, CTLTYPE_NODE, "hw",
-	    NULL, NULL, 0, NULL, 0,
-	    CTL_HW, CTL_EOL);
-
-	if (rv != 0)
-		goto fail;
-
-	rv = sysctl_createv(NULL, 0, &rnode, &rnode,
 	    CTLFLAG_PERMANENT, CTLTYPE_NODE, "acpi",
 	    NULL, NULL, 0, NULL, 0,
-	    CTL_CREATE, CTL_EOL);
+	    CTL_HW, CTL_CREATE, CTL_EOL);
 
 	if (rv != 0)
 		goto fail;

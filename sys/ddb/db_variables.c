@@ -106,12 +106,6 @@ SYSCTL_SETUP(sysctl_ddb_setup, "sysctl ddb subtree setup")
 {
 
 	sysctl_createv(clog, 0, NULL, NULL,
-		       CTLFLAG_PERMANENT,
-		       CTLTYPE_NODE, "ddb", NULL,
-		       NULL, 0, NULL, 0,
-		       CTL_DDB, CTL_EOL);
-
-	sysctl_createv(clog, 0, NULL, NULL,
 		       CTLFLAG_PERMANENT|CTLFLAG_READWRITE,
 		       CTLTYPE_INT, "radix",
 		       SYSCTL_DESCR("Input and output radix"),

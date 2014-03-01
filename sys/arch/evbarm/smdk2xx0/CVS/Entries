@@ -1,7 +1,7 @@
 /if_cs_smdk24x0.c/1.6/Mon Nov 12 18:00:39 2012/-kk/
 /smdk2410_kbd.c/1.8/Sat Oct 27 17:17:49 2012/-kk/
 /smdk2410_lcd.c/1.8/Sat Oct 27 17:17:49 2012/-kk/
-/smdk2410_machdep.c/1.33/Thu Oct 24 10:28:57 2013/-kk/
+/smdk2410_machdep.c/1.34/Sat Mar  1 06:04:25 2014/-kk/
 /smdk2410_start.S/1.6/Mon Jan 31 06:28:05 2011/-kk/
 /smdk2800_machdep.c/1.41/Thu Oct 24 10:28:57 2013/-kk/
 /smdk2800_pci.c/1.5/Fri Jul  1 20:44:21 2011/-kk/

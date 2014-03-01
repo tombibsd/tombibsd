@@ -167,11 +167,13 @@ void
 ufs_ihashins(struct inode *ip)
 {
 	struct ihashhead *ipp;
+	int error __diagused;
 
 	KASSERT(mutex_owned(&ufs_hashlock));
 
 	/* lock the inode, then put it on the appropriate hash list */
-	VOP_LOCK(ITOV(ip), LK_EXCLUSIVE);
+	error = VOP_LOCK(ITOV(ip), LK_EXCLUSIVE);
+	KASSERT(error == 0);
 
 	mutex_enter(&ufs_ihash_lock);
 	ipp = &ihashtbl[INOHASH(ip->i_dev, ip->i_number)];

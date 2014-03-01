@@ -51,13 +51,6 @@ SYSCTL_SETUP(sysctl_net_bluetooth_setup, "sysctl net.bluetooth subtree setup")
 
 	sysctl_createv(clog, 0, NULL, NULL,
 		CTLFLAG_PERMANENT,
-		CTLTYPE_NODE, "net", NULL,
-		NULL, 0,
-		NULL, 0,
-		CTL_NET, CTL_EOL);
-
-	sysctl_createv(clog, 0, NULL, NULL,
-		CTLFLAG_PERMANENT,
 		CTLTYPE_NODE, "bluetooth",
 		SYSCTL_DESCR("Bluetooth Protocol Family"),
 		NULL, 0,

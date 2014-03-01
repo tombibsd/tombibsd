@@ -95,6 +95,11 @@
 
 #define TS_C_MPD	0x101##a000##00c0UL
 
+#	define	MPD_DR	0x08	/* RO: Data receive */
+#	define	MPD_CKR	0x04	/* RO: Clock receive */
+#	define	MPD_DS	0x02	/* WO: Data send - Must be a 1 to receive */
+#	define	MPD_CKS	0x01	/* WO: Clock send */
+
 #define TS_C_AAR0	0x101##a000##0100UL
 #define TS_C_AAR1	0x101##a000##0140UL
 #define TS_C_AAR2	0x101##a000##0180UL

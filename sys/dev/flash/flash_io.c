@@ -387,12 +387,6 @@ SYSCTL_SETUP(sysctl_flash, "sysctl flash subtree setup")
 	int rc, flash_root_num;
 	const struct sysctlnode *node;
 
-	if ((rc = sysctl_createv(clog, 0, NULL, NULL,
-	    CTLFLAG_PERMANENT, CTLTYPE_NODE, "hw", NULL,
-	    NULL, 0, NULL, 0, CTL_HW, CTL_EOL)) != 0) {
-		goto error;
-	}
-
 	if ((rc = sysctl_createv(clog, 0, NULL, &node,
 	    CTLFLAG_PERMANENT, CTLTYPE_NODE, "flash",
 	    SYSCTL_DESCR("FLASH driver controls"),

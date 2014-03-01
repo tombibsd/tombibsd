@@ -107,11 +107,11 @@
 /*
  * Bus access types.
  */
-typedef uint32_t bus_addr_t;
-typedef uint32_t bus_size_t;
+typedef uintptr_t bus_addr_t;
+typedef uintptr_t bus_size_t;
 
 #ifndef __HAVE_LOCAL_BUS_SPACE
-typedef	uint32_t bus_space_handle_t;
+typedef	uintptr_t bus_space_handle_t;
 typedef	const struct powerpc_bus_space *bus_space_tag_t;
 
 struct extent;

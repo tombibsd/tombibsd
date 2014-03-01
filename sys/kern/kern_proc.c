@@ -359,12 +359,6 @@ procinit_sysctl(void)
 
 	sysctl_createv(&clog, 0, NULL, NULL,
 		       CTLFLAG_PERMANENT,
-		       CTLTYPE_NODE, "kern", NULL,
-		       NULL, 0, NULL, 0,
-		       CTL_KERN, CTL_EOL);
-
-	sysctl_createv(&clog, 0, NULL, NULL,
-		       CTLFLAG_PERMANENT,
 		       CTLTYPE_NODE, "proc",
 		       SYSCTL_DESCR("System-wide process information"),
 		       sysctl_doeproc, 0, NULL, 0,

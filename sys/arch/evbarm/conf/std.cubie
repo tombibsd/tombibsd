@@ -5,7 +5,7 @@
 machine	evbarm arm
 include 	"arch/evbarm/conf/std.evbarm"
 
-# Pull in BEAGLEBOARD config definitions.
+# Pull in CUBIEBOARD config definitions.
 include		"arch/evbarm/conf/files.cubie"
 
 # To support easy transit to ../arch/arm/arm32

@@ -249,7 +249,8 @@ loop:
 	fd->fd_link = 0;
 	fd->fd_ix = ix;
 	uvm_vnp_setsize(*vpp, 0);
-	VOP_LOCK(*vpp, LK_EXCLUSIVE);
+	error = VOP_LOCK(*vpp, LK_EXCLUSIVE);
+	KASSERT(error == 0);
 	LIST_INSERT_HEAD(fc, fd, fd_hash);
 	mutex_exit(&fdcache_lock);
 

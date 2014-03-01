@@ -155,13 +155,6 @@ exec_script_makecmds(struct lwp *l, struct exec_package *epp)
 	if (cp >= hdrstr + hdrlinelen)
 		return ENOEXEC;
 
-	/*
-	 * If the script has an ELF header, don't exec it.
-	 */
-	if (epp->ep_hdrvalid >= sizeof(ELFMAG)-1 &&
-	    memcmp(hdrstr, ELFMAG, sizeof(ELFMAG)-1) == 0)
-		return ENOEXEC;
-
 	shellname = NULL;
 	shellarg = NULL;
 	shellarglen = 0;

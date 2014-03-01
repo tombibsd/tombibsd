@@ -229,7 +229,8 @@ loop:
 	kauth_cred_hold(np->n_rcred);
 	np->n_wcred = curlwp->l_cred;
 	kauth_cred_hold(np->n_wcred);
-	VOP_LOCK(vp, LK_EXCLUSIVE);
+	error = VOP_LOCK(vp, LK_EXCLUSIVE);
+	KASSERT(error == 0);
 	NFS_INVALIDATE_ATTRCACHE(np);
 	uvm_vnp_setsize(vp, 0);
 	(void)rb_tree_insert_node(&nmp->nm_rbtree, np);

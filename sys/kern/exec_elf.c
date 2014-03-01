@@ -873,10 +873,10 @@ netbsd_elf_signature(struct lwp *l, struct exec_package *epp,
 	size_t i;
 	Elf_Shdr *sh;
 	Elf_Nhdr *np;
-	size_t shsize;
+	size_t shsize, nsize;
 	int error;
 	int isnetbsd = 0;
-	char *ndata;
+	char *ndata, *ndesc;
 
 	epp->ep_pax_flags = 0;
 	if (eh->e_shnum > MAXSHNUM || eh->e_shnum == 0)
@@ -902,92 +902,90 @@ netbsd_elf_signature(struct lwp *l, struct exec_package *epp,
 		if (error)
 			continue;
 
+		/* Point to the note, skip the header */
 		ndata = (char *)(np + 1);
-		unsigned int maxlen = (unsigned int)(shp->sh_size -
-		    ((char *)ndata - (char *)np));
-		if (maxlen < np->n_namesz)
+
+		/*
+		 * Padding is present if necessary to ensure 4-byte alignment.
+		 * The actual section size is therefore:
+		 *    header size + 4-byte aligned name + 4-byte aligned desc
+		 * Ensure this size is consistent with what is indicated
+		 * in sh_size. The first check avoids integer overflows.
+		 */
+		if (np->n_namesz > shp->sh_size || np->n_descsz > shp->sh_size)
 			goto bad;
+		nsize = sizeof(*np) + roundup(np->n_namesz, 4) +
+		    roundup(np->n_descsz, 4);
+		if (nsize != shp->sh_size)
+			goto bad;
+		ndesc = ndata + roundup(np->n_namesz, 4);
+
 		switch (np->n_type) {
 		case ELF_NOTE_TYPE_NETBSD_TAG:
-			/*
-			 * It is us
-			 */
+			/* It is us */
 			if (np->n_namesz == ELF_NOTE_NETBSD_NAMESZ &&
 			    np->n_descsz == ELF_NOTE_NETBSD_DESCSZ &&
 			    memcmp(ndata, ELF_NOTE_NETBSD_NAME,
 			    ELF_NOTE_NETBSD_NAMESZ) == 0) {
-				memcpy(&epp->ep_osversion,
-				    ndata + ELF_NOTE_NETBSD_NAMESZ + 1,
+				memcpy(&epp->ep_osversion, ndesc,
 				    ELF_NOTE_NETBSD_DESCSZ);
 				isnetbsd = 1;
 				break;
 			}
+
 			/*
-			 * Ignore SuSE tags
+			 * Ignore SuSE tags; SuSE's n_type is the same as NetBSD's
+			 * one.
 			 */
 			if (np->n_namesz == ELF_NOTE_SUSE_NAMESZ &&
 			    memcmp(ndata, ELF_NOTE_SUSE_NAME,
 			    ELF_NOTE_SUSE_NAMESZ) == 0)
 				break;
-			/*
-			 * Dunno, warn for diagnostic
-			 */
+
 			goto bad;
 
 		case ELF_NOTE_TYPE_PAX_TAG:
-			if (np->n_namesz != ELF_NOTE_PAX_NAMESZ ||
-			    np->n_descsz != ELF_NOTE_PAX_DESCSZ ||
+			if (np->n_namesz == ELF_NOTE_PAX_NAMESZ &&
+			    np->n_descsz == ELF_NOTE_PAX_DESCSZ &&
 			    memcmp(ndata, ELF_NOTE_PAX_NAME,
-			    ELF_NOTE_PAX_NAMESZ)) {
-bad:
-#ifdef DIAGNOSTIC
-			{
-				/*
-				 * Ignore GNU tags
-				 */
-				if (np->n_namesz == ELF_NOTE_GNU_NAMESZ &&
-				    memcmp(ndata, ELF_NOTE_GNU_NAME,
-				    ELF_NOTE_GNU_NAMESZ) == 0)
-				    break;
-				int ns = MIN(np->n_namesz, maxlen);
-				printf("%s: Unknown elf note type %d: "
-				    "[namesz=%d, descsz=%d name=%*.*s]\n",
-				    epp->ep_kname, np->n_type, np->n_namesz,
-				    np->n_descsz, ns, ns, ndata);
+			    ELF_NOTE_PAX_NAMESZ) == 0) {
+				memcpy(&epp->ep_pax_flags, ndesc,
+				    sizeof(epp->ep_pax_flags));
+				break;
 			}
-#endif
-				continue;
-			}
-			(void)memcpy(&epp->ep_pax_flags,
-			    ndata + ELF_NOTE_PAX_NAMESZ,
-			    sizeof(epp->ep_pax_flags));
-			break;
+			goto bad;
 
 		case ELF_NOTE_TYPE_MARCH_TAG:
-			/*
-			 * Copy the machine arch into the package.
-			 */
+			/* Copy the machine arch into the package. */
 			if (np->n_namesz == ELF_NOTE_MARCH_NAMESZ
 			    && memcmp(ndata, ELF_NOTE_MARCH_NAME,
 				    ELF_NOTE_MARCH_NAMESZ) == 0) {
-				strlcpy(epp->ep_machine_arch,
-				    ndata + roundup(ELF_NOTE_MARCH_NAMESZ, 4),
+				/* Do not truncate the buffer */
+				if (np->n_descsz > sizeof(epp->ep_machine_arch))
+					goto bad;
+				/*
+				 * Ensure ndesc is NUL-terminated and of the
+				 * expected length.
+				 */
+				if (strnlen(ndesc, np->n_descsz) + 1 !=
+				    np->n_descsz)
+					goto bad;
+				strlcpy(epp->ep_machine_arch, ndesc,
 				    sizeof(epp->ep_machine_arch));
 				break;
 			}
+			goto bad;
+
 		case ELF_NOTE_TYPE_MCMODEL_TAG:
-			/*
-			 * arch specific check for code model
-			 */
+			/* arch specific check for code model */
 #ifdef ELF_MD_MCMODEL_CHECK
 			if (np->n_namesz == ELF_NOTE_MCMODEL_NAMESZ
 			    && memcmp(ndata, ELF_NOTE_MCMODEL_NAME,
 				    ELF_NOTE_MCMODEL_NAMESZ) == 0) {
-				ELF_MD_MCMODEL_CHECK(epp, 
-				    ndata + roundup(ELF_NOTE_MCMODEL_NAMESZ, 4),
-				    np->n_descsz);
+				ELF_MD_MCMODEL_CHECK(epp, ndesc, np->n_descsz);
 				break;
 			}
+			goto bad;
 #endif
 			break;
 
@@ -995,9 +993,19 @@ bad:
 			break;
 
 		default:
+bad:
 #ifdef DIAGNOSTIC
-			printf("%s: unknown note type %d\n", epp->ep_kname,
-			    np->n_type);
+			/* Ignore GNU tags */
+			if (np->n_namesz == ELF_NOTE_GNU_NAMESZ &&
+			    memcmp(ndata, ELF_NOTE_GNU_NAME,
+			    ELF_NOTE_GNU_NAMESZ) == 0)
+			    break;
+
+			int ns = MIN(np->n_namesz, shp->sh_size - sizeof(*np));
+			printf("%s: Unknown elf note type %d: "
+			    "[namesz=%d, descsz=%d name=%*.*s]\n",
+			    epp->ep_kname, np->n_type, np->n_namesz,
+			    np->n_descsz, ns, ns, ndata);
 #endif
 			break;
 		}

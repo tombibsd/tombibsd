@@ -53,11 +53,6 @@ SYSCTL_SETUP(sysctl_syscall_setup, "sysctl system call stats")
 	const struct sysctlnode *cnode;
 	int kern_syscalls;
 
-        sysctl_createv(clog, 0, NULL, NULL,
-			CTLFLAG_PERMANENT,  
-			CTLTYPE_NODE, "kern", NULL,
-			NULL, 0, NULL, 0,
-			CTL_KERN, CTL_EOL);
         sysctl_createv(clog, 0, NULL, &cnode,
 			CTLFLAG_PERMANENT,  
 			CTLTYPE_NODE, "syscalls",

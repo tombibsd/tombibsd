@@ -53,6 +53,12 @@ __RCSID("$NetBSD$");
 #define	I128	I16 I16 I16 I16 I16 I16 I16 I16
 
 static __cpu_simple_lock_t atomic_locks[128] = { I128 };
+/*
+ * Pick a lock out of above array depending on the object address
+ * passed. Most variables used atomically will not be in the same
+ * cacheline - and if they are, using the same lock is fine.
+ */
+#define HASH(PTR)	(((uintptr_t)(PTR) >> 3) & 127)
 
 #ifdef	__HAVE_ASM_ATOMIC_CAS_UP
 extern uint32_t _atomic_cas_up(volatile uint32_t *, uint32_t, uint32_t);
@@ -62,6 +68,17 @@ static uint32_t _atomic_cas_up(volatile uint32_t *, uint32_t, uint32_t);
 static uint32_t (*_atomic_cas_fn)(volatile uint32_t *, uint32_t, uint32_t) =
     _atomic_cas_up;
 RAS_DECL(_atomic_cas);
+
+#ifdef	__HAVE_ATOMIC_CAS_64_UP
+#ifdef	__HAVE_ASM_ATOMIC_CAS_64_UP
+extern uint64_t _atomic_cas_64_up(volatile uint64_t *, uint64_t, uint64_t);
+#else
+static uint64_t _atomic_cas_64_up(volatile uint64_t *, uint64_t, uint64_t);
+#endif
+static uint64_t (*_atomic_cas_64_fn)(volatile uint64_t *, uint64_t, uint64_t) =
+    _atomic_cas_64_up;
+RAS_DECL(_atomic_cas_64);
+#endif
 
 #ifdef	__HAVE_ASM_ATOMIC_CAS_16_UP
 extern uint16_t _atomic_cas_16_up(volatile uint16_t *, uint16_t, uint16_t);
@@ -96,6 +113,24 @@ _atomic_cas_up(volatile uint32_t *ptr, uint32_t old, uint32_t new)
 	}
 	*ptr = new;
 	RAS_END(_atomic_cas);
+
+	return ret;
+}
+#endif
+
+#if defined(__HAVE_ATOMIC_CAS_64_UP) && !defined(__HAVE_ASM_ATOMIC_CAS_64_UP)
+static uint64_t
+_atomic_cas_64_up(volatile uint64_t *ptr, uint64_t old, uint64_t new)
+{
+	uint64_t ret;
+
+	RAS_START(_atomic_cas_64);
+	ret = *ptr;
+	if (__predict_false(ret != old)) {
+		return ret;
+	}
+	*ptr = new;
+	RAS_END(_atomic_cas_64);
 
 	return ret;
 }
@@ -143,7 +178,60 @@ _atomic_cas_mp(volatile uint32_t *ptr, uint32_t old, uint32_t new)
 	__cpu_simple_lock_t *lock;
 	uint32_t ret;
 
-	lock = &atomic_locks[((uintptr_t)ptr >> 3) & 127];
+	lock = &atomic_locks[HASH(ptr)];
+	__cpu_simple_lock(lock);
+	ret = *ptr;
+	if (__predict_true(ret == old)) {
+		*ptr = new;
+	}
+	__cpu_simple_unlock(lock);
+
+	return ret;
+}
+
+#ifdef	__HAVE_ATOMIC_CAS_64_UP
+static uint64_t
+_atomic_cas_64_mp(volatile uint64_t *ptr, uint64_t old, uint64_t new)
+{
+	__cpu_simple_lock_t *lock;
+	uint64_t ret;
+
+	lock = &atomic_locks[HASH(ptr)];
+	__cpu_simple_lock(lock);
+	ret = *ptr;
+	if (__predict_true(ret == old)) {
+		*ptr = new;
+	}
+	__cpu_simple_unlock(lock);
+
+	return ret;
+}
+#endif
+
+static uint16_t
+_atomic_cas_16_mp(volatile uint16_t *ptr, uint16_t old, uint16_t new)
+{
+	__cpu_simple_lock_t *lock;
+	uint16_t ret;
+
+	lock = &atomic_locks[HASH(ptr)];
+	__cpu_simple_lock(lock);
+	ret = *ptr;
+	if (__predict_true(ret == old)) {
+		*ptr = new;
+	}
+	__cpu_simple_unlock(lock);
+
+	return ret;
+}
+
+static uint8_t
+_atomic_cas_8_mp(volatile uint8_t *ptr, uint8_t old, uint8_t new)
+{
+	__cpu_simple_lock_t *lock;
+	uint8_t ret;
+
+	lock = &atomic_locks[HASH(ptr)];
 	__cpu_simple_lock(lock);
 	ret = *ptr;
 	if (__predict_true(ret == old)) {
@@ -161,7 +249,16 @@ _atomic_cas_32(volatile uint32_t *ptr, uint32_t old, uint32_t new)
 	return (*_atomic_cas_fn)(ptr, old, new);
 }
 
-uint16_t _atomic_cas_16(volatile uint16_t *, uint16_t, uint16_t);
+#ifdef	__HAVE_ATOMIC_CAS_64_UP
+uint64_t _atomic_cas_64(volatile uint64_t *, uint64_t, uint64_t);
+
+uint64_t
+_atomic_cas_64(volatile uint64_t *ptr, uint64_t old, uint64_t new)
+{
+
+	return (*_atomic_cas_64_fn)(ptr, old, new);
+}
+#endif
 
 uint16_t
 _atomic_cas_16(volatile uint16_t *ptr, uint16_t old, uint16_t new)
@@ -186,6 +283,11 @@ __libc_atomic_init(void)
 	size_t len;
 
 	_atomic_cas_fn = _atomic_cas_mp;
+#ifdef	__HAVE_ATOMIC_CAS_64_UP
+	_atomic_cas_64_fn = _atomic_cas_64_mp;
+#endif
+	_atomic_cas_16_fn = _atomic_cas_16_mp;
+	_atomic_cas_8_fn = _atomic_cas_8_mp;
 
 	mib[0] = CTL_HW;
 	mib[1] = HW_NCPU; 
@@ -199,6 +301,14 @@ __libc_atomic_init(void)
 		_atomic_cas_fn = _atomic_cas_up;
 		return;
 	}
+
+#ifdef	__HAVE_ATOMIC_CAS_64_UP
+	if (rasctl(RAS_ADDR(_atomic_cas_64), RAS_SIZE(_atomic_cas_64),
+	    RAS_INSTALL) == 0) {
+		_atomic_cas_64_fn = _atomic_cas_64_up;
+		return;
+	}
+#endif
 
 	if (rasctl(RAS_ADDR(_atomic_cas_16), RAS_SIZE(_atomic_cas_16),
 	    RAS_INSTALL) == 0) {
@@ -239,6 +349,14 @@ __strong_alias(_atomic_cas_ulong_ni,_atomic_cas_32)
 atomic_op_alias(atomic_cas_ptr_ni,_atomic_cas_32)
 __strong_alias(_atomic_cas_ptr_ni,_atomic_cas_32)
 
-__strong_alias(__sync_val_compare_and_swap_4,_atomic_cas_32)
-__strong_alias(__sync_val_compare_and_swap_2,_atomic_cas_16)
-__strong_alias(__sync_val_compare_and_swap_1,_atomic_cas_8)
+//atomic_op_alias(atomic_cas_16,_atomic_cas_16)
+//atomic_op_alias(atomic_cas_16_ni,_atomic_cas_16)
+//atomic_op_alias(atomic_cas_8,_atomic_cas_8)
+//atomic_op_alias(atomic_cas_8_ni,_atomic_cas_8)
+#ifdef	__HAVE_ATOMIC_CAS_64_UP
+//atomic_op_alias(atomic_cas_64_ni,_atomic_cas_64)
+crt_alias(__sync_val_compare_and_swap_8,_atomic_cas_64)
+#endif
+crt_alias(__sync_val_compare_and_swap_4,_atomic_cas_32)
+crt_alias(__sync_val_compare_and_swap_2,_atomic_cas_16)
+crt_alias(__sync_val_compare_and_swap_1,_atomic_cas_8)

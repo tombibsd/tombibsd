@@ -33,11 +33,12 @@
 
 #include <sys/types.h>
 #include <machine/emipsreg.h>
+#include <lib/libsa/net.h>
 
 #include <stand/common/common.h>
 
-long
-getsecs()
+satime_t
+getsecs(void)
 {
     struct _Tc *Tc = (struct _Tc *)TIMER_DEFAULT_ADDRESS;
 	uint64_t now;

@@ -33,23 +33,39 @@
 RCSID("$NetBSD$")
 
 	.section	.ctors, "aw", @progbits
-	.p2align 2
+	.p2align P2SZREG
 	.global		__CTOR_LIST_END__
 	.hidden 	__CTOR_LIST_END__
 __CTOR_LIST_END__:
+#ifdef _LP64
+	.quad 0
+#else
 	.long 0
+#endif
 
 	.section	.dtors, "aw", @progbits
-	.p2align 2
+	.p2align P2SZREG
 	.global		__DTOR_LIST_END__
 	.hidden 	__DTOR_LIST_END__
 __DTOR_LIST_END__:
+#ifdef _LP64
+	.quad 0
+#else
 	.long 0
+#endif
 
 	.section	.eh_frame, "a", @progbits
-	.p2align 2
+	.p2align P2SZREG
+#ifdef _LP64
+	.quad 0
+#else
 	.long 0
+#endif
 
 	.section	.jcr, "aw", @progbits
-	.p2align 2
+	.p2align P2SZREG
+#ifdef _LP64
+	.quad 0
+#else
 	.long 0
+#endif

@@ -136,14 +136,9 @@ SYSCTL_SETUP(sysctl_rtw, "sysctl rtw(4) subtree setup")
 	const struct sysctlnode *cnode, *rnode;
 
 	if ((rc = sysctl_createv(clog, 0, NULL, &rnode,
-	    CTLFLAG_PERMANENT, CTLTYPE_NODE, "hw", NULL,
-	    NULL, 0, NULL, 0, CTL_HW, CTL_EOL)) != 0)
-		goto err;
-
-	if ((rc = sysctl_createv(clog, 0, &rnode, &rnode,
 	    CTLFLAG_PERMANENT, CTLTYPE_NODE, "rtw",
 	    "Realtek RTL818x 802.11 controls",
-	    NULL, 0, NULL, 0, CTL_CREATE, CTL_EOL)) != 0)
+	    NULL, 0, NULL, 0, CTL_HW, CTL_CREATE, CTL_EOL)) != 0)
 		goto err;
 
 #ifdef RTW_DEBUG

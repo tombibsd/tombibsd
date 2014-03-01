@@ -99,9 +99,12 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <machine/gdt.h>
 #include <machine/reg.h>
 #include <machine/specialreg.h>
+
 #ifdef MTRR
 #include <machine/mtrr.h>
 #endif
+
+#include <x86/fpu.h>
 
 void
 cpu_proc_fork(struct proc *p1, struct proc *p2)
@@ -151,6 +154,8 @@ cpu_lwp_fork(struct lwp *l1, struct lwp *l2, void *stack, size_t stacksize,
 
 	/* Copy the PCB from parent. */
 	memcpy(pcb2, pcb1, sizeof(struct pcb));
+	/* Copy any additional fpu state */
+	fpu_save_area_fork(pcb2, pcb1);
 
 #if defined(XEN)
 	pcb2->pcb_iopl = SEL_KPL;
@@ -169,10 +174,10 @@ cpu_lwp_fork(struct lwp *l1, struct lwp *l2, void *stack, size_t stacksize,
 	uv = uvm_lwp_getuarea(l2);
 
 #ifdef __x86_64__
-	pcb2->pcb_rsp0 = (uv + KSTACK_SIZE - 16) & ~0xf;
+	pcb2->pcb_rsp0 = (uv + USPACE - 16) & ~0xf;
 	tf = (struct trapframe *)pcb2->pcb_rsp0 - 1;
 #else
-	pcb2->pcb_esp0 = (uv + KSTACK_SIZE - 16);
+	pcb2->pcb_esp0 = (uv + USPACE - 16);
 	tf = (struct trapframe *)pcb2->pcb_esp0 - 1;
 
 	pcb2->pcb_iomap = NULL;

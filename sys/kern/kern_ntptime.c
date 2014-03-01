@@ -970,12 +970,6 @@ SYSCTL_SETUP(sysctl_kern_ntptime_setup, "sysctl kern.ntptime node setup")
 
 	sysctl_createv(clog, 0, NULL, NULL,
 		       CTLFLAG_PERMANENT,
-		       CTLTYPE_NODE, "kern", NULL,
-		       NULL, 0, NULL, 0,
-		       CTL_KERN, CTL_EOL);
-
-	sysctl_createv(clog, 0, NULL, NULL,
-		       CTLFLAG_PERMANENT,
 		       CTLTYPE_STRUCT, "ntptime",
 		       SYSCTL_DESCR("Kernel clock values for NTP"),
 		       sysctl_kern_ntptime, 0, NULL,

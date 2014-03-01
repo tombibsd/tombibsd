@@ -162,11 +162,13 @@ void
 efs_ihashins(struct efs_inode *eip)
 {
 	struct ihashhead *ipp;
+	int error __diagused;
 
 	KASSERT(mutex_owned(&efs_hashlock));
 
 	/* lock the inode, then put it on the appropriate hash list */
-	VOP_LOCK(EFS_ITOV(eip), LK_EXCLUSIVE);
+	error = VOP_LOCK(EFS_ITOV(eip), LK_EXCLUSIVE);
+	KASSERT(error == 0);
 
 	mutex_enter(&efs_ihash_lock);
 	ipp = &ihashtbl[INOHASH(eip->ei_dev, eip->ei_number)];

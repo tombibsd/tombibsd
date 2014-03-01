@@ -186,11 +186,6 @@ ext2fs_modcmd(modcmd_t cmd, void *arg)
 			break;
 		sysctl_createv(&ext2fs_sysctl_log, 0, NULL, NULL,
 			       CTLFLAG_PERMANENT,
-			       CTLTYPE_NODE, "vfs", NULL,
-			       NULL, 0, NULL, 0,
-			       CTL_VFS, CTL_EOL);
-		sysctl_createv(&ext2fs_sysctl_log, 0, NULL, NULL,
-			       CTLFLAG_PERMANENT,
 			       CTLTYPE_NODE, "ext2fs",
 			       SYSCTL_DESCR("Linux EXT2FS file system"),
 			       NULL, 0, NULL, 0,

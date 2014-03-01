@@ -59,6 +59,8 @@ __KERNEL_RCSID(1, "$NetBSD$");
 
 #include <dev/mii/miivar.h>
 
+#include <arm/locore.h>
+
 #include <arm/broadcom/bcm53xx_reg.h>
 #include <arm/broadcom/bcm53xx_var.h>
 

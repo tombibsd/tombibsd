@@ -495,6 +495,7 @@ ELFNAME2(linux,copyargs)(struct lwp *l, struct exec_package *pack,
 	*stackp += len;
 
 	len = (a - ai) * sizeof(AuxInfo);
+	KASSERT(len <= LINUX_ELF_AUX_ENTRIES * sizeof(AuxInfo));
 	if ((error = copyout(ai, *stackp, len)) != 0)
 		return error;
 	*stackp += len;

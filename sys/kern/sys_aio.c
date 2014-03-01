@@ -1100,15 +1100,6 @@ sysctl_aio_init(void)
 	aio_sysctl = NULL;
 
 	rv = sysctl_createv(&aio_sysctl, 0, NULL, NULL,
-		CTLFLAG_PERMANENT,
-		CTLTYPE_NODE, "kern", NULL,
-		NULL, 0, NULL, 0,
-		CTL_KERN, CTL_EOL);
-
-	if (rv != 0)
-		return rv;
-
-	rv = sysctl_createv(&aio_sysctl, 0, NULL, NULL,
 		CTLFLAG_PERMANENT | CTLFLAG_IMMEDIATE,
 		CTLTYPE_INT, "posix_aio",
 		SYSCTL_DESCR("Version of IEEE Std 1003.1 and its "

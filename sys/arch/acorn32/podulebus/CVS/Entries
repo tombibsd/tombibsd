@@ -10,7 +10,7 @@
 /csc.c/1.19/Thu Feb 13 15:22:11 2014/-kk/
 /cscreg.h/1.2/Mon Apr 28 20:23:10 2008/-kk/
 /cscvar.h/1.2/Mon Apr 28 20:23:10 2008/-kk/
-/esc.c/1.26/Thu Feb 13 15:22:11 2014/-kk/
+/esc.c/1.27/Sat Mar  1 06:04:21 2014/-kk/
 /escreg.h/1.1/Fri Oct  5 22:27:55 2001/-kk/
 /escvar.h/1.8/Sat Oct 27 17:17:23 2012/-kk/
 /icside.c/1.32/Tue Jul 31 15:50:31 2012/-kk/
@@ -34,7 +34,7 @@
 /sbic.c/1.17/Sat Oct 27 17:17:23 2012/-kk/
 /sbicreg.h/1.5/Wed Mar  8 23:46:22 2006/-kk/
 /sbicvar.h/1.6/Sat Oct 27 17:17:24 2012/-kk/
-/sfas.c/1.23/Thu Feb 13 15:22:11 2014/-kk/
+/sfas.c/1.24/Sat Mar  1 06:04:21 2014/-kk/
 /sfasreg.h/1.1/Fri Oct  5 22:27:59 2001/-kk/
 /sfasvar.h/1.7/Sat Oct 27 17:17:24 2012/-kk/
 /simide.c/1.29/Tue Jul 31 15:50:31 2012/-kk/

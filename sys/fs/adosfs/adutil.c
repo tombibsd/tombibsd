@@ -85,7 +85,10 @@ start_over:
 void
 adosfs_ainshash(struct adosfsmount *amp, struct anode *ap)
 {
-	VOP_LOCK(ATOV(ap), LK_EXCLUSIVE);
+	int error __diagused;
+
+	error = VOP_LOCK(ATOV(ap), LK_EXCLUSIVE);
+	KASSERT(error == 0);
 
 	mutex_enter(&adosfs_hashlock);
 	LIST_INSERT_HEAD(&amp->anodetab[AHASH(ap->block)], ap, link);

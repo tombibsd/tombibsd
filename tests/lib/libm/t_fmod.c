@@ -49,7 +49,7 @@ ATF_TC_BODY(fmod, tc)
 	ATF_CHECK(fmod(2.0, 0.5) == 0);
 	ATF_CHECK(fmodl(2.0, 0.5) == 0);
 
-	ATF_CHECK(fabsf(fmodf(1.0, 0.1) - 0.1) <= 55 * FLT_EPSILON);
+	ATF_CHECK(fabsf(fmodf(1.0, 0.1) - 0.1f) <= 55 * FLT_EPSILON);
 	ATF_CHECK(fabs(fmod(1.0, 0.1) - 0.1) <= 55 * DBL_EPSILON);
 	ATF_CHECK(fabsl(fmodl(1.0, 0.1L) - 0.1L) <= 55 * LDBL_EPSILON);
 }

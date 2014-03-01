@@ -46,14 +46,35 @@ __KERNEL_RCSID(1, "$NetBSD$");
 #include <net/if.h>
 #include <net/if_ether.h>
 
+#include <arm/locore.h>
+
 #include <arm/mainbus/mainbus.h>
 
 #include <arm/allwinner/awin_reg.h>
 #include <arm/allwinner/awin_var.h>
 
+#include <arm/cortex/gtmr_var.h>
+
 bus_space_handle_t awin_core_bsh;
 
 struct arm32_bus_dma_tag awin_dma_tag = {
+	_BUS_DMAMAP_FUNCS,
+	_BUS_DMAMEM_FUNCS,
+	_BUS_DMATAG_FUNCS,
+};
+
+struct arm32_dma_range awin_coherent_dma_ranges[] = {
+	[0] = {
+		.dr_sysbase = AWIN_SDRAM_PBASE,
+		.dr_busbase = AWIN_SDRAM_PBASE,
+		.dr_flags = _BUS_DMAMAP_COHERENT,
+	},
+};
+
+
+struct arm32_bus_dma_tag awin_coherent_dma_tag = {
+	._ranges = awin_coherent_dma_ranges,
+	._nranges = __arraycount(awin_coherent_dma_ranges),
 	_BUS_DMAMAP_FUNCS,
 	_BUS_DMAMEM_FUNCS,
 	_BUS_DMATAG_FUNCS,
@@ -161,6 +182,26 @@ awin_bootstrap(vaddr_t iobase, vaddr_t uartbase)
 #ifdef VERBOSE_INIT_ARM
 	printf("\n");
 #endif
+
+#ifdef MULTIPROCESSOR
+#ifdef VERBOSE_INIT_ARM
+	uint32_t s0 = bus_space_read_4(&awin_bs_tag, awin_core_bsh,
+	    AWIN_CPUCFG_OFFSET + AWIN_CPUCFG_CPU0_STATUS_REG);
+	uint32_t s1 = bus_space_read_4(&awin_bs_tag, awin_core_bsh,
+	    AWIN_CPUCFG_OFFSET + AWIN_CPUCFG_CPU1_STATUS_REG);
+	printf("%s: cpu status: 0=%#x 1=%#x\n", __func__, s0, s1);
+#endif
+	arm_cpu_max = 1 + __SHIFTOUT(armreg_l2ctrl_read(), L2CTRL_NUMCPU);
+#ifdef VERBOSE_INIT_ARM
+	printf("%s: %d cpus present\n", __func__, arm_cpu_max);
+#endif
+#endif
+}
+
+void
+awin_dma_bootstrap(psize_t psize)
+{
+	awin_coherent_dma_ranges[0].dr_len = psize;
 }
 
 #ifdef MULTIPROCESSOR

@@ -111,12 +111,15 @@ arm_netbsd_elf32_probe(struct lwp *l, struct exec_package *epp, void *eh0,
 		strlcpy(l->l_proc->p_md.md_march, epp->ep_machine_arch,
 		    sizeof(l->l_proc->p_md.md_march));
 	}
+
 	/*
 	 * If we are AAPCS (EABI) and armv6/armv7, we want alignment faults
-	 * be off.
+	 * to be off.
 	 */
 	if (aapcs_p && (CPU_IS_ARMV7_P() || CPU_IS_ARMV6_P())) {
 		l->l_md.md_flags |= MDLWP_NOALIGNFLT;
+	} else {
+		l->l_md.md_flags &= ~MDLWP_NOALIGNFLT;
 	}
 	return 0;
 }

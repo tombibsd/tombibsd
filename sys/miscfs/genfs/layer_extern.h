@@ -103,6 +103,7 @@ int	layer_bypass(void *);
 int	layer_getattr(void *);
 int	layer_inactive(void *);
 int	layer_reclaim(void *);
+int	layer_lock(void *);
 int	layer_print(void *);
 int	layer_bmap(void *);
 int	layer_fsync(void *);

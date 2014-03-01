@@ -184,7 +184,7 @@ ATF_TC_BODY(atanf_inf_neg, tc)
 	const float x = -1.0L / 0.0L;
 	const float eps = 1.0e-7;
 
-	if (fabsf(atanf(x) + M_PI_2) > eps)
+	if (fabsf(atanf(x) + (float)M_PI_2) > eps)
 		atf_tc_fail_nonfatal("atanf(-Inf) != -pi/2");
 #endif
 }
@@ -201,7 +201,7 @@ ATF_TC_BODY(atanf_inf_pos, tc)
 	const float x = +1.0L / 0.0L;
 	const float eps = 1.0e-7;
 
-	if (fabsf(atanf(x) - M_PI_2) > eps)
+	if (fabsf(atanf(x) - (float)M_PI_2) > eps)
 		atf_tc_fail_nonfatal("atanf(+Inf) != pi/2");
 #endif
 }

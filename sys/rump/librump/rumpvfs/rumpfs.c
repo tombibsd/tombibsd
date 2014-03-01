@@ -965,7 +965,8 @@ rump_vop_setattr(void *v)
 
 	if (vp->v_type == VREG &&
 	    vap->va_size != VSIZENOTSET &&
-	    vap->va_size != rn->rn_dlen) {
+	    vap->va_size != rn->rn_dlen &&
+	    (rn->rn_flags & RUMPNODE_ET_PHONE_HOST) == 0) {
 		void *newdata;
 		size_t copylen, newlen;
 

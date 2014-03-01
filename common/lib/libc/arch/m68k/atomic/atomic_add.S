@@ -66,7 +66,18 @@ ATOMIC_OP_ALIAS(atomic_add_long_nv,_atomic_add_32_nv)
 STRONG_ALIAS(_atomic_add_long_nv,_atomic_add_32_nv)
 ATOMIC_OP_ALIAS(atomic_add_ptr_nv,_atomic_add_32_nv)
 STRONG_ALIAS(_atomic_add_ptr_nv,_atomic_add_32_nv)
-STRONG_ALIAS(__sync_add_and_fetch_4,_atomic_add_32_nv)
+CRT_ALIAS(__sync_add_and_fetch_4,_atomic_add_32_nv)
+
+ENTRY(__sync_fetch_and_add_4)
+	movl	4(%sp), %a0
+1:	movl	(%a0), %d0
+	movl	%d0, %d1
+	addl	8(%sp), %d1
+	casl	%d0, %d1, (%a0)
+	bne	1b
+	movl	%d0, %a0	/* pointers return also in %a0 */
+	rts
+END(__sync_fetch_and_add_4)
 
 ENTRY(_atomic_add_16_nv)
 	movl	4(%sp), %a0
@@ -78,7 +89,17 @@ ENTRY(_atomic_add_16_nv)
 	rts
 END(_atomic_add_16_nv)
 
-STRONG_ALIAS(__sync_add_and_fetch_2,_atomic_add_16_nv)
+CRT_ALIAS(__sync_add_and_fetch_2,_atomic_add_16_nv)
+
+ENTRY(__sync_fetch_and_add_2)
+	movl	4(%sp), %a0
+1:	movw	(%a0), %d0
+	movw	%d0, %d1
+	addw	8(%sp), %d1
+	casw	%d0, %d1, (%a0)
+	bne	1b
+	rts
+END(__sync_fetch_and_add_2)
 
 ENTRY(_atomic_add_8_nv)
 	movl	4(%sp), %a0
@@ -90,4 +111,14 @@ ENTRY(_atomic_add_8_nv)
 	rts
 END(_atomic_add_8_nv)
 
-STRONG_ALIAS(__sync_add_and_fetch_1,_atomic_add_8_nv)
+CRT_ALIAS(__sync_add_and_fetch_1,_atomic_add_8_nv)
+
+ENTRY(__sync_fetch_and_add_1)
+	movl	4(%sp), %a0
+1:	movb	(%a0), %d0
+	movb	%d0, %d1
+	addb	8(%sp), %d1
+	casb	%d0, %d1, (%a0)
+	bne	1b
+	rts
+END(__sync_fetch_and_add_1)

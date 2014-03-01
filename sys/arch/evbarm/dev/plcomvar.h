@@ -42,7 +42,6 @@
 
 #include <sys/callout.h>
 #include <sys/timepps.h>
-#include <sys/simplelock.h>
 
 struct plcom_instance;
 

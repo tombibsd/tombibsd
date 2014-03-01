@@ -33,9 +33,8 @@ __RCSID("$NetBSD$");
 
 #include <sys/mman.h>
 #include <sys/resource.h>
+#include <sys/sysctl.h>
 #include <sys/wait.h>
-#define _KMEMUSER
-#include <machine/vmparam.h>
 
 #include <errno.h>
 #include <atf-c.h>
@@ -80,13 +79,16 @@ ATF_TC_HEAD(mlock_err, tc)
 
 ATF_TC_BODY(mlock_err, tc)
 {
+	unsigned long vmin = 0;
+	size_t len = sizeof(vmin);
 	void *invalid_ptr;
 	int null_errno = ENOMEM;	/* error expected for NULL */
 
-#ifdef VM_MIN_ADDRESS
-	if ((uintptr_t)VM_MIN_ADDRESS > 0)
+	if (sysctlbyname("vm.minaddress", &vmin, &len, NULL, 0) != 0)
+		atf_tc_fail("failed to read vm.minaddress");
+
+	if (vmin > 0)
 		null_errno = EINVAL;	/* NULL is not inside user VM */
-#endif
 
 	errno = 0;
 	ATF_REQUIRE_ERRNO(null_errno, mlock(NULL, page) == -1);

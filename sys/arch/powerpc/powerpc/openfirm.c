@@ -699,13 +699,13 @@ OF_interpret(const char *cmd, int nargs, int nreturns, ...)
 		return -1;
 	ofbcopy(cmd, OF_buf, len + 1);
 	i = 0;
-	args.slots[i] = (uint32_t)OF_buf;
+	args.slots[i] = (uintptr_t)OF_buf;
 	args.nargs = nargs + 1;
 	args.nreturns = nreturns + 1;
 	va_start(ap, nreturns);
 	i++;
 	while (i < args.nargs) {
-		args.slots[i] = (uint32_t)va_arg(ap, uint32_t *);
+		args.slots[i] = (uintptr_t)va_arg(ap, uint32_t *);
 		i++;
 	}
 

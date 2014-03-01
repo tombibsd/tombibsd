@@ -1338,12 +1338,6 @@ sysctl_net_route_setup(struct sysctllog **clog)
 {
 	const struct sysctlnode *rnode = NULL;
 
-	sysctl_createv(clog, 0, NULL, NULL,
-		       CTLFLAG_PERMANENT,
-		       CTLTYPE_NODE, "net", NULL,
-		       NULL, 0, NULL, 0,
-		       CTL_NET, CTL_EOL);
-
 	sysctl_createv(clog, 0, NULL, &rnode,
 		       CTLFLAG_PERMANENT,
 		       CTLTYPE_NODE, DOMAINNAME,

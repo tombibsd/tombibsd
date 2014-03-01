@@ -625,8 +625,7 @@ ipf_htent_remove(ipf_main_softc_t *softc, void *arg, iphtable_t *iph,
 	switch (iph->iph_type & ~IPHASH_ANON)
 	{
 	case IPHASH_GROUPMAP :
-		if (ipe->ipe_group != NULL)
-			ipf_group_del(softc, ipe->ipe_ptr, NULL);
+		ipf_group_del(softc, ipe->ipe_ptr, NULL);
 		break;
 
 	default :

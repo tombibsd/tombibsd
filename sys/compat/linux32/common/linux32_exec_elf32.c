@@ -191,6 +191,8 @@ linux32_elf32_copyargs(struct lwp *l, struct exec_package *pack,
 	a++;
 
 #if 0
+	/* XXX: increase LINUX32_ELF_AUX_ENTRIES if we enable those things */
+
 	a->a_type = LINUX_AT_SYSINFO;
 	a->a_v = NETBSD32PTR32I(&esdp->kernel_vsyscall[0]);
 	a++;
@@ -238,7 +240,8 @@ linux32_elf32_copyargs(struct lwp *l, struct exec_package *pack,
 	*stackp += sizeof(esd);
 #endif
 
-	len = (a - ai) * sizeof(AuxInfo);
+	len = (a - ai) * sizeof(Aux32Info);
+	KASSERT(len <= LINUX32_ELF_AUX_ENTRIES * sizeof(Aux32Info));
 	if ((error = copyout(ai, *stackp, len)) != 0)
 		return error;
 	*stackp += len;

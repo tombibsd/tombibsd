@@ -38,6 +38,8 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/device.h>
 #include <sys/atomic.h>
 
+#include <arm/locore.h>
+
 #include <arm/cortex/mpcore_var.h>
 #include <arm/cortex/pl310_reg.h>
 #include <arm/cortex/pl310_var.h>

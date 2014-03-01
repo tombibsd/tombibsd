@@ -2260,19 +2260,11 @@ SYSCTL_SETUP(sysctl_hw_ipw_accept_eula_setup, "sysctl hw.ipw.accept_eula")
 
 	sysctl_createv(NULL, 0, NULL, &rnode,
 		CTLFLAG_PERMANENT,
-		CTLTYPE_NODE, "hw",
-		NULL,
-		NULL, 0,
-		NULL, 0,
-		CTL_HW, CTL_EOL);
-
-	sysctl_createv(NULL, 0, &rnode, &rnode,
-		CTLFLAG_PERMANENT,
 		CTLTYPE_NODE, "ipw",
 		NULL,
 		NULL, 0,
 		NULL, 0,
-		CTL_CREATE, CTL_EOL);
+		CTL_HW, CTL_CREATE, CTL_EOL);
 
 	sysctl_createv(NULL, 0, &rnode, &cnode,
 		CTLFLAG_PERMANENT | CTLFLAG_READWRITE,

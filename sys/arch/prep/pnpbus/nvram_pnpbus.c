@@ -40,7 +40,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/kthread.h>
 #include <sys/device.h>
 #include <sys/malloc.h>
-#include <sys/simplelock.h>
 #include <sys/bus.h>
 #include <sys/intr.h>
 

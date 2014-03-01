@@ -53,11 +53,6 @@ SYSCTL_SETUP(sysctl_keylock_setup, "sysctl keylock setup")
 {
 	const struct sysctlnode *node = NULL;
 
-	sysctl_createv(clog, 0, NULL, NULL,
-	    CTLFLAG_PERMANENT,
-	    CTLTYPE_NODE, "hw", NULL,
-	    NULL, 0, NULL, 0,
-	    CTL_HW, CTL_EOL);
 	sysctl_createv(clog, 0, NULL, &node,
 	    CTLFLAG_PERMANENT,
 	    CTLTYPE_NODE, "keylock",

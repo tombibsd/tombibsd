@@ -658,11 +658,6 @@ map_done:
 	if (sc->sc_fixedrate && sc->sc_codectype == AC97_CODEC_TYPE_AUDIO)
 		return;
 
-	err = sysctl_createv(&sc->sc_log, 0, NULL, NULL, 0,
-			     CTLTYPE_NODE, "hw", NULL, NULL, 0, NULL, 0,
-			     CTL_HW, CTL_EOL);
-	if (err != 0)
-		goto sysctl_err;
 	err = sysctl_createv(&sc->sc_log, 0, NULL, &node, 0,
 			     CTLTYPE_NODE, device_xname(self), NULL, NULL, 0,
 			     NULL, 0, CTL_HW, CTL_CREATE, CTL_EOL);

@@ -38,7 +38,8 @@ CFLAGS+=	-fno-pic
 
 .if ${MACHINE} == "sparc64"
 # force same memory model as rest of the kernel
-CFLAGS+=	-mcmodel=medlow
+CFLAGS+=	${${ACTIVE_CC} == "gcc":? -mcmodel=medlow :}
+CFLAGS+=	${${ACTIVE_CC} == "clang":? -mcmodel=small :}
 .endif
 
 # evbppc needs some special help

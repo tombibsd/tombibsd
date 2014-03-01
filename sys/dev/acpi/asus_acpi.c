@@ -344,10 +344,6 @@ asus_sysctl_setup(struct asus_softc *sc)
 	if (sc->sc_cfvnum == 0)
 		return;
 
-	err = sysctl_createv(&sc->sc_log, 0, NULL, NULL, 0,
-	    CTLTYPE_NODE, "hw", NULL, NULL, 0, NULL, 0, CTL_HW, CTL_EOL);
-	if (err)
-		goto sysctl_err;
 	err = sysctl_createv(&sc->sc_log, 0, NULL, &node, 0,
 	    CTLTYPE_NODE, device_xname(sc->sc_dev), NULL, NULL, 0,
 	    NULL, 0, CTL_HW, CTL_CREATE, CTL_EOL);

@@ -985,16 +985,6 @@ uatp_setup_sysctl(struct uatp_softc *sc)
 {
 	int error;
 
-	error = sysctl_createv(&sc->sc_log, 0, NULL, NULL, CTLFLAG_PERMANENT,
-	    CTLTYPE_NODE, "hw", NULL,
-	    NULL, 0, NULL, 0,
-	    CTL_HW, CTL_EOL);
-	if (error != 0) {
-		aprint_error_dev(uatp_dev(sc), "unable to set up sysctl: %d\n",
-		    error);
-		return;
-	}
-
 	error = sysctl_createv(&sc->sc_log, 0, NULL, &sc->sc_node, 0,
 	    CTLTYPE_NODE, device_xname(uatp_dev(sc)),
 	    SYSCTL_DESCR("uatp configuration knobs"),

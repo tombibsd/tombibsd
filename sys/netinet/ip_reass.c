@@ -172,11 +172,6 @@ sysctl_ip_reass_setup(void)
 
 	sysctl_createv(&ip_reass_sysctllog, 0, NULL, NULL,
 		CTLFLAG_PERMANENT,
-		CTLTYPE_NODE, "net", NULL,
-		NULL, 0, NULL, 0,
-		CTL_NET, CTL_EOL);
-	sysctl_createv(&ip_reass_sysctllog, 0, NULL, NULL,
-		CTLFLAG_PERMANENT,
 		CTLTYPE_NODE, "inet",
 		SYSCTL_DESCR("PF_INET related settings"),
 		NULL, 0, NULL, 0,

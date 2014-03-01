@@ -29,10 +29,10 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef _VFPREG_H
-#define _VFPREG_H
+#ifndef _ARM_VFPREG_H_
+#define _ARM_VFPREG_H_
 
-/* FPSID regsiter */
+/* FPSID register */
 
 #define VFP_FPSID_IMP_MSK	0xff000000	/* Implementer */
 #define VFP_FPSID_IMP_ARM	0x41000000	/* Implementer: ARM */
@@ -110,4 +110,4 @@
 #define VFP_FPSCR_DZC	0x00000002	/* DivByZero Cumulative Flag */
 #define VFP_FPSCR_IOC	0x00000001	/* Invalid Operation Cumulative Flag */
 
-#endif /* _VFPREG_H */
+#endif /* _ARM_VFPREG_H_ */

@@ -2023,12 +2023,6 @@ sysctl_net_bpf_setup(void)
 {
 	const struct sysctlnode *node;
 
-	sysctl_createv(&bpf_sysctllog, 0, NULL, NULL,
-		       CTLFLAG_PERMANENT,
-		       CTLTYPE_NODE, "net", NULL,
-		       NULL, 0, NULL, 0,
-		       CTL_NET, CTL_EOL);
-
 	node = NULL;
 	sysctl_createv(&bpf_sysctllog, 0, NULL, &node,
 		       CTLFLAG_PERMANENT,

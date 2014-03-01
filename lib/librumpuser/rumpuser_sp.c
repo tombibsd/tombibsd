@@ -1021,7 +1021,7 @@ handlereq(struct spclient *spc)
 					break;
 				}
 			}
-			pthread_mutex_lock(&pfmtx);
+			pthread_mutex_unlock(&pfmtx);
 			spcfreebuf(spc);
 
 			if (!pf) {

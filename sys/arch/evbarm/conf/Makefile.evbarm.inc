@@ -5,7 +5,7 @@
 # tree, insert it into the kernel *before* we make the u-boot images.
 #
 RAMDISKNAME?=	ramdisk
-.if ${KERNEL_BUILD:T:M*INSTALL} != ""
+.if ${KERNEL_BUILD:T:M*INSTALL*} != ""
 RAMDISKDIR!=	cd ${NETBSDSRCDIR}/distrib/${THISARM:T}/instkernel/${RAMDISKNAME} && ${PRINTOBJDIR}
 
 .if exists(${RAMDISKDIR}/${RAMDISKNAME}.fs)

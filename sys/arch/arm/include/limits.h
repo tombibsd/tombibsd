@@ -31,8 +31,8 @@
  *	from: @(#)limits.h	7.2 (Berkeley) 6/28/90
  */
 
-#ifndef	_ARM_LIMITS_H_
-#define	_ARM_LIMITS_H_
+#ifndef _ARM_LIMITS_H_
+#define _ARM_LIMITS_H_
 
 #include <sys/featuretest.h>
 

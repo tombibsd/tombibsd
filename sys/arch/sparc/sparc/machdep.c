@@ -100,7 +100,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/exec.h>
 #include <sys/exec_aout.h>
 #include <sys/ucontext.h>
-#include <sys/simplelock.h>
 #include <sys/module.h>
 #include <sys/mutex.h>
 #include <sys/ras.h>

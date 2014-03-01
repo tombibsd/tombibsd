@@ -89,6 +89,7 @@ const struct vnodeopv_entry_desc umap_vnodeop_entries[] = {
 	{ &vop_fsync_desc,	layer_fsync },
 	{ &vop_inactive_desc,	layer_inactive },
 	{ &vop_reclaim_desc,	layer_reclaim },
+	{ &vop_lock_desc,	layer_lock },
 	{ &vop_open_desc,	layer_open },
 	{ &vop_setattr_desc,	layer_setattr },
 	{ &vop_access_desc,	layer_access },

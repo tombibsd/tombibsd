@@ -3290,14 +3290,9 @@ wpi_sysctlattach(struct wpi_softc *sc)
 	struct sysctllog **clog = &sc->sc_sysctllog;
 
 	if ((rc = sysctl_createv(clog, 0, NULL, &rnode,
-	    CTLFLAG_PERMANENT, CTLTYPE_NODE, "hw", NULL,
-	    NULL, 0, NULL, 0, CTL_HW, CTL_EOL)) != 0)
-		goto err;
-
-	if ((rc = sysctl_createv(clog, 0, &rnode, &rnode,
 	    CTLFLAG_PERMANENT, CTLTYPE_NODE, device_xname(sc->sc_dev),
 	    SYSCTL_DESCR("wpi controls and statistics"),
-	    NULL, 0, NULL, 0, CTL_CREATE, CTL_EOL)) != 0)
+	    NULL, 0, NULL, 0, CTL_HW, CTL_CREATE, CTL_EOL)) != 0)
 		goto err;
 
 	if ((rc = sysctl_createv(clog, 0, &rnode, &cnode,

@@ -59,7 +59,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/buf.h>
 #include <sys/exec.h>
 #include <sys/vnode.h>
-#include <sys/simplelock.h>
 
 #include <sys/exec_aout.h>
 

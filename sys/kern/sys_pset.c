@@ -598,11 +598,6 @@ SYSCTL_SETUP(sysctl_pset_setup, "sysctl kern.pset subtree setup")
 {
 	const struct sysctlnode *node = NULL;
 
-	sysctl_createv(clog, 0, NULL, NULL,
-		CTLFLAG_PERMANENT,
-		CTLTYPE_NODE, "kern", NULL,
-		NULL, 0, NULL, 0,
-		CTL_KERN, CTL_EOL);
 	sysctl_createv(clog, 0, NULL, &node,
 		CTLFLAG_PERMANENT,
 		CTLTYPE_NODE, "pset",

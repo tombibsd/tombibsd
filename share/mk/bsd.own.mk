@@ -47,17 +47,33 @@ NEED_OWN_INSTALL_TARGET?=	yes
 TOOLCHAIN_MISSING?=	no
 
 #
-# Platforms still using GCC 4.1
+# GCC Using platforms.
 #
 .if ${MKGCC:Uyes} != "no"
+
+#
+# Platforms still using GCC 4.1
+#
 .if ${MACHINE_CPU}  == "vax"
 HAVE_GCC?=    4
 .else
 # Otherwise, default to GCC4.5
 HAVE_GCC?=    45
 .endif
+
+#
+# We import the old gcc as "gcc.old" when upgrading.  EXTERNAL_GCC_SUBDIR is
+# set to the relevant subdirectory in src/external/gpl3 for his HAVE_GCC.
+#
+.if ${HAVE_GCC} == 45
+EXTERNAL_GCC_SUBDIR=	gcc.old
+.elif ${HAVE_GCC} == 48
+EXTERNAL_GCC_SUBDIR=	gcc
+.else
+EXTERNAL_GCC_SUBDIR=	/does/not/exist
 .endif
 
+.endif
 
 .if ${MACHINE_ARCH} == "ia64"
 USE_COMPILERCRTSTUFF?=	yes
@@ -295,7 +311,7 @@ TOOL_GREP=		${TOOLDIR}/bin/${_TOOL_PREFIX}grep
 TOOL_GROFF=		PATH=${TOOLDIR}/lib/groff:$${PATH} ${TOOLDIR}/bin/${_TOOL_PREFIX}groff
 TOOL_HEXDUMP=		${TOOLDIR}/bin/${_TOOL_PREFIX}hexdump
 TOOL_HP300MKBOOT=	${TOOLDIR}/bin/${_TOOL_PREFIX}hp300-mkboot
-TOOL_HP700MKBOOT=	${TOOLDIR}/bin/${_TOOL_PREFIX}hp700-mkboot
+TOOL_HPPAMKBOOT=	${TOOLDIR}/bin/${_TOOL_PREFIX}hppa-mkboot
 TOOL_INDXBIB=		${TOOLDIR}/bin/${_TOOL_PREFIX}indxbib
 TOOL_INSTALLBOOT=	${TOOLDIR}/bin/${_TOOL_PREFIX}installboot
 TOOL_INSTALL_INFO=	${TOOLDIR}/bin/${_TOOL_PREFIX}install-info
@@ -396,7 +412,7 @@ TOOL_GREP=		grep
 TOOL_GROFF=		groff
 TOOL_HEXDUMP=		hexdump
 TOOL_HP300MKBOOT=	hp300-mkboot
-TOOL_HP700MKBOOT=	hp700-mkboot
+TOOL_HPPAMKBOOT=	hppa-mkboot
 TOOL_INDXBIB=		indxbib
 TOOL_INSTALLBOOT=	installboot
 TOOL_INSTALL_INFO=	install-info
@@ -485,7 +501,7 @@ MACHINES.arm=		acorn26 acorn32 cats epoc32 evbarm hpcarm \
 MACHINES.coldfire=	evbcf
 MACHINES.i386=		i386
 MACHINES.ia64=		ia64
-MACHINES.hppa=		hp700
+MACHINES.hppa=		hppa
 MACHINES.m68000=	sun2
 MACHINES.m68k=		amiga atari cesfic hp300 luna68k mac68k \
 			news68k next68k sun3 x68k

@@ -139,7 +139,7 @@ options		DDB_ONPANIC=1
 options 	DDB_HISTORY_SIZE=100	# Enable history editing in DDB
 #options 	KGDB
 makeoptions	DEBUG="-g"	# compile full symbol table
-options 	SYMTAB_SPACE=800000
+options 	SYMTAB_SPACE=820000
 
 ## USB Debugging options
 options USB_DEBUG
@@ -177,11 +177,10 @@ armgtmr0	at armperiph?				# ARM Generic Timer
 # SoC I/O
 awinio0		at mainbus?
 
-# SDHC controllers
-#sdhc0		at awinio0 port 0
-#sdhc*		at awinio0 port ?
-#sdmmc*		at sdhc?		# SD/MMC bus
-#ld*		at sdmmc?
+# SD/MMC controllers
+awinmmc0	at awinio0 port 0
+sdmmc*		at awinmmc?
+ld*		at sdmmc?
 
 # NAND controller
 awinnand0	at awinio0
@@ -264,8 +263,10 @@ ahcisata*	at awinio0
 atabus*		at ata?
 wd*		at atabus? drive ?
 
-# 10/100/1000 Ethernet (A10/A20)
+# 10/100 Ethernet (A10/A20)
 awe0		at awinio0 port ?
+# 10/100/1000 Ethernet (A10/A20)
+awge0		at awinio0 port ?
 
 include "dev/usb/usbdevices.config"
 
@@ -293,4 +294,4 @@ pseudo-device	pty			# pseudo-terminals
 pseudo-device	ksyms			# /dev/ksyms
 pseudo-device	lockstat		# lock profiling
 
-cinclude "arch/evbarm/conf/BEAGLEBOARD.local"
+cinclude "arch/evbarm/conf/CUBIEBOARD.local"

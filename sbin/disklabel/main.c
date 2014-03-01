@@ -239,7 +239,7 @@ static const struct disklabel_params {
 	{ "bebox",	0, 1,   0,  8, 3, 0, BIG_ENDIAN },	/* powerpc */
 
 	{ "emips",	0, 1,   0, 16, 2, 0, BIG_ENDIAN },	/* mips */
-	{ "hp700",	0, 1,   0, 16, 2, 0, BIG_ENDIAN },	/* hppa */
+	{ "hppa",	0, 1,   0, 16, 2, 0, BIG_ENDIAN },	/* hppa */
 	{ "ibmnws",	0, 1,   0, 16, 2, 0, BIG_ENDIAN },	/* powerpc */
 	{ "ofppc",	0, 1,   0, 16, 2, 0, BIG_ENDIAN },	/* powerpc */
 	{ "rs6000",	0, 1,   0, 16, 2, 0, BIG_ENDIAN },	/* powerpc */
