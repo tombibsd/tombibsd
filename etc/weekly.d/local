@@ -1,0 +1,10 @@
+#	$NetBSD$
+
+if [ -f /etc/weekly.local ]; then
+	. /etc/weekly.local > $TMP 2>&1
+	if [ -s $TMP ] ; then
+		printf "\nRunning /etc/weekly.local:\n"
+		cat $TMP
+	fi
+	rm -f $TMP
+fi

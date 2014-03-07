@@ -1,0 +1,51 @@
+#	$NetBSD$
+
+awk '{
+	# ignore comments and blank lines
+	if ($0 ~ /^\#/ || $0 ~ /^$/ )
+		next;
+	# manage line continuation
+	while ($NF ~ /^\\$/) {
+		$NF = "";
+		line = $0 "";
+		getline;
+		$0 = line $0 "";
+	}
+
+	delete dir;
+	readonly = ndir = 0;
+	for (i = 1; i <= NF; ++i) {
+		if ($i ~ /^\//) dir[ndir++] = $i;
+		else if ($i ~ /^-/) {
+			if ($i ~ /^-(ro|o)$/) readonly = 1;
+			if ($i ~ /^-network/) next;
+		}
+		else next;
+	}
+	if (readonly)
+		for (item in dir)
+			rodir[nrodir++] = dir[item];
+	else
+		for (item in dir)
+			rwdir[nrwdir++] = dir[item];
+
+}
+
+END {
+	if (nrodir) {
+		printf("Globally exported file system%s, read-only:\n",
+			nrodir > 1 ? "s" : "");
+		for (item in rodir)
+			printf("\t%s\n", rodir[item]);
+	}
+	if (nrwdir) {
+		printf("Globally exported file system%s, read-write:\n",
+			nrwdir > 1 ? "s" : "");
+		for (item in rwdir)
+			printf("\t%s\n", rwdir[item]);
+	}
+}' < /etc/exports > $OUTPUT
+if [ -s $OUTPUT ] ; then
+	printf "\nChecking for globally exported file systems.\n"
+	cat $OUTPUT
+fi

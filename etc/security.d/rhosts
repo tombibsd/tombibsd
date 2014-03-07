@@ -1,0 +1,36 @@
+#	$NetBSD$
+
+list="/etc/hosts.equiv /etc/hosts.lpd"
+for f in $list ; do
+	if [ -f $f ] && egrep '\+' $f > /dev/null ; then
+		printf "\nPlus sign in $f file.\n"
+	fi
+done
+
+# Check for special users with .rhosts files.  Only root and toor should
+# have .rhosts files.  Also, .rhosts files should not have plus signs.
+awk -F: '$1 != "root" && $1 != "toor" && \
+	($3 < 100 || $1 == "ftp" || $1 == "uucp") \
+		{ print $1 " " $9 }' $MP |
+sort -k2 |
+while read uid homedir; do
+	if [ -f ${homedir}/.rhosts ] ; then
+		rhost=$(ls -ldgT ${homedir}/.rhosts)
+		printf -- "$uid: $rhost\n"
+	fi
+done > $OUTPUT
+if [ -s $OUTPUT ] ; then
+	printf "\nChecking for special users with .rhosts files.\n"
+	cat $OUTPUT
+fi
+
+while read uid homedir; do
+	if [ -f ${homedir}/.rhosts -a -r ${homedir}/.rhosts ] && \
+	    cat -f ${homedir}/.rhosts | egrep '\+' > /dev/null ; then
+		printf -- "$uid: + in .rhosts file.\n"
+	fi
+done < $MPBYPATH > $OUTPUT
+if [ -s $OUTPUT ] ; then
+	printf "\nChecking .rhosts files syntax.\n"
+	cat $OUTPUT
+fi

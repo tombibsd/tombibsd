@@ -1,0 +1,166 @@
+#	$NetBSD$
+
+> $ERR
+(
+
+# Convert check_devices_ignore_fstypes="foo !bar bax"
+#    into "-fstype foo -o ! -fstype bar -o -fstype bax"
+# and check_devices_ignore_paths="/foo !/bar /bax"
+#    into " -path /foo -o ! -path /bar -o -path /bax"
+#
+ignexpr=$(\
+    echo $check_devices_ignore_fstypes | \
+	sed -e's/\(!*\)\([^[:space:]]\{1,\}\)/-o \1 -fstype \2/g' ; \
+    echo $check_devices_ignore_paths | \
+	sed -e's/\(!*\)\([^[:space:]]\{1,\}\)/-o \1 -path \2/g' \
+)
+
+# Massage the expression into ( $ignexpr ) -a -prune -o
+if [ -n "${ignexpr}" ]; then
+	ignexpr=$(\
+		echo $ignexpr | \
+		    sed -e 's/^-o /( /' \
+			-e 's/$/ ) -a -prune -o/' \
+	)
+fi
+
+find / $ignexpr \
+    \( \( -perm -u+s -a ! -type d \) -o \
+       \( -perm -g+s -a ! -type d \) -o \
+       -type b -o -type c \) -print0 | \
+xargs -0 ls -ldgTq | sort +9 > $LIST
+
+) 2> $OUTPUT
+
+# Display any errors that occurred during system file walk.
+if [ -s $OUTPUT ] ; then
+	printf "Setuid/device find errors:\n" >> $ERR
+	cat $OUTPUT >> $ERR
+	printf "\n" >> $ERR
+fi
+
+# Display any changes in the setuid file list.
+egrep -v '^[bc]' $LIST > $TMP1
+if [ -s $TMP1 ] ; then
+	# Check to make sure uudecode isn't setuid.
+	if grep -w uudecode $TMP1 > /dev/null ; then
+		printf "\nUudecode is setuid.\n" >> $ERR
+	fi
+
+	file=$work_dir/setuid
+	migrate_file "$backup_dir/setuid" "$file"
+	CUR=${file}.current
+	BACK=${file}.backup
+	if [ -s $CUR ] ; then
+		if cmp -s $CUR $TMP1 ; then
+			:
+		else
+			> $TMP2
+			join -110 -210 -v2 $CUR $TMP1 > $OUTPUT
+			if [ -s $OUTPUT ] ; then
+				printf "Setuid additions:\n" >> $ERR
+				tee -a $TMP2 < $OUTPUT >> $ERR
+				printf "\n" >> $ERR
+			fi
+
+			join -110 -210 -v1 $CUR $TMP1 > $OUTPUT
+			if [ -s $OUTPUT ] ; then
+				printf "Setuid deletions:\n" >> $ERR
+				tee -a $TMP2 < $OUTPUT >> $ERR
+				printf "\n" >> $ERR
+			fi
+
+			sort -k10 $TMP2 $CUR $TMP1 | \
+			    sed -e 's/[	 ][	 ]*/ /g' | \
+			    uniq -u > $OUTPUT
+			if [ -s $OUTPUT ] ; then
+				printf "Setuid changes:\n" >> $ERR
+				column -t $OUTPUT >> $ERR
+				printf "\n" >> $ERR
+			fi
+
+			backup_file update $TMP1 $CUR $BACK
+		fi
+	else
+		printf "Setuid additions:\n" >> $ERR
+		column -t $TMP1 >> $ERR
+		printf "\n" >> $ERR
+		backup_file add $TMP1 $CUR $BACK
+	fi
+fi
+
+# Check for block and character disk devices that are readable or
+# writable or not owned by root.operator.
+>$TMP1
+DISKLIST="ccd ch hk hp ld md ra raid rb rd rl rx \
+    sd se ss uk up vnd wd xd xy"
+#	DISKLIST="$DISKLIST ct mt st wt"
+for i in $DISKLIST; do
+	egrep "^b.*/${i}[0-9][0-9]*[a-p]$"  $LIST >> $TMP1
+	egrep "^c.*/r${i}[0-9][0-9]*[a-p]$"  $LIST >> $TMP1
+done
+
+awk '$3 != "root" || $4 != "operator" || $1 !~ /.rw-r-----/ \
+	{ printf "Disk %s is user %s, group %s, permissions %s.\n", \
+	    $11, $3, $4, $1; }' < $TMP1 > $OUTPUT
+if [ -s $OUTPUT ] ; then
+	printf "\nChecking disk ownership and permissions.\n" >> $ERR
+	cat $OUTPUT >> $ERR
+	printf "\n" >> $ERR
+fi
+
+# Display any changes in the device file list.
+egrep '^[bc]' $LIST | sort -k11 > $TMP1
+if [ -s $TMP1 ] ; then
+	file=$work_dir/device
+	migrate_file "$backup_dir/device" "$file"
+	CUR=${file}.current
+	BACK=${file}.backup
+
+	if [ -s $CUR ] ; then
+		if cmp -s $CUR $TMP1 ; then
+			:
+		else
+			> $TMP2
+			join -111 -211 -v2 $CUR $TMP1 > $OUTPUT
+			if [ -s $OUTPUT ] ; then
+				printf "Device additions:\n" >> $ERR
+				tee -a $TMP2 < $OUTPUT >> $ERR
+				printf "\n" >> $ERR
+			fi
+
+			join -111 -211 -v1 $CUR $TMP1 > $OUTPUT
+			if [ -s $OUTPUT ] ; then
+				printf "Device deletions:\n" >> $ERR
+				tee -a $TMP2 < $OUTPUT >> $ERR
+				printf "\n" >> $ERR
+			fi
+
+			# Report any block device change. Ignore
+			# character devices, only the name is
+			# significant.
+			cat $TMP2 $CUR $TMP1 | \
+			    sed -e '/^c/d' | \
+			    sort -k11 | \
+			    sed -e 's/[	 ][	 ]*/ /g' | \
+			    uniq -u > $OUTPUT
+			if [ -s $OUTPUT ] ; then
+				printf "Block device changes:\n" >> $ERR
+				column -t $OUTPUT >> $ERR
+				printf "\n" >> $ERR
+			fi
+
+			backup_file update $TMP1 $CUR $BACK
+		fi
+	else
+		printf "Device additions:\n" >> $ERR
+		column -t $TMP1 >> $ERR
+		printf "\n" >> $ERR
+		backup_file add $TMP1 $CUR $BACK >> $ERR
+	fi
+fi
+if [ -s $ERR ] ; then
+	printf "\nChecking setuid files and devices:\n"
+	cat $ERR
+	printf "\n"
+fi

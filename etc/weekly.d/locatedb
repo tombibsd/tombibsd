@@ -1,0 +1,12 @@
+#	$NetBSD$
+
+echo ""
+if [ -f /var/db/locate.database ]; then
+	echo "Rebuilding locate database:"
+	chmod 644 /var/db/locate.database
+	chown nobody:nobody /var/db/locate.database
+	(cd / && nice -5 su -m nobody -c /usr/libexec/locate.updatedb 2>/dev/null)
+	chown root:wheel /var/db/locate.database
+else
+	echo "Not rebuilding locate database; no /var/db/locate.database"
+fi

@@ -1,0 +1,9 @@
+#	$NetBSD$
+
+if [ -f /etc/security.local ]; then
+	. /etc/security.local > $OUTPUT 2>&1
+	if [ -s $OUTPUT ] ; then
+		printf "\nRunning /etc/security.local:\n"
+		cat $OUTPUT
+	fi
+fi

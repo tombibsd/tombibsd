@@ -1,0 +1,43 @@
+#	$NetBSD$
+
+mtree -D -k type -f $SPECIALSPEC -E exclude |
+    sed '/^type=file/!d ; s/type=file \.//' | unvis > $CHANGEFILES
+
+(
+	# Add other files which might dynamically exist:
+	#	/etc/ifconfig.*
+	#	/etc/raid*.conf
+	#	/etc/rc.d/*
+	#	/etc/rc.conf.d/*
+	#
+	echo "/etc/ifconfig.*"
+	echo "/etc/raid*.conf"
+	echo "/etc/rc.d/*"
+	echo "/etc/rc.conf.d/*"
+	echo "/etc/lvm/backup/*"
+	echo "/etc/lvm/archive/*"
+
+	# Add /etc/changelist
+	#
+	if [ -s /etc/changelist ]; then
+		grep -v '^#' /etc/changelist
+	fi
+) | while read file; do
+	case "$file" in
+	*[\*\?\[]*)	# If changelist line is a glob ...
+			# ... expand possible backup files
+			#
+		ls -1d $(echo $backup_dir/${file}.current) 2>/dev/null \
+		    | sed "s,^$backup_dir/,, ; s,\.current$,,"
+
+			# ... expand possible files
+			#
+		ls -1d $(echo $file) 2>/dev/null
+		;;
+	*)
+			# Otherwise, just print the filename
+		echo $file
+		;;
+	esac
+done >> $CHANGEFILES
+CHANGELIST="$CHANGEFILES $CHANGELIST"

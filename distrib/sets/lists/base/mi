@@ -134,12 +134,31 @@
 ./etc/rc.d					base-sys-root
 ./etc/release					etc-sys-etc
 ./etc/security.d				base-sys-root
+./etc/security.d/aliases			base-sys-root
+./etc/security.d/changelist			base-sys-root
+./etc/security.d/devices			base-sys-root
+./etc/security.d/disklabels			base-sys-root
+./etc/security.d/ftpusers			base-sys-root
+./etc/security.d/group				base-sys-root
+./etc/security.d/homes				base-sys-root
+./etc/security.d/local				base-sys-root
+./etc/security.d/lvm				base-sys-root
+./etc/security.d/mtree				base-sys-root
+./etc/security.d/nfs				base-sys-root
+./etc/security.d/passwd				base-sys-root
+./etc/security.d/rhosts				base-sys-root
+./etc/security.d/rootdotfiles			base-sys-root
+./etc/security.d/varmail			base-sys-root
 ./etc/skel					base-sys-root
 ./etc/sliphome					base-slip-root
 ./etc/ssh					base-sys-root
 ./etc/systrace					base-obsolete		obsolete
 ./etc/uucp					base-obsolete		obsolete
 ./etc/weekly.d					base-sys-root
+./etc/weekly.d/local				base-sys-root
+./etc/weekly.d/locatedb				base-sys-root
+./etc/weekly.d/mandb				base-sys-root
+./etc/weekly.d/whatisdb				base-sys-root
 ./etc/zfs					base-zfs-root
 ./lib						base-sys-root
 ./lib/libdes.so					base-obsolete		obsolete

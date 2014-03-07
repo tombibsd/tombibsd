@@ -1,0 +1,97 @@
+#	$NetBSD$
+
+rhome=~root
+umaskset=no
+list="/etc/csh.cshrc /etc/csh.login ${rhome}/.cshrc ${rhome}/.login"
+for i in $list ; do
+	if [ -f $i ] ; then
+		if egrep '^[ \t]*umask[ \t]+[0-7]+' $i > /dev/null ;
+		then
+			umaskset=yes
+		fi
+		# Double check the umask value itself; ensure that
+		# both the group and other write bits are set.
+		#
+		egrep '^[ \t]*umask[ \t]+[0-7]+' $i |
+		awk '{
+			if ($2 ~ /^.$/ || $2 ~! /[^2367].$/) {
+				print "\tRoot umask is group writable"
+			}
+			if ($2 ~ /[^2367]$/) {
+				print "\tRoot umask is other writable"
+			}
+		    }' | sort -u
+		SAVE_PATH=$PATH
+		unset PATH
+		/bin/csh -f -s << end-of-csh > /dev/null 2>&1
+			source $i
+			/bin/ls -ldgT \$path > $TMP1
+end-of-csh
+		export PATH=$SAVE_PATH
+		awk '{
+			if ($10 ~ /^\.$/) {
+				print "\tThe root path includes .";
+				next;
+			}
+		     }
+		     $1 ~ /^d....w/ \
+	{ print "\tRoot path directory " $10 " is group writable." } \
+		     $1 ~ /^d.......w/ \
+	{ print "\tRoot path directory " $10 " is other writable." }' \
+		< $TMP1
+	fi
+done > $OUTPUT
+if [ $umaskset = "no" -o -s $OUTPUT ] ; then
+	printf "\nChecking root csh paths, umask values:\n$list\n\n"
+	if [ -s $OUTPUT ]; then
+		cat $OUTPUT
+	fi
+	if [ $umaskset = "no" ] ; then
+	    printf "\tRoot csh startup files do not set the umask.\n"
+	fi
+fi
+
+umaskset=no
+list="/etc/profile ${rhome}/.profile"
+for i in $list; do
+	if [ -f $i ] ; then
+		if egrep umask $i > /dev/null ; then
+			umaskset=yes
+		fi
+		egrep umask $i |
+		awk '$2 ~ /^.$/ || $2 ~ /[^2367].$/ \
+			{ print "\tRoot umask is group writable" } \
+		     $2 ~ /[^2367]$/ \
+			{ print "\tRoot umask is other writable" }'
+		SAVE_PATH=$PATH
+		unset PATH
+		/bin/sh << end-of-sh > /dev/null 2>&1
+			. $i
+			list=\$(echo \$PATH | /usr/bin/sed -e \
+			    's/^:/.:/;s/:$/:./;s/::/:.:/g;s/:/ /g')
+			/bin/ls -ldgT \$list > $TMP1
+end-of-sh
+		export PATH=$SAVE_PATH
+		awk '{
+			if ($10 ~ /^\.$/) {
+				print "\tThe root path includes .";
+				next;
+			}
+		     }
+		     $1 ~ /^d....w/ \
+	{ print "\tRoot path directory " $10 " is group writable." } \
+		     $1 ~ /^d.......w/ \
+	{ print "\tRoot path directory " $10 " is other writable." }' \
+		< $TMP1
+
+	fi
+done > $OUTPUT
+if [ $umaskset = "no" -o -s $OUTPUT ] ; then
+	printf "\nChecking root sh paths, umask values:\n$list\n"
+	if [ -s $OUTPUT ]; then
+		cat $OUTPUT
+	fi
+	if [ $umaskset = "no" ] ; then
+		printf "\tRoot sh startup files do not set the umask.\n"
+	fi
+fi

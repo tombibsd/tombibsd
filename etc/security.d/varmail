@@ -1,0 +1,15 @@
+#	$NetBSD$
+
+ls -lA /var/mail | \
+awk '	NR == 1 { next; }
+	$9 ~ /^\./ {next; }
+	$3 != $9 {
+		print "user " $9 " mailbox is owned by " $3
+	}
+	$1 != "-rw-------" {
+		print "user " $9 " mailbox is " $1 ", group " $4
+	}' > $OUTPUT
+if [ -s $OUTPUT ] ; then
+	printf "\nChecking mailbox ownership.\n"
+	cat $OUTPUT
+fi

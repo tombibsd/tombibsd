@@ -1,0 +1,27 @@
+#	$NetBSD$
+
+if checkyesno check_mtree_follow_symlinks; then
+	check_mtree_flags="-L"
+else
+	check_mtree_flags=""
+fi
+mtree -e -l -p / $check_mtree_flags -f $SPECIALSPEC 3>&1 >$OUTPUT 2>&3 |
+	grep -v '^mtree: dev/tty: Device not configured$' >&2
+if [ -s $OUTPUT ]; then
+	printf "\nChecking special files and directories.\n"
+	cat $OUTPUT
+fi
+
+for file in /etc/mtree/*.secure; do
+	[ $file = '/etc/mtree/*.secure' ] && continue
+	tree=$(sed -n -e '3s/.* //p' -e 3q $file)
+	mtree $check_mtree_flags -f $file -p $tree > $TMP1
+	if [ -s $TMP1 ]; then
+		printf "\nChecking $tree:\n"
+		cat $TMP1
+	fi
+done > $OUTPUT
+if [ -s $OUTPUT ]; then
+	printf "\nChecking system binaries:\n"
+	cat $OUTPUT
+fi
