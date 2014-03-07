@@ -91,6 +91,7 @@
 ./etc/X11/xsm					base-x11-root
 ./etc/atf					base-atf-bin
 ./etc/cgd					base-sys-root
+./etc/daily.d					base-sys-root
 ./etc/defaults					base-sys-root
 ./etc/disklabels				base-obsolete		obsolete
 ./etc/fonts					base-x11-root
@@ -101,6 +102,7 @@
 ./etc/kerberosV					base-krb5-root
 ./etc/kyua					base-kyua-root
 ./etc/mail					base-postfix-bin
+./etc/monthly.d					base-sys-root
 ./etc/mtree					base-sys-root
 ./etc/mtree/set.base				base-sys-root
 ./etc/namedb					base-bind-root
@@ -118,11 +120,13 @@
 ./etc/rc.conf.d					base-sys-root
 ./etc/rc.d					base-sys-root
 ./etc/release					etc-sys-etc
+./etc/security.d				base-sys-root
 ./etc/skel					base-sys-root
 ./etc/sliphome					base-slip-root
 ./etc/ssh					base-sys-root
 ./etc/systrace					base-obsolete		obsolete
 ./etc/uucp					base-obsolete		obsolete
+./etc/weekly.d					base-sys-root
 ./etc/zfs					base-zfs-root
 ./lib						base-sys-root
 ./lib/libdes.so					base-obsolete		obsolete

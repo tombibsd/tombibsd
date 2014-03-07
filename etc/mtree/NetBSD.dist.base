@@ -30,6 +30,7 @@
 ./etc/atf
 ./etc/bluetooth
 ./etc/cgd			mode=0700
+./etc/daily.d
 ./etc/defaults
 ./etc/fonts
 ./etc/fonts/conf.avail
@@ -38,6 +39,7 @@
 ./etc/kerberosV
 ./etc/kyua
 ./etc/mail
+./etc/monthly.d
 ./etc/mtree
 ./etc/namedb
 ./etc/openldap
@@ -57,9 +59,11 @@
 ./etc/saslc.d/postfix/mech
 ./etc/saslc.d/saslc
 ./etc/saslc.d/saslc/mech
+./etc/security.d
 ./etc/skel
 ./etc/sliphome
 ./etc/ssh
+./etc/weekly.d
 ./etc/zfs
 ./lib
 ./lib/npf
