@@ -6,5 +6,5 @@ if [ -d /var/log/rdist ]; then
 	logf="$(date +%Y.%b.%d)"
 	rdist -f /etc/Distfile 2>&1 | tee /var/log/rdist/$logf
 else
-	rdist -f /etc/Distfile 
+	rdist -f /etc/Distfile
 fi
