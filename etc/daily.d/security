@@ -1,0 +1,21 @@
+#	$NetBSD$
+
+SECOUT="$DAILYDIR/sec"
+sh /etc/security > "$SECOUT" 2>&1
+if [ ! -s "$SECOUT" ]; then
+	if checkyesno send_empty_security; then
+		echo "Nothing to report on $date" > "$SECOUT"
+	else
+		echo ""
+		echo "Suppressing empty security report."
+	fi
+fi
+if [ -s "$SECOUT" ]; then
+	if checkyesno separate_security_email; then
+		mail -s "$host daily insecurity output for $date" $MAILTO < $SECOUT
+	else
+	    echo ""
+	    echo "$host daily insecurity output for $date:"
+	    cat $SECOUT
+	fi
+fi

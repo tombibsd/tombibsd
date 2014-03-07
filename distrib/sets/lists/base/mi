@@ -92,6 +92,19 @@
 ./etc/atf					base-atf-bin
 ./etc/cgd					base-sys-root
 ./etc/daily.d					base-sys-root
+./etc/daily.d/acct				base-sys-root
+./etc/daily.d/calendar				base-sys-root
+./etc/daily.d/core				base-sys-root
+./etc/daily.d/disks				base-sys-root
+./etc/daily.d/fsck				base-sys-root
+./etc/daily.d/local				base-sys-root
+./etc/daily.d/mailq				base-sys-root
+./etc/daily.d/makemandb				base-sys-root
+./etc/daily.d/network				base-sys-root
+./etc/daily.d/pkg				base-sys-root
+./etc/daily.d/rdist				base-sys-root
+./etc/daily.d/security				base-sys-root
+./etc/daily.d/skeyaudit				base-sys-root
 ./etc/defaults					base-sys-root
 ./etc/disklabels				base-obsolete		obsolete
 ./etc/fonts					base-x11-root

@@ -1,0 +1,9 @@
+#	$NetBSD$
+
+mailq > $TMP
+if ! grep -q "queue is empty$" $TMP; then
+	echo ""
+	echo "mail:"
+	cat $TMP
+fi
+

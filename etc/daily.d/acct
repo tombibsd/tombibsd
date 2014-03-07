@@ -1,0 +1,19 @@
+#	$NetBSD$
+
+echo ""
+echo "Purging accounting records:"
+if [ -f /var/account/acct.0.gz ]; then
+	mv /var/account/acct.2.gz /var/account/acct.3.gz 2>/dev/null
+	mv /var/account/acct.1.gz /var/account/acct.2.gz 2>/dev/null
+	mv /var/account/acct.0.gz /var/account/acct.1.gz 2>/dev/null
+else
+	mv /var/account/acct.2 /var/account/acct.3 2>/dev/null
+	mv /var/account/acct.1 /var/account/acct.2 2>/dev/null
+	mv /var/account/acct.0 /var/account/acct.1 2>/dev/null
+fi
+cp /var/account/acct /var/account/acct.0
+sa -sq
+if [ -f /var/account/acct.1.gz ]; then
+	gzip /var/account/acct.0
+fi
+

@@ -1,0 +1,10 @@
+#	$NetBSD$
+
+if [ -f /etc/daily.local ]; then
+	( . /etc/daily.local ) > $TMP 2>&1
+	if [ -s $TMP ] ; then
+		printf "\nRunning /etc/daily.local:\n"
+		cat $TMP
+	fi
+	rm -f $TMP
+fi

@@ -1,0 +1,37 @@
+#	$NetBSD$
+
+# Turn "foo !bar bax" into "-fstype foo -o ! -fstype bar -o -fstype bax"
+ignfstypes="$(echo $find_core_ignore_fstypes | \
+	sed -e's/\(!*\)\([^[:space:]]\{1,\}\)/-o \1 -fstype \2/g' \
+	    -e's/^-o //')"
+# Turn "foo bar" into "( -path foo -o -path bar ) -prune -o"
+# Set ignpaths empty if no find_core_ignore_paths given
+if [ -n "$find_core_ignore_paths" ]; then
+	ignpaths="$(printf " -o -path %s" $find_core_ignore_paths)"
+	ignpaths="( ${ignpaths# -o } ) -prune -o"
+else
+	ignpaths=""
+fi
+find / \( $ignfstypes \) -prune -o \
+	${ignpaths} \
+	-name 'lost+found' -prune -o \
+	\( -name '*.core' -o -name 'core' \) -type f -print > $TMP
+#	\( -name '[#,]*' -o -name '.#*' -o -name a.out \
+#	   -o -name '*.CKP' -o -name '.emacs_[0-9]*' \) \
+#		-a -atime +3 -exec rm -f -- {} \; -a -print > $TMP
+
+egrep '\.core$|^core$' $TMP > $TMP2
+if [ -s $TMP2 ]; then
+	echo ""
+	echo "Possible core dumps:"
+	cat $TMP2
+fi
+
+#egrep -v '\.core' $TMP > $TMP2
+#if [ -s $TMP2 ]; then
+#	echo ""
+#	echo "Deleted files:"
+#	cat $TMP2
+#fi
+
+rm -f $TMP $TMP2

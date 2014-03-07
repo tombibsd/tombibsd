@@ -1,0 +1,10 @@
+#	$NetBSD$
+
+calendar -a > $TMP 2>&1
+if [ -s $TMP ]; then
+	echo ""
+	echo "Running calendar:"
+	cat $TMP
+fi
+rm -f $TMP
+

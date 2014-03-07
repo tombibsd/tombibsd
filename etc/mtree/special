@@ -47,6 +47,19 @@
 ./etc/daily			type=file mode=0644
 ./etc/daily.conf		type=file mode=0644
 ./etc/daily.d			type=dir  mode=0755
+./etc/daily.d/acct		type=file mode=0444
+./etc/daily.d/calendar		type=file mode=0444
+./etc/daily.d/core		type=file mode=0444
+./etc/daily.d/disks		type=file mode=0444
+./etc/daily.d/fsck		type=file mode=0444
+./etc/daily.d/local		type=file mode=0444
+./etc/daily.d/mailq		type=file mode=0444
+./etc/daily.d/makemandb		type=file mode=0444
+./etc/daily.d/network		type=file mode=0444
+./etc/daily.d/pkg		type=file mode=0444
+./etc/daily.d/rdist		type=file mode=0444
+./etc/daily.d/security		type=file mode=0444
+./etc/daily.d/skeyaudit		type=file mode=0444
 ./etc/daily.local		type=file mode=0644 optional
 ./etc/defaultdomain		type=file mode=0644 optional
 ./etc/defaults			type=dir  mode=0755

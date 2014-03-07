@@ -1,0 +1,14 @@
+#	$NetBSD$
+
+if ${pkg_info} ${_compat_K_flag} -q -E '*'; then
+	if [ -z "$fetch_pkg_vulnerabilities" ]; then
+		echo "fetch_pkg_vulnerabilities is not set in daily.conf(5)."
+		echo "You should set it to YES to enable vulnerability checks"
+		echo "or set it to NO to get rid of this warning."
+	elif checkyesno fetch_pkg_vulnerabilities; then
+		echo ""
+		echo "Fetching package vulnerabilities database:"
+		( umask 022 && ${pkg_admin} ${_compat_K_flag} \
+		    fetch-pkg-vulnerabilities -u )
+	fi
+fi

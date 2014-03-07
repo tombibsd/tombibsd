@@ -1,0 +1,7 @@
+#	$NetBSD$
+
+if [ -s /etc/skeykeys ]; then
+	echo ""
+	echo "Checking remaining s/key OTPs:"
+	skeyaudit
+fi

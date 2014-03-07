@@ -1,0 +1,7 @@
+#	$NetBSD$
+
+if [ -f /etc/man.conf -a -x /usr/sbin/makemandb ]; then
+	echo ""
+	echo "Updating man page index:"
+	(umask 022; nice -n 5 /usr/sbin/makemandb -Q)
+fi
