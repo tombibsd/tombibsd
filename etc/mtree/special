@@ -122,6 +122,7 @@
 ./etc/monthly			type=file mode=0644
 ./etc/monthly.conf		type=file mode=0644
 ./etc/monthly.d			type=dir  mode=0755
+./etc/monthly.d/local		type=file mode=0444
 ./etc/monthly.local		type=file mode=0644 optional
 ./etc/mrouted.conf		type=file mode=0644
 ./etc/mtree			type=dir  mode=0755

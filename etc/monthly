@@ -34,11 +34,4 @@ TMP=monthly.$$
 # echo "Doing login accounting:"
 # ac -p | sort -nr +1
 
-if [ -f /etc/monthly.local ]; then
-	. /etc/monthly.local > $TMP 2>&1
-	if [ -s $TMP ] ; then
-		printf "\nRunning /etc/monthly.local:\n"
-		cat $TMP
-	fi
-	rm -f $TMP
-fi
+. /etc/monthly.d/local

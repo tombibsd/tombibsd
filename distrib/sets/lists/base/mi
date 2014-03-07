@@ -116,6 +116,7 @@
 ./etc/kyua					base-kyua-root
 ./etc/mail					base-postfix-bin
 ./etc/monthly.d					base-sys-root
+./etc/monthly.d/local				base-sys-root
 ./etc/mtree					base-sys-root
 ./etc/mtree/set.base				base-sys-root
 ./etc/namedb					base-bind-root
