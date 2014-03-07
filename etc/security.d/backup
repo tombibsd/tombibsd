@@ -1,0 +1,18 @@
+#	$NetBSD$
+
+echo $MP > $TMP1			# always add /etc/master.passwd
+mtree -D -k type -f $SPECIALSPEC -I nodiff |
+    sed '/^type=file/!d ; s/type=file \.//' | unvis >> $TMP1
+grep -v '^$' $TMP1 | sort -u > $TMP2
+
+while read file; do
+	backup_and_diff "$file" no
+done < $TMP2
+
+
+if [ -n "$CHANGELIST" ]; then
+	grep -h -v '^$' $CHANGELIST | sort -u > $TMP1
+	comm -23 $TMP1 $TMP2 | while read file; do
+		backup_and_diff "$file" yes
+	done
+fi

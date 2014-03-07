@@ -31,6 +31,19 @@
 ./etc/csh.logout				etc-util-etc
 ./etc/daily					etc-sys-etc
 ./etc/daily.conf				etc-sys-etc
+./etc/daily.d/acct				etc-sys-etc
+./etc/daily.d/calendar				etc-sys-etc
+./etc/daily.d/core				etc-sys-etc
+./etc/daily.d/disks				etc-sys-etc
+./etc/daily.d/fsck				etc-sys-etc
+./etc/daily.d/local				etc-sys-etc
+./etc/daily.d/mailq				etc-sys-etc
+./etc/daily.d/makemandb				etc-sys-etc
+./etc/daily.d/network				etc-sys-etc
+./etc/daily.d/pkg				etc-sys-etc
+./etc/daily.d/rdist				etc-sys-etc
+./etc/daily.d/security				etc-sys-etc
+./etc/daily.d/skeyaudit				etc-sys-etc
 ./etc/default					etc-obsolete		obsolete
 ./etc/default/daily.conf			etc-obsolete		obsolete
 ./etc/default/monthly.conf			etc-obsolete		obsolete
@@ -87,6 +100,7 @@
 ./etc/moduli					etc-secsh-etc		crypto
 ./etc/monthly					etc-sys-etc
 ./etc/monthly.conf				etc-sys-etc
+./etc/monthly.d/local				etc-sys-etc
 ./etc/motd					etc-sys-etc
 ./etc/mrouted.conf				etc-router-etc
 ./etc/mtree/NetBSD.dist				etc-sys-etc
@@ -315,6 +329,24 @@
 ./etc/saslc.d/saslc/mech			etc-libsaslc-etc
 ./etc/security					etc-sys-etc
 ./etc/security.conf				etc-sys-etc
+./etc/security.d/aliases			etc-sys-etc
+./etc/security.d/backup				etc-sys-etc
+./etc/security.d/changelist			etc-sys-etc
+./etc/security.d/devices			etc-sys-etc
+./etc/security.d/disklabels			etc-sys-etc
+./etc/security.d/ftpusers			etc-sys-etc
+./etc/security.d/group				etc-sys-etc
+./etc/security.d/homes				etc-sys-etc
+./etc/security.d/local				etc-sys-etc
+./etc/security.d/lvm				etc-sys-etc
+./etc/security.d/mtree				etc-sys-etc
+./etc/security.d/nfs				etc-sys-etc
+./etc/security.d/passwd				etc-sys-etc
+./etc/security.d/pkgs				etc-sys-etc
+./etc/security.d/rhosts				etc-sys-etc
+./etc/security.d/rootdotfiles			etc-sys-etc
+./etc/security.d/varmail			etc-sys-etc
+./etc/security.subr				etc-sys-etc
 ./etc/services					etc-net-etc
 ./etc/shells					etc-sys-etc
 ./etc/shrc					etc-util-etc
@@ -334,6 +366,10 @@
 ./etc/ttys					etc-sys-etc
 ./etc/weekly					etc-sys-etc
 ./etc/weekly.conf				etc-sys-etc
+./etc/weekly.d/local				etc-sys-etc
+./etc/weekly.d/locatedb				etc-sys-etc
+./etc/weekly.d/mandb				etc-sys-etc
+./etc/weekly.d/whatisdb				etc-sys-etc
 ./etc/wscons.conf				etc-sys-etc
 ./root/.cshrc					etc-root-root
 ./root/.klogin					etc-root-root

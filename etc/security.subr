@@ -1,0 +1,110 @@
+#	$NetBSD$
+
+have_pkgs() {
+	$pkg_info ${_compat_K_flag} -q -E '*'
+}
+
+# migrate_file old new
+#	Determine if the "${old}" path name needs to be migrated to the
+#	"${new}" path. Also checks if "${old}.current" needs migrating,
+#	and if so, migrate it and possibly "${old}.current,v" and
+#	"${old}.backup".
+#
+migrate_file()
+{
+	_old=$1
+	_new=$2
+	if [ -z "$_old" -o -z "$_new" ]; then
+		err 3 "USAGE: migrate_file old new"
+	fi
+	if [ ! -d "${_new%/*}" ]; then
+		mkdir -p "${_new%/*}"
+	fi
+	if [ -f "${_old}" -a ! -f "${_new}" ]; then
+		echo "==> migrating ${_old}"
+		echo "           to ${_new}"
+		mv "${_old}" "${_new}"
+	fi
+	if [ -f "${_old}.current" -a ! -f "${_new}.current" ]; then
+		echo "==> migrating ${_old}.current"
+		echo "           to ${_new}.current"
+		mv "${_old}.current" "${_new}.current"
+		if [ -f "${_old}.current,v" -a ! -f "${_new}.current,v" ]; then
+			echo "==> migrating ${_old}.current,v"
+			echo "           to ${_new}.current,v"
+			mv "${_old}.current,v" "${_new}.current,v"
+		fi
+		if [ -f "${_old}.backup" -a ! -f "${_new}.backup" ]; then
+			echo "==> migrating ${_old}.backup"
+			echo "           to ${_new}.backup"
+			mv "${_old}.backup" "${_new}.backup"
+		fi
+	fi
+}
+
+
+# backup_and_diff file printdiff
+#	Determine if file needs backing up, and if so, do it.
+#	If printdiff is yes, display the diffs, otherwise 
+#	just print a message saying "[changes omitted]".
+#
+backup_and_diff()
+{
+	_file=$1
+	_printdiff=$2
+	if [ -z "$_file" -o -z "$_printdiff" ]; then
+		err 3 "USAGE: backup_and_diff file printdiff"
+	fi
+	! checkyesno _printdiff
+	_printdiff=$?
+
+	_old=$backup_dir/${_file##*/}
+	case "$_file" in
+	$work_dir/*)
+		_new=$_file
+		migrate_file "$backup_dir/$_old" "$_new"
+		migrate_file "$_old" "$_new"
+		;;
+	*)
+		_new=$backup_dir/$_file
+		migrate_file "$_old" "$_new"
+		;;
+	esac
+	CUR=${_new}.current
+	BACK=${_new}.backup
+	if [ -f $_file ]; then
+		if [ -f $CUR ] ; then
+			if [ "$_printdiff" -ne 0 ]; then
+				diff ${diff_options} $CUR $_file > $OUTPUT
+			else
+				if ! cmp -s $CUR $_file; then
+					echo "[changes omitted]"
+				fi > $OUTPUT
+			fi
+			if [ -s $OUTPUT ] ; then
+				printf \
+			"\n======\n%s diffs (OLD < > NEW)\n======\n" $_file
+				cat $OUTPUT
+				backup_file update $_file $CUR $BACK
+			fi
+		else
+			printf "\n======\n%s added\n======\n" $_file
+			if [ "$_printdiff" -ne 0 ]; then
+				diff ${diff_options} /dev/null $_file
+			else
+				echo "[changes omitted]"
+			fi
+			backup_file add $_file $CUR $BACK
+		fi
+	else
+		if [ -f $CUR ]; then
+			printf "\n======\n%s removed\n======\n" $_file
+			if [ "$_printdiff" -ne 0 ]; then
+				diff ${diff_options} $CUR /dev/null
+			else
+				echo "[changes omitted]"
+			fi
+			backup_file remove $_file $CUR $BACK
+		fi
+	fi
+}

@@ -4,6 +4,7 @@
 
 CONFIGFILES=\
 		aliases \
+		backup \
 		changelist \
 		devices \
 		disklabels \
@@ -15,6 +16,7 @@ CONFIGFILES=\
 		mtree \
 		nfs \
 		passwd \
+		pkgs \
 		rhosts \
 		rootdotfiles \
 		varmail

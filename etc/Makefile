@@ -94,7 +94,7 @@ BIN1+=	bootptab changelist csh.cshrc csh.login \
 	mrouted.conf named.conf netconfig networks newsyslog.conf \
 	nsswitch.conf ntp.conf passwd.conf pkgpath.conf phones printcap \
 	profile protocols rbootd.conf rc rc.conf rc.local rc.subr \
-	rc.shutdown remote rpc security security.conf services shells \
+	rc.shutdown remote rpc security security.conf security.subr services shells \
 	shrc sysctl.conf syslog.conf weekly weekly.conf wscons.conf
 
 # Use machine-specific disktab if it exists, or the MI one otherwise

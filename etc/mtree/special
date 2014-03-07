@@ -319,6 +319,7 @@
 ./etc/security.conf		type=file mode=0644
 ./etc/security.d		type=dir  mode=0755
 ./etc/security.d/aliases	type=file mode=0444
+./etc/security.d/backup		type=file mode=0444
 ./etc/security.d/changelist	type=file mode=0444
 ./etc/security.d/devices	type=file mode=0444
 ./etc/security.d/disklabels	type=file mode=0444
@@ -330,10 +331,12 @@
 ./etc/security.d/mtree		type=file mode=0444
 ./etc/security.d/nfs		type=file mode=0444
 ./etc/security.d/passwd		type=file mode=0444
+./etc/security.d/pkgs		type=file mode=0444
 ./etc/security.d/rhosts		type=file mode=0444
 ./etc/security.d/rootdotfiles	type=file mode=0444
 ./etc/security.d/varmail	type=file mode=0444
 ./etc/security.local		type=file mode=0644 optional
+./etc/security.subr		type=file mode=0644
 ./etc/services			type=file mode=0644
 ./etc/shells			type=file mode=0644
 ./etc/shosts.equiv		type=file mode=0600 optional

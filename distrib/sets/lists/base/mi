@@ -92,19 +92,6 @@
 ./etc/atf					base-atf-bin
 ./etc/cgd					base-sys-root
 ./etc/daily.d					base-sys-root
-./etc/daily.d/acct				base-sys-root
-./etc/daily.d/calendar				base-sys-root
-./etc/daily.d/core				base-sys-root
-./etc/daily.d/disks				base-sys-root
-./etc/daily.d/fsck				base-sys-root
-./etc/daily.d/local				base-sys-root
-./etc/daily.d/mailq				base-sys-root
-./etc/daily.d/makemandb				base-sys-root
-./etc/daily.d/network				base-sys-root
-./etc/daily.d/pkg				base-sys-root
-./etc/daily.d/rdist				base-sys-root
-./etc/daily.d/security				base-sys-root
-./etc/daily.d/skeyaudit				base-sys-root
 ./etc/defaults					base-sys-root
 ./etc/disklabels				base-obsolete		obsolete
 ./etc/fonts					base-x11-root
@@ -116,7 +103,6 @@
 ./etc/kyua					base-kyua-root
 ./etc/mail					base-postfix-bin
 ./etc/monthly.d					base-sys-root
-./etc/monthly.d/local				base-sys-root
 ./etc/mtree					base-sys-root
 ./etc/mtree/set.base				base-sys-root
 ./etc/namedb					base-bind-root
@@ -135,31 +121,12 @@
 ./etc/rc.d					base-sys-root
 ./etc/release					etc-sys-etc
 ./etc/security.d				base-sys-root
-./etc/security.d/aliases			base-sys-root
-./etc/security.d/changelist			base-sys-root
-./etc/security.d/devices			base-sys-root
-./etc/security.d/disklabels			base-sys-root
-./etc/security.d/ftpusers			base-sys-root
-./etc/security.d/group				base-sys-root
-./etc/security.d/homes				base-sys-root
-./etc/security.d/local				base-sys-root
-./etc/security.d/lvm				base-sys-root
-./etc/security.d/mtree				base-sys-root
-./etc/security.d/nfs				base-sys-root
-./etc/security.d/passwd				base-sys-root
-./etc/security.d/rhosts				base-sys-root
-./etc/security.d/rootdotfiles			base-sys-root
-./etc/security.d/varmail			base-sys-root
 ./etc/skel					base-sys-root
 ./etc/sliphome					base-slip-root
 ./etc/ssh					base-sys-root
 ./etc/systrace					base-obsolete		obsolete
 ./etc/uucp					base-obsolete		obsolete
 ./etc/weekly.d					base-sys-root
-./etc/weekly.d/local				base-sys-root
-./etc/weekly.d/locatedb				base-sys-root
-./etc/weekly.d/mandb				base-sys-root
-./etc/weekly.d/whatisdb				base-sys-root
 ./etc/zfs					base-zfs-root
 ./lib						base-sys-root
 ./lib/libdes.so					base-obsolete		obsolete

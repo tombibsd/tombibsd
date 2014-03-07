@@ -1,0 +1,14 @@
+#	$NetBSD$
+
+pkgs=$work_dir/pkgs
+migrate_file "$backup_dir/pkgs" "$pkgs"
+pkg_dbdir=$(${pkg_admin} config-var PKG_DBDIR)
+: ${pkg_dbdir:=/var/db/pkg}
+(	cd $pkg_dbdir
+	$pkg_info | sort
+	echo ""
+	find . \( -name +REQUIRED_BY -o -name +CONTENTS \) -print0 |
+		xargs -0 ls -ldgTq | sort -t. +1 | sed -e 's, \./, ,'
+ ) > $pkgs
+echo "$pkgs" > $PKGS
+CHANGELIST="$PKGS $CHANGELIST"
