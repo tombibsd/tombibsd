@@ -103,7 +103,6 @@
 #define	ARM_ENTRY_NP(y)		_ARM_ENTRY(_C_LABEL(y))
 #define	THUMB_ENTRY(y)		_THUMB_ENTRY(_C_LABEL(y)); _PROF_PROLOGUE
 #define	THUMB_ENTRY_NP(y)	_THUMB_ENTRY(_C_LABEL(y))
-#define	END(y)			_END(_C_LABEL(y))
 #define	ASENTRY(y)		_ENTRY(_ASM_LABEL(y)); _PROF_PROLOGUE
 #define	ASENTRY_NP(y)		_ENTRY(_ASM_LABEL(y))
 #define	ASEND(y)		_END(_ASM_LABEL(y))

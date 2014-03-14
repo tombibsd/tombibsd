@@ -2,7 +2,7 @@
 /atapi_base.c/1.28/Mon Apr 28 20:23:57 2008/-kk/
 /atapi_tape.h/1.6/Sun Dec 11 12:23:50 2005/-kk/
 /atapi_wdc.c/1.119/Tue Jul 31 15:59:57 2012/-kk/
-/atapiconf.c/1.86/Sun Jun 24 07:48:01 2012/-kk/
+/atapiconf.c/1.87/Fri Mar 14 04:28:21 2014/-kk/
 /atapiconf.h/1.23/Mon Oct 19 18:41:16 2009/-kk/
 /cd.c/1.316/Tue Oct 29 07:53:50 2013/-kk/
 /cdvar.h/1.31/Thu Feb  2 19:43:06 2012/-kk/

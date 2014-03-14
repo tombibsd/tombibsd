@@ -133,9 +133,6 @@ mainbus_match(device_t parent, cfdata_t match, void *aux)
 void
 mainbus_attach(device_t parent, device_t self, void *aux)
 {
-#if defined(DOM0OPS) && NPCI > 0
-	int mode;
-#endif
 	union mainbus_attach_args mba;
 #if defined(DOM0OPS)
 	int numcpus = 0;
@@ -157,9 +154,9 @@ mainbus_attach(device_t parent, device_t self, void *aux)
 #endif
 #if NPCI > 0
 		/* ACPI needs to be able to access PCI configuration space. */
-		mode = pci_mode_detect();
+		pci_mode_detect();
 #ifdef PCI_BUS_FIXUP
-		if (mode != 0) {
+		if (pci_mode != 0) {
 			pci_maxbus = pci_bus_fixup(NULL, 0);
 			aprint_debug_dev(self, "PCI bus max, after "
 			    "pci_bus_fixup: %i\n", pci_maxbus);

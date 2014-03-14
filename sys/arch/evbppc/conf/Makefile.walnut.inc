@@ -10,5 +10,5 @@ SYSTEM_FIRST_SFILE=	${THISPPC}/walnut/walnut_start.S
 
 SYSTEM_LD_TAIL_EXTRA_EXTRA+=; \
 	echo ${MKIMG} $@ $@.img ; \
-	OBJDUMP=${OBJDUMP}; OBJCOPY=${OBJCOPY}; export OBJDUMP OBJCOPY; \
-		${MKIMG} $@ $@.img
+	OBJDUMP=${OBJDUMP}; OBJCOPY=${OBJCOPY}; STAT=${TOOL_STAT]; \
+		export OBJDUMP OBJCOPY STAT; ${MKIMG} $@ $@.img

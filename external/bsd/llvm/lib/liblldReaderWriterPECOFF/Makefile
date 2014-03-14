@@ -8,6 +8,7 @@ LIB=	lldReaderWriterPECOFF
 
 SRCS+=	EdataPass.cpp \
 	IdataPass.cpp \
+	LoadConfigPass.cpp \
 	PECOFFLinkingContext.cpp \
 	Pass.cpp \
 	ReaderCOFF.cpp \

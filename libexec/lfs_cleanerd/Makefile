@@ -11,4 +11,6 @@ BINDIR=		/libexec
 LDSTATIC?=      -static
 .endif
 
+CWARNFLAGS.clang+=	-Wno-error=absolute-value
+
 .include <bsd.prog.mk>

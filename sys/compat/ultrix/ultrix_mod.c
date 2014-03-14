@@ -57,16 +57,20 @@ MODULE(MODULE_CLASS_EXEC, compat_ultrix, "compat" MD1);
 
 static struct execsw ultrix_execsw[] = {
 #ifdef EXEC_ECOFF
-	{ ECOFF_HDR_SIZE,
-	  exec_ecoff_makecmds,
-	  { .ecoff_probe_func = ultrix_exec_ecoff_probe },
-	  &emul_ultrix,
-	  EXECSW_PRIO_LAST, /* XXX probe func alw. succeeds */
-  	  0,
-  	  copyargs,
-  	  cpu_exec_ecoff_setregs,
-	  coredump_netbsd,
-	  exec_setup_stack },
+	{
+		.es_hdrsz = ECOFF_HDR_SIZE,
+		.es_makecmds = exec_ecoff_makecmds,
+		.u = {
+			.ecoff_probe_func = ultrix_exec_ecoff_probe,
+		},
+		.es_emul = &emul_ultrix,
+		.es_prio = EXECSW_PRIO_LAST,
+		.es_arglen = 0,
+		.es_copyargs = copyargs,
+		.es_setregs = cpu_exec_ecoff_setregs,
+		.es_coredump = coredump_netbsd,
+		.es_setup_stack = exec_setup_stack,
+	},
 #endif
 };
 

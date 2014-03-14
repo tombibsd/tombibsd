@@ -7,7 +7,8 @@ ASM+=	_lwp_getprivate.S mremap.S
 CPPFLAGS+= -I.		# for assym.h
 
 .if ${MKSOFTFLOAT} != "no"
-CPPFLAGS+= -DSOFTFLOAT_NEED_FIXUNS -DSOFTFLOAT -DSOFTFLOATM68K_FOR_GCC
+#CPPFLAGS+= -DSOFTFLOAT_NEED_FIXUNS
+CPPFLAGS+= -DSOFTFLOAT -DSOFTFLOATM68K_FOR_GCC
 .  include <softfloat/Makefile.inc>
 .elif ${MACHINE_ARCH} != "m68000"
 .PATH : ${ARCHDIR}/hardfloat

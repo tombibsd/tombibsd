@@ -20,7 +20,8 @@ SRCS+=	AArch64AsmPrinter.cpp \
 	AArch64SelectionDAGInfo.cpp \
 	AArch64Subtarget.cpp \
 	AArch64TargetMachine.cpp \
-	AArch64TargetObjectFile.cpp
+	AArch64TargetObjectFile.cpp \
+	AArch64TargetTransformInfo.cpp
 
 TABLEGEN_SRC=		AArch64.td
 TABLEGEN_INCLUDES=	-I${LLVM_SRCDIR}/lib/Target/AArch64

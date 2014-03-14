@@ -36,7 +36,7 @@ CFLAGS+=	-mlongcall
 CFLAGS+=	-fno-pic
 .endif
 
-.if ${MACHINE} == "sparc64"
+.if ${MACHINE_CPU} == "sparc64"
 # force same memory model as rest of the kernel
 CFLAGS+=	${${ACTIVE_CC} == "gcc":? -mcmodel=medlow :}
 CFLAGS+=	${${ACTIVE_CC} == "clang":? -mcmodel=small :}

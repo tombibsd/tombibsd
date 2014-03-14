@@ -505,7 +505,6 @@ ENTRY_NOPROFILE(buserr60)
 	orl	#IC60_CABC,%d2		| clear all branch cache entries
 	movc	%d2,%cacr
 	movl	%d0,%d1
-	addql	#1,L60bpe
 	andl	#0x7ffd,%d1
 	jeq	_ASM_LABEL(faultstkadjnotrap2)
 Lnobpe:

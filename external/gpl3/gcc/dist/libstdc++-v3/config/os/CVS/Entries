@@ -1,10 +1,11 @@
 D/aix////
+D/bionic////
 D/bsd////
 D/djgpp////
 D/generic////
 D/gnu-linux////
 D/hpux////
-D/irix////
+D/mingw32-w64////
 D/mingw32////
 D/newlib////
 D/qnx////

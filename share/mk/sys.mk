@@ -44,7 +44,8 @@ LINK.c?=	${CC} ${CFLAGS} ${CPPFLAGS} ${LDFLAGS}
 
 # C Type Format data is required for DTrace
 CTFFLAGS	?=	-g -L VERSION
-CTFMFLAGS	?=	-g -t -L VERSION
+# Use only one thread for now.
+CTFMFLAGS	?=	-S 1 -g -t -L VERSION
 
 # We have to define these here, because if we don't the rules below will
 # not work

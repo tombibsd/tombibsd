@@ -284,7 +284,7 @@ lockdebug_alloc(volatile void *lock, lockops_t *lo, uintptr_t initaddr)
 	ci->ci_lkdebug_recurse--;
 
 	if (ld->ld_lock != NULL) {
-		panic("lockdebug_alloc: corrupt table");
+		panic("lockdebug_alloc: corrupt table ld %p", ld);
 	}
 
 	/* Initialise the structure. */

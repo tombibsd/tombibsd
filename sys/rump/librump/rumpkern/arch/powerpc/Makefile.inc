@@ -1,6 +1,7 @@
 # $NetBSD$
 
-.if ${MACHINE_ARCH} == "powerpc"
+.if ${MACHINE_ARCH} == "powerpc" \
+    || (defined(MLIBDIR) && "${MLIBDIR}" == "powerpc")
 CPPFLAGS+=	-DARCH_ELFSIZE=32
 .else
 CPPFLAGS+=	-DARCH_ELFSIZE=64

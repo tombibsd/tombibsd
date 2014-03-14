@@ -5,6 +5,9 @@
 .include <bsd.own.mk>
 
 .include	"../../Makefile.inc"
+.include	"../../Makefile.ctf"
+
+.PATH:          ${OPENSOLARIS_USR_DISTDIR}/tools/ctf/cvt
 
 PROG=		ctfmerge
 
@@ -26,22 +29,7 @@ SRCS=		alist.c \
 		traverse.c \
 		util.c
 
-CFLAGS+=	-I${OSNETDIR}/sys \
-		-I${OSNETDIR}/include \
-		-I${OPENSOLARIS_USR_DISTDIR} \
-		-I${OPENSOLARIS_SYS_DISTDIR} \
-		-I${OPENSOLARIS_USR_DISTDIR}/head \
-		-I${OPENSOLARIS_USR_DISTDIR}/tools/ctf/common \
-		-I${OPENSOLARIS_USR_DISTDIR}/tools/ctf/cvt \
-		-I${OPENSOLARIS_SYS_DISTDIR}/uts/common \
-
-.ifndef HOSTPROG
-LIBCTF_OBJDIR!=	cd ${.CURDIR}/../../lib/libctf && ${PRINTOBJDIR}
-LDADD+=		-L${LIBCTF_OBJDIR} -lctf
-LDADD+=		-ldwarf -lelf -lz -lpthread
-.endif
-
-.PATH:		${OPENSOLARIS_USR_DISTDIR}/tools/ctf/common
-.PATH:		${OPENSOLARIS_USR_DISTDIR}/tools/ctf/cvt
+LDADD+=-lrt -lpthread
+DPADD+=${LIBRT} ${LIBPTHREAD}
 
 .include <bsd.prog.mk>

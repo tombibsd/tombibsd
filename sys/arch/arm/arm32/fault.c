@@ -242,7 +242,8 @@ data_abort_handler(trapframe_t *tf)
 	int error;
 	ksiginfo_t ksi;
 
-	UVMHIST_FUNC(__func__); UVMHIST_CALLED(maphist);
+	UVMHIST_FUNC(__func__);
+	UVMHIST_CALLED(maphist);
 
 	/* Grab FAR/FSR before enabling interrupts */
 	far = cpu_faultaddress();
@@ -782,7 +783,8 @@ prefetch_abort_handler(trapframe_t *tf)
 	ksiginfo_t ksi;
 	int error, user;
 
-	UVMHIST_FUNC(__func__); UVMHIST_CALLED(maphist);
+	UVMHIST_FUNC(__func__);
+	UVMHIST_CALLED(maphist);
 
 	/* Update vmmeter statistics */
 	curcpu()->ci_data.cpu_ntrap++;
@@ -826,8 +828,8 @@ prefetch_abort_handler(trapframe_t *tf)
 	/* Get fault address */
 	fault_pc = tf->tf_pc;
 	lwp_settrapframe(l, tf);
-	UVMHIST_LOG(maphist, " (pc=0x%x, l=0x%x, tf=0x%x)", fault_pc, l, tf,
-	    0);
+	UVMHIST_LOG(maphist, " (pc=0x%x, l=0x%x, tf=0x%x)",
+	    fault_pc, l, tf, 0);
 
 	/* Ok validate the address, can only execute in USER space */
 	if (__predict_false(fault_pc >= VM_MAXUSER_ADDRESS ||
@@ -871,6 +873,7 @@ prefetch_abort_handler(trapframe_t *tf)
 	KSI_INIT_TRAP(&ksi);
 
 	UVMHIST_LOG (maphist, " <- fatal (%d)", error, 0, 0, 0);
+
 	if (error == ENOMEM) {
 		printf("UVM: pid %d (%s), uid %d killed: "
 		    "out of swap\n", l->l_proc->p_pid, l->l_proc->p_comm,

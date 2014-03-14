@@ -168,3 +168,9 @@ log1p(double x)
     /* log(+INF) is INF */
 	else return(x);
 }
+
+float
+log1pf(float x)
+{
+	return log1p(x);
+}

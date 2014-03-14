@@ -106,6 +106,7 @@ int cpu_neon_present;
 int cpu_simd_present;
 int cpu_simdex_present;
 int cpu_umull_present;
+int cpu_synchprim_present;
 const char *cpu_arch = "";
 
 int cpu_instruction_set_attributes[6];
@@ -491,6 +492,11 @@ SYSCTL_SETUP(sysctl_machdep_setup, "sysctl machdep subtree setup")
 		       NULL, 0, &cpu_simdex_present, 0,
 		       CTL_MACHDEP, CTL_CREATE, CTL_EOL);
 	sysctl_createv(clog, 0, NULL, NULL,
+		       CTLFLAG_PERMANENT|CTLFLAG_READONLY,
+		       CTLTYPE_INT, "synchprim_present", NULL,
+		       NULL, 0, &cpu_synchprim_present, 0,
+		       CTL_MACHDEP, CTL_CREATE, CTL_EOL);
+	sysctl_createv(clog, 0, NULL, NULL,
 		       CTLFLAG_PERMANENT|CTLFLAG_READWRITE,
 		       CTLTYPE_INT, "printfataltraps", NULL,
 		       NULL, 0, &cpu_printfataltraps, 0,
@@ -679,6 +685,9 @@ cpu_boot_secondary_processors(void)
 {
 	uint32_t mbox;
 	kcpuset_export_u32(kcpuset_attached, &mbox, sizeof(mbox));
+#ifdef VERBOSE_ARM_INIT
+	printf("%s: writing mbox with %#x\n", __func__, mbox);
+#endif
 	atomic_swap_32(&arm_cpu_mbox, mbox);
 	membar_producer();
 #ifdef _ARM_ARCH_7

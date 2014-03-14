@@ -162,6 +162,7 @@ elf_placedynexec(struct lwp *l, struct exec_package *epp, Elf_Ehdr *eh,
 
 	for (i = 0; i < eh->e_phnum; i++)
 		ph[i].p_vaddr += offset;
+	epp->ep_entryoffset = offset;
 	eh->e_entry += offset;
 }
 
@@ -835,6 +836,7 @@ exec_elf_makecmds(struct lwp *l, struct exec_package *epp)
 		}
 
 		ap->arg_interp = epp->ep_vmcmds.evs_cmds[nused].ev_addr;
+		epp->ep_entryoffset = interp_offset;
 		epp->ep_entry = ap->arg_interp + interp_offset;
 		PNBUF_PUT(interp);
 	} else

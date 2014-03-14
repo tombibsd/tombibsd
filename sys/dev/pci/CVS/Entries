@@ -363,8 +363,8 @@
 /ppb.c/1.52/Thu Oct 24 10:28:58 2013/-kk/
 /ppbreg.h/1.6/Sun Dec 11 12:22:50 2005/-kk/
 /puc.c/1.37/Thu Feb 13 15:36:00 2014/-kk/
-/puccn.c/1.13/Thu Feb 13 15:22:31 2014/-kk/
-/puccn.h/1.6/Thu Feb 13 15:22:31 2014/-kk/
+/puccn.c/1.14/Fri Mar 14 04:28:21 2014/-kk/
+/puccn.h/1.7/Fri Mar 14 04:28:21 2014/-kk/
 /pucdata.c/1.93/Thu Feb 13 15:36:00 2014/-kk/
 /pucvar.h/1.10/Thu Oct 24 10:28:58 2013/-kk/
 /pwdog.c/1.7/Tue Aug 30 07:22:12 2011/-kk/
@@ -445,7 +445,7 @@
 /weaselreg.h/1.2/Mon Apr 28 20:23:55 2008/-kk/
 /wsdisplay_pci.c/1.1/Sat Jan 22 15:14:28 2011/-kk/
 /wsdisplay_pci.h/1.1/Sat Jan 22 15:14:28 2011/-kk/
-/xhci_pci.c/1.1/Thu Oct 24 10:28:58 2013/-kk/
+/xhci_pci.c/1.2/Fri Mar 14 04:28:21 2014/-kk/
 /yds.c/1.54/Thu Oct 24 10:28:58 2013/-kk/
 /ydsreg.h/1.6/Sun Dec 11 12:22:51 2005/-kk/
 /ydsvar.h/1.11/Wed Nov 23 23:07:36 2011/-kk/

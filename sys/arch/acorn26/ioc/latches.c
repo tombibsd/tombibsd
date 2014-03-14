@@ -79,14 +79,12 @@ latches_attach(device_t parent, device_t self, void *aux)
 {
 	struct latches_softc *sc = device_private(self);
 	struct ioc_attach_args *ioc = aux;
-	bus_space_tag_t iot;
-	bus_space_handle_t ioh;
 
 	sc->sc_dev = self;
 	if (the_latches == NULL)
 		the_latches = self;
-	iot = sc->sc_iot = ioc->ioc_fast_t;
-	ioh = sc->sc_ioh = ioc->ioc_fast_h;
+	sc->sc_iot = ioc->ioc_fast_t;
+	sc->sc_ioh = ioc->ioc_fast_h;
 
 	sc->sc_latcha =
 	    LATCHA_NSEL0 | LATCHA_NSEL1 | LATCHA_NSEL2 | LATCHA_NSEL3 |

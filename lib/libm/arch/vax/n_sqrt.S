@@ -32,6 +32,10 @@
 
 #include <machine/asm.h>
 
+#ifdef WEAK_ALIAS
+WEAK_ALIAS(sqrtl, sqrt)
+#endif
+
 /*
  * double sqrt(arg)   revised August 15,1982
  * double arg;

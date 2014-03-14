@@ -47,6 +47,8 @@
 /debug-loc.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /diff.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /diff2.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
+/discriminator.s/1.1.1.1/Tue Mar  4 20:54:37 2014/-kk/
+/dot-symbol-assignment.s/1.1.1.1/Tue Mar  4 20:54:37 2014/-kk/
 /elf_directive_previous.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /elf_directive_section.s/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /empty-dwarf-lines.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
@@ -65,7 +67,7 @@
 /lcomm.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /leb128.s/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /lit.local.cfg/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
-/local-reloc.s/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/local-reloc.s/1.1.1.2/Fri Mar 14 04:23:50 2014/-kk/
 /many-section.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /many-sections-2.s/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /merge.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/

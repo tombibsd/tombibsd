@@ -99,6 +99,7 @@ struct intrsource {
 	uint8_t is_ipl;				/* IPL_xxx */
 	uint8_t is_irq;				/* local to pic */
 	uint8_t is_iplidx;
+	bool is_mpsafe;
 	char is_source[16];
 };
 

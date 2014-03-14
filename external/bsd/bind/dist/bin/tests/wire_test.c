@@ -88,10 +88,6 @@ main(int argc, char *argv[]) {
 	isc_boolean_t tcp = ISC_FALSE;
 	int ch;
 
-	isc__mem_register();
-	isc__task_register();
-	isc__timer_register();
-	isc__socket_register();
 	mctx = NULL;
 	RUNTIME_CHECK(isc_mem_create(0, 0, &mctx) == ISC_R_SUCCESS);
 

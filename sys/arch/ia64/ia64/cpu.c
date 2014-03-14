@@ -117,7 +117,7 @@ identifycpu(struct cpu_softc *sc)
 	uint64_t vendor[3];
 	const char *family_name, *model_name;
 	uint64_t features, tmp;
-	int number, revision, model, family, archrev;
+	int revision, model, family;
 	char bitbuf[32];
 	extern uint64_t processor_frequency;
 
@@ -129,11 +129,11 @@ identifycpu(struct cpu_softc *sc)
 	vendor[2] = '\0';
 
 	tmp = ia64_get_cpuid(3);
-	number = (tmp >> 0) & 0xff;
+	/* number = (tmp >> 0) & 0xff; */
 	revision = (tmp >> 8) & 0xff;
 	model = (tmp >> 16) & 0xff;
 	family = (tmp >> 24) & 0xff;
-	archrev = (tmp >> 32) & 0xff;
+	/* archrev = (tmp >> 32) & 0xff; */
 
 	family_name = model_name = "unknown";
 	switch (family) {

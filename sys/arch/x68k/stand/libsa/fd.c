@@ -40,7 +40,8 @@ fdopen(struct open_file *f, ...)
 	int error;
 	struct fd_softc *sc;
 	struct fdfmt fdfmt;
-	int id, part;
+	int id;
+	int part __unused;
 	va_list ap;
 
 	va_start(ap, f);

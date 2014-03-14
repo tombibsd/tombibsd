@@ -94,10 +94,6 @@ main(int argc, char *argv[]) {
 	unsigned int options = 0;
 	dns_cache_t *cache;
 
-	isc__mem_register();
-	isc__task_register();
-	isc__timer_register();
-	isc__socket_register();
 	RUNTIME_CHECK(isc_app_start() == ISC_R_SUCCESS);
 
 	dns_result_register();

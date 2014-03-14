@@ -44,9 +44,6 @@
 
 #include <uvm/uvm_extern.h>		/* for pmap.h */
 
-extern int cpu_media_and_vfp_features[];
-extern int cpu_neon_present;
-
 #ifdef FPU_VFP
 
 #ifdef CPU_CORTEX
@@ -148,6 +145,11 @@ struct evcnt vfpevent_use;
 struct evcnt vfpevent_reuse;
 struct evcnt vfpevent_fpe;
 
+/* determine what bits can be changed */
+uint32_t vfp_fpscr_changable = VFP_FPSCR_CSUM;
+/* default to run fast */
+uint32_t vfp_fpscr_default = (VFP_FPSCR_DN | VFP_FPSCR_FZ | VFP_FPSCR_RN);
+
 /*
  * Used to test for a VFP. The following function is installed as a coproc10
  * handler on the undefined instruction vector and then we issue a VFP
@@ -166,6 +168,9 @@ vfp_test(u_int address, u_int insn, trapframe_t *frame, int fault_code)
 	return 0;
 }
 
+#else
+/* determine what bits can be changed */
+uint32_t vfp_fpscr_changable = VFP_FPSCR_CSUM|VFP_FPSCR_ESUM|VFP_FPSCR_RMODE;
 #endif /* FPU_VFP */
 
 struct evcnt vfp_fpscr_ev = 
@@ -196,8 +201,7 @@ vfp_fpscr_handler(u_int address, u_int insn, trapframe_t *frame, int fault_code)
 		return 1;
 
 	if (__predict_false(!vfp_used_p())) {
-		pcb->pcb_vfp.vfp_fpscr =
-		    (VFP_FPSCR_DN | VFP_FPSCR_FZ | VFP_FPSCR_RN); /* Runfast */
+		pcb->pcb_vfp.vfp_fpscr = vfp_fpscr_default;
 	}
 #endif
 
@@ -208,10 +212,8 @@ vfp_fpscr_handler(u_int address, u_int insn, trapframe_t *frame, int fault_code)
 	if (insn & 0x00100000) {
 		*regp = pcb->pcb_vfp.vfp_fpscr;
 	} else {
-		register_t tmp = *regp;
-		if (!(cpu_media_and_vfp_features[0] & ARM_MVFR0_EXCEPT_MASK))
-			tmp &= ~VFP_FPSCR_ESUM;
-		pcb->pcb_vfp.vfp_fpscr = tmp;
+		pcb->pcb_vfp.vfp_fpscr &= ~vfp_fpscr_changable;
+		pcb->pcb_vfp.vfp_fpscr |= *regp & vfp_fpscr_changable;
 	}
 
 	vfp_fpscr_ev.ev_count++;
@@ -338,6 +340,9 @@ vfp_attach(void)
 		aprint_normal_dev(ci->ci_dev, "unrecognized VFP version %x\n",
 		    fpsid);
 		install_coproc_handler(VFP_COPROC, vfp_fpscr_handler);
+		vfp_fpscr_changable = VFP_FPSCR_CSUM|VFP_FPSCR_ESUM
+		    |VFP_FPSCR_RMODE;
+		vfp_fpscr_default = 0;
 		return;
 	}
 
@@ -345,14 +350,34 @@ vfp_attach(void)
 	cpu_media_and_vfp_features[0] = armreg_mvfr0_read();
 	cpu_media_and_vfp_features[1] = armreg_mvfr1_read();
 	if (fpsid != 0) {
-		aprint_normal("vfp%d at %s: %s\n",
+		uint32_t f0 = armreg_mvfr0_read();
+		uint32_t f1 = armreg_mvfr0_read();
+		aprint_normal("vfp%d at %s: %s%s%s%s%s\n",
 		    device_unit(curcpu()->ci_dev),
 		    device_xname(curcpu()->ci_dev),
-		    model);
+		    model,
+		    ((f0 & ARM_MVFR0_ROUNDING_MASK) ? ", rounding" : ""),
+		    ((f0 & ARM_MVFR0_EXCEPT_MASK) ? ", exceptions" : ""),
+		    ((f1 & ARM_MVFR1_D_NAN_MASK) ? ", NaN propogation" : ""),
+		    ((f1 & ARM_MVFR1_FTZ_MASK) ? ", denormals" : ""));
 		aprint_verbose("vfp%d: mvfr: [0]=%#x [1]=%#x\n",
-		    device_unit(curcpu()->ci_dev), 
-		    cpu_media_and_vfp_features[0],
-		    cpu_media_and_vfp_features[1]);
+		    device_unit(curcpu()->ci_dev), f0, f1);
+		if (cpu_media_and_vfp_features[0] & ARM_MVFR0_ROUNDING_MASK) {
+			vfp_fpscr_changable |= VFP_FPSCR_RMODE;
+		}
+		if (cpu_media_and_vfp_features[0] & ARM_MVFR0_EXCEPT_MASK) {
+			vfp_fpscr_changable |= VFP_FPSCR_ESUM;
+		}
+		// If hardware supports propogation of NaNs, select it.
+		if (cpu_media_and_vfp_features[1] & ARM_MVFR1_D_NAN_MASK) {
+			vfp_fpscr_default &= ~VFP_FPSCR_DN;
+			vfp_fpscr_changable |= VFP_FPSCR_DN;
+		}
+		// If hardware supports denormalized numbers, use it.
+		if (cpu_media_and_vfp_features[1] & ARM_MVFR1_FTZ_MASK) {
+			vfp_fpscr_default &= ~VFP_FPSCR_FZ;
+			vfp_fpscr_changable |= VFP_FPSCR_FZ;
+		}
 	}
 	evcnt_attach_dynamic(&vfpevent_use, EVCNT_TYPE_MISC, NULL,
 	    "VFP", "coproc use");
@@ -505,8 +530,7 @@ vfp_state_load(lwp_t *l, u_int flags)
 	if (__predict_false((flags & PCU_LOADED) == 0)) {
 		KASSERT(flags & PCU_RELOAD);
 		vfpevent_use.ev_count++;
-		pcb->pcb_vfp.vfp_fpscr =
-		    (VFP_FPSCR_DN | VFP_FPSCR_FZ | VFP_FPSCR_RN); /* Runfast */
+		pcb->pcb_vfp.vfp_fpscr = vfp_fpscr_default;
 	} else {
 		vfpevent_reuse.ev_count++;
 	}

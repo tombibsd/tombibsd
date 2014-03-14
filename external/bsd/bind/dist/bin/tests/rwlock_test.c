@@ -109,10 +109,6 @@ main(int argc, char *argv[]) {
 	char name[100];
 	void *dupname;
 
-	isc__mem_register();
-	isc__task_register();
-	isc__timer_register();
-	isc__socket_register();
 	if (argc > 1)
 		nworkers = atoi(argv[1]);
 	else

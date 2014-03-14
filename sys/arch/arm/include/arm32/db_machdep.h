@@ -7,5 +7,8 @@
 
 void db_show_frame_cmd(db_expr_t, bool, db_expr_t, const char *);
 void db_show_fault_cmd(db_expr_t, bool, db_expr_t, const char *);
+#ifdef _KERNEL
+void db_show_tlb_cmd(db_expr_t, bool, db_expr_t, const char *);
+#endif
 
 #endif

@@ -104,33 +104,30 @@ static struct intrsource armgic_dummy_source;
 __CTASSERT(NIPL == 8);
 
 /*
- * GIC register are always in little-endian.
+ * GIC register are always in little-endian.  It is assumed the bus_space
+ * will do any endian conversion required.
  */
 static inline uint32_t
 gicc_read(struct armgic_softc *sc, bus_size_t o)
 {
-	uint32_t v = bus_space_read_4(sc->sc_memt, sc->sc_gicch, o);
-	return le32toh(v);
+	return bus_space_read_4(sc->sc_memt, sc->sc_gicch, o);
 }
 
 static inline void
 gicc_write(struct armgic_softc *sc, bus_size_t o, uint32_t v)
 {
-	v = htole32(v);
 	bus_space_write_4(sc->sc_memt, sc->sc_gicch, o, v);
 }
 
 static inline uint32_t
 gicd_read(struct armgic_softc *sc, bus_size_t o)
 {
-	uint32_t v = bus_space_read_4(sc->sc_memt, sc->sc_gicdh, o);
-	return le32toh(v);
+	return bus_space_read_4(sc->sc_memt, sc->sc_gicdh, o);
 }
 
 static inline void
 gicd_write(struct armgic_softc *sc, bus_size_t o, uint32_t v)
 {
-	v = htole32(v);
 	bus_space_write_4(sc->sc_memt, sc->sc_gicdh, o, v);
 }
 

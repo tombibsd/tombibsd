@@ -63,10 +63,6 @@ main(int argc, char *argv[]) {
 	isc_result_t result;
 #endif
 
-	isc__mem_register();
-	isc__task_register();
-	isc__timer_register();
-	isc__socket_register();
 	if (argc > 1) {
 		file = argv[1];
 	}

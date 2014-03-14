@@ -87,3 +87,11 @@ ENTRY(tan, 0x0fc0)		# save %r6-%r11
 	divd3	%r0,%r10,%r0
 	bispsw	(%sp)+
 1:	ret
+
+
+ENTRY(tanf, 0)
+	cvtfd	4(%ap),-(%sp)
+	calls	$2,_C_LABEL(tan)
+	cvtdf	%r0,%r0
+	ret
+

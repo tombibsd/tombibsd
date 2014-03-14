@@ -185,9 +185,10 @@ tpm_acpi_attach(device_t parent, device_t self, void *aux)
 	else
 		inum = irq->ar_irq;
 
-	if ((rv = (*sc->sc_init)(sc, inum, device_xname(sc->sc_dev))) != 0)
+	if ((rv = (*sc->sc_init)(sc, inum, device_xname(sc->sc_dev))) != 0) {
 		aprint_error_dev(sc->sc_dev, "cannot init device %d\n", rv);
 		goto out1;
+	}
 
 	if (inum != -1 &&
 	    (sc->sc_ih = isa_intr_establish(aa->aa_ic, irq->ar_irq,

@@ -114,7 +114,7 @@ sysident_assym.h: ${GENASSYM_CONF} ${GENASSYM_EXTRAS} ${NETBSDSRCDIR}/sys/sys/pa
 	${_MKTARGET_CREATE}
 	cat ${COMMON_DIR}/sysident_assym.cf | \
 	    ${TOOL_GENASSYM} -- ${CC} ${CFLAGS:N-Wa,*} ${CPPFLAGS} ${PROF} \
-	    > sysident_assym.h.tmp && \
+	    ${GENASSYM_CPPFLAGS} > sysident_assym.h.tmp && \
 	mv -f sysident_assym.h.tmp sysident_assym.h
 
 CLEANFILES+=	sysident_assym.h

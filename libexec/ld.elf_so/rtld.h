@@ -259,7 +259,11 @@ typedef struct Struct_Obj_Entry {
 						  * object we know about. */
 
 #ifdef __powerpc__
+#ifdef _LP64
+	Elf_Addr	glink;		/* global linkage */
+#else
 	Elf_Addr       *gotptr;		/* GOT table (secure-plt only) */
+#endif
 #endif
 
 #if defined(__HAVE_TLS_VARIANT_I) || defined(__HAVE_TLS_VARIANT_II)

@@ -67,7 +67,7 @@ extern const char *cpu_arch;
 volatile u_int arm_cpu_hatched = 0;
 u_int arm_cpu_max = 0;
 uint32_t arm_cpu_mbox __cacheline_aligned = 0;
-uint32_t arm_cpu_marker __cacheline_aligned = 1;
+uint32_t arm_cpu_marker[2]  __cacheline_aligned = { 0, 0 };
 #endif
 
 /* Prototypes */
@@ -784,6 +784,9 @@ identify_features(device_t dv)
 	    ((cpu_instruction_set_attributes[3] >> 4) & 0x0f) >= 3;
 	cpu_simdex_present = cpu_simd_present
 	    && ((cpu_instruction_set_attributes[1] >> 12) & 0x0f) >= 2;
+	cpu_synchprim_present =
+	    ((cpu_instruction_set_attributes[3] >> 8) & 0xf0)
+	    | ((cpu_instruction_set_attributes[4] >> 20) & 0x0f);
 
 	cpu_memory_model_features[0] = armreg_mmfr0_read();
 	cpu_memory_model_features[1] = armreg_mmfr1_read();

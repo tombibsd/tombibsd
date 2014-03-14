@@ -23,7 +23,7 @@
 /basic-arm-instructions.s/1.1.1.1/Thu Nov 28 14:18:09 2013/-kk/
 /basic-thumb-instructions.s/1.1.1.1/Thu Nov 28 14:18:09 2013/-kk/
 /basic-thumb2-instructions-v8.s/1.1.1.1/Thu Nov 28 14:18:09 2013/-kk/
-/basic-thumb2-instructions.s/1.1.1.1/Thu Nov 28 14:18:09 2013/-kk/
+/basic-thumb2-instructions.s/1.1.1.2/Fri Mar 14 04:23:49 2014/-kk/
 /bkpt.s/1.1.1.1/Sun Jan  5 16:17:24 2014/-kk/
 /bracket-darwin.s/1.1.1.1/Thu Nov 28 14:18:09 2013/-kk/
 /bracket-exprs.s/1.1.1.1/Thu Nov 28 14:18:09 2013/-kk/
@@ -36,6 +36,7 @@
 /deprecated-v8.s/1.1.1.1/Thu Nov 28 14:18:09 2013/-kk/
 /diagnostics-noneon.s/1.1.1.1/Thu Nov 28 14:18:09 2013/-kk/
 /diagnostics.s/1.1.1.1/Thu Nov 28 14:18:09 2013/-kk/
+/directive-align.s/1.1.1.1/Tue Mar  4 20:54:50 2014/-kk/
 /directive-arch-armv2.s/1.1.1.2/Thu Feb 27 08:52:23 2014/-kk/
 /directive-arch-armv2a.s/1.1.1.2/Thu Feb 27 08:52:23 2014/-kk/
 /directive-arch-armv3.s/1.1.1.2/Thu Feb 27 08:52:23 2014/-kk/
@@ -62,6 +63,13 @@
 /directive-arch-armv8a.s/1.1.1.2/Thu Feb 27 08:52:24 2014/-kk/
 /directive-arch-iwmmxt.s/1.1.1.2/Thu Feb 27 08:52:24 2014/-kk/
 /directive-arch-iwmmxt2.s/1.1.1.2/Thu Feb 27 08:52:24 2014/-kk/
+/directive-arch_extension-crc.s/1.1.1.1/Tue Mar  4 20:54:49 2014/-kk/
+/directive-arch_extension-crypto.s/1.1.1.1/Tue Mar  4 20:54:50 2014/-kk/
+/directive-arch_extension-fp.s/1.1.1.1/Tue Mar  4 20:54:50 2014/-kk/
+/directive-arch_extension-idiv.s/1.1.1.1/Tue Mar  4 20:54:50 2014/-kk/
+/directive-arch_extension-mp.s/1.1.1.1/Tue Mar  4 20:54:50 2014/-kk/
+/directive-arch_extension-sec.s/1.1.1.1/Tue Mar  4 20:54:50 2014/-kk/
+/directive-arch_extension-simd.s/1.1.1.1/Tue Mar  4 20:54:49 2014/-kk/
 /directive-cpu.s/1.1.1.1/Thu Nov 28 14:18:09 2013/-kk/
 /directive-eabi_attribute-2.s/1.1.1.2/Thu Feb 27 08:52:24 2014/-kk/
 /directive-eabi_attribute-diagnostics.s/1.1.1.1/Wed Jan 15 21:24:19 2014/-kk/
@@ -71,6 +79,7 @@
 /directive-fpu-multiple.s/1.1.1.2/Thu Feb 27 08:52:24 2014/-kk/
 /directive-fpu-softvfp.s/1.1.1.1/Sun Jan  5 16:17:24 2014/-kk/
 /directive-fpu.s/1.1.1.1/Thu Nov 28 14:18:09 2013/-kk/
+/directive-literals.s/1.1.1.1/Tue Mar  4 20:54:50 2014/-kk/
 /directive-object_arch-2.s/1.1.1.1/Fri Feb 14 20:12:55 2014/-kk/
 /directive-object_arch-3.s/1.1.1.1/Fri Feb 14 20:12:55 2014/-kk/
 /directive-object_arch-diagnostics.s/1.1.1.1/Fri Feb 14 20:12:55 2014/-kk/
@@ -142,6 +151,7 @@
 /invalid-hint-thumb.s/1.1.1.1/Thu Nov 28 14:18:09 2013/-kk/
 /invalid-idiv.s/1.1.1.1/Thu Nov 28 14:18:09 2013/-kk/
 /invalid-neon-v8.s/1.1.1.1/Thu Nov 28 14:18:09 2013/-kk/
+/invalid-vector-index.s/1.1.1.1/Tue Mar  4 20:54:50 2014/-kk/
 /ldr-pseudo-darwin.s/1.1.1.1/Sun Jan  5 16:17:24 2014/-kk/
 /ldr-pseudo-obj-errors.s/1.1.1.1/Sun Jan  5 16:17:24 2014/-kk/
 /ldr-pseudo-parse-errors.s/1.1.1.1/Sun Jan  5 16:17:24 2014/-kk/

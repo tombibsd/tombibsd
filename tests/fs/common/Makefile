@@ -39,4 +39,6 @@ CPPFLAGS+=	-DMOUNT_NOMAIN -DMOUNTNFS_RETRYRPC=1
 .include "../../../libexec/lfs_cleanerd/Makefile.inc"
 CPPFLAGS+=	-DUSE_RUMP -DLFS_CLEANER_AS_LIB
 
+CWARNFLAGS.clang+=	-Wno-error=absolute-value
+
 .include <bsd.lib.mk>

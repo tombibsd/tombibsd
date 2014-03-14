@@ -52,7 +52,7 @@ struct zfs_args {
 	int  datalen;
 	int  optlen;
 	int  flags;
-} za;
+};
 
 typedef struct zfs_args zfs_args_t;
 

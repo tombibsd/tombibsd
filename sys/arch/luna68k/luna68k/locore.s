@@ -350,10 +350,6 @@ Lenab3:
  */
 #include <m68k/m68k/trap_subr.s>
 
-	.data
-GLOBAL(m68k_fault_addr)
-	.long	0
-
 #if defined(M68040) || defined(M68060)
 ENTRY_NOPROFILE(addrerr4060)
 	clrl	%sp@-			| stack adjust count
@@ -379,7 +375,6 @@ ENTRY_NOPROFILE(buserr60)
 	orl	#IC60_CABC,%d2		| clear all branch cache entries
 	movc	%d2,%cacr
 	movl	%d0,%d1
-	addql	#1,L60bpe
 	andl	#0x7ffd,%d1
 	jeq	_ASM_LABEL(faultstkadjnotrap2)
 Lnobpe:
@@ -401,7 +396,6 @@ Lberr3:
 Lberr60:
 	tstl	_C_LABEL(nofault)	| catch bus error?
 	jeq	Lisberr			| no, handle as usual
-	movl	%sp@(FR_HW+8+8),_C_LABEL(m68k_fault_addr) | save fault addr
 	movl	_C_LABEL(nofault),%sp@-	| yes,
 	jbsr	_C_LABEL(longjmp)	|  longjmp(nofault)
 	/* NOTREACHED */
@@ -429,7 +423,6 @@ Lbe1stpg:
 Lberr40:
 	tstl	_C_LABEL(nofault)	| catch bus error?
 	jeq	Lisberr			| no, handle as usual
-	movl	%sp@(FR_HW+8+20),_C_LABEL(m68k_fault_addr) | save fault addr
 	movl	_C_LABEL(nofault),%sp@-	| yes,
 	jbsr	_C_LABEL(longjmp)	|  longjmp(nofault)
 	/* NOTREACHED */
@@ -516,7 +509,6 @@ Lisberr1:
 	clrw	%sp@			| re-clear pad word
 	tstl	_C_LABEL(nofault)	| catch bus error?
 	jeq	Lisberr			| no, handle as usual
-	movl	%sp@(FR_HW+8+16),_C_LABEL(m68k_fault_addr) | save fault addr
 	movl	_C_LABEL(nofault),%sp@-	| yes,
 	jbsr	_C_LABEL(longjmp)	|  longjmp(nofault)
 	/* NOTREACHED */

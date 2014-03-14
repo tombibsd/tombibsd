@@ -1,14 +1,24 @@
 /2006-12-11-Cast-ConstExpr.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /2009-06-11-FirstClassAggregateConstant.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
+/aggregateInstructions.3.2.ll.bc/1.1.1.1/Tue Mar  4 20:54:01 2014/-kk/
+/aggregateInstructions.3.2.ll/1.1.1.1/Tue Mar  4 20:54:01 2014/-kk/
 /arm32_neon_vcnt_upgrade.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /attributes-3.3.ll.bc/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /attributes-3.3.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /attributes.ll/1.1.1.2/Tue Jan 14 16:01:57 2014/-kk/
+/binaryFloatInstructions.3.2.ll.bc/1.1.1.1/Tue Mar  4 20:54:01 2014/-kk/
+/binaryFloatInstructions.3.2.ll/1.1.1.1/Tue Mar  4 20:54:01 2014/-kk/
+/binaryIntInstructions.3.2.ll.bc/1.1.1.1/Tue Mar  4 20:54:01 2014/-kk/
+/binaryIntInstructions.3.2.ll/1.1.1.1/Tue Mar  4 20:54:01 2014/-kk/
+/bitwiseInstructions.3.2.ll.bc/1.1.1.1/Tue Mar  4 20:54:01 2014/-kk/
+/bitwiseInstructions.3.2.ll/1.1.1.1/Tue Mar  4 20:54:01 2014/-kk/
 /blockaddress.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /calling-conventions.3.2.ll.bc/1.1.1.1/Sun Jan  5 16:18:20 2014/-kk/
 /calling-conventions.3.2.ll/1.1.1.1/Sun Jan  5 16:18:20 2014/-kk/
 /case-ranges-3.3.ll.bc/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /case-ranges-3.3.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
+/conversionInstructions.3.2.ll.bc/1.1.1.1/Tue Mar  4 20:54:01 2014/-kk/
+/conversionInstructions.3.2.ll/1.1.1.1/Tue Mar  4 20:54:01 2014/-kk/
 /drop-debug-info.ll/1.1.1.2/Thu Feb 27 08:52:08 2014/-kk/
 /extractelement.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /flags.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
@@ -28,7 +38,11 @@
 /select.ll/1.1.1.2/Tue Jan 14 16:01:57 2014/-kk/
 /shuffle.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /ssse3_palignr.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
+/terminatorInstructions.3.2.ll.bc/1.1.1.1/Tue Mar  4 20:54:01 2014/-kk/
+/terminatorInstructions.3.2.ll/1.1.1.1/Tue Mar  4 20:54:01 2014/-kk/
 /upgrade-tbaa.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
+/vectorInstructions.3.2.ll.bc/1.1.1.1/Tue Mar  4 20:54:01 2014/-kk/
+/vectorInstructions.3.2.ll/1.1.1.1/Tue Mar  4 20:54:01 2014/-kk/
 /visibility-styles.3.2.ll.bc/1.1.1.1/Sun Jan  5 16:18:20 2014/-kk/
 /visibility-styles.3.2.ll/1.1.1.1/Sun Jan  5 16:18:20 2014/-kk/
 D

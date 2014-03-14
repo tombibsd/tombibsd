@@ -1,6 +1,6 @@
 /autoconf.c/1.1/Mon Feb 24 07:23:43 2014/-kk/
 /conf.c/1.1/Mon Feb 24 07:23:43 2014/-kk/
-/copy.S/1.19/Sat Oct  1 15:50:46 2011/-kk/
+/copy.S/1.22/Fri Mar 14 04:28:15 2014/-kk/
 /core_machdep.c/1.6/Tue Jan 14 16:04:54 2014/-kk/
 /cpuvar.h/1.1/Thu Apr  5 21:00:30 2012/-kk/
 /db_disasm.c/1.16/Wed Jan 18 09:35:48 2012/-kk/
@@ -22,8 +22,8 @@
 /kobj_machdep.c/1.14/Thu Feb 13 15:35:50 2014/-kk/
 /lock_stubs.S/1.26/Tue Apr  3 14:18:14 2012/-kk/
 /locore.S/1.1/Mon Feb 24 07:23:43 2014/-kk/
-/machdep.c/1.1/Mon Feb 24 07:23:43 2014/-kk/
-/machdep.h/1.16/Sat Mar  1 06:04:30 2014/-kk/
+/machdep.c/1.2/Fri Mar 14 04:28:15 2014/-kk/
+/machdep.h/1.17/Fri Mar 14 04:28:15 2014/-kk/
 /mainbus.c/1.1/Mon Feb 24 07:23:43 2014/-kk/
 /pim.h/1.1/Mon Feb 24 07:23:43 2014/-kk/
 /pmap.c/1.98/Tue Feb 28 07:30:30 2012/-kk/
@@ -34,6 +34,6 @@
 /support.S/1.6/Tue Nov  3 05:07:26 2009/-kk/
 /sys_machdep.c/1.1/Mon Feb 24 07:23:43 2014/-kk/
 /trap.S/1.68/Fri Apr  6 13:13:13 2012/-kk/
-/trap.c/1.105/Thu Feb 27 08:55:46 2014/-kk/
-/vm_machdep.c/1.53/Thu Feb 27 08:55:46 2014/-kk/
+/trap.c/1.106/Fri Mar 14 04:28:15 2014/-kk/
+/vm_machdep.c/1.54/Fri Mar 14 04:28:15 2014/-kk/
 D

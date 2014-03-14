@@ -64,27 +64,35 @@ MODULE(MODULE_CLASS_EXEC, compat_svr4, "compat" MD1 MD2);
 
 static struct execsw svr4_execsw[] = {
 #if defined(EXEC_ELF32) && ELFSIZE == 32
-	{ sizeof (Elf32_Ehdr),
-	  exec_elf32_makecmds,
-	  { svr4_elf32_probe },
-	  &emul_svr4,
-	  EXECSW_PRIO_LAST,	/* probe always succeeds */
-	  ELF32_AUXSIZE,
-	  elf32_copyargs,
-	  NULL,
-	  coredump_elf32,
-	  exec_setup_stack },
+	{
+		.es_hdrsz = sizeof (Elf32_Ehdr),
+		.es_makecmds = exec_elf32_makecmds,
+		.u = {
+			.elf_probe_func = svr4_elf32_probe,
+		},
+		.es_emul = &emul_svr4,
+		.es_prio = EXECSW_PRIO_LAST,
+		.es_arglen = ELF32_AUXSIZE,
+		.es_copyargs = elf32_copyargs,
+		.es_setregs = NULL,
+		.es_coredump = coredump_elf32,
+		.es_setup_stack = exec_setup_stack,
+	},
 #elif defined(EXEC_ELF64)
-	{ sizeof (Elf64_Ehdr),
-	  exec_elf64_makecmds,
-	  { svr4_elf64_probe },
-	  &emul_svr4,
-	  EXECSW_PRIO_LAST,	/* probe always succeeds */
-	  ELF64_AUXSIZE,
-	  elf64_copyargs,
-	  NULL,
-	  coredump_elf64,
-	  exec_setup_stack },
+	{
+		.es_hdrsz = sizeof (Elf64_Ehdr),
+		.es_makecmds = exec_elf64_makecmds,
+		.u = {
+			.elf_probe_func = svr4_elf64_probe,
+		},
+		.es_emul = &emul_svr4,
+		.es_prio = EXECSW_PRIO_LAST,
+		.es_arglen = ELF64_AUXSIZE,
+		.es_copyargs = elf64_copyargs,
+		.es_setregs = NULL,
+		.es_coredump = coredump_elf64,
+		.es_setup_stack = exec_setup_stack,
+	},
 #endif
 };
 

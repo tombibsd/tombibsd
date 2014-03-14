@@ -165,7 +165,7 @@ main(int argc, char **argv)
 		}
 		if (elf_ldd(fd, *argv, fmt1, fmt2) == -1
 		    /* Alpha never had 32 bit support. */
-#if (defined(_LP64) && !defined(__alpha__)) || defined(MIPS_N32)
+#if (defined(_LP64) && !defined(ELF64_ONLY)) || defined(MIPS_N32)
 		    && elf32_ldd(fd, *argv, fmt1, fmt2) == -1
 #if defined(__mips__) && 0 /* XXX this is still hosed for some reason */
 		    && elf32_ldd_compat(fd, *argv, fmt1, fmt2) == -1

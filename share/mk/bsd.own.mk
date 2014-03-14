@@ -56,6 +56,16 @@ TOOLCHAIN_MISSING?=	no
 #
 .if ${MACHINE_CPU}  == "vax"
 HAVE_GCC?=    4
+
+# Platforms switched to GCC 4.8
+.elif \
+      ${MACHINE_CPU} == "alpha" || \
+      ${MACHINE_CPU} == "arm" || \
+      ${MACHINE_CPU} == "hppa" || \
+      ${MACHINE_CPU} == "sparc" || \
+      ${MACHINE_CPU} == "sparc64"
+HAVE_GCC?=    48
+
 .else
 # Otherwise, default to GCC4.5
 HAVE_GCC?=    45
@@ -515,6 +525,16 @@ MACHINES.sparc64=	sparc64
 MACHINES.vax=		vax
 MACHINES.x86_64=	amd64
 
+# for crunchide & ldd, define the OBJECT_FMTS used by a MACHINE_ARCH
+#
+OBJECT_FMTS=
+.if	${MACHINE_ARCH} != "alpha" 
+OBJECT_FMTS+=	elf32
+.endif
+.if	${MACHINE_ARCH} == "alpha" || ${MACHINE_ARCH:M*64*} != ""
+OBJECT_FMTS+=	elf64
+.endif
+
 # OBJCOPY flags to create a.out binaries for old firmware
 # shared among src/distrib and ${MACHINE}/conf/Makefile.${MACHINE}.inc
 .if ${MACHINE_CPU} == "arm"
@@ -770,6 +790,8 @@ ARM_APCS_FLAGS=	-mabi=apcs-gnu -mfloat-abi=soft
 ARM_APCS_FLAGS+=${${ACTIVE_CC} == "clang":? -target ${MACHINE_GNU_ARCH}--netbsdelf -B ${TOOLDIR}/${MACHINE_GNU_PLATFORM}/bin :}
 .endif
 
+GENASSYM_CPPFLAGS+=	${${ACTIVE_CC} == "clang":? -no-integrated-as :}
+
 #
 # Determine if arch uses native kernel modules with rump
 #
@@ -845,8 +867,9 @@ MK${var}:=	yes
 #
 # MK* options which have variable defaults.
 #
-.if ${MACHINE_ARCH} == "x86_64" || ${MACHINE_ARCH} == "sparc64" || \
-    ${MACHINE_ARCH} == "mips64eb" || ${MACHINE_ARCH} == "mips64el"
+.if ${MACHINE_ARCH} == "x86_64" || ${MACHINE_ARCH} == "sparc64" \
+    || ${MACHINE_ARCH} == "mips64eb" || ${MACHINE_ARCH} == "mips64el" \
+    || ${MACHINE_ARCH} == "powerpc64"
 MKCOMPAT?=	yes
 .elif !empty(MACHINE_ARCH:Mearm*)
 MKCOMPAT?=	no
@@ -857,7 +880,7 @@ MKCOMPAT:=	no
 
 #.if ${MACHINE_ARCH} == "x86_64" || ${MACHINE_ARCH} == "i386" || \
 
-.if ${MACHINE} == "evbppc"
+.if ${MACHINE} == "evbppc" && ${MACHINE_ARCH} == "powerpc"
 MKCOMPATMODULES?=	yes
 .else
 MKCOMPATMODULES:=	no
@@ -973,8 +996,7 @@ ${var}?=no
     ${MACHINE} == "amiga"	|| \
     ${MACHINE} == "mac68k"	|| \
     ${MACHINE} == "pmax"	|| \
-    ${MACHINE} == "sun3"	|| \
-    ${MACHINE} == "x68k"
+    ${MACHINE} == "sun3"
 X11FLAVOUR?=	XFree86
 .else
 X11FLAVOUR?=	Xorg

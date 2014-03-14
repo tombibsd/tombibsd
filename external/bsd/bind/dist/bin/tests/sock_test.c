@@ -265,11 +265,6 @@ main(int argc, char *argv[]) {
 	isc_result_t result;
 	int pf;
 
-	isc__mem_register();
-	isc__task_register();
-	isc__timer_register();
-	isc__socket_register();
-
 	if (argc > 1) {
 		workers = atoi(argv[1]);
 		if (workers < 1)

@@ -200,6 +200,7 @@ struct exec_package {
 	vaddr_t	ep_minsaddr;		/* proc's min stack addr ("bottom") */
 	vsize_t	ep_ssize;		/* size of process's stack */
 	vaddr_t	ep_entry;		/* process's entry point */
+	vaddr_t	ep_entryoffset;		/* offset to entry point */
 	vaddr_t	ep_vm_minaddr;		/* bottom of process address space */
 	vaddr_t	ep_vm_maxaddr;		/* top of process address space */
 	u_int	ep_flags;		/* flags; see below. */

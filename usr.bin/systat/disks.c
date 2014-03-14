@@ -102,6 +102,7 @@ drvselect(char *args, int truefalse, int selections[])
 		for (i = 0; i < ndrive; i++)
 			if (fnmatch(args, dr_name[i], 0) == 0) {
 				selections[i] = truefalse;
+				break;
 			}
 		if (i >= ndrive)
 			error("%s: unknown drive", args);

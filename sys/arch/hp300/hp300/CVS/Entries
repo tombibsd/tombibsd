@@ -8,7 +8,7 @@
 /intr.c/1.40/Mon Dec 20 00:25:33 2010/-kk/
 /leds.c/1.20/Tue Feb  8 20:20:13 2011/-kk/
 /leds.h/1.5/Tue Feb  8 20:20:13 2011/-kk/
-/locore.s/1.167/Thu Feb 13 15:35:50 2014/-kk/
+/locore.s/1.169/Fri Mar 14 04:28:15 2014/-kk/
 /machdep.c/1.227/Thu Oct 24 10:28:57 2013/-kk/
 /pmap_bootstrap.c/1.58/Thu Oct 24 10:28:57 2013/-kk/
 /trap.c/1.150/Thu Oct 24 10:28:57 2013/-kk/

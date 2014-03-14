@@ -441,8 +441,8 @@ initarm(void *arg)
 	int loop;
 	int loop1;
 	u_int l1pagetable;
-	paddr_t memstart;
-	psize_t memsize;
+	paddr_t memstart = 0;
+	psize_t memsize = 0;
 
 	/* Calibrate the delay loop. */
 	i80321_calibrate_delay();

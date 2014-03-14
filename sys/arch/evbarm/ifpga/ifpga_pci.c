@@ -352,7 +352,7 @@ ifpga_pci_intr_establish(void *pcv, pci_intr_handle_t ih, int level,
     int (*func) (void *), void *arg)
 {
 	void *intr;
-	int length;
+	/* int length; */
 
 #ifdef PCI_DEBUG
 	printf("ifpga_pci_intr_establish(pcv=%p, ih=0x%lx, level=%d, "
@@ -360,7 +360,7 @@ ifpga_pci_intr_establish(void *pcv, pci_intr_handle_t ih, int level,
 #endif
 
 	/* Copy the interrupt string to a private buffer */
-	length = strlen(ifpga_pci_intr_string(pcv, ih));
+	/* length = strlen(ifpga_pci_intr_string(pcv, ih)); */
 	intr = ifpga_intr_establish(ih, level, func, arg);
 
 	return intr;

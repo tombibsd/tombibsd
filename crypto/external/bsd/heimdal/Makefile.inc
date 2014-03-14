@@ -45,3 +45,4 @@ HOST_CPPFLAGS+=	-DHAVE_CONFIG_H
 CPPFLAGS+= ${.PATH:S/^/-I/}
 CPPFLAGS+= -I${HEIMBASE}/include
 CPPFLAGS+= -I${HEIMDIST}/include
+CWARNFLAGS.clang+=	-Wno-error=absolute-value

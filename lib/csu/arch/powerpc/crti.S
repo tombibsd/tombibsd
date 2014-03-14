@@ -36,7 +36,7 @@ RCSID("$NetBSD$")
 #include "sysident.S"
 
 	.section ".init", "ax", @progbits
-_ENTRY(_init)
+_XENTRY(_init)
 	mflr	%r0
 #ifdef _LP64
 	stdu	%r1, -(6*SZREG)(%r1)
@@ -47,7 +47,7 @@ _ENTRY(_init)
 #endif
 
 	.section ".fini", "ax", @progbits
-_ENTRY(_fini)
+_XENTRY(_fini)
 	mflr	%r0
 #ifdef _LP64
 	stdu	%r1, -(6*SZREG)(%r1)

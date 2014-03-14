@@ -81,6 +81,9 @@ void hppa_fpu_bootstrap(u_int);
 void hppa_fpu_flush(struct lwp *);
 void hppa_fpu_emulate(struct trapframe *, struct lwp *, u_int);
 
+/* Set up of space registers and protection IDs */
+void hppa_setvmspace(struct lwp *);
+
 /* Interrupt dispatching. */
 void hppa_intr(struct trapframe *);
 

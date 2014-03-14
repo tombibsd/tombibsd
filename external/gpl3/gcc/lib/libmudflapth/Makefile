@@ -3,15 +3,18 @@
 NOLINT=yes			# core dumps
 UNSUPPORTED_COMPILER.clang=     # defined
 
-.include <bsd.init.mk>
+.include <bsd.own.mk>
 
-DIST=           ${GCCDIST}/libmudflap
+DIST=           ${NETBSDSRCDIR}/external/gpl3/gcc/dist/libmudflap
 CPPFLAGS+=	-I${.CURDIR}/../libmudflap -DLIBMUDFLAPTH
+
+.PATH: ${DIST}
+
+SHLIB_MAJOR=	0
+SHLIB_MINOR=	0
 
 LINTFLAGS+=-g
 LIB=mudflapth
 SRCS=mf-runtime.c mf-heuristics.c mf-hooks1.c mf-hooks2.c mf-hooks3.c
 
 .include <bsd.lib.mk>
-
-.PATH: ${DIST}

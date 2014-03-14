@@ -113,8 +113,8 @@ Notes:
 bc includes dc, both of which are in the NetBSD tree.
 
 Package:	bind [named and utils]
-Version:	9.9.5b1
-Current Vers:	9.9.4-P1/9.9.5b1
+Version:	9.10.0b1
+Current Vers:	9.10.0b1
 Maintainer:	Paul Vixie <vixie@vix.com>
 Archive Site:	ftp://ftp.isc.org/isc/bind9/
 Home Page:	http://www.isc.org/software/bind/
@@ -302,8 +302,8 @@ Notes:
 Use the dhcp2netbsd script.
 
 Package:	dhcpcd
-Version:	6.3.0
-Current Vers:	6.3.0
+Version:	6.3.1
+Current Vers:	6.3.1
 Maintainer:	roy
 Archive Site:	ftp://roy.marples.name/pub/dhcpcd/
 Home Page:	http://roy.marples.name/projects/dhcpcd/
@@ -1457,19 +1457,18 @@ Location:	crypto/external/cpl/tpm-tools/dist
 Notes:
 		Need to feed back local changes
 
-Package:	libdwarf
-Version:	FreeBSD-2013-01-17
+Package:	elftoolchain (libelf/libdwarf)
+Version:	FreeBSD-2014-03-08
 Current Vers:	FreeBSD-XXXX-YY-ZZ
-Maintainer:	John Birrell <jb@freebsd.org>
+Maintainer:	Joseph Koshi <jkoshi@freebsd.org>
 Archive Site:	none
 Home Page:	none
 Mailing List:	none
 Responsible:	christos
 License:	BSD-like (2-clause)
-Location:	sys/external/bsd/libdwarf/dist
+Location:	sys/external/bsd/elftoolchain/dist
 Notes:
 		Run prepare-import.sh; next time use svn id.
-		Ask jkoshy who the upstream will be.
 
 Package:	smbfs
 Version:	smbfs-1.4.1.tar.gz + FreeBSD-2003-02-16

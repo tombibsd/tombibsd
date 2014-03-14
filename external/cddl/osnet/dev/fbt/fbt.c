@@ -703,7 +703,6 @@ static int
 fbt_ctfoff_init(dtrace_modctl_t *mod, mod_ctf_t *mc)
 {
 	const Elf_Sym *symp = mc->symtab;
-	const char *name;
 	const ctf_header_t *hp = (const ctf_header_t *) mc->ctftab;
 	const uint8_t *ctfdata = mc->ctftab + sizeof(ctf_header_t);
 	int i;
@@ -757,11 +756,6 @@ fbt_ctfoff_init(dtrace_modctl_t *mod, mod_ctf_t *mc)
 			*ctfoff = 0xffffffff;
 			continue;
 		}
-
-		if (symp->st_name < mc->strcnt)
-			name = mc->strtab + symp->st_name;
-		else
-			name = "(?)";
 
 		switch (ELF_ST_TYPE(symp->st_info)) {
 		case STT_OBJECT:

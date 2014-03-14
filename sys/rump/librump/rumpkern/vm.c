@@ -1158,6 +1158,8 @@ uvm_kick_pdaemon()
 void *
 rump_hypermalloc(size_t howmuch, int alignment, bool waitok, const char *wmsg)
 {
+	const unsigned long thelimit =
+	    curlwp == uvm.pagedaemon_lwp ? pdlimit : rump_physmemlimit;
 	unsigned long newmem;
 	void *rv;
 	int error;
@@ -1166,10 +1168,9 @@ rump_hypermalloc(size_t howmuch, int alignment, bool waitok, const char *wmsg)
 
 	/* first we must be within the limit */
  limitagain:
-	if (rump_physmemlimit != RUMPMEM_UNLIMITED) {
+	if (thelimit != RUMPMEM_UNLIMITED) {
 		newmem = atomic_add_long_nv(&curphysmem, howmuch);
-		if ((newmem > rump_physmemlimit) &&
-		    !(curlwp == uvm.pagedaemon_lwp || newmem > pdlimit)) {
+		if (newmem > thelimit) {
 			newmem = atomic_add_long_nv(&curphysmem, -howmuch);
 			if (!waitok) {
 				return NULL;

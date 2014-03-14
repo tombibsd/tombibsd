@@ -66,9 +66,6 @@ volatile int hardware_spl_level;
 volatile uint32_t vic1_intr_enabled;
 volatile uint32_t vic2_intr_enabled;
 
-/* Interrupts pending. */
-static volatile int ipending;
-
 void	ep93xx_intr_dispatch(struct trapframe *);
 
 #define VIC1REG(reg)	*((volatile uint32_t*) (EP93XX_AHB_VBASE + \

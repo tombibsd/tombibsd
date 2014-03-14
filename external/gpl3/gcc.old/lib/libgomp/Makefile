@@ -73,6 +73,9 @@ INCSDIR=	/usr/include/gcc-4.5
 libinstall::
 .endif			# }
 
+COPTS.team.c = -Wno-stack-protector
+COPTS.task.c = -Wno-stack-protector
+
 .include <bsd.lib.mk>
 
 .PATH:	${ARCHDIR} ${DIST}/libgomp ${DIST}/libgomp/config/posix

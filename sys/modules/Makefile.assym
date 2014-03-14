@@ -27,5 +27,6 @@ assym.h:
 #	 ${GENASSYM_DIR}/genassym.cf
 	@echo ${S}
 	${TOOL_GENASSYM} -- ${CC} ${CFLAGS:N-Wa,*} ${CPPFLAGS} ${PROF} \
-		< ${GENASSYM_DIR}/genassym.cf > assym.h.tmp && \
+		${GENASSYM_CPPFLAGS} < ${GENASSYM_DIR}/genassym.cf \
+		> assym.h.tmp && \
 	mv -f assym.h.tmp assym.h

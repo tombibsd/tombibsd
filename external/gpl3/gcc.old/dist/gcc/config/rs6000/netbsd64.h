@@ -337,7 +337,7 @@ extern int dot_symbols;
 #undef	LINK_OS_DEFAULT_SPEC
 #define LINK_OS_DEFAULT_SPEC "%(link_os_netbsd)"
 
-#define LINK_OS_NETBSD_SPEC32 "-m elf32ppc %{!shared: %{!static: \
+#define LINK_OS_NETBSD_SPEC32 "-m elf32ppc_nbsd %{!shared: %{!static: \
   %{rdynamic:-export-dynamic} \
   %{!dynamic-linker:-dynamic-linker /usr/libexec/ld.elf_so}}}"
 
@@ -371,7 +371,7 @@ extern int dot_symbols;
 #define	PTRDIFF_TYPE (TARGET_64BIT ? "long int" : "int")
 
 #undef	WCHAR_TYPE
-#define	WCHAR_TYPE (TARGET_64BIT ? "int" : "long int")
+#define	WCHAR_TYPE "int"
 #undef  WCHAR_TYPE_SIZE
 #define WCHAR_TYPE_SIZE 32
 

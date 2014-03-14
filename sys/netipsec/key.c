@@ -6997,7 +6997,6 @@ key_setdump_chain(u_int8_t req_satype, int *errorp, int *lenp, pid_t pid)
 	u_int8_t state;
 	int cnt;
 	struct mbuf *m, *n, *prev;
-	int totlen;
 
 	*lenp = 0;
 
@@ -7057,7 +7056,6 @@ key_setdump_chain(u_int8_t req_satype, int *errorp, int *lenp, pid_t pid)
 					return (NULL);
 				}
 
-				totlen += n->m_pkthdr.len;
 				if (!m)
 					m = n;
 				else

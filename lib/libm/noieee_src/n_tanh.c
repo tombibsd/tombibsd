@@ -97,3 +97,9 @@ tanh(double x)
 	else
 	    return(sign);	/* x is +- INF */
 }
+
+float
+tanhf(float x)
+{
+	return tanh(x);
+}

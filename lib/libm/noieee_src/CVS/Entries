@@ -10,6 +10,8 @@
 /n_cosh.c/1.8/Thu Mar 20 16:41:26 2008/-kk/
 /n_erf.c/1.9/Tue Dec 17 04:04:51 2013/-kk/
 /n_exp.c/1.8/Thu Mar 20 16:41:26 2008/-kk/
+/n_exp2.c/1.1/Thu Mar  6 10:55:57 2014/-kk/
+/n_exp2f.c/1.1/Thu Mar  6 10:55:57 2014/-kk/
 /n_exp__E.c/1.7/Tue Apr 29 15:10:02 2008/-kk/
 /n_expm1.c/1.8/Tue Dec 17 04:04:51 2013/-kk/
 /n_floor.c/1.7/Thu Dec  9 22:52:59 2010/-kk/
@@ -24,8 +26,9 @@
 /n_jn.c/1.7/Wed Nov  2 02:34:56 2011/-kk/
 /n_lgamma.c/1.6/Fri Nov 24 21:15:54 2006/-kk/
 /n_log.c/1.7/Thu Mar 20 16:41:26 2008/-kk/
-/n_log10.c/1.6/Thu Aug  7 16:44:52 2003/-kk/
-/n_log1p.c/1.7/Tue Apr 29 15:10:02 2008/-kk/
+/n_log10.c/1.7/Fri Mar 14 04:28:02 2014/-kk/
+/n_log1p.c/1.8/Fri Mar 14 04:28:02 2014/-kk/
+/n_log2.c/1.1/Thu Mar  6 10:57:01 2014/-kk/
 /n_log__L.c/1.6/Thu Aug  7 16:44:52 2003/-kk/
 /n_lround.c/1.1/Thu Dec  9 22:52:59 2010/-kk/
 /n_lroundf.c/1.1/Thu Dec  9 22:52:59 2010/-kk/
@@ -36,6 +39,6 @@
 /n_sinh.c/1.7/Thu Mar 20 16:41:26 2008/-kk/
 /n_support.c/1.5/Thu Aug  7 16:44:52 2003/-kk/
 /n_tan.c/1.5/Thu Aug  7 16:44:52 2003/-kk/
-/n_tanh.c/1.6/Thu Aug  7 16:44:52 2003/-kk/
+/n_tanh.c/1.7/Fri Mar 14 04:28:02 2014/-kk/
 /trig.h/1.6/Thu Aug  7 16:44:53 2003/-kk/
 D

@@ -174,10 +174,6 @@ main(int argc, char *argv[]) {
 	isc_task_t *task;
 	isc_mem_t *mctx, *mctx2;
 
-	isc__mem_register();
-	isc__task_register();
-	isc__timer_register();
-	isc__socket_register();
 	RUNTIME_CHECK(isc_app_start() == ISC_R_SUCCESS);
 
 	if (argc > 1) {

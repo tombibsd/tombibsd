@@ -3,6 +3,8 @@
 .include <bsd.init.mk>
 
 TESTSDIR=	${TESTSBASE}/atf/atf-sh
+ATFFILE=	yes
+KYUAFILE=	yes
 
 .PATH:		${SRCDIR}/atf-sh
 

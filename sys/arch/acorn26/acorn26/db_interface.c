@@ -169,11 +169,10 @@ volatile bool db_validating, db_faulted;
 int
 db_validate_address(vm_offset_t addr)
 {
-	volatile uint8_t tmp;
 
 	db_faulted = false;
 	db_validating = true;
-	tmp = *(uint8_t *)addr;
+	(void) *(volatile uint8_t *)addr;
 	db_validating = false;
 	return db_faulted;
 }

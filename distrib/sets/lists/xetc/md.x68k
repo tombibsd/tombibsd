@@ -1,2 +1,3 @@
 # $NetBSD$
 ./etc/X11/X68kConfig					-unknown-	x11
+./etc/X11/X68kConfig					-unknown-	xorg

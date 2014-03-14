@@ -13,8 +13,9 @@ GCC_MACHINE_ARCH=${MACHINE_ARCH:S/earmv5/earm/}
 SUBDIR+=	host-libiberty .WAIT \
 		backend .WAIT \
 		frontend .WAIT \
-		libcpp libdecnumber gcov .WAIT \
-		cc1 cc1obj cc1plus cpp g++ gcc \
+		common common-target .WAIT \
+		libcpp libdecnumber .WAIT \
+		gcov cc1 cc1obj cc1plus cpp g++ gcc \
 		include
 
 .include <bsd.subdir.mk>

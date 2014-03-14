@@ -2,12 +2,12 @@
 
 COMPILER_RT_SRCDIR=	${NETBSDSRCDIR}/sys/external/bsd/compiler_rt/dist
 
-.if ${MACHINE_ARCH} == "powerpc"
+.if ${LIBC_MACHINE_ARCH} == "powerpc"
 COMPILER_RT_CPU_DIR=	${COMPILER_RT_SRCDIR}/lib/builtins/ppc
 COMPILER_RT_ARCH_DIR=	${COMPILER_RT_SRCDIR}/lib/builtins/ppc
 .else
 COMPILER_RT_CPU_DIR=	${COMPILER_RT_SRCDIR}/lib/builtins/${MACHINE_CPU}
-COMPILER_RT_ARCH_DIR=	${COMPILER_RT_SRCDIR}/lib/builtins/${MACHINE_ARCH}
+COMPILER_RT_ARCH_DIR=	${COMPILER_RT_SRCDIR}/lib/builtins/${LIBC_MACHINE_ARCH}
 .endif
 
 .PATH: ${COMPILER_RT_CPU_DIR}
@@ -166,7 +166,7 @@ GENERIC_SRCS+= \
 	GCDAProfiling.c \
 	PGOProfiling.c
 
-.if ${MACHINE_ARCH} == "powerpc"
+.if ${LIBC_MACHINE_ARCH} == "powerpc"
 GENERIC_SRCS+= \
 	fixtfdi.c \
 	fixunstfdi.c \

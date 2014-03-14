@@ -2,6 +2,8 @@
 /dwarfdump-inl-test.elf-x86-64/1.1.1.1/Thu Nov 28 14:18:09 2013/-kk/
 /dwarfdump-inl-test.h/1.1.1.1/Thu Nov 28 14:18:09 2013/-kk/
 /dwarfdump-inl-test.high_pc.elf-x86-64/1.1.1.1/Thu Nov 28 14:18:09 2013/-kk/
+/dwarfdump-line-dwo.cc/1.1.1.1/Tue Mar  4 20:52:58 2014/-kk/
+/dwarfdump-line-dwo.elf-x86-64/1.1.1.1/Tue Mar  4 20:52:58 2014/-kk/
 /dwarfdump-pubnames.cc/1.1.1.1/Thu Nov 28 14:18:09 2013/-kk/
 /dwarfdump-pubnames.elf-x86-64/1.1.1.1/Thu Nov 28 14:18:09 2013/-kk/
 /dwarfdump-test-32bit.elf.c/1.1.1.1/Thu Nov 28 14:18:09 2013/-kk/
@@ -28,4 +30,5 @@
 /llvm-symbolizer-test.elf-x86-64/1.1.1.1/Fri Feb 14 20:12:31 2014/-kk/
 /macho-universal.cc/1.1.1.1/Thu Nov 28 14:18:09 2013/-kk/
 /macho-universal/1.1.1.1/Thu Nov 28 14:18:09 2013/-kk/
+/shared-object-stripped.elf-i386/1.1.1.1/Tue Mar  4 20:52:58 2014/-kk/
 D

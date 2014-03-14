@@ -93,3 +93,13 @@ log10(double x)
 	return(ivln10*log(x));
 #endif	/* defined(__vax__)||defined(tahoe) */
 }
+
+float
+log10f(float x)
+{
+#if defined(__vax__)||defined(tahoe)
+	return(logf(x)/ln10hi);
+#else	/* defined(__vax__)||defined(tahoe) */
+	return(ivln10*log(x));
+#endif	/* defined(__vax__)||defined(tahoe) */
+}

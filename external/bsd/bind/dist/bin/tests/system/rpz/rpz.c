@@ -42,7 +42,7 @@ main(int argc, char **argv)
 #else
 		return (1);
 #endif
-	    }
+	}
 
 	if (!strcasecmp(argv[1], "nsdname")) {
 #ifdef ENABLE_RPZ_NSDNAME
@@ -50,8 +50,8 @@ main(int argc, char **argv)
 #else
 		return (1);
 #endif
-	    }
+	}
 
-	    fputs(USAGE, stderr);
-	    return (1);
+	fputs(USAGE, stderr);
+	return (1);
 }

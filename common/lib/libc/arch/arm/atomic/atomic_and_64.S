@@ -57,6 +57,6 @@ END(_atomic_and_64_nv)
 STRONG_ALIAS(_atomic_and_64,_atomic_and_64_nv)
 ATOMIC_OP_ALIAS(atomic_and_64_nv,_atomic_and_64_nv)
 ATOMIC_OP_ALIAS(atomic_and_64,_atomic_and_64_nv)
-STRONG_ALIAS(__sync_and_and_fetch_8,_atomic_and_64_nv)
+CRT_ALIAS(__sync_and_and_fetch_8,_atomic_and_64_nv)
 
 #endif /* _ARM_ARCH_6 */

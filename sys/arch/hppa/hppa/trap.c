@@ -1236,7 +1236,7 @@ syscall(struct trapframe *frame, int *args)
 		 * run reads as:
 		 *
 		 *	ldil	L%SYSCALLGATE, r1
-		 *	ble	4(sr7, r1)
+		 *	ble	4(srX, r1)
 		 *	ldi	__CONCAT(SYS_,x), t1
 		 *	comb,<>	%r0, %t1, __cerror
 		 *

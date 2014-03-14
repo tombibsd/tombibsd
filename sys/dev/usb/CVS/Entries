@@ -1,7 +1,7 @@
 /FILES/1.12/Tue Jan 17 03:49:20 2012/-kk/
 /Makefile.usbdevs/1.6/Mon Oct 12 22:28:47 2009/-kk/
 /Makefile/1.9/Sun May 14 21:47:00 2006/-kk/
-/TODO.usbmp/1.6/Tue Dec 17 04:13:36 2013/-kk/
+/TODO.usbmp/1.7/Fri Mar 14 04:28:21 2014/-kk/
 /TODO/1.44/Tue Dec 17 04:13:36 2013/-kk/
 /aubtfwl.c/1.5/Thu Oct 24 10:28:58 2013/-kk/
 /aubtfwlreg.h/1.1/Thu Oct 24 10:28:58 2013/-kk/
@@ -191,8 +191,8 @@
 /uyap.c/1.19/Fri Dec 23 00:51:50 2011/-kk/
 /uyap_firmware.h/1.7/Tue Aug 18 11:08:37 2009/-kk/
 /uyurex.c/1.9/Thu Oct 24 10:28:58 2013/-kk/
-/xhci.c/1.13/Fri Jan 31 08:48:49 2014/-kk/
+/xhci.c/1.16/Fri Mar 14 04:28:21 2014/-kk/
 /xhcireg.h/1.1/Thu Oct 24 10:28:58 2013/-kk/
-/xhcivar.h/1.2/Thu Oct 31 07:00:24 2013/-kk/
+/xhcivar.h/1.4/Fri Mar 14 04:28:21 2014/-kk/
 /xinput_rdesc.h/1.1/Sat Jul 30 12:15:44 2011/-kk/
 D

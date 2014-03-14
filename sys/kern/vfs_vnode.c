@@ -1029,30 +1029,33 @@ vclean(vnode_t *vp)
 }
 
 /*
- * Recycle an unused vnode to the front of the free list.
- * Release the passed interlock if the vnode will be recycled.
+ * Recycle an unused vnode if caller holds the last reference.
  */
-int
-vrecycle(vnode_t *vp, kmutex_t *inter_lkp)
+bool
+vrecycle(vnode_t *vp)
 {
+
+	mutex_enter(vp->v_interlock);
 
 	KASSERT((vp->v_iflag & VI_MARKER) == 0);
 
-	mutex_enter(vp->v_interlock);
-	if (vp->v_usecount != 0 || (vp->v_iflag & (VI_CLEAN|VI_XLOCK)) != 0) {
+	if (vp->v_usecount != 1) {
 		mutex_exit(vp->v_interlock);
-		return 0;
+		return false;
 	}
-	if (inter_lkp) {
-		mutex_exit(inter_lkp);
+	if ((vp->v_iflag & VI_CHANGING) != 0)
+		vwait(vp, VI_CHANGING);
+	if (vp->v_usecount != 1) {
+		mutex_exit(vp->v_interlock);
+		return false;
+	} else if ((vp->v_iflag & VI_CLEAN) != 0) {
+		mutex_exit(vp->v_interlock);
+		return true;
 	}
-	vremfree(vp);
-	vp->v_usecount = 1;
-	KASSERT((vp->v_iflag & VI_CHANGING) == 0);
 	vp->v_iflag |= VI_CHANGING;
 	vclean(vp);
 	vrelel(vp, VRELEL_CHANGING_SET);
-	return 1;
+	return true;
 }
 
 /*

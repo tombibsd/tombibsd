@@ -622,13 +622,15 @@ rumpuser_cv_has_waiters(struct rumpuser_cv *cv, int *nwaiters)
  * curlwp
  */
 
-static pthread_key_t curlwpkey;
+static __thread struct lwp *curlwp;
 
 /*
  * the if0'd curlwp implementation is not used by this hypervisor,
  * but serves as test code to check that the intended usage works.
  */
 #if 0
+static pthread_key_t curlwpkey;
+
 struct rumpuser_lwp {
 	struct lwp *l;
 	LIST_ENTRY(rumpuser_lwp) l_entries;
@@ -716,12 +718,12 @@ rumpuser_curlwpop(int enum_rumplwpop, struct lwp *l)
 	case RUMPUSER_LWP_DESTROY:
 		break;
 	case RUMPUSER_LWP_SET:
-		assert(pthread_getspecific(curlwpkey) == NULL);
-		pthread_setspecific(curlwpkey, l);
+		assert(curlwp == NULL);
+		curlwp = l;
 		break;
 	case RUMPUSER_LWP_CLEAR:
-		assert(pthread_getspecific(curlwpkey) == l);
-		pthread_setspecific(curlwpkey, NULL);
+		assert(curlwp == l);
+		curlwp = NULL;
 		break;
 	}
 }
@@ -730,7 +732,7 @@ struct lwp *
 rumpuser_curlwp(void)
 {
 
-	return pthread_getspecific(curlwpkey);
+	return curlwp;
 }
 #endif
 
@@ -738,5 +740,5 @@ rumpuser_curlwp(void)
 void
 rumpuser__thrinit(void)
 {
-	pthread_key_create(&curlwpkey, NULL);
+
 }

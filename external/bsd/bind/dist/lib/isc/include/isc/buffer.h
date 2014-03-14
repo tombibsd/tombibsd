@@ -1,7 +1,7 @@
 /*	$NetBSD$	*/
 
 /*
- * Copyright (C) 2004-2008, 2010, 2012  Internet Systems Consortium, Inc. ("ISC")
+ * Copyright (C) 2004-2008, 2010, 2012, 2014  Internet Systems Consortium, Inc. ("ISC")
  * Copyright (C) 1998-2002  Internet Software Consortium.
  *
  * Permission to use, copy, modify, and/or distribute this software for any
@@ -789,7 +789,7 @@ ISC_LANG_ENDDECLS
 
 #define ISC__BUFFER_PUTMEM(_b, _base, _length) \
 	do { \
-		memcpy(isc_buffer_used(_b), (_base), (_length)); \
+		memmove(isc_buffer_used(_b), (_base), (_length)); \
 		(_b)->used += (_length); \
 	} while (/*CONSTCOND*/0)
 
@@ -799,7 +799,7 @@ ISC_LANG_ENDDECLS
 		unsigned char *_cp; \
 		_length = strlen(_source); \
 		_cp = isc_buffer_used(_b); \
-		memcpy(_cp, (_source), _length); \
+		memmove(_cp, (_source), _length); \
 		(_b)->used += (_length); \
 	} while (/*CONSTCOND*/0)
 

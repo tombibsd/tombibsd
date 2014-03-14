@@ -5,7 +5,7 @@
 
 options 	MEMORY_DISK_HOOKS
 options 	MEMORY_DISK_IS_ROOT	# Force root on ramdisk
-options 	MEMORY_DISK_ROOT_SIZE=7424
+options 	MEMORY_DISK_ROOT_SIZE=8192
 options 	MEMORY_DISK_RBFLAGS=RB_SINGLE	# boot in single-user mode
 
-pseudo-device	md	
+pseudo-device	md

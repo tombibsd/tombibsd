@@ -231,8 +231,10 @@ atapi_probe_bus(struct atapibus_softc *sc, int target)
 	int error;
 	struct atapi_adapter *atapi_adapter;
 
+	KASSERT(chan->chan_ntargets >= 1);
+
 	if (target == -1) {
-		maxtarget = 1;
+		maxtarget = chan->chan_ntargets - 1;
 		mintarget = 0;
 	} else {
 		if (target < 0 || target >= chan->chan_ntargets)

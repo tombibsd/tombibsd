@@ -496,9 +496,16 @@ mpc601_ioseg_add(paddr_t pa, register_t len)
 	 * in pmap_bootstrap().
 	 */
 	iosrtable[i] = SR601(SR601_Ks, SR601_BUID_MEMFORCED, 0, i);
+
+	/*
+	 * XXX Setting segment register 0xf on my powermac 7200
+	 * wedges machine so set later in pmap.c
+	 */
+	/*
 	__asm volatile ("mtsrin %0,%1"
 	    ::	"r"(iosrtable[i]),
 		"r"(pa));
+	*/
 }
 #endif /* PPC_OEA601 */
 

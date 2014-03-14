@@ -468,9 +468,10 @@ uvm_aio_aiodone_pages(struct vm_page **pgs, int npages, bool write, int error)
 
 		/* these pages are now only in swap. */
 		mutex_enter(&uvm_swap_data_lock);
-		KASSERT(uvmexp.swpgonly + npages <= uvmexp.swpginuse);
-		if (error != ENOMEM)
+		if (error != ENOMEM) {
+			KASSERT(uvmexp.swpgonly + npages <= uvmexp.swpginuse);
 			uvmexp.swpgonly += npages;
+		}
 		mutex_exit(&uvm_swap_data_lock);
 		if (error) {
 			if (error != ENOMEM)

@@ -34,8 +34,8 @@ biostramp.obj: ${OBJS} ${DEPS}
 	${LD} -Bstatic -N -Ttext 0 -e do_bios_call -o $@ $(OBJS)
 
 assym.h: machine x86 genassym.cf
-	${TOOL_GENASSYM} -- ${CC} ${CFLAGS} ${CPPFLAGS} ${PROF} \
-	    < ${.CURDIR}/genassym.cf > assym.h.tmp && \
+	${TOOL_GENASSYM} -- ${CC} ${CFLAGS:N-Wa,*} ${CPPFLAGS} ${PROF} \
+	    ${GENASSYM_CPPFLAGS} < ${.CURDIR}/genassym.cf > assym.h.tmp && \
 	mv -f assym.h.tmp assym.h
 
 biostramp.S: assym.h

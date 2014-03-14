@@ -1,6 +1,6 @@
 #	$NetBSD$
 
-MACHINE_ARCH=		arm
+MACHINE_ARCH?=		arm
 CPPFLAGS+=		-D${MACHINE}
 
 SYSTEM_FIRST_OBJ=	zaurus_start.o

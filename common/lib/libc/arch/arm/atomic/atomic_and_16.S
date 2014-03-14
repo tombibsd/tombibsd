@@ -50,7 +50,7 @@ END(_atomic_and_16)
 
 ATOMIC_OP_ALIAS(atomic_and_16,_atomic_and_16)
 ATOMIC_OP_ALIAS(atomic_and_ushort,_atomic_and_16)
-STRONG_ALIAS(__sync_fetch_and_and_2,_atomic_and_16)
+CRT_ALIAS(__sync_fetch_and_and_2,_atomic_and_16)
 STRONG_ALIAS(_atomic_and_ushort,_atomic_and_16)
 
 ENTRY_NP(_atomic_and_16_nv)
@@ -70,7 +70,7 @@ END(_atomic_and_16_nv)
 
 ATOMIC_OP_ALIAS(atomic_and_16_nv,_atomic_and_16_nv)
 ATOMIC_OP_ALIAS(atomic_and_ushort_nv,_atomic_and_16_nv)
-STRONG_ALIAS(__sync_and_and_fetch_2,_atomic_and_16_nv)
+CRT_ALIAS(__sync_and_and_fetch_2,_atomic_and_16_nv)
 STRONG_ALIAS(_atomic_and_ushort_nv,_atomic_and_16_nv)
 
 #endif /* _ARM_ARCH_6 */

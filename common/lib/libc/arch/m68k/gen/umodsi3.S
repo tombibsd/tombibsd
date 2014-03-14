@@ -47,7 +47,12 @@
 #ifndef __mc68010__
 ENTRY(__umodsi3)
 	movel	4(%sp),%d1
+#ifdef __mcoldfire__
+	remul	8(%sp),%d0:%d1
+	divul	8(%sp),%d1
+#else
 	divull	8(%sp),%d0:%d1
+#endif
 	rts
 END(__umodsi3)
 #else

@@ -132,10 +132,6 @@ main(int argc, char **argv) {
 	UNUSED(argc);
 	UNUSED(argv);
 
-	isc__mem_register();
-	isc__task_register();
-	isc__timer_register();
-	isc__socket_register();
 	mctx = NULL;
 	CHECK("isc_mem_create()",
 	      isc_mem_create(0, 0, &mctx));

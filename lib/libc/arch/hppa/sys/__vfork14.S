@@ -56,7 +56,7 @@ ENTRY(__vfork14, 0)
 
 	copy	%rp, %t4
 	ldil	L%SYSCALLGATE, %r1
-	ble	4(%sr7, %r1)
+	ble	4(%sr2, %r1)
 	ldi	SYS___vfork14, %t1
 	comb,<>	%r0, %t1, __cerror
 	copy	%t4, %rp

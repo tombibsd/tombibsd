@@ -313,7 +313,7 @@ struct cpu_info {
  * referenced in generic code
  */
 
-#define	cpu_proc_fork(p1, p2)
+void	cpu_proc_fork(struct proc *, struct proc *);
 
 #ifdef MULTIPROCESSOR
 

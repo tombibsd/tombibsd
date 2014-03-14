@@ -61,6 +61,9 @@
 /available_externally_a.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /available_externally_b.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /basiclink.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/datalayout.ll/1.1.1.1/Tue Mar  4 20:54:04 2014/-kk/
+/dllstorage-a.ll/1.1.1.1/Tue Mar  4 20:54:04 2014/-kk/
+/dllstorage-b.ll/1.1.1.1/Tue Mar  4 20:54:04 2014/-kk/
 /func-attrs-a.ll/1.1.1.1/Fri Feb 14 20:12:45 2014/-kk/
 /func-attrs-b.ll/1.1.1.1/Fri Feb 14 20:12:45 2014/-kk/
 /inlineasm.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/

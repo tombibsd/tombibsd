@@ -70,9 +70,6 @@ volatile int hardware_spl_level;
 volatile uint32_t intr_enabled;
 volatile uint32_t pci_intr_enabled;
 
-/* Interrupts pending. */
-static volatile int ipending;
-
 void	ixp12x0_intr_dispatch(struct trapframe *);
 
 #define IXPREG(reg)	*((volatile uint32_t*) (reg))

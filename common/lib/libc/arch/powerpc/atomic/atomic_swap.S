@@ -35,18 +35,36 @@ __RCSID("$NetBSD$")
 
 	.text
 ENTRY(_atomic_swap_32)
-1:	lwarx	%r10,0,%r3
-	stwcx.	%r4,0,%r3
-	bne-	1b
-	mr	%r3,%r10
-	blr
+	mr	%r10,%r3
+1:	lwarx	%r3,0,%r10
+	stwcx.	%r4,0,%r10
+	beqlr+
+	b	1b
 END(_atomic_swap_32)
 ATOMIC_OP_ALIAS(atomic_swap_32,_atomic_swap_32)
+
 ATOMIC_OP_ALIAS(atomic_swap_uint,_atomic_swap_32)
 STRONG_ALIAS(_atomic_swap_uint,_atomic_swap_32)
-#if !defined(_LP64)
+
+#if defined(_LP64)
+ENTRY(_atomic_swap_64)
+	mr	%r10,%r3
+1:	ldarx	%r3,0,%r10
+	stdcx.	%r4,0,%r10
+	beqlr+
+	b	1b
+END(_atomic_swap_64)
+ATOMIC_OP_ALIAS(atomic_swap_64,_atomic_swap_64)
+
+ATOMIC_OP_ALIAS(atomic_swap_ulong,_atomic_swap_64)
+ATOMIC_OP_ALIAS(atomic_swap_ptr,_atomic_swap_64)
+
+STRONG_ALIAS(_atomic_swap_ulong,_atomic_swap_64)
+STRONG_ALIAS(_atomic_swap_ptr,_atomic_swap_64)
+#else
 ATOMIC_OP_ALIAS(atomic_swap_ulong,_atomic_swap_32)
-STRONG_ALIAS(_atomic_swap_ulong,_atomic_swap_32)
 ATOMIC_OP_ALIAS(atomic_swap_ptr,_atomic_swap_32)
+
+STRONG_ALIAS(_atomic_swap_ulong,_atomic_swap_32)
 STRONG_ALIAS(_atomic_swap_ptr,_atomic_swap_32)
 #endif

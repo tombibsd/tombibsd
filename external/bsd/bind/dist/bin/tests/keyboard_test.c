@@ -46,10 +46,6 @@ main(int argc, char **argv) {
 	UNUSED(argc);
 	UNUSED(argv);
 
-	isc__mem_register();
-	isc__task_register();
-	isc__timer_register();
-	isc__socket_register();
 	printf("Type Q to exit.\n");
 
 	res = isc_keyboard_open(&kbd);

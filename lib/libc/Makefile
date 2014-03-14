@@ -37,9 +37,9 @@ CLEANFILES+=	assym.h assym.h.tmp
 
 assym.h: ${ARCHDIR}/genassym.cf
 	${_MKTARGET_CREATE}
-	${TOOL_GENASSYM} -- ${CC} ${CFLAGS:N-Wa,--fatal-warnings} \
+	${TOOL_GENASSYM} -- ${CC} ${CFLAGS:N-Wa,*} \
 		${CPPFLAGS} ${CPPFLAGS.assym.h} ${PROF} \
-		< ${ARCHDIR}/genassym.cf > assym.h.tmp && \
+		${GENASSYM_CPPFLAGS} < ${ARCHDIR}/genassym.cf > assym.h.tmp && \
 	mv -f assym.h.tmp assym.h
 .endif
 

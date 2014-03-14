@@ -459,10 +459,6 @@ main(int argc, char *argv[]) {
 	UNUSED(argv);
 	UNUSED(argc);
 
-	isc__mem_register();
-	isc__task_register();
-	isc__timer_register();
-	isc__socket_register();
 	RUNCHECK(isc_app_start());
 
 	dns_result_register();

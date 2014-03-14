@@ -1513,7 +1513,7 @@ sysctl_lookup(SYSCTLFN_ARGS)
 	switch (SYSCTL_TYPE(rnode->sysctl_flags)) {
 	case CTLTYPE_INT:
 		/* Allow for 64bit read of 32bit value */
-		if (*oldlenp == sizeof (uint64_t)) {
+		if (*oldlenp != sz && *oldlenp == sizeof (uint64_t)) {
 			qval = *(int *)d;
 			d_out = &qval;
 			sz =  sizeof (uint64_t);
@@ -1521,9 +1521,12 @@ sysctl_lookup(SYSCTLFN_ARGS)
 		break;
 	case CTLTYPE_QUAD:
 		/* Allow for 32bit read of 64bit value */
-		if (*oldlenp == sizeof (int)) {
+		if (*oldlenp != sz && *oldlenp == sizeof (int)) {
 			qval = *(uint64_t *)d;
-			ival = qval < 0x100000000 ? qval : 0xffffffff;
+			ival = qval;
+			/* Replace out of range values with -1 */
+			if (ival != qval)
+				ival = -1;
 			d_out = &ival;
 			sz =  sizeof (int);
 		}

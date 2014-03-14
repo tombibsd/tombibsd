@@ -35,32 +35,61 @@ __RCSID("$NetBSD$")
 
 	.text
 ENTRY(_atomic_cas_32)
-1:	lwarx	%r10,0,%r3
-	cmpw	%r10,%r4
-	bne-	2f
-	stwcx.	%r5,0,%r3
-	bne-	1b
-2:	mr	%r3,%r10
-	blr
+	mr	%r10,%r3
+1:	lwarx	%r3,0,%r10
+	cmpw	%r3,%r4
+	bnelr-
+	stwcx.	%r5,0,%r10
+	beqlr+
+	b	1b
 END(_atomic_cas_32)
 
 ATOMIC_OP_ALIAS(atomic_cas_32,_atomic_cas_32)
-ATOMIC_OP_ALIAS(atomic_cas_uint,_atomic_cas_32)
-STRONG_ALIAS(_atomic_cas_uint,_atomic_cas_32)
-#if !defined(_LP64)
-ATOMIC_OP_ALIAS(atomic_cas_ulong,_atomic_cas_32)
-STRONG_ALIAS(_atomic_cas_ulong,_atomic_cas_32)
-ATOMIC_OP_ALIAS(atomic_cas_ptr,_atomic_cas_32)
-STRONG_ALIAS(_atomic_cas_ptr,_atomic_cas_32)
-#endif
-
 ATOMIC_OP_ALIAS(atomic_cas_32_ni,_atomic_cas_32)
 STRONG_ALIAS(_atomic_cas_32_ni,_atomic_cas_32)
+
+ATOMIC_OP_ALIAS(atomic_cas_uint,_atomic_cas_32)
 ATOMIC_OP_ALIAS(atomic_cas_uint_ni,_atomic_cas_32)
+
+STRONG_ALIAS(_atomic_cas_uint,_atomic_cas_32)
 STRONG_ALIAS(_atomic_cas_uint_ni,_atomic_cas_32)
-#if !defined(_LP64)
+
+#if defined(_LP64)
+ENTRY(_atomic_cas_64)
+	mr	%r10,%r3
+1:	ldarx	%r3,0,%r10
+	cmpd	%r3,%r4
+	bnelr-
+	stdcx.	%r5,0,%r10
+	beqlr+
+	b	1b
+END(_atomic_cas_64)
+
+ATOMIC_OP_ALIAS(atomic_cas_64,_atomic_cas_64)
+ATOMIC_OP_ALIAS(atomic_cas_64_ni,_atomic_cas_64)
+STRONG_ALIAS(_atomic_cas_64_ni,_atomic_cas_64)
+
+ATOMIC_OP_ALIAS(atomic_cas_ulong,_atomic_cas_64)
+ATOMIC_OP_ALIAS(atomic_cas_ulong_ni,_atomic_cas_64)
+
+ATOMIC_OP_ALIAS(atomic_cas_ptr,_atomic_cas_64)
+ATOMIC_OP_ALIAS(atomic_cas_ptr_ni,_atomic_cas_64)
+
+STRONG_ALIAS(_atomic_cas_ulong,_atomic_cas_64)
+STRONG_ALIAS(_atomic_cas_ulong_ni,_atomic_cas_64)
+
+STRONG_ALIAS(_atomic_cas_ptr,_atomic_cas_64)
+STRONG_ALIAS(_atomic_cas_ptr_ni,_atomic_cas_64)
+#else
+ATOMIC_OP_ALIAS(atomic_cas_ulong,_atomic_cas_32)
 ATOMIC_OP_ALIAS(atomic_cas_ulong_ni,_atomic_cas_32)
-STRONG_ALIAS(_atomic_cas_ulong_ni,_atomic_cas_32)
+
+ATOMIC_OP_ALIAS(atomic_cas_ptr,_atomic_cas_32)
 ATOMIC_OP_ALIAS(atomic_cas_ptr_ni,_atomic_cas_32)
+
+STRONG_ALIAS(_atomic_cas_ulong,_atomic_cas_32)
+STRONG_ALIAS(_atomic_cas_ulong_ni,_atomic_cas_32)
+
+STRONG_ALIAS(_atomic_cas_ptr,_atomic_cas_32)
 STRONG_ALIAS(_atomic_cas_ptr_ni,_atomic_cas_32)
 #endif

@@ -712,8 +712,13 @@ lfs_bmapv(struct proc *p, fsid_t *fsidp, BLOCK_INFO *blkiov, int blkcnt)
 			 */
 			if (v_daddr != LFS_UNUSED_DADDR) {
 				lfs_vunref(vp);
-				if (VTOI(vp)->i_lfs_iflags & LFSI_BMAP)
-					vrecycle(vp, NULL);
+				if (VTOI(vp)->i_lfs_iflags & LFSI_BMAP) {
+					mutex_enter(vp->v_interlock);
+					if (vget(vp, LK_NOWAIT) == 0) {
+						if (! vrecycle(vp))
+							vrele(vp);
+					}
+				}
 				numrefed--;
 			}
 
@@ -822,8 +827,13 @@ lfs_bmapv(struct proc *p, fsid_t *fsidp, BLOCK_INFO *blkiov, int blkcnt)
 	if (v_daddr != LFS_UNUSED_DADDR) {
 		lfs_vunref(vp);
 		/* Recycle as above. */
-		if (ip->i_lfs_iflags & LFSI_BMAP)
-			vrecycle(vp, NULL);
+		if (ip->i_lfs_iflags & LFSI_BMAP) {
+			mutex_enter(vp->v_interlock);
+			if (vget(vp, LK_NOWAIT) == 0) {
+				if (! vrecycle(vp))
+					vrele(vp);
+			}
+		}
 		numrefed--;
 	}
 

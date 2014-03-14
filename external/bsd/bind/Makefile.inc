@@ -50,6 +50,7 @@ CPPFLAGS+=-I${BIND_SRCDIR}/include \
 
 .if (${USE_INET6} != "no")
 CPPFLAGS+=	-DWANT_IPV6
+CPPFLAGS+=	-DALLOW_FILTER_AAAA_ON_V4
 .endif
 
 .if defined(HAVE_GCC)

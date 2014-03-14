@@ -3,7 +3,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_INIT([netpgp],[20140220],[Alistair Crooks <agc@netbsd.org> c0596823])
-AC_PREREQ(2.63)
+AC_PREREQ(2.69)
 AC_REVISION([$Revision$])
 
 AS_SHELL_SANITIZE
@@ -22,12 +22,21 @@ AC_SUBST([CANONICAL_HOST])
 # Checks for programs.
 #
 AC_PROG_MAKE_SET
-AM_PROG_AR
 AC_PROG_AWK
 AC_PROG_CC
 AC_PROG_INSTALL
 AC_PROG_LIBTOOL
 AC_PROG_LN_S
+
+dnl based on AC_PROG_RANLIB from autoconf
+m4_ifndef([AC_PROG_AR],[dnl
+AN_MAKEVAR([AR], [AC_PROG_AR])
+AN_PROGRAM([ar], [AC_PROG_AR])
+AC_DEFUN([AC_PROG_AR],
+[AC_CHECK_TOOL(AR, ar, :)])
+])
+
+AC_PROG_AR
 
 # Compiler characteristics
 #

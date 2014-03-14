@@ -1,5 +1,7 @@
 #	$NetBSD$
 
+CPPFLAGS+= -mcpu=cortex-a8 -mfpu=neon
+
 SYSTEM_FIRST_OBJ=	netwalker_start.o
 SYSTEM_FIRST_SFILE=	${THISARM}/netwalker/netwalker_start.S
 

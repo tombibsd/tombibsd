@@ -1901,7 +1901,8 @@ int
 sscomcngetc(dev_t dev)
 {
 	int s = splserial();
-	u_char stat, c;
+	u_char __attribute__((__unused__)) stat;
+	u_char c;
 
 	/* got a character from reading things earlier */
 	if (sscom_readaheadcount > 0) {
@@ -1923,7 +1924,7 @@ sscomcngetc(dev_t dev)
 	c = sscom_getc(sscomconstag, sscomconsioh);
 	stat = sscom_geterr(sscomconstag, sscomconsioh);
 	{
-		int cn_trapped = 0; /* unused */
+		int __attribute__((__unused__))cn_trapped = 0;
 #ifdef DDB
 		extern int db_active;
 		if (!db_active)
@@ -1943,11 +1944,12 @@ sscomcnputc(dev_t dev, int c)
 	int s = splserial();
 	int timo;
 
-	int cin, stat;
+	int cin;
+	int __attribute__((__unused__)) stat;
 	if (sscom_readaheadcount < MAX_READAHEAD && 
 	    sscom_rxrdy(sscomconstag, sscomconsioh)) {
 	    
-		int cn_trapped = 0;
+		int __attribute__((__unused__))cn_trapped = 0;
 		cin = sscom_getc(sscomconstag, sscomconsioh);
 		stat = sscom_geterr(sscomconstag, sscomconsioh);
 		cn_check_magic(dev, cin, sscom_cnm_state);

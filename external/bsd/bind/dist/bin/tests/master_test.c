@@ -68,10 +68,6 @@ main(int argc, char *argv[]) {
 
 	UNUSED(argc);
 
-	isc__mem_register();
-	isc__task_register();
-	isc__timer_register();
-	isc__socket_register();
 	RUNTIME_CHECK(isc_mem_create(0, 0, &mctx) == ISC_R_SUCCESS);
 
 	if (argv[1]) {

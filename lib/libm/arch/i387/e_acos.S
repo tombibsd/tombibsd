@@ -18,6 +18,7 @@ ENTRY(__ieee754_acos)
 	fld1
 	fsubp				/* 1 - x^2 */
 	fsqrt				/* sqrt (1 - x^2) */
+	fabs				/* Change -0.0 to +0.0 */
 	fxch	%st(1)
 	fpatan
 	XMM_DOUBLE_EPILOGUE

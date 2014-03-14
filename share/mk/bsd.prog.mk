@@ -65,6 +65,9 @@ MKDEP_SUFFIXES?=	.o .ln
 .if defined(MKDTRACE) && (${MKDTRACE} != "no") && (${CFLAGS:M-g} != "")
 CTFFLAGS+= -g
 CTFMFLAGS+= -g
+.if defined(HAVE_GCC) && ${HAVE_GCC} >= 48
+#CFLAGS+=-gdwarf-2
+.endif
 .endif
 
 # ELF platforms depend on crti.o, crtbegin.o, crtend.o, and crtn.o
