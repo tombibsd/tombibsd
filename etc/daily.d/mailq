@@ -6,4 +6,3 @@ if ! grep -q "queue is empty$" $TMP; then
 	echo "mail:"
 	cat $TMP
 fi
-
