@@ -188,8 +188,17 @@ dev_type_tty(mttytty);
 dev_type_poll(mttypoll);
 
 const struct cdevsw mtty_cdevsw = {
-	mttyopen, mttyclose, mttyread, mttywrite, mttyioctl,
-	mttystop, mttytty, mttypoll, nommap, ttykqfilter, D_TTY
+	.d_open = mttyopen,
+	.d_close = mttyclose,
+	.d_read = mttyread,
+	.d_write = mttywrite,
+	.d_ioctl = mttyioctl,
+	.d_stop = mttystop,
+	.d_tty = mttytty,
+	.d_poll = mttypoll,
+	.d_mmap = nommap,
+	.d_kqfilter = ttykqfilter,
+	.d_flag = D_TTY
 };
 
 dev_type_open(mbppopen);
@@ -198,8 +207,17 @@ dev_type_read(mbpp_rw);
 dev_type_ioctl(mbppioctl);
 
 const struct cdevsw mbpp_cdevsw = {
-	mbppopen, mbppclose, mbpp_rw, mbpp_rw, mbppioctl,
-	nostop, notty, nopoll, nommap, nokqfilter, D_OTHER
+	.d_open = mbppopen,
+	.d_close = mbppclose,
+	.d_read = mbpp_rw,
+	.d_write = mbpp_rw,
+	.d_ioctl = mbppioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_OTHER
 };
 
 /************************************************************************

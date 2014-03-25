@@ -87,8 +87,17 @@ dev_type_tty(gencntty);
 dev_type_poll(gencnpoll);
 
 const struct cdevsw gen_cdevsw = {
-	gencnopen, gencnclose, gencnread, gencnwrite, gencnioctl,
-	nostop, gencntty, gencnpoll, nommap, ttykqfilter, D_TTY
+	.d_open = gencnopen,
+	.d_close = gencnclose,
+	.d_read = gencnread,
+	.d_write = gencnwrite,
+	.d_ioctl = gencnioctl,
+	.d_stop = nostop,
+	.d_tty = gencntty,
+	.d_poll = gencnpoll,
+	.d_mmap = nommap,
+	.d_kqfilter = ttykqfilter,
+	.d_flag = D_TTY
 };
 
 int

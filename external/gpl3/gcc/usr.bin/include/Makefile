@@ -15,7 +15,7 @@ INCS+=	mm_malloc.h
 # XXX we should put this in gcc/config.gcc and regenerate the i386/x86
 # mknative files
 mm_malloc.h: ${DIST}/gcc/config/i386/pmm_malloc.h
-	cp $> ${.TARGET}
+	cp -f $> ${.TARGET}
 
 CLEANFILES+=	mm_malloc.h
 .endif

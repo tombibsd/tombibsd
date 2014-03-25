@@ -110,12 +110,27 @@ static dev_type_dump(dkdump);
 static dev_type_size(dksize);
 
 const struct bdevsw dk_bdevsw = {
-	dkopen, dkclose, dkstrategy, dkioctl, dkdump, dksize, D_DISK
+	.d_open = dkopen,
+	.d_close = dkclose,
+	.d_strategy = dkstrategy,
+	.d_ioctl = dkioctl,
+	.d_dump = dkdump,
+	.d_psize = dksize,
+	.d_flag = D_DISK
 };
 
 const struct cdevsw dk_cdevsw = {
-	dkopen, dkclose, dkread, dkwrite, dkioctl,
-	    nostop, notty, nopoll, nommap, nokqfilter, D_DISK
+	.d_open = dkopen,
+	.d_close = dkclose,
+	.d_read = dkread,
+	.d_write = dkwrite,
+	.d_ioctl = dkioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_DISK
 };
 
 static struct dkwedge_softc **dkwedges;

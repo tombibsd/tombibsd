@@ -5,7 +5,7 @@
 PROG=	xwd
 SRCS=	xwd.c clientwin.c dsimple.c list.c multiVis.c
 
-CPPFLAGS+=-I${X11SRCDIR./xlsfonts}
+CPPFLAGS+=-I${X11SRCDIR./xlsfonts} -DXKB
 .PATH:	${X11SRCDIR./xlsfonts}
 
 LDADD+=	-lXmuu -lXt -lSM -lICE -lXext -lX11

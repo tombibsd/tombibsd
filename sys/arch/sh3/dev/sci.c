@@ -248,8 +248,17 @@ dev_type_tty(scitty);
 dev_type_poll(scipoll);
 
 const struct cdevsw sci_cdevsw = {
-	sciopen, sciclose, sciread, sciwrite, sciioctl,
-	scistop, scitty, scipoll, nommap, ttykqfilter, D_TTY
+	.d_open = sciopen,
+	.d_close = sciclose,
+	.d_read = sciread,
+	.d_write = sciwrite,
+	.d_ioctl = sciioctl,
+	.d_stop = scistop,
+	.d_tty = scitty,
+	.d_poll = scipoll,
+	.d_mmap = nommap,
+	.d_kqfilter = ttykqfilter,
+	.d_flag = D_TTY
 };
 
 void InitializeSci (unsigned int);

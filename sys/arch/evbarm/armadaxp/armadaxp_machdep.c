@@ -414,7 +414,7 @@ initarm(void *arg)
 #define	CONMODE ((TTYDEF_CFLAG & ~(CSIZE | CSTOPB | PARENB)) | CS8) /* 8N1 */
 #endif
 #ifndef CONSFREQ
-#define	CONSFREQ 250000000
+#define	CONSFREQ 0
 #endif
 static const int	comcnspeed = CONSPEED;
 static const int	comcnfreq  = CONSFREQ;
@@ -435,7 +435,7 @@ consinit(void)
 	    uint32_t, int);
 
 	if (mvuart_cnattach(&mvsoc_bs_tag, comcnaddr, comcnspeed,
-			comcnfreq, comcnmode))
+			comcnfreq ? comcnfreq : mvTclk , comcnmode))
 		panic("Serial console can not be initialized.");
 #endif
 }

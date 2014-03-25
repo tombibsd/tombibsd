@@ -37,6 +37,8 @@
 #define MARVELL_INTERREGS_VBASE			0xf1000000
 #define MARVELL_PEXIO_VBASE			0xf2000000
 
+#ifndef _LOCORE
 extern bus_addr_t marvell_interregs_pbase;
+#endif
 
 #endif /* _EVBARM_MARVELLVAR_H_ */

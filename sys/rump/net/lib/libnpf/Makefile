@@ -17,7 +17,7 @@ SRCS+=	npf_alg_icmp.c
 
 SRCS+=	npf_ext_log.c npf_ext_normalize.c npf_ext_rndblock.c
 
-SRCS+=	component.c
+SRCS+=	npf_component.c
 
 .include <bsd.own.mk>
 

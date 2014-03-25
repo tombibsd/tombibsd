@@ -109,8 +109,17 @@ static dev_type_poll(midipoll);
 static dev_type_kqfilter(midikqfilter);
 
 const struct cdevsw midi_cdevsw = {
-	midiopen, midiclose, midiread, midiwrite, midiioctl,
-	nostop, notty, midipoll, nommap, midikqfilter, D_OTHER | D_MPSAFE
+	.d_open = midiopen,
+	.d_close = midiclose,
+	.d_read = midiread,
+	.d_write = midiwrite,
+	.d_ioctl = midiioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = midipoll,
+	.d_mmap = nommap,
+	.d_kqfilter = midikqfilter,
+	.d_flag = D_OTHER | D_MPSAFE
 };
 
 CFATTACH_DECL_NEW(midi, sizeof(struct midi_softc),

@@ -7,8 +7,8 @@
 .include <bsd.own.mk>
 .include "Makefile.xmlsrcs"
 
-PYTHON?=	/usr/pkg/bin/python2.6
-PYTHONLIB?=	/usr/pkg/lib/python2.6
+PYTHON?=	/usr/pkg/bin/python2.7
+PYTHONLIB?=	/usr/pkg/lib/python2.7
 C_CLIENT?=	${X11SRCDIR.xcb}/src/c_client.py
 
 .SUFFIXES: .c .xml

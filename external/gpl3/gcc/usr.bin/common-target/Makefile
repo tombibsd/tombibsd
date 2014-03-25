@@ -32,6 +32,7 @@ ${G_common_out_file:T:R}.o:  common/common-target-hooks-def.h
 DPSRCS+=	options.h
 
 HOST_CPPFLAGS+=	-I${BACKENDOBJ} -I${GCCARCH} -I. -I${DIST}/include -I${DIST}/gcc
+HOST_CPPFLAGS+=	-DGENERATOR_FILE
 
 MKPIC:=		no
 MKPICLIB:=	no

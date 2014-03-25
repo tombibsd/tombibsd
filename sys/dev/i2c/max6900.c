@@ -73,8 +73,17 @@ dev_type_read(maxrtc_read);
 dev_type_write(maxrtc_write);
 
 const struct cdevsw maxrtc_cdevsw = {
-	maxrtc_open, maxrtc_close, maxrtc_read, maxrtc_write, noioctl,
-	nostop, notty, nopoll, nommap, nokqfilter, D_OTHER
+	.d_open = maxrtc_open,
+	.d_close = maxrtc_close,
+	.d_read = maxrtc_read,
+	.d_write = maxrtc_write,
+	.d_ioctl = noioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_OTHER
 };
 
 static int maxrtc_clock_read(struct maxrtc_softc *, struct clock_ymdhms *);

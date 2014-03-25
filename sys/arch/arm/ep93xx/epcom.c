@@ -162,8 +162,17 @@ dev_type_tty(epcomtty);
 dev_type_poll(epcompoll);
 
 const struct cdevsw epcom_cdevsw = {
-	epcomopen, epcomclose, epcomread, epcomwrite, epcomioctl,
-	epcomstop, epcomtty, epcompoll, nommap, ttykqfilter, D_TTY
+	.d_open = epcomopen,
+	.d_close = epcomclose,
+	.d_read = epcomread,
+	.d_write = epcomwrite,
+	.d_ioctl = epcomioctl,
+	.d_stop = epcomstop,
+	.d_tty = epcomtty,
+	.d_poll = epcompoll,
+	.d_mmap = nommap,
+	.d_kqfilter = ttykqfilter,
+	.d_flag = D_TTY
 };
 
 struct consdev epcomcons = {

@@ -116,8 +116,17 @@ dev_type_ioctl(grfioctl);
 dev_type_mmap(grfmmap);
 
 const struct cdevsw grf_cdevsw = {
-	grfopen, grfclose, nullread, nullwrite, grfioctl,
-	nostop, notty, nopoll, grfmmap, nokqfilter,
+	.d_open = grfopen,
+	.d_close = grfclose,
+	.d_read = nullread,
+	.d_write = nullwrite,
+	.d_ioctl = grfioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = grfmmap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = 0
 };
 
 /*

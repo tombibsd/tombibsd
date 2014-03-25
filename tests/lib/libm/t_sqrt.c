@@ -62,7 +62,11 @@ ATF_TC_HEAD(sqrt_pow, tc)
 ATF_TC_BODY(sqrt_pow, tc)
 {
 	const double x[] = { 0.0, 0.005, 1.0, 99.0, 123.123, 9999.9999 };
+#if __DBL_MIN_10_EXP__ <= -40
 	const double eps = 1.0e-40;
+#else
+	const double eps = __DBL_MIN__*4.0;
+#endif
 	double y, z;
 	size_t i;
 

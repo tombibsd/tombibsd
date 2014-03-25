@@ -180,8 +180,17 @@ dev_type_ioctl(bktr_ioctl);
 dev_type_mmap(bktr_mmap);
 
 const struct cdevsw bktr_cdevsw = {
-	bktr_open, bktr_close, bktr_read, bktr_write, bktr_ioctl,
-	nostop, notty, nopoll, bktr_mmap, nokqfilter, D_OTHER
+	.d_open = bktr_open,
+	.d_close = bktr_close,
+	.d_read = bktr_read,
+	.d_write = bktr_write,
+	.d_ioctl = bktr_ioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = bktr_mmap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_OTHER
 };
 #endif /* __NetBSD __ */
 

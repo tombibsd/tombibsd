@@ -6,7 +6,7 @@
 /kloader_pxa2x0.S/1.1/Sat Mar 31 14:02:54 2012/-kk/
 /locore.S/1.18/Fri Mar 14 04:28:15 2014/-kk/
 /netbookpro_machdep.c/1.1/Sat Aug  6 03:53:40 2011/-kk/
-/pxa2x0_hpc_machdep.c/1.20/Thu Oct 24 10:28:57 2013/-kk/
+/pxa2x0_hpc_machdep.c/1.21/Tue Mar 25 02:35:20 2014/-kk/
 /sa11x0_hpc_machdep.c/1.9/Fri Mar 14 04:28:15 2014/-kk/
 /softintr.c/1.15/Tue Dec 17 04:13:27 2013/-kk/
 /spl.S/1.7/Tue Dec 17 04:13:27 2013/-kk/

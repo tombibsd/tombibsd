@@ -176,6 +176,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <machine/autoconf.h>
 
+#include <arm/locore.h>
 #include <arm/arm32/machdep.h>
 
 #include <arm/s3c2xx0/s3c2440reg.h>

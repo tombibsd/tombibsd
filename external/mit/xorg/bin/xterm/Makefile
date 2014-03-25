@@ -38,6 +38,8 @@ SUBDIR=	resize uxterm
 
 COPTS.input.c+=	-Wno-error	# uses XKeycodeToKeysym
 
+# XXXMRG should probably build builtin_icons.h
+
 .include "Makefile.inc"
 
 .include <bsd.x11.mk>

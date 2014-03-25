@@ -28,6 +28,8 @@
 #ifndef	_MVPEXVAR_H_
 #define	_MVPEXVAR_H_
 
+extern enum marvell_tags *mvpex_bar2_tags;
+
 struct mvpex_intrhand {
 	LIST_ENTRY(mvpex_intrhand) ih_q;
 	int (*ih_func)(void *);

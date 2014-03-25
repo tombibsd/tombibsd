@@ -78,8 +78,17 @@ extern struct cfdriver	tpm_cd;
 #define TPMUNIT(a)	minor(a)
  
 const struct cdevsw tpm_cdevsw = {
-	tpmopen, tpmclose, tpmread, tpmwrite, tpmioctl,
-	nostop, notty, nopoll, nommap, nokqfilter, D_OTHER,
+	.d_open = tpmopen,
+	.d_close = tpmclose,
+	.d_read = tpmread,
+	.d_write = tpmwrite,
+	.d_ioctl = tpmioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_OTHER,
 }; 
 
 /* Probe TPM using TIS 1.2 interface. */

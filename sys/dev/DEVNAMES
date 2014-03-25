@@ -1179,6 +1179,7 @@ rtfps			MI
 rtii			MI
 rtk			MI
 rtl80x9			MI		Attribute
+rtsx			MI
 rum			MI
 run			MI
 rx			MI
@@ -1223,6 +1224,8 @@ scsi			MI		Attribute
 scsibus			MI
 scsirom			x68k
 sd			MI
+sdhc			MI
+sdmmc			MI
 sdtemp			MI
 se			MI
 sea			MI

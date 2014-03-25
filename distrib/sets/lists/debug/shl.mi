@@ -218,6 +218,7 @@
 ./usr/libdata/debug/usr/lib/librumpkern_ksem.so.0.0.debug	comp-obsolete		obsolete,rump
 ./usr/libdata/debug/usr/lib/librumpkern_sljit.so.0.0.debug	comp-rump-debug	debug,sljit,rump
 ./usr/libdata/debug/usr/lib/librumpkern_solaris.so.0.0.debug	comp-rump-debug	debug,zfs,rump
+./usr/libdata/debug/usr/lib/librumpkern_time.so.0.0.debug	comp-rump-debug	debug,rump
 ./usr/libdata/debug/usr/lib/librumpkern_tty.so.0.0.debug	comp-rump-debug	debug,rump
 ./usr/libdata/debug/usr/lib/librumpkern_z.so.0.0.debug	comp-rump-debug	debug,rump
 ./usr/libdata/debug/usr/lib/librumpnet.so.0.0.debug	comp-rump-debug	debug,rump

@@ -66,8 +66,17 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #ifdef NO_DEV_PTM
 const struct cdevsw ptm_cdevsw = {
-	noopen, noclose, noread, nowrite, noioctl,
-	nostop, notty, nopoll, nommap, nokqfilter, D_TTY
+	.d_open = noopen,
+	.d_close = noclose,
+	.d_read = noread,
+	.d_write = nowrite,
+	.d_ioctl = noioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_TTY
 };
 #else
 
@@ -372,7 +381,9 @@ ptmioctl(dev_t dev, u_long cmd, void *data, int flag, struct lwp *l)
 			goto bad;
 
 		/* now, put the indices and names into struct ptmget */
-		return pty_fill_ptmget(l, newdev, cfd, sfd, data);
+		if ((error = pty_fill_ptmget(l, newdev, cfd, sfd, data)) != 0)
+			goto bad2;
+		return 0;
 	default:
 #ifdef COMPAT_60
 		error = compat_60_ptmioctl(dev, cmd, data, flag, l);
@@ -381,6 +392,11 @@ ptmioctl(dev_t dev, u_long cmd, void *data, int flag, struct lwp *l)
 #endif /* COMPAT_60 */
 		DPRINTF(("ptmioctl EINVAL\n"));
 		return EINVAL;
+	}
+bad2:
+	fp = fd_getfile(sfd);
+	if (fp != NULL) {
+		fd_close(sfd);
 	}
  bad:
 	fp = fd_getfile(cfd);
@@ -391,7 +407,16 @@ ptmioctl(dev_t dev, u_long cmd, void *data, int flag, struct lwp *l)
 }
 
 const struct cdevsw ptm_cdevsw = {
-	ptmopen, ptmclose, noread, nowrite, ptmioctl,
-	nullstop, notty, nopoll, nommap, nokqfilter, D_TTY
+	.d_open = ptmopen,
+	.d_close = ptmclose,
+	.d_read = noread,
+	.d_write = nowrite,
+	.d_ioctl = ptmioctl,
+	.d_stop = nullstop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_TTY
 };
 #endif

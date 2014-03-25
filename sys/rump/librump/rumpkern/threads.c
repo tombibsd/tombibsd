@@ -73,7 +73,7 @@ threadbouncer(void *arg)
 	}
 
 	/* schedule ourselves */
-	rumpuser_curlwpop(RUMPUSER_LWP_SET, l);
+	rump_lwproc_curlwp_set(l);
 	rump_schedule();
 
 	/* free dance struct */

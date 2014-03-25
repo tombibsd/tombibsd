@@ -908,7 +908,6 @@ xwarning(usch *s)
 {
 	usch *t;
 	usch *sb = stringbuf;
-	int dummy;
 
 	flbuf();
 	savch(0);
@@ -916,8 +915,8 @@ xwarning(usch *s)
 		t = sheap("%s:%d: warning: ", ifiles->fname, ifiles->lineno);
 		write (2, t, strlen((char *)t));
 	}
-	dummy = write (2, s, strlen((char *)s));
-	dummy = write (2, "\n", 1);
+	(void)write (2, s, strlen((char *)s));
+	(void)write (2, "\n", 1);
 	stringbuf = sb;
 }
 
@@ -925,16 +924,15 @@ void
 xerror(usch *s)
 {
 	usch *t;
-	int dummy;
 
 	flbuf();
 	savch(0);
 	if (ifiles != NULL) {
 		t = sheap("%s:%d: error: ", ifiles->fname, ifiles->lineno);
-		dummy = write (2, t, strlen((char *)t));
+		(void)write (2, t, strlen((char *)t));
 	}
-	dummy = write (2, s, strlen((char *)s));
-	dummy = write (2, "\n", 1);
+	(void)write (2, s, strlen((char *)s));
+	(void)write (2, "\n", 1);
 	exit(1);
 }
 

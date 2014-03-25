@@ -6,7 +6,7 @@
 LIB=	rumpdev_putter
 
 SRCS=	putter.c
-SRCS+=	component.c
+SRCS+=	putter_component.c
 
 CPPFLAGS+=	-I${RUMPTOP}/librump/rumpvfs
 

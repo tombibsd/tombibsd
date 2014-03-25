@@ -1881,8 +1881,17 @@ done:
 }
 
 const struct cdevsw twe_cdevsw = {
-	tweopen, tweclose, noread, nowrite, tweioctl,
-	    nostop, notty, nopoll, nommap, nokqfilter, D_OTHER,
+	.d_open = tweopen,
+	.d_close = tweclose,
+	.d_read = noread,
+	.d_write = nowrite,
+	.d_ioctl = tweioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_OTHER
 };
 
 /*

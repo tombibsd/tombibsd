@@ -122,8 +122,17 @@ CFATTACH_DECL_NEW(clock, sizeof(struct clock_softc),
     clockmatch, clockattach, NULL, NULL);
 
 const struct cdevsw rtc_cdevsw = {
-	rtcopen, rtcclose, rtcread, rtcwrite, noioctl,
-	nostop, notty, nopoll, nommap, nokqfilter,
+	.d_open = rtcopen,
+	.d_close = rtcclose,
+	.d_read = rtcread,
+	.d_write = rtcwrite,
+	.d_ioctl = noioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = 0
 };
 
 void statintr(struct clockframe);

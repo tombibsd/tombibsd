@@ -75,8 +75,17 @@ dev_type_write(uriowrite);
 dev_type_ioctl(urioioctl);
 
 const struct cdevsw urio_cdevsw = {
-	urioopen, urioclose, urioread, uriowrite, urioioctl,
-	nostop, notty, nopoll, nommap, nokqfilter, D_OTHER,
+	.d_open = urioopen,
+	.d_close = urioclose,
+	.d_read = urioread,
+	.d_write = uriowrite,
+	.d_ioctl = urioioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_OTHER
 };
 
 #define URIO_CONFIG_NO		1

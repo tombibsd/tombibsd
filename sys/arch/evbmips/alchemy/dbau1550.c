@@ -320,17 +320,7 @@ dbau1550_slot_enable(int slot)
 void
 dbau1550_slot_disable(int slot)
 {
-	int		shift;
 	uint16_t	status;
-
-	switch (slot) {
-	case 0:
-		shift = DBAU1550_PCMCIA_PC0_SHIFT;
-		break;
-	case 1:
-		shift = DBAU1550_PCMCIA_PC1_SHIFT;
-		break;
-	}
 
 	status = GET16(DBAU1550_PCMCIA);
 	status &= ~(DBAU1550_PCMCIA_MASK);

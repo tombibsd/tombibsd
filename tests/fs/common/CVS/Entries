@@ -5,7 +5,7 @@
 /fstest_msdosfs.c/1.3/Mon Mar 26 15:10:26 2012/-kk/
 /fstest_nfs.c/1.9/Mon Feb 28 21:08:46 2011/-kk/
 /fstest_puffs.c/1.11/Thu Oct 24 10:28:58 2013/-kk/
-/fstest_rumpfs.c/1.1/Thu Nov 11 17:39:29 2010/-kk/
+/fstest_rumpfs.c/1.2/Tue Mar 25 02:35:52 2014/-kk/
 /fstest_sysvbfs.c/1.2/Fri Jul 30 16:15:05 2010/-kk/
 /fstest_tmpfs.c/1.2/Fri Jul 30 16:15:05 2010/-kk/
 /fstest_udf.c/1.4/Thu Oct 24 10:28:58 2013/-kk/

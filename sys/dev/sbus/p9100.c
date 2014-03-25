@@ -173,8 +173,17 @@ static dev_type_ioctl(p9100ioctl);
 static dev_type_mmap(p9100mmap);
 
 const struct cdevsw pnozz_cdevsw = {
-	p9100open, nullclose, noread, nowrite, p9100ioctl,
-	nostop, notty, nopoll, p9100mmap, nokqfilter,
+	.d_open = p9100open,
+	.d_close = nullclose,
+	.d_read = noread,
+	.d_write = nowrite,
+	.d_ioctl = p9100ioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = p9100mmap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = 0
 };
 
 /* frame buffer generic driver */

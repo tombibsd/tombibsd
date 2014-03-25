@@ -641,8 +641,17 @@ dev_type_close(scrclose);
 dev_type_ioctl(scrioctl);
 
 const struct cdevsw scr_cdevsw = {
-	scropen, scrclose, noread, nowrite, scrioctl,
-	nostop, notty, nopoll, nommap, nokqfilter, D_TTY
+	.d_open = scropen,
+	.d_close = scrclose,
+	.d_read = noread,
+	.d_write = nowrite,
+	.d_ioctl = scrioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_TTY
 };
 
 /*

@@ -1,6 +1,6 @@
 /bus_dma.c/1.46/Wed Feb  1 09:54:03 2012/-kk/
 /bus_space.c/1.36/Thu Oct 24 10:28:57 2013/-kk/
-/clock.c/1.14/Fri Mar 14 04:28:17 2014/-kk/
+/clock.c/1.16/Tue Mar 25 02:35:28 2014/-kk/
 /compat_13_machdep.c/1.21/Tue Dec 13 11:03:52 2011/-kk/
 /compat_16_machdep.c/1.19/Mon Jun 20 05:50:39 2011/-kk/
 /copystr.c/1.6/Sun Dec 11 12:18:46 2005/-kk/

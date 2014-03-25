@@ -159,13 +159,11 @@ mvsoctmr_attach(device_t parent, device_t self, void *aux)
 	case MARVELL_ARMADAXP_MV78460:
 		sc->sc_flags = TMR_FLAGS_25MHZ | TMR_FLAGS_NOBRIDGE;
 		break;
-#if 0
 	case MARVELL_ARMADA370_MV6707:
 	case MARVELL_ARMADA370_MV6710:
 	case MARVELL_ARMADA370_MV6W11:
 		sc->sc_flags = TMR_FLAGS_NOBRIDGE | TMR_FLAGS_SYSCLK;
 		break;
-#endif
 	}
 
 	mvsoctmr_timecounter.tc_name = device_xname(self);

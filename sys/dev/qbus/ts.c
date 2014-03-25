@@ -177,12 +177,27 @@ dev_type_strategy(tsstrategy);
 dev_type_dump(tsdump);
 
 const struct bdevsw ts_bdevsw = {
-	tsopen, tsclose, tsstrategy, tsioctl, tsdump, nosize, D_TAPE
+	.d_open = tsopen,
+	.d_close = tsclose,
+	.d_strategy = tsstrategy,
+	.d_ioctl = tsioctl,
+	.d_dump = tsdump,
+	.d_psize = nosize,
+	.d_flag = D_TAPE
 };
 
 const struct cdevsw ts_cdevsw = {
-	tsopen, tsclose, tsread, tswrite, tsioctl,
-	nostop, notty, nopoll, nommap, nokqfilter, D_TAPE
+	.d_open = tsopen,
+	.d_close = tsclose,
+	.d_read = tsread,
+	.d_write = tswrite,
+	.d_ioctl = tsioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_TAPE
 };
 
 /* Bits in minor device */

@@ -24,18 +24,6 @@ rump_kern_unavailable(void)
 }
 
 int
-rump_pub_getversion(void)
-{
-	int rv;
-
-	rump_schedule();
-	rv = rump_getversion();
-	rump_unschedule();
-
-	return rv;
-}
-
-int
 rump_pub_module_init(const struct modinfo * const *arg1, size_t arg2)
 {
 	int rv;

@@ -194,8 +194,17 @@ bool	plcom_intstatus(struct plcom_instance *, u_int *);
 extern struct cfdriver plcom_cd;
 
 const struct cdevsw plcom_cdevsw = {
-	plcomopen, plcomclose, plcomread, plcomwrite, plcomioctl,
-	plcomstop, plcomtty, plcompoll, nommap, ttykqfilter, D_TTY
+	.d_open = plcomopen,
+	.d_close = plcomclose,
+	.d_read = plcomread,
+	.d_write = plcomwrite,
+	.d_ioctl = plcomioctl,
+	.d_stop = plcomstop,
+	.d_tty = plcomtty,
+	.d_poll = plcompoll,
+	.d_mmap = nommap,
+	.d_kqfilter = ttykqfilter,
+	.d_flag = D_TTY
 };
 
 /*

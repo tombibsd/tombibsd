@@ -58,6 +58,7 @@ OBJCOPTS+=	-fno-strict-aliasing -fexceptions
 
 OBJCOPTS.Object.m = -Wno-stack-protector
 COPTS.sendmsg.c = -Wno-stack-protector
+COPTS.objc-act.c = -Wno-stack-protector
 
 INCS=		${G_OBJC_H}
 INCSDIR=	/usr/include/objc

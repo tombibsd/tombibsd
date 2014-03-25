@@ -136,6 +136,7 @@ void mv78xx0_getclks(bus_addr_t);
 
 void armadaxp_intr_bootstrap(bus_addr_t);
 void armadaxp_getclks(void);
+void armada370_getclks(void);
 int armadaxp_clkgating(struct marvell_attach_args *);
 
 #endif	/* _MVSOCVAR_H_ */

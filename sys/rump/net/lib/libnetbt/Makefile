@@ -20,7 +20,7 @@ SRCS=	bt_proto.c bt_sysctl.c						\
 COPTS.l2cap_signal.c=	-O0
 .endif
 .endif
-SRCS+=	component.c
+SRCS+=	netbt_component.c
 
 .include <bsd.lib.mk>
 .include <bsd.klinks.mk>

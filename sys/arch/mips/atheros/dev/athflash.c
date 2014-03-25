@@ -134,8 +134,17 @@ dev_type_read(flashread);
 dev_type_write(flashwrite);
 
 const struct cdevsw athflash_cdevsw = {
-	flashopen, flashclose, flashread, flashwrite, noioctl,
-	nostop, notty, nopoll, nommap, nokqfilter,
+	.d_open = flashopen,
+	.d_close = flashclose,
+	.d_read = flashread,
+	.d_write = flashwrite,
+	.d_ioctl = noioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = 0
 };
 
 static struct {

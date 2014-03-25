@@ -705,7 +705,7 @@ print_s0(int which)
 			else
 				printf("First active partition: %d\n", active);
 		}
-		if (!sh_flag && mboot.mbr_dsn != 0)
+		if (!sh_flag)
 			printf("Drive serial number: %"PRIu32" (0x%08x)\n",
 			    le32toh(mboot.mbr_dsn),
 			    le32toh(mboot.mbr_dsn));

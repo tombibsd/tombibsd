@@ -25,6 +25,8 @@ typedef Registers_x86_64 ThisUnwindRegisters;
 typedef Registers_ppc32 ThisUnwindRegisters;
 #elif __arm__ && !defined(__ARM_EABI__)
 typedef Registers_arm32 ThisUnwindRegisters;
+#elif __vax__
+typedef Registers_vax ThisUnwindRegisters;
 #else
 #error Unsupported architecture
 #endif
@@ -275,17 +277,18 @@ uintptr_t _Unwind_GetIP(struct _Unwind_Context *context) {
   return cursor->getIP();
 }
 
+uintptr_t _Unwind_GetIPInfo(struct _Unwind_Context *context, int *isSignalFrame) {
+  ThisUnwindCursor *cursor = (ThisUnwindCursor *)context;
+  *isSignalFrame = cursor->isSignalFrame() ? 1 : 0;
+  return cursor->getIP();
+}
+
 void _Unwind_SetIP(struct _Unwind_Context *context, uintptr_t new_value) {
   ThisUnwindCursor *cursor = (ThisUnwindCursor *)context;
   cursor->setIP(new_value);
   unw_proc_info_t info;
   cursor->getInfo(&info);
-  uint64_t orgArgSize = info.extra_args;
-  uint64_t orgFuncStart = info.start_ip;
   cursor->setInfoBasedOnIPRegister(false);
-  // Adjust REG_SP if there was a DW_CFA_GNU_args_size.
-  if (orgFuncStart == info.start_ip && orgArgSize != 0)
-    cursor->setSP(cursor->getSP() + orgArgSize);
 }
 
 uintptr_t _Unwind_GetRegionStart(struct _Unwind_Context *context) {

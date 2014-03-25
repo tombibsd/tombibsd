@@ -617,7 +617,8 @@ snapshot_expunge(struct mount *mp, struct vnode *vp, struct fs *copy_fs,
 	struct inode *xp;
 	struct lwp *l = curlwp;
 	struct vattr vat;
-	struct vnode *logvp = NULL, *mvp = NULL, *xvp;
+	struct vnode *logvp = NULL, *xvp;
+	struct vnode_iterator *marker;
 
 	*snaplist = NULL;
 	/*
@@ -631,41 +632,18 @@ snapshot_expunge(struct mount *mp, struct vnode *vp, struct fs *copy_fs,
 			goto out;
 	}
 	/*
-	 * Allocate a marker vnode.
-	 */
-	mvp = vnalloc(mp);
-	/*
 	 * We also calculate the needed size for the snapshot list.
 	 */
 	*snaplistsize = fs->fs_ncg + howmany(fs->fs_cssize, fs->fs_bsize) +
 	    FSMAXSNAP + 1 /* superblock */ + 1 /* last block */ + 1 /* size */;
-	mutex_enter(&mntvnode_lock);
-	/*
-	 * NOTE: not using the TAILQ_FOREACH here since in this loop vgone()
-	 * and vclean() can be called indirectly
-	 */
-	for (xvp = TAILQ_FIRST(&mp->mnt_vnodelist); xvp; xvp = vunmark(mvp)) {
-		vmark(mvp, xvp);
-		/*
-		 * Make sure this vnode wasn't reclaimed in getnewvnode().
-		 * Start over if it has (it won't be on the list anymore).
-		 */
-		if (xvp->v_mount != mp || vismarker(xvp))
-			continue;
-		mutex_enter(xvp->v_interlock);
-		if ((xvp->v_iflag & VI_XLOCK) ||
-		    xvp->v_usecount == 0 || xvp->v_type == VNON ||
-		    VTOI(xvp) == NULL ||
+
+	vfs_vnode_iterator_init(mp, &marker);
+	while (vfs_vnode_iterator_next(marker, &xvp)) {
+		if (xvp->v_type == VNON || VTOI(xvp) == NULL ||
 		    (VTOI(xvp)->i_flags & SF_SNAPSHOT)) {
-			mutex_exit(xvp->v_interlock);
+			vrele(xvp);
 			continue;
 		}
-		mutex_exit(&mntvnode_lock);
-		/*
-		 * XXXAD should increase vnode ref count to prevent it
-		 * disappearing or being recycled.
-		 */
-		mutex_exit(xvp->v_interlock);
 #ifdef DEBUG
 		if (snapdebug)
 			vprint("ffs_snapshot: busy vnode", xvp);
@@ -674,11 +652,11 @@ snapshot_expunge(struct mount *mp, struct vnode *vp, struct fs *copy_fs,
 		if (xvp != logvp) {
 			if (VOP_GETATTR(xvp, &vat, l->l_cred) == 0 &&
 			    vat.va_nlink > 0) {
-				mutex_enter(&mntvnode_lock);
+				vrele(xvp);
 				continue;
 			}
 			if (ffs_checkfreefile(copy_fs, vp, xp->i_number)) {
-				mutex_enter(&mntvnode_lock);
+				vrele(xvp);
 				continue;
 			}
 		}
@@ -692,7 +670,8 @@ snapshot_expunge(struct mount *mp, struct vnode *vp, struct fs *copy_fs,
 			if (len > 0 && len < fs->fs_bsize) {
 				error = UFS_WAPBL_BEGIN(mp);
 				if (error) {
-					(void)vunmark(mvp);
+					vrele(xvp);
+					vfs_vnode_iterator_destroy(marker);
 					goto out;
 				}
 				ffs_blkfree_snap(copy_fs, vp, db_get(xp, loc),
@@ -714,13 +693,14 @@ snapshot_expunge(struct mount *mp, struct vnode *vp, struct fs *copy_fs,
 				UFS_WAPBL_END(mp);
 			}
 		}
+		vrele(xvp);
 		if (error) {
-			(void)vunmark(mvp);
+			vfs_vnode_iterator_destroy(marker);
 			goto out;
 		}
-		mutex_enter(&mntvnode_lock);
 	}
-	mutex_exit(&mntvnode_lock);
+	vfs_vnode_iterator_destroy(marker);
+
 	/*
 	 * Create a preliminary list of preallocated snapshot blocks.
 	 */
@@ -741,8 +721,6 @@ snapshot_expunge(struct mount *mp, struct vnode *vp, struct fs *copy_fs,
 	(*snaplist)[0] = blkp - &(*snaplist)[0];
 
 out:
-	if (mvp != NULL)
-		vnfree(mvp);
 	if (logvp != NULL)
 		vput(logvp);
 	if (error && *snaplist != NULL) {

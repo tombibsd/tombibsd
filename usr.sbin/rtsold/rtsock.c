@@ -59,12 +59,12 @@
 	(((a) & ((size)-1)) ? (1 + ((a) | ((size)-1))) : (a))
 
 #define NEXT_SA(ap) (ap) = (struct sockaddr *) \
-	((caddr_t)(ap) + \
+	((char *)(ap) + \
 	 ((ap)->sa_len ? ROUNDUP((ap)->sa_len, sizeof(u_long)) \
 		       : sizeof(u_long)))
 
 #ifdef RTM_IFANNOUNCE	/*NetBSD 1.5 or later*/
-static int rtsock_input_ifannounce __P((int, struct rt_msghdr *, char *));
+static int rtsock_input_ifannounce(int, struct rt_msghdr *, char *);
 #endif
 
 static struct {

@@ -87,7 +87,7 @@
 ./usr/libdata/debug/usr/lib/64/libdtrace.so.2.0.debug	comp-sys-debug	dtrace,debug,compat,arch64
 ./usr/libdata/debug/usr/lib/64/libdwarf.so.1.0.debug	comp-sys-debug	debug,compat,arch64
 ./usr/libdata/debug/usr/lib/64/libedit.so.3.1.debug	comp-sys-debug	debug,compat,arch64
-./usr/libdata/debug/usr/lib/64/libelf.so.0.debug		comp-sys-debug	debug,compat,arch64
+./usr/libdata/debug/usr/lib/64/libelf.so.1.0.debug		comp-sys-debug	debug,compat,arch64
 ./usr/libdata/debug/usr/lib/64/libevent.so.4.0.debug	comp-sys-debug	debug,compat,arch64
 ./usr/libdata/debug/usr/lib/64/libevent_openssl.so.4.0.debug	comp-sys-debug	debug,compat,crypto,arch64
 ./usr/libdata/debug/usr/lib/64/libevent_pthreads.so.4.0.debug	comp-sys-debug	debug,compat,arch64
@@ -263,7 +263,7 @@
 ./usr/libdata/debug/usr/lib/o32/libdtrace.so.2.0.debug	comp-sys-debug	dtrace,debug,compat,arch64
 ./usr/libdata/debug/usr/lib/o32/libdwarf.so.1.0.debug	comp-sys-debug	debug,compat,arch64
 ./usr/libdata/debug/usr/lib/o32/libedit.so.3.1.debug	comp-sys-debug	debug,compat,arch64
-./usr/libdata/debug/usr/lib/o32/libelf.so.0.debug		comp-sys-debug	debug,compat,arch64
+./usr/libdata/debug/usr/lib/o32/libelf.so.1.0.debug		comp-sys-debug	debug,compat,arch64
 ./usr/libdata/debug/usr/lib/o32/libevent.so.4.0.debug	comp-sys-debug	debug,compat,arch64
 ./usr/libdata/debug/usr/lib/o32/libevent_openssl.so.4.0.debug	comp-sys-debug	debug,compat,crypto,arch64
 ./usr/libdata/debug/usr/lib/o32/libevent_pthreads.so.4.0.debug	comp-sys-debug	debug,compat,arch64

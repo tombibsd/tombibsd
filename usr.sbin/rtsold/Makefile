@@ -1,5 +1,6 @@
 # $NetBSD$
 
+WARNS?=6
 USE_FORT?= yes	# network client (local server)
 
 PROG=	rtsold

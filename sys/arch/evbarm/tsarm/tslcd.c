@@ -77,8 +77,17 @@ dev_type_ioctl(tslcdioctl);
 dev_type_poll(tslcdpoll);
 
 const struct cdevsw tslcd_cdevsw = {
-	tslcdopen, tslcdclose, tslcdread, tslcdwrite, tslcdioctl,
-	nostop, notty, tslcdpoll, nommap,
+	.d_open = tslcdopen,
+	.d_close = tslcdclose,
+	.d_read = tslcdread,
+	.d_write = tslcdwrite,
+	.d_ioctl = tslcdioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = tslcdpoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = 0
 };
 
 extern const struct wsdisplay_emulops hlcd_emulops;

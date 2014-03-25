@@ -123,7 +123,9 @@ static void
 pcdp_cninit(struct consdev *cn)
 {
 	struct dig64_hcdp_table *tbl;
+#if NVGA > 0
 	union dev_desc *desc;
+#endif
 	uint64_t hcdp;
 	int n, m;
 
@@ -135,8 +137,8 @@ pcdp_cninit(struct consdev *cn)
 	n = 0;
 	m = tbl->length - sizeof(struct dig64_hcdp_table);
 	while (n < m) {
-		desc = (union dev_desc *)((char *)tbl->entry + n);
 #if NVGA > 0
+		desc = (union dev_desc *)((char *)tbl->entry + n);
 
 /* not yet... */
 /* Our VGA is Framebuffer? */

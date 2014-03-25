@@ -72,7 +72,7 @@
 #ifndef _S3C2XX0_INTR_H_
 #define _S3C2XX0_INTR_H_
 
-
+#include <sys/evcnt.h>
 
 #include <arm/cpu.h>
 #include <arm/armreg.h>

@@ -148,8 +148,17 @@ dev_type_tty(ucycomtty);
 dev_type_poll(ucycompoll);
 
 const struct cdevsw ucycom_cdevsw = {
-	ucycomopen, ucycomclose, ucycomread, ucycomwrite, ucycomioctl,
-	ucycomstop, ucycomtty, ucycompoll, nommap, ttykqfilter, D_TTY
+	.d_open = ucycomopen,
+	.d_close = ucycomclose,
+	.d_read = ucycomread,
+	.d_write = ucycomwrite,
+	.d_ioctl = ucycomioctl,
+	.d_stop = ucycomstop,
+	.d_tty = ucycomtty,
+	.d_poll = ucycompoll,
+	.d_mmap = nommap,
+	.d_kqfilter = ttykqfilter,
+	.d_flag = D_TTY
 };
 
 Static int ucycomparam(struct tty *, struct termios *);

@@ -76,8 +76,17 @@ static dev_type_close(ukclose);
 static dev_type_ioctl(ukioctl);
 
 const struct cdevsw uk_cdevsw = {
-	ukopen, ukclose, noread, nowrite, ukioctl,
-	nostop, notty, nopoll, nommap, nokqfilter, D_OTHER,
+	.d_open = ukopen,
+	.d_close = ukclose,
+	.d_read = noread,
+	.d_write = nowrite,
+	.d_ioctl = ukioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_OTHER
 };
 
 static int

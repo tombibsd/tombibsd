@@ -6,7 +6,7 @@
 LIB=	rumpdev_bpf
 
 SRCS=	bpf.c bpf_filter.c
-SRCS+=	component.c
+SRCS+=	bpf_component.c
 
 CPPFLAGS+=	-I${.CURDIR}/../../../librump/rumpvfs
 

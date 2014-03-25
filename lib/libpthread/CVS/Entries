@@ -19,7 +19,7 @@
 /pthread_barrier.3/1.4/Fri Jul  9 18:07:20 2010/-kk/
 /pthread_barrier.c/1.19/Thu Jan 29 21:19:35 2009/-kk/
 /pthread_barrierattr.3/1.9/Fri Jul  9 10:45:36 2010/-kk/
-/pthread_cancel.3/1.5/Fri Jul  9 11:03:26 2010/-kk/
+/pthread_cancel.3/1.6/Tue Mar 25 02:35:05 2014/-kk/
 /pthread_cancelstub.c/1.38/Thu Oct 24 10:28:53 2013/-kk/
 /pthread_cleanup_push.3/1.6/Fri Jul  9 08:51:28 2010/-kk/
 /pthread_compat.c/1.3/Thu Feb 13 15:35:39 2014/-kk/
@@ -55,7 +55,7 @@
 /pthread_spin.3/1.5/Fri Jul  9 10:55:11 2010/-kk/
 /pthread_spin.c/1.6/Thu Aug 16 04:49:47 2012/-kk/
 /pthread_suspend_np.3/1.5/Fri Jul  9 09:18:45 2010/-kk/
-/pthread_testcancel.3/1.8/Thu Oct 24 10:28:53 2013/-kk/
+/pthread_testcancel.3/1.9/Tue Mar 25 02:35:05 2014/-kk/
 /pthread_tsd.c/1.11/Thu Oct 24 10:28:53 2013/-kk/
 /pthread_types.h/1.13/Sat Aug  2 19:46:30 2008/-kk/
 /res_state.c/1.6/Mon Apr 28 20:23:02 2008/-kk/

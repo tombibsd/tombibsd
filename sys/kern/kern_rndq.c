@@ -58,7 +58,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <dev/rnd_private.h>
 
-#if defined(__HAVE_CPU_COUNTER) && !defined(_RUMPKERNEL) /* XXX: bad pooka */
+#if defined(__HAVE_CPU_COUNTER)
 #include <machine/cpu_counter.h>
 #endif
 
@@ -183,7 +183,7 @@ rnd_counter(void)
 {
 	struct timeval tv;
 
-#if defined(__HAVE_CPU_COUNTER) && !defined(_RUMPKERNEL) /* XXX: bad pooka */
+#if defined(__HAVE_CPU_COUNTER)
 	if (cpu_hascounter())
 		return (cpu_counter32());
 #endif
@@ -329,7 +329,7 @@ rnd_estimate_entropy(krndsource_t *rs, u_int32_t t)
 	return (1);
 }
 
-#if defined(__HAVE_CPU_COUNTER) && !defined(_RUMPKERNEL)
+#if defined(__HAVE_CPU_COUNTER)
 static void
 rnd_skew(void *arg)
 {
@@ -432,7 +432,7 @@ rnd_init(void)
 	 * XXX clocking the callout mechanism.  How to get this right
 	 * XXX without unsightly spelunking in the timecounter code?
 	 */
-#if defined(__HAVE_CPU_COUNTER) && !defined(_RUMPKERNEL) /* XXX: bad pooka */
+#if defined(__HAVE_CPU_COUNTER)
 	callout_init(&skew_callout, CALLOUT_MPSAFE);
 	callout_setfunc(&skew_callout, rnd_skew, NULL);
 	rnd_skew(NULL);

@@ -154,8 +154,17 @@ dev_type_ioctl(cgeightioctl);
 dev_type_mmap(cgeightmmap);
 
 const struct cdevsw cgeight_cdevsw = {
-	cgeightopen, nullclose, noread, nowrite, cgeightioctl,
-	nostop, notty, nopoll, cgeightmmap, nokqfilter
+	.d_open = cgeightopen,
+	.d_close = nullclose,
+	.d_read = noread,
+	.d_write = nowrite,
+	.d_ioctl = cgeightioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = cgeightmmap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = 0
 };
 
 #if defined(SUN4)

@@ -141,16 +141,16 @@
 /cacvar.h/1.20/Sat Oct 27 17:18:19 2012/-kk/
 /cd1190reg.h/1.5/Wed Jul  2 10:16:20 2008/-kk/
 /cd1400reg.h/1.6/Sun Dec 11 12:21:26 2005/-kk/
-/cd18xx.c/1.29/Sat Oct 27 17:18:19 2012/-kk/
+/cd18xx.c/1.30/Tue Mar 25 02:35:31 2014/-kk/
 /cd18xxreg.h/1.4/Thu May 29 14:51:27 2008/-kk/
 /cd18xxvar.h/1.4/Sat Oct 27 17:18:19 2012/-kk/
 /ciss.c/1.32/Thu Oct 24 10:28:57 2013/-kk/
 /cissreg.h/1.4/Thu Oct 24 10:28:57 2013/-kk/
 /cissvar.h/1.6/Thu Oct 24 10:28:57 2013/-kk/
-/clmpcc.c/1.46/Sat Oct 27 17:18:19 2012/-kk/
+/clmpcc.c/1.47/Tue Mar 25 02:35:31 2014/-kk/
 /clmpccreg.h/1.4/Mon Apr 28 20:23:49 2008/-kk/
 /clmpccvar.h/1.13/Sat Oct 27 17:18:20 2012/-kk/
-/com.c/1.322/Wed Jan  1 02:45:28 2014/-kk/
+/com.c/1.323/Tue Mar 25 02:35:31 2014/-kk/
 /com_cpcbus.c/1.11/Mon Apr 28 20:23:49 2008/-kk/
 /com_upc.c/1.11/Sun Jan 25 14:34:14 2009/-kk/
 /comreg.h/1.22/Thu Oct 24 10:28:57 2013/-kk/
@@ -197,7 +197,7 @@
 /dp83932.c/1.36/Tue Oct 29 08:21:44 2013/-kk/
 /dp83932reg.h/1.7/Mon Apr 28 20:23:49 2008/-kk/
 /dp83932var.h/1.12/Tue Sep  1 15:20:53 2009/-kk/
-/dpt.c/1.69/Thu Oct 24 10:28:57 2013/-kk/
+/dpt.c/1.70/Tue Mar 25 02:35:31 2014/-kk/
 /dptreg.h/1.19/Mon Sep  8 23:36:54 2008/-kk/
 /dptvar.h/1.16/Sat Oct 27 17:18:20 2012/-kk/
 /ds.h/1.10/Sun Feb 12 16:34:11 2012/-kk/
@@ -266,7 +266,7 @@
 /ibm561var.h/1.5/Mon Apr 28 20:23:50 2008/-kk/
 /ibm82660reg.h/1.3/Sat Jun 14 12:01:28 2008/-kk/
 /icp.c/1.31/Sat Oct 27 17:18:20 2012/-kk/
-/icp_ioctl.c/1.19/Sun Jun  8 12:43:51 2008/-kk/
+/icp_ioctl.c/1.20/Tue Mar 25 02:35:31 2014/-kk/
 /icp_ioctl.h/1.6/Tue Dec 25 18:33:38 2007/-kk/
 /icpreg.h/1.7/Mon Sep  8 23:36:54 2008/-kk/
 /icpsp.c/1.26/Fri Mar 14 04:28:19 2014/-kk/
@@ -310,7 +310,7 @@
 /ispmbox.h/1.56/Thu Oct 24 10:28:58 2013/-kk/
 /ispreg.h/1.34/Fri Mar 26 20:52:01 2010/-kk/
 /ispvar.h/1.72/Mon Feb 28 17:17:55 2011/-kk/
-/joy.c/1.18/Wed Nov 23 23:07:32 2011/-kk/
+/joy.c/1.19/Tue Mar 25 02:35:32 2014/-kk/
 /joyvar.h/1.7/Wed Nov 23 23:07:32 2011/-kk/
 /lan9118.c/1.16/Sun Jul 22 14:32:57 2012/-kk/
 /lan9118reg.h/1.3/Mon Sep 27 12:29:03 2010/-kk/
@@ -329,7 +329,7 @@
 /lemacvar.h/1.12/Sat Oct 27 17:18:21 2012/-kk/
 /lm700x.c/1.3/Sun Dec 11 12:21:27 2005/-kk/
 /lm700x.h/1.2/Fri Oct 19 11:59:55 2007/-kk/
-/lpt.c/1.78/Wed Nov 25 14:28:50 2009/-kk/
+/lpt.c/1.79/Tue Mar 25 02:35:32 2014/-kk/
 /lpt_upc.c/1.10/Sun Jan 25 14:34:14 2009/-kk/
 /lptreg.h/1.10/Tue May  2 08:31:02 2006/-kk/
 /lptvar.h/1.56/Fri Mar  7 17:15:51 2008/-kk/
@@ -357,7 +357,7 @@
 /mc68450reg.h/1.5/Mon Apr 28 20:23:50 2008/-kk/
 /mc6845reg.h/1.4/Sun Dec 11 12:21:27 2005/-kk/
 /mc6854reg.h/1.1/Mon Sep 10 23:41:49 2001/-kk/
-/mfi.c/1.51/Thu Feb 13 15:22:29 2014/-kk/
+/mfi.c/1.52/Tue Mar 25 02:35:32 2014/-kk/
 /mfiio.h/1.1/Wed Sep 19 21:24:29 2012/-kk/
 /mfireg.h/1.8/Wed Sep 19 21:24:29 2012/-kk/
 /mfivar.h/1.20/Wed Sep 19 21:24:29 2012/-kk/
@@ -367,7 +367,7 @@
 /mk48txx.c/1.26/Tue Jan  4 01:28:15 2011/-kk/
 /mk48txxreg.h/1.11/Tue Jan  4 01:28:15 2011/-kk/
 /mk48txxvar.h/1.7/Tue Jan  4 01:28:15 2011/-kk/
-/mlx.c/1.60/Sat Oct 27 17:18:21 2012/-kk/
+/mlx.c/1.61/Tue Mar 25 02:35:32 2014/-kk/
 /mlxio.h/1.3/Mon Aug 26 17:02:15 2002/-kk/
 /mlxreg.h/1.8/Mon Sep  8 23:36:54 2008/-kk/
 /mlxvar.h/1.15/Sat Oct 27 17:18:22 2012/-kk/
@@ -451,7 +451,7 @@
 /pdqvar.h/1.47/Sat Oct 27 17:18:22 2012/-kk/
 /ramdac.h/1.8/Mon Apr 28 20:23:51 2008/-kk/
 /rf3000reg.h/1.6/Mon Oct 19 23:19:39 2009/-kk/
-/rrunner.c/1.76/Thu Oct 24 10:28:58 2013/-kk/
+/rrunner.c/1.77/Tue Mar 25 02:35:36 2014/-kk/
 /rrunnerreg.h/1.9/Mon Apr 28 20:23:51 2008/-kk/
 /rrunnervar.h/1.14/Sat Oct 27 17:18:22 2012/-kk/
 /rs5c313.c/1.9/Tue Apr  6 15:29:19 2010/-kk/
@@ -472,6 +472,9 @@
 /rtl81x9.c/1.94/Sun Jul 22 14:32:58 2012/-kk/
 /rtl81x9reg.h/1.45/Wed Dec 25 07:37:38 2013/-kk/
 /rtl81x9var.h/1.53/Thu Feb  2 19:43:03 2012/-kk/
+/rtsx.c/1.1/Wed Mar 19 15:26:41 2014/-kk/
+/rtsxreg.h/1.1/Wed Mar 19 15:26:41 2014/-kk/
+/rtsxvar.h/1.1/Wed Mar 19 15:26:41 2014/-kk/
 /rtw.c/1.121/Sat Mar  1 06:04:42 2014/-kk/
 /rtwphy.c/1.16/Mon Nov 18 05:31:38 2013/-kk/
 /rtwphy.h/1.6/Mon Oct 19 23:19:39 2009/-kk/
@@ -514,7 +517,7 @@
 /smc93cx6var.h/1.9/Sun Dec 11 12:21:28 2005/-kk/
 /spdmem.c/1.9/Sat Mar  1 06:04:42 2014/-kk/
 /spdmemreg.h/1.1/Wed Mar 24 00:31:41 2010/-kk/
-/spdmemvar.h/1.3/Thu Oct 24 10:28:58 2013/-kk/
+/spdmemvar.h/1.4/Tue Mar 25 02:35:36 2014/-kk/
 /spic.c/1.19/Thu Oct 24 10:28:58 2013/-kk/
 /spicvar.h/1.7/Wed Feb 24 22:37:58 2010/-kk/
 /st16650reg.h/1.3/Sun Dec 11 12:21:28 2005/-kk/
@@ -534,7 +537,7 @@
 /tms320av110reg.h/1.4/Mon Apr 28 20:23:51 2008/-kk/
 /tms320av110var.h/1.12/Sat Oct 27 17:18:23 2012/-kk/
 /tms9914reg.h/1.2/Mon Apr 28 20:23:51 2008/-kk/
-/tpm.c/1.9/Thu Oct 24 10:28:58 2013/-kk/
+/tpm.c/1.10/Tue Mar 25 02:35:36 2014/-kk/
 /tpmreg.h/1.3/Mon Jan 23 04:12:26 2012/-kk/
 /tpmvar.h/1.3/Sat Oct 27 17:18:23 2012/-kk/
 /tropic.c/1.44/Sat Oct 27 17:18:23 2012/-kk/
@@ -584,6 +587,6 @@
 /z8530reg.h/1.12/Sun Dec 11 12:21:29 2005/-kk/
 /z8530sc.c/1.31/Thu Oct 24 10:28:58 2013/-kk/
 /z8530sc.h/1.26/Fri May 22 03:51:30 2009/-kk/
-/z8530tty.c/1.128/Sun Apr 24 16:27:00 2011/-kk/
+/z8530tty.c/1.129/Tue Mar 25 02:35:36 2014/-kk/
 /z8536reg.h/1.3/Tue Jan 31 22:13:19 2012/-kk/
 D

@@ -30,14 +30,11 @@
 #ifndef _XEN_XBDVAR_H_
 #define _XEN_XBDVAR_H_
 
-#include <sys/simplelock.h>
-
 struct xbd_softc {
 	device_t		sc_dev;		/* base device glue */
 	struct dk_softc		sc_dksc;	/* generic disk interface */
 	unsigned long		sc_xd_device;	/* cookie identifying device */
 	struct dk_intf		*sc_di;		/* pseudo-disk interface */
-	struct simplelock	sc_slock;	/* our lock */
 	int			sc_shutdown;	/* about to be removed */
 	krndsource_t	sc_rnd_source;
 };

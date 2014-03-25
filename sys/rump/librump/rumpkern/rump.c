@@ -254,12 +254,10 @@ rump_init(void)
 	}
 
 	/* init minimal lwp/cpu context */
+	rump_lwproc_init();
 	l = &lwp0;
 	l->l_cpu = l->l_target_cpu = rump_cpu;
-
-	/* lwp0 isn't created like other threads, so notify hypervisor here */
-	rumpuser_curlwpop(RUMPUSER_LWP_CREATE, l);
-	rumpuser_curlwpop(RUMPUSER_LWP_SET, l);
+	rump_lwproc_curlwp_set(l);
 
 	/* retrieve env vars which affect the early stage of bootstrap */
 	if (rumpuser_getparam("RUMP_THREADS", buf, sizeof(buf)) == 0) {
@@ -341,7 +339,7 @@ rump_init(void)
 
 	rump_scheduler_init(numcpu);
 	/* revert temporary context and schedule a semireal context */
-	rumpuser_curlwpop(RUMPUSER_LWP_CLEAR, l);
+	rump_lwproc_curlwp_clear(l);
 	initproc = &proc0; /* borrow proc0 before we get initproc started */
 	rump_schedule();
 	bootlwp = curlwp;
@@ -941,6 +939,19 @@ rump_getversion(void)
 {
 
 	return __NetBSD_Version__;
+}
+/* compat */
+__strong_alias(rump_pub_getversion,rump_getversion);
+
+int
+rump_nativeabi_p(void)
+{
+
+#ifdef _RUMP_NATIVE_ABI
+	return 1;
+#else
+	return 0;
+#endif
 }
 
 /*

@@ -165,8 +165,17 @@ dev_type_close(mapleclose);
 dev_type_ioctl(mapleioctl);
 
 const struct cdevsw maple_cdevsw = {
-	mapleopen, mapleclose, noread, nowrite, mapleioctl,
-	nostop, notty, nopoll, nommap, nokqfilter,
+	.d_open = mapleopen,
+	.d_close = mapleclose,
+	.d_read = noread,
+	.d_write = nowrite,
+	.d_ioctl = mapleioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = 0
 };
 
 static int
@@ -554,10 +563,7 @@ static void
 maple_check_unit_change(struct maple_softc *sc, struct maple_unit *u)
 {
 	struct maple_devinfo *newinfo = (void *) (u->u_rxbuf + 1);
-	int port, subunit;
 
-	port = u->port;
-	subunit = u->subunit;
 	if (memcmp(&u->devinfo, newinfo, sizeof(struct maple_devinfo)) == 0)
 		goto out;	/* no change */
 

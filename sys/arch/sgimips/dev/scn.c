@@ -155,8 +155,17 @@ dev_type_tty(scntty);
 dev_type_poll(scnpoll);
 
 const struct cdevsw scn_cdevsw = {
-	scnopen, scnclose, scnread, scnwrite, scnioctl,
-	scnstop, scntty, scnpoll, nommap, ttykqfilter, D_TTY
+	.d_open = scnopen,
+	.d_close = scnclose,
+	.d_read = scnread,
+	.d_write = scnwrite,
+	.d_ioctl = scnioctl,
+	.d_stop = scnstop,
+	.d_tty = scntty,
+	.d_poll = scnpoll,
+	.d_mmap = nommap,
+	.d_kqfilter = ttykqfilter,
+	.d_flag = D_TTY
 };
 
 struct consdev scn_cn = {

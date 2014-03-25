@@ -205,8 +205,17 @@ dev_type_poll(videopoll);
 dev_type_mmap(videommap);
 
 const struct cdevsw video_cdevsw = {
-	videoopen, videoclose, videoread, videowrite, videoioctl,
-	nostop, notty, videopoll, videommap, nokqfilter, D_OTHER
+	.d_open = videoopen,
+	.d_close = videoclose,
+	.d_read = videoread,
+	.d_write = videowrite,
+	.d_ioctl = videoioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = videopoll,
+	.d_mmap = videommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_OTHER
 };
 
 #define VIDEOUNIT(n)	(minor(n))

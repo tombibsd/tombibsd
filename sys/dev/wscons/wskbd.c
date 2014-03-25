@@ -297,8 +297,17 @@ dev_type_poll(wskbdpoll);
 dev_type_kqfilter(wskbdkqfilter);
 
 const struct cdevsw wskbd_cdevsw = {
-	wskbdopen, wskbdclose, wskbdread, nowrite, wskbdioctl,
-	nostop, notty, wskbdpoll, nommap, wskbdkqfilter, D_OTHER
+	.d_open = wskbdopen,
+	.d_close = wskbdclose,
+	.d_read = wskbdread,
+	.d_write = nowrite,
+	.d_ioctl = wskbdioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = wskbdpoll,
+	.d_mmap = nommap,
+	.d_kqfilter = wskbdkqfilter,
+	.d_flag = D_OTHER
 };
 
 #ifndef WSKBD_DEFAULT_BELL_PITCH

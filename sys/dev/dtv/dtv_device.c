@@ -64,7 +64,7 @@ const struct cdevsw dtv_cdevsw = {
 	.d_poll = dtvpoll,
 	.d_mmap = nommap,
 	.d_kqfilter = nokqfilter,
-	.d_flag = D_OTHER|D_MPSAFE,
+	.d_flag = D_OTHER | D_MPSAFE,
 };
 
 static int	dtv_match(device_t, cfdata_t, void *);

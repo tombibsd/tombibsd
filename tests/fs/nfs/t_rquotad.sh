@@ -57,9 +57,9 @@ get_nfs_quota()
 #start a a nfs server
 
 	atf_check -s exit:0 rump_server -lrumpvfs -lrumpdev -lrumpnet   \
-	    -lrumpnet_net -lrumpnet_netinet -lrumpnet_local             \
-	    -lrumpnet_shmif -lrumpdev_disk -lrumpfs_ffs -lrumpfs_nfs    \
-	    -lrumpfs_nfsserver                                          \
+	    -lrumpnet_net -lrumpnet_netinet -lrumpnet_netinet6          \
+	    -lrumpnet_local -lrumpnet_shmif -lrumpdev_disk -lrumpfs_ffs \
+	    -lrumpfs_nfs -lrumpfs_nfsserver                             \
 	    -d key=/dk,hostpath=${IMG},size=host ${RUMP_SERVER}
 
 	atf_check -s exit:0 rump.ifconfig shmif0 create

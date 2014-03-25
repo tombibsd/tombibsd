@@ -3,7 +3,7 @@
 # build libraries for xorg
 
 SUBDIR=	libfontenc freetype libFS libICE libOSMesa \
-	libXau libXdmcp libdrm libpciaccess .WAIT
+	libXau libXdmcp libdrm libpciaccess libpthread-stubs .WAIT
 .if ${MACHINE_ARCH} == "i386" || ${MACHINE_ARCH} == "x86_64"
 SUBDIR+=libdrm_intel
 .endif

@@ -45,7 +45,7 @@
 /msiiepvar.h/1.9/Thu Oct 24 10:28:57 2013/-kk/
 /oclock.c/1.20/Fri Jul  1 18:51:51 2011/-kk/
 /openfirm.c/1.18/Mon Jul 18 21:00:28 2011/-kk/
-/openprom.c/1.26/Sun Mar  4 06:00:46 2007/-kk/
+/openprom.c/1.27/Tue Mar 25 02:35:29 2014/-kk/
 /pci_fixup.c/1.1/Thu Oct 24 10:28:57 2013/-kk/
 /pci_fixup.h/1.1/Thu Oct 24 10:28:57 2013/-kk/
 /pci_machdep.c/1.18/Thu Oct 24 10:28:57 2013/-kk/

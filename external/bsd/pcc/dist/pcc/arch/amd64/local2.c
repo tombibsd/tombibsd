@@ -321,7 +321,7 @@ ultofd(NODE *p)
 static void
 ldtoul(NODE *p)
 {
-	int r;
+	int r __unused;
 
 	r = getlr(p, '1')->n_rval;
 

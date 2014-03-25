@@ -130,8 +130,17 @@ dev_type_read(ulptread);
 dev_type_ioctl(ulptioctl);
 
 const struct cdevsw ulpt_cdevsw = {
-	ulptopen, ulptclose, ulptread, ulptwrite, ulptioctl,
-	nostop, notty, nopoll, nommap, nokqfilter, D_OTHER,
+	.d_open = ulptopen,
+	.d_close = ulptclose,
+	.d_read = ulptread,
+	.d_write = ulptwrite,
+	.d_ioctl = ulptioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_OTHER
 };
 
 void ulpt_disco(void *);

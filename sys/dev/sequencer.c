@@ -157,9 +157,17 @@ static dev_type_poll(sequencerpoll);
 static dev_type_kqfilter(sequencerkqfilter);
 
 const struct cdevsw sequencer_cdevsw = {
-	sequenceropen, sequencerclose, sequencerread, sequencerwrite,
-	sequencerioctl, nostop, notty, sequencerpoll, nommap,
-	sequencerkqfilter, D_OTHER | D_MPSAFE
+	.d_open = sequenceropen,
+	.d_close = sequencerclose,
+	.d_read = sequencerread,
+	.d_write = sequencerwrite,
+	.d_ioctl = sequencerioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = sequencerpoll,
+	.d_mmap = nommap,
+	.d_kqfilter = sequencerkqfilter,
+	.d_flag = D_OTHER | D_MPSAFE
 };
 static LIST_HEAD(, sequencer_softc) sequencers = LIST_HEAD_INITIALIZER(sequencers);
 static kmutex_t sequencer_lock;
@@ -1587,8 +1595,17 @@ static dev_type_open(midiopen);
 static dev_type_close(midiclose);
 
 const struct cdevsw midi_cdevsw = {
-	midiopen, midiclose, noread, nowrite, noioctl,
-	nostop, notty, nopoll, nommap, nokqfilter, D_OTHER | D_MPSAFE
+	.d_open = midiopen,
+	.d_close = midiclose,
+	.d_read = noread,
+	.d_write = nowrite,
+	.d_ioctl = noioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_OTHER | D_MPSAFE
 };
 
 /*

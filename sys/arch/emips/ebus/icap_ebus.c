@@ -149,16 +149,17 @@ icap_ebus_attach(device_t parent, device_t self, void *aux)
 /* The character device handlers
  */
 const struct cdevsw icap_cdevsw = {
-	icapopen,
-	icapclose,
-	icapread,
-	icapwrite,
-	icapioctl,
-	nostop,
-	notty,
-	nopoll,
-	nommap,
-	nokqfilter,
+	.d_open = icapopen,
+	.d_close = icapclose,
+	.d_read = icapread,
+	.d_write = icapwrite,
+	.d_ioctl = icapioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = 0
 };
 
 /*

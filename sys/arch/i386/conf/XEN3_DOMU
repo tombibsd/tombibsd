@@ -258,6 +258,6 @@ options 	PAX_MPROTECT=0		# PaX mprotect(2) restrictions
 options 	PAX_ASLR=0		# PaX Address Space Layout Randomization
 
 # PCI pass-through support:
-xpci* at xenbus ?			#Xen3 PCI front end driver
-pci* at xpci ?
+#xpci* at xenbus ?			#Xen3 PCI front end driver
+#pci* at xpci ?
 # you then need to add your PCI devices drivers below.

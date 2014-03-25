@@ -91,8 +91,17 @@ dev_type_poll(btnpoll);
 dev_type_kqfilter(btnkqfilter);
 
 const struct cdevsw button_cdevsw = {
-	btnopen, btnclose, btnread, nowrite, btnioctl,
-	nostop, notty, btnpoll, nommap, btnkqfilter,
+	.d_open = btnopen,
+	.d_close = btnclose,
+	.d_read = btnread,
+	.d_write = nowrite,
+	.d_ioctl = btnioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = btnpoll,
+	.d_mmap = nommap,
+	.d_kqfilter = btnkqfilter,
+	.d_flag = 0
 };
 
 static int

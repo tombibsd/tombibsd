@@ -397,7 +397,15 @@ logputchar(int c)
 }
 
 const struct cdevsw log_cdevsw = {
-	logopen, logclose, logread, nowrite, logioctl,
-	nostop, notty, logpoll, nommap, logkqfilter,
-	D_OTHER | D_MPSAFE
+	.d_open = logopen,
+	.d_close = logclose,
+	.d_read = logread,
+	.d_write = nowrite,
+	.d_ioctl = logioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = logpoll,
+	.d_mmap = nommap,
+	.d_kqfilter = logkqfilter,
+	.d_flag = D_OTHER | D_MPSAFE
 };

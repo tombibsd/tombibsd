@@ -1342,6 +1342,9 @@ ucom*	at uark? portno ?
 moscom* at uhub? port ?
 ucom*	at moscom? portno ?
 
+umcs* at uhub? port ?		# Moschip MCS7xxx serial adapter
+ucom*	at umcs? portno ?
+
 uhmodem* at uhub?
 ucom*	at uhmodem? portno ?
 
@@ -1412,11 +1415,13 @@ sbp*	at ieee1394if? euihi ? euilo ?	# SCSI over IEEE1394
 
 # PCI SD/MMC controller
 sdhc*	at pci?				# SD Host Controller
+rtsx*	at pci?				# Realtek RTS5209/RTS5229 Card Reader
 
 # CardBus SD/MMC controller
 sdhc*	at cardbus? function ?		# SD Host Controller
 
 sdmmc*	at sdhc?			# SD/MMC bus
+sdmmc*	at rtsx?			# SD/MMC bus
 ld*	at sdmmc?
 
 

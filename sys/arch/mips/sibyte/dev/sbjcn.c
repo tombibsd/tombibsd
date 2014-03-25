@@ -175,8 +175,17 @@ dev_type_stop(sbjcnstop);
 dev_type_tty(sbjcntty);
 
 const struct cdevsw sbjcn_cdevsw = {
-	sbjcnopen, sbjcnclose, sbjcnread, sbjcnwrite, sbjcnioctl,
-	sbjcnstop, sbjcntty, nopoll, nommap, ttykqfilter, D_TTY
+	.d_open = sbjcnopen,
+	.d_close = sbjcnclose,
+	.d_read = sbjcnread,
+	.d_write = sbjcnwrite,
+	.d_ioctl = sbjcnioctl,
+	.d_stop = sbjcnstop,
+	.d_tty = sbjcntty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = ttykqfilter,
+	.d_flag = D_TTY
 };
 
 #define	integrate	static inline

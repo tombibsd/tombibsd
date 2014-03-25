@@ -185,8 +185,17 @@ dev_type_poll(sabpoll);
 static struct cnm_state sabtty_cnm_state;
 
 const struct cdevsw sabtty_cdevsw = {
-	sabopen, sabclose, sabread, sabwrite, sabioctl,
-	sabstop, sabtty, sabpoll, nommap, ttykqfilter, D_TTY
+	.d_open = sabopen,
+	.d_close = sabclose,
+	.d_read = sabread,
+	.d_write = sabwrite,
+	.d_ioctl = sabioctl,
+	.d_stop = sabstop,
+	.d_tty = sabtty,
+	.d_poll = sabpoll,
+	.d_mmap = nommap,
+	.d_kqfilter = ttykqfilter,
+	.d_flag = D_TTY
 };
 
 struct sabtty_rate {

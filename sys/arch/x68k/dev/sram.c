@@ -75,8 +75,17 @@ CFATTACH_DECL_NEW(sram, sizeof(struct sram_softc),
 	srammatch, sramattach, NULL, NULL);
 
 const struct cdevsw sram_cdevsw = {
-	sramopen, sramclose, noread, nowrite, sramioctl,
-	nostop, notty, nopoll, nommap, nokqfilter,
+	.d_open = sramopen,
+	.d_close = sramclose,
+	.d_read = noread,
+	.d_write = nowrite,
+	.d_ioctl = sramioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = 0
 };
 
 static int sram_attached;

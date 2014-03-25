@@ -1,5 +1,5 @@
 /Makefile.inc/1.1.1.1/Tue Jul 29 05:01:21 2008/-kk/
-/Makefile/1.27/Thu Oct 24 10:28:53 2013/-kk/
+/Makefile/1.28/Tue Mar 25 02:34:15 2014/-kk/
 D/dri////
 D/fontconfig////
 D/freetype////
@@ -53,6 +53,7 @@ D/libdrm_radeon////
 D/libfontenc////
 D/libglut////
 D/libpciaccess////
+D/libpthread-stubs////
 D/libxcb////
 D/libxkbfile////
 D/libxkbui////

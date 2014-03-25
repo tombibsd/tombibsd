@@ -54,7 +54,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <rump/rumpuser.h>
 
 #include "rump_private.h"
-#include "rumpcomp_user.h"
+#include "sockin_user.h"
 
 /*
  * An inet communication domain which uses the socket interface.

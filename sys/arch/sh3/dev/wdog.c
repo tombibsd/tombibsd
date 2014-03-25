@@ -69,8 +69,17 @@ dev_type_close(wdogclose);
 dev_type_ioctl(wdogioctl);
 
 const struct cdevsw wdog_cdevsw = {
-	wdogopen, wdogclose, noread, nowrite, wdogioctl,
-	nostop, notty, nopoll, nommap, nokqfilter,
+	.d_open = wdogopen,
+	.d_close = wdogclose,
+	.d_read = noread,
+	.d_write = nowrite,
+	.d_ioctl = wdogioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = 0
 };
 
 void

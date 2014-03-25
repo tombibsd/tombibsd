@@ -203,8 +203,17 @@ dev_type_poll(wsmousepoll);
 dev_type_kqfilter(wsmousekqfilter);
 
 const struct cdevsw wsmouse_cdevsw = {
-	wsmouseopen, wsmouseclose, wsmouseread, nowrite, wsmouseioctl,
-	nostop, notty, wsmousepoll, nommap, wsmousekqfilter, D_OTHER
+	.d_open = wsmouseopen,
+	.d_close = wsmouseclose,
+	.d_read = wsmouseread,
+	.d_write = nowrite,
+	.d_ioctl = wsmouseioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = wsmousepoll,
+	.d_mmap = nommap,
+	.d_kqfilter = wsmousekqfilter,
+	.d_flag = D_OTHER
 };
 
 #if NWSMUX > 0

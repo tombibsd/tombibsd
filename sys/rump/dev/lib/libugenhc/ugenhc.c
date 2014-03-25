@@ -81,7 +81,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <rump/rumpuser.h>
 
-#include "rumpcomp_user.h"
+#include "ugenhc_user.h"
 
 #include "rump_private.h"
 #include "rump_dev_private.h"

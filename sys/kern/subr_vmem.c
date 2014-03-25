@@ -324,7 +324,7 @@ bt_freetrim(vmem_t *vm, int freelimit)
 		LIST_REMOVE(bt, bt_freelist);
 		vm->vm_nfreetags--;
 		if (bt >= static_bts
-		    && bt < static_bts + sizeof(static_bts)) {
+		    && bt < &static_bts[STATIC_BT_COUNT]) {
 			mutex_enter(&vmem_btag_lock);
 			LIST_INSERT_HEAD(&vmem_btag_freelist, bt, bt_freelist);
 			vmem_btag_freelist_count++;
@@ -1176,7 +1176,7 @@ retry:
 	/* XXX */
 
 	if ((flags & VM_SLEEP) != 0) {
-#if defined(_KERNEL) && !defined(_RUMPKERNEL)
+#if defined(_KERNEL)
 		mutex_spin_enter(&uvm_fpageqlock);
 		uvm_kick_pdaemon();
 		mutex_spin_exit(&uvm_fpageqlock);

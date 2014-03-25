@@ -10,7 +10,7 @@
 /cpuswitch.S/1.82/Sat Mar  1 06:04:22 2014/-kk/
 /db_interface.c/1.50/Wed Dec 25 07:37:18 2013/-kk/
 /db_machdep.c/1.18/Fri Mar 14 04:28:13 2014/-kk/
-/exception.S/1.21/Fri Mar 14 04:28:13 2014/-kk/
+/exception.S/1.22/Tue Mar 25 02:35:18 2014/-kk/
 /fault.c/1.98/Fri Mar 14 04:28:13 2014/-kk/
 /genassym.cf/1.67/Sat Mar  1 06:04:22 2014/-kk/
 /intr.c/1.34/Sat Sep  1 12:15:39 2012/-kk/

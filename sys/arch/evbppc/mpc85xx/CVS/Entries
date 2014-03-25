@@ -1,7 +1,7 @@
-/autoconf.c/1.8/Thu Oct 24 10:28:57 2013/-kk/
+/autoconf.c/1.9/Tue Mar 25 02:35:19 2014/-kk/
 /cadmusreg.h/1.2/Tue Jan 18 01:10:25 2011/-kk/
 /ds1553rtc.c/1.2/Tue Jan 18 01:10:25 2011/-kk/
-/machdep.c/1.30/Thu Oct 24 10:28:57 2013/-kk/
+/machdep.c/1.31/Tue Mar 25 02:35:19 2014/-kk/
 /mpc85xx_start.S/1.6/Sun Jul 29 21:36:27 2012/-kk/
 /pixisreg.h/1.2/Tue Jan 18 01:10:25 2011/-kk/
 /wdc_obio.c/1.4/Tue Jul 31 15:50:32 2012/-kk/

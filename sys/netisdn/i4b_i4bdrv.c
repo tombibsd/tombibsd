@@ -196,8 +196,17 @@ SYSINIT(i4bdev,SI_SUB_DRIVERS,SI_ORDER_MIDDLE+CDEV_MAJOR,i4b_drvinit,NULL)
 
 #ifdef __NetBSD__
 const struct cdevsw isdn_cdevsw = {
-	isdnopen, isdnclose, isdnread, nowrite, isdnioctl,
-	nostop, notty, isdnpoll, nommap, isdnkqfilter, D_OTHER
+	.d_open = isdnopen,
+	.d_close = isdnclose,
+	.d_read = isdnread,
+	.d_write = nowrite,
+	.d_ioctl = isdnioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = isdnpoll,
+	.d_mmap = nommap,
+	.d_kqfilter = isdnkqfilter,
+	.d_flag = D_OTHER
 };
 #endif /* __NetBSD__ */
 

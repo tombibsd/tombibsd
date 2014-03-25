@@ -4334,7 +4334,7 @@ bnx_rx_intr(struct bnx_softc *sc)
 	 */
 	while (sw_cons != hw_cons) {
 		struct mbuf *m;
-		struct rx_bd *rxbd;
+		struct rx_bd *rxbd __diagused;
 		unsigned int len;
 		u_int32_t status;
 

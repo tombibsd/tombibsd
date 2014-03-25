@@ -197,12 +197,27 @@ static dev_type_dump(vnddump);
 static dev_type_size(vndsize);
 
 const struct bdevsw vnd_bdevsw = {
-	vndopen, vndclose, vndstrategy, vndioctl, vnddump, vndsize, D_DISK
+	.d_open = vndopen,
+	.d_close = vndclose,
+	.d_strategy = vndstrategy,
+	.d_ioctl = vndioctl,
+	.d_dump = vnddump,
+	.d_psize = vndsize,
+	.d_flag = D_DISK
 };
 
 const struct cdevsw vnd_cdevsw = {
-	vndopen, vndclose, vndread, vndwrite, vndioctl,
-	nostop, notty, nopoll, nommap, nokqfilter, D_DISK
+	.d_open = vndopen,
+	.d_close = vndclose,
+	.d_read = vndread,
+	.d_write = vndwrite,
+	.d_ioctl = vndioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_DISK
 };
 
 static int	vnd_match(device_t, cfdata_t, void *);

@@ -32,6 +32,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/kernel.h>
 #include <sys/kmem.h>
 #include <sys/cprng.h>
+#include <sys/module.h>
 
 #include <net/bpf.h>
 #include <net/if.h>
@@ -41,13 +42,8 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <netinet/in.h>
 #include <netinet/in_var.h>
 
-#include <rump/rump.h>
-
-#include "rump_private.h"
-#include "rump_net_private.h"
-
 #include "if_virt.h"
-#include "rumpcomp_user.h"
+#include "virtif_user.h"
 
 /*
  * Virtual interface.  Uses hypercalls to shovel packets back
@@ -151,11 +147,13 @@ static int
 virtif_unclone(struct ifnet *ifp)
 {
 	struct virtif_sc *sc = ifp->if_softc;
+	int rv;
 
 	if (ifp->if_flags & IFF_UP)
 		return EBUSY;
 
-	VIFHYPER_DYING(sc->sc_viu);
+	if ((rv = VIFHYPER_DYING(sc->sc_viu)) != 0)
+		return rv;
 
 	virtif_stop(ifp, 1);
 	if_down(ifp);
@@ -296,12 +294,15 @@ virtif_start(struct ifnet *ifp)
 		}
 
 		m = m0;
-		for (i = 0; i < LB_SH && m; i++) {
-			io[i].iov_base = mtod(m, void *);
-			io[i].iov_len = m->m_len;
+		for (i = 0; i < LB_SH && m; ) {
+			if (m->m_len) {
+				io[i].iov_base = mtod(m, void *);
+				io[i].iov_len = m->m_len;
+				i++;
+			}
 			m = m->m_next;
 		}
-		if (i == LB_SH)
+		if (i == LB_SH && m)
 			panic("lazy bum");
 		bpf_mtap(ifp, m0);
 
@@ -352,8 +353,10 @@ VIF_DELIVERPKT(struct virtif_sc *sc, struct iovec *iov, size_t iovlen)
 			return;
 		}
 	}
-
 	m->m_data += align;
+	m->m_pkthdr.len -= align;
+	m->m_len -= align;
+
 	eth = mtod(m, struct ether_header *);
 	if (memcmp(eth->ether_dhost, CLLADDR(ifp->if_sadl),
 	    ETHER_ADDR_LEN) == 0) {
@@ -377,4 +380,32 @@ VIF_DELIVERPKT(struct virtif_sc *sc, struct iovec *iov, size_t iovlen)
 		m_freem(m);
 	}
 	m = NULL;
+}
+
+MODULE(MODULE_CLASS_DRIVER, if_virt, NULL);
+
+static int
+if_virt_modcmd(modcmd_t cmd, void *opaque)
+{
+	int error = 0;
+
+	switch (cmd) {
+	case MODULE_CMD_INIT:
+		if_clone_attach(&VIF_CLONER);
+		break;
+	case MODULE_CMD_FINI:
+		/*
+		 * not sure if interfaces are refcounted
+		 * and properly protected
+		 */
+#if 0
+		if_clone_detach(&VIF_CLONER);
+#else
+		error = ENOTTY;
+#endif
+		break;
+	default:
+		error = ENOTTY;
+	}
+	return error;
 }

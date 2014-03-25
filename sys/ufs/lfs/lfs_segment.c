@@ -62,6 +62,8 @@
 #include <sys/cdefs.h>
 __KERNEL_RCSID(0, "$NetBSD$");
 
+#define _VFS_VNODE_PRIVATE	/* XXX: check for VI_MARKER, this has to go */
+
 #ifdef DEBUG
 # define vndebug(vp, str) do {						\
 	if (VTOI(vp)->i_flag & IN_CLEANING)				\
@@ -508,7 +510,7 @@ lfs_writevnodes(struct lfs *fs, struct mount *mp, struct segment *sp, int op)
 		}
 
 		mutex_enter(vp->v_interlock);
-		if (vp->v_type == VNON || vismarker(vp) ||
+		if (vp->v_type == VNON || (vp->v_iflag & VI_MARKER) ||
 		    (vp->v_iflag & VI_CLEAN) != 0) {
 			mutex_exit(vp->v_interlock);
 			continue;

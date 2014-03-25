@@ -66,8 +66,17 @@ dev_type_ioctl(fbioctl);
 dev_type_mmap(fbmmap);
 
 const struct cdevsw fb_cdevsw = {
-	fbopen, fbclose, noread, nowrite, fbioctl,
-	nostop, notty, nopoll, fbmmap, nokqfilter,
+	.d_open = fbopen,
+	.d_close = fbclose,
+	.d_read = noread,
+	.d_write = nowrite,
+	.d_ioctl = fbioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = fbmmap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = 0
 };
 
 static struct fbdevice *devfb;

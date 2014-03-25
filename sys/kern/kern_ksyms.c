@@ -1135,6 +1135,15 @@ ksymsioctl(dev_t dev, u_long cmd, void *data, int fflag, struct lwp *l)
 }
 
 const struct cdevsw ksyms_cdevsw = {
-	ksymsopen, ksymsclose, ksymsread, ksymswrite, ksymsioctl,
-	nullstop, notty, nopoll, nommap, nullkqfilter, D_OTHER | D_MPSAFE
+	.d_open = ksymsopen,
+	.d_close = ksymsclose,
+	.d_read = ksymsread,
+	.d_write = ksymswrite,
+	.d_ioctl = ksymsioctl,
+	.d_stop = nullstop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nullkqfilter,
+	.d_flag = D_OTHER | D_MPSAFE
 };

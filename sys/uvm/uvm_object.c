@@ -227,7 +227,7 @@ uvm_obj_unwirepages(struct uvm_object *uobj, off_t start, off_t end)
 	mutex_exit(uobj->vmobjlock);
 }
 
-#if (defined(DDB) || defined(DEBUGPRINT)) && !defined(_RUMPKERNEL)
+#if defined(DDB) || defined(DEBUGPRINT)
 
 /*
  * uvm_object_printit: actually prints the object

@@ -121,8 +121,17 @@ dev_type_ioctl(ascioctl);
 dev_type_mmap(ascmmap);
 
 const struct cdevsw asc_cdevsw = {
-	ascopen, ascclose, ascread, ascwrite, ascioctl,
-	nostop, notty, nopoll, ascmmap, nokqfilter,
+	.d_open = ascopen,
+	.d_close = ascclose,
+	.d_read = ascread,
+	.d_write = ascwrite,
+	.d_ioctl = ascioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = ascmmap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = 0
 };
 
 static int

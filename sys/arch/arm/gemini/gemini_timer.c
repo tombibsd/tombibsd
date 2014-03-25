@@ -257,7 +257,9 @@ statintr(void *frame)
 static void
 timer_init(geminitmr_softc_t *sc, int schz, boolean_t autoload, boolean_t intr)
 {
-	disable_interrupts(I32_bit);
+	int psw;
+
+	psw = disable_interrupts(I32_bit);
 	timer_factors(sc, schz, autoload);
 	_timer_stop(sc);
 	_timer_intr_dis(sc);
@@ -265,7 +267,7 @@ timer_init(geminitmr_softc_t *sc, int schz, boolean_t autoload, boolean_t intr)
 	if (intr)
 		_timer_intr_enb(sc);
 	_timer_start(sc);
-	enable_interrupts(I32_bit);
+	restore_interrupts(psw);
 }
 
 void

@@ -62,13 +62,8 @@ main(int argc, char *argv[])
 		from_inetd = 0;
 
 	if (!from_inetd) {
-		daemon(0, 0);
-
 		(void) rpcb_unset(RQUOTAPROG, RQUOTAVERS, NULL);
 		(void) rpcb_unset(RQUOTAPROG, EXT_RQUOTAVERS, NULL);
-		(void) signal(SIGINT, cleanup);
-		(void) signal(SIGTERM, cleanup);
-		(void) signal(SIGHUP, cleanup);
 	}
 
 	openlog("rpc.rquotad", LOG_PID, LOG_DAEMON);
@@ -106,6 +101,12 @@ main(int argc, char *argv[])
 		}
 	}
 
+	if (!from_inetd) {
+		daemon(0, 0);
+		(void) signal(SIGINT, cleanup);
+		(void) signal(SIGTERM, cleanup);
+		(void) signal(SIGHUP, cleanup);
+	}
 	svc_run();
 	syslog(LOG_ERR, "svc_run returned");
 	exit(1);

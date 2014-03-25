@@ -385,11 +385,14 @@ rmixl_pcix_attach(device_t parent, device_t self, void *aux)
 	 * check PCI-X interface byteswap setup
 	 * ensure 'Match Byte Lane' is disabled
 	 */
-	uint32_t mble, mba, mbs;
+	uint32_t mble;
 	mble = RMIXL_PCIXREG_READ(RMIXL_PCIX_ECFG_XLR_MBLE);
+#ifdef PCI_DEBUG
+	uint32_t mba, mbs;
 	mba  = RMIXL_PCIXREG_READ(RMIXL_PCIX_ECFG_MATCH_BIT_ADDR);
 	mbs  = RMIXL_PCIXREG_READ(RMIXL_PCIX_ECFG_MATCH_BIT_SIZE);
 	DPRINTF(("%s: MBLE=%#x, MBA=%#x, MBS=%#x\n", __func__, mble, mba, mbs));
+#endif
 	if ((mble & __BIT(40)) != 0)
 		RMIXL_PCIXREG_WRITE(RMIXL_PCIX_ECFG_XLR_MBLE, 0);
 

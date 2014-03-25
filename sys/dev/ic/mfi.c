@@ -184,8 +184,17 @@ static dev_type_open(mfifopen);
 static dev_type_close(mfifclose);
 static dev_type_ioctl(mfifioctl);
 const struct cdevsw mfi_cdevsw = {
-	mfifopen, mfifclose, noread, nowrite, mfifioctl,
-	nostop, notty, nopoll, nommap, nokqfilter, D_OTHER
+	.d_open = mfifopen,
+	.d_close = mfifclose,
+	.d_read = noread,
+	.d_write = nowrite,
+	.d_ioctl = mfifioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_OTHER
 };
 
 extern struct cfdriver mfi_cd;

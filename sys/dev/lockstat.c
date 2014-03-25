@@ -111,8 +111,17 @@ int		lockstat_busy;
 struct timespec	lockstat_stime;
 
 const struct cdevsw lockstat_cdevsw = {
-	lockstat_open, lockstat_close, lockstat_read, nowrite, lockstat_ioctl,
-	nostop, notty, nopoll, nommap, nokqfilter, D_OTHER | D_MPSAFE
+	.d_open = lockstat_open,
+	.d_close = lockstat_close,
+	.d_read = lockstat_read,
+	.d_write = nowrite,
+	.d_ioctl = lockstat_ioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_OTHER | D_MPSAFE
 };
 
 /*

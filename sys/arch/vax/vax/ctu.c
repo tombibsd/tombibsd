@@ -99,13 +99,28 @@ dev_type_write(ctuwrite);
 dev_type_strategy(ctustrategy);
 
 const struct bdevsw ctu_bdevsw = {
-	ctuopen, ctuclose, ctustrategy, noioctl, nodump, nosize, D_TAPE
+	.d_open = ctuopen,
+	.d_close = ctuclose,
+	.d_strategy = ctustrategy,
+	.d_ioctl = noioctl,
+	.d_dump = nodump,
+	.d_psize = nosize,
+	.d_flag = D_TAPE
 };
 
 #if 0 /* not yet */
 const struct cdevsw ctu_cdevsw = {
-	ctuopen, ctuclose, cturead, ctuwrite, noioctl,
-	nostop, notty, nopoll, nommap, nokqfilter, D_TAPE
+	.d_open = ctuopen,
+	.d_close = ctuclose,
+	.d_read = cturead,
+	.d_write = ctuwrite,
+	.d_ioctl = noioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_TAPE
 };
 #endif
 

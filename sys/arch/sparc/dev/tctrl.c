@@ -88,8 +88,17 @@ dev_type_poll(tctrlpoll);
 dev_type_kqfilter(tctrlkqfilter);
 
 const struct cdevsw tctrl_cdevsw = {
-	tctrlopen, tctrlclose, noread, nowrite, tctrlioctl,
-	nostop, notty, tctrlpoll, nommap, tctrlkqfilter,
+	.d_open = tctrlopen,
+	.d_close = tctrlclose,
+	.d_read = noread,
+	.d_write = nowrite,
+	.d_ioctl = tctrlioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = tctrlpoll,
+	.d_mmap = nommap,
+	.d_kqfilter = tctrlkqfilter,
+	.d_flag = 0
 };
 
 static const char *tctrl_ext_statuses[16] = {

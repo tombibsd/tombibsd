@@ -551,6 +551,7 @@ pragmas_gcc(char *t)
 			return 0;
 		}
 		*t = u;
+		__USE(ign);
 	} else if (strcmp(t, "poison") == 0) {
 		/* currently ignore */;
 	} else if (strcmp(t, "visibility") == 0) {

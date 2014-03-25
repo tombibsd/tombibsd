@@ -229,7 +229,8 @@ npf_packet_handler(void *arg, struct mbuf **mp, ifnet_t *ifp, int di)
 	 * if session creation fails (e.g. due to unsupported protocol).
 	 */
 	if ((retfl & NPF_RULE_STATEFUL) != 0 && !se) {
-		se = npf_session_establish(&npc, &nbuf, di);
+		se = npf_session_establish(&npc, &nbuf, di,
+		    (retfl & NPF_RULE_MULTIENDS) == 0);
 		if (se) {
 			/*
 			 * Note: the reference on the rule procedure is

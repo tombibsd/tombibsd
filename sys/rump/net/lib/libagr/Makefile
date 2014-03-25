@@ -12,7 +12,7 @@ SRCS=	if_agr.c if_agrsoftc.c if_agrsubr.c if_agrtimer.c if_agrmonitor.c \
 	ieee8023ad_lacp_sm_ptx.c ieee8023ad_lacp_sm_tx.c \
 	ieee8023ad_lacp_debug.c ieee8023_tlv.c
 
-SRCS+=	component.c
+SRCS+=	agr_component.c
 
 .include <bsd.lib.mk>
 .include <bsd.klinks.mk>

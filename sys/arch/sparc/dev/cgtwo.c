@@ -104,8 +104,17 @@ dev_type_ioctl(cgtwoioctl);
 dev_type_mmap(cgtwommap);
 
 const struct cdevsw cgtwo_cdevsw = {
-	cgtwoopen, nullclose, noread, nowrite, cgtwoioctl,
-	nostop, notty, nopoll, cgtwommap, nokqfilter,
+	.d_open = cgtwoopen,
+	.d_close = nullclose,
+	.d_read = noread,
+	.d_write = nowrite,
+	.d_ioctl = cgtwoioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = cgtwommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = 0
 };
 
 /* frame buffer generic driver */

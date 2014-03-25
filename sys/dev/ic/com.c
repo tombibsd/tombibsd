@@ -215,8 +215,17 @@ static struct consdev comcons = {
 
 
 const struct cdevsw com_cdevsw = {
-	comopen, comclose, comread, comwrite, comioctl,
-	comstop, comtty, compoll, nommap, ttykqfilter, D_TTY
+	.d_open = comopen,
+	.d_close = comclose,
+	.d_read = comread,
+	.d_write = comwrite,
+	.d_ioctl = comioctl,
+	.d_stop = comstop,
+	.d_tty = comtty,
+	.d_poll = compoll,
+	.d_mmap = nommap,
+	.d_kqfilter = ttykqfilter,
+	.d_flag = D_TTY
 };
 
 /*

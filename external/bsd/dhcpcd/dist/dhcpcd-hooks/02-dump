@@ -4,4 +4,5 @@
 
 if [ "$reason" = "DUMP" ]; then
 	set | sed -ne 's/^new_//p' | sort
+	exit 0
 fi

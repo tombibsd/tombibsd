@@ -255,12 +255,27 @@ dev_type_dump(rddump);
 dev_type_size(rdsize);
 
 const struct bdevsw rd_bdevsw = {
-	rdopen, rdclose, rdstrategy, rdioctl, rddump, rdsize, D_DISK
+	.d_open = rdopen,
+	.d_close = rdclose,
+	.d_strategy = rdstrategy,
+	.d_ioctl = rdioctl,
+	.d_dump = rddump,
+	.d_psize = rdsize,
+	.d_flag = D_DISK
 };
 
 const struct cdevsw rd_cdevsw = {
-	rdopen, rdclose, rdread, rdwrite, rdioctl,
-	nostop, notty, nopoll, nommap, nokqfilter, D_DISK
+	.d_open = rdopen,
+	.d_close = rdclose,
+	.d_read = rdread,
+	.d_write = rdwrite,
+	.d_ioctl = rdioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_DISK
 };
 
 extern struct cfdriver rd_cd;

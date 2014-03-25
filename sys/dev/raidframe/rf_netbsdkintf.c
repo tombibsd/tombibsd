@@ -205,13 +205,27 @@ dev_type_dump(raiddump);
 dev_type_size(raidsize);
 
 const struct bdevsw raid_bdevsw = {
-	raidopen, raidclose, raidstrategy, raidioctl,
-	raiddump, raidsize, D_DISK
+	.d_open = raidopen,
+	.d_close = raidclose,
+	.d_strategy = raidstrategy,
+	.d_ioctl = raidioctl,
+	.d_dump = raiddump,
+	.d_psize = raidsize,
+	.d_flag = D_DISK
 };
 
 const struct cdevsw raid_cdevsw = {
-	raidopen, raidclose, raidread, raidwrite, raidioctl,
-	nostop, notty, nopoll, nommap, nokqfilter, D_DISK
+	.d_open = raidopen,
+	.d_close = raidclose,
+	.d_read = raidread,
+	.d_write = raidwrite,
+	.d_ioctl = raidioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_DISK
 };
 
 static struct dkdriver rf_dkdriver = { raidstrategy, minphys };

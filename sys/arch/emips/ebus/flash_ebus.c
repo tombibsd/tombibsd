@@ -1396,12 +1396,27 @@ dev_type_dump(eflashdump);
 dev_type_size(eflashsize);
 
 const struct bdevsw eflash_bdevsw = {
-	eflashopen, eflashclose, eflashstrategy, eflashioctl, eflashdump, eflashsize, D_DISK
+	.d_open = eflashopen,
+	.d_close = eflashclose,
+	.d_strategy = eflashstrategy,
+	.d_ioctl = eflashioctl,
+	.d_dump = eflashdump,
+	.d_psize = eflashsize,
+	.d_flag = D_DISK
 };
 
 const struct cdevsw eflash_cdevsw = {
-	eflashopen, eflashclose, eflashread, eflashwrite, eflashioctl,
-	nostop, notty, nopoll, nommap, nokqfilter, D_DISK
+	.d_open = eflashopen,
+	.d_close = eflashclose,
+	.d_read = eflashread,
+	.d_write = eflashwrite,
+	.d_ioctl = eflashioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_DISK
 };
 
 void  eflashgetdefaultlabel(struct eflash_softc *, struct disklabel *);

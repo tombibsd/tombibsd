@@ -971,7 +971,9 @@ rump_vop_setattr(void *v)
 		size_t copylen, newlen;
 
 		newlen = vap->va_size;
-		newdata = rump_hypermalloc(newlen, 0, true, "rumpfs");
+		newdata = rump_hypermalloc(newlen, 0, false, "rumpfs");
+		if (newdata == NULL)
+			return ENOSPC;
 
 		copylen = MIN(rn->rn_dlen, newlen);
 		memset(newdata, 0, newlen);
@@ -1465,7 +1467,9 @@ rump_vop_write(void *v)
 		oldlen = rn->rn_dlen;
 		olddata = rn->rn_data;
 
-		rn->rn_data = rump_hypermalloc(newlen, 0, true, "rumpfs");
+		rn->rn_data = rump_hypermalloc(newlen, 0, false, "rumpfs");
+		if (rn->rn_data == NULL)
+			return ENOSPC;
 		rn->rn_dlen = newlen;
 		memset(rn->rn_data, 0, newlen);
 		memcpy(rn->rn_data, olddata, oldlen);

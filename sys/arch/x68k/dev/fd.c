@@ -271,12 +271,27 @@ dev_type_ioctl(fdioctl);
 dev_type_strategy(fdstrategy);
 
 const struct bdevsw fd_bdevsw = {
-	fdopen, fdclose, fdstrategy, fdioctl, nodump, nosize, D_DISK
+	.d_open = fdopen,
+	.d_close = fdclose,
+	.d_strategy = fdstrategy,
+	.d_ioctl = fdioctl,
+	.d_dump = nodump,
+	.d_psize = nosize,
+	.d_flag = D_DISK
 };
 
 const struct cdevsw fd_cdevsw = {
-	fdopen, fdclose, fdread, fdwrite, fdioctl,
-	nostop, notty, nopoll, nommap, nokqfilter, D_DISK
+	.d_open = fdopen,
+	.d_close = fdclose,
+	.d_read = fdread,
+	.d_write = fdwrite,
+	.d_ioctl = fdioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_DISK
 };
 
 void fdstart(struct fd_softc *);

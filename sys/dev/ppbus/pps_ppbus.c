@@ -62,8 +62,17 @@ static dev_type_open(ppsopen);
 static dev_type_close(ppsclose);
 static dev_type_ioctl(ppsioctl);
 const struct cdevsw pps_cdevsw = {
-	ppsopen, ppsclose, noread, nowrite, ppsioctl,
-	nostop, notty, nopoll, nommap, nokqfilter, D_OTHER
+	.d_open = ppsopen,
+	.d_close = ppsclose,
+	.d_read = noread,
+	.d_write = nowrite,
+	.d_ioctl = ppsioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_OTHER
 };
 
 static void ppsintr(void *arg);

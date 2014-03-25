@@ -57,11 +57,11 @@ static const struct {
  */
 ATF_LIBM_TEST(atan_nan, "Test atan/atanf(NaN) == NaN")
 {
-#ifdef __vax__
-	atf_tc_skip("no NaN in vax floating point format");
-#else
+#ifdef T_LIBM_NAN
 	T_LIBM_CHECK_NAN(0, atan, T_LIBM_NAN);
 	T_LIBM_CHECK_NAN(0, atanf, T_LIBM_NAN);
+#else
+	atf_tc_skip("no NaN on this machine");
 #endif
 }
 

@@ -105,8 +105,17 @@ dev_type_ioctl(panelioctl);
 dev_type_poll(panelpoll);
 
 const struct cdevsw panel_cdevsw = {
-	panelopen, panelclose, panelread, panelwrite, panelioctl,
-	nostop, notty, panelpoll, nommap,
+	.d_open = panelopen,
+	.d_close = panelclose,
+	.d_read = panelread,
+	.d_write = panelwrite,
+	.d_ioctl = panelioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = panelpoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = 0
 };
 
 CFATTACH_DECL_NEW(panel, sizeof(struct panel_softc),

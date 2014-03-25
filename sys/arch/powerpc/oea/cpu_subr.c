@@ -1218,11 +1218,9 @@ cpu_spinup(device_t self, struct cpu_info *ci)
 {
 	volatile struct cpu_hatch_data hatch_data, *h = &hatch_data;
 	struct pglist mlist;
-	int i, error, pvr, vers;
+	int i, error;
 	char *hp;
 
-	pvr = mfpvr();
-	vers = pvr >> 16;
 	KASSERT(ci != curcpu());
 
 	/* Now allocate a hatch stack */

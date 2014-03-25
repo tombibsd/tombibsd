@@ -142,12 +142,27 @@ dev_type_dump(wddump);
 dev_type_size(wdsize);
 
 const struct bdevsw wd_bdevsw = {
-	wdopen, wdclose, wdstrategy, wdioctl, wddump, wdsize, D_DISK
+	.d_open = wdopen,
+	.d_close = wdclose,
+	.d_strategy = wdstrategy,
+	.d_ioctl = wdioctl,
+	.d_dump = wddump,
+	.d_psize = wdsize,
+	.d_flag = D_DISK
 };
 
 const struct cdevsw wd_cdevsw = {
-	wdopen, wdclose, wdread, wdwrite, wdioctl,
-	nostop, notty, nopoll, nommap, nokqfilter, D_DISK
+	.d_open = wdopen,
+	.d_close = wdclose,
+	.d_read = wdread,
+	.d_write = wdwrite,
+	.d_ioctl = wdioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_DISK
 };
 
 /*

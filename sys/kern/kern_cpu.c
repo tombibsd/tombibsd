@@ -102,9 +102,17 @@ static void	cpu_xc_offline(struct cpu_info *);
 dev_type_ioctl(cpuctl_ioctl);
 
 const struct cdevsw cpuctl_cdevsw = {
-	nullopen, nullclose, nullread, nullwrite, cpuctl_ioctl,
-	nullstop, notty, nopoll, nommap, nokqfilter,
-	D_OTHER | D_MPSAFE
+	.d_open = nullopen,
+	.d_close = nullclose,
+	.d_read = nullread,
+	.d_write = nullwrite,
+	.d_ioctl = cpuctl_ioctl,
+	.d_stop = nullstop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_OTHER | D_MPSAFE
 };
 
 kmutex_t	cpu_lock		__cacheline_aligned;

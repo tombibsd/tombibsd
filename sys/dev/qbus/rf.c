@@ -117,27 +117,27 @@ dev_type_size(rfsize);
 
 /* Entries in block and character major device number switch table. */
 const struct bdevsw rf_bdevsw = {
-	rfopen,
-	rfclose,
-	rfstrategy,
-	rfioctl,
-	rfdump,
-	rfsize,
-	D_DISK
+	.d_open = rfopen,
+	.d_close = rfclose,
+	.d_strategy = rfstrategy,
+	.d_ioctl = rfioctl,
+	.d_dump = rfdump,
+	.d_psize = rfsize,
+	.d_flag = D_DISK
 };
 
 const struct cdevsw rf_cdevsw = {
-	rfopen,
-	rfclose,
-	rfread,
-	rfwrite,
-	rfioctl,
-	nostop,
-	notty,
-	nopoll,
-	nommap,
-	nokqfilter,
-	D_DISK
+	.d_open = rfopen,
+	.d_close = rfclose,
+	.d_read = rfread,
+	.d_write = rfwrite,
+	.d_ioctl = rfioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_DISK
 };
 
 

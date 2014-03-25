@@ -8,5 +8,4 @@ SRCS+=	bcopy.S memcpy.S memmove.S
 SRCS+=	spcopy.S
 .endif
 
-SRCS+= ashrdi3.c divdi3.c    
 SRCS+= ffs.c bswap16.c bswap32.c

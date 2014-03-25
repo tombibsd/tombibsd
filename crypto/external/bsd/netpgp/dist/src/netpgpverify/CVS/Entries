@@ -16,7 +16,7 @@
 /bufgap.h/1.1/Sun Mar  9 00:15:45 2014/-kk/
 /bzlib.c/1.2/Sun Mar  9 07:01:42 2014/-kk/
 /bzlib.h/1.1/Sun Mar  9 00:15:45 2014/-kk/
-/bzlib_private.h/1.1/Sun Mar  9 00:15:45 2014/-kk/
+/bzlib_private.h/1.2/Tue Mar 25 02:32:08 2014/-kk/
 /chk.sh/1.1/Sun Mar  9 00:15:45 2014/-kk/
 /configure/1.1/Sun Mar  9 00:15:45 2014/-kk/
 /data.gpg/1.1/Sun Mar  9 00:15:45 2014/-kk/
@@ -26,12 +26,12 @@
 /digest.c/1.1/Sun Mar  9 00:15:45 2014/-kk/
 /digest.h/1.1/Sun Mar  9 00:15:45 2014/-kk/
 /libnetpgpverify.3/1.1/Sun Mar  9 00:15:45 2014/-kk/
-/libverify.c/1.1/Sun Mar  9 00:15:45 2014/-kk/
+/libverify.c/1.4/Tue Mar 25 02:32:08 2014/-kk/
 /main.c/1.4/Fri Mar 14 04:22:24 2014/-kk/
 /md5.h/1.1/Sun Mar  9 00:15:45 2014/-kk/
 /md5c.c/1.1/Sun Mar  9 00:15:45 2014/-kk/
 /misc.c/1.1/Sun Mar  9 00:15:45 2014/-kk/
-/misc.h/1.1/Sun Mar  9 00:15:45 2014/-kk/
+/misc.h/1.2/Tue Mar 25 02:32:08 2014/-kk/
 /netpgpverify.1/1.8/Fri Mar 14 04:22:24 2014/-kk/
 /pgpsum.c/1.1/Sun Mar  9 00:15:45 2014/-kk/
 /pgpsum.h/1.1/Sun Mar  9 00:15:45 2014/-kk/

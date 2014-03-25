@@ -52,7 +52,7 @@ COPYHEADERS+=	${_dst} ${_src}
 
 .for _h _s in ${COPYHEADERS}
 ${_h}: ${_s}
-	cp -p ${.ALLSRC} ${.TARGET}
+	cp -pf ${.ALLSRC} ${.TARGET}
 .endfor
 
 .PATH: ${.CURDIR}/../../arch/${GCC_MACHINE_ARCH} \

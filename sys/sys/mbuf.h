@@ -171,12 +171,12 @@ struct m_hdr {
  * packets during reassembly.
  */
 struct	pkthdr {
-	struct	ifnet *rcvif;		/* rcv interface */
-	SLIST_HEAD(packet_tags, m_tag) tags; /* list of packet tags */
-	int	len;			/* total packet length */
-	int	csum_flags;		/* checksum flags */
-	uint32_t csum_data;		/* checksum data */
-	u_int	segsz;			/* segment size */
+	struct ifnet	*rcvif;			/* rcv interface */
+	SLIST_HEAD(packet_tags, m_tag) tags;	/* list of packet tags */
+	int		len;			/* total packet length */
+	int		csum_flags;		/* checksum flags */
+	uint32_t	csum_data;		/* checksum data */
+	u_int		segsz;			/* segment size */
 };
 
 /*

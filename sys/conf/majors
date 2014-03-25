@@ -29,7 +29,7 @@ device-major amr       char 176		   amr		vector=1
 device-major lockstat  char 177		   lockstat	single
 device-major putter    char 178		   putter
 device-major srt       char 179		   srt		
-device-major drm       char 180		   drmbase
+device-major drm       char 180		   drmbase | drmkms
 device-major bio       char 181		   bio		single
 device-major altmem    char 182 block 182  altmem	
 device-major twa       char 187		   twa

@@ -157,6 +157,15 @@ cttykqfilter(dev_t dev, struct knote *kn)
 }
 
 const struct cdevsw ctty_cdevsw = {
-	cttyopen, nullclose, cttyread, cttywrite, cttyioctl,
-	nullstop, notty, cttypoll, nommap, cttykqfilter, D_TTY
+	.d_open = cttyopen,
+	.d_close = nullclose,
+	.d_read = cttyread,
+	.d_write = cttywrite,
+	.d_ioctl = cttyioctl,
+	.d_stop = nullstop,
+	.d_tty = notty,
+	.d_poll = cttypoll,
+	.d_mmap = nommap,
+	.d_kqfilter = cttykqfilter,
+	.d_flag = D_TTY
 };

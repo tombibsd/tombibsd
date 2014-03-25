@@ -120,15 +120,21 @@ dev_type_mmap(esh_fpmmap);
 dev_type_strategy(esh_fpstrategy);
 
 const struct cdevsw esh_cdevsw = {
-	esh_fpopen, esh_fpclose, esh_fpread, esh_fpwrite, nullioctl,
-	nostop, notty, nullpoll,
+	.d_open = esh_fpopen,
+	.d_close = esh_fpclose,
+	.d_read = esh_fpread,
+	.d_write = esh_fpwrite,
+	.d_ioctl = nullioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nullpoll,
 #ifdef MORE_DONE
-	esh_fpmmap,
+	.d_mmap = esh_fpmmap,
 #else
-	nommap,
+	.d_mmap = nommap,
 #endif
-	nullkqfilter,
-	D_OTHER,
+	.d_kqfilter = nullkqfilter,
+	.d_flag = D_OTHER
 };
 
 /* General routines, not externally visable */

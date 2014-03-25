@@ -344,8 +344,17 @@ dev_type_poll(qdpoll);
 dev_type_kqfilter(qdkqfilter);
 
 const struct cdevsw qd_cdevsw = {
-	qdopen, qdclose, qdread, qdwrite, qdioctl,
-	qdstop, notty, qdpoll, nommap, qdkqfilter,
+	.d_open = qdopen,
+	.d_close = qdclose,
+	.d_read = qdread,
+	.d_write = qdwrite,
+	.d_ioctl = qdioctl,
+	.d_stop = qdstop,
+	.d_tty = notty,
+	.d_poll = qdpoll,
+	.d_mmap = nommap,
+	.d_kqfilter = qdkqfilter,
+	.d_flag = 0
 };
 
 /*

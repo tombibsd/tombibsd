@@ -125,8 +125,17 @@ dev_type_write(parwrite);
 dev_type_ioctl(parioctl);
 
 const struct cdevsw par_cdevsw = {
-	paropen, parclose, noread, parwrite, parioctl,
-	nostop, notty, nopoll, nommap, nokqfilter,
+	.d_open = paropen,
+	.d_close = parclose,
+	.d_read = noread,
+	.d_write = parwrite,
+	.d_ioctl = parioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = 0
 };
 
 int

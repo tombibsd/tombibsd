@@ -65,6 +65,8 @@
 #define IST_EDGE_BOTH	6
 #define IST_SOFT	7
 
+#define IST_MPSAFE	0x100	/* interrupt is MPSAFE */
+
 #ifndef _LOCORE
 
 #include <sys/queue.h>

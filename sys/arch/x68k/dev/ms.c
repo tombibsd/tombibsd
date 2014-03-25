@@ -163,8 +163,17 @@ dev_type_poll(mspoll);
 dev_type_kqfilter(mskqfilter);
 
 const struct cdevsw ms_cdevsw ={
-	msopen, msclose, msread, nowrite, msioctl,
-	nostop, notty, mspoll, nommap, mskqfilter,
+	.d_open = msopen,
+	.d_close = msclose,
+	.d_read = msread,
+	.d_write = nowrite,
+	.d_ioctl = msioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = mspoll,
+	.d_mmap = nommap,
+	.d_kqfilter = mskqfilter,
+	.d_flag = 0
 };
 
 /*

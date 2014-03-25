@@ -665,7 +665,6 @@ ra_gpio_attach(device_t parent, device_t self, void *aux)
 static void
 ra_gpio_pin_init(ra_gpio_softc_t *sc, int pin)
 {
-	u_int gpio_mode;
 	uint32_t r;
 
 	sc->sc_pins[pin].pin_caps = 0;
@@ -692,7 +691,6 @@ ra_gpio_pin_init(ra_gpio_softc_t *sc, int pin)
 	sc->sc_pins[pin].pin_caps = GPIO_PIN_INPUT | GPIO_PIN_OUTPUT |
 	    GPIO_PIN_INVIN | GPIO_PIN_INVOUT;
 	sc->sc_pins[pin].pin_state = GPIO_PIN_INPUT;
-	gpio_mode = 0;
 
 #if defined(SLICKROCK)
 	r = sy_read(sc, RA_SYSCTL_GPIOMODE);
@@ -706,7 +704,9 @@ ra_gpio_pin_init(ra_gpio_softc_t *sc, int pin)
 	 * GPIO0 doesn't have an associated MODE register.
 	 */
 	if (pin != 0) {
-		for (gpio_mode=0; gpio_mode < GPIO_MODE_SETTINGS; gpio_mode++) {
+		u_int gpio_mode = 0;
+
+		for (gpio_mode; gpio_mode < GPIO_MODE_SETTINGS; gpio_mode++) {
 			if (pin <= pin_share[gpio_mode]) {
 				r = sy_read(sc, RA_SYSCTL_GPIOMODE);
 				if (10 == pin) {

@@ -202,6 +202,12 @@ label:	ASCIZ msg;				\
 #endif /* __STDC__ */
 
 
+#ifdef __ELF__
+#define RCSID(name)		.pushsection ".ident"; .asciz name; .popsection
+#else
+#define RCSID(name)		.asciz name
+#endif
+
 /*
  * Kernel RCS ID tag and copyright macros
  */

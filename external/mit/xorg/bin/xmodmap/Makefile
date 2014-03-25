@@ -5,7 +5,7 @@
 PROG=	xmodmap
 SRCS=	xmodmap.c pf.c handle.c exec.c
 
-CPPFLAGS+=	-I${X11SRCDIR.${PROG}}/../include
+CPPFLAGS+=	-I${X11SRCDIR.${PROG}}/../include -DHAVE_CONFIG_H
 
 LDADD+=	-lX11
 DPADD+=	${LIBX11}

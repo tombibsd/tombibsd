@@ -67,8 +67,17 @@ dev_type_poll(irframepoll);
 dev_type_kqfilter(irframekqfilter);
 
 const struct cdevsw irframe_cdevsw = {
-	irframeopen, irframeclose, irframeread, irframewrite, irframeioctl,
-	nostop, notty, irframepoll, nommap, irframekqfilter, D_OTHER,
+	.d_open = irframeopen,
+	.d_close = irframeclose,
+	.d_read = irframeread,
+	.d_write = irframewrite,
+	.d_ioctl = irframeioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = irframepoll,
+	.d_mmap = nommap,
+	.d_kqfilter = irframekqfilter,
+	.d_flag = D_OTHER
 };
 
 int irframe_match(device_t parent, cfdata_t match, void *aux);

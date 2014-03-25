@@ -248,8 +248,17 @@ dev_type_tty(mfcstty);
 dev_type_poll(mfcspoll);
 
 const struct cdevsw mfcs_cdevsw = {
-	mfcsopen, mfcsclose, mfcsread, mfcswrite, mfcsioctl,
-	mfcsstop, mfcstty, mfcspoll, nommap, ttykqfilter, D_TTY
+	.d_open = mfcsopen,
+	.d_close = mfcsclose,
+	.d_read = mfcsread,
+	.d_write = mfcswrite,
+	.d_ioctl = mfcsioctl,
+	.d_stop = mfcsstop,
+	.d_tty = mfcstty,
+	.d_poll = mfcspoll,
+	.d_mmap = nommap,
+	.d_kqfilter = ttykqfilter,
+	.d_flag = D_TTY
 };
 
 int	mfcs_active;

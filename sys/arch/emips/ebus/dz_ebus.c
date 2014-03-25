@@ -111,8 +111,17 @@ dev_type_tty(dztty);
 dev_type_poll(dzpoll);
 
 const struct cdevsw dz_cdevsw = {
-	dzopen, dzclose, dzread, dzwrite, dzioctl,
-	dzstop, dztty, dzpoll, nommap, ttykqfilter, D_TTY
+	.d_open = dzopen,
+	.d_close = dzclose,
+	.d_read = dzread,
+	.d_write = dzwrite,
+	.d_ioctl = dzioctl,
+	.d_stop = dzstop,
+	.d_tty = dztty,
+	.d_poll = dzpoll,
+	.d_mmap = nommap,
+	.d_kqfilter = ttykqfilter,
+	.d_flag = D_TTY
 };
 
 int

@@ -111,8 +111,17 @@ dev_type_poll(vc_nb_poll);
 dev_type_kqfilter(vc_nb_kqfilter);
 
 const struct cdevsw vcoda_cdevsw = {
-	vc_nb_open, vc_nb_close, vc_nb_read, vc_nb_write, vc_nb_ioctl,
-	nostop, notty, vc_nb_poll, nommap, vc_nb_kqfilter, D_OTHER,
+	.d_open = vc_nb_open,
+	.d_close = vc_nb_close,
+	.d_read = vc_nb_read,
+	.d_write = vc_nb_write,
+	.d_ioctl = vc_nb_ioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = vc_nb_poll,
+	.d_mmap = nommap,
+	.d_kqfilter = vc_nb_kqfilter,
+	.d_flag = D_OTHER,
 };
 
 struct vmsg {

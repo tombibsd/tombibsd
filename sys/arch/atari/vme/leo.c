@@ -108,8 +108,17 @@ dev_type_ioctl(leoioctl);
 dev_type_mmap(leommap);
 
 const struct cdevsw leo_cdevsw = {
-	leoopen, leoclose, leomove, leomove, leoioctl,
-	nostop, notty, nopoll, leommap, nokqfilter,
+	.d_open = leoopen,
+	.d_close = leoclose,
+	.d_read = leomove,
+	.d_write = leomove,
+	.d_ioctl = leoioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = leommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = 0
 };
 
 static int

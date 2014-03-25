@@ -182,8 +182,17 @@ dev_type_tty(at91dbgu_tty);
 dev_type_poll(at91dbgu_poll);
 
 const struct cdevsw at91dbgu_cdevsw = {
-	at91dbgu_open, at91dbgu_close, at91dbgu_read, at91dbgu_write, at91dbgu_ioctl,
-	at91dbgu_stop, at91dbgu_tty, at91dbgu_poll, nommap, ttykqfilter, D_TTY
+	.d_open = at91dbgu_open,
+	.d_close = at91dbgu_close,
+	.d_read = at91dbgu_read,
+	.d_write = at91dbgu_write,
+	.d_ioctl = at91dbgu_ioctl,
+	.d_stop = at91dbgu_stop,
+	.d_tty = at91dbgu_tty,
+	.d_poll = at91dbgu_poll,
+	.d_mmap = nommap,
+	.d_kqfilter = ttykqfilter,
+	.d_flag = D_TTY
 };
 
 struct consdev at91dbgu_cons = {

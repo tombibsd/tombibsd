@@ -49,6 +49,23 @@ struct ipovly {
 } __packed;
 
 /*
+ * IP Flow structure
+ */
+struct ipflow {
+	LIST_ENTRY(ipflow) ipf_list;	/* next in active list */
+	LIST_ENTRY(ipflow) ipf_hash;	/* next ipflow in bucket */
+	struct in_addr ipf_dst;		/* destination address */
+	struct in_addr ipf_src;		/* source address */
+	uint8_t ipf_tos;		/* type-of-service */
+	struct route ipf_ro;		/* associated route entry */
+	u_long ipf_uses;		/* number of uses in this period */
+	u_long ipf_last_uses;		/* number of uses in last period */
+	u_long ipf_dropped;		/* ENOBUFS retured by if_output */
+	u_long ipf_errors;		/* other errors returned by if_output */
+	u_int ipf_timer;		/* lifetime timer */
+};
+
+/*
  * IP sequence queue structure.
  *
  * XXX -- The following explains why the ipqe_m field is here, for TCP's use:
@@ -222,7 +239,7 @@ int	 rip_usrreq(struct socket *,
 	    int, struct mbuf *, struct mbuf *, struct mbuf *, struct lwp *);
 int	ipflow_init(int);
 void	ipflow_poolinit(void);
-void	ipflow_prune(void);
+struct ipflow *ipflow_reap(bool);
 void	ipflow_create(const struct route *, struct mbuf *);
 void	ipflow_slowtimo(void);
 int	ipflow_invalidate_all(int);

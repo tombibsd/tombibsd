@@ -8,6 +8,6 @@
 #define __ELF__
 #endif
 
-#define	__ALIGNBYTES		15
+#define	__ALIGNBYTES		((size_t)15)
 
 #endif /* !_MACHINE_CDEFS_H_ */

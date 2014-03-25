@@ -11,7 +11,8 @@ SRCS+= bzlib.c zlib.c
 
 SRCS+= md5c.c rmd160.c sha1.c sha2.c tiger.c
 
-CPPFLAGS+=-I${.CURDIR} ${EXTDIST}/src/netpgpverify
+CPPFLAGS+=-I${.CURDIR} -I${EXTDIST}/src/netpgpverify
+COPTS.libverify.c+= -Wno-format-nonliteral
 
 .ifndef PRODUCTION
 CPPFLAGS+=-g -O0

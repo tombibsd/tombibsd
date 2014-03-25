@@ -331,8 +331,17 @@ static dev_type_tty(dcmtty);
 static dev_type_poll(dcmpoll);
 
 const struct cdevsw dcm_cdevsw = {
-	dcmopen, dcmclose, dcmread, dcmwrite, dcmioctl,
-	dcmstop, dcmtty, dcmpoll, nommap, ttykqfilter, D_TTY
+	.d_open = dcmopen,
+	.d_close = dcmclose,
+	.d_read = dcmread,
+	.d_write = dcmwrite,
+	.d_ioctl = dcmioctl,
+	.d_stop = dcmstop,
+	.d_tty = dcmtty,
+	.d_poll = dcmpoll,
+	.d_mmap = nommap,
+	.d_kqfilter = ttykqfilter,
+	.d_flag = D_TTY
 };
 
 static int

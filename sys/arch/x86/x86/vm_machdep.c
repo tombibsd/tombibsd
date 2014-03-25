@@ -270,7 +270,7 @@ paddr_t
 kvtop(void *addr)
 {
 	paddr_t pa;
-	bool ret;
+	bool ret __diagused;
 
 	ret = pmap_extract(pmap_kernel(), (vaddr_t)addr, &pa);
 	KASSERT(ret == true);

@@ -177,8 +177,17 @@ dev_type_tty(txcomtty);
 dev_type_poll(txcompoll);
 
 const struct cdevsw txcom_cdevsw = {
-	txcomopen, txcomclose, txcomread, txcomwrite, txcomioctl,
-	txcomstop, txcomtty, txcompoll, nommap, ttykqfilter, D_TTY
+	.d_open = txcomopen,
+	.d_close = txcomclose,
+	.d_read = txcomread,
+	.d_write = txcomwrite,
+	.d_ioctl = txcomioctl,
+	.d_stop = txcomstop,
+	.d_tty = txcomtty,
+	.d_poll = txcompoll,
+	.d_mmap = nommap,
+	.d_kqfilter = ttykqfilter,
+	.d_flag = D_TTY
 };
 
 int

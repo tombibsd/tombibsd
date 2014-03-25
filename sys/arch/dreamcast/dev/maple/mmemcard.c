@@ -189,13 +189,27 @@ dev_type_ioctl(mmemioctl);
 dev_type_strategy(mmemstrategy);
 
 const struct bdevsw mmem_bdevsw = {
-	mmemopen, mmemclose, mmemstrategy, mmemioctl, nodump,
-	nosize, D_DISK
+	.d_open = mmemopen,
+	.d_close = mmemclose,
+	.d_strategy = mmemstrategy,
+	.d_ioctl = mmemioctl,
+	.d_dump = nodump,
+	.d_psize = nosize,
+	.d_flag = D_DISK
 };
 
 const struct cdevsw mmem_cdevsw = {
-	mmemopen, mmemclose, mmemread, mmemwrite, mmemioctl,
-	nostop, notty, nopoll, nommap, nokqfilter, D_DISK
+	.d_open = mmemopen,
+	.d_close = mmemclose,
+	.d_read = mmemread,
+	.d_write = mmemwrite,
+	.d_ioctl = mmemioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_DISK
 };
 
 CFATTACH_DECL_NEW(mmem, sizeof(struct mmem_softc),

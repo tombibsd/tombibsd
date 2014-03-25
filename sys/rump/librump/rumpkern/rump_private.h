@@ -152,4 +152,8 @@ void	rump_consdev_init(void);
 
 void	rump_hyperentropy_init(void);
 
+void	rump_lwproc_init(void);
+void	rump_lwproc_curlwp_set(struct lwp *);
+void	rump_lwproc_curlwp_clear(struct lwp *);
+
 #endif /* _SYS_RUMP_PRIVATE_H_ */

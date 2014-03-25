@@ -157,12 +157,27 @@ static dev_type_dump(sddump);
 static dev_type_size(sdsize);
 
 const struct bdevsw sd_bdevsw = {
-	sdopen, sdclose, sdstrategy, sdioctl, sddump, sdsize, D_DISK
+	.d_open = sdopen,
+	.d_close = sdclose,
+	.d_strategy = sdstrategy,
+	.d_ioctl = sdioctl,
+	.d_dump = sddump,
+	.d_psize = sdsize,
+	.d_flag = D_DISK
 };
 
 const struct cdevsw sd_cdevsw = {
-	sdopen, sdclose, sdread, sdwrite, sdioctl,
-	nostop, notty, nopoll, nommap, nokqfilter, D_DISK
+	.d_open = sdopen,
+	.d_close = sdclose,
+	.d_read = sdread,
+	.d_write = sdwrite,
+	.d_ioctl = sdioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_DISK
 };
 
 static struct dkdriver sddkdriver = { sdstrategy, sdminphys };

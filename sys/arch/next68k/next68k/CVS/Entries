@@ -5,7 +5,7 @@
 /genassym.cf/1.26/Fri Jan 14 02:06:29 2011/-kk/
 /isr.c/1.28/Mon Dec 20 00:25:40 2010/-kk/
 /isr.h/1.7/Mon Apr 28 20:23:30 2008/-kk/
-/locore.s/1.64/Fri Mar 14 04:28:17 2014/-kk/
+/locore.s/1.65/Tue Mar 25 02:35:28 2014/-kk/
 /machdep.c/1.109/Sat Aug 11 01:21:04 2012/-kk/
 /mainbus.c/1.11/Sun Jun  5 17:03:19 2011/-kk/
 /nextrom.c/1.25/Sat Aug 11 01:21:04 2012/-kk/

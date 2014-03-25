@@ -70,8 +70,17 @@ CFATTACH_DECL_NEW(bthub, 0,
 dev_type_ioctl(bthubioctl);
 
 const struct cdevsw bthub_cdevsw = {
-	nullopen, nullclose, noread, nowrite, bthubioctl,
-	nostop, notty, nopoll, nommap, nokqfilter, D_OTHER,
+	.d_open = nullopen,
+	.d_close = nullclose,
+	.d_read = noread,
+	.d_write = nowrite,
+	.d_ioctl = bthubioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_OTHER,
 };
 
 /* bthub functions */

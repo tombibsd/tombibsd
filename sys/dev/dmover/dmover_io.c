@@ -133,9 +133,17 @@ void	dmoverioattach(int);
 dev_type_open(dmoverioopen);
 
 const struct cdevsw dmoverio_cdevsw = {
-	dmoverioopen, noclose, noread, nowrite, noioctl,
-	nostop, notty, nopoll, nommap, nokqfilter,
-	D_OTHER
+	.d_open = dmoverioopen,
+	.d_close = noclose,
+	.d_read = noread,
+	.d_write = nowrite,
+	.d_ioctl = noioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_OTHER
 };
 
 /*

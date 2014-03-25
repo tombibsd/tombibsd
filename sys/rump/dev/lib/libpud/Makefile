@@ -7,7 +7,7 @@ LIB=	rumpdev_pud
 
 SRCS=	pud.c pud_dev.c
 
-SRCS+=	component.c
+SRCS+=	pud_component.c
 
 CPPFLAGS+=	-I${RUMPTOP}/librump/rumpvfs
 

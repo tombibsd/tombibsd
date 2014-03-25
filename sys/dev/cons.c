@@ -67,8 +67,17 @@ dev_type_kqfilter(cnkqfilter);
 static bool cn_redirect(dev_t *, int, int *);
 
 const struct cdevsw cons_cdevsw = {
-	cnopen, cnclose, cnread, cnwrite, cnioctl,
-	nostop, notty, cnpoll, nommap, cnkqfilter, D_TTY
+	.d_open = cnopen,
+	.d_close = cnclose,
+	.d_read = cnread,
+	.d_write = cnwrite,
+	.d_ioctl = cnioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = cnpoll,
+	.d_mmap = nommap,
+	.d_kqfilter = cnkqfilter,
+	.d_flag = D_TTY
 };
 
 struct	tty *constty = NULL;	/* virtual console output device */

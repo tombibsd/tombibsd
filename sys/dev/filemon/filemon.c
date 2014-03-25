@@ -51,7 +51,6 @@ static dev_type_open(filemon_open);
 
 struct cdevsw filemon_cdevsw = {
 	.d_open = filemon_open,
-	.d_flag = D_MPSAFE,
 	.d_close = noclose,
 	.d_read = noread,
 	.d_write = nowrite,
@@ -61,6 +60,7 @@ struct cdevsw filemon_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = nommap,
 	.d_kqfilter = nokqfilter,
+	.d_flag = D_MPSAFE
 };
 
 static int filemon_ioctl(struct file *, u_long, void *);

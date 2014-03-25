@@ -116,8 +116,17 @@ CFATTACH_DECL_NEW(amr, sizeof(struct amr_softc),
     amr_match, amr_attach, NULL, NULL);
 
 const struct cdevsw amr_cdevsw = {
-	amropen, amrclose, noread, nowrite, amrioctl,
-	nostop, notty, nopoll, nommap, nokqfilter, D_OTHER
+	.d_open = amropen,
+	.d_close = amrclose,
+	.d_read = noread,
+	.d_write = nowrite,
+	.d_ioctl = amrioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_OTHER
 };      
 
 extern struct   cfdriver amr_cd;

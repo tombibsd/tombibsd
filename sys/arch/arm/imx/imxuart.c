@@ -338,8 +338,17 @@ dev_type_tty(imxutty);
 dev_type_poll(imxupoll);
 
 const struct cdevsw imxcom_cdevsw = {
-	imxuopen, imxuclose, imxuread, imxuwrite, imxuioctl,
-	imxustop, imxutty, imxupoll, nommap, ttykqfilter, D_TTY
+	.d_open = imxuopen,
+	.d_close = imxuclose,
+	.d_read = imxuread,
+	.d_write = imxuwrite,
+	.d_ioctl = imxuioctl,
+	.d_stop = imxustop,
+	.d_tty = imxutty,
+	.d_poll = imxupoll,
+	.d_mmap = nommap,
+	.d_kqfilter = ttykqfilter,
+	.d_flag = D_TTY
 };
 
 /*

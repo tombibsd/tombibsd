@@ -100,6 +100,10 @@ enum rump_etfs_type {
 _BEGIN_DECLS
 #endif
 
+int	rump_getversion(void);
+int	rump_pub_getversion(void); /* compat */
+int	rump_nativeabi_p(void);
+
 int	rump_boot_gethowto(void);
 void	rump_boot_sethowto(int);
 void	rump_boot_setsigmodel(enum rump_sigmodel);

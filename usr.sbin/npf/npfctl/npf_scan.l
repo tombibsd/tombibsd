@@ -118,6 +118,7 @@ block			return BLOCK;
 pass			return PASS;
 pcap-filter		return PCAP_FILTER;
 stateful		return STATEFUL;
+stateful-ends		return STATEFUL_ENDS;
 apply			return APPLY;
 final			return FINAL;
 quick			return FINAL;

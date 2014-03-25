@@ -1564,6 +1564,7 @@
 ./usr/share/man/cat4/rtii.0			man-sys-catman		.cat
 ./usr/share/man/cat4/rtk.0			man-sys-catman		.cat
 ./usr/share/man/cat4/rtpphy.0			man-obsolete		obsolete
+./usr/share/man/cat4/rtsx.0			man-sys-catman		.cat
 ./usr/share/man/cat4/rtw.0			man-sys-catman		.cat
 ./usr/share/man/cat4/rum.0			man-sys-catman		.cat
 ./usr/share/man/cat4/rumpfs.0			man-sys-catman		.cat,rump
@@ -1800,6 +1801,7 @@
 ./usr/share/man/cat4/ukyopon.0			man-sys-catman		.cat
 ./usr/share/man/cat4/ulpt.0			man-sys-catman		.cat
 ./usr/share/man/cat4/umass.0			man-sys-catman		.cat
+./usr/share/man/cat4/umcs.0			man-sys-catman		.cat
 ./usr/share/man/cat4/umct.0			man-sys-catman		.cat
 ./usr/share/man/cat4/umidi.0			man-sys-catman		.cat
 ./usr/share/man/cat4/umodem.0			man-sys-catman		.cat
@@ -4529,6 +4531,7 @@
 ./usr/share/man/html4/rtfps.html		man-sys-htmlman		html
 ./usr/share/man/html4/rtii.html			man-sys-htmlman		html
 ./usr/share/man/html4/rtk.html			man-sys-htmlman		html
+./usr/share/man/html4/rtsx.html			man-sys-htmlman		html
 ./usr/share/man/html4/rtw.html			man-sys-htmlman		html
 ./usr/share/man/html4/rum.html			man-sys-htmlman		html
 ./usr/share/man/html4/rumpfs.html			man-sys-htmlman		html,rump
@@ -4756,6 +4759,7 @@
 ./usr/share/man/html4/ukyopon.html		man-sys-htmlman		html
 ./usr/share/man/html4/ulpt.html			man-sys-htmlman		html
 ./usr/share/man/html4/umass.html		man-sys-htmlman		html
+./usr/share/man/html4/umcs.html			man-sys-htmlman		html
 ./usr/share/man/html4/umct.html			man-sys-htmlman		html
 ./usr/share/man/html4/umidi.html		man-sys-htmlman		html
 ./usr/share/man/html4/umodem.html		man-sys-htmlman		html
@@ -7398,6 +7402,7 @@
 ./usr/share/man/man4/rtii.4			man-sys-man		.man
 ./usr/share/man/man4/rtk.4			man-sys-man		.man
 ./usr/share/man/man4/rtpphy.4			man-obsolete		obsolete
+./usr/share/man/man4/rtsx.4			man-sys-man		.man
 ./usr/share/man/man4/rtw.4			man-sys-man		.man
 ./usr/share/man/man4/rum.4			man-sys-man		.man
 ./usr/share/man/man4/rumpfs.4			man-sys-man		.man,rump
@@ -7634,6 +7639,7 @@
 ./usr/share/man/man4/ukyopon.4			man-sys-man		.man
 ./usr/share/man/man4/ulpt.4			man-sys-man		.man
 ./usr/share/man/man4/umass.4			man-sys-man		.man
+./usr/share/man/man4/umcs.4			man-sys-man		.man
 ./usr/share/man/man4/umct.4			man-sys-man		.man
 ./usr/share/man/man4/umidi.4			man-sys-man		.man
 ./usr/share/man/man4/umodem.4			man-sys-man		.man

@@ -46,8 +46,17 @@ static dev_type_open(rump_devnullopen);
 static dev_type_read(rump_devnullrw);
 
 static struct cdevsw null_cdevsw = {
-	rump_devnullopen, nullclose, rump_devnullrw, rump_devnullrw, noioctl,
-	nostop, notty, nopoll, nommap, nokqfilter, D_OTHER | D_MPSAFE,
+	.d_open = rump_devnullopen,
+	.d_close = nullclose,
+	.d_read = rump_devnullrw,
+	.d_write = rump_devnullrw,
+	.d_ioctl = noioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_OTHER | D_MPSAFE
 };
 
 int

@@ -484,9 +484,9 @@ mcintr(void *arg)
 integrate void
 mc_tint(struct mc_softc *sc)
 {
-	u_int8_t xmtrc, xmtfs;
+	u_int8_t xmtfs;
 
-	xmtrc = NIC_GET(sc, MACE_XMTRC);
+	(void)NIC_GET(sc, MACE_XMTRC);
 	xmtfs = NIC_GET(sc, MACE_XMTFS);
 
 	if ((xmtfs & XMTSV) == 0)

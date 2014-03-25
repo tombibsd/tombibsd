@@ -401,10 +401,10 @@ cd9660_stat(struct open_file *f, struct stat *sb)
 }
 
 #if defined(LIBSA_ENABLE_LS_OP)
+#include "ls.h"
 __compactcall void
 cd9660_ls(struct open_file *f, const char *pattern)
 {
-	printf("Currently ls command is unsupported by cd9660\n");
-	return;
+	lsunsup("cd9660");
 }
 #endif

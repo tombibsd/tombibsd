@@ -76,8 +76,17 @@ __KERNEL_RCSID(0, "$NetBSD$");
 dev_type_open(svr4_netopen);
 
 const struct cdevsw svr4_net_cdevsw = {
-	svr4_netopen, noclose, noread, nowrite, noioctl,
-	nostop, notty, nopoll, nommap, nokqfilter, D_OTHER,
+	.d_open = svr4_netopen,
+	.d_close = noclose,
+	.d_read = noread,
+	.d_write = nowrite,
+	.d_ioctl = noioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_OTHER,
 };
 
 /*

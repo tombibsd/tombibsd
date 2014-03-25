@@ -95,8 +95,17 @@ dev_type_ioctl(bw2ioctl);
 dev_type_mmap(bw2mmap);
 
 const struct cdevsw bwtwo_cdevsw = {
-	bw2open, nullclose, noread, nowrite, bw2ioctl,
-	nostop, notty, nopoll, bw2mmap, nokqfilter,
+	.d_open = bw2open,
+	.d_close = nullclose,
+	.d_read = noread,
+	.d_write = nowrite,
+	.d_ioctl = bw2ioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = bw2mmap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = 0
 };
 
 /* XXX we do not handle frame buffer interrupts */

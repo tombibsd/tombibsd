@@ -91,8 +91,17 @@ dev_type_close(prep_nvramclose);
 dev_type_read(prep_nvramread);
 
 const struct cdevsw nvram_cdevsw = {
-	prep_nvramopen, prep_nvramclose, prep_nvramread, nowrite,
-	prep_nvramioctl, nostop, notty, nopoll, nommap, nokqfilter, D_OTHER,
+	.d_open = prep_nvramopen,
+	.d_close = prep_nvramclose,
+	.d_read = prep_nvramread,
+	.d_write = nowrite,
+	.d_ioctl = prep_nvramioctl, 
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_OTHER,
 };
 
 extern struct cfdriver nvram_cd;

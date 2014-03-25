@@ -63,7 +63,8 @@ HAVE_GCC?=    4
       ${MACHINE_CPU} == "arm" || \
       ${MACHINE_CPU} == "hppa" || \
       ${MACHINE_CPU} == "sparc" || \
-      ${MACHINE_CPU} == "sparc64"
+      ${MACHINE_CPU} == "sparc64" || \
+      ${MACHINE_CPU} == "x86_64"
 HAVE_GCC?=    48
 
 .else
@@ -97,7 +98,11 @@ HAVE_LIBGCC?=	no
 HAVE_LIBGCC?=	yes
 .endif
 
-.if ${MKLLVM:Uno} == "yes" && (${MACHINE_ARCH} == "i386" || ${MACHINE_ARCH} == "x86_64")
+_LIBC_UNWIND_SUPPORT.i386=	yes
+_LIBC_UNWIND_SUPPORT.powerpc=	yes
+_LIBC_UNWIND_SUPPORT.vax=	yes
+_LIBC_UNWIND_SUPPORT.x86_64=	yes
+.if ${MKLLVM:Uno} == "yes" && ${_LIBC_UNWIND_SUPPORT.${MACHINE_ARCH}:Uno} == "yes"
 HAVE_LIBGCC_EH?=	no
 .else
 HAVE_LIBGCC_EH?=	yes
@@ -792,14 +797,6 @@ ARM_APCS_FLAGS+=${${ACTIVE_CC} == "clang":? -target ${MACHINE_GNU_ARCH}--netbsde
 
 GENASSYM_CPPFLAGS+=	${${ACTIVE_CC} == "clang":? -no-integrated-as :}
 
-#
-# Determine if arch uses native kernel modules with rump
-#
-.if ${MACHINE_ARCH} == "i386" || \
-    ${MACHINE_ARCH} == "x86_64"
-RUMPKMOD=	# defined
-.endif
-
 TARGETS+=	all clean cleandir depend dependall includes \
 		install lint obj regress tags html analyze
 PHONY_NOTMAIN =	all clean cleandir depend dependall distclean includes \
@@ -1204,15 +1201,16 @@ X11SRCDIRMIT?=		${X11SRCDIR}/external/mit
 	FS ICE SM X11 XScrnSaver XTrap Xau Xcomposite Xcursor Xdamage \
 	Xdmcp Xevie Xext Xfixes Xfont Xft Xi Xinerama Xmu Xpm \
 	Xrandr Xrender Xres Xt Xtst Xv XvMC Xxf86dga Xxf86misc Xxf86vm drm \
-	fontenc xkbfile xkbui Xaw lbxutil Xfontcache pciaccess xcb
+	fontenc xkbfile xkbui Xaw lbxutil Xfontcache pciaccess xcb \
+	pthread-stubs
 X11SRCDIR.${_lib}?=		${X11SRCDIRMIT}/lib${_lib}/dist
 .endfor
 
 .for _proto in \
 	xcmisc xext xf86bigfont bigreqs input kb x fonts fixes scrnsaver \
-	xinerama dri2 render resource record video xf86dga xf86misc \
+	xinerama dri2 dri3 render resource record video xf86dga xf86misc \
 	xf86vidmode composite damage trap gl randr fontcache xf86dri \
-	xcb-
+	present xcb-
 X11SRCDIR.${_proto}proto?=		${X11SRCDIRMIT}/${_proto}proto/dist
 .endfor
 

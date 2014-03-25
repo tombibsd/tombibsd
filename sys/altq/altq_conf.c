@@ -168,8 +168,17 @@ dev_type_close(altqclose);
 dev_type_ioctl(altqioctl);
 
 const struct cdevsw altq_cdevsw = {
-	altqopen, altqclose, noread, nowrite, altqioctl,
-	nostop, notty, nopoll, nommap, nokqfilter, D_OTHER,
+	.d_open = altqopen,
+	.d_close = altqclose,
+	.d_read = noread,
+	.d_write = nowrite, 
+	.d_ioctl = altqioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_OTHER,
 };
 
 int

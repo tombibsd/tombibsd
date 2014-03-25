@@ -382,12 +382,31 @@ rumpuser_dl_bootstrap(rump_modinit_fn domodinit,
 	int error;
 
 	mainhandle = dlopen(NULL, RTLD_NOW);
+	/* Will be null if statically linked so just return */
+	if (mainhandle == NULL)
+		return;
 	if (dlinfo(mainhandle, RTLD_DI_LINKMAP, &mainmap) == -1) {
 		fprintf(stderr, "warning: rumpuser module bootstrap "
 		    "failed: %s\n", dlerror());
 		return;
 	}
 	origmap = mainmap;
+
+	/*
+	 * Use a heuristic to determine if we are static linked.
+	 * A dynamically linked binary should always have at least
+	 * two objects: itself and ld.so.
+	 *
+	 * In a statically linked binary with glibc the linkmap
+	 * contains some "info" that leads to a segfault.  Since we
+	 * can't really do anything useful in here without ld.so, just
+	 * simply bail and let the symbol references in librump do the
+	 * right things.
+	 */
+	if (origmap->l_next == NULL && origmap->l_prev == NULL) {
+		dlclose(mainhandle);
+		return;
+	}
 
 	/*
 	 * Process last->first because that's the most probable

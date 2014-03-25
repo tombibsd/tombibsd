@@ -109,8 +109,17 @@ dev_type_poll(satlinkpoll);
 dev_type_kqfilter(satlinkkqfilter);
 
 const struct cdevsw satlink_cdevsw = {
-	satlinkopen, satlinkclose, satlinkread, nowrite, satlinkioctl,
-	nostop, notty, satlinkpoll, nommap, satlinkkqfilter, D_OTHER,
+	.d_open = satlinkopen,
+	.d_close = satlinkclose,
+	.d_read = satlinkread,
+	.d_write = nowrite,
+	.d_ioctl = satlinkioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = satlinkpoll,
+	.d_mmap = nommap,
+	.d_kqfilter = satlinkkqfilter,
+	.d_flag = D_OTHER
 };
 
 int

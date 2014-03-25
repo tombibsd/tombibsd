@@ -65,6 +65,10 @@ D/des////
 D/dk_subr////
 D/dm////
 D/drm////
+D/drm2pci////
+D/drmkms////
+D/drmkms_linux////
+D/drmkms_pci////
 D/dtrace////
 D/dtv////
 D/dtv_math////
@@ -99,6 +103,7 @@ D/hpacel////
 D/hpet////
 D/hpqlb////
 D/i915drm////
+D/i915drmkms////
 D/if_alc////
 D/if_ath_pci////
 D/if_athn_usb////

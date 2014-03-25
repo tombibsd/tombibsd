@@ -1,0 +1,10 @@
+#	$NetBSD$
+
+ioconf i915drmkms
+
+include "conf/files"
+include "dev/pci/files.pci"
+
+pseudo-root	pci*
+
+i915drmkms* 	at pci? dev ? function ?

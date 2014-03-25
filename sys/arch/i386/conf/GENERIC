@@ -1340,11 +1340,13 @@ sbp*	at ieee1394if? euihi ? euilo ?	# SCSI over IEEE1394
 
 # PCI SD/MMC controller
 sdhc*	at pci?				# SD Host Controller
+rtsx*	at pci?				# Realtek RTS5209/RTS5229 Card Reader
 
 # CardBus SD/MMC controller
 sdhc*	at cardbus? function ?		# SD Host Controller
 
 sdmmc*	at sdhc?			# SD/MMC bus
+sdmmc*	at rtsx?			# SD/MMC bus
 ld*	at sdmmc?
 
 

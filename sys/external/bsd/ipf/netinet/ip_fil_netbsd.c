@@ -128,13 +128,22 @@ static  int     ipfpoll(dev_t, int events, PROC_T *);
 static	void	ipf_timer_func(void *ptr);
 
 const struct cdevsw ipl_cdevsw = {
-	ipfopen, ipfclose, ipfread, ipfwrite, ipfioctl,
-	nostop, notty, ipfpoll, nommap,
+	.d_open = ipfopen,
+	.d_close = ipfclose,
+	.d_read = ipfread,
+	.d_write = ipfwrite,
+	.d_ioctl = ipfioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = ipfpoll,
+	.d_mmap = nommap,
 #if  (__NetBSD_Version__ >= 200000000)
-	nokqfilter,
+	.d_kqfilter = nokqfilter,
 #endif
 #ifdef D_OTHER
-	D_OTHER,
+	.d_flag = D_OTHER
+#else
+	.d_flag = 0
 #endif
 };
 

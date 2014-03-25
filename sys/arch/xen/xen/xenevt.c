@@ -88,8 +88,17 @@ dev_type_open(xenevtopen);
 dev_type_read(xenevtread);
 dev_type_mmap(xenevtmmap);
 const struct cdevsw xenevt_cdevsw = {
-	xenevtopen, nullclose, xenevtread, nowrite, noioctl,
-	nostop, notty, nopoll, xenevtmmap, nokqfilter, D_OTHER
+	.d_open = xenevtopen,
+	.d_close = nullclose,
+	.d_read = xenevtread,
+	.d_write = nowrite,
+	.d_ioctl = noioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = xenevtmmap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_OTHER
 };
 
 /* minor numbers */

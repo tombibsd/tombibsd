@@ -196,7 +196,11 @@ ATF_TC_HEAD(ldexp_exp2, tc)
 ATF_TC_BODY(ldexp_exp2, tc)
 {
 	const double n[] = { 1, 2, 3, 10, 50, 100 };
+#if __DBL_MIN_10_EXP__ <= -40
 	const double eps = 1.0e-40;
+#else
+	const double eps = __DBL_MIN__*4.0;
+#endif
 	const double x = 12.0;
 	double y;
 	size_t i;

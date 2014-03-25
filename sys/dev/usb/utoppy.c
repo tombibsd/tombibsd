@@ -179,8 +179,17 @@ dev_type_write(utoppywrite);
 dev_type_ioctl(utoppyioctl);
 
 const struct cdevsw utoppy_cdevsw = {
-	utoppyopen, utoppyclose, utoppyread, utoppywrite, utoppyioctl,
-	nostop, notty, nopoll, nommap, nokqfilter, D_OTHER,
+	.d_open = utoppyopen,
+	.d_close = utoppyclose,
+	.d_read = utoppyread,
+	.d_write = utoppywrite,
+	.d_ioctl = utoppyioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_OTHER
 };
 
 #define	UTOPPYUNIT(n)	(minor(n))

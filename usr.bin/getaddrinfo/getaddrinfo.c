@@ -32,6 +32,9 @@
 #include <sys/cdefs.h>
 __RCSID("$NetBSD$");
 
+#include <sys/types.h>
+#include <sys/socket.h>
+
 #include <assert.h>
 #include <err.h>
 #include <errno.h>
@@ -40,6 +43,7 @@ __RCSID("$NetBSD$");
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include <string.h>
 #include <unistd.h>
 #include <util.h>
@@ -101,6 +105,7 @@ main(int argc, char **argv)
 				warnx("invalid protocol: %s", optarg);
 				usage();
 			}
+			break;
 
 		case 'P':
 			hints.ai_flags |= AI_PASSIVE;

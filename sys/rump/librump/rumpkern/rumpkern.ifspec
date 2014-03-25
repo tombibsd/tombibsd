@@ -8,8 +8,6 @@ WRAPPERS|librump/rumpkern/rumpkern_if_wrappers.c
 ; type		| name		| args
 ;
 
-int		|getversion	|void
-
 int		|module_init	|const struct modinfo * const *, size_t
 int		|module_fini	|const struct modinfo *
 int		|kernelfsym_load|void *, uint64_t, char *, uint64_t

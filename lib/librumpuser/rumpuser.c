@@ -217,7 +217,7 @@ rumpuser_getfileinfo(const char *path, uint64_t *sizep, int *ftp)
 int
 rumpuser_malloc(size_t howmuch, int alignment, void **memp)
 {
-	void *mem;
+	void *mem = NULL;
 	int rv;
 
 	if (alignment == 0)

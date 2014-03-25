@@ -820,17 +820,27 @@ vrele_async(vnode_t *vp)
 static void
 vrele_thread(void *cookie)
 {
+	vnodelst_t skip_list;
 	vnode_t *vp;
+	struct mount *mp;
 
+	TAILQ_INIT(&skip_list);
+
+	mutex_enter(&vrele_lock);
 	for (;;) {
-		mutex_enter(&vrele_lock);
 		while (TAILQ_EMPTY(&vrele_list)) {
 			vrele_gen++;
 			cv_broadcast(&vrele_cv);
 			cv_timedwait(&vrele_cv, &vrele_lock, hz);
+			TAILQ_CONCAT(&vrele_list, &skip_list, v_freelist);
 		}
 		vp = TAILQ_FIRST(&vrele_list);
+		mp = vp->v_mount;
 		TAILQ_REMOVE(&vrele_list, vp, v_freelist);
+		if (fstrans_start_nowait(mp, FSTRANS_LAZY) != 0) {
+			TAILQ_INSERT_TAIL(&skip_list, vp, v_freelist);
+			continue;
+		}
 		vrele_pending--;
 		mutex_exit(&vrele_lock);
 
@@ -840,6 +850,8 @@ vrele_thread(void *cookie)
 		 */
 		mutex_enter(vp->v_interlock);
 		vrelel(vp, 0);
+		fstrans_done(mp);
+		mutex_enter(&vrele_lock);
 	}
 }
 

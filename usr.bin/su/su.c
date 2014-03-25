@@ -112,7 +112,10 @@ main(int argc, char **argv)
 	enum { UNSET, YES, NO } iscsh = UNSET;
 	const char *user, *shell, *avshell;
 	char *username, **np;
-	char *userpass, *class;
+#ifdef SU_ROOTAUTH
+	char *userpass;
+#endif
+	char *class;
 	char shellbuf[MAXPATHLEN], avshellbuf[MAXPATHLEN];
 	time_t pw_warntime = _PASSWORD_WARNDAYS * SECSPERDAY;
 #ifdef LOGIN_CAP
@@ -186,7 +189,9 @@ main(int argc, char **argv)
 	if (pwd == NULL)
 		errx(EXIT_FAILURE, "who are you?");
 	username = estrdup(pwd->pw_name);
+#ifdef SU_ROOTAUTH
 	userpass = estrdup(pwd->pw_passwd);
+#endif
 
 	if (asme) {
 		if (pwd->pw_shell && *pwd->pw_shell) {

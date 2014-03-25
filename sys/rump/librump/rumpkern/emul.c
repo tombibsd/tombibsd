@@ -148,6 +148,9 @@ u_int nprocs = 1;
 
 cprng_strong_t *kern_cprng;
 
+/* not used, but need the symbols for pointer comparisons */
+syncobj_t mutex_syncobj, rw_syncobj;
+
 int
 kpause(const char *wmesg, bool intr, int timeo, kmutex_t *mtx)
 {

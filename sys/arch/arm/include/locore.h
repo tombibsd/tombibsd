@@ -51,6 +51,7 @@
 #ifdef _KERNEL_OPT
 #include "opt_cpuoptions.h"
 #include "opt_cputypes.h"
+#include "opt_arm_debug.h"
 #endif
 
 #include <arm/cpuconf.h>

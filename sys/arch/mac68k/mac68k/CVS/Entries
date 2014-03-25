@@ -8,7 +8,7 @@
 /genassym.cf/1.37/Thu Oct 24 10:28:57 2013/-kk/
 /intr.c/1.29/Mon Dec 20 00:25:36 2010/-kk/
 /iop.c/1.11/Mon Mar 12 18:18:25 2007/-kk/
-/locore.s/1.169/Fri Mar 14 04:28:16 2014/-kk/
+/locore.s/1.170/Tue Mar 25 02:35:27 2014/-kk/
 /macglobals.s/1.4/Tue Sep 16 16:13:47 1997/-kk/
 /machdep.c/1.346/Thu Oct 24 10:28:57 2013/-kk/
 /macrom.c/1.72/Sun Feb 12 16:34:09 2012/-kk/

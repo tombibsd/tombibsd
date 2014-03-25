@@ -68,8 +68,17 @@ static int	bio_validate(void *);
 void	bioattach(int);
 
 const struct cdevsw bio_cdevsw = {
-        bioopen, bioclose, noread, nowrite, bioioctl,
-        nostop, notty, nopoll, nommap, nokqfilter, D_OTHER | D_MPSAFE
+        .d_open = bioopen,
+	.d_close = bioclose,
+	.d_read = noread,
+	.d_write = nowrite,
+	.d_ioctl = bioioctl,
+        .d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_OTHER | D_MPSAFE
 };
 
 

@@ -223,6 +223,7 @@ _hf_gethtbyname2(const char *name, int af, struct getnamaddr *info)
 
 	if (num == 0) {
 		*info->he = HOST_NOT_FOUND;
+		free(buf);
 		return NULL;
 	}
 
@@ -247,9 +248,11 @@ _hf_gethtbyname2(const char *name, int af, struct getnamaddr *info)
 		HENT_SCOPY(hp->h_aliases[i], aliases[i], ptr, len);
 	hp->h_aliases[anum] = NULL;
 
+	free(buf);
 	return hp;
 nospc:
 	*info->he = NETDB_INTERNAL;
+	free(buf);
 	errno = ENOSPC;
 	return NULL;
 }

@@ -36,6 +36,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <machine/cpu.h>
 
 #include "rump_private.h"
+#include "rump_curlwp.h"
 
 struct cpu_info *cpu_info_list;
 
@@ -65,7 +66,7 @@ struct lwp *
 x86_curlwp()
 {
 
-	return rumpuser_curlwp();
+	return rump_curlwp_fast();
 }
 
 void

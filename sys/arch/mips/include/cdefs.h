@@ -71,6 +71,6 @@
 #define	_MIPS_ISA_MIPS32	5
 #define	_MIPS_ISA_MIPS64	6
 
-#define	__ALIGNBYTES	7
+#define	__ALIGNBYTES	((size_t)7)
 
 #endif /* !_MIPS_CDEFS_H_ */

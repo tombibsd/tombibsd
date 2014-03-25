@@ -78,8 +78,17 @@ dev_type_read(strtc_read);
 dev_type_write(strtc_write);
 
 const struct cdevsw strtc_cdevsw = {
-	strtc_open, strtc_close, strtc_read, strtc_write, noioctl,
-	nostop, notty, nopoll, nommap, nokqfilter, D_OTHER
+	.d_open = strtc_open,
+	.d_close = strtc_close,
+	.d_read = strtc_read,
+	.d_write = strtc_write,
+	.d_ioctl = noioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_OTHER
 };
 #endif
 

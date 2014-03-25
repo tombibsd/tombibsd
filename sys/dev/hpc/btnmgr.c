@@ -101,8 +101,17 @@ dev_type_write(btnmgrwrite);
 dev_type_ioctl(btnmgrioctl);
 
 const struct cdevsw btnmgr_cdevsw = {
-	btnmgropen, btnmgrclose, btnmgrread, btnmgrwrite, btnmgrioctl,
-	nostop, notty, nopoll, nommap, nokqfilter,
+	.d_open = btnmgropen,
+	.d_close = btnmgrclose,
+	.d_read = btnmgrread,
+	.d_write = btnmgrwrite,
+	.d_ioctl = btnmgrioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = 0
 };
 #endif /* notyet */
 

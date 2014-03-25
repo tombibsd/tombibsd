@@ -1535,8 +1535,17 @@ cztty_diag(void *arg)
 }
 
 const struct cdevsw cz_cdevsw = {
-	czttyopen, czttyclose, czttyread, czttywrite, czttyioctl,
-	    czttystop, czttytty, czttypoll, nommap, ttykqfilter, D_TTY
+	.d_open = czttyopen,
+	.d_close = czttyclose,
+	.d_read = czttyread,
+	.d_write = czttywrite,
+	.d_ioctl = czttyioctl,
+	.d_stop = czttystop,
+	.d_tty = czttytty,
+	.d_poll = czttypoll,
+	.d_mmap = nommap,
+	.d_kqfilter = ttykqfilter,
+	.d_flag = D_TTY
 };
 
 /*

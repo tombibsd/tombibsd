@@ -52,7 +52,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include "rump_private.h"
 #include "rump_net_private.h"
-#include "rumpcomp_user.h"
+#include "shmif_user.h"
 
 static int shmif_clone(struct if_clone *, int);
 static int shmif_unclone(struct ifnet *);

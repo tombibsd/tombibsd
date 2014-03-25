@@ -1,6 +1,6 @@
-/bswap16.S/1.5/Thu Oct 24 10:28:41 2013/-kk/
-/bswap32.S/1.5/Thu Oct 24 10:28:41 2013/-kk/
-/bswap64.S/1.4/Tue Oct 29 12:08:00 2013/-kk/
+/bswap16.S/1.6/Tue Mar 25 02:32:02 2014/-kk/
+/bswap32.S/1.6/Tue Mar 25 02:32:02 2014/-kk/
+/bswap64.S/1.5/Tue Mar 25 02:32:02 2014/-kk/
 /divsi3.S/1.5/Thu Oct 24 10:28:41 2013/-kk/
 /modsi3.S/1.7/Fri Mar 14 04:22:13 2014/-kk/
 /mulsi3.S/1.4/Thu Oct 24 10:28:41 2013/-kk/

@@ -51,9 +51,11 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <dev/wscons/wsdisplay_vconsvar.h>
 
+#ifdef _KERNEL_OPT
 #include "opt_wsemul.h"
 #include "opt_wsdisplay_compat.h"
 #include "opt_vcons.h"
+#endif
 
 static void vcons_dummy_init_screen(void *, struct vcons_screen *, int, 
 	    long *);

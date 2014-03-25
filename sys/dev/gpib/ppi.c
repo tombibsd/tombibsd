@@ -126,8 +126,17 @@ dev_type_write(ppiwrite);
 dev_type_ioctl(ppiioctl);
 
 const struct cdevsw ppi_cdevsw = {
-        ppiopen, ppiclose, ppiread, ppiwrite, ppiioctl,
-        nostop, notty, nopoll, nommap, nokqfilter, D_OTHER
+        .d_open = ppiopen,
+	.d_close = ppiclose,
+	.d_read = ppiread,
+	.d_write = ppiwrite,
+	.d_ioctl = ppiioctl,
+        .d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_OTHER
 };
 
 #define UNIT(x)		minor(x)

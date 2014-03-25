@@ -55,9 +55,17 @@ dev_type_ioctl(cirioctl);
 dev_type_poll(cirpoll);
 
 const struct cdevsw cir_cdevsw = {
-	ciropen, circlose, cirread, cirwrite, cirioctl,
-	nostop, notty, cirpoll, nommap, nokqfilter,
-	D_OTHER
+	.d_open = ciropen,
+	.d_close = circlose,
+	.d_read = cirread,
+	.d_write = cirwrite,
+	.d_ioctl = cirioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = cirpoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_OTHER
 };
 
 int cir_match(device_t parent, cfdata_t match, void *aux);

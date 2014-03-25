@@ -138,8 +138,17 @@ dev_type_ioctl(et4kioctl);
 dev_type_mmap(et4kmmap);
 
 const struct cdevsw et4k_cdevsw = {
-	et4kopen, et4kclose, et4kread, et4kwrite, et4kioctl,
-	nostop, notty, nopoll, et4kmmap, nokqfilter,
+	.d_open = et4kopen,
+	.d_close = et4kclose,
+	.d_read = et4kread,
+	.d_write = et4kwrite,
+	.d_ioctl = et4kioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = et4kmmap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = 0
 };
 
 /*

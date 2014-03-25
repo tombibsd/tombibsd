@@ -5,7 +5,7 @@
 
 LIB=	rumpdev_opencrypto
 
-SRCS=	component.c
+SRCS=	opencrypto_component.c
 
 # Sources for crypto framework
 

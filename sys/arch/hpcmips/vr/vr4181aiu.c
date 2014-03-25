@@ -97,8 +97,17 @@ dev_type_read(vr4181aiuread);
 dev_type_write(vr4181aiuwrite);
 
 const struct cdevsw vr4181aiu_cdevsw = {
-	vr4181aiuopen, vr4181aiuclose, vr4181aiuread, vr4181aiuwrite, noioctl,
-	nostop, notty, nopoll, nommap, nokqfilter,
+	.d_open = vr4181aiuopen,
+	.d_close = vr4181aiuclose,
+	.d_read = vr4181aiuread,
+	.d_write = vr4181aiuwrite,
+	.d_ioctl = noioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = 0
 };
 
 static int

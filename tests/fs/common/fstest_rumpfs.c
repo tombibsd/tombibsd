@@ -47,6 +47,13 @@ int
 rumpfs_fstest_newfs(const atf_tc_t *tc, void **buf, const char *image,
     off_t size, void *fspriv)
 {
+	char tmp[64];
+	int res;
+
+	snprintf(tmp, sizeof(tmp), "%"PRId64, size);
+	res = setenv("RUMP_MEMLIMIT", tmp, 0);
+	if (res == -1)
+		return res;
 
 	return rump_init();
 }

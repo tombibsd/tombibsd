@@ -9,7 +9,7 @@ LIB=	rumpnet_net
 SRCS=	if.c if_loop.c route.c rtsock.c rtsock_50.c raw_usrreq.c	\
 	raw_cb.c if_media.c link_proto.c net_stats.c if_ethersubr.c
 SRCS+=	if_43.c pfil.c uipc_syscalls_50.c
-SRCS+=	component.c
+SRCS+=	net_component.c
 
 CPPFLAGS+=	-I${.CURDIR}/opt -I${.CURDIR}/../libnetinet/opt
 CPPFLAGS+=	-DCOMPAT_OIFREQ -DCOMPAT_OIFDATA

@@ -59,8 +59,17 @@ static dev_type_close(crxclose);
 static dev_type_read(crxrw);
 
 const struct cdevsw crx_cdevsw = {
-	crxopen, crxclose, crxrw, crxrw, noioctl,
-	nostop, notty, nopoll, nommap, nokqfilter,
+	.d_open = crxopen,
+	.d_close = crxclose,
+	.d_read = crxrw,
+	.d_write = crxrw,
+	.d_ioctl = noioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = 0
 };
 
 extern struct	rx50device *rx50device_ptr;

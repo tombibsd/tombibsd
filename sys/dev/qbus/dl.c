@@ -158,8 +158,17 @@ dev_type_tty(dltty);
 dev_type_poll(dlpoll);
 
 const struct cdevsw dl_cdevsw = {
-	dlopen, dlclose, dlread, dlwrite, dlioctl,
-	dlstop, dltty, dlpoll, nommap, ttykqfilter, D_TTY
+	.d_open = dlopen,
+	.d_close = dlclose,
+	.d_read = dlread,
+	.d_write = dlwrite,
+	.d_ioctl = dlioctl,
+	.d_stop = dlstop,
+	.d_tty = dltty,
+	.d_poll = dlpoll,
+	.d_mmap = nommap,
+	.d_kqfilter = ttykqfilter,
+	.d_flag = D_TTY
 };
 
 #define	DL_READ_WORD(reg) \

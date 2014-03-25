@@ -137,8 +137,17 @@ static dev_type_close(sesclose);
 static dev_type_ioctl(sesioctl);
 
 const struct cdevsw ses_cdevsw = {
-	sesopen, sesclose, noread, nowrite, sesioctl,
-	nostop, notty, nopoll, nommap, nokqfilter, D_OTHER,
+	.d_open = sesopen,
+	.d_close = sesclose,
+	.d_read = noread,
+	.d_write = nowrite,
+	.d_ioctl = sesioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_OTHER
 };
 
 static int ses_runcmd(struct ses_softc *, char *, int, char *, int *);

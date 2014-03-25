@@ -5,9 +5,9 @@
 
 /* No arch-specific cdefs. */
 #ifdef __arch64__
-#define	__ALIGNBYTES		0xf
+#define	__ALIGNBYTES		((size_t)0xf)
 #else
-#define	__ALIGNBYTES		0x7
+#define	__ALIGNBYTES		((size_t)0x7)
 #endif
 
 #endif /* !_MACHINE_CDEFS_H_ */

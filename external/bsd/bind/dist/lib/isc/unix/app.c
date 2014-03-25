@@ -317,6 +317,7 @@ isc__app_ctxstart(isc_appctx_t *ctx0) {
 #endif
 
 #ifdef ISC_PLATFORM_USETHREADS
+	if (isc_bind9) {
 	/*
 	 * Block SIGHUP, SIGINT, SIGTERM.
 	 *
@@ -344,6 +345,7 @@ isc__app_ctxstart(isc_appctx_t *ctx0) {
 				 strbuf);
 		result = ISC_R_UNEXPECTED;
 		goto cleanup;
+	}
 	}
 #else /* ISC_PLATFORM_USETHREADS */
 	/*

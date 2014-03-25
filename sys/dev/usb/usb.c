@@ -117,8 +117,17 @@ dev_type_poll(usbpoll);
 dev_type_kqfilter(usbkqfilter);
 
 const struct cdevsw usb_cdevsw = {
-	usbopen, usbclose, usbread, nowrite, usbioctl,
-	nostop, notty, usbpoll, nommap, usbkqfilter, D_OTHER,
+	.d_open = usbopen,
+	.d_close = usbclose,
+	.d_read = usbread,
+	.d_write = nowrite,
+	.d_ioctl = usbioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = usbpoll,
+	.d_mmap = nommap,
+	.d_kqfilter = usbkqfilter,
+	.d_flag = D_OTHER
 };
 
 Static void	usb_discover(struct usb_softc *);

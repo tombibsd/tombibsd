@@ -93,8 +93,17 @@ dev_type_poll(kbdpoll);
 dev_type_kqfilter(kbdkqfilter);
 
 const struct cdevsw kbd_cdevsw = {
-	kbdopen, kbdclose, kbdread, nowrite, kbdioctl,
-	nostop, notty, kbdpoll, nommap, kbdkqfilter,
+	.d_open = kbdopen,
+	.d_close = kbdclose,
+	.d_read = kbdread,
+	.d_write = nowrite,
+	.d_ioctl = kbdioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = kbdpoll,
+	.d_mmap = nommap,
+	.d_kqfilter = kbdkqfilter,
+	.d_flag = 0
 };
 
 static int

@@ -5,7 +5,7 @@
 PROG=	xauth
 SRCS=	xauth.c gethost.c process.c parsedpy.c
 
-CPPFLAGS+=		-DRETSIGTYPE=void
+CPPFLAGS+=		-DRETSIGTYPE=void -DPACKAGE_VERSION=\"1.0.8\"
 CPPFLAGS.gethost.c=	${X11FLAGS.CONNECTION}
 CPPFLAGS.parsedpy.c=	${X11FLAGS.CONNECTION}
 

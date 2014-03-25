@@ -259,8 +259,17 @@ dev_type_tty(sertty);
 dev_type_poll(serpoll);
 
 const struct cdevsw ser_cdevsw = {
-	seropen, serclose, serread, serwrite, serioctl,
-	serstop, sertty, serpoll, nommap, ttykqfilter, D_TTY
+	.d_open = seropen,
+	.d_close = serclose,
+	.d_read = serread,
+	.d_write = serwrite,
+	.d_ioctl = serioctl,
+	.d_stop = serstop,
+	.d_tty = sertty,
+	.d_poll = serpoll,
+	.d_mmap = nommap,
+	.d_kqfilter = ttykqfilter,
+	.d_flag = D_TTY
 };
 
 #ifndef SERCONSOLE

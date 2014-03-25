@@ -6,14 +6,14 @@
 /sdhc.c/1.43/Thu Oct 24 10:28:58 2013/-kk/
 /sdhcreg.h/1.11/Mon Dec 24 05:43:34 2012/-kk/
 /sdhcvar.h/1.13/Thu Oct 24 10:28:58 2013/-kk/
-/sdmmc.c/1.21/Thu Oct 24 10:28:58 2013/-kk/
+/sdmmc.c/1.22/Tue Mar 25 02:35:39 2014/-kk/
 /sdmmc_cis.c/1.4/Wed Feb  1 22:34:43 2012/-kk/
 /sdmmc_io.c/1.7/Wed Feb  1 22:34:43 2012/-kk/
 /sdmmc_ioreg.h/1.2/Thu Oct  7 12:40:34 2010/-kk/
-/sdmmc_mem.c/1.30/Tue Oct 29 07:53:50 2013/-kk/
+/sdmmc_mem.c/1.31/Tue Mar 25 02:35:39 2014/-kk/
 /sdmmcchip.h/1.4/Wed May 18 01:07:17 2011/-kk/
 /sdmmcdevs.h/1.2/Tue Apr 21 03:10:41 2009/-kk/
 /sdmmcdevs/1.2/Thu Oct 24 10:28:58 2013/-kk/
 /sdmmcreg.h/1.14/Thu Oct 24 10:28:58 2013/-kk/
-/sdmmcvar.h/1.14/Thu Jul 12 15:59:32 2012/-kk/
+/sdmmcvar.h/1.15/Tue Mar 25 02:35:39 2014/-kk/
 D

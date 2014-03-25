@@ -50,7 +50,7 @@
 #endif
 
 #if defined(__ARM_EABI__) || defined(__ARM_PCS_AAPCS64)
-#define __ALIGNBYTES		(8 - 1)
+#define __ALIGNBYTES		((size_t)(8 - 1))
 #else
 #define __ALIGNBYTES		(sizeof(int) - 1)
 #endif
