@@ -1,0 +1,9 @@
+#	$NetBSD$
+
+have_pkgs && {
+${pkg_admin} ${_compat_K_flag} audit >${OUTPUT} 2>&1
+if [ -s ${OUTPUT} ]; then
+	printf "\nInstalled vulnerable packages:\n"
+	cat ${OUTPUT}
+fi
+}

@@ -1,5 +1,9 @@
 #	$NetBSD$
 
+#
+# Mailboxes should be owned by user and unreadable.
+#
+
 ls -lA /var/mail | \
 awk '	NR == 1 { next; }
 	$9 ~ /^\./ {next; }

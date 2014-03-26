@@ -1,5 +1,20 @@
 #	$NetBSD$
 
+#
+# Check special files.
+# Check system binaries.
+#
+# Create the mtree tree specifications using:
+#	mtree -cx -pDIR -kmd5,uid,gid,mode,nlink,size,link,time > DIR.secure
+#	chown root:wheel DIR.secure
+#	chmod u+r,go= DIR.secure
+#
+# Note, this is not complete protection against Trojan horsed binaries, as
+# the hacker can modify the tree specification to match the replaced binary.
+# For details on really protecting yourself against modified binaries, see
+# the mtree(8) manual page.
+#
+
 if checkyesno check_mtree_follow_symlinks; then
 	check_mtree_flags="-L"
 else

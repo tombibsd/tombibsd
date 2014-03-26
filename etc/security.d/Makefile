@@ -17,6 +17,8 @@ CONFIGFILES=\
 		nfs \
 		passwd \
 		pkgs \
+		pkg_signatures \
+		pkg_vulnerabilities \
 		rhosts \
 		rootdotfiles \
 		varmail

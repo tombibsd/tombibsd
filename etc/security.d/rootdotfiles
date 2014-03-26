@@ -1,5 +1,12 @@
 #	$NetBSD$
 
+#
+# Check for root paths, umask values in startup files.
+# The check for the root paths is problematical -- it's likely to fail
+# in other environments.  Once the shells have been modified to warn
+# of '.' in the path, the path tests should go away.
+#
+
 rhome=~root
 umaskset=no
 list="/etc/csh.cshrc /etc/csh.login ${rhome}/.cshrc ${rhome}/.login"

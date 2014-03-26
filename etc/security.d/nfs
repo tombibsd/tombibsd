@@ -1,5 +1,11 @@
 #	$NetBSD$
 
+#
+# NFS exports shouldn't be globally exported
+#
+
+{
+[ -f /etc/exports ] &&
 awk '{
 	# ignore comments and blank lines
 	if ($0 ~ /^\#/ || $0 ~ /^$/ )
@@ -44,7 +50,8 @@ END {
 		for (item in rwdir)
 			printf("\t%s\n", rwdir[item]);
 	}
-}' < /etc/exports > $OUTPUT
+}' < /etc/exports
+} > $OUTPUT
 if [ -s $OUTPUT ] ; then
 	printf "\nChecking for globally exported file systems.\n"
 	cat $OUTPUT

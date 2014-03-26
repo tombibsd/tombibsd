@@ -1,5 +1,10 @@
 #	$NetBSD$
 
+#
+# Check home directories.  Directories should not be owned by someone else
+# or writable.
+#
+
 checkyesno check_homes_permit_usergroups && \
 	permit_usergroups=1 || permit_usergroups=0
 while read uid homedir; do

@@ -1,5 +1,10 @@
 #	$NetBSD$
 
+#
+# Check for changes in the list of installed pkgs
+#
+
+have_pkgs && {
 pkgs=$work_dir/pkgs
 migrate_file "$backup_dir/pkgs" "$pkgs"
 pkg_dbdir=$(${pkg_admin} config-var PKG_DBDIR)
@@ -12,3 +17,4 @@ pkg_dbdir=$(${pkg_admin} config-var PKG_DBDIR)
  ) > $pkgs
 echo "$pkgs" > $PKGS
 CHANGELIST="$PKGS $CHANGELIST"
+}

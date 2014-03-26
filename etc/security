@@ -82,110 +82,35 @@ for file in $special_files; do
 	[ -s $file ] && cat $file
 done | mtree -CM -k all > $SPECIALSPEC || exit 1
 
+################################################################################
 
-# Check the master password file syntax.
+# Execute checks
 #
-if checkyesno check_passwd; then
-	. /etc/security.d/passwd
-fi
+for i in \
+    passwd \
+    group \
+    rootdotfiles \
+    ftpusers \
+    aliases \
+    rhosts \
+    homes \
+    varmail \
+    nfs \
+    devices \
+    mtree \
+    disklabels \
+    lvm \
+    pkgs \
+    changelist \
+    pkg_vulnerabilities \
+    pkg_signatures
+do
+	if checkyesno check_$i; then
+		. /etc/security.d/$i
+	fi
+done
 
-# Check the group file syntax.
-#
-if checkyesno check_group; then
-	. /etc/security.d/group
-fi
-
-# Check for root paths, umask values in startup files.
-# The check for the root paths is problematical -- it's likely to fail
-# in other environments.  Once the shells have been modified to warn
-# of '.' in the path, the path tests should go away.
-#
-if checkyesno check_rootdotfiles; then
-	. /etc/security.d/rootdotfiles
-fi
-
-# Root and uucp should both be in /etc/ftpusers.
-#
-if checkyesno check_ftpusers; then
-	. /etc/security.d/ftpusers
-fi
-
-# Uudecode should not be in the /etc/mail/aliases file.
-#
-if checkyesno check_aliases; then
-	. /etc/security.d/aliases
-fi
-
-# Files that should not have + signs.
-#
-if checkyesno check_rhosts; then
-	. /etc/security.d/rhosts
-fi
-
-# Check home directories.  Directories should not be owned by someone else
-# or writable.
-#
-if checkyesno check_homes; then
-	. /etc/security.d/homes
-fi
-
-# Mailboxes should be owned by user and unreadable.
-#
-if checkyesno check_varmail; then
-	. /etc/security.d/varmail
-fi
-
-# NFS exports shouldn't be globally exported
-#
-if checkyesno check_nfs && [ -f /etc/exports ]; then
-	. /etc/security.d/nfs
-fi
-
-# Display any changes in setuid files and devices.
-#
-if checkyesno check_devices; then
-	. /etc/security.d/devices
-fi
-
-# Check special files.
-# Check system binaries.
-#
-# Create the mtree tree specifications using:
-#	mtree -cx -pDIR -kmd5,uid,gid,mode,nlink,size,link,time > DIR.secure
-#	chown root:wheel DIR.secure
-#	chmod u+r,go= DIR.secure
-#
-# Note, this is not complete protection against Trojan horsed binaries, as
-# the hacker can modify the tree specification to match the replaced binary.
-# For details on really protecting yourself against modified binaries, see
-# the mtree(8) manual page.
-#
-if checkyesno check_mtree; then
-	. /etc/security.d/mtree
-fi
-
-# Backup disklabels of available disks
-#
-if checkyesno check_disklabels; then
-	. /etc/security.d/disklabels
-fi
-
-if checkyesno check_lvm; then
-	. /etc/security.d/lvm
-fi
-
-# Check for changes in the list of installed pkgs
-#
-if checkyesno check_pkgs && have_pkgs; then
-	. /etc/security.d/pkgs
-fi
-
-# List of files that get backed up and checked for any modifications.
-# Any changes cause the files to rotate.
-#
-if checkyesno check_changelist ; then
-	. /etc/security.d/changelist
-fi
+################################################################################
 
 # Special case backups, including the master password file and
 # ssh private host keys. The normal backup mechanisms for
@@ -194,22 +119,6 @@ fi
 #
 . /etc/security.d/backup
 
-if have_pkgs; then
-	if checkyesno check_pkg_vulnerabilities; then
-		${pkg_admin} ${_compat_K_flag} audit >${OUTPUT} 2>&1
-		if [ -s ${OUTPUT} ]; then
-			printf "\nInstalled vulnerable packages:\n"
-			cat ${OUTPUT}
-		fi
-	fi
-
-	if checkyesno check_pkg_signatures; then
-		${pkg_admin} ${_compat_K_flag} check >${OUTPUT} 2>&1
-		if [ $? -ne 0 ]; then
-			printf "\nFiles with invalid signatures:\n"
-			cat ${OUTPUT}
-		fi
-	fi
-fi
+################################################################################
 
 . /etc/security.d/local

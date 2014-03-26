@@ -343,6 +343,8 @@
 ./etc/security.d/nfs				etc-sys-etc
 ./etc/security.d/passwd				etc-sys-etc
 ./etc/security.d/pkgs				etc-sys-etc
+./etc/security.d/pkg_signatures			etc-sys-etc
+./etc/security.d/pkg_vulnerabilities		etc-sys-etc
 ./etc/security.d/rhosts				etc-sys-etc
 ./etc/security.d/rootdotfiles			etc-sys-etc
 ./etc/security.d/varmail			etc-sys-etc

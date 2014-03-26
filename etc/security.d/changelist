@@ -1,5 +1,10 @@
 #	$NetBSD$
 
+#
+# List of files that get backed up and checked for any modifications.
+# Any changes cause the files to rotate.
+#
+
 mtree -D -k type -f $SPECIALSPEC -E exclude |
     sed '/^type=file/!d ; s/type=file \.//' | unvis > $CHANGEFILES
 

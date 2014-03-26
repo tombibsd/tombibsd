@@ -1,5 +1,9 @@
 #	$NetBSD$
 
+#
+# Files that should not have + signs.
+#
+
 list="/etc/hosts.equiv /etc/hosts.lpd"
 for f in $list ; do
 	if [ -f $f ] && egrep '\+' $f > /dev/null ; then

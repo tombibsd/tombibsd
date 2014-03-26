@@ -1,5 +1,9 @@
 #	$NetBSD$
 
+#
+# Display any changes in setuid files and devices.
+#
+
 > $ERR
 (
 

@@ -1,5 +1,9 @@
 #	$NetBSD$
 
+#
+# Uudecode should not be in the /etc/mail/aliases file.
+#
+
 for f in /etc/mail/aliases /etc/aliases; do
 	if [ -f $f ] && egrep '^[^#]*(uudecode|decode).*\|' $f; then
 		printf "\nEntry for uudecode in $f file.\n"

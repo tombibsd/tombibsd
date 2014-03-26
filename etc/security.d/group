@@ -1,5 +1,9 @@
 #	$NetBSD$
 
+#
+# Check the group file syntax.
+#
+
 GRP=/etc/group
 awk -F: -v "len=$max_grouplen" '{
 	if ($0 ~ /^[	 ]*$/) {

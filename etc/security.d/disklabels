@@ -1,5 +1,9 @@
 #	$NetBSD$
 
+#
+# Backup disklabels of available disks
+#
+
 	# migrate old disklabels
 for file in $(ls -1d $backup_dir/$backup_dir/disklabel.* \
     $backup_dir/disklabel.* 2>/dev/null); do

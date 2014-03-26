@@ -1,0 +1,10 @@
+#	$NetBSD$
+
+have_pkgs &&
+{
+${pkg_admin} ${_compat_K_flag} check >${OUTPUT} 2>&1
+if [ $? -ne 0 ]; then
+	printf "\nFiles with invalid signatures:\n"
+	cat ${OUTPUT}
+fi
+}
