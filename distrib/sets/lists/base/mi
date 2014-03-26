@@ -97,6 +97,7 @@
 ./etc/fonts					base-x11-root
 ./etc/fonts/conf.avail				base-x11-root
 ./etc/fonts/conf.d				base-x11-root
+./etc/install.d					base-sys-root
 ./etc/iscsi					base-sysutil-root
 ./etc/kerberosIV				base-obsolete		obsolete
 ./etc/kerberosV					base-krb5-root

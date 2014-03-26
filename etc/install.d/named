@@ -1,0 +1,19 @@
+#	$NetBSD$
+
+#
+#	named
+#
+additem named "named configuration update"
+do_named()
+{
+	[ -n "$1" ] || err 3 "USAGE: do_named  fix|check"
+	op="$1"
+
+	move_file "${op}" \
+		"${DEST_DIR}/etc/namedb/named.conf" \
+		"${DEST_DIR}/etc/named.conf"
+
+	compare_dir "${op}" "${SRC_DIR}/etc/namedb" "${DEST_DIR}/etc/namedb" \
+		644 \
+		root.cache
+}

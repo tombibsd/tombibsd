@@ -1,0 +1,60 @@
+#	$NetBSD$
+
+#
+#	catpages
+#
+obsolete_catpages()
+{
+	basedir="$2"
+	section="$3"
+	mandir="${basedir}/man${section}"
+	catdir="${basedir}/cat${section}"
+	test -d "$mandir" || return 0
+	test -d "$catdir" || return 0
+	(cd "$mandir" && find . -type f) | {
+	failed=0
+	while read manpage; do
+		manpage="${manpage#./}"
+		case "$manpage" in
+		*.Z)
+			catname="$catdir/${manpage%.*.Z}.0"
+			;;
+		*.gz)
+			catname="$catdir/${manpage%.*.gz}.0"
+			;;
+		*)
+			catname="$catdir/${manpage%.*}.0"
+			;;
+		esac
+		test -e "$catname" -a "$catname" -ot "$mandir/$manpage" || continue
+		if [ "$1" = "fix" ]; then
+			rm "$catname"
+			failed=$(( ${failed} + $? ))
+			msg "Removed obsolete cat page $catname"
+		else
+			msg "Obsolete cat page $catname"
+			failed=1
+		fi
+	done
+	exit $failed
+	}
+}
+
+additem catpages "remove outdated cat pages"
+do_catpages()
+{
+	failed=0
+	for manbase in /usr/share/man /usr/X11R6/man /usr/X11R7/man; do
+		for sec in 1 2 3 4 5 6 7 8 9; do
+			obsolete_catpages "$1" "${DEST_DIR}${manbase}" "${sec}"
+			failed=$(( ${failed} + $? ))
+			if [ "$1" = "fix" ]; then
+				rmdir "${DEST_DIR}${manbase}/cat${sec}"/* \
+					2>/dev/null
+				rmdir "${DEST_DIR}${manbase}/cat${sec}" \
+					2>/dev/null
+			fi
+		done
+	done
+	return $failed
+}

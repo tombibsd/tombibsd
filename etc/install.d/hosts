@@ -1,0 +1,19 @@
+#	$NetBSD$
+
+#
+#	hosts
+#
+additem hosts "/etc/hosts being up to date"
+do_hosts()
+{
+	[ -n "$1" ] || err 3 "USAGE: do_hosts  fix|check"
+
+	modify_file "$1" "${DEST_DIR}/etc/hosts" "${SCRATCHDIR}/hosts" '
+		/^(127\.0\.0\.1|::1)[ 	]+[^\.]*$/ {
+			print $0, "localhost."
+			next
+		}
+		{ print }
+	'
+	return $?
+}

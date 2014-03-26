@@ -1,0 +1,32 @@
+#	$NetBSD$
+
+#
+#	sendmail
+#
+adddisableditem sendmail "remove obsolete sendmail configuration files and scripts"
+do_sendmail()
+{
+	[ -n "$1" ] || err 3 "USAGE: do_sendmail  fix|check"
+	op="$1"
+	failed=0
+
+	# Don't complain if the "sendmail" package is installed because the
+	# files might still be in use.
+	if /usr/sbin/pkg_info -qe sendmail >/dev/null 2>&1; then
+		return 0
+	fi
+
+	for f in /etc/mail/helpfile /etc/mail/local-host-names \
+	    /etc/mail/sendmail.cf /etc/mail/submit.cf /etc/rc.d/sendmail \
+	    /etc/rc.d/smmsp /usr/share/misc/sendmail.hf \
+	    $(find "${DEST_DIR}/usr/share/sendmail" -type f) \
+	    $(find "${DEST_DIR}/usr/share/sendmail" -type d) \
+	    "${DEST_DIR}/var/log/sendmail.st" \
+	    "${DEST_DIR}/var/spool/clientmqueue" \
+	    "${DEST_DIR}/var/spool/mqueue"; do
+		[ -e "${DEST_DIR}${f}" ] && echo "${f}"
+	done | obsolete_paths "${op}"
+	failed=$(( ${failed} + $? ))
+
+	return ${failed}
+}

@@ -99,6 +99,41 @@
 ./etc/hosts.lpd			type=file mode=0644 optional
 ./etc/ifaliases			type=file mode=0644 optional
 ./etc/inetd.conf		type=file mode=0644
+./etc/install.d			type=dir  mode=0755
+./etc/install.d/atf		type=file mode=0444
+./etc/install.d/bluetooth	type=file mode=0444
+./etc/install.d/catpages	type=file mode=0444
+./etc/install.d/ddbonpanic	type=file mode=0444
+./etc/install.d/defaults	type=file mode=0444
+./etc/install.d/dhcpd		type=file mode=0444
+./etc/install.d/dhcpdrundir	type=file mode=0444
+./etc/install.d/envsys		type=file mode=0444
+./etc/install.d/fontconfig	type=file mode=0444
+./etc/install.d/gid		type=file mode=0444
+./etc/install.d/gpio		type=file mode=0444
+./etc/install.d/hosts		type=file mode=0444
+./etc/install.d/iscsi		type=file mode=0444
+./etc/install.d/mailerconf	type=file mode=0444
+./etc/install.d/makedev		type=file mode=0444
+./etc/install.d/motd		type=file mode=0444
+./etc/install.d/mtree		type=file mode=0444
+./etc/install.d/named		type=file mode=0444
+./etc/install.d/obsolete	type=file mode=0444
+./etc/install.d/pam		type=file mode=0444
+./etc/install.d/periodic	type=file mode=0444
+./etc/install.d/pf		type=file mode=0444
+./etc/install.d/ptyfsoldnodes	type=file mode=0444
+./etc/install.d/pwd_mkdb	type=file mode=0444
+./etc/install.d/rc		type=file mode=0444
+./etc/install.d/sendmail	type=file mode=0444
+./etc/install.d/ssh		type=file mode=0444
+./etc/install.d/tcpdumpchroot	type=file mode=0444
+./etc/install.d/uid		type=file mode=0444
+./etc/install.d/varrwho		type=file mode=0444
+./etc/install.d/varshm		type=file mode=0444
+./etc/install.d/wscons		type=file mode=0444
+./etc/install.d/x11		type=file mode=0444
+./etc/install.d/xkb		type=file mode=0444
 ./etc/ipf.conf			type=file mode=0644 optional
 ./etc/ipf6.conf			type=file mode=0644 optional
 ./etc/ipnat.conf		type=file mode=0644 optional

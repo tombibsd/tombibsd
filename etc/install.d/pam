@@ -1,0 +1,21 @@
+#	$NetBSD$
+
+#
+#	pam
+#
+additem pam "/etc/pam.d is populated"
+do_pam()
+{
+	[ -n "$1" ] || err 3 "USAGE: do_pam  fix|check"
+	op="$1"
+	failed=0
+
+	populate_dir "${op}" true "${SRC_DIR}/etc/pam.d" \
+		"${DEST_DIR}/etc/pam.d" 644 \
+		README display_manager ftpd gdm imap kde login other passwd \
+		pop3 ppp rexecd rsh sshd su system telnetd xdm xserver
+
+	failed=$(( ${failed} + $? ))
+
+	return ${failed}
+}

@@ -1,0 +1,58 @@
+#	$NetBSD$
+
+#
+#	X11
+#
+additem x11 "x11 configuration update"
+do_x11()
+{
+	[ -n "$1" ] || err 3 "USAGE: do_x11  fix|check"
+	op="$1"
+
+	failed=0
+	_etcx11="${DEST_DIR}/etc/X11"
+	if [ ! -d "${_etcx11}" ]; then
+		msg "${_etcx11} is not a directory; skipping check"
+		return 0
+	fi
+	if [ -d "${DEST_DIR}/usr/X11R6/." ]
+	then
+		_libx11="${DEST_DIR}/usr/X11R6/lib/X11"
+		if [ ! -d "${_libx11}" ]; then
+			msg "${_libx11} is not a directory; skipping check"
+			return 0
+		fi
+	fi
+
+	_notfixed=""
+	if [ "${op}" = "fix" ]; then
+		_notfixed="${NOT_FIXED}"
+	fi
+
+	for d in \
+		    fs lbxproxy proxymngr rstart twm xdm xinit xserver xsm \
+	    ; do
+		sd="${_libx11}/${d}"
+		ld="/etc/X11/${d}"
+		td="${DEST_DIR}${ld}"
+		if [ -h "${sd}" ]; then
+			continue
+		elif [ -d "${sd}" ]; then
+			tdfiles="$(find "${td}" \! -type d)"
+			if [ -n "${tdfiles}" ]; then
+				msg "${sd} exists yet ${td} already" \
+				    "contains files${_notfixed}"
+			else
+				msg "Migrate ${sd} to ${td}${_notfixed}"
+			fi
+			failed=1
+		elif [ -e "${sd}" ]; then
+			msg "Unexpected file ${sd}${_notfixed}"
+			continue
+		else
+			continue
+		fi
+	done
+
+	return ${failed}
+}

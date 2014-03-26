@@ -1,0 +1,41 @@
+#	$NetBSD$
+
+#
+#	motd
+#
+additem motd "contents of motd"
+do_motd()
+{
+	[ -n "$1" ] || err 3 "USAGE: do_motd  fix|check"
+
+	if ${GREP} -i 'http://www.NetBSD.org/Misc/send-pr.html' \
+		"${DEST_DIR}/etc/motd" >/dev/null 2>&1 \
+	    || ${GREP} -i 'http://www.NetBSD.org/support/send-pr.html' \
+		"${DEST_DIR}/etc/motd" >/dev/null 2>&1
+	then
+		tmp1="$(mktemp /tmp/postinstall.motd.XXXXXXXX)"
+		tmp2="$(mktemp /tmp/postinstall.motd.XXXXXXXX)"
+		sed '1,2d' <"${SRC_DIR}/etc/motd" >"${tmp1}"
+		sed '1,2d' <"${DEST_DIR}/etc/motd" >"${tmp2}"
+
+		if [ "$1" = check ]; then
+			cmp -s "${tmp1}" "${tmp2}"
+			result=$?
+			if [ "${result}" -ne 0 ]; then
+				msg \
+    "Bug reporting messages do not seem to match the installed release"
+			fi
+		else
+			head -n 2 "${DEST_DIR}/etc/motd" >"${tmp1}"
+			sed '1,2d' <"${SRC_DIR}/etc/motd" >>"${tmp1}"
+			cp "${tmp1}" "${DEST_DIR}/etc/motd"
+			result=0
+		fi
+
+		rm -f "${tmp1}" "${tmp2}"
+	else
+		result=0
+	fi
+
+	return ${result}
+}

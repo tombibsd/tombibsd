@@ -1,0 +1,99 @@
+#	$NetBSD$
+
+#
+#	rc
+#
+additem rc "/etc/rc* and /etc/rc.d/ being up to date"
+do_rc()
+{
+	[ -n "$1" ] || err 3 "USAGE: do_rc  fix|check"
+	op="$1"
+	failed=0
+	generated_scripts=""
+	if [ "${MKX11}" != "no" ]; then
+		generated_scripts="${generated_scripts} xdm xfs"
+	fi
+
+	compare_dir "${op}" "${SRC_DIR}/etc" "${DEST_DIR}/etc" 644 \
+		rc rc.subr rc.shutdown
+	failed=$(( ${failed} + $? ))
+
+	if ! $SOURCEMODE; then
+		extra_scripts="${generated_scripts}"
+	else
+		extra_scripts=""
+	fi
+
+	compare_dir "${op}" "${SRC_DIR}/etc/rc.d" "${DEST_DIR}/etc/rc.d" 555 \
+		DAEMON DISKS LOGIN NETWORKING SERVERS \
+		accounting altqd amd apmd \
+		bluetooth bootconf.sh bootparams \
+		ccd cgd cleartmp cron devpubd \
+		dhclient dhcpcd dhcpd dhcrelay dmesg downinterfaces envsys \
+		fsck fsck_root ftp_proxy ftpd \
+		gpio \
+		hostapd httpd \
+		identd ifwatchd inetd ipfilter ipfs ipmon ipnat ipsec \
+		irdaattach iscsi_target isdnd isibootd \
+		kdc \
+		ldconfig ldpd local lpd lvm \
+		makemandb mdnsd mixerctl mopd motd mountall mountcritlocal \
+		mountcritremote mountd moused mrouted \
+		named ndbootd network newsyslog nfsd nfslocking npf ntpd \
+		ntpdate \
+		perusertmp pf pf_boot pflogd postfix powerd ppp pwcheck \
+		quota \
+		racoon rpcbind raidframe raidframeparity random_seed rarpd \
+		rbootd rndctl root route6d routed rtadvd rtclocaltime \
+		rtsold rwho \
+		savecore screenblank securelevel sshd \
+		staticroute swap1 swap2 sysctl sysdb syslogd \
+		timed tpctl ttys \
+		veriexec virecover wdogctl wpa_supplicant wscons wsmoused \
+		ypbind yppasswdd ypserv \
+		${extra_scripts}
+	failed=$(( ${failed} + $? ))
+
+	if $SOURCEMODE && [ -n "${generated_scripts}" ]; then
+		# generate scripts
+		mkdir "${SCRATCHDIR}/rc"
+		for f in ${generated_scripts}; do
+			sed -e "s,@X11ROOTDIR@,${X11ROOTDIR},g" \
+			    < "${SRC_DIR}/etc/rc.d/${f}.in" \
+			    > "${SCRATCHDIR}/rc/${f}"
+		done
+		compare_dir "${op}" "${SCRATCHDIR}/rc" \
+		    "${DEST_DIR}/etc/rc.d" 555 \
+		    ${generated_scripts}
+		failed=$(( ${failed} + $? ))
+	fi
+
+		# check for obsolete rc.d files
+	for f in NETWORK btattach btconfig btcontrol btdevctl bthcid btuartd \
+	    fsck.sh kerberos nfsiod sdpd servers \
+	    systemfs daemon gated login poffd portmap sunndd xntpd; do
+		fd="/etc/rc.d/${f}"
+		[ -e "${DEST_DIR}${fd}" ] && echo "${fd}"
+	done | obsolete_paths "${op}"
+	failed=$(( ${failed} + $? ))
+
+		# check for obsolete rc.conf(5) variables
+	set --	amd amd_master \
+		btcontrol btcontrol_devices \
+		critical_filesystems critical_filesystems_beforenet \
+		mountcritlocal mountcritremote \
+		network ip6forwarding \
+		network nfsiod_flags \
+		sdpd sdpd_control \
+		sdpd sdpd_groupname \
+		sdpd sdpd_username \
+		sysctl defcorename
+	while [ $# -gt 1 ]; do
+		if rcconf_is_set "${op}" "$1" "$2" 1; then
+			failed=1
+		fi
+		shift 2
+	done
+
+	return ${failed}
+}

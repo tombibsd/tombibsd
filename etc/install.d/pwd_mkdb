@@ -1,0 +1,40 @@
+#	$NetBSD$
+
+#
+#	pwd_mkdb
+#
+additem pwd_mkdb "passwd database version"
+do_pwd_mkdb()
+{
+	[ -n "$1" ] || err 3 "USAGE: do_pwd_mkdb  fix|check"
+	op="$1"
+	failed=0
+
+	# XXX Ideally, we should figure out the endianness of the
+	# target machine, and add "-E B"/"-E L" to the db(1) flags,
+	# and "-B"/"-L" to the pwd_mkdb(8) flags if the target is not
+	# the same as the host machine.  It probably doesn't matter,
+	# because we don't expect "postinstall fix pwd_mkdb" to be
+	# invoked during a cross build.
+
+	set -- $(${DB} -q -Sb -Ub -To -N hash "${DEST_DIR}/etc/pwd.db" \
+		'VERSION\0')
+	case "$2" in
+	'\001\000\000\000') return 0 ;; # version 1, little-endian
+	'\000\000\000\001') return 0 ;; # version 1, big-endian
+	esac
+
+	if [ "${op}" = "check" ]; then
+		msg "Update format of passwd database"
+		failed=1
+	elif ! ${PWD_MKDB} -V 1 -d "${DEST_DIR:-/}" \
+			"${DEST_DIR}/etc/master.passwd";
+	then
+		msg "Can't update format of passwd database"
+		failed=1
+	else
+		msg "Updated format of passwd database"
+	fi
+
+	return ${failed}
+}

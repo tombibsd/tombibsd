@@ -85,6 +85,40 @@
 ./etc/hosts.equiv				etc-netutil-etc
 ./etc/hosts.lpd					etc-lpr-etc
 ./etc/inetd.conf				etc-netutil-etc
+./etc/install.d/atf				etc-sys-etc
+./etc/install.d/bluetooth			etc-sys-etc
+./etc/install.d/catpages			etc-sys-etc
+./etc/install.d/ddbonpanic			etc-sys-etc
+./etc/install.d/defaults			etc-sys-etc
+./etc/install.d/dhcpd				etc-sys-etc
+./etc/install.d/dhcpdrundir			etc-sys-etc
+./etc/install.d/envsys				etc-sys-etc
+./etc/install.d/fontconfig			etc-sys-etc
+./etc/install.d/gid				etc-sys-etc
+./etc/install.d/gpio				etc-sys-etc
+./etc/install.d/hosts				etc-sys-etc
+./etc/install.d/iscsi				etc-sys-etc
+./etc/install.d/mailerconf			etc-sys-etc
+./etc/install.d/makedev				etc-sys-etc
+./etc/install.d/motd				etc-sys-etc
+./etc/install.d/mtree				etc-sys-etc
+./etc/install.d/named				etc-sys-etc
+./etc/install.d/obsolete			etc-sys-etc
+./etc/install.d/pam				etc-sys-etc
+./etc/install.d/periodic			etc-sys-etc
+./etc/install.d/pf				etc-sys-etc
+./etc/install.d/ptyfsoldnodes			etc-sys-etc
+./etc/install.d/pwd_mkdb			etc-sys-etc
+./etc/install.d/rc				etc-sys-etc
+./etc/install.d/sendmail			etc-sys-etc
+./etc/install.d/ssh				etc-sys-etc
+./etc/install.d/tcpdumpchroot			etc-sys-etc
+./etc/install.d/uid				etc-sys-etc
+./etc/install.d/varrwho				etc-sys-etc
+./etc/install.d/varshm				etc-sys-etc
+./etc/install.d/wscons				etc-sys-etc
+./etc/install.d/x11				etc-sys-etc
+./etc/install.d/xkb				etc-sys-etc
 ./etc/iscsi/auths				etc-iscsi-etc		iscsi
 ./etc/iscsi/targets				etc-iscsi-etc		iscsi
 ./etc/kyua/kyua.conf				etc-kyua-etc		kyua

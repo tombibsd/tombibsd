@@ -1,0 +1,20 @@
+#	$NetBSD$
+
+#
+#	dhcpcd
+#
+additem dhcpcd "dhcpcd configuration is up to date"
+do_dhcpcd()
+{
+	[ -n "$1" ] || err 3 "USAGE: do_dhcpcd fix|check"
+	op="$1"
+	failed=0
+
+	find_file_in_dirlist dhcpcd.conf "dhcpcd.conf" \
+	    "${SRC_DIR}/external/bsd/dhcpcd/dist" "${SRC_DIR}/etc" || return 1
+			# ${dir} is set by find_file_in_dirlist()
+	populate_dir "$op" true "${dir}" "${DEST_DIR}/etc" 644 dhcpcd.conf
+	failed=$(( ${failed} + $? ))
+
+	return ${failed}
+}

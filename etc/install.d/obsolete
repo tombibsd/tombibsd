@@ -1,0 +1,29 @@
+#	$NetBSD$
+
+#
+#	obsolete
+#	(this item is last to allow other items to move obsolete files)
+#
+additem obsolete "remove obsolete file sets and minor libraries"
+do_obsolete()
+{
+	[ -n "$1" ] || err 3 "USAGE: do_obsolete  fix|check"
+	op="$1"
+	failed=0
+
+	sort -ru "${DEST_DIR}"/var/db/obsolete/* | obsolete_paths "${op}"
+	failed=$(( ${failed} + $? ))
+
+	(
+		obsolete_libs /lib
+		obsolete_libs /usr/lib
+		obsolete_libs /usr/lib/i18n
+		obsolete_libs /usr/X11R6/lib
+		obsolete_libs /usr/X11R7/lib
+		[ "$MACHINE" = "amd64" ] && obsolete_libs /usr/lib/i386
+		[ "$MACHINE" = "sparc64" ] && obsolete_libs /usr/lib/sparc
+	) | obsolete_paths "${op}"
+	failed=$(( ${failed} + $? ))
+
+	return ${failed}
+}

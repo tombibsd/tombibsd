@@ -1,0 +1,12 @@
+#	$NetBSD$
+
+#
+#	varrwho
+#
+additem varrwho "required ownership of files in /var/rwho"
+do_varrwho()
+{
+	[ -n "$1" ] || err 3 "USAGE: do_varrwho  fix|check"
+
+	contents_owner "$1" "${DEST_DIR}/var/rwho" _rwhod _rwhod
+}

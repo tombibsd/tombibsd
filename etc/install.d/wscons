@@ -1,0 +1,28 @@
+#	$NetBSD$
+
+#
+#	wscons
+#
+additem wscons "wscons configuration file update"
+do_wscons()
+{
+	[ -n "$1" ] || err 3 "USAGE: do_wscons  fix|check"
+	op="$1"
+
+	[ -f "${DEST_DIR}/etc/wscons.conf" ] || return 0
+
+	failed=0
+	notfixed=""
+	if [ "${op}" = "fix" ]; then
+		notfixed="${NOT_FIXED}"
+	fi
+	while read _type _arg1 _rest; do
+		if [ "${_type}" = "mux" -a "${_arg1}" = "1" ]; then
+			msg \
+    "Obsolete wscons.conf(5) entry \""${_type} ${_arg1}"\" found.${notfixed}"
+			failed=1
+		fi
+	done < "${DEST_DIR}/etc/wscons.conf"
+
+	return ${failed}
+}

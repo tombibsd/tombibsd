@@ -317,7 +317,7 @@ install-etc-files: .PHONY .MAKE check_DESTDIR MAKEDEV
     			/dev/null ${DESTDIR}${file}; \
 	else true; fi
 .endfor
-.for subdir in . daily.d defaults bluetooth iscsi monthly.d mtree namedb pam.d powerd rc.d root security.d skel ssh weekly.d
+.for subdir in . daily.d defaults bluetooth install.d iscsi monthly.d mtree namedb pam.d powerd rc.d root security.d skel ssh weekly.d
 	${MAKEDIRTARGET} ${subdir} configinstall
 .endfor
 	${MAKEDIRTARGET} ${NETBSDSRCDIR}/external/bsd/dhcpcd/sbin/dhcpcd configinstall

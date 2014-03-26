@@ -1,0 +1,16 @@
+#	$NetBSD$
+
+#
+#	iscsi
+#
+additem iscsi "/etc/iscsi is populated"
+do_iscsi()
+{
+	[ -n "$1" ] || err 3 "USAGE: do_iscsi  fix|check"
+
+	populate_dir "${op}" true \
+	    "${SRC_DIR}/etc/iscsi" "${DEST_DIR}/etc/iscsi" 600 auths
+	populate_dir "${op}" true \
+	    "${SRC_DIR}/etc/iscsi" "${DEST_DIR}/etc/iscsi" 644 targets
+	return $?
+}

@@ -1,0 +1,18 @@
+#	$NetBSD$
+
+#
+#	gpio
+#
+additem gpio "gpio configuration is up to date"
+do_gpio()
+{
+	[ -n "$1" ] || err 3 "USAGE: do_gpio fix|check"
+	op="$1"
+	failed=0
+
+	populate_dir "$op" true "${SRC_DIR}/etc" "${DEST_DIR}/etc" 644 \
+		gpio.conf
+	failed=$(( ${failed} + $? ))
+
+	return ${failed}
+}

@@ -35,6 +35,7 @@
 ./etc/fonts
 ./etc/fonts/conf.avail
 ./etc/fonts/conf.d
+./etc/install.d
 ./etc/iscsi
 ./etc/kerberosV
 ./etc/kyua

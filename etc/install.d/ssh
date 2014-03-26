@@ -1,0 +1,95 @@
+#	$NetBSD$
+
+#
+#	ssh
+#
+additem ssh "ssh configuration update"
+do_ssh()
+{
+	[ -n "$1" ] || err 3 "USAGE: do_ssh  fix|check"
+	op="$1"
+
+	failed=0
+	_etcssh="${DEST_DIR}/etc/ssh"
+	if ! check_dir "${op}" "${_etcssh}" 755; then
+		failed=1
+	fi
+
+	if [ ${failed} -eq 0 ]; then
+		for f in \
+			    ssh_known_hosts ssh_known_hosts2 \
+			    ssh_host_dsa_key ssh_host_dsa_key.pub \
+			    ssh_host_rsa_key ssh_host_rsa_key.pub \
+			    ssh_host_key ssh_host_key.pub \
+		    ; do
+			if ! move_file "${op}" \
+			    "${DEST_DIR}/etc/${f}" "${_etcssh}/${f}" ; then
+				failed=1
+			fi
+		done
+		for f in sshd.conf ssh.conf ; do
+				# /etc/ssh/ssh{,d}.conf -> ssh{,d}_config
+				#
+			if ! move_file "${op}" \
+			    "${_etcssh}/${f}" "${_etcssh}/${f%.conf}_config" ;
+			then
+				failed=1
+			fi
+				# /etc/ssh{,d}.conf -> /etc/ssh/ssh{,d}_config
+				#
+			if ! move_file "${op}" \
+			    "${DEST_DIR}/etc/${f}" \
+			    "${_etcssh}/${f%.conf}_config" ;
+			then
+				failed=1
+			fi
+		done
+	fi
+
+	sshdconf=""
+	for f in \
+	    "${_etcssh}/sshd_config" \
+	    "${_etcssh}/sshd.conf" \
+	    "${DEST_DIR}/etc/sshd.conf" ; do
+		if [ -f "${f}" ]; then
+			sshdconf="${f}"
+			break
+		fi
+	done
+	if [ -n "${sshdconf}" ]; then
+		modify_file "${op}" "${sshdconf}" "${SCRATCHDIR}/sshdconf" '
+			/^[^#$]/ {
+				kw = tolower($1)
+				if (kw == "hostkey" &&
+				    $2 ~ /^\/etc\/+ssh_host(_[dr]sa)?_key$/ ) {
+					sub(/\/etc\/+/, "/etc/ssh/")
+				}
+				if (kw == "rhostsauthentication" ||
+				    kw == "verifyreversemapping" ||
+				    kw == "reversemappingcheck") {
+					sub(/^/, "# DEPRECATED:\t")
+				}
+			}
+			{ print }
+		'
+		failed=$(( ${failed} + $? ))
+	fi
+
+	if ! find_file_in_dirlist moduli "moduli" \
+	    "${SRC_DIR}/crypto/external/bsd/openssh/dist" "${SRC_DIR}/etc" ; then
+		failed=1
+			# ${dir} is set by find_file_in_dirlist()
+	elif ! compare_dir "${op}" "${dir}" "${DEST_DIR}/etc" 444 moduli; then
+		failed=1
+	fi
+
+	if ! check_dir "${op}" "${DEST_DIR}/var/chroot/sshd" 755 ; then
+		failed=1
+	fi
+
+	if rcconf_is_set "${op}" sshd sshd_conf_dir 1; then
+		failed=1
+	fi
+
+	return ${failed}
+}

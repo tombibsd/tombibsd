@@ -1,0 +1,26 @@
+#	$NetBSD$
+
+#
+#	mtree
+#
+additem mtree "/etc/mtree/ being up to date"
+do_mtree()
+{
+	[ -n "$1" ] || err 3 "USAGE: do_mtree  fix|check"
+	failed=0
+
+	compare_dir "$1" "${SRC_DIR}/etc/mtree" "${DEST_DIR}/etc/mtree" 444 special
+	failed=$(( ${failed} + $? ))
+
+	if ! $SOURCEMODE; then
+		MTREE_DIR="${SRC_DIR}/etc/mtree"
+	else
+		${MAKE} -s -C "${SRC_DIR}/etc/mtree" emit_dist_file > \
+		    "${SCRATCHDIR}/NetBSD.dist"
+		MTREE_DIR="${SCRATCHDIR}"
+	fi
+	compare_dir "$1" "${MTREE_DIR}" "${DEST_DIR}/etc/mtree" 444 NetBSD.dist
+	failed=$(( ${failed} + $? ))
+
+	return ${failed}
+}

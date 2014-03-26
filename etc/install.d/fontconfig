@@ -1,0 +1,82 @@
+#	$NetBSD$
+
+#
+#	X11 fontconfig
+#
+additem fontconfig "X11 font configuration is up to date"
+do_fontconfig()
+{
+	[ -n "$1" ] || err 3 "USAGE: do_fontconfig fix|check"
+	op="$1"
+	failed=0
+
+	# First, check for updates we can handle.
+	if ! $SOURCEMODE; then
+		FONTCONFIG_DIR="${SRC_DIR}/etc/fonts/conf.avail"
+	else
+		FONTCONFIG_DIR="${XSRC_DIR}/external/mit/fontconfig/dist/conf.d"
+	fi
+
+	populate_dir "$op" false "${FONTCONFIG_DIR}" "${DEST_DIR}/etc/fonts/conf.avail" 444 \
+		10-autohint.conf \
+		10-no-sub-pixel.conf \
+		10-scale-bitmap-fonts.conf \
+		10-sub-pixel-bgr.conf \
+		10-sub-pixel-rgb.conf \
+		10-sub-pixel-vbgr.conf \
+		10-sub-pixel-vrgb.conf \
+		10-unhinted.conf \
+		11-lcdfilter-default.conf \
+		11-lcdfilter-legacy.conf \
+		11-lcdfilter-light.conf \
+		20-unhint-small-vera.conf \
+		25-unhint-nonlatin.conf \
+		30-metric-aliases.conf \
+		30-urw-aliases.conf \
+		40-nonlatin.conf \
+		45-latin.conf \
+		49-sansserif.conf \
+		50-user.conf \
+		51-local.conf \
+		60-latin.conf \
+		65-fonts-persian.conf \
+		65-khmer.conf \
+		65-nonlatin.conf \
+		69-unifont.conf \
+		70-no-bitmaps.conf \
+		70-yes-bitmaps.conf \
+		80-delicious.conf \
+		90-synthetic.conf
+	failed=$(( ${failed} + $? ))
+
+	# We can't modify conf.d easily; someone might have removed a file.
+
+	conf_d_failed=0
+	# Look for old files that need to be deleted.
+	if [ -f "${DEST_DIR}/etc/fonts/conf.d/10-unhinted.conf" -a \
+	     -f "${DEST_DIR}/etc/fonts/conf.d/10-autohint.conf" ]; then
+		conf_d_failed=1
+		failed=$(( ${failed} + 1 ))
+	fi
+
+	if [ "$conf_d_failed" = 1 ]; then
+		msg \
+    "Broken fontconfig configuration found; please delete these files"
+		msg \
+    "in the ${DESTDIR}/etc/fonts/conf.d/ subdirectory:"
+		msg \
+    "   10-autohint.conf 10-no-sub-pixel.conf 10-sub-pixel-bgr.conf"
+		msg \
+    "   10-sub-pixel-rgb.conf 10-sub-pixel-vbgr.conf"
+		msg \
+    "   10-sub-pixel-vrgb.conf 10-unhinted.conf 25-unhint-nonlatin.conf"
+		msg \
+    "   65-khmer.conf 70-no-bitmaps.conf 70-yes-bitmaps.conf"
+		msg \
+    "(This warning only appears if both the 10-unhinted.conf and"
+		msg \
+    "10-autohint.conf files are present."
+	fi
+
+	return ${failed}
+}
