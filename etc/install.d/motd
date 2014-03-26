@@ -3,6 +3,7 @@
 #
 #	motd
 #
+
 additem motd "contents of motd"
 do_motd()
 {

@@ -3,6 +3,7 @@
 #
 #	hosts
 #
+
 additem hosts "/etc/hosts being up to date"
 do_hosts()
 {

@@ -3,6 +3,7 @@
 #
 #	makedev
 #
+
 additem makedev "/dev/MAKEDEV being up to date"
 do_makedev()
 {

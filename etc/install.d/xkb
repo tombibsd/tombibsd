@@ -9,6 +9,7 @@
 # or at least adding that one file (which we may be able to do if X11SRCDIR
 # is available).
 #
+
 additem xkb "clean up for xkbdata to xkeyboard-config upgrade"
 do_xkb()
 {

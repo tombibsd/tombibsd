@@ -3,6 +3,7 @@
 #
 #	X11 fontconfig
 #
+
 additem fontconfig "X11 font configuration is up to date"
 do_fontconfig()
 {

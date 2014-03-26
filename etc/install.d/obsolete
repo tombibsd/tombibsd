@@ -4,6 +4,7 @@
 #	obsolete
 #	(this item is last to allow other items to move obsolete files)
 #
+
 additem obsolete "remove obsolete file sets and minor libraries"
 do_obsolete()
 {

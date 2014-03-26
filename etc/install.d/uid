@@ -3,6 +3,7 @@
 #
 #	uid
 #
+
 additem uid "required users in /etc/master.passwd"
 do_uid()
 {

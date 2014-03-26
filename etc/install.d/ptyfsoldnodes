@@ -3,6 +3,7 @@
 #
 #	ptyfsoldnodes
 #
+
 additem ptyfsoldnodes "remove legacy device nodes when using ptyfs"
 do_ptyfsoldnodes()
 {

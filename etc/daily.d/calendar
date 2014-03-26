@@ -7,4 +7,3 @@ if [ -s $TMP ]; then
 	cat $TMP
 fi
 rm -f $TMP
-

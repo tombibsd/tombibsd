@@ -3,6 +3,7 @@
 #
 #	varshm
 #
+
 additem varshm "check for a tmpfs mounted on /var/shm"
 do_varshm()
 {

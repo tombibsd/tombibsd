@@ -3,6 +3,7 @@
 #
 #	varrwho
 #
+
 additem varrwho "required ownership of files in /var/rwho"
 do_varrwho()
 {

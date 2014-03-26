@@ -3,6 +3,7 @@
 #
 #	mailerconf
 #
+
 adddisableditem mailerconf "update /etc/mailer.conf after sendmail removal"
 do_mailerconf()
 {

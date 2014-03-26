@@ -3,6 +3,7 @@
 #
 #	pwd_mkdb
 #
+
 additem pwd_mkdb "passwd database version"
 do_pwd_mkdb()
 {

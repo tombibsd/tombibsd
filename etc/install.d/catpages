@@ -3,6 +3,7 @@
 #
 #	catpages
 #
+
 obsolete_catpages()
 {
 	basedir="$2"

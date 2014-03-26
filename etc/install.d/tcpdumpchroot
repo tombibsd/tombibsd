@@ -3,6 +3,7 @@
 #
 #	tcpdumpchroot
 #
+
 additem tcpdumpchroot "remove /var/chroot/tcpdump/etc/protocols"
 do_tcpdumpchroot()
 {

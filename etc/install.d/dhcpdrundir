@@ -3,6 +3,7 @@
 #
 #	dhcpcdrundir
 #
+
 additem dhcpcdrundir "accientaly created /@RUNDIR@ does not exist"
 do_dhcpcdrundir()
 {

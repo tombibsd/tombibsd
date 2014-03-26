@@ -3,6 +3,7 @@
 #
 #	dhcpcd
 #
+
 additem dhcpcd "dhcpcd configuration is up to date"
 do_dhcpcd()
 {

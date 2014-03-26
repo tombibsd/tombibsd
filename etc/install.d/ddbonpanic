@@ -3,6 +3,7 @@
 #
 #	ddbonpanic
 #
+
 additem ddbonpanic "verify ddb.onpanic is configured in sysctl.conf"
 do_ddbonpanic()
 {

@@ -3,6 +3,7 @@
 #
 #	pf
 #
+
 additem pf "pf configuration being up to date"
 do_pf()
 {

@@ -3,6 +3,7 @@
 #
 #	gid
 #
+
 additem gid "required groups in /etc/group"
 do_gid()
 {

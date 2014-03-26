@@ -3,6 +3,7 @@
 #
 #	gpio
 #
+
 additem gpio "gpio configuration is up to date"
 do_gpio()
 {

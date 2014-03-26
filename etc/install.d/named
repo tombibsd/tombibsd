@@ -3,6 +3,7 @@
 #
 #	named
 #
+
 additem named "named configuration update"
 do_named()
 {

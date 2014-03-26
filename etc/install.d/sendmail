@@ -3,6 +3,7 @@
 #
 #	sendmail
 #
+
 adddisableditem sendmail "remove obsolete sendmail configuration files and scripts"
 do_sendmail()
 {

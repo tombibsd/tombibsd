@@ -3,6 +3,7 @@
 #
 #	X11
 #
+
 additem x11 "x11 configuration update"
 do_x11()
 {

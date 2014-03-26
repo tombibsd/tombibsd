@@ -3,6 +3,7 @@
 #
 #	wscons
 #
+
 additem wscons "wscons configuration file update"
 do_wscons()
 {

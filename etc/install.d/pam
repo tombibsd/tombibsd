@@ -3,6 +3,7 @@
 #
 #	pam
 #
+
 additem pam "/etc/pam.d is populated"
 do_pam()
 {

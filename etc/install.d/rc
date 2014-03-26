@@ -3,6 +3,7 @@
 #
 #	rc
 #
+
 additem rc "/etc/rc* and /etc/rc.d/ being up to date"
 do_rc()
 {

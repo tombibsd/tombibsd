@@ -3,6 +3,7 @@
 #
 #	mtree
 #
+
 additem mtree "/etc/mtree/ being up to date"
 do_mtree()
 {

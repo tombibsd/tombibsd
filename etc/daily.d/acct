@@ -16,4 +16,3 @@ sa -sq
 if [ -f /var/account/acct.1.gz ]; then
 	gzip /var/account/acct.0
 fi
-

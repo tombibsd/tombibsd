@@ -3,6 +3,7 @@
 #
 #	periodic
 #
+
 additem periodic "/etc/{daily,weekly,monthly,security} being up to date"
 do_periodic()
 {

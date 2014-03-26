@@ -3,6 +3,7 @@
 #
 #	defaults
 #
+
 additem defaults "/etc/defaults/ being up to date"
 do_defaults()
 {

@@ -3,6 +3,7 @@
 #
 #	iscsi
 #
+
 additem iscsi "/etc/iscsi is populated"
 do_iscsi()
 {
