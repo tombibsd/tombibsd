@@ -332,6 +332,8 @@
 ./etc/security.d/nfs		type=file mode=0444
 ./etc/security.d/passwd		type=file mode=0444
 ./etc/security.d/pkgs		type=file mode=0444
+./etc/security.d/pkg_signatures		type=file mode=0444
+./etc/security.d/pkg_vulnerabilities	type=file mode=0444
 ./etc/security.d/rhosts		type=file mode=0444
 ./etc/security.d/rootdotfiles	type=file mode=0444
 ./etc/security.d/varmail	type=file mode=0444
