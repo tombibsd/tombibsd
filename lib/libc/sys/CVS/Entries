@@ -40,7 +40,7 @@
 /chmod.2/1.47/Thu Oct 24 10:28:53 2013/-kk/
 /chown.2/1.36/Thu Oct 24 10:28:53 2013/-kk/
 /chroot.2/1.23/Mon May 31 12:16:20 2010/-kk/
-/clock_settime.2/1.20/Wed Mar 11 13:39:14 2009/-kk/
+/clock_settime.2/1.22/Fri Apr 11 02:03:14 2014/-kk/
 /clock_settime.c/1.12/Sat Oct 15 23:00:02 2011/-kk/
 /clone.2/1.13/Sun Jan 29 11:44:54 2012/-kk/
 /close.2/1.17/Tue Jun  1 16:14:10 2004/-kk/

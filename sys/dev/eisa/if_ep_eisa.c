@@ -203,6 +203,7 @@ ep_eisa_attach(device_t parent, device_t self, void *aux)
 	const char *intrstr;
 	const struct ep_eisa_product *eep;
 	u_int irq;
+	char intrbuf[EISA_INTRSTR_LEN];
 
 	/* Map i/o space. */
 	if (bus_space_map(iot, EISA_SLOT_ADDR(ea->ea_slot) + EP_EISA_CFG_BASE,
@@ -253,7 +254,7 @@ ep_eisa_attach(device_t parent, device_t self, void *aux)
 		    irq);
 		return;
 	}
-	intrstr = eisa_intr_string(ec, ih);
+	intrstr = eisa_intr_string(ec, ih, intrbuf, sizeof(intrbuf));
 	sc->sc_ih = eisa_intr_establish(ec, ih, IST_EDGE, IPL_NET,
 	    epintr, sc);
 	if (sc->sc_ih == NULL) {

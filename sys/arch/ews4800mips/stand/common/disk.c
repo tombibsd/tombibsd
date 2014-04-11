@@ -285,9 +285,8 @@ __fd_progress_msg(int pos)
 {
 	char msg[16];
 
-	memset(msg, 0, sizeof msg);
-	sprintf(msg, "C%d H%d S%d  \r", (pos >> 16) & 0xff, (pos >> 8) & 0xff,
-	    pos & 0xff);
+	snprintf(msg, sizeof(msg), "C%d H%d S%d  \r",
+	    (pos >> 16) & 0xff, (pos >> 8) & 0xff, pos & 0xff);
 	printf("%s", msg);
 }
 #endif

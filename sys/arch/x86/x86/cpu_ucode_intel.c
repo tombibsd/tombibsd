@@ -102,7 +102,8 @@ cpu_ucode_intel_firmware_open(firmware_handle_t *fwh, const char *fwname)
 		return EOPNOTSUPP;
 
 	intel_getcurrentucode(&ucodeversion, &platformid);
-	sprintf(cpuspec, "%08x-%d", cpu_signature, platformid);
+	snprintf(cpuspec, sizeof(cpuspec), "%08x-%d", cpu_signature,
+	    platformid);
 
 	return firmware_open(fw_path, cpuspec, fwh);
 }

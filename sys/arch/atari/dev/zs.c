@@ -1334,5 +1334,6 @@ zs_loadchannelregs(struct zschan *zc, uint8_t *reg)
 	ZS_WRITE(zc, 15, reg[15]);
 	ZS_WRITE(zc,  3, reg[3]);
 	ZS_WRITE(zc,  5, reg[5]);
+	__USE(i);
 }
 #endif /* NZS > 1 */

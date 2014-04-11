@@ -371,7 +371,7 @@ arm32_kernel_vm_init(vaddr_t kernel_vm_base, vaddr_t vectors, vaddr_t iovbase,
 {
 	struct bootmem_info * const bmi = &bootmem_info;
 #ifdef MULTIPROCESSOR
-	const size_t cpu_num = arm_cpu_max + 1;
+	const size_t cpu_num = arm_cpu_max;
 #else
 	const size_t cpu_num = 1;
 #endif
@@ -903,11 +903,12 @@ arm32_kernel_vm_init(vaddr_t kernel_vm_base, vaddr_t vectors, vaddr_t iovbase,
 	 * tables.
 	 */
 
-#if defined(VERBOSE_INIT_ARM) && 0
+#if defined(VERBOSE_INIT_ARM)
 	printf("TTBR0=%#x", armreg_ttbr_read());
 #ifdef _ARM_ARCH_6
-	printf(" TTBR1=%#x TTBCR=%#x",
-	    armreg_ttbr1_read(), armreg_ttbcr_read());
+	printf(" TTBR1=%#x TTBCR=%#x CONTEXTIDR=%#x",
+	    armreg_ttbr1_read(), armreg_ttbcr_read(),
+	    armreg_contextidr_read());
 #endif
 	printf("\n");
 #endif
@@ -931,6 +932,7 @@ arm32_kernel_vm_init(vaddr_t kernel_vm_base, vaddr_t vectors, vaddr_t iovbase,
 	/*
 	 * TTBCR should have been initialized by the MD start code.
 	 */
+	KASSERT((armreg_contextidr_read() & 0xff) == 0);
 	KASSERT(armreg_ttbcr_read() == __SHIFTIN(1, TTBCR_S_N));
 	/*
 	 * Disable lookups via TTBR0 until there is an activated pmap.
@@ -951,6 +953,20 @@ arm32_kernel_vm_init(vaddr_t kernel_vm_base, vaddr_t vectors, vaddr_t iovbase,
 #else
 	printf(" (TTBR0=%#x)", armreg_ttbr_read());
 #endif
+#endif
+
+#ifdef MULTIPROCESSOR
+	/*
+	 * Kick the secondaries to load the TTB.  After which they'll go
+	 * back to sleep to wait for the final kick so they will hatch.
+	 */
+#ifdef VERBOSE_INIT_ARM
+	printf(" hatchlings");
+#endif
+	cpu_boot_secondary_processors();
+#endif
+
+#ifdef VERBOSE_INIT_ARM
 	printf(" OK\n");
 #endif
 }

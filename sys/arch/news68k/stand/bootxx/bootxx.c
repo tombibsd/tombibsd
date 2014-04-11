@@ -113,7 +113,8 @@ bootxx(uint32_t d4, uint32_t d5, uint32_t d6, uint32_t d7)
 		return;
 	}
 
-	sprintf(devname, "%s(%d,%d,%d)", devs[type], ctlr, unit, part);
+	snprintf(devname, sizeof(devname), "%s(%d,%d,%d)",
+	    devs[type], ctlr, unit, part);
 
 	fd = rom_open(devname, 0);
 	if (fd == -1) {

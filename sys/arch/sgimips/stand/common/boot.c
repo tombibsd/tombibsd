@@ -160,14 +160,16 @@ main(int argc, char **argv)
 	 */
 
 	if (strstr(argv[0], "cdrom(")) {
+		char *ep =
 		strcpy(bootfile, argv[0]);
-		i = (strrchr(bootfile, ')') - bootfile);
+		ep = strrchr(bootfile, ')');
+		i =  ep - bootfile;
 		bootfile[i - 1] = '0';
 		if (strstr(bootfile, "ip3x"))
 			kernel = "ip3x";
 		else
 			kernel = "ip2x";
-		sprintf((strrchr(bootfile, ')') + 1), kernel);
+		strcpy(ep + 1, kernel);
 		if ((loadfile(bootfile, marks, LOAD_KERNEL)) >= 0)
 			goto finish;
 	}

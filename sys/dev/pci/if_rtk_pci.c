@@ -162,6 +162,7 @@ rtk_pci_attach(device_t parent, device_t self, void *aux)
 	const char *intrstr = NULL;
 	const struct rtk_type *t;
 	bool ioh_valid, memh_valid;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	sc->sc_dev = self;
 	psc->sc_pc = pa->pa_pc;
@@ -211,7 +212,7 @@ rtk_pci_attach(device_t parent, device_t self, void *aux)
 		aprint_error_dev(self, "couldn't map interrupt\n");
 		return;
 	}
-	intrstr = pci_intr_string(pc, ih);
+	intrstr = pci_intr_string(pc, ih, intrbuf, sizeof(intrbuf));
 	psc->sc_ih = pci_intr_establish(pc, ih, IPL_NET, rtk_intr, sc);
 	if (psc->sc_ih == NULL) {
 		aprint_error_dev(self, "couldn't establish interrupt");

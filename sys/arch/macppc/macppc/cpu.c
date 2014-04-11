@@ -221,7 +221,7 @@ md_setup_trampoline(volatile struct cpu_hatch_data *h, struct cpu_info *ci)
 		h->hatch_running = -1;
 
 		/* see if there's an OF property for the reset register */
-		sprintf(cpupath, "/cpus/@%x", ci->ci_cpuid);
+		snprintf(cpupath, sizeof(cpupath), "/cpus/@%x", ci->ci_cpuid);
 		node = OF_finddevice(cpupath);
 		if (node == -1) {
 			printf(": no OF node for CPU %d?\n", ci->ci_cpuid);

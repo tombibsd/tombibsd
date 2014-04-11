@@ -732,11 +732,10 @@ ctintr(void *arg)
 	struct ct_softc *sc = arg;
 	struct buf *bp;
 	uint8_t stat;
-	int ctlr, slave, unit;
+	int ctlr, slave;
 
 	ctlr = device_unit(device_parent(sc->sc_dev));
 	slave = sc->sc_slave;
-	unit = device_unit(sc->sc_dev);
 
 	bp = bufq_peek(sc->sc_tab);
 	if (bp == NULL) {

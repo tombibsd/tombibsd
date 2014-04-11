@@ -8,7 +8,7 @@ include "external/bsd/drm2/linux/files.drmkms_linux"
 # if we wanted.  Not clear that this provides as much advantage as
 # separating out PCI code, which will be necessary for, e.g., PCIless
 # ARM SoC graphics drivers.
-define	drmkms_i2c
+define	drmkms_i2c: drmkms_linux
 
 define	drmkms
 device	drmkms: drmkms_linux, drmkms_i2c

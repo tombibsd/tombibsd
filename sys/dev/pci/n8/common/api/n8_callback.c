@@ -188,7 +188,7 @@ N8_Status_t n8_callbackThread(N8_CallbackData_t *callbackData_p)
    recalc_sigpending(current);
 
    /* set name of this process (max 15 chars + 0 !) */
-   sprintf(current->comm, "NSP2000 Thread");
+   strcpy(current->comm, "NSP2000 Thread");
 #endif
         
    while (callbackData_p->n8_thread == TRUE)

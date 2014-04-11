@@ -16,8 +16,8 @@ rm -rf BonjourExample DNS-SD.VisualStudio DNS-SD.xcodeproj
 rm -rf DNSServiceBrowser-Info.plist DNSServiceBrowser.NET
 rm -rf DNSServiceBrowser.VB DNSServiceBrowser.m DNSServiceBrowser.nib
 rm -rf DNSServiceReg-Info.plist DNSServiceReg.m DNSServiceReg.nib
-rm -rf ExplorerPlugin Java Makefile PrinterSetupWizard ReadMe.txt
-rm -rf SimpleChat.NET SimpleChat.VB
+rm -rf ExplorerPlugin FirefoxExtension Java Makefile PrinterSetupWizard
+rm -rf ReadMe.txt SimpleChat.NET SimpleChat.VB mDNSNetMonitor.VisualStudio
 
 cd ../mDNSCore
 rm -f Implementer\ Notes.txt

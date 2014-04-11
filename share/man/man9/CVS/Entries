@@ -1,7 +1,7 @@
 /CTASSERT.9/1.2/Mon Apr  5 19:18:45 2010/-kk/
 /KASSERT.9/1.13/Tue Sep 27 00:36:51 2011/-kk/
 /LWP_CACHE_CREDS.9/1.2/Sun Dec  9 08:53:57 2007/-kk/
-/Makefile/1.375/Tue Mar 25 02:35:16 2014/-kk/
+/Makefile/1.377/Fri Apr 11 02:03:25 2014/-kk/
 /RUN_ONCE.9/1.8/Tue Jul  6 22:29:29 2010/-kk/
 /SET.9/1.3/Tue Mar 25 02:35:16 2014/-kk/
 /STACK.9/1.2/Fri Apr  8 07:55:04 2011/-kk/
@@ -118,7 +118,7 @@
 /linedisc.9/1.11/Wed Sep  3 02:56:47 2008/-kk/
 /lock.9/1.29/Wed Apr 30 13:10:58 2008/-kk/
 /log.9/1.10/Wed Apr 30 13:10:58 2008/-kk/
-/ltsleep.9/1.14/Sat Jan 28 13:26:12 2012/-kk/
+/ltsleep.9/1.17/Fri Apr 11 02:03:25 2014/-kk/
 /m_tag.9/1.5/Thu Dec  2 12:54:13 2010/-kk/
 /makeiplcookie.9/1.3/Sat Dec 23 10:01:32 2006/-kk/
 /malloc.9/1.47/Mon Aug  3 19:57:40 2009/-kk/
@@ -146,7 +146,7 @@
 /pathbuf.9/1.2/Tue Nov 30 10:32:46 2010/-kk/
 /pci.9/1.36/Mon Jan 30 19:20:13 2012/-kk/
 /pci_configure_bus.9/1.16/Sat Jul 14 05:32:17 2012/-kk/
-/pci_intr.9/1.15/Tue Apr  5 14:57:33 2011/-kk/
+/pci_intr.9/1.17/Fri Apr 11 02:03:25 2014/-kk/
 /pckbport.9/1.5/Mon Mar  9 19:24:32 2009/-kk/
 /pcmcia.9/1.20/Mon May 30 01:48:40 2011/-kk/
 /pcq.9/1.6/Sun Jan 22 02:55:47 2012/-kk/
@@ -232,7 +232,7 @@
 /vme.9/1.13/Fri Jul  1 17:34:44 2011/-kk/
 /vmem.9/1.15/Thu Oct 24 10:28:54 2013/-kk/
 /vnfileops.9/1.16/Thu Dec  2 12:54:13 2010/-kk/
-/vnode.9/1.60/Fri Mar 14 04:28:07 2014/-kk/
+/vnode.9/1.61/Fri Apr 11 02:03:25 2014/-kk/
 /vnodeops.9/1.93/Sat Mar  1 06:04:20 2014/-kk/
 /vnsubr.9/1.42/Sat Mar  1 06:04:20 2014/-kk/
 /wdc.9/1.18/Thu Oct 24 10:28:54 2013/-kk/

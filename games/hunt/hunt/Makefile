@@ -1,14 +1,12 @@
 #	$NetBSD$
 
 PROG=	hunt
-SRCS=	connect.c hunt.c otto.c playit.c pathname.c
+SRCS=	connect.c hunt.c otto.c playit.c server.c
 MAN=	hunt.6
 LDADD=	-lcurses -lterminfo
 DPADD=	${LIBCURSES} ${LIBTERMINFO}
 HIDEGAME=hidegame
 
-CPPFLAGS+=-I${.CURDIR}/../huntd
-
-.PATH: ${.CURDIR}/../huntd
+CPPFLAGS+=-I${.CURDIR}/../include
 
 .include <bsd.prog.mk>

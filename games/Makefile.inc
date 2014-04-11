@@ -20,4 +20,7 @@ BINGRP=		games
 BINMODE=	2555
 .endif
 .endif
+# Note: do not bother with WARNS=6 until -Wconversion is either
+# removed from WARNS=6 or rendered useful by improving gcc; as it is
+# (with gcc48) it produces buckets of drivel.
 WARNS?=		5

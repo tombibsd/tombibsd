@@ -78,7 +78,6 @@ static void dwc2_qh_init(struct dwc2_hsotg *hsotg, struct dwc2_qh *qh,
 			 struct dwc2_hcd_urb *urb)
 {
 	int dev_speed, hub_addr, hub_port;
-	const char *speed, *type;
 
 	dev_vdbg(hsotg->dev, "%s()\n", __func__);
 
@@ -149,6 +148,8 @@ static void dwc2_qh_init(struct dwc2_hsotg *hsotg, struct dwc2_qh *qh,
 
 	qh->dev_speed = dev_speed;
 
+#ifdef DWC2_DEBUG
+	const char *speed, *type;
 	switch (dev_speed) {
 	case USB_SPEED_LOW:
 		speed = "low";
@@ -184,6 +185,7 @@ static void dwc2_qh_init(struct dwc2_hsotg *hsotg, struct dwc2_qh *qh,
 	}
 
 	dev_vdbg(hsotg->dev, "DWC OTG HCD QH - Type = %s\n", type);
+#endif
 
 	if (qh->ep_type == USB_ENDPOINT_XFER_INT) {
 		dev_vdbg(hsotg->dev, "DWC OTG HCD QH - usecs = %d\n",

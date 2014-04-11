@@ -470,6 +470,7 @@ bnx_attach(device_t parent, device_t self, void *aux)
 	u_int32_t		val;
 	int			mii_flags = MIIF_FORCEANEG;
 	pcireg_t		memtype;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	if (bnx_tx_pool == NULL) {
 		bnx_tx_pool = malloc(sizeof(*bnx_tx_pool), M_DEVBUF, M_NOWAIT);
@@ -519,7 +520,7 @@ bnx_attach(device_t parent, device_t self, void *aux)
 		goto bnx_attach_fail;
 	}
 
-	intrstr = pci_intr_string(pc, ih);
+	intrstr = pci_intr_string(pc, ih, intrbuf, sizeof(intrbuf));
 
 	/*
 	 * Configure byte swap and enable indirect register access.

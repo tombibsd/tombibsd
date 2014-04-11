@@ -512,7 +512,8 @@ rump_init(void)
 #undef CPFX
 #undef CPFXLEN
 		} else {
-			sprintf(buf, "rumpns_sys_%s", syscallnames[i]);
+			snprintf(buf, sizeof(buf), "rumpns_sys_%s",
+			    syscallnames[i]);
 		}
 		if ((sym = rumpuser_dl_globalsym(buf)) != NULL
 		    && sym != rump_sysent[i].sy_call) {

@@ -18,3 +18,4 @@ ENTRY(ffs)
 
 1:	xorl	%eax,%eax		/* clear result */
 	ret
+END(ffs)

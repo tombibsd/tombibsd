@@ -116,6 +116,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #define ELFSIZE 32
 #include <sys/exec_elf.h>
 #include <sys/device.h>
+#include <sys/cpu.h>
 
 #include <m68k/cacheops.h>
 
@@ -1880,8 +1881,6 @@ struct intvid_info_t {
  * 	...?
  */
 
-char	cpu_model[120];		/* for sysctl() */
-
 int	mach_cputype(void);
 
 int
@@ -1910,11 +1909,11 @@ identifycpu(void)
 		mpu = ("(unknown processor)");
 		break;
 	}
-	sprintf(cpu_model, "Apple Macintosh %s%s %s",
+	cpu_setmodel("Apple Macintosh %s%s %s",
 	    cpu_models[mac68k_machine.cpu_model_index].model_major,
 	    cpu_models[mac68k_machine.cpu_model_index].model_minor,
 	    mpu);
-	printf("%s\n", cpu_model);
+	printf("%s\n", cpu_getmodel());
 	printf("cpu: delay factor %d\n", delay_factor);
 	initfpu();
 }

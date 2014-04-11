@@ -1289,7 +1289,7 @@ kadm5_ad_randkey_principal(void *server_handle,
 				 password,
 				 principal,
 				 &(*keys)[0]);
-	memset(password, 0, sizeof(password));
+	memset(password, 0, plen);
 	if (ret) {
 	    free(*keys);
 	    *keys = NULL;

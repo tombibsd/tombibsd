@@ -1,5 +1,5 @@
-/autoconf.c/1.22/Sat Oct 13 06:18:44 2012/-kk/
-/bus_space.c/1.11/Tue Nov 22 14:31:02 2011/-kk/
+/autoconf.c/1.23/Fri Apr 11 02:03:32 2014/-kk/
+/bus_space.c/1.12/Fri Apr 11 02:03:32 2014/-kk/
 /clock.c/1.17/Sat Sep  9 03:14:18 2006/-kk/
 /clockvar.h/1.6/Mon Apr 28 20:23:30 2008/-kk/
 /disksubr.c/1.31/Wed Jan  2 11:48:26 2008/-kk/
@@ -7,7 +7,7 @@
 /isr.c/1.21/Mon Dec 20 00:25:40 2010/-kk/
 /isr.h/1.7/Mon Apr 28 20:23:30 2008/-kk/
 /locore.s/1.65/Tue Mar 25 02:35:28 2014/-kk/
-/machdep.c/1.100/Fri Aug 10 12:17:51 2012/-kk/
+/machdep.c/1.101/Fri Apr 11 02:03:32 2014/-kk/
 /machid.h/1.4/Sun Dec 11 12:18:23 2005/-kk/
 /mainbus.c/1.16/Sun Mar  6 14:54:47 2011/-kk/
 /pmap_bootstrap.c/1.40/Fri Feb 10 06:28:39 2012/-kk/

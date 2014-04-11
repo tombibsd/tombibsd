@@ -2134,6 +2134,7 @@ mpii_attach(device_t parent, device_t self, void *aux)
 	struct scsipi_adapter *adapt = &sc->sc_adapt;
 	struct scsipi_channel *chan = &sc->sc_chan;
 	char wkname[15];
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	pci_aprint_devinfo(pa, NULL);
 
@@ -2195,7 +2196,7 @@ mpii_attach(device_t parent, device_t self, void *aux)
 		aprint_error_dev(self, "unable to map interrupt\n");
 		goto unmap;
 	}
-	intrstr = pci_intr_string(pa->pa_pc, ih);
+	intrstr = pci_intr_string(pa->pa_pc, ih, intrbuf, sizeof(intrbuf));
 
 	if (mpii_init(sc) != 0) {
 		aprint_error_dev(self, "unable to initialize ioc\n");

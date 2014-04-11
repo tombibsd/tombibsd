@@ -683,6 +683,8 @@ put_parameter(uint8_t *buf, unsigned len, negotiation_parameter_t *par)
 	}
 
 	cc = snprintf(buf, len, "%s=", entries[par->key].name);
+	if (cc >= len)
+		return len;
 
 	for (i = 0; i < par->list_num; i++) {
 		switch (entries[par->key].val) {
@@ -759,11 +761,17 @@ put_parameter(uint8_t *buf, unsigned len, negotiation_parameter_t *par)
 		DEB(10, ("put_par: value '%s'\n",&buf[cc]));
 
 		cc += cl;
+		if (cc >= len)
+			return len;
 		if ((i + 1) < par->list_num) {
+			if (cc >= len)
+				return len;
 			buf[cc++] = ',';
 		}
 	}
 
+	if (cc >= len)
+		return len;
 	buf[cc] = 0x0;				/* make sure it's terminated */
 	return cc + 1;				/* return next place in list */
 }

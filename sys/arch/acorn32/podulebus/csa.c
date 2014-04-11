@@ -184,7 +184,7 @@ csa_attach(device_t parent, device_t self, void *aux)
 
 	/* Provide an override for the host id */
 	ncr_sc->sc_channel.chan_id = 7;
-	sprintf(hi_option, "%s.hostid", device_xname(self));
+	snprintf(hi_option, sizeof(hi_option), "%s.hostid", device_xname(self));
 	(void)get_bootconf_option(boot_args, hi_option,
 	    BOOTOPT_TYPE_INT, &ncr_sc->sc_channel.chan_id);
 	ncr_sc->sc_adapter.adapt_minphys = minphys;

@@ -174,7 +174,7 @@ printtrap(const u_long a0, const u_long a1, const u_long a2,
 		entryname = "system call";
 		break;
 	default:
-		sprintf(ubuf, "type %lx", entry);
+		snprintf(ubuf, sizeof(ubuf), "type %lx", entry);
 		entryname = (const char *) ubuf;
 		break;
 	}

@@ -43,3 +43,4 @@ ENTRY(memset)
 	popl	%eax
 	popl	%edi
 	ret
+END(memset)

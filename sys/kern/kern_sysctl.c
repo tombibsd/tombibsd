@@ -2105,6 +2105,11 @@ sysctl_createv(struct sysctllog **log, int cflags,
 	pnode = root;
 	error = sysctl_locate(NULL, &name[0], namelen - 1, &pnode, &ni);
 	if (error) {
+		/*
+		 * XXX: If you are seeing this printf in early bringup
+		 * stages, perhaps your setfault is not functioning and
+		 * thus kcopy() is mis-behaving.
+		 */
 		printf("sysctl_createv: sysctl_locate(%s) returned %d\n",
 		       nnode.sysctl_name, error);
 		sysctl_unlock();

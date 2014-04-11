@@ -315,7 +315,8 @@ MALLOC_DECLARE(M_VCHI);
  */
 #if 1
 /* emulate jiffies */
-static inline unsigned long _jiffies(void)
+static inline unsigned long
+_jiffies(void)
 {
 	struct timeval tv;
 
@@ -323,7 +324,8 @@ static inline unsigned long _jiffies(void)
 	return tvtohz(&tv);
 }
 
-static inline unsigned long msecs_to_jiffies(unsigned long msecs)
+static inline unsigned long
+msecs_to_jiffies(unsigned long msecs)
 {
 	struct timeval tv;
 
@@ -388,6 +390,10 @@ typedef	off_t	loff_t;
 #define rmb	membar_consumer
 #define wmb	membar_producer
 #define dsb	membar_producer
+
+#define smp_mb	membar_producer
+#define smp_rmb	membar_consumer
+#define smp_wmb	membar_producer
 
 #define device_print_prettyname(dev)	device_printf((dev), "")
 

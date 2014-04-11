@@ -1192,7 +1192,7 @@ fn_name(vaddr_t addr)
 	for (i = 0; names[i].name; i++)
 		if (names[i].addr == (void*)addr)
 			return (names[i].name);
-	sprintf(buf, "%#"PRIxVADDR, addr);
+	snprintf(buf, sizeof(buf), "%#"PRIxVADDR, addr);
 	return (buf);
 }
 

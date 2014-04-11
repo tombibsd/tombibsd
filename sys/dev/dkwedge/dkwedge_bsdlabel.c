@@ -120,7 +120,7 @@ static const struct disklabel_location {
 	{ 0,	128 },	/* sparc, sun68k */
 	{ 1,	0 },	/* amd64, arc, arm, bebox, cobalt, evbppc, hppa,
 			   hpcarm, hpcmips, i386, ibmnws, mipsco, mvmeppc,
-			   ofppc, pmppc, prep, sandpoint,
+			   ofppc, playstation2, pmppc, prep, sandpoint,
 			   sbmips, sgimips, sh3 */
 	/* XXX atari is weird */
 	{ 2,	0 },	/* cesfic, hp300 */

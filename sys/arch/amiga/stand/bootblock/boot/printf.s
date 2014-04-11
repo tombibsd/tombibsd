@@ -56,7 +56,8 @@ Lstorech:
 	movb	%d0, %a3@+
 	rts
 
-ENTRY_NOPROFILE(sprintf)
+#ifdef notdef
+ENTRY_NOPROFILE(unused_sprintf)
 	movml	#0x0032,%sp@-
 	movl	%sp@(16),%a3
 	lea	%pc@(Lstorech:w),%a2
@@ -66,6 +67,7 @@ ENTRY_NOPROFILE(sprintf)
 	jsr	%a6@(-0x20a)
 	movml	%sp@+, #0x4c00
 	rts
+#endif
 
 /*
  * XXX cheating - at least for now.

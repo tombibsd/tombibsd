@@ -197,6 +197,7 @@ txp_attach(device_t parent, device_t self, void *aux)
 	u_int16_t subsys;
 	int i, flags;
 	char devinfo[256];
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	sc->sc_dev = self;
 	sc->sc_cold = 1;
@@ -247,7 +248,7 @@ txp_attach(device_t parent, device_t self, void *aux)
 		return;
 	}
 
-	intrstr = pci_intr_string(pc, ih);
+	intrstr = pci_intr_string(pc, ih, intrbuf, sizeof(intrbuf));
 	sc->sc_ih = pci_intr_establish(pc, ih, IPL_NET, txp_intr, sc);
 	if (sc->sc_ih == NULL) {
 		printf(": couldn't establish interrupt");

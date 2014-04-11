@@ -121,9 +121,10 @@ pci_intr_map(const struct pci_attach_args *pa, pci_intr_handle_t *ihp)
 }
 
 const char *
-pci_intr_string(pci_chipset_tag_t pc, pci_intr_handle_t ih)
+pci_intr_string(pci_chipset_tag_t pc, pci_intr_handle_t ih, char *buf,
+    size_t len)
 {
-	return (*pc->pc_intr_string)(pc, ih);
+	return (*pc->pc_intr_string)(pc, ih, buf, len);
 }
 
 const struct evcnt *

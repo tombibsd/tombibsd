@@ -115,14 +115,11 @@ void
 drscattach(device_t parent, device_t self, void *aux)
 {
 	struct siop_softc *sc = device_private(self);
-	struct zbus_args *zap;
 	siop_regmap_p rp;
 	struct scsipi_adapter *adapt = &sc->sc_adapter;
 	struct scsipi_channel *chan = &sc->sc_channel;
 
 	printf("\n");
-
-	zap = aux;
 
 	sc->sc_dev = self;
 	sc->sc_siopp = rp = (siop_regmap_p)(DRCCADDR+PAGE_SIZE*DRSCSIPG);

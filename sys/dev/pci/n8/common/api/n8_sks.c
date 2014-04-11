@@ -379,7 +379,7 @@ void n8_printSKSKeyHandle(const N8_SKSKeyHandle_t *keyHandle_p)
  *    The given key handle pointer is valid.
  *****************************************************************************/
 N8_Status_t N8_SKSDisplay(N8_SKSKeyHandle_t *keyHandle_p,
-                          char              *display_string_p) 
+                          char              *display_string_p, size_t len) 
 {
    if (keyHandle_p == NULL)
    {
@@ -391,7 +391,7 @@ N8_Status_t N8_SKSDisplay(N8_SKSKeyHandle_t *keyHandle_p,
       return N8_INVALID_PARAMETER;
    }
 
-   sprintf(display_string_p,
+   snprintf(display_string_p, len,
            "Key Handle:\n"
            "\tKey Type   %08x\n"
            "\tKey Length %08x\n"

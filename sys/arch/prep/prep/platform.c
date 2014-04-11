@@ -266,11 +266,11 @@ create_intr_map(void *v, prop_dictionary_t dict)
 			else
 				intr_num = prop_number_create_integer(
 				    (line & 0x7fff) + offset);
-			sprintf(key, "pin-%c", 'A' + j);
+			snprintf(key, sizeof(key), "pin-%c", 'A' + j);
 			prop_dictionary_set(sub, key, intr_num);
 			prop_object_release(intr_num);
 		}
-		sprintf(key, "devfunc-%d", dev);
+		snprintf(key, sizeof(key), "devfunc-%d", dev);
 		prop_dictionary_set(dict, key, sub);
 		prop_object_release(sub);
 	}

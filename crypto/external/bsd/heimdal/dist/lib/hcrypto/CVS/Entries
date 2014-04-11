@@ -28,7 +28,7 @@
 /ec.h/1.1.1.1/Wed Apr 13 18:14:49 2011/-kk/
 /ecdh.h/1.1.1.1/Wed Apr 13 18:14:49 2011/-kk/
 /ecdsa.h/1.1.1.1/Wed Apr 13 18:14:49 2011/-kk/
-/engine.c/1.1.1.1/Wed Apr 13 18:14:49 2011/-kk/
+/engine.c/1.2/Fri Apr 11 01:59:58 2014/-kk/
 /engine.h/1.1.1.2/Thu Apr 14 14:08:31 2011/-kk/
 /evp-cc.c/1.1.1.1/Wed Apr 13 18:14:49 2011/-kk/
 /evp-cc.h/1.1.1.2/Thu Apr 14 14:08:31 2011/-kk/
@@ -43,7 +43,7 @@
 /hmac.c/1.1.1.1/Wed Apr 13 18:14:50 2011/-kk/
 /hmac.h/1.1.1.2/Thu Apr 14 14:08:32 2011/-kk/
 /libhcrypto-exports.def/1.1.1.1/Wed Apr 13 18:14:50 2011/-kk/
-/md2.c/1.1.1.1/Wed Apr 13 18:14:50 2011/-kk/
+/md2.c/1.2/Fri Apr 11 01:59:58 2014/-kk/
 /md2.h/1.1.1.2/Thu Apr 14 14:08:32 2011/-kk/
 /md4.c/1.1.1.1/Wed Apr 13 18:14:50 2011/-kk/
 /md4.h/1.1.1.2/Thu Apr 14 14:08:32 2011/-kk/

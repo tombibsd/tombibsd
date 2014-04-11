@@ -30,6 +30,8 @@ CONFIG_SUBST=	${TOOL_SED} \
 		-e 's,%libdir%,${X11USRLIBDIR},g' \
 		-e 's,%includedir%,${X11INCDIR},' \
 		-e 's,%ft_version%,${FT_VERSION},' \
+		-e 's,%LIBS_CONFIG%,-lfreetype -lz -lbz2,' \
+		-e 's,%LIBSSTATIC_CONFIG%,-lfreetype -lz -lbz2,' \
 		-e 's,%build_libtool_libs%,yes,' \
 		-e 's,%FT2_EXTRA_LIBS%,,' \
 		-e 's,%LIBZ%,-lz,' \

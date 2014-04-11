@@ -220,10 +220,10 @@ bfs_newfs(int fd, uint32_t nsectors)
 	/* dirent table */
 	memset(buf, 0, BFS_BSIZE);
 	dirent->inode = BFS_ROOT_INODE;
-	sprintf(dirent->name, ".");
+	strcpy(dirent->name, ".");
 	dirent++;
 	dirent->inode = BFS_ROOT_INODE;
-	sprintf(dirent->name, "..");
+	strcpy(dirent->name, "..");
 	if (write(fd, buf, BFS_BSIZE) < 0) {
 		perror("write dirent");
 		return -1;

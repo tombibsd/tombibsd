@@ -36,6 +36,7 @@ ENTRY_NP(_membar_producer)
 #ifdef _ARM_ARCH_7
 	dsb
 #else
+	mov	r0, #0
 	mcr	p15, 0, r0, c7, c10, 4	 /* Data Synchronization Barrier */
 #endif
 	RET
@@ -48,6 +49,7 @@ ENTRY_NP(_membar_sync)
 #ifdef _ARM_ARCH_7
 	dmb
 #else
+	mov	r0, #0
 	mcr	p15, 0, r0, c7, c10, 5	/* Data Memory Barrier */
 #endif
 	RET

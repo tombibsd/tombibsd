@@ -1,4 +1,5 @@
 /*	$NetBSD$	*/
+	char intrbuf[PCI_INTRSTR_LEN];
 
 /*-
  * Copyright (c) 1994-1997 Matt Thomas (matt@3am-software.com)
@@ -5638,6 +5639,7 @@ tulip_pci_attach(
     unsigned csrsize = TULIP_PCI_CSRSIZE;
     tulip_csrptr_t csr_base;
     tulip_chipid_t chipid = TULIP_CHIPID_UNKNOWN;
+	char intrbuf[PCI_INTRSTR_LEN];
 
     if (unit >= TULIP_MAX_DEVICES) {
 #ifdef __FreeBSD__
@@ -5875,7 +5877,7 @@ tulip_pci_attach(
 		aprint_error_dev(sc->tulip_dev, "couldn't map interrupt\n");
 		return;
 	    }
-	    intrstr = pci_intr_string(pa->pa_pc, intrhandle);
+	    intrstr = pci_intr_string(pa->pa_pc, intrhandle, intrbuf, sizeof(intrbuf));
 	    sc->tulip_ih = pci_intr_establish(pa->pa_pc, intrhandle, IPL_NET,
 					      intr_rtn, sc);
 	    if (sc->tulip_ih == NULL) {

@@ -1405,6 +1405,18 @@ License:	LGPL3
 Location:	external/lgpl3/gmp/dist
 Notes:
 
+Package:	osnet
+Version:	osnet-20100224
+Current Vers:	?
+Maintainer:	?
+Archive Site:	?
+Home Page:	?
+Mailing List:	?
+Responsible:	?
+License:	CDDL
+Location:	external/cddl/osnet
+Notes:
+
 Package:	sljit
 Version:	svn revision 186
 Current Vers:	svn revision 226

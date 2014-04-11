@@ -60,6 +60,8 @@ typedef unsigned long	vsize_t;
 #define	PRIuVSIZE	"lu"
 #endif
 
+typedef int             pmc_evid_t; 
+typedef __uint64_t      pmc_ctr_t;
 typedef long int	register_t;
 typedef int		register32_t;
 #define	PRIxREGISTER	"lx"

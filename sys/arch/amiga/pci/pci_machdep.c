@@ -97,12 +97,12 @@ amiga_pci_intr_disestablish(pci_chipset_tag_t pc, void *cookie)
 }
 
 const char *
-amiga_pci_intr_string(pci_chipset_tag_t pc, pci_intr_handle_t ih) 
+amiga_pci_intr_string(pci_chipset_tag_t pc, pci_intr_handle_t ih, char *buf,
+    size_t len) 
 {
-	static char str[10];
 
-	sprintf(str, "INT%d", (int) ih);
-	return str;
+	snprintf(buf, len, "INT%d", (int) ih);
+	return buf;
 }
 
 int

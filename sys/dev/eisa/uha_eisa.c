@@ -117,6 +117,7 @@ uha_eisa_attach(device_t parent, device_t self, void *aux)
 	eisa_chipset_tag_t ec = ea->ea_ec;
 	eisa_intr_handle_t ih;
 	const char *model, *intrstr;
+	char intrbuf[EISA_INTRSTR_LEN];
 
 	if (!strncmp(ea->ea_idstring, "USC024", 6))
 		model = EISA_PRODUCT_USC0240;
@@ -142,7 +143,7 @@ uha_eisa_attach(device_t parent, device_t self, void *aux)
 		    upd.sc_irq);
 		return;
 	}
-	intrstr = eisa_intr_string(ec, ih);
+	intrstr = eisa_intr_string(ec, ih, intrbuf, sizeof(intrbuf));
 	sc->sc_ih = eisa_intr_establish(ec, ih, IST_LEVEL, IPL_BIO,
 	    u24_intr, sc);
 	if (sc->sc_ih == NULL) {

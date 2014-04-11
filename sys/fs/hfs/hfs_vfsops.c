@@ -149,31 +149,27 @@ const struct vnodeopv_desc * const hfs_vnodeopv_descs[] = {
 };
 
 struct vfsops hfs_vfsops = {
-	MOUNT_HFS,
-	sizeof (struct hfs_args),
-	hfs_mount,
-	hfs_start,
-	hfs_unmount,
-	hfs_root,
-	(void *)eopnotsupp,		/* vfs_quotactl */
-	hfs_statvfs,
-	hfs_sync,
-	hfs_vget,
-	hfs_fhtovp,
-	hfs_vptofh,
-	hfs_init,
-	hfs_reinit,
-	hfs_done,
-	NULL,				/* vfs_mountroot */
-	NULL,				/* vfs_snapshot */
-	vfs_stdextattrctl,
-	(void *)eopnotsupp,		/* vfs_suspendctl */
-	genfs_renamelock_enter,
-	genfs_renamelock_exit,
-	(void *)eopnotsupp,
-	hfs_vnodeopv_descs,
-	0,
-	{ NULL, NULL },
+	.vfs_name = MOUNT_HFS,
+	.vfs_min_mount_data = sizeof (struct hfs_args),
+	.vfs_mount = hfs_mount,
+	.vfs_start = hfs_start,
+	.vfs_unmount = hfs_unmount,
+	.vfs_root = hfs_root,
+	.vfs_quotactl = (void *)eopnotsupp,
+	.vfs_statvfs = hfs_statvfs,
+	.vfs_sync = hfs_sync,
+	.vfs_vget = hfs_vget,
+	.vfs_fhtovp = hfs_fhtovp,
+	.vfs_vptofh = hfs_vptofh,
+	.vfs_init = hfs_init,
+	.vfs_reinit = hfs_reinit,
+	.vfs_done = hfs_done,
+	.vfs_extattrctl = vfs_stdextattrctl,
+	.vfs_suspendctl = (void *)eopnotsupp,
+	.vfs_renamelock_enter = genfs_renamelock_enter,
+	.vfs_renamelock_exit = genfs_renamelock_exit,
+	.vfs_fsync = (void *)eopnotsupp,
+	.vfs_opv_descs = hfs_vnodeopv_descs
 };
 
 static const struct genfs_ops hfs_genfsops = {

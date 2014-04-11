@@ -1,0 +1,10 @@
+#	$NetBSD$
+#
+#	PANDABOARD_INSTALL -- PANDABOARD kernel with installation-sized
+#	ramdisk
+#
+
+include "arch/evbarm/conf/PANDABOARD"
+include "arch/evbarm/conf/INSTALL"
+
+options BOOTHOWTO=RB_SINGLE

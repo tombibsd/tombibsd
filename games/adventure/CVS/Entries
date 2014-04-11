@@ -5,10 +5,10 @@
 /extern.h/1.16/Sun Jan  8 18:17:41 2012/-kk/
 /glorkz/1.2/Thu Jan  1 15:58:03 2004/-kk/
 /hdr.h/1.13/Tue Aug 25 06:56:52 2009/-kk/
-/init.c/1.20/Wed Aug 31 16:24:55 2011/-kk/
+/init.c/1.21/Fri Apr 11 02:02:21 2014/-kk/
 /io.c/1.22/Tue Aug 25 06:56:52 2009/-kk/
 /main.c/1.21/Tue Aug 25 06:56:52 2009/-kk/
-/save.c/1.13/Sun Jan  8 18:16:00 2012/-kk/
+/save.c/1.14/Fri Apr 11 02:02:21 2014/-kk/
 /setup.c/1.11/Fri Jul  1 00:03:36 2005/-kk/
 /subr.c/1.13/Tue Aug 25 06:56:52 2009/-kk/
 /vocab.c/1.15/Tue Aug 25 06:56:52 2009/-kk/

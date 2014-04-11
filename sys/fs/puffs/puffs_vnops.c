@@ -1692,7 +1692,7 @@ puffs_vnop_fsync(void *v)
 	 */
 	if (dofaf == 0) {
 		mutex_enter(vp->v_interlock);
-		if (vp->v_iflag & VI_XLOCK)
+		if (vdead_check(vp, VDEAD_NOWAIT) != 0)
 			dofaf = 1;
 		mutex_exit(vp->v_interlock);
 	}
@@ -2601,7 +2601,7 @@ puffs_vnop_strategy(void *v)
 	 */
 	if (BUF_ISWRITE(bp)) {
 		mutex_enter(vp->v_interlock);
-		if (vp->v_iflag & VI_XLOCK)
+		if (vdead_check(vp, VDEAD_NOWAIT) != 0)
 			dofaf = 1;
 		if (pn->pn_stat & PNODE_FAF)
 			dofaf = 1;

@@ -219,6 +219,7 @@ wi_pci_attach(device_t parent, device_t self, void *aux)
 	pci_intr_handle_t ih;
 	bus_space_tag_t memt, iot, plxt, tmdt;
 	bus_space_handle_t memh, ioh, plxh, tmdh;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	sc->sc_dev = self;
 	psc->psc_pc = pc;
@@ -316,7 +317,7 @@ wi_pci_attach(device_t parent, device_t self, void *aux)
 		aprint_error_dev(self, "couldn't map interrupt\n");
 		return;
 	}
-	intrstr = pci_intr_string(pc, ih);
+	intrstr = pci_intr_string(pc, ih, intrbuf, sizeof(intrbuf));
 
 	psc->psc_ih = ih;
 	sc->sc_ih = pci_intr_establish(pc, ih, IPL_NET, wi_intr, sc);

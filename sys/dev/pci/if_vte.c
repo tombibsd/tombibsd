@@ -174,6 +174,7 @@ vte_attach(device_t parent, device_t self, void *aux)
 	int error;
 	const struct sysctlnode *node;
 	int vte_nodenum;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	sc->vte_dev = self;
 
@@ -224,7 +225,7 @@ vte_attach(device_t parent, device_t self, void *aux)
 	    aprint_error_dev(self, "couldn't map interrupt\n");
 	    return;
 	}
-	intrstr = pci_intr_string(pa->pa_pc, intrhandle);
+	intrstr = pci_intr_string(pa->pa_pc, intrhandle, intrbuf, sizeof(intrbuf));
 	sc->vte_ih = pci_intr_establish(pa->pa_pc, intrhandle, IPL_NET,
 	    vte_intr, sc);
 	if (sc->vte_ih == NULL) {

@@ -457,7 +457,7 @@ spiflash_process_write(spiflash_handle_t sc)
 	 * do the erase, if we need to.
 	 */
 	if (neederase) {
-		DPRINTF(("erasing from %x - %x\n", base, base + len));
+		DPRINTF(("erasing from %zx - %zx\n", base, base + len));
 		if ((err = sc->sc_erase(sc, base, len)) != 0) {
 			spiflash_process_done(sc, err);
 			return;
@@ -467,8 +467,7 @@ spiflash_process_write(spiflash_handle_t sc)
 	/*
 	 * now write our save area, and finish up.
 	 */
-	DPRINTF(("flashing %d bytes to %x from %x\n", len,
-		    base, (unsigned)save));
+	DPRINTF(("flashing %d bytes to %zx from %p\n", len, base, save));
 	err = sc->sc_write(sc, base, len, save);
 	spiflash_process_done(sc, err);
 }

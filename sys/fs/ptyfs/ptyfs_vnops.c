@@ -616,7 +616,8 @@ ptyfs_lookup(void *v)
 
 		pty = atoi(pname, cnp->cn_namelen);
 
-		if (pty < 0 || pty >= npty || pty_isfree(pty, 1))
+		if (pty < 0 || pty >= npty || pty_isfree(pty, 1) ||
+		    ptyfs_used_get(PTYFSptc, pty, dvp->v_mount, 0) == NULL)
 			break;
 
 		error = ptyfs_allocvp(dvp->v_mount, vpp, PTYFSpts, pty,
@@ -711,7 +712,8 @@ ptyfs_readdir(void *v)
 	}
 	for (; uio->uio_resid >= UIO_MX && i < npty; i++) {
 		/* check for used ptys */
-		if (pty_isfree(i - 2, 1))
+		if (pty_isfree(i - 2, 1) ||
+		    ptyfs_used_get(PTYFSptc, i - 2, vp->v_mount, 0) == NULL)
 			continue;
 
 		dp->d_fileno = PTYFS_FILENO(i - 2, PTYFSpts);

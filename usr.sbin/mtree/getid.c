@@ -206,7 +206,12 @@ grstart(void)
 	}
 	if (grfile[0] == '\0')			/* sanity check */
 		return 0;
-	return (_gr_fp = fopen(grfile, "r")) ? 1 : 0;
+
+	_gr_fp = fopen(grfile, "r");
+	if (_gr_fp != NULL)
+		return 1;
+	warn("Can't open `%s'", grfile);
+	return 0;
 }
 
 
@@ -350,7 +355,11 @@ pwstart(void)
 	}
 	if (pwfile[0] == '\0')			/* sanity check */
 		return 0;
-	return (_pw_fp = fopen(pwfile, "r")) ? 1 : 0;
+	_pw_fp = fopen(pwfile, "r");
+	if (_pw_fp != NULL)
+		return 1;
+	warn("Can't open `%s'", pwfile);
+	return 0;
 }
 
 

@@ -167,7 +167,7 @@ parattach(device_t parent, device_t self, void *aux)
 {
 	struct par_softc *sc = device_private(self);
 	struct intio_attach_args *ia = aux;
-	int r;
+	int r __diagused;
 	
 	par_attached = 1;
 

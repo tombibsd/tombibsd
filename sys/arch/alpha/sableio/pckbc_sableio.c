@@ -135,8 +135,10 @@ pckbc_sableio_intr_establish(struct pckbc_softc *sc, pckbc_slot_t slot)
 {
 	struct pckbc_sableio_softc *ssc = (void *) sc;
 	const char *intrstr;
+	char buf[PCI_INTRSTR_LEN];
 
-	intrstr = pci_intr_string(ssc->sc_pc, ssc->sc_irq[slot]);
+	intrstr = pci_intr_string(ssc->sc_pc, ssc->sc_irq[slot], buf,
+	    sizeof(buf));
 	ssc->sc_ih[slot] = pci_intr_establish(ssc->sc_pc, ssc->sc_irq[slot],
 	    IPL_TTY, pckbcintr, sc);
 	if (ssc->sc_ih[slot] == NULL) {

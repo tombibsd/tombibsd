@@ -155,7 +155,7 @@ dec_3max_init(void)
 	*(volatile uint32_t *)MIPS_PHYS_TO_KSEG1(KN02_SYS_CSR) = csr;
 	kn02_wbflush();
 
-	strcpy(cpu_model, "DECstation 5000/200 (3MAX)");
+	cpu_setmodel("DECstation 5000/200 (3MAX)");
 }
 
 /*

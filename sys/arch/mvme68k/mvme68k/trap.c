@@ -283,7 +283,7 @@ trap(struct frame *fp, int type, unsigned int code, unsigned int v)
 	int s;
 	int rv;
 	u_quad_t sticks = 0 /* XXX initialiser works around compiler bug */;
-	static int panicking = 0;
+	static int panicking __diagused;
 
 	curcpu()->ci_data.cpu_ntrap++;
 	l = curlwp;

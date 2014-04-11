@@ -396,8 +396,8 @@ vaudio_getdev(void *opaque, struct audio_device *adev)
 {
 	struct vaudio_softc *sc = opaque;
 
-	sprintf(adev->name, "Virtual Audio");
-	sprintf(adev->version, "");
+	snprintf(adev->name, sizeof(adev->name), "Virtual Audio");
+	adev->version[0] = '\0';
 	snprintf(adev->config, sizeof(adev->config), "%s", sc->sc_audiopath);
 
 	return 0;

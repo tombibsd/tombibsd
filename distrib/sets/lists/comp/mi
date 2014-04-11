@@ -20,9 +20,9 @@
 ./usr/bin/config				comp-util-bin
 ./usr/bin/crunchgen				comp-c-bin
 ./usr/bin/crunchide				comp-c-bin
-./usr/bin/ctfconvert				comp-util-bin		dtrace
-./usr/bin/ctfdump				comp-util-bin		dtrace
-./usr/bin/ctfmerge				comp-util-bin		dtrace
+./usr/bin/ctfconvert				comp-util-bin		ctf
+./usr/bin/ctfdump				comp-util-bin		ctf
+./usr/bin/ctfmerge				comp-util-bin		ctf
 ./usr/bin/cvs					comp-cvs-bin		cvs
 ./usr/bin/cvsbug				comp-cvs-bin		cvs
 ./usr/bin/elfedit				comp-util-bin		binutils
@@ -3266,7 +3266,7 @@
 ./usr/include/sys/signal.h			comp-c-include
 ./usr/include/sys/signalvar.h			comp-c-include
 ./usr/include/sys/sigtypes.h			comp-c-include
-./usr/include/sys/simplelock.h			comp-c-include		obsolete
+./usr/include/sys/simplelock.h			comp-obsolete		obsolete
 ./usr/include/sys/sleepq.h			comp-c-include
 ./usr/include/sys/socket.h			comp-c-include
 ./usr/include/sys/socketvar.h			comp-c-include
@@ -10453,6 +10453,7 @@
 ./usr/share/man/cat9/mstohz.0			comp-sys-catman		.cat
 ./usr/share/man/cat9/mtocl.0			comp-sys-catman		.cat
 ./usr/share/man/cat9/mtod.0			comp-sys-catman		.cat
+./usr/share/man/cat9/mtsleep.0			comp-sys-catman		.cat
 ./usr/share/man/cat9/mutex.0			comp-sys-catman		.cat
 ./usr/share/man/cat9/mutex_destroy.0		comp-sys-catman		.cat
 ./usr/share/man/cat9/mutex_enter.0		comp-sys-catman		.cat
@@ -10976,6 +10977,7 @@
 ./usr/share/man/cat9/vdevgone.0			comp-sys-catman		.cat
 ./usr/share/man/cat9/veriexec.0			comp-sys-catman		.cat
 ./usr/share/man/cat9/vfinddev.0			comp-sys-catman		.cat
+./usr/share/man/cat9/vdead_check.0		comp-sys-catman		.cat
 ./usr/share/man/cat9/vflush.0			comp-sys-catman		.cat
 ./usr/share/man/cat9/vflushbuf.0		comp-sys-catman		.cat
 ./usr/share/man/cat9/vfs.0			comp-sys-catman		.cat
@@ -17144,6 +17146,7 @@
 ./usr/share/man/html9/mstohz.html		comp-sys-htmlman	html
 ./usr/share/man/html9/mtocl.html		comp-sys-htmlman	html
 ./usr/share/man/html9/mtod.html			comp-sys-htmlman	html
+./usr/share/man/html9/mtsleep.html		comp-sys-htmlman	html
 ./usr/share/man/html9/mutex.html		comp-sys-htmlman	html
 ./usr/share/man/html9/mutex_destroy.html	comp-sys-htmlman	html
 ./usr/share/man/html9/mutex_enter.html		comp-sys-htmlman	html
@@ -17628,6 +17631,7 @@
 ./usr/share/man/html9/vdevgone.html		comp-sys-htmlman	html
 ./usr/share/man/html9/veriexec.html		comp-sys-htmlman	html
 ./usr/share/man/html9/vfinddev.html		comp-sys-htmlman	html
+./usr/share/man/html9/vdead_check.html		comp-sys-htmlman	html
 ./usr/share/man/html9/vflush.html		comp-sys-htmlman	html
 ./usr/share/man/html9/vflushbuf.html		comp-sys-htmlman	html
 ./usr/share/man/html9/vfs.html			comp-sys-htmlman	html
@@ -23996,6 +24000,7 @@
 ./usr/share/man/man9/mstohz.9			comp-sys-man		.man
 ./usr/share/man/man9/mtocl.9			comp-sys-man		.man
 ./usr/share/man/man9/mtod.9			comp-sys-man		.man
+./usr/share/man/man9/mtsleep.9			comp-sys-man		.man
 ./usr/share/man/man9/mutex.9			comp-sys-man		.man
 ./usr/share/man/man9/mutex_destroy.9		comp-sys-man		.man
 ./usr/share/man/man9/mutex_enter.9		comp-sys-man		.man
@@ -24519,6 +24524,7 @@
 ./usr/share/man/man9/vdevgone.9			comp-sys-man		.man
 ./usr/share/man/man9/veriexec.9			comp-sys-man		.man
 ./usr/share/man/man9/vfinddev.9			comp-sys-man		.man
+./usr/share/man/man9/vdead_check.9		comp-sys-man		.man
 ./usr/share/man/man9/vflush.9			comp-sys-man		.man
 ./usr/share/man/man9/vflushbuf.9		comp-sys-man		.man
 ./usr/share/man/man9/vfs.9			comp-sys-man		.man

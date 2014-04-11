@@ -106,7 +106,7 @@ bootp_addvend(u_char *area)
 	*area++ = TAG_SWAPSERVER;
 
 	/* Insert a NetBSD Vendor Class Identifier option. */
-	sprintf(vci, "NetBSD:%s:libsa", MACHINE);
+	snprintf(vci, sizeof(vci), "NetBSD:%s:libsa", MACHINE);
 	vcilen = strlen(vci);
 	*area++ = TAG_CLASSID;
 	*area++ = vcilen;

@@ -53,7 +53,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <dev/pci/ppbreg.h>
 
 int ixm1200_pci_intr_map(const struct pci_attach_args *, pci_intr_handle_t *);
-const char *ixm1200_pci_intr_string(void *, pci_intr_handle_t);
+const char *ixm1200_pci_intr_string(void *, pci_intr_handle_t, char *, size_t);
 const struct evcnt *ixm1200_pci_intr_evcnt(void *, pci_intr_handle_t);
 void *ixm1200_pci_intr_establish(void *, pci_intr_handle_t, int,
 	int (*func)(void *), void *);
@@ -90,12 +90,10 @@ ixm1200_pci_intr_map(const struct pci_attach_args *pa, pci_intr_handle_t *ihp)
 }
 
 const char *
-ixm1200_pci_intr_string(void *v, pci_intr_handle_t ih)
+ixm1200_pci_intr_string(void *v, pci_intr_handle_t ih, char *buf, size_t len)
 {
-	static char irqstr[IRQNAMESIZE];
-
-	sprintf(irqstr, "IXM1200 irq %ld", ih);
-	return (irqstr);
+	snprintf(buf, len, "IXM1200 irq %ld", ih);
+	return buf;
 }
 
 const struct evcnt *

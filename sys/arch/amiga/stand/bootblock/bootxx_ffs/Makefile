@@ -53,10 +53,10 @@ INCPATH += -I${.CURDIR}/../boot -I${.CURDIR}/../../..
 INCPATH += -I${.CURDIR}/../elf2bb -I${.OBJDIR}
 
 AFLAGS += -m68030 -l
-CAFLAGS += -Wa,-l -Wa,-m68030 ${INCPATH} -D_PRIMARY_BOOT
+CAFLAGS += -Wa,-l -Wa,-mcpu=68030 ${INCPATH} -D_PRIMARY_BOOT
 
 COPTIM= -Os -fomit-frame-pointer -fcse-follow-jumps -fcse-skip-blocks
-COPTIM+= -Wa,-l -m68060 -Wa,-m68030 -fno-unwind-tables
+COPTIM+= -Wa,-l -m68060 -Wa,-mcpu=68030 -fno-unwind-tables
 CFLAGS= -ffreestanding ${COPTIM} ${INCPATH} ${DEFS} -Wall #-Wstrict-prototypes
 
 NETBSD_VERS!=	${HOST_SH} ${.CURDIR}/../../../../../conf/osrelease.sh

@@ -269,9 +269,9 @@ ixv_probe(device_t dev)
 
 		    ((pci_subdevice_id == ent->subdevice_id) ||
 		     (ent->subdevice_id == 0))) {
-			sprintf(adapter_name, "%s, Version - %s",
-				ixv_strings[ent->index],
-				ixv_driver_version);
+			snprintf(adapter_name, sizeof(adapter_name),
+			    "%s, Version - %s", ixv_strings[ent->index],
+			    ixv_driver_version);
 			device_set_desc_copy(dev, adapter_name);
 			return (0);
 		}

@@ -219,10 +219,10 @@ mach_init(int32_t memsize32, u_int bim, int32_t bip32)
 
 	cobalt_id = read_board_id();
 	if (cobalt_id >= COBALT_MODELS || cobalt_model[cobalt_id] == NULL)
-		sprintf(cpu_model, "Cobalt unknown model (board ID %u)",
+		cpu_setmodel("Cobalt unknown model (board ID %u)",
 		    cobalt_id);
 	else
-		strcpy(cpu_model, cobalt_model[cobalt_id]);
+		cpu_setmodel("%s", cobalt_model[cobalt_id]);
 
 	switch (cobalt_id) {
 	case COBALT_ID_QUBE2700:
@@ -319,7 +319,7 @@ cpu_startup(void)
 	 * Good {morning,afternoon,evening,night}.
 	 */
 	printf("%s%s", copyright, version);
-	printf("%s\n", cpu_model);
+	printf("%s\n", cpu_getmodel());
 	format_bytes(pbuf, sizeof(pbuf), ctob(physmem));
 	printf("total memory = %s\n", pbuf);
 

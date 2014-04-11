@@ -49,7 +49,7 @@
 /if_otus.c/1.25/Thu Oct 24 10:28:58 2013/-kk/
 /if_otusreg.h/1.4/Thu Oct 24 10:28:58 2013/-kk/
 /if_otusvar.h/1.7/Thu Oct 24 10:28:58 2013/-kk/
-/if_rum.c/1.47/Thu Oct 24 10:28:58 2013/-kk/
+/if_rum.c/1.48/Fri Apr 11 02:03:50 2014/-kk/
 /if_rumreg.h/1.4/Mon Feb 21 23:50:42 2011/-kk/
 /if_rumvar.h/1.9/Mon Feb 21 23:50:42 2011/-kk/
 /if_run.c/1.10/Thu Feb 13 15:22:32 2014/-kk/
@@ -138,7 +138,7 @@
 /umass_scsipi.c/1.48/Thu Oct 24 10:28:58 2013/-kk/
 /umass_scsipi.h/1.2/Mon Apr 28 20:24:00 2008/-kk/
 /umassvar.h/1.35/Wed Jan  1 02:45:33 2014/-kk/
-/umcs.c/1.4/Mon Mar 17 21:21:57 2014/-kk/
+/umcs.c/1.6/Fri Apr 11 02:03:50 2014/-kk/
 /umcs.h/1.1/Sun Mar 16 09:34:45 2014/-kk/
 /umct.c/1.32/Fri Dec 23 00:51:47 2011/-kk/
 /umct.h/1.2/Mon Apr 28 20:24:00 2008/-kk/

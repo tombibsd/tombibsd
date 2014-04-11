@@ -697,7 +697,7 @@ void
 rdstart(struct rd_softc *sc)
 {
 	struct buf *bp = bufq_peek(sc->sc_tab);
-	int part, slave, punit;
+	int slave, punit;
 
 	slave = sc->sc_slave;
 	punit = sc->sc_punit;
@@ -707,7 +707,6 @@ rdstart(struct rd_softc *sc)
 
 again:
 
-	part = RDPART(bp->b_dev);
 	sc->sc_flags |= RDF_SEEK;
 	sc->sc_ioc.c_unit = CS80CMD_SUNIT(punit);
 	sc->sc_ioc.c_volume = CS80CMD_SVOL(0);

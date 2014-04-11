@@ -36,7 +36,6 @@ __RCSID("$NetBSD$");
 #include <sys/kernel.h>
 #include <sys/kthread.h>
 #include <sys/proc.h>
-#include <sys/simplelock.h>
 
 #include "kernspace.h"
 

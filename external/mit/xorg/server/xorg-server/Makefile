@@ -20,6 +20,10 @@ SUBDIR+=	hw
 .PATH:	${X11SRCDIR.xorg-server}
 
 PKGCONFIG=	xorg-server
+# Use -fvisibility=hidden for symbol_visibility?
+PKGCONFIG_SED_FLAGS= \
+	-e "s,@sysconfigdir@,${X11ETCDIR},; \
+	    s,@symbol_visibility@,,"
 
 .include <bsd.x11.mk>
 .include <bsd.man.mk>

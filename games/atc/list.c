@@ -55,7 +55,7 @@ __RCSID("$NetBSD$");
 PLANE *
 newplane(void)
 {
-	return ((PLANE *) calloc(1, sizeof (PLANE)));
+	return calloc(1, sizeof (PLANE));
 }
 
 void

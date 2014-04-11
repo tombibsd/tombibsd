@@ -44,7 +44,11 @@
 #define	barrier()	__insn_barrier()
 #define	unlikely(X)	__predict_false(X)
 
-#define	uninitialized_var(x)	x
+/*
+ * XXX Linux kludge to work around GCC uninitialized variable warning.
+ * Linux does `x = x', which is bollocks.
+ */
+#define	uninitialized_var(x)	x = 0
 
 /* XXX These will multiply evaluate their arguments.  */
 #define	max_t(T, X, Y)	MAX(X, Y)

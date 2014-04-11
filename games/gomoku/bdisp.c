@@ -53,9 +53,6 @@ __RCSID("$NetBSD$");
 static	int	lastline;
 static	char	pcolor[] = "*O.?";
 
-extern int interactive;
-extern const char *plyr[];
-
 /*
  * Initialize screen display.
  */

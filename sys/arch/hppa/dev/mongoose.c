@@ -259,7 +259,7 @@ mg_intr_string(void *v, int irq)
 {
 	static char buf[16];
 
-	sprintf (buf, "isa irq %d", irq);
+	snprintf (buf, sizeof(buf), "isa irq %d", irq);
 	return buf;
 }
 

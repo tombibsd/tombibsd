@@ -52,7 +52,6 @@ __RCSID("$NetBSD$");
 
 extern const char   *const instr[];		/* text of instructions */
 extern const char   *const message[];		/* update message */
-extern short ospeed;			/* tty output speed */
 
 static const char *const helpm[] = {		/* help message */
 	"Enter a space or newline to roll, or",

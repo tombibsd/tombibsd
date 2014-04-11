@@ -298,7 +298,8 @@ mmemattach(device_t parent, device_t self, void *aux)
 	    M_WAITOK|M_ZERO);
 
 	for (i = 0; i < sc->sc_npt; i++) {
-		sprintf(sc->sc_pt[i].pt_name, "%s.%d", device_xname(self), i);
+		snprintf(sc->sc_pt[i].pt_name, sizeof(sc->sc_pt[i].pt_name),
+		    "%s.%d", device_xname(self), i);
 	}
 
 	maple_set_callback(parent, sc->sc_unit, MAPLE_FN_MEMCARD,

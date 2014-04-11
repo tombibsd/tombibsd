@@ -8,10 +8,10 @@
 /gpibio.h/1.3/Sun Dec 11 12:21:21 2005/-kk/
 /gpibvar.h/1.5/Sat Oct 27 17:18:16 2012/-kk/
 /hil_gpib.c/1.12/Sat Oct 27 17:18:16 2012/-kk/
-/mt.c/1.26/Tue Mar 25 02:35:31 2014/-kk/
+/mt.c/1.27/Fri Apr 11 02:03:41 2014/-kk/
 /mtreg.h/1.4/Sun Dec 11 12:21:21 2005/-kk/
 /ppi.c/1.21/Tue Mar 25 02:35:31 2014/-kk/
 /ppiio.h/1.3/Sun Dec 11 12:21:21 2005/-kk/
-/rd.c/1.32/Tue Mar 25 02:35:31 2014/-kk/
+/rd.c/1.33/Fri Apr 11 02:03:41 2014/-kk/
 /rdreg.h/1.6/Tue Feb  8 20:20:27 2011/-kk/
 D

@@ -63,7 +63,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 int	iyonix_pci_intr_map(const struct pci_attach_args *,
 	    pci_intr_handle_t *);
-const char *iyonix_pci_intr_string(void *, pci_intr_handle_t);
+const char *iyonix_pci_intr_string(void *, pci_intr_handle_t, char *, size_t);
 const struct evcnt *iyonix_pci_intr_evcnt(void *, pci_intr_handle_t);
 void	*iyonix_pci_intr_establish(void *, pci_intr_handle_t,
 	    int, int (*func)(void *), void *);
@@ -131,10 +131,11 @@ iyonix_pci_intr_map(const struct pci_attach_args *pa, pci_intr_handle_t *ihp)
 }
 
 const char *
-iyonix_pci_intr_string(void *v, pci_intr_handle_t ih)
+iyonix_pci_intr_string(void *v, pci_intr_handle_t ih, char *buf, size_t len)
 {
 
-	return (i80321_irqnames[ih]);
+	strlcpy(buf, i80321_irqnames[ih], len);
+	return buf;
 }
 
 const struct evcnt *

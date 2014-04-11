@@ -149,8 +149,9 @@ notimplemented(void)
 	char str[64];
 	int n;
 
-	n = sprintf(str, "Operation not implemented on ROM version %d\r\n",
-		    promops.po_version);
+	n = snprintf(str, sizeof(str),
+	    "Operation not implemented on ROM version %d\r\n",
+	    promops.po_version);
 
 	/*
 	 * Use PROM vector directly, in case we're called before prom_init().

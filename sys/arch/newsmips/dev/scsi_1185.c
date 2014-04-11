@@ -568,8 +568,10 @@ scintr_loop:
 			int volatile cmonr;
 
 			statr = sc_statr;
+			__USE(statr);
 			DMAC_WAIT0;
 			cmonr = sc_cmonr;
+			__USE(cmonr);
 			sc->int_stat2 &= ~R3_SPE;
 			sc->perr_flag[sc->ip->chan_num] = 1;
 		}

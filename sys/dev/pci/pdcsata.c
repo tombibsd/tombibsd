@@ -229,6 +229,7 @@ pdcsata_chip_map(struct pciide_softc *sc, const struct pci_attach_args *pa)
 	int channel, i;
 	pci_intr_handle_t intrhandle;
 	const char *intrstr;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	/*
 	 * Promise SATA controllers have 3 or 4 channels,
@@ -239,7 +240,7 @@ pdcsata_chip_map(struct pciide_softc *sc, const struct pci_attach_args *pa)
 		    "couldn't map interrupt\n");
 		return;
 	}
-	intrstr = pci_intr_string(pa->pa_pc, intrhandle);
+	intrstr = pci_intr_string(pa->pa_pc, intrhandle, intrbuf, sizeof(intrbuf));
 	sc->sc_pci_ih = pci_intr_establish(pa->pa_pc,
 	    intrhandle, IPL_BIO, pdcsata_pci_intr, sc);
 

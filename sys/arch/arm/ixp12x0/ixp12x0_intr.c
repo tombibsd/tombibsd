@@ -312,7 +312,7 @@ ixp12x0_intr_init(void)
 		iq = &intrq[i];
 		TAILQ_INIT(&iq->iq_list);
 
-		sprintf(iq->iq_name, "ipl %d", i);
+		snprintf(iq->iq_name, sizeof(iq->iq_name), "ipl %d", i);
 		evcnt_attach_dynamic(&iq->iq_ev, EVCNT_TYPE_INTR,
 				     NULL, "ixpintr", iq->iq_name);
 	}

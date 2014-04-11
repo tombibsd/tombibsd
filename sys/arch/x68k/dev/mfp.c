@@ -98,7 +98,7 @@ mfp_attach(device_t parent, device_t self, void *aux)
 {
 	struct mfp_softc *sc = device_private(self);
 	struct intio_attach_args *ia = aux;
-	int r;
+	int r __diagused;
 
 	aprint_normal("\n");
 	mfp_attached = 1;

@@ -114,9 +114,6 @@ tape_open(struct open_file *f, ...)
 int
 tape_close(struct open_file *f)
 {
-	struct mvmeprom_dskio *ti;
-
-	ti = f->f_devdata;
 	f->f_devdata = NULL;
 	return 0;
 }

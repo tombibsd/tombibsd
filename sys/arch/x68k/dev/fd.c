@@ -523,12 +523,12 @@ fdcreset(struct fdc_softc *fdc)
 static int
 fdcpoll(struct fdc_softc *fdc)
 {
-	int i = 25000, n;
+	int i = 25000;
 
 	while (--i > 0) {
 		if ((intio_get_sicilian_intr() & SICILIAN_STAT_FDC) != 0) {
 			out_fdc(fdc->sc_iot, fdc->sc_ioh, NE7CMD_SENSEI);
-			n = fdcresult(fdc);
+			fdcresult(fdc);
 			break;
 		}
 		DELAY(100);

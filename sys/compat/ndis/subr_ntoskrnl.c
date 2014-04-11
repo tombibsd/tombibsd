@@ -1001,9 +1001,9 @@ static void
 ntoskrnl_wakeup(void *arg)
 {
 	nt_dispatch_header	*obj;
-	wait_block		*w;
 	list_entry		*e;
 #ifdef __FreeBSD__
+	wait_block		*w;
 	struct thread		*td;
 #endif
 
@@ -1012,9 +1012,9 @@ ntoskrnl_wakeup(void *arg)
 	obj->dh_sigstate = TRUE;
 	e = obj->dh_waitlisthead.nle_flink;
 	while (e != &obj->dh_waitlisthead) {
-		w = (wait_block *)e;
 /* TODO: is this correct? */		
 #ifdef __FreeBSD__
+		w = (wait_block *)e;
 		td = w->wb_kthread;
 		ndis_thresume(td->td_proc);
 #else
@@ -2384,7 +2384,7 @@ PsCreateSystemThread(
 	tc->tc_thrctx = thrctx;
 	tc->tc_thrfunc = thrfunc;
 
-	sprintf(tname, "windows kthread %d", ntoskrnl_kth);
+	snprintf(tname, sizeof(tname), "windows kthread %d", ntoskrnl_kth);
 #ifdef __FreeBSD__
 	error = kthread_create(ntoskrnl_thrfunc, tc, &p,
 	    RFHIGHPID, NDIS_KSTACK_PAGES, tname);
@@ -2693,8 +2693,6 @@ image_patch_table ntoskrnl_functbl[] = {
 	IMPORT_FUNC(RtlFreeAnsiString),
 	IMPORT_FUNC(RtlFreeUnicodeString),
 	IMPORT_FUNC(RtlUnicodeStringToInteger),
-	IMPORT_FUNC(sprintf),
-	IMPORT_FUNC(vsprintf),
 	IMPORT_FUNC_MAP(_snprintf, snprintf),
 	IMPORT_FUNC_MAP(_vsnprintf, vsnprintf),
 	IMPORT_FUNC(DbgPrint),

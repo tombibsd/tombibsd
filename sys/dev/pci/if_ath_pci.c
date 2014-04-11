@@ -156,6 +156,7 @@ ath_pci_attach(device_t parent, device_t self, void *aux)
 	const char *intrstr = NULL;
 	const char *devname;
 	pcireg_t mem_type;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	sc->sc_dev = self;
 	sc->sc_dmat = pa->pa_dmat;
@@ -195,7 +196,7 @@ ath_pci_attach(device_t parent, device_t self, void *aux)
 		goto bad1;
 	}
 
-	intrstr = pci_intr_string(pc, psc->sc_pih);
+	intrstr = pci_intr_string(pc, psc->sc_pih, intrbuf, sizeof(intrbuf));
 	psc->sc_ih = pci_intr_establish(pc, psc->sc_pih, IPL_NET, ath_intr, sc);
 	if (psc->sc_ih == NULL) {
 		aprint_error("couldn't map interrupt\n");

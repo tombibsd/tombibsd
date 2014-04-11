@@ -321,6 +321,7 @@ p5pb_find_resources(struct p5pb_softc *sc)
 void
 p5pb_set_props(struct p5pb_softc *sc) 
 {
+#if NGENFB > 0
 	prop_dictionary_t dict;
 	device_t dev;
 	
@@ -328,7 +329,6 @@ p5pb_set_props(struct p5pb_softc *sc)
 	dict = device_properties(dev);
 
 	/* genfb needs additional properties, like virtual, physical address */
-#if (NGENFB > 0)
 	/* XXX: currently genfb is supported only on CVPPC/BVPPC */
 	prop_dictionary_set_uint64(dict, "virtual_address",
 	    sc->pci_mem_area.base);

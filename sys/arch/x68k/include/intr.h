@@ -34,8 +34,7 @@
 
 #include <machine/psl.h>
 
-/* spl0 requires checking for software interrupts */
-void	spl0(void);
+#define spl0()		_spl0()
 
 #define splsoftbio()	splraise1()
 #define splsoftclock()	splraise1()
@@ -47,9 +46,6 @@ void	spl0(void);
 
 #define	splnone()	spl0()
 #define	splzs()		splraise5()	/* disallow serial interrupts */
-
-/* watch out for side effects */
-#define splx(s)         ((s) & PSL_IPL ? _spl(s) : spl0())
 
 #define	IPL_NONE	0
 #define	IPL_SOFTCLOCK	1
@@ -82,4 +78,10 @@ splraiseipl(ipl_cookie_t icookie)
 	return _splraise(icookie._psl);
 }
 
+static inline void
+splx(int sr)
+{
+
+	__asm volatile("movew %0,%%sr" : : "di" (sr));
+}
 #endif /* !_X68K_INTR_H_ */

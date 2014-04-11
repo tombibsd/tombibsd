@@ -962,20 +962,12 @@ error:
 int
 mtread(dev_t dev, struct uio *uio, int flags)
 {
-	struct mt_softc *sc;
-
-	sc = device_lookup_private(&mt_cd, MTUNIT(dev));
-
 	return (physio(mtstrategy, NULL, dev, B_READ, minphys, uio));
 }
 
 int
 mtwrite(dev_t dev, struct uio *uio, int flags)
 {
-	struct mt_softc *sc;
-
-	sc = device_lookup_private(&mt_cd, MTUNIT(dev));
-
 	return (physio(mtstrategy, NULL, dev, B_WRITE, minphys, uio));
 }
 

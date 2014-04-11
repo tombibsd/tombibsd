@@ -2540,7 +2540,7 @@ rmfldops(NODE *p)
 		foff = UPKFOFF(q->n_rval);
 		t = q->n_left->n_type;
 #if TARGET_ENDIAN == TARGET_BE
-		foff = tsz - fsz - foff;
+		foff = (int)tsize(t, 0, 0) - fsz - foff;
 #endif
 		bt = NULL;
 		if (p->n_right->n_op != ICON && p->n_right->n_op != NAME) {

@@ -90,7 +90,7 @@ rtc_attach(device_t parent, device_t self, void *aux)
 {
 	struct rtc_softc *sc = device_private(self);
 	struct intio_attach_args *ia = aux;
-	int r;
+	int r __diagused;
 
 	rtc_attached = 1;
 

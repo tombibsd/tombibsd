@@ -124,10 +124,6 @@ remove_coproc_handler(void *cookie)
 	kmem_free(uh, sizeof(*uh));
 }
 
-static struct evcnt cp15_ev =
-    EVCNT_INITIALIZER(EVCNT_TYPE_TRAP, NULL, "cpu0", "undefined cp15 insn traps");
-EVCNT_ATTACH_STATIC(cp15_ev);
-
 static int
 cp15_trapper(u_int addr, u_int insn, struct trapframe *tf, int code)
 {
@@ -158,7 +154,7 @@ cp15_trapper(u_int addr, u_int insn, struct trapframe *tf, int code)
 	if ((insn & 0xffff0fff) == 0xee1d0f70) {
 		*regp = (uintptr_t)l->l_private;
 		tf->tf_pc += INSN_SIZE;
-		cp15_ev.ev_count++;
+		curcpu()->ci_und_cp15_ev.ev_count++;
 		return 0;
 	}
 
@@ -172,7 +168,7 @@ cp15_trapper(u_int addr, u_int insn, struct trapframe *tf, int code)
 		else
 			pcb->pcb_user_pid_rw = *regp;
 		tf->tf_pc += INSN_SIZE;
-		cp15_ev.ev_count++;
+		curcpu()->ci_und_cp15_ev.ev_count++;
 		return 0;
 	}
 
@@ -282,10 +278,6 @@ undefined_init(void)
 #endif
 }
 
-static struct evcnt und_ev =
-    EVCNT_INITIALIZER(EVCNT_TYPE_TRAP, NULL, "cpu0", "undefined insn traps");
-EVCNT_ATTACH_STATIC(und_ev);
-
 void
 undefinedinstruction(trapframe_t *tf)
 {
@@ -300,7 +292,7 @@ undefinedinstruction(trapframe_t *tf)
 	int s;
 #endif
 
-	und_ev.ev_count++;
+	curcpu()->ci_und_ev.ev_count++;
 
 #ifdef KDTRACE_HOOKS
 	if ((tf->tf_spsr & PSR_MODE) != PSR_USR32_MODE) {

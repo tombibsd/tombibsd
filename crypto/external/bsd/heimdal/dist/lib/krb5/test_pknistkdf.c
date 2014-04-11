@@ -143,7 +143,7 @@ test_dh2key(krb5_context context, int i, struct testcase *c)
     AlgorithmIdentifier ai;
     size_t size;
 
-    memset(&ticket, 0, sizeof(&ticket));
+    memset(&ticket, 0, sizeof(ticket));
 
     ai.algorithm = *c->oid;
     ai.parameters = NULL;

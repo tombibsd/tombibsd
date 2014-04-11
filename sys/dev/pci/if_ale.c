@@ -389,6 +389,7 @@ ale_attach(device_t parent, device_t self, void *aux)
 	int mii_flags, error = 0;
 	uint32_t rxf_len, txf_len;
 	const char *chipname;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	aprint_naive("\n");
 	aprint_normal(": Attansic/Atheros L1E Ethernet\n");
@@ -426,7 +427,7 @@ ale_attach(device_t parent, device_t self, void *aux)
 	/*
 	 * Allocate IRQ
 	 */
-	intrstr = pci_intr_string(sc->sc_pct, ih);
+	intrstr = pci_intr_string(sc->sc_pct, ih, intrbuf, sizeof(intrbuf));
 	sc->sc_irq_handle = pci_intr_establish(pc, ih, IPL_NET, ale_intr, sc);
 	if (sc->sc_irq_handle == NULL) {
 		aprint_error_dev(self, "could not establish interrupt");

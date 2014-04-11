@@ -124,14 +124,13 @@ void
 findroot(void)
 {
 #if NSCSIBUS > 0
-	int ctlr, unit, part, type;
+	int ctlr, part, type;
 	device_t dv;
 
 	if (BOOTDEV_MAG(bootdev) != 5)	/* NEWS-OS's B_DEVMAGIC */
 		return;
 
 	ctlr = BOOTDEV_CTLR(bootdev);	/* SCSI ID */
-	unit = BOOTDEV_UNIT(bootdev);
 	part = BOOTDEV_PART(bootdev);	/* LUN */
 	type = BOOTDEV_TYPE(bootdev);
 

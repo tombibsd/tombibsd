@@ -221,6 +221,7 @@ news3400_badaddr(void *addr, u_int size)
 		x = *(volatile uint32_t *)addr;
 		break;
 	}
+	__USE(x);
 
 	/* also check CPU INT4 here for bus errors during splhigh() */
 	if (badaddr_flag == 0) {

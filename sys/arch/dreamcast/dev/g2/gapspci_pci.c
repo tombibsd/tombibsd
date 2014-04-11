@@ -63,7 +63,8 @@ pcireg_t	gaps_conf_read(void *, pcitag_t, int);
 void		gaps_conf_write(void *, pcitag_t, int, pcireg_t);
 
 int		gaps_intr_map(struct pci_attach_args *, pci_intr_handle_t *);
-const char	*gaps_intr_string(void *, pci_intr_handle_t);
+const char	*gaps_intr_string(void *, pci_intr_handle_t,
+		    char *buf, size_t len);
 void		*gaps_intr_establish(void *, pci_intr_handle_t,
 		    int, int (*)(void *), void *);
 void		gaps_intr_disestablish(void *, void *);
@@ -196,10 +197,12 @@ gaps_intr_map(struct pci_attach_args *pa, pci_intr_handle_t *ihp)
 }
 
 const char *
-gaps_intr_string(void *v, pci_intr_handle_t ih)
+gaps_intr_string(void *v, pci_intr_handle_t ih,
+    char *buf, size_t len)
 {
 
-	return sysasic_intr_string(SYSASIC_IRL11);
+	strlcpy(buf, sysasic_intr_string(SYSASIC_IRL11), len);
+	return buf;
 }
 
 void *

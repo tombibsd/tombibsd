@@ -86,6 +86,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/ksyms.h>
 #include <sys/device.h>
 #include <sys/module.h>
+#include <sys/cpu.h>
 
 #include <uvm/uvm_extern.h>
 #include <ufs/mfs/mfs_extern.h>		/* mfs_initminiroot() */
@@ -146,7 +147,7 @@ cpu_startup(void)
 {
 
 	/* XXX: show model (LANDISK/USL-5P) */
-	strcpy(cpu_model, "Model: I-O DATA LANDISK\n");
+	cpu_setmodel("Model: I-O DATA LANDISK\n");
 
         sh_startup();
 }

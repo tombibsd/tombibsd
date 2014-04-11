@@ -15,7 +15,7 @@
 /genassym.cf/1.13/Thu Aug 16 16:23:48 2012/-kk/
 /irq.c/1.17/Fri May 11 15:39:17 2012/-kk/
 /locore.S/1.23/Thu Oct 24 10:28:57 2013/-kk/
-/machdep.c/1.37/Thu Aug 16 17:35:01 2012/-kk/
+/machdep.c/1.38/Fri Apr 11 02:03:26 2014/-kk/
 /pmap.c/1.36/Fri May 11 15:39:17 2012/-kk/
 /rscons.c/1.4/Sun Dec 11 12:16:03 2005/-kk/
 /start.c/1.20/Thu Oct 24 10:28:57 2013/-kk/

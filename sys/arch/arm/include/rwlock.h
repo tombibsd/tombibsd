@@ -40,8 +40,18 @@ struct krwlock {
 
 #define	__HAVE_SIMPLE_RW_LOCKS		1
 
+#ifdef MULTIPROCESSOR
+#if defined(_ARM_ARCH_7) && !defined(_ARM_ARCH_6)
+#define	RW_RECEIVE(rw)			__asm __volatile("dmb")
+#define	RW_GIVE(rw)			__asm __volatile("dsb")
+#else
+#define	RW_RECEIVE(rw)			membar_consumer()
+#define	RW_GIVE(rw)			membar_producer()
+#endif
+#else
 #define	RW_RECEIVE(rw)			/* nothing */
 #define	RW_GIVE(rw)			/* nothing */
+#endif
 
 #define	RW_CAS(p, o, n)			\
     (atomic_cas_ulong((volatile unsigned long *)(p), (o), (n)) == (o))

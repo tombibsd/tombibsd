@@ -265,6 +265,7 @@ kbdenable(void)
 	 */
 	while (KBD->ac_cs & (A_IRQ|A_RXRDY))
 		code = KBD->ac_da;
+	__USE(code);
 	/*
 	 * Enable interrupts from MFP
 	 */
@@ -401,6 +402,7 @@ kbdintr(int sr)
 		}
 		kbd_ring[kbd_rbput++ & KBD_RING_MASK] = KBD->ac_da;
 	}
+	__USE(code);
 
 	/*
 	 * If characters are waiting for transmit, send them.

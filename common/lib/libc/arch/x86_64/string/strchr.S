@@ -132,6 +132,11 @@ ENTRY(strchr)
 	sar	%cl,%r10	/* top bytes 0xff */
 	and	%r10,%rax	/* clear lsb from unwanted low bytes */
 	jmp	21b
+#ifdef TEST_STRCHR
+END(test_strchr)
+#else
+END(strchr)
+#endif
 
 #ifdef TEST_STRCHR
 /* Trivial version for bug-fixing above */
@@ -148,6 +153,7 @@ ENTRY(strchr)
 	ret
 2:	lea	-1(%rsi),%rax
 	ret
+END(strchr)
 #endif
 
 STRONG_ALIAS(index,strchr)

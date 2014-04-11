@@ -654,7 +654,7 @@ hppa_mod_info(int type, int sv)
 	}
 
 	if (i == __arraycount(hppa_knownmods)) {
-		sprintf(fakeid, "type %x, sv %x", type, sv);
+		snprintf(fakeid, sizeof(fakeid), "type %x, sv %x", type, sv);
 		return fakeid;
 	}
 

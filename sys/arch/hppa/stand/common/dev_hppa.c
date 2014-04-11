@@ -250,7 +250,8 @@ char ttyname_buf[8];
 char *
 ttyname(int fd)
 {
-	sprintf(ttyname_buf, "%s%d", cdevs[major(cn_tab->cn_dev)],
+	snprintf(ttyname_buf, sizeof(ttyname_buf), "%s%d",
+	    cdevs[major(cn_tab->cn_dev)],
 	    minor(cn_tab->cn_dev));
 	return (ttyname_buf);
 }

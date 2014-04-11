@@ -96,6 +96,7 @@ uhci_pci_attach(device_t parent, device_t self, void *aux)
 	const char *vendor;
 	usbd_status r;
 	int s;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	sc->sc.sc_dev = self;
 	sc->sc.sc_bus.hci_private = sc;
@@ -131,7 +132,7 @@ uhci_pci_attach(device_t parent, device_t self, void *aux)
 		aprint_error_dev(self, "couldn't map interrupt\n");
 		return;
 	}
-	intrstr = pci_intr_string(pc, ih);
+	intrstr = pci_intr_string(pc, ih, intrbuf, sizeof(intrbuf));
 	sc->sc_ih = pci_intr_establish(pc, ih, IPL_SCHED, uhci_intr, sc);
 	if (sc->sc_ih == NULL) {
 		aprint_error_dev(self, "couldn't establish interrupt");

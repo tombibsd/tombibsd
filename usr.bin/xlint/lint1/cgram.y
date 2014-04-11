@@ -575,7 +575,7 @@ struct_spec:
 		 * a new tag if "a" is not declared at current level
 		 *
 		 * yychar is valid because otherwise the parser would
-		 * not been able to deceide if he must shift or reduce
+		 * not been able to decide if he must shift or reduce
 		 */
 		$$ = mktag($2, $1, 0, yychar == T_SEMI);
 	  }

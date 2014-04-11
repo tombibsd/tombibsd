@@ -287,16 +287,17 @@ main(int argc, char *argv[], char *bootargs_start, char *bootargs_end)
 	 * which have valid disklabels.
 	 */
 	if (n >= argc) {
+		static const size_t blen = sizeof("wdN:");
 		n = 0;
 		argc = 0;
-		argv = alloc(MAX_UNITS * (sizeof(char *) + sizeof("wdN:")));
+		argv = alloc(MAX_UNITS * (sizeof(char *) + blen));
 		bname = (char *)(argv + MAX_UNITS);
 		for (i = 0; i < MAX_UNITS; i++) {
 			if (!dlabel_valid(i))
 				continue;
-			sprintf(bname, "wd%d:", i);
+			snprintf(bname, blen, "wd%d:", i);
 			argv[argc++] = bname;
-			bname += sizeof("wdN:");
+			bname += blen;
 		}
 		/* use default drive if no valid disklabel is found */
 		if (argc == 0) {
@@ -430,8 +431,8 @@ module_add(const char *name)
 
 	bm = alloc(sizeof(struct boot_module) + strlen(name) + 1);
 	if (bm == NULL) {
-		printf("couldn't allocate module %s\n", name); 
-		return; 
+		printf("couldn't allocate module %s\n", name);
+		return;
 	}
 
 	bm->bm_kmod = (char *)(bm + 1);
@@ -451,12 +452,12 @@ module_add(const char *name)
 #define alignpg(x)	(((x)+PAGE_SIZE-1) & ~(PAGE_SIZE-1))
 
 void
-module_load(const char *kernel_path) 
+module_load(const char *kernel_path)
 {
 	struct boot_module *bm;
 	struct bi_modulelist_entry *bi;
 	struct stat st;
-	char *p; 
+	char *p;
 	int size, fd;
 
 	strcpy(module_base, kernel_path);
@@ -496,7 +497,7 @@ module_load(const char *kernel_path)
 		}
 		bm->bm_len = (int)st.st_size;
 		close(fd);
-		size += sizeof(struct bi_modulelist_entry); 
+		size += sizeof(struct bi_modulelist_entry);
 	}
 	if (size == 0)
 		return;

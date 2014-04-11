@@ -98,7 +98,7 @@ neptune_attach(device_t parent, device_t self, void *aux)
 	struct neptune_softc *sc = device_private(self);
 	struct intio_attach_args *ia = aux;
 	struct neptune_attach_args na;
-	int r;
+	int r __diagused;
 	cfdata_t cf;
 
 	ia->ia_size = 0x400;

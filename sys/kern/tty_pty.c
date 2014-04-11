@@ -1041,6 +1041,9 @@ ptyioctl(dev_t dev, u_long cmd, void *data, int flag, struct lwp *l)
 	const struct cdevsw *cdev;
 	u_char *cc = tp->t_cc;
 	int stop, error, sig;
+#ifndef NO_DEV_PTM
+	struct mount *mp;
+#endif
 
 	/*
 	 * IF CONTROLLER STTY THEN MUST FLUSH TO PREVENT A HANG.
@@ -1071,8 +1074,11 @@ ptyioctl(dev_t dev, u_long cmd, void *data, int flag, struct lwp *l)
 
 #ifndef NO_DEV_PTM
 	/* Allow getting the name from either the master or the slave */
-	if (cmd == TIOCPTSNAME)
-		return pty_fill_ptmget(l, dev, -1, -1, data);
+	if (cmd == TIOCPTSNAME) {
+		if ((error = ptyfs_getmp(l, &mp)) != 0)
+			return error;
+		return pty_fill_ptmget(l, dev, -1, -1, data, mp);
+	}
 #endif
 
 	cdev = cdevsw_lookup(dev);
@@ -1080,7 +1086,9 @@ ptyioctl(dev_t dev, u_long cmd, void *data, int flag, struct lwp *l)
 		switch (cmd) {
 #ifndef NO_DEV_PTM
 		case TIOCGRANTPT:
-			return pty_grant_slave(l, dev);
+			if ((error = ptyfs_getmp(l, &mp)) != 0)
+				return error;
+			return pty_grant_slave(l, dev, mp);
 #endif
 
 		case TIOCGPGRP:

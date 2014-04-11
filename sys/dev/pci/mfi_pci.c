@@ -199,6 +199,7 @@ mfi_pci_attach(device_t parent, device_t self, void *aux)
 	int			regbar;
 	const char 		*subtype = NULL;
 	uint32_t		subsysid;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	sc->sc_dev = self;
 	psc->psc_pc = pa->pa_pc;
@@ -237,7 +238,7 @@ mfi_pci_attach(device_t parent, device_t self, void *aux)
 		bus_space_unmap(sc->sc_iot, sc->sc_ioh, sc->sc_size);
 		return;
 	}
-	intrstr = pci_intr_string(pa->pa_pc, ih);
+	intrstr = pci_intr_string(pa->pa_pc, ih, intrbuf, sizeof(intrbuf));
 	if (mpd->mpd_iop == MFI_IOP_TBOLT) {
 		sc->sc_ih = pci_intr_establish(pa->pa_pc, ih, IPL_BIO,
 		    mfi_tbolt_intrh, sc);

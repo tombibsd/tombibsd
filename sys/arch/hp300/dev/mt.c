@@ -189,7 +189,7 @@ mtattach(device_t parent, device_t self, void *aux)
 {
 	struct mt_softc *sc = device_private(self);
 	struct hpibbus_attach_args *ha = aux;
-	int unit, hpibno, slave;
+	int hpibno, slave;
 
 	sc->sc_dev = self;
 	if (mtident(sc, ha) == 0) {
@@ -197,7 +197,6 @@ mtattach(device_t parent, device_t self, void *aux)
 		return;
 	}
 
-	unit = device_unit(self);
 	hpibno = device_unit(parent);
 	slave = ha->ha_slave;
 

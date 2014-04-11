@@ -200,7 +200,7 @@ initarm(void *arg)
 #ifdef MULTIPROCESSOR
 	uint32_t scu_cfg = bus_space_read_4(bcm53xx_armcore_bst, bcm53xx_armcore_bsh,
 	    ARMCORE_SCU_BASE + SCU_CFG);
-	arm_cpu_max = scu_cfg & SCU_CFG_CPUMAX;
+	arm_cpu_max = 1 + (scu_cfg & SCU_CFG_CPUMAX);
 	membar_producer();
 #endif
 	/*

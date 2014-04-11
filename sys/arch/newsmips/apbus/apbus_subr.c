@@ -74,14 +74,10 @@ apbus_lookupdev(char *devname)
 static void
 apctl_dump(struct apbus_ctl *apctl)
 {
-	unsigned int *p;
-
 	if (!apctl)
 		return;
 
 	printf("	apbus_ctl dump (%p)\n", apctl);
-
-	p = (void *)apctl;
 
 	printf("	Num:		%d\n", apctl->apbc_ctlno);
 	printf("	HWaddr:		0x%08x\n", apctl->apbc_hwbase);

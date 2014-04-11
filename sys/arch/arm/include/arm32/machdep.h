@@ -53,7 +53,7 @@ extern struct bootmem_info bootmem_info;
 extern char *booted_kernel;
 
 extern volatile uint32_t arm_cpu_hatched;
-extern uint32_t arm_cpu_mbox;
+extern volatile uint32_t arm_cpu_mbox;
 extern u_int arm_cpu_max;
 
 /* misc prototypes used by the many arm machdeps */

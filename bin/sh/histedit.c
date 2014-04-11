@@ -432,10 +432,12 @@ histcmd(int argc, char **argv)
 	}
 	if (editor) {
 		char *editcmd;
+		size_t cmdlen;
 
 		fclose(efp);
-		editcmd = stalloc(strlen(editor) + strlen(editfile) + 2);
-		sprintf(editcmd, "%s %s", editor, editfile);
+		cmdlen = strlen(editor) + strlen(editfile) + 2;
+		editcmd = stalloc(cmdlen);
+		snprintf(editcmd, cmdlen, "%s %s", editor, editfile);
 		evalstring(editcmd, 0);	/* XXX - should use no JC command */
 		INTON;
 		readcmdfile(editfile);	/* XXX - should read back - quick tst */

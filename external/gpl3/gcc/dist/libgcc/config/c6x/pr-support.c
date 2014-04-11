@@ -518,7 +518,7 @@ _Unwind_GetRegionStart (_Unwind_Context *context)
   return (_Unwind_Ptr) ucbp->pr_cache.fnstart;
 }
 
-void *
+_Unwind_Ptr
 _Unwind_GetLanguageSpecificData (_Unwind_Context *context)
 {
   _Unwind_Control_Block *ucbp;
@@ -531,5 +531,5 @@ _Unwind_GetLanguageSpecificData (_Unwind_Context *context)
   /* Skip the unwind opcodes.  */
   ptr += (((*ptr) >> 24) & 0xff) + 1;
 
-  return ptr;
+  return (_Unwind_Ptr) ptr;
 }

@@ -84,7 +84,8 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 int     dec_alphabook1_intr_map(const struct pci_attach_args *,
 	    pci_intr_handle_t *);
-const char *dec_alphabook1_intr_string(void *, pci_intr_handle_t);
+const char *dec_alphabook1_intr_string(void *, pci_intr_handle_t, char *,
+    size_t);
 const struct evcnt *dec_alphabook1_intr_evcnt(void *, pci_intr_handle_t);
 void    *dec_alphabook1_intr_establish(void *, pci_intr_handle_t,
 	    int, int (*func)(void *), void *);
@@ -173,13 +174,13 @@ dec_alphabook1_intr_map(const struct pci_attach_args *pa,
 }
 
 const char *
-dec_alphabook1_intr_string(void *lcv, pci_intr_handle_t ih)
+dec_alphabook1_intr_string(void *lcv, pci_intr_handle_t ih, char *buf, size_t len)
 {
 #if 0
 	struct lca_config *lcp = lcv;
 #endif
 
-	return sio_intr_string(NULL /*XXX*/, ih);
+	return sio_intr_string(NULL /*XXX*/, ih, buf, len);
 }
 
 const struct evcnt *

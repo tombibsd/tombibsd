@@ -148,6 +148,7 @@ age_attach(device_t parent, device_t self, void *aux)
 	struct ifnet *ifp = &sc->sc_ec.ec_if;
 	pcireg_t memtype;
 	int error = 0;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	aprint_naive("\n");
 	aprint_normal(": Attansic/Atheros L1 Gigabit Ethernet\n");
@@ -185,7 +186,7 @@ age_attach(device_t parent, device_t self, void *aux)
 	/*
 	 * Allocate IRQ
 	 */
-	intrstr = pci_intr_string(sc->sc_pct, ih);
+	intrstr = pci_intr_string(sc->sc_pct, ih, intrbuf, sizeof(intrbuf));
 	sc->sc_irq_handle = pci_intr_establish(sc->sc_pct, ih, IPL_NET,
 	    age_intr, sc);
 	if (sc->sc_irq_handle == NULL) {

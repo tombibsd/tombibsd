@@ -71,13 +71,13 @@ ata_raid_via_type(int type)
 	static char buffer[16];
 
 	switch (type) {
-	    case VIA_T_RAID0:   return "RAID0";
-	    case VIA_T_RAID1:   return "RAID1";
-	    case VIA_T_RAID5:   return "RAID5";
-	    case VIA_T_RAID01:  return "RAID0+1";
-	    case VIA_T_SPAN:    return "SPAN";
-	    default:
-		sprintf(buffer, "UNKNOWN 0x%02x", type);
+	case VIA_T_RAID0:   return "RAID0";
+	case VIA_T_RAID1:   return "RAID1";
+	case VIA_T_RAID5:   return "RAID5";
+	case VIA_T_RAID01:  return "RAID0+1";
+	case VIA_T_SPAN:    return "SPAN";
+	default:
+		snprintf(buffer, sizeof(buffer), "UNKNOWN 0x%02x", type);
 		return buffer;
 	}
 }

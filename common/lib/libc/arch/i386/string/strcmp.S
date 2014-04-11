@@ -75,3 +75,4 @@ ENTRY(strcmp)
 	popl	%ebx
 	popl	%esi
 	ret
+END(strcmp)

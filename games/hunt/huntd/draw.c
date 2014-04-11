@@ -312,7 +312,7 @@ showstat(PLAYER *pp)
  *	unless he is cloaked.
  */
 void
-drawplayer(PLAYER *pp, FLAG draw)
+drawplayer(PLAYER *pp, bool draw)
 {
 	PLAYER *newp;
 	int x, y;

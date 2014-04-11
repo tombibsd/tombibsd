@@ -462,6 +462,7 @@ pdq_eisa_attach(
     pdq_uint32_t irq, maddr, msiz;
     eisa_intr_handle_t ih;
     const char *intrstr;
+    char intrbuf[EISA_INTRSTR_LEN];
 
     sc->sc_iotag = ea->ea_iot;
     sc->sc_dmatag = ea->ea_dmat;
@@ -508,7 +509,7 @@ pdq_eisa_attach(
 	aprint_error_dev(sc->sc_dev, "couldn't map interrupt (%d)\n", irq);
 	return;
     }
-    intrstr = eisa_intr_string(ea->ea_ec, ih);
+    intrstr = eisa_intr_string(ea->ea_ec, ih, intrbuf, sizeof(intrbuf));
     sc->sc_ih = eisa_intr_establish(ea->ea_ec, ih, IST_LEVEL, IPL_NET,
 				    (int (*)(void *)) pdq_interrupt, sc->sc_pdq);
     if (sc->sc_ih == NULL) {

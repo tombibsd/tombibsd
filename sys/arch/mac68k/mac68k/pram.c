@@ -121,7 +121,8 @@ static const char *convtime(unsigned long t)
     t=0;
   }
 
-  sprintf(s,"%s %ld, %ld   %ld:%ld:%ld",monstr[month],day,year,hour,minute,seconds);
+  snprintf(s, sizeof(s), "%s %ld, %ld   %ld:%ld:%ld",
+      monstr[month], day, year, hour, minute, seconds);
 
   return s;
 }

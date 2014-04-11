@@ -19,12 +19,12 @@
 /lcd.c/1.1/Mon Feb 24 07:23:42 2014/-kk/
 /lpt_ssio.c/1.1/Mon Feb 24 07:23:42 2014/-kk/
 /mem.c/1.1/Mon Feb 24 07:23:42 2014/-kk/
-/mongoose.c/1.1/Mon Feb 24 07:23:42 2014/-kk/
+/mongoose.c/1.2/Fri Apr 11 02:03:30 2014/-kk/
 /pdc.c/1.1/Mon Feb 24 07:23:42 2014/-kk/
 /phantomas.c/1.1/Mon Feb 24 07:23:42 2014/-kk/
 /power.c/1.1/Mon Feb 24 07:23:42 2014/-kk/
 /siop_sgc.c/1.1/Mon Feb 24 07:23:42 2014/-kk/
-/ssio.c/1.1/Mon Feb 24 07:23:43 2014/-kk/
+/ssio.c/1.2/Fri Apr 11 02:03:30 2014/-kk/
 /ssiovar.h/1.1/Mon Feb 24 07:23:43 2014/-kk/
 /sti_pci_machdep.c/1.1/Mon Feb 24 07:23:43 2014/-kk/
 /sti_sgc.c/1.1/Mon Feb 24 07:23:43 2014/-kk/

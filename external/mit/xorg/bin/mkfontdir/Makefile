@@ -12,5 +12,7 @@ SCRIPTS=	mkfontdir
 mkfontdir: mkfontdir.in
 	${TOOL_SED} -e "s#@bindir@#${X11BINDIR}#" < ${.ALLSRC} > ${.TARGET}
 
+CLEANFILES+=	mkfontdir
+
 .include <bsd.x11.mk>
 .include <bsd.prog.mk>

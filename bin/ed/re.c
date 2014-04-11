@@ -37,10 +37,21 @@ __RCSID("$NetBSD$");
 #endif
 #endif /* not lint */
 
+#include <stdarg.h>
 #include "ed.h"
 
 
 char errmsg[MAXPATHLEN + 40] = "";
+
+void
+seterrmsg(const char *fmt, ...)
+{
+	va_list ap;
+
+	va_start(ap, fmt);
+	vsnprintf(errmsg, sizeof(errmsg), fmt, ap);
+	va_end(ap);
+}
 
 /* get_compiled_pattern: return pointer to compiled pattern from command 
    buffer */
@@ -54,10 +65,10 @@ get_compiled_pattern(void)
 	int n;
 
 	if ((delimiter = *ibufp) == ' ') {
-		sprintf(errmsg, "invalid pattern delimiter");
+		seterrmsg("invalid pattern delimiter");
 		return NULL;
 	} else if (delimiter == '\n' || *++ibufp == '\n' || *ibufp == delimiter) {
-		if (!expr) sprintf(errmsg, "no previous pattern");
+		if (!expr) seterrmsg("no previous pattern");
 		return expr;
 	} else if ((exps = extract_pattern(delimiter)) == NULL)
 		return NULL;
@@ -66,7 +77,7 @@ get_compiled_pattern(void)
 		regfree(expr);
 	else if ((expr = (pattern_t *) malloc(sizeof(pattern_t))) == NULL) {
 		fprintf(stderr, "%s\n", strerror(errno));
-		sprintf(errmsg, "out of memory");
+		seterrmsg("out of memory");
 		return NULL;
 	}
 	patlock = 0;
@@ -96,13 +107,13 @@ extract_pattern(int delimiter)
 			break;
 		case '[':
 			if ((nd = parse_char_class(nd + 1)) == NULL) {
-				sprintf(errmsg, "unbalanced brackets ([])");
+				seterrmsg("unbalanced brackets ([])");
 				return NULL;
 			}
 			break;
 		case '\\':
 			if (*++nd == '\n') {
-				sprintf(errmsg, "trailing backslash (\\)");
+				seterrmsg("trailing backslash (\\)");
 				return NULL;
 			}
 			break;

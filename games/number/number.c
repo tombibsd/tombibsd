@@ -78,9 +78,9 @@ static const char	*const name1[] = {
 
 int	main(int, char *[]);
 static void convert(char *);
-static int number(const char *, int);
-static void pfract(int);
-static int unit(int, const char *);
+static int number(const char *, size_t);
+static void pfract(size_t);
+static int unit(size_t, const char *);
 static void usage(void) __dead;
 
 static int lflag;
@@ -125,7 +125,8 @@ main(int argc, char *argv[])
 void
 convert(char *line)
 {
-	int flen, len, rval;
+	size_t flen, len;
+	int rval;
 	char *p, *fraction;
 
 	flen = 0;
@@ -191,9 +192,10 @@ badnum:			errx(1, "illegal number: %s", line);
 }
 
 int
-unit(int len, const char *p)
+unit(size_t len, const char *p)
 {
-	int off, rval;
+	size_t off;
+	int rval;
 
 	rval = 0;
 	if (len > 3) {
@@ -225,7 +227,7 @@ unit(int len, const char *p)
 }
 
 int
-number(const char *p, int len)
+number(const char *p, size_t len)
 {
 	int val, rval;
 
@@ -263,7 +265,7 @@ number(const char *p, int len)
 }
 
 void
-pfract(int len)
+pfract(size_t len)
 {
 	static const char *const pref[] = { "", "ten-", "hundred-" };
 

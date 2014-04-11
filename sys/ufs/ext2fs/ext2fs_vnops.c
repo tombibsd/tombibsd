@@ -1116,7 +1116,7 @@ ext2fs_reclaim(void *v)
 	/*
 	 * The inode must be freed and updated before being removed
 	 * from its hash chain.  Other threads trying to gain a hold
-	 * on the inode will be stalled because it is locked (VI_XLOCK).
+	 * or lock on the inode will be stalled.
 	 */
 	if (ip->i_omode == 1 && (vp->v_mount->mnt_flag & MNT_RDONLY) == 0)
 		ext2fs_vfree(vp, ip->i_number, ip->i_e2fs_mode);

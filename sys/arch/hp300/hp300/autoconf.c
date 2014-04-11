@@ -300,7 +300,6 @@ void
 cpu_rootconf(void)
 {
 	struct dev_data *dd;
-	device_t dv;
 	struct vfsops *vops;
 
 	/*
@@ -342,7 +341,6 @@ cpu_rootconf(void)
 			}
 			if (dd == NULL) {
 				printf("no network interface for NFS root");
-				dv = NULL;
 			}
 		}
 		if (vops != NULL)
@@ -608,7 +606,7 @@ setbootdev(void)
 	 *	4 == sd
 	 *	6 == le
 	 *
-	 * Allare bdevsw major numbers, except for le, which
+	 * All are bdevsw major numbers, except for le, which
 	 * is just special.
 	 *
 	 * We can't mount root on a tape, so we ignore those.

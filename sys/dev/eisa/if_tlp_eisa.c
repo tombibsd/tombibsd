@@ -162,6 +162,7 @@ tlp_eisa_attach(device_t parent, device_t self, void *aux)
 	u_int8_t enaddr[ETHER_ADDR_LEN], tmpbuf[sizeof(testpat)];
 	u_int32_t val;
 	int irq, i, cnt;
+	char intrbuf[EISA_INTRSTR_LEN];
 
 	/*
 	 * Map the device.
@@ -264,7 +265,7 @@ tlp_eisa_attach(device_t parent, device_t self, void *aux)
 		    irq);
 		return;
 	}
-	intrstr = eisa_intr_string(ec, ih);
+	intrstr = eisa_intr_string(ec, ih, intrbuf, sizeof(intrbuf));
 	esc->sc_ih = eisa_intr_establish(ec, ih,
 	    (val & 0x01) ? IST_EDGE : IST_LEVEL, IPL_NET, tlp_intr, sc);
 	if (esc->sc_ih == NULL) {

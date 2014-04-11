@@ -56,7 +56,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 int	dec_2100_a50_intr_map(const struct pci_attach_args *,
 	    pci_intr_handle_t *);
-const char *dec_2100_a50_intr_string(void *, pci_intr_handle_t);
+const char *dec_2100_a50_intr_string(void *, pci_intr_handle_t, char *, size_t);
 const struct evcnt *dec_2100_a50_intr_evcnt(void *, pci_intr_handle_t);
 void    *dec_2100_a50_intr_establish(void *, pci_intr_handle_t,
 	    int, int (*func)(void *), void *);
@@ -215,13 +215,13 @@ dec_2100_a50_intr_map(const struct pci_attach_args *pa, pci_intr_handle_t *ihp)
 }
 
 const char *
-dec_2100_a50_intr_string(void *acv, pci_intr_handle_t ih)
+dec_2100_a50_intr_string(void *acv, pci_intr_handle_t ih, char *buf, size_t len)
 {
 #if 0
 	struct apecs_config *acp = acv;
 #endif
 
-	return sio_intr_string(NULL /*XXX*/, ih);
+	return sio_intr_string(NULL /*XXX*/, ih, buf, len);
 }
 
 const struct evcnt *

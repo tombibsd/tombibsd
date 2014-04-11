@@ -1624,9 +1624,11 @@ do_sys_openat(lwp_t *l, int fdat, const char *path, int flags,
 	int error;
 
 #ifdef COMPAT_10	/* XXX: and perhaps later */
-	if (path == NULL)
+	if (path == NULL) {
 		pb = pathbuf_create(".");
-	else
+		if (pb == NULL)
+			return ENOMEM;
+	} else
 #endif
 	{
 		error = pathbuf_copyin(path, &pb);

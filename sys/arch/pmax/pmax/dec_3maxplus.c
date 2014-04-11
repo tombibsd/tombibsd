@@ -180,10 +180,10 @@ dec_3maxplus_init(void)
 	prodtype &= KN03_INTR_PROD_JUMPER;
 	/* the bit persists even if INTR register is assigned value 0 */
 	if (prodtype)
-		sprintf(cpu_model, "DECstation 5000/%s (3MAXPLUS)",
+		cpu_setmodel("DECstation 5000/%s (3MAXPLUS)",
 		    (CPUISMIPS3) ? "260" : "240");
 	else
-		sprintf(cpu_model, "DECsystem 5900%s (3MAXPLUS)",
+		cpu_setmodel("DECsystem 5900%s (3MAXPLUS)",
 		    (CPUISMIPS3) ? "-260" : "");
 }
 

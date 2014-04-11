@@ -195,7 +195,7 @@
 /test_mem.c/1.1.1.1/Wed Apr 13 18:15:38 2011/-kk/
 /test_pac.c/1.1.1.1/Wed Apr 13 18:15:38 2011/-kk/
 /test_pkinit_dh2key.c/1.1.1.1/Wed Apr 13 18:15:38 2011/-kk/
-/test_pknistkdf.c/1.1.1.1/Wed Apr 13 18:15:38 2011/-kk/
+/test_pknistkdf.c/1.2/Fri Apr 11 02:00:00 2014/-kk/
 /test_plugin.c/1.1.1.1/Wed Apr 13 18:15:38 2011/-kk/
 /test_prf.c/1.1.1.1/Wed Apr 13 18:15:38 2011/-kk/
 /test_princ.c/1.1.1.1/Wed Apr 13 18:15:38 2011/-kk/

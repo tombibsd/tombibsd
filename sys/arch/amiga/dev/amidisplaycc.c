@@ -1448,8 +1448,8 @@ amidisplaycc_show_screen(void *dp, void *screen, int waitok,
 int
 amidisplaycc_load_font(void *dp, void *cookie, struct wsdisplay_font *font)
 {
-	struct amidisplaycc_softc   * adp;
-	struct amidisplaycc_screen  * scr;
+	struct amidisplaycc_softc   * adp __diagused;
+	struct amidisplaycc_screen  * scr __diagused;
 
 	adp = dp;
 	scr = cookie;

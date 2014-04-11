@@ -36,6 +36,7 @@ SUBDIR += arch/mvme68k
 SUBDIR += arch/news68k
 SUBDIR += arch/newsmips
 SUBDIR += arch/ofppc
+SUBDIR += arch/playstation2
 SUBDIR += arch/pmax
 SUBDIR += arch/prep
 SUBDIR += arch/sandpoint

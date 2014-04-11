@@ -5411,6 +5411,7 @@ nbsd_attach(device_t parent, device_t self, void *aux)
   const char *intrstr;
   bus_addr_t csr_addr;
   int error;
+  char intrbuf[PCI_INTRSTR_LEN];
 
   /* for READ/WRITE_PCI_CFG() */
   sc->sc_dev = self;
@@ -5471,7 +5472,7 @@ nbsd_attach(device_t parent, device_t self, void *aux)
     nbsd_detach(self, 0);
     return;
     }
-  intrstr = pci_intr_string(pa->pa_pc, sc->intr_handle);
+  intrstr = pci_intr_string(pa->pa_pc, sc->intr_handle, intrbuf, sizeof(intrbuf));
   aprint_normal(" %s: %s\n", intrstr, sc->dev_desc);
   aprint_naive(": %s\n", sc->dev_desc);
 

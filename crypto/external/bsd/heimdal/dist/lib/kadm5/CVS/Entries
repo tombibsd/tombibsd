@@ -2,7 +2,7 @@
 /Makefile.am/1.1.1.2/Thu Apr 14 14:09:16 2011/-kk/
 /NTMakefile/1.1.1.1/Wed Apr 13 18:15:29 2011/-kk/
 /acl.c/1.1.1.1/Wed Apr 13 18:15:29 2011/-kk/
-/ad.c/1.1.1.1/Wed Apr 13 18:15:29 2011/-kk/
+/ad.c/1.2/Fri Apr 11 01:59:59 2014/-kk/
 /admin.h/1.1.1.2/Thu Apr 14 14:09:16 2011/-kk/
 /bump_pw_expire.c/1.1.1.1/Wed Apr 13 18:15:28 2011/-kk/
 /check-cracklib.pl/1.1.1.2/Thu Apr 14 14:09:16 2011/-kk/

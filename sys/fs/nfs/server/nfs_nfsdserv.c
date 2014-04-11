@@ -3346,8 +3346,8 @@ nfsrvd_setclientid(struct nfsrv_descript *nd, __unused int isdgram,
 		rad = NFSSOCKADDR(clp->lc_req.nr_nam, struct sockaddr_in *);
 		ucp = (u_char *)&rad->sin_addr.s_addr;
 		ucp2 = (u_char *)&rad->sin_port;
-		sprintf(addrbuf, "%d.%d.%d.%d.%d.%d", ucp[0] & 0xff,
-		    ucp[1] & 0xff, ucp[2] & 0xff, ucp[3] & 0xff,
+		snprintf(addrbuf, sizeof(addrbuf), "%d.%d.%d.%d.%d.%d",
+		    ucp[0] & 0xff, ucp[1] & 0xff, ucp[2] & 0xff, ucp[3] & 0xff,
 		    ucp2[0] & 0xff, ucp2[1] & 0xff);
 		(void) nfsm_strtom(nd, addrbuf, strlen(addrbuf));
 	}

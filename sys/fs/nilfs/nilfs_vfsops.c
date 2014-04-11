@@ -111,31 +111,29 @@ const struct vnodeopv_desc * const nilfs_vnodeopv_descs[] = {
 
 /* vfsops descriptor linked in as anchor point for the filingsystem */
 struct vfsops nilfs_vfsops = {
-	MOUNT_NILFS,			/* vfs_name */
-	sizeof (struct nilfs_args),
-	nilfs_mount,
-	nilfs_start,
-	nilfs_unmount,
-	nilfs_root,
-	(void *)eopnotsupp,		/* vfs_quotactl */
-	nilfs_statvfs,
-	nilfs_sync,
-	nilfs_vget,
-	nilfs_fhtovp,
-	nilfs_vptofh,
-	nilfs_init,
-	nilfs_reinit,
-	nilfs_done,
-	nilfs_mountroot,
-	nilfs_snapshot,
-	vfs_stdextattrctl,
-	(void *)eopnotsupp,		/* vfs_suspendctl */
-	genfs_renamelock_enter,
-	genfs_renamelock_exit,
-	(void *)eopnotsupp,		/* vfs_full_fsync */
-	nilfs_vnodeopv_descs,
-	0, /* int vfs_refcount   */
-	{ NULL, NULL, }, /* LIST_ENTRY(vfsops) */
+	.vfs_name = MOUNT_NILFS,
+	.vfs_min_mount_data = sizeof (struct nilfs_args),
+	.vfs_mount = nilfs_mount,
+	.vfs_start = nilfs_start,
+	.vfs_unmount = nilfs_unmount,
+	.vfs_root = nilfs_root,
+	.vfs_quotactl = (void *)eopnotsupp,
+	.vfs_statvfs = nilfs_statvfs,
+	.vfs_sync = nilfs_sync,
+	.vfs_vget = nilfs_vget,
+	.vfs_fhtovp = nilfs_fhtovp,
+	.vfs_vptofh = nilfs_vptofh,
+	.vfs_init = nilfs_init,
+	.vfs_reinit = nilfs_reinit,
+	.vfs_done = nilfs_done,
+	.vfs_mountroot = nilfs_mountroot,
+	.vfs_snapshot = nilfs_snapshot,
+	.vfs_extattrctl = vfs_stdextattrctl,
+	.vfs_suspendctl = (void *)eopnotsupp,
+	.vfs_renamelock_enter = genfs_renamelock_enter,
+	.vfs_renamelock_exit = genfs_renamelock_exit,
+	.vfs_fsync = (void *)eopnotsupp,
+	.vfs_opv_descs = nilfs_vnodeopv_descs
 };
 
 /* --------------------------------------------------------------------- */

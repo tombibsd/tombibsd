@@ -1,7 +1,9 @@
-/Makefile/1.7/Sat Feb  6 23:45:25 2010/-kk/
-/connect.c/1.8/Sat Jul  4 05:01:16 2009/-kk/
+/Makefile/1.9/Fri Apr 11 02:02:21 2014/-kk/
+/connect.c/1.11/Fri Apr 11 02:02:21 2014/-kk/
 /hunt.6/1.14/Sat Jul  4 06:15:27 2009/-kk/
-/hunt.c/1.41/Thu Sep  1 07:18:50 2011/-kk/
-/otto.c/1.15/Sat Jul  4 07:10:23 2009/-kk/
-/playit.c/1.16/Thu Aug 27 00:36:32 2009/-kk/
+/hunt.c/1.58/Fri Apr 11 02:02:21 2014/-kk/
+/hunt_private.h/1.9/Sun Mar 30 05:30:28 2014/-kk/
+/otto.c/1.18/Fri Apr 11 02:02:21 2014/-kk/
+/playit.c/1.25/Fri Apr 11 02:02:21 2014/-kk/
+/server.c/1.8/Sun Mar 30 04:57:37 2014/-kk/
 D

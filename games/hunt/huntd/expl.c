@@ -38,6 +38,10 @@ __RCSID("$NetBSD$");
 #include <stdlib.h>
 #include "hunt.h"
 
+
+static EXPL *Expl[EXPLEN];		/* explosion lists */
+static EXPL *Last_expl;			/* last explosion on Expl[0] */
+
 static void remove_wall(int, int);
 
 

@@ -309,12 +309,7 @@ ipf_p_irc_send(fr_info_t *fin, nat_t *nat)
 	i = irc->irc_addr - ctcpbuf;
 	i++;
 	(void) strncpy(newbuf, ctcpbuf, i);
-	/* DO NOT change these! */
-#if defined(SNPRINTF) && defined(KERNEL)
-	SNPRINTF(newbuf, sizeof(newbuf) - i, "%u %u\001\r\n", a1, a5);
-#else
-	(void) sprintf(newbuf, "%u %u\001\r\n", a1, a5);
-#endif
+	snprintf(newbuf, sizeof(newbuf) - i, "%u %u\001\r\n", a1, a5);
 
 	nlen = strlen(newbuf);
 	inc = nlen - olen;

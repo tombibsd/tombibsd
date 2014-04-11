@@ -99,5 +99,6 @@ ENTRY(strchr)
 	popl	%ebx
 	popl	%esi
 	ret
+END(strchr)
 
 STRONG_ALIAS(index,strchr)

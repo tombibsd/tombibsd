@@ -30,7 +30,7 @@
 /i8259.h/1.4/Thu Aug  7 16:30:32 2003/-kk/
 /ieee.h/1.11/Wed Sep 15 16:11:28 2010/-kk/
 /ieeefp.h/1.4/Sat Mar 26 19:52:20 2011/-kk/
-/intr.h/1.43/Mon Aug  1 10:42:23 2011/-kk/
+/intr.h/1.44/Fri Apr 11 02:03:39 2014/-kk/
 /intrdefs.h/1.19/Tue Dec 17 04:13:30 2013/-kk/
 /ipmivar.h/1.11/Sun Aug  1 08:16:14 2010/-kk/
 /isa_machdep.h/1.11/Fri Jul  1 18:22:39 2011/-kk/
@@ -46,7 +46,7 @@
 /mutex.h/1.6/Fri Apr 24 17:49:51 2009/-kk/
 /nmi.h/1.1/Tue Feb 24 06:03:54 2009/-kk/
 /pci_machdep.h/1.14/Sun Mar 14 20:19:06 2010/-kk/
-/pci_machdep_common.h/1.12/Thu Oct 24 10:28:57 2013/-kk/
+/pci_machdep_common.h/1.13/Fri Apr 11 02:03:39 2014/-kk/
 /pic.h/1.7/Sun Apr 19 14:11:37 2009/-kk/
 /pio.h/1.9/Sun May 22 16:01:43 2011/-kk/
 /pmap.h/1.55/Thu Oct 24 10:28:57 2013/-kk/

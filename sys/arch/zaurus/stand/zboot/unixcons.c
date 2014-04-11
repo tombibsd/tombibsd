@@ -170,8 +170,7 @@ awaitkey(int timeout, int tell)
 			char numbuf[20];
 			int len, j;
 
-			sprintf(numbuf, "%d ", i);
-			len = strlen(numbuf);
+			len = snprintf(numbuf, sizeof(numbuf), "%d ", i);
 			for (j = 0; j < len; j++)
 				numbuf[len + j] = '\b';
 			numbuf[len + j] = '\0';

@@ -640,6 +640,7 @@ bcm53xx_device_register(device_t self, void *aux)
 	}
 }
 
+#ifdef SRAB_BASE
 static kmutex_t srab_lock __cacheline_aligned;
 
 void
@@ -742,3 +743,4 @@ bcm53xx_srab_write_8(u_int pageoffset, uint64_t val)
 	bcm53xx_srab_busywait(bst, bsh);
 	mutex_spin_exit(&srab_lock);
 }
+#endif

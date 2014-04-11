@@ -156,6 +156,7 @@ mvsata_pci_attach(device_t parent, device_t self, void *aux)
 	uint32_t reg, mask;
 	int read_pre_amps, hc, port, rv, i;
 	const char *intrstr;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	sc->sc_wdcdev.sc_atac.atac_dev = self;
 	sc->sc_model = PCI_PRODUCT(pa->pa_id);
@@ -192,7 +193,7 @@ mvsata_pci_attach(device_t parent, device_t self, void *aux)
 		aprint_error_dev(self, "couldn't map interrupt\n");
 		return;
 	}
-	intrstr = pci_intr_string(psc->psc_pc, intrhandle);
+	intrstr = pci_intr_string(psc->psc_pc, intrhandle, intrbuf, sizeof(intrbuf));
 	psc->psc_ih = pci_intr_establish(psc->psc_pc, intrhandle, IPL_BIO,
 	    mvsata_pci_intr, sc);
 	if (psc->psc_ih == NULL) {

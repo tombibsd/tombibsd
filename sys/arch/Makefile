@@ -51,7 +51,7 @@ SUBDIR+= xen
 #	m68k mac68k macppc mips mipsco mmeye mvme68k \
 #	netwinder news68k newsmips next68k \
 #	ofppc \
-#	pmax powerpc prep \
+#	playstation2 pmax powerpc prep \
 #	sandpoint sbmips sgimips sh3 shark sparc sparc64 sun2 sun3 sun68k \
 #	rs6000 \
 #	vax \

@@ -179,7 +179,7 @@ nfssvc_program(struct svc_req *rqst, SVCXPRT *xprt)
 #if defined(KLD_MODULE)
 			/* Do not use ip6_sprintf: the nfs module should work without INET6. */
 #define	ip6_sprintf(buf, a)						\
-			(sprintf((buf), "%x:%x:%x:%x:%x:%x:%x:%x",	\
+			(snprintf((buf), sizeof(buf), "%x:%x:%x:%x:%x:%x:%x:%x",	\
 			    (a)->s6_addr16[0], (a)->s6_addr16[1],	\
 			    (a)->s6_addr16[2], (a)->s6_addr16[3],	\
 			    (a)->s6_addr16[4], (a)->s6_addr16[5],	\

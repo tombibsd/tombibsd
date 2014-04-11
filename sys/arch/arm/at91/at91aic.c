@@ -251,7 +251,7 @@ at91aic_init(void)
 		iq = &intrq[i];
 		TAILQ_INIT(&iq->iq_list);
 
-		sprintf(iq->iq_name, "irq %d", i);
+		snprintf(iq->iq_name, sizeof(iq->iq_name), "irq %d", i);
 	}
 
 	/* All interrupts should use IRQ not FIQ */

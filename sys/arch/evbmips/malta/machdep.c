@@ -126,9 +126,6 @@ int	comcnrate = 38400;	/* XXX should be config option */
 
 struct malta_config malta_configuration;
 
-/* For sysctl_hw. */
-extern char cpu_model[];
-
 /* Maps for VM objects. */
 struct vm_map *phys_map = NULL;
 
@@ -227,7 +224,7 @@ mach_init(int argc, char **argv, yamon_env_var *envp, u_long memsize)
 	mem_clusters[0].size = ctob(physmem);
 	mem_cluster_cnt = 1;
 
-	strcpy(cpu_model, "MIPS Malta Evaluation Board");
+	cpu_setmodel("MIPS Malta Evaluation Board");
 
 	/*
 	 * XXX: check argv[0] - do something if "gdb"???

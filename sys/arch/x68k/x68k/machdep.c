@@ -308,10 +308,6 @@ cpu_startup(void)
 	callout_init(&candbtimer_ch, 0);
 }
 
-/*
- * Info for CTL_HW
- */
-char	cpu_model[96];		/* max 85 chars */
 static const char *fpu_descr[] = {
 #ifdef	FPU_EMULATE
 	", emulator FPU",	/* 0 */
@@ -366,19 +362,19 @@ identifycpu(void)
 	check_emulator(emubuf, sizeof(emubuf));
 
 	cpuspeed = 2048 / delay_divisor;
-	sprintf(clock, "%dMHz", cpuspeed);
+	snprintf(clock, sizeof(clock), "%dMHz", cpuspeed);
 	switch (cputype) {
 	case CPU_68060:
 		cpu_type = "m68060";
 		mmu = "/MMU";
 		cpuspeed = 128 / delay_divisor;
-		sprintf(clock, "%d/%dMHz", cpuspeed*2, cpuspeed);
+		snprintf(clock, sizeof(clock), "%d/%dMHz", cpuspeed*2, cpuspeed);
 		break;
 	case CPU_68040:
 		cpu_type = "m68040";
 		mmu = "/MMU";
 		cpuspeed = 759 / delay_divisor;
-		sprintf(clock, "%d/%dMHz", cpuspeed*2, cpuspeed);
+		snprintf(clock, sizeof(clock), "%d/%dMHz", cpuspeed*2, cpuspeed);
 		break;
 	case CPU_68030:
 		cpu_type = "m68030";
@@ -397,10 +393,10 @@ identifycpu(void)
 		fpu = fpu_descr[fputype];
 	else
 		fpu = ", unknown FPU";
-	sprintf(cpu_model, "X68%s (%s CPU%s%s, %s clock)%s%s",
+	cpu_setmodel("X68%s (%s CPU%s%s, %s clock)%s%s",
 	    mach, cpu_type, mmu, fpu, clock,
 		emubuf[0] ? " on " : "", emubuf);
-	printf("%s\n", cpu_model);
+	printf("%s\n", cpu_getmodel());
 }
 
 /*
@@ -517,16 +513,23 @@ cpu_reboot(int howto, char *bootstr)
 	 *	Power cannot be removed; simply halt the system (b)
 	 *	Power switch state is checked in shutdown hook
 	 *  a2: the power switch is off
-	 *	Remove the power; the simplest way is go back to ROM eg. reboot
+	 *	Remove the power
 	 * b) RB_HALT
 	 *	call cngetc
 	 * c) otherwise
 	 *	Reboot
 	 */
-	if (((howto & RB_POWERDOWN) == RB_POWERDOWN) && power_switch_is_off)
-		doboot();
-	else if (/*((howto & RB_POWERDOWN) == RB_POWERDOWN) ||*/
-		 ((howto & RB_HALT) == RB_HALT)) {
+	if (((howto & RB_POWERDOWN) == RB_POWERDOWN) && power_switch_is_off) {
+		printf("powering off...\n");
+		delay(1000000);
+		intio_set_sysport_powoff(0x00);
+		intio_set_sysport_powoff(0x0f);
+		intio_set_sysport_powoff(0x0f);
+		delay(1000000);
+		printf("WARNING: powerdown failed\n");
+		delay(1000000);
+		/* PASSTHROUGH even if came back */
+	} else if ((howto & RB_HALT) == RB_HALT) {
 		printf("System halted.  Hit any key to reboot.\n\n");
 		(void)cngetc();
 	}
@@ -878,6 +881,7 @@ badaddr(volatile void* addr)
 		return 1;
 	}
 	i = *(volatile short *)addr;
+	__USE(i);
 	nofault = NULL;
 	return 0;
 }
@@ -894,6 +898,7 @@ badbaddr(volatile void *addr)
 		return 1;
 	}
 	i = *(volatile char *)addr;
+	__USE(i);
 	nofault = NULL;
 	return 0;
 }
@@ -1218,7 +1223,6 @@ setmemrange(void)
 #endif
 }
 
-volatile int ssir;
 int idepth;
 
 bool

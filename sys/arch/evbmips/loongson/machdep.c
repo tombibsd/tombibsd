@@ -109,6 +109,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/termios.h>
 #include <sys/ksyms.h>
 #include <sys/device.h>
+#include <sys/cpu.h>
 
 #include <uvm/uvm_extern.h>
 
@@ -216,9 +217,6 @@ const struct bonito_flavour bonito_flavours[] = {
 	{ "LM9001",	&lynloong_platform },
 	{ NULL }
 };
-
-/* For sysctl_hw. */
-extern char cpu_model[];
 
 /* Maps for VM objects. */
 struct vm_map *phys_map = NULL;
@@ -432,9 +430,8 @@ mach_init(int32_t argc, int32_t argva, int32_t enva, int32_t callvec,
 		}
 	}
 
-	sprintf(cpu_model, "%s %s", sys_platform->vendor, 
-	    sys_platform->product);
-	DPRINTF(("Found %s, setting up.\n", cpu_model));
+	cpu_setmodel("%s %s", sys_platform->vendor, sys_platform->product);
+	DPRINTF(("Found %s, setting up.\n", cpu_getmodel()));
 
 	/*
 	 * Figure out memory information.

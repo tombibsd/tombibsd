@@ -19,8 +19,7 @@ int
 procfs_getcpuinfstr(char *buf, int *len)
 {
 	const char *cpu, *mmu, *fpu;
-
-	*len = 0;
+	int maxlen = *len;
 
 	switch (cputype) {
 	case CPU_68020:
@@ -79,7 +78,7 @@ procfs_getcpuinfstr(char *buf, int *len)
 		break;
 	}
 
-	*len = snprintf(buf, sizeof(buf),
+	*len = snprintf(buf, maxlen,
 	    /* as seen in Linux 2.4.27 */
 	    "CPU:\t\t%s\n"
 	    "MMU:\t\t%s\n"

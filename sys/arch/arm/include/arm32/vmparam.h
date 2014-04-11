@@ -78,7 +78,11 @@
  * Mach derived constants
  */
 #define	VM_MIN_ADDRESS		((vaddr_t) PAGE_SIZE)
+#ifdef ARM_MMU_EXTENDED
+#define	VM_MAXUSER_ADDRESS	((vaddr_t) 0x80000000 - PAGE_SIZE)
+#else
 #define	VM_MAXUSER_ADDRESS	((vaddr_t) KERNEL_BASE - PAGE_SIZE)
+#endif
 #define	VM_MAX_ADDRESS		VM_MAXUSER_ADDRESS
 
 #define	VM_MIN_KERNEL_ADDRESS	((vaddr_t) KERNEL_BASE)

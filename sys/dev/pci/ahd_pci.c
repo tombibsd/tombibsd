@@ -324,6 +324,7 @@ ahd_pci_attach(device_t parent, device_t self, void *aux)
 	pci_intr_handle_t  	ih;
 	const char         	*intrstr;
 	struct ahd_pci_busdata 	*bd;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	ahd->sc_dev = self;
 	ahd_set_name(ahd, device_xname(self));
@@ -537,7 +538,7 @@ ahd_pci_attach(device_t parent, device_t self, void *aux)
 		ahd_free(ahd);
 		return;
 	}
-	intrstr = pci_intr_string(pa->pa_pc, ih);
+	intrstr = pci_intr_string(pa->pa_pc, ih, intrbuf, sizeof(intrbuf));
 	ahd->ih = pci_intr_establish(pa->pa_pc, ih, IPL_BIO, ahd_intr, ahd);
 	if (ahd->ih == NULL) {
 		aprint_error("%s: couldn't establish interrupt",

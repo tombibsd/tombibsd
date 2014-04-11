@@ -53,6 +53,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/boot_flag.h>
 #include <sys/ksyms.h>
 #include <sys/module.h>
+#include <sys/cpu.h>
 
 #include <uvm/uvm_extern.h>
 
@@ -327,7 +328,7 @@ void
 cpu_startup(void)
 {
 
-	sprintf(cpu_model, "%s\n", platid_name(&platid));
+	cpu_setmodel("%s", platid_name(&platid));
 
 	sh_startup();
 }

@@ -2,5 +2,5 @@
 
 #include <mips/cpu.h>
 #ifndef _LOCORE
-extern char hpcmips_cpuname[];
+int cpuname_printf(const char *, ...) __printflike(1, 2);
 #endif

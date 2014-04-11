@@ -56,6 +56,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/ksyms.h>
 #include <sys/proc.h>
 #include <sys/device.h>
+#include <sys/cpu.h>
 
 #include <uvm/uvm_extern.h>
 
@@ -436,7 +437,7 @@ cpu_startup(void)
 	 * Good {morning,afternoon,evening,night}.
 	 */
 	printf("%s%s", copyright, version);
-	printf("%s\n", cpu_model);
+	printf("%s\n", cpu_getmodel());
 	format_bytes(pbuf, sizeof(pbuf), ctob(physmem));
 	printf("total memory = %s\n", pbuf);
 

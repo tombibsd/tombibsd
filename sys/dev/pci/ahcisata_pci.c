@@ -271,6 +271,7 @@ ahci_pci_attach(device_t parent, device_t self, void *aux)
 	bool ahci_cap_64bit;
 	bool ahci_bad_64bit;
 	pci_intr_handle_t intrhandle;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	sc->sc_atac.atac_dev = self;
 
@@ -289,14 +290,14 @@ ahci_pci_attach(device_t parent, device_t self, void *aux)
 		aprint_error_dev(self, "couldn't map interrupt\n");
 		return;
 	}
-	intrstr = pci_intr_string(pa->pa_pc, intrhandle);
+	intrstr = pci_intr_string(pa->pa_pc, intrhandle,
+	    intrbuf, sizeof(intrbuf));
 	psc->sc_ih = pci_intr_establish(pa->pa_pc, intrhandle, IPL_BIO, ahci_intr, sc);
 	if (psc->sc_ih == NULL) {
 		aprint_error_dev(self, "couldn't establish interrupt\n");
 		return;
 	}
-	aprint_normal_dev(self, "interrupting at %s\n",
-	    intrstr ? intrstr : "unknown interrupt");
+	aprint_normal_dev(self, "interrupting at %s\n", intrstr);
 
 	sc->sc_dmat = pa->pa_dmat;
 

@@ -269,11 +269,6 @@ SYSCTL_SETUP(sysctl_machdep_setup, "sysctl machdep subtree setup")
 #endif
 	sysctl_createv(clog, 0, NULL, NULL,
 		       CTLFLAG_PERMANENT,
-		       CTLTYPE_STRING, "model", NULL,
-		       NULL, 0, cpu_model, 0,
-		       CTL_MACHDEP, CPU_MODEL, CTL_EOL);
-	sysctl_createv(clog, 0, NULL, NULL,
-		       CTLFLAG_PERMANENT,
 		       CTLTYPE_STRING, "booted_device", NULL,
 		       sysctl_machdep_booted_device, 0, NULL, 0,
 		       CTL_MACHDEP, CPU_BOOTED_DEVICE, CTL_EOL);

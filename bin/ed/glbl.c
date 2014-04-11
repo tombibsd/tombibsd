@@ -54,7 +54,7 @@ build_active_list(int isgcmd)
 	char delimiter;
 
 	if ((delimiter = *ibufp) == ' ' || delimiter == '\n') {
-		sprintf(errmsg, "invalid pattern delimiter");
+		seterrmsg("invalid pattern delimiter");
 		return ERR;
 	} else if ((pat = get_compiled_pattern()) == NULL)
 		return ERR;
@@ -114,13 +114,13 @@ exec_global(int interact, int gflag)
 			if (n < 0)
 				return ERR;
 			else if (n == 0) {
-				sprintf(errmsg, "unexpected end-of-file");
+				seterrmsg("unexpected end-of-file");
 				return ERR;
 			} else if (n == 1 && !strcmp(ibuf, "\n"))
 				continue;
 			else if (n == 2 && !strcmp(ibuf, "&\n")) {
 				if (cmd == NULL) {
-					sprintf(errmsg, "no previous command");
+					seterrmsg("no previous command");
 					return ERR;
 				} else cmd = ocmd;
 			} else if ((cmd = get_extended_line(&n, 0)) == NULL)
@@ -137,7 +137,7 @@ exec_global(int interact, int gflag)
 			if ((status = extract_addr_range()) < 0 ||
 			    (status = exec_command()) < 0 ||
 			    (status > 0 && (status = display_lines(
-			    current_addr, current_addr, status))) < 0)
+			    current_addr, current_addr, status)) < 0))
 				return status;
 	}
 	return 0;
@@ -164,7 +164,7 @@ set_active_node(line_t *lp)
 			if ((ts = (line_t **) realloc(active_list, 
 			    (ti += MINBUFSZ) * sizeof(line_t **))) == NULL) {
 				fprintf(stderr, "%s\n", strerror(errno));
-				sprintf(errmsg, "out of memory");
+				seterrmsg("out of memory");
 				SPL0();
 				return ERR;
 			}
@@ -173,7 +173,7 @@ set_active_node(line_t *lp)
 			if ((ts = (line_t **) malloc((ti += MINBUFSZ) * 
 			    sizeof(line_t **))) == NULL) {
 				fprintf(stderr, "%s\n", strerror(errno));
-				sprintf(errmsg, "out of memory");
+				seterrmsg("out of memory");
 				SPL0();
 				return ERR;
 			}

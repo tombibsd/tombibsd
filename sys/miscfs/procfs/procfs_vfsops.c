@@ -286,31 +286,28 @@ const struct vnodeopv_desc * const procfs_vnodeopv_descs[] = {
 };
 
 struct vfsops procfs_vfsops = {
-	MOUNT_PROCFS,
-	sizeof (struct procfs_args),
-	procfs_mount,
-	procfs_start,
-	procfs_unmount,
-	procfs_root,
-	(void *)eopnotsupp,		/* vfs_quotactl */
-	procfs_statvfs,
-	procfs_sync,
-	procfs_vget,
-	(void *)eopnotsupp,		/* vfs_fhtovp */
-	(void *)eopnotsupp,		/* vfs_vptofh */
-	procfs_init,
-	procfs_reinit,
-	procfs_done,
-	NULL,				/* vfs_mountroot */
-	(int (*)(struct mount *, struct vnode *, struct timespec *)) eopnotsupp,
-	vfs_stdextattrctl,
-	(void *)eopnotsupp,		/* vfs_suspendctl */
-	genfs_renamelock_enter,
-	genfs_renamelock_exit,
-	(void *)eopnotsupp,
-	procfs_vnodeopv_descs,
-	0,
-	{ NULL, NULL },
+	.vfs_name = MOUNT_PROCFS,
+	.vfs_min_mount_data = sizeof (struct procfs_args),
+	.vfs_mount = procfs_mount,
+	.vfs_start = procfs_start,
+	.vfs_unmount = procfs_unmount,
+	.vfs_root = procfs_root,
+	.vfs_quotactl = (void *)eopnotsupp,
+	.vfs_statvfs = procfs_statvfs,
+	.vfs_sync = procfs_sync,
+	.vfs_vget = procfs_vget,
+	.vfs_fhtovp = (void *)eopnotsupp,
+	.vfs_vptofh = (void *)eopnotsupp,
+	.vfs_init = procfs_init,
+	.vfs_reinit = procfs_reinit,
+	.vfs_done = procfs_done,
+	.vfs_snapshot = (void *)eopnotsupp,
+	.vfs_extattrctl = vfs_stdextattrctl,
+	.vfs_suspendctl = (void *)eopnotsupp,
+	.vfs_renamelock_enter = genfs_renamelock_enter,
+	.vfs_renamelock_exit = genfs_renamelock_exit,
+	.vfs_fsync = (void *)eopnotsupp,
+	.vfs_opv_descs = procfs_vnodeopv_descs
 };
 
 static int

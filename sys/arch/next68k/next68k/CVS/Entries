@@ -1,19 +1,19 @@
 /autoconf.c/1.27/Sat Oct 27 17:18:07 2012/-kk/
 /clock.c/1.12/Sat Apr 24 19:58:13 2010/-kk/
 /conf.c/1.17/Sun Dec 11 12:18:29 2005/-kk/
-/disksubr.c/1.25/Mon Mar 16 23:11:13 2009/-kk/
+/disksubr.c/1.27/Fri Apr 11 02:03:37 2014/-kk/
 /genassym.cf/1.26/Fri Jan 14 02:06:29 2011/-kk/
 /isr.c/1.28/Mon Dec 20 00:25:40 2010/-kk/
 /isr.h/1.7/Mon Apr 28 20:23:30 2008/-kk/
 /locore.s/1.65/Tue Mar 25 02:35:28 2014/-kk/
-/machdep.c/1.109/Sat Aug 11 01:21:04 2012/-kk/
+/machdep.c/1.111/Fri Apr 11 02:03:37 2014/-kk/
 /mainbus.c/1.11/Sun Jun  5 17:03:19 2011/-kk/
 /nextrom.c/1.25/Sat Aug 11 01:21:04 2012/-kk/
 /nextrom.h/1.11/Sun Dec 18 04:29:32 2011/-kk/
 /pmap_bootstrap.c/1.43/Tue Jan 14 16:04:55 2014/-kk/
-/rtc.c/1.15/Sat Dec 12 14:44:09 2009/-kk/
+/rtc.c/1.17/Fri Apr 11 02:03:37 2014/-kk/
 /rtc.h/1.5/Mon Apr 28 20:23:30 2008/-kk/
 /seglist.h/1.6/Fri Oct 23 17:01:08 2009/-kk/
-/trap.c/1.85/Sun Feb 19 21:06:22 2012/-kk/
+/trap.c/1.87/Fri Apr 11 02:03:37 2014/-kk/
 /vectors.s/1.11/Tue Feb  8 20:20:21 2011/-kk/
 D

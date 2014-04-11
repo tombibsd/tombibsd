@@ -234,6 +234,7 @@ le_pci_attach(device_t parent, device_t self, void *aux)
 	pcireg_t csr;
 	int i, rseg;
 	const char *model, *intrstr;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	sc->sc_dev = self;
 
@@ -335,7 +336,7 @@ le_pci_attach(device_t parent, device_t self, void *aux)
 		aprint_error_dev(self, "couldn't map interrupt\n");
 		return;
 	}
-	intrstr = pci_intr_string(pc, ih);
+	intrstr = pci_intr_string(pc, ih, intrbuf, sizeof(intrbuf));
 	lesc->sc_ih = pci_intr_establish(pc, ih, IPL_NET, am79900_intr, sc);
 	if (lesc->sc_ih == NULL) {
 		aprint_error_dev(self, "couldn't establish interrupt");

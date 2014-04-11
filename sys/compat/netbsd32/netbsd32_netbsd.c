@@ -241,8 +241,11 @@ netbsd32_open(struct lwp *l, const struct netbsd32_open_args *uap, register_t *r
 		error = pathbuf_copyin(SCARG(&ua, path), &pb);
 		if (error) 
 			return error; 
-	} else
+	} else {
 		pb = pathbuf_create(".");
+		if (pb == NULL)
+			return ENOMEM;
+	}
                 
         error = do_open(l, NULL, pb, SCARG(&ua, flags), SCARG(&ua, mode), &fd);
         pathbuf_destroy(pb);

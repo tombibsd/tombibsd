@@ -743,7 +743,7 @@ lfs_bmapv(struct proc *p, fsid_t *fsidp, BLOCK_INFO *blkiov, int blkcnt)
 			 */
 			mutex_enter(&ulfs_ihash_lock);
 			vp = ulfs_ihashlookup(ump->um_dev, blkp->bi_inode);
-			if (vp != NULL && !(vp->v_iflag & VI_XLOCK)) {
+			if (vp != NULL && vdead_check(vp, VDEAD_NOWAIT) == 0) {
 				ip = VTOI(vp);
 				mutex_enter(vp->v_interlock);
 				mutex_exit(&ulfs_ihash_lock);
@@ -1050,8 +1050,8 @@ lfs_fasthashget(dev_t dev, ino_t ino, struct vnode **vpp)
 	if ((vp = ulfs_ihashlookup(dev, ino)) != NULL) {
 		mutex_enter(vp->v_interlock);
 		mutex_exit(&ulfs_ihash_lock);
-		if (vp->v_iflag & VI_XLOCK) {
-			DLOG((DLOG_CLEAN, "lfs_fastvget: ino %d VI_XLOCK\n",
+		if (vdead_check(vp, VDEAD_NOWAIT) != 0) {
+			DLOG((DLOG_CLEAN, "lfs_fastvget: ino %d dead\n",
 			      ino));
 			lfs_stats.clean_vnlocked++;
 			mutex_exit(vp->v_interlock);

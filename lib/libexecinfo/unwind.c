@@ -51,7 +51,7 @@ tracer(struct _Unwind_Context *ctx, void *arg)
 		return 0;
 	}
 	if (t->n < t->len)
-		t->arr[t->n++] = _Unwind_GetIP(ctx);
+		t->arr[t->n++] = (void *)_Unwind_GetIP(ctx);
 	return 0;
 }
 

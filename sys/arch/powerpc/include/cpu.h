@@ -361,7 +361,6 @@ extern char *booted_kernel;
 extern int powersave;
 extern int cpu_timebase;
 extern int cpu_printfataltraps;
-extern char cpu_model[];
 
 struct cpu_info *
 	cpu_attach_common(device_t, int);

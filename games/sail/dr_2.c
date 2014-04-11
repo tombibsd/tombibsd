@@ -286,7 +286,7 @@ try(struct ship *f, struct ship *t,
 	}
 	if ((ma > 0 && ta > 0 && (n = str_end(temp)) != 'l' && n != 'r') ||
 	    !strlen(temp)) {
-		strlcat(temp, "l", sizeof(temp));
+		strlcat(temp, "l", tempmax);
 		new = score(f, t, temp, tempmax, rakeme);
 		if (new > *high && (!rakeme ||
 				    (gunsbear(f, t) && !gunsbear(t, f)))) {

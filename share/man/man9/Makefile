@@ -450,7 +450,7 @@ MLINKS+=lock.9 simple_lock_init.9 lock.9 simple_lock.9 \
 	lock.9 lockinit.9 lock.9 lockmgr.9 \
 	lock.9 lockstatus.9 lock.9 lockmgr_printinfo.9 lock.9 transferlockers.9 \
 	lock.9 spinlockinit.9 lock.9 spinlockmgr.9
-MLINKS+=ltsleep.9 wakeup.9 ltsleep.9 tsleep.9
+MLINKS+=ltsleep.9 wakeup.9 ltsleep.9 mtsleep.9 ltsleep.9 tsleep.9
 MLINKS+=malloc.9 MALLOC.9 malloc.9 realloc.9 malloc.9 free.9 malloc.9 FREE.9
 MLINKS+=malloc.9 malloc_roundup.9 malloc.9 malloc_type_attach.9
 MLINKS+=malloc.9 malloc_type_detach.9 malloc.9 malloc_type_setlimit.9
@@ -898,6 +898,7 @@ MLINKS+=vnode.9 vref.9 \
 	vnode.9 vrecycle.9 \
 	vnode.9 vgone.9 \
 	vnode.9 vgonel.9 \
+	vnode.9 vdead_check.9 \
 	vnode.9 vflush.9 \
 	vnode.9 vaccess.9 \
 	vnode.9 bdevvp.9 \

@@ -916,13 +916,14 @@ pccbb_intrinit(struct pccbb_softc *sc)
 	pci_chipset_tag_t pc = sc->sc_pc;
 	bus_space_tag_t bmt = sc->sc_base_memt;
 	bus_space_handle_t bmh = sc->sc_base_memh;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	/* Map and establish the interrupt. */
 	if (pci_intr_map(&sc->sc_pa, &ih)) {
 		aprint_error_dev(sc->sc_dev, "couldn't map interrupt\n");
 		return;
 	}
-	intrstr = pci_intr_string(pc, ih);
+	intrstr = pci_intr_string(pc, ih, intrbuf, sizeof(intrbuf));
 
 	/*
 	 * XXX pccbbintr should be called under the priority lower

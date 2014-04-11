@@ -127,6 +127,9 @@ struct cpu_info **cpu_infos		__read_mostly;
 kcpuset_t *	kcpuset_attached	__read_mostly	= NULL;
 kcpuset_t *	kcpuset_running		__read_mostly	= NULL;
 
+
+static char cpu_model[128];
+
 /*
  * mi_cpu_init: early initialisation of MI CPU related structures.
  *
@@ -473,6 +476,24 @@ cpu_setstate(struct cpu_info *ci, bool online)
 
 	spc->spc_lastmod = time_second;
 	return 0;
+}
+
+int
+cpu_setmodel(const char *fmt, ...)
+{
+	int len;
+	va_list ap;
+
+	va_start(ap, fmt);
+	len = vsnprintf(cpu_model, sizeof(cpu_model), fmt, ap);
+	va_end(ap);
+	return len;
+}
+
+const char *
+cpu_getmodel(void)
+{
+	return cpu_model;
 }
 
 #ifdef __HAVE_INTR_CONTROL

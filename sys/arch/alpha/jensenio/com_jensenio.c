@@ -112,7 +112,7 @@ com_jensenio_attach(device_t parent, device_t self, void *aux)
 	aprint_normal_dev(self, "interrupting at vector 0x%x\n",
 	    ja->ja_irq[0]);
 
-	sprintf(jsc->sc_vecstr, "0x%x", ja->ja_irq[0]);
+	snprintf(jsc->sc_vecstr, sizeof(jsc->sc_vecstr), "0x%x", ja->ja_irq[0]);
 	evcnt_attach_dynamic(&jsc->sc_ev_intr, EVCNT_TYPE_INTR,
 	    NULL, "vector", jsc->sc_vecstr);
 

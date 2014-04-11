@@ -81,7 +81,7 @@ struct ether_arp {
 
 struct arp_list {
 	struct in_addr	addr;
-	u_char		ea[6];
+	u_char		ea[ETHER_ADDR_LEN];
 } arp_list[ARP_NUM] = {
 	/* XXX - net order `INADDR_BROADCAST' must be a constant */
 	{ {0xffffffff}, BA }

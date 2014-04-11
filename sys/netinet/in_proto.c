@@ -68,6 +68,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include "opt_ipsec.h"
 #include "opt_pim.h"
 #include "opt_gateway.h"
+#include "opt_compat_netbsd.h"
 
 #include <sys/param.h>
 #include <sys/socket.h>

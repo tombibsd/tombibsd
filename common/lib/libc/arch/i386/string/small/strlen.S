@@ -39,3 +39,4 @@ ENTRY(strlen)
         cmpb    $0, 0(%ecx,%eax,1)
         jnz 1b
         ret
+END(strlen)

@@ -2,7 +2,7 @@
 /ceareg.h/1.1/Sat Feb 12 15:15:34 2011/-kk/
 /eldreg.h/1.1/Sat Feb 12 15:15:34 2011/-kk/
 /files.hdaudio/1.5/Sat Feb 12 15:15:34 2011/-kk/
-/hdafg.c/1.18/Thu Oct 24 10:28:58 2013/-kk/
+/hdafg.c/1.19/Fri Apr 11 02:03:50 2014/-kk/
 /hdafg_dd.c/1.2/Wed Aug 29 18:52:31 2012/-kk/
 /hdafg_dd.h/1.2/Wed Aug 29 18:52:32 2012/-kk/
 /hdaudio.c/1.21/Tue Mar 25 02:35:39 2014/-kk/
@@ -10,7 +10,7 @@
 /hdaudio_ids.c/1.7/Wed Dec 25 07:37:41 2013/-kk/
 /hdaudio_ids.h/1.3/Mon Oct 24 22:20:59 2011/-kk/
 /hdaudio_mixer.h/1.3/Mon Sep  7 11:49:27 2009/-kk/
-/hdaudio_pci.c/1.11/Wed Feb  1 16:56:34 2012/-kk/
+/hdaudio_pci.c/1.12/Fri Apr 11 02:03:50 2014/-kk/
 /hdaudio_pci.h/1.1/Sat Aug  7 16:59:48 2010/-kk/
 /hdaudioio.h/1.3/Sun Oct 11 08:50:12 2009/-kk/
 /hdaudioreg.h/1.7/Tue Sep  6 10:48:28 2011/-kk/

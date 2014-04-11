@@ -7,6 +7,9 @@ SRCS+=		if-options.c if-pref.c net.c script.c
 SRCS+=		dhcp-common.c dhcpcd-embedded.c
 SRCS+=		bpf.c if-bsd.c platform-bsd.c
 
+WARNS?=		5
+USE_FORT?=	yes	# network client (local server)
+
 .include <bsd.own.mk>
 
 SRCS+=		auth.c hmac_md5.c

@@ -2027,11 +2027,20 @@ change_part(int extended, int part, int sysid, daddr_t start, daddr_t size,
 			tmp_bootmenu[0] = 0;
 #endif
 
-	if (!s_flag && partp != NULL) {
-		/* values not specified, default to current ones */
-		sysid = partp->mbrp_type;
-		start = offset + le32toh(partp->mbrp_start);
-		size = le32toh(partp->mbrp_size);
+	if (partp != NULL) {
+		if (!s_flag) {
+			/* values not specified, default to current ones */
+			sysid = partp->mbrp_type;
+			start = offset + le32toh(partp->mbrp_start);
+			size = le32toh(partp->mbrp_size);
+		} else {
+			if (sysid == -1)
+				sysid = partp->mbrp_type;
+			if (start == (daddr_t)0xffffffff)
+				start = offset + le32toh(partp->mbrp_start);
+			if (size == (daddr_t)0xffffffff)
+				size = le32toh(partp->mbrp_size);
+		}
 	}
 
 	/* creating a new partition, default to free space */

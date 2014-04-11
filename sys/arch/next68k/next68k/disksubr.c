@@ -171,7 +171,7 @@ build_nextstep_label(struct next68k_disklabel *ondisk, struct disklabel *lp)
 	unsigned short *checksum;
 
 
-	memset (ondisk, 0, sizeof (ondisk));
+	memset (ondisk, 0, sizeof (*ondisk));
 
 	ondisk->cd_version = NEXT68K_LABEL_CD_V3;
 	/* ondisk->cd_label_blkno = 0; */
@@ -272,7 +272,7 @@ build_nextstep_label(struct next68k_disklabel *ondisk, struct disklabel *lp)
 				p->cp_minfree = 5; /* set some default */
 			p->cp_cpg = lp->d_partitions[nbp].p_cpg;
 		} else {
-			memset (p, 0, sizeof(p));
+			memset (p, 0, sizeof(*p));
 			p->cp_size = -1;
 			p->cp_offset = -1;
 			p->cp_bsize = -1;

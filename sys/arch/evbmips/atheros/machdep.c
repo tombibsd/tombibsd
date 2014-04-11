@@ -124,6 +124,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/ksyms.h>
 #include <sys/mount.h>
 #include <sys/reboot.h>
+#include <sys/cpu.h>
 
 #include <uvm/uvm_extern.h>
 
@@ -188,7 +189,7 @@ mach_init(void)
 	atheros_set_platformsw();
 
 	/* set CPU model info for sysctl_hw */
-	snprintf(cpu_model, 64, "Atheros %s", atheros_get_cpuname());
+	cpu_setmodel("Atheros %s", atheros_get_cpuname());
 
 	/*
 	 * Set up the exception vectors and CPU-specific function
@@ -318,7 +319,7 @@ cpu_startup(void)
 	 * Good {morning,afternoon,evening,night}.
 	 */
 	printf("%s%s", copyright, version);
-	printf("%s\n", cpu_model);
+	printf("%s\n", cpu_getmodel());
 	format_bytes(pbuf, sizeof(pbuf), ctob(physmem));
 	printf("total memory = %s\n", pbuf);
 

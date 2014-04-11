@@ -62,7 +62,7 @@ OBJCFLAGS+=	${OBJCOPTS}
 MKDEP_SUFFIXES?=	.o .ln
 
 # CTF preserve debug symbols
-.if defined(MKDTRACE) && (${MKDTRACE} != "no") && (${CFLAGS:M-g} != "")
+.if (${MKCTF:Uno} != "no") && (${CFLAGS:M-g} != "")
 CTFFLAGS+= -g
 CTFMFLAGS+= -g
 .if defined(HAVE_GCC) && ${HAVE_GCC} >= 48

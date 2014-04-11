@@ -31,6 +31,7 @@
 
 #include <sys/param.h>
 #include <sys/disklabel.h>
+#include <sys/bootblock.h>
 #include <dev/scsipi/scsi_spc.h>
 #include <dev/scsipi/scsipi_all.h>
 #include <dev/scsipi/scsi_all.h>

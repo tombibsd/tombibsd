@@ -732,14 +732,12 @@ static int iavc_receive_task_ready(iavc_softc_t *sc, u_int8_t *dmabuf)
 static int iavc_receive_debugmsg(iavc_softc_t *sc, u_int8_t *dmabuf)
 {
     u_int32_t Length;
-    u_int8_t *p;
     printf("%s: receive_debugmsg\n", device_xname(sc->sc_dev));
 
     if (sc->sc_dma) {
-	p = amcc_get_word(dmabuf, &Length);
+	amcc_get_word(dmabuf, &Length);
     } else {
 	Length = iavc_get_slice(sc, sc->sc_recvbuf);
-	p = sc->sc_recvbuf;
     }
 
     /* XXX could show the message if trace enabled? XXX */

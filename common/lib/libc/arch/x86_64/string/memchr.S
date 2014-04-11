@@ -106,3 +106,4 @@ ENTRY(memchr)
 /* Not found */
 30:	xorq	%rax,%rax
 	ret
+END(memchr)

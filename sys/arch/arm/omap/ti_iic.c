@@ -238,7 +238,7 @@ ti_iic_attach(device_t parent, device_t self, void *opaque)
 		}
 	}
 	KASSERT(i < __arraycount(am335x_iic));
-	sprintf(buf, "%s_SDA", am335x_iic[i].as_name);
+	snprintf(buf, sizeof(buf), "%s_SDA", am335x_iic[i].as_name);
 	if (sitara_cm_padconf_get(buf, &mode, &state) == 0) {
 		aprint_debug(": SDA mode %s state %d ", mode, state);
 	}
@@ -247,7 +247,7 @@ ti_iic_attach(device_t parent, device_t self, void *opaque)
 		aprint_error(": can't switch %s pad\n", buf);
 		return;
 	}
-	sprintf(buf, "%s_SCL", am335x_iic[i].as_name);
+	snprintf(buf, sizeof(buf), "%s_SCL", am335x_iic[i].as_name);
 	if (sitara_cm_padconf_get(buf, &mode, &state) == 0) {
 		aprint_debug(": SCL mode %s state %d ", mode, state);
 	}

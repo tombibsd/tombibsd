@@ -633,7 +633,7 @@ lfs_mknod(void *v)
 
 	/*
 	 * Call fsync to write the vnode so that we don't have to deal with
-	 * flushing it when it's marked VU_DIROP|VI_XLOCK.
+	 * flushing it when it's marked VU_DIROP or reclaiming.
 	 *
 	 * XXX KS - If we can't flush we also can't call vgone(), so must
 	 * return.  But, that leaves this vnode in limbo, also not good.
@@ -984,7 +984,7 @@ lfs_reclaim(void *v)
 	/*
 	 * The inode must be freed and updated before being removed
 	 * from its hash chain.  Other threads trying to gain a hold
-	 * on the inode will be stalled because it is locked (VI_XLOCK).
+	 * or lock on the inode will be stalled.
 	 */
 	if (ip->i_nlink <= 0 && (vp->v_mount->mnt_flag & MNT_RDONLY) == 0)
 		lfs_vfree(vp, ip->i_number, ip->i_omode);
@@ -1203,10 +1203,11 @@ lfs_flush_dirops(struct lfs *fs)
 		nip = TAILQ_NEXT(ip, i_lfs_dchain);
 		mutex_exit(&lfs_lock);
 		vp = ITOV(ip);
+		mutex_enter(vp->v_interlock);
 
 		KASSERT((ip->i_flag & IN_ADIROP) == 0);
 		KASSERT(vp->v_uflag & VU_DIROP);
-		KASSERT(!(vp->v_iflag & VI_XLOCK));
+		KASSERT(vdead_check(vp, VDEAD_NOWAIT) == 0);
 
 		/*
 		 * All writes to directories come from dirops; all
@@ -1216,10 +1217,12 @@ lfs_flush_dirops(struct lfs *fs)
 		 * directory blocks inodes and file inodes.  So we don't
 		 * really need to lock.
 		 */
-		if (vp->v_iflag & VI_XLOCK) {
+		if (vdead_check(vp, VDEAD_NOWAIT) != 0) {
+			mutex_exit(vp->v_interlock);
 			mutex_enter(&lfs_lock);
 			continue;
 		}
+		mutex_exit(vp->v_interlock);
 		/* XXX see below
 		 * waslocked = VOP_ISLOCKED(vp);
 		 */
@@ -1324,7 +1327,8 @@ lfs_flush_pchain(struct lfs *fs)
 			goto top;
 
 		mutex_enter(vp->v_interlock);
-		if ((vp->v_iflag & VI_XLOCK) || (vp->v_uflag & VU_DIROP) != 0) {
+		if (vdead_check(vp, VDEAD_NOWAIT) != 0 ||
+		    (vp->v_uflag & VU_DIROP) != 0) {
 			mutex_exit(vp->v_interlock);
 			continue;
 		}
@@ -2268,7 +2272,7 @@ lfs_putpages(void *v)
 	sp->vp = vp;
 
 	/* Note segments written by reclaim; only for debugging */
-	if ((vp->v_iflag & VI_XLOCK) != 0) {
+	if (vdead_check(vp, VDEAD_NOWAIT) != 0) {
 		sp->seg_flags |= SEGM_RECLAIM;
 		fs->lfs_reclino = ip->i_number;
 	}

@@ -20,6 +20,11 @@ SYSTEM_LD_TAIL_EXTRA+=; \
 .include "${BOARDMKFRAG}"
 .endif
 
+.if defined(KERNEL_BASE_PHYS) && defined(KERNEL_BASE_VIRT) \
+    && ${KERNEL_BASE_PHYS} == ${KERNEL_BASE_VIRT}
+CPPFLAGS+=-DKERNEL_BASES_EQUAL
+.endif
+
 EXTRA_CLEAN+= ldscript tmp ${KERNELS:=.map}
 
 .if defined(KERNEL_BASE_PHYS)

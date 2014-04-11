@@ -658,7 +658,8 @@ wfqclose(dev_t dev, int flag, int fmt,
 	s = splnet();
 	while ((wfqp = wfq_list) != NULL) {
 		ifp = wfqp->ifq->altq_ifp;
-		sprintf(iface.wfq_ifacename, "%s", ifp->if_xname);
+		snprintf(iface.wfq_ifacename, sizeof(iface.wfq_ifacename),
+		    "%s", ifp->if_xname);
 		wfq_ifdetach(&iface);
 	}
 	splx(s);

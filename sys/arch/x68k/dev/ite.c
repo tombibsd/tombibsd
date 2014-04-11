@@ -508,11 +508,10 @@ void
 itestart(struct tty *tp)
 {
 	struct clist *rbp;
-	struct ite_softc *ip;
 	u_char buf[ITEBURST];
 	int s, len;
 
-	ip = getitesp(tp->t_dev);
+	getitesp(tp->t_dev);
 	/*
 	 * (Potentially) lower priority.  We only need to protect ourselves
 	 * from keyboard interrupts since that is all that can affect the
@@ -1577,8 +1576,9 @@ iteputchar(int c, struct ite_softc *ip)
 					break;
 				case 6:
 					/* cursor position report */
-					sprintf(ip->argbuf, "\033[%d;%dR",
-						 ip->cury + 1, ip->curx + 1);
+					snprintf(ip->argbuf, sizeof(ip->argbuf),
+					    "\033[%d;%dR",
+					     ip->cury + 1, ip->curx + 1);
 					ite_sendstr(ip, ip->argbuf);
 					break;
 				}

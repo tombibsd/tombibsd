@@ -792,7 +792,7 @@ struct cpu_functions arm1136_cpufuncs = {
 
 	.cf_control		= cpufunc_control,
 	.cf_domains		= cpufunc_domains,
-	.cf_setttb		= arm11x6_setttb,
+	.cf_setttb		= arm11_setttb,
 	.cf_faultstatus		= cpufunc_faultstatus,
 	.cf_faultaddress	= cpufunc_faultaddress,
 
@@ -854,7 +854,7 @@ struct cpu_functions arm1176_cpufuncs = {
 
 	.cf_control		= cpufunc_control,
 	.cf_domains		= cpufunc_domains,
-	.cf_setttb		= arm11x6_setttb,
+	.cf_setttb		= arm11_setttb,
 	.cf_faultstatus		= cpufunc_faultstatus,
 	.cf_faultaddress	= cpufunc_faultaddress,
 
@@ -1506,19 +1506,21 @@ static void
 get_cacheinfo_clidr(struct arm_cache_info *info, u_int level, u_int clidr)
 {
 	u_int csid;
-	u_int nsets;
 
 	if (clidr & 6) {
 		csid = get_cachesize_cp15(level << 1); /* select dcache values */
-		nsets = CPU_CSID_NUMSETS(csid) + 1;
+		info->dcache_sets = CPU_CSID_NUMSETS(csid) + 1;
 		info->dcache_ways = CPU_CSID_ASSOC(csid) + 1;
 		info->dcache_line_size = 1U << (CPU_CSID_LEN(csid) + 4);
-		info->dcache_size = info->dcache_line_size * info->dcache_ways * nsets;
+		info->dcache_way_size =
+		    info->dcache_line_size * info->dcache_sets;
+		info->dcache_size = info->dcache_way_size * info->dcache_ways;
 
 		if (level == 0) {
 			arm_dcache_log2_assoc = CPU_CSID_ASSOC(csid) + 1;
 			arm_dcache_log2_linesize = CPU_CSID_LEN(csid) + 4;
-			arm_dcache_log2_nsets = 31 - __builtin_clz(nsets*2-1);
+			arm_dcache_log2_nsets =
+			    31 - __builtin_clz(info->dcache_sets*2-1);
 		}
 	}
 
@@ -1532,17 +1534,19 @@ get_cacheinfo_clidr(struct arm_cache_info *info, u_int level, u_int clidr)
 	if (info->cache_unified) {
 		info->icache_ways = info->dcache_ways;
 		info->icache_line_size = info->dcache_line_size;
+		info->icache_way_size = info->dcache_way_size;
 		info->icache_size = info->dcache_size;
 	} else {
 		csid = get_cachesize_cp15((level << 1)|CPU_CSSR_InD); /* select icache values */
-		nsets = CPU_CSID_NUMSETS(csid) + 1;
+		info->icache_sets = CPU_CSID_NUMSETS(csid) + 1;
 		info->icache_ways = CPU_CSID_ASSOC(csid) + 1;
 		info->icache_line_size = 1U << (CPU_CSID_LEN(csid) + 4);
-		info->icache_size = info->icache_line_size * info->icache_ways * nsets;
+		info->icache_way_size = info->icache_line_size * info->icache_sets;
+		info->icache_size = info->icache_way_size * info->icache_ways;
 	}
 	if (level == 0
-	    && info->dcache_size / info->dcache_ways <= PAGE_SIZE
-	    && info->icache_size / info->icache_ways <= PAGE_SIZE) {
+	    && info->dcache_way_size <= PAGE_SIZE
+	    && info->icache_way_size <= PAGE_SIZE) {
 		arm_cache_prefer_mask = 0;
 	}
 }
@@ -1595,8 +1599,11 @@ get_cachetype_cp15(void)
 			if (arm_scache.dcache_line_size < arm_dcache_align)
 				arm_dcache_align = arm_scache.dcache_line_size;
 		}
-		if (arm_pcache.dcache_type == CACHE_TYPE_PIPT
-		    && arm_pcache.icache_type == CACHE_TYPE_PIPT) {
+		/*
+		 * The pmap cleans an entire way for an exec page so
+		 * we don't care that it's VIPT anymore.
+		 */
+		if (arm_pcache.dcache_type == CACHE_TYPE_PIPT) {
 			arm_cache_prefer_mask = 0;
 		}
 		goto out;
@@ -1634,6 +1641,8 @@ get_cachetype_cp15(void)
 #endif
 		}
 		arm_pcache.icache_size = multiplier << (CPU_CT_xSIZE_SIZE(isize) + 8);
+		arm_pcache.icache_way_size =
+		    __BIT(9 + CPU_CT_xSIZE_SIZE(isize) - CPU_CT_xSIZE_ASSOC(isize));
 	}
 
 	dsize = CPU_CT_DSIZE(ctype);
@@ -1658,6 +1667,8 @@ get_cachetype_cp15(void)
 #endif
 	}
 	arm_pcache.dcache_size = multiplier << (CPU_CT_xSIZE_SIZE(dsize) + 8);
+	arm_pcache.dcache_way_size =
+	    __BIT(9 + CPU_CT_xSIZE_SIZE(dsize) - CPU_CT_xSIZE_ASSOC(dsize));
 
 	arm_dcache_align = arm_pcache.dcache_line_size;
 
@@ -1724,10 +1735,20 @@ get_cachetype_table(void)
 			arm_pcache.dcache_line_size =
 			    cachetab[i].ct_pdcache_line_size;
 			arm_pcache.dcache_ways = cachetab[i].ct_pdcache_ways;
+			if (arm_pcache.dcache_ways) {
+				arm_pcache.dcache_way_size = 
+				    arm_pcache.dcache_line_size
+				    / arm_pcache.dcache_ways;
+			}
 			arm_pcache.icache_size = cachetab[i].ct_picache_size;
 			arm_pcache.icache_line_size =
 			    cachetab[i].ct_picache_line_size;
 			arm_pcache.icache_ways = cachetab[i].ct_picache_ways;
+			if (arm_pcache.icache_ways) {
+				arm_pcache.icache_way_size = 
+				    arm_pcache.icache_line_size
+				    / arm_pcache.icache_ways;
+			}
 		}
 	}
 
@@ -2941,10 +2962,12 @@ arm11_setup(char *args)
 {
 
 	int cpuctrl = CPU_CONTROL_MMU_ENABLE | CPU_CONTROL_SYST_ENABLE
+#ifdef ARM_MMU_EXTENDED
+	    | CPU_CONTROL_XP_ENABLE
+#endif
 	    | CPU_CONTROL_IC_ENABLE | CPU_CONTROL_DC_ENABLE
 	    /* | CPU_CONTROL_BPRD_ENABLE */;
-	int cpuctrlmask = CPU_CONTROL_MMU_ENABLE | CPU_CONTROL_SYST_ENABLE
-	    | CPU_CONTROL_IC_ENABLE | CPU_CONTROL_DC_ENABLE
+	int cpuctrlmask = cpuctrl
 	    | CPU_CONTROL_ROM_ENABLE | CPU_CONTROL_BPRD_ENABLE
 	    | CPU_CONTROL_BEND_ENABLE | CPU_CONTROL_AFLT_ENABLE
 	    | CPU_CONTROL_ROUNDROBIN | CPU_CONTROL_CPCLK;
@@ -2990,10 +3013,11 @@ arm11mpcore_setup(char *args)
 
 	int cpuctrl = CPU_CONTROL_IC_ENABLE
 	    | CPU_CONTROL_DC_ENABLE
+#ifdef ARM_MMU_EXTENDED
+	    | CPU_CONTROL_XP_ENABLE
+#endif
 	    | CPU_CONTROL_BPRD_ENABLE ;
-	int cpuctrlmask = CPU_CONTROL_IC_ENABLE
-	    | CPU_CONTROL_DC_ENABLE
-	    | CPU_CONTROL_BPRD_ENABLE
+	int cpuctrlmask = cpuctrl
 	    | CPU_CONTROL_AFLT_ENABLE
 	    | CPU_CONTROL_VECRELOC;
 
@@ -3117,8 +3141,7 @@ void
 arm11x6_setup(char *args)
 {
 	int cpuctrl, cpuctrl_wax;
-	uint32_t auxctrl, auxctrl_wax;
-	uint32_t tmp, tmp2;
+	uint32_t auxctrl;
 	uint32_t sbz=0;
 	uint32_t cpuid;
 
@@ -3133,6 +3156,9 @@ arm11x6_setup(char *args)
 		CPU_CONTROL_LABT_ENABLE |
 		CPU_CONTROL_SYST_ENABLE |
 		CPU_CONTROL_UNAL_ENABLE |
+#ifdef ARM_MMU_EXTENDED
+		CPU_CONTROL_XP_ENABLE   |
+#endif
 		CPU_CONTROL_IC_ENABLE;
 
 	/*
@@ -3162,8 +3188,7 @@ arm11x6_setup(char *args)
 		cpuctrl |= CPU_CONTROL_VECRELOC;
 #endif
 
-	auxctrl = 0;
-	auxctrl_wax = ~0;
+	auxctrl = armreg_auxctl_read();
 	/*
 	 * This options enables the workaround for the 364296 ARM1136
 	 * r0pX errata (possible cache data corruption with
@@ -3175,16 +3200,14 @@ arm11x6_setup(char *args)
 	 */
 	if ((cpuid & CPU_ID_CPU_MASK) == CPU_ID_ARM1136JS) { /* ARM1136JSr0pX */
 		cpuctrl |= CPU_CONTROL_FI_ENABLE;
-		auxctrl = ARM1136_AUXCTL_PFI;
-		auxctrl_wax = ~ARM1136_AUXCTL_PFI;
+		auxctrl |= ARM1136_AUXCTL_PFI;
 	}
 
 	/*
 	 * Enable an errata workaround
 	 */
 	if ((cpuid & CPU_ID_CPU_MASK) == CPU_ID_ARM1176JZS) { /* ARM1176JZSr0 */
-		auxctrl = ARM1176_AUXCTL_PHD;
-		auxctrl_wax = ~ARM1176_AUXCTL_PHD;
+		auxctrl |= ARM1176_AUXCTL_PHD;
 	}
 
 	/* Clear out the cache */
@@ -3200,13 +3223,8 @@ arm11x6_setup(char *args)
 	curcpu()->ci_ctrl = cpuctrl;
 	cpu_control(~cpuctrl_wax, cpuctrl);
 
-	__asm volatile ("mrc	p15, 0, %0, c1, c0, 1\n\t"
-			"and	%1, %0, %2\n\t"
-			"orr	%1, %1, %3\n\t"
-			"teq	%0, %1\n\t"
-			"mcrne	p15, 0, %1, c1, c0, 1\n\t"
-			: "=r"(tmp), "=r"(tmp2) :
-			  "r"(auxctrl_wax), "r"(auxctrl));
+	/* Update auxctlr */
+	armreg_auxctl_write(auxctrl);
 
 	/* And again. */
 	cpu_idcache_wbinv_all();
@@ -3447,7 +3465,7 @@ ixp12x0_setup(char *args)
 #endif /* CPU_IXP12X0 */
 
 #if defined(CPU_XSCALE_80200) || defined(CPU_XSCALE_80321) || \
-    defined(__CPU_XSCALE_PXA2XX) || defined(CPU_XSCALE_IXP425) || defined(CPU_CORTEX)
+    defined(__CPU_XSCALE_PXA2XX) || defined(CPU_XSCALE_IXP425)
 struct cpu_option xscale_options[] = {
 #ifdef COMPAT_12
 	{ "branchpredict", 	BIC, OR,  CPU_CONTROL_BPRD_ENABLE },

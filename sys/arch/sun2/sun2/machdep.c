@@ -179,6 +179,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/vnode.h>
 #include <sys/syscallargs.h>
 #include <sys/ksyms.h>
+#include <sys/cpu.h>
 #ifdef	KGDB
 #include <sys/kgdb.h>
 #endif
@@ -366,7 +367,6 @@ cpu_startup(void)
  */
 char	machine[16] = MACHINE;		/* from <machine/param.h> */
 char	kernel_arch[16] = "sun2";	/* XXX needs a sysctl node */
-char	cpu_model[120];
 
 /*
  * Determine which Sun2 model we are running on.
@@ -378,9 +378,9 @@ identifycpu(void)
 
 	/* Other stuff? (VAC, mc6888x version, etc.) */
 	/* Note: miniroot cares about the kernel_arch part. */
-	sprintf(cpu_model, "%s %s", kernel_arch, cpu_string);
+	cpu_setmodel("%s %s", kernel_arch, cpu_string);
 
-	printf("Model: %s\n", cpu_model);
+	printf("Model: %s\n", cpu_getmodel());
 }
 
 /*
@@ -879,7 +879,7 @@ _bus_dmamap_load(bus_dma_tag_t t, bus_dmamap_t map, void *buf,
 	int pagesz = PAGE_SIZE;
 	bus_addr_t dva;
 	pmap_t pmap;
-	int rv;
+	int rv __diagused;
 
 	/*
 	 * Make sure that on error condition we return "no valid mappings".

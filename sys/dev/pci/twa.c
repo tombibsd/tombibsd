@@ -1505,6 +1505,7 @@ twa_attach(device_t parent, device_t self, void *aux)
 	const struct twa_pci_identity *entry;
 	int i;
 	bool use_64bit;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	sc = device_private(self);
 
@@ -1584,7 +1585,7 @@ twa_attach(device_t parent, device_t self, void *aux)
 		aprint_error_dev(sc->twa_dv, "can't map interrupt\n");
 		return;
 	}
-	intrstr = pci_intr_string(pc, ih);
+	intrstr = pci_intr_string(pc, ih, intrbuf, sizeof(intrbuf));
 
 	sc->twa_ih = pci_intr_establish(pc, ih, IPL_BIO, twa_intr, sc);
 	if (sc->twa_ih == NULL) {

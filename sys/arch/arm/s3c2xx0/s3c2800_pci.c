@@ -149,7 +149,7 @@ void	s3c2800_pci_conf_write(void *, pcitag_t, int, pcireg_t);
 void	s3c2800_pci_conf_interrupt(void *, int, int, int, int, int *);
 int	s3c2800_pci_intr_map(const struct pci_attach_args *,
 	    pci_intr_handle_t *);
-const char *s3c2800_pci_intr_string(void *, pci_intr_handle_t);
+const char *s3c2800_pci_intr_string(void *, pci_intr_handle_t, char *, size_t);
 const struct evcnt *s3c2800_pci_intr_evcnt(void *, pci_intr_handle_t);
 void *s3c2800_pci_intr_establish(void *, pci_intr_handle_t, int,
 				  int (*) (void *), void *);
@@ -573,10 +573,11 @@ s3c2800_pci_intr_map(const struct pci_attach_args *pa, pci_intr_handle_t *ihp)
 }
 
 const char *
-s3c2800_pci_intr_string(void *pcv, pci_intr_handle_t ih)
+s3c2800_pci_intr_string(void *pcv, pci_intr_handle_t ih, char *buf, size_t len)
 {
 	/* We have only one interrupt source from PCI */
-	return "pciint";
+	strlcpy(buf, "pciint", len);
+	return buf;
 }
 
 const struct evcnt *

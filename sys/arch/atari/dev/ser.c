@@ -820,6 +820,7 @@ ser_iflush(struct ser_softc *sc)
 	/* flush any pending I/O */
 	while (ISSET(MFP->mf_rsr, RSR_CIP|RSR_BFULL))
 		tmp = MFP->mf_udr;
+	__USE(tmp);
 }
 
 void

@@ -110,7 +110,7 @@ dmac_attach(device_t parent, device_t self, void *aux)
 	struct dmac_softc *sc = device_private(self);
 	struct intio_attach_args *ia = aux;
 	struct intio_softc *intio;
-	int r;
+	int r __diagused;
 
 	sc->sc_dev = self;
 	dmac_attached = 1;

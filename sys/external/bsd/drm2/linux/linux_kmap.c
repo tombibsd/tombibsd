@@ -194,15 +194,11 @@ kmap(struct page *page)
 	KASSERT(collision == lke);
 	mutex_spin_exit(&linux_kmap_lock);
 
-	const int s = splvm();
-
 	KASSERT(!pmap_extract(pmap_kernel(), vaddr, NULL));
 	const int prot = (VM_PROT_READ | VM_PROT_WRITE);
 	const int flags = 0;
 	pmap_kenter_pa(vaddr, paddr, prot, flags);
 	pmap_update(pmap_kernel());
-
-	splx(s);
 
 	return (void *)vaddr;
 }
@@ -222,12 +218,10 @@ kunmap(struct page *page)
 	const vaddr_t vaddr = lke->lke_vaddr;
 	kmem_free(lke, sizeof(*lke));
 
-	const int s = splvm();
-
 	KASSERT(pmap_extract(pmap_kernel(), vaddr, NULL));
 
 	pmap_kremove(vaddr, PAGE_SIZE);
 	pmap_update(pmap_kernel());
 
-	splx(s);
+	uvm_km_free(kernel_map, vaddr, PAGE_SIZE, UVM_KMF_VAONLY);
 }

@@ -1093,6 +1093,7 @@ via_sata_chip_map_new(struct pciide_softc *sc,
 	pci_intr_handle_t intrhandle;
 	const char *intrstr;
 	int i;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	if (pciide_chipen(sc, pa) == 0)
 		return;
@@ -1131,7 +1132,7 @@ via_sata_chip_map_new(struct pciide_softc *sc,
 		    "couldn't map native-PCI interrupt\n");
 		return;
 	}
-	intrstr = pci_intr_string(pa->pa_pc, intrhandle);
+	intrstr = pci_intr_string(pa->pa_pc, intrhandle, intrbuf, sizeof(intrbuf));
 	sc->sc_pci_ih = pci_intr_establish(pa->pa_pc,
 	    intrhandle, IPL_BIO, pciide_pci_intr, sc);
 	if (sc->sc_pci_ih == NULL) {

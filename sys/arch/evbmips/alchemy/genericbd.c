@@ -60,7 +60,7 @@ static struct alchemy_board genericbd_info = {
 
 /*
  * XXX: A cleaner way would be to get this from the cpu table in the MIPS
- * CPU handler code (or even better, have *that* code fill in cpu_model.)
+ * CPU handler code (or even better, have *that* code fill in cpu model.)
  */
 static struct {
 	int		id;

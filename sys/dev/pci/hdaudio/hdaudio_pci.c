@@ -108,6 +108,7 @@ hdaudio_pci_attach(device_t parent, device_t self, void *opaque)
 	const char *intrstr;
 	pcireg_t csr;
 	int err;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	aprint_naive("\n");
 	aprint_normal(": HD Audio Controller\n");
@@ -143,7 +144,7 @@ hdaudio_pci_attach(device_t parent, device_t self, void *opaque)
 		aprint_error_dev(self, "couldn't map interrupt\n");
 		return;
 	}
-	intrstr = pci_intr_string(pa->pa_pc, ih);
+	intrstr = pci_intr_string(pa->pa_pc, ih, intrbuf, sizeof(intrbuf));
 	sc->sc_ih = pci_intr_establish(pa->pa_pc, ih, IPL_AUDIO,
 	    hdaudio_pci_intr, sc);
 	if (sc->sc_ih == NULL) {

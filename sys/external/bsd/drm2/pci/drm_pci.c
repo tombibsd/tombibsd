@@ -197,11 +197,12 @@ drm_pci_irq_install(struct drm_device *dev, irqreturn_t (*handler)(void *),
 	pci_intr_handle_t ih;
 	const char *intrstr;
 	void *ih_cookie;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	if (pci_intr_map(pa, &ih))
 		return -ENOENT;
 
-	intrstr = pci_intr_string(pa->pa_pc, ih);
+	intrstr = pci_intr_string(pa->pa_pc, ih, intrbuf, sizeof(intrbuf));
 	ih_cookie = pci_intr_establish(pa->pa_pc, ih, IPL_DRM, handler, arg);
 	if (ih_cookie == NULL) {
 		aprint_error_dev(dev->dev,

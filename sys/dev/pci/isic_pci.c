@@ -164,6 +164,7 @@ isic_pci_isdn_attach(struct pci_isic_softc *psc, struct pci_attach_args *pa, con
 	pci_chipset_tag_t pc = pa->pa_pc;
 	pci_intr_handle_t ih;
 	const char *intrstr;
+	char intrbuf[PCI_INTRSTR_LEN];
 
   	static const char *ISACversion[] = {
   		"2085 Version A1/A2 or 2086/2186 Version 1.1",
@@ -253,7 +254,7 @@ isic_pci_isdn_attach(struct pci_isic_softc *psc, struct pci_attach_args *pa, con
 		aprint_error_dev(sc->sc_dev, "couldn't map interrupt\n");
 		return;
 	}
-	intrstr = pci_intr_string(pc, ih);
+	intrstr = pci_intr_string(pc, ih, intrbuf, sizeof(intrbuf));
 	psc->sc_ih = pci_intr_establish(pc, ih, IPL_NET, isic_intr_qs1p, psc);
 	if (psc->sc_ih == NULL) {
 		aprint_error_dev(sc->sc_dev, "couldn't establish interrupt");

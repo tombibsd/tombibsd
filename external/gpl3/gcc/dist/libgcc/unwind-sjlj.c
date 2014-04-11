@@ -231,10 +231,10 @@ _Unwind_SetIP (struct _Unwind_Context *context, _Unwind_Ptr val)
   context->fc->call_site = val - 1;
 }
 
-void *
+_Unwind_Ptr
 _Unwind_GetLanguageSpecificData (struct _Unwind_Context *context)
 {
-  return context->fc->lsda;
+  return (_Unwind_Ptr) context->fc->lsda;
 }
 
 _Unwind_Ptr

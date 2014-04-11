@@ -1,6 +1,6 @@
 /amd7930intr.s/1.23/Mon Dec 20 00:25:43 2010/-kk/
 /asm.h/1.11/Sat Dec 24 20:07:37 2005/-kk/
-/autoconf.c/1.251/Thu Oct 24 10:28:57 2013/-kk/
+/autoconf.c/1.255/Fri Apr 11 02:03:39 2014/-kk/
 /auxiotwo.c/1.11/Sun Jul 29 00:04:05 2012/-kk/
 /auxiotwo.h/1.5/Sun Jul 29 00:04:05 2012/-kk/
 /auxreg.c/1.40/Sun Jul 29 00:04:05 2012/-kk/
@@ -14,7 +14,7 @@
 /compat_13_machdep.c/1.12/Sat Nov 21 04:16:51 2009/-kk/
 /compat_16_machdep.c/1.4/Sat Nov 21 04:16:51 2009/-kk/
 /core_machdep.c/1.7/Sat Mar  1 06:04:33 2014/-kk/
-/cpu.c/1.240/Tue Nov 26 03:29:49 2013/-kk/
+/cpu.c/1.243/Fri Apr 11 02:03:39 2014/-kk/
 /cpu_in_cksum.c/1.1/Mon Sep 20 10:21:10 2010/-kk/
 /cpuunit.c/1.15/Sun Jul 17 23:18:23 2011/-kk/
 /cpuunitvar.h/1.3/Mon Apr 28 20:23:36 2008/-kk/
@@ -48,11 +48,11 @@
 /openprom.c/1.27/Tue Mar 25 02:35:29 2014/-kk/
 /pci_fixup.c/1.1/Thu Oct 24 10:28:57 2013/-kk/
 /pci_fixup.h/1.1/Thu Oct 24 10:28:57 2013/-kk/
-/pci_machdep.c/1.18/Thu Oct 24 10:28:57 2013/-kk/
+/pci_machdep.c/1.20/Fri Apr 11 02:03:39 2014/-kk/
 /pmap.c/1.357/Wed Dec 25 07:37:33 2013/-kk/
 /process_machdep.c/1.18/Tue Jan 14 16:05:01 2014/-kk/
 /procfs_machdep.c/1.4/Sun Dec 11 12:19:08 2005/-kk/
-/promlib.c/1.43/Sun Jul 17 20:54:47 2011/-kk/
+/promlib.c/1.44/Fri Apr 11 02:03:39 2014/-kk/
 /sigcode_state.s/1.1/Fri Jun  8 04:49:46 2001/-kk/
 /sunos_machdep.c/1.23/Sat Nov 21 04:16:52 2009/-kk/
 /sunos_sigcode.s/1.1/Fri Jun  8 04:49:46 2001/-kk/

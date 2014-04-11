@@ -104,7 +104,7 @@
 ./usr/libdata/debug/usr/X11R7/lib/libexpat.so.2.0.debug	-obsolete-		obsolete
 ./usr/libdata/debug/usr/X11R7/lib/libfontconfig.so.2.2.debug	-unknown-		xorg,debug
 ./usr/libdata/debug/usr/X11R7/lib/libfontenc.so.2.0.debug	-unknown-		xorg,debug
-./usr/libdata/debug/usr/X11R7/lib/libfreetype.so.7.4.debug	-unknown-		xorg,debug
+./usr/libdata/debug/usr/X11R7/lib/libfreetype.so.17.2.11.debug	-unknown-		xorg,debug
 ./usr/libdata/debug/usr/X11R7/lib/libglut.so.4.0.debug	-unknown-		xorg,debug
 ./usr/libdata/debug/usr/X11R7/lib/libpciaccess.so.0.3.debug	-unknown-		xorg,debug
 ./usr/libdata/debug/usr/X11R7/lib/libpixman-1.so.2.2.debug	-unknown-		xorg,debug

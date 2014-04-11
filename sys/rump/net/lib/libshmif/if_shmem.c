@@ -170,7 +170,7 @@ allocif(int unit, struct shmif_sc **scp)
 
 	ifp = &sc->sc_ec.ec_if;
 
-	sprintf(ifp->if_xname, "shmif%d", unit);
+	snprintf(ifp->if_xname, sizeof(ifp->if_xname), "shmif%d", unit);
 	ifp->if_softc = sc;
 	ifp->if_flags = IFF_BROADCAST | IFF_MULTICAST;
 	ifp->if_init = shmif_init;

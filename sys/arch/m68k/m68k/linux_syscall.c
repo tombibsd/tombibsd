@@ -104,7 +104,6 @@ static void
 linux_syscall_plain(register_t code, struct lwp *l, struct frame *frame)
 {
 	struct proc *p = l->l_proc;
-	char *params;
 	const struct sysent *callp;
 	int error, nsys;
 	size_t argsize;
@@ -112,7 +111,6 @@ linux_syscall_plain(register_t code, struct lwp *l, struct frame *frame)
 
 	nsys = p->p_emul->e_nsysent;
 	callp = p->p_emul->e_sysent;
-	params = (char *)frame->f_regs[SP] + sizeof(int);
 
 	if (code < 0 || code >= nsys)
 		callp += p->p_emul->e_nosys;		/* illegal */
@@ -181,7 +179,6 @@ static void
 linux_syscall_fancy(register_t code, struct lwp *l, struct frame *frame)
 {
 	struct proc *p = l->l_proc;
-	char *params;
 	const struct sysent *callp;
 	int error, nsys;
 	size_t argsize;
@@ -189,7 +186,6 @@ linux_syscall_fancy(register_t code, struct lwp *l, struct frame *frame)
 
 	nsys = p->p_emul->e_nsysent;
 	callp = p->p_emul->e_sysent;
-	params = (char *)frame->f_regs[SP] + sizeof(int);
 
 	if (code < 0 || code >= nsys)
 		callp += p->p_emul->e_nosys;		/* illegal */

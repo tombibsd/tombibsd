@@ -234,6 +234,7 @@ iwic_pci_attach(device_t  parent, device_t  dev, void *aux)
 	const char *intrstr;
 	struct pci_attach_args *pa = aux;
 	pci_chipset_tag_t pc = pa->pa_pc;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	sc->sc_dev = dev;
 	sc->sc_cardname = iwic_find_card(pa);
@@ -252,7 +253,7 @@ iwic_pci_attach(device_t  parent, device_t  dev, void *aux)
 		aprint_error_dev(sc->sc_dev, "couldn't map interrupt\n");
 		return;
 	}
-	intrstr = pci_intr_string(pc, ih);
+	intrstr = pci_intr_string(pc, ih, intrbuf, sizeof(intrbuf));
 	sc->sc_ih = pci_intr_establish(pc, ih, IPL_NET, iwic_pci_intr, sc);
 	if (sc->sc_ih == NULL) {
 		aprint_error_dev(sc->sc_dev, "couldn't establish interrupt");

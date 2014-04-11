@@ -1,4 +1,4 @@
-/DEVNAMES/1.288/Tue Mar 25 02:35:31 2014/-kk/
+/DEVNAMES/1.289/Fri Apr 11 02:03:41 2014/-kk/
 /Makefile/1.35/Wed Jun 20 21:38:26 2012/-kk/
 /TODO.audiomp/1.19/Sat Mar  1 06:04:40 2014/-kk/
 /auconv.c/1.25/Wed Nov 23 23:07:31 2011/-kk/
@@ -25,7 +25,7 @@
 /cons.h/1.27/Tue Feb  8 20:20:26 2011/-kk/
 /dksubr.c/1.49/Wed Jan  1 02:45:27 2014/-kk/
 /dkvar.h/1.18/Thu Oct 24 10:28:57 2013/-kk/
-/firmload.c/1.18/Sat Mar  1 06:04:40 2014/-kk/
+/firmload.c/1.19/Fri Apr 11 02:03:41 2014/-kk/
 /firmload.h/1.2/Mon Apr 28 20:23:46 2008/-kk/
 /fss.c/1.88/Tue Mar 25 02:35:31 2014/-kk/
 /fssvar.h/1.28/Sat Mar  1 06:04:40 2014/-kk/
@@ -63,7 +63,7 @@
 /verified_exec.c/1.68/Tue Mar 25 02:35:31 2014/-kk/
 /video.c/1.31/Tue Mar 25 02:35:31 2014/-kk/
 /video_if.h/1.7/Fri Dec 24 20:54:28 2010/-kk/
-/vnd.c/1.228/Tue Mar 25 02:35:31 2014/-kk/
+/vnd.c/1.229/Fri Apr 11 02:03:41 2014/-kk/
 /vndvar.h/1.33/Thu Oct 24 10:28:58 2013/-kk/
 D/acpi////
 D/adb////

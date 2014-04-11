@@ -45,3 +45,4 @@ L6:	xorl	%eax,%eax		/* Perform unsigned comparison	*/
 	popl	%esi
 	popl	%edi
 	ret
+END(memcmp)

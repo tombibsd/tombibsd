@@ -137,7 +137,7 @@ static pcitag_t admpci_make_tag(void *, int, int, int);
 static void admpci_decompose_tag(void *, pcitag_t, int *, int *, int *);
 static pcireg_t admpci_conf_read(void *, pcitag_t, int);
 static void admpci_conf_write(void *, pcitag_t, int, pcireg_t);
-static const char *admpci_intr_string(void *, pci_intr_handle_t);
+static const char *admpci_intr_string(void *, pci_intr_handle_t, char *, size_t);
 static void admpci_conf_interrupt(void *, int, int, int, int, int *);
 static void *admpci_intr_establish(void *, pci_intr_handle_t, int,
     int (*)(void *), void *);
@@ -385,12 +385,10 @@ admpci_conf_write(void *v, pcitag_t tag, int reg, pcireg_t data)
 }
 
 const char *
-admpci_intr_string(void *v, pci_intr_handle_t ih)
+admpci_intr_string(void *v, pci_intr_handle_t ih, char *buf, size_t len)
 {
-	static char name[16];
-
-	(void)snprintf(name, sizeof(name), "irq %u", (unsigned)ih);
-	return name;
+	(void)snprintf(buf, len, "irq %u", (unsigned)ih);
+	return buf;
 }
 
 void *

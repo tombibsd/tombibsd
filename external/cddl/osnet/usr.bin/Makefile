@@ -2,7 +2,7 @@
 
 .include <bsd.own.mk>
 
-.if ${MKDTRACE} != "no"
+.if ${MKCTF} != "no"
 SUBDIR+=	ctfconvert ctfmerge ctfdump
 .endif
 

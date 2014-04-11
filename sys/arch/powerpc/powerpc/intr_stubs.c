@@ -83,12 +83,12 @@ intr_disestablish(void *ih)
 	(*powerpc_intrsw->intrsw_disestablish)(ih);
 }
 
-const char *intr_string(int, int) __stub;
+const char *intr_string(int, int, char *, size_t) __stub;
 
 const char *
-intr_string(int irq, int ist)
+intr_string(int irq, int ist, char *buf, size_t len)
 {
-	return (*powerpc_intrsw->intrsw_string)(irq, ist);
+	return (*powerpc_intrsw->intrsw_string)(irq, ist, buf, len);
 }
 
 void spl0(void) __stub;

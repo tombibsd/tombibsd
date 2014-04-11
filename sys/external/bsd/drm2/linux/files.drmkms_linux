@@ -1,6 +1,6 @@
 #       $NetBSD$
 
-define	drmkms_linux
+define	drmkms_linux: i2cexec, i2c_bitbang
 
 makeoptions 	drmkms_linux	CPPFLAGS+="-I$S/external/bsd/drm2/include"
 

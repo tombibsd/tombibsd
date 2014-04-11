@@ -1,8 +1,8 @@
 /Makefile/1.5/Sat Feb  6 23:45:25 2010/-kk/
 /bdinit.c/1.9/Sat Oct 13 20:57:35 2012/-kk/
-/bdisp.c/1.16/Sat Feb 18 06:57:23 2012/-kk/
+/bdisp.c/1.17/Fri Apr 11 02:02:21 2014/-kk/
 /gomoku.6/1.15/Mon Mar 29 04:00:03 2010/-kk/
-/gomoku.h/1.19/Mon Mar 29 04:28:47 2010/-kk/
+/gomoku.h/1.20/Fri Apr 11 02:02:21 2014/-kk/
 /main.c/1.26/Tue Aug 16 11:10:54 2011/-kk/
 /makemove.c/1.11/Wed Aug 12 06:19:17 2009/-kk/
 /pickmove.c/1.22/Thu Oct 24 10:28:53 2013/-kk/

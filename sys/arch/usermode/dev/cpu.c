@@ -73,8 +73,6 @@ struct cpu_info cpu_info_primary = {
 	.ci_curlwp = &lwp0,
 };
 
-char cpu_model[48] = "virtual processor";
-
 typedef struct cpu_softc {
 	device_t	sc_dev;
 	struct cpu_info	*sc_ci;
@@ -126,8 +124,10 @@ cpu_attach(device_t parent, device_t self, void *opaque)
 void
 cpu_configure(void)
 {
+	cpu_setmodel("virtual processor");
 	if (config_rootfound("mainbus", NULL) == NULL)
 		panic("configure: mainbus not configured");
+
 
 	spl0();
 }

@@ -111,6 +111,7 @@ iha_pci_attach(device_t parent, device_t self, void *aux)
 	const char *intrstr;
 	pcireg_t command;
 	int ioh_valid;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	sc->sc_dev = self;
 
@@ -141,7 +142,7 @@ iha_pci_attach(device_t parent, device_t self, void *aux)
 		aprint_error_dev(self, "couldn't map interrupt\n");
 		return;
 	}
-	intrstr = pci_intr_string(pa->pa_pc, ih);
+	intrstr = pci_intr_string(pa->pa_pc, ih, intrbuf, sizeof(intrbuf));
 
 	sc->sc_ih = pci_intr_establish(pa->pa_pc, ih, IPL_BIO, iha_intr, sc);
 

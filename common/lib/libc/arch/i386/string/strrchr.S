@@ -92,5 +92,6 @@ ENTRY(strrchr)
 	popl	%edi
 	popl	%esi
 	ret
+END(strrchr)
 
 STRONG_ALIAS(rindex,strrchr)

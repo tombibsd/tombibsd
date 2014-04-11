@@ -131,3 +131,13 @@ ENTRY(memcpy)
 	movb	%al,(%edi)
 	jmp	.Lback_aligned
 #endif
+
+#ifdef BCOPY
+END(bcopy)
+#else
+#ifdef MEMMOVE
+END(memmove)
+#else
+END(memcpy)
+#endif
+#endif

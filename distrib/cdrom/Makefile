@@ -172,6 +172,7 @@ MACHINE_ARCH.news68k=	m68k
 MACHINE_ARCH.newsmips=	mipseb
 MACHINE_ARCH.next68k=	m68k
 MACHINE_ARCH.ofppc=	powerpc
+MACHINE_ARCH.playstation2=mipsel
 MACHINE_ARCH.pmax=	mipsel
 MACHINE_ARCH.prep=	powerpc
 MACHINE_ARCH.sandpoint=	powerpc

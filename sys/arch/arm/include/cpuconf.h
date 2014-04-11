@@ -213,14 +213,14 @@
 #endif
 
 #if !defined(_KERNEL_OPT) ||						\
-	defined(CPU_ARM11) && defined(ARM11_COMPAT_MMU)
+	(defined(CPU_ARM11) && defined(ARM11_COMPAT_MMU))
 #define	ARM_MMU_V6C		1
 #else
 #define	ARM_MMU_V6C		0
 #endif
 
 #if !defined(_KERNEL_OPT) ||						\
-	defined(CPU_ARM11) && !defined(ARM11_COMPAT_MMU)
+	(defined(CPU_ARM11) && !defined(ARM11_COMPAT_MMU))
 #define	ARM_MMU_V6N		1
 #else
 #define	ARM_MMU_V6N		0
@@ -228,9 +228,8 @@
 
 #define	ARM_MMU_V6	(ARM_MMU_V6C + ARM_MMU_V6N)
 
-
 #if !defined(_KERNEL_OPT) ||						\
-	 defined(CPU_CORTEX) || defined(CPU_PJ4B)
+	 defined(CPU_ARMV7)
 #define	ARM_MMU_V7		1
 #else
 #define	ARM_MMU_V7		0
@@ -239,7 +238,7 @@
 /*
  * Can we use the ASID support in armv6+ MMUs?
  */
-#if !defined(_LOCORE) && 0
+#if !defined(_LOCORE)
 #define	ARM_MMU_EXTENDED	((ARM_MMU_MEMC + ARM_MMU_GENERIC	\
 				  + ARM_MMU_SA1 + ARM_MMU_XSCALE	\
 				  + ARM_MMU_V6C) == 0			\

@@ -50,6 +50,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/unistd.h>
 #include <sys/resourcevar.h>
 #include <sys/kauth.h>
+#include <sys/cpu.h>
 
 #include <uvm/uvm_extern.h>
 #include <sys/sysctl.h>
@@ -220,6 +221,7 @@ compat_43_sys_getkerninfo(struct lwp *l, const struct compat_43_sys_getkerninfo_
 			    (struct bsdi_si *) SCARG(uap, where);
 			struct bsdi_si ksi;
 			struct timeval tv;
+			const char *cpu_model = cpu_getmodel();
 			char *us = (char *) &usi[1];
 
 			if (usi == NULL) {

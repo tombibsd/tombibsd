@@ -548,6 +548,7 @@ arc_map_pci_resources(device_t self, struct pci_attach_args *pa)
 	struct arc_softc		*sc = device_private(self);
 	pcireg_t			memtype;
 	pci_intr_handle_t		ih;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	sc->sc_pc = pa->pa_pc;
 	sc->sc_tag = pa->pa_tag;
@@ -574,7 +575,7 @@ arc_map_pci_resources(device_t self, struct pci_attach_args *pa)
 	
 	aprint_normal("\n");
 	aprint_normal_dev(self, "interrupting at %s\n",
-	    pci_intr_string(pa->pa_pc, ih));
+	    pci_intr_string(pa->pa_pc, ih, intrbuf, sizeof(intrbuf)));
 
 	return 0;
 

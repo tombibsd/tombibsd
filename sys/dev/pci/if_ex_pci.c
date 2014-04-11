@@ -211,6 +211,7 @@ ex_pci_attach(device_t parent, device_t self, void *aux)
 	const char *intrstr = NULL;
 	int rev;
 	int error;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	aprint_naive(": Ethernet controller\n");
 
@@ -286,7 +287,7 @@ ex_pci_attach(device_t parent, device_t self, void *aux)
 		return;
 	}
 
-	intrstr = pci_intr_string(pc, ih);
+	intrstr = pci_intr_string(pc, ih, intrbuf, sizeof(intrbuf));
 	sc->sc_ih = pci_intr_establish(pc, ih, IPL_NET, ex_intr, sc);
 	if (sc->sc_ih == NULL) {
 		aprint_error_dev(self, "couldn't establish interrupt");

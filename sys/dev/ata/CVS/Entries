@@ -2,12 +2,12 @@
 /ata.c/1.130/Tue Mar 25 02:35:31 2014/-kk/
 /ata_raid.c/1.35/Sat Oct 27 17:18:14 2012/-kk/
 /ata_raid_adaptec.c/1.9/Mon Sep 15 11:44:50 2008/-kk/
-/ata_raid_intel.c/1.6/Tue Jul  6 18:09:04 2010/-kk/
-/ata_raid_jmicron.c/1.4/Mon May 11 17:14:31 2009/-kk/
-/ata_raid_nvidia.c/1.1/Wed Aug 20 15:00:34 2008/-kk/
+/ata_raid_intel.c/1.7/Fri Apr 11 02:03:41 2014/-kk/
+/ata_raid_jmicron.c/1.5/Fri Apr 11 02:03:41 2014/-kk/
+/ata_raid_nvidia.c/1.2/Fri Apr 11 02:03:41 2014/-kk/
 /ata_raid_promise.c/1.11/Tue Mar 18 20:46:36 2008/-kk/
 /ata_raid_subr.c/1.2/Thu Jun 24 13:03:08 2010/-kk/
-/ata_raid_via.c/1.6/Fri Sep 19 16:49:27 2008/-kk/
+/ata_raid_via.c/1.7/Fri Apr 11 02:03:41 2014/-kk/
 /ata_raidreg.h/1.8/Thu Sep 11 11:08:50 2008/-kk/
 /ata_raidvar.h/1.12/Tue Jul  6 18:03:21 2010/-kk/
 /ata_wdc.c/1.103/Thu Oct 24 10:28:57 2013/-kk/

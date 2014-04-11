@@ -635,6 +635,7 @@ SYSCTL_SETUP(sysctl_hw_setup, "sysctl hw subtree setup")
 {
 	u_int u;
 	u_quad_t q;
+	const char *model = cpu_getmodel();
 
 	sysctl_createv(clog, 0, NULL, NULL,
 		       CTLFLAG_PERMANENT,
@@ -646,7 +647,7 @@ SYSCTL_SETUP(sysctl_hw_setup, "sysctl hw subtree setup")
 		       CTLFLAG_PERMANENT,
 		       CTLTYPE_STRING, "model",
 		       SYSCTL_DESCR("Machine model"),
-		       NULL, 0, cpu_model, 0,
+		       NULL, 0, __UNCONST(model), 0,
 		       CTL_HW, HW_MODEL, CTL_EOL);
 	sysctl_createv(clog, 0, NULL, NULL,
 		       CTLFLAG_PERMANENT,

@@ -103,6 +103,7 @@ gcscehci_attach(device_t parent, device_t self, void *aux)
 	bus_addr_t ehcibase;
 	int ncomp;
 	struct usb_pci *up;
+	char buf[PCI_INTRSTR_LEN];
 
 	sc->sc.sc_dev = self;
 	sc->sc.sc_bus.hci_private = sc;
@@ -136,7 +137,7 @@ gcscehci_attach(device_t parent, device_t self, void *aux)
 		aprint_error("%s: couldn't map interrupt\n", devname);
 		return;
 	}
-	intrstr = pci_intr_string(pc, ih);
+	intrstr = pci_intr_string(pc, ih, buf, sizeof(buf));
 	sc->sc_ih = pci_intr_establish(pc, ih, IPL_USB, ehci_intr, sc);
 	if (sc->sc_ih == NULL) {
 		aprint_error("%s: couldn't establish interrupt", devname);

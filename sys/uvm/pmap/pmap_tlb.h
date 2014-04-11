@@ -122,7 +122,7 @@ struct pmap_tlb_info {
 	enum tlb_invalidate_op ti_tlbinvop;
 #define tlbinfo_index(ti)	((ti)->ti_index)
 #else
-#define tlbinfo_index(ti)	(0)
+#define tlbinfo_index(ti)	((void)(ti), 0)
 #endif
 	struct evcnt ti_evcnt_synci_asts;
 	struct evcnt ti_evcnt_synci_all;
@@ -131,7 +131,7 @@ struct pmap_tlb_info {
 	struct evcnt ti_evcnt_synci_desired;
 	struct evcnt ti_evcnt_synci_duplicate;
 #else
-#define tlbinfo_index(ti)	(0)
+#define tlbinfo_index(ti)	((void)(ti), 0)
 #endif
 	struct evcnt ti_evcnt_asid_reinits;
 	u_long ti_asid_bitmap[256 / (sizeof(u_long) * 8)];

@@ -99,7 +99,7 @@ dec_5100_init(void)
 	/* calibrate cpu_mhz value */
 	mc_cpuspeed(MIPS_PHYS_TO_KSEG1(KN01_SYS_CLOCK), MIPS_INT_MASK_2);
 
-	sprintf(cpu_model, "DECsystem 5100 (MIPSMATE)");
+	cpu_setmodel("DECsystem 5100 (MIPSMATE)");
 }
 
 /*

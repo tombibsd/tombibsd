@@ -31,7 +31,17 @@ CHECKSUM_OBJS=	${BACKENDOBJ}/libbackend.a \
 # VER_CPPFLAGS from Makefile.inc
 CPPFLAGS.c-cppbuiltin.c=	${VER_CPPFLAGS}
 
-COPTS+=	-Wno-stack-protector
+COPTS.c-ada-spec.c=	-Wno-stack-protector
+COPTS.c-aux-info.c=	-Wno-stack-protector
+COPTS.c-common.c=	-Wno-stack-protector
+COPTS.c-cppbuiltin.c=	-Wno-stack-protector
+COPTS.c-format.c=	-Wno-stack-protector
+COPTS.c-format.h=	-Wno-stack-protector
+COPTS.c-lex.c=		-Wno-stack-protector
+COPTS.c-opts.c=		-Wno-stack-protector
+COPTS.c-ppoutput.c=	-Wno-stack-protector
+COPTS.c-pragma.c=	-Wno-stack-protector
+COPTS.c-typeck.c=	-Wno-stack-protector
 
 CPPFLAGS.default-c.c+=	-I${BACKENDOBJ}
 
@@ -40,4 +50,3 @@ DPADD+=	${LIBMPC} ${LIBMPFR} ${LIBGMP} ${LIBINTL} ${LIBZ} ${LIBM}
 
 .PATH: ${DIST}/gcc ${DIST}/gcc/c ${DIST}/gcc/c-family ${DIST}/gcc/config
 .PATH: ${G_out_file:H}
-

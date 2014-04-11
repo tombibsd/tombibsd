@@ -343,6 +343,17 @@ descr
 	sections
 kcah
 
+hack	Disable fortification for /usr/bin/makeinfo
+cdata	24 Mar 2014
+who	tron
+file	src/gnu/usr.bin/texinfo/makeinfo/Makefile	: 1.8
+pr	N/A
+descr
+	If "makeinfo" is compiled with "-D_FORTIFY_SOURCE=2" using GCC 4.8.3
+	it fails to process certain texinfo files, e.g. "cl.texi"
+	included in the Emacs 24.3 distribution.
+kcah
+
 port	vax
 
 	hack	gcc4/vax ICE

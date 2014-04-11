@@ -35,6 +35,7 @@
  * ARM6/ARM7 assembly functions for CPU / MMU / TLB specific operations
  */
  
+#include "assym.h"
 #include <machine/asm.h>
 #include <arm/locore.h>
 

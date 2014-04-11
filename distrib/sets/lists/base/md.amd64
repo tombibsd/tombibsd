@@ -292,7 +292,7 @@
 ./usr/lib/i386/libssh.so.22			base-compat-shlib	compat,pic
 ./usr/lib/i386/libssh.so.22.0			base-compat-shlib	compat,pic
 ./usr/lib/i386/libssl.so.10			base-compat-shlib	compat,pic
-./usr/lib/i386/libssl.so.10.2			base-compat-shlib	compat,pic
+./usr/lib/i386/libssl.so.10.3			base-compat-shlib	compat,pic
 ./usr/lib/i386/libstdc++.so.7			base-compat-shlib	compat,pic,gcccmds,libstdcxx
 ./usr/lib/i386/libstdc++.so.7.0			base-compat-shlib	gcc=4,compat,pic,libstdcxx
 ./usr/lib/i386/libstdc++.so.7.1			base-compat-shlib	gcc=45,compat,pic,libstdcxx

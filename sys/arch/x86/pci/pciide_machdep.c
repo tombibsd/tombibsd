@@ -71,6 +71,7 @@ pciide_machdep_compat_intr_establish(device_t dev,
 #if NIOAPIC > 0
 	int mpih;
 #endif
+	char buf[PCI_INTRSTR_LEN];
 
 	irq = PCIIDE_COMPAT_IRQ(chan);
 	cookie = isa_intr_establish(NULL, irq, IST_EDGE, IPL_BIO, func, arg);
@@ -83,7 +84,7 @@ pciide_machdep_compat_intr_establish(device_t dev,
 		mpih |= irq;
 		aprint_normal_dev(dev, "%s channel interrupting at %s\n",
 		    PCIIDE_CHANNEL_NAME(chan),
-		    intr_string(mpih));
+		    intr_string(mpih, buf, sizeof(buf)));
 	} else
 #endif
 	aprint_normal_dev(dev, "%s channel interrupting at irq %d\n",

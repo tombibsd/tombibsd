@@ -263,6 +263,7 @@ gcscaudio_attach(device_t parent, device_t self, void *aux)
 	const char *intrstr;
 	pci_intr_handle_t ih;
 	int rc, i;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	sc = device_private(self);
 
@@ -291,7 +292,7 @@ gcscaudio_attach(device_t parent, device_t self, void *aux)
 		aprint_error_dev(sc->sc_dev, "couldn't map interrupt\n");
 		goto attach_failure_unmap;
 	}
-	intrstr = pci_intr_string(sc->sc_pc, ih);
+	intrstr = pci_intr_string(sc->sc_pc, ih, intrbuf, sizeof(intrbuf));
 
 	sc->sc_ih = pci_intr_establish(sc->sc_pc, ih, IPL_AUDIO,
 	    gcscaudio_intr, sc);

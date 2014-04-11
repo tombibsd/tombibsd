@@ -61,7 +61,7 @@ extern struct termios	tty_start, tty_new;
 
 extern DISPLACEMENT	displacement[MAXDIR];
 
-int		addplane(void);
+void		addplane(void);
 void		append(LIST *, PLANE *);
 void		check_adir(int, int, int);
 void		delete(LIST *, PLANE *);

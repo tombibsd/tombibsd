@@ -1,8 +1,8 @@
 /Makefile.inc/1.21/Wed Dec 12 15:12:11 2012/-kk/
-/Makefile/1.80/Fri Jan 31 08:48:50 2014/-kk/
+/Makefile/1.81/Fri Apr 11 02:03:52 2014/-kk/
 /alloc.c/1.26/Sat Jul 30 03:43:20 2011/-kk/
-/arp.c/1.33/Sat Jan 17 14:00:36 2009/-kk/
-/bootp.c/1.38/Wed May 11 16:23:40 2011/-kk/
+/arp.c/1.34/Fri Apr 11 02:03:52 2014/-kk/
+/bootp.c/1.39/Fri Apr 11 02:03:52 2014/-kk/
 /bootp.h/1.9/Sat Jan 17 14:00:36 2009/-kk/
 /bootparam.c/1.19/Wed Oct 21 23:12:10 2009/-kk/
 /bootparam.h/1.4/Sat Nov 24 13:20:54 2007/-kk/
@@ -22,8 +22,8 @@
 /dosfs.c/1.20/Tue Mar 25 02:35:43 2014/-kk/
 /dosfs.h/1.3/Sun Dec 11 12:24:46 2005/-kk/
 /errno.c/1.3/Sun Dec 11 12:24:46 2005/-kk/
-/ether.c/1.22/Mon Jan 12 11:32:45 2009/-kk/
-/ether_sprintf.c/1.6/Sat Nov 24 13:20:55 2007/-kk/
+/ether.c/1.23/Fri Apr 11 02:03:52 2014/-kk/
+/ether_sprintf.c/1.7/Fri Apr 11 02:03:52 2014/-kk/
 /exit.c/1.17/Sat Nov 24 13:20:55 2007/-kk/
 /ext2fs.c/1.20/Tue Mar 25 02:35:43 2014/-kk/
 /ext2fs.h/1.1/Sat Dec  1 18:06:22 2007/-kk/
@@ -34,9 +34,9 @@
 /fstat.c/1.7/Sun Dec  2 04:59:25 2007/-kk/
 /getfile.c/1.9/Sat Nov 24 13:20:55 2007/-kk/
 /gets.c/1.10/Sat Nov 24 13:20:55 2007/-kk/
-/globals.c/1.10/Tue Jan 14 16:05:07 2014/-kk/
+/globals.c/1.11/Fri Apr 11 02:03:52 2014/-kk/
 /ioctl.c/1.11/Sun Dec  2 04:59:25 2007/-kk/
-/iodesc.h/1.9/Sat Jan 17 14:00:36 2009/-kk/
+/iodesc.h/1.10/Fri Apr 11 02:03:52 2014/-kk/
 /ip.c/1.2/Fri May 13 23:35:09 2011/-kk/
 /ip_cksum.c/1.2/Wed Jan 25 13:46:09 2006/-kk/
 /lfs.h/1.5/Sun Dec 11 12:24:46 2005/-kk/
@@ -56,7 +56,7 @@
 /minixfs3.c/1.7/Tue Mar 25 02:35:43 2014/-kk/
 /minixfs3.h/1.5/Tue Oct 29 12:12:00 2013/-kk/
 /net.c/1.35/Sat Apr 11 10:57:55 2009/-kk/
-/net.h/1.26/Wed May 11 16:23:40 2011/-kk/
+/net.h/1.27/Fri Apr 11 02:03:52 2014/-kk/
 /netif.c/1.25/Sun Oct 27 08:20:04 2013/-kk/
 /netif.h/1.7/Sat Jan 17 14:00:36 2009/-kk/
 /nfs.c/1.48/Tue Mar 25 02:35:43 2014/-kk/
@@ -67,7 +67,7 @@
 /panic.c/1.7/Sun Jul 17 20:54:52 2011/-kk/
 /printf.c/1.18/Sun Jul 17 20:54:52 2011/-kk/
 /qsort.c/1.4/Sat Nov 24 13:20:56 2007/-kk/
-/rarp.c/1.31/Wed May 11 16:23:40 2011/-kk/
+/rarp.c/1.32/Fri Apr 11 02:03:52 2014/-kk/
 /read.c/1.15/Sun Dec  2 04:59:26 2007/-kk/
 /rpc.c/1.29/Sat Jan 17 14:00:36 2009/-kk/
 /rpc.h/1.11/Sat Jan 17 14:00:36 2009/-kk/
@@ -75,11 +75,10 @@
 /saerrno.h/1.11/Mon Dec  3 09:51:31 2007/-kk/
 /saioctl.h/1.4/Sun Dec 11 12:24:46 2005/-kk/
 /snprintf.c/1.5/Sun Jul 17 20:54:52 2011/-kk/
-/sprintf.c/1.5/Sun Jul 17 20:54:52 2011/-kk/
-/stand.h/1.77/Tue Jan 14 16:05:07 2014/-kk/
+/stand.h/1.78/Fri Apr 11 02:03:52 2014/-kk/
 /stat.c/1.7/Sat Nov 24 13:20:57 2007/-kk/
 /strerror.c/1.20/Sat Nov 24 13:20:57 2007/-kk/
-/subr_prf.c/1.23/Wed Jan  1 02:45:35 2014/-kk/
+/subr_prf.c/1.24/Fri Apr 11 02:03:52 2014/-kk/
 /tftp.c/1.35/Tue Mar 25 02:35:43 2014/-kk/
 /tftp.h/1.6/Sun Dec 11 12:24:46 2005/-kk/
 /twiddle.c/1.8/Wed Apr 30 16:18:09 2008/-kk/
@@ -88,6 +87,5 @@
 /ufs.h/1.10/Sun Dec 25 06:09:08 2011/-kk/
 /ustarfs.c/1.35/Tue Mar 25 02:35:43 2014/-kk/
 /ustarfs.h/1.3/Sun Dec 11 12:24:46 2005/-kk/
-/vsprintf.c/1.5/Sun Jul 17 20:54:52 2011/-kk/
 /write.c/1.15/Sun Dec  2 04:59:26 2007/-kk/
 D

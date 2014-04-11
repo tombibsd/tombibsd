@@ -3304,6 +3304,7 @@ bge_attach(device_t parent, device_t self, void *aux)
 	uint32_t		pm_ctl;
 	bool			no_seeprom;
 	int			capmask;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	bp = bge_lookup(pa);
 	KASSERT(bp != NULL);
@@ -3355,7 +3356,7 @@ bge_attach(device_t parent, device_t self, void *aux)
 	}
 
 	DPRINTFN(5, ("pci_intr_string\n"));
-	intrstr = pci_intr_string(pc, ih);
+	intrstr = pci_intr_string(pc, ih, intrbuf, sizeof(intrbuf));
 
 	DPRINTFN(5, ("pci_intr_establish\n"));
 	sc->bge_intrhand = pci_intr_establish(pc, ih, IPL_NET, bge_intr, sc);

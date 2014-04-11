@@ -3,7 +3,7 @@
 /conf.c/1.12/Sun Dec 11 12:17:06 2005/-kk/
 /kloader_machdep.c/1.5/Mon Apr 28 20:23:16 2008/-kk/
 /locore.S/1.9/Mon Apr 28 20:23:16 2008/-kk/
-/machdep.c/1.44/Tue Mar 25 02:35:19 2014/-kk/
+/machdep.c/1.45/Fri Apr 11 02:03:28 2014/-kk/
 /mainbus.c/1.11/Sun Nov 21 18:53:56 2010/-kk/
 /sysasic.c/1.14/Mon Apr 28 20:23:16 2008/-kk/
 D

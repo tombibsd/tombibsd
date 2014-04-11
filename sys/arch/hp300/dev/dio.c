@@ -263,7 +263,8 @@ dio_devinfo(struct dio_attach_args *da, char *buf, size_t buflen)
 				}
 			} else {
 			foundit:
-				sprintf(buf, "%s", dio_devdescs[i].dd_desc);
+				snprintf(buf, buflen, "%s",
+				    dio_devdescs[i].dd_desc);
 				return buf;
 			}
 		}
@@ -273,7 +274,7 @@ dio_devinfo(struct dio_attach_args *da, char *buf, size_t buflen)
 	/*
 	 * Device is unknown.  Construct something reasonable.
 	 */
-	sprintf(buf, "device id = 0x%x secid = 0x%x",
+	snprintf(buf, buflen, "device id = 0x%x secid = 0x%x",
 	    da->da_id, da->da_secid);
 	return buf;
 }

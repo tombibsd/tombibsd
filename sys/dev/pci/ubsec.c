@@ -366,6 +366,7 @@ ubsec_attach(device_t parent, device_t self, void *aux)
 	pcireg_t memtype;
 	struct ubsec_dma *dmap;
 	u_int32_t cmd, i;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	sc->sc_dev = self;
 	sc->sc_pct = pc;
@@ -407,7 +408,7 @@ ubsec_attach(device_t parent, device_t self, void *aux)
 		aprint_error_dev(self, "couldn't map interrupt\n");
 		return;
 	}
-	intrstr = pci_intr_string(pc, ih);
+	intrstr = pci_intr_string(pc, ih, intrbuf, sizeof(intrbuf));
 	sc->sc_ih = pci_intr_establish(pc, ih, IPL_NET, ubsec_intr, sc);
 	if (sc->sc_ih == NULL) {
 		aprint_error_dev(self, "couldn't establish interrupt");

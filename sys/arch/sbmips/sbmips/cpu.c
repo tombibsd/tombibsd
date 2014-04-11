@@ -94,6 +94,7 @@ cpu_attach(device_t parent, device_t self, void *aux)
 
 	/* XXX this code must run on the target CPU */
 	config = mips3_cp0_config_read();
+	__USE(config);
 	KASSERT((config & MIPS3_CONFIG_K0_MASK) == 5);
 
 	/* Determine CPU frequency */

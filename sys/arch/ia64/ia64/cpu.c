@@ -52,8 +52,6 @@ struct cpu_softc {
 	struct cpu_info *sc_info;	/* pointer to CPU info */
 };
 
-char cpu_model[64];
-
 static int cpu_match(device_t, cfdata_t, void *);
 static void cpu_attach(device_t, device_t, void *);
 
@@ -167,7 +165,7 @@ identifycpu(struct cpu_softc *sc)
 		}
 		break;
 	}
-	snprintf(cpu_model, sizeof(cpu_model), "%s", model_name);
+	cpu_setmodel("%s", model_name);
 
 	features = ia64_get_cpuid(4);
 

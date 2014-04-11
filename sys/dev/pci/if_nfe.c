@@ -221,6 +221,7 @@ nfe_attach(device_t parent, device_t self, void *aux)
 	struct ifnet *ifp;
 	pcireg_t memtype, csr;
 	int mii_flags = 0;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	sc->sc_dev = self;
 	sc->sc_pc = pa->pa_pc;
@@ -244,7 +245,7 @@ nfe_attach(device_t parent, device_t self, void *aux)
 		goto fail;
 	}
 
-	intrstr = pci_intr_string(pc, ih);
+	intrstr = pci_intr_string(pc, ih, intrbuf, sizeof(intrbuf));
 	sc->sc_ih = pci_intr_establish(pc, ih, IPL_NET, nfe_intr, sc);
 	if (sc->sc_ih == NULL) {
 		aprint_error_dev(self, "could not establish interrupt");

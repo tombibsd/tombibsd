@@ -145,7 +145,6 @@ extern paddr_t avail_end;
  */
 char		machine[] = MACHINE;		/* from <machine/param.h> */
 char		machine_arch[] = MACHINE_ARCH;	/* from <machine/param.h> */
-char		cpu_model[100];
 void *		msgbufaddr;
 int		*symtab_start;
 int		*symtab_end;
@@ -186,7 +185,7 @@ cpu_startup(void)
 	 * Also call CPU init on systems that need that.
 	 */
 	printf("%s%s", copyright, version);
-	printf("%s\n", cpu_model);
+	printf("%s\n", cpu_getmodel());
         if (dep_call->cpu_conf)
                 (*dep_call->cpu_conf)();
 

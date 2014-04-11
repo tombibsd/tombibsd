@@ -260,8 +260,8 @@ tlsb_node_type_str(uint32_t dtype)
 		return ("Dual CPU, 16MB cache");
 
 	default:
-		memset(tlsb_line, 0, sizeof(tlsb_line));
-		sprintf(tlsb_line, "unknown, dtype 0x%x", dtype);
+		snprintf(tlsb_line, sizeof(tlsb_line), "unknown, dtype 0x%x",
+		    dtype);
 		return (tlsb_line);
 	}
 	/* NOTREACHED */

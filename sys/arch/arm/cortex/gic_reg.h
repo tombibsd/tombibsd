@@ -199,4 +199,14 @@
 #define	GICv1_ICCHPIR		GICC_HPPIR
 #define	GICv1_ICCIIDR		GICC_IIDR
 
+/* GICv2m (MSI) */
+
+#define GIC_MSI_TYPER		0x0008
+#define GIC_MSI_SETSPI		0x0040
+#define GIC_MSI_PIDR2		0x0fe8
+#define GIC_MSI_IIDR		0x0ffc
+
+#define GIC_MSI_TYPER_BASE	__BITS(25,16)	// Starting SPI of MSIs
+#define GIC_MSI_TYPER_NUMBER	__BITS(9,0)	// Count of MSIs
+
 #endif /* !_ARM_CORTEX_GICREG_H_ */

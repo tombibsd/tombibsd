@@ -144,7 +144,7 @@ device_register(device_t dev, void *aux)
 	if (device_class(dev) == DV_IFNET) {
 		majdev = B_TYPE(bootdev);
 		if (X68K_BOOT_DEV_IS_NETIF(majdev)) {
-			sprintf(tname, "%s%d",
+			snprintf(tname, sizeof(tname), "%s%d",
 				name_netif[255 - majdev], B_UNIT(bootdev));
 			if (!strcmp(tname, device_xname(dev)))
 				goto found;
@@ -195,7 +195,7 @@ scsi_find(dev_t bdev)
 		 * search for the scsibus whose parent is
 		 * the specified SCSI interface
 		 */
-		sprintf(tname, "%s%" PRIu64,
+		snprintf(tname, sizeof(tname), "%s%" PRIu64,
 			name_scsiif[ifid], B_X68K_SCSI_IF_UN(bdev));
 
 		for (scsibus = deviter_first(&di, DEVITER_F_ROOT_FIRST);

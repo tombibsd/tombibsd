@@ -1,9 +1,9 @@
-/memcmp.S/1.1/Thu Jun 16 16:39:14 2011/-kk/
+/memcmp.S/1.2/Fri Apr 11 01:59:52 2014/-kk/
 /memcpy.S/1.1/Thu Jun 16 16:39:14 2011/-kk/
 /memmove.S/1.1/Thu Jun 16 16:39:14 2011/-kk/
-/memset.S/1.1/Thu Jun 16 16:39:14 2011/-kk/
-/strchr.S/1.1/Thu Jun 16 16:39:14 2011/-kk/
-/strcmp.S/1.1/Thu Jun 16 16:39:14 2011/-kk/
-/strcpy.S/1.1/Thu Jun 16 16:39:14 2011/-kk/
-/strlen.S/1.1/Thu Jun 16 16:39:14 2011/-kk/
+/memset.S/1.2/Fri Apr 11 01:59:52 2014/-kk/
+/strchr.S/1.2/Fri Apr 11 01:59:52 2014/-kk/
+/strcmp.S/1.2/Fri Apr 11 01:59:52 2014/-kk/
+/strcpy.S/1.2/Fri Apr 11 01:59:52 2014/-kk/
+/strlen.S/1.2/Fri Apr 11 01:59:52 2014/-kk/
 D

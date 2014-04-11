@@ -191,7 +191,7 @@ ofwoea_initppc(u_int startkernel, u_int endkernel, char *args)
 
 #if defined(MULTIPROCESSOR) && defined(ofppc)
 	for (i=1; i < CPU_MAXNUM; i++) {
-		sprintf(cpupath, "/cpus/@%x", i);
+		snprintf(cpupath, sizeof(cpupath), "/cpus/@%x", i);
 		node = OF_finddevice(cpupath);
 		if (node <= 0)
 			continue;

@@ -260,7 +260,7 @@ pvr_getdevconfig(struct fb_devconfig *dc)
 	dc->dc_wsscrdescr.textops = &dc->dc_rinfo.ri_ops;
 	dc->dc_wsscrdescr.capabilities = dc->dc_rinfo.ri_caps;
 
-	sprintf(dc->dc_wsscrname, "%dx%d",
+	snprintf(dc->dc_wsscrname, sizeof(dc->dc_wsscrname), "%dx%d",
 	    dc->dc_wsscrdescr.ncols, dc->dc_wsscrdescr.nrows);
 }
 

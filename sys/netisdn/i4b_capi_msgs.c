@@ -726,7 +726,8 @@ void capi_data_b3_req(capi_softc_t *sc, int chan, struct mbuf *m_b3)
     msg = capimsg_setu16(msg, msgid);
 
     msg = capimsg_setu32(msg, sc->sc_bchan[chan].ncci);
-    msg = capimsg_setu32(msg, (u_int32_t) m_b3->m_data); /* Pointer */
+    /* XXX: 32bit Pointer */
+    msg = capimsg_setu32(msg, (u_int32_t)(intptr_t)m_b3->m_data);
     msg = capimsg_setu16(msg, m_b3->m_len);
     msg = capimsg_setu16(msg, chan);
     msg = capimsg_setu16(msg, 0); /* Flags */

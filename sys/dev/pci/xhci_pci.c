@@ -85,6 +85,7 @@ xhci_pci_attach(device_t parent, device_t self, void *aux)
 	int err;
 	//const char *vendor;
 	uint32_t hccparams;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	sc->sc_dev = self;
 	sc->sc_bus.hci_private = sc;
@@ -142,7 +143,7 @@ xhci_pci_attach(device_t parent, device_t self, void *aux)
 	/*
 	 * Allocate IRQ
 	 */
-	intrstr = pci_intr_string(pc, ih);
+	intrstr = pci_intr_string(pc, ih, intrbuf, sizeof(intrbuf));
 	sc->sc_ih = pci_intr_establish(pc, ih, IPL_USB, xhci_intr, sc);
 	if (sc->sc_ih == NULL) {
 		aprint_error_dev(self, "couldn't establish interrupt");

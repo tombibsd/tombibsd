@@ -341,7 +341,8 @@ rtalloc1(const struct sockaddr *dst, int report)
 				goto miss;
 			}
 			KASSERT(newrt != NULL);
-			if ((rt = newrt) && (rt->rt_flags & RTF_XRESOLVE)) {
+			rt = newrt;
+			if (rt->rt_flags & RTF_XRESOLVE) {
 				msgtype = RTM_RESOLVE;
 				goto miss;
 			}

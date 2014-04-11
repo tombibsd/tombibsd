@@ -143,31 +143,29 @@ const struct vnodeopv_desc * const lfs_vnodeopv_descs[] = {
 };
 
 struct vfsops lfs_vfsops = {
-	MOUNT_LFS,
-	sizeof (struct ulfs_args),
-	lfs_mount,
-	ulfs_start,
-	lfs_unmount,
-	ulfs_root,
-	ulfs_quotactl,
-	lfs_statvfs,
-	lfs_sync,
-	lfs_vget,
-	lfs_fhtovp,
-	lfs_vptofh,
-	lfs_init,
-	lfs_reinit,
-	lfs_done,
-	lfs_mountroot,
-	(int (*)(struct mount *, struct vnode *, struct timespec *)) eopnotsupp,
-	lfs_extattrctl,
-	(void *)eopnotsupp,	/* vfs_suspendctl */
-	genfs_renamelock_enter,
-	genfs_renamelock_exit,
-	(void *)eopnotsupp,
-	lfs_vnodeopv_descs,
-	0,
-	{ NULL, NULL },
+	.vfs_name = MOUNT_LFS,
+	.vfs_min_mount_data = sizeof (struct ulfs_args),
+	.vfs_mount = lfs_mount,
+	.vfs_start = ulfs_start,
+	.vfs_unmount = lfs_unmount,
+	.vfs_root = ulfs_root,
+	.vfs_quotactl = ulfs_quotactl,
+	.vfs_statvfs = lfs_statvfs,
+	.vfs_sync = lfs_sync,
+	.vfs_vget = lfs_vget,
+	.vfs_fhtovp = lfs_fhtovp,
+	.vfs_vptofh = lfs_vptofh,
+	.vfs_init = lfs_init,
+	.vfs_reinit = lfs_reinit,
+	.vfs_done = lfs_done,
+	.vfs_mountroot = lfs_mountroot,
+	.vfs_snapshot = (void *)eopnotsupp,
+	.vfs_extattrctl = lfs_extattrctl,
+	.vfs_suspendctl = (void *)eopnotsupp,
+	.vfs_renamelock_enter = genfs_renamelock_enter,
+	.vfs_renamelock_exit = genfs_renamelock_exit,
+	.vfs_fsync = (void *)eopnotsupp,
+	.vfs_opv_descs = lfs_vnodeopv_descs
 };
 
 const struct genfs_ops lfs_genfsops = {
@@ -241,7 +239,7 @@ lfs_sysctl_setup(struct sysctllog **clog)
 		{ "write_exceeded", "Number of times writer invoked flush" },
 		{ "flush_invoked",  "Number of times flush was invoked" },
 		{ "vflush_invoked", "Number of time vflush was called" },
-		{ "clean_inlocked", "Number of vnodes skipped for VI_XLOCK" },
+		{ "clean_inlocked", "Number of vnodes skipped for being dead" },
 		{ "clean_vnlocked", "Number of vnodes skipped for vget failure" },
 		{ "segs_reclaimed", "Number of segments reclaimed" },
 	};
@@ -1757,10 +1755,13 @@ lfs_gop_write(struct vnode *vp, struct vm_page **pgs, int npages,
 	 * We must write everything, however, if our vnode is being
 	 * reclaimed.
 	 */
-	if (LFS_STARVED_FOR_SEGS(fs) && !(vp->v_iflag & VI_XLOCK)) {
+	mutex_enter(vp->v_interlock);
+	if (LFS_STARVED_FOR_SEGS(fs) && vdead_check(vp, VDEAD_NOWAIT) == 0) {
+		mutex_exit(vp->v_interlock);
 		failreason = "Starved for segs and not flushing vp";
  		goto tryagain;
 	}
+	mutex_exit(vp->v_interlock);
 
 	/*
 	 * Sometimes things slip past the filters in lfs_putpages,

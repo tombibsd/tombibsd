@@ -457,6 +457,7 @@ auich_attach(device_t parent, device_t self, void *aux)
 	const struct auich_devtype *d;
 	const struct sysctlnode *node, *node_ac97clock;
 	int err, node_mib, i;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	sc->sc_dev = self;
 	pa = aux;
@@ -533,7 +534,7 @@ map_done:
 		aprint_error_dev(self, "can't map interrupt\n");
 		return;
 	}
-	intrstr = pci_intr_string(pa->pa_pc, sc->intrh);
+	intrstr = pci_intr_string(pa->pa_pc, sc->intrh, intrbuf, sizeof(intrbuf));
 	sc->sc_ih = pci_intr_establish(pa->pa_pc, sc->intrh, IPL_AUDIO,
 	    auich_intr, sc);
 	if (sc->sc_ih == NULL) {

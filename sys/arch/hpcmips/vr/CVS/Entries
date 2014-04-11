@@ -19,7 +19,7 @@
 /rtc.c/1.32/Fri Mar 18 15:31:38 2011/-kk/
 /rtcreg.h/1.9/Sat Sep 16 02:14:57 2006/-kk/
 /siureg.h/1.1.1.1/Thu Sep 16 12:23:32 1999/-kk/
-/vr.c/1.64/Fri Mar 18 15:31:38 2011/-kk/
+/vr.c/1.65/Fri Apr 11 02:03:30 2014/-kk/
 /vr.h/1.4/Sun Sep 16 05:32:21 2001/-kk/
 /vr4102ip.c/1.9/Sat Oct 27 17:17:55 2012/-kk/
 /vr4122ip.c/1.8/Sat Oct 27 17:17:55 2012/-kk/
@@ -38,7 +38,7 @@
 /vrc4172gpio.c/1.13/Sat Oct 27 17:17:55 2012/-kk/
 /vrc4172gpioreg.h/1.2/Sun May  6 14:25:16 2001/-kk/
 /vrc4172icureg.h/1.2/Fri Apr 13 08:11:44 2001/-kk/
-/vrc4172pci.c/1.16/Sat Oct 27 17:17:55 2012/-kk/
+/vrc4172pci.c/1.17/Fri Apr 11 02:03:30 2014/-kk/
 /vrc4172pcireg.h/1.1/Fri Mar 22 09:18:09 2002/-kk/
 /vrc4172pcsreg.h/1.1/Sat Nov 11 04:42:09 2000/-kk/
 /vrc4172pmureg.h/1.2/Fri Apr 13 08:11:44 2001/-kk/
@@ -46,7 +46,7 @@
 /vrc4172pwmreg.h/1.4/Fri Apr 13 08:11:44 2001/-kk/
 /vrc4172pwmvar.h/1.9/Sat Oct 27 17:17:55 2012/-kk/
 /vrc4172reg.h/1.5/Sun Dec 11 12:17:34 2005/-kk/
-/vrc4173bcu.c/1.22/Sat Oct 27 17:17:55 2012/-kk/
+/vrc4173bcu.c/1.23/Fri Apr 11 02:03:30 2014/-kk/
 /vrc4173bcuvar.h/1.4/Sun Jan 13 14:18:32 2002/-kk/
 /vrc4173cmureg.h/1.2/Fri Oct 26 04:22:25 2001/-kk/
 /vrc4173icureg.h/1.1/Wed Jun 13 07:32:48 2001/-kk/
@@ -79,7 +79,7 @@
 /vrpiu.c/1.42/Sat Oct 27 17:17:56 2012/-kk/
 /vrpiureg.h/1.4/Sun Dec 15 09:24:26 2002/-kk/
 /vrpiuvar.h/1.12/Sat Oct 27 17:17:56 2012/-kk/
-/vrpmu.c/1.19/Sat Oct 27 17:17:56 2012/-kk/
+/vrpmu.c/1.20/Fri Apr 11 02:03:30 2014/-kk/
 /vrpmureg.h/1.4/Mon Jun 11 06:02:21 2001/-kk/
 /vrpmuvar.h/1.2/Sat Oct 27 17:17:56 2012/-kk/
 D

@@ -351,12 +351,10 @@ dchan_receive(struct iwic_softc *sc, int ista)
 		}
 		else
 		{
-			int hi, lo;
-			int total_frame_len;
+			int lo;
 
 			lo = IWIC_READ(sc, D_RBCL);
-			hi = IWIC_READ(sc, D_RBCH);
-			total_frame_len = D_RBC(hi, lo);
+			(void)IWIC_READ(sc, D_RBCH);
 			lo = lo & 0x3f;
 
 			if (lo == 0)

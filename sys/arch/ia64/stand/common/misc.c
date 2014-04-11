@@ -175,7 +175,7 @@ hexdump(void *region, size_t len)
     void *	line;
     int		x, c;
     char	lbuf[80];
-#define emit(fmt, args...)	{sprintf(lbuf, fmt , ## args); pager_output(lbuf);}
+#define emit(fmt, args...)	{snprintf(lbuf, sizeof(lbuf), fmt , ## args); pager_output(lbuf);}
 
     pager_open();
     for (line = region; line < (region + len); line += 16) {

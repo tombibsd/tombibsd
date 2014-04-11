@@ -51,6 +51,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/kernel.h>
 #include <sys/reboot.h>
 #include <sys/bus.h>
+#include <sys/cpu.h>
 
 #include <uvm/uvm_extern.h>
 
@@ -145,7 +146,6 @@ __CTASSERT(__arraycount(cpu_info) == __arraycount(cpu_softc));
 /*
  * This should probably be in autoconf!				XXX
  */
-char cpu_model[80];
 char machine[] = MACHINE;		/* from <machine/param.h> */
 char machine_arch[] = MACHINE_ARCH;	/* from <machine/param.h> */
 
@@ -167,7 +167,7 @@ booke_cpu_startup(const char *model)
 	vaddr_t 	minaddr, maxaddr;
 	char 		pbuf[9];
 
-	strlcpy(cpu_model, model, sizeof(cpu_model));
+	cpu_setmodel("%s", model);
 
 	printf("%s%s", copyright, version);
 

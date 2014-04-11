@@ -125,3 +125,4 @@ ENTRY(strcat)
 	movl	8(%esp),%eax
 	popl	%ebx
 	ret
+END(strcat)

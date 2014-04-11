@@ -725,7 +725,6 @@ sunscpal_scsipi_request(struct scsipi_channel *chan, scsipi_adapter_req_t req,
     void *arg)
 {
 	struct scsipi_xfer *xs;
-	struct scsipi_periph *periph;
 	struct sunscpal_softc *sc;
 	struct sunscpal_req *sr;
 	int s, i, flags;
@@ -735,7 +734,6 @@ sunscpal_scsipi_request(struct scsipi_channel *chan, scsipi_adapter_req_t req,
 	switch (req) {
 	case ADAPTER_REQ_RUN_XFER:
 		xs = arg;
-		periph = xs->xs_periph;
 		flags = xs->xs_control;
 
 		if (flags & XS_CTL_DATA_UIO)

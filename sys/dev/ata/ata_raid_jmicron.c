@@ -82,7 +82,7 @@ ata_raid_jmicron_type(int type)
 	case JM_T_JBOD:
 		return "JBOD";
 	default:
-		sprintf(buffer, "UNKNOWN 0x%02x", type);
+		snprintf(buffer, sizeof(buffer), "UNKNOWN 0x%02x", type);
 		return buffer;
 	}
 }

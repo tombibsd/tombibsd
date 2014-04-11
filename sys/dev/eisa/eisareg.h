@@ -96,4 +96,8 @@
 #define	EISA_PRODID_3(pid)						\
 	    (HEXDIGITS[(((pid)[1] >> 0) & 0xf)])
 
+/*
+ * Local defines
+ */
+#define EISA_INTRSTR_LEN	64
 #endif /* !__DEV_EISA_EISAREG_H__ */

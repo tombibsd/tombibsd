@@ -674,6 +674,7 @@ sii3114_chip_map(struct pciide_softc *sc, const struct pci_attach_args *pa)
 	pci_intr_handle_t intrhandle;
 	const char *intrstr;
 	int channel;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	if (pciide_chipen(sc, pa) == 0)
 		return;
@@ -760,7 +761,7 @@ sii3114_chip_map(struct pciide_softc *sc, const struct pci_attach_args *pa)
 		    "couldn't map native-PCI interrupt\n");
 		return;
 	}
-	intrstr = pci_intr_string(pa->pa_pc, intrhandle);
+	intrstr = pci_intr_string(pa->pa_pc, intrhandle, intrbuf, sizeof(intrbuf));
 	sc->sc_pci_ih = pci_intr_establish(pa->pa_pc, intrhandle, IPL_BIO,
 					   /* XXX */
 					   pciide_pci_intr, sc);

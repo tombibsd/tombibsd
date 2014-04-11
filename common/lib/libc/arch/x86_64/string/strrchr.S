@@ -120,5 +120,6 @@ ENTRY(strrchr)
 
 .Ldone:
 	ret
+END(strrchr)
 
 STRONG_ALIAS(rindex,strrchr)

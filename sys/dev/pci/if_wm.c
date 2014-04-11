@@ -1181,6 +1181,7 @@ wm_attach(device_t parent, device_t self, void *aux)
 	pcireg_t preg, memtype;
 	uint16_t eeprom_data, apme_mask;
 	uint32_t reg;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	sc->sc_dev = self;
 	callout_init(&sc->sc_tick_ch, 0);
@@ -1313,7 +1314,7 @@ wm_attach(device_t parent, device_t self, void *aux)
 		aprint_error_dev(sc->sc_dev, "unable to map interrupt\n");
 		return;
 	}
-	intrstr = pci_intr_string(pc, ih);
+	intrstr = pci_intr_string(pc, ih, intrbuf, sizeof(intrbuf));
 	sc->sc_ih = pci_intr_establish(pc, ih, IPL_NET, wm_intr, sc);
 	if (sc->sc_ih == NULL) {
 		aprint_error_dev(sc->sc_dev, "unable to establish interrupt");
@@ -2094,7 +2095,8 @@ wm_attach(device_t parent, device_t self, void *aux)
 	    NULL, xname, "txtsopain");
 
 	for (i = 0; i < WM_NTXSEGS; i++) {
-		sprintf(wm_txseg_evcnt_names[i], "txseg%d", i);
+		snprintf(wm_txseg_evcnt_names[i],
+		    sizeof(wm_txseg_evcnt_names[i]), "txseg%d", i);
 		evcnt_attach_dynamic(&sc->sc_ev_txseg[i], EVCNT_TYPE_MISC,
 		    NULL, xname, wm_txseg_evcnt_names[i]);
 	}

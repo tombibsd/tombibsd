@@ -339,7 +339,7 @@ prop_string_append(prop_string_t dst, prop_string_t src)
 	cp = _PROP_MALLOC(len + 1, M_PROP_STRING);
 	if (cp == NULL)
 		return (false);
-	sprintf(cp, "%s%s", prop_string_contents(dst),
+	snprintf(cp, len + 1, "%s%s", prop_string_contents(dst),
 		prop_string_contents(src));
 	ocp = dst->ps_mutable;
 	dst->ps_mutable = cp;
@@ -373,7 +373,7 @@ prop_string_append_cstring(prop_string_t dst, const char *src)
 	cp = _PROP_MALLOC(len + 1, M_PROP_STRING);
 	if (cp == NULL)
 		return (false);
-	sprintf(cp, "%s%s", prop_string_contents(dst), src);
+	snprintf(cp, len + 1, "%s%s", prop_string_contents(dst), src);
 	ocp = dst->ps_mutable;
 	dst->ps_mutable = cp;
 	dst->ps_size = len;

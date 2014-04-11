@@ -56,7 +56,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <machine/machdep.h>
 #include <machine/memcreg.h>
 
-char cpu_model[] = "Archimedes";
 
 struct vm_map *phys_map = NULL;
 
@@ -147,6 +146,7 @@ cpu_startup(void)
 	/* Stuff to do here: */
 	/* initmsgbuf() is called from start() */
 
+	cpu_setmodel("Archimedes");
 	printf("%s%s", copyright, version);
 	format_bytes(pbuf, sizeof(pbuf), ctob(physmem));
 	printf("total memory = %s\n", pbuf);

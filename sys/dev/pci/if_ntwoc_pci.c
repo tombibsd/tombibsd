@@ -200,6 +200,7 @@ ntwoc_pci_attach(device_t parent, device_t self, void *aux)
 	u_int16_t db0, db1;
 	u_int32_t flags;
 	u_int numports;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	printf(": N2 Serial Interface\n");
 	flags = device_cfdata(self)->cf_flags;
@@ -234,7 +235,7 @@ ntwoc_pci_attach(device_t parent, device_t self, void *aux)
 		aprint_error_dev(self, "couldn't map interrupt\n");
 		return;
 	}
-	intrstr = pci_intr_string(pa->pa_pc, ih);
+	intrstr = pci_intr_string(pa->pa_pc, ih, intrbuf, sizeof(intrbuf));
 	sc->sc_ih = pci_intr_establish(pa->pa_pc, ih, IPL_NET, ntwoc_pci_intr,
 	    sc);
 	if (sc->sc_ih == NULL) {

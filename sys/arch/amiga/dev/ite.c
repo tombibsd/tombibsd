@@ -1642,7 +1642,8 @@ iteputchar(register int c, struct ite_softc *ip)
 					break;
 				case 6:
 					/* cursor position report */
-					sprintf(ip->argbuf, "\033[%d;%dR",
+					snprintf(ip->argbuf, sizeof(ip->argbuf),
+					    "\033[%d;%dR",
 					    ip->cury + 1, ip->curx + 1);
 					ite_sendstr(ip->argbuf);
 					break;

@@ -164,6 +164,7 @@ epic_pci_attach(device_t parent, device_t self, void *aux)
 	bus_space_handle_t ioh, memh;
 	int ioh_valid, memh_valid;
 	int error;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	sc->sc_dev = self;
 
@@ -217,7 +218,7 @@ epic_pci_attach(device_t parent, device_t self, void *aux)
 		aprint_error_dev(self, "unable to map interrupt\n");
 		return;
 	}
-	intrstr = pci_intr_string(pc, ih);
+	intrstr = pci_intr_string(pc, ih, intrbuf, sizeof(intrbuf));
 	psc->sc_ih = pci_intr_establish(pc, ih, IPL_NET, epic_intr, sc);
 	if (psc->sc_ih == NULL) {
 		aprint_error_dev(self, "unable to establish interrupt");

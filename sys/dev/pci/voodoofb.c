@@ -514,13 +514,14 @@ voodoofb_attach(device_t parent, device_t self, void *aux)
 	}
 
 #ifdef VOODOOFB_ENABLE_INTR
+	char intrbuf[PCI_INTRSTR_LEN];
 	/* Interrupt. We don't use it for anything yet */
 	if (pci_intr_map(pa, &ih)) {
 		aprint_error_dev(self, "failed to map interrupt\n");
 		return;
 	}
 
-	intrstr = pci_intr_string(sc->sc_pc, ih);
+	intrstr = pci_intr_string(sc->sc_pc, ih, intrbuf, sizeof(intrbuf));
 	sc->sc_ih = pci_intr_establish(sc->sc_pc, ih, IPL_NET, voodoofb_intr, 
 	    sc);
 	if (sc->sc_ih == NULL) {

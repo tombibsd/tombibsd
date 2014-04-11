@@ -511,18 +511,15 @@ rtcclose(dev_t dev, int flag, int mode, struct lwp *l)
 int
 rtcread(dev_t dev, struct uio *uio, int flags)
 {
-	struct clock_softc	*sc;
 	mc_todregs		clkregs;
 	int			s, length;
 	char			buffer[16 + 1];
-
-	sc = device_lookup_private(&clock_cd, minor(dev));
 
 	s = splhigh();
 	MC146818_GETTOD(RTC, &clkregs);
 	splx(s);
 
-	sprintf(buffer, "%4d%02d%02d%02d%02d.%02d\n",
+	snprintf(buffer, sizeof(buffer), "%4d%02d%02d%02d%02d.%02d\n",
 	    clkregs[MC_YEAR] + GEMSTARTOFTIME,
 	    clkregs[MC_MONTH], clkregs[MC_DOM],
 	    clkregs[MC_HOUR], clkregs[MC_MIN], clkregs[MC_SEC]);

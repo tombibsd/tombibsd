@@ -324,7 +324,6 @@ static int
 isv_capture(struct isv_softc *sc)
 {
 	int speed;
-	uint16_t discard;
 	int rc, state = ISV_S_CAPTURE0;
 	struct timeval diff, end, start, stop;
 	static const struct timeval wait = {.tv_sec = 0, .tv_usec = 200000};
@@ -372,7 +371,7 @@ isv_capture(struct isv_softc *sc)
 	/* read one dummy word to prime the state machine on the
 	 * image capture board
 	 */
-	discard = isv_read(ir, ISV_DATA);
+	isv_read(ir, ISV_DATA);
 	bus_space_read_multi_stream_2(ir->ir_bt, ir->ir_bh, ISV_DATA,
 	    sc->sc_frame, ISV_WIDTH * ISV_LINES / 2);
 

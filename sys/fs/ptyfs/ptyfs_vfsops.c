@@ -72,11 +72,11 @@ VFS_PROTOS(ptyfs);
 
 static struct sysctllog *ptyfs_sysctl_log;
 
-static int ptyfs__allocvp(struct ptm_pty *, struct lwp *, struct vnode **,
+static int ptyfs__allocvp(struct mount *, struct lwp *, struct vnode **,
     dev_t, char);
-static int ptyfs__makename(struct ptm_pty *, struct lwp *, char *, size_t,
+static int ptyfs__makename(struct mount *, struct lwp *, char *, size_t,
     dev_t, char);
-static void ptyfs__getvattr(struct ptm_pty *, struct lwp *, struct vattr *);
+static void ptyfs__getvattr(struct mount *, struct lwp *, struct vattr *);
 
 /*
  * ptm glue: When we mount, we make ptm point to us.
@@ -125,10 +125,9 @@ out:
 }
 
 static int
-ptyfs__makename(struct ptm_pty *pt, struct lwp *l, char *tbuf, size_t bufsiz,
+ptyfs__makename(struct mount *mp, struct lwp *l, char *tbuf, size_t bufsiz,
     dev_t dev, char ms)
 {
-	struct mount *mp = pt->arg;
 	size_t len;
 	const char *np;
 
@@ -154,10 +153,9 @@ ptyfs__makename(struct ptm_pty *pt, struct lwp *l, char *tbuf, size_t bufsiz,
 
 static int
 /*ARGSUSED*/
-ptyfs__allocvp(struct ptm_pty *pt, struct lwp *l, struct vnode **vpp,
+ptyfs__allocvp(struct mount *mp, struct lwp *l, struct vnode **vpp,
     dev_t dev, char ms)
 {
-	struct mount *mp = pt->arg;
 	ptyfstype type;
 
 	switch (ms) {
@@ -176,9 +174,8 @@ ptyfs__allocvp(struct ptm_pty *pt, struct lwp *l, struct vnode **vpp,
 
 
 static void
-ptyfs__getvattr(struct ptm_pty *pt, struct lwp *l, struct vattr *vattr)
+ptyfs__getvattr(struct mount *mp, struct lwp *l, struct vattr *vattr)
 {
-	struct mount *mp = pt->arg;
 	struct ptyfsmount *pmnt = VFSTOPTY(mp);
 	vattr_null(vattr);
 	/* get real uid */
@@ -358,31 +355,28 @@ const struct vnodeopv_desc * const ptyfs_vnodeopv_descs[] = {
 };
 
 struct vfsops ptyfs_vfsops = {
-	MOUNT_PTYFS,
-	sizeof (struct ptyfs_args),
-	ptyfs_mount,
-	ptyfs_start,
-	ptyfs_unmount,
-	ptyfs_root,
-	(void *)eopnotsupp,		/* vfs_quotactl */
-	genfs_statvfs,
-	ptyfs_sync,
-	ptyfs_vget,
-	(void *)eopnotsupp,		/* vfs_fhtovp */
-	(void *)eopnotsupp,		/* vfs_vptofp */
-	ptyfs_init,
-	ptyfs_reinit,
-	ptyfs_done,
-	NULL,				/* vfs_mountroot */
-	(void *)eopnotsupp,
-	(void *)eopnotsupp,
-	(void *)eopnotsupp,		/* vfs_suspendctl */
-	genfs_renamelock_enter,
-	genfs_renamelock_exit,
-	(void *)eopnotsupp,
-	ptyfs_vnodeopv_descs,
-	0,
-	{ NULL, NULL },
+	.vfs_name = MOUNT_PTYFS,
+	.vfs_min_mount_data = sizeof (struct ptyfs_args),
+	.vfs_mount = ptyfs_mount,
+	.vfs_start = ptyfs_start,
+	.vfs_unmount = ptyfs_unmount,
+	.vfs_root = ptyfs_root,
+	.vfs_quotactl = (void *)eopnotsupp,
+	.vfs_statvfs = genfs_statvfs,
+	.vfs_sync = ptyfs_sync,
+	.vfs_vget = ptyfs_vget,
+	.vfs_fhtovp = (void *)eopnotsupp,
+	.vfs_vptofh = (void *)eopnotsupp,
+	.vfs_init = ptyfs_init,
+	.vfs_reinit = ptyfs_reinit,
+	.vfs_done = ptyfs_done,
+	.vfs_snapshot = (void *)eopnotsupp,
+	.vfs_extattrctl = (void *)eopnotsupp,
+	.vfs_suspendctl = (void *)eopnotsupp,
+	.vfs_renamelock_enter = genfs_renamelock_enter,
+	.vfs_renamelock_exit = genfs_renamelock_exit,
+	.vfs_fsync = (void *)eopnotsupp,
+	.vfs_opv_descs = ptyfs_vnodeopv_descs
 };
 
 static int

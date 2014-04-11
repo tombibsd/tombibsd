@@ -1,9 +1,9 @@
 /autoconf.c/1.9/Sat Oct 27 17:18:09 2012/-kk/
 /console.c/1.6/Tue Aug 11 12:38:24 2009/-kk/
-/cpu.c/1.21/Sat Jul  9 16:59:40 2011/-kk/
+/cpu.c/1.22/Fri Apr 11 02:03:38 2014/-kk/
 /disksubr.c/1.21/Thu Oct 24 10:28:57 2013/-kk/
 /locore_machdep.S/1.4/Sun Dec 11 12:18:51 2005/-kk/
-/machdep.c/1.52/Sat Jul 28 23:09:50 2012/-kk/
+/machdep.c/1.53/Fri Apr 11 02:03:38 2014/-kk/
 /rtc.c/1.19/Sat Jul  9 16:59:40 2011/-kk/
 /sb1250_icu.c/1.13/Sat Jul  9 16:59:40 2011/-kk/
 /systemsw.c/1.17/Sat Jul  9 16:59:40 2011/-kk/

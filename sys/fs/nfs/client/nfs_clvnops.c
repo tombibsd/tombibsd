@@ -2428,7 +2428,7 @@ nfs_sillyrename(struct vnode *dvp, struct vnode *vp, struct componentname *cnp)
 	pid = cnp->cn_thread->td_proc->p_pid;
 	lticks = (unsigned int)ticks;
 	for ( ; ; ) {
-		sp->s_namlen = sprintf(sp->s_name, 
+		sp->s_namlen = snprintf(sp->s_name, sizeof(sp->s_name),
 				       ".nfs.%08x.%04x4.4", lticks, 
 				       pid);
 		if (nfs_lookitup(dvp, sp->s_name, sp->s_namlen, sp->s_cred,

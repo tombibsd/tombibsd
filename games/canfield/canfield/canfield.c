@@ -168,7 +168,7 @@ static bool mtfdone, Cflag = FALSE;
 #define BETTINGBOX	2
 #define NOBOX		3
 static int status = INSTRUCTIONBOX;
-static int uid;
+static uid_t uid;
 
 /*
  * Basic betting costs
@@ -1637,14 +1637,12 @@ instruct(void)
 static void
 initall(void)
 {
-	int i;
+	ssize_t i;
 
-	srandom(getpid());
+	srandom(time(NULL));
 	time(&acctstart);
 	initdeck(deck);
 	uid = getuid();
-	if (uid < 0)
-		uid = 0;
 	dbfd = open(_PATH_SCORE, O_RDWR);
 
 	/* Revoke setgid privileges */
@@ -1654,8 +1652,7 @@ initall(void)
 		return;
 	if (dbfd < 3)
 		exit(1);
-	i = lseek(dbfd, uid * sizeof(struct betinfo), SEEK_SET);
-	if (i < 0) {
+	if (lseek(dbfd, uid * sizeof(struct betinfo), SEEK_SET) < 0) {
 		close(dbfd);
 		dbfd = -1;
 		return;

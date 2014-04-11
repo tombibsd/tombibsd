@@ -379,11 +379,12 @@ static void dwc2_handle_disconnect_intr(struct dwc2_hsotg *hsotg)
  */
 static void dwc2_handle_usb_suspend_intr(struct dwc2_hsotg *hsotg)
 {
-	u32 dsts;
-
 	dev_dbg(hsotg->dev, "USB SUSPEND\n");
 
 	if (dwc2_is_device_mode(hsotg)) {
+#ifdef DWC2_DEBUG
+		u32 dsts;
+
 		/*
 		 * Check the Device status register to determine if the Suspend
 		 * state is active
@@ -394,6 +395,7 @@ static void dwc2_handle_usb_suspend_intr(struct dwc2_hsotg *hsotg)
 			"DSTS.Suspend Status=%d HWCFG4.Power Optimize=%d\n",
 			!!(dsts & DSTS_SUSPSTS),
 			hsotg->hw_params.power_optimized);
+#endif
 	} else {
 		if (hsotg->op_state == OTG_STATE_A_PERIPHERAL) {
 			dev_dbg(hsotg->dev, "a_peripheral->a_host\n");

@@ -900,6 +900,7 @@ sbicreset(struct sbic_softc *dev)
 
 	SBIC_WAIT(regs, SBIC_ASR_INT, 0);
 	GET_SBIC_csr(regs, csr);	/* clears interrupt also */
+	__USE(csr);
 
 	/*
 	 * Set up various chip parameters
@@ -1258,6 +1259,7 @@ sbicxfin(sbic_regmap_p regs, int len, void *bp)
 			} else {
 				u_char foo;
 				GET_SBIC_data (regs, foo);
+				__USE(foo);
 			}
 			wait = sbic_data_wait;
 		}

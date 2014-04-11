@@ -93,18 +93,14 @@ rumpuser_thread_create(void *(*f)(void *), void *arg, const char *thrname,
 		nanosleep(&ts, NULL);
 	}
 
-#if defined(__NetBSD__)
-	if (rv == 0 && thrname)
-		pthread_setname_np(ptid, thrname, NULL);
-#elif defined(__linux__)
-	/*
-	 * The pthread_setname_np() call varies from one Linux distro to
-	 * another.  Comment out the call pending autoconf support.
-	 */
-#if 0
-	if (rv == 0 && thrname)
-		pthread_setname_np(ptid, thrname);
-#endif
+#if defined(HAVE_PTHREAD_SETNAME_3)
+	if (rv == 0 && thrname) {
+		pthread_setname_np(*ptidp, thrname, NULL);
+	}
+#elif defined(HAVE_PTHREAD_SETNAME_2)
+	if (rv == 0 && thrname) {
+		pthread_setname_np(*ptidp, thrname);
+	}
 #endif
 
 	if (joinable) {

@@ -152,6 +152,7 @@ gmac_attach(device_t parent, device_t self, void *aux)
 	struct gmac_dma *dp;
 	u_int32_t reg[10];
 	u_char laddr[6];
+	char buf[PCI_INTRSTR_LEN];
 
 	sc->sc_dev = self;
 
@@ -171,7 +172,7 @@ gmac_attach(device_t parent, device_t self, void *aux)
 		printf(": unable to map interrupt\n");
 		return;
 	}
-	intrstr = pci_intr_string(pa->pa_pc, ih);
+	intrstr = pci_intr_string(pa->pa_pc, ih, buf, sizeof(buf));
 
 	if (pci_intr_establish(pa->pa_pc, ih, IPL_NET, gmac_intr, sc) == NULL) {
 		printf(": unable to establish interrupt");

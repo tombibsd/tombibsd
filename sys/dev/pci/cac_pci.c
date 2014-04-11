@@ -147,6 +147,7 @@ cac_pci_attach(device_t parent, device_t self, void *aux)
 	const char *intrstr;
 	pcireg_t reg;
 	int memr, ior, i;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	aprint_naive(": RAID controller\n");
 
@@ -202,7 +203,7 @@ cac_pci_attach(device_t parent, device_t self, void *aux)
 		aprint_error("can't map interrupt\n");
 		return;
 	}
-	intrstr = pci_intr_string(pc, ih);
+	intrstr = pci_intr_string(pc, ih, intrbuf, sizeof(intrbuf));
 	sc->sc_ih = pci_intr_establish(pc, ih, IPL_BIO, cac_intr, sc);
 	if (sc->sc_ih == NULL) {
 		aprint_error("can't establish interrupt");

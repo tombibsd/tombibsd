@@ -26,6 +26,8 @@ DPADD+=		${LIBINTL}
 
 .include <bsd.info.mk>
 
+COPTS.gcc.c=	-Wno-stack-protector
+
 .PATH: ${DIST}/gcc ${DIST}/gcc/c-family ${DIST}/gcc/doc
 
 cpp.info: gcc-vers.texi

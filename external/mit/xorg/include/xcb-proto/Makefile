@@ -14,6 +14,8 @@ FILES=	bigreq.xml composite.xml damage.xml dpms.xml dri2.xml dri3.xml \
 FILESDIR=${X11SHAREDIR}/xcb
 
 PKGCONFIG=	xcb-proto
+PKGCONFIG_SED_FLAGS= \
+	-e "s,@pythondir@,,"
 
 NOPROG=	# defined
 

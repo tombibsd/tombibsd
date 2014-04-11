@@ -47,7 +47,7 @@
 /mips_fixup.c/1.10/Wed Nov  9 17:05:50 2011/-kk/
 /mips_fpu.c/1.11/Thu Oct 24 10:28:57 2013/-kk/
 /mips_fputrap.c/1.10/Sat Feb 26 15:41:32 2011/-kk/
-/mips_machdep.c/1.258/Mon Nov 18 05:31:34 2013/-kk/
+/mips_machdep.c/1.259/Fri Apr 11 02:03:31 2014/-kk/
 /mips_mcclock.c/1.19/Sun Feb 20 07:45:48 2011/-kk/
 /mips_mcclock.h/1.6/Sun Feb 20 07:45:48 2011/-kk/
 /mips_mcclock_loop.S/1.5/Mon Mar 28 12:26:59 2011/-kk/
@@ -65,7 +65,7 @@
 /svr4_machdep.c/1.15/Sun Jul 10 23:21:59 2011/-kk/
 /sys_machdep.c/1.34/Sun Feb 20 07:45:48 2011/-kk/
 /syscall.c/1.48/Thu Oct 24 10:28:57 2013/-kk/
-/trap.c/1.235/Sun Feb 19 21:06:20 2012/-kk/
+/trap.c/1.236/Fri Apr 11 02:03:31 2014/-kk/
 /vm_machdep.c/1.142/Sun Feb 19 21:06:20 2012/-kk/
 /wired_map.c/1.5/Sun Feb 20 07:45:48 2011/-kk/
 D

@@ -104,8 +104,8 @@ p160x_match(struct platform *p)
 	for (cp = &bid.pwa[sizeof(bid.pwa) - 1]; *cp == ' '; cp--)
 		*cp = '\0';
 
-	sprintf(p160x_model, "%s, Serial: %s, PWA: %s", bid.id,
-	    bid.serial, bid.pwa);
+	snprintf(p160x_model, sizeof(p160x_model),
+	    "%s, Serial: %s, PWA: %s", bid.id, bid.serial, bid.pwa);
 	p->model = p160x_model;
 
 	speed[3] = '\0';

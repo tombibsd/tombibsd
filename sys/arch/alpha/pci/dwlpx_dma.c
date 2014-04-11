@@ -209,10 +209,12 @@ dwlpx_dma_init(struct dwlpx_config *ccp)
 	 *	Window base: 1GB
 	 *	SGVA base: 0
 	 */
-	exname = malloc(16, M_DEVBUF, M_NOWAIT);
+#define EXNAMELEN 16
+	exname = malloc(EXNAMELEN, M_DEVBUF, M_NOWAIT);
 	if (exname == NULL)
 		panic("dwlpx_dma_init");
-	sprintf(exname, "%s_sgmap_a", device_xname(ccp->cc_sc->dwlpx_dev));
+	snprintf(exname, EXNAMELEN, "%s_sgmap_a",
+	    device_xname(ccp->cc_sc->dwlpx_dev));
 	alpha_sgmap_init(t, &ccp->cc_sgmap, exname, DWLPx_SG_MAPPED_BASE,
 	    0, DWLPx_SG_MAPPED_SIZE(lim), sizeof(uint32_t),
 	    (void *)page_table, 0);

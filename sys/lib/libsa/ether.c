@@ -108,8 +108,8 @@ readether(struct iodesc *d, void *pkt, size_t len, saseconds_t tleft,
 		return -1;
 
 	/* Validate Ethernet address. */
-	if (memcmp(d->myea, eh->ether_dhost, 6) != 0 &&
-	    memcmp(bcea, eh->ether_dhost, 6) != 0) {
+	if (memcmp(d->myea, eh->ether_dhost, ETHER_ADDR_LEN) != 0 &&
+	    memcmp(bcea, eh->ether_dhost, ETHER_ADDR_LEN) != 0) {
 #ifdef ETHER_DEBUG
 		if (debug)
 			printf("readether: not ours (ea=%s)\n",

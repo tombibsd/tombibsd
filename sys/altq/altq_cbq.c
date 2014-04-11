@@ -990,7 +990,8 @@ cbqclose(dev_t dev, int flag, int fmt,
 
 	while (cbq_list) {
 		ifp = cbq_list->ifnp.ifq_->altq_ifp;
-		sprintf(iface.cbq_ifacename, "%s", ifp->if_xname);
+		snprintf(iface.cbq_ifacename, sizeof(iface.cbq_ifacename),
+		    "%s", ifp->if_xname);
 		err = cbq_ifdetach(&iface);
 		if (err != 0 && error == 0)
 			error = err;

@@ -587,7 +587,7 @@ rtsol_timer_update(struct ifinfo *ifinfo)
 			ifinfo->timer = tm_max;	/* stop timer(valid?) */
 		break;
 	case IFS_DELAY:
-		interval = (time_t) (arc4random() % (MAX_RTR_SOLICITATION_DELAY * MILLION));
+		interval = arc4random() % (MAX_RTR_SOLICITATION_DELAY * MILLION);
 		ifinfo->timer.tv_sec = interval / MILLION;
 		ifinfo->timer.tv_usec = (suseconds_t)(interval % MILLION);
 		break;
@@ -661,9 +661,10 @@ warnmsg(int priority, const char *func, const char *msg, ...)
 		if (priority <= log_upto)
 			vwarnx(msg, ap);
 	} else {
-		char buf[BUFSIZ];
-		snprintf(buf, sizeof(buf), "<%s> %s", func, msg);
-		vsyslog(priority, buf, ap);
+		char *buf;
+		evasprintf(&buf, msg, ap);
+		syslog(priority, "<%s> %s", func, buf);
+		free(buf);
 	}
 	va_end(ap);
 }

@@ -331,7 +331,7 @@ static int
 nextkbd_read_data(struct nextkbd_internal *id)
 {
 	unsigned char device;
-	struct mon_regs stat;
+	struct mon_regs stat = { 0 };
 				
 	bus_space_read_region_4(id->iot, id->ioh, 0, &stat, 3);
 	if ((stat.mon_csr & CSR_INT) && (stat.mon_csr & CSR_DATA)) {

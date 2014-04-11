@@ -81,11 +81,11 @@ INCPATH += -I${.CURDIR}
 INCPATH += -I${.CURDIR}/../../.. -I${.OBJDIR}
 INCPATH += -I${.CURDIR}/../elf2bb
 
-AFLAGS += -m68030 -l
-CAFLAGS += -Wa,-l -Wa,-m68030 ${INCPATH}
+AFLAGS += -mcpu=68030 -l
+CAFLAGS += -Wa,-l -Wa,-mcpu=68030 ${INCPATH}
 
 COPTIM= -Os -fomit-frame-pointer -fcse-follow-jumps -fcse-skip-blocks
-COPTIM+= -Wa,-l -m68060 -Wa,-m68030 -fno-unwind-tables
+COPTIM+= -Wa,-l -m68060 -Wa,-mcpu=68030 -fno-unwind-tables
 CFLAGS= -ffreestanding ${COPTIM} ${INCPATH} ${DEFS}
 CFLAGS+= -Werror
 CFLAGS+= -Wall -Wmissing-prototypes -Wstrict-prototypes -Wpointer-arith

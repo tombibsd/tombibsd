@@ -144,7 +144,7 @@ main(int argc, char *argv[])
 	init_gr();
 	setup_screen(sp);
 
-	(void)addplane();
+	addplane();
 
 	(void)signal(SIGINT, quit);
 	(void)signal(SIGQUIT, quit);

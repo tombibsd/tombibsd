@@ -34,7 +34,18 @@ CHECKSUM_OBJS=	${BACKENDOBJ}/libbackend.a \
 # VER_CPPFLAGS from Makefile.inc
 CPPFLAGS.c-cppbuiltin.c=	${VER_CPPFLAGS}
 
-COPTS+=	-Wno-stack-protector
+COPTS.c-ada-spec.c+=			-Wno-stack-protector
+COPTS.c-aux-info.c+=			-Wno-stack-protector
+COPTS.c-common.c+=			-Wno-stack-protector
+COPTS.c-cppbuiltin.c+=			-Wno-stack-protector
+COPTS.c-format.c+=			-Wno-stack-protector
+COPTS.c-lex.c+=				-Wno-stack-protector
+COPTS.c-ppoutput.c+=			-Wno-stack-protector
+COPTS.c-pragma.c+=			-Wno-stack-protector
+COPTS.c-typeck.c+=			-Wno-stack-protector
+COPTS.objc-act.c+=			-Wno-stack-protector
+COPTS.objc-gnu-runtime-abi-01.c+=	-Wno-stack-protector
+COPTS.objc-next-runtime-abi-01.c+=	-Wno-stack-protector
 
 LDADD+=	${LIBMPC} ${LIBMPFR} ${LIBGMP} -lintl -lz -lm
 DPADD+=	${LIBMPC} ${LIBMPFR} ${LIBGMP} ${LIBINTL} ${LIBZ} ${LIBM}

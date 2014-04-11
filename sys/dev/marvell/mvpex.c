@@ -620,10 +620,8 @@ mvpex_intr_map(const struct pci_attach_args *pa, pci_intr_handle_t *ihp)
 
 /* ARGSUSED */
 const char *
-mvpex_intr_string(void *v, pci_intr_handle_t pin)
+mvpex_intr_string(void *v, pci_intr_handle_t pin, char *buf, size_t len)
 {
-	static char intrstr[32];
-
 	switch (pin) {
 	case PCI_INTERRUPT_PIN_A:
 	case PCI_INTERRUPT_PIN_B:
@@ -634,10 +632,9 @@ mvpex_intr_string(void *v, pci_intr_handle_t pin)
 	default:
 		return NULL;
 	}
-	snprintf(intrstr, sizeof(intrstr), "interrupt pin INT%c#",
-	    (char)('A' - 1 + pin));
+	snprintf(buf, len, "interrupt pin INT%c#", (char)('A' - 1 + pin));
 
-	return intrstr;
+	return buf;
 }
 
 /* ARGSUSED */
@@ -663,6 +660,7 @@ mvpex_intr_establish(void *v, pci_intr_handle_t pin, int ipl,
 	struct mvpex_intrhand *pexih;
 	uint32_t mask;
 	int ih = pin - 1, s;
+	char buf[PCI_INTRSTR_LEN];
 
 	intrtab = &sc->sc_intrtab[ih];
 
@@ -677,7 +675,7 @@ mvpex_intr_establish(void *v, pci_intr_handle_t pin, int ipl,
 	pexih->ih_type = ipl;
 	pexih->ih_intrtab = intrtab;
 	evcnt_attach_dynamic(&pexih->ih_evcnt, EVCNT_TYPE_INTR, NULL, "mvpex",
-	    mvpex_intr_string(v, pin));
+	    mvpex_intr_string(v, pin, buf, sizeof(buf)));
 
 	s = splhigh();
 

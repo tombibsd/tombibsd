@@ -208,11 +208,11 @@ prep_pci_intr_map(const struct pci_attach_args *pa, pci_intr_handle_t *ihp)
 		goto bad;
 	}
 
-	sprintf(key, "devfunc-%d", dev);
+	snprintf(key, sizeof(key), "devfunc-%d", dev);
 	devsub = prop_dictionary_get(dict, key);
 	if (devsub == NULL)
 		goto bad;
-	sprintf(key, "pin-%c", 'A' + (pin-1));
+	snprintf(key, sizeof(key), "pin-%c", 'A' + (pin-1));
 	pinsub = prop_dictionary_get(devsub, key);
 	if (pinsub == NULL)
 		goto bad;

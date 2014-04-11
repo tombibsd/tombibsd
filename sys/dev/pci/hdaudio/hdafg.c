@@ -2944,7 +2944,8 @@ hdafg_build_mixers(struct hdafg_softc *sc)
 			if (sc->sc_assocs[i].as_dir != HDAUDIO_PINDIR_OUT)
 				continue;
 			mx[index].mx_di.un.s.member[j].mask = 1 << i;
-			sprintf(mx[index].mx_di.un.s.member[j].label.name,
+			snprintf(mx[index].mx_di.un.s.member[j].label.name,
+			    sizeof(mx[index].mx_di.un.s.member[j].label.name),
 			    "%s%02X",
 			    hdafg_assoc_type_string(&sc->sc_assocs[i]), i);
 			++j;
@@ -2967,7 +2968,8 @@ hdafg_build_mixers(struct hdafg_softc *sc)
 			if (sc->sc_assocs[i].as_dir != HDAUDIO_PINDIR_IN)
 				continue;
 			mx[index].mx_di.un.s.member[j].mask = 1 << i;
-			sprintf(mx[index].mx_di.un.s.member[j].label.name,
+			snprintf(mx[index].mx_di.un.s.member[j].label.name,
+			    sizeof(mx[index].mx_di.un.s.member[j].label.name),
 			    "%s%02X",
 			    hdafg_assoc_type_string(&sc->sc_assocs[i]), i);
 			++j;

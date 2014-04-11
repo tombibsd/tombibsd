@@ -146,6 +146,11 @@ MKCRYPTO	If "no", no cryptography support will be built into the system,
 MKCRYPTO_RC5	If not "no", RC5 support will be built into libcrypto_rc5
 		Default: no
 
+MKCTF		If "no", do not build and install CTF tools, and also
+		don't generate and manipulate CTF data of ELF binaries
+		during build.
+		Default: no
+
 MKCVS		If "no", don't build or install cvs(1).
 		Default: yes
 

@@ -351,6 +351,7 @@ iwn_attach(device_t parent __unused, device_t self, void *aux)
 	pci_intr_handle_t ih;
 	pcireg_t memtype, reg;
 	int i, error;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	sc->sc_dev = self;
 	sc->sc_pct = pa->pa_pc;
@@ -402,7 +403,7 @@ iwn_attach(device_t parent __unused, device_t self, void *aux)
 		aprint_error(": can't map interrupt\n");
 		return;
 	}
-	intrstr = pci_intr_string(sc->sc_pct, ih);
+	intrstr = pci_intr_string(sc->sc_pct, ih, intrbuf, sizeof(intrbuf));
 	sc->sc_ih = pci_intr_establish(sc->sc_pct, ih, IPL_NET, iwn_intr, sc);
 	if (sc->sc_ih == NULL) {
 		aprint_error(": can't establish interrupt");

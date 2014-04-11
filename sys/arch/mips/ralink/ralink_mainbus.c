@@ -129,7 +129,7 @@ mainbus_find(device_t parent, cfdata_t cf, const int *ldesc, void *aux)
 	struct mainbus_attach_args * const ma = aux;
 	char devname[16];
 
-	sprintf(devname, "%s%d", cf->cf_name, cf->cf_unit);
+	snprintf(devname, sizeof(devname), "%s%d", cf->cf_name, cf->cf_unit);
 	if (strcmp(ma->ma_name, devname) != 0)
 		return 0;
 

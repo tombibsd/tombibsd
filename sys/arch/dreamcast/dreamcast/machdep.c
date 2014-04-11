@@ -83,6 +83,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/ksyms.h>
 #include <sys/device.h>
 #include <sys/module.h>
+#include <sys/cpu.h>
 
 #ifdef KGDB
 #include <sys/kgdb.h>
@@ -174,7 +175,7 @@ void
 cpu_startup(void)
 {
 
-	strcpy(cpu_model, "SEGA Dreamcast\n");
+	cpu_setmodel("SEGA Dreamcast");
 
 	sh_startup();
 }

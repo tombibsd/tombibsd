@@ -239,6 +239,7 @@ siop_pci_attach_common(struct siop_pci_common_softc *pci_sc,
 	int memh_valid, ioh_valid;
 	bus_addr_t ioaddr, memaddr;
 	bool use_pciclock;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	aprint_naive(": SCSI controller\n");
 
@@ -328,7 +329,7 @@ siop_pci_attach_common(struct siop_pci_common_softc *pci_sc,
 		aprint_error_dev(siop_sc->sc_dev, "couldn't map interrupt\n");
 		return 0;
 	}
-	intrstr = pci_intr_string(pa->pa_pc, intrhandle);
+	intrstr = pci_intr_string(pa->pa_pc, intrhandle, intrbuf, sizeof(intrbuf));
 	pci_sc->sc_ih = pci_intr_establish(pa->pa_pc, intrhandle, IPL_BIO,
 	    intr, siop_sc);
 	if (pci_sc->sc_ih != NULL) {

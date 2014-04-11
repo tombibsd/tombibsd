@@ -183,7 +183,8 @@ sprint_bootsel(const char *filename)
 	const char *file;
 
 	if (parsebootfile(filename, &devname, &unit, &partition, &file) == 0) {
-		sprintf(buf, "%s%d%c:%s", devname, unit, 'a' + partition, file);
+		snprintf(buf, sizeof(buf), "%s%d%c:%s", devname, unit,
+		    'a' + partition, file);
 		return (buf);
 	}
 	return ("(invalid)");

@@ -148,6 +148,7 @@ struct ptyfs_args {
 #define PTYFSTOV(ptyfs)	((ptyfs)->ptyfs_vnode)
 
 int ptyfs_freevp(struct vnode *);
+struct vnode *ptyfs_used_get(ptyfstype, int, struct mount *, int);
 int ptyfs_allocvp(struct mount *, struct vnode **, ptyfstype, int,
     struct lwp *);
 void ptyfs_hashinit(void);

@@ -1389,7 +1389,7 @@ _bus_dmamem_unmap(bus_dma_tag_t t, void *kva, size_t size)
 	printf("dmamem_unmap: t=%p kva=%p size=%zx\n", t, kva, size);
 #endif	/* DEBUG_DMA */
 	KASSERTMSG(((uintptr_t)kva & PAGE_MASK) == 0,
-	    "kva %p (%#"PRIxPTR")", kva, (uintptr_t)kva & PAGE_MASK);
+	    "kva %p (%#"PRIxPTR")", kva, ((uintptr_t)kva & PAGE_MASK));
 
 	size = round_page(size);
 	pmap_kremove((vaddr_t)kva, size);
