@@ -61,7 +61,7 @@ docommand(char *arg)
 	command_help(NULL);
 }
 
-void
+__dead void
 bootmenu(void)
 {
 	char input[80];

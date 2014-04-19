@@ -948,7 +948,7 @@ pmap_tlb_asid_release_all(struct pmap *pm)
 #if defined(MULTIPROCESSOR)
 	//KASSERT(!kcpuset_iszero(pm->pm_onproc)); // XXX
 #if PMAP_TLB_MAX > 1
-	struct cpu_info * const ci = curcpu();
+	struct cpu_info * const ci __diagused = curcpu();
 	for (u_int i = 0; !kcpuset_iszero(pm->pm_active); i++) {
 		KASSERT(i < pmap_ntlbs);
 		struct pmap_tlb_info * const ti = pmap_tlbs[i];
@@ -993,7 +993,7 @@ pmap_tlb_asid_release_all(struct pmap *pm)
 	struct pmap_asid_info * const pai = PMAP_PAI(pm, ti);
 	TLBINFO_LOCK(ti);
 	if (pai->pai_asid > KERNEL_PID) {
-		if (curcpu()->ci_pmap_cur == pm) {
+		if (curcpu()->ci_pmap_asid_cur == pai->pai_asid) {
 			tlb_invalidate_asids(pai->pai_asid, pai->pai_asid);
 		} else {
 			pmap_pai_reset(ti, pai, pm);

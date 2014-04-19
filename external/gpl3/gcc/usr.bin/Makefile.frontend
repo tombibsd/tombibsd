@@ -6,6 +6,7 @@ CPPFLAGS+=	-I${GCCARCH} -I${FRONTENDOBJ} \
 		${G_ALL_CFLAGS:M-D*} ${G_INCLUDES:M-I*:N-I.*} \
 		-DIN_GCC_FRONTEND
 
+NOCTF=	# defined
 .include <bsd.own.mk>
 
 DPADD+=			${FRONTENDOBJ}/libfrontend.a

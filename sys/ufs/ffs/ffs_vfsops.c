@@ -1125,14 +1125,14 @@ ffs_mountfs(struct vnode *devvp, struct mount *mp, struct lwp *l)
 	 */
 
 	if (!ronly) {
-		error = bread(devvp, FFS_FSBTODB(fs, fs->fs_size - 1), fs->fs_fsize,
-		    cred, 0, &bp);
-		if (bp->b_bcount != fs->fs_fsize)
-			error = EINVAL;
+		error = bread(devvp, FFS_FSBTODB(fs, fs->fs_size - 1),
+		    fs->fs_fsize, cred, 0, &bp);
 		if (error) {
 			bset = BC_INVAL;
 			goto out;
 		}
+		if (bp->b_bcount != fs->fs_fsize)
+			error = EINVAL;
 		brelse(bp, BC_INVAL);
 		bp = NULL;
 	}

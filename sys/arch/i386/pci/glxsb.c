@@ -253,7 +253,7 @@ glxsb_attach(device_t parent, device_t self, void *aux)
 	callout_init(&sc->sc_co, 0);
 	callout_setfunc(&sc->sc_co, glxsb_rnd, sc);
 	glxsb_rnd(sc);
-	printf(": RNG");
+	aprint_normal(": RNG");
 
 	/* We don't have an interrupt handler, so disable completion INTs */
 	intr = SB_AI_DISABLE_AES_A | SB_AI_DISABLE_AES_B |
@@ -264,9 +264,9 @@ glxsb_attach(device_t parent, device_t self, void *aux)
 	sc->sc_dmat = pa->pa_dmat;
 
 	if (glxsb_crypto_setup(sc))
-		printf(" AES");
+		aprint_normal(" AES");
 
-	printf("\n");
+	aprint_normal("\n");
 }
 
 void

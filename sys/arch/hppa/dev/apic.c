@@ -146,11 +146,9 @@ apic_intr_map(const struct pci_attach_args *pa, pci_intr_handle_t *ihp)
 }
 
 const char *
-apic_intr_string(void *v, pci_intr_handle_t ih)
+apic_intr_string(void *v, pci_intr_handle_t ih, char *buf, size_t len)
 {
-	static char buf[32];
-
-	snprintf(buf, sizeof(buf), "line %ld irq %ld",
+	snprintf(buf, len, "line %ld irq %ld",
 	    APIC_INT_LINE(ih), APIC_INT_IRQ(ih));
 
 	return buf;

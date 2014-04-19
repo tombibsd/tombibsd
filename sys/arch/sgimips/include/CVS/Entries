@@ -39,7 +39,7 @@
 /netbsd32_machdep.h/1.2/Mon Dec 14 00:46:13 2009/-kk/
 /param.h/1.16/Mon Jul  4 12:18:53 2011/-kk/
 /pcb.h/1.1/Wed Jun 14 15:39:59 2000/-kk/
-/pci_machdep.h/1.12/Fri Apr 11 02:03:38 2014/-kk/
+/pci_machdep.h/1.13/Sat Apr 19 05:36:49 2014/-kk/
 /pmap.h/1.1/Wed Jun 14 15:39:59 2000/-kk/
 /pmc.h/1.1/Wed Aug  7 05:15:58 2002/-kk/
 /proc.h/1.1/Wed Jun 14 15:39:59 2000/-kk/

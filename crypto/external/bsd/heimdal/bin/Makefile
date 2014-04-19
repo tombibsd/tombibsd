@@ -14,6 +14,7 @@ SUBDIR =		\
 	kinit		\
 	kpasswd		\
 	krb5-config	\
+	kvno		\
 	string2key	\
 	verify_krb5_conf
 

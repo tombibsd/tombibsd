@@ -207,6 +207,9 @@ ls_main(int argc, char *argv[])
 		case 'R':
 			f_recursive = 1;
 			break;
+		case 'f':
+			f_nosort = 1;
+			/* FALLTHROUGH */
 		case 'a':
 			fts_options |= FTS_SEEDOT;
 			/* FALLTHROUGH */
@@ -229,9 +232,6 @@ ls_main(int argc, char *argv[])
 		case 'd':
 			f_listdir = 1;
 			f_recursive = 0;
-			break;
-		case 'f':
-			f_nosort = 1;
 			break;
 		case 'i':
 			f_inode = 1;

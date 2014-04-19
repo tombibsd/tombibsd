@@ -485,10 +485,7 @@ do_sys_mount(struct lwp *l, struct vfsops *vfsops, const char *type,
 		if (data_len == 0) {
 			/* No length supplied, use default for filesystem */
 			data_len = vfsops->vfs_min_mount_data;
-			if (data_len > VFS_MAX_MOUNT_DATA) {
-				error = EINVAL;
-				goto done;
-			}
+
 			/*
 			 * Hopefully a longer buffer won't make copyin() fail.
 			 * For compatibility with 3.0 and earlier.
@@ -496,6 +493,10 @@ do_sys_mount(struct lwp *l, struct vfsops *vfsops, const char *type,
 			if (flags & MNT_UPDATE
 			    && data_len < sizeof (struct mnt_export_args30))
 				data_len = sizeof (struct mnt_export_args30);
+		}
+		if (data_len > VFS_MAX_MOUNT_DATA) {
+			error = EINVAL;
+			goto done;
 		}
 		data_buf = kmem_alloc(data_len, KM_SLEEP);
 

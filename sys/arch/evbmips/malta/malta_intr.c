@@ -387,7 +387,7 @@ malta_pciide_compat_intr_establish(void *v, device_t dev,
 	pci_chipset_tag_t pc = pa->pa_pc; 
 	void *cookie;
 	int bus, irq;
-	char buf[PCI_IRQSTR_LEN];
+	char buf[PCI_INTRSTR_LEN];
 
 	pci_decompose_tag(pc, pa->pa_tag, &bus, NULL, NULL);
 

@@ -380,20 +380,20 @@ rpi_bootparams(void)
 
 	bcm2835_mbox_write(iot, ioh, BCMMBOX_CHANPM, (
 #if (NSDHC > 0)
-	    (1 << VCPM_POWER_SDCARD) | 
+	    (1 << VCPM_POWER_SDCARD) |
 #endif
 #if (NPLCOM > 0)
 	    (1 << VCPM_POWER_UART0) |
 #endif
 #if (NBCMDWCTWO > 0)
-	    (1 << VCPM_POWER_USB) | 
+	    (1 << VCPM_POWER_USB) |
 #endif
 #if (NBSCIIC > 0)
-	    (1 << VCPM_POWER_I2C0) | (1 << VCPM_POWER_I2C1) | 
+	    (1 << VCPM_POWER_I2C0) | (1 << VCPM_POWER_I2C1) |
 	/*  (1 << VCPM_POWER_I2C2) | */
 #endif
 #if (NBCMSPI > 0)
-	    (1 << VCPM_POWER_SPI) | 
+	    (1 << VCPM_POWER_SPI) |
 #endif
 	    0) << 4);
 
@@ -537,11 +537,41 @@ initarm(void *arg)
 #ifdef VERBOSE_INIT_ARM
 	printf("initarm: Configuring system ...\n");
 #endif
-	arm32_bootmem_init(bootconfig.dram[0].address,
-	    bootconfig.dram[0].pages * PAGE_SIZE, (uintptr_t)KERNEL_BASE_phys);
+
+	psize_t ram_size = bootconfig.dram[0].pages * PAGE_SIZE;
+
+#ifdef __HAVE_MM_MD_DIRECT_MAPPED_PHYS
+	if (ram_size > KERNEL_VM_BASE - KERNEL_BASE) {
+		printf("%s: dropping RAM size from %luMB to %uMB\n",
+		    __func__, (unsigned long) (ram_size >> 20),
+		    (KERNEL_VM_BASE - KERNEL_BASE) >> 20);
+		ram_size = KERNEL_VM_BASE - KERNEL_BASE;
+	}
+#endif
+
+	/*
+	 * If MEMSIZE specified less than what we really have, limit ourselves
+	 * to that.
+	 */
+#ifdef MEMSIZE
+	if (ram_size == 0 || ram_size > (unsigned)MEMSIZE * 1024 * 1024)
+		ram_size = (unsigned)MEMSIZE * 1024 * 1024;
+#else
+	KASSERTMSG(ram_size > 0, "RAM size unknown and MEMSIZE undefined");
+#endif
+
+	arm32_bootmem_init(bootconfig.dram[0].address, ram_size,
+	    (uintptr_t)KERNEL_BASE_phys);
+
+#ifdef __HAVE_MM_MD_DIRECT_MAPPED_PHYS
+	const bool mapallmem_p = true;
+	KASSERT(ram_size <= KERNEL_VM_BASE - KERNEL_BASE);
+#else
+	const bool mapallmem_p = false;
+#endif
 
 	arm32_kernel_vm_init(KERNEL_VM_BASE, ARM_VECTORS_HIGH, 0, rpi_devmap,
-	    false);
+	    mapallmem_p);
 
 	cpu_reset_address = bcm2835_system_reset;
 
@@ -645,7 +675,7 @@ rpi_fb_get_edid_mode(uint32_t *pwidth, uint32_t *pheight)
 	uint8_t edid_data[1024];
 	uint32_t res;
 	int error;
-	
+
 	error = bcmmbox_request(BCMMBOX_CHANARM2VC, &vb_edid,
 	    sizeof(vb_edid), &res);
 	if (error) {
@@ -688,7 +718,7 @@ rpi_fb_init(prop_dictionary_t dict)
 	uint32_t width = 0, height = 0;
 	uint32_t res;
 	char *ptr;
-	int integer; 
+	int integer;
 	int error;
 
 	if (get_bootconf_option(boot_args, "fb",

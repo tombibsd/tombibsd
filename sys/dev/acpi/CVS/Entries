@@ -44,6 +44,7 @@
 /acpireg.h/1.12/Mon Aug  1 11:25:59 2011/-kk/
 /acpivar.h/1.73/Mon Aug  1 11:25:59 2011/-kk/
 /aibs_acpi.c/1.4/Tue Aug 14 14:36:43 2012/-kk/
+/apple_smc_acpi.c/1.3/Tue Apr  1 17:49:40 2014/-kk/
 /asus_acpi.c/1.25/Sat Mar  1 06:04:40 2014/-kk/
 /atppc_acpi.c/1.17/Fri Mar  5 14:00:17 2010/-kk/
 /attimer_acpi.c/1.14/Fri Mar  5 14:00:17 2010/-kk/
@@ -52,7 +53,7 @@
 /devlist2h.awk/1.7/Wed Apr 30 13:10:59 2008/-kk/
 /fdc_acpi.c/1.42/Thu Feb  2 19:43:02 2012/-kk/
 /fdc_acpireg.h/1.2/Fri Mar  5 08:30:48 2010/-kk/
-/files.acpi/1.93/Sun Jan 22 06:44:28 2012/-kk/
+/files.acpi/1.94/Sat Apr 19 05:36:56 2014/-kk/
 /fujbp_acpi.c/1.4/Sat Mar  1 06:04:40 2014/-kk/
 /fujhk_acpi.c/1.3/Sat Mar  1 06:04:40 2014/-kk/
 /hpacel_acpi.c/1.4/Tue Aug 14 14:36:43 2012/-kk/

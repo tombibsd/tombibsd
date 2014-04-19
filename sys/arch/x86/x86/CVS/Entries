@@ -37,7 +37,7 @@
 /pmap.c/1.181/Tue Nov 12 02:18:42 2013/-kk/
 /pmap_tlb.c/1.6/Sat Apr 21 22:22:48 2012/-kk/
 /powernow.c/1.8/Mon Nov 18 05:31:36 2013/-kk/
-/procfs_machdep.c/1.5/Fri Apr 11 02:03:40 2014/-kk/
+/procfs_machdep.c/1.6/Sat Apr 19 05:36:50 2014/-kk/
 /sys_machdep.c/1.27/Fri Apr 11 02:03:40 2014/-kk/
 /syscall.c/1.12/Thu Oct 24 10:28:57 2013/-kk/
 /tprof_amdpmi.c/1.4/Mon Nov 18 05:31:36 2013/-kk/
@@ -49,8 +49,8 @@
 /viac7temp.c/1.7/Mon Nov 18 05:31:36 2013/-kk/
 /vm_machdep.c/1.25/Tue Mar 25 02:35:30 2014/-kk/
 /vmt.c/1.8/Thu Oct 24 10:28:57 2013/-kk/
-/x86_autoconf.c/1.68/Thu Oct 24 10:28:57 2013/-kk/
-/x86_machdep.c/1.63/Sat Mar  1 06:04:35 2014/-kk/
+/x86_autoconf.c/1.70/Sat Apr 19 05:36:50 2014/-kk/
+/x86_machdep.c/1.64/Sat Apr 19 05:36:50 2014/-kk/
 /x86_stub.c/1.4/Wed Oct 19 05:01:43 2011/-kk/
 /x86_userconf.c/1.1/Tue May 31 23:28:53 2011/-kk/
 D

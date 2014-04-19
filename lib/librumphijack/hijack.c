@@ -38,9 +38,12 @@ __RCSID("$NetBSD$");
 #include <sys/mount.h>
 #include <sys/socket.h>
 #include <sys/stat.h>
-#include <sys/statvfs.h>
 #include <sys/time.h>
 #include <sys/uio.h>
+
+#ifdef PLATFORM_HAS_NBVFSSTAT
+#include <sys/statvfs.h>
+#endif
 
 #ifdef PLATFORM_HAS_KQUEUE
 #include <sys/event.h>

@@ -711,6 +711,7 @@ gsip*	at pci? dev ? function ?	# NS83820 Gigabit Ethernet
 ipw*	at pci? dev ? function ?	# Intel PRO/Wireless 2100
 iwi*	at pci? dev ? function ?	# Intel PRO/Wireless 2200BG
 iwn*	at pci? dev ? function ?	# Intel PRO/Wireless 4965AGN
+ixg*	at pci? dev ? function ?	# Intel 8259x 10 gigabit
 jme*	at pci? dev ? function ?	# JMicron JMC2[56]0 ethernet
 hme*	at pci? dev ? function ?	# Sun Microelectronics STP2002-STQ
 le*	at pci? dev ? function ?	# PCnet-PCI Ethernet
@@ -1196,7 +1197,7 @@ options 	MEMORY_DISK_HOOKS	# enable root ramdisk
 options 	MEMORY_DISK_DYNAMIC	# loaded via kernel module(7)
 
 pseudo-device	vnd			# disk-like interface to files
-#options 	VND_COMPRESSION		# compressed vnd(4)
+options 	VND_COMPRESSION		# compressed vnd(4)
 
 
 # network pseudo-devices

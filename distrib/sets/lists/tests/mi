@@ -2109,6 +2109,8 @@
 ./usr/tests/lib/libc/ssp/h_readlink		tests-lib-tests		atf,ssp
 ./usr/tests/lib/libc/ssp/h_snprintf		tests-lib-tests		atf,ssp
 ./usr/tests/lib/libc/ssp/h_sprintf		tests-lib-tests		atf,ssp
+./usr/tests/lib/libc/ssp/h_stpcpy		tests-lib-tests		atf,ssp
+./usr/tests/lib/libc/ssp/h_stpncpy		tests-lib-tests		atf,ssp
 ./usr/tests/lib/libc/ssp/h_strcat		tests-lib-tests		atf,ssp
 ./usr/tests/lib/libc/ssp/h_strcpy		tests-lib-tests		atf,ssp
 ./usr/tests/lib/libc/ssp/h_strncat		tests-lib-tests		atf,ssp

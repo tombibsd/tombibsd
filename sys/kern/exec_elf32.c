@@ -64,7 +64,7 @@ static struct execsw exec_elf32_execsw[] = {
 		.es_copyargs = elf32_copyargs,
 		.es_setregs = NULL,
 		.es_coredump = coredump_elf32,
-		.es_setup_stack =exec_setup_stack,
+		.es_setup_stack = exec_setup_stack,
 	},
 #if EXEC_ELF_NOTELESS
 	{

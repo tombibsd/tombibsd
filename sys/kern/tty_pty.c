@@ -1075,7 +1075,7 @@ ptyioctl(dev_t dev, u_long cmd, void *data, int flag, struct lwp *l)
 #ifndef NO_DEV_PTM
 	/* Allow getting the name from either the master or the slave */
 	if (cmd == TIOCPTSNAME) {
-		if ((error = ptyfs_getmp(l, &mp)) != 0)
+		if ((error = pty_getmp(l, &mp)) != 0)
 			return error;
 		return pty_fill_ptmget(l, dev, -1, -1, data, mp);
 	}
@@ -1086,7 +1086,7 @@ ptyioctl(dev_t dev, u_long cmd, void *data, int flag, struct lwp *l)
 		switch (cmd) {
 #ifndef NO_DEV_PTM
 		case TIOCGRANTPT:
-			if ((error = ptyfs_getmp(l, &mp)) != 0)
+			if ((error = pty_getmp(l, &mp)) != 0)
 				return error;
 			return pty_grant_slave(l, dev, mp);
 #endif

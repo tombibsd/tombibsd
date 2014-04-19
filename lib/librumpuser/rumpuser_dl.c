@@ -59,8 +59,8 @@ __RCSID("$NetBSD$");
 #include <rump/rumpuser.h>
 
 #if defined(__ELF__) && (defined(__NetBSD__) || defined(__FreeBSD__)	\
-    || (defined(__sun__) && defined(__svr4__))) || defined(__linux__)	\
-    || defined(__DragonFly__)
+    || (defined(__sun__) && defined(__svr4__))) || defined(__DragonFly__)	\
+    || (defined(__linux__) && !defined(__ANDROID__))
 #include <elf.h>
 #include <link.h>
 

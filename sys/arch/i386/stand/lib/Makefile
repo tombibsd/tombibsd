@@ -57,3 +57,6 @@ lib${LIB}.o:: ${OBJS}
 .if ${HAVE_GCC:U} == 45
 COPTS.biosdisk.c+=	-fno-strict-aliasing
 .endif
+.if ${ACTIVE_CC} == "gcc" && ${HAVE_GCC:U} == 48
+COPTS.biosdisk_ll.c+=	-O0
+.endif

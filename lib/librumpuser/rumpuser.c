@@ -536,32 +536,9 @@ rumpuser_clock_sleep(int enum_rumpclock, int64_t sec, long nsec)
 static int
 gethostncpu(void)
 {
-	int ncpu = 1;
+	int ncpu = 1; /* unknown, really */
 
-#if defined(__BSD__)
-	size_t sz = sizeof(ncpu);
-
-	sysctlbyname("hw.ncpu", &ncpu, &sz, NULL, 0);
-#elif defined(__linux__) || defined(__CYGWIN__)
-	FILE *fp;
-	char *line = NULL;
-	size_t n = 0;
-
-	/* If anyone knows a better way, I'm all ears */
-	if ((fp = fopen("/proc/cpuinfo", "r")) != NULL) {
-		ncpu = 0;
-		while (getline(&line, &n, fp) != -1) {
-			if (strncmp(line,
-			    "processor", sizeof("processor")-1) == 0)
-			    	ncpu++;
-		}
-		if (ncpu == 0)
-			ncpu = 1;
-		free(line);
-		fclose(fp);
-	}
-#elif __sun__
-	/* XXX: this is just a rough estimate ... */
+#ifdef _SC_NPROCESSORS_ONLN
 	ncpu = sysconf(_SC_NPROCESSORS_ONLN);
 #endif
 	

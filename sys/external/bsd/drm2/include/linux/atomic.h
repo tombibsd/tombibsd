@@ -38,8 +38,8 @@
 
 struct atomic {
 	union {
-		int au_int;
-		unsigned int au_uint;
+		volatile int au_int;
+		volatile unsigned int au_uint;
 	} a_u;
 };
 
@@ -50,7 +50,7 @@ typedef struct atomic atomic_t;
 static inline int
 atomic_read(atomic_t *atomic)
 {
-	return *(volatile int *)&atomic->a_u.au_int;
+	return atomic->a_u.au_int;
 }
 
 static inline void

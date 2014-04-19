@@ -1461,3 +1461,16 @@ dkwedge_find_partition(device_t parent, daddr_t startblk, uint64_t nblks)
 	return wedge;
 }
 
+const char *
+dkwedge_get_parent_name(dev_t dev)
+{
+	/* XXX: perhaps do this in lookup? */
+	int bmaj = bdevsw_lookup_major(&dk_bdevsw);
+	int cmaj = cdevsw_lookup_major(&dk_cdevsw);
+	if (major(dev) != bmaj && major(dev) != cmaj)
+		return NULL;
+	struct dkwedge_softc *sc = dkwedge_lookup(dev);
+	if (sc == NULL)
+		return NULL;
+	return sc->sc_parent->dk_name;
+}

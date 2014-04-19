@@ -8,9 +8,13 @@ D/libdm////
 D/libdrvctl////
 D/libfss////
 D/libmd////
+D/libmiiphy////
 D/libnetsmb////
 D/libopencrypto////
 D/libpad////
+D/libpci////
+D/libpci_if_iwn////
+D/libpci_if_wm////
 D/libpud////
 D/libputter////
 D/libraidframe////

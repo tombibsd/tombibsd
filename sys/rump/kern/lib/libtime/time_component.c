@@ -33,9 +33,10 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include "rump_private.h"
 
+void rumpkern_time_is_obsolete(void);
+
 RUMP_COMPONENT(RUMP_COMPONENT_KERN)
 {
 
-	time_init();
-	time_init2();
+	rumpkern_time_is_obsolete();
 }

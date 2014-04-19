@@ -3,6 +3,8 @@
 # Public Domain.
 #
 
+NOLINT=		# defined
+
 .PATH:	${.CURDIR}/../../../../net/npf
 
 LIB=	rumpnet_npf

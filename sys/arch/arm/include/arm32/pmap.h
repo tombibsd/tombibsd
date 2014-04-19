@@ -545,14 +545,20 @@ l1pte_set(pt_entry_t *pdep, pt_entry_t pde)
 static inline void
 l2pte_set(pt_entry_t *ptep, pt_entry_t pte, pt_entry_t opte)
 {
-	for (size_t k = 0; k < PAGE_SIZE / L2_S_SIZE; k++) {
-		KASSERTMSG(*ptep == opte, "%#x [*%p] != %#x", *ptep, ptep, opte);
-		*ptep++ = pte;
-		pte += L2_S_SIZE;
-		if (opte)
-			opte += L2_S_SIZE;
+	if (l1pte_lpage_p(pte)) {
+		for (size_t k = 0; k < L2_L_SIZE / L2_S_SIZE; k++) {
+			*ptep++ = pte;
+		}
+	} else {
+		for (size_t k = 0; k < PAGE_SIZE / L2_S_SIZE; k++) {
+			KASSERTMSG(*ptep == opte, "%#x [*%p] != %#x", *ptep, ptep, opte);
+			*ptep++ = pte;
+			pte += L2_S_SIZE;
+			if (opte)
+				opte += L2_S_SIZE;
+		}
 	}
-}       
+}
 
 static inline void
 l2pte_reset(pt_entry_t *ptep)
@@ -910,7 +916,7 @@ extern void (*pmap_zero_page_func)(paddr_t);
 #define	L2_L_CACHE_MASK		L2_L_CACHE_MASK_generic
 #define	L2_S_CACHE_MASK		L2_S_CACHE_MASK_generic
 
-#define	L1_SS_PROTO		L1_SS_PROTO_generic
+#define	L1_SS_PROTO		L1_SS_PROTO_armv6
 #define	L1_S_PROTO		L1_S_PROTO_generic
 #define	L1_C_PROTO		L1_C_PROTO_generic
 #define	L2_S_PROTO		L2_S_PROTO_generic

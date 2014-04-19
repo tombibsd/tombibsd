@@ -136,6 +136,7 @@ extern int footbridge_imask[NIPL];
 void
 cpu_configure(void)
 {
+	footbridge_intr_evcnt_attach();
 	/*
 	 * Since various PCI interrupts could be routed via the ICU
 	 * (for PCI devices in the bridge) we need to set up the ICU

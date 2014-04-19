@@ -37,8 +37,8 @@
 /* bus space defs */
 typedef unsigned long bus_addr_t;
 typedef unsigned long bus_size_t;
-typedef int bus_space_tag_t;
-typedef int bus_space_handle_t;
+typedef unsigned long bus_space_tag_t;
+typedef unsigned long bus_space_handle_t;
 
 /* bus dma defs */
 typedef void *bus_dma_tag_t;

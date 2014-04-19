@@ -242,6 +242,7 @@
 ./usr/share/man/cat1/ksh.0			man-util-catman		.cat
 ./usr/share/man/cat1/ktrace.0			man-debug-catman	.cat
 ./usr/share/man/cat1/ktruss.0			man-debug-catman	.cat
+./usr/share/man/cat1/kvno.0			man-krb5-catman		kerberos,.cat
 ./usr/share/man/cat1/kyua-about.0		man-kyua-catman		kyua,.cat
 ./usr/share/man/cat1/kyua-atf-tester.0		man-kyua-catman		kyua,.cat
 ./usr/share/man/cat1/kyua-config.0		man-kyua-catman		kyua,.cat
@@ -1390,6 +1391,7 @@
 ./usr/share/man/cat4/mlx.0			man-sys-catman		.cat
 ./usr/share/man/cat4/mly.0			man-sys-catman		.cat
 ./usr/share/man/cat4/module.0			man-obsolete		obsolete
+./usr/share/man/cat4/mcp23s17gpio.0		man-sys-catman		.cat
 ./usr/share/man/cat4/mpii.0			man-sys-catman		.cat
 ./usr/share/man/cat4/mpl115a.0			man-sys-catman		.cat
 ./usr/share/man/cat4/mpls.0			man-sys-catman		.cat
@@ -3342,6 +3344,7 @@
 ./usr/share/man/html1/ksh.html			man-util-htmlman	html
 ./usr/share/man/html1/ktrace.html		man-debug-htmlman	html
 ./usr/share/man/html1/ktruss.html		man-debug-htmlman	html
+./usr/share/man/html1/kvno.html			man-krb5-htmlman	kerberos,html
 ./usr/share/man/html1/kyua-about.html		man-kyua-htmlman	kyua,html
 ./usr/share/man/html1/kyua-atf-tester.html	man-kyua-htmlman	kyua,html
 ./usr/share/man/html1/kyua-config.html		man-kyua-htmlman	kyua,html
@@ -4385,6 +4388,7 @@
 ./usr/share/man/html4/mlx.html			man-sys-htmlman		html
 ./usr/share/man/html4/mly.html			man-sys-htmlman		html
 ./usr/share/man/html4/module.html		man-obsolete		obsolete
+./usr/share/man/html4/mcp23s17gpio.html		man-sys-htmlman		html
 ./usr/share/man/html4/mpii.html			man-sys-htmlman		html
 ./usr/share/man/html4/mpl115a.html		man-sys-htmlman		html
 ./usr/share/man/html4/mpls.html			man-sys-htmlman		html
@@ -6080,6 +6084,7 @@
 ./usr/share/man/man1/ksh.1			man-util-man		.man
 ./usr/share/man/man1/ktrace.1			man-debug-man		.man
 ./usr/share/man/man1/ktruss.1			man-debug-man		.man
+./usr/share/man/man1/kvno.1			man-krb5-man		kerberos,.man
 ./usr/share/man/man1/kyua-about.1		man-kyua-man		kyua,.man
 ./usr/share/man/man1/kyua-atf-tester.1		man-kyua-man		kyua,.man
 ./usr/share/man/man1/kyua-config.1		man-kyua-man		kyua,.man
@@ -7228,6 +7233,7 @@
 ./usr/share/man/man4/mlx.4			man-sys-man		.man
 ./usr/share/man/man4/mly.4			man-sys-man		.man
 ./usr/share/man/man4/module.4			man-obsolete		obsolete
+./usr/share/man/man4/mcp23s17gpio.4		man-sys-man		.man
 ./usr/share/man/man4/mpii.4			man-sys-man		.man
 ./usr/share/man/man4/mpl115a.4			man-sys-man		.man
 ./usr/share/man/man4/mpls.4			man-sys-man		.man

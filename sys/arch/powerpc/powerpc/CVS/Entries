@@ -35,7 +35,7 @@
 /pmap_subr.c/1.27/Wed Feb  1 09:54:03 2012/-kk/
 /powerpc_machdep.c/1.69/Fri Apr 11 02:03:38 2014/-kk/
 /process_machdep.c/1.37/Fri Mar 14 04:28:17 2014/-kk/
-/procfs_machdep.c/1.7/Wed Oct 17 19:56:48 2007/-kk/
+/procfs_machdep.c/1.9/Sat Apr 19 05:36:49 2014/-kk/
 /rtas.c/1.14/Sat Mar  1 06:04:33 2014/-kk/
 /setfault.S/1.9/Fri Jun 17 05:07:17 2011/-kk/
 /setjmp.S/1.4/Mon Jan 17 08:23:56 2011/-kk/

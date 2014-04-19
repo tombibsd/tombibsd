@@ -3883,6 +3883,8 @@
 ./usr/lib/librumpuser.a				comp-c-lib		rump
 ./usr/lib/librumpuser_p.a			comp-c-proflib		profile,rump
 ./usr/lib/librumpvfs.a				comp-c-lib		rump
+./usr/lib/librumpvfs_aio.a			comp-c-lib		rump
+./usr/lib/librumpvfs_aio_p.a			comp-c-proflib		profile,rump
 ./usr/lib/librumpvfs_fifofs.a			comp-c-lib		rump
 ./usr/lib/librumpvfs_fifofs_p.a			comp-c-proflib		profile,rump
 ./usr/lib/librumpvfs_layerfs.a			comp-c-lib		rump

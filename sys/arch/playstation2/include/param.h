@@ -71,10 +71,10 @@
 #ifndef	_PLAYSTATION2_PARAM_H_
 #define	_PLAYSTATION2_PARAM_H_
 
-#include <mips/mips_param.h>
-
 #define	_MACHINE	playstation2
 #define	MACHINE		"playstation2"
+
+#include <mips/mips_param.h>
 
 #define	DEV_BSIZE	512
 #define	DEV_BSHIFT	9		/* log2(DEV_BSIZE) */

@@ -114,7 +114,7 @@
 /recvmsg.c/1.1.1.1/Wed Apr 13 18:15:42 2011/-kk/
 /rename.c/1.1.1.1/Wed Apr 13 18:15:42 2011/-kk/
 /resolve-test.c/1.1.1.1/Wed Apr 13 18:15:42 2011/-kk/
-/resolve.c/1.1.1.1/Wed Apr 13 18:15:42 2011/-kk/
+/resolve.c/1.2/Sat Apr 19 05:33:39 2014/-kk/
 /resolve.h/1.1.1.2/Thu Apr 14 14:09:31 2011/-kk/
 /rkpty.c/1.1.1.1/Wed Apr 13 18:15:42 2011/-kk/
 /roken-common.h/1.1.1.2/Thu Apr 14 14:09:31 2011/-kk/

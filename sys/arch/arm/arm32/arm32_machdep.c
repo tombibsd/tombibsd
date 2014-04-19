@@ -257,7 +257,6 @@ cpu_startup(void)
 {
 	vaddr_t minaddr;
 	vaddr_t maxaddr;
-	u_int loop;
 	char pbuf[9];
 
 	/*
@@ -284,10 +283,13 @@ cpu_startup(void)
 	 */
 
 	/* msgbufphys was setup during the secondary boot strap */
-	for (loop = 0; loop < btoc(MSGBUFSIZE); ++loop)
-		pmap_kenter_pa((vaddr_t)msgbufaddr + loop * PAGE_SIZE,
-		    msgbufphys + loop * PAGE_SIZE,
-		    VM_PROT_READ|VM_PROT_WRITE, 0);
+	if (!pmap_extract(pmap_kernel(), (vaddr_t)msgbufaddr, NULL)) {
+		for (u_int loop = 0; loop < btoc(MSGBUFSIZE); ++loop) {
+			pmap_kenter_pa((vaddr_t)msgbufaddr + loop * PAGE_SIZE,
+			    msgbufphys + loop * PAGE_SIZE,
+			    VM_PROT_READ|VM_PROT_WRITE, 0);
+		}
+	}
 	pmap_update(pmap_kernel());
 	initmsgbuf(msgbufaddr, round_page(MSGBUFSIZE));
 

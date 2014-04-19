@@ -35,6 +35,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/types.h>
 #include <sys/device.h>
 #include <sys/module.h>
+#include <sys/reboot.h>
 #include <sys/systm.h>
 
 #include <drm/drmP.h>
@@ -48,10 +49,12 @@ MODULE(MODULE_CLASS_DRIVER, drmkms, "iic,drmkms_linux");
 #include "ioconf.c"
 #endif
 
-#ifndef _MODULE
 /*
  * XXX Mega-kludge.  See drm_init in drm_drv.c for details.
  */
+#ifdef _MODULE
+static const int linux_suppress_init = 1;
+#else
 extern int linux_suppress_init;
 #endif
 
@@ -65,10 +68,11 @@ drmkms_modcmd(modcmd_t cmd, void *arg __unused)
 
 	switch (cmd) {
 	case MODULE_CMD_INIT:
-#ifndef _MODULE
-		if (!linux_suppress_init)
-#endif
-		linux_mutex_init(&drm_global_mutex);
+		if (!linux_suppress_init) {
+			linux_mutex_init(&drm_global_mutex);
+			if (ISSET(boothowto, AB_DEBUG))
+				drm_debug = ~(unsigned int)0;
+		}
 #ifdef _MODULE
 		error = config_init_component(cfdriver_ioconf_drmkms,
 		    cfattach_ioconf_drmkms, cfdata_ioconf_drmkms);

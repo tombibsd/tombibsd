@@ -557,7 +557,7 @@ void
 sea_scsipi_request(struct scsipi_channel *chan, scsipi_adapter_req_t req, void *arg)
 {
 	struct scsipi_xfer *xs;
-	struct scsipi_periph *periph;
+	struct scsipi_periph *periph __diagused;
 	struct sea_softc *sea = device_private(chan->chan_adapter->adapt_dev);
 	struct sea_scb *scb;
 	int flags;

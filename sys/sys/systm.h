@@ -403,6 +403,7 @@ void	consinit(void);
 
 void	cpu_startup(void);
 void	cpu_configure(void);
+void	cpu_bootconf(void);
 void	cpu_rootconf(void);
 void	cpu_dumpconf(void);
 

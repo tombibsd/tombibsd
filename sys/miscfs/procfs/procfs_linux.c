@@ -510,14 +510,15 @@ int
 procfs_docpuinfo(struct lwp *curl, struct proc *p,
     struct pfsnode *pfs, struct uio *uio)
 {
-	int len = LBFSZ;
-	char *bf = malloc(len, M_TEMP, M_WAITOK);
+	size_t len = LBFSZ;
+	char *bf = NULL;
 	int error;
 
-	if (procfs_getcpuinfstr(bf, &len) < 0) {
-		error = ENOSPC;
-		goto done;
-	}
+	do {
+		if (bf)
+			free(bf, M_TEMP);
+		bf = malloc(len, M_TEMP, M_WAITOK);
+	} while (procfs_getcpuinfstr(bf, &len) < 0);
 
 	if (len == 0) {
 		error = 0;

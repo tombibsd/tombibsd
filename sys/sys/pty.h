@@ -41,7 +41,7 @@ int pty_grant_slave(struct lwp *, dev_t, struct mount *);
 dev_t pty_makedev(char, int);
 int pty_vn_open(struct vnode *, struct lwp *);
 struct ptm_pty *pty_sethandler(struct ptm_pty *);
-int ptyfs_getmp(struct lwp *, struct mount **);
+int pty_getmp(struct lwp *, struct mount **);
 
 /*
  * Ptm_pty is used for switch ptm{x} driver between BSDPTY, PTYFS.
@@ -53,7 +53,7 @@ struct ptm_pty {
 	    char);
 	int (*makename)(struct mount *, struct lwp *, char *, size_t, dev_t, char);
 	void (*getvattr)(struct mount *, struct lwp *, struct vattr *);
-	void *arg;
+	int (*getmp)(struct lwp *, struct mount **);
 };
 
 #ifdef COMPAT_BSDPTY

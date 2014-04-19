@@ -45,6 +45,9 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/once.h>
 #endif
 #include <sys/poll.h>
+#ifndef _MODULE
+#include <sys/reboot.h>		/* XXX drm_init kludge */
+#endif
 #include <sys/select.h>
 
 #include <uvm/uvm_extern.h>
@@ -454,6 +457,9 @@ drm_init(void)
 
 	linux_suppress_init = 1;
 	linux_mutex_init(&drm_global_mutex);
+
+	if (ISSET(boothowto, AB_DEBUG))
+		drm_debug = ~(unsigned int)0;
 
 	return 0;
 

@@ -242,7 +242,8 @@ static void	rmixl_pcix_conf_write(void *, pcitag_t, int, pcireg_t);
 static int	rmixl_pcix_intr_map(const struct pci_attach_args *,
 		    pci_intr_handle_t *);
 static const char *
-		rmixl_pcix_intr_string(void *, pci_intr_handle_t);
+		rmixl_pcix_intr_string(void *, pci_intr_handle_t,
+		    char *, size_t);
 static const struct evcnt *
 		rmixl_pcix_intr_evcnt(void *, pci_intr_handle_t);
 static pci_intr_handle_t
@@ -787,7 +788,7 @@ rmixl_pcix_intr_map(const struct pci_attach_args *pa, pci_intr_handle_t *pih)
 }
 
 const char *
-rmixl_pcix_intr_string(void *v, pci_intr_handle_t pih)
+rmixl_pcix_intr_string(void *v, pci_intr_handle_t pih, char *buf, size_t len)
 {
 	u_int bitno, irq;
 
@@ -797,7 +798,8 @@ rmixl_pcix_intr_string(void *v, pci_intr_handle_t pih)
 		panic("%s: cpu %#x not supported\n",
 			__func__, mips_options.mips_cpu_id);
 
-	return rmixl_intr_string(RMIXL_IRT_VECTOR(irq));
+	strlcpy(buf, rmixl_intr_string(RMIXL_IRT_VECTOR(irq)), len);
+	return buf;
 }
 
 const struct evcnt *

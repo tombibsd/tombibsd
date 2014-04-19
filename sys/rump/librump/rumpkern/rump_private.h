@@ -146,7 +146,7 @@ void	rump_hyperfree(void *, size_t);
 void	rump_xc_highpri(struct cpu_info *);
 
 void	rump_thread_init(void);
-void	rump_thread_allow(void);
+void	rump_thread_allow(struct lwp *);
 
 void	rump_consdev_init(void);
 

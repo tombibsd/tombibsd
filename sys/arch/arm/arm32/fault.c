@@ -864,7 +864,7 @@ prefetch_abort_handler(trapframe_t *tf)
 #endif
 
 	KASSERT(pcb->pcb_onfault == NULL);
-	error = uvm_fault(map, va, VM_PROT_READ);
+	error = uvm_fault(map, va, VM_PROT_READ|VM_PROT_EXECUTE);
 
 	if (__predict_true(error == 0)) {
 		UVMHIST_LOG (maphist, " <- uvm", 0, 0, 0, 0);

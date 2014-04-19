@@ -213,6 +213,7 @@
 ./usr/lib/librumpnet_sockin_g.a			comp-c-debuglib		debuglib,rump
 ./usr/lib/librumpnet_virtif_g.a			comp-c-debuglib		debuglib,rump
 ./usr/lib/librumpuser_g.a			comp-c-debuglib		debuglib,rump
+./usr/lib/librumpvfs_aio_g.a			comp-c-debuglib		debuglib,rump
 ./usr/lib/librumpvfs_fifofs_g.a			comp-c-debuglib		debuglib,rump
 ./usr/lib/librumpvfs_g.a			comp-c-debuglib		debuglib,rump
 ./usr/lib/librumpvfs_layerfs_g.a		comp-c-debuglib		debuglib,rump
@@ -559,6 +560,7 @@
 ./usr/libdata/debug/usr/bin/kpasswd.debug	comp-krb5-debug		kerberos,debug
 ./usr/libdata/debug/usr/bin/ktrace.debug	comp-debug-debug	debug
 ./usr/libdata/debug/usr/bin/ktruss.debug	comp-debug-debug	debug
+./usr/libdata/debug/usr/bin/kvno.debug		comp-krb5-debug		kerberos,debug
 ./usr/libdata/debug/usr/bin/kyua.debug		comp-kyua-debug		kyua,debug
 ./usr/libdata/debug/usr/bin/lam.debug		comp-util-debug		debug
 ./usr/libdata/debug/usr/bin/last.debug		comp-util-debug		debug
@@ -1880,6 +1882,8 @@
 ./usr/libdata/debug/usr/tests/lib/libc/ssp/h_readlink.debug		tests-lib-debug		debug,atf,ssp
 ./usr/libdata/debug/usr/tests/lib/libc/ssp/h_snprintf.debug		tests-lib-debug		debug,atf,ssp
 ./usr/libdata/debug/usr/tests/lib/libc/ssp/h_sprintf.debug		tests-lib-debug		debug,atf,ssp
+./usr/libdata/debug/usr/tests/lib/libc/ssp/h_stpcpy.debug		tests-lib-debug		debug,atf,ssp
+./usr/libdata/debug/usr/tests/lib/libc/ssp/h_stpncpy.debug		tests-lib-debug		debug,atf,ssp
 ./usr/libdata/debug/usr/tests/lib/libc/ssp/h_strcat.debug		tests-lib-debug		debug,atf,ssp
 ./usr/libdata/debug/usr/tests/lib/libc/ssp/h_strcpy.debug		tests-lib-debug		debug,atf,ssp
 ./usr/libdata/debug/usr/tests/lib/libc/ssp/h_strncat.debug		tests-lib-debug		debug,atf,ssp

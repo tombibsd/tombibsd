@@ -539,3 +539,19 @@ sched_nice(struct proc *p, int level)
 
 	/* nothing to do for now */
 }
+
+void
+sched_enqueue(struct lwp *l, bool swtch)
+{
+
+	if (swtch)
+		panic("sched_enqueue with switcheroo");
+	rump_thread_allow(l);
+}
+
+void
+sched_dequeue(struct lwp *l)
+{
+
+	panic("sched_dequeue not implemented");
+}

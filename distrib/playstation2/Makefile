@@ -7,7 +7,9 @@ MINIROOTDIR!=	cd ${.CURDIR}/../miniroot && ${PRINTOBJDIR}
 MINIROOT=	${MINIROOTDIR}/miniroot.fs
 
 MDSETTARGETS=		RAMDISK ${MINIROOT} netbsd
-MDSET_RELEASEDIR=	installation
+
+# ???
+# MDSET_RELEASEDIR=	installation
 
 .include "${DISTRIBDIR}/common/Makefile.mdset"
 

@@ -379,3 +379,9 @@ Changes from NetBSD 6.0 to NetBSD 7.0:
 		[pettai 20140324]
 	arm: add support for ARMv6+ MMU features ASIDS, XN, split TTBR.
 	     add support for SMP. [matt 20140330]
+	ptyfs: Allow multiple mounts and support proper device visibility
+	     in chroots (Ilya Zykov) [christos 20140404]
+	i386: Switched to GCC 4.8.  [christos 20140404]
+	mcp23s17gpio: Add Microchip MCP23S17 16-bit GPIO chip driver.
+		e.g. Raspberry Pi interface boards [kardel 20140406]
+	OpenSSL: Imported 1.0.1g [christos 20140407]

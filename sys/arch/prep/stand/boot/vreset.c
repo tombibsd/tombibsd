@@ -234,9 +234,8 @@ vga_reset(u_char *ISA_mem)
 static void
 write_attr(u_int8_t index, u_int8_t data, u_int8_t videoOn)
 {
-	u_int8_t v;
 
-	v = inb(0x3da);		/* reset attr addr toggle */
+	(void)inb(0x3da);	/* reset attr addr toggle */
 	if (videoOn)
 		outb(0x3c0, (index & 0x1F) | 0x20);
 	else

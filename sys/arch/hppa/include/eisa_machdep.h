@@ -40,7 +40,7 @@ struct hppa_eisa_chipset {
 	void	(*ec_attach_hook)(device_t, device_t,
 				       struct eisabus_attach_args *);
 	int	(*ec_intr_map)(void *, u_int, int *);
-	const char *(*ec_intr_string)(void *, int);
+	const char *(*ec_intr_string)(void *, int, char *, size_t);
 	void	*(*ec_intr_establish)(void *, int, int, int,
 					   int (*)(void *), void *);
 	void	(*ec_intr_disestablish)(void *, void *);

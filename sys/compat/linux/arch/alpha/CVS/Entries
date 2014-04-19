@@ -1,4 +1,4 @@
-/Makefile/1.2/Sat Oct  3 20:17:37 1998/-kk/
+/Makefile/1.3/Sat Apr 19 05:36:51 2014/-kk/
 /files.linux_alpha/1.9/Tue May 31 20:53:13 2011/-kk/
 /linux_errno.h/1.8/Wed Dec 25 07:37:36 2013/-kk/
 /linux_exec.h/1.12/Thu Feb 13 15:35:58 2014/-kk/
@@ -12,12 +12,12 @@
 /linux_siginfo.h/1.7/Fri Nov 18 04:07:43 2011/-kk/
 /linux_signal.h/1.9/Mon Apr 28 20:23:42 2008/-kk/
 /linux_socket.h/1.5/Thu Feb 13 15:22:27 2014/-kk/
-/linux_syscall.h/1.89/Fri Jan 31 08:48:44 2014/-kk/
-/linux_syscallargs.h/1.88/Fri Jan 31 08:48:44 2014/-kk/
-/linux_syscalls.c/1.90/Fri Jan 31 08:48:44 2014/-kk/
-/linux_sysent.c/1.89/Fri Jan 31 08:48:45 2014/-kk/
+/linux_syscall.h/1.90/Sat Apr 19 05:36:51 2014/-kk/
+/linux_syscallargs.h/1.89/Sat Apr 19 05:36:51 2014/-kk/
+/linux_syscalls.c/1.91/Sat Apr 19 05:36:51 2014/-kk/
+/linux_sysent.c/1.90/Sat Apr 19 05:36:51 2014/-kk/
 /linux_termios.h/1.4/Mon Apr 28 20:23:42 2008/-kk/
 /linux_types.h/1.7/Wed Jan  1 02:45:27 2014/-kk/
 /syscalls.conf/1.3/Fri Mar 30 18:31:28 2001/-kk/
-/syscalls.master/1.83/Fri Jan 31 08:48:45 2014/-kk/
+/syscalls.master/1.84/Sat Apr 19 05:36:51 2014/-kk/
 D

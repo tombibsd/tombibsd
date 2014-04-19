@@ -224,7 +224,7 @@ ski_fmtdev(void *vdev)
 			if (len > buflen)
 				len = buflen;
 		}
-		strlcat(cp, ":", buflen - len);
+		strlcat(buf, ":", buflen - len);
 		break;
 
 	case DEVT_NET:

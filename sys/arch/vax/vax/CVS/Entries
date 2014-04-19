@@ -53,7 +53,7 @@
 /nmi_mainbus.c/1.11/Tue Dec 14 23:44:49 2010/-kk/
 /opcodes.c/1.2/Sat Mar 14 15:36:15 2009/-kk/
 /pmap.c/1.182/Thu Feb  2 18:59:44 2012/-kk/
-/procfs_machdep.c/1.4/Sun Dec 11 12:19:36 2005/-kk/
+/procfs_machdep.c/1.5/Sat Apr 19 05:36:50 2014/-kk/
 /sbi.c/1.37/Sat Apr  2 10:21:58 2011/-kk/
 /scb.c/1.18/Tue Dec 14 23:44:49 2010/-kk/
 /sgmap.c/1.17/Fri Jan 27 18:53:06 2012/-kk/

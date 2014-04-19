@@ -108,7 +108,7 @@ command_boot(int argc, char *argv[])
 	return(CMD_ERROR);
 
     /* Call the exec handler from the loader matching the kernel */
-    command_seterr("%s", strerror(file_formats[fp->f_loader]->l_exec(fp));
+    command_seterr("%s", strerror(file_formats[fp->f_loader]->l_exec(fp)));
     return(CMD_ERROR);
 }
 

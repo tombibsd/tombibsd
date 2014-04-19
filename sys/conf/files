@@ -1095,6 +1095,27 @@ file 	dev/ic/hpet.c		hpet			needs-flag
 device	smsh: arp, ether, ifnet, mii
 file	dev/ic/lan9118.c		smsh
 
+# Apple System Management Controller
+#
+define	applesmcbus	{ }
+device	applesmc: applesmcbus
+file	dev/ic/apple_smc.c		applesmc
+
+# Apple SMC fan sensors and control
+device	applesmcfan: applesmcbus, sysmon_envsys
+attach	applesmcfan at applesmcbus with apple_smc_fan
+file	dev/ic/apple_smc_fan.c		applesmcfan
+
+# Apple SMC temperature sensors
+device	applesmctemp: applesmcbus, sysmon_envsys
+attach	applesmctemp at applesmcbus with apple_smc_temp
+file	dev/ic/apple_smc_temp.c		applesmctemp
+
+# Apple SMC accelerometer (not yet implemented!)
+#device	applesmcaccel: applesmcbus, sysmon_envsys
+#attach	applesmcaccel at applesmcbus with apple_smc_accel
+#file	dev/ic/apple_smc_accel.c	applesmcaccel
+
 # DRM - Direct Rendering Infrastructure: dev/drm
 define drm {}
 include "external/bsd/drm/conf/files.drm"

@@ -422,9 +422,9 @@ EVCNT_ATTACH_STATIC(pmap_ev_exec_cached);
 
 static struct evcnt pmap_ev_exec_synced =
    PMAP_EVCNT_INITIALIZER("exec pages synced");
-#ifndef ARM_MMU_EXTENDED
 static struct evcnt pmap_ev_exec_synced_map =
    PMAP_EVCNT_INITIALIZER("exec pages synced (MP)");
+#ifndef ARM_MMU_EXTENDED
 static struct evcnt pmap_ev_exec_synced_unmap =
    PMAP_EVCNT_INITIALIZER("exec pages synced (UM)");
 static struct evcnt pmap_ev_exec_synced_remap =
@@ -436,8 +436,8 @@ static struct evcnt pmap_ev_exec_synced_kremove =
 #endif
 
 EVCNT_ATTACH_STATIC(pmap_ev_exec_synced);
-#ifndef ARM_MMU_EXTENDED
 EVCNT_ATTACH_STATIC(pmap_ev_exec_synced_map);
+#ifndef ARM_MMU_EXTENDED
 EVCNT_ATTACH_STATIC(pmap_ev_exec_synced_unmap);
 EVCNT_ATTACH_STATIC(pmap_ev_exec_synced_remap);
 EVCNT_ATTACH_STATIC(pmap_ev_exec_synced_clearbit);
@@ -1572,6 +1572,7 @@ pmap_alloc_l2_bucket(pmap_t pm, vaddr_t va)
 static void
 pmap_free_l2_bucket(pmap_t pm, struct l2_bucket *l2b, u_int count)
 {
+	KASSERT(pm != pmap_kernel());
 	KDASSERT(count <= l2b->l2b_occupancy);
 
 	/*
@@ -2904,7 +2905,9 @@ pmap_page_remove(struct vm_page_md *md, paddr_t pa)
 		 */
 		l2pte_reset(ptep);
 		PTE_SYNC_CURRENT(pm, ptep);
-		pmap_free_l2_bucket(pm, l2b, PAGE_SIZE / L2_S_SIZE);
+		if (pm != pmap_kernel()) {
+			pmap_free_l2_bucket(pm, l2b, PAGE_SIZE / L2_S_SIZE);
+		}
 		pmap_release_pmap_lock(pm);
 
 		pool_put(&pmap_pv_pool, pv);
@@ -3201,18 +3204,22 @@ pmap_enter(pmap_t pm, vaddr_t va, paddr_t pa, vm_prot_t prot, u_int flags)
 					    oflags);
 				}
 #endif
-			} else
-			if ((pv = pool_get(&pmap_pv_pool, PR_NOWAIT)) == NULL){
+			} else {
 				pmap_release_page_lock(md);
-				if ((flags & PMAP_CANFAIL) == 0)
-					panic("pmap_enter: no pv entries");
+				pv = pool_get(&pmap_pv_pool, PR_NOWAIT);
+				if (pv == NULL) {
+					pmap_release_pmap_lock(pm);
+					if ((flags & PMAP_CANFAIL) == 0)
+						panic("pmap_enter: "
+						    "no pv entries");
 
-				if (pm != pmap_kernel())
-					pmap_free_l2_bucket(pm, l2b, 0);
-				pmap_release_pmap_lock(pm);
-				UVMHIST_LOG(maphist, "  <-- done (ENOMEM)",
-				    0, 0, 0, 0);
-				return (ENOMEM);
+					if (pm != pmap_kernel())
+						pmap_free_l2_bucket(pm, l2b, 0);
+					UVMHIST_LOG(maphist, "  <-- done (ENOMEM)",
+					    0, 0, 0, 0);
+					return (ENOMEM);
+				}
+				pmap_acquire_page_lock(md);
 			}
 
 			pmap_enter_pv(md, pa, pv, pm, va, nflags);
@@ -3283,6 +3290,18 @@ pmap_enter(pmap_t pm, vaddr_t va, paddr_t pa, vm_prot_t prot, u_int flags)
 
 	UVMHIST_LOG(maphist, " opte %#x npte %#x", opte, npte, 0, 0);
 
+#if defined(ARM_MMU_EXTENDED)
+	/*
+	 * If exec protection was requested but the page hasn't been synced,
+	 * sync it now and allow execution from it.
+	 */
+	if ((nflags & PVF_EXEC) && (npte & L2_XS_XN)) {
+		struct vm_page_md *md = VM_PAGE_TO_MD(pg);
+		npte &= ~L2_XS_XN;
+		pmap_syncicache_page(md, pa);
+		PMAPCOUNT(exec_synced_map);
+	}
+#endif
 	/*
 	 * If this is just a wiring change, the two PTEs will be
 	 * identical, so there's no need to update the page table.
@@ -3322,7 +3341,6 @@ pmap_enter(pmap_t pm, vaddr_t va, paddr_t pa, vm_prot_t prot, u_int flags)
 #ifndef ARM_MMU_EXTENDED
 		UVMHIST_LOG(maphist, "  is_cached %d cs 0x%08x\n",
 		    is_cached, pm->pm_cstate.cs_all, 0, 0);
-#endif
 
 		if (pg != NULL) {
 			struct vm_page_md *md = VM_PAGE_TO_MD(pg);
@@ -3331,6 +3349,7 @@ pmap_enter(pmap_t pm, vaddr_t va, paddr_t pa, vm_prot_t prot, u_int flags)
 			pmap_vac_me_harder(md, pa, pm, va);
 			pmap_release_page_lock(md);
 		}
+#endif
 	}
 #if defined(PMAP_CACHE_VIPT) && defined(DIAGNOSTIC)
 	if (pg) {
@@ -3549,7 +3568,8 @@ pmap_remove(pmap_t pm, vaddr_t sva, vaddr_t eva)
 			}
 		}
 
-		pmap_free_l2_bucket(pm, l2b, mappings);
+		if (pm != pmap_kernel())
+			pmap_free_l2_bucket(pm, l2b, mappings);
 		pm->pm_stats.resident_count -= mappings;
 	}
 
@@ -3613,7 +3633,7 @@ pmap_kenter_pa(vaddr_t va, paddr_t pa, vm_prot_t prot, u_int flags)
 	struct pv_entry *pv = NULL;
 #endif
 #endif
-	struct vm_page_md *md = VM_PAGE_TO_MD(pg);
+	struct vm_page_md *md = pg != NULL ? VM_PAGE_TO_MD(pg) : NULL;
 
 	UVMHIST_FUNC(__func__);
 
@@ -3647,17 +3667,17 @@ pmap_kenter_pa(vaddr_t va, paddr_t pa, vm_prot_t prot, u_int flags)
 		PMAPCOUNT(kenter_remappings);
 #ifdef PMAP_CACHE_VIPT
 		opg = PHYS_TO_VM_PAGE(l2pte_pa(opte));
-#ifdef DIAGNOSTIC
-		struct vm_page_md *omd = VM_PAGE_TO_MD(opg);
+#if !defined(ARM_MMU_EXTENDED) || defined(DIAGNOSTIC)
+		struct vm_page_md *omd __diagused = VM_PAGE_TO_MD(opg);
 #endif
 		if (opg && arm_cache_prefer_mask != 0) {
 			KASSERT(opg != pg);
 			KASSERT((omd->pvh_attrs & PVF_KMPAGE) == 0);
 			KASSERT((flags & PMAP_KMPAGE) == 0);
 #ifndef ARM_MMU_EXTENDED
-			pmap_acquire_page_lock(md);
+			pmap_acquire_page_lock(omd);
 			pv = pmap_kremove_pg(opg, va);
-			pmap_release_page_lock(md);
+			pmap_release_page_lock(omd);
 #endif
 		}
 #endif
@@ -3705,16 +3725,17 @@ pmap_kenter_pa(vaddr_t va, paddr_t pa, vm_prot_t prot, u_int flags)
 				PMAPCOUNT(vac_flush_lots2);
 				pmap_flush_page(md, pa, PMAP_FLUSH_SECONDARY);
 			}
-			pmap_acquire_page_lock(md);
+			/*
+			 * Since this is a KMPAGE, there can be no contention
+			 * for this page so don't lock it.
+			 */
 			md->pvh_attrs &= PAGE_SIZE - 1;
 			md->pvh_attrs |= PVF_KMPAGE | PVF_COLORED | PVF_DIRTY
 			    | (va & arm_cache_prefer_mask);
 #else /* !PMAP_CACHE_VIPT || ARM_MMU_EXTENDED */
-			pmap_acquire_page_lock(md);
 			md->pvh_attrs |= PVF_KMPAGE;
 #endif
-			pmap_kmpages++;
-			pmap_release_page_lock(md);
+			atomic_inc_32(&pmap_kmpages);
 #if defined(PMAP_CACHE_VIPT) && !defined(ARM_MMU_EXTENDED)
 		} else if (arm_cache_prefer_mask != 0) {
 			if (pv == NULL) {
@@ -3739,11 +3760,12 @@ pmap_kenter_pa(vaddr_t va, paddr_t pa, vm_prot_t prot, u_int flags)
 			pool_put(&pmap_pv_pool, pv);
 #endif
 	}
-
+	KASSERT(md == NULL || !pmap_page_locked_p(md));
 	if (pmap_initialized) {
 		UVMHIST_LOG(maphist, "  <-- done (ptep %p: %#x -> %#x)",
 		    ptep, opte, npte, 0);
 	}
+
 }
 
 void
@@ -3779,7 +3801,6 @@ pmap_kremove(vaddr_t va, vsize_t len)
 			if (opg != NULL) {
 				struct vm_page_md *omd = VM_PAGE_TO_MD(opg);
 
-				pmap_acquire_page_lock(omd);
 				if (omd->pvh_attrs & PVF_KMPAGE) {
 					KASSERT(omd->urw_mappings == 0);
 					KASSERT(omd->uro_mappings == 0);
@@ -3791,14 +3812,15 @@ pmap_kremove(vaddr_t va, vsize_t len)
 						omd->pvh_attrs &= ~PVF_WRITE;
 					}
 #endif
-					pmap_kmpages--;
+					atomic_dec_32(&pmap_kmpages);
 #if defined(PMAP_CACHE_VIPT) && !defined(ARM_MMU_EXTENDED)
 				} else if (arm_cache_prefer_mask != 0) {
+					pmap_acquire_page_lock(omd);
 					pool_put(&pmap_pv_pool,
 					    pmap_kremove_pg(opg, va));
+					pmap_release_page_lock(omd);
 #endif
 				}
-				pmap_release_page_lock(omd);
 			}
 			if (l2pte_valid_p(opte)) {
 #ifdef PMAP_CACHE_VIVT
@@ -3866,8 +3888,7 @@ pmap_extract(pmap_t pm, vaddr_t va, paddr_t *pap)
 			return false;
 		}
 
-		ptep = &ptep[l2pte_index(va)];
-		pte = *ptep;
+		pte = ptep[l2pte_index(va)];
 		pmap_release_pmap_lock(pm);
 
 		if (pte == 0)
@@ -3879,7 +3900,7 @@ pmap_extract(pmap_t pm, vaddr_t va, paddr_t *pap)
 			break;
 
 		default:
-			pa = (pte & L2_S_FRAME) | (va & L2_S_OFFSET);
+			pa = (pte & ~PAGE_MASK) | (va & PAGE_MASK);
 			break;
 		}
 	}
@@ -4383,6 +4404,7 @@ pmap_fault_fixup(pmap_t pm, vaddr_t va, vm_prot_t ftype, int user)
 			 * Is this a mapping of an executable page?
 			 */
 			if ((pv->pv_flags & PVF_EXEC) == 0) {
+				pmap_release_page_lock(md);
 				UVMHIST_LOG(maphist, " <-- done (ref emul: no exec)",
 				    0, 0, 0, 0);
 				goto out;
@@ -5542,18 +5564,14 @@ pmap_grow_map(vaddr_t va, paddr_t *pap)
 		if (pg == NULL)
 			return (1);
 		pa = VM_PAGE_TO_PHYS(pg);
-#ifdef PMAP_CACHE_VIPT
-#ifdef DIAGNOSTIC
-		struct vm_page_md *md = VM_PAGE_TO_MD(pg);
-#endif
 		/*
 		 * This new page must not have any mappings.  Enter it via
 		 * pmap_kenter_pa and let that routine do the hard work.
 		 */
+		struct vm_page_md *md __diagused = VM_PAGE_TO_MD(pg);
 		KASSERT(SLIST_EMPTY(&md->pvh_list));
 		pmap_kenter_pa(va, pa,
 		    VM_PROT_READ|VM_PROT_WRITE, PMAP_KMPAGE|PMAP_PTE);
-#endif
 	}
 
 	if (pap)
@@ -5931,7 +5949,15 @@ pmap_bootstrap(vaddr_t vstart, vaddr_t vend)
 #ifdef VERBOSE_INIT_ARM
 	printf("locks ");
 #endif
-	mutex_init(&pmap_lock, MUTEX_DEFAULT, IPL_NONE);
+#if defined(PMAP_CACHE_VIPT) && !defined(ARM_MMU_EXTENDED)
+	if (arm_cache_prefer_mask != 0) {
+		mutex_init(&pmap_lock, MUTEX_DEFAULT, IPL_VM);
+	} else {
+#endif
+		mutex_init(&pmap_lock, MUTEX_DEFAULT, IPL_NONE);
+#if defined(PMAP_CACHE_VIPT) && !defined(ARM_MMU_EXTENDED)
+	}
+#endif
 	mutex_init(&pm->pm_obj_lock, MUTEX_DEFAULT, IPL_NONE);
 	uvm_obj_init(&pm->pm_obj, NULL, false, 1);
 	uvm_obj_setlock(&pm->pm_obj, &pm->pm_obj_lock);
@@ -5943,7 +5969,8 @@ pmap_bootstrap(vaddr_t vstart, vaddr_t vend)
 	 * Scan the L1 translation table created by initarm() and create
 	 * the required metadata for all valid mappings found in it.
 	 */
-	for (size_t l1slot = 0; l1slot < L1_TABLE_SIZE / sizeof(pd_entry_t);
+	for (size_t l1slot = 0;
+	     l1slot < L1_TABLE_SIZE / sizeof(pd_entry_t);
 	     l1slot++) {
 		pd_entry_t pde = l1pt[l1slot];
 
@@ -6067,8 +6094,11 @@ pmap_bootstrap(vaddr_t vstart, vaddr_t vend)
 	pmap_alloc_specials(&virtual_avail, nptes, &cdstp, &cdst_pte);
 	pmap_set_pt_cache_mode(l1pt, (vaddr_t)cdst_pte, nptes);
 	pmap_alloc_specials(&virtual_avail, nptes, &memhook, NULL);
-	pmap_alloc_specials(&virtual_avail, round_page(MSGBUFSIZE) / PAGE_SIZE,
-	    (void *)&msgbufaddr, NULL);
+	if (msgbufaddr == NULL) {
+		pmap_alloc_specials(&virtual_avail,
+		    round_page(MSGBUFSIZE) / PAGE_SIZE,
+		    (void *)&msgbufaddr, NULL);
+	}
 
 	/*
 	 * Allocate a range of kernel virtual address space to be used
@@ -6476,7 +6506,7 @@ pmap_map_entry(vaddr_t l1pt, vaddr_t va, paddr_t pa, int prot, int cache)
 	if ((pdep[l1slot] & L1_TYPE_MASK) != L1_TYPE_C)
 		panic("pmap_map_entry: no L2 table for VA 0x%08lx", va);
 
-	ptep = (pt_entry_t *) kernel_pt_lookup(l1pte_pa(pdep[l1pte_index(va)]));
+	ptep = (pt_entry_t *) kernel_pt_lookup(l1pte_pa(pdep[l1slot]));
 	if (ptep == NULL)
 		panic("pmap_map_entry: can't find L2 table for VA 0x%08lx", va);
 

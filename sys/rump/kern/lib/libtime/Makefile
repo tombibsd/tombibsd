@@ -5,7 +5,6 @@
 
 LIB=	rumpkern_time
 
-SRCS+=	kern_time.c
 SRCS+=	time_component.c
 
 CPPFLAGS+= -I${RUMPTOP}/librump/rumpkern

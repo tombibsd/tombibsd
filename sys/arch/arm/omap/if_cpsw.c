@@ -527,7 +527,7 @@ cpsw_start(struct ifnet *ifp)
 	uint32_t * const dw = bd.word;
 	struct mbuf *m;
 	bus_dmamap_t dm;
-	u_int eopi = ~0;
+	u_int eopi __diagused = ~0;
 	u_int seg;
 	u_int txfree;
 	int txstart = -1;

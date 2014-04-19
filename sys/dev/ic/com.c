@@ -296,11 +296,9 @@ comspeed(long speed, long frequency, int type)
 	    divisor = 13;
 	}
 
-#if 0
 	if (speed == 0)
 		return (0);
-#endif
-	if (speed <= 0)
+	if (speed < 0)
 		return (-1);
 	x = divrnd(frequency / divisor, speed);
 	if (x <= 0)
@@ -1426,12 +1424,10 @@ comparam(struct tty *tp, struct termios *t)
 	}
 	sc->sc_msr_mask = sc->sc_msr_cts | sc->sc_msr_dcd;
 
-#if 0
-	if (ospeed == 0)
+	if (t->c_ospeed == 0 && tp->t_ospeed != 0)
 		CLR(sc->sc_mcr, sc->sc_mcr_dtr);
-	else
+	else if (t->c_ospeed != 0 && tp->t_ospeed == 0)
 		SET(sc->sc_mcr, sc->sc_mcr_dtr);
-#endif
 
 	sc->sc_dlbl = ospeed;
 	sc->sc_dlbh = ospeed >> 8;

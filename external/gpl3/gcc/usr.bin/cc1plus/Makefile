@@ -9,8 +9,6 @@ NOMAN=	1
 CPPFLAGS+=	-I${DIST}/gcc/cp
 CPPFLAGS.prefix.c+=     -DPREFIX=\"/usr\"
 
-.include <bsd.own.mk>
-
 .include "../Makefile.backend"
 .include "../Makefile.backtrace"
 .include "../Makefile.common"

@@ -141,7 +141,6 @@ mach_init(int32_t memsize32, u_int bim, int32_t bip32)
 	extern char edata[], end[];
 	const char *bi_msg;
 #if NKSYMS || defined(DDB) || defined(MODULAR)
-	int nsym = 0;
 	char *ssym = 0;
 	struct btinfo_symtab *bi_syms;
 #endif
@@ -206,7 +205,6 @@ mach_init(int32_t memsize32, u_int bim, int32_t bip32)
 
 	/* Load symbol table if present */
 	if (bi_syms != NULL) {
-		nsym = bi_syms->nsym;
 		ssym = (void *)(intptr_t)bi_syms->ssym;
 		esym = (void *)(intptr_t)bi_syms->esym;
 		kernend = (void *)mips_round_page(esym);

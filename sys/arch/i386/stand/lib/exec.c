@@ -418,7 +418,7 @@ out:
 static void
 extract_device(const char *path, char *buf, size_t buflen)
 {
-	int i;
+	size_t i;
 
 	if (strchr(path, ':') != NULL) {
 		for (i = 0; i < buflen - 2 && path[i] != ':'; i++)
@@ -440,7 +440,7 @@ module_path(boot_module_t *bm, const char *kdev)
 	for (name2 = name; *name2; ++name2) {
 		if (*name2 == ' ' || *name2 == '\t') {
 			strlcpy(name_buf, name, sizeof(name_buf));
-			if (name2 - name < sizeof(name_buf))
+			if ((uintptr_t)name2 - (uintptr_t)name < sizeof(name_buf))
 				name_buf[name2 - name] = '\0';
 			name = name_buf;
 			break;
@@ -504,7 +504,7 @@ module_init(const char *kernel_path)
 	char kdev[64];
 	char *buf;
 	boot_module_t *bm;
-	size_t len;
+	ssize_t len;
 	off_t off;
 	int err, fd, nfail = 0;
 

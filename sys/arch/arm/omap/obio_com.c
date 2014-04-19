@@ -171,7 +171,7 @@ uart_enable(struct obio_attach_args *obio)
 #endif
 	uint32_t fclken1;
 	uint32_t iclken1;
-	int err;
+	int err __diagused;
 	int n=-1;
 
 	KASSERT(obio != NULL);

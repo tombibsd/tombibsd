@@ -911,6 +911,21 @@ uvm_vm_page_to_phys(const struct vm_page *pg)
 	return 0;
 }
 
+vaddr_t
+uvm_uarea_alloc(void)
+{
+
+	/* non-zero */
+	return (vaddr_t)11;
+}
+
+void
+uvm_uarea_free(vaddr_t uarea)
+{
+
+	/* nata, so creamy */
+}
+
 /*
  * Routines related to the Page Baroness.
  */

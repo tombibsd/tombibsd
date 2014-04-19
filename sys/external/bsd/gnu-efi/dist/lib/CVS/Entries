@@ -1,0 +1,24 @@
+/Makefile/1.1.1.1/Tue Apr  1 16:16:06 2014/-kk/
+/boxdraw.c/1.1.1.1/Tue Apr  1 16:16:06 2014/-kk/
+/console.c/1.1.1.1/Tue Apr  1 16:16:06 2014/-kk/
+/crc.c/1.1.1.1/Tue Apr  1 16:16:06 2014/-kk/
+/data.c/1.1.1.1/Tue Apr  1 16:16:06 2014/-kk/
+/debug.c/1.1.1.1/Tue Apr  1 16:16:06 2014/-kk/
+/dpath.c/1.1.1.1/Tue Apr  1 16:16:06 2014/-kk/
+/error.c/1.1.1.1/Tue Apr  1 16:16:06 2014/-kk/
+/event.c/1.1.1.1/Tue Apr  1 16:16:06 2014/-kk/
+/guid.c/1.1.1.1/Tue Apr  1 16:16:06 2014/-kk/
+/hand.c/1.1.1.1/Tue Apr  1 16:16:07 2014/-kk/
+/hw.c/1.1.1.1/Tue Apr  1 16:16:06 2014/-kk/
+/init.c/1.1.1.1/Tue Apr  1 16:16:06 2014/-kk/
+/lib.h/1.1.1.1/Tue Apr  1 16:16:06 2014/-kk/
+/lock.c/1.1.1.1/Tue Apr  1 16:16:06 2014/-kk/
+/misc.c/1.1.1.1/Tue Apr  1 16:16:06 2014/-kk/
+/print.c/1.1.1.1/Tue Apr  1 16:16:06 2014/-kk/
+/smbios.c/1.1.1.1/Tue Apr  1 16:16:06 2014/-kk/
+/sread.c/1.1.1.1/Tue Apr  1 16:16:07 2014/-kk/
+/str.c/1.1.1.1/Tue Apr  1 16:16:06 2014/-kk/
+D/ia32////
+D/ia64////
+D/runtime////
+D/x86_64////

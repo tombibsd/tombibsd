@@ -47,6 +47,9 @@ USE_SHLIBDIR=	yes
 # require this for the value of I387_LIBM from mk.conf, if set.
 .include <bsd.own.mk>
 
+# compiler_rt uses typeof() and __extension__
+LINTFLAGS += -g
+
 .if (${MACHINE_ARCH} == "alpha")
 .PATH: ${.CURDIR}/arch/alpha
 ARCH_SRCS = s_copysign.S s_copysignf.S lrint.S

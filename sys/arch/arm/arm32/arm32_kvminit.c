@@ -144,6 +144,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 struct bootmem_info bootmem_info;
 
+extern void *msgbufaddr;
 paddr_t msgbufphys;
 paddr_t physical_start;
 paddr_t physical_end;
@@ -549,6 +550,7 @@ arm32_kernel_vm_init(vaddr_t kernel_vm_base, vaddr_t vectors, vaddr_t iovbase,
 	    VM_PROT_READ|VM_PROT_WRITE, PTE_CACHE, false);
 	add_pages(bmi, &msgbuf);
 	msgbufphys = msgbuf.pv_pa;
+	msgbufaddr = (void *)msgbuf.pv_va;
 
 	if (map_vectors_p) {
 		/*
@@ -681,14 +683,13 @@ arm32_kernel_vm_init(vaddr_t kernel_vm_base, vaddr_t vectors, vaddr_t iovbase,
 
 #ifdef VERBOSE_INIT_ARM
 	printf("Listing Chunks\n");
-	{
-		pv_addr_t *pv;
-		SLIST_FOREACH(pv, &bmi->bmi_chunks, pv_list) {
-			printf("%s: pv %p: chunk VA %#lx..%#lx "
-			    "(PA %#lx, prot %d, cache %d)\n",
-			    __func__, pv, pv->pv_va, pv->pv_va + pv->pv_size - 1,
-			    pv->pv_pa, pv->pv_prot, pv->pv_cache);
-		}
+
+	pv_addr_t *lpv;
+	SLIST_FOREACH(lpv, &bmi->bmi_chunks, pv_list) {
+		printf("%s: pv %p: chunk VA %#lx..%#lx "
+		    "(PA %#lx, prot %d, cache %d)\n",
+		    __func__, lpv, lpv->pv_va, lpv->pv_va + lpv->pv_size - 1,
+		    lpv->pv_pa, lpv->pv_prot, lpv->pv_cache);
 	}
 	printf("\nMapping Chunks\n");
 #endif

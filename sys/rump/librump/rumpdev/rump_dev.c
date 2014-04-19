@@ -82,6 +82,11 @@ cpu_rootconf(void)
 }
 
 void
+cpu_bootconf(void)
+{
+}
+
+void
 device_register(device_t dev, void *v)
 {
 

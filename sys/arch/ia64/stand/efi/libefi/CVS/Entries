@@ -3,7 +3,7 @@
 /bootinfo.c/1.4/Thu Dec 27 20:21:51 2012/-kk/
 /copy.c/1.4/Mon Oct 26 19:16:56 2009/-kk/
 /delay.c/1.2/Sat Apr 22 07:58:53 2006/-kk/
-/devicename.c/1.7/Fri Apr 11 02:03:31 2014/-kk/
+/devicename.c/1.8/Sat Apr 19 05:36:48 2014/-kk/
 /efi.c/1.4/Thu Dec 27 20:21:51 2012/-kk/
 /efi_console.c/1.4/Mon Jul 20 04:59:03 2009/-kk/
 /efiboot.h/1.2/Sat Apr 22 07:58:53 2006/-kk/

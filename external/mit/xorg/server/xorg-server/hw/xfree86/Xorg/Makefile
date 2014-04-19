@@ -77,6 +77,12 @@ LDADD+=	-lalpha
 DPADD+=	${LIBALPHA}
 .endif
 
+.if ${MACHINE_ARCH} == "i386" || ${MACHINE_ARCH} == "x86_64"
+# Needed by current xf86-video-intel for SNA.
+LDADD+=	-lpthread
+DPADD+=	${LIBPTHREAD}
+.endif
+
 LDADD+=	-lm
 
 DPADD+=	${DPADD.dix} \

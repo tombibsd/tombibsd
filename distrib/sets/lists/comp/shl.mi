@@ -225,6 +225,7 @@
 ./usr/lib/librumpnet_sockin_pic.a		comp-c-piclib		rump,picinstall
 ./usr/lib/librumpnet_virtif_pic.a		comp-c-piclib		rump,picinstall
 ./usr/lib/librumpuser_pic.a			comp-c-piclib		rump,picinstall
+./usr/lib/librumpvfs_aio_pic.a		comp-c-piclib		rump,picinstall
 ./usr/lib/librumpvfs_fifofs_pic.a		comp-c-piclib		rump,picinstall
 ./usr/lib/librumpvfs_layerfs_pic.a		comp-c-piclib		rump,picinstall
 ./usr/lib/librumpvfs_pic.a			comp-c-piclib		rump,picinstall

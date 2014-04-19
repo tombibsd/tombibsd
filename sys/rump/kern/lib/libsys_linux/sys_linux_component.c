@@ -58,14 +58,6 @@ linux_fakedev(dev_t in, int raw)
 void rumplinux__stub(void);
 void rumplinux__stub(void) {panic("unavailable");}
 
-/* timing */
-__weak_alias(clock_gettime1,rumplinux__stub);
-__weak_alias(clock_settime1,rumplinux__stub);
-__weak_alias(clock_getres1,rumplinux__stub);
-__weak_alias(compat_50_sys_gettimeofday,rumplinux__stub);
-__weak_alias(compat_50_sys_settimeofday,rumplinux__stub);
-__weak_alias(nanosleep1,rumplinux__stub);
-
 /* vm-related */
 __weak_alias(sys_mmap,rumplinux__stub);
 __weak_alias(vm_map_unlock,rumplinux__stub);

@@ -1,14 +1,14 @@
 #	$NetBSD$
 
-.if !defined(TOOLCHAIN_MISSING) || ${TOOLCHAIN_MISSING}=="no"
+.if !defined(EXTERNAL_TOOLCHAIN) || ${EXTERNAL_TOOLCHAIN}==""
 .error please do not run "make" directly, use sh ../../conf/build.playstation2.sh instead
 .endif
 
 # working around makesystem bugs: redefine CC and friends here or it does
 # not properly get picked up by mkdep in sub-makes for "make depend" of
 # libkern and friends - XXX fix this
-PREFIX=/usr/pkg
-PLATFORM=mips--netbsdelf
+PREFIX=${EXTERNAL_TOOLCHAIN}
+PLATFORM=mipsel--netbsdelf
 
 CC=${PREFIX}/bin/${PLATFORM}-gcc
 CPP=${PREFIX}/bin/${PLATFORM}-cpp

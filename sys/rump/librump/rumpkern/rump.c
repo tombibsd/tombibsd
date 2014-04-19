@@ -355,6 +355,9 @@ rump_init(void)
 	ts = boottime;
 	tc_setclock(&ts);
 
+	extern krwlock_t exec_lock;
+	rw_init(&exec_lock);
+
 	/* we are mostly go.  do per-cpu subsystem init */
 	for (i = 0; i < numcpu; i++) {
 		struct cpu_info *ci = cpu_lookup(i);
@@ -379,7 +382,7 @@ rump_init(void)
 	}
 
 	/* CPUs are up.  allow kernel threads to run */
-	rump_thread_allow();
+	rump_thread_allow(NULL);
 
 	rnd_init_softint();
 
@@ -392,6 +395,8 @@ rump_init(void)
 	pipe_init();
 	resource_init();
 	procinit_sysctl();
+	time_init();
+	time_init2();
 
 	/* start page baroness */
 	if (rump_threads) {
@@ -1049,4 +1054,17 @@ rump_syscall(int num, void *data, size_t dlen, register_t *retval)
 	rump_unschedule();
 
 	return rv;
+}
+
+/*
+ * Temporary notification that rumpkern_time is obsolete.  This is to
+ * be removed along with obsoleting rumpkern_time in a few months.
+ */
+#define RUMPKERN_TIME_WARN "rumpkern_time is obsolete, functionality in librump"
+__warn_references(rumpkern_time_is_obsolete,RUMPKERN_TIME_WARN)
+void rumpkern_time_is_obsolete(void);
+void
+rumpkern_time_is_obsolete(void)
+{
+	printf("WARNING: %s\n", RUMPKERN_TIME_WARN);
 }

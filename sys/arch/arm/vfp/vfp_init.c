@@ -339,7 +339,7 @@ vfp_attach(struct cpu_info *ci)
 		    model,
 		    ((f0 & ARM_MVFR0_ROUNDING_MASK) ? ", rounding" : ""),
 		    ((f0 & ARM_MVFR0_EXCEPT_MASK) ? ", exceptions" : ""),
-		    ((f1 & ARM_MVFR1_D_NAN_MASK) ? ", NaN propogation" : ""),
+		    ((f1 & ARM_MVFR1_D_NAN_MASK) ? ", NaN propagation" : ""),
 		    ((f1 & ARM_MVFR1_FTZ_MASK) ? ", denormals" : ""));
 		aprint_verbose("vfp%d: mvfr: [0]=%#x [1]=%#x\n",
 		    device_unit(ci->ci_dev), f0, f1);
@@ -350,7 +350,7 @@ vfp_attach(struct cpu_info *ci)
 			if (f1 & ARM_MVFR0_EXCEPT_MASK) {
 				vfp_fpscr_changable |= VFP_FPSCR_ESUM;
 			}
-			// If hardware supports propogation of NaNs, select it.
+			// If hardware supports propagation of NaNs, select it.
 			if (f1 & ARM_MVFR1_D_NAN_MASK) {
 				vfp_fpscr_default &= ~VFP_FPSCR_DN;
 				vfp_fpscr_changable |= VFP_FPSCR_DN;

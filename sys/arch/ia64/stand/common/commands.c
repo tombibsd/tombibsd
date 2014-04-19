@@ -42,7 +42,7 @@ command_seterr(const char *fmt, ...)
 {
 	int len;
 	va_list ap;
-	va_start(fmt, ap);
+	va_start(ap, fmt);
 	len = vsnprintf(command_errbuf, sizeof(command_errbuf), fmt, ap);
 	va_end(ap);
 	return len;

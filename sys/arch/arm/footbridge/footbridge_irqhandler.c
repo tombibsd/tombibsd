@@ -195,16 +195,26 @@ footbridge_intr_init(void)
 	
 	for (i = 0, iq = footbridge_intrq; i < NIRQ; i++, iq++) {
 		TAILQ_INIT(&iq->iq_list);
-
-		snprintf(iq->iq_name, sizeof(iq->iq_name), "irq %d", i);
-		evcnt_attach_dynamic(&iq->iq_ev, EVCNT_TYPE_INTR,
-		    NULL, "footbridge", iq->iq_name);
 	}
 	
 	footbridge_intr_calculate_masks();
 
 	/* Enable IRQ's, we don't have any FIQ's*/
 	enable_interrupts(I32_bit);
+}
+
+void
+footbridge_intr_evcnt_attach(void)
+{
+	struct intrq *iq;
+	int i;
+
+	for (i = 0, iq = footbridge_intrq; i < NIRQ; i++, iq++) {
+
+		snprintf(iq->iq_name, sizeof(iq->iq_name), "irq %d", i);
+		evcnt_attach_dynamic(&iq->iq_ev, EVCNT_TYPE_INTR,
+		    NULL, "footbridge", iq->iq_name);
+	}
 }
 
 void *

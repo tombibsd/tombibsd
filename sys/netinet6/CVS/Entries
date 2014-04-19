@@ -20,7 +20,7 @@
 /in6_var.h/1.68/Fri Jan 31 08:48:56 2014/-kk/
 /ip6_etherip.c/1.15/Sun Jul 17 20:54:53 2011/-kk/
 /ip6_etherip.h/1.2/Tue Aug 24 00:07:00 2010/-kk/
-/ip6_flow.c/1.21/Thu Oct 24 10:28:58 2013/-kk/
+/ip6_flow.c/1.22/Sat Apr 19 05:37:02 2014/-kk/
 /ip6_forward.c/1.72/Thu Oct 24 10:28:58 2013/-kk/
 /ip6_id.c/1.17/Sat Nov 19 22:51:29 2011/-kk/
 /ip6_input.c/1.145/Sat Mar  1 06:05:15 2014/-kk/

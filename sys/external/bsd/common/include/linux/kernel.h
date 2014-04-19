@@ -44,11 +44,22 @@
 #define	barrier()	__insn_barrier()
 #define	unlikely(X)	__predict_false(X)
 
-#define	uninitialized_var(x)	x
+/*
+ * XXX Linux kludge to work around GCC uninitialized variable warning.
+ * Linux does `x = x', which is bollocks.
+ */
+#define	uninitialized_var(x)	x = 0
 
 /* XXX These will multiply evaluate their arguments.  */
 #define	max_t(T, X, Y)	MAX(X, Y)
 #define	min_t(T, X, Y)	MIN(X, Y)
+
+/*
+ * Rounding to nearest.
+ */
+#define	DIV_ROUND_CLOSEST(N, D)						\
+	((0 < (N)) ? (((N) + ((D) / 2)) / (D))				\
+	    : (((N) - ((D) / 2)) / (D)))
 
 /*
  * Rounding to what may or may not be powers of two.
@@ -101,5 +112,7 @@ abs64(int64_t x)
 {
 	return (x < 0? (-x) : x);
 }
+
+static int panic_timeout __unused = 0;
 
 #endif  /* _LINUX_KERNEL_H_ */

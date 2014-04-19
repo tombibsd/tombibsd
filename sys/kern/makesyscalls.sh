@@ -637,11 +637,12 @@ function printproto(wrap) {
 	for (i = 1; i <= varargc; i++) {
 		type=uncompattype(argtype[i])
 		sub("const ", "", type)
-		if (!typeseen[type] && \
+		ntype=type
+		sub(" *\\*.*", "", ntype);
+		if (!typeseen[ntype] && \
 		    match(type, "struct") && match(type, "\\*")) {
-			typeseen[type] = 1
-			sub(" *\\*", "", type);
-			printf("%s;\n", type) > rumptypes
+			typeseen[ntype] = 1
+			printf("%s;\n", ntype) > rumptypes
 		}
 	}
 }

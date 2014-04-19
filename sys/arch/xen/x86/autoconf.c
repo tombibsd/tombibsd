@@ -86,7 +86,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <machine/pcb.h>
 #include <machine/bootinfo.h>
 
-static void findroot(void);
 static int is_valid_disk(device_t);
 
 struct disklist *x86_alldisks;
@@ -143,7 +142,7 @@ cpu_configure(void)
 void
 cpu_rootconf(void)
 {
-	findroot();
+	cpu_bootconf();
 
 	printf("boot device: %s\n",
 	    booted_device ? device_xname(booted_device) : "<unknown>");
@@ -153,11 +152,9 @@ cpu_rootconf(void)
 
 /*
  * Attempt to find the device from which we were booted.
- * If we can do so, and not instructed not to do so,
- * change rootdev to correspond to the load device.
  */
 void
-findroot(void)
+cpu_bootconf(void)
 {
 	device_t dv;
 	deviter_t di;

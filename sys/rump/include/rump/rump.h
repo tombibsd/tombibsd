@@ -57,7 +57,7 @@ typedef struct prop_dictionary *prop_dictionary_t;
 #endif
 #endif /* __NetBSD__ */
 
-#if defined(__sun__) && !defined(RUMP_REGISTER_T)
+#if (!defined(_KERNEL)) && (defined(__sun__) || defined(__ANDROID__)) && !defined(RUMP_REGISTER_T)
 #define RUMP_REGISTER_T long
 typedef RUMP_REGISTER_T register_t;
 #endif

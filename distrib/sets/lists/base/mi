@@ -536,6 +536,7 @@
 ./usr/bin/krb5-config				base-krb5-bin		kerberos
 ./usr/bin/ktrace				base-debug-bin
 ./usr/bin/ktruss				base-debug-bin
+./usr/bin/kvno					base-krb5-bin		kerberos
 ./usr/bin/kyua					base-kyua-bin		kyua
 ./usr/bin/lam					base-util-bin
 ./usr/bin/last					base-util-bin

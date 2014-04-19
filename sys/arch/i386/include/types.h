@@ -104,6 +104,7 @@ typedef	volatile unsigned char		__cpu_simple_lock_t;
 #define	__HAVE_NEW_STYLE_BUS_H
 #define	__HAVE_CPU_DATA_FIRST
 #define	__HAVE_CPU_COUNTER
+#define	__HAVE_CPU_BOOTCONF
 #define	__HAVE_MD_CPU_OFFLINE
 #define	__HAVE_SYSCALL_INTERN
 #define	__HAVE_MINIMAL_EMUL

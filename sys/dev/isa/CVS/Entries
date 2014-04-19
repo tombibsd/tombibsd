@@ -129,7 +129,7 @@
 /pasreg.h/1.5/Wed Mar  8 23:46:25 2006/-kk/
 /pcdisplay.c/1.41/Sat Oct 27 17:18:25 2012/-kk/
 /pcdisplayvar.h/1.4/Sun Dec 11 12:22:03 2005/-kk/
-/pckbc_isa.c/1.25/Sun May 25 16:19:12 2008/-kk/
+/pckbc_isa.c/1.26/Sat Apr 19 05:36:57 2014/-kk/
 /pcppi.c/1.42/Fri Apr  6 20:33:20 2012/-kk/
 /pcppireg.h/1.1/Wed Apr 15 20:26:18 1998/-kk/
 /pcppivar.h/1.11/Wed Nov 23 23:07:32 2011/-kk/
@@ -146,7 +146,7 @@
 /sbdspvar.h/1.61/Wed Nov 23 23:07:33 2011/-kk/
 /sbreg.h/1.31/Sun Dec 11 12:22:03 2005/-kk/
 /sbvar.h/1.6/Mon Apr 28 20:23:52 2008/-kk/
-/seagate.c/1.71/Sat Oct 27 17:18:25 2012/-kk/
+/seagate.c/1.72/Sat Apr 19 05:36:57 2014/-kk/
 /sf16fmr2.c/1.16/Sat Oct 27 17:18:25 2012/-kk/
 /slhci_isa.c/1.12/Tue Mar  8 04:58:21 2011/-kk/
 /smsc.c/1.11/Sun Jul 31 16:18:54 2011/-kk/

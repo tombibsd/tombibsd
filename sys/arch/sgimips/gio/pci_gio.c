@@ -302,7 +302,7 @@ giopci_intr_map(const struct pci_attach_args *pa, pci_intr_handle_t *ihp)
 
 static const char *
 giopci_intr_string(pci_chipset_tag_t pc, pci_intr_handle_t ih, char * buf,
-    size_t, len)
+    size_t len)
 {
 	snprintf(buf, len, "slot %s", (ih == GIO_SLOT_EXP0) ? "EXP0" :
 	    (ih == GIO_SLOT_EXP1) ? "EXP1" : "GFX");

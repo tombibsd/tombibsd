@@ -369,6 +369,8 @@ armadaxp_getclks(void)
 
 	mvPclk *= 1000000;
 	mvSysclk *= 1000000;
+
+	curcpu()->ci_data.cpu_cc_freq = mvPclk;
 }
 
 void

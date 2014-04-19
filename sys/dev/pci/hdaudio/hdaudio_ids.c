@@ -267,7 +267,7 @@ hdaudio_id2name(uint16_t vendor, uint16_t product, char *buf, size_t len)
 	if (name)
 		snprintf(buf, len - 1, "%s", name);
 	else if (product == HDA_PRODUCT_ANY)
-		snprintf(buf, len - 1, "vendor %04x", vendor);
+		snprintf(buf, len - 1, "vendor 0x%04x", vendor);
 	else
-		snprintf(buf, len - 1, "product %04x", product);
+		snprintf(buf, len - 1, "product 0x%04x", product);
 }

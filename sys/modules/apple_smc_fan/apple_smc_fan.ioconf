@@ -1,0 +1,9 @@
+# $NetBSD$
+
+ioconf apple_smc_fan
+
+include "conf/files"
+
+pseudo-root	applesmcbus*
+
+applesmcfan*	at applesmcbus?

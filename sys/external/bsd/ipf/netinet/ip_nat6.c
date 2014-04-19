@@ -109,7 +109,7 @@ extern struct ifnet vpnif;
 #undef	SOCKADDR_IN
 #define	SOCKADDR_IN	struct sockaddr_in
 
-__KERNEL_RCSID(0, "@(#)Id: ip_nat6.c,v 1.1.1.2 2012/07/22 13:45:29 darrenr Exp");
+__KERNEL_RCSID(0, "Id: ip_nat6.c,v 1.1.1.2 2012/07/22 13:45:29 darrenr Exp");
 
 #ifdef USE_INET6
 static struct hostmap *ipf_nat6_hostmap(ipf_nat_softc_t *, ipnat_t *,

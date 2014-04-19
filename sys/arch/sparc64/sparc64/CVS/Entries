@@ -32,7 +32,7 @@
 /ofw_machdep.c/1.41/Tue Jan 14 16:05:01 2014/-kk/
 /pmap.c/1.286/Tue Jan 14 16:05:01 2014/-kk/
 /process_machdep.c/1.24/Tue Jan 14 16:05:01 2014/-kk/
-/procfs_machdep.c/1.5/Sun Dec 11 12:19:15 2005/-kk/
+/procfs_machdep.c/1.6/Sat Apr 19 05:36:50 2014/-kk/
 /rbus_machdep.c/1.16/Fri Jul  1 18:49:24 2011/-kk/
 /sigcode32.s/1.1/Wed Jun  6 21:19:50 2001/-kk/
 /sigdebug.h/1.1/Sat Jan  9 23:12:36 1999/-kk/

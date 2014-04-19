@@ -109,6 +109,7 @@ lwproc_proc_free(struct proc *p)
 	if (rump_proc_vfs_release)
 		rump_proc_vfs_release(p);
 
+	doexithooks(p);
 	lim_free(p->p_limit);
 	pstatsfree(p->p_stats);
 	kauth_cred_free(p->p_cred);

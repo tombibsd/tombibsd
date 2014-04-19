@@ -345,7 +345,7 @@ bootdefault(void)
 	}
 }
 
-void
+__dead void
 doboottypemenu(void)
 {
 	int choice;

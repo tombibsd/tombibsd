@@ -45,11 +45,11 @@ char *__stpcpy_chk(char * __restrict, const char * __restrict, size_t);
 char *
 __stpcpy_chk(char * __restrict dst, const char * __restrict src, size_t slen)
 {
-	size_t len = strlen(src) + 1;
+	size_t len = strlen(src);
 
-	if (len > slen)
+	if (len >= slen)
 		__chk_fail();
 
-	(void)memcpy(dst, src, len);
+	(void)memcpy(dst, src, len + 1);
 	return dst + len;
 }

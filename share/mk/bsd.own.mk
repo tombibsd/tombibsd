@@ -64,7 +64,8 @@ HAVE_GCC?=    4
       ${MACHINE_CPU} == "hppa" || \
       ${MACHINE_CPU} == "sparc" || \
       ${MACHINE_CPU} == "sparc64" || \
-      ${MACHINE_CPU} == "x86_64"
+      ${MACHINE_CPU} == "x86_64" || \
+      ${MACHINE_CPU} == "i386"
 HAVE_GCC?=    48
 
 .else
@@ -101,6 +102,8 @@ HAVE_LIBGCC?=	yes
 _LIBC_UNWIND_SUPPORT.i386=	yes
 _LIBC_UNWIND_SUPPORT.m68k=	yes
 _LIBC_UNWIND_SUPPORT.powerpc=	yes
+_LIBC_UNWIND_SUPPORT.sh3el=	yes
+_LIBC_UNWIND_SUPPORT.sh3eb=	yes
 _LIBC_UNWIND_SUPPORT.vax=	yes
 _LIBC_UNWIND_SUPPORT.x86_64=	yes
 .if ${MKLLVM:Uno} == "yes" && ${_LIBC_UNWIND_SUPPORT.${MACHINE_ARCH}:Uno} == "yes"
@@ -505,7 +508,7 @@ FC=		${TOOL_FC.${ACTIVE_FC}}
 OBJC=		${TOOL_OBJC.${ACTIVE_OBJC}}
 
 # Override with tools versions if needed
-.if ${MKCTF:Uno} != "no" && exists(${TOOL_CTFCONVERT}) && exists(${TOOL_CTFMERGE})
+.if ${MKCTF:Uno} != "no" && !defined(NOCTF)
 CTFCONVERT=	${TOOL_CTFCONVERT}
 CTFMERGE=	${TOOL_CTFMERGE}
 .endif

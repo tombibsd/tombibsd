@@ -50,7 +50,7 @@
 #define DEALLOC(a, b)		dealloc(a, b)
 #define OKMAGIC(a)		((a) == ZMAGIC)
 
-void x86_progress(const char *, ...);
+void x86_progress(const char *, ...) __printflike(1, 2);
 void vpbcopy(const void *, void *, size_t);
 void pbzero(void *, size_t);
 ssize_t pread(int, void *, size_t);

@@ -7,7 +7,7 @@
 /dvo_sil164.c/1.1.1.1/Thu Oct 24 10:28:58 2013/-kk/
 /dvo_tfp410.c/1.1.1.1/Thu Oct 24 10:28:58 2013/-kk/
 /i915_debugfs.c/1.1.1.1/Thu Oct 24 10:28:58 2013/-kk/
-/i915_dma.c/1.3/Tue Mar 25 02:35:42 2014/-kk/
+/i915_dma.c/1.4/Sat Apr 19 05:37:00 2014/-kk/
 /i915_drv.c/1.2/Tue Mar 25 02:35:42 2014/-kk/
 /i915_drv.h/1.2/Tue Mar 25 02:35:42 2014/-kk/
 /i915_gem.c/1.2/Tue Mar 25 02:35:42 2014/-kk/
@@ -43,8 +43,8 @@
 /intel_pm.c/1.2/Tue Mar 25 02:35:42 2014/-kk/
 /intel_ringbuffer.c/1.2/Tue Mar 25 02:35:42 2014/-kk/
 /intel_ringbuffer.h/1.2/Tue Mar 25 02:35:42 2014/-kk/
-/intel_sdvo.c/1.2/Tue Mar 25 02:35:42 2014/-kk/
+/intel_sdvo.c/1.3/Sat Apr 19 05:37:00 2014/-kk/
 /intel_sdvo_regs.h/1.1.1.1/Thu Oct 24 10:28:58 2013/-kk/
 /intel_sprite.c/1.1.1.1/Thu Oct 24 10:28:58 2013/-kk/
-/intel_tv.c/1.2/Tue Mar 25 02:35:42 2014/-kk/
+/intel_tv.c/1.3/Sat Apr 19 05:37:00 2014/-kk/
 D

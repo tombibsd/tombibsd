@@ -51,7 +51,7 @@
 /patch.c/1.4/Mon Apr 28 20:23:10 2008/-kk/
 /pmap.c/1.259/Tue Jan 14 16:04:51 2014/-kk/
 /process_machdep.c/1.28/Tue Jan 14 16:04:51 2014/-kk/
-/procfs_machdep.c/1.4/Sun Dec 11 12:16:10 2005/-kk/
+/procfs_machdep.c/1.5/Sat Apr 19 05:36:37 2014/-kk/
 /prom.c/1.48/Mon Feb  6 02:14:12 2012/-kk/
 /prom_disp.s/1.8/Mon Nov  3 04:22:03 1997/-kk/
 /promcons.c/1.38/Tue Mar 25 02:35:17 2014/-kk/

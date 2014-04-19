@@ -276,10 +276,10 @@ gpio_print(void *aux, const char *pnp)
 	struct gpio_attach_args *ga = aux;
 	int i;
 
-	printf(" pins");
+	aprint_normal(" pins");
 	for (i = 0; i < 32; i++)
 		if (ga->ga_mask & (1 << i))
-			printf(" %d", ga->ga_offset + i);
+			aprint_normal(" %d", ga->ga_offset + i);
 
 	return UNCONF;
 }

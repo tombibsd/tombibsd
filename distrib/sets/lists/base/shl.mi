@@ -706,6 +706,9 @@
 ./usr/lib/librumpvfs.so				base-rump-shlib	rump
 ./usr/lib/librumpvfs.so.0			base-rump-shlib	rump
 ./usr/lib/librumpvfs.so.0.0			base-rump-shlib	rump
+./usr/lib/librumpvfs_aio.so			base-rump-shlib	rump
+./usr/lib/librumpvfs_aio.so.0		base-rump-shlib	rump
+./usr/lib/librumpvfs_aio.so.0.0		base-rump-shlib	rump
 ./usr/lib/librumpvfs_fifofs.so			base-rump-shlib	rump
 ./usr/lib/librumpvfs_fifofs.so.0		base-rump-shlib	rump
 ./usr/lib/librumpvfs_fifofs.so.0.0		base-rump-shlib	rump

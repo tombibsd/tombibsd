@@ -4,6 +4,7 @@
 _EXTERNAL_GPL3_GCC_USR_BIN_MAKEFILE_BACKEND_=1
 
 NOMAN=		# defined
+NOCTF=		# defined
 BINDIR=		/usr/libexec
 
 CPPFLAGS+=	-I${GCCARCH} -I${BACKENDOBJ} \

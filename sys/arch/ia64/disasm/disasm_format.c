@@ -287,7 +287,7 @@ asm_operand(const struct asm_oper *o, char *buf, size_t buflen, uint64_t ip)
 	case 12: l = strlcpy(buf, "sp", buflen); break;
 	case 13: l = strlcpy(buf, "tp", buflen); break;
 	default:
-	    l += snprintf(buf, buflen, "r%d", (int)o->o_value);
+	    l = snprintf(buf, buflen, "r%d", (int)o->o_value);
 	    if (l > buflen)
 		l = buflen;
 	    break;

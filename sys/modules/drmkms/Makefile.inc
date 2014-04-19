@@ -8,6 +8,7 @@
 CPPFLAGS+=	-I${S}/external/bsd/drm2/include
 CPPFLAGS+=	-I${S}/external/bsd/drm2/dist/uapi
 CPPFLAGS+=	-I${S}/external/bsd/drm2/dist/include
+CPPFLAGS+=	-I${S}/external/bsd/common/include
 CPPFLAGS+=	-D__KERNEL__
 
 # XXX Is this the right place to set this?

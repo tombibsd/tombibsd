@@ -106,6 +106,8 @@ struct ptyfsnode {
 };
 
 struct ptyfsmount {
+	TAILQ_ENTRY(ptyfsmount) pmnt_le;
+	struct mount *pmnt_mp;
 	gid_t pmnt_gid;
 	mode_t pmnt_mode;
 	int pmnt_flags;

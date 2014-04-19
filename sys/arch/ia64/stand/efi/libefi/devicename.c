@@ -227,8 +227,8 @@ efi_fmtdev(void *vdev)
 		if (dev->d_kind.efidisk.partition >= 0) {
 			len += snprintf(buf + len, buflen - len, "%c", dev->d_kind.efidisk.partition + 'a');
 			if (len > buflen)
-		}
 				len = buflen;
+		}
 		strlcat(buf, ":", sizeof(buf) - len);
 		break;
 
