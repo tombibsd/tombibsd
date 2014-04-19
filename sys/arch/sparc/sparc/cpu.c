@@ -436,7 +436,7 @@ cpu_attach(struct cpu_softc *sc, int node, int mid)
 	/* Stuff to only run on the boot CPU */
 	cpu_setup();
 	snprintf(buf, sizeof buf, "%s @ %s MHz, %s FPU",
-		cpi->cpu_longname, clockfreq(cpi->hz), cpi->fpu_name);
+		cpi->cpu_longname, clockfreq(cpi->hz / 1000), cpi->fpu_name);
 	cpu_setmodel("%s (%s)", machine_model, buf);
 	printf(": %s\n", buf);
 	cache_print(sc);

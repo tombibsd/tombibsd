@@ -311,7 +311,7 @@ cpu_attach(device_t parent, device_t dev, void *aux)
 	ci->ci_system_clockrate[1] = sclk / 1000000;
 
 	snprintf(buf, sizeof buf, "%s @ %s MHz",
-		prom_getpropstring(node, "name"), clockfreq(clk));
+		prom_getpropstring(node, "name"), clockfreq(clk / 1000));
 	cpu_setmodel("%s (%s)", machine_model, buf);
 
 	aprint_normal(": %s, UPA id %d\n", buf, ci->ci_cpuid);

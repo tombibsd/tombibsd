@@ -1394,7 +1394,7 @@ ixgbe_enable_queue(struct adapter *adapter, u32 vector)
 	}
 }
 
-static inline void
+__unused static inline void
 ixgbe_disable_queue(struct adapter *adapter, u32 vector)
 {
 	struct ixgbe_hw *hw = &adapter->hw;
@@ -3257,7 +3257,7 @@ ixgbe_tx_ctx_setup(struct tx_ring *txr, struct mbuf *mp)
 	struct ip6_hdr ip6;
 	int  ehdrlen, ip_hlen = 0;
 	u16	etype;
-	u8	ipproto = 0;
+	u8	ipproto __diagused = 0;
 	bool	offload;
 	int ctxd = txr->next_avail_desc;
 	u16 vtag = 0;

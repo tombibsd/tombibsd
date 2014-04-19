@@ -37,7 +37,6 @@ CPPFLAGS+= -DBOOT=\"$(BOOT)\" -DBOOT_VERS=\"$(VERSION)\"
 CPPFLAGS+= -I${COMMONDIR} -I${LIBIOCS} -I${S} -I. -D_STANDALONE
 CFLAGS+=   -m68020-60
 AFLAGS=	   ${CFLAGS:M-[ID]*}
-AFLAGS+=   -Wa,-mc68000
 LINKFLAGS=   -n -Bstatic -T ${.CURDIR}/${BOOT}.ldscript -M
 LINKFLAGS+=  -noinhibit-exec	# XXX
 

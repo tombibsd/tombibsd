@@ -103,6 +103,7 @@ gtmr_attach(device_t parent, device_t self, void *aux)
 	 * This runs at a fixed frequency of 1 to 50MHz.
 	 */
 	prop_dictionary_get_uint32(dict, "frequency", &sc->sc_freq);            
+	KASSERT(sc->sc_freq != 0);
 
 	humanize_number(freqbuf, sizeof(freqbuf), sc->sc_freq, "Hz", 1000);
 

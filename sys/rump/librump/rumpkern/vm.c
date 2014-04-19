@@ -402,7 +402,11 @@ void
 uvm_init_limits(struct proc *p)
 {
 
-	PUNLIMIT(RLIMIT_STACK);
+#ifndef DFLSSIZ
+#define DFLSSIZ (16*1024*1024)
+#endif
+	p->p_rlimit[RLIMIT_STACK].rlim_cur = DFLSSIZ;
+	p->p_rlimit[RLIMIT_STACK].rlim_max = MAXSSIZ;
 	PUNLIMIT(RLIMIT_DATA);
 	PUNLIMIT(RLIMIT_RSS);
 	PUNLIMIT(RLIMIT_AS);

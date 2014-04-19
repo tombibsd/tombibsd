@@ -124,6 +124,15 @@ sheeva_l2_disable:
 	mrc	p15, 1, r5, c15, c1, 0	@ Get Marvell Extra Features Register
 	bic	r5, r5, #0x00400000	@ disable L2 cache
 	mcr	p15, 1, r5, c15, c1, 0
+
+#ifdef SHEEVA_L2_CACHE_WT
+	/* L2 WT Mode */
+	ldr	r2, =0xf1020128		/* CPU L2 Configuration Register */
+	ldr	r3, [r2]
+	bic	r3, r3, #0x10		/* Force Write Through */
+	str	r3, [r2]
+#endif
+
 1:
 
 	/* save u-boot's args */

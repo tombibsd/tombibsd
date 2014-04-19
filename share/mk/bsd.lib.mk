@@ -618,13 +618,10 @@ ${_LIB.so.full}: ${SOLIB} ${DPADD} ${DPLIBC} \
     ${SHLIB_LDSTARTFILE} ${SHLIB_LDENDFILE}
 	${_MKTARGET_BUILD}
 	rm -f ${.TARGET}
-	${LIBCC} ${LDLIBC} -shared ${SHLIB_SHFLAGS} \
+	${LIBCC} ${LDLIBC} -Wl,-x -shared ${SHLIB_SHFLAGS} \
 	    ${_LDFLAGS.${_LIB}} -o ${.TARGET} ${_LIBLDOPTS} \
 	    -Wl,--whole-archive ${SOLIB} \
 	    -Wl,--no-whole-archive ${_LDADD.${_LIB}}
-.if !defined(_LIB.so.debug)
-	${OBJCOPY} ${OBJCOPYLIBFLAGS} ${.TARGET}
-.endif
 #  We don't use INSTALL_SYMLINK here because this is just
 #  happening inside the build directory/objdir. XXX Why does
 #  this spend so much effort on libraries that aren't live??? XXX
@@ -643,7 +640,7 @@ ${_LIB.so.full}: ${SOLIB} ${DPADD} ${DPLIBC} \
 ${_LIB.so.debug}: ${_LIB.so.full}
 	${_MKTARGET_CREATE}
 	(  ${OBJCOPY} --only-keep-debug ${_LIB.so.full} ${_LIB.so.debug} \
-	&& ${OBJCOPY} ${OBJCOPYLIBFLAGS} --strip-debug -p -R .gnu_debuglink \
+	&& ${OBJCOPY} --strip-debug -p -R .gnu_debuglink \
 		--add-gnu-debuglink=${_LIB.so.debug} ${_LIB.so.full} \
 	) || (rm -f ${.TARGET}; false)
 .endif

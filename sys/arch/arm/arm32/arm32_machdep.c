@@ -712,11 +712,11 @@ xc_send_ipi(struct cpu_info *ci)
 bool
 mm_md_direct_mapped_phys(paddr_t pa, vaddr_t *vap)
 {
-	if (physical_start <= pa && pa < physical_end) {
-		*vap = KERNEL_BASE + (pa - physical_start);
-		return true;
+	bool rv;
+	vaddr_t va = pmap_direct_mapped_phys(pa, &rv, 0);
+	if (rv) {
+		*vap = va;
 	}
-
-	return false;
+	return rv;
 }
 #endif

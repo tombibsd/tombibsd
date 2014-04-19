@@ -339,7 +339,7 @@ w83795g_get_limits(struct sysmon_envsys *sme, envsys_data_t *edata,
 		index = W83795G_FHL1LSB + (sensor->msb - W83795G_FANIN1) / 2;
 		iic_smbus_read_byte(sc->sc_tag, sc->sc_addr, index, &lsb, 0);
 		if (index % 2)
-			lsb >> 4;
+			lsb >>= 4;
 		else
 			lsb &= 0xf;
 		limits->sel_warnmin = 1350000 / (msb << 4 | lsb);

@@ -162,6 +162,7 @@ swwdog_detach(device_t self, int flags)
 {
 	struct swwdog_softc *sc = device_private(self);
 
+	pmf_device_deregister(self);
 	swwdog_disarm(sc);
 	callout_destroy(&sc->sc_c);
 	sysctl_teardown(&swwdog_sysctllog);

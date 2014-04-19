@@ -79,6 +79,7 @@ myfunc3(size_t ncalls)
 		++max_frames;
 	}
 	nptrs = backtrace(buffer, __arraycount(buffer));
+	ATF_REQUIRE(nptrs != (size_t)-1);
 	strings = backtrace_symbols_fmt(buffer, nptrs, "%n");
 
 	ATF_CHECK(strings != NULL);

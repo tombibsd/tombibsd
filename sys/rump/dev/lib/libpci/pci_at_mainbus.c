@@ -41,12 +41,27 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include "ioconf.c"
 
 #include "rump_private.h"
+#include "rump_vfs_private.h"
 
 RUMP_COMPONENT(RUMP_COMPONENT_DEV)
 {
+	extern const struct cdevsw pci_cdevsw;
+	devmajor_t cmaj, bmaj;
+	int error;
 
 	config_init_component(cfdriver_ioconf_pci,
 	    cfattach_ioconf_pci, cfdata_ioconf_pci);
+
+	bmaj = cmaj = -1;
+	if ((error = devsw_attach("pci", NULL, &bmaj,
+	    &pci_cdevsw, &cmaj)) != 0) {
+		printf("pci: devsw_attach failed: %d\n", error);
+		return;
+	}
+
+	if ((error = rump_vfs_makedevnodes(S_IFCHR, "/dev/pci", '0',
+	    cmaj, 0, 4)) != 0)
+		printf("pci: failed to create /dev/pci nodes: %d", error);
 }
 
 RUMP_COMPONENT(RUMP_COMPONENT_DEV_AFTERMAINBUS)
@@ -56,6 +71,7 @@ RUMP_COMPONENT(RUMP_COMPONENT_DEV_AFTERMAINBUS)
 
 	/* XXX: attach args should come from elsewhere */
 	memset(&pba, 0, sizeof(pba));
+	pba.pba_bus = 0;
 	pba.pba_iot = (bus_space_tag_t)0;
 	pba.pba_memt = (bus_space_tag_t)1;
 	pba.pba_dmat = (void *)0x20;

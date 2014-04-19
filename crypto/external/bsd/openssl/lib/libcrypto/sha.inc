@@ -16,5 +16,5 @@ SHA_SRCS+= libc-sha512.c libc-sha256.c
 SRCS += ${SHA_SRCS}
 
 .for cryptosrc in ${SHA_SRCS}
-CPPFLAGS.${cryptosrc} = -I${OPENSSLSRC}/crypto/sha ${SHACPPFLAGS}
+CPPFLAGS.${cryptosrc} += -I${OPENSSLSRC}/crypto/sha ${SHACPPFLAGS}
 .endfor

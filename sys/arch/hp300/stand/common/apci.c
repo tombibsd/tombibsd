@@ -85,7 +85,8 @@ void
 apciprobe(struct consdev *cp)
 {
 
-	apcicnaddr = (void *)IIOV(FRODO_BASE + FRODO_APCI_OFFSET(1));
+	apcicnaddr =
+	    (void *)IIOV(INTIOBASE + FRODO_BASE + FRODO_APCI_OFFSET(1));
 
 	cp->cn_pri = CN_DEAD;
 

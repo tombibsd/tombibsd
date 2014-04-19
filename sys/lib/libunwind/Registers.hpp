@@ -35,6 +35,7 @@ public:
     LAST_REGISTER = REGNO_X86_EIP,
     LAST_RESTORE_REG = REGNO_X86_EIP,
     RETURN_REG = REGNO_X86_EIP,
+    RETURN_OFFSET = 0,
   };
 
   __dso_hidden Registers_x86();
@@ -100,6 +101,7 @@ public:
     LAST_REGISTER = REGNO_X86_64_RIP,
     LAST_RESTORE_REG = REGNO_X86_64_RIP,
     RETURN_REG = REGNO_X86_64_RIP,
+    RETURN_OFFSET = 0,
   };
 
   __dso_hidden Registers_x86_64();
@@ -168,6 +170,7 @@ public:
     LAST_REGISTER = REGNO_PPC32_V31,
     LAST_RESTORE_REG = REGNO_PPC32_V31,
     RETURN_REG = REGNO_PPC32_LR,
+    RETURN_OFFSET = 0,
   };
 
   __dso_hidden Registers_ppc32();
@@ -256,6 +259,7 @@ public:
     LAST_REGISTER = REGNO_ARM32_D31,
     LAST_RESTORE_REG = REGNO_ARM32_SPSR,
     RETURN_REG = REGNO_ARM32_SPSR,
+    RETURN_OFFSET = 0,
   };
 
   __dso_hidden Registers_arm32();
@@ -325,6 +329,7 @@ public:
     LAST_REGISTER = REGNO_VAX_PSW,
     LAST_RESTORE_REG = REGNO_VAX_PSW,
     RETURN_REG = REGNO_VAX_R15,
+    RETURN_OFFSET = 0,
   };
 
   __dso_hidden Registers_vax();
@@ -396,6 +401,7 @@ public:
     LAST_REGISTER = REGNO_M68K_FP7,
     LAST_RESTORE_REG = REGNO_M68K_FP7,
     RETURN_REG = REGNO_M68K_PC,
+    RETURN_OFFSET = 0,
   };
 
   __dso_hidden Registers_M68K();
@@ -472,6 +478,7 @@ public:
     LAST_REGISTER = REGNO_SH3_PR,
     LAST_RESTORE_REG = REGNO_SH3_PR,
     RETURN_REG = REGNO_SH3_PR,
+    RETURN_OFFSET = 0,
   };
 
   __dso_hidden Registers_SH3();
@@ -518,6 +525,153 @@ private:
   uint32_t reg[REGNO_SH3_PR + 1];
 };
 
+enum {
+  DWARF_SPARC64_R0 = 0,
+  DWARF_SPARC64_R31 = 31,
+  DWARF_SPARC64_PC = 32,
+
+  REGNO_SPARC64_R0 = 0,
+  REGNO_SPARC64_R14 = 14,
+  REGNO_SPARC64_R15 = 15,
+  REGNO_SPARC64_R31 = 31,
+  REGNO_SPARC64_PC = 32,
+};
+
+class Registers_SPARC64 {
+public:
+  enum {
+    LAST_REGISTER = REGNO_SPARC64_PC,
+    LAST_RESTORE_REG = REGNO_SPARC64_PC,
+    RETURN_REG = REGNO_SPARC64_R15,
+    RETURN_OFFSET = 8,
+  };
+  typedef uint64_t reg_t;
+
+  __dso_hidden Registers_SPARC64();
+
+  static int dwarf2regno(int num) {
+    if (num >= DWARF_SPARC64_R0 && num <= DWARF_SPARC64_R31)
+      return REGNO_SPARC64_R0 + (num - DWARF_SPARC64_R0);
+    if (num == DWARF_SPARC64_PC)
+      return REGNO_SPARC64_PC;
+    return LAST_REGISTER + 1;
+  }
+
+  bool validRegister(int num) const {
+    return num >= 0 && num <= REGNO_SPARC64_PC;
+  }
+
+  uint64_t getRegister(int num) const {
+    assert(validRegister(num));
+    return reg[num];
+  }
+
+  void setRegister(int num, uint64_t value) {
+    assert(validRegister(num));
+    reg[num] = value;
+  }
+
+  uint64_t getIP() const { return reg[REGNO_SPARC64_PC]; }
+
+  void setIP(uint64_t value) { reg[REGNO_SPARC64_PC] = value; }
+
+  uint64_t getSP() const { return reg[REGNO_SPARC64_R14]; }
+
+  void setSP(uint64_t value) { reg[REGNO_SPARC64_R14] = value; }
+
+  bool validFloatVectorRegister(int num) const { return false; }
+
+  void copyFloatVectorRegister(int num, uint64_t addr_) {}
+
+  __dso_hidden void jumpto() const __dead;
+
+private:
+  uint64_t reg[REGNO_SPARC64_PC + 1];
+};
+
+enum {
+  DWARF_SPARC_R0 = 0,
+  DWARF_SPARC_R31 = 31,
+  DWARF_SPARC_PC = 32,
+
+  REGNO_SPARC_R0 = 0,
+  REGNO_SPARC_R14 = 14,
+  REGNO_SPARC_R15 = 15,
+  REGNO_SPARC_R31 = 31,
+  REGNO_SPARC_PC = 32,
+};
+
+class Registers_SPARC {
+public:
+  enum {
+    LAST_REGISTER = REGNO_SPARC_PC,
+    LAST_RESTORE_REG = REGNO_SPARC_PC,
+    RETURN_REG = REGNO_SPARC_R15,
+    RETURN_OFFSET = 8,
+  };
+  typedef uint32_t reg_t;
+
+  __dso_hidden Registers_SPARC();
+
+  static int dwarf2regno(int num) {
+    if (num >= DWARF_SPARC_R0 && num <= DWARF_SPARC_R31)
+      return REGNO_SPARC_R0 + (num - DWARF_SPARC_R0);
+    if (num == DWARF_SPARC_PC)
+      return REGNO_SPARC_PC;
+    return LAST_REGISTER + 1;
+  }
+
+  bool validRegister(int num) const {
+    return num >= 0 && num <= REGNO_SPARC_PC;
+  }
+
+  uint64_t getRegister(int num) const {
+    assert(validRegister(num));
+    return reg[num];
+  }
+
+  void setRegister(int num, uint64_t value) {
+    assert(validRegister(num));
+    reg[num] = value;
+  }
+
+  uint64_t getIP() const { return reg[REGNO_SPARC_PC]; }
+
+  void setIP(uint64_t value) { reg[REGNO_SPARC_PC] = value; }
+
+  uint64_t getSP() const { return reg[REGNO_SPARC_R14]; }
+
+  void setSP(uint64_t value) { reg[REGNO_SPARC_R14] = value; }
+
+  bool validFloatVectorRegister(int num) const { return false; }
+
+  void copyFloatVectorRegister(int num, uint64_t addr_) {}
+
+  __dso_hidden void jumpto() const __dead;
+
+private:
+  uint32_t reg[REGNO_SPARC_PC + 1];
+};
+
+#if __i386__
+typedef Registers_x86 NativeUnwindRegisters;
+#elif __x86_64__
+typedef Registers_x86_64 NativeUnwindRegisters;
+#elif __powerpc__
+typedef Registers_ppc32 NativeUnwindRegisters;
+#elif __arm__ && !defined(__ARM_EABI__)
+typedef Registers_arm32 NativeUnwindRegisters;
+#elif __vax__
+typedef Registers_vax NativeUnwindRegisters;
+#elif __m68k__
+typedef Registers_M68K NativeUnwindRegisters;
+#elif __sh3__
+typedef Registers_SH3 NativeUnwindRegisters;
+#elif __sparc64__
+typedef Registers_SPARC64 NativeUnwindRegisters;
+#elif __sparc__
+typedef Registers_SPARC NativeUnwindRegisters;
+#endif
 } // namespace _Unwind
 
 #endif // __REGISTERS_HPP__

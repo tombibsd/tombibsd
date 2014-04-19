@@ -469,9 +469,9 @@
 ./usr/libdata/debug/usr/bin/crunchide.debug	comp-c-debug		debug
 ./usr/libdata/debug/usr/bin/csplit.debug	comp-c-debug		debug
 ./usr/libdata/debug/usr/bin/ctags.debug		comp-c-debug		debug
-./usr/libdata/debug/usr/bin/ctfconvert.debug	comp-util-debug		dtrace,debug
-./usr/libdata/debug/usr/bin/ctfdump.debug	comp-util-debug		dtrace,debug
-./usr/libdata/debug/usr/bin/ctfmerge.debug	comp-util-debug		dtrace,debug
+./usr/libdata/debug/usr/bin/ctfconvert.debug	comp-util-debug		ctf,debug
+./usr/libdata/debug/usr/bin/ctfdump.debug	comp-util-debug		ctf,debug
+./usr/libdata/debug/usr/bin/ctfmerge.debug	comp-util-debug		ctf,debug
 ./usr/libdata/debug/usr/bin/cut.debug		comp-util-debug		debug
 ./usr/libdata/debug/usr/bin/cvs.debug		comp-cvs-debug		cvs,debug
 ./usr/libdata/debug/usr/bin/db.debug		comp-util-debug		debug

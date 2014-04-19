@@ -209,8 +209,8 @@ struct livengood_tcpip_ctxdesc {
 #define	CTRL_FD		(1U << 0)	/* full duplex */
 #define	CTRL_BEM	(1U << 1)	/* big-endian mode */
 #define	CTRL_PRIOR	(1U << 2)	/* 0 = receive, 1 = fair */
+#define	CTRL_GIO_M_DIS	(1U << 2)	/* disabl PCI master access */
 #define	CTRL_LRST	(1U << 3)	/* link reset */
-#define	CTRL_GIO_M_DIS	(1U << 3)	/* disabl PCI master access */
 #define	CTRL_ASDE	(1U << 5)	/* auto speed detect enable */
 #define	CTRL_SLU	(1U << 6)	/* set link up */
 #define	CTRL_ILOS	(1U << 7)	/* invert loss of signal */

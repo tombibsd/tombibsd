@@ -20,7 +20,7 @@ HMAN1=${HSRCS1:S/^/ev/g:S/.h.3/.3/g}
 
 .for i in ${HSRCS1}
 ev${i:S/.h.3/.3/g}: $i
-	${.CURDIR}/fixman ${TOOL_SED} ${.ALLSRC} ${.TARGET}
+	${HOST_SH} ${.CURDIR}/fixman ${TOOL_SED} ${.ALLSRC} ${.TARGET}
 .endfor
 
 HSRCS2= \
@@ -30,7 +30,7 @@ event_compat.h.3
 
 .for i in ${HSRCS2}
 ${i:S/.h.3/.3/g}: $i
-	${.CURDIR}/fixman ${TOOL_SED} ${.ALLSRC} ${.TARGET}
+	${HOST_SH} ${.CURDIR}/fixman ${TOOL_SED} ${.ALLSRC} ${.TARGET}
 .endfor
 
 HMAN2=${HSRCS2:S/.h.3/.3/g}

@@ -47,8 +47,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <dev/ic/spdmemreg.h>
 #include <dev/ic/spdmemvar.h>
 
-SYSCTL_SETUP_PROTO(sysctl_spdmem_setup);
-
 /* Routines for decoding spd data */
 static void decode_edofpm(const struct sysctlnode *, device_t, struct spdmem *);
 static void decode_rom(const struct sysctlnode *, device_t, struct spdmem *);

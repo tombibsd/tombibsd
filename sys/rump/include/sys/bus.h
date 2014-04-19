@@ -45,8 +45,9 @@ typedef void *bus_dma_tag_t;
 #define BUS_DMA_TAG_VALID(_tag_) ((_tag_) != NULL)
 
 typedef struct {
-	bus_addr_t ds_addr;
-	bus_size_t ds_len;
+	bus_addr_t	ds_addr;
+	bus_size_t	ds_len;
+	vaddr_t		_ds_vacookie;
 } bus_dma_segment_t;
 
 typedef struct {

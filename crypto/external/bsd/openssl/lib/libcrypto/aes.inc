@@ -16,6 +16,6 @@ AES_SRCS += aes_misc.c aes_cfb.c aes_ofb.c \
 SRCS += ${AES_SRCS}
 
 .for cryptosrc in ${AES_SRCS}
-CPPFLAGS.${cryptosrc} = -I${OPENSSLSRC}/crypto/aes ${AESCPPFLAGS}
+CPPFLAGS.${cryptosrc} += -I${OPENSSLSRC}/crypto/aes ${AESCPPFLAGS}
 .endfor
 

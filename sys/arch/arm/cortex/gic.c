@@ -563,6 +563,10 @@ armgic_attach(device_t parent, device_t self, void *aux)
 		sc->sc_gic_valid_lines[group] = valid;
 	}
 
+	aprint_normal(": Generic Interrupt Controller, "
+	    "%zu sources (%zu valid)\n",
+	    sc->sc_pic.pic_maxsources, sc->sc_gic_lines);
+
 	pic_add(&sc->sc_pic, 0);
 
 	/*
@@ -619,10 +623,6 @@ armgic_attach(device_t parent, device_t self, void *aux)
 #endif
 	armgic_cpu_init(&sc->sc_pic, curcpu());
 #endif
-
-	aprint_normal(": Generic Interrupt Controller, "
-	    "%zu sources (%zu valid)\n",
-	    sc->sc_pic.pic_maxsources, sc->sc_gic_lines);
 
 	const u_int ppis = popcount32(sc->sc_gic_valid_lines[0] >> 16);
 	const u_int sgis = popcount32(sc->sc_gic_valid_lines[0] & 0xffff);

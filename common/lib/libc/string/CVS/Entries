@@ -1,5 +1,5 @@
 /bcmp.c/1.7/Fri Mar  9 15:41:16 2012/-kk/
-/bcopy.c/1.9/Wed Mar 18 12:25:06 2009/-kk/
+/bcopy.c/1.10/Sat Apr 19 07:53:05 2014/-kk/
 /bzero.c/1.1/Tue Dec 20 19:28:52 2005/-kk/
 /bzero2.c/1.2/Mon Dec 14 00:39:01 2009/-kk/
 /consttime_memequal.c/1.4/Thu Oct 24 10:28:41 2013/-kk/

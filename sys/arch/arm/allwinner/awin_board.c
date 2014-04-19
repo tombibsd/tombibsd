@@ -191,10 +191,10 @@ awin_bootstrap(vaddr_t iobase, vaddr_t uartbase)
 	printf("%s: cpu status: 0=%#x 1=%#x\n", __func__, s0, s1);
 #endif
 
-#if !defined(MULTIPROCESSOR) && defined(VERBOSE_ARM_INIT)
+#if !defined(MULTIPROCESSOR) && defined(VERBOSE_INIT_ARM)
 	u_int arm_cpu_max;
 #endif
-#if defined(MULTIPROCESSOR) || defined(VERBOSE_ARM_INIT)
+#if defined(MULTIPROCESSOR) || defined(VERBOSE_INIT_ARM)
 	arm_cpu_max = 1 + __SHIFTOUT(armreg_l2ctrl_read(), L2CTRL_NUMCPU);
 #endif
 #ifdef VERBOSE_INIT_ARM
@@ -224,7 +224,7 @@ awin_cpu_hatch(struct cpu_info *ci)
 }
 #endif
 
-psize_t 
+psize_t
 awin_memprobe(void)
 {
 	const uint32_t dcr = bus_space_read_4(&awin_bs_tag, awin_core_bsh,
