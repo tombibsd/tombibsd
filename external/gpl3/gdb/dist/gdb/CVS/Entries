@@ -84,8 +84,8 @@
 /amd64bsd-nat.h/1.1.1.1/Thu Oct 24 10:28:52 2013/-kk/
 /amd64fbsd-nat.c/1.1.1.2/Tue Oct 29 12:10:24 2013/-kk/
 /amd64fbsd-tdep.c/1.1.1.2/Tue Oct 29 12:10:24 2013/-kk/
-/amd64nbsd-nat.c/1.4/Tue Oct 29 12:10:24 2013/-kk/
-/amd64nbsd-tdep.c/1.6/Tue Oct 29 12:10:24 2013/-kk/
+/amd64nbsd-nat.c/1.6/Thu Apr 24 14:24:51 2014/-kk/
+/amd64nbsd-tdep.c/1.8/Thu Apr 24 14:24:51 2014/-kk/
 /amd64obsd-nat.c/1.1.1.2/Tue Oct 29 12:10:24 2013/-kk/
 /amd64obsd-tdep.c/1.1.1.2/Tue Oct 29 12:10:24 2013/-kk/
 /annotate.c/1.1.1.2/Tue Oct 29 12:10:24 2013/-kk/

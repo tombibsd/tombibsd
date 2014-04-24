@@ -481,6 +481,10 @@ do_sys_mount(struct lwp *l, struct vfsops *vfsops, const char *type,
 		}
 	}
 
+	/*
+	 * We allow data to be NULL, even for userspace. Some fs's don't need
+	 * it. The others will handle NULL.
+	 */
 	if (data != NULL && data_seg == UIO_USERSPACE) {
 		if (data_len == 0) {
 			/* No length supplied, use default for filesystem */
@@ -494,7 +498,7 @@ do_sys_mount(struct lwp *l, struct vfsops *vfsops, const char *type,
 			    && data_len < sizeof (struct mnt_export_args30))
 				data_len = sizeof (struct mnt_export_args30);
 		}
-		if (data_len > VFS_MAX_MOUNT_DATA) {
+		if ((data_len == 0) || (data_len > VFS_MAX_MOUNT_DATA)) {
 			error = EINVAL;
 			goto done;
 		}
@@ -1977,6 +1981,7 @@ dofhopen(struct lwp *l, const void *ufhp, size_t fhsize, int oflags,
 		goto bad;
 	}
 	error = vfs_fhtovp(fh, &vp);
+	vfs_copyinfh_free(fh);
 	if (error != 0) {
 		goto bad;
 	}
@@ -2014,14 +2019,12 @@ dofhopen(struct lwp *l, const void *ufhp, size_t fhsize, int oflags,
 	VOP_UNLOCK(vp);
 	*retval = indx;
 	fd_affix(p, fp, indx);
-	vfs_copyinfh_free(fh);
 	return (0);
 
 bad:
 	fd_abort(p, fp, indx);
 	if (vp != NULL)
 		vput(vp);
-	vfs_copyinfh_free(fh);
 	return (error);
 }
 

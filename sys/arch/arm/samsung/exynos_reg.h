@@ -95,6 +95,21 @@
 /* standard block size for offsets defined below */
 #define EXYNOS_BLOCK_SIZE		0x00010000
 
+
+#if defined(EXYNOS5)
+#include <arm/samsung/exynos5_reg.h>
+#endif
+#if defined(EXYNOS4)
+#include <arm/samsung/exynos4_reg.h>
+#endif
+
+
+/* standard frequency settings */
+#define EXYNOS_ACLK_REF_FREQ		(200*1000*1000)	/* 200 Mhz */
+#define EXYNOS_UART_FREQ		(109*1000*1000) /* should be EXYNOS_ACLK_REF_FREQ! */
+
+
+/* Watchdog register definitions */
 #define EXYNOS_WDT_WTCON		0x0000
 #define  WTCON_PRESCALER		__BITS(15,8)
 #define  WTCON_ENABLE			__BIT(5)
@@ -111,16 +126,5 @@
 #define  WTCNT_COUNT			__BITS(15,0)
 #define EXYNOS_WDT_WTCLRINT		0x000C
 
-
-/* standard frequency settings */
-#define EXYNOS_ACLK_REF_FREQ		(200*1000*1000)	/* 200 Mhz */
-#define EXYNOS_UART_FREQ		(109*1000*1000) /* should be EXYNOS_ACLK_REF_FREQ! */
-
-#if defined(EXYNOS5)
-#include <arm/samsung/exynos5_reg.h>
-#endif
-#if defined(EXYNOS4)
-#include <arm/samsung/exynos4_reg.h>
-#endif
 
 #endif /* _ARM_SAMSUNG_EXYNOS_REG_H_ */

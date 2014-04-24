@@ -516,19 +516,22 @@ mpt_done(mpt_softc_t *mpt, uint32_t reply)
 
 		/* XXX BUS_DMASYNC_POSTREAD XXX */
 		mpt_reply = MPT_REPLY_PTOV(mpt, reply);
-		if (mpt->verbose > 1) {
-			uint32_t *pReply = (uint32_t *) mpt_reply;
+		if (mpt_reply != NULL) {
+			if (mpt->verbose > 1) {
+				uint32_t *pReply = (uint32_t *) mpt_reply;
 
-			mpt_prt(mpt, "Address Reply (index %u):",
-			    le32toh(mpt_reply->MsgContext) & 0xffff);
-			mpt_prt(mpt, "%08x %08x %08x %08x",
-			    pReply[0], pReply[1], pReply[2], pReply[3]);
-			mpt_prt(mpt, "%08x %08x %08x %08x",
-			    pReply[4], pReply[5], pReply[6], pReply[7]);
-			mpt_prt(mpt, "%08x %08x %08x %08x",
-			    pReply[8], pReply[9], pReply[10], pReply[11]);
-		}
-		index = le32toh(mpt_reply->MsgContext);
+				mpt_prt(mpt, "Address Reply (index %u):",
+				    le32toh(mpt_reply->MsgContext) & 0xffff);
+				mpt_prt(mpt, "%08x %08x %08x %08x", pReply[0],
+				    pReply[1], pReply[2], pReply[3]);
+				mpt_prt(mpt, "%08x %08x %08x %08x", pReply[4],
+				    pReply[5], pReply[6], pReply[7]);
+				mpt_prt(mpt, "%08x %08x %08x %08x", pReply[8],
+				    pReply[9], pReply[10], pReply[11]);
+			}
+			index = le32toh(mpt_reply->MsgContext);
+		} else
+			index = reply & MPT_CONTEXT_MASK;
 	}
 
 	/*
@@ -540,13 +543,15 @@ mpt_done(mpt_softc_t *mpt, uint32_t reply)
 		if (mpt_reply != NULL)
 			mpt_ctlop(mpt, mpt_reply, reply);
 		else
-			mpt_prt(mpt, "mpt_done: index 0x%x, NULL reply", index);
+			mpt_prt(mpt, "%s: index 0x%x, NULL reply", __func__,
+			    index);
 		return;
 	}
 
 	/* Did we end up with a valid index into the table? */
 	if (__predict_false(index < 0 || index >= MPT_MAX_REQUESTS(mpt))) {
-		mpt_prt(mpt, "mpt_done: invalid index (0x%x) in reply", index);
+		mpt_prt(mpt, "%s: invalid index (0x%x) in reply", __func__,
+		    index);
 		return;
 	}
 
@@ -554,7 +559,8 @@ mpt_done(mpt_softc_t *mpt, uint32_t reply)
 
 	/* Make sure memory hasn't been trashed. */
 	if (__predict_false(req->index != index)) {
-		mpt_prt(mpt, "mpt_done: corrupted request_t (0x%x)", index);
+		mpt_prt(mpt, "%s: corrupted request_t (0x%x)", __func__,
+		    index);
 		return;
 	}
 
@@ -564,7 +570,7 @@ mpt_done(mpt_softc_t *mpt, uint32_t reply)
 	/* Short cut for task management replies; nothing more for us to do. */
 	if (__predict_false(mpt_req->Function == MPI_FUNCTION_SCSI_TASK_MGMT)) {
 		if (mpt->verbose > 1)
-			mpt_prt(mpt, "mpt_done: TASK MGMT");
+			mpt_prt(mpt, "%s: TASK MGMT", __func__);
 		KASSERT(req == mpt->mngt_req);
 		mpt->mngt_req = NULL;
 		goto done;
@@ -580,8 +586,8 @@ mpt_done(mpt_softc_t *mpt, uint32_t reply)
 	if (__predict_false(mpt_req->Function !=
 			    MPI_FUNCTION_SCSI_IO_REQUEST)) {
 		if (mpt->verbose > 1)
-			mpt_prt(mpt, "mpt_done: unknown Function 0x%x (0x%x)",
-			    mpt_req->Function, index);
+			mpt_prt(mpt, "%s: unknown Function 0x%x (0x%x)",
+			    __func__, mpt_req->Function, index);
 		goto done;
 	}
 
@@ -591,7 +597,7 @@ mpt_done(mpt_softc_t *mpt, uint32_t reply)
 	/* Can't have a SCSI command without a scsipi_xfer. */
 	if (__predict_false(xs == NULL)) {
 		mpt_prt(mpt,
-		    "mpt_done: no scsipi_xfer, index = 0x%x, seq = 0x%08x",
+		    "%s: no scsipi_xfer, index = 0x%x, seq = 0x%08x", __func__,
 		    req->index, req->sequence);
 		mpt_prt(mpt, "request state: %s", mpt_req_state(req->debug));
 		mpt_prt(mpt, "mpt_request:");
@@ -646,7 +652,7 @@ mpt_done(mpt_softc_t *mpt, uint32_t reply)
 	switch (le16toh(mpt_reply->IOCStatus) & MPI_IOCSTATUS_MASK) {
 	case MPI_IOCSTATUS_SCSI_DATA_OVERRUN:
 		xs->error = XS_DRIVER_STUFFUP;
-		mpt_prt(mpt,"mpt_done: IOC overrun!");
+		mpt_prt(mpt, "%s: IOC overrun!", __func__);
 		break;
 
 	case MPI_IOCSTATUS_SCSI_DATA_UNDERRUN:
@@ -705,34 +711,34 @@ mpt_done(mpt_softc_t *mpt, uint32_t reply)
 
 	case MPI_IOCSTATUS_SCSI_RESIDUAL_MISMATCH:
 		xs->error = XS_DRIVER_STUFFUP;
-		mpt_prt(mpt,"mpt_done: IOC SCSI residual mismatch!");
+		mpt_prt(mpt, "%s: IOC SCSI residual mismatch!", __func__);
 		restart = 1;
 		break;
 
 	case MPI_IOCSTATUS_SCSI_TASK_TERMINATED:
 		/* XXX What should we do here? */
-		mpt_prt(mpt,"mpt_done: IOC SCSI task terminated!");
+		mpt_prt(mpt, "%s: IOC SCSI task terminated!", __func__);
 		restart = 1;
 		break;
 
 	case MPI_IOCSTATUS_SCSI_TASK_MGMT_FAILED:
 		/* XXX */
 		xs->error = XS_DRIVER_STUFFUP;
-		mpt_prt(mpt,"mpt_done: IOC SCSI task failed!");
+		mpt_prt(mpt, "%s: IOC SCSI task failed!", __func__);
 		restart = 1;
 		break;
 
 	case MPI_IOCSTATUS_SCSI_IOC_TERMINATED:
 		/* XXX */
 		xs->error = XS_DRIVER_STUFFUP;
-		mpt_prt(mpt,"mpt_done: IOC task terminated!");
+		mpt_prt(mpt, "%s: IOC task terminated!", __func__);
 		restart = 1;
 		break;
 
 	case MPI_IOCSTATUS_SCSI_EXT_TERMINATED:
 		/* XXX This is a bus-reset */
 		xs->error = XS_DRIVER_STUFFUP;
-		mpt_prt(mpt,"mpt_done: IOC SCSI bus reset!");
+		mpt_prt(mpt, "%s: IOC SCSI bus reset!", __func__);
 		restart = 1;
 		break;
 
@@ -740,10 +746,12 @@ mpt_done(mpt_softc_t *mpt, uint32_t reply)
 		/*
 		 * FreeBSD and Linux indicate this is a phase error between
 		 * the IOC and the drive itself. When this happens, the IOC
-		* becomes unhappy and stops processing all transactions.  
-		* Call mpt_timeout which knows how to get the IOC back on its feet.
+		 * becomes unhappy and stops processing all transactions.  
+		 * Call mpt_timeout which knows how to get the IOC back
+		 * on its feet.
 		 */
-		 mpt_prt(mpt,"mpt_done: IOC indicates protocol error -- recovering...");
+		 mpt_prt(mpt, "%s: IOC indicates protocol error -- "
+		     "recovering...", __func__);
 		xs->error = XS_TIMEOUT;
 		restart = 1;
 
@@ -752,27 +760,31 @@ mpt_done(mpt_softc_t *mpt, uint32_t reply)
 	default:
 		/* XXX unrecognized HBA error */
 		xs->error = XS_DRIVER_STUFFUP;
-		mpt_prt(mpt,"mpt_done: IOC returned unknown code: 0x%x",le16toh(mpt_reply->IOCStatus));
+		mpt_prt(mpt, "%s: IOC returned unknown code: 0x%x", __func__,
+		    le16toh(mpt_reply->IOCStatus));
 		restart = 1;
 		break;
 	}
 
-	if (mpt_reply->SCSIState & MPI_SCSI_STATE_AUTOSENSE_VALID) {
-		memcpy(&xs->sense.scsi_sense, req->sense_vbuf,
-		    sizeof(xs->sense.scsi_sense));
-	} else if (mpt_reply->SCSIState & MPI_SCSI_STATE_AUTOSENSE_FAILED) {
-		/*
-		 * This will cause the scsipi layer to issue
-		 * a REQUEST SENSE.
-		 */
-		if (xs->status == SCSI_CHECK)
-			xs->error = XS_BUSY;
+	if (mpt_reply != NULL) {
+		if (mpt_reply->SCSIState & MPI_SCSI_STATE_AUTOSENSE_VALID) {
+			memcpy(&xs->sense.scsi_sense, req->sense_vbuf,
+			    sizeof(xs->sense.scsi_sense));
+		} else if (mpt_reply->SCSIState &
+		    MPI_SCSI_STATE_AUTOSENSE_FAILED) {
+			/*
+			 * This will cause the scsipi layer to issue
+			 * a REQUEST SENSE.
+			 */
+			if (xs->status == SCSI_CHECK)
+				xs->error = XS_BUSY;
+		}
 	}
 
  done:
-	if (le16toh(mpt_reply->IOCStatus) & 
+	if (mpt_reply != NULL && le16toh(mpt_reply->IOCStatus) & 
 	MPI_IOCSTATUS_FLAG_LOG_INFO_AVAILABLE) {
-		mpt_prt(mpt,"mpt_done: IOC has error - logging...\n");
+		mpt_prt(mpt, "%s: IOC has error - logging...\n", __func__);
 		mpt_ctlop(mpt, mpt_reply, reply);
 	}
 
@@ -788,7 +800,7 @@ mpt_done(mpt_softc_t *mpt, uint32_t reply)
 		scsipi_done(xs);
 
 	if (restart) {
-		mpt_prt(mpt,"mpt_done: IOC fatal error: restarting...");
+		mpt_prt(mpt, "%s: IOC fatal error: restarting...", __func__);
 		mpt_restart(mpt, NULL);
 	}
 }
@@ -1065,7 +1077,7 @@ mpt_run_xfer(mpt_softc_t *mpt, struct scsipi_xfer *xs)
 		mpt_print_scsi_io_request(mpt_req);
 
 		if (xs->timeout == 0) {
-			mpt_prt(mpt,"mpt_run_xfer: no timeout specified for request: 0x%x\n",
+			mpt_prt(mpt, "mpt_run_xfer: no timeout specified for request: 0x%x\n",
 			req->index);
 			xs->timeout = 500;
 		}

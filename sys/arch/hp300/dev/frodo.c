@@ -117,6 +117,7 @@ static const struct frodo_device frodo_subdevs[] = {
 	{ "com",	FRODO_APCI_OFFSET(1),	FRODO_INTR_APCI1 },
 	{ "com",	FRODO_APCI_OFFSET(2),	FRODO_INTR_APCI2 },
 	{ "com",	FRODO_APCI_OFFSET(3),	FRODO_INTR_APCI3 },
+	{ "mcclock",	FRODO_CALENDAR,		FRODO_INTR_CALENDAR },
 	{ NULL,		0,			0 }
 };
 

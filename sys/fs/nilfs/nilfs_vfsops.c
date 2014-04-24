@@ -800,6 +800,8 @@ nilfs_mount(struct mount *mp, const char *path,
 
 	DPRINTF(VFSCALL, ("nilfs_mount called\n"));
 
+	if (args == NULL)
+		return EINVAL;
 	if (*data_len < sizeof *args)
 		return EINVAL;
 

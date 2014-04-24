@@ -130,6 +130,9 @@ procfs_mount(
 	struct procfs_args *args = data;
 	int error;
 
+	if (args == NULL)
+		return EINVAL;
+
 	if (UIO_MX & (UIO_MX-1)) {
 		log(LOG_ERR, "procfs: invalid directory entry size");
 		return (EINVAL);

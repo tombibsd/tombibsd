@@ -296,8 +296,6 @@ linux_sys_ptrace_arch(struct lwp *l, const struct linux_sys_ptrace_args *uap,
 			*retval = regs->cr;
 		else if (addr == LUSR_OFF(signal))
 			error = 1;
-		else if (addr == LUSR_OFF(signal))
-			error = 1;
 		else if (addr == LUSR_OFF(magic))
 			error = 1;
 		else if (addr == LUSR_OFF(u_comm))

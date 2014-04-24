@@ -243,13 +243,14 @@ int	sscomtxintr(void *);
 int	sscomrxintr(void *);
 int	sscomintr(void *);
 
-int	sscom_cnattach(bus_space_tag_t, const struct sscom_uart_info *, 
-	    int, int, tcflag_t);
+int	sscom_cnattach(bus_space_tag_t, bus_space_handle_t,
+	    const struct sscom_uart_info *, int, int, tcflag_t);
 void	sscom_cndetach(void);
 int	sscom_is_console(bus_space_tag_t, int, bus_space_handle_t *);
 
 #ifdef KGDB
-int	sscom_kgdb_attach(bus_space_tag_t, const struct sscom_uart_info *,
+int	sscom_kgdb_attach(bus_space_tag_t, bus_space_handle_t,
+	    const struct sscom_uart_info *,
 	    int, int, tcflag_t);
 #endif
 

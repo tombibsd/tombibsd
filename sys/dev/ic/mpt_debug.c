@@ -201,10 +201,10 @@ mpt_ioc_diag(u_int32_t code)
 		return tbuf;
 	while (status->Error_Code >= 0) {
 		if ((status->Error_Code & code) != 0) {
+			if (len >= sizeof(tbuf))
+				return tbuf;
 			len += snprintf(tbuf + len, sizeof(tbuf) - len, "%s ",
 			    status->Error_String);
-			if (len > sizeof(tbuf))
-				return tbuf;
 		}
 		status++;
 	}
@@ -248,10 +248,10 @@ mpt_scsi_state(int code)
 		return tbuf;
 	while (status->Error_Code >= 0) {
 		if ((status->Error_Code & code) != 0) {
+			if (len >= sizeof(tbuf))
+				return tbuf;
 			len += snprintf(tbuf + len, sizeof(tbuf) - len, "%s ",
 				status->Error_String);
-			if (len > sizeof(tbuf))
-				return tbuf;
 		}
 		status++;
 	}

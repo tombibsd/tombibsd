@@ -418,7 +418,7 @@ sysctl_dounpcb(struct kinfo_pcb *pcb, const struct socket *so)
 	pcb->ki_rcvq = so->so_rcv.sb_cc;
 	pcb->ki_sndq = so->so_snd.sb_cc;
 
-	un = (struct sockaddr_un *)&pcb->ki_src;
+	un = (struct sockaddr_un *)pcb->ki_spad;
 	/*
 	 * local domain sockets may bind without having a local
 	 * endpoint.  bleah!
@@ -430,17 +430,17 @@ sysctl_dounpcb(struct kinfo_pcb *pcb, const struct socket *so)
 		 * makeun().
 		 */
 		memcpy(un, unp->unp_addr,
-		    min(sizeof(pcb->ki_s), unp->unp_addr->sun_len + 1));
+		    min(sizeof(pcb->ki_spad), unp->unp_addr->sun_len + 1));
 	}
 	else {
 		un->sun_len = offsetof(struct sockaddr_un, sun_path);
 		un->sun_family = pcb->ki_family;
 	}
 	if (unp->unp_conn != NULL) {
-		un = (struct sockaddr_un *)&pcb->ki_dst;
+		un = (struct sockaddr_un *)pcb->ki_dpad;
 		if (unp->unp_conn->unp_addr != NULL) {
 			memcpy(un, unp->unp_conn->unp_addr,
-			    min(sizeof(pcb->ki_s), unp->unp_conn->unp_addr->sun_len + 1));
+			    min(sizeof(pcb->ki_dpad), unp->unp_conn->unp_addr->sun_len + 1));
 		}
 		else {
 			un->sun_len = offsetof(struct sockaddr_un, sun_path);

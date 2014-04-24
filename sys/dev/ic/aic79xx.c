@@ -8605,13 +8605,11 @@ ahd_print_register(ahd_reg_parse_entry_t *table, u_int num_entries,
 		*cur_column = 0;
 	}
 	printed = snprintf(line, sizeof(line), "%s[0x%x]", name, value);
-	if (printed > sizeof(line))
 		printed = sizeof(line);
 	if (table == NULL) {
-		printed += snprintf(&line[printed], (sizeof line) - printed,
-		    " ");
-		if (printed > sizeof(line))
-			printed = sizeof(line);
+		if (printed < sizeof(line))
+		    printed += snprintf(&line[printed],
+			(sizeof line) - printed, " ");
 		printf("%s", line);
 		if (cur_column != NULL)
 			*cur_column += printed;
@@ -8627,12 +8625,11 @@ ahd_print_register(ahd_reg_parse_entry_t *table, u_int num_entries,
 			 || ((printed_mask & table[entry].mask)
 			  == table[entry].mask))
 				continue;
-			if (printed > sizeof(line))
-				printed = sizeof(line);
-			printed += snprintf(&line[printed],
-			    (sizeof line) - printed, "%s%s",
-				printed_mask == 0 ? ":(" : "|",
-				table[entry].name);
+			if (printed < sizeof(line))
+			    printed += snprintf(&line[printed],
+				(sizeof line) - printed, "%s%s",
+				    printed_mask == 0 ? ":(" : "|",
+				    table[entry].name);
 			printed_mask |= table[entry].mask;
 
 			break;
@@ -8640,14 +8637,14 @@ ahd_print_register(ahd_reg_parse_entry_t *table, u_int num_entries,
 		if (entry >= num_entries)
 			break;
 	}
-	if (printed > sizeof(line))
-		printed = sizeof(line);
-	if (printed_mask != 0)
-		printed += snprintf(&line[printed],
-		    (sizeof line) - printed, ") ");
-	else
-		printed += snprintf(&line[printed],
-		    (sizeof line) - printed, " ");
+	if (printed < sizeof(line)) {
+		if (printed_mask != 0)
+			printed += snprintf(&line[printed],
+			    (sizeof line) - printed, ") ");
+		else
+			printed += snprintf(&line[printed],
+			    (sizeof line) - printed, " ");
+	}
 	if (cur_column != NULL)
 		*cur_column += printed;
 	printf("%s", line);

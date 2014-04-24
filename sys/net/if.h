@@ -401,7 +401,8 @@ typedef struct ifnet {
 #define	IFCAP_CSUM_UDPv6_Rx	0x10000	/* can do IPv6/UDP checksums (Rx) */
 #define	IFCAP_CSUM_UDPv6_Tx	0x20000	/* can do IPv6/UDP checksums (Tx) */
 #define	IFCAP_TSOv6		0x40000	/* can do TCPv6 segmentation offload */
-#define	IFCAP_MASK		0x7ff80 /* currently valid capabilities */
+#define	IFCAP_LRO		0x80000	/* can do Large Receive Offload */
+#define	IFCAP_MASK		0xfff80 /* currently valid capabilities */
 
 #define	IFCAPBITS		\
 	"\020"			\
@@ -416,7 +417,8 @@ typedef struct ifnet {
 	"\20TCP6CSUM_Tx"	\
 	"\21UDP6CSUM_Rx"	\
 	"\22UDP6CSUM_Tx"	\
-	"\23TSO6"
+	"\23TSO6"		\
+	"\24LRO"		\
 
 /*
  * Output queues (ifp->if_snd) and internetwork datagram level (pup level 1)

@@ -124,6 +124,7 @@ static const struct {
 	{ 4, " r2p0" },
 	{ 5, " r3p0" },
 	{ 6, " r3p1" },
+	{ 7, " r3p1a" },
 	{ 8, " r3p2" },
 	{ 9, " r3p3" },
 };
@@ -134,6 +135,12 @@ arml2cc_attach(device_t parent, device_t self, void *aux)
         struct arml2cc_softc * const sc = device_private(self);
 	struct mpcore_attach_args * const mpcaa = aux;
 	const char * const xname = device_xname(self);
+	prop_dictionary_t dict = device_properties(self);
+	uint32_t off;
+
+	if (!prop_dictionary_get_uint32(dict, "offset", &off)) {
+		off = L2CC_BASE;
+	}
 
 	arml2cc_sc = sc;
 	sc->sc_dev = self;
@@ -150,7 +157,7 @@ arml2cc_attach(device_t parent, device_t self, void *aux)
 	mutex_init(&sc->sc_lock, MUTEX_DEFAULT, IPL_HIGH);
 
 	bus_space_subregion(sc->sc_memt, mpcaa->mpcaa_memh, 
-	    L2CC_BASE, L2CC_SIZE, &sc->sc_memh);
+	    off, L2CC_SIZE, &sc->sc_memh);
 
 	uint32_t id = arml2cc_read_4(sc, L2C_CACHE_ID);
 	u_int rev = __SHIFTOUT(id, CACHE_ID_REV);

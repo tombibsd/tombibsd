@@ -157,6 +157,9 @@ frodo*		at intio?
 #wskbd*		at dnkbd? mux 1
 com*		at frodo? offset ?	# tty flavor
 
+# mc146818-like real time clock found on 425e
+mcclock0	at frodo? offset 0x80
+
 # Davinci framebuffer
 dvbox*		at intio?
 dvbox*		at dio? scode ?

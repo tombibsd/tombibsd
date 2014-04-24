@@ -47,6 +47,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <arm/samsung/exynos_reg.h>
 #include <arm/samsung/exynos_var.h>
 
+
 #if NEXYNOS_WDT > 0
 static int exynos_wdt_match(device_t, cfdata_t, void *);
 static void exynos_wdt_attach(device_t, device_t, void *);
@@ -177,8 +178,8 @@ exynos_wdt_attach(device_t parent, device_t self, void *aux)
 	sc->sc_dev = self;
 	sc->sc_bst = exyo->exyo_core_bst;
 
-	if (bus_space_map(sc->sc_bst, exyo->exyo_loc.loc_offset,
-	    exyo->exyo_loc.loc_size, 0, &sc->sc_wdog_bsh)) {
+	if (bus_space_subregion(sc->sc_bst, exyo->exyo_core_bsh,
+	    exyo->exyo_loc.loc_offset, exyo->exyo_loc.loc_size, &sc->sc_wdog_bsh)) {
 		aprint_error(": failed to map registers\n");
 		return;
 	}
@@ -287,3 +288,4 @@ exynos_wdt_reset(void)
 	bus_space_write_4(bst, bsh, wdt_offset + EXYNOS_WDT_WTCON,
 	   WTCON_ENABLE | WTCON_RESET_ENABLE);
 }
+

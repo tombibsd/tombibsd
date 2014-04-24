@@ -66,10 +66,6 @@ void printrominvo(void);
 void configure(void);
 int sctoaddr(int);
 
-/* clock.c */
-void read_bbc(void);
-u_char read_bbc_reg(int);
-
 /* cons.c */
 extern	int cons_scode;
 void cninit(void);

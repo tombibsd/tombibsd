@@ -51,7 +51,7 @@ __RCSID("$NetBSD$");
 #endif
 #endif
 
-#ifdef _FORTIFY_SOURCE
+#if defined(_FORTIFY_SOURCE) || defined(_STANDALONE) || defined(_KERNEL)
 #undef bcopy
 #undef memcpy
 #undef memmove

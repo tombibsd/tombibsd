@@ -589,3 +589,280 @@ ENTRY(_ZNK7_Unwind15Registers_SPARC6jumptoEv)
 	  ld	[%o0 + 32], %o0
 END(_ZNK7_Unwind15Registers_SPARC6jumptoEv)
 #endif
+
+#if defined(__alpha__)
+	.set nomacro
+	.set noat
+	.hidden _ZN7_Unwind15Registers_AlphaC1Ev
+LEAF_NOPROFILE(_ZN7_Unwind15Registers_AlphaC1Ev, 1)
+	stq $0, 0($16)
+	stq $1, 8($16)
+	stq $2, 16($16)
+	stq $3, 24($16)
+	stq $4, 32($16)
+	stq $5, 40($16)
+	stq $6, 48($16)
+	stq $7, 56($16)
+	stq $8, 64($16)
+	stq $9, 72($16)
+	stq $10, 80($16)
+	stq $11, 88($16)
+	stq $12, 96($16)
+	stq $13, 104($16)
+	stq $14, 112($16)
+	stq $15, 120($16)
+	stq $16, 128($16)
+	stq $17, 136($16)
+	stq $18, 144($16)
+	stq $19, 152($16)
+	stq $20, 160($16)
+	stq $21, 168($16)
+	stq $22, 176($16)
+	stq $23, 184($16)
+	stq $24, 192($16)
+	stq $25, 200($16)
+	stq $26, 208($16)
+	stq $27, 216($16)
+	stq $28, 224($16)
+	stq $29, 232($16)
+	stq $30, 240($16)
+	stq $26, 248($16)
+
+	stt $f0, 256($16)
+	stt $f1, 264($16)
+	stt $f2, 272($16)
+	stt $f3, 280($16)
+	stt $f4, 288($16)
+	stt $f5, 296($16)
+	stt $f6, 304($16)
+	stt $f7, 312($16)
+	stt $f8, 320($16)
+	stt $f9, 328($16)
+	stt $f10, 336($16)
+	stt $f11, 344($16)
+	stt $f12, 352($16)
+	stt $f13, 360($16)
+	stt $f14, 368($16)
+	stt $f15, 376($16)
+	stt $f16, 384($16)
+	stt $f17, 392($16)
+	stt $f18, 400($16)
+	stt $f19, 408($16)
+	stt $f20, 416($16)
+	stt $f21, 424($16)
+	stt $f22, 432($16)
+	stt $f23, 440($16)
+	stt $f24, 448($16)
+	stt $f25, 456($16)
+	stt $f26, 464($16)
+	stt $f27, 472($16)
+	stt $f28, 480($16)
+	stt $f29, 488($16)
+	stt $f30, 496($16)
+	ret $31, ($26), 1
+END(_ZN7_Unwind15Registers_AlphaC1Ev)
+
+	.set nomacro
+	.set noat
+	.hidden _ZNK7_Unwind15Registers_Alpha6jumptoEv
+LEAF_NOPROFILE(_ZNK7_Unwind15Registers_Alpha6jumptoEv, 1)
+	ldq $0, 0($16)
+	ldq $1, 8($16)
+	ldq $2, 16($16)
+	ldq $3, 24($16)
+	ldq $4, 32($16)
+	ldq $5, 40($16)
+	ldq $6, 48($16)
+	ldq $7, 56($16)
+	ldq $8, 64($16)
+	ldq $9, 72($16)
+	ldq $10, 80($16)
+	ldq $11, 88($16)
+	ldq $12, 96($16)
+	ldq $13, 104($16)
+	ldq $14, 112($16)
+	ldq $15, 120($16)
+	ldq $17, 136($16)
+	ldq $18, 144($16)
+	ldq $19, 152($16)
+	ldq $20, 160($16)
+	ldq $21, 168($16)
+	ldq $22, 176($16)
+	ldq $23, 184($16)
+	ldq $24, 192($16)
+	ldq $25, 200($16)
+	ldq $27, 216($16)
+	ldq $28, 224($16)
+	ldq $29, 232($16)
+	ldq $30, 240($16)
+	ldq $26, 248($16)
+
+	ldt $f0, 256($16)
+	ldt $f1, 264($16)
+	ldt $f2, 272($16)
+	ldt $f3, 280($16)
+	ldt $f4, 288($16)
+	ldt $f5, 296($16)
+	ldt $f6, 304($16)
+	ldt $f7, 312($16)
+	ldt $f8, 320($16)
+	ldt $f9, 328($16)
+	ldt $f10, 336($16)
+	ldt $f11, 344($16)
+	ldt $f12, 352($16)
+	ldt $f13, 360($16)
+	ldt $f14, 368($16)
+	ldt $f15, 376($16)
+	ldt $f16, 384($16)
+	ldt $f17, 392($16)
+	ldt $f18, 400($16)
+	ldt $f19, 408($16)
+	ldt $f20, 416($16)
+	ldt $f21, 424($16)
+	ldt $f22, 432($16)
+	ldt $f23, 440($16)
+	ldt $f24, 448($16)
+	ldt $f25, 456($16)
+	ldt $f26, 464($16)
+	ldt $f27, 472($16)
+	ldt $f28, 480($16)
+	ldt $f29, 488($16)
+	ldt $f30, 496($16)
+	ldq $16, 128($16)
+	ret $31, ($26), 1
+END(_ZNK7_Unwind15Registers_Alpha6jumptoEv)
+#endif
+
+#if defined(__hppa__)
+LEAF_ENTRY_NOPROFILE(_ZN7_Unwind14Registers_HPPAC1Ev)
+	stw %r2, 0(%r26)
+	stw %r1, 4(%r26)
+	stw %r2, 8(%r26)
+	stw %r3, 12(%r26)
+	stw %r4, 16(%r26)
+	stw %r5, 20(%r26)
+	stw %r6, 24(%r26)
+	stw %r7, 28(%r26)
+	stw %r8, 32(%r26)
+	stw %r9, 36(%r26)
+	stw %r10, 40(%r26)
+	stw %r11, 44(%r26)
+	stw %r12, 48(%r26)
+	stw %r13, 52(%r26)
+	stw %r14, 56(%r26)
+	stw %r15, 60(%r26)
+	stw %r16, 64(%r26)
+	stw %r17, 68(%r26)
+	stw %r18, 72(%r26)
+	stw %r19, 76(%r26)
+	stw %r20, 80(%r26)
+	stw %r21, 84(%r26)
+	stw %r22, 88(%r26)
+	stw %r23, 92(%r26)
+	stw %r24, 96(%r26)
+	stw %r25, 100(%r26)
+	stw %r26, 104(%r26)
+	stw %r27, 108(%r26)
+	stw %r28, 112(%r26)
+	stw %r29, 116(%r26)
+	stw %r30, 120(%r26)
+	stw %r31, 124(%r26)
+	ldi 128, %r19
+	addl %r19, %r26, %r19
+	fstds,ma %fr4, 8(%r19)
+	fstds,ma %fr5, 8(%r19)
+	fstds,ma %fr6, 8(%r19)
+	fstds,ma %fr7, 8(%r19)
+	fstds,ma %fr8, 8(%r19)
+	fstds,ma %fr9, 8(%r19)
+	fstds,ma %fr10, 8(%r19)
+	fstds,ma %fr11, 8(%r19)
+	fstds,ma %fr12, 8(%r19)
+	fstds,ma %fr13, 8(%r19)
+	fstds,ma %fr14, 8(%r19)
+	fstds,ma %fr15, 8(%r19)
+	fstds,ma %fr16, 8(%r19)
+	fstds,ma %fr17, 8(%r19)
+	fstds,ma %fr18, 8(%r19)
+	fstds,ma %fr19, 8(%r19)
+	fstds,ma %fr20, 8(%r19)
+	fstds,ma %fr21, 8(%r19)
+	fstds,ma %fr22, 8(%r19)
+	fstds,ma %fr23, 8(%r19)
+	fstds,ma %fr24, 8(%r19)
+	fstds,ma %fr25, 8(%r19)
+	fstds,ma %fr19, 8(%r19)
+	fstds,ma %fr27, 8(%r19)
+	fstds,ma %fr28, 8(%r19)
+	fstds,ma %fr29, 8(%r19)
+	fstds,ma %fr30, 8(%r19)
+	fstds,ma %fr31, 8(%r19)
+	ldw 76(%r26), %r19
+	bv,n %r0(%r2)
+EXIT(_ZN7_Unwind14Registers_HPPAC1Ev)
+
+LEAF_ENTRY_NOPROFILE(_ZNK7_Unwind14Registers_HPPA6jumptoEv)
+	ldi 128, %r19
+	addl %r19, %r26, %r19
+	fldds,ma 8(%r19), %fr4
+	fldds,ma 8(%r19), %fr5
+	fldds,ma 8(%r19), %fr6
+	fldds,ma 8(%r19), %fr7
+	fldds,ma 8(%r19), %fr8
+	fldds,ma 8(%r19), %fr9
+	fldds,ma 8(%r19), %fr10
+	fldds,ma 8(%r19), %fr11
+	fldds,ma 8(%r19), %fr12
+	fldds,ma 8(%r19), %fr13
+	fldds,ma 8(%r19), %fr14
+	fldds,ma 8(%r19), %fr15
+	fldds,ma 8(%r19), %fr16
+	fldds,ma 8(%r19), %fr17
+	fldds,ma 8(%r19), %fr18
+	fldds,ma 8(%r19), %fr19
+	fldds,ma 8(%r19), %fr20
+	fldds,ma 8(%r19), %fr21
+	fldds,ma 8(%r19), %fr22
+	fldds,ma 8(%r19), %fr23
+	fldds,ma 8(%r19), %fr24
+	fldds,ma 8(%r19), %fr25
+	fldds,ma 8(%r19), %fr26
+	fldds,ma 8(%r19), %fr27
+	fldds,ma 8(%r19), %fr28
+	fldds,ma 8(%r19), %fr29
+	fldds,ma 8(%r19), %fr30
+	fldds,ma 8(%r19), %fr31
+	ldw 0(%r26), %r2
+	ldw 4(%r26), %r1
+	ldw 12(%r26), %r3
+	ldw 16(%r26), %r4
+	ldw 20(%r26), %r5
+	ldw 24(%r26), %r6
+	ldw 28(%r26), %r7
+	ldw 32(%r26), %r8
+	ldw 36(%r26), %r9
+	ldw 40(%r26), %r10
+	ldw 44(%r26), %r11
+	ldw 48(%r26), %r12
+	ldw 52(%r26), %r13
+	ldw 56(%r26), %r14
+	ldw 60(%r26), %r15
+	ldw 64(%r26), %r16
+	ldw 68(%r26), %r17
+	ldw 72(%r26), %r18
+	ldw 76(%r26), %r19
+	ldw 80(%r26), %r20
+	ldw 84(%r26), %r21
+	ldw 88(%r26), %r22
+	ldw 92(%r26), %r23
+	ldw 96(%r26), %r24
+	ldw 100(%r26), %r25
+	ldw 108(%r26), %r27
+	ldw 112(%r26), %r28
+	ldw 116(%r26), %r29
+	ldw 120(%r26), %r30
+	ldw 124(%r26), %r31
+	ldw 104(%r26), %r26
+	bv,n %r0(%r2)
+EXIT(_ZNK7_Unwind14Registers_HPPA6jumptoEv)
+#endif

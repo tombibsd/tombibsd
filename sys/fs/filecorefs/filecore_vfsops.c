@@ -229,6 +229,8 @@ filecore_mount(struct mount *mp, const char *path, void *data, size_t *data_len)
 	int error;
 	struct filecore_mnt *fcmp = NULL;
 
+	if (args == NULL)
+		return EINVAL;
 	if (*data_len < sizeof *args)
 		return EINVAL;
 

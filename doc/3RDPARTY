@@ -191,6 +191,9 @@ Responsible:
 License:	BSD (2-clause) (see http://www.freebsd.org/cgi/cvsweb.cgi/src/COPYRIGHT)
 Location:	share/misc/bsd-family-tree
 Notes:
+Please send all updates upstream.  Eitan Adler <lists@eitanadler.com>
+is a FreeBSD committer who has been helpful with incorporating changes
+in the past.
 
 Package:	byacc
 Version:	20130304

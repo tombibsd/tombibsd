@@ -757,6 +757,7 @@ deftyp(void)
 			break;
 		case DOUBLE:
 			if (l == LONG) {
+		case LDOUBLE:
 				l = NOTSPEC;
 				t = LDOUBLE;
 				if (tflag)
@@ -778,7 +779,7 @@ deftyp(void)
 		case LCOMPLEX:
 			break;
 		default:
-			LERROR("deftyp()");
+			LERROR("deftyp(%s)", basictyname(t));
 		}
 		if (t != INT && t != CHAR && (s != NOTSPEC || l != NOTSPEC)) {
 			dcs->d_terr = 1;

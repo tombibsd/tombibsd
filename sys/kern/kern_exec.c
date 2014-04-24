@@ -122,6 +122,11 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 struct execve_data;
 
+static size_t calcargs(struct execve_data * restrict, const size_t);
+static size_t calcstack(struct execve_data * restrict, const size_t);
+static int copyoutargs(struct execve_data * restrict, struct lwp *,
+    char * const);
+static int copyoutpsstrs(struct execve_data * restrict, struct proc *);
 static int copyinargs(struct execve_data * restrict, char * const *,
     char * const *, execve_fetch_element_t, char **);
 static int copyinargstrs(struct execve_data * restrict, char * const *,
@@ -250,6 +255,7 @@ struct execve_data {
 	char			*ed_resolvedpathbuf;
 	size_t			ed_ps_strings_sz;
 	int			ed_szsigcode;
+	size_t			ed_argslen;
 	long			ed_argc;
 	long			ed_envc;
 };
@@ -700,29 +706,10 @@ execve_loadvm(struct lwp *l, const char *path, char * const *args,
 	 * Calculate the new stack size.
 	 */
 
-	const size_t nargenvptrs =
-	    data->ed_argc +		/* char *argv[] */
-	    1 +				/* \0 */
-	    data->ed_envc +		/* char *env[] */
-	    1 +				/* \0 */
-	    epp->ep_esch->es_arglen;	/* auxinfo */
-
-	const size_t ptrsz = (epp->ep_flags & EXEC_32) ?
-	    sizeof(int) : sizeof(char *);
-
-	const size_t argenvstrlen = (char *)ALIGN(dp) - data->ed_argp;
-
-	data->ed_szsigcode = epp->ep_esch->es_emul->e_esigcode -
-	    epp->ep_esch->es_emul->e_sigcode;
-
-	data->ed_ps_strings_sz = (epp->ep_flags & EXEC_32) ?
-	    sizeof(struct ps_strings32) : sizeof(struct ps_strings);
-
-	const size_t aslrgap =
 #ifdef PAX_ASLR
-	    pax_aslr_active(l) ? (cprng_fast32() % PAGE_SIZE) : 0;
+#define	ASLR_GAP(l)	(pax_aslr_active(l) ? (cprng_fast32() % PAGE_SIZE) : 0)
 #else
-	    0;
+#define	ASLR_GAP(l)	0
 #endif
 
 #ifdef __MACHINE_STACK_GROWS_UP
@@ -736,32 +723,20 @@ execve_loadvm(struct lwp *l, const char *path, char * const *args,
 #define	RTLD_GAP	0
 #endif
 
-	const size_t argenvlen =
-	    RTLD_GAP +			/* reserved for _rtld() */
-	    sizeof(int) +		/* XXX argc in stack is long, not int */
-	    (nargenvptrs * ptrsz);	/* XXX auxinfo multiplied by ptr size? */
+	const size_t argenvstrlen = (char *)ALIGN(dp) - data->ed_argp;
 
-	const size_t sigcode_psstr_sz =
-	    data->ed_szsigcode +	/* sigcode */
-	    data->ed_ps_strings_sz +	/* ps_strings */
-	    STACK_PTHREADSPACE;		/* pthread space */
+	data->ed_argslen = calcargs(data, argenvstrlen);
 
-	const size_t stacklen =
-	    argenvlen +
-	    argenvstrlen +
-	    aslrgap +
-	    sigcode_psstr_sz;
+	const size_t len = calcstack(data, ASLR_GAP(l) + RTLD_GAP);
 
-	/* make the stack "safely" aligned */
-	const size_t aligned_stacklen = STACK_LEN_ALIGN(stacklen, STACK_ALIGNBYTES);
-
-	if (aligned_stacklen > epp->ep_ssize) {
+	if (len > epp->ep_ssize) {
 		/* in effect, compare to initial limit */
-		DPRINTF(("%s: stack limit exceeded %zu\n", __func__, aligned_stacklen));
+		DPRINTF(("%s: stack limit exceeded %zu\n", __func__, len));
+		error = ENOMEM;
 		goto bad;
 	}
 	/* adjust "active stack depth" for process VSZ */
-	epp->ep_ssize = aligned_stacklen;
+	epp->ep_ssize = len;
 
 	return 0;
 
@@ -805,6 +780,60 @@ execve_loadvm(struct lwp *l, const char *path, char * const *args,
 	return error;
 }
 
+static int
+execve_dovmcmds(struct lwp *l, struct execve_data * restrict data)
+{
+	struct exec_package	* const epp = &data->ed_pack;
+	struct proc		*p = l->l_proc;
+	struct exec_vmcmd	*base_vcp;
+	int			error = 0;
+	int			i;
+
+	/* record proc's vnode, for use by procfs and others */
+	if (p->p_textvp)
+		vrele(p->p_textvp);
+	vref(epp->ep_vp);
+	p->p_textvp = epp->ep_vp;
+
+	/* create the new process's VM space by running the vmcmds */
+	KASSERTMSG(epp->ep_vmcmds.evs_used != 0, "%s: no vmcmds", __func__);
+
+	DUMPVMCMDS(epp, 0, 0);
+
+	base_vcp = NULL;
+
+	for (i = 0; i < epp->ep_vmcmds.evs_used && !error; i++) {
+		struct exec_vmcmd *vcp;
+
+		vcp = &epp->ep_vmcmds.evs_cmds[i];
+		if (vcp->ev_flags & VMCMD_RELATIVE) {
+			KASSERTMSG(base_vcp != NULL,
+			    "%s: relative vmcmd with no base", __func__);
+			KASSERTMSG((vcp->ev_flags & VMCMD_BASE) == 0,
+			    "%s: illegal base & relative vmcmd", __func__);
+			vcp->ev_addr += base_vcp->ev_addr;
+		}
+		error = (*vcp->ev_proc)(l, vcp);
+		if (error)
+			DUMPVMCMDS(epp, i, error);
+		if (vcp->ev_flags & VMCMD_BASE)
+			base_vcp = vcp;
+	}
+
+	/* free the vmspace-creation commands, and release their references */
+	kill_vmcmds(&epp->ep_vmcmds);
+
+	vn_lock(epp->ep_vp, LK_EXCLUSIVE | LK_RETRY);
+	VOP_CLOSE(epp->ep_vp, FREAD, l->l_cred);
+	vput(epp->ep_vp);
+
+	/* if an error happened, deallocate and punt */
+	if (error != 0) {
+		DPRINTF(("%s: vmcmd %zu failed: %d\n", __func__, i - 1, error));
+	}
+	return error;
+}
+
 static void
 execve_free_data(struct execve_data *data)
 {
@@ -833,6 +862,58 @@ execve_free_data(struct execve_data *data)
 	pathbuf_stringcopy_put(data->ed_pathbuf, data->ed_pathstring);
 	pathbuf_destroy(data->ed_pathbuf);
 	PNBUF_PUT(data->ed_resolvedpathbuf);
+}
+
+static void
+pathexec(struct exec_package *epp, struct proc *p, const char *pathstring)
+{
+	const char		*commandname;
+	size_t			commandlen;
+	char			*path;
+
+	/* set command name & other accounting info */
+	commandname = strrchr(epp->ep_resolvedname, '/');
+	if (commandname != NULL) {
+		commandname++;
+	} else {
+		commandname = epp->ep_resolvedname;
+	}
+	commandlen = min(strlen(commandname), MAXCOMLEN);
+	(void)memcpy(p->p_comm, commandname, commandlen);
+	p->p_comm[commandlen] = '\0';
+
+	path = PNBUF_GET();
+
+	/*
+	 * If the path starts with /, we don't need to do any work.
+	 * This handles the majority of the cases.
+	 * In the future perhaps we could canonicalize it?
+	 */
+	if (pathstring[0] == '/') {
+		(void)strlcpy(path, pathstring,
+		    MAXPATHLEN);
+		epp->ep_path = path;
+	}
+#ifdef notyet
+	/*
+	 * Although this works most of the time [since the entry was just
+	 * entered in the cache] we don't use it because it will fail for
+	 * entries that are not placed in the cache because their name is
+	 * longer than NCHNAMLEN and it is not the cleanest interface,
+	 * because there could be races. When the namei cache is re-written,
+	 * this can be changed to use the appropriate function.
+	 */
+	else if (!(error = vnode_to_path(path, MAXPATHLEN, p->p_textvp, l, p)))
+		epp->ep_path = path;
+#endif
+	else {
+#ifdef notyet
+		printf("Cannot get path for pid %d [%s] (error %d)\n",
+		    (int)p->p_pid, p->p_comm, error);
+#endif
+		epp->ep_path = NULL;
+		PNBUF_PUT(path);
+	}
 }
 
 /* XXX elsewhere */
@@ -923,6 +1004,67 @@ credexec(struct lwp *l, struct vattr *attr)
 	return 0;
 }
 
+static void
+emulexec(struct lwp *l, struct exec_package *epp)
+{
+	struct proc		*p = l->l_proc;
+
+	/* The emulation root will usually have been found when we looked
+	 * for the elf interpreter (or similar), if not look now. */
+	if (epp->ep_esch->es_emul->e_path != NULL &&
+	    epp->ep_emul_root == NULL)
+		emul_find_root(l, epp);
+
+	/* Any old emulation root got removed by fdcloseexec */
+	rw_enter(&p->p_cwdi->cwdi_lock, RW_WRITER);
+	p->p_cwdi->cwdi_edir = epp->ep_emul_root;
+	rw_exit(&p->p_cwdi->cwdi_lock);
+	epp->ep_emul_root = NULL;
+	if (epp->ep_interp != NULL)
+		vrele(epp->ep_interp);
+
+	/*
+	 * Call emulation specific exec hook. This can setup per-process
+	 * p->p_emuldata or do any other per-process stuff an emulation needs.
+	 *
+	 * If we are executing process of different emulation than the
+	 * original forked process, call e_proc_exit() of the old emulation
+	 * first, then e_proc_exec() of new emulation. If the emulation is
+	 * same, the exec hook code should deallocate any old emulation
+	 * resources held previously by this process.
+	 */
+	if (p->p_emul && p->p_emul->e_proc_exit
+	    && p->p_emul != epp->ep_esch->es_emul)
+		(*p->p_emul->e_proc_exit)(p);
+
+	/*
+	 * This is now LWP 1.
+	 */
+	/* XXX elsewhere */
+	mutex_enter(p->p_lock);
+	p->p_nlwpid = 1;
+	l->l_lid = 1;
+	mutex_exit(p->p_lock);
+
+	/*
+	 * Call exec hook. Emulation code may NOT store reference to anything
+	 * from &pack.
+	 */
+	if (epp->ep_esch->es_emul->e_proc_exec)
+		(*epp->ep_esch->es_emul->e_proc_exec)(p, epp);
+
+	/* update p_emul, the old value is no longer needed */
+	p->p_emul = epp->ep_esch->es_emul;
+
+	/* ...and the same for p_execsw */
+	p->p_execsw = epp->ep_esch;
+
+#ifdef __HAVE_SYSCALL_INTERN
+	(*p->p_emul->e_syscall_intern)(p);
+#endif
+	ktremul();
+}
+
 static int
 execve_runproc(struct lwp *l, struct execve_data * restrict data,
 	bool no_local_exec_lock, bool is_spawn)
@@ -971,13 +1113,6 @@ execve_runproc(struct lwp *l, struct execve_data * restrict data,
 		    epp->ep_vm_maxaddr,
 		    epp->ep_flags & EXEC_TOPDOWN_VM);
 
-	/* record proc's vnode, for use by procfs and others */
-	if (p->p_textvp)
-		vrele(p->p_textvp);
-	vref(epp->ep_vp);
-	p->p_textvp = epp->ep_vp;
-
-	/* Now map address space */
 	struct vmspace		*vm;
 	vm = p->p_vmspace;
 	vm->vm_taddr = (void *)epp->ep_taddr;
@@ -993,162 +1128,18 @@ execve_runproc(struct lwp *l, struct execve_data * restrict data,
 	pax_aslr_init(l, vm);
 #endif /* PAX_ASLR */
 
-	/* create the new process's VM space by running the vmcmds */
-	KASSERTMSG(epp->ep_vmcmds.evs_used != 0, "%s: no vmcmds", __func__);
-
-	DUMPVMCMDS(epp, 0, 0);
-
-	size_t			i;
-	struct exec_vmcmd	*base_vcp;
-
-	base_vcp = NULL;
-
-	for (i = 0; i < epp->ep_vmcmds.evs_used && !error; i++) {
-		struct exec_vmcmd *vcp;
-
-		vcp = &epp->ep_vmcmds.evs_cmds[i];
-		if (vcp->ev_flags & VMCMD_RELATIVE) {
-			KASSERTMSG(base_vcp != NULL,
-			    "%s: relative vmcmd with no base", __func__);
-			KASSERTMSG((vcp->ev_flags & VMCMD_BASE) == 0,
-			    "%s: illegal base & relative vmcmd", __func__);
-			vcp->ev_addr += base_vcp->ev_addr;
-		}
-		error = (*vcp->ev_proc)(l, vcp);
-		if (error)
-			DUMPVMCMDS(epp, i, error);
-		if (vcp->ev_flags & VMCMD_BASE)
-			base_vcp = vcp;
-	}
-
-	/* free the vmspace-creation commands, and release their references */
-	kill_vmcmds(&epp->ep_vmcmds);
-
-	vn_lock(epp->ep_vp, LK_EXCLUSIVE | LK_RETRY);
-	VOP_CLOSE(epp->ep_vp, FREAD, l->l_cred);
-	vput(epp->ep_vp);
-
-	/* if an error happened, deallocate and punt */
-	if (error) {
-		DPRINTF(("%s: vmcmd %zu failed: %d\n", __func__, i - 1, error));
+	/* Now map address space. */
+	error = execve_dovmcmds(l, data);
+	if (error != 0)
 		goto exec_abort;
-	}
 
-	const char		*commandname;
-	size_t			commandlen;
+	pathexec(epp, p, data->ed_pathstring);
 
-	/* set command name & other accounting info */
-	commandname = strrchr(epp->ep_resolvedname, '/');
-	if (commandname != NULL) {
-		commandname++;
-	} else {
-		commandname = epp->ep_resolvedname;
-	}
-	commandlen = min(strlen(commandname), MAXCOMLEN);
-	(void)memcpy(p->p_comm, commandname, commandlen);
-	p->p_comm[commandlen] = '\0';
+	char * const newstack = STACK_GROW(vm->vm_minsaddr, epp->ep_ssize);
 
-	char			*path;
-
-	path = PNBUF_GET();
-
-	/*
-	 * If the path starts with /, we don't need to do any work.
-	 * This handles the majority of the cases.
-	 * In the future perhaps we could canonicalize it?
-	 */
-	if (data->ed_pathstring[0] == '/') {
-		(void)strlcpy(path, data->ed_pathstring,
-		    MAXPATHLEN);
-		epp->ep_path = path;
-	}
-#ifdef notyet
-	/*
-	 * Although this works most of the time [since the entry was just
-	 * entered in the cache] we don't use it because it will fail for
-	 * entries that are not placed in the cache because their name is
-	 * longer than NCHNAMLEN and it is not the cleanest interface,
-	 * because there could be races. When the namei cache is re-written,
-	 * this can be changed to use the appropriate function.
-	 */
-	else if (!(error = vnode_to_path(path, MAXPATHLEN, p->p_textvp, l, p)))
-		epp->ep_path = path;
-#endif
-	else {
-#ifdef notyet
-		printf("Cannot get path for pid %d [%s] (error %d)\n",
-		    (int)p->p_pid, p->p_comm, error);
-#endif
-		epp->ep_path = NULL;
-		PNBUF_PUT(path);
-	}
-
-	/* remember information about the process */
-	data->ed_arginfo.ps_nargvstr = data->ed_argc;
-	data->ed_arginfo.ps_nenvstr = data->ed_envc;
-
-	/*
-	 * Allocate the stack address passed to the newly execve()'ed process.
-	 *
-	 * The new stack address will be set to the SP (stack pointer) register
-	 * in setregs().
-	 */
-
-	const size_t sigcode_psstr_sz =
-	    data->ed_szsigcode +	/* sigcode */
-	    data->ed_ps_strings_sz +	/* ps_strings */
-	    STACK_PTHREADSPACE;		/* pthread space */
-
-	char			*stack;
-
-	/* Top of the stack address space. */
-	stack = vm->vm_minsaddr;
-
-	/* Skip pthread space, ps_strings, and sigcode. */
-	stack = STACK_GROW(stack, sigcode_psstr_sz);
-
-	/* Allocate the gap for _rtld() and arguments to be filled by copyargs(). */
-	stack = STACK_ALLOC(stack, epp->ep_ssize - sigcode_psstr_sz);
-
-	/* Skip a few words reserved for _rtld(). */
-	stack = STACK_GROW(stack, RTLD_GAP);
-
-	/* Now copy argc, args & environ to the new stack. */
-	error = (*epp->ep_esch->es_copyargs)(l, epp,
-	    &data->ed_arginfo, &stack, data->ed_argp);
-
-	if (epp->ep_path) {
-		PNBUF_PUT(epp->ep_path);
-		epp->ep_path = NULL;
-	}
-	if (error) {
-		DPRINTF(("%s: copyargs failed %d\n", __func__, error));
+	error = copyoutargs(data, l, newstack);
+	if (error != 0)
 		goto exec_abort;
-	}
-
-	/* fill process ps_strings info */
-	p->p_psstrp = (vaddr_t)STACK_ALLOC(STACK_GROW(vm->vm_minsaddr,
-	    STACK_PTHREADSPACE), data->ed_ps_strings_sz);
-
-	struct ps_strings32	arginfo32;
-	void			*aip;
-
-	if (epp->ep_flags & EXEC_32) {
-		aip = &arginfo32;
-		arginfo32.ps_argvstr = (vaddr_t)data->ed_arginfo.ps_argvstr;
-		arginfo32.ps_nargvstr = data->ed_arginfo.ps_nargvstr;
-		arginfo32.ps_envstr = (vaddr_t)data->ed_arginfo.ps_envstr;
-		arginfo32.ps_nenvstr = data->ed_arginfo.ps_nenvstr;
-	} else
-		aip = &data->ed_arginfo;
-
-	/* copy out the process's ps_strings structure */
-	if ((error = copyout(aip, (void *)p->p_psstrp, data->ed_ps_strings_sz))
-	    != 0) {
-		DPRINTF(("%s: ps_strings copyout %p->%p size %zu failed\n",
-		    __func__, aip, (void *)p->p_psstrp, data->ed_ps_strings_sz));
-		goto exec_abort;
-	}
 
 	cwdexec(p);
 	fd_closeexec();		/* handle close on exec */
@@ -1220,12 +1211,11 @@ execve_runproc(struct lwp *l, struct execve_data * restrict data,
 	 * the end of arg/env strings.  Userland guesses the address of argc
 	 * via ps_strings::ps_argvstr.
 	 */
-	const vaddr_t newstack = (vaddr_t)STACK_GROW(vm->vm_minsaddr, epp->ep_ssize);
 
 	/* Setup new registers and do misc. setup. */
-	(*epp->ep_esch->es_emul->e_setregs)(l, epp, newstack);
+	(*epp->ep_esch->es_emul->e_setregs)(l, epp, (vaddr_t)newstack);
 	if (epp->ep_esch->es_setregs)
-		(*epp->ep_esch->es_setregs)(l, epp, newstack);
+		(*epp->ep_esch->es_setregs)(l, epp, (vaddr_t)newstack);
 
 	/* Provide a consistent LWP private setting */
 	(void)lwp_setprivate(l, NULL);
@@ -1248,59 +1238,7 @@ execve_runproc(struct lwp *l, struct execve_data * restrict data,
 
 	SDT_PROBE(proc,,,exec_success, epp->ep_name, 0, 0, 0, 0);
 
-	/* The emulation root will usually have been found when we looked
-	 * for the elf interpreter (or similar), if not look now. */
-	if (epp->ep_esch->es_emul->e_path != NULL &&
-	    epp->ep_emul_root == NULL)
-		emul_find_root(l, epp);
-
-	/* Any old emulation root got removed by fdcloseexec */
-	rw_enter(&p->p_cwdi->cwdi_lock, RW_WRITER);
-	p->p_cwdi->cwdi_edir = epp->ep_emul_root;
-	rw_exit(&p->p_cwdi->cwdi_lock);
-	epp->ep_emul_root = NULL;
-	if (epp->ep_interp != NULL)
-		vrele(epp->ep_interp);
-
-	/*
-	 * Call emulation specific exec hook. This can setup per-process
-	 * p->p_emuldata or do any other per-process stuff an emulation needs.
-	 *
-	 * If we are executing process of different emulation than the
-	 * original forked process, call e_proc_exit() of the old emulation
-	 * first, then e_proc_exec() of new emulation. If the emulation is
-	 * same, the exec hook code should deallocate any old emulation
-	 * resources held previously by this process.
-	 */
-	if (p->p_emul && p->p_emul->e_proc_exit
-	    && p->p_emul != epp->ep_esch->es_emul)
-		(*p->p_emul->e_proc_exit)(p);
-
-	/*
-	 * This is now LWP 1.
-	 */
-	mutex_enter(p->p_lock);
-	p->p_nlwpid = 1;
-	l->l_lid = 1;
-	mutex_exit(p->p_lock);
-
-	/*
-	 * Call exec hook. Emulation code may NOT store reference to anything
-	 * from &pack.
-	 */
-	if (epp->ep_esch->es_emul->e_proc_exec)
-		(*epp->ep_esch->es_emul->e_proc_exec)(p, epp);
-
-	/* update p_emul, the old value is no longer needed */
-	p->p_emul = epp->ep_esch->es_emul;
-
-	/* ...and the same for p_execsw */
-	p->p_execsw = epp->ep_esch;
-
-#ifdef __HAVE_SYSCALL_INTERN
-	(*p->p_emul->e_syscall_intern)(p);
-#endif
-	ktremul();
+	emulexec(l, epp);
 
 	/* Allow new references from the debugger/procfs. */
 	rw_exit(&p->p_reflock);
@@ -1397,6 +1335,123 @@ execve1(struct lwp *l, const char *path, char * const *args,
 	return error;
 }
 
+static size_t
+calcargs(struct execve_data * restrict data, const size_t argenvstrlen)
+{
+	struct exec_package	* const epp = &data->ed_pack;
+
+	const size_t nargenvptrs =
+	    1 +				/* long argc */
+	    data->ed_argc +		/* char *argv[] */
+	    1 +				/* \0 */
+	    data->ed_envc +		/* char *env[] */
+	    1 +				/* \0 */
+	    epp->ep_esch->es_arglen;	/* auxinfo */
+
+	const size_t ptrsz = (epp->ep_flags & EXEC_32) ?
+	    sizeof(int) : sizeof(char *);
+
+	return (nargenvptrs * ptrsz) + argenvstrlen;
+}
+
+static size_t
+calcstack(struct execve_data * restrict data, const size_t gaplen)
+{
+	struct exec_package	* const epp = &data->ed_pack;
+
+	data->ed_szsigcode = epp->ep_esch->es_emul->e_esigcode -
+	    epp->ep_esch->es_emul->e_sigcode;
+
+	data->ed_ps_strings_sz = (epp->ep_flags & EXEC_32) ?
+	    sizeof(struct ps_strings32) : sizeof(struct ps_strings);
+
+	const size_t sigcode_psstr_sz =
+	    data->ed_szsigcode +	/* sigcode */
+	    data->ed_ps_strings_sz +	/* ps_strings */
+	    STACK_PTHREADSPACE;		/* pthread space */
+
+	const size_t stacklen =
+	    data->ed_argslen +
+	    gaplen +
+	    sigcode_psstr_sz;
+
+	/* make the stack "safely" aligned */
+	return STACK_LEN_ALIGN(stacklen, STACK_ALIGNBYTES);
+}
+
+static int
+copyoutargs(struct execve_data * restrict data, struct lwp *l,
+    char * const newstack)
+{
+	struct exec_package	* const epp = &data->ed_pack;
+	struct proc		*p = l->l_proc;
+	int			error;
+
+	/* remember information about the process */
+	data->ed_arginfo.ps_nargvstr = data->ed_argc;
+	data->ed_arginfo.ps_nenvstr = data->ed_envc;
+
+	/*
+	 * Allocate the stack address passed to the newly execve()'ed process.
+	 *
+	 * The new stack address will be set to the SP (stack pointer) register
+	 * in setregs().
+	 */
+
+	char *newargs = STACK_ALLOC(
+	    STACK_SHRINK(newstack, data->ed_argslen), data->ed_argslen);
+
+	error = (*epp->ep_esch->es_copyargs)(l, epp,
+	    &data->ed_arginfo, &newargs, data->ed_argp);
+
+	if (epp->ep_path) {
+		PNBUF_PUT(epp->ep_path);
+		epp->ep_path = NULL;
+	}
+	if (error) {
+		DPRINTF(("%s: copyargs failed %d\n", __func__, error));
+		return error;
+	}
+
+	error = copyoutpsstrs(data, p);
+	if (error != 0)
+		return error;
+
+	return 0;
+}
+
+static int
+copyoutpsstrs(struct execve_data * restrict data, struct proc *p)
+{
+	struct exec_package	* const epp = &data->ed_pack;
+	struct ps_strings32	arginfo32;
+	void			*aip;
+	int			error;
+
+	/* fill process ps_strings info */
+	p->p_psstrp = (vaddr_t)STACK_ALLOC(STACK_GROW(epp->ep_minsaddr,
+	    STACK_PTHREADSPACE), data->ed_ps_strings_sz);
+
+	if (epp->ep_flags & EXEC_32) {
+		aip = &arginfo32;
+		arginfo32.ps_argvstr = (vaddr_t)data->ed_arginfo.ps_argvstr;
+		arginfo32.ps_nargvstr = data->ed_arginfo.ps_nargvstr;
+		arginfo32.ps_envstr = (vaddr_t)data->ed_arginfo.ps_envstr;
+		arginfo32.ps_nenvstr = data->ed_arginfo.ps_nenvstr;
+	} else
+		aip = &data->ed_arginfo;
+
+	/* copy out the process's ps_strings structure */
+	if ((error = copyout(aip, (void *)p->p_psstrp, data->ed_ps_strings_sz))
+	    != 0) {
+		DPRINTF(("%s: ps_strings copyout %p->%p size %zu failed\n",
+		    __func__, aip, (void *)p->p_psstrp, data->ed_ps_strings_sz));
+		return error;
+	}
+
+	return 0;
+}
+
 static int
 copyinargs(struct execve_data * restrict data, char * const *args,
     char * const *envs, execve_fetch_element_t fetch_element, char **dpp)
@@ -1412,23 +1467,30 @@ copyinargs(struct execve_data * restrict data, char * const *args,
 
 	/* copy the fake args list, if there's one, freeing it as we go */
 	if (epp->ep_flags & EXEC_HASARGL) {
-		struct exec_fakearg	*tmpfap = epp->ep_fa;
+		struct exec_fakearg	*fa = epp->ep_fa;
 
-		while (tmpfap->fa_arg != NULL) {
+		while (fa->fa_arg != NULL) {
 			const size_t maxlen = ARG_MAX - (dp - data->ed_argp);
 			size_t len;
 
-			len = strlcpy(dp, tmpfap->fa_arg, maxlen);
+			len = strlcpy(dp, fa->fa_arg, maxlen);
 			/* Count NUL into len. */
 			if (len < maxlen)
 				len++;
-			else
+			else {
+				while (fa->fa_arg != NULL) {
+					kmem_free(fa->fa_arg, fa->fa_len);
+					fa++;
+				}
+				kmem_free(epp->ep_fa, epp->ep_fa_len);
+				epp->ep_flags &= ~EXEC_HASARGL;
 				return E2BIG;
-			ktrexecarg(tmpfap->fa_arg, len - 1);
+			}
+			ktrexecarg(fa->fa_arg, len - 1);
 			dp += len;
 
-			kmem_free(tmpfap->fa_arg, tmpfap->fa_len);
-			tmpfap++;
+			kmem_free(fa->fa_arg, fa->fa_len);
+			fa++;
 			data->ed_argc++;
 		}
 		kmem_free(epp->ep_fa, epp->ep_fa_len);
@@ -1516,8 +1578,6 @@ copyinargstrs(struct execve_data * restrict data, char * const *strs,
 /*
  * Copy argv and env strings from kernel buffer (argp) to the new stack.
  * Those strings are located just after auxinfo.
- *
- * XXX rename this as copyoutargs()
  */
 int
 copyargs(struct lwp *l, struct exec_package *pack, struct ps_strings *arginfo,
@@ -1538,10 +1598,10 @@ copyargs(struct lwp *l, struct exec_package *pack, struct ps_strings *arginfo,
 	CTASSERT(sizeof(*cpp) == sizeof(argc));
 
 	dp = (char *)(cpp +
-	    1 +				/* argc */
-	    argc +			/* *argv[] */
+	    1 +				/* long argc */
+	    argc +			/* char *argv[] */
 	    1 +				/* \0 */
-	    envc +			/* *env[] */
+	    envc +			/* char *env[] */
 	    1 +				/* \0 */
 	    /* XXX auxinfo multiplied by ptr size? */
 	    pack->ep_esch->es_arglen);	/* auxinfo */

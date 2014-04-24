@@ -1378,7 +1378,7 @@ static inline void
 ixgbe_enable_queue(struct adapter *adapter, u32 vector)
 {
 	struct ixgbe_hw *hw = &adapter->hw;
-	u64	queue = (u64)(1 << vector);
+	u64	queue = (u64)(1ULL << vector);
 	u32	mask;
 
 	if (hw->mac.type == ixgbe_mac_82598EB) {
@@ -1398,7 +1398,7 @@ __unused static inline void
 ixgbe_disable_queue(struct adapter *adapter, u32 vector)
 {
 	struct ixgbe_hw *hw = &adapter->hw;
-	u64	queue = (u64)(1 << vector);
+	u64	queue = (u64)(1ULL << vector);
 	u32	mask;
 
 	if (hw->mac.type == ixgbe_mac_82598EB) {
@@ -2725,6 +2725,8 @@ ixgbe_config_link(struct adapter *adapter)
 		if ((!autoneg) && (hw->mac.ops.get_link_capabilities))
                 	err  = hw->mac.ops.get_link_capabilities(hw,
 			    &autoneg, &negotiate);
+		else
+			negotiate = 0;
 		if (err)
 			goto out;
 		if (hw->mac.ops.setup_link)
@@ -4649,7 +4651,7 @@ next_desc:
 	** Schedule another interrupt if so.
 	*/
 	if ((staterr & IXGBE_RXD_STAT_DD) != 0) {
-		ixgbe_rearm_queues(adapter, (u64)(1 << que->msix));
+		ixgbe_rearm_queues(adapter, (u64)(1ULL << que->msix));
 		return true;
 	}
 
@@ -5020,9 +5022,9 @@ ixgbe_handle_link(void *context)
 {
 	struct adapter  *adapter = context;
 
-	ixgbe_check_link(&adapter->hw,
-	    &adapter->link_speed, &adapter->link_up, 0);
-       	ixgbe_update_link_status(adapter);
+	if (ixgbe_check_link(&adapter->hw,
+	    &adapter->link_speed, &adapter->link_up, 0) == 0)
+	    ixgbe_update_link_status(adapter);
 }
 
 /*
@@ -5067,6 +5069,8 @@ ixgbe_handle_msf(void *context)
 	autoneg = hw->phy.autoneg_advertised;
 	if ((!autoneg) && (hw->mac.ops.get_link_capabilities))
 		hw->mac.ops.get_link_capabilities(hw, &autoneg, &negotiate);
+	else
+		negotiate = 0;
 	if (hw->mac.ops.setup_link)
 		hw->mac.ops.setup_link(hw, autoneg, negotiate, TRUE);
 	return;

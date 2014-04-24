@@ -14,7 +14,10 @@
 #endif
 #if !defined(_LP64)
 #define	VM_FREELIST_FIRST512M	2
-#endif
+#endif /* !_LP64 */
 #define VM_FREELIST_ISADMA	1
+
+#define VM_FREELIST_NORMALOK_P(lcv) \
+	((lcv) == VM_FREELIST_DEFAULT || (lcv) != mips_poolpage_vmfreelist)
  
 #endif	/* !_EVBMIPS_VMPARAM_H_ */

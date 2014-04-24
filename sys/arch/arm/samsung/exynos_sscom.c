@@ -113,9 +113,9 @@ exynos_change_txrx_interrupts(struct sscom_softc *sc, bool unmask_p,
 {
 	int intbits = 0;
 	if (flags & SSCOM_HW_RXINT)
-		intbits |= 1 << sc->sc_rx_irqno;
+		intbits |= UINT_RXD;
 	if (flags & SSCOM_HW_TXINT)
-		intbits |= 1 << sc->sc_tx_irqno;
+		intbits |= UINT_TXD;
 	if (unmask_p) {
 		exynos_unmask_interrupts(sc, intbits);
 	} else {
@@ -129,9 +129,9 @@ exynos_clear_interrupts(struct sscom_softc *sc, u_int flags)
 	uint32_t val = 0;
 
 	if (flags & SSCOM_HW_RXINT)
-		val |= sc->sc_rx_irqno;
+		val |= UINT_RXD;
 	if (flags & SSCOM_HW_TXINT)
-		val |= sc->sc_tx_irqno;
+		val |= UINT_TXD;
 	bus_space_write_4(sc->sc_iot, sc->sc_ioh, SSCOM_UINTP, val);
 }
 
@@ -141,9 +141,10 @@ sscom_attach(device_t parent, device_t self, void *aux)
 	struct sscom_softc *sc = device_private(self);
 	struct exyo_attach_args *exyo = aux;
 	int unit = exyo->exyo_loc.loc_port;
-	bus_addr_t iobase = exyo->exyo_loc.loc_offset;
 
-	aprint_normal( ": UART%d addr=%lx", unit, iobase );
+	/* debug */
+//	bus_addr_t iobase = exyo->exyo_loc.loc_offset;
+//	aprint_normal( ": UART%d addr=%lx", unit, iobase );
 
 	sc->sc_dev = self;
 	sc->sc_iot = exyo->exyo_core_bst;
@@ -153,11 +154,13 @@ sscom_attach(device_t parent, device_t self, void *aux)
 	sc->sc_change_txrx_interrupts = exynos_change_txrx_interrupts;
 	sc->sc_clear_interrupts = exynos_clear_interrupts;
 
-	sc->sc_rx_irqno = UINT_RXD;
-	sc->sc_tx_irqno = UINT_TXD;
+	/* not used here, but do initialise */
+	sc->sc_rx_irqno = 0;
+	sc->sc_tx_irqno = 0;
 
 	if (!sscom_is_console(sc->sc_iot, unit, &sc->sc_ioh)
-	    && bus_space_map(sc->sc_iot, iobase, SSCOM_SIZE, 0, &sc->sc_ioh)) {
+	    && bus_space_subregion(sc->sc_iot, exyo->exyo_core_bsh,
+		    exyo->exyo_loc.loc_offset, SSCOM_SIZE, &sc->sc_ioh)) {
 		printf( ": failed to map registers\n" );
 		return;
 	}

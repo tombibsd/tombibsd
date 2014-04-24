@@ -1906,6 +1906,8 @@ setregs(struct lwp *l, struct exec_package *pack, vaddr_t stack)
 
 	if (pack->ep_osversion < 699003600) {
 		p->p_md.md_flags |= MDP_OLDSPACE;
+	} else {
+		p->p_md.md_flags = 0;
 	}
 
 	hppa_setvmspace(l);

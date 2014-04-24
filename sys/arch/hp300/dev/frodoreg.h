@@ -36,7 +36,7 @@
  * Other items in the Frodo part
  */
 
-/* An mc146818-like calendar, but no battery... lame */
+/* An mc146818-like calendar.  Only 425e has a battery and an oscillator. */
 #define	FRODO_CALENDAR		0x80
 
 #define	FRODO_TIMER		0xa0	/* 8254-like timer */

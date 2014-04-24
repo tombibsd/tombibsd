@@ -93,11 +93,13 @@ test_case check_valid gcc_compound_statements2 "Checks GCC compound" \
     "statements with non-expressions"
 test_case check_valid gcc_compound_statements3 "Checks GCC compound" \
     "statements with void type"
+test_case check_valid gcc_extension "Checks GCC __extension__ and __typeof__"
 
 test_case check_valid cvt_in_ternary "Checks CVT nodes handling in ?" \
-    "operator"
+test_case check_valid cvt_constant "Checks constant conversion"
 test_case check_valid ellipsis_in_switch "Checks ellipsis in switch()"
 test_case check_valid c99_complex_num "Checks C99 complex numbers"
+test_case check_valid c99_complex_split "Checks C99 complex access"
 test_case check_valid c99_for_loops "Checks C99 for loops"
 test_case check_valid alignof "Checks __alignof__"
 test_case check_valid shift_to_narrower_type "Checks that type shifts that" \

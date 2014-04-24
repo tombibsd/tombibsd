@@ -123,6 +123,8 @@ chfs_mount(struct mount *mp,
 
 	dbg("mount()\n");
 
+	if (args == NULL)
+		return EINVAL;
 	if (*data_len < sizeof *args)
 		return EINVAL;
 

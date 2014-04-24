@@ -1807,7 +1807,12 @@ static int
 read_cd_capacity(struct scsipi_periph *periph, u_int *blksize, u_long *last_lba)
 {
 	struct scsipi_read_cd_capacity    cap_cmd;
-	struct scsipi_read_cd_cap_data    cap;
+	/*
+	 * XXX: see PR 48550 and PR 48754:
+	 * the ahcisata(4) driver can not deal with unaligned
+	 * data, so align this "a bit"
+	 */
+	struct scsipi_read_cd_cap_data    cap __aligned(2);
 	struct scsipi_read_discinfo       di_cmd;
 	struct scsipi_read_discinfo_data  di;
 	struct scsipi_read_trackinfo      ti_cmd;

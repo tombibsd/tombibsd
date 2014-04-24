@@ -185,16 +185,18 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <dev/i2c/ddcreg.h>
 
 #include <dev/usb/ukbdvar.h>
+#include <net/if_ether.h>
 
 BootConfig bootconfig;		/* Boot config storage */
 static char bootargs[MAX_BOOT_STRING];
 char *boot_args = NULL;
 char *boot_file = NULL;
+static uint8_t uboot_enaddr[ETHER_ADDR_LEN];
 
 bool cubietruck_p;
 /*
  * uboot_args are filled in by cubie_start.S and must be in .data
- * and not .bbs since .bss is cleared after uboot_args are filled in.
+ * and not .bss since .bss is cleared after uboot_args are filled in.
  */
 uintptr_t uboot_args[4] = { 0 };
 
@@ -216,11 +218,6 @@ int use_fb_console = true;
  * kernel address space.  *Not* for general use.
  */
 #define KERNEL_BASE_PHYS	((paddr_t)KERNEL_BASE_phys)
-#ifdef KERNEL_BASES_EQUAL
-#define KERNEL_PHYS_VOFFSET	0
-#else
-#define KERNEL_PHYS_VOFFSET	(KERNEL_BASE - AWIN_SDRAM_PBASE)
-#endif
 #define AWIN_CORE_VOFFSET	(AWIN_CORE_VBASE - AWIN_CORE_PBASE)
 
 /* Prototypes */
@@ -334,6 +331,8 @@ initarm(void *arg)
 	printf("\nNetBSD/evbarm (cubie) booting ...\n");
 #endif
 
+	const uint8_t *uboot_bootinfo = (void*)uboot_args[0];
+
 #ifdef BOOT_ARGS
 	char mi_bootargs[] = BOOT_ARGS;
 	parse_mi_bootargs(mi_bootargs);
@@ -405,10 +404,18 @@ initarm(void *arg)
 		 */
 		if (uboot_args[3] - AWIN_SDRAM_PBASE < ram_size) {
 			const char * const args = (const char *)
-			     (uboot_args[3] + KERNEL_PHYS_VOFFSET);
+			     (uboot_args[3] + KERNEL_BASE_VOFFSET);
 			strlcpy(bootargs, args, sizeof(bootargs));
 		}
+		if (uboot_args[0]
+		   && uboot_args[0] - AWIN_SDRAM_PBASE < ram_size) {
+			uboot_bootinfo =
+			    (void*)(uboot_args[0] + KERNEL_BASE_VOFFSET);
+		}
 	}
+
+	/* copy u-boot bootinfo ethernet address */
+	memcpy(uboot_enaddr, uboot_bootinfo + 0x250, sizeof(uboot_enaddr));
 
 	boot_args = bootargs;
 	parse_mi_bootargs(boot_args);
@@ -606,6 +613,12 @@ cubie_device_register(device_t self, void *aux)
 		prop_dictionary_set_uint32(dict, "nc-h", 0x03c53f04);
 		prop_dictionary_set_uint32(dict, "nc-i", 0x003fc03f);
 		return;
+	}
+	if (device_is_a(self, "awge") || device_is_a(self, "awe")) {
+		prop_data_t blob =
+		    prop_data_create_data(uboot_enaddr, ETHER_ADDR_LEN);
+		prop_dictionary_set(dict, "mac-address", blob);
+		prop_object_release(blob);
 	}
 
 	if (device_is_a(self, "ehci")) {

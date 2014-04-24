@@ -295,6 +295,8 @@ cpu_startup(void)
 	pmapdebug = 0;
 #endif
 
+	hp300_cninit_deferred();
+
 	if (fputype != FPU_NONE)
 		m68k_make_fpu_idle_frame();
 

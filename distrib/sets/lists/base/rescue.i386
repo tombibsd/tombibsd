@@ -1,2 +1,2 @@
 # $NetBSD$
-./rescue/ldconfig				base-rescue-root
+./rescue/ldconfig				base-rescue-root	pic

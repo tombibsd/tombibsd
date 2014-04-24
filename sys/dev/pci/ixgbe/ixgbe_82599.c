@@ -1677,6 +1677,7 @@ s32 ixgbe_fdir_add_perfect_filter_82599(struct ixgbe_hw *hw,
 	case IXGBE_ATR_FLOW_TYPE_IPV4:
 		/* use the L4 protocol mask for raw IPv4/IPv6 traffic */
 		fdirm |= IXGBE_FDIRM_L4P;
+		break;
 	case IXGBE_ATR_FLOW_TYPE_SCTPV4:
 		if (input_masks->dst_port_mask || input_masks->src_port_mask) {
 			DEBUGOUT(" Error on src/dst port mask\n");
@@ -1705,6 +1706,7 @@ s32 ixgbe_fdir_add_perfect_filter_82599(struct ixgbe_hw *hw,
 	case 0xEFFF:
 		/* Unmask VLAN ID - bit 0 and fall through to unmask prio */
 		fdirm &= ~IXGBE_FDIRM_VLANID;
+		/*FALLTHROUGH*/
 	case 0xE000:
 		/* Unmask VLAN prio - bit 1 */
 		fdirm &= ~IXGBE_FDIRM_VLANP;

@@ -46,7 +46,7 @@ struct align {
 	int a64;
 };
 
-#ifdef	__GNUC__
+#if defined(__GNUC__) || defined(__lint__)
 #define	MALIGN(N)	{					\
 		.a32 = __alignof__(Elf32_##N),			\
 		.a64 = __alignof__(Elf64_##N)			\

@@ -216,11 +216,11 @@ outint(int i)
  * the name is preceded by its length
  */
 void
-outname(const char *name)
+outname1(const char *file, size_t line, const char *name)
 {
 
 	if (name == NULL)
-		errx(1, "internal error: outname() 1");
+		errx(1, "%s, %zu: internal error: outname(NULL)", file, line);
 	outint((int)strlen(name));
 	outstrg(name);
 }

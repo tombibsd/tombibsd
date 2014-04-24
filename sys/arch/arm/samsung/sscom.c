@@ -181,7 +181,8 @@ static void	sscom_iflush(struct sscom_softc *);
 
 static int	sscomhwiflow(struct tty *tp, int block);
 #if defined(KGDB) || defined(SSCOM0CONSOLE) || defined(SSCOM1CONSOLE)
-static int	sscom_init(bus_space_tag_t, const struct sscom_uart_info *,
+static int	sscom_init(bus_space_tag_t, bus_space_handle_t,
+		    const struct sscom_uart_info *,
 		    int, int, tcflag_t, bus_space_handle_t *);
 #endif
 
@@ -338,8 +339,8 @@ void
 sscomstatus(struct sscom_softc *sc, const char *str)
 {
 	struct tty *tp = sc->sc_tty;
-	int umstat = bus_space_read_1(sc->sc_iot, sc->sc_iot, SSCOM_UMSTAT);
-	int umcon = bus_space_read_4(sc->sc_iot, sc->sc_iot, SSCOM_UMCON);
+	int umstat = bus_space_read_1(sc->sc_iot, sc->sc_ioh, SSCOM_UMSTAT);
+	int umcon = bus_space_read_4(sc->sc_iot, sc->sc_ioh, SSCOM_UMCON);
 
 	printf("%s: %s %sclocal  %sdcd %sts_carr_on %sdtr %stx_stopped\n",
 	    device_xname(sc->sc_dev), str,
@@ -1839,15 +1840,15 @@ sscomintr(void *v)
  * Initialize UART for use as console or KGDB line.
  */
 static int
-sscom_init(bus_space_tag_t iot, const struct sscom_uart_info *config,
+sscom_init(bus_space_tag_t iot, bus_space_handle_t base_ioh,
+    const struct sscom_uart_info *config,
     int rate, int frequency, tcflag_t cflag, bus_space_handle_t *iohp)
 {
 	bus_space_handle_t ioh;
 	bus_addr_t iobase = config->iobase;
 	int timo = 150000;
 
-	if (bus_space_map(iot, iobase, SSCOM_SIZE, 0, &ioh))
-		return ENOMEM; /* ??? */
+	bus_space_subregion(iot, base_ioh, iobase, SSCOM_SIZE, &ioh);
 
 	/* wait until all is transmitted until we enable this device */
 	while (!(bus_space_read_4(iot, ioh, SSCOM_UTRSTAT) &
@@ -1893,12 +1894,14 @@ struct consdev sscomcons = {
 
 
 int
-sscom_cnattach(bus_space_tag_t iot, const struct sscom_uart_info *config,
+sscom_cnattach(bus_space_tag_t iot, bus_space_handle_t ioh,
+    const struct sscom_uart_info *config,
     int rate, int frequency, tcflag_t cflag)
 {
 	int res;
 
-	res = sscom_init(iot, config, rate, frequency, cflag, &sscomconsioh);
+	res = sscom_init(iot, ioh, config,
+		rate, frequency, cflag, &sscomconsioh);
 	if (res)
 		return res;
 
@@ -2022,7 +2025,8 @@ sscomcnpollc(dev_t dev, int on)
 
 #ifdef KGDB
 int
-sscom_kgdb_attach(bus_space_tag_t iot, const struct sscom_uart_info *config,
+sscom_kgdb_attach(bus_space_tag_t iot, bus_space_handle_t ioh,
+    const struct sscom_uart_info *config,
     int rate, int frequency, tcflag_t cflag)
 {
 	int res;
@@ -2032,7 +2036,8 @@ sscom_kgdb_attach(bus_space_tag_t iot, const struct sscom_uart_info *config,
 		return EBUSY; /* cannot share with console */
 	}
 
-	res = sscom_init(iot, config, rate, frequency, cflag, &sscom_kgdb_ioh);
+	res = sscom_init(iot, ioh, config,
+		rate, frequency, cflag, &sscom_kgdb_ioh);
 	if (res)
 		return res;
 

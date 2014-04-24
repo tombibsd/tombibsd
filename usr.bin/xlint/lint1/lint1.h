@@ -226,7 +226,7 @@ typedef	struct sym {
 	pos_t	s_spos;		/* position of first initialisation */
 	pos_t	s_upos;		/* position of first use */
 	symt_t	s_kind;		/* type of symbol */
-	u_int	s_keyw : 1;	/* keyword */
+	void   *s_keyw;		/* keyword */
 	u_int	s_field : 1;	/* bit-field */
 	u_int	s_set : 1;	/* variable set, label defined */
 	u_int	s_used : 1;	/* variable/label used */
@@ -435,5 +435,11 @@ typedef	struct err_set {
 #define	ERR_ZERO(p)	(void)memset((p), 0, sizeof(*(p)))
 
 #define LERROR(fmt, args...)	lerror(__FILE__, __LINE__, fmt, ##args)
+
+#ifdef BLKDEBUG
+#define ZERO	0xa5
+#else
+#define	ZERO	0
+#endif
 
 extern err_set	msgset;

@@ -59,4 +59,6 @@ MAN+= ${HMAN1} ${HMAN2} ${MAN1}
 
 CLEANFILES+=${HMAN1} ${HMAN2} ${MAN1}
 
+USETBL=	yes
+
 .include <bsd.man.mk>

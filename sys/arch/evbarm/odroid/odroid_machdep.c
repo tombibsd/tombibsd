@@ -111,37 +111,37 @@ static const struct sscom_uart_info exynos_uarts[] = {
 #ifdef EXYNOS5
 	{
 		.unit    = 0,
-		.iobase = EXYNOS5_CORE_PBASE + EXYNOS5_UART0_OFFSET
+		.iobase = EXYNOS5_UART0_OFFSET
 	},
 	{
 		.unit    = 1,
-		.iobase = EXYNOS5_CORE_PBASE + EXYNOS5_UART1_OFFSET
+		.iobase = EXYNOS5_UART1_OFFSET
 	},
 	{
 		.unit    = 2,
-		.iobase = EXYNOS5_CORE_PBASE + EXYNOS5_UART2_OFFSET
+		.iobase = EXYNOS5_UART2_OFFSET
 	},
 	{
 		.unit    = 3,
-		.iobase = EXYNOS5_CORE_PBASE + EXYNOS5_UART3_OFFSET
+		.iobase = EXYNOS5_UART3_OFFSET
 	},
 #endif
 #ifdef EXYNOS4
 	{
 		.unit    = 0,
-		.iobase = EXYNOS5_CORE_PBASE + EXYNOS4_UART0_OFFSET
+		.iobase = EXYNOS4_UART0_OFFSET
 	},
 	{
 		.unit    = 1,
-		.iobase = EXYNOS5_CORE_PBASE + EXYNOS4_UART1_OFFSET
+		.iobase = EXYNOS4_UART1_OFFSET
 	},
 	{
 		.unit    = 2,
-		.iobase = EXYNOS5_CORE_PBASE + EXYNOS4_UART2_OFFSET
+		.iobase = EXYNOS4_UART2_OFFSET
 	},
 	{
 		.unit    = 3,
-		.iobase = EXYNOS5_CORE_PBASE + EXYNOS4_UART3_OFFSET
+		.iobase = EXYNOS4_UART3_OFFSET
 	},
 #endif
 };
@@ -353,14 +353,16 @@ curcpu()->ci_data.cpu_cc_freq = 1*1000*1000*1000;	/* XXX hack XXX */
 	ram_size = (psize_t) 0xC0000000 - 0x40000000;
 
 #if defined(EXYNOS4)
-	switch (exynos_pop_id) {
-	case EXYNOS_PACKAGE_ID_2_GIG:
-		KASSERT(ram_size <= 2UL*1024*1024*1024);
-		break;
-	default:
-		printf("Unknown PoP package id 0x%08x, assuming 1Gb\n",
-			exynos_pop_id);
-		ram_size = (psize_t) 0x10000000;
+	if (IS_EXYNOS4_P()) {
+		switch (exynos_pop_id) {
+		case EXYNOS_PACKAGE_ID_2_GIG:
+			KASSERT(ram_size <= 2UL*1024*1024*1024);
+			break;
+		default:
+			printf("Unknown PoP package id 0x%08x, assuming 1Gb\n",
+				exynos_pop_id);
+			ram_size = (psize_t) 0x10000000;
+		}
 	}
 #endif
 
@@ -425,23 +427,39 @@ void
 consinit(void)
 {
 	static bool consinit_called;
+
 	if (consinit_called)
 		return;
 	consinit_called = true;
 
 #if NSSCOM > 0
-	bus_space_tag_t iot = &exynos_bs_tag;
+	bus_space_tag_t bst = &exynos_bs_tag;
 	bus_addr_t iobase = armreg_tpidruro_read();
-	size_t i;
+	bus_space_handle_t bsh = EXYNOS_IOPHYSTOVIRT(iobase);
+	u_int i;
+	/*	
+	 * No need to guess at the UART frequency since we can caclulate it.
+	 */
+	uint32_t freq = conspeed
+	   * (16 * (bus_space_read_4(bst, bsh, SSCOM_UBRDIV) + 1)
+		 + bus_space_read_4(bst, bsh, SSCOM_UFRACVAL));
+	freq = (freq + conspeed / 2) / 1000;
+	freq *= 1000;
+
 	for (i = 0; i < __arraycount(exynos_uarts); i++) {
 		/* attach console */
-		if (exynos_uarts[i].iobase == iobase)
+		if (exynos_uarts[i].iobase + EXYNOS_CORE_PBASE == iobase)
 			break;
 	}
 	KASSERT(i < __arraycount(exynos_uarts));
-	if (sscom_cnattach(iot, &exynos_uarts[i], conspeed, EXYNOS_UART_FREQ,
-			conmode))
+	printf("%s: attaching console @ %#"PRIxPTR" (%u HZ, %u bps)\n",
+	    __func__, iobase, freq, conspeed);
+	if (sscom_cnattach(bst, exynos_core_bsh, &exynos_uarts[i],
+			   conspeed, freq, conmode))
 		panic("Serial console can not be initialized");
+#ifdef VERBOSE_INIT_ARM
+	printf("Console initialized\n");
+#endif
 #else
 #error only serial console is supported
 #if NUKBD > 0

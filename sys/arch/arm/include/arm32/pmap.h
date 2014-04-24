@@ -503,8 +503,13 @@ extern int pmap_needs_pte_sync;
 static inline void
 pmap_ptesync(pt_entry_t *ptep, size_t cnt)
 {
-	if (PMAP_NEEDS_PTE_SYNC)
+	if (PMAP_NEEDS_PTE_SYNC) {
 		cpu_dcache_wb_range((vaddr_t)ptep, cnt * sizeof(pt_entry_t));
+#ifdef SHEEVA_L2_CACHE
+		cpu_sdcache_wb_range((vaddr_t)ptep, -1,
+		    cnt * sizeof(pt_entry_t));
+#endif
+	}
 #if ARM_MMU_V7 > 0
 	__asm("dsb");
 #endif

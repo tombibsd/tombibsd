@@ -65,9 +65,9 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <uvm/uvm.h>
 
+#include <arm/cpufunc_proto.h>
 #include <arm/cpuconf.h>
 #include <arm/locore.h>
-#include <arm/cpufunc_proto.h>
 
 #ifdef CPU_XSCALE_80200
 #include <arm/xscale/i80200reg.h>

@@ -754,7 +754,8 @@ lfs_bmapv(struct proc *p, fsid_t *fsidp, BLOCK_INFO *blkiov, int blkcnt)
 				}
 				numrefed++;
 			} else {
-				mutex_exit(vp->v_interlock);
+				if (vp != NULL)
+					mutex_exit(vp->v_interlock);
 				mutex_exit(&ulfs_ihash_lock);
 				/*
 				 * Don't VFS_VGET if we're being unmounted,

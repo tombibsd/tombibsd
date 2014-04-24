@@ -102,6 +102,8 @@ puffs_vfsop_mount(struct mount *mp, const char *path, void *data,
 	int error = 0, i;
 	pid_t mntpid = curlwp->l_proc->p_pid;
 
+	if (data == NULL)
+		return EINVAL;
 	if (*data_len < sizeof *args)
 		return EINVAL;
 
@@ -115,12 +117,6 @@ puffs_vfsop_mount(struct mount *mp, const char *path, void *data,
 	/* update is not supported currently */
 	if (mp->mnt_flag & MNT_UPDATE)
 		return EOPNOTSUPP;
-
-	/*
-	 * We need the file system name
-	 */
-	if (!data)
-		return EINVAL;
 
 	args = (struct puffs_kargs *)data;
 

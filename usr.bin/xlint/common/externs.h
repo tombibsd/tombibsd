@@ -69,5 +69,6 @@ extern	void	outchar(int);
 extern	void	outqchar(int);
 extern	void	outstrg(const char *);
 extern	void	outint(int);
-extern	void	outname(const char *);
+#define outname(a)	outname1(__FILE__, __LINE__, a);
+extern	void	outname1(const char *, size_t, const char *);
 extern	void	outsrc(const char *);

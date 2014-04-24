@@ -91,7 +91,7 @@ LFLAGS?=
 LEX.l?=		${LEX} ${LFLAGS}
 
 LINT?=		lint
-LINTFLAGS?=	-chapbxzFS
+LINTFLAGS?=	-chapbxzgFS
 
 LORDER?=	lorder
 

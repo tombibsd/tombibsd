@@ -307,7 +307,7 @@ vchiq_prepare_bulk_data(VCHIQ_BULK_T *bulk, VCHI_MEM_HANDLE_T memhandle,
 	/*
 	 * We've now got the bus_addr_t for the pagelist we want the transfer
 	 * to use.
-	 * */
+	 */
 	bulk->data = (void *)bi->pagelist_map->dm_segs[0].ds_addr;
 
 	/*
@@ -335,16 +335,22 @@ vchiq_prepare_bulk_data(VCHIQ_BULK_T *bulk, VCHI_MEM_HANDLE_T memhandle,
 
 	bulk->handle = memhandle;
 
-	pagelist->type = (dir == VCHIQ_BULK_RECEIVE) ? PAGELIST_READ : PAGELIST_WRITE;
+	pagelist->type = (dir == VCHIQ_BULK_RECEIVE) ?
+	    PAGELIST_READ : PAGELIST_WRITE;
 	pagelist->length = size;
-	pagelist->offset = va & PAGE_MASK;
+	pagelist->offset = va & L2_S_OFFSET;
 
 	/*
 	 * busdma already coalesces contiguous pages for us
 	 */
 	for (int i = 0; i < bi->dmamap->dm_nsegs; i++) {
-		pagelist->addrs[i] = bi->dmamap->dm_segs[i].ds_addr & ~PAGE_MASK;
-		pagelist->addrs[i] |= atop(round_page(bi->dmamap->dm_segs[i].ds_len)) - 1;
+		bus_addr_t addr = bi->dmamap->dm_segs[i].ds_addr;
+		bus_size_t len = bi->dmamap->dm_segs[i].ds_len;
+		bus_size_t off = addr & L2_S_OFFSET;
+		int npgs = ((off + len + L2_S_OFFSET) >> L2_S_SHIFT);
+
+		pagelist->addrs[i] = addr & ~L2_S_OFFSET;
+		pagelist->addrs[i] |= npgs - 1;
 	}
 
 	/* Partial cache lines (fragments) require special measures */

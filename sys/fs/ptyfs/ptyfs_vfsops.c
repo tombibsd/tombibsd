@@ -259,6 +259,8 @@ ptyfs_mount(struct mount *mp, const char *path, void *data, size_t *data_len)
 	struct ptyfsmount *pmnt;
 	struct ptyfs_args *args = data;
 
+	if (args == NULL)
+		return EINVAL;
 	if (*data_len != sizeof *args && *data_len != OSIZE)
 		return EINVAL;
 

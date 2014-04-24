@@ -428,6 +428,8 @@ struct kinfo_pcb {
 
 #define ki_src ki_s._kis_src
 #define ki_dst ki_d._kid_dst
+#define ki_spad ki_s._kis_pad
+#define ki_dpad ki_d._kid_pad
 
 #define PCB_SLOP		20
 #define PCB_ALL			0

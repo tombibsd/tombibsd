@@ -103,6 +103,9 @@ tmpfs_mount(struct mount *mp, const char *path, void *data, size_t *data_len)
 	ino_t nodes;
 	int error;
 
+	if (args == NULL)
+		return EINVAL;
+
 	/* Validate the version. */
 	if (*data_len < sizeof(*args) ||
 	    args->ta_version != TMPFS_ARGS_VERSION)
