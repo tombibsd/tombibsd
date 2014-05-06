@@ -149,6 +149,12 @@ readdisklabel(dev_t dev, void (*strat)(struct buf *),
 		lp->d_partitions[RAW_PART].p_offset = 0; 
 		lp->d_partitions[RAW_PART].p_size = 0x1fffffff;
 	}
+	/*
+	 * Set partition 'a' to be the whole disk.
+	 * Cleared if we find a netbsd label.
+	 */
+	lp->d_partitions[0].p_size = lp->d_partitions[RAW_PART].p_size;
+	lp->d_partitions[0].p_fstype = FS_BSDFFS;
 
 	/* obtain buffer to probe drive with */
     

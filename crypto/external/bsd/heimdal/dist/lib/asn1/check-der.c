@@ -45,7 +45,7 @@
 
 #include "check-common.h"
 
-__RCSID("$NetBSD$");
+__RCSID("NetBSD");
 
 static int
 cmp_integer (void *a, void *b)

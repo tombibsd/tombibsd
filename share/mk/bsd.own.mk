@@ -87,12 +87,6 @@ EXTERNAL_GCC_SUBDIR=	/does/not/exist
 
 .endif
 
-.if ${MACHINE_ARCH} == "ia64"
-USE_COMPILERCRTSTUFF?=	yes
-.else
-USE_COMPILERCRTSTUFF?=	no
-.endif
-
 .if ${MKLLVM:Uno} == "yes" && (${MACHINE_ARCH} == "i386" || ${MACHINE_ARCH} == "x86_64")
 HAVE_LIBGCC?=	no
 .else
@@ -103,6 +97,10 @@ _LIBC_UNWIND_SUPPORT.alpha=	yes
 _LIBC_UNWIND_SUPPORT.hppa=	yes
 _LIBC_UNWIND_SUPPORT.i386=	yes
 _LIBC_UNWIND_SUPPORT.m68k=	yes
+_LIBC_UNWIND_SUPPORT.mipseb=	yes
+_LIBC_UNWIND_SUPPORT.mipsel=	yes
+_LIBC_UNWIND_SUPPORT.mips64eb=	yes
+_LIBC_UNWIND_SUPPORT.mips64el=	yes
 _LIBC_UNWIND_SUPPORT.powerpc=	yes
 _LIBC_UNWIND_SUPPORT.sh3el=	yes
 _LIBC_UNWIND_SUPPORT.sh3eb=	yes

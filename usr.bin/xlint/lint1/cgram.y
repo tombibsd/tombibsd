@@ -107,7 +107,7 @@ static inline void RESTORE(const char *file, size_t line)
 #endif
 %}
 
-%expect 71
+%expect 75
 
 %union {
 	int	y_int;
@@ -200,8 +200,10 @@ static inline void RESTORE(const char *file, size_t line)
 %token <y_type>		T_AT_FORMAT_PRINTF
 %token <y_type>		T_AT_FORMAT_SCANF
 %token <y_type>		T_AT_FORMAT_STRFTIME
-
-
+%token <y_type>		T_AT_FORMAT_ARG
+%token <y_type>		T_AT_SENTINEL
+%token <y_type>		T_AT_RETURNS_TWICE
+%token <y_type>		T_AT_COLD
 
 %left	T_COMMA
 %right	T_ASSIGN T_OPASS
@@ -485,8 +487,12 @@ type_attribute_format_type:
 type_attribute_spec:
 	  T_AT_DEPRECATED
 	| T_AT_ALIGNED T_LPARN constant T_RPARN
+	| T_AT_SENTINEL T_LPARN constant T_RPARN
+	| T_AT_FORMAT_ARG T_LPARN constant T_RPARN
 	| T_AT_MAY_ALIAS
 	| T_AT_NORETURN
+	| T_AT_COLD
+	| T_AT_RETURNS_TWICE
 	| T_AT_PACKED {
 		addpacked();
 	}
@@ -932,7 +938,7 @@ notype_direct_decl:
 	| notype_direct_decl T_LBRACK constant T_RBRACK {
 		$$ = addarray($1, 1, toicon($3, 0));
 	  }
-	| notype_direct_decl param_list {
+	| notype_direct_decl param_list opt_asm_or_symbolrename {
 		$$ = addfunc($1, $2);
 		popdecl();
 		blklev--;
@@ -965,7 +971,7 @@ type_direct_decl:
 	| type_direct_decl T_LBRACK constant T_RBRACK {
 		$$ = addarray($1, 1, toicon($3, 0));
 	  }
-	| type_direct_decl param_list {
+	| type_direct_decl param_list opt_asm_or_symbolrename {
 		$$ = addfunc($1, $2);
 		popdecl();
 		blklev--;
@@ -1002,7 +1008,7 @@ direct_param_decl:
 	| direct_param_decl T_LBRACK constant T_RBRACK {
 		$$ = addarray($1, 1, toicon($3, 0));
 	  }
-	| direct_param_decl param_list {
+	| direct_param_decl param_list opt_asm_or_symbolrename {
 		$$ = addfunc($1, $2);
 		popdecl();
 		blklev--;
@@ -1031,7 +1037,7 @@ direct_notype_param_decl:
 	| direct_notype_param_decl T_LBRACK constant T_RBRACK {
 		$$ = addarray($1, 1, toicon($3, 0));
 	  }
-	| direct_notype_param_decl param_list {
+	| direct_notype_param_decl param_list opt_asm_or_symbolrename {
 		$$ = addfunc($1, $2);
 		popdecl();
 		blklev--;
@@ -1318,12 +1324,12 @@ direct_abs_decl:
 	| direct_abs_decl T_LBRACK constant T_RBRACK {
 		$$ = addarray($1, 1, toicon($3, 0));
 	  }
-	| abs_decl_param_list {
+	| abs_decl_param_list opt_asm_or_symbolrename {
 		$$ = addfunc(aname(), $1);
 		popdecl();
 		blklev--;
 	  }
-	| direct_abs_decl abs_decl_param_list {
+	| direct_abs_decl abs_decl_param_list opt_asm_or_symbolrename {
 		$$ = addfunc($1, $2);
 		popdecl();
 		blklev--;

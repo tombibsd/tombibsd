@@ -28,6 +28,6 @@ int mp_to_unsigned_bin_n (mp_int * a, unsigned char *b, unsigned long *outlen)
 }
 #endif
 
-/* Source: /cvs/libtom/libtommath/bn_mp_to_unsigned_bin_n.c,v */
-/* Revision: 1.4 */
-/* Date: 2006/12/28 01:25:13 */
+/* Source: /cvs/libtom/libtommath/bn_mp_to_unsigned_bin_n.c,v  */
+/* Revision: 1.4  */
+/* Date: 2006/12/28 01:25:13  */

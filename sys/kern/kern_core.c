@@ -155,6 +155,12 @@ coredump(struct lwp *l, const char *pattern)
 	error = coredump_buildname(p, name, pattern, MAXPATHLEN);
 	mutex_exit(&lim->pl_lock);
 
+	if (error) {
+		mutex_exit(p->p_lock);
+		mutex_exit(proc_lock);
+		goto done;
+	}
+
 	/*
 	 * On a simple filename, see if the filesystem allow us to write
 	 * core dumps there.

@@ -45,12 +45,14 @@ CPPFLAGS+=	-I${RUMPTOP}/..
 RUMP_LDSCRIPT?=	GNU
 .if ${RUMP_LDSCRIPT} != "no"
 # my ld or yours?
-.if ${RUMP_LDSCRIPT} == "sun" || defined(HAVE_SUN_LD)
+.if ${RUMP_LDSCRIPT} == "sun"
 LDFLAGS+=	-Wl,-M ${RUMPTOP}/ldscript_sun.rump
 SRCS+=		linksyms_sun.c
 .PATH:		${RUMPTOP}
 .elif ${RUMP_LDSCRIPT} == "GNU"
 LDFLAGS+=	-Wl,-T,${RUMPTOP}/ldscript.rump
+.elif ${RUMP_LDSCRIPT} == "ctor"
+CPPFLAGS+=	-DRUMP_USE_CTOR
 .else
 .error Unknown ldscript ${RUMP_LDSCRIPT}
 .endif

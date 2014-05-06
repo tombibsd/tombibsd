@@ -560,3 +560,14 @@ sockin_ctloutput(int op, struct socket *so, struct sockopt *sopt)
 	return rumpcomp_sockin_setsockopt(SO2S(so), sopt->sopt_level,
 	    sopt->sopt_name, sopt->sopt_data, sopt->sopt_size);
 }
+
+int sockin_unavailable(void);
+int
+sockin_unavailable(void)
+{
+
+        panic("interface not available in with sockin");
+}
+__strong_alias(rtrequest,sockin_unavailable);
+__strong_alias(ifunit,sockin_unavailable);
+__strong_alias(ifreq_setaddr,sockin_unavailable);

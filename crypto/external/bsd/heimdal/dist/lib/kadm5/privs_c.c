@@ -35,7 +35,7 @@
 
 #include "kadm5_locl.h"
 
-__RCSID("$NetBSD$");
+__RCSID("NetBSD");
 
 kadm5_ret_t
 kadm5_c_get_privs(void *server_handle, uint32_t *privs)

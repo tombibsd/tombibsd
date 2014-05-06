@@ -35,7 +35,7 @@
 
 #include "kcm_locl.h"
 
-__RCSID("$NetBSD$");
+__RCSID("NetBSD");
 
 static krb5_log_facility *logf;
 

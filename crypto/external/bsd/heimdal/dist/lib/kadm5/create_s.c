@@ -35,7 +35,7 @@
 
 #include "kadm5_locl.h"
 
-__RCSID("$NetBSD$");
+__RCSID("NetBSD");
 
 static kadm5_ret_t
 get_default(kadm5_server_context *context, krb5_principal princ,
@@ -143,7 +143,7 @@ out:
     hdb_free_entry(context->context, &ent);
     return _kadm5_error_code(ret);
 }
-				
+
 
 kadm5_ret_t
 kadm5_s_create_principal(void *server_handle,

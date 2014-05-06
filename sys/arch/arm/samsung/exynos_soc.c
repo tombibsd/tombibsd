@@ -231,6 +231,9 @@ exynos_bootstrap(vaddr_t iobase, vaddr_t uartbase)
 		panic("%s: failed to map in Exynos io registers: %d",
 			__func__, error);
 	KASSERT(exynos_core_bsh == iobase);
+
+	/* init bus dma tags */
+	exynos_dma_bootstrap(physmem * PAGE_SIZE);
 }
 
 
@@ -255,11 +258,15 @@ exynos_device_register(device_t self, void *aux)
 		 * The Exynos4420 armgic is located at a different location!
 		 */
 
+		struct mpcore_attach_args * const mpcaa = aux;
 		extern uint32_t exynos_soc_id;
+
 		switch (EXYNOS_PRODUCT_ID(exynos_soc_id)) {
 #if defined(EXYNOS5)
 		case 0xe5410:
+			/* offsets not changed on matt's request */
 #if 0
+			mpcaa->mpcaa_memh = EXYNOS_CORE_VBASE;
 			mpcaa->mpcaa_off1 = EXYNOS5_GIC_IOP_DISTRIBUTOR_OFFSET;
 			mpcaa->mpcaa_off2 = EXYNOS5_GIC_IOP_CONTROLLER_OFFSET;
 #endif
@@ -267,13 +274,11 @@ exynos_device_register(device_t self, void *aux)
 #endif
 #if defined(EXYNOS4)
 		case 0xe4410:
-		case 0xe4412: {
-			struct mpcore_attach_args * const mpcaa = aux;
+		case 0xe4412:
 			mpcaa->mpcaa_memh = EXYNOS_CORE_VBASE;
 			mpcaa->mpcaa_off1 = EXYNOS4_GIC_DISTRIBUTOR_OFFSET;
 			mpcaa->mpcaa_off2 = EXYNOS4_GIC_CNTR_OFFSET;
 			break;
-		}
 #endif
 		default:
 			panic("%s: unknown SoC product id %#x", __func__,

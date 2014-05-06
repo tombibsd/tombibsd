@@ -167,7 +167,7 @@ sscom_attach(device_t parent, device_t self, void *aux)
 
 	printf("\n");
 
-	void *ih = intr_establish(exyo->exyo_loc.loc_intr, IPL_SERIAL,
+	void *ih = intr_establish(exyo->exyo_loc.loc_intr, IPL_SCHED,
 	    IST_LEVEL, sscomintr, sc);
 	if (ih != NULL) {
 		aprint_normal_dev(self, "interrupting at irq %d\n",

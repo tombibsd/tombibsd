@@ -35,7 +35,7 @@
 
 #include "ktutil_locl.h"
 
-__RCSID("$NetBSD$");
+__RCSID("NetBSD");
 
 /*
  * keep track of the highest version for every principal.

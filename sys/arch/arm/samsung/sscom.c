@@ -1866,11 +1866,9 @@ sscom_init(bus_space_tag_t iot, bus_space_handle_t base_ioh,
 	    UFCON_RXFIFO_RESET);
 	/* tx/rx fifo reset are auto-cleared */
 
-#if 0
 	rate = sscomspeed(rate, frequency);
-	bus_space_write_2(iot, ioh, SSCOM_UBRDIV, rate);
-#endif
-	bus_space_write_1(iot, ioh, SSCOM_ULCON, cflag2lcr(cflag));
+	bus_space_write_4(iot, ioh, SSCOM_UBRDIV, rate);
+	bus_space_write_4(iot, ioh, SSCOM_ULCON, cflag2lcr(cflag));
 
 	/* enable UART */
 	bus_space_write_4(iot, ioh, SSCOM_UCON, 
@@ -1900,8 +1898,8 @@ sscom_cnattach(bus_space_tag_t iot, bus_space_handle_t ioh,
 {
 	int res;
 
-	res = sscom_init(iot, ioh, config,
-		rate, frequency, cflag, &sscomconsioh);
+	res = sscom_init(iot, ioh, config, rate, frequency, cflag,
+	    &sscomconsioh);
 	if (res)
 		return res;
 

@@ -77,6 +77,10 @@ u_int	pffasttimo_now;
 static struct sysctllog *domain_sysctllog;
 static void sysctl_net_setup(void);
 
+/* ensure successful linkage even without any domains in link sets */
+static struct domain domain_dummy;
+__link_set_add_rodata(domains,domain_dummy);
+
 void
 domaininit(bool addroute)
 {
@@ -91,6 +95,8 @@ domaininit(bool addroute)
 	 * domain is added last.
 	 */
 	__link_set_foreach(dpp, domains) {
+		if (*dpp == &domain_dummy)
+			continue;
 		if ((*dpp)->dom_family == PF_ROUTE)
 			rt_domain = *dpp;
 		else

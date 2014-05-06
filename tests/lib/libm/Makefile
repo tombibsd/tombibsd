@@ -10,6 +10,10 @@ TESTSDIR=	${TESTSBASE}/lib/libm
 CPPFLAGS+=	-DHAVE_FENV_H
 .endif
 
+.if ${MACHINE} == "alpha"
+COPTS+=	-mfloat-ieee -mieee-with-inexact -mfp-trap-mode=sui -mtrap-precision=i
+.endif
+
 TESTS_C+=	t_acos
 TESTS_C+=	t_asin
 TESTS_C+=	t_atan

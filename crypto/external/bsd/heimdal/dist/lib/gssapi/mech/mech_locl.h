@@ -64,6 +64,7 @@
 #include "mech_switch.h"
 #include "name.h"
 #include "utils.h"
+#include "compat.h"
 
 #define _mg_buffer_zero(buffer) \
 	do {					\

@@ -102,7 +102,9 @@ struct pcb {
 	/* **** DO NOT ADD ANYTHING HERE **** */
 
 };
+#ifndef __lint__
 /* This doesn't really matter, but there is a lot of implied padding */
 __CTASSERT(sizeof(struct pcb) - sizeof (union savefpu) == 128);
+#endif
 
 #endif /* _I386_PCB_H_ */

@@ -1311,8 +1311,10 @@ extern struct sparc_bus_space_tag mainbus_space_tag;
 		if (prom_getprop_address1(node, &ma.ma_promvaddr) != 0)
 			continue;
 
-		if (config_found(dev, (void *)&ma, mbprint) == NULL)
+		if (config_found(dev, (void *)&ma, mbprint) == NULL) {
+			if (ssp->flags & BS_OPTIONAL) continue;
 			panic(sp);
+		}
 	}
 
 	/*

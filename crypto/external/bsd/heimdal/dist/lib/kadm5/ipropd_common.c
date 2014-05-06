@@ -34,7 +34,7 @@
  */
 
 #include "iprop.h"
-__RCSID("$NetBSD$");
+__RCSID("NetBSD");
 
 sig_atomic_t exit_flag;
 

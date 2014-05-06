@@ -36,7 +36,8 @@
 
 #include <rump/rump.h>
 #include <rump/rump_syscalls.h>
-#include <rump/scsitest.h>
+
+#include "scsitest.h"
 
 #include "../../h_macros.h"
 

@@ -240,7 +240,7 @@ print_hash(struct nbperf *nbperf, struct state *state)
 	fprintf(nbperf->output,
 	    "\tidx2 = idx - holes64[idx >> 6] - holes64k[idx >> 16];\n"
 	    "\tidx2 -= popcount64(g1[idx >> 6] & g2[idx >> 6]\n"
-	    "\t                   & (((uint64_t)1 << idx) - 1));\n"
+	    "\t                   & (((uint64_t)1 << (idx & 63)) - 1));\n"
 	    "\treturn idx2;\n");
 
 	fprintf(nbperf->output, "}\n");

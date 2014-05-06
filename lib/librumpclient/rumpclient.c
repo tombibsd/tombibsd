@@ -292,7 +292,7 @@ cliwaitresp(struct spclient *spc, struct respwait *rw, sigset_t *mask,
 				pfd[1].events = POLLIN;
 
 				rv = host_poll(pfd, 2, -1);
-				if (pfd[1].revents & POLLIN) {
+				if (rv >= 1 && pfd[1].revents & POLLIN) {
 					dosig = 1;
 					goto cleanup;
 				}

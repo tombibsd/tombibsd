@@ -190,7 +190,7 @@ main(int argc, char **argv)
 
     if (argc < 3)
 	usage(1);
-		
+
     principal = argv[0];
     keytab = argv[1];
     ccache = argv[2];

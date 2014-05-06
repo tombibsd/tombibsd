@@ -36,6 +36,8 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/kobj.h>
 #include <sys/systm.h>
 
+#include <rump/rump.h>
+
 /*
  * Mangle symbols into rump kernel namespace.  This means
  * putting "rumpns" in front of select symbols.
@@ -70,15 +72,12 @@ kobj_renamespace(Elf_Sym *symtab, size_t symcount,
 	size_t worktabsz, worktabidx;
 	unsigned i;
 	const size_t prefixlen = strlen(RUMPNS);
-
-#ifndef _RUMP_NATIVE_ABI
 	static int warned;
 
-	if (!warned) {
+	if (!rump_nativeabi_p() && !warned) {
 		printf("warning: kernel ABI not supported on this arch\n");
 		warned = 1;
 	}
-#endif
 
 	/* allocate space for worst-case stringtab */
 	worktabsz = *strtabsz + symcount * prefixlen;

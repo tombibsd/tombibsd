@@ -226,7 +226,9 @@ tcxmatch(device_t parent, cfdata_t cf, void *aux)
 {
 	struct sbus_attach_args *sa = aux;
 
-	return (strcmp(sa->sa_name, OBPNAME) == 0);
+	if (strcmp(sa->sa_name, OBPNAME) == 0)
+		return 100;	/* beat genfb */
+	return 0;
 }
 
 /*

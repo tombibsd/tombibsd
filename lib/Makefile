@@ -7,14 +7,8 @@ SUBDIR=		csu .WAIT
 
 .if (${MKGCC} != "no")
 . if ${HAVE_GCC} == 4
-.  if (${USE_COMPILERCRTSTUFF} == "yes")
-SUBDIR+=	../gnu/lib/crtstuff4 .WAIT
-.  endif
 SUBDIR+=	../gnu/lib/libgcc4 .WAIT
 . else
-.  if (${USE_COMPILERCRTSTUFF} == "yes")
-SUBDIR+=	../external/gpl3/${EXTERNAL_GCC_SUBDIR}/lib/crtstuff .WAIT
-.  endif
 SUBDIR+=	../external/gpl3/${EXTERNAL_GCC_SUBDIR}/lib/libgcc .WAIT
 . endif
 .endif

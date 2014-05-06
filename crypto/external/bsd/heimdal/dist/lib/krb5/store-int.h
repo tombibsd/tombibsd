@@ -45,6 +45,7 @@ struct krb5_storage_data {
     void (*free)(struct krb5_storage_data*);
     krb5_flags flags;
     int eof_code;
+    size_t max_alloc;
 };
 
 #endif /* __store_int_h__ */

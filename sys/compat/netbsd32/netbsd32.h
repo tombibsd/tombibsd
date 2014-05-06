@@ -166,6 +166,7 @@ typedef netbsd32_pointer_t netbsd32_fd_setp_t;
 typedef netbsd32_intptr_t netbsd32_semid_t;
 typedef netbsd32_pointer_t netbsd32_semidp_t;
 typedef netbsd32_uint64 netbsd32_dev_t;
+typedef netbsd32_int64 netbsd32_off_t;
 
 /* from <sys/uio.h> */
 typedef netbsd32_pointer_t netbsd32_iovecp_t;

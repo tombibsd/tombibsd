@@ -40,7 +40,7 @@
 /joystick.h/1.2/Sun Dec 11 12:16:16 2005/-kk/
 /kbio.h/1.4/Sun Dec 11 12:16:16 2005/-kk/
 /kcore.h/1.4/Mon Feb  6 02:14:13 2012/-kk/
-/limits.h/1.15/Thu Oct 24 10:28:57 2013/-kk/
+/limits.h/1.16/Tue May  6 05:49:50 2014/-kk/
 /loadfile_machdep.h/1.5/Mon Apr 28 20:23:11 2008/-kk/
 /lock.h/1.28/Wed Nov 25 14:28:50 2009/-kk/
 /logout.h/1.8/Mon Feb  6 02:14:13 2012/-kk/

@@ -307,7 +307,7 @@ sleepq_block(int timo, bool catch)
  *
  *	Wake zero or more LWPs blocked on a single wait channel.
  */
-lwp_t *
+void
 sleepq_wake(sleepq_t *sq, wchan_t wchan, u_int expected, kmutex_t *mp)
 {
 	lwp_t *l, *next;
@@ -326,7 +326,6 @@ sleepq_wake(sleepq_t *sq, wchan_t wchan, u_int expected, kmutex_t *mp)
 	}
 
 	mutex_spin_exit(mp);
-	return l;
 }
 
 /*

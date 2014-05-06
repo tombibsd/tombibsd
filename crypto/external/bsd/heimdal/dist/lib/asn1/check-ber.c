@@ -38,7 +38,7 @@
 #include <krb5/cms_asn1.h>
 
 
-__RCSID("$NetBSD$");
+__RCSID("NetBSD");
 
 static const unsigned char *contentdata = (unsigned char *)
     "\x30\x80\x06\x09\x2a\x86\x48\x86\xf7\x0d\x01\x07\x02\xa0\x80\x30"

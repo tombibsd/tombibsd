@@ -22,14 +22,14 @@
 /dma.c/1.43/Sun Jun  6 04:50:06 2010/-kk/
 /dmareg.h/1.17/Fri Apr 11 02:03:30 2014/-kk/
 /dmavar.h/1.14/Mon Apr 28 20:23:19 2008/-kk/
-/dnkbd.c/1.5/Fri Feb 18 19:15:43 2011/-kk/
+/dnkbd.c/1.7/Tue May  6 05:49:58 2014/-kk/
 /dnkbdmap.c/1.3/Sat Feb 19 05:37:55 2011/-kk/
 /dnkbdmap.h/1.2/Sat Feb 19 05:37:55 2011/-kk/
 /dvbox.c/1.3/Fri Feb 18 19:15:43 2011/-kk/
 /dvboxreg.h/1.2/Sat Feb 12 16:40:29 2011/-kk/
 /fhpib.c/1.40/Fri Apr 11 02:03:30 2014/-kk/
 /fhpibreg.h/1.6/Sun Dec 11 12:17:13 2005/-kk/
-/frodo.c/1.31/Thu Apr 24 14:30:23 2014/-kk/
+/frodo.c/1.32/Tue May  6 05:49:58 2014/-kk/
 /frodoreg.h/1.5/Thu Apr 24 14:30:23 2014/-kk/
 /frodovar.h/1.9/Mon Apr 28 20:23:19 2008/-kk/
 /gbox.c/1.3/Fri Feb 18 19:15:43 2011/-kk/

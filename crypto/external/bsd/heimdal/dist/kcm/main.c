@@ -35,7 +35,7 @@
 
 #include "kcm_locl.h"
 
-__RCSID("$NetBSD$");
+__RCSID("NetBSD");
 
 sig_atomic_t exit_flag = 0;
 

@@ -454,6 +454,7 @@ do_sys_mount(struct lwp *l, struct vfsops *vfsops, const char *type,
 	struct vnode *vp;
 	void *data_buf = data;
 	bool vfsopsrele = false;
+	size_t alloc_sz = 0;
 	int error;
 
 	/* XXX: The calling convention of this routine is totally bizarre */
@@ -502,7 +503,8 @@ do_sys_mount(struct lwp *l, struct vfsops *vfsops, const char *type,
 			error = EINVAL;
 			goto done;
 		}
-		data_buf = kmem_alloc(data_len, KM_SLEEP);
+		alloc_sz = data_len;
+		data_buf = kmem_alloc(alloc_sz, KM_SLEEP);
 
 		/* NFS needs the buffer even for mnt_getargs .... */
 		error = copyin(data, data_buf, data_len);
@@ -538,7 +540,7 @@ do_sys_mount(struct lwp *l, struct vfsops *vfsops, const char *type,
 	    	vrele(vp);
 	}
 	if (data_buf != data)
-		kmem_free(data_buf, data_len);
+		kmem_free(data_buf, alloc_sz);
 	return (error);
 }
 

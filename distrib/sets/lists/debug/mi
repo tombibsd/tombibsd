@@ -152,7 +152,7 @@
 ./usr/lib/librumpdev_raidframe_g.a		comp-c-debuglib		debuglib,rump
 ./usr/lib/librumpdev_rnd_g.a			comp-c-debuglib		debuglib,rump
 ./usr/lib/librumpdev_scsipi_g.a			comp-c-debuglib		debuglib,rump
-./usr/lib/librumpdev_scsitest_g.a		comp-c-debuglib		debuglib,rump
+./usr/lib/librumpdev_scsitest_g.a		comp-obsolete obsolete
 ./usr/lib/librumpdev_sysmon_g.a			comp-c-debuglib		debuglib,rump
 ./usr/lib/librumpdev_ubt_g.a			comp-c-debuglib		debuglib,rump
 ./usr/lib/librumpdev_ucom_g.a			comp-c-debuglib		debuglib,rump
@@ -1792,6 +1792,7 @@
 ./usr/libdata/debug/usr/tests/lib/libc/c063/t_unlinkat.debug		tests-lib-debug		debug,atf
 ./usr/libdata/debug/usr/tests/lib/libc/c063/t_utimensat.debug		tests-lib-debug		debug,atf
 ./usr/libdata/debug/usr/tests/lib/libc/db/h_db.debug			tests-lib-debug		debug,atf
+./usr/libdata/debug/usr/tests/lib/libc/gen/execve/t_execve.debug	tests-kernel-tests	debug,atf
 ./usr/libdata/debug/usr/tests/lib/libc/gen/posix_spawn/h_fileactions.debug	tests-kernel-tests	debug,atf
 ./usr/libdata/debug/usr/tests/lib/libc/gen/posix_spawn/h_spawn.debug		tests-kernel-tests	debug,atf
 ./usr/libdata/debug/usr/tests/lib/libc/gen/posix_spawn/h_spawnattr.debug	tests-kernel-tests	debug,atf

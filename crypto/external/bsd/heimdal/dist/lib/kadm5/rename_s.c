@@ -35,7 +35,7 @@
 
 #include "kadm5_locl.h"
 
-__RCSID("$NetBSD$");
+__RCSID("NetBSD");
 
 kadm5_ret_t
 kadm5_s_rename_principal(void *server_handle,
@@ -64,7 +64,7 @@ kadm5_s_rename_principal(void *server_handle,
 	goto out2;
     {
 	/* fix salt */
-	int i;
+	size_t i;
 	Salt salt;
 	krb5_salt salt2;
 	memset(&salt, 0, sizeof(salt));

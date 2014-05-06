@@ -31,6 +31,7 @@
 #ifndef _SSP_STRING_H_
 #define _SSP_STRING_H_
 
+#include <sys/cdefs.h>
 #include <ssp/ssp.h>
 
 __BEGIN_DECLS
@@ -93,7 +94,9 @@ __END_DECLS
 #define memmove(dst, src, len) __ssp_bos_check3(memmove, dst, src, len)
 #define memset(dst, val, len) __ssp_bos_check3(memset, dst, val, len)
 #define stpcpy(dst, src) __ssp_bos_check2(stpcpy, dst, src)
+#if __GNUC_PREREQ__(4,8) || defined(__clang__)
 #define stpncpy(dst, src, len) __ssp_bos_check3(stpncpy, dst, src, len)
+#endif
 #define strcpy(dst, src) __ssp_bos_check2(strcpy, dst, src)
 #define strcat(dst, src) __ssp_bos_check2(strcat, dst, src)
 #define strncpy(dst, src, len) __ssp_bos_check3(strncpy, dst, src, len)

@@ -151,14 +151,6 @@ main(int argc, char *argv[])
 	unsigned nmods = 0, curmod = 0, nlibs = 0, curlib = 0, libidx;
 	unsigned liblast = -1; /* XXXgcc */
 
-#ifdef __GLIBC__
-	char *p_weak;
-
-	if ((p_weak = getenv("LD_DYNAMIC_WEAK")) == NULL || *p_weak != '1')
-		fprintf(stderr, "WARNING: LD_DYNAMIC_WEAK is not set to "
-		    "\"1\" in the environment\n");
-#endif
-
 #ifdef PLATFORM_HAS_SETGETPROGNAME
 	setprogname(argv[0]);
 #endif

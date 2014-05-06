@@ -91,8 +91,8 @@
 
 struct ViceIoctl {
   caddr_t in, out;
-  short in_size;
-  short out_size;
+  unsigned short in_size;
+  unsigned short out_size;
 };
 
 struct ClearToken {

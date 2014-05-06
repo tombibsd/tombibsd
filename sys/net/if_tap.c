@@ -415,6 +415,7 @@ tap_detach(device_t self, int flags)
 	ifmedia_delete_instance(&sc->sc_im, IFM_INST_ANY);
 	seldestroy(&sc->sc_rsel);
 	mutex_destroy(&sc->sc_rdlock);
+	mutex_destroy(&sc->sc_kqlock);
 
 	pmf_device_deregister(self);
 

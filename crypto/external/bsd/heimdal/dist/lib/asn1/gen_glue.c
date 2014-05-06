@@ -37,7 +37,7 @@
 
 #include "gen_locl.h"
 
-__RCSID("$NetBSD$");
+__RCSID("NetBSD");
 
 static void
 generate_2int (const Type *t, const char *gen_name)

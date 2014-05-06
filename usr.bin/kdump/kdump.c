@@ -652,14 +652,13 @@ rprint(register_t ret)
 {
 
 	if (!plain) {
-		(void)printf("%ld", (long)ret);
-		if (!small(ret))
-			(void)printf("/%#lx", (long)ret);
+		output_long(ret, 0);
+		if (!small(ret)) {
+			putchar('/');
+			output_long(ret, 1);
+		}
 	} else {
-		if (decimal || small(ret))
-			(void)printf("%ld", (long)ret);
-		else
-			(void)printf("%#lx", (long)ret);
+		output_long(ret, !(decimal || small(ret)));
 	}
 }
 

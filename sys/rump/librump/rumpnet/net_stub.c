@@ -38,18 +38,13 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <compat/sys/socket.h>
 #include <compat/sys/sockio.h>
 
-int __rumpnet_stub(void);
+int rumpnet_stub(void);
 int
-__rumpnet_stub(void)
+rumpnet_stub(void)
 {
 
 	panic("component not available");
 }
-__weak_alias(rtioctl,__rumpnet_stub);
-__weak_alias(rtrequest,__rumpnet_stub);
-__weak_alias(ifioctl,__rumpnet_stub);
-__weak_alias(ifunit,__rumpnet_stub);
-__weak_alias(ifreq_setaddr,__rumpnet_stub);
 
 /*
  * Weak symbols so that we can optionally leave components out.
@@ -57,14 +52,14 @@ __weak_alias(ifreq_setaddr,__rumpnet_stub);
  */
 
 /* bridge */
-__weak_alias(bridge_ifdetach,__rumpnet_stub);
-__weak_alias(bridge_output,__rumpnet_stub);
-__weak_alias(bridge_input,__rumpnet_stub);
+__weak_alias(bridge_ifdetach,rumpnet_stub);
+__weak_alias(bridge_output,rumpnet_stub);
+__weak_alias(bridge_input,rumpnet_stub);
 
 /* agr */
-__weak_alias(agr_input,__rumpnet_stub);
-__weak_alias(ieee8023ad_lacp_input,__rumpnet_stub);
-__weak_alias(ieee8023ad_marker_input,__rumpnet_stub);
+__weak_alias(agr_input,rumpnet_stub);
+__weak_alias(ieee8023ad_lacp_input,rumpnet_stub);
+__weak_alias(ieee8023ad_marker_input,rumpnet_stub);
 
 struct ifnet_head ifnet;
 

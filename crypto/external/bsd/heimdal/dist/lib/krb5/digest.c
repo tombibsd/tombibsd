@@ -246,7 +246,7 @@ digest_request(krb5_context context,
     DigestREP rep;
     krb5_error_code ret;
     krb5_data data, data2;
-    size_t size;
+    size_t size = 0;
     krb5_crypto crypto = NULL;
     krb5_auth_context ac = NULL;
     krb5_principal principal = NULL;
@@ -729,8 +729,10 @@ krb5_digest_request(krb5_context context,
 	ireq.u.digestRequest.type = digest->init.type;
     }
 
-    if (ireq.u.digestRequest.digest == NULL)
-	ireq.u.digestRequest.digest = "md5";
+    if (ireq.u.digestRequest.digest == NULL) {
+	static char md5[] = "md5";
+	ireq.u.digestRequest.digest = md5;
+    }
 
     ret = digest_request(context, realm, ccache,
 			 KRB5_KU_DIGEST_ENCRYPT, &ireq, &irep);

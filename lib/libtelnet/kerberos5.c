@@ -227,7 +227,8 @@ kerberos5_send(Authenticator *ap)
 		}
 		return (0);
 	}
-	krb5_auth_con_setkeytype(telnet_context, auth_context, KEYTYPE_DES);
+	krb5_auth_con_setkeytype(telnet_context, auth_context,
+	    ETYPE_DES_CBC_CRC);
 
 	foo[0] = ap->type;
 	foo[1] = ap->way;

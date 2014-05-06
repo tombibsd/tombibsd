@@ -164,7 +164,7 @@
 ./usr/lib/librumpdev_raidframe_pic.a		comp-c-piclib		rump,picinstall
 ./usr/lib/librumpdev_rnd_pic.a			comp-c-piclib		rump,picinstall
 ./usr/lib/librumpdev_scsipi_pic.a		comp-c-piclib		rump,picinstall
-./usr/lib/librumpdev_scsitest_pic.a		comp-c-piclib		rump,picinstall
+./usr/lib/librumpdev_scsitest_pic.a		comp-obsolete obsolete
 ./usr/lib/librumpdev_sysmon_pic.a		comp-c-piclib		rump,picinstall
 ./usr/lib/librumpdev_ubt_pic.a			comp-c-piclib		rump,picinstall
 ./usr/lib/librumpdev_ucom_pic.a			comp-c-piclib		rump,picinstall

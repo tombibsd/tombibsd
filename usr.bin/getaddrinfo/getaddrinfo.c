@@ -132,6 +132,24 @@ main(int argc, char **argv)
 	if (argc == 1)
 		hostname = argv[0];
 
+	if (service != NULL) {
+		char *p;
+
+		if ((p = strchr(service, '/')) != NULL) {
+			if (hints.ai_protocol != 0) {
+				warnx("protocol already specified");
+				usage();
+			}
+			*p = '\0';
+			p++;
+			
+			if (!parse_protocol(p, &hints.ai_protocol)) {
+				warnx("invalid protocol: %s", p);
+				usage();
+			}
+		}
+	}
+
 	error = getaddrinfo(hostname, service, &hints, &addrinfo);
 	if (error)
 		errx(1, "%s", gai_strerror(error));

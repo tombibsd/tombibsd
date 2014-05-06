@@ -1,6 +1,6 @@
 /*	$NetBSD$	*/
 
-/* Finds Mersenne primes using the Lucas-Lehmer test 
+/* Finds Mersenne primes using the Lucas-Lehmer test
  *
  * Tom St Denis, tomstdenis@gmail.com
  */
@@ -12,7 +12,7 @@ is_mersenne (long s, int *pp)
 {
   mp_int  n, u;
   int     res, k;
-  
+
   *pp = 0;
 
   if ((res = mp_init (&n)) != MP_OKAY) {
@@ -141,6 +141,6 @@ main (void)
   return 0;
 }
 
-/* Source: /cvs/libtom/libtommath/etc/mersenne.c,v */
-/* Revision: 1.3 */
-/* Date: 2006/03/31 14:18:47 */
+/* Source: /cvs/libtom/libtommath/etc/mersenne.c,v  */
+/* Revision: 1.3  */
+/* Date: 2006/03/31 14:18:47  */

@@ -296,11 +296,11 @@ main(int argc, char **argv)
 		mtree_err("-l and -u flags are mutually exclusive");
 
 	if (cflag) {
-		cwalk();
+		cwalk(stdout);
 		exit(0);
 	}
 	if (Cflag || Dflag) {
-		dump_nodes("", spec(spec1), Dflag);
+		dump_nodes(stdout, "", spec(spec1), Dflag);
 		exit(0);
 	}
 	if (spec2 != NULL)

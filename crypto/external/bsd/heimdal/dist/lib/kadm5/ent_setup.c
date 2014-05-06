@@ -37,7 +37,7 @@
 
 #include "kadm5_locl.h"
 
-__RCSID("$NetBSD$");
+__RCSID("NetBSD");
 
 #define set_value(X, V) do { if((X) == NULL) (X) = malloc(sizeof(*(X))); *(X) = V; } while(0)
 #define set_null(X)     do { if((X) != NULL) free((X)); (X) = NULL; } while (0)
@@ -105,7 +105,7 @@ perform_tl_data(krb5_context context,
 				   NULL);
 	if (ret)
 	    return KADM5_BAD_TL_TYPE;
-	
+
 	ret = hdb_replace_extension(context, &ent->entry, &ext);
 	free_HDB_extension(&ext);
     } else {

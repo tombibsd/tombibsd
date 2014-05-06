@@ -109,9 +109,9 @@ open_pty(void)
     {
 	char *clone[] = {
 	    "/dev/ptc",
-	    "/dev/ptmx", 
+	    "/dev/ptmx",
 	    "/dev/ptm",
-	    "/dev/ptym/clone", 
+	    "/dev/ptym/clone",
 	    NULL
 	};
 	char **q;
@@ -374,7 +374,7 @@ main(int argc, char **argv)
 	    sa.sa_handler = caught_signal;
 	    sa.sa_flags = 0;
 	    sigemptyset (&sa.sa_mask);
-	
+
 	    sigaction(SIGALRM, &sa, NULL);
 	}
 

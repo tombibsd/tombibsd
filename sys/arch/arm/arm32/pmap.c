@@ -722,7 +722,7 @@ struct pv_entry {
 static bool		pmap_set_pt_cache_mode(pd_entry_t *, vaddr_t, size_t);
 static void		pmap_alloc_specials(vaddr_t *, int, vaddr_t *,
 			    pt_entry_t **);
-static bool		pmap_is_current(pmap_t);
+static bool		pmap_is_current(pmap_t) __unused;
 static bool		pmap_is_cached(pmap_t);
 static void		pmap_enter_pv(struct vm_page_md *, paddr_t, struct pv_entry *,
 			    pmap_t, vaddr_t, u_int);
@@ -1582,7 +1582,6 @@ pmap_alloc_l2_bucket(pmap_t pm, vaddr_t va)
 static void
 pmap_free_l2_bucket(pmap_t pm, struct l2_bucket *l2b, u_int count)
 {
-	KASSERT(pm != pmap_kernel());
 	KDASSERT(count <= l2b->l2b_occupancy);
 
 	/*
@@ -2918,9 +2917,7 @@ pmap_page_remove(struct vm_page_md *md, paddr_t pa)
 		 */
 		l2pte_reset(ptep);
 		PTE_SYNC_CURRENT(pm, ptep);
-		if (pm != pmap_kernel()) {
-			pmap_free_l2_bucket(pm, l2b, PAGE_SIZE / L2_S_SIZE);
-		}
+		pmap_free_l2_bucket(pm, l2b, PAGE_SIZE / L2_S_SIZE);
 		pmap_release_pmap_lock(pm);
 
 		pool_put(&pmap_pv_pool, pv);
@@ -3055,7 +3052,7 @@ pmap_enter(pmap_t pm, vaddr_t va, paddr_t pa, vm_prot_t prot, u_int flags)
 
 	UVMHIST_FUNC(__func__); UVMHIST_CALLED(maphist);
 
-	UVMHIST_LOG(maphist, " (pm %p va %#x pa %#x prot #x",
+	UVMHIST_LOG(maphist, " (pm %p va %#x pa %#x prot %#x",
 	    pm, va, pa, prot);
 	UVMHIST_LOG(maphist, "  flag %#x", flags, 0, 0, 0);
 
@@ -3226,8 +3223,7 @@ pmap_enter(pmap_t pm, vaddr_t va, paddr_t pa, vm_prot_t prot, u_int flags)
 						panic("pmap_enter: "
 						    "no pv entries");
 
-					if (pm != pmap_kernel())
-						pmap_free_l2_bucket(pm, l2b, 0);
+					pmap_free_l2_bucket(pm, l2b, 0);
 					UVMHIST_LOG(maphist, "  <-- done (ENOMEM)",
 					    0, 0, 0, 0);
 					return (ENOMEM);
@@ -3581,9 +3577,9 @@ pmap_remove(pmap_t pm, vaddr_t sva, vaddr_t eva)
 			}
 		}
 
-		if (pm != pmap_kernel())
-			pmap_free_l2_bucket(pm, l2b, mappings);
-		pm->pm_stats.resident_count -= mappings;
+
+		pmap_free_l2_bucket(pm, l2b, mappings);
+		pm->pm_stats.resident_count -= mappings / (PAGE_SIZE/L2_S_SIZE);
 	}
 
 	pmap_release_pmap_lock(pm);

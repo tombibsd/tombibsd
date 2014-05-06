@@ -520,9 +520,9 @@
 ./usr/lib/librumpdev_scsipi.so			base-rump-shlib	rump
 ./usr/lib/librumpdev_scsipi.so.0		base-rump-shlib	rump
 ./usr/lib/librumpdev_scsipi.so.0.0		base-rump-shlib	rump
-./usr/lib/librumpdev_scsitest.so		base-rump-shlib	rump
-./usr/lib/librumpdev_scsitest.so.0		base-rump-shlib	rump
-./usr/lib/librumpdev_scsitest.so.0.0		base-rump-shlib	rump
+./usr/lib/librumpdev_scsitest.so		base-obsolete obsolete
+./usr/lib/librumpdev_scsitest.so.0		base-obsolete obsolete
+./usr/lib/librumpdev_scsitest.so.0.0		base-obsolete obsolete
 ./usr/lib/librumpdev_sysmon.so			base-rump-shlib	rump
 ./usr/lib/librumpdev_sysmon.so.0		base-rump-shlib	rump
 ./usr/lib/librumpdev_sysmon.so.0.0		base-rump-shlib	rump

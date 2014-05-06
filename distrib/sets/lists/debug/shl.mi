@@ -179,7 +179,7 @@
 ./usr/libdata/debug/usr/lib/librumpdev_raidframe.so.0.0.debug	comp-rump-debug	debug,rump
 ./usr/libdata/debug/usr/lib/librumpdev_rnd.so.0.0.debug	comp-rump-debug	debug,rump
 ./usr/libdata/debug/usr/lib/librumpdev_scsipi.so.0.0.debug	comp-rump-debug	debug,rump
-./usr/libdata/debug/usr/lib/librumpdev_scsitest.so.0.0.debug	comp-rump-debug	debug,rump
+./usr/libdata/debug/usr/lib/librumpdev_scsitest.so.0.0.debug	comp-obsolete obsolete
 ./usr/libdata/debug/usr/lib/librumpdev_sysmon.so.0.0.debug	comp-rump-debug	debug,rump
 ./usr/libdata/debug/usr/lib/librumpdev_ubt.so.0.0.debug	comp-rump-debug	debug,rump
 ./usr/libdata/debug/usr/lib/librumpdev_ucom.so.0.0.debug	comp-rump-debug	debug,rump

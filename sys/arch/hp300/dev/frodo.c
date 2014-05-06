@@ -197,6 +197,11 @@ frodoattach(device_t parent, device_t self, void *aux)
 		if (fd->fd_offset == FRODO_APCI_OFFSET(1) &&
 		    mmuid != MMUID_425_E)
 			continue;
+		/*
+		 * The mcclock is available only on a 425e.
+		 */
+		if (fd->fd_offset == FRODO_CALENDAR && mmuid != MMUID_425_E)
+			continue;
 		fa.fa_name = fd->fd_name;
 		fa.fa_bst = bst;
 		fa.fa_base = ia->ia_iobase;

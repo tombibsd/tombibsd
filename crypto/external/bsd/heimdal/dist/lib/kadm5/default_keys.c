@@ -36,7 +36,7 @@
 #include "kadm5_locl.h"
 #include <err.h>
 
-__RCSID("$NetBSD$");
+__RCSID("NetBSD");
 
 static void
 print_keys(krb5_context context, Key *keys, size_t nkeys)
@@ -74,7 +74,7 @@ print_keys(krb5_context context, Key *keys, size_t nkeys)
 	    if (keys[i].salt->salt.length)
 		printf("%.*s", (int)keys[i].salt->salt.length,
 		       (char *)keys[i].salt->salt.data);
-	}	
+	}
 	printf("\n");
     }
     printf("end keys:\n");

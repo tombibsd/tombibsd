@@ -35,7 +35,7 @@
 
 #include <der_locl.h>
 
-__RCSID("$NetBSD$");
+__RCSID("NetBSD");
 
 static int
 test_timegm(void)

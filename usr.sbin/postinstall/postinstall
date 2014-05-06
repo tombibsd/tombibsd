@@ -1790,6 +1790,11 @@ do_ptyfsoldnodes()
 		return 0
 	fi
 
+	if [ ! -e "${DEST_DIR}/dev/pts" ]; then
+		msg "ptyfs is not properly configured: missing /dev/pts"
+		return 1
+	fi
+
 	# Find the device major numbers for the pty master and slave
 	# devices, by parsing the output from "MAKEDEV -s pty0".
 	#

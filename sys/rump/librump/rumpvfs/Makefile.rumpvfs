@@ -22,6 +22,8 @@ SRCS+=	rump_vfs.c devnodes.c devnull.c rumpblk.c rumpfs.c vm_vfs.c
 
 SRCS+=	rumpvfs_if_wrappers.c
 
+SRCS+=	rumpvfs_syscalls.c
+
 # sys/kern I/O
 SRCS+=	kern_physio.c
 

@@ -35,7 +35,7 @@
 
 #include "kadm5_locl.h"
 
-__RCSID("$NetBSD$");
+__RCSID("NetBSD");
 
 struct foreach_data {
     const char *exp;

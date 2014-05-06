@@ -34,7 +34,7 @@
 
 #include "kadm5_locl.h"
 
-__RCSID("$NetBSD$");
+__RCSID("NetBSD");
 
 kadm5_ret_t
 kadm5_s_flush(void *server_handle)

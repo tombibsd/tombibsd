@@ -34,6 +34,8 @@ atf_test_case chm
 chm_head()
 {
 	atf_set "descr" "Checks chm algorithm"
+	atf_set "require.files" "/usr/share/dict/web2"
+	atf_set "require.progs" "cc"
 }
 chm_body()
 { 
@@ -56,6 +58,8 @@ atf_test_case chm3
 chm3_head()
 {
 	atf_set "descr" "Checks chm3 algorithm"
+	atf_set "require.files" "/usr/share/dict/web2"
+	atf_set "require.progs" "cc"
 }
 chm3_body()
 { 
@@ -78,6 +82,8 @@ atf_test_case bdz
 bdz_head()
 {
 	atf_set "descr" "Checks bdz algorithm"
+	atf_set "require.files" "/usr/share/dict/web2"
+	atf_set "require.progs" "cc"
 }
 bdz_body()
 { 

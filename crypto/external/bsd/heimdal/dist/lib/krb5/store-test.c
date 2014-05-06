@@ -73,7 +73,7 @@ main(int argc, char **argv)
     krb5_storage *sp;
     krb5_context context;
     krb5_principal principal;
-	
+
 
     krb5_init_context(&context);
 

@@ -281,7 +281,7 @@ struct thread_data {
 
 static struct thread_data thread_slots[MAX_THREAD_DATA_SLOTS];
 
-static void 
+static void
 kthread_wrapper(void *data)
 {
 	struct thread_data *slot;
@@ -312,7 +312,7 @@ vchiq_thread_create(int (*threadfn)(void *data),
 	va_start(ap, namefmt);
 	vsnprintf(name, sizeof(name), namefmt, ap);
 	va_end(ap);
-	
+
 	newt = NULL;
 	if (kthread_create(PRI_NONE, 0, NULL, kthread_wrapper, slot, &newt,
 	    "%s", name) != 0) {

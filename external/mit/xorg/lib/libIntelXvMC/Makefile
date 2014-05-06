@@ -3,7 +3,7 @@
 .include <bsd.own.mk>
 
 LIB=	IntelXvMC
-#MKLINT=	no
+MKLINT=	no
 .PATH:	${X11SRCDIR.xf86-video-intel}/xvmc
 
 SRCS+=		intel_xvmc.c

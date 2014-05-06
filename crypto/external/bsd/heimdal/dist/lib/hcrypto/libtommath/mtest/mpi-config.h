@@ -7,7 +7,7 @@
 #define MPI_CONFIG_H_
 
 /*
-  For boolean options, 
+  For boolean options,
   0 = no
   1 = yes
 
@@ -87,6 +87,6 @@
 
 /* crc==3287762869, version==2, Sat Feb 02 06:43:53 2002 */
 
-/* Source: /cvs/libtom/libtommath/mtest/mpi-config.h,v */
-/* Revision: 1.2 */
-/* Date: 2005/05/05 14:38:47 */
+/* Source: /cvs/libtom/libtommath/mtest/mpi-config.h,v  */
+/* Revision: 1.2  */
+/* Date: 2005/05/05 14:38:47  */

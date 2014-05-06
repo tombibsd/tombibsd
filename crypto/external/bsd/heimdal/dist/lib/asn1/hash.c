@@ -39,7 +39,7 @@
 
 #include "gen_locl.h"
 
-__RCSID("$NetBSD$");
+__RCSID("NetBSD");
 
 static Hashentry *_search(Hashtab * htab,	/* The hash table */
 			  void *ptr);	/* And key */

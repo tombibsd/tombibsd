@@ -1040,6 +1040,7 @@
 ./usr/share/man/cat4/et.0			man-sys-catman		.cat
 ./usr/share/man/cat4/etherip.0			man-sys-catman		.cat
 ./usr/share/man/cat4/etphy.0			man-sys-catman		.cat
+./usr/share/man/cat4/evbarm/bcmgpio.0		man-sys-catman		.cat
 ./usr/share/man/cat4/evbarm/cpsw.0		man-sys-catman		.cat
 ./usr/share/man/cat4/evbarm/epgpio.0		man-sys-catman		.cat
 ./usr/share/man/cat4/evbarm/intro.0		man-sys-catman		.cat
@@ -2118,7 +2119,7 @@
 ./usr/share/man/cat5/ntp.conf.0			man-ntp-catman		.cat
 ./usr/share/man/cat5/ntp.keys.0			man-ntp-catman		.cat
 ./usr/share/man/cat5/openssl.cnf.0		man-crypto-catman	crypto,.cat
-./usr/share/man/cat5/pam.conf.0			man-sys-catman		.cat
+./usr/share/man/cat5/pam.conf.0			man-sys-catman		pam,.cat
 ./usr/share/man/cat5/passwd.0			man-sys-catman		.cat
 ./usr/share/man/cat5/passwd.conf.0		man-sys-catman		.cat
 ./usr/share/man/cat5/pcap-savefile.0		man-net-catman		.cat
@@ -4077,6 +4078,7 @@
 ./usr/share/man/html4/et.html			man-sys-htmlman		html
 ./usr/share/man/html4/etherip.html		man-sys-htmlman		html
 ./usr/share/man/html4/etphy.html		man-sys-htmlman		html
+./usr/share/man/html4/evbarm/bcmgpio.html	man-sys-htmlman		html
 ./usr/share/man/html4/evbarm/cpsw.html		man-sys-htmlman		html
 ./usr/share/man/html4/evbarm/epgpio.html	man-sys-htmlman		html
 ./usr/share/man/html4/evbarm/intro.html		man-sys-htmlman		html
@@ -5067,7 +5069,7 @@
 ./usr/share/man/html5/ntp.conf.html		man-ntp-htmlman		html
 ./usr/share/man/html5/ntp.keys.html		man-ntp-htmlman		html
 ./usr/share/man/html5/openssl.cnf.html		man-crypto-htmlman	crypto,html
-./usr/share/man/html5/pam.conf.html		man-sys-htmlman		html
+./usr/share/man/html5/pam.conf.html		man-sys-htmlman		pam,html
 ./usr/share/man/html5/passwd.conf.html		man-sys-htmlman		html
 ./usr/share/man/html5/passwd.html		man-sys-htmlman		html
 ./usr/share/man/html5/pcap-savefile.html	man-sys-htmlman		html
@@ -6884,6 +6886,7 @@
 ./usr/share/man/man4/et.4			man-sys-man		.man
 ./usr/share/man/man4/etherip.4			man-sys-man		.man
 ./usr/share/man/man4/etphy.4			man-sys-man		.man
+./usr/share/man/man4/evbarm/bcmgpio.4		man-sys-man		.man
 ./usr/share/man/man4/evbarm/cpsw.4		man-sys-man		.man
 ./usr/share/man/man4/evbarm/epgpio.4		man-sys-man		.man
 ./usr/share/man/man4/evbarm/intro.4		man-sys-man		.man
@@ -7962,7 +7965,7 @@
 ./usr/share/man/man5/ntp.conf.5			man-ntp-man		.man
 ./usr/share/man/man5/ntp.keys.5			man-ntp-man		.man
 ./usr/share/man/man5/openssl.cnf.5		man-crypto-man		crypto,.man
-./usr/share/man/man5/pam.conf.5			man-sys-man		.man
+./usr/share/man/man5/pam.conf.5			man-sys-man		pam,.man
 ./usr/share/man/man5/passwd.5			man-sys-man		.man
 ./usr/share/man/man5/passwd.conf.5		man-sys-man		.man
 ./usr/share/man/man5/pcap-savefile.5		man-netutil-man		.man

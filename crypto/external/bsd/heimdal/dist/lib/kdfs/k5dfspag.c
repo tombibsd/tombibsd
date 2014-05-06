@@ -27,7 +27,7 @@
 #include <config.h>
 #endif
 
-__RCSID("$NetBSD$");
+__RCSID("NetBSD");
 
 #include <krb5/krb5.h>
 

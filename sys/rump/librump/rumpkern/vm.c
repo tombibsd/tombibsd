@@ -1124,8 +1124,7 @@ uvm_pageout(void *arg)
 		 * And then drain the pools.  Wipe them out ... all of them.
 		 */
 		for (pp_first = NULL;;) {
-			if (rump_vfs_drainbufs)
-				rump_vfs_drainbufs(10 /* XXX: estimate! */);
+			rump_vfs_drainbufs(10 /* XXX: estimate! */);
 
 			succ = pool_drain(&pp);
 			if (succ || pp == pp_first)

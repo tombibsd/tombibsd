@@ -35,7 +35,7 @@
 
 #include "kadm5_locl.h"
 
-__RCSID("$NetBSD$");
+__RCSID("NetBSD");
 
 kadm5_ret_t
 kadm5_init_with_password(const char *client_name,

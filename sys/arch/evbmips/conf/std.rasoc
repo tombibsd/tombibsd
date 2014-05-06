@@ -15,6 +15,6 @@ options 	EXEC_SCRIPT	# exec #! scripts
 makeoptions	CPUFLAGS+="-march=mips32r2"
 makeoptions	DEFTEXTADDR="0x80010000"
 makeoptions	NEED_BINARY="yes"
-makeoptions	NEED_UBOOTIMAGE="bsentry"
+makeoptions	NEED_UBOOTIMAGE="yes"
 
 include	"arch/evbmips/conf/files.rasoc"

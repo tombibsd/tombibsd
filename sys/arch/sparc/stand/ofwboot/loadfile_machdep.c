@@ -694,7 +694,7 @@ sparc64_finalize_tlb_sun4v(u_long data_va)
 			1,		/* valid */
 			0		/* endianness */
 			);
-		data |= SUN4V_TLB_L | SUN4V_TLB_CV; /* locked, virt.cache */
+		data |= SUN4V_TLB_CV|SUN4V_TLB_X; /* virt.cache, executable */
 		if (!writable_text) {
 			hv_rc = hv_mmu_unmap_perm_addr(dtlb_store[i].te_va,
 			                               MAP_DTLB);

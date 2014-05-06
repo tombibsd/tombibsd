@@ -232,7 +232,7 @@ ralink_console_early(void)
 {
 	cn_tab = &ralink_earlycons;
 }
-#endif
+#endif /* RALINK_CONSOLE_EARLY */
 
 
 int

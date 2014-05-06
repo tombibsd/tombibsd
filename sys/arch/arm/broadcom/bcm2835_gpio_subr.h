@@ -31,6 +31,7 @@
 
 #include <arm/broadcom/bcm2835_gpioreg.h>
 
-void bcm2835gpio_function_select(u_int, u_int);
+void  bcm2835gpio_function_select(u_int, u_int);
+u_int bcm2835gpio_function_read(u_int);
 
 #endif /* _BROADCOM_BCM2835_GPIOVAR_H_ */

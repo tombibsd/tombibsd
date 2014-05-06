@@ -279,6 +279,7 @@ void		tmpfs_update(vnode_t *, unsigned);
 
 void		tmpfs_mntmem_init(tmpfs_mount_t *, uint64_t);
 void		tmpfs_mntmem_destroy(tmpfs_mount_t *);
+int		tmpfs_mntmem_set(tmpfs_mount_t *, uint64_t);
 
 size_t		tmpfs_mem_info(bool);
 uint64_t	tmpfs_bytes_max(tmpfs_mount_t *);

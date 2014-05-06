@@ -35,7 +35,7 @@
 
 #include "gen_locl.h"
 
-__RCSID("$NetBSD$");
+__RCSID("NetBSD");
 
 static void
 length_primitive (const char *typename,

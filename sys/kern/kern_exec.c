@@ -787,7 +787,7 @@ execve_dovmcmds(struct lwp *l, struct execve_data * restrict data)
 	struct proc		*p = l->l_proc;
 	struct exec_vmcmd	*base_vcp;
 	int			error = 0;
-	int			i;
+	size_t			i;
 
 	/* record proc's vnode, for use by procfs and others */
 	if (p->p_textvp)

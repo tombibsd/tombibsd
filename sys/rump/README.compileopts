@@ -94,10 +94,12 @@ effect: Iff defined, export normal system call symbols from libc.
 
     RUMP_LDSCRIPT
 
-values: no/GNU/sun
+values: no/GNU/sun/ctor
 defval: GNU
 effect: Select the linker script to be used for linking rump kernel shared
 	library components.
-	no  - do not use a linker script
-	GNU - use a linker script for GNU ld 2.18 and later
-	sun - use a linker script for the Solaris linker
+	no	- do not use a linker script
+	GNU	- use a linker script for GNU ld 2.18 and later
+	sun	- use a linker script for the Solaris linker
+	ctor	- do not use a linker script, make the code
+		  generate __attribute__((constructor))

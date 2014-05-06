@@ -12,7 +12,7 @@ CLEANFILES+=	krb5-config
 
 krb5-config: krb5-config.in
 	${TOOL_SED} -e "s!@PACKAGE\@!heimdal!g" \
-	        -e "s!@VERSION\@!1.5pre1!g" \
+	        -e "s!@VERSION\@!1.5.3!g" \
 	        -e "s!@prefix\@!/!g" \
 	        -e "s!@exec_prefix\@!/!g" \
 	        -e "s!@libdir\@!/usr/lib!g" \

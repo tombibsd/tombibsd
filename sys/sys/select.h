@@ -55,7 +55,6 @@ void	selnotify(struct selinfo *, int, long);
 void	selsysinit(struct cpu_info *);
 void	selinit(struct selinfo *);
 void	seldestroy(struct selinfo *);
-int	pollsock(struct socket *, const struct timespec *, int);
 
 #else /* _KERNEL */
 

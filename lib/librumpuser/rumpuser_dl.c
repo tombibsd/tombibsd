@@ -487,10 +487,3 @@ rumpuser_dl_bootstrap(rump_modinit_fn domodinit,
 	return;
 }
 #endif
-
-void *
-rumpuser_dl_globalsym(const char *symname)
-{
-
-	return dlsym(RTLD_DEFAULT, symname);
-}

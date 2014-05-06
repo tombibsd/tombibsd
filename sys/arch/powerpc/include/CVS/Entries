@@ -30,7 +30,7 @@
 /ipkdb.h/1.4/Thu Feb 16 20:17:14 2006/-kk/
 /isa_machdep.h/1.9/Sat Oct 27 17:18:07 2012/-kk/
 /kcore.h/1.5/Sun Dec 11 12:18:43 2005/-kk/
-/limits.h/1.18/Thu Oct 24 10:28:57 2013/-kk/
+/limits.h/1.19/Tue May  6 05:50:01 2014/-kk/
 /lock.h/1.12/Mon Apr 28 20:23:32 2008/-kk/
 /math.h/1.4/Tue Feb 19 13:08:15 2002/-kk/
 /mcontext.h/1.15/Sat Mar  1 06:04:32 2014/-kk/

@@ -43,3 +43,7 @@ device  cfi: norbus
 attach	cfi at mainbus with ralink_cfi
 file	arch/mips/ralink/ralink_cfi.c		ralink_cfi
 
+# Ralink PCIe
+device	rpci: pcibus
+attach	rpci at mainbus with ralink_pci
+file	arch/mips/ralink/ralink_pci.c		ralink_pci

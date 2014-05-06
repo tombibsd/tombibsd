@@ -35,7 +35,7 @@
 
 #include "ktutil_locl.h"
 
-__RCSID("$NetBSD$");
+__RCSID("NetBSD");
 
 int
 kt_rename(struct rename_options *opt, int argc, char **argv)

@@ -16,7 +16,7 @@
 /dma-buf.h/1.2/Tue Mar 18 18:20:43 2014/-kk/
 /dma-mapping.h/1.2/Tue Mar 18 18:20:43 2014/-kk/
 /dma_remapping.h/1.2/Tue Mar 18 18:20:43 2014/-kk/
-/dmi.h/1.2/Tue Mar 18 18:20:43 2014/-kk/
+/dmi.h/1.3/Tue May  6 05:50:15 2014/-kk/
 /efi.h/1.2/Tue Mar 18 18:20:43 2014/-kk/
 /err.h/1.2/Tue Mar 18 18:20:43 2014/-kk/
 /export.h/1.2/Tue Mar 18 18:20:43 2014/-kk/
@@ -31,7 +31,7 @@
 /i2c.h/1.2/Tue Mar 18 18:20:43 2014/-kk/
 /idr.h/1.2/Tue Mar 18 18:20:43 2014/-kk/
 /ihex.h/1.2/Tue Mar 18 18:20:43 2014/-kk/
-/init.h/1.2/Tue Mar 18 18:20:43 2014/-kk/
+/init.h/1.3/Tue May  6 05:50:16 2014/-kk/
 /input.h/1.2/Tue Mar 18 18:20:43 2014/-kk/
 /intel-iommu.h/1.2/Tue Mar 18 18:20:43 2014/-kk/
 /interrupt.h/1.2/Tue Mar 18 18:20:43 2014/-kk/

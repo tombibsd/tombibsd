@@ -305,6 +305,6 @@ int main(void)
    return 0;
 }
 
-/* Source: /cvs/libtom/libtommath/mtest/mtest.c,v */
-/* Revision: 1.2 */
-/* Date: 2005/05/05 14:38:47 */
+/* Source: /cvs/libtom/libtommath/mtest/mtest.c,v  */
+/* Revision: 1.2  */
+/* Date: 2005/05/05 14:38:47  */

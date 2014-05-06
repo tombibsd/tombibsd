@@ -42,7 +42,7 @@
 #include <krb5/hex.h>
 #include <err.h>
 
-__RCSID("$NetBSD$");
+__RCSID("NetBSD");
 
 static int
 doit(const char *fn)

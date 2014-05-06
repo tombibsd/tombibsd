@@ -34,7 +34,7 @@
 
 #include "kcm_locl.h"
 
-__RCSID("$NetBSD$");
+__RCSID("NetBSD");
 
 /*
  * Server-side loopback glue for credentials cache operations; this

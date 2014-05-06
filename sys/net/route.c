@@ -568,15 +568,6 @@ rtflushclone(sa_family_t family, struct rtentry *parent)
 	rt_walktree(family, rtflushclone1, (void *)parent);
 }
 
-/*
- * Routing table ioctl interface.
- */
-int
-rtioctl(u_long req, void *data, struct lwp *l)
-{
-	return EOPNOTSUPP;
-}
-
 struct ifaddr *
 ifa_ifwithroute(int flags, const struct sockaddr *dst,
 	const struct sockaddr *gateway)

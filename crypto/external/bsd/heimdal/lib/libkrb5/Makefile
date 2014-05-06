@@ -532,7 +532,7 @@ heimdal.texi: vars.texi
 vars.texi: vars.tin
 	< ${HEIMDIST}/doc/vars.tin > $@			\
 	sed -e 's,[@]dbdir[@],/var/heimdal,g'		\
-	    -e 's,[@]PACKAGE_VERSION[@],1.5pre1,g'
+	    -e 's,[@]PACKAGE_VERSION[@],1.5.3,g'
 
 CLEANFILES+=	vars.texi
 
