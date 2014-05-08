@@ -1234,7 +1234,7 @@ Job_CheckCommands(GNode *gn, void (*abortProc)(const char *, ...))
 
 	    if (gn->flags & FROM_DEPEND) {
 		if (!Job_RunTarget(".STALE", gn->fname))
-		    fprintf(stdout, "%s: %s, %d: ignoring stale %s for %s\n",
+		    Punt("%s: %s, %d: ignoring stale %s for %s\n",
 			progname, gn->fname, gn->lineno, makeDependfile,
 			gn->name);
 		return TRUE;

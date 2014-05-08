@@ -1465,7 +1465,7 @@ Dir_MTime(GNode *gn, Boolean recheck)
 			 */
 			gn->path = bmake_strdup(fullName);
 			if (!Job_RunTarget(".STALE", gn->fname))
-			    fprintf(stdout,
+			    Punt(
 				"%s: %s, %d: ignoring stale %s for %s, "
 				"found %s\n", progname, gn->fname, gn->lineno,
 				makeDependfile, gn->name, fullName);
