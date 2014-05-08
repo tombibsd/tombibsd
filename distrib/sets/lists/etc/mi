@@ -90,8 +90,10 @@
 ./etc/install.d/catpages			etc-sys-etc
 ./etc/install.d/ddbonpanic			etc-sys-etc
 ./etc/install.d/defaults			etc-sys-etc
-./etc/install.d/dhcpd				etc-sys-etc
-./etc/install.d/dhcpdrundir			etc-sys-etc
+./etc/install.d/dhcpcd				etc-sys-etc
+./etc/install.d/dhcpcdrundir			etc-sys-etc
+./etc/install.d/dhcpd				etc-sys-etc		obsolete
+./etc/install.d/dhcpdrundir			etc-sys-etc		obsolete
 ./etc/install.d/envsys				etc-sys-etc
 ./etc/install.d/fontconfig			etc-sys-etc
 ./etc/install.d/gid				etc-sys-etc

@@ -9,8 +9,8 @@ CONFIGFILES=\
 		./catpages \
 		ddbonpanic \
 		defaults \
-		dhcpd \
-		dhcpdrundir \
+		dhcpcd \
+		dhcpcdrundir \
 		envsys \
 		fontconfig \
 		gid \
