@@ -1556,12 +1556,27 @@ dev_type_dump(acedump);
 dev_type_size(acesize);
 
 const struct bdevsw ace_bdevsw = {
-	aceopen, aceclose, acestrategy, aceioctl, acedump, acesize, D_DISK
+	.d_open = aceopen,
+	.d_close = aceclose,
+	.d_strategy = acestrategy,
+	.d_ioctl = aceioctl,
+	.d_dump = acedump,
+	.d_psize = acesize,
+	.d_flag = D_DISK
 };
 
 const struct cdevsw ace_cdevsw = {
-	aceopen, aceclose, aceread, acewrite, aceioctl,
-	nostop, notty, nopoll, nommap, nokqfilter, D_DISK
+	.d_open = aceopen,
+	.d_close = aceclose,
+	.d_read = aceread,
+	.d_write = acewrite,
+	.d_ioctl = aceioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_DISK
 };
 
 void  acegetdefaultlabel(struct ace_softc *, struct disklabel *);

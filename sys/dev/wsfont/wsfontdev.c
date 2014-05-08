@@ -107,6 +107,15 @@ wsfontioctl(dev_t dev, u_long cmd, void *data, int flag,
 }
 
 const struct cdevsw wsfont_cdevsw = {
-	wsfontopen, wsfontclose, noread, nowrite, wsfontioctl,
-	    nostop, notty, nopoll, nommap, nokqfilter, D_OTHER,
+	.d_open = wsfontopen,
+	.d_close = wsfontclose,
+	.d_read = noread,
+	.d_write = nowrite,
+	.d_ioctl = wsfontioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_OTHER
 };

@@ -134,9 +134,9 @@
 					(queue).head = (queue).tail = NULL; \
 					UNLOCK(&(queue).taillock); \
 					break; \
+				} \
+				UNLOCK(&(queue).taillock); \
 			} \
-			UNLOCK(&(queue).taillock); \
-		} \
 			(queue).head = ret->link.next; \
 			(queue).head->link.prev = NULL; \
 			break; \

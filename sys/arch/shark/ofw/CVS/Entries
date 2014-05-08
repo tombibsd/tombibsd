@@ -8,7 +8,7 @@
 /ofisa_machdep.c/1.10/Sat Oct 27 17:18:11 2012/-kk/
 /ofisapc.c/1.11/Mon Jun  6 16:29:15 2011/-kk/
 /ofisascr.c/1.10/Mon Jun  6 16:29:15 2011/-kk/
-/ofrom.c/1.24/Sat Mar  1 06:04:33 2014/-kk/
+/ofrom.c/1.25/Tue Mar 25 02:35:29 2014/-kk/
 /ofw.c/1.63/Sat Mar  1 06:04:33 2014/-kk/
 /vga_ofbus.c/1.16/Tue Mar 13 18:40:28 2012/-kk/
 /vga_ofbusvar.h/1.2/Sun Dec 11 12:19:05 2005/-kk/

@@ -7,7 +7,6 @@ NOLINT=		# defined
 
 LIB=		gcov
 
-.include "../../../Makefile.gcc_path"
 .include <bsd.own.mk>
 .include <bsd.init.mk>
 

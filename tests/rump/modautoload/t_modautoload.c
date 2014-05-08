@@ -34,9 +34,8 @@ static void
 mountkernfs(void)
 {
 
-#ifndef HAVE_HOST_MODULES
-	atf_tc_skip("host kernel modules not supported on this architecture");
-#endif
+	if (!rump_nativeabi_p())
+		atf_tc_skip("host kernel modules not supported");
 
 	rump_init();
 

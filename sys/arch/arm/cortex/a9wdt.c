@@ -172,7 +172,7 @@ a9wdt_setmode(struct sysmon_wdog *smw)
 	    | __SHIFTIN(sc->sc_wdog_prescaler - 1, TMR_CTL_PRESCALER);
 
 	a9wdt_wdog_write(sc, TMR_LOAD, sc->sc_wdog_load);
-	a9wdt_wdog_write(sc, TMR_CTL, sc->sc_wdog_load);
+	a9wdt_wdog_write(sc, TMR_CTL, sc->sc_wdog_ctl);
 
 	aprint_debug_dev(sc->sc_dev, "setmode enable\n");
 	return 0;

@@ -251,6 +251,7 @@ bce_attach(device_t parent, device_t self, void *aux)
 	bus_dma_segment_t seg;
 	int             error, i, pmreg, rseg;
 	struct ifnet   *ifp;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	sc->bce_dev = self;
 
@@ -317,7 +318,7 @@ bce_attach(device_t parent, device_t self, void *aux)
 		aprint_error_dev(self, "couldn't map interrupt\n");
 		return;
 	}
-	intrstr = pci_intr_string(pc, ih);
+	intrstr = pci_intr_string(pc, ih, intrbuf, sizeof(intrbuf));
 
 	sc->bce_intrhand = pci_intr_establish(pc, ih, IPL_NET, bce_intr, sc);
 

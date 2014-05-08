@@ -382,7 +382,6 @@ trap(int vector, struct trapframe *tf)
 	struct lwp *l;
 	uint64_t ucode;
 	int sig, user;
-	u_int sticks;
 	ksiginfo_t ksi;
 
 	user = TRAPF_USERMODE(tf) ? 1 : 0;
@@ -397,11 +396,9 @@ trap(int vector, struct trapframe *tf)
 	if (user) {
 		ia64_set_fpsr(IA64_FPSR_DEFAULT);
 		p = l->l_proc;
-		sticks = p->p_sticks;
 		l->l_md.md_tf = tf;
 		LWP_CACHE_CREDS(l, p);
 	} else {
-		sticks = 0;		/* XXX bogus -Wuninitialized warning */
 		p = NULL;
 	}
 	sig = 0;

@@ -503,7 +503,7 @@ mouse_debug_print(u_int buttons, int x, int y)
 	__y = MINMAX(__y + y, 0, FB_HEIGHT);
 	*(uint8_t *)(fb.fb_addr + __x + __y * FB_LINEBYTES) = 0xff;
 
-	sprintf(buf, "%8d %8d", x, y);
+	snprintf(buf, sizeof(buf), "%8d %8d", x, y);
 	for (i = 0; i < 64 && buf[i]; i++)
 		fb_drawchar(480 + i * 12, k, buf[i]);
 

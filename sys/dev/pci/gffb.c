@@ -644,12 +644,11 @@ gffb_putpalreg(struct gffb_softc *sc, uint8_t idx, uint8_t r, uint8_t g,
 static void
 gffb_dma_kickoff(struct gffb_softc *sc)
 {
-	volatile uint8_t scratch;
 
-	if(sc->sc_current != sc->sc_put) {
+	if (sc->sc_current != sc->sc_put) {
 		sc->sc_put = sc->sc_current;
 		membar_sync();
-		scratch = *sc->sc_fbaddr;
+		(void)*sc->sc_fbaddr;
 		GFFB_WRITE_4(GFFB_FIFO_PUT, sc->sc_put);
 		membar_sync();
 	}

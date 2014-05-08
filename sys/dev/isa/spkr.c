@@ -74,8 +74,17 @@ dev_type_write(spkrwrite);
 dev_type_ioctl(spkrioctl);
 
 const struct cdevsw spkr_cdevsw = {
-	spkropen, spkrclose, noread, spkrwrite, spkrioctl,
-	nostop, notty, nopoll, nommap, nokqfilter, D_OTHER,
+	.d_open = spkropen,
+	.d_close = spkrclose,
+	.d_read = noread,
+	.d_write = spkrwrite,
+	.d_ioctl = spkrioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_OTHER
 };
 
 static pcppi_tag_t ppicookie;

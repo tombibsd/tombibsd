@@ -143,7 +143,8 @@ s3c2xx0_intr_init(struct s3c2xx0_intr_dispatch * dispatch_table, int icu_len)
 		dispatch_table[i].func = stray_interrupt;
 		dispatch_table[i].cookie = (void *) (i);
 		dispatch_table[i].level = IPL_VM;
-		sprintf(dispatch_table[i].name, "irq %d", i);
+		snprintf(dispatch_table[i].name,
+		    sizeof(dispatch_table[i].name), "irq %d", i);
 		evcnt_attach_dynamic(&dispatch_table[i].ev, EVCNT_TYPE_INTR,
 				     NULL, "s3c2xx0", dispatch_table[i].name);
 	}

@@ -68,7 +68,7 @@ pizazz_init(void)
 
 	pizazz_intr_establish(SYS_INTR_LEVEL0, pizazz_level0_intr, NULL);
 
-	strcpy(cpu_model, "Mips 3230 Magnum (Pizazz)");
+	cpu_setmodel("Mips 3230 Magnum (Pizazz)");
 	cpuspeed = 25;
 }
 

@@ -108,7 +108,7 @@ device	uep: wsmousedev, tpcalib
 attach	uep at usbdevif
 file	dev/usb/uep.c			uep			needs-flag
 
-# Cypress microcontroller based serial adpaters
+# Cypress microcontroller based serial adapters
 device	ucycom: hid
 attach	ucycom at uhidbus
 file	dev/usb/ucycom.c		ucycom			needs-flag
@@ -326,6 +326,11 @@ file	dev/usb/umct.c			umct
 device	moscom: ucombus
 attach	moscom at usbdevif
 file	dev/usb/moscom.c		moscom
+
+# andother driver for the same chip
+device	umcs: ucombus
+attach	umcs at usbdevif
+file	dev/usb/umcs.c			umcs
 
 # SUNTAC Slipper U VS-10U driver
 device	uvscom: ucombus

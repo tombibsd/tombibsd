@@ -6,7 +6,7 @@
 LIB=	rumpnet_netmpls
 
 SRCS=	mpls_ttl.c if_mpls.c
-SRCS+=	component.c
+SRCS+=	netmpls_component.c
 
 CPPFLAGS+=	-I${.CURDIR}/../libnet/opt
 

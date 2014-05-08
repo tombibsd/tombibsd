@@ -280,8 +280,17 @@ dev_type_poll(qvpoll);
 dev_type_kqfilter(qvkqfilter);
 
 const struct cdevsw qv_cdevsw = {
-	qvopen, qvclose, qvread, qvwrite, qvioctl,
-	qvstop, notty, qvpoll, nommap, qvkqfilter,
+	.d_open = qvopen,
+	.d_close = qvclose,
+	.d_read = qvread,
+	.d_write = qvwrite,
+	.d_ioctl = qvioctl,
+	.d_stop = qvstop,
+	.d_tty = notty,
+	.d_poll = qvpoll,
+	.d_mmap = nommap,
+	.d_kqfilter = qvkqfilter,
+	.d_flag = 0
 };
 
 /*

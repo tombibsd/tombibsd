@@ -158,8 +158,17 @@ dev_type_tty(gtmpsctty);
 dev_type_poll(gtmpscpoll);
 
 const struct cdevsw gtmpsc_cdevsw = {
-	gtmpscopen, gtmpscclose, gtmpscread, gtmpscwrite, gtmpscioctl,
-	gtmpscstop, gtmpsctty, gtmpscpoll, nommap, ttykqfilter, D_TTY
+	.d_open = gtmpscopen,
+	.d_close = gtmpscclose,
+	.d_read = gtmpscread,
+	.d_write = gtmpscwrite,
+	.d_ioctl = gtmpscioctl,
+	.d_stop = gtmpscstop,
+	.d_tty = gtmpsctty,
+	.d_poll = gtmpscpoll,
+	.d_mmap = nommap,
+	.d_kqfilter = ttykqfilter,
+	.d_flag = D_TTY
 };
 
 CFATTACH_DECL_NEW(gtmpsc, sizeof(struct gtmpsc_softc),

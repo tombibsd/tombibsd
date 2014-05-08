@@ -109,8 +109,17 @@ dev_type_close(arcppclose);
 dev_type_write(arcppwrite);
 
 const struct cdevsw arcpp_cdevsw = {
-	arcppopen, arcppclose, noread, arcppwrite, noioctl,
-	nostop, notty, nopoll, nommap, nokqfilter,
+	.d_open = arcppopen,
+	.d_close = arcppclose,
+	.d_read = noread,
+	.d_write = arcppwrite,
+	.d_ioctl = noioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = 0
 };
 
 #define	ARCPPUNIT(s)	(minor(s) & 0x1f)

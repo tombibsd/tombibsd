@@ -109,13 +109,31 @@ dev_type_ioctl(ptyioctl);
 dev_type_tty(ptytty);
 
 const struct cdevsw ptc_cdevsw = {
-	ptcopen, ptcclose, ptcread, ptcwrite, ptyioctl,
-	nullstop, ptytty, ptcpoll, nommap, ptckqfilter, D_TTY
+	.d_open = ptcopen,
+	.d_close = ptcclose,
+	.d_read = ptcread,
+	.d_write = ptcwrite,
+	.d_ioctl = ptyioctl,
+	.d_stop = nullstop,
+	.d_tty = ptytty,
+	.d_poll = ptcpoll,
+	.d_mmap = nommap,
+	.d_kqfilter = ptckqfilter,
+	.d_flag = D_TTY
 };
 
 const struct cdevsw pts_cdevsw = {
-	ptsopen, ptsclose, ptsread, ptswrite, ptyioctl,
-	ptsstop, ptytty, ptspoll, nommap, ttykqfilter, D_TTY
+	.d_open = ptsopen,
+	.d_close = ptsclose,
+	.d_read = ptsread,
+	.d_write = ptswrite,
+	.d_ioctl = ptyioctl,
+	.d_stop = ptsstop,
+	.d_tty = ptytty,
+	.d_poll = ptspoll,
+	.d_mmap = nommap,
+	.d_kqfilter = ttykqfilter,
+	.d_flag = D_TTY
 };
 
 #if defined(pmax)
@@ -125,13 +143,31 @@ const struct cdevsw pts_cdevsw = {
  */
 
 const struct cdevsw ptc_ultrix_cdevsw = {
-	ptcopen, ptcclose, ptcread, ptcwrite, ptyioctl,
-	nullstop, ptytty, ptcpoll, nommap, ptckqfilter, D_TTY
+	.d_open = ptcopen,
+	.d_close = ptcclose,
+	.d_read = ptcread,
+	.d_write = ptcwrite,
+	.d_ioctl = ptyioctl,
+	.d_stop = nullstop,
+	.d_tty = ptytty,
+	.d_poll = ptcpoll,
+	.d_mmap = nommap,
+	.d_kqfilter = ptckqfilter,
+	.d_flag = D_TTY
 };
 
 const struct cdevsw pts_ultrix_cdevsw = {
-	ptsopen, ptsclose, ptsread, ptswrite, ptyioctl,
-	ptsstop, ptytty, ptspoll, nommap, ttykqfilter, D_TTY
+	.d_open = ptsopen,
+	.d_close = ptsclose,
+	.d_read = ptsread,
+	.d_write = ptswrite,
+	.d_ioctl = ptyioctl,
+	.d_stop = ptsstop,
+	.d_tty = ptytty,
+	.d_poll = ptspoll,
+	.d_mmap = nommap,
+	.d_kqfilter = ttykqfilter,
+	.d_flag = D_TTY
 };
 #endif /* defined(pmax) */
 
@@ -1005,6 +1041,9 @@ ptyioctl(dev_t dev, u_long cmd, void *data, int flag, struct lwp *l)
 	const struct cdevsw *cdev;
 	u_char *cc = tp->t_cc;
 	int stop, error, sig;
+#ifndef NO_DEV_PTM
+	struct mount *mp;
+#endif
 
 	/*
 	 * IF CONTROLLER STTY THEN MUST FLUSH TO PREVENT A HANG.
@@ -1035,8 +1074,11 @@ ptyioctl(dev_t dev, u_long cmd, void *data, int flag, struct lwp *l)
 
 #ifndef NO_DEV_PTM
 	/* Allow getting the name from either the master or the slave */
-	if (cmd == TIOCPTSNAME)
-		return pty_fill_ptmget(l, dev, -1, -1, data);
+	if (cmd == TIOCPTSNAME) {
+		if ((error = pty_getmp(l, &mp)) != 0)
+			return error;
+		return pty_fill_ptmget(l, dev, -1, -1, data, mp);
+	}
 #endif
 
 	cdev = cdevsw_lookup(dev);
@@ -1044,7 +1086,9 @@ ptyioctl(dev_t dev, u_long cmd, void *data, int flag, struct lwp *l)
 		switch (cmd) {
 #ifndef NO_DEV_PTM
 		case TIOCGRANTPT:
-			return pty_grant_slave(l, dev);
+			if ((error = pty_getmp(l, &mp)) != 0)
+				return error;
+			return pty_grant_slave(l, dev, mp);
 #endif
 
 		case TIOCGPGRP:

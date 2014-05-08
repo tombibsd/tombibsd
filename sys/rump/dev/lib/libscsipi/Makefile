@@ -14,7 +14,7 @@ SRCS+=	cd.c sd.c
 SRCS+=		scsipi_verbose.c
 .endif
 
-SRCS+=	component.c
+SRCS+=	scsipi_component.c
 
 CPPFLAGS+=	-I${.CURDIR}/opt -I${RUMPTOP}/librump/rumpvfs
 

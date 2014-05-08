@@ -67,8 +67,8 @@ __KERNEL_RCSID(0, "$NetBSD$");
  * an internal pool of page headers (`phpool').
  */
 
-/* List of all pools */
-static TAILQ_HEAD(, pool) pool_head = TAILQ_HEAD_INITIALIZER(pool_head);
+/* List of all pools. Non static as needed by 'vmstat -i' */
+TAILQ_HEAD(, pool) pool_head = TAILQ_HEAD_INITIALIZER(pool_head);
 
 /* Private pool for page header structures */
 #define	PHPOOL_MAX	8

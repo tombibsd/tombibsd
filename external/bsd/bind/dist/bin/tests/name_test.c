@@ -90,10 +90,6 @@ main(int argc, char *argv[]) {
 	dns_name_t *prefix, *suffix;
 	int ch;
 
-	isc__mem_register();
-	isc__task_register();
-	isc__timer_register();
-	isc__socket_register();
 	while ((ch = isc_commandline_parse(argc, argv, "acdiqs:w")) != -1) {
 		switch (ch) {
 		case 'a':

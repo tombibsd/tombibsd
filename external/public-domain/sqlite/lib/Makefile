@@ -23,6 +23,6 @@ dependall: all
 
 sqlite3.pc: ${SRCDIR}/sqlite3.h sqlite3.pc.in
 	@(V=$$( (echo '#include <sqlite3.h>'; echo SQLITE_VERSION) | \
-	    ${CC} -E -I${SRCDIR} - | tail -1 | tr -d '"') && \
+	    ${HOST_CC} -E -I${SRCDIR} - | tail -1 | tr -d '"') && \
 	    ${TOOL_SED} -e s/@VERSION@/$$V/ < ${.CURDIR}/sqlite3.pc.in \
 	    > ${.TARGET})

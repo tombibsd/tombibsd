@@ -49,6 +49,8 @@ struct mdlwp {
 };
 
 struct mdproc {
+	int		md_flags;		/* machine-dependent flags */
+#define MDP_OLDSPACE	0x0001
 };
 
 /* md_flags */

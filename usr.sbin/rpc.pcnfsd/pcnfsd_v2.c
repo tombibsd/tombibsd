@@ -238,7 +238,7 @@ pcnfsd2_pr_status_2_svc(arg, req)
 	static char status[128];
 
 	res.stat = get_pr_status(arg->pn, &res.avail, &res.printing,
-	    &res.qlen, &res.needs_operator, &status[0]);
+	    &res.qlen, &res.needs_operator, &status[0], sizeof(status));
 	res.status = &status[0];
 	res.cm = &no_comment[0];
 

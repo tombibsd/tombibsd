@@ -125,7 +125,6 @@ struct gdium_config gdium_configuration = {
 };
 
 /* For sysctl_hw. */
-extern char cpu_model[];
 
 /* Maps for VM objects. */
 struct vm_map *phys_map = NULL;
@@ -309,7 +308,7 @@ mach_init(int argc, char **argv, char **envp32, void *callvec)
 	mem_clusters[0].size = ctob(physmem);
 	mem_cluster_cnt = 1;
 
-	strcpy(cpu_model, "Gdium Liberty 1000");
+	cpu_setmodel("Gdium Liberty 1000");
 
 	/*
 	 * XXX: check argv[0] - do something if "gdb"???

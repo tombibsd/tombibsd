@@ -461,7 +461,7 @@ podulebusattach(device_t parent, device_t self, void *aux)
 	for (loop = 0; loop < MAX_PODULES+MAX_NETSLOTS; ++loop) {
 #if 1
 		/* Provide backwards compat for a while */
-		sprintf(argstring, "podule%d.disable", loop);
+		snprintf(argstring, sizeof(argstring), "podule%d.disable", loop);
 		if (get_bootconf_option(boot_args, argstring,
 		    BOOTOPT_TYPE_BOOLEAN, &value)) {
 			if (value) {
@@ -471,7 +471,7 @@ podulebusattach(device_t parent, device_t self, void *aux)
 			}
  		}
 #endif
- 		sprintf(argstring, "podule%d=", loop);
+ 		snprintf(argstring, sizeof(argstring), "podule%d=", loop);
  		if (get_bootconf_option(boot_args, argstring,
  		    BOOTOPT_TYPE_HEXINT, &value)) {
 			/* Override the ID */

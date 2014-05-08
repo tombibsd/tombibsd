@@ -108,7 +108,8 @@ struct	dmareg {
 #define	DMA_CLEAR(dc) do {					\
 		v_int dmaclr;					\
 		dmaclr = (int)dc->dm_Bhwaddr->dmaB_addr;	\
-	} while (0);
+		__USE(dmaclr);					\
+	} while (/*CONSTCOND*/0);
 #define	DMA_STAT(dc)	dc->dm_Bhwaddr->dmaB_stat
 
 #if defined(HP320)

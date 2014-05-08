@@ -148,8 +148,8 @@ pckbc_jensenio_intr_establish(struct pckbc_softc *sc, pckbc_slot_t slot)
 	aprint_normal_dev(sc->sc_dv, "%s slot interrupting at vector 0x%lx\n",
 	    pckbc_slot_names[slot], jsc->sc_ic[slot].ic_vector);
 
-	sprintf(jsc->sc_ic[slot].ic_vecstr, "0x%lx",
-	    jsc->sc_ic[slot].ic_vector);
+	snprintf(jsc->sc_ic[slot].ic_vecstr, sizeof(jsc->sc_ic[slot].ic_vecstr),
+	    "0x%lx", jsc->sc_ic[slot].ic_vector);
 	evcnt_attach_dynamic(&jsc->sc_ic[slot].ic_ev, EVCNT_TYPE_INTR,
 	    NULL, "vector", jsc->sc_ic[slot].ic_vecstr);
 }

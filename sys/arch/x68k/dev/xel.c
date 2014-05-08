@@ -190,7 +190,7 @@ xel_attach(device_t parent, device_t self, void *aux)
 	struct intio_attach_args *ia = aux;
 	cfdata_t cf = device_cfdata(self);
 	paddr_t addr;
-	int r;
+	int r __diagused;
 
 	addr = xel_addr(parent, cf, aux);
 	sc->sc_bst = ia->ia_bst;

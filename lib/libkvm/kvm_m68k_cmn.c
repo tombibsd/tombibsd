@@ -97,6 +97,7 @@ __RCSID("$NetBSD$");
 
 #include <m68k/cpu.h>
 #include <m68k/kcore.h>
+#include <m68k/m68k.h>
 
 #include "kvm_private.h"
 #include "kvm_m68k.h"

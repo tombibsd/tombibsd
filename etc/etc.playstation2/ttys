@@ -1,0 +1,9 @@
+#
+#	$NetBSD$
+#
+# name	getty				type	status		comments
+
+constty	"/usr/libexec/getty std.9600"	vt100	off secure
+
+# Workstation console (framebuffer) ttys
+ttyE0	"/usr/libexec/getty std.9600"	vt100	on secure

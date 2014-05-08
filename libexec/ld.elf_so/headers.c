@@ -298,9 +298,15 @@ _rtld_digest_dynamic(const char *execname, Obj_Entry *obj)
 			break;
 #endif
 #ifdef __powerpc__
+#ifdef _LP64
+		case DT_PPC64_GLINK:
+			obj->glink = (Elf_Addr)(uintptr_t)obj->relocbase + dynp->d_un.d_ptr;
+			break;
+#else
 		case DT_PPC_GOT:
 			obj->gotptr = (Elf_Addr *)(obj->relocbase + dynp->d_un.d_ptr);
 			break;
+#endif
 #endif
 		case DT_FLAGS_1:
 			obj->z_now =

@@ -7,7 +7,7 @@ LIB=	rumpnet_bridge
 
 SRCS=	if_bridge.c bridgestp.c
 
-SRCS+=	component.c
+SRCS+=	bridge_component.c
 
 CPPFLAGS+=	-I${.CURDIR}/../libnet/opt
 

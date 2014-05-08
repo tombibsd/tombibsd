@@ -62,6 +62,14 @@
 #define GDB_THUMB_BREAKPOINT	0xdefe		/* Thumb in GDB */
 #define KERNEL_BREAKPOINT	0xe7ffffff	/* Used by DDB */
 
+/*
+ * DTrace uses 0xe7fffef0 to 0xe7fffeff as breakpoints.
+ * The first byte is used to encode a cond value.
+ */
+#define DTRACE_BREAKPOINT	0xe7fffef0
+#define DTRACE_BREAKPOINT_MASK	0xfffffff0
+#define DTRACE_IS_BREAKPOINT(insn)	((insn & DTRACE_BREAKPOINT_MASK) == DTRACE_BREAKPOINT)
+
 #define KBPT_ASM		".word 0xe7ffdefe"
 
 #define USER_BREAKPOINT		GDB_BREAKPOINT

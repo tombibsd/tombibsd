@@ -34,7 +34,7 @@
 
 #include "kcm_locl.h"
 
-__RCSID("$NetBSD$");
+__RCSID("NetBSD");
 
 krb5_error_code
 kcm_ccache_refresh(krb5_context context,

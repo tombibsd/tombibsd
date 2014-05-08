@@ -35,6 +35,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include "opt_mtrr.h"
 #include "opt_perfctrs.h"
 #include "opt_user_ldt.h"
+#include "opt_compat_netbsd.h"
 #ifdef i386
 #include "opt_vm86.h"
 #endif

@@ -1,0 +1,14 @@
+#	$NetBSD$
+#
+
+.if !defined(VIRTIF)
+.error Define VIRTIF when including ${.PARSEFILE}
+.endif
+
+SRCS=	if_virt.c
+
+VIRTIFDIR:=	${.PARSEDIR}
+.PATH:		${VIRTIFDIR}
+
+CPPFLAGS+=		 -DVIRTIF_BASE=${VIRTIF} -I${VIRTIFDIR}
+RUMPCOMP_USER_CPPFLAGS+= -DVIRTIF_BASE=${VIRTIF} -I${VIRTIFDIR}

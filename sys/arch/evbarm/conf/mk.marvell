@@ -1,7 +1,7 @@
 #	$NetBSD$
 
-SYSTEM_FIRST_OBJ=	marvell_start.o
-SYSTEM_FIRST_SFILE=	${THISARM}/marvell/marvell_start.S
+SYSTEM_FIRST_OBJ?=	marvell_start.o
+SYSTEM_FIRST_SFILE?=	${THISARM}/marvell/marvell_start.S
 
 _OSRELEASE!=		${HOST_SH} $S/conf/osrelease.sh
 

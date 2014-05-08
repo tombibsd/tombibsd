@@ -175,12 +175,12 @@ zs_attach(device_t parent, device_t self, void *aux)
 	struct zsc_attach_args zsc_args;
 	volatile struct zschan *zc;
 	struct zs_chanstate *cs;
-	int r, s, zs_unit, channel;
+	int r __diagused;
+	int s, channel;
 
 	zsc->zsc_dev = self;
 	aprint_normal("\n");
 
-	zs_unit = device_unit(self);
 	zsc->zsc_addr = (void *)ia->ia_addr;
 
 	ia->ia_size = 8;
@@ -325,6 +325,7 @@ zshard(void *arg)
 	/* We are at splzs here, so no need to lock. */
 	if (zsc->zsc_cs[0]->cs_softreq || zsc->zsc_cs[1]->cs_softreq)
 		softint_schedule(zsc->zsc_softintr_cookie);
+	splx(s);
 
 	return (rval);
 }

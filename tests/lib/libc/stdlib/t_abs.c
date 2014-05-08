@@ -106,7 +106,7 @@ ATF_TC_BODY(labs_basic, tc)
 		{ LONG_MAX,	LONG_MAX	},
 		{ -LONG_MAX,	LONG_MAX	},
 		{ INT_MAX,	INT_MAX		},
-		{ -INT_MAX,	-INT_MAX	},
+		{ -INT_MAX,	INT_MAX		},
 	};
 
 	for (size_t i = 0; i < __arraycount(table); i++)

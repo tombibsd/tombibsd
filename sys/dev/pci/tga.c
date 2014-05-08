@@ -394,6 +394,7 @@ tgaattach(device_t parent, device_t self, void *aux)
 	const char *intrstr;
 	uint8_t rev;
 	int console;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	sc->sc_dev = self;
 
@@ -422,7 +423,7 @@ tgaattach(device_t parent, device_t self, void *aux)
 		aprint_error(": couldn't map interrupt");
 		return;
 	}
-	intrstr = pci_intr_string(pa->pa_pc, intrh);
+	intrstr = pci_intr_string(pa->pa_pc, intrh, intrbuf, sizeof(intrbuf));
 	sc->sc_intr = pci_intr_establish(pa->pa_pc, intrh, IPL_TTY, tga_intr,
 	    sc->sc_dc);
 	if (sc->sc_intr == NULL) {

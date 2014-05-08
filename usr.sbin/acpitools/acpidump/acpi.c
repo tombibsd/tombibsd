@@ -1949,9 +1949,8 @@ acpi_print_rsdt(ACPI_TABLE_HEADER *rsdp)
 			addr = le64toh(xsdt->TableOffsetEntry[i]);
 			break;
 		default:
-			addr = 0;
+			assert((addr = 0));
 		}
-		assert(addr != 0);
 		printf("0x%08lx", addr);
 	}
 	printf(" }\n");

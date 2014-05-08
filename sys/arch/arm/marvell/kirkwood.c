@@ -145,7 +145,7 @@ static void
 kirkwood_intr_init(void)
 {
 	extern struct pic_softc mvsoc_bridge_pic;
-	void *ih;
+	void *ih __diagused;
 
 	pic_add(&kirkwood_pic, 0);
 

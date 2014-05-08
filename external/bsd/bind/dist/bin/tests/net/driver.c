@@ -86,10 +86,6 @@ main(int argc, char **argv) {
 	UNUSED(argc);
 	UNUSED(argv);
 
-	isc__mem_register();
-	isc__task_register();
-	isc__timer_register();
-	isc__socket_register();
 	printf("S:%s:%s\n", SUITENAME, gettime());
 
 	n_failed = 0;

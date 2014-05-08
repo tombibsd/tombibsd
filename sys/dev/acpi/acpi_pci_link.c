@@ -1262,7 +1262,7 @@ acpi_AppendBufferResource(ACPI_BUFFER *buf, ACPI_RESOURCE *res)
 	}
 
 	/* Insert the new resource. */
-	memcpy(rp, res, res->Length + ACPI_RS_SIZE_NO_DATA);
+	memcpy(rp, res, res->Length);
 
 	/* And add the terminator. */
 	rp = ACPI_NEXT_RESOURCE(rp);

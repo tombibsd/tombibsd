@@ -63,8 +63,17 @@ dev_type_open(openpromopen);
 dev_type_ioctl(openpromioctl);
 
 const struct cdevsw openprom_cdevsw = {
-	openpromopen, nullclose, noread, nowrite, openpromioctl,
-	nostop, notty, nopoll, nommap, nokqfilter, D_OTHER
+	.d_open = openpromopen,
+	.d_close = nullclose,
+	.d_read = noread,
+	.d_write = nowrite,
+	.d_ioctl = openpromioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_OTHER
 };
 
 static	int lastnode;			/* speed hack */

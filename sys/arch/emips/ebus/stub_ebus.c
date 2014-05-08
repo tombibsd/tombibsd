@@ -98,16 +98,17 @@ static int     stubclose(dev_t device, int flags, int fmt, struct lwp *process);
 
 /* just define the character device handlers because that is all we need */
 const struct cdevsw stub_cdevsw = {
-	stubopen,
-	stubclose,
-	noread,
-	nowrite,
-	noioctl,
-	nostop,
-	notty,
-	nopoll,
-	nommap,
-	nokqfilter,
+	.d_open = stubopen,
+	.d_close = stubclose,
+	.d_read = noread,
+	.d_write = nowrite,
+	.d_ioctl = noioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = 0
 };
 
 /*

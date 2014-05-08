@@ -4,6 +4,16 @@
 
 TESTSDIR=	${TESTSBASE}/lib/libm
 
+.if ${MACHINE} == "sparc" || ${MACHINE} == "i386" \
+	|| ${MACHINE} == "amd64" || ${MACHINE_CPU} == "arm"	\
+	|| ${MACHINE} == "sparc64"
+CPPFLAGS+=	-DHAVE_FENV_H
+.endif
+
+.if ${MACHINE} == "alpha"
+COPTS+=	-mfloat-ieee -mieee-with-inexact -mfp-trap-mode=sui -mtrap-precision=i
+.endif
+
 TESTS_C+=	t_acos
 TESTS_C+=	t_asin
 TESTS_C+=	t_atan

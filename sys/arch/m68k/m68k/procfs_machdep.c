@@ -16,11 +16,10 @@ __KERNEL_RCSID(0, "$NetBSD$");
  * Only used when procfs is mounted with -o linux.
  */
 int
-procfs_getcpuinfstr(char *buf, int *len)
+procfs_getcpuinfstr(char *buf, size_t *len)
 {
 	const char *cpu, *mmu, *fpu;
-
-	*len = 0;
+	size_t size = *len;
 
 	switch (cputype) {
 	case CPU_68020:
@@ -79,7 +78,7 @@ procfs_getcpuinfstr(char *buf, int *len)
 		break;
 	}
 
-	*len = snprintf(buf, sizeof(buf),
+	*len = snprintf(buf, size,
 	    /* as seen in Linux 2.4.27 */
 	    "CPU:\t\t%s\n"
 	    "MMU:\t\t%s\n"
@@ -89,6 +88,5 @@ procfs_getcpuinfstr(char *buf, int *len)
 	     * "BogoMips" and "Calibration".
 	     */
 	    cpu, mmu, fpu);
-
-	return 0;
+	return size < *len ? -1 : 0;
 }

@@ -161,7 +161,7 @@ main(int argc, char **argv)
 	ret = (*func->C_SignInit)(session, &mechanism, private);
 	if (ret != CKR_OK)
 	    return 1;
-	
+
 	ck_sigsize = sizeof(signature);
 	ret = (*func->C_Sign)(session, (CK_BYTE *)sighash, strlen(sighash),
 			      (CK_BYTE *)signature, &ck_sigsize);
@@ -194,7 +194,7 @@ main(int argc, char **argv)
 	ret = (*func->C_EncryptInit)(session, &mechanism, public);
 	if (ret != CKR_OK)
 	    return 1;
-	
+
 	ck_sigsize = sizeof(signature);
 	ret = (*func->C_Encrypt)(session, (CK_BYTE *)sighash, strlen(sighash),
 				 (CK_BYTE *)signature, &ck_sigsize);

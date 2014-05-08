@@ -29,7 +29,6 @@ atouint(
 		return 0;
 
 	u = 0;
-		    return 0;
 	while ('\0' != *cp) {
 		if (!isdigit((unsigned char)*cp))
 			return 0;

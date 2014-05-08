@@ -1244,9 +1244,11 @@ smbfs_lookup(void *v)
 		}
 
 		newvp = *vpp;
-		vn_lock(newvp, LK_SHARED | LK_RETRY);
+		if (newvp != dvp)
+			vn_lock(newvp, LK_SHARED | LK_RETRY);
 		error = VOP_GETATTR(newvp, &vattr, cnp->cn_cred);
-		VOP_UNLOCK(newvp);
+		if (newvp != dvp)
+			VOP_UNLOCK(newvp);
 		/*
 		 * If the file type on the server is inconsistent
 		 * with what it was when we created the vnode,

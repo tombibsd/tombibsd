@@ -17,7 +17,7 @@
 /t_issetugid.c/1.1/Thu Jul  7 06:57:53 2011/-kk/
 /t_kevent.c/1.6/Thu Nov 29 09:13:44 2012/-kk/
 /t_kill.c/1.1/Thu Jul  7 06:57:53 2011/-kk/
-/t_link.c/1.1/Thu Jul  7 06:57:53 2011/-kk/
+/t_link.c/1.2/Tue May  6 05:50:30 2014/-kk/
 /t_listen.c/1.4/Sun Mar 18 07:00:52 2012/-kk/
 /t_lwp_create.c/1.2/Tue May 22 09:23:39 2012/-kk/
 /t_lwp_ctl.c/1.2/Sun Mar 18 06:20:51 2012/-kk/
@@ -53,6 +53,6 @@
 /t_truncate.c/1.2/Thu Aug 18 19:48:03 2011/-kk/
 /t_ucontext.c/1.1/Sat Oct 15 06:54:52 2011/-kk/
 /t_umask.c/1.1/Thu Jul  7 06:57:54 2011/-kk/
-/t_unlink.c/1.1/Thu Jul  7 06:57:54 2011/-kk/
+/t_unlink.c/1.2/Tue May  6 05:50:30 2014/-kk/
 /t_write.c/1.2/Wed Oct 19 16:19:30 2011/-kk/
 D

@@ -107,13 +107,14 @@ tc_3000_300_intr_setup(void)
 	 * Set up interrupt handlers.
 	 */
 	for (i = 0; i < TC_3000_300_NCOOKIES; i++) {
+		static const size_t len = 12;
 	        tc_3000_300_intr[i].tci_func = tc_3000_300_intrnull;
 	        tc_3000_300_intr[i].tci_arg = (void *)i;
 		
-		cp = malloc(12, M_DEVBUF, M_NOWAIT);
+		cp = malloc(len, M_DEVBUF, M_NOWAIT);
 		if (cp == NULL)
 			panic("tc_3000_300_intr_setup");
-		sprintf(cp, "slot %lu", i);
+		snprintf(cp, len, "slot %lu", i);
 		evcnt_attach_dynamic(&tc_3000_300_intr[i].tci_evcnt,
 		    EVCNT_TYPE_INTR, NULL, "tc", cp);
 	}

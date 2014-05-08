@@ -8,7 +8,7 @@ IOCONF=	WSCONS.ioconf
 
 SRCS=   wsevent.c wskbd.c wskbdutil.c wsmouse.c
 
-SRCS+=	component.c
+SRCS+=	wscons_component.c
 
 CPPFLAGS+=	-I${RUMPTOP}/librump/rumpvfs -I${.CURDIR}/opt
 

@@ -231,6 +231,7 @@ ccdcreate(int unit) {
 static void
 ccddestroy(struct ccd_softc *sc) {
 	mutex_obj_free(sc->sc_iolock);
+	mutex_exit(&sc->sc_dvlock);
 	mutex_destroy(&sc->sc_dvlock);
 	cv_destroy(&sc->sc_stop);
 	cv_destroy(&sc->sc_push);
@@ -1271,7 +1272,8 @@ ccdioctl(dev_t dev, u_long cmd, void *data, int flag, struct lwp *l)
 		disk_detach(&cs->sc_dkdev);
 		bufq_free(cs->sc_bufq);
 		ccdput(cs);
-		break;
+		/* Don't break, otherwise cs is read again. */
+		return 0;
 
 	case DIOCGDINFO:
 		*(struct disklabel *)data = *(cs->sc_dkdev.dk_label);

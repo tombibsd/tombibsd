@@ -32,7 +32,9 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #ifndef GENFBVAR_H
 #define GENFBVAR_H
 
+#ifdef _KERNEL_OPT
 #include "opt_splash.h"
+#endif
 
 #include <sys/param.h>
 #include <sys/buf.h>
@@ -46,7 +48,9 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <dev/rasops/rasops.h>
 
 #include <dev/wscons/wsdisplay_vconsvar.h>
+#ifdef _KERNEL_OPT
 #include "opt_genfb.h"
+#endif
 
 #ifdef SPLASHSCREEN
 #define GENFB_DISABLE_TEXT

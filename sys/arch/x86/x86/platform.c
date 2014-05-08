@@ -242,7 +242,7 @@ platform_add_date(struct smbtable *tbl, const char *key, int idx)
 		year += 2000;
 	else if (year < 100)
 		year += 1900;
-	sprintf(datestr, "%04u%02u%02u", year, month, day);
+	snprintf(datestr, sizeof(datestr), "%04u%02u%02u", year, month, day);
 	pmf_set_platform(key, datestr);
 	platform_create_sysctl(key);
 }

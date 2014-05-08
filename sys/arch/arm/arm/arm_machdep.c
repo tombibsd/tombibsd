@@ -112,6 +112,9 @@ struct cpu_info cpu_info_store = {
 	.ci_curlwp = &lwp0,
 #ifdef __PROG32
 	.ci_undefsave[2] = (register_t) undefinedinstruction_bounce,
+#if defined(ARM_MMU_EXTENDED) && KERNEL_PID != 0
+	.ci_pmap_asid_cur = KERNEL_PID,
+#endif
 #endif
 };
 

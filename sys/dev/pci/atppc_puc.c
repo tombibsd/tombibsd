@@ -97,6 +97,7 @@ atppc_puc_attach(device_t parent, device_t self, void *aux)
 	struct atppc_puc_softc *psc = device_private(self);
 	struct puc_attach_args *aa = aux;
 	const char *intrstr;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	sc->sc_dev_ok = ATPPC_NOATTACH;
 
@@ -109,7 +110,8 @@ atppc_puc_attach(device_t parent, device_t self, void *aux)
 	sc->sc_dmat = aa->dmat;
 	sc->sc_has = 0;
 
-	intrstr = pci_intr_string(aa->pc, aa->intrhandle);
+	intrstr = pci_intr_string(aa->pc, aa->intrhandle, intrbuf,
+	    sizeof(intrbuf));
 	sc->sc_ieh = pci_intr_establish(aa->pc, aa->intrhandle, IPL_TTY,
 	    atppcintr, sc);
 	if (sc->sc_ieh == NULL) {

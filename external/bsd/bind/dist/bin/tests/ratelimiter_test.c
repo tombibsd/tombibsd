@@ -109,10 +109,6 @@ main(int argc, char *argv[]) {
 	UNUSED(argc);
 	UNUSED(argv);
 
-	isc__mem_register();
-	isc__task_register();
-	isc__timer_register();
-	isc__socket_register();
 	isc_app_start();
 	isc_interval_set(&linterval, 1, 0);
 

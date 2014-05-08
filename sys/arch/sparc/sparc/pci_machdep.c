@@ -490,14 +490,14 @@ pci_intr_map(const struct pci_attach_args *pa, pci_intr_handle_t *ihp)
 
 
 const char *
-pci_intr_string(pci_chipset_tag_t pc, pci_intr_handle_t ih)
+pci_intr_string(pci_chipset_tag_t pc, pci_intr_handle_t ih, char *buf,
+    size_t len)
 {
-	static char str[16];
 	int pil;
 
 	pil = mspcic_assigned_interrupt(ih);
-	sprintf(str, "line %d (pil %d)", ih, pil);
-	return str;
+	snprintf(buf, len, "line %d (pil %d)", ih, pil);
+	return buf;
 }
 
 

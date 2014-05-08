@@ -106,8 +106,17 @@ static dev_type_close(scsibusclose);
 static dev_type_ioctl(scsibusioctl);
 
 const struct cdevsw scsibus_cdevsw = {
-	scsibusopen, scsibusclose, noread, nowrite, scsibusioctl,
-	nostop, notty, nopoll, nommap, nokqfilter, D_OTHER,
+	.d_open = scsibusopen,
+	.d_close = scsibusclose,
+	.d_read = noread,
+	.d_write = nowrite,
+	.d_ioctl = scsibusioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_OTHER
 };
 
 static int	scsibusprint(void *, const char *);

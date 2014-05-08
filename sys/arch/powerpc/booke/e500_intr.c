@@ -382,7 +382,7 @@ static void 	e500_intr_cpu_attach(struct cpu_info *ci);
 static void 	e500_intr_cpu_hatch(struct cpu_info *ci);
 static void	e500_intr_cpu_send_ipi(cpuid_t, uintptr_t);
 static void 	e500_intr_init(void);
-static const char *e500_intr_string(int, int);
+static const char *e500_intr_string(int, int, char *, size_t);
 static const char *e500_intr_typename(int);
 static void 	e500_critintr(struct trapframe *tf);
 static void 	e500_decrintr(struct trapframe *tf);
@@ -670,7 +670,7 @@ e500_intr_irq_info_get(struct cpu_info *ci, u_int irq, int ipl, int ist,
 }
 
 static const char *
-e500_intr_string(int irq, int ist)
+e500_intr_string(int irq, int ist, char *buf, size_t len)
 {
 	struct cpu_info * const ci = curcpu();
 	struct cpu_softc * const cpu = ci->ci_softc;
@@ -679,7 +679,8 @@ e500_intr_string(int irq, int ist)
 	if (!e500_intr_irq_info_get(ci, irq, IPL_VM, ist, &ii))
 		return NULL;
 
-	return cpu->cpu_evcnt_intrs[ii.irq_vector].ev_name;
+	strlcpy(buf, cpu->cpu_evcnt_intrs[ii.irq_vector].ev_name, len);
+	return buf;
 }
 
 __CTASSERT(__arraycount(ist_names) == IST_MAX);

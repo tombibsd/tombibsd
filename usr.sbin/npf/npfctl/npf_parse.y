@@ -136,6 +136,7 @@ yyerror(const char *fmt, ...)
 %token			SEPLINE
 %token			SLASH
 %token			STATEFUL
+%token			STATEFUL_ENDS
 %token			TABLE
 %token			TCP
 %token			TO
@@ -188,7 +189,7 @@ input
 	;
 
 lines
-	: line SEPLINE lines
+	: lines SEPLINE line
 	| line
 	;
 
@@ -234,7 +235,7 @@ list
 	;
 
 list_elems
-	: element COMMA list_elems
+	: list_elems COMMA element
 	{
 		npfvar_add_elements($1, $3);
 	}
@@ -345,7 +346,7 @@ rproc
 	;
 
 procs
-	: proc_call SEPLINE procs
+	: procs SEPLINE proc_call
 	{
 		$$ = npfvar_add_elements($1, $3);
 	}
@@ -366,7 +367,7 @@ proc_call
 	;
 
 proc_param_list
-	: proc_param COMMA proc_param_list
+	: proc_param_list COMMA proc_param
 	{
 		$$ = npfvar_add_elements($1, $3);
 	}
@@ -446,7 +447,7 @@ ruleset_block
 	;
 
 ruleset_def
-	: rule_group SEPLINE ruleset_def
+	: ruleset_def SEPLINE rule_group
 	| rule_group
 	;
 
@@ -553,6 +554,7 @@ all_or_filt_opts
 
 opt_stateful
 	: STATEFUL	{ $$ = NPF_RULE_STATEFUL; }
+	| STATEFUL_ENDS	{ $$ = NPF_RULE_STATEFUL | NPF_RULE_MULTIENDS; }
 	|		{ $$ = 0; }
 	;
 

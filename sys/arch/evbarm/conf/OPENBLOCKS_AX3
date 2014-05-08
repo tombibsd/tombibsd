@@ -21,6 +21,8 @@ options 	L2CACHE_ENABLE
 #options 	AURORA_IO_CACHE_COHERENCY
 options 	AURORA_L2_PT_WALK
 options 	ARM_HAS_VBAR
+#options 	FPU_VFP
+#makeoptions	CPUFLAGS="-march=armv7-a -mfpu=neon"
 makeoptions	CPUFLAGS="-march=armv7-a -msoft-float"
 
 # Architecture options
@@ -165,6 +167,7 @@ cpu0	at mainbus?
 
 # Marvell MV88F78260 ARMADA XP System-on-chip
 mvsoc0	at mainbus?
+options 	MVSOC_INTERREGS_PBASE=0xd0000000
 options 	MVSOC_FIXUP_DEVID=0x7826
 
 # On-chip Serial-ATA II Host Controller (SATAHC)
@@ -176,8 +179,7 @@ mvgbe*	at mvgbec? port ? irq ?
 makphy* at mii? phy ?
 
 # On-chip USB 2.0 Interface
-ehci0	at mvsoc? offset ? irq ?
-ehci1	at mvsoc? offset ? irq ?
+ehci*	at mvsoc? offset ? irq ?
 
 # Serial Peripheral Interface (SPI)
 #mvspi*	at mvsoc? offset ? irq ?
@@ -212,6 +214,8 @@ options 	PCI_NETBSD_CONFIGURE
 #options 	PCI_CONFIG_DUMP	# verbosely dump PCI config space
 pci*	at mvpex?
 pchb*	at pci? dev ? function ?	# PCI-Host bridges
+
+#athn*	at pci? dev ? function ?	# Atheros AR9k (802.11a/g/n)
 
 # ATA (IDE) bus support
 atabus* at ata?

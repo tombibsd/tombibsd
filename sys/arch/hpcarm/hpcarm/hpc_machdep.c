@@ -101,7 +101,7 @@ void dumpsys(void);
 void (*__sleep_func)(void *);
 void *__sleep_ctx;
 
-void (*__cpu_reset)(void) = cpu_reset;
+void (*__cpu_reset)(void) __dead = cpu_reset;
 
 u_int initarm(int, char **, struct bootinfo *);
 #if defined(CPU_SA1100) || defined(CPU_SA1110)

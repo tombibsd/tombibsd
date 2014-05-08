@@ -132,7 +132,7 @@ scsirom_attach(device_t parent, device_t self, void *aux)
 {
 	struct scsirom_softc *sc = device_private(self);
 	struct intio_attach_args *ia = aux;
-	int r;
+	int r __diagused;
 	cfdata_t cf;
 
 	sc->sc_addr = ia->ia_addr;

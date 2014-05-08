@@ -76,7 +76,6 @@ main(int argc, char **argv) {
 
 	file = argv[1];
 
-	isc__mem_register();
 	RUNTIME_CHECK(isc_mem_create(0, 0, &mctx) == ISC_R_SUCCESS);
 	RUNTIME_CHECK(setup_logging(mctx, stderr, &lctx) == ISC_R_SUCCESS);
 

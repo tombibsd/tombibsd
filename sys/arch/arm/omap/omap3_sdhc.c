@@ -119,7 +119,7 @@ obiosdhc_match(device_t parent, cfdata_t cf, void *aux)
 	    || oa->obio_addr == SDMMC2_BASE_3530
 	    || oa->obio_addr == SDMMC3_BASE_3530)
                 return 1;
-#elif defined(OMAP4)
+#elif defined(OMAP4) || defined(OMAP5)
 	if (oa->obio_addr == SDMMC1_BASE_4430
 	    || oa->obio_addr == SDMMC2_BASE_4430
 	    || oa->obio_addr == SDMMC3_BASE_4430

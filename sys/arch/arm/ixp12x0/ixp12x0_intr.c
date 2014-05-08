@@ -39,7 +39,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/param.h>
 #include <sys/systm.h>
 #include <sys/malloc.h>
-#include <sys/simplelock.h>
 #include <sys/termios.h>
 #include <sys/bus.h>
 #include <sys/intr.h>
@@ -69,9 +68,6 @@ volatile int hardware_spl_level;
 /* Software copy of the IRQs we have enabled. */
 volatile uint32_t intr_enabled;
 volatile uint32_t pci_intr_enabled;
-
-/* Interrupts pending. */
-static volatile int ipending;
 
 void	ixp12x0_intr_dispatch(struct trapframe *);
 
@@ -316,7 +312,7 @@ ixp12x0_intr_init(void)
 		iq = &intrq[i];
 		TAILQ_INIT(&iq->iq_list);
 
-		sprintf(iq->iq_name, "ipl %d", i);
+		snprintf(iq->iq_name, sizeof(iq->iq_name), "ipl %d", i);
 		evcnt_attach_dynamic(&iq->iq_ev, EVCNT_TYPE_INTR,
 				     NULL, "ixpintr", iq->iq_name);
 	}

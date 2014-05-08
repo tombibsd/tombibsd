@@ -320,7 +320,7 @@ devcanon(char *fname)
 
 	/* Copy kernel name before we overwrite, then do it */
 	strcpy(file_name, (*cp) ? cp : kernelnames[0]);
-	sprintf(fname,"%c/%s(%c,%c)/%s",
+	snprintf(fname, PATH_MAX, "%c/%s(%c,%c)/%s",
 	        ctlr + '0', device_name, unit + '0', part + '0', file_name);
 
 	//printf("devcanon -> %s\n",fname);

@@ -68,6 +68,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/syscallargs.h>
 #include <sys/kcore.h>
 #include <sys/ksyms.h>
+#include <sys/cpu.h>
 #include <ufs/mfs/mfs_extern.h>		/* mfs_initminiroot() */
 
 #include <machine/bootinfo.h>
@@ -347,7 +348,7 @@ mach_init(int argc, char *argv[], u_int bim, void *bip)
 		curcpu()->ci_divisor_delay /= 2;
 		curcpu()->ci_cctr_freq /= 2;
 	}
-	sprintf(cpu_model, "%s %s%s",
+	cpu_setmodel("%s %s%s",
 	    platform->vendor, platform->model, platform->variant);
 
 	/*
@@ -507,7 +508,7 @@ cpu_startup(void)
 	 * Good {morning,afternoon,evening,night}.
 	 */
 	printf("%s%s", copyright, version);
-	printf("%s\n", cpu_model);
+	printf("%s\n", cpu_getmodel());
 	format_bytes(pbuf, sizeof(pbuf), ctob(physmem));
 	printf("total memory = %s\n", pbuf);
 

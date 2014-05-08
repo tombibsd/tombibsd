@@ -153,13 +153,12 @@ prep_pci_intr_map(const struct pci_attach_args *pa, pci_intr_handle_t *ihp)
 	prop_dictionary_t dict, devsub;
 	prop_object_t pinsub;
 	prop_number_t pbus;
-	int busno, bus, pin, line, swiz, dev, origdev, i;
+	int busno, pin, line, dev, origdev, i;
 	char key[20];
 
 	pin = pa->pa_intrpin;
 	line = pa->pa_intrline;
-	bus = busno = pa->pa_bus;
-	swiz = pa->pa_intrswiz;
+	busno = pa->pa_bus;
 	origdev = dev = pa->pa_device;
 	i = 0;
 
@@ -208,11 +207,11 @@ prep_pci_intr_map(const struct pci_attach_args *pa, pci_intr_handle_t *ihp)
 		goto bad;
 	}
 
-	sprintf(key, "devfunc-%d", dev);
+	snprintf(key, sizeof(key), "devfunc-%d", dev);
 	devsub = prop_dictionary_get(dict, key);
 	if (devsub == NULL)
 		goto bad;
-	sprintf(key, "pin-%c", 'A' + (pin-1));
+	snprintf(key, sizeof(key), "pin-%c", 'A' + (pin-1));
 	pinsub = prop_dictionary_get(devsub, key);
 	if (pinsub == NULL)
 		goto bad;

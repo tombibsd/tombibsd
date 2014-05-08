@@ -124,8 +124,17 @@ dev_type_poll(wsmuxpoll);
 dev_type_kqfilter(wsmuxkqfilter);
 
 const struct cdevsw wsmux_cdevsw = {
-	wsmuxopen, wsmuxclose, wsmuxread, nowrite, wsmuxioctl,
-	nostop, notty, wsmuxpoll, nommap, wsmuxkqfilter, D_OTHER
+	.d_open = wsmuxopen,
+	.d_close = wsmuxclose,
+	.d_read = wsmuxread,
+	.d_write = nowrite,
+	.d_ioctl = wsmuxioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = wsmuxpoll,
+	.d_mmap = nommap,
+	.d_kqfilter = wsmuxkqfilter,
+	.d_flag = D_OTHER
 };
 
 struct wssrcops wsmux_srcops = {

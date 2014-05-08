@@ -168,6 +168,7 @@ clmpcc_pcctwo_iackhook(struct clmpcc_softc *sc, int which)
 	}
 
 	foo = pcc2_reg_read(sys_pcctwo, offset);
+	__USE(foo);
 }
 
 /*
@@ -210,6 +211,7 @@ clmpcc_pcctwo_consiackhook(struct clmpcc_softc *sc, int which)
 		PCCTWO_REG_OFF]);
 
 	foo = bus_space_read_1(&_mainbus_space_tag, bush, offset);
+	__USE(foo);
 #else
 #error Need consiack hook
 #endif

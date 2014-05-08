@@ -413,6 +413,7 @@ trm_attach(device_t parent, device_t self, void *aux)
 	pcireg_t command;
 	const char *intrstr;
 	int fl = 0;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	sc->sc_dev = self;
 
@@ -474,7 +475,7 @@ trm_attach(device_t parent, device_t self, void *aux)
 		aprint_error_dev(self, "couldn't map interrupt\n");
 		return;
 	}
-	intrstr = pci_intr_string(pa->pa_pc, ih);
+	intrstr = pci_intr_string(pa->pa_pc, ih, intrbuf, sizeof(intrbuf));
 
 	if (pci_intr_establish(pa->pa_pc, ih, IPL_BIO, trm_intr, sc) == NULL) {
 		aprint_error_dev(self, "couldn't establish interrupt");

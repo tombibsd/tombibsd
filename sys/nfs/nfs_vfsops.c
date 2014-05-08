@@ -104,31 +104,28 @@ const struct vnodeopv_desc * const nfs_vnodeopv_descs[] = {
 };
 
 struct vfsops nfs_vfsops = {
-	MOUNT_NFS,
-	sizeof (struct nfs_args),
-	nfs_mount,
-	nfs_start,
-	nfs_unmount,
-	nfs_root,
-	(void *)eopnotsupp,	/* vfs_quotactl */
-	nfs_statvfs,
-	nfs_sync,
-	nfs_vget,
-	nfs_fhtovp,
-	nfs_vptofh,
-	nfs_vfs_init,
-	NULL,
-	nfs_vfs_done,
-	nfs_mountroot,
-	(int (*)(struct mount *, struct vnode *, struct timespec *)) eopnotsupp,
-	vfs_stdextattrctl,
-	(void *)eopnotsupp,	/* vfs_suspendctl */
-	genfs_renamelock_enter,
-	genfs_renamelock_exit,
-	(void *)eopnotsupp,
-	nfs_vnodeopv_descs,
-	0,
-	{ NULL, NULL },
+	.vfs_name = MOUNT_NFS,
+	.vfs_min_mount_data = sizeof (struct nfs_args),
+	.vfs_mount = nfs_mount,
+	.vfs_start = nfs_start,
+	.vfs_unmount = nfs_unmount,
+	.vfs_root = nfs_root,
+	.vfs_quotactl = (void *)eopnotsupp,
+	.vfs_statvfs = nfs_statvfs,
+	.vfs_sync = nfs_sync,
+	.vfs_vget = nfs_vget,
+	.vfs_fhtovp = nfs_fhtovp,
+	.vfs_vptofh = nfs_vptofh,
+	.vfs_init = nfs_vfs_init,
+	.vfs_done = nfs_vfs_done,
+	.vfs_mountroot = nfs_mountroot,
+	.vfs_snapshot = (void *)eopnotsupp,
+	.vfs_extattrctl = vfs_stdextattrctl,
+	.vfs_suspendctl = (void *)eopnotsupp,
+	.vfs_renamelock_enter = genfs_renamelock_enter,
+	.vfs_renamelock_exit = genfs_renamelock_exit,
+	.vfs_fsync = (void *)eopnotsupp,
+	.vfs_opv_descs = nfs_vnodeopv_descs
 };
 
 extern u_int32_t nfs_procids[NFS_NPROCS];
@@ -597,6 +594,8 @@ nfs_mount(struct mount *mp, const char *path, void *data, size_t *data_len)
 	size_t len;
 	u_char *nfh;
 
+	if (args == NULL)
+		return EINVAL;
 	if (*data_len < sizeof *args)
 		return EINVAL;
 
@@ -945,51 +944,33 @@ extern int syncprt;
 int
 nfs_sync(struct mount *mp, int waitfor, kauth_cred_t cred)
 {
-	struct vnode *vp, *mvp;
+	struct vnode *vp;
+	struct vnode_iterator *marker;
 	int error, allerror = 0;
 
 	/*
 	 * Force stale buffer cache information to be flushed.
 	 */
-	mvp = vnalloc(mp);
-loop:
-	/*
-	 * NOTE: not using the TAILQ_FOREACH here since in this loop vgone()
-	 * and vclean() can be called indirectly
-	 */
-	mutex_enter(&mntvnode_lock);
-	for (vp = TAILQ_FIRST(&mp->mnt_vnodelist); vp; vp = vunmark(mvp)) {
-		vmark(mvp, vp);
-		if (vp->v_mount != mp || vismarker(vp))
-			continue;
-		mutex_enter(vp->v_interlock);
-		/* XXX MNT_LAZY cannot be right? */
-		if (waitfor == MNT_LAZY ||
-		    (LIST_EMPTY(&vp->v_dirtyblkhd) &&
-		     UVM_OBJ_IS_CLEAN(&vp->v_uobj))) {
-			mutex_exit(vp->v_interlock);
+	vfs_vnode_iterator_init(mp, &marker);
+	while (vfs_vnode_iterator_next(marker, &vp)) {
+		error = vn_lock(vp, LK_EXCLUSIVE);
+		if (error) {
+			vrele(vp);
 			continue;
 		}
-		mutex_exit(&mntvnode_lock);
-		error = vget(vp, LK_EXCLUSIVE | LK_NOWAIT);
-		if (error != 0) {
-			if (error != ENOENT) {
-				mutex_enter(&mntvnode_lock);
-				continue;
-			}
-			(void)vunmark(mvp);
-			goto loop;
+		if (LIST_EMPTY(&vp->v_dirtyblkhd) &&
+		    UVM_OBJ_IS_CLEAN(&vp->v_uobj)) {
+			vput(vp);
+			continue;
 		}
 		error = VOP_FSYNC(vp, cred,
 		    waitfor == MNT_WAIT ? FSYNC_WAIT : 0, 0, 0);
 		if (error)
 			allerror = error;
 		vput(vp);
-		mutex_enter(&mntvnode_lock);
 	}
-	mutex_exit(&mntvnode_lock);
-	vnfree(mvp);
-	return (allerror);
+	vfs_vnode_iterator_destroy(marker);
+	return allerror;
 }
 
 /*

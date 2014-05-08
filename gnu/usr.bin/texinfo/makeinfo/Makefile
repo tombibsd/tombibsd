@@ -12,4 +12,6 @@ WARNS?=		0	# pointer sign issues
 
 .include <bsd.prog.mk>
 
+CPPFLAGS:=	${CPPFLAGS:S/-D_FORTIFY_SOURCE=2//}
+
 .PATH: ${IDIST}/makeinfo ${IDIST}/doc

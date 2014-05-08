@@ -105,6 +105,7 @@
 ./usr/X11R7/lib/libmp_g.a				-unknown-	debuglib,xorg
 ./usr/X11R7/lib/libpciaccess_g.a			-unknown-	debuglib,xorg
 ./usr/X11R7/lib/libpixman-1_g.a				-unknown-	debuglib,xorg
+./usr/X11R7/lib/libpthread-stubs_g.a			-unknown-	debuglib,xorg
 ./usr/X11R7/lib/libre_g.a				-unknown-	debuglib,xorg
 ./usr/X11R7/lib/libxcb-atom_g.a				-unknown-	debuglib,xorg
 ./usr/X11R7/lib/libxcb-aux_g.a				-unknown-	debuglib,xorg
@@ -112,11 +113,13 @@
 ./usr/X11R7/lib/libxcb-damage_g.a			-unknown-	debuglib,xorg
 ./usr/X11R7/lib/libxcb-dpms_g.a				-unknown-	debuglib,xorg
 ./usr/X11R7/lib/libxcb-dri2_g.a				-unknown-	debuglib,xorg
+./usr/X11R7/lib/libxcb-dri3_g.a				-unknown-	debuglib,xorg
 ./usr/X11R7/lib/libxcb-event_g.a			-unknown-	debuglib,xorg
 ./usr/X11R7/lib/libxcb-glx_g.a				-unknown-	debuglib,xorg
 ./usr/X11R7/lib/libxcb-icccm_g.a			-unknown-	debuglib,xorg
 ./usr/X11R7/lib/libxcb-image_g.a			-unknown-	debuglib,xorg
 ./usr/X11R7/lib/libxcb-keysyms_g.a			-unknown-	debuglib,xorg
+./usr/X11R7/lib/libxcb-present_g.a			-unknown-	debuglib,xorg
 ./usr/X11R7/lib/libxcb-property_g.a			-unknown-	debuglib,xorg
 ./usr/X11R7/lib/libxcb-randr_g.a			-unknown-	debuglib,xorg
 ./usr/X11R7/lib/libxcb-record_g.a			-unknown-	debuglib,xorg
@@ -132,6 +135,7 @@
 ./usr/X11R7/lib/libxcb-xf86dri_g.a			-unknown-	debuglib,xorg
 ./usr/X11R7/lib/libxcb-xfixes_g.a			-unknown-	debuglib,xorg
 ./usr/X11R7/lib/libxcb-xinerama_g.a			-unknown-	debuglib,xorg
+./usr/X11R7/lib/libxcb-xkb_g.a				-unknown-	debuglib,xorg
 ./usr/X11R7/lib/libxcb-xtest_g.a			-unknown-	debuglib,xorg
 ./usr/X11R7/lib/libxcb-xv_g.a				-unknown-	debuglib,xorg
 ./usr/X11R7/lib/libxcb-xvmc_g.a				-unknown-	debuglib,xorg

@@ -160,9 +160,13 @@ ATF_TC_HEAD(link_perm, tc)
 
 ATF_TC_BODY(link_perm, tc)
 {
+	int rv;
 
-	errno =0;
-	ATF_REQUIRE_ERRNO(EACCES, link("/root", "/root.link") == -1);
+	errno = 0;
+	rv = link("/root", "/root.link");
+	ATF_REQUIRE_MSG(rv == -1 && (errno == EACCES || errno == EPERM),
+	    "link to a directory did not fail with EPERM or EACCESS; link() "
+	    "returned %d, errno %d", rv, errno);
 
 	errno = 0;
 	ATF_REQUIRE_ERRNO(EACCES,

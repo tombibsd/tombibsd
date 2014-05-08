@@ -47,6 +47,11 @@
 #error PIC_MAXMAXSOURCES needs to be defined
 #endif
 
+#define IRQ_SGI(n)		( 0 + ((n) & 15))
+#define IRQ_PPI(n)		(16 + ((n) & 15))
+#define IRQ_SPI(n)		(32 + (n))
+#define GIC_MAXSOURCES(n)	IRQ_SPI(n)
+
 void armgic_irq_handler(void *);
 
 #include <arm/pic/picvar.h>

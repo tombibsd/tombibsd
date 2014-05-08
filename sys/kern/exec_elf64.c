@@ -53,28 +53,36 @@ MODULE(MODULE_CLASS_EXEC, exec_elf64, DEP);
 
 static struct execsw exec_elf64_execsw[] = {
 	/* Native Elf64 */
-	{ sizeof (Elf64_Ehdr),
-	  exec_elf64_makecmds,
-	  { netbsd_elf64_probe },
-	  &emul_netbsd,
-	  EXECSW_PRIO_ANY,
-	  ELF64_AUXSIZE,
-	  elf64_copyargs,
-	  NULL,
-	  coredump_elf64,
-	  exec_setup_stack },
+	{
+		.es_hdrsz = sizeof (Elf64_Ehdr),
+	  	.es_makecmds = exec_elf64_makecmds,
+	  	.u = {
+			.elf_probe_func = netbsd_elf64_probe,
+		},
+		.es_emul = &emul_netbsd,
+		.es_prio = EXECSW_PRIO_ANY,
+		.es_arglen = ELF64_AUXSIZE,
+		.es_copyargs = elf64_copyargs,
+		.es_setregs = NULL,
+		.es_coredump = coredump_elf64,
+		.es_setup_stack = exec_setup_stack,
+	},
 #if EXEC_ELF_NOTELESS
 	/* Generic Elf64 -- run at NetBSD Elf64 */
-	{ sizeof (Elf64_Ehdr),
-	  exec_elf64_makecmds,
-	  { NULL },
-	  &emul_netbsd,
-	  EXECSW_PRIO_ANY,
-	  ELF64_AUXSIZE,
-	  elf64_copyargs,
-	  NULL,
-	  coredump_elf64,
-	  exec_setup_stack },
+	{
+		.es_hdrsz = sizeof (Elf64_Ehdr),
+		.es_makecmds = exec_elf64_makecmds,
+		.u = {
+			.elf_probe_func = NULL,
+		},
+		.es_emul = &emul_netbsd,
+		.es_prio = EXECSW_PRIO_ANY,
+		.es_arglen = ELF64_AUXSIZE,
+		.es_copyargs = elf64_copyargs,
+		.es_setregs = NULL,
+		.es_coredump = coredump_elf64,
+		.es_setup_stack = exec_setup_stack,
+	},
 #endif
 };
 

@@ -1272,7 +1272,8 @@ est_tables(device_t self)
 		return false;
 
 	for (i = len = 0; i < sc->sc_fqlist->n; i++) {
-
+		if (len >= sc->sc_freqs_len)
+			break;
 		len += snprintf(sc->sc_freqs + len, sc->sc_freqs_len - len,
 		    "%d%s", MSR2MHZ(sc->sc_fqlist->table[i], sc->sc_bus_clock),
 		    i < sc->sc_fqlist->n - 1 ? " " : "");

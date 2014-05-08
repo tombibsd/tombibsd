@@ -102,8 +102,17 @@ static dev_type_read(joyread);
 static dev_type_ioctl(joyioctl);
 
 const struct cdevsw joy_cdevsw = {
-	joyopen, joyclose, joyread, nowrite, joyioctl,
-	nostop, notty, nopoll, nommap, nokqfilter, D_OTHER | D_MPSAFE,
+	.d_open = joyopen,
+	.d_close = joyclose,
+	.d_read = joyread,
+	.d_write = nowrite,
+	.d_ioctl = joyioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_OTHER | D_MPSAFE
 };
 
 void

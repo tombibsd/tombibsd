@@ -106,11 +106,12 @@ arm32_vfp_fpscr(struct lwp *l, const void *uap, register_t *retval)
 
 	retval[0] = pcb->pcb_vfp.vfp_fpscr;
 	if (uap) {
+		extern uint32_t vfp_fpscr_changable;
 		struct arm_vfp_fpscr_args ua;
 		int error;
 		if ((error = copyin(uap, &ua, sizeof(ua))) != 0)
 			return (error);
-		if (((ua.fpscr_clear|ua.fpscr_set) & ~VFP_FPSCR_RMODE) != 0)
+		if ((ua.fpscr_clear|ua.fpscr_set) & ~vfp_fpscr_changable)
 			return EINVAL;
 		pcb->pcb_vfp.vfp_fpscr &= ~ua.fpscr_clear;
 		pcb->pcb_vfp.vfp_fpscr |= ua.fpscr_set;

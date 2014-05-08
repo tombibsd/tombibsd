@@ -73,7 +73,7 @@ static void cpu_tau_setup(struct cpu_info *);
 static void cpu_tau_refresh(struct sysmon_envsys *, envsys_data_t *);
 #endif
 
-int cpu;
+int cpu = -1;
 int ncpus;
 
 struct fmttab {
@@ -255,7 +255,6 @@ int cpu_altivec;
 register_t cpu_psluserset;
 register_t cpu_pslusermod;
 register_t cpu_pslusermask = 0xffff;
-char cpu_model[80];
 
 /* This is to be called from locore.S, and nowhere else. */
 
@@ -772,11 +771,8 @@ cpu_identify(char *str, size_t len)
 			break;
 	}
 
-	if (str == NULL) {
-		str = cpu_model;
-		len = sizeof(cpu_model);
+	if (cpu == -1)
 		cpu = vers;
-	}
 
 	revfmt = cp->revfmt;
 	if (rev == MPC750 && pvr == 15) {
@@ -1218,11 +1214,9 @@ cpu_spinup(device_t self, struct cpu_info *ci)
 {
 	volatile struct cpu_hatch_data hatch_data, *h = &hatch_data;
 	struct pglist mlist;
-	int i, error, pvr, vers;
+	int i, error;
 	char *hp;
 
-	pvr = mfpvr();
-	vers = pvr >> 16;
 	KASSERT(ci != curcpu());
 
 	/* Now allocate a hatch stack */

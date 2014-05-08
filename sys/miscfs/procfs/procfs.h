@@ -245,7 +245,7 @@ int procfs_validmap(struct lwp *, struct mount *);
 
 int procfs_rw(void *);
 
-int procfs_getcpuinfstr(char *, int *);
+int procfs_getcpuinfstr(char *, size_t *);
 
 #define PROCFS_LOCKED	0x01
 #define PROCFS_WANT	0x02

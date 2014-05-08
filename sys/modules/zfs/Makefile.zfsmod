@@ -20,6 +20,10 @@ SRCS+=	zprop_common.c
 
 SRCS+= trees.c
 
+.PATH:	${ZFSDIR}/lib/libzpool
+
+SRCS+=	atomic.c
+
 .PATH:	${ZFSDIR}/dist/uts/common/fs/zfs
 
 SRCS+=	arc.c

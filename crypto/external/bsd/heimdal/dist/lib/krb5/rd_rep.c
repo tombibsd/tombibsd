@@ -67,7 +67,7 @@ krb5_rd_rep(krb5_context context,
     if (ret)
 	goto out;
     ret = krb5_decrypt_EncryptedData (context,
-				      crypto,	
+				      crypto,
 				      KRB5_KU_AP_REQ_ENC_PART,
 				      &ap_rep.enc_part,
 				      &data);

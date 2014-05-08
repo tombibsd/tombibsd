@@ -7,7 +7,7 @@ LIB=	rumpdev_cgd
 
 SRCS=   cgd.c cgd_crypto.c
 
-SRCS+=	component.c
+SRCS+=	cgd_component.c
 
 CPPFLAGS+=	-I${RUMPTOP}/librump/rumpvfs
 

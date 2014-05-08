@@ -8,7 +8,7 @@
 /bsdstart.S/1.3/Tue Oct 20 19:10:11 2009/-kk/
 /cread.c/1.10/Tue Mar 31 11:48:15 2009/-kk/
 /cread.h/1.3/Mon Apr 28 20:23:15 2008/-kk/
-/diskio.c/1.3/Wed Mar 18 10:22:26 2009/-kk/
+/diskio.c/1.4/Fri Apr 11 02:03:28 2014/-kk/
 /diskio.h/1.1/Sun Feb 24 20:51:08 2002/-kk/
 /disklbl.h/1.3/Sun Dec 11 12:17:00 2005/-kk/
 /elf.c/1.14/Sat Oct  1 15:59:00 2011/-kk/

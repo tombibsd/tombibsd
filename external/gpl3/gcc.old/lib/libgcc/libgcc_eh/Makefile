@@ -14,7 +14,7 @@ LIB=		gcc_eh
 
 .cc: # disable .cc->NULL transform
 
-SRCS+=		${LIB2_EH} ${LIB2_EHASM}
+SRCS+=		${LIB2_EH} ${LIB2_EHASM} empty.c
 COPTS.unwind-dw2.c = -Wno-stack-protector
 
 MKPIC:=	no

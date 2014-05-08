@@ -161,6 +161,7 @@ pcscp_attach(device_t parent, device_t self, void *aux)
 	pcireg_t csr;
 	bus_dma_segment_t seg;
 	int error, rseg;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	sc->sc_dev = self;
 	pci_aprint_devinfo(pa, NULL);
@@ -282,7 +283,7 @@ pcscp_attach(device_t parent, device_t self, void *aux)
 		goto fail_4;
 	}
 
-	intrstr = pci_intr_string(pa->pa_pc, ih);
+	intrstr = pci_intr_string(pa->pa_pc, ih, intrbuf, sizeof(intrbuf));
 	esc->sc_ih = pci_intr_establish(pa->pa_pc, ih, IPL_BIO,
 	    ncr53c9x_intr, esc);
 	if (esc->sc_ih == NULL) {

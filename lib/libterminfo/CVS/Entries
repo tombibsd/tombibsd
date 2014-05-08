@@ -11,12 +11,12 @@
 /term.c/1.17/Thu Oct 24 10:28:53 2013/-kk/
 /term.h/1.16/Thu Oct 24 10:28:53 2013/-kk/
 /term_private.h/1.11/Thu Oct 24 10:28:53 2013/-kk/
-/termcap.3/1.7/Tue Oct 29 12:11:39 2013/-kk/
+/termcap.3/1.8/Tue Mar 25 02:35:05 2014/-kk/
 /termcap.c/1.17/Sun Nov 13 15:24:04 2011/-kk/
 /termcap.h/1.2/Mon Apr 11 21:13:09 2011/-kk/
 /termcap_map.c/1.3/Wed Sep 22 06:10:51 2010/-kk/
-/terminfo.3/1.11/Thu Oct 24 10:28:53 2013/-kk/
-/terminfo.5.in/1.19/Thu Oct 24 10:28:53 2013/-kk/
+/terminfo.3/1.12/Tue Mar 25 02:35:05 2014/-kk/
+/terminfo.5.in/1.20/Tue Mar 25 02:35:05 2014/-kk/
 /ti.c/1.3/Thu Oct 24 10:28:53 2013/-kk/
 /tparm.c/1.15/Thu Oct 24 10:28:53 2013/-kk/
 /tputs.c/1.3/Thu Oct 24 10:28:53 2013/-kk/

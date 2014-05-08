@@ -1505,6 +1505,7 @@ twa_attach(device_t parent, device_t self, void *aux)
 	const struct twa_pci_identity *entry;
 	int i;
 	bool use_64bit;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	sc = device_private(self);
 
@@ -1584,7 +1585,7 @@ twa_attach(device_t parent, device_t self, void *aux)
 		aprint_error_dev(sc->twa_dv, "can't map interrupt\n");
 		return;
 	}
-	intrstr = pci_intr_string(pc, ih);
+	intrstr = pci_intr_string(pc, ih, intrbuf, sizeof(intrbuf));
 
 	sc->twa_ih = pci_intr_establish(pc, ih, IPL_BIO, twa_intr, sc);
 	if (sc->twa_ih == NULL) {
@@ -1865,7 +1866,7 @@ twa_map_request(struct twa_request *tr)
 static int
 twa_intr(void *arg)
 {
-	int	caught, s, rv;
+	int	caught, s, rv __diagused;
 	struct twa_softc *sc;
 	uint32_t	status_reg;
 	sc = (struct twa_softc *)arg;
@@ -2273,8 +2274,17 @@ fw_passthru_done:
 }
 
 const struct cdevsw twa_cdevsw = {
-	twaopen, twaclose, noread, nowrite, twaioctl,
-	nostop, notty, nopoll, nommap, nokqfilter, D_OTHER,
+	.d_open = twaopen,
+	.d_close = twaclose,
+	.d_read = noread,
+	.d_write = nowrite,
+	.d_ioctl = twaioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_OTHER
 };
 
 /*
@@ -2756,7 +2766,7 @@ twa_aen_callback(struct twa_request *tr)
 static uint16_t
 twa_enqueue_aen(struct twa_softc *sc, struct twa_command_header *cmd_hdr)
 {
-	int			rv, s;
+	int			rv __diagused, s;
 	struct tw_cl_event_packet *event;
 	uint16_t		aen_code;
 	unsigned long		sync_time;

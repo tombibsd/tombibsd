@@ -193,11 +193,11 @@ mq200_regname(struct mq200_softc *sc, int offset, char *buf, int bufsize)
 	for (i = 0; i < sizeof(regs)/sizeof(*regs); i++)
 		if (regs[i].base + regs[i].start * 4 <= offset &&
 		    offset <= regs[i].base + regs[i].end * 4) {
-			sprintf(buf, "%s%02XR", regs[i].name,
+			snprintf(buf, bufsize, "%s%02XR", regs[i].name,
 			    (offset - regs[i].base) / 4);
 			return (buf);
 		}
-	sprintf(buf, "OFFSET %02X", offset);
+	snprintf(buf, bufsize, "OFFSET %02X", offset);
 	return (buf);
 }
 

@@ -80,6 +80,8 @@ __dso_handle:
  * needed.
  */
 
+	.hidden __do_global_dtors_aux
+
 _ENTRY(__do_global_dtors_aux, 0x0100)		/* save r8 */
 	tstb	__finished			/* done this already? */
 	bneq	4f
@@ -127,6 +129,8 @@ END(__do_global_dtors_aux)
 
 	.weak	__register_frame_info
 	.weak	_Jv_RegisterClasses
+
+	.hidden __do_global_ctors_aux
 
 _ENTRY(__do_global_ctors_aux, 0x0800)
 	tstb	__initialized

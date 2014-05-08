@@ -32,10 +32,6 @@ main() {
 	char buf[1024];
 	char *s, *e;
 
-	isc__mem_register();
-	isc__task_register();
-	isc__timer_register();
-	isc__socket_register();
 	while (fgets(buf, sizeof(buf), stdin) != NULL) {
 		buf[sizeof(buf) - 1] = '\0';
 		s = buf;

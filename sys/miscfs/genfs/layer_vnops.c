@@ -718,15 +718,18 @@ layer_lock(void *v)
 	int flags = ap->a_flags;
 	int error;
 
-	if ((flags & LK_NOWAIT) != 0) {
-		if (!mutex_tryenter(vp->v_interlock))
-			return EBUSY;
-		if ((vp->v_iflag & (VI_XLOCK | VI_CLEAN)) != 0) {
+	if (ISSET(flags, LK_NOWAIT)) {
+		error = VOP_LOCK(lowervp, flags);
+		if (error)
+			return error;
+		if (mutex_tryenter(vp->v_interlock)) {
+			error = vdead_check(vp, VDEAD_NOWAIT);
 			mutex_exit(vp->v_interlock);
-			return EBUSY;
-		}
-		mutex_exit(vp->v_interlock);
-		return VOP_LOCK(lowervp, flags);
+		} else
+			error = EBUSY;
+		if (error)
+			VOP_UNLOCK(lowervp);
+		return error;
 	}
 
 	error = VOP_LOCK(lowervp, flags);
@@ -734,16 +737,15 @@ layer_lock(void *v)
 		return error;
 
 	mutex_enter(vp->v_interlock);
-	if ((vp->v_iflag & (VI_XLOCK | VI_CLEAN)) != 0) {
+	error = vdead_check(vp, VDEAD_NOWAIT);
+	if (error) {
 		VOP_UNLOCK(lowervp);
-		if ((vp->v_iflag & VI_XLOCK))
-			vwait(vp, VI_XLOCK);
-		mutex_exit(vp->v_interlock);
-		return ENOENT;
+		error = vdead_check(vp, 0);
+		KASSERT(error == ENOENT);
 	}
 	mutex_exit(vp->v_interlock);
 
-	return 0;
+	return error;
 }
 
 /*

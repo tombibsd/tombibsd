@@ -2,12 +2,12 @@
 
 COMPILER_RT_SRCDIR=	${NETBSDSRCDIR}/sys/external/bsd/compiler_rt/dist
 
-.if ${MACHINE_ARCH} == "powerpc"
+.if ${LIBC_MACHINE_ARCH} == "powerpc"
 COMPILER_RT_CPU_DIR=	${COMPILER_RT_SRCDIR}/lib/builtins/ppc
 COMPILER_RT_ARCH_DIR=	${COMPILER_RT_SRCDIR}/lib/builtins/ppc
 .else
 COMPILER_RT_CPU_DIR=	${COMPILER_RT_SRCDIR}/lib/builtins/${MACHINE_CPU}
-COMPILER_RT_ARCH_DIR=	${COMPILER_RT_SRCDIR}/lib/builtins/${MACHINE_ARCH}
+COMPILER_RT_ARCH_DIR=	${COMPILER_RT_SRCDIR}/lib/builtins/${LIBC_MACHINE_ARCH}
 .endif
 
 .PATH: ${COMPILER_RT_CPU_DIR}
@@ -127,10 +127,17 @@ GENERIC_SRCS+= \
 	ucmpti2.c \
 	udivmodsi4.c \
 	udivmodti4.c \
-	udivsi3.c \
 	udivti3.c \
 	umodsi3.c \
 	umodti3.c
+
+.if ${MACHINE_CPU} != "sh3"
+# On sh3 __udivsi3 is gcc "millicode" with special calling convention
+# (less registers clobbered than usual).  Each DSO that needs it gets
+# its own hidden copy from libgcc.a.
+GENERIC_SRCS+= \
+	udivsi3.c
+.endif
 
 GENERIC_SRCS+= \
 	absvdi2.c \
@@ -166,7 +173,7 @@ GENERIC_SRCS+= \
 	GCDAProfiling.c \
 	PGOProfiling.c
 
-.if ${MACHINE_ARCH} == "powerpc"
+.if ${LIBC_MACHINE_ARCH} == "powerpc"
 GENERIC_SRCS+= \
 	fixtfdi.c \
 	fixunstfdi.c \

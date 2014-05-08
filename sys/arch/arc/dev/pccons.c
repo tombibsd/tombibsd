@@ -186,8 +186,17 @@ dev_type_poll(pcpoll);
 dev_type_mmap(pcmmap);
 
 const struct cdevsw pc_cdevsw = {
-	pcopen, pcclose, pcread, pcwrite, pcioctl,
-	nostop, pctty, pcpoll, pcmmap, ttykqfilter, D_TTY
+	.d_open = pcopen,
+	.d_close = pcclose,
+	.d_read = pcread,
+	.d_write = pcwrite,
+	.d_ioctl = pcioctl,
+	.d_stop = nostop,
+	.d_tty = pctty,
+	.d_poll = pcpoll,
+	.d_mmap = pcmmap,
+	.d_kqfilter = ttykqfilter,
+	.d_flag = D_TTY
 };
 
 #define	CHR		2

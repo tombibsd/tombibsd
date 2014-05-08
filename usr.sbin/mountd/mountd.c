@@ -334,11 +334,6 @@ main(int argc, char **argv)
 	get_mountlist();
 	if (debug)
 		(void)fprintf(stderr, "Here we go.\n");
-	if (debug == 0) {
-		daemon(0, 0);
-		(void)signal(SIGINT, SIG_IGN);
-		(void)signal(SIGQUIT, SIG_IGN);
-	}
 	(void)signal(SIGHUP, get_exportlist);
 	(void)signal(SIGTERM, send_umntall);
 	pidfile(NULL);
@@ -463,6 +458,11 @@ main(int argc, char **argv)
 		exit(1);
 	}
 
+	if (debug == 0) {
+		daemon(0, 0);
+		(void)signal(SIGINT, SIG_IGN);
+		(void)signal(SIGQUIT, SIG_IGN);
+	}
 	svc_run();
 	syslog(LOG_ERR, "Mountd died");
 	exit(1);

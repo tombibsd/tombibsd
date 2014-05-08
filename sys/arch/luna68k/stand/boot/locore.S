@@ -762,7 +762,7 @@ ENTRY(spl7)
 	.data
 
 /*
- * Memory Infomation Field for secondary booter memory allocator
+ * Memory Information Field for secondary booter memory allocator
  */
 
 GLOBAL(prgcore)

@@ -50,7 +50,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 isr_autovec_list_t isr_autovec[NISRAUTOVEC];
 struct	isr_vectored isr_vectored[NISRVECTORED];
 int	idepth;
-volatile int	ssir;
 
 extern	int intrcnt[];		/* from locore.s */
 extern	void (*vectab[])(void);

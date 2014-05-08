@@ -45,20 +45,21 @@ SRCS+=					\
 
 # XXX
 
-.if ${MACHINE_ARCH} == "i386"
+.if ${MACHINE_ARCH} == "i386" || ${MACHINE_ARCH} == "x86_64"
+. if ${MACHINE_ARCH} == "i386"
 SRCS+= pixman-mmx.c
 COPTS.pixman-mmx.c=	-mmmx -fvisibility=hidden
-. if defined(HAVE_LLVM)
+.  if defined(HAVE_LLVM)
 COPTS.pixman-mmx.c+=	-Wno-error=attributes
+.  endif
+CPPFLAGS+=		-DUSE_X86_MMX
+MKDEPFLAGS+=		-mmmx
 . endif
-MKDEPFLAGS+=		-mmmx -msse2 -fvisibility=hidden
-SRCS+=	pixman-sse2.c
+SRCS+=	pixman-sse2.c pixman-ssse3.c
 COPTS.pixman-sse2.c=	-msse2 -fvisibility=hidden
-CPPFLAGS+=	-DUSE_SSE2 -DUSE_X86_MMX
-.elif ${MACHINE_ARCH} == "x86_64"
-SRCS+=	pixman-sse2.c
-COPTS.pixman-sse2.c=	-msse2 -fvisibility=hidden
-CPPFLAGS+=	-DUSE_SSE2
+COPTS.pixman-ssse3.c=	-msse3 -mssse3 -fvisibility=hidden
+CPPFLAGS+=		-DUSE_SSE2 -DUSE_SSE3
+MKDEPFLAGS+=		-msse2 -mssse3 -mssse3 -fvisibility=hidden
 .endif
 
 .if ${MACHINE_ARCH} == "powerpc"
@@ -67,7 +68,6 @@ COPTS.pixman-vmx.c=	-maltivec
 CPPFLAGS+=		-DUSE_VMX
 MKDEPFLAGS+=		-maltivec
 .endif
-
 
 .if !empty(MACHINE_ARCH:Mearm*)
 # ARM SIMD

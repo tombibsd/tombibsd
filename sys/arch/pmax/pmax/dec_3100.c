@@ -141,7 +141,7 @@ dec_3100_init(void)
 		submodel = "2100 (PMIN)";
 	else
 		submodel = "3100 (PMAX)";
-	sprintf(cpu_model, "DECstation %s", submodel);
+	cpu_setmodel("DECstation %s", submodel);
 }
 
 /*

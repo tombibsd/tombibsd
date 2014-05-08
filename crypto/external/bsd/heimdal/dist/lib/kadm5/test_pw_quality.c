@@ -36,7 +36,7 @@
 #include "kadm5_locl.h"
 #include <krb5/getarg.h>
 
-__RCSID("$NetBSD$");
+__RCSID("NetBSD");
 
 static int version_flag;
 static int help_flag;

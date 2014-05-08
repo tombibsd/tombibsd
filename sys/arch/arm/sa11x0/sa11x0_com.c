@@ -117,8 +117,17 @@ dev_type_tty(sacomtty);
 dev_type_poll(sacompoll);
 
 const struct cdevsw sacom_cdevsw = {
-	sacomopen, sacomclose, sacomread, sacomwrite, sacomioctl,
-	sacomstop, sacomtty, sacompoll, nommap, ttykqfilter, D_TTY
+	.d_open = sacomopen,
+	.d_close = sacomclose,
+	.d_read = sacomread,
+	.d_write = sacomwrite,
+	.d_ioctl = sacomioctl,
+	.d_stop = sacomstop,
+	.d_tty = sacomtty,
+	.d_poll = sacompoll,
+	.d_mmap = nommap,
+	.d_kqfilter = ttykqfilter,
+	.d_flag = D_TTY
 };
 
 static	int	sacom_match(device_t, cfdata_t, void *);

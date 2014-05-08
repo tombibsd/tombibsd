@@ -98,7 +98,7 @@ xs_bee3_init(void)
 	/* calibrate cpu_mhz value */
 	//cpu_mhz = 10;
 	cpuspeed  = 8; /* xxx */
-	sprintf(cpu_model, "BeSquare BEE3 (eMIPS)");
+	cpu_setmodel("BeSquare BEE3 (eMIPS)");
 
 	ipl_sr_map = xs_bee3_ipl_sr_map;
 }

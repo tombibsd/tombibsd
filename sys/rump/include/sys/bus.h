@@ -37,16 +37,17 @@
 /* bus space defs */
 typedef unsigned long bus_addr_t;
 typedef unsigned long bus_size_t;
-typedef int bus_space_tag_t;
-typedef int bus_space_handle_t;
+typedef unsigned long bus_space_tag_t;
+typedef unsigned long bus_space_handle_t;
 
 /* bus dma defs */
 typedef void *bus_dma_tag_t;
 #define BUS_DMA_TAG_VALID(_tag_) ((_tag_) != NULL)
 
 typedef struct {
-	bus_addr_t ds_addr;
-	bus_size_t ds_len;
+	bus_addr_t	ds_addr;
+	bus_size_t	ds_len;
+	vaddr_t		_ds_vacookie;
 } bus_dma_segment_t;
 
 typedef struct {

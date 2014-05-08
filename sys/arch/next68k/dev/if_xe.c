@@ -70,13 +70,8 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #ifdef XE_DEBUG
 int xe_debug = 0;
 #define DPRINTF(x) if (xe_debug) printf x;
-extern char *ndtracep;
-extern char ndtrace[];
-extern int ndtraceshow;
-#define NDTRACEIF(x) if (10 && ndtracep < (ndtrace + 8192)) do {x;} while (0)
 #else
 #define DPRINTF(x)
-#define NDTRACEIF(x)
 #endif
 #define PRINTF(x) printf x;
 

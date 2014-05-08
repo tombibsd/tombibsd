@@ -49,7 +49,7 @@
 #include <krb5/asn1-common.h>
 #include "check-common.h"
 
-__RCSID("$NetBSD$");
+__RCSID("NetBSD");
 
 struct map_page {
     void *start;
@@ -396,7 +396,7 @@ generic_decode_fail (const struct test_case *tests,
 	    sz = 4096;
 	    bytes = NULL;
 	}
-	
+
 	buf = map_alloc(OVERRUN, bytes, sz, &buf_map);
 
 	if (tests[i].byte_len == -1)

@@ -169,8 +169,8 @@ _dev_error(struct xenbus_device *dev, int err, const char *fmt,
 		goto fail;
 
 	len = snprintf(printf_buffer, PRINTF_BUFFER_SIZE, "%i ", -err);
+	KASSERT(len < PRINTF_BUFFER_SIZE);
 	ret = vsnprintf(printf_buffer+len, PRINTF_BUFFER_SIZE-len, fmt, ap);
-
 	KASSERT(len + ret < PRINTF_BUFFER_SIZE);
 	dev->xbusd_has_error = 1;
 

@@ -33,6 +33,7 @@
 #include <sys/param.h>
 #include <sys/lua.h>
 #include <sys/callout.h>
+#include <sys/cpu.h>
 #ifdef _MODULE
 #include <sys/module.h>
 #endif
@@ -187,7 +188,7 @@ luaopen_systm(void *ls)
 	/* some string values */
 	lua_pushstring(L, copyright);
 	lua_setfield(L, -2, "copyright");
-	lua_pushstring(L, cpu_model);
+	lua_pushstring(L, cpu_getmodel());
 	lua_setfield(L, -2, "cpu_model");
 	lua_pushstring(L, machine);
 	lua_setfield(L, -2, "machine");

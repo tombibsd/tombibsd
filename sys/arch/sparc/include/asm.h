@@ -152,7 +152,7 @@
 #define	FUNC(name)		ASENTRY(name)
 #define RODATA(name)		.align 4; .text; .globl _C_LABEL(name); \
 				OTYPE(_C_LABEL(name)); _C_LABEL(name):
-
+#define	END(y)		.size y, . - y
 
 #define ASMSTR			.asciz
 

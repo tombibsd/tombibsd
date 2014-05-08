@@ -669,7 +669,7 @@ npf_do_nat(npf_cache_t *npc, npf_session_t *se, nbuf_t *nbuf, const int di)
 	 * stream depends on other, stateless filtering rules.
 	 */
 	if (se == NULL) {
-		nse = npf_session_establish(npc, nbuf, di);
+		nse = npf_session_establish(npc, nbuf, di, true);
 		if (nse == NULL) {
 			atomic_dec_uint(&np->n_refcnt);
 			return ENOMEM;

@@ -40,7 +40,7 @@
 /openpicreg.h/1.5/Wed Aug 19 06:28:06 2009/-kk/
 /param.h/1.5/Mon Jun 20 06:29:54 2011/-kk/
 /pcb.h/1.1/Sun Feb  4 18:32:14 2001/-kk/
-/pci_machdep.h/1.8/Sat Jun 18 08:08:30 2011/-kk/
+/pci_machdep.h/1.9/Fri Apr 11 02:03:38 2014/-kk/
 /pio.h/1.2/Mon Feb  5 19:33:54 2001/-kk/
 /pmap.h/1.7/Thu Feb 14 15:21:22 2008/-kk/
 /pmc.h/1.1/Wed Aug  7 05:15:56 2002/-kk/

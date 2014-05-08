@@ -14,5 +14,5 @@ cleandir:
 	-rm -rf libiberty
 
 depend dependall all: libiberty/libiberty.a
-	
+
 .include <bsd.prog.mk>

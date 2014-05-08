@@ -82,12 +82,27 @@ static dev_type_dump(lddump);
 static dev_type_size(ldsize);
 
 const struct bdevsw ld_bdevsw = {
-	ldopen, ldclose, ldstrategy, ldioctl, lddump, ldsize, D_DISK
+	.d_open = ldopen,
+	.d_close = ldclose,
+	.d_strategy = ldstrategy,
+	.d_ioctl = ldioctl,
+	.d_dump = lddump,
+	.d_psize = ldsize,
+	.d_flag = D_DISK
 };
 
 const struct cdevsw ld_cdevsw = {
-	ldopen, ldclose, ldread, ldwrite, ldioctl,
-	nostop, notty, nopoll, nommap, nokqfilter, D_DISK
+	.d_open = ldopen,
+	.d_close = ldclose,
+	.d_read = ldread,
+	.d_write = ldwrite,
+	.d_ioctl = ldioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_DISK
 };
 
 static struct	dkdriver lddkdriver = { ldstrategy, ldminphys };

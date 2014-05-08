@@ -114,7 +114,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <arch/arm/arm/disassem.h>
 #include <arm/arm32/machdep.h>
- 
+
 extern char fusubailout[];
 
 #ifdef DEBUG
@@ -242,7 +242,8 @@ data_abort_handler(trapframe_t *tf)
 	int error;
 	ksiginfo_t ksi;
 
-	UVMHIST_FUNC(__func__); UVMHIST_CALLED(maphist);
+	UVMHIST_FUNC(__func__);
+	UVMHIST_CALLED(maphist);
 
 	/* Grab FAR/FSR before enabling interrupts */
 	far = cpu_faultaddress();
@@ -317,7 +318,7 @@ data_abort_handler(trapframe_t *tf)
 	 * further down if we have to decode the current instruction.
 	 */
 #ifdef THUMB_CODE
-	/* 
+	/*
 	 * XXX: It would be nice to be able to support Thumb in the kernel
 	 * at some point.
 	 */
@@ -415,7 +416,7 @@ data_abort_handler(trapframe_t *tf)
 	if (CPU_IS_ARMV6_P() || CPU_IS_ARMV7_P()) {
 		ftype = (fsr & FAULT_WRITE) ? VM_PROT_WRITE : VM_PROT_READ;
 	} else if (IS_PERMISSION_FAULT(fsr)) {
-		ftype = VM_PROT_WRITE; 
+		ftype = VM_PROT_WRITE;
 	} else {
 #ifdef THUMB_CODE
 		/* Fast track the ARM case.  */
@@ -445,11 +446,11 @@ data_abort_handler(trapframe_t *tf)
 			    ((insn & 0x0e1000b0) == 0x000000b0) || /* STR[HD]*/
 			    ((insn & 0x0a100000) == 0x08000000) || /* STM/CDT*/
 			    ((insn & 0x0f9000f0) == 0x01800090))   /* STREX[BDH] */
-				ftype = VM_PROT_WRITE; 
+				ftype = VM_PROT_WRITE;
 			else if ((insn & 0x0fb00ff0) == 0x01000090)/* SWP */
-				ftype = VM_PROT_READ | VM_PROT_WRITE; 
+				ftype = VM_PROT_READ | VM_PROT_WRITE;
 			else
-				ftype = VM_PROT_READ; 
+				ftype = VM_PROT_READ;
 		}
 	}
 
@@ -782,7 +783,8 @@ prefetch_abort_handler(trapframe_t *tf)
 	ksiginfo_t ksi;
 	int error, user;
 
-	UVMHIST_FUNC(__func__); UVMHIST_CALLED(maphist);
+	UVMHIST_FUNC(__func__);
+	UVMHIST_CALLED(maphist);
 
 	/* Update vmmeter statistics */
 	curcpu()->ci_data.cpu_ntrap++;
@@ -826,8 +828,8 @@ prefetch_abort_handler(trapframe_t *tf)
 	/* Get fault address */
 	fault_pc = tf->tf_pc;
 	lwp_settrapframe(l, tf);
-	UVMHIST_LOG(maphist, " (pc=0x%x, l=0x%x, tf=0x%x)", fault_pc, l, tf,
-	    0);
+	UVMHIST_LOG(maphist, " (pc=0x%x, l=0x%x, tf=0x%x)",
+	    fault_pc, l, tf, 0);
 
 	/* Ok validate the address, can only execute in USER space */
 	if (__predict_false(fault_pc >= VM_MAXUSER_ADDRESS ||
@@ -862,7 +864,7 @@ prefetch_abort_handler(trapframe_t *tf)
 #endif
 
 	KASSERT(pcb->pcb_onfault == NULL);
-	error = uvm_fault(map, va, VM_PROT_READ);
+	error = uvm_fault(map, va, VM_PROT_READ|VM_PROT_EXECUTE);
 
 	if (__predict_true(error == 0)) {
 		UVMHIST_LOG (maphist, " <- uvm", 0, 0, 0, 0);
@@ -871,6 +873,7 @@ prefetch_abort_handler(trapframe_t *tf)
 	KSI_INIT_TRAP(&ksi);
 
 	UVMHIST_LOG (maphist, " <- fatal (%d)", error, 0, 0, 0);
+
 	if (error == ENOMEM) {
 		printf("UVM: pid %d (%s), uid %d killed: "
 		    "out of swap\n", l->l_proc->p_pid, l->l_proc->p_comm,

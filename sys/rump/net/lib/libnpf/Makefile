@@ -3,6 +3,8 @@
 # Public Domain.
 #
 
+NOLINT=		# defined
+
 .PATH:	${.CURDIR}/../../../../net/npf
 
 LIB=	rumpnet_npf
@@ -17,9 +19,13 @@ SRCS+=	npf_alg_icmp.c
 
 SRCS+=	npf_ext_log.c npf_ext_normalize.c npf_ext_rndblock.c
 
-SRCS+=	component.c
+SRCS+=	npf_component.c
 
+.include <bsd.own.mk>
+
+.if ${RUMP_NPF_TESTING:Uyes} == "yes"
 CPPFLAGS+=	-D_NPF_TESTING
+.endif
 CPPFLAGS+=	-I${.CURDIR}/../../../librump/rumpvfs
 
 .include <bsd.lib.mk>

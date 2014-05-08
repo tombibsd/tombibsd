@@ -496,6 +496,7 @@
 ./usr/bin/ftp					base-netutil-bin
 ./usr/bin/gcpp					base-util-bin		gcccmds
 ./usr/bin/gencat				base-locale-bin
+./usr/bin/getaddrinfo				base-netutil-bin
 ./usr/bin/getcap				base-util-bin
 ./usr/bin/getconf				base-util-bin
 ./usr/bin/getent				base-util-bin
@@ -541,6 +542,7 @@
 ./usr/bin/krb5-config				base-krb5-bin		kerberos
 ./usr/bin/ktrace				base-debug-bin
 ./usr/bin/ktruss				base-debug-bin
+./usr/bin/kvno					base-krb5-bin		kerberos
 ./usr/bin/kyua					base-kyua-bin		kyua
 ./usr/bin/lam					base-util-bin
 ./usr/bin/last					base-util-bin
@@ -3925,6 +3927,7 @@
 ./usr/share/man/cat4/evbmips			base-man-share
 ./usr/share/man/cat4/evbppc			base-man-share
 ./usr/share/man/cat4/hp300			base-man-share
+./usr/share/man/cat4/hp700			base-obsolete		obsolete
 ./usr/share/man/cat4/hpcarm			base-man-share
 ./usr/share/man/cat4/hpcmips			base-man-share
 ./usr/share/man/cat4/hpcsh			base-man-share
@@ -3973,6 +3976,7 @@
 ./usr/share/man/cat8/evbsh3			base-man-share
 ./usr/share/man/cat8/evbsh5			base-obsolete		obsolete
 ./usr/share/man/cat8/hp300			base-man-share
+./usr/share/man/cat8/hp700			base-obsolete		obsolete
 ./usr/share/man/cat8/hpcarm			base-man-share
 ./usr/share/man/cat8/hpcmips			base-man-share
 ./usr/share/man/cat8/hpcsh			base-man-share
@@ -3992,7 +3996,7 @@
 ./usr/share/man/cat8/next68k			base-man-share
 ./usr/share/man/cat8/ofppc			base-man-share
 ./usr/share/man/cat8/pc532			base-obsolete		obsolete
-./usr/share/man/cat8/playstation2		base-obsolete		obsolete
+./usr/share/man/cat8/playstation2		base-man-share
 ./usr/share/man/cat8/pmax			base-man-share
 ./usr/share/man/cat8/pmppc			base-obsolete		obsolete
 ./usr/share/man/cat8/prep			base-man-share
@@ -4053,6 +4057,7 @@
 ./usr/share/man/html4/evbmips			base-man-share
 ./usr/share/man/html4/evbppc			base-man-share
 ./usr/share/man/html4/hp300			base-man-share
+./usr/share/man/html4/hp700			base-obsolete		obsolete
 ./usr/share/man/html4/hpcarm			base-man-share
 ./usr/share/man/html4/hpcmips			base-man-share
 ./usr/share/man/html4/hpcsh			base-man-share
@@ -4100,6 +4105,7 @@
 ./usr/share/man/html8/evbsh3			base-man-share
 ./usr/share/man/html8/evbsh5			base-obsolete		obsolete
 ./usr/share/man/html8/hp300			base-man-share
+./usr/share/man/html8/hp700			base-obsolete		obsolete
 ./usr/share/man/html8/hpcarm			base-man-share
 ./usr/share/man/html8/hpcmips			base-man-share
 ./usr/share/man/html8/hpcsh			base-man-share
@@ -4120,7 +4126,7 @@
 ./usr/share/man/html8/ofppc			base-man-share
 ./usr/share/man/html8/pc532			base-obsolete		obsolete
 ./usr/share/man/html8/playstation		base-obsolete		obsolete
-./usr/share/man/html8/playstation2		base-obsolete		obsolete
+./usr/share/man/html8/playstation2		base-man-share
 ./usr/share/man/html8/pmax			base-man-share
 ./usr/share/man/html8/pmppc			base-obsolete		obsolete
 ./usr/share/man/html8/prep			base-man-share
@@ -4182,6 +4188,7 @@
 ./usr/share/man/man4/evbmips			base-man-share
 ./usr/share/man/man4/evbppc			base-man-share
 ./usr/share/man/man4/hp300			base-man-share
+./usr/share/man/man4/hp700			base-obsolete		obsolete
 ./usr/share/man/man4/hpcarm			base-man-share
 ./usr/share/man/man4/hpcmips			base-man-share
 ./usr/share/man/man4/hpcsh			base-man-share
@@ -4230,6 +4237,7 @@
 ./usr/share/man/man8/evbsh3			base-man-share
 ./usr/share/man/man8/evbsh5			base-obsolete		obsolete
 ./usr/share/man/man8/hp300			base-man-share
+./usr/share/man/man8/hp700			base-obsolete		obsolete
 ./usr/share/man/man8/hpcarm			base-man-share
 ./usr/share/man/man8/hpcmips			base-man-share
 ./usr/share/man/man8/hpcsh			base-man-share
@@ -4249,7 +4257,7 @@
 ./usr/share/man/man8/next68k			base-man-share
 ./usr/share/man/man8/ofppc			base-man-share
 ./usr/share/man/man8/pc532			base-obsolete		obsolete
-./usr/share/man/man8/playstation2		base-obsolete		obsolete
+./usr/share/man/man8/playstation2		base-man-share
 ./usr/share/man/man8/pmax			base-man-share
 ./usr/share/man/man8/pmppc			base-obsolete		obsolete
 ./usr/share/man/man8/prep			base-man-share

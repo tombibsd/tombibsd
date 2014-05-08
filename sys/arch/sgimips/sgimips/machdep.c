@@ -63,6 +63,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/kcore.h>
 #include <sys/boot_flag.h>
 #include <sys/ksyms.h>
+#include <sys/cpu.h>
 
 #include <uvm/uvm_extern.h>
 
@@ -285,7 +286,7 @@ mach_init(int argc, int32_t argv32[], uintptr_t magic, int32_t bip32)
 #endif
 	}
 
-	strcpy(cpu_model, arcbios_system_identifier);
+	cpu_setmodel("%s", arcbios_system_identifier);
 
 	uvm_setpagesize();
 

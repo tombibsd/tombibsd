@@ -463,6 +463,8 @@ ip6flow_create(const struct route *ro, struct mbuf *m)
 	if (ip6_maxflows == 0 || ip6->ip6_nxt == IPPROTO_IPV6_ICMP)
 		return;
 
+	KERNEL_LOCK(1, NULL);
+
 	/*
 	 * See if an existing flow exists.  If so:
 	 *	- Remove the flow
@@ -481,7 +483,7 @@ ip6flow_create(const struct route *ro, struct mbuf *m)
 		} else {
 			ip6f = pool_get(&ip6flow_pool, PR_NOWAIT);
 			if (ip6f == NULL)
-				return;
+				goto out;
 			ip6flow_inuse++;
 		}
 		memset(ip6f, 0, sizeof(*ip6f));
@@ -513,6 +515,9 @@ ip6flow_create(const struct route *ro, struct mbuf *m)
 	s = splnet();
 	IP6FLOW_INSERT(&ip6flowtable[hash], ip6f);
 	splx(s);
+
+ out:
+	KERNEL_UNLOCK_ONE(NULL);
 }
 
 /*

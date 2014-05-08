@@ -82,10 +82,10 @@ struct nbpcb {
 #define	NB_RCVQ		(64 * 1024)
 
 /*
- * Timeouts used for send/receive. XXX Sysctl this?
+ * Timeouts (s) used for send/receive. XXX Sysctl this?
  */
-#define NB_SNDTIMEO	(5 * hz)
-#define NB_RCVTIMEO	(5 * hz)
+#define NB_SNDTIMEO	(5)
+#define NB_RCVTIMEO	(5)
 
 /*
  * TCP slowstart presents a problem in conjunction with large

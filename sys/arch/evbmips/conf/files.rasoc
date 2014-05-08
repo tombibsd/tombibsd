@@ -1,5 +1,7 @@
 #	$NetBSD$
 
+defflag opt_rasoc.h				RT3050 RT3052 RT3883 MT7620
+
 file	arch/mips/mips/bus_dma.c
 file	arch/mips/mips/mips3_clock.c
 file	arch/mips/mips/mips3_clockintr.c

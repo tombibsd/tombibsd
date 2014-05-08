@@ -121,8 +121,17 @@ static dev_type_poll(chpoll);
 static dev_type_kqfilter(chkqfilter);
 
 const struct cdevsw ch_cdevsw = {
-	chopen, chclose, chread, nowrite, chioctl,
-	nostop, notty, chpoll, nommap, chkqfilter, D_OTHER
+	.d_open = chopen,
+	.d_close = chclose,
+	.d_read = chread,
+	.d_write = nowrite,
+	.d_ioctl = chioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = chpoll,
+	.d_mmap = nommap,
+	.d_kqfilter = chkqfilter,
+	.d_flag = D_OTHER
 };
 
 /* SCSI glue */

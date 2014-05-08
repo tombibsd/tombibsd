@@ -15,4 +15,3 @@ defflag	opt_cputypes.h			AURORA_IO_CACHE_COHERENCY AURORA_L2_PT_WALK
 
 # CPU support and integrated peripherals
 include	"arch/arm/marvell/files.marvell"
-

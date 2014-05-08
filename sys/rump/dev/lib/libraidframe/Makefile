@@ -21,7 +21,7 @@ SRCS=   rf_acctrace.c rf_alloclist.c rf_aselect.c rf_callback.c		\
 	rf_shutdown.c rf_sstf.c rf_states.c rf_stripelocks.c		\
 	rf_strutils.c rf_utils.c rf_compat50.c rf_paritymap.c
 
-SRCS+=	component.c
+SRCS+=	raidframe_component.c
 
 CPPFLAGS+=	-I${RUMPTOP}/librump/rumpvfs
 

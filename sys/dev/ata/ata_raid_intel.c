@@ -79,7 +79,7 @@ ata_raid_intel_type(int type)
 	case INTEL_T_RAID5:
 		return "RAID5";
 	default:
-		sprintf(buffer, "UNKNOWN 0x%02x", type);
+		snprintf(buffer, sizeof(buffer), "UNKNOWN 0x%02x", type);
 		return buffer;
 	}
 }

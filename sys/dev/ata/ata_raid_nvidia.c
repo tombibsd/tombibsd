@@ -76,7 +76,7 @@ ata_raid_nvidia_type(int type)
 	case NV_T_RAID5:    return "RAID5";
 	case NV_T_RAID01:   return "RAID0+1";
 	default:
-		sprintf(buffer, "UNKNOWN 0x%02x", type);
+		snprintf(buffer, sizeof(buffer), "UNKNOWN 0x%02x", type);
 		return buffer;
     }
 }

@@ -252,7 +252,7 @@ get_keyword(void)
 static void
 des_error(const char *s /* the message */)
 {
-	(void)sprintf(errmsg, "%s", s ? s : strerror(errno));
+	seterrmsg("%s", s ? s : strerror(errno));
 }
 
 /*

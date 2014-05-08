@@ -331,7 +331,7 @@ timewarn(time_t timeleft)
 		(void)fprintf(pf, "System going down IMMEDIATELY\n\n");
 
 	if (mbuflen)
-		(void)fwrite(mbuf, sizeof(*mbuf), mbuflen, pf);
+		(void)fwrite(mbuf, 1, mbuflen, pf);
 
 	/*
 	 * play some games, just in case wall doesn't come back

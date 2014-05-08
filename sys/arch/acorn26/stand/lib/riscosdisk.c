@@ -58,10 +58,10 @@ rodisk_open(struct open_file *f, ...)
 
 	buflen = strlen(fsname) + 13;
 	buf = alloc(buflen);
-	sprintf(buf, "%s_DescribeDisc", fsname);
+	snprintf(buf, buflen, "%s_DescribeDisc", fsname);
 	if (xos_swi_number_from_string(buf, &rd->describe_disc) != NULL)
 		return ENODEV;
-	sprintf(buf, "%s_DiscOp", fsname);
+	snprintf(buf, buflen, "%s_DiscOp", fsname);
 	if (xos_swi_number_from_string(buf, &rd->disc_op) != NULL)
 		return ENODEV;
 	

@@ -29,8 +29,10 @@
 #ifndef _WSDISPLAY_VCONS_H_
 #define _WSDISPLAY_VCONS_H_
 
+#ifdef _KERNEL_OPT
 #include "opt_wsdisplay_compat.h"
 #include "opt_vcons.h"
+#endif
 
 struct vcons_data;
 

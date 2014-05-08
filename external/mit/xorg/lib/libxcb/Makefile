@@ -7,7 +7,9 @@ SUBDIR+= \
 	damage \
 	dpms \
 	dri2 \
+	dri3 \
 	glx \
+	present \
 	randr \
 	record \
 	render \
@@ -20,6 +22,7 @@ SUBDIR+= \
 	xf86dri \
 	xfixes \
 	xinerama \
+	xkb \
 	xtest \
 	xv \
 	xvmc \

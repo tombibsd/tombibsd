@@ -45,6 +45,12 @@ ic(L, 4503599627370496.0E0, 52, 1.0)			  /* 2**52 */
 #define	L	vccast(L)
 #endif
 
+#ifdef __weak_alias
+__weak_alias(ceill, ceil);
+__weak_alias(floorl, floor);
+__weak_alias(truncl, trunc);
+#endif
+
 /*
  * floor(x) := the largest integer no larger than x;
  * ceil(x) := -floor(-x), for all real x.
@@ -215,4 +221,16 @@ llrintf(float x)
 	s = copysign(L,x);
 	t = x + s;				/* x+s rounded to integer */
 	return (t - s);
+}
+
+double
+trunc(double x)
+{
+	return x < 0 ? ceil(x) : floor(x);
+}
+
+float
+truncf(float x)
+{
+	return x < 0 ? ceilf(x) : floorf(x);
 }

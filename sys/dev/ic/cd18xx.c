@@ -138,8 +138,17 @@ dev_type_tty(cdttytty);
 dev_type_poll(cdttypoll);
 
 const struct cdevsw cdtty_cdevsw = {
-	cdttyopen, cdttyclose, cdttyread, cdttywrite, cdttyioctl,
-	cdttystop, cdttytty, cdttypoll, nommap, ttykqfilter, D_TTY
+	.d_open = cdttyopen,
+	.d_close = cdttyclose,
+	.d_read = cdttyread,
+	.d_write = cdttywrite,
+	.d_ioctl = cdttyioctl,
+	.d_stop = cdttystop,
+	.d_tty = cdttytty,
+	.d_poll = cdttypoll,
+	.d_mmap = nommap,
+	.d_kqfilter = ttykqfilter,
+	.d_flag = D_TTY
 };
 
 static void	cdtty_shutdown(struct cd18xx_softc *, struct cdtty_port *);

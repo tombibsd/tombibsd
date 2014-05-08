@@ -164,7 +164,7 @@
 ./usr/lib/librumpdev_raidframe_pic.a		comp-c-piclib		rump,picinstall
 ./usr/lib/librumpdev_rnd_pic.a			comp-c-piclib		rump,picinstall
 ./usr/lib/librumpdev_scsipi_pic.a		comp-c-piclib		rump,picinstall
-./usr/lib/librumpdev_scsitest_pic.a		comp-c-piclib		rump,picinstall
+./usr/lib/librumpdev_scsitest_pic.a		comp-obsolete obsolete
 ./usr/lib/librumpdev_sysmon_pic.a		comp-c-piclib		rump,picinstall
 ./usr/lib/librumpdev_ubt_pic.a			comp-c-piclib		rump,picinstall
 ./usr/lib/librumpdev_ucom_pic.a			comp-c-piclib		rump,picinstall
@@ -206,6 +206,7 @@
 ./usr/lib/librumpkern_ksem_pic.a		comp-obsolete		obsolete
 ./usr/lib/librumpkern_sljit_pic.a		comp-c-piclib		sljit,rump,picinstall
 ./usr/lib/librumpkern_solaris_pic.a		comp-c-piclib		zfs,rump,picinstall
+./usr/lib/librumpkern_time_pic.a			comp-c-piclib		rump,picinstall
 ./usr/lib/librumpkern_tty_pic.a			comp-c-piclib		rump,picinstall
 ./usr/lib/librumpkern_z_pic.a			comp-c-piclib		rump,picinstall
 ./usr/lib/librumpnet_agr_pic.a			comp-c-piclib		rump,picinstall
@@ -224,6 +225,7 @@
 ./usr/lib/librumpnet_sockin_pic.a		comp-c-piclib		rump,picinstall
 ./usr/lib/librumpnet_virtif_pic.a		comp-c-piclib		rump,picinstall
 ./usr/lib/librumpuser_pic.a			comp-c-piclib		rump,picinstall
+./usr/lib/librumpvfs_aio_pic.a		comp-c-piclib		rump,picinstall
 ./usr/lib/librumpvfs_fifofs_pic.a		comp-c-piclib		rump,picinstall
 ./usr/lib/librumpvfs_layerfs_pic.a		comp-c-piclib		rump,picinstall
 ./usr/lib/librumpvfs_pic.a			comp-c-piclib		rump,picinstall

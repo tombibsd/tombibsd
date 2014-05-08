@@ -1026,4 +1026,9 @@ struct pci_rom {
 #define	PCI_EXTCAPLIST_VERSION(ecr)	(((ecr) >> 16) & 0xf)
 #define	PCI_EXTCAPLIST_NEXT(ecr)	(((ecr) >> 20) & 0xfff)
 
+/*
+ * Local constants
+ */
+#define PCI_INTRSTR_LEN			64
+
 #endif /* _DEV_PCI_PCIREG_H_ */

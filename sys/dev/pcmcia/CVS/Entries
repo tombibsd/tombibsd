@@ -16,7 +16,7 @@
 /if_cnwreg.h/1.6/Mon Apr 28 20:23:56 2008/-kk/
 /if_cs_pcmcia.c/1.20/Sat Oct 27 17:18:36 2012/-kk/
 /if_ep_pcmcia.c/1.63/Sat Sep  5 12:31:00 2009/-kk/
-/if_malo_pcmcia.c/1.4/Sat Mar  1 06:04:43 2014/-kk/
+/if_malo_pcmcia.c/1.6/Tue May  6 05:50:11 2014/-kk/
 /if_malo_pcmciareg.h/1.1/Sat Aug 25 08:20:03 2012/-kk/
 /if_malo_pcmciavar.h/1.1/Sat Aug 25 08:20:03 2012/-kk/
 /if_mbe_pcmcia.c/1.46/Tue May 12 14:42:18 2009/-kk/
@@ -32,9 +32,9 @@
 /isic_pcmcia.c/1.41/Sat Oct 27 17:18:37 2012/-kk/
 /isic_pcmcia.h/1.6/Mon Apr 28 20:23:56 2008/-kk/
 /isic_pcmcia_avm_fritz.c/1.12/Fri Oct 19 12:01:05 2007/-kk/
-/isic_pcmcia_elsa_isdnmc.c/1.13/Mon Apr 28 20:23:56 2008/-kk/
-/isic_pcmcia_elsa_mcall.c/1.14/Mon Apr 28 20:23:56 2008/-kk/
-/isic_pcmcia_sbspeedstar2.c/1.12/Mon Apr 28 20:23:56 2008/-kk/
+/isic_pcmcia_elsa_isdnmc.c/1.14/Fri Apr 11 02:03:50 2014/-kk/
+/isic_pcmcia_elsa_mcall.c/1.15/Fri Apr 11 02:03:50 2014/-kk/
+/isic_pcmcia_sbspeedstar2.c/1.13/Fri Apr 11 02:03:50 2014/-kk/
 /mhzc.c/1.50/Sat Oct 27 17:18:37 2012/-kk/
 /nca_pcmcia.c/1.24/Mon Apr 28 20:23:56 2008/-kk/
 /pcmcia.c/1.94/Tue Jul 26 22:24:36 2011/-kk/

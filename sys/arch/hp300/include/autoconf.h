@@ -39,6 +39,7 @@ extern  int conscode;			/* select code of console device */
 extern  void *conaddr;			/* KVA of console device */
 
 void	hp300_cninit(void);
+void	hp300_cninit_deferred(void);
 void	iomap_init(void);
 void *	iomap(void *, int);
 void	iounmap(void *, int);

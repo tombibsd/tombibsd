@@ -12,6 +12,7 @@ SRCS+=	Action.cpp \
 	Driver.cpp \
 	DriverOptions.cpp \
 	Job.cpp \
+	Multilib.cpp \
 	Phases.cpp \
 	SanitizerArgs.cpp \
 	Tool.cpp \

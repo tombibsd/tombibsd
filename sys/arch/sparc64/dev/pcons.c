@@ -78,8 +78,17 @@ dev_type_tty(pconstty);
 dev_type_poll(pconspoll);
 
 const struct cdevsw pcons_cdevsw = {
-	pconsopen, pconsclose, pconsread, pconswrite, pconsioctl,
-	nostop, pconstty, pconspoll, nommap, ttykqfilter, D_TTY
+	.d_open = pconsopen,
+	.d_close = pconsclose,
+	.d_read = pconsread,
+	.d_write = pconswrite,
+	.d_ioctl = pconsioctl,
+	.d_stop = nostop,
+	.d_tty = pconstty,
+	.d_poll = pconspoll,
+	.d_mmap = nommap,
+	.d_kqfilter = ttykqfilter,
+	.d_flag = D_TTY
 };
 
 static struct cnm_state pcons_cnm_state;

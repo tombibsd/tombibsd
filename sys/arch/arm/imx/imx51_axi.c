@@ -95,10 +95,8 @@ static int
 axi_critical_search(device_t parent, struct cfdata *cf,
     const int *ldesc __unused, void *aux)
 {
-	struct axi_softc *sc;
 	struct axi_attach_args *aa;
 
-	sc = device_private(parent);
 	aa = aux;
 
 	if ((strcmp(cf->cf_name, "tzic") != 0) &&
@@ -125,10 +123,8 @@ static int
 axi_search(device_t parent, struct cfdata *cf, const int *ldesc __unused,
     void *aux)
 {
-	struct axi_softc *sc;
 	struct axi_attach_args *aa;
 
-	sc = device_private(parent);
 	aa = aux;
 
 	aa->aa_addr = cf->cf_loc[AXICF_ADDR];

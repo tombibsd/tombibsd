@@ -78,8 +78,17 @@ dev_type_tty(ofcons_tty);
 dev_type_poll(ofcons_poll);
 
 const struct cdevsw ofcons_cdevsw = {
-	ofcons_open, ofcons_close, ofcons_read, ofcons_write, ofcons_ioctl,
-	nostop, ofcons_tty, ofcons_poll, nommap, ttykqfilter, D_TTY
+	.d_open = ofcons_open,
+	.d_close = ofcons_close,
+	.d_read = ofcons_read,
+	.d_write = ofcons_write,
+	.d_ioctl = ofcons_ioctl,
+	.d_stop = nostop,
+	.d_tty = ofcons_tty,
+	.d_poll = ofcons_poll,
+	.d_mmap = nommap,
+	.d_kqfilter = ttykqfilter,
+	.d_flag = D_TTY
 };
 
 static int ofcons_probe(void);

@@ -305,6 +305,7 @@ azalia_pci_attach(device_t parent, device_t self, void *aux)
 	const char *intrrupt_str;
 	const char *name;
 	const char *vendor;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	sc->dev = self;
 	sc->dmat = pa->pa_dmat;
@@ -335,7 +336,7 @@ azalia_pci_attach(device_t parent, device_t self, void *aux)
 
 	sc->pc = pa->pa_pc;
 	sc->tag = pa->pa_tag;
-	intrrupt_str = pci_intr_string(pa->pa_pc, ih);
+	intrrupt_str = pci_intr_string(pa->pa_pc, ih, intrbuf, sizeof(intrbuf));
 	sc->ih = pci_intr_establish(pa->pa_pc, ih, IPL_AUDIO, azalia_intr, sc);
 	if (sc->ih == NULL) {
 		aprint_error_dev(self, "can't establish interrupt");

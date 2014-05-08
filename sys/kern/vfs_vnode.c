@@ -176,6 +176,7 @@ static void		vdrain_thread(void *);
 static void		vrele_thread(void *);
 static void		vnpanic(vnode_t *, const char *, ...)
     __printflike(2, 3);
+static void		vwait(vnode_t *, int);
 
 /* Routines having to do with the management of the vnode table. */
 extern int		(**dead_vnodeop_p)(void *);
@@ -820,17 +821,27 @@ vrele_async(vnode_t *vp)
 static void
 vrele_thread(void *cookie)
 {
+	vnodelst_t skip_list;
 	vnode_t *vp;
+	struct mount *mp;
 
+	TAILQ_INIT(&skip_list);
+
+	mutex_enter(&vrele_lock);
 	for (;;) {
-		mutex_enter(&vrele_lock);
 		while (TAILQ_EMPTY(&vrele_list)) {
 			vrele_gen++;
 			cv_broadcast(&vrele_cv);
 			cv_timedwait(&vrele_cv, &vrele_lock, hz);
+			TAILQ_CONCAT(&vrele_list, &skip_list, v_freelist);
 		}
 		vp = TAILQ_FIRST(&vrele_list);
+		mp = vp->v_mount;
 		TAILQ_REMOVE(&vrele_list, vp, v_freelist);
+		if (fstrans_start_nowait(mp, FSTRANS_LAZY) != 0) {
+			TAILQ_INSERT_TAIL(&skip_list, vp, v_freelist);
+			continue;
+		}
 		vrele_pending--;
 		mutex_exit(&vrele_lock);
 
@@ -840,6 +851,8 @@ vrele_thread(void *cookie)
 		 */
 		mutex_enter(vp->v_interlock);
 		vrelel(vp, 0);
+		fstrans_done(mp);
+		mutex_enter(&vrele_lock);
 	}
 }
 
@@ -1029,30 +1042,33 @@ vclean(vnode_t *vp)
 }
 
 /*
- * Recycle an unused vnode to the front of the free list.
- * Release the passed interlock if the vnode will be recycled.
+ * Recycle an unused vnode if caller holds the last reference.
  */
-int
-vrecycle(vnode_t *vp, kmutex_t *inter_lkp)
+bool
+vrecycle(vnode_t *vp)
 {
+
+	mutex_enter(vp->v_interlock);
 
 	KASSERT((vp->v_iflag & VI_MARKER) == 0);
 
-	mutex_enter(vp->v_interlock);
-	if (vp->v_usecount != 0 || (vp->v_iflag & (VI_CLEAN|VI_XLOCK)) != 0) {
+	if (vp->v_usecount != 1) {
 		mutex_exit(vp->v_interlock);
-		return 0;
+		return false;
 	}
-	if (inter_lkp) {
-		mutex_exit(inter_lkp);
+	if ((vp->v_iflag & VI_CHANGING) != 0)
+		vwait(vp, VI_CHANGING);
+	if (vp->v_usecount != 1) {
+		mutex_exit(vp->v_interlock);
+		return false;
+	} else if ((vp->v_iflag & VI_CLEAN) != 0) {
+		mutex_exit(vp->v_interlock);
+		return true;
 	}
-	vremfree(vp);
-	vp->v_usecount = 1;
-	KASSERT((vp->v_iflag & VI_CHANGING) == 0);
 	vp->v_iflag |= VI_CHANGING;
 	vclean(vp);
 	vrelel(vp, VRELEL_CHANGING_SET);
-	return 1;
+	return true;
 }
 
 /*
@@ -1125,10 +1141,35 @@ vwakeup(struct buf *bp)
 }
 
 /*
+ * Test a vnode for being or becoming dead.  Returns one of:
+ * EBUSY:  vnode is becoming dead, with "flags == VDEAD_NOWAIT" only.
+ * ENOENT: vnode is dead.
+ * 0:      otherwise.
+ *
+ * Whenever this function returns a non-zero value all future
+ * calls will also return a non-zero value.
+ */
+int
+vdead_check(struct vnode *vp, int flags)
+{
+
+	KASSERT(mutex_owned(vp->v_interlock));
+	if (ISSET(vp->v_iflag, VI_XLOCK)) {
+		if (ISSET(flags, VDEAD_NOWAIT))
+			return EBUSY;
+		vwait(vp, VI_XLOCK);
+		KASSERT(ISSET(vp->v_iflag, VI_CLEAN));
+	}
+	if (ISSET(vp->v_iflag, VI_CLEAN))
+		return ENOENT;
+	return 0;
+}
+
+/*
  * Wait for a vnode (typically with VI_XLOCK set) to be cleaned or
  * recycled.
  */
-void
+static void
 vwait(vnode_t *vp, int flags)
 {
 

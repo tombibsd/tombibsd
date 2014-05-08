@@ -1525,7 +1525,7 @@ sysctl_net_inet_ip_maxflows(SYSCTLFN_ARGS)
 	mutex_enter(softnet_lock);
 	KERNEL_LOCK(1, NULL);
 
-	ipflow_prune();
+	ipflow_reap(false);
 
 	KERNEL_UNLOCK_ONE(NULL);
 	mutex_exit(softnet_lock);

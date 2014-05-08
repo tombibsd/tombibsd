@@ -37,7 +37,7 @@
 #include <krb5/getarg.h>
 #include "lex.h"
 
-__RCSID("$NetBSD$");
+__RCSID("NetBSD");
 
 extern FILE *yyin;
 
@@ -204,6 +204,6 @@ main(int argc, char **argv)
 	    free(arg[i]);
 	free(arg);
     }
-   
+
     return 0;
 }

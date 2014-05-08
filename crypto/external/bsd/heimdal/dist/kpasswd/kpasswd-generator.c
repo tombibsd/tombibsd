@@ -35,7 +35,7 @@
 
 #include "kpasswd_locl.h"
 
-__RCSID("$NetBSD$");
+__RCSID("NetBSD");
 
 static unsigned
 read_words (const char *filename, char ***ret_w)

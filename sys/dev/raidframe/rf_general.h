@@ -41,7 +41,7 @@
 
 /* error reporting and handling */
 
-#include <sys/systm.h>		/* printf, sprintf, and friends */
+#include <sys/systm.h>		/* printf, snprintf, and friends */
 
 #define RF_ERRORMSG(s)            printf((s))
 #define RF_ERRORMSG1(s,a)         printf((s),(a))

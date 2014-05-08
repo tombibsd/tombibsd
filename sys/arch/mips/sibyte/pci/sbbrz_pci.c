@@ -96,7 +96,7 @@ static void	sbbrz_pci_conf_interrupt(void *, int, int, int, int, int *);
 static int	sbbrz_pci_intr_map(const struct pci_attach_args *,
 		    pci_intr_handle_t *);
 static const char *
-		sbbrz_pci_intr_string(void *, pci_intr_handle_t);
+		sbbrz_pci_intr_string(void *, pci_intr_handle_t, char *, size_t);
 static const struct evcnt *
 		sbbrz_pci_intr_evcnt(void *, pci_intr_handle_t);
 static void *	sbbrz_pci_intr_establish(void *, pci_intr_handle_t,
@@ -225,15 +225,19 @@ sbbrz_pci_intr_map(const struct pci_attach_args *pa, pci_intr_handle_t *ihp)
 }
 
 const char *
-sbbrz_pci_intr_string(void *v, pci_intr_handle_t ih)
+sbbrz_pci_intr_string(void *v, pci_intr_handle_t ih, char *buf, size_t len)
 {
+	char c;
+
 	switch (ih) {
-	default:		return NULL;
-	case K_INT_PCI_INTA:	return "pci inta";
-	case K_INT_PCI_INTB:	return "pci intb";
-	case K_INT_PCI_INTC:	return "pci intc";
-	case K_INT_PCI_INTD:	return "pci intd";
+	default:		c = '?'; break;
+	case K_INT_PCI_INTA:	c = 'a'; break;
+	case K_INT_PCI_INTB:	c = 'b'; break;
+	case K_INT_PCI_INTC:	c = 'c'; break;
+	case K_INT_PCI_INTD:	c = 'd'; break;
 	}
+	snprintf(buf, len, "pci int%c", c);
+	return buf;
 }
 
 const struct evcnt *

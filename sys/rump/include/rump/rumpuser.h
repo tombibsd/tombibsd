@@ -175,12 +175,14 @@ int  rumpuser_thread_create(void *(*f)(void *), void *, const char *, int,
 void rumpuser_thread_exit(void) __dead;
 int  rumpuser_thread_join(void *);
 
+#if defined(LIBRUMPUSER) || defined(RUMP__CURLWP_PRIVATE)
 enum rumplwpop {
 	RUMPUSER_LWP_CREATE, RUMPUSER_LWP_DESTROY,
 	RUMPUSER_LWP_SET, RUMPUSER_LWP_CLEAR
 };
 void rumpuser_curlwpop(int, struct lwp *);
 struct lwp *rumpuser_curlwp(void);
+#endif /* LIBRUMPUSER || RUMP__CURLWP_PRIVATE */
 
 struct rumpuser_mtx;
 #define RUMPUSER_MTX_SPIN	0x01
@@ -225,7 +227,6 @@ typedef void (*rump_modinit_fn)(const struct modinfo *const *, size_t);
 typedef int (*rump_symload_fn)(void *, uint64_t, char *, uint64_t);
 typedef void (*rump_compload_fn)(const struct rump_component *);
 void rumpuser_dl_bootstrap(rump_modinit_fn, rump_symload_fn, rump_compload_fn);
-void *rumpuser_dl_globalsym(const char *);
 
 /*
  * misc management

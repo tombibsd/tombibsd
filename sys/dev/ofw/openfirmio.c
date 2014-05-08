@@ -66,8 +66,17 @@ void openfirmattach (int);
 dev_type_ioctl(openfirmioctl);
 
 const struct cdevsw openfirm_cdevsw = {
-	nullopen, nullclose, noread, nowrite, openfirmioctl,
-	nostop, notty, nopoll, nommap, nokqfilter,
+	.d_open = nullopen,
+	.d_close = nullclose,
+	.d_read = noread,
+	.d_write = nowrite,
+	.d_ioctl = openfirmioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = 0
 };
 
 void

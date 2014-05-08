@@ -754,7 +754,7 @@ needcompat(void)
 
 	/*LINTED*/
 	return __NetBSD_Version__ < VERS_TIMECHANGE
-	    && rump_pub_getversion() >= VERS_TIMECHANGE;
+	    && rump_getversion() >= VERS_TIMECHANGE;
 }
 
 #define DOCOMPAT(va, va_compat)						\

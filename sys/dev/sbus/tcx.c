@@ -158,8 +158,17 @@ dev_type_ioctl(tcxioctl);
 dev_type_mmap(tcxmmap);
 
 const struct cdevsw tcx_cdevsw = {
-	tcxopen, tcxclose, noread, nowrite, tcxioctl,
-	nostop, notty, nopoll, tcxmmap, nokqfilter,
+	.d_open = tcxopen,
+	.d_close = tcxclose,
+	.d_read = noread,
+	.d_write = nowrite,
+	.d_ioctl = tcxioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = tcxmmap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = 0
 };
 
 /* frame buffer generic driver */
@@ -217,7 +226,9 @@ tcxmatch(device_t parent, cfdata_t cf, void *aux)
 {
 	struct sbus_attach_args *sa = aux;
 
-	return (strcmp(sa->sa_name, OBPNAME) == 0);
+	if (strcmp(sa->sa_name, OBPNAME) == 0)
+		return 100;	/* beat genfb */
+	return 0;
 }
 
 /*

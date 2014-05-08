@@ -226,8 +226,17 @@ dev_type_tty(msctty);
 dev_type_poll(mscpoll);
 
 const struct cdevsw msc_cdevsw = {
-	mscopen, mscclose, mscread, mscwrite, mscioctl,
-	mscstop, msctty, mscpoll, nommap, ttykqfilter, D_TTY
+	.d_open = mscopen,
+	.d_close = mscclose,
+	.d_read = mscread,
+	.d_write = mscwrite,
+	.d_ioctl = mscioctl,
+	.d_stop = mscstop,
+	.d_tty = msctty,
+	.d_poll = mscpoll,
+	.d_mmap = nommap,
+	.d_kqfilter = ttykqfilter,
+	.d_flag = D_TTY
 };
 
 int

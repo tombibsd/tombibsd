@@ -594,7 +594,8 @@ rf_ConfigureDisk(RF_Raid_t *raidPtr, char *bf, RF_RaidDisk_t *diskPtr,
 
 	if (!strcmp("absent", diskPtr->devname)) {
 		printf("Ignoring missing component at column %d\n", col);
-		sprintf(diskPtr->devname, "component%d", col);
+		snprintf(diskPtr->devname, sizeof(diskPtr->devname),
+		    "component%d", col);
 		diskPtr->status = rf_ds_failed;
 		return (0);
 	}

@@ -103,7 +103,7 @@ copy_import(void)
 	errx(1, "gss_compare_name");
     if (!equal)
 	errx(1, "names not equal");
-	
+
     if (lifetime1 != lifetime2)
 	errx(1, "lifetime not equal %lu != %lu",
 	     (unsigned long)lifetime1, (unsigned long)lifetime2);
@@ -127,7 +127,7 @@ copy_import(void)
 	errx(1, "gss_compare_name");
     if (!equal)
 	errx(1, "names not equal");
-	
+
     if (lifetime1 != lifetime2)
 	errx(1, "lifetime not equal %lu != %lu",
 	     (unsigned long)lifetime1, (unsigned long)lifetime2);

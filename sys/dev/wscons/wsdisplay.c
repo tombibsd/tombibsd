@@ -189,9 +189,17 @@ dev_type_mmap(wsdisplaymmap);
 dev_type_kqfilter(wsdisplaykqfilter);
 
 const struct cdevsw wsdisplay_cdevsw = {
-	wsdisplayopen, wsdisplayclose, wsdisplayread, wsdisplaywrite,
-	wsdisplayioctl, wsdisplaystop, wsdisplaytty, wsdisplaypoll,
-	wsdisplaymmap, wsdisplaykqfilter, D_TTY
+	.d_open = wsdisplayopen,
+	.d_close = wsdisplayclose,
+	.d_read = wsdisplayread,
+	.d_write = wsdisplaywrite,
+	.d_ioctl = wsdisplayioctl,
+	.d_stop = wsdisplaystop,
+	.d_tty = wsdisplaytty,
+	.d_poll = wsdisplaypoll,
+	.d_mmap = wsdisplaymmap,
+	.d_kqfilter = wsdisplaykqfilter,
+	.d_flag = D_TTY
 };
 
 static void wsdisplaystart(struct tty *);

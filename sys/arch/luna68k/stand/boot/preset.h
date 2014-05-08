@@ -71,7 +71,7 @@
  */
 
 /*
- * preset.h -- preset infomation
+ * preset.h -- preset information
  *   by A.Fujita, Dec-12-1992
  */
 

@@ -154,8 +154,17 @@ static dev_type_close(sticclose);
 static dev_type_mmap(sticmmap);
 
 const struct cdevsw stic_cdevsw = {
-	sticopen, sticclose, noread, nowrite, noioctl,
-	nostop, notty, nopoll, sticmmap, nokqfilter,
+	.d_open = sticopen,
+	.d_close = sticclose,
+	.d_read = noread,
+	.d_write = nowrite,
+	.d_ioctl = noioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = sticmmap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = 0
 };
 
 /* Colormap for wscons, matching WSCOL_*. Upper 8 are high-intensity. */

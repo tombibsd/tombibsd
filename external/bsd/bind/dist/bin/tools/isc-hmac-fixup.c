@@ -41,10 +41,6 @@ main(int argc, char **argv)  {
 	isc_region_t r;
 	isc_result_t result;
 
-	isc__mem_register();
-	isc__task_register();
-	isc__timer_register();
-	isc__socket_register();
 	if (argc != 3) {
 		fprintf(stderr, "Usage:\t%s algorithm secret\n", argv[0]);
 		fprintf(stderr, "\talgorithm: (MD5 | SHA1 | SHA224 | "

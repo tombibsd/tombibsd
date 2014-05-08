@@ -139,3 +139,4 @@ ENTRY(strlen)
 .Ldone:
 	subl	4(%esp),%eax
 	ret
+END(strlen)

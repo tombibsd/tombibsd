@@ -51,7 +51,7 @@ COPTS.loadmod.c=		-Wno-error
 sdksyms.c: sdksyms.sh
 	CPP=${CPP:Q} AWK=${TOOL_AWK:Q} ${HOST_SH} $(LOADERDIR)/sdksyms.sh $(X11SRCDIR.xorg-server) ${CFLAGS} ${CPPFLAGS}
 sdksyms.d: sdksyms.c
-CLEANFILES+=	sdksyms.c
+CLEANFILES+=	sdksyms.c sdksyms.dep
 
 .include <bsd.x11.mk>
 .include <bsd.lib.mk>

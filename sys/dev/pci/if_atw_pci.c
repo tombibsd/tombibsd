@@ -175,6 +175,7 @@ atw_pci_attach(device_t parent, device_t self, void *aux)
 	int ioh_valid, memh_valid;
 	const struct atw_pci_product *app;
 	int error;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	sc->sc_dev = self;
 
@@ -254,7 +255,7 @@ atw_pci_attach(device_t parent, device_t self, void *aux)
 		aprint_error_dev(self, "unable to map interrupt\n");
 		return;
 	}
-	intrstr = pci_intr_string(pc, psc->psc_ih);
+	intrstr = pci_intr_string(pc, psc->psc_ih, intrbuf, sizeof(intrbuf));
 	psc->psc_intrcookie = pci_intr_establish(pc, psc->psc_ih, IPL_NET,
 	    atw_intr, sc);
 	if (psc->psc_intrcookie == NULL) {

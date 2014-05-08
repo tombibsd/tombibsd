@@ -48,3 +48,5 @@
 void puc_cnprobe(struct consdev *);
 int puc_cninit(struct consdev *);
 int cpu_puc_cnprobe(struct consdev *, struct pci_attach_args *);
+void puc_gdbprobe(struct consdev *);
+void puc_gdbinit(struct consdev *);

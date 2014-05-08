@@ -86,7 +86,9 @@ extract_subst_template(void)
 
 	if (*ibufp == '%' && *(ibufp + 1) == delimiter) {
 		ibufp++;
-		if (!rhbuf) sprintf(errmsg, "no previous substitution");
+		if (!rhbuf) {
+			seterrmsg("no previous substitution");
+		}
 		return rhbuf;
 	}
 	while (*ibufp != delimiter) {
@@ -160,7 +162,7 @@ search_and_replace(pattern_t *pat, int gflag, int kth)
 	}
 	current_addr = xa;
 	if  (nsubs == 0 && !(gflag & GLB)) {
-		sprintf(errmsg, "no match");
+		seterrmsg("no match");
 		return ERR;
 	} else if ((gflag & (GPR | GLS | GNP)) &&
 	    display_lines(current_addr, current_addr, gflag) < 0)
@@ -214,7 +216,7 @@ substitute_matching_text(pattern_t *pat, line_t *lp, int gflag, int kth)
 		i = eot - txt;
 		REALLOC(rbuf, rbufsz, off + i + 2, ERR);
 		if (i > 0 && !rm[0].rm_eo && (gflag & GSG)) {
-			sprintf(errmsg, "infinite substitution loop");
+			seterrmsg("infinite substitution loop");
 			return  ERR;
 		}
 		if (isbinary)

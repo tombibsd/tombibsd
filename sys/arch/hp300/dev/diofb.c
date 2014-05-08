@@ -318,7 +318,7 @@ diofb_end_attach(device_t self, struct wsdisplay_accessops *accessops,
 
 	fb->scrlist[0] = &fb->wsd;
 	fb->wsl.nscreens = 1;
-	fb->wsl.screens = (const struct wsscreen_descr **)fb->scrlist;
+	fb->wsl.screens = (void *)fb->scrlist;
 
 	waa.console = console;
 	waa.scrdata = &fb->wsl;

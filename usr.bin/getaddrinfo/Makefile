@@ -1,5 +1,7 @@
 #	$NetBSD$
 
+.include <bsd.own.mk>
+
 PROG=	getaddrinfo
 
 DPADD+=	${LIBUTIL}

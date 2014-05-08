@@ -142,7 +142,8 @@ _rtld_relocate_plt_lazy(const Obj_Entry *obj)
 
 		/* Just relocate the GOT slots pointing into the PLT */
 		*where += (Elf_Addr)obj->relocbase;
-		rdbg(("fixup !main in %s --> %p", obj->path, (void *)*where));
+		rdbg(("lazy fixup pltgot %p in %s --> %p", where, obj->path,
+		    (void *)*where));
 	}
 
 	return 0;
@@ -167,7 +168,7 @@ _rtld_relocate_plt_object(const Obj_Entry *obj, const Elf_Rela *rela, Elf_Addr *
 
 	new_value = (Elf_Addr)(defobj->relocbase + def->st_value +
 	    rela->r_addend);
-	rdbg(("bind now/fixup in %s --> old=%p new=%p",
+	rdbg(("bind now/fixup pltgot %p in %s --> old=%p new=%p", where,
 	    defobj->strtab + def->st_name, (void *)*where, (void *)new_value));
 	if (*where != new_value)
 		*where = new_value;

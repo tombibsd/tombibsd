@@ -118,6 +118,7 @@ mlx_eisa_attach(device_t parent, device_t self, void *aux)
 	bus_space_tag_t iot;
 	const char *intrstr;
 	int irq, i, icfg;
+	char intrbuf[EISA_INTRSTR_LEN];
 
 	ea = aux;
 	mlx = device_private(self);
@@ -163,7 +164,7 @@ mlx_eisa_attach(device_t parent, device_t self, void *aux)
 		return;
 	}
 
-	intrstr = eisa_intr_string(ec, ih);
+	intrstr = eisa_intr_string(ec, ih, intrbuf, sizeof(intrbuf));
 	mlx->mlx_ih = eisa_intr_establish(ec, ih,
 	    ((icfg & 0x08) != 0 ? IST_LEVEL : IST_EDGE),
 	    IPL_BIO, mlx_intr, mlx);

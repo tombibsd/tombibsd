@@ -66,7 +66,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 int cmalo_d = 1;
 #define DPRINTF(l, x...)	do { if ((l) <= cmalo_d) printf(x); } while (0)
 #else
-#define DPRINTF(l, x...)
+#define DPRINTF(l, x...)	do {} while (0)
 #endif
 
 static int	malo_pcmcia_match(device_t, cfdata_t, void *);

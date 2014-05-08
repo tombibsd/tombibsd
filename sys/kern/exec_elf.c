@@ -90,7 +90,7 @@ extern struct emul emul_netbsd;
 
 #define elf_check_header	ELFNAME(check_header)
 #define elf_copyargs		ELFNAME(copyargs)
-#define elf_load_file		ELFNAME(load_file)
+#define elf_load_interp		ELFNAME(load_interp)
 #define elf_load_psection	ELFNAME(load_psection)
 #define exec_elf_makecmds	ELFNAME2(exec,makecmds)
 #define netbsd_elf_signature	ELFNAME2(netbsd,signature)
@@ -99,11 +99,11 @@ extern struct emul emul_netbsd;
 #define	elf_free_emul_arg	ELFNAME(free_emul_arg)
 
 static int
-elf_load_file(struct lwp *, struct exec_package *, char *,
+elf_load_interp(struct lwp *, struct exec_package *, char *,
     struct exec_vmcmd_set *, u_long *, Elf_Addr *);
 static void
 elf_load_psection(struct exec_vmcmd_set *, struct vnode *, const Elf_Phdr *,
-    Elf_Addr *, u_long *, int *, int);
+    Elf_Addr *, u_long *, int);
 
 int	netbsd_elf_signature(struct lwp *, struct exec_package *, Elf_Ehdr *);
 int	netbsd_elf_probe(struct lwp *, struct exec_package *, void *, char *,
@@ -162,6 +162,7 @@ elf_placedynexec(struct lwp *l, struct exec_package *epp, Elf_Ehdr *eh,
 
 	for (i = 0; i < eh->e_phnum; i++)
 		ph[i].p_vaddr += offset;
+	epp->ep_entryoffset = offset;
 	eh->e_entry += offset;
 }
 
@@ -316,10 +317,11 @@ elf_check_header(Elf_Ehdr *eh)
  */
 static void
 elf_load_psection(struct exec_vmcmd_set *vcset, struct vnode *vp,
-    const Elf_Phdr *ph, Elf_Addr *addr, u_long *size, int *prot, int flags)
+    const Elf_Phdr *ph, Elf_Addr *addr, u_long *size, int flags)
 {
 	u_long msize, psize, rm, rf;
 	long diff, offset;
+	int vmprot = 0;
 
 	/*
 	 * If the user specified an address, then we load there.
@@ -341,9 +343,9 @@ elf_load_psection(struct exec_vmcmd_set *vcset, struct vnode *vp,
 	} else
 		diff = 0;
 
-	*prot |= (ph->p_flags & PF_R) ? VM_PROT_READ : 0;
-	*prot |= (ph->p_flags & PF_W) ? VM_PROT_WRITE : 0;
-	*prot |= (ph->p_flags & PF_X) ? VM_PROT_EXECUTE : 0;
+	vmprot |= (ph->p_flags & PF_R) ? VM_PROT_READ : 0;
+	vmprot |= (ph->p_flags & PF_W) ? VM_PROT_WRITE : 0;
+	vmprot |= (ph->p_flags & PF_X) ? VM_PROT_EXECUTE : 0;
 
 	/*
 	 * Adjust everything so it all starts on a page boundary.
@@ -371,12 +373,12 @@ elf_load_psection(struct exec_vmcmd_set *vcset, struct vnode *vp,
 	if (psize > 0) {
 		NEW_VMCMD2(vcset, ph->p_align < PAGE_SIZE ?
 		    vmcmd_map_readvn : vmcmd_map_pagedvn, psize, *addr, vp,
-		    offset, *prot, flags);
+		    offset, vmprot, flags);
 		flags &= VMCMD_RELATIVE;
 	}
 	if (psize < *size) {
 		NEW_VMCMD2(vcset, vmcmd_map_readvn, *size - psize,
-		    *addr + psize, vp, offset + psize, *prot, flags);
+		    *addr + psize, vp, offset + psize, vmprot, flags);
 	}
 
 	/*
@@ -388,20 +390,18 @@ elf_load_psection(struct exec_vmcmd_set *vcset, struct vnode *vp,
 
 	if (rm != rf) {
 		NEW_VMCMD2(vcset, vmcmd_map_zero, rm - rf, rf, NULLVP,
-		    0, *prot, flags & VMCMD_RELATIVE);
+		    0, vmprot, flags & VMCMD_RELATIVE);
 		*size = msize;
 	}
 }
 
 /*
- * elf_load_file():
+ * elf_load_interp():
  *
- * Load a file (interpreter/library) pointed to by path
- * [stolen from coff_load_shlib()]. Made slightly generic
- * so it might be used externally.
+ * Load an interpreter pointed to by path.
  */
 static int
-elf_load_file(struct lwp *l, struct exec_package *epp, char *path,
+elf_load_interp(struct lwp *l, struct exec_package *epp, char *path,
     struct exec_vmcmd_set *vcset, u_long *entryoff, Elf_Addr *last)
 {
 	int error, i;
@@ -555,7 +555,6 @@ elf_load_file(struct lwp *l, struct exec_package *epp, char *path,
 		switch (ph[i].p_type) {
 		case PT_LOAD: {
 			u_long size;
-			int prot = 0;
 			int flags;
 
 			if (base_ph == NULL) {
@@ -595,7 +594,7 @@ elf_load_file(struct lwp *l, struct exec_package *epp, char *path,
 			}
 			last_ph = &ph[i];
 			elf_load_psection(vcset, vp, &ph[i], &addr,
-			    &size, &prot, flags);
+			    &size, flags);
 			/*
 			 * If entry is within this psection then this
 			 * must contain the .text section.  *entryoff is
@@ -608,11 +607,6 @@ elf_load_file(struct lwp *l, struct exec_package *epp, char *path,
 			addr += size;
 			break;
 		}
-
-		case PT_DYNAMIC:
-		case PT_PHDR:
-		case PT_NOTE:
-			break;
 
 		default:
 			break;
@@ -658,7 +652,7 @@ exec_elf_makecmds(struct lwp *l, struct exec_package *epp)
 	int error, i;
 	char *interp = NULL;
 	u_long phsize;
-	struct elf_args *ap = NULL;
+	struct elf_args *ap;
 	bool is_dyn = false;
 
 	if (epp->ep_hdrvalid < sizeof(Elf_Ehdr))
@@ -748,12 +742,11 @@ exec_elf_makecmds(struct lwp *l, struct exec_package *epp)
 	for (i = 0; i < eh->e_phnum; i++) {
 		Elf_Addr addr = ELFDEFNNAME(NO_ADDR);
 		u_long size = 0;
-		int prot = 0;
 
 		switch (ph[i].p_type) {
 		case PT_LOAD:
 			elf_load_psection(&epp->ep_vmcmds, epp->ep_vp,
-			    &ph[i], &addr, &size, &prot, VMCMD_FIXED);
+			    &ph[i], &addr, &size, VMCMD_FIXED);
 
 			/*
 			 * Consider this as text segment, if it is executable.
@@ -781,7 +774,6 @@ exec_elf_makecmds(struct lwp *l, struct exec_package *epp)
 		case PT_INTERP:
 			/* Already did this one. */
 		case PT_DYNAMIC:
-			break;
 		case PT_NOTE:
 			break;
 		case PT_PHDR:
@@ -804,11 +796,6 @@ exec_elf_makecmds(struct lwp *l, struct exec_package *epp)
 		goto bad;
 	}
 
-	if (interp || (epp->ep_flags & EXEC_FORCEAUX) != 0) {
-		ap = kmem_alloc(sizeof(*ap), KM_SLEEP);
-		ap->arg_interp = (vaddr_t)NULL;
-	}
-
 	if (epp->ep_daddr == ELFDEFNNAME(NO_ADDR)) {
 		epp->ep_daddr = round_page(end_text);
 		epp->ep_dsize = 0;
@@ -819,26 +806,32 @@ exec_elf_makecmds(struct lwp *l, struct exec_package *epp)
 	 * its interpreter
 	 */
 	if (interp) {
-		int nused = epp->ep_vmcmds.evs_used;
+		u_int nused = epp->ep_vmcmds.evs_used;
 		u_long interp_offset = 0;
 
-		if ((error = elf_load_file(l, epp, interp,
+		if ((error = elf_load_interp(l, epp, interp,
 		    &epp->ep_vmcmds, &interp_offset, &pos)) != 0) {
-			kmem_free(ap, sizeof(*ap));
 			goto bad;
 		}
 		if (epp->ep_vmcmds.evs_used == nused) {
-			/* elf_load_file() has not set up any new VMCMD */
-			kmem_free(ap, sizeof(*ap));
+			/* elf_load_interp() has not set up any new VMCMD */
 			error = ENOEXEC;
 			goto bad;
 		}
 
+		ap = kmem_alloc(sizeof(*ap), KM_SLEEP);
 		ap->arg_interp = epp->ep_vmcmds.evs_cmds[nused].ev_addr;
+		epp->ep_entryoffset = interp_offset;
 		epp->ep_entry = ap->arg_interp + interp_offset;
 		PNBUF_PUT(interp);
-	} else
+	} else {
 		epp->ep_entry = eh->e_entry;
+		if (epp->ep_flags & EXEC_FORCEAUX) {
+			ap = kmem_alloc(sizeof(*ap), KM_SLEEP);
+			ap->arg_interp = (vaddr_t)NULL;
+		} else
+			ap = NULL;
+	}
 
 	if (ap) {
 		ap->arg_phaddr = phdr ? phdr : computed_phdr;

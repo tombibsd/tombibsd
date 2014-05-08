@@ -449,7 +449,8 @@ nbfs_func(struct nbfs_reg *r)
 	case 16: /* Shut down */
 		return NULL;
 	default:
-		sprintf(error.errmess, "nbfs_func %d not implemented", reason);
+		snprintf(error.errmess, sizeof(error.errmess),
+		    "nbfs_func %d not implemented", reason);
 		return &error;
 	}
 }

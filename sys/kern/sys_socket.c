@@ -92,6 +92,8 @@ const struct fileops socketops = {
 	.fo_restart = soo_restart,
 };
 
+int (*ifioctl)(struct socket *, u_long, void *, struct lwp *) = (void *)eopnotsupp;
+
 /* ARGSUSED */
 int
 soo_read(file_t *fp, off_t *offset, struct uio *uio, kauth_cred_t cred,
@@ -198,8 +200,6 @@ soo_ioctl(file_t *fp, u_long cmd, void *data)
 		KERNEL_LOCK(1, NULL);
 		if (IOCGROUP(cmd) == 'i')
 			error = ifioctl(so, cmd, data, curlwp);
-		else if (IOCGROUP(cmd) == 'r')
-			error = rtioctl(cmd, data, curlwp);
 		else {
 			error = (*so->so_proto->pr_usrreq)(so, PRU_CONTROL,
 			    (struct mbuf *)cmd, (struct mbuf *)data, NULL,

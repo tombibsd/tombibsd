@@ -142,8 +142,14 @@ dhcp_auth_validate(struct authstate *state, const struct auth *auth,
 		    algorithm != auth->algorithm ||
 		    rdm != auth->rdm)
 	{
-		errno = EPERM;
-		return NULL;
+		/* As we don't require authentication, we should still
+		 * accept a reconfigure key */
+		if (protocol != AUTH_PROTO_RECONFKEY ||
+		    auth->options & DHCPCD_AUTH_REQUIRE)
+		{
+			errno = EPERM;
+			return NULL;
+		}
 	}
 	dlen -= 3;
 
@@ -234,6 +240,11 @@ dhcp_auth_validate(struct authstate *state, const struct auth *auth,
 			}
 			if (state->reconf == NULL)
 				errno = ENOENT;
+			/* Free the old token so we log acceptance */
+			if (state->token) {
+				free(state->token);
+				state->token = NULL;
+			}
 			/* Nothing to validate, just accepting the key */
 			return state->reconf;
 		case 2:
@@ -346,18 +357,20 @@ finish:
 			} else {
 				free(state->token);
 				state->token = NULL;
+				return NULL;
 			}
-			if (t->realm) {
+			if (t->realm_len) {
 				state->token->realm = malloc(t->realm_len);
 				if (state->token->realm) {
 					state->token->realm_len = t->realm_len;
 					memcpy(state->token->realm, t->realm,
 					    t->realm_len);
-			    } else {
+				} else {
 					free(state->token->key);
 					free(state->token);
 					state->token = NULL;
-			    }
+					return NULL;
+				}
 			} else {
 				state->token->realm = NULL;
 				state->token->realm_len = 0;

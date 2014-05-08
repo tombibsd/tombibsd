@@ -334,7 +334,8 @@ afmclose(dev_t dev, int flag, int fmt, struct lwp *l)
 	     head = head->afh_chain.le_next) {
 
 		/* call interface to clean up maps */
-		sprintf(fmap.af_ifname, "%s", head->afh_ifp->if_xname);
+		snprintf(fmap.af_ifname, sizeof(fmap.af_ifname),
+		    "%s", head->afh_ifp->if_xname);
 		err = afmioctl(dev, AFM_CLEANFMAP, (void *)&fmap, flag, l);
 		if (err && error == 0)
 			error = err;

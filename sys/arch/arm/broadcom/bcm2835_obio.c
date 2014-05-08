@@ -1,7 +1,7 @@
 /*	$NetBSD$	*/
 
 /*-
- * Copyright (c) 2012 The NetBSD Foundation, Inc.
+ * Copyright (c) 2012, 2014 The NetBSD Foundation, Inc.
  * All rights reserved.
  *
  * This code is derived from software contributed to The NetBSD Foundation
@@ -156,6 +156,20 @@ static const struct ambadev_locators bcm2835_ambadev_locs[] = {
 		.ad_addr = BCM2835_BSC1_BASE,
 		.ad_size = BCM2835_BSC_SIZE,
 		.ad_intr = BCM2835_INT_BSC,
+	},
+	{
+		/* gpio */
+		.ad_name = "bcmgpio",
+		.ad_addr = BCM2835_GPIO_BASE,
+		.ad_size = BCM2835_GPIO_SIZE,
+		.ad_intr = -1,
+	},
+	{
+		/* gpio */
+		.ad_name = "bcmgpio",
+		.ad_addr = BCM2835_GPIO_BASE,
+		.ad_size = BCM2835_GPIO_SIZE,
+		.ad_intr = -1,
 	},
 	{
 		/* Terminator */

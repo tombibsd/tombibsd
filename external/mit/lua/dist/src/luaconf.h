@@ -545,7 +545,7 @@
 #define lua_str2number(s,p)	strtod((s), (p))
 #endif
 
-#define lua_number2str(s,n)	sprintf((s), LUA_NUMBER_FMT, (n))
+#define lua_number2str(s,l,n)	snprintf((s), (l), LUA_NUMBER_FMT, (n))
 #define LUAI_MAXNUMBER2STR	32 /* 16 digits, sign, point, and \0 */
 
 /*

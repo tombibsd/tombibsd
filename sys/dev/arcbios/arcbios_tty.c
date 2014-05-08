@@ -64,9 +64,17 @@ dev_type_tty(arcbios_ttytty);
 dev_type_poll(arcbios_ttypoll);
 
 const struct cdevsw arcbios_cdevsw = {
-	arcbios_ttyopen, arcbios_ttyclose, arcbios_ttyread, arcbios_ttywrite,
-	arcbios_ttyioctl, arcbios_ttystop, arcbios_ttytty, arcbios_ttypoll,
-	nommap, ttykqfilter, D_TTY,
+	.d_open = arcbios_ttyopen,
+	.d_close = arcbios_ttyclose,
+	.d_read = arcbios_ttyread,
+	.d_write = arcbios_ttywrite,
+	.d_ioctl = arcbios_ttyioctl,
+	.d_stop = arcbios_ttystop,
+	.d_tty = arcbios_ttytty,
+	.d_poll = arcbios_ttypoll,
+	.d_mmap = nommap,
+	.d_kqfilter = ttykqfilter,
+	.d_flag = D_TTY,
 };
 
 int

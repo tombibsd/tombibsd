@@ -106,6 +106,7 @@ int
 ELFNAMEEND(coredump)(struct lwp *l, struct coredump_iostate *cookie)
 {
 	Elf_Ehdr ehdr;
+	Elf_Shdr shdr;
 	Elf_Phdr *psections;
 	size_t psectionssize;
 	int npsections;
@@ -165,14 +166,22 @@ ELFNAMEEND(coredump)(struct lwp *l, struct coredump_iostate *cookie)
 	ehdr.e_machine = ELFDEFNNAME(MACHDEP_ID);
 	ehdr.e_version = EV_CURRENT;
 	ehdr.e_entry = 0;
-	ehdr.e_phoff = sizeof(ehdr);
-	ehdr.e_shoff = 0;
 	ehdr.e_flags = 0;
 	ehdr.e_ehsize = sizeof(ehdr);
 	ehdr.e_phentsize = sizeof(Elf_Phdr);
-	ehdr.e_phnum = npsections;
-	ehdr.e_shentsize = 0;
-	ehdr.e_shnum = 0;
+	if (npsections < PN_XNUM) {
+		ehdr.e_phnum = npsections;
+		ehdr.e_shentsize = 0;
+		ehdr.e_shnum = 0;
+		ehdr.e_shoff = 0;
+		ehdr.e_phoff = sizeof(ehdr);
+	} else {
+		ehdr.e_phnum = PN_XNUM;
+		ehdr.e_shentsize = sizeof(Elf_Shdr);
+		ehdr.e_shnum = 1;
+		ehdr.e_shoff = sizeof(ehdr);
+		ehdr.e_phoff = sizeof(ehdr) + sizeof(shdr);
+	}
 	ehdr.e_shstrndx = 0;
 
 #ifdef ELF_MD_COREDUMP_SETUP
@@ -184,8 +193,19 @@ ELFNAMEEND(coredump)(struct lwp *l, struct coredump_iostate *cookie)
 	if (error)
 		goto out;
 
+	/* Write out sections, if needed */
+	if (npsections >= PN_XNUM) {
+		memset(&shdr, 0, sizeof(shdr));
+		shdr.sh_type = SHT_NULL;
+		shdr.sh_info = npsections;
+		error = coredump_write(cookie, UIO_SYSSPACE, &shdr,
+		    sizeof(shdr));
+		if (error)
+			goto out;
+	}
+
 	psectionssize = npsections * sizeof(*psections);
-	notestart = sizeof(ehdr) + psectionssize;
+	notestart = ehdr.e_phoff + psectionssize;
 
 	psections = kmem_zalloc(psectionssize, KM_SLEEP);
 

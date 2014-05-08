@@ -61,7 +61,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 int     api_up1000_intr_map(const struct pci_attach_args *,
 	    pci_intr_handle_t *);
-const char *api_up1000_intr_string(void *, pci_intr_handle_t);
+const char *api_up1000_intr_string(void *, pci_intr_handle_t, char *, size_t);
 const struct evcnt *api_up1000_intr_evcnt(void *, pci_intr_handle_t);
 void    *api_up1000_intr_establish(void *, pci_intr_handle_t,
 	    int, int (*func)(void *), void *);
@@ -140,13 +140,13 @@ api_up1000_intr_map(const struct pci_attach_args *pa, pci_intr_handle_t *ihp)
 }
 
 const char *
-api_up1000_intr_string(void *icv, pci_intr_handle_t ih)
+api_up1000_intr_string(void *icv, pci_intr_handle_t ih, char *buf, size_t len)
 {
 #if 0
 	struct irongate_config *icp = icv;
 #endif
 
-	return sio_intr_string(NULL /*XXX*/, ih);
+	return sio_intr_string(NULL /*XXX*/, ih, buf, len);
 }
 
 const struct evcnt *
@@ -188,6 +188,7 @@ api_up1000_pciide_compat_intr_establish(void *icv, device_t dev,
 	pci_chipset_tag_t pc = pa->pa_pc;
 	void *cookie = NULL;
 	int bus, irq;
+	char buf[64];
 
 	pci_decompose_tag(pc, pa->pa_tag, &bus, NULL, NULL);
 
@@ -204,7 +205,8 @@ api_up1000_pciide_compat_intr_establish(void *icv, device_t dev,
 	if (cookie == NULL)
 		return (NULL);
 	aprint_normal_dev(dev, "%s channel interrupting at %s\n",
-	    PCIIDE_CHANNEL_NAME(chan), sio_intr_string(NULL /*XXX*/, irq));
+	    PCIIDE_CHANNEL_NAME(chan), sio_intr_string(NULL /*XXX*/, irq, buf,
+	    sizeof(buf)));
 #endif
 	return (cookie);
 }

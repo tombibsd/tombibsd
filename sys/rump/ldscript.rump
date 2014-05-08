@@ -18,13 +18,6 @@ SECTIONS
 		__stop_link_set_modules = .;
 	}
 
-	link_set_domains :
-	{
-		__start_link_set_domains = .;
-		*(link_set_domains);
-		__stop_link_set_domains = .;
-	}
-
 	link_set_rump_components :
 	{
 		__start_link_set_rump_components = .;

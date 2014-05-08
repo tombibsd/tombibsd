@@ -932,11 +932,6 @@ struct staterecord *buildrecordstack(struct recordchain *rchain, uint64_t procof
 	uint64_t rlen = 0;		/* Current region length, defaults to zero, if not specified */
 	uint64_t roffset = 0;		/* Accumulated region length */
 	uint64_t rdepth = 0;		/* Offset within current region */
-
-
-	char *spill_mask = NULL;	/* Specifies when preserved registers are spilled, as a bit mask */
-
-	spill_mask = NULL;
 	bool rtype;
 
 	unwind_rsp = recordstack; /* Start with bottom of staterecord stack. */

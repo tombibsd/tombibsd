@@ -80,9 +80,7 @@
 #define gets		libsa_gets
 #define printf		libsa_printf
 #define putchar		libsa_putchar
-#define sprintf		libsa_sprintf
 #define vprintf		libsa_vprintf
-#define vsprintf	libsa_vsprintf
 #endif
 
 struct open_file;
@@ -252,14 +250,10 @@ int	dkcksum(const struct disklabel *);
 
 void	printf(const char *, ...)
     __attribute__((__format__(__printf__, 1, 2)));
-int	sprintf(char *, const char *, ...)
-    __attribute__((__format__(__printf__, 2, 3)));
 int	snprintf(char *, size_t, const char *, ...)
     __attribute__((__format__(__printf__, 3, 4)));
 void	vprintf(const char *, va_list)
     __attribute__((__format__(__printf__, 1, 0)));
-int	vsprintf(char *, const char *, va_list)
-    __attribute__((__format__(__printf__, 2, 0)));
 int	vsnprintf(char *, size_t, const char *, va_list)
     __attribute__((__format__(__printf__, 3, 0)));
 void	twiddle(void);

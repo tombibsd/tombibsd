@@ -17,7 +17,7 @@
  * Tom St Denis, tomstdenis@gmail.com, http://libtom.org
  */
 
-/* computes a = 2**b 
+/* computes a = 2**b
  *
  * Simple algorithm which zeroes the int, grows it then just sets one bit
  * as required.
@@ -45,6 +45,6 @@ mp_2expt (mp_int * a, int b)
 }
 #endif
 
-/* Source: /cvs/libtom/libtommath/bn_mp_2expt.c,v */
-/* Revision: 1.4 */
-/* Date: 2006/12/28 01:25:13 */
+/* Source: /cvs/libtom/libtommath/bn_mp_2expt.c,v  */
+/* Revision: 1.4  */
+/* Date: 2006/12/28 01:25:13  */

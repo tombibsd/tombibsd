@@ -96,12 +96,27 @@ static dev_type_dump(rldump);
 static dev_type_size(rlpsize);
 
 const struct bdevsw rl_bdevsw = {
-	rlopen, rlclose, rlstrategy, rlioctl, rldump, rlpsize, D_DISK
+	.d_open = rlopen,
+	.d_close = rlclose,
+	.d_strategy = rlstrategy,
+	.d_ioctl = rlioctl,
+	.d_dump = rldump,
+	.d_psize = rlpsize,
+	.d_flag = D_DISK
 };
 
 const struct cdevsw rl_cdevsw = {
-	rlopen, rlclose, rlread, rlwrite, rlioctl,
-	nostop, notty, nopoll, nommap, nokqfilter, D_DISK
+	.d_open = rlopen,
+	.d_close = rlclose,
+	.d_read = rlread,
+	.d_write = rlwrite,
+	.d_ioctl = rlioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_DISK
 };
 
 #define	MAXRLXFER (RL_BPS * RL_SPT)

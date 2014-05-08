@@ -113,6 +113,7 @@ kauai_attach(device_t parent, device_t self, void *aux)
 	paddr_t regbase, dmabase;
 	int node, reg[5], i;
 	uint32_t intrs[4], intr;
+	char buf[PCI_INTRSTR_LEN];
 
 	sc->sc_wdcdev.sc_atac.atac_dev = self;
 
@@ -161,7 +162,8 @@ kauai_attach(device_t parent, device_t self, void *aux)
 		aprint_error(": unable to map interrupt\n");
 		return;
 	}
-	aprint_normal(": interrupting at %s\n", pci_intr_string(pa->pa_pc, ih));
+	aprint_normal(": interrupting at %s\n", pci_intr_string(pa->pa_pc, ih,
+	    buf, sizeof(buf)));
 
 	sc->sc_wdcdev.regs = wdr = &sc->sc_wdc_regs;
 

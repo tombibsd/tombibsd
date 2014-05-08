@@ -631,10 +631,10 @@ main(int argc, char *argv[])
 			if (sflag)
 				rt_stats(use_sysctl ? 0 : nl[N_RTSTAT].n_value);
 			else {
-				if (!use_sysctl)
-					err(1, "-r is not supported "
-					    "for post-mortem analysis.");
-				p_rttables(af);
+				if (use_sysctl)
+					p_rttables(af);
+				else
+					routepr(nl[N_RTREE].n_value);
 			}
 			break;
 		}

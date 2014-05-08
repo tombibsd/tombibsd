@@ -402,6 +402,7 @@ pmap_pte_flush(void)
 
 struct vm_map;
 struct trapframe;
+struct pcb;
 
 int	pmap_exec_fixup(struct vm_map *, struct trapframe *, struct pcb *);
 void	pmap_ldt_cleanup(struct lwp *);

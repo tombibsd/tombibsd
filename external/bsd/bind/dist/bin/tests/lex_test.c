@@ -83,10 +83,6 @@ main(int argc, char *argv[]) {
 	unsigned int options = 0;
 	int done = 0;
 
-	isc__mem_register();
-	isc__task_register();
-	isc__timer_register();
-	isc__socket_register();
 	while ((c = isc_commandline_parse(argc, argv, "qmcs")) != -1) {
 		switch (c) {
 		case 'q':

@@ -55,6 +55,7 @@ typedef	void (*ite_windowmover)(struct ite_data *, int, int, int, int, int,
 
 struct ite_data {
 	int	alive;
+	int	scode;			/* DIO selectcode or SGC slot # */
 	struct  itesw *isw;
 	void 	*regbase, *fbbase;
 	short	curx, cury;
@@ -139,6 +140,13 @@ void rbox_init(struct ite_data *);
 void dvbox_init(struct ite_data *);
 void hyper_init(struct ite_data *);
 void tvrx_init(struct ite_data *);
+
+void sti_iteinit_sgc(struct ite_data *);
+void sti_cursor(struct ite_data *, int);
+void sti_putc(struct ite_data *, int, int, int);
+void sti_clear(struct ite_data *, int, int, int, int);
+void sti_scroll(struct ite_data *);
+
 void dumb_init(struct ite_data *);
 void dumb_cursor(struct ite_data *, int);
 void dumb_putc(struct ite_data *, int, int, int);

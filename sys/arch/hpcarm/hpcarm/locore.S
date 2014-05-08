@@ -63,7 +63,7 @@ ASENTRY_NP(start)
 
 	/* Disable PID virtual address mapping */
 	mov	r4, #0
-	mcr	15, 0, r4, c13, c0, 0
+	mcr	p15, 0, r4, c13, c0, 0
 
 #if defined(CPU_XSCALE_PXA250) || defined(CPU_XSCALE_PXA270)
 /*
@@ -211,8 +211,8 @@ ENTRY_NP(cpu_reset)
 	 * Hurl ourselves into the ROM
 	 */
 	mov	r0, #(CPU_CONTROL_32BP_ENABLE | CPU_CONTROL_32BD_ENABLE)
-	mcr     15, 0, r0, c1, c0, 0
-	mcr     15, 0, r0, c8, c7, 0
+	mcr     p15, 0, r0, c1, c0, 0
+	mcr     p15, 0, r0, c8, c7, 0
 	mov     pc, r4
 
 	/*
@@ -263,9 +263,9 @@ ENTRY(dumpsys)
         add     r2, r0, #(PCB_R8)
         stmia   r2, {r8-r13}
 #else
-        strd    r8, [r0, #(PCB_R8)]
-        strd    r10, [r0, #(PCB_R10)]
-        strd    r12, [r0, #(PCB_R12)]
+        strd    r8, r9, [r0, #(PCB_R8)]
+        strd    r10, r11, [r0, #(PCB_R10)]
+        strd    r12, r13, [r0, #(PCB_R12)]
 #endif
 
 	bl	_C_LABEL(dodumpsys)

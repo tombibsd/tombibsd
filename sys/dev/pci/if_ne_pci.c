@@ -198,6 +198,7 @@ ne_pci_attach(device_t parent, device_t self, void *aux)
 	const struct ne_pci_product *npp;
 	pci_intr_handle_t ih;
 	pcireg_t csr;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	npp = ne_pci_lookup(pa);
 	if (npp == NULL) {
@@ -260,7 +261,7 @@ ne_pci_attach(device_t parent, device_t self, void *aux)
 		aprint_error_dev(dsc->sc_dev, "couldn't map interrupt\n");
 		return;
 	}
-	intrstr = pci_intr_string(pc, ih);
+	intrstr = pci_intr_string(pc, ih, intrbuf, sizeof(intrbuf));
 	psc->sc_ih = pci_intr_establish(pc, ih, IPL_NET, dp8390_intr, dsc);
 	if (psc->sc_ih == NULL) {
 		aprint_error_dev(dsc->sc_dev, "couldn't establish interrupt");

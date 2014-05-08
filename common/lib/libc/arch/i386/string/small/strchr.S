@@ -49,3 +49,4 @@ ENTRY(strchr)
 	xorl	%eax, %eax
 3:
 	ret
+END(strchr)

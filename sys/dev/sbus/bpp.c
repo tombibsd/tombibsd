@@ -126,8 +126,17 @@ dev_type_poll(bpppoll);
 dev_type_kqfilter(bppkqfilter);
 
 const struct cdevsw bpp_cdevsw = {
-	bppopen, bppclose, noread, bppwrite, bppioctl,
-	nostop, notty, bpppoll, nommap, bppkqfilter, D_TTY
+	.d_open = bppopen,
+	.d_close = bppclose,
+	.d_read = noread,
+	.d_write = bppwrite,
+	.d_ioctl = bppioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = bpppoll,
+	.d_mmap = nommap,
+	.d_kqfilter = bppkqfilter,
+	.d_flag = D_TTY
 };
 
 #define BPPUNIT(dev)	(minor(dev))

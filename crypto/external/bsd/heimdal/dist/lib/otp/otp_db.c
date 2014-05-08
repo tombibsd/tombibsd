@@ -35,7 +35,7 @@
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
-__RCSID("$NetBSD$");
+__RCSID("NetBSD");
 #endif
 
 #include "otp_locl.h"

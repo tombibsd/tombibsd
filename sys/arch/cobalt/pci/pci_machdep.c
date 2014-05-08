@@ -183,16 +183,14 @@ pci_intr_map(const struct pci_attach_args *pa, pci_intr_handle_t *ihp)
 }
 
 const char *
-pci_intr_string(pci_chipset_tag_t pc, pci_intr_handle_t ih)
+pci_intr_string(pci_chipset_tag_t pc, pci_intr_handle_t ih, char *buf, size_t len)
 {
-	static char irqstr[8];
-
 	if (ih >= NICU_INT)
-		sprintf(irqstr, "level %d", ih - NICU_INT);
+		snprintf(buf, len, "level %d", ih - NICU_INT);
 	else
-		sprintf(irqstr, "irq %d", ih);
+		snprintf(buf, len, "irq %d", ih);
 
-	return irqstr;
+	return buf;
 }
 
 const struct evcnt *

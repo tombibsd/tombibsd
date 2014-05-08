@@ -52,8 +52,17 @@ dev_type_tty(nullcndev_tty);
 static int	nullcons_newdev(struct consdev *);
 
 const struct cdevsw nullcn_devsw = {
-	nullopen, nullclose, nullcndev_read, nullwrite, nullcndev_ioctl,
-	nullstop, nullcndev_tty, nopoll, nommap, ttykqfilter, D_TTY
+	.d_open = nullopen,
+	.d_close = nullclose,
+	.d_read = nullcndev_read,
+	.d_write = nullwrite,
+	.d_ioctl = nullcndev_ioctl,
+	.d_stop = nullstop,
+	.d_tty = nullcndev_tty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = ttykqfilter,
+	.d_flag = D_TTY
 };
 
 /*

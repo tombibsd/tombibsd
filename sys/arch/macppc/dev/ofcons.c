@@ -79,8 +79,17 @@ dev_type_tty(ofctty);
 dev_type_poll(ofcpoll);
 
 const struct cdevsw macofcons_cdevsw = {
-	ofcopen, ofcclose, ofcread, ofcwrite, ofcioctl,
-	nostop, ofctty, ofcpoll, nommap, ttykqfilter, D_TTY
+	.d_open = ofcopen,
+	.d_close = ofcclose,
+	.d_read = ofcread,
+	.d_write = ofcwrite,
+	.d_ioctl = ofcioctl,
+	.d_stop = nostop,
+	.d_tty = ofctty,
+	.d_poll = ofcpoll,
+	.d_mmap = nommap,
+	.d_kqfilter = ttykqfilter,
+	.d_flag = D_TTY
 };
 
 /* For polled ADB mode */

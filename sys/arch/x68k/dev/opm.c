@@ -87,7 +87,7 @@ opm_attach(device_t parent, device_t self, void *aux)
 {
 	struct opm_softc *sc = device_private(self);
 	struct intio_attach_args *ia = aux;
-	int r;
+	int r __diagused;
 
 	aprint_normal("\n");
 	ia->ia_size = 0x2000;

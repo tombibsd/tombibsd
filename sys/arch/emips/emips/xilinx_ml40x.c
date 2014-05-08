@@ -38,6 +38,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/param.h>
 #include <sys/systm.h>
 #include <sys/device.h>
+#include <sys/cpu.h>
 
 #include <uvm/uvm_extern.h>
 
@@ -100,7 +101,8 @@ xilinx_ml40x_init(void)
 	//cpu_mhz = 10;
 	cpuspeed = 8; /* xxx */
 
-	sprintf(cpu_model, "Xilinx ML%s (eMIPS)", (systype == XS_ML40x) ? "40x" : "50x");
+	cpu_setmodel("Xilinx ML%s (eMIPS)",
+	    (systype == XS_ML40x) ? "40x" : "50x");
 
 	ipl_sr_map = xilinx_ml40x_ipl_sr_map;
 }

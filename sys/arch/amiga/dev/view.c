@@ -80,8 +80,17 @@ dev_type_ioctl(viewioctl);
 dev_type_mmap(viewmmap);
 
 const struct cdevsw view_cdevsw = {
-	viewopen, viewclose, nullread, nullwrite, viewioctl,
-	nostop, notty, nopoll, viewmmap, nokqfilter,
+	.d_open = viewopen,
+	.d_close = viewclose,
+	.d_read = nullread,
+	.d_write = nullwrite,
+	.d_ioctl = viewioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = viewmmap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = 0
 };
 
 /*

@@ -88,8 +88,8 @@ ENTRY(longjmp)
 	moveq	#1,%d0		/* else make non-zero */
 ok:
 	moveml	28(%a0),#0x3CFC /* restore non-scratch regs */
-	movl	%a0,-(%sp)	 /* let sigreturn */
-	jbsr	PIC_PLT(_C_LABEL(sigreturn)) /*  finish for us */
+	movl	%a0,-(%sp)	/* let sigreturn */
+	trap	#1		/* finish via compat_13_sigreturn13() */
 
 botch:
 	jbsr	PIC_PLT(_C_LABEL(longjmperror))

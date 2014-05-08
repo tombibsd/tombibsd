@@ -1399,7 +1399,7 @@ s32 ixgbe_write_i2c_byte_generic(struct ixgbe_hw *hw, u8 byte_offset,
                                  u8 dev_addr, u8 data)
 {
 	s32 status = IXGBE_SUCCESS;
-	u32 max_retry = 1;
+	u32 max_retry = 2;
 	u32 retry = 0;
 	u16 swfw_mask = 0;
 

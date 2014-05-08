@@ -1,6 +1,5 @@
 #	$NetBSD$
 #
-# XXX XXX XXX netbsd xsrc xfree 4.5 freetype used "major=9"!
-#
-major=7
-minor=4
+major=17
+minor=2
+teeny=11

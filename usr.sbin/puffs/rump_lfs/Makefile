@@ -13,6 +13,8 @@ RUMP_DISKFS=
 
 CPPFLAGS+=	-DUSE_RUMP -DLFS_CLEANER_AS_LIB
 
+CWARNFLAGS.clang+=	-Wno-error=absolute-value
+
 .include "../../../libexec/lfs_cleanerd/Makefile.inc"
 
 #DBG=-g

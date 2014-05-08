@@ -35,8 +35,8 @@
 GLOBAL(vectab)
 	.long	0x4ef80000	/* 0: jmp 0x0000:w (unused reset SSP) */
 	VECTOR_UNUSED		/* 1: NOT USED (reset PC) */
-	VECTOR(buserr)		/* 2: bus error */
-	VECTOR(addrerr)		/* 3: address error */
+	VECTOR_UNUSED		/* 2: bus error (set per CPU types) */
+	VECTOR_UNUSED		/* 3: address error (set per CPU types) */
 	VECTOR(illinst)		/* 4: illegal instruction */
 	VECTOR(zerodiv)		/* 5: zero divide */
 	VECTOR(chkinst)		/* 6: CHK instruction */

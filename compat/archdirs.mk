@@ -25,3 +25,7 @@ ARCHDIR_SUBDIR=	arm/oabi arm/eabi
 .if (${MACHINE_ARCH} == "mips64eb" || ${MACHINE_ARCH} == "mips64el")
 ARCHDIR_SUBDIR=	mips64/64 mips64/o32
 .endif
+
+.if ${MACHINE_ARCH} == "powerpc64"
+ARCHDIR_SUBDIR= powerpc64/powerpc
+.endif

@@ -1058,8 +1058,11 @@ sys_recvmmsg(struct lwp *l, const struct sys_recvmmsg_args *uap,
 
 		error = do_sys_recvmsg_so(l, s, so, msg, &from,
 		    msg->msg_control != NULL ? &control : NULL, retval);
-		if (error)
+		if (error) {
+			if (error == EAGAIN && dg > 0)
+				error = 0;
 			break;
+		}
 
 		if (msg->msg_control != NULL)
 			error = copyout_msg_control(l, msg, control);

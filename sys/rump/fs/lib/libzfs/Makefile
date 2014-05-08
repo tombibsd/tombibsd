@@ -11,7 +11,7 @@ LIB=	rumpfs_zfs
 CPPFLAGS+=      -I${RUMPTOP}/librump/rumpkern -I${RUMPTOP}/librump/rumpvfs\
 		-I${RUMPTOP}/librump/rumpdev
 
-SRCS+=	component.c
+SRCS+=	zfs_component.c
 
 .include <bsd.lib.mk>
 .include <bsd.klinks.mk>

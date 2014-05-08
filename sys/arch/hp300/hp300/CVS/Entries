@@ -1,5 +1,5 @@
-/autoconf.c/1.102/Thu Oct 24 10:28:57 2013/-kk/
-/bus_space.c/1.20/Sat Feb 12 05:15:39 2011/-kk/
+/autoconf.c/1.105/Thu Apr 24 14:30:23 2014/-kk/
+/bus_space.c/1.21/Fri Apr 11 02:03:30 2014/-kk/
 /clock.c/1.40/Tue Feb  8 20:20:13 2011/-kk/
 /clockreg.h/1.11/Tue Feb  8 20:20:13 2011/-kk/
 /disksubr.c/1.27/Wed Jan  2 11:48:25 2008/-kk/
@@ -8,8 +8,8 @@
 /intr.c/1.40/Mon Dec 20 00:25:33 2010/-kk/
 /leds.c/1.20/Tue Feb  8 20:20:13 2011/-kk/
 /leds.h/1.5/Tue Feb  8 20:20:13 2011/-kk/
-/locore.s/1.167/Thu Feb 13 15:35:50 2014/-kk/
-/machdep.c/1.227/Thu Oct 24 10:28:57 2013/-kk/
+/locore.s/1.170/Tue Mar 25 02:35:20 2014/-kk/
+/machdep.c/1.229/Thu Apr 24 14:30:23 2014/-kk/
 /pmap_bootstrap.c/1.58/Thu Oct 24 10:28:57 2013/-kk/
 /trap.c/1.150/Thu Oct 24 10:28:57 2013/-kk/
 /vectors.s/1.19/Sun Dec 11 12:17:18 2005/-kk/

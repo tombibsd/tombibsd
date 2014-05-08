@@ -9,7 +9,7 @@ IOCONF=	UMASS.ioconf
 .if ${MACHINE} == "i386"
 SRCS=	umass.c umass_isdata.c umass_quirks.c umass_scsipi.c
 
-SRCS+=	component.c
+SRCS+=	umass_component.c
 .else
 SRCS=	dummy.c
 .endif

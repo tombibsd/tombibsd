@@ -95,14 +95,12 @@ cpu_rootconf(void)
 
 	if ((boothowto & RB_ASKNAME) != 0) {
 		int md_major, i;
-		dev_t md_dev;
 		cfdata_t cf;
 		struct md_softc *sc;
 
 		md_major = devsw_name2blk("md", NULL, 0);
 		if (md_major >= 0) {
 			for (i = 0; i < RAMD_NDEV; i++) {
-				md_dev = MAKEDISKDEV(md_major, i, RAW_PART);
 				cf = malloc(sizeof(*cf), M_DEVBUF,
 				    M_ZERO|M_WAITOK);
 				if (cf == NULL)

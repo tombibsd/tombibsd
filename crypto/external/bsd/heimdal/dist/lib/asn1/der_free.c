@@ -37,7 +37,7 @@
 
 #include "der_locl.h"
 
-__RCSID("$NetBSD$");
+__RCSID("NetBSD");
 
 void
 der_free_general_string (heim_general_string *str)

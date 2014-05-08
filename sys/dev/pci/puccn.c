@@ -122,11 +122,13 @@ pucprobe_doit(struct consdev *cn)
 resume_scan:
 		for (; func < nfunctions; func++)  {
 			pa.pa_tag = pci_make_tag(pa.pa_pc, bus, dev, func);
-			reg = pci_conf_read(pa.pa_pc, pa.pa_tag, PCI_CLASS_REG);
+			reg = pci_conf_read(pa.pa_pc, pa.pa_tag,
+			    PCI_CLASS_REG);
 			if (PCI_CLASS(reg)  == PCI_CLASS_COMMUNICATIONS
 			    && PCI_SUBCLASS(reg)
 			       == PCI_SUBCLASS_COMMUNICATIONS_SERIAL) {
-				pa.pa_id = pci_conf_read(pa.pa_pc, pa.pa_tag, PCI_ID_REG);
+				pa.pa_id = pci_conf_read(pa.pa_pc, pa.pa_tag,
+				    PCI_ID_REG);
 				subsys = pci_conf_read(pa.pa_pc, pa.pa_tag,
 				    PCI_SUBSYS_ID_REG);
 				foundport = 1;
@@ -164,8 +166,7 @@ resume_scan:
 	 * We found a device and it's on the puc table. Set the tag and
 	 * the base address.
 	 */
-	for (i = 0; PUC_PORT_VALID(desc, i); i++)
-	{
+	for (i = 0; PUC_PORT_VALID(desc, i); i++) {
 		if (desc->ports[i].type != PUC_PORT_TYPE_COM)
 			continue;
 		puccnflags = desc->ports[i].flags;
@@ -204,18 +205,15 @@ resume_scan:
 }
 
 #ifdef KGDB
-void comgdbprobe(struct consdev *);
-void comgdbinit(struct consdev *);
-
 void
-comgdbprobe(struct consdev *cn)
+puc_gdbprobe(struct consdev *cn)
 {
 
 	pucgdbbase = pucprobe_doit(cn);
 }
 
 void
-comgdbinit(struct consdev *cn)
+puc_gdbinit(struct consdev *cn)
 {
 
 	if (pucgdbbase == 0)

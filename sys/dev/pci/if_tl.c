@@ -295,6 +295,7 @@ tl_pci_attach(device_t parent, device_t self, void *aux)
 	int reg_io, reg_mem;
 	pcireg_t reg10, reg14;
 	pcireg_t csr;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	sc->sc_dev = self;
 	aprint_normal("\n");
@@ -391,7 +392,7 @@ tl_pci_attach(device_t parent, device_t self, void *aux)
 		aprint_error_dev(self, "couldn't map interrupt\n");
 		return;
 	}
-	intrstr = pci_intr_string(pa->pa_pc, intrhandle);
+	intrstr = pci_intr_string(pa->pa_pc, intrhandle, intrbuf, sizeof(intrbuf));
 	sc->tl_if.if_softc = sc;
 	sc->tl_ih = pci_intr_establish(pa->pa_pc, intrhandle, IPL_NET,
 	    tl_intr, sc);

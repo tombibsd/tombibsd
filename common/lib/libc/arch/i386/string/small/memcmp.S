@@ -48,3 +48,4 @@ ENTRY(memcmp)
 1:
 	decl %eax
 	ret
+END(memcmp)

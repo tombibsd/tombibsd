@@ -1,0 +1,10 @@
+#	$NetBSD$
+#
+#	MIRABOX_INSTALL -- MIRABOX kernel with installation-sized
+#	ramdisk
+#
+
+include "arch/evbarm/conf/MIRABOX"
+include "arch/evbarm/conf/INSTALL"
+
+options BOOTHOWTO=RB_SINGLE

@@ -1150,6 +1150,8 @@ acpicpu_md_pstate_sysctl_all(SYSCTLFN_ARGS)
 		if (sc->sc_pstate[i].ps_freq == 0)
 			continue;
 
+		if (len >= sizeof(buf))
+			break;
 		len += snprintf(buf + len, sizeof(buf) - len, "%u%s",
 		    sc->sc_pstate[i].ps_freq,
 		    i < (sc->sc_pstate_count - 1) ? " " : "");

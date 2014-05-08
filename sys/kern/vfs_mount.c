@@ -69,6 +69,8 @@
 #include <sys/cdefs.h>
 __KERNEL_RCSID(0, "$NetBSD$");
 
+#define _VFS_VNODE_PRIVATE
+
 #include <sys/param.h>
 #include <sys/kernel.h>
 
@@ -337,42 +339,80 @@ vfs_unbusy(struct mount *mp, bool keepref, struct mount **nextp)
 	}
 }
 
-/*
- * Insert a marker vnode into a mount's vnode list, after the
- * specified vnode.  mntvnode_lock must be held.
- */
+struct vnode_iterator {
+	struct vnode vi_vnode;
+}; 
+
 void
-vmark(vnode_t *mvp, vnode_t *vp)
+vfs_vnode_iterator_init(struct mount *mp, struct vnode_iterator **vip)
 {
-	struct mount *mp = mvp->v_mount;
+	struct vnode *vp;
 
-	KASSERT(mutex_owned(&mntvnode_lock));
-	KASSERT((mvp->v_iflag & VI_MARKER) != 0);
-	KASSERT(vp->v_mount == mp);
+	vp = vnalloc(mp);
 
-	TAILQ_INSERT_AFTER(&mp->mnt_vnodelist, vp, mvp, v_mntvnodes);
+	mutex_enter(&mntvnode_lock);
+	TAILQ_INSERT_HEAD(&mp->mnt_vnodelist, vp, v_mntvnodes);
+	vp->v_usecount = 1;
+	mutex_exit(&mntvnode_lock);
+
+	*vip = (struct vnode_iterator *)vp;
 }
 
-/*
- * Remove a marker vnode from a mount's vnode list, and return
- * a pointer to the next vnode in the list.  mntvnode_lock must
- * be held.
- */
-vnode_t *
-vunmark(vnode_t *mvp)
+void
+vfs_vnode_iterator_destroy(struct vnode_iterator *vi)
 {
+	struct vnode *mvp = &vi->vi_vnode;
+
+	mutex_enter(&mntvnode_lock);
+	KASSERT(ISSET(mvp->v_iflag, VI_MARKER));
+	if (mvp->v_usecount != 0)
+		TAILQ_REMOVE(&mvp->v_mount->mnt_vnodelist, mvp, v_mntvnodes);
+	mutex_exit(&mntvnode_lock);
+	vnfree(mvp);
+}
+
+bool
+vfs_vnode_iterator_next(struct vnode_iterator *vi, struct vnode **vpp)
+{
+	struct vnode *mvp = &vi->vi_vnode;
 	struct mount *mp = mvp->v_mount;
-	vnode_t *vp;
+	struct vnode *vp;
+	int error;
 
-	KASSERT(mutex_owned(&mntvnode_lock));
-	KASSERT((mvp->v_iflag & VI_MARKER) != 0);
+	KASSERT(ISSET(mvp->v_iflag, VI_MARKER));
 
-	vp = TAILQ_NEXT(mvp, v_mntvnodes);
-	TAILQ_REMOVE(&mp->mnt_vnodelist, mvp, v_mntvnodes); 
+	do {
+		mutex_enter(&mntvnode_lock);
+		vp = TAILQ_NEXT(mvp, v_mntvnodes);
+		TAILQ_REMOVE(&mp->mnt_vnodelist, mvp, v_mntvnodes);
+		mvp->v_usecount = 0;
+		if (vp == NULL) {
+	       		mutex_exit(&mntvnode_lock);
+			*vpp = NULL;
+	       		return false;
+		}
 
-	KASSERT(vp == NULL || vp->v_mount == mp);
+		mutex_enter(vp->v_interlock);
+		while ((vp->v_iflag & VI_MARKER) != 0) {
+			mutex_exit(vp->v_interlock);
+			vp = TAILQ_NEXT(vp, v_mntvnodes);
+			if (vp == NULL) {
+				mutex_exit(&mntvnode_lock);
+				*vpp = NULL;
+				return false;
+			}
+			mutex_enter(vp->v_interlock);
+		}
 
-	return vp;
+		TAILQ_INSERT_AFTER(&mp->mnt_vnodelist, vp, mvp, v_mntvnodes);
+		mvp->v_usecount = 1;
+		mutex_exit(&mntvnode_lock);
+		error = vget(vp, 0);
+		KASSERT(error == 0 || error == ENOENT);
+	} while (error != 0);
+
+	*vpp = vp;
+	return true;
 }
 
 /*
@@ -426,99 +466,78 @@ struct ctldebug debug1 = { "busyprt", &busyprt };
 #endif
 
 static vnode_t *
-vflushnext(vnode_t *mvp, int *when)
+vflushnext(struct vnode_iterator *marker, int *when)
 {
+	struct vnode *vp;
 
 	if (hardclock_ticks > *when) {
-		mutex_exit(&mntvnode_lock);
 		yield();
-		mutex_enter(&mntvnode_lock);
 		*when = hardclock_ticks + hz / 10;
 	}
-	return vunmark(mvp);
+	if (vfs_vnode_iterator_next(marker, &vp))
+		return vp;
+	return NULL;
 }
 
 int
 vflush(struct mount *mp, vnode_t *skipvp, int flags)
 {
-	vnode_t *vp, *mvp;
+	vnode_t *vp;
+	struct vnode_iterator *marker;
 	int busy = 0, when = 0;
 
 	/* First, flush out any vnode references from vrele_list. */
 	vrele_flush();
 
-	/* Allocate a marker vnode. */
-	mvp = vnalloc(mp);
-
-	/*
-	 * NOTE: not using the TAILQ_FOREACH here since in this loop vgone()
-	 * and vclean() are called.
-	 */
-	mutex_enter(&mntvnode_lock);
-	for (vp = TAILQ_FIRST(&mp->mnt_vnodelist);
-	    vp != NULL;
-	    vp = vflushnext(mvp, &when)) {
-		vmark(mvp, vp);
-		if (vp->v_mount != mp || vismarker(vp))
-			continue;
+	vfs_vnode_iterator_init(mp, &marker);
+	while ((vp = vflushnext(marker, &when)) != NULL) {
 		/*
 		 * Skip over a selected vnode.
 		 */
-		if (vp == skipvp)
-			continue;
-		/*
-		 * First try to recycle the vnode.
-		 */
-		if (vrecycle(vp, &mntvnode_lock)) {
-			mutex_enter(&mntvnode_lock);
-			continue;
-		}
-		mutex_enter(vp->v_interlock);
-		/*
-		 * Ignore clean but still referenced vnodes.
-		 */
-		if ((vp->v_iflag & VI_CLEAN) != 0) {
-			mutex_exit(vp->v_interlock);
+		if (vp == skipvp) {
+			vrele(vp);
 			continue;
 		}
 		/*
 		 * Skip over a vnodes marked VSYSTEM.
 		 */
 		if ((flags & SKIPSYSTEM) && (vp->v_vflag & VV_SYSTEM)) {
-			mutex_exit(vp->v_interlock);
+			vrele(vp);
 			continue;
 		}
 		/*
 		 * If WRITECLOSE is set, only flush out regular file
 		 * vnodes open for writing.
 		 */
-		if ((flags & WRITECLOSE) &&
-		    (vp->v_writecount == 0 || vp->v_type != VREG)) {
+		if ((flags & WRITECLOSE) && vp->v_type == VREG) {
+			mutex_enter(vp->v_interlock);
+			if (vp->v_writecount == 0) {
+				mutex_exit(vp->v_interlock);
+				vrele(vp);
+				continue;
+			}
 			mutex_exit(vp->v_interlock);
-			continue;
 		}
 		/*
+		 * First try to recycle the vnode.
+		 */
+		if (vrecycle(vp))
+			continue;
+		/*
 		 * If FORCECLOSE is set, forcibly close the vnode.
-		 * For block or character devices, revert to an
-		 * anonymous device.  For all other files, just
-		 * kill them.
 		 */
 		if (flags & FORCECLOSE) {
-			mutex_exit(&mntvnode_lock);
-			if (vget(vp, 0) == 0)
-				vgone(vp);
-			mutex_enter(&mntvnode_lock);
+			vgone(vp);
 			continue;
 		}
 #ifdef DEBUG
 		if (busyprt)
 			vprint("vflush: busy vnode", vp);
 #endif
-		mutex_exit(vp->v_interlock);
+		vrele(vp);
 		busy++;
 	}
-	mutex_exit(&mntvnode_lock);
-	vnfree(mvp);
+	vfs_vnode_iterator_destroy(marker);
 	if (busy)
 		return (EBUSY);
 	return (0);

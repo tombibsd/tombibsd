@@ -1058,7 +1058,7 @@ sprint0(int width, char prefix, char base, int value)
 	*pos++ = base;
 	*pos++ = (char) 0;
 	
-	sprintf(scrap, format, value);
+	snprintf(scrap, sizeof(scrap), format, value);
 	length = strlen(scrap);
 
 	return scrap+length-width;

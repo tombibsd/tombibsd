@@ -89,7 +89,7 @@ obioohci_match(device_t parent, cfdata_t cf, void *aux)
 	if (obio->obio_addr != OHCI1_BASE_OMAP3)
 		return 0;
 #endif
-#if defined(OMAP4)
+#if defined(OMAP4) || defined(OMAP5)
 	if (obio->obio_addr != OHCI1_BASE_OMAP4)
 		return 0;
 #endif

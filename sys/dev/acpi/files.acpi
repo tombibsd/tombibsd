@@ -206,4 +206,8 @@ device	fujhk: sysmon_power
 attach	fujhk at acpinodebus
 file	dev/acpi/fujhk_acpi.c		fujhk
 
+# Apple SMC
+attach	applesmc at acpinodebus with apple_smc_acpi
+file	dev/acpi/apple_smc_acpi.c	apple_smc_acpi
+
 include	"dev/acpi/wmi/files.wmi"

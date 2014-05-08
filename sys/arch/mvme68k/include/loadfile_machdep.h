@@ -59,7 +59,7 @@
 #define WARN(a)			warn a
 #define PROGRESS(a)		/* nothing */
 #define ALLOC(a)		malloc(a)
-#define DEALLOC(a, b)		free(a)
+#define DEALLOC(a, b)		free(a), __USE(b)
 #define OKMAGIC(a)		((a) == OMAGIC)
 
 #endif

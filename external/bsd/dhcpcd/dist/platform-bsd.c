@@ -56,6 +56,12 @@
 #  define SYS_NMLN 256
 #endif
 
+#ifndef HW_MACHINE_ARCH
+#  ifdef HW_MODEL	/* OpenBSD */
+#    define HW_MACHINE_ARCH HW_MODEL
+#  endif
+#endif
+
 int
 hardware_platform(char *str, size_t len)
 {
@@ -111,7 +117,7 @@ ipv6_ra_flush(void)
 	s = socket(AF_INET6, SOCK_DGRAM, 0);
 	if (s == -1)
 		return -1;
-	strcpy(dummy, "lo0");
+	strlcpy(dummy, "lo0", sizeof(dummy));
 	if (ioctl(s, SIOCSRTRFLUSH_IN6, (caddr_t)&dummy) == -1)
 		syslog(LOG_ERR, "SIOSRTRFLUSH_IN6: %m");
 	if (ioctl(s, SIOCSPFXFLUSH_IN6, (caddr_t)&dummy) == -1)

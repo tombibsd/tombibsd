@@ -13,7 +13,11 @@ file	arch/arm/marvell/mvsoc_dma.c
 
 file	arch/arm/arm32/irq_dispatch.S
 
+# Some SoC(ARMADAXP) reports false DeviceID. 
 defflag opt_mvsoc.h				ORION KIRKWOOD MV78XX0 ARMADAXP
+						MVSOC_CONSOLE_EARLY
+defparam opt_mvsoc.h				MVSOC_INTERREGS_PBASE
+						MVSOC_FIXUP_DEVID MEMSIZE
 file	arch/arm/marvell/mvsoc_intr.c
 file	arch/arm/marvell/orion.c		orion
 file	arch/arm/marvell/kirkwood.c		kirkwood

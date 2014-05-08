@@ -303,14 +303,14 @@ vr_init(void)
 	platform.reboot		= vr_reboot;
 
 #if NVRBCU > 0
-	sprintf(hpcmips_cpuname, "NEC %s rev%d.%d %d.%03dMHz", 
+	cpuname_printf("NEC %s rev%d.%d %d.%03dMHz", 
 		vrbcu_vrip_getcpuname(),
 		vrbcu_vrip_getcpumajor(),
 		vrbcu_vrip_getcpuminor(),
 		vrbcu_vrip_getcpuclock() / 1000000,
 		(vrbcu_vrip_getcpuclock() % 1000000) / 1000);
 #else
-	sprintf(hpcmips_cpuname, "NEC VR41xx");
+	cpuname_printf("NEC VR41xx");
 #endif
 }
 

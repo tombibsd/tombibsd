@@ -14,7 +14,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
  * Only used when procfs is mounted with -o linux.
  */
 int
-procfs_getcpuinfstr(char *buf, int *len)
+procfs_getcpuinfstr(char *buf, size_t *len)
 {
 	*len = 0;
 

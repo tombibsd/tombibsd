@@ -57,7 +57,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/socket.h>
 #include <sys/endian.h>
 #include <sys/ioctl.h>
-#include <sys/simplelock.h>
 #include <sys/syslog.h>
 
 #include <sys/bus.h>

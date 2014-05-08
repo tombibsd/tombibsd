@@ -291,6 +291,7 @@ cz_attach(device_t parent, device_t self, void *aux)
 	struct cztty_softc *sc;
 	struct tty *tp;
 	int i;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	aprint_naive(": Multi-port serial controller\n");
 	aprint_normal(": Cyclades-Z multiport serial\n");
@@ -342,7 +343,7 @@ cz_attach(device_t parent, device_t self, void *aux)
 		cz->cz_ih = NULL;
 		goto polling_mode;
 	} else {
-		intrstr = pci_intr_string(pa->pa_pc, ih);
+		intrstr = pci_intr_string(pa->pa_pc, ih, intrbuf, sizeof(intrbuf));
 		cz->cz_ih = pci_intr_establish(pa->pa_pc, ih, IPL_TTY,
 		    cz_intr, cz);
 	}
@@ -1535,8 +1536,17 @@ cztty_diag(void *arg)
 }
 
 const struct cdevsw cz_cdevsw = {
-	czttyopen, czttyclose, czttyread, czttywrite, czttyioctl,
-	    czttystop, czttytty, czttypoll, nommap, ttykqfilter, D_TTY
+	.d_open = czttyopen,
+	.d_close = czttyclose,
+	.d_read = czttyread,
+	.d_write = czttywrite,
+	.d_ioctl = czttyioctl,
+	.d_stop = czttystop,
+	.d_tty = czttytty,
+	.d_poll = czttypoll,
+	.d_mmap = nommap,
+	.d_kqfilter = ttykqfilter,
+	.d_flag = D_TTY
 };
 
 /*

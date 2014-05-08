@@ -74,12 +74,12 @@ userret(struct lwp *l, struct trapframe *tf)
 #endif
 #ifdef PPC_BOOKE
 	/*
-	 * BookE doesn't PSL_SE but it does have a debug instruction completion
-	 * exception but it needs PSL_DE to fire.  Since we don't want it to
-	 * happen in the kernel, we must disable PSL_DE and let it get
-	 * restored by rfi/rfci.
+	 * BookE doesn't have PSL_SE but it does have a debug instruction
+	 * completion exception but it needs PSL_DE to fire.  Instead we
+	 * use IAC1/IAC2 to match the next PC.
 	 */
 	if (__predict_false(tf->tf_srr1 & PSL_SE)) {
+		tf->tf_srr1 &= ~PSL_SE;
 		extern void booke_sstep(struct trapframe *); /* ugly */
 		booke_sstep(tf);
 	}

@@ -72,6 +72,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/kernel.h>
 #include <sys/proc.h>
 #include <sys/buf.h>
+#include <sys/cpu.h>
 #include <sys/reboot.h>
 #include <sys/device.h>
 #include <sys/conf.h>
@@ -221,7 +222,6 @@ u_int	cpu_ticksnum, cpu_ticksdenom, cpu_hzticks;
 
 /* exported info */
 char	machine[] = MACHINE;
-char	cpu_model[128];
 const struct hppa_cpu_info *hppa_cpu_info;
 enum hppa_cpu_type cpu_type;
 int	cpu_modelno;
@@ -831,7 +831,7 @@ cpuid(void)
 	if (hppa_cpu_ispa20_p())
 		curcpu()->ci_psw |= PSW_O;
 
-	snprintf(cpu_model, sizeof(cpu_model), "HP9000/%s", model);
+	cpu_setmodel("HP9000/%s", model);
 
 #define	LDILDO(t,f) ((t)[0] = (f)[0], (t)[1] = (f)[1]);
 	LDILDO(trap_ep_T_TLB_DIRTY , hppa_cpu_info->tlbdh);
@@ -913,7 +913,7 @@ cpu_startup(void)
 	printf("%s%s", copyright, version);
 
 	/* identify system type */
-	printf("%s\n", cpu_model);
+	printf("%s\n", cpu_getmodel());
 
 	/* Display some memory usage information. */
 	format_bytes(pbuf[0], sizeof(pbuf[0]), ptoa(physmem));
@@ -1862,6 +1862,31 @@ dumpsys(void)
 	}
 }
 
+void
+hppa_setvmspace(struct lwp *l)
+{
+	struct proc *p = l->l_proc;
+	struct trapframe *tf = l->l_md.md_regs;
+	pmap_t pmap = p->p_vmspace->vm_map.pmap;
+	pa_space_t space = pmap->pm_space;
+
+    	if (p->p_md.md_flags & MDP_OLDSPACE) {
+		tf->tf_sr7 = HPPA_SID_KERNEL;
+	} else {
+		tf->tf_sr7 = space;
+	}
+
+	tf->tf_sr2 = HPPA_SID_KERNEL;
+
+	/* Load all of the user's space registers. */
+	tf->tf_sr0 = tf->tf_sr1 = tf->tf_sr3 =
+	tf->tf_sr4 = tf->tf_sr5 = tf->tf_sr6 =
+	tf->tf_iisq_head = tf->tf_iisq_tail = space;
+
+	/* Load the protection regsiters. */
+	tf->tf_pidr1 = tf->tf_pidr2 = pmap->pm_pid;
+}
+
 /*
  * Set registers on exec.
  */
@@ -1870,8 +1895,6 @@ setregs(struct lwp *l, struct exec_package *pack, vaddr_t stack)
 {
 	struct proc *p = l->l_proc;
 	struct trapframe *tf = l->l_md.md_regs;
-	pmap_t pmap = p->p_vmspace->vm_map.pmap;
-	pa_space_t space = pmap->pm_space;
 	struct pcb *pcb = lwp_getpcb(l);
 
 	tf->tf_flags = TFF_SYS|TFF_LAST;
@@ -1881,16 +1904,13 @@ setregs(struct lwp *l, struct exec_package *pack, vaddr_t stack)
 	tf->tf_arg0 = p->p_psstrp;
 	tf->tf_arg1 = tf->tf_arg2 = 0; /* XXX dynload stuff */
 
-	tf->tf_sr7 = HPPA_SID_KERNEL;
+	if (pack->ep_osversion < 699003600) {
+		p->p_md.md_flags |= MDP_OLDSPACE;
+	} else {
+		p->p_md.md_flags = 0;
+	}
 
-	/* Load all of the user's space registers. */
-	tf->tf_sr0 = tf->tf_sr1 = tf->tf_sr2 = tf->tf_sr3 =
-	tf->tf_sr4 = tf->tf_sr5 = tf->tf_sr6 = space;
-
-	tf->tf_iisq_head = tf->tf_iisq_tail = space;
-
-	/* Load the protection regsiters. */
-	tf->tf_pidr1 = tf->tf_pidr2 = pmap->pm_pid;
+	hppa_setvmspace(l);
 
 	/* reset any of the pending FPU exceptions */
 	hppa_fpu_flush(l);

@@ -61,8 +61,17 @@ dev_type_poll(sysmonpoll);
 dev_type_kqfilter(sysmonkqfilter);
 
 const struct cdevsw sysmon_cdevsw = {
-	sysmonopen, sysmonclose, sysmonread, nowrite, sysmonioctl,
-	nostop, notty, sysmonpoll, nommap, sysmonkqfilter, D_OTHER | D_MPSAFE,
+	.d_open = sysmonopen,
+	.d_close = sysmonclose,
+	.d_read = sysmonread,
+	.d_write = nowrite,
+	.d_ioctl = sysmonioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = sysmonpoll,
+	.d_mmap = nommap,
+	.d_kqfilter = sysmonkqfilter,
+	.d_flag = D_OTHER | D_MPSAFE
 };
 
 /*

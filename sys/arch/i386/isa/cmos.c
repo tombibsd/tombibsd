@@ -95,10 +95,17 @@ dev_type_write(cmos_write);
 static void cmos_sum(uint8_t *, int, int, int);
 
 const struct cdevsw cmos_cdevsw = {
-	.d_open = cmos_open, .d_close = nullclose, .d_read = cmos_read,
-	.d_write = cmos_write, .d_ioctl = noioctl,
-	.d_stop = nostop, .d_tty = notty, .d_poll = nopoll, .d_mmap = nommap,
-	.d_kqfilter = nokqfilter, .d_flag = D_OTHER | D_MPSAFE
+	.d_open = cmos_open,
+	.d_close = nullclose,
+	.d_read = cmos_read,
+	.d_write = cmos_write,
+	.d_ioctl = noioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_OTHER | D_MPSAFE
 };
 
 static kmutex_t cmos_lock;

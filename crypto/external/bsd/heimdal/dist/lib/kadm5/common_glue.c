@@ -35,7 +35,7 @@
 
 #include "kadm5_locl.h"
 
-__RCSID("$NetBSD$");
+__RCSID("NetBSD");
 
 #define __CALL(F, P) (*((kadm5_common_context*)server_handle)->funcs.F)P;
 

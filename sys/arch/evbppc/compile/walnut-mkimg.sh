@@ -18,6 +18,7 @@ output=$1; shift
 
 : ${OBJDUMP=objdump}
 : ${OBJCOPY=objcopy}
+: ${STAT=stat}
 
 file=$( file $input )
 case $file in
@@ -36,7 +37,7 @@ case $file in
 	;;
 esac
 
-size=`stat -f '%z' ${input}.bin.$$`
+size=$(${STAT} -f '%z' ${input}.bin.$$)
 size=$(( ( $size + 511 ) / 512 ))
 
 enc()

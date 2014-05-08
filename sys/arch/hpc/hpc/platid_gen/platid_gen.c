@@ -307,7 +307,7 @@ gen_list(node_t* np)
 		case N_ENTRY:
 			if (np->ptr2 == NULL) {
 				char buf[MAXLEN];
-				sprintf(buf, "%s%s",
+				snprintf(buf, sizeof(buf), "%s%s",
 				    nest == 0 ? "" : " ",
 				    np->ptr1);
 		  		np->ptr2 = strdup(buf);

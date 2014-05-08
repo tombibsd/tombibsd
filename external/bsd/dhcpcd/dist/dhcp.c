@@ -154,7 +154,9 @@ get_option(struct dhcpcd_ctx *ctx,
 		if (o == opt) {
 			if (op) {
 				if (!ctx->opt_buffer) {
-					ctx->opt_buffer = malloc(sizeof(*dhcp));
+					ctx->opt_buffer =
+					    malloc(DHCP_OPTION_LEN +
+					    BOOTFILE_LEN + SERVERNAME_LEN);
 					if (ctx->opt_buffer == NULL)
 						return NULL;
 				}
@@ -975,9 +977,8 @@ ssize_t
 write_lease(const struct interface *ifp, const struct dhcp_message *dhcp)
 {
 	int fd;
-	ssize_t bytes = sizeof(*dhcp);
-	const uint8_t *p = dhcp->options;
-	const uint8_t *e = p + sizeof(dhcp->options);
+	ssize_t bytes;
+	const uint8_t *e, *p;
 	uint8_t l;
 	uint8_t o = 0;
 	const struct dhcp_state *state = D_CSTATE(ifp);
@@ -996,6 +997,9 @@ write_lease(const struct interface *ifp, const struct dhcp_message *dhcp)
 		return -1;
 
 	/* Only write as much as we need */
+	p = dhcp->options;
+	e = p + sizeof(dhcp->options);
+	bytes = sizeof(*dhcp);
 	while (p < e) {
 		o = *p;
 		if (o == DHO_END) {
@@ -1060,8 +1064,12 @@ read_lease(struct interface *ifp)
 			free(dhcp);
 			return NULL;
 		}
-		syslog(LOG_DEBUG, "%s: validated using 0x%08" PRIu32,
-		    ifp->name, state->auth.token->secretid);
+		if (state->auth.token)
+			syslog(LOG_DEBUG, "%s: validated using 0x%08" PRIu32,
+			    ifp->name, state->auth.token->secretid);
+		else
+			syslog(LOG_DEBUG, "%s: accepted reconfigure key",
+			    ifp->name);
 	}
 
 	return dhcp;
@@ -1343,7 +1351,7 @@ dhcp_close(struct interface *ifp)
 		state->raw_fd = -1;
 	}
 	if (state->udp_fd != -1) {
-		/* we don't listen to events on the udp */
+		eloop_event_delete(ifp->ctx->eloop, state->udp_fd);
 		close(state->udp_fd);
 		state->udp_fd = -1;
 	}
@@ -1452,8 +1460,8 @@ checksum(const void *data, uint16_t len)
 	return ~sum;
 }
 
-static ssize_t
-dhcp_makeudppacket(uint8_t **p, const uint8_t *data, size_t length,
+static struct udp_dhcp_packet *
+dhcp_makeudppacket(ssize_t *sz, const uint8_t *data, size_t length,
 	struct in_addr source, struct in_addr dest)
 {
 	struct udp_dhcp_packet *udpp;
@@ -1462,7 +1470,7 @@ dhcp_makeudppacket(uint8_t **p, const uint8_t *data, size_t length,
 
 	udpp = calloc(1, sizeof(*udpp));
 	if (udpp == NULL)
-		return -1;
+		return NULL;
 	ip = &udpp->ip;
 	udp = &udpp->udp;
 
@@ -1497,8 +1505,8 @@ dhcp_makeudppacket(uint8_t **p, const uint8_t *data, size_t length,
 	ip->ip_len = htons(sizeof(*ip) + sizeof(*udp) + length);
 	ip->ip_sum = checksum(ip, sizeof(*ip));
 
-	*p = (uint8_t *)udpp;
-	return sizeof(*ip) + sizeof(*udp) + length;
+	*sz = sizeof(*ip) + sizeof(*udp) + length;
+	return udpp;
 }
 
 static void
@@ -1508,7 +1516,7 @@ send_message(struct interface *iface, int type,
 	struct dhcp_state *state = D_STATE(iface);
 	struct if_options *ifo = iface->options;
 	struct dhcp_message *dhcp;
-	uint8_t *udp;
+	struct udp_dhcp_packet *udp;
 	ssize_t len, r;
 	struct in_addr from, to;
 	in_addr_t a = 0;
@@ -1567,11 +1575,15 @@ send_message(struct interface *iface, int type,
 			dhcp_close(iface);
 		}
 	} else {
-		len = dhcp_makeudppacket(&udp, (uint8_t *)dhcp, len, from, to);
-		if (len == -1)
-			return;
-		r = ipv4_sendrawpacket(iface, ETHERTYPE_IP, udp, len);
-		free(udp);
+		r = 0;
+		udp = dhcp_makeudppacket(&r, (uint8_t *)dhcp, len, from, to);
+		if (udp == NULL) {
+			syslog(LOG_ERR, "dhcp_makeudppacket: %m");
+		} else {
+			r = ipv4_sendrawpacket(iface, ETHERTYPE_IP,
+			    (uint8_t *)udp, r);
+			free(udp);
+		}
 		/* If we failed to send a raw packet this normally means
 		 * we don't have the ability to work beneath the IP layer
 		 * for this interface.
@@ -2192,8 +2204,12 @@ dhcp_handledhcp(struct interface *iface, struct dhcp_message **dhcpp,
 			    iface, dhcp, from, 0);
 			return;
 		}
-		syslog(LOG_DEBUG, "%s: validated using 0x%08" PRIu32,
-		    iface->name, state->auth.token->secretid);
+		if (state->auth.token)
+			syslog(LOG_DEBUG, "%s: validated using 0x%08" PRIu32,
+			    iface->name, state->auth.token->secretid);
+		else
+			syslog(LOG_DEBUG, "%s: accepted reconfigure key",
+			    iface->name);
 	} else if (ifo->auth.options & DHCPCD_AUTH_REQUIRE) {
 		log_dhcp1(LOG_ERR, "no authentication", iface, dhcp, from, 0);
 		return;
@@ -2606,7 +2622,7 @@ dhcp_handleudp(void *arg)
 
 	/* Just read what's in the UDP fd and discard it as we always read
 	 * from the raw fd */
-	read(ctx->udp_fd, buffer, sizeof(buffer));
+	(void)read(ctx->udp_fd, buffer, sizeof(buffer));
 }
 
 static void
@@ -2621,7 +2637,7 @@ dhcp_handleifudp(void *arg)
 
 	/* Just read what's in the UDP fd and discard it as we always read
 	 * from the raw fd */
-	read(state->udp_fd, buffer, sizeof(buffer));
+	(void)read(state->udp_fd, buffer, sizeof(buffer));
 }
 
 static int
@@ -2665,25 +2681,23 @@ dhcp_open(struct interface *ifp)
 }
 
 int
-dhcp_dump(const char *ifname)
+dhcp_dump(struct dhcpcd_ctx *ctx, const char *ifname)
 {
-	struct dhcpcd_ctx ctx;
 	struct interface *ifp;
 	struct dhcp_state *state;
-	int r;
 
-	ifp = NULL;
+	if (ctx->ifaces == NULL) {
+		ctx->ifaces = malloc(sizeof(*ctx->ifaces));
+		if (ctx->ifaces == NULL)
+			return -1;
+		TAILQ_INIT(ctx->ifaces);
+	}
 	state = NULL;
-	memset(&ctx, 0, sizeof(ctx));
-	ctx.ifaces = malloc(sizeof(*ctx.ifaces));
-	if (ctx.ifaces == NULL)
-		goto eexit;
-	TAILQ_INIT(ctx.ifaces);
 	ifp = calloc(1, sizeof(*ifp));
 	if (ifp == NULL)
 		goto eexit;
-	ifp->ctx = &ctx;
-	TAILQ_INSERT_HEAD(ctx.ifaces, ifp, next);
+	ifp->ctx = ctx;
+	TAILQ_INSERT_HEAD(ctx->ifaces, ifp, next);
 	ifp->if_data[IF_DATA_DHCP] = state = calloc(1, sizeof(*state));
 	if (state == NULL)
 		goto eexit;
@@ -2693,7 +2707,6 @@ dhcp_dump(const char *ifname)
 	strlcpy(ifp->name, ifname, sizeof(ifp->name));
 	snprintf(state->leasefile, sizeof(state->leasefile),
 	    LEASEFILE, ifp->name);
-	strlcpy(ifp->options->script, SCRIPT, sizeof(ifp->options->script));
 	state->new = read_lease(ifp);
 	if (state->new == NULL && errno == ENOENT) {
 		strlcpy(state->leasefile, ifname, sizeof(state->leasefile));
@@ -2702,28 +2715,14 @@ dhcp_dump(const char *ifname)
 	if (state->new == NULL) {
 		if (errno == ENOENT)
 			syslog(LOG_ERR, "%s: no lease to dump", ifname);
-		r = -1;
-		goto cexit;
+		return -1;
 	}
 	state->reason = "DUMP";
-	r = script_runreason(ifp, state->reason);
-	goto cexit;
+	return script_runreason(ifp, state->reason);
 
 eexit:
 	syslog(LOG_ERR, "%s: %m", __func__);
-	r = -1;
-
-cexit:
-	if (state) {
-		free(state->new);
-		free(state);
-	}
-	if (ifp) {
-		free(ifp->options);
-		free(ifp);
-	}
-	free(ctx.ifaces);
-	return r;
+	return -1;
 }
 
 void

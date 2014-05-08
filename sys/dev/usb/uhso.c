@@ -388,7 +388,7 @@ const struct cdevsw uhso_cdevsw = {
 	.d_poll = uhso_tty_poll,
 	.d_mmap = nommap,
 	.d_kqfilter = ttykqfilter,
-	.d_flag = D_TTY,
+	.d_flag = D_TTY
 };
 
 Static int  uhso_tty_init(struct uhso_port *);

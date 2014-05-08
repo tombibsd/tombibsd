@@ -85,6 +85,7 @@
 ./usr/libdata/debug/usr/tests/lib/libc/c063				tests-lib-debug
 ./usr/libdata/debug/usr/tests/lib/libc/db				tests-lib-debug
 ./usr/libdata/debug/usr/tests/lib/libc/gen				tests-lib-debug
+./usr/libdata/debug/usr/tests/lib/libc/gen/execve			tests-kernel-tests
 ./usr/libdata/debug/usr/tests/lib/libc/gen/posix_spawn			tests-kernel-tests
 ./usr/libdata/debug/usr/tests/lib/libc/getaddrinfo			tests-obsolete		obsolete
 ./usr/libdata/debug/usr/tests/lib/libc/getaddrinfo/data			tests-obsolete		obsolete
@@ -1910,6 +1911,10 @@
 ./usr/tests/lib/libc/gen			tests-lib-tests
 ./usr/tests/lib/libc/gen/Atffile		tests-lib-tests		atf
 ./usr/tests/lib/libc/gen/Kyuafile		tests-lib-tests		atf,kyua
+./usr/tests/lib/libc/gen/execve			tests-kernel-tests
+./usr/tests/lib/libc/gen/execve/Atffile		tests-kernel-tests	atf
+./usr/tests/lib/libc/gen/execve/Kyuafile	tests-kernel-tests	atf,kyua
+./usr/tests/lib/libc/gen/execve/t_execve	tests-kernel-tests	atf
 ./usr/tests/lib/libc/gen/posix_spawn			tests-kernel-tests
 ./usr/tests/lib/libc/gen/posix_spawn/Atffile		tests-kernel-tests	atf
 ./usr/tests/lib/libc/gen/posix_spawn/Kyuafile		tests-kernel-tests	atf,kyua
@@ -2109,6 +2114,8 @@
 ./usr/tests/lib/libc/ssp/h_readlink		tests-lib-tests		atf,ssp
 ./usr/tests/lib/libc/ssp/h_snprintf		tests-lib-tests		atf,ssp
 ./usr/tests/lib/libc/ssp/h_sprintf		tests-lib-tests		atf,ssp
+./usr/tests/lib/libc/ssp/h_stpcpy		tests-lib-tests		atf,ssp
+./usr/tests/lib/libc/ssp/h_stpncpy		tests-lib-tests		atf,ssp
 ./usr/tests/lib/libc/ssp/h_strcat		tests-lib-tests		atf,ssp
 ./usr/tests/lib/libc/ssp/h_strcpy		tests-lib-tests		atf,ssp
 ./usr/tests/lib/libc/ssp/h_strncat		tests-lib-tests		atf,ssp
@@ -3136,6 +3143,7 @@
 ./usr/tests/usr.bin/xlint/lint1/Kyuafile	tests-usr.bin-tests	atf,kyua
 ./usr/tests/usr.bin/xlint/lint1/d_alignof.c			tests-usr.bin-tests	atf
 ./usr/tests/usr.bin/xlint/lint1/d_c99_complex_num.c		tests-usr.bin-tests	atf
+./usr/tests/usr.bin/xlint/lint1/d_c99_complex_split.c		tests-usr.bin-tests	atf
 ./usr/tests/usr.bin/xlint/lint1/d_c99_decls_after_stmt.c	tests-usr.bin-tests	atf
 ./usr/tests/usr.bin/xlint/lint1/d_c99_decls_after_stmt2.c	tests-usr.bin-tests	atf
 ./usr/tests/usr.bin/xlint/lint1/d_c99_decls_after_stmt3.c	tests-usr.bin-tests	atf
@@ -3156,10 +3164,12 @@
 ./usr/tests/usr.bin/xlint/lint1/d_constant_conv1.c		tests-usr.bin-tests	atf
 ./usr/tests/usr.bin/xlint/lint1/d_constant_conv2.c		tests-usr.bin-tests	atf
 ./usr/tests/usr.bin/xlint/lint1/d_cvt_in_ternary.c		tests-usr.bin-tests	atf
+./usr/tests/usr.bin/xlint/lint1/d_cvt_constant.c		tests-usr.bin-tests	atf
 ./usr/tests/usr.bin/xlint/lint1/d_ellipsis_in_switch.c		tests-usr.bin-tests	atf
 ./usr/tests/usr.bin/xlint/lint1/d_gcc_compound_statements1.c	tests-usr.bin-tests	atf
 ./usr/tests/usr.bin/xlint/lint1/d_gcc_compound_statements2.c	tests-usr.bin-tests	atf
 ./usr/tests/usr.bin/xlint/lint1/d_gcc_compound_statements3.c	tests-usr.bin-tests	atf
+./usr/tests/usr.bin/xlint/lint1/d_gcc_extension.c		tests-usr.bin-tests	atf
 ./usr/tests/usr.bin/xlint/lint1/d_gcc_func.c			tests-usr.bin-tests	atf
 ./usr/tests/usr.bin/xlint/lint1/d_gcc_variable_array_init.c	tests-usr.bin-tests	atf
 ./usr/tests/usr.bin/xlint/lint1/d_incorrect_array_size.c	tests-usr.bin-tests	atf

@@ -141,8 +141,8 @@ sysctl_ieee80211_rssadapt_expavgctl(SYSCTLFN_ARGS)
  *
  * TBD condition CTLFLAG_PERMANENT on being a module or not
  */
-SYSCTL_SETUP(sysctl_ieee80211_rssadapt,
-    "sysctl ieee80211 rssadapt subtree setup")
+void
+ieee80211_rssadapt_sysctl_setup(struct sysctllog **clog)
 {
 	int rc;
 	const struct sysctlnode *node;

@@ -409,6 +409,7 @@ fhpibgo(struct hpibbus_softc *hs, int slave, int sec, void *ptr, int count,
 		hd->hpib_cmd = sc->sc_cmd;
 		hd->hpib_ie = IDS_DMA(hs->sc_dq->dq_chan) |
 			((flags & DMAGO_WORD) ? IDS_WDMA : 0);
+		__USE(i);
 		return;
 	}
 	sc->sc_cmd = CT_REN | CT_8BIT | CT_FIFOSEL;
@@ -436,6 +437,7 @@ fhpibgo(struct hpibbus_softc *hs, int slave, int sec, void *ptr, int count,
 	hd->hpib_cmd = sc->sc_cmd;
 	hd->hpib_ie = IDS_DMA(hs->sc_dq->dq_chan) | IDS_WRITE |
 		((flags & DMAGO_WORD) ? IDS_WDMA : 0);
+	__USE(i);
 }
 
 /*

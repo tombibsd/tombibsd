@@ -29,7 +29,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <sys/simplelock.h>
+#include <sys/mutex.h>
 
 struct edc_mca_softc;
 
@@ -39,7 +39,7 @@ struct ed_softc {
 	/* General disk infos */
 	struct disk sc_dk;
 	struct bufq_state *sc_q;
-	struct simplelock sc_q_lock;
+	kmutex_t sc_q_lock;
 
 	struct edc_mca_softc *edc_softc;   /* pointer to our controller */
 

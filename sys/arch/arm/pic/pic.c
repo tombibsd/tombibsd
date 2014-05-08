@@ -27,10 +27,13 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
+
+#define _INTR_PRIVATE
+#include "opt_ddb.h"
+
 #include <sys/cdefs.h>
 __KERNEL_RCSID(0, "$NetBSD$");
 
-#define _INTR_PRIVATE
 #include <sys/param.h>
 #include <sys/atomic.h>
 #include <sys/cpu.h>
@@ -42,6 +45,10 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <arm/armreg.h>
 #include <arm/cpufunc.h>
+
+#ifdef DDB
+#include <arm/db_machdep.h>
+#endif
 
 #include <arm/pic/picvar.h>
 
@@ -99,6 +106,16 @@ pic_ipi_xcall(void *arg)
 	xc_ipi_handler();
 	return 1;
 }
+
+#ifdef DDB
+int
+pic_ipi_ddb(void *arg)
+{
+	printf("%s: %s: tf=%p\n", __func__, curcpu()->ci_cpuname, arg);
+	kdb_trap(-1, arg);
+	return 1;
+}
+#endif
 
 void
 intr_cpu_init(struct cpu_info *ci)
@@ -255,17 +272,30 @@ pic_find_pending_irqs_by_ipl(struct pic_softc *pic, size_t irq_base,
 void
 pic_dispatch(struct intrsource *is, void *frame)
 {
-	int rv __unused;
+	int (*func)(void *) = is->is_func;
+	void *arg = is->is_arg;
 
-	if (__predict_false(is->is_arg == NULL)
-	    && __predict_true(frame != NULL)) {
-		rv = (*is->is_func)(frame);
-	} else if (__predict_true(is->is_arg != NULL)) {
-		rv = (*is->is_func)(is->is_arg);
-	} else {
-		pic_deferral_ev.ev_count++;
-		return;
+	if (__predict_false(arg == NULL)) {
+		if (__predict_false(frame == NULL)) {
+			pic_deferral_ev.ev_count++;
+			return;
+		}
+		arg = frame;
 	}
+
+#ifdef MULTIPROCESSOR
+	if (!is->is_mpsafe) {
+		KERNEL_LOCK(1, NULL);
+		const u_int ci_blcnt __diagused = curcpu()->ci_biglock_count;
+		const u_int l_blcnt __diagused = curlwp->l_blcnt;
+		(void)(*func)(arg);
+		KASSERT(ci_blcnt == curcpu()->ci_biglock_count);
+		KASSERT(l_blcnt == curlwp->l_blcnt);
+		KERNEL_UNLOCK_ONE(NULL);
+	} else
+#endif
+		(void)(*func)(arg);
+
 
 	struct pic_percpu * const pcpu = percpu_getref(is->is_pic->pic_percpu);
 	KASSERT(pcpu->pcpu_magic == PICPERCPU_MAGIC);
@@ -604,9 +634,12 @@ pic_establish_intr(struct pic_softc *pic, int irq, int ipl, int type,
 	is->is_pic = pic;
 	is->is_irq = irq;
 	is->is_ipl = ipl;
-	is->is_type = type;
+	is->is_type = type & 0xff;
 	is->is_func = func;
 	is->is_arg = arg;
+#ifdef MULTIPROCESSOR
+	is->is_mpsafe = (type & IST_MPSAFE);
+#endif
 
 	if (pic->pic_ops->pic_source_name)
 		(*pic->pic_ops->pic_source_name)(pic, irq, is->is_source,

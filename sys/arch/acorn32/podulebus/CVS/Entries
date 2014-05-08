@@ -6,7 +6,7 @@
 /cosc.c/1.19/Thu Feb 13 15:22:11 2014/-kk/
 /coscreg.h/1.1/Fri Oct  5 22:27:54 2001/-kk/
 /coscvar.h/1.1/Fri Oct  5 22:27:55 2001/-kk/
-/csa.c/1.11/Sat Oct 27 17:17:23 2012/-kk/
+/csa.c/1.12/Fri Apr 11 02:03:26 2014/-kk/
 /csc.c/1.19/Thu Feb 13 15:22:11 2014/-kk/
 /cscreg.h/1.2/Mon Apr 28 20:23:10 2008/-kk/
 /cscvar.h/1.2/Mon Apr 28 20:23:10 2008/-kk/
@@ -21,7 +21,7 @@
 /if_ne_pbus.c/1.18/Thu Feb 13 15:22:11 2014/-kk/
 /if_ne_pbusreg.h/1.3/Mon Apr 28 20:23:10 2008/-kk/
 /netslot.c/1.10/Thu May 10 10:27:10 2012/-kk/
-/podulebus.c/1.26/Fri Jun  3 07:35:37 2011/-kk/
+/podulebus.c/1.27/Fri Apr 11 02:03:26 2014/-kk/
 /podulebus.h/1.1/Fri Oct  5 22:27:57 2001/-kk/
 /podulebus_io.c/1.8/Thu May 10 10:27:10 2012/-kk/
 /podulebus_io_asm.S/1.1/Fri Oct  5 22:27:58 2001/-kk/

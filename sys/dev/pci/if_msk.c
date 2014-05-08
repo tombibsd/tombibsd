@@ -1167,6 +1167,7 @@ mskc_attach(device_t parent, device_t self, void *aux)
 	void *kva;
 	bus_dma_segment_t seg;
 	int rseg;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	DPRINTFN(2, ("begin mskc_attach\n"));
 
@@ -1241,7 +1242,7 @@ mskc_attach(device_t parent, device_t self, void *aux)
 		goto fail_1;
 	}
 
-	intrstr = pci_intr_string(pc, ih);
+	intrstr = pci_intr_string(pc, ih, intrbuf, sizeof(intrbuf));
 	sc->sk_intrhand = pci_intr_establish(pc, ih, IPL_NET, msk_intr, sc);
 	if (sc->sk_intrhand == NULL) {
 		aprint_error(": couldn't establish interrupt");

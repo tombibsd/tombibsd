@@ -240,6 +240,8 @@ void	ieee80211_sysctl_attach(struct ieee80211com *);
 void	ieee80211_sysctl_detach(struct ieee80211com *);
 void	ieee80211_load_module(const char *);
 
+void	ieee80211_rssadapt_sysctl_setup(struct sysctllog **);
+
 void	ieee80211_init(void);
 #define	IEEE80211_CRYPTO_SETUP(name)				\
 	static void name(void);					\

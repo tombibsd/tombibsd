@@ -169,8 +169,17 @@ CFATTACH_DECL_NEW(clpscom, sizeof(struct clpscom_softc),
     clpscom_match, clpscom_attach, NULL, NULL);
 
 const struct cdevsw clpscom_cdevsw = {
-	clpscomopen, clpscomclose, clpscomread, clpscomwrite, clpscomioctl,
-	clpscomstop, clpscomtty, clpscompoll, nommap, ttykqfilter, D_TTY
+	.d_open = clpscomopen,
+	.d_close = clpscomclose,
+	.d_read = clpscomread,
+	.d_write = clpscomwrite,
+	.d_ioctl = clpscomioctl,
+	.d_stop = clpscomstop,
+	.d_tty = clpscomtty,
+	.d_poll = clpscompoll,
+	.d_mmap = nommap,
+	.d_kqfilter = ttykqfilter,
+	.d_flag = D_TTY
 };
 
 static struct cnm_state clpscom_cnm_state;

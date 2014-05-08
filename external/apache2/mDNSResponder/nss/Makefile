@@ -13,6 +13,8 @@ NOPICINSTALL=	# don't install _pic.a library
 
 .include "${.CURDIR}/../Makefile.inc"
 
+CPPFLAGS+=-I${NETBSDSRCDIR}/lib/libc/net
+
 SRCS=		nss_mdnsd.c
 LDADD+= 	-ldns_sd
 DPADD+= 	${LIBDNS_SD}

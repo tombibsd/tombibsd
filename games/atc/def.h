@@ -65,11 +65,6 @@
 #define D_UP		3
 #define D_DOWN		4
 
-#define T_NODEST	0
-#define T_BEACON	1
-#define T_EXIT		2
-#define T_AIRPORT	3
-
 #undef S_NONE
 #undef S_GONE
 #undef S_MARKED

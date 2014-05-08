@@ -70,8 +70,17 @@ dev_type_read(ofromrw);
 dev_type_mmap(ofrommmap);
 
 const struct cdevsw ofrom_cdevsw = {
-	ofromopen, nullclose, ofromrw, ofromrw, noioctl,
-	nostop, notty, nopoll, ofrommmap, nokqfilter,
+	.d_open = ofromopen,
+	.d_close = nullclose,
+	.d_read = ofromrw,
+	.d_write = ofromrw,
+	.d_ioctl = noioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = ofrommmap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = 0
 };
 
 int

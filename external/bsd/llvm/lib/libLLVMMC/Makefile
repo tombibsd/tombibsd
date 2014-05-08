@@ -40,7 +40,6 @@ SRCS+=	ELFObjectWriter.cpp \
 	MCObjectStreamer.cpp \
 	MCObjectSymbolizer.cpp \
 	MCObjectWriter.cpp \
-	MCPureStreamer.cpp \
 	MCRegisterInfo.cpp \
 	MCRelocationInfo.cpp \
 	MCSection.cpp \

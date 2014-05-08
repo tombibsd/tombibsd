@@ -105,12 +105,27 @@ static dev_type_strategy(ststrategy);
 static dev_type_dump(stdump);
 
 const struct bdevsw st_bdevsw = {
-	stopen, stclose, ststrategy, stioctl, stdump, nosize, D_TAPE
+	.d_open = stopen,
+	.d_close = stclose,
+	.d_strategy = ststrategy,
+	.d_ioctl = stioctl,
+	.d_dump = stdump,
+	.d_psize = nosize,
+	.d_flag = D_TAPE
 };
 
 const struct cdevsw st_cdevsw = {
-	stopen, stclose, stread, stwrite, stioctl,
-	nostop, notty, nopoll, nommap, nokqfilter, D_TAPE
+	.d_open = stopen,
+	.d_close = stclose,
+	.d_read = stread,
+	.d_write = stwrite,
+	.d_ioctl = stioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_TAPE
 };
 
 /*

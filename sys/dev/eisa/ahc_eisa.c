@@ -110,6 +110,7 @@ ahc_eisa_attach(device_t parent, device_t self, void *aux)
 #ifdef AHC_DEBUG
 	int i;
 #endif
+	char intrbuf[EISA_INTRSTR_LEN];
 
 	ahc->sc_dev = self;
 
@@ -165,7 +166,7 @@ ahc_eisa_attach(device_t parent, device_t self, void *aux)
 		intrtype = IST_LEVEL;
 		intrtypestr = "level sensitive";
 	}
-	intrstr = eisa_intr_string(ec, ih);
+	intrstr = eisa_intr_string(ec, ih, intrbuf, sizeof(intrbuf));
 	ahc->ih = eisa_intr_establish(ec, ih,
 	    intrtype, IPL_BIO, ahc_intr, ahc);
 	if (ahc->ih == NULL) {

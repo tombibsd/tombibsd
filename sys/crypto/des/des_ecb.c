@@ -98,7 +98,8 @@ char *des_options(void)
                         size="int";
                 else
                         size="long";
-                sprintf(buf,"des(%s,%s,%s,%s)",ptr,risc,unroll,size);
+                snprintf(buf, sizeof(buf), "des(%s,%s,%s,%s)",
+		    ptr, risc, unroll, size);
                 init=0;
                 }
         return(buf);

@@ -103,6 +103,9 @@ tmpfs_mount(struct mount *mp, const char *path, void *data, size_t *data_len)
 	ino_t nodes;
 	int error;
 
+	if (args == NULL)
+		return EINVAL;
+
 	/* Validate the version. */
 	if (*data_len < sizeof(*args) ||
 	    args->ta_version != TMPFS_ARGS_VERSION)
@@ -127,10 +130,6 @@ tmpfs_mount(struct mount *mp, const char *path, void *data, size_t *data_len)
 		return 0;
 	}
 
-	if (mp->mnt_flag & MNT_UPDATE) {
-		/* TODO */
-		return EOPNOTSUPP;
-	}
 
 	/* Prohibit mounts if there is not enough memory. */
 	if (tmpfs_mem_info(true) < TMPFS_PAGES_RESERVED)
@@ -151,6 +150,20 @@ tmpfs_mount(struct mount *mp, const char *path, void *data, size_t *data_len)
 	}
 	nodes = MIN(nodes, INT_MAX);
 	KASSERT(nodes >= 3);
+
+	if (mp->mnt_flag & MNT_UPDATE) {
+		tmp = VFS_TO_TMPFS(mp);
+		if (nodes < tmp->tm_nodes_cnt)
+			return EBUSY;
+		if ((error = tmpfs_mntmem_set(tmp, memlimit)) != 0)
+			return error;
+		tmp->tm_nodes_max = nodes;
+		root = tmp->tm_root;
+		root->tn_uid = args->ta_root_uid;
+		root->tn_gid = args->ta_root_gid;
+		root->tn_mode = args->ta_root_mode;
+		return 0;
+	}
 
 	/* Allocate the tmpfs mount structure and fill it. */
 	tmp = kmem_zalloc(sizeof(tmpfs_mount_t), KM_SLEEP);
@@ -393,31 +406,27 @@ const struct vnodeopv_desc * const tmpfs_vnodeopv_descs[] = {
 };
 
 struct vfsops tmpfs_vfsops = {
-	MOUNT_TMPFS,			/* vfs_name */
-	sizeof (struct tmpfs_args),
-	tmpfs_mount,			/* vfs_mount */
-	tmpfs_start,			/* vfs_start */
-	tmpfs_unmount,			/* vfs_unmount */
-	tmpfs_root,			/* vfs_root */
-	(void *)eopnotsupp,		/* vfs_quotactl */
-	tmpfs_statvfs,			/* vfs_statvfs */
-	tmpfs_sync,			/* vfs_sync */
-	tmpfs_vget,			/* vfs_vget */
-	tmpfs_fhtovp,			/* vfs_fhtovp */
-	tmpfs_vptofh,			/* vfs_vptofh */
-	tmpfs_init,			/* vfs_init */
-	NULL,				/* vfs_reinit */
-	tmpfs_done,			/* vfs_done */
-	NULL,				/* vfs_mountroot */
-	tmpfs_snapshot,			/* vfs_snapshot */
-	vfs_stdextattrctl,		/* vfs_extattrctl */
-	(void *)eopnotsupp,		/* vfs_suspendctl */
-	genfs_renamelock_enter,
-	genfs_renamelock_exit,
-	(void *)eopnotsupp,
-	tmpfs_vnodeopv_descs,
-	0,				/* vfs_refcount */
-	{ NULL, NULL },
+	.vfs_name = MOUNT_TMPFS,
+	.vfs_min_mount_data = sizeof (struct tmpfs_args),
+	.vfs_mount = tmpfs_mount,
+	.vfs_start = tmpfs_start,
+	.vfs_unmount = tmpfs_unmount,
+	.vfs_root = tmpfs_root,
+	.vfs_quotactl = (void *)eopnotsupp,
+	.vfs_statvfs = tmpfs_statvfs,
+	.vfs_sync = tmpfs_sync,
+	.vfs_vget = tmpfs_vget,
+	.vfs_fhtovp = tmpfs_fhtovp,
+	.vfs_vptofh = tmpfs_vptofh,
+	.vfs_init = tmpfs_init,
+	.vfs_done = tmpfs_done,
+	.vfs_snapshot = tmpfs_snapshot,
+	.vfs_extattrctl = vfs_stdextattrctl,
+	.vfs_suspendctl = (void *)eopnotsupp,
+	.vfs_renamelock_enter = genfs_renamelock_enter,
+	.vfs_renamelock_exit = genfs_renamelock_exit,
+	.vfs_fsync = (void *)eopnotsupp,
+	.vfs_opv_descs = tmpfs_vnodeopv_descs
 };
 
 static int

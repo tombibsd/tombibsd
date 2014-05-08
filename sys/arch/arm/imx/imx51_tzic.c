@@ -258,19 +258,18 @@ imx51_irq_handler(void *frame)
 static void
 tzic_intr_init(struct tzic_softc * const tzic)
 {
-	uint32_t reg;
 	int i;
 
 	disable_interrupts(I32_bit|F32_bit);
 
-	reg = INTC_READ(tzic, TZIC_INTCNTL);
+	(void) INTC_READ(tzic, TZIC_INTCNTL);
 	INTC_WRITE(tzic, TZIC_INTCNTL, INTCNTL_NSEN_MASK|INTCNTL_NSEN|INTCNTL_EN);
-	reg = INTC_READ(tzic, TZIC_INTCNTL);
+	(void) INTC_READ(tzic, TZIC_INTCNTL);
 	INTC_WRITE(tzic, TZIC_PRIOMASK, SW_TO_HW_IPL(IPL_NONE));
-	reg = INTC_READ(tzic, TZIC_PRIOMASK);
+	(void) INTC_READ(tzic, TZIC_PRIOMASK);
 
 	INTC_WRITE(tzic, TZIC_SYNCCTRL, 0x00);
-	reg = INTC_READ(tzic, TZIC_SYNCCTRL);
+	(void) INTC_READ(tzic, TZIC_SYNCCTRL);
 
 	/* route all interrupts to IRQ.  secure interrupts are for FIQ */
 	for (i = 0; i < 4; i++)

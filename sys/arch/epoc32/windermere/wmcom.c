@@ -133,8 +133,17 @@ CFATTACH_DECL_NEW(wmcom, sizeof(struct wmcom_softc),
     wmcom_match, wmcom_attach, NULL, NULL);
 
 const struct cdevsw wmcom_cdevsw = {
-	wmcomopen, wmcomclose, wmcomread, wmcomwrite, wmcomioctl,
-	wmcomstop, wmcomtty, wmcompoll, nommap, ttykqfilter, D_TTY
+	.d_open = wmcomopen,
+	.d_close = wmcomclose,
+	.d_read = wmcomread,
+	.d_write = wmcomwrite,
+	.d_ioctl = wmcomioctl,
+	.d_stop = wmcomstop,
+	.d_tty = wmcomtty,
+	.d_poll = wmcompoll,
+	.d_mmap = nommap,
+	.d_kqfilter = ttykqfilter,
+	.d_flag = D_TTY
 };
 
 static struct cnm_state wmcom_cnm_state;

@@ -71,6 +71,7 @@
  * XScale assembly functions for CPU / MMU / TLB specific operations
  */
  
+#include "assym.h"
 #include <arm/asm.h>
 #include <arm/locore.h>
 
@@ -185,6 +186,11 @@ END(xscale_setttb)
 ENTRY(xscale_tlb_flushID_SE)
 	mcr	p15, 0, r0, c8, c6, 1	/* flush D tlb single entry */
 	mcr	p15, 0, r0, c8, c5, 1	/* flush I tlb single entry */
+#if PAGE_SIZE == 2 * L2_S_SIZE
+	add	r0, r0, #L2_S_SIZE
+	mcr	p15, 0, r0, c8, c6, 1	/* flush D tlb single entry */
+	mcr	p15, 0, r0, c8, c5, 1	/* flush I tlb single entry */
+#endif
 	RET
 END(xscale_tlb_flushID_SE)
 

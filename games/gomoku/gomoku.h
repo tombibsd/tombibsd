@@ -265,6 +265,9 @@ extern	int	movelog[BSZ * BSZ];		/* history of moves */
 extern	int	movenum;
 extern	int	debug;
 
+extern int interactive;
+extern const char *plyr[];
+
 #define ASSERT(x)
 
 void	bdinit(struct spotstr *);

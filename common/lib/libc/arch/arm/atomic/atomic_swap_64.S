@@ -50,11 +50,13 @@ ENTRY_NP(_atomic_swap_64)
 	RET
 END(_atomic_swap_64)
 ATOMIC_OP_ALIAS(atomic_swap_64,_atomic_swap_64)
-STRONG_ALIAS(__sync_lock_test_and_set_8,_atomic_swap_64)
+CRT_ALIAS(__sync_lock_test_and_set_8,_atomic_swap_64)
 
+#if (!defined(_KERNEL) || defined(_RUMPKERNEL)) && !defined(_STANDALONE)
 ENTRY_NP(__sync_lock_release_8)
 	mov	r2, #0
 	mov	r3, #0
 	strd	r2, r3, [r0]
 	RET
 END(__sync_lock_release_8)
+#endif

@@ -558,7 +558,10 @@ _rtld(Elf_Addr *sp, Elf_Addr relocbase)
 				*oenvp++ = *env;
 			}
 		} else if (strncmp(*env, bind_var, LEN(bind_var)) == 0) {
-			ld_bind_now = *env + LEN(bind_var);
+			if (_rtld_trust) {
+				ld_bind_now = *env + LEN(bind_var);
+				*oenvp++ = *env;
+			}
 		} else if (strncmp(*env, path_var, LEN(path_var)) == 0) {
 			if (_rtld_trust) {
 				ld_library_path = *env + LEN(path_var);

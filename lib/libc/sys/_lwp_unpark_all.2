@@ -38,7 +38,7 @@
 .Sh SYNOPSIS
 .In lwp.h
 .Ft ssize_t
-.Fn _lwp_unpark_all "lwpid_t *targets" "size_t ntargets" "const void *hint"
+.Fn _lwp_unpark_all "const lwpid_t *targets" "size_t ntargets" "const void *hint"
 .Sh DESCRIPTION
 .Fn _lwp_unpark_all
 resumes execution of one or more light-weight processes listed in

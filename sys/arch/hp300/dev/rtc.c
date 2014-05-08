@@ -79,6 +79,10 @@ rtcmatch(device_t parent, cfdata_t cf, void *aux)
 {
 	struct intio_attach_args *ia = aux;
 
+	/* 425e doesn't have the traditional RTC at intio */
+	if (machineid == HP_425 && mmuid == MMUID_425_E)
+		return 0;
+
 	if (strcmp("rtc", ia->ia_modname) != 0)
 		return 0;
 

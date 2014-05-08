@@ -36,10 +36,9 @@
  * This source was derived from that file.
  */
 
+#include "assym.h"
 #include <machine/asm.h>
 #include <arm/locore.h>
-
-#include "assym.h"
 
 /*
  * Functions to set the MMU Translation Table Base register

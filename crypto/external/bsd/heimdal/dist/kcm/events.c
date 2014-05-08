@@ -34,7 +34,7 @@
 
 #include "kcm_locl.h"
 
-__RCSID("$NetBSD$");
+__RCSID("NetBSD");
 
 /* thread-safe in case we multi-thread later */
 static HEIMDAL_MUTEX events_mutex = HEIMDAL_MUTEX_INITIALIZER;

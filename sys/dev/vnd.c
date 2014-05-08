@@ -197,12 +197,27 @@ static dev_type_dump(vnddump);
 static dev_type_size(vndsize);
 
 const struct bdevsw vnd_bdevsw = {
-	vndopen, vndclose, vndstrategy, vndioctl, vnddump, vndsize, D_DISK
+	.d_open = vndopen,
+	.d_close = vndclose,
+	.d_strategy = vndstrategy,
+	.d_ioctl = vndioctl,
+	.d_dump = vnddump,
+	.d_psize = vndsize,
+	.d_flag = D_DISK
 };
 
 const struct cdevsw vnd_cdevsw = {
-	vndopen, vndclose, vndread, vndwrite, vndioctl,
-	nostop, notty, nopoll, nommap, nokqfilter, D_DISK
+	.d_open = vndopen,
+	.d_close = vndclose,
+	.d_read = vndread,
+	.d_write = vndwrite,
+	.d_ioctl = vndioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_DISK
 };
 
 static int	vnd_match(device_t, cfdata_t, void *);
@@ -1043,6 +1058,10 @@ vndioctl(dev_t dev, u_long cmd, void *data, int flag, struct lwp *l)
 	    cmd != VNDIOCGET)
 		return ENXIO;
 	vio = (struct vnd_ioctl *)data;
+
+	error = disk_ioctl(&vnd->sc_dkdev, cmd, data, flag, l);
+	if (error != EPASSTHROUGH)
+		return (error);
 
 	/* Must be open for writes for these commands... */
 	switch (cmd) {
@@ -2007,6 +2026,12 @@ vnd_set_geometry(struct vnd_softc *vnd)
 	dg->dg_ntracks = vnd->sc_geom.vng_ntracks;
 	dg->dg_ncylinders = vnd->sc_geom.vng_ncylinders;
 
+#ifdef DEBUG
+	if (vnddebug & VDB_LABEL) {
+		printf("dg->dg_secperunit: %" PRId64 "\n", dg->dg_secperunit);
+		printf("dg->dg_ncylinders: %u\n", dg->dg_ncylinders);
+	}
+#endif
 	disk_set_info(vnd->sc_dev, &vnd->sc_dkdev, NULL);
 }
 

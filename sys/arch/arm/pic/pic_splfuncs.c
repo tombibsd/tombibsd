@@ -93,12 +93,9 @@ splx(int savedipl)
 	ci->ci_intr_depth--;
 	KASSERTMSG(ci->ci_cpl == savedipl, "cpl %d savedipl %d",
 	    ci->ci_cpl, savedipl);
-	cpu_dosoftints();
-	KASSERTMSG(ci->ci_cpl == savedipl, "cpl %d savedipl %d",
-	    ci->ci_cpl, savedipl);
 	if ((psw & I32_bit) == 0)
 		cpsie(I32_bit);
-
+	cpu_dosoftints();
 	KASSERTMSG(ci->ci_cpl == savedipl, "cpl %d savedipl %d",
 	    ci->ci_cpl, savedipl);
 }

@@ -90,7 +90,7 @@ ENGINE_finish(ENGINE *engine)
     if(engine->destroy)
 	(*engine->destroy)(engine);
 
-    memset(engine, 0, sizeof(engine));
+    memset(engine, 0, sizeof(*engine));
     engine->references = -1;
 
 
@@ -341,7 +341,7 @@ ENGINE_by_dso(const char *path, const char *id)
 	    dlclose(handle);
 	    free(engine);
 	    return NULL;
-	}	
+	}
     }
 
     {
@@ -359,7 +359,7 @@ ENGINE_by_dso(const char *path, const char *id)
 	    dlclose(handle);
 	    free(engine);
 	    return NULL;
-	}	
+	}
     }
 
     ENGINE_up_ref(engine);

@@ -323,8 +323,6 @@ linux_sys_ptrace_arch(struct lwp *l, const struct linux_sys_ptrace_args *uap,
 			*retval = led->led_debugreg[off];
 		} else if (addr == LUSR_OFF(__signal)) {
 			error = ENOTSUP;
-		} else if (addr == LUSR_OFF(__signal)) {
-			error = ENOTSUP;
 		} else if (addr == LUSR_OFF(u_fpstate)) {
 			error = ENOTSUP;
 		} else if (addr == LUSR_OFF(__magic)) {

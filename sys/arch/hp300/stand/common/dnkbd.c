@@ -95,7 +95,8 @@ int
 dnkbd_getc(void)
 {
 	struct apciregs *apci =
-	    (struct apciregs *)IIOV(FRODO_BASE + FRODO_APCI_OFFSET(0));
+	    (struct apciregs *)IIOV(INTIOBASE + FRODO_BASE +
+	    FRODO_APCI_OFFSET(0));
 	int c;
 
 	/* default to `no key' */
@@ -168,7 +169,8 @@ dnkbd_init(void)
 	 * Look for a Frodo utility chip.  If we find one, assume there
 	 * is a Domain keyboard attached.
 	 */
-	if (badaddr((void *)IIOV(FRODO_BASE + FRODO_APCI_OFFSET(0))))
+	if (badaddr((void *)IIOV(INTIOBASE + FRODO_BASE +
+	    FRODO_APCI_OFFSET(0))))
 		return 0;
 
 	/*

@@ -365,7 +365,7 @@ ka780_attach_cpu(device_t self)
 	struct ka78x * const ka78 = (void *)&vax_cpudata;
 
 	aprint_normal(": KA%s, S/N %d(%d), hardware ECO level %d(%d)\n",
-	    &cpu_model[8], ka78->snr, ka78->plant, ka78->eco >> 4, ka78->eco);
+	    cpu_getmodel() + 8, ka78->snr, ka78->plant, ka78->eco >> 4, ka78->eco);
 	aprint_normal_dev(self, "4KB L1 cachen");
 	if (mfpr(PR_ACCS) & 255) {
 		aprint_normal(", FPA present\n");

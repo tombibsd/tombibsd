@@ -226,7 +226,7 @@ quiz(void)
 	int i;
 	size_t len;
 	unsigned guesses, rights, wrongs;
-	int next;
+	unsigned next, j;
 	char *answer, *t, question[LINE_SZ];
 	const char *s;
 
@@ -237,7 +237,7 @@ quiz(void)
 			break;
 		next = random() % qsize;
 		qp = qlist.q_next;
-		for (i = 0; i < next; i++)
+		for (j = 0; j < next; j++)
 			qp = qp->q_next;
 		while (qp && qp->q_answered)
 			qp = qp->q_next;

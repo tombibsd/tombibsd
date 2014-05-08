@@ -57,8 +57,17 @@ __KERNEL_RCSID(0, "$NetBSD$");
 dev_type_ioctl(clockctlioctl);
 
 const struct cdevsw clockctl_cdevsw = {
-	nullopen, nullclose, noread, nowrite, clockctlioctl,
-	nostop, notty, nopoll, nommap, nokqfilter, D_OTHER,
+	.d_open = nullopen,
+	.d_close = nullclose,
+	.d_read = noread,
+	.d_write = nowrite,
+	.d_ioctl = clockctlioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_OTHER,
 };
 
 static kauth_listener_t clockctl_listener;

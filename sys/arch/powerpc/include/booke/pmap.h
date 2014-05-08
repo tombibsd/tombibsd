@@ -72,6 +72,7 @@
 #define	PMAP_TLB_NUM_PIDS		256
 #define	PMAP_TLB_MAX			1
 #define	PMAP_INVALID_SEGTAB_ADDRESS	((pmap_segtab_t *)0xfeeddead)
+#define	PMAP_TLB_FLUSH_ASID_ON_RESET	false
 
 #define	pmap_phys_address(x)		(x)
 

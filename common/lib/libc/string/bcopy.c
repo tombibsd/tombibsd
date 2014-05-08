@@ -51,7 +51,7 @@ __RCSID("$NetBSD$");
 #endif
 #endif
 
-#ifdef _FORTIFY_SOURCE
+#if defined(_FORTIFY_SOURCE) || defined(_STANDALONE) || defined(_KERNEL)
 #undef bcopy
 #undef memcpy
 #undef memmove
@@ -89,8 +89,7 @@ bcopy(const void *src0, void *dst0, size_t length)
 	unsigned long u;
 
 #if !defined(_KERNEL)
-	_DIAGASSERT(dst0 != 0);
-	_DIAGASSERT(src0 != 0);
+	_DIAGASSERT((dst0 && src0) || length == 0);
 #endif
 
 	if (length == 0 || dst == src)		/* nothing to do */

@@ -121,13 +121,13 @@ L$sigcode_bounce:
 	copy	%r3, %arg0
 	ldil	L%SYSCALLGATE, %r1
 	.call
-	ble	4(%sr7, %r1)
+	ble	4(%sr2, %r1)
 	ldi	SYS_setcontext, %t1
 
 	/* Make a SYS_exit system call. */
 	copy	%ret0, %arg0
 	ldil	L%SYSCALLGATE, %r1
 	.call
-	ble	4(%sr7, %r1)
+	ble	4(%sr2, %r1)
 	ldi	SYS_exit, %t1
 EXIT(__sigtramp_siginfo_2)

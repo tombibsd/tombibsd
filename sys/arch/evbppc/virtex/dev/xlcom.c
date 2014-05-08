@@ -138,8 +138,17 @@ static dev_type_tty(xlcom_tty);
 static dev_type_stop(xlcom_stop);
 
 const struct cdevsw xlcom_cdevsw = {
-	xlcom_open, xlcom_close, xlcom_read, xlcom_write, xlcom_ioctl,
-	xlcom_stop, xlcom_tty, xlcom_poll, nommap, ttykqfilter, D_TTY
+	.d_open = xlcom_open,
+	.d_close = xlcom_close,
+	.d_read = xlcom_read,
+	.d_write = xlcom_write,
+	.d_ioctl = xlcom_ioctl,
+	.d_stop = xlcom_stop,
+	.d_tty = xlcom_tty,
+	.d_poll = xlcom_poll,
+	.d_mmap = nommap,
+	.d_kqfilter = ttykqfilter,
+	.d_flag = D_TTY
 };
 
 extern struct cfdriver xlcom_cd;

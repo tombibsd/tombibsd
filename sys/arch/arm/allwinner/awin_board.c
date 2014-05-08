@@ -183,7 +183,6 @@ awin_bootstrap(vaddr_t iobase, vaddr_t uartbase)
 	printf("\n");
 #endif
 
-#ifdef MULTIPROCESSOR
 #ifdef VERBOSE_INIT_ARM
 	uint32_t s0 = bus_space_read_4(&awin_bs_tag, awin_core_bsh,
 	    AWIN_CPUCFG_OFFSET + AWIN_CPUCFG_CPU0_STATUS_REG);
@@ -191,10 +190,23 @@ awin_bootstrap(vaddr_t iobase, vaddr_t uartbase)
 	    AWIN_CPUCFG_OFFSET + AWIN_CPUCFG_CPU1_STATUS_REG);
 	printf("%s: cpu status: 0=%#x 1=%#x\n", __func__, s0, s1);
 #endif
+
+#if !defined(MULTIPROCESSOR) && defined(VERBOSE_INIT_ARM)
+	u_int arm_cpu_max;
+#endif
+#if defined(MULTIPROCESSOR) || defined(VERBOSE_INIT_ARM)
 	arm_cpu_max = 1 + __SHIFTOUT(armreg_l2ctrl_read(), L2CTRL_NUMCPU);
+#endif
 #ifdef VERBOSE_INIT_ARM
 	printf("%s: %d cpus present\n", __func__, arm_cpu_max);
 #endif
+#if defined(MULTIPROCESSOR)
+	for (size_t i = 1; i < arm_cpu_max; i++) {
+		if ((arm_cpu_hatched & (1 << i)) == 0) {
+			printf("%s: warning: cpu%zu failed to hatch\n",
+			    __func__, i);
+		}
+	}
 #endif
 }
 
@@ -212,7 +224,7 @@ awin_cpu_hatch(struct cpu_info *ci)
 }
 #endif
 
-psize_t 
+psize_t
 awin_memprobe(void)
 {
 	const uint32_t dcr = bus_space_read_4(&awin_bs_tag, awin_core_bsh,

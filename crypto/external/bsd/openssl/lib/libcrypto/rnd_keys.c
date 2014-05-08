@@ -72,7 +72,7 @@ des_init_random_number_generator(des_cblock *seed)
 
 	SHA1Init(&sha);
 
-	gethostname(hname, sizeof(hname - 1));
+	gethostname(hname, sizeof(hname) - 1);
 	gettimeofday(&when, NULL);
 
 	memcpy(&seed_q, seed, sizeof(seed_q));

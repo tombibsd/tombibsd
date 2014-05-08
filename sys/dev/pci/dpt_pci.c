@@ -86,6 +86,7 @@ dpt_pci_attach(device_t parent, device_t self, void *aux)
 	bus_space_handle_t ioh;
 	const char *intrstr;
 	pcireg_t csr;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	aprint_naive(": Storage controller\n");
 
@@ -119,7 +120,7 @@ dpt_pci_attach(device_t parent, device_t self, void *aux)
 		aprint_error("can't map interrupt\n");
 		return;
 	}
-	intrstr = pci_intr_string(pc, ih);
+	intrstr = pci_intr_string(pc, ih, intrbuf, sizeof(intrbuf));
 	sc->sc_ih = pci_intr_establish(pc, ih, IPL_BIO, dpt_intr, sc);
 	if (sc->sc_ih == NULL) {
 		aprint_error("can't establish interrupt");

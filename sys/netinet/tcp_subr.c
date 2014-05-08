@@ -224,7 +224,7 @@ int	tcp_rttlocal = 0;		/* Use RTT to decide who's 'local' */
 int	tcp4_vtw_enable = 0;		/* 1 to enable */
 int	tcp6_vtw_enable = 0;		/* 1 to enable */
 int	tcp_vtw_was_enabled = 0;
-int	tcp_vtw_entries = 1 << 16;	/* 64K vestigial TIME_WAIT entries */
+int	tcp_vtw_entries = 1 << 4;	/* 16 vestigial TIME_WAIT entries */
 
 /* tcb hash */
 #ifndef TCBHASHSIZE

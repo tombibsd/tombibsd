@@ -73,8 +73,17 @@ static percpu_t *		npf_stats_percpu	__read_mostly;
 static struct sysctllog *	npf_sysctl		__read_mostly;
 
 const struct cdevsw npf_cdevsw = {
-	npf_dev_open, npf_dev_close, npf_dev_read, nowrite, npf_dev_ioctl,
-	nostop, notty, npf_dev_poll, nommap, nokqfilter, D_OTHER | D_MPSAFE
+	.d_open = npf_dev_open,
+	.d_close = npf_dev_close,
+	.d_read = npf_dev_read,
+	.d_write = nowrite,
+	.d_ioctl = npf_dev_ioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = npf_dev_poll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_OTHER | D_MPSAFE
 };
 
 static int

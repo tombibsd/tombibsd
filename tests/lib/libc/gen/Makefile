@@ -4,7 +4,8 @@
 
 TESTSDIR=	${TESTSBASE}/lib/libc/gen
 
-TESTS_SUBDIRS=	posix_spawn
+TESTS_SUBDIRS=	execve
+TESTS_SUBDIRS+=	posix_spawn
 
 TESTS_C+=	t_alarm
 TESTS_C+=	t_assert

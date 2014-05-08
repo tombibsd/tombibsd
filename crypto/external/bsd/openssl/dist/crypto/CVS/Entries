@@ -11,7 +11,7 @@
 /armcap.c/1.1.1.2/Fri Jan 31 08:44:57 2014/-kk/
 /armv4cpuid.S/1.1.1.1/Thu Jul 26 14:59:04 2012/-kk/
 /cpt_err.c/1.1.1.2/Sun Jun  5 14:57:19 2011/-kk/
-/cryptlib.c/1.3/Thu Oct 24 10:28:41 2013/-kk/
+/cryptlib.c/1.4/Sat Apr 19 05:33:39 2014/-kk/
 /cryptlib.h/1.3/Thu Oct 24 10:28:41 2013/-kk/
 /crypto-lib.com/1.1.1.5/Thu Oct 24 10:28:41 2013/-kk/
 /crypto.h/1.4/Thu Oct 24 10:28:41 2013/-kk/
@@ -38,7 +38,7 @@
 /o_time.h/1.1.1.1/Sun Jul 19 23:02:35 2009/-kk/
 /opensslconf.h.in/1.1.1.1/Sun Jul 19 23:02:35 2009/-kk/
 /opensslconf.h/1.5/Sun Aug 12 17:24:59 2012/-kk/
-/opensslv.h/1.7/Fri Jan 31 08:44:57 2014/-kk/
+/opensslv.h/1.8/Sat Apr 19 05:33:39 2014/-kk/
 /ossl_typ.h/1.1.1.2/Thu Jul 26 14:59:14 2012/-kk/
 /pariscid.pl/1.1.1.2/Fri Jan 31 08:44:57 2014/-kk/
 /ppccap.c/1.3/Thu Oct 24 10:28:41 2013/-kk/
@@ -47,7 +47,7 @@
 /s390xcpuid.S/1.1.1.3/Thu Jul 26 14:59:15 2012/-kk/
 /sparccpuid.S/1.3/Thu Oct 24 10:28:41 2013/-kk/
 /sparcv9cap.c/1.1.1.3/Thu Jul 26 14:59:15 2012/-kk/
-/symhacks.h/1.1.1.5/Thu Oct 24 10:28:41 2013/-kk/
+/symhacks.h/1.1.1.6/Sat Apr 19 05:33:39 2014/-kk/
 /uid.c/1.2/Sun Jul 19 23:30:38 2009/-kk/
 /vms_rms.h/1.1.1.1/Sun Jun  5 14:57:22 2011/-kk/
 /x86_64cpuid.pl/1.1.1.4/Thu Oct 24 10:28:41 2013/-kk/

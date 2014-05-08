@@ -97,6 +97,7 @@ mtd_pci_attach(device_t parent, device_t self, void *aux)
 	bus_space_tag_t iot, memt;
 	bus_space_handle_t ioh, memh;
 	int io_valid, mem_valid;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	sc->dev = self;
 	pci_aprint_devinfo(pa, NULL);
@@ -126,7 +127,7 @@ mtd_pci_attach(device_t parent, device_t self, void *aux)
 		aprint_error_dev(sc->dev, "could not map interrupt\n");
 		return;
 	}
-	intrstring = pci_intr_string(pa->pa_pc, ih);
+	intrstring = pci_intr_string(pa->pa_pc, ih, intrbuf, sizeof(intrbuf));
 
 	if (pci_intr_establish(pa->pa_pc, ih, IPL_NET, mtd_irq_h, sc) == NULL) {
 		aprint_error_dev(sc->dev, "could not establish interrupt");

@@ -43,6 +43,7 @@
 #include <machine/asm.h>
 
 	.data
+	.align	4
 randseed:
 	.long	1
 

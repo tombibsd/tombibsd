@@ -780,6 +780,7 @@ ahc_pci_attach(device_t parent, device_t self, void *aux)
 	const char        *intrstr;
 	struct ahc_pci_busdata *bd;
 	bool               override_ultra;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	ahc->sc_dev = self;
 	ahc_set_name(ahc, device_xname(ahc->sc_dev));
@@ -953,7 +954,7 @@ ahc_pci_attach(device_t parent, device_t self, void *aux)
 		ahc_free(ahc);
 		return;
 	}
-	intrstr = pci_intr_string(pa->pa_pc, ih);
+	intrstr = pci_intr_string(pa->pa_pc, ih, intrbuf, sizeof(intrbuf));
 	ahc->ih = pci_intr_establish(pa->pa_pc, ih, IPL_BIO, ahc_intr, ahc);
 	if (ahc->ih == NULL) {
 		aprint_error_dev(ahc->sc_dev,

@@ -508,14 +508,11 @@ nhpibintr(void *arg)
 	int stat0;
 	int stat1;
 
-#ifdef lint
-	if (stat1 = unit)
-		return 1;
-#endif
 	if ((hd->hpib_ids & IDS_IR) == 0)
 		return 0;
 	stat0 = hd->hpib_mis;
 	stat1 = hd->hpib_lis;
+	__USE(stat1);
 
 	hq = TAILQ_FIRST(&hs->sc_queue);
 

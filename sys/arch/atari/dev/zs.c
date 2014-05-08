@@ -238,8 +238,17 @@ dev_type_tty(zstty);
 dev_type_poll(zspoll);
 
 const struct cdevsw zs_cdevsw = {
-	zsopen, zsclose, zsread, zswrite, zsioctl,
-	zsstop, zstty, zspoll, nommap, ttykqfilter, D_TTY
+	.d_open = zsopen,
+	.d_close = zsclose,
+	.d_read = zsread,
+	.d_write = zswrite,
+	.d_ioctl = zsioctl,
+	.d_stop = zsstop,
+	.d_tty = zstty,
+	.d_poll = zspoll,
+	.d_mmap = nommap,
+	.d_kqfilter = ttykqfilter,
+	.d_flag = D_TTY
 };
 
 /* Interrupt handlers. */
@@ -1325,5 +1334,6 @@ zs_loadchannelregs(struct zschan *zc, uint8_t *reg)
 	ZS_WRITE(zc, 15, reg[15]);
 	ZS_WRITE(zc,  3, reg[3]);
 	ZS_WRITE(zc,  5, reg[5]);
+	__USE(i);
 }
 #endif /* NZS > 1 */

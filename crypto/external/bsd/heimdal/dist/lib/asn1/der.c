@@ -40,7 +40,7 @@
 #include <krb5/getarg.h>
 #include <err.h>
 
-__RCSID("$NetBSD$");
+__RCSID("NetBSD");
 
 
 static const char *class_names[] = {

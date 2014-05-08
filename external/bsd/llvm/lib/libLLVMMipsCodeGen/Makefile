@@ -11,6 +11,7 @@ SRCS+=	Mips16ISelDAGToDAG.cpp \
 	Mips16InstrInfo.cpp \
 	Mips16FrameLowering.cpp \
 	Mips16HardFloat.cpp \
+	Mips16HardFloatInfo.cpp \
 	Mips16RegisterInfo.cpp \
 	MipsAnalyzeImmediate.cpp \
 	MipsAsmPrinter.cpp \

@@ -24,7 +24,7 @@ LIBISPRIVATE=	yes
 CPPFLAGS+=	-DRTLD_ARCH_SUBDIR=\"${MLIBDIR}\"
 .endif
 
-.if ${MACHINE_ARCH} != "alpha"
+.if ${OBJECT_FMTS:Melf32} != ""
 .include "../Makefile.elf"
 .endif
 

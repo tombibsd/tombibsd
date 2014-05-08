@@ -186,10 +186,13 @@ zzz(void)
 {
 	int     oldtime;
 	int     n;
+	int zzztime;
+
+	zzztime = (3 * CYCLE) / 4;
 
 	oldtime = ourtime;
-	if ((snooze - ourtime) < (0.75 * CYCLE)) {
-		ourtime += 0.75 * CYCLE - (snooze - ourtime);
+	if ((snooze - ourtime) < zzztime) {
+		ourtime += zzztime - (snooze - ourtime);
 		printf("<zzz>");
 		for (n = 0; n < ourtime - oldtime; n++)
 			printf(".");

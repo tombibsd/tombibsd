@@ -28,6 +28,26 @@
 #ifndef _GTIDMACVAR_H_
 #define _GTIDMACVAR_H_
 
+#include <dev/marvell/marvellvar.h>
+
+/*
+ * We get access control of IDMAC. 
+ * Please set to variable 'gtidmac_winacctbl' your winacctbl-list by
+ * device_register() or MD initialization processing.  You can also set except
+ * MARVELL_TAG_SDRAM_CS* to a tag.  In this case, device_register() should
+ * replace mva_tags of marvell_attach_args to the tag list for you.
+ */
+struct gtidmac_winacctbl {
+	enum marvell_tags tag;
+
+#define GTIDMAC_WINACC_NOACCESSALLOWED	0	/* No Access Allowed */
+#define GTIDMAC_WINACC_READONLY		1	/* Read Only */
+#define GTIDMAC_WINACC_FULLACCESS	2	/* Full Access */
+	int winacc;
+};
+extern struct gtidmac_winacctbl *gtidmac_winacctbl;
+extern struct gtidmac_winacctbl *mvxore_winacctbl;
+
 void *gtidmac_tag_get(void);
 
 int gtidmac_chan_alloc(void *, bus_dmamap_t **, bus_dmamap_t **, void *);

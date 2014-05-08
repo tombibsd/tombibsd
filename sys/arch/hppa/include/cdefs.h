@@ -10,6 +10,6 @@
  */
 #define __ASM_DELIMITER "\n\t"
 
-#define	__ALIGNBYTES	7
+#define	__ALIGNBYTES	((size_t)7)
 
 #endif /* !_HPPA_CDEFS_H_ */

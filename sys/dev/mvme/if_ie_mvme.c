@@ -130,10 +130,7 @@ ie_reset(struct ie_softc *sc, int why)
 static int
 ie_intrhook(struct ie_softc *sc, int when)
 {
-	struct ie_pcctwo_softc *ps;
 	u_int8_t reg;
-
-	ps = (struct ie_pcctwo_softc *) sc;
 
 	if (when == INTR_EXIT) {
 		reg = pcc2_reg_read(sys_pcctwo, PCC2REG_ETH_ICSR);

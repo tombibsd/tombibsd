@@ -20,5 +20,5 @@ CRYPTOCPPFLAGS=-DOPENSSL_CPUID_OBJ
 .endif
 
 .for cryptosrc in ${CRYPTO_SRCS}
-CPPFLAGS.${cryptosrc} = -I${OPENSSLSRC}/crypto/crypto ${CRYPTOCPPFLAGS}
+CPPFLAGS.${cryptosrc} += -I${OPENSSLSRC}/crypto/crypto ${CRYPTOCPPFLAGS}
 .endfor

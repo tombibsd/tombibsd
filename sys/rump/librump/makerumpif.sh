@@ -145,6 +145,10 @@ $1 == "WRAPPERS"{gencalls = topdir "/" $2;print gencalls;next}
 		printf("\n") > pubhdr
 		printf("\n") > privhdr
 
+		printf("#ifndef _RUMP_PRIF_%s_H_\n", toupper(myname)) > privhdr
+		printf("#define _RUMP_PRIF_%s_H_\n", toupper(myname)) > privhdr
+		printf("\n") > privhdr
+
 		printf("\n#include <sys/cdefs.h>\n") > gencalls
 		printf("#include <sys/systm.h>\n") > gencalls
 		printf("\n#include <rump/rump.h>\n") > gencalls
@@ -168,6 +172,8 @@ $1 == "WRAPPERS"{gencalls = topdir "/" $2;print gencalls;next}
 
 	printf("%s rump_pub_%s(%s);\n", funtype, funname, funargs) > pubhdr
 	printf("%s rump_%s(%s);\n", funtype, funname, funargs) > privhdr
+	printf("typedef %s (*rump_%s_fn)(%s);\n",	\
+	    funtype, funname, funargs) > privhdr
 
 	if (funtype == "void")
 		voidret = 1
@@ -215,4 +221,6 @@ $1 == "WRAPPERS"{gencalls = topdir "/" $2;print gencalls;next}
 	if (isweak)
 		printf("__weak_alias(rump_%s,rump_%s_unavailable);\n", \
 		    funname, myname) > gencalls
-}'
+}
+
+END { printf("\n#endif /* _RUMP_PRIF_%s_H_ */\n", toupper(myname)) > privhdr }'

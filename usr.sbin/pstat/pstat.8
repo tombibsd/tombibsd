@@ -29,7 +29,7 @@
 .\"
 .\"     from: @(#)pstat.8	8.5 (Berkeley) 5/13/94
 .\"
-.Dd December 5, 2009
+.Dd March 24, 2014
 .Dt PSTAT 8
 .Os
 .Sh NAME
@@ -270,14 +270,6 @@ VSYSTEM vnode being used by kernel.
 VISTTY vnode is a tty.
 .It E
 VEXECMAP vnode has PROT_EXEC mappings.
-.It L
-VXLOCK locked to change underlying type.
-.It W
-VXWANT process is waiting for vnode.
-.It B
-VBWAIT waiting for output to complete.
-.It A
-VALIASED vnode has an alias.
 .It D
 VDIROP lfs vnode involved in directory op.
 .It Y

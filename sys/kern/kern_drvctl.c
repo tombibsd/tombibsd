@@ -66,8 +66,17 @@ static struct selinfo		drvctl_rdsel;
 dev_type_open(drvctlopen);
 
 const struct cdevsw drvctl_cdevsw = {
-	drvctlopen, nullclose, nullread, nullwrite, noioctl,
-	nostop, notty, nopoll, nommap, nokqfilter, D_OTHER
+	.d_open = drvctlopen,
+	.d_close = nullclose,
+	.d_read = nullread,
+	.d_write = nullwrite,
+	.d_ioctl = noioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_OTHER
 };
 
 void drvctlattach(int);

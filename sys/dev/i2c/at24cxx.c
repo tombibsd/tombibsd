@@ -94,8 +94,17 @@ dev_type_read(seeprom_read);
 dev_type_write(seeprom_write);
 
 const struct cdevsw seeprom_cdevsw = {
-	seeprom_open, seeprom_close, seeprom_read, seeprom_write, noioctl,
-	nostop, notty, nopoll, nommap, nokqfilter, D_OTHER
+	.d_open = seeprom_open,
+	.d_close = seeprom_close,
+	.d_read = seeprom_read,
+	.d_write = seeprom_write,
+	.d_ioctl = noioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_OTHER
 };
 
 static int seeprom_wait_idle(struct seeprom_softc *);

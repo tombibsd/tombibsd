@@ -635,7 +635,7 @@ l2t_seq_show(struct seq_file *seq, void *v)
         struct l2t_entry *e = v;
 
         mtx_lock(&e->lock);
-        sprintf(ip, "%u.%u.%u.%u", NIPQUAD(e->addr));
+        snprintf(ip, sizeof(ip), "%u.%u.%u.%u", NIPQUAD(e->addr));
         seq_printf(seq, "%-5u %-15s %02x:%02x:%02x:%02x:%02x:%02x  %4d"
                "  %3u     %c   %7u   %4u %s\n",
                e->idx, ip, e->dmac[0], e->dmac[1], e->dmac[2],

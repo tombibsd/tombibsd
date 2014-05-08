@@ -2,15 +2,11 @@
 #
 
 LIB=	rumpnet_virtif
+VIRTIF=	virt
 
-SRCS=	if_virt.c
-SRCS+=	component.c
+.include "${.CURDIR}/Makefile.virtif"
 
-CPPFLAGS+=	-I${.CURDIR}/../../../librump/rumpkern -I${.CURDIR}
-CPPFLAGS+=	-DVIRTIF_BASE=virt
-
-RUMPCOMP_USER=	#defined
-RUMPCOMP_USER_CPPFLAGS+= -DVIRTIF_BASE=virt
+RUMPCOMP_USER_SRCS=	virtif_user.c
 
 .include <bsd.lib.mk>
 .include <bsd.klinks.mk>

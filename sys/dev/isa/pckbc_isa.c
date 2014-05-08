@@ -123,6 +123,8 @@ pckbc_isa_match(device_t parent, cfdata_t match, void *aux)
 #endif
 			ok = 0;
 		}
+#else
+		__USE(res);
 #endif /* PCKBCNOTEST */
  out:
 		bus_space_unmap(iot, ioh_d, 1);

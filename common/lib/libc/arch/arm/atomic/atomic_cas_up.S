@@ -53,7 +53,7 @@ END(_atomic_cas_up)
 ARM_ENTRY(_atomic_cas_64_up)
 	push	{r4-r5}
 	mov	ip, r0
-	ldrd	r4, r5, [sp]
+	ldrd	r4, r5, [sp, #8]
 	.align	0
 RAS_START_ASM_HIDDEN(_atomic_cas_64)
 	ldrd	r0, r1, [ip]

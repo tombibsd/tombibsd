@@ -148,7 +148,7 @@ linux_sys_ioctl(struct lwp *l, const struct linux_sys_ioctl_args *uap, register_
 #if NSEQUENCER > 0
 /* XXX XAX 2x check this. */
 		/*
-		 * Both termios and the MIDI sequncer use 'T' to identify
+		 * Both termios and the MIDI sequencer use 'T' to identify
 		 * the ioctl, so we have to differentiate them in another
 		 * way.  We do it by indexing in the cdevsw with the major
 		 * device number and check if that is the sequencer entry.

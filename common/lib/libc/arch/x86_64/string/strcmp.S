@@ -70,3 +70,4 @@ ENTRY(strcmp)
 	movzbq	%dl,%rdx
 	subq	%rdx,%rax
 	ret
+END(strcmp)

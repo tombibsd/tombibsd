@@ -75,10 +75,6 @@ main(int argc, char **argv) {
 	isc_boolean_t memstats = ISC_FALSE;
 	char *filename = NULL;
 
-	isc__mem_register();
-	isc__task_register();
-	isc__timer_register();
-	isc__socket_register();
 	RUNTIME_CHECK(isc_mem_create(0, 0, &mctx) == ISC_R_SUCCESS);
 
 	result = isc_log_create(mctx, &lctx, &lcfg);

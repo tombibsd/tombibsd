@@ -128,8 +128,17 @@ dev_type_tty(siotty);
 dev_type_poll(siopoll);
 
 const struct cdevsw siotty_cdevsw = {
-	sioopen, sioclose, sioread, siowrite, sioioctl,
-	siostop, siotty, siopoll, nommap, ttykqfilter, D_TTY
+	.d_open = sioopen,
+	.d_close = sioclose,
+	.d_read = sioread,
+	.d_write = siowrite,
+	.d_ioctl = sioioctl,
+	.d_stop = siostop,
+	.d_tty = siotty,
+	.d_poll = siopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = ttykqfilter,
+	.d_flag = D_TTY
 };
 
 static int

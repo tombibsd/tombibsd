@@ -247,10 +247,6 @@ main(int argc, char **argv) {
 	char *filename = NULL;
 	const char *classname = "IN";
 
-	isc__mem_register();
-	isc__task_register();
-	isc__timer_register();
-	isc__socket_register();
 	while ((c = isc_commandline_parse(argc, argv, "cdf:m:qsMS")) != EOF) {
 		switch (c) {
 		case 'c':

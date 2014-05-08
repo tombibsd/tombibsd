@@ -158,7 +158,6 @@ scan_PCI(int start)
 	int slot, r;
 	struct PCI_cinfo *pslot;
 	int VGAslot = -1;
-	int highVGAslot = 0;
 
 	for (slot = start + 1; slot < PCI_NSLOTS; slot++) {
 		pslot = &PCI_slots[slot];
@@ -171,7 +170,6 @@ scan_PCI(int start)
 			    ((pslot->regs[CLASS] & 0xffffff00) ==
 				0x00010000)) {
 				/* it's a VGA card */
-				highVGAslot = slot;
 				if ((pslot->regs[CMD] & 0x03)) {
 					/* fW enabled it */
 					VGAslot = slot;

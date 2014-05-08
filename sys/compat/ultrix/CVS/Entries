@@ -8,7 +8,7 @@
 /ultrix_fs.c/1.54/Tue Dec 17 04:05:06 2013/-kk/
 /ultrix_ioctl.c/1.36/Mon Dec 14 00:47:12 2009/-kk/
 /ultrix_misc.c/1.122/Sun Feb 19 21:06:45 2012/-kk/
-/ultrix_mod.c/1.4/Thu Oct 24 10:28:57 2013/-kk/
+/ultrix_mod.c/1.5/Fri Mar 14 04:28:19 2014/-kk/
 /ultrix_pathname.c/1.38/Mon Dec 14 00:47:12 2009/-kk/
 /ultrix_syscall.h/1.63/Tue Nov 12 02:18:43 2013/-kk/
 /ultrix_syscallargs.h/1.58/Tue Nov 12 02:18:43 2013/-kk/

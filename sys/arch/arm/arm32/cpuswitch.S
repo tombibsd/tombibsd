@@ -279,7 +279,9 @@ ENTRY(cpu_switchto)
 #endif
 
 	/* Record the old lwp for pmap_activate()'s benefit */
+#ifndef ARM_MMU_EXTENDED
 	str	r4, [r3, #CI_LASTLWP]
+#endif
 
 	/* rem: r4 = old lwp */
 	/* rem: r5 = new lwp's proc */

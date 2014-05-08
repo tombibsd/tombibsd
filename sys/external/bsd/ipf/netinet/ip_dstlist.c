@@ -72,7 +72,7 @@ struct file;
 # include "md5.h"
 #endif
 
-__KERNEL_RCSID(0, "@(#)Id: ip_dstlist.c,v 1.1.1.2 2012/07/22 13:45:11 darrenr Exp");
+__KERNEL_RCSID(0, "Id: ip_dstlist.c,v 1.1.1.2 2012/07/22 13:45:11 darrenr Exp");
 
 typedef struct ipf_dstl_softc_s {
 	ippool_dst_t	*dstlist[LOOKUP_POOL_SZ];

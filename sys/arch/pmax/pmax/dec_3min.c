@@ -183,7 +183,7 @@ dec_3min_init(void)
 		physmem_boardmax = physmem_boardmax >> 2;
 	physmem_boardmax = MIPS_PHYS_TO_KSEG1(physmem_boardmax);
 
-	sprintf(cpu_model, "DECstation 5000/1%d (3MIN)", mips_options.mips_cpu_mhz);
+	cpu_setmodel("DECstation 5000/1%d (3MIN)", mips_options.mips_cpu_mhz);
 }
 
 /*

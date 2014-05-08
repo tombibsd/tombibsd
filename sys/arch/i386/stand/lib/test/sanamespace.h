@@ -12,7 +12,6 @@
 #undef ioctl
 #undef lseek
 #undef printf
-#undef sprintf
 #undef vprintf
 #undef putchar
 #undef gets

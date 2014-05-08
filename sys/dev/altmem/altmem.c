@@ -60,12 +60,26 @@ static int	altmem_match(device_t, cfdata_t, void *);
 static void	altmem_attach(device_t, device_t, void *);
 
 const struct bdevsw altmem_bdevsw = {
-        altmemopen, altmemclose, altmemstrategy, altmemioctl, nodump,
-	altmemsize, D_DISK
+        .d_open = altmemopen,
+	.d_close = altmemclose,
+	.d_strategy = altmemstrategy,
+	.d_ioctl = altmemioctl,
+	.d_dump = nodump,
+	.d_psize = altmemsize,
+	.d_flag = D_DISK
 };
 const struct cdevsw altmem_cdevsw = {
-	altmemopen, altmemclose, altmemread, altmemwrite, altmemioctl,
-	nostop, notty, nopoll, nommap, nokqfilter, D_DISK
+	.d_open = altmemopen,
+	.d_close = altmemclose,
+	.d_read = altmemread,
+	.d_write = altmemwrite,
+	.d_ioctl = altmemioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_DISK
 };
 static struct dkdriver altmemdkdriver = { altmemstrategy, minphys };
 extern struct cfdriver altmem_cd;

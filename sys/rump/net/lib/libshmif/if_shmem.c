@@ -52,7 +52,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include "rump_private.h"
 #include "rump_net_private.h"
-#include "rumpcomp_user.h"
+#include "shmif_user.h"
 
 static int shmif_clone(struct if_clone *, int);
 static int shmif_unclone(struct ifnet *);
@@ -170,7 +170,7 @@ allocif(int unit, struct shmif_sc **scp)
 
 	ifp = &sc->sc_ec.ec_if;
 
-	sprintf(ifp->if_xname, "shmif%d", unit);
+	snprintf(ifp->if_xname, sizeof(ifp->if_xname), "shmif%d", unit);
 	ifp->if_softc = sc;
 	ifp->if_flags = IFF_BROADCAST | IFF_MULTICAST;
 	ifp->if_init = shmif_init;

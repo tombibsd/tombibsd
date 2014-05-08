@@ -57,7 +57,7 @@ typedef struct prop_dictionary *prop_dictionary_t;
 #endif
 #endif /* __NetBSD__ */
 
-#if defined(__sun__) && !defined(RUMP_REGISTER_T)
+#if (!defined(_KERNEL)) && (defined(__sun__) || defined(__ANDROID__)) && !defined(RUMP_REGISTER_T)
 #define RUMP_REGISTER_T long
 typedef RUMP_REGISTER_T register_t;
 #endif
@@ -99,6 +99,10 @@ enum rump_etfs_type {
 #ifdef _BEGIN_DECLS
 _BEGIN_DECLS
 #endif
+
+int	rump_getversion(void);
+int	rump_pub_getversion(void); /* compat */
+int	rump_nativeabi_p(void);
 
 int	rump_boot_gethowto(void);
 void	rump_boot_sethowto(int);

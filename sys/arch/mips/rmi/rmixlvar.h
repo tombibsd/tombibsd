@@ -208,14 +208,13 @@ rmixl_cache_err_check(void)
 static inline int
 rmixl_probe_4(volatile uint32_t *va)
 {
-	uint32_t tmp;
 	uint32_t r;
 	int err;
 	int s;
 
 	s = splhigh();
 	r = rmixl_cache_err_dis();
-	tmp = *va;			/* probe */
+	(void)*va;			/* probe */
 	err = rmixl_cache_err_check();
 	rmixl_cache_err_restore(r);
 	splx(s);

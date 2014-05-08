@@ -7,7 +7,7 @@ LIB=	rumpdev_md
 IOCONF=	MD.ioconf
 
 SRCS=	md.c
-SRCS+=	component.c
+SRCS+=	md_component.c
 
 CPPFLAGS+=	-I${.CURDIR}/../../../librump/rumpvfs
 

@@ -419,8 +419,8 @@ supported by GNU
 are
 .Em not
 supported at this moment.
-.It Fn gsub r t "[s]"
-same as
+.It Fn gsub r s "[t]"
+Same as
 .Fn sub
 except that all occurrences of the regular expression
 are replaced;
@@ -477,13 +477,13 @@ according to the
 .Xr printf 3
 format
 .Ar fmt .
-.It Fn sub r t "[s]"
+.It Fn sub r s "[t]"
 substitutes
-.Ar t
+.Ar s
 for the first occurrence of the regular expression
 .Ar r
-in the string
-.Ar s .
+in the target string
+.Ar t .
 If
 .Ar s
 is not given,

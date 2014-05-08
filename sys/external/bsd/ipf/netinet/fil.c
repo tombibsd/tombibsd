@@ -4196,14 +4196,14 @@ ipf_getstat(ipf_main_softc_t *softc, friostat_t *fiop, int rev)
 	fiop->f_features = ipf_features;
 
 #ifdef IPFILTER_COMPAT
-	sprintf(fiop->f_version, "IP Filter: v%d.%d.%d",
-		(rev / 1000000) % 100,
-		(rev / 10000) % 100,
-		(rev / 100) % 100);
+	snprintf(fiop->f_version, sizeof(fiop->f_version),
+		 "IP Filter: v%d.%d.%d", (rev / 1000000) % 100,
+		 (rev / 10000) % 100, (rev / 100) % 100);
 #else
 	rev = rev;
 	(void) strncpy(fiop->f_version, ipfilter_version,
 		       sizeof(fiop->f_version));
+        fiop->f_version[sizeof(fiop->f_version) - 1] = '\0';
 #endif
 }
 
@@ -5392,11 +5392,7 @@ ipf_grpmapinit(ipf_main_softc_t *softc, frentry_t *fr)
 	char name[FR_GROUPLEN];
 	iphtable_t *iph;
 
-#if defined(SNPRINTF) && defined(_KERNEL)
-	SNPRINTF(name, sizeof(name), "%d", fr->fr_arg);
-#else
-	(void) sprintf(name, "%d", fr->fr_arg);
-#endif
+	(void) snprintf(name, sizeof(name), "%d", fr->fr_arg);
 	iph = ipf_lookup_find_htable(softc, IPL_LOGIPF, name);
 	if (iph == NULL) {
 		IPFERROR(38);
@@ -5932,12 +5928,9 @@ ipf_getifname(ifp, buffer)
 	unit = ifp->if_unit;
 	space = LIFNAMSIZ - (s - buffer);
 	if ((space > 0) && (unit >= 0)) {
-#  if defined(SNPRINTF) && defined(_KERNEL)
-		SNPRINTF(temp, sizeof(temp), "%d", unit);
-#  else
-		(void) sprintf(temp, "%d", unit);
-#  endif
+		snprintf(temp, sizeof(temp), "%d", unit);
 		(void) strncpy(s, temp, space);
+		s[space - 1] = '\0';
 	}
 # endif
 	return buffer;

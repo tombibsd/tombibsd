@@ -134,7 +134,7 @@
 /mpfr-gmp.h/1.1.1.1/Thu Nov 28 12:30:54 2013/-kk/
 /mpfr-impl.h/1.1.1.1/Thu Nov 28 12:30:54 2013/-kk/
 /mpfr-intmax.h/1.1.1.1/Thu Nov 28 12:30:54 2013/-kk/
-/mpfr-longlong.h/1.1.1.1/Thu Nov 28 12:30:54 2013/-kk/
+/mpfr-longlong.h/1.2/Fri Apr 11 02:02:20 2014/-kk/
 /mpfr-thread.h/1.1.1.1/Thu Nov 28 12:30:54 2013/-kk/
 /mpfr.h/1.1.1.1/Thu Nov 28 12:30:54 2013/-kk/
 /mpn_exp.c/1.1.1.1/Thu Nov 28 12:30:54 2013/-kk/

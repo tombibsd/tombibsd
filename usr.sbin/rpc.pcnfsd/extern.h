@@ -19,7 +19,7 @@ void		free_pr_list_item __P((pr_list));
 void		free_pr_queue_item __P((pr_queue));
 struct passwd  *get_password __P((char *));
 pirstat		get_pr_status __P((printername, bool_t *, bool_t *, int *,
-		    bool_t *, char *));
+		    bool_t *, char *, size_t));
 void	       *grab __P((int));
 pcrstat		pr_cancel __P((char *, char *, char *));
 pirstat		pr_init __P((char *, char *, char **));

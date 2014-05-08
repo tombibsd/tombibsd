@@ -325,10 +325,8 @@ scsi_tt_idisable(void)
 static inline void
 scsi_tt_clr_ipend(void)
 {
-	int tmp;
-
 	SCSI_DMA->s_dma_ctrl = 0;
-	tmp = GET_TT_REG(NCR5380_IRCV);
+	GET_TT_REG(NCR5380_IRCV);
 	if (machineid & ATARI_TT)
 		MFP2->mf_iprb = (uint8_t)~IB_SCDM;
 	MFP2->mf_ipra = (uint8_t)~IA_SCSI;

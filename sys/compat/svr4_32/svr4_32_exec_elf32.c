@@ -244,7 +244,7 @@ svr4_32_copyargs(struct lwp *l, struct exec_package *pack, struct ps_strings *ar
 	a++;
 
 	len = (a - ai) * sizeof(AuxInfo);
-	if (copyout(ai, *stackp, len))
+	if ((error = copyout(ai, *stackp, len)) != 0)
 		return error;
 	*stackp += len;
 

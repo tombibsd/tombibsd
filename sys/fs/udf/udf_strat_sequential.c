@@ -525,6 +525,7 @@ udf_doshedule(struct udf_mount *ump)
 					&ump->metadata_track);
 			assert(error == 0);
 			mutex_enter(&priv->discstrat_mutex);
+			__USE(error);
 		}
 	}
 

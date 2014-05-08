@@ -51,6 +51,7 @@ void	footbridge_intr_disestablish(void *);
 #ifdef _KERNEL
 void *footbridge_intr_claim(int irq, int ipl, const char *name, int (*func)(void *), void *arg);
 void footbridge_intr_init(void);
+void footbridge_intr_evcnt_attach(void);
 void footbridge_intr_disestablish(void *cookie);
 #endif	/* _KERNEL */
 

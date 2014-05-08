@@ -4,7 +4,7 @@
 .include "${NETBSDSRCDIR}/distrib/common/Makefile.distrib"
 
 IMAGE=		ramdisk.fs
-IMAGESIZE=	1760k
+IMAGESIZE=	2000k
 MAKEFS_FLAGS=	-f 15
 
 WARNS=		1

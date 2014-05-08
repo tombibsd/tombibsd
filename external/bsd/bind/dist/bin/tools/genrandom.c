@@ -81,10 +81,6 @@ main(int argc, char **argv) {
 	size_t len;
 	char *name;
 
-	isc__mem_register();
-	isc__task_register();
-	isc__timer_register();
-	isc__socket_register();
 	isc_commandline_errprint = ISC_FALSE;
 
 	while ((c = isc_commandline_parse(argc, argv, "hn:")) != EOF) {

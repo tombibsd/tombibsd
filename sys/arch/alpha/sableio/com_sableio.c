@@ -90,6 +90,7 @@ com_sableio_attach(device_t parent, device_t self, void *aux)
 	struct com_softc *sc = &ssc->sc_com;
 	struct sableio_attach_args *sa = aux;
 	const char *intrstr;
+	char buf[PCI_INTRSTR_LEN];
 	bus_space_handle_t ioh;
 
 	sc->sc_dev = self;
@@ -105,7 +106,8 @@ com_sableio_attach(device_t parent, device_t self, void *aux)
 
 	com_attach_subr(sc);
 
-	intrstr = pci_intr_string(sa->sa_pc, sa->sa_sableirq[0]);
+	intrstr = pci_intr_string(sa->sa_pc, sa->sa_sableirq[0],
+	    buf, sizeof(buf));
 	ssc->sc_ih = pci_intr_establish(sa->sa_pc, sa->sa_sableirq[0],
 	    IPL_SERIAL, comintr, sc);
 	if (ssc->sc_ih == NULL) {

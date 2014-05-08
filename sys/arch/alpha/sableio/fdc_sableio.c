@@ -84,6 +84,7 @@ fdc_sableio_attach(device_t parent, device_t self, void *aux)
 	struct fdc_softc *fdc = &sfdc->sc_fdc;
 	struct sableio_attach_args *sa = aux;
 	const char *intrstr;
+	char buf[PCI_INTRSTR_LEN];
 
 	aprint_normal("\n");
 
@@ -110,7 +111,8 @@ fdc_sableio_attach(device_t parent, device_t self, void *aux)
 		return;
 	}
 
-	intrstr = pci_intr_string(sa->sa_pc, sa->sa_sableirq[0]);
+	intrstr = pci_intr_string(sa->sa_pc, sa->sa_sableirq[0],
+	    buf, sizeof(buf));
 	fdc->sc_ih = pci_intr_establish(sa->sa_pc, sa->sa_sableirq[0],
 	    IPL_BIO, fdcintr, fdc);
 	if (fdc->sc_ih == NULL) {

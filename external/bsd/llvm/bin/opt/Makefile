@@ -8,6 +8,7 @@ NOMAN=		yes
 .PATH: ${LLVM_SRCDIR}/tools/opt
 
 SRCS=	AnalysisWrappers.cpp \
+	BreakpointPrinter.cpp \
 	GraphPrinters.cpp \
 	NewPMDriver.cpp \
 	PassPrinters.cpp \

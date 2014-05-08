@@ -35,6 +35,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include "assym.h"
 #include <arm/asm.h>
 #include <arm/locore.h>
 

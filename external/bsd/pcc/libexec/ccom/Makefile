@@ -32,7 +32,7 @@ COPTS.pftn.c+=	-Wno-uninitialized
 
 DPSRCS=	external.c
 
-MKEXTDIR!=	cd ../mkext && ${PRINTOBJDIR}
+MKEXTDIR!=	cd ${.CURDIR}/../mkext && ${PRINTOBJDIR}
 
 external.c:	${MKEXTDIR}/mkext
 	${_MKTARGET_CREATE}

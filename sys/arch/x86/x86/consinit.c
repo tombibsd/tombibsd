@@ -147,7 +147,9 @@ void
 consinit(void)
 {
 	const struct btinfo_console *consinfo;
+#if (NGENFB > 0)
 	const struct btinfo_framebuffer *fbinfo;
+#endif
 	static int initted;
 #if (NCOM > 0)
 	int rv;
@@ -163,7 +165,9 @@ consinit(void)
 #endif
 		consinfo = &default_consinfo;
 
+#if (NGENFB > 0)
 	fbinfo = lookup_bootinfo(BTINFO_FRAMEBUFFER);
+#endif
 
 	if (!strcmp(consinfo->devname, "pc")) {
 		int error;

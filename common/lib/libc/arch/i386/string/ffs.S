@@ -18,3 +18,4 @@ ENTRY(ffs)
 	_ALIGN_TEXT
 L1:	xorl	%eax,%eax		/* clear result */
 	ret
+END(ffs)

@@ -1936,7 +1936,7 @@ coda_getpages(void *v)
 		 * XXX Perhaps we should not fully open the file, but
 		 * simply obtain a container file.
 		 */
-		/* XXX Is it ok to do this while holding the simplelock? */
+		/* XXX Is it ok to do this while holding the mutex? */
 		cerror = VOP_OPEN(vp, FREAD, cred);
 
 		if (cerror) {

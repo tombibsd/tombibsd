@@ -1513,7 +1513,7 @@ sysctl_lookup(SYSCTLFN_ARGS)
 	switch (SYSCTL_TYPE(rnode->sysctl_flags)) {
 	case CTLTYPE_INT:
 		/* Allow for 64bit read of 32bit value */
-		if (*oldlenp == sizeof (uint64_t)) {
+		if (*oldlenp != sz && *oldlenp == sizeof (uint64_t)) {
 			qval = *(int *)d;
 			d_out = &qval;
 			sz =  sizeof (uint64_t);
@@ -1521,9 +1521,12 @@ sysctl_lookup(SYSCTLFN_ARGS)
 		break;
 	case CTLTYPE_QUAD:
 		/* Allow for 32bit read of 64bit value */
-		if (*oldlenp == sizeof (int)) {
+		if (*oldlenp != sz && *oldlenp == sizeof (int)) {
 			qval = *(uint64_t *)d;
-			ival = qval < 0x100000000 ? qval : 0xffffffff;
+			ival = qval;
+			/* Replace out of range values with -1 */
+			if (ival != qval)
+				ival = -1;
 			d_out = &ival;
 			sz =  sizeof (int);
 		}
@@ -2102,6 +2105,11 @@ sysctl_createv(struct sysctllog **log, int cflags,
 	pnode = root;
 	error = sysctl_locate(NULL, &name[0], namelen - 1, &pnode, &ni);
 	if (error) {
+		/*
+		 * XXX: If you are seeing this printf in early bringup
+		 * stages, perhaps your setfault is not functioning and
+		 * thus kcopy() is mis-behaving.
+		 */
 		printf("sysctl_createv: sysctl_locate(%s) returned %d\n",
 		       nnode.sysctl_name, error);
 		sysctl_unlock();

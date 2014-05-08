@@ -271,11 +271,12 @@ void
 icpsp_intr(struct icp_ccb *ic)
 {
 	struct scsipi_xfer *xs;
-	struct icpsp_softc *sc;
  	struct icp_softc *icp;
  	int soff;
 
-	sc = device_private(ic->ic_dv);
+#ifdef DIAGNOSTIC
+	struct icpsp_softc *sc = device_private(ic->ic_dv);
+#endif
 	xs = ic->ic_context;
 	icp = device_private(device_parent(ic->ic_dv));
 	soff = ICP_SCRATCH_SENSE + ic->ic_ident *

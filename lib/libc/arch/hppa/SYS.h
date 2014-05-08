@@ -40,7 +40,7 @@
 #define	SYSCALL(x)				!\
 	stw	%rp, HPPA_FRAME_ERP(%sr0,%sp)	!\
 	ldil	L%SYSCALLGATE, %r1		!\
-	ble	4(%sr7, %r1)			!\
+	ble	4(%sr2, %r1)			!\
 	ldi	__CONCAT(SYS_,x), %t1		!\
 	.import __cerror, code			!\
 	comb,<>	%r0, %t1, __cerror		!\
@@ -57,7 +57,7 @@ SYSEXIT(x)
 SYSENTRY(x)					!\
 	stw	%rp, HPPA_FRAME_ERP(%sr0,%sp)	!\
 	ldil	L%SYSCALLGATE, %r1		!\
-	ble	4(%sr7, %r1)			!\
+	ble	4(%sr2, %r1)			!\
 	ldi	__CONCAT(SYS_,y), %t1		!\
 	ldw	HPPA_FRAME_ERP(%sr0,%sp), %rp	!\
 	bv	%r0(%rp)			!\

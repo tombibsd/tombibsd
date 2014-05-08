@@ -273,6 +273,8 @@ p_rtentry(struct rt_msghdr *rtm)
 		p_tag(rti_info[RTAX_TAG]);
 	printf(" %.16s", if_indextoname(rtm->rtm_index, ifbuf));
 	putchar('\n');
+	if (vflag)
+		pr_rtrmx(&rtm->rtm_rmx);
 }
 
 /*

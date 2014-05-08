@@ -35,7 +35,7 @@
 
 #include "ktutil_locl.h"
 
-__RCSID("$NetBSD$");
+__RCSID("NetBSD");
 
 static krb5_error_code
 change_entry (krb5_keytab keytab,
@@ -75,7 +75,7 @@ change_entry (krb5_keytab keytab,
 	    free(conf.realm);
 	    krb5_set_error_message(context, ENOMEM, "malloc failed");
 	    return ENOMEM;
-	}	
+	}
 	conf.mask |= KADM5_CONFIG_ADMIN_SERVER;
     }
 

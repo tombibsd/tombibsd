@@ -28,8 +28,9 @@
 /2010-10-19-WeakOdr.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /2011-04-09-EmptyGlobalCtors.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /2012-05-11-blockaddress.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
-/alias-resolve.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/alias-resolve.ll/1.1.1.2/Fri Mar 14 04:23:50 2014/-kk/
 /alias-used-address-space.ll/1.1.1.1/Sun Jan  5 16:16:56 2014/-kk/
+/alias-used-section.ll/1.1.1.1/Tue Mar  4 20:54:20 2014/-kk/
 /alias-used.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /array-elem-refs.ll/1.1.1.1/Sun Jan  5 16:16:56 2014/-kk/
 /atexit.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
@@ -50,6 +51,7 @@
 /deadglobal-2.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /deadglobal.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /externally-initialized-global-ctr.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/fastcc.ll/1.1.1.1/Tue Mar  4 20:54:20 2014/-kk/
 /globalsra-partial.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /globalsra-unknown-index.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /globalsra.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/

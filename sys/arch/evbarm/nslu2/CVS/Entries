@@ -4,7 +4,7 @@
 /nslu2_leds.c/1.10/Thu Oct 24 10:28:57 2013/-kk/
 /nslu2_machdep.c/1.24/Thu Oct 24 10:28:57 2013/-kk/
 /nslu2_mainbus.c/1.5/Sat Oct 27 17:17:48 2012/-kk/
-/nslu2_pci.c/1.5/Mon Nov 12 18:00:39 2012/-kk/
+/nslu2_pci.c/1.7/Fri Apr 11 02:03:29 2014/-kk/
 /nslu2_start.S/1.3/Mon Jan 31 06:28:05 2011/-kk/
 /nslu2reg.h/1.2/Mon Apr 28 20:23:17 2008/-kk/
 D

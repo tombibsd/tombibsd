@@ -109,6 +109,7 @@ svwsata_chip_map(struct pciide_softc *sc, const struct pci_attach_args *pa)
 	pcireg_t interface;
 	const char *intrstr;
 	int channel;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	/* The 4-port version has a dummy second function. */
 	if (pci_conf_read(sc->sc_pc, sc->sc_tag,
@@ -158,7 +159,7 @@ svwsata_chip_map(struct pciide_softc *sc, const struct pci_attach_args *pa)
 		    "couldn't map native-PCI interrupt\n");
 		return;
 	}
-	intrstr = pci_intr_string(pa->pa_pc, intrhandle);
+	intrstr = pci_intr_string(pa->pa_pc, intrhandle, intrbuf, sizeof(intrbuf));
 	sc->sc_pci_ih = pci_intr_establish(pa->pa_pc, intrhandle, IPL_BIO,
 	    pciide_pci_intr, sc);
 	if (sc->sc_pci_ih != NULL) {

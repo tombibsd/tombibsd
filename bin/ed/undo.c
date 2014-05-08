@@ -54,7 +54,7 @@ push_undo_stack(int type, long from, long to)
 	if (ustack == NULL &&
 	    (ustack = (undo_t *) malloc((usize = USIZE) * sizeof(undo_t))) == NULL) {
 		fprintf(stderr, "%s\n", strerror(errno));
-		sprintf(errmsg, "out of memory");
+		seterrmsg("out of memory");
 		return NULL;
 	}
 #endif
@@ -69,7 +69,7 @@ push_undo_stack(int type, long from, long to)
 	}
 	/* out of memory - release undo stack */
 	fprintf(stderr, "%s\n", strerror(errno));
-	sprintf(errmsg, "out of memory");
+	seterrmsg("out of memory");
 	clear_undo_stack();
 	free(ustack);
 	ustack = NULL;
@@ -97,7 +97,7 @@ pop_undo_stack(void)
 	long o_addr_last = addr_last;
 
 	if (u_current_addr == -1 || u_addr_last == -1) {
-		sprintf(errmsg, "nothing to undo");
+		seterrmsg("nothing to undo");
 		return ERR;
 	} else if (u_p)
 		modified = 1;

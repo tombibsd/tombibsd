@@ -1,0 +1,36 @@
+/Makefile/1.1.1.1/Tue Apr  1 16:16:07 2014/-kk/
+/efi.h/1.1.1.1/Tue Apr  1 16:16:07 2014/-kk/
+/efi_nii.h/1.1.1.1/Tue Apr  1 16:16:07 2014/-kk/
+/efi_pxe.h/1.1.1.1/Tue Apr  1 16:16:07 2014/-kk/
+/efiapi.h/1.1.1.1/Tue Apr  1 16:16:07 2014/-kk/
+/eficon.h/1.1.1.1/Tue Apr  1 16:16:07 2014/-kk/
+/efidebug.h/1.1.1.1/Tue Apr  1 16:16:07 2014/-kk/
+/efidef.h/1.1.1.1/Tue Apr  1 16:16:07 2014/-kk/
+/efidevp.h/1.1.1.1/Tue Apr  1 16:16:07 2014/-kk/
+/efierr.h/1.1.1.1/Tue Apr  1 16:16:07 2014/-kk/
+/efifs.h/1.1.1.1/Tue Apr  1 16:16:07 2014/-kk/
+/efigpt.h/1.1.1.1/Tue Apr  1 16:16:07 2014/-kk/
+/efiip.h/1.1.1.1/Tue Apr  1 16:16:07 2014/-kk/
+/efilib.h/1.1.1.1/Tue Apr  1 16:16:07 2014/-kk/
+/efilink.h/1.1.1.1/Tue Apr  1 16:16:07 2014/-kk/
+/efinet.h/1.1.1.1/Tue Apr  1 16:16:07 2014/-kk/
+/efipart.h/1.1.1.1/Tue Apr  1 16:16:07 2014/-kk/
+/efipciio.h/1.1.1.1/Tue Apr  1 16:16:07 2014/-kk/
+/efiprot.h/1.1.1.1/Tue Apr  1 16:16:07 2014/-kk/
+/efipxebc.h/1.1.1.1/Tue Apr  1 16:16:07 2014/-kk/
+/efirtlib.h/1.1.1.1/Tue Apr  1 16:16:07 2014/-kk/
+/efiser.h/1.1.1.1/Tue Apr  1 16:16:07 2014/-kk/
+/efistdarg.h/1.2/Tue Apr  8 17:55:18 2014/-kk/
+/efitcp.h/1.1.1.1/Tue Apr  1 16:16:07 2014/-kk/
+/efiudp.h/1.1.1.1/Tue Apr  1 16:16:07 2014/-kk/
+/efiui.h/1.1.1.1/Tue Apr  1 16:16:07 2014/-kk/
+/inc.mak/1.1.1.1/Tue Apr  1 16:16:07 2014/-kk/
+/libsmbios.h/1.1.1.1/Tue Apr  1 16:16:07 2014/-kk/
+/make.inf/1.1.1.1/Tue Apr  1 16:16:07 2014/-kk/
+/makefile.hdr/1.1.1.1/Tue Apr  1 16:16:07 2014/-kk/
+/pci22.h/1.1.1.1/Tue Apr  1 16:16:07 2014/-kk/
+/romload.h/1.1.1.1/Tue Apr  1 16:16:07 2014/-kk/
+D/ia32////
+D/ia64////
+D/protocol////
+D/x86_64////

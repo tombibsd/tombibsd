@@ -89,8 +89,17 @@ int isdntrcioctl(dev_t dev, u_long cmd, void *data, int flag, struct lwp *l);
 
 #ifdef __NetBSD__
 const struct cdevsw isdntrc_cdevsw = {
-	isdntrcopen, isdntrcclose, isdntrcread, nowrite, isdntrcioctl,
-	nostop, notty, nopoll, nommap, nokqfilter, D_OTHER
+	.d_open = isdntrcopen,
+	.d_close = isdntrcclose,
+	.d_read = isdntrcread,
+	.d_write = nowrite,
+	.d_ioctl = isdntrcioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_OTHER
 };
 #endif /* __NetBSD__ */
 

@@ -106,12 +106,27 @@ dev_type_dump(bmddump);
 dev_type_size(bmdsize);
 
 const struct bdevsw bmd_bdevsw = {
-	bmdopen, bmdclose, bmdstrategy, bmdioctl, bmddump, bmdsize, D_DISK
+	.d_open = bmdopen,
+	.d_close = bmdclose,
+	.d_strategy = bmdstrategy,
+	.d_ioctl = bmdioctl,
+	.d_dump = bmddump,
+	.d_psize = bmdsize,
+	.d_flag = D_DISK
 };
 
 const struct cdevsw bmd_cdevsw = {
-	bmdopen, bmdclose, bmdread, bmdwrite, bmdioctl,
-	nostop, notty, nopoll, nommap, nokqfilter, D_DISK
+	.d_open = bmdopen,
+	.d_close = bmdclose,
+	.d_read = bmdread,
+	.d_write = bmdwrite,
+	.d_ioctl = bmdioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_DISK
 };
 
 struct dkdriver bmddkdriver = { bmdstrategy };

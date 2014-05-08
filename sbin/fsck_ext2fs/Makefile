@@ -11,6 +11,8 @@ FSCK=	${NETBSDSRCDIR}/sbin/fsck
 CPPFLAGS+= -I${FSCK}
 .PATH:	${NETBSDSRCDIR}/sys/ufs/ext2fs ${FSCK}
 
+CWARNFLAGS.clang+=	-Wno-error=tautological-pointer-compare
+
 .include <bsd.prog.mk>
 
 LDADD+=-lutil

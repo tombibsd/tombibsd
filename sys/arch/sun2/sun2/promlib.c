@@ -152,6 +152,7 @@ type new proto								\
 	int rc;								\
 	_mode_monitor(&state, 0);					\
 	rc = (*(romVectorPtr->old)) args;				\
+	__USE(rc);							\
 	_mode_kernel(&state, 0);					\
 	ret ;								\
 }
@@ -221,6 +222,7 @@ prom_printf(const char *fmt, ...)
 	    /* the PROM printf vector: */
 		(romVectorPtr->printf))
 		)(fmt, varargs);
+	__USE(rc);
 	_mode_kernel(&state, 0);
 }
 

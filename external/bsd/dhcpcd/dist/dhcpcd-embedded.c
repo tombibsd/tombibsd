@@ -36,7 +36,7 @@
 
 #include <unistd.h>
 
-const char *dhcpcd_embedded_conf[] = {
+const char * const dhcpcd_embedded_conf[] = {
 "define 1 request ipaddress subnet_mask",
 "define 121 rfc3442 classless_static_routes",
 "define 249 rfc3442 ms_classless_static_routes",

@@ -2,7 +2,7 @@
 /agten.c/1.32/Thu Oct 24 10:28:58 2013/-kk/
 /be.c/1.80/Thu Oct 24 10:28:58 2013/-kk/
 /bereg.h/1.9/Sat Sep 19 11:53:42 2009/-kk/
-/bpp.c/1.39/Thu Sep 17 16:28:12 2009/-kk/
+/bpp.c/1.40/Tue Mar 25 02:35:39 2014/-kk/
 /bppreg.h/1.2/Mon Apr 28 20:23:57 2008/-kk/
 /bwtwo_sbus.c/1.29/Sat Sep 19 04:52:44 2009/-kk/
 /cgsix_sbus.c/1.30/Thu Sep 17 16:28:12 2009/-kk/
@@ -26,10 +26,10 @@
 /isp_sbus.c/1.81/Fri Sep  7 22:37:27 2012/-kk/
 /lebuffer.c/1.36/Thu Sep 17 17:53:35 2009/-kk/
 /lebuffervar.h/1.8/Thu Sep 17 17:51:52 2009/-kk/
-/magma.c/1.57/Thu Oct 24 10:28:58 2013/-kk/
+/magma.c/1.58/Tue Mar 25 02:35:39 2014/-kk/
 /magmareg.h/1.17/Sat Oct 27 17:18:37 2012/-kk/
 /mbppio.h/1.2/Wed Jul  2 10:16:20 2008/-kk/
-/p9100.c/1.60/Tue Nov 26 03:29:56 2013/-kk/
+/p9100.c/1.61/Tue Mar 25 02:35:39 2014/-kk/
 /p9100reg.h/1.6/Fri Sep 21 01:07:44 2012/-kk/
 /qe.c/1.62/Sat Jun 23 17:21:12 2012/-kk/
 /qec.c/1.50/Sat Sep 19 11:53:42 2009/-kk/
@@ -38,12 +38,12 @@
 /qereg.h/1.7/Sat Sep 19 11:53:42 2009/-kk/
 /sbusvar.h/1.27/Thu Sep 17 16:28:12 2009/-kk/
 /sio16.c/1.24/Mon Jul 18 00:58:52 2011/-kk/
-/spif.c/1.29/Thu Oct 24 10:28:58 2013/-kk/
+/spif.c/1.30/Tue Mar 25 02:35:39 2014/-kk/
 /spifreg.h/1.4/Tue May 12 14:43:59 2009/-kk/
 /spifvar.h/1.4/Mon Jul 18 00:58:52 2011/-kk/
 /stp4020.c/1.67/Sat Oct 27 17:18:37 2012/-kk/
 /stp4020reg.h/1.4/Mon Apr 28 20:23:57 2008/-kk/
-/tcx.c/1.44/Wed Jan 11 16:08:57 2012/-kk/
+/tcx.c/1.46/Tue May  6 05:50:13 2014/-kk/
 /tcxreg.h/1.5/Thu Aug  6 18:26:03 2009/-kk/
 /xbox.c/1.21/Mon Jul 18 00:58:52 2011/-kk/
 /xboxvar.h/1.5/Mon Apr 28 20:23:57 2008/-kk/

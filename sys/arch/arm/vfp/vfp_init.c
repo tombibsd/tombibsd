@@ -44,9 +44,6 @@
 
 #include <uvm/uvm_extern.h>		/* for pmap.h */
 
-extern int cpu_media_and_vfp_features[];
-extern int cpu_neon_present;
-
 #ifdef FPU_VFP
 
 #ifdef CPU_CORTEX
@@ -144,9 +141,10 @@ const pcu_ops_t arm_vfp_ops = {
 	.pcu_state_release = vfp_state_release,
 };
 
-struct evcnt vfpevent_use;
-struct evcnt vfpevent_reuse;
-struct evcnt vfpevent_fpe;
+/* determine what bits can be changed */
+uint32_t vfp_fpscr_changable = VFP_FPSCR_CSUM;
+/* default to run fast */
+uint32_t vfp_fpscr_default = (VFP_FPSCR_DN | VFP_FPSCR_FZ | VFP_FPSCR_RN);
 
 /*
  * Used to test for a VFP. The following function is installed as a coproc10
@@ -166,11 +164,10 @@ vfp_test(u_int address, u_int insn, trapframe_t *frame, int fault_code)
 	return 0;
 }
 
+#else
+/* determine what bits can be changed */
+uint32_t vfp_fpscr_changable = VFP_FPSCR_CSUM|VFP_FPSCR_ESUM|VFP_FPSCR_RMODE;
 #endif /* FPU_VFP */
-
-struct evcnt vfp_fpscr_ev = 
-    EVCNT_INITIALIZER(EVCNT_TYPE_TRAP, NULL, "VFP", "FPSCR traps");
-EVCNT_ATTACH_STATIC(vfp_fpscr_ev);
 
 static int
 vfp_fpscr_handler(u_int address, u_int insn, trapframe_t *frame, int fault_code)
@@ -196,8 +193,7 @@ vfp_fpscr_handler(u_int address, u_int insn, trapframe_t *frame, int fault_code)
 		return 1;
 
 	if (__predict_false(!vfp_used_p())) {
-		pcb->pcb_vfp.vfp_fpscr =
-		    (VFP_FPSCR_DN | VFP_FPSCR_FZ | VFP_FPSCR_RN); /* Runfast */
+		pcb->pcb_vfp.vfp_fpscr = vfp_fpscr_default;
 	}
 #endif
 
@@ -208,13 +204,11 @@ vfp_fpscr_handler(u_int address, u_int insn, trapframe_t *frame, int fault_code)
 	if (insn & 0x00100000) {
 		*regp = pcb->pcb_vfp.vfp_fpscr;
 	} else {
-		register_t tmp = *regp;
-		if (!(cpu_media_and_vfp_features[0] & ARM_MVFR0_EXCEPT_MASK))
-			tmp &= ~VFP_FPSCR_ESUM;
-		pcb->pcb_vfp.vfp_fpscr = tmp;
+		pcb->pcb_vfp.vfp_fpscr &= ~vfp_fpscr_changable;
+		pcb->pcb_vfp.vfp_fpscr |= *regp & vfp_fpscr_changable;
 	}
 
-	vfp_fpscr_ev.ev_count++;
+	curcpu()->ci_vfp_evs[0].ev_count++;
 		
 	frame->tf_pc += INSN_SIZE;
 	return 0;
@@ -226,49 +220,37 @@ vfp_fpscr_handler(u_int address, u_int insn, trapframe_t *frame, int fault_code)
  * instructions.
  */
 void
-vfp_attach(void)
+vfp_attach(struct cpu_info *ci)
 {
-	install_coproc_handler(VFP_COPROC, vfp_fpscr_handler);
+	if (CPU_IS_PRIMARY(ci)) {
+		install_coproc_handler(VFP_COPROC, vfp_fpscr_handler);
+	}
+	evcnt_attach_dynamic(&ci->ci_vfp_evs[0], EVCNT_TYPE_TRAP, NULL,
+	    ci->ci_cpuname, "vfp fpscr traps");
 }
 
 #else
-#if 0
-static bool
-vfp_patch_branch(uintptr_t code, uintptr_t func, uintptr_t newfunc)
-{
-	for (;; code += sizeof(uint32_t)) {
-		uint32_t insn = *(uint32_t *)code; 
-		if ((insn & 0xffd08000) == 0xe8908000)	/* ldm ... { pc } */
-			return false;
-		if ((insn & 0xfffffff0) == 0xe12fff10)	/* bx rN */
-			return false;
-		if ((insn & 0xf1a0f000) == 0xe1a0f000)	/* mov pc, ... */
-			return false;
-		if ((insn >> 25) != 0x75)		/* not b/bl insn */
-			continue;
-		intptr_t imm26 = ((int32_t)insn << 8) >> 6;
-		if (code + imm26 + 8 == func) {
-			int32_t imm24 = (newfunc - (code + 8)) >> 2;
-			uint32_t new_insn = (insn & 0xff000000)
-			   | (imm24 & 0xffffff);
-			KASSERTMSG((uint32_t)((imm24 >> 24) + 1) <= 1, "%x",
-			    ((imm24 >> 24) + 1));
-			*(uint32_t *)code = new_insn;
-			cpu_idcache_wbinv_range(code, sizeof(uint32_t));
-			return true;
-		}
-	}
-}
-#endif
-
 void
-vfp_attach(void)
+vfp_attach(struct cpu_info *ci)
 {
-	struct cpu_info * const ci = curcpu();
 	const char *model = NULL;
 
-	if (CPU_ID_ARM11_P(curcpu()->ci_arm_cpuid)
-	    || CPU_ID_CORTEX_P(curcpu()->ci_arm_cpuid)) {
+	if (CPU_ID_ARM11_P(ci->ci_arm_cpuid)
+	    || CPU_ID_MV88SV58XX_P(ci->ci_arm_cpuid)
+	    || CPU_ID_CORTEX_P(ci->ci_arm_cpuid)) {
+#if 0
+		const uint32_t nsacr = armreg_nsacr_read();
+		const uint32_t nsacr_vfp = __BITS(VFP_COPROC,VFP_COPROC2);
+		if ((nsacr & nsacr_vfp) != nsacr_vfp) {
+			aprint_normal_dev(ci->ci_dev, "VFP access denied\n");
+			install_coproc_handler(VFP_COPROC, vfp_fpscr_handler);
+			ci->ci_vfp_id = 0;
+			evcnt_attach_dynamic(&ci->ci_vfp_evs[0],
+			    EVCNT_TYPE_TRAP, NULL, ci->ci_cpuname,
+			    "vfp fpscr traps");
+			return;
+		}
+#endif
 		const uint32_t cpacr_vfp = CPACR_CPn(VFP_COPROC);
 		const uint32_t cpacr_vfp2 = CPACR_CPn(VFP_COPROC2);
 
@@ -278,15 +260,6 @@ vfp_attach(void)
 		uint32_t cpacr = armreg_cpacr_read();
 		cpacr |= __SHIFTIN(CPACR_ALL, cpacr_vfp);
 		cpacr |= __SHIFTIN(CPACR_ALL, cpacr_vfp2);
-#if 0
-		if (CPU_ID_CORTEX_P(curcpu()->ci_arm_cpuid)) {
-			/*
-			 * Disable access to the upper 16 FP registers and NEON.
-			 */
-			cpacr |= CPACR_V7_D32DIS;
-			cpacr |= CPACR_V7_ASEDIS;
-		}
-#endif
 		armreg_cpacr_write(cpacr);
 
 		/*
@@ -299,6 +272,9 @@ vfp_attach(void)
 			aprint_normal_dev(ci->ci_dev, "No VFP detected\n");
 			install_coproc_handler(VFP_COPROC, vfp_fpscr_handler);
 			ci->ci_vfp_id = 0;
+			evcnt_attach_dynamic(&ci->ci_vfp_evs[0],
+			    EVCNT_TYPE_TRAP, NULL, ci->ci_cpuname,
+			    "vfp fpscr traps");
 			return;
 		}
 	}
@@ -326,18 +302,28 @@ vfp_attach(void)
 	case FPU_VFP11_ARM11:
 		model = "VFP11";
 		break;
+	case FPU_VFP_MV88SV58XX:
+		model = "VFP3";
+		break;
 	case FPU_VFP_CORTEXA5:
 	case FPU_VFP_CORTEXA7:
 	case FPU_VFP_CORTEXA8:
 	case FPU_VFP_CORTEXA9:
 	case FPU_VFP_CORTEXA15:
-		model = "NEON MPE (VFP 3.0+)";
-		cpu_neon_present = 1;
+		if (armreg_cpacr_read() & CPACR_V7_ASEDIS) {
+			model = "VFP 4.0+";
+		} else {
+			model = "NEON MPE (VFP 3.0+)";
+			cpu_neon_present = 1;
+		}
 		break;
 	default:
-		aprint_normal_dev(ci->ci_dev, "unrecognized VFP version %x\n",
+		aprint_normal_dev(ci->ci_dev, "unrecognized VFP version %#x\n",
 		    fpsid);
 		install_coproc_handler(VFP_COPROC, vfp_fpscr_handler);
+		vfp_fpscr_changable = VFP_FPSCR_CSUM|VFP_FPSCR_ESUM
+		    |VFP_FPSCR_RMODE;
+		vfp_fpscr_default = 0;
 		return;
 	}
 
@@ -345,32 +331,47 @@ vfp_attach(void)
 	cpu_media_and_vfp_features[0] = armreg_mvfr0_read();
 	cpu_media_and_vfp_features[1] = armreg_mvfr1_read();
 	if (fpsid != 0) {
-		aprint_normal("vfp%d at %s: %s\n",
-		    device_unit(curcpu()->ci_dev),
-		    device_xname(curcpu()->ci_dev),
-		    model);
+		uint32_t f0 = armreg_mvfr0_read();
+		uint32_t f1 = armreg_mvfr0_read();
+		aprint_normal("vfp%d at %s: %s%s%s%s%s\n",
+		    device_unit(ci->ci_dev),
+		    device_xname(ci->ci_dev),
+		    model,
+		    ((f0 & ARM_MVFR0_ROUNDING_MASK) ? ", rounding" : ""),
+		    ((f0 & ARM_MVFR0_EXCEPT_MASK) ? ", exceptions" : ""),
+		    ((f1 & ARM_MVFR1_D_NAN_MASK) ? ", NaN propagation" : ""),
+		    ((f1 & ARM_MVFR1_FTZ_MASK) ? ", denormals" : ""));
 		aprint_verbose("vfp%d: mvfr: [0]=%#x [1]=%#x\n",
-		    device_unit(curcpu()->ci_dev), 
-		    cpu_media_and_vfp_features[0],
-		    cpu_media_and_vfp_features[1]);
+		    device_unit(ci->ci_dev), f0, f1);
+		if (CPU_IS_PRIMARY(ci)) {
+			if (f0 & ARM_MVFR0_ROUNDING_MASK) {
+				vfp_fpscr_changable |= VFP_FPSCR_RMODE;
+			}
+			if (f1 & ARM_MVFR0_EXCEPT_MASK) {
+				vfp_fpscr_changable |= VFP_FPSCR_ESUM;
+			}
+			// If hardware supports propagation of NaNs, select it.
+			if (f1 & ARM_MVFR1_D_NAN_MASK) {
+				vfp_fpscr_default &= ~VFP_FPSCR_DN;
+				vfp_fpscr_changable |= VFP_FPSCR_DN;
+			}
+			// If hardware supports denormalized numbers, use it.
+			if (cpu_media_and_vfp_features[1] & ARM_MVFR1_FTZ_MASK) {
+				vfp_fpscr_default &= ~VFP_FPSCR_FZ;
+				vfp_fpscr_changable |= VFP_FPSCR_FZ;
+			}
+		}
 	}
-	evcnt_attach_dynamic(&vfpevent_use, EVCNT_TYPE_MISC, NULL,
-	    "VFP", "coproc use");
-	evcnt_attach_dynamic(&vfpevent_reuse, EVCNT_TYPE_MISC, NULL,
-	    "VFP", "coproc re-use");
-	evcnt_attach_dynamic(&vfpevent_fpe, EVCNT_TYPE_TRAP, NULL,
-	    "VFP", "coproc fault");
+	evcnt_attach_dynamic(&ci->ci_vfp_evs[0], EVCNT_TYPE_MISC, NULL,
+	    ci->ci_cpuname, "vfp coproc use");
+	evcnt_attach_dynamic(&ci->ci_vfp_evs[1], EVCNT_TYPE_MISC, NULL,
+	    ci->ci_cpuname, "vfp coproc re-use");
+	evcnt_attach_dynamic(&ci->ci_vfp_evs[2], EVCNT_TYPE_TRAP, NULL,
+	    ci->ci_cpuname, "vfp coproc fault");
 	install_coproc_handler(VFP_COPROC, vfp_handler);
 	install_coproc_handler(VFP_COPROC2, vfp_handler);
 #ifdef CPU_CORTEX
 	install_coproc_handler(CORE_UNKNOWN_HANDLER, neon_handler);
-#endif
-
-#if 0
-	vfp_patch_branch((uintptr_t)pmap_copy_page_generic,
-	   (uintptr_t)bcopy_page, (uintptr_t)bcopy_page_vfp);
-	vfp_patch_branch((uintptr_t)pmap_zero_page_generic,
-	   (uintptr_t)bzero_page, (uintptr_t)bzero_page_vfp);
 #endif
 }
 
@@ -405,7 +406,7 @@ vfp_handler(u_int address, u_int insn, trapframe_t *frame, int fault_code)
 		ksiginfo_t ksi;
 		KASSERT(fpexc & VFP_FPEXC_EN);
 
-		vfpevent_fpe.ev_count++;
+		curcpu()->ci_vfp_evs[2].ev_count++;
 
 		/*
 		 * Need the clear the exception condition so any signal
@@ -504,11 +505,10 @@ vfp_state_load(lwp_t *l, u_int flags)
 	 */
 	if (__predict_false((flags & PCU_LOADED) == 0)) {
 		KASSERT(flags & PCU_RELOAD);
-		vfpevent_use.ev_count++;
-		pcb->pcb_vfp.vfp_fpscr =
-		    (VFP_FPSCR_DN | VFP_FPSCR_FZ | VFP_FPSCR_RN); /* Runfast */
+		curcpu()->ci_vfp_evs[0].ev_count++;
+		pcb->pcb_vfp.vfp_fpscr = vfp_fpscr_default;
 	} else {
-		vfpevent_reuse.ev_count++;
+		curcpu()->ci_vfp_evs[1].ev_count++;
 	}
 
 	uint32_t fpexc = armreg_fpexc_read();

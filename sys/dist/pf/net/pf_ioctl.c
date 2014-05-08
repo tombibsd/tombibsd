@@ -169,8 +169,17 @@ void			 pf_rtlabel_copyout(struct pf_addr_wrap *);
 
 #ifdef __NetBSD__
 const struct cdevsw pf_cdevsw = {
-	pfopen, pfclose, noread, nowrite, pfioctl,
-	nostop, notty, nopoll, nommap, nokqfilter, D_OTHER
+	.d_open = pfopen,
+	.d_close = pfclose,
+	.d_read = noread,
+	.d_write = nowrite,
+	.d_ioctl = pfioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_OTHER
 };
 
 static int pfil4_wrapper(void *, struct mbuf **, struct ifnet *, int);

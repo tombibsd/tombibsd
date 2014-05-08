@@ -345,6 +345,7 @@ auvia_attach(device_t parent, device_t self, void *aux)
 	pcireg_t pr;
 	int r;
 	const char *revnum;	/* VT823xx revision number */
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	pa = aux;
 	sc = device_private(self);
@@ -423,7 +424,7 @@ auvia_attach(device_t parent, device_t self, void *aux)
 		bus_space_unmap(sc->sc_iot, sc->sc_ioh, sc->sc_iosize);
 		return;
 	}
-	intrstr = pci_intr_string(pc, ih);
+	intrstr = pci_intr_string(pc, ih, intrbuf, sizeof(intrbuf));
 
 	mutex_init(&sc->sc_lock, MUTEX_DEFAULT, IPL_NONE);
 	mutex_init(&sc->sc_intr_lock, MUTEX_DEFAULT, IPL_AUDIO);

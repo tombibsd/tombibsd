@@ -638,7 +638,7 @@
  * @endcode
  *
  * - time
- * 	
+ *
  * Format of the time is: YYYYmmddHHMMSS, corresponding to strftime
  * format "%Y%m%d%k%M%S".
  *

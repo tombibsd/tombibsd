@@ -2,7 +2,7 @@
 /files.nfs/1.13/Tue Mar  2 23:49:11 2010/-kk/
 /krpc.h/1.9/Sat Mar 14 14:46:11 2009/-kk/
 /krpc_subr.c/1.37/Sun Mar 15 17:20:09 2009/-kk/
-/nfs.h/1.73/Thu Oct 24 10:28:58 2013/-kk/
+/nfs.h/1.74/Tue May  6 05:50:19 2014/-kk/
 /nfs_bio.c/1.189/Thu Oct 24 10:28:58 2013/-kk/
 /nfs_boot.c/1.81/Tue Oct 29 08:21:49 2013/-kk/
 /nfs_bootdhcp.c/1.52/Mon Oct  4 23:48:22 2010/-kk/
@@ -19,10 +19,10 @@
 /nfs_srvcache.c/1.45/Sun Mar 15 17:20:10 2009/-kk/
 /nfs_srvsocket.c/1.4/Thu Sep  3 20:59:12 2009/-kk/
 /nfs_srvsubs.c/1.14/Mon Nov  5 19:06:27 2012/-kk/
-/nfs_subs.c/1.224/Thu Oct 24 10:28:58 2013/-kk/
+/nfs_subs.c/1.225/Tue Mar 25 02:35:49 2014/-kk/
 /nfs_syscalls.c/1.154/Tue Dec 17 04:05:11 2013/-kk/
 /nfs_var.h/1.91/Wed Dec 25 07:37:47 2013/-kk/
-/nfs_vfsops.c/1.224/Sat Mar  1 06:05:15 2014/-kk/
+/nfs_vfsops.c/1.227/Thu Apr 24 14:31:32 2014/-kk/
 /nfs_vnops.c/1.304/Thu Feb 13 15:36:03 2014/-kk/
 /nfsdiskless.h/1.30/Mon Oct  4 23:48:23 2010/-kk/
 /nfsm_subs.h/1.53/Thu Oct 24 07:31:58 2013/-kk/

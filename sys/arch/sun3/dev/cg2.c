@@ -105,8 +105,17 @@ dev_type_ioctl(cg2ioctl);
 dev_type_mmap(cg2mmap);
 
 const struct cdevsw cgtwo_cdevsw = {
-	cg2open, nullclose, noread, nowrite, cg2ioctl,
-	nostop, notty, nopoll, cg2mmap, nokqfilter,
+	.d_open = cg2open,
+	.d_close = nullclose,
+	.d_read = noread,
+	.d_write = nowrite,
+	.d_ioctl = cg2ioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = cg2mmap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = 0
 };
 
 static int cg2gattr(struct fbdevice *,  void *);

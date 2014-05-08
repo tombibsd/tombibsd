@@ -116,14 +116,14 @@ struct xhci_softc {
 	uint8_t sc_conf;
 };
 
-usbd_status     xhci_init(struct xhci_softc *);
-int             xhci_intr(void *);
-int             xhci_detach(struct xhci_softc *, int);
-int             xhci_activate(device_t, enum devact);
-void            xhci_childdet(device_t, device_t);
-bool            xhci_suspend(device_t, const pmf_qual_t *);
-bool            xhci_resume(device_t, const pmf_qual_t *);
-bool            xhci_shutdown(device_t, int);
+int	xhci_init(struct xhci_softc *);
+int	xhci_intr(void *);
+int	xhci_detach(struct xhci_softc *, int);
+int	xhci_activate(device_t, enum devact);
+void	xhci_childdet(device_t, device_t);
+bool	xhci_suspend(device_t, const pmf_qual_t *);
+bool	xhci_resume(device_t, const pmf_qual_t *);
+bool	xhci_shutdown(device_t, int);
 
 #define XHCI_TRANSFER_RING_TRBS 256
 

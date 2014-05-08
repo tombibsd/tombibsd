@@ -92,8 +92,17 @@ dev_type_close(luaclose);
 dev_type_ioctl(luaioctl);
 
 const struct cdevsw lua_cdevsw = {
-	luaopen, luaclose, noread, nowrite, luaioctl, nostop, notty,
-	nopoll, nommap, nokqfilter, D_OTHER | D_MPSAFE
+	.d_open = luaopen,
+	.d_close = luaclose,
+	.d_read = noread,
+	.d_write = nowrite,
+	.d_ioctl = luaioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_OTHER | D_MPSAFE
 };
 
 struct lua_loadstate {

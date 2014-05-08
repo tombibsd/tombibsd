@@ -1,7 +1,7 @@
 /*	$NetBSD$	*/
 
 /*
- * Copyright (C) 2013  Internet Systems Consortium, Inc. ("ISC")
+ * Copyright (C) 2013, 2014  Internet Systems Consortium, Inc. ("ISC")
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -144,7 +144,7 @@ tostruct_eui48(ARGS_TOSTRUCT) {
 	eui48->common.rdtype = rdata->type;
 	ISC_LINK_INIT(&eui48->common, link);
 
-	memcpy(eui48->eui48, rdata->data, rdata->length);
+	memmove(eui48->eui48, rdata->data, rdata->length);
 	return (ISC_R_SUCCESS);
 }
 

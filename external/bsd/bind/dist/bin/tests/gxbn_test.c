@@ -67,10 +67,6 @@ main(int argc, char **argv) {
 
 	(void)argc;
 
-	isc__mem_register();
-	isc__task_register();
-	isc__timer_register();
-	isc__socket_register();
 	while (argv[1] != NULL) {
 		he = gethostbyname(argv[1]);
 		print_he(he, h_errno, "gethostbyname", argv[1]);

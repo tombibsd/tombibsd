@@ -81,8 +81,17 @@ dev_type_read(pcfrtc_read);
 dev_type_write(pcfrtc_write);
 
 const struct cdevsw pcfrtc_cdevsw = {
-	pcfrtc_open, pcfrtc_close, pcfrtc_read, pcfrtc_write, noioctl,
-	nostop, notty, nopoll, nommap, nokqfilter, D_OTHER
+	.d_open = pcfrtc_open,
+	.d_close = pcfrtc_close,
+	.d_read = pcfrtc_read,
+	.d_write = pcfrtc_write,
+	.d_ioctl = noioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_OTHER
 };
 
 static int pcfrtc_clock_read(struct pcfrtc_softc *, struct clock_ymdhms *,

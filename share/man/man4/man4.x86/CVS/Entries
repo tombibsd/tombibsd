@@ -1,8 +1,8 @@
 /Makefile/1.14/Thu Oct 24 10:28:54 2013/-kk/
 /amdpcib.4/1.2/Fri Aug  6 16:44:06 2010/-kk/
 /apic.4/1.1/Mon Jun  6 16:52:15 2011/-kk/
-/balloon.4/1.10/Thu Oct 24 10:28:54 2013/-kk/
-/coretemp.4/1.3/Thu Oct 24 10:28:54 2013/-kk/
+/balloon.4/1.11/Tue Mar 25 02:35:16 2014/-kk/
+/coretemp.4/1.4/Tue Mar 25 02:35:16 2014/-kk/
 /est.4/1.4/Thu Oct 20 13:54:38 2011/-kk/
 /fdc.4/1.1/Fri Sep 23 14:45:06 2011/-kk/
 /fwhrng.4/1.1/Fri Aug  6 17:00:13 2010/-kk/
@@ -12,7 +12,7 @@
 /mem.4/1.1/Fri Sep 23 14:45:06 2011/-kk/
 /odcm.4/1.4/Fri Mar  4 13:49:26 2011/-kk/
 /powernow.4/1.2/Fri Mar  4 05:58:07 2011/-kk/
-/soekrisgpio.4/1.4/Thu Oct 24 10:28:54 2013/-kk/
+/soekrisgpio.4/1.5/Tue Mar 25 02:35:16 2014/-kk/
 /tprof_amdpmi.4/1.2/Fri Dec  2 14:38:51 2011/-kk/
 /tprof_pmi.4/1.2/Fri Dec  2 14:38:51 2011/-kk/
 /vmt.4/1.6/Thu Oct 24 10:28:54 2013/-kk/

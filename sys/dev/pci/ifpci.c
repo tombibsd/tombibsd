@@ -955,6 +955,7 @@ avma1pp_map_int(struct ifpci_softc *psc, struct pci_attach_args *pa)
 	pci_chipset_tag_t pc = pa->pa_pc;
 	pci_intr_handle_t ih;
 	const char *intrstr;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	/* Map and establish the interrupt. */
 	if (pci_intr_map(pa, &ih)) {
@@ -963,7 +964,7 @@ avma1pp_map_int(struct ifpci_softc *psc, struct pci_attach_args *pa)
 		return;
 	}
 	psc->sc_pc = pc;
-	intrstr = pci_intr_string(pc, ih);
+	intrstr = pci_intr_string(pc, ih, intrbuf, sizeof(intrbuf));
 	psc->sc_ih = pci_intr_establish(pc, ih, IPL_NET, avma1pp_intr, sc);
 	if (psc->sc_ih == NULL) {
 		aprint_error_dev(sc->sc_dev, "couldn't establish interrupt");

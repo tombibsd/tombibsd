@@ -79,6 +79,11 @@ echo copying $r to $d
 cd $r
 pax -rw * $d
 
+if [ -d $d/libtool.m4 ]
+then
+	mv $d/libtool.m4 $d/m4
+fi
+
 ### Remove the $'s around RCS tags
 cleantags $d
 

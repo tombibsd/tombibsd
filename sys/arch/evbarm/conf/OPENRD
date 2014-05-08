@@ -17,7 +17,6 @@ makeoptions	LOADADDRESS="0xc0800000"
 
 #options 	FPU_VFP
 
-options 	COMPAT_NETBSD32
 no options 	COMPAT_LINUX
 
 # On-board PCI vga

@@ -427,7 +427,7 @@ ENTRY(xrstor)
 	movl	4(%esp), %ecx
 	movl	8(%esp), %eax	/* feature mask bits */
 	movl	12(%esp), %edx
-	xrstor	(%eax)
+	xrstor	(%ecx)
 	ret
 END(xrstor)
 

@@ -122,8 +122,17 @@ dev_type_poll(apmdevpoll);
 dev_type_kqfilter(apmdevkqfilter);
 
 const struct cdevsw apmdev_cdevsw = {
-	apmdevopen, apmdevclose, noread, nowrite, apmdevioctl,
-	nostop, notty, apmdevpoll, nommap, apmdevkqfilter, D_OTHER
+	.d_open = apmdevopen,
+	.d_close = apmdevclose,
+	.d_read = noread,
+	.d_write = nowrite,
+	.d_ioctl = apmdevioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = apmdevpoll,
+	.d_mmap = nommap,
+	.d_kqfilter = apmdevkqfilter,
+	.d_flag = D_OTHER
 };
 
 /* configurable variables */

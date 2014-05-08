@@ -80,7 +80,7 @@ struct pci_overrides {
 	int (*ov_intr_map)(void *, const struct pci_attach_args *,
 	   pci_intr_handle_t *);
 	const char *(*ov_intr_string)(void *, pci_chipset_tag_t,
-	    pci_intr_handle_t);
+	    pci_intr_handle_t, char *, size_t);
 	const struct evcnt *(*ov_intr_evcnt)(void *, pci_chipset_tag_t,
 	    pci_intr_handle_t);
 	void *(*ov_intr_establish)(void *, pci_chipset_tag_t, pci_intr_handle_t,

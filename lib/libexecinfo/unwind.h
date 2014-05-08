@@ -54,7 +54,7 @@ _Unwind_Ptr		 _Unwind_GetDataRelBase(struct _Unwind_Context *);
 _Unwind_Word 		 _Unwind_GetGR(struct _Unwind_Context *, int);
 _Unwind_Ptr		 _Unwind_GetIP(struct _Unwind_Context *);
 _Unwind_Ptr		 _Unwind_GetIPInfo(struct _Unwind_Context *, int *);
-void 			*_Unwind_GetLanguageSpecificData(
+_Unwind_Ptr		 _Unwind_GetLanguageSpecificData(
     struct _Unwind_Context *);
 _Unwind_Ptr		 _Unwind_GetRegionStart(struct _Unwind_Context *);
 _Unwind_Ptr		 _Unwind_GetTextRelBase(struct _Unwind_Context *);

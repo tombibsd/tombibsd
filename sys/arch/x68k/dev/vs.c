@@ -387,8 +387,6 @@ vs_set_params(void *hdl, int setmode, int usemode,
 	struct audio_params *p;
 	int mode;
 	int rate;
-	stream_filter_factory_t *pswcode;
-	stream_filter_factory_t *rswcode;
 	audio_params_t hw;
 	int matched;
 
@@ -408,8 +406,6 @@ vs_set_params(void *hdl, int setmode, int usemode,
 			return EINVAL;
 
 		rate = p->sample_rate;
-		pswcode = NULL;
-		rswcode = NULL;
 		hw = *p;
 		hw.encoding = AUDIO_ENCODING_ADPCM;
 		hw.precision = hw.validbits = 4;

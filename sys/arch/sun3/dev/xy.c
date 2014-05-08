@@ -217,12 +217,27 @@ dev_type_dump(xydump);
 dev_type_size(xysize);
 
 const struct bdevsw xy_bdevsw = {
-	xyopen, xyclose, xystrategy, xyioctl, xydump, xysize, D_DISK
+	.d_open = xyopen,
+	.d_close = xyclose,
+	.d_strategy = xystrategy,
+	.d_ioctl = xyioctl,
+	.d_dump = xydump,
+	.d_psize = xysize,
+	.d_flag = D_DISK
 };
 
 const struct cdevsw xy_cdevsw = {
-	xyopen, xyclose, xyread, xywrite, xyioctl,
-	nostop, notty, nopoll, nommap, nokqfilter, D_DISK
+	.d_open = xyopen,
+	.d_close = xyclose,
+	.d_read = xyread,
+	.d_write = xywrite,
+	.d_ioctl = xyioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_DISK
 };
 
 /*

@@ -191,7 +191,7 @@ ntwoc_isa_probe(device_t parent, cfdata_t match, void *aux)
 	struct isa_attach_args *ia;
 	bus_space_tag_t iot, memt;
 	bus_space_handle_t ioh, memh, sca_ioh[16];
-	int i, tmp, dbg, rv;
+	int i, tmp, rv;
 	int gotmem, gotsca[16];
 	u_int32_t ioport;
 
@@ -211,7 +211,6 @@ ntwoc_isa_probe(device_t parent, cfdata_t match, void *aux)
 
 	memset(gotsca, 0, sizeof(gotsca));
 	gotmem = rv = 0;
-	dbg = 0;
 
 	/* disallow wildcarded I/O base */
 	if (ia->ia_io[0].ir_addr == ISA_UNKNOWN_PORT) {
@@ -390,13 +389,12 @@ ntwoc_isa_attach(device_t parent, device_t self, void *aux)
 	u_int8_t rdiv, tdiv, tmc;
 	u_int32_t flags, ioport;
 	u_int16_t tmp;
-	int i, dbg, pgs, rv;
+	int i, pgs, rv;
 
 	ia = (struct isa_attach_args *)aux;
 	sc = device_private(self);
 	sc->sc_dev = self;
 	sca = &sc->sc_sca;
-	dbg = 0;
 
 	printf(": N2 Serial Interface\n");
 	flags = device_cfdata(sc->sc_dev)->cf_flags;

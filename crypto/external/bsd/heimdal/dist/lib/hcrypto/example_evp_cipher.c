@@ -119,7 +119,7 @@ main(int argc, char **argv)
      */
     EVP_CIPHER_CTX_init(&ctx);
     EVP_CipherInit_ex(&ctx, c, NULL, key, ivec, encryptp);
-	
+
     /* read in buffer */
     while ((ilen = fread(ibuf, 1, block_size, in)) > 0) {
 	/* encrypto/decrypt */

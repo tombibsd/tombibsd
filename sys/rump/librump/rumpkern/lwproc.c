@@ -25,6 +25,8 @@
  * SUCH DAMAGE.
  */
 
+#define RUMP__CURLWP_PRIVATE
+
 #include <sys/cdefs.h>
 __KERNEL_RCSID(0, "$NetBSD$");
 
@@ -42,15 +44,46 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/uidinfo.h>
 
 #include <rump/rumpuser.h>
-
 #include "rump_private.h"
+#include "rump_curlwp.h"
 
 struct emul *emul_default = &emul_netbsd;
+
+void
+rump_lwproc_init(void)
+{
+
+	lwproc_curlwpop(RUMPUSER_LWP_CREATE, &lwp0);
+}
+
+struct lwp *
+rump_lwproc_curlwp_hypercall(void)
+{
+
+	return rumpuser_curlwp();
+}
+
+void
+rump_lwproc_curlwp_set(struct lwp *l)
+{
+
+	KASSERT(curlwp == NULL);
+	lwproc_curlwpop(RUMPUSER_LWP_SET, l);
+}
+
+void
+rump_lwproc_curlwp_clear(struct lwp *l)
+{
+
+	KASSERT(l == curlwp);
+	lwproc_curlwpop(RUMPUSER_LWP_CLEAR, l);
+}
 
 static void
 lwproc_proc_free(struct proc *p)
 {
 	kauth_cred_t cred;
+	struct proc *child;
 
 	KASSERT(p->p_stat == SDYING || p->p_stat == SDEAD);
 
@@ -64,6 +97,14 @@ lwproc_proc_free(struct proc *p)
 
 	mutex_enter(proc_lock);
 
+	/* childranee eunt initus */
+	while ((child = LIST_FIRST(&p->p_children)) != NULL) {
+		LIST_REMOVE(child, p_sibling);
+		child->p_pptr = initproc;
+		child->p_ppid = 1;
+		LIST_INSERT_HEAD(&initproc->p_children, child, p_sibling);
+	}
+
 	KASSERT(p->p_nlwps == 0);
 	KASSERT(LIST_EMPTY(&p->p_lwps));
 
@@ -74,9 +115,9 @@ lwproc_proc_free(struct proc *p)
 
 	cred = p->p_cred;
 	chgproccnt(kauth_cred_getuid(cred), -1);
-	if (rump_proc_vfs_release)
-		rump_proc_vfs_release(p);
+	rump_proc_vfs_release(p);
 
+	doexithooks(p);
 	lim_free(p->p_limit);
 	pstatsfree(p->p_stats);
 	kauth_cred_free(p->p_cred);
@@ -174,8 +215,7 @@ lwproc_newproc(struct proc *parent, int flags)
 	kauth_proc_fork(parent, p);
 
 	/* initialize cwd in rump kernels with vfs */
-	if (rump_proc_vfs_init)
-		rump_proc_vfs_init(p);
+	rump_proc_vfs_init(p);
 
 	chgproccnt(uid, 1); /* not enforced */
 
@@ -219,7 +259,7 @@ lwproc_freelwp(struct lwp *l)
 		kmem_free(l->l_name, MAXCOMLEN);
 	lwp_finispecific(l);
 
-	rumpuser_curlwpop(RUMPUSER_LWP_DESTROY, l);
+	lwproc_curlwpop(RUMPUSER_LWP_DESTROY, l);
 	membar_exit();
 	kmem_free(l, sizeof(*l));
 
@@ -255,7 +295,7 @@ lwproc_makelwp(struct proc *p, struct lwp *l, bool doswitch, bool procmake)
 	lwp_initspecific(l);
 
 	membar_enter();
-	rumpuser_curlwpop(RUMPUSER_LWP_CREATE, l);
+	lwproc_curlwpop(RUMPUSER_LWP_CREATE, l);
 	if (doswitch) {
 		rump_lwproc_switch(l);
 	}
@@ -364,13 +404,13 @@ rump_lwproc_switch(struct lwp *newlwp)
 	}
 
 	KERNEL_UNLOCK_ALL(NULL, &l->l_biglocks);
-	rumpuser_curlwpop(RUMPUSER_LWP_CLEAR, l);
+	lwproc_curlwpop(RUMPUSER_LWP_CLEAR, l);
 
 	newlwp->l_cpu = newlwp->l_target_cpu = l->l_cpu;
 	newlwp->l_mutex = l->l_mutex;
 	newlwp->l_pflag |= LP_RUNNING;
 
-	rumpuser_curlwpop(RUMPUSER_LWP_SET, newlwp);
+	lwproc_curlwpop(RUMPUSER_LWP_SET, newlwp);
 	curcpu()->ci_curlwp = newlwp;
 	KERNEL_LOCK(newlwp->l_biglocks, NULL);
 

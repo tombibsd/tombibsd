@@ -139,7 +139,8 @@ epclk_attach(device_t parent, device_t self, void *aux)
 	if (epclk_sc == NULL) {
 		first_run = true;
 		epclk_sc = sc;
-	}
+	} else
+		first_run = false;
 
 	if (bus_space_map(sa->sa_iot, sa->sa_addr, sa->sa_size, 
 		0, &sc->sc_ioh))

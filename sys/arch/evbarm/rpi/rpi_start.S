@@ -90,8 +90,8 @@
 RCSID("$NetBSD$")
 
 /*
- * Workaround Erratum 411920 
- * 
+ * Workaround Erratum 411920
+ *
  *	- value of arg 'reg' Should Be Zero
  */
 #define Invalidate_I_cache(reg) \
@@ -201,7 +201,7 @@ _C_LABEL(rpi_start):
 
 	mcr	p15, 0, r0, c7, c14, 0	/* Clean and Invalidate Entire Data Cache */
 
-        ldr     r2, Lctl_ID_dis		/* Disable I+D caches */
+	ldr     r2, Lctl_ID_dis		/* Disable I+D caches */
 	mrc	p15, 0, r1, c1, c0, 0	/*  "       "   "     */
 	and	r1, r1, r2		/*  "       "   "     */
 	mcr	p15, 0, r1, c1, c0, 0	/*  "       "   "     */
@@ -230,12 +230,12 @@ _C_LABEL(rpi_start):
 	ldr     r1, Lcontrol_set
 	orr	r0, r0, r1
 	ldr	lr, Lstart
-	
+
 	.align 5
 	@ turn mmu on!
 	mov	r0, r0
 	mcr	p15, 0, r0, c1, c0, 0
-	
+
 	/*
 	 * Ensure that the coprocessor has finished turning on the MMU.
 	 */
@@ -258,7 +258,7 @@ Ll1_s_frame:
 Ltemp_l1_table:
 	/* Put the temporary L1 translation table just below the kernel. */
 	.word	0x4000
-	
+
 Lstart:
 	.word	start
 /*

@@ -137,8 +137,8 @@ awaitkey(int timeout, int tell)
 			char numbuf[20];
 			int len, j;
 
-			sprintf(numbuf, "%d ", i / POLL_FREQ);
-			len = strlen(numbuf);
+			len = snprintf(numbuf, sizeof(numbuf),
+			    "%d ", i / POLL_FREQ);
 			for (j = 0; j < len; j++)
 				numbuf[len + j] = '\b';
 			numbuf[len + j] = '\0';

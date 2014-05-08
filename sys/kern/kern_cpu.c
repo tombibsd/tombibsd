@@ -102,9 +102,17 @@ static void	cpu_xc_offline(struct cpu_info *);
 dev_type_ioctl(cpuctl_ioctl);
 
 const struct cdevsw cpuctl_cdevsw = {
-	nullopen, nullclose, nullread, nullwrite, cpuctl_ioctl,
-	nullstop, notty, nopoll, nommap, nokqfilter,
-	D_OTHER | D_MPSAFE
+	.d_open = nullopen,
+	.d_close = nullclose,
+	.d_read = nullread,
+	.d_write = nullwrite,
+	.d_ioctl = cpuctl_ioctl,
+	.d_stop = nullstop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_OTHER | D_MPSAFE
 };
 
 kmutex_t	cpu_lock		__cacheline_aligned;
@@ -118,6 +126,9 @@ struct cpu_info **cpu_infos		__read_mostly;
 /* Note: set on mi_cpu_attach() and idle_loop(). */
 kcpuset_t *	kcpuset_attached	__read_mostly	= NULL;
 kcpuset_t *	kcpuset_running		__read_mostly	= NULL;
+
+
+static char cpu_model[128];
 
 /*
  * mi_cpu_init: early initialisation of MI CPU related structures.
@@ -465,6 +476,24 @@ cpu_setstate(struct cpu_info *ci, bool online)
 
 	spc->spc_lastmod = time_second;
 	return 0;
+}
+
+int
+cpu_setmodel(const char *fmt, ...)
+{
+	int len;
+	va_list ap;
+
+	va_start(ap, fmt);
+	len = vsnprintf(cpu_model, sizeof(cpu_model), fmt, ap);
+	va_end(ap);
+	return len;
+}
+
+const char *
+cpu_getmodel(void)
+{
+	return cpu_model;
 }
 
 #ifdef __HAVE_INTR_CONTROL

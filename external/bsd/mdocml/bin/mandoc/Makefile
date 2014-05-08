@@ -13,6 +13,7 @@ SRCS=		chars.c main.c out.c tree.c \
 .ifndef HOSTPROG
 DPADD+= 	${MDOCMLLIB.mandoc}
 LDADD+= 	-L${MDOCMLOBJDIR.mandoc} -lmandoc
+CPPFLAGS+=	-DUSE_WCHAR
 .else
 SRCS.libmandoc!=cd ${.PARSEDIR}/../../lib/libmandoc && ${MAKE} -V '$${SRCS}'
 

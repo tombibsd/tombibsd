@@ -384,7 +384,6 @@ const struct flagbit_desc vnode_flags[] = {
 	{ VV_SYSTEM,	'S' },
 	{ VV_ISTTY,	'I' },
 	{ VI_EXECMAP,	'E' },
-	{ VI_XLOCK,	'L' },
 	{ VU_DIROP,	'D' },
 	{ VI_LAYER,	'Y' },
 	{ VI_ONWORKLST,	'O' },

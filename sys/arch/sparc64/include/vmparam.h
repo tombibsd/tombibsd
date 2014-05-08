@@ -47,6 +47,8 @@
 #ifndef VMPARAM_H
 #define VMPARAM_H
 
+#define __USE_TOPDOWN_VM
+
 /*
  * We use 8K VM pages on the Sun4U.  Override the PAGE_* definitions
  * to be compile-time constants.

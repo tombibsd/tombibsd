@@ -48,3 +48,4 @@ ENTRY(strcmp)
 	movsbl	%al, %eax
 	popl	%esi
 	ret
+END(strcmp)

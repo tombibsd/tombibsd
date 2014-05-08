@@ -67,7 +67,7 @@ kloader_reboot_setup(const char *filename)
 void
 kloader_hpcarm_reset(void)
 {
-	extern void (*__cpu_reset)(void);
+	extern void (*__cpu_reset)(void) __dead;
 
 	__cpu_reset();
 	/*NOTREACHED*/
@@ -83,6 +83,7 @@ kloader_hpcarm_jump(kloader_bootfunc_t func, vaddr_t sp,
 
 	/* jump to 2nd boot-loader */
 	(*func)(kbi, tag);
+	__builtin_unreachable();
 }
 
 /*

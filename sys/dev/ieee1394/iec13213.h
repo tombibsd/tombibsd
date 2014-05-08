@@ -224,7 +224,7 @@ struct csrreg *crom_search_key(struct crom_context *, uint8_t);
 int crom_has_specver(uint32_t *, uint32_t, uint32_t);
 
 #ifndef _KERNEL
-const char *crom_desc(struct crom_context *, char *, int);
+const char *crom_desc(struct crom_context *, char *, size_t);
 #endif
 
 /* For CROM build */

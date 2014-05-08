@@ -154,8 +154,17 @@ dev_type_tty(ucomtty);
 dev_type_poll(ucompoll);
 
 const struct cdevsw ucom_cdevsw = {
-	ucomopen, ucomclose, ucomread, ucomwrite, ucomioctl,
-	ucomstop, ucomtty, ucompoll, nommap, ttykqfilter, D_TTY
+	.d_open = ucomopen,
+	.d_close = ucomclose,
+	.d_read = ucomread,
+	.d_write = ucomwrite,
+	.d_ioctl = ucomioctl,
+	.d_stop = ucomstop,
+	.d_tty = ucomtty,
+	.d_poll = ucompoll,
+	.d_mmap = nommap,
+	.d_kqfilter = ttykqfilter,
+	.d_flag = D_TTY
 };
 
 static void	ucom_cleanup(struct ucom_softc *);

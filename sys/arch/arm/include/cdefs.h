@@ -49,8 +49,10 @@
 #define	_ARM_ARCH_DWORD_OK
 #endif
 
-#if defined(__ARM_EABI__) || defined(__ARM_PCS_AAPCS64)
-#define __ALIGNBYTES		(8 - 1)
+#if defined(__ARM_PCS_AAPCS64)
+#define __ALIGNBYTES		(sizeof(__int128_t) - 1)
+#elif defined(__ARM_EABI__)
+#define __ALIGNBYTES		(sizeof(long long) - 1)
 #else
 #define __ALIGNBYTES		(sizeof(int) - 1)
 #endif

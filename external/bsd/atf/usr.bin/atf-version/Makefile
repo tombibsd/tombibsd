@@ -12,10 +12,13 @@ SRCS=		atf-version.cpp
 MAN=		atf-version.1
 
 CPPFLAGS+=	-I${SRCDIR}/tools
+CPPFLAGS+=	-I.
 
 WARNS?=		2
 
-CPPFLAGS+=	-DATF_VERSION=\"$(ATF_VERSION)\"
-atf-version.o:	atf-version.txt
+DPSRCS+=	version.hpp
+CLEANFILES+=	version.hpp
+version.hpp: Makefile atf-version.txt
+	echo "#define ATF_VERSION \"$$(cat atf-version.txt)\"" >version.hpp
 
 .include <bsd.prog.mk>

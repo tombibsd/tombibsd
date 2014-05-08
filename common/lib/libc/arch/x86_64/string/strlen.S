@@ -161,6 +161,11 @@ ENTRY(strlen)
 	dec	%rsi
 	or	%rsi,%rdx		/* low bytes now non-zero */
 	jmp	2b
+#ifdef TEST_STRLEN
+END(test_strlen)
+#else
+END(strlen)
+#endif
 
 #ifdef TEST_STRLEN
 /* trivial implementation when testing above! */
@@ -173,4 +178,5 @@ ENTRY(strlen)
 	jmp	1b
 2:	sub	%rdi,%rax
 	ret
+END(strlen)
 #endif

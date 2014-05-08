@@ -135,6 +135,7 @@ athn_pci_attach(device_t parent, device_t self, void *aux)
 	pcireg_t memtype, reg;
 	pci_product_id_t subsysid;
 	int error;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	sc->sc_dev = self;
 	sc->sc_dmat = pa->pa_dmat;
@@ -204,7 +205,7 @@ athn_pci_attach(device_t parent, device_t self, void *aux)
 		goto fail1;
 	}
 
-	intrstr = pci_intr_string(psc->psc_pc, psc->psc_pih);
+	intrstr = pci_intr_string(psc->psc_pc, psc->psc_pih, intrbuf, sizeof(intrbuf));
 	psc->psc_ih = pci_intr_establish(psc->psc_pc, psc->psc_pih, IPL_NET,
 	    athn_intr, sc);
 	if (psc->psc_ih == NULL) {

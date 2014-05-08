@@ -190,9 +190,17 @@ PDEVSTATIC int isdnbchanselect(dev_t dev, int rw, struct lwp *l);
 
 #ifdef __NetBSD__
 const struct cdevsw isdnbchan_cdevsw = {
-	isdnbchanopen, isdnbchanclose, isdnbchanread, isdnbchanwrite,
-	isdnbchanioctl, nostop, notty, isdnbchanpoll, nommap, nokqfilter,
-	D_OTHER
+	.d_open = isdnbchanopen,
+	.d_close = isdnbchanclose,
+	.d_read = isdnbchanread,
+	.d_write = isdnbchanwrite,
+	.d_ioctl = isdnbchanioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = isdnbchanpoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_OTHER
 };
 #endif /* __NetBSD__ */
 

@@ -1,0 +1,9 @@
+#       $NetBSD$
+
+ioconf drmkms
+
+include "conf/files"
+
+pseudo-root	drmkmsbus*
+
+drmkms*		at drmkmsbus?

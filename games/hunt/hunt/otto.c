@@ -53,8 +53,11 @@ __RCSID("$NetBSD$");
 #include <ctype.h>
 #include <signal.h>
 #include <stdlib.h>
+#include <string.h>
 #include <unistd.h>
-#include "hunt.h"
+
+#include "hunt_common.h"
+#include "hunt_private.h"
 
 #undef WALL
 #undef NORTH
@@ -140,7 +143,7 @@ STATIC struct itimerval	pause_time = { { 0, 0 }, { 0, 55000 }};
 STATIC void attack(int, struct item *);
 STATIC void duck(int);
 STATIC void face_and_move_direction(int, int);
-STATIC int go_for_ammo(char);
+STATIC bool go_for_ammo(char);
 STATIC void ottolook(int, struct item *);
 STATIC void look_around(void);
 STATIC void nothing(int);
@@ -214,7 +217,7 @@ otto(int y, int x, char face)
 		wander();
 
 done:
-	(void) write(Socket, command, comlen);
+	(void) write(huntsocket, command, comlen);
 	Otto_count += comlen;
 #ifdef	DEBUG
 	(void) fwrite(command, 1, comlen, debug);
@@ -523,7 +526,7 @@ duck(int rel_dir)
  * go for the closest mine if possible
  */
 
-STATIC int
+STATIC bool
 go_for_ammo(char mine)
 {
 	int i, rel_dir, dist;
@@ -537,7 +540,7 @@ go_for_ammo(char mine)
 		}
 	}
 	if (rel_dir == -1)
-		return FALSE;
+		return false;
 
 	if (!(flbr[rel_dir].flags & ON_SIDE)
 	|| flbr[rel_dir].distance > 1) {
@@ -545,8 +548,8 @@ go_for_ammo(char mine)
 			dist = 4;
 		face_and_move_direction(rel_dir, dist);
 	} else
-		return FALSE;		/* until it's done right */
-	return TRUE;
+		return false;		/* until it's done right */
+	return true;
 }
 
 STATIC void

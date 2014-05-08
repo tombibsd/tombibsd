@@ -406,11 +406,11 @@ dosfs_stat(struct open_file *fd, struct stat *sb)
 }
 
 #if defined(LIBSA_ENABLE_LS_OP)
+#include "ls.h"
 __compactcall void
 dosfs_ls(struct open_file *f, const char *pattern)
 {
-	printf("Currently ls command is unsupported by dosfs\n");
-	return;
+	lsunsup("dosfs");
 }
 #endif
 

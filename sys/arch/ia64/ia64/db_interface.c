@@ -458,17 +458,17 @@ db_disasm(db_addr_t loc, bool altfmt)
 
 		/* Predicate. */
 		if (i->i_oper[0].o_value != 0) {
-			asm_operand(i->i_oper+0, buf, loc);
+			asm_operand(i->i_oper+0, buf, sizeof(buf), loc);
 			db_printf("(%s) ", buf);
 		} else
 			db_printf("   ");
 
 		/* Mnemonic & completers. */
-		asm_mnemonic(i->i_op, buf);
+		asm_mnemonic(i->i_op, buf, sizeof(buf));
 		db_printf(buf);
 		n = 0;
 		while (n < i->i_ncmpltrs) {
-			asm_completer(i->i_cmpltr + n, buf);
+			asm_completer(i->i_cmpltr + n, buf, sizeof(buf));
 			db_printf(buf);
 			n++;
 		}
@@ -484,7 +484,7 @@ db_disasm(db_addr_t loc, bool altfmt)
 				else
 					db_printf(",");
 			}
-			asm_operand(i->i_oper + n, buf, loc);
+			asm_operand(i->i_oper + n, buf, sizeof(buf), loc);
 			db_printf(buf);
 			n++;
 		}

@@ -3,7 +3,6 @@
 ioconf		iic
 
 include		"conf/files"
-include		"dev/i2c/files.i2c"
 
 pseudo-root	i2cbus*
 iic*		at i2cbus?

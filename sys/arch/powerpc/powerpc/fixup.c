@@ -43,6 +43,8 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <powerpc/instr.h>
 #include <powerpc/spr.h>
+#include <powerpc/include/cpu.h>
+#include <powerpc/include/oea/spr.h>
 
 static inline void
 fixup_jump(uint32_t *insnp, const struct powerpc_jump_fixup_info *jfi)
@@ -71,7 +73,13 @@ powerpc_fixup_stubs(uint32_t *start, uint32_t *end,
 	extern uint32_t __stub_start[], __stub_end[];
 #ifdef DEBUG
 	size_t fixups_done = 0;
-	uint64_t cycles = mftb();
+	uint64_t cycles = 0;
+#ifdef PPC_OEA601
+	if ((mfpvr() >> 16) == MPC601)
+	    cycles = rtc_nanosecs() >> 7;
+	else
+#endif
+	    cycles = mftb();
 #endif
 
 	if (stub_start == NULL) {
@@ -209,7 +217,14 @@ powerpc_fixup_stubs(uint32_t *start, uint32_t *end,
 	}
 
 #ifdef DEBUG
+
+#ifdef PPC_OEA601
+	if ((mfpvr() >> 16) == MPC601)
+	    cycles = (rtc_nanosecs() >> 7) - cycles;
+	else
+#endif
 	cycles = mftb() - cycles;
+
 	printf("%s: %zu fixup%s done in %"PRIu64" cycles\n", __func__,
 	    fixups_done, fixups_done == 1 ? "" : "s",
 	    cycles);

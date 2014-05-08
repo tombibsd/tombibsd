@@ -259,6 +259,7 @@ eso_attach(device_t parent, device_t self, void *aux)
 	const char *intrstring;
 	int idx, error;
 	uint8_t a2mode, mvctl;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	sc = device_private(self);
 	sc->sc_dev = self;
@@ -390,7 +391,7 @@ eso_attach(device_t parent, device_t self, void *aux)
 		return;
 	}
 
-	intrstring = pci_intr_string(pa->pa_pc, ih);
+	intrstring = pci_intr_string(pa->pa_pc, ih, intrbuf, sizeof(intrbuf));
 	sc->sc_ih  = pci_intr_establish(pa->pa_pc, ih, IPL_AUDIO, eso_intr, sc);
 	if (sc->sc_ih == NULL) {
 		aprint_error_dev(sc->sc_dev, "couldn't establish interrupt");

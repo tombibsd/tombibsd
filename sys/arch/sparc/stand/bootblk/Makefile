@@ -23,12 +23,12 @@ CPPFLAGS=	${INCLUDES} ${IDENT} ${PARAM} -D_LKM -D_KERNEL
 
 ffs.fth.h: genfth.cf machine sparc
 	${TOOL_GENASSYM} -f -- ${CC} ${CFLAGS} ${CPPFLAGS} ${PROF} \
-	    <${.CURDIR}/genfth.cf >ffs.fth.h.tmp && \
+	    ${GENASSYM_CPPFLAGS} < ${.CURDIR}/genfth.cf >ffs.fth.h.tmp && \
 	    mv -f ffs.fth.h.tmp ffs.fth.h
 
 lfs.fth.h: genlfs.cf machine sparc
 	${TOOL_GENASSYM} -f -- ${CC} ${CFLAGS} ${CPPFLAGS} ${PROF} \
-	    <${.CURDIR}/genlfs.cf >lfs.fth.h.tmp && \
+	    ${GENASSYM_CPPFLAGS} < ${.CURDIR}/genlfs.cf >lfs.fth.h.tmp && \
 	    mv -f lfs.fth.h.tmp lfs.fth.h
 
 bootblk.text: bootblk.fth ffs.fth.h lfs.fth.h

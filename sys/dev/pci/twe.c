@@ -318,6 +318,7 @@ twe_attach(device_t parent, device_t self, void *aux)
 	const struct sysctlnode *node;
 	struct twe_cmd *tc;
 	struct twe_ccb *ccb;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	sc = device_private(self);
 	sc->sc_dev = self;
@@ -348,7 +349,7 @@ twe_attach(device_t parent, device_t self, void *aux)
 		return;
 	}
 
-	intrstr = pci_intr_string(pc, ih);
+	intrstr = pci_intr_string(pc, ih, intrbuf, sizeof(intrbuf));
 	sc->sc_ih = pci_intr_establish(pc, ih, IPL_BIO, twe_intr, sc);
 	if (sc->sc_ih == NULL) {
 		aprint_error_dev(self, "can't establish interrupt%s%s\n",
@@ -1881,8 +1882,17 @@ done:
 }
 
 const struct cdevsw twe_cdevsw = {
-	tweopen, tweclose, noread, nowrite, tweioctl,
-	    nostop, notty, nopoll, nommap, nokqfilter, D_OTHER,
+	.d_open = tweopen,
+	.d_close = tweclose,
+	.d_read = noread,
+	.d_write = nowrite,
+	.d_ioctl = tweioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_OTHER
 };
 
 /*

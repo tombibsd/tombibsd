@@ -5,7 +5,7 @@
 /consio.c/1.10/Fri Oct 12 18:01:53 2012/-kk/
 /consio.h/1.3/Mon Apr 11 14:00:02 2011/-kk/
 /devopen.c/1.6/Fri Oct 12 20:15:52 2012/-kk/
-/fd.c/1.7/Sun Jul 17 20:54:49 2011/-kk/
+/fd.c/1.8/Fri Mar 14 04:28:18 2014/-kk/
 /fdsub.S/1.1/Thu Sep 27 10:03:28 2001/-kk/
 /fdvar.h/1.2/Sun Nov 11 05:20:27 2007/-kk/
 /libx68k.h/1.6/Fri Oct 12 20:15:52 2012/-kk/

@@ -42,11 +42,6 @@ main(void) {
 	FILE *fp;
 	int n;
 
-	isc__mem_register();
-	isc__task_register();
-	isc__timer_register();
-	isc__socket_register();
-
 	n = remove(PATH);
 	if (n != 0 && errno != ENOENT) {
 		fprintf(stderr, "unable to remove(%s)\n", PATH);

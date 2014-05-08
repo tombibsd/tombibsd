@@ -63,8 +63,17 @@ dev_type_poll(itepoll);
 dev_type_kqfilter(itekqfilter);
 
 const struct cdevsw ite_cdevsw = {
-	iteopen, iteclose, iteread, itewrite, iteioctl,
-	nostop, itetty, itepoll, nommap, itekqfilter, D_TTY
+	.d_open = iteopen,
+	.d_close = iteclose,
+	.d_read = iteread,
+	.d_write = itewrite,
+	.d_ioctl = iteioctl,
+	.d_stop = nostop,
+	.d_tty = itetty,
+	.d_poll = itepoll,
+	.d_mmap = nommap,
+	.d_kqfilter = itekqfilter,
+	.d_flag = D_TTY
 };
 
 #if NWSDISPLAY > 0

@@ -212,7 +212,7 @@ mach_init(long fwhandle, long magic, long bootdata, long reserved)
 	    (u_int)fwhandle, (u_int)magic, (u_int)bootdata, (u_int)reserved);
 #endif
 
-	strcpy(cpu_model, "sb1250");
+	cpu_setmodel("sb1250");
 
 	if (magic == BOOTINFO_MAGIC) {
 		int idx;

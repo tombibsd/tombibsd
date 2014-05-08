@@ -4,20 +4,21 @@ REQUIRETOOLS=	yes
 NOLINT=		# defined
 UNSUPPORTED_COMPILER.clang=	# defined
 
-.include <bsd.init.mk>
+.include <bsd.own.mk>
 
 # If using an external toolchain, we expect crtbegin/crtend to be
 # supplied by that toolchain's run-time support.
 .if !defined(EXTERNAL_TOOLCHAIN) && ${MKGCC} != "no"
 
-DIST=		${GCCDIST}
+DIST=		${NETBSDSRCDIR}/external/gpl3/gcc/dist
 GNUHOSTDIST=	${DIST}
-GCCARCH=	${EXTERNAL_GCC_SUBDIR}/usr.bin/gcc/arch/${MACHINE_ARCH}
+GCCARCH=	${NETBSDSRCDIR}/external/gpl3/gcc/usr.bin/gcc/arch/${MACHINE_ARCH}
 
 GALLCFLAGS=	${G_CRTSTUFF_CFLAGS} ${G_CRTSTUFF_T_CFLAGS}
 
 CPPFLAGS+=	-I${GCCARCH} ${GALLCFLAGS:M-D*} ${GALLCFLAGS:M-I*:N-I.*}
-CPPFLAGS+=	-I.
+CPPFLAGS+=	-I. -I${DIST}/libgcc -I${DIST}/gcc -I${DIST}/include
+CPPFLAGS+=	-DIN_GCC
 COPTS+=		-finhibit-size-directive \
 		-fno-inline \
 		-fno-exceptions \
@@ -49,10 +50,10 @@ realall: ${OBJS}
 FILES=${OBJS}
 FILESDIR=${LIBDIR}
 
-.PATH: ${DIST}/gcc ${DIST}/gcc/config ${G_CONFIGDIR}
+.PATH: ${DIST}/libgcc ${DIST}/libgcc/config
 
 .include "../Makefile.tconfigh"
-EXTRA_FAKEHEADERS= options.h
+EXTRA_FAKEHEADERS= options.h libgcc_tm.h
 .include "../Makefile.hacks"
 
 ${OBJS}: ${DPSRCS}

@@ -340,7 +340,7 @@ efifs_dev_print(int verbose)
 	char		line[80];
 
 	for (i = 0; i < fs_handle_count; i++) {
-		sprintf(line, "    fs%d:   EFI filesystem", i);
+		snprintf(line, sizeof(line), "    fs%d:   EFI filesystem", i);
 		pager_output(line);
 		/* XXX more detail? */
 		pager_output("\n");

@@ -7,6 +7,11 @@
 
 include 	"arch/hp300/conf/INSTALL"
 
+# These options for small RAM machines makes extracting binaries much slower.
+no options	NVNODE
+no options	NBUF
+no options	BUFPAGES
+
 # Enable the hooks used for initializing the root memory-disk.
 options 	MEMORY_DISK_HOOKS
 options 	MEMORY_DISK_IS_ROOT		# force root on memory disk

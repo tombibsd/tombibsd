@@ -46,8 +46,10 @@
 #error this file should not be included by loadable kernel modules
 #endif
 
+#ifdef _KERNEL_OPT
 #include "opt_modular.h"
 #include "opt_multiprocessor.h"
+#endif
 
 #include <sys/mutex.h>
 

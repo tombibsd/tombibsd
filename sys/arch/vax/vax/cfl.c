@@ -123,8 +123,17 @@ static dev_type_close(cflclose);
 static dev_type_read(cflrw);
 
 const struct cdevsw cfl_cdevsw = {
-	cflopen, cflclose, cflrw, cflrw, noioctl,
-	nostop, notty, nopoll, nommap, nokqfilter,
+	.d_open = cflopen,
+	.d_close = cflclose,
+	.d_read = cflrw,
+	.d_write = cflrw,
+	.d_ioctl = noioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = 0
 };
 
 /*ARGSUSED*/

@@ -487,6 +487,7 @@ udf_vfsstrategy(void *v)
 
 	/* check assertions: we OUGHT to always get multiples of this */
 	assert(sectors * lb_size == bp->b_bcount);
+	__USE(sectors);
 
 	/* issue buffer */
 	if (bp->b_flags & B_READ) {

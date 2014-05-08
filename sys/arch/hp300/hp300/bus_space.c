@@ -199,7 +199,7 @@ hp300_bus_space_probe(bus_space_tag_t t, bus_space_handle_t bsh,
 		panic("%s: unupported data size %d", __func__, sz);
 		/* NOTREACHED */
 	}
-
+	__USE(i);
 	nofault = NULL;
 	return 1;
 }

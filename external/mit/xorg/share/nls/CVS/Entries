@@ -1,5 +1,5 @@
 /Makefile.nls/1.1.1.1/Tue Jul 29 05:01:23 2008/-kk/
-/Makefile/1.3/Thu Oct 24 10:28:53 2013/-kk/
+/Makefile/1.4/Tue Mar 25 02:34:16 2014/-kk/
 D/C////
 D/am_ET.UTF-8////
 D/armscii-8////
@@ -29,6 +29,7 @@ D/ja.JIS////
 D/ja.SJIS////
 D/ja////
 D/ja_JP.UTF-8////
+D/km_KH.UTF-8////
 D/ko////
 D/ko_KR.UTF-8////
 D/koi8-c////
@@ -40,6 +41,8 @@ D/microsoft-cp1256////
 D/mulelao-1////
 D/nokhchi-1////
 D/pt_BR.UTF-8////
+D/ru_RU.UTF-8////
+D/sr_CS.UTF-8////
 D/tatar-cyr////
 D/th_TH.UTF-8////
 D/th_TH////

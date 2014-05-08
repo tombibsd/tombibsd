@@ -815,13 +815,13 @@ edcworker(void *arg)
 			}
 
 			/* Is there a buf for us ? */
-			simple_lock(&ed->sc_q_lock);
+			mutex_enter(&ed->sc_q_lock);
 			if ((bp = bufq_get(ed->sc_q)) == NULL) {
-				simple_unlock(&ed->sc_q_lock);
+				mutex_exit(&ed->sc_q_lock);
 				i++;
 				continue;
 			}
-			simple_unlock(&ed->sc_q_lock);
+			mutex_exit(&ed->sc_q_lock);
 
 			/* Instrumentation. */
 			disk_busy(&ed->sc_dk);

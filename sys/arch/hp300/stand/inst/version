@@ -11,3 +11,4 @@ $NetBSD$
 1.9:	Change boot messages to replace build date and maker with kernrev.
 1.10:	Pull OpenBSD's ite driver reorganization.
 1.11:	Add support for framebuffers on HP362 and HP382.
+1.12:	Add and fix support for HP425e mcclock, sti framebuffer, apci and dnkbd.

@@ -180,8 +180,17 @@ dev_type_ioctl(bktr_ioctl);
 dev_type_mmap(bktr_mmap);
 
 const struct cdevsw bktr_cdevsw = {
-	bktr_open, bktr_close, bktr_read, bktr_write, bktr_ioctl,
-	nostop, notty, nopoll, bktr_mmap, nokqfilter, D_OTHER
+	.d_open = bktr_open,
+	.d_close = bktr_close,
+	.d_read = bktr_read,
+	.d_write = bktr_write,
+	.d_ioctl = bktr_ioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = bktr_mmap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_OTHER
 };
 #endif /* __NetBSD __ */
 
@@ -1394,6 +1403,7 @@ bktr_attach(device_t parent, device_t self, void *aux)
 	const char *intrstr;
 	int retval;
 	int unit;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	bktr = (bktr_ptr_t)self;
 	unit = bktr->bktr_dev.dv_unit;
@@ -1425,7 +1435,7 @@ bktr_attach(device_t parent, device_t self, void *aux)
 		printf(": couldn't map interrupt\n");
 		return;
 	}
-	intrstr = pci_intr_string(pa->pa_pc, ih);
+	intrstr = pci_intr_string(pa->pa_pc, ih, intrbuf, sizeof(intrbuf));
 
 	bktr->ih = pci_intr_establish(pa->pa_pc, ih, IPL_VIDEO,
 				      bktr_intr, bktr, device_xname(bktr->bktr_dev));
@@ -1448,6 +1458,7 @@ bktr_attach(device_t parent, device_t self, void *aux)
 	const char *intrstr;
 	int retval;
 	int unit;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	bktr = device_private(self);
 	bktr->bktr_dev = self;
@@ -1492,7 +1503,7 @@ bktr_attach(device_t parent, device_t self, void *aux)
 		       bktr_name(bktr));
 		return;
 	}
-	intrstr = pci_intr_string(pa->pa_pc, ih);
+	intrstr = pci_intr_string(pa->pa_pc, ih, intrbuf, sizeof(intrbuf));
 	bktr->ih = pci_intr_establish(pa->pa_pc, ih, IPL_VIDEO,
 				      bktr_intr, bktr);
 	if (bktr->ih == NULL) {

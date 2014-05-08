@@ -64,7 +64,7 @@ intr(int sig)
  */
 
 static int
-read_string(const char *preprompt, const char *prompt, 
+read_string(const char *preprompt, const char *prompt,
 	    char *buf, size_t len, int echo)
 {
     int of = 0;
@@ -88,13 +88,13 @@ read_string(const char *preprompt, const char *prompt,
     if(of)
 	p--;
     *p = 0;
-    
+
     if(echo == 0){
 	printf("\n");
     }
 
     signal(SIGINT, oldsigintr);
-    
+
     if(intr_flag)
 	return -2;
     if(of)

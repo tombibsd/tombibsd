@@ -96,8 +96,17 @@ dev_type_write(lptwrite);
 dev_type_ioctl(lptioctl);
 
 const struct cdevsw lpt_cdevsw = {
-	lptopen, lptclose, noread, lptwrite, lptioctl,
-	nostop, notty, nopoll, nommap, nokqfilter, D_OTHER,
+	.d_open = lptopen,
+	.d_close = lptclose,
+	.d_read = noread,
+	.d_write = lptwrite,
+	.d_ioctl = lptioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_OTHER
 };
 
 #define	LPTUNIT(s)	(minor(s) & 0x1f)

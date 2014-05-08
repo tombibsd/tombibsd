@@ -162,8 +162,17 @@ dev_type_tty(epcomtty);
 dev_type_poll(epcompoll);
 
 const struct cdevsw epcom_cdevsw = {
-	epcomopen, epcomclose, epcomread, epcomwrite, epcomioctl,
-	epcomstop, epcomtty, epcompoll, nommap, ttykqfilter, D_TTY
+	.d_open = epcomopen,
+	.d_close = epcomclose,
+	.d_read = epcomread,
+	.d_write = epcomwrite,
+	.d_ioctl = epcomioctl,
+	.d_stop = epcomstop,
+	.d_tty = epcomtty,
+	.d_poll = epcompoll,
+	.d_mmap = nommap,
+	.d_kqfilter = ttykqfilter,
+	.d_flag = D_TTY
 };
 
 struct consdev epcomcons = {
@@ -874,7 +883,7 @@ epcomcngetc(dev_t dev)
 	if (!db_active)
 #endif
 	{
-		int cn_trapped = 0; /* unused */
+		int cn_trapped __unused = 0;
 
 		cn_check_magic(dev, c, epcom_cnm_state);
 	}
@@ -1017,10 +1026,9 @@ epcomintr(void* arg)
 	u_char *put, *end;
 	u_int cc;
 	u_int flagr;
-	u_int intr;
 	uint32_t c, csts;
 
-	intr = bus_space_read_4(iot, ioh, EPCOM_IntIDIntClr);
+	(void) bus_space_read_4(iot, ioh, EPCOM_IntIDIntClr);
 
 	if (COM_ISALIVE(sc) == 0) 
 		panic("intr on disabled epcom");

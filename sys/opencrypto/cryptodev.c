@@ -1109,17 +1109,17 @@ cryptoselect(dev_t dev, int rw, struct lwp *l)
 
 /*static*/
 struct cdevsw crypto_cdevsw = {
-	/* open */	cryptoopen,
-	/* close */	noclose,
-	/* read */	cryptoread,
-	/* write */	cryptowrite,
-	/* ioctl */	noioctl,
-	/* ttstop?*/	nostop,
-	/* ??*/		notty,
-	/* poll */	cryptoselect /*nopoll*/,
-	/* mmap */	nommap,
-	/* kqfilter */	nokqfilter,
-	/* type */	D_OTHER,
+	.d_open = cryptoopen,
+	.d_close = noclose,
+	.d_read = cryptoread,
+	.d_write = cryptowrite,
+	.d_ioctl = noioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = cryptoselect /*nopoll*/,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_OTHER
 };
 
 int 

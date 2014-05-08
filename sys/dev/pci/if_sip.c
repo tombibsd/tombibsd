@@ -994,6 +994,7 @@ sipcom_attach(device_t parent, device_t self, void *aux)
 	bus_size_t tx_dmamap_size;
 	int ntxsegs_alloc;
 	cfdata_t cf = device_cfdata(self);
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	callout_init(&sc->sc_tick_ch, 0);
 
@@ -1100,7 +1101,7 @@ sipcom_attach(device_t parent, device_t self, void *aux)
 		aprint_error_dev(sc->sc_dev, "unable to map interrupt\n");
 		return;
 	}
-	intrstr = pci_intr_string(pc, ih);
+	intrstr = pci_intr_string(pc, ih, intrbuf, sizeof(intrbuf));
 	sc->sc_ih = pci_intr_establish(pc, ih, IPL_NET, sipcom_intr, sc);
 	if (sc->sc_ih == NULL) {
 		aprint_error_dev(sc->sc_dev, "unable to establish interrupt");

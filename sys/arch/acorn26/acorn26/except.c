@@ -141,7 +141,7 @@ data_abort_handler(struct trapframe *tf)
 	vm_prot_t atype;
 	bool usrmode, twopages;
 	struct vm_map *map;
-	vaddr_t pc, va;
+	vaddr_t va;
 	vsize_t asize;
 
 	/*
@@ -163,7 +163,6 @@ data_abort_handler(struct trapframe *tf)
 		lwp_settrapframe(l, tf);
 		LWP_CACHE_CREDS(l, p);
 	}
-	pc = tf->tf_r15 & R15_PC;
 	data_abort_fixup(tf);
 	va = data_abort_address(tf, &asize);
 	atype = data_abort_atype(tf);

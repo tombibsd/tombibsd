@@ -59,6 +59,7 @@ struct marvell_attach_args {
 	bus_size_t mva_size;
 	bus_dma_tag_t mva_dmat;
 	int mva_irq;
+	enum marvell_tags *mva_tags;
 };
 
 #include "locators.h"

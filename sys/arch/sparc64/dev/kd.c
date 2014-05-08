@@ -73,8 +73,17 @@ dev_type_tty(kdtty);
 dev_type_poll(kdpoll);
 
 const struct cdevsw kd_cdevsw = {
-	kdopen, kdclose, kdread, kdwrite, kdioctl,
-	nostop, kdtty, kdpoll, nommap, ttykqfilter, D_TTY
+	.d_open = kdopen,
+	.d_close = kdclose,
+	.d_read = kdread,
+	.d_write = kdwrite,
+	.d_ioctl = kdioctl,
+	.d_stop = nostop,
+	.d_tty = kdtty,
+	.d_poll = kdpoll,
+	.d_mmap = nommap,
+	.d_kqfilter = ttykqfilter,
+	.d_flag = D_TTY
 };
 
 struct	tty *fbconstty = 0;	/* tty structure for frame buffer console */

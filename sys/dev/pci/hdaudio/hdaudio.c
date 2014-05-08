@@ -58,9 +58,17 @@ dev_type_close(hdaudioclose);
 dev_type_ioctl(hdaudioioctl);
 
 const struct cdevsw hdaudio_cdevsw = {
-	hdaudioopen, hdaudioclose, noread, nowrite, hdaudioioctl,
-	nostop, notty, nopoll, nommap, nokqfilter,
-	D_OTHER
+	.d_open = hdaudioopen,
+	.d_close = hdaudioclose,
+	.d_read = noread,
+	.d_write = nowrite,
+	.d_ioctl = hdaudioioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_OTHER
 };
 
 extern struct cfdriver hdaudio_cd;

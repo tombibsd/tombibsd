@@ -46,5 +46,9 @@ DPADD+=	${LIBXMU} ${LIBXT} ${LIBSM} ${LIBICE} ${LIBXEXT} ${LIBX11}
 
 CWARNFLAGS.clang+=	-Wno-pointer-sign
 
+# XXX: has const issues best solved upstream
+COPTS.menus.c+=	-Wno-error
+COPTS.util.c+=	-Wno-error
+
 .include <bsd.x11.mk>
 .include <bsd.prog.mk>

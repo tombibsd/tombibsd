@@ -73,8 +73,17 @@ dev_type_read(xrtc_read);
 dev_type_write(xrtc_write);
 
 const struct cdevsw xrtc_cdevsw = {
-	xrtc_open, xrtc_close, xrtc_read, xrtc_write,
-	noioctl, nostop, notty, nopoll, nommap, nokqfilter, D_OTHER
+	.d_open = xrtc_open,
+	.d_close = xrtc_close,
+	.d_read = xrtc_read,
+	.d_write = xrtc_write,
+	.d_ioctl = noioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_OTHER
 };
 
 static int xrtc_clock_read(struct xrtc_softc *, struct clock_ymdhms *);

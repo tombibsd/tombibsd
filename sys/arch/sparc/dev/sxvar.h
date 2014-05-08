@@ -45,4 +45,10 @@ sx_write(struct sx_softc *sc, int addr, uint32_t val)
 	bus_space_write_4(sc->sc_tag, sc->sc_regh, addr, val);
 }
 
+static inline uint32_t
+sx_read(struct sx_softc *sc, int addr)
+{
+	return bus_space_read_4(sc->sc_tag, sc->sc_regh, addr);
+}
+
 #endif

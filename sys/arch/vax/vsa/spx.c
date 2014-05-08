@@ -1512,7 +1512,8 @@ spx_init_common(device_t self, struct vsbus_attach_args *va)
 	spx_stdscreen.nrows = spx_rows;
 	spx_stdscreen.fontwidth = spx_font.fontwidth;
 	spx_stdscreen.fontheight = spx_font.fontheight;
-	sprintf(spx_stdscreen_name, "%dx%d", spx_cols, spx_rows);
+	snprintf(spx_stdscreen_name, sizeof(spx_stdscreen_name),
+            "%dx%d", spx_cols, spx_rows);
 
 	/* for SPXg spx_fb_size represents FB window size, not FB length */
 	if (fb_type == FB_IS_SPXg)

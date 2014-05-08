@@ -375,10 +375,6 @@ main(int argc, char *argv[]) {
 	isc_log_t *lctx = NULL;
 	size_t n;
 
-	isc__mem_register();
-	isc__task_register();
-	isc__timer_register();
-	isc__socket_register();
 	dns_result_register();
 
 	RUNTIME_CHECK(isc_mem_create(0, 0, &mctx) == ISC_R_SUCCESS);

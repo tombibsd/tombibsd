@@ -15,6 +15,7 @@ SRCS+=	MipsAsmBackend.cpp \
 	MipsMCCodeEmitter.cpp \
 	MipsMCExpr.cpp \
 	MipsMCTargetDesc.cpp \
+	MipsNaClELFStreamer.cpp \
 	MipsTargetStreamer.cpp
 
 .if defined(HOSTLIB)

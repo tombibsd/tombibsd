@@ -149,7 +149,7 @@ pcireg_t dino_conf_read(void *, pcitag_t, int);
 void dino_conf_write(void *, pcitag_t, int, pcireg_t);
 
 int dino_intr_map(const struct pci_attach_args *, pci_intr_handle_t *);
-const char *dino_intr_string(void *, pci_intr_handle_t);
+const char *dino_intr_string(void *, pci_intr_handle_t, char *, size_t);
 void *dino_intr_establish(void *, pci_intr_handle_t, int,
     int (*)(void *), void *);
 void dino_intr_disestablish(void *, void *);
@@ -387,11 +387,9 @@ dino_intr_map(const struct pci_attach_args *pa, pci_intr_handle_t *ihp)
 }
 
 const char *
-dino_intr_string(void *v, pci_intr_handle_t ih)
+dino_intr_string(void *v, pci_intr_handle_t ih, char *buf, size_t len)
 {
-	static char buf[32];
-
-	snprintf(buf, 32, "irq %ld", ih);
+	snprintf(buf, len, "irq %ld", ih);
 	return buf;
 }
 

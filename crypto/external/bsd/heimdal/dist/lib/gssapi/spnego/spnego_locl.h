@@ -73,6 +73,8 @@
 #include "utils.h"
 #include <krb5/der.h>
 
+#include <krb5/heimbase.h>
+
 #define ALLOC(X, N) (X) = calloc((N), sizeof(*(X)))
 
 typedef struct {

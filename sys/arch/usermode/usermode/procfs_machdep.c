@@ -38,7 +38,7 @@ __RCSID("$NetBSD$");
 #include <machine/thunk.h>
 
 int
-procfs_getcpuinfstr(char *bf, int *len)
+procfs_getcpuinfstr(char *bf, size_t *len)
 {
 	return thunk_getcpuinfo(bf, len);
 }

@@ -357,6 +357,7 @@ tlp_pci_attach(device_t parent, device_t self, void *aux)
 	pcireg_t reg;
 	int error;
 	bus_size_t iosize = 0, memsize = 0;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	sc->sc_dev = self;
 	sc->sc_devno = pa->pa_device;
@@ -1010,7 +1011,7 @@ tlp_pci_attach(device_t parent, device_t self, void *aux)
 			aprint_error_dev(self, "unable to map interrupt\n");
 			goto fail;
 		}
-		intrstr = pci_intr_string(pc, ih);
+		intrstr = pci_intr_string(pc, ih, intrbuf, sizeof(intrbuf));
 		psc->sc_ih = pci_intr_establish(pc, ih, IPL_NET,
 		    (psc->sc_flags & TULIP_PCI_SHAREDINTR) ?
 		    tlp_pci_shared_intr : tlp_intr, sc);

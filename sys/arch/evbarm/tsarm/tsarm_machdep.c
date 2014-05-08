@@ -378,10 +378,11 @@ initarm(void *arg)
 	int loop;
 	int loop1;
 	u_int l1pagetable;
+
+#ifdef FIXME
 	paddr_t memstart;
 	psize_t memsize;
 
-#ifdef FIXME
 	/* Calibrate the delay loop. */
 	i80321_calibrate_delay();
 #endif
@@ -415,7 +416,7 @@ initarm(void *arg)
 	 */
 	i80321_sdram_bounds(&obio_bs_tag, VERDE_PMMR_BASE + VERDE_MCU_BASE,
 	    &memstart, &memsize);
-#else
+
 	memstart = 0x0;
 	memsize = 0x2000000;
 #endif

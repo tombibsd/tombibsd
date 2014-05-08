@@ -154,8 +154,17 @@ int isdnctlioctl(dev_t dev, u_long cmd, void *data, int flag, struct lwp *l);
 
 #ifdef __NetBSD__
 const struct cdevsw isdnctl_cdevsw = {
-	isdnctlopen, isdnctlclose, noread, nowrite, isdnctlioctl,
-	nostop, notty, nopoll, nommap, nokqfilter, D_OTHER
+	.d_open = isdnctlopen,
+	.d_close = isdnctlclose,
+	.d_read = noread,
+	.d_write = nowrite,
+	.d_ioctl = isdnctlioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_OTHER
 };
 #endif /* __NetBSD__ */
 

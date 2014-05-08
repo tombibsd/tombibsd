@@ -56,6 +56,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/syscallargs.h>
 #include <sys/syslog.h>
 #include <sys/systm.h>
+#include <sys/cpu.h>
 
 #include <uvm/uvm_extern.h>
 
@@ -496,9 +497,16 @@ mpc601_ioseg_add(paddr_t pa, register_t len)
 	 * in pmap_bootstrap().
 	 */
 	iosrtable[i] = SR601(SR601_Ks, SR601_BUID_MEMFORCED, 0, i);
+
+	/*
+	 * XXX Setting segment register 0xf on my powermac 7200
+	 * wedges machine so set later in pmap.c
+	 */
+	/*
 	__asm volatile ("mtsrin %0,%1"
 	    ::	"r"(iosrtable[i]),
 		"r"(pa));
+	*/
 }
 #endif /* PPC_OEA601 */
 
@@ -929,7 +937,7 @@ oea_startup(const char *model)
 	uintptr_t sz;
 	void *v;
 	vaddr_t minaddr, maxaddr;
-	char pbuf[9];
+	char pbuf[9], mstr[128];
 
 	KASSERT(curcpu() != NULL);
 	KASSERT(lwp0.l_cpu != NULL);
@@ -966,7 +974,8 @@ oea_startup(const char *model)
 	printf("%s%s", copyright, version);
 	if (model != NULL)
 		printf("Model: %s\n", model);
-	cpu_identify(NULL, 0);
+	cpu_identify(mstr, sizeof(mstr));
+	cpu_setmodel("%s", mstr);
 
 	format_bytes(pbuf, sizeof(pbuf), ctob((u_int)physmem));
 	printf("total memory = %s\n", pbuf);

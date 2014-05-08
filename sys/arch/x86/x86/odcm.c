@@ -208,6 +208,8 @@ odcm_init(device_t self)
 		len += snprintf(sc->sc_names + len,
 		    sc->sc_names_len - len, "%d%s", state[i].level,
 		    i < __arraycount(state) ? " " : "");
+		if (len > sc->sc_names_len)
+			break;
 	}
 
 	/*

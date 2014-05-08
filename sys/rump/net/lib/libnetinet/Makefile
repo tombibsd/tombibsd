@@ -3,7 +3,7 @@
 
 LIB=	rumpnet_netinet
 
-SRCS=	component.c
+SRCS=	netinet_component.c
 
 .include <bsd.lib.mk>
 .include <bsd.klinks.mk>

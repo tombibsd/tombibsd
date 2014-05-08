@@ -260,6 +260,7 @@ hifn_attach(device_t parent, device_t self, void *aux)
 	bus_dmamap_t dmamap;
 	int rseg;
 	void *kva;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	hp = hifn_lookup(pa);
 	if (hp == NULL) {
@@ -365,7 +366,7 @@ hifn_attach(device_t parent, device_t self, void *aux)
 		aprint_error_dev(sc->sc_dv, "couldn't map interrupt\n");
 		goto fail_mem;
 	}
-	intrstr = pci_intr_string(pc, ih);
+	intrstr = pci_intr_string(pc, ih, intrbuf, sizeof(intrbuf));
 #ifdef	__OpenBSD__
 	sc->sc_ih = pci_intr_establish(pc, ih, IPL_NET, hifn_intr, sc,
 	    device_xname(self));

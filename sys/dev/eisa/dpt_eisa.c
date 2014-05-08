@@ -128,6 +128,7 @@ dpt_eisa_attach(device_t parent, device_t self, void *aux)
 	bus_space_tag_t iot;
 	const char *intrstr;
 	int irq;
+	char intrbuf[EISA_INTRSTR_LEN];
 
 	ea = aux;
 	sc = device_private(self);
@@ -158,7 +159,7 @@ dpt_eisa_attach(device_t parent, device_t self, void *aux)
 		return;
 	}
 
-	intrstr = eisa_intr_string(ec, ih);
+	intrstr = eisa_intr_string(ec, ih, intrbuf, sizeof(intrbuf));
 	sc->sc_ih = eisa_intr_establish(ec, ih, IST_LEVEL, IPL_BIO,
 	    dpt_intr, sc);
 	if (sc->sc_ih == NULL) {

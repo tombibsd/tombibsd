@@ -649,7 +649,7 @@ waitcmd(int argc, char **argv)
 			if (dowait(WBLOCK|WNOFREE, job) == -1)
 			       return 128 + SIGINT;
 		}
-		status = job->ps[job->nprocs - 1].status;
+		status = job->ps[job->nprocs ? job->nprocs - 1 : 0].status;
 		if (WIFEXITED(status))
 			retval = WEXITSTATUS(status);
 #if JOBS

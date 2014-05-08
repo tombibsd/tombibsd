@@ -1,17 +1,17 @@
-/Makefile.am/1.1.1.1/Wed Apr 13 18:16:01 2011/-kk/
+/Makefile.am/1.1.1.2/Tue May  6 05:46:43 2014/-kk/
 /NTMakefile/1.1.1.1/Wed Apr 13 18:16:01 2011/-kk/
 /check-cc.in/1.1.1.1/Wed Apr 13 18:16:01 2011/-kk/
 /check-delegation.in/1.1.1.1/Wed Apr 13 18:16:01 2011/-kk/
 /check-des.in/1.1.1.1/Wed Apr 13 18:16:01 2011/-kk/
-/check-digest.in/1.1.1.1/Wed Apr 13 18:16:01 2011/-kk/
+/check-digest.in/1.1.1.2/Tue May  6 05:46:43 2014/-kk/
 /check-iprop.in/1.1.1.1/Wed Apr 13 18:16:01 2011/-kk/
-/check-kadmin.in/1.1.1.1/Wed Apr 13 18:16:01 2011/-kk/
+/check-kadmin.in/1.1.1.2/Tue May  6 05:46:43 2014/-kk/
 /check-kdc-weak.in/1.1.1.1/Wed Apr 13 18:16:01 2011/-kk/
-/check-kdc.in/1.1.1.1/Wed Apr 13 18:16:01 2011/-kk/
+/check-kdc.in/1.1.1.2/Tue May  6 05:46:43 2014/-kk/
 /check-keys.in/1.1.1.1/Wed Apr 13 18:16:01 2011/-kk/
 /check-kpasswdd.in/1.1.1.1/Wed Apr 13 18:16:01 2011/-kk/
 /check-pkinit.in/1.1.1.1/Wed Apr 13 18:16:01 2011/-kk/
-/check-referral.in/1.1.1.1/Wed Apr 13 18:16:01 2011/-kk/
+/check-referral.in/1.1.1.2/Tue May  6 05:46:43 2014/-kk/
 /check-uu.in/1.1.1.1/Wed Apr 13 18:16:02 2011/-kk/
 /donotexists.txt/1.1.1.1/Wed Apr 13 18:16:02 2011/-kk/
 /heimdal.acl/1.1.1.1/Wed Apr 13 18:16:02 2011/-kk/
@@ -19,9 +19,9 @@
 /krb5-pkinit.conf.in/1.1.1.1/Wed Apr 13 18:16:02 2011/-kk/
 /krb5.conf.in/1.1.1.1/Wed Apr 13 18:16:02 2011/-kk/
 /krb5.conf.keys.in/1.1.1.1/Wed Apr 13 18:16:02 2011/-kk/
-/leaks-kill.sh/1.1.1.1/Wed Apr 13 18:16:02 2011/-kk/
+/leaks-kill.sh/1.1.1.2/Tue May  6 05:46:43 2014/-kk/
 /ntlm-user-file.txt/1.1.1.1/Wed Apr 13 18:16:02 2011/-kk/
 /pki-mapping/1.1.1.1/Wed Apr 13 18:16:02 2011/-kk/
 /uuserver.txt/1.1.1.1/Wed Apr 13 18:16:02 2011/-kk/
-/wait-kdc.sh/1.1.1.1/Wed Apr 13 18:16:02 2011/-kk/
+/wait-kdc.sh/1.1.1.2/Tue May  6 05:46:43 2014/-kk/
 D

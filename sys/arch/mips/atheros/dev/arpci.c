@@ -207,9 +207,10 @@ arpci_intr_map(const struct pci_attach_args *pa, pci_intr_handle_t *ihp)
 }
 
 static const char *
-arpci_intr_string(void *v, pci_intr_handle_t ih)
+arpci_intr_string(void *v, pci_intr_handle_t ih, char *buf, size_t len)
 {
-	return NULL;
+	snprintf(buf, len, "fixme!");
+	return buf;
 }
 
 static const struct evcnt *

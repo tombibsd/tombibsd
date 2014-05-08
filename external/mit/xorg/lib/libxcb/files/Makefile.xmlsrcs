@@ -8,7 +8,9 @@ XMLSRCS= \
 	damage.c \
 	dpms.c \
 	dri2.c \
+	dri3.c \
 	glx.c \
+	present.c \
 	randr.c \
 	record.c \
 	render.c \

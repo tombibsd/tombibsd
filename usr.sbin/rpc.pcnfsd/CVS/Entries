@@ -2,14 +2,14 @@
 /Makefile/1.23/Fri Aug 10 12:10:30 2012/-kk/
 /README/1.3/Wed Nov 12 13:31:07 2003/-kk/
 /common.h/1.2/Tue Jul 25 22:20:26 1995/-kk/
-/extern.h/1.2/Sat Apr 18 13:02:36 2009/-kk/
+/extern.h/1.3/Fri Apr 11 02:04:02 2014/-kk/
 /paths.h/1.1/Mon Aug 14 19:50:09 1995/-kk/
 /pcnfsd.8/1.8/Sat Sep 27 04:47:01 2008/-kk/
 /pcnfsd.x/1.6/Sat Apr 18 13:02:36 2009/-kk/
 /pcnfsd_cache.c/1.4/Wed Jul 16 08:22:01 2003/-kk/
 /pcnfsd_misc.c/1.15/Sun Nov  4 22:26:04 2012/-kk/
-/pcnfsd_print.c/1.12/Tue Aug 16 14:29:16 2011/-kk/
+/pcnfsd_print.c/1.13/Fri Apr 11 02:04:02 2014/-kk/
 /pcnfsd_test.c/1.3/Wed Jul 16 08:22:01 2003/-kk/
 /pcnfsd_v1.c/1.4/Wed Aug 31 16:24:59 2011/-kk/
-/pcnfsd_v2.c/1.12/Fri Oct  7 10:46:29 2011/-kk/
+/pcnfsd_v2.c/1.13/Fri Apr 11 02:04:02 2014/-kk/
 D

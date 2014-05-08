@@ -4,11 +4,11 @@
 /ad.m68k.shl/1.10/Tue Jan 14 16:01:09 2014/-kk/
 /ad.m68k/1.49/Mon Nov 11 15:18:11 2013/-kk/
 /ad.mips/1.47/Tue Jan 14 16:01:10 2014/-kk/
-/ad.powerpc/1.65/Tue Jan 14 16:01:10 2014/-kk/
+/ad.powerpc/1.66/Fri Mar 14 04:22:38 2014/-kk/
 /ad.sh3/1.29/Mon Nov 11 15:18:11 2013/-kk/
 /md.algor/1.16/Sun Jul 17 20:54:31 2011/-kk/
 /md.alpha/1.66/Tue Jan 14 16:01:10 2014/-kk/
-/md.amd64/1.216/Thu Feb 27 08:51:20 2014/-kk/
+/md.amd64/1.218/Tue May  6 05:46:59 2014/-kk/
 /md.amiga/1.59/Thu Oct 24 10:28:41 2013/-kk/
 /md.amigappc/1.11/Tue Nov 26 03:26:43 2013/-kk/
 /md.arc/1.24/Sun Jul 17 20:54:31 2011/-kk/
@@ -26,7 +26,7 @@
 /md.hp300/1.62/Thu Oct 24 10:28:41 2013/-kk/
 /md.hpcmips/1.31/Thu Oct 24 10:28:41 2013/-kk/
 /md.hpcsh/1.27/Thu Oct 24 10:28:41 2013/-kk/
-/md.hppa/1.1/Mon Feb 24 07:23:39 2014/-kk/
+/md.hppa/1.2/Fri Mar 14 04:22:38 2014/-kk/
 /md.i386/1.145/Thu Feb 27 08:51:20 2014/-kk/
 /md.ibmnws/1.11/Tue Nov 26 03:26:43 2013/-kk/
 /md.landisk/1.5/Thu Oct 24 10:28:41 2013/-kk/
@@ -41,6 +41,7 @@
 /md.newsmips/1.30/Sun Nov 25 21:55:50 2012/-kk/
 /md.next68k/1.32/Sun Jul 17 20:54:31 2011/-kk/
 /md.ofppc/1.15/Tue Nov 26 03:26:43 2013/-kk/
+/md.playstation2/1.12/Sat Apr 19 05:33:45 2014/-kk/
 /md.pmax/1.63/Sun Jul 17 20:54:31 2011/-kk/
 /md.prep/1.29/Tue Nov 26 03:26:43 2013/-kk/
 /md.rs6000/1.7/Tue Nov 26 03:26:43 2013/-kk/
@@ -48,12 +49,12 @@
 /md.sbmips/1.15/Sun Nov 25 21:55:50 2012/-kk/
 /md.sgimips/1.19/Thu Oct 24 10:28:41 2013/-kk/
 /md.sparc/1.83/Thu Feb 13 15:32:25 2014/-kk/
-/md.sparc64/1.182/Sat Mar  1 05:58:12 2014/-kk/
+/md.sparc64/1.183/Tue May  6 05:47:00 2014/-kk/
 /md.sun2/1.20/Thu Oct 24 10:28:41 2013/-kk/
 /md.sun3/1.62/Thu Oct 24 10:28:41 2013/-kk/
 /md.vax/1.40/Mon Nov 11 15:18:11 2013/-kk/
 /md.x68k/1.60/Thu Oct 24 10:28:41 2013/-kk/
-/mi/1.1878/Thu Feb 13 15:32:25 2014/-kk/
-/shl.mi/1.261/Fri Jan 31 08:45:05 2014/-kk/
+/mi/1.1891/Tue May  6 05:47:00 2014/-kk/
+/shl.mi/1.264/Tue May  6 05:47:00 2014/-kk/
 /stl.mi/1.1/Fri Jul  2 21:19:00 2010/-kk/
 D

@@ -40,7 +40,7 @@ struct hppa_eisa_chipset {
 	void	(*ec_attach_hook)(device_t, device_t,
 				       struct eisabus_attach_args *);
 	int	(*ec_intr_map)(void *, u_int, int *);
-	const char *(*ec_intr_string)(void *, int);
+	const char *(*ec_intr_string)(void *, int, char *, size_t);
 	void	*(*ec_intr_establish)(void *, int, int, int,
 					   int (*)(void *), void *);
 	void	(*ec_intr_disestablish)(void *, void *);
@@ -60,8 +60,8 @@ struct hppa_eisa_chipset {
 #define	eisa_maxslots(c)	8
 #define	eisa_intr_map(c, i, hp)						\
     (*(c)->ec_intr_map)((c)->ec_v, (i), (hp))
-#define	eisa_intr_string(c, h)						\
-    (*(c)->ec_intr_string)((c)->ec_v, (h))
+#define	eisa_intr_string(c, h, buf, len)				\
+    (*(c)->ec_intr_string)((c)->ec_v, (h), (buf), (len))
 #define	eisa_intr_establish(c, h, t, l, f, a)			\
     (*(c)->ec_intr_establish)((c)->ec_v, (h), (t), (l), (f), (a))
 #define	eisa_intr_disestablish(c, h)					\

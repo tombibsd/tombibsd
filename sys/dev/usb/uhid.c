@@ -116,8 +116,17 @@ dev_type_poll(uhidpoll);
 dev_type_kqfilter(uhidkqfilter);
 
 const struct cdevsw uhid_cdevsw = {
-	uhidopen, uhidclose, uhidread, uhidwrite, uhidioctl,
-	nostop, notty, uhidpoll, nommap, uhidkqfilter, D_OTHER | D_MPSAFE,
+	.d_open = uhidopen,
+	.d_close = uhidclose,
+	.d_read = uhidread,
+	.d_write = uhidwrite,
+	.d_ioctl = uhidioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = uhidpoll,
+	.d_mmap = nommap,
+	.d_kqfilter = uhidkqfilter,
+	.d_flag = D_OTHER | D_MPSAFE
 };
 
 Static void uhid_intr(struct uhidev *, void *, u_int len);

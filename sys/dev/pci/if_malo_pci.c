@@ -103,6 +103,7 @@ malo_pci_attach(device_t parent, device_t self, void *aux)
 	pci_intr_handle_t ih;
 	pcireg_t memtype1, memtype2;
 	int error;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	sc->sc_dev = self;
 	sc->sc_dmat = pa->pa_dmat;
@@ -156,7 +157,7 @@ malo_pci_attach(device_t parent, device_t self, void *aux)
 	}
 
 	/* establish interrupt */
-	intrstr = pci_intr_string(psc->sc_pc, ih);
+	intrstr = pci_intr_string(psc->sc_pc, ih, intrbuf, sizeof(intrbuf));
 	psc->sc_ih = pci_intr_establish(psc->sc_pc, ih, IPL_NET, malo_intr, sc);
 	if (psc->sc_ih == NULL) {
 		aprint_error_dev(self, "could not establish interrupt");

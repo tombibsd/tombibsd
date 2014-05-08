@@ -37,6 +37,12 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include "rump_private.h"
 
+#ifdef LOCKDEBUG
+const int rump_lockdebug = 1;
+#else
+const int rump_lockdebug = 0;
+#endif
+
 /*
  * Simple lockdebug.  If it's compiled in, it's always active.
  * Currently available only for mtx/rwlock.
@@ -72,9 +78,6 @@ static lockops_t rw_lockops = {
 #define LOCKED(a, b)
 #define UNLOCKED(a, b)
 #endif
-
-/* not used, but need the symbols for pointer comparisons */
-syncobj_t mutex_syncobj, rw_syncobj;
 
 /*
  * We map locks to pthread routines.  The difference between kernel

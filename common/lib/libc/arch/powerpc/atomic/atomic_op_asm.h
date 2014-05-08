@@ -44,4 +44,54 @@
 
 #endif /* _KERNEL */
 
+#define	ATOMIC_OP_32_ARG(op,insn,arg) \
+ENTRY(_atomic_##op##_32)	; \
+	mr	%r10,%r3	; \
+1:	lwarx	%r3,0,%r10	; \
+	insn	%r5,%r3,arg	; \
+	stwcx.	%r5,0,%r10	; \
+	beqlr+			; \
+	b	1b		; \
+END(_atomic_##op##_32)		; \
+ATOMIC_OP_ALIAS(atomic_##op##_32,_atomic_##op##_32)
+
+#define	ATOMIC_OP_64_ARG(op,insn,arg) \
+ENTRY(_atomic_##op##_64)	; \
+	mr	%r10,%r3	; \
+1:	ldarx	%r3,0,%r10	; \
+	insn	%r5,%r3,arg	; \
+	stdcx.	%r5,0,%r10	; \
+	beqlr+			; \
+	b	1b		; \
+END(_atomic_##op##_64)		; \
+ATOMIC_OP_ALIAS(atomic_##op##_64,_atomic_##op##_64)
+
+#define	ATOMIC_OP_32_ARG_NV(op,insn,arg) \
+ENTRY(_atomic_##op##_32_nv)	; \
+	mr	%r10,%r3	; \
+1:	lwarx	%r3,0,%r10	; \
+	insn	%r3,%r3,arg	; \
+	stwcx.	%r3,0,%r10	; \
+	beqlr+			; \
+	b	1b		; \
+END(_atomic_##op##_32_nv)	; \
+ATOMIC_OP_ALIAS(atomic_##op##_32_nv,_atomic_##op##_32_nv)
+
+#define	ATOMIC_OP_64_ARG_NV(op,insn,arg) \
+ENTRY(_atomic_##op##_64_nv)	; \
+	mr	%r10,%r3	; \
+1:	ldarx	%r3,0,%r10	; \
+	insn	%r3,%r3,arg	; \
+	stdcx.	%r3,0,%r10	; \
+	beqlr+			; \
+	b	1b		; \
+END(_atomic_##op##_64_nv)	; \
+ATOMIC_OP_ALIAS(atomic_##op##_64_nv,_atomic_##op##_64_nv)
+
+#define ATOMIC_OP_32(op)	ATOMIC_OP_32_ARG(op,op,%r4)
+#define ATOMIC_OP_32_NV(op)	ATOMIC_OP_32_ARG_NV(op,op,%r4)
+
+#define ATOMIC_OP_64(op)	ATOMIC_OP_64_ARG(op,op,%r4)
+#define ATOMIC_OP_64_NV(op)	ATOMIC_OP_64_ARG_NV(op,op,%r4)
+
 #endif /* _ATOMIC_OP_ASM_H_ */

@@ -158,6 +158,7 @@ jmide_attach(device_t parent, device_t self, void *aux)
 	    PCI_JM_CONTROL1);
 	struct pciide_product_desc *pp;
 	int ahci_used = 0;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	sc->sc_pciide.sc_wdcdev.sc_atac.atac_dev = self;
 
@@ -184,7 +185,7 @@ jmide_attach(device_t parent, device_t self, void *aux)
                 aprint_error("%s: couldn't map interrupt\n", JM_NAME(sc));
                 return;
         }
-        intrstr = pci_intr_string(pa->pa_pc, intrhandle);
+        intrstr = pci_intr_string(pa->pa_pc, intrhandle, intrbuf, sizeof(intrbuf));
         sc->sc_pciide.sc_pci_ih = pci_intr_establish(pa->pa_pc, intrhandle,
 	    IPL_BIO, jmide_intr, sc);
         if (sc->sc_pciide.sc_pci_ih == NULL) {

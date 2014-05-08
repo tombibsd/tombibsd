@@ -580,9 +580,6 @@ static void
 veriexec_file_report(struct veriexec_file_entry *vfe, const u_char *msg,
     const u_char *filename, struct lwp *l, int f)
 {
-	if (msg == NULL)
-		return;
-
 	if (vfe != NULL && vfe->filename != NULL)
 		filename = vfe->filename;
 

@@ -659,7 +659,6 @@ detect_x11()
 	fi
 }
 
-
 usage()
 {
 	cat 1>&2 << _USAGE_

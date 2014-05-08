@@ -5,8 +5,8 @@
 PROG=	mkfontscale
 SRCS=	mkfontscale.c list.c hash.c ident.c
 
-CPPFLAGS+=	-DFREETYPE2 -I${DESTDIR}${X11INCDIR}/freetype2 \
-		-DXFREE86_FT2 -DX_BZIP2_FONT_COMPRESSION
+CPPFLAGS+=	-I${DESTDIR}${X11INCDIR}/freetype2
+CPPFLAGS+=	-I${X11SRCDIR.${PROG}}/../include -DHAVE_CONFIG_H
 
 LDADD+=	-lfontenc -lfreetype -lz -lbz2
 DPADD+=	${LIBFONTENC} ${LIBFREETYPE} ${LIBZ} ${LIBBZ2}

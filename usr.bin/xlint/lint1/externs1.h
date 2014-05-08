@@ -68,6 +68,7 @@ extern	int	yyparse(void);
 /*
  * scan.l
  */
+extern  int	attron;
 extern	pos_t	curr_pos;
 extern	pos_t	csrc_pos;
 extern	symt_t	symtyp;

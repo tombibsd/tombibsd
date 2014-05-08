@@ -72,12 +72,27 @@ dev_type_mmap(fw_mmap);
 dev_type_strategy(fw_strategy);
 
 const struct bdevsw fw_bdevsw = {
-	fw_open, fw_close, fw_strategy, fw_ioctl, nodump, nosize, D_OTHER,
+	.d_open = fw_open,
+	.d_close = fw_close,
+	.d_strategy = fw_strategy,
+	.d_ioctl = fw_ioctl,
+	.d_dump = nodump,
+	.d_psize = nosize,
+	.d_flag = D_OTHER
 };
 
 const struct cdevsw fw_cdevsw = {
-	fw_open, fw_close, fw_read, fw_write, fw_ioctl,
-	nostop, notty, fw_poll, fw_mmap, nokqfilter, D_OTHER,
+	.d_open = fw_open,
+	.d_close = fw_close,
+	.d_read = fw_read,
+	.d_write = fw_write,
+	.d_ioctl = fw_ioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = fw_poll,
+	.d_mmap = fw_mmap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_OTHER
 };
 
 struct fw_drv1 {

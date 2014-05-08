@@ -22,8 +22,8 @@
 /svr4_lwp.h/1.2/Mon Apr 28 20:23:45 2008/-kk/
 /svr4_misc.c/1.155/Tue Sep 27 00:52:55 2011/-kk/
 /svr4_mman.h/1.4/Mon Apr 28 20:23:45 2008/-kk/
-/svr4_mod.c/1.2/Thu Oct 24 10:28:57 2013/-kk/
-/svr4_net.c/1.58/Sun Dec 20 09:36:05 2009/-kk/
+/svr4_mod.c/1.4/Fri Mar 14 04:28:19 2014/-kk/
+/svr4_net.c/1.59/Tue Mar 25 02:35:30 2014/-kk/
 /svr4_resource.c/1.18/Sun Mar 29 01:02:50 2009/-kk/
 /svr4_resource.h/1.2/Mon Apr 28 20:23:45 2008/-kk/
 /svr4_schedctl.c/1.7/Mon Apr 28 20:23:45 2008/-kk/

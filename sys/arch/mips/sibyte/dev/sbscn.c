@@ -186,8 +186,17 @@ dev_type_tty(sbscntty);
 dev_type_poll(sbscnpoll);
 
 const struct cdevsw sbscn_cdevsw = {
-	sbscnopen, sbscnclose, sbscnread, sbscnwrite, sbscnioctl,
-	sbscnstop, sbscntty, sbscnpoll, nommap, ttykqfilter, D_TTY
+	.d_open = sbscnopen,
+	.d_close = sbscnclose,
+	.d_read = sbscnread,
+	.d_write = sbscnwrite,
+	.d_ioctl = sbscnioctl,
+	.d_stop = sbscnstop,
+	.d_tty = sbscntty,
+	.d_poll = sbscnpoll,
+	.d_mmap = nommap,
+	.d_kqfilter = ttykqfilter,
+	.d_flag = D_TTY
 };
 
 #define	integrate	static inline

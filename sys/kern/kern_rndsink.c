@@ -210,7 +210,20 @@ rndsinks_enqueue(struct rndsink *rndsink)
 
 	KASSERT(mutex_owned(&rndsinks_lock));
 
-	/* XXX Kick any on-demand entropy sources too.  */
+	/*
+	 * XXX This should request only rndsink->rs_bytes bytes of
+	 * entropy, but that might get buffered up indefinitely because
+	 * kern_rndq has no bound on the duration before it will
+	 * process queued entropy samples.  For now, request refilling
+	 * the pool altogether so that the buffer will fill up and get
+	 * processed.  Later, we ought to (a) bound the duration before
+	 * queued entropy samples get processed, and (b) add a target
+	 * or something -- as soon as we get that much from the entropy
+	 * sources, distribute it.
+	 */
+	mutex_spin_enter(&rndpool_mtx);
+	rnd_getmore(RND_POOLBITS / NBBY);
+	mutex_spin_exit(&rndpool_mtx);
 
 	switch (rndsink->rsink_state) {
 	case RNDSINK_IDLE:

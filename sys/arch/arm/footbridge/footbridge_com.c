@@ -128,8 +128,17 @@ dev_type_tty(fcomtty);
 dev_type_poll(fcompoll);
 
 const struct cdevsw fcom_cdevsw = {
-	fcomopen, fcomclose, fcomread, fcomwrite, fcomioctl,
-	nostop, fcomtty, fcompoll, nommap, ttykqfilter, D_TTY
+	.d_open = fcomopen,
+	.d_close = fcomclose,
+	.d_read = fcomread,
+	.d_write = fcomwrite,
+	.d_ioctl = fcomioctl,
+	.d_stop = nostop,
+	.d_tty = fcomtty,
+	.d_poll = fcompoll,
+	.d_mmap = nommap,
+	.d_kqfilter = ttykqfilter,
+	.d_flag = D_TTY
 };
 
 void fcominit(bus_space_tag_t, bus_space_handle_t, int, int);

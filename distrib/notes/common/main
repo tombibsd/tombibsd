@@ -46,7 +46,7 @@
 .as MACHINE_LIST " evbsh3 ews4800mips hp300 hppa hpcarm hpcmips hpcsh i386
 .as MACHINE_LIST " ibmnws iyonix landisk luna68k mac68k macppc mipsco mmeye
 .as MACHINE_LIST " mvme68k mvmeppc netwinder news68k newsmips next68k ofppc
-.as MACHINE_LIST " pmax prep rs6000 sandpoint sbmips
+.as MACHINE_LIST " playstation2 pmax prep rs6000 sandpoint sbmips
 .as MACHINE_LIST " sgimips shark sparc sparc64 sun2 sun3 vax x68k xen zaurus .
 .so \*[.CURDIR]/../common/macros
 .
@@ -1023,7 +1023,7 @@ If you're one of them, and would like to be mentioned, tell us!)
 .Pp
 .
 .
-.Bl -column xxx "Jun-ichiro itojun Hagino" ".Mt sommerfeld@NetBSD.org" ".Sy ews4800mips"
+.Bl -column xxx "Jun-ichiro itojun Hagino" ".Mt sommerfeld@NetBSD.org" ".Sy playstation2"
 .
 .br_ne 1i
 .It Em "The NetBSD core group:"
@@ -1376,6 +1376,7 @@ If you're one of them, and would like to be mentioned, tell us!)
 .It Ta Daniel Sieger Ta Mt dsieger@NetBSD.org
 .It Ta Chuck Silvers Ta Mt chs@NetBSD.org
 .It Ta Thor Lancelot Simon Ta Mt tls@NetBSD.org
+.It Ta Nathanial Sloss Ta Mt nat@NetBSD.org
 .It Ta Jeff Smith Ta Mt jeffs@NetBSD.org
 .It Ta Noriyuki Soda Ta Mt soda@NetBSD.org
 .It Ta Wolfgang Solfrank Ta Mt ws@NetBSD.org
@@ -1386,6 +1387,7 @@ If you're one of them, and would like to be mentioned, tell us!)
 .It Ta Bill Squier Ta Mt groo@NetBSD.org
 .It Ta Adrian Steinmann Ta Mt ast@NetBSD.org
 .It Ta Bill Studenmund Ta Mt wrstuden@NetBSD.org
+.It Ta Hiroki Suenaga Ta Mt hsuenaga@NetBSD.org
 .It Ta Kevin Sullivan Ta Mt sullivan@NetBSD.org
 .It Ta Kimmo Suominen Ta Mt kim@NetBSD.org
 .It Ta Gr\('egoire Sutre Ta Mt gsutre@NetBSD.org

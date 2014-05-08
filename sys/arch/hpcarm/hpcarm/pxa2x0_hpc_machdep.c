@@ -252,7 +252,6 @@ init_pxa2x0(int argc, char **argv, struct bootinfo *bi)
 	u_int kerneldatasize, symbolsize;
 	u_int l1pagetable;
 	vaddr_t freemempos;
-	vsize_t pt_size;
 	int loop;
 #if NKSYMS || defined(DDB) || defined(MODULAR)
 	Elf_Shdr *sh;
@@ -391,8 +390,6 @@ init_pxa2x0(int argc, char **argv, struct bootinfo *bi)
 	 * shared by all processes.
 	 */
 	valloc_pages(systempage, 1);
-
-	pt_size = round_page(freemempos) - physical_start;
 
 	/* Allocate stacks for all modes */
 	valloc_pages(irqstack, IRQ_STACK_SIZE);

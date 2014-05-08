@@ -39,6 +39,7 @@ SUBDIR+= \
 	llvm-mc \
 	llvm-nm \
 	llvm-objdump \
+	llvm-profdata \
 	llvm-readobj \
 	llvm-size \
 	llvm-symbolizer \

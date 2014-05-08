@@ -210,6 +210,7 @@ bool		npf_autounload_p(void);
 #define	NPF_RULE_RETRST			0x0010
 #define	NPF_RULE_RETICMP		0x0020
 #define	NPF_RULE_DYNAMIC		0x0040
+#define	NPF_RULE_MULTIENDS		0x0080
 
 #define	NPF_DYNAMIC_GROUP		(NPF_RULE_GROUP | NPF_RULE_DYNAMIC)
 

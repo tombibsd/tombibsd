@@ -69,8 +69,11 @@ struct evvar {
 		(ev)->ev_wanted = 0; \
 		wakeup((void *)(ev)); \
 	} \
-	if ((ev)->ev_async) \
+	if ((ev)->ev_async) { \
+		mutex_enter(proc_lock); \
 		psignal((ev)->ev_io, SIGIO); \
+		mutex_exit(proc_lock); \
+	} \
 }
 
 void	ev_init(struct evvar *);

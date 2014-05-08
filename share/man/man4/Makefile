@@ -37,8 +37,9 @@ MAN=	aac.4 ac97.4 acardide.4 aceride.4 acphy.4 \
 	jme.4 jmide.4 joy.4 \
 	kloader.4 kse.4 ksyms.4 kttcp.4 \
 	lc.4 ld.4 lii.4 lo.4 lua.4 lxtphy.4 \
-	mainbus.4 makphy.4 malo.4 mbe.4 mca.4 mcclock.4 md.4 mfb.4 mfi.4 mhzc.4 \
-	midi.4 mii.4 mk48txx.4 mlx.4 mly.4 mpls.4 mpii.4 mpt.4 mpu.4 mtd.4 \
+	mainbus.4 makphy.4 malo.4 mbe.4 mca.4 mcclock.4 md.4 mfb.4 \
+	mfi.4 mhzc.4 \
+	micphy.4 midi.4 mii.4 mk48txx.4 mlx.4 mly.4 mpls.4 mpii.4 mpt.4 mpu.4 mtd.4 \
 	mtio.4 msm6242b.4 multicast.4 mvsata.4 \
 	nadb.4 ne.4 neo.4 netintro.4 nfe.4 nfsmb.4 njata.4 njs.4 \
 	nsclpcsio.4 nside.4 nsp.4 nsphy.4 nsphyter.4 ntwoc.4 null.4 nsmb.4 \
@@ -49,7 +50,7 @@ MAN=	aac.4 ac97.4 acardide.4 aceride.4 acphy.4 \
 	pseye.4 ptcd.4 ptm.4 pty.4 puc.4 pud.4 puffs.4 pwdog.4 px.4 pxg.4 \
 	qe.4 qec.4 qsphy.4 \
 	raid.4 ral.4 ray.4 rcons.4 rdcphy.4 re.4 rgephy.4 rlphy.4 \
-	rnd.4 route.4 rs5c372rtc.4 rtk.4 rtw.4 rum.4 run.4 \
+	rnd.4 route.4 rs5c372rtc.4 rtk.4 rtsx.4 rtw.4 rum.4 run.4 \
 	s390rtc.4 satalink.4 sbus.4 scc.4 schide.4 \
 	scsi.4 sd.4 se.4 seeprom.4 sem.4 \
 	ses.4 sf.4 sfb.4 sgsmix.4 shb.4 shmif.4 \
@@ -74,7 +75,7 @@ MAN+=	atu.4 aubtfwl.4 aue.4 axe.4 axen.4 cdce.4 cue.4 ehci.4 kue.4 ohci.4 \
 	slhci.4 stuirda.4 u3g.4 uatp.4 uaudio.4 uberry.4 ubsa.4 ubt.4 uchcom.4 \
 	ucom.4 ucycom.4 udav.4 udsbr.4 uftdi.4 ugen.4 ugensa.4 uhci.4 uhid.4 \
 	uhidev.4 uhmodem.4 uhso.4 uipaq.4 uirda.4 ukbd.4 ukyopon.4 ulpt.4 \
-	umass.4 umct.4 umidi.4 umodem.4 ums.4 upgt.4 upl.4 uplcom.4 \
+	umass.4 umcs.4 umct.4 umidi.4 umodem.4 ums.4 upgt.4 upl.4 uplcom.4 \
 	urio.4 url.4 urndis.4 urtw.4 urtwn.4 \
 	usb.4 uscanner.4 uslsa.4 usmsc.4 usscanner.4 \
 	ustir.4 uthum.4 utoppy.4 uts.4 uvideo.4 uvisor.4 uvscom.4 uyap.4 \
@@ -125,7 +126,7 @@ MAN+=	dbcool.4 g760a.4 lmenv.4 lmtemp.4 mcp980x.4 mpl115a.4 sdtemp.4 \
 	smscmon.4 spdmem.4 tps65217pmic.4
 
 # machine-independent SPI devices
-MAN +=	m25p.4 tm121temp.4
+MAN +=	m25p.4 mcp23s17gpio.4 tm121temp.4
 
 # machine-independent SD/MMC devices
 MAN +=	sbt.4 sdhc.4 sdmmc.4

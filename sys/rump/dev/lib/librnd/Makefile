@@ -7,7 +7,7 @@ LIB=	rumpdev_rnd
 
 SRCS=	rndpseudo.c
 
-SRCS+=	component.c
+SRCS+=	rnd_component.c
 
 # sys/rump/Makefile.rump sets CPPFLAGS+= -DCOMPAT_50=1,
 # so we need rndpseudo_50.c from the compat/common directory.

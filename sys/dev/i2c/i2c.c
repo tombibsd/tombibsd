@@ -68,8 +68,17 @@ static dev_type_close(iic_close);
 static dev_type_ioctl(iic_ioctl);
 
 const struct cdevsw iic_cdevsw = {
-	iic_open, iic_close, noread, nowrite, iic_ioctl,
-	nostop, notty, nopoll, nommap, nokqfilter, D_OTHER
+	.d_open = iic_open,
+	.d_close = iic_close,
+	.d_read = noread,
+	.d_write = nowrite,
+	.d_ioctl = iic_ioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_OTHER
 };
 
 extern struct cfdriver iic_cd;

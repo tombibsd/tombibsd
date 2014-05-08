@@ -66,8 +66,17 @@ dev_type_poll(uart_poll);
 dev_type_stop(uart_stop);
 
 const struct cdevsw uart_cdevsw = {
-        uart_open, uart_close, uart_read, uart_write, uart_ioctl,
-        uart_stop, uart_tty, uart_poll, nommap, ttykqfilter, D_TTY
+        .d_open = uart_open,
+	.d_close = uart_close,
+	.d_read = uart_read,
+	.d_write = uart_write,
+	.d_ioctl = uart_ioctl,
+        .d_stop = uart_stop,
+	.d_tty = uart_tty,
+	.d_poll = uart_poll,
+	.d_mmap = nommap,
+	.d_kqfilter = ttykqfilter,
+	.d_flag = D_TTY
 };
 
 struct consdev uartcons = {

@@ -35,7 +35,7 @@
 
 #include "kadm5_locl.h"
 
-__RCSID("$NetBSD$");
+__RCSID("NetBSD");
 
 kadm5_ret_t
 _kadm5_error_code(kadm5_ret_t code)

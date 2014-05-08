@@ -1280,7 +1280,7 @@ quota2_handle_cmd_cursorget(struct ufsmount *ump, struct quotakcursor *qkc,
 	struct q2cursor_state state;
 	struct quota2_entry default_q2e;
 	int idtype;
-	int quota2_hash_size;
+	int quota2_hash_size = 0; /* XXX: sh3 gcc 4.8 -Wuninitialized */
 
 	/*
 	 * Convert and validate the cursor.

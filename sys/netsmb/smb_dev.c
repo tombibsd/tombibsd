@@ -85,8 +85,17 @@ dev_type_close(nsmb_dev_close);
 dev_type_ioctl(nsmb_dev_ioctl);
 
 const struct cdevsw nsmb_cdevsw = {
-	nsmb_dev_open, nsmb_dev_close, noread, nowrite,
-	nsmb_dev_ioctl, nostop, notty, nopoll, nommap, nokqfilter, D_OTHER,
+	.d_open = nsmb_dev_open,
+	.d_close = nsmb_dev_close,
+	.d_read = noread,
+	.d_write = nowrite,
+	.d_ioctl = nsmb_dev_ioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_OTHER,
 };
 
 

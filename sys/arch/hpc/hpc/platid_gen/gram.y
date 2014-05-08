@@ -184,7 +184,7 @@ dump_node(prefix, n)
 	char prefix2[1024];
 	node_t *np;
 
-	sprintf(prefix2, "%s    ", prefix);
+	snprintf(prefix2, sizeof(prefix2), "%s    ", prefix);
 
 	switch (n->type) {
 	case N_LABEL:

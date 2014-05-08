@@ -46,6 +46,7 @@ struct gtmr_softc {
 struct cpu_info;
 void	gtmr_init_cpu_clock(struct cpu_info *);
 void	gtmr_delay(unsigned int n);
+void	gtmr_bootdelay(unsigned int n);
 #endif
 
 #endif /* _ARM_CORTEX_GTMR_VAR_ */

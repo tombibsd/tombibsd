@@ -46,3 +46,4 @@ ENTRY(strcpy)
 	popl	%edi
 	popl	%esi
 	ret
+END(strcpy)

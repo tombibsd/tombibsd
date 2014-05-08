@@ -93,6 +93,7 @@ RUMP_COMPONENT(RUMP__FACTION_VFS)
 {
 	extern struct vfsops rumpfs_vfsops;
 	char buf[64];
+	char *mbase;
 	int rv, i;
 
 	/* initialize indirect interfaces */
@@ -153,20 +154,17 @@ RUMP_COMPONENT(RUMP__FACTION_VFS)
 	 * host module directory to rump.  This means that kernel
 	 * modules from the host will be autoloaded to rump kernels.
 	 */
-#ifdef _RUMP_NATIVE_ABI
-	{
-	char *mbase;
+	if (rump_nativeabi_p()) {
+		if (rumpuser_getparam("RUMP_MODULEBASE", buf, sizeof(buf)) == 0)
+			mbase = buf;
+		else
+			mbase = module_base;
 
-	if (rumpuser_getparam("RUMP_MODULEBASE", buf, sizeof(buf)) == 0)
-		mbase = buf;
-	else
-		mbase = module_base;
-
-	if (strlen(mbase) != 0 && *mbase != '0') {
-		rump_etfs_register(module_base, mbase, RUMP_ETFS_DIR_SUBDIRS);
+		if (strlen(mbase) != 0 && *mbase != '0') {
+			rump_etfs_register(module_base, mbase,
+			    RUMP_ETFS_DIR_SUBDIRS);
+		}
 	}
-	}
-#endif
 
 	module_init_class(MODULE_CLASS_VFS);
 

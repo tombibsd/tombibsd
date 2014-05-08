@@ -128,6 +128,7 @@ ral_pci_attach(device_t parent, device_t self, void *aux)
 	pci_intr_handle_t ih;
 	pcireg_t reg;
 	int error;
+	char intrbuf[PCI_INTRSTR_LEN];
 
 	pci_aprint_devinfo(pa, NULL);
 
@@ -158,7 +159,7 @@ ral_pci_attach(device_t parent, device_t self, void *aux)
 		return;
 	}
 
-	intrstr = pci_intr_string(psc->sc_pc, ih);
+	intrstr = pci_intr_string(psc->sc_pc, ih, intrbuf, sizeof(intrbuf));
 	psc->sc_ih = pci_intr_establish(psc->sc_pc, ih, IPL_NET,
 	    psc->sc_opns->intr, sc);
 

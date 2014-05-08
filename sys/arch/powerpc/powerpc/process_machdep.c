@@ -137,10 +137,13 @@ process_sstep(struct lwp *l, int sstep)
 {
 	struct trapframe * const tf = l->l_md.md_utf;
 	
-	if (sstep)
+	if (sstep) {
 		tf->tf_srr1 |= PSL_SE;
-	else
+		l->l_md.md_flags |= PSL_SE;
+	} else {
 		tf->tf_srr1 &= ~PSL_SE;
+		l->l_md.md_flags &= ~PSL_SE;
+	}
 	return 0;
 }
 

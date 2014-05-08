@@ -43,6 +43,7 @@ news68k	m68k	19991209	Sony's m68k based NET WORK STATION
 newsmips	mipseb	19980218	Sony's MIPS based NET WORK STATION
 next68k	m68k	19980609	NeXT Computer's cubes and slabs
 ofppc	powerpc,powerpc64	19980528	Open Firmware based PowerPC machines
+playstation2	mipsel	20011016	Sony PlayStation 2
 pmax	mipsel,mips64el	19931012	Digital Equipment Corp. MIPS based machines
 prep	powerpc	20000229	PowerPC Reference Platform machines
 rs6000	powerpc	20071217	MCA-based IBM RS/6000 wokstations

@@ -1,4 +1,4 @@
-/Makefile.assym/1.3/Tue Nov 12 02:18:52 2013/-kk/
+/Makefile.assym/1.4/Fri Mar 14 04:28:28 2014/-kk/
 /Makefile.inc/1.6/Sun Sep 11 18:38:02 2011/-kk/
 /Makefile/1.135/Tue Jan 14 16:05:07 2014/-kk/
 /README/1.1/Thu Nov 13 10:06:46 2008/-kk/
@@ -21,6 +21,10 @@ D/adosfs////
 D/aibs////
 D/aio////
 D/amdtemp////
+D/apple_smc////
+D/apple_smc_acpi////
+D/apple_smc_fan////
+D/apple_smc_temp////
 D/aps////
 D/arch////
 D/asus////
@@ -65,6 +69,10 @@ D/des////
 D/dk_subr////
 D/dm////
 D/drm////
+D/drm2pci////
+D/drmkms////
+D/drmkms_linux////
+D/drmkms_pci////
 D/dtrace////
 D/dtv////
 D/dtv_math////
@@ -99,6 +107,7 @@ D/hpacel////
 D/hpet////
 D/hpqlb////
 D/i915drm////
+D/i915drmkms////
 D/if_alc////
 D/if_ath_pci////
 D/if_athn_usb////

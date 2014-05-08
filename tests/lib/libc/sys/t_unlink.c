@@ -129,9 +129,13 @@ ATF_TC_HEAD(unlink_perm, tc)
 
 ATF_TC_BODY(unlink_perm, tc)
 {
+	int rv;
 
 	errno = 0;
-	ATF_REQUIRE_ERRNO(EACCES, unlink("/etc") == -1);
+	rv = unlink("/etc");
+	ATF_REQUIRE_MSG(rv == -1 && (errno == EACCES || errno == EPERM),
+	    "unlinking a directory did not fail with EPERM or EACCESS; "
+	    "unlink() returned %d, errno %d", rv, errno);
 
 	errno = 0;
 	ATF_REQUIRE_ERRNO(EACCES, unlink("/root/.profile") == -1);

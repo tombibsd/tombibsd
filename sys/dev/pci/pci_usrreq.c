@@ -170,8 +170,17 @@ pcimmap(dev_t dev, off_t offset, int prot)
 }
 
 const struct cdevsw pci_cdevsw = {
-	pciopen, nullclose, noread, nowrite, pciioctl,
-	nostop, notty, nopoll, pcimmap, nokqfilter, D_OTHER,
+	.d_open = pciopen,
+	.d_close = nullclose,
+	.d_read = noread,
+	.d_write = nowrite,
+	.d_ioctl = pciioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = pcimmap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_OTHER
 };
 
 /*

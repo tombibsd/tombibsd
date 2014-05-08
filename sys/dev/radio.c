@@ -63,8 +63,17 @@ static dev_type_close(radioclose);
 static dev_type_ioctl(radioioctl);
 
 const struct cdevsw radio_cdevsw = {
-	radioopen, radioclose, noread, nowrite, radioioctl,
-	nostop, notty, nopoll, nommap, nokqfilter, D_OTHER,
+	.d_open = radioopen,
+	.d_close = radioclose,
+	.d_read = noread,
+	.d_write = nowrite,
+	.d_ioctl = radioioctl,
+	.d_stop = nostop,
+	.d_tty = notty,
+	.d_poll = nopoll,
+	.d_mmap = nommap,
+	.d_kqfilter = nokqfilter,
+	.d_flag = D_OTHER,
 };
 
 extern struct cfdriver radio_cd;

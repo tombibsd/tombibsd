@@ -762,11 +762,11 @@ reapchild(void)
 
 				if (WIFEXITED(status) && WEXITSTATUS(status))
 					syslog(LOG_WARNING,
-					    "%s: exit status 0x%x",
+					    "%s: exit status %u",
 					    sep->se_server, WEXITSTATUS(status));
 				else if (WIFSIGNALED(status))
 					syslog(LOG_WARNING,
-					    "%s: exit signal 0x%x",
+					    "%s: exit signal %u",
 					    sep->se_server, WTERMSIG(status));
 				sep->se_wait = 1;
 				ev = allocchange();

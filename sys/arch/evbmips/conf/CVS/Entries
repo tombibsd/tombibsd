@@ -3,7 +3,7 @@
 /ADM5120/1.17/Thu Oct 24 10:28:57 2013/-kk/
 /ALCHEMY/1.52/Thu Oct 24 10:28:57 2013/-kk/
 /AP30/1.30/Thu Oct 24 10:28:57 2013/-kk/
-/CPMBR1400/1.14/Thu Oct 24 10:28:57 2013/-kk/
+/CPMBR1400/1.16/Tue May  6 05:49:54 2014/-kk/
 /DB120/1.12/Thu Oct 24 10:28:57 2013/-kk/
 /DBAU1500/1.8/Tue Apr  4 04:30:28 2006/-kk/
 /DBAU1550/1.9/Mon Oct  2 08:13:53 2006/-kk/
@@ -17,8 +17,9 @@
 /INSTALL_OMSAL400/1.2/Fri Feb  6 18:50:27 2009/-kk/
 /INSTALL_XLSATX32/1.2/Sun Feb 20 07:48:33 2011/-kk/
 /INSTALL_XLSATX64/1.2/Sun Feb 20 07:48:33 2011/-kk/
+/INSTALL_ZYXELKX/1.1/Wed Apr 30 01:01:04 2014/-kk/
 /LOONGSON/1.22/Fri Jan 31 08:48:36 2014/-kk/
-/MALTA/1.76/Thu Oct 24 10:28:57 2013/-kk/
+/MALTA/1.77/Tue Mar 25 02:35:19 2014/-kk/
 /MALTA32.MP/1.2/Sun Feb 20 07:48:33 2011/-kk/
 /MALTA32/1.3/Thu Feb  9 18:58:44 2012/-kk/
 /MALTA64.MP/1.2/Sun Feb 20 07:48:33 2011/-kk/
@@ -38,6 +39,7 @@
 /XLSATX32/1.3/Thu Apr 14 05:06:10 2011/-kk/
 /XLSATX64.MP/1.3/Thu Apr 14 05:06:39 2011/-kk/
 /XLSATX64/1.2/Sun Feb 20 07:48:33 2011/-kk/
+/ZYXELKX/1.1/Wed Apr 30 01:01:04 2014/-kk/
 /files.adm5120/1.7/Sun Feb 20 07:48:34 2011/-kk/
 /files.alchemy/1.11/Sun Feb 20 07:48:34 2011/-kk/
 /files.algor/1.1/Sat Jul  9 16:03:01 2011/-kk/
@@ -46,7 +48,7 @@
 /files.gdium/1.3/Sun Jul 24 21:40:31 2011/-kk/
 /files.loongson/1.4/Thu Oct 24 10:28:57 2013/-kk/
 /files.malta/1.18/Sat Jul  9 16:03:01 2011/-kk/
-/files.rasoc/1.2/Thu Jul 28 15:50:13 2011/-kk/
+/files.rasoc/1.3/Tue May  6 05:49:54 2014/-kk/
 /files.rmixl/1.4/Fri Mar 18 00:59:13 2011/-kk/
 /majors.evbmips/1.28/Thu Oct 24 10:28:57 2013/-kk/
 /std.adm5120/1.2/Thu Dec 11 05:42:18 2008/-kk/
@@ -57,6 +59,6 @@
 /std.loongson/1.1/Sat Aug 27 13:42:44 2011/-kk/
 /std.malta/1.8/Sun Feb 20 07:48:34 2011/-kk/
 /std.meraki/1.3/Thu Jul  7 05:06:44 2011/-kk/
-/std.rasoc/1.3/Tue Aug 16 07:01:37 2011/-kk/
+/std.rasoc/1.4/Tue May  6 05:49:54 2014/-kk/
 /std.rmixl/1.3/Sun Feb 20 07:48:34 2011/-kk/
 D

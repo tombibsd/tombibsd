@@ -1,5 +1,5 @@
 /Makefile/1.22/Thu Dec 17 05:29:56 2009/-kk/
-/boot.c/1.19/Sat Jan 22 19:19:21 2011/-kk/
+/boot.c/1.20/Fri Apr 11 02:03:34 2014/-kk/
 /bootinfo.c/1.6/Mon Apr 28 20:23:30 2008/-kk/
 /devopen.c/1.10/Thu Feb 21 14:30:41 2008/-kk/
 /locore.S/1.2/Wed Dec 22 05:54:41 1999/-kk/

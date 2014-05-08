@@ -746,13 +746,13 @@ tx39_intr_dump(struct tx39icu_softc *sc)
 				reg |= (1 << j);
 			}
 		}
-		sprintf(msg, "%d high", i);
+		snprintf(msg, sizeof(msg), "%d high", i);
 		dbg_bit_print_msg(reg, msg);
-		sprintf(msg, "%d status", i);
+		snprintf(msg, sizeof(msg), "%d status", i);
 		dbg_bit_print_msg(sc->sc_regs[i], msg);
 		ofs = TX39_INTRENABLE_REG(i);
 		reg = tx_conf_read(tc, ofs);
-		sprintf(msg, "%d enable", i);
+		snprintf(msg, sizeof(msg), "%d enable", i);
 		dbg_bit_print_msg(reg, msg);
 	}
 	reg = sc->sc_regs[0];

@@ -7,15 +7,15 @@ NOPROFILE=	# defined
 
 LIB=		gcc_eh
 
-.include "../../../Makefile.gcc_path"
 .include <bsd.own.mk>
 
 .if ${MKGCC} != "no"
 
 .cc: # disable .cc->NULL transform
 
-SRCS+=		${LIB2_EH} ${LIB2_EHASM}
-COPTS.unwind-dw2.c = -Wno-stack-protector
+SRCS+=		${LIB2_EH} ${LIB2_EHASM} empty.c
+COPTS.c-typeck.c=	-Wno-stack-protector
+COPTS.unwind-dw2.c=	-Wno-stack-protector
 
 MKPIC:=	no
 

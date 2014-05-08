@@ -185,8 +185,17 @@ dev_type_tty(at91usart_tty);
 dev_type_poll(at91usart_poll);
 
 const struct cdevsw at91usart_cdevsw = {
-	at91usart_open, at91usart_close, at91usart_read, at91usart_write, at91usart_ioctl,
-	at91usart_stop, at91usart_tty, at91usart_poll, nommap, ttykqfilter, D_TTY
+	.d_open = at91usart_open,
+	.d_close = at91usart_close,
+	.d_read = at91usart_read,
+	.d_write = at91usart_write,
+	.d_ioctl = at91usart_ioctl,
+	.d_stop = at91usart_stop,
+	.d_tty = at91usart_tty,
+	.d_poll = at91usart_poll,
+	.d_mmap = nommap,
+	.d_kqfilter = ttykqfilter,
+	.d_flag = D_TTY
 };
 
 #if	NOTYET

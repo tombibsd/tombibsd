@@ -169,7 +169,7 @@ static int
 bsciic_acquire_bus(void *v, int flags)
 {
 	struct bsciic_softc * const sc = v;
-	uint32_t s;
+	uint32_t s __diagused;
 
 	mutex_enter(&sc->sc_buslock);
 
