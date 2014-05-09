@@ -150,7 +150,11 @@ LDADD+=	-llua
 ##
 ## module install rules
 lua-install:		${DESTDIR}${LUA_DEST.${_M}}/${LUA_NAME.${_M}}
+.if ${MKUPDATE} == "no"
 ${DESTDIR}${LUA_DEST.${_M}}/${LUA_NAME.${_M}}! ${LUA_TARG.${_M}}
+.else
+${DESTDIR}${LUA_DEST.${_M}}/${LUA_NAME.${_M}}: ${LUA_TARG.${_M}}
+.endif
 	${_MKTARGET_INSTALL}
 	${INSTALL_FILE} -o ${LIBOWN} -g ${LIBGRP} -m ${LIBMODE}	\
 	    ${.ALLSRC} ${.TARGET}
