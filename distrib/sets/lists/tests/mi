@@ -955,6 +955,11 @@
 ./usr/tests/fs					tests-fs-tests
 ./usr/tests/fs/Atffile				tests-fs-tests		atf,rump
 ./usr/tests/fs/Kyuafile				tests-fs-tests		atf,rump,kyua
+./usr/tests/fs/cd9660				tests-fs-tests
+./usr/tests/fs/cd9660/Atffile			tests-fs-tests		atf,rump
+./usr/tests/fs/cd9660/Kyuafile			tests-fs-tests		atf,rump,kyua
+./usr/tests/fs/cd9660/t_high_ino_big_file	tests-fs-tests		atf,rump
+./usr/tests/fs/cd9660/pr_48787.image.bz2	tests-fs-tests		atf,rump
 ./usr/tests/fs/ffs				tests-fs-tests
 ./usr/tests/fs/ffs/Atffile			tests-fs-tests		atf,rump
 ./usr/tests/fs/ffs/Kyuafile			tests-fs-tests		atf,rump,kyua

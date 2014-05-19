@@ -4372,10 +4372,10 @@ ENTRY_NOPROFILE(cpu_initialize)	/* for cosmetic reasons - nicer backtrace */
 	bne,pt	%icc, 6f
 	 nop
 	/* sun4v */
-	set	_C_LABEL(trapbase_sun4v), %o0
+	set	_C_LABEL(trapbase_sun4v), %l1
 	GET_MMFSA %o1
 	call	_C_LABEL(prom_set_trap_table_sun4v)	! Now we should be running 100% from our handlers
-	 nop
+	 mov	%l1, %o0
 	
 	ba	7f
 	 nop

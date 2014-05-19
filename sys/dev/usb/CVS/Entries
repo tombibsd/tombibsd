@@ -70,7 +70,7 @@
 /if_urndis.c/1.6/Thu Oct 24 10:28:58 2013/-kk/
 /if_urndisreg.h/1.1/Wed Jul 20 19:59:49 2011/-kk/
 /if_urtw.c/1.6/Thu Oct 24 10:28:58 2013/-kk/
-/if_urtwn.c/1.29/Thu Feb 27 08:56:02 2014/-kk/
+/if_urtwn.c/1.30/Mon May 19 16:26:31 2014/-kk/
 /if_urtwn_data.h/1.2/Thu Oct 24 10:28:58 2013/-kk/
 /if_urtwnreg.h/1.6/Thu Feb 27 08:56:02 2014/-kk/
 /if_urtwnvar.h/1.7/Thu Oct 24 10:28:58 2013/-kk/
@@ -97,7 +97,7 @@
 /ubsavar.h/1.9/Fri Dec 23 00:51:45 2011/-kk/
 /ubt.c/1.50/Sat Mar  1 06:04:44 2014/-kk/
 /uchcom.c/1.13/Tue Mar 25 02:35:40 2014/-kk/
-/ucom.c/1.103/Tue Mar 25 02:35:40 2014/-kk/
+/ucom.c/1.104/Mon May 19 16:26:31 2014/-kk/
 /ucomvar.h/1.20/Mon Dec 19 19:34:52 2011/-kk/
 /ucycom.c/1.38/Tue Mar 25 02:35:40 2014/-kk/
 /udl.c/1.11/Sat Mar  1 06:04:44 2014/-kk/
@@ -138,7 +138,7 @@
 /umass_scsipi.c/1.48/Thu Oct 24 10:28:58 2013/-kk/
 /umass_scsipi.h/1.2/Mon Apr 28 20:24:00 2008/-kk/
 /umassvar.h/1.35/Wed Jan  1 02:45:33 2014/-kk/
-/umcs.c/1.6/Fri Apr 11 02:03:50 2014/-kk/
+/umcs.c/1.7/Mon May 19 16:26:31 2014/-kk/
 /umcs.h/1.1/Sun Mar 16 09:34:45 2014/-kk/
 /umct.c/1.32/Fri Dec 23 00:51:47 2011/-kk/
 /umct.h/1.2/Mon Apr 28 20:24:00 2008/-kk/

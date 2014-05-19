@@ -92,17 +92,11 @@ exyo_print(void *aux, const char *pnp)
 void
 exyo_device_register(device_t self, void *aux)
 {
-	prop_dictionary_t dict = device_properties(self);
+}
 
-	if (device_is_a(self, "mct")) {
-		/*
-		 * This clock always runs at (arm_clk div 2) and only goes
-		 * to timers that are part of the A9 MP core subsystem.
-		 */
-		prop_dictionary_set_uint32(dict, "frequency",
-		    curcpu()->ci_data.cpu_cc_freq / 2);
-		return;
-	}
+void
+exyo_device_register_post_config(device_t self, void *aux)
+{
 }
 
 static int

@@ -541,12 +541,10 @@ exit1(struct lwp *l, int rv)
 	 */
 	pcu_discard_all(l);
 
-	/*
-	 * Remaining lwp resources will be freed in lwp_exit2() once we've
-	 * switch to idle context; at that point, we will be marked as a
-	 * full blown zombie.
-	 */
 	mutex_enter(p->p_lock);
+	/* Free the linux lwp id */
+	if ((l->l_pflag & LP_PIDLID) != 0 && l->l_lid != p->p_pid)
+		proc_free_pid(l->l_lid);
 	lwp_drainrefs(l);
 	lwp_lock(l);
 	l->l_prflag &= ~LPR_DETACHED;

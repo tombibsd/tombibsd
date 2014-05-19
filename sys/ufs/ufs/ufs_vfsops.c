@@ -97,6 +97,26 @@ ufs_root(struct mount *mp, struct vnode **vpp)
 }
 
 /*
+ * Look up and return a vnode/inode pair by inode number.
+ */
+int
+ufs_vget(struct mount *mp, ino_t ino, struct vnode **vpp)
+{
+	int error;
+
+	error = vcache_get(mp, &ino, sizeof(ino), vpp);
+	if (error)
+		return error;
+	error = vn_lock(*vpp, LK_EXCLUSIVE);
+	if (error) {
+		vrele(*vpp);
+		*vpp = NULL;
+		return error;
+	}
+	return 0;
+}
+
+/*
  * Do operations associated with quotas
  */
 int
@@ -245,7 +265,6 @@ ufs_init(void)
 	ufs_direct_cache = pool_cache_init(sizeof(struct direct), 0, 0, 0,
 	    "ufsdir", NULL, IPL_NONE, NULL, NULL, NULL);
 
-	ufs_ihashinit();
 #if defined(QUOTA) || defined(QUOTA2)
 	dqinit();
 #endif
@@ -260,7 +279,6 @@ ufs_init(void)
 void
 ufs_reinit(void)
 {
-	ufs_ihashreinit();
 #if defined(QUOTA) || defined(QUOTA2)
 	dqreinit();
 #endif
@@ -275,7 +293,6 @@ ufs_done(void)
 	if (--ufs_initcount > 0)
 		return;
 
-	ufs_ihashdone();
 #if defined(QUOTA) || defined(QUOTA2)
 	dqdone();
 #endif

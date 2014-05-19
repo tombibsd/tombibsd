@@ -305,9 +305,9 @@ pmap_segtab_alloc(void)
 	}
 
 #ifdef PARANOIADIAG
-	for (i = 0; i < PMAP_SEGTABSIZE; i++) {
+	for (size_t i = 0; i < PMAP_SEGTABSIZE; i++) {
 		if (stp->seg_tab[i] != 0)
-			panic("pmap_create: pm_segtab.seg_tab[%zu] != 0");
+			panic("%s: pm_segtab.seg_tab[%zu] != 0", __func__, i);
 	}
 #endif
 	return stp;
@@ -455,6 +455,7 @@ pmap_pte_reserve(pmap_t pmap, vaddr_t va, int flags)
 		 * free the page we just allocated.
 		 */
 		if (__predict_false(opte != NULL)) {
+			mips_pmap_unmap_poolpage(pa);
 			uvm_pagefree(pg);
 			pte = opte;
 		}
@@ -463,13 +464,13 @@ pmap_pte_reserve(pmap_t pmap, vaddr_t va, int flags)
 #endif
 		KASSERT(pte == stp->seg_tab[(va >> SEGSHIFT) & (PMAP_SEGTABSIZE - 1)]);
 
-		pte += (va >> PGSHIFT) & (NPTEPG - 1);
 #ifdef PARANOIADIAG
 		for (size_t i = 0; i < NPTEPG; i++) {
 			if ((pte+i)->pt_entry)
 				panic("pmap_enter: new segmap not empty");
 		}
 #endif
+		pte += (va >> PGSHIFT) & (NPTEPG - 1);
 	}
 
 	return pte;

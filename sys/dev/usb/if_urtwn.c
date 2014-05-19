@@ -411,6 +411,9 @@ urtwn_attach(device_t parent, device_t self, void *aux)
 
 	usbd_add_drv_event(USB_EVENT_DRIVER_ATTACH, sc->sc_udev, sc->sc_dev);
 
+	if (!pmf_device_register(self, NULL, NULL))
+		aprint_error_dev(self, "couldn't establish power handler\n");
+
 	SET(sc->sc_flags, URTWN_FLAG_ATTACHED);
 	return;
 

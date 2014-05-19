@@ -41,7 +41,7 @@
 
 Package:	acpica
 Version:	20131218
-Current Vers:	20131218
+Current Vers:	20140424
 Maintainer:	Intel
 Archive Site:	http://www.acpica.org/downloads/
 Home Page:	http://www.acpica.org/
@@ -401,7 +401,7 @@ Before importing a new version of external/gpl3/gcc:
 
 Package:	gdb
 Version:	7.6.1
-Current Vers:	7.7
+Current Vers:	7.7.1
 Maintainer:	FSF
 Archive Site:	ftp://ftp.gnu.org/gnu/gdb/
 Home Page:	http://www.gnu.org/software/gdb/

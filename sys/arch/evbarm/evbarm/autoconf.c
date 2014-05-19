@@ -48,6 +48,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <machine/bootconfig.h>
 
 void	(*evbarm_device_register)(device_t, void *);
+void	(*evbarm_device_register_post_config)(device_t, void *);
 
 #ifndef MEMORY_DISK_IS_ROOT
 static void get_device(char *name);
@@ -141,7 +142,15 @@ cpu_configure(void)
 void
 device_register(device_t dev, void *aux)
 {
-
 	if (evbarm_device_register != NULL)
 		(*evbarm_device_register)(dev, aux);
 }
+
+
+void
+device_register_post_config(device_t dev, void *aux)
+{
+	if (evbarm_device_register_post_config != NULL)
+		(*evbarm_device_register_post_config)(dev, aux);
+}
+

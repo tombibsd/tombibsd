@@ -131,6 +131,7 @@ exynos_usb_attach(device_t parent, device_t self, void *aux)
 	/* get our bushandles */
 	sc->sc_bst  = exyoaa->exyo_core_bst;
 	sc->sc_dmat = exyoaa->exyo_dmat;
+//	sc->sc_dmat = exyoaa->exyo_coherent_dmat;
 
 	bus_space_subregion(sc->sc_bst, exyoaa->exyo_core_bsh,
 		exyoaa->exyo_loc.loc_offset, exyoaa->exyo_loc.loc_size,
@@ -157,8 +158,7 @@ exynos_usb_attach(device_t parent, device_t self, void *aux)
 	    caplength + EHCI_USBINTR, 0);
 #endif
 
-	/* TBD enable USB phy  */
-	/* TBD program USB hub */
+	/* TBD Init USB subsystem */
 
 	/* claim shared interrupt for OHCI/EHCI */
 	sc->sc_intrh = intr_establish(sc->sc_irq, IPL_USB, IST_LEVEL,

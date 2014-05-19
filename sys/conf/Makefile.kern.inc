@@ -17,6 +17,11 @@
 #
 # all ports are expected to include bsd.own.mk for toolchain settings
 
+# Default DEBUG to -g if kernel debug info is requested by MKKDEBUG=yes
+.if defined(MKKDEBUG) && ${MKKDEBUG} == "yes"
+DEBUG?=-g
+.endif
+
 ##
 ## (0) toolchain settings for things that aren't part of the standard
 ## toolchain

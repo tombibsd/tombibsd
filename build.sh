@@ -922,6 +922,8 @@ Usage: ${progname} [-EhnorUuxy] [-a arch] [-B buildid] [-C cdextras]
     install=idir        Run "make installworld" to \`idir' to install all sets
                         except \`etc'.  Useful after "distribution" or "release"
     kernel=conf         Build kernel with config file \`conf'
+    kernel.gdb=conf     Build kernel (including netbsd.gdb) with config
+    			file \`conf'
     releasekernel=conf  Install kernel built by kernel=conf to RELEASEDIR.
     installmodules=idir Run "make installmodules" to \`idir' to install all
                         kernel modules.
@@ -1220,7 +1222,7 @@ parseoptions()
 			op=install_image # used as part of a variable name
 			;;
 
-		kernel=*|releasekernel=*)
+		kernel=*|releasekernel=*|kernel.gdb=*)
 			arg=${op#*=}
 			op=${op%%=*}
 			[ -n "${arg}" ] ||
@@ -1861,7 +1863,7 @@ buildkernel()
 	[ -x "${TOOLDIR}/bin/${toolprefix}config" ] \
 	|| bomb "${TOOLDIR}/bin/${toolprefix}config does not exist. You need to \"$0 tools\" first."
 	${runcmd} "${TOOLDIR}/bin/${toolprefix}config" -b "${kernelbuildpath}" \
-		-s "${TOP}/sys" "${kernelconfpath}" ||
+		${ksymopts} -s "${TOP}/sys" "${kernelconfpath}" ||
 	    bomb "${toolprefix}config failed for ${kernelconf}"
 	make_in_dir "${kernelbuildpath}" depend
 	make_in_dir "${kernelbuildpath}" all
@@ -2100,7 +2102,11 @@ main()
 			arg=${op#*=}
 			buildkernel "${arg}"
 			;;
-
+		kernel.gdb=*)
+			arg=${op#*=}
+			ksymopts="-D DEBUG=-g"
+			buildkernel "${arg}"
+			;;
 		releasekernel=*)
 			arg=${op#*=}
 			releasekernel "${arg}"

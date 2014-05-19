@@ -39,5 +39,6 @@ struct mainbus_attach_args {
 #endif
 
 extern void (*evbarm_device_register)(device_t, void *);
+extern void (*evbarm_device_register_post_config)(device_t, void *);
 
 #endif	/* _EVBARM_AUTOCONF_H_ */

@@ -67,7 +67,7 @@ static inline void
 init_completion(struct completion *completion)
 {
 
-	mutex_init(&completion->c_lock, MUTEX_DEFAULT, IPL_NONE);
+	mutex_init(&completion->c_lock, MUTEX_DEFAULT, IPL_VM);
 	cv_init(&completion->c_cv, "lnxcmplt");
 	completion->c_done = 0;
 }

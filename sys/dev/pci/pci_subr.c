@@ -1245,6 +1245,8 @@ pci_conf_print_pcie_cap(const pcireg_t *regs, int capoff)
 			printf("      SERR on Fatal Error Enable\n");
 		if ((reg & PCIE_RCR_PME_IE) != 0)
 			printf("      PME Interrupt Enable\n");
+		if ((reg & PCIE_RCR_CRS_SVE) != 0)
+			printf("      CRS Software Visibility Enable\n");
 
 		/* Root Capability Register */
 		printf("    Root Capability Register: %04x\n",
@@ -1357,6 +1359,8 @@ pci_conf_print_pcie_cap(const pcireg_t *regs, int capoff)
 			if (((val >> i) & 0x01) != 0)
 				printf(" %sGT/s", linkspeeds[i]);
 		}
+		printf("      Crosslink Supported: %s\n",
+		    (reg & PCIE_LCAP2_CROSSLNK) != 0 ? "yes" : "no");
 		printf("\n");
 
 		/* Link Control 2 */

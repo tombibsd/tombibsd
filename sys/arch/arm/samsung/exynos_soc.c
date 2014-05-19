@@ -234,6 +234,9 @@ exynos_bootstrap(vaddr_t iobase, vaddr_t uartbase)
 
 	/* init bus dma tags */
 	exynos_dma_bootstrap(physmem * PAGE_SIZE);
+
+	/* init gpio structures */
+	exynos_gpio_bootstrap();
 }
 
 
@@ -286,18 +289,23 @@ exynos_device_register(device_t self, void *aux)
 		}
 		return;
 	}
-#if defined(CPU_CORTEXA7) || defined(CPU_CORTEXA15)
-	if (device_is_a(self, "armgtmr")) {
+	if (device_is_a(self, "armgtmr") || device_is_a(self, "mct")) {
 		/*
-		 * The frequency of the generic timer is the reference
+		 * The frequencies of the timers are the reference
 		 * frequency.
 		 */
 		prop_dictionary_set_uint32(device_properties(self),
-		    "frequency", 24000000);
+		    "frequency", EXYNOS_F_IN_FREQ);
 		return;
 	}
-#endif
 
 	exyo_device_register(self, aux);
+}
+
+
+void
+exynos_device_register_post_config(device_t self, void *aux)
+{
+	exyo_device_register_post_config(self, aux);
 }
 

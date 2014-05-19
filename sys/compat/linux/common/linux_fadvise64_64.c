@@ -73,5 +73,5 @@ linux_sys_fadvise64_64(struct lwp *l,
 	} */
 
 	return do_posix_fadvise(SCARG(uap, fd), SCARG(uap, offset),
-	    SCARG(uap, offset), linux_to_bsd_posix_fadv(SCARG(uap, advice)));
+	    SCARG(uap, len), linux_to_bsd_posix_fadv(SCARG(uap, advice)));
 }

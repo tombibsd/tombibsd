@@ -4178,7 +4178,7 @@ static int
 hdafg_get_props(void *opaque)
 {
 	struct hdaudio_audiodev *ad = opaque;
-	int props = 0;
+	int props = AUDIO_PROP_MMAP;
 
 	if (ad->ad_playback)
 		props |= AUDIO_PROP_PLAYBACK;
@@ -4188,8 +4188,6 @@ hdafg_get_props(void *opaque)
 		props |= AUDIO_PROP_FULLDUPLEX;
 		props |= AUDIO_PROP_INDEPENDENT;
 	}
-
-	/* TODO: AUDIO_PROP_MMAP */
 
 	return props;
 }

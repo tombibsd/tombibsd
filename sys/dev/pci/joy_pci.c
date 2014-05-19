@@ -113,8 +113,8 @@ joy_pci_attach(device_t parent, device_t self, void *aux)
 	}
 
 	if (mapsize != 2) {
-		if (!bus_space_subregion(sc->sc_iot, sc->sc_ioh, 1, 1,
-		    &sc->sc_ioh) < 0) {
+		if (bus_space_subregion(sc->sc_iot, sc->sc_ioh, 1, 1,
+		    &sc->sc_ioh)) {
 			aprint_error_dev(self, "error mapping subregion\n");
 			return;
 		}

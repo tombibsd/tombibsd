@@ -8,3 +8,4 @@ include "arch/evbarm/conf/RPI"
 include "arch/evbarm/conf/INSTALL"
 
 makeoptions	RAMDISKNAME=sshramdisk
+no makeoptions	DEBUG

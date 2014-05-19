@@ -8,3 +8,4 @@ include "arch/evbarm/conf/IMX23_OLINUXINO"
 include "arch/evbarm/conf/INSTALL"
 
 makeoptions	RAMDISKNAME=ramdisk
+no makeoptions	DEBUG

@@ -234,6 +234,10 @@ MKISCSI		If "no", don't build or install iSCSI library or applications
 		(depends on libpthread.)
 		Default: yes
 
+MKKDEBUG	If "yes", force building of kernel symbol info and creation
+		of netbsd.gdb in all kernel builds, independently of the
+		settings for "makeoptions DEBUG" in the kernel config file.
+
 MKKERBEROS	If "no", disables building of Kerberos v5
 		infrastructure (libraries and support programs).
 		Default: yes
@@ -839,6 +843,8 @@ TOOL_MKTEMP		Make (unique) temporary file name.  [mktemp]
 TOOL_MSGC		Simple message list compiler.  [msgc]
 
 TOOL_MTREE		Map a directory hierarchy.  [mtree]
+
+TOOL_NCDCS		Turn ELF kernel into a NCD firmware image. [ncdcs]
 
 TOOL_PAX		Manipulate file archives and copy directories.  [pax]
 

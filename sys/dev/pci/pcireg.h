@@ -751,6 +751,7 @@ struct pci_msix_table_entry {
 #define PCIE_RCR_SERR_NFER	__BIT(1)       /* SERR on Non-Fatal Error En */
 #define PCIE_RCR_SERR_FER	__BIT(2)       /* SERR on Fatal Error Enable */
 #define PCIE_RCR_PME_IE		__BIT(3)       /* PME Interrupt Enable */
+#define PCIE_RCR_CRS_SVE	__BIT(4)       /* CRS Software Visibility En */
 #define PCIE_RSR	0x20	/* Root Status Register */
 #define PCIE_RSR_PME_REQESTER	__BITS(15, 0)  /* PME Requester ID */
 #define PCIE_RSR_PME_STAT	__BIT(16)      /* PME Status */

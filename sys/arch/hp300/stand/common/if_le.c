@@ -631,10 +631,9 @@ le_get(struct iodesc *desc, void *pkt, size_t len, saseconds_t timeout)
 	int cc;
 
 	t = getsecs();
-	cc = 0;
-	while (((getsecs() - t) < timeout) && !cc) {
+	do {
 		cc = le_poll(desc, pkt, len);
-	}
+	} while (cc == 0 && (getsecs() - t) < timeout);
 	return cc;
 }
 

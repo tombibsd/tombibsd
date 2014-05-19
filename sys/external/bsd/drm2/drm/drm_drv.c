@@ -977,6 +977,7 @@ drm_mmap_ioctl(struct drm_device *dev, void *data, struct drm_file *file)
 	const int flags = args->dnm_flags;
 	const off_t offset = args->dnm_offset;
 	struct uvm_object *uobj;
+	voff_t uoffset;
 	const vm_prot_t vm_maxprot = (VM_PROT_READ | VM_PROT_WRITE);
 	vm_prot_t vm_prot;
 	int uvmflag;
@@ -991,17 +992,19 @@ drm_mmap_ioctl(struct drm_device *dev, void *data, struct drm_file *file)
 		return -EACCES;
 	if (flags != MAP_SHARED)
 		return -EINVAL;
+	if (offset != (offset & ~(PAGE_SIZE-1)))
+		return -EINVAL;
 	(void)addr;		/* XXX ignore -- no MAP_FIXED for now */
 
 	/* Try a GEM object mapping first.  */
-	ret = drm_gem_mmap_object(dev, offset, size, prot, &uobj);
+	ret = drm_gem_mmap_object(dev, offset, size, prot, &uobj, &uoffset);
 	if (ret)
 		return ret;
 	if (uobj != NULL)
 		goto map;
 
 	/* Try a traditional DRM mapping second.  */
-	ret = drm_mmap_object(dev, offset, size, prot, &uobj);
+	ret = drm_mmap_object(dev, offset, size, prot, &uobj, &uoffset);
 	if (ret)
 		return ret;
 	if (uobj != NULL)
@@ -1020,8 +1023,8 @@ map:	vm_prot = ((ISSET(prot, PROT_READ)? VM_PROT_READ : 0) |
 	vaddr = (*curproc->p_emul->e_vm_default_addr)(curproc,
 	    (vaddr_t)curproc->p_vmspace->vm_daddr, size);
 	/* XXX errno NetBSD->Linux */
-	ret = -uvm_map(&curproc->p_vmspace->vm_map, &vaddr, size, uobj, offset,
-	    align, uvmflag);
+	ret = -uvm_map(&curproc->p_vmspace->vm_map, &vaddr, size, uobj,
+	    uoffset, align, uvmflag);
 	if (ret) {
 		(*uobj->pgops->pgo_detach)(uobj);
 		return ret;

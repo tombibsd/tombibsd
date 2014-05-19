@@ -33,6 +33,7 @@
 __RCSID("$NetBSD$");
 
 #include <locale.h>
+#include <string.h>
 #include <wchar.h>
 
 #include <atf-c.h>

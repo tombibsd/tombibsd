@@ -202,7 +202,7 @@ endif
 sscom2		at exyo0  port 2		# UART2
 
 # Exynos Watchdog Timer
-#exywdt0 	at exyo0			# watchdog
+#exyowdt0 	at exyo0			# watchdog
 
 # Odroid-U connectivity
 

@@ -190,7 +190,11 @@ sscom0		at exyo0  port 0		# UART0
 sscom1		at exyo0  port 1		# UART1
 
 # Exynos Watchdog Timer
-exywdt0 	at exyo0 flags 1		# watchdog
+exyowdt0 	at exyo0 flags 1		# watchdog
+
+# GPIO
+exyogpio0	at exyo0
+gpio*		at exyogpio?
 
 # On-board USB
 exyousb*	at exyo0

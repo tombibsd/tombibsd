@@ -77,8 +77,8 @@ static int mousebtn_match(device_t, cfdata_t, void *);
 static void mousebtn_attach(device_t, device_t, void *);
 static int mousebtn_detach(device_t, int);
 
-CFATTACH_DECL_NEW(btn_netwalker, sizeof(struct mousebtn_softc),
-	mousebtn_match, mousebtn_attach, mousebtn_detach, NULL);
+CFATTACH_DECL_NEW(netwalker_btn, sizeof(struct mousebtn_softc),
+    mousebtn_match, mousebtn_attach, mousebtn_detach, NULL);
 
 static void mousebtn_poll(void *);
 static int mousebtn_intr(void *);

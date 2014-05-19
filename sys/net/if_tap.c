@@ -1182,7 +1182,6 @@ tap_dev_poll(int unit, int events, struct lwp *l)
 
 		s = splnet();
 		IFQ_POLL(&ifp->if_snd, m);
-		splx(s);
 
 		if (m != NULL)
 			revents |= events & (POLLIN|POLLRDNORM);
@@ -1191,6 +1190,7 @@ tap_dev_poll(int unit, int events, struct lwp *l)
 			selrecord(l, &sc->sc_rsel);
 			mutex_spin_exit(&sc->sc_kqlock);
 		}
+		splx(s);
 	}
 	revents |= events & (POLLOUT|POLLWRNORM);
 

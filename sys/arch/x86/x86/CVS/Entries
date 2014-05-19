@@ -34,7 +34,7 @@
 /odcm.c/1.4/Fri Apr 11 02:03:40 2014/-kk/
 /patch.c/1.22/Mon Nov 18 05:31:36 2013/-kk/
 /platform.c/1.15/Fri Apr 11 02:03:40 2014/-kk/
-/pmap.c/1.181/Tue Nov 12 02:18:42 2013/-kk/
+/pmap.c/1.182/Mon May 19 16:26:18 2014/-kk/
 /pmap_tlb.c/1.6/Sat Apr 21 22:22:48 2012/-kk/
 /powernow.c/1.8/Mon Nov 18 05:31:36 2013/-kk/
 /procfs_machdep.c/1.6/Sat Apr 19 05:36:50 2014/-kk/

@@ -11,7 +11,7 @@ CPPFLAGS+=	-DHAVE_FENV_H
 .endif
 
 .if ${MACHINE} == "alpha"
-COPTS+=	-mfloat-ieee -mieee-with-inexact -mfp-trap-mode=sui -mtrap-precision=i
+# COPTS+=	-mfloat-ieee -mieee-with-inexact -mfp-trap-mode=sui -mtrap-precision=i
 .endif
 
 TESTS_C+=	t_acos

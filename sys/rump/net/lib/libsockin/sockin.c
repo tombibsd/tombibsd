@@ -58,8 +58,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 /*
  * An inet communication domain which uses the socket interface.
- * Currently supports only IPv4 UDP, but could easily be extended to
- * support IPv6 and TCP by adding more stuff to the protosw.
+ * Supports IPv4 & IPv6 UDP/TCP.
  */
 
 DOMAIN_DEFINE(sockindomain);

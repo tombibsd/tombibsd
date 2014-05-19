@@ -214,7 +214,7 @@ change_ttyflags(struct ttyent *tep)
 		return (0);
 
 	/* Open the device NON-BLOCKING, set the flags, and close it. */
-	if ((fd = open(path, O_RDONLY | O_NONBLOCK, 0)) == -1) {
+	if ((fd = open(path, O_RDWR | O_NONBLOCK, 0)) == -1) {
 		if (!(errno == ENXIO ||
 		      (errno == ENOENT && (st & TTY_ON) == 0)))
 			rval = 1;

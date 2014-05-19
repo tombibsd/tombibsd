@@ -556,6 +556,8 @@ struct vnode *
 	vnalloc(struct mount *);
 void	vnfree(struct vnode *);
 void	vremfree(struct vnode *);
+int	vcache_get(struct mount *, const void *, size_t, struct vnode **);
+void	vcache_remove(struct mount *, const void *, size_t);
 
 /* see vnsubr(9) */
 int	vn_bwrite(void *);

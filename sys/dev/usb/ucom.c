@@ -368,10 +368,6 @@ ucomopen(dev_t dev, int flag, int mode, struct lwp *l)
 	int s, i;
 	int error;
 
-	/* XXX This is a hopefully temporary stopgap for kern/42848. */
-	if ((flag & (FREAD|FWRITE)) != (FREAD|FWRITE))
-		return (EINVAL);
-
 	if (sc == NULL)
 		return (ENXIO);
 

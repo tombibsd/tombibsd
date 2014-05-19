@@ -271,7 +271,7 @@ tcxattach(device_t parent, device_t self, void *args)
 	fb_setsize_obp(fb, fb->fb_type.fb_depth, 1152, 900, node);
 
 	if (sc->sc_8bit) {
-		printf(" (8bit only TCX)");
+		printf(" (8-bit only TCX)\n");
 		ramsize = 1024 * 1024;
 		/* XXX - fix THC and TEC offsets */
 		sc->sc_physaddr[TCX_REG_TEC].oa_base += 0x1000;

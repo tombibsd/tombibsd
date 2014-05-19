@@ -281,14 +281,19 @@ nonsel:		/* Now parse the command */
 		case EMPTY:		/* d D g G h H l n N p P q x = \0 */
 			p++;
 			EATSPACE();
-			if (*p == ';') {
+			switch (*p) {
+			case ';':
 				p++;
 				link = &cmd->next;
 				goto semicolon;
-			}
-			if (*p)
+			case '}':
+				goto semicolon;
+			case '\0':
+				break;
+			default:
 				err(COMPILE,
 "extra characters at the end of %c command", cmd->code);
+			}
 			break;
 		case TEXT:			/* a c i */
 			p++;
@@ -365,14 +370,19 @@ nonsel:		/* Now parse the command */
 			p++;
 			p = compile_tr(p, (char **)(void *)&cmd->u.y);
 			EATSPACE();
-			if (*p == ';') {
+			switch (*p) {
+			case ';':
 				p++;
 				link = &cmd->next;
 				goto semicolon;
-			}
-			if (*p)
+			case '}':
+				goto semicolon;
+			case '\0':
+				break;
+			default:
 				err(COMPILE,
 "extra text at the end of a transform command");
+			}
 			break;
 		}
 	}

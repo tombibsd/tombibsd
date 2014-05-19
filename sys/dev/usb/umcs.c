@@ -169,19 +169,6 @@ umcs7840_reg_ctrl(int phyport)
 	}
 }
 
-static inline int
-umcs7840_reg_dcr0(int phyport)
-{
-	KASSERT(phyport >= 0 && phyport < 4);
-	switch (phyport) {
-	default:
-	case 0:	return MCS7840_DEV_REG_DCR0_1;
-	case 1:	return MCS7840_DEV_REG_DCR0_2;
-	case 2:	return MCS7840_DEV_REG_DCR0_3;
-	case 3:	return MCS7840_DEV_REG_DCR0_4;
-	}
-}
-
 static int
 umcs7840_match(device_t dev, cfdata_t match, void *aux)
 {

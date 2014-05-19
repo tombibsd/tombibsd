@@ -1470,10 +1470,6 @@ struct kernel_hash {
 		X_BUFHASH, X_BUFHASHTBL,
 		HASH_LIST, offsetof(struct buf, b_hash)
 	}, {
-		"inode cache (ihash)",
-		X_IHASH, X_IHASHTBL,
-		HASH_LIST, offsetof(struct inode, i_hash)
-	}, {
 		"ipv4 address -> interface hash",
 		X_IFADDRHASH, X_IFADDRHASHTBL,
 		HASH_LIST, offsetof(struct in_ifaddr, ia_hash),

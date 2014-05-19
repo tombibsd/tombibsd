@@ -6,3 +6,4 @@
 
 include "arch/evbarm/conf/GEMINI"
 include "arch/evbarm/conf/INSTALL"
+no makeoptions	DEBUG
