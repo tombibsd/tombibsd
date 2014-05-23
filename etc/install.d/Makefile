@@ -17,7 +17,7 @@ CONFIGFILES=\
 		gid \
 		gpio \
 		hosts \
-		install \
+		./install \
 		iscsi \
 		mailerconf \
 		makedev \
