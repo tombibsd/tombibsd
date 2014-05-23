@@ -1,0 +1,25 @@
+#	$NetBSD$
+
+#
+#	monthly
+#
+
+# XXX Don't hard-code
+monthly_444_files="
+local
+"
+
+additem monthly "/etc/monthly.d/ being up to date"
+do_monthly()
+{
+	[ -n "$1" ] || err 3 "USAGE: do_monthly  fix|check"
+	op="$1"
+	failed=0
+
+	compare_dir "$op" "${SRC_DIR}/etc/monthly.d" "${DEST_DIR}/etc/monthly.d" \
+		444 \
+		${monthly_444_files}
+	failed=$(( ${failed} + $? ))
+
+	return ${failed}
+}

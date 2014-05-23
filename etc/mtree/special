@@ -103,6 +103,7 @@
 ./etc/install.d/atf		type=file mode=0444
 ./etc/install.d/bluetooth	type=file mode=0444
 ./etc/install.d/catpages	type=file mode=0444
+./etc/install.d/daily		type=file mode=0444
 ./etc/install.d/ddbonpanic	type=file mode=0444
 ./etc/install.d/defaults	type=file mode=0444
 ./etc/install.d/dhcpd		type=file mode=0444
@@ -112,9 +113,11 @@
 ./etc/install.d/gid		type=file mode=0444
 ./etc/install.d/gpio		type=file mode=0444
 ./etc/install.d/hosts		type=file mode=0444
+./etc/install.d/install		type=file mode=0444
 ./etc/install.d/iscsi		type=file mode=0444
 ./etc/install.d/mailerconf	type=file mode=0444
 ./etc/install.d/makedev		type=file mode=0444
+./etc/install.d/monthly		type=file mode=0444
 ./etc/install.d/motd		type=file mode=0444
 ./etc/install.d/mtree		type=file mode=0444
 ./etc/install.d/named		type=file mode=0444
@@ -125,12 +128,14 @@
 ./etc/install.d/ptyfsoldnodes	type=file mode=0444
 ./etc/install.d/pwd_mkdb	type=file mode=0444
 ./etc/install.d/rc		type=file mode=0444
+./etc/install.d/security	type=file mode=0444
 ./etc/install.d/sendmail	type=file mode=0444
 ./etc/install.d/ssh		type=file mode=0444
 ./etc/install.d/tcpdumpchroot	type=file mode=0444
 ./etc/install.d/uid		type=file mode=0444
 ./etc/install.d/varrwho		type=file mode=0444
 ./etc/install.d/varshm		type=file mode=0444
+./etc/install.d/weekly		type=file mode=0444
 ./etc/install.d/wscons		type=file mode=0444
 ./etc/install.d/x11		type=file mode=0444
 ./etc/install.d/xkb		type=file mode=0444

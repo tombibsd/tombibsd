@@ -7,6 +7,7 @@ CONFIGFILES=\
 		atf \
 		bluetooth \
 		./catpages \
+		daily \
 		ddbonpanic \
 		defaults \
 		dhcpcd \
@@ -16,9 +17,11 @@ CONFIGFILES=\
 		gid \
 		gpio \
 		hosts \
+		install \
 		iscsi \
 		mailerconf \
 		makedev \
+		monthly \
 		motd \
 		mtree \
 		named \
@@ -29,12 +32,14 @@ CONFIGFILES=\
 		ptyfsoldnodes \
 		pwd_mkdb \
 		rc \
+		security \
 		sendmail \
 		ssh \
 		tcpdumpchroot \
 		uid \
 		varrwho \
 		varshm \
+		weekly \
 		wscons \
 		x11 \
 		xkb

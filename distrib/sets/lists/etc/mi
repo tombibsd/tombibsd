@@ -88,6 +88,7 @@
 ./etc/install.d/atf				etc-sys-etc
 ./etc/install.d/bluetooth			etc-sys-etc
 ./etc/install.d/catpages			etc-sys-etc
+./etc/install.d/daily				etc-sys-etc
 ./etc/install.d/ddbonpanic			etc-sys-etc
 ./etc/install.d/defaults			etc-sys-etc
 ./etc/install.d/dhcpcd				etc-sys-etc
@@ -99,9 +100,11 @@
 ./etc/install.d/gid				etc-sys-etc
 ./etc/install.d/gpio				etc-sys-etc
 ./etc/install.d/hosts				etc-sys-etc
+./etc/install.d/install				etc-sys-etc
 ./etc/install.d/iscsi				etc-sys-etc
 ./etc/install.d/mailerconf			etc-sys-etc
 ./etc/install.d/makedev				etc-sys-etc
+./etc/install.d/monthly				etc-sys-etc
 ./etc/install.d/motd				etc-sys-etc
 ./etc/install.d/mtree				etc-sys-etc
 ./etc/install.d/named				etc-sys-etc
@@ -112,12 +115,14 @@
 ./etc/install.d/ptyfsoldnodes			etc-sys-etc
 ./etc/install.d/pwd_mkdb			etc-sys-etc
 ./etc/install.d/rc				etc-sys-etc
+./etc/install.d/security			etc-sys-etc
 ./etc/install.d/sendmail			etc-sys-etc
 ./etc/install.d/ssh				etc-sys-etc
 ./etc/install.d/tcpdumpchroot			etc-sys-etc
 ./etc/install.d/uid				etc-sys-etc
 ./etc/install.d/varrwho				etc-sys-etc
 ./etc/install.d/varshm				etc-sys-etc
+./etc/install.d/weekly				etc-sys-etc
 ./etc/install.d/wscons				etc-sys-etc
 ./etc/install.d/x11				etc-sys-etc
 ./etc/install.d/xkb				etc-sys-etc

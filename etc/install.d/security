@@ -1,0 +1,43 @@
+#	$NetBSD$
+
+#
+#	security
+#
+
+# XXX Don't hard-code
+security_444_files="
+aliases
+backup
+changelist
+devices
+disklabels
+ftpusers
+group
+homes
+local
+lvm
+mtree
+nfs
+passwd
+pkg_signatures
+pkg_vulnerabilities
+pkgs
+rhosts
+rootdotfiles
+varmail
+"
+
+additem security "/etc/security.d/ being up to date"
+do_security()
+{
+	[ -n "$1" ] || err 3 "USAGE: do_security  fix|check"
+	op="$1"
+	failed=0
+
+	compare_dir "$op" "${SRC_DIR}/etc/security.d" "${DEST_DIR}/etc/security.d" \
+		444 \
+		${security_444_files}
+	failed=$(( ${failed} + $? ))
+
+	return ${failed}
+}

@@ -1,0 +1,28 @@
+#	$NetBSD$
+
+#
+#	weekly
+#
+
+# XXX Don't hard-code
+weekly_444_files="
+local
+locatedb
+mandb
+whatisdb
+"
+
+additem weekly "/etc/weekly.d/ being up to date"
+do_weekly()
+{
+	[ -n "$1" ] || err 3 "USAGE: do_weekly  fix|check"
+	op="$1"
+	failed=0
+
+	compare_dir "$op" "${SRC_DIR}/etc/weekly.d" "${DEST_DIR}/etc/weekly.d" \
+		444 \
+		${weekly_444_files}
+	failed=$(( ${failed} + $? ))
+
+	return ${failed}
+}

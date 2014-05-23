@@ -1,0 +1,63 @@
+#	$NetBSD$
+
+#
+#	install
+#
+
+# XXX Generate file list from "sets"
+install_444_files="
+atf
+bluetooth
+catpages
+daily
+ddbonpanic
+defaults
+dhcpcd
+dhcpcdrundir
+envsys
+fontconfig
+gid
+gpio
+hosts
+install
+iscsi
+mailerconf
+makedev
+monthly
+motd
+mtree
+named
+obsolete
+pam
+periodic
+pf
+ptyfsoldnodes
+pwd_mkdb
+rc
+security
+sendmail
+ssh
+tcpdumpchroot
+uid
+varrwho
+varshm
+weekly
+wscons
+x11
+xkb
+"
+
+additem install "/etc/install.d/ being up to date"
+do_install()
+{
+	[ -n "$1" ] || err 3 "USAGE: do_install  fix|check"
+	op="$1"
+	failed=0
+
+	compare_dir "$op" "${SRC_DIR}/etc/install.d" "${DEST_DIR}/etc/install.d" \
+		444 \
+		${install_444_files}
+	failed=$(( ${failed} + $? ))
+
+	return ${failed}
+}

@@ -1,0 +1,37 @@
+#	$NetBSD$
+
+#
+#	daily
+#
+
+# XXX Generate file list from "sets"
+daily_444_files="
+acct
+calendar
+core
+disks
+fsck
+local
+mailq
+makemandb
+network
+pkg
+rdist
+security
+skeyaudit
+"
+
+additem daily "/etc/daily.d/ being up to date"
+do_daily()
+{
+	[ -n "$1" ] || err 3 "USAGE: do_daily  fix|check"
+	op="$1"
+	failed=0
+
+	compare_dir "$op" "${SRC_DIR}/etc/daily.d" "${DEST_DIR}/etc/daily.d" \
+		444 \
+		${daily_444_files}
+	failed=$(( ${failed} + $? ))
+
+	return ${failed}
+}
