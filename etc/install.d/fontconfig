@@ -4,6 +4,9 @@
 #	X11 fontconfig
 #
 
+# XXX Move this to xetc.tgz
+# XXX Make this work as: "postinstall -s xetc.tgz fontconfig"
+
 additem fontconfig "X11 font configuration is up to date"
 do_fontconfig()
 {
