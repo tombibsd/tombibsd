@@ -803,7 +803,11 @@ create_syspkg_tgz()
 			/^@/		{next}
 			/^\.\//		{print $0; next}
 			/./		{print "./" $0; next}' \
-			<"${PLIST}" >"${spec1}"
+			<"${PLIST}" |
+			# C.f. usr.sbin/mtree/spec.c:vispath()
+			# XXX vis -o -e ' 	\\*?[' \
+			vis -o -e '[' \
+			>"${spec1}"
 
 		# If metalog was specified, attributes from metalog override
 		# attributes in the file system.  We also fake up an
