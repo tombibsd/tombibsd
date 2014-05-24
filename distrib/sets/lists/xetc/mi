@@ -105,6 +105,12 @@
 ./etc/fonts/fonts.conf					-unknown-	xorg
 ./etc/fonts/fonts.dtd					-unknown-	x11
 ./etc/fonts/fonts.dtd					-unknown-	xorg
+./etc/install.d/fontconfig				etc-x11-etc	x11
+./etc/install.d/fontconfig				etc-x11-etc	xorg
+./etc/install.d/x11					etc-x11-etc	x11
+./etc/install.d/x11					etc-x11-etc	xorg
+./etc/install.d/xkb					etc-x11-etc	x11
+./etc/install.d/xkb					etc-x11-etc	xorg
 ./etc/mtree/set.xetc					xetc-sys-root	x11
 ./etc/mtree/set.xetc					xetc-sys-root	xorg
 ./etc/rc.d/fccache					etc-x11-rc	x11

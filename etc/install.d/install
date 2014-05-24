@@ -15,7 +15,6 @@ defaults
 dhcpcd
 dhcpcdrundir
 envsys
-fontconfig
 gid
 gpio
 hosts
@@ -43,8 +42,6 @@ varrwho
 varshm
 weekly
 wscons
-x11
-xkb
 "
 
 additem install "/etc/install.d/ being up to date"

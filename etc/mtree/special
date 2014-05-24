@@ -109,7 +109,7 @@
 ./etc/install.d/dhcpd		type=file mode=0444
 ./etc/install.d/dhcpdrundir	type=file mode=0444
 ./etc/install.d/envsys		type=file mode=0444
-./etc/install.d/fontconfig	type=file mode=0444
+./etc/install.d/fontconfig	type=file mode=0444 optional
 ./etc/install.d/gid		type=file mode=0444
 ./etc/install.d/gpio		type=file mode=0444
 ./etc/install.d/hosts		type=file mode=0444
@@ -137,8 +137,8 @@
 ./etc/install.d/varshm		type=file mode=0444
 ./etc/install.d/weekly		type=file mode=0444
 ./etc/install.d/wscons		type=file mode=0444
-./etc/install.d/x11		type=file mode=0444
-./etc/install.d/xkb		type=file mode=0444
+./etc/install.d/x11		type=file mode=0444 optional
+./etc/install.d/xkb		type=file mode=0444 optional
 ./etc/ipf.conf			type=file mode=0644 optional
 ./etc/ipf6.conf			type=file mode=0644 optional
 ./etc/ipnat.conf		type=file mode=0644 optional

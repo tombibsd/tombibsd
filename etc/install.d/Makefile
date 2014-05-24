@@ -3,7 +3,7 @@
 .include <bsd.own.mk>
 
 # XXX catpages conflicts with the corresponding phony target name
-CONFIGFILES=\
+CONFIGFILES.etc=\
 		atf \
 		bluetooth \
 		./catpages \
@@ -13,7 +13,6 @@ CONFIGFILES=\
 		dhcpcd \
 		dhcpcdrundir \
 		envsys \
-		fontconfig \
 		gid \
 		gpio \
 		hosts \
@@ -40,9 +39,15 @@ CONFIGFILES=\
 		varrwho \
 		varshm \
 		weekly \
-		wscons \
+		wscons
+.if ${MKX11} != "no"
+CONFIGFILES.xetc=\
+		fontconfig \
 		x11 \
 		xkb
+.endif
+CONFIGFILES=	${CONFIGFILES.etc} ${CONFIGFILES.xetc}
+
 FILESDIR=	/etc/install.d
 FILESMODE=	${NONBINMODE}
 
