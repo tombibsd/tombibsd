@@ -49,6 +49,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/atomic.h>
 #include <sys/bus.h>
 #include <sys/xcall.h>
+#include <sys/ipi.h>
 #include <sys/bitops.h>
 
 #include <uvm/uvm_extern.h>
@@ -1217,6 +1218,7 @@ e500_ipi_kpreempt(void)
 
 static const ipifunc_t e500_ipifuncs[] = {
 	[ilog2(IPI_XCALL)] =	xc_ipi_handler,
+	[ilog2(IPI_GENERIC)] =	ipi_cpu_handler,
 	[ilog2(IPI_HALT)] =	e500_ipi_halt,
 #ifdef __HAVE_PREEMPTION
 	[ilog2(IPI_KPREEMPT)] =	e500_ipi_kpreempt,

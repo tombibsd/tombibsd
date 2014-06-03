@@ -298,7 +298,7 @@ void		npf_rprocset_insert(npf_rprocset_t *, npf_rproc_t *);
 npf_rproc_t *	npf_rproc_create(prop_dictionary_t);
 void		npf_rproc_acquire(npf_rproc_t *);
 void		npf_rproc_release(npf_rproc_t *);
-void		npf_rproc_run(npf_cache_t *, nbuf_t *, npf_rproc_t *, int *);
+bool		npf_rproc_run(npf_cache_t *, nbuf_t *, npf_rproc_t *, int *);
 
 /* Session handling interface. */
 void		npf_session_sysinit(void);

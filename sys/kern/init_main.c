@@ -157,6 +157,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/mbuf.h>
 #include <sys/sched.h>
 #include <sys/sleepq.h>
+#include <sys/ipi.h>
 #include <sys/iostat.h>
 #include <sys/vmem.h>
 #include <sys/uuid.h>
@@ -516,6 +517,9 @@ main(void)
 	mm_init();
 
 	configure2();
+
+	ipi_sysinit();
+
 	/* Now timer is working.  Enable preemption. */
 	kpreempt_enable();
 

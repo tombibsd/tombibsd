@@ -158,10 +158,10 @@ el_set(EditLine *el, int op, ...)
 		const char *argv[20];
 		int i;
 		const wchar_t **wargv;
-		for (i = 1; i < (int)__arraycount(argv); ++i)
-			if ((argv[i] = va_arg(ap, char *)) == NULL)
+		for (i = 1; i < (int)__arraycount(argv) - 1; ++i)
+			if ((argv[i] = va_arg(ap, const char *)) == NULL)
 			    break;
-		argv[0] = NULL;
+		argv[0] = argv[i] = NULL;
 		wargv = (const wchar_t **)
 		    ct_decode_argv(i + 1, argv, &el->el_lgcyconv);
 		if (!wargv) {

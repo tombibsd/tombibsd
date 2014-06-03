@@ -818,7 +818,6 @@ extern struct mowner revoked_mowner;
 
 MALLOC_DECLARE(M_MBUF);
 MALLOC_DECLARE(M_SONAME);
-MALLOC_DECLARE(M_SOOPTS);
 
 struct	mbuf *m_copym(struct mbuf *, int, int, int);
 struct	mbuf *m_copypacket(struct mbuf *, int);

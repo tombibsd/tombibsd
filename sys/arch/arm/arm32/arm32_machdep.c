@@ -65,6 +65,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/module.h>
 #include <sys/atomic.h>
 #include <sys/xcall.h>
+#include <sys/ipi.h>
 
 #include <uvm/uvm_extern.h>
 
@@ -706,6 +707,16 @@ xc_send_ipi(struct cpu_info *ci)
 
 	intr_ipi_send(ci != NULL ? ci->ci_kcpuset : NULL, IPI_XCALL);
 }
+
+void
+cpu_ipi(struct cpu_info *ci)
+{
+	KASSERT(kpreempt_disabled());
+	KASSERT(curcpu() != ci);
+
+	intr_ipi_send(ci != NULL ? ci->ci_kcpuset : NULL, IPI_GENERIC);
+}
+
 #endif /* MULTIPROCESSOR */
 
 #ifdef __HAVE_MM_MD_DIRECT_MAPPED_PHYS

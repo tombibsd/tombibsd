@@ -355,6 +355,7 @@ eco_input(struct ifnet *ifp, struct mbuf *m)
 {
 	struct ifqueue *inq;
 	struct eco_header ehdr, *eh;
+	int isr = 0;
 	int s;
 #ifdef INET
 	int i;
@@ -380,7 +381,7 @@ eco_input(struct ifnet *ifp, struct mbuf *m)
 	case ECO_PORT_IP:
 		switch (eh->eco_control) {
 		case ECO_CTL_IP:
-			schednetisr(NETISR_IP);
+			isr = NETISR_IP;
 			inq = &ipintrq;
 			break;
 		case ECO_CTL_ARP_REQUEST:
@@ -426,7 +427,7 @@ eco_input(struct ifnet *ifp, struct mbuf *m)
 			memcpy(ar_tpa(ah), ecah->ecar_tpa, ah->ar_pln);
 			m_freem(m);
 			m = m1;
-			schednetisr(NETISR_ARP);
+			isr = NETISR_ARP;
 			inq = &arpintrq;
 			break;
 		case ECO_CTL_IPBCAST_REQUEST:
@@ -476,8 +477,10 @@ eco_input(struct ifnet *ifp, struct mbuf *m)
 	if (IF_QFULL(inq)) {
 		IF_DROP(inq);
 		m_freem(m);
-	} else
+	} else {
 		IF_ENQUEUE(inq, m);
+		schednetisr(isr);
+	}
 	splx(s);
 }
 

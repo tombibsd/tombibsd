@@ -149,7 +149,8 @@ CFATTACH_DECL_NEW(upgt, sizeof(struct upgt_softc),
 
 static const struct usb_devno upgt_devs_1[] = {
 	/* version 1 devices */
-	{ USB_VENDOR_ALCATELT,		USB_PRODUCT_ALCATELT_ST120G }
+	{ USB_VENDOR_ALCATELT,		USB_PRODUCT_ALCATELT_ST120G },
+	{ USB_VENDOR_SMC,		USB_PRODUCT_SMC_2862WG_V1 }
 };
 
 static const struct usb_devno upgt_devs_2[] = {

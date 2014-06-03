@@ -2162,19 +2162,15 @@ rt6_deleteroute(struct rtentry *rt, void *arg)
 int
 nd6_setdefaultiface(int ifindex)
 {
+	ifnet_t *ifp;
 	int error = 0;
 
-	if (ifindex < 0 || if_indexlim <= ifindex)
-		return (EINVAL);
-	if (ifindex != 0 && !ifindex2ifnet[ifindex])
-		return (EINVAL);
-
+	if ((ifp = if_byindex(ifindex)) == NULL) {
+		return EINVAL;
+	}
 	if (nd6_defifindex != ifindex) {
 		nd6_defifindex = ifindex;
-		if (nd6_defifindex > 0) {
-			nd6_defifp = ifindex2ifnet[nd6_defifindex];
-		} else
-			nd6_defifp = NULL;
+		nd6_defifp = nd6_defifindex > 0 ? ifp : NULL;
 
 		/*
 		 * Our current implementation assumes one-to-one maping between

@@ -811,6 +811,7 @@ union_mkshadow(struct union_mount *um, struct vnode *dvp,
 	va.va_type = VDIR;
 	va.va_mode = um->um_cmode;
 
+	KASSERT(*vpp == NULL);
 	error = VOP_MKDIR(dvp, vpp, &cn, &va);
 	VOP_UNLOCK(dvp);
 	PNBUF_PUT(pnbuf);
@@ -889,6 +890,7 @@ union_vn_create(struct vnode **vpp, struct union_node *un, struct lwp *l)
 	vap->va_type = VREG;
 	vap->va_mode = cmode;
 	vref(un->un_dirvp);
+	vp = NULL;
 	error = VOP_CREATE(un->un_dirvp, &vp, &cn, vap);
 	if (error)
 		return error;

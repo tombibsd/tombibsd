@@ -609,7 +609,9 @@ function printproto(wrap) {
 	# occurence for the default __RENAME()
 	seen = funcseen[fbase]
 	funcseen[fbase] = rumpfname
-	if (seen)
+	# special case for mknod as type of last argument changed from
+	# uint32_t to dev_t
+	if ((seen && fbase != "mknod") || (!seen && fbase == "mknod"))
 		return
 
 	printf("%s rump_sys_%s(", returntype, realname) > rumpprotos

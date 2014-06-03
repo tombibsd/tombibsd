@@ -268,7 +268,6 @@ Lstart:
 	/* bits to set in the Control Register */
 Lcontrol_set:
 	.word CPU_CONTROL_MMU_ENABLE  | \
-	      CPU_CONTROL_AFLT_ENABLE | \
 	      CPU_CONTROL_DC_ENABLE   | \
 	      CPU_CONTROL_WBUF_ENABLE |    /* not defined in 1176 */   \
 	      CPU_CONTROL_32BP_ENABLE | \

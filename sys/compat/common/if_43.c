@@ -256,7 +256,7 @@ compat_ifioctl(struct socket *so, u_long ocmd, u_long cmd, void *data,
 		cmd = SIOCGIFNETMASK;
 	}
 
-	error = (*so->so_proto->pr_usrreq)(so, PRU_CONTROL,
+	error = (*so->so_proto->pr_usrreqs->pr_generic)(so, PRU_CONTROL,
 	    (struct mbuf *)cmd, (struct mbuf *)ifr, (struct mbuf *)ifp, l);
 
 	switch (ocmd) {

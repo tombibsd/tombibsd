@@ -9056,7 +9056,11 @@ const struct usb_product usb_products[] = {
 	},
 	{
 	    USB_VENDOR_SMC, USB_PRODUCT_SMC_2862WG,
-	    "EZ Connect 54Mbps",
+	    "EZ Connect 54Mbps v2 USB 2.0",
+	},
+	{
+	    USB_VENDOR_SMC, USB_PRODUCT_SMC_2862WG_V1,
+	    "EZ Connect 54Mbps v1 USB 1.0",
 	},
 	{
 	    USB_VENDOR_SMK, USB_PRODUCT_SMK_MCE_IR,
@@ -10131,4 +10135,4 @@ const struct usb_product usb_products[] = {
 	    "Prestige",
 	},
 };
-const int usb_nproducts = 1994;
+const int usb_nproducts = 1995;

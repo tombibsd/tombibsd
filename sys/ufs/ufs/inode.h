@@ -295,8 +295,8 @@ struct indir {
 struct ufid {
 	u_int16_t ufid_len;	/* Length of structure. */
 	u_int16_t ufid_pad;	/* Force 32-bit alignment. */
-	u_int32_t ufid_ino;	/* File number (ino). */
 	int32_t	  ufid_gen;	/* Generation number. */
+	ino_t     ufid_ino;	/* File number (ino). */
 };
 #endif /* _KERNEL */
 

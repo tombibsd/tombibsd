@@ -1038,7 +1038,6 @@ upl_input(struct ifnet *ifp, struct mbuf *m)
 
 	/* XXX Assume all traffic is IP */
 
-	schednetisr(NETISR_IP);
 	inq = &ipintrq;
 
 	s = splnet();
@@ -1053,6 +1052,7 @@ upl_input(struct ifnet *ifp, struct mbuf *m)
 		return;
 	}
 	IF_ENQUEUE(inq, m);
+	schednetisr(NETISR_IP);
 	splx(s);
 #endif
 	ifp->if_ipackets++;

@@ -342,7 +342,9 @@ initarm(void *arg)
 	printf("initarm: Configuring system ...\n");
 
 #if defined(CPU_CORTEXA7) || defined(CPU_CORTEXA9) || defined(CPU_CORTEXA15)
-	printf("initarm: cbar=%#x\n", armreg_cbar_read());
+	if (!CPU_ID_CORTEX_A8_P(curcpu()->ci_arm_cpuid)) {
+		printf("initarm: cbar=%#x\n", armreg_cbar_read());
+	}
 #endif
 #endif
 

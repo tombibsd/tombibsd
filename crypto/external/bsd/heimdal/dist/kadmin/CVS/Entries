@@ -26,7 +26,7 @@
 /pw_quality.c/1.1.1.1/Wed Apr 13 18:14:35 2011/-kk/
 /random_password.c/1.1.1.1/Wed Apr 13 18:14:35 2011/-kk/
 /rename.c/1.1.1.1/Wed Apr 13 18:14:35 2011/-kk/
-/rpc.c/1.1.1.2/Tue May  6 05:46:38 2014/-kk/
+/rpc.c/1.2/Tue Jun  3 02:48:43 2014/-kk/
 /server.c/1.1.1.2/Tue May  6 05:46:38 2014/-kk/
 /stash.c/1.1.1.2/Tue May  6 05:46:38 2014/-kk/
 /test_util.c/1.1.1.1/Wed Apr 13 18:14:35 2011/-kk/

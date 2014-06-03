@@ -323,7 +323,7 @@ trap(const u_long a0, const u_long a1, const u_long a2, const u_long entry,
 			if (framep->tf_regs[FRAME_A0] == -2) { /* weird! */
 				KSI_INIT_TRAP(&ksi);
 				ksi.ksi_signo = SIGFPE;
-				ksi.ksi_code =  alpha_ucode_to_ksiginfo(ucode);
+				ksi.ksi_code = FPE_INTDIV;
 				ksi.ksi_addr =
 					(void *)l->l_md.md_tf->tf_regs[FRAME_PC];
 				ksi.ksi_trap =  a0;	/* exception summary */

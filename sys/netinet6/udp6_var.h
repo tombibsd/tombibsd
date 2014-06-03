@@ -99,6 +99,9 @@
 }
 
 #ifdef _KERNEL
+
+extern const struct pr_usrreqs udp6_usrreqs;
+
 void	*udp6_ctlinput(int, const struct sockaddr *, void *);
 int	udp6_ctloutput(int, struct socket *, struct sockopt *);
 void	udp6_init(void);

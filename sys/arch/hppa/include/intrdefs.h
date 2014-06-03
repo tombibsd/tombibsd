@@ -24,7 +24,8 @@
 #define	HPPA_IPI_NOP		0
 #define	HPPA_IPI_HALT		1
 #define	HPPA_IPI_XCALL		2
-#define	HPPA_NIPI		3
+#define	HPPA_IPI_GENERIC	3
+#define	HPPA_NIPI		4
 #endif
 
 #endif

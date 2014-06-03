@@ -253,7 +253,7 @@ int
 drm_limit_dma_space(struct drm_device *dev, resource_size_t min_addr,
     resource_size_t max_addr)
 {
-	int error;
+	int ret;
 
 	KASSERT(min_addr <= max_addr);
 
@@ -274,11 +274,13 @@ drm_limit_dma_space(struct drm_device *dev, resource_size_t min_addr,
 	 * the caller should try to allocate DMA-safe memory on failure
 	 * anyway, but...paranoia).
 	 */
-	error = bus_dmatag_subregion(dev->bus_dmat, min_addr, max_addr,
+	/* XXX errno NetBSD->Linux */
+	ret = -bus_dmatag_subregion(dev->bus_dmat, min_addr, max_addr,
 	    &dev->dmat, BUS_DMA_WAITOK);
-	if (error) {
+	if (ret) {
 		dev->dmat = dev->bus_dmat;
-		return error;
+		dev->dmat_subregion_p = false;
+		return ret;
 	}
 
 	/*

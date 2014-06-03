@@ -123,13 +123,7 @@ struct sysctlnode sysctl_root = {
 	    CTLFLAG_ROOT|CTLFLAG_READWRITE|
 	    CTLTYPE_NODE,
 	.sysctl_num = 0,
-	/*
-	 * XXX once all ports are on gcc3, we can get rid of this
-	 * ugliness and simply make it into
-	 *
-	 *	.sysctl_size = sizeof(struct sysctlnode),
-	 */
-	sysc_init_field(_sysctl_size, sizeof(struct sysctlnode)),
+	.sysctl_size = sizeof(struct sysctlnode),
 	.sysctl_name = "(root)",
 };
 

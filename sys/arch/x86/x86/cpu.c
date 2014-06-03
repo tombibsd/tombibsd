@@ -855,9 +855,11 @@ cpu_hatch(void *v)
 
 	cpu_init_idt();
 	gdt_init_cpu(ci);
+#if NLAPIC > 0
 	lapic_enable();
 	lapic_set_lvt();
 	lapic_initclocks();
+#endif
 
 	fpuinit(ci);
 	lldt(GSYSSEL(GLDT_SEL, SEL_KPL));
@@ -1039,7 +1041,9 @@ mp_cpu_start(struct cpu_info *ci, paddr_t target)
 	dwordptr[0] = 0;
 	dwordptr[1] = target >> 4;
 
+#if NLAPIC > 0
 	memcpy((uint8_t *)cmos_data_mapping + 0x467, dwordptr, 4);
+#endif
 
 	if ((cpu_feature[0] & CPUID_APIC) == 0) {
 		aprint_error("mp_cpu_start: CPU does not have APIC\n");

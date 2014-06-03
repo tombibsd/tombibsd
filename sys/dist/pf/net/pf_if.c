@@ -100,10 +100,6 @@ RB_GENERATE(pfi_ifhead, pfi_kif, pfik_tree, pfi_if_compare);
 void
 pfi_initialize(void)
 {
-#ifdef __NetBSD__
-	int i;
-#endif /* __NetBSD__ */
-
 	if (pfi_all != NULL)	/* already initialized */
 		return;
 
@@ -122,14 +118,10 @@ pfi_initialize(void)
 		panic("pfi_kif_get for pfi_all failed");
 
 #ifdef __NetBSD__
-	for (i = 0; i < if_indexlim; i++) {
-		struct ifnet *ifp = ifindex2ifnet[i];
-
-		if (ifp != NULL) {
-			pfi_init_groups(ifp);
-
-			pfi_attach_ifnet(ifp);
-		}
+	ifnet_t *ifp;
+	IFNET_FOREACH(ifp) {
+		pfi_init_groups(ifp);
+		pfi_attach_ifnet(ifp);
 	}
 
 	pfil_add_hook(pfil_ifnet_wrapper, NULL, PFIL_IFNET, if_pfil);
@@ -142,19 +134,14 @@ void
 pfi_destroy(void)
 {
 	struct pfi_kif *p;
-	int i;
+	ifnet_t *ifp;
 
 	pfil_remove_hook(pfil_ifaddr_wrapper, NULL, PFIL_IFADDR, if_pfil);
 	pfil_remove_hook(pfil_ifnet_wrapper, NULL, PFIL_IFNET, if_pfil);
 
-	for (i = 0; i < if_indexlim; i++) {
-		struct ifnet *ifp = ifindex2ifnet[i];
-
-		if (ifp != NULL) {
-			pfi_detach_ifnet(ifp);
-
-			pfi_destroy_groups(ifp);
-		}
+	IFNET_FOREACH(ifp) {
+		pfi_detach_ifnet(ifp);
+		pfi_destroy_groups(ifp);
 	}
 
 	while ((p = RB_MIN(pfi_ifhead, &pfi_ifs))) {

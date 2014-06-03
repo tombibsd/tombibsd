@@ -100,10 +100,10 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <sys/param.h>
 #include <sys/systm.h>
-#include <sys/malloc.h>
 #include <sys/mbuf.h>
 #include <sys/protosw.h>
 #include <sys/socket.h>
+#include <sys/kmem.h>
 #include <sys/time.h>
 #include <sys/kernel.h>
 #include <sys/syslog.h>
@@ -204,10 +204,7 @@ icmp_mtudisc_callback_register(void (*func)(struct in_addr))
 			return;
 	}
 
-	mc = malloc(sizeof(*mc), M_PCB, M_NOWAIT);
-	if (mc == NULL)
-		panic("icmp_mtudisc_callback_register");
-
+	mc = kmem_alloc(sizeof(*mc), KM_SLEEP);
 	mc->mc_func = func;
 	LIST_INSERT_HEAD(&icmp_mtudisc_callbacks, mc, mc_list);
 }

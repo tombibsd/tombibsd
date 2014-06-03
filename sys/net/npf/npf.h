@@ -188,7 +188,7 @@ typedef struct {
 	void *		ctx;
 	int		(*ctor)(npf_rproc_t *, prop_dictionary_t);
 	void		(*dtor)(npf_rproc_t *, void *);
-	void		(*proc)(npf_cache_t *, nbuf_t *, void *, int *);
+	bool		(*proc)(npf_cache_t *, nbuf_t *, void *, int *);
 } npf_ext_ops_t;
 
 void *		npf_ext_register(const char *, const npf_ext_ops_t *);

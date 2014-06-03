@@ -1315,9 +1315,7 @@ ip_multicast_if(struct in_addr *a, int *ifindexp)
 		*ifindexp = 0;
 	if (ntohl(a->s_addr) >> 24 == 0) {
 		ifindex = ntohl(a->s_addr) & 0xffffff;
-		if (ifindex < 0 || if_indexlim <= ifindex)
-			return NULL;
-		ifp = ifindex2ifnet[ifindex];
+		ifp = if_byindex(ifindex);
 		if (!ifp)
 			return NULL;
 		if (ifindexp)

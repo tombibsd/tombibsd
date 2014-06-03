@@ -19,12 +19,15 @@
 /ddcvar.h/1.1/Tue Apr 25 21:18:16 2006/-kk/
 /ds1307.c/1.17/Tue Mar 25 02:35:31 2014/-kk/
 /ds1307reg.h/1.4/Thu Feb 23 20:59:19 2012/-kk/
-/files.i2c/1.53/Thu Oct 24 10:28:57 2013/-kk/
+/files.i2c/1.54/Tue Jun  3 02:54:32 2014/-kk/
 /g760a.c/1.4/Sun Jul 29 07:04:09 2012/-kk/
 /g760areg.h/1.1/Sat Oct  2 06:07:37 2010/-kk/
 /gttwsi_core.c/1.1/Thu Oct 24 10:28:57 2013/-kk/
 /gttwsireg.h/1.1/Thu Oct 24 10:28:57 2013/-kk/
 /gttwsivar.h/1.1/Thu Oct 24 10:28:57 2013/-kk/
+/hytp14.c/1.1/Sun May 18 11:46:23 2014/-kk/
+/hytp14reg.h/1.1/Sun May 18 11:46:23 2014/-kk/
+/hytp14var.h/1.1/Sun May 18 11:46:23 2014/-kk/
 /i2c.c/1.43/Tue Mar 25 02:35:31 2014/-kk/
 /i2c_bitbang.c/1.13/Sun Apr 25 00:35:58 2010/-kk/
 /i2c_bitbang.h/1.2/Sun Dec 11 12:21:22 2005/-kk/

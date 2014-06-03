@@ -527,6 +527,7 @@ arc_input(struct ifnet *ifp, struct mbuf *m)
 	struct arc_header *ah;
 	struct ifqueue *inq;
 	uint8_t atype;
+	int isr = 0;
 	int s;
 
 	if ((ifp->if_flags & IFF_UP) == 0) {
@@ -553,19 +554,19 @@ arc_input(struct ifnet *ifp, struct mbuf *m)
 #ifdef INET
 	case ARCTYPE_IP:
 		m_adj(m, ARC_HDRNEWLEN);
-		schednetisr(NETISR_IP);
+		isr = NETISR_IP;
 		inq = &ipintrq;
 		break;
 
 	case ARCTYPE_IP_OLD:
 		m_adj(m, ARC_HDRLEN);
-		schednetisr(NETISR_IP);
+		isr = NETISR_IP;
 		inq = &ipintrq;
 		break;
 
 	case ARCTYPE_ARP:
 		m_adj(m, ARC_HDRNEWLEN);
-		schednetisr(NETISR_ARP);
+		isr = NETISR_ARP;
 		inq = &arpintrq;
 #ifdef ARCNET_ALLOW_BROKEN_ARP
 		mtod(m, struct arphdr *)->ar_pro = htons(ETHERTYPE_IP);
@@ -574,7 +575,7 @@ arc_input(struct ifnet *ifp, struct mbuf *m)
 
 	case ARCTYPE_ARP_OLD:
 		m_adj(m, ARC_HDRLEN);
-		schednetisr(NETISR_ARP);
+		isr = NETISR_ARP;
 		inq = &arpintrq;
 #ifdef ARCNET_ALLOW_BROKEN_ARP
 		mtod(m, struct arphdr *)->ar_pro = htons(ETHERTYPE_IP);
@@ -584,7 +585,7 @@ arc_input(struct ifnet *ifp, struct mbuf *m)
 #ifdef INET6
 	case ARCTYPE_INET6:
 		m_adj(m, ARC_HDRNEWLEN);
-		schednetisr(NETISR_IPV6);
+		isr = NETISR_IPV6;
 		inq = &ip6intrq;
 		break;
 #endif
@@ -597,8 +598,10 @@ arc_input(struct ifnet *ifp, struct mbuf *m)
 	if (IF_QFULL(inq)) {
 		IF_DROP(inq);
 		m_freem(m);
-	} else
+	} else {
 		IF_ENQUEUE(inq, m);
+		schednetisr(isr);
+	}
 	splx(s);
 }
 

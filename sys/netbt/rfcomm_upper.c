@@ -37,7 +37,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/param.h>
 #include <sys/kernel.h>
 #include <sys/mbuf.h>
-#include <sys/proc.h>
+#include <sys/kmem.h>
 #include <sys/socketvar.h>
 #include <sys/systm.h>
 
@@ -56,12 +56,12 @@ __KERNEL_RCSID(0, "$NetBSD$");
  */
 
 /*
- * rfcomm_attach(handle, proto, upper)
+ * rfcomm_attach_pcb(handle, proto, upper)
  *
  * attach a new RFCOMM DLC to handle, populate with reasonable defaults
  */
 int
-rfcomm_attach(struct rfcomm_dlc **handle,
+rfcomm_attach_pcb(struct rfcomm_dlc **handle,
 		const struct btproto *proto, void *upper)
 {
 	struct rfcomm_dlc *dlc;
@@ -70,9 +70,7 @@ rfcomm_attach(struct rfcomm_dlc **handle,
 	KASSERT(proto != NULL);
 	KASSERT(upper != NULL);
 
-	dlc = malloc(sizeof(struct rfcomm_dlc), M_BLUETOOTH, M_NOWAIT | M_ZERO);
-	if (dlc == NULL)
-		return ENOMEM;
+	dlc = kmem_zalloc(sizeof(struct rfcomm_dlc), KM_SLEEP);
 
 	dlc->rd_state = RFCOMM_DLC_CLOSED;
 	dlc->rd_mtu = rfcomm_mtu_default;
@@ -270,12 +268,12 @@ rfcomm_disconnect(struct rfcomm_dlc *dlc, int linger)
 }
 
 /*
- * rfcomm_detach(handle)
+ * rfcomm_detach_pcb(handle)
  *
  * detach RFCOMM DLC from handle
  */
-int
-rfcomm_detach(struct rfcomm_dlc **handle)
+void
+rfcomm_detach_pcb(struct rfcomm_dlc **handle)
 {
 	struct rfcomm_dlc *dlc = *handle;
 
@@ -298,10 +296,8 @@ rfcomm_detach(struct rfcomm_dlc **handle)
 		dlc->rd_flags |= RFCOMM_DLC_DETACH;
 	else {
 		callout_destroy(&dlc->rd_timeout);
-		free(dlc, M_BLUETOOTH);
+		kmem_free(dlc, sizeof(*dlc));
 	}
-
-	return 0;
 }
 
 /*

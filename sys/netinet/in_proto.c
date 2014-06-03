@@ -122,6 +122,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include "carp.h"
 #if NCARP > 0
+#include <netinet/in_var.h>
 #include <netinet/ip_carp.h>
 #endif
 
@@ -139,14 +140,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 DOMAIN_DEFINE(inetdomain);	/* forward declare and add to link set */
 
 /* Wrappers to acquire kernel_lock. */
-
-PR_WRAP_USRREQ(rip_usrreq)
-PR_WRAP_USRREQ(udp_usrreq)
-PR_WRAP_USRREQ(tcp_usrreq)
-
-#define	rip_usrreq 	rip_usrreq_wrapper
-#define	udp_usrreq 	udp_usrreq_wrapper
-#define	tcp_usrreq 	tcp_usrreq_wrapper
 
 PR_WRAP_CTLINPUT(rip_ctlinput)
 PR_WRAP_CTLINPUT(udp_ctlinput)
@@ -188,7 +181,7 @@ const struct protosw inetsw[] = {
 	.pr_input = udp_input,
 	.pr_ctlinput = udp_ctlinput,
 	.pr_ctloutput = udp_ctloutput,
-	.pr_usrreq = udp_usrreq,
+	.pr_usrreqs = &udp_usrreqs,
 	.pr_init = udp_init,
 },
 {	.pr_type = SOCK_STREAM,
@@ -198,7 +191,7 @@ const struct protosw inetsw[] = {
 	.pr_input = tcp_input,
 	.pr_ctlinput = tcp_ctlinput,
 	.pr_ctloutput = tcp_ctloutput,
-	.pr_usrreq = tcp_usrreq,
+	.pr_usrreqs = &tcp_usrreqs,
 	.pr_init = tcp_init,
 	.pr_fasttimo = tcp_fasttimo,
 	.pr_drain = tcp_drainstub,
@@ -211,7 +204,7 @@ const struct protosw inetsw[] = {
 	.pr_output = rip_output,
 	.pr_ctlinput = rip_ctlinput,
 	.pr_ctloutput = rip_ctloutput,
-	.pr_usrreq = rip_usrreq,
+	.pr_usrreqs = &rip_usrreqs,
 },
 {	.pr_type = SOCK_RAW,
 	.pr_domain = &inetdomain,
@@ -221,7 +214,7 @@ const struct protosw inetsw[] = {
 	.pr_output = rip_output,
 	.pr_ctlinput = rip_ctlinput,
 	.pr_ctloutput = rip_ctloutput,
-	.pr_usrreq = rip_usrreq,
+	.pr_usrreqs = &rip_usrreqs,
 	.pr_init = icmp_init,
 },
 #ifdef GATEWAY
@@ -261,7 +254,7 @@ const struct protosw inetsw[] = {
 	.pr_output = rip_output,
 	.pr_ctlinput = rip_ctlinput,
 	.pr_ctloutput = rip_ctloutput,
-	.pr_usrreq = rip_usrreq,
+	.pr_usrreqs = &rip_usrreqs,
 	.pr_init = encap_init,
 },
 #ifdef INET6
@@ -273,7 +266,7 @@ const struct protosw inetsw[] = {
 	.pr_output = rip_output,
 	.pr_ctlinput = rip_ctlinput,
 	.pr_ctloutput = rip_ctloutput,
-	.pr_usrreq = rip_usrreq,
+	.pr_usrreqs = &rip_usrreqs,
 	.pr_init = encap_init,
 },
 #endif /* INET6 */
@@ -286,7 +279,7 @@ const struct protosw inetsw[] = {
 	.pr_output = rip_output,
 	.pr_ctlinput = rip_ctlinput,
 	.pr_ctloutput = rip_ctloutput,
-	.pr_usrreq = rip_usrreq,
+	.pr_usrreqs = &rip_usrreqs,
 },
 #endif /* NETHERIP > 0 */
 #if NCARP > 0
@@ -297,7 +290,7 @@ const struct protosw inetsw[] = {
 	.pr_input = carp_proto_input,
 	.pr_output = rip_output,
 	.pr_ctloutput = rip_ctloutput,
-	.pr_usrreq = rip_usrreq,
+	.pr_usrreqs = &rip_usrreqs,
 	.pr_init = carp_init,
 },
 #endif /* NCARP > 0 */
@@ -309,7 +302,7 @@ const struct protosw inetsw[] = {
 	.pr_input	 = pfsync_input,
 	.pr_output	 = rip_output,
 	.pr_ctloutput = rip_ctloutput,
-	.pr_usrreq	 = rip_usrreq,
+	.pr_usrreqs	 = &rip_usrreqs,
 },
 #endif /* NPFSYNC > 0 */
 {	.pr_type = SOCK_RAW,
@@ -320,7 +313,7 @@ const struct protosw inetsw[] = {
 	.pr_output = rip_output,
 	.pr_ctloutput = rip_ctloutput,
 	.pr_ctlinput = rip_ctlinput,
-	.pr_usrreq = rip_usrreq,
+	.pr_usrreqs = &rip_usrreqs,
 	.pr_fasttimo = igmp_fasttimo,
 	.pr_slowtimo = igmp_slowtimo,
 	.pr_init = igmp_init,
@@ -334,7 +327,7 @@ const struct protosw inetsw[] = {
 	.pr_output = rip_output,
 	.pr_ctloutput = rip_ctloutput,
 	.pr_ctlinput = rip_ctlinput,
-	.pr_usrreq = rip_usrreq,
+	.pr_usrreqs = &rip_usrreqs,
 },
 #endif /* PIM */
 /* raw wildcard */
@@ -345,7 +338,7 @@ const struct protosw inetsw[] = {
 	.pr_output = rip_output,
 	.pr_ctloutput = rip_ctloutput,
 	.pr_ctlinput = rip_ctlinput,
-	.pr_usrreq = rip_usrreq,
+	.pr_usrreqs = &rip_usrreqs,
 	.pr_init = rip_init,
 },
 };

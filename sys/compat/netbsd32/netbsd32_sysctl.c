@@ -67,7 +67,7 @@ struct sysctlnode netbsd32_sysctl_root = {
 	.sysctl_flags = SYSCTL_VERSION|CTLFLAG_ROOT|CTLTYPE_NODE,
 	.sysctl_num = 0,
 	.sysctl_name = "(netbsd32_root)",
-	sysc_init_field(_sysctl_size, sizeof(struct sysctlnode)),
+	.sysctl_size = sizeof(struct sysctlnode),
 };
 
 static struct sysctllog *netbsd32_clog;

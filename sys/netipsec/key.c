@@ -1220,12 +1220,13 @@ key_freeso(struct socket *so)
 	case PF_INET:
 	    {
 		struct inpcb *pcb = sotoinpcb(so);
+		struct inpcbpolicy *sp = pcb->inp_sp;
 
 		/* Does it have a PCB ? */
 		if (pcb == NULL)
 			return;
-		key_freesp_so(&pcb->inp_sp->sp_in);
-		key_freesp_so(&pcb->inp_sp->sp_out);
+		key_freesp_so(&sp->sp_in);
+		key_freesp_so(&sp->sp_out);
 	    }
 		break;
 #endif
@@ -1234,12 +1235,13 @@ key_freeso(struct socket *so)
 	    {
 #ifdef HAVE_NRL_INPCB
 		struct inpcb *pcb  = sotoinpcb(so);
+		struct inpcbpolicy *sp = pcb->inp_sp;
 
 		/* Does it have a PCB ? */
 		if (pcb == NULL)
 			return;
-		key_freesp_so(&pcb->inp_sp->sp_in);
-		key_freesp_so(&pcb->inp_sp->sp_out);
+		key_freesp_so(&sp->sp_in);
+		key_freesp_so(&sp->sp_out);
 #else
 		struct in6pcb *pcb  = sotoin6pcb(so);
 

@@ -961,3 +961,15 @@ port	hp700
 	descr
 		workaround for unanalysed codegen bug affecting md5c.c.
 	kcah
+
+port	mips64*
+hack	compiler crashes on mips64* with optimization enabled
+cdate	Tue May 13 18:46:48 UTC 2014
+who	macallan
+file	src/external/lgpl3/gmp/lib/libgmp/arch/mips64eb/Makefile.inc: 1.6
+	src/external/lgpl3/gmp/lib/libgmp/arch/mips64eb/config.h: 1.5
+	src/external/lgpl3/gmp/lib/libgmp/arch/mips64el/Makefile.inc: 1.6
+	src/external/lgpl3/gmp/lib/libgmp/arch/mips64el/config.h: 1.5
+descr	workaround for n32 gcc doing unaligned 64bit accesses when optimizing
+pr	48696
+kcah

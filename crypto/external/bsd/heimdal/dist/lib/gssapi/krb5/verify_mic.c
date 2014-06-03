@@ -256,7 +256,8 @@ retry:
   krb5_crypto_destroy (context, crypto);
   ret = krb5_crypto_init(context, key,
 			 ETYPE_DES3_CBC_SHA1, &crypto);
-  if (ret){
+  if (ret) {
+      free (tmp);
       *minor_status = ret;
       return GSS_S_FAILURE;
   }

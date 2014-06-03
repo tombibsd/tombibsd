@@ -149,11 +149,18 @@ static int ip_gif_ttl = 40;	/*XXX*/
 #endif
 
 extern struct domain inetdomain;
+
 static const struct protosw in_stf_protosw =
-{ SOCK_RAW,	&inetdomain,	IPPROTO_IPV6,	PR_ATOMIC|PR_ADDR,
-  in_stf_input, rip_output,	0,		rip_ctloutput,
-  rip_usrreq,
-  0,            0,              0,              0
+{
+	.pr_type	= SOCK_RAW,
+	.pr_domain	= &inetdomain,
+	.pr_protocol	= IPPROTO_IPV6,
+	.pr_flags	= PR_ATOMIC|PR_ADDR,
+	.pr_input	= in_stf_input,
+	.pr_output	= rip_output,
+	.pr_ctlinput	= NULL,
+	.pr_ctloutput	= rip_ctloutput,
+	.pr_usrreqs	= &rip_usrreqs,
 };
 
 void	stfattach(int);

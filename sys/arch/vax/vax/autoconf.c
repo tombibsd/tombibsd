@@ -217,7 +217,7 @@ static int booted_sd(device_t, void *);
 #if NRL > 0
 static int booted_rl(device_t, void *);
 #endif
-#if NRA
+#if NRA > 0 || NRACD > 0
 static int booted_ra(device_t, void *);
 #endif
 #if NHP
@@ -411,7 +411,7 @@ booted_rl(device_t dev, void *aux)
 }
 #endif
 
-#if NRA
+#if NRA > 0 || NRACD > 0
 #include <dev/mscp/mscp.h>
 #include <dev/mscp/mscpreg.h>
 #include <dev/mscp/mscpvar.h>
@@ -422,7 +422,7 @@ booted_ra(device_t dev, void *aux)
 	struct mscp_softc *pdev = device_private(device_parent(dev));
 	paddr_t ioaddr;
 
-	if (jmfr("ra", dev, BDEV_UDA))
+	if (jmfr("ra", dev, BDEV_UDA) && jmfr("racd", dev, BDEV_UDA))
 		return 0;
 
 	if (da->da_mp->mscp_unit != rpb.unit)
@@ -435,6 +435,7 @@ booted_ra(device_t dev, void *aux)
 	return 0;
 }
 #endif
+
 #if NHP
 #include <vax/mba/mbavar.h>
 int

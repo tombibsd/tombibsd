@@ -1209,7 +1209,9 @@ ipf_fastroute(mb_t *m0, mb_t **mpp, fr_info_t *fin, frdest_t *fdp)
 			ip->ip_sum = in_cksum(m, hlen);
 # endif /* M_CSUM_IPv4 */
 
+		KERNEL_LOCK(1, NULL);
 		error = (*ifp->if_output)(ifp, m, dst, rt);
+		KERNEL_UNLOCK_ONE(NULL);
 		goto done;
 	}
 
@@ -1296,7 +1298,9 @@ sendorfree:
 		m0 = m->m_act;
 		m->m_act = 0;
 		if (error == 0) {
+			KERNEL_LOCK(1, NULL);
 			error = (*ifp->if_output)(ifp, m, dst, rt);
+			KERNEL_UNLOCK_ONE(NULL);
 		} else {
 			FREE_MB_T(m);
 		}

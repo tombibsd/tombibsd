@@ -9,7 +9,7 @@ set -e
 
 cd dist/libcxx
 rm -rf .svn cmake Makefile CMakeLists.txt lib src/support www .arcconfig
-rm -rf include/support
+rm -rf include/support */CMakeLists.txt
 cd ../libcxxrt
 rm -rf .git CMakeLists.txt */CMakeLists.txt src/doxygen_config
 

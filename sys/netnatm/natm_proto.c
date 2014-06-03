@@ -42,7 +42,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/mbuf.h>
 
 #include <net/if.h>
-#include <net/radix.h>
 #include <net/route.h>
 
 #include <netinet/in.h>
@@ -57,10 +56,6 @@ struct npcblist natm_pcbs = LIST_HEAD_INITIALIZER(natm_pcbs);
 struct	ifqueue natmintrq;       	/* natm packet input queue */
 int	natmqmaxlen = IFQ_MAXLEN;	/* max # of packets on queue */
 
-PR_WRAP_USRREQ(natm_usrreq)
-
-#define	natm_usrreq	natm_usrreq_wrapper
-
 const struct protosw natmsw[] = {
 { .pr_type = SOCK_STREAM,
   .pr_domain = &natmdomain,
@@ -70,7 +65,7 @@ const struct protosw natmsw[] = {
   .pr_output = 0,
   .pr_ctlinput = 0,
   .pr_ctloutput = 0,
-  .pr_usrreq = natm_usrreq,
+  .pr_usrreqs = &natm_usrreq,
   .pr_init = 0,
   .pr_fasttimo = 0,
   .pr_slowtimo = 0,
@@ -84,7 +79,7 @@ const struct protosw natmsw[] = {
   .pr_output = 0,
   .pr_ctlinput = 0,
   .pr_ctloutput = 0,
-  .pr_usrreq = natm_usrreq,
+  .pr_usrreqs = &natm_usrreq,
   .pr_init = 0,
   .pr_fasttimo = 0,
   .pr_slowtimo = 0,
@@ -98,7 +93,7 @@ const struct protosw natmsw[] = {
   .pr_output = 0,
   .pr_ctlinput = 0,
   .pr_ctloutput = 0,
-  .pr_usrreq = natm_usrreq,
+  .pr_usrreqs = &natm_usrreqs,
   .pr_init = 0,
   .pr_fasttimo = 0,
   .pr_slowtimo = 0,

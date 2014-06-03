@@ -85,4 +85,5 @@
 	.long	ELF_NOTE_TYPE_MARCH_TAG
 	.ascii	"NetBSD\0\0"
 	.asciz	ELF_NOTE_MARCH_DESC
+	.p2align 2
 #endif

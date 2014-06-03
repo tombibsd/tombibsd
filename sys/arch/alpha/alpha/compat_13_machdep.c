@@ -94,7 +94,7 @@ compat_13_sys_sigreturn(struct lwp *l, const struct compat_13_sys_sigreturn_args
 
 	/* XXX ksc.sc_ownedfp ? */
 	pcb = lwp_getpcb(l);
-	fpu_discard();
+	fpu_discard(true);
 	memcpy(&pcb->pcb_fp, (struct fpreg *)ksc.sc_fpregs,
 	    sizeof(struct fpreg));
 	/* XXX ksc.sc_fp_control ? */

@@ -52,13 +52,13 @@ __KERNEL_RCSID(0, "$NetBSD$");
  */
 
 /*
- * l2cap_attach(handle, btproto, upper)
+ * l2cap_attach_pcb(handle, btproto, upper)
  *
  *	attach new l2cap_channel to handle, populate
  *	with reasonable defaults
  */
 int
-l2cap_attach(struct l2cap_channel **handle,
+l2cap_attach_pcb(struct l2cap_channel **handle,
 		const struct btproto *proto, void *upper)
 {
 	struct l2cap_channel *chan;
@@ -260,12 +260,12 @@ l2cap_disconnect(struct l2cap_channel *chan, int linger)
 }
 
 /*
- * l2cap_detach(handle)
+ * l2cap_detach_pcb(handle)
  *
  *	Detach l2cap channel from handle & close it down
  */
-int
-l2cap_detach(struct l2cap_channel **handle)
+void
+l2cap_detach_pcb(struct l2cap_channel **handle)
 {
 	struct l2cap_channel *chan;
 
@@ -288,7 +288,6 @@ l2cap_detach(struct l2cap_channel **handle)
 	 */
 
 	free(chan, M_BLUETOOTH);
-	return 0;
 }
 
 /*

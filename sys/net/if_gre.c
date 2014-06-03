@@ -422,7 +422,7 @@ gre_socreate(struct gre_softc *sc, const struct gre_soparm *sp, int *fdout)
 	GRE_DPRINTF(sc, "enter\n");
 
 	af = sp->sp_src.ss_family;
-	rc = fsocreate(af, NULL, sp->sp_type, sp->sp_proto, curlwp, &fd);
+	rc = fsocreate(af, NULL, sp->sp_type, sp->sp_proto, &fd);
 	if (rc != 0) {
 		GRE_DPRINTF(sc, "fsocreate failed\n");
 		return rc;
@@ -528,7 +528,8 @@ gre_sosend(struct socket *so, struct mbuf *top)
 	 */
 	if (so->so_state & SS_CANTSENDMORE)
 		snderr(EPIPE);
-	error = (*so->so_proto->pr_usrreq)(so, PRU_SEND, top, NULL, NULL, l);
+	error = (*so->so_proto->pr_usrreqs->pr_generic)(so,
+	    PRU_SEND, top, NULL, NULL, l);
 	top = NULL;
  release:
 	sbunlock(&so->so_snd);
@@ -723,7 +724,7 @@ gre_soreceive(struct socket *so, struct mbuf **mp0)
 	SBLASTRECORDCHK(&so->so_rcv, "soreceive 4");
 	SBLASTMBUFCHK(&so->so_rcv, "soreceive 4");
 	if (pr->pr_flags & PR_WANTRCVD && so->so_pcb)
-		(*pr->pr_usrreq)(so, PRU_RCVD, NULL,
+		(*pr->pr_usrreqs->pr_generic)(so, PRU_RCVD, NULL,
 		    (struct mbuf *)(long)flags, NULL, curlwp);
 	if (*mp0 == NULL && (flags & MSG_EOR) == 0 &&
 	    (so->so_state & SS_CANTRCVMORE) == 0) {
@@ -964,7 +965,8 @@ gre_output(struct ifnet *ifp, struct mbuf *m, const struct sockaddr *dst,
 static int
 gre_getname(struct socket *so, int req, struct mbuf *nam, struct lwp *l)
 {
-	return (*so->so_proto->pr_usrreq)(so, req, NULL, nam, NULL, l);
+	return (*so->so_proto->pr_usrreqs->pr_generic)(so,
+	    req, NULL, nam, NULL, l);
 }
 
 static int

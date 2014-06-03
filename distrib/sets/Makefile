@@ -306,12 +306,13 @@ makedeps: .PHONY
 
 # Sort the lists files
 sortlists: .PHONY
-	find ${.CURDIR}/lists \! \( -name CVS -prune \) -type f -print \
+	find ${.CURDIR}/lists \! \( -name CVS -prune \) \! -name .#\* \
+	    -type f -print \
 	| while read f ; do \
 	    ${_MKSHMSG} "sorting $${f#${.CURDIR}/}" ; \
 	    { grep '^#' "$$f" ; \
 	      grep -v '^#' "$$f" | sort ; \
-	    } >"$$f".tmp; \
+	    } | cat -s >"$$f".tmp; \
 	    if cmp "$$f" "$$f".tmp >/dev/null; then \
 	      : "$$f is unchanged" ; \
 	      rm "$$f".tmp ; \

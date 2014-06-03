@@ -1,5 +1,4 @@
 /*	$NetBSD$	*/
-	char intrbuf[PCI_INTRSTR_LEN];
 
 /*-
  * Copyright (c) 1994-1997 Matt Thomas (matt@3am-software.com)

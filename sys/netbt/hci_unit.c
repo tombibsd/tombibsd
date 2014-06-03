@@ -81,7 +81,7 @@ static const uint8_t hci_cmds_v10[HCI_COMMANDS_SIZE] = {
 static void hci_intr (void *);
 
 struct hci_unit *
-hci_attach(const struct hci_if *hci_if, device_t dev, uint16_t flags)
+hci_attach_pcb(const struct hci_if *hci_if, device_t dev, uint16_t flags)
 {
 	struct hci_unit *unit;
 
@@ -120,7 +120,7 @@ hci_attach(const struct hci_if *hci_if, device_t dev, uint16_t flags)
 }
 
 void
-hci_detach(struct hci_unit *unit)
+hci_detach_pcb(struct hci_unit *unit)
 {
 
 	mutex_enter(bt_lock);

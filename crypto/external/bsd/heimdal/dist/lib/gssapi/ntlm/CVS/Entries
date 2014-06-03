@@ -4,7 +4,7 @@
 /canonicalize_name.c/1.1.1.1/Wed Apr 13 18:14:47 2011/-kk/
 /compare_name.c/1.1.1.1/Wed Apr 13 18:14:47 2011/-kk/
 /context_time.c/1.1.1.1/Wed Apr 13 18:14:47 2011/-kk/
-/creds.c/1.1.1.2/Tue May  6 05:46:39 2014/-kk/
+/creds.c/1.2/Tue Jun  3 02:48:43 2014/-kk/
 /crypto.c/1.1.1.2/Tue May  6 05:46:39 2014/-kk/
 /delete_sec_context.c/1.1.1.1/Wed Apr 13 18:14:47 2011/-kk/
 /display_name.c/1.1.1.2/Tue May  6 05:46:39 2014/-kk/

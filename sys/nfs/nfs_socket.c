@@ -805,11 +805,11 @@ nfs_timer(void *arg)
 		    nmp->nm_sent < nmp->nm_cwnd) &&
 		   (m = m_copym(rep->r_mreq, 0, M_COPYALL, M_DONTWAIT))){
 		        if (so->so_state & SS_ISCONNECTED)
-			    error = (*so->so_proto->pr_usrreq)(so, PRU_SEND, m,
-			    NULL, NULL, NULL);
+			    error = (*so->so_proto->pr_usrreqs->pr_generic)(so,
+			    PRU_SEND, m, NULL, NULL, NULL);
 			else
-			    error = (*so->so_proto->pr_usrreq)(so, PRU_SEND, m,
-			    nmp->nm_nam, NULL, NULL);
+			    error = (*so->so_proto->pr_usrreqs->pr_generic)(so,
+			    PRU_SEND, m, nmp->nm_nam, NULL, NULL);
 			if (error) {
 				if (NFSIGNORE_SOERROR(nmp->nm_soflags, error)) {
 #ifdef DEBUG

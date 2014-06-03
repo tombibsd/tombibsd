@@ -103,6 +103,11 @@ device	lmtemp: sysmon_envsys
 attach	lmtemp at iic
 file	dev/i2c/lm75.c				lmtemp
 
+# IST-AG Humidity and Teperature sensor (P14)
+device	hythygtemp: sysmon_envsys
+attach	hythygtemp at iic
+file	dev/i2c/hytp14.c			hythygtemp
+
 # National Semiconductor LM78 temp sensor/fan controller
 attach	lm at iic with lm_iic
 file	dev/i2c/lm_i2c.c			lm_iic

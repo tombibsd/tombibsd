@@ -4,7 +4,9 @@
 /destructor.pass.cpp/1.1.1.1/Thu Oct 24 10:28:46 2013/-kk/
 /notify_all.pass.cpp/1.1.1.1/Thu Oct 24 10:28:46 2013/-kk/
 /notify_one.pass.cpp/1.1.1.1/Thu Oct 24 10:28:46 2013/-kk/
+/wait.exception.pass.cpp/1.1.1.1/Thu May 15 23:53:14 2014/-kk/
 /wait.pass.cpp/1.1.1.1/Thu Oct 24 10:28:46 2013/-kk/
+/wait_for.exception.pass.cpp/1.1.1.1/Thu May 15 23:53:14 2014/-kk/
 /wait_for.pass.cpp/1.1.1.1/Thu Oct 24 10:28:46 2013/-kk/
 /wait_for_pred.pass.cpp/1.1.1.1/Thu Oct 24 10:28:46 2013/-kk/
 /wait_pred.pass.cpp/1.1.1.1/Thu Oct 24 10:28:46 2013/-kk/

@@ -2,7 +2,7 @@
 /devlist2h.awk/1.1/Tue Apr 21 03:00:30 2009/-kk/
 /files.sdmmc/1.3/Wed Feb  1 22:34:42 2012/-kk/
 /ld_sdmmc.c/1.12/Thu Oct 24 10:28:58 2013/-kk/
-/sbt.c/1.3/Sat Oct 27 17:18:38 2012/-kk/
+/sbt.c/1.4/Tue Jun  3 02:54:38 2014/-kk/
 /sdhc.c/1.43/Thu Oct 24 10:28:58 2013/-kk/
 /sdhcreg.h/1.11/Mon Dec 24 05:43:34 2012/-kk/
 /sdhcvar.h/1.13/Thu Oct 24 10:28:58 2013/-kk/

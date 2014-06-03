@@ -590,10 +590,9 @@ npf_session_inspect(npf_cache_t *npc, nbuf_t *nbuf, const int di, int *error)
 
 	/* Inspect the protocol data and handle state changes. */
 	if (!npf_state_inspect(npc, nbuf, &se->s_state, forw)) {
-		/* Silently block invalid packets. */
+		/* Invalid: let the rules deal with it. */
 		npf_session_release(se);
 		npf_stats_inc(NPF_STAT_INVALID_STATE);
-		*error = ENETUNREACH;
 		se = NULL;
 	}
 	return se;

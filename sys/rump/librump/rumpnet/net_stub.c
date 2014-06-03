@@ -61,7 +61,7 @@ __weak_alias(agr_input,rumpnet_stub);
 __weak_alias(ieee8023ad_lacp_input,rumpnet_stub);
 __weak_alias(ieee8023ad_marker_input,rumpnet_stub);
 
-struct ifnet_head ifnet;
+struct ifnet_head ifnet_list;
 
 int
 compat_ifconf(u_long cmd, void *data)

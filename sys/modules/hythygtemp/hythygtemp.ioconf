@@ -1,0 +1,9 @@
+# $NetBSD$
+
+ioconf hythygtemp
+
+include "conf/files"
+
+pseudo-root iic*
+
+hythygtemp* at iic? addr 0x28

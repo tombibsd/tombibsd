@@ -784,14 +784,16 @@ linux_sys_dup3(struct lwp *l, const struct linux_sys_dup3_args *uap,
 		syscallarg(int) to;
 		syscallarg(int) flags;
 	} */
-	int error;
-	if ((error = sys_dup2(l, (const struct sys_dup2_args *)uap, retval)))
-		return error;
+	int flags;
 
-	if (SCARG(uap, flags) & LINUX_O_CLOEXEC)
-		fd_set_exclose(l, SCARG(uap, to), true);
+	flags = linux_to_bsd_ioflags(SCARG(uap, flags));
+	if ((flags & ~O_CLOEXEC) != 0)
+		return EINVAL;
 
-	return 0;
+	if (SCARG(uap, from) == SCARG(uap, to))
+		return EINVAL;
+
+	return dodup(l, SCARG(uap, from), SCARG(uap, to), flags, retval);
 }
 
 

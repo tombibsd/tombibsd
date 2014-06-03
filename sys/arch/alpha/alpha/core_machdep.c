@@ -70,7 +70,7 @@ cpu_coredump(struct lwp *l, struct coredump_iostate *iocookie,
 	pcu_save_all(l);
 	cpustate.md_tf = *l->l_md.md_tf;
 	cpustate.md_tf.tf_regs[FRAME_SP] = alpha_pal_rdusp();	/* XXX */
-	if (fpu_used_p(l)) {
+	if (fpu_valid_p(l)) {
 		cpustate.md_fpstate = ((struct pcb *)lwp_getpcb(l))->pcb_fp;
 	} else
 		memset(&cpustate.md_fpstate, 0, sizeof(cpustate.md_fpstate));

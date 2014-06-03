@@ -88,7 +88,7 @@ cpu_lwp_fork(struct lwp *l1, struct lwp *l2, void *stack, size_t stacksize,
 	pcb2 = lwp_getpcb(l2);
 
 	l2->l_md.md_tf = l1->l_md.md_tf;
-	l2->l_md.md_flags = l1->l_md.md_flags & (MDLWP_FPUSED | MDLWP_FP_C);
+	l2->l_md.md_flags = l1->l_md.md_flags & MDLWP_FP_C;
 	l2->l_md.md_astpending = 0;
 
 	/*

@@ -46,6 +46,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/bitops.h>
 #include <sys/idle.h>
 #include <sys/xcall.h>
+#include <sys/ipi.h>
 
 #include <uvm/uvm.h>
 
@@ -928,6 +929,13 @@ xc_send_ipi(struct cpu_info *ci)
 
 	(*mips_locoresw.lsw_send_ipi)(ci, IPI_XCALL);
 }
+
+void
+cpu_ipi(struct cpu_info *ci)
+{
+	(*mips_locoresw.lsw_send_ipi)(ci, IPI_GENERIC);
+}
+
 #endif /* MULTIPROCESSOR */
 
 void

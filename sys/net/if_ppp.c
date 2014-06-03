@@ -1395,6 +1395,7 @@ ppp_inproc(struct ppp_softc *sc, struct mbuf *m)
     int s, ilen, proto, rv;
     u_char *cp, adrs, ctrl;
     struct mbuf *mp, *dmp = NULL;
+    int isr = 0;
 #ifdef VJC
     int xlen;
     u_char *iphdr;
@@ -1625,7 +1626,7 @@ ppp_inproc(struct ppp_softc *sc, struct mbuf *m)
 	if (ipflow_fastforward(m))
 		return;
 #endif
-	schednetisr(NETISR_IP);
+	isr = NETISR_IP;
 	inq = &ipintrq;
 	break;
 #endif
@@ -1648,7 +1649,7 @@ ppp_inproc(struct ppp_softc *sc, struct mbuf *m)
 	if (ip6flow_fastforward(&m))
 		return;
 #endif
-	schednetisr(NETISR_IPV6);
+	isr = NETISR_IPV6;
 	inq = &ip6intrq;
 	break;
 #endif
@@ -1675,6 +1676,9 @@ ppp_inproc(struct ppp_softc *sc, struct mbuf *m)
 	goto bad;
     }
     IF_ENQUEUE(inq, m);
+    if (__predict_true(isr)) {
+        schednetisr(isr);
+    }
     splx(s);
     ifp->if_ipackets++;
     ifp->if_ibytes += ilen;

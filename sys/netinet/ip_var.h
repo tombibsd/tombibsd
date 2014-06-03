@@ -176,6 +176,7 @@ struct ip_moptions {
 #define	IP_MTUDISC		0x0400		/* Path MTU Discovery; set DF */
 
 extern struct domain inetdomain;
+extern const struct pr_usrreqs rip_usrreqs;
 
 extern int   ip_defttl;			/* default IP ttl */
 extern int   ipforwarding;		/* ip forwarding */

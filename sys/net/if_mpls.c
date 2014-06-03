@@ -540,8 +540,8 @@ mpls_unlabel_inet(struct mbuf *m)
 		return ENOBUFS;
 	}
 	IF_ENQUEUE(inq, m);
-	splx(s);
 	schednetisr(NETISR_IP);
+	splx(s);
 
 	return 0;
 }

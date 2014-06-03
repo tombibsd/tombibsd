@@ -975,6 +975,8 @@ do {									\
 				stype = "Wh";
 			else if (strcmp(sensor->type, "Ampere hour") == 0)
 				stype = "Ah";
+			else if (strcmp(sensor->type, "relative Humidity") == 0)
+				stype = "%rH";
 			else
 				stype = "?";
 

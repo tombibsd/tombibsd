@@ -799,7 +799,7 @@ hci_sco_newconn(struct hci_unit *unit, bdaddr_t *bdaddr)
 
 		sco = hci_link_alloc(unit, bdaddr, HCI_LINK_SCO);
 		if (sco == NULL) {
-			sco_detach(&new);
+			sco_detach_pcb(&new);
 			return NULL;
 		}
 

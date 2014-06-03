@@ -42,6 +42,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/kernel.h>
 #include <sys/kmem.h>
 #include <sys/xcall.h>
+#include <sys/ipi.h>
 
 #include <arm/armreg.h>
 #include <arm/cpufunc.h>
@@ -104,6 +105,13 @@ int
 pic_ipi_xcall(void *arg)
 {
 	xc_ipi_handler();
+	return 1;
+}
+
+int
+pic_ipi_generic(void *arg)
+{
+	ipi_cpu_handler();
 	return 1;
 }
 

@@ -421,6 +421,7 @@ token_input(struct ifnet *ifp, struct mbuf *m)
 	struct llc *l;
 	struct token_header *trh;
 	int s, lan_hdr_len;
+	int isr = 0;
 
 	if ((ifp->if_flags & IFF_UP) == 0) {
 		m_freem(m);
@@ -472,18 +473,18 @@ token_input(struct ifnet *ifp, struct mbuf *m)
 		switch (etype) {
 #ifdef INET
 		case ETHERTYPE_IP:
-			schednetisr(NETISR_IP);
+			isr = NETISR_IP;
 			inq = &ipintrq;
 			break;
 
 		case ETHERTYPE_ARP:
-			schednetisr(NETISR_ARP);
+			isr = NETISR_ARP;
 			inq = &arpintrq;
 			break;
 #endif
 #ifdef DECNET
 		case ETHERTYPE_DECNET:
-			schednetisr(NETISR_DECNET);
+			isr = NETISR_DECNET;
 			inq = &decnetintrq;
 			break;
 #endif
@@ -512,9 +513,10 @@ token_input(struct ifnet *ifp, struct mbuf *m)
 	if (IF_QFULL(inq)) {
 		IF_DROP(inq);
 		m_freem(m);
-	}
-	else
+	} else {
 		IF_ENQUEUE(inq, m);
+		schednetisr(isr);
+	}
 	splx(s);
 }
 

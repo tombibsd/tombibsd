@@ -228,6 +228,7 @@ atm_input(struct ifnet *ifp, struct atm_pseudohdr *ah, struct mbuf *m,
 {
 	struct ifqueue *inq;
 	uint16_t etype = ETHERTYPE_IP; /* default */
+	int isr = 0;
 	int s;
 
 	if ((ifp->if_flags & IFF_UP) == 0) {
@@ -242,7 +243,7 @@ atm_input(struct ifnet *ifp, struct atm_pseudohdr *ah, struct mbuf *m,
 	  s = splnet();			/* in case 2 atm cards @ diff lvls */
 	  npcb->npcb_inq++;			/* count # in queue */
 	  splx(s);
-	  schednetisr(NETISR_NATM);
+	  isr = NETISR_NATM;
 	  inq = &natmintrq;
 	  m->m_pkthdr.rcvif = rxhand; /* XXX: overload */
 #else
@@ -281,7 +282,7 @@ atm_input(struct ifnet *ifp, struct atm_pseudohdr *ah, struct mbuf *m,
 		  if (ipflow_fastforward(m))
 			return;
 #endif
-		  schednetisr(NETISR_IP);
+		  isr = NETISR_IP;
 		  inq = &ipintrq;
 		  break;
 #endif /* INET */
@@ -291,9 +292,9 @@ atm_input(struct ifnet *ifp, struct atm_pseudohdr *ah, struct mbuf *m,
 		if (ip6flow_fastforward(&m))
 			return;
 #endif
-		  schednetisr(NETISR_IPV6);
-		  inq = &ip6intrq;
-		  break;
+		isr = NETISR_IPV6;
+		inq = &ip6intrq;
+		break;
 #endif
 	  default:
 	      m_freem(m);
@@ -305,8 +306,10 @@ atm_input(struct ifnet *ifp, struct atm_pseudohdr *ah, struct mbuf *m,
 	if (IF_QFULL(inq)) {
 		IF_DROP(inq);
 		m_freem(m);
-	} else
+	} else {
 		IF_ENQUEUE(inq, m);
+		schednetisr(isr);
+	}
 	splx(s);
 }
 

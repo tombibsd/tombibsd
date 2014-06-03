@@ -432,6 +432,13 @@ npf_ext_param_bool(nl_ext_t *ext, const char *key, bool val)
 	prop_dictionary_set_bool(extdict, key, val);
 }
 
+void
+npf_ext_param_string(nl_ext_t *ext, const char *key, const char *val)
+{
+	prop_dictionary_t extdict = ext->nxt_dict;
+	prop_dictionary_set_cstring(extdict, key, val);
+}
+
 /*
  * RULE INTERFACE.
  */

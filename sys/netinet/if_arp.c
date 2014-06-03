@@ -249,14 +249,13 @@ const struct protosw arpsw[] = {
 	  .pr_output = 0,
 	  .pr_ctlinput = 0,
 	  .pr_ctloutput = 0,
-	  .pr_usrreq =  0,
+	  .pr_usrreqs = 0,
 	  .pr_init = arp_init,
 	  .pr_fasttimo = arp_fasttimo,
 	  .pr_slowtimo = 0,
 	  .pr_drain = arp_drainstub,
 	}
 };
-
 
 struct domain arpdomain = {
 	.dom_family = PF_ARP,

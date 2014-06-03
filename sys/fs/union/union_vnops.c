@@ -517,6 +517,8 @@ union_create(void *v)
 		struct mount *mp;
 
 		mp = ap->a_dvp->v_mount;
+
+		vp = NULL;
 		error = VOP_CREATE(dvp, &vp, cnp, ap->a_vap);
 		if (error)
 			return (error);
@@ -1383,6 +1385,7 @@ union_mkdir(void *v)
 		int error;
 		struct vnode *vp;
 
+		vp = NULL;
 		error = VOP_MKDIR(dvp, &vp, cnp, ap->a_vap);
 		if (error) {
 			vrele(ap->a_dvp);

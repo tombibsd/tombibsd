@@ -171,7 +171,10 @@ GENERIC_SRCS+= \
 
 GENERIC_SRCS+= \
 	GCDAProfiling.c \
-	PGOProfiling.c
+	InstrProfiling.c \
+	InstrProfilingBuffer.c \
+	InstrProfilingFile.c \
+	InstrProfilingPlatformOther.c
 
 .if ${LIBC_MACHINE_ARCH} == "powerpc"
 GENERIC_SRCS+= \
@@ -210,9 +213,12 @@ GENERIC_SRCS+= \
 SRCS+=	${src:R}.S
 .  else
 SRCS+=	${src}
+.    if ${src:E} != "cc"
 COPTS.${src}+=	-Wno-missing-prototypes \
 		-Wno-old-style-definition \
 		-Wno-strict-prototypes \
-		-Wno-uninitialized
+		-Wno-uninitialized \
+		-Wno-cast-qual
+.    endif
 .  endif
 .endfor

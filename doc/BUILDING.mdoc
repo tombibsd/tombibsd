@@ -115,6 +115,10 @@ use the
 .Xr make 1
 .Dq reachover
 Makefile semantics when building these programs for a native host.
+.It Sy external , sys/external
+Sources and build infrastructure for components imported (mostly) unchanged
+from upstream maintainers, sorted by applicable license.
+This is (slowly) replacing the crypto/dist, dist/ and gnu/dist directories.
 .It Sy distrib/ , etc/
 Sources for items used when making a full release snapshot, such as
 files installed in
@@ -433,6 +437,11 @@ Indicates whether preformatted plaintext manual pages will be created
 during a build.
 .DFLTn
 .
+.It Sy MKCROSSGDB
+.YorN
+Create a cross-gdb as a host tool.
+.DFLTn
+.
 .It Sy MKCRYPTO
 .YorN
 Indicates whether cryptographic code will be included in a build;
@@ -441,6 +450,25 @@ cryptography.
 Will not affect use of the standard low-security password encryption system,
 .Xr crypt 3 .
 .DFLTy
+.
+.It Sy MKDEBUG
+.YorN
+Indicates whether debug information should be generated for all userland
+binaries compiled.
+The result is collected as an additional
+.Sy debug.tgz
+and
+.Sy xdebug.tgz
+set and installed in
+.Pa /usr/libdata/debug .
+.DFLTn
+.
+.It Sy MKDEBUGLIB
+.YorN
+Indicates wether debug information (see
+.Sy MKDEBUG )
+should also be generated for all libraries build.
+.DFLTn
 .
 .It Sy MKDOC
 .YorN
@@ -476,6 +504,18 @@ Indicates whether GNU Info files, used for the documentation for
 most of the compilation tools, will be created and installed during a
 build.
 .DFLTy
+.
+.It Sy MKKDEBUG
+.YorN
+Force generation of full-debug symbol versions of all kernels compiled.
+Alongside of the
+.Pa netbsd
+kernel file, an unstripped version
+.Pa netbsd.gdb
+is created.
+This is usfull if a cross-gdb is build as well (see
+.Sy MKCROSSGDB ) .
+.DFLTn
 .
 .It Sy MKKMOD
 .YorN
@@ -1425,6 +1465,17 @@ on the kernel in question first unless the
 .Fl u
 option is given.
 .
+.It Sy kernel.gdb Ns = Ns Ar kconf
+Build a new kernel with debug information.
+Similar to the above
+.Sy kernel Ns = Ns Ar kconf
+operation, but creates a
+.Pa netbsd.gdb
+file alongside of the kernel
+.Pa netbsd ,
+which contains a full symbol table and can be used for debugging
+(for example with a cross-gdb build by
+.Sy MKCROSSGDB ) .
 .It Sy modules
 This command will build kernel modules and install them into
 .Sy DESTDIR .

@@ -238,6 +238,7 @@ hippi_input(struct ifnet *ifp, struct mbuf *m)
 	struct llc *l;
 	uint16_t htype;
 	struct hippi_header *hh;
+	int isr = 0;
 	int s;
 
 	if ((ifp->if_flags & IFF_UP) == 0) {
@@ -273,13 +274,13 @@ hippi_input(struct ifnet *ifp, struct mbuf *m)
 	switch (htype) {
 #ifdef INET
 	case ETHERTYPE_IP:
-		schednetisr(NETISR_IP);
+		isr = NETISR_IP;
 		inq = &ipintrq;
 		break;
 #endif
 #ifdef INET6
 	case ETHERTYPE_IPV6:
-		schednetisr(NETISR_IPV6);
+		isr = NETISR_IPV6;
 		inq = &ip6intrq;
 		break;
 #endif
@@ -292,8 +293,10 @@ hippi_input(struct ifnet *ifp, struct mbuf *m)
 	if (IF_QFULL(inq)) {
 		IF_DROP(inq);
 		m_freem(m);
-	} else
+	} else {
 		IF_ENQUEUE(inq, m);
+		schednetisr(isr);
+	}
 	splx(s);
 }
 
@@ -308,15 +311,16 @@ hippi_ip_input(struct ifnet *ifp, struct mbuf *m)
 	struct ifqueue *inq;
 	int s;
 
-	schednetisr(NETISR_IP);
 	inq = &ipintrq;
 
 	s = splnet();
 	if (IF_QFULL(inq)) {
 		IF_DROP(inq);
 		m_freem(m);
-	} else
+	} else {
 		IF_ENQUEUE(inq, m);
+		schednetisr(NETISR_IP);
+	}
 	splx(s);
 }
 #endif

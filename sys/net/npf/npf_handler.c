@@ -252,8 +252,13 @@ block:
 	 * Execute the rule procedure, if any is associated.
 	 * It may reverse the decision from pass to block.
 	 */
-	if (rp) {
-		npf_rproc_run(&npc, &nbuf, rp, &decision);
+	if (rp && !npf_rproc_run(&npc, &nbuf, rp, &decision)) {
+		if (se) {
+			npf_session_release(se);
+		}
+		npf_rproc_release(rp);
+		*mp = NULL;
+		return 0;
 	}
 out:
 	/*

@@ -129,9 +129,7 @@ struct ip6protosw {
 			(int, struct socket *, struct sockopt *);
 
 /* user-protocol hook */
-	int	(*pr_usrreq)		/* user request: see list below */
-			(struct socket *, int, struct mbuf *,
-			     struct mbuf *, struct mbuf *, struct lwp *);
+	const struct pr_usrreqs *pr_usrreqs;
 
 /* utility hooks */
 	void	(*pr_init)		/* initialization hook */

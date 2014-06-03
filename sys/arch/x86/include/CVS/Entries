@@ -31,7 +31,7 @@
 /ieee.h/1.11/Wed Sep 15 16:11:28 2010/-kk/
 /ieeefp.h/1.4/Sat Mar 26 19:52:20 2011/-kk/
 /intr.h/1.44/Fri Apr 11 02:03:39 2014/-kk/
-/intrdefs.h/1.19/Tue Dec 17 04:13:30 2013/-kk/
+/intrdefs.h/1.20/Tue Jun  3 02:54:25 2014/-kk/
 /ipmivar.h/1.11/Sun Aug  1 08:16:14 2010/-kk/
 /isa_machdep.h/1.11/Fri Jul  1 18:22:39 2011/-kk/
 /loadfile_machdep.h/1.5/Sat Apr 19 05:36:50 2014/-kk/

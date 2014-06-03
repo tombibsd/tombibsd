@@ -164,8 +164,9 @@ _splraise(int s)
 #define	ALPHA_IPI_AST			(1UL << 4)
 #define	ALPHA_IPI_PAUSE			(1UL << 5)
 #define	ALPHA_IPI_XCALL			(1UL << 6)
+#define	ALPHA_IPI_GENERIC		(1UL << 7)
 
-#define	ALPHA_NIPIS		7	/* must not exceed 64 */
+#define	ALPHA_NIPIS			8	/* must not exceed 64 */
 
 struct cpu_info;
 struct trapframe;

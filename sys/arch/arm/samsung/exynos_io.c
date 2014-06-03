@@ -78,6 +78,7 @@ exyo_match(device_t parent, cfdata_t cf, void *aux)
 	return 1;
 }
 
+
 static int
 exyo_print(void *aux, const char *pnp)
 {
@@ -89,10 +90,12 @@ exyo_print(void *aux, const char *pnp)
 	return QUIET;
 }
 
+
 void
 exyo_device_register(device_t self, void *aux)
 {
 }
+
 
 void
 exyo_device_register_post_config(device_t self, void *aux)

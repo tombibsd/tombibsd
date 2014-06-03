@@ -2567,13 +2567,12 @@ void hci_memo_free(struct hci_memo *);
 /* hci_socket.c */
 void hci_drop(void *);
 void hci_init(void);
-int hci_usrreq(struct socket *, int, struct mbuf *, struct mbuf *, struct mbuf *, struct lwp *);
 int hci_ctloutput(int, struct socket *, struct sockopt *);
 void hci_mtap(struct mbuf *, struct hci_unit *);
 
 /* hci_unit.c */
-struct hci_unit *hci_attach(const struct hci_if *, device_t, uint16_t);
-void hci_detach(struct hci_unit *);
+struct hci_unit *hci_attach_pcb(const struct hci_if *, device_t, uint16_t);
+void hci_detach_pcb(struct hci_unit *);
 int hci_enable(struct hci_unit *);
 void hci_disable(struct hci_unit *);
 struct hci_unit *hci_unit_lookup(const bdaddr_t *);

@@ -60,7 +60,7 @@ extern	struct	rawcbhead rawcb;		/* head of list */
 
 int	raw_attach(struct socket *, int);
 void	*raw_ctlinput(int, const struct sockaddr *, void *);
-void	raw_detach(struct rawcb *);
+void	raw_detach(struct socket *);
 void	raw_disconnect(struct rawcb *);
 void	raw_init(void);
 void	raw_input(struct mbuf *, ...);

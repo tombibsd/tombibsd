@@ -273,9 +273,6 @@ tcxattach(device_t parent, device_t self, void *args)
 	if (sc->sc_8bit) {
 		printf(" (8-bit only TCX)\n");
 		ramsize = 1024 * 1024;
-		/* XXX - fix THC and TEC offsets */
-		sc->sc_physaddr[TCX_REG_TEC].oa_base += 0x1000;
-		sc->sc_physaddr[TCX_REG_THC].oa_base += 0x1000;
 	} else {
 		printf(" (S24)\n");
 		ramsize = 4 * 1024 * 1024;
@@ -289,12 +286,19 @@ tcxattach(device_t parent, device_t self, void *args)
 
 	fb->fb_type.fb_type = FBTYPE_TCXCOLOR;
 
-
 	if (sa->sa_nreg != TCX_NREG) {
-		printf("%s: only %d register sets\n",
-			device_xname(self), sa->sa_nreg);
+		aprint_error("\n");
+		aprint_error_dev(self, "only %d register sets\n",
+			sa->sa_nreg);
 		return;
 	}
+	if (sa->sa_reg[TCX_REG_STIP].oa_size < 0x1000) {
+		aprint_error("\n");
+		aprint_error_dev(self, "STIP register too small (0x%x)\n",
+		    sa->sa_reg[TCX_REG_STIP].oa_size);
+		return;
+	}
+
 	memcpy(sc->sc_physaddr, sa->sa_reg,
 	      sa->sa_nreg * sizeof(struct openprom_addr));
 

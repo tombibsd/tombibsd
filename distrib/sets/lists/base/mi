@@ -5032,6 +5032,7 @@
 ./usr/share/zoneinfo/Antarctica/Rothera		base-sys-share		share
 ./usr/share/zoneinfo/Antarctica/South_Pole	base-sys-share		share
 ./usr/share/zoneinfo/Antarctica/Syowa		base-sys-share		share
+./usr/share/zoneinfo/Antarctica/Troll		base-sys-share		share
 ./usr/share/zoneinfo/Antarctica/Vostok		base-sys-share		share
 ./usr/share/zoneinfo/Arctic			base-sys-share
 ./usr/share/zoneinfo/Arctic/Longyearbyen	base-sys-share		share

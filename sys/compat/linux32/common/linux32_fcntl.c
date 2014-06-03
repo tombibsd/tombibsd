@@ -151,20 +151,15 @@ linux32_sys_fadvise64(struct lwp *l,
 {
 	/* {
 		syscallarg(int) fd;
-		syscallarg(off_t) offset;
-		syscallarg(size_t) len;
+		syscallarg(uint32_t) offlo;
+		syscallarg(uint32_t) offhi;
+		syscallarg(netbsd32_size_t) len;
 		syscallarg(int) advice;
 	} */
-	struct sys___posix_fadvise50_args ua;
+	off_t off = ((off_t)SCARG(uap, offhi) << 32) + SCARG(uap, offlo);
 
-	/* Linux doesn't have the 'pad' pseudo-parameter */
-	NETBSD32TO64_UAP(fd);
-	SCARG(&ua, PAD) = 0;
-	SCARG(&ua, offset) = ((off_t)SCARG(uap, offhi) << 32) + SCARG(uap, offlo);
-	SCARG(&ua, len) = SCARG(uap, len);
-	SCARG(&ua, advice) = linux_to_bsd_posix_fadv(SCARG(uap, advice));
-
-	return sys___posix_fadvise50(l, &ua, retval);
+	return do_posix_fadvise(SCARG(uap, fd), off,
+	    SCARG(uap, len), linux_to_bsd_posix_fadv(SCARG(uap, advice)));
 }
 
 int
@@ -173,18 +168,15 @@ linux32_sys_fadvise64_64(struct lwp *l,
 {
 	/* {
 		syscallarg(int) fd;
-		syscallarg(off_t) offset;
-		syscallarg(off_t) len;
+		syscallarg(uint32_t) offlo;
+		syscallarg(uint32_t) offhi;
+		syscallarg(uint32_t) lenlo;
+		syscallarg(uint32_t) lenhi;
 		syscallarg(int) advice;
 	} */
-	struct sys___posix_fadvise50_args ua;
+	off_t off = ((off_t)SCARG(uap, offhi) << 32) + SCARG(uap, offlo);
+	off_t len = ((off_t)SCARG(uap, lenhi) << 32) + SCARG(uap, lenlo);
 
-	/* Linux doesn't have the 'pad' pseudo-parameter */
-	NETBSD32TO64_UAP(fd);
-	SCARG(&ua, PAD) = 0;
-	SCARG(&ua, offset) = ((off_t)SCARG(uap, offhi) << 32) + SCARG(uap, offlo);
-	SCARG(&ua, len) = ((off_t)SCARG(uap, lenhi) << 32) + SCARG(uap, lenlo);
-	SCARG(&ua, advice) = linux_to_bsd_posix_fadv(SCARG(uap, advice));
-
-	return sys___posix_fadvise50(l, &ua, retval);
+	return do_posix_fadvise(SCARG(uap, fd), off,
+	    len, linux_to_bsd_posix_fadv(SCARG(uap, advice)));
 }

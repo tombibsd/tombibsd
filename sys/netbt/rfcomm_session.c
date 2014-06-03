@@ -185,7 +185,7 @@ rfcomm_session_alloc(struct rfcomm_session_list *list,
 	SIMPLEQ_INIT(&rs->rs_credits);
 	LIST_INIT(&rs->rs_dlcs);
 
-	err = l2cap_attach(&rs->rs_l2cap, &rfcomm_session_proto, rs);
+	err = l2cap_attach_pcb(&rs->rs_l2cap, &rfcomm_session_proto, rs);
 	if (err) {
 		free(rs, M_BLUETOOTH);
 		return NULL;
@@ -250,7 +250,7 @@ rfcomm_session_free(struct rfcomm_session *rs)
 
 	/* Goodbye! */
 	LIST_REMOVE(rs, rs_next);
-	l2cap_detach(&rs->rs_l2cap);
+	l2cap_detach_pcb(&rs->rs_l2cap);
 	callout_destroy(&rs->rs_timeout);
 	free(rs, M_BLUETOOTH);
 }

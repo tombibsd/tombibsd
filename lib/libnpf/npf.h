@@ -87,6 +87,7 @@ int		npf_ruleset_flush(int, const char *);
 nl_ext_t *	npf_ext_construct(const char *name);
 void		npf_ext_param_u32(nl_ext_t *, const char *, uint32_t);
 void		npf_ext_param_bool(nl_ext_t *, const char *, bool);
+void		npf_ext_param_string(nl_ext_t *, const char *, const char *);
 
 nl_rule_t *	npf_rule_create(const char *, uint32_t, const char *);
 int		npf_rule_setcode(nl_rule_t *, int, const void *, size_t);

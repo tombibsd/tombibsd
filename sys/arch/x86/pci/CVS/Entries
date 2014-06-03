@@ -21,7 +21,7 @@
 /pci_ranges.c/1.4/Sat Oct 27 17:18:14 2012/-kk/
 /pcib.c/1.15/Fri Apr  6 20:38:52 2012/-kk/
 /pcibvar.h/1.2/Tue Aug 18 17:15:10 2009/-kk/
-/pciide_machdep.c/1.12/Fri Apr 11 02:03:40 2014/-kk/
+/pciide_machdep.c/1.13/Tue Jun  3 02:54:25 2014/-kk/
 /rdcpcib.c/1.2/Fri Jul  1 18:22:08 2011/-kk/
 /tcpcib.c/1.1/Wed Dec  5 16:19:46 2012/-kk/
 D

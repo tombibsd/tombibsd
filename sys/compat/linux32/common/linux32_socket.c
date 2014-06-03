@@ -398,10 +398,7 @@ linux32_getifname(struct lwp *l, register_t *retval, void *data)
 	if (error)
 		return error;
 
-	if (ifr.ifr_ifru.ifru_ifindex >= if_indexlim)
-		return ENODEV;
-	
-	ifp = ifindex2ifnet[ifr.ifr_ifru.ifru_ifindex];
+	ifp = if_byindex(ifr.ifr_ifru.ifru_ifindex);
 	if (ifp == NULL)
 		return ENODEV;
 

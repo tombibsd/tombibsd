@@ -1,0 +1,12 @@
+/assign.fail.cpp/1.1.1.1/Thu May 15 23:53:14 2014/-kk/
+/copy.fail.cpp/1.1.1.1/Thu May 15 23:53:14 2014/-kk/
+/default.pass.cpp/1.1.1.1/Thu May 15 23:53:14 2014/-kk/
+/lock.pass.cpp/1.1.1.1/Thu May 15 23:53:14 2014/-kk/
+/lock_shared.pass.cpp/1.1.1.1/Thu May 15 23:53:14 2014/-kk/
+/try_lock.pass.cpp/1.1.1.1/Thu May 15 23:53:14 2014/-kk/
+/try_lock_for.pass.cpp/1.1.1.1/Thu May 15 23:53:14 2014/-kk/
+/try_lock_shared.pass.cpp/1.1.1.1/Thu May 15 23:53:14 2014/-kk/
+/try_lock_shared_for.pass.cpp/1.1.1.1/Thu May 15 23:53:14 2014/-kk/
+/try_lock_shared_until.pass.cpp/1.1.1.1/Thu May 15 23:53:14 2014/-kk/
+/try_lock_until.pass.cpp/1.1.1.1/Thu May 15 23:53:14 2014/-kk/
+D

@@ -53,12 +53,12 @@ __KERNEL_RCSID(0, "$NetBSD$");
 struct sco_pcb_list sco_pcb = LIST_HEAD_INITIALIZER(sco_pcb);
 
 /*
- * sco_attach(handle, proto, upper)
+ * sco_attach_pcb(handle, proto, upper)
  *
  *	Attach a new instance of SCO pcb to handle
  */
 int
-sco_attach(struct sco_pcb **handle,
+sco_attach_pcb(struct sco_pcb **handle,
 		const struct btproto *proto, void *upper)
 {
 	struct sco_pcb *pcb;
@@ -222,21 +222,18 @@ sco_disconnect(struct sco_pcb *pcb, int linger)
 }
 
 /*
- * sco_detach(handle)
+ * sco_detach_pcb(handle)
  *
  *	Detach SCO pcb from handle and clear up
  */
-int
-sco_detach(struct sco_pcb **handle)
+void
+sco_detach_pcb(struct sco_pcb **handle)
 {
 	struct sco_pcb *pcb;
 
 	KASSERT(handle != NULL);
 	pcb = *handle;
 	*handle = NULL;
-
-	if (pcb == NULL)
-		return EINVAL;
 
 	if (pcb->sp_link != NULL) {
 		sco_disconnect(pcb, 0);
@@ -245,7 +242,6 @@ sco_detach(struct sco_pcb **handle)
 
 	LIST_REMOVE(pcb, sp_next);
 	free(pcb, M_BLUETOOTH);
-	return 0;
 }
 
 /*

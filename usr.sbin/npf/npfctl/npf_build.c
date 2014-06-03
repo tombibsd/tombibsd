@@ -39,6 +39,7 @@ __RCSID("$NetBSD$");
 #include <sys/types.h>
 #include <sys/mman.h>
 #include <sys/stat.h>
+#include <netinet/tcp.h>
 
 #include <stdlib.h>
 #include <inttypes.h>
@@ -267,7 +268,7 @@ npfctl_build_proto(npf_bpf_t *ctx, sa_family_t family, const opt_proto_t *op)
 			assert(npfvar_get_count(popts) == 2);
 			tf = npfvar_get_data(popts, NPFVAR_TCPFLAG, 0);
 			tf_mask = npfvar_get_data(popts, NPFVAR_TCPFLAG, 1);
-			npfctl_bpf_tcpfl(ctx, *tf, *tf_mask);
+			npfctl_bpf_tcpfl(ctx, *tf, *tf_mask, false);
 		}
 		break;
 	case IPPROTO_ICMP:
@@ -327,6 +328,16 @@ npfctl_build_code(nl_rule_t *rl, sa_family_t family, const opt_proto_t *op,
 
 	/* Build layer 4 protocol blocks. */
 	npfctl_build_proto(bc, family, op);
+
+	/*
+	 * If this is a stateful rule and TCP flags are not specified,
+	 * then add "flags S/SAFR" filter for TCP protocol case.
+	 */
+	if ((npf_rule_getattr(rl) & NPF_RULE_STATEFUL) != 0 &&
+	    (proto == -1 || (proto == IPPROTO_TCP && !op->op_opts))) {
+		npfctl_bpf_tcpfl(bc, TH_SYN,
+		    TH_SYN | TH_ACK | TH_FIN | TH_RST, proto == -1);
+	}
 
 	/* Build IP address blocks. */
 	npfctl_build_vars(bc, family, apfrom->ap_netaddr, MATCH_SRC);

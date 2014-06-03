@@ -63,3 +63,4 @@
 	.long	ELF_NOTE_TYPE_MCMODEL_TAG
 	.ascii	"NetBSD\0\0"
 	.ascii	CONTENT
+	.p2align 2

@@ -103,6 +103,8 @@ ATF_TC_BODY(reregister_reg, tc)
 	ATF_REQUIRE_EQ(lseek(localfd, 0, SEEK_SET), 0);
 	ATF_REQUIRE(read(localfd, buf, sizeof(buf)) > 0);
 	ATF_REQUIRE_STREQ(buf, TESTSTR2);
+	close(etcfd);
+	close(localfd);
 }
 
 ATF_TC(reregister_blk);

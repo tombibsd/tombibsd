@@ -269,9 +269,9 @@
 /sysconf.3/1.42/Sat Nov  3 00:52:41 2012/-kk/
 /sysconf.c/1.36/Wed Dec 25 07:36:58 2013/-kk/
 /sysctl.3/1.200/Mon Mar 22 19:30:54 2010/-kk/
-/sysctl.c/1.32/Tue Mar 20 16:36:05 2012/-kk/
+/sysctl.c/1.34/Tue Jun  3 02:53:14 2014/-kk/
 /sysctlbyname.c/1.7/Mon Dec 13 23:10:13 2010/-kk/
-/sysctlgetmibinfo.c/1.10/Tue Mar 13 21:13:37 2012/-kk/
+/sysctlgetmibinfo.c/1.11/Tue Jun  3 02:53:14 2014/-kk/
 /sysctlnametomib.c/1.7/Tue Mar 13 21:13:37 2012/-kk/
 /syslog.3/1.29/Mon Jul 25 19:42:50 2011/-kk/
 /syslog.c/1.53/Thu Oct 11 17:09:55 2012/-kk/

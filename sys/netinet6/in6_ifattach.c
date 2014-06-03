@@ -473,7 +473,7 @@ get_ifid(struct ifnet *ifp0, struct ifnet *altifp,
 	}
 
 	/* next, try to get it from some other hardware interface */
-	TAILQ_FOREACH(ifp, &ifnet, if_list) {
+	IFNET_FOREACH(ifp) {
 		if (ifp == ifp0)
 			continue;
 		if (in6_get_hw_ifid(ifp, in6) != 0)
@@ -962,7 +962,7 @@ in6_tmpaddrtimer(void *ignored_arg)
 	    ip6_temp_regen_advance) * hz, in6_tmpaddrtimer, NULL);
 
 	memset(nullbuf, 0, sizeof(nullbuf));
-	TAILQ_FOREACH(ifp, &ifnet, if_list) {
+	IFNET_FOREACH(ifp) {
 		ndi = ND_IFINFO(ifp);
 		if (memcmp(ndi->randomid, nullbuf, sizeof(nullbuf)) != 0) {
 			/*

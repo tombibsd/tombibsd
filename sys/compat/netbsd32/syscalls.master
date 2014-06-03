@@ -630,8 +630,7 @@
 306	STD		{ int|netbsd32||utrace(netbsd32_charp label, \
 			    netbsd32_voidp addr, netbsd32_size_t len); }
 307	STD		{ int|netbsd32||getcontext(netbsd32_ucontextp ucp); }
-308	STD		{ int|netbsd32||setcontext(netbsd32_ucontextp ucp, \
-			    uint32_t flags, netbsd32_lwpidp new_lwp); }
+308	STD		{ int|netbsd32||setcontext(netbsd32_ucontextp ucp); }
 309	STD		{ int|netbsd32||_lwp_create(netbsd32_ucontextp ucp, \
 			    netbsd32_u_long flags, netbsd32_lwpidp new_lwp); }
 310	NOARGS		{ int|sys||_lwp_exit(void); }

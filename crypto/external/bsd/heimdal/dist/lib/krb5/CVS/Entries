@@ -139,7 +139,7 @@
 /n-fold.c/1.1.1.2/Tue May  6 05:46:42 2014/-kk/
 /net_read.c/1.1.1.1/Wed Apr 13 18:15:36 2011/-kk/
 /net_write.c/1.1.1.2/Tue May  6 05:46:42 2014/-kk/
-/pac.c/1.1.1.2/Tue May  6 05:46:42 2014/-kk/
+/pac.c/1.2/Tue Jun  3 02:48:44 2014/-kk/
 /padata.c/1.1.1.2/Tue May  6 05:46:42 2014/-kk/
 /parse-name-test.c/1.1.1.1/Wed Apr 13 18:15:36 2011/-kk/
 /pcache.c/1.1.1.1/Wed Apr 13 18:15:36 2011/-kk/
@@ -163,7 +163,7 @@
 /salt-des3.c/1.1.1.1/Wed Apr 13 18:15:37 2011/-kk/
 /salt.c/1.3/Tue May  6 05:46:42 2014/-kk/
 /scache.c/1.1.1.2/Tue May  6 05:46:42 2014/-kk/
-/send_to_kdc.c/1.1.1.2/Tue May  6 05:46:43 2014/-kk/
+/send_to_kdc.c/1.3/Tue Jun  3 02:48:44 2014/-kk/
 /send_to_kdc_plugin.h/1.1.1.2/Thu Apr 14 14:09:25 2011/-kk/
 /sendauth.c/1.1.1.2/Tue May  6 05:46:43 2014/-kk/
 /set_default_realm.c/1.1.1.1/Wed Apr 13 18:15:38 2011/-kk/

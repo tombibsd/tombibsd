@@ -806,7 +806,7 @@ vmt_tclo_tick(void *xarg)
 
 		/* find first available ipv4 address */
 		guest_ip = NULL;
-		TAILQ_FOREACH(iface, &ifnet, if_list) {
+		IFNET_FOREACH(iface) {
 			struct ifaddr *iface_addr;
 
 			/* skip loopback */

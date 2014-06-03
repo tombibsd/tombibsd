@@ -76,6 +76,10 @@ ${OBJS} ${POBJS} ${SOBJS}: runtime-info.h
 
 ${SRCS}: tconfig.h options.h
 
+.if ${HAVE_LIBGCC_EH} == "no"
+G_CONFIGLINKS:= ${G_CONFIGLINKS:S,libgcc/config/arm/unwind-arm.h,libgcc/unwind-generic.h,}
+.endif
+
 .if ${MKGCC} != "no"
 .if defined(G_CONFIGLINKS) && !empty(G_CONFIGLINKS)
 BUILDSYMLINKS+=	${G_CONFIGLINKS}

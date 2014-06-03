@@ -202,7 +202,7 @@ loop_clone_destroy(struct ifnet *ifp)
 	bpf_detach(ifp);
 	if_detach(ifp);
 
-	free(ifp, M_DEVBUF);
+	if_free(ifp);
 
 	return (0);
 }
@@ -216,6 +216,8 @@ looutput(struct ifnet *ifp, struct mbuf *m, const struct sockaddr *dst,
 	int csum_flags;
 
 	MCLAIM(m, ifp->if_mowner);
+	KASSERT(KERNEL_LOCKED_P());
+
 	if ((m->m_flags & M_PKTHDR) == 0)
 		panic("looutput: no header mbuf");
 	if (ifp->if_flags & IFF_LOOPBACK)

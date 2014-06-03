@@ -42,7 +42,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/intr.h>
 #include <sys/cpu.h>
 #include <sys/proc.h>
-#include <sys/xcall.h>		/* for xc_ipi_handler */
 
 #include <arm/armreg.h>
 #include <arm/cpufunc.h>
@@ -612,6 +611,8 @@ armgic_attach(device_t parent, device_t self, void *aux)
 	    pic_ipi_nop, (void *)-1);
 	intr_establish(ARMGIC_SGI_IPIBASE + IPI_XCALL, IPL_VM, IST_EDGE,
 	    pic_ipi_xcall, (void *)-1);
+	intr_establish(ARMGIC_SGI_IPIBASE + IPI_GENERIC, IPL_VM, IST_EDGE,
+	    pic_ipi_generic, (void *)-1);
 	intr_establish(ARMGIC_SGI_IPIBASE + IPI_NOP, IPL_VM, IST_EDGE,
 	    pic_ipi_nop, (void *)-1);
 	intr_establish(ARMGIC_SGI_IPIBASE + IPI_SHOOTDOWN, IPL_VM, IST_EDGE,

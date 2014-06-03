@@ -201,9 +201,9 @@ soo_ioctl(file_t *fp, u_long cmd, void *data)
 		if (IOCGROUP(cmd) == 'i')
 			error = ifioctl(so, cmd, data, curlwp);
 		else {
-			error = (*so->so_proto->pr_usrreq)(so, PRU_CONTROL,
-			    (struct mbuf *)cmd, (struct mbuf *)data, NULL,
-			     curlwp);
+			error = (*so->so_proto->pr_usrreqs->pr_generic)(so,
+			    PRU_CONTROL, (struct mbuf *)cmd,
+			    (struct mbuf *)data, NULL, curlwp);
 		}
 		KERNEL_UNLOCK_ONE(NULL);
 		break;
@@ -240,7 +240,7 @@ soo_stat(file_t *fp, struct stat *ub)
 	ub->st_mode = S_IFSOCK;
 
 	solock(so);
-	error = (*so->so_proto->pr_usrreq)(so, PRU_SENSE,
+	error = (*so->so_proto->pr_usrreqs->pr_generic)(so, PRU_SENSE,
 	    (struct mbuf *)ub, NULL, NULL, curlwp);
 	sounlock(so);
 

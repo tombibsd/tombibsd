@@ -2,8 +2,8 @@
 /config.c/1.12/Wed Aug 31 13:32:36 2011/-kk/
 /config_lex.l/1.8/Thu Mar 15 02:02:23 2012/-kk/
 /config_yacc.y/1.5/Thu Mar 15 02:02:23 2012/-kk/
-/envstat.8/1.61/Thu Feb  9 18:10:26 2012/-kk/
-/envstat.c/1.94/Fri Dec 14 05:29:28 2012/-kk/
+/envstat.8/1.62/Tue Jun  3 02:54:55 2014/-kk/
+/envstat.c/1.95/Tue Jun  3 02:54:55 2014/-kk/
 /envstat.h/1.2/Fri Nov 16 08:01:38 2007/-kk/
 /envstat_hostops.c/1.2/Wed Dec 15 15:07:54 2010/-kk/
 /envstat_rumpops.c/1.2/Wed Dec 15 15:07:54 2010/-kk/

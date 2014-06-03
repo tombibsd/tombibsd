@@ -133,7 +133,7 @@ sendsig_sigcontext(const ksiginfo_t *ksi, const sigset_t *mask)
 
  	/* save the floating-point state, if necessary, then copy it. */
 	fpu_save();
-	frame.sf_sc.sc_ownedfp = fpu_used_p(l);
+	frame.sf_sc.sc_ownedfp = fpu_valid_p(l);
 	memcpy((struct fpreg *)frame.sf_sc.sc_fpregs, &pcb->pcb_fp,
 	    sizeof(struct fpreg));
 	frame.sf_sc.sc_fp_control = alpha_read_fp_c(l);
@@ -281,12 +281,11 @@ compat_16_sys___sigreturn14(struct lwp *l, const struct compat_16_sys___sigretur
 	alpha_pal_wrusp(ksc.sc_regs[R_SP]);
 
 	pcb = lwp_getpcb(l);
-	fpu_discard();
+	fpu_discard(true);
 	memcpy(&pcb->pcb_fp, (struct fpreg *)ksc.sc_fpregs,
 	    sizeof(struct fpreg));
 	pcb->pcb_fp.fpr_cr = ksc.sc_fpcr;
-	l->l_md.md_flags = (ksc.sc_fp_control & MDLWP_FP_C)
-	    | (ksc.sc_ownedfp ? MDLWP_FPUSED : 0);
+	l->l_md.md_flags = ksc.sc_fp_control & MDLWP_FP_C;
 
 	mutex_enter(p->p_lock);
 	/* Restore signal stack. */

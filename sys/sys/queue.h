@@ -211,6 +211,14 @@ struct {								\
 	    ((tvar) = LIST_NEXT((var), field), 1);			\
 	    (var) = (tvar))
 
+#define	LIST_MOVE(head1, head2) do {					\
+	LIST_INIT((head2));						\
+	if (!LIST_EMPTY((head1))) {					\
+		(head2)->lh_first = (head1)->lh_first;			\
+		LIST_INIT((head1));					\
+	}								\
+} while (/*CONSTCOND*/0)
+
 /*
  * List functions.
  */

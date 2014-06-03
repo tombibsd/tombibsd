@@ -67,16 +67,11 @@ linux_sys_fadvise64(struct lwp *l,
 {
 	/* {
 		syscallarg(int) fd;
-		syscallarg(linux_off_t) offset;
+		syscallarg(off_t) offset;
 		syscallarg(size_t) len;
 		syscallarg(int) advice;
 	} */
 
-	size_t len = SCARG(uap, len);
-
-	if (sizeof(len) == sizeof(linux_off_t) && len > SSIZE_MAX)
-		return (EINVAL);
-
-	return do_posix_fadvise(SCARG(uap, fd),
-	    SCARG(uap, offset), len, linux_to_bsd_posix_fadv(SCARG(uap, advice)));
+	return do_posix_fadvise(SCARG(uap, fd), SCARG(uap, offset),
+	    SCARG(uap, len), linux_to_bsd_posix_fadv(SCARG(uap, advice)));
 }

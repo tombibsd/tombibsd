@@ -295,7 +295,7 @@ int	soconnect(struct socket *, struct mbuf *, struct lwp *);
 int	soconnect2(struct socket *, struct socket *);
 int	socreate(int, struct socket **, int, int, struct lwp *,
 		 struct socket *);
-int	fsocreate(int, struct socket **, int, int, struct lwp *, int *);
+int	fsocreate(int, struct socket **, int, int, int *);
 int	sodisconnect(struct socket *);
 void	sofree(struct socket *);
 int	sogetopt(struct socket *, struct sockopt *);
@@ -308,7 +308,7 @@ int	solisten(struct socket *, int, struct lwp *);
 struct socket *
 	sonewconn(struct socket *, bool);
 void	soqinsque(struct socket *, struct socket *, int);
-int	soqremque(struct socket *, int);
+bool	soqremque(struct socket *, int);
 int	soreceive(struct socket *, struct mbuf **, struct uio *,
 	    struct mbuf **, struct mbuf **, int *);
 int	soreserve(struct socket *, u_long, u_long);

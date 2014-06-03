@@ -72,6 +72,7 @@ pr_kern_48787_head() {
 	atf_set "descr" "Verifies 32bit overflow isssues from PR kern/48787 are fixed"
 	atf_set "require.user" "root"
 	atf_set "require.progs" "rump_cd9660 bunzip2 stat"
+	atf_set "timeout" 6000
 }
 
 pr_kern_48787_body() {

@@ -1482,8 +1482,12 @@ main(int argc, char **argv)
 #endif /* HAVE_CAP_NG_H */
 
 	if (getuid() == 0 || geteuid() == 0) {
-		if (username || chroot_dir)
+		if (username || chroot_dir) {
+#ifndef HAVE_CAP_NG_H
+			if (!WFileName)
+#endif
 			droproot(username, chroot_dir);
+		}
 
 	}
 #endif /* WIN32 */

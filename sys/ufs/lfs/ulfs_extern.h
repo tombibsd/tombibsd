@@ -75,8 +75,6 @@ int	ulfs_inactive(void *);
 int	ulfs_link(void *);
 #define	ulfs_lock	genfs_lock
 int	ulfs_lookup(void *);
-int	ulfs_mkdir(void *);
-int	ulfs_mknod(void *);
 #define	ulfs_mmap	genfs_mmap
 #define	ulfs_revoke	genfs_revoke
 int	ulfs_open(void *);
@@ -90,7 +88,6 @@ int	ulfs_rmdir(void *);
 #define	ulfs_poll	genfs_poll
 int	ulfs_setattr(void *);
 int	ulfs_strategy(void *);
-int	ulfs_symlink(void *);
 #define	ulfs_unlock	genfs_unlock
 int	ulfs_whiteout(void *);
 int	ulfsspec_close(void *);
