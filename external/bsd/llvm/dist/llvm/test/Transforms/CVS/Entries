@@ -1,5 +1,7 @@
 D/ADCE////
+D/AddDiscriminators////
 D/ArgumentPromotion////
+D/AtomicExpandLoadLinked////
 D/BBVectorize////
 D/BranchFolding////
 D/CodeExtractor////
@@ -16,6 +18,7 @@ D/FunctionAttrs////
 D/GCOVProfiling////
 D/GVN////
 D/GlobalDCE////
+D/GlobalMerge////
 D/GlobalOpt////
 D/IPConstantProp////
 D/IndVarSimplify////
@@ -26,6 +29,7 @@ D/Internalize////
 D/JumpThreading////
 D/LCSSA////
 D/LICM////
+D/LoadCombine////
 D/LoopDeletion////
 D/LoopIdiom////
 D/LoopReroll////
@@ -54,6 +58,7 @@ D/SROA////
 D/SampleProfile////
 D/ScalarRepl////
 D/Scalarizer////
+D/SeparateConstOffsetFromGEP////
 D/SimplifyCFG////
 D/Sink////
 D/StripSymbols////

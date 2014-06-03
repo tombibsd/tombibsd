@@ -23,3 +23,8 @@ ENTRY(fpgetprec)
 	rorl $8,%eax
 	andl $3,%eax
 	ret
+#ifdef WEAK_ALIAS
+END(_fpgetprec)
+#else
+END(fpgetprec)
+#endif

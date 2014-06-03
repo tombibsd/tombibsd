@@ -11,10 +11,12 @@
 /2011-10-01-NoopTrunc.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /2012-04-09-unroll-indirectbr.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /basic.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/loop-remarks.ll/1.1.1.1/Fri May 30 18:11:27 2014/-kk/
 /partial-unroll-optsize.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /pr10813.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /pr11361.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /pr14167.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/pr18861.ll/1.1.1.1/Fri May 30 18:11:27 2014/-kk/
 /runtime-loop.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /runtime-loop1.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /runtime-loop2.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
@@ -23,3 +25,4 @@
 /shifted-tripcount.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /unloop.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 D/PowerPC////
+D/X86////

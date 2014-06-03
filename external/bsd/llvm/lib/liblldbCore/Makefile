@@ -6,6 +6,8 @@ LIB=	lldbCore
 
 .PATH: ${LLDB_SRCDIR}/source/Core
 
+CPPFLAGS.IOHandler.cpp+= -DLLDB_DISABLE_CURSES
+
 SRCS+=	Address.cpp \
 	AddressRange.cpp \
 	AddressResolver.cpp \
@@ -33,9 +35,7 @@ SRCS+=	Address.cpp \
 	FileLineResolver.cpp \
 	FileSpecList.cpp \
 	History.cpp \
-	InputReader.cpp \
-	InputReaderEZ.cpp \
-	InputReaderStack.cpp \
+	IOHandler.cpp \
 	Language.cpp \
 	Listener.cpp \
 	Log.cpp \

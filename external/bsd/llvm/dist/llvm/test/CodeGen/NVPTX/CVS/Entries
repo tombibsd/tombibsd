@@ -1,9 +1,13 @@
+/access-non-generic.ll/1.1.1.1/Fri May 30 18:11:19 2014/-kk/
 /add-128bit.ll/1.1.1.1/Thu Nov 28 14:18:10 2013/-kk/
+/addrspacecast-gvar.ll/1.1.1.1/Fri May 30 18:11:19 2014/-kk/
+/addrspacecast.ll/1.1.1.1/Fri May 30 18:11:19 2014/-kk/
 /aggr-param.ll/1.1.1.1/Fri Feb 14 20:12:36 2014/-kk/
 /annotations.ll/1.1.1.1/Thu Nov 28 14:18:10 2013/-kk/
 /arithmetic-fp-sm20.ll/1.1.1.1/Thu Nov 28 14:18:10 2013/-kk/
 /arithmetic-int.ll/1.1.1.1/Thu Nov 28 14:18:10 2013/-kk/
-/bug17709.ll/1.1.1.1/Thu Nov 28 14:18:10 2013/-kk/
+/bug17709.ll/1.1.1.2/Tue Jun  3 03:05:22 2014/-kk/
+/call-with-alloca-buffer.ll/1.1.1.1/Fri May 30 18:11:19 2014/-kk/
 /callchain.ll/1.1.1.1/Thu Nov 28 14:18:10 2013/-kk/
 /calling-conv.ll/1.1.1.1/Thu Nov 28 14:18:10 2013/-kk/
 /compare-int.ll/1.1.1.1/Thu Nov 28 14:18:10 2013/-kk/
@@ -36,8 +40,9 @@
 /ldu-reg-plus-offset.ll/1.1.1.1/Thu Nov 28 14:18:10 2013/-kk/
 /lit.local.cfg/1.1.1.1/Thu Nov 28 14:18:10 2013/-kk/
 /load-sext-i1.ll/1.1.1.1/Thu Nov 28 14:18:10 2013/-kk/
-/local-stack-frame.ll/1.1.1.1/Thu Nov 28 14:18:10 2013/-kk/
+/local-stack-frame.ll/1.1.1.2/Tue Jun  3 03:05:22 2014/-kk/
 /module-inline-asm.ll/1.1.1.1/Thu Nov 28 14:18:10 2013/-kk/
+/noduplicate-syncthreads.ll/1.1.1.1/Fri May 30 18:11:19 2014/-kk/
 /nvvm-reflect.ll/1.1.1.1/Thu Nov 28 14:18:10 2013/-kk/
 /param-align.ll/1.1.1.1/Thu Nov 28 14:18:10 2013/-kk/
 /pr13291-i1-store.ll/1.1.1.1/Thu Nov 28 14:18:10 2013/-kk/
@@ -58,6 +63,10 @@
 /sm-version-35.ll/1.1.1.1/Thu Nov 28 14:18:10 2013/-kk/
 /st-addrspace.ll/1.1.1.1/Thu Nov 28 14:18:10 2013/-kk/
 /st-generic.ll/1.1.1.1/Thu Nov 28 14:18:10 2013/-kk/
+/surf-read.ll/1.1.1.1/Fri May 30 18:11:19 2014/-kk/
+/surf-write.ll/1.1.1.1/Fri May 30 18:11:19 2014/-kk/
+/symbol-naming.ll/1.1.1.1/Fri May 30 18:11:19 2014/-kk/
+/tex-read.ll/1.1.1.1/Fri May 30 18:11:19 2014/-kk/
 /tuple-literal.ll/1.1.1.1/Thu Nov 28 14:18:10 2013/-kk/
 /vec-param-load.ll/1.1.1.2/Fri Jan 31 08:45:44 2014/-kk/
 /vec8.ll/1.1.1.1/Thu Nov 28 14:18:10 2013/-kk/

@@ -28,7 +28,7 @@
 /different-type-ivs.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /dominate-assert.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /dont-hoist-simple-loop-constants.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
-/dont_insert_redundant_ops.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/dont_insert_redundant_ops.ll/1.1.1.2/Tue Jun  3 03:04:01 2014/-kk/
 /dont_reduce_bytes.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /dont_reverse.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /exit_compare_live_range.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
@@ -63,5 +63,6 @@
 /use_postinc_value_outside_loop.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /var_stride_used_by_compare.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /variable_stride.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+D/AArch64////
 D/ARM////
 D/X86////

@@ -33,7 +33,7 @@ GENASSYM_CONF=	${AMD64}/amd64/genassym.cf
 ##
 ## (2) compile settings
 ##
-DEFCOPTS=	-O2
+DEFCOPTS=	-O2 -fno-omit-frame-pointer
 CPPFLAGS+=	-Damd64 -Dx86_64
 CFLAGS+=	-mcmodel=kernel
 # -mno-sse implies -mno-sse2 (etc), explicitly disable avx to be extra sure

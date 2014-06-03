@@ -41,6 +41,8 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include "opt_ptm.h"
 
+#define TTY_ALLOW_PRIVATE
+
 #include <sys/param.h>
 #include <sys/systm.h>
 #include <sys/ioctl.h>

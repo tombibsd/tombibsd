@@ -23,6 +23,7 @@ SRCS+=	ARMAsmPrinter.cpp \
 	ARMLoadStoreOptimizer.cpp \
 	ARMMCInstLower.cpp \
 	ARMMachineFunctionInfo.cpp \
+	ARMOptimizeBarriersPass.cpp \
 	ARMRegisterInfo.cpp \
 	ARMSelectionDAGInfo.cpp \
 	ARMSubtarget.cpp \

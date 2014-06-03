@@ -58,3 +58,4 @@ ENTRY(__vfork14)
 err:
 	pushq	%r9
 	jmp	CERROR
+END(__vfork14)

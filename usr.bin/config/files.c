@@ -160,7 +160,9 @@ addfile(const char *path, struct condexpr *optx, int flags, const char *rule)
 	TAILQ_INSERT_TAIL(&allfiles, fi, fi_next);
 	return;
  bad:
-	condexpr_destroy(optx);
+	if (optx != NULL) {
+		condexpr_destroy(optx);
+	}
 }
 
 void

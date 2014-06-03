@@ -11,6 +11,8 @@ CPPFLAGS.Thread.cpp+=	-I${LLDB_SRCDIR}/source/Plugins/Process/Utility
 SRCS+=	ABI.cpp \
 	CPPLanguageRuntime.cpp \
 	ExecutionContext.cpp \
+	JITLoader.cpp \
+	JITLoaderList.cpp \
 	LanguageRuntime.cpp \
 	Memory.cpp \
 	ObjCLanguageRuntime.cpp \
@@ -18,7 +20,11 @@ SRCS+=	ABI.cpp \
 	PathMappingList.cpp \
 	Platform.cpp \
 	Process.cpp \
+	Queue.cpp \
+	QueueItem.cpp \
+	QueueList.cpp \
 	RegisterContext.cpp \
+	SectionLoadHistory.cpp \
 	SectionLoadList.cpp \
 	StackFrame.cpp \
 	StackFrameList.cpp \

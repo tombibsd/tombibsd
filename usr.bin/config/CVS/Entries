@@ -1,10 +1,10 @@
 /Makefile/1.8/Sun May 13 20:22:45 2007/-kk/
 /config.1/1.15/Mon May 19 16:26:59 2014/-kk/
-/config.5/1.22/Thu Feb 27 08:56:22 2014/-kk/
+/config.5/1.24/Tue Jun  3 03:10:09 2014/-kk/
 /config.samples.5/1.6/Fri Mar 14 04:28:31 2014/-kk/
 /defs.h/1.45/Mon May 19 16:26:59 2014/-kk/
-/files.c/1.11/Sun Mar 11 08:21:53 2012/-kk/
-/gram.y/1.38/Thu Oct 24 10:28:59 2013/-kk/
+/files.c/1.12/Tue Jun  3 03:10:09 2014/-kk/
+/gram.y/1.39/Tue Jun  3 03:10:09 2014/-kk/
 /hash.c/1.8/Mon Mar 12 02:58:55 2012/-kk/
 /lint.c/1.14/Tue Mar 20 20:34:57 2012/-kk/
 /main.c/1.53/Mon May 19 16:26:59 2014/-kk/
@@ -15,7 +15,7 @@
 /mkswap.c/1.7/Tue Jan 20 18:20:48 2009/-kk/
 /pack.c/1.8/Mon Mar  8 10:19:14 2010/-kk/
 /scan.l/1.17/Tue Mar 20 20:34:57 2012/-kk/
-/sem.c/1.42/Thu Oct 24 10:28:59 2013/-kk/
+/sem.c/1.43/Tue Jun  3 03:10:09 2014/-kk/
 /sem.h/1.10/Sun Mar 11 21:16:08 2012/-kk/
 /util.c/1.16/Mon Nov 11 15:21:44 2013/-kk/
 D

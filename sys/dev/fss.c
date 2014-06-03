@@ -1154,7 +1154,7 @@ fss_bs_thread(void *arg)
 				fss_error(sc, "write error on backing store");
 
 			scp->fc_type = FSS_CACHE_FREE;
-			cv_signal(&sc->sc_cache_cv);
+			cv_broadcast(&sc->sc_cache_cv);
 			break;
 		}
 

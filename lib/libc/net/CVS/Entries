@@ -58,7 +58,7 @@
 /nsparser.y/1.12/Tue Mar 20 17:44:18 2012/-kk/
 /protoent.h/1.2/Mon Apr 28 20:23:00 2008/-kk/
 /rcmd.3/1.28/Mon Mar 22 19:30:54 2010/-kk/
-/rcmd.c/1.68/Sat Jul 14 15:06:26 2012/-kk/
+/rcmd.c/1.69/Tue Jun  3 03:08:57 2014/-kk/
 /recv.c/1.10/Tue Mar 20 17:44:18 2012/-kk/
 /resolver.3/1.28/Mon Nov 18 05:31:22 2013/-kk/
 /rthdr.c/1.18/Tue Mar 13 21:13:42 2012/-kk/

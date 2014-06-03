@@ -88,12 +88,11 @@ struct mipsco_intrhand intrtab[MAX_INTR_COOKIES];
 void
 cpu_configure(void)
 {
-  	int s;
 
 	/*
 	 * Kick off autoconfiguration
 	 */
-	s = splhigh();
+	(void) splhigh();
 	if (config_rootfound("mainbus", NULL) == NULL)
 		panic("no mainbus found");
 	initcpu();

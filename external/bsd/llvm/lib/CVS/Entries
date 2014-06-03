@@ -1,5 +1,5 @@
 /Makefile.inc/1.3/Thu Oct 24 10:28:46 2013/-kk/
-/Makefile/1.39/Thu Feb 27 08:52:27 2014/-kk/
+/Makefile/1.40/Tue Jun  3 03:04:03 2014/-kk/
 D/libLLVMAArch64AsmParser////
 D/libLLVMAArch64AsmPrinter////
 D/libLLVMAArch64CodeGen////
@@ -53,6 +53,7 @@ D/libLLVMPowerPCCodeGen////
 D/libLLVMPowerPCDisassembler////
 D/libLLVMPowerPCMCTargetDesc////
 D/libLLVMPowerPCTargetInfo////
+D/libLLVMProfileData////
 D/libLLVMRuntimeDyld////
 D/libLLVMScalarOpts////
 D/libLLVMSelectionDAG////
@@ -139,6 +140,7 @@ D/liblldbHostNetBSD////
 D/liblldbInterpreter////
 D/liblldbLog////
 D/liblldbPluginABIMacOSX_arm////
+D/liblldbPluginABIMacOSX_arm64////
 D/liblldbPluginABIMacOSX_i386////
 D/liblldbPluginABISysV_x86_64////
 D/liblldbPluginAppleObjCRuntime////
@@ -148,9 +150,12 @@ D/liblldbPluginDynamicLoaderMacOSXDYLD////
 D/liblldbPluginDynamicLoaderPosixDYLD////
 D/liblldbPluginDynamicLoaderStatic////
 D/liblldbPluginInstructionARM////
+D/liblldbPluginInstructionARM64////
+D/liblldbPluginJITLoaderGDB////
 D/liblldbPluginObjectContainerBSDArchive////
 D/liblldbPluginObjectContainerMachOArchive////
 D/liblldbPluginObjectFileELF////
+D/liblldbPluginObjectFileJIT////
 D/liblldbPluginObjectFileMachO////
 D/liblldbPluginObjectFilePECOFF////
 D/liblldbPluginPlatformGDB////

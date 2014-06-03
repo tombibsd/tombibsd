@@ -1394,9 +1394,11 @@ dcmsetischeme(int brd, int flags)
 		for (i = 0; i < NDCMPORT; i++) {
 			tp = sc->sc_tty[i];
 
-			if ((c = tp->t_cc[VSTART]) != _POSIX_VDISABLE)
+			c = tty_getctrlchar(tp, VSTART);
+			if (c != _POSIX_VDISABLE)
 				dcm->dcm_bmap[c].data_data |= (1 << i);
-			if ((c = tp->t_cc[VSTOP]) != _POSIX_VDISABLE)
+			c = tty_getctrlchar(tp, VSTOP);
+			if (c != _POSIX_VDISABLE)
 				dcm->dcm_bmap[c].data_data |= (1 << i);
 		}
 	}

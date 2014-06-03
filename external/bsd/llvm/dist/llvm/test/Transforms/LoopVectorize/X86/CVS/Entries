@@ -1,13 +1,16 @@
-/already-vectorized.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/already-vectorized.ll/1.1.1.2/Tue Jun  3 03:04:01 2014/-kk/
 /avx1.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /constant-vector-operand.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /conversion-cost.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /cost-model.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/fp32_to_uint32-cost-model.ll/1.1.1.1/Fri May 30 18:11:27 2014/-kk/
+/fp64_to_uint32-cost-model.ll/1.1.1.1/Fri May 30 18:11:27 2014/-kk/
+/fp_to_sint8-cost-model.ll/1.1.1.1/Fri May 30 18:11:27 2014/-kk/
 /gather-cost.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /gcc-examples.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /illegal-parallel-loop-uniform-write.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /lit.local.cfg/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
-/metadata-enable.ll/1.1.1.1/Sun Jan  5 16:16:58 2014/-kk/
+/metadata-enable.ll/1.1.1.2/Tue Jun  3 03:04:01 2014/-kk/
 /min-trip-count-switch.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /no-vector.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /parallel-loops-after-reg2mem.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
@@ -17,10 +20,14 @@
 /small-size.ll/1.1.1.2/Thu Feb 27 08:52:26 2014/-kk/
 /struct-store.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /tripcount.ll/1.1.1.1/Fri Dec  6 23:19:07 2013/-kk/
+/uint64_to_fp64-cost-model.ll/1.1.1.1/Fri May 30 18:11:27 2014/-kk/
 /unroll-pm.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /unroll-small-loops.ll/1.1.1.2/Thu Feb 27 08:52:26 2014/-kk/
 /unroll_selection.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/vect.omp.force.ll/1.1.1.1/Fri May 30 18:11:27 2014/-kk/
+/vect.omp.force.small-tc.ll/1.1.1.1/Fri May 30 18:11:27 2014/-kk/
 /vector-scalar-select-cost.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /vector_ptr_load_store.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/vectorization-remarks.ll/1.1.1.1/Fri May 30 18:11:27 2014/-kk/
 /x86_fp80-vector-store.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 D

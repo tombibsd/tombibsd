@@ -58,3 +58,8 @@ ENTRY(llabs)
 	adcl	$0,%edx
 	negl	%edx
 1:	ret
+#ifdef WEAK_ALIAS
+END(_llabs)
+#else
+END(llabs)
+#endif

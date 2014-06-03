@@ -24,3 +24,8 @@ ENTRY(ldiv)
 	cqto
 	idivq   %rsi
 	ret
+#ifdef WEAK_ALIAS
+END(_ldiv)
+#else
+END(ldiv)
+#endif

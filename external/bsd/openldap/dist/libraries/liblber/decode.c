@@ -1,10 +1,10 @@
 /*	$NetBSD$	*/
 
 /* decode.c - ber input decoding routines */
-/* OpenLDAP: pkg/ldap/libraries/liblber/decode.c,v 1.105.2.11 2010/04/13 20:22:53 kurt Exp */
+/* $OpenLDAP$ */
 /* This work is part of OpenLDAP Software <http://www.openldap.org/>.
  *
- * Copyright 1998-2010 The OpenLDAP Foundation.
+ * Copyright 1998-2014 The OpenLDAP Foundation.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without

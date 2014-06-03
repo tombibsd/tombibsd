@@ -1,9 +1,9 @@
 /*	$NetBSD$	*/
 
-/* OpenLDAP: pkg/ldap/libraries/liblutil/hash.c,v 1.8.2.5 2010/04/13 20:23:06 kurt Exp */
+/* $OpenLDAP$ */
 /* This work is part of OpenLDAP Software <http://www.openldap.org/>.
  *
- * Copyright 2000-2010 The OpenLDAP Foundation.
+ * Copyright 2000-2014 The OpenLDAP Foundation.
  * Portions Copyright 2000-2003 Kurt D. Zeilenga.
  * All rights reserved.
  *

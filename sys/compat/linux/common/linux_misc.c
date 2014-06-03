@@ -1380,34 +1380,6 @@ linux_sys_getpriority(struct lwp *l, const struct linux_sys_getpriority_args *ua
 }
 
 int
-linux_sys_utimes(struct lwp *l, const struct linux_sys_utimes_args *uap, register_t *retval)
-{
-	/* {
-		syscallarg(const char *) path;
-		syscallarg(const struct linux_timeval) *times;
-	} */
-	struct linux_timeval ltv[2];
-	struct timeval tv[2];
-	struct timeval *tptr = NULL;
-	int error;
-
-	if (SCARG(uap, times)) {
-		if ((error = copyin(SCARG(uap, times), &ltv, sizeof(ltv))))
-			return error;
-
-		tv[0].tv_sec = ltv[0].tv_sec;
-		tv[0].tv_usec = ltv[0].tv_usec;
-		tv[1].tv_sec = ltv[1].tv_sec;
-		tv[1].tv_usec = ltv[1].tv_usec;
-
-		tptr = tv;
-	}
-
-	return do_sys_utimes(l, NULL, SCARG(uap, path), FOLLOW,
-	    tptr, UIO_SYSSPACE);
-}
-
-int
 linux_do_sys_utimensat(struct lwp *l, int fd, const char *path, struct timespec *tsp, int flags, register_t *retval)
 {
 	int follow, error;

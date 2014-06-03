@@ -3,10 +3,10 @@
 /compat.c/1.10/Thu Oct 24 10:28:58 2013/-kk/
 /devnodes.c/1.9/Fri Apr 11 02:03:53 2014/-kk/
 /devnull.c/1.5/Tue Mar 25 02:35:50 2014/-kk/
-/rump_vfs.c/1.78/Tue May  6 05:50:21 2014/-kk/
+/rump_vfs.c/1.80/Tue Jun  3 03:10:02 2014/-kk/
 /rump_vfs_private.h/1.17/Thu Oct 24 10:28:58 2013/-kk/
 /rumpblk.c/1.55/Tue Mar 25 02:35:50 2014/-kk/
-/rumpfs.c/1.127/Tue May  6 05:50:22 2014/-kk/
+/rumpfs.c/1.128/Tue Jun  3 03:10:02 2014/-kk/
 /rumpvfs.ifspec/1.9/Tue May  6 05:50:23 2014/-kk/
 /rumpvfs_if_priv.h/1.12/Tue May  6 05:50:24 2014/-kk/
 /rumpvfs_if_wrappers.c/1.12/Tue May  6 05:50:24 2014/-kk/

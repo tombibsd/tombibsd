@@ -604,6 +604,16 @@ port	vax
 		internal compiler error: in change_address_1, at emit-rtl.c:2019
 	kcah
 
+	hack	gcc -fno-guess-branch-probability
+	cdate	28 May 2014
+	mdate	28 May 2014
+	who	abs
+	file	lib/libcurses/Makefile : 1.69
+	descr	sysinst crashes under vax gcc 4.1 after selecting
+                partition sizes due to curses bug
+        pr	lib/48827
+	kcah
+
 port	arm
 
 	hack	gcc-unsigned-compare
@@ -973,3 +983,12 @@ file	src/external/lgpl3/gmp/lib/libgmp/arch/mips64eb/Makefile.inc: 1.6
 descr	workaround for n32 gcc doing unaligned 64bit accesses when optimizing
 pr	48696
 kcah
+
+port	vax
+hack	compile boot with -O1
+cdate	Sat May 24 09:40:58 CEST 2014
+who	martin
+file	src/sys/arch/vax/boot/boot/Makefile: 1.41
+descr	/boot does not work when compiled with -O2 and gcc 4.8
+kcah
+

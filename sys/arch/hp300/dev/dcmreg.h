@@ -131,7 +131,7 @@ struct	dcmpreg {
 	u_char		pad3[7];	/* +12 */
 	vu_char	t_tail;			/* +19 */
 };
-#define	dcm_preg(d, p)	((struct dcmpreg *)((u_int)(d)+0x8e00+(p)*2))
+#define	dcm_preg(d, p)	((struct dcmpreg *)((uintptr_t)(d)+0x8e00+(p)*2))
 
 /* interface reset/id */
 #define DCMCON          0x80	/* REMOTE/LOCAL switch, read */

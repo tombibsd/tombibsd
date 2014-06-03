@@ -22,3 +22,4 @@ ENTRY(ldiv)
 	movl	%ebx,%eax
 	popl	%ebx
 	ret	$4
+END(ldiv)

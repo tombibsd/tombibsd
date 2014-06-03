@@ -2007,6 +2007,7 @@ key_spdadd(struct socket *so, struct mbuf *m,
 	xpl->sadb_x_policy_id = newsp->id;
 
 	m_freem(m);
+	key_update_used();
 	return key_sendup_mbuf(so, n, KEY_SENDUP_ALL);
     }
 }
@@ -2139,6 +2140,7 @@ key_spddelete(struct socket *so, struct mbuf *m,
 	newmsg->sadb_msg_len = PFKEY_UNIT64(n->m_pkthdr.len);
 
 	m_freem(m);
+	key_update_used();
 	return key_sendup_mbuf(so, n, KEY_SENDUP_ALL);
     }
 }
@@ -8080,6 +8082,36 @@ key_setspddump(int *errorp, pid_t pid)
 
 	*errorp = 0;
 	return (m);
+}
+
+int
+key_get_used(void) {
+	return !LIST_EMPTY(&sptree[IPSEC_DIR_INBOUND]) ||
+	    !LIST_EMPTY(&sptree[IPSEC_DIR_OUTBOUND]);
+}
+
+void
+key_update_used(void)
+{
+	switch (ipsec_enabled) {
+	default:
+	case 0:
+#ifdef notyet
+		/* XXX: racy */
+		ipsec_used = 0;
+#endif
+		break;
+	case 1:
+#ifndef notyet
+		/* XXX: racy */
+		if (!ipsec_used)
+#endif
+		ipsec_used = key_get_used();
+		break;
+	case 2:
+		ipsec_used = 1;
+		break;
+	}
 }
 
 static int

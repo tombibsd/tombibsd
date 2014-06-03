@@ -1,3 +1,8 @@
-/bug_11395.ll/1.1.1.1/Thu Nov 28 14:18:09 2013/-kk/
+/asm_attr.ll/1.1.1.1/Fri May 30 18:11:24 2014/-kk/
+/asm_mov.ll/1.1.1.1/Fri May 30 18:11:24 2014/-kk/
+/asm_mov.s/1.1.1.1/Fri May 30 18:11:24 2014/-kk/
+/asm_mov_no_instrumentation.s/1.1.1.1/Fri May 30 18:11:24 2014/-kk/
+/asm_swap_intel.s/1.1.1.1/Fri May 30 18:11:24 2014/-kk/
+/bug_11395.ll/1.1.1.2/Tue Jun  3 03:03:57 2014/-kk/
 /lit.local.cfg/1.1.1.1/Thu Nov 28 14:18:09 2013/-kk/
 D

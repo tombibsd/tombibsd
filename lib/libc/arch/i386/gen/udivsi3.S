@@ -44,3 +44,4 @@ ENTRY(__udivsi3)
 	xorl %edx,%edx
 	divl 8(%esp)
 	ret
+END(__udivsi3)

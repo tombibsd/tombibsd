@@ -130,11 +130,6 @@ int  (*rump_vfs_makeonedevnode)(dev_t, const char *,
 int  (*rump_vfs_makedevnodes)(dev_t, const char *, char,
 			      devmajor_t, devminor_t, int) = (void *)nullop;
 
-int rump__unavailable(void);
-int rump__unavailable() {return EOPNOTSUPP;}
-
-__weak_alias(biodone,rump__unavailable);
-
 rump_proc_vfs_init_fn rump_proc_vfs_init = (void *)nullop;
 rump_proc_vfs_release_fn rump_proc_vfs_release = (void *)nullop;
 

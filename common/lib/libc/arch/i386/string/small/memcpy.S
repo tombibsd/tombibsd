@@ -68,4 +68,9 @@ __memmove_start:
 	popl	%edi
 	popl	%esi
 	ret
+END(memcpy)
+END(memmove)
 #  endif /* MEMMOVE */
+#  ifdef BCOPY
+END(bcopy)
+#  endif

@@ -50,3 +50,10 @@ _PROF_PROLOGUE
 	movzwl	4(%esp),%eax
 	xchgb	%al, %ah
 	ret
+#if defined(_KERNEL) || defined(_STANDALONE)
+END(_C_LABEL(bswap16))
+#else /* defined(_KERNEL) || defined(_STANDALONE) */
+END(_C_LABEL(__bswap16))
+#endif /* defined(_KERNEL) || defined(_STANDALONE) */
+END(_C_LABEL(ntohs))
+END(_C_LABEL(htons))

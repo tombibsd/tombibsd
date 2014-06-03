@@ -638,7 +638,8 @@ reflect:
 
 		pfctlinput(PRC_REDIRECT_HOST, sintosa(&icmpsrc));
 #if defined(IPSEC)
-		key_sa_routechange((struct sockaddr *)&icmpsrc);
+		if (ipsec_used)
+			key_sa_routechange((struct sockaddr *)&icmpsrc);
 #endif
 		break;
 

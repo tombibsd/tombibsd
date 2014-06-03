@@ -31,3 +31,8 @@ ENTRY(fpsetmask)
 
 	addl $4,%esp
 	ret
+#ifdef WEAK_ALIAS
+END(_fpsetmask)
+#else
+END(fpsetmask)
+#endif

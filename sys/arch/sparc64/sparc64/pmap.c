@@ -1026,7 +1026,6 @@ pmap_bootstrap(u_long kernelstart, u_long kernelend)
 	BDPRINTF(PDB_BOOT1, ("Inserting mesgbuf into pmap_kernel()\n"));
 	/* it's not safe to call pmap_enter so we need to do this ourselves */
 	va = (vaddr_t)msgbufp;
-	prom_map_phys(phys_msgbuf, msgbufsiz, (vaddr_t)msgbufp, -1);
 	while (msgbufsiz) {
 		data = TSB_DATA(0 /* global */,
 			PGSZ_8K,

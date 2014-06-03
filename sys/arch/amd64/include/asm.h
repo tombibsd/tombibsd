@@ -47,7 +47,7 @@
 #define PIC_GOT(x)	x
 #endif
 
-# define _C_LABEL(x)	x
+#define _C_LABEL(x)	x
 #define	_ASM_LABEL(x)	x
 
 #define CVAROFF(x,y)		(_C_LABEL(x)+y)(%rip)

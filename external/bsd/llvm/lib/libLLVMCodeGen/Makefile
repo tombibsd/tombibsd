@@ -9,6 +9,7 @@ LIB=	LLVMCodeGen
 SRCS+=	AggressiveAntiDepBreaker.cpp \
 	AllocationOrder.cpp \
 	Analysis.cpp \
+	AtomicExpandLoadLinkedPass.cpp \
 	BasicTargetTransformInfo.cpp \
 	BranchFolding.cpp \
 	CalcSpillWeights.cpp \

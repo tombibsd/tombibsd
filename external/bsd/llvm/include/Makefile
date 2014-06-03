@@ -16,6 +16,7 @@ INCS=	__wmmintrin_aes.h \
 	f16cintrin.h \
 	fmaintrin.h \
 	fma4intrin.h \
+	ia32intrin.h \
 	immintrin.h \
 	lzcntintrin.h \
 	mm3dnow.h \
@@ -71,7 +72,7 @@ CLANG_TABLEGEN_OUTPUT.Attr.td= \
 	clang/AST/AttrImpl.inc|-gen-clang-attr-impl \
 	clang/AST/AttrVisitor.inc|-gen-clang-attr-ast-visitor \
 	clang/Basic/AttrList.inc|-gen-clang-attr-list \
-	clang/Lex/AttrSpellings.inc|-gen-clang-attr-spelling-list \
+	clang/Basic/AttrHasAttributeImpl.inc|-gen-clang-attr-has-attribute-impl \
 	clang/Parse/AttrParserStringSwitches.inc|-gen-clang-attr-parser-string-switches \
 	clang/Sema/AttrParsedAttrImpl.inc|-gen-clang-attr-parsed-attr-impl \
 	clang/Sema/AttrParsedAttrKinds.inc|-gen-clang-attr-parsed-attr-kinds \

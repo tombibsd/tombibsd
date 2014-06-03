@@ -146,7 +146,7 @@ npf_config_reload(prop_dictionary_t dict, npf_ruleset_t *rset,
 	if ((onc = npf_config) != NULL) {
 		npf_ruleset_reload(rset, onc->n_rules);
 		npf_tableset_reload(tset, onc->n_tables);
-		npf_ruleset_natreload(nset, onc->n_nat_rules);
+		npf_ruleset_reload(nset, onc->n_nat_rules);
 	}
 
 	/*

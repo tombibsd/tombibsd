@@ -181,7 +181,10 @@ void
 setident(const char *i)
 {
 
-	ident = intern(i);
+	if (i)
+		ident = intern(i);
+	else
+		ident = NULL;
 }
 
 /*

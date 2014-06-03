@@ -16,7 +16,10 @@ maxusers	32
 
 options 	CPU_CORTEXA8
 options 	OMAP_3530
+options 	FPU_VFP
 options 	PMAPCOUNTERS
+options 	ARM_HAS_VBAR
+options 	__HAVE_MM_MD_DIRECT_MAPPED_PHYS
 makeoptions	CPUFLAGS="-mcpu=cortex-a8 -mfpu=neon"
 
 # Architecture options

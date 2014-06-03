@@ -1,10 +1,10 @@
 /*	$NetBSD$	*/
 
 /* Generic socket.h */
-/* OpenLDAP: pkg/ldap/include/ac/socket.h,v 1.67.2.7 2010/04/13 20:22:51 kurt Exp */
+/* $OpenLDAP$ */
 /* This work is part of OpenLDAP Software <http://www.openldap.org/>.
  *
- * Copyright 1998-2010 The OpenLDAP Foundation.
+ * Copyright 1998-2014 The OpenLDAP Foundation.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -64,6 +64,7 @@
 
 #ifdef HAVE_WINSOCK2
 #include <winsock2.h>
+#include <ws2tcpip.h>
 #elif HAVE_WINSOCK
 #include <winsock.h>
 #endif

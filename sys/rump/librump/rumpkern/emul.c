@@ -157,7 +157,7 @@ int
 kpause(const char *wmesg, bool intr, int timeo, kmutex_t *mtx)
 {
 	extern int hz;
-	int rv;
+	int rv __diagused;
 	uint64_t sec, nsec;
 
 	if (mtx)

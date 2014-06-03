@@ -145,7 +145,7 @@ shmif_lockbus(struct shmif_mem *busmem)
 static void
 shmif_unlockbus(struct shmif_mem *busmem)
 {
-	unsigned int old;
+	unsigned int old __diagused;
 
 	membar_exit();
 	old = atomic_swap_32(&busmem->shm_lock, LOCK_UNLOCKED);
@@ -345,7 +345,7 @@ rump_shmif_create(const char *path, int *ifnum)
 static int
 shmif_clone(struct if_clone *ifc, int unit)
 {
-	int rc;
+	int rc __diagused;
 	vmem_addr_t unit2;
 
 	/*

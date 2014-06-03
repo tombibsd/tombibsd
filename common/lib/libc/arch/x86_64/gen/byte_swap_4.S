@@ -16,3 +16,10 @@ _PROF_PROLOGUE
 	movl	%edi,%eax
 	bswapl	%eax
 	ret
+#if defined(_KERNEL) || defined(_STANDALONE)
+END(_C_LABEL(bswap32))
+#else
+END(_C_LABEL(__bswap32))
+#endif
+END(_C_LABEL(ntohl))
+END(_C_LABEL(htonl))

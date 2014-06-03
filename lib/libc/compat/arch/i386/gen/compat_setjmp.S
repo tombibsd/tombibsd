@@ -72,6 +72,7 @@ ENTRY(setjmp)
 	movl	%eax,24(%ecx)
 	xorl	%eax,%eax
 	ret
+END(setjmp)
 
 ENTRY(longjmp)
 	movl	4(%esp),%edx
@@ -99,3 +100,4 @@ ENTRY(longjmp)
 	incl	%eax
 1:	movl	%ecx,0(%esp)
 	ret
+END(longjmp)

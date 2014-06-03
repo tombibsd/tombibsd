@@ -2,7 +2,7 @@
 
 /* This work is part of OpenLDAP Software <http://www.openldap.org/>.
  *
- * Copyright 1998-2010 The OpenLDAP Foundation.
+ * Copyright 1998-2014 The OpenLDAP Foundation.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -15,6 +15,6 @@
  */
 
 static const char copyright[] =
-"Copyright 1998-2010 The OpenLDAP Foundation.  All rights reserved.\n"
+"Copyright 1998-2014 The OpenLDAP Foundation.  All rights reserved.\n"
 "COPYING RESTRICTIONS APPLY.\n";
 

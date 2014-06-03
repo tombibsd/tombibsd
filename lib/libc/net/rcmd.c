@@ -698,7 +698,7 @@ iruserok_sa(const void *raddr, int rlen, int superuser, const char *ruser,
 		uid = geteuid();
 		gid = getegid();
 		(void)setegid(pwd->pw_gid);
-		initgroups(pwd->pw_name, pwd->pw_gid);
+		(void)initgroups(pwd->pw_name, pwd->pw_gid);
 		(void)seteuid(pwd->pw_uid);
 		hostf = fopen(pbuf, "r");
 

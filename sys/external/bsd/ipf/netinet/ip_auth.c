@@ -11,6 +11,9 @@
 # define        KERNEL	1
 # define        _KERNEL	1
 #endif
+#if defined(__NetBSD__)
+#include <sys/cdefs.h>
+#endif
 #include <sys/errno.h>
 #include <sys/types.h>
 #include <sys/param.h>
@@ -128,7 +131,6 @@ extern struct ifqueue   ipintrq;		/* ip packet input queue */
 
 #if !defined(lint)
 #if defined(__NetBSD__)
-#include <sys/cdefs.h>
 __KERNEL_RCSID(0, "$NetBSD$");
 #else
 static const char rcsid[] = "@(#)Id: ip_auth.c,v 1.1.1.2 2012/07/22 13:45:08 darrenr Exp";

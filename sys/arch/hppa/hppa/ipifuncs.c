@@ -166,7 +166,7 @@ xc_send_ipi(struct cpu_info *ci)
 }
 
 void
-cpu_ipi(struct cpu_info *)
+cpu_ipi(struct cpu_info *ci)
 {
 	KASSERT(kpreempt_disabled());
 	KASSERT(curcpu() != ci);

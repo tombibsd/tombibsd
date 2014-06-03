@@ -183,6 +183,7 @@
 ./usr/include/clang-3.5/f16cintrin.h		comp-c-include		llvm
 ./usr/include/clang-3.5/fma4intrin.h		comp-c-include		llvm
 ./usr/include/clang-3.5/fmaintrin.h		comp-c-include		llvm
+./usr/include/clang-3.5/ia32intrin.h		comp-c-include		llvm
 ./usr/include/clang-3.5/immintrin.h		comp-c-include		llvm
 ./usr/include/clang-3.5/lzcntintrin.h		comp-c-include		llvm
 ./usr/include/clang-3.5/mm3dnow.h		comp-c-include		llvm

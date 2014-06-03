@@ -124,9 +124,9 @@
 ./usr/libdata/debug/usr/lib/oabi/libkrb5.so.24.0.debug		 comp-compat-shlib	 compat,pic,kerberos,debug,obsolete
 ./usr/libdata/debug/usr/lib/oabi/libkrb5.so.26.0.debug		 comp-compat-shlib	 compat,pic,kerberos,debug
 ./usr/libdata/debug/usr/lib/oabi/libkvm.so.6.0.debug		comp-sys-debug	debug,compat
-./usr/libdata/debug/usr/lib/oabi/liblber.so.3.2.debug	comp-ldap-debug	ldap,debug,compat
-./usr/libdata/debug/usr/lib/oabi/libldap.so.4.2.debug	comp-ldap-debug	ldap,debug,compat
-./usr/libdata/debug/usr/lib/oabi/libldap_r.so.4.2.debug	comp-ldap-debug	ldap,debug,compat
+./usr/libdata/debug/usr/lib/oabi/liblber.so.3.3.debug	comp-ldap-debug	ldap,debug,compat
+./usr/libdata/debug/usr/lib/oabi/libldap.so.4.3.debug	comp-ldap-debug	ldap,debug,compat
+./usr/libdata/debug/usr/lib/oabi/libldap_r.so.4.3.debug	comp-ldap-debug	ldap,debug,compat
 ./usr/libdata/debug/usr/lib/oabi/liblua.so.1.0.debug		comp-sys-debug	debug,compat
 ./usr/libdata/debug/usr/lib/oabi/liblutok.so.1.0.debug		comp-obsolete	obsolete
 ./usr/libdata/debug/usr/lib/oabi/liblutok.so.2.0.debug		comp-kyua-debug	kyua,debug,compat

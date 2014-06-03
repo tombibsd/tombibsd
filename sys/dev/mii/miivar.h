@@ -39,7 +39,7 @@
 #include <dev/mii/mii_verbose.h>
 
 /*
- * Media Independent Interface datat structure definitions.
+ * Media Independent Interface data structure definitions.
  */
 
 struct ifnet;

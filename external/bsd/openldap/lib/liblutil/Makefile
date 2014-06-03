@@ -13,7 +13,7 @@ CPPFLAGS+=	-I${LDAP_DISTDIR}/libraries/liblutil
 
 SRCS=		base64.c entropy.c sasl.c signal.c hash.c passfile.c \
 		md5.c passwd.c sha1.c getpass.c lockf.c utils.c uuid.c \
-		sockpair.c avl.c tavl.c ldif.c fetch.c meter.c \
+		sockpair.c avl.c tavl.c meter.c \
 		getpeereid.c detach.c
 
 .include <bsd.lib.mk>

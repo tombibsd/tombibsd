@@ -181,19 +181,18 @@ ext2fs_mknod(void *v)
 		ip->i_din.e2fs_din->e2di_rdev = h2fs32(vap->va_rdev);
 	}
 	/*
-	 * Remove inode so that it will be reloaded by VFS_VGET and
+	 * Remove inode so that it will be reloaded by vcache_get and
 	 * checked to see if it is an alias of an existing entry in
 	 * the inode cache.
 	 */
 	(*vpp)->v_type = VNON;
 	VOP_UNLOCK(*vpp);
 	vgone(*vpp);
-	error = VFS_VGET(mp, ino, vpp);
+	error = vcache_get(mp, &ino, sizeof(ino), vpp);
 	if (error != 0) {
 		*vpp = NULL;
 		return (error);
 	}
-	VOP_UNLOCK(*vpp);
 	return (0);
 }
 

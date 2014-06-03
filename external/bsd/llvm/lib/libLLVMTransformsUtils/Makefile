@@ -7,6 +7,7 @@ LIB=	LLVMTransformsUtils
 .PATH: ${LLVM_SRCDIR}/lib/Transforms/Utils
 
 SRCS+=	ASanStackFrameLayout.cpp \
+	AddDiscriminators.cpp \
 	BasicBlockUtils.cpp \
 	BreakCriticalEdges.cpp \
 	BuildLibCalls.cpp \
@@ -15,6 +16,7 @@ SRCS+=	ASanStackFrameLayout.cpp \
 	CloneModule.cpp \
 	CmpInstAnalysis.cpp \
 	CodeExtractor.cpp \
+	CtorUtils.cpp \
 	DemoteRegToStack.cpp \
 	FlattenCFG.cpp \
 	GlobalStatus.cpp \

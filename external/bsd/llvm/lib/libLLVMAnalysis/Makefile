@@ -14,9 +14,11 @@ SRCS+=	AliasAnalysis.cpp \
 	Analysis.cpp \
 	BasicAliasAnalysis.cpp \
 	BlockFrequencyInfo.cpp \
+	BlockFrequencyInfoImpl.cpp \
 	BranchProbabilityInfo.cpp \
 	CFG.cpp \
 	CFGPrinter.cpp \
+	CGSCCPassManager.cpp \
 	CaptureTracking.cpp \
 	CodeMetrics.cpp \
 	ConstantFolding.cpp \

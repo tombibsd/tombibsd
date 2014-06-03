@@ -9,7 +9,7 @@
 /pciide_machdep.c/1.18/Mon Apr  4 20:37:55 2011/-kk/
 /privcmd.c/1.45/Tue Nov 12 02:18:42 2013/-kk/
 /shutdown_xenbus.c/1.7/Tue Sep 20 00:12:24 2011/-kk/
-/xbd_xenbus.c/1.62/Tue Mar 25 02:35:30 2014/-kk/
+/xbd_xenbus.c/1.63/Tue Jun  3 03:09:41 2014/-kk/
 /xbdback_xenbus.c/1.59/Tue Nov 12 02:18:42 2013/-kk/
 /xen_acpi_machdep.c/1.5/Tue Aug 18 16:41:03 2009/-kk/
 /xen_debug.c/1.8/Sun Jul 17 20:54:49 2011/-kk/

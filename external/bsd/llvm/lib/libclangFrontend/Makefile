@@ -33,8 +33,7 @@ SRCS+=	ASTConsumers.cpp \
 	TextDiagnostic.cpp \
 	TextDiagnosticBuffer.cpp \
 	TextDiagnosticPrinter.cpp \
-	VerifyDiagnosticConsumer.cpp \
-	Warnings.cpp
+	VerifyDiagnosticConsumer.cpp
 
 .if defined(HOSTLIB)
 .include <bsd.hostlib.mk>

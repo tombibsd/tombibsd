@@ -154,19 +154,13 @@ nullfs_mount(struct mount *mp, const char *path, void *data, size_t *data_len)
 	nmp->nullm_size = sizeof(struct null_node);
 	nmp->nullm_tag = VT_NULL;
 	nmp->nullm_bypass = layer_bypass;
-	nmp->nullm_alloc = layer_node_alloc;	/* the default alloc is fine */
 	nmp->nullm_vnodeop_p = null_vnodeop_p;
-	mutex_init(&nmp->nullm_hashlock, MUTEX_DEFAULT, IPL_NONE);
-	nmp->nullm_node_hashtbl = hashinit(desiredvnodes, HASH_LIST, true,
-	    &nmp->nullm_node_hash);
 
 	/* Setup a null node for root vnode. */
 	VOP_UNLOCK(lowerrootvp);
 	error = layer_node_create(mp, lowerrootvp, &vp);
 	if (error) {
 		vrele(lowerrootvp);
-		hashdone(nmp->nullm_node_hashtbl, HASH_LIST,
-		    nmp->nullm_node_hash);
 		kmem_free(nmp, sizeof(struct null_mount));
 		return error;
 	}
@@ -205,8 +199,6 @@ nullfs_unmount(struct mount *mp, int mntflags)
 	vgone(null_rootvp);
 
 	/* Finally, destroy the mount point structures. */
-	hashdone(nmp->nullm_node_hashtbl, HASH_LIST, nmp->nullm_node_hash);
-	mutex_destroy(&nmp->nullm_hashlock);
 	kmem_free(mp->mnt_data, sizeof(struct null_mount));
 	mp->mnt_data = NULL;
 	return 0;
@@ -229,6 +221,7 @@ struct vfsops nullfs_vfsops = {
 	.vfs_quotactl = layerfs_quotactl,
 	.vfs_statvfs = layerfs_statvfs,
 	.vfs_sync = layerfs_sync,
+	.vfs_loadvnode = layerfs_loadvnode,
 	.vfs_vget = layerfs_vget,
 	.vfs_fhtovp = layerfs_fhtovp,
 	.vfs_vptofh = layerfs_vptofh,

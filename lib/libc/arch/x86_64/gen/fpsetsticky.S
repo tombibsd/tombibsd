@@ -43,3 +43,8 @@ ENTRY(fpsetsticky)
 	ldmxcsr	-32(%rsp)
 	fldenv	-28(%rsp)
 	ret
+#ifdef WEAK_ALIAS
+END(_fpsetsticky)
+#else
+END(fpsetsticky)
+#endif

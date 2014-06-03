@@ -803,7 +803,12 @@ create_syspkg_tgz()
 			/^@/		{next}
 			/^\.\//		{print $0; next}
 			/./		{print "./" $0; next}' \
-			<"${PLIST}" >"${spec1}"
+			<"${PLIST}" |
+		# Escape some characters to match the new mtree(8) format.
+		# C.f. usr.sbin/mtree/spec.c:vispath()
+		# XXX escape only '[' for now
+		${SED} -e 's,\[,\\133,g' \
+		>"${spec1}"
 
 		# If metalog was specified, attributes from metalog override
 		# attributes in the file system.  We also fake up an

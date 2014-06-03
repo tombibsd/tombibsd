@@ -510,6 +510,13 @@ puffs_vfsop_statvfs(struct mount *mp, struct statvfs *sbp)
 	return error;
 }
 
+static bool
+pageflush_selector(void *cl, struct vnode *vp)
+{
+	return vp->v_type == VREG &&
+	    !(LIST_EMPTY(&vp->v_dirtyblkhd) && UVM_OBJ_IS_CLEAN(&vp->v_uobj));
+}
+
 static int
 pageflush(struct mount *mp, kauth_cred_t cred, int waitfor)
 {
@@ -528,7 +535,9 @@ pageflush(struct mount *mp, kauth_cred_t cred, int waitfor)
 	 * all the nodes it knows to exist.
 	 */
 	vfs_vnode_iterator_init(mp, &marker);
-	while (vfs_vnode_iterator_next(marker, &vp)) {
+	while ((vp = vfs_vnode_iterator_next(marker, pageflush_selector,
+	    NULL)))
+	{
 		/*
 		 * Here we try to get a reference to the vnode and to
 		 * lock it.  This is mostly cargo-culted, but I will
@@ -550,11 +559,6 @@ pageflush(struct mount *mp, kauth_cred_t cred, int waitfor)
 			continue;
 		}
 		pn = VPTOPP(vp);
-		if (vp->v_type != VREG || UVM_OBJ_IS_CLEAN(&vp->v_uobj)) {
-			vput(vp);
-			continue;
-		}
-
 		/* hmm.. is the FAF thing entirely sensible? */
 		if (waitfor == MNT_LAZY) {
 			mutex_enter(vp->v_interlock);

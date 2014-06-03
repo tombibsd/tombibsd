@@ -212,7 +212,8 @@ rip_input(struct mbuf *m, ...)
 			;
 #if defined(IPSEC)
 		/* check AH/ESP integrity. */
-		else if (ipsec4_in_reject_so(m, last->inp_socket)) {
+		else if (ipsec_used &&
+		    ipsec4_in_reject_so(m, last->inp_socket)) {
 			IPSEC_STATINC(IPSEC_STAT_IN_POLVIO);
 			/* do not inject data to pcb */
 		}
@@ -226,7 +227,8 @@ rip_input(struct mbuf *m, ...)
 	}
 #if defined(IPSEC)
 	/* check AH/ESP integrity. */
-	if (last != NULL && ipsec4_in_reject_so(m, last->inp_socket)) {
+	if (ipsec_used && last != NULL
+	    && ipsec4_in_reject_so(m, last->inp_socket)) {
 		m_freem(m);
 		IPSEC_STATINC(IPSEC_STAT_IN_POLVIO);
 		IP_STATDEC(IP_STAT_DELIVERED);
@@ -381,8 +383,13 @@ rip_output(struct mbuf *m, ...)
 		flags |= IP_RAWOUTPUT;
 		IP_STATINC(IP_STAT_RAWOUT);
 	}
-	return (ip_output(m, opts, &inp->inp_route, flags, inp->inp_moptions,
-	     inp->inp_socket, &inp->inp_errormtu));
+
+	/*
+	 * IP output.  Note: if IP_RETURNMTU flag is set, the MTU size
+	 * will be stored in inp_errormtu.
+	 */
+	return ip_output(m, opts, &inp->inp_route, flags, inp->inp_moptions,
+	     inp->inp_socket);
 }
 
 /*

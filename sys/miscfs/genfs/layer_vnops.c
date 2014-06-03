@@ -694,11 +694,9 @@ layer_reclaim(void *v)
 		 */
 		lmp->layerm_rootvp = NULL;
 	}
+	vcache_remove(vp->v_mount, &lowervp, sizeof(lowervp));
 	/* After this assignment, this node will not be re-used. */
 	xp->layer_lowervp = NULL;
-	mutex_enter(&lmp->layerm_hashlock);
-	LIST_REMOVE(xp, layer_hash);
-	mutex_exit(&lmp->layerm_hashlock);
 	kmem_free(vp->v_data, lmp->layerm_size);
 	vp->v_data = NULL;
 	vrele(lowervp);

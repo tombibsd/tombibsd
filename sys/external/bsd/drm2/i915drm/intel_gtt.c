@@ -59,9 +59,6 @@ void
 intel_gtt_chipset_flush(void)
 {
 
-	/*
-	 * XXX If the Linux code is any indication, this is not
-	 * sufficient...but it'll probably do for now.
-	 */
-	agp_flush_cache();
+	KASSERT(agp_i810_sc != NULL);
+	agp_i810_chipset_flush(agp_i810_sc->as_chipc);
 }

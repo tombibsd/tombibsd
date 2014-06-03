@@ -1,8 +1,8 @@
 /*	$NetBSD$	*/
 
-// OpenLDAP: pkg/ldap/contrib/ldapc++/src/LDAPObjClass.h,v 1.3.6.3 2008/09/02 23:58:15 quanah Exp
+// $OpenLDAP$
 /*
- * Copyright 2003, OpenLDAP Foundation, All Rights Reserved.
+ * Copyright 2003-2014 The OpenLDAP Foundation, All Rights Reserved.
  * COPYING RESTRICTIONS APPLY, see COPYRIGHT file
  */
 

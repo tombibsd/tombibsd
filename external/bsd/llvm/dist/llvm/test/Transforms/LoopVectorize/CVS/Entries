@@ -10,8 +10,8 @@
 /dbg.value.ll/1.1.1.2/Tue Jan 14 16:02:17 2014/-kk/
 /debugloc.ll/1.1.1.2/Tue Jan 14 16:02:17 2014/-kk/
 /ee-crash.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
-/flags.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
-/float-reduction.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/flags.ll/1.1.1.2/Tue Jun  3 03:04:01 2014/-kk/
+/float-reduction.ll/1.1.1.2/Tue Jun  3 03:04:01 2014/-kk/
 /funcall.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /gcc-examples.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /global_alias.ll/1.1.1.2/Thu Feb 27 08:52:26 2014/-kk/
@@ -24,10 +24,10 @@
 /if-conversion.ll/1.1.1.2/Tue Jan 14 16:02:17 2014/-kk/
 /if-pred-stores.ll/1.1.1.1/Fri Feb 14 20:12:50 2014/-kk/
 /increment.ll/1.1.1.2/Tue Jan 14 16:02:17 2014/-kk/
-/induction.ll/1.1.1.2/Fri Jan 31 08:46:01 2014/-kk/
+/induction.ll/1.1.1.3/Tue Jun  3 03:04:01 2014/-kk/
 /induction_plus.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /infiniteloop.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
-/intrinsic.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/intrinsic.ll/1.1.1.2/Tue Jun  3 03:04:01 2014/-kk/
 /lcssa-crash.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /lifetime.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /memdep.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
@@ -51,7 +51,7 @@
 /reverse_iter.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /runtime-check-address-space.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /runtime-check-readonly-address-space.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
-/runtime-check-readonly.ll/1.1.1.2/Fri Jan 31 08:46:01 2014/-kk/
+/runtime-check-readonly.ll/1.1.1.3/Tue Jun  3 03:04:01 2014/-kk/
 /runtime-check.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /runtime-limit.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /safegep.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
@@ -61,14 +61,18 @@
 /simple-unroll.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /small-loop.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /start-non-zero.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
-/store-shuffle-bug.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/store-shuffle-bug.ll/1.1.1.2/Tue Jun  3 03:04:01 2014/-kk/
 /struct_access.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /undef-inst-bug.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /unroll_novec.ll/1.1.1.2/Thu Feb 27 08:52:26 2014/-kk/
 /value-ptr-bug.ll/1.1.1.2/Thu Feb 27 08:52:26 2014/-kk/
+/vect.omp.persistence.ll/1.1.1.1/Fri May 30 18:11:27 2014/-kk/
+/vect.stats.ll/1.1.1.1/Fri May 30 18:11:27 2014/-kk/
 /vectorize-once.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /version-mem-access.ll/1.1.1.1/Wed Jan 15 21:24:16 2014/-kk/
 /write-only.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+D/AArch64////
 D/ARM////
+D/PowerPC////
 D/X86////
 D/XCore////

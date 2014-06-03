@@ -17,7 +17,8 @@ SRCS+=	X86AsmBackend.cpp \
 	X86MachORelocationInfo.cpp \
 	X86MachObjectWriter.cpp \
 	X86ELFRelocationInfo.cpp \
-	X86WinCOFFObjectWriter.cpp
+	X86WinCOFFObjectWriter.cpp \
+	X86WinCOFFStreamer.cpp
 
 .if defined(HOSTLIB)
 .include <bsd.hostlib.mk>

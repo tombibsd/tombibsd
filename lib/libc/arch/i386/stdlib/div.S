@@ -22,3 +22,4 @@ ENTRY(div)
 	movl	%ebx,%eax
 	popl	%ebx
 	ret	$4
+END(div)

@@ -588,7 +588,7 @@ ext2fs_reload(struct mount *mp, kauth_cred_t cred, struct lwp *l)
 	}
 
 	vfs_vnode_iterator_init(mp, &marker);
-	while (vfs_vnode_iterator_next(marker, &vp)) {
+	while ((vp = vfs_vnode_iterator_next(marker, NULL, NULL))) {
 		/*
 		 * Step 4: invalidate all inactive vnodes.
 		 */
@@ -862,6 +862,26 @@ ext2fs_statvfs(struct mount *mp, struct statvfs *sbp)
 	return (0);
 }
 
+static bool
+ext2fs_sync_selector(void *cl, struct vnode *vp)
+{
+	struct inode *ip;
+
+	ip = VTOI(vp);
+	/*
+	 * Skip the vnode/inode if inaccessible.
+	 */
+	if (ip == NULL || vp->v_type == VNON)
+		return false;
+
+	if (((ip->i_flag &
+	      (IN_CHANGE | IN_UPDATE | IN_MODIFIED)) == 0 &&
+	     LIST_EMPTY(&vp->v_dirtyblkhd) &&
+	     UVM_OBJ_IS_CLEAN(&vp->v_uobj)))
+		return false;
+	return true;
+}
+
 /*
  * Go through the disk queues to initiate sandbagged IO;
  * go through the inodes to write those that have been modified;
@@ -873,7 +893,6 @@ int
 ext2fs_sync(struct mount *mp, int waitfor, kauth_cred_t cred)
 {
 	struct vnode *vp;
-	struct inode *ip;
 	struct ufsmount *ump = VFSTOUFS(mp);
 	struct m_ext2fs *fs;
 	struct vnode_iterator *marker;
@@ -889,26 +908,12 @@ ext2fs_sync(struct mount *mp, int waitfor, kauth_cred_t cred)
 	 * Write back each (modified) inode.
 	 */
 	vfs_vnode_iterator_init(mp, &marker);
-	while (vfs_vnode_iterator_next(marker, &vp)) {
+	while ((vp = vfs_vnode_iterator_next(marker, ext2fs_sync_selector,
+	    NULL)))
+	{
 		error = vn_lock(vp, LK_EXCLUSIVE);
 		if (error) {
 			vrele(vp);
-			continue;
-		}
-		ip = VTOI(vp);
-		/*
-		 * Skip the vnode/inode if inaccessible.
-		 */
-		if (ip == NULL || vp->v_type == VNON) {
-			vput(vp);
-			continue;
-		}
-
-		if (((ip->i_flag &
-		      (IN_CHANGE | IN_UPDATE | IN_MODIFIED)) == 0 &&
-		     LIST_EMPTY(&vp->v_dirtyblkhd) &&
-		     UVM_OBJ_IS_CLEAN(&vp->v_uobj))) {
-			vput(vp);
 			continue;
 		}
 		if (vp->v_type == VREG && waitfor == MNT_LAZY)

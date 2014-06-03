@@ -184,6 +184,7 @@ COMPATNAME(route_attach)(struct socket *so, int proto)
 
 	KASSERT(sotorawcb(so) == NULL);
 	rp = kmem_zalloc(sizeof(*rp), KM_SLEEP);
+	rp->rcb_len = sizeof(*rp);
 	so->so_pcb = rp;
 
 	s = splsoftnet();

@@ -14,7 +14,8 @@ SRCS=	llvm-readobj.cpp \
 	Error.cpp \
 	MachODumper.cpp \
 	ObjDumper.cpp \
-	StreamWriter.cpp
+	StreamWriter.cpp \
+	Win64EHDumper.cpp
 
 LLVM_LIBS+= \
 	AArch64TargetInfo \

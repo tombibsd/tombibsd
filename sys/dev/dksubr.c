@@ -224,35 +224,9 @@ dk_strategy(struct dk_intf *di, struct dk_softc *dksc, struct buf *bp)
 	 */
 	s = splbio();
 	bufq_put(dksc->sc_bufq, bp);
-	dk_start(di, dksc);
+	di->di_diskstart(dksc);
 	splx(s);
 	return;
-}
-
-void
-dk_start(struct dk_intf *di, struct dk_softc *dksc)
-{
-	struct	buf *bp;
-
-	DPRINTF_FOLLOW(("dk_start(%s, %p)\n", di->di_dkname, dksc));
-
-	/* Process the work queue */
-	while ((bp = bufq_get(dksc->sc_bufq)) != NULL) {
-		if (di->di_diskstart(dksc, bp) != 0) {
-			bufq_put(dksc->sc_bufq, bp);
-			break;
-		}
-	}
-}
-
-void
-dk_iodone(struct dk_intf *di, struct dk_softc *dksc)
-{
-
-	DPRINTF_FOLLOW(("dk_iodone(%s, %p)\n", di->di_dkname, dksc));
-
-	/* We kick the queue in case we are able to get more work done */
-	dk_start(di, dksc);
 }
 
 int

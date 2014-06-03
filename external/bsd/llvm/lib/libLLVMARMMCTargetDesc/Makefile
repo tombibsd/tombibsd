@@ -19,7 +19,9 @@ SRCS+=	ARMAsmBackend.cpp \
 	ARMTargetStreamer.cpp \
 	ARMMachORelocationInfo.cpp \
 	ARMMachObjectWriter.cpp \
-	ARMUnwindOpAsm.cpp
+	ARMUnwindOpAsm.cpp \
+	ARMWinCOFFObjectWriter.cpp \
+	ARMWinCOFFStreamer.cpp
 
 .if defined(HOSTLIB)
 .include <bsd.hostlib.mk>

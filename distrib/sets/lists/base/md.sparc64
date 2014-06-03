@@ -176,11 +176,11 @@
 ./usr/lib/sparc/libkvm.so.6			base-compat-shlib	compat,pic
 ./usr/lib/sparc/libkvm.so.6.0			base-compat-shlib	compat,pic
 ./usr/lib/sparc/liblber.so.3			base-compat-shlib	compat,pic,ldap
-./usr/lib/sparc/liblber.so.3.2			base-compat-shlib	compat,pic,ldap
+./usr/lib/sparc/liblber.so.3.3			base-compat-shlib	compat,pic,ldap
 ./usr/lib/sparc/libldap.so.4			base-compat-shlib	compat,pic,ldap
-./usr/lib/sparc/libldap.so.4.2			base-compat-shlib	compat,pic,ldap
+./usr/lib/sparc/libldap.so.4.3			base-compat-shlib	compat,pic,ldap
 ./usr/lib/sparc/libldap_r.so.4			base-compat-shlib	compat,pic,ldap
-./usr/lib/sparc/libldap_r.so.4.2		base-compat-shlib	compat,pic,ldap
+./usr/lib/sparc/libldap_r.so.4.3		base-compat-shlib	compat,pic,ldap
 ./usr/lib/sparc/liblua.so			base-compat-shlib	compat,pic
 ./usr/lib/sparc/liblua.so.1			base-compat-shlib	compat,pic
 ./usr/lib/sparc/liblua.so.1.0			base-compat-shlib	compat,pic

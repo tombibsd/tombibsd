@@ -1,10 +1,10 @@
 /*	$NetBSD$	*/
 
 /* base64.c -- routines to encode/decode base64 data */
-/* OpenLDAP: pkg/ldap/libraries/liblutil/base64.c,v 1.15.2.5 2010/04/13 20:23:05 kurt Exp */
+/* $OpenLDAP$ */
 /* This work is part of OpenLDAP Software <http://www.openldap.org/>.
  *
- * Copyright 1998-2010 The OpenLDAP Foundation.
+ * Copyright 1998-2014 The OpenLDAP Foundation.
  * Portions Copyright 1998-2003 Kurt D. Zeilenga.
  * Portions Copyright 1995 IBM Corporation.
  * All rights reserved.

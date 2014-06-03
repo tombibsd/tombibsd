@@ -44,3 +44,4 @@ ENTRY(__fixdfsi)
 	fistpl	4(%esp)
 	movl	4(%esp),%eax
 	ret
+END(__fixdfsi)

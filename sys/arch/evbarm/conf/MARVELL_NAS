@@ -142,7 +142,7 @@ mainbus0 at root
 # The boot cpu
 cpu0	at mainbus?
 
-# Mervell MV88Fxx81 Orion System-on-Chip
+# Marvell MV88Fxx81 Orion System-on-Chip
 mvsoc0	at mainbus?
 
 # On-chip PCI Express Interface

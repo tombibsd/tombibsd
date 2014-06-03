@@ -997,6 +997,9 @@ intel_cpu_cacheinfo(struct cpu_info *ci)
 				    desc);
 				if (cai != NULL)
 					ci->ci_cinfo[cai->cai_index] = *cai;
+				else if (verbose)
+					printf("Unknown cacheinfo desc %02x\n",
+					    desc);
 			}
 		}
 		x86_cpuid(2, descs);

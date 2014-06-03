@@ -52,7 +52,7 @@
 /KUROBOX_PRO/1.5/Thu Oct 24 10:28:57 2013/-kk/
 /KUROBOX_PRO_INSTALL/1.3/Mon May 19 16:25:47 2014/-kk/
 /LUBBOCK/1.48/Thu Oct 24 10:28:57 2013/-kk/
-/MARVELL_NAS/1.18/Thu Oct 24 10:28:57 2013/-kk/
+/MARVELL_NAS/1.19/Tue Jun  3 03:09:20 2014/-kk/
 /MINI2440/1.12/Thu Oct 24 10:28:57 2013/-kk/
 /MINI2440_INSTALL/1.1/Mon Jan 30 03:28:33 2012/-kk/
 /MIRABOX/1.4/Sat Apr 19 05:36:46 2014/-kk/
@@ -69,7 +69,7 @@
 /NETWALKER_INSTALL/1.3/Mon May 19 16:25:47 2014/-kk/
 /NETWALKER_MD/1.3/Sun Apr 15 08:17:42 2012/-kk/
 /NSLU2/1.33/Thu Oct 24 10:28:57 2013/-kk/
-/ODROID-U/1.5/Mon May 19 16:25:48 2014/-kk/
+/ODROID-U/1.6/Tue Jun  3 03:09:20 2014/-kk/
 /ODROID/1.2/Mon May 19 16:25:47 2014/-kk/
 /ODROID_INSTALL/1.2/Mon May 19 16:25:48 2014/-kk/
 /OMAP5EVM/1.2/Sun Mar 30 16:01:46 2014/-kk/
@@ -79,7 +79,7 @@
 /OPENRD/1.5/Sat Apr 19 05:36:46 2014/-kk/
 /OPENRD_INSTALL/1.1/Fri Aug 10 02:31:52 2012/-kk/
 /OSK5912/1.22/Thu Oct 24 10:28:57 2013/-kk/
-/OVERO/1.34/Sat Apr 19 05:36:46 2014/-kk/
+/OVERO/1.35/Tue Jun  3 03:09:20 2014/-kk/
 /PANDABOARD/1.11/Tue Oct 29 12:11:44 2013/-kk/
 /PANDABOARD_INSTALL/1.2/Mon May 19 16:25:48 2014/-kk/
 /README.evbarm/1.7/Thu Oct 24 10:28:57 2013/-kk/
@@ -118,7 +118,7 @@
 /files.g42xxeb/1.7/Thu Sep 23 07:08:57 2010/-kk/
 /files.gemini/1.1/Fri Oct 24 04:23:18 2008/-kk/
 /files.goldengate/1.1/Thu Oct 24 10:28:57 2013/-kk/
-/files.gumstix/1.17/Thu Sep 23 07:08:57 2010/-kk/
+/files.gumstix/1.18/Tue Jun  3 03:09:20 2014/-kk/
 /files.hawk/1.1/Thu Oct 24 10:28:57 2013/-kk/
 /files.hdl_g/1.3/Mon Dec  3 15:33:30 2007/-kk/
 /files.imx23_olinuxino/1.2/Thu Oct 24 10:28:57 2013/-kk/
@@ -140,7 +140,7 @@
 /files.nslu2/1.3/Mon Dec  3 15:33:32 2007/-kk/
 /files.odroid/1.1/Sun Apr 13 02:26:26 2014/-kk/
 /files.osk5912/1.1/Sat Jan  6 08:16:26 2007/-kk/
-/files.overo/1.4/Sun Mar  6 02:22:27 2011/-kk/
+/files.overo/1.5/Tue Jun  3 03:09:21 2014/-kk/
 /files.rpi/1.4/Thu Oct 24 10:28:57 2013/-kk/
 /files.smdk2410/1.5/Sun Dec 11 12:17:07 2005/-kk/
 /files.smdk2800/1.1/Wed Nov 20 18:06:25 2002/-kk/

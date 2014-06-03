@@ -8,6 +8,7 @@ D/atomics////
 D/containers////
 D/depr////
 D/diagnostics////
+D/extensions////
 D/input.output////
 D/iterators////
 D/language.support////

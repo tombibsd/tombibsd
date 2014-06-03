@@ -11,6 +11,7 @@ SRCS+=	AsmWriter.cpp \
 	AutoUpgrade.cpp \
 	BasicBlock.cpp \
 	ConstantFold.cpp \
+	ConstantRange.cpp \
 	Constants.cpp \
 	Core.cpp \
 	DIBuilder.cpp \
@@ -34,6 +35,7 @@ SRCS+=	AsmWriter.cpp \
 	LLVMContextImpl.cpp \
 	LeakDetector.cpp \
 	LegacyPassManager.cpp \
+	MDBuilder.cpp \
 	Mangler.cpp \
 	Metadata.cpp \
 	Module.cpp \

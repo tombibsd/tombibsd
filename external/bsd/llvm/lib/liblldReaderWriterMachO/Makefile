@@ -10,6 +10,7 @@ SRCS+=	MachOLinkingContext.cpp \
 	MachONormalizedFileBinaryReader.cpp \
 	MachONormalizedFileBinaryWriter.cpp \
 	MachONormalizedFileFromAtoms.cpp \
+	MachONormalizedFileToAtoms.cpp \
 	MachONormalizedFileYAML.cpp \
 	ReferenceKinds.cpp \
 	WriterMachO.cpp

@@ -208,6 +208,7 @@ gpio_attach(device_t parent, device_t self, void *aux)
 	sc->sc_npins = gba->gba_npins;
 
 	aprint_normal(": %d pins\n", sc->sc_npins);
+	aprint_naive("\n");
 
 	if (!pmf_device_register(self, NULL, gpio_resume))
 		aprint_error_dev(self, "couldn't establish power handler\n");

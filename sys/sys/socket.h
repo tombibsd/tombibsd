@@ -341,7 +341,8 @@ struct sockcred {
  * Compute size of a sockcred structure with groups.
  */
 #define	SOCKCREDSIZE(ngrps) \
-	(sizeof(struct sockcred) + (sizeof(gid_t) * ((ngrps) - 1)))
+	(sizeof(struct sockcred) + (sizeof(gid_t) * \
+	    ((ngrps) ? ((ngrps) - 1) : 0)))
 #endif /* _NETBSD_SOURCE */
 
 

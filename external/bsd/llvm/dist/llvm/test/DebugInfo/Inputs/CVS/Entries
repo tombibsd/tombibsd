@@ -1,3 +1,4 @@
+/arm-relocs.elf-arm/1.1.1.1/Fri May 30 18:11:22 2014/-kk/
 /dwarfdump-inl-test.cc/1.1.1.1/Thu Nov 28 14:18:09 2013/-kk/
 /dwarfdump-inl-test.elf-x86-64/1.1.1.1/Thu Nov 28 14:18:09 2013/-kk/
 /dwarfdump-inl-test.h/1.1.1.1/Thu Nov 28 14:18:09 2013/-kk/
@@ -26,6 +27,8 @@
 /dwarfdump-test4.elf-x86-64/1.1.1.1/Thu Nov 28 14:18:09 2013/-kk/
 /dwarfdump-type-units.cc/1.1.1.1/Thu Nov 28 14:18:09 2013/-kk/
 /dwarfdump-type-units.elf-x86-64/1.1.1.1/Thu Nov 28 14:18:09 2013/-kk/
+/llvm-symbolizer-dwo-test.cc/1.1.1.1/Fri May 30 18:11:22 2014/-kk/
+/llvm-symbolizer-dwo-test/1.1.1.1/Fri May 30 18:11:22 2014/-kk/
 /llvm-symbolizer-test.c/1.1.1.1/Fri Feb 14 20:12:31 2014/-kk/
 /llvm-symbolizer-test.elf-x86-64/1.1.1.1/Fri Feb 14 20:12:31 2014/-kk/
 /macho-universal.cc/1.1.1.1/Thu Nov 28 14:18:09 2013/-kk/

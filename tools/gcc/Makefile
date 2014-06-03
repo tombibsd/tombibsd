@@ -35,13 +35,16 @@ MULTILIB_ARGS= --disable-multilib
 SOFTFLOAT_ARGS=	-with-float=soft
 .endif
 
+.include "gcc-version.mk"
+
 COMMON_CONFIGURE_ARGS=	--target=${MACHINE_GNU_PLATFORM} \
 			--enable-long-long \
 			--enable-threads \
 			--with-bugurl=http://www.NetBSD.org/Misc/send-pr.html \
-			--with-pkgversion="NetBSD nb1 20120916" \
+			--with-pkgversion="NetBSD ${NETBSD_GCC_VERSION}" \
 			--with-system-zlib \
-			--enable-__cxa_atexit
+			--enable-__cxa_atexit \
+			--enable-libstdcxx-threads
 .if defined(GCC_CONFIG_ARCH.${MACHINE_ARCH})
 COMMON_CONFIGURE_ARGS+=	--with-arch=${GCC_CONFIG_ARCH.${MACHINE_ARCH}}
 .endif
@@ -85,22 +88,22 @@ BUILD_MAKE=${TOOL_GMAKE}
 # mknative-gcc specific stuff
 #
 
-MKNATIVE_CONFIG_TARGET_LIBS= \
-	configure-target-libstdc++-v3 \
-	configure-target-libobjc
+MKNATIVE_CONFIG_TARGET_LIBS=
 
 .if ${HAVE_GCC} == 48
-MKNATIVE_CONFIG_TARGET_LIBS += configure-target-libgcc
+MKNATIVE_CONFIG_TARGET_LIBS+=	configure-target-libgcc
+MKNATIVE_CONFIG_TARGET_LIBS+=	configure-target-libgomp
 MKNATIVE_TARGET=	gcc48
-MKNATIVE_CONFIG_TARGET_LIBS+= \
-	configure-target-libgomp
 .elif ${HAVE_GCC} == 45
+MKNATIVE_CONFIG_TARGET_LIBS+=	configure-target-libgomp
 MKNATIVE_TARGET=	gcc45
-MKNATIVE_CONFIG_TARGET_LIBS+= \
-	configure-target-libgomp
 .else
 MKNATIVE_TARGET=	gcc4
 .endif
+
+MKNATIVE_CONFIG_TARGET_LIBS+= \
+	configure-target-libstdc++-v3 \
+	configure-target-libobjc
 
 BINENV=		/usr/bin/env -i
 

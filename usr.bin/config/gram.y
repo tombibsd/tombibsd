@@ -627,6 +627,7 @@ config_item:
 	| OPTIONS opt_list
 	| MAXUSERS NUMBER		{ setmaxusers($2.val); }
 	| IDENT stringvalue		{ setident($2); }
+	| NO IDENT			{ setident(NULL); }
 	| CONFIG conf root_spec sysparam_list
 					{ addconf(&conf); }
 	| NO CONFIG WORD		{ delconf($3); }

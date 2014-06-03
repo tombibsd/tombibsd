@@ -94,3 +94,4 @@ ENTRY(__clone)
 	popq	%r13
 	popq	%r12
 	jmp	CERROR
+END(__clone)

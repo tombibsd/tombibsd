@@ -725,8 +725,15 @@ exynos_gpio_pin_reserve(const char *name, struct exynos_gpio_pindata *pd)
 	}
 	KASSERT(grp);
 
-	KASSERT(pinnr < grp->grp_bits);
-	KASSERT(grp->grp_pin_mask & __BIT(pinnr));
+	/* in range? */
+	if (pinnr >= grp->grp_bits)
+		return false;
+
+	/* marked as connected? */
+	if ((grp->grp_pin_mask & __BIT(pinnr)) == 0)
+		return false;
+
+	/* it better not be used!! this is not taken lightly */
 	KASSERT((grp->grp_pin_inuse_mask & __BIT(pinnr)) == 0);
 
 	/* update our pin configuration */

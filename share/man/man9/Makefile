@@ -25,7 +25,7 @@ MAN=	accept_filter.9 accf_data.9 accf_http.9 \
 	ieee80211_node.9 ieee80211_output.9 ieee80211_proto.9 \
 	ieee80211_radiotap.9 iic.9 imax.9 \
 	in_getifa.9 \
-	in4_cksum.9 inittodr.9 intro.9 ioasic.9 ioctl.9 ipkdb.9 isa.9 \
+	in4_cksum.9 inittodr.9 intro.9 ioasic.9 ioctl.9 ipkdb.9 ipi.9 isa.9 \
 	isapnp.9 itimerfix.9 kauth.9 kcopy.9 kcpuset.9 kmem.9 \
 	kpause.9 \
 	kfilter_register.9 knote.9 \

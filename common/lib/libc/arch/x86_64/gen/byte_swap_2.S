@@ -17,3 +17,10 @@ _PROF_PROLOGUE
 	movl	%edi,%eax
 	xchgb	%ah,%al
 	ret
+#if defined(_KERNEL) || defined(_STANDALONE)
+END(_C_LABEL(bswap16))
+#else
+END(_C_LABEL(__bswap16))
+#endif
+END(_C_LABEL(ntohs))
+END(_C_LABEL(htons))

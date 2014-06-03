@@ -27,6 +27,9 @@ LLD_LIBS+= \
 
 LLVM_LIBS+= \
 	Object \
+	BitReader \
+	IR \
+	DebugInfo \
 	Option \
 	Support
 

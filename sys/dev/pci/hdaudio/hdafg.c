@@ -3593,6 +3593,7 @@ hdafg_attach(device_t parent, device_t self, void *opaque)
 	int err, i;
 	bool rv;
 
+	aprint_naive("\n");
 	sc->sc_dev = self;
 
 	mutex_init(&sc->sc_lock, MUTEX_DEFAULT, IPL_NONE);

@@ -89,6 +89,8 @@ i915_gem_gtt_init(struct drm_device *dev)
 	 * physical addresses.
 	 *
 	 * XXX pci_set_dma_mask?  pci_set_consistent_dma_mask?
+	 *
+	 * XXX DMA limits
 	 */
 	if (INTEL_INFO(dev)->gen < 4)
 		drm_limit_dma_space(dev, 0,
@@ -403,9 +405,14 @@ agp_gtt_init(struct drm_device *dev)
 	gtt->gma_bus_addr = agp_i810_sc->as_apaddr;
 	gtt->gtt_mappable_entries = (agp_i810_sc->as_apsize >> AGP_PAGE_SHIFT);
 	gtt->stolen_size = (isc->stolen << AGP_PAGE_SHIFT);
-	gtt->gtt_total_entries =
-	    (gtt->gtt_mappable_entries + (gtt->stolen_size >> AGP_PAGE_SHIFT));
-	gtt->gtt_bsh = isc->gtt_bsh;
+
+	/*
+	 * XXX Not quite right -- on some devices (i965), there are
+	 * more entries in the GTT than fit in the aperture.  However,
+	 * this is a safe approximation until we work out the fake AGP
+	 * code to detect the correct number of GTT entries.
+	 */
+	gtt->gtt_total_entries = gtt->gtt_mappable_entries;
 
 	product = PCI_PRODUCT(dev->pdev->pd_pa.pa_id);
 	if (((product == PCI_PRODUCT_INTEL_IRONLAKE_M_HB) ||
@@ -504,11 +511,11 @@ agp_ggtt_clear_range(struct drm_device *dev, unsigned start_page,
 
 typedef uint32_t gtt_pte_t;
 
-#define	GEN6_PTE_VALID		__BIT(0)
-#define	GEN6_PTE_UNCACHED	__BIT(1)
-#define	HSW_PTE_UNCACHED	(0)
-#define	GEN6_PTE_CACHE_LLC	__BIT(2)
-#define	GEN6_PTE_CACHE_LLC_MLC	__BIT(3)
+#define	GEN6_PTE_VALID		0x01
+#define	GEN6_PTE_UNCACHED	0x02
+#define	HSW_PTE_UNCACHED	0x00
+#define	GEN6_PTE_CACHE_LLC	0x04
+#define	GEN6_PTE_CACHE_LLC_MLC	0x06
 
 static uint32_t
 gen6_pte_addr_encode(bus_addr_t addr)

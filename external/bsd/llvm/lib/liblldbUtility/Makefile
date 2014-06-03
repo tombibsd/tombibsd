@@ -7,6 +7,7 @@ LIB=	lldbUtility
 .PATH: ${LLDB_SRCDIR}/source/Utility
 
 SRCS+=	ARM_DWARF_Registers.cpp \
+	ARM64_DWARF_Registers.cpp \
 	KQueue.cpp \
 	PseudoTerminal.cpp \
 	Range.cpp \

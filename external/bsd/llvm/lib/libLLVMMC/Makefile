@@ -30,6 +30,7 @@ SRCS+=	ELFObjectWriter.cpp \
 	MCInstrAnalysis.cpp \
 	MCInstPrinter.cpp \
 	MCLabel.cpp \
+	MCLinkerOptimizationHint.cpp \
 	MCModule.cpp \
 	MCMachOStreamer.cpp \
 	MCMachObjectTargetWriter.cpp \
@@ -50,6 +51,7 @@ SRCS+=	ELFObjectWriter.cpp \
 	MCSubtargetInfo.cpp \
 	MCSymbolizer.cpp \
 	MCSymbol.cpp \
+	MCTargetOptions.cpp \
 	MCValue.cpp \
 	MCWin64EH.cpp \
 	MachObjectWriter.cpp \

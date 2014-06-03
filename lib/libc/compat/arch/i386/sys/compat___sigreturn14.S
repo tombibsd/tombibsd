@@ -46,6 +46,7 @@
  */
 #ifdef GPROF
 #undef ENTRY
+#undef END
 #ifdef __ELF__
 #define MCOUNT_SYMBOL	__mcount
 #else
@@ -54,6 +55,8 @@
 #define	ENTRY(x) \
 	.globl _ ## x; _ALIGN_TEXT; _ ## x:  pusha ; \
 	.data; 1:; .long 0; .text; movl $1b,%eax; call MCOUNT_SYMBOL; popa ; nop
+#define	END(x) \
+	.size _ ## x, . - _ ## x
 #endif /* GPROF */
 
 PSEUDO(__sigreturn14,compat_16___sigreturn14)

@@ -1,6 +1,6 @@
 /Makefile.inc/1.18/Fri Jan 31 08:48:25 2014/-kk/
-/Makefile/1.18/Tue Jun  3 02:53:17 2014/-kk/
-/NEWS/1.2/Tue Jun  3 02:53:17 2014/-kk/
+/Makefile/1.19/Tue Jun  3 03:08:58 2014/-kk/
+/NEWS/1.3/Tue Jun  3 03:08:58 2014/-kk/
 /README/1.8/Wed Jan  1 02:45:14 2014/-kk/
 /Theory/1.14/Thu Oct 24 10:28:53 2013/-kk/
 /asctime.c/1.18/Sun Oct 28 17:11:33 2012/-kk/
@@ -21,7 +21,7 @@
 /strptime.c/1.38/Thu Oct 24 10:28:53 2013/-kk/
 /time2posix.3/1.17/Fri Dec 17 01:30:14 2010/-kk/
 /tz-art.htm/1.5/Thu Oct 24 10:28:53 2013/-kk/
-/tz-link.htm/1.14/Tue Jun  3 02:53:17 2014/-kk/
+/tz-link.htm/1.15/Tue Jun  3 03:08:58 2014/-kk/
 /tzcode2netbsd/1.5/Thu May 27 20:33:31 2004/-kk/
 /tzfile.5/1.20/Thu Oct 24 10:28:53 2013/-kk/
 /tzfile.h/1.14/Tue Jun  3 02:53:17 2014/-kk/
@@ -31,6 +31,6 @@
 /version.h/1.2/Thu Oct 24 10:28:53 2013/-kk/
 /zdump.8/1.11/Thu Oct 24 10:28:53 2013/-kk/
 /zdump.c/1.33/Tue Jun  3 02:53:17 2014/-kk/
-/zic.8/1.21/Thu Oct 24 10:28:53 2013/-kk/
-/zic.c/1.45/Tue Jun  3 02:53:17 2014/-kk/
+/zic.8/1.22/Tue Jun  3 03:08:59 2014/-kk/
+/zic.c/1.46/Tue Jun  3 03:08:59 2014/-kk/
 D

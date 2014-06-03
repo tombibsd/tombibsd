@@ -20,6 +20,7 @@ SRCS+=	Archive.cpp \
 	MachOUniversal.cpp \
 	Object.cpp \
 	ObjectFile.cpp \
+	StringTableBuilder.cpp \
 	SymbolicFile.cpp \
 	YAML.cpp
 

@@ -373,7 +373,7 @@ quota1_handle_cmd_quotaon(struct lwp *l, struct ufsmount *ump, int type,
 	 * NB: only need to add dquot's for inodes being modified.
 	 */
 	vfs_vnode_iterator_init(mp, &marker);
-	while (vfs_vnode_iterator_next(marker, &vp)) {
+	while ((vp = vfs_vnode_iterator_next(marker, NULL, NULL))) {
 		error = vn_lock(vp, LK_EXCLUSIVE);
 		if (error) {
 			vrele(vp);
@@ -436,7 +436,7 @@ quota1_handle_cmd_quotaoff(struct lwp *l, struct ufsmount *ump, int type)
 	 * deleting any references to quota file being closed.
 	 */
 	vfs_vnode_iterator_init(mp, &marker);
-	while (vfs_vnode_iterator_next(marker, &vp)) {
+	while ((vp = vfs_vnode_iterator_next(marker, NULL, NULL))) {
 		error = vn_lock(vp, LK_EXCLUSIVE);
 		if (error) {
 			vrele(vp);
@@ -762,7 +762,7 @@ q1sync(struct mount *mp)
 	 * synchronizing any modified dquot structures.
 	 */
 	vfs_vnode_iterator_init(mp, &marker);
-	while (vfs_vnode_iterator_next(marker, &vp)) {
+	while ((vp = vfs_vnode_iterator_next(marker, NULL, NULL))) {
 		error = vn_lock(vp, LK_EXCLUSIVE);
 		if (error) {
 			vrele(vp);

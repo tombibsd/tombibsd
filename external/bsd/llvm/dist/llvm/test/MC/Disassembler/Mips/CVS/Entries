@@ -2,12 +2,14 @@
 /micromips.txt/1.1.1.2/Thu Feb 27 08:52:24 2014/-kk/
 /micromips_le.txt/1.1.1.2/Thu Feb 27 08:52:24 2014/-kk/
 /mips-dsp.txt/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
-/mips32.txt/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
-/mips32_le.txt/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
-/mips32r2.txt/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
-/mips32r2_le.txt/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
+/mips32.txt/1.1.1.2/Tue Jun  3 03:03:58 2014/-kk/
+/mips32_le.txt/1.1.1.2/Tue Jun  3 03:03:58 2014/-kk/
+/mips32r2.txt/1.1.1.2/Tue Jun  3 03:03:58 2014/-kk/
+/mips32r2_le.txt/1.1.1.2/Tue Jun  3 03:03:58 2014/-kk/
+/mips32r6.txt/1.1.1.1/Fri May 30 18:11:25 2014/-kk/
 /mips64.txt/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /mips64_le.txt/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /mips64r2.txt/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /mips64r2_le.txt/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
-D
+/mips64r6.txt/1.1.1.1/Fri May 30 18:11:25 2014/-kk/
+D/msa////

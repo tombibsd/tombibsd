@@ -5,7 +5,7 @@
 /uvm_amap.h/1.37/Sun Jun 12 03:36:02 2011/-kk/
 /uvm_anon.c/1.63/Tue Oct 29 08:21:50 2013/-kk/
 /uvm_anon.h/1.30/Sat Aug  6 17:25:03 2011/-kk/
-/uvm_aobj.c/1.120/Tue Oct 29 08:21:50 2013/-kk/
+/uvm_aobj.c/1.122/Tue Jun  3 03:10:03 2014/-kk/
 /uvm_aobj.h/1.23/Thu Oct 24 10:28:58 2013/-kk/
 /uvm_bio.c/1.80/Tue Oct 29 08:21:50 2013/-kk/
 /uvm_coredump.c/1.6/Tue Jan 14 16:05:14 2014/-kk/
@@ -13,7 +13,7 @@
 /uvm_device.c/1.63/Fri Jan 27 19:48:41 2012/-kk/
 /uvm_device.h/1.12/Wed Feb  2 15:13:34 2011/-kk/
 /uvm_emap.c/1.10/Thu Oct 24 10:28:58 2013/-kk/
-/uvm_extern.h/1.189/Sat Mar  1 06:05:16 2014/-kk/
+/uvm_extern.h/1.190/Tue Jun  3 03:10:03 2014/-kk/
 /uvm_fault.c/1.195/Thu Oct 24 10:28:58 2013/-kk/
 /uvm_fault.h/1.20/Wed Feb  2 15:13:34 2011/-kk/
 /uvm_fault_i.h/1.28/Sun Feb 19 00:05:56 2012/-kk/

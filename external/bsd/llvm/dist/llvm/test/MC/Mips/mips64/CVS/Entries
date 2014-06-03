@@ -1,0 +1,5 @@
+/invalid-mips64r2-xfail.s/1.1.1.1/Fri May 30 18:11:25 2014/-kk/
+/invalid-mips64r2.s/1.1.1.1/Fri May 30 18:11:25 2014/-kk/
+/valid-xfail.s/1.1.1.1/Fri May 30 18:11:25 2014/-kk/
+/valid.s/1.1.1.1/Fri May 30 18:11:25 2014/-kk/
+D

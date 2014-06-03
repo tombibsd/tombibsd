@@ -32,3 +32,8 @@ ENTRY(fpsetprec)
 
 	addl $4,%esp
 	ret
+#ifdef WEAK_ALIAS
+END(_fpsetprec)
+#else
+END(fpsetprec)
+#endif

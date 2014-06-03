@@ -1,9 +1,8 @@
 /Makefile.inc/1.9/Fri Jan 21 15:59:07 2011/-kk/
 /Makefile/1.31/Sun Nov 25 21:55:51 2012/-kk/
 /ansi.h/1.28/Sun Jul 17 20:54:43 2011/-kk/
-/asm.h/1.46/Thu Nov 10 00:37:38 2011/-kk/
+/asm.h/1.47/Tue Jun  3 03:09:30 2014/-kk/
 /bswap.h/1.4/Thu Oct 24 10:28:57 2013/-kk/
-/bus_dma.h/1.10/Sun Feb 20 07:45:47 2011/-kk/
 /bus_dma_defs.h/1.1/Fri Jul  1 17:28:55 2011/-kk/
 /bus_dma_funcs.h/1.1/Fri Jul  1 17:28:55 2011/-kk/
 /bus_space_defs.h/1.1/Fri Jul  1 17:28:55 2011/-kk/

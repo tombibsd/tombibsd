@@ -51,3 +51,4 @@ ENTRY(syscall)
 	ret
 err:
 	jmp	CERROR
+END(syscall)

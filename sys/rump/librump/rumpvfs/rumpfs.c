@@ -428,7 +428,7 @@ etfsremove(const char *key)
 {
 	struct etfs *et;
 	size_t keylen;
-	int rv;
+	int rv __diagused;
 
 	if (key[0] != '/') {
 		return EINVAL;

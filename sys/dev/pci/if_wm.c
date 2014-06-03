@@ -167,7 +167,7 @@ int	wm_debug = WM_DEBUG_TX | WM_DEBUG_RX | WM_DEBUG_LINK | WM_DEBUG_GMII
 #define	WM_NEXTTX(sc, x)	(((x) + 1) & WM_NTXDESC_MASK(sc))
 #define	WM_NEXTTXS(sc, x)	(((x) + 1) & WM_TXQUEUELEN_MASK(sc))
 
-#define	WM_MAXTXDMA		round_page(IP_MAXPACKET) /* for TSO */
+#define	WM_MAXTXDMA		 (2 * round_page(IP_MAXPACKET)) /* for TSO */
 
 /*
  * Receive descriptor list size.  We have one Rx buffer for normal

@@ -908,9 +908,11 @@ shmrealloc(int newshmni)
 	    ALIGN(newshmni * sizeof(struct shmid_ds)));
 
 	/* Copy all memory to the new area */
-	for (i = 0; i < shm_nused; i++)
+	for (i = 0; i < shm_nused; i++) {
+		cv_init(&newshm_cv[i], "shmwait");
 		(void)memcpy(&newshmsegs[i], &shmsegs[i],
 		    sizeof(newshmsegs[0]));
+	}
 
 	/* Mark as free all new segments, if there is any */
 	for (; i < newshmni; i++) {

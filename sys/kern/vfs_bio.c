@@ -441,6 +441,9 @@ bufinit(void)
 	struct bqueue *dp;
 	int use_std;
 	u_int i;
+	extern void (*biodone_vfs)(buf_t *);
+
+	biodone_vfs = biodone;
 
 	mutex_init(&bufcache_lock, MUTEX_DEFAULT, IPL_NONE);
 	mutex_init(&buffer_lock, MUTEX_DEFAULT, IPL_NONE);

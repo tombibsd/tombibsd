@@ -66,13 +66,15 @@
 
 #define PSEUDO_NOERROR(x,y)						\
 	_SYSCALL_NOERROR(x,y);						\
-	ret
+	ret;								\
+	END(x)
 
 #define PSEUDO(x,y)							\
 	_SYSCALL_NOERROR(x,y);						\
 	jc 2f;								\
 	ret;								\
-	2: _SYSCALL_ERR
+	2: _SYSCALL_ERR;						\
+	END(x)
 
 #define RSYSCALL_NOERROR(x)						\
 	PSEUDO_NOERROR(x,x)

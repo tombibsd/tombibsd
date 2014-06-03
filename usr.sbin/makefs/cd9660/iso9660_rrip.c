@@ -657,13 +657,14 @@ cd9660node_rrip_pn(struct ISO_SUSP_ATTRIBUTES *pn_field, fsnode *fnode)
 	pn_field->attr.rr_entry.PN.h.length[0] = 20;
 	pn_field->attr.rr_entry.PN.h.version[0] = 1;
 
-	if (sizeof (fnode->inode->st.st_dev) > 32)
-		cd9660_bothendian_dword((uint64_t)fnode->inode->st.st_dev >> 32,
+	if (sizeof (fnode->inode->st.st_rdev) > 4)
+		cd9660_bothendian_dword(
+		    (uint64_t)fnode->inode->st.st_rdev >> 32,
 		    pn_field->attr.rr_entry.PN.high);
 	else
 		cd9660_bothendian_dword(0, pn_field->attr.rr_entry.PN.high);
 
-	cd9660_bothendian_dword(fnode->inode->st.st_dev & 0xffffffff,
+	cd9660_bothendian_dword(fnode->inode->st.st_rdev & 0xffffffff,
 		pn_field->attr.rr_entry.PN.low);
 	return 1;
 }

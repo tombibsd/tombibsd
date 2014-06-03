@@ -89,3 +89,8 @@ ENTRY(memset)
 	sub	%rdx,%rcx		/* adjust length ... */
 	add	%rdx,%rdi		/* ... and target */
 	jmp	2b
+END(memset)
+
+#ifndef _KERNEL
+END(bzero)
+#endif

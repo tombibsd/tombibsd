@@ -468,8 +468,3 @@ int	icmp6_rediraccept = 1;		/* accept and process redirects */
 int	icmp6_redirtimeout = 10 * 60;	/* 10 minutes */
 int	icmp6errppslim = 100;		/* 100pps */
 int	icmp6_nodeinfo = 1;		/* enable/disable NI response */
-
-/* UDP on IP6 parameters */
-int	udp6_sendspace = 9216;		/* really max datagram size */
-int	udp6_recvspace = 40 * (1024 + sizeof(struct sockaddr_in6));
-					/* 40 1K datagrams */

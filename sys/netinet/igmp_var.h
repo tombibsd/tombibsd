@@ -103,7 +103,7 @@
  * DELAY * countdown frequency).  We assume that the routine random()
  * is defined somewhere (and that it returns a positive number).
  */
-#define	IGMP_RANDOM_DELAY(X)	(random() % (X) + 1)
+#define	IGMP_RANDOM_DELAY(X)	(cprng_fast32() % (X) + 1)
 
 #ifdef __NO_STRICT_ALIGNMENT
 #define	IGMP_HDR_ALIGNED_P(ig)	1

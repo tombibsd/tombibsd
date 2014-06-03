@@ -43,6 +43,7 @@ struct lwp;
 #include <sys/percpu_types.h>
 #include <sys/queue.h>
 #include <sys/kcpuset.h>
+#include <sys/ipi.h>
 
 /*
  * MI per-cpu data
@@ -71,6 +72,7 @@ struct cpu_data {
 	kcondvar_t	cpu_xcall;		/* cross-call support */
 	int		cpu_xcall_pending;	/* cross-call support */
 	lwp_t		*cpu_onproc;		/* bottom level LWP */
+	uint32_t	cpu_ipipend[IPI_BITWORDS];	/* pending IPIs */
 
 	cpuid_t		cpu_package_id;
 	cpuid_t		cpu_core_id;
@@ -123,6 +125,7 @@ struct cpu_data {
 #define	ci_lkdebug_recurse	ci_data.cpu_lkdebug_recurse
 #define	ci_pcu_curlwp		ci_data.cpu_pcu_curlwp
 #define	ci_kcpuset		ci_data.cpu_kcpuset
+#define	ci_ipipend		ci_data.cpu_ipipend
 
 #define	ci_package_id		ci_data.cpu_package_id
 #define	ci_core_id		ci_data.cpu_core_id

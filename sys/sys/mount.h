@@ -442,7 +442,8 @@ int	vfs_quotactl_quotaoff(struct mount *, int);
 struct vnode_iterator; /* Opaque. */
 void	vfs_vnode_iterator_init(struct mount *, struct vnode_iterator **);
 void	vfs_vnode_iterator_destroy(struct vnode_iterator *);
-bool	vfs_vnode_iterator_next(struct vnode_iterator *, struct vnode **);
+struct vnode *vfs_vnode_iterator_next(struct vnode_iterator *,
+    bool (*)(void *, struct vnode *), void *);
 
 extern	TAILQ_HEAD(mntlist, mount) mountlist;	/* mounted filesystem list */
 extern	struct vfsops *vfssw[];			/* filesystem type table */

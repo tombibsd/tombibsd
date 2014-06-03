@@ -1229,8 +1229,10 @@ sdhc_start_command(struct sdhc_host *hp, struct sdmmc_command *cmd)
 	DPRINTF(1,("%s: writing cmd: blksize=%d blkcnt=%d mode=%04x cmd=%04x\n",
 	    HDEVNAME(hp), blksize, blkcount, mode, command));
 
-	blksize |= (MAX(0, PAGE_SHIFT - 12) & SDHC_DMA_BOUNDARY_MASK) <<
-	    SDHC_DMA_BOUNDARY_SHIFT;	/* PAGE_SIZE DMA boundary */
+	if (!ISSET(hp->sc->sc_flags, SDHC_FLAG_ENHANCED)) {
+		blksize |= (MAX(0, PAGE_SHIFT - 12) & SDHC_DMA_BOUNDARY_MASK) <<
+		    SDHC_DMA_BOUNDARY_SHIFT;	/* PAGE_SIZE DMA boundary */
+	}
 
 	mutex_enter(&hp->host_mtx);
 

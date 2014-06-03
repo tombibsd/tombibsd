@@ -18,6 +18,7 @@ SRCS+=	Mips16ISelDAGToDAG.cpp \
 	MipsCodeEmitter.cpp \
 	MipsConstantIslandPass.cpp \
 	MipsDelaySlotFiller.cpp \
+	MipsFastISel.cpp \
 	MipsFrameLowering.cpp \
 	MipsInstrInfo.cpp \
 	MipsISelDAGToDAG.cpp \

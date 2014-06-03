@@ -249,12 +249,10 @@ tcp_usrreq(struct socket *so, int req, struct mbuf *m, struct mbuf *nam,
 		splx(s);
 		return EAFNOSUPPORT;
 	}
-
-#ifdef INET6
-	KASSERT((inp != NULL) ^ (in6p != NULL));
-#endif
 	KASSERT(!control || (req == PRU_SEND || req == PRU_SENDOOB));
-
+#ifdef INET6
+	/* XXX: KASSERT((inp != NULL) ^ (in6p != NULL)); */
+#endif
 	/*
 	 * When a TCP is attached to a socket, then there will be
 	 * a (struct inpcb) pointed at by the socket, and this

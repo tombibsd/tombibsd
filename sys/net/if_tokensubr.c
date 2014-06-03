@@ -124,17 +124,16 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <net/if_ether.h>
 #include <net/if_token.h>
 
-#include "carp.h"
-#if NCARP > 0
-#include <netinet/ip_carp.h>
-#endif
-
 #ifdef INET
 #include <netinet/in.h>
 #include <netinet/in_var.h>
 #include <netinet/if_inarp.h>
 #endif
 
+#include "carp.h"
+#if NCARP > 0
+#include <netinet/ip_carp.h>
+#endif
 
 #ifdef DECNET
 #include <netdnet/dn.h>

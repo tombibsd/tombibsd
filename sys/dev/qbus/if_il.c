@@ -332,7 +332,7 @@ ilinit(struct ifnet *ifp)
 		addr->il_csr = ILC_ALLMC;
 		if (ilwait(ui, "all multi"))
 			return 0;
-	else {
+	} else {
 		int i;
 		register struct ether_addr *ep = is->is_maddrs;
 		struct ether_multi *enm;

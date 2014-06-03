@@ -16,6 +16,10 @@ See also: BUILDING, build.sh, Makefile.
 Recent changes:
 ^^^^^^^^^^^^^^^
 
+20140530:
+	ARM eABI switched to DWARF based exception handling. This requires
+	rebuilding all C++ code. It is strongly advised to do a clean build.
+
 20140131:
 	The new compiler_rt/libc integration moved a few things. It is strongly
 	advised to do a clean build. At least lib/libc, the compat version(s)

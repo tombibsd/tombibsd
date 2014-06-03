@@ -539,6 +539,7 @@ void		vunmapbuf(struct buf *, vsize_t);
 
 /* uvm_aobj.c */
 struct uvm_object	*uao_create(vsize_t, int);
+void			uao_set_pgfl(struct uvm_object *, int);
 void			uao_detach(struct uvm_object *);
 void			uao_reference(struct uvm_object *);
 

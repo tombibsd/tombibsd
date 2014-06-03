@@ -26,7 +26,6 @@ SRCS+=	SBAddress.cpp \
 	SBFrame.cpp \
 	SBFunction.cpp \
 	SBHostOS.cpp \
-	SBInputReader.cpp \
 	SBInstruction.cpp \
 	SBInstructionList.cpp \
 	SBLineEntry.cpp \

@@ -24,6 +24,8 @@
 ./usr/include/gcc-4.5/tgmath.h			comp-c-include		gcccmds,gcc=45
 ./usr/include/gcc-4.5/vec_types.h		comp-c-include		gcccmds,gcc=45
 ./usr/include/gcc-4.8/altivec.h			comp-c-include		gcccmds,gcc=48
+./usr/include/gcc-4.8/htmintrin.h		comp-c-include		gcccmds,gcc=48
+./usr/include/gcc-4.8/htmxlintrin.h		comp-c-include		gcccmds,gcc=48
 ./usr/include/gcc-4.8/paired.h			comp-c-include		gcccmds,gcc=48
 ./usr/include/gcc-4.8/ppc-asm.h			comp-c-include		gcccmds,gcc=48
 ./usr/include/gcc-4.8/ppu_intrinsics.h		comp-c-include		gcccmds,gcc=48

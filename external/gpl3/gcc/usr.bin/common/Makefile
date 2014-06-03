@@ -25,6 +25,8 @@ HOSTPROG_CXX=	1
 COPTS.diagnostic.c=	-Wno-stack-protector
 COPTS.intl.c=		-Wno-stack-protector
 
+${SRCS}: ${GCCARCH}/defs.mk
+
 .include <bsd.lib.mk>
 
 # Force using C++ for this

@@ -64,6 +64,7 @@
 /dbginfo.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /dce-cond-after-folding-terminator.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /duplicate-phis.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/extract-cost.ll/1.1.1.1/Fri May 30 18:11:27 2014/-kk/
 /hoist-common-code.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /hoist-dbgvalue.ll/1.1.1.2/Tue Jan 14 16:02:17 2014/-kk/
 /indirectbr.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
@@ -92,7 +93,7 @@
 /switch_switch_fold.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /switch_thread.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /trap-debugloc.ll/1.1.1.2/Tue Jan 14 16:02:17 2014/-kk/
-/trapping-load-unreachable.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/trapping-load-unreachable.ll/1.1.1.2/Tue Jun  3 03:04:01 2014/-kk/
 /trivial-throw.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /two-entry-phi-return.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /unreachable-blocks.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/

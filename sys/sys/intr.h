@@ -42,6 +42,7 @@ struct cpu_info;
 void	*softint_establish(u_int, void (*)(void *), void *);
 void	softint_disestablish(void *);
 void	softint_schedule(void *);
+void	softint_schedule_cpu(void *, struct cpu_info *);
 
 /* MI hooks. */
 void	softint_init(struct cpu_info *);
@@ -62,6 +63,7 @@ void	softint_dispatch(lwp_t *, int);
 #define	SOFTINT_SERIAL	0x0002
 #define	SOFTINT_NET	0x0003
 #define	SOFTINT_MPSAFE	0x0100
+#define	SOFTINT_RCPU	0x0200
 
 /* Implementation private flags. */
 #define	SOFTINT_PENDING	0x1000

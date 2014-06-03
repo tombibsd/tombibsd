@@ -6,6 +6,8 @@ LIB=	lldbCommands
 
 .PATH: ${LLDB_SRCDIR}/source/Commands
 
+CPPFLAGS.CommandObjectGUI.cpp+= -DLLDB_DISABLE_CURSES
+
 SRCS+=	CommandCompletions.cpp \
 	CommandObjectApropos.cpp \
 	CommandObjectArgs.cpp \
@@ -15,6 +17,7 @@ SRCS+=	CommandCompletions.cpp \
 	CommandObjectDisassemble.cpp \
 	CommandObjectExpression.cpp \
 	CommandObjectFrame.cpp \
+	CommandObjectGUI.cpp \
 	CommandObjectHelp.cpp \
 	CommandObjectLog.cpp \
 	CommandObjectMemory.cpp \

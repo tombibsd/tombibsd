@@ -54,3 +54,4 @@ ENTRY(alloca)
 	pushl	0(%ecx)
 	pushl	%eax		/* dummy to pop at callsite */
 	jmp	*%edx		/* "return" */
+END(alloca)

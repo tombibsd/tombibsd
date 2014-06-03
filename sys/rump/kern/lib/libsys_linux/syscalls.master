@@ -547,8 +547,8 @@
 			    struct timezone *tzp); }
 419	NOARGS		{ int|linux_sys||settimeofday(struct timeval50 *tp, \
 			    struct timezone *tzp); }
-420	NOARGS		{ int|linux_sys||utimes(const char *path, \
-			    struct linux_timeval *tv); }
+420	NOARGS		{ int|compat_50_sys||utimes(const char *path, \
+			    const struct timveval50 *tptr); }
 421	UNIMPL		adjtime
 422	UNIMPL		lfs_segwait
 423	NOARGS		{ int|sys|50|futimes(int fd, \

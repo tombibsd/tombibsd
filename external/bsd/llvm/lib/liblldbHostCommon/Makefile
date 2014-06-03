@@ -8,6 +8,7 @@ LIB=	lldbHostCommon
 
 SRCS+=	Condition.cpp \
 	DynamicLibrary.cpp \
+	Editline.cpp \
 	File.cpp \
 	FileSpec.cpp \
 	Host.cpp \

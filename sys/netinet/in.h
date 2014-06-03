@@ -282,9 +282,7 @@ struct ip_opts {
 #define	IP_PORTRANGE		19   /* int; range to use for ephemeral port */
 #define	IP_RECVIF		20   /* bool; receive reception if w/dgram */
 #define	IP_ERRORMTU		21   /* int; get MTU of last xmit = EMSGSIZE */
-#if 1 /*IPSEC*/
-#define	IP_IPSEC_POLICY		22 /* struct; get/set security policy */
-#endif
+#define	IP_IPSEC_POLICY		22   /* struct; get/set security policy */
 #define	IP_RECVTTL		23   /* bool; receive IP TTL w/dgram */
 #define	IP_MINTTL		24   /* minimum TTL for packet or drop */
 #define	IP_PKTINFO		25   /* int; send interface and src addr */
@@ -563,6 +561,12 @@ int	in4_cksum(struct mbuf *, u_int8_t, int, int);
 void	in_delayed_cksum(struct mbuf *);
 int	in_localaddr(struct in_addr);
 void	in_socktrim(struct sockaddr_in *);
+
+struct route;
+struct ip_moptions;
+
+struct sockaddr_in *in_selectsrc(struct sockaddr_in *,
+	struct route *, int, struct ip_moptions *, int *);
 
 #define	in_hosteq(s,t)	((s).s_addr == (t).s_addr)
 #define	in_nullhost(x)	((x).s_addr == INADDR_ANY)

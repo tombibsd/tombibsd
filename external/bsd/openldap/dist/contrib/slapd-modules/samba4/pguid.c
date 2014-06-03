@@ -1,10 +1,10 @@
 /*	$NetBSD$	*/
 
 /* pguid.c - Parent GUID value overlay */
-/* OpenLDAP: pkg/ldap/contrib/slapd-modules/samba4/pguid.c,v 1.1.2.2 2010/04/21 20:13:23 quanah Exp */
+/* $OpenLDAP$ */
 /* This work is part of OpenLDAP Software <http://www.openldap.org/>.
  *
- * Copyright 1998-2009 The OpenLDAP Foundation.
+ * Copyright 1998-2014 The OpenLDAP Foundation.
  * Portions Copyright 2008 Pierangelo Masarati.
  * All rights reserved.
  *

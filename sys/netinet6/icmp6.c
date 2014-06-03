@@ -2316,7 +2316,8 @@ icmp6_redirect_input(struct mbuf *m, int off)
 		sockaddr_in6_init(&sdst, &reddst6, 0, 0, 0);
 		pfctlinput(PRC_REDIRECT_HOST, (struct sockaddr *)&sdst);
 #if defined(IPSEC)
-		key_sa_routechange((struct sockaddr *)&sdst);
+		if (ipsec_used)
+			key_sa_routechange((struct sockaddr *)&sdst);
 #endif
 	}
 

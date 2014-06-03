@@ -9,4 +9,5 @@ sun4v:
 - 32-bit kernel support
 - libkvm
 - ofwboot: tlb_init_sun4v() hardcodes number of slots to 64
-- sun4v_datatrap: missing implementation
+- locore.s: sun4v_datatrap missing implementation for trap levels 0 and 1
+- pmap.c: pmap_calculate_colors() should known about sun4v

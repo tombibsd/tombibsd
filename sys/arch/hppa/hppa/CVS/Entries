@@ -17,7 +17,7 @@
 /idle_machdep.c/1.2/Thu May 17 14:51:19 2007/-kk/
 /in_cksum.c/1.8/Tue Nov  3 05:07:26 2009/-kk/
 /intr.c/1.1/Mon Feb 24 07:23:43 2014/-kk/
-/ipifuncs.c/1.3/Tue Jun  3 02:54:05 2014/-kk/
+/ipifuncs.c/1.4/Tue Jun  3 03:09:26 2014/-kk/
 /kgdb_hppa.c/1.8/Sat Jan 22 19:35:48 2011/-kk/
 /kobj_machdep.c/1.14/Thu Feb 13 15:35:50 2014/-kk/
 /lock_stubs.S/1.26/Tue Apr  3 14:18:14 2012/-kk/

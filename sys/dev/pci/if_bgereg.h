@@ -2607,7 +2607,7 @@ struct vpd_key {
 #define VPD_RES_WRITE	0x81	/* start of read/write area */
 #define VPD_RES_END	0x78	/* end tag */
 
-/* Flags for bge_lags  */
+/* Flags for bge_flags  */
 #define BGEF_FIBER_TBI		0x00000001
 #define BGEF_JUMBO_CAPABLE	0x00000002
 #define BGEF_FIBER_MII		0x00000004

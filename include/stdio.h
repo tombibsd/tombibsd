@@ -505,10 +505,12 @@ static __inline int __sputc(int _c, FILE *_p) {
 #endif /* !_ANSI_SOURCE && !__cplusplus*/
 
 #if (_POSIX_C_SOURCE - 0) >= 200809L || defined(_NETBSD_SOURCE)
+__BEGIN_DECLS
 int	 vdprintf(int, const char * __restrict, __va_list)
 		__printflike(2, 0);
 int	 dprintf(int, const char * __restrict, ...)
 		__printflike(2, 3);
+__END_DECLS
 #endif /* (_POSIX_C_SOURCE - 0) >= 200809L || defined(_NETBSD_SOURCE) */
 
 #if (_POSIX_C_SOURCE - 0) >= 199506L || (_XOPEN_SOURCE - 0) >= 500 || \
@@ -522,10 +524,12 @@ int	 dprintf(int, const char * __restrict, ...)
 
 #if (_POSIX_C_SOURCE - 0) >= 200809L || (_XOPEN_SOURCE - 0) >= 700 || \
     defined(_NETBSD_SOURCE)
+__BEGIN_DECLS
 FILE *fmemopen(void * __restrict, size_t, const char * __restrict);
 ssize_t	 getdelim(char ** __restrict, size_t * __restrict, int,
 	    FILE * __restrict);
 ssize_t	 getline(char ** __restrict, size_t * __restrict, FILE * __restrict);
+__END_DECLS
 #endif
 
 #if (_POSIX_C_SOURCE - 0) >= 200809L || defined(_NETBSD_SOURCE)

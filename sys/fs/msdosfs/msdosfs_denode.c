@@ -671,8 +671,10 @@ msdosfs_reclaim(void *v)
 		struct vnode *a_vp;
 	} */ *ap = v;
 	struct vnode *vp = ap->a_vp;
+	struct mount *mp = vp->v_mount;
 	struct denode *dep = VTODE(vp);
 
+	fstrans_start(mp, FSTRANS_LAZY);
 #ifdef MSDOSFS_DEBUG
 	printf("msdosfs_reclaim(): dep %p, file %s, refcnt %ld\n",
 	    dep, dep->de_Name, dep->de_refcnt);
@@ -694,9 +696,15 @@ msdosfs_reclaim(void *v)
 #if 0 /* XXX */
 	dep->de_flag = 0;
 #endif
+	/*
+	 * To interlock with msdosfs_sync().
+	 */
 	genfs_node_destroy(vp);
-	pool_put(&msdosfs_denode_pool, dep);
+	mutex_enter(vp->v_interlock);
 	vp->v_data = NULL;
+	mutex_exit(vp->v_interlock);
+	pool_put(&msdosfs_denode_pool, dep);
+	fstrans_done(mp);
 	return (0);
 }
 

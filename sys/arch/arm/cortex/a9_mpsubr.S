@@ -632,7 +632,7 @@ cortex_mpcontinuation:
 
 	mrc	p15, 0, r1, c2, c0, 2		// TTBCR get
 	orr	r1, r1, #TTBCR_S_PD0		// prevent lookups via TTBR0
-	mrc	p15, 0, r1, c2, c0, 2		// TTBCR set
+	mcr	p15, 0, r1, c2, c0, 2		// TTBCR set
 
 #ifdef MPDEBUG
 	str	pc, [r9]			// we've got this far

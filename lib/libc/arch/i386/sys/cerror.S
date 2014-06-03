@@ -57,3 +57,4 @@ _ENTRY(CERROR)
 	movl	$-1,%eax
 	movl	$-1,%edx
 	ret
+END(CERROR)

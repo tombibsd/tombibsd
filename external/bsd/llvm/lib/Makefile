@@ -22,6 +22,7 @@ SUBDIR=	\
 	libLLVMObjCARC \
 	libLLVMObject \
 	libLLVMOption \
+	libLLVMProfileData \
 	libLLVMScalarOpts \
 	libLLVMSelectionDAG \
 	libLLVMSupport \
@@ -90,10 +91,13 @@ SUBDIR+= \
 	libLLVMRuntimeDyld
 .endif
 
+.if (${NO_LLVM_DEVELOPER:Uno} == "no" && ${LLVM_DEVELOPER:U} == "yes") || ${MKLLD} == "yes"
+SUBDIR+= \
+	libLLVMDebugInfo
+.endif
 
 .if ${NO_LLVM_DEVELOPER:Uno} == "no" && ${LLVM_DEVELOPER:U} == "yes"
 SUBDIR+= \
-	libLLVMDebugInfo \
 	libLLVMCppBackend \
 	libLLVMCppBackendInfo \
 	libLLVMHello \
@@ -184,6 +188,7 @@ SUBDIR+= \
 	liblldbInterpreter \
 	liblldbLog \
 	liblldbPluginABIMacOSX_arm \
+	liblldbPluginABIMacOSX_arm64 \
 	liblldbPluginABIMacOSX_i386 \
 	liblldbPluginABISysV_x86_64 \
 	liblldbPluginAppleObjCRuntime \
@@ -193,9 +198,12 @@ SUBDIR+= \
 	liblldbPluginDynamicLoaderPosixDYLD \
 	liblldbPluginDynamicLoaderStatic \
 	liblldbPluginInstructionARM \
+	liblldbPluginInstructionARM64 \
+	liblldbPluginJITLoaderGDB \
 	liblldbPluginObjectContainerBSDArchive \
 	liblldbPluginObjectContainerMachOArchive \
 	liblldbPluginObjectFileELF \
+	liblldbPluginObjectFileJIT \
 	liblldbPluginObjectFileMachO \
 	liblldbPluginObjectFilePECOFF \
 	liblldbPluginPlatformNetBSD \

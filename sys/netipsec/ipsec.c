@@ -106,6 +106,9 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <net/net_osdep.h>
 
+int ipsec_used = 0;
+int ipsec_enabled = 1;
+
 #ifdef IPSEC_DEBUG
 int ipsec_debug = 1;
 

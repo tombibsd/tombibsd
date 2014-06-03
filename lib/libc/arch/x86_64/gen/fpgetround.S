@@ -22,3 +22,8 @@ ENTRY(fpgetround)
 	movl -4(%rsp), %eax
 	andl $0x00000c00, %eax
 	ret
+#ifdef WEAK_ALIAS
+END(_fpgetround)
+#else
+END(fpgetround)
+#endif

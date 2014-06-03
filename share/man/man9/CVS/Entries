@@ -1,7 +1,7 @@
 /CTASSERT.9/1.2/Mon Apr  5 19:18:45 2010/-kk/
 /KASSERT.9/1.13/Tue Sep 27 00:36:51 2011/-kk/
 /LWP_CACHE_CREDS.9/1.2/Sun Dec  9 08:53:57 2007/-kk/
-/Makefile/1.377/Fri Apr 11 02:03:25 2014/-kk/
+/Makefile/1.378/Tue Jun  3 03:09:12 2014/-kk/
 /RUN_ONCE.9/1.8/Tue Jul  6 22:29:29 2010/-kk/
 /SET.9/1.3/Tue Mar 25 02:35:16 2014/-kk/
 /STACK.9/1.2/Fri Apr  8 07:55:04 2011/-kk/
@@ -101,6 +101,7 @@
 /intro.9/1.15/Thu Oct 24 10:28:54 2013/-kk/
 /ioasic.9/1.12/Fri Jul  1 17:34:44 2011/-kk/
 /ioctl.9/1.31/Thu Oct 24 10:28:54 2013/-kk/
+/ipi.9/1.2/Sun May 25 15:51:26 2014/-kk/
 /ipkdb.9/1.9/Fri Sep  4 23:29:03 2009/-kk/
 /isa.9/1.20/Mon May 30 01:48:40 2011/-kk/
 /isapnp.9/1.12/Mon May 30 01:50:07 2011/-kk/
@@ -121,7 +122,7 @@
 /ltsleep.9/1.17/Fri Apr 11 02:03:25 2014/-kk/
 /m_tag.9/1.5/Thu Dec  2 12:54:13 2010/-kk/
 /makeiplcookie.9/1.3/Sat Dec 23 10:01:32 2006/-kk/
-/malloc.9/1.47/Mon Aug  3 19:57:40 2009/-kk/
+/malloc.9/1.49/Tue Jun  3 03:09:12 2014/-kk/
 /mb.9/1.6/Sun Jan  2 07:14:02 2011/-kk/
 /mbuf.9/1.51/Thu Oct 24 10:28:54 2013/-kk/
 /mca.9/1.11/Thu Oct 24 10:28:54 2013/-kk/
@@ -150,7 +151,7 @@
 /pckbport.9/1.5/Mon Mar  9 19:24:32 2009/-kk/
 /pcmcia.9/1.20/Mon May 30 01:48:40 2011/-kk/
 /pcq.9/1.6/Sun Jan 22 02:55:47 2012/-kk/
-/pcu.9/1.9/Tue Jun  3 02:53:36 2014/-kk/
+/pcu.9/1.10/Tue Jun  3 03:09:12 2014/-kk/
 /percpu.9/1.11/Tue Mar 25 02:35:16 2014/-kk/
 /pfil.9/1.33/Thu Oct 24 10:28:54 2013/-kk/
 /physio.9/1.11/Tue Apr 13 10:06:43 2010/-kk/
@@ -220,14 +221,14 @@
 /userret.9/1.9/Wed Apr 30 13:10:59 2008/-kk/
 /uvm.9/1.107/Mon Jul  2 21:10:31 2012/-kk/
 /uvm_km.9/1.3/Tue Jun  3 02:53:36 2014/-kk/
-/uvm_map.9/1.4/Tue Jun  3 02:53:37 2014/-kk/
+/uvm_map.9/1.5/Tue Jun  3 03:09:12 2014/-kk/
 /vattr.9/1.15/Thu Dec  2 12:54:13 2010/-kk/
 /vcons.9/1.2/Mon Feb 13 19:57:58 2006/-kk/
 /veriexec.9/1.27/Tue Mar 25 02:35:17 2014/-kk/
 /vfs.9/1.8/Wed Apr 30 13:10:59 2008/-kk/
 /vfs_hooks.9/1.4/Wed Apr 30 13:10:59 2008/-kk/
 /vfsops.9/1.46/Mon Feb 13 13:24:18 2012/-kk/
-/vfssubr.9/1.23/Tue Mar 25 02:35:17 2014/-kk/
+/vfssubr.9/1.25/Tue Jun  3 03:09:12 2014/-kk/
 /video.9/1.7/Tue Mar 25 02:35:17 2014/-kk/
 /vme.9/1.13/Fri Jul  1 17:34:44 2011/-kk/
 /vmem.9/1.15/Thu Oct 24 10:28:54 2013/-kk/

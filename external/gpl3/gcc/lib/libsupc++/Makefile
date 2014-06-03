@@ -40,10 +40,6 @@ DPSRCS+=       ${_dst}
 .endif
 .endif
 
-.for f in eh_ptr eh_throw guard atexit_thread nested_exception
-COPTS.${f}.cc+=	-std=gnu++0x
-.endfor
-
 .include <bsd.lib.mk>
 
 .PATH:	${DIST}/libstdc++-v3/src \

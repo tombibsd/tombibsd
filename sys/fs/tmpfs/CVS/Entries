@@ -11,6 +11,6 @@
 /tmpfs_specops.h/1.8/Tue May 24 20:17:49 2011/-kk/
 /tmpfs_subr.c/1.96/Thu Feb 13 15:22:33 2014/-kk/
 /tmpfs_vfsops.c/1.61/Tue May  6 05:50:16 2014/-kk/
-/tmpfs_vnops.c/1.118/Sat Mar  1 06:05:13 2014/-kk/
+/tmpfs_vnops.c/1.119/Tue Jun  3 03:09:54 2014/-kk/
 /tmpfs_vnops.h/1.13/Tue May 24 20:17:49 2011/-kk/
 D

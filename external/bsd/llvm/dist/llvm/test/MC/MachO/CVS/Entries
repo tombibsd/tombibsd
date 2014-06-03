@@ -2,6 +2,7 @@
 /absolutize.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /bad-darwin-x86_64-32-bit-abs-addr.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /bad-darwin-x86_64-diff-relocs.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
+/bad-darwin-x86_64-reloc-expr.s/1.1.1.1/Fri May 30 18:11:25 2014/-kk/
 /bad-dollar.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /bad-indirect-symbols.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /bad-macro.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
@@ -15,12 +16,15 @@
 /darwin-x86_64-reloc-offsets.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /darwin-x86_64-reloc.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /data.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
-/debug_frame.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
+/debug_frame.s/1.1.1.2/Tue Jun  3 03:03:59 2014/-kk/
 /diff-with-two-sections.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /direction_labels.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
+/eh-frame-reloc.s/1.1.1.1/Fri May 30 18:11:25 2014/-kk/
+/eh-symbols.s/1.1.1.1/Fri May 30 18:11:25 2014/-kk/
+/eh_symbol.s/1.1.1.1/Fri May 30 18:11:25 2014/-kk/
 /empty-dwarf-lines.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /file.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
-/gen-dwarf-cpp.s/1.1.1.2/Fri Mar 14 04:23:50 2014/-kk/
+/gen-dwarf-cpp.s/1.1.1.3/Tue Jun  3 03:03:59 2014/-kk/
 /gen-dwarf-macro-cpp.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /gen-dwarf-producer.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /gen-dwarf.s/1.1.1.2/Fri Mar 14 04:23:50 2014/-kk/
@@ -33,6 +37,7 @@
 /linker-options.ll/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /lit.local.cfg/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /loc.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
+/osx-version-min-load-command.s/1.1.1.1/Fri May 30 18:11:25 2014/-kk/
 /pcrel-to-other-section.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /previous.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /pushsection.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
@@ -53,7 +58,7 @@
 /symbols-1.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /tbss.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /tdata.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
-/temp-labels.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
+/temp-labels.s/1.1.1.2/Tue Jun  3 03:03:59 2014/-kk/
 /thread_init_func.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /tls.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /tlv-bss.ll/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
@@ -77,4 +82,5 @@
 /zerofill-4.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /zerofill-5.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /zerofill-sect-align.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
+D/AArch64////
 D/ARM////

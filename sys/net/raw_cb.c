@@ -100,18 +100,19 @@ void
 raw_detach(struct socket *so)
 {
 	struct rawcb *rp = sotorawcb(so);
+	const size_t rcb_len = rp->rcb_len;
 
 	KASSERT(rp != NULL);
 	KASSERT(solocked(so));
 	KASSERT(so->so_lock == softnet_lock);	/* XXX */
 
-	LIST_REMOVE(rp, rcb_list);		/* remove last reference */
+	/* Remove the last reference. */
+	LIST_REMOVE(rp, rcb_list);
 	so->so_pcb = NULL;
 
 	/* Note: sofree() drops the socket's lock. */
 	sofree(so);
-	kmem_free(rp, sizeof(*rp));
-
+	kmem_free(rp, rcb_len);
 	mutex_enter(softnet_lock);
 }
 

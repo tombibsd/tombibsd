@@ -1,3 +1,10 @@
-/errors.test/1.1.1.1/Tue Mar  4 20:54:52 2014/-kk/
-/simple.test/1.1.1.1/Tue Mar  4 20:54:52 2014/-kk/
+/c-general.test/1.1.1.1/Fri May 30 18:11:27 2014/-kk/
+/errors.test/1.1.1.2/Tue Jun  3 03:04:02 2014/-kk/
+/raw-32-bits-be.test/1.1.1.1/Fri May 30 18:11:27 2014/-kk/
+/raw-32-bits-le.test/1.1.1.1/Fri May 30 18:11:27 2014/-kk/
+/raw-64-bits-be.test/1.1.1.1/Fri May 30 18:11:27 2014/-kk/
+/raw-64-bits-le.test/1.1.1.1/Fri May 30 18:11:27 2014/-kk/
+/raw-magic-but-no-header.test/1.1.1.1/Fri May 30 18:11:27 2014/-kk/
+/raw-two-profiles.test/1.1.1.1/Fri May 30 18:11:27 2014/-kk/
+/simple.test/1.1.1.2/Tue Jun  3 03:04:02 2014/-kk/
 D/Inputs////

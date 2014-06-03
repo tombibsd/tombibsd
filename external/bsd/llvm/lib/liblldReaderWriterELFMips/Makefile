@@ -1,4 +1,4 @@
-#	$NetBSD$
+    #	$NetBSD$
 
 LIB=	lldReaderWriterELFMips
 
@@ -10,6 +10,7 @@ CPPFLAGS+=	-I${LLD_SRCDIR}/lib/ReaderWriter/ELF
 
 SRCS+=	MipsLinkingContext.cpp \
 	MipsRelocationHandler.cpp \
+	MipsRelocationPass.cpp \
 	MipsTargetHandler.cpp
 
 .if defined(HOSTLIB)

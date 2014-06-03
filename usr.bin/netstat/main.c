@@ -79,8 +79,8 @@ struct nlist nl[] = {
 	{ "_udbtable", 0, 0, 0, 0 },
 #define	N_UDPSTAT	5
 	{ "_udpstat", 0, 0, 0, 0 },	/* not available via kvm */
-#define	N_IFNET		6
-	{ "_ifnet", 0, 0, 0, 0 },
+#define	N_IFNET_LIST		6
+	{ "_ifnet_list", 0, 0, 0, 0 },
 #define	N_ICMPSTAT	7
 	{ "_icmpstat", 0, 0, 0, 0 },	/* not available via kvm */
 #define	N_RTSTAT	8
@@ -570,7 +570,7 @@ main(int argc, char *argv[])
 	}
 	if (pflag) {
 		if (iflag && tp->pr_istats)
-			intpr(interval, nl[N_IFNET].n_value, tp->pr_istats);
+			intpr(interval, nl[N_IFNET_LIST].n_value, tp->pr_istats);
 		else if (tp->pr_stats)
 			(*tp->pr_stats)(nl[tp->pr_sindex].n_value,
 				tp->pr_name);
@@ -624,7 +624,7 @@ main(int argc, char *argv[])
 			if (af != AF_UNSPEC)
 				goto protostat;
 
-			intpr(interval, nl[N_IFNET].n_value, NULL);
+			intpr(interval, nl[N_IFNET_LIST].n_value, NULL);
 			break;
 		}
 		if (rflag) {
@@ -723,7 +723,7 @@ printproto(struct protox *tp, const char *name)
 	if (sflag) {
 		if (iflag) {
 			if (tp->pr_istats)
-				intpr(interval, nl[N_IFNET].n_value,
+				intpr(interval, nl[N_IFNET_LIST].n_value,
 				      tp->pr_istats);
 			return;
 		}

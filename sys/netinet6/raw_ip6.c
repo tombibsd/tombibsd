@@ -204,7 +204,7 @@ rip6_input(struct mbuf **mp, int *offp, int proto)
 			/*
 			 * Check AH/ESP integrity
 			 */
-			if (!ipsec6_in_reject(m,last)) 
+			if (ipsec_used && !ipsec6_in_reject(m, last)) 
 #endif /* IPSEC */
 			if ((n = m_copy(m, 0, (int)M_COPYALL)) != NULL) {
 				if (last->in6p_flags & IN6P_CONTROLOPTS)
@@ -226,7 +226,7 @@ rip6_input(struct mbuf **mp, int *offp, int proto)
 		last = in6p;
 	}
 #ifdef IPSEC
-	if (last && ipsec6_in_reject(m, last)) {
+	if (ipsec_used && last && ipsec6_in_reject(m, last)) {
 		m_freem(m);
 		/*
 		 * XXX ipsec6_in_reject update stat if there is an error

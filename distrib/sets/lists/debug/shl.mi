@@ -112,9 +112,9 @@
 ./usr/libdata/debug/usr/lib/libkdc.so.2.0.debug		comp-krb5-debug	kerberos,debug
 ./usr/libdata/debug/usr/lib/libkrb5.so.26.0.debug	comp-krb5-debug	kerberos,debug
 ./usr/libdata/debug/usr/lib/libkvm.so.6.0.debug		comp-sys-debug	debug
-./usr/libdata/debug/usr/lib/liblber.so.3.2.debug	comp-ldap-debug	ldap,debug
-./usr/libdata/debug/usr/lib/libldap.so.4.2.debug	comp-ldap-debug	ldap,debug
-./usr/libdata/debug/usr/lib/libldap_r.so.4.2.debug	comp-ldap-debug	ldap,debug
+./usr/libdata/debug/usr/lib/liblber.so.3.3.debug	comp-ldap-debug	ldap,debug
+./usr/libdata/debug/usr/lib/libldap.so.4.3.debug	comp-ldap-debug	ldap,debug
+./usr/libdata/debug/usr/lib/libldap_r.so.4.3.debug	comp-ldap-debug	ldap,debug
 ./usr/libdata/debug/usr/lib/liblua.so.1.0.debug		comp-sys-debug	debug
 ./usr/libdata/debug/usr/lib/liblutok.so.1.0.debug	comp-obsolete	obsolete
 ./usr/libdata/debug/usr/lib/liblutok.so.2.0.debug	comp-kyua-debug	kyua,debug

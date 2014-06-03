@@ -17,7 +17,7 @@
 /invalid-armv8.txt/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /invalid-because-armv7.txt/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /invalid-thumbv7-xfail.txt/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
-/invalid-thumbv7.txt/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
+/invalid-thumbv7.txt/1.1.1.2/Tue Jun  3 03:03:58 2014/-kk/
 /invalid-thumbv8.txt/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /ldrd-armv4.txt/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /lit.local.cfg/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/

@@ -637,7 +637,7 @@ sysctl_kern_vnode(SYSCTLFN_ARGS)
 			continue;
 		}
 		vfs_vnode_iterator_init(mp, &marker);
-		while (vfs_vnode_iterator_next(marker, &vp)) {
+		while ((vp = vfs_vnode_iterator_next(marker, NULL, NULL))) {
 			if (bp + VPTRSZ + VNODESZ > ewhere) {
 				vrele(vp);
 				vfs_vnode_iterator_destroy(marker);

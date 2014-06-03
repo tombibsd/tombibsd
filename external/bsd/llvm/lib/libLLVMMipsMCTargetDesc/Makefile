@@ -11,6 +11,7 @@ CPPFLAGS+=	-I${MIPS_OBJDIR} -I${LLVM_SRCDIR}/lib/Target/Mips
 
 SRCS+=	MipsAsmBackend.cpp \
 	MipsELFObjectWriter.cpp \
+	MipsELFStreamer.cpp \
 	MipsMCAsmInfo.cpp \
 	MipsMCCodeEmitter.cpp \
 	MipsMCExpr.cpp \

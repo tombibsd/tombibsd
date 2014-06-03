@@ -7708,6 +7708,7 @@
 ./usr/share/man/cat3/ldap_dn2dcedn.0		comp-ldap-catman	ldap,.cat
 ./usr/share/man/cat3/ldap_dn2str.0		comp-ldap-catman	ldap,.cat
 ./usr/share/man/cat3/ldap_dn2ufn.0		comp-ldap-catman	ldap,.cat
+./usr/share/man/cat3/ldap_dup.0			comp-ldap-catman	ldap,.cat
 ./usr/share/man/cat3/ldap_err2string.0		comp-ldap-catman	ldap,.cat
 ./usr/share/man/cat3/ldap_errlist.0		comp-ldap-catman	ldap,.cat
 ./usr/share/man/cat3/ldap_error.0		comp-ldap-catman	ldap,.cat
@@ -10273,6 +10274,7 @@
 ./usr/share/man/cat9/ioctl.0			comp-sys-catman		.cat
 ./usr/share/man/cat9/ioctl_copyin.0		comp-sys-catman		.cat
 ./usr/share/man/cat9/ioctl_copyout.0		comp-sys-catman		.cat
+./usr/share/man/cat9/ipi.0			comp-sys-catman		.cat
 ./usr/share/man/cat9/ipkdb.0			comp-sys-catman		.cat
 ./usr/share/man/cat9/ipkdb_connect.0		comp-sys-catman		.cat
 ./usr/share/man/cat9/ipkdb_init.0		comp-sys-catman		.cat
@@ -14505,6 +14507,7 @@
 ./usr/share/man/html3/ldap_dn2dcedn.html	comp-ldap-htmlman	ldap,html
 ./usr/share/man/html3/ldap_dn2str.html		comp-ldap-htmlman	ldap,html
 ./usr/share/man/html3/ldap_dn2ufn.html		comp-ldap-htmlman	ldap,html
+./usr/share/man/html3/ldap_dup.html		comp-ldap-htmlman	ldap,html
 ./usr/share/man/html3/ldap_err2string.html	comp-ldap-htmlman	ldap,html
 ./usr/share/man/html3/ldap_errlist.html		comp-ldap-htmlman	ldap,html
 ./usr/share/man/html3/ldap_error.html		comp-ldap-htmlman	ldap,html
@@ -16970,6 +16973,7 @@
 ./usr/share/man/html9/ioctl.html		comp-sys-htmlman	html
 ./usr/share/man/html9/ioctl_copyin.html		comp-sys-htmlman	html
 ./usr/share/man/html9/ioctl_copyout.html	comp-sys-htmlman	html
+./usr/share/man/html9/ipi.html			comp-sys-htmlman	html
 ./usr/share/man/html9/ipkdb.html		comp-sys-htmlman	html
 ./usr/share/man/html9/ipkdb_connect.html	comp-sys-htmlman	html
 ./usr/share/man/html9/ipkdb_init.html		comp-sys-htmlman	html
@@ -21260,6 +21264,7 @@
 ./usr/share/man/man3/ldap_dn2dcedn.3		comp-ldap-man		ldap,.man
 ./usr/share/man/man3/ldap_dn2str.3		comp-ldap-man		ldap,.man
 ./usr/share/man/man3/ldap_dn2ufn.3		comp-ldap-man		ldap,.man
+./usr/share/man/man3/ldap_dup.3			comp-ldap-man		ldap,.man
 ./usr/share/man/man3/ldap_err2string.3		comp-ldap-man		ldap,.man
 ./usr/share/man/man3/ldap_errlist.3		comp-ldap-man		ldap,.man
 ./usr/share/man/man3/ldap_error.3		comp-ldap-man		ldap,.man
@@ -23820,6 +23825,7 @@
 ./usr/share/man/man9/ioctl.9			comp-sys-man		.man
 ./usr/share/man/man9/ioctl_copyin.9		comp-sys-man		.man
 ./usr/share/man/man9/ioctl_copyout.9		comp-sys-man		.man
+./usr/share/man/man9/ipi.9			comp-sys-man		.man
 ./usr/share/man/man9/ipkdb.9			comp-sys-man		.man
 ./usr/share/man/man9/ipkdb_connect.9		comp-sys-man		.man
 ./usr/share/man/man9/ipkdb_init.9		comp-sys-man		.man

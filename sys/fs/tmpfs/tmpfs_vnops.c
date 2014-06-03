@@ -343,7 +343,7 @@ tmpfs_mknod(void *v)
 	enum vtype vt = vap->va_type;
 
 	if (vt != VBLK && vt != VCHR && vt != VFIFO) {
-		vput(dvp);
+		*vpp = NULL;
 		return EINVAL;
 	}
 	return tmpfs_construct_node(dvp, vpp, vap, cnp, NULL);

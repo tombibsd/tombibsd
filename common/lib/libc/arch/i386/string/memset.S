@@ -104,3 +104,8 @@ ENTRY(memset)
 #endif
 	popl	%edi
 	ret
+#ifdef BZERO
+END(bzero)
+#else
+END(memset)
+#endif

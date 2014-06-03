@@ -48,3 +48,4 @@ ENTRY(exect)
 	popfq
 	SYSTRAP(execve)
 	jmp	CERROR
+END(exect)

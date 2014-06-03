@@ -11,6 +11,8 @@ SRCS=	srt0.S boot.c devopen.c conf.c autoconf.c netio.c rom.c romread.S \
 LIBC=
 
 CLEANFILES+=${PROG} ${PROG}.sym vers.c
+# XXX - hack, doesn't work with -O2 and gcc 4.8
+CFLAGS+=-O1
 CPPFLAGS+=-DSUPPORT_BOOTPARAMS -DSUPPORT_BOOTP -DSUPPORT_DHCP -D_STANDALONE \
 	-DNO_MID_CHECK
 #CPPFLAGS+=-DBOOTP_DEBUG -DNETIF_DEBUG -DETHER_DEBUG -DNFS_DEBUG -DDEV_DEBUG \
