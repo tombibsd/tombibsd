@@ -137,7 +137,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
  * This structure is used to keep track of in6_multi chains which belong to
  * deleted interface addresses.
  */
-static LIST_HEAD(, multi6_kludge) in6_mk; /* XXX BSS initialization */
+static LIST_HEAD(, multi6_kludge) in6_mk = LIST_HEAD_INITIALIZER(in6_mk);
 
 struct multi6_kludge {
 	LIST_ENTRY(multi6_kludge) mk_entry;

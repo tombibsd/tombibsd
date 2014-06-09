@@ -69,7 +69,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <compat/linux/linux_syscallargs.h>
 
-static int linux_to_bsd_ioflags(int);
 static int bsd_to_linux_ioflags(int);
 #ifndef __amd64__
 static void bsd_to_linux_stat(struct stat *, struct linux_stat *);
@@ -86,7 +85,7 @@ conv_linux_flock(linux, flock)
  * The next two functions convert between the Linux and NetBSD values
  * of the flags used in open(2) and fcntl(2).
  */
-static int
+int
 linux_to_bsd_ioflags(int lflags)
 {
 	int res = 0;

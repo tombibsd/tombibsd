@@ -17,6 +17,9 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
+#ifndef	_HYPERVISOR_H_
+#define	_HYPERVISOR_H_
+
 /*
  * UltraSPARC Hypervisor API.
  */
@@ -319,3 +322,5 @@ int64_t	hv_rng_data_read(paddr_t raddr, uint64_t *delta);
 #define H_ENOMAP	14
 #define H_ETOOMANY	15
 #define H_ECHANNEL	16
+
+#endif	/* _HYPERVISOR_H_ */

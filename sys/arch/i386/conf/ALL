@@ -251,6 +251,7 @@ options 	ALTQ_WFQ	# Weighted Fair Queueing
 options 	ACPIVERBOSE	# verbose ACPI device autoconfig messages
 options 	EISAVERBOSE	# verbose EISA device autoconfig messages
 options 	MIIVERBOSE	# verbose PHY autoconfig messages
+options 	MPVERBOSE	# verbose mpbios config messages
 options 	PCIVERBOSE	# verbose PCI device autoconfig messages
 options 	PCI_CONFIG_DUMP	# verbosely dump PCI config space
 options 	PCMCIAVERBOSE	# verbose PCMCIA configuration messages

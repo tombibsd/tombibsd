@@ -8,7 +8,7 @@ NOPROFILE=	# defined
 CWARNFLAGS.clang+=	-Wno-parentheses
 UNSUPPORTED_COMPILER.clang=	# defined
 
-.include <bsd.own.mk>
+.include <bsd.init.mk>
 
 GCC_MACHINE_ARCH?=${MACHINE_ARCH:S/earmv5/earm/}
 

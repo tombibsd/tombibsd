@@ -63,7 +63,7 @@ __RCSID("$NetBSD$");
 static struct Info {
 	struct	uvmexp_sysctl uvmexp;
 	struct	vmtotal Total;
-	struct	nchstats nchstats;
+	struct	nchstats_sysctl nchstats;
 	long	nchcount;
 	long	*intrcnt;
 	u_int64_t	*evcnt;
@@ -776,7 +776,12 @@ getinfo(struct Info *stats)
 
 	cpureadstats();
 	drvreadstats();
-	NREAD(X_NCHSTATS, &stats->nchstats, sizeof stats->nchstats);
+	size = sizeof(stats->nchstats);
+	if (sysctlbyname("vfs.namecache_stats", &stats->nchstats, &size,
+	    NULL, 0) < 0) {
+		error("can't get namecache statistics: %s\n", strerror(errno));
+		memset(&stats->nchstats, 0, sizeof(stats->nchstats));
+	}
 	if (nintr)
 		NREAD(X_INTRCNT, stats->intrcnt, nintr * LONG);
 	for (i = 0; i < nevcnt; i++)

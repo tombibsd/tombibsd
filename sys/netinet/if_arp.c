@@ -1481,8 +1481,10 @@ revarprequest(struct ifnet *ifp)
 	sa.sa_family = AF_ARP;
 	sa.sa_len = 2;
 	m->m_flags |= M_BCAST;
-	(*ifp->if_output)(ifp, m, &sa, NULL);
 
+	KERNEL_LOCK(1, NULL);
+	(*ifp->if_output)(ifp, m, &sa, NULL);
+	KERNEL_UNLOCK_ONE(NULL);
 }
 
 /*

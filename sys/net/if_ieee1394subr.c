@@ -356,6 +356,7 @@ ieee1394_fragment(struct ifnet *ifp, struct mbuf *m0, int maxsize,
 void
 ieee1394_input(struct ifnet *ifp, struct mbuf *m, uint16_t src)
 {
+	pktqueue_t *pktq = NULL;
 	struct ifqueue *inq;
 	uint16_t etype;
 	int s;
@@ -408,8 +409,7 @@ ieee1394_input(struct ifnet *ifp, struct mbuf *m, uint16_t src)
 	switch (etype) {
 #ifdef INET
 	case ETHERTYPE_IP:
-		isr = NETISR_IP;
-		inq = &ipintrq;
+		pktq = ip_pktq;
 		break;
 
 	case ETHERTYPE_ARP:
@@ -420,13 +420,19 @@ ieee1394_input(struct ifnet *ifp, struct mbuf *m, uint16_t src)
 
 #ifdef INET6
 	case ETHERTYPE_IPV6:
-		isr = NETISR_IPV6;
-		inq = &ip6intrq;
+		pktq = ip6_pktq;
 		break;
 #endif /* INET6 */
 
 	default:
 		m_freem(m);
+		return;
+	}
+
+	if (__predict_true(pktq)) {
+		if (__predict_false(!pktq_enqueue(pktq, m, 0))) {
+			m_freem(m);
+		}
 		return;
 	}
 

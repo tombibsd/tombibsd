@@ -575,7 +575,8 @@ void
 ether_input(struct ifnet *ifp, struct mbuf *m)
 {
 	struct ethercom *ec = (struct ethercom *) ifp;
-	struct ifqueue *inq;
+	pktqueue_t *pktq = NULL;
+	struct ifqueue *inq = NULL;
 	uint16_t etype;
 	struct ether_header *eh;
 	size_t ehlen;
@@ -840,8 +841,7 @@ ether_input(struct ifnet *ifp, struct mbuf *m)
 			if (ipflow_fastforward(m))
 				return;
 #endif
-			isr = NETISR_IP;
-			inq = &ipintrq;
+			pktq = ip_pktq;
 			break;
 
 		case ETHERTYPE_ARP:
@@ -863,8 +863,7 @@ ether_input(struct ifnet *ifp, struct mbuf *m)
 			if (ip6flow_fastforward(&m))
 				return;
 #endif
-			isr = NETISR_IPV6;
-			inq = &ip6intrq;
+			pktq = ip6_pktq;
 			break;
 #endif
 #ifdef IPX
@@ -943,6 +942,19 @@ ether_input(struct ifnet *ifp, struct mbuf *m)
 #endif /* ISO || LLC || NETATALK*/
 	}
 
+	if (__predict_true(pktq)) {
+		const uint32_t h = pktq_rps_hash(m);
+		if (__predict_false(!pktq_enqueue(pktq, m, h))) {
+			m_freem(m);
+		}
+		return;
+	}
+
+	if (__predict_false(!inq)) {
+		/* Should not happen. */
+		m_freem(m);
+		return;
+	}
 	if (IF_QFULL(inq)) {
 		IF_DROP(inq);
 		m_freem(m);

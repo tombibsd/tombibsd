@@ -416,7 +416,8 @@ bad:
 static void
 token_input(struct ifnet *ifp, struct mbuf *m)
 {
-	struct ifqueue *inq;
+	pktqueue_t *pktq = NULL;
+	struct ifqueue *inq = NULL;
 	struct llc *l;
 	struct token_header *trh;
 	int s, lan_hdr_len;
@@ -472,8 +473,7 @@ token_input(struct ifnet *ifp, struct mbuf *m)
 		switch (etype) {
 #ifdef INET
 		case ETHERTYPE_IP:
-			isr = NETISR_IP;
-			inq = &ipintrq;
+			pktq = ip_pktq;
 			break;
 
 		case ETHERTYPE_ARP:
@@ -505,6 +505,13 @@ token_input(struct ifnet *ifp, struct mbuf *m)
 	dropanyway:
 #endif
 		m_freem(m);
+		return;
+	}
+
+	if (__predict_true(pktq)) {
+		if (__predict_false(!pktq_enqueue(pktq, m, 0))) {
+			m_freem(m);
+		}
 		return;
 	}
 

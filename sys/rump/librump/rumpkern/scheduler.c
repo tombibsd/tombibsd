@@ -523,6 +523,15 @@ kpreempt_enable(void)
 	KPREEMPT_ENABLE(curlwp);
 }
 
+bool
+kpreempt_disabled(void)
+{
+	const lwp_t *l = curlwp;
+
+	return l->l_nopreempt != 0 || l->l_stat == LSZOMB ||
+	    (l->l_flag & LW_IDLE) != 0 /* || cpu_kpreempt_disabled() */;
+}
+
 void
 suspendsched(void)
 {

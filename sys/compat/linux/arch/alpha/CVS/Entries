@@ -7,7 +7,7 @@
 /linux_machdep.c/1.49/Fri Nov 18 04:07:43 2011/-kk/
 /linux_machdep.h/1.12/Mon Nov 21 22:00:42 2011/-kk/
 /linux_mmap.h/1.4/Mon Apr 28 20:23:42 2008/-kk/
-/linux_pipe.c/1.15/Thu Apr 14 11:17:47 2011/-kk/
+/linux_pipe.c/1.16/Mon Jun  9 00:29:04 2014/-kk/
 /linux_sigarray.c/1.9/Mon Apr 28 20:23:42 2008/-kk/
 /linux_siginfo.h/1.7/Fri Nov 18 04:07:43 2011/-kk/
 /linux_signal.h/1.9/Mon Apr 28 20:23:42 2008/-kk/

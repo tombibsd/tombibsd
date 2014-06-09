@@ -68,12 +68,6 @@ static struct mystat curstat;
 static struct mystat oldstat;
 static struct mystat newstat;
 
-static struct nlist namelist[] = {
-	{ .n_name = "_ipstat" },
-	{ .n_name = "_udpstat" },
-	{ .n_name = NULL }
-};
-
 WINDOW *
 openip(void)
 {
@@ -186,42 +180,20 @@ int
 initip(void)
 {
 
-	if (! use_sysctl) {
-		if (namelist[0].n_type == 0) {
-			if (kvm_nlist(kd, namelist)) {
-				nlisterr(namelist);
-				return(0);
-			}
-			if ((namelist[0].n_type | namelist[1].n_type) == 0) {
-				error("No namelist");
-				return(0);
-			}
-		}
-	}
 	return 1;
 }
 
 void
 fetchip(void)
 {
+	size_t size;
 
-	if (use_sysctl) {
-		size_t size;
-
-		size = sizeof(newstat.i);
-		if (sysctlbyname("net.inet.ip.stats", newstat.i, &size,
-				 NULL, 0) == -1)
-			return;
-		size = sizeof(newstat.u);
-		if (sysctlbyname("net.inet.udp.stats", newstat.u, &size,
-				 NULL, 0) == -1)
-			return;
-	} else {
-		KREAD((void *)namelist[0].n_value, newstat.i, 
-		    sizeof(newstat.i));
-		KREAD((void *)namelist[1].n_value, newstat.u, 
-		    sizeof(newstat.u));
-	}
+	size = sizeof(newstat.i);
+	if (sysctlbyname("net.inet.ip.stats", newstat.i, &size, NULL, 0) == -1)
+		return;
+	size = sizeof(newstat.u);
+	if (sysctlbyname("net.inet.udp.stats", newstat.u, &size, NULL, 0) == -1)
+		return;
 
 	ADJINETCTR(curstat, oldstat, newstat, i[IP_STAT_TOTAL]);
 	ADJINETCTR(curstat, oldstat, newstat, i[IP_STAT_DELIVERED]);

@@ -20,7 +20,7 @@
 /kobj_machdep.c/1.9/Thu Oct 24 10:28:57 2013/-kk/
 /locore.S/1.36/Sat Apr 19 08:03:44 2014/-kk/
 /netbsd32_machdep.c/1.6/Mon May 19 16:25:38 2014/-kk/
-/pmap.c/1.292/Tue May  6 05:49:51 2014/-kk/
+/pmap.c/1.293/Mon Jun  9 00:27:48 2014/-kk/
 /setcpsr.S/1.3/Thu Oct 24 10:28:57 2013/-kk/
 /setstack.S/1.6/Thu Oct 24 10:28:57 2013/-kk/
 /spl.S/1.10/Tue Dec 17 04:13:25 2013/-kk/

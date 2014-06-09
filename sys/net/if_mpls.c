@@ -480,10 +480,9 @@ mpls_send_frame(struct mbuf *m, struct ifnet *ifp, struct rtentry *rt)
 static int
 mpls_unlabel_inet(struct mbuf *m)
 {
-	int s, iphlen;
 	struct ip *iph;
 	union mpls_shim *ms;
-	struct ifqueue *inq;
+	int iphlen;
 
 	if (mpls_mapttl_inet || mpls_mapprec_inet) {
 
@@ -531,18 +530,10 @@ mpls_unlabel_inet(struct mbuf *m)
 		m_adj(m, sizeof(union mpls_shim));
 
 	/* Put it on IP queue */
-	inq = &ipintrq;
-	s = splnet();
-	if (IF_QFULL(inq)) {
-		IF_DROP(inq);
-		splx(s);
+	if (__predict_false(!pktq_enqueue(ip_pktq, m, 0))) {
 		m_freem(m);
 		return ENOBUFS;
 	}
-	IF_ENQUEUE(inq, m);
-	schednetisr(NETISR_IP);
-	splx(s);
-
 	return 0;
 }
 
@@ -584,8 +575,6 @@ mpls_unlabel_inet6(struct mbuf *m)
 {
 	struct ip6_hdr *ip6hdr;
 	union mpls_shim ms;
-	struct ifqueue *inq;
-	int s;
 
 	/* TODO: mapclass */
 	if (mpls_mapttl_inet6) {
@@ -602,20 +591,11 @@ mpls_unlabel_inet6(struct mbuf *m)
 	} else
 		m_adj(m, sizeof(union mpls_shim));
 
-	/* Put it back on IPv6 stack */
-	schednetisr(NETISR_IPV6);
-	inq = &ip6intrq;
-	s = splnet();
-	if (IF_QFULL(inq)) {
-		IF_DROP(inq);
-		splx(s);
+	/* Put it back on IPv6 queue. */
+	if (__predict_false(!pktq_enqueue(ip6_pktq, m, 0))) {
 		m_freem(m);
 		return ENOBUFS;
 	}
-
-	IF_ENQUEUE(inq, m);
-	splx(s);
-
 	return 0;
 }
 

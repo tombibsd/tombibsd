@@ -317,7 +317,6 @@ extern const struct pr_usrreqs rip6_usrreqs;
 int	icmp6_ctloutput(int, struct socket *, struct sockopt *);
 
 void	ip6_init(void);
-void	ip6intr(void);
 void	ip6_input(struct mbuf *);
 const struct ip6aux *ip6_getdstifaddr(struct mbuf *);
 void	ip6_freepcbopts(struct ip6_pktopts *);

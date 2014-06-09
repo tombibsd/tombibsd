@@ -56,7 +56,6 @@ RUMP_COMPONENT(RUMP_COMPONENT_NET)
 
 	carpattach(1);
 
-	rump_netisr_register(NETISR_IP, ipintr);
 	rump_netisr_register(NETISR_ARP, arpintr);
 }
 

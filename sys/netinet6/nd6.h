@@ -93,6 +93,7 @@ struct nd_ifinfo {
 					 * DAD failure.  (XXX: not ND-specific)
 					 */
 #define	ND6_IFF_OVERRIDE_RTADV	0x10	/* See "RTADV Key", below. */
+#define	ND6_IFF_AUTO_LINKLOCAL	0x20
 
 /*
  * RTADV Key

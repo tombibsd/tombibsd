@@ -784,10 +784,11 @@ static int
 gre_input(struct gre_softc *sc, struct mbuf *m, int hlen,
     const struct gre_h *gh)
 {
+	pktqueue_t *pktq = NULL;
+	struct ifqueue *ifq = NULL;
 	uint16_t flags;
 	uint32_t af;		/* af passed to BPF tap */
-	int isr, s;
-	struct ifqueue *ifq;
+	int isr = 0, s;
 
 	sc->sc_if.if_ipackets++;
 	sc->sc_if.if_ibytes += m->m_pkthdr.len;
@@ -813,8 +814,7 @@ gre_input(struct gre_softc *sc, struct mbuf *m, int hlen,
 	switch (ntohs(gh->ptype)) { /* ethertypes */
 #ifdef INET
 	case ETHERTYPE_IP:
-		ifq = &ipintrq;
-		isr = NETISR_IP;
+		pktq = ip_pktq;
 		af = AF_INET;
 		break;
 #endif
@@ -827,8 +827,7 @@ gre_input(struct gre_softc *sc, struct mbuf *m, int hlen,
 #endif
 #ifdef INET6
 	case ETHERTYPE_IPV6:
-		ifq = &ip6intrq;
-		isr = NETISR_IPV6;
+		pktq = ip6_pktq;
 		af = AF_INET6;
 		break;
 #endif
@@ -856,6 +855,13 @@ gre_input(struct gre_softc *sc, struct mbuf *m, int hlen,
 	bpf_mtap_af(&sc->sc_if, af, m);
 
 	m->m_pkthdr.rcvif = &sc->sc_if;
+
+	if (__predict_true(pktq)) {
+		if (__predict_false(!pktq_enqueue(pktq, m, 0))) {
+			m_freem(m);
+		}
+		return 1;
+	}
 
 	s = splnet();
 	if (IF_QFULL(ifq)) {

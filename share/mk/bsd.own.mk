@@ -51,14 +51,8 @@ TOOLCHAIN_MISSING?=	no
 #
 .if ${MKGCC:Uyes} != "no"
 
-#
-# Platforms still using GCC 4.1
-#
-.if ${MACHINE_CPU}  == "vax"
-HAVE_GCC?=    4
-
 # Platforms still using GCC 4.5
-.elif \
+.if \
       ${MACHINE_CPU} == "ia64" || \
       ${MACHINE_CPU} == "m68k" || \
       ${MACHINE_CPU} == "sh3" || \

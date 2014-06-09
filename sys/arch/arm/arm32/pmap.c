@@ -6036,7 +6036,7 @@ pmap_bootstrap(vaddr_t vstart, vaddr_t vend)
 		    l2idx < (L2_TABLE_SIZE_REAL / sizeof(pt_entry_t));
 		    l2idx++) {
 			if ((ptep[l2idx] & L2_TYPE_MASK) != L2_TYPE_INV) {
-				l2b->l2b_occupancy += PAGE_SIZE / L2_S_SIZE;
+				l2b->l2b_occupancy++;
 			}
 		}
 

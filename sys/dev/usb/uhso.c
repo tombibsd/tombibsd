@@ -2139,17 +2139,12 @@ uhso_ifnet_input(struct ifnet *ifp, struct mbuf **mb, uint8_t *cp, size_t cc)
 
 		bpf_mtap(ifp, m);
 
-		ifp->if_ipackets++;
-		ifp->if_ibytes += m->m_pkthdr.len;
-
-		if (IF_QFULL(&ipintrq)) {
-			IF_DROP(&ipintrq);
+		if (__predict_false(!pktq_enqueue(ip_pktq, m, 0))) {
 			m_freem(m);
 		} else {
-			IF_ENQUEUE(&ipintrq, m);
-			schednetisr(NETISR_IP);
+			ifp->if_ipackets++;
+			ifp->if_ibytes += got;
 		}
-
 		splx(s);
 	}
 }

@@ -1,6 +1,6 @@
 #	$NetBSD$
 
-DIST=		${NETBSDSRCDIR}/external/gpl3/gcc/dist
+DIST=		${GCCDIST}
 GNUHOSTDIST=	${DIST}
 
 GCC_MACHINE_ARCH=${MACHINE_ARCH:S/earmv5/earm/}

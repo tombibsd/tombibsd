@@ -288,7 +288,7 @@ ulfs_lookup(void *v)
 		    NULL, &bp, false)))
 			goto out;
 		numdirpasses = 2;
-		nchstats.ncs_2passes++;
+		namecache_count_2passes();
 	}
 	prevoff = results->ulr_offset;
 	endsearch = roundup(dp->i_size, dirblksiz);
@@ -524,7 +524,7 @@ notfound:
 
 found:
 	if (numdirpasses == 2)
-		nchstats.ncs_pass2++;
+		namecache_count_pass2();
 	/*
 	 * Check that directory length properly reflects presence
 	 * of this entry.

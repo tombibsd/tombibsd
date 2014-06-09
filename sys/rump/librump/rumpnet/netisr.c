@@ -38,9 +38,12 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include "rump_net_private.h"
 
 static void *netisrs[NETISR_MAX];
+
 void
 schednetisr(int isr)
 {
+	KASSERT(isr != NETISR_IP);
+	KASSERT(isr != NETISR_IPV6);
 
 	/*
 	 * Do not schedule a softint that is not registered.
@@ -55,6 +58,8 @@ schednetisr(int isr)
 void
 rump_netisr_register(int level, void (*handler)(void))
 {
+	KASSERT(level != NETISR_IP);
+	KASSERT(level != NETISR_IPV6);
 
 	netisrs[level] = softint_establish(SOFTINT_NET | SOFTINT_MPSAFE,
 	    (void (*)(void *))handler, NULL);

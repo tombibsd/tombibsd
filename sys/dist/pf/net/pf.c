@@ -5822,7 +5822,7 @@ pf_test(int dir, struct ifnet *ifp, struct mbuf **m0,
 			log = s->log;
 		} else if (s == NULL)
 			action = pf_test_rule(&r, &s, dir, kif,
-			    m, off, h, &pd, &a, &ruleset, &ipintrq);
+			    m, off, h, &pd, &a, &ruleset, NULL);
 		break;
 	}
 
@@ -5852,7 +5852,7 @@ pf_test(int dir, struct ifnet *ifp, struct mbuf **m0,
 			log = s->log;
 		} else if (s == NULL)
 			action = pf_test_rule(&r, &s, dir, kif,
-			    m, off, h, &pd, &a, &ruleset, &ipintrq);
+			    m, off, h, &pd, &a, &ruleset, NULL);
 		break;
 	}
 
@@ -5876,7 +5876,7 @@ pf_test(int dir, struct ifnet *ifp, struct mbuf **m0,
 			log = s->log;
 		} else if (s == NULL)
 			action = pf_test_rule(&r, &s, dir, kif,
-			    m, off, h, &pd, &a, &ruleset, &ipintrq);
+			    m, off, h, &pd, &a, &ruleset, NULL);
 		break;
 	}
 
@@ -5900,7 +5900,7 @@ pf_test(int dir, struct ifnet *ifp, struct mbuf **m0,
 			log = s->log;
 		} else if (s == NULL)
 			action = pf_test_rule(&r, &s, dir, kif, m, off, h,
-			    &pd, &a, &ruleset, &ipintrq);
+			    &pd, &a, &ruleset, NULL);
 		break;
 	}
 
@@ -6241,7 +6241,7 @@ pf_test6(int dir, struct ifnet *ifp, struct mbuf **m0,
 			log = s->log;
 		} else if (s == NULL)
 			action = pf_test_rule(&r, &s, dir, kif,
-			    m, off, h, &pd, &a, &ruleset, &ip6intrq);
+			    m, off, h, &pd, &a, &ruleset, NULL);
 		break;
 	}
 
@@ -6271,7 +6271,7 @@ pf_test6(int dir, struct ifnet *ifp, struct mbuf **m0,
 			log = s->log;
 		} else if (s == NULL)
 			action = pf_test_rule(&r, &s, dir, kif,
-			    m, off, h, &pd, &a, &ruleset, &ip6intrq);
+			    m, off, h, &pd, &a, &ruleset, NULL);
 		break;
 	}
 
@@ -6304,7 +6304,7 @@ pf_test6(int dir, struct ifnet *ifp, struct mbuf **m0,
 			log = s->log;
 		} else if (s == NULL)
 			action = pf_test_rule(&r, &s, dir, kif,
-			    m, off, h, &pd, &a, &ruleset, &ip6intrq);
+			    m, off, h, &pd, &a, &ruleset, NULL);
 		break;
 	}
 
@@ -6319,7 +6319,7 @@ pf_test6(int dir, struct ifnet *ifp, struct mbuf **m0,
 			log = s->log;
 		} else if (s == NULL)
 			action = pf_test_rule(&r, &s, dir, kif, m, off, h,
-			    &pd, &a, &ruleset, &ip6intrq);
+			    &pd, &a, &ruleset, NULL);
 		break;
 	}
 
@@ -6476,6 +6476,8 @@ int
 pf_check_congestion(struct ifqueue *ifq)
 {
 #ifdef __NetBSD__
+	// XXX: not handled anyway
+	KASSERT(ifq == NULL);
 	return (0);
 #else
 	if (ifq->ifq_congestion)

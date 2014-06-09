@@ -918,6 +918,9 @@ ifinfo(char *ifname, int argc, char **argv)
 #ifdef ND6_IFF_OVERRIDE_RTADV
 		SETFLAG("override_rtadv", ND6_IFF_OVERRIDE_RTADV);
 #endif
+#ifdef ND6_IFF_AUTO_LINKLOCAL
+		SETFLAG("auto_linklocal", ND6_IFF_AUTO_LINKLOCAL);
+#endif
 #ifdef ND6_IFF_PREFER_SOURCE
 		SETFLAG("prefer_source", ND6_IFF_PREFER_SOURCE);
 #endif
@@ -995,6 +998,10 @@ ifinfo(char *ifname, int argc, char **argv)
 #ifdef ND6_IFF_OVERRIDE_RTADV
 		if ((ND.flags & ND6_IFF_OVERRIDE_RTADV))
 			(void)printf("override_rtadv ");
+#endif
+#ifdef ND6_IFF_AUTO_LINKLOCAL
+		if ((ND.flags & ND6_IFF_AUTO_LINKLOCAL))
+			(void)printf("auto_linklocal ");
 #endif
 #ifdef ND6_IFF_PREFER_SOURCE
 		if ((ND.flags & ND6_IFF_PREFER_SOURCE))

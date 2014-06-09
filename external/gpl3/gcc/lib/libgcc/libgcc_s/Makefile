@@ -9,6 +9,7 @@ NOSTATICLIB=	# defined
 NOPROFILE=	# defined
 NOPICINSTALL=	# defined
 
+.include "../../../Makefile.gcc_path"
 .include <bsd.own.mk>
 
 .if ${MKGCC} != "no"

@@ -1220,11 +1220,12 @@ key_freeso(struct socket *so)
 	case PF_INET:
 	    {
 		struct inpcb *pcb = sotoinpcb(so);
-		struct inpcbpolicy *sp = pcb->inp_sp;
 
 		/* Does it have a PCB ? */
 		if (pcb == NULL)
 			return;
+
+		struct inpcbpolicy *sp = pcb->inp_sp;
 		key_freesp_so(&sp->sp_in);
 		key_freesp_so(&sp->sp_out);
 	    }
@@ -1772,7 +1773,7 @@ key_gather_mbuf(struct mbuf *m, const struct sadb_msghdr *mhp,
 	}
 	va_end(ap);
 
-	if ((result->m_flags & M_PKTHDR) != 0) {
+	if (result && (result->m_flags & M_PKTHDR) != 0) {
 		result->m_pkthdr.len = 0;
 		for (n = result; n; n = n->m_next)
 			result->m_pkthdr.len += n->m_len;

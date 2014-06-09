@@ -57,8 +57,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <fs/cd9660/cd9660_rrip.h>
 #include <fs/cd9660/cd9660_mount.h>
 
-struct	nchstats iso_nchstats;
-
 /*
  * Convert a component of a pathname into a pointer to a locked inode.
  * This is a very central and rather complicated routine.
@@ -191,7 +189,7 @@ cd9660_lookup(void *v)
 		    &bp)))
 				return (error);
 		numdirpasses = 2;
-		iso_nchstats.ncs_2passes++;
+		namecache_count_2passes();
 	}
 	endsearch = dp->i_size;
 
@@ -343,7 +341,7 @@ notfound:
 
 found:
 	if (numdirpasses == 2)
-		iso_nchstats.ncs_pass2++;
+		namecache_count_pass2();
 
 	/*
 	 * Found component in pathname.

@@ -1962,7 +1962,6 @@ atppc_ecp_read_error(struct atppc_softc *atppc)
 static void
 atppc_std_write(struct atppc_softc * const atppc)
 {
-	unsigned int timecount;
 	unsigned char ctr;
 
 	ctr = atppc_r_ctr(atppc);
@@ -1997,7 +1996,6 @@ atppc_std_write(struct atppc_softc * const atppc)
 		atppc_barrier_w(atppc);
 
 		/* Wait for nACK for MAXBUSYWAIT */
-		timecount = 0;
 		if (atppc->sc_use & ATPPC_USE_INTR) {
 			atppc->sc_outerr = atppc_wait_interrupt(atppc,
 				&atppc->sc_out_cv, ATPPC_IRQ_nACK);

@@ -1718,7 +1718,7 @@ insert_into_db(sqlite3 *db, mandb_rec *rec)
 
 	rc = sqlite3_step(stmt);
 	sqlite3_finalize(stmt);
-	if (rc == SQLITE_CONSTRAINT) {
+	if (rc == SQLITE_CONSTRAINT_UNIQUE) {
 		/* The *most* probable reason for reaching here is that
 		 * the UNIQUE contraint on the file column of the mandb_meta
 		 * table was violated.

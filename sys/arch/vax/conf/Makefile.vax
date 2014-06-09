@@ -76,7 +76,9 @@ lock_stubs.o unimpl_emul.o: assym.h
 ##
 
 # XXX recent gcc4 gets ICE on this one
+.if ${HAVE_GCC} == "4"
 COPTS.db_command.c+=	-fno-tree-ter
+.endif
 
 ##
 ## (8) config(8) generated machinery

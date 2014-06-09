@@ -1116,7 +1116,7 @@ struct pf_pdesc {
 #define PFRES_NORM	4		/* Dropping by normalizer */
 #define PFRES_MEMORY	5		/* Dropped due to lacking mem */
 #define PFRES_TS	6		/* Bad TCP Timestamp (RFC1323) */
-#define PFRES_CONGEST	7		/* Congestion (of ipintrq) */
+#define PFRES_CONGEST	7		/* Congestion (of IP queue) */
 #define PFRES_IPOPTIONS 8		/* IP option */
 #define PFRES_PROTCKSUM 9		/* Protocol checksum invalid */
 #define PFRES_BADSTATE	10		/* State mismatch */

@@ -1872,8 +1872,6 @@ vif_input(struct mbuf *m, ...)
 	int off, proto;
 	va_list ap;
 	struct vif *vifp;
-	int s;
-	struct ifqueue *ifq;
 
 	va_start(ap, m);
 	off = va_arg(ap, int);
@@ -1889,22 +1887,10 @@ vif_input(struct mbuf *m, ...)
 
 	m_adj(m, off);
 	m->m_pkthdr.rcvif = vifp->v_ifp;
-	ifq = &ipintrq;
-	s = splnet();
-	if (IF_QFULL(ifq)) {
-		IF_DROP(ifq);
+
+	if (__predict_false(!pktq_enqueue(ip_pktq, m, 0))) {
 		m_freem(m);
-	} else {
-		IF_ENQUEUE(ifq, m);
-		/*
-		 * normally we would need a "schednetisr(NETISR_IP)"
-		 * here but we were called by ip_input and it is going
-		 * to loop back & try to dequeue the packet we just
-		 * queued as soon as we return so we avoid the
-		 * unnecessary software interrrupt.
-		 */
 	}
-	splx(s);
 }
 
 /*

@@ -60,7 +60,6 @@ extern char	*memf;
 extern int	allflag;
 extern int	turns;
 extern gid_t	egid;
-extern int	use_sysctl;
 
 struct inpcb;
 #ifdef INET6

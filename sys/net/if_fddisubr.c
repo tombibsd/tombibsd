@@ -459,8 +459,11 @@ bad:
 static void
 fddi_input(struct ifnet *ifp, struct mbuf *m)
 {
-#if defined(INET) || defined(INET6) || defined(NS) || defined(DECNET) || defined(IPX) || defined(NETATALK)
-	struct ifqueue *inq;
+#if defined(INET) || defined(INET6)
+	pktqueue_t *pktq = NULL;
+#endif
+#if defined(NS) || defined(DECNET) || defined(IPX) || defined(NETATALK)
+	struct ifqueue *inq = NULL;
 	int s;
 #endif
 	struct llc *l;
@@ -548,8 +551,7 @@ fddi_input(struct ifnet *ifp, struct mbuf *m)
 			if (ipflow_fastforward(m))
 				return;
 #endif
-			isr = NETISR_IP;
-			inq = &ipintrq;
+			pktq = ip_pktq;
 			break;
 
 		case ETHERTYPE_ARP:
@@ -574,8 +576,7 @@ fddi_input(struct ifnet *ifp, struct mbuf *m)
 			if (ip6flow_fastforward(&m))
 				return;
 #endif
-			isr = NETISR_IPV6;
-			inq = &ip6intrq;
+			pktq = ip6_pktq;
 			break;
 
 #endif
@@ -612,7 +613,18 @@ fddi_input(struct ifnet *ifp, struct mbuf *m)
 		return;
 	}
 
-#if defined(INET) || defined(INET6) || defined(NS) || defined(DECNET) || defined(IPX) || defined(NETATALK)
+#if defined(INET) || defined(INET6)
+	if (__predict_true(pktq)) {
+		if (__predict_false(!pktq_enqueue(pktq, m, 0))) {
+			m_freem(m);
+		}
+		return;
+	}
+#endif
+#if defined(NS) || defined(DECNET) || defined(IPX) || defined(NETATALK)
+	if (!inq) {
+		m_freem(m);
+	}
 	s = splnet();
 	if (IF_QFULL(inq)) {
 		IF_DROP(inq);

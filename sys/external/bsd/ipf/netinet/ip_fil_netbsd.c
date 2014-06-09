@@ -1927,22 +1927,15 @@ ipf_inject(fr_info_t *fin, mb_t *m)
 	int error;
 
 	if (fin->fin_out == 0) {
-		struct ifqueue *ifq;
-
-		ifq = &ipintrq;
-
-		if (IF_QFULL(ifq)) {
-			IF_DROP(ifq);
+		if (__predict_false(!pktq_enqueue(ip_pktq, m, 0))) {
 			FREE_MB_T(m);
 			error = ENOBUFS;
 		} else {
-			IF_ENQUEUE(ifq, m);
 			error = 0;
 		}
 	} else {
 		error = ip_output(m, NULL, NULL, IP_FORWARDING, NULL);
 	}
-
 	return error;
 }
 

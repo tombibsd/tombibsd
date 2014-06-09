@@ -754,6 +754,8 @@ in6_ifattach(struct ifnet *ifp, struct ifnet *altifp)
 #ifdef IFT_PFSYNC
 	case IFT_PFSYNC:
 #endif
+		ND_IFINFO(ifp)->flags &= ~ND6_IFF_AUTO_LINKLOCAL;
+		ND_IFINFO(ifp)->flags |= ND6_IFF_IFDISABLED;
 		return;
 	}
 
@@ -784,6 +786,7 @@ in6_ifattach(struct ifnet *ifp, struct ifnet *altifp)
 		 * linklocals for 6to4 interface, but there's no use and
 		 * it is rather harmful to have one.
 		 */
+		ND_IFINFO(ifp)->flags &= ~ND6_IFF_AUTO_LINKLOCAL;
 		return;
 #endif
 	case IFT_CARP:
@@ -817,7 +820,9 @@ in6_ifattach(struct ifnet *ifp, struct ifnet *altifp)
 	/*
 	 * assign a link-local address, if there's none.
 	 */
-	if (ip6_auto_linklocal) {
+	if (!(ND_IFINFO(ifp)->flags & ND6_IFF_IFDISABLED) &&
+	    ND_IFINFO(ifp)->flags & ND6_IFF_AUTO_LINKLOCAL)
+	{
 		ia = in6ifa_ifpforlinklocal(ifp, 0);
 		if (ia == NULL && in6_ifattach_linklocal(ifp, altifp) != 0) {
 			printf("%s: cannot assign link-local address\n",

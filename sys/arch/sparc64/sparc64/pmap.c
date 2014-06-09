@@ -484,6 +484,7 @@ static int pmap_calculate_colors(void)
 		/* Found a CPU, get the E$ info. */
 		size = prom_getpropint(node, "ecache-size", -1);
 		if (size == -1) {
+			/* XXX sun4v support missing */
 			prom_printf("pmap_calculate_colors: node %x has "
 				"no ecache-size\n", node);
 			/* If we can't get the E$ size, skip the node */

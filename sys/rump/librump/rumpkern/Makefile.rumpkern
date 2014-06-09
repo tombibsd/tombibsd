@@ -115,6 +115,7 @@ SRCS+=	init_sysctl_base.c	\
 	subr_log.c		\
 	subr_lwp_specificdata.c	\
 	subr_once.c		\
+	subr_pcq.c		\
 	subr_percpu.c		\
 	subr_prf.c		\
 	subr_pserialize.c	\

@@ -571,11 +571,13 @@ struct ip6_mtuinfo {
 #define IPV6CTL_ANONPORTMAX	29	/* maximum ephemeral port */
 #define IPV6CTL_LOWPORTMIN	30	/* minimum reserved port */
 #define IPV6CTL_LOWPORTMAX	31	/* maximum reserved port */
-/* 32 to 38: reserved */
+/* 32 to 34: reserved */
+#define IPV6CTL_AUTO_LINKLOCAL	35	/* automatic link-local addr assign */
+/* 36 to 38: reserved */
 #define IPV6CTL_USE_DEFAULTZONE	39	/* use default scope zone */
 /* 40: reserved */
 #define IPV6CTL_MAXFRAGS	41	/* max fragments */
-#define IPV6CTL_IFQ		42	/* ip6intrq node */
+#define IPV6CTL_IFQ		42	/* IPv6 packet input queue */
 #define IPV6CTL_RTADV_MAXROUTES 43	/* maximum number of routes */
 					/* via router advertisement */
 #define IPV6CTL_RTADV_NUMROUTES 44	/* current number of routes */

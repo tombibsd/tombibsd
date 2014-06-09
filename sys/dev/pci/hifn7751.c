@@ -700,6 +700,7 @@ hifn_rng_locked(void *vsc)
 
 		if (sc->sc_rng_need) {
 			nwords = (sc->sc_rng_need * NBBY) / HIFN_RNG_BITSPER;
+			nwords = MIN(__arraycount(num), nwords);
 		}
 
 		if (nwords < 2) {

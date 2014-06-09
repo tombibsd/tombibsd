@@ -7,6 +7,7 @@ NOPROFILE=	# defined
 
 LIB=		gcc
 
+.include "../../../Makefile.gcc_path"
 .include <bsd.own.mk>
 
 .if ${MKGCC} != "no"

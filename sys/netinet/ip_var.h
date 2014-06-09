@@ -226,7 +226,6 @@ struct mbuf *
 	 ip_srcroute(void);
 int	 ip_sysctl(int *, u_int, void *, size_t *, void *, size_t);
 void	 ip_statinc(u_int);
-void	 ipintr(void);
 void *	 rip_ctlinput(int, const struct sockaddr *, void *);
 int	 rip_ctloutput(int, struct socket *, struct sockopt *);
 void	 rip_init(void);

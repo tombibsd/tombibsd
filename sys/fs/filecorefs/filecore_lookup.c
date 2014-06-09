@@ -80,8 +80,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <fs/filecorefs/filecore_extern.h>
 #include <fs/filecorefs/filecore_node.h>
 
-struct	nchstats filecore_nchstats;
-
 /*
  * Convert a component of a pathname into a pointer to a locked inode.
  * This is a very central and rather complicated routine.
@@ -193,7 +191,7 @@ filecore_lookup(void *v)
 	} else {
 		i = dp->i_diroff;
 		numdirpasses = 2;
-		filecore_nchstats.ncs_2passes++;
+		namecache_count_2passes();
 	}
 	endsearch = FILECORE_MAXDIRENTS;
 
@@ -251,7 +249,7 @@ notfound:
 
 found:
 	if (numdirpasses == 2)
-		filecore_nchstats.ncs_pass2++;
+		namecache_count_pass2();
 
 	/*
 	 * Found component in pathname.

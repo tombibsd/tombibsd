@@ -935,14 +935,10 @@ slintr(void *arg)
 
 #ifdef INET
 		s = splnet();
-		if (IF_QFULL(&ipintrq)) {
-			IF_DROP(&ipintrq);
+		if (__predict_false(!pktq_enqueue(ip_pktq, m, 0))) {
 			sc->sc_if.if_ierrors++;
 			sc->sc_if.if_iqdrops++;
 			m_freem(m);
-		} else {
-			IF_ENQUEUE(&ipintrq, m);
-			schednetisr(NETISR_IP);
 		}
 		splx(s);
 #endif

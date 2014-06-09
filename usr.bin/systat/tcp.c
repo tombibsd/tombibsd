@@ -64,11 +64,6 @@ static uint64_t curstat[TCP_NSTATS];
 static uint64_t newstat[TCP_NSTATS];
 static uint64_t oldstat[TCP_NSTATS];
 
-static struct nlist namelist[] = {
-	{ .n_name = "_tcpstat" },
-	{ .n_name = NULL }
-};
-
 WINDOW *
 opentcp(void)
 {
@@ -214,36 +209,16 @@ showtcp(void)
 int
 inittcp(void)
 {
-
-	if (! use_sysctl) {
-		if (namelist[0].n_type == 0) {
-			if (kvm_nlist(kd, namelist)) {
-				nlisterr(namelist);
-				return(0);
-			}
-			if (namelist[0].n_type == 0) {
-				error("No namelist");
-				return(0);
-			}
-		}
-	}
 	return 1;
 }
 
 void
 fetchtcp(void)
 {
-	int i;
+	size_t i, size = sizeof(newstat);
 
-	if (use_sysctl) {
-		size_t size = sizeof(newstat);
-		
-		if (sysctlbyname("net.inet.tcp.stats", newstat, &size,
-				 NULL, 0) == -1)
-			return;
-	} else {
-		KREAD((void *)namelist[0].n_value, newstat, sizeof(newstat));
-	}
+	if (sysctlbyname("net.inet.tcp.stats", newstat, &size, NULL, 0) == -1)
+		return;
 
 	for (i = 0; i < TCP_NSTATS; i++)
 		xADJINETCTR(curstat, oldstat, newstat, i);

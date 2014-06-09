@@ -3,7 +3,7 @@
 REQUIRETOOLS=	yes
 NOLINT=		# defined
 
-.include <bsd.own.mk>
+.include <bsd.init.mk>
 
 .include "Makefile.inc"
 

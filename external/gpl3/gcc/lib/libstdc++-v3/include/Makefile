@@ -10,7 +10,7 @@ SUBDIR+=	tr1 tr2
 
 .cc: # disable .cc->NULL transform
 
-DIST=		${NETBSDSRCDIR}/external/gpl3/gcc/dist
+DIST=		${GCCDIST}
 GNUHOSTDIST=	${DIST}
 
 # libsupc++

@@ -1,13 +1,11 @@
 #	$NetBSD$
 
-.include <bsd.own.mk>
 .include <bsd.init.mk>
 
 .include "${.CURDIR}/../../arch/${GCC_MACHINE_ARCH}/defs.mk"
 
 .cc: # disable .cc->NULL transform
 
-DIST=		${NETBSDSRCDIR}/external/gpl3/${EXTERNAL_GCC_SUBDIR}/dist
 GNUHOSTDIST=	${DIST}
 
 BUILDINCS=	basic_file.h c++allocator.h c++io.h c++locale.h
@@ -55,12 +53,13 @@ ${_h}: ${_s}
 	cp -pf ${.ALLSRC} ${.TARGET}
 .endfor
 
+# Get default targets including <bsd.inc.mk>.
+.include <bsd.prog.mk>
+
 .PATH: ${.CURDIR}/../../arch/${GCC_MACHINE_ARCH} \
 	${DIST}/libstdc++-v3/include \
 	${DIST}/libstdc++-v3/config \
 	${DIST}/libstdc++-v3/ \
 	${DIST}/libstdc++-v3/libsupc++
 
-# Get default targets including <bsd.inc.mk>.
-.include <bsd.prog.mk>
 .include <bsd.subdir.mk>

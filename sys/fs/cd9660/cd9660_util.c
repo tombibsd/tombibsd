@@ -117,7 +117,6 @@ isofncmp(const u_char *fn, size_t fnlen, const u_char *isofn, size_t isolen,
 			case ';':
 				break;
 			}
-			fn++;
 			for (i = 0; fnlen-- != 0; i = i * 10 + *fn++ - '0') {
 				if (*fn < '0' || *fn > '9') {
 					return -1;

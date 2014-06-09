@@ -37,8 +37,8 @@
 /exit.c/1.15/Wed May 18 19:36:36 2011/-kk/
 /getenv.3/1.25/Tue Oct 26 22:34:33 2010/-kk/
 /getenv.c/1.35/Sun Nov 14 22:04:36 2010/-kk/
-/getopt.3/1.32/Mon Mar 22 19:30:54 2010/-kk/
-/getopt.c/1.28/Fri Mar 20 13:56:57 2009/-kk/
+/getopt.3/1.34/Mon Jun  9 00:27:06 2014/-kk/
+/getopt.c/1.29/Mon Jun  9 00:27:06 2014/-kk/
 /getopt_long.3/1.18/Mon Jul  2 17:56:17 2007/-kk/
 /getopt_long.c/1.25/Fri Mar 20 14:05:54 2009/-kk/
 /getsubopt.3/1.14/Tue Nov 17 15:02:08 2009/-kk/

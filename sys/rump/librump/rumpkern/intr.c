@@ -324,6 +324,14 @@ softint_schedule(void *arg)
 	}
 }
 
+void
+softint_schedule_cpu(void *arg, struct cpu_info *ci)
+{
+	/* TODO: implement this properly */
+	KASSERT(curcpu() == ci);
+	softint_schedule(arg);
+}
+
 /*
  * flimsy disestablish: should wait for softints to finish.
  */

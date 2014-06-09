@@ -636,17 +636,18 @@ end:
 		top = m_devget(sc->sc_ifbuf + LPIPHDRLEN, len, 0, ifp, NULL);
 	}
 
-	/* Do nothing if mbuf was not created or the queue is full */
-	if((top == NULL) || (IF_QFULL(&ipintrq))) {
-		IF_DROP(&ipintrq);
+	if (top == NULL) {
 		ifp->if_iqdrops++;
-		LP_PRINTF("DROP");
 		goto err;
 	}
-	if(ifp->if_bpf)
+	if (ifp->if_bpf) {
 		lptap(ifp, top);
-	IF_ENQUEUE(&ipintrq, top);
-	schednetisr(NETISR_IP);
+	}
+	if (__predict_false(!pktq_enqueue(ip_pktq, top, 0))) {
+		ifp->if_iqdrops++;
+		m_freem(top);
+		goto err;
+	}
 	ifp->if_ipackets++;
 	ifp->if_ibytes += len;
 	sc->sc_iferrs = 0;

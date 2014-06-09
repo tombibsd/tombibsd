@@ -526,7 +526,7 @@ cpu_attach_non_boot(struct cpu_softc *sc, struct cpu_info *cpi, int node)
 	/* Now start this CPU */
 	cpu_spinup(cpi);
 	printf(": %s @ %s MHz, %s FPU\n", cpi->cpu_longname,
-		clockfreq(cpi->hz), cpi->fpu_name);
+		clockfreq(cpi->hz / 1000), cpi->fpu_name);
 
 	cache_print(sc);
 

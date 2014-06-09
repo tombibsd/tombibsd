@@ -191,7 +191,9 @@ __quota_nfs_get(struct quotahandle *qh, const struct quotakey *qk,
 	free(host);
 
 	if (ret != RPC_SUCCESS) {
-		errno = sverrno;
+		/* if the file server does not support any quotas at all,
+		   return ENOENT */
+		errno = sverrno == ENOTCONN ? ENOENT : sverrno;
 		return -1;
 	}
 

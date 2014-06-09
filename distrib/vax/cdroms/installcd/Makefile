@@ -31,7 +31,7 @@ image_md_pre:
 	for f in ${SYSINSTDIR}/sysinstmsgs.??; do \
 		${INSTALL} ${COPY} $$f cdrom; \
 	done
-	${TOOL_GZIP} -d cdrom/netbsd.gz
+	${TOOL_GZIP} -d -f cdrom/netbsd.gz
 	echo '. type=dir optional' > ./fs.spec
 	echo './dev type=dir optional' >> ./fs.spec
 	${HOST_SH} cdrom/dev/MAKEDEV -s all | ${TOOL_SED} -e '1d' -e 's:^\./:./dev/:' >> ./fs.spec
