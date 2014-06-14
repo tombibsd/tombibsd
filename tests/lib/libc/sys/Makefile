@@ -70,7 +70,7 @@ LDADD.t_getpid+=        -lpthread
 
 .if (${MKRUMP} != "no")
 TESTS_C+=		t_posix_fadvise
-LDADD.t_posix_fadvise+= -lrumpvfs -lrump -lrumpuser -lpthread
+LDADD.t_posix_fadvise+= -lrumpvfs -lrump -lrumpuser -lrump -lpthread
 .endif
 
 WARNS=			4

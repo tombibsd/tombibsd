@@ -130,10 +130,10 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <netatalk/at.h>
 #endif
 #include <net/pfil.h>
+#include <netinet/in.h>
 #include <netinet/in_var.h>
 
 #ifdef INET6
-#include <netinet/in.h>
 #include <netinet6/in6_var.h>
 #include <netinet6/nd6.h>
 #endif
@@ -872,7 +872,9 @@ again:
 	 * ensures that the packets are dequeued while a cross-call will
 	 * ensure that the interrupts have completed. FIXME: not quite..
 	 */
+#ifdef INET
 	pktq_barrier(ip_pktq);
+#endif
 	xc = xc_broadcast(0, (xcfunc_t)nullop, NULL, NULL);
 	xc_wait(xc);
 
@@ -927,7 +929,7 @@ if_rt_walktree(struct rtentry *rt, void *v)
 	    rt_mask(rt), rt->rt_flags, NULL);
 	KASSERT((rt->rt_flags & RTF_UP) == 0);
 	rt->rt_ifp = NULL;
-	RTFREE(rt);
+	rtfree(rt);
 	if (error != 0)
 		printf("%s: warning: unable to delete rtentry @ %p, "
 		    "error = %d\n", ifp->if_xname, rt, error);
@@ -2339,6 +2341,20 @@ bad:
 #if defined(INET) || defined(INET6)
 
 static int
+sysctl_pktq_maxlen(SYSCTLFN_ARGS, pktqueue_t *pq)
+{
+	u_int nmaxlen = pktq_get_count(pq, PKTQ_MAXLEN);
+	struct sysctlnode node = *rnode;
+	int error;
+
+	node.sysctl_data = &nmaxlen;
+	error = sysctl_lookup(SYSCTLFN_CALL(&node));
+	if (error || newp == NULL)
+		return error;
+	return pktq_set_maxlen(pq, nmaxlen);
+}
+
+static int
 sysctl_pktq_count(SYSCTLFN_ARGS, pktqueue_t *pq, u_int count_id)
 {
 	int count = pktq_get_count(pq, count_id);
@@ -2355,12 +2371,21 @@ sysctl_pktq_count(SYSCTLFN_ARGS, pktqueue_t *pq, u_int count_id)
 	}
 
 #if defined(INET)
-SYSCTL_NET_PKTQ(ip_pktq, maxlen, PKTQ_MAXLEN)
+static int
+sysctl_net_ip_pktq_maxlen(SYSCTLFN_ARGS)
+{
+	return sysctl_pktq_maxlen(SYSCTLFN_CALL(rnode), ip_pktq);
+}
 SYSCTL_NET_PKTQ(ip_pktq, items, PKTQ_NITEMS)
 SYSCTL_NET_PKTQ(ip_pktq, drops, PKTQ_DROPS)
 #endif
+
 #if defined(INET6)
-SYSCTL_NET_PKTQ(ip6_pktq, maxlen, PKTQ_MAXLEN)
+static int
+sysctl_net_ip6_pktq_maxlen(SYSCTLFN_ARGS)
+{
+	return sysctl_pktq_maxlen(SYSCTLFN_CALL(rnode), ip6_pktq);
+}
 SYSCTL_NET_PKTQ(ip6_pktq, items, PKTQ_NITEMS)
 SYSCTL_NET_PKTQ(ip6_pktq, drops, PKTQ_DROPS)
 #endif
@@ -2432,3 +2457,44 @@ sysctl_net_pktq_setup(struct sysctllog **clog, int pf)
 		       CTL_NET, pf, ipn, qid, IFQCTL_DROPS, CTL_EOL);
 }
 #endif /* INET || INET6 */
+
+static int
+if_sdl_sysctl(SYSCTLFN_ARGS)
+{
+	struct ifnet *ifp;
+	const struct sockaddr_dl *sdl;
+
+	if (namelen != 1)
+		return EINVAL;
+
+	ifp = if_byindex(name[0]);
+	if (ifp == NULL)
+		return ENODEV;
+
+	sdl = ifp->if_sadl;
+	if (sdl == NULL) {
+		*oldlenp = 0;
+		return 0;
+	}
+
+	if (oldp == NULL) {
+		*oldlenp = sdl->sdl_alen;
+		return 0;
+	}
+
+	if (*oldlenp >= sdl->sdl_alen)
+		*oldlenp = sdl->sdl_alen;
+	return sysctl_copyout(l, &sdl->sdl_data[sdl->sdl_nlen], oldp, *oldlenp);
+}
+
+SYSCTL_SETUP(sysctl_net_sdl_setup, "sysctl net.sdl subtree setup")
+{
+	const struct sysctlnode *rnode = NULL;
+
+	sysctl_createv(clog, 0, NULL, &rnode,
+		       CTLFLAG_PERMANENT,
+		       CTLTYPE_NODE, "sdl",
+		       SYSCTL_DESCR("Get active link-layer address"),
+		       if_sdl_sysctl, 0, NULL, 0,
+		       CTL_NET, CTL_CREATE, CTL_EOL);
+}

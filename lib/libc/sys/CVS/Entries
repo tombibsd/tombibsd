@@ -115,7 +115,7 @@
 /ntp_adjtime.2/1.10/Mon May 18 09:28:51 2009/-kk/
 /ntp_adjtime.c/1.13/Tue Mar 20 16:26:12 2012/-kk/
 /open.2/1.56/Thu Oct 24 10:28:53 2013/-kk/
-/pathconf.2/1.27/Mon Jul 26 12:30:16 2010/-kk/
+/pathconf.2/1.28/Sat Jun 14 03:56:12 2014/-kk/
 /pipe.2/1.30/Sat Mar  1 06:04:07 2014/-kk/
 /pmc_control.2/1.7/Mon Oct 31 11:34:16 2005/-kk/
 /poll.2/1.28/Mon Mar 22 19:30:55 2010/-kk/

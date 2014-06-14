@@ -183,7 +183,6 @@ mach_init(int argc, char *argv[], char *envp[], u_int bim, char *bip)
 	extern char edata[], end[];
 	const char *bi_msg;
 #if NKSYMS || defined(DDB) || defined(MODULAR)
-	int nsym = 0;
 	char *ssym = 0;
 	char *esym = 0;
 	struct btinfo_symtab *bi_syms;
@@ -218,7 +217,6 @@ mach_init(int argc, char *argv[], char *envp[], u_int bim, char *bip)
 
 	/* Load sysmbol table if present */
 	if (bi_syms != NULL) {
-		nsym = bi_syms->nsym;
 		ssym = (void *)bi_syms->ssym;
 		esym = (void *)bi_syms->esym;
 		kernend = (void *)mips_round_page(esym);
@@ -591,9 +589,7 @@ null_cnpollc(dev_t dev, int on)
 void
 consinit(void)
 {
-	int zs_unit;
 
-	zs_unit = 0;
 	cn_tab = &consdev_zs;
 
 	(*cn_tab->cn_init)(cn_tab);

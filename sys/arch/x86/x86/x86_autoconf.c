@@ -70,6 +70,14 @@ int x86_ndisks;
 #define DPRINTF(a)
 #endif
 
+static void
+dmatch(const char *func, device_t dv)
+{
+
+	printf("WARNING: %s: double match for boot device (%s, %s)\n",
+	    func, device_xname(booted_device), device_xname(dv));
+}
+
 static int
 is_valid_disk(device_t dv)
 {
@@ -388,10 +396,7 @@ findroot(void)
 			continue;
  bootwedge_found:
 			if (booted_device) {
-				printf("WARNING: double match for boot "
-				    "device (%s, %s)\n",
-				    device_xname(booted_device),
-				    device_xname(dv));
+				dmatch(__func__, dv);
 				continue;
 			}
 			booted_device = dv;
@@ -450,10 +455,7 @@ findroot(void)
 			continue;
  bootdisk_found:
 			if (booted_device) {
-				printf("WARNING: double match for boot "
-				    "device (%s, %s)\n",
-				    device_xname(booted_device),
-				    device_xname(dv));
+				dmatch(__func__, dv);
 				continue;
 			}
 			booted_device = dv;
@@ -540,8 +542,7 @@ device_register(device_t dev, void *aux)
 
 	if (booted_device != NULL) {
 		/* XXX should be a panic() */
-		printf("WARNING: double match for boot device (%s, %s)\n",
-		    device_xname(booted_device), device_xname(dev));
+		dmatch(__func__, dev);
 	} else
 		booted_device = (isaboot != NULL) ? isaboot : pciboot;
 }

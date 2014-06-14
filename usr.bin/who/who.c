@@ -285,6 +285,7 @@ print(const char *name, const char *line, time_t t, const char *host,
 	time_t idle;
 	const char *types = NULL;
 	size_t i;
+	char *tstr;
 
 	state = '?';
 	idle = 0;
@@ -312,7 +313,8 @@ print(const char *name, const char *line, time_t t, const char *host,
 		(void)printf("%c ", state);
 
 	(void)printf("%-*.*s ", maxline, maxline, line);
-	(void)printf("%.12s ", ctime(&t) + 4);
+	tstr = ctime(&t);
+	(void)printf("%.12s ", tstr ? tstr + 4 : "?");
 
 	if (show_idle) {
 		if (idle < 60) 

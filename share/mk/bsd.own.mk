@@ -53,9 +53,7 @@ TOOLCHAIN_MISSING?=	no
 
 # Platforms still using GCC 4.5
 .if \
-      ${MACHINE_CPU} == "ia64" || \
       ${MACHINE_CPU} == "m68k" || \
-      ${MACHINE_CPU} == "sh3" || \
       ${MACHINE_ARCH} == "powerpc"
 HAVE_GCC?=    45
 

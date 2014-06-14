@@ -303,6 +303,9 @@ unp_output(struct mbuf *m, struct mbuf *control, struct unpcb *unp,
 	struct socket *so2;
 	const struct sockaddr_un *sun;
 
+	/* XXX: server side closed the socket */
+	if (unp->unp_conn == NULL)
+		return ECONNREFUSED;
 	so2 = unp->unp_conn->unp_socket;
 
 	KASSERT(solocked(so2));

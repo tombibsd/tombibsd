@@ -359,11 +359,11 @@ lostart(struct ifnet *ifp)
 {
 	for (;;) {
 		pktqueue_t *pktq = NULL;
-		struct ifqueue *ifq;
+		struct ifqueue *ifq = NULL;
 		struct mbuf *m;
 		size_t pktlen;
 		uint32_t af;
-		int s, isr;
+		int s, isr = 0;
 
 		IFQ_DEQUEUE(&ifp->if_snd, m);
 		if (m == NULL)

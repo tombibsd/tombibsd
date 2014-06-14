@@ -49,6 +49,7 @@ bool		pktq_enqueue(pktqueue_t *, struct mbuf *, const u_int);
 struct mbuf *	pktq_dequeue(pktqueue_t *);
 void		pktq_barrier(pktqueue_t *);
 void		pktq_flush(pktqueue_t *);
+int		pktq_set_maxlen(pktqueue_t *, size_t);
 
 uint32_t	pktq_rps_hash(const struct mbuf *);
 uint64_t	pktq_get_count(pktqueue_t *, pktq_count_t);

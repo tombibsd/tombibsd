@@ -176,6 +176,12 @@ AC_CHECK_DECLS([lchflags, lchmod, lchown],,,[
 #include <unistd.h>
 ])
 
+AC_CHECK_DECLS([errc, verrc, warnc, vwarnc],,, [
+#ifdef HAVE_ERR_H
+#include <err.h>
+#endif
+])
+
 AC_CHECK_DECLS([htobe16, htobe32, htobe64, htole16, htole32, htole64,
 		be16toh, be32toh, be64toh, le16toh, le32toh, le64toh],,,
 		[#include <sys/types.h>])

@@ -66,7 +66,7 @@ MODULE(MODULE_CLASS_MISC, npf_alg_icmp, "npf");
 static npf_alg_t *	alg_icmp	__read_mostly;
 
 /*
- * npfa_icmp_match: matching insperctor determines ALG case and associates
+ * npfa_icmp_match: matching inspector determines ALG case and associates
  * our ALG with the NAT entry.
  */
 static bool

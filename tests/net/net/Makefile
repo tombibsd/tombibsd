@@ -13,7 +13,7 @@ TESTS_C+=	t_pktinfo
 TESTS_C+=	t_raw
 .endif
 
-LDADD.t_raw+=		-lrumpnet_local -lrumpnet_netinet -lrumpnet_net
-LDADD.t_raw+=		-lrumpnet -lrumpvfs -lrump -lrumpuser -lpthread
+LDADD.t_raw+=	-lrumpnet_local -lrumpnet_netinet -lrumpnet_net
+LDADD.t_raw+=	-lrumpnet -lrumpvfs -lrump -lrumpuser -lrump -lpthread
 
 .include <bsd.test.mk>

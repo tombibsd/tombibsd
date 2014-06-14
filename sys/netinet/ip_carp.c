@@ -390,7 +390,7 @@ carp_setroute(struct carp_softc *sc, int cmd)
 			hr_otherif = (rt && rt->rt_ifp != &sc->sc_if &&
 			    rt->rt_flags & (RTF_CLONING|RTF_CLONED));
 			if (rt != NULL) {
-				RTFREE(rt);
+				rtfree(rt);
 				rt = NULL;
 			}
 
@@ -434,7 +434,7 @@ carp_setroute(struct carp_softc *sc, int cmd)
 				break;
 			}
 			if (rt != NULL) {
-				RTFREE(rt);
+				rtfree(rt);
 				rt = NULL;
 			}
 			break;

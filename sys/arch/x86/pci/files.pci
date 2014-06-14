@@ -59,3 +59,8 @@ file	arch/x86/pci/tcpcib.c		tcpcib
 device	fwhrng
 attach	fwhrng at fwhichbus
 file	arch/x86/pci/fwhrng.c		fwhrng needs-flag
+
+# VMware VMXNET3 virtual interface
+device	vmx: ether, ifnet, arp
+attach	vmx at pci
+file	arch/x86/pci/if_vmx.c		vmx

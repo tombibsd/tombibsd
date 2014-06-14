@@ -464,11 +464,14 @@ fddi_input(struct ifnet *ifp, struct mbuf *m)
 #endif
 #if defined(NS) || defined(DECNET) || defined(IPX) || defined(NETATALK)
 	struct ifqueue *inq = NULL;
+#endif
+#if defined(NS) || defined(DECNET) || defined(IPX) || defined(NETATALK)
+	int isr = 0;
 	int s;
 #endif
+
 	struct llc *l;
 	struct fddi_header *fh;
-	int isr = 0;
 
 	MCLAIM(m, &((struct ethercom *)ifp)->ec_rx_mowner);
 	if ((ifp->if_flags & IFF_UP) == 0) {
@@ -556,8 +559,10 @@ fddi_input(struct ifnet *ifp, struct mbuf *m)
 
 		case ETHERTYPE_ARP:
 #if !defined(__bsdi__) || _BSDI_VERSION >= 199401
+#if defined(NS) || defined(DECNET) || defined(IPX) || defined(NETATALK)
 			isr = NETISR_ARP;
 			inq = &arpintrq;
+#endif
 			break;
 #else
 			arpinput(ifp, m);

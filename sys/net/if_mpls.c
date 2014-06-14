@@ -268,7 +268,7 @@ mpls_output(struct ifnet *ifp, struct mbuf *m, const struct sockaddr *dst, struc
 	}
 
 	err = mpls_send_frame(m, rt1->rt_ifp, rt);
-	RTFREE(rt1);
+	rtfree(rt1);
 	return err;
 }
 
@@ -439,7 +439,7 @@ done:
 	if (error != 0 && m != NULL)
 		m_freem(m);
 	if (rt != NULL)
-		RTFREE(rt);
+		rtfree(rt);
 
 	return error;
 }

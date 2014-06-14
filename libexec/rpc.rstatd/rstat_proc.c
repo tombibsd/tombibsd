@@ -254,7 +254,7 @@ updatestat(int dummy)
 	}
 	s = socket(AF_INET, SOCK_DGRAM, 0);
 	for (i = 0; s != -1 && ifps[i].if_name != NULL; ++i) {
-		strncpy(ifdr.ifdr_name, ifps[i].if_name, sizeof(ifdr.ifdr_name));
+		strlcpy(ifdr.ifdr_name, ifps[i].if_name, sizeof(ifdr.ifdr_name));
 		if (ioctl(s, SIOCGIFDATA, &ifdr) != 0)
 			continue;
 		stats_all.s3.if_ipackets += ifdr.ifdr_data.ifi_ipackets;

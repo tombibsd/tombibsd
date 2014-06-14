@@ -526,10 +526,14 @@ kpreempt_enable(void)
 bool
 kpreempt_disabled(void)
 {
+#if 0
 	const lwp_t *l = curlwp;
 
 	return l->l_nopreempt != 0 || l->l_stat == LSZOMB ||
-	    (l->l_flag & LW_IDLE) != 0 /* || cpu_kpreempt_disabled() */;
+	    (l->l_flag & LW_IDLE) != 0 || cpu_kpreempt_disabled();
+#endif
+	/* XXX: emulate cpu_kpreempt_disabled() */
+	return true;
 }
 
 void

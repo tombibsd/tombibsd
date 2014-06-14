@@ -636,8 +636,9 @@ sppp_input(struct ifnet *ifp, struct mbuf *m)
 	}
 
 queue_pkt:
-	if (! (ifp->if_flags & IFF_UP) || ! inq)
+	if ((ifp->if_flags & IFF_UP) == 0 || (!inq && !pktq)) {
 		goto drop;
+	}
 
 	/* Check queue. */
 	if (__predict_true(pktq)) {

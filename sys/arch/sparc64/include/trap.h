@@ -144,6 +144,14 @@
 #define	SYSCALL_G7RFLAG	0x800	/* use %g7 as above (deprecated) */
 #define	SYSCALL_G5RFLAG	0xc00	/* use %g5 as above (only ABI compatible way) */
 
+/* Software traps */
+#ifdef SUN4V
+#define ST_FAST_TRAP            0x80
+#define ST_MMU_MAP_ADDR         0x83
+#define ST_MMU_UNMAP_ADDR	0x84
+#define ST_CORE_TRAP	        0xff
+#endif
+
 /*
  * `software trap' macros to keep people happy (sparc v8 manual says not
  * to set the upper bits). Correct mask is 0xff for v9, but all values

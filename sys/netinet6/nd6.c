@@ -847,7 +847,7 @@ nd6_lookup1(const struct in6_addr *addr6, int create, struct ifnet *ifp,
 		 * interface route.
 		 */
 		if (create) {
-			RTFREE(rt);
+			rtfree(rt);
 			rt = NULL;
 		}
 	}

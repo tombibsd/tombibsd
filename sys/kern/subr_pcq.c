@@ -60,6 +60,7 @@ struct pcq {
  * Consumer (c) - in the higher 16 bits.
  *
  * We have a limitation of 16 bits i.e. 0xffff items in the queue.
+ * The PCQ_MAXLEN constant is set accordingly.
  */
 
 static inline void
@@ -197,7 +198,7 @@ pcq_create(size_t nitems, km_flag_t kmflags)
 {
 	pcq_t *pcq;
 
-	KASSERT(nitems > 0 || nitems <= 0xffff);
+	KASSERT(nitems > 0 || nitems <= PCQ_MAXLEN);
 
 	pcq = kmem_zalloc(offsetof(pcq_t, pcq_items[nitems]), kmflags);
 	if (pcq == NULL) {

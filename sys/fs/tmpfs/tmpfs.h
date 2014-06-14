@@ -307,13 +307,6 @@ bool		tmpfs_strname_neqlen(struct componentname *, struct componentname *);
     KASSERT((node)->tn_size % sizeof(tmpfs_dirent_t) == 0);
 
 /*
- * Memory management stuff.
- */
-
-/* Amount of memory pages to reserve for the system. */
-#define	TMPFS_PAGES_RESERVED	(4 * 1024 * 1024 / PAGE_SIZE)
-
-/*
  * Routines to convert VFS structures to tmpfs internal ones.
  */
 

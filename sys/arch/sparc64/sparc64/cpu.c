@@ -78,6 +78,11 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sparc64/hypervisor.h>
 #endif
 
+#ifdef SUN4V
+#define SUN4V_MONDO_QUEUE_SIZE	32
+#define SUN4V_QUEUE_ENTRY_SIZE	64
+#endif
+
 int ecache_min_line_size;
 
 /* Linked list of all CPUs in system. */
@@ -135,6 +140,7 @@ cpuid_from_node(u_int cpu_node)
 		id = prom_getpropint(cpu_node, "portid", -1);
 	if (id == -1)
 		id = prom_getpropint(cpu_node, "cpuid", -1);
+#ifdef SUN4V	
 	if (CPU_ISSUN4V) {
 		int reg[4];
 		int* regp=reg;
@@ -146,6 +152,7 @@ cpuid_from_node(u_int cpu_node)
 		/* cpuid in the lower 24 bits - sun4v hypervisor arch */
 		id = reg[0] & 0x0fffffff;
 	}
+#endif	
 	if (id == -1)
 		panic("failed to determine cpuid");
 	
@@ -347,6 +354,7 @@ cpu_attach(device_t parent, device_t dev, void *aux)
 	}
 	aprint_normal_dev(dev, "");
 
+	/* XXX sun4v mising cache info printout */
 	bigcache = 0;
 
 	icachesize = prom_getpropint(node, "icache-size", 0);
@@ -441,6 +449,38 @@ cpu_attach(device_t parent, device_t dev, void *aux)
 	 */
 	uvm_page_recolor(atop(bigcache)); /* XXX */
 
+	/*
+	 * CPU specific ipi setup
+	 * Currently only necessary for SUN4V
+	 */
+#ifdef SUN4V	
+	if (CPU_ISSUN4V) {
+		paddr_t pa = ci->ci_paddr;
+		int err;
+
+		pa += CPUINFO_VA - INTSTACK;
+		pa += PAGE_SIZE;
+
+		ci->ci_cpumq = pa;
+		err = hv_cpu_qconf(CPU_MONDO_QUEUE, ci->ci_cpumq, SUN4V_MONDO_QUEUE_SIZE);
+		if (err != H_EOK)
+			panic("Unable to set cpu mondo queue: %d", err);
+		pa += SUN4V_MONDO_QUEUE_SIZE * SUN4V_QUEUE_ENTRY_SIZE;
+		
+		ci->ci_devmq = pa;
+		err = hv_cpu_qconf(DEVICE_MONDO_QUEUE, ci->ci_devmq, SUN4V_MONDO_QUEUE_SIZE);
+		if (err != H_EOK)
+			panic("Unable to set device mondo queue: %d", err);
+		pa += SUN4V_MONDO_QUEUE_SIZE * SUN4V_QUEUE_ENTRY_SIZE;
+		
+		ci->ci_mondo = pa;
+		pa += 64; /* mondo message is 64 bytes */
+		
+		ci->ci_cpuset = pa;
+		pa += 64;
+	}
+#endif	
+	
 }
 
 int
@@ -522,9 +562,11 @@ cpu_boot_secondary_processors(void)
 		delay(1000);
 		sync_tick = 1;
 		membar_Sync();
-		settick(0);
+		if (CPU_ISSUN4U || CPU_ISSUN4US)
+			settick(0);
 		if (ci->ci_system_clockrate[0] != 0)
-			setstick(0);
+			if (CPU_ISSUN4U || CPU_ISSUN4US)
+				setstick(0);
 
 		setpstate(pstate);
 
@@ -552,9 +594,11 @@ cpu_hatch(void)
 	while (sync_tick == 0) {
 		/* we do nothing here */
 	}
-	settick(0);
+	if (CPU_ISSUN4U || CPU_ISSUN4US)
+		settick(0);
 	if (curcpu()->ci_system_clockrate[0] != 0) {
-		setstick(0);
+		if (CPU_ISSUN4U || CPU_ISSUN4US)
+			setstick(0);
 		stickintr_establish(PIL_CLOCK, stickintr);
 	} else {
 		tickintr_establish(PIL_CLOCK, tickintr);

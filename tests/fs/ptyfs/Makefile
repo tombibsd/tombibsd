@@ -9,7 +9,7 @@ TESTS_C+=	t_nullpts
 
 LDADD+=	-lrumpfs_ptyfs						# fs drivers
 LDADD+=	-lrumpkern_tty						# tty support
-LDADD+=	-lrumpvfs -lrump -lrumpuser -lpthread			# base
+LDADD+=	-lrumpvfs -lrump -lrumpuser -lrump -lpthread		# base
 
 LDADD.t_nullpts+= -lrumpfs_null -lrumpvfs_layerfs
 

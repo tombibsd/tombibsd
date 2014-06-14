@@ -18,6 +18,7 @@ LDADD+=	-Wl,--whole-archive -lrumpdev_scsitest -Wl,--no-whole-archive
 LDADD+= -lrumpdev_scsipi -lrumpdev_disk -lrumpdev -lrumpvfs
 LDADD+=	-lrump -lutil
 LDADD+=	-lrumpuser -lpthread
+LDADD+= -lrump
 
 WARNS=	4
 

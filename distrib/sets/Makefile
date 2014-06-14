@@ -210,7 +210,7 @@ maketars: .PRECIOUS .PHONY check_DESTDIR check_RELEASEDIR \
 maketarsetup: .EXEC
 .if defined(DESTDIR) && ${DESTDIR} != ""
 	${_MKMSG} "execute  checkflist"
-	${MAKE} checkflist
+	cd ${.CURDIR}; ${MAKE} checkflist
 .endif
 	mkdir -p ${TARDIR}
 	for i in MD5 SHA512; do \

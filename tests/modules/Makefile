@@ -12,7 +12,7 @@ TESTSDIR=	${TESTSBASE}/modules
 TESTS_C=	t_modctl
 TESTS_C+=	t_builtin
 LDADD=		-lprop
-LDADD+=		-lrumpfs_kernfs -lrumpvfs -lrump -lrumpuser -lpthread
+LDADD+=		-lrumpfs_kernfs -lrumpvfs -lrump -lrumpuser -lrump -lpthread
 
 TESTS_SH=	t_abi_uvm
 TESTS_SH+=	t_modload

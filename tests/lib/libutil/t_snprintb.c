@@ -59,6 +59,7 @@ ATF_TC_HEAD(snprintb, tc)
 ATF_TC_BODY(snprintb, tc)
 {
 	h_snprintb("\10\2BITTWO\1BITONE", 3, "03<BITTWO,BITONE>");
+	h_snprintb("\177\20b\0A\0\0", 0, "0x0");
    
 	h_snprintb("\177\20b\05NOTBOOT\0b\06FPP\0b\013SDVMA\0b\015VIDEO\0"
 		"b\020LORES\0b\021FPA\0b\022DIAG\0b\016CACHE\0"

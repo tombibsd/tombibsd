@@ -29,6 +29,12 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+/*
+ * The packet queue (pktqueue) interface is a lockless IP input queue
+ * which also abstracts and handles network ISR scheduling.  It provides
+ * a mechanism to enable receiver-side packet steering (RPS).
+ */
+
 #include <sys/cdefs.h>
 __KERNEL_RCSID(0, "$NetBSD$");
 
@@ -42,10 +48,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/mbuf.h>
 #include <sys/proc.h>
 #include <sys/percpu.h>
-
-#include <netinet/in.h>
-#include <netinet/ip.h>
-#include <netinet/ip_private.h>
 
 #include <net/pktqueue.h>
 
@@ -204,9 +206,9 @@ pktq_rps_hash(const struct mbuf *m __unused)
  * => Returns false on failure; caller is responsible to free the packet.
  */
 bool
-pktq_enqueue(pktqueue_t *pq, struct mbuf *m, const u_int hash)
+pktq_enqueue(pktqueue_t *pq, struct mbuf *m, const u_int hash __unused)
 {
-	const unsigned cpuid = hash % ncpu;
+	const unsigned cpuid = curcpu()->ci_index /* hash % ncpu */;
 
 	KASSERT(kpreempt_disabled());
 
@@ -285,7 +287,7 @@ pktq_barrier(pktqueue_t *pq)
 /*
  * pktq_flush: free mbufs in all queues.
  *
- * => The caller must ensure there are no concurrent writers or flush.
+ * => The caller must ensure there are no concurrent writers or flush calls.
  */
 void
 pktq_flush(pktqueue_t *pq)
@@ -298,4 +300,64 @@ pktq_flush(pktqueue_t *pq)
 			m_freem(m);
 		}
 	}
+}
+
+/*
+ * pktq_set_maxlen: create per-CPU queues using a new size and replace
+ * the existing queues without losing any packets.
+ */
+int
+pktq_set_maxlen(pktqueue_t *pq, size_t maxlen)
+{
+	const u_int slotbytes = ncpu * sizeof(pcq_t *);
+	pcq_t **qs;
+
+	if (!maxlen || maxlen > PCQ_MAXLEN)
+		return EINVAL;
+	if (pq->pq_maxlen == maxlen)
+		return 0;
+
+	/* First, allocate the new queues and replace them. */
+	qs = kmem_zalloc(slotbytes, KM_SLEEP);
+	for (u_int i = 0; i < ncpu; i++) {
+		qs[i] = pcq_create(maxlen, KM_SLEEP);
+	}
+	mutex_enter(&pq->pq_lock);
+	for (u_int i = 0; i < ncpu; i++) {
+		/* Swap: store of a word is atomic. */
+		pcq_t *q = pq->pq_queue[i];
+		pq->pq_queue[i] = qs[i];
+		qs[i] = q;
+	}
+	pq->pq_maxlen = maxlen;
+	mutex_exit(&pq->pq_lock);
+
+	/*
+	 * At this point, the new packets are flowing into the new
+	 * queues.  However, the old queues may have some packets
+	 * present which are no longer being processed.  We are going
+	 * to re-enqueue them.  This may change the order of packet
+	 * arrival, but it is not considered an issue.
+	 *
+	 * There may be in-flight interrupts calling pktq_dequeue()
+	 * which reference the old queues.  Issue a barrier to ensure
+	 * that we are going to be the only pcq_get() callers on the
+	 * old queues.
+	 */
+	pktq_barrier(pq);
+
+	for (u_int i = 0; i < ncpu; i++) {
+		struct mbuf *m;
+
+		while ((m = pcq_get(qs[i])) != NULL) {
+			while (!pcq_put(pq->pq_queue[i], m)) {
+				kpause("pktqrenq", false, 1, NULL);
+			}
+		}
+		pcq_destroy(qs[i]);
+	}
+
+	/* Well, that was fun. */
+	kmem_free(qs, slotbytes);
+	return 0;
 }

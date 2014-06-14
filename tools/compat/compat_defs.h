@@ -260,6 +260,18 @@ void warn(const char *, ...);
 void warnx(const char *, ...);
 void vwarnx(const char *, va_list);
 #endif
+#if !HAVE_DECL_WARNC
+void warnc(int, const char *, ...);
+#endif
+#if !HAVE_DECL_VWARNC
+void vwarnc(int, const char *, va_list);
+#endif
+#if !HAVE_DECL_ERRC
+void errc(int, int, const char *, ...);
+#endif
+#if !HAVE_DECL_VERRC
+void verrc(int, int, const char *, va_list);
+#endif
 
 #if !HAVE_ESETFUNC
 void (*esetfunc(void (*)(int, const char *, ...)))(int, const char *, ...);

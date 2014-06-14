@@ -280,6 +280,8 @@ typedef u_int8_t pci_revision_t;
 #define		PCI_INTERFACE_RTC_ISA			0x01
 #define	PCI_SUBCLASS_SYSTEM_PCIHOTPLUG		0x04
 #define	PCI_SUBCLASS_SYSTEM_SDHC		0x05
+#define	PCI_SUBCLASS_SYSTEM_IOMMU		0x06
+#define	PCI_SUBCLASS_SYSTEM_RCEC		0x07
 #define	PCI_SUBCLASS_SYSTEM_MISC		0x80
 
 /* 0x09 input subclasses */

@@ -16,6 +16,7 @@ PROGS=		h_mdserv
 LDADD+=	-lrumpdev_md -lrumpdev_disk -lrumpdev -lrumpvfs
 LDADD+=	-lrump
 LDADD+=	-lrumpuser
+LDADD+=	-lrump
 LDADD+=	-lpthread
 
 WARNS=	4

@@ -228,6 +228,12 @@ struct ether_multi {
 	LIST_ENTRY(ether_multi) enm_list;
 };
 
+struct ether_multi_sysctl {
+	u_int   enm_refcount;
+	uint8_t enm_addrlo[ETHER_ADDR_LEN];
+	uint8_t enm_addrhi[ETHER_ADDR_LEN];
+};
+
 /*
  * Structure used by macros below to remember position when stepping through
  * all of the ether_multi records.

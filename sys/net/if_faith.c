@@ -290,7 +290,7 @@ faithprefix(struct in6_addr *in6)
 	else
 		ret = 0;
 	if (rt)
-		RTFREE(rt);
+		rtfree(rt);
 	return ret;
 }
 #endif

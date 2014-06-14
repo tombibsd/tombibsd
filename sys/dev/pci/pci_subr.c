@@ -317,6 +317,8 @@ static const struct pci_class pci_subclass_system[] = {
 	{ "RTC",		PCI_SUBCLASS_SYSTEM_RTC,   pci_interface_rtc,},
 	{ "PCI Hot-Plug",	PCI_SUBCLASS_SYSTEM_PCIHOTPLUG, NULL,	},
 	{ "SD Host Controller",	PCI_SUBCLASS_SYSTEM_SDHC,	NULL,	},
+	{ "IOMMU",		PCI_SUBCLASS_SYSTEM_IOMMU,	NULL,	},
+	{ "Root Complex Event Collector", PCI_SUBCLASS_SYSTEM_RCEC, NULL, },
 	{ "miscellaneous",	PCI_SUBCLASS_SYSTEM_MISC,	NULL,	},
 	{ NULL,			0,				NULL,	},
 };
