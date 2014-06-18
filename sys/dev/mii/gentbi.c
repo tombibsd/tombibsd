@@ -130,14 +130,26 @@ gentbiattach(device_t parent, device_t self, void *aux)
 	struct mii_softc *sc = device_private(self);
 	struct mii_attach_args *ma = aux;
 	struct mii_data *mii = ma->mii_data;
+	int oui = MII_OUI(ma->mii_id1, ma->mii_id2);
+	int model = MII_MODEL(ma->mii_id2);
+	int rev = MII_REV(ma->mii_id2);
+	const char *descr;
 
-	aprint_naive(": Media interface\n");
-	aprint_normal(": Generic ten-bit interface, rev. %d\n",
-	    MII_REV(ma->mii_id2));
+	if ((descr = mii_get_descr(oui, model)) != NULL)
+		aprint_normal(": %s (OUI 0x%06x, model 0x%04x), rev. %d\n",
+		    descr, oui, model, rev);
+	else
+		aprint_normal(": OUI 0x%06x, model 0x%04x, rev. %d\n",
+		    oui, model, rev);
+
+	aprint_naive(": Generic ten-bit interface\n");
 
 	sc->mii_dev = self;
 	sc->mii_inst = mii->mii_instance;
 	sc->mii_phy = ma->mii_phyno;
+	sc->mii_mpd_oui = oui;
+	sc->mii_mpd_model = model;
+	sc->mii_mpd_rev = rev;
 	sc->mii_funcs = &gentbi_funcs;
 	sc->mii_pdata = mii;
 	sc->mii_flags = ma->mii_flags;

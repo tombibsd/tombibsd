@@ -1236,7 +1236,7 @@ netbsd32___quotactl(struct lwp *l, const struct netbsd32___quotactl_args *uap, r
 		args.u.put.qc_val = NETBSD32PTR64(args32.u.put.qc_val);
 		break;
 	    case QUOTACTL_DELETE:
-		args.u.delete.qc_key = NETBSD32PTR64(args32.u.delete.qc_key);
+		args.u.remove.qc_key = NETBSD32PTR64(args32.u.remove.qc_key);
 		break;
 	    case QUOTACTL_CURSOROPEN:
 		args.u.cursoropen.qc_cursor =

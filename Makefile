@@ -199,15 +199,8 @@ postinstall-fix-obsolete: .NOTMAIN .PHONY
 # Targets (in order!) called by "make build".
 #
 .if defined(HAVE_GCC)
-.if ${HAVE_GCC} == "4"
-LIBGCC_EXT=4
-BUILD_CC_LIB_BASEDIR= gnu/lib
-BUILD_CC_LIB_BASETARGET= gnu-lib
-.else
-LIBGCC_EXT=
 BUILD_CC_LIB_BASEDIR= external/gpl3/${EXTERNAL_GCC_SUBDIR}/lib
 BUILD_CC_LIB_BASETARGET= external-gpl3-gcc-lib
-.endif
 .endif
 
 BUILDTARGETS+=	check-tools

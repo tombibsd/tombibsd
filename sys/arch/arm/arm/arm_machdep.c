@@ -262,7 +262,7 @@ cpu_need_resched(struct cpu_info *ci, int flags)
 #endif
 	if (flags & RESCHED_KPREEMPT) {
 #ifdef __HAVE_PREEMPTION
-		atomic_or_uint(&l->l_dopreempt, DOPREEMPT_ACITBE);
+		atomic_or_uint(&l->l_dopreempt, DOPREEMPT_ACTIVE);
 		if (ci == cur_ci) {
 			softint_trigger(SOFTINT_KPREEMPT);
 		} else {

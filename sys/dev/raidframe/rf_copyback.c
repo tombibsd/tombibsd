@@ -83,6 +83,8 @@ rf_ConfigureCopyback(RF_ShutdownList_t **listp)
 #include <sys/vnode.h>
 #include <sys/namei.h> /* for pathbuf */
 
+#include <miscfs/specfs/specdev.h> /* for v_rdev */
+
 /* do a complete copyback */
 void
 rf_CopybackReconstructedData(RF_Raid_t *raidPtr)
@@ -96,7 +98,6 @@ rf_CopybackReconstructedData(RF_Raid_t *raidPtr)
 
 	struct pathbuf *dev_pb;
 	struct vnode *vp;
-	struct vattr va;
 
 	int ac;
 
@@ -160,20 +161,15 @@ rf_CopybackReconstructedData(RF_Raid_t *raidPtr)
 		/* Ok, so we can at least do a lookup... How about actually
 		 * getting a vp for it? */
 
-		vn_lock(vp, LK_SHARED | LK_RETRY);
-		retcode = VOP_GETATTR(vp, &va, curlwp->l_cred);
-		VOP_UNLOCK(vp);
-		if (retcode != 0)
-			return;
 		retcode = rf_getdisksize(vp, &raidPtr->Disks[fcol]);
 		if (retcode) {
 			return;
 		}
 
 		raidPtr->raid_cinfo[fcol].ci_vp = vp;
-		raidPtr->raid_cinfo[fcol].ci_dev = va.va_rdev;
+		raidPtr->raid_cinfo[fcol].ci_dev = vp->v_rdev;
 
-		raidPtr->Disks[fcol].dev = va.va_rdev;	/* XXX or the above? */
+		raidPtr->Disks[fcol].dev = vp->v_rdev;	/* XXX or the above? */
 
 		/* we allow the user to specify that only a fraction of the
 		 * disks should be used this is just for debug:  it speeds up

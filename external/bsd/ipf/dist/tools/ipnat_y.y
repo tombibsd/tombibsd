@@ -1762,7 +1762,9 @@ addname(np, name)
 	int pos;
 
 	nlen = strlen(name) + 1;
-	n = realloc(*np, (*np)->in_size + nlen);
+	n = calloc(1, (*np)->in_size + nlen);
+	memcpy(n, *np, (*np)->in_size);
+	free(*np);
 	if (*np == nattop)
 		nattop = n;
 	*np = n;

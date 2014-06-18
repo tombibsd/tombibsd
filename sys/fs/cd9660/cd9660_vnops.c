@@ -723,7 +723,7 @@ cd9660_strategy(void *v)
 		biodone(bp);
 		return (0);
 	}
-	vp = ip->i_devvp;
+	vp = ip->i_mnt->im_devvp;
 	return (VOP_STRATEGY(vp, bp));
 }
 

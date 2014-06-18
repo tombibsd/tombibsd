@@ -48,6 +48,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/module.h>
 
 #include <dev/dkvar.h>
+#include <miscfs/specfs/specdev.h> /* for v_rdev */
 
 int	dkdebug = 0;
 
@@ -621,7 +622,6 @@ dk_lookup(struct pathbuf *pb, struct lwp *l, struct vnode **vpp)
 {
 	struct nameidata nd;
 	struct vnode *vp;
-	struct vattr va;
 	int     error;
 
 	if (l == NULL)
@@ -635,22 +635,29 @@ dk_lookup(struct pathbuf *pb, struct lwp *l, struct vnode **vpp)
 	}
 
 	vp = nd.ni_vp;
-	if ((error = VOP_GETATTR(vp, &va, l->l_cred)) != 0) {
-		DPRINTF((DKDB_FOLLOW|DKDB_INIT),
-		    ("dk_lookup: getattr error = %d\n", error));
-		goto out;
-	}
-
-	/* XXX: eventually we should handle VREG, too. */
-	if (va.va_type != VBLK) {
+	if (vp->v_type != VBLK) {
 		error = ENOTBLK;
 		goto out;
 	}
 
-	IFDEBUG(DKDB_VNODE, vprint("dk_lookup: vnode info", vp));
-
+	/* Reopen as anonymous vnode to protect against forced unmount. */
+	if ((error = bdevvp(vp->v_rdev, vpp)) != 0)
+		goto out;
 	VOP_UNLOCK(vp);
-	*vpp = vp;
+	if ((error = vn_close(vp, FREAD | FWRITE, l->l_cred)) != 0) {
+		vrele(*vpp);
+		return error;
+	}
+	if ((error = VOP_OPEN(*vpp, FREAD | FWRITE, l->l_cred)) != 0) {
+		vrele(*vpp);
+		return error;
+	}
+	mutex_enter((*vpp)->v_interlock);
+	(*vpp)->v_writecount++;
+	mutex_exit((*vpp)->v_interlock);
+
+	IFDEBUG(DKDB_VNODE, vprint("dk_lookup: vnode info", *vpp));
+
 	return 0;
 out:
 	VOP_UNLOCK(vp);

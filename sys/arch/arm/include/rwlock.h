@@ -41,7 +41,7 @@ struct krwlock {
 #define	__HAVE_SIMPLE_RW_LOCKS		1
 
 #ifdef MULTIPROCESSOR
-#if defined(_ARM_ARCH_7) && !defined(_ARM_ARCH_6)
+#ifdef _ARM_ARCH_7
 #define	RW_RECEIVE(rw)			__asm __volatile("dmb")
 #define	RW_GIVE(rw)			__asm __volatile("dsb")
 #else

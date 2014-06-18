@@ -31,6 +31,71 @@
 #
 #	@(#)newvers.sh	8.1 (Berkeley) 4/20/94
 
+# newvers.sh -- Create a "vers.c" file containing version information.
+#
+# The "vers.c" file in the current directory is the primary output.  It
+# contains C source code with several variables containing information
+# about the build.  This file is expected to be incorporated into a
+# kernel, and when that kernel is booted then the information can be
+# queried by the uname(8) command.
+#
+# Command line options:
+#
+#     -r                Reproducible build: Do not embed directory
+#                       names, user names, time stamps, or other dynamic
+#                       information into the output file.  This intended
+#                       to allow two builds done at different times and
+#                       even by different people on different hosts to
+#                       produce identical output.
+#
+#     -i <id>           Use the specified string as the value of the
+#                       kernel_ident variable
+#
+#     -n                Do not include an ELF note section in the output
+#                       file.
+# Environment variables:
+#
+#     BUILDID		If defined, ${BUILDID} is appended to the
+#			default value of the kernel_ident string.
+#			(If the -i command line option is used, then
+#			BUILDID is not appended.)
+#
+# Output files:
+#
+#     vers.c            The "vers.c" file in the current directory is
+#                       the primary output.
+#
+#     version           The "version" file in the current directory
+#                       is both an input and an output.  See the
+#                       description under "Input files".
+#
+# Input files:
+#
+#     version           The "version" file in the current directory
+#                       contains an integer counter, representing the
+#                       number of times this script has been executed in
+#                       this directory, starting with "0" if the file
+#                       does not exist.  The serial number in the file
+#                       is incremented after the file is read. so that
+#                       the incremented serial number is an output from
+#                       the present build and an input to the next build
+#                       that is performed in the same directory.
+#
+#     copyright         The "copyright" file (in the same directory as
+#                       this script itself) contains a copyright notice,
+#                       which is embedded in the copyright variable in
+#                       the output file.
+#
+#     ident             The "ident" file in the current directory is optional.
+#			If this file exists, then its contents override the
+#			default value of the kernel_ident string.
+#
+# Input from external commands:
+#
+#     osrelease.sh      This script is expected to print the OS revision.
+#                       The result is stored in the osrelease variable.
+#
+
 if [ ! -e version ]; then
 	echo 0 > version
 fi
@@ -46,13 +111,18 @@ copyright=$(awk '{ printf("\"%s\\n\"", $0); }' ${cwd}/copyright)
 while [ $# -gt 0 ]; do
 	case "$1" in
 	-r)
+		# -r: Reproducible build
 		rflag=true
 		;;
 	-i)
+		# -i <id>: Use the secified string as the
+		# value of the kernel_ident variable
 		id="$2"
 		shift
 		;;
 	-n)
+		# -n: Do not include a ELF note section
+		# in the output file.
 		nflag=true
 		;;
 	esac
@@ -64,6 +134,13 @@ if [ -z "${id}" ]; then
 		id="$(cat ident)"
 	else
 		id=$(basename ${d})
+	fi
+	# Append ".${BUILDID}" to the default value of <id>.
+	# If the "-i <id>" command line option was used then this
+	# branch is not taken, so the command-line value of <id>
+	# is used without change.
+	if [ -n "${BUILDID}" ]; then
+		id="${id}.${BUILDID}"
 	fi
 fi
 

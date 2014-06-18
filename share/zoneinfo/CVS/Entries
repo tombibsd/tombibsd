@@ -1,22 +1,22 @@
 /Makefile/1.46/Wed Jan  1 02:45:21 2014/-kk/
 /README/1.3/Thu Dec 26 17:09:39 2013/-kk/
-/africa/1.1.1.37/Tue Jun  3 02:53:38 2014/-kk/
+/africa/1.1.1.38/Wed Jun 18 08:42:31 2014/-kk/
 /antarctica/1.1.1.25/Tue Jun  3 02:53:38 2014/-kk/
 /asia/1.1.1.62/Tue Jun  3 02:53:38 2014/-kk/
-/australasia/1.35/Tue Jun  3 02:53:38 2014/-kk/
+/australasia/1.36/Wed Jun 18 08:42:31 2014/-kk/
 /backward/1.1.1.26/Wed Jan  1 02:45:21 2014/-kk/
 /etcetera/1.1.1.10/Wed Jan  1 02:45:21 2014/-kk/
-/europe/1.1.1.52/Tue Jun  3 02:53:38 2014/-kk/
+/europe/1.1.1.53/Wed Jun 18 08:42:31 2014/-kk/
 /factory/1.1.1.5/Sun Jul 22 10:34:55 2012/-kk/
 /iso3166.tab/1.1.1.22/Wed Jan  1 02:45:21 2014/-kk/
 /leap-seconds.list/1.1.1.1/Thu Dec 26 16:41:00 2013/-kk/
 /leapseconds.awk/1.1.1.1/Thu Dec 26 16:40:59 2013/-kk/
 /leapseconds/1.1.1.22/Wed Jan  1 02:45:21 2014/-kk/
-/northamerica/1.1.1.59/Tue Jun  3 02:53:38 2014/-kk/
+/northamerica/1.1.1.60/Wed Jun 18 08:42:31 2014/-kk/
 /pacificnew/1.1.1.5/Sun Jul 22 10:34:55 2012/-kk/
 /southamerica/1.1.1.57/Tue Jun  3 02:53:38 2014/-kk/
 /systemv/1.1.1.6/Sun Jul 22 10:34:55 2012/-kk/
-/tzdata2netbsd/1.2/Sun May 18 16:53:56 2014/-kk/
+/tzdata2netbsd/1.3/Wed Jun 18 08:42:31 2014/-kk/
 /yearistype.sh/1.7/Sun Jul 22 10:40:29 2012/-kk/
 /zone.tab/1.1.1.47/Tue Jun  3 02:53:38 2014/-kk/
 D

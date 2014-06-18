@@ -1,9 +1,0 @@
-/back_insert_iterator.cc/1.1.1.1/Thu Apr 20 10:11:55 2006/-kk/
-/front_insert_iterator.cc/1.1.1.1/Thu Apr 20 10:11:55 2006/-kk/
-/insert_iterator.cc/1.1.1.1/Thu Apr 20 10:11:55 2006/-kk/
-/istream_iterator.cc/1.1.1.1/Thu Apr 20 10:11:55 2006/-kk/
-/iterator.cc/1.1.1.1/Thu Apr 20 10:11:56 2006/-kk/
-/ostream_iterator.cc/1.1.1.1/Thu Apr 20 10:11:55 2006/-kk/
-D/istreambuf_iterator////
-D/ostreambuf_iterator////
-D/reverse_iterator////

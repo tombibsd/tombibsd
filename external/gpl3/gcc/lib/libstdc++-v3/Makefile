@@ -57,8 +57,6 @@ COPTS.hashtable_c++0x.cc=  -fimplicit-templates
 COPTS.bitmap_allocator.cc = -fimplicit-templates
 CPPFLAGS.strstream.cc=	-I$(GLIBCPP_INCLUDE_DIR)/backward -Wno-deprecated
 
-# For GCC 4.5
-.if ${HAVE_GCC} >= 45
 # XXX also need this for some PCHs.
 CPPFLAGS.atomic.cc = -std=gnu++0x
 CPPFLAGS.compatibility-c++0x.cc = -std=gnu++0x
@@ -81,7 +79,6 @@ CPPFLAGS.concept-inst.cc += -D_GLIBCXX_CONCEPT_CHECKS
 CPPFLAGS.parallel_list.cc += -D_GLIBCXX_PARALLEL
 CPPFLAGS.parallel_settings.cc += -D_GLIBCXX_PARALLEL
 CPPFLAGS.compatibility-parallel_list.cc += -D_GLIBCXX_PARALLEL
-.endif
 
 cp-demangle.d cp-demangle.o: cp-demangle.h
 

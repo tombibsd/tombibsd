@@ -19,6 +19,7 @@ int gethost(family, name, hostp)
 	struct netent *n;
 	u_32_t addr;
 
+	memset(hostp, 0, sizeof(*hostp));
 	if (!strcmp(name, "test.host.dots")) {
 		if (family == AF_INET) {
 			hostp->in4.s_addr = htonl(0xfedcba98);
@@ -59,7 +60,7 @@ int gethost(family, name, hostp)
 		struct addrinfo hints, *res;
 		struct sockaddr_in6 *sin6;
 
-		bzero((char *)&hints, sizeof(hints));
+		memset(&hints, 0, sizeof(hints));
 		hints.ai_family = PF_INET6;
 
 		getaddrinfo(name, NULL, &hints, &res);

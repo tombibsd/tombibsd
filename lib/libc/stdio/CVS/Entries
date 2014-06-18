@@ -122,7 +122,7 @@
 /vfprintf.c/1.60/Thu Oct 24 10:28:53 2013/-kk/
 /vfscanf.c/1.45/Thu Oct 24 10:28:53 2013/-kk/
 /vfwprintf.c/1.34/Fri Jan 31 08:48:24 2014/-kk/
-/vfwscanf.c/1.11/Thu Oct 24 10:28:53 2013/-kk/
+/vfwscanf.c/1.12/Wed Jun 18 08:42:15 2014/-kk/
 /vprintf.c/1.13/Thu Oct 24 10:28:53 2013/-kk/
 /vscanf.c/1.15/Thu Oct 24 10:28:53 2013/-kk/
 /vsnprintf.c/1.27/Thu Oct 24 10:28:53 2013/-kk/

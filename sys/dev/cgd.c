@@ -55,6 +55,8 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <dev/dkvar.h>
 #include <dev/cgdvar.h>
 
+#include <miscfs/specfs/specdev.h> /* for v_rdev */
+
 /* Entry Point Functions */
 
 void	cgdattach(int);
@@ -809,7 +811,6 @@ cgdinit(struct cgd_softc *cs, const char *cpath, struct vnode *vp,
 	struct lwp *l)
 {
 	struct	disk_geom *dg;
-	struct	vattr va;
 	int	ret;
 	char	*tmppath;
 	uint64_t psize;
@@ -826,13 +827,7 @@ cgdinit(struct cgd_softc *cs, const char *cpath, struct vnode *vp,
 	cs->sc_tpath = malloc(cs->sc_tpathlen, M_DEVBUF, M_WAITOK);
 	memcpy(cs->sc_tpath, tmppath, cs->sc_tpathlen);
 
-	vn_lock(vp, LK_SHARED | LK_RETRY);
-	ret = VOP_GETATTR(vp, &va, l->l_cred);
-	VOP_UNLOCK(vp);
-	if (ret != 0)
-		goto bail;
-
-	cs->sc_tdev = va.va_rdev;
+	cs->sc_tdev = vp->v_rdev;
 
 	if ((ret = getdisksize(vp, &psize, &secsize)) != 0)
 		goto bail;

@@ -49,6 +49,8 @@
 #include <sys/disk.h>
 #include <sys/disklabel.h>
 
+#include <miscfs/specfs/specdev.h> /* for v_rdev */
+
 #include <prop/proplib.h>
 
 #define DM_MAX_TYPE_NAME 16

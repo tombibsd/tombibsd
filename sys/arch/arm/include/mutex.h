@@ -89,7 +89,7 @@ struct kmutex {
  * interrupts, not multiple processors.
  */
 #ifdef MULTIPROCESSOR
-#if defined(_ARM_ARCH_7) && !defined(_ARM_ARCH_6)
+#ifdef _ARM_ARCH_7
 #define	MUTEX_RECEIVE(mtx)		__asm __volatile("dmb")
 #else
 #define	MUTEX_RECEIVE(mtx)		membar_consumer()
@@ -102,8 +102,8 @@ struct kmutex {
  * MUTEX_GIVE: no memory barrier required; same reason.
  */
 #ifdef MULTIPROCESSOR
-#if defined(_ARM_ARCH_7) && !defined(_ARM_ARCH_6)
-#define	MUTEX_RECEIVE(mtx)		__asm __volatile("dsb")
+#ifdef _ARM_ARCH_7
+#define	MUTEX_GIVE(mtx)			__asm __volatile("dsb")
 #else
 #define	MUTEX_GIVE(mtx)			membar_producer()
 #endif

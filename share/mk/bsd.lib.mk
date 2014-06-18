@@ -604,8 +604,6 @@ LDADD+= -lgcc
 LIBCC:=	${CXX}
 . if ${MKLIBCXX} == "yes"
 LIBDPLIBS+=     c++	${.CURDIR}/../../../../../external/bsd/libc++/lib
-. elif defined(HAVE_GCC) && ${HAVE_GCC} == 4
-LIBDPLIBS+=     stdc++	${.CURDIR}/../../../../../gnu/lib/libstdc++-v3_4
 . else
 LIBDPLIBS+=     stdc++	${.CURDIR}/../../../../../external/gpl3/${EXTERNAL_GCC_SUBDIR}/lib/libstdc++-v3
 . endif

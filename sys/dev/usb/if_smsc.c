@@ -1305,6 +1305,13 @@ smsc_rxeof(usbd_xfer_handle xfer, usbd_private_handle priv, usbd_status status)
 
 		pktlen += ETHER_ALIGN;
 
+		if (pktlen > MCLBYTES) {
+			smsc_dbg_printf(sc, "pktlen %d > MCLBYTES %d\n",
+			    pktlen, MCLBYTES);
+			ifp->if_ierrors++;
+			goto done;
+		}
+
 		if (pktlen > total_len) {
 			smsc_dbg_printf(sc, "pktlen %d > total_len %d\n",
 			    pktlen, total_len);
@@ -1324,6 +1331,8 @@ smsc_rxeof(usbd_xfer_handle xfer, usbd_private_handle priv, usbd_status status)
 		m->m_pkthdr.len = m->m_len = pktlen;
 		m->m_flags |= M_HASFCS;
 		m_adj(m, ETHER_ALIGN);
+
+		KASSERT(m->m_len < MCLBYTES);
 		memcpy(mtod(m, char *), buf + ETHER_ALIGN, m->m_len);
 
 		/* Check if RX TCP/UDP checksumming is being offloaded */
@@ -1374,6 +1383,13 @@ smsc_rxeof(usbd_xfer_handle xfer, usbd_private_handle priv, usbd_status status)
 				   m->m_pkthdr.csum_data);
 			}
 		}
+
+		/* round up to next longword */
+		pktlen = (pktlen + 3) & ~0x3;
+
+		/* total_len does not include the padding */
+		if (pktlen > total_len)
+			pktlen = total_len;
 
 		buf += pktlen;
 		total_len -= pktlen;

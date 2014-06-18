@@ -80,8 +80,17 @@ uname(struct utsname *name)
 	mib[0] = CTL_KERN;
 	mib[1] = KERN_VERSION;
 	len = sizeof(name->version);
-	if (sysctl(mib, 2, &name->version, &len, NULL, 0) == -1)
-		goto error;
+	if (sysctl(mib, 2, &name->version, &len, NULL, 0) == -1) {
+		if (errno == ENOMEM) {
+			/*
+			 * string is too long for {struct utsname}.version.
+			 * Just use the truncated string.
+			 * XXX: We could mark the truncation with "..."
+			 */
+			name->version[sizeof(name->version) - 1] = '\0';
+		}
+		else goto error;
+	}
 
 	/* The version may have newlines in it, turn them into spaces. */
 	for (p = name->version; len--; ++p) {

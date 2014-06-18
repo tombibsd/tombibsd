@@ -885,6 +885,23 @@ rump_syscall_boot_establish(const struct rump_onesyscall *calls, size_t ncall)
 	}
 }
 
+struct rump_boot_etfs *ebstart;
+void
+rump_boot_etfs_register(struct rump_boot_etfs *eb)
+{
+
+	/*
+	 * Could use atomics, but, since caller would need to synchronize
+	 * against calling rump_init() anyway, easier to just specify the
+	 * interface as "caller serializes".  This solve-by-specification
+	 * approach avoids the grey area of using atomics before rump_init()
+	 * runs.
+	 */
+	eb->_eb_next = ebstart;
+	eb->eb_status = -1;
+	ebstart = eb;
+}
+
 /*
  * Temporary notification that rumpkern_time is obsolete.  This is to
  * be removed along with obsoleting rumpkern_time in a few months.

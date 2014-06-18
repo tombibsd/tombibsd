@@ -35,7 +35,7 @@
 #include "opt_exynos.h"
 
 /*
- * Kernel VM space 16Mb behind KERNEL_BASE upto 0xf0000000
+ * Kernel VM space 16Mb behind KERNEL_BASE upto 0xeff00000
  */
 #define KERNEL_VM_BASE		0xc0000000
 #define KERNEL_VM_SIZE		(EXYNOS_CORE_VBASE - KERNEL_VM_BASE)

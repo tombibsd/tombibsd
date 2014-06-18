@@ -186,7 +186,7 @@
 /timer_create.2/1.12/Tue Nov  6 21:16:21 2012/-kk/
 /timer_delete.2/1.5/Wed Apr 30 13:10:51 2008/-kk/
 /timer_settime.2/1.9/Tue Nov  6 23:25:44 2012/-kk/
-/truncate.2/1.26/Mon May 31 12:16:20 2010/-kk/
+/truncate.2/1.28/Wed Jun 18 08:42:15 2014/-kk/
 /truncate.c/1.13/Tue Mar 20 16:26:12 2012/-kk/
 /umask.2/1.16/Thu Aug  7 16:44:10 2003/-kk/
 /undelete.2/1.15/Sun Jan 11 02:46:30 2009/-kk/

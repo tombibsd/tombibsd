@@ -300,7 +300,7 @@ struct netbsd32_quotactlargs {
 		} put;
 		struct {
 			netbsd32_pointer_t qc_key;
-		} delete;
+		} remove;
 		struct {
 			netbsd32_pointer_t qc_cursor;
 		} cursoropen;

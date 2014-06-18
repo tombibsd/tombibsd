@@ -6,8 +6,8 @@
 /atphy.c/1.15/Thu Oct 24 10:28:58 2013/-kk/
 /bmtphy.c/1.30/Mon Oct 19 18:41:13 2009/-kk/
 /bmtphyreg.h/1.2/Mon Apr 28 20:23:53 2008/-kk/
-/brgphy.c/1.68/Tue Nov  5 03:38:18 2013/-kk/
-/brgphyreg.h/1.6/Thu Oct 24 10:28:58 2013/-kk/
+/brgphy.c/1.69/Wed Jun 18 08:43:00 2014/-kk/
+/brgphyreg.h/1.7/Wed Jun 18 08:43:00 2014/-kk/
 /ciphy.c/1.24/Thu Oct 24 10:28:58 2013/-kk/
 /ciphyreg.h/1.4/Sun Mar 12 22:41:41 2006/-kk/
 /devlist2h.awk/1.7/Fri May  2 18:11:05 2008/-kk/
@@ -16,7 +16,7 @@
 /etphy.c/1.1/Sat Nov 13 00:47:24 2010/-kk/
 /exphy.c/1.53/Thu Oct 24 10:28:58 2013/-kk/
 /files.mii/1.49/Sat Mar  1 06:04:42 2014/-kk/
-/gentbi.c/1.24/Mon Oct 19 18:41:13 2009/-kk/
+/gentbi.c/1.25/Wed Jun 18 08:43:00 2014/-kk/
 /glxtphy.c/1.23/Mon Oct 19 18:41:13 2009/-kk/
 /glxtphyreg.h/1.2/Mon Apr 28 20:23:53 2008/-kk/
 /gphyter.c/1.28/Thu Jan  7 09:30:28 2010/-kk/

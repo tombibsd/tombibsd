@@ -196,6 +196,9 @@ etc-release: .EXEC .MAKE
 		echo "Build settings:"; \
 		printf "%20s   %s\n" "Build date" "$$(date -u)"; \
 		printf "%20s   %s\n"  "Built by" "$${USER-root}@$$(hostname)"; \
+		if [ -n "${BUILDID}" ]; then \
+		    printf "%20s   %s\n"  "Build ID:" "${BUILDID}" ; \
+		fi ; \
 		echo ; \
 		${PRINT_PARAMS} ; \
 	) >${.OBJDIR}/${.TARGET}

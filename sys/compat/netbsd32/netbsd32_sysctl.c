@@ -186,8 +186,8 @@ netbsd32___sysctl(struct lwp *l, const struct netbsd32___sysctl_args *uap, regis
 	 * get and convert 32 bit size_t to native size_t
 	 */
 	namep = SCARG_P32(uap, name);
-	oldp = SCARG_P32(uap, old);
-	newp = SCARG_P32(uap, new);
+	oldp = SCARG_P32(uap, oldv);
+	newp = SCARG_P32(uap, newv);
 	oldlenp = SCARG_P32(uap, oldlenp);
 	oldlen = 0;
 	if (oldlenp != NULL) {

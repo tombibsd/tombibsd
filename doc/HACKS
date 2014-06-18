@@ -604,16 +604,6 @@ port	vax
 		internal compiler error: in change_address_1, at emit-rtl.c:2019
 	kcah
 
-	hack	gcc -fno-guess-branch-probability
-	cdate	28 May 2014
-	mdate	28 May 2014
-	who	abs
-	file	lib/libcurses/Makefile : 1.69
-	descr	sysinst crashes under vax gcc 4.1 after selecting
-                partition sizes due to curses bug
-        pr	lib/48827
-	kcah
-
 port	arm
 
 	hack	gcc-unsigned-compare

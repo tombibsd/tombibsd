@@ -298,14 +298,14 @@ sys___sysctl(struct lwp *l, const struct sys___sysctl_args *uap, register_t *ret
 
 	ktrmib(name, SCARG(uap, namelen));
 
-	sysctl_lock(SCARG(uap, new) != NULL);
+	sysctl_lock(SCARG(uap, newv) != NULL);
 
 	/*
 	 * do sysctl work (NULL means main built-in default tree)
 	 */
 	error = sysctl_dispatch(&name[0], SCARG(uap, namelen),
-				SCARG(uap, old), &oldlen,
-				SCARG(uap, new), SCARG(uap, newlen),
+				SCARG(uap, oldv), &oldlen,
+				SCARG(uap, newv), SCARG(uap, newlen),
 				&name[0], l, NULL);
 
 	/*
@@ -328,7 +328,7 @@ sys___sysctl(struct lwp *l, const struct sys___sysctl_args *uap, register_t *ret
 	 * if the only problem is that we weren't given enough space,
 	 * that's an ENOMEM error
 	 */
-	if (error == 0 && SCARG(uap, old) != NULL && savelen < oldlen)
+	if (error == 0 && SCARG(uap, oldv) != NULL && savelen < oldlen)
 		error = ENOMEM;
 
 	return (error);

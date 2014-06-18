@@ -443,7 +443,7 @@ quota_handle_cmd_delete(struct mount *mp, struct lwp *l,
 	int error;
 
 	KASSERT(args->qc_op == QUOTACTL_DELETE);
-	qk = args->u.delete.qc_key;
+	qk = args->u.remove.qc_key;
 
 	kauth_id = qk->qk_id;
 	if (kauth_id == QUOTA_DEFAULTID) {

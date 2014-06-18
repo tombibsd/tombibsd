@@ -1817,6 +1817,8 @@ rumpfs_init()
 {
 	extern rump_etfs_register_withsize_fn rump__etfs_register;
 	extern rump_etfs_remove_fn rump__etfs_remove;
+	extern struct rump_boot_etfs *ebstart;
+	struct rump_boot_etfs *eb;
 
 	CTASSERT(RUMP_ETFS_SIZE_ENDOFF == RUMPBLK_SIZENOTSET);
 
@@ -1825,6 +1827,11 @@ rumpfs_init()
 
 	rump__etfs_register = etfsregister;
 	rump__etfs_remove = etfsremove;
+
+	for (eb = ebstart; eb; eb = eb->_eb_next) {
+		eb->eb_status = etfsregister(eb->eb_key, eb->eb_hostpath,
+		    eb->eb_type, eb->eb_begin, eb->eb_size);
+	}
 }
 
 void

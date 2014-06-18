@@ -1194,7 +1194,7 @@ spserver(void *arg)
 	int rv;
 	unsigned int nfds, maxidx;
 
-	rump_pub_lwproc_switch(sarg->sps_l);
+	lwproc_switch(sarg->sps_l);
 
 	for (idx = 0; idx < MAXCLI; idx++) {
 		pfdlist[idx].fd = -1;

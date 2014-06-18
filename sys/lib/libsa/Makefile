@@ -84,6 +84,6 @@ lib${LIB}.o:: ${OBJS}
 
 CPPFLAGS+=	-Wno-pointer-sign
 
-.if defined(HAVE_GCC) && ${HAVE_GCC} >= 45 && ${MACHINE_ARCH} == "vax"
+.if defined(HAVE_GCC) && ${MACHINE_ARCH} == "vax"
 COPTS.bootp.c+=	-O0
 .endif

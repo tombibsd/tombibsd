@@ -7772,7 +7772,7 @@ int
 pic_ipi_shootdown(void *arg)
 {
 #if PMAP_NEED_TLB_SHOOTDOWN
-	pmap_tlb_shootdown_process()
+	pmap_tlb_shootdown_process();
 #endif
 	return 1;
 }

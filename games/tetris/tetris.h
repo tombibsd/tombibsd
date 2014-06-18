@@ -123,6 +123,7 @@ extern int	Rows, Cols;	/* current screen size */
  * rotated forms.
  */
 struct shape {
+	int	color;
 	int	rot;	/* index of rotated version of this shape */
 	int	off[3];	/* offsets to other blots if center is at (0,0) */
 };

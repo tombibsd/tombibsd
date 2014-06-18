@@ -2048,6 +2048,9 @@ main()
 	statusmsg2 "MACHINE_ARCH:"     "${MACHINE_ARCH}"
 	statusmsg2 "Build platform:"   "${uname_s} ${uname_r} ${uname_m}"
 	statusmsg2 "HOST_SH:"          "${HOST_SH}"
+	if [ -n "${BUILDID}" ]; then
+		statusmsg2 "BUILDID:"  "${BUILDID}"
+	fi
 
 	rebuildmake
 	validatemakeparams

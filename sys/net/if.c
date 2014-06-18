@@ -875,6 +875,9 @@ again:
 #ifdef INET
 	pktq_barrier(ip_pktq);
 #endif
+#ifdef INET6
+	pktq_barrier(ip6_pktq);
+#endif
 	xc = xc_broadcast(0, (xcfunc_t)nullop, NULL, NULL);
 	xc_wait(xc);
 

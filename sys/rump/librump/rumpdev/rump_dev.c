@@ -72,6 +72,12 @@ RUMP_COMPONENT(RUMP__FACTION_DEV)
 	config_finalize();
 
 	KERNEL_UNLOCK_LAST(curlwp);
+
+	/* if there is a vfs, perform activity deferred until mountroot */
+	if (rump_component_count(RUMP__FACTION_VFS)) {
+		config_create_mountrootthreads();
+		yield();
+	}
 }
 
 void

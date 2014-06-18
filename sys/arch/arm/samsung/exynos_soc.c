@@ -52,6 +52,7 @@ __KERNEL_RCSID(1, "$NetBSD$");
 
 #include <arm/samsung/exynos_reg.h>
 #include <arm/samsung/exynos_var.h>
+#include <arm/samsung/mct_reg.h>
 #include <arm/samsung/smc.h>
 
 #include <arm/cortex/pl310_var.h>
@@ -311,6 +312,16 @@ exynos_device_register(device_t self, void *aux)
 		return;
 	}
 	if (device_is_a(self, "armgtmr") || device_is_a(self, "mct")) {
+#ifdef EXYNOS5
+		/*
+		 * The global timer is dependent on the MCT running.
+		 */
+		bus_size_t o = EXYNOS5_MCT_OFFSET + MCT_G_TCON;
+		uint32_t v = bus_space_read_4(&exynos_bs_tag, exynos_core_bsh,
+		     o);
+		v |= G_TCON_START;
+		bus_space_write_4(&exynos_bs_tag, exynos_core_bsh, o, v);
+#endif
 		/*
 		 * The frequencies of the timers are the reference
 		 * frequency.

@@ -89,11 +89,9 @@ PKGCONFIG_VERSION.glu=	${MESA_VER}
 .include <bsd.lib.mk>
 
 # XXX
-.if defined(HAVE_GCC) && ${HAVE_GCC} >= 45
 COPTS.arcsorter.cc+=	-Wno-error
 COPTS.sorter.cc+=	-Wno-error
 COPTS.tobezier.cc+=	-Wno-error
-.endif
 
 .if ${MACHINE_ARCH} == "m68000" || ${MACHINE_ARCH} == "m68k"
 COPTS.sampleCompTop.cc+=	-O0

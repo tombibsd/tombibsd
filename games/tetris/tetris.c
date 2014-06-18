@@ -92,7 +92,7 @@ setup_board(void)
 
 	p = board;
 	for (i = B_SIZE; i; i--)
-		*p++ = i <= (2 * B_COLS) || (i % B_COLS) < 2;
+		*p++ = (i <= (2 * B_COLS) || (i % B_COLS) < 2) ? 7 : 0;
 }
 
 /*

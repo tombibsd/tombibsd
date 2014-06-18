@@ -638,6 +638,7 @@ drm_read(struct file *fp, off_t *off, struct uio *uio, kauth_cred_t cred,
 		error = uiomove(event->event, event->event->length, uio);
 		if (error)	/* XXX Requeue the event?  */
 			break;
+		(*event->destroy)(event);
 	}
 
 	/* Success!  */

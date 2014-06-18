@@ -1261,6 +1261,8 @@ int	sysctlgetmibinfo(const char *, int *, u_int *,
 int	sysctlnametomib(const char *, int *, size_t *);
 int	proc_compare(const struct kinfo_proc2 *, const struct kinfo_lwp *,
     const struct kinfo_proc2 *, const struct kinfo_lwp *);
+void	*asysctl(const int *, size_t, size_t *);
+void	*asysctlbyname(const char *, size_t *);
 __END_DECLS
 
 #endif	/* !_KERNEL */

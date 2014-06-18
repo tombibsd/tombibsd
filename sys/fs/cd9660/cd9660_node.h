@@ -133,8 +133,7 @@ void	cd9660_ihashins(struct iso_node *);
 void	cd9660_ihashrem(struct iso_node *);
 int	cd9660_tstamp_conv7(const u_char *, struct timespec *);
 int	cd9660_tstamp_conv17(const u_char *, struct timespec *);
-int	cd9660_vget_internal(struct mount *, ino_t, struct vnode **, int,
-			      struct iso_directory_record *);
+int	cd9660_vget_internal(struct mount *, ino_t, struct vnode **);
 
 extern kmutex_t cd9660_hashlock;
 

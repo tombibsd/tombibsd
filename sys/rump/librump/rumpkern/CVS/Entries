@@ -16,13 +16,13 @@
 /ltsleep.c/1.33/Thu Oct 24 10:28:58 2013/-kk/
 /lwproc.c/1.31/Tue May  6 05:50:19 2014/-kk/
 /memalloc.c/1.21/Thu Oct 24 10:28:58 2013/-kk/
-/rump.c/1.305/Tue Jun  3 03:10:02 2014/-kk/
+/rump.c/1.306/Wed Jun 18 08:43:12 2014/-kk/
 /rump_atomic_cas_up.c/1.2/Tue Nov 23 12:51:10 2010/-kk/
 /rump_curlwp.h/1.2/Sun Mar 16 15:30:05 2014/-kk/
 /rump_curlwp___thread.h/1.2/Sun Mar 16 15:30:05 2014/-kk/
 /rump_curlwp_hypercall.h/1.2/Sun Mar 16 15:30:05 2014/-kk/
 /rump_private.h/1.85/Tue May  6 05:50:19 2014/-kk/
-/rump_syscalls.c/1.100/Tue May  6 05:50:19 2014/-kk/
+/rump_syscalls.c/1.101/Wed Jun 18 08:43:12 2014/-kk/
 /rumpcopy.c/1.18/Thu Oct 24 10:28:58 2013/-kk/
 /rumpkern.ifspec/1.13/Tue May  6 05:50:19 2014/-kk/
 /rumpkern_if_priv.h/1.16/Tue May  6 05:50:19 2014/-kk/
@@ -32,6 +32,6 @@
 /signals.c/1.13/Thu Feb 27 08:56:16 2014/-kk/
 /sleepq.c/1.16/Tue May  6 05:50:19 2014/-kk/
 /threads.c/1.23/Sat Apr 19 05:37:02 2014/-kk/
-/vm.c/1.156/Tue May  6 05:50:19 2014/-kk/
+/vm.c/1.159/Wed Jun 18 08:43:12 2014/-kk/
 D/arch////
 D/opt////

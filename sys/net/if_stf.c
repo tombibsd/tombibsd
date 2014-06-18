@@ -78,6 +78,9 @@
 __KERNEL_RCSID(0, "$NetBSD$");
 
 #include "opt_inet.h"
+#ifndef INET6
+	#error "pseudo-device stf requires options INET6"
+#endif
 
 #include <sys/param.h>
 #include <sys/systm.h>

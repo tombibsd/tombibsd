@@ -376,9 +376,8 @@ setit:
 			if ((ife->ifm_media & IFM_GMASK) == IFM_FDX) {
 				speed |= BMCR_FDX;
 				gig = GTCR_ADV_1000TFDX;
-			} else {
+			} else
 				gig = GTCR_ADV_1000THDX;
-			}
 
 			PHY_WRITE(sc, MII_100T2CR, 0);
 			PHY_WRITE(sc, MII_ANAR, ANAR_CSMA);
@@ -635,7 +634,7 @@ brgphy_mii_phy_auto(struct mii_softc *sc)
 	if (sc->mii_flags & MIIF_HAVEFIBER) {
 		anar = ANAR_X_FD | ANAR_X_HD;
 		if (sc->mii_flags & MIIF_DOPAUSE)
-			anar |= BRGPHY_SERDES_ANAR_BOTH_PAUSE;
+			anar |= ANAR_X_PAUSE_TOWARDS;
 	} else {
 		anar = BMSR_MEDIA_TO_ANAR(sc->mii_capabilities) | ANAR_CSMA;
 		if (sc->mii_flags & MIIF_DOPAUSE)
@@ -645,8 +644,7 @@ brgphy_mii_phy_auto(struct mii_softc *sc)
 	DELAY(1000);
 
 	/* Start autonegotiation */
-	PHY_WRITE(sc, MII_BMCR,
-	    BMCR_AUTOEN | BMCR_STARTNEG);
+	PHY_WRITE(sc, MII_BMCR, BMCR_AUTOEN | BMCR_STARTNEG);
 	PHY_WRITE(sc, BRGPHY_MII_IMR, 0xFF00);
 
 	return (EJUSTRETURN);

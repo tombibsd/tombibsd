@@ -58,11 +58,11 @@ __KERNEL_RCSID(0, "$NetBSD$");
  * XXX drm_bus_borrow is a horrible kludge!
  */
 static bool
-drm_bus_borrow(bus_addr_t base, bus_space_handle_t *handlep)
+drm_bus_borrow(bus_addr_t base, bus_size_t size, bus_space_handle_t *handlep)
 {
 
 #if NAGP_I810 > 0
-	if (agp_i810_borrow(base, handlep))
+	if (agp_i810_borrow(base, size, handlep))
 		return true;
 #endif
 
@@ -113,7 +113,8 @@ drm_ioremap(struct drm_device *dev, struct drm_local_map *map)
 	}
 
 	/* Couldn't map it.  Try borrowing from someone else.  */
-	if (drm_bus_borrow(map->offset, &map->lm_data.bus_space.bsh)) {
+	if (drm_bus_borrow(map->offset, map->size,
+		&map->lm_data.bus_space.bsh)) {
 		map->lm_data.bus_space.bus_map = NULL;
 		goto win;
 	}

@@ -52,7 +52,3 @@ ada-exp.c: ada-lex.c
 .if ${MACHINE} == "amiga"
 COPTS.dwarf2-frame.c+=-O1
 .endif
-
-.if defined(HAVE_GCC) && HAVE_GCC == 4 && ${MACHINE} == "sun2"
-COPTS.dwarf2-frame.c+=-O0
-.endif

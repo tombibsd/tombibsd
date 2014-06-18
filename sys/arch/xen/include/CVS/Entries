@@ -3,7 +3,7 @@
 /bus_private.h/1.9/Wed Jan 23 19:46:45 2008/-kk/
 /evtchn.h/1.22/Thu Oct 24 10:28:57 2013/-kk/
 /granttables.h/1.9/Wed Dec  7 15:47:42 2011/-kk/
-/hypervisor.h/1.43/Thu Oct 24 10:28:57 2013/-kk/
+/hypervisor.h/1.44/Wed Jun 18 08:42:56 2014/-kk/
 /i82093var.h/1.4/Mon Mar 22 16:43:08 2010/-kk/
 /i82489var.h/1.2/Sun Nov 14 13:40:31 2010/-kk/
 /if_xennetvar.h/1.14/Fri Oct 23 02:32:33 2009/-kk/

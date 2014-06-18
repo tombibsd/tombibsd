@@ -115,7 +115,7 @@ tmpfs_mem_info(bool total)
 uint64_t
 tmpfs_bytes_max(struct tmpfs_mount *mp)
 {
-	size_t freepages = tmpfs_mem_info(false);
+	psize_t freepages = tmpfs_mem_info(false);
 	uint64_t avail_mem;
 
 	if (freepages < uvmexp.freetarg) {
@@ -123,8 +123,7 @@ tmpfs_bytes_max(struct tmpfs_mount *mp)
 	} else {
 		freepages -= uvmexp.freetarg;
 	}
-	avail_mem = round_page(mp->tm_bytes_used)
-	    + ((uint64_t)freepages << PAGE_SHIFT);
+	avail_mem = round_page(mp->tm_bytes_used) + (freepages << PAGE_SHIFT);
 	return MIN(mp->tm_mem_limit, avail_mem);
 }
 

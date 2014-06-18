@@ -17,12 +17,4 @@ SUBDIR+=	groff
 
 SUBDIR+=	gettext
 
-.if ${MKGCC} != "no"
-.if ${HAVE_GCC} == 4
-.if ${MKGCCCMDS} != "no"
-SUBDIR+=	gcc4
-.endif
-.endif
-.endif
-
 .include <bsd.subdir.mk>

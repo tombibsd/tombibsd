@@ -1,5 +1,4 @@
 /*	$NetBSD$	*/
-
 #include "file.h"
 #ifndef lint
 #if 0

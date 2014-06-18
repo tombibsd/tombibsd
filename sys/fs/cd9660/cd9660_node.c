@@ -241,10 +241,6 @@ cd9660_reclaim(void *v)
 	/*
 	 * Purge old data structures associated with the inode.
 	 */
-	if (ip->i_devvp) {
-		vrele(ip->i_devvp);
-		ip->i_devvp = 0;
-	}
 	genfs_node_destroy(vp);
 	pool_put(&cd9660_node_pool, vp->v_data);
 	vp->v_data = NULL;

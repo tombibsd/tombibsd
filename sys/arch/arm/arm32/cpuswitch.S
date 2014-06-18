@@ -139,7 +139,7 @@ ENTRY(cpu_switchto)
 #ifdef TPIDRPRW_IS_CURCPU
 	GET_CURCPU(r3)
 #elif defined(TPIDRPRW_IS_CURLWP)
-	mcr	p15, 0, r0, c13, c0, 4		/* get old lwp (r4 maybe 0) */
+	mrc	p15, 0, r0, c13, c0, 4		/* get old lwp (r4 maybe 0) */
 	ldr	r3, [r0, #(L_CPU)]		/* get cpu from old lwp */
 #elif !defined(MULTIPROCESSOR) 
 	ldr	r3, [r6, #L_CPU]		/* get cpu from new lwp */

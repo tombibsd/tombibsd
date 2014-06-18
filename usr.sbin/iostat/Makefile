@@ -13,7 +13,7 @@ CPPFLAGS+=-I${NETBSDSRCDIR}/usr.bin/vmstat
 # drvstats.c pulled in from ../../usr.bin/vmstat
 SRCS=	drvstats.c iostat.c
 
-DPADD=	${LIBKVM} ${LIBM}
-LDADD=	-lkvm -lm
+DPADD=	${LIBM}
+LDADD=	-lm
 
 .include <bsd.prog.mk>

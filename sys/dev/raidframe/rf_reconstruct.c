@@ -47,6 +47,8 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/namei.h> /* for pathbuf */
 #include <dev/raidframe/raidframevar.h>
 
+#include <miscfs/specfs/specdev.h> /* for v_rdev */
+
 #include "rf_raid.h"
 #include "rf_reconutil.h"
 #include "rf_revent.h"
@@ -352,7 +354,6 @@ rf_ReconstructInPlace(RF_Raid_t *raidPtr, RF_RowCol_t col)
 	unsigned int secsize;
 	struct pathbuf *pb;
 	struct vnode *vp;
-	struct vattr va;
 	int retcode;
 	int ac;
 
@@ -456,18 +457,6 @@ rf_ReconstructInPlace(RF_Raid_t *raidPtr, RF_RowCol_t col)
 	/* Ok, so we can at least do a lookup...
 	   How about actually getting a vp for it? */
 
-	vn_lock(vp, LK_SHARED | LK_RETRY);
-	retcode = VOP_GETATTR(vp, &va, curlwp->l_cred);
-	VOP_UNLOCK(vp);
-	if (retcode != 0) {
-		vn_close(vp, FREAD | FWRITE, kauth_cred_get());
-		rf_lock_mutex2(raidPtr->mutex);
-		raidPtr->reconInProgress--;
-		rf_signal_cond2(raidPtr->waitForReconCond);
-		rf_unlock_mutex2(raidPtr->mutex);
-		return(retcode);
-	}
-
 	retcode = getdisksize(vp, &numsec, &secsize);
 	if (retcode) {
 		vn_close(vp, FREAD | FWRITE, kauth_cred_get());
@@ -482,9 +471,9 @@ rf_ReconstructInPlace(RF_Raid_t *raidPtr, RF_RowCol_t col)
 	raidPtr->Disks[col].numBlocks = numsec - rf_protectedSectors;
 
 	raidPtr->raid_cinfo[col].ci_vp = vp;
-	raidPtr->raid_cinfo[col].ci_dev = va.va_rdev;
+	raidPtr->raid_cinfo[col].ci_dev = vp->v_rdev;
 
-	raidPtr->Disks[col].dev = va.va_rdev;
+	raidPtr->Disks[col].dev = vp->v_rdev;
 
 	/* we allow the user to specify that only a fraction
 	   of the disks should be used this is just for debug:

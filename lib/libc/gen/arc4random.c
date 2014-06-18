@@ -50,6 +50,8 @@ __weak_alias(arc4random_stir,_arc4random_stir)
 __weak_alias(arc4random_uniform,_arc4random_uniform)
 #endif
 
+#define REKEY_BYTES	1600000
+
 struct arc4_stream {
 	bool inited;
 	uint8_t i;
@@ -60,8 +62,12 @@ struct arc4_stream {
 };
 
 #ifdef _REENTRANT
-#define LOCK(rs)	if (__isthreaded) mutex_lock(&(rs)->mtx);
-#define UNLOCK(rs)	if (__isthreaded) mutex_unlock(&(rs)->mtx);
+#define LOCK(rs)	do { \
+				if (__isthreaded) mutex_lock(&(rs)->mtx); \
+			} while (/*CONSTCOND*/ 0)
+#define UNLOCK(rs)	do { \
+				if (__isthreaded) mutex_unlock(&(rs)->mtx); \
+			} while (/*CONSTCOND*/ 0)
 #else
 #define LOCK(rs)
 #define UNLOCK(rs)
@@ -177,8 +183,8 @@ arc4_stir(struct arc4_stream *as)
 	for (j = 0; j < __arraycount(as->s) * sizeof(uint32_t); j++)
 		arc4_getbyte(as);
 
-	/* Stir again after swallowing 1600000 bytes or if the pid changes */
-	as->count = 1600000;
+	/* Stir again after REKEY_BYTES bytes, or if the pid changes */
+	as->count = REKEY_BYTES;
 }
 
 static inline void

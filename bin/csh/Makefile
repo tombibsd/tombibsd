@@ -56,10 +56,6 @@ const.h: const.c
 SUBDIR+=USD.doc
 .endif
 
-# XXX Only GCC 4.1 problem
-.if defined(HAVE_GCC) && ${HAVE_GCC} == 4 && ${MACHINE_ARCH} == "vax"
-COPTS.parse.c+=	-O0
-.endif
 COPTS.err.c = -Wno-format-nonliteral
 COPTS.printf.c = -Wno-format-nonliteral
 COPTS.proc.c = -Wno-format-nonliteral

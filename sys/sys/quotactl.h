@@ -118,7 +118,7 @@ struct quotactl_args {
 		} put;
 		struct {
 			const struct quotakey *qc_key;
-		} delete;
+		} remove;
 		struct {
 			struct quotakcursor *qc_cursor;
 		} cursoropen;

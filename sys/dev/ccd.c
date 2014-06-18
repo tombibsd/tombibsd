@@ -121,6 +121,8 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <dev/ccdvar.h>
 #include <dev/dkvar.h>
 
+#include <miscfs/specfs/specdev.h> /* for v_rdev */
+
 #if defined(CCDDEBUG) && !defined(DEBUG)
 #define DEBUG
 #endif
@@ -292,7 +294,6 @@ ccdinit(struct ccd_softc *cs, char **cpaths, struct vnode **vpp,
 {
 	struct ccdcinfo *ci = NULL;
 	int ix;
-	struct vattr va;
 	struct ccdgeom *ccg = &cs->sc_geom;
 	char *tmppath;
 	int error, path_alloced;
@@ -344,19 +345,7 @@ ccdinit(struct ccd_softc *cs, char **cpaths, struct vnode **vpp,
 		/*
 		 * XXX: Cache the component's dev_t.
 		 */
-		vn_lock(vpp[ix], LK_SHARED | LK_RETRY);
-		error = VOP_GETATTR(vpp[ix], &va, l->l_cred);
-		VOP_UNLOCK(vpp[ix]);
-		if (error != 0) {
-#ifdef DEBUG
-			if (ccddebug & (CCDB_FOLLOW|CCDB_INIT))
-				printf("%s: %s: getattr failed %s = %d\n",
-				    cs->sc_xname, ci->ci_path,
-				    "error", error);
-#endif
-			goto out;
-		}
-		ci->ci_dev = va.va_rdev;
+		ci->ci_dev = vpp[ix]->v_rdev;
 
 		/*
 		 * Get partition information for the component.

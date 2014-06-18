@@ -91,9 +91,6 @@ __RCSID("$NetBSD$");
 
 #include "drvstats.h"
 
-/* Namelist and memory files. */
-char	*nlistf, *memf;
-
 int		hz;
 static int	reps, interval;
 static int	todo = 0;
@@ -130,7 +127,7 @@ main(int argc, char *argv[])
 	struct timespec	tv;
 	struct ttysize ts;
 
-	while ((ch = getopt(argc, argv, "Cc:dDIM:N:Tw:x")) != -1)
+	while ((ch = getopt(argc, argv, "Cc:dDITw:x")) != -1)
 		switch (ch) {
 		case 'c':
 			if ((reps = atoi(optarg)) <= 0)
@@ -149,12 +146,6 @@ main(int argc, char *argv[])
 			break;
 		case 'I':
 			todo |= SHOW_TOTALS;
-			break;
-		case 'M':
-			memf = optarg;
-			break;
-		case 'N':
-			nlistf = optarg;
 			break;
 		case 'T':
 			todo |= SHOW_TTY;
@@ -450,8 +441,8 @@ static void
 usage(void)
 {
 
-	(void)fprintf(stderr, "usage: iostat [-CdDITx] [-c count] [-M core] "
-	    "[-N system] [-w wait] [drives]\n");
+	(void)fprintf(stderr, "usage: iostat [-CdDITx] [-c count] "
+	    "[-w wait] [drives]\n");
 	exit(1);
 }
 

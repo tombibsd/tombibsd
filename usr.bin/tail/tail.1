@@ -32,7 +32,7 @@
 .\"
 .\"	@(#)tail.1	8.1 (Berkeley) 6/6/93
 .\"
-.Dd June 6, 1993
+.Dd June 15, 2014
 .Dt TAIL 1
 .Os
 .Sh NAME
@@ -92,7 +92,8 @@ to not stop when end of file is reached, but rather to wait for additional
 data to be appended to the input.
 The
 .Fl f
-option is ignored if the standard input is a pipe, but not if it is a FIFO.
+option is ignored if there are no file arguments and the standard
+input is a pipe or a FIFO.
 .It Fl F
 The
 .Fl F

@@ -12,10 +12,14 @@ PROG=		pigz
 SRCS=		pigz.c yarn.c
 MAN=		pigz.1
 
+# pigz 2.3.1 brings zopfli support
+SRCS+=		deflate.c blocksplitter.c tree.c lz77.c cache.c hash.c util.c \
+		squeeze.c katajainen.c
+
 .if !defined(HOSTPROG)
 DPADD=		${LIBM} ${LIBPTHREAD}
 .endif
-LDADD=		-lz -lpthread
+LDADD=		-lm -lz -lpthread
 
 .if ${MKPIGZGZIP} != "no"
 # these ones are from mrg's gzip
@@ -43,7 +47,7 @@ LINKS+=		${BINDIR}/pigz ${BINDIR}/gzip \
 .include <bsd.prog.mk>
 
 DIST=		${NETBSDSRCDIR}/external/zlib/pigz/dist
-.PATH:	${DIST}
+.PATH:	${DIST} ${DIST}/zopfli
 
 .if ${MKPIGZGZIP} != "no"
 GZIPDIST=	${NETBSDSRCDIR}/usr.bin/gzip

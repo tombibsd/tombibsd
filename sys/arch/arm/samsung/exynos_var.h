@@ -81,26 +81,6 @@ struct exyo_locators {
 };
 
 
-struct exyo_usb_locinfo {
-	bus_size_t	uloc_pmuregs_offset;
-	bus_size_t	uloc_sysregs_offset;
-
-	bus_size_t	uloc_ehci_offset;
-	bus_size_t	uloc_ohci_offset;
-	bus_size_t	uloc_usbotg_offset;
-	bus_size_t	uloc_usb2phy_offset;
-
-	int		uloc_usbhost_irq;
-	int		uloc_usbotg_irq;
-	int		uloc_usb3_irq;
-
-	bus_size_t	uloc_usb3_xhci0_offset;
-	bus_size_t	uloc_usb3_xhci1_offset;
-	bus_size_t	uloc_usb3_phy0_offset;
-	bus_size_t	uloc_usb3_phy1_offset;
-};
-
-
 struct exyo_attach_args {
 	struct exyo_locators exyo_loc;
 	bus_space_tag_t exyo_core_bst;
