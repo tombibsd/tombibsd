@@ -245,7 +245,7 @@ getpassfd(const char *prompt, char *buf, size_t len, int *fd, int flags,
 		}
 
 		/* End of line */
-		if (c == C(VEOL, CTRL('j')) || c == C(VEOL2, CTRL('l')))
+		if (c == C(VEOL, CTRL('j')) || c == C(VEOL2, CTRL('m')))
 			c = '\0';
 add:
 		if (l >= len) {

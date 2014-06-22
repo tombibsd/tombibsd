@@ -170,13 +170,15 @@ afterinstall: .PHONY .MAKE
 	${MAKEDIRTARGET} . postinstall-check
 .endif
 
-_POSTINSTALL=	${.CURDIR}/usr.sbin/postinstall/postinstall
+_POSTINSTALL=	${.CURDIR}/usr.sbin/postinstall/postinstall \
+		-m ${MACHINE} -a ${MACHINE_ARCH}
 _POSTINSTALL_ENV= \
 	AWK=${TOOL_AWK:Q}		\
 	DB=${TOOL_DB:Q}			\
 	HOST_SH=${HOST_SH:Q}		\
 	MAKE=${MAKE:Q}			\
 	PWD_MKDB=${TOOL_PWD_MKDB:Q}	\
+	SED=${TOOL_SED:Q}		\
 	STAT=${TOOL_STAT:Q}
 
 postinstall-check: .PHONY
@@ -192,6 +194,11 @@ postinstall-fix: .NOTMAIN .PHONY
 postinstall-fix-obsolete: .NOTMAIN .PHONY
 	@echo "   === Removing obsolete files ==="
 	${_POSTINSTALL_ENV} ${HOST_SH} ${_POSTINSTALL} -s ${.CURDIR} -d ${DESTDIR}/ fix obsolete
+	@echo "   ==============================="
+
+postinstall-fix-obsolete_stand: .NOTMAIN .PHONY
+	@echo "   === Removing obsolete files ==="
+	${_POSTINSTALL_ENV} ${HOST_SH} ${_POSTINSTALL} -s ${.CURDIR} -d ${DESTDIR}/ fix obsolete_stand
 	@echo "   ==============================="
 
 
@@ -306,6 +313,7 @@ distribution buildworld: .PHONY .MAKE
 	${MAKEDIRTARGET} etc distribution INSTALL_DONE=1
 .if defined(DESTDIR) && ${DESTDIR} != "" && ${DESTDIR} != "/"
 	${MAKEDIRTARGET} . postinstall-fix-obsolete
+	${MAKEDIRTARGET} . postinstall-fix-obsolete_stand
 	${MAKEDIRTARGET} distrib/sets checkflist
 .endif
 	@echo   "make ${.TARGET} started at:  ${START_TIME}"

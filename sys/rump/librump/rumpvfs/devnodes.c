@@ -52,7 +52,7 @@ makeonedevnode(dev_t devtype, const char *devname,
 	if (error == EEXIST) /* XXX: should check it's actually the same */
 		error = 0;
 
-	return 0;
+	return error;
 }
 
 static int

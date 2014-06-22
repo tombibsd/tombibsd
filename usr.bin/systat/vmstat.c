@@ -212,10 +212,6 @@ initvmstat(void)
 			nlisterr(namelist);
 			return(0);
 		}
-		if (namelist[0].n_type == 0) {
-			error("No namelist");
-			return(0);
-		}
 	}
 	hertz = stathz ? stathz : hz;
 	if (!drvinit(1))

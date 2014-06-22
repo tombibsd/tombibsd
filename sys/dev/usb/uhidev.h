@@ -53,6 +53,7 @@ struct uhidev_softc {
 	u_int sc_nrepid;
 	device_t *sc_subdevs;
 
+	int sc_refcnt;
 	u_char sc_dying;
 
 	kmutex_t sc_lock;		/* protects writes to sc_state */

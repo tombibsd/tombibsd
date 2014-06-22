@@ -1,6 +1,6 @@
 #	$NetBSD$
 
 INCSDIR=	/usr/include/hpcarm
-INCS=
+INCS=		sljitarch.h
 
 .include "../../arm/include/Makefile.common"

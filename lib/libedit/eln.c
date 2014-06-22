@@ -125,6 +125,13 @@ el_set(EditLine *el, int op, ...)
 		break;
 	}
 
+	case EL_ALIAS_TEXT: {
+		el_afunc_t p = va_arg(ap, el_afunc_t);
+		void *arg = va_arg(ap, void *);
+		ret = ch_aliasfun(el, p, arg);
+		break;
+	}
+
 	case EL_PROMPT_ESC:
 	case EL_RPROMPT_ESC: {
 		el_pfunc_t p = va_arg(ap, el_pfunc_t);

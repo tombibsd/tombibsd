@@ -229,8 +229,19 @@ openpam_parse_chain(pam_handle_t *pamh,
 				 * outer loop does not just ignore the
 				 * error and keep searching.
 				 */
-				if (errno == ENOENT)
+				if (errno == ENOENT) {
+					/*
+					 * we're failing load, make sure
+					 * there's a log message of severity
+					 * higher than debug
+					 */
+					openpam_log(PAM_LOG_ERROR,
+					"failed loading include for service "
+					"%s in %s(%d): %s",
+					servicename, filename, lineno,
+					strerror(errno));
 					errno = EINVAL;
+				}
 				goto fail;
 			}
 			continue;

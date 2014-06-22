@@ -156,6 +156,7 @@ unsigned char	_el_fn_complete(EditLine *, int);
 #define	EL_PROMPT_ESC	21	/* , prompt_func, Char);	      set/get */
 #define	EL_RPROMPT_ESC	22	/* , prompt_func, Char);	      set/get */
 #define	EL_RESIZE	23	/* , el_zfunc_t, void *);	      set     */
+#define	EL_ALIAS_TEXT	24	/* , el_afunc_t, void *);	      set     */
 
 #define	EL_BUILTIN_GETCFN	(NULL)
 

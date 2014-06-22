@@ -164,7 +164,7 @@ shell_quote()
 bre_quote()
 {
 	local arg="$1"
-	local extra="$2:/,"
+	local extra="${2-/,}"
 	printf "%s\n" "${arg}" | sed -e 's/[][^$.*\\'"${extra}"']/\\&/g'
 }
 

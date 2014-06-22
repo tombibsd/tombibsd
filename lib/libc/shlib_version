@@ -41,4 +41,4 @@
 # - redo stdin/stdout/stderr to not require copy relocations
 # - move gethostbyname to a compat library
 major=12
-minor=191
+minor=192

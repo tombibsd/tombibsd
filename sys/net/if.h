@@ -79,8 +79,12 @@
 
 #include <sys/socket.h>
 #include <sys/queue.h>
+
 #include <net/dlt.h>
 #include <net/pfil.h>
+#ifdef _KERNEL
+#include <net/pktqueue.h>
+#endif
 
 /*
  * Always include ALTQ glue here -- we use the ALTQ interface queue

@@ -729,6 +729,8 @@ bnx_attach(device_t parent, device_t self, void *aux)
 	dict = device_properties(self);
 	prop_dictionary_set_uint32(dict, "phyflags", sc->bnx_phy_flags);
 	prop_dictionary_set_uint32(dict, "chipid", sc->bnx_chipid);
+	prop_dictionary_set_uint32(dict, "shared_hwcfg",sc->bnx_shared_hw_cfg);
+	prop_dictionary_set_uint32(dict, "port_hwcfg", sc->bnx_port_hw_cfg);
 
 	if (sc->bnx_phy_flags & BNX_PHY_SERDES_FLAG)
 		mii_flags |= MIIF_HAVEFIBER;

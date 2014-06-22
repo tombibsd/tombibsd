@@ -3293,7 +3293,7 @@ bge_attach(device_t parent, device_t self, void *aux)
 	pci_chipset_tag_t	pc;
 	pci_intr_handle_t	ih;
 	const char		*intrstr = NULL;
-	uint32_t 		hwcfg, hwcfg2, hwcfg3, hwcfg4;
+	uint32_t 		hwcfg, hwcfg2, hwcfg3, hwcfg4, hwcfg5;
 	uint32_t		command;
 	struct ifnet		*ifp;
 	uint32_t		misccfg, mimode;
@@ -3304,6 +3304,7 @@ bge_attach(device_t parent, device_t self, void *aux)
 	uint32_t		pm_ctl;
 	bool			no_seeprom;
 	int			capmask;
+	int			mii_flags;
 	char intrbuf[PCI_INTRSTR_LEN];
 
 	bp = bge_lookup(pa);
@@ -3577,6 +3578,7 @@ bge_attach(device_t parent, device_t self, void *aux)
 	    PCI_PRODUCT(pa->pa_id) == PCI_PRODUCT_BROADCOM_BCM57791 ||
 	    PCI_PRODUCT(pa->pa_id) == PCI_PRODUCT_BROADCOM_BCM57795 ||
 	    BGE_ASICREV(sc->bge_chipid) == BGE_ASICREV_BCM5906) {
+		/* These chips are 10/100 only. */
 		capmask &= ~BMSR_EXTSTAT;
 		sc->bge_phy_flags |= BGEPHYF_NO_WIRESPEED;
 	}
@@ -3667,7 +3669,7 @@ bge_attach(device_t parent, device_t self, void *aux)
 	 * memory, or fall back to the config word in the EEPROM.
 	 * Note: on some BCM5700 cards, this value appears to be unset.
 	 */
-	hwcfg = hwcfg2 = hwcfg3 = hwcfg4 = 0;
+	hwcfg = hwcfg2 = hwcfg3 = hwcfg4 = hwcfg5 = 0;
 	if (bge_readmem_ind(sc, BGE_SRAM_DATA_SIG) ==
 	    BGE_SRAM_DATA_SIG_MAGIC) {
 		uint32_t tmp;
@@ -3681,13 +3683,16 @@ bge_attach(device_t parent, device_t self, void *aux)
 			hwcfg3 = bge_readmem_ind(sc, BGE_SRAM_DATA_CFG_3);
 		if (BGE_ASICREV(sc->bge_chipid == BGE_ASICREV_BCM5785))
 			hwcfg4 = bge_readmem_ind(sc, BGE_SRAM_DATA_CFG_4);
+		if (BGE_IS_5717_PLUS(sc))
+			hwcfg5 = bge_readmem_ind(sc, BGE_SRAM_DATA_CFG_5);
 	} else if (!(sc->bge_flags & BGEF_NO_EEPROM)) {
 		bge_read_eeprom(sc, (void *)&hwcfg,
 		    BGE_EE_HWCFG_OFFSET, sizeof(hwcfg));
 		hwcfg = be32toh(hwcfg);
 	}
-	aprint_normal_dev(sc->bge_dev, "HW config %08x, %08x, %08x, %08x\n",
-	    hwcfg, hwcfg2, hwcfg3, hwcfg4);
+	aprint_normal_dev(sc->bge_dev,
+	    "HW config %08x, %08x, %08x, %08x %08x\n",
+	    hwcfg, hwcfg2, hwcfg3, hwcfg4, hwcfg5);
 
 	bge_sig_legacy(sc, BGE_RESET_START);
 	bge_sig_post_reset(sc, BGE_RESET_START);
@@ -3861,10 +3866,11 @@ bge_attach(device_t parent, device_t self, void *aux)
 	 */
 	if (PCI_PRODUCT(pa->pa_id) == SK_SUBSYSID_9D41 ||
 	    (hwcfg & BGE_HWCFG_MEDIA) == BGE_MEDIA_FIBER) {
-		if (BGE_IS_5714_FAMILY(sc))
-		    sc->bge_flags |= BGEF_FIBER_MII;
-		else
-		    sc->bge_flags |= BGEF_FIBER_TBI;
+		if (BGE_IS_5705_PLUS(sc)) {
+			sc->bge_flags |= BGEF_FIBER_MII;
+			sc->bge_phy_flags |= BGEPHYF_NO_WIRESPEED;
+		} else
+			sc->bge_flags |= BGEF_FIBER_TBI;
 	}
 
 	/* Set bge_phy_flags before prop_dictionary_set_uint32() */
@@ -3899,9 +3905,11 @@ bge_attach(device_t parent, device_t self, void *aux)
 
 		ifmedia_init(&sc->bge_mii.mii_media, 0, bge_ifmedia_upd,
 			     bge_ifmedia_sts);
-		mii_attach(sc->bge_dev, &sc->bge_mii, capmask,
-			   sc->bge_phy_addr, MII_OFFSET_ANY,
-			   MIIF_DOPAUSE);
+		mii_flags = MIIF_DOPAUSE;
+		if (sc->bge_flags & BGEF_FIBER_MII)
+			mii_flags |= MIIF_HAVEFIBER;
+		mii_attach(sc->bge_dev, &sc->bge_mii, capmask, sc->bge_phy_addr,
+		    MII_OFFSET_ANY, mii_flags);
 
 		if (LIST_EMPTY(&sc->bge_mii.mii_phys)) {
 			aprint_error_dev(sc->bge_dev, "no PHY found!\n");
@@ -5040,7 +5048,7 @@ doit:
 			 * XXX jonathan@NetBSD.org: untested.
 			 * how to force  this branch to be taken?
 			 */
-			BGE_EVCNT_INCR(&sc->sc_ev_txtsopain);
+			BGE_EVCNT_INCR(sc->bge_ev_txtsopain);
 
 			m_copydata(m0, offset, sizeof(ip), &ip);
 			m_copydata(m0, hlen, sizeof(th), &th);

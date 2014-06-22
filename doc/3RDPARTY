@@ -1431,8 +1431,8 @@ Location:	external/cddl/osnet
 Notes:
 
 Package:	sljit
-Version:	svn revision 186
-Current Vers:	svn revision 226
+Version:	0.91 (svn revision 257)
+Current Vers:	svn revision 268
 Maintainer:	Zoltán Herczeg <hzmester@freemail.hu
 Archive Site:	http://sourceforge.net/projects/sljit/
 Home Page:	http://sljit.sourceforge.net/

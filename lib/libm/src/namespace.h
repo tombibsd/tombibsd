@@ -52,6 +52,7 @@
 #define floorl _floorl
 #define roundl _roundl
 #define fmodl _fmodl
+#define modfl _modfl
 #define truncl _truncl
 
 #define exp2l _exp2l

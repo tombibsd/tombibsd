@@ -247,11 +247,11 @@ dmphy_status(struct mii_softc *sc)
 		if (dscsr & DSCSR_100FDX)
 			mii->mii_media_active |= IFM_100_TX|IFM_FDX;
 		else if (dscsr & DSCSR_100HDX)
-			mii->mii_media_active |= IFM_100_TX;
+			mii->mii_media_active |= IFM_100_TX|IFM_HDX;
 		else if (dscsr & DSCSR_10FDX)
 			mii->mii_media_active |= IFM_10_T|IFM_FDX;
 		else if (dscsr & DSCSR_10HDX)
-			mii->mii_media_active |= IFM_10_T;
+			mii->mii_media_active |= IFM_10_T|IFM_HDX;
 		else
 			mii->mii_media_active |= IFM_NONE;
 	} else

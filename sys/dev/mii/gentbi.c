@@ -55,7 +55,7 @@
  */
 
 /*
- * Driver for generic ten-bit (1000BASE-SX) interfaces, built in to
+ * Driver for generic ten-bit (1000BASE-SX) interfaces, built into
  * many Gigabit Ethernet chips.
  *
  * All we have to do here is correctly report speed and duplex.
@@ -261,7 +261,7 @@ gentbi_status(struct mii_softc *sc)
 
 	if (bmcr & BMCR_AUTOEN) {
 		/*
-		 * The media status bits are only valid of autonegotiation
+		 * The media status bits are only valid if autonegotiation
 		 * has completed (or it's disabled).
 		 */
 		if ((bmsr & BMSR_ACOMP) == 0) {
@@ -281,6 +281,8 @@ gentbi_status(struct mii_softc *sc)
 		    (anlpar & ANLPAR_X_FD) != 0)
 			mii->mii_media_active |=
 			    IFM_FDX | mii_phy_flowstatus(sc);
+		else
+			mii->mii_media_active |= IFM_HDX;
 	} else
 		mii->mii_media_active = ife->ifm_media;
 }

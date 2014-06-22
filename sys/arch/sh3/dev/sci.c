@@ -599,7 +599,6 @@ void
 sci_iflush(struct sci_softc *sc)
 {
 	unsigned char err_c;
-	volatile unsigned char c;
 
 	if (((err_c = SHREG_SCSSR)
 	     & (SCSSR_RDRF | SCSSR_ORER | SCSSR_FER | SCSSR_PER)) != 0) {
@@ -609,7 +608,7 @@ sci_iflush(struct sci_softc *sc)
 			return;
 		}
 
-		c = SHREG_SCRDR;
+		(void)SHREG_SCRDR;
 
 		SHREG_SCSSR &= ~SCSSR_RDRF;
 	}

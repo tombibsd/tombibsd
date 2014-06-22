@@ -4,7 +4,7 @@
 /openpam_asprintf.h/1.1.1.1/Fri Dec 27 19:27:41 2013/-kk/
 /openpam_borrow_cred.c/1.4/Wed Jan  1 02:42:56 2014/-kk/
 /openpam_check_owner_perms.c/1.6/Wed Jan  1 02:42:56 2014/-kk/
-/openpam_configure.c/1.9/Mon Jun  9 00:16:54 2014/-kk/
+/openpam_configure.c/1.10/Sun Jun 22 14:30:01 2014/-kk/
 /openpam_constants.c/1.4/Wed Jan  1 02:42:56 2014/-kk/
 /openpam_constants.h/1.4/Wed Jan  1 02:42:56 2014/-kk/
 /openpam_cred.h/1.1.1.1/Fri Dec 27 19:27:41 2013/-kk/

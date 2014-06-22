@@ -2636,7 +2636,7 @@ ApplyModifiers(char *nstr, const char *tstr,
 			break;
 		    }
 		    free(UNCONST(pattern.rhs));
-		    newStr = var_Error;
+		    newStr = varNoError;
 		    break;
 		}
 		goto default_case; /* "::<unrecognised>" */

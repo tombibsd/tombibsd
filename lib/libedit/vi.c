@@ -918,34 +918,26 @@ vi_comment_out(EditLine *el, Int c __attribute__((__unused__)))
  * NB: posix implies that we should enter insert mode, however
  * this is against historical precedent...
  */
-#ifdef __weak_reference
-__weakref_visible char *my_get_alias_text(const char *)
-    __weak_reference(get_alias_text);
-#endif
 protected el_action_t
 /*ARGSUSED*/
 vi_alias(EditLine *el, Int c __attribute__((__unused__)))
 {
-#ifdef __weak_reference
 	char alias_name[3];
-	char *alias_text;
+	const char *alias_text;
 
-	if (my_get_alias_text == 0) {
+	if (el->el_chared.c_aliasfun == NULL)
 		return CC_ERROR;
-	}
 
 	alias_name[0] = '_';
 	alias_name[2] = 0;
 	if (el_getc(el, &alias_name[1]) != 1)
 		return CC_ERROR;
 
-	alias_text = my_get_alias_text(alias_name);
+	alias_text = (*el->el_chared.c_aliasfun)(el->el_chared.c_aliasarg,
+	    alias_name);
 	if (alias_text != NULL)
 		FUN(el,push)(el, ct_decode_string(alias_text, &el->el_scratch));
 	return CC_NORM;
-#else
-	return CC_ERROR;
-#endif
 }
 
 /* vi_to_history_line():

@@ -5968,6 +5968,8 @@ wm_tbi_mediastatus(struct ifnet *ifp, struct ifmediareq *ifmr)
 	ifmr->ifm_active |= IFM_1000_SX;
 	if (CSR_READ(sc, WMREG_STATUS) & STATUS_FD)
 		ifmr->ifm_active |= IFM_FDX;
+	else
+		ifmr->ifm_active |= IFM_HDX;
 	ctrl = CSR_READ(sc, WMREG_CTRL);
 	if (ctrl & CTRL_RFCE)
 		ifmr->ifm_active |= IFM_FLOW | IFM_ETH_RXPAUSE;

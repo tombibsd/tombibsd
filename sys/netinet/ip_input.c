@@ -304,7 +304,7 @@ ip_init(void)
 	pr = pffindproto(PF_INET, IPPROTO_RAW, SOCK_RAW);
 	KASSERT(pr != NULL);
 
-	ip_pktq = pktq_create(IFQ_MAXLEN, ipintr);
+	ip_pktq = pktq_create(IFQ_MAXLEN, ipintr, NULL);
 	KASSERT(ip_pktq != NULL);
 
 	for (u_int i = 0; i < IPPROTO_MAX; i++) {

@@ -59,6 +59,7 @@ __RCSID("$NetBSD$");
 #include "mystring.h"
 #include "myhistedit.h"
 #include "error.h"
+#include "alias.h"
 #ifndef SMALL
 #include "eval.h"
 #include "memalloc.h"
@@ -135,6 +136,7 @@ histedit(void)
 					el_set(el, EL_HIST, history, hist);
 				el_set(el, EL_PROMPT, getprompt);
 				el_set(el, EL_SIGNAL, 1);
+				el_set(el, EL_ALIAS_TEXT, alias_text, NULL);
 				el_set(el, EL_ADDFN, "rl-complete",
 				    "ReadLine compatible completion function",
 				    _el_fn_complete);

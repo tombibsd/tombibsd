@@ -65,7 +65,7 @@
 ./usr/libdata/debug/usr/lib/oabi/libbsdmalloc.so.0.0.debug	comp-sys-debug	debug,compat
 ./usr/libdata/debug/usr/lib/oabi/libbz2.so.1.1.debug		comp-sys-debug	debug,compat
 ./usr/libdata/debug/usr/lib/oabi/libc++.so.1.0.debug		comp-sys-debug	debug,compat,pic,libcxx
-./usr/libdata/debug/usr/lib/oabi/libc.so.12.191.debug		comp-sys-debug	debug,compat
+./usr/libdata/debug/usr/lib/oabi/libc.so.12.192.debug		comp-sys-debug	debug,compat
 ./usr/libdata/debug/usr/lib/oabi/libc_vfp.so.0.0.debug		comp-sys-debug	debug,compat,pic
 ./usr/libdata/debug/usr/lib/oabi/libcom_err.so.6.0.debug	comp-compat-shlib	 compat,pic,kerberos,debug,obsolete
 ./usr/libdata/debug/usr/lib/oabi/libcom_err.so.7.0.debug	comp-compat-shlib	 compat,pic,kerberos,debug

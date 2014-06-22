@@ -28,10 +28,7 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  */
-
-#if HAVE_NBTOOL_CONFIG_H
-#include "nbtool_config.h"
-#endif
+#include "gettemp.h"
 
 #if !HAVE_NBTOOL_CONFIG_H || !HAVE_MKSTEMP
 
@@ -44,21 +41,6 @@ __RCSID("$NetBSD$");
 #endif
 #endif /* LIBC_SCCS and not lint */
 
-#include "namespace.h"
-
-#if HAVE_NBTOOL_CONFIG_H
-#define	GETTEMP		__nbcompat_gettemp
-#else
-#include <assert.h>
-#include <errno.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include "reentrant.h"
-#include "local.h"
-#define	GETTEMP		__gettemp
-#endif
-
 #ifdef __weak_alias
 __weak_alias(mkstemp,_mkstemp)
 #endif
@@ -70,7 +52,7 @@ mkstemp(char *path)
 
 	_DIAGASSERT(path != NULL);
 
-	return GETTEMP(path, &fd, 0) ? fd : -1;
+	return GETTEMP(path, &fd, 0, 0, 0) ? fd : -1;
 }
 
 #endif /* !HAVE_NBTOOL_CONFIG_H || !HAVE_MKSTEMP */

@@ -27,6 +27,7 @@ TESTS_C+=	t_fmod
 TESTS_C+=	t_infinity
 TESTS_C+=	t_ldexp
 TESTS_C+=	t_log
+TESTS_C+=	t_modf
 TESTS_C+=	t_pow
 TESTS_C+=	t_precision
 TESTS_C+=	t_round

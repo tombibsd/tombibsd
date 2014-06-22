@@ -59,9 +59,6 @@ u_int current_mask;
 u_int actual_mask;
 u_int disabled_mask;
 u_int irqmasks[NIPL];
-extern u_int intrcnt[];
-
-extern char *_intrnames;
 
 /* Prototypes */
 

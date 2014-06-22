@@ -252,8 +252,11 @@ inphy_status(struct mii_softc *sc)
 			mii->mii_media_active |= IFM_100_T4;
 		else
 			mii->mii_media_active |= IFM_10_T;
+
 		if (scr & SCR_FDX)
 			mii->mii_media_active |= IFM_FDX;
+		else
+			mii->mii_media_active |= IFM_HDX;
 
 		if (mii->mii_media_active & IFM_FDX)
 			mii->mii_media_active |= mii_phy_flowstatus(sc);

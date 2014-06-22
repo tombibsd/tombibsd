@@ -210,7 +210,8 @@
 #define BNX_CHIP_METAL(sc)			(((sc)->bnx_chipid) & 0x00000ff0)
 #define BNX_CHIP_BOND(bp)			(((sc)->bnx_chipid) & 0x0000000f)
 
-#define BNX_CHIP_ID(sc)				(((sc)->bnx_chipid) & 0xfffffff0)
+#define _BNX_CHIP_ID(chipid)			((chipid) & 0xfffffff0)
+#define BNX_CHIP_ID(sc)				_BNX_CHIP_ID((sc)->bnx_chipid)
 
 #define BNX_CHIP_ID_5706_A0			0x57060000
 #define BNX_CHIP_ID_5706_A1			0x57060010

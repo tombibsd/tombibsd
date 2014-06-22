@@ -856,8 +856,13 @@ printlivelist(fiop, out, set, fp, group, comment)
 			if (fp->fr_family != 0 && fp->fr_family != AF_INET)
 				continue;
 		}
-		if (fp->fr_data != NULL)
-			fp->fr_data = (char *)fp + fp->fr_size;
+		if (fp->fr_data != NULL) {
+			fp->fr_data = calloc(1, fp->fr_dsize);
+			if (fp->fr_data != NULL) {
+				memcpy(fp->fr_data, (char *)fp + fp->fr_size,
+				    fp->fr_dsize);
+			}
+		}
 
 		rules++;
 

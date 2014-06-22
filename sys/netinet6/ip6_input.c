@@ -180,7 +180,7 @@ ip6_init(void)
 		    pr->pr_protocol && pr->pr_protocol != IPPROTO_RAW)
 			ip6_protox[pr->pr_protocol] = pr - inet6sw;
 
-	ip6_pktq = pktq_create(IFQ_MAXLEN, ip6intr);
+	ip6_pktq = pktq_create(IFQ_MAXLEN, ip6intr, NULL);
 	KASSERT(ip6_pktq != NULL);
 
 	scope6_init();

@@ -137,7 +137,7 @@ main(int argc, char *argv[])
 	fflag = 0;
 	inplace = NULL;
 
-	while ((c = getopt(argc, argv, "EI::ae:f:i::lnr")) != -1)
+	while ((c = getopt(argc, argv, "EI::ae:f:i::lnru")) != -1)
 		switch (c) {
 		case 'r':		/* Gnu sed compat */
 		case 'E':
@@ -177,6 +177,16 @@ main(int argc, char *argv[])
 		case 'n':
 			nflag = 1;
 			break;
+		case 'u':
+#ifdef _IONBF
+			c = setvbuf(stdout, NULL, _IONBF, 0);
+#else
+			c = -1;
+			errno = EOPNOTSUPP;
+#endif
+			if (c)
+				warn("setting unbuffered output failed");
+			break;
 		default:
 		case '?':
 			usage();
@@ -208,9 +218,10 @@ main(int argc, char *argv[])
 static void
 usage(void)
 {
-	(void)fprintf(stderr, "%s\n%s\n",
-		"usage: sed script [-Ealn] [-i extension] [file ...]",
-		"       sed [-Ealn] [-i extension] [-e script] ... [-f script_file] ... [file ...]");
+	(void)fprintf(stderr,
+	    "Usage:  %s [-aElnru] command [file ...]\n"
+	    "\t%s [-aElnru] [-e command] [-f command_file] [-I[extension]]\n"
+	    "\t    [-i[extension]] [file ...]\n", getprogname(), getprogname());
 	exit(1);
 }
 

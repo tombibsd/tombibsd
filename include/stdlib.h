@@ -182,6 +182,8 @@ void	 srandom(unsigned int) __RENAME(__srandom60);
 #endif
 #ifdef _NETBSD_SOURCE
 #define	RANDOM_MAX	0x7fffffff	/* (((long)1 << 31) - 1) */
+int	 mkostemp(char *, int);
+int	 mkostemps(char *, int, int);
 #endif
 
 char	*mkdtemp(char *);

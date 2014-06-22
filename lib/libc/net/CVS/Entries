@@ -6,11 +6,11 @@
 /base64.c/1.14/Mon Jun 25 22:32:44 2012/-kk/
 /byteorder.3/1.15/Tue May  3 04:07:39 2011/-kk/
 /ethers.3/1.13/Wed Apr 16 13:34:41 2003/-kk/
-/ethers.c/1.23/Tue Mar 20 17:44:18 2012/-kk/
+/ethers.c/1.24/Sun Jun 22 14:31:48 2014/-kk/
 /gai_strerror.3/1.5/Mon Mar 22 19:30:54 2010/-kk/
 /getaddrinfo.3/1.57/Thu Oct 24 10:28:53 2013/-kk/
 /getaddrinfo.c/1.106/Wed Jan  1 02:45:13 2014/-kk/
-/gethnamaddr.c/1.90/Thu Feb 13 15:22:02 2014/-kk/
+/gethnamaddr.c/1.91/Sun Jun 22 14:31:48 2014/-kk/
 /gethostbyname.3/1.29/Thu Oct 24 10:28:53 2013/-kk/
 /getifaddrs.3/1.14/Thu Oct 24 10:28:53 2013/-kk/
 /getifaddrs.c/1.15/Tue Mar 13 21:13:40 2012/-kk/

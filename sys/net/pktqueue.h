@@ -36,13 +36,15 @@
 #error "not supposed to be exposed to userland."
 #endif
 
+#include <sys/sysctl.h>
+
 struct mbuf;
 
 typedef struct pktqueue pktqueue_t;
 
 typedef enum { PKTQ_MAXLEN, PKTQ_NITEMS, PKTQ_DROPS } pktq_count_t;
 
-pktqueue_t *	pktq_create(size_t, void (*)(void *));
+pktqueue_t *	pktq_create(size_t, void (*)(void *), void *);
 void		pktq_destroy(pktqueue_t *);
 
 bool		pktq_enqueue(pktqueue_t *, struct mbuf *, const u_int);
@@ -53,5 +55,8 @@ int		pktq_set_maxlen(pktqueue_t *, size_t);
 
 uint32_t	pktq_rps_hash(const struct mbuf *);
 uint64_t	pktq_get_count(pktqueue_t *, pktq_count_t);
+
+int		sysctl_pktq_maxlen(SYSCTLFN_PROTO, pktqueue_t *);
+int		sysctl_pktq_count(SYSCTLFN_PROTO, pktqueue_t *, u_int);
 
 #endif

@@ -28,6 +28,7 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  */
+#include "gettemp.h"
 
 #include <sys/cdefs.h>
 #if defined(LIBC_SCCS) && !defined(lint)
@@ -38,12 +39,6 @@ __RCSID("$NetBSD$");
 #endif
 #endif /* LIBC_SCCS and not lint */
 
-#include <assert.h>
-#include <errno.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include "reentrant.h"
 #include "local.h"
 
 char *
@@ -52,7 +47,7 @@ _mktemp(char *path)
 
 	_DIAGASSERT(path != NULL);
 
-	return __gettemp(path, NULL, 0) ? path : NULL;
+	return GETTEMP(path, NULL, 0, 0, 0) ? path : NULL;
 }
 
 __warn_references(mktemp,
@@ -64,5 +59,5 @@ mktemp(char *path)
 
 	_DIAGASSERT(path != NULL);
 
-	return __gettemp(path, NULL, 0) ? path : NULL;
+	return GETTEMP(path, NULL, 0, 0, 0) ? path : NULL;
 }

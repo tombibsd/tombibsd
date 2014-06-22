@@ -2841,6 +2841,7 @@
 ./usr/tests/lib/libm/t_ldexp			tests-lib-tests		atf
 ./usr/tests/lib/libm/t_libm			tests-obsolete		obsolete
 ./usr/tests/lib/libm/t_log			tests-lib-tests		atf
+./usr/tests/lib/libm/t_modf			tests-lib-tests		atf
 ./usr/tests/lib/libm/t_pow			tests-lib-tests		atf
 ./usr/tests/lib/libm/t_precision		tests-lib-tests		atf
 ./usr/tests/lib/libm/t_round			tests-lib-tests		atf

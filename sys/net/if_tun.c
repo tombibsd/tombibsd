@@ -940,11 +940,11 @@ tunwrite(dev_t dev, struct uio *uio, int ioflag)
 		error = ENXIO;
 		goto out;
 	}
-	if (__predict_false(!pktq_enqueue(pktq, m, 0))) {
+	if (__predict_false(!pktq_enqueue(pktq, top, 0))) {
 		ifp->if_collisions++;
 		mutex_exit(&tp->tun_lock);
 		error = ENOBUFS;
-		m_freem(m);
+		m_freem(top);
 		goto out_nolock;
 	}
 	ifp->if_ipackets++;

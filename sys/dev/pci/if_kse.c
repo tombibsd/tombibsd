@@ -1315,11 +1315,11 @@ ifmedia_sts(struct ifnet *ifp, struct ifmediareq *ifmr)
 		if (result & (1U << 3))
 			ifmr->ifm_active |= IFM_100_TX|IFM_FDX;
 		else if (result & (1U << 2))
-			ifmr->ifm_active |= IFM_100_TX;
+			ifmr->ifm_active |= IFM_100_TX|IFM_HDX;
 		else if (result & (1U << 1))
 			ifmr->ifm_active |= IFM_10_T|IFM_FDX;
 		else if (result & (1U << 0))
-			ifmr->ifm_active |= IFM_10_T;
+			ifmr->ifm_active |= IFM_10_T|IFM_HDX;
 		else
 			ifmr->ifm_active |= IFM_NONE;
 		if (ctl & (1U << 4))

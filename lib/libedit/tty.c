@@ -48,6 +48,7 @@ __RCSID("$NetBSD$");
 #include <errno.h>
 #include <unistd.h>	/* for isatty */
 #include <strings.h>	/* for ffs */
+#include <stdlib.h>	/* for abort */
 #include "el.h"
 #include "tty.h"
 

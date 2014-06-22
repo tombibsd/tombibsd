@@ -353,6 +353,7 @@ __aconst char *getusershell(void);
 int	 initgroups(const char *, gid_t);
 int	 iruserok(uint32_t, int, const char *, const char *);
 int      issetugid(void);
+int	 mkstemps(char *, int);
 int	 nfssvc(int, void *);
 int	 pipe2(int *, int);
 int	 profil(char *, size_t, u_long, u_int);

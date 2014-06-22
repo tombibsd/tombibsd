@@ -247,7 +247,7 @@ bmtphy_status(struct mii_softc *sc)
 
 	if (bmcr & BMCR_AUTOEN) {
 		/*
-		 * The media status bits are only valid of autonegotiation
+		 * The media status bits are only valid if autonegotiation
 		 * has completed (or it's disabled).
 		 */
 		if ((bmsr & BMSR_ACOMP) == 0) {
@@ -272,7 +272,7 @@ bmtphy_status(struct mii_softc *sc)
 		mii->mii_media_active = ife->ifm_media;
 }
 
-static void   
+static void
 bmtphy_reset(struct mii_softc *sc)
 {
 	u_int16_t data;
@@ -288,8 +288,7 @@ bmtphy_reset(struct mii_softc *sc)
 		data = PHY_READ(sc, MII_BMTPHY_AUX2);
 		PHY_WRITE(sc, MII_BMTPHY_AUX2, data | 0x0020);
 
-		/* Enable clocks across APD for
-		 * Auto-MDIX functionality */
+		/* Enable clocks across APD for Auto-MDIX functionality */
 		data = PHY_READ(sc, MII_BMTPHY_INTR);
 		PHY_WRITE(sc, MII_BMTPHY_INTR, data | 0x0004);
 
@@ -297,4 +296,4 @@ bmtphy_reset(struct mii_softc *sc)
 		data = PHY_READ(sc, 0x1f);
 		PHY_WRITE(sc, 0x1f, data & ~0x0080);
 	}
-}      
+}

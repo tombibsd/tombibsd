@@ -256,9 +256,12 @@ nsphyter_status(struct mii_softc *sc)
 			mii->mii_media_active |= IFM_10_T;
 		else
 			mii->mii_media_active |= IFM_100_TX;
+
 		if (physts & PHYSTS_DUPLEX)
 			mii->mii_media_active |=
 			    IFM_FDX | mii_phy_flowstatus(sc);
+		else
+			mii->mii_media_active |= IFM_HDX;
 	} else
 		mii->mii_media_active = ife->ifm_media;
 }

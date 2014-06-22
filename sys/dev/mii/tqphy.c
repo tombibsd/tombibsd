@@ -250,8 +250,11 @@ tqphy_status(struct mii_softc *sc)
 			mii->mii_media_active |= IFM_100_TX;
 		else
 			mii->mii_media_active |= IFM_10_T;
+
 		if (diag & DIAG_DPLX)
 			mii->mii_media_active |= IFM_FDX;
+		else
+			mii->mii_media_active |= IFM_HDX;
 	} else
 		mii->mii_media_active = ife->ifm_media;
 }
