@@ -54,7 +54,8 @@ TOOLCHAIN_MISSING?=	no
 # Platforms still using GCC 4.5
 .if \
       ${MACHINE_CPU} == "m68k" || \
-      ${MACHINE_ARCH} == "powerpc"
+      ${MACHINE_ARCH} == "powerpc" || \
+      ${MACHINE_ARCH} == "powerpc64"
 HAVE_GCC?=    45
 
 .else

@@ -122,3 +122,7 @@ ENTRY(__sync_fetch_and_add_1)
 	bne	1b
 	rts
 END(__sync_fetch_and_add_1)
+
+CRT_ALIAS(__atomic_fetch_add_1,__sync_fetch_and_add_1)
+CRT_ALIAS(__atomic_fetch_add_2,__sync_fetch_and_add_2)
+CRT_ALIAS(__atomic_fetch_add_4,__sync_fetch_and_add_4)

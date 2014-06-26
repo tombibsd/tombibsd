@@ -63,6 +63,7 @@ test_bpf_code(void *code, size_t size)
 {
 	ifnet_t *dummy_ifp = npf_test_addif(IFNAME_TEST, false, false);
 	npf_cache_t npc = { .npc_info = 0 };
+	uint32_t memstore[BPF_MEMWORDS];
 	bpf_args_t bc_args;
 	struct mbuf *m;
 	nbuf_t nbuf;
@@ -74,9 +75,10 @@ test_bpf_code(void *code, size_t size)
 	nbuf_init(&nbuf, m, dummy_ifp);
 	npf_cache_all(&npc, &nbuf);
 
-	memset(&bc_args, 0, sizeof(bpf_args_t));
-	bc_args.pkt = m;
-	bc_args.wirelen = m_length(m);
+	bc_args.pkt = (const uint8_t *)m;
+	bc_args.buflen = m_length(m);
+	bc_args.wirelen = bc_args.buflen;
+	bc_args.mem = memstore;
 	bc_args.arg = &npc;
 
 	ret = npf_bpf_filter(&bc_args, code, NULL);

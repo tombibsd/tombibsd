@@ -1333,6 +1333,9 @@ swcrypto_attach(device_t parent, device_t self, void *opaque)
 {
 
 	swcr_init();
+
+	if (!pmf_device_register(self, NULL, NULL))
+		aprint_error_dev(self, "couldn't establish power handler\n");
 }
 
 int	swcrypto_detach(device_t, int);

@@ -56,6 +56,8 @@ atomic_add_64(volatile uint64_t *addr, int64_t val)
    (void) fetch_and_add_8(addr, val);
 }
 
+__strong_alias(__atomic_fetch_add_8,__sync_fetch_and_add_8)
+
 #undef atomic_add_64
 atomic_op_alias(atomic_add_64,_atomic_add_64)
 

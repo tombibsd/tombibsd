@@ -827,7 +827,7 @@ kevent1(register_t *retval, int fd,
 	struct timespec	ts;
 	size_t i, n, ichange;
 	int nerrors, error;
-	struct kevent kevbuf[8];	/* approx 300 bytes on 64-bit */
+	struct kevent kevbuf[KQ_NEVENTS];	/* approx 300 bytes on 64-bit */
 	file_t *fp;
 
 	/* check that we're dealing with a kq */

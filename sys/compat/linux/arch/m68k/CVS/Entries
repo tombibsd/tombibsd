@@ -2,7 +2,7 @@
 /files.linux_m68k/1.7/Wed Jan  1 02:45:27 2014/-kk/
 /linux_errno.h/1.5/Wed Dec 25 07:37:36 2013/-kk/
 /linux_exec.h/1.11/Thu Feb 13 15:35:58 2014/-kk/
-/linux_fcntl.h/1.4/Tue Nov  2 18:01:26 2010/-kk/
+/linux_fcntl.h/1.5/Thu Jun 26 06:46:21 2014/-kk/
 /linux_ioctl.h/1.3/Mon Apr 28 20:23:42 2008/-kk/
 /linux_machdep.c/1.42/Wed Jul  7 01:30:34 2010/-kk/
 /linux_machdep.h/1.7/Mon Apr 28 20:23:42 2008/-kk/

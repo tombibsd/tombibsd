@@ -479,7 +479,6 @@ get_range(bitstr_t *bits, int low, int high, const char * const names[],
 		if (ch == EOF)
 			return (EOF);
 	} else if (ch == '?') {
-	} else if (ch == '?') {
 		qmark = TRUE;
 		ch = get_char(file);
 		if (ch == EOF)

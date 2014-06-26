@@ -339,8 +339,8 @@ check_exec(struct lwp *l, struct exec_package *epp, struct pathbuf *pb)
 		return error;
 	epp->ep_vp = vp = nd.ni_vp;
 	/* normally this can't fail */
-	if ((error = copystr(nd.ni_pnbuf, epp->ep_resolvedname, PATH_MAX, NULL)))
-		goto bad1;
+	error = copystr(nd.ni_pnbuf, epp->ep_resolvedname, PATH_MAX, NULL);
+	KASSERT(error == 0);
 
 #ifdef DIAGNOSTIC
 	/* paranoia (take this out once namei stuff stabilizes) */

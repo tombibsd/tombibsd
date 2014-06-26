@@ -51,6 +51,7 @@ END(_atomic_and_8)
 ATOMIC_OP_ALIAS(atomic_and_8,_atomic_and_8)
 ATOMIC_OP_ALIAS(atomic_and_uchar,_atomic_and_8)
 CRT_ALIAS(__sync_fetch_and_and_1,_atomic_and_8)
+CRT_ALIAS(__atomic_fetch_and_1,_atomic_and_8)
 STRONG_ALIAS(_atomic_and_uchar,_atomic_and_8)
 
 ENTRY_NP(_atomic_and_8_nv)

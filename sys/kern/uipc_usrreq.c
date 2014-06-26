@@ -376,10 +376,8 @@ unp_usrreq(struct socket *so, int req, struct mbuf *m, struct mbuf *nam,
 
 	KASSERT(req != PRU_ATTACH);
 	KASSERT(req != PRU_DETACH);
+	KASSERT(req != PRU_CONTROL);
 
-	if (req == PRU_CONTROL) {
-		return EOPNOTSUPP;
-	}
 	KASSERT(solocked(so));
 	unp = sotounpcb(so);
 
@@ -865,6 +863,13 @@ unp_detach(struct socket *so)
 		unp_thread_kick();
 	} else
 		unp_free(unp);
+}
+
+static int
+unp_ioctl(struct socket *so, struct mbuf *m, struct mbuf *nam,
+    struct mbuf *control, struct lwp *l)
+{
+	return EOPNOTSUPP;
 }
 
 /*
@@ -1812,5 +1817,6 @@ unp_discard_later(file_t *fp)
 const struct pr_usrreqs unp_usrreqs = {
 	.pr_attach	= unp_attach,
 	.pr_detach	= unp_detach,
+	.pr_ioctl	= unp_ioctl,
 	.pr_generic	= unp_usrreq,
 };

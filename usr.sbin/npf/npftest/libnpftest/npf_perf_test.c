@@ -99,5 +99,5 @@ npf_test_conc(bool st, unsigned nthreads)
 	kmem_free(npackets, sizeof(uint64_t) * nthreads);
 	kmem_free(l, sizeof(lwp_t *) * nthreads);
 
-	printf("%u\t%" PRIu64 "\n", nthreads, total);
+	printf("%u\t%" PRIu64 "\n", nthreads, total / NSECS);
 }

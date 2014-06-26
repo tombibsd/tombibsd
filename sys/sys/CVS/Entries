@@ -154,7 +154,7 @@
 /power.h/1.19/Thu Oct 24 10:28:58 2013/-kk/
 /proc.h/1.320/Sat Mar  1 06:05:16 2014/-kk/
 /prot.h/1.2/Tue Apr 29 06:53:03 2008/-kk/
-/protosw.h/1.47/Tue Jun  3 02:54:47 2014/-kk/
+/protosw.h/1.48/Thu Jun 26 06:46:44 2014/-kk/
 /pserialize.h/1.1/Sat Jul 30 17:01:04 2011/-kk/
 /pset.h/1.4/Thu Oct 24 10:28:58 2013/-kk/
 /ptrace.h/1.45/Tue Jan 14 16:05:14 2014/-kk/

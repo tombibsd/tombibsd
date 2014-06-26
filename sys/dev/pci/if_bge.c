@@ -975,7 +975,7 @@ bge_ape_read_fw_ver(struct bge_softc *sc)
 		fwtype = "UNKN";
 
 	/* Print the APE firmware version. */
-	printf(", APE firmware %s %d.%d.%d.%d", fwtype,
+	aprint_normal_dev(sc->bge_dev, "APE firmware %s %d.%d.%d.%d\n", fwtype,
 	    (apedata & BGE_APE_FW_VERSION_MAJMSK) >> BGE_APE_FW_VERSION_MAJSFT,
 	    (apedata & BGE_APE_FW_VERSION_MINMSK) >> BGE_APE_FW_VERSION_MINSFT,
 	    (apedata & BGE_APE_FW_VERSION_REVMSK) >> BGE_APE_FW_VERSION_REVSFT,

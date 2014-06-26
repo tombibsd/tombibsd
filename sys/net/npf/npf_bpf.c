@@ -39,6 +39,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/types.h>
 #include <sys/param.h>
 
+#include <sys/bitops.h>
 #include <sys/mbuf.h>
 #include <net/bpf.h>
 
@@ -51,26 +52,43 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 static bpf_ctx_t *npf_bpfctx __read_mostly;
 
-static uint32_t	npf_cop_l3(bpf_ctx_t *, bpf_args_t *, uint32_t);
-static uint32_t	npf_cop_table(bpf_ctx_t *, bpf_args_t *, uint32_t);
+static uint32_t	npf_cop_l3(const bpf_ctx_t *, bpf_args_t *, uint32_t);
+static uint32_t	npf_cop_table(const bpf_ctx_t *, bpf_args_t *, uint32_t);
 
 static const bpf_copfunc_t npf_bpfcop[] = {
 	[NPF_COP_L3]	= npf_cop_l3,
 	[NPF_COP_TABLE]	= npf_cop_table,
 };
 
+#define	BPF_MW_ALLMASK \
+    ((1U << BPF_MW_IPVER) | (1U << BPF_MW_L4OFF) | (1U << BPF_MW_L4PROTO))
+
 void
 npf_bpf_sysinit(void)
 {
 	npf_bpfctx = bpf_create();
-	KASSERT(npf_bpfctx != NULL);
 	bpf_set_cop(npf_bpfctx, npf_bpfcop, __arraycount(npf_bpfcop));
+	bpf_set_extmem(npf_bpfctx, NPF_BPF_NWORDS, BPF_MW_ALLMASK);
 }
 
 void
 npf_bpf_sysfini(void)
 {
 	bpf_destroy(npf_bpfctx);
+}
+
+void
+npf_bpf_prepare(npf_cache_t *npc, nbuf_t *nbuf, bpf_args_t *args, uint32_t *m)
+{
+	const struct mbuf *mbuf = nbuf_head_mbuf(nbuf);
+	const size_t pktlen = m_length(mbuf);
+
+	/* Prepare the arguments for the BPF programs. */
+	args->pkt = (const uint8_t *)mbuf;
+	args->wirelen = pktlen;
+	args->buflen = 0;
+	args->mem = m;
+	args->arg = npc;
 }
 
 int
@@ -112,7 +130,7 @@ npf_bpf_validate(const void *code, size_t len)
  *	BPF_MW_L4PROTO	L4 protocol.
  */
 static uint32_t
-npf_cop_l3(bpf_ctx_t *bc, bpf_args_t *args, uint32_t A)
+npf_cop_l3(const bpf_ctx_t *bc, bpf_args_t *args, uint32_t A)
 {
 	const npf_cache_t * const npc = (const npf_cache_t *)args->arg;
 	uint32_t * const M = args->mem;
@@ -144,7 +162,7 @@ npf_cop_l3(bpf_ctx_t *bc, bpf_args_t *args, uint32_t A)
  *	A <- non-zero (true) if found and zero (false) otherwise
  */
 static uint32_t
-npf_cop_table(bpf_ctx_t *bc, bpf_args_t *args, uint32_t A)
+npf_cop_table(const bpf_ctx_t *bc, bpf_args_t *args, uint32_t A)
 {
 	const npf_cache_t * const npc = (const npf_cache_t *)args->arg;
 	npf_tableset_t *tblset = npf_config_tableset();

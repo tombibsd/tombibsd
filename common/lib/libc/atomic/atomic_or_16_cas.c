@@ -62,3 +62,4 @@ or_and_fetch_2(volatile uint16_t *addr, uint16_t val, ...)
 	return old;
 }
 
+__strong_alias(__atomic_fetch_or_2,__sync_fetch_and_or_2)

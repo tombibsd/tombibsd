@@ -222,10 +222,7 @@ check_shell:
 	    ) {
 		struct file *fp;
 
-#if defined(DIAGNOSTIC) && defined(FDSCRIPTS)
-		if (epp->ep_flags & EXEC_HASFD)
-			panic("exec_script_makecmds: epp already has a fd");
-#endif
+		KASSERT(!(epp->ep_flags & EXEC_HASFD));
 
 		if ((error = fd_allocfile(&fp, &epp->ep_fd)) != 0) {
 			scriptvp = NULL;
@@ -262,12 +259,9 @@ check_shell:
 #endif
 		/* normally can't fail, but check for it if diagnostic */
 		error = copystr(epp->ep_kname, tmpsap->fa_arg, MAXPATHLEN,
-		    (size_t *)0);
+		    NULL);
+		KASSERT(error == 0);
 		tmpsap++;
-#ifdef DIAGNOSTIC
-		if (error != 0)
-			panic("exec_script: copystr couldn't fail");
-#endif
 #ifdef FDSCRIPTS
 	} else {
 		snprintf(tmpsap->fa_arg, MAXPATHLEN, "/dev/fd/%d", epp->ep_fd);

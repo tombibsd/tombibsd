@@ -484,6 +484,13 @@ key_detach(struct socket *so)
 	splx(s);
 }
 
+static int
+key_ioctl(struct socket *so, struct mbuf *m, struct mbuf *nam,
+    struct mbuf *control, struct lwp *l)
+{
+	return EOPNOTSUPP;
+}
+
 /*
  * key_usrreq()
  * derived from net/rtsock.c:route_usrreq()
@@ -496,6 +503,7 @@ key_usrreq(struct socket *so, int req,struct mbuf *m, struct mbuf *nam,
 
 	KASSERT(req != PRU_ATTACH);
 	KASSERT(req != PRU_DETACH);
+	KASSERT(req != PRU_CONTROL);
 
 	s = splsoftnet();
 	error = raw_usrreq(so, req, m, nam, control, l);
@@ -514,11 +522,13 @@ DOMAIN_DEFINE(keydomain);
 PR_WRAP_USRREQS(key)
 #define	key_attach	key_attach_wrapper
 #define	key_detach	key_detach_wrapper
+#define	key_ioctl	key_ioctl_wrapper
 #define	key_usrreq	key_usrreq_wrapper
 
 const struct pr_usrreqs key_usrreqs = {
 	.pr_attach	= key_attach,
 	.pr_detach	= key_detach,
+	.pr_ioctl	= key_ioctl,
 	.pr_generic	= key_usrreq,
 };
 

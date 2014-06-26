@@ -746,8 +746,7 @@ cd9660_loadvnode(struct mount *mp, struct vnode *vp,
 
 	if (off + isonum_711(isodir->length) > imp->logical_block_size) {
 		pool_put(&cd9660_node_pool, ip);
-		if (bp != 0)
-			brelse(bp, 0);
+		brelse(bp, 0);
 		printf("fhtovp: directory crosses block boundary %d[off=%d/len=%d]\n",
 		    off +isonum_711(isodir->length), off,
 		    isonum_711(isodir->length));
@@ -800,8 +799,7 @@ cd9660_loadvnode(struct mount *mp, struct vnode *vp,
 		break;
 	}
 
-	if (bp != 0)
-		brelse(bp, 0);
+	brelse(bp, 0);
 
 	/*
 	 * Initialize the associated vnode

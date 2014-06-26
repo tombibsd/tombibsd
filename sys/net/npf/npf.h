@@ -67,6 +67,8 @@ typedef uint8_t			npf_netmask_t;
 #define	BPF_MW_L4OFF		1
 #define	BPF_MW_L4PROTO		2
 #endif
+/* The number of words used. */
+#define	NPF_BPF_NWORDS		3
 
 #if defined(_KERNEL)
 

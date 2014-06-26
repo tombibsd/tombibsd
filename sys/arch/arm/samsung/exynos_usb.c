@@ -299,7 +299,7 @@ exynos_ohci_attach(device_t parent, device_t self, void *aux)
 	/* attach */
 	r = ohci_init(sc);
 	if (r != USBD_NORMAL_COMPLETION) {
-		aprint_error_dev(self, "init failed, errpr = %d\n", r);
+		aprint_error_dev(self, "init failed, error = %d\n", r);
 		/* disable : TBD */
 		return;
 	}
@@ -356,7 +356,7 @@ exynos_ehci_attach(device_t parent, device_t self, void *aux)
 	/* attach */
 	r = ehci_init(sc);
 	if (r != USBD_NORMAL_COMPLETION) {
-		aprint_error_dev(self, "init failed, errpr = %d\n", r);
+		aprint_error_dev(self, "init failed, error = %d\n", r);
 		/* disable : TBD */
 		return;
 	}

@@ -50,6 +50,7 @@ END(_atomic_or_16)
 ATOMIC_OP_ALIAS(atomic_or_16,_atomic_or_16)
 ATOMIC_OP_ALIAS(atomic_or_ushort,_atomic_or_16)
 CRT_ALIAS(__sync_fetch_and_or_2,_atomic_or_16)
+CRT_ALIAS(__atomic_fetch_or_2,_atomic_or_16)
 STRONG_ALIAS(_atomic_or_ushort,_atomic_or_16)
 
 ENTRY_NP(_atomic_or_16_nv)

@@ -13,6 +13,7 @@ CPPFLAGS+=	-I${.CURDIR} \
 		-I${DIST}/gdb \
 		-I${DIST}/gdb/common \
 		-I${DIST}/gdb/config \
+		-I${DIST}/gdb/gnulib/import \
 		-I${DIST}/include/opcode \
 		-I${DIST} \
 		-I${.CURDIR}/../../lib/libbfd/arch/${GDB_MACHINE_ARCH} \

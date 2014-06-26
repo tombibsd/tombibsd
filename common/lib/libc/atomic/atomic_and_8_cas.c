@@ -47,3 +47,5 @@ fetch_and_and_1(volatile uint8_t *addr, uint8_t val, ...)
 	} while (atomic_cas_8(addr, old, new) != old);
 	return old;
 }
+
+__strong_alias(__atomic_fetch_and_1,__sync_fetch_and_and_1)

@@ -123,4 +123,6 @@ ENTRY(__sync_fetch_and_and_1)
 	rts
 END(__sync_fetch_and_and_1)
 
-
+CRT_ALIAS(__atomic_fetch_and_1,__sync_fetch_and_and_1)
+CRT_ALIAS(__atomic_fetch_and_2,__sync_fetch_and_and_2)
+CRT_ALIAS(__atomic_fetch_and_4,__sync_fetch_and_and_4)

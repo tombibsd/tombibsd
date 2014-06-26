@@ -56,49 +56,37 @@
  */
 
 /*
- * allocator of kernel wired memory.
+ * Allocator of kernel wired memory. This allocator has some debug features
+ * enabled with "option DIAGNOSTIC" and "option DEBUG".
  */
 
 /*
- * This allocator has some debug features enabled with "option DEBUG".
+ * KMEM_SIZE: detect alloc/free size mismatch bugs.
+ *	Prefix each allocations with a fixed-sized header and record the exact
+ *	user-requested allocation size in it. When freeing, compare it with
+ *	kmem_free's "size" argument.
+ */
+
+/*
+ * KMEM_REDZONE: detect overrun bugs.
+ *	Add a 2-byte pattern (allocate one more page if needed) at the end
+ *	of each allocated buffer. Check this pattern on kmem_free.
  *
- * KMEM_POISON
- *	Try to detect modify-after-free bugs.
- *
+ * KMEM_POISON: detect modify-after-free bugs.
  *	Fill freed (in the sense of kmem_free) memory with a garbage pattern.
  *	Check the pattern on allocation.
  *
- * KMEM_REDZONE
- *	Try to detect overrun bugs.
- *
- *	Allocate some more bytes for each allocation.
- *	The extra bytes are checked by KMEM_POISON on kmem_free.
- *
- * KMEM_SIZE
- *	Try to detect alloc/free size mismatch bugs.
- *
- *	Prefix each allocations with a fixed-sized header and record
- *	the exact user-requested allocation size in it.
- *	When freeing, compare it with kmem_free's "size" argument.
- *
  * KMEM_GUARD
- *	See the below "kmguard" section.
- */
-
-/*
- * kmguard
+ *	A kernel with "option DEBUG" has "kmguard" debugging feature compiled
+ *	in. See the comment in uvm/uvm_kmguard.c for what kind of bugs it tries
+ *	to detect.  Even if compiled in, it's disabled by default because it's
+ *	very expensive.  You can enable it on boot by:
+ *		boot -d
+ *		db> w kmem_guard_depth 0t30000
+ *		db> c
  *
- * A kernel with "option DEBUG" has "kmguard" debugging feature compiled in.
- * See the comment in uvm/uvm_kmguard.c for what kind of bugs it tries to
- * detect.  Even if compiled in, it's disabled by default because it's very
- * expensive.  You can enable it on boot by:
- *
- * 	boot -d
- * 	db> w kmem_guard_depth 0t30000
- * 	db> c
- *
- * The default value of kmem_guard_depth is 0, which means disabled.
- * It can be changed by KMEM_GUARD_DEPTH kernel config option.
+ *	The default value of kmem_guard_depth is 0, which means disabled.
+ *	It can be changed by KMEM_GUARD_DEPTH kernel config option.
  */
 
 #include <sys/cdefs.h>
@@ -178,18 +166,13 @@ static size_t kmem_cache_maxidx __read_mostly;
 static pool_cache_t kmem_cache_big[KMEM_CACHE_BIG_COUNT] __cacheline_aligned;
 static size_t kmem_cache_big_maxidx __read_mostly;
 
+#if defined(DIAGNOSTIC) && defined(_HARDKERNEL)
+#define KMEM_SIZE
+#endif /* defined(DIAGNOSTIC) */
 
 #if defined(DEBUG) && defined(_HARDKERNEL)
-#ifndef KMEM_GUARD_DEPTH
-#define KMEM_GUARD_DEPTH 0
-#endif
-int kmem_guard_depth = KMEM_GUARD_DEPTH;
-size_t kmem_guard_size;
-static struct uvm_kmguard kmem_guard;
-static void *kmem_freecheck;
 #define	KMEM_POISON
 #define	KMEM_REDZONE
-#define	KMEM_SIZE
 #define	KMEM_GUARD
 #endif /* defined(DEBUG) */
 
@@ -203,13 +186,17 @@ static void kmem_poison_check(void *, size_t);
 #endif /* defined(KMEM_POISON) */
 
 #if defined(KMEM_REDZONE)
-#define	REDZONE_SIZE	1
+#define	REDZONE_SIZE	2
+static void kmem_redzone_fill(void *p, size_t sz);
+static void kmem_redzone_check(void *p, size_t sz);
 #else /* defined(KMEM_REDZONE) */
 #define	REDZONE_SIZE	0
+#define	kmem_redzone_fill(p, sz)		/* nothing */
+#define	kmem_redzone_check(p, sz)	/* nothing */
 #endif /* defined(KMEM_REDZONE) */
 
 #if defined(KMEM_SIZE)
-#define	SIZE_SIZE	(MAX(KMEM_ALIGN, sizeof(size_t)))
+#define	SIZE_SIZE	kmem_roundup_size(sizeof(size_t))
 static void kmem_size_set(void *, size_t);
 static void kmem_size_check(void *, size_t);
 #else
@@ -217,6 +204,16 @@ static void kmem_size_check(void *, size_t);
 #define	kmem_size_set(p, sz)	/* nothing */
 #define	kmem_size_check(p, sz)	/* nothing */
 #endif
+
+#if defined(KMEM_GUARD)
+#ifndef KMEM_GUARD_DEPTH
+#define KMEM_GUARD_DEPTH 0
+#endif
+int kmem_guard_depth = KMEM_GUARD_DEPTH;
+size_t kmem_guard_size;
+static struct uvm_kmguard kmem_guard;
+static void *kmem_freecheck;
+#endif /* defined(KMEM_GUARD) */
 
 CTASSERT(KM_SLEEP == PR_WAITOK);
 CTASSERT(KM_NOSLEEP == PR_NOWAIT);
@@ -242,13 +239,21 @@ kmem_intr_alloc(size_t requested_size, km_flag_t kmflags)
 	}
 #endif
 	size = kmem_roundup_size(requested_size);
-	allocsz = size + REDZONE_SIZE + SIZE_SIZE;
+	allocsz = size + SIZE_SIZE;
+
+#ifdef KMEM_REDZONE
+	if (size - requested_size < REDZONE_SIZE) {
+		/* If there isn't enough space in the page padding,
+		 * allocate one more page for the red zone. */
+		allocsz += kmem_roundup_size(REDZONE_SIZE);
+	}
+#endif
 
 	if ((index = ((allocsz -1) >> KMEM_SHIFT))
 	    < kmem_cache_maxidx) {
 		pc = kmem_cache[index];
 	} else if ((index = ((allocsz - 1) >> KMEM_BIG_SHIFT))
-            < kmem_cache_big_maxidx) {
+	    < kmem_cache_big_maxidx) {
 		pc = kmem_cache_big[index];
 	} else {
 		int ret = uvm_km_kmem_alloc(kmem_va_arena,
@@ -268,6 +273,7 @@ kmem_intr_alloc(size_t requested_size, km_flag_t kmflags)
 		kmem_poison_check(p, size);
 		FREECHECK_OUT(&kmem_freecheck, p);
 		kmem_size_set(p, requested_size);
+		kmem_redzone_fill(p, requested_size + SIZE_SIZE);
 
 		return p + SIZE_SIZE;
 	}
@@ -310,14 +316,21 @@ kmem_intr_free(void *p, size_t requested_size)
 		return;
 	}
 #endif
+
 	size = kmem_roundup_size(requested_size);
-	allocsz = size + REDZONE_SIZE + SIZE_SIZE;
+	allocsz = size + SIZE_SIZE;
+
+#ifdef KMEM_REDZONE
+	if (size - requested_size < REDZONE_SIZE) {
+		allocsz += kmem_roundup_size(REDZONE_SIZE);
+	}
+#endif
 
 	if ((index = ((allocsz -1) >> KMEM_SHIFT))
 	    < kmem_cache_maxidx) {
 		pc = kmem_cache[index];
 	} else if ((index = ((allocsz - 1) >> KMEM_BIG_SHIFT))
-            < kmem_cache_big_maxidx) {
+	    < kmem_cache_big_maxidx) {
 		pc = kmem_cache_big[index];
 	} else {
 		FREECHECK_IN(&kmem_freecheck, p);
@@ -328,10 +341,9 @@ kmem_intr_free(void *p, size_t requested_size)
 
 	p = (uint8_t *)p - SIZE_SIZE;
 	kmem_size_check(p, requested_size);
+	kmem_redzone_check(p, requested_size + SIZE_SIZE);
 	FREECHECK_IN(&kmem_freecheck, p);
 	LOCKDEBUG_MEM_CHECK(p, size);
-	kmem_poison_check((uint8_t *)p + SIZE_SIZE + size,
-      	    allocsz - (SIZE_SIZE + size));
 	kmem_poison_fill(p, allocsz);
 
 	pool_cache_put(pc, p);
@@ -448,7 +460,7 @@ kmem_init(void)
 #endif
 	kmem_cache_maxidx = kmem_create_caches(kmem_cache_sizes,
 	    kmem_cache, KMEM_MAXSIZE, KMEM_SHIFT, IPL_VM);
-       	kmem_cache_big_maxidx = kmem_create_caches(kmem_cache_big_sizes,
+	kmem_cache_big_maxidx = kmem_create_caches(kmem_cache_big_sizes,
 	    kmem_cache_big, PAGE_SIZE, KMEM_BIG_SHIFT, IPL_VM);
 }
 
@@ -459,20 +471,20 @@ kmem_roundup_size(size_t size)
 	return (size + (KMEM_ALIGN - 1)) & ~(KMEM_ALIGN - 1);
 }
 
-/* ---- debug */
+/* ------------------ DEBUG / DIAGNOSTIC ------------------ */
 
-#if defined(KMEM_POISON)
-
+#if defined(KMEM_POISON) || defined(KMEM_REDZONE)
 #if defined(_LP64)
 #define PRIME 0x9e37fffffffc0000UL
 #else /* defined(_LP64) */
 #define PRIME 0x9e3779b1
 #endif /* defined(_LP64) */
+#endif /* defined(KMEM_POISON) || defined(KMEM_REDZONE) */
 
+#if defined(KMEM_POISON)
 static inline uint8_t
 kmem_poison_pattern(const void *p)
 {
-
 	return (uint8_t)(((uintptr_t)p) * PRIME
 	   >> ((sizeof(uintptr_t) - sizeof(uint8_t))) * CHAR_BIT);
 }
@@ -519,14 +531,12 @@ kmem_poison_check(void *p, size_t sz)
 		cp++;
 	}
 }
-
 #endif /* defined(KMEM_POISON) */
 
 #if defined(KMEM_SIZE)
 static void
 kmem_size_set(void *p, size_t sz)
 {
-
 	memcpy(p, &sz, sizeof(sz));
 }
 
@@ -541,7 +551,50 @@ kmem_size_check(void *p, size_t sz)
 		    (const uint8_t *)p + SIZE_SIZE, sz, psz);
 	}
 }
-#endif	/* defined(KMEM_SIZE) */
+#endif /* defined(KMEM_SIZE) */
+
+#if defined(KMEM_REDZONE)
+static inline uint8_t
+kmem_redzone_pattern(const void *p)
+{
+	return (uint8_t)(((uintptr_t)p) * PRIME
+	   >> ((sizeof(uintptr_t) - sizeof(uint8_t))) * CHAR_BIT);
+}
+
+static void
+kmem_redzone_fill(void *p, size_t sz)
+{
+	uint8_t *cp;
+	const uint8_t *ep;
+
+	cp = (uint8_t *)p + sz;
+	ep = cp + REDZONE_SIZE;
+	while (cp < ep) {
+		*cp = kmem_redzone_pattern(cp);
+		cp++;
+	}
+}
+
+static void
+kmem_redzone_check(void *p, size_t sz)
+{
+	uint8_t *cp;
+	const uint8_t *ep;
+
+	cp = (uint8_t *)p + sz;
+	ep = (uint8_t *)p + sz + REDZONE_SIZE;
+	while (cp < ep) {
+		const uint8_t expected = kmem_redzone_pattern(cp);
+
+		if (*cp != expected) {
+			panic("%s: %p: 0x%02x != 0x%02x\n",
+			   __func__, cp, *cp, expected);
+		}
+		cp++;
+	}
+}
+#endif /* defined(KMEM_REDZONE) */
+
 
 /*
  * Used to dynamically allocate string with kmem accordingly to format.

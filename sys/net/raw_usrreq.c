@@ -162,9 +162,7 @@ raw_usrreq(struct socket *so, int req, struct mbuf *m, struct mbuf *nam,
 
 	KASSERT(req != PRU_ATTACH);
 	KASSERT(req != PRU_DETACH);
-
-	if (req == PRU_CONTROL)
-		return EOPNOTSUPP;
+	KASSERT(req != PRU_CONTROL);
 
 	s = splsoftnet();
 	KERNEL_LOCK(1, NULL);

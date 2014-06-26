@@ -93,15 +93,19 @@ linux_to_bsd_ioflags(int lflags)
 	res |= cvtto_bsd_mask(lflags, LINUX_O_WRONLY, O_WRONLY);
 	res |= cvtto_bsd_mask(lflags, LINUX_O_RDONLY, O_RDONLY);
 	res |= cvtto_bsd_mask(lflags, LINUX_O_RDWR, O_RDWR);
+
 	res |= cvtto_bsd_mask(lflags, LINUX_O_CREAT, O_CREAT);
 	res |= cvtto_bsd_mask(lflags, LINUX_O_EXCL, O_EXCL);
 	res |= cvtto_bsd_mask(lflags, LINUX_O_NOCTTY, O_NOCTTY);
 	res |= cvtto_bsd_mask(lflags, LINUX_O_TRUNC, O_TRUNC);
+	res |= cvtto_bsd_mask(lflags, LINUX_O_APPEND, O_APPEND);
+	res |= cvtto_bsd_mask(lflags, LINUX_O_NONBLOCK, O_NONBLOCK);
 	res |= cvtto_bsd_mask(lflags, LINUX_O_NDELAY, O_NDELAY);
 	res |= cvtto_bsd_mask(lflags, LINUX_O_SYNC, O_FSYNC);
 	res |= cvtto_bsd_mask(lflags, LINUX_FASYNC, O_ASYNC);
-	res |= cvtto_bsd_mask(lflags, LINUX_O_APPEND, O_APPEND);
+	res |= cvtto_bsd_mask(lflags, LINUX_O_DIRECT, O_DIRECT);
 	res |= cvtto_bsd_mask(lflags, LINUX_O_DIRECTORY, O_DIRECTORY);
+	res |= cvtto_bsd_mask(lflags, LINUX_O_NOFOLLOW, O_NOFOLLOW);
 	res |= cvtto_bsd_mask(lflags, LINUX_O_CLOEXEC, O_CLOEXEC);
 
 	return res;
@@ -115,15 +119,19 @@ bsd_to_linux_ioflags(int bflags)
 	res |= cvtto_linux_mask(bflags, O_WRONLY, LINUX_O_WRONLY);
 	res |= cvtto_linux_mask(bflags, O_RDONLY, LINUX_O_RDONLY);
 	res |= cvtto_linux_mask(bflags, O_RDWR, LINUX_O_RDWR);
+
 	res |= cvtto_linux_mask(bflags, O_CREAT, LINUX_O_CREAT);
 	res |= cvtto_linux_mask(bflags, O_EXCL, LINUX_O_EXCL);
 	res |= cvtto_linux_mask(bflags, O_NOCTTY, LINUX_O_NOCTTY);
 	res |= cvtto_linux_mask(bflags, O_TRUNC, LINUX_O_TRUNC);
+	res |= cvtto_linux_mask(bflags, O_APPEND, LINUX_O_APPEND);
+	res |= cvtto_linux_mask(bflags, O_NONBLOCK, LINUX_O_NONBLOCK);
 	res |= cvtto_linux_mask(bflags, O_NDELAY, LINUX_O_NDELAY);
 	res |= cvtto_linux_mask(bflags, O_FSYNC, LINUX_O_SYNC);
 	res |= cvtto_linux_mask(bflags, O_ASYNC, LINUX_FASYNC);
-	res |= cvtto_linux_mask(bflags, O_APPEND, LINUX_O_APPEND);
+	res |= cvtto_linux_mask(bflags, O_DIRECT, LINUX_O_DIRECT);
 	res |= cvtto_linux_mask(bflags, O_DIRECTORY, LINUX_O_DIRECTORY);
+	res |= cvtto_linux_mask(bflags, O_NOFOLLOW, LINUX_O_NOFOLLOW);
 	res |= cvtto_linux_mask(bflags, O_CLOEXEC, LINUX_O_CLOEXEC);
 
 	return res;
@@ -204,7 +212,7 @@ linux_sys_open(struct lwp *l, const struct linux_sys_open_args *uap, register_t 
 	SCARG(&boa, mode) = SCARG(uap, mode);
 
 	if ((error = sys_open(l, &boa, retval)))
-		return error;
+		return (error == EFTYPE) ? ELOOP : error;
 
 	linux_open_ctty(l, fl, *retval);
 	return 0;
@@ -230,7 +238,7 @@ linux_sys_openat(struct lwp *l, const struct linux_sys_openat_args *uap, registe
 	SCARG(&boa, mode) = SCARG(uap, mode);
 
 	if ((error = sys_openat(l, &boa, retval)))
-		return error;
+		return (error == EFTYPE) ? ELOOP : error;
 
 	linux_open_ctty(l, fl, *retval);
 	return 0;

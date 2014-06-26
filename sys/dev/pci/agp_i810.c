@@ -1093,9 +1093,10 @@ agp_i810_bind_page(struct agp_softc *sc, off_t offset, bus_addr_t physical)
 
 	if (offset < 0 || offset >= ((isc->gtt_size/4) << AGP_PAGE_SHIFT)) {
 #ifdef AGP_DEBUG
-		printf("%s: failed: offset 0x%08x, shift %d, entries %d\n",
+		printf("%s: failed"
+		    ": offset 0x%08x, shift %d, entries %"PRIuMAX"\n",
 		    device_xname(sc->as_dev), (int)offset, AGP_PAGE_SHIFT,
-		    isc->gtt_size/4);
+		    (uintmax_t)isc->gtt_size/4);
 #endif
 		return EINVAL;
 	}

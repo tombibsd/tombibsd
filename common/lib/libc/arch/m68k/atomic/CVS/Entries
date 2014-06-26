@@ -1,14 +1,14 @@
 /Makefile.inc/1.13/Sat Mar  1 05:57:57 2014/-kk/
-/atomic_add.S/1.9/Sat Mar  1 05:57:57 2014/-kk/
-/atomic_and.S/1.10/Sat Mar  1 05:57:57 2014/-kk/
+/atomic_add.S/1.10/Thu Jun 26 06:39:51 2014/-kk/
+/atomic_and.S/1.11/Thu Jun 26 06:39:51 2014/-kk/
 /atomic_cas.S/1.10/Sat Mar  1 05:57:57 2014/-kk/
 /atomic_cas_68000.S/1.6/Thu Feb 13 15:18:39 2014/-kk/
 /atomic_dec.S/1.6/Thu Oct 24 10:28:41 2013/-kk/
 /atomic_inc.S/1.6/Thu Oct 24 10:28:41 2013/-kk/
 /atomic_nand.S/1.2/Sat Feb 22 17:08:30 2014/-kk/
 /atomic_op_asm.h/1.5/Sat Mar  1 05:57:57 2014/-kk/
-/atomic_or.S/1.10/Sat Mar  1 05:57:57 2014/-kk/
-/atomic_sub.S/1.2/Sat Feb 22 17:08:30 2014/-kk/
+/atomic_or.S/1.11/Thu Jun 26 06:39:51 2014/-kk/
+/atomic_sub.S/1.3/Thu Jun 26 06:39:51 2014/-kk/
 /atomic_swap.S/1.8/Sat Mar  1 05:57:57 2014/-kk/
-/atomic_xor.S/1.2/Sat Feb 22 17:08:30 2014/-kk/
+/atomic_xor.S/1.3/Thu Jun 26 06:39:51 2014/-kk/
 D

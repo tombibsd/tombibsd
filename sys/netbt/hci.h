@@ -2536,7 +2536,7 @@ extern SIMPLEQ_HEAD(hci_unit_list, hci_unit) hci_unit_list;
 void hci_event(struct mbuf *, struct hci_unit *);
 
 /* hci_ioctl.c */
-int hci_ioctl(unsigned long, void *, struct lwp *);
+int hci_ioctl_pcb(unsigned long, void *, struct lwp *);
 
 /* hci_link.c */
 struct hci_link *hci_acl_open(struct hci_unit *, bdaddr_t *);

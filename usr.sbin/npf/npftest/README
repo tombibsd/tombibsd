@@ -12,11 +12,15 @@ npftest -c /tmp/npf.plist -t
 
 Stream:
 
-tcpdump -w stream.pcap -i $INTERFACE "host $HOST and tcp"
+tcpdump -w stream.pcap -i $interface "host $host and tcp"
 npfctl debug npftest.conf /tmp/npf.plist
 npftest -c /tmp/npf.plist -s stream.pcap > stream_npf_data.txt
 
 Preferably, use MALLOC_OPTIONS="AJ" and/or other facilities.
+
+Benchmark:
+
+npftest -b rule -c /tmp/npf.plist -p $ncpu
 
 ---
 

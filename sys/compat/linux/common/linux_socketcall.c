@@ -125,7 +125,7 @@ linux_sys_socketcall(struct lwp *l, const struct linux_sys_socketcall_args *uap,
 	struct linux_socketcall_dummy_args lda;
 	int error;
 
-	if (SCARG(uap, what) < 0 || SCARG(uap, what) > LINUX_MAX_SOCKETCALL)
+	if (SCARG(uap, what) <= 0 || SCARG(uap, what) > LINUX_MAX_SOCKETCALL)
 		return ENOSYS;
 
 	if ((error = copyin(SCARG(uap, args), &lda,

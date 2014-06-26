@@ -14,6 +14,7 @@ CPPFLAGS+=	-I${.CURDIR} \
 		-I${DIST}/gdb \
 		-I${DIST}/gdb/common \
 		-I${DIST}/gdb/config \
+		-I${DIST}/gdb/gnulib/import \
 		-I${DIST}/include/opcode \
 		-I${DIST} \
 		-I${.CURDIR}/../../lib/libbfd/arch/${GDB_MACHINE_ARCH} \
@@ -21,7 +22,7 @@ CPPFLAGS+=	-I${.CURDIR} \
 		-I${DIST}/include \
 		${GCPPFLAGS:M-D*}
 
-TEXINFO=	gdb.texinfo gdbint.texinfo stabs.texinfo
+TEXINFO=	gdb.texinfo stabs.texinfo
 INFOFLAGS=	-I${DIST}/gdb/doc -I${DIST}/gdb/mi \
 		-I${DIST}/readline/doc -I${.CURDIR}/.. -DGDBN=${GDBN}
 
@@ -32,7 +33,7 @@ gdb-cfg.texi: ${DIST}/gdb/doc/all-cfg.texi
 	${TOOL_CAT} ${.ALLSRC} > ${.TARGET}
 
 CLEANFILES+= GDBvn.texi gdb-cfg.texi
-gdbint.info stabs.info gdb.info: gdb-cfg.texi GDBvn.texi
+stabs.info gdb.info: gdb-cfg.texi GDBvn.texi
 
 .include "../../Makefile.inc"
 .include <bsd.info.mk>

@@ -9,7 +9,7 @@
 /ct.c/1.7/Sun Jul 17 20:54:40 2011/-kk/
 /dca.c/1.7/Tue Feb  8 20:20:14 2011/-kk/
 /dcareg.h/1.2/Sun Dec 11 12:17:19 2005/-kk/
-/dcm.c/1.8/Tue Feb  8 20:20:14 2011/-kk/
+/dcm.c/1.9/Thu Jun 26 06:46:11 2014/-kk/
 /device.h/1.5/Sun Mar  4 05:59:50 2007/-kk/
 /devopen.c/1.10/Mon Apr 28 20:23:19 2008/-kk/
 /dnkbd.c/1.13/Tue May  6 05:49:58 2014/-kk/
@@ -25,7 +25,7 @@
 /hilreg.h/1.2/Tue Feb  8 20:20:14 2011/-kk/
 /hpib.c/1.9/Sun Mar  4 05:59:50 2007/-kk/
 /hpibvar.h/1.5/Sun Jun 25 17:37:43 2006/-kk/
-/if_le.c/1.12/Mon May 19 16:25:52 2014/-kk/
+/if_le.c/1.13/Thu Jun 26 06:46:11 2014/-kk/
 /if_lereg.h/1.6/Thu Jul 26 17:15:22 2012/-kk/
 /ite.c/1.17/Sat Apr 19 08:04:01 2014/-kk/
 /ite_dumb.c/1.1/Sat Feb 12 05:08:41 2011/-kk/

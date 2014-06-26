@@ -132,7 +132,7 @@ hci_dump(void)
 #endif
 
 int
-hci_ioctl(unsigned long cmd, void *data, struct lwp *l)
+hci_ioctl_pcb(unsigned long cmd, void *data, struct lwp *l)
 {
 	struct btreq *btr = data;
 	struct hci_unit *unit;

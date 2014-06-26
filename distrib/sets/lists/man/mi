@@ -21,7 +21,7 @@
 ./usr/share/info/g77.info			man-fortran-info	gcc=3,gcccmds,info
 ./usr/share/info/gcc.info			man-c-info		gcccmds,info
 ./usr/share/info/gdb.info			man-debug-info		gdb,info
-./usr/share/info/gdbint.info			man-debug-info		gdb,info
+./usr/share/info/gdbint.info			man-obsolete		obsolete
 ./usr/share/info/gettext.info			man-sys-info		info
 ./usr/share/info/gprof.info			man-debug-info		binutils,info
 ./usr/share/info/grep.info			man-util-info		info,!bsdgrep

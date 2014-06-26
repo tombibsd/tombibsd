@@ -52,6 +52,7 @@ ATOMIC_OP_ALIAS(atomic_and_32,_atomic_and_32)
 ATOMIC_OP_ALIAS(atomic_and_uint,_atomic_and_32)
 ATOMIC_OP_ALIAS(atomic_and_ulong,_atomic_and_32)
 CRT_ALIAS(__sync_fetch_and_and_4,_atomic_and_32)
+CRT_ALIAS(__atomic_fetch_and_4,_atomic_and_32)
 STRONG_ALIAS(_atomic_and_uint,_atomic_and_32)
 STRONG_ALIAS(_atomic_and_ulong,_atomic_and_32)
 

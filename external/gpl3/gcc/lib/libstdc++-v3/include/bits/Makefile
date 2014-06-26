@@ -19,7 +19,7 @@ INCS+=		${BUILDINCS}
 INCS+=		nested_exception.h hash_bytes.h atomic_lockfree_defines.h
 INCS+=		cxxabi_forced.h	exception_defines.h exception_ptr.h
 
-.if ${MKCOMPAT} != no
+.if ${MKCOMPAT} != no && !empty(MACHINE_ARCH:M*64*)
 SUBDIR+=	arch
 .else
 INCS+=		c++config.h

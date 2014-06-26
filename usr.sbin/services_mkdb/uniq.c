@@ -96,6 +96,7 @@ uniq(const char *fname)
 			break;
 		case -1:
 			err(1, "put");
+			/*NOTREACHED*/
 		default:
 			abort();
 			break;

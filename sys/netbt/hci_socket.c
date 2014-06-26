@@ -483,20 +483,26 @@ hci_detach(struct socket *so)
 	kmem_free(pcb, sizeof(*pcb));
 }
 
+static int
+hci_ioctl(struct socket *up, struct mbuf *m,
+		struct mbuf *nam, struct mbuf *ctl, struct lwp *l)
+{
+	int err;
+	mutex_enter(bt_lock);
+	err = hci_ioctl_pcb((unsigned long)m, (void *)nam, l);
+	mutex_exit(bt_lock);
+	return err;
+}
+
 /*
  * User Request.
  * up is socket
- * m is either
- *	optional mbuf chain containing message
- *	ioctl command (PRU_CONTROL)
- * nam is either
- *	optional mbuf chain containing an address
- *	ioctl data (PRU_CONTROL)
+ * m is optional mbuf chain containing message
+ * nam is optional mbuf chain containing an address
  * ctl is optional mbuf chain containing socket options
  * l is pointer to process requesting action (if any)
  *
- * we are responsible for disposing of m and ctl if
- * they are mbuf chains
+ * we are responsible for disposing of m and ctl
  */
 static int
 hci_usrreq(struct socket *up, int req, struct mbuf *m,
@@ -509,14 +515,9 @@ hci_usrreq(struct socket *up, int req, struct mbuf *m,
 	DPRINTFN(2, "%s\n", prurequests[req]);
 	KASSERT(req != PRU_ATTACH);
 	KASSERT(req != PRU_DETACH);
+	KASSERT(req != PRU_CONTROL);
 
 	switch(req) {
-	case PRU_CONTROL:
-		mutex_enter(bt_lock);
-		err = hci_ioctl((unsigned long)m, (void *)nam, l);
-		mutex_exit(bt_lock);
-		return err;
-
 	case PRU_PURGEIF:
 		return EOPNOTSUPP;
 	}
@@ -868,10 +869,12 @@ PR_WRAP_USRREQS(hci)
 
 #define	hci_attach		hci_attach_wrapper
 #define	hci_detach		hci_detach_wrapper
+#define	hci_ioctl		hci_ioctl_wrapper
 #define	hci_usrreq		hci_usrreq_wrapper
 
 const struct pr_usrreqs hci_usrreqs = {
 	.pr_attach	= hci_attach,
 	.pr_detach	= hci_detach,
+	.pr_ioctl	= hci_ioctl,
 	.pr_generic	= hci_usrreq,
 };

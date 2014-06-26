@@ -508,7 +508,7 @@ piixpm_i2c_exec(void *cookie, i2c_op_t op, i2c_addr_t addr,
 		}
 		if (st & PIIX_SMB_HS_BUSY)
 			goto timeout;
-		piixpm_intr(smbus);
+		piixpm_intr(sc);
 	} else {
 		/* Wait for interrupt */
 		if (tsleep(sc, PRIBIO, "iicexec", PIIXPM_TIMEOUT * hz))
@@ -543,8 +543,7 @@ timeout:
 static int
 piixpm_intr(void *arg)
 {
-	struct piixpm_smbus *smbus = arg;
-	struct piixpm_softc *sc = smbus->softc;
+	struct piixpm_softc *sc = arg;
 	u_int8_t st;
 	u_int8_t *b;
 	size_t len;

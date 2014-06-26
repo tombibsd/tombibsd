@@ -1,5 +1,10 @@
 /* $NetBSD$ */
 
+/*
+ * Written by Matthias Drochner <drochner@NetBSD.org>.
+ * Public domain.
+ */
+
 #if !defined(_KERNEL) && !defined(_STANDALONE)
 #include "namespace.h"
 #include <string.h>

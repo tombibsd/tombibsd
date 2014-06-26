@@ -112,7 +112,8 @@ netbsd32___kevent50(struct lwp *l,
 
 	nchanges = SCARG(uap, nchanges);
 	nevents = SCARG(uap, nevents);
-	maxalloc = MIN(KQ_NEVENTS, MAX(nchanges, nevents));
+	maxalloc = KQ_NEVENTS;
+
 	netbsd32_kevent_ops.keo_private =
 	    kmem_alloc(maxalloc * sizeof(struct netbsd32_kevent), KM_SLEEP);
 

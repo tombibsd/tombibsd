@@ -6,6 +6,8 @@
 TESTSDIR=	${TESTSBASE}/lib/libbpfjit
 
 TESTS_C+=	t_bpfjit
+TESTS_C+=	t_extmem
+TESTS_C+=	t_cop
 
 # XXX this variable doesn't belong to here
 LIBBPFJITDIR!=	cd ${NETBSDSRCDIR}/lib/libbpfjit && ${PRINTOBJDIR}

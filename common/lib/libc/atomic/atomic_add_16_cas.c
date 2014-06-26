@@ -61,3 +61,5 @@ add_and_fetch_2(volatile uint16_t *addr, uint16_t val, ...)
 	} while (atomic_cas_16(addr, old, new) != old);
 	return new;
 }
+
+__strong_alias(__atomic_fetch_add_2,__sync_fetch_and_add_2)

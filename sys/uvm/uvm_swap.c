@@ -492,13 +492,17 @@ sys_swapctl(struct lwp *l, const struct sys_swapctl_args *uap, register_t *retva
 	    || SCARG(uap, cmd) == SWAP_STATS13
 #endif
 	    ) {
-		if ((size_t)misc > (size_t)uvmexp.nswapdev)
-			misc = uvmexp.nswapdev;
-
-		if (misc == 0) {
+		if (misc < 0) {
 			error = EINVAL;
 			goto out;
 		}
+		if (misc == 0 || uvmexp.nswapdev == 0) {
+			error = 0;
+			goto out;
+		}
+		/* Make sure userland cannot exhaust kernel memory */
+		if ((size_t)misc > (size_t)uvmexp.nswapdev)
+			misc = uvmexp.nswapdev;
 		KASSERT(misc > 0);
 #if defined(COMPAT_13)
 		if (SCARG(uap, cmd) == SWAP_STATS13)

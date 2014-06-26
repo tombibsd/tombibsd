@@ -40,5 +40,6 @@
 # - consolidate ownership with crt0.o and avoid common symbols
 # - redo stdin/stdout/stderr to not require copy relocations
 # - move gethostbyname to a compat library
+# - remove arc4random(3) API
 major=12
 minor=192

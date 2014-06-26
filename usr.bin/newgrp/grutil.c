@@ -147,7 +147,7 @@ addgrp(gid_t newgid, int makespace)
 		return ADDGRP_NOERROR;
 
 	rval = alloc_groups(&ngroups, &groups, &ngroupsmax);
-	if (rval != 0)
+	if (rval != ADDGRP_NOERROR)
 		return rval;
 
 	/*
@@ -235,7 +235,7 @@ newgrp(const char *gname, struct passwd *pwd, uid_t ruid, const char *prompt)
 	if (ruid == 0 || pwd->pw_gid == grp->gr_gid)
 		return grp->gr_gid;
 
-	if (alloc_groups(&ngroups, &groups, &ngroupsmax) == 0) {
+	if (alloc_groups(&ngroups, &groups, &ngroupsmax) == ADDGRP_NOERROR) {
 		int i;
 		for (i = 0; i < ngroups; i++)
 			if (groups[i] == grp->gr_gid) {

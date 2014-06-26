@@ -400,7 +400,7 @@ Before importing a new version of external/gpl3/gcc:
 	- you can use the gcc2netbsd script for the above (except version)
 
 Package:	gdb
-Version:	7.6.1
+Version:	7.7.1
 Current Vers:	7.7.1
 Maintainer:	FSF
 Archive Site:	ftp://ftp.gnu.org/gnu/gdb/

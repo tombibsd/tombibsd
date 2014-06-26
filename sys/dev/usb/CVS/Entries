@@ -2,7 +2,7 @@
 /Makefile.usbdevs/1.6/Mon Oct 12 22:28:47 2009/-kk/
 /Makefile/1.9/Sun May 14 21:47:00 2006/-kk/
 /TODO.usbmp/1.7/Fri Mar 14 04:28:21 2014/-kk/
-/TODO/1.44/Tue Dec 17 04:13:36 2013/-kk/
+/TODO/1.45/Thu Jun 26 06:46:28 2014/-kk/
 /aubtfwl.c/1.5/Thu Oct 24 10:28:58 2013/-kk/
 /aubtfwlreg.h/1.1/Thu Oct 24 10:28:58 2013/-kk/
 /auvitek.c/1.8/Mon Jan  9 10:57:34 2012/-kk/
@@ -23,7 +23,7 @@
 /emdtv_dtv.c/1.10/Thu Oct 24 10:28:58 2013/-kk/
 /emdtv_i2c.c/1.1/Mon Jul 11 18:02:04 2011/-kk/
 /emdtv_ir.c/1.1/Mon Jul 11 18:02:04 2011/-kk/
-/emdtvreg.h/1.1/Mon Jul 11 18:02:04 2011/-kk/
+/emdtvreg.h/1.2/Thu Jun 26 06:46:28 2014/-kk/
 /emdtvvar.h/1.3/Tue Aug  9 01:42:24 2011/-kk/
 /ezload.c/1.15/Thu Oct 24 10:28:58 2013/-kk/
 /ezload.h/1.5/Mon Apr 28 20:23:59 2008/-kk/

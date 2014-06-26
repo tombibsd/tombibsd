@@ -5,7 +5,7 @@
 /bozohttpd.8/1.46/Thu Feb 13 15:35:39 2014/-kk/
 /bozohttpd.c/1.50/Tue Jun  3 02:53:23 2014/-kk/
 /bozohttpd.h/1.32/Thu Feb 13 15:35:39 2014/-kk/
-/cgi-bozo.c/1.24/Tue Jan 14 16:04:43 2014/-kk/
+/cgi-bozo.c/1.25/Thu Jun 26 06:45:56 2014/-kk/
 /content-bozo.c/1.10/Tue Jun  3 02:53:23 2014/-kk/
 /daemon-bozo.c/1.16/Tue Jan 14 16:04:43 2014/-kk/
 /dir-index-bozo.c/1.19/Tue Jan 14 16:04:43 2014/-kk/

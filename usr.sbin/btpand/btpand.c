@@ -213,6 +213,7 @@ main(int argc, char *argv[])
 	switch(fork()) {
 	case -1: /* bad */
 		err(EXIT_FAILURE, "fork() failed");
+		/*NOTREACHED*/
 
 	case 0:	/* child */
 		openlog(getprogname(), LOG_NDELAY | LOG_PERROR | LOG_PID, LOG_DAEMON);

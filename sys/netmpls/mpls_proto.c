@@ -95,6 +95,13 @@ mpls_detach(struct socket *so)
 }
 
 static int
+mpls_ioctl(struct socket *so, struct mbuf *m,
+    struct mbuf *nam, struct mbuf *control, struct lwp *l)
+{
+	return EOPNOTSUPP;
+}
+
+static int
 mpls_usrreq(struct socket *so, int req, struct mbuf *m,
     struct mbuf *nam, struct mbuf *control, struct lwp *l)
 {
@@ -185,11 +192,13 @@ DOMAIN_DEFINE(mplsdomain);
 PR_WRAP_USRREQS(mpls)
 #define	mpls_attach	mpls_attach_wrapper
 #define	mpls_detach	mpls_detach_wrapper
+#define	mpls_ioctl	mpls_ioctl_wrapper
 #define	mpls_usrreq	mpls_usrreq_wrapper
 
 static const struct pr_usrreqs mpls_usrreqs = {
 	.pr_attach	= mpls_attach,
 	.pr_detach	= mpls_detach,
+	.pr_ioctl	= mpls_ioctl,
 	.pr_generic	= mpls_usrreq,
 };
 

@@ -96,7 +96,7 @@ linux32_sys_socketcall(struct lwp *l, const struct linux32_sys_socketcall_args *
 	union linux32_socketcall_args ua;
 	int error;
 
-	if (SCARG(uap, what) < 0 || SCARG(uap, what) > LINUX32_MAX_SOCKETCALL)
+	if (SCARG(uap, what) <= 0 || SCARG(uap, what) > LINUX32_MAX_SOCKETCALL)
 		return ENOSYS;
 
 	if ((error = copyin(SCARG_P32(uap, args), &ua,

@@ -1765,10 +1765,8 @@ netbsd32_swapctl_stats(struct lwp *l, struct sys_swapctl_args *uap, register_t *
 
 	if (count < 0)
 		return EINVAL;
-
 	if (count == 0 || uvmexp.nswapdev == 0)
 		return 0;
-
 	/* Make sure userland cannot exhaust kernel memory */
 	if ((size_t)count > (size_t)uvmexp.nswapdev)
 		count = uvmexp.nswapdev;

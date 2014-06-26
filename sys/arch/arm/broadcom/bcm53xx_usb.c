@@ -125,10 +125,11 @@ ohci_bcmusb_attach(device_t parent, device_t self, void *aux)
 	int error = ohci_init(sc);
 	if (error != USBD_NORMAL_COMPLETION) {
 		aprint_error_dev(self, "init failed, error=%d\n", error);
-	} else {
-		/* Attach usb device. */
-		sc->sc_child = config_found(self, &sc->sc_bus, usbctlprint);
+		return;
 	}
+
+	/* Attach usb device. */
+	sc->sc_child = config_found(self, &sc->sc_bus, usbctlprint);
 }
 
 #ifdef EHCI_DEBUG
@@ -184,10 +185,10 @@ ehci_bcmusb_attach(device_t parent, device_t self, void *aux)
 	int error = ehci_init(sc);
 	if (error != USBD_NORMAL_COMPLETION) {
 		aprint_error_dev(self, "init failed, error=%d\n", error);
-	} else {
-		/* Attach usb device. */
-		sc->sc_child = config_found(self, &sc->sc_bus, usbctlprint);
+		return;
 	}
+	/* Attach usb device. */
+	sc->sc_child = config_found(self, &sc->sc_bus, usbctlprint);
 }
 
 /*

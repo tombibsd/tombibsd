@@ -107,15 +107,18 @@ sco_detach(struct socket *so)
 	KASSERT(so->so_pcb == NULL);
 }
 
+static int
+sco_ioctl(struct socket *up, struct mbuf *m,
+    struct mbuf *nam, struct mbuf *ctl, struct lwp *l)
+{
+	return EOPNOTSUPP;
+}
+
 /*
  * User Request.
  * up is socket
- * m is either
- *	optional mbuf chain containing message
- *	ioctl command (PRU_CONTROL)
- * nam is either
- *	optional mbuf chain containing an address
- *	ioctl data (PRU_CONTROL)
+ * m is optional mbuf chain containing message
+ * nam is optional mbuf chain containing an address
  * ctl is optional mbuf chain containing socket options
  * l is pointer to process requesting action (if any)
  *
@@ -134,11 +137,9 @@ sco_usrreq(struct socket *up, int req, struct mbuf *m,
 	DPRINTFN(2, "%s\n", prurequests[req]);
 	KASSERT(req != PRU_ATTACH);
 	KASSERT(req != PRU_DETACH);
+	KASSERT(req != PRU_CONTROL);
 
 	switch(req) {
-	case PRU_CONTROL:
-		return EOPNOTSUPP;
-
 	case PRU_PURGEIF:
 		return EOPNOTSUPP;
 	}
@@ -383,10 +384,12 @@ PR_WRAP_USRREQS(sco)
 
 #define	sco_attach		sco_attach_wrapper
 #define	sco_detach		sco_detach_wrapper
+#define	sco_ioctl		sco_ioctl_wrapper
 #define	sco_usrreq		sco_usrreq_wrapper
 
 const struct pr_usrreqs sco_usrreqs = {
 	.pr_attach	= sco_attach,
 	.pr_detach	= sco_detach,
+	.pr_ioctl	= sco_ioctl,
 	.pr_generic	= sco_usrreq,
 };

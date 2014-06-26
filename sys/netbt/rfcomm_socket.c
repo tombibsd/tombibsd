@@ -124,19 +124,23 @@ rfcomm_detach(struct socket *so)
 	KASSERT(so->so_pcb == NULL);
 }
 
+static int
+rfcomm_ioctl(struct socket *up, struct mbuf *m,
+		struct mbuf *nam, struct mbuf *ctl, struct lwp *l)
+{
+	return EPASSTHROUGH;
+}
+
 /*
  * User Request.
  * up is socket
- * m is either
- *	optional mbuf chain containing message
- *	ioctl command (PRU_CONTROL)
+ * m is optional mbuf chain containing message
  * nam is either
  *	optional mbuf chain containing an address
- *	ioctl data (PRU_CONTROL)
  *	message flags (PRU_RCVD)
  * ctl is either
  *	optional mbuf chain containing socket options
- *	optional interface pointer (PRU_CONTROL, PRU_PURGEIF)
+ *	optional interface pointer PRU_PURGEIF
  * l is pointer to process requesting action (if any)
  *
  * we are responsible for disposing of m and ctl if
@@ -154,11 +158,9 @@ rfcomm_usrreq(struct socket *up, int req, struct mbuf *m,
 	DPRINTFN(2, "%s\n", prurequests[req]);
 	KASSERT(req != PRU_ATTACH);
 	KASSERT(req != PRU_DETACH);
+	KASSERT(req != PRU_CONTROL);
 
 	switch (req) {
-	case PRU_CONTROL:
-		return EPASSTHROUGH;
-
 	case PRU_PURGEIF:
 		return EOPNOTSUPP;
 	}
@@ -428,10 +430,12 @@ PR_WRAP_USRREQS(rfcomm)
 
 #define	rfcomm_attach		rfcomm_attach_wrapper
 #define	rfcomm_detach		rfcomm_detach_wrapper
+#define	rfcomm_ioctl		rfcomm_ioctl_wrapper
 #define	rfcomm_usrreq		rfcomm_usrreq_wrapper
 
 const struct pr_usrreqs rfcomm_usrreqs = {
 	.pr_attach	= rfcomm_attach,
 	.pr_detach	= rfcomm_detach,
+	.pr_ioctl	= rfcomm_ioctl,
 	.pr_generic	= rfcomm_usrreq,
 };

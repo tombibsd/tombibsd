@@ -895,6 +895,14 @@ udp_detach(struct socket *so)
 }
 
 static int
+udp_ioctl(struct socket *so, struct mbuf *m, struct mbuf *nam,
+    struct mbuf *ifp, struct lwp *l)
+{
+	return in_control(so, (long)m, (void *)nam,
+	    (struct ifnet *)ifp, l);
+}
+
+static int
 udp_usrreq(struct socket *so, int req, struct mbuf *m, struct mbuf *nam,
     struct mbuf *control, struct lwp *l)
 {
@@ -903,11 +911,8 @@ udp_usrreq(struct socket *so, int req, struct mbuf *m, struct mbuf *nam,
 
 	KASSERT(req != PRU_ATTACH);
 	KASSERT(req != PRU_DETACH);
+	KASSERT(req != PRU_CONTROL);
 
-	if (req == PRU_CONTROL) {
-		return in_control(so, (long)m, (void *)nam,
-		    (struct ifnet *)control, l);
-	}
 	s = splsoftnet();
 	if (req == PRU_PURGEIF) {
 		mutex_enter(softnet_lock);
@@ -1260,10 +1265,12 @@ udp4_espinudp(struct mbuf **mp, int off, struct sockaddr *src,
 PR_WRAP_USRREQS(udp)
 #define	udp_attach	udp_attach_wrapper
 #define	udp_detach	udp_detach_wrapper
+#define	udp_ioctl	udp_ioctl_wrapper
 #define	udp_usrreq	udp_usrreq_wrapper
 
 const struct pr_usrreqs udp_usrreqs = {
 	.pr_attach	= udp_attach,
 	.pr_detach	= udp_detach,
+	.pr_ioctl	= udp_ioctl,
 	.pr_generic	= udp_usrreq,
 };

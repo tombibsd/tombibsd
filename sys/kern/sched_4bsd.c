@@ -527,7 +527,7 @@ SYSCTL_SETUP(sysctl_sched_4bsd_setup, "sysctl sched setup")
 	sysctl_createv(NULL, 0, &node, NULL,
 		CTLFLAG_PERMANENT,
 		CTLTYPE_INT, "rtts",
-		SYSCTL_DESCR("Round-robin time quantum (in miliseconds)"),
+		SYSCTL_DESCR("Round-robin time quantum (in milliseconds)"),
 		sysctl_sched_rtts, 0, NULL, 0,
 		CTL_CREATE, CTL_EOL);
 }

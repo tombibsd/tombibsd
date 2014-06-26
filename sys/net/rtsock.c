@@ -224,6 +224,13 @@ COMPATNAME(route_detach)(struct socket *so)
 }
 
 static int
+COMPATNAME(route_ioctl)(struct socket *so, struct mbuf *m,
+    struct mbuf *nam, struct mbuf *control, struct lwp *l)
+{
+	return EOPNOTSUPP;
+}
+
+static int
 COMPATNAME(route_usrreq)(struct socket *so, int req, struct mbuf *m,
     struct mbuf *nam, struct mbuf *control, struct lwp *l)
 {
@@ -231,6 +238,7 @@ COMPATNAME(route_usrreq)(struct socket *so, int req, struct mbuf *m,
 
 	KASSERT(req != PRU_ATTACH);
 	KASSERT(req != PRU_DETACH);
+	KASSERT(req != PRU_CONTROL);
 
 	s = splsoftnet();
 	error = raw_usrreq(so, req, m, nam, control, l);
@@ -1327,6 +1335,7 @@ PR_WRAP_USRREQS(compat_50_route);
 static const struct pr_usrreqs route_usrreqs = {
 	.pr_attach	= COMPATNAME(route_attach_wrapper),
 	.pr_detach	= COMPATNAME(route_detach_wrapper),
+	.pr_ioctl	= COMPATNAME(route_ioctl_wrapper),
 	.pr_generic	= COMPATNAME(route_usrreq_wrapper),
 };
 

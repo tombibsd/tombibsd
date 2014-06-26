@@ -51,6 +51,7 @@ END(_atomic_xor_8)
 ATOMIC_OP_ALIAS(atomic_xor_8,_atomic_xor_8)
 ATOMIC_OP_ALIAS(atomic_xor_uchar,_atomic_xor_8)
 CRT_ALIAS(__sync_fetch_and_xor_1,_atomic_xor_8)
+CRT_ALIAS(__atomic_fetch_xor_1,_atomic_xor_8)
 STRONG_ALIAS(_atomic_xor_uchar,_atomic_xor_8)
 
 ENTRY_NP(_atomic_xor_8_nv)

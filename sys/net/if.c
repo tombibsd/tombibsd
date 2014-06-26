@@ -1922,8 +1922,8 @@ doifioctl(struct socket *so, u_long cmd, void *data, struct lwp *l)
 #ifdef COMPAT_OSOCK
 		error = compat_ifioctl(so, ocmd, cmd, data, l);
 #else
-		error = (*so->so_proto->pr_usrreqs->pr_generic)(so,
-		    PRU_CONTROL, (struct mbuf *)cmd, (struct mbuf *)data,
+		error = (*so->so_proto->pr_usrreqs->pr_ioctl)(so,
+		    (struct mbuf *)cmd, (struct mbuf *)data,
 		    (struct mbuf *)ifp, l);
 #endif
 	}

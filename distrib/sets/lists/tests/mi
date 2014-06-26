@@ -2297,6 +2297,8 @@
 ./usr/tests/lib/libbpfjit/Atffile		tests-lib-tests		atf,sljit
 ./usr/tests/lib/libbpfjit/Kyuafile		tests-lib-tests		atf,sljit,kyua
 ./usr/tests/lib/libbpfjit/t_bpfjit		tests-lib-tests		atf,sljit
+./usr/tests/lib/libbpfjit/t_extmem		tests-lib-tests		atf,sljit
+./usr/tests/lib/libbpfjit/t_cop			tests-lib-tests		atf,sljit
 ./usr/tests/lib/libc				tests-lib-tests
 ./usr/tests/lib/libc/Atffile			tests-lib-tests		atf
 ./usr/tests/lib/libc/Kyuafile			tests-lib-tests		atf,kyua
@@ -2580,6 +2582,7 @@
 ./usr/tests/lib/libc/string			tests-lib-tests
 ./usr/tests/lib/libc/string/Atffile		tests-lib-tests		atf
 ./usr/tests/lib/libc/string/Kyuafile		tests-lib-tests		atf,kyua
+./usr/tests/lib/libc/string/t_bm		tests-lib-tests		atf
 ./usr/tests/lib/libc/string/t_memchr		tests-lib-tests		atf
 ./usr/tests/lib/libc/string/t_memcpy		tests-lib-tests		atf
 ./usr/tests/lib/libc/string/t_memmem		tests-lib-tests		atf
