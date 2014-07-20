@@ -46,6 +46,9 @@
 #define	kmap		linux_kmap
 #define	kunmap		linux_kunmap
 
+/* XXX Kludge!  */
+#define	kmap_atomic_prot(page, prot)	kmap_atomic(page)
+
 int	linux_kmap_init(void);
 void	linux_kmap_fini(void);
 

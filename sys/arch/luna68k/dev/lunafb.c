@@ -38,7 +38,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/conf.h>
 #include <sys/device.h>
 #include <sys/ioctl.h>
-#include <sys/malloc.h>
+#include <sys/kmem.h>
 #include <sys/mman.h>
 #include <sys/proc.h>
 #include <sys/tty.h>
@@ -156,12 +156,14 @@ static int   omfb_show_screen(void *, void *, int,
 			      void (*) (void *, int, int), void *);
 
 static const struct wsdisplay_accessops omfb_accessops = {
-	omfbioctl,
-	omfbmmap,
-	omfb_alloc_screen,
-	omfb_free_screen,
-	omfb_show_screen,
-	0 /* load_font */
+	.ioctl        = omfbioctl,
+	.mmap         = omfbmmap,
+	.alloc_screen = omfb_alloc_screen,
+	.free_screen  = omfb_free_screen,
+	.show_screen  = omfb_show_screen,
+	.load_font    = NULL,
+	.pollc        = NULL,
+	.scroll       = NULL
 };
 
 static int  omfbmatch(device_t, cfdata_t, void *);
@@ -204,8 +206,8 @@ omfbattach(device_t parent, device_t self, void *args)
 		sc->sc_dc = &omfb_console_dc;
 		sc->nscreens = 1;
 	} else {
-		sc->sc_dc = malloc(sizeof(struct om_hwdevconfig),
-		    M_DEVBUF, M_WAITOK | M_ZERO);
+		sc->sc_dc = kmem_zalloc(sizeof(struct om_hwdevconfig),
+		    KM_SLEEP);
 		omfb_getdevconfig(OMFB_FB_WADDR, sc->sc_dc);
 	}
 	aprint_normal(": %d x %d, %dbpp\n", sc->sc_dc->dc_wid, sc->sc_dc->dc_ht,
@@ -377,15 +379,8 @@ omfb_getdevconfig(paddr_t paddr, struct om_hwdevconfig *dc)
 		break;
 	default:
 	case 0x0f:
-#if 1
-		/*
-		 * XXX
-		 * experiment resulted in WHITE on SKYBLUE after Xorg server
-		 * touches pallete. Disable 4bpp for now.
-		 */
 		bpp = 4;	/* XXX check monochrome bit in DIPSW */
 		break;
-#endif
 	case 1:
 		bpp = 1;
 		break;
@@ -431,7 +426,11 @@ omfb_getdevconfig(paddr_t paddr, struct om_hwdevconfig *dc)
 	} else if (hwplanemask == 0xff) {
 		struct bt458 *ndac = (struct bt458 *)OMFB_RAMDAC;
 
-		/* Initialize the Bt458 */
+		/*
+		 * Initialize the Bt458.  When we write to control registers,
+		 * the address is not incremented automatically. So we specify
+		 * it ourselves for each control register.
+		 */
 		ndac->bt_addr = 0x04;
 		ndac->bt_ctrl = 0xff; /* all planes will be read */
 		ndac->bt_addr = 0x05;
@@ -441,14 +440,15 @@ omfb_getdevconfig(paddr_t paddr, struct om_hwdevconfig *dc)
 		ndac->bt_addr = 0x07;
 		ndac->bt_ctrl = 0x00; /* no test mode */
 
+		/*
+		 * Set ANSI 16 colors.  We only supports 4bpp console right
+		 * now, repeat 16 colors in 256 colormap.
+		 */
 		ndac->bt_addr = 0;
-		ndac->bt_cmap = dc->dc_cmap.r[0] = 0;
-		ndac->bt_cmap = dc->dc_cmap.g[0] = 0;
-		ndac->bt_cmap = dc->dc_cmap.b[0] = 0;
-		for (i = 1; i < 256; i++) {
-			ndac->bt_cmap = dc->dc_cmap.r[i] = 255;
-			ndac->bt_cmap = dc->dc_cmap.g[i] = 255;
-			ndac->bt_cmap = dc->dc_cmap.b[i] = 255;
+		for (i = 0; i < 256; i++) {
+			ndac->bt_cmap = dc->dc_cmap.r[i] = ansicmap[i % 16].r;
+			ndac->bt_cmap = dc->dc_cmap.g[i] = ansicmap[i % 16].g;
+			ndac->bt_cmap = dc->dc_cmap.b[i] = ansicmap[i % 16].b;
 		}
 	}
 
@@ -477,7 +477,7 @@ omfb_getdevconfig(paddr_t paddr, struct om_hwdevconfig *dc)
 		ri->ri_flg |= RI_NO_AUTO;
 	ri->ri_hw = dc;
 
-	if (bpp == 4)
+	if (bpp == 4 || bpp == 8)
 		omrasops4_init(ri, 34, 80);
 	else
 		omrasops1_init(ri, 34, 80);

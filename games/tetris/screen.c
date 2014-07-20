@@ -98,6 +98,8 @@ static void
 setcolor(int c)
 {
 	char *buf;
+	if (nocolor == 1)
+		return;
 	if (set_a_foreground == NULL)
 		return;
 

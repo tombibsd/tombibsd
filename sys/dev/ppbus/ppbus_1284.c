@@ -47,7 +47,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <dev/ppbus/ppbus_var.h>
 
 
-/* Wait for the peripherial up to 40ms */
+/* Wait for the peripheral up to 40ms */
 static int
 do_1284_wait(struct ppbus_softc * bus, char mask, char status)
 {

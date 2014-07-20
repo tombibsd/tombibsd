@@ -117,7 +117,7 @@ SUBDIR += .WAIT texinfo \
 		.WAIT paxctl \
 		.WAIT fdisk \
 		.WAIT installboot \
-		pwd_mkdb strfile sunlabel zic
+		pwd_mkdb strfile sunlabel vgrind zic
 .endif
 SUBDIR+= stat .WAIT config
 

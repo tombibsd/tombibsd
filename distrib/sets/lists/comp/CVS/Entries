@@ -17,7 +17,7 @@
 /md.cesfic/1.7/Sun Jul 17 20:54:31 2011/-kk/
 /md.cobalt/1.24/Sun Jul 17 20:54:31 2011/-kk/
 /md.dreamcast/1.17/Tue Jul 19 15:52:29 2011/-kk/
-/md.emips/1.4/Thu Oct 24 10:28:41 2013/-kk/
+/md.emips/1.5/Sun Jul 20 13:55:23 2014/-kk/
 /md.evbcf/1.2/Thu Oct 24 10:28:41 2013/-kk/
 /md.evbmips/1.17/Sat Nov 24 14:00:35 2012/-kk/
 /md.evbppc/1.13/Tue Nov 26 03:26:43 2013/-kk/
@@ -33,7 +33,7 @@
 /md.luna68k/1.19/Sun Jul 17 20:54:31 2011/-kk/
 /md.mac68k/1.59/Fri Apr  6 22:46:16 2012/-kk/
 /md.macppc/1.38/Tue Nov 26 03:26:43 2013/-kk/
-/md.mipsco/1.22/Thu Oct 24 10:28:41 2013/-kk/
+/md.mipsco/1.23/Sun Jul 20 13:55:23 2014/-kk/
 /md.mmeye/1.31/Thu Oct 24 10:28:41 2013/-kk/
 /md.mvme68k/1.37/Thu Oct 24 10:28:41 2013/-kk/
 /md.mvmeppc/1.15/Tue Nov 26 03:26:43 2013/-kk/
@@ -54,7 +54,7 @@
 /md.sun3/1.62/Thu Oct 24 10:28:41 2013/-kk/
 /md.vax/1.40/Mon Nov 11 15:18:11 2013/-kk/
 /md.x68k/1.60/Thu Oct 24 10:28:41 2013/-kk/
-/mi/1.1897/Sun Jul 20 13:23:08 2014/-kk/
-/shl.mi/1.265/Sun Jul 20 13:23:08 2014/-kk/
+/mi/1.1899/Sun Jul 20 13:55:23 2014/-kk/
+/shl.mi/1.266/Sun Jul 20 13:55:23 2014/-kk/
 /stl.mi/1.1/Fri Jul  2 21:19:00 2010/-kk/
 D

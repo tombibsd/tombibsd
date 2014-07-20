@@ -188,7 +188,9 @@
 ./usr/libdata/debug/usr/lib/powerpc/libipsec.so.3.0.debug			comp-compat-shlib	compat,arch64,debug,pic
 ./usr/libdata/debug/usr/lib/powerpc/libisc.so.8.0.debug			comp-compat-shlib	compat,arch64,debug,pic
 ./usr/libdata/debug/usr/lib/powerpc/libisccc.so.8.0.debug			comp-compat-shlib	compat,arch64,debug,pic
-./usr/libdata/debug/usr/lib/powerpc/libisccfg.so.8.0.debug		comp-compat-shlib	compat,arch64,debug,pic
+./usr/libdata/debug/usr/lib/powerpc/libisccfg.so.8.0.debug		comp-compat-shlib	compat,arch64,debug,pic,obsolete
+./usr/libdata/debug/usr/lib/powerpc/libisccfg.so.8.1.debug		comp-compat-shlib	compat,arch64,debug,pic
+./usr/libdata/debug/usr/lib/powerpc/libirs.so.8.0.debug		comp-compat-shlib	compat,arch64,debug,pic
 ./usr/libdata/debug/usr/lib/powerpc/libiscsi.so.2.0.debug			comp-compat-shlib	compat,arch64,debug,pic,iscsi
 ./usr/libdata/debug/usr/lib/powerpc/libisns.so.0.0.debug			comp-compat-shlib	compat,arch64,debug,pic
 ./usr/libdata/debug/usr/lib/powerpc/libkadm5clnt.so.13.0.debug	 comp-compat-shlib	 compat,arch64,debug,pic,kerberos
@@ -200,7 +202,7 @@
 ./usr/libdata/debug/usr/lib/powerpc/liblber.so.3.3.debug			comp-compat-shlib	compat,arch64,debug,pic,ldap
 ./usr/libdata/debug/usr/lib/powerpc/libldap.so.4.3.debug			comp-compat-shlib	compat,arch64,debug,pic,ldap
 ./usr/libdata/debug/usr/lib/powerpc/libldap_r.so.4.3.debug		comp-compat-shlib	compat,arch64,debug,pic,ldap
-./usr/libdata/debug/usr/lib/powerpc/liblua.so.1.0.debug			comp-compat-shlib	compat,arch64,debug,pic
+./usr/libdata/debug/usr/lib/powerpc/liblua.so.5.3.debug			comp-compat-shlib	compat,arch64,debug,pic
 ./usr/libdata/debug/usr/lib/powerpc/liblutok.so.2.0.debug			comp-compat-shlib	compat,arch64,debug,pic,kyua
 ./usr/libdata/debug/usr/lib/powerpc/liblwres.so.8.0.debug			comp-compat-shlib	compat,arch64,debug,pic
 ./usr/libdata/debug/usr/lib/powerpc/liblzf.so.1.0.debug			comp-compat-shlib	compat,arch64,debug,pic

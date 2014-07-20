@@ -31,4 +31,6 @@
  *	@(#)pathnames.h	8.1 (Berkeley) 6/6/93
  */
 
+#ifndef _PATH_VGRINDEFS
 #define	_PATH_VGRINDEFS	"/usr/share/misc/vgrindefs"
+#endif

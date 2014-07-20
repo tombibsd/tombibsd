@@ -69,7 +69,7 @@
  * penultimate pass, and the KEVNT_TIMEOUT on the final pass.  We
  * set KEVNT_TIMEOUT just barely long enough to put it into the
  * last test pass, and set MAXSLEEP a couple seconds longer than
- * necessary,in order to avoid a QEMU bug which nearly doubles
+ * necessary, in order to avoid a QEMU bug which nearly doubles
  * some timers.
  */
 

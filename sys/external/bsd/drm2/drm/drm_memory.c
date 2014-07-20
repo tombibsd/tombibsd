@@ -181,11 +181,6 @@ drm_pci_alloc(struct drm_device *dev, size_t size, size_t align)
 	KASSERT(nsegs == 1);
 
 	/*
-	 * XXX Old drm passed BUS_DMA_NOWAIT below but BUS_DMA_WAITOK
-	 * above.  WTF?
-	 */
-
-	/*
 	 * Map the DMA-safe memory into kernel virtual address space.
 	 */
 	/* XXX errno NetBSD->Linux */

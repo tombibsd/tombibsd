@@ -1,10 +1,10 @@
-/Makefile/1.614/Tue Jun  3 02:53:33 2014/-kk/
+/Makefile/1.615/Sun Jul 20 13:58:31 2014/-kk/
 /aac.4/1.14/Sat Feb 19 10:54:31 2011/-kk/
 /ac97.4/1.2/Wed Jun 22 04:19:09 2005/-kk/
 /acardide.4/1.4/Mon Oct 19 18:41:08 2009/-kk/
 /aceride.4/1.3/Mon Oct 19 18:41:08 2009/-kk/
 /acphy.4/1.3/Fri Jan 17 06:23:53 2003/-kk/
-/acpi.4/1.75/Tue Apr 10 13:48:24 2012/-kk/
+/acpi.4/1.77/Sun Jul 20 13:58:31 2014/-kk/
 /acpiacad.4/1.6/Wed Apr 30 13:10:53 2008/-kk/
 /acpibat.4/1.9/Thu Mar 25 15:34:30 2010/-kk/
 /acpibut.4/1.4/Sun Apr 25 07:12:10 2010/-kk/
@@ -55,6 +55,7 @@
 /aria.4/1.10/Wed Apr 30 13:10:53 2008/-kk/
 /artsata.4/1.5/Mon Oct 19 18:41:08 2009/-kk/
 /ast.4/1.12/Tue May 11 22:42:47 2004/-kk/
+/asus.4/1.3/Fri Jul 18 11:14:18 2014/-kk/
 /ata.4/1.5/Thu Apr 28 23:45:15 2011/-kk/
 /atalk.4/1.19/Mon Mar 22 18:58:31 2010/-kk/
 /ataraid.4/1.15/Thu Oct 24 10:28:54 2013/-kk/
@@ -351,7 +352,7 @@
 /nca.4/1.6/Thu Apr  1 04:04:11 2010/-kk/
 /ne.4/1.21/Thu Oct 24 10:28:54 2013/-kk/
 /neo.4/1.5/Wed Apr 30 13:10:54 2008/-kk/
-/netintro.4/1.27/Thu Oct 24 10:28:54 2013/-kk/
+/netintro.4/1.28/Sun Jul 20 13:58:31 2014/-kk/
 /nfe.4/1.4/Wed Nov 14 14:31:40 2007/-kk/
 /nfsmb.4/1.5/Sat Apr 10 20:19:40 2010/-kk/
 /njata.4/1.7/Mon Feb 21 02:31:57 2011/-kk/
@@ -553,7 +554,7 @@
 /uhid.4/1.22/Mon May 14 04:55:07 2012/-kk/
 /uhidev.4/1.5/Wed Apr 30 13:10:54 2008/-kk/
 /uhmodem.4/1.6/Thu Apr 28 11:25:12 2011/-kk/
-/uhso.4/1.3/Fri Aug 26 07:56:00 2011/-kk/
+/uhso.4/1.5/Sun Jul 20 13:58:32 2014/-kk/
 /uipaq.4/1.3/Wed Apr 30 13:10:54 2008/-kk/
 /uirda.4/1.3/Wed Apr 30 13:10:54 2008/-kk/
 /uk.4/1.11/Mon Mar 22 18:58:31 2010/-kk/
@@ -570,12 +571,12 @@
 /unix.4/1.24/Sun May 29 08:46:42 2011/-kk/
 /upgt.4/1.7/Tue Mar 25 02:35:16 2014/-kk/
 /upl.4/1.7/Wed Apr 30 13:10:54 2008/-kk/
-/uplcom.4/1.18/Wed Apr 30 13:10:54 2008/-kk/
+/uplcom.4/1.19/Sun Jul 20 13:58:32 2014/-kk/
 /urio.4/1.9/Tue Mar 13 19:25:42 2012/-kk/
 /url.4/1.8/Wed Apr 30 13:10:54 2008/-kk/
 /urndis.4/1.5/Tue Mar 25 02:35:16 2014/-kk/
 /urtw.4/1.4/Thu Oct 24 10:28:54 2013/-kk/
-/urtwn.4/1.10/Thu Feb 27 08:55:35 2014/-kk/
+/urtwn.4/1.12/Sun Jul 20 13:58:32 2014/-kk/
 /usb.4/1.104/Thu Feb 13 15:22:09 2014/-kk/
 /uscanner.4/1.12/Tue Sep 20 19:31:47 2011/-kk/
 /userconf.4/1.12/Wed Apr 30 13:10:54 2008/-kk/

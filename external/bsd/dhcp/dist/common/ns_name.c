@@ -1,5 +1,4 @@
 /*	$NetBSD$	*/
-
 /*
  * Copyright (c) 2004,2009 by Internet Systems Consortium, Inc. ("ISC")
  * Copyright (c) 1996-2003 by Internet Software Consortium
@@ -256,7 +255,7 @@ MRns_name_pton(const char *src, u_char *dst, size_t dstsiz) {
  *	Enforces label and domain length limits.
  */
 
-static int
+int
 MRns_name_ntol(const u_char *src, u_char *dst, size_t dstsiz) {
 	const u_char *cp;
 	u_char *dn, *eom;
@@ -483,7 +482,7 @@ cleanup:
  * note:
  *	Root domain returns as "." not "".
  */
-static int
+int
 MRns_name_uncompress(const u_char *msg, const u_char *eom, const u_char *src,
 		     char *dst, size_t dstsiz)
 {
@@ -530,7 +529,7 @@ MRns_name_compress(const char *src, u_char *dst, size_t dstsiz,
  * return:
  *	0 on success, -1 (with errno set) on failure.
  */
-static int
+int
 MRns_name_skip(const u_char **ptrptr, const u_char *eom) {
 	const u_char *cp;
 	u_int n;

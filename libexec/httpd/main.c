@@ -290,19 +290,18 @@ main(int argc, char **argv)
 #endif /* NO_DEBUG */
 			break;
 
+		case 't':
+			bozo_set_pref(&prefs, "chroot dir", optarg);
+			break;
+
 #ifdef NO_USER_SUPPORT
 		case 'p':
-		case 't':
 		case 'u':
 			bozo_err(&httpd, 1, "User support is not enabled");
 			/* NOTREACHED */
 #else
 		case 'p':
 			bozo_set_pref(&prefs, "public_html", optarg);
-			break;
-
-		case 't':
-			bozo_set_pref(&prefs, "chroot dir", optarg);
 			break;
 
 		case 'u':

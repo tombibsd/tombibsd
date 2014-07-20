@@ -464,6 +464,10 @@ ATF_TC_BODY(libbpfjit_copx_ret_preinited_mem, tc)
 ATF_TP_ADD_TCS(tp)
 {
 
+	/*
+	 * For every new test please also add a similar test
+	 * to ../../net/bpfjit/t_extmem.c
+	 */
 	ATF_TP_ADD_TC(tp, libbpfjit_extmem_load_default);
 	ATF_TP_ADD_TC(tp, libbpfjit_extmem_load_preinited);
 	ATF_TP_ADD_TC(tp, libbpfjit_extmem_invalid_load);

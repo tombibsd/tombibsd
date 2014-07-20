@@ -57,7 +57,6 @@
 /strcoll.c/1.12/Thu Oct 24 10:28:53 2013/-kk/
 /strcpy.3/1.20/Sat May  2 09:37:32 2009/-kk/
 /strcspn.3/1.10/Mon Oct 16 08:48:45 2006/-kk/
-/strcspn.c/1.18/Wed Mar 21 00:35:50 2012/-kk/
 /strdup.3/1.18/Thu Jan 29 10:15:39 2009/-kk/
 /strdup.c/1.14/Mon Jun 25 22:32:46 2012/-kk/
 /strerror.3/1.17/Mon Oct 25 07:37:11 2010/-kk/
@@ -72,13 +71,11 @@
 /strmode.c/1.19/Mon Jun 25 22:32:46 2012/-kk/
 /strndup.c/1.4/Tue Jul  3 12:11:09 2007/-kk/
 /strpbrk.3/1.9/Mon Oct 16 08:48:45 2006/-kk/
-/strpbrk.c/1.20/Tue Nov 22 00:37:09 2011/-kk/
 /strrchr.3/1.10/Mon Oct 16 08:48:45 2006/-kk/
 /strsep.3/1.19/Mon Oct 16 08:48:45 2006/-kk/
 /strsignal.3/1.10/Wed Jul 22 19:48:27 2009/-kk/
 /strsignal.c/1.15/Mon Jun 25 22:32:46 2012/-kk/
 /strspn.3/1.11/Mon Oct 16 08:48:45 2006/-kk/
-/strspn.c/1.18/Wed Mar 21 00:35:50 2012/-kk/
 /strstr.3/1.10/Mon Oct 16 08:48:45 2006/-kk/
 /strtok.3/1.23/Fri Aug 29 05:48:40 2008/-kk/
 /strtok.c/1.12/Wed Oct 27 19:12:31 2004/-kk/

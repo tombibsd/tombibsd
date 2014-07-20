@@ -15,6 +15,9 @@ device	mainbus { [node = -1] }
 attach	mainbus at root
 file	arch/mips/rmi/rmixl_mainbus.c		mainbus
 
+# Stack-less Just-In-Time compiler
+include	"external/bsd/sljit/conf/files.sljit"
+
 # Machine-independent I2O drivers.
 include "dev/i2o/files.i2o"
 

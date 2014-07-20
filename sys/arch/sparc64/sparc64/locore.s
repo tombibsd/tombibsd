@@ -101,11 +101,12 @@
 #include "ksyms.h"
 
 	/* Misc. macros */
-	
+
 	.macro	GET_MAXCWP reg
 #ifdef SUN4V
 	sethi	%hi(cputyp), \reg
 	ld	[\reg + %lo(cputyp)], \reg
+	cmp	\reg, CPU_SUN4V
 	bne,pt	%icc, 2f
 	 nop
 	/* sun4v */
@@ -119,7 +120,45 @@
 3:
 	.endm
 
-		
+
+	.macro	SET_MMU_CONTEXTID ctxid,ctx,scratch
+#ifdef SUN4V
+	sethi	%hi(cputyp), \scratch
+	ld	[\scratch + %lo(cputyp)], \scratch
+	cmp	\scratch, CPU_SUN4V
+	bne,pt	%icc, 2f
+	 nop
+	/* sun4v */
+	stxa	\ctxid, [\ctx] ASI_MMU;
+	ba	3f
+	 nop
+2:		
+#endif	
+	/* sun4u */
+	stxa	\ctxid, [\ctx] ASI_DMMU;
+3:
+	
+	.endm
+
+
+	.macro	NORMAL_GLOBALS scratch
+#ifdef SUN4V
+	sethi	%hi(cputyp), \scratch
+	ld	[\scratch + %lo(cputyp)], \scratch
+	cmp	\scratch, CPU_SUN4V
+	bne,pt	%icc, 2f
+	 nop
+	/* sun4v */
+	ba	3f
+	 wrpr	%g0, 0, %gl
+2:		
+#endif	
+	/* sun4u */
+	wrpr	%g0, PSTATE_KERN, %pstate
+3:
+	.endm
+	
+
 #ifdef SUN4V
 	/* Misc. sun4v macros */
 	
@@ -245,6 +284,9 @@ cputyp:	.word	CPU_SUN4U ! Default to sun4u
 	/* hardware interrupts (can be linked or made `fast') */
 #define	HARDINT4U(lev) \
 	VTRAP(lev, _C_LABEL(sparc_interrupt))
+#ifdef SUN4V
+#define HARDINT4V(lev) HARDINT4U(lev)	
+#endif
 
 	/* software interrupts (may not be made direct, sorry---but you
 	   should not be using them trivially anyway) */
@@ -947,7 +989,23 @@ _C_LABEL(trapbase_sun4v):
 	!
 	sun4v_trap_entry 49				! 0x000-0x030
 	VTRAP(T_DATA_MMU_MISS, sun4v_dtsb_miss)		! 0x031 = data MMU miss
-	sun4v_trap_entry 78				! 0x032-0x07f
+	sun4v_trap_entry 15				! 0x032-0x040
+	HARDINT4V(1)					! 0x041 = level 1 interrupt
+	HARDINT4V(2)					! 0x042 = level 2 interrupt
+	HARDINT4V(3)					! 0x043 = level 3 interrupt
+	HARDINT4V(4)					! 0x044 = level 4 interrupt
+	HARDINT4V(5)					! 0x045 = level 5 interrupt
+	HARDINT4V(6)					! 0x046 = level 6 interrupt
+	HARDINT4V(7)					! 0x047 = level 7 interrupt
+	HARDINT4V(8)					! 0x048 = level 8 interrupt
+	HARDINT4V(9)					! 0x049 = level 9 interrupt
+	HARDINT4V(10)					! 0x04a = level 10 interrupt
+	HARDINT4V(11)					! 0x04b = level 11 interrupt
+	HARDINT4V(12)					! 0x04c = level 12 interrupt
+	HARDINT4V(13)					! 0x04d = level 13 interrupt
+	HARDINT4V(14)					! 0x04e = level 14 interrupt
+	HARDINT4V(15)					! 0x04f = level 15 interrupt
+	sun4v_trap_entry 48				! 0x050-0x07f
 	SPILL64(uspill8_sun4v,ASI_AIUS)			! 0x080 spill_0_normal -- used to save user windows in user mode
 	SPILL32(uspill4_sun4v,ASI_AIUS)			! 0x084 spill_1_normal
 	SPILLBOTH(uspill8_sun4v,uspill4_sun4v,ASI_AIUS)	! 0x088 spill_2_normal
@@ -1342,13 +1400,13 @@ intr_setup_msg:
 	\
 	wrpr	%g0, %g5, %otherwin; \
 	\
-	sethi	%hi(KERNBASE), %g5; \
 	mov	CTX_PRIMARY, %g7; \
 	\
 	wrpr	%g0, WSTATE_KERN, %wstate;			/* Enable kernel mode window traps -- now we can trap again */ \
 	\
-	stxa	%g0, [%g7] ASI_DMMU; 				/* Switch MMU to kernel primary context */ \
+	SET_MMU_CONTEXTID %g0, %g7, %g5;			/* Switch MMU to kernel primary context */ \
 	\
+	sethi	%hi(KERNBASE), %g5; \
 	flush	%g5;						/* Some convenient address that won't trap */ \
 1:
 	
@@ -1443,9 +1501,9 @@ intr_setup_msg:
 	wrpr	%g0, 0, %canrestore; \
 	mov	CTX_PRIMARY, %g7; \
 	wrpr	%g0, %g5, %otherwin; \
-	sethi	%hi(KERNBASE), %g5; \
 	wrpr	%g0, WSTATE_KERN, %wstate;			/* Enable kernel mode window traps -- now we can trap again */ \
-	stxa	%g0, [%g7] ASI_DMMU; 				/* Switch MMU to kernel primary context */ \
+	SET_MMU_CONTEXTID %g0, %g7, %g5;			/* Switch MMU to kernel primary context */ \
+	sethi	%hi(KERNBASE), %g5; \
 	flush	%g5;						/* Some convenient address that won't trap */ \
 1:
 #endif /* _LP64 */
@@ -3542,7 +3600,7 @@ ENTRY_NOPROFILE(sparc_interrupt)
 #endif
 	INTR_SETUP(-CC64FSZ-TF_SIZE)
 	! Switch to normal globals so we can save them
-	wrpr	%g0, PSTATE_KERN, %pstate
+	NORMAL_GLOBALS %g5
 	stx	%g1, [%sp + CC64FSZ + STKB + TF_G + ( 1*8)]
 	stx	%g2, [%sp + CC64FSZ + STKB + TF_G + ( 2*8)]
 	stx	%g3, [%sp + CC64FSZ + STKB + TF_G + ( 3*8)]

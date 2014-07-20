@@ -99,6 +99,12 @@ file dev/cons.c
 file dev/bus_dma/bus_dmamem_common.c
 
 #
+# Stack-less Just-In-Time compiler
+#
+
+include	"external/bsd/sljit/conf/files.sljit"
+
+#
 # Machine-independent SCSI driver.
 #
 

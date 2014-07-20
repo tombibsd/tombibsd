@@ -66,6 +66,11 @@ file	arch/evbmips/evbmips/cpu.c		cpu
 device	mcclock: mc146818
 
 #
+# Stack-less Just-In-Time compiler
+#
+include	"external/bsd/sljit/conf/files.sljit"
+
+#
 # Machine-independent I2O drivers.
 #
 include "dev/i2o/files.i2o"

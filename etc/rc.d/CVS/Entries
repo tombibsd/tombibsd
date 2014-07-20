@@ -18,7 +18,7 @@
 /devpubd/1.1/Tue Sep  6 21:32:29 2011/-kk/
 /dhclient/1.9/Fri Aug 13 18:08:03 2004/-kk/
 /dhcpcd/1.3/Sat Apr 19 05:33:51 2014/-kk/
-/dhcpd/1.6/Fri Aug 13 18:08:03 2004/-kk/
+/dhcpd/1.7/Sun Jul 20 13:55:29 2014/-kk/
 /dhcrelay/1.6/Fri Aug 13 18:08:03 2004/-kk/
 /dmesg/1.9/Fri Aug 13 18:08:03 2004/-kk/
 /downinterfaces/1.6/Sat Sep  5 16:26:07 2009/-kk/
@@ -60,7 +60,7 @@
 /mountd/1.13/Wed Nov 12 12:35:52 2008/-kk/
 /moused/1.2/Fri Aug 13 18:08:03 2004/-kk/
 /mrouted/1.7/Fri Aug 13 18:08:03 2004/-kk/
-/named/1.24/Sun Jul 20 13:23:12 2014/-kk/
+/named/1.25/Sun Jul 20 13:55:29 2014/-kk/
 /ndbootd/1.2/Fri Aug 13 18:08:03 2004/-kk/
 /network/1.66/Tue May  6 05:47:04 2014/-kk/
 /newsyslog/1.6/Fri Aug 13 18:08:03 2004/-kk/

@@ -47,6 +47,12 @@ hweight16(uint16_t n)
 	return popcount32(n);
 }
 
+static inline unsigned int
+hweight32(uint16_t n)
+{
+	return popcount32(n);
+}
+
 /*
  * XXX Don't define BITS_PER_LONG as sizeof(unsigned long)*CHAR_BIT
  * because that won't work in preprocessor conditionals, where it often
@@ -55,6 +61,8 @@ hweight16(uint16_t n)
 
 #define	BITS_TO_LONGS(n)						\
 	roundup2((n), (sizeof(unsigned long) * CHAR_BIT))
+
+#define	BIT(n)	((uintmax_t)1 << (n))
 
 static inline int
 test_bit(unsigned int n, const volatile unsigned long *p)
@@ -86,6 +94,64 @@ __change_bit(unsigned int n, volatile unsigned long *p)
 	const unsigned units = (sizeof(unsigned long) * CHAR_BIT);
 
 	p[n / units] ^= (1UL << (n % units));
+}
+
+static inline unsigned long
+__test_and_set_bit(unsigned int bit, volatile unsigned long *ptr)
+{
+	const unsigned int units = (sizeof(*ptr) * CHAR_BIT);
+	volatile unsigned long *const p = &ptr[bit / units];
+	const unsigned long mask = (1UL << (bit % units));
+	unsigned long v;
+
+	v = *p;
+	*p |= mask;
+
+	return ((v & mask) != 0);
+}
+
+static inline unsigned long
+__test_and_clear_bit(unsigned int bit, volatile unsigned long *ptr)
+{
+	const unsigned int units = (sizeof(*ptr) * CHAR_BIT);
+	volatile unsigned long *const p = &ptr[bit / units];
+	const unsigned long mask = (1UL << (bit % units));
+	unsigned long v;
+
+	v = *p;
+	*p &= ~mask;
+
+	return ((v & mask) != 0);
+}
+
+static inline unsigned long
+__test_and_change_bit(unsigned int bit, volatile unsigned long *ptr)
+{
+	const unsigned int units = (sizeof(*ptr) * CHAR_BIT);
+	volatile unsigned long *const p = &ptr[bit / units];
+	const unsigned long mask = (1UL << (bit % units));
+	unsigned long v;
+
+	v = *p;
+	*p ^= mask;
+
+	return ((v & mask) != 0);
+}
+
+static inline unsigned long
+find_first_zero_bit(const unsigned long *ptr, unsigned long nbits)
+{
+	const size_t bpl = (CHAR_BIT * sizeof(*ptr));
+	const unsigned long *p;
+	unsigned long result = 0;
+
+	for (p = ptr; bpl < nbits; nbits -= bpl, p++, result += bpl) {
+		if (~*p)
+			break;
+	}
+
+	result += ffs(~*p | (~0UL << MIN(nbits, bpl)));
+	return result;
 }
 
 #endif  /* _LINUX_BITOPS_H_ */

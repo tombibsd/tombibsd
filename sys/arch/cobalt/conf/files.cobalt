@@ -53,6 +53,9 @@ file dev/md_root.c			memory_disk_hooks
 file dev/cons.c
 file dev/cninit.c
 
+# Stack-less Just-In-Time compiler
+include	"external/bsd/sljit/conf/files.sljit"
+
 include "dev/i2o/files.i2o"
 
 include "dev/pci/files.pci"

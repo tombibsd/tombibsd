@@ -154,8 +154,8 @@ drm_mmap_map_paddr(struct drm_device *dev, struct drm_local_map *map,
 	case _DRM_REGISTERS:
 		flags |= BUS_SPACE_MAP_LINEAR; /* XXX Why?  */
 
-		return bus_space_mmap(dev->bst, map->offset, byte_offset, prot,
-		    flags);
+		return bus_space_mmap(map->lm_data.bus_space.bst, map->offset,
+		    byte_offset, prot, flags);
 
 	case _DRM_CONSISTENT: {
 		struct drm_dma_handle *const dmah = map->lm_data.dmah;
@@ -182,7 +182,6 @@ drm_mmap_map_paddr(struct drm_device *dev, struct drm_local_map *map,
 	}
 
 	case _DRM_SHM:
-	case _DRM_GEM:
 	default:
 		return (paddr_t)-1;
 	}

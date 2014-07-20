@@ -527,7 +527,7 @@ void assert_sleepable(void);
 #if defined(DEBUG)
 #define	ASSERT_SLEEPABLE()	assert_sleepable()
 #else /* defined(DEBUG) */
-#define	ASSERT_SLEEPABLE()	/* nothing */
+#define	ASSERT_SLEEPABLE()	do {} while (0)
 #endif /* defined(DEBUG) */
 
 vaddr_t calc_cache_size(vsize_t , int, int);

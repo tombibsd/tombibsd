@@ -594,7 +594,7 @@ rip_stat(struct socket *so, struct stat *ub)
 static int
 rip_peeraddr(struct socket *so, struct mbuf *nam)
 {
-	KASSERT(solocked(0));
+	KASSERT(solocked(so));
 	KASSERT(sotoinpcb(so) != NULL);
 	KASSERT(nam != NULL);
 
@@ -605,7 +605,7 @@ rip_peeraddr(struct socket *so, struct mbuf *nam)
 static int
 rip_sockaddr(struct socket *so, struct mbuf *nam)
 {
-	KASSERT(solocked(0));
+	KASSERT(solocked(so));
 	KASSERT(sotoinpcb(so) != NULL);
 	KASSERT(nam != NULL);
 

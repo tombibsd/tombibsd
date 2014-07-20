@@ -97,7 +97,7 @@ npf_ext_rndblock_dtor(npf_rproc_t *rp, void *meta)
  * npf_ext_rndblock: main routine implementing the extension functionality.
  */
 static bool
-npf_ext_rndblock(npf_cache_t *npc, nbuf_t *nbuf, void *meta, int *decision)
+npf_ext_rndblock(npf_cache_t *npc, void *meta, int *decision)
 {
 	npf_ext_rndblock_t *rndblock = meta;
 	unsigned long c;

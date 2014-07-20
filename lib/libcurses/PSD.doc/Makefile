@@ -20,12 +20,10 @@ CLEANFILES+= ${CEXAMPLES} intro.2.tbl
 # bold font, and comments in italics.
 #
 
-
 # Don't re-run vgrind unless you want to patch the output files.
-# XXXBUILDSH: can we use TOOL_VGRIND here ?
-VFONT=	/usr/libexec/vfontedpr
+
 .c.gr:
-	${VFONT} ${.IMPSRC} | grep -v "^'wh" > ${.TARGET}
+	${TOOL_VFONTEDPR} ${.IMPSRC} | grep -v "^'wh" > ${.TARGET}
 
 # Unfortunately our make doesn't handle single-suffix rules.
 intro.2.tbl: intro.2

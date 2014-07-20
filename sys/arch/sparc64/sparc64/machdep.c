@@ -1611,27 +1611,6 @@ static void	sparc_bus_free(bus_space_tag_t, bus_space_handle_t, bus_size_t);
 
 struct extent *io_space = NULL;
 
-void
-bus_space_barrier(bus_space_tag_t t, bus_space_handle_t h,
-	bus_size_t o, bus_size_t s, int f)
-{
-	/*
-	 * We have a bit of a problem with the bus_space_barrier()
-	 * interface.  It defines a read barrier and a write barrier
-	 * which really don't map to the 7 different types of memory
-	 * barriers in the SPARC v9 instruction set.
-	 */
-	if (f == BUS_SPACE_BARRIER_READ)
-		/* A load followed by a load to the same location? */
-		__asm volatile("membar #Lookaside");
-	else if (f == BUS_SPACE_BARRIER_WRITE)
-		/* A store followed by a store? */
-		__asm volatile("membar #StoreStore");
-	else 
-		/* A store followed by a load? */
-		__asm volatile("membar #StoreLoad|#MemIssue|#Lookaside");
-}
-
 int
 bus_space_alloc(bus_space_tag_t t, bus_addr_t rs, bus_addr_t re, bus_size_t s,
 	bus_size_t a, bus_size_t b, int f, bus_addr_t *ap,

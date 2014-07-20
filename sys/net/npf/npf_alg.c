@@ -189,7 +189,7 @@ npf_alg_unregister(npf_alg_t *alg)
  * npf_alg_match: call ALG matching inspectors, determine if any ALG matches.
  */
 bool
-npf_alg_match(npf_cache_t *npc, nbuf_t *nbuf, npf_nat_t *nt, int di)
+npf_alg_match(npf_cache_t *npc, npf_nat_t *nt, int di)
 {
 	bool match = false;
 	int s;
@@ -198,7 +198,7 @@ npf_alg_match(npf_cache_t *npc, nbuf_t *nbuf, npf_nat_t *nt, int di)
 	for (u_int i = 0; i < alg_count; i++) {
 		const npfa_funcs_t *f = &alg_funcs[i];
 
-		if (f->match && f->match(npc, nbuf, nt, di)) {
+		if (f->match && f->match(npc, nt, di)) {
 			match = true;
 			break;
 		}
@@ -211,7 +211,7 @@ npf_alg_match(npf_cache_t *npc, nbuf_t *nbuf, npf_nat_t *nt, int di)
  * npf_alg_exec: execute ALG hooks for translation.
  */
 void
-npf_alg_exec(npf_cache_t *npc, nbuf_t *nbuf, npf_nat_t *nt, bool forw)
+npf_alg_exec(npf_cache_t *npc, npf_nat_t *nt, bool forw)
 {
 	int s;
 
@@ -220,16 +220,16 @@ npf_alg_exec(npf_cache_t *npc, nbuf_t *nbuf, npf_nat_t *nt, bool forw)
 		const npfa_funcs_t *f = &alg_funcs[i];
 
 		if (f->translate) {
-			f->translate(npc, nbuf, nt, forw);
+			f->translate(npc, nt, forw);
 		}
 	}
 	pserialize_read_exit(s);
 }
 
-npf_session_t *
-npf_alg_session(npf_cache_t *npc, nbuf_t *nbuf, int di)
+npf_conn_t *
+npf_alg_conn(npf_cache_t *npc, int di)
 {
-	npf_session_t *se = NULL;
+	npf_conn_t *con = NULL;
 	int s;
 
 	s = pserialize_read_enter();
@@ -238,9 +238,9 @@ npf_alg_session(npf_cache_t *npc, nbuf_t *nbuf, int di)
 
 		if (!f->inspect)
 			continue;
-		if ((se = f->inspect(npc, nbuf, di)) != NULL)
+		if ((con = f->inspect(npc, di)) != NULL)
 			break;
 	}
 	pserialize_read_exit(s);
-	return se;
+	return con;
 }

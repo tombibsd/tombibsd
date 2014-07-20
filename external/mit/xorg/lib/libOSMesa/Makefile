@@ -15,7 +15,7 @@ CPPFLAGS+=	${X11FLAGS.THREADLIB} \
 		-D_NETBSD_SOURCE -DUSE_EXTERNAL_DXTN_LIB=1 -DHAVE_ALIAS
 CFLAGS+=	-pthread
 
-CWARNFLAGS.clang+=	-Wno-format -Wno-constant-conversion
+CWARNFLAGS.clang+=	-Wno-format -Wno-constant-conversion -Wno-tautological-compare
 
 .include "libmesa.mk"
 

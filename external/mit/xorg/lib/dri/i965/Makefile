@@ -124,7 +124,7 @@ SRCS+= \
 	brw_fs_vector_splitting.cpp \
 	brw_shader.cpp
 
-CWARNFLAGS.clang+=	-Wno-format -Wno-switch
+CWARNFLAGS.clang+=	-Wno-format -Wno-switch -Wno-tautological-compare
 
 LIBDPLIBS+=	drm_intel	${.CURDIR}/../../libdrm_intel
 

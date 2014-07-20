@@ -261,7 +261,7 @@
 ./usr/libdata/debug/usr/lib/i386/liblber.so.3.3.debug	comp-compat-shlib	compat,pic,ldap,debug
 ./usr/libdata/debug/usr/lib/i386/libldap.so.4.3.debug	comp-compat-shlib	compat,pic,ldap,debug
 ./usr/libdata/debug/usr/lib/i386/libldap_r.so.4.3.debug	comp-compat-shlib	compat,pic,ldap,debug
-./usr/libdata/debug/usr/lib/i386/liblua.so.1.0.debug	comp-compat-shlib	compat,pic,debug
+./usr/libdata/debug/usr/lib/i386/liblua.so.5.3.debug	comp-compat-shlib	compat,pic,debug
 ./usr/libdata/debug/usr/lib/i386/liblutok.so.1.0.debug	comp-obsolete		obsolete
 ./usr/libdata/debug/usr/lib/i386/liblutok.so.2.0.debug	comp-compat-shlib	compat,pic,debug,kyua
 ./usr/libdata/debug/usr/lib/i386/liblwres.so.6.0.debug	comp-compat-shlib	compat,pic,debug,obsolete

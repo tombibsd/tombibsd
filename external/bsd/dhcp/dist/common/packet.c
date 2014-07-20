@@ -1,5 +1,4 @@
 /*	$NetBSD$	*/
-
 /* packet.c
 
    Packet assembly code, originally contributed by Archie Cobbs. */

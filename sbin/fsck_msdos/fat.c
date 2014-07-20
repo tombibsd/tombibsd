@@ -392,7 +392,8 @@ checkfat(struct bootblock *boot, struct fatEntry *fat)
 
 		/* follow the chain and mark all clusters on the way */
 		for (len = 0, p = head;
-		     p >= CLUST_FIRST && p < boot->NumClusters;
+		     p >= CLUST_FIRST && p < boot->NumClusters &&
+		     fat[p].head != head;
 		     p = fat[p].next) {
 			fat[p].head = head;
 			len++;

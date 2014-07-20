@@ -5,8 +5,6 @@
 KMOD=		luasystm
 SRCS=		luasystm.c
 
-CPPFLAGS+=	-I${S}/../external/mit/lua/dist/src \
-		-I${S}/modules/lua \
-		-I${S}/sys
+CPPFLAGS+=	-I${S}/../external/mit/lua/dist/src
 
 .include <bsd.kmodule.mk>

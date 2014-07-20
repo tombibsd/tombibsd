@@ -141,14 +141,20 @@ hcreate_r(size_t nel, struct hsearch_data *head)
 }
 
 void
-hdestroy(void)
+hdestroy1(int flags)
 {
 	_DIAGASSERT(htable.table != NULL);
-	hdestroy_r(&htable);
+	hdestroy1_r(&htable, flags);
 }
 
 void
-hdestroy_r(struct hsearch_data *head)
+hdestroy(void)
+{
+	hdestroy1(0);
+}
+
+void
+hdestroy1_r(struct hsearch_data *head, int flags)
 {
 	struct internal_entry *ie;
 	size_t idx;
@@ -166,11 +172,20 @@ hdestroy_r(struct hsearch_data *head)
 		while (!SLIST_EMPTY(&table[idx])) {
 			ie = SLIST_FIRST(&table[idx]);
 			SLIST_REMOVE_HEAD(&table[idx], link);
-			free(ie->ent.key);
+			if (flags & FREE_KEY)
+				free(ie->ent.key);
+			if (flags & FREE_DATA)
+				free(ie->ent.data);
 			free(ie);
 		}
 	}
 	free(table);
+}
+
+void
+hdestroy_r(struct hsearch_data *head)
+{
+	hdestroy1_r(head, 0);
 }
 
 ENTRY *

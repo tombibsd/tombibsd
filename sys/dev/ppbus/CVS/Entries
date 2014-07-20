@@ -4,9 +4,9 @@
 /lptio.h/1.8/Mon Apr 28 20:23:56 2008/-kk/
 /lptreg.h/1.6/Sun Dec 11 12:23:28 2005/-kk/
 /lptvar.h/1.10/Mon Apr 28 20:23:56 2008/-kk/
-/ppbus_1284.c/1.12/Fri Apr 18 14:56:40 2008/-kk/
+/ppbus_1284.c/1.13/Sun Jul 20 13:58:49 2014/-kk/
 /ppbus_1284.h/1.8/Sun Apr  5 09:56:16 2009/-kk/
-/ppbus_base.c/1.18/Fri May 13 22:35:51 2011/-kk/
+/ppbus_base.c/1.19/Sun Jul 20 13:58:49 2014/-kk/
 /ppbus_base.h/1.8/Tue Apr 15 15:02:29 2008/-kk/
 /ppbus_conf.c/1.20/Sat Oct 27 17:18:37 2012/-kk/
 /ppbus_conf.h/1.12/Fri Feb 18 21:38:17 2011/-kk/

@@ -1202,6 +1202,7 @@ wm_attach(device_t parent, device_t self, void *aux)
 	uint16_t cfg1, cfg2, swdpin, io3;
 	pcireg_t preg, memtype;
 	uint16_t eeprom_data, apme_mask;
+	bool force_clear_smbi;
 	uint32_t reg;
 	char intrbuf[PCI_INTRSTR_LEN];
 
@@ -1393,7 +1394,6 @@ wm_attach(device_t parent, device_t self, void *aux)
 		    && (sc->sc_type != WM_T_PCH)
 		    && (sc->sc_type != WM_T_PCH2)
 		    && (sc->sc_type != WM_T_PCH_LPT)) {
-			sc->sc_flags |= WM_F_EEPROM_SEMAPHORE;
 			/* ICH* and PCH* have no PCIe capability registers */
 			if (pci_get_capability(pa->pa_pc, pa->pa_tag,
 				PCI_CAP_PCIEXPRESS, &sc->sc_pcixe_capoff,
@@ -1592,7 +1592,7 @@ wm_attach(device_t parent, device_t self, void *aux)
 			sc->sc_ee_addrbits = 8;
 		else
 			sc->sc_ee_addrbits = 6;
-		sc->sc_flags |= WM_F_EEPROM_HANDSHAKE;
+		sc->sc_flags |= WM_F_LOCK_EECD;
 		break;
 	case WM_T_82541:
 	case WM_T_82541_2:
@@ -1605,15 +1605,17 @@ wm_attach(device_t parent, device_t self, void *aux)
 		} else
 			/* Microwire */
 			sc->sc_ee_addrbits = (reg & EECD_EE_ABITS) ? 8 : 6;
-		sc->sc_flags |= WM_F_EEPROM_HANDSHAKE;
+		sc->sc_flags |= WM_F_LOCK_EECD;
 		break;
 	case WM_T_82571:
 	case WM_T_82572:
 		/* SPI */
 		wm_set_spiaddrbits(sc);
-		sc->sc_flags |= WM_F_EEPROM_HANDSHAKE;
+		sc->sc_flags |= WM_F_LOCK_EECD | WM_F_LOCK_SWSM;
 		break;
 	case WM_T_82573:
+		sc->sc_flags |= WM_F_LOCK_SWSM;
+		/* FALLTHROUGH */
 	case WM_T_82574:
 	case WM_T_82583:
 		if (wm_is_onboard_nvm_eeprom(sc) == 0)
@@ -1629,11 +1631,12 @@ wm_attach(device_t parent, device_t self, void *aux)
 	case WM_T_82580:
 	case WM_T_82580ER:
 	case WM_T_I350:
-	case WM_T_I354: /* XXXX ok? */
+	case WM_T_I354:
 	case WM_T_80003:
 		/* SPI */
 		wm_set_spiaddrbits(sc);
-		sc->sc_flags |= WM_F_EEPROM_EERDEEWR | WM_F_SWFW_SYNC;
+		sc->sc_flags |= WM_F_EEPROM_EERDEEWR | WM_F_LOCK_SWFW
+		    | WM_F_LOCK_SWSM;
 		break;
 	case WM_T_ICH8:
 	case WM_T_ICH9:
@@ -1642,7 +1645,7 @@ wm_attach(device_t parent, device_t self, void *aux)
 	case WM_T_PCH2:
 	case WM_T_PCH_LPT:
 		/* FLASH */
-		sc->sc_flags |= WM_F_EEPROM_FLASH | WM_F_SWFWHW_SYNC;
+		sc->sc_flags |= WM_F_EEPROM_FLASH | WM_F_LOCK_EXTCNF;
 		memtype = pci_mapreg_type(pa->pa_pc, pa->pa_tag, WM_ICH8_FLASH);
 		if (pci_mapreg_map(pa, WM_ICH8_FLASH, memtype, 0,
 		    &sc->sc_flasht, &sc->sc_flashh, NULL, NULL)) {
@@ -1663,10 +1666,33 @@ wm_attach(device_t parent, device_t self, void *aux)
 	case WM_T_I210:
 	case WM_T_I211:
 		sc->sc_flags |= WM_F_EEPROM_FLASH_HW;
-		sc->sc_flags |= WM_F_EEPROM_EERDEEWR | WM_F_SWFW_SYNC;
+		sc->sc_flags |= WM_F_EEPROM_EERDEEWR | WM_F_LOCK_SWFW;
 		break;
 	default:
 		break;
+	}
+
+	/* Ensure the SMBI bit is clear before first NVM or PHY access */
+	switch (sc->sc_type) {
+	case WM_T_82571:
+	case WM_T_82572:
+		reg = CSR_READ(sc, WMREG_SWSM2);
+		if ((reg & SWSM2_LOCK) != 0) {
+			CSR_WRITE(sc, WMREG_SWSM2, reg | SWSM2_LOCK);
+			force_clear_smbi = true;
+		} else
+			force_clear_smbi = false;
+		break;
+	default:
+		force_clear_smbi = true;
+		break;
+	}
+	if (force_clear_smbi) {
+		reg = CSR_READ(sc, WMREG_SWSM);
+		if ((reg & ~SWSM_SMBI) != 0)
+			aprint_error_dev(sc->sc_dev,
+			    "Please update the Bootagent\n");
+		CSR_WRITE(sc, WMREG_SWSM, reg & ~SWSM_SMBI);
 	}
 
 	/*
@@ -4196,6 +4222,7 @@ static void
 wm_reset(struct wm_softc *sc)
 {
 	int phy_reset = 0;
+	int error = 0;
 	uint32_t reg, mask;
 
 	/*
@@ -4298,7 +4325,7 @@ wm_reset(struct wm_softc *sc)
 	case WM_T_82573:
 	case WM_T_82574:
 	case WM_T_82583:
-		wm_get_hw_semaphore_82573(sc);
+		error = wm_get_hw_semaphore_82573(sc);
 		break;
 	default:
 		break;
@@ -4404,9 +4431,11 @@ wm_reset(struct wm_softc *sc)
 
 	/* Must release the MDIO ownership after MAC reset */
 	switch (sc->sc_type) {
+	case WM_T_82573:
 	case WM_T_82574:
 	case WM_T_82583:
-		wm_put_hw_semaphore_82573(sc);
+		if (error == 0)
+			wm_put_hw_semaphore_82573(sc);
 		break;
 	default:
 		break;
@@ -5311,12 +5340,12 @@ wm_acquire_eeprom(struct wm_softc *sc)
 	if ((sc->sc_flags & WM_F_EEPROM_FLASH) != 0)
 		return 0;
 
-	if (sc->sc_flags & WM_F_SWFWHW_SYNC) {
+	if (sc->sc_flags & WM_F_LOCK_EXTCNF) {
 		ret = wm_get_swfwhw_semaphore(sc);
-	} else if (sc->sc_flags & WM_F_SWFW_SYNC) {
+	} else if (sc->sc_flags & WM_F_LOCK_SWFW) {
 		/* this will also do wm_get_swsm_semaphore() if needed */
 		ret = wm_get_swfw_semaphore(sc, SWFW_EEP_SM);
-	} else if (sc->sc_flags & WM_F_EEPROM_SEMAPHORE) {
+	} else if (sc->sc_flags & WM_F_LOCK_SWSM) {
 		ret = wm_get_swsm_semaphore(sc);
 	}
 
@@ -5326,7 +5355,7 @@ wm_acquire_eeprom(struct wm_softc *sc)
 		return 1;
 	}
 
-	if (sc->sc_flags & WM_F_EEPROM_HANDSHAKE) {
+	if (sc->sc_flags & WM_F_LOCK_EECD) {
 		reg = CSR_READ(sc, WMREG_EECD);
 
 		/* Request EEPROM access. */
@@ -5345,11 +5374,11 @@ wm_acquire_eeprom(struct wm_softc *sc)
 			    "could not acquire EEPROM GNT\n");
 			reg &= ~EECD_EE_REQ;
 			CSR_WRITE(sc, WMREG_EECD, reg);
-			if (sc->sc_flags & WM_F_SWFWHW_SYNC)
+			if (sc->sc_flags & WM_F_LOCK_EXTCNF)
 				wm_put_swfwhw_semaphore(sc);
-			if (sc->sc_flags & WM_F_SWFW_SYNC)
+			if (sc->sc_flags & WM_F_LOCK_SWFW)
 				wm_put_swfw_semaphore(sc, SWFW_EEP_SM);
-			else if (sc->sc_flags & WM_F_EEPROM_SEMAPHORE)
+			else if (sc->sc_flags & WM_F_LOCK_SWSM)
 				wm_put_swsm_semaphore(sc);
 			return 1;
 		}
@@ -5372,17 +5401,17 @@ wm_release_eeprom(struct wm_softc *sc)
 	if ((sc->sc_flags & WM_F_EEPROM_FLASH) != 0)
 		return;
 
-	if (sc->sc_flags & WM_F_EEPROM_HANDSHAKE) {
+	if (sc->sc_flags & WM_F_LOCK_EECD) {
 		reg = CSR_READ(sc, WMREG_EECD);
 		reg &= ~EECD_EE_REQ;
 		CSR_WRITE(sc, WMREG_EECD, reg);
 	}
 
-	if (sc->sc_flags & WM_F_SWFWHW_SYNC)
+	if (sc->sc_flags & WM_F_LOCK_EXTCNF)
 		wm_put_swfwhw_semaphore(sc);
-	if (sc->sc_flags & WM_F_SWFW_SYNC)
+	if (sc->sc_flags & WM_F_LOCK_SWFW)
 		wm_put_swfw_semaphore(sc, SWFW_EEP_SM);
-	else if (sc->sc_flags & WM_F_EEPROM_SEMAPHORE)
+	else if (sc->sc_flags & WM_F_LOCK_SWSM)
 		wm_put_swsm_semaphore(sc);
 }
 
@@ -5852,8 +5881,6 @@ wm_read_mac_addr(struct wm_softc *sc, uint8_t *enaddr)
 	return 0;
 
  bad:
-	aprint_error_dev(sc->sc_dev, "unable to read Ethernet address\n");
-
 	return -1;
 }
 
@@ -7676,13 +7703,13 @@ wm_kmrn_readreg(struct wm_softc *sc, int reg)
 {
 	int rv;
 
-	if (sc->sc_flags == WM_F_SWFW_SYNC) {
+	if (sc->sc_flags == WM_F_LOCK_SWFW) {
 		if (wm_get_swfw_semaphore(sc, SWFW_MAC_CSR_SM)) {
 			aprint_error_dev(sc->sc_dev,
 			    "%s: failed to get semaphore\n", __func__);
 			return 0;
 		}
-	} else if (sc->sc_flags == WM_F_SWFWHW_SYNC) {
+	} else if (sc->sc_flags == WM_F_LOCK_EXTCNF) {
 		if (wm_get_swfwhw_semaphore(sc)) {
 			aprint_error_dev(sc->sc_dev,
 			    "%s: failed to get semaphore\n", __func__);
@@ -7698,9 +7725,9 @@ wm_kmrn_readreg(struct wm_softc *sc, int reg)
 
 	rv = CSR_READ(sc, WMREG_KUMCTRLSTA) & KUMCTRLSTA_MASK;
 
-	if (sc->sc_flags == WM_F_SWFW_SYNC)
+	if (sc->sc_flags == WM_F_LOCK_SWFW)
 		wm_put_swfw_semaphore(sc, SWFW_MAC_CSR_SM);
-	else if (sc->sc_flags == WM_F_SWFWHW_SYNC)
+	else if (sc->sc_flags == WM_F_LOCK_EXTCNF)
 		wm_put_swfwhw_semaphore(sc);
 
 	return rv;
@@ -7715,13 +7742,13 @@ static void
 wm_kmrn_writereg(struct wm_softc *sc, int reg, int val)
 {
 
-	if (sc->sc_flags == WM_F_SWFW_SYNC) {
+	if (sc->sc_flags == WM_F_LOCK_SWFW) {
 		if (wm_get_swfw_semaphore(sc, SWFW_MAC_CSR_SM)) {
 			aprint_error_dev(sc->sc_dev,
 			    "%s: failed to get semaphore\n", __func__);
 			return;
 		}
-	} else if (sc->sc_flags == WM_F_SWFWHW_SYNC) {
+	} else if (sc->sc_flags == WM_F_LOCK_EXTCNF) {
 		if (wm_get_swfwhw_semaphore(sc)) {
 			aprint_error_dev(sc->sc_dev,
 			    "%s: failed to get semaphore\n", __func__);
@@ -7733,9 +7760,9 @@ wm_kmrn_writereg(struct wm_softc *sc, int reg, int val)
 	    ((reg << KUMCTRLSTA_OFFSET_SHIFT) & KUMCTRLSTA_OFFSET) |
 	    (val & KUMCTRLSTA_MASK));
 
-	if (sc->sc_flags == WM_F_SWFW_SYNC)
+	if (sc->sc_flags == WM_F_LOCK_SWFW)
 		wm_put_swfw_semaphore(sc, SWFW_MAC_CSR_SM);
-	else if (sc->sc_flags == WM_F_SWFWHW_SYNC)
+	else if (sc->sc_flags == WM_F_LOCK_EXTCNF)
 		wm_put_swfwhw_semaphore(sc);
 }
 
@@ -7824,7 +7851,7 @@ wm_get_swfw_semaphore(struct wm_softc *sc, uint16_t mask)
 	int timeout = 200;
 
 	for (timeout = 0; timeout < 200; timeout++) {
-		if (sc->sc_flags & WM_F_EEPROM_SEMAPHORE) {
+		if (sc->sc_flags & WM_F_LOCK_SWSM) {
 			if (wm_get_swsm_semaphore(sc)) {
 				aprint_error_dev(sc->sc_dev,
 				    "%s: failed to get semaphore\n",
@@ -7836,11 +7863,11 @@ wm_get_swfw_semaphore(struct wm_softc *sc, uint16_t mask)
 		if ((swfw_sync & (swmask | fwmask)) == 0) {
 			swfw_sync |= swmask;
 			CSR_WRITE(sc, WMREG_SW_FW_SYNC, swfw_sync);
-			if (sc->sc_flags & WM_F_EEPROM_SEMAPHORE)
+			if (sc->sc_flags & WM_F_LOCK_SWSM)
 				wm_put_swsm_semaphore(sc);
 			return 0;
 		}
-		if (sc->sc_flags & WM_F_EEPROM_SEMAPHORE)
+		if (sc->sc_flags & WM_F_LOCK_SWSM)
 			wm_put_swsm_semaphore(sc);
 		delay(5000);
 	}
@@ -7854,14 +7881,14 @@ wm_put_swfw_semaphore(struct wm_softc *sc, uint16_t mask)
 {
 	uint32_t swfw_sync;
 
-	if (sc->sc_flags & WM_F_EEPROM_SEMAPHORE) {
+	if (sc->sc_flags & WM_F_LOCK_SWSM) {
 		while (wm_get_swsm_semaphore(sc) != 0)
 			continue;
 	}
 	swfw_sync = CSR_READ(sc, WMREG_SW_FW_SYNC);
 	swfw_sync &= ~(mask << SWFW_SOFT_SHIFT);
 	CSR_WRITE(sc, WMREG_SW_FW_SYNC, swfw_sync);
-	if (sc->sc_flags & WM_F_EEPROM_SEMAPHORE)
+	if (sc->sc_flags & WM_F_LOCK_SWSM)
 		wm_put_swsm_semaphore(sc);
 }
 

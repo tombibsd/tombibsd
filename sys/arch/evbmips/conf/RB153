@@ -77,6 +77,10 @@ options 	INET6		# IPV6
 #options 	PPP_FILTER	# Active filter support for PPP (requires bpf)
 #options 	IPFILTER_LOG	# ipmon(8) log support
 
+# JIT compiler for bpfilter
+#options	SLJIT
+#options	BPFJIT
+
 # These options enable verbose messages for several subsystems.
 # Warning, these may compile large string tables into the kernel!
 #options 	MIIVERBOSE	# verbose PHY autoconfig messages

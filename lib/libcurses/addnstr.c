@@ -147,16 +147,11 @@ waddnstr(WINDOW *win, const char *s, int n)
 	 * ncurses: if (n >= 0) then "at most n", else "len = strlen(s)"
 	 * XCURSES: if (n != -1) then "at most n", else "len = strlen(s)"
 	 * 
-	 * Also SUSv2 says these functions do not wrap nor change the
-	 * cursor position.
 	 */
 	if (n >= 0)
 		for (p = s, len = 0; n-- && *p++; ++len);
 	else
 		len = strlen(s);
 	
-	if (len > (win->maxx - win->curx))
-		len = win->maxx - win->curx;
-
 	return(waddbytes(win, s, (int) len));
 }

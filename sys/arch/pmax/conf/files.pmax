@@ -43,6 +43,11 @@ file	arch/pmax/pmax/memc_3max.c	dec_3max|dec_3maxplus
 file	arch/pmax/pmax/memc_3min.c	dec_3min|dec_maxine
 
 #
+# Stack-less Just-In-Time compiler
+#
+include	"external/bsd/sljit/conf/files.sljit"
+
+#
 # Bus-independent support for DEC devices
 #
 include "dev/dec/files.dec"

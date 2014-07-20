@@ -161,6 +161,7 @@
 ./usr/lib/librumpdev_ulpt_g.a			comp-c-debuglib		debuglib,rump
 ./usr/lib/librumpdev_umass_g.a			comp-c-debuglib		debuglib,rump
 ./usr/lib/librumpdev_usb_g.a			comp-c-debuglib		debuglib,rump
+./usr/lib/librumpdev_vnd_g.a			comp-c-debuglib		debuglib,rump
 ./usr/lib/librumpdev_wscons_g.a			comp-c-debuglib		debuglib,rump
 ./usr/lib/librumpfs_cd9660_g.a			comp-c-debuglib		debuglib,rump
 ./usr/lib/librumpfs_efs_g.a			comp-c-debuglib		debuglib,rump
@@ -1972,6 +1973,7 @@
 ./usr/libdata/debug/usr/tests/lib/libc/sys/t_lwp_create.debug		tests-lib-debug		debug,atf
 ./usr/libdata/debug/usr/tests/lib/libc/sys/t_lwp_ctl.debug		tests-lib-debug		debug,atf
 ./usr/libdata/debug/usr/tests/lib/libc/sys/t_mincore.debug		tests-lib-debug		debug,atf
+./usr/libdata/debug/usr/tests/lib/libc/sys/t_minherit.debug		tests-lib-debug		debug,atf
 ./usr/libdata/debug/usr/tests/lib/libc/sys/t_mkdir.debug		tests-lib-debug		debug,atf
 ./usr/libdata/debug/usr/tests/lib/libc/sys/t_mkfifo.debug		tests-lib-debug		debug,atf
 ./usr/libdata/debug/usr/tests/lib/libc/sys/t_mknod.debug		tests-lib-debug		debug,atf

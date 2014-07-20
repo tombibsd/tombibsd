@@ -166,7 +166,8 @@ checkresult(bool verbose, unsigned i, struct mbuf *m, ifnet_t *ifp, int error)
 	}
 
 	nbuf_init(&nbuf, m, ifp);
-	if (!npf_cache_all(&npc, &nbuf)) {
+	npc.npc_nbuf = &nbuf;
+	if (!npf_cache_all(&npc)) {
 		printf("error: could not fetch the packet data");
 		return false;
 	}

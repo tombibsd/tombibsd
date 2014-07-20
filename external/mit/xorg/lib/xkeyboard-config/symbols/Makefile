@@ -8,7 +8,7 @@ FILES=	af al altwin am apl ara at az \
 	ba bd be bg br brai bt bw by \
 	ca capslock cd ch cm cn compose ctrl cz \
 	de dk \
-	ee empty epo es et eurosign \
+	ee empty epo es et eu eurosign \
 	fi fo fr \
 	gb ge gh gn gr group \
 	hr hu \

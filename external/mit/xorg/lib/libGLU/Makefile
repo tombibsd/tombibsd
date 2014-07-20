@@ -97,4 +97,4 @@ COPTS.tobezier.cc+=	-Wno-error
 COPTS.sampleCompTop.cc+=	-O0
 .endif
 
-CWARNFLAGS.clang+=	-Wno-parentheses
+CWARNFLAGS.clang+=	-Wno-parentheses -Wno-tautological-compare

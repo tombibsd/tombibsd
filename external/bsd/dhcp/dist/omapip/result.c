@@ -1,5 +1,4 @@
 /*	$NetBSD$	*/
-
 /* result.c
  */
 

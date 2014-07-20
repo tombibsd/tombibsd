@@ -79,8 +79,8 @@ SRCS+=	random.c
 SRCS+=	rngtest.c
 
 SRCS+=	memchr.c
-SRCS+=	strcat.c strcmp.c strcpy.c strlen.c strnlen.c
-SRCS+=	strncat.c strncmp.c strncpy.c
+SRCS+=	strcat.c strcmp.c strcpy.c strcspn.c strlen.c strnlen.c
+SRCS+=	strncat.c strncmp.c strncpy.c strpbrk.c strspn.c
 SRCS+=	strcasecmp.c strncasecmp.c
 
 SRCS+=	xlat_mbr_fstype.c

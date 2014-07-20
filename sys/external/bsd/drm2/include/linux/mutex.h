@@ -34,6 +34,8 @@
 
 #include <sys/mutex.h>
 
+#include <lib/libkern/libkern.h> /* KASSERT */
+
 struct mutex {
 	kmutex_t mtx_lock;
 };
@@ -82,5 +84,15 @@ mutex_is_locked(struct mutex *mutex)
 {
 	return mutex_owned(&mutex->mtx_lock);
 }
+
+static inline void
+mutex_lock_nest_lock(struct mutex *mutex, struct mutex *already)
+{
+
+	KASSERT(mutex_is_locked(already));
+	mutex_lock(mutex);
+}
+
+#define	lockdep_assert_held(m)	do {} while (0)
 
 #endif  /* _LINUX_MUTEX_H_ */

@@ -557,7 +557,7 @@ vioif_attach(device_t parent, device_t self, void *aux)
 		}
 	}
 
-	sc->sc_rx_softint = softint_establish(SOFTINT_NET|SOFTINT_MPSAFE,
+	sc->sc_rx_softint = softint_establish(SOFTINT_NET,
 					      vioif_rx_softint, sc);
 	if (sc->sc_rx_softint == NULL) {
 		aprint_error_dev(self, "cannot establish softint\n");

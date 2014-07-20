@@ -362,8 +362,8 @@ sockaddr_dl_init(struct sockaddr_dl *sdl, socklen_t socklen, uint16_t ifindex,
 	if (len > socklen) {
 		sdl->sdl_len = socklen;
 #ifdef DIAGNOSTIC
-		printf("%s: too long: %" PRIu8 " > %" PRIu8 "\n", __func__, len,
-		    socklen);
+		printf("%s: too long: %u > %u\n", __func__, (u_int)len,
+		    (u_int)socklen);
 #endif
 		return NULL;
 	}
@@ -442,8 +442,8 @@ sockaddr_dl_setaddr(struct sockaddr_dl *sdl, socklen_t socklen,
 	len = sockaddr_dl_measure(sdl->sdl_nlen, addrlen);
 	if (len > socklen) {
 #ifdef DIAGNOSTIC
-		printf("%s: too long: %" PRIu8 " > %" PRIu8 "\n", __func__, len,
-		    socklen);
+		printf("%s: too long: %u > %u\n", __func__, (u_int)len,
+		    (u_int)socklen);
 #endif
 		return NULL;
 	}

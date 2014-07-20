@@ -772,10 +772,7 @@ make_fstab(void)
 			if (!check_lfs_progs())
 				s = "# ";
 			fstype = "lfs";
-			/* XXX fsck_lfs considered harmfull */
-			fsck_pass = 0;
-			dump_freq = 1;
-			break;
+			/* FALLTHROUGH */
 		case FS_BSDFFS:
 			fsck_pass = (strcmp(mp, "/") == 0) ? 1 : 2;
 			dump_freq = 1;

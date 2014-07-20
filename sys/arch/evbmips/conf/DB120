@@ -117,6 +117,10 @@ options 	INET		# Internet protocols
 # Compatibility with 4.2BSD implementation of TCP/IP.  Not recommended.
 #options 	TCP_COMPAT_42
 
+# JIT compiler for bpfilter
+#options	SLJIT
+#options	BPFJIT
+
 # These options enable verbose messages for several subsystems.
 # Warning, these may compile large string tables into the kernel!
 options 	MIIVERBOSE	# verbose PHY autoconfig messages

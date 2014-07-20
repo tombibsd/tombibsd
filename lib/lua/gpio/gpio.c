@@ -288,13 +288,13 @@ luaopen_gpio(lua_State* L)
 	};
 	int n;
 
-	luaL_register(L, "gpio", methods);
-	luaL_register(L, NULL, gpio_methods);
+	luaL_newlib(L, methods);
+	luaL_setfuncs(L, gpio_methods, 0);
 	gpio_set_info(L);
 
 	/* The gpio metatable */
 	if (luaL_newmetatable(L, GPIO_METATABLE)) {
-		luaL_register(L, NULL, gpio_methods);
+		luaL_setfuncs(L, gpio_methods, 0);
 
 		lua_pushliteral(L, "__gc");
 		lua_pushcfunction(L, gpio_close);

@@ -117,12 +117,6 @@
 #endif /* DDB */
 #endif /* ACPI_DEBUG */
 
-static __inline int
-isprint(int ch)
-{
-        return(isspace(ch) || isascii(ch));
-}
-
 #else /* defined(_KERNEL) || defined(_STANDALONE) */
 
 #include <ctype.h>

@@ -109,7 +109,7 @@
 #define INDEX_HTML		"index.html"
 #endif
 #ifndef SERVER_SOFTWARE
-#define SERVER_SOFTWARE		"bozohttpd/20140708"
+#define SERVER_SOFTWARE		"bozohttpd/20140717"
 #endif
 #ifndef DIRECT_ACCESS_FILE
 #define DIRECT_ACCESS_FILE	".bzdirect"
@@ -527,7 +527,8 @@ bozo_read_request(bozohttpd_t *httpd)
 	 */
 	if (bozo_daemon_fork(httpd))
 		return NULL;
-	bozo_ssl_accept(httpd);
+	if (bozo_ssl_accept(httpd))
+		return NULL;
 
 	request = bozomalloc(httpd, sizeof(*request));
 	memset(request, 0, sizeof(*request));

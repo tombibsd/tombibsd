@@ -235,12 +235,12 @@ char	*bozostrdup(bozohttpd_t *, const char *);
 #ifdef NO_SSL_SUPPORT
 #define bozo_ssl_set_opts(w, x, y)	do { /* nothing */ } while (0)
 #define bozo_ssl_init(x)		do { /* nothing */ } while (0)
-#define bozo_ssl_accept(x)		do { /* nothing */ } while (0)
+#define bozo_ssl_accept(x)		(0)
 #define bozo_ssl_destroy(x)		do { /* nothing */ } while (0)
 #else
 void	bozo_ssl_set_opts(bozohttpd_t *, const char *, const char *);
 void	bozo_ssl_init(bozohttpd_t *);
-void	bozo_ssl_accept(bozohttpd_t *);
+int	bozo_ssl_accept(bozohttpd_t *);
 void	bozo_ssl_destroy(bozohttpd_t *);
 #endif
 

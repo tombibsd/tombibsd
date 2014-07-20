@@ -34,6 +34,8 @@
 
 #include <sys/types.h>
 
+#include <asm/div64.h>
+
 static inline int64_t
 div64_u64(int64_t divisor, uint64_t dividend)
 {
@@ -42,6 +44,12 @@ div64_u64(int64_t divisor, uint64_t dividend)
 
 static inline int64_t
 div_u64(int64_t divisor, uint32_t dividend)
+{
+	return divisor / dividend;
+}
+
+static inline int64_t
+div64_s64(int64_t divisor, int64_t dividend)
 {
 	return divisor / dividend;
 }

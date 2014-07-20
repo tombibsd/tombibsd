@@ -351,9 +351,9 @@ ffs_wapbl_start(struct mount *mp)
 #endif
 
 			if ((fs->fs_flags & FS_DOWAPBL) == 0) {
+				fs->fs_flags |= FS_DOWAPBL;
 				if ((error = UFS_WAPBL_BEGIN(mp)) != 0)
 					goto out;
-				fs->fs_flags |= FS_DOWAPBL;
 				error = ffs_sbupdate(ump, MNT_WAIT);
 				if (error) {
 					UFS_WAPBL_END(mp);

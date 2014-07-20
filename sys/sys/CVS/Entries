@@ -21,7 +21,7 @@
 /callout.h/1.31/Mon Apr 28 20:24:10 2008/-kk/
 /cctr.h/1.3/Mon Apr 28 20:24:10 2008/-kk/
 /cdbr.h/1.1/Wed Dec 11 01:24:08 2013/-kk/
-/cdefs.h/1.119/Tue Mar 25 02:35:51 2014/-kk/
+/cdefs.h/1.120/Sun Jul 20 13:59:14 2014/-kk/
 /cdefs_aout.h/1.20/Thu May 18 17:55:38 2006/-kk/
 /cdefs_elf.h/1.44/Tue Jun  3 02:54:47 2014/-kk/
 /cdio.h/1.33/Thu Jan 29 19:36:28 2009/-kk/
@@ -117,7 +117,7 @@
 /lock.h/1.86/Thu Jul  1 13:00:57 2010/-kk/
 /lockdebug.h/1.14/Thu Oct 24 10:28:58 2013/-kk/
 /lockf.h/1.20/Wed Nov 19 13:34:11 2008/-kk/
-/lua.h/1.3/Tue Nov  5 03:38:26 2013/-kk/
+/lua.h/1.6/Sun Jul 20 13:59:14 2014/-kk/
 /lwp.h/1.169/Tue Jun  3 02:54:47 2014/-kk/
 /lwpctl.h/1.4/Mon Apr 28 20:24:10 2008/-kk/
 /malloc.h/1.115/Tue Jun  3 02:54:47 2014/-kk/
@@ -126,7 +126,7 @@
 /md4.h/1.7/Mon Dec 26 18:41:36 2005/-kk/
 /md5.h/1.9/Mon Dec 26 18:41:36 2005/-kk/
 /midiio.h/1.15/Mon Apr 28 20:24:11 2008/-kk/
-/mman.h/1.46/Sun Jul 20 13:08:42 2014/-kk/
+/mman.h/1.47/Sun Jul 20 13:59:14 2014/-kk/
 /module.h/1.35/Tue May  6 05:50:26 2014/-kk/
 /mount.h/1.215/Sun Jul 20 13:08:42 2014/-kk/
 /mqueue.h/1.16/Mon Nov 21 04:36:05 2011/-kk/
@@ -208,10 +208,10 @@
 /syscall_stats.h/1.4/Wed Nov 12 12:36:28 2008/-kk/
 /syscallargs.h/1.254/Wed Jun 18 08:43:12 2014/-kk/
 /syscallvar.h/1.9/Fri Mar 14 04:28:29 2014/-kk/
-/sysctl.h/1.212/Wed Jun 18 08:43:12 2014/-kk/
+/sysctl.h/1.213/Sun Jul 20 13:59:14 2014/-kk/
 /syslimits.h/1.27/Fri Dec  7 07:06:39 2012/-kk/
 /syslog.h/1.35/Wed Oct 10 22:51:55 2012/-kk/
-/systm.h/1.263/Sat Apr 19 05:37:02 2014/-kk/
+/systm.h/1.264/Sun Jul 20 13:59:14 2014/-kk/
 /tape.h/1.3/Mon Dec 26 18:41:36 2005/-kk/
 /termios.h/1.32/Thu Oct 24 10:28:58 2013/-kk/
 /time.h/1.65/Thu Oct 27 16:12:52 2011/-kk/

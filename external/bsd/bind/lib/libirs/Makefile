@@ -14,8 +14,7 @@ DIST=   ${IDIST}/lib/irs
 
 .PATH.c:	${DIST}
 
-SRCS=		context.c dnsconf.c gai_strerror.c getaddrinfo.c \
-		getnameinfo.c resconf.c version.c
+SRCS=		context.c dnsconf.c resconf.c version.c
 
 
 .include <bsd.lib.mk>

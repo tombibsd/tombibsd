@@ -1,6 +1,6 @@
 -- $NetBSD$
 
-require 'gpio'
+local gpio = require 'gpio'
 
 print(gpio._VERSION .. ' - ' .. gpio._DESCRIPTION)
 print(gpio._COPYRIGHT)

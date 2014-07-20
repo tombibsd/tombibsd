@@ -91,9 +91,8 @@ struct kernfs_node {
 	kfstype		kfs_type;	/* type of kernfs node */
 	mode_t		kfs_mode;	/* mode bits for stat() */
 	long		kfs_fileno;	/* unique file id */
-	u_int32_t	kfs_value;	/* SA id or SP id (KFSint) */
 	const struct kern_target *kfs_kt;
-	void		*kfs_v;		/* pointer to secasvar/secpolicy/mbuf */
+	void		*kfs_v;		/* dynamic node private data */
 	long		kfs_cookie;	/* fileno cookie */
 };
 
@@ -124,20 +123,13 @@ extern int (**kernfs_vnodeop_p)(void *);
 extern struct vfsops kernfs_vfsops;
 extern dev_t rrootdev;
 
-struct secasvar;
-struct secpolicy;
-
 int kernfs_root(struct mount *, struct vnode **);
 
 void kernfs_hashinit(void);
 void kernfs_hashreinit(void);
 void kernfs_hashdone(void);
 int kernfs_freevp(struct vnode *);
-int kernfs_allocvp(struct mount *, struct vnode **, kfstype,
-	const struct kern_target *, u_int32_t);
-
-void kernfs_revoke_sa(struct secasvar *);
-void kernfs_revoke_sp(struct secpolicy *);
+int kernfs_allocvp(struct mount *, struct vnode **, const struct kern_target *);
 
 /*
  * Data types for the kernfs file operations.

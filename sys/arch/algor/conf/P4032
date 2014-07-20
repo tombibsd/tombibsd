@@ -56,6 +56,10 @@ options 	INET6		# IPV6
 options 	IPSEC		# IP security
 #options 	IPSEC_DEBUG	# debug for IP security
 
+# JIT compiler for bpfilter
+#options	SLJIT
+#options	BPFJIT
+
 # 4.3BSD compatibility.  Should be optional, but necessary for now.
 options 	COMPAT_43
 

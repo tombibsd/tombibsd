@@ -192,7 +192,7 @@ kernfs_root(struct mount *mp, struct vnode **vpp)
 {
 
 	/* setup "." */
-	return (kernfs_allocvp(mp, vpp, KFSkern, &kern_targets[0], 0));
+	return (kernfs_allocvp(mp, vpp, &kern_targets[0]));
 }
 
 /*ARGSUSED*/

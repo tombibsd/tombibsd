@@ -125,6 +125,12 @@ arc4_fork_child(void)
 static inline void
 arc4_check_init(struct arc4_stream *as)
 {
+	/*
+	 * pthread_atfork(3) only allows async-signal-safe functions in
+	 * the child handler.
+	 * NetBSD's mutex_unlock is async-signal safe, other implementations
+	 * may not be.
+	 */
 
 	if (__predict_false(!as->inited)) {
 		as->inited = true;

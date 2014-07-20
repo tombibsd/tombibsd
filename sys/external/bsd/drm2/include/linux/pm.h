@@ -41,4 +41,8 @@ typedef struct {
 #define	PM_EVENT_PRETHAW		0
 #define	PM_EVENT_SUSPEND		1
 
+struct dev_pm_domain {
+	char dummy;		/* XXX */
+};
+
 #endif  /* _LINUX_PM_H_ */

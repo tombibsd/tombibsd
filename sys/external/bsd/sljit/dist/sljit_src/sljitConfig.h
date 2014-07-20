@@ -90,6 +90,10 @@
 #endif
 
 #ifdef _KERNEL
+#define SLJIT_IS_FPU_AVAILABLE 0
+#endif
+
+#ifdef _KERNEL
 #include <sys/cdefs.h>
 #include <sys/malloc.h>
 #include <sys/param.h>

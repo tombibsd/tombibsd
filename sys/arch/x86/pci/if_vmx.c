@@ -1145,11 +1145,13 @@ vmxnet3_load_mbuf(struct vmxnet3_softc *sc, struct mbuf *m)
 	case 0:
 		break;
 	case EFBIG:
-		if (m_defrag(m, M_DONTWAIT) == 0 &&
-		    bus_dmamap_load_mbuf(sc->sc_dmat, map, m,
-		     BUS_DMA_NOWAIT) == 0)
-			break;
-
+		mp = m_defrag(m, M_DONTWAIT);
+		if (mp != NULL) {
+			m = mp;
+			if (bus_dmamap_load_mbuf(sc->sc_dmat, map, m,
+			    BUS_DMA_NOWAIT) == 0)
+				break;
+		}
 		/* FALLTHROUGH */
 	default:
 		m_freem(m);

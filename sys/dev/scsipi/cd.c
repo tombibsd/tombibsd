@@ -313,6 +313,9 @@ cddetach(device_t self, int flags)
 	struct cd_softc *cd = device_private(self);
 	int s, bmaj, cmaj, i, mn;
 
+	if (cd->sc_dk.dk_openmask != 0 && (flags & DETACH_FORCE) == 0)
+		return EBUSY;
+
 	/* locate the major number */
 	bmaj = bdevsw_lookup_major(&cd_bdevsw);
 	cmaj = cdevsw_lookup_major(&cd_cdevsw);

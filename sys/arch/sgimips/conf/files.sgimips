@@ -35,6 +35,9 @@ file dev/md_root.c			memory_disk_hooks
 
 file dev/cons.c
 
+# Stack-less Just-In-Time compiler
+include	"external/bsd/sljit/conf/files.sljit"
+
 # Machine-dependent drivers
 include "arch/sgimips/dev/files.dev"
 include "arch/sgimips/ioc/files.ioc"		# depends on int0 (files.dev)

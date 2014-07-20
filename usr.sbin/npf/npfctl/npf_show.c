@@ -452,7 +452,7 @@ npfctl_config_show(int fd)
 		if (ncf == NULL) {
 			return errno;
 		}
-		fprintf(ctx->fp, "Filtering:\t%s\nConfiguration:\t%s\n",
+		fprintf(ctx->fp, "# filtering:\t%s\n# config:\t%s\n",
 		    active ? "active" : "inactive",
 		    loaded ? "loaded" : "empty");
 		print_linesep(ctx);

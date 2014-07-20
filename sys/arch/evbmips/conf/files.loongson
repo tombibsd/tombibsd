@@ -24,6 +24,9 @@ file	arch/mips/mips/mips3_clockintr.c
 # Memory Disk
 file	dev/md_root.c				memory_disk_hooks
 
+# Stack-less Just-In-Time compiler
+include	"external/bsd/sljit/conf/files.sljit"
+
 include "dev/ata/files.ata"
 include "dev/scsipi/files.scsipi"
 include "dev/i2o/files.i2o"

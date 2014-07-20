@@ -792,11 +792,11 @@ tandem(const char *option)
 
 	(void)tcgetattr(FD, &rmtty);
 	if (strcmp(option, "on") == 0) {
-		rmtty.c_iflag |= IXON|IXOFF|IXANY;
-		term.c_iflag |= IXON|IXOFF|IXANY;
+		rmtty.c_iflag |= IXON|IXOFF;
+		term.c_iflag |= IXON|IXOFF;
 	} else {
-		rmtty.c_iflag &= ~(IXON|IXOFF|IXANY);
-		term.c_iflag &= ~(IXON|IXOFF|IXANY);
+		rmtty.c_iflag &= ~(IXON|IXOFF);
+		term.c_iflag &= ~(IXON|IXOFF);
 	}
 	(void)tcsetattr(FD, TCSADRAIN, &rmtty);
 	(void)tcsetattr(0, TCSADRAIN, &term);

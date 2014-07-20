@@ -44,3 +44,19 @@ void
 drm_sysfs_connector_remove(struct drm_connector *connector __unused)
 {
 }
+
+int
+drm_sysfs_device_add(struct drm_minor *minor __unused)
+{
+	return 0;
+}
+
+void
+drm_sysfs_device_remove(struct drm_minor *minor __unused)
+{
+}
+
+void
+drm_sysfs_hotplug_event(struct drm_device *dev __unused)
+{
+}

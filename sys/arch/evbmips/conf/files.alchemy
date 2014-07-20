@@ -41,6 +41,9 @@ device	obio { [addr=-1] }
 attach	obio at mainbus
 file	arch/evbmips/alchemy/obio.c		obio
 
+# Stack-less Just-In-Time compiler
+include	"external/bsd/sljit/conf/files.sljit"
+
 # Machine-independent SCSI drivers
 include "dev/scsipi/files.scsipi"
 

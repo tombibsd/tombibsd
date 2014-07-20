@@ -212,7 +212,6 @@ static const int	maxuprc	= MAXUPRC;
 
 static int sysctl_doeproc(SYSCTLFN_PROTO);
 static int sysctl_kern_proc_args(SYSCTLFN_PROTO);
-static void fill_kproc2(struct proc *, struct kinfo_proc2 *, bool);
 
 /*
  * The process list descriptors, used during pid allocation and
@@ -2200,7 +2199,7 @@ fill_eproc(struct proc *p, struct eproc *ep, bool zombie)
 /*
  * Fill in a kinfo_proc2 structure for the specified process.
  */
-static void
+void
 fill_kproc2(struct proc *p, struct kinfo_proc2 *ki, bool zombie)
 {
 	struct tty *tp;

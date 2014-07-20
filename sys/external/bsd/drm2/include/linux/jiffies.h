@@ -35,7 +35,11 @@
 #include <sys/param.h>
 #include <sys/kernel.h>
 
-#define	jiffies	hardclock_ticks
+#define	jiffies		hardclock_ticks
+#define	jiffies_64	hardclock_ticks /* XXX */
+
+/* XXX Er, what?  */
+#define	MAX_JIFFY_OFFSET	((INT_MAX >> 1) - 1)
 
 static inline unsigned int
 msecs_to_jiffies(unsigned int msec)

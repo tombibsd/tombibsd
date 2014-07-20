@@ -5,7 +5,7 @@
 PROG=	xlsclients
 
 CPPFLAGS+=	-I${DESTDIR}${X11INCDIR} -DHAVE_STRNLEN \
-		-DPACKAGE_STRING=\"1.1.3\"
+		-DPACKAGE_STRING="\"xlsclients 1.1.3\""
 
 #BUILDSYMLINKS=	xlscli.man xlsclients.man
 

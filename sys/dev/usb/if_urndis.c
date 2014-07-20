@@ -1033,7 +1033,7 @@ urndis_init(struct ifnet *ifp)
 	sc = ifp->if_softc;
 
 	if (ifp->if_flags & IFF_RUNNING)
-		return EBUSY;
+		return 0;
 
 	err = urndis_ctrl_init(sc);
 	if (err != RNDIS_STATUS_SUCCESS)

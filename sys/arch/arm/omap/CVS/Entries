@@ -1,9 +1,9 @@
 /am335x_cm_padconf.c/1.2/Thu Oct 24 10:28:57 2013/-kk/
 /am335x_dmtimer.c/1.1/Tue Dec 11 19:06:23 2012/-kk/
 /am335x_prcm.c/1.6/Thu Oct 24 10:28:57 2013/-kk/
-/am335x_prcm.h/1.6/Thu Oct 24 10:28:57 2013/-kk/
+/am335x_prcm.h/1.7/Sun Jul 20 13:58:34 2014/-kk/
 /files.omap/1.6/Wed Jun  6 20:21:45 2012/-kk/
-/files.omap2/1.27/Thu Oct 24 10:28:57 2013/-kk/
+/files.omap2/1.28/Sun Jul 20 13:58:34 2014/-kk/
 /files.omapl1x/1.1/Thu Oct 24 10:28:57 2013/-kk/
 /if_cpsw.c/1.6/Sat Apr 19 05:36:39 2014/-kk/
 /if_cpswreg.h/1.2/Sat Mar  1 06:04:22 2014/-kk/
@@ -93,7 +93,11 @@
 /omapl1x_tipb.c/1.1/Thu Oct 24 10:28:57 2013/-kk/
 /sitara_cm.c/1.1/Thu Oct 24 10:28:57 2013/-kk/
 /sitara_cm.h/1.1/Thu Oct 24 10:28:57 2013/-kk/
-/sitara_cmreg.h/1.1/Thu Oct 24 10:28:57 2013/-kk/
+/sitara_cmreg.h/1.2/Sun Jul 20 13:58:34 2014/-kk/
 /ti_iic.c/1.7/Fri Apr 11 02:03:28 2014/-kk/
 /ti_iicreg.h/1.1/Thu Oct 24 10:28:57 2013/-kk/
+/tifb.c/1.1/Wed Jul 16 18:30:43 2014/-kk/
+/tifbreg.h/1.1/Wed Jul 16 18:30:43 2014/-kk/
+/tiotg.c/1.2/Thu Jul 17 19:58:18 2014/-kk/
+/tiotgreg.h/1.1/Wed Jul 16 18:27:19 2014/-kk/
 D

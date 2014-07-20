@@ -54,7 +54,7 @@
 ./usr/include/mipsco/rwlock.h			comp-c-include
 ./usr/include/mipsco/setjmp.h			comp-c-include
 ./usr/include/mipsco/signal.h			comp-c-include
-./usr/include/mipsco/sljitarch.h		comp-c-include
+./usr/include/mipsco/sljitarch.h		comp-obsolete		obsolete
 ./usr/include/mipsco/stdarg.h			comp-obsolete		obsolete
 ./usr/include/mipsco/sysconf.h			comp-c-include
 ./usr/include/mipsco/trap.h			comp-c-include

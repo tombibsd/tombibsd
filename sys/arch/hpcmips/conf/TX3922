@@ -78,6 +78,10 @@ options 	INET6		# IPV6
 #options 	MROUTING	# Multicast routing support
 #options 	PIM		# Protocol Independent Multicast
 
+# JIT compiler for bpfilter
+#options	SLJIT
+#options	BPFJIT
+
 options 	NFSSERVER	# Sun NFS-compatible filesystem (server)
 options 	WAPBL		# File system journaling support
 #options 	QUOTA		# legacy UFS quotas

@@ -1,5 +1,4 @@
 /*	$NetBSD$	*/
-
 /*
  * Copyright (C) 2012 Internet Systems Consortium, Inc. ("ISC")
  *

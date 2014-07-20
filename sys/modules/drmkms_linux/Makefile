@@ -11,12 +11,13 @@ CPPFLAGS+=	-DDIAGNOSTIC
 
 KMOD=	drmkms_linux
 
-SRCS+=	linux_gfp.c
+SRCS+=	linux_dmi.c
 SRCS+=	linux_kmap.c
 SRCS+=	linux_i2c.c
 SRCS+=	linux_idr.c
 SRCS+=	linux_list_sort.c
 SRCS+=	linux_module.c
 SRCS+=	linux_work.c
+SRCS+=	linux_writecomb.c
 
 .include <bsd.kmodule.mk>

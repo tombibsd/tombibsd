@@ -45,6 +45,8 @@ SRCS+=					\
 
 # XXX
 
+# missing: HAVE_GCC_VECTOR_EXTENSIONS
+
 .if ${MACHINE_ARCH} == "i386" || ${MACHINE_ARCH} == "x86_64"
 . if ${MACHINE_ARCH} == "i386"
 SRCS+= pixman-mmx.c

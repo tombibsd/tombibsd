@@ -383,9 +383,6 @@ igma_attach(device_t parent, device_t self, void *aux)
 
 #if NVGA > 0
 	iaa.iaa_console = vga_cndetach() ? true : false;
-	/* Hack */
-	if (iaa.iaa_console)
-		wsdisplay_cndetach();
 #else
 	iaa.iaa_console = 0;
 #endif

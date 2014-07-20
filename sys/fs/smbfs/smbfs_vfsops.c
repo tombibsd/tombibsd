@@ -62,7 +62,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <fs/smbfs/smbfs_node.h>
 #include <fs/smbfs/smbfs_subr.h>
 
-MODULE(MODULE_CLASS_VFS, smbfs, NULL);
+MODULE(MODULE_CLASS_VFS, smbfs, "nsmb");
 
 VFS_PROTOS(smbfs);
 

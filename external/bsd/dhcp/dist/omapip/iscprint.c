@@ -1,5 +1,4 @@
 /*	$NetBSD$	*/
-
 /*
  * Copyright (C) 2004  Internet Systems Consortium, Inc. ("ISC")
  * Copyright (C) 1999-2001, 2003  Internet Software Consortium.
@@ -19,7 +18,6 @@
 
 #include <sys/cdefs.h>
 __RCSID("$NetBSD$");
-
 
 /* Id: iscprint.c,v 1.2 2005/03/17 20:30:41 dhankins Exp  */
 

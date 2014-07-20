@@ -37,10 +37,13 @@
 
 #define	printk		printf
 #define	vprintk		vprintf
+#define	printk_once	printf
 #define	pr_err		printf	/* XXX */
 #define	pr_info		printf	/* XXX */
+#define	pr_info_once	printf	/* XXX */
 #define	pr_warn_once	printf	/* XXX */
 #define	KERN_DEBUG	"drm kern debug: "
+#define	KERN_INFO	"drm kern info: "
 #define	KERN_WARNING	"drm kern warning: "
 #define	KERN_ERR	"drm kern error: "
 

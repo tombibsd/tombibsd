@@ -34,6 +34,7 @@ LIBDIR=		${X11USRLIBDIR}/modules/dri
 
 #LIBDPLIBS+=	GL	${.CURDIR}/../../libGL
 
-CWARNFLAGS.clang+=	-Wno-format -Wno-constant-conversion
+CWARNFLAGS.clang+=	-Wno-format -Wno-constant-conversion \
+			-Wno-tautological-compare
 
 .include <bsd.lib.mk>

@@ -1098,6 +1098,11 @@ beagle_device_register(device_t self, void *aux)
 			prop_dictionary_set_bool(dict, "is_console", true);
 		return;
 	}
+	if (device_is_a(self, "tifb")) {
+		if (use_fb_console)
+			prop_dictionary_set_bool(dict, "is_console", true);
+		return;
+	}
 	if (device_is_a(self, "com")) {
 		if (use_fb_console)
 			prop_dictionary_set_bool(dict, "is_console", false);

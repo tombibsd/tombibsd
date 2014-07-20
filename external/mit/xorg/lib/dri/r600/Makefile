@@ -56,6 +56,6 @@ SRCS+= \
 LIBDPLIBS+=	drm_radeon	${.CURDIR}/../../libdrm_radeon
 
 CWARNFLAGS.clang+=	-Wno-constant-logical-operand -Wno-empty-body \
-			-Wno-format
+			-Wno-format -Wno-tautological-compare
 
 .include "${.CURDIR}/../dri.mk"

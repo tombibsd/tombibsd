@@ -168,6 +168,7 @@ extern gid_t	gid, egid;
 
 extern char	key_msg[100];
 extern int	showpreview;
+extern int	nocolor;
 
 int	fits_in(const struct shape *, int);
 void	place(const struct shape *, int, int);

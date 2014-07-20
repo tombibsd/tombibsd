@@ -69,7 +69,7 @@ static npf_ifmap_t	npf_ifmap[NPF_MAX_IFMAP]	__read_mostly;
 static u_int		npf_ifmap_cnt			__read_mostly;
 
 /*
- * NOTE: IDs start from 1.  Zero is reseved for "no interface" and
+ * NOTE: IDs start from 1.  Zero is reserved for "no interface" and
  * (unsigned)-1 for "inactive interface".  Therefore, an interface
  * can have either INACTIVE_ID or non-zero ID.
  */

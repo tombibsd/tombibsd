@@ -73,7 +73,8 @@ test_bpf_code(void *code, size_t size)
 	/* Layer 3 (IP + TCP). */
 	m = fill_packet(IPPROTO_TCP);
 	nbuf_init(&nbuf, m, dummy_ifp);
-	npf_cache_all(&npc, &nbuf);
+	npc.npc_nbuf = &nbuf;
+	npf_cache_all(&npc);
 
 	bc_args.pkt = (const uint8_t *)m;
 	bc_args.buflen = m_length(m);

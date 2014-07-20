@@ -35,6 +35,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include "opt_evbarm_boardtype.h"
 #include "opt_ddb.h"
 #include "opt_kgdb.h"
+#include "opt_arm_debug.h"
 
 #include "sdhc.h"
 #include "bcmdwctwo.h"

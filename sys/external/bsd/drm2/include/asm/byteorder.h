@@ -48,4 +48,11 @@
 #define	be32_to_cpu	be32toh
 #define	be64_to_cpu	be64toh
 
+#define	be16_to_cpup	be16dec
+#define	be32_to_cpup	be32dec
+#define	be64_to_cpup	be64dec
+#define	le16_to_cpup	le16dec
+#define	le32_to_cpup	le32dec
+#define	le64_to_cpup	le64dec
+
 #endif	/* _ASM_BYTEORDER_H_ */

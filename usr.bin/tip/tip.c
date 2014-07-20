@@ -497,9 +497,9 @@ ttysetup(speed_t spd)
 	cntrl.c_cc[VMIN] = 1;
 	cntrl.c_cc[VTIME] = 0;
 	if (boolean(value(TAND)))
-		cntrl.c_iflag |= IXOFF|IXON|IXANY;
+		cntrl.c_iflag |= IXOFF|IXON;
 	else
-		cntrl.c_iflag &= ~(IXOFF|IXON|IXANY);
+		cntrl.c_iflag &= ~(IXOFF|IXON);
 	return tcsetattr(FD, TCSAFLUSH, &cntrl);
 }
 

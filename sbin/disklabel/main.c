@@ -1384,7 +1384,7 @@ makedisktab(FILE *f, struct disklabel *lp)
 		did = "";
 	}
 	if (lp->d_headswitch != 0) {
-		(void) fprintf(f, "%shs#%" PRIu16 ":", did, lp->d_headswitch);
+		(void) fprintf(f, "%shs#%" PRIu32 ":", did, lp->d_headswitch);
 		did = "";
 	}
 	if (lp->d_trkseek != 0) {

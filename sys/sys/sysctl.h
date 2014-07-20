@@ -1143,6 +1143,7 @@ typedef int (*sysctlfn)(SYSCTLFN_PROTO);
  * used in more than just sysctl
  */
 void	fill_eproc(struct proc *, struct eproc *, bool);
+void	fill_kproc2(struct proc *, struct kinfo_proc2 *, bool);
 
 /*
  * subsystem setup

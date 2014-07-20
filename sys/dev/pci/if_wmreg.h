@@ -928,6 +928,9 @@ struct livengood_tcpip_ctxdesc {
 #define FWSM_RSPCIPHY		0x00000040	/* Reset PHY on PCI reset */
 #define FWSM_FW_VALID		0x00008000 /* FW established a valid mode */
 
+#define	WMREG_SWSM2	0x5b58	/* SW Semaphore 2 */
+#define SWSM2_LOCK		0x00000002 /* Secondary driver semaphore bit */
+
 #define	WMREG_SW_FW_SYNC 0x5b5c	/* software-firmware semaphore */
 #define	SWFW_EEP_SM		0x0001 /* eeprom access */
 #define	SWFW_PHY0_SM		0x0002 /* first ctrl phy access */

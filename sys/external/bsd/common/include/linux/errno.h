@@ -44,5 +44,8 @@
 #include <sys/errno.h>
 
 #define	ERESTARTSYS	ERESTART
+#define	ENOTSUPP	ENOTSUP	/* XXX ???  */
+#define	EREMOTEIO	EIO	/* XXX Urk...  */
+#define	ECHRNG		ERANGE	/* XXX ??? */
 
 #endif  /* _LINUX_ERRNO_H_ */

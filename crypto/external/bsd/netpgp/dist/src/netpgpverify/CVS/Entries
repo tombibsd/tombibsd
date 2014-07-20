@@ -10,8 +10,8 @@
 /array.h/1.1/Sun Mar  9 00:15:45 2014/-kk/
 /b64.c/1.1/Sun Mar  9 00:15:45 2014/-kk/
 /b64.h/1.1/Sun Mar  9 00:15:45 2014/-kk/
-/bignum.c/1.1/Sun Mar  9 00:15:45 2014/-kk/
-/bn.h/1.1/Sun Mar  9 00:15:45 2014/-kk/
+/bignum.c/1.2/Sun Jul 20 13:55:05 2014/-kk/
+/bn.h/1.2/Sun Jul 20 13:55:06 2014/-kk/
 /bufgap.c/1.1/Sun Mar  9 00:15:45 2014/-kk/
 /bufgap.h/1.1/Sun Mar  9 00:15:45 2014/-kk/
 /bzlib.c/1.2/Sun Mar  9 07:01:42 2014/-kk/

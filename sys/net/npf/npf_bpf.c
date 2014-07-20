@@ -78,9 +78,9 @@ npf_bpf_sysfini(void)
 }
 
 void
-npf_bpf_prepare(npf_cache_t *npc, nbuf_t *nbuf, bpf_args_t *args, uint32_t *M)
+npf_bpf_prepare(npf_cache_t *npc, bpf_args_t *args, uint32_t *M)
 {
-	const struct mbuf *mbuf = nbuf_head_mbuf(nbuf);
+	const struct mbuf *mbuf = nbuf_head_mbuf(npc->npc_nbuf);
 	const size_t pktlen = m_length(mbuf);
 
 	/* Prepare the arguments for the BPF programs. */

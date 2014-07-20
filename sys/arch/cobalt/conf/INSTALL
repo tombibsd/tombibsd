@@ -120,6 +120,10 @@ options 	INET		# Internet protocols
 #options 	ALTQ_RIO	# RED with IN/OUT
 #options 	ALTQ_WFQ	# Weighted Fair Queueing
 
+# JIT compiler for bpfilter
+#options	SLJIT
+#options	BPFJIT
+
 # These options enable verbose messages for several subsystems.
 # Warning, these may compile large string tables into the kernel!
 #options 	PCIVERBOSE	# verbose PCI device autoconfig messages

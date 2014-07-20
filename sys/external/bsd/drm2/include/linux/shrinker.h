@@ -33,12 +33,16 @@
 #define _LINUX_SHRINKER_H_
 
 struct shrink_control {
-	unsigned long nr_to_scan;
+	unsigned long	nr_to_scan;
 };
 
 struct shrinker {
-	int (*shrink)(struct shrinker *, struct shrink_control *);
-	int seeks;
+	int		(*shrink)(struct shrinker *, struct shrink_control *);
+	unsigned long	(*count_objects)(struct shrinker *,
+			    struct shrink_control *);
+	unsigned long	(*scan_objects)(struct shrinker *,
+			    struct shrink_control *);
+	int		seeks;
 };
 
 #define	DEFAULT_SEEKS	2	/* XXX cargo-culted from Linux */

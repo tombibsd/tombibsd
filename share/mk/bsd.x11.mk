@@ -322,7 +322,8 @@ ${_pkg}.pc: ${PKGDIST.${_pkg}}/configure Makefile
 		s,@GL_LIB@,GL,; \
 		s,@GL_PC_REQ_PRIV@,x11 xext,; \
 		s,@GL_PC_LIB_PRIV@,-lm -lpthread,; \
-		s,@GL_PC_CFLAGS@,," \
+		s,@GL_PC_CFLAGS@,,; \
+		s,@GLX_TLS@,no," \
 		-e "s,@GLU_LIB@,GLU,; \
 		s,@GLU_PC_REQ@,gl,; \
 		s,@GLU_PC_REQ_PRIV@,,; \

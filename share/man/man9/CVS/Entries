@@ -10,7 +10,7 @@
 /accf_http.9/1.7/Sun Apr 11 05:40:16 2010/-kk/
 /altq.9/1.14/Sun Jun 24 19:26:58 2007/-kk/
 /arp.9/1.26/Thu Oct 24 10:28:54 2013/-kk/
-/audio.9/1.43/Wed Nov 23 23:11:56 2011/-kk/
+/audio.9/1.44/Sun Jul 20 13:58:32 2014/-kk/
 /autoconf.9/1.30/Thu Oct 24 10:28:54 2013/-kk/
 /bcdtobin.9/1.2/Wed Apr 30 13:10:58 2008/-kk/
 /bcmp.9/1.6/Thu Aug  7 10:31:29 2003/-kk/
@@ -27,7 +27,7 @@
 /bzero.9/1.7/Thu Aug  7 10:31:30 2003/-kk/
 /callback.9/1.5/Thu Dec  2 12:54:13 2010/-kk/
 /callout.9/1.26/Thu Oct 24 10:28:54 2013/-kk/
-/cardbus.9/1.18/Tue Jan 14 16:04:50 2014/-kk/
+/cardbus.9/1.19/Sun Jul 20 13:58:32 2014/-kk/
 /cnmagic.9/1.14/Tue Jun  8 19:44:28 2010/-kk/
 /condvar.9/1.14/Thu Dec  2 12:54:13 2010/-kk/
 /config.9/1.29/Thu Dec  2 12:54:13 2010/-kk/

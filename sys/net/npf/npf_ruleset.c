@@ -730,13 +730,12 @@ npf_rule_reinspect(const npf_rule_t *drl, bpf_args_t *bc_args,
  *
  * Loop through the rules in the set and run the byte-code of each rule
  * against the packet (nbuf chain).  If sub-ruleset is found, inspect it.
- *
- * => Caller is responsible for nbuf chain protection.
  */
 npf_rule_t *
-npf_ruleset_inspect(npf_cache_t *npc, nbuf_t *nbuf,
-    const npf_ruleset_t *rlset, const int di, const int layer)
+npf_ruleset_inspect(npf_cache_t *npc, const npf_ruleset_t *rlset,
+    const int di, const int layer)
 {
+	nbuf_t *nbuf = npc->npc_nbuf;
 	const int di_mask = (di & PFIL_IN) ? NPF_RULE_IN : NPF_RULE_OUT;
 	const u_int nitems = rlset->rs_nitems;
 	const u_int ifid = nbuf->nb_ifid;
@@ -751,7 +750,7 @@ npf_ruleset_inspect(npf_cache_t *npc, nbuf_t *nbuf,
 	 * the BPF programs to be executed.
 	 */
 	uint32_t bc_words[NPF_BPF_NWORDS];
-	npf_bpf_prepare(npc, nbuf, &bc_args, bc_words);
+	npf_bpf_prepare(npc, &bc_args, bc_words);
 
 	while (n < nitems) {
 		npf_rule_t *rl = rlset->rs_rules[n];

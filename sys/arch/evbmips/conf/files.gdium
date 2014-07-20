@@ -26,6 +26,9 @@ device	cpu
 attach	cpu at mainbus
 file	arch/evbmips/evbmips/cpu.c		cpu
 
+# Stack-less Just-In-Time compiler
+include	"external/bsd/sljit/conf/files.sljit"
+
 # Machine-independent I2O drivers.
 include "dev/i2o/files.i2o"
 

@@ -73,6 +73,7 @@ gid_t	gid, egid;
 
 char	key_msg[100];
 int	showpreview;
+int	nocolor;
 
 static void elide(void);
 static void setup_board(void);
@@ -144,8 +145,11 @@ main(int argc, char *argv[])
 
 	keys = "jkl pq";
 
-	while ((ch = getopt(argc, argv, "k:l:ps")) != -1)
+	while ((ch = getopt(argc, argv, "bk:l:ps")) != -1)
 		switch(ch) {
+		case 'b':
+			nocolor = 1;
+			break;
 		case 'k':
 			if (strlen(keys = optarg) != 6)
 				usage();

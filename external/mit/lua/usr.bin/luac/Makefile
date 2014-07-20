@@ -1,7 +1,7 @@
 # $NetBSD$
 
 PROG=		luac
-SRCS=		luac.c print.c
+SRCS=		luac.c
 BINDIR=		/usr/bin
 
 #

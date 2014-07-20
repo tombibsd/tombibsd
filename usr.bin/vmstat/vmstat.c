@@ -304,7 +304,7 @@ void	needhdr(int);
 void	getnlist(int);
 long	getuptime(void);
 void	printhdr(void);
-long	pct(long, long);
+long	pct(u_long, u_long);
 __dead static void	usage(void);
 void	doforkst(void);
 
@@ -852,7 +852,7 @@ needhdr(int dummy)
 }
 
 long
-pct(long top, long bot)
+pct(u_long top, u_long bot)
 {
 	long ans;
 
@@ -862,7 +862,7 @@ pct(long top, long bot)
 	return (ans);
 }
 
-#define	PCT(top, bot) (int)pct((long)(top), (long)(bot))
+#define	PCT(top, bot) (int)pct((u_long)(top), (u_long)(bot))
 
 void
 dosum(void)

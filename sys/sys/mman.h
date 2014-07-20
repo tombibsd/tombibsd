@@ -161,6 +161,7 @@ typedef	__off_t		off_t;		/* file offset */
 #define	MAP_INHERIT_NONE	2	/* absent from child */
 #define	MAP_INHERIT_DONATE_COPY	3	/* copy and delete -- not
 					   implemented in UVM */
+#define	MAP_INHERIT_ZERO	4	/* zero in child */
 #define	MAP_INHERIT_DEFAULT	MAP_INHERIT_COPY
 #endif
 

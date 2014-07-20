@@ -2070,12 +2070,10 @@ REALPOLLTS(struct pollfd *fds, nfds_t nfds, const struct timespec *ts,
 
 		/* strip cross-thread notification from real results */
 		if (pfd_host[nfds].revents & POLLIN) {
-			assert((pfd_rump[nfds].revents & POLLIN) == 0);
 			assert(rv_host > 0);
 			rv_host--;
 		}
 		if (pfd_rump[nfds].revents & POLLIN) {
-			assert((pfd_host[nfds].revents & POLLIN) == 0);
 			assert(rv_rump > 0);
 			rv_rump--;
 		}

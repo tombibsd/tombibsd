@@ -520,7 +520,7 @@ kernfs_lookup(void *v)
 		break;
 
 	found:
-		error = kernfs_allocvp(dvp->v_mount, vpp, kt->kt_tag, kt, 0);
+		error = kernfs_allocvp(dvp->v_mount, vpp, kt);
 		if (error)
 			return error;
 		VOP_UNLOCK(*vpp);
@@ -828,14 +828,13 @@ kernfs_ioctl(void *v)
 
 static int
 kernfs_setdirentfileno_kt(struct dirent *d, const struct kern_target *kt,
-    u_int32_t value, struct vop_readdir_args *ap)
+    struct vop_readdir_args *ap)
 {
 	struct kernfs_node *kfs;
 	struct vnode *vp;
 	int error;
 
-	if ((error = kernfs_allocvp(ap->a_vp->v_mount, &vp, kt->kt_tag, kt,
-	    value)) != 0)
+	if ((error = kernfs_allocvp(ap->a_vp->v_mount, &vp, kt)) != 0)
 		return error;
 	kfs = VTOKERN(vp);
 	d->d_fileno = kfs->kfs_fileno;
@@ -863,7 +862,7 @@ kernfs_setdirentfileno(struct dirent *d, off_t entry,
 		break;
 	}
 	if (ikt != thisdir_kfs->kfs_kt) {
-		if ((error = kernfs_setdirentfileno_kt(d, ikt, 0, ap)) != 0)
+		if ((error = kernfs_setdirentfileno_kt(d, ikt, ap)) != 0)
 			return error;
 	} else
 		d->d_fileno = thisdir_kfs->kfs_fileno;

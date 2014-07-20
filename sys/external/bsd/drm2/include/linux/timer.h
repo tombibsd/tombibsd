@@ -75,6 +75,14 @@ mod_timer(struct timer_list *timer, unsigned long then)
 }
 
 static inline void
+mod_timer_pinned(struct timer_list *timer, unsigned long then)
+{
+
+	/* XXX Stay on the same CPU it was originally on...  */
+	mod_timer(timer, then);
+}
+
+static inline void
 del_timer_sync(struct timer_list *timer)
 {
 

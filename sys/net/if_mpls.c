@@ -205,6 +205,8 @@ mpls_output(struct ifnet *ifp, struct mbuf *m, const struct sockaddr *dst, struc
 	int err;
 	uint psize = sizeof(struct sockaddr_mpls);
 
+	KASSERT(KERNEL_LOCKED_P());
+
 	if ((ifp->if_flags & (IFF_UP|IFF_RUNNING)) != (IFF_UP|IFF_RUNNING)) {
 		m_freem(m);
 		return ENETDOWN;
@@ -448,6 +450,7 @@ static int
 mpls_send_frame(struct mbuf *m, struct ifnet *ifp, struct rtentry *rt)
 {
 	union mpls_shim msh;
+	int ret;
 
 	if ((rt->rt_flags & RTF_GATEWAY) == 0)
 		return EHOSTUNREACH;
@@ -466,7 +469,10 @@ mpls_send_frame(struct mbuf *m, struct ifnet *ifp, struct rtentry *rt)
 	case IFT_ETHER:
 	case IFT_TUNNEL:
 	case IFT_LOOP:
-		return (*ifp->if_output)(ifp, m, rt->rt_gateway, rt);
+		KERNEL_LOCK(1, NULL);
+		ret =  (*ifp->if_output)(ifp, m, rt->rt_gateway, rt);
+		KERNEL_UNLOCK_ONE(NULL);
+		return ret;
 		break;
 	default:
 		return ENETUNREACH;

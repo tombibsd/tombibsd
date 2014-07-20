@@ -101,7 +101,7 @@ named_precmd()
 		;;
 	esac
 
-	for i in null random; do
+	for i in null random urandom; do
 		if [ ! -c "${named_chrootdir}/dev/$i" ]; then
 			rm -f "${named_chrootdir}/dev/$i"
 			(cd /dev && 

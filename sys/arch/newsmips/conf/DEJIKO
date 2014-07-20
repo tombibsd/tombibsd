@@ -38,6 +38,10 @@ options 	IPFILTER_COMPAT # Compat for IP-Filter
 options 	NFS_BOOT_BOOTPARAM
 options 	NFS_BOOTPARAM_NOGATEWAY
 
+# JIT compiler for bpfilter
+#options	SLJIT
+#options	BPFJIT
+
 # Compatibility options
 options 	COMPAT_43		# compatibility with 4.3BSD binaries
 options 	COMPAT_14		# NetBSD 1.4 binary compatibility

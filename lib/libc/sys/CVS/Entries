@@ -77,7 +77,7 @@
 /intro.2/1.55/Mon Mar 22 19:30:55 2010/-kk/
 /ioctl.2/1.23/Sun Dec 19 22:19:27 2010/-kk/
 /issetugid.2/1.12/Sat Apr 21 12:27:27 2012/-kk/
-/kill.2/1.22/Sun Jul 20 13:25:59 2014/-kk/
+/kill.2/1.23/Sun Jul 20 13:58:22 2014/-kk/
 /kqueue.2/1.33/Sat Nov 24 15:16:52 2012/-kk/
 /ktrace.2/1.17/Thu May 13 10:20:58 2004/-kk/
 /lfs_bmapv.2/1.10/Wed Apr 30 13:10:51 2008/-kk/
@@ -88,10 +88,10 @@
 /listen.2/1.16/Thu May 13 10:20:58 2004/-kk/
 /lseek.2/1.24/Mon Apr  5 07:53:47 2010/-kk/
 /lseek.c/1.11/Tue Mar 20 16:26:12 2012/-kk/
-/madvise.2/1.27/Tue Mar 29 18:54:54 2011/-kk/
+/madvise.2/1.28/Sun Jul 20 13:58:22 2014/-kk/
 /makelintstub/1.25/Sun Feb 12 01:46:05 2012/-kk/
 /mincore.2/1.19/Thu May 13 10:20:58 2004/-kk/
-/minherit.2/1.18/Fri Oct 13 20:52:57 2006/-kk/
+/minherit.2/1.19/Sun Jul 20 13:58:22 2014/-kk/
 /mkdir.2/1.29/Thu Oct 24 10:28:53 2013/-kk/
 /mkfifo.2/1.27/Thu Oct 24 10:28:53 2013/-kk/
 /mknod.2/1.28/Thu Oct 24 10:28:53 2013/-kk/
@@ -100,7 +100,7 @@
 /mlockall.2/1.13/Wed Apr 30 13:10:51 2008/-kk/
 /mmap.2/1.47/Thu Jan  5 15:19:52 2012/-kk/
 /mmap.c/1.15/Tue Mar 20 16:26:12 2012/-kk/
-/modctl.2/1.9/Tue Aug  7 01:19:05 2012/-kk/
+/modctl.2/1.10/Sun Jul 20 13:58:22 2014/-kk/
 /mount.2/1.49/Fri Nov 18 21:04:21 2011/-kk/
 /mprotect.2/1.24/Sun Apr  3 06:54:30 2011/-kk/
 /mremap.2/1.4/Thu Apr 28 12:00:55 2011/-kk/
@@ -194,7 +194,7 @@
 /utimes.2/1.40/Thu Oct 24 10:28:53 2013/-kk/
 /utrace.2/1.13/Fri May  2 18:38:32 2008/-kk/
 /uuidgen.2/1.4/Sun Jan 30 18:13:04 2005/-kk/
-/vfork.2/1.24/Thu Aug  7 16:44:11 2003/-kk/
+/vfork.2/1.27/Sun Jul 20 13:58:22 2014/-kk/
 /wait.2/1.27/Sat Apr  3 15:43:46 2010/-kk/
 /write.2/1.33/Thu Oct 24 10:28:53 2013/-kk/
 D

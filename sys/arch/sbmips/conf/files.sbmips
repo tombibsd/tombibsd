@@ -21,6 +21,9 @@ file arch/mips/mips/bus_dma.c
 ### MI device inclusion
 ###
 
+# Stack-less Just-In-Time compiler
+include	"external/bsd/sljit/conf/files.sljit"
+
 # Machine-independent I2O drivers.
 include "dev/i2o/files.i2o"
 

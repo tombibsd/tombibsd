@@ -125,7 +125,7 @@ PKGCONFIG=	fontconfig
 PKGCONFIG_SED_FLAGS= \
 	-e "s,@sysconfdir@,${X11ETCDIR},; \
 	    s,@localstatedir@,/var,; \
-	    s,@baseconfigdir@,/etc/fonts,; \
+	    s,@BASECONFIGDIR@,/etc/fonts,; \
 	    s,@fc_cachedir@,${FONTCONFIG_PATH},"
 
 # XXX

@@ -16,7 +16,7 @@ INCS=	ansi.h asm.h autoconf.h \
 	mainboard.h math.h mcontext.h mips_opcode.h mutex.h \
 	param.h pcb.h pmap.h pmc.h proc.h profile.h psl.h pte.h ptrace.h \
 	reg.h regdef.h regnum.h reloc.h rwlock.h \
-	setjmp.h signal.h sljitarch.h sysconf.h \
+	setjmp.h signal.h sysconf.h \
 	trap.h types.h \
 	vmparam.h \
 	wchar_limits.h \

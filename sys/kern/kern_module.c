@@ -1081,8 +1081,9 @@ module_do_load(const char *name, bool isdep, int flags,
 			error = module_do_load(buf, true, flags, NULL,
 			    &mod2, MODULE_CLASS_ANY, true);
 			if (error != 0) {
-				module_error("recursive load failed for `%s', "
-				    "error %d", mi->mi_name, error);
+				module_error("recursive load failed for `%s' "
+				    "(`%s' required), error %d", mi->mi_name,
+				    buf, error);
 				goto fail;
 			}
 			mod->mod_required[mod->mod_nrequired++] = mod2;

@@ -34,9 +34,9 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #ifdef _KERNEL_OPT
 #include "opt_execfmt.h"
-#define	MODDEPS	"compat"
+# define	DEPS1	"compat"
 #else
-#define	MODDEPS	"compat,ksem"
+# define	DEPS1	"compat,ksem"
 #endif
 
 #ifndef ELFSIZE
@@ -51,10 +51,16 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <compat/netbsd32/netbsd32_sysctl.h>
 #include <compat/netbsd32/netbsd32_exec.h>
 
+#if defined(EXEC_ELF32)
+# define	DEPS2	",exec_elf32"
+#else
+# define	DEPS2	""
+#endif
+
 #define ELF32_AUXSIZE (howmany(ELF_AUX_ENTRIES * sizeof(Aux32Info), \
     sizeof(Elf32_Addr)) + MAXPATHLEN + ALIGN(1))
 
-MODULE(MODULE_CLASS_EXEC, compat_netbsd32, MODDEPS);
+MODULE(MODULE_CLASS_EXEC, compat_netbsd32, DEPS1 DEPS2);
 
 static struct execsw netbsd32_execsw[] = {
 #ifdef EXEC_AOUT

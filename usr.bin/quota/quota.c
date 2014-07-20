@@ -502,30 +502,6 @@ getprivs(id_t id, int idtype)
 			}
 			err(1, "%s: quota_open", fst[i].f_mntonname);
 		}
-#if 0
-		if (strncmp(fst[i].f_fstypename, "nfs", 
-		    sizeof(fst[i].f_fstypename)) == 0) {
-			version = 0;
-			qup->numqvs = QUOTA_NLIMITS;
-			qup->qvs = malloc(qup->numqvs * sizeof(qup->qvs[0]));
-			if (qup->qvs == NULL) {
-				err(1, "Out of memory");
-			}
-			if (getnfsquota(fst[i].f_mntfromname,
-			    qup->qvs, id, ufs_quota_class_names[idtype]) != 1)
-				continue;
-		} else if ((fst[i].f_flag & ST_QUOTA) != 0) {
-			qup->numqvs = QUOTA_NLIMITS;
-			qup->qvs = malloc(qup->numqvs * sizeof(qup->qvs[0]));
-			if (qup->qvs == NULL) {
-				err(1, "Out of memory");
-			}
-			if (getvfsquota(fst[i].f_mntonname, qup->qvs, &version,
-			    id, idtype, dflag, 0) != 1)
-				continue;
-		} else
-			continue;
-#else
 		qup->numqvs = quota_getnumidtypes(qup->qh);
 		qup->qvs = malloc(qup->numqvs * sizeof(qup->qvs[0]));
 		if (qup->qvs == NULL) {
@@ -547,7 +523,6 @@ getprivs(id_t id, int idtype)
 				quotaval_clear(&qup->qvs[j]);
 			}
 		}
-#endif
 		(void)strlcpy(qup->fsname, fst[i].f_mntonname,
 		    sizeof(qup->fsname));
 		if (quphead == NULL)

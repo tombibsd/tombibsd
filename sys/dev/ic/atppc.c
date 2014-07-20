@@ -1663,7 +1663,7 @@ atppc_nibble_read(struct atppc_softc *atppc)
 			ctr &= ~HOSTBUSY;
 			atppc_w_ctr(atppc, ctr);
 
-			/* Event 11 - wait ack from peripherial */
+			/* Event 11 - wait ack from peripheral */
 			if (atppc->sc_use & ATPPC_USE_INTR)
 				atppc->sc_inerr = atppc_wait_interrupt(atppc,
 					&atppc->sc_in_cv, ATPPC_IRQ_nACK);
