@@ -77,9 +77,7 @@ nodes.c nodes.h: mknodes.sh nodetypes nodes.c.pat
 NBCOMPATLIB=   -L${TOOLDIR}/lib -lnbcompat
 .endif
 
-.if make(install)
 SUBDIR+=USD.doc
-.endif
 
 COPTS.printf.c = -Wno-format-nonliteral
 COPTS.jobs.c = -Wno-format-nonliteral

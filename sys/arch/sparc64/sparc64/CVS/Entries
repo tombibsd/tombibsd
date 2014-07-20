@@ -30,7 +30,7 @@
 /netbsd32_machdep.c/1.103/Fri Mar 14 04:28:17 2014/-kk/
 /netbsd32_sigcode.s/1.6/Thu May 29 14:51:26 2008/-kk/
 /ofw_machdep.c/1.42/Mon May 19 16:26:14 2014/-kk/
-/pmap.c/1.288/Mon Jun  9 00:28:52 2014/-kk/
+/pmap.c/1.289/Sun Jul 20 13:26:19 2014/-kk/
 /process_machdep.c/1.24/Tue Jan 14 16:05:01 2014/-kk/
 /procfs_machdep.c/1.6/Sat Apr 19 05:36:50 2014/-kk/
 /rbus_machdep.c/1.16/Fri Jul  1 18:49:24 2011/-kk/

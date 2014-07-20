@@ -133,7 +133,7 @@ static isc_result_t	addsuffix(char *filename, int len,
 		_r = algorithm_status(alg);	\
 		if (_r != ISC_R_SUCCESS)	\
 			return (_r);		\
-	} while (/*CONSTCOND*/0);
+	} while (/*CONSTCOND*/0);				\
 
 #if defined(OPENSSL)
 static void *
@@ -231,7 +231,7 @@ dst_lib_init2(isc_mem_t *mctx, isc_entropy_t *ectx,
 	RETERR(dst__opensslecdsa_init(&dst_t_func[DST_ALG_ECDSA384]));
 #endif
 #elif PKCS11CRYPTO
-	dst__pkcs11_init(mctx, engine);
+	RETERR(dst__pkcs11_init(mctx, engine));
 	RETERR(dst__pkcs11rsa_init(&dst_t_func[DST_ALG_RSAMD5]));
 	RETERR(dst__pkcs11rsa_init(&dst_t_func[DST_ALG_RSASHA1]));
 	RETERR(dst__pkcs11rsa_init(&dst_t_func[DST_ALG_NSEC3RSASHA1]));

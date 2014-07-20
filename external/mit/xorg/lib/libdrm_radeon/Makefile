@@ -17,8 +17,6 @@ SRCS=	radeon_bo.c \
 CPPFLAGS+=	-I${DESTDIR}${X11INCDIR}/libdrm
 CPPFLAGS+=	-I${DESTDIR}${X11INCDIR}/X11 -I${X11SRCDIR.drm}
 
-COPTS.radeon_cs_gem.c+=	-Wno-error	# XXX
-
 LIBDPLIBS=	drm	${.CURDIR}/../libdrm
 
 PKGCONFIG=	libdrm_radeon

@@ -10,7 +10,7 @@
 .PATH:	${SRCDIR}/tools
 
 .if ${MKDOC} != "no"
-FILESDIR=	/usr/share/doc/atf
+FILESDIR=	/usr/share/doc/reference/ref1/atf
 FILES=		AUTHORS COPYING NEWS README
 .endif
 

@@ -4,8 +4,7 @@
 
 LIB=		OSMesa
 
-MESA_SRC_MODULES=	main math vbo tnl shader swrast slang glapi common \
-			osmesa ss
+MESA_SRC_MODULES=	main math vbo tnl program swrast glapi common osmesa ss
 
 .PATH:		${X11SRCDIR.MesaLib}/include/GL
 INCS=		osmesa.h

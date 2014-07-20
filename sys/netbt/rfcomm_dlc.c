@@ -84,14 +84,14 @@ rfcomm_dlc_newconn(struct rfcomm_session *rs, int dlci)
 	 * a note of the best address and BDADDR_ANY matches in order to find
 	 * the oldest and most specific match.
 	 */
-	l2cap_sockaddr(rs->rs_l2cap, &laddr);
-	l2cap_peeraddr(rs->rs_l2cap, &raddr);
+	l2cap_sockaddr_pcb(rs->rs_l2cap, &laddr);
+	l2cap_peeraddr_pcb(rs->rs_l2cap, &raddr);
 	chan = RFCOMM_CHANNEL(dlci);
 	new = NULL;
 
 	any = best = NULL;
 	LIST_FOREACH(ls, &rfcomm_session_listen, rs_next) {
-		l2cap_sockaddr(ls->rs_l2cap, &addr);
+		l2cap_sockaddr_pcb(ls->rs_l2cap, &addr);
 
 		if (addr.bt_psm != laddr.bt_psm)
 			continue;

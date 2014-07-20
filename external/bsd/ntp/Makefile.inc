@@ -17,7 +17,7 @@ WARNS?=	4
 
 IDIST=		${NETBSDSRCDIR}/external/bsd/ntp/dist
 NTP_SRCDIR=	${NETBSDSRCDIR}/external/bsd/ntp
-NTP_HTMLDIR=	/usr/share/doc/html/ntp
+NTP_HTMLDIR=	/usr/share/doc/reference/ref8
 
 SYSCONFDIR=/etc
 LOCALSTATEDIR=/var

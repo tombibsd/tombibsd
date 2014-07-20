@@ -33,7 +33,6 @@
 #include <isc/string.h>
 #include <isc/util.h>
 #include <isc/task.h>
-#include <isc/timer.h>
 
 #include <dns/byaddr.h>
 #include <dns/fixedname.h>

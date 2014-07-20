@@ -893,12 +893,16 @@ svr4_stream_ti_ioctl(file_t *fp, struct lwp *l, register_t *retval, int fd, u_lo
 	switch (cmd) {
 	case SVR4_TI_GETMYNAME:
 		DPRINTF(("TI_GETMYNAME\n"));
-		cmd = PRU_SOCKADDR;
+		error = do_sys_getsockname(fd, &name);
+		if (error != 0)
+			return error;
 		break;
 
 	case SVR4_TI_GETPEERNAME:
 		DPRINTF(("TI_GETPEERNAME\n"));
-		cmd = PRU_PEERADDR;
+		error = do_sys_getpeername(fd, &name);
+		if (error != 0)
+			return error;
 		break;
 
 	case SVR4_TI_SETMYNAME:
@@ -912,10 +916,6 @@ svr4_stream_ti_ioctl(file_t *fp, struct lwp *l, register_t *retval, int fd, u_lo
 		DPRINTF(("ti_ioctl: Unknown ioctl %lx\n", cmd));
 		return ENOSYS;
 	}
-
-	error = do_sys_getsockname(l, fd, cmd, &name);
-	if (error != 0)
-		return error;
 
 	switch (st->s_family) {
 	case AF_INET:
@@ -1624,10 +1624,9 @@ svr4_sys_getmsg(struct lwp *l, const struct svr4_sys_getmsg_args *uap, register_
 		 * a connect verification.
 		 */
 
-		error = do_sys_getsockname(l, SCARG(uap, fd), PRU_SOCKADDR,
-		    &name);
+		error = do_sys_getsockname(SCARG(uap, fd), &name);
 		if (error != 0) {
-			DPRINTF(("getmsg: getpeername failed %d\n", error));
+			DPRINTF(("getmsg: getsockname failed %d\n", error));
 			goto out;
 		}
 

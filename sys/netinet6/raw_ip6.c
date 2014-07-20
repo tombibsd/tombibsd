@@ -645,11 +645,48 @@ rip6_detach(struct socket *so)
 }
 
 static int
-rip6_ioctl(struct socket *so, struct mbuf *m, 
-	struct mbuf *nam, struct mbuf *ifp, struct lwp *l)
+rip6_accept(struct socket *so, struct mbuf *nam)
 {
-	return in6_control(so, (u_long)m, (void *)nam,
-	    (struct ifnet *)ifp, l);
+	KASSERT(solocked(so));
+
+	return EOPNOTSUPP;
+}
+
+static int
+rip6_ioctl(struct socket *so, u_long cmd, void *nam, struct ifnet *ifp)
+{
+	return in6_control(so, cmd, nam, ifp);
+}
+
+static int
+rip6_stat(struct socket *so, struct stat *ub)
+{
+	KASSERT(solocked(so));
+
+	/* stat: don't bother with a blocksize */
+	return 0;
+}
+
+static int
+rip6_peeraddr(struct socket *so, struct mbuf *nam)
+{
+	KASSERT(solocked(so));
+	KASSERT(sotoin6pcb(so) != NULL);
+	KASSERT(nam != NULL);
+
+	in6_setpeeraddr(sotoin6pcb(so), nam);
+	return 0;
+}
+
+static int
+rip6_sockaddr(struct socket *so, struct mbuf *nam)
+{
+	KASSERT(solocked(so));
+	KASSERT(sotoin6pcb(so) != NULL);
+	KASSERT(nam != NULL);
+
+	in6_setsockaddr(sotoin6pcb(so), nam);
+	return 0;
 }
 
 int
@@ -659,7 +696,11 @@ rip6_usrreq(struct socket *so, int req, struct mbuf *m,
 	struct in6pcb *in6p = sotoin6pcb(so);
 	int error = 0;
 
+	KASSERT(req != PRU_ACCEPT);
 	KASSERT(req != PRU_CONTROL);
+	KASSERT(req != PRU_SENSE);
+	KASSERT(req != PRU_PEERADDR);
+	KASSERT(req != PRU_SOCKADDR);
 
 	if (req == PRU_PURGEIF) {
 		mutex_enter(softnet_lock);
@@ -828,28 +869,14 @@ rip6_usrreq(struct socket *so, int req, struct mbuf *m,
 		break;
 	}
 
-	case PRU_SENSE:
-		/*
-		 * stat: don't bother with a blocksize
-		 */
-		return 0;
 	/*
 	 * Not supported.
 	 */
 	case PRU_RCVOOB:
 	case PRU_RCVD:
 	case PRU_LISTEN:
-	case PRU_ACCEPT:
 	case PRU_SENDOOB:
 		error = EOPNOTSUPP;
-		break;
-
-	case PRU_SOCKADDR:
-		in6_setsockaddr(in6p, nam);
-		break;
-
-	case PRU_PEERADDR:
-		in6_setpeeraddr(in6p, nam);
 		break;
 
 	default:
@@ -902,12 +929,20 @@ sysctl_net_inet6_raw6_setup(struct sysctllog **clog)
 PR_WRAP_USRREQS(rip6)
 #define	rip6_attach		rip6_attach_wrapper
 #define	rip6_detach		rip6_detach_wrapper
+#define	rip6_accept		rip6_accept_wrapper
 #define	rip6_ioctl		rip6_ioctl_wrapper
+#define	rip6_stat		rip6_stat_wrapper
+#define	rip6_peeraddr		rip6_peeraddr_wrapper
+#define	rip6_sockaddr		rip6_sockaddr_wrapper
 #define	rip6_usrreq		rip6_usrreq_wrapper
 
 const struct pr_usrreqs rip6_usrreqs = {
 	.pr_attach	= rip6_attach,
 	.pr_detach	= rip6_detach,
+	.pr_accept	= rip6_accept,
 	.pr_ioctl	= rip6_ioctl,
+	.pr_stat	= rip6_stat,
+	.pr_peeraddr	= rip6_peeraddr,
+	.pr_sockaddr	= rip6_sockaddr,
 	.pr_generic	= rip6_usrreq,
 };

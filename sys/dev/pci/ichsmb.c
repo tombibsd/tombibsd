@@ -147,14 +147,14 @@ ichsmb_attach(device_t parent, device_t self, void *aux)
 
 	if ((conf & LPCIB_SMB_HOSTC_HSTEN) == 0) {
 		aprint_error_dev(self, "SMBus disabled\n");
-		return;
+		goto out;
 	}
 
 	/* Map I/O space */
 	if (pci_mapreg_map(pa, LPCIB_SMB_BASE, PCI_MAPREG_TYPE_IO, 0,
 	    &sc->sc_iot, &sc->sc_ioh, NULL, &iosize)) {
 		aprint_error_dev(self, "can't map I/O space\n");
-		return;
+		goto out;
 	}
 
 	sc->sc_poll = 1;
@@ -189,7 +189,7 @@ ichsmb_attach(device_t parent, device_t self, void *aux)
 	iba.iba_tag = &sc->sc_i2c_tag;
 	config_found(self, &iba, iicbus_print);
 
-	if (!pmf_device_register(self, NULL, NULL))
+out:	if (!pmf_device_register(self, NULL, NULL))
 		aprint_error_dev(self, "couldn't establish power handler\n");
 }
 

@@ -271,13 +271,13 @@ rfcomm_session_lookup(struct sockaddr_bt *src, struct sockaddr_bt *dest)
 		if (rs->rs_state == RFCOMM_SESSION_CLOSED)
 			continue;
 
-		l2cap_sockaddr(rs->rs_l2cap, &addr);
+		l2cap_sockaddr_pcb(rs->rs_l2cap, &addr);
 
 		if (bdaddr_same(&src->bt_bdaddr, &addr.bt_bdaddr) == 0)
 			if (bdaddr_any(&src->bt_bdaddr) == 0)
 				continue;
 
-		l2cap_peeraddr(rs->rs_l2cap, &addr);
+		l2cap_peeraddr_pcb(rs->rs_l2cap, &addr);
 
 		if (addr.bt_psm != dest->bt_psm)
 			continue;

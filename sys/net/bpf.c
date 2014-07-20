@@ -1388,15 +1388,17 @@ bpf_deliver(struct bpf_if *bp, void *(*cpfn)(void *, const void *, size_t),
     void *pkt, u_int pktlen, u_int buflen, const bool rcv)
 {
 	struct timespec ts;
-	bpf_args_t args;
+	bpf_args_t args = {
+		.pkt = (const uint8_t *)pkt,
+		.wirelen = pktlen,
+		.buflen = buflen,
+		.mem = NULL,
+		.arg = NULL
+	};
 	struct bpf_d *d;
 
 	const bpf_ctx_t *bc = NULL;
 	bool gottime = false;
-
-	args.pkt = (const uint8_t *)pkt;
-	args.wirelen = pktlen;
-	args.buflen = buflen;
 
 	/*
 	 * Note that the IPL does not have to be raised at this point.

@@ -53,7 +53,7 @@ static const char *text[DST_R_NRESULTS] = {
 	"no randomness available",		/*%< 19 */
 	"bad key type",				/*%< 20 */
 	"no engine",				/*%< 21 */
-	"illegal operation for an external key"	/*%< 22 */
+	"illegal operation for an external key",/*%< 22 */
 };
 
 #define DST_RESULT_RESULTSET			2

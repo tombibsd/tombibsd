@@ -112,12 +112,12 @@ rfcomm_bind(struct rfcomm_dlc *dlc, struct sockaddr_bt *addr)
 }
 
 /*
- * rfcomm_sockaddr(dlc, sockaddr)
+ * rfcomm_sockaddr_pcb(dlc, sockaddr)
  *
  * return local address
  */
 int
-rfcomm_sockaddr(struct rfcomm_dlc *dlc, struct sockaddr_bt *addr)
+rfcomm_sockaddr_pcb(struct rfcomm_dlc *dlc, struct sockaddr_bt *addr)
 {
 
 	memcpy(addr, &dlc->rd_laddr, sizeof(struct sockaddr_bt));
@@ -184,7 +184,7 @@ rfcomm_connect(struct rfcomm_dlc *dlc, struct sockaddr_bt *dest)
 	if (rfcomm_dlc_lookup(rs, dlc->rd_dlci))
 		return EBUSY;
 
-	l2cap_sockaddr(rs->rs_l2cap, &dlc->rd_laddr);
+	l2cap_sockaddr_pcb(rs->rs_l2cap, &dlc->rd_laddr);
 
 	/*
 	 * attach the DLC to the session and start it off
@@ -200,12 +200,12 @@ rfcomm_connect(struct rfcomm_dlc *dlc, struct sockaddr_bt *dest)
 }
 
 /*
- * rfcomm_peeraddr(dlc, sockaddr)
+ * rfcomm_peeraddr_pcb(dlc, sockaddr)
  *
  * return remote address
  */
 int
-rfcomm_peeraddr(struct rfcomm_dlc *dlc, struct sockaddr_bt *addr)
+rfcomm_peeraddr_pcb(struct rfcomm_dlc *dlc, struct sockaddr_bt *addr)
 {
 
 	memcpy(addr, &dlc->rd_raddr, sizeof(struct sockaddr_bt));
@@ -332,7 +332,7 @@ rfcomm_listen(struct rfcomm_dlc *dlc)
 		return EADDRNOTAVAIL;
 
 	LIST_FOREACH(rs, &rfcomm_session_listen, rs_next) {
-		l2cap_sockaddr(rs->rs_l2cap, &addr);
+		l2cap_sockaddr_pcb(rs->rs_l2cap, &addr);
 
 		if (addr.bt_psm != dlc->rd_laddr.bt_psm)
 			continue;

@@ -9,6 +9,4 @@ SRCS= \
 	swrast.c \
         swrast_span.c
 
-COPTS.swrast.c=		-Wno-error	# XXX const
-
 .include "${.CURDIR}/../dri.mk"

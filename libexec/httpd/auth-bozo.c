@@ -74,7 +74,11 @@ bozo_auth_check(bozo_httpreq_t *request, const char *file)
 	}
 	request->hr_authrealm = bozostrdup(httpd, dir);
 
-	snprintf(authfile, sizeof(authfile), "%s/%s", dir, AUTH_FILE);
+	if ((size_t)snprintf(authfile, sizeof(authfile), "%s/%s", dir, AUTH_FILE) >= 
+	  sizeof(authfile)) {
+		return bozo_http_error(httpd, 404, request,
+			"authfile path too long");
+	}
 	if (stat(authfile, &sb) < 0) {
 		debug((httpd, DEBUG_NORMAL,
 		    "bozo_auth_check realm `%s' dir `%s' authfile `%s' missing",

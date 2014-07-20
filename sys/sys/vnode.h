@@ -557,6 +557,10 @@ struct vnode *
 void	vnfree(struct vnode *);
 void	vremfree(struct vnode *);
 int	vcache_get(struct mount *, const void *, size_t, struct vnode **);
+int	vcache_rekey_enter(struct mount *, struct vnode *,
+	    const void *, size_t, const void *, size_t);
+void	vcache_rekey_exit(struct mount *, struct vnode *,
+	    const void *, size_t, const void *, size_t);
 void	vcache_remove(struct mount *, const void *, size_t);
 
 /* see vnsubr(9) */

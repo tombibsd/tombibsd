@@ -23,7 +23,8 @@ SRCS.atomic+=	atomic_xor_32_cas.c atomic_xor_16_cas.c atomic_xor_8_cas.c \
 		atomic_and_16_cas.c atomic_and_8_cas.c \
 		atomic_add_16_cas.c atomic_add_8_cas.c \
 		atomic_swap_16_cas.c atomic_swap_8_cas.c \
-		atomic_cas_32_cas.c atomic_cas_16_cas.c atomic_cas_8_cas.c
+		atomic_cas_32_cas.c atomic_cas_16_cas.c atomic_cas_8_cas.c \
+		atomic_load.c atomic_store.c
 .endif
 
 .else

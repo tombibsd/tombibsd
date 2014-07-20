@@ -4,7 +4,7 @@
 /frag6.c/1.55/Thu Oct 24 10:28:58 2013/-kk/
 /icmp6.c/1.169/Sat Jun 14 03:56:48 2014/-kk/
 /icmp6_private.h/1.3/Mon Apr 28 20:24:10 2008/-kk/
-/in6.c/1.171/Sat Jun 14 03:56:48 2014/-kk/
+/in6.c/1.174/Sun Jul 20 13:26:34 2014/-kk/
 /in6.h/1.78/Mon Jun  9 00:29:32 2014/-kk/
 /in6_cksum.c/1.28/Mon Apr 25 22:05:05 2011/-kk/
 /in6_gif.c/1.60/Tue Jun  3 02:54:45 2014/-kk/
@@ -17,7 +17,7 @@
 /in6_pcb.h/1.37/Mon Jun 25 15:28:39 2012/-kk/
 /in6_proto.c/1.103/Mon Jun  9 00:29:32 2014/-kk/
 /in6_src.c/1.54/Tue Jun  3 02:54:45 2014/-kk/
-/in6_var.h/1.69/Mon Jun  9 00:29:33 2014/-kk/
+/in6_var.h/1.70/Sun Jul 20 13:26:34 2014/-kk/
 /ip6_etherip.c/1.15/Sun Jul 17 20:54:53 2011/-kk/
 /ip6_etherip.h/1.2/Tue Aug 24 00:07:00 2010/-kk/
 /ip6_flow.c/1.23/Tue Jun  3 02:54:45 2014/-kk/
@@ -35,11 +35,11 @@
 /mld6_var.h/1.10/Sat Nov 19 22:51:29 2011/-kk/
 /nd6.c/1.152/Sat Jun 14 03:56:48 2014/-kk/
 /nd6.h/1.59/Mon Jun  9 00:29:33 2014/-kk/
-/nd6_nbr.c/1.99/Fri Jan 31 08:48:56 2014/-kk/
+/nd6_nbr.c/1.100/Sun Jul 20 13:26:34 2014/-kk/
 /nd6_rtr.c/1.91/Tue Jun  3 02:54:45 2014/-kk/
 /pim6.h/1.5/Sat Dec 10 23:39:56 2005/-kk/
 /pim6_var.h/1.14/Tue Apr 15 05:40:15 2008/-kk/
-/raw_ip6.c/1.120/Thu Jun 26 06:46:41 2014/-kk/
+/raw_ip6.c/1.127/Sun Jul 20 13:26:34 2014/-kk/
 /raw_ip6.h/1.4/Tue Apr 15 05:13:37 2008/-kk/
 /route6.c/1.23/Tue Apr 15 03:57:04 2008/-kk/
 /scope6.c/1.9/Tue Jun  3 02:54:45 2014/-kk/
@@ -47,6 +47,6 @@
 /udp6.h/1.7/Sat Dec 10 23:39:56 2005/-kk/
 /udp6_output.c/1.44/Thu Oct 24 10:28:58 2013/-kk/
 /udp6_private.h/1.3/Mon Apr 28 20:24:10 2008/-kk/
-/udp6_usrreq.c/1.100/Thu Jun 26 06:46:41 2014/-kk/
+/udp6_usrreq.c/1.107/Sun Jul 20 13:26:34 2014/-kk/
 /udp6_var.h/1.27/Tue Jun  3 03:10:00 2014/-kk/
 D

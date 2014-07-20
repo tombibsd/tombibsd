@@ -1,12 +1,12 @@
 #	$NetBSD$
 #	@(#)Makefile	8.1 (Berkeley) 8/14/93
 
-DIR=	usd/03.shell
-SRCS=	Rv7man t.mac t1 t2 t3 t4
-MACROS= -ms
-
-paper.ps: ${SRCS}
-	${TOOL_REFER} -e -p ${SRCS} | \
-	    ${TOOL_ROFF_PS} ${MACROS} > ${.TARGET}
+SECTION=reference/ref1
+ARTICLE=sh
+SRCS=	referargs t.mac t1 t2 t3 t4
+MACROS=-ms
+ROFF_REFER=yes
+#REFER_ARGS=-e -p Rv7man
+EXTRAHTMLFILES=sh1.png sh2.png sh3.png sh4.png sh5.png
 
 .include <bsd.doc.mk>

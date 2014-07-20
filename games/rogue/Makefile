@@ -12,9 +12,7 @@ HIDEGAME=hidegame
 SETGIDGAME=yes
 MAN=	rogue.6
 
-.if make(install)
 SUBDIR+=USD.doc
-.endif
 
 .include <bsd.prog.mk>
 .include <bsd.subdir.mk>

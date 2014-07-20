@@ -997,7 +997,7 @@ intel_cpu_cacheinfo(struct cpu_info *ci)
 				    desc);
 				if (cai != NULL)
 					ci->ci_cinfo[cai->cai_index] = *cai;
-				else if (verbose)
+				else if ((verbose != 0) && (desc != 0xff))
 					printf("Unknown cacheinfo desc %02x\n",
 					    desc);
 			}

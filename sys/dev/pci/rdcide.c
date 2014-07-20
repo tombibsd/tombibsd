@@ -46,9 +46,14 @@ static int  rdcide_match(device_t, cfdata_t, void *);
 static void rdcide_attach(device_t, device_t, void *);
 
 static const struct pciide_product_desc pciide_intel_products[] =  {
-	{ PCI_PRODUCT_RDC_IDE,
+	{ PCI_PRODUCT_RDC_R1011_IDE,
 	  0,
-	  "RDC IDE controller",
+	  "RDC R1011 IDE controller",
+	  rdcide_chip_map,
+	},
+	{ PCI_PRODUCT_RDC_R1012_IDE,
+	  0,
+	  "RDC R1012 IDE controller",
 	  rdcide_chip_map,
 	},
 };

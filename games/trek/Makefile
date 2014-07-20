@@ -15,9 +15,7 @@ DPADD=	${LIBM}
 LDADD=	-lm
 HIDEGAME=hidegame
 
-.if make(install)
 SUBDIR+=USD.doc
-.endif
 
 COPTS.getpar.c += -Wno-format-nonliteral
 

@@ -93,7 +93,7 @@ dns_ds_buildrdata(dns_name_t *owner, dns_rdata_t *key,
 		isc_gost_invalidate(&gost);		\
 		return (ret);				\
 	}						\
-} while (0)
+} while (/*CONSTCOND*/0)
 
 	case DNS_DSDIGEST_GOST:
 		RETERR(isc_gost_init(&gost));

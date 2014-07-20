@@ -219,6 +219,8 @@ uhid_detach(device_t self, int flags)
 
 	sc->sc_dying = 1;
 
+	pmf_device_deregister(self);
+
 	mutex_enter(&sc->sc_lock);
 	if (sc->sc_hdev.sc_state & UHIDEV_OPEN) {
 		if (--sc->sc_refcnt >= 0) {

@@ -30,20 +30,20 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <sys/param.h>
 #include <sys/systm.h>
+#include <sys/device.h>
 
 #include <machine/autoconf.h>
 
-static int cpumatch(struct device *, struct cfdata *, void *);
-static void cpuattach(struct device *, struct device *, void *);
+static int cpumatch(device_t, cfdata_t, void *);
+static void cpuattach(device_t, device_t, void *);
 
-CFATTACH_DECL(cpu, sizeof (struct device),
-    cpumatch, cpuattach, NULL, NULL);
+CFATTACH_DECL_NEW(cpu, 0, cpumatch, cpuattach, NULL, NULL);
 
 extern struct cfdriver cpu_cd;
 static int __attached; /* PlayStation 2 has only one CPU */
 
 static int
-cpumatch(struct device *parent, struct cfdata *cf, void *aux)
+cpumatch(device_t parent, cfdata_t cf, void *aux)
 {
 	struct mainbus_attach_args *ma = aux;
 
@@ -55,11 +55,11 @@ cpumatch(struct device *parent, struct cfdata *cf, void *aux)
 }
 
 static void
-cpuattach(struct device *parent, struct device *dev, void *aux)
+cpuattach(struct device *parent, struct device *self, void *aux)
 {
 
 	printf(": ");
 	__attached = 1;
 
-	cpu_identify();
+	cpu_identify(self);
 }

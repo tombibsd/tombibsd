@@ -463,9 +463,9 @@ int l2cap_ctloutput(int, struct socket *, struct sockopt *);
 /* l2cap_upper.c */
 int l2cap_attach_pcb(struct l2cap_channel **, const struct btproto *, void *);
 int l2cap_bind(struct l2cap_channel *, struct sockaddr_bt *);
-int l2cap_sockaddr(struct l2cap_channel *, struct sockaddr_bt *);
+int l2cap_sockaddr_pcb(struct l2cap_channel *, struct sockaddr_bt *);
 int l2cap_connect(struct l2cap_channel *, struct sockaddr_bt *);
-int l2cap_peeraddr(struct l2cap_channel *, struct sockaddr_bt *);
+int l2cap_peeraddr_pcb(struct l2cap_channel *, struct sockaddr_bt *);
 int l2cap_disconnect(struct l2cap_channel *, int);
 void l2cap_detach_pcb(struct l2cap_channel **);
 int l2cap_listen(struct l2cap_channel *);

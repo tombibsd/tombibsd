@@ -44,7 +44,7 @@
 		result = (x); \
 		if (result != ISC_R_SUCCESS) \
 			goto failure; \
-	} while (0)
+	} while (/*CONSTCOND*/0)
 
 /* For this simple example, use fixed sized strings */
 struct record {

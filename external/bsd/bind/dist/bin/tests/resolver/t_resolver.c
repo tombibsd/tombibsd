@@ -1,7 +1,7 @@
 /*	$NetBSD$	*/
 
 /*
- * Copyright (C) 2011-2013  Internet Systems Consortium, Inc. ("ISC")
+ * Copyright (C) 2011-2014  Internet Systems Consortium, Inc. ("ISC")
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -106,7 +106,7 @@ destroy_resolver(dns_resolver_t **resolverp) {
 }
 
 static void
-test_dns_resolver_create() {
+test_dns_resolver_create(void) {
 	dns_resolver_t *resolver = NULL;
 
 	t_assert("test_dns_resolver_create", 1, T_REQUIRED, "%s",

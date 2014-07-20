@@ -50,7 +50,7 @@ int	aarpresolve(struct ifnet *, struct mbuf *, const struct sockaddr_at *,
 void	aarpinput(struct ifnet *, struct mbuf *);
 int	at_broadcast(const struct sockaddr_at *);
 void	aarp_clean(void);
-int	at_control(u_long, void *, struct ifnet *, struct lwp *);
+int	at_control(u_long, void *, struct ifnet *);
 int	at_inithead(void **, int);
 void	at_purgeaddr(struct ifaddr *);
 void	at_purgeif(struct ifnet *);

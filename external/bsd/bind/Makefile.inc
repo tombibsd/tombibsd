@@ -27,7 +27,7 @@ NAMED_USE_PTHREADS?=no
 
 IDIST=		${NETBSDSRCDIR}/external/bsd/bind/dist
 BIND_SRCDIR=	${NETBSDSRCDIR}/external/bsd/bind
-BIND_HTMLDIR=	/usr/share/doc/html/bind9
+BIND_HTMLDIR=	/usr/share/doc/reference/ref8/bind9
 
 .include "${IDIST}/version"
 

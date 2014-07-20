@@ -68,8 +68,11 @@ static int	sockin_do_init(void);
 static void	sockin_init(void);
 static int	sockin_attach(struct socket *, int);
 static void	sockin_detach(struct socket *);
-static int	sockin_ioctl(struct socket *, struct mbuf *, struct mbuf *,
-			     struct mbuf *control, struct lwp *);
+static int	sockin_accept(struct socket *, struct mbuf *);
+static int	sockin_ioctl(struct socket *, u_long, void *, struct ifnet *);
+static int	sockin_stat(struct socket *, struct stat *);
+static int	sockin_peeraddr(struct socket *, struct mbuf *);
+static int	sockin_sockaddr(struct socket *, struct mbuf *);
 static int	sockin_usrreq(struct socket *, int, struct mbuf *,
 			      struct mbuf *, struct mbuf *, struct lwp *);
 static int	sockin_ctloutput(int op, struct socket *, struct sockopt *);
@@ -77,7 +80,11 @@ static int	sockin_ctloutput(int op, struct socket *, struct sockopt *);
 static const struct pr_usrreqs sockin_usrreqs = {
 	.pr_attach = sockin_attach,
 	.pr_detach = sockin_detach,
+	.pr_accept = sockin_accept,
 	.pr_ioctl = sockin_ioctl,
+	.pr_stat = sockin_stat,
+	.pr_peeraddr = sockin_peeraddr,
+	.pr_sockaddr = sockin_sockaddr,
 	.pr_generic = sockin_usrreq,
 };
 
@@ -277,7 +284,7 @@ sockin_process(struct socket *so)
 }
 
 static void
-sockin_accept(struct socket *so)
+sockin_waccept(struct socket *so)
 {
 	struct socket *nso;
 	struct sockaddr_in6 sin;
@@ -356,7 +363,7 @@ sockinworker(void *arg)
 						so = su_iter->su_so;
 						mutex_exit(&su_mtx);
 						if(so->so_options&SO_ACCEPTCONN)
-							sockin_accept(so);
+							sockin_waccept(so);
 						else
 							sockin_process(so);
 						mutex_enter(&su_mtx);
@@ -453,10 +460,56 @@ sockin_detach(struct socket *so)
 }
 
 static int
-sockin_ioctl(struct socket *so, struct mbuf *m, struct mbuf *nam,
-	struct mbuf *control, struct lwp *l)
+sockin_accept(struct socket *so, struct mbuf *nam)
+{
+	KASSERT(solocked(so));
+
+	/* we do all the work in the worker thread */
+	return 0;
+}
+
+static int
+sockin_ioctl(struct socket *so, u_long cmd, void *nam, struct ifnet *ifp)
 {
 	return ENOTTY;
+}
+
+static int
+sockin_stat(struct socket *so, struct stat *ub)
+{
+	KASSERT(solocked(so));
+
+	return 0;
+}
+
+static int
+sockin_peeraddr(struct socket *so, struct mbuf *nam)
+{
+	KASSERT(solocked(so));
+
+	int error = 0;
+	int slen = nam->m_len;
+
+	error = rumpcomp_sockin_getname(SO2S(so),
+	    mtod(nam, struct sockaddr *), &slen, RUMPCOMP_SOCKIN_PEERNAME);
+	if (error == 0)
+		nam->m_len = slen;
+	return error;
+}
+
+static int
+sockin_sockaddr(struct socket *so, struct mbuf *nam)
+{
+	KASSERT(solocked(so));
+
+	int error = 0;
+	int slen = nam->m_len;
+
+	error = rumpcomp_sockin_getname(SO2S(so),
+	    mtod(nam, struct sockaddr *), &slen, RUMPCOMP_SOCKIN_SOCKNAME);
+	if (error == 0)
+		nam->m_len = slen;
+	return error;
 }
 
 static int
@@ -465,13 +518,13 @@ sockin_usrreq(struct socket *so, int req, struct mbuf *m, struct mbuf *nam,
 {
 	int error = 0;
 
+	KASSERT(req != PRU_ACCEPT);
 	KASSERT(req != PRU_CONTROL);
+	KASSERT(req != PRU_SENSE);
+	KASSERT(req != PRU_PEERADDR);
+	KASSERT(req != PRU_SOCKADDR);
 
 	switch (req) {
-	case PRU_ACCEPT:
-		/* we do all the work in the worker thread */
-		break;
-
 	case PRU_BIND:
 		error = rumpcomp_sockin_bind(SO2S(so),
 		    mtod(nam, const struct sockaddr *),
@@ -548,23 +601,6 @@ sockin_usrreq(struct socket *so, int req, struct mbuf *m, struct mbuf *nam,
 	case PRU_SHUTDOWN:
 		removesock(so);
 		break;
-
-	case PRU_SOCKADDR:
-	case PRU_PEERADDR:
-	{
-		int slen = nam->m_len;
-		enum rumpcomp_sockin_getnametype which;
-
-		if (req == PRU_SOCKADDR)
-			which = RUMPCOMP_SOCKIN_SOCKNAME;
-		else
-			which = RUMPCOMP_SOCKIN_PEERNAME;
-		error = rumpcomp_sockin_getname(SO2S(so),
-		    mtod(nam, struct sockaddr *), &slen, which);
-		if (error == 0)
-			nam->m_len = slen;
-		break;
-	}
 
 	default:
 		panic("sockin_usrreq: IMPLEMENT ME, req %d not supported", req);

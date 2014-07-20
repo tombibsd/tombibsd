@@ -53,7 +53,7 @@
 			(pt).bitlen = 0; \
 		} \
 		isc_refcount_init(&(pt).refcount, 0); \
-	} while(0)
+	} while(/*CONSTCOND*/0)
 
 typedef struct isc_prefix {
 	isc_mem_t *mctx;

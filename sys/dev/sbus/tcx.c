@@ -903,9 +903,8 @@ tcx_clearscreen(struct tcx_softc *sc, int spc)
 	uint64_t spc64;
 	int i, len;
 
-	bg |=  ((uint64_t)sc->sc_bg << 32);
-	spc64 = (spc & 3) << 24;
-	bg |= spc64;
+	spc64 = ((spc & 3) << 24) | sc->sc_bg;
+	bg |= (spc64 << 32);
 
 	len = sc->sc_fb.fb_type.fb_width * sc->sc_fb.fb_type.fb_height;
 	for (i = 0; i < len; i += 32)

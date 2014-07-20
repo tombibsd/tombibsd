@@ -14,6 +14,11 @@
 /* .nf
 
  /*
+  * System library.
+  */
+#include <stdarg.h>
+
+ /*
   * Utility library.
   */
 #include <attr.h>

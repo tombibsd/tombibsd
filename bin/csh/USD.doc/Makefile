@@ -1,12 +1,12 @@
 #	$NetBSD$
 #	@(#)Makefile	8.1 (Berkeley) 8/14/93
 
-DIR=	usd/04.csh
+SECTION=reference/ref1
+ARTICLE=csh
 SRCS=	tabs csh.1 csh.2 csh.3 csh.4 csh.ap csh.g
 MACROS= -ms
-
-paper.ps: ${SRCS}
-	${TOOL_SOELIM} -I${.CURDIR} ${.ALLSRC} | \
-	    ${TOOL_ROFF_PS} ${MACROS} > ${.TARGET}                  
+EXTRAHTMLFILES=\
+	csh1.png csh2.png csh3.png csh4.png csh5.png csh6.png csh7.png \
+	csh8.png csh9.png
 
 .include <bsd.doc.mk>

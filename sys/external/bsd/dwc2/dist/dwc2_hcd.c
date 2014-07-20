@@ -1845,7 +1845,7 @@ void dwc2_hcd_dump_state(struct dwc2_hsotg *hsotg)
 		dev_dbg(hsotg->dev, "    qh: %p\n", chan->qh);
 
 		if (chan->xfer_started) {
-			dev_dbg(hsotg->dev, "    hfnum: 0x%08x\n", 
+			dev_dbg(hsotg->dev, "    hfnum: 0x%08x\n",
 			    DWC2_READ_4(hsotg, HFNUM));
 			dev_dbg(hsotg->dev, "    hcchar: 0x%08x\n",
 			    DWC2_READ_4(hsotg, HCCHAR(i)));

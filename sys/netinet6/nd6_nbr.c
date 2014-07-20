@@ -1097,6 +1097,8 @@ nd6_newaddrmsg(struct ifaddr *ifa)
 /*
  * Start Duplicate Address Detection (DAD) for specified interface address.
  *
+ * Note that callout is used when xtick > 0 and not when xtick == 0.
+ *
  * xtick: minimum delay ticks for IFF_UP event
  */
 void

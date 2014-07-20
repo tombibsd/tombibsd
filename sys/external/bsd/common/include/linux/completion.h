@@ -29,6 +29,20 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+/*
+ * Notes on porting:
+ *
+ * - Linux does not have destroy_completion.  You must add it yourself
+ *   in the appropriate place.
+ *
+ * - Some Linux code does `completion->done++' or similar.  Convert
+ *   that to complete(completion) and suggest the same change upstream,
+ *   unless it turns out there actually is a good reason to do that, in
+ *   which case the Linux completion API should be extended with a
+ *   sensible name for this that doesn't expose the guts of `struct
+ *   completion'.
+ */
+
 #ifndef _LINUX_COMPLETION_H_
 #define _LINUX_COMPLETION_H_
 

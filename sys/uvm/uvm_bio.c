@@ -210,6 +210,12 @@ ubc_init(void)
 				UVM_ADV_RANDOM, UVM_FLAG_NOMERGE)) != 0) {
 		panic("ubc_init: failed to map ubc_object");
 	}
+}
+
+void
+ubchist_init(void)
+{
+
 	UVMHIST_INIT(ubchist, 300);
 }
 

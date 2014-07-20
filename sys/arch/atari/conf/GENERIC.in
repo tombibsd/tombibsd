@@ -19,6 +19,12 @@ include "arch/atari/conf/std.milan"
 options 	INCLUDE_CONFIG_FILE	# embed config file in kernel binary
 #endif /* !SMALL030_KERNEL */
 
+#if !defined(SMALL030_KERNEL)
+makeoptions	COPTS="-O2 -fno-reorder-blocks"	# see share/mk/sys.mk
+#else
+makeoptions	COPTS="-Os"			# optimize for space
+#endif /* !SMALL030_KERNEL */
+
 #if defined(SMALL030_KERNEL) || \
   (!defined(TT030_KERNEL) && !defined(HADES_KERNEL) && !defined(MILAN_KERNEL))
 #define       NO_PHYS_NETWORK 1

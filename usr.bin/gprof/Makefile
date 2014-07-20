@@ -1,7 +1,5 @@
 #	$NetBSD$
 
-.if make(install)
-SUBDIR=	PSD.doc
-.endif
+SUBDIR=PSD.doc
 
 .include <bsd.subdir.mk>

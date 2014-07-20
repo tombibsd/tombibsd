@@ -20,6 +20,7 @@ CPPFLAGS+=	-DLIBRUMPUSER
 SRCS=		rumpuser.c
 SRCS+=		rumpuser_pth.c
 SRCS+=		rumpuser_component.c rumpuser_bio.c
+SRCS+=		rumpuser_file.c rumpuser_mem.c
 
 SRCS+=		rumpuser_errtrans.c rumpuser_sigtrans.c
 

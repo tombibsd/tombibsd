@@ -283,7 +283,7 @@ extent_create(const char *name, u_long start, u_long end,
 			LIST_INSERT_HEAD(&fex->fex_freelist, rp, er_link);
 		}
 	} else {
-		ex = (struct extent *)kmem_alloc(sizeof(struct extent),
+		ex = kmem_alloc(sizeof(*ex),
 		    (flags & EX_WAITOK) ? KM_SLEEP : KM_NOSLEEP);
 		if (ex == NULL)
 			return (NULL);

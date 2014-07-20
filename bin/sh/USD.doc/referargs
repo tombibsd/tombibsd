@@ -1,0 +1,8 @@
+.\" $NetBSD$
+.\"
+.\" Arguments for refer; these were previously passed on the refer(1)
+.\" command line: -e -p Rv7man
+.R1
+accumulate
+database Rv7man
+.R2

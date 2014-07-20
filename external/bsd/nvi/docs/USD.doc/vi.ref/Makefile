@@ -2,25 +2,18 @@
 #
 #	@(#)Makefile	8.20 (Berkeley) 8/18/96
 
-DIR=		usd/13.viref
-SRCS=		vi.ref ex.cmd.roff set.opt.roff vi.cmd.roff ref.so
+SECTION=	reference/ref1
+ARTICLE=	vi
+SRCS=		vi.ref
+DEPSRCS=	ex.cmd.roff set.opt.roff vi.cmd.roff ref.so index.so
 MACROS=		-me
-CLEANFILES+=	vi.ref.txt vi.ref.ps index index.so
+ROFF_TBL=	yes
+CLEANFILES+=	index index.so
 
-all: vi.ref.txt vi.ref.ps
+.include <bsd.doc.mk>
 
-vi.ref.txt: vi.ref index.so
-	${TOOL_SOELIM} vi.ref | ${TOOL_TBL} | ${TOOL_ROFF_ASCII} ${MACROS} > $@
-	rm -f index
-	chmod 444 $@
-
-vi.ref.ps: vi.ref index.so
-	${TOOL_SOELIM} vi.ref | ${TOOL_TBL} | ${TOOL_ROFF_PS} ${MACROS} > $@
-	rm -f index
-	chmod 444 $@
-
+# index.so is generated.
 index.so: vi.ref
-	# Build index.so, side-effect of building the paper.
 	${TOOL_SOELIM} vi.ref | ${TOOL_TBL} | \
 	    ${TOOL_ROFF_PS} ${MACROS} > /dev/null
 	sed -e 's/MINUSSIGN/\\-/' \
@@ -30,6 +23,3 @@ index.so: vi.ref
 	sort -u '-t	' +0 -1 +1n | awk -f merge.awk | \
 	sed -e 's/__SPACE/ /g' > $@
 	rm -f index
-	chmod 444 $@
-
-.include <bsd.doc.mk>

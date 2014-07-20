@@ -44,7 +44,7 @@ CPPFLAGS+=	-I${KERNDIR}/../../../common/include
 .endif
 
 .if !defined(RUMPKERNEL)
-.include ".${PARSEDIR}/Makefile.compiler-rt"
+.include "${.PARSEDIR}/Makefile.compiler-rt"
 .endif
 
 # Other stuff

@@ -50,8 +50,10 @@ __KERNEL_RCSID(0, "$NetBSD$");
 static int sockaddr_dl_cmp(const struct sockaddr *, const struct sockaddr *);
 static int link_attach(struct socket *, int);
 static void link_detach(struct socket *);
-static int link_ioctl(struct socket *, struct mbuf *, struct mbuf *,
-    struct mbuf *, struct lwp *);
+static int link_ioctl(struct socket *, u_long, void *, struct ifnet *);
+static int link_stat(struct socket *, struct stat *);
+static int link_peeraddr(struct socket *, struct mbuf *);
+static int link_sockaddr(struct socket *, struct mbuf *);
 static int link_usrreq(struct socket *, int, struct mbuf *, struct mbuf *,
     struct mbuf *, struct lwp *);
 static void link_init(void);
@@ -66,6 +68,9 @@ static const struct pr_usrreqs link_usrreqs = {
 	.pr_attach	= link_attach,
 	.pr_detach	= link_detach,
 	.pr_ioctl	= link_ioctl,
+	.pr_stat	= link_stat,
+	.pr_peeraddr	= link_peeraddr,
+	.pr_sockaddr	= link_sockaddr,
 	.pr_generic	= link_usrreq,
 };
 
@@ -100,7 +105,7 @@ link_init(void)
 
 static int
 link_control(struct socket *so, unsigned long cmd, void *data,
-    struct ifnet *ifp, struct lwp *l)
+    struct ifnet *ifp)
 {
 	int error, s;
 	bool isactive, mkactive;
@@ -233,11 +238,33 @@ link_detach(struct socket *so)
 }
 
 static int
-link_ioctl(struct socket *so, struct mbuf *m, struct mbuf *nam,
-	struct mbuf *ifp, struct lwp *l)
+link_ioctl(struct socket *so, u_long cmd, void *nam, struct ifnet *ifp)
 {
-	return link_control(so, (unsigned long)m, nam,
-	    (struct ifnet *)ifp, l);
+	return link_control(so, cmd, nam, ifp);
+}
+
+static int
+link_stat(struct socket *so, struct stat *ub)
+{
+	KASSERT(solocked(so));
+
+	return EOPNOTSUPP;
+}
+
+static int
+link_peeraddr(struct socket *so, struct mbuf *nam)
+{
+	KASSERT(solocked(so));
+
+	return EOPNOTSUPP;
+}
+
+static int
+link_sockaddr(struct socket *so, struct mbuf *nam)
+{
+ 	KASSERT(solocked(so));
+
+	return EOPNOTSUPP;
 }
 
 static int
@@ -247,6 +274,9 @@ link_usrreq(struct socket *so, int req, struct mbuf *m, struct mbuf *nam,
 	KASSERT(req != PRU_ATTACH);
 	KASSERT(req != PRU_DETACH);
 	KASSERT(req != PRU_CONTROL);
+	KASSERT(req != PRU_SENSE);
+	KASSERT(req != PRU_PEERADDR);
+	KASSERT(req != PRU_SOCKADDR);
 
 	return EOPNOTSUPP;
 }

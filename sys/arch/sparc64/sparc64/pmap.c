@@ -742,8 +742,7 @@ pmap_bootstrap(u_long kernelstart, u_long kernelend)
 	 * Get hold or the message buffer.
 	 */
 	msgbufp = (struct kern_msgbuf *)(vaddr_t)MSGBUF_VA;
-/* XXXXX -- increase msgbufsiz for uvmhist printing */
-	msgbufsiz = 4*PAGE_SIZE /* round_page(sizeof(struct msgbuf)) */;
+	msgbufsiz = MSGBUFSIZE;
 	BDPRINTF(PDB_BOOT, ("Trying to allocate msgbuf at %lx, size %lx\n",
 			    (long)msgbufp, (long)msgbufsiz));
 	if ((long)msgbufp !=

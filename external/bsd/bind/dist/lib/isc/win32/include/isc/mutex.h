@@ -52,6 +52,6 @@ TryEnterCriticalSection(LPCRITICAL_SECTION lpCriticalSection);
 /*
  * This is a placeholder for now since we are not keeping any mutex stats
  */
-#define isc_mutex_stats(fp) do {} while (/*CONSTCOND*/0)
+#define isc_mutex_stats(fp) do {} while (0)
 
 #endif /* ISC_MUTEX_H */

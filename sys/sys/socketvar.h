@@ -346,7 +346,8 @@ int	copyout_sockname(struct sockaddr *, unsigned int *, int, struct mbuf *);
 int	copyout_msg_control(struct lwp *, struct msghdr *, struct mbuf *);
 void	free_control_mbuf(struct lwp *, struct mbuf *, struct mbuf *);
 
-int	do_sys_getsockname(struct lwp *, int, int, struct mbuf **);
+int	do_sys_getpeername(int, struct mbuf **);
+int	do_sys_getsockname(int, struct mbuf **);
 int	do_sys_sendmsg(struct lwp *, int, struct msghdr *, int, register_t *);
 int	do_sys_recvmsg(struct lwp *, int, struct msghdr *, struct mbuf **,
 	    struct mbuf **, register_t *);

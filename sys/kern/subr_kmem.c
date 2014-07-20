@@ -62,15 +62,15 @@
 
 /*
  * KMEM_SIZE: detect alloc/free size mismatch bugs.
- *	Prefix each allocations with a fixed-sized header and record the exact
- *	user-requested allocation size in it. When freeing, compare it with
- *	kmem_free's "size" argument.
+ *	Prefix each allocations with a fixed-sized, aligned header and record
+ *	the exact user-requested allocation size in it. When freeing, compare
+ *	it with kmem_free's "size" argument.
  */
 
 /*
  * KMEM_REDZONE: detect overrun bugs.
- *	Add a 2-byte pattern (allocate one more page if needed) at the end
- *	of each allocated buffer. Check this pattern on kmem_free.
+ *	Add a 2-byte pattern (allocate one more memory chunk if needed) at the
+ *	end of each allocated buffer. Check this pattern on kmem_free.
  *
  * KMEM_POISON: detect modify-after-free bugs.
  *	Fill freed (in the sense of kmem_free) memory with a garbage pattern.
@@ -167,7 +167,7 @@ static pool_cache_t kmem_cache_big[KMEM_CACHE_BIG_COUNT] __cacheline_aligned;
 static size_t kmem_cache_big_maxidx __read_mostly;
 
 #if defined(DIAGNOSTIC) && defined(_HARDKERNEL)
-#define KMEM_SIZE
+#define	KMEM_SIZE
 #endif /* defined(DIAGNOSTIC) */
 
 #if defined(DEBUG) && defined(_HARDKERNEL)
@@ -187,8 +187,8 @@ static void kmem_poison_check(void *, size_t);
 
 #if defined(KMEM_REDZONE)
 #define	REDZONE_SIZE	2
-static void kmem_redzone_fill(void *p, size_t sz);
-static void kmem_redzone_check(void *p, size_t sz);
+static void kmem_redzone_fill(void *, size_t);
+static void kmem_redzone_check(void *, size_t);
 #else /* defined(KMEM_REDZONE) */
 #define	REDZONE_SIZE	0
 #define	kmem_redzone_fill(p, sz)		/* nothing */
@@ -196,7 +196,10 @@ static void kmem_redzone_check(void *p, size_t sz);
 #endif /* defined(KMEM_REDZONE) */
 
 #if defined(KMEM_SIZE)
-#define	SIZE_SIZE	kmem_roundup_size(sizeof(size_t))
+struct kmem_header {
+	size_t		size;
+} __aligned(KMEM_ALIGN);
+#define	SIZE_SIZE	sizeof(struct kmem_header)
 static void kmem_size_set(void *, size_t);
 static void kmem_size_check(void *, size_t);
 #else
@@ -243,8 +246,8 @@ kmem_intr_alloc(size_t requested_size, km_flag_t kmflags)
 
 #ifdef KMEM_REDZONE
 	if (size - requested_size < REDZONE_SIZE) {
-		/* If there isn't enough space in the page padding,
-		 * allocate one more page for the red zone. */
+		/* If there isn't enough space in the padding, allocate
+		 * one more memory chunk for the red zone. */
 		allocsz += kmem_roundup_size(REDZONE_SIZE);
 	}
 #endif
@@ -270,7 +273,7 @@ kmem_intr_alloc(size_t requested_size, km_flag_t kmflags)
 	p = pool_cache_get(pc, kmflags);
 
 	if (__predict_true(p != NULL)) {
-		kmem_poison_check(p, size);
+		kmem_poison_check(p, allocsz);
 		FREECHECK_OUT(&kmem_freecheck, p);
 		kmem_size_set(p, requested_size);
 		kmem_redzone_fill(p, requested_size + SIZE_SIZE);
@@ -479,16 +482,16 @@ kmem_roundup_size(size_t size)
 #else /* defined(_LP64) */
 #define PRIME 0x9e3779b1
 #endif /* defined(_LP64) */
-#endif /* defined(KMEM_POISON) || defined(KMEM_REDZONE) */
 
-#if defined(KMEM_POISON)
 static inline uint8_t
-kmem_poison_pattern(const void *p)
+kmem_pattern_generate(const void *p)
 {
 	return (uint8_t)(((uintptr_t)p) * PRIME
 	   >> ((sizeof(uintptr_t) - sizeof(uint8_t))) * CHAR_BIT);
 }
+#endif /* defined(KMEM_POISON) || defined(KMEM_REDZONE) */
 
+#if defined(KMEM_POISON)
 static int
 kmem_poison_ctor(void *arg, void *obj, int flag)
 {
@@ -508,7 +511,7 @@ kmem_poison_fill(void *p, size_t sz)
 	cp = p;
 	ep = cp + sz;
 	while (cp < ep) {
-		*cp = kmem_poison_pattern(cp);
+		*cp = kmem_pattern_generate(cp);
 		cp++;
 	}
 }
@@ -522,7 +525,7 @@ kmem_poison_check(void *p, size_t sz)
 	cp = p;
 	ep = cp + sz;
 	while (cp < ep) {
-		const uint8_t expected = kmem_poison_pattern(cp);
+		const uint8_t expected = kmem_pattern_generate(cp);
 
 		if (*cp != expected) {
 			panic("%s: %p: 0x%02x != 0x%02x\n",
@@ -537,40 +540,49 @@ kmem_poison_check(void *p, size_t sz)
 static void
 kmem_size_set(void *p, size_t sz)
 {
-	memcpy(p, &sz, sizeof(sz));
+	struct kmem_header *hd;
+	hd = (struct kmem_header *)p;
+	hd->size = sz;
 }
 
 static void
 kmem_size_check(void *p, size_t sz)
 {
-	size_t psz;
+	struct kmem_header *hd;
+	size_t hsz;
 
-	memcpy(&psz, p, sizeof(psz));
-	if (psz != sz) {
+	hd = (struct kmem_header *)p;
+	hsz = hd->size;
+
+	if (hsz != sz) {
 		panic("kmem_free(%p, %zu) != allocated size %zu",
-		    (const uint8_t *)p + SIZE_SIZE, sz, psz);
+		    (const uint8_t *)p + SIZE_SIZE, sz, hsz);
 	}
 }
 #endif /* defined(KMEM_SIZE) */
 
 #if defined(KMEM_REDZONE)
-static inline uint8_t
-kmem_redzone_pattern(const void *p)
-{
-	return (uint8_t)(((uintptr_t)p) * PRIME
-	   >> ((sizeof(uintptr_t) - sizeof(uint8_t))) * CHAR_BIT);
-}
-
+#define STATIC_BYTE	0xFE
+CTASSERT(REDZONE_SIZE > 1);
 static void
 kmem_redzone_fill(void *p, size_t sz)
 {
-	uint8_t *cp;
+	uint8_t *cp, pat;
 	const uint8_t *ep;
 
 	cp = (uint8_t *)p + sz;
 	ep = cp + REDZONE_SIZE;
+
+	/*
+	 * We really don't want the first byte of the red zone to be '\0';
+	 * an off-by-one in a string may not be properly detected.
+	 */
+	pat = kmem_pattern_generate(cp);
+	*cp = (pat == '\0') ? STATIC_BYTE: pat;
+	cp++;
+
 	while (cp < ep) {
-		*cp = kmem_redzone_pattern(cp);
+		*cp = kmem_pattern_generate(cp);
 		cp++;
 	}
 }
@@ -578,14 +590,22 @@ kmem_redzone_fill(void *p, size_t sz)
 static void
 kmem_redzone_check(void *p, size_t sz)
 {
-	uint8_t *cp;
+	uint8_t *cp, pat, expected;
 	const uint8_t *ep;
 
 	cp = (uint8_t *)p + sz;
-	ep = (uint8_t *)p + sz + REDZONE_SIZE;
-	while (cp < ep) {
-		const uint8_t expected = kmem_redzone_pattern(cp);
+	ep = cp + REDZONE_SIZE;
 
+	pat = kmem_pattern_generate(cp);
+	expected = (pat == '\0') ? STATIC_BYTE: pat;
+	if (expected != *cp) {
+		panic("%s: %p: 0x%02x != 0x%02x\n",
+		   __func__, cp, *cp, expected);
+	}
+	cp++;
+
+	while (cp < ep) {
+		expected = kmem_pattern_generate(cp);
 		if (*cp != expected) {
 			panic("%s: %p: 0x%02x != 0x%02x\n",
 			   __func__, cp, *cp, expected);

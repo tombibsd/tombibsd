@@ -525,6 +525,7 @@ fileassoc_file_delete(struct vnode *vp)
 	file_free(faf);
 
 	tbl = fileassoc_table_lookup(vp->v_mount);
+	KASSERT(tbl != NULL);
 	--(tbl->tbl_nused); /* XXX gc? */
 
 	KERNEL_UNLOCK_ONE(NULL);

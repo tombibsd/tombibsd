@@ -36,9 +36,7 @@ COPTS.ffs_appleufs.c+=	-Wno-pointer-sign
 COPTS.pass1.c+=	-fno-tree-fre -fno-tree-lrs
 .endif
 
-.if make(install)
 SUBDIR+=SMM.doc
-.endif
 
 .include <bsd.prog.mk>
 .include <bsd.subdir.mk>

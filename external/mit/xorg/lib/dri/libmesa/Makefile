@@ -5,19 +5,17 @@
 _LIB_PREFIX=	lib
 LIB=		mesa_dri
 LIBISMODULE=	yes
+LIBISCXX=	yes
 
 SHLIB_MAJOR=	0
 
-MESA_SRC_MODULES=	glapi main math vbo tnl shader swrast slang ss common
+MESA_SRC_MODULES=	main math vbo tnl program swrast ss common
 
-CPPFLAGS+=	-I${X11SRCDIR.MesaLib}/src/mesa/main \
-		-I${X11SRCDIR.MesaLib}/src/mesa/glapi \
-		-I${X11SRCDIR.MesaLib}/src/mesa/shader \
-		-I${X11SRCDIR.MesaLib}/src/mesa/drivers/dri/common \
-		-I${X11SRCDIR.MesaLib}/src/mesa \
-		-I${X11SRCDIR.MesaLib}/include \
-		-I${DESTDIR}${X11INCDIR}/X11
-
+CPPFLAGS+=	\
+	-I${X11SRCDIR.MesaLib}/include \
+	-I${X11SRCDIR.MesaLib}/src/glsl \
+	-I${X11SRCDIR.MesaLib}/src/mesa \
+	-I${X11SRCDIR.MesaLib}/src/mapi
 
 CPPFLAGS+=	${X11FLAGS.THREADLIB} \
 		-DPTHREADS -D_NETBSD_SOURCE -DUSE_EXTERNAL_DXTN_LIB=1 \
@@ -28,7 +26,7 @@ CFLAGS+=	-pthread
 .include "../../libOSMesa/libmesa.mk"
 .include "../../../tools/glsl/Makefile.glslsrcs"
 
-SRCS+=  ${SRCS.pp} ${SRCS.cl}
+SRCS+=  ${SRCS.glsl}
 
 .include <bsd.x11.mk>
 

@@ -163,12 +163,15 @@
 ./usr/lib/oabi/libintl.so.1.0			base-compat-shlib	compat,pic
 ./usr/lib/oabi/libipsec.so.3			base-compat-shlib	compat,pic
 ./usr/lib/oabi/libipsec.so.3.0			base-compat-shlib	compat,pic
+./usr/lib/oabi/libirs.so.8			base-compat-shlib	compat,pic
+./usr/lib/oabi/libirs.so.8.0			base-compat-shlib	compat,pic
 ./usr/lib/oabi/libisc.so.8			base-compat-shlib	compat,pic
 ./usr/lib/oabi/libisc.so.8.0			base-compat-shlib	compat,pic
 ./usr/lib/oabi/libisccc.so.8			base-compat-shlib	compat,pic
 ./usr/lib/oabi/libisccc.so.8.0			base-compat-shlib	compat,pic
 ./usr/lib/oabi/libisccfg.so.8			base-compat-shlib	compat,pic
-./usr/lib/oabi/libisccfg.so.8.0			base-compat-shlib	compat,pic
+./usr/lib/oabi/libisccfg.so.8.1			base-compat-shlib	compat,pic
+./usr/lib/oabi/libisccfg.so.8.0			base-compat-shlib	obsolete
 ./usr/lib/oabi/libiscsi.so.2			base-compat-shlib	compat,pic,iscsi
 ./usr/lib/oabi/libiscsi.so.2.0			base-compat-shlib	compat,pic,iscsi
 ./usr/lib/oabi/libisns.so.0			base-compat-shlib	compat,pic

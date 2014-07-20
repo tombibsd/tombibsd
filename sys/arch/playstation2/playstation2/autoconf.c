@@ -31,6 +31,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <sys/param.h>
 #include <sys/systm.h>
+#include <sys/device.h>
 #include <sys/conf.h>
 
 #include <playstation2/ee/sifvar.h>			/* sif_init */

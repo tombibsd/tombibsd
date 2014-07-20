@@ -73,6 +73,7 @@
 ./usr/lib/sparc/libiberty_g.a			comp-obsolete		obsolete
 ./usr/lib/sparc/libintl_g.a			comp-c-debuglib		compat,debuglib
 ./usr/lib/sparc/libipsec_g.a			comp-c-debuglib		compat,debuglib
+./usr/lib/sparc/libirs_g.a			comp-c-debuglib		compat,debuglib
 ./usr/lib/sparc/libisc_g.a			comp-c-debuglib		compat,debuglib
 ./usr/lib/sparc/libisccc_g.a			comp-c-debuglib		compat,debuglib
 ./usr/lib/sparc/libisccfg_g.a			comp-c-debuglib		compat,debuglib

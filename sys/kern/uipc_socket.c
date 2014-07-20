@@ -802,8 +802,7 @@ soaccept(struct socket *so, struct mbuf *nam)
 	so->so_state &= ~SS_NOFDREF;
 	if ((so->so_state & SS_ISDISCONNECTED) == 0 ||
 	    (so->so_proto->pr_flags & PR_ABRTACPTDIS) == 0)
-		error = (*so->so_proto->pr_usrreqs->pr_generic)(so,
-		    PRU_ACCEPT, NULL, nam, NULL, NULL);
+		error = (*so->so_proto->pr_usrreqs->pr_accept)(so, nam);
 	else
 		error = ECONNABORTED;
 

@@ -7,7 +7,7 @@
 /getaddrinfo.c/1.6/Fri Mar 14 04:22:58 2014/-kk/
 /gethost.c/1.5/Fri Mar 14 04:22:58 2014/-kk/
 /getipnode.c/1.5/Fri Mar 14 04:22:58 2014/-kk/
-/getnameinfo.c/1.5/Thu Oct 24 10:28:41 2013/-kk/
+/getnameinfo.c/1.6/Sun Jul 20 13:23:27 2014/-kk/
 /getrrset.c/1.5/Fri Mar 14 04:22:58 2014/-kk/
 /herror.c/1.5/Fri Mar 14 04:22:58 2014/-kk/
 /lwbuffer.c/1.4/Fri Mar 14 04:22:58 2014/-kk/

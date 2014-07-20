@@ -52,9 +52,7 @@ const.h: const.c
 	    ${TOOL_SED} -e 's/Char \([a-zA-Z0-9_]*\)\(.*\)/extern Char \1[];/' | \
 	    sort >> ${.TARGET}
 
-.if make(install)
 SUBDIR+=USD.doc
-.endif
 
 COPTS.err.c = -Wno-format-nonliteral
 COPTS.printf.c = -Wno-format-nonliteral

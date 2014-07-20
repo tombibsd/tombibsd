@@ -127,8 +127,6 @@ static const struct genfs_ops cd9660_genfsops = {
  *
  * Name is updated by mount(8) after booting.
  */
-#define ROOTNAME	"root_device"
-
 static int iso_makemp(struct iso_mnt *isomp, struct buf *bp, int *ea_len);
 static int iso_mountfs(struct vnode *devvp, struct mount *mp,
 		struct lwp *l, struct iso_args *argp);

@@ -58,9 +58,11 @@
  */
 
 struct mbuf;
+struct ifnet;
 struct sockaddr;
 struct socket;
 struct sockopt;
+struct stat;
 struct domain;
 struct proc;
 struct lwp;
@@ -236,8 +238,11 @@ static const char * const prcorequests[] = {
 struct pr_usrreqs {
 	int	(*pr_attach)(struct socket *, int);
 	void	(*pr_detach)(struct socket *);
-	int	(*pr_ioctl)(struct socket *, struct mbuf *,
-	    struct mbuf *, struct mbuf *, struct lwp *);
+	int	(*pr_accept)(struct socket *, struct mbuf *);
+	int	(*pr_ioctl)(struct socket *, u_long, void *, struct ifnet *);
+	int	(*pr_stat)(struct socket *, struct stat *);
+	int	(*pr_peeraddr)(struct socket *, struct mbuf *);
+	int	(*pr_sockaddr)(struct socket *, struct mbuf *);
 	int	(*pr_generic)(struct socket *, int, struct mbuf *,
 	    struct mbuf *, struct mbuf *, struct lwp *);
 };
@@ -290,13 +295,48 @@ name##_detach_wrapper(struct socket *a)			\
 	KERNEL_UNLOCK_ONE(NULL);			\
 }							\
 static int						\
-name##_ioctl_wrapper(struct socket *a,			\
-    struct mbuf *b, struct mbuf *c, struct mbuf *d,	\
-    struct lwp *e)					\
+name##_accept_wrapper(struct socket *a, struct mbuf *b)	\
 {							\
 	int rv;						\
 	KERNEL_LOCK(1, NULL);				\
-	rv = name##_ioctl(a, b, c, d, e);		\
+	rv = name##_accept(a, b);			\
+	KERNEL_UNLOCK_ONE(NULL);			\
+	return rv;					\
+}							\
+static int						\
+name##_ioctl_wrapper(struct socket *a, u_long b,	\
+    void *c, struct ifnet *d)				\
+{							\
+	int rv;						\
+	KERNEL_LOCK(1, NULL);				\
+	rv = name##_ioctl(a, b, c, d);			\
+	KERNEL_UNLOCK_ONE(NULL);			\
+	return rv;					\
+}							\
+static int						\
+name##_stat_wrapper(struct socket *a, struct stat *b)	\
+{							\
+	int rv;						\
+	KERNEL_LOCK(1, NULL);				\
+	rv = name##_stat(a, b);				\
+	KERNEL_UNLOCK_ONE(NULL);			\
+	return rv;					\
+}							\
+static int						\
+name##_peeraddr_wrapper(struct socket *a, struct mbuf *b)	\
+{							\
+	int rv;						\
+	KERNEL_LOCK(1, NULL);				\
+	rv = name##_peeraddr(a, b);			\
+	KERNEL_UNLOCK_ONE(NULL);			\
+	return rv;					\
+}							\
+static int						\
+name##_sockaddr_wrapper(struct socket *a, struct mbuf *b)	\
+{							\
+	int rv;						\
+	KERNEL_LOCK(1, NULL);				\
+	rv = name##_sockaddr(a, b);			\
 	KERNEL_UNLOCK_ONE(NULL);			\
 	return rv;					\
 }							\

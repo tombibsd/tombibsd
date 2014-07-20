@@ -8,6 +8,8 @@ include		"arch/news68k/conf/std.news68k"
 
 #ident 		"GENERIC_TINY-$Revision$"
 
+makeoptions	COPTS="-O2 -fno-reorder-blocks"	# see share/mk/sys.mk
+
 maxusers	4
 
 options 	news1200		# news1200 support

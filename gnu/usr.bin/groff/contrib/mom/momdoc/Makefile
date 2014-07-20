@@ -5,7 +5,7 @@ DIST_SUBDIR=    contrib/mom/momdoc
 .include <bsd.own.mk>
 
 .if ${MKSHARE} != "no"
-FILESDIR=       ${HTMLDOCDIR}/groff/mom
+FILESDIR=       /usr/share/doc/reference/ref1/roff/mom
 FILES=          appendices.html \
   color.html \
   cover.html \

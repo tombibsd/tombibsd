@@ -1,7 +1,7 @@
 /*	$NetBSD$	*/
 
 /*
- * Copyright (C) 2006, 2008, 2009, 2011  Internet Systems Consortium, Inc. ("ISC")
+ * Copyright (C) 2006, 2008, 2009, 2011, 2014  Internet Systems Consortium, Inc. ("ISC")
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -62,7 +62,8 @@ check_result(isc_result_t result, const char *message) {
 
 static void
 usage(void) {
-	fprintf(stderr, "Usage: %s salt algorithm iterations domain\n", program);
+	fprintf(stderr, "Usage: %s salt algorithm iterations domain\n",
+		program);
 	exit(1);
 }
 

@@ -34,8 +34,10 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/param.h>
 #include <sys/systm.h>
 #include <sys/kernel.h>		/* time */
+#include <sys/proc.h>
 
 #include <mips/locore.h>
+#include <mips/mips3_clock.h>
 
 #include <dev/clock_subr.h>
 #include <machine/bootinfo.h>
@@ -48,7 +50,7 @@ void
 cpu_initclocks(void)
 {
 	struct todr_chip_handle	todr = {
-		.todr_gettime_ymdhms = get_bootinfo_tod;
+		.todr_gettime_ymdhms = get_bootinfo_tod,
 	};
 
 	/*

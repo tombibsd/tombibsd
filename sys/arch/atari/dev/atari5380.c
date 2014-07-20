@@ -731,9 +731,8 @@ scsi_falcon_idisable(void)
 static inline void
 scsi_falcon_clr_ipend(void)
 {
-	int tmp;
 
-	tmp = get_falcon_5380_reg(NCR5380_IRCV);
+	(void)get_falcon_5380_reg(NCR5380_IRCV);
 	rem_sicallback((si_farg)ncr_ctrl_intr);
 }
 

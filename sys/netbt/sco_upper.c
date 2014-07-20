@@ -98,12 +98,12 @@ sco_bind(struct sco_pcb *pcb, struct sockaddr_bt *addr)
 }
 
 /*
- * sco_sockaddr(pcb, sockaddr)
+ * sco_sockaddr_pcb(pcb, sockaddr)
  *
  *	Copy local address of PCB to sockaddr
  */
 int
-sco_sockaddr(struct sco_pcb *pcb, struct sockaddr_bt *addr)
+sco_sockaddr_pcb(struct sco_pcb *pcb, struct sockaddr_bt *addr)
 {
 
 	memset(addr, 0, sizeof(struct sockaddr_bt));
@@ -177,12 +177,12 @@ sco_connect(struct sco_pcb *pcb, struct sockaddr_bt *dest)
 }
 
 /*
- * sco_peeraddr(pcb, sockaddr)
+ * sco_peeraddr_pcb(pcb, sockaddr)
  *
  *	Copy remote address of SCO pcb to sockaddr
  */
 int
-sco_peeraddr(struct sco_pcb *pcb, struct sockaddr_bt *addr)
+sco_peeraddr_pcb(struct sco_pcb *pcb, struct sockaddr_bt *addr)
 {
 
 	memset(addr, 0, sizeof(struct sockaddr_bt));

@@ -35,7 +35,7 @@
 #include <isc/string.h>
 #include <isc/util.h>
 
-#ifdef ISC_PLATFORM_OPENSSLAES
+#ifdef ISC_PLATFORM_WANTAES
 
 /*
  * Test data from NIST KAT
@@ -290,7 +290,7 @@ ATF_TC_BODY(untested, tc) {
  * Main
  */
 ATF_TP_ADD_TCS(tp) {
-#ifdef ISC_PLATFORM_OPENSSLAES
+#ifdef ISC_PLATFORM_WANTAES
 	ATF_TP_ADD_TC(tp, isc_aes128);
 	ATF_TP_ADD_TC(tp, isc_aes192);
 	ATF_TP_ADD_TC(tp, isc_aes256);

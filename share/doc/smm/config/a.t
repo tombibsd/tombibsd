@@ -144,15 +144,18 @@ One or more alphabetics, either upper or lower case, and underscore,
 Approximately the C language specification for an integer number.
 That is, a leading ``0x'' indicates a hexadecimal value,
 a leading ``0'' indicates an octal value, otherwise the number is
-expected to be a decimal value.  Hexadecimal numbers may use either
+expected to be a decimal value.
+Hexadecimal numbers may use either
 upper or lower case alphabetics.
 .IP FPNUMBER
 .br
-A floating point number without exponent.  That is a number of the
+A floating point number without exponent.
+That is a number of the
 form ``nnn.ddd'', where the fractional component is optional.
 .LP
 In special instances a question mark, ``?'', can be substituted for
-a ``NUMBER'' token.  This is used to effect wildcarding in device
+a ``NUMBER'' token.
+This is used to effect wildcarding in device
 interconnection specifications.
 .LP
 Comments in configuration files are indicated by a ``#'' character

@@ -399,7 +399,7 @@ out:
 #endif
 	}
 	if (error) {
-		if (!UFS_WAPBL_BEGIN(mp)) {
+		if (UFS_WAPBL_BEGIN(mp) == 0) {
 			(void) ffs_truncate(vp, (off_t)0, 0, NOCRED);
 			UFS_WAPBL_END(mp);
 		}

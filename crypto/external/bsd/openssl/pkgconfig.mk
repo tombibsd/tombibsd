@@ -8,5 +8,5 @@ FILES+=${pkg}.pc
 FILESBUILD_${pkg}.pc=yes
 
 ${pkg}.pc: ${.CURDIR}/../../mkpc
-	${HOST_SH} ${.ALLSRC} ${OPENSSLSRC}/crypto ${.TARGET} > ${.TARGET}
+	CPPFLAGS=${CPPFLAGS:N-DOPENSSLDIR=*:N-DENGINESDIR=*:Q} CPP=${CPP:Q} ${HOST_SH} ${.ALLSRC} ${OPENSSLSRC}/crypto ${.TARGET} > ${.TARGET}
 .endfor

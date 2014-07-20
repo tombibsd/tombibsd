@@ -667,6 +667,9 @@ cpu_probe_vortex86(struct cpu_info *ci)
 	case 0x33504d44:
 		strcpy(cpu_brand_string, "Vortex86MX");
 		break;
+	case 0x37504d44:
+		strcpy(cpu_brand_string, "Vortex86EX");
+		break;
 	default:
 		strcpy(cpu_brand_string, "Unknown Vortex86");
 		break;

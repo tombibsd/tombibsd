@@ -24,6 +24,8 @@ options 	INCLUDE_CONFIG_FILE	# embed config file in kernel binary
 
 #ident 		"GENERIC-$Revision$"
 
+makeoptions	COPTS="-O2 -fno-reorder-blocks"	# see share/mk/sys.mk
+
 maxusers	8
 
 options 	M68030

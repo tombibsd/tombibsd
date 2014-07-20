@@ -63,6 +63,11 @@ named_migrate()
 
 named_precmd()
 {
+	if [ ! -e "/etc/rndc.key" ]; then
+		echo "Generating rndc.key"
+		/usr/sbin/rndc-confgen -a
+	fi
+
 	if [ -z "$named_chrootdir" ]; then
 		if [ ! -d "/etc/namedb/keys" ]; then
 			mkdir -m 775 "/etc/namedb/keys"

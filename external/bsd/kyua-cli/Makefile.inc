@@ -11,7 +11,7 @@ KYUA_LIBS?=
 # Layout of installed files.
 KYUA_BINDIR=		/usr/bin
 KYUA_CONFDIR=		/etc/kyua
-KYUA_DOCDIR=		/usr/share/doc/kyua-cli
+KYUA_DOCDIR=		/usr/share/doc/reference/ref1/kyua/kyua-cli
 KYUA_EXAMPLESDIR=	/usr/share/examples/kyua-cli
 KYUA_MISCDIR=		/usr/share/kyua-cli/misc
 KYUA_STOREDIR=		/usr/share/kyua-cli/store

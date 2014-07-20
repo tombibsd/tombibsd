@@ -1343,6 +1343,7 @@ int	swcrypto_detach(device_t, int);
 int
 swcrypto_detach(device_t self, int flag)
 {
+	pmf_device_deregister(self);
 	if (swcr_id >= 0)
 		crypto_unregister_all(swcr_id);
 	return 0;

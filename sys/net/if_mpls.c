@@ -104,7 +104,7 @@ static struct mbuf *mpls_label_inet6(struct mbuf *, union mpls_shim *, uint);
 static struct mbuf *mpls_prepend_shim(struct mbuf *, union mpls_shim *);
 
 extern int mpls_defttl, mpls_mapttl_inet, mpls_mapttl_inet6, mpls_icmp_respond,
-	mpls_forwarding, mpls_accept, mpls_mapprec_inet, mpls_mapclass_inet6,
+	mpls_forwarding, mpls_frame_accept, mpls_mapprec_inet, mpls_mapclass_inet6,
 	mpls_rfc4182;
 
 /* ARGSUSED */
@@ -329,7 +329,7 @@ mpls_lse(struct mbuf *m)
 
 	/* Check if we're accepting MPLS Frames */
 	error = EINVAL;
-	if (!mpls_accept)
+	if (!mpls_frame_accept)
 		goto done;
 
 	/* TTL decrement */

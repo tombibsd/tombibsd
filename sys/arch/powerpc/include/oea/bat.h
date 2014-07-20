@@ -69,7 +69,7 @@
 struct bat {
 	register_t batu;
 	register_t batl;
-};
+} __aligned(8);
 #endif
 
 /* Lower BAT bits (all but PowerPC 601): */

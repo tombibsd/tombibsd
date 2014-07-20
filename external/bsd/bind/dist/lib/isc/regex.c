@@ -23,7 +23,7 @@
 #include <isc/string.h>
 
 #if VALREGEX_REPORT_REASON
-#define FAIL(x) do { reason = (x); goto error; } while(0)
+#define FAIL(x) do { reason = (x); goto error; } while(/*CONSTCOND*/0)
 #else
 #define FAIL(x) goto error
 #endif

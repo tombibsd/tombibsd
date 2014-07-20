@@ -1072,18 +1072,25 @@ abortit:
 		}
 		cache_purge(fvp);
 		if (!doingdirectory) {
+			struct denode_key old_key = ip->de_key;
+			struct denode_key new_key = ip->de_key;
+
 			error = pcbmap(dp, de_cluster(pmp, to_diroffset), 0,
-				       &ip->de_dirclust, 0);
+				       &new_key.dk_dirclust, 0);
 			if (error) {
 				/* XXX should really panic here, fs is corrupt */
 				VOP_UNLOCK(fvp);
 				goto bad;
 			}
-			ip->de_diroffset = to_diroffset;
-			if (ip->de_dirclust != MSDOSFSROOT)
-				ip->de_diroffset &= pmp->pm_crbomask;
+			new_key.dk_diroffset = to_diroffset;
+			if (new_key.dk_dirclust != MSDOSFSROOT)
+				new_key.dk_diroffset &= pmp->pm_crbomask;
+			vcache_rekey_enter(pmp->pm_mountp, fvp, &old_key,
+			    sizeof(old_key), &new_key, sizeof(new_key));
+			ip->de_key = new_key;
+			vcache_rekey_exit(pmp->pm_mountp, fvp, &old_key,
+			    sizeof(old_key), &ip->de_key, sizeof(ip->de_key));
 		}
-		reinsert(ip);
 	}
 
 	/*

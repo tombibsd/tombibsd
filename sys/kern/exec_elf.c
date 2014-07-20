@@ -115,13 +115,6 @@ static void	elf_free_emul_arg(void *);
 #define	ELF_ROUND(a, b)		(((a) + (b) - 1) & ~((b) - 1))
 #define	ELF_TRUNC(a, b)		((a) & ~((b) - 1))
 
-/*
- * Arbitrary limits to avoid DoS for excessive memory allocation.
- */
-#define MAXPHNUM	128
-#define MAXSHNUM	32768
-#define MAXNOTESIZE	1024
-
 static void
 elf_placedynexec(struct lwp *l, struct exec_package *epp, Elf_Ehdr *eh,
     Elf_Phdr *ph)
@@ -304,7 +297,7 @@ elf_check_header(Elf_Ehdr *eh)
 	if (ELF_EHDR_FLAGS_OK(eh) == 0)
 		return ENOEXEC;
 
-	if (eh->e_shnum > MAXSHNUM || eh->e_phnum > MAXPHNUM)
+	if (eh->e_shnum > ELF_MAXSHNUM || eh->e_phnum > ELF_MAXPHNUM)
 		return ENOEXEC;
 
 	return 0;
@@ -789,7 +782,7 @@ exec_elf_makecmds(struct lwp *l, struct exec_package *epp)
 		}
 	}
 
-	if (epp->ep_vmcmds.evs_cmds == NULL) {
+	if (epp->ep_vmcmds.evs_used == 0) {
 		/* No VMCMD; there was no PT_LOAD section, or those
 		 * sections were empty */
 		error = ENOEXEC;
@@ -882,7 +875,7 @@ netbsd_elf_signature(struct lwp *l, struct exec_package *epp,
 #endif
 
 	epp->ep_pax_flags = 0;
-	if (eh->e_shnum > MAXSHNUM || eh->e_shnum == 0)
+	if (eh->e_shnum > ELF_MAXSHNUM || eh->e_shnum == 0)
 		return ENOEXEC;
 
 	shsize = eh->e_shnum * sizeof(Elf_Shdr);
@@ -891,12 +884,12 @@ netbsd_elf_signature(struct lwp *l, struct exec_package *epp,
 	if (error)
 		goto out;
 
-	np = kmem_alloc(MAXNOTESIZE, KM_SLEEP);
+	np = kmem_alloc(ELF_MAXNOTESIZE, KM_SLEEP);
 	for (i = 0; i < eh->e_shnum; i++) {
 		Elf_Shdr *shp = &sh[i];
 
 		if (shp->sh_type != SHT_NOTE ||
-		    shp->sh_size > MAXNOTESIZE ||
+		    shp->sh_size > ELF_MAXNOTESIZE ||
 		    shp->sh_size < sizeof(Elf_Nhdr) + ELF_NOTE_NETBSD_NAMESZ)
 			continue;
 
@@ -1035,7 +1028,7 @@ bad:
 			break;
 		}
 	}
-	kmem_free(np, MAXNOTESIZE);
+	kmem_free(np, ELF_MAXNOTESIZE);
 
 	error = isnetbsd ? 0 : ENOEXEC;
 out:

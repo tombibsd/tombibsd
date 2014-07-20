@@ -409,9 +409,9 @@ int rfcomm_ctloutput(int, struct socket *, struct sockopt *);
 /* rfcomm_upper.c */
 int rfcomm_attach_pcb(struct rfcomm_dlc **, const struct btproto *, void *);
 int rfcomm_bind(struct rfcomm_dlc *, struct sockaddr_bt *);
-int rfcomm_sockaddr(struct rfcomm_dlc *, struct sockaddr_bt *);
+int rfcomm_sockaddr_pcb(struct rfcomm_dlc *, struct sockaddr_bt *);
 int rfcomm_connect(struct rfcomm_dlc *, struct sockaddr_bt *);
-int rfcomm_peeraddr(struct rfcomm_dlc *, struct sockaddr_bt *);
+int rfcomm_peeraddr_pcb(struct rfcomm_dlc *, struct sockaddr_bt *);
 int rfcomm_disconnect(struct rfcomm_dlc *, int);
 void rfcomm_detach_pcb(struct rfcomm_dlc **);
 int rfcomm_listen(struct rfcomm_dlc *);

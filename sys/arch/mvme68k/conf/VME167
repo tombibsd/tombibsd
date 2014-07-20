@@ -4,6 +4,8 @@ include		"arch/mvme68k/conf/std.mvme68k"
 
 #options 	INCLUDE_CONFIG_FILE	# embed config file in kernel binary
 
+makeoptions	COPTS="-O2 -fno-reorder-blocks"	# see share/mk/sys.mk
+
 # Boards this kernel supports; need at least one
 options 	MVME167
 

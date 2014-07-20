@@ -27,6 +27,7 @@
 #if defined(ISC_PLATFORM_USETHREADS)
 void
 isc__taskmgr_pause(isc_taskmgr_t *taskmgr);
+
 void
 isc__taskmgr_resume(isc_taskmgr_t *taskmgr);
 #else

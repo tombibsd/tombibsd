@@ -132,7 +132,7 @@ hci_dump(void)
 #endif
 
 int
-hci_ioctl_pcb(unsigned long cmd, void *data, struct lwp *l)
+hci_ioctl_pcb(unsigned long cmd, void *data)
 {
 	struct btreq *btr = data;
 	struct hci_unit *unit;
@@ -225,7 +225,7 @@ hci_ioctl_pcb(unsigned long cmd, void *data, struct lwp *l)
 		break;
 
 	case SIOCSBTFLAGS:	/* set unit flags (privileged) */
-		err = kauth_authorize_device(l->l_cred,
+		err = kauth_authorize_device(curlwp->l_cred,
 		    KAUTH_DEVICE_BLUETOOTH_SETPRIV, unit, KAUTH_ARG(cmd),
 		    btr, NULL);
 		if (err)
@@ -253,7 +253,7 @@ hci_ioctl_pcb(unsigned long cmd, void *data, struct lwp *l)
 		break;
 
 	case SIOCSBTPOLICY:	/* set unit link policy (privileged) */
-		err = kauth_authorize_device(l->l_cred,
+		err = kauth_authorize_device(curlwp->l_cred,
 		    KAUTH_DEVICE_BLUETOOTH_SETPRIV, unit, KAUTH_ARG(cmd),
 		    btr, NULL);
 		if (err)
@@ -265,7 +265,7 @@ hci_ioctl_pcb(unsigned long cmd, void *data, struct lwp *l)
 		break;
 
 	case SIOCSBTPTYPE:	/* set unit packet types (privileged) */
-		err = kauth_authorize_device(l->l_cred,
+		err = kauth_authorize_device(curlwp->l_cred,
 		    KAUTH_DEVICE_BLUETOOTH_SETPRIV, unit, KAUTH_ARG(cmd),
 		    btr, NULL);
 		if (err)
@@ -281,7 +281,7 @@ hci_ioctl_pcb(unsigned long cmd, void *data, struct lwp *l)
 		break;
 
 	case SIOCZBTSTATS:	/* get & reset unit statistics */
-		err = kauth_authorize_device(l->l_cred,
+		err = kauth_authorize_device(curlwp->l_cred,
 		    KAUTH_DEVICE_BLUETOOTH_SETPRIV, unit, KAUTH_ARG(cmd),
 		    btr, NULL);
 		if (err)
@@ -297,7 +297,7 @@ hci_ioctl_pcb(unsigned long cmd, void *data, struct lwp *l)
 		 * sent to USB bluetooth controllers that are not an
 		 * integer number of frame sizes, the USB bus locks up.
 		 */
-		err = kauth_authorize_device(l->l_cred,
+		err = kauth_authorize_device(curlwp->l_cred,
 		    KAUTH_DEVICE_BLUETOOTH_SETPRIV, unit, KAUTH_ARG(cmd),
 		    btr, NULL);
 		if (err)

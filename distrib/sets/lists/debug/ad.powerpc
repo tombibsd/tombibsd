@@ -43,6 +43,7 @@
 ./usr/lib/powerpc/libhx509_g.a			comp-c-debuglib		compat,arch64,debuglib,kerberos
 ./usr/lib/powerpc/libintl_g.a			comp-c-debuglib		compat,arch64,debuglib
 ./usr/lib/powerpc/libipsec_g.a			comp-c-debuglib		compat,arch64,debuglib
+./usr/lib/powerpc/libirs_g.a			comp-c-debuglib		compat,arch64,debuglib
 ./usr/lib/powerpc/libisc_g.a			comp-c-debuglib		compat,arch64,debuglib
 ./usr/lib/powerpc/libisccc_g.a			comp-c-debuglib		compat,arch64,debuglib
 ./usr/lib/powerpc/libisccfg_g.a			comp-c-debuglib		compat,arch64,debuglib

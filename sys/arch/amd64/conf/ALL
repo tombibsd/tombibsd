@@ -2025,6 +2025,7 @@ options NETATALKDEBUG
 options NETDOCK_DEBUG_DRIVER
 options NETIF_DEBUG
 options NET_DEBUG
+options NET_MPSAFE
 options NFE_DEBUG
 options NFS_DEBUG
 options NFS_DEBUG_COMMIT

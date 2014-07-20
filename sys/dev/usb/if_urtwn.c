@@ -431,6 +431,8 @@ urtwn_detach(device_t self, int flags)
 
 	DPRINTFN(DBG_FN, ("%s: %s\n", device_xname(sc->sc_dev), __func__));
 
+	pmf_device_deregister(self);
+
 	s = splusb();
 
 	sc->sc_dying = 1;

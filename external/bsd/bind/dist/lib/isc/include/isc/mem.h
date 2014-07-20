@@ -264,22 +264,22 @@ struct isc_mempool {
 	do { \
 		ISCMEMFUNC(put)((c), (p), (s) _ISC_MEM_FILELINE);	\
 		(p) = NULL; \
-	} while (0)
+	} while (/*CONSTCOND*/0)
 #define isc_mem_putanddetach(c, p, s) \
 	do { \
 		ISCMEMFUNC(putanddetach)((c), (p), (s) _ISC_MEM_FILELINE); \
 		(p) = NULL; \
-	} while (0)
+	} while (/*CONSTCOND*/0)
 #define isc_mem_free(c, p) \
 	do { \
 		ISCMEMFUNC(free)((c), (p) _ISC_MEM_FILELINE);	\
 		(p) = NULL; \
-	} while (0)
+	} while (/*CONSTCOND*/0)
 #define isc_mempool_put(c, p) \
 	do { \
 		ISCMEMPOOLFUNC(put)((c), (p) _ISC_MEM_FILELINE);	\
 		(p) = NULL; \
-	} while (0)
+	} while (/*CONSTCOND*/0)
 
 /*@{*/
 isc_result_t

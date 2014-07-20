@@ -355,7 +355,15 @@ tryclear(struct bootblock *boot, struct fatEntry *fat, cl_t head, cl_t *truncp)
 		clearchain(boot, fat, head);
 		return FSFATMOD;
 	} else if (ask(0, "Truncate")) {
+		uint32_t len;
+		cl_t p;
+
+		for (p = head, len = 0;
+		    p >= CLUST_FIRST && p < boot->NumClusters;
+		    p = fat[p].next, len++)
+			continue;
 		*truncp = CLUST_EOF;
+		fat[head].length = len;
 		return FSFATMOD;
 	} else
 		return FSERROR;
@@ -405,10 +413,10 @@ checkfat(struct bootblock *boot, struct fatEntry *fat)
 			continue;
 
 		/* follow the chain to its end (hopefully) */
-		for (p = head;
+		for (len = fat[head].length, p = head;
 		     (n = fat[p].next) >= CLUST_FIRST && n < boot->NumClusters;
 		     p = n)
-			if (fat[n].head != head)
+			if (fat[n].head != head || len-- < 2)
 				break;
 		if (n >= CLUST_EOFS)
 			continue;
@@ -416,14 +424,20 @@ checkfat(struct bootblock *boot, struct fatEntry *fat)
 		if (n == CLUST_FREE || n >= CLUST_RSRVD) {
 			pwarn("Cluster chain starting at %u ends with cluster marked %s\n",
 			      head, rsrvdcltype(n));
+clear:
 			ret |= tryclear(boot, fat, head, &fat[p].next);
 			continue;
 		}
 		if (n < CLUST_FIRST || n >= boot->NumClusters) {
 			pwarn("Cluster chain starting at %u ends with cluster out of range (%u)\n",
-			      head, n);
-			ret |= tryclear(boot, fat, head, &fat[p].next);
-			continue;
+			    head, n);
+			goto clear;
+		}
+		if (head == fat[n].head) {
+			pwarn("Cluster chain starting at %u loops at cluster %u\n",
+			
+			    head, p);
+			goto clear;
 		}
 		pwarn("Cluster chains starting at %u and %u are linked at cluster %u\n",
 		      head, fat[n].head, n);
@@ -540,13 +554,15 @@ writefat(int fs, struct bootblock *boot, struct fatEntry *fat, int correct_fat)
 		default:
 			if (fat[cl].next == CLUST_FREE)
 				boot->NumFree++;
-			if (cl + 1 < boot->NumClusters
-			    && fat[cl + 1].next == CLUST_FREE)
-				boot->NumFree++;
 			*p++ = (u_char)fat[cl].next;
-			*p++ = (u_char)((fat[cl].next >> 8) & 0xf)
-			       |(u_char)(fat[cl+1].next << 4);
-			*p++ = (u_char)(fat[++cl].next >> 4);
+			*p = (u_char)((fat[cl].next >> 8) & 0xf);
+			cl++;
+			if (cl >= boot->NumClusters)
+				break;
+			if (fat[cl].next == CLUST_FREE)
+				boot->NumFree++;
+			*p++ |= (u_char)(fat[cl + 1].next << 4);
+			*p++ = (u_char)(fat[cl + 1].next >> 4);
 			break;
 		}
 	}

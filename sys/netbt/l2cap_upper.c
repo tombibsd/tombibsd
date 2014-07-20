@@ -118,12 +118,12 @@ l2cap_bind(struct l2cap_channel *chan, struct sockaddr_bt *addr)
 }
 
 /*
- * l2cap_sockaddr(l2cap_channel, sockaddr)
+ * l2cap_sockaddr_pcb(l2cap_channel, sockaddr)
  *
  *	get local address of channel
  */
 int
-l2cap_sockaddr(struct l2cap_channel *chan, struct sockaddr_bt *addr)
+l2cap_sockaddr_pcb(struct l2cap_channel *chan, struct sockaddr_bt *addr)
 {
 
 	memcpy(addr, &chan->lc_laddr, sizeof(struct sockaddr_bt));
@@ -209,12 +209,12 @@ fail:
 }
 
 /*
- * l2cap_peeraddr(l2cap_channel, sockaddr)
+ * l2cap_peeraddr_pcb(l2cap_channel, sockaddr)
  *
  *	get remote address of channel
  */
 int
-l2cap_peeraddr(struct l2cap_channel *chan, struct sockaddr_bt *addr)
+l2cap_peeraddr_pcb(struct l2cap_channel *chan, struct sockaddr_bt *addr)
 {
 
 	memcpy(addr, &chan->lc_raddr, sizeof(struct sockaddr_bt));

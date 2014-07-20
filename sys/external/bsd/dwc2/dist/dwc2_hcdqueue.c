@@ -844,7 +844,7 @@ void dwc2_hcd_qtd_unlink_and_free(struct dwc2_hsotg *hsotg,
 				  struct dwc2_qh *qh)
 {
 	struct dwc2_softc *sc = hsotg->hsotg_sc;
-	
+
 	list_del_init(&qtd->qtd_list_entry);
  	pool_cache_put(sc->sc_qtdpool, qtd);
 }

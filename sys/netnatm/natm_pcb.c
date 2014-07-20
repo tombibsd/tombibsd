@@ -36,6 +36,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include "opt_ddb.h"
 
 #include <sys/param.h>
+#include <sys/kmem.h>
 #include <sys/systm.h>
 #include <sys/queue.h>
 #include <sys/socket.h>
@@ -98,13 +99,9 @@ npcb_free(struct natmpcb *npcb, int op)
  *   returns npcb if ok
  */
 
-struct natmpcb *npcb_add(npcb, ifp, vci, vpi)
-
-struct natmpcb *npcb;
-struct ifnet *ifp;
-u_int16_t vci;
-u_int8_t vpi;
-
+struct natmpcb *
+npcb_add(struct natmpcb *npcb, struct ifnet *ifp,
+	u_int16_t vci, u_int8_t vpi)
 {
   struct natmpcb *cpcb = NULL;		/* current pcb */
   int s = splnet();
