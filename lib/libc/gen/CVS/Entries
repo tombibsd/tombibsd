@@ -100,7 +100,7 @@
 /ftw.c/1.1/Fri Dec 30 23:07:32 2005/-kk/
 /getbsize.3/1.9/Thu Aug  7 16:42:48 2003/-kk/
 /getbsize.c/1.17/Mon Jun 25 22:32:43 2012/-kk/
-/getcap.c/1.52/Mon Jun  4 20:56:40 2012/-kk/
+/getcap.c/1.53/Sun Jul 20 13:08:08 2014/-kk/
 /getcwd.3/1.18/Thu Apr 29 06:54:26 2010/-kk/
 /getcwd.c/1.53/Thu Jun 21 23:29:23 2012/-kk/
 /getdevmajor.3/1.5/Tue Mar 24 22:34:54 2009/-kk/

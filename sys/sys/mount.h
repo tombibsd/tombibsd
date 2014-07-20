@@ -427,7 +427,7 @@ int	vfs_quotactl_get(struct mount *, const struct quotakey *,
 	    struct quotaval *);
 int	vfs_quotactl_put(struct mount *, const struct quotakey *,
 	    const struct quotaval *);
-int	vfs_quotactl_delete(struct mount *, const struct quotakey *);
+int	vfs_quotactl_del(struct mount *, const struct quotakey *);
 int	vfs_quotactl_cursoropen(struct mount *, struct quotakcursor *);
 int	vfs_quotactl_cursorclose(struct mount *, struct quotakcursor *);
 int	vfs_quotactl_cursorskipidtype(struct mount *, struct quotakcursor *,

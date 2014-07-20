@@ -126,9 +126,9 @@
 /md4.h/1.7/Mon Dec 26 18:41:36 2005/-kk/
 /md5.h/1.9/Mon Dec 26 18:41:36 2005/-kk/
 /midiio.h/1.15/Mon Apr 28 20:24:11 2008/-kk/
-/mman.h/1.45/Wed Dec 25 07:37:48 2013/-kk/
+/mman.h/1.46/Sun Jul 20 13:08:42 2014/-kk/
 /module.h/1.35/Tue May  6 05:50:26 2014/-kk/
-/mount.h/1.214/Tue Jun  3 03:10:02 2014/-kk/
+/mount.h/1.215/Sun Jul 20 13:08:42 2014/-kk/
 /mqueue.h/1.16/Mon Nov 21 04:36:05 2011/-kk/
 /msg.h/1.24/Mon Jan 19 19:39:41 2009/-kk/
 /msgbuf.h/1.15/Wed Nov  7 00:19:08 2007/-kk/
@@ -162,7 +162,7 @@
 /pty.h/1.10/Sat Apr 19 05:37:02 2014/-kk/
 /queue.h/1.67/Tue Jun  3 02:54:47 2014/-kk/
 /quota.h/1.12/Mon Jan 30 00:56:19 2012/-kk/
-/quotactl.h/1.37/Wed Jun 18 08:43:12 2014/-kk/
+/quotactl.h/1.38/Sun Jul 20 13:08:42 2014/-kk/
 /radioio.h/1.2/Mon Dec 26 18:41:36 2005/-kk/
 /radixtree.h/1.5/Tue Oct 25 14:11:27 2011/-kk/
 /ras.h/1.14/Mon Aug 11 21:51:14 2008/-kk/

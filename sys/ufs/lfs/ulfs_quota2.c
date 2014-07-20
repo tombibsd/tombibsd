@@ -672,7 +672,7 @@ dq2clear_callback(struct ulfsmount *ump, uint64_t *offp, struct quota2_entry *q2
 	return 0;
 }
 int
-lfsquota2_handle_cmd_delete(struct ulfsmount *ump, const struct quotakey *qk)
+lfsquota2_handle_cmd_del(struct ulfsmount *ump, const struct quotakey *qk)
 {
 	int idtype;
 	id_t id;

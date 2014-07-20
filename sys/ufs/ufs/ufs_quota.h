@@ -130,7 +130,7 @@ int quota2_handle_cmd_get(struct ufsmount *, const struct quotakey *,
     struct quotaval *);
 int quota2_handle_cmd_put(struct ufsmount *, const struct quotakey *,
     const struct quotaval *);
-int quota2_handle_cmd_delete(struct ufsmount *, const struct quotakey *);
+int quota2_handle_cmd_del(struct ufsmount *, const struct quotakey *);
 int quota2_handle_cmd_cursorget(struct ufsmount *, struct quotakcursor *,
     struct quotakey *, struct quotaval *, unsigned, unsigned *);
 int quota2_handle_cmd_cursoropen(struct ufsmount *, struct quotakcursor *);

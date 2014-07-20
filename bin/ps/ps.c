@@ -175,8 +175,11 @@ ttyname2dev(const char *ttname, int *xflg, int *what)
 		ttypath = ttname;
 	*what = KERN_PROC_TTY;
 	if (stat(ttypath, &sb) == -1) {
-		devmajor_t pts = getdevmajor("pts", S_IFCHR);
+		devmajor_t pts;
+		int serrno;
 
+		serrno = errno;
+		pts = getdevmajor("pts", S_IFCHR);
 		if (pts != NODEVMAJOR && strncmp(ttname, "pts/", 4) == 0) {
 			int ptsminor = atoi(ttname + 4);
 
@@ -184,6 +187,7 @@ ttyname2dev(const char *ttname, int *xflg, int *what)
 			if (strcmp(pathbuf, ttname) == 0 && ptsminor >= 0)
 				return makedev(pts, ptsminor);
 		}
+		errno = serrno;
 		err(1, "%s", ttypath);
 	}
 	if (!S_ISCHR(sb.st_mode))

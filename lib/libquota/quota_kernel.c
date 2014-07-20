@@ -220,8 +220,8 @@ __quota_kernel_delete(struct quotahandle *qh, const struct quotakey *qk)
 {
 	struct quotactl_args args;
 
-	args.qc_op = QUOTACTL_DELETE;
-	args.u.remove.qc_key = qk;
+	args.qc_op = QUOTACTL_DEL;
+	args.u.del.qc_key = qk;
 	return __quotactl(qh->qh_mountpoint, &args);
 }
 

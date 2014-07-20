@@ -751,9 +751,10 @@ ether_input(struct ifnet *ifp, struct mbuf *m)
 		if (IF_QFULL(inq)) {
 			IF_DROP(inq);
 			m_freem(m);
-		} else
+		} else {
 			IF_ENQUEUE(inq, m);
-		softint_schedule(pppoe_softintr);
+			softint_schedule(pppoe_softintr);
+		}
 		return;
 #endif /* NPPPOE > 0 */
 	case ETHERTYPE_SLOWPROTOCOLS: {

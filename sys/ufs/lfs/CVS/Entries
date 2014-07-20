@@ -34,12 +34,12 @@
 /ulfs_inode.c/1.9/Thu Oct 24 10:28:58 2013/-kk/
 /ulfs_inode.h/1.12/Tue Jun  3 02:54:47 2014/-kk/
 /ulfs_lookup.c/1.21/Mon Jun  9 00:29:36 2014/-kk/
-/ulfs_quota.c/1.11/Wed Jun 18 08:43:12 2014/-kk/
-/ulfs_quota.h/1.4/Thu Oct 24 10:28:58 2013/-kk/
+/ulfs_quota.c/1.12/Sun Jul 20 13:08:42 2014/-kk/
+/ulfs_quota.h/1.5/Sun Jul 20 13:08:42 2014/-kk/
 /ulfs_quota1.c/1.8/Tue Jun  3 03:10:03 2014/-kk/
 /ulfs_quota1.h/1.4/Thu Oct 24 10:28:58 2013/-kk/
 /ulfs_quota1_subr.c/1.3/Thu Oct 24 10:28:58 2013/-kk/
-/ulfs_quota2.c/1.15/Thu Oct 24 10:28:58 2013/-kk/
+/ulfs_quota2.c/1.16/Sun Jul 20 13:08:42 2014/-kk/
 /ulfs_quota2.h/1.4/Thu Oct 24 10:28:58 2013/-kk/
 /ulfs_quota2_subr.c/1.6/Thu Oct 24 10:28:58 2013/-kk/
 /ulfs_quotacommon.h/1.4/Thu Oct 24 10:28:58 2013/-kk/

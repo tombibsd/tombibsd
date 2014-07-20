@@ -48,10 +48,10 @@
 /atomic_sub_32_cas.c/1.2/Thu Jun 26 06:39:51 2014/-kk/
 /atomic_sub_64_cas.c/1.3/Thu Jun 26 06:39:51 2014/-kk/
 /atomic_sub_8_cas.c/1.3/Thu Jun 26 06:39:51 2014/-kk/
-/atomic_swap_16_cas.c/1.2/Fri Feb 21 15:51:07 2014/-kk/
-/atomic_swap_32_cas.c/1.6/Sat Mar  1 05:57:58 2014/-kk/
-/atomic_swap_64_cas.c/1.8/Sat Mar  1 05:57:58 2014/-kk/
-/atomic_swap_8_cas.c/1.2/Fri Feb 21 15:51:07 2014/-kk/
+/atomic_swap_16_cas.c/1.3/Sun Jul 20 13:03:51 2014/-kk/
+/atomic_swap_32_cas.c/1.7/Sun Jul 20 13:03:51 2014/-kk/
+/atomic_swap_64_cas.c/1.9/Sun Jul 20 13:03:51 2014/-kk/
+/atomic_swap_8_cas.c/1.3/Sun Jul 20 13:03:51 2014/-kk/
 /atomic_xor_16_cas.c/1.3/Thu Jun 26 06:39:51 2014/-kk/
 /atomic_xor_32_cas.c/1.2/Thu Jun 26 06:39:51 2014/-kk/
 /atomic_xor_64_cas.c/1.3/Thu Jun 26 06:39:51 2014/-kk/

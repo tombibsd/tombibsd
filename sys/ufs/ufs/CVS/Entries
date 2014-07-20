@@ -16,10 +16,10 @@
 /ufs_extern.h/1.75/Tue Jun  3 03:10:03 2014/-kk/
 /ufs_inode.c/1.90/Mon May 19 16:26:50 2014/-kk/
 /ufs_lookup.c/1.132/Mon Jun  9 00:29:36 2014/-kk/
-/ufs_quota.c/1.116/Wed Jun 18 08:43:12 2014/-kk/
-/ufs_quota.h/1.21/Sat Feb 18 06:13:23 2012/-kk/
+/ufs_quota.c/1.117/Sun Jul 20 13:08:42 2014/-kk/
+/ufs_quota.h/1.22/Sun Jul 20 13:08:42 2014/-kk/
 /ufs_quota1.c/1.20/Tue Jun  3 03:10:03 2014/-kk/
-/ufs_quota2.c/1.38/Tue Mar 25 02:35:52 2014/-kk/
+/ufs_quota2.c/1.39/Sun Jul 20 13:08:42 2014/-kk/
 /ufs_readwrite.c/1.107/Thu Oct 24 10:28:58 2013/-kk/
 /ufs_rename.c/1.11/Tue Jun  3 03:10:03 2014/-kk/
 /ufs_vfsops.c/1.53/Mon May 19 16:26:50 2014/-kk/

@@ -45,6 +45,8 @@ atomic_swap_32(volatile uint32_t *addr, uint32_t new)
 	return (old);
 }
 
+crt_alias(__atomic_exchange_4,_atomic_swap_32)
+
 #undef atomic_swap_32
 atomic_op_alias(atomic_swap_32,_atomic_swap_32)
 #undef atomic_swap_uint

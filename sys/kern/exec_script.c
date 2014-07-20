@@ -138,11 +138,8 @@ exec_script_makecmds(struct lwp *l, struct exec_package *epp)
 		return ENOEXEC;
 
 	/*
-	 * check that the shell spec is terminated by a newline,
-	 * and that it isn't too large.  Don't modify the
-	 * buffer unless we're ready to commit to handling it.
-	 * (The latter requirement means that we have to check
-	 * for both spaces and tabs later on.)
+	 * Check that the shell spec is terminated by a newline, and that
+	 * it isn't too large.
 	 */
 	hdrlinelen = min(epp->ep_hdrvalid, SCRIPT_HDR_SIZE);
 	for (cp = hdrstr + EXEC_SCRIPT_MAGICLEN; cp < hdrstr + hdrlinelen;
@@ -155,20 +152,19 @@ exec_script_makecmds(struct lwp *l, struct exec_package *epp)
 	if (cp >= hdrstr + hdrlinelen)
 		return ENOEXEC;
 
-	shellname = NULL;
-	shellarg = NULL;
-	shellarglen = 0;
-
 	/* strip spaces before the shell name */
 	for (cp = hdrstr + EXEC_SCRIPT_MAGICLEN; *cp == ' ' || *cp == '\t';
 	    cp++)
 		;
+	if (*cp == '\0')
+		return ENOEXEC;
 
-	/* collect the shell name; remember it's length for later */
+	shellarg = NULL;
+	shellarglen = 0;
+
+	/* collect the shell name; remember its length for later */
 	shellname = cp;
 	shellnamelen = 0;
-	if (*cp == '\0')
-		goto check_shell;
 	for ( /* cp = cp */ ; *cp != '\0' && *cp != ' ' && *cp != '\t'; cp++)
 		shellnamelen++;
 	if (*cp == '\0')

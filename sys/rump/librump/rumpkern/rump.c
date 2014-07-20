@@ -531,7 +531,7 @@ rump_component_load(const struct rump_component *rc_const)
 	 */
 	rc = __UNCONST(rc_const);
 
-	KASSERT(curlwp == bootlwp);
+	KASSERT(!rump_inited || curlwp == bootlwp);
 
 	LIST_FOREACH(rc_iter, &rchead, rc_entries) {
 		if (rc_iter == rc)

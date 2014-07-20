@@ -498,6 +498,7 @@ wsmouse*	at pms? mux 0
 
 chipsfb*	at pci? dev ? function ?
 genfb*		at pci? dev ? function ?
+gffb*		at pci? dev ? function ?
 igsfb*		at pci? dev ? function ?
 machfb* 	at pci? dev ? function ?
 pm2fb*		at pci? dev ? function ?

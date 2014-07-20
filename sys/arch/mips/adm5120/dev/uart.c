@@ -171,8 +171,6 @@ uart_cnattach(void)
 void
 uart_cnputc(dev_t dev, int c)
 {
-	char chr;
-	chr = c;
 	while ((*((volatile unsigned long *)0xb2600018)) & 0x20)
 		continue;
 	(*((volatile unsigned long *)0xb2600000)) = c;
@@ -335,7 +333,7 @@ uart_intr(void *v)
 {
 	struct uart_softc *sc = v;
 	struct tty *tp = sc->sc_tty;
-	int c, l_r;
+	int c;
 
 	if (REG_READ(UART_RSR_REG) & UART_RSR_BE) {
 		REG_WRITE(UART_ECR_REG, UART_ECR_RSR);
@@ -345,7 +343,7 @@ uart_intr(void *v)
 	while ((REG_READ(UART_FR_REG) & UART_FR_RX_FIFO_EMPTY) == 0) {
 		c = REG_READ(UART_DR_REG) & 0xff;
 		if (tp->t_state & TS_ISOPEN)
-			l_r = (*tp->t_linesw->l_rint)(c, tp);
+			(*tp->t_linesw->l_rint)(c, tp);
 	}
 	return 0;
 }

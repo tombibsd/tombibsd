@@ -1,7 +1,8 @@
 /Makefile.inc/1.1/Wed Nov  3 16:10:24 2010/-kk/
-/Makefile/1.16/Tue Mar 25 02:35:53 2014/-kk/
+/Makefile/1.17/Sun Jul 20 13:08:47 2014/-kk/
 D/bpf////
 D/bpfilter////
+D/bpfjit////
 D/carp////
 D/config////
 D/fdpass////

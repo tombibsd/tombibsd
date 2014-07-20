@@ -43,6 +43,10 @@ __RCSID("$NetBSD$");
 __FBSDID("$FreeBSD: head/usr.bin/sed/process.c 192732 2009-05-25 06:45:33Z brian $");
 #endif
 
+#if 0
+static const char sccsid[] = "@(#)process.c	8.6 (Berkeley) 4/20/94";
+#endif
+
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/ioctl.h>

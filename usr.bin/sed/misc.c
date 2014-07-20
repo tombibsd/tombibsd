@@ -43,6 +43,10 @@ __RCSID("$NetBSD$");
 __FBSDID("$FreeBSD: head/usr.bin/sed/misc.c 200462 2009-12-13 03:14:06Z delphij $");
 #endif
 
+#if 0
+static const char sccsid[] = "@(#)misc.c	8.1 (Berkeley) 6/6/93";
+#endif
+
 #include <sys/types.h>
 
 #include <err.h>

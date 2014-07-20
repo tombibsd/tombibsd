@@ -699,12 +699,14 @@ gpio_ioctl(struct gpio_softc *sc, u_long cmd, void *data, int flag,
 		/* check that the controller supports all requested flags */
 		if ((flags & sc->sc_pins[pin].pin_caps) != flags)
 			return ENODEV;
-		flags = set->gp_flags | GPIO_PIN_SET;
+		flags = set->gp_flags;
 
 		set->gp_caps = sc->sc_pins[pin].pin_caps;
 		/* return old value */
 		set->gp_flags = sc->sc_pins[pin].pin_flags;
+
 		if (flags > 0) {
+			flags |= GPIO_PIN_SET;
 			gpiobus_pin_ctl(gc, pin, flags);
 			/* update current value */
 			sc->sc_pins[pin].pin_flags = flags;

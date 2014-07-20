@@ -565,7 +565,6 @@ sys_swapctl(struct lwp *l, const struct sys_swapctl_args *uap, register_t *retva
 		if (SCARG(uap, cmd) == SWAP_ON &&
 		    copystr("miniroot", userpath, SWAP_PATH_MAX, &len))
 			panic("swapctl: miniroot copy failed");
-		KASSERT(len > 0);
 	} else {
 		struct pathbuf *pb;
 

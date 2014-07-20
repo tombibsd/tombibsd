@@ -94,7 +94,8 @@ typedef	__off_t		off_t;		/* file offset */
  * Mapping type
  */
 #define	MAP_FILE	0x0000	/* map from file (default) */
-#define	MAP_ANON	0x1000	/* allocated from memory, swap space */
+#define	MAP_ANONYMOUS	0x1000	/* allocated from memory, swap space */
+#define	MAP_ANON	MAP_ANONYMOUS
 #define	MAP_STACK	0x2000	/* allocated from memory, swap space (stack) */
 
 /*

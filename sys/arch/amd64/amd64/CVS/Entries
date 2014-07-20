@@ -26,7 +26,7 @@
 /netbsd32_sigcode.S/1.7/Mon Apr 28 20:23:12 2008/-kk/
 /netbsd32_syscall.c/1.32/Tue Jun  3 02:53:42 2014/-kk/
 /process_machdep.c/1.29/Thu Feb 27 08:55:37 2014/-kk/
-/rbus_machdep.c/1.5/Fri Jul  1 19:24:14 2011/-kk/
+/rbus_machdep.c/1.6/Sun Jul 20 13:08:17 2014/-kk/
 /spl.S/1.28/Fri Jan 31 08:48:34 2014/-kk/
 /trap.c/1.78/Tue Mar 25 02:35:17 2014/-kk/
 /vector.S/1.44/Thu Oct 24 10:28:57 2013/-kk/

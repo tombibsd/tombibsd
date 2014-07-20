@@ -885,7 +885,7 @@ dwc2_root_intr_transfer(usbd_xfer_handle xfer)
 Static usbd_status
 dwc2_root_intr_start(usbd_xfer_handle xfer)
 {
-	struct dwc2_softc *sc = DWC2_PIPE2SC(xfer);
+	struct dwc2_softc *sc = DWC2_XFER2SC(xfer);
 
 	DPRINTF("\n");
 
@@ -1096,7 +1096,7 @@ dwc2_device_intr_transfer(usbd_xfer_handle xfer)
 Static usbd_status
 dwc2_device_intr_start(usbd_xfer_handle xfer)
 {
-	struct dwc2_pipe *dpipe = (struct dwc2_pipe *)xfer->pipe;
+	struct dwc2_pipe *dpipe = DWC2_XFER2DPIPE(xfer)
 	usbd_device_handle dev = dpipe->pipe.device;
 	struct dwc2_softc *sc = dev->bus->hci_private;
 	usbd_status err;
@@ -1178,7 +1178,7 @@ dwc2_device_isoc_transfer(usbd_xfer_handle xfer)
 usbd_status
 dwc2_device_isoc_start(usbd_xfer_handle xfer)
 {
-	struct dwc2_pipe *dpipe = (struct dwc2_pipe *)xfer->pipe;
+	struct dwc2_pipe *dpipe = DWC2_XFER2DPIPE(xfer);
 	usbd_device_handle dev = dpipe->pipe.device;
 	struct dwc2_softc *sc = dev->bus->hci_private;
 	usbd_status err;

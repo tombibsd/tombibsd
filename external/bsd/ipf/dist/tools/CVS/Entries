@@ -1,7 +1,7 @@
 /BNF.ipf/1.1.1.1/Fri Mar 23 21:20:22 2012/-kk/
 /BNF.ipnat/1.1.1.1/Fri Mar 23 21:20:22 2012/-kk/
 /ipf.c/1.2/Sun Jul 22 14:27:51 2012/-kk/
-/ipf_y.y/1.2/Wed Jun 18 08:34:50 2014/-kk/
+/ipf_y.y/1.3/Sun Jul 20 13:04:58 2014/-kk/
 /ipfcomp.c/1.4/Thu Oct 24 10:28:45 2013/-kk/
 /ipfs.c/1.2/Sun Jul 22 14:27:51 2012/-kk/
 /ipfstat.c/1.5/Sun Jun 22 14:29:05 2014/-kk/
@@ -10,7 +10,7 @@
 /ipmon.c/1.7/Sat Oct 27 20:07:12 2012/-kk/
 /ipmon_y.y/1.2/Sun Oct 21 22:57:48 2012/-kk/
 /ipnat.c/1.2/Sun Jul 22 14:27:51 2012/-kk/
-/ipnat_y.y/1.3/Wed Jun 18 08:34:50 2014/-kk/
+/ipnat_y.y/1.4/Sun Jul 20 13:04:58 2014/-kk/
 /ippool.c/1.4/Thu Oct 24 10:28:45 2013/-kk/
 /ippool_y.y/1.1.1.2/Sun Jul 22 13:44:58 2012/-kk/
 /ipscan_y.y/1.1.1.2/Sun Jul 22 13:44:58 2012/-kk/

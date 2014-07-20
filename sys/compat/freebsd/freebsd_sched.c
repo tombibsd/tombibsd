@@ -94,8 +94,6 @@ sched_freebsd2native(int freebsd_policy,
 	return 0;
 }
 
-/*
- */
 static int
 sched_native2freebsd(int native_policy, const struct sched_param *native_params,
     int *freebsd_policy, struct freebsd_sched_param *freebsd_params)

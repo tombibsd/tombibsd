@@ -49,6 +49,10 @@ __COPYRIGHT("@(#) Copyright (c) 1992, 1993\
 	The Regents of the University of California.  All rights reserved.");
 #endif
 
+#if 0
+static const char sccsid[] = "@(#)main.c	8.2 (Berkeley) 1/3/94";
+#endif
+
 #include <sys/types.h>
 #include <sys/mman.h>
 #include <sys/param.h>

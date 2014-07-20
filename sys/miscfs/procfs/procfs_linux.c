@@ -467,7 +467,7 @@ procfs_do_pid_stat(struct lwp *curl, struct lwp *l,
 	    (long)USEC_2_TICKS(cru->ru_stime.tv_usec),
 
 	    l->l_priority,				/* XXX: priority */
-	    p->p_nice - 20,
+	    p->p_nice - NZERO,
 	    0,
 
 	    (long long)rt.tv_sec,

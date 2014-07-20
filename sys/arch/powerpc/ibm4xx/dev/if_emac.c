@@ -522,7 +522,8 @@ emac_attach(device_t parent, device_t self, void *aux)
 
 	sc->sc_ethercom.ec_mii = mii;
 	ifmedia_init(&mii->mii_media, 0, ether_mediachange, ether_mediastatus);
-	mii_attach(self, mii, 0xffffffff, mii_phy, MII_OFFSET_ANY, 0);
+	mii_attach(self, mii, 0xffffffff, mii_phy, MII_OFFSET_ANY,
+	    MIIF_DOPAUSE);
 	if (LIST_FIRST(&mii->mii_phys) == NULL) {
 		ifmedia_add(&mii->mii_media, IFM_ETHER|IFM_NONE, 0, NULL);
 		ifmedia_set(&mii->mii_media, IFM_ETHER|IFM_NONE);

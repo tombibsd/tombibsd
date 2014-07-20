@@ -131,7 +131,7 @@ int lfsquota2_handle_cmd_get(struct ulfsmount *, const struct quotakey *,
     struct quotaval *);
 int lfsquota2_handle_cmd_put(struct ulfsmount *, const struct quotakey *,
     const struct quotaval *);
-int lfsquota2_handle_cmd_delete(struct ulfsmount *, const struct quotakey *);
+int lfsquota2_handle_cmd_del(struct ulfsmount *, const struct quotakey *);
 int lfsquota2_handle_cmd_cursorget(struct ulfsmount *, struct quotakcursor *,
     struct quotakey *, struct quotaval *, unsigned, unsigned *);
 int lfsquota2_handle_cmd_cursoropen(struct ulfsmount *, struct quotakcursor *);

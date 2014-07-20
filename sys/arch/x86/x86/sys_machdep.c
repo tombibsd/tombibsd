@@ -695,7 +695,7 @@ x86_set_sdbase(void *arg, char which, lwp_t *l, bool direct)
 			wrmsr(MSR_KERNELGSBASE, pcb->pcb_gs);
 		break;
 	default:
-		panic("x86_get_sdbase");
+		panic("x86_set_sdbase");
 	}
 	kpreempt_enable();
 
@@ -717,7 +717,7 @@ x86_get_sdbase32(void *arg, char which)
 		sd = (void *)&curpcb->pcb_gsd;
 		break;
 	default:
-		panic("x86_get_sdbase");
+		panic("x86_get_sdbase32");
 	}
 
 	base = sd->sd_hibase << 24 | sd->sd_lobase;

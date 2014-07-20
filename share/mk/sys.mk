@@ -28,8 +28,8 @@ CC?=		cc
 # -O2 is too -falign-* zealous for low-memory sh3 machines
 DBG?=	-Os -freorder-blocks
 .elif ${MACHINE_ARCH} == "m68k" || ${MACHINE_ARCH} == "m68000"
-# see src/doc/HACKS for details
-DBG?=	-Os
+# -freorder-blocks (enabled by -O2) produces much bigger code
+DBG?=	-O2 -fno-reorder-blocks
 .elif ${MACHINE_ARCH} == "coldfire"
 DBG?=	-O1
 .elif ${MACHINE_ARCH} == "vax"

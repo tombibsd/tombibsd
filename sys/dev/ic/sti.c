@@ -90,14 +90,6 @@ struct wsdisplay_emulops sti_emulops = {
 	sti_alloc_attr
 };
 
-int sti_ioctl(void *, void *, u_long, void *, int, struct lwp *);
-paddr_t sti_mmap(void *, void *, off_t, int);
-int sti_alloc_screen(void *, const struct wsscreen_descr *,
-	void **, int *, int *, long *);
-	void sti_free_screen(void *, void *);
-int sti_show_screen(void *, void *, int, void (*cb)(void *, int, int), void *);
-int sti_load_font(void *, void *, struct wsdisplay_font *);
-
 const struct wsdisplay_accessops sti_accessops = {
 	sti_ioctl,
 	sti_mmap,
