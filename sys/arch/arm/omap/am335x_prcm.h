@@ -149,7 +149,7 @@ struct omap_module {
 #define RST_GLOBAL_COLD_SW	__BIT(1)
 
 #ifdef _KERNEL
-void prcm_mpu_pll_config(u_int);
+int  set_mpu_volt(int);
 void am335x_sys_clk(bus_space_handle_t);
 void am335x_cpu_clk(void);
 #endif

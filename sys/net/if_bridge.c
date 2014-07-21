@@ -648,6 +648,11 @@ bridge_ioctl(struct ifnet *ifp, u_long cmd, void *data)
 		}
 		break;
 
+	case SIOCSIFMTU:
+		if ((error = ifioctl_common(ifp, cmd, data)) == ENETRESET)
+			error = 0;
+		break;
+
 	default:
 		error = ifioctl_common(ifp, cmd, data);
 		break;

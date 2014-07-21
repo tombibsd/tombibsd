@@ -39,6 +39,7 @@
 #ifdef _KERNEL
 #include <sys/queue.h>
 #include <sys/tree.h>
+#include <sys/mutex.h>
 
 /*
  * The different types of node in a kernfs filesystem
@@ -122,14 +123,9 @@ extern const int static_nkern_targets;
 extern int (**kernfs_vnodeop_p)(void *);
 extern struct vfsops kernfs_vfsops;
 extern dev_t rrootdev;
+extern kmutex_t kfs_lock;
 
 int kernfs_root(struct mount *, struct vnode **);
-
-void kernfs_hashinit(void);
-void kernfs_hashreinit(void);
-void kernfs_hashdone(void);
-int kernfs_freevp(struct vnode *);
-int kernfs_allocvp(struct mount *, struct vnode **, const struct kern_target *);
 
 /*
  * Data types for the kernfs file operations.

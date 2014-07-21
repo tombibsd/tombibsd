@@ -18,7 +18,7 @@
 /if_arp.h/1.29/Tue Apr 15 15:17:54 2008/-kk/
 /if_atm.h/1.19/Tue Feb  1 19:46:28 2011/-kk/
 /if_atmsubr.c/1.52/Mon Jun  9 00:29:30 2014/-kk/
-/if_bridge.c/1.87/Sun Jul 20 13:59:12 2014/-kk/
+/if_bridge.c/1.88/Mon Jul 21 08:07:50 2014/-kk/
 /if_bridgevar.h/1.20/Sun Jul 20 13:59:12 2014/-kk/
 /if_dl.h/1.23/Wed Feb 20 17:18:11 2008/-kk/
 /if_eco.h/1.8/Wed Feb 20 17:05:52 2008/-kk/

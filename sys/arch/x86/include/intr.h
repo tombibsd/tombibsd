@@ -186,7 +186,7 @@ int x86_send_ipi(struct cpu_info *, int);
 void x86_broadcast_ipi(int);
 void x86_ipi_handler(void);
 
-extern void (*ipifunc[X86_NIPI])(struct cpu_info *);
+extern void (* const ipifunc[X86_NIPI])(struct cpu_info *);
 
 #endif /* _KERNEL */
 

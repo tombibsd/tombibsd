@@ -826,7 +826,6 @@ int
 npf_conn_save(prop_array_t conlist, prop_array_t nplist)
 {
 	npf_conn_t *con, *prev;
-	int error;
 
 	/*
 	 * Note: acquire conn_lock to prevent from the database
@@ -877,7 +876,7 @@ skip:
 	npf_conndb_settail(conn_db, prev);
 	mutex_exit(&conn_lock);
 
-	return error;
+	return 0;
 }
 
 /*

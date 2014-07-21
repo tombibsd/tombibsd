@@ -1,11 +1,11 @@
-/*	$NetBSD$	*/
+/*	$NetBSD$ */
 
 /*-
  * Copyright (c) 2013 The NetBSD Foundation, Inc.
  * All rights reserved.
  *
  * This code is derived from software contributed to The NetBSD Foundation
- * by Taylor R. Campbell.
+ * by Radoslaw Kujawa.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -29,9 +29,10 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef _LINUX_CTYPE_H_
-#define _LINUX_CTYPE_H_
+/*#include <sys/cdefs.h>*/
 
-#include <lib/libkern/libkern.h>
+#ifndef _TPS65217PMICVAR_H_
+#define _TPS65217PMICVAR_H_
+int tps65217pmic_set_volt(device_t, const char *, int);
+#endif /* _TPS65217PMICVAR_H_ */
 
-#endif  /* _LINUX_CTYPE_H_ */

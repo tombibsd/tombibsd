@@ -585,7 +585,7 @@ main(int argc, char **argv)
 		free(term->name);
 		free(term);
 	}
-	hdestroy();
+	hdestroy1(free, NULL);
 #endif
 
 

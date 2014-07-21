@@ -22,7 +22,7 @@
 /intel_busclock.c/1.18/Tue Nov 26 03:29:49 2013/-kk/
 /intr.c/1.77/Tue Jun  3 02:54:25 2014/-kk/
 /ioapic.c/1.48/Thu Oct 24 10:28:57 2013/-kk/
-/ipi.c/1.24/Tue Jun  3 02:54:25 2014/-kk/
+/ipi.c/1.26/Mon Jul 21 08:07:38 2014/-kk/
 /ipmi.c/1.56/Thu Oct 24 10:28:57 2013/-kk/
 /lapic.c/1.47/Mon Nov 18 05:31:36 2013/-kk/
 /linux_trap.c/1.11/Sun Feb 19 21:06:35 2012/-kk/
