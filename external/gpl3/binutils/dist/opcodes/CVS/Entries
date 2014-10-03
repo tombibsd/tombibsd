@@ -47,8 +47,8 @@
 /cgen.sh/1.3/Sun Sep 25 04:32:45 2011/-kk/
 /config.in/1.1.1.3/Tue Oct 29 12:09:03 2013/-kk/
 /configure.com/1.1.1.1/Sat Sep 24 22:17:34 2011/-kk/
-/configure.in/1.5/Fri Oct  3 09:49:10 2014/-kk/
-/configure/1.5/Fri Oct  3 09:49:10 2014/-kk/
+/configure.in/1.6/Fri Oct  3 09:56:08 2014/-kk/
+/configure/1.6/Fri Oct  3 09:56:08 2014/-kk/
 /cr16-dis.c/1.1.1.3/Tue Oct 29 12:09:03 2013/-kk/
 /cr16-opc.c/1.1.1.2/Sat Sep 24 22:17:34 2011/-kk/
 /cris-dis.c/1.1.1.3/Tue Oct 29 12:09:03 2013/-kk/
@@ -62,7 +62,7 @@
 /dep-in.sed/1.1.1.2/Sat Sep 24 22:17:30 2011/-kk/
 /dis-buf.c/1.1.1.2/Sat Sep 24 22:17:30 2011/-kk/
 /dis-init.c/1.1.1.2/Sat Sep 24 22:17:30 2011/-kk/
-/disassemble.c/1.2/Fri Oct  3 09:49:10 2014/-kk/
+/disassemble.c/1.3/Fri Oct  3 09:56:08 2014/-kk/
 /dlx-dis.c/1.1.1.2/Sat Sep 24 22:17:30 2011/-kk/
 /epiphany-asm.c/1.1.1.1/Thu Oct 24 10:28:51 2013/-kk/
 /epiphany-desc.c/1.1.1.1/Thu Oct 24 10:28:51 2013/-kk/
@@ -211,6 +211,8 @@
 /pj-opc.c/1.1.1.2/Sat Sep 24 22:11:54 2011/-kk/
 /ppc-dis.c/1.4/Tue Oct 29 12:09:04 2013/-kk/
 /ppc-opc.c/1.4/Tue Oct 29 12:09:04 2013/-kk/
+/riscv-dis.c/1.2/Sat Sep 20 04:53:19 2014/-kk/
+/riscv-opc.c/1.1/Fri Sep 19 17:19:53 2014/-kk/
 /rl78-decode.c/1.1.1.1/Thu Oct 24 10:28:51 2013/-kk/
 /rl78-decode.opc/1.1.1.1/Thu Oct 24 10:28:51 2013/-kk/
 /rl78-dis.c/1.1.1.1/Thu Oct 24 10:28:51 2013/-kk/

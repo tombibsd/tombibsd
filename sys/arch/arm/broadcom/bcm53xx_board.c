@@ -603,7 +603,7 @@ bcm53xx_device_register(device_t self, void *aux)
 		/*
 		 * XXX KLUDGE ALERT XXX
 		 * The iot mainbus supplies is completely wrong since it scales
-		 * addresses by 2.  The simpliest remedy is to replace with our
+		 * addresses by 2.  The simplest remedy is to replace with our
 		 * bus space used for the armcore regisers (which armperiph uses). 
 		 */
 		struct mainbus_attach_args * const mb = aux;

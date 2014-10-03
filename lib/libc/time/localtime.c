@@ -61,10 +61,10 @@ static time_t const time_t_max =
 */
 
 #ifdef O_BINARY
-#define OPEN_MODE	(O_RDONLY | O_BINARY)
+#define OPEN_MODE	(O_RDONLY | O_BINARY | O_CLOEXEC)
 #endif /* defined O_BINARY */
 #ifndef O_BINARY
-#define OPEN_MODE	O_RDONLY
+#define OPEN_MODE	(O_RDONLY | O_CLOEXEC)
 #endif /* !defined O_BINARY */
 
 #ifndef WILDABBR

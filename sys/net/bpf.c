@@ -1388,25 +1388,24 @@ static inline void
 bpf_deliver(struct bpf_if *bp, void *(*cpfn)(void *, const void *, size_t),
     void *pkt, u_int pktlen, u_int buflen, const bool rcv)
 {
-	struct timespec ts;
+	const bpf_ctx_t *bc = NULL;
+	uint32_t mem[BPF_MEMWORDS];
 	bpf_args_t args = {
 		.pkt = (const uint8_t *)pkt,
 		.wirelen = pktlen,
 		.buflen = buflen,
-		.mem = NULL,
+		.mem = mem,
 		.arg = NULL
 	};
-	struct bpf_d *d;
-
-	const bpf_ctx_t *bc = NULL;
 	bool gottime = false;
+	struct timespec ts;
 
 	/*
 	 * Note that the IPL does not have to be raised at this point.
 	 * The only problem that could arise here is that if two different
 	 * interfaces shared any data.  This is not the case.
 	 */
-	for (d = bp->bif_dlist; d != NULL; d = d->bd_next) {
+	for (struct bpf_d *d = bp->bif_dlist; d != NULL; d = d->bd_next) {
 		u_int slen;
 
 		if (!d->bd_seesent && !rcv) {

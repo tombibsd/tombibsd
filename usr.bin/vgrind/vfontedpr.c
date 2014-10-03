@@ -163,7 +163,7 @@ main(int argc, char *argv[])
 
 	    /* act as a filter like eqn */
 	    if (!strcmp(argv[0], "-f")) {
-		filter++;
+		filter=true;
 		argv[0] = argv[argc-1];
 		argv[argc-1] = minus;
 		continue;
@@ -177,13 +177,13 @@ main(int argc, char *argv[])
 
 	    /* build an index */
 	    if (!strcmp(argv[0], "-x")) {
-		idx++;
+		idx=true;
 		argv[0] = minusn;
 	    }
 
 	    /* indicate no keywords */
 	    if (!strcmp(argv[0], "-n")) {
-		nokeyw++;
+		nokeyw=true;
 		argc--, argv++;
 		continue;
 	    }

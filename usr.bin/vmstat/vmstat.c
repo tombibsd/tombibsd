@@ -237,7 +237,7 @@ struct nlist histnl[] =
 };
 
 
-#define KILO	1024	
+#define KILO	1024
 
 struct cpu_counter {
 	uint64_t nintr;
@@ -2118,7 +2118,7 @@ hist_dodump(struct kern_history *histp)
 
 			(void)printf("%06ld.%06ld ", (long int)e->tv.tv_sec,
 			    (long int)e->tv.tv_usec);
-			(void)printf("%s#%ld: ", fn, e->call);
+			(void)printf("%s#%ld@%d: ", fn, e->call, e->cpunum);
 			(void)printf(fmt, e->v[0], e->v[1], e->v[2], e->v[3]);
 			(void)putchar('\n');
 		}

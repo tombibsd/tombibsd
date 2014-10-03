@@ -451,7 +451,7 @@ res_hostalias(const res_state statp, const char *name, char *dst, size_t siz) {
 	if (issetugid())
 		return (NULL);
 	file = getenv("HOSTALIASES");
-	if (file == NULL || (fp = fopen(file, "r")) == NULL)
+	if (file == NULL || (fp = fopen(file, "re")) == NULL)
 		return (NULL);
 	buf[sizeof(buf) - 1] = '\0';
 	while (fgets(buf, (int)sizeof(buf), fp)) {

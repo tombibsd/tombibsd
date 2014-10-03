@@ -1984,6 +1984,7 @@ read_config(struct dhcpcd_ctx *ctx,
 	FILE *fp;
 	char *line, *buf, *option, *p;
 	size_t buflen;
+	ssize_t vlen;
 	int skip = 0, have_profile = 0;
 #ifndef EMBEDDED_CONFIG
 	const char * const *e;
@@ -2019,9 +2020,9 @@ read_config(struct dhcpcd_ctx *ctx,
 	ifo->auth.options |= DHCPCD_AUTH_REQUIRE;
 	TAILQ_INIT(&ifo->auth.tokens);
 
-	ifo->vendorclassid[0] =
-	    (uint8_t)dhcp_vendor((char *)ifo->vendorclassid + 1,
-	    sizeof(ifo->vendorclassid) - 1);
+	vlen = dhcp_vendor((char *)ifo->vendorclassid + 1,
+	            sizeof(ifo->vendorclassid) - 1);
+	ifo->vendorclassid[0] = vlen == -1 ? 0 : (uint8_t)vlen;
 
 	buf = NULL;
 	buflen = 0;

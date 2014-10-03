@@ -6,7 +6,7 @@
 /base64.c/1.14/Mon Jun 25 22:32:44 2012/-kk/
 /byteorder.3/1.15/Tue May  3 04:07:39 2011/-kk/
 /ethers.3/1.13/Wed Apr 16 13:34:41 2003/-kk/
-/ethers.c/1.24/Sun Jun 22 14:31:48 2014/-kk/
+/ethers.c/1.25/Fri Oct  3 09:57:25 2014/-kk/
 /gai_strerror.3/1.5/Mon Mar 22 19:30:54 2010/-kk/
 /getaddrinfo.3/1.57/Thu Oct 24 10:28:53 2013/-kk/
 /getaddrinfo.c/1.106/Wed Jan  1 02:45:13 2014/-kk/
@@ -36,7 +36,7 @@
 /getservent.c/1.12/Mon Apr 28 20:23:00 2008/-kk/
 /getservent_r.c/1.11/Sat Oct 15 23:00:02 2011/-kk/
 /hesiod.3/1.7/Tue Mar 10 23:36:10 2009/-kk/
-/hesiod.c/1.27/Tue Mar 20 17:44:18 2012/-kk/
+/hesiod.c/1.28/Fri Oct  3 09:57:25 2014/-kk/
 /hostent.h/1.2/Thu Oct 24 10:28:53 2013/-kk/
 /if_indextoname.3/1.12/Mon Mar 22 19:30:54 2010/-kk/
 /if_indextoname.c/1.7/Mon Dec 13 23:10:12 2010/-kk/
@@ -53,12 +53,12 @@
 /linkaddr.3/1.10/Thu Aug  7 16:43:11 2003/-kk/
 /linkaddr.c/1.16/Tue Mar 20 17:44:18 2012/-kk/
 /nsdispatch.3/1.31/Thu Apr 28 16:16:23 2011/-kk/
-/nsdispatch.c/1.37/Tue Mar 13 21:13:42 2012/-kk/
+/nsdispatch.c/1.38/Fri Oct  3 09:57:25 2014/-kk/
 /nslexer.l/1.13/Mon Jun 25 22:32:45 2012/-kk/
 /nsparser.y/1.12/Tue Mar 20 17:44:18 2012/-kk/
 /protoent.h/1.2/Mon Apr 28 20:23:00 2008/-kk/
 /rcmd.3/1.28/Mon Mar 22 19:30:54 2010/-kk/
-/rcmd.c/1.69/Tue Jun  3 03:08:57 2014/-kk/
+/rcmd.c/1.70/Fri Oct  3 09:57:25 2014/-kk/
 /recv.c/1.10/Tue Mar 20 17:44:18 2012/-kk/
 /resolver.3/1.28/Mon Nov 18 05:31:22 2013/-kk/
 /rthdr.c/1.18/Tue Mar 13 21:13:42 2012/-kk/

@@ -179,7 +179,7 @@ typedef struct Struct_Obj_Entry {
 	const Elf_Sym  *symtab;		/* Symbol table */
 	const char     *strtab;		/* String table */
 	unsigned long   strsize;	/* Size in bytes of string table */
-#ifdef __mips__
+#if defined(__mips__) || defined(__riscv__)
 	Elf_Word        local_gotno;	/* Number of local GOT entries */
 	Elf_Word        symtabno;	/* Number of dynamic symbols */
 	Elf_Word        gotsym;		/* First dynamic symbol in GOT */

@@ -116,6 +116,8 @@
 ./powerpc/include/elf_machdep.h
 ./prep/include/disklabel.h
 ./prep/include/elf_machdep.h
+./riscv/include/disklabel.h
+./riscv/include/elf_machdep.h
 ./rs6000/include/disklabel.h
 ./rs6000/include/elf_machdep.h
 ./sandpoint/include/disklabel.h

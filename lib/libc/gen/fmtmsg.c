@@ -213,7 +213,7 @@ fmtmsg(long classification, const char *label, int severity,
 	}
 	/* Similar to MM_PRINT but ignoring $MSGVERB. */
 	if (classification & MM_CONSOLE) {
-		if ((console = fopen(_PATH_CONSOLE, "w")) != NULL) {
+		if ((console = fopen(_PATH_CONSOLE, "we")) != NULL) {
 			if (writeit(console, MM_VERBALL,
 			    label, sevstr, text, action, tag) < 0)
 				result |= MM_NOCON;

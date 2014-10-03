@@ -1,6 +1,6 @@
-/MAKEDEV.awk/1.24/Thu Oct 24 10:28:41 2013/-kk/
+/MAKEDEV.awk/1.25/Fri Oct  3 09:54:56 2014/-kk/
 /MAKEDEV.local/1.14/Wed Apr 30 13:10:49 2008/-kk/
-/MAKEDEV.tmpl/1.172/Thu Oct 31 06:57:20 2013/-kk/
+/MAKEDEV.tmpl/1.173/Fri Oct  3 09:54:56 2014/-kk/
 /Makefile.params/1.12/Fri Oct  3 09:21:56 2014/-kk/
 /Makefile/1.421/Fri Oct  3 09:21:56 2014/-kk/
 /aliases/1.22/Wed Aug 25 15:38:44 2010/-kk/
@@ -120,6 +120,7 @@ D/etc.or1k////
 D/etc.playstation2////
 D/etc.pmax////
 D/etc.prep////
+D/etc.riscv////
 D/etc.rs6000////
 D/etc.sandpoint////
 D/etc.sbmips////

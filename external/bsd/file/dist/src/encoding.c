@@ -102,7 +102,6 @@ file_encoding(struct magic_set *ms, const unsigned char *buf, size_t nbytes, uni
 		*code_mime = "utf-8";
 	} else if (file_looks_utf8(buf, nbytes, *ubuf, ulen) > 1) {
 		DPRINTF(("utf8 %" SIZE_T_FORMAT "u\n", *ulen));
-		*code = "UTF-8 Unicode (with BOM)";
 		*code = "UTF-8 Unicode";
 		*code_mime = "utf-8";
 	} else if ((ucs_type = looks_ucs16(buf, nbytes, *ubuf, ulen)) != 0) {

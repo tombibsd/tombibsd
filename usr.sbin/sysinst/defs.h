@@ -489,7 +489,7 @@ int	get_real_geom(const char *, struct disklabel *);
 
 /* from net.c */
 extern int network_up;
-extern char net_namesvr6[STRSIZE];
+extern char net_namesvr[STRSIZE];
 int	get_via_ftp(const char *);
 int	get_via_nfs(void);
 int	config_network(void);

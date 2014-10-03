@@ -12,6 +12,8 @@ D/mips64////
 D/or1k////
 D/powerpc////
 D/powerpc64////
+D/riscv32////
+D/riscv64////
 D/sh3////
 D/sparc////
 D/sparc64////

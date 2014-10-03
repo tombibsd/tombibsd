@@ -639,7 +639,7 @@ ext2fs_mountfs(struct vnode *devvp, struct mount *mp)
 	kauth_cred_t cred;
 
 	dev = devvp->v_rdev;
-	cred = l ? l->l_cred : NOCRED;
+	cred = l->l_cred;
 
 	/* Flush out any old buffers remaining from a previous use. */
 	vn_lock(devvp, LK_EXCLUSIVE | LK_RETRY);

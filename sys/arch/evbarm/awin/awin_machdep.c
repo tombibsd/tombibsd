@@ -335,7 +335,7 @@ initarm(void *arg)
 
 #ifdef VERBOSE_INIT_ARM
 	/* Talk to the user */
-	printf("\nNetBSD/evbarm (" __STRING(BOARDTYPE) ") booting ...\n");
+	printf("\nNetBSD/evbarm (" BOARDTYPE ") booting ...\n");
 #endif
 
 #ifdef BOOT_ARGS
@@ -591,8 +591,15 @@ awin_device_register(device_t self, void *aux)
 		 */
 		prop_dictionary_set_cstring(dict, "satapwren",
 		    (cubietruck_p ? ">PH12" : ">PB8"));
-		prop_dictionary_set_cstring(dict, "usb0drv",
-		    (cubietruck_p ? ">PH17" : ">PB2"));
+#if AWIN_board == AWIN_cubieboard || AWIN_board == AWIN_cubietruck
+		if (cubietruck_p) {
+			prop_dictionary_set_cstring(dict, "usb0drv", ">PH17");
+		} else if (awin_chip_id() == AWIN_CHIP_ID_A20) {
+			prop_dictionary_set_cstring(dict, "usb0drv", ">PB9");
+		} else {
+			prop_dictionary_set_cstring(dict, "usb0drv", ">PB2");
+		}
+#endif
 		prop_dictionary_set_cstring(dict, "usb2drv", ">PH3");
 		prop_dictionary_set_cstring(dict, "usb0iddet",
 		    (cubietruck_p ? "<PH19" : "<PH4"));

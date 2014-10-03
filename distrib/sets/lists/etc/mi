@@ -270,7 +270,7 @@
 ./etc/rc.d/rpcbind				etc-rpcbind-rc
 ./etc/rc.d/rtadvd				etc-net-rc
 ./etc/rc.d/rtclocaltime				etc-sys-rc
-./etc/rc.d/rtsold				etc-net-rc
+./etc/rc.d/rtsold				etc-obsolete		obsolete
 ./etc/rc.d/rwho					etc-net-rc
 ./etc/rc.d/savecore				etc-sys-rc
 ./etc/rc.d/screenblank				etc-sys-rc

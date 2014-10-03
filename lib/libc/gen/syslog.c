@@ -457,7 +457,8 @@ vsyslogp_r(int pri, struct syslog_data *data, const char *msgid,
 	 * Make sure the error reported is the one from the syslogd failure.
 	 */
 	if (tries == MAXTRIES && (data->log_stat & LOG_CONS) &&
-	    (fd = open(_PATH_CONSOLE, O_WRONLY|O_NONBLOCK, 0)) >= 0) {
+	    (fd = open(_PATH_CONSOLE,
+		O_WRONLY | O_NONBLOCK | O_CLOEXEC, 0)) >= 0) {
 		iov[iovcnt].iov_base = __UNCONST(CRLF);
 		iov[iovcnt].iov_len = 2;
 		(void)writev(fd, iov, iovcnt + 1);

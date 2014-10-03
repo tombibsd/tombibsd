@@ -107,7 +107,8 @@ getpassfd(const char *prompt, char *buf, size_t len, int *fd, int flags,
 		 * and write to stderr.
 		 */
 		fd = fdc;
-		if ((fd[0] = fd[1] = fd[2] = open(_PATH_TTY, O_RDWR)) == -1) {
+		if ((fd[0] = fd[1] = fd[2] = open(_PATH_TTY,
+		    O_RDWR | O_CLOEXEC)) == -1) {
 			fd[0] = STDIN_FILENO;
 			fd[1] = fd[2] = STDERR_FILENO;
 		} else

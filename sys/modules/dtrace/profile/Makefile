@@ -4,7 +4,7 @@
 
 .PATH: ${NETBSDSRCDIR}/external/cddl/osnet/dev/profile
 
-KMOD=		profile
+KMOD=		dtrace_profile
 SRCS=		profile.c
 
 CPPFLAGS+=	-I${NETBSDSRCDIR}/external/cddl/osnet/sys \

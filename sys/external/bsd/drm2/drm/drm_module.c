@@ -33,6 +33,7 @@
 __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <sys/types.h>
+#include <sys/conf.h>
 #include <sys/device.h>
 #include <sys/module.h>
 #ifndef _MODULE
@@ -49,10 +50,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
  * XXX I2C stuff should be moved to a separate drmkms_i2c module.
  */
 MODULE(MODULE_CLASS_DRIVER, drmkms, "iic,drmkms_linux");
-
-#ifdef _MODULE
-#include "ioconf.c"
-#endif
 
 struct mutex	drm_global_mutex;
 

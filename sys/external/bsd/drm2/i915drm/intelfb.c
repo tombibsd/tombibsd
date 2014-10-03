@@ -218,8 +218,8 @@ intelfb_setconfig_task(struct i915drmkms_task *task)
 	if (vga_is_console(dev->pdev->pd_pa.pa_iot, -1)) {
 		what_was_cons = CONS_VGA;
 		prop_dictionary_set_bool(dict, "is_console", true);
-		i915_disable_vga(dev);
 		vga_cndetach();
+		i915_disable_vga(dev);
 	} else
 #endif
 	if (genfb_is_console() && genfb_is_enabled()) {

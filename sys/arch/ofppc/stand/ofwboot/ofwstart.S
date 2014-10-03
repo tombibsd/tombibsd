@@ -95,9 +95,8 @@ _entry:
 _start:
 	sync
 	isync
-	lis	%r1,stack@ha
-	addi	%r1,%r1,stack@l
-	addi	%r1,%r1,8192
+	lis	%r1,stack+0x20000@ha
+	addi	%r1,%r1,stack+0x20000@l
 
 	mfmsr	%r8
 	li	%r0,0

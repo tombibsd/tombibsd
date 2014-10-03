@@ -5,8 +5,8 @@
 #
 define	hdaudiobus	{[nid = -1]}
 device	hdaudio: hdaudiobus
-file	dev/pci/hdaudio/hdaudio.c	hdaudio
-file	dev/pci/hdaudio/hdaudio_ids.c	hdaudio
+file	dev/pci/hdaudio/hdaudio.c		hdaudio
+file	dev/pci/hdaudio/hdaudio_verbose.c	hdaudio & hdaudioverbose
 
 device	hdafg: audiobus, auconv, aurateconv, mulaw
 attach	hdafg at hdaudiobus

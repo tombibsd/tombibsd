@@ -8,7 +8,7 @@ EXTRA_LINKFLAGS+=	--be8
 SYSTEM_FIRST_OBJ=	awin_start.o
 SYSTEM_FIRST_SFILE=	${THISARM}/awin/awin_start.S
 
-CPPFLAGS.awin_machdep.c+=	-DBOARDTYPE=${BOARDTYPE}
+CPPFLAGS.awin_machdep.c+=	-DBOARDTYPE='"${BOARDTYPE}"'
 CPPFLAGS.awin_machdep.c+=	-DAWIN_board=AWIN_${BOARDTYPE}
 
 GENASSYM_EXTRAS+=	${THISARM}/awin/genassym.cf

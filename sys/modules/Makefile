@@ -135,6 +135,7 @@ SUBDIR+=	coretemp
 SUBDIR+=	est
 SUBDIR+=	hdafg
 SUBDIR+=	hdaudio
+SUBDIR+=	hdaudioverbose
 SUBDIR+=	hpet
 SUBDIR+=	odcm
 SUBDIR+=	powernow

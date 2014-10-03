@@ -113,6 +113,8 @@
 /elf32lppc.sh/1.1.1.1/Tue Aug 18 10:05:16 2009/-kk/
 /elf32lppcnto.sh/1.1.1.1/Tue Aug 18 10:05:16 2009/-kk/
 /elf32lppcsim.sh/1.1.1.1/Tue Aug 18 10:05:16 2009/-kk/
+/elf32lriscv-defs.sh/1.1/Fri Sep 19 17:19:53 2014/-kk/
+/elf32lriscv.sh/1.1/Fri Sep 19 17:19:53 2014/-kk/
 /elf32lsmip.sh/1.1.1.1/Tue Aug 18 10:05:16 2009/-kk/
 /elf32ltsmip.sh/1.1.1.1/Tue Aug 18 10:05:16 2009/-kk/
 /elf32ltsmip_fbsd.sh/1.1.1.1/Thu Oct 24 10:28:51 2013/-kk/
@@ -166,6 +168,8 @@
 /elf64btsmip_fbsd.sh/1.1.1.1/Thu Oct 24 10:28:51 2013/-kk/
 /elf64hppa.sh/1.1.1.2/Sat Sep 24 22:22:13 2011/-kk/
 /elf64lppc.sh/1.1.1.1/Tue Aug 18 10:05:16 2009/-kk/
+/elf64lriscv-defs.sh/1.1/Fri Sep 19 17:19:53 2014/-kk/
+/elf64lriscv.sh/1.1/Fri Sep 19 17:19:53 2014/-kk/
 /elf64ltsmip.sh/1.1.1.1/Tue Aug 18 10:05:16 2009/-kk/
 /elf64ltsmip_fbsd.sh/1.1.1.1/Thu Oct 24 10:28:51 2013/-kk/
 /elf64mmix.sh/1.1.1.2/Sat Sep 24 22:22:13 2011/-kk/

@@ -34,7 +34,7 @@ CONFIGFILES=\
 		quota \
 		racoon rpcbind raidframe raidframeparity random_seed rarpd \
 		rbootd rndctl root route6d routed rtadvd rtclocaltime \
-		rtsold rwho \
+		rwho \
 		savecore screenblank securelevel sshd \
 		staticroute swap1 swap2 sysctl sysdb syslogd \
 		timed tpctl ttys \

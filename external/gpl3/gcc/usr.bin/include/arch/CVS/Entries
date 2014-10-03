@@ -28,6 +28,8 @@
 /or1k.mk/1.1/Wed Sep  3 19:10:36 2014/-kk/
 /powerpc.mk/1.2/Tue Jun  3 03:07:18 2014/-kk/
 /powerpc64.mk/1.1/Mon Jun 23 02:29:20 2014/-kk/
+/riscv32.mk/1.1/Fri Sep 19 17:23:24 2014/-kk/
+/riscv64.mk/1.1/Fri Sep 19 17:23:24 2014/-kk/
 /sh3eb.mk/1.1/Sat Mar  1 10:00:52 2014/-kk/
 /sh3el.mk/1.1/Sat Mar  1 10:00:52 2014/-kk/
 /sparc.mk/1.1/Sat Mar  1 10:00:52 2014/-kk/

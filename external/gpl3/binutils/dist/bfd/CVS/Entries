@@ -39,10 +39,10 @@
 /aoutx.h/1.5/Tue Oct 29 12:08:30 2013/-kk/
 /archive.c/1.4/Tue Oct 29 12:08:30 2013/-kk/
 /archive64.c/1.1.1.3/Tue Oct 29 12:08:30 2013/-kk/
-/archures.c/1.5/Fri Oct  3 09:48:56 2014/-kk/
+/archures.c/1.6/Fri Oct  3 09:55:54 2014/-kk/
 /armnetbsd.c/1.1.1.1/Tue Aug 18 09:23:24 2009/-kk/
 /bfd-in.h/1.1.1.3/Tue Oct 29 12:08:30 2013/-kk/
-/bfd-in2.h/1.6/Fri Oct  3 09:48:56 2014/-kk/
+/bfd-in2.h/1.7/Fri Oct  3 09:55:54 2014/-kk/
 /bfd.c/1.4/Tue Oct 29 12:08:30 2013/-kk/
 /bfd.m4/1.1.1.2/Sat Sep 24 22:45:56 2011/-kk/
 /bfdio.c/1.1.1.3/Tue Oct 29 12:08:30 2013/-kk/
@@ -90,12 +90,12 @@
 /cofflink.c/1.1.1.3/Tue Oct 29 12:08:30 2013/-kk/
 /coffswap.h/1.1.1.2/Sat Sep 24 22:44:42 2011/-kk/
 /compress.c/1.1.1.3/Tue Oct 29 12:08:30 2013/-kk/
-/config.bfd/1.13/Fri Oct  3 09:48:56 2014/-kk/
+/config.bfd/1.14/Fri Oct  3 09:55:54 2014/-kk/
 /config.in/1.1.1.3/Tue Oct 29 12:08:30 2013/-kk/
 /configure.com/1.1.1.3/Tue Oct 29 12:08:30 2013/-kk/
 /configure.host/1.4/Tue Oct 29 12:08:30 2013/-kk/
-/configure.in/1.5/Fri Oct  3 09:48:56 2014/-kk/
-/configure/1.6/Fri Oct  3 09:48:56 2014/-kk/
+/configure.in/1.6/Fri Oct  3 09:55:54 2014/-kk/
+/configure/1.7/Fri Oct  3 09:55:54 2014/-kk/
 /corefile.c/1.1.1.3/Tue Oct 29 12:08:30 2013/-kk/
 /cpu-aarch64.c/1.1.1.1/Thu Oct 24 10:28:51 2013/-kk/
 /cpu-alpha.c/1.1.1.3/Tue Oct 29 12:08:30 2013/-kk/
@@ -152,6 +152,7 @@
 /cpu-pj.c/1.1.1.3/Tue Oct 29 12:08:30 2013/-kk/
 /cpu-plugin.c/1.1.1.2/Tue Oct 29 12:08:30 2013/-kk/
 /cpu-powerpc.c/1.1.1.3/Tue Oct 29 12:08:30 2013/-kk/
+/cpu-riscv.c/1.1/Fri Sep 19 17:19:52 2014/-kk/
 /cpu-rl78.c/1.1.1.1/Thu Oct 24 10:28:51 2013/-kk/
 /cpu-rs6000.c/1.1.1.3/Tue Oct 29 12:08:30 2013/-kk/
 /cpu-rx.c/1.1.1.2/Tue Oct 29 12:08:30 2013/-kk/
@@ -185,7 +186,7 @@
 /ecofflink.c/1.1.1.3/Tue Oct 29 12:08:30 2013/-kk/
 /ecoffswap.h/1.1.1.1/Tue Aug 18 09:24:17 2009/-kk/
 /elf-attrs.c/1.1.1.3/Tue Oct 29 12:08:30 2013/-kk/
-/elf-bfd.h/1.2/Fri Oct  3 09:48:56 2014/-kk/
+/elf-bfd.h/1.3/Fri Oct  3 09:55:54 2014/-kk/
 /elf-eh-frame.c/1.4/Tue Oct 29 12:08:30 2013/-kk/
 /elf-hppa.h/1.1.1.2/Sat Sep 24 22:44:17 2011/-kk/
 /elf-ifunc.c/1.1.1.2/Tue Oct 29 12:08:30 2013/-kk/
@@ -244,6 +245,7 @@
 /elf32-pj.c/1.1.1.1/Tue Aug 18 09:25:23 2009/-kk/
 /elf32-ppc.c/1.6/Tue Oct 29 12:08:31 2013/-kk/
 /elf32-ppc.h/1.1.1.3/Tue Oct 29 12:08:31 2013/-kk/
+/elf32-riscv.c/1.1/Fri Sep 19 17:19:52 2014/-kk/
 /elf32-rl78.c/1.1.1.1/Thu Oct 24 10:28:51 2013/-kk/
 /elf32-rx.c/1.1.1.2/Tue Oct 29 12:08:31 2013/-kk/
 /elf32-s390.c/1.1.1.3/Tue Oct 29 12:08:31 2013/-kk/
@@ -283,6 +285,7 @@
 /elf64-mmix.c/1.1.1.3/Tue Oct 29 12:08:31 2013/-kk/
 /elf64-ppc.c/1.5/Fri Mar 14 04:24:15 2014/-kk/
 /elf64-ppc.h/1.1.1.3/Tue Oct 29 12:08:31 2013/-kk/
+/elf64-riscv.c/1.1/Fri Sep 19 17:19:52 2014/-kk/
 /elf64-s390.c/1.1.1.3/Tue Oct 29 12:08:31 2013/-kk/
 /elf64-sh64.c/1.1.1.3/Tue Oct 29 12:08:31 2013/-kk/
 /elf64-sparc.c/1.1.1.3/Tue Oct 29 12:08:31 2013/-kk/
@@ -299,6 +302,8 @@
 /elfxx-ia64.h/1.1.1.1/Thu Oct 24 10:28:51 2013/-kk/
 /elfxx-mips.c/1.8/Fri Oct  3 09:41:34 2014/-kk/
 /elfxx-mips.h/1.1.1.3/Tue Oct 29 12:08:31 2013/-kk/
+/elfxx-riscv.c/1.1/Fri Sep 19 17:19:52 2014/-kk/
+/elfxx-riscv.h/1.1/Fri Sep 19 17:19:52 2014/-kk/
 /elfxx-sparc.c/1.6/Tue Oct 29 12:08:31 2013/-kk/
 /elfxx-sparc.h/1.1.1.3/Tue Oct 29 12:08:31 2013/-kk/
 /elfxx-target.h/1.1.1.3/Tue Oct 29 12:08:31 2013/-kk/
@@ -334,7 +339,7 @@
 /libaout.h/1.1.1.2/Sat Sep 24 22:42:05 2011/-kk/
 /libbfd-in.h/1.1.1.3/Tue Oct 29 12:08:31 2013/-kk/
 /libbfd.c/1.1.1.3/Tue Oct 29 12:08:31 2013/-kk/
-/libbfd.h/1.5/Fri Oct  3 09:48:57 2014/-kk/
+/libbfd.h/1.6/Fri Oct  3 09:55:55 2014/-kk/
 /libcoff-in.h/1.1.1.3/Tue Oct 29 12:08:31 2013/-kk/
 /libcoff.h/1.1.1.3/Tue Oct 29 12:08:31 2013/-kk/
 /libecoff.h/1.1.1.2/Sat Sep 24 22:42:02 2011/-kk/
@@ -426,7 +431,7 @@
 /sunos.c/1.1.1.2/Tue Oct 29 12:08:31 2013/-kk/
 /syms.c/1.4/Tue Oct 29 12:08:31 2013/-kk/
 /sysdep.h/1.1.1.3/Tue Oct 29 12:08:31 2013/-kk/
-/targets.c/1.2/Fri Oct  3 09:48:57 2014/-kk/
+/targets.c/1.3/Fri Oct  3 09:55:55 2014/-kk/
 /targmatch.sed/1.1.1.1/Tue Aug 18 09:27:36 2009/-kk/
 /tekhex.c/1.1.1.3/Tue Oct 29 12:08:31 2013/-kk/
 /ticoff.h/1.1.1.3/Tue Oct 29 12:08:31 2013/-kk/

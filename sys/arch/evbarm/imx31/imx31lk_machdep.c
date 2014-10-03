@@ -171,10 +171,10 @@ BootConfig bootconfig;		/* Boot config storage */
 char *boot_args = NULL;
 char *boot_file = NULL;
 
-vm_offset_t physical_start;
-vm_offset_t physical_freestart;
-vm_offset_t physical_freeend;
-vm_offset_t physical_end;
+vaddr_t physical_start;
+vaddr_t physical_freestart;
+vaddr_t physical_freeend;
+vaddr_t physical_end;
 u_int free_pages;
 
 /*int debug_flags;*/
@@ -182,7 +182,7 @@ u_int free_pages;
 int max_processes = 64;			/* Default number */
 #endif	/* !PMAP_STATIC_L1S */
 
-vm_offset_t msgbufphys;
+paddr_t msgbufphys;
 
 #ifdef PMAP_DEBUG
 extern int pmap_debug_level;

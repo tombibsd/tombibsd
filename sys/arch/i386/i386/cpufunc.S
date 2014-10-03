@@ -188,8 +188,7 @@ NENTRY(msr_onfault)
 	movl	$0, PCB_ONFAULT(%ecx)
 	movl	$EFAULT, %eax
 	ret
-
-END(rdmsr_safe)
+END(msr_onfault)
 
 ENTRY(cpu_counter)
 	rdtsc

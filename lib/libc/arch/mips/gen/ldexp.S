@@ -209,7 +209,7 @@ LEAF(ldexp)
 	bge	v1, zero, 1f		# should result be negative infinity?
 	neg.d	$f0, $f0		# result is negative infinity
 1:
-	add.d	$f0, $f0		# cause overflow faults if enabled
+	add.d	$f0, $f0, $f0		# cause overflow faults if enabled
 	j	ra
 9:
 	mov.d	$f0, $f12		# yes, result is just x

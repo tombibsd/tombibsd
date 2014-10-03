@@ -34,6 +34,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/systm.h>
 #include <sys/kernel.h>
 #include <sys/dirent.h>
+#include <sys/condvar.h>
 #include <sys/ksem.h>
 #include <sys/mount.h>
 #include <sys/proc.h>

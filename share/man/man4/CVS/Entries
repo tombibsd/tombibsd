@@ -4,7 +4,7 @@
 /acardide.4/1.4/Mon Oct 19 18:41:08 2009/-kk/
 /aceride.4/1.3/Mon Oct 19 18:41:08 2009/-kk/
 /acphy.4/1.3/Fri Jan 17 06:23:53 2003/-kk/
-/acpi.4/1.77/Sun Jul 20 13:58:31 2014/-kk/
+/acpi.4/1.78/Fri Oct  3 09:57:29 2014/-kk/
 /acpiacad.4/1.6/Wed Apr 30 13:10:53 2008/-kk/
 /acpibat.4/1.9/Thu Mar 25 15:34:30 2010/-kk/
 /acpibut.4/1.4/Sun Apr 25 07:12:10 2010/-kk/
@@ -228,7 +228,7 @@
 /gus.4/1.13/Wed Apr 30 13:10:54 2008/-kk/
 /guspnp.4/1.18/Tue Mar 25 02:35:15 2014/-kk/
 /hcide.4/1.7/Fri Apr 10 15:23:31 2009/-kk/
-/hdaudio.4/1.13/Thu Oct 24 10:28:54 2013/-kk/
+/hdaudio.4/1.14/Fri Oct  3 09:57:30 2014/-kk/
 /hifn.4/1.7/Tue Mar 13 19:25:40 2012/-kk/
 /hil.4/1.2/Sat Mar  1 06:04:18 2014/-kk/
 /hilid.4/1.1/Wed Feb  9 15:12:41 2011/-kk/
@@ -252,7 +252,7 @@
 /ieee80211.4/1.4/Thu Feb 26 12:53:35 2009/-kk/
 /ifmedia.4/1.29/Fri Apr 10 17:07:15 2009/-kk/
 /ifpci.4/1.6/Wed Apr 30 13:10:54 2008/-kk/
-/igmafb.4/1.2/Thu Jan 23 15:17:59 2014/-kk/
+/igmafb.4/1.3/Fri Oct  3 09:57:30 2014/-kk/
 /igphy.4/1.1/Tue Jun  8 05:38:32 2010/-kk/
 /igsfb.4/1.2/Sun Jun  1 01:14:30 2003/-kk/
 /iha.4/1.4/Tue Mar 13 19:25:40 2012/-kk/

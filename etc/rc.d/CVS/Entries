@@ -1,7 +1,7 @@
 /DAEMON/1.8/Fri Mar 22 04:33:57 2002/-kk/
 /DISKS/1.1/Tue Apr 21 16:08:57 2009/-kk/
 /LOGIN/1.7/Fri Mar 22 04:33:57 2002/-kk/
-/Makefile/1.89/Thu Oct 24 10:28:41 2013/-kk/
+/Makefile/1.90/Fri Oct  3 09:54:57 2014/-kk/
 /NETWORKING/1.2/Fri Mar 22 04:33:57 2002/-kk/
 /SERVERS/1.9/Fri Mar 22 04:33:57 2002/-kk/
 /accounting/1.9/Sun Oct  8 18:08:39 2006/-kk/
@@ -62,7 +62,7 @@
 /mrouted/1.7/Fri Aug 13 18:08:03 2004/-kk/
 /named/1.25/Sun Jul 20 13:55:29 2014/-kk/
 /ndbootd/1.2/Fri Aug 13 18:08:03 2004/-kk/
-/network/1.66/Tue May  6 05:47:04 2014/-kk/
+/network/1.67/Fri Oct  3 09:54:57 2014/-kk/
 /newsyslog/1.6/Fri Aug 13 18:08:03 2004/-kk/
 /nfsd/1.7/Tue Oct 12 14:51:03 2004/-kk/
 /nfslocking/1.8/Tue Oct 12 14:51:03 2004/-kk/
@@ -91,7 +91,6 @@
 /rpcbind/1.7/Fri Aug 13 18:08:03 2004/-kk/
 /rtadvd/1.8/Thu Oct 24 10:28:41 2013/-kk/
 /rtclocaltime/1.9/Wed Apr  8 13:29:59 2009/-kk/
-/rtsold/1.7/Sat Oct  7 21:41:41 2006/-kk/
 /rwho/1.6/Fri Aug 13 18:08:03 2004/-kk/
 /savecore/1.8/Mon Sep 14 17:34:56 2009/-kk/
 /screenblank/1.6/Fri Aug 13 18:08:03 2004/-kk/

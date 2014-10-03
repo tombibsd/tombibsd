@@ -4,6 +4,7 @@
 
 .PATH: ${S}/external/bsd/drm2/linux
 
+CPPFLAGS+=	-I${S}/external/bsd/common/include
 CPPFLAGS+=	-I${S}/external/bsd/drm2/include
 
 # XXX Kludge!

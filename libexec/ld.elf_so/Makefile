@@ -36,6 +36,7 @@ M=		${.CURDIR}/arch/${ARCHSUBDIR}
      (${MACHINE_CPU} == "mips") ||					\
      (${MACHINE_CPU} == "or1k") ||					\
      (${MACHINE_CPU} == "powerpc") ||					\
+     (${MACHINE_CPU} == "riscv") ||					\
      (${MACHINE_CPU} == "sh3") ||					\
      (${LDELFSO_MACHINE_ARCH} == "sparc") ||				\
      (${LDELFSO_MACHINE_ARCH} == "sparc64") ||				\

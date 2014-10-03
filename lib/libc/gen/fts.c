@@ -601,7 +601,7 @@ fts_children(FTS *sp, int instr)
 	    ISSET(FTS_NOCHDIR))
 		return (sp->fts_child = fts_build(sp, instr));
 
-	if ((fd = open(".", O_RDONLY, 0)) == -1)
+	if ((fd = open(".", O_RDONLY | O_CLOEXEC, 0)) == -1)
 		return (sp->fts_child = NULL);
 	sp->fts_child = fts_build(sp, instr);
 	if (fchdir(fd)) {
@@ -1211,7 +1211,7 @@ fts_safe_changedir(const FTS *sp, const FTSENT *p, int fd, const char *path)
 	if (ISSET(FTS_NOCHDIR))
 		return 0;
 
-	if (oldfd < 0 && (fd = open(path, O_RDONLY)) == -1)
+	if (oldfd < 0 && (fd = open(path, O_RDONLY | O_CLOEXEC)) == -1)
 		return -1;
 
 	if (fstat(fd, &sb) == -1)

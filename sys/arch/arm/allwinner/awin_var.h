@@ -91,6 +91,7 @@ void	awin_bootstrap(vaddr_t, vaddr_t);
 void	awin_dma_bootstrap(psize_t);
 void	awin_pll2_enable(void);
 void	awin_pll6_enable(void);
+void	awin_pll7_enable(void);
 void	awin_cpu_hatch(struct cpu_info *);
 
 #define AWIN_CHIP_ID_A10	0x1623

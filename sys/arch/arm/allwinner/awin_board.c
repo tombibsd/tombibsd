@@ -231,8 +231,9 @@ awin_memprobe(void)
 	const uint32_t dcr = bus_space_read_4(&awin_bs_tag, awin_core_bsh,
 	    AWIN_DRAM_OFFSET + AWIN_DRAM_DCR_REG);
 
-	psize_t memsize = __SHIFTOUT(dcr, AWIN_DRAM_DCR_IO_WIDTH);
-	memsize <<= __SHIFTOUT(dcr, AWIN_DRAM_DCR_CHIP_DENSITY) + 28 - 3;
+	psize_t memsize = (__SHIFTOUT(dcr, AWIN_DRAM_DCR_BUS_WIDTH) + 1)
+	   / __SHIFTOUT(dcr, AWIN_DRAM_DCR_IO_WIDTH);
+	memsize *= 1 << (__SHIFTOUT(dcr, AWIN_DRAM_DCR_CHIP_DENSITY) + 28 - 3);
 #ifdef VERBOSE_INIT_ARM
 	printf("sdram_config = %#x, memsize = %uMB\n", dcr,
 	    (u_int)(memsize >> 20));
@@ -333,5 +334,27 @@ awin_pll2_enable(void)
 	if (ncfg != ocfg) {
 		bus_space_write_4(bst, bsh,
 		    AWIN_CCM_OFFSET + AWIN_PLL2_CFG_REG, ncfg);
+	}
+}
+
+void
+awin_pll7_enable(void)
+{
+	bus_space_tag_t bst = &awin_bs_tag;
+	bus_space_handle_t bsh = awin_core_bsh;
+
+	/*
+	 * HDMI needs PLL7 to be 29700000 Hz
+	 */
+	const uint32_t ocfg = bus_space_read_4(bst, bsh,
+	    AWIN_CCM_OFFSET + AWIN_PLL7_CFG_REG);
+
+	uint32_t ncfg = ocfg;
+	ncfg &= ~(AWIN_PLL7_MODE_SEL|AWIN_PLL7_FRAC_SET|AWIN_PLL7_FACTOR_M);
+	ncfg |= AWIN_PLL7_FRAC_SET;
+	ncfg |= AWIN_PLL_CFG_ENABLE;
+	if (ncfg != ocfg) {
+		bus_space_write_4(bst, bsh,
+		    AWIN_CCM_OFFSET + AWIN_PLL7_CFG_REG, ncfg);
 	}
 }

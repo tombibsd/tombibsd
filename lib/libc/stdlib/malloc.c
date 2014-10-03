@@ -107,7 +107,7 @@ static mutex_t thread_lock = MUTEX_INITIALIZER;
     static int fdzero;
 #   define MMAP_FD	fdzero
 #   define INIT_MMAP() \
-	{ if ((fdzero = open(_PATH_DEVZERO, O_RDWR, 0000)) == -1) \
+	{ if ((fdzero = open(_PATH_DEVZERO, O_RDWR | O_CLOEXEC, 0000)) == -1) \
 	    wrterror("open of /dev/zero"); }
 #endif /* __sparc__ */
 

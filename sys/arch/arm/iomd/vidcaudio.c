@@ -114,8 +114,8 @@ struct vidcaudio_softc {
 	int	sc_is16bit;
 
 	size_t	sc_pblksize;
-	vm_offset_t	sc_poffset;
-	vm_offset_t	sc_pbufsize;
+	vaddr_t	sc_poffset;
+	vaddr_t	sc_pbufsize;
 	paddr_t	*sc_ppages;
 	void	(*sc_pintr)(void *);
 	void	*sc_parg;

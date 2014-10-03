@@ -14,7 +14,7 @@
 /flock.c/1.6/Mon Apr 28 20:24:12 2008/-kk/
 /fpurge.c/1.1/Tue Jun 16 22:35:34 2009/-kk/
 /fts.h/1.2/Mon Oct 27 00:12:43 2003/-kk/
-/getline.c/1.1/Sun Mar 20 20:48:57 2011/-kk/
+/getline.c/1.2/Fri Oct  3 09:58:01 2014/-kk/
 /getmode.c/1.8/Tue Nov  4 23:31:32 2008/-kk/
 /glob.h/1.2/Mon Oct 27 00:12:43 2003/-kk/
 /issetugid.c/1.2/Mon Oct 27 00:12:43 2003/-kk/

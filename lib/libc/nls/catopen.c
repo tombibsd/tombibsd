@@ -163,7 +163,7 @@ load_msgcat(const char *path)
 
 	_DIAGASSERT(path != NULL);
 
-	if ((fd = open(path, O_RDONLY)) == -1)
+	if ((fd = open(path, O_RDONLY|O_CLOEXEC)) == -1)
 		return (nl_catd)-1;
 
 	if (fstat(fd, &st) != 0) {

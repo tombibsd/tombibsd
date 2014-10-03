@@ -148,14 +148,14 @@ struct bootconfig bootconfig;		/* Boot config storage */
 char *boot_args = NULL;
 char *boot_file = NULL;
 
-vm_offset_t physical_start;
-vm_offset_t physical_freestart;
-vm_offset_t physical_freeend;
-vm_offset_t physical_freeend_low;
-vm_offset_t physical_end;
+vaddr_t physical_start;
+vaddr_t physical_freestart;
+vaddr_t physical_freeend;
+vaddr_t physical_freeend_low;
+vaddr_t physical_end;
 u_int free_pages;
 
-vm_offset_t msgbufphys;
+paddr_t msgbufphys;
 
 static struct arm32_dma_range tsarm_dma_ranges[4];
 

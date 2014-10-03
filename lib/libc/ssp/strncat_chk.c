@@ -37,6 +37,9 @@ __RCSID("$NetBSD$");
 #include <string.h>
 #include <stdio.h>
 
+char *__strncat_chk(char * __restrict, const char * __restrict, size_t,
+    size_t);
+
 char *
 __strncat_chk(char * __restrict dst, const char * __restrict src, size_t len,
     size_t slen)

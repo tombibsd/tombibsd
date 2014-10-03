@@ -38,7 +38,7 @@
 #define TWSI_CONTROL		0x0c
 #define TWSI_STATUS		0x10
 #define TWSI_BAUDRATE		0x14
-#define TWSI_SOFTRESET		0x1c
+#define TWSI_SOFTRESET		0x18
 #else
 #define	TWSI_SLAVEADDR		0x00
 #define	TWSI_EXTEND_SLAVEADDR	0x10

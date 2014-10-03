@@ -670,7 +670,7 @@ iruserok_sa(const void *raddr, int rlen, int superuser, const char *ruser,
 
 	__rcmd_errstr = NULL;
 
-	hostf = superuser ? NULL : fopen(_PATH_HEQUIV, "r");
+	hostf = superuser ? NULL : fopen(_PATH_HEQUIV, "re");
 
 	if (hostf) {
 		if (__ivaliduser_sa(hostf, sa, (socklen_t)rlen, luser,
@@ -700,7 +700,7 @@ iruserok_sa(const void *raddr, int rlen, int superuser, const char *ruser,
 		(void)setegid(pwd->pw_gid);
 		(void)initgroups(pwd->pw_name, pwd->pw_gid);
 		(void)seteuid(pwd->pw_uid);
-		hostf = fopen(pbuf, "r");
+		hostf = fopen(pbuf, "re");
 
 		if (hostf != NULL) {
 			/*

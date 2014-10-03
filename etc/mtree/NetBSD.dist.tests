@@ -307,6 +307,7 @@
 ./usr/tests/net/fdpass
 ./usr/tests/net/icmp
 ./usr/tests/net/if
+./usr/tests/net/if_bridge
 ./usr/tests/net/if_loop
 ./usr/tests/net/mpls
 ./usr/tests/net/net

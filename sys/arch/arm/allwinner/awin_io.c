@@ -106,6 +106,7 @@ static const struct awin_locators awin_locators[] = {
 	{ "com", OFFANDSIZE(UART7), 7, AWIN_IRQ_UART7, AANY },
 	{ "awinwdt", OFFANDSIZE(TMR), NOPORT, NOINTR, AANY },
 	{ "awinrtc", OFFANDSIZE(TMR), NOPORT, NOINTR, AANY },
+	{ "awinhdmi", OFFANDSIZE(HDMI), NOPORT, AWIN_IRQ_HDMI0, A20 },
 	{ "awinusb", OFFANDSIZE(USB1), 0, NOINTR, AANY },
 	{ "awinusb", OFFANDSIZE(USB2), 1, NOINTR, AANY },
 	{ "motg", OFFANDSIZE(USB0), NOPORT, AWIN_IRQ_USB0, AANY },

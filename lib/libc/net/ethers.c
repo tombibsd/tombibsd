@@ -97,7 +97,7 @@ ether_ntohost(char *hostname, const struct ether_addr *e)
 	    e->ether_addr_octet[4], e->ether_addr_octet[5]);
 #endif
 
-	f = fopen(_PATH_ETHERS, "r");
+	f = fopen(_PATH_ETHERS, "re");
 	if (f == NULL)
 		return -1;
 	for (p = NULL;;) {
@@ -150,7 +150,7 @@ ether_hostton(const char *hostname, struct ether_addr *e)
 	_DIAGASSERT(hostname != NULL);
 	_DIAGASSERT(e != NULL);
 
-	f = fopen(_PATH_ETHERS, "r");
+	f = fopen(_PATH_ETHERS, "re");
 	if (f == NULL)
 		return -1;
 

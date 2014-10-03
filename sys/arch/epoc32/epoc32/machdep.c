@@ -87,13 +87,13 @@ BootConfig bootconfig;		/* Boot config storage */
 static char bootargs[256];
 char *boot_args = NULL;
 
-vm_offset_t physical_start;
-vm_offset_t physical_freestart;
-vm_offset_t physical_freeend;
-vm_offset_t physical_end;
+vaddr_t physical_start;
+vaddr_t physical_freestart;
+vaddr_t physical_freeend;
+vaddr_t physical_end;
 u_int free_pages;
 
-vm_offset_t msgbufphys;
+paddr_t msgbufphys;
 
 enum {
 	KERNEL_PT_SYS = 0,	/* Page table for mapping proc0 zero page */

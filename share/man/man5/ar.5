@@ -104,6 +104,14 @@ Objects in the archive are always an even number of bytes long; files
 which are an odd number of bytes long are padded with a newline
 .Pq Dq \en
 character, although the size in the header does not reflect this.
+.Sh COMPATIBILITY
+The current a.out archive format is not specified by any standard.
+.Pp
+ELF systems use the
+.Nm
+format specified by the
+.At V.4
+ABI, with the same headers but different long file name handling.
 .Sh SEE ALSO
 .Xr ar 1 ,
 .Xr stat 2
@@ -144,14 +152,6 @@ It has been extended for these reasons,
 as described above.
 This format first appeared in
 .Bx 4.4 .
-.Sh COMPATIBILITY
-The current a.out archive format is not specified by any standard.
-.Pp
-ELF systems use the
-.Nm
-format specified by the
-.At V.4
-ABI, with the same headers but different long file name handling.
 .Sh BUGS
 The
 .Tn \*[Lt]ar.h\*[Gt]

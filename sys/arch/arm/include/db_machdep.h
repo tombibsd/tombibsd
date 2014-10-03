@@ -118,7 +118,7 @@ extern db_regs_t *ddb_regp;
 u_int branch_taken(u_int insn, u_int pc, db_regs_t *db_regs);
 int kdb_trap(int, db_regs_t *);
 void db_machine_init(void);
-int db_validate_address(vm_offset_t addr);
+int db_validate_address(vaddr_t addr);
 
 #define DB_ELF_SYMBOLS
 #define DB_ELFSIZE 32

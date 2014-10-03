@@ -714,7 +714,7 @@ _loc(void)
 			goto no_locale;
 	oldsun = 0;
 	(void) sprintf(filename, "%s/%s/%s", locale_home, name, lc_time);
-	fd = open(filename, O_RDONLY);
+	fd = open(filename, O_RDONLY | O_CLOEXEC);
 	if (fd < 0) {
 		/*
 		** Old Sun systems have a different naming and data convention.
@@ -722,7 +722,7 @@ _loc(void)
 		oldsun = 1;
 		(void) sprintf(filename, "%s/%s/%s", locale_home,
 			lc_time, name);
-		fd = open(filename, O_RDONLY);
+		fd = open(filename, O_RDONLY | O_CLOEXEC);
 		if (fd < 0)
 			goto no_locale;
 	}

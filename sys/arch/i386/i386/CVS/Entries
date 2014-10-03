@@ -7,9 +7,9 @@
 /compat_16_machdep.c/1.26/Thu Feb 27 08:55:46 2014/-kk/
 /copy.S/1.23/Fri Jan 31 08:48:36 2014/-kk/
 /cpu_in_cksum.S/1.4/Mon Apr 28 20:23:24 2008/-kk/
-/cpufunc.S/1.20/Fri Mar 14 04:28:15 2014/-kk/
+/cpufunc.S/1.21/Fri Oct  3 09:57:39 2014/-kk/
 /db_dbgreg.S/1.7/Tue Dec 11 23:31:07 2007/-kk/
-/db_disasm.c/1.40/Sat Mar 14 21:04:10 2009/-kk/
+/db_disasm.c/1.41/Fri Oct  3 09:57:39 2014/-kk/
 /db_interface.c/1.71/Sat Mar  1 06:04:31 2014/-kk/
 /db_machdep.c/1.5/Fri Jan 31 08:48:36 2014/-kk/
 /dumpsys.c/1.16/Mon Dec 12 19:03:09 2011/-kk/

@@ -30,11 +30,12 @@
 __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <sys/param.h>
-#include <sys/device.h>
-#include <sys/systm.h>
-#include <sys/mutex.h>
 #include <sys/bus.h>
+#include <sys/device.h>
 #include <sys/intr.h>
+#include <sys/mutex.h>
+#include <sys/once.h>
+#include <sys/systm.h>
 
 #include <dev/i2c/i2cvar.h>
 
@@ -48,7 +49,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #endif
 #include <sys/kernhist.h>
 
-KERNHIST_DECL(bsciichist);
 KERNHIST_DEFINE(bsciichist);
 
 struct bsciic_softc {
@@ -75,6 +75,15 @@ CFATTACH_DECL_NEW(bsciic, sizeof(struct bsciic_softc),
     bsciic_match, bsciic_attach, NULL, NULL);
 
 static int
+bsciic_init(void)
+{
+
+	KERNHIST_INIT(bsciichist, 512);
+
+	return 0;
+}
+
+static int
 bsciic_match(device_t parent, cfdata_t match, void *aux)
 {
 	struct amba_attach_args * const aaa = aux;
@@ -92,6 +101,7 @@ bsciic_attach(device_t parent, device_t self, void *aux)
 	struct amba_attach_args * const aaa = aux;
 	struct i2cbus_attach_args iba;
 	u_int bscunit = ~0;
+	static ONCE_DECL(control);
 
 	switch (aaa->aaa_addr) {
 	case BCM2835_BSC0_BASE:
@@ -105,7 +115,7 @@ bsciic_attach(device_t parent, device_t self, void *aux)
 	aprint_naive("\n");
 	aprint_normal(": BSC%u\n", bscunit);
 
-	KERNHIST_INIT(bsciichist, 512);
+	RUN_ONCE(&control, bsciic_init);
 
 	sc->sc_dev = self;
 

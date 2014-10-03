@@ -1,5 +1,5 @@
 /Makefile.inc/1.22/Wed Mar 21 05:47:53 2012/-kk/
-/Makefile/1.126/Wed Jan  1 02:45:15 2014/-kk/
+/Makefile/1.127/Fri Oct  3 09:57:27 2014/-kk/
 D/amrctl////
 D/apmlabel////
 D/atactl////
@@ -91,7 +91,6 @@ D/restore////
 D/rndctl////
 D/route////
 D/routed////
-D/rtsol////
 D/savecore////
 D/scan_ffs////
 D/scsictl////

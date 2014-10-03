@@ -12,6 +12,8 @@ _BSD_ENDIAN_MK_=1
     ${MACHINE_ARCH} == "i386" || \
     ${MACHINE_ARCH} == "ia64" || \
     ${MACHINE_ARCH} == "vax" || \
+    ${MACHINE_ARCH} == "riscv32" || \
+    ${MACHINE_ARCH} == "riscv64" || \
     ${MACHINE_ARCH} == "x86_64" || \
     ${MACHINE_ARCH:C/^.*el$/el/} == "el"
 TARGET_ENDIANNESS=	1234

@@ -15,7 +15,7 @@ MLINKS+=moncontrol.3 monstartup.3
 # and mcount.c causes warnings from as(1).
 # mcount.c should be fixed and this test removed.
 #
-COPTS.mcount.c+=-Wa,--no-warn
+COPTS.mcount.c+=${${ACTIVE_CXX} == "gcc":? -Wa,--no-warn :}
 .endif
 
 

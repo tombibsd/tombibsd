@@ -815,7 +815,7 @@ struct apple_drvr_descriptor {
 	uint32_t	descBlock;	/* first block of driver */
 	uint16_t	descSize;	/* driver size in blocks */
 	uint16_t	descType;	/* system type */
-};
+} __packed;
 
 /*
  *	system types; Apple reserves 0-15

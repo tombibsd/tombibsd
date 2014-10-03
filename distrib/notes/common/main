@@ -491,8 +491,6 @@ The following features are to be removed from
 in the future:
 .(bullet
 .Xr dhclient 8
-and
-.Xr rtsol 8
 in favor of
 .Xr dhcpcd 8 .
 .It

@@ -259,11 +259,11 @@ _C_LABEL(x):
 
 #define	MSG(msg)			\
 	.rdata;				\
-9:	.asciiz	msg;			\
+9:	.asciz	msg;			\
 	.text
 
 #define	ASMSTR(str)			\
-	.asciiz str;			\
+	.asciz str;			\
 	.align	3
 
 #define	RCSID(name)	.pushsection ".ident"; .asciz name; .popsection

@@ -97,7 +97,7 @@ FNPREFIX(FileChunk)(const char *filename, char *buf, off_t off, off_t len)
 
 	FNPREFIX(Init)(&ctx);
 
-	if ((fd = open(filename, O_RDONLY)) < 0)
+	if ((fd = open(filename, O_RDONLY | O_CLOEXEC)) < 0)
 		return (NULL);
 	if (len == 0) {
 		if (fstat(fd, &sb) == -1) {

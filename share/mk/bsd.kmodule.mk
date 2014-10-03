@@ -34,6 +34,8 @@ CFLAGS+=	-mlong-calls
 CFLAGS+=	${${ACTIVE_CC} == "gcc":? -mlongcall :}
 .elif ${MACHINE_CPU} == "vax"
 CFLAGS+=	-fno-pic
+.elif ${MACHINE_CPU} == "riscv"
+CFLAGS+=	-fPIC -Wa,-fno-pic
 .endif
 
 .if ${MACHINE_CPU} == "sparc64"

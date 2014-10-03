@@ -30,6 +30,10 @@ ARCHDIR_SUBDIR=	mips64/64 mips64/o32
 ARCHDIR_SUBDIR= powerpc64/powerpc
 .endif
 
+.if ${MACHINE_ARCH} == "riscv64"
+ARCHDIR_SUBDIR= riscv64/rv32
+.endif
+
 .if (${MACHINE_ARCH} == "aarch64")
 ARCHDIR_SUBDIR+= arm/eabi
 ARCHDIR_SUBDIR+= arm/eabihf

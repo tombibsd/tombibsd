@@ -519,7 +519,7 @@ _nsconfigure(void)
 	 */
 	rwlock_wrlock(&_nslock);
 
-	_nsyyin = fopen(_PATH_NS_CONF, "r");
+	_nsyyin = fopen(_PATH_NS_CONF, "re");
 	if (_nsyyin == NULL) {
 		/*
 		 * Unable to open nsswitch.conf; behave as though the

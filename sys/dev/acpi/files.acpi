@@ -4,6 +4,7 @@ include "dev/acpi/acpica/files.acpica"
 
 defflag	opt_acpi.h	ACPIVERBOSE ACPI_DEBUG ACPI_ACTIVATE_DEV
 			ACPI_DSDT_OVERRIDE ACPI_SCANPCI ACPI_BREAKPOINT
+			ACPI__DIS_IS_BROKEN
 defparam opt_acpi.h	ACPI_DSDT_FILE := "\"/dev/null\""
 defparam opt_acpi.h	ACPI_BLACKLIST_YEAR = 2000
 

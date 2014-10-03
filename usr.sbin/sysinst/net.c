@@ -76,7 +76,7 @@ static char net_host[STRSIZE];
 static char net_ip[SSTRSIZE];
 static char net_srv_ip[SSTRSIZE];
 static char net_mask[SSTRSIZE];
-static char net_namesvr[STRSIZE];
+char net_namesvr[STRSIZE];
 static char net_defroute[STRSIZE];
 static char net_media[STRSIZE];
 static char sl_flags[STRSIZE];
@@ -87,8 +87,6 @@ static int net_dhcpconf;
 #define DHCPCONF_DOMAIN         0x08
 #ifdef INET6
 static char net_ip6[STRSIZE];
-char net_namesvr6[STRSIZE];
-static int net_ip6conf;
 #define IP6CONF_AUTOHOST        0x01
 #endif
 
@@ -104,12 +102,9 @@ static void write_etc_hosts(FILE *f);
 #define DHCPCD "/sbin/dhcpcd"
 #include <signal.h>
 static int config_dhcp(char *);
-static void get_dhcp_value(char *, size_t, const char *);
 
 #ifdef INET6
 static int is_v6kernel (void);
-static void init_v6kernel (int);
-static int get_v6wait (void);
 #endif
 
 /*
@@ -435,41 +430,6 @@ is_v6kernel(void)
 	close(s);
 	return 1;
 }
-
-/*
- * initialize as v6 client.
- * we are sure that we will never become router with boot floppy :-)
- * (include and use sysctl(8) if you are willing to)
- */
-static void
-init_v6kernel(int autoconf)
-{
-	int v;
-	int mib[4] = {CTL_NET, PF_INET6, IPPROTO_IPV6, 0};
-
-	mib[3] = IPV6CTL_FORWARDING;
-	v = 0;
-	(void)sysctl(mib, 4, NULL, NULL, (void *)&v, sizeof(v));
-
-	mib[3] = IPV6CTL_ACCEPT_RTADV;
-	v = autoconf ? 1 : 0;
-	(void)sysctl(mib, 4, NULL, NULL, (void *)&v, sizeof(v));
-}
-
-static int
-get_v6wait(void)
-{
-	size_t len = sizeof(int);
-	int v;
-	int mib[4] = {CTL_NET, PF_INET6, IPPROTO_IPV6, IPV6CTL_DAD_COUNT};
-
-	len = sizeof(v);
-	if (sysctl(mib, 4, (void *)&v, &len, NULL, 0) < 0) {
-		/* warn("sysctl(net.inet6.ip6.dadcount)"); */
-		return 1;	/* guess */
-	}
-	return v;
-}
 #endif
 
 static int
@@ -533,7 +493,6 @@ config_network(void)
 	int selected_net;
 
 	int i;
-	char dhcp_host[STRSIZE];
 #ifdef INET6
 	int v6config = 1;
 #endif
@@ -573,6 +532,7 @@ again:
 	    return 0;
 
 	network_up = 1;
+	dhcp_config = 0;
 
 	strncpy(net_dev, net_devs[selected_net].if_dev, STRSIZE);
 
@@ -585,13 +545,10 @@ again:
 	/* If root is on NFS do not reconfigure the interface. */
 	if (statvfs("/", &sb) == 0 && strcmp(sb.f_fstypename, "nfs") == 0) {
 		nfs_root = 1;
-		dhcp_config = 0;
 		get_ifinterface_info();
 		get_if6interface_info();
 		get_host_info();
-	} else if (slip) {
-		dhcp_config = 0;
-	} else {
+	} else if (!slip) {
 		/* Preload any defaults we can find */
 		get_ifinterface_info();
 		get_if6interface_info();
@@ -645,6 +602,8 @@ again:
 		/* try a dhcp configuration */
 		dhcp_config = config_dhcp(net_dev);
 		if (dhcp_config) {
+			char *nline;
+
 			/* Get newly configured data off interface. */
 			get_ifinterface_info();
 			get_if6interface_info();
@@ -657,50 +616,72 @@ again:
 			 * 'route -n show'
 			 */
 			if (collect(T_OUTPUT, &textbuf,
-				    "/sbin/route -n show | "
-				    "while read dest gateway flags;"
-				    " do [ \"$dest\" = default ] && {"
-					" echo $gateway; break; };"
-				    " done" ) > 0)
+			    "/sbin/route -n show | "
+			    "while read dest gateway flags;"
+			    " do [ \"$dest\" = default ] && {"
+			    " echo \"$gateway\"; break; };"
+			    " done" ) > 0)
 				strlcpy(net_defroute, textbuf,
 				    sizeof net_defroute);
 			free(textbuf);
+			if ((nline = strchr(net_defroute, '\n')))
+				*nline = '\0';
 
 			/* pull nameserver info out of /etc/resolv.conf */
 			if (collect(T_OUTPUT, &textbuf,
-				    "cat /etc/resolv.conf 2>/dev/null |"
-				    " while read keyword address rest;"
-				    " do [ \"$keyword\" = nameserver "
-					" -a \"${address#*:}\" = "
-					"\"${address}\" ] && {"
-					    " echo $address; break; };"
-				    " done" ) > 0)
+			    "cat /etc/resolv.conf 2>/dev/null |"
+			    " while read keyword address rest;"
+			    " do [ \"$keyword\" = nameserver ] &&"
+			    " { echo \"$address\"; break; };"
+			    " done" ) > 0)
 				strlcpy(net_namesvr, textbuf,
 				    sizeof net_namesvr);
 			free(textbuf);
+			if ((nline = strchr(net_namesvr, '\n')))
+				*nline = '\0';
 			if (net_namesvr[0] != '\0')
 				net_dhcpconf |= DHCPCONF_NAMESVR;
 
-			/* pull domainname out of leases file */
-			get_dhcp_value(net_domain, sizeof(net_domain),
-			    "domain-name");
+			/* pull domain info out of /etc/resolv.conf */
+			if (collect(T_OUTPUT, &textbuf,
+			    "cat /etc/resolv.conf 2>/dev/null |"
+			    " while read keyword domain rest;"
+			    " do [ \"$keyword\" = domain ] &&"
+			    " { echo \"$domain\"; break; };"
+			    " done" ) > 0)
+				strlcpy(net_domain, textbuf,
+				    sizeof net_domain);
+			free(textbuf);
+			if (net_domain[0] == '\0') {
+				/* pull domain info out of /etc/resolv.conf */
+				if (collect(T_OUTPUT, &textbuf,
+				    "cat /etc/resolv.conf 2>/dev/null |"
+				    " while read keyword search rest;"
+				    " do [ \"$keyword\" = search ] &&"
+				    " { echo \"$search\"; break; };"
+				    " done" ) > 0)
+					strlcpy(net_domain, textbuf,
+					    sizeof net_domain);
+				free(textbuf);
+			}
+			if ((nline = strchr(net_domain, '\n')))
+				*nline = '\0';
 			if (net_domain[0] != '\0')
 				net_dhcpconf |= DHCPCONF_DOMAIN;
 
-			/* pull hostname out of leases file */
-			dhcp_host[0] = 0;
-			get_dhcp_value(dhcp_host, sizeof(dhcp_host),
-			    "host-name");
-			if (dhcp_host[0] != '\0') {
+			if (gethostname(net_host, sizeof(net_host)) == 0 &&
+			    net_host[0] != 0)
 				net_dhcpconf |= DHCPCONF_HOST;
-				strlcpy(net_host, dhcp_host, sizeof net_host);
-			}
 		}
 	}
 
-	msg_prompt_add(MSG_net_domain, net_domain, net_domain,
-	    sizeof net_domain);
-	msg_prompt_add(MSG_net_host, net_host, net_host, sizeof net_host);
+	if (!(net_dhcpconf & DHCPCONF_HOST))
+		msg_prompt_add(MSG_net_host, net_host, net_host,
+		    sizeof net_host);
+
+	if (!(net_dhcpconf & DHCPCONF_DOMAIN))
+		msg_prompt_add(MSG_net_domain, net_domain, net_domain,
+		    sizeof net_domain);
 
 	if (!dhcp_config) {
 		/* Manually configure IPv4 */
@@ -731,49 +712,40 @@ again:
 		    sizeof net_defroute);
 	}
 
-	if (!dhcp_config || net_namesvr[0] == 0)
+	if (!(net_dhcpconf & DHCPCONF_NAMESVR)) {
+#ifdef INET6
+		if (v6config) {
+			process_menu(MENU_namesrv6, NULL);
+			if (!yesno)
+				msg_prompt_add(MSG_net_namesrv, net_namesvr,
+				    net_namesvr, sizeof net_namesvr);
+		} else
+#endif
 		msg_prompt_add(MSG_net_namesrv, net_namesvr, net_namesvr,
 		    sizeof net_namesvr);
-
-#ifdef INET6
-	/* IPv6 autoconfiguration */
-	if (!is_v6kernel())
-		v6config = 0;
-	else if (v6config) {
-		process_menu(MENU_noyes, deconst(MSG_Perform_IPv6_autoconfiguration));
-		v6config = yesno ? 1 : 0;
-		net_ip6conf |= yesno ? IP6CONF_AUTOHOST : 0;
 	}
-
-	if (v6config) {
-		process_menu(MENU_namesrv6, NULL);
-		if (!yesno)
-			msg_prompt_add(MSG_net_namesrv6, net_namesvr6,
-			    net_namesvr6, sizeof net_namesvr6);
-	}
-#endif
 
 	/* confirm the setting */
 	if (slip)
-		msg_display(MSG_netok_slip, net_domain, net_host, net_dev,
-			*net_ip == '\0' ? "<none>" : net_ip,
-			*net_srv_ip == '\0' ? "<none>" : net_srv_ip,
-			*net_mask == '\0' ? "<none>" : net_mask,
-			*net_namesvr == '\0' ? "<none>" : net_namesvr,
-			*net_defroute == '\0' ? "<none>" : net_defroute,
-			*net_media == '\0' ? "<default>" : net_media);
+		msg_display(MSG_netok_slip, net_domain, net_host,
+		    *net_namesvr == '\0' ? "<none>" : net_namesvr,
+		    net_dev,
+		    *net_media == '\0' ? "<default>" : net_media,
+		    *net_ip == '\0' ? "<none>" : net_ip,
+		    *net_srv_ip == '\0' ? "<none>" : net_srv_ip,
+		    *net_mask == '\0' ? "<none>" : net_mask,
+		    *net_defroute == '\0' ? "<none>" : net_defroute);
 	else
-		msg_display(MSG_netok, net_domain, net_host, net_dev,
-			*net_ip == '\0' ? "<none>" : net_ip,
-			*net_mask == '\0' ? "<none>" : net_mask,
-			*net_namesvr == '\0' ? "<none>" : net_namesvr,
-			*net_defroute == '\0' ? "<none>" : net_defroute,
-			*net_media == '\0' ? "<default>" : net_media);
+		msg_display(MSG_netok, net_domain, net_host,
+		    *net_namesvr == '\0' ? "<none>" : net_namesvr,
+		    net_dev,
+		    *net_media == '\0' ? "<default>" : net_media,
+		    *net_ip == '\0' ? "<none>" : net_ip,
+		    *net_mask == '\0' ? "<none>" : net_mask,
+		    *net_defroute == '\0' ? "<none>" : net_defroute);
 #ifdef INET6
 	msg_display_add(MSG_netokv6,
-		     !is_v6kernel() ? "<not supported>" :
-			(v6config ? "yes" : "no"),
-		     *net_namesvr6 == '\0' ? "<none>" : net_namesvr6);
+		     !is_v6kernel() ? "<not supported>" : net_ip6);
 #endif
 done:
 	process_menu(MENU_yesno, deconst(MSG_netok_ok));
@@ -781,17 +753,22 @@ done:
 	if (!yesno)
 		goto again;
 
+	run_program(0, "/sbin/ifconfig lo0 127.0.0.1");
+
+	/* dhcpcd will have configured it all for us */
+	if (dhcp_config) {
+		fflush(NULL);
+		network_up = 1;
+		return network_up;
+	}
+
 	/*
 	 * we may want to perform checks against inconsistent configuration,
 	 * like IPv4 DNS server without IPv4 configuration.
 	 */
 
 	/* Create /etc/resolv.conf if a nameserver was given */
-	if (net_namesvr[0] != '\0'
-#ifdef INET6
-	    || net_namesvr6[0] != '\0'
-#endif
-		) {
+	if (net_namesvr[0] != '\0') {
 		f = fopen("/etc/resolv.conf", "w");
 		if (f == NULL) {
 			if (logfp)
@@ -809,26 +786,10 @@ done:
 			scripting_fprintf(f, "search %s\n", net_domain);
 		if (net_namesvr[0] != '\0')
 			scripting_fprintf(f, "nameserver %s\n", net_namesvr);
-#ifdef INET6
-		if (net_namesvr6[0] != '\0')
-			scripting_fprintf(f, "nameserver %s\n", net_namesvr6);
-#endif
 		scripting_fprintf(NULL, "EOF\n");
 		fflush(NULL);
 		fclose(f);
 	}
-
-	run_program(0, "/sbin/ifconfig lo0 127.0.0.1");
-
-#ifdef INET6
-	if (v6config && !nfs_root) {
-		init_v6kernel(1);
-		run_program(0, "/sbin/ifconfig %s up", net_dev);
-		sleep(get_v6wait() + 1);
-		run_program(RUN_DISPLAY, "/sbin/rtsol -D %s", net_dev);
-		sleep(get_v6wait() + 1);
-	}
-#endif
 
 	if (net_ip[0] != '\0') {
 		if (slip) {
@@ -894,16 +855,19 @@ done:
 	if (v6config && network_up) {
 		network_up = !run_program(RUN_DISPLAY | RUN_PROGRESS,
 		    "/sbin/ping6 -v -c 3 -n -I %s ff02::2", net_dev);
-
-		if (net_namesvr6[0] != '\0')
-			network_up = !run_program(RUN_DISPLAY | RUN_PROGRESS,
-			    "/sbin/ping6 -v -c 3 -n %s", net_namesvr6);
 	}
 #endif
 
-	if (net_namesvr[0] != '\0' && network_up)
-		network_up = !run_program(RUN_DISPLAY | RUN_PROGRESS,
-		    "/sbin/ping -v -c 5 -w 5 -o -n %s", net_namesvr);
+	if (net_namesvr[0] != '\0' && network_up) {
+#ifdef INET6
+		if (strchr(net_namesvr, ':'))
+			network_up = !run_program(RUN_DISPLAY | RUN_PROGRESS,
+			    "/sbin/ping6 -v -c 3 -n %s", net_namesvr);
+		else
+#endif
+			network_up = !run_program(RUN_DISPLAY | RUN_PROGRESS,
+			    "/sbin/ping -v -c 5 -w 5 -o -n %s", net_namesvr);
+	}
 
 	if (net_defroute[0] != '\0' && network_up)
 		network_up = !run_program(RUN_DISPLAY | RUN_PROGRESS,
@@ -1104,7 +1068,6 @@ void
 mnt_net_config(void)
 {
 	char ifconfig_fn[STRSIZE];
-	char ifconfig_str[STRSIZE];
 	FILE *ifconf = NULL;
 
 	if (!network_up)
@@ -1120,17 +1083,8 @@ mnt_net_config(void)
 
 	/* Copy resolv.conf to target.  If DHCP was used to create it,
 	 * it will be replaced on next boot anyway. */
-#ifndef INET6
 	if (net_namesvr[0] != '\0')
 		dup_file_into_target("/etc/resolv.conf");
-#else
-	/*
-	 * not sure if it is a good idea, to allow dhcp config to
-	 * override IPv6 configuration
-	 */
-	if (net_namesvr[0] != '\0' || net_namesvr6[0] != '\0')
-		dup_file_into_target("/etc/resolv.conf");
-#endif
 
 	/*
 	 * bring the interface up, it will be necessary for IPv6, and
@@ -1181,25 +1135,13 @@ mnt_net_config(void)
 		if (del_rc_conf("defaultroute") == 0)
 			add_rc_conf("defaultroute=\"%s\"\n", net_defroute);
 	} else {
-		if (snprintf(ifconfig_str, sizeof ifconfig_str,
-		    "ifconfig_%s", net_dev) > 0 &&
-		    del_rc_conf(ifconfig_str) == 0) {
-			add_rc_conf("ifconfig_%s=dhcp\n", net_dev);
-		}
+		/*
+		 * Start dhcpcd quietly and in master mode, but restrict
+		 * it to our interface
+		 */
+		add_rc_conf("dhcpcd=YES\n");
+		add_rc_conf("dhcpcd_flags=\"-qM %s\"\n", net_dev);
         }
-
-#ifdef INET6
-	if ((net_ip6conf & IP6CONF_AUTOHOST) != 0) {
-		if (del_rc_conf("ip6mode") == 0)
-			add_rc_conf("ip6mode=autohost\n");
-		if (ifconf != NULL) {
-			scripting_fprintf(NULL, "cat <<EOF >>%s%s\n",
-			    target_prefix(), ifconfig_fn);
-			scripting_fprintf(ifconf, "!rtsol $int\n");
-			scripting_fprintf(NULL, "EOF\n");
-		}
-	}
-#endif
 
 	if (ifconf)
 		fclose(ifconf);
@@ -1220,7 +1162,7 @@ config_dhcp(char *inter)
 
 	if (!file_mode_match(DHCPCD, S_IFREG))
 		return 0;
-	process_menu(MENU_yesno, deconst(MSG_Perform_DHCP_autoconfiguration));
+	process_menu(MENU_yesno, deconst(MSG_Perform_autoconfiguration));
 	if (yesno) {
 		/* spawn off dhcpcd and wait for parent to exit */
 		dhcpautoconf = run_program(RUN_DISPLAY | RUN_PROGRESS,
@@ -1228,38 +1170,4 @@ config_dhcp(char *inter)
 		return dhcpautoconf ? 0 : 1;
 	}
 	return 0;
-}
-
-static void
-get_dhcp_value(char *targ, size_t l, const char *var)
-{
-	static const char *lease_data = "/tmp/dhcpcd-lease";
-	FILE *fp;
-	char *line;
-	size_t len, var_len;
-
-	if ((fp = fopen(lease_data, "r")) == NULL) {
-		warn("Could not open %s", lease_data);
-		*targ = '\0';
-		return;
-	}
-
-	var_len = strlen(var);
-
-	while ((line = fgetln(fp, &len)) != NULL) {
-		if (line[len - 1] == '\n')
-			--len;
-		if (len <= var_len)
-			continue;
-		if (memcmp(line, var, var_len))
-			continue;
-		if (line[var_len] != '=')
-			continue;
-		line += var_len + 1;
-		len -= var_len + 1;
-		strlcpy(targ, line, l > len ? len + 1: l);
-		break;
-	}
-
-	fclose(fp);
 }

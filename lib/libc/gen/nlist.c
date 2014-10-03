@@ -119,7 +119,7 @@ nlist(const char *name, struct nlist *list)
 	_DIAGASSERT(name != NULL);
 	_DIAGASSERT(list != NULL);
 
-	fd = open(name, O_RDONLY, 0);
+	fd = open(name, O_RDONLY | O_CLOEXEC, 0);
 	if (fd < 0)
 		return (-1);
 	n = __fdnlist(fd, list);

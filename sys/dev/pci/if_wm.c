@@ -1152,7 +1152,19 @@ static const struct wm_product {
 	{ PCI_VENDOR_INTEL,	PCI_PRODUCT_INTEL_I218_V,
 	  "I218 V Ethernet Connection",
 	  WM_T_PCH_LPT,		WMP_F_COPPER },
+	{ PCI_VENDOR_INTEL,	PCI_PRODUCT_INTEL_I218_V2,
+	  "I218 V Ethernet Connection",
+	  WM_T_PCH_LPT,		WMP_F_COPPER },
+	{ PCI_VENDOR_INTEL,	PCI_PRODUCT_INTEL_I218_V3,
+	  "I218 V Ethernet Connection",
+	  WM_T_PCH_LPT,		WMP_F_COPPER },
 	{ PCI_VENDOR_INTEL,	PCI_PRODUCT_INTEL_I218_LM,
+	  "I218 LM Ethernet Connection",
+	  WM_T_PCH_LPT,		WMP_F_COPPER },
+	{ PCI_VENDOR_INTEL,	PCI_PRODUCT_INTEL_I218_LM2,
+	  "I218 LM Ethernet Connection",
+	  WM_T_PCH_LPT,		WMP_F_COPPER },
+	{ PCI_VENDOR_INTEL,	PCI_PRODUCT_INTEL_I218_LM3,
 	  "I218 LM Ethernet Connection",
 	  WM_T_PCH_LPT,		WMP_F_COPPER },
 	{ 0,			0,
@@ -8269,8 +8281,8 @@ wm_nvm_read_ich8(struct wm_softc *sc, int offset, int words, uint16_t *data)
 	 */
 	error = wm_nvm_valid_bank_detect_ich8lan(sc, &flash_bank);
 	if (error) {
-		aprint_error_dev(sc->sc_dev, "%s: failed to detect NVM bank\n",
-		    __func__);
+		DPRINTF(WM_DEBUG_NVM, ("%s: failed to detect NVM bank\n",
+			device_xname(sc->sc_dev)));
 		flash_bank = 0;
 	}
 

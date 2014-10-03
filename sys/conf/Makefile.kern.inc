@@ -259,6 +259,7 @@ SYSTEM_LD_TAIL+=${SYSTEM_LD_TAIL_DEBUG}
 LINKFLAGS+=	${LINKFLAGS_DEBUG}
 EXTRA_KERNELS+= ${KERNELS:@.KERNEL.@${.KERNEL.}.gdb@}
 CTFFLAGS+=	-g
+TARGETSFX=	.gdb
 .elifndef PROF
 LINKFLAGS+=	${LINKFLAGS_NORMAL}
 .endif
@@ -268,6 +269,9 @@ SYSTEM_LD_TAIL_STAGE1=	${SYSTEM_LD_TAIL}
 SYSTEM_LD_TAIL_STAGE2=	${SYSTEM_LD_TAIL}
 .if defined(COPY_SYMTAB)
 SYSTEM_LD_TAIL_STAGE2+=	; echo ${DBSYM} $@; ${DBSYM} $@
+.if !empty(DEBUG:M-g)
+SYSTEM_LD_TAIL_STAGE2+=	; echo ${DBSYM} $@.gdb; ${DBSYM} $@.gdb
+.endif
 .endif
 SYSTEM_LD_TAIL_STAGE2+=	${SYSTEM_LD_TAIL_EXTRA}
 
@@ -553,7 +557,7 @@ build_kernel: .USE
 	${SYSTEM_LD} swap${.TARGET}.o kern_ksyms_buf.o
 	${SYSTEM_LD_TAIL_STAGE1}
 	${CC} ${CFLAGS} ${CPPFLAGS} -DCOPY_SYMTAB \
-	    -DSYMTAB_SPACE=$$(${DBSYM} -P ${.TARGET}) \
+	    -DSYMTAB_SPACE=$$(${DBSYM} -P ${.TARGET}${TARGETSFX}) \
 	    -c $S/kern/kern_ksyms_buf.c -o kern_ksyms_buf_real.o
 	${SYSTEM_LD_HEAD}
 	${SYSTEM_LD} swap${.TARGET}.o kern_ksyms_buf_real.o

@@ -75,12 +75,13 @@ struct motg_softc {
 #define MOTG_MODE_DEVICE 1
 	void (*sc_intr_poll)(void *);
 	void *sc_intr_poll_arg;
+	int sc_ep_max;
+	u_int sc_ep_fifosize;
 
 	uint16_t sc_intr_tx_ep;
 	uint16_t sc_intr_rx_ep;
 	uint8_t  sc_intr_ctrl;
 
-	int sc_ep_max;
 	struct motg_hw_ep sc_in_ep[MOTG_MAX_HW_EP];
 	struct motg_hw_ep sc_out_ep[MOTG_MAX_HW_EP];
 

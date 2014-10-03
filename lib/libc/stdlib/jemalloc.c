@@ -295,10 +295,15 @@ __strerror_r(int e, char *s, size_t l)
 #  define SIZEOF_PTR_2POW	2
 #  define USE_BRK
 #endif
-#ifdef __mips__
-#  define QUANTUM_2POW_MIN	4
+#if defined(__mips__) || defined(__riscv__)
+# ifdef _LP64
+#  define SIZEOF_PTR_2POW	3
+#  define TINY_MIN_2POW		3
+# else
 #  define SIZEOF_PTR_2POW	2
-#  define USE_BRK
+# endif
+# define QUANTUM_2POW_MIN	4
+# define USE_BRK
 #endif
 #ifdef __hppa__                                                                                                                                         
 #  define QUANTUM_2POW_MIN     4                                                                                                                        

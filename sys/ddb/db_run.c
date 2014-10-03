@@ -345,6 +345,9 @@ db_continue_cmd(db_expr_t addr, bool have_addr,
  * bool inst_call(int inst)
  *	returns true if the instruction might branch
  *
+ * bool inst_return(int inst)
+ *	returns true is the instruction will return to its caller
+ *
  * bool inst_unconditional_flow_transfer(int inst)
  *	returns true if the instruction is an unconditional
  *	transter of flow (i.e. unconditional branch)

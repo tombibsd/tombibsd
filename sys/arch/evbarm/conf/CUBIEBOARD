@@ -278,6 +278,10 @@ ehci*		at awinusb?
 usb*		at ohci?
 usb*		at ehci?
 
+# USB OTG
+#motg0		at awinio0
+#usb*		at motg?
+
 # SATA
 ahcisata*	at awinio0
 atabus*		at ata?

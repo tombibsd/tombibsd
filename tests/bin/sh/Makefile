@@ -7,13 +7,6 @@ TESTSDIR = ${TESTSBASE}/bin/sh
 
 TESTS_SUBDIRS += dotcmd
 
-.include <bsd.test.mk>
-# $NetBSD$
-
-.include <bsd.own.mk>
-
-TESTSDIR=	${TESTSBASE}/bin/sh
-
 TESTS_SH=	t_compexit
 TESTS_SH+=	t_exit
 TESTS_SH+=	t_expand

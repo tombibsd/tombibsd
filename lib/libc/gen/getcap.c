@@ -322,8 +322,8 @@ getent(char **cap, size_t *len, const char * const *db_array, int fd,
 			size_t clen;
 
 			(void)snprintf(pbuf, sizeof(pbuf), "%s.db", *db_p);
-			if ((capdbp = dbopen(pbuf, O_RDONLY, 0, DB_HASH, 0))
-			     != NULL) {
+			if ((capdbp = dbopen(pbuf, O_RDONLY | O_CLOEXEC, 0,
+			    DB_HASH, 0)) != NULL) {
 				free(record);
 				retval = cdbget(capdbp, &record, name);
 				if (retval < 0) {
@@ -352,7 +352,7 @@ getent(char **cap, size_t *len, const char * const *db_array, int fd,
 			} else
 #endif
 			{
-				fd = open(*db_p, O_RDONLY, 0);
+				fd = open(*db_p, O_RDONLY | O_CLOEXEC, 0);
 				if (fd < 0) {
 					/* No error on unfound file. */
 					continue;

@@ -36,6 +36,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #ifdef _KERNEL_OPT
 #include "opt_compat_netbsd.h"
+#include "opt_usb.h"
 #include "opt_usbverbose.h"
 #endif
 

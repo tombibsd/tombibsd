@@ -41,6 +41,8 @@
 
 __KERNEL_RCSID(1, "$NetBSD$");
 
+/* #define	DWC_GMAC_DEBUG	1 */
+
 #include "opt_inet.h"
 
 #include <sys/param.h>
@@ -91,23 +93,40 @@ static int dwc_gmac_ioctl(struct ifnet *, u_long, void *);
 
 #define RX_DESC_OFFSET(N)	((N)*sizeof(struct dwc_gmac_dev_dmadesc))
 
+
+#ifdef DWC_GMAC_DEBUG
+static void dwc_gmac_dump_dma(struct dwc_gmac_softc *sc);
+static void dwc_gmac_dump_tx_desc(struct dwc_gmac_softc *sc);
+#endif
+
 void
-dwc_gmac_attach(struct dwc_gmac_softc *sc, uint8_t *ep, uint32_t mii_clk)
+dwc_gmac_attach(struct dwc_gmac_softc *sc, uint32_t mii_clk)
 {
 	uint8_t enaddr[ETHER_ADDR_LEN];
 	uint32_t maclo, machi;
 	struct mii_data * const mii = &sc->sc_mii;
 	struct ifnet * const ifp = &sc->sc_ec.ec_if;
+	prop_dictionary_t dict;
 
 	mutex_init(&sc->sc_mdio_lock, MUTEX_DEFAULT, IPL_NET);
 	sc->sc_mii_clk = mii_clk & 7;
 
-	/*
-	 * If the frontend did not pass in a pre-configured ethernet mac
-	 * address, try to read on from the current filter setup,
-	 * before resetting the chip.
-	 */
-	if (ep == NULL) {
+	dict = device_properties(sc->sc_dev);
+	prop_data_t ea = dict ? prop_dictionary_get(dict, "mac-address") : NULL;
+	if (ea != NULL) {
+		/*
+		 * If the MAC address is overriden by a device property,
+		 * use that.
+		 */
+		KASSERT(prop_object_type(ea) == PROP_TYPE_DATA);
+		KASSERT(prop_data_size(ea) == ETHER_ADDR_LEN);
+		memcpy(enaddr, prop_data_data_nocopy(ea), ETHER_ADDR_LEN);
+	} else {
+		/*
+		 * If we did not get an externaly configure address,
+		 * try to read one from the current filter setup,
+		 * before resetting the chip.
+		 */
 		maclo = bus_space_read_4(sc->sc_bst, sc->sc_bsh, AWIN_GMAC_MAC_ADDR0LO);
 		machi = bus_space_read_4(sc->sc_bst, sc->sc_bsh, AWIN_GMAC_MAC_ADDR0HI);
 		enaddr[0] = maclo & 0x0ff;
@@ -116,15 +135,18 @@ dwc_gmac_attach(struct dwc_gmac_softc *sc, uint8_t *ep, uint32_t mii_clk)
 		enaddr[3] = (maclo >> 24) & 0x0ff;
 		enaddr[4] = machi & 0x0ff;
 		enaddr[5] = (machi >> 8) & 0x0ff;
-		ep = enaddr;
 	}
+
+#ifdef DWC_GMAC_DEBUG
+	dwc_gmac_dump_dma(sc);
+#endif
 
 	/*
 	 * Init chip and do intial setup
 	 */
 	if (dwc_gmac_reset(sc) != 0)
 		return;	/* not much to cleanup, haven't attached yet */
-	dwc_gmac_write_hwaddr(sc, ep);
+	dwc_gmac_write_hwaddr(sc, enaddr);
 	aprint_normal_dev(sc->sc_dev, "Ethernet address: %s\n",
 	    ether_sprintf(enaddr));
 
@@ -234,16 +256,17 @@ static int
 dwc_gmac_miibus_read_reg(device_t self, int phy, int reg)
 {
 	struct dwc_gmac_softc * const sc = device_private(self);
-	uint16_t miiaddr;
+	uint16_t mii;
 	size_t cnt;
 	int rv = 0;
 
-	miiaddr = ((phy << GMAC_MII_PHY_SHIFT) & GMAC_MII_PHY_MASK)
-		| ((reg << GMAC_MII_REG_SHIFT) & GMAC_MII_REG_MASK);
+	mii = __SHIFTIN(phy,GMAC_MII_PHY_MASK)
+	    | __SHIFTIN(reg,GMAC_MII_REG_MASK)
+	    | __SHIFTIN(sc->sc_mii_clk,GMAC_MII_CLKMASK)
+	    | GMAC_MII_BUSY;
 
 	mutex_enter(&sc->sc_mdio_lock);
-	bus_space_write_4(sc->sc_bst, sc->sc_bsh, AWIN_GMAC_MAC_MIIADDR,
-	    miiaddr | GMAC_MII_BUSY | (sc->sc_mii_clk << 2));
+	bus_space_write_4(sc->sc_bst, sc->sc_bsh, AWIN_GMAC_MAC_MIIADDR, mii);
 
 	for (cnt = 0; cnt < 1000; cnt++) {
 		if (!(bus_space_read_4(sc->sc_bst, sc->sc_bsh,
@@ -264,17 +287,17 @@ static void
 dwc_gmac_miibus_write_reg(device_t self, int phy, int reg, int val)
 {
 	struct dwc_gmac_softc * const sc = device_private(self);
-	uint16_t miiaddr;
+	uint16_t mii;
 	size_t cnt;
 
-	miiaddr = ((phy << GMAC_MII_PHY_SHIFT) & GMAC_MII_PHY_MASK)
-		| ((reg << GMAC_MII_REG_SHIFT) & GMAC_MII_REG_MASK)
-		| GMAC_MII_BUSY | GMAC_MII_WRITE | (sc->sc_mii_clk << 2);
+	mii = __SHIFTIN(phy,GMAC_MII_PHY_MASK)
+	    | __SHIFTIN(reg,GMAC_MII_REG_MASK)
+	    | __SHIFTIN(sc->sc_mii_clk,GMAC_MII_CLKMASK)
+	    | GMAC_MII_BUSY | GMAC_MII_WRITE;
 
 	mutex_enter(&sc->sc_mdio_lock);
 	bus_space_write_4(sc->sc_bst, sc->sc_bsh, AWIN_GMAC_MAC_MIIDATA, val);
-	bus_space_write_4(sc->sc_bst, sc->sc_bsh, AWIN_GMAC_MAC_MIIADDR,
-	    miiaddr);
+	bus_space_write_4(sc->sc_bst, sc->sc_bsh, AWIN_GMAC_MAC_MIIADDR, mii);
 
 	for (cnt = 0; cnt < 1000; cnt++) {
 		if (!(bus_space_read_4(sc->sc_bst, sc->sc_bsh,
@@ -292,8 +315,7 @@ dwc_gmac_alloc_rx_ring(struct dwc_gmac_softc *sc,
 {
 	struct dwc_gmac_rx_data *data;
 	bus_addr_t physaddr;
-	const size_t descsize = 
-	    AWGE_RX_RING_COUNT * sizeof(*ring->r_desc);
+	const size_t descsize = AWGE_RX_RING_COUNT * sizeof(*ring->r_desc);
 	int error, i, next;
 
 	ring->r_cur = ring->r_next = 0;
@@ -342,12 +364,11 @@ dwc_gmac_alloc_rx_ring(struct dwc_gmac_softc *sc,
 
 		desc = &sc->sc_rxq.r_desc[i];
 		desc->ddesc_data = htole32(physaddr);
-		next = i < (AWGE_RX_RING_COUNT-1) ? i+1 : 0;
+		next = (i+1) % AWGE_RX_RING_COUNT;
 		desc->ddesc_next = htole32(ring->r_physaddr 
 		    + next * sizeof(*desc));
 		desc->ddesc_cntl = htole32(
-		    (AWGE_MAX_PACKET & DDESC_CNTL_SIZE1MASK)
-		    << DDESC_CNTL_SIZE1SHIFT);
+		    __SHIFTIN(AWGE_MAX_PACKET,DDESC_CNTL_SIZE1MASK));
 		desc->ddesc_status = htole32(DDESC_STATUS_OWNEDBYDEV);
 	}
 
@@ -355,7 +376,7 @@ dwc_gmac_alloc_rx_ring(struct dwc_gmac_softc *sc,
 	    AWGE_RX_RING_COUNT*sizeof(struct dwc_gmac_dev_dmadesc),
 	    BUS_DMASYNC_PREREAD);
 	bus_space_write_4(sc->sc_bst, sc->sc_bsh, AWIN_GMAC_DMA_RX_ADDR,
-	    htole32(ring->r_physaddr));
+	    ring->r_physaddr);
 
 	return 0;
 
@@ -374,8 +395,7 @@ dwc_gmac_reset_rx_ring(struct dwc_gmac_softc *sc,
 	for (i = 0; i < AWGE_RX_RING_COUNT; i++) {
 		desc = &sc->sc_rxq.r_desc[i];
 		desc->ddesc_cntl = htole32(
-		    (AWGE_MAX_PACKET & DDESC_CNTL_SIZE1MASK)
-		    << DDESC_CNTL_SIZE1SHIFT);
+		    __SHIFTIN(AWGE_MAX_PACKET,DDESC_CNTL_SIZE1MASK));
 		desc->ddesc_status = htole32(DDESC_STATUS_OWNEDBYDEV);
 	}
 
@@ -508,7 +528,7 @@ dwc_gmac_alloc_tx_ring(struct dwc_gmac_softc *sc,
 		}
 		ring->t_desc[i].ddesc_next = htole32(
 		    ring->t_physaddr + sizeof(struct dwc_gmac_dev_dmadesc)
-		    *((i+1)&AWGE_TX_RING_COUNT));
+		    *((i+1)%AWGE_TX_RING_COUNT));
 	}
 
 	return 0;
@@ -564,6 +584,8 @@ dwc_gmac_reset_tx_ring(struct dwc_gmac_softc *sc,
 	    TX_DESC_OFFSET(0),
 	    AWGE_TX_RING_COUNT*sizeof(struct dwc_gmac_dev_dmadesc),
 	    BUS_DMASYNC_PREWRITE);
+	bus_space_write_4(sc->sc_bst, sc->sc_bsh, AWIN_GMAC_DMA_TX_ADDR,
+	    sc->sc_txq.t_physaddr);
 
 	ring->t_queued = 0;
 	ring->t_cur = ring->t_next = 0;
@@ -629,9 +651,18 @@ dwc_gmac_init(struct ifnet *ifp)
 	dwc_gmac_stop(ifp, 0);
 
 	/*
-	 * Set up dma pointer for RX ring
+	 * Set up dma pointer for RX and TX ring
 	 */
-	bus_space_write_4(sc->sc_bst, sc->sc_bsh, AWIN_GMAC_DMA_RX_ADDR, sc->sc_rxq.r_physaddr);
+	bus_space_write_4(sc->sc_bst, sc->sc_bsh, AWIN_GMAC_DMA_RX_ADDR,
+	    sc->sc_rxq.r_physaddr);
+	bus_space_write_4(sc->sc_bst, sc->sc_bsh, AWIN_GMAC_DMA_TX_ADDR,
+	    sc->sc_txq.t_physaddr);
+
+	/*
+	 * Start RX part
+	 */
+	bus_space_write_4(sc->sc_bst, sc->sc_bsh,
+	    AWIN_GMAC_DMA_OPMODE, GMAC_DMA_OP_RXSTART);
 
 	ifp->if_flags |= IFF_RUNNING;
 	ifp->if_flags &= ~IFF_OACTIVE;
@@ -665,16 +696,37 @@ dwc_gmac_start(struct ifnet *ifp)
 		/* packets have been queued, kick it off */
 		dwc_gmac_txdesc_sync(sc, old, sc->sc_txq.t_cur,
 		    BUS_DMASYNC_PREREAD|BUS_DMASYNC_PREWRITE);
-		bus_space_write_4(sc->sc_bst, sc->sc_bsh, AWIN_GMAC_DMA_TX_ADDR,
-		    sc->sc_txq.t_physaddr
-		        + old*sizeof(struct dwc_gmac_dev_dmadesc));
+		
+		bus_space_write_4(sc->sc_bst, sc->sc_bsh,
+		    AWIN_GMAC_DMA_OPMODE,
+		    bus_space_read_4(sc->sc_bst, sc->sc_bsh,
+		        AWIN_GMAC_DMA_OPMODE) | GMAC_DMA_OP_FLUSHTX);
+		bus_space_write_4(sc->sc_bst, sc->sc_bsh,
+		    AWIN_GMAC_DMA_OPMODE,
+		    bus_space_read_4(sc->sc_bst, sc->sc_bsh,
+		        AWIN_GMAC_DMA_OPMODE) | GMAC_DMA_OP_TXSTART);
 	}
+
+#ifdef DWC_GMAC_DEBUG
+	dwc_gmac_dump_dma(sc);
+	dwc_gmac_dump_tx_desc(sc);
+#endif
 }
 
 static void
 dwc_gmac_stop(struct ifnet *ifp, int disable)
 {
 	struct dwc_gmac_softc *sc = ifp->if_softc;
+
+	bus_space_write_4(sc->sc_bst, sc->sc_bsh,
+	    AWIN_GMAC_DMA_OPMODE,
+	    bus_space_read_4(sc->sc_bst, sc->sc_bsh,
+	        AWIN_GMAC_DMA_OPMODE)
+		& ~(GMAC_DMA_OP_TXSTART|GMAC_DMA_OP_RXSTART));
+	bus_space_write_4(sc->sc_bst, sc->sc_bsh,
+	    AWIN_GMAC_DMA_OPMODE,
+	    bus_space_read_4(sc->sc_bst, sc->sc_bsh,
+	        AWIN_GMAC_DMA_OPMODE) | GMAC_DMA_OP_FLUSHTX);
 
 	mii_down(&sc->sc_mii);
 	dwc_gmac_reset_tx_ring(sc, &sc->sc_txq);
@@ -690,7 +742,7 @@ dwc_gmac_queue(struct dwc_gmac_softc *sc, struct mbuf *m0)
 	struct dwc_gmac_dev_dmadesc *desc = NULL;
 	struct dwc_gmac_tx_data *data = NULL;
 	bus_dmamap_t map;
-	uint32_t status, flags, len;
+	uint32_t flags, len;
 	int error, i, first;
 
 	first = sc->sc_txq.t_cur;
@@ -711,36 +763,41 @@ dwc_gmac_queue(struct dwc_gmac_softc *sc, struct mbuf *m0)
 	}
 
 	data = NULL;
-	flags = DDESC_STATUS_TXINT|DDESC_STATUS_TXCHAIN;
+	flags = DDESC_CNTL_TXFIRST|DDESC_CNTL_TXINT|DDESC_CNTL_TXCHAIN;
 	for (i = 0; i < map->dm_nsegs; i++) {
 		data = &sc->sc_txq.t_data[sc->sc_txq.t_cur];
+
+#ifdef DWC_GMAC_DEBUG
+		aprint_normal_dev(sc->sc_dev, "enqueing desc #%d data %08lx "
+		    "len %lu\n", sc->sc_txq.t_cur,
+		    (unsigned long)map->dm_segs[i].ds_addr,
+		    (unsigned long)map->dm_segs[i].ds_len);
+#endif
+
 		desc = &sc->sc_txq.t_desc[sc->sc_txq.t_cur];
 
 		desc->ddesc_data = htole32(map->dm_segs[i].ds_addr);
-		len = (map->dm_segs[i].ds_len & DDESC_CNTL_SIZE1MASK)
-		    << DDESC_CNTL_SIZE1SHIFT;
-		desc->ddesc_cntl = htole32(len);
-		status = flags;
-		desc->ddesc_status = htole32(status);
-		sc->sc_txq.t_queued++;
+		len = __SHIFTIN(map->dm_segs[i].ds_len,DDESC_CNTL_SIZE1MASK);
+		if (i == map->dm_nsegs-1)
+			flags |= DDESC_CNTL_TXLAST;
+		desc->ddesc_cntl = htole32(len|flags);
+		flags &= ~DDESC_CNTL_TXFIRST;
 
 		/*
 		 * Defer passing ownership of the first descriptor
 		 * untill we are done.
 		 */
-		flags |= DDESC_STATUS_OWNEDBYDEV;
+		if (i)
+			desc->ddesc_status = htole32(DDESC_STATUS_OWNEDBYDEV);
+		sc->sc_txq.t_queued++;
 
 		sc->sc_txq.t_cur = (sc->sc_txq.t_cur + 1)
 		    & (AWGE_TX_RING_COUNT-1);
 	}
 
-	/* Fixup last */
-	status = flags|DDESC_STATUS_TXLAST;
-	desc->ddesc_status = htole32(status);
-
-	/* Finalize first */
-	status = flags|DDESC_STATUS_TXFIRST;
-	sc->sc_txq.t_desc[first].ddesc_status = htole32(status);
+	/* Pass first to device */
+	sc->sc_txq.t_desc[first].ddesc_status
+	    = htole32(DDESC_STATUS_OWNEDBYDEV);
 
 	data->td_m = m0;
 	data->td_active = map;
@@ -813,3 +870,50 @@ if (++cnt > 20)
 
 	return 1;
 }
+
+#ifdef DWC_GMAC_DEBUG
+static void
+dwc_gmac_dump_dma(struct dwc_gmac_softc *sc)
+{
+	aprint_normal_dev(sc->sc_dev, "busmode: %08x\n",
+	    bus_space_read_4(sc->sc_bst, sc->sc_bsh, AWIN_GMAC_DMA_BUSMODE));
+	aprint_normal_dev(sc->sc_dev, "tx poll: %08x\n",
+	    bus_space_read_4(sc->sc_bst, sc->sc_bsh, AWIN_GMAC_DMA_TXPOLL));
+	aprint_normal_dev(sc->sc_dev, "rx poll: %08x\n",
+	    bus_space_read_4(sc->sc_bst, sc->sc_bsh, AWIN_GMAC_DMA_RXPOLL));
+	aprint_normal_dev(sc->sc_dev, "rx descriptors: %08x\n",
+	    bus_space_read_4(sc->sc_bst, sc->sc_bsh, AWIN_GMAC_DMA_RX_ADDR));
+	aprint_normal_dev(sc->sc_dev, "tx descriptors: %08x\n",
+	    bus_space_read_4(sc->sc_bst, sc->sc_bsh, AWIN_GMAC_DMA_TX_ADDR));
+	aprint_normal_dev(sc->sc_dev, "status: %08x\n",
+	    bus_space_read_4(sc->sc_bst, sc->sc_bsh, AWIN_GMAC_DMA_STATUS));
+	aprint_normal_dev(sc->sc_dev, "op mode: %08x\n",
+	    bus_space_read_4(sc->sc_bst, sc->sc_bsh, AWIN_GMAC_DMA_OPMODE));
+	aprint_normal_dev(sc->sc_dev, "int enable: %08x\n",
+	    bus_space_read_4(sc->sc_bst, sc->sc_bsh, AWIN_GMAC_DMA_INTENABLE));
+	aprint_normal_dev(sc->sc_dev, "cur tx: %08x\n",
+	    bus_space_read_4(sc->sc_bst, sc->sc_bsh, AWIN_GMAC_DMA_CUR_TX_DESC));
+	aprint_normal_dev(sc->sc_dev, "cur rx: %08x\n",
+	    bus_space_read_4(sc->sc_bst, sc->sc_bsh, AWIN_GMAC_DMA_CUR_RX_DESC));
+	aprint_normal_dev(sc->sc_dev, "cur tx buffer: %08x\n",
+	    bus_space_read_4(sc->sc_bst, sc->sc_bsh, AWIN_GMAC_DMA_CUR_TX_BUFADDR));
+	aprint_normal_dev(sc->sc_dev, "cur rx buffer: %08x\n",
+	    bus_space_read_4(sc->sc_bst, sc->sc_bsh, AWIN_GMAC_DMA_CUR_RX_BUFADDR));
+}
+
+static void
+dwc_gmac_dump_tx_desc(struct dwc_gmac_softc *sc)
+{
+	int i;
+
+	aprint_normal_dev(sc->sc_dev, " TX DMA descriptors:\n");
+	for (i = 0; i < AWGE_TX_RING_COUNT; i++) {
+		struct dwc_gmac_dev_dmadesc *desc = &sc->sc_txq.t_desc[i];
+		aprint_normal("#%d (%08lx): status: %08x cntl: %08x data: %08x next: %08x\n",
+		    i, sc->sc_txq.t_physaddr + i*sizeof(struct dwc_gmac_dev_dmadesc),
+		    le32toh(desc->ddesc_status), le32toh(desc->ddesc_cntl),
+		    le32toh(desc->ddesc_data), le32toh(desc->ddesc_next));
+
+	}
+}
+#endif

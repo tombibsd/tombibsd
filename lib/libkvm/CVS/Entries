@@ -28,6 +28,7 @@
 /kvm_private.h/1.20/Mon Sep 12 21:11:32 2011/-kk/
 /kvm_proc.c/1.90/Thu Feb 27 08:55:25 2014/-kk/
 /kvm_read.3/1.8/Thu Aug  7 16:44:39 2003/-kk/
+/kvm_riscv.c/1.1/Fri Sep 19 17:36:25 2014/-kk/
 /kvm_sh3.c/1.9/Thu Feb 27 08:55:25 2014/-kk/
 /kvm_sparc.c/1.33/Thu Feb 27 08:55:25 2014/-kk/
 /kvm_sparc64.c/1.17/Sat Mar  1 06:04:08 2014/-kk/

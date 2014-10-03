@@ -64,6 +64,11 @@ The following table names and describes each field.
 .It "oc	bool	present means upper and lower case are equivalent"
 .It "kw	str	a list of keywords separated by spaces"
 .El
+.Sh FILES
+.Bl -tag -width /usr/share/misc/vgrindefs -compact
+.It Pa /usr/share/misc/vgrindefs
+File containing terminal descriptions.
+.El
 .Sh EXAMPLES
 The following entry, which describes the C language, is
 typical of a language entry.
@@ -143,11 +148,6 @@ by spaces.
 If the "oc" boolean is specified, indicating that upper
 and lower case are equivalent, then all the keywords should be
 specified in lower case.
-.Sh FILES
-.Bl -tag -width /usr/share/misc/vgrindefs -compact
-.It Pa /usr/share/misc/vgrindefs
-File containing terminal descriptions.
-.El
 .Sh SEE ALSO
 .Xr troff 1 ,
 .Xr vgrind 1

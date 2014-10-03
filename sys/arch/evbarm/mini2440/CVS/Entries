@@ -2,6 +2,6 @@
 /if_dm_mini2440.c/1.3/Mon Nov 12 18:00:39 2012/-kk/
 /mini2440_bootinfo.h/1.1/Mon Jan 30 03:28:33 2012/-kk/
 /mini2440_lcd.c/1.4/Fri Oct  3 09:08:56 2014/-kk/
-/mini2440_machdep.c/1.8/Tue Mar 25 02:35:19 2014/-kk/
+/mini2440_machdep.c/1.9/Fri Oct  3 09:57:38 2014/-kk/
 /mini2440_start.S/1.1/Mon Jan 30 03:28:34 2012/-kk/
 D

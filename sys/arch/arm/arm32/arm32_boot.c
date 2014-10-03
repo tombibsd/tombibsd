@@ -408,6 +408,7 @@ cpu_hatch(struct cpu_info *ci, cpuid_t cpuid, void (*md_cpu_init)(struct cpu_inf
 	printf(" done!\n");
 #endif
 	atomic_and_32(&arm_cpu_mbox, ~(1 << cpuid));
+	membar_producer();
 	__asm __volatile("sev; sev; sev");
 }
 #endif /* MULTIPROCESSOR */
