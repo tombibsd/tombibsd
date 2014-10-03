@@ -154,7 +154,8 @@ typedef struct krndsource {
 } krndsource_t;
 
 static inline void
-rndsource_setcb(struct krndsource *const rs, void *const cb, void *const arg)
+rndsource_setcb(struct krndsource *const rs, void (*const cb)(size_t, void *),
+    void *const arg)
 {
 	rs->get = cb;
 	rs->getarg = arg;

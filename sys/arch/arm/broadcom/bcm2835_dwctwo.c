@@ -130,7 +130,7 @@ bcmdwc2_attach(device_t parent, device_t self, void *aux)
 	aprint_naive(": USB controller\n");
 	aprint_normal(": USB controller\n");
 
-	sc->sc_ih = bcm2835_intr_establish(aaa->aaa_intr, IPL_USB,
+	sc->sc_ih = bcm2835_intr_establish(aaa->aaa_intr, IPL_SCHED,
 	   dwc2_intr, &sc->sc_dwc2);
 
 	if (sc->sc_ih == NULL) {

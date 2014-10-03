@@ -220,7 +220,7 @@ cryptof_write(file_t *fp, off_t *poff,
 int
 cryptof_ioctl(struct file *fp, u_long cmd, void *data)
 {
-	struct fcrypt *fcr = fp->f_data;
+	struct fcrypt *fcr = fp->f_fcrypt;
 	struct csession *cse;
 	struct session_op *sop;
 	struct session_n_op *snop;
@@ -942,7 +942,7 @@ fail:
 static int
 cryptof_close(struct file *fp)
 {
-	struct fcrypt *fcr = fp->f_data;
+	struct fcrypt *fcr = fp->f_fcrypt;
 	struct csession *cse;
 
 	mutex_enter(&crypto_mtx);
@@ -953,7 +953,7 @@ cryptof_close(struct file *fp)
 		mutex_enter(&crypto_mtx);
 	}
 	seldestroy(&fcr->sinfo);
-	fp->f_data = NULL;
+	fp->f_fcrypt = NULL;
 	crypto_refcount--;
 	mutex_exit(&crypto_mtx);
 
@@ -2037,7 +2037,7 @@ fail:
 static int      
 cryptof_stat(struct file *fp, struct stat *st)
 {
-	struct fcrypt *fcr = fp->f_data;
+	struct fcrypt *fcr = fp->f_fcrypt;
 
 	(void)memset(st, 0, sizeof(*st));
 
@@ -2056,7 +2056,7 @@ cryptof_stat(struct file *fp, struct stat *st)
 static int      
 cryptof_poll(struct file *fp, int events)
 {
-	struct fcrypt *fcr = (struct fcrypt *)fp->f_data;
+	struct fcrypt *fcr = fp->f_fcrypt;
 	int revents = 0;
 
 	if (!(events & (POLLIN | POLLRDNORM))) {

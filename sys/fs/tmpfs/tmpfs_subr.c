@@ -185,7 +185,6 @@ tmpfs_alloc_node(tmpfs_mount_t *tmp, enum vtype type, uid_t uid, gid_t gid,
 		}
 
 		KASSERT(nnode->tn_size < MAXPATHLEN);
-		nnode->tn_size++; /* include the NUL terminator */
 
 		nnode->tn_spec.tn_lnk.tn_link =
 		    tmpfs_strname_alloc(tmp, nnode->tn_size);

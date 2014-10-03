@@ -208,7 +208,7 @@ do_filereadv(int fd, const struct iovec *iovp, int iovcnt,
 	if (offset == NULL)
 		offset = &fp->f_offset;
 	else {
-		struct vnode *vp = fp->f_data;
+		struct vnode *vp = fp->f_vnode;
 		if (fp->f_type != DTYPE_VNODE || vp->v_type == VFIFO) {
 			error = ESPIPE;
 			goto out;
@@ -413,7 +413,7 @@ do_filewritev(int fd, const struct iovec *iovp, int iovcnt,
 	if (offset == NULL)
 		offset = &fp->f_offset;
 	else {
-		struct vnode *vp = fp->f_data;
+		struct vnode *vp = fp->f_vnode;
 		if (fp->f_type != DTYPE_VNODE || vp->v_type == VFIFO) {
 			error = ESPIPE;
 			goto out;

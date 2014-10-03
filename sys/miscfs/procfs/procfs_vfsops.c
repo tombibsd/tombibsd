@@ -339,7 +339,7 @@ procfs_loadvnode(struct mount *mp, struct vnode *vp,
 			pfs->pfs_mode = S_IRUSR|S_IWUSR;
 			switch (fp->f_type) {
 			case DTYPE_VNODE:
-				vxp = fp->f_data;
+				vxp = fp->f_vnode;
 
 				/*
 				 * We make symlinks for directories

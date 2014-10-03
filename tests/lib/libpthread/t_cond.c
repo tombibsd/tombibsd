@@ -343,25 +343,17 @@ ATF_TC_HEAD(cond_timedwait_race, tc)
 ATF_TC_BODY(cond_timedwait_race, tc)
 {
 	pthread_t tid[64];
-	size_t i, j;
+	size_t i;
 
-	atf_tc_expect_fail("PR lib/44756");
-	/* This outer loop is to ensure that a false positive of this race
-	 * test does not report the test as broken (due to the test not
-	 * triggering the expected failure).  However, we want to make this
-	 * fail consistently when the race is resolved, and this approach
-	 * will have the desired effect. */
-	for (j = 0; j < 10; j++ ) {
-		for (i = 0; i < __arraycount(tid); i++) {
+	for (i = 0; i < __arraycount(tid); i++) {
 
-			PTHREAD_REQUIRE(pthread_create(&tid[i], NULL,
-			    pthread_cond_timedwait_func, NULL));
-		}
+		PTHREAD_REQUIRE(pthread_create(&tid[i], NULL,
+		    pthread_cond_timedwait_func, NULL));
+	}
 
-		for (i = 0; i < __arraycount(tid); i++) {
+	for (i = 0; i < __arraycount(tid); i++) {
 
-			PTHREAD_REQUIRE(pthread_join(tid[i], NULL));
-		}
+		PTHREAD_REQUIRE(pthread_join(tid[i], NULL));
 	}
 }
 

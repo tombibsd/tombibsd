@@ -193,7 +193,7 @@ at_control(u_long cmd, void *data, struct ifnet *ifp)
 			} else {
 				TAILQ_INSERT_TAIL(&at_ifaddr, aa, aa_list);
 			}
-			IFAREF(&aa->aa_ifa);
+			ifaref(&aa->aa_ifa);
 
 			/*
 		         * Find the end of the interface's addresses
@@ -336,7 +336,7 @@ at_purgeaddr(struct ifaddr *ifa)
 	 */
 	ifa_remove(ifp, &aa->aa_ifa);
 	TAILQ_REMOVE(&at_ifaddr, aa, aa_list);
-	IFAFREE(&aa->aa_ifa);
+	ifafree(&aa->aa_ifa);
 }
 
 void

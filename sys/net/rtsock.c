@@ -1379,7 +1379,6 @@ sysctl_rtable(SYSCTLFN_ARGS)
 {
 	void 	*where = oldp;
 	size_t	*given = oldlenp;
-	const void *new = newp;
 	int	i, s, error = EINVAL;
 	u_char  af;
 	struct	rt_walkarg w;
@@ -1387,7 +1386,7 @@ sysctl_rtable(SYSCTLFN_ARGS)
 	if (namelen == 1 && name[0] == CTL_QUERY)
 		return sysctl_query(SYSCTLFN_CALL(rnode));
 
-	if (new)
+	if (newp)
 		return EPERM;
 	if (namelen != 3)
 		return EINVAL;

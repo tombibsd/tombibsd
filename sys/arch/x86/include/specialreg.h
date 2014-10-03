@@ -355,9 +355,12 @@
  */
 
 #define	CPUID_PES1_XSAVEOPT	0x00000001	/* xsaveopt instruction */
+#define	CPUID_PES1_XSAVEC	0x00000002	/* xsavec & compacted XRSTOR */
+#define	CPUID_PES1_XGETBV	0x00000004	/* xgetbv with ECX = 1 */
+#define	CPUID_PES1_XSAVES	0x00000008	/* xsaves/xrstors, IA32_XSS */
 
 #define CPUID_PES1_FLAGS	"\20" \
-	"\1" "XSAVEOPT"
+	"\1" "XSAVEOPT"	"\2" "XSAVEC"	"\3" "XINUSE"	"\4" "XSAVES"
 
 /* Intel Fn80000001 extended features - %edx */
 #define CPUID_SYSCALL	0x00000800	/* SYSCALL/SYSRET */

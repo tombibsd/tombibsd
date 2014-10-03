@@ -1195,7 +1195,7 @@ union_readdirhook(struct vnode **vpp, struct file *fp, struct lwp *l)
 		return (error);
 	}
 	VOP_UNLOCK(lvp);
-	fp->f_data = lvp;
+	fp->f_vnode = lvp;
 	fp->f_offset = 0;
 	error = vn_close(vp, FREAD, fp->f_cred);
 	if (error)

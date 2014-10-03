@@ -112,10 +112,10 @@ fd_checkstd(void)
 			fd_abort(p, fp, fd);
 			return (error);
 		}
-		fp->f_data = nd.ni_vp;
+		fp->f_type = DTYPE_VNODE;
+		fp->f_vnode = nd.ni_vp;
 		fp->f_flag = flags;
 		fp->f_ops = &vnops;
-		fp->f_type = DTYPE_VNODE;
 		VOP_UNLOCK(nd.ni_vp);
 		fd_affix(p, fp, fd);
 		pathbuf_destroy(pb);

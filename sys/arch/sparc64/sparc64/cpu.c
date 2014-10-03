@@ -545,7 +545,7 @@ cpu_boot_secondary_processors(void)
 	}
 
 	for (ci = cpus; ci != NULL; ci = ci->ci_next) {
-		if (ci->ci_cpuid == CPU_UPAID)
+		if (ci->ci_cpuid == cpu_myid())
 			continue;
 
 		cpu_pmap_prepare(ci, false);

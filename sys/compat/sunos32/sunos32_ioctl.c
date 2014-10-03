@@ -435,15 +435,15 @@ sunos32_do_ioctl(int fd, int cmd, void *arg, struct lwp *l)
 	struct vnode *vp;
 	int error;
 
-	if ((fp = fd_getfile(fd)) == NULL)
-		return EBADF;
+	if ((error = fd_getvnode(fd, &fp)) != 0)
+		return error;
 	if ((fp->f_flag & (FREAD|FWRITE)) == 0) {
 		fd_putfile(fd);
 		return EBADF;
 	}
 	error = fp->f_ops->fo_ioctl(fp, cmd, arg);
 	if (error == EIO && cmd == TIOCGPGRP) {
-		vp = (struct vnode *)fp->f_data;
+		vp = fp->f_vnode;
 		if (vp != NULL && vp->v_type == VCHR && major(vp->v_rdev) == 21)
 			error = ENOTTY;
 	}

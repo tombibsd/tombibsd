@@ -97,6 +97,7 @@ struct pool_allocator {
 };
 
 LIST_HEAD(pool_pagelist,pool_item_header);
+SPLAY_HEAD(phtree, pool_item_header);
 
 struct pool {
 	TAILQ_ENTRY(pool)
@@ -158,7 +159,7 @@ struct pool {
 	kcondvar_t	pr_cv;
 	int		pr_ipl;
 
-	SPLAY_HEAD(phtree, pool_item_header) pr_phtree;
+	struct phtree	pr_phtree;
 
 	int		pr_maxcolor;	/* Cache colouring */
 	int		pr_curcolor;

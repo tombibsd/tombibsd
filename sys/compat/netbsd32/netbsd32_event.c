@@ -61,12 +61,12 @@ netbsd32_kevent_fetch_timeout(const void *src, void *dest, size_t length)
 }
 
 static int
-netbsd32_kevent_fetch_changes(void *private, const struct kevent *changelist,
+netbsd32_kevent_fetch_changes(void *ctx, const struct kevent *changelist,
     struct kevent *changes, size_t index, int n)
 {
 	const struct netbsd32_kevent *src =
 	    (const struct netbsd32_kevent *)changelist;
-	struct netbsd32_kevent *kev32, *changes32 = private;
+	struct netbsd32_kevent *kev32, *changes32 = ctx;
 	int error, i;
 
 	error = copyin(src + index, changes32, n * sizeof(*changes32));
@@ -78,10 +78,10 @@ netbsd32_kevent_fetch_changes(void *private, const struct kevent *changelist,
 }
 
 static int
-netbsd32_kevent_put_events(void *private, struct kevent *events,
+netbsd32_kevent_put_events(void *ctx, struct kevent *events,
     struct kevent *eventlist, size_t index, int n)
 {
-	struct netbsd32_kevent *kev32, *events32 = private;
+	struct netbsd32_kevent *kev32, *events32 = ctx;
 	int i;
 
 	for (i = 0, kev32 = events32; i < n; i++, kev32++, events++)

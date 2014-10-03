@@ -249,7 +249,7 @@ int perfuse_node_reclaim(struct puffs_usermount *, puffs_cookie_t);
 int perfuse_node_inactive(struct puffs_usermount *, puffs_cookie_t);
 int perfuse_node_print(struct puffs_usermount *, puffs_cookie_t);
 int perfuse_node_pathconf(struct puffs_usermount *,
-    puffs_cookie_t, int, int *);
+    puffs_cookie_t, int, register_t *);
 int perfuse_node_advlock(struct puffs_usermount *,
     puffs_cookie_t, void *, int, struct flock *, int);
 int perfuse_node_read(struct puffs_usermount *, puffs_cookie_t,

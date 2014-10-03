@@ -213,7 +213,7 @@ retry:
 	fp->f_flag = FREAD|FWRITE;
 	fp->f_type = DTYPE_VNODE;
 	fp->f_ops = &vnops;
-	fp->f_data = vp;
+	fp->f_vnode = vp;
 	VOP_UNLOCK(vp);
 	fd_affix(curproc, fp, *fd);
 	return 0;
@@ -290,7 +290,7 @@ pty_alloc_slave(struct lwp *l, int *fd, dev_t dev, struct mount *mp)
 	fp->f_flag = FREAD|FWRITE;
 	fp->f_type = DTYPE_VNODE;
 	fp->f_ops = &vnops;
-	fp->f_data = vp;
+	fp->f_vnode = vp;
 	VOP_UNLOCK(vp);
 	fd_affix(curproc, fp, *fd);
 	return 0;

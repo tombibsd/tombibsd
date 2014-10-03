@@ -513,11 +513,12 @@ sunos_sys_ioctl(struct lwp *l, const struct sunos_sys_ioctl_args *uap, register_
 		 * is on a pty.
 		 */
 		int pgrp;
-		struct vnode *vp;
+		struct vnode *vp = NULL;
 
 		error = (*ctl)(fp, TIOCGPGRP, &pgrp);
 		if (error) {
-			vp = (struct vnode *)fp->f_data;
+			if (fp->f_type == DTYPE_VNODE)
+				vp = fp->f_vnode;
 			if ((error == EIO || (error == 0 && pgrp == 0)) &&
 			    vp != NULL &&
 			    vp->v_type == VCHR &&

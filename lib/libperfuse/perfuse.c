@@ -483,6 +483,7 @@ perfuse_init(struct perfuse_callbacks *pc, struct perfuse_mount_info *pmi)
 	PUFFSOP_SET(pops, perfuse, node, reclaim);
 	PUFFSOP_SET(pops, perfuse, node, inactive);
 	PUFFSOP_SET(pops, perfuse, node, print);
+	PUFFSOP_SET(pops, perfuse, node, pathconf);
 	PUFFSOP_SET(pops, perfuse, node, advlock);
 	PUFFSOP_SET(pops, perfuse, node, read);
 	PUFFSOP_SET(pops, perfuse, node, write);

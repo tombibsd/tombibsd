@@ -44,7 +44,7 @@ struct _prop_ingest_context {
  *	Allocate and initialize an ingest context.
  */
 prop_ingest_context_t
-prop_ingest_context_alloc(void *private)
+prop_ingest_context_alloc(void *xprivate)
 {
 	prop_ingest_context_t ctx;
 
@@ -53,7 +53,7 @@ prop_ingest_context_alloc(void *private)
 		ctx->pic_error = PROP_INGEST_ERROR_NO_ERROR;
 		ctx->pic_type = PROP_TYPE_UNKNOWN;
 		ctx->pic_key = NULL;
-		ctx->pic_private = private;
+		ctx->pic_private = xprivate;
 	}
 	return (ctx);
 }

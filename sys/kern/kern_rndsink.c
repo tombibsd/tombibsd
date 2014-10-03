@@ -43,15 +43,17 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <dev/rnd_private.h>	/* XXX provisional, for rnd_extract_data */
 
+enum rsink_state {
+	RNDSINK_IDLE,		/* no callback in progress */
+	RNDSINK_QUEUED,		/* queued for callback */
+	RNDSINK_IN_FLIGHT,	/* callback called */
+	RNDSINK_REQUEUED,	/* queued again before callback done */
+	RNDSINK_DEAD,		/* destroyed */
+};
+
 struct rndsink {
 	/* Callback state.  */
-	enum {
-		RNDSINK_IDLE,		/* no callback in progress */
-		RNDSINK_QUEUED,		/* queued for callback */
-		RNDSINK_IN_FLIGHT,	/* callback called */
-		RNDSINK_REQUEUED,	/* queued again before callback done */
-		RNDSINK_DEAD,		/* destroyed */
-	}			rsink_state;
+	enum rsink_state	rsink_state;
 
 	/* Entry on the queue of rndsinks, iff in the RNDSINK_QUEUED state.  */
 	TAILQ_ENTRY(rndsink)	rsink_entry;

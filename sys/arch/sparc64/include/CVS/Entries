@@ -10,7 +10,7 @@
 /bus_funcs.h/1.3/Sun Jul 20 13:58:44 2014/-kk/
 /cdefs.h/1.4/Sat Jul 20 11:52:21 2002/-kk/
 /cgtworeg.h/1.2/Sat Jul 20 11:52:21 2002/-kk/
-/cpu.h/1.111/Sat Jun 14 03:56:35 2014/-kk/
+/cpu.h/1.112/Fri Oct  3 09:50:49 2014/-kk/
 /cpu_counter.h/1.8/Sat May 16 19:15:34 2009/-kk/
 /cpuset.h/1.8/Mon Apr 28 20:23:37 2008/-kk/
 /ctlreg.h/1.61/Sun Jul 20 13:58:44 2014/-kk/
@@ -53,7 +53,7 @@
 /param.h/1.54/Sun Jul 20 13:26:19 2014/-kk/
 /pcb.h/1.16/Tue Oct 13 22:41:57 2009/-kk/
 /pci_machdep.h/1.27/Fri Apr 11 02:03:39 2014/-kk/
-/pmap.h/1.58/Sat Apr 19 08:04:47 2014/-kk/
+/pmap.h/1.59/Fri Oct  3 09:50:49 2014/-kk/
 /pmc.h/1.1/Wed Aug  7 05:16:11 2002/-kk/
 /proc.h/1.13/Fri Jan 14 02:06:32 2011/-kk/
 /profile.h/1.6/Sat Jul 20 11:52:22 2002/-kk/
@@ -69,7 +69,7 @@
 /setjmp.h/1.3/Sat Jul 20 11:52:22 2002/-kk/
 /signal.h/1.11/Thu Jan  9 23:25:24 2003/-kk/
 /sljit_machdep.h/1.1/Wed Jul 23 18:19:45 2014/-kk/
-/sparc64.h/1.12/Tue Jan 14 16:05:01 2014/-kk/
+/sparc64.h/1.13/Fri Oct  3 09:50:49 2014/-kk/
 /sunos_machdep.h/1.2/Sun Dec 11 12:19:10 2005/-kk/
 /svr4_32_machdep.h/1.9/Mon Apr 28 20:23:37 2008/-kk/
 /svr4_machdep.h/1.12/Mon Apr 28 20:23:37 2008/-kk/

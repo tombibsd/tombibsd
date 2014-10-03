@@ -204,6 +204,30 @@ audio_ioctl(int fd, unsigned long com, void *argp)
 			tmpinfo.play.encoding =
 			tmpinfo.record.encoding = AUDIO_ENCODING_ULINEAR_BE;
 			break;
+		case AFMT_S24_LE:
+			tmpinfo.play.precision =
+			tmpinfo.record.precision = 24;
+			tmpinfo.play.encoding =
+			tmpinfo.record.encoding = AUDIO_ENCODING_SLINEAR_LE;
+			break;
+		case AFMT_S24_BE:
+			tmpinfo.play.precision =
+			tmpinfo.record.precision = 24;
+			tmpinfo.play.encoding =
+			tmpinfo.record.encoding = AUDIO_ENCODING_SLINEAR_BE;
+			break;
+		case AFMT_S32_LE:
+			tmpinfo.play.precision =
+			tmpinfo.record.precision = 32;
+			tmpinfo.play.encoding =
+			tmpinfo.record.encoding = AUDIO_ENCODING_SLINEAR_LE;
+			break;
+		case AFMT_S32_BE:
+			tmpinfo.play.precision =
+			tmpinfo.record.precision = 32;
+			tmpinfo.play.encoding =
+			tmpinfo.record.encoding = AUDIO_ENCODING_SLINEAR_BE;
+			break;
 		case AFMT_AC3:
 			tmpinfo.play.precision =
 			tmpinfo.record.precision = 16;
@@ -227,13 +251,21 @@ audio_ioctl(int fd, unsigned long com, void *argp)
 			idat = AFMT_A_LAW;
 			break;
 		case AUDIO_ENCODING_SLINEAR_LE:
-			if (tmpinfo.play.precision == 16)
+			if (tmpinfo.play.precision == 32)
+				idat = AFMT_S32_LE;
+			else if (tmpinfo.play.precision == 24)
+				idat = AFMT_S24_LE;
+			else if (tmpinfo.play.precision == 16)
 				idat = AFMT_S16_LE;
 			else
 				idat = AFMT_S8;
 			break;
 		case AUDIO_ENCODING_SLINEAR_BE:
-			if (tmpinfo.play.precision == 16)
+			if (tmpinfo.play.precision == 32)
+				idat = AFMT_S32_BE;
+			else if (tmpinfo.play.precision == 24)
+				idat = AFMT_S24_BE;
+			else if (tmpinfo.play.precision == 16)
 				idat = AFMT_S16_BE;
 			else
 				idat = AFMT_S8;

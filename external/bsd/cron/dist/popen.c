@@ -59,7 +59,6 @@ __RCSID("$NetBSD$");
  * command.
  */
 static PID_T *pids;
-static long fds;
 
 FILE *
 cron_popen(char *program, const char *type, struct passwd *pw) {
@@ -74,9 +73,10 @@ cron_popen(char *program, const char *type, struct passwd *pw) {
 
 	if (!pids) {
 		size_t len;
+		long fds;
 		if ((fds = sysconf(_SC_OPEN_MAX)) <= 0)
 			return (NULL);
-		len = fds * sizeof(*pids);
+		len = (size_t)fds * sizeof(*pids);
 		if ((pids = malloc(len)) == NULL)
 			return (NULL);
 		(void)memset(pids, 0, len);

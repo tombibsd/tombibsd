@@ -1036,7 +1036,7 @@ tmpfs_readlink(void *v)
 	/* Note: readlink(2) returns the path without NUL terminator. */
 	if (node->tn_size > 0) {
 		error = uiomove(node->tn_spec.tn_lnk.tn_link,
-		    MIN(node->tn_size - 1, uio->uio_resid), uio);
+		    MIN(node->tn_size, uio->uio_resid), uio);
 	} else {
 		error = 0;
 	}

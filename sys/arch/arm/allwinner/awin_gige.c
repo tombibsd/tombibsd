@@ -1,9 +1,9 @@
 /*-
- * Copyright (c) 2013 The NetBSD Foundation, Inc.
+ * Copyright (c) 2013, 2014 The NetBSD Foundation, Inc.
  * All rights reserved.
  *
  * This code is derived from software contributed to The NetBSD Foundation
- * by Matt Thomas of 3am Software Foundry.
+ * by Matt Thomas of 3am Software Foundry and Martin Husemann.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -42,14 +42,21 @@ __KERNEL_RCSID(1, "$NetBSD$");
 #include <arm/allwinner/awin_reg.h>
 #include <arm/allwinner/awin_var.h>
 
+#include <net/if.h>
+#include <net/if_ether.h>
+#include <net/if_media.h>
+
+#include <dev/mii/miivar.h>
+
+#include <dev/ic/dwc_gmac_var.h>
+
 static int awin_gige_match(device_t, cfdata_t, void *);
 static void awin_gige_attach(device_t, device_t, void *);
+static int awin_gige_intr(void*);
 
 struct awin_gige_softc {
-	device_t sc_dev;
-	bus_space_tag_t sc_bst;
-	bus_space_handle_t sc_bsh;
-	bus_dma_tag_t sc_dmat;
+	struct dwc_gmac_softc sc_core;
+	void *sc_ih;
 };
 
 static const struct awin_gpio_pinset awin_gige_gpio_pinset = {
@@ -85,16 +92,64 @@ awin_gige_attach(device_t parent, device_t self, void *aux)
 	struct awin_gige_softc * const sc = device_private(self);
 	struct awinio_attach_args * const aio = aux;
 	const struct awin_locators * const loc = &aio->aio_loc;
+	prop_dictionary_t dict;
+	uint8_t enaddr[ETHER_ADDR_LEN], *ep = NULL;
 
-	sc->sc_dev = self;
+	sc->sc_core.sc_dev = self;
+	dict = device_properties(sc->sc_core.sc_dev);
 
 	awin_gpio_pinset_acquire(&awin_gige_gpio_pinset);
 
-	sc->sc_bst = aio->aio_core_bst;
-	sc->sc_dmat = aio->aio_dmat;
-	bus_space_subregion(sc->sc_bst, aio->aio_core_bsh,
-	    loc->loc_offset, loc->loc_size, &sc->sc_bsh);
+	sc->sc_core.sc_bst = aio->aio_core_bst;
+	sc->sc_core.sc_dmat = aio->aio_dmat;
+	bus_space_subregion(sc->sc_core.sc_bst, aio->aio_core_bsh,
+	    loc->loc_offset, loc->loc_size, &sc->sc_core.sc_bsh);
 
 	aprint_naive("\n");
 	aprint_normal(": Gigabit Ethernet Controller\n");
+	
+	prop_data_t ea = dict ? prop_dictionary_get(dict, "mac-address") : NULL;
+	if (ea != NULL) {
+		KASSERT(prop_object_type(ea) == PROP_TYPE_DATA);
+		KASSERT(prop_data_size(ea) == ETHER_ADDR_LEN);
+		memcpy(enaddr, prop_data_data_nocopy(ea), ETHER_ADDR_LEN);
+		ep = enaddr;
+	}
+
+	/*
+	 * Interrupt handler
+	 */
+	sc->sc_ih = intr_establish(loc->loc_intr, IPL_VM, IST_LEVEL|IST_MPSAFE,
+	    awin_gige_intr, sc);
+	if (sc->sc_ih == NULL) {
+		aprint_error_dev(self, "failed to establish interrupt %d\n",
+		     loc->loc_intr);
+		return;
+	}
+	aprint_normal_dev(self, "interrupting on irq %d\n",
+	     loc->loc_intr);
+
+	/*
+	 * Enable GMAC clock
+	 */
+	awin_reg_set_clear(aio->aio_core_bst, aio->aio_ccm_bsh,
+	    AWIN_AHB_GATING1_REG, AWIN_AHB_GATING1_GMAC, 0);
+	/*
+	 * We use RGMII phy mode, set up clock accordingly
+	 */
+	awin_reg_set_clear(aio->aio_core_bst, aio->aio_ccm_bsh,
+	    AWIN_GMAC_CLK_REG, 4, 3);
+	awin_reg_set_clear(aio->aio_core_bst, aio->aio_ccm_bsh,
+	    AWIN_GMAC_CLK_REG, 2, 0);
+
+	dwc_gmac_attach(&sc->sc_core, ep, 2);
+}
+
+
+static int
+awin_gige_intr(void *arg)
+{
+	struct awin_gige_softc *sc = arg;
+
+	return dwc_gmac_intr(&sc->sc_core);
 }

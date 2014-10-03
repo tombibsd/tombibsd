@@ -93,6 +93,7 @@ struct ubc_map {
 	LIST_ENTRY(ubc_map)	list;		/* per-object list */
 };
 
+TAILQ_HEAD(ubc_inactive_head, ubc_map);
 static struct ubc_object {
 	struct uvm_object uobj;		/* glue for uvm_map() */
 	char *kva;			/* where ubc_object is mapped */
@@ -101,7 +102,7 @@ static struct ubc_object {
 	LIST_HEAD(, ubc_map) *hash;	/* hashtable for cached ubc_map's */
 	u_long hashmask;		/* mask for hashtable */
 
-	TAILQ_HEAD(ubc_inactive_head, ubc_map) *inactive;
+	struct ubc_inactive_head *inactive;
 					/* inactive queues for ubc_map's */
 } ubc_object;
 

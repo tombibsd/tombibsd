@@ -32,7 +32,7 @@ ARCHDIR_SUBDIR= powerpc64/powerpc
 
 .if (${MACHINE_ARCH} == "aarch64")
 ARCHDIR_SUBDIR+= arm/eabi
-#ARCHDIR_SUBDIR+= arm/eabihf
+ARCHDIR_SUBDIR+= arm/eabihf
 ARCHDIR_SUBDIR+= arm/oabi
 .elif (${MACHINE_ARCH} == "aarch64eb")
 ARCHDIR_SUBDIR= arm/eabi

@@ -801,8 +801,10 @@ chfs_get_data_nodes(struct chfs_mount *chmp,
 	buf = kmem_alloc(len, KM_SLEEP);
 
 	dnode = kmem_alloc(len, KM_SLEEP);
-	if (!dnode)
+	if (!dnode) {
+		kmem_free(buf, len);
 		return ENOMEM;
+	}
 
 	nref = chfs_first_valid_data_ref(ip->chvc->dnode);
 

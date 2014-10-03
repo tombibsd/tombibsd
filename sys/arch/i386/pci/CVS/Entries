@@ -20,7 +20,7 @@
 /opti82c700reg.h/1.2/Tue Jul 18 11:07:21 2000/-kk/
 /p64h2apic.c/1.15/Mon May  4 12:15:51 2009/-kk/
 /pceb.c/1.24/Fri Jul  1 17:37:26 2011/-kk/
-/pci_intr_fixup.c/1.49/Fri Jul  1 17:37:26 2011/-kk/
+/pci_intr_fixup.c/1.50/Fri Oct  3 09:50:46 2014/-kk/
 /pci_intr_fixup.h/1.9/Thu Jun 22 16:24:34 2006/-kk/
 /pcibios.c/1.39/Mon Jul 26 22:33:23 2010/-kk/
 /pcibios.h/1.12/Tue Dec 25 18:33:33 2007/-kk/

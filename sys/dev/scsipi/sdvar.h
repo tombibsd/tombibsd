@@ -61,6 +61,16 @@
 #define	SD_IO_TIMEOUT	(60 * 1000)
 #endif
 
+struct disk_parms {
+	u_long	heads;			/* number of heads */
+	u_long	cyls;			/* number of cylinders */
+	u_long	sectors;		/* number of sectors/track */
+	u_long	blksize;		/* number of bytes/sector */
+	u_long	rot_rate;		/* rotational rate, in RPM */
+	u_int64_t disksize;		/* total number sectors */
+	u_int64_t disksize512;		/* total number sectors */
+};
+
 struct sd_softc {
 	device_t sc_dev;
 	struct disk sc_dk;
@@ -74,15 +84,7 @@ struct sd_softc {
 
 	struct scsipi_periph *sc_periph;/* contains our targ, lun, etc. */
 
-	struct disk_parms {
-		u_long	heads;		/* number of heads */
-		u_long	cyls;		/* number of cylinders */
-		u_long	sectors;	/* number of sectors/track */
-		u_long	blksize;	/* number of bytes/sector */
-		u_long	rot_rate;	/* rotational rate, in RPM */
-		u_int64_t disksize;	/* total number sectors */
-		u_int64_t disksize512;	/* total number sectors */
-	} params;
+	struct disk_parms params;
 
 	struct bufq_state *buf_queue;
 	callout_t sc_callout;

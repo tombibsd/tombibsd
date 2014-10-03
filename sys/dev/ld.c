@@ -570,7 +570,7 @@ ldioctl(dev_t dev, u_long cmd, void *addr, int32_t flag, struct lwp *l)
 	case DIOCSSTRATEGY:
 	    {
 		struct disk_strategy *dks = (void *)addr;
-		struct bufq_state *new, *old;
+		struct bufq_state *new_bufq, *old_bufq;
 
 		if ((flag & FWRITE) == 0)
 			return EPERM;
@@ -579,17 +579,17 @@ ldioctl(dev_t dev, u_long cmd, void *addr, int32_t flag, struct lwp *l)
 			return EINVAL;
 
 		dks->dks_name[sizeof(dks->dks_name) - 1] = 0; /* ensure term */
-		error = bufq_alloc(&new, dks->dks_name,
+		error = bufq_alloc(&new_bufq, dks->dks_name,
 		    BUFQ_EXACT|BUFQ_SORT_RAWBLOCK);
 		if (error)
 			return error;
 
 		mutex_enter(&sc->sc_mutex);
-		old = sc->sc_bufq;
-		bufq_move(new, old);
-		sc->sc_bufq = new;
+		old_bufq = sc->sc_bufq;
+		bufq_move(new_bufq, old_bufq);
+		sc->sc_bufq = new_bufq;
 		mutex_exit(&sc->sc_mutex);
-		bufq_free(old);
+		bufq_free(old_bufq);
 
 		return 0;
 	    }

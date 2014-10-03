@@ -34,6 +34,7 @@ M=		${.CURDIR}/arch/${ARCHSUBDIR}
      (${LDELFSO_MACHINE_ARCH} == "i386") ||				\
      (${LDELFSO_MACHINE_ARCH} == "m68k") ||				\
      (${MACHINE_CPU} == "mips") ||					\
+     (${MACHINE_CPU} == "or1k") ||					\
      (${MACHINE_CPU} == "powerpc") ||					\
      (${MACHINE_CPU} == "sh3") ||					\
      (${LDELFSO_MACHINE_ARCH} == "sparc") ||				\

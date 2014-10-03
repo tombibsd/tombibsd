@@ -1,20 +1,22 @@
 /bcm2835_bsc.c/1.2/Tue Mar 25 02:35:18 2014/-kk/
 /bcm2835_bscreg.h/1.1/Thu Oct 24 10:28:57 2013/-kk/
 /bcm2835_dma.c/1.2/Tue Sep 18 05:47:27 2012/-kk/
-/bcm2835_dwctwo.c/1.1/Thu Oct 24 10:28:57 2013/-kk/
-/bcm2835_emmc.c/1.9/Thu Oct 24 10:28:57 2013/-kk/
-/bcm2835_genfb.c/1.6/Fri Oct  3 09:08:52 2014/-kk/
+/bcm2835_dmac.c/1.2/Sun Sep  7 15:21:27 2014/-kk/
+/bcm2835_dmac.h/1.1/Sun Sep  7 14:16:44 2014/-kk/
+/bcm2835_dwctwo.c/1.2/Fri Oct  3 09:50:37 2014/-kk/
+/bcm2835_emmc.c/1.10/Fri Oct  3 09:50:37 2014/-kk/
+/bcm2835_genfb.c/1.7/Fri Oct  3 09:50:37 2014/-kk/
 /bcm2835_gpio.c/1.2/Tue Jun  3 02:53:52 2014/-kk/
 /bcm2835_gpio_subr.c/1.3/Tue May  6 05:49:52 2014/-kk/
 /bcm2835_gpio_subr.h/1.2/Tue May  6 05:49:52 2014/-kk/
 /bcm2835_gpioreg.h/1.3/Tue May  6 05:49:52 2014/-kk/
-/bcm2835_intr.c/1.3/Thu Oct 24 10:28:57 2013/-kk/
+/bcm2835_intr.c/1.4/Fri Oct  3 09:50:37 2014/-kk/
 /bcm2835_intr.h/1.1/Thu Jul 26 06:21:57 2012/-kk/
 /bcm2835_mbox.c/1.6/Thu Oct 24 10:28:57 2013/-kk/
 /bcm2835_mbox.h/1.4/Thu Oct 24 10:28:57 2013/-kk/
 /bcm2835_mbox_subr.c/1.3/Sat Oct 13 08:42:50 2012/-kk/
 /bcm2835_mboxreg.h/1.1/Mon Aug 20 07:45:24 2012/-kk/
-/bcm2835_obio.c/1.20/Tue May  6 05:49:52 2014/-kk/
+/bcm2835_obio.c/1.21/Fri Oct  3 09:50:37 2014/-kk/
 /bcm2835_plcom.c/1.1/Thu Jul 26 06:21:57 2012/-kk/
 /bcm2835_pm.c/1.3/Thu Oct 24 10:28:57 2013/-kk/
 /bcm2835_pmvar.h/1.1/Thu Jul 26 06:21:57 2012/-kk/
@@ -23,9 +25,9 @@
 /bcm2835_spi.c/1.1/Thu Oct 24 10:28:57 2013/-kk/
 /bcm2835_spireg.h/1.1/Thu Oct 24 10:28:57 2013/-kk/
 /bcm2835_tmr.c/1.3/Thu Oct 24 10:28:57 2013/-kk/
-/bcm2835_vcaudio.c/1.3/Mon May 19 16:25:39 2014/-kk/
+/bcm2835_vcaudio.c/1.6/Fri Oct  3 09:50:37 2014/-kk/
 /bcm2835_vcaudioreg.h/1.3/Tue May  6 05:49:52 2014/-kk/
-/bcm2835reg.h/1.10/Thu Oct 24 10:28:57 2013/-kk/
+/bcm2835reg.h/1.11/Fri Oct  3 09:50:37 2014/-kk/
 /bcm2835var.h/1.1/Thu Jul 26 06:21:57 2012/-kk/
 /bcm53xx_board.c/1.21/Fri Apr 11 02:03:27 2014/-kk/
 /bcm53xx_cca.c/1.1/Sat Sep  1 00:04:44 2012/-kk/
@@ -44,6 +46,6 @@
 /bcm53xx_var.h/1.6/Thu Oct 31 07:00:00 2013/-kk/
 /bcm_amba.h/1.1/Thu Jul 26 06:21:57 2012/-kk/
 /bcmgen_space.c/1.4/Thu Oct 31 07:00:01 2013/-kk/
-/files.bcm2835/1.21/Tue May  6 05:49:52 2014/-kk/
+/files.bcm2835/1.22/Fri Oct  3 09:50:37 2014/-kk/
 /files.bcm53xx/1.4/Thu Oct 31 07:00:01 2013/-kk/
 D

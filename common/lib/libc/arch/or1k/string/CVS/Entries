@@ -1,0 +1,11 @@
+/bcopy.S/1.1/Wed Sep  3 19:34:25 2014/-kk/
+/bzero.S/1.1/Wed Sep  3 19:34:25 2014/-kk/
+/clz.S/1.1/Wed Sep  3 19:34:25 2014/-kk/
+/ctz.S/1.1/Wed Sep  3 19:34:25 2014/-kk/
+/ffs.S/1.1/Wed Sep  3 19:34:25 2014/-kk/
+/memcmp.S/1.1/Wed Sep  3 19:34:25 2014/-kk/
+/memcpy.c/1.1/Wed Sep  3 19:34:25 2014/-kk/
+/memmove.S/1.1/Wed Sep  3 19:34:25 2014/-kk/
+/memset.S/1.1/Wed Sep  3 19:34:25 2014/-kk/
+/strlen.S/1.1/Wed Sep  3 19:34:25 2014/-kk/
+D

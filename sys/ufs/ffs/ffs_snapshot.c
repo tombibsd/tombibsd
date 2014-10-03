@@ -77,11 +77,13 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <uvm/uvm.h>
 
+TAILQ_HEAD(inodelst, inode);			/* List of active snapshots */
+
 struct snap_info {
 	kmutex_t si_lock;			/* Lock this snapinfo */
 	kmutex_t si_snaplock;			/* Snapshot vnode common lock */
 	lwp_t *si_owner;			/* Sanplock owner */
-	TAILQ_HEAD(inodelst, inode) si_snapshots; /* List of active snapshots */
+	struct inodelst si_snapshots;		/* List of active snapshots */
 	daddr_t *si_snapblklist;		/* Snapshot block hints list */
 	uint32_t si_gen;			/* Incremented on change */
 };

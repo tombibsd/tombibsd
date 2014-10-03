@@ -1,0 +1,11 @@
+/Makefile.inc/1.2/Fri Sep  5 18:09:37 2014/-kk/
+/SYS.h/1.2/Fri Sep  5 18:09:37 2014/-kk/
+/genassym.cf/1.1/Wed Sep  3 19:34:25 2014/-kk/
+/syscallargs.awk/1.1/Fri Sep  5 18:09:37 2014/-kk/
+D/gdtoa////
+D/gen////
+D/net////
+D/softfloat////
+D/stdlib////
+D/string////
+D/sys////

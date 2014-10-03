@@ -71,6 +71,9 @@
 #include <machine/cpuset.h>
 #include <sparc64/sparc64/intreg.h>
 #endif
+#ifdef SUN4V
+#include <sparc64/hypervisor.h>
+#endif
 
 #include <sys/cpu_data.h>
 #include <sys/evcnt.h>
@@ -174,6 +177,9 @@ struct cpu_info {
 	pte_t			*ci_tsb_dmmu;
 	pte_t			*ci_tsb_immu;
 
+	/* TSB description (sun4v). */
+	struct tsb_desc         *ci_tsb_desc;
+	
 	/* MMU Fault Status Area (sun4v).
 	 * Will be initialized to the physical address of the bottom of
 	 * the interrupt stack.

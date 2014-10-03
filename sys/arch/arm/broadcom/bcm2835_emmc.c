@@ -46,7 +46,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 struct bcmemmc_softc {
 	struct sdhc_softc	sc;
-	device_t		sc_sdmmc;
 
 	bus_space_tag_t		sc_iot;
 	bus_space_handle_t	sc_ioh;

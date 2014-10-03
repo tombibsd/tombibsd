@@ -531,7 +531,12 @@ Compat_Make(void *gnp, void *pgnp)
 	    goto cohorts;
 	}
 
-	Make_SetImpsrcLocalVar(gn, pgn);
+	if (Lst_Member(gn->iParents, pgn) != NULL) {
+	    char *p1;
+	    Var_Set(IMPSRC, Var_Value(TARGET, gn, &p1), pgn, 0);
+	    if (p1)
+		free(p1);
+	}
 
 	/*
 	 * All the children were made ok. Now cmgn->mtime contains the
@@ -630,7 +635,12 @@ Compat_Make(void *gnp, void *pgnp)
 	 */
 	pgn->flags &= ~REMAKE;
     } else {
-	Make_SetImpsrcLocalVar(gn, pgn);
+	if (Lst_Member(gn->iParents, pgn) != NULL) {
+	    char *p1;
+	    Var_Set(IMPSRC, Var_Value(TARGET, gn, &p1), pgn, 0);
+	    if (p1)
+		free(p1);
+	}
 	switch(gn->made) {
 	    case BEINGMADE:
 		Error("Graph cycles through %s", gn->name);

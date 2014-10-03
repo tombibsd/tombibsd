@@ -1102,7 +1102,7 @@ gre_ssock(struct ifnet *ifp, struct gre_soparm *sp, int fd)
 
 	GRE_DPRINTF(sc, "\n");
 
-	so = (struct socket *)fp->f_data;
+	so = fp->f_socket;
 	pr = so->so_proto;
 
 	GRE_DPRINTF(sc, "type %d, proto %d\n", pr->pr_type, pr->pr_protocol);

@@ -517,9 +517,9 @@ sysctl_unpcblist(SYSCTLFN_ARGS)
 	mutex_enter(&filelist_lock);
 	LIST_FOREACH(fp, &filehead, f_list) {
 		if (fp->f_count == 0 || fp->f_type != DTYPE_SOCKET ||
-		    fp->f_data == NULL)
+		    fp->f_socket == NULL)
 			continue;
-		so = (struct socket *)fp->f_data;
+		so = fp->f_socket;
 		if (so->so_type != type)
 			continue;
 		if (so->so_proto->pr_domain->dom_family != pf)

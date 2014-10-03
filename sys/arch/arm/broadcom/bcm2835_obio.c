@@ -105,6 +105,13 @@ static const struct ambadev_locators bcm2835_ambadev_locs[] = {
 		.ad_intr = -1,
 	},
 	{
+		/* DMA Controller */
+		.ad_name = "bcmdmac",
+		.ad_addr = BCM2835_DMA0_BASE,
+		.ad_size = BCM2835_DMA0_SIZE,
+		.ad_intr = -1,
+	},
+	{
 		/* Random number generator */
 		.ad_name = "bcmrng",
 		.ad_addr = BCM2835_RNG_BASE,

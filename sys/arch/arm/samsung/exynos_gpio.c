@@ -1,3 +1,5 @@
+/*	$NetBSD$	*/
+
 /*-
 * Copyright (c) 2014 The NetBSD Foundation, Inc.
 * All rights reserved.
@@ -168,7 +170,7 @@ static struct exynos_gpio_pin_group exynos4_pin_groups[] = {
 	GPIO_GRP(4, RIGHT, 0x01C0, GPY5, 8),
 	GPIO_GRP(4, RIGHT, 0x01E0, GPY6, 8),
 	GPIO_GRP(4, RIGHT, 0x0200, ETC0, 6),
-	GPIO_GRP(4, RIGHT, 0x0220, ETC6, 7),
+	GPIO_GRP(4, RIGHT, 0x0220, ETC6, 8),
 	GPIO_GRP(4, RIGHT, 0x0260, GPM0, 8),
 	GPIO_GRP(4, RIGHT, 0x0280, GPM1, 7),
 	GPIO_GRP(4, RIGHT, 0x02A0, GPM2, 5),

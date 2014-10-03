@@ -1,4 +1,5 @@
 /*	$NetBSD$	*/
+
 /*-
  * Copyright (c) 2014 The NetBSD Foundation, Inc.
  * All rights reserved.
@@ -349,9 +350,11 @@ exynos_get_cpufreq(void)
 static void
 exynos_set_cpufreq(const struct cpu_freq *freqreq)
 {
+	struct cpu_info *ci;
 	uint32_t reg = 0;
 	uint32_t regval;
 	int M, P, S;
+	int cii;
 
 	M = freqreq->M;
 	P = freqreq->P;
@@ -374,6 +377,11 @@ exynos_set_cpufreq(const struct cpu_freq *freqreq)
 	/* enable PPL and write config */
 	regval |= PLL_CON0_ENABLE;
 	bus_space_write_4(&exynos_bs_tag, exynos_core_bsh, reg, regval);
+
+	/* update our cycle counter i.e. our CPU frequency for all CPUs */
+	for (CPU_INFO_FOREACH(cii, ci)) {
+		ci->ci_data.cpu_cc_freq = exynos_get_cpufreq();
+	}
 }
 
 
@@ -438,6 +446,46 @@ sysctl_cpufreq_current(SYSCTLFN_ARGS)
 }
 
 
+#ifdef VERBOSE_INIT_ARM
+#define DUMP_PLL(v, var) \
+	reg = EXYNOS##v##_CMU_##var + PLL_CON0_OFFSET;\
+	regval = bus_space_read_4(&exynos_bs_tag, exynos_core_bsh, reg); \
+	freq   = PLL_FREQ(EXYNOS_F_IN_FREQ, regval); \
+	printf("%8s at %d Mhz\n", #var, freq/(1000*1000));
+
+
+static void
+exynos_dump_clocks(void)
+{
+	uint32_t reg = 0;
+	uint32_t regval;
+	uint32_t freq;
+
+	printf("Initial PLL settings\n");
+#ifdef EXYNOS4
+	if (IS_EXYNOS4_P()) {
+		DUMP_PLL(4, APLL);
+		DUMP_PLL(4, MPLL);
+		DUMP_PLL(4, EPLL);
+		DUMP_PLL(4, VPLL);
+	}
+#endif
+#ifdef EXYNOS5
+	if (IS_EXYNOS5_P()) {
+		DUMP_PLL(5, APLL);
+		DUMP_PLL(5, MPLL);
+		DUMP_PLL(5, EPLL);
+		DUMP_PLL(5, VPLL);
+		DUMP_PLL(5, CPLL);
+		DUMP_PLL(5, GPLL);
+		DUMP_PLL(5, BPLL);
+	}
+#endif
+}
+#undef DUMP_PLL
+#endif
+
+
 void
 exynos_clocks_bootstrap(void)
 {
@@ -456,9 +504,12 @@ exynos_clocks_bootstrap(void)
 	KASSERT(ncpu_freq_settings != 0);
 	KASSERT(ncpu_freq_settings < NFRQS);
 
+#ifdef VERBOSE_INIT_ARM
+	exynos_dump_clocks();
+#endif
+
 	/* set max cpufreq */
 	exynos_set_cpufreq(&cpu_freq_settings[ncpu_freq_settings-1]);
-	curcpu()->ci_data.cpu_cc_freq = exynos_get_cpufreq();
 }
 
 

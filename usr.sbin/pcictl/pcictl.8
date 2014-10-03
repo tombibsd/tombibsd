@@ -83,6 +83,49 @@ at the specified bus, device, and function.
 If the bus is not specified, it defaults to the bus number of the
 PCI bus specified on the command line.
 If the function is not specified, it defaults to 0.
+.Pp
+.Cm read
+.Op Fl b Ar bus
+.Fl d Ar device
+.Op Fl f Ar function
+.Ar reg
+.Pp
+Read the specified 32-bit aligned PCI configuration register and print
+it in hexadecimal to standard output.
+If the bus is not specified, it defaults to the bus number of the
+PCI bus specified on the command line.
+If the function is not specified, it defaults to 0.
+.Pp
+.Em WARNING:
+.Nm
+.Cm read
+is a dangerous command that can damage hardware and panic the operating
+system, even though it appears to be a harmless read-only operation.
+It is meant as a diagnostic tool for experiments or to debug device
+drivers.
+Do not use it as a substitute for a device driver!
+.Pp
+.Cm write
+.Op Fl b Ar bus
+.Fl d Ar device
+.Op Fl f Ar function
+.Ar reg
+.Ar value
+.Pp
+Write the specified value to the specified 32-bit aligned PCI
+configuration register.
+If the bus is not specified, it defaults to the bus number of the
+PCI bus specified on the command line.
+If the function is not specified, it defaults to 0.
+.Pp
+.Em WARNING:
+.Nm
+.Cm write
+is a dangerous command that can damage hardware and panic the operating
+system.
+It is meant as a diagnostic tool for experiments or to debug device
+drivers.
+Do not use it as a substitute for a device driver!
 .Sh FILES
 .Pa /dev/pci*
 - PCI bus device nodes

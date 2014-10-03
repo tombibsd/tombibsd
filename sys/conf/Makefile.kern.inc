@@ -75,6 +75,7 @@ CWARNFLAGS+=	-Wold-style-definition
 CWARNFLAGS+=	-Wswitch -Wshadow
 CWARNFLAGS+=	-Wcast-qual -Wwrite-strings
 CWARNFLAGS+=	-Wno-unreachable-code
+#CWARNFLAGS+=	-Wc++-compat -Wno-error=c++-compat
 CWARNFLAGS+=	-Wno-pointer-sign -Wno-attributes
 .  if ${MACHINE} == "i386" || ${MACHINE_ARCH} == "x86_64" || \
 	${MACHINE_ARCH} == "sparc64" || ${MACHINE} == "prep"

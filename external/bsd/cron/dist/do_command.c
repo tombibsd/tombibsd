@@ -128,7 +128,7 @@ child_process(entry *e) {
 			}
 
 			if (!(escaped = (ch == '\\'))) {
-				*p++ = ch;
+				*p++ = (char)ch;
 			}
 		}
 		if (ch == '\0') {

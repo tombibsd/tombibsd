@@ -116,7 +116,7 @@ osf1_sys_fstatfs(struct lwp *l, const struct osf1_sys_fstatfs_args *uap, registe
 	/* fd_getvnode() will use the descriptor for us */
 	if ((error = fd_getvnode(SCARG(uap, fd), &fp)))
 		return (error);
-	mp = ((struct vnode *)fp->f_data)->v_mount;
+	mp = fp->f_vnode->v_mount;
 	sp = &mp->mnt_stat;
 	if ((error = VFS_STATVFS(mp, sp)))
 		goto out;

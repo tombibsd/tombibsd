@@ -135,17 +135,24 @@ GENERIC_SRCS+= \
 .endif
 
 # These have h/w instructions which are always used.
-.if ${LIBC_MACHINE_ARCH} != "alpha" && ${LIBC_MACHINE_CPU} != "powerpc" \
-    && ${LIBC_MACHINE_CPU} != "aarch64"
+.if ${LIBC_MACHINE_ARCH} != "alpha" && ${LIBC_MACHINE_CPU} != "aarch64" \
+    && ${LIBC_MACHINE_CPU} != "powerpc" && ${LIBC_MACHINE_CPU} != "or1k"
 GENERIC_SRCS+= \
 	clzsi2.c
+.endif
+
+# These have h/w instructions which are always used.
+.if ${LIBC_MACHINE_ARCH} != "alpha" && ${LIBC_MACHINE_ARCH} != "vax" \
+    && ${LIBC_MACHINE_CPU} != "aarch64" && ${LIBC_MACHINE_CPU} != "powerpc" \
+    && ${LIBC_MACHINE_CPU} != "or1k"
+GENERIC_SRCS+= \
+	ctzsi2.c
 .endif
 
 # These have h/w instructions which are always used.
 .if ${LIBC_MACHINE_ARCH} != "alpha" && ${LIBC_MACHINE_CPU} != "powerpc" \
     && ${LIBC_MACHINE_CPU} != "aarch64" && ${LIBC_MACHINE_ARCH} != "vax"
 GENERIC_SRCS+= \
-	ctzsi2.c \
 	divmodsi4.c \
 	divsi3.c \
 	modsi3.c \
@@ -174,7 +181,7 @@ GENERIC_SRCS+= \
 
 # These have h/w instructions which are always used.
 .if ${LIBC_MACHINE_ARCH} != "alpha" && ${LIBC_MACHINE_CPU} != "powerpc64" \
-    && ${LIBC_MACHINE_ARCH} != "aarch64"
+    && ${LIBC_MACHINE_ARCH} != "aarch64" && ${LIBC_MACHINE_CPU} != "or1k"
 GENERIC_SRCS+= \
 	clzdi2.c \
 	ctzdi2.c \

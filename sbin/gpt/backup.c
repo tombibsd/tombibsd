@@ -82,6 +82,10 @@ backup(void)
 
 	props = prop_dictionary_create();
 	PROP_ERR(props);
+	propnum = prop_number_create_integer(secsz);
+	PROP_ERR(propnum);
+	rc = prop_dictionary_set(props, "sector_size", propnum);
+	PROP_ERR(rc);
 	m = map_first();
 	while (m != NULL) {
 		switch (m->map_type) {
@@ -137,6 +141,11 @@ backup(void)
 					    "end_head", propnum);
 					PROP_ERR(rc);
 					propnum = prop_number_create_unsigned_integer(mbr->mbr_part[i].part_esect);
+					PROP_ERR(propnum);
+					rc = prop_dictionary_set(mbr_dict,
+					    "end_sector", propnum);
+					PROP_ERR(rc);
+					propnum = prop_number_create_unsigned_integer(mbr->mbr_part[i].part_ecyl);
 					PROP_ERR(propnum);
 					rc = prop_dictionary_set(mbr_dict,
 					    "end_cylinder", propnum);
@@ -207,12 +216,11 @@ backup(void)
 			type_dict = prop_dictionary_create();
 			PROP_ERR(type_dict);
 			ent = m->map_data;
-			gpt_array = NULL;
+			gpt_array = prop_array_create();
+			PROP_ERR(gpt_array);
 			for (i = 1, ent = m->map_data;
 			    (char *)ent < (char *)(m->map_data) +
 			    m->map_size * secsz; i++, ent++) {
-				if (uuid_is_nil((uuid_t *)&ent->ent_type, NULL))
-					continue;
 				gpt_dict = prop_dictionary_create();
 				PROP_ERR(gpt_dict);
 				propnum = prop_number_create_integer(i);
@@ -258,19 +266,13 @@ backup(void)
 					    "name", propstr);
 					PROP_ERR(rc);
 				}
-				if (gpt_array == NULL) {
-					gpt_array = prop_array_create();
-					PROP_ERR(gpt_array);
-				}
 				rc = prop_array_add(gpt_array, gpt_dict);
 				PROP_ERR(rc);
 			}
-			if (gpt_array != NULL) {
-				rc = prop_dictionary_set(type_dict,
-				    "gpt_array", gpt_array);
-				PROP_ERR(rc);
-				prop_object_release(gpt_array);
-			}
+			rc = prop_dictionary_set(type_dict,
+			    "gpt_array", gpt_array);
+			PROP_ERR(rc);
+			prop_object_release(gpt_array);
 			rc = prop_dictionary_set(props, "GPT_TBL", type_dict);
 			PROP_ERR(rc);
 			prop_object_release(type_dict);
@@ -282,6 +284,7 @@ backup(void)
 	PROP_ERR(propext);
 	prop_object_release(props);
 	fputs(propext, stdout);
+	free(propext);
 }
 
 int

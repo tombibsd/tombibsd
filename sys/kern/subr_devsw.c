@@ -178,25 +178,25 @@ devsw_attach(const char *devname,
 	}
 	if (i == max_devsw_convs) {
 		struct devsw_conv *newptr;
-		int old, new;
+		int old_convs, new_convs;
 
-		old = max_devsw_convs;
-		new = old + 1;
+		old_convs = max_devsw_convs;
+		new_convs = old_convs + 1;
 
-		newptr = kmem_zalloc(new * DEVSWCONV_SIZE, KM_NOSLEEP);
+		newptr = kmem_zalloc(new_convs * DEVSWCONV_SIZE, KM_NOSLEEP);
 		if (newptr == NULL) {
 			devsw_detach_locked(bdev, cdev);
 			error = ENOMEM;
 			goto fail;
 		}
-		newptr[old].d_name = NULL;
-		newptr[old].d_bmajor = -1;
-		newptr[old].d_cmajor = -1;
-		memcpy(newptr, devsw_conv, old * DEVSWCONV_SIZE);
+		newptr[old_convs].d_name = NULL;
+		newptr[old_convs].d_bmajor = -1;
+		newptr[old_convs].d_cmajor = -1;
+		memcpy(newptr, devsw_conv, old_convs * DEVSWCONV_SIZE);
 		if (devsw_conv != devsw_conv0)
-			kmem_free(devsw_conv, old * DEVSWCONV_SIZE);
+			kmem_free(devsw_conv, old_convs * DEVSWCONV_SIZE);
 		devsw_conv = newptr;
-		max_devsw_convs = new;
+		max_devsw_convs = new_convs;
 	}
 
 	len = strlen(devname) + 1;

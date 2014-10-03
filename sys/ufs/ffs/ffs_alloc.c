@@ -90,6 +90,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/syslog.h>
 #include <sys/vnode.h>
 #include <sys/wapbl.h>
+#include <sys/cprng.h>
 
 #include <miscfs/specfs/specdev.h>
 #include <ufs/ufs/quota.h>
@@ -697,7 +698,7 @@ ffs_dirpref(struct inode *pip)
 	 * Force allocation in another cg if creating a first level dir.
 	 */
 	if (ITOV(pip)->v_vflag & VV_ROOT) {
-		prefcg = random() % fs->fs_ncg;
+		prefcg = cprng_fast32() % fs->fs_ncg;
 		mincg = prefcg;
 		minndir = fs->fs_ipg;
 		for (cg = prefcg; cg < fs->fs_ncg; cg++)

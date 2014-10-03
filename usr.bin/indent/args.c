@@ -274,6 +274,9 @@ struct pro {
 		"nsc", PRO_BOOL, true, OFF, &star_comment_cont
 	},
 	{
+		"nut", PRO_BOOL, true, OFF, &use_tabs
+	},
+	{
 		"nsob", PRO_BOOL, false, OFF, &swallow_optional_blanklines
 	},
 	{
@@ -299,6 +302,9 @@ struct pro {
 	},
 	{
 		"troff", PRO_BOOL, false, ON, &troff
+	},
+	{
+		"ut", PRO_BOOL, true, ON, &use_tabs
 	},
 	{
 		"v", PRO_BOOL, false, ON, &verbose

@@ -164,7 +164,7 @@ osf1_sys_getdirentries(struct lwp *l, const struct osf1_sys_getdirentries_args *
 		goto out1;
 	}
 
-	vp = (struct vnode *)fp->f_data;
+	vp = fp->f_vnode;
 	if (vp->v_type != VDIR) {
 		error = EINVAL;
 		goto out1;

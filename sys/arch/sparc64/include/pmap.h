@@ -40,6 +40,9 @@
 #include <uvm/uvm_object.h>
 #ifdef _KERNEL
 #include <machine/cpuset.h>
+#ifdef SUN4V
+#include <sparc64/hypervisor.h>
+#endif
 #endif
 #endif
 
@@ -234,7 +237,7 @@ void		pmap_zero_page_phys(paddr_t);
 #ifdef SUN4V
 /* sun4v specific */
 void		pmap_setup_intstack_sun4v(paddr_t);
-void		pmap_setup_tsb_sun4v(void);
+void		pmap_setup_tsb_sun4v(struct tsb_desc*);
 #endif
 
 /* Installed physical memory, as discovered during bootstrap. */

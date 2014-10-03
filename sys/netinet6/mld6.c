@@ -657,7 +657,7 @@ in6_addmulti(struct in6_addr *maddr6, struct ifnet *ifp,
 			return (NULL);
 		}
 		in6m->in6m_ia = ia;
-		IFAREF(&ia->ia_ifa); /* gain a reference */
+		ifaref(&ia->ia_ifa); /* gain a reference */
 		LIST_INSERT_HEAD(&ia->ia6_multiaddrs, in6m, in6m_entry);
 
 		/*
@@ -669,7 +669,7 @@ in6_addmulti(struct in6_addr *maddr6, struct ifnet *ifp,
 		if (*errorp) {
 			LIST_REMOVE(in6m, in6m_entry);
 			free(in6m, M_IPMADDR);
-			IFAFREE(&ia->ia_ifa);
+			ifafree(&ia->ia_ifa);
 			splx(s);
 			return (NULL);
 		}
@@ -719,7 +719,7 @@ in6_delmulti(struct in6_multi *in6m)
 		 */
 		LIST_REMOVE(in6m, in6m_entry);
 		if (in6m->in6m_ia != NULL) {
-			IFAFREE(&in6m->in6m_ia->ia_ifa); /* release reference */
+			ifafree(&in6m->in6m_ia->ia_ifa); /* release reference */
 			in6m->in6m_ia = NULL;
 		}
 
@@ -798,8 +798,8 @@ in6_savemkludge(struct in6_ifaddr *oia)
 		KASSERT(ia != oia);
 		while ((in6m = LIST_FIRST(&oia->ia6_multiaddrs)) != NULL) {
 			LIST_REMOVE(in6m, in6m_entry);
-			IFAREF(&ia->ia_ifa);
-			IFAFREE(&in6m->in6m_ia->ia_ifa);
+			ifaref(&ia->ia_ifa);
+			ifafree(&in6m->in6m_ia->ia_ifa);
 			in6m->in6m_ia = ia;
 			LIST_INSERT_HEAD(&ia->ia6_multiaddrs, in6m, in6m_entry);
 		}
@@ -815,7 +815,7 @@ in6_savemkludge(struct in6_ifaddr *oia)
 
 		while ((in6m = LIST_FIRST(&oia->ia6_multiaddrs)) != NULL) {
 			LIST_REMOVE(in6m, in6m_entry);
-			IFAFREE(&in6m->in6m_ia->ia_ifa); /* release reference */
+			ifafree(&in6m->in6m_ia->ia_ifa); /* release reference */
 			in6m->in6m_ia = NULL;
 			LIST_INSERT_HEAD(&mk->mk_head, in6m, in6m_entry);
 		}
@@ -842,7 +842,7 @@ in6_restoremkludge(struct in6_ifaddr *ia, struct ifnet *ifp)
 	while ((in6m = LIST_FIRST(&mk->mk_head)) != NULL) {
 		LIST_REMOVE(in6m, in6m_entry);
 		in6m->in6m_ia = ia;
-		IFAREF(&ia->ia_ifa);
+		ifaref(&ia->ia_ifa);
 		LIST_INSERT_HEAD(&ia->ia6_multiaddrs, in6m, in6m_entry);
 	}
 }

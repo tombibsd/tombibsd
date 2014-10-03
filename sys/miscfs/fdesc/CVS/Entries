@@ -1,6 +1,6 @@
 /Makefile/1.1/Fri Jun 12 23:23:01 1998/-kk/
 /fdesc.h/1.22/Sun Jul 20 13:59:11 2014/-kk/
-/fdesc_vfsops.c/1.89/Sun Jul 20 13:59:11 2014/-kk/
-/fdesc_vnops.c/1.121/Fri Oct  3 09:09:27 2014/-kk/
+/fdesc_vfsops.c/1.90/Fri Oct  3 09:51:01 2014/-kk/
+/fdesc_vnops.c/1.125/Fri Oct  3 09:51:01 2014/-kk/
 /files.fdesc/1.3/Sun Dec 11 12:24:50 2005/-kk/
 D

@@ -1,4 +1,4 @@
-/ad.aarch64/1.4/Fri Oct  3 09:40:31 2014/-kk/
+/ad.aarch64/1.5/Fri Oct  3 09:47:53 2014/-kk/
 /ad.arm.shl/1.6/Tue Jan 14 16:01:09 2014/-kk/
 /ad.arm/1.60/Fri Oct  3 09:40:31 2014/-kk/
 /ad.hppa/1.7/Mon Nov 11 15:18:11 2013/-kk/
@@ -42,6 +42,7 @@
 /md.newsmips/1.32/Fri Oct  3 09:40:31 2014/-kk/
 /md.next68k/1.32/Sun Jul 17 20:54:31 2011/-kk/
 /md.ofppc/1.17/Fri Oct  3 09:40:31 2014/-kk/
+/md.or1k/1.1/Wed Sep  3 19:34:25 2014/-kk/
 /md.playstation2/1.13/Tue Jun  3 02:49:08 2014/-kk/
 /md.pmax/1.66/Fri Oct  3 09:40:31 2014/-kk/
 /md.prep/1.31/Fri Oct  3 09:40:31 2014/-kk/

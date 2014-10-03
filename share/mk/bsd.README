@@ -1969,6 +1969,7 @@ WARNS		Crank up compiler warning options; the distinct levels are:
 			WARNS=3
 			WARNS=4
 			WARNS=5
+			WARNS=6
 
 =-=-=-=-=   bsd.host.mk  =-=-=-=-=
 

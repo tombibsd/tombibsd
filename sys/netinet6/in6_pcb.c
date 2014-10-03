@@ -617,9 +617,9 @@ in6_pcbdetach(struct in6pcb *in6p)
 		free(in6p->in6p_outputopts, M_IP6OPT);
 	}
 	rtcache_free(&in6p->in6p_route);
+	ip6_freemoptions(in6p->in6p_moptions);
 	sofree(so);				/* drops the socket's lock */
 
-	ip6_freemoptions(in6p->in6p_moptions);
 	pool_put(&in6pcb_pool, in6p);
 	mutex_enter(softnet_lock);		/* reacquire it */
 }

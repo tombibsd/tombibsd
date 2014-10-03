@@ -228,7 +228,7 @@ check_shell:
 		epp->ep_flags |= EXEC_HASFD;
 		fp->f_type = DTYPE_VNODE;
 		fp->f_ops = &vnops;
-		fp->f_data = (void *) epp->ep_vp;
+		fp->f_vnode = epp->ep_vp;
 		fp->f_flag = FREAD;
 		fd_affix(curproc, fp, epp->ep_fd);
 	}

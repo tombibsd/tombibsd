@@ -26,7 +26,7 @@
  */
 
 #if !defined(__aarch64__) && !defined(__arm__) && !defined(__i386__) \
-    && !defined(__sparc__) && !defined(__x86_64__)
+    && !defined(__or1k__) && !defined(__sparc__) && !defined(__x86_64__)
 #error	"fenv.h is currently not supported for this architecture"
 #endif
 

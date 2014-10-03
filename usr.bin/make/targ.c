@@ -242,7 +242,6 @@ Targ_NewGN(const char *name)
     } else {
 	gn->type = 0;
     }
-    gn->gType = 0;
     gn->unmade =    	0;
     gn->unmade_cohorts = 0;
     gn->cohort_num[0] = 0;
@@ -256,10 +255,6 @@ Targ_NewGN(const char *name)
     gn->cohorts =   	Lst_Init(FALSE);
     gn->parents =   	Lst_Init(FALSE);
     gn->children =  	Lst_Init(FALSE);
-    gn->first_local_child = NULL;
-    gn->first_local_child_tmp = NULL;
-    gn->last_local_child = NULL;
-    gn->last_local_child_tmp = NULL;
     gn->order_pred =  	Lst_Init(FALSE);
     gn->order_succ =  	Lst_Init(FALSE);
     Hash_InitTable(&gn->context, 0);
@@ -311,7 +306,6 @@ TargFreeGN(void *gnp)
     Lst_Destroy(gn->order_pred, NULL);
     Hash_DeleteTable(&gn->context);
     Lst_Destroy(gn->commands, NULL);
-    Suff_UnsetSuffix(gn);
     free(gn);
 }
 #endif

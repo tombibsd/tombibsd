@@ -157,7 +157,7 @@ db_show_files_cmd(db_expr_t addr, bool haddr,
 	filedesc_t *fdp;
 	fdfile_t *ff;
 	file_t *fp;
-	struct vnode *vn;
+	struct vnode *vp;
 	bool full = false;
 	fdtab_t *dt;
 
@@ -175,18 +175,16 @@ db_show_files_cmd(db_expr_t addr, bool haddr,
 		fp = ff->ff_file;
 
 		/* Only look at vnodes... */
-		if ((fp != NULL) && (fp->f_type == DTYPE_VNODE)) {
-			if (fp->f_data != NULL) {
-				vn = (struct vnode *) fp->f_data;
-				vfs_vnode_print(vn, full, db_printf);
+		if (fp != NULL && fp->f_type == DTYPE_VNODE
+		    && fp->f_vnode != NULL) {
+			vp = fp->f_vnode;
+			vfs_vnode_print(vp, full, db_printf);
 
 #ifdef LOCKDEBUG
-				db_printf("\nv_uobj.vmobjlock lock details:\n");
-				lockdebug_lock_print(vn->v_uobj.vmobjlock,
-					     db_printf);
-				db_printf("\n");
+			db_printf("\nv_uobj.vmobjlock lock details:\n");
+			lockdebug_lock_print(vp->v_uobj.vmobjlock, db_printf);
+			db_printf("\n");
 #endif
-			}
 		}
 	}
 #endif

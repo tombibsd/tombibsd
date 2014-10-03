@@ -1,4 +1,4 @@
-/Makefile/1.44/Fri Oct  3 09:25:27 2014/-kk/
+/Makefile/1.45/Fri Oct  3 09:50:36 2014/-kk/
 /README/1.62/Fri Apr 11 02:03:25 2014/-kk/
 D/aarch64////
 D/acorn26////
@@ -51,6 +51,7 @@ D/news68k////
 D/newsmips////
 D/next68k////
 D/ofppc////
+D/or1k////
 D/playstation2////
 D/pmax////
 D/powerpc////

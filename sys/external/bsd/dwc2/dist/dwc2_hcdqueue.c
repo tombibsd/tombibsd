@@ -94,6 +94,7 @@ static void dwc2_qh_init(struct dwc2_hsotg *hsotg, struct dwc2_qh *qh,
 	dev_speed = dwc2_host_get_speed(hsotg, urb->priv);
 
 	dwc2_host_hub_info(hsotg, urb->priv, &hub_addr, &hub_port);
+	qh->nak_frame = 0xffff;
 
 	if ((dev_speed == USB_SPEED_LOW || dev_speed == USB_SPEED_FULL) &&
 	    hub_addr != 0 && hub_addr != 1) {

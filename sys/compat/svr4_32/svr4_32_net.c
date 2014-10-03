@@ -124,7 +124,7 @@ svr4_32_stream_get(file_t *fp)
 	if (fp == NULL || fp->f_type != DTYPE_SOCKET)
 		return NULL;
 
-	so = (struct socket *) fp->f_data;
+	so = fp->f_socket;
 
 	if (so->so_internal)
 		return so->so_internal;

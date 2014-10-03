@@ -19,6 +19,7 @@ TARGET_ENDIANNESS=	1234
       ${MACHINE_ARCH} == "hppa" || \
       ${MACHINE_ARCH} == "m68000" || \
       ${MACHINE_ARCH} == "m68k" || \
+      ${MACHINE_ARCH} == "or1k" || \
       ${MACHINE_ARCH} == "powerpc" || \
       ${MACHINE_ARCH} == "powerpc64" || \
       ${MACHINE_ARCH} == "sparc" || \

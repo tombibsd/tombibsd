@@ -413,7 +413,7 @@ static void
 getparm(file_t *fp, struct svr4_si_sockparms *pa)
 {
 	struct svr4_strm *st = svr4_stream_get(fp);
-	struct socket *so = (struct socket *) fp->f_data;
+	struct socket *so = fp->f_socket;
 
 	if (st == NULL)
 		return;

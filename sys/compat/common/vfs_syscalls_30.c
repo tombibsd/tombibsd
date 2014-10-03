@@ -227,7 +227,7 @@ compat_30_sys_getdents(struct lwp *l, const struct compat_30_sys_getdents_args *
 		goto out1;
 	}
 
-	vp = fp->f_data;
+	vp = fp->f_vnode;
 	if (vp->v_type != VDIR) {
 		error = EINVAL;
 		goto out1;

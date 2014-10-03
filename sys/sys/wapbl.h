@@ -215,6 +215,7 @@ wapbl_vphaswapbl(struct vnode *vp)
 /* Replay support */
 
 #ifdef WAPBL_INTERNAL
+LIST_HEAD(wapbl_blk_head, wapbl_blk);
 struct wapbl_replay {
 	struct vnode *wr_logvp;
 	struct vnode *wr_devvp;
@@ -228,7 +229,7 @@ struct wapbl_replay {
 
 	void *wr_scratch;
 
-	LIST_HEAD(wapbl_blk_head, wapbl_blk) *wr_blkhash;
+	struct wapbl_blk_head *wr_blkhash;
 	u_long wr_blkhashmask;
 	int wr_blkhashcnt;
 

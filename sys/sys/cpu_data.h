@@ -98,7 +98,7 @@ struct cpu_data {
 	uint64_t	cpu_nintr;		/* interrupt count */
 	uint64_t	cpu_nsoft;		/* soft interrupt count */
 	uint64_t	cpu_nfault;		/* pagefault counter */
-	void		*cpu_uvm;		/* uvm per-cpu data */
+	struct uvm_cpu	*cpu_uvm;		/* uvm per-cpu data */
 	void		*cpu_softcpu;		/* soft interrupt table */
 	TAILQ_HEAD(,buf) cpu_biodone;		/* finished block xfers */
 	percpu_cpu_t	cpu_percpu;		/* per-cpu data */

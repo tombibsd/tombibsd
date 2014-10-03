@@ -1481,16 +1481,16 @@ sbunlock(struct sockbuf *sb)
 }
 
 int
-sowait(struct socket *so, bool catch, int timo)
+sowait(struct socket *so, bool catch_p, int timo)
 {
 	kmutex_t *lock;
 	int error;
 
 	KASSERT(solocked(so));
-	KASSERT(catch || timo != 0);
+	KASSERT(catch_p || timo != 0);
 
 	lock = so->so_lock;
-	if (catch)
+	if (catch_p)
 		error = cv_timedwait_sig(&so->so_cv, lock, timo);
 	else
 		error = cv_timedwait(&so->so_cv, lock, timo);

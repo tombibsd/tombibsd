@@ -38,7 +38,7 @@ INCS=	__wmmintrin_aes.h \
 	x86intrin.h \
 	xmmintrin.h \
 	xopintrin.h
-.elif ${MACHINE_ARCH} == "powerpc"
+.elif ${MACHINE_ARCH} == "powerpc" || ${MACHINE_ARCH} == "powerpc64"
 INCS=	altivec.h
 .elif ${MACHINE_CPU} == "arm"
 INCS=	arm_acle.h

@@ -73,7 +73,6 @@
  * TODO (in order of importance):
  *
  *	- Check XXX'ed comments
- *	- Read SFP ROM and set media type correctly on 82575 and newer devices
  *	- EEE (Energy Efficiency Ethernet)
  *	- MSI/MSI-X
  *	- Virtual Function
@@ -287,7 +286,8 @@ struct wm_softc {
 	callout_t sc_tick_ch;		/* tick callout */
 	bool sc_stopping;
 
-	int sc_ee_addrbits;		/* EEPROM address bits */
+	int sc_nvm_addrbits;		/* NVM address bits */
+	unsigned int sc_nvm_wordsize;		/* NVM word size */
 	int sc_ich8_flash_base;
 	int sc_ich8_flash_bank_size;
 	int sc_nvm_k1_enabled;
@@ -623,19 +623,20 @@ static int	wm_tbi_mediachange(struct ifnet *);
 static void	wm_tbi_set_linkled(struct wm_softc *);
 static void	wm_tbi_check_link(struct wm_softc *);
 /* SFP related */
-static uint32_t	wm_get_sfp_media_type(struct wm_softc *);
+static int	wm_sfp_read_data_byte(struct wm_softc *, uint16_t, uint8_t *);
+static uint32_t	wm_sfp_get_media_type(struct wm_softc *);
 
 /*
  * NVM related.
  * Microwire, SPI (w/wo EERD) and Flash.
  */
-/* Both spi and uwire */
+/* Misc functions */
 static void	wm_eeprom_sendbits(struct wm_softc *, uint32_t, int);
 static void	wm_eeprom_recvbits(struct wm_softc *, uint32_t *, int);
+static int	wm_nvm_set_addrbits_size_eecd(struct wm_softc *);
 /* Microwire */
 static int	wm_nvm_read_uwire(struct wm_softc *, int, int, uint16_t *);
 /* SPI */
-static void	wm_set_spiaddrbits(struct wm_softc *);
 static int	wm_nvm_ready_spi(struct wm_softc *);
 static int	wm_nvm_read_spi(struct wm_softc *, int, int, uint16_t *);
 /* Using with EERD */
@@ -1648,7 +1649,8 @@ wm_attach(device_t parent, device_t self, void *aux)
 	case WM_T_82543:
 	case WM_T_82544:
 		/* Microwire */
-		sc->sc_ee_addrbits = 6;
+		sc->sc_nvm_wordsize = 64;
+		sc->sc_nvm_addrbits = 6;
 		break;
 	case WM_T_82540:
 	case WM_T_82545:
@@ -1657,10 +1659,13 @@ wm_attach(device_t parent, device_t self, void *aux)
 	case WM_T_82546_3:
 		/* Microwire */
 		reg = CSR_READ(sc, WMREG_EECD);
-		if (reg & EECD_EE_SIZE)
-			sc->sc_ee_addrbits = 8;
-		else
-			sc->sc_ee_addrbits = 6;
+		if (reg & EECD_EE_SIZE) {
+			sc->sc_nvm_wordsize = 256;
+			sc->sc_nvm_addrbits = 8;
+		} else {
+			sc->sc_nvm_wordsize = 64;
+			sc->sc_nvm_addrbits = 6;
+		}
 		sc->sc_flags |= WM_F_LOCK_EECD;
 		break;
 	case WM_T_82541:
@@ -1670,16 +1675,25 @@ wm_attach(device_t parent, device_t self, void *aux)
 		reg = CSR_READ(sc, WMREG_EECD);
 		if (reg & EECD_EE_TYPE) {
 			/* SPI */
-			wm_set_spiaddrbits(sc);
-		} else
+			sc->sc_flags |= WM_F_EEPROM_SPI;
+			wm_nvm_set_addrbits_size_eecd(sc);
+		} else {
 			/* Microwire */
-			sc->sc_ee_addrbits = (reg & EECD_EE_ABITS) ? 8 : 6;
+			if ((reg & EECD_EE_ABITS) != 0) {
+				sc->sc_nvm_wordsize = 256;
+				sc->sc_nvm_addrbits = 8;
+			} else {
+				sc->sc_nvm_wordsize = 64;
+				sc->sc_nvm_addrbits = 6;
+			}
+		}
 		sc->sc_flags |= WM_F_LOCK_EECD;
 		break;
 	case WM_T_82571:
 	case WM_T_82572:
 		/* SPI */
-		wm_set_spiaddrbits(sc);
+		sc->sc_flags |= WM_F_EEPROM_SPI;
+		wm_nvm_set_addrbits_size_eecd(sc);
 		sc->sc_flags |= WM_F_LOCK_EECD | WM_F_LOCK_SWSM;
 		break;
 	case WM_T_82573:
@@ -1687,11 +1701,13 @@ wm_attach(device_t parent, device_t self, void *aux)
 		/* FALLTHROUGH */
 	case WM_T_82574:
 	case WM_T_82583:
-		if (wm_nvm_is_onboard_eeprom(sc) == 0)
+		if (wm_nvm_is_onboard_eeprom(sc) == 0) {
 			sc->sc_flags |= WM_F_EEPROM_FLASH;
-		else {
+			sc->sc_nvm_wordsize = 2048;
+		} else {
 			/* SPI */
-			wm_set_spiaddrbits(sc);
+			sc->sc_flags |= WM_F_EEPROM_SPI;
+			wm_nvm_set_addrbits_size_eecd(sc);
 		}
 		sc->sc_flags |= WM_F_EEPROM_EERDEEWR;
 		break;
@@ -1703,7 +1719,8 @@ wm_attach(device_t parent, device_t self, void *aux)
 	case WM_T_I354:
 	case WM_T_80003:
 		/* SPI */
-		wm_set_spiaddrbits(sc);
+		sc->sc_flags |= WM_F_EEPROM_SPI;
+		wm_nvm_set_addrbits_size_eecd(sc);
 		sc->sc_flags |= WM_F_EEPROM_EERDEEWR | WM_F_LOCK_SWFW
 		    | WM_F_LOCK_SWSM;
 		break;
@@ -1715,6 +1732,7 @@ wm_attach(device_t parent, device_t self, void *aux)
 	case WM_T_PCH_LPT:
 		/* FLASH */
 		sc->sc_flags |= WM_F_EEPROM_FLASH | WM_F_LOCK_EXTCNF;
+		sc->sc_nvm_wordsize = 2048;
 		memtype = pci_mapreg_type(pa->pa_pc, pa->pa_tag, WM_ICH8_FLASH);
 		if (pci_mapreg_map(pa, WM_ICH8_FLASH, memtype, 0,
 		    &sc->sc_flasht, &sc->sc_flashh, NULL, NULL)) {
@@ -1734,6 +1752,7 @@ wm_attach(device_t parent, device_t self, void *aux)
 		break;
 	case WM_T_I210:
 	case WM_T_I211:
+		wm_nvm_set_addrbits_size_eecd(sc);
 		sc->sc_flags |= WM_F_EEPROM_FLASH_HW;
 		sc->sc_flags |= WM_F_EEPROM_EERDEEWR | WM_F_LOCK_SWFW;
 		break;
@@ -1792,19 +1811,21 @@ wm_attach(device_t parent, device_t self, void *aux)
 
 	if (sc->sc_flags & WM_F_EEPROM_INVALID)
 		aprint_verbose_dev(sc->sc_dev, "No EEPROM\n");
-	else if (sc->sc_flags & WM_F_EEPROM_FLASH_HW) {
-		aprint_verbose_dev(sc->sc_dev, "FLASH(HW)\n");
-	} else if (sc->sc_flags & WM_F_EEPROM_FLASH) {
-		aprint_verbose_dev(sc->sc_dev, "FLASH\n");
-	} else {
-		if (sc->sc_flags & WM_F_EEPROM_SPI)
-			eetype = "SPI";
-		else
-			eetype = "MicroWire";
-		aprint_verbose_dev(sc->sc_dev,
-		    "%u word (%d address bits) %s EEPROM\n",
-		    1U << sc->sc_ee_addrbits,
-		    sc->sc_ee_addrbits, eetype);
+	else {
+		aprint_verbose_dev(sc->sc_dev, "%u words ",
+		    sc->sc_nvm_wordsize);
+		if (sc->sc_flags & WM_F_EEPROM_FLASH_HW) {
+			aprint_verbose("FLASH(HW)\n");
+		} else if (sc->sc_flags & WM_F_EEPROM_FLASH) {
+			aprint_verbose("FLASH\n");
+		} else {
+			if (sc->sc_flags & WM_F_EEPROM_SPI)
+				eetype = "SPI";
+			else
+				eetype = "MicroWire";
+			aprint_verbose("(%d address bits) %s EEPROM\n",
+			    sc->sc_nvm_addrbits, eetype);
+		}
 	}
 
 	switch (sc->sc_type) {
@@ -2054,7 +2075,7 @@ wm_attach(device_t parent, device_t self, void *aux)
 				aprint_verbose_dev(sc->sc_dev, "SGMII(I2C)\n");
 				/*FALLTHROUGH*/
 			case CTRL_EXT_LINK_MODE_PCIE_SERDES:
-				sc->sc_mediatype = wm_get_sfp_media_type(sc);
+				sc->sc_mediatype = wm_sfp_get_media_type(sc);
 				if (sc->sc_mediatype == WMP_F_UNKNOWN) {
 					if (link_mode
 					    == CTRL_EXT_LINK_MODE_SGMII) {
@@ -2089,6 +2110,7 @@ wm_attach(device_t parent, device_t self, void *aux)
 				break;
 			case CTRL_EXT_LINK_MODE_GMII:
 			default:
+				aprint_verbose_dev(sc->sc_dev, "Copper\n");
 				sc->sc_mediatype = WMP_F_COPPER;
 				break;
 			}
@@ -7557,12 +7579,91 @@ wm_tbi_check_link(struct wm_softc *sc)
 }
 
 /* SFP related */
-static uint32_t
-wm_get_sfp_media_type(struct wm_softc *sc)
-{
 
-	/* XXX */
-	return WMP_F_SERDES;
+static int
+wm_sfp_read_data_byte(struct wm_softc *sc, uint16_t offset, uint8_t *data)
+{
+	uint32_t i2ccmd;
+	int i;
+
+	i2ccmd = (offset << I2CCMD_REG_ADDR_SHIFT) | I2CCMD_OPCODE_READ;
+	CSR_WRITE(sc, WMREG_I2CCMD, i2ccmd);
+
+	/* Poll the ready bit */
+	for (i = 0; i < I2CCMD_PHY_TIMEOUT; i++) {
+		delay(50);
+		i2ccmd = CSR_READ(sc, WMREG_I2CCMD);
+		if (i2ccmd & I2CCMD_READY)
+			break;
+	}
+	if ((i2ccmd & I2CCMD_READY) == 0)
+		return -1;
+	if ((i2ccmd & I2CCMD_ERROR) != 0)
+		return -1;
+
+	*data = i2ccmd & 0x00ff;
+
+	return 0;
+}
+
+static uint32_t
+wm_sfp_get_media_type(struct wm_softc *sc)
+{
+	uint32_t ctrl_ext;
+	uint8_t val = 0;
+	int timeout = 3;
+	uint32_t mediatype = WMP_F_UNKNOWN;
+	int rv = -1;
+
+	ctrl_ext = CSR_READ(sc, WMREG_CTRL_EXT);
+	ctrl_ext &= ~CTRL_EXT_SWDPIN(3);
+	CSR_WRITE(sc, WMREG_CTRL_EXT, ctrl_ext | CTRL_EXT_I2C_ENA);
+	CSR_WRITE_FLUSH(sc);
+
+	/* Read SFP module data */
+	while (timeout) {
+		rv = wm_sfp_read_data_byte(sc, SFF_SFP_ID_OFF, &val);
+		if (rv == 0)
+			break;
+		delay(100*1000); /* XXX too big */
+		timeout--;
+	}
+	if (rv != 0)
+		goto out;
+	switch (val) {
+	case SFF_SFP_ID_SFF:
+		aprint_normal_dev(sc->sc_dev,
+		    "Module/Connector soldered to board\n");
+		break;
+	case SFF_SFP_ID_SFP:
+		aprint_normal_dev(sc->sc_dev, "SFP\n");
+		break;
+	case SFF_SFP_ID_UNKNOWN:
+		goto out;
+	default:
+		break;
+	}
+
+	rv = wm_sfp_read_data_byte(sc, SFF_SFP_ETH_FLAGS_OFF, &val);
+	if (rv != 0) {
+		goto out;
+	}
+
+	if ((val & (SFF_SFP_ETH_FLAGS_1000SX | SFF_SFP_ETH_FLAGS_1000LX)) != 0)
+		mediatype = WMP_F_SERDES;
+	else if ((val & SFF_SFP_ETH_FLAGS_1000T) != 0){
+		sc->sc_flags |= WM_F_SGMII;
+		mediatype = WMP_F_COPPER;
+	} else if ((val & SFF_SFP_ETH_FLAGS_100FX) != 0){
+		sc->sc_flags |= WM_F_SGMII;
+		mediatype = WMP_F_SERDES;
+	}
+
+out:
+	/* Restore I2C interface setting */
+	CSR_WRITE(sc, WMREG_CTRL_EXT, ctrl_ext);
+
+	return mediatype;
 }
 /*
  * NVM related.
@@ -7673,7 +7774,7 @@ wm_nvm_read_uwire(struct wm_softc *sc, int word, int wordcnt, uint16_t *data)
 		wm_eeprom_sendbits(sc, UWIRE_OPC_READ, 3);
 
 		/* Shift in address. */
-		wm_eeprom_sendbits(sc, word + i, sc->sc_ee_addrbits);
+		wm_eeprom_sendbits(sc, word + i, sc->sc_nvm_addrbits);
 
 		/* Shift out the data. */
 		wm_eeprom_recvbits(sc, &val, 16);
@@ -7691,15 +7792,69 @@ wm_nvm_read_uwire(struct wm_softc *sc, int word, int wordcnt, uint16_t *data)
 
 /* SPI */
 
-/* Set SPI related information */
-static void
-wm_set_spiaddrbits(struct wm_softc *sc)
+/*
+ * Set SPI and FLASH related information from the EECD register.
+ * For 82541 and 82547, the word size is taken from EEPROM.
+ */
+static int
+wm_nvm_set_addrbits_size_eecd(struct wm_softc *sc)
 {
+	int size;
 	uint32_t reg;
+	uint16_t data;
 
-	sc->sc_flags |= WM_F_EEPROM_SPI;
 	reg = CSR_READ(sc, WMREG_EECD);
-	sc->sc_ee_addrbits = (reg & EECD_EE_ABITS) ? 16 : 8;
+	sc->sc_nvm_addrbits = (reg & EECD_EE_ABITS) ? 16 : 8;
+
+	/* Read the size of NVM from EECD by default */
+	size = __SHIFTOUT(reg, EECD_EE_SIZE_EX_MASK);
+	switch (sc->sc_type) {
+	case WM_T_82541:
+	case WM_T_82541_2:
+	case WM_T_82547:
+	case WM_T_82547_2:
+		/* Set dummy value to access EEPROM */
+		sc->sc_nvm_wordsize = 64;
+		wm_nvm_read(sc, NVM_OFF_EEPROM_SIZE, 1, &data);
+		reg = data;
+		size = __SHIFTOUT(reg, EECD_EE_SIZE_EX_MASK);
+		if (size == 0)
+			size = 6; /* 64 word size */
+		else
+			size += NVM_WORD_SIZE_BASE_SHIFT + 1;
+		break;
+	case WM_T_80003:
+	case WM_T_82571:
+	case WM_T_82572:
+	case WM_T_82573: /* SPI case */
+	case WM_T_82574: /* SPI case */
+	case WM_T_82583: /* SPI case */
+		size += NVM_WORD_SIZE_BASE_SHIFT;
+		if (size > 14)
+			size = 14;
+		break;
+	case WM_T_82575:
+	case WM_T_82576:
+	case WM_T_82580:
+	case WM_T_82580ER:
+	case WM_T_I350:
+	case WM_T_I354:
+	case WM_T_I210:
+	case WM_T_I211:
+		size += NVM_WORD_SIZE_BASE_SHIFT;
+		if (size > 15)
+			size = 15;
+		break;
+	default:
+		aprint_error_dev(sc->sc_dev,
+		    "%s: unknown device(%d)?\n", __func__, sc->sc_type);
+		return -1;
+		break;
+	}
+
+	sc->sc_nvm_wordsize = 1 << size;
+
+	return 0;
 }
 
 /*
@@ -7756,11 +7911,11 @@ wm_nvm_read_spi(struct wm_softc *sc, int word, int wordcnt, uint16_t *data)
 	delay(2);
 
 	opc = SPI_OPC_READ;
-	if (sc->sc_ee_addrbits == 8 && word >= 128)
+	if (sc->sc_nvm_addrbits == 8 && word >= 128)
 		opc |= SPI_OPC_A8;
 
 	wm_eeprom_sendbits(sc, opc, 8);
-	wm_eeprom_sendbits(sc, word << 1, sc->sc_ee_addrbits);
+	wm_eeprom_sendbits(sc, word << 1, sc->sc_nvm_addrbits);
 
 	for (i = 0; i < wordcnt; i++) {
 		wm_eeprom_recvbits(sc, &val, 16);
@@ -8377,7 +8532,7 @@ wm_get_swsm_semaphore(struct wm_softc *sc)
 
 	if (sc->sc_flags & WM_F_LOCK_SWSM) {
 		/* Get the SW semaphore. */
-		timeout = 1000 + 1; /* XXX */
+		timeout = sc->sc_nvm_wordsize + 1;
 		while (timeout) {
 			swsm = CSR_READ(sc, WMREG_SWSM);
 
@@ -8396,7 +8551,7 @@ wm_get_swsm_semaphore(struct wm_softc *sc)
 	}
 
 	/* Get the FW semaphore. */
-	timeout = 1000 + 1; /* XXX */
+	timeout = sc->sc_nvm_wordsize + 1;
 	while (timeout) {
 		swsm = CSR_READ(sc, WMREG_SWSM);
 		swsm |= SWSM_SWESMBI;

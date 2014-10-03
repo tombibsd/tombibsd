@@ -240,6 +240,42 @@ awin_memprobe(void)
 	return memsize;
 }
 
+uint16_t
+awin_chip_id(void)
+{
+	static uint16_t chip_id = 0;
+	uint32_t ver;
+
+	if (!chip_id) {
+		ver = bus_space_read_4(&awin_bs_tag, awin_core_bsh,
+		    AWIN_SRAM_OFFSET + AWIN_SRAM_VER_REG);
+		ver |= AWIN_SRAM_VER_R_EN;
+		bus_space_write_4(&awin_bs_tag, awin_core_bsh,
+		    AWIN_SRAM_OFFSET + AWIN_SRAM_VER_REG, ver);
+		ver = bus_space_read_4(&awin_bs_tag, awin_core_bsh,
+		    AWIN_SRAM_OFFSET + AWIN_SRAM_VER_REG);
+
+		chip_id = __SHIFTOUT(ver, AWIN_SRAM_VER_KEY_FIELD);
+	}
+
+	return chip_id;
+}
+
+const char *
+awin_chip_name(void)
+{
+	uint16_t chip_id = awin_chip_id();
+
+	switch (chip_id) {
+	case AWIN_CHIP_ID_A10: return "A10";
+	case AWIN_CHIP_ID_A13: return "A13";
+	case AWIN_CHIP_ID_A20: return "A20";
+	case AWIN_CHIP_ID_A23: return "A23";
+	case AWIN_CHIP_ID_A31: return "A31";
+	default: return "unknown chip";
+	}
+}
+
 void
 awin_pll6_enable(void)
 {
@@ -274,4 +310,28 @@ awin_pll6_enable(void)
 	    __SHIFTOUT(ncfg, AWIN_PLL_CFG_FACTOR_K),
 	    __SHIFTOUT(ncfg, AWIN_PLL_CFG_FACTOR_M));
 #endif
+}
+
+void
+awin_pll2_enable(void)
+{
+	bus_space_tag_t bst = &awin_bs_tag;
+	bus_space_handle_t bsh = awin_core_bsh;
+
+	/*
+  	 * AC (at 48kHz) needs PLL2 to be 24576000 Hz
+  	 */
+	const uint32_t ocfg = bus_space_read_4(bst, bsh,
+	    AWIN_CCM_OFFSET + AWIN_PLL2_CFG_REG);
+
+	uint32_t ncfg = ocfg;
+	ncfg &= ~(AWIN_PLL2_CFG_PREVDIV|AWIN_PLL2_CFG_FACTOR_N|AWIN_PLL2_CFG_POSTDIV);
+	ncfg |= __SHIFTIN(21, AWIN_PLL2_CFG_PREVDIV);
+	ncfg |= __SHIFTIN(86, AWIN_PLL2_CFG_FACTOR_N);
+	ncfg |= __SHIFTIN(4, AWIN_PLL2_CFG_POSTDIV);
+	ncfg |= AWIN_PLL_CFG_ENABLE;
+	if (ncfg != ocfg) {
+		bus_space_write_4(bst, bsh,
+		    AWIN_CCM_OFFSET + AWIN_PLL2_CFG_REG, ncfg);
+	}
 }

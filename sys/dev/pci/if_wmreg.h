@@ -286,6 +286,7 @@ struct livengood_tcpip_ctxdesc {
 #define	EECD_EE_AUTORD	(1U << 9)	/* auto read done */
 #define	EECD_EE_ABITS	(1U << 10)	/* EEPROM address bits
 					   (based on type) */
+#define	EECD_EE_SIZE_EX_MASK __BITS(14,11) /* EEPROM size for new devices */
 #define	EECD_EE_TYPE	(1U << 13)	/* EEPROM type
 					   (0 = Microwire, 1 = SPI) */
 #define EECD_SEC1VAL	(1U << 22)	/* Sector One Valid */
@@ -900,11 +901,13 @@ struct livengood_tcpip_ctxdesc {
 
 #define NVM_CHECKSUM		0xBABA
 #define NVM_SIZE		0x0040
+#define NVM_WORD_SIZE_BASE_SHIFT 6
 
 #define	NVM_OFF_MACADDR		0x0000	/* MAC address offset */
 #define NVM_OFF_COMPAT		0x0003
 #define	NVM_OFF_CFG1		0x000a	/* config word 1 */
 #define	NVM_OFF_CFG2		0x000f	/* config word 2 */
+#define	NVM_OFF_EEPROM_SIZE	0x0012	/* NVM SIZE */
 #define	NVM_OFF_CFG3_PORTB	0x0014	/* config word 3 */
 #define NVM_OFF_FUTURE_INIT_WORD1 0x0019
 #define	NVM_OFF_INIT_3GIO_3	0x001a	/* PCIe Initial Configuration Word 3 */
@@ -1031,6 +1034,20 @@ struct livengood_tcpip_ctxdesc {
 
 /* for PCI express Capability registers */
 #define	WM_PCIE_DCSR2_16MS	0x00000005
+
+/* SFF SFP ROM data */
+#define SFF_SFP_ID_OFF		0x00
+#define SFF_SFP_ID_UNKNOWN	0x00	/* Unknown */
+#define SFF_SFP_ID_SFF		0x02	/* Module soldered to motherboard */
+#define SFF_SFP_ID_SFP		0x03	/* SFP transceiver */
+
+#define SFF_SFP_ETH_FLAGS_OFF	0x06
+#define SFF_SFP_ETH_FLAGS_1000SX	0x01
+#define SFF_SFP_ETH_FLAGS_1000LX	0x02
+#define SFF_SFP_ETH_FLAGS_1000CX	0x04
+#define SFF_SFP_ETH_FLAGS_1000T		0x08
+#define SFF_SFP_ETH_FLAGS_100FX		0x10
+
 
 /* advanced TX descriptor for 82575 and newer */
 typedef union nq_txdesc {

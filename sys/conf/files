@@ -705,6 +705,11 @@ file	dev/ic/hme.c			hme
 device	gem: arp, ether, ifnet, mii
 file	dev/ic/gem.c			gem
 
+# Synopsis Designware GMAC core, as found on allwinner a20
+# and other SoCs
+device	awge: arp, ether, ifnet, mii
+file	dev/ic/dwc_gmac.c		awge
+
 # 8390-family Ethernet controllers
 #
 defflag	opt_ipkdb.h		IPKDB_DP8390

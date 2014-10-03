@@ -27,7 +27,8 @@ MULTILIB_ARGS= --enable-multilib
 MULTILIB_ARGS= --disable-multilib
 .endif
 
-.if ${MKSOFTFLOAT} != "no" && ${MACHINE_CPU} != "m68k"
+.if ${MKSOFTFLOAT} != "no" && ${MACHINE_CPU} != "m68k" \
+    && ${MACHINE_CPU} != "or1k"
 SOFTFLOAT_ARGS=	-with-float=soft
 .endif
 

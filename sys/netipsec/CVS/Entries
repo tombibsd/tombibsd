@@ -8,7 +8,7 @@
 /ipcomp_var.h/1.6/Wed Apr 23 06:09:05 2008/-kk/
 /ipip_var.h/1.4/Wed Apr 23 06:09:05 2008/-kk/
 /ipsec.c/1.64/Fri Oct  3 09:36:25 2014/-kk/
-/ipsec.h/1.35/Tue Jun  3 03:10:00 2014/-kk/
+/ipsec.h/1.36/Fri Oct  3 09:51:02 2014/-kk/
 /ipsec6.h/1.13/Thu Jun  9 19:54:18 2011/-kk/
 /ipsec_input.c/1.32/Fri Mar 14 04:28:28 2014/-kk/
 /ipsec_mbuf.c/1.12/Mon May 16 10:05:23 2011/-kk/

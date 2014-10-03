@@ -941,7 +941,7 @@ getdevinfo(file_t *fp)
 	 * Figure out what device it is so we can check if the
 	 * cached data is valid.
 	 */
-	vp = fp->f_data;
+	vp = fp->f_vnode;
 	if (vp->v_type != VCHR)
 		return 0;
 	vn_lock(vp, LK_SHARED | LK_RETRY);
@@ -1046,8 +1046,8 @@ oss_ioctl_mixer(struct lwp *lwp, const struct oss_sys_ioctl_args *uap, register_
 	int l, r, n, e;
 	int (*ioctlf)(file_t *, u_long, void *);
 
-	if ((fp = fd_getfile(SCARG(uap, fd))) == NULL)
-		return (EBADF);
+	if ((error = fd_getvnode(SCARG(uap, fd), &fp)) != 0)
+		return error;
 
 	if ((fp->f_flag & (FREAD | FWRITE)) == 0) {
 		error = EBADF;

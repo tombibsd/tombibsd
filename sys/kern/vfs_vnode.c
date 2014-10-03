@@ -181,10 +181,11 @@ static lwp_t *		vrele_lwp		__cacheline_aligned;
 static int		vrele_pending		__cacheline_aligned;
 static int		vrele_gen		__cacheline_aligned;
 
+SLIST_HEAD(hashhead, vcache_node);
 static struct {
 	kmutex_t	lock;
 	u_long		hashmask;
-	SLIST_HEAD(hashhead, vcache_node)	*hashtab;
+	struct hashhead	*hashtab;
 	pool_cache_t	pool;
 }			vcache			__cacheline_aligned;
 

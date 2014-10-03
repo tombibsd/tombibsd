@@ -202,7 +202,7 @@ fdesc_loadvnode(struct mount *mp, struct vnode *vp,
 		break;
 	case FD_CTTY:
 		fd->fd_type = Fctty;
-		vp->v_type = VNON;
+		vp->v_type = VCHR;
 		break;
 	case FD_STDIN:
 		fd->fd_type = Flink;

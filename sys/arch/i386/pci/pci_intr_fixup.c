@@ -719,6 +719,8 @@ pciintr_do_header_fixup(pci_chipset_tag_t pc, pcitag_t tag,
 			PCIBIOS_PRINTV((" %3d", l->irq));
 		PCIBIOS_PRINTV(("  %d   ", l->fixup_stage));
 	}
+#else
+	__USE(id);
 #endif
 	
 	/*

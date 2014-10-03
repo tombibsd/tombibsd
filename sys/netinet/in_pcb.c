@@ -606,9 +606,9 @@ in_pcbdetach(void *v)
 		m_free(inp->inp_options);
 	}
 	rtcache_free(&inp->inp_route);
+	ip_freemoptions(inp->inp_moptions);
 	sofree(so);			/* drops the socket's lock */
 
-	ip_freemoptions(inp->inp_moptions);
 	pool_put(&inpcb_pool, inp);
 	mutex_enter(softnet_lock);	/* reacquire the softnet_lock */
 }

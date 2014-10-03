@@ -72,7 +72,7 @@
 #define AWIN_IRQ_DMA		59
 #define AWIN_IRQ_PIO		60
 #define AWIN_IRQ_TP		61
-#define AWIN_IRQ_ADDC		62
+#define AWIN_IRQ_AC		62
 #define AWIN_IRQ_LRADC		63
 #define AWIN_IRQ_SDMMC0		64
 #define AWIN_IRQ_SDMMC1		65

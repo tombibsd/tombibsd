@@ -153,7 +153,7 @@ static	struct llinfo_arp *arplookup(struct mbuf *, const struct in_addr *,
 static	void in_arpinput(struct mbuf *);
 static	void arp_drainstub(void);
 
-LIST_HEAD(, llinfo_arp) llinfo_arp;
+LIST_HEAD(llinfo_arpq, llinfo_arp) llinfo_arp;
 struct	ifqueue arpintrq = {
 	.ifq_head = NULL,
 	.ifq_tail = NULL,

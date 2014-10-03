@@ -123,7 +123,7 @@ compat_12_sys_getdirentries(struct lwp *l, const struct compat_12_sys_getdirentr
 		goto out1;
 	}
 
-	vp = (struct vnode *)fp->f_data;
+	vp = (struct vnode *)fp->f_vnode;
 	if (vp->v_type != VDIR) {
 		error = ENOTDIR;
 		goto out1;

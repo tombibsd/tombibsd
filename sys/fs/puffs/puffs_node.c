@@ -180,6 +180,8 @@ puffs_newnode(struct mount *mp, struct vnode *dvp, struct vnode **vpp,
 		cache_enter(dvp, *vpp, cnp->cn_nameptr, cnp->cn_namelen,
 			    cnp->cn_flags);
 
+	puffs_updatenode(VPTOPP(dvp), PUFFS_UPDATECTIME|PUFFS_UPDATEMTIME, 0);
+
 	return 0;
 }
 

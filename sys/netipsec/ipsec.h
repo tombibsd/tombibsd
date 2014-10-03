@@ -274,8 +274,8 @@ ipsec4_getpolicybysock(
 
 static __inline int
 ipsec_copy_pcbpolicy(
-    struct inpcbpolicy *old,
-    struct inpcbpolicy *new
+    struct inpcbpolicy *oldp,
+    struct inpcbpolicy *newp
 )
 {
   /*XXX do nothing */

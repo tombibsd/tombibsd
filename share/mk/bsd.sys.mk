@@ -116,7 +116,8 @@ COPTS+=	-fstack-protector -Wstack-protector
 .if "${ACTIVE_CC}" == "gcc" && "${HAVE_GCC}" == "48" && \
 	( ${MACHINE_CPU} == "sh3" || \
 	  ${MACHINE_ARCH} == "vax" || \
-	  ${MACHINE_CPU} == "m68k" )
+	  ${MACHINE_CPU} == "m68k" || \
+	  ${MACHINE_CPU} == "or1k" )
 COPTS+=	-Wno-error=stack-protector 
 .endif
 

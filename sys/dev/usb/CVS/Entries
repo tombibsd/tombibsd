@@ -110,7 +110,7 @@
 /uep.c/1.19/Thu Oct 24 10:28:58 2013/-kk/
 /uftdi.c/1.59/Wed Dec 25 07:37:43 2013/-kk/
 /uftdireg.h/1.8/Thu Oct 24 10:28:58 2013/-kk/
-/ugen.c/1.124/Fri Oct  3 09:09:20 2014/-kk/
+/ugen.c/1.125/Fri Oct  3 09:50:56 2014/-kk/
 /ugensa.c/1.31/Thu Oct 24 10:28:58 2013/-kk/
 /ugraphire_rdesc.h/1.9/Fri Dec 23 00:51:46 2011/-kk/
 /uhci.c/1.264/Fri Oct  3 09:26:04 2014/-kk/
@@ -175,7 +175,7 @@
 /usbdi.h/1.90/Sun Jul 20 13:58:50 2014/-kk/
 /usbdi_util.c/1.62/Thu Oct 24 10:28:58 2013/-kk/
 /usbdi_util.h/1.45/Thu Oct 24 10:28:58 2013/-kk/
-/usbdivar.h/1.108/Fri Oct  3 09:36:19 2014/-kk/
+/usbdivar.h/1.109/Fri Oct  3 09:50:56 2014/-kk/
 /usbhid.h/1.14/Tue Jan 17 03:49:20 2012/-kk/
 /usbroothub_subr.c/1.1/Sun Feb  3 10:57:13 2008/-kk/
 /usbroothub_subr.h/1.1/Sun Feb  3 10:57:13 2008/-kk/

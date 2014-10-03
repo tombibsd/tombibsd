@@ -275,6 +275,11 @@ __strerror_r(int e, char *s, size_t l)
 #  define SIZEOF_PTR_2POW	2
 #  define USE_BRK
 #endif
+#ifdef __or1k__
+#  define QUANTUM_2POW_MIN	4
+#  define SIZEOF_PTR_2POW	2
+#  define USE_BRK
+#endif
 #ifdef __vax__
 #  define QUANTUM_2POW_MIN	4
 #  define SIZEOF_PTR_2POW	2

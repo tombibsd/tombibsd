@@ -1,7 +1,7 @@
 /Makefile/1.1/Sun Mar 16 08:26:49 2003/-kk/
 /files.union/1.2/Tue Mar  2 16:43:48 2010/-kk/
 /union.h/1.26/Thu Feb 27 08:56:07 2014/-kk/
-/union_subr.c/1.66/Sun Jun 22 14:32:21 2014/-kk/
+/union_subr.c/1.67/Fri Oct  3 09:51:00 2014/-kk/
 /union_vfsops.c/1.72/Thu Apr 24 14:31:17 2014/-kk/
 /union_vnops.c/1.62/Fri Oct  3 09:09:25 2014/-kk/
 D

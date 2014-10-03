@@ -408,8 +408,8 @@ algo_bsd(int algo, uint16_t *port, struct inpcb_hdr *inp_hdr, kauth_cred_t cred)
 }
 
 /*
- * The straightforward algorithm that calls random() in order to
- * compute the increment to the next port number.
+ * The straightforward algorithm that increments the port number
+ * by a random amount.
  */
 static int
 algo_random_start(int algo, uint16_t *port, struct inpcb_hdr *inp_hdr,
@@ -687,7 +687,7 @@ algo_doublehash(int algo, uint16_t *port, struct inpcb_hdr *inp_hdr,
 	/* first time initialization */
 	if (dhtable[0] == 0)
 		for (size_t i = 0; i < __arraycount(dhtable); i++)
-			dhtable[i] = random() & 0xffff;
+			dhtable[i] = cprng_fast32() & 0xffff;
 
 	/* Ephemeral port selection function */
 	num_ephemeral = mymax - mymin + 1;

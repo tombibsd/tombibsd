@@ -651,7 +651,7 @@ identify_arm_cpu(device_t dv, struct cpu_info *ci)
 	}
 
 	if (ci->ci_data.cpu_cc_freq != 0) {
-		char freqbuf[8];
+		char freqbuf[10];
 		humanize_number(freqbuf, sizeof(freqbuf), ci->ci_data.cpu_cc_freq,
 		    "Hz", 1000);
 

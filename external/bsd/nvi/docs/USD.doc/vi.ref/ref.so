@@ -62,7 +62,7 @@
 ..
 .\" key words for index
 .de KY
-.sy echo >>index '\\$1	\\n%'
+.if \n[.U]==0 .sy echo >>index '\\$1	\\n%'
 ..
 .\" option names
 .de OP

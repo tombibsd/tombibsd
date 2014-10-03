@@ -1305,6 +1305,19 @@ _bus_dmamem_map(bus_dma_tag_t t, bus_dma_segment_t *segs, int nsegs,
 			}
 		}
 
+#ifdef PMAP_NEED_ALLOC_POOLPAGE
+		/*
+		 * The page can only be direct mapped if was allocated out
+		 * of the arm poolpage vm freelist.  
+		 */
+		int lcv = vm_physseg_find(atop(pa), NULL);
+		KASSERT(lcv != -1);
+		if (direct_mapable) {
+			direct_mapable =
+			    (arm_poolpage_vmfreelist == VM_PHYSMEM_PTR(lcv)->free_list);
+		}
+#endif
+
 		if (direct_mapable) {
 			*kvap = (void *)PMAP_MAP_POOLPAGE(pa);
 #ifdef DEBUG_DMA

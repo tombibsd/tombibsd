@@ -17,7 +17,7 @@
 /ChangeLog/1.6/Fri Oct  3 09:33:03 2014/-kk/
 /MAINTAINERS/1.1.1.1/Tue Aug 18 09:22:55 2009/-kk/
 /Makefile.am/1.1.1.3/Tue Oct 29 12:08:30 2013/-kk/
-/Makefile.in/1.1.1.3/Tue Oct 29 12:08:30 2013/-kk/
+/Makefile.in/1.2/Fri Oct  3 09:48:56 2014/-kk/
 /PORTING/1.1.1.1/Tue Aug 18 09:23:13 2009/-kk/
 /README/1.1.1.1/Tue Aug 18 09:23:13 2009/-kk/
 /TODO/1.1.1.1/Tue Aug 18 09:23:13 2009/-kk/
@@ -39,10 +39,10 @@
 /aoutx.h/1.5/Tue Oct 29 12:08:30 2013/-kk/
 /archive.c/1.4/Tue Oct 29 12:08:30 2013/-kk/
 /archive64.c/1.1.1.3/Tue Oct 29 12:08:30 2013/-kk/
-/archures.c/1.4/Tue Oct 29 12:08:30 2013/-kk/
+/archures.c/1.5/Fri Oct  3 09:48:56 2014/-kk/
 /armnetbsd.c/1.1.1.1/Tue Aug 18 09:23:24 2009/-kk/
 /bfd-in.h/1.1.1.3/Tue Oct 29 12:08:30 2013/-kk/
-/bfd-in2.h/1.5/Tue Oct 29 12:08:30 2013/-kk/
+/bfd-in2.h/1.6/Fri Oct  3 09:48:56 2014/-kk/
 /bfd.c/1.4/Tue Oct 29 12:08:30 2013/-kk/
 /bfd.m4/1.1.1.2/Sat Sep 24 22:45:56 2011/-kk/
 /bfdio.c/1.1.1.3/Tue Oct 29 12:08:30 2013/-kk/
@@ -68,7 +68,6 @@
 /coff-m88k.c/1.1.1.3/Tue Oct 29 12:08:30 2013/-kk/
 /coff-mcore.c/1.1.1.3/Tue Oct 29 12:08:30 2013/-kk/
 /coff-mips.c/1.1.1.3/Tue Oct 29 12:08:30 2013/-kk/
-/coff-or32.c/1.1.1.3/Tue Oct 29 12:08:30 2013/-kk/
 /coff-ppc.c/1.1.1.3/Tue Oct 29 12:08:30 2013/-kk/
 /coff-rs6000.c/1.1.1.3/Tue Oct 29 12:08:30 2013/-kk/
 /coff-sh.c/1.1.1.3/Tue Oct 29 12:08:30 2013/-kk/
@@ -86,17 +85,17 @@
 /coff-z80.c/1.1.1.2/Sat Sep 24 22:44:49 2011/-kk/
 /coff-z8k.c/1.1.1.1/Tue Aug 18 09:23:51 2009/-kk/
 /coff64-rs6000.c/1.1.1.3/Tue Oct 29 12:08:30 2013/-kk/
-/coffcode.h/1.1.1.3/Tue Oct 29 12:08:30 2013/-kk/
+/coffcode.h/1.2/Fri Oct  3 09:48:56 2014/-kk/
 /coffgen.c/1.1.1.3/Tue Oct 29 12:08:30 2013/-kk/
 /cofflink.c/1.1.1.3/Tue Oct 29 12:08:30 2013/-kk/
 /coffswap.h/1.1.1.2/Sat Sep 24 22:44:42 2011/-kk/
 /compress.c/1.1.1.3/Tue Oct 29 12:08:30 2013/-kk/
-/config.bfd/1.12/Fri Oct  3 09:23:28 2014/-kk/
+/config.bfd/1.13/Fri Oct  3 09:48:56 2014/-kk/
 /config.in/1.1.1.3/Tue Oct 29 12:08:30 2013/-kk/
 /configure.com/1.1.1.3/Tue Oct 29 12:08:30 2013/-kk/
 /configure.host/1.4/Tue Oct 29 12:08:30 2013/-kk/
-/configure.in/1.4/Tue Oct 29 12:08:30 2013/-kk/
-/configure/1.5/Tue Oct 29 12:08:30 2013/-kk/
+/configure.in/1.5/Fri Oct  3 09:48:56 2014/-kk/
+/configure/1.6/Fri Oct  3 09:48:56 2014/-kk/
 /corefile.c/1.1.1.3/Tue Oct 29 12:08:30 2013/-kk/
 /cpu-aarch64.c/1.1.1.1/Thu Oct 24 10:28:51 2013/-kk/
 /cpu-alpha.c/1.1.1.3/Tue Oct 29 12:08:30 2013/-kk/
@@ -148,7 +147,7 @@
 /cpu-mt.c/1.1.1.2/Tue Oct 29 12:08:30 2013/-kk/
 /cpu-ns32k.c/1.1.1.2/Tue Oct 29 12:08:30 2013/-kk/
 /cpu-openrisc.c/1.1.1.3/Tue Oct 29 12:08:30 2013/-kk/
-/cpu-or32.c/1.1.1.3/Tue Oct 29 12:08:30 2013/-kk/
+/cpu-or1k.c/1.1/Wed Sep  3 19:01:15 2014/-kk/
 /cpu-pdp11.c/1.1.1.3/Tue Oct 29 12:08:30 2013/-kk/
 /cpu-pj.c/1.1.1.3/Tue Oct 29 12:08:30 2013/-kk/
 /cpu-plugin.c/1.1.1.2/Tue Oct 29 12:08:30 2013/-kk/
@@ -186,7 +185,7 @@
 /ecofflink.c/1.1.1.3/Tue Oct 29 12:08:30 2013/-kk/
 /ecoffswap.h/1.1.1.1/Tue Aug 18 09:24:17 2009/-kk/
 /elf-attrs.c/1.1.1.3/Tue Oct 29 12:08:30 2013/-kk/
-/elf-bfd.h/1.1.1.3/Tue Oct 29 12:08:30 2013/-kk/
+/elf-bfd.h/1.2/Fri Oct  3 09:48:56 2014/-kk/
 /elf-eh-frame.c/1.4/Tue Oct 29 12:08:30 2013/-kk/
 /elf-hppa.h/1.1.1.2/Sat Sep 24 22:44:17 2011/-kk/
 /elf-ifunc.c/1.1.1.2/Tue Oct 29 12:08:30 2013/-kk/
@@ -241,8 +240,7 @@
 /elf32-moxie.c/1.1.1.2/Tue Oct 29 12:08:31 2013/-kk/
 /elf32-msp430.c/1.1.1.3/Tue Oct 29 12:08:31 2013/-kk/
 /elf32-mt.c/1.1.1.3/Tue Oct 29 12:08:31 2013/-kk/
-/elf32-openrisc.c/1.1.1.3/Tue Oct 29 12:08:31 2013/-kk/
-/elf32-or32.c/1.1.1.1/Tue Aug 18 09:25:23 2009/-kk/
+/elf32-or1k.c/1.1/Wed Sep  3 19:01:15 2014/-kk/
 /elf32-pj.c/1.1.1.1/Tue Aug 18 09:25:23 2009/-kk/
 /elf32-ppc.c/1.6/Tue Oct 29 12:08:31 2013/-kk/
 /elf32-ppc.h/1.1.1.3/Tue Oct 29 12:08:31 2013/-kk/
@@ -336,7 +334,7 @@
 /libaout.h/1.1.1.2/Sat Sep 24 22:42:05 2011/-kk/
 /libbfd-in.h/1.1.1.3/Tue Oct 29 12:08:31 2013/-kk/
 /libbfd.c/1.1.1.3/Tue Oct 29 12:08:31 2013/-kk/
-/libbfd.h/1.4/Tue Oct 29 12:08:31 2013/-kk/
+/libbfd.h/1.5/Fri Oct  3 09:48:57 2014/-kk/
 /libcoff-in.h/1.1.1.3/Tue Oct 29 12:08:31 2013/-kk/
 /libcoff.h/1.1.1.3/Tue Oct 29 12:08:31 2013/-kk/
 /libecoff.h/1.1.1.2/Sat Sep 24 22:42:02 2011/-kk/
@@ -428,7 +426,7 @@
 /sunos.c/1.1.1.2/Tue Oct 29 12:08:31 2013/-kk/
 /syms.c/1.4/Tue Oct 29 12:08:31 2013/-kk/
 /sysdep.h/1.1.1.3/Tue Oct 29 12:08:31 2013/-kk/
-/targets.c/1.1.1.3/Tue Oct 29 12:08:31 2013/-kk/
+/targets.c/1.2/Fri Oct  3 09:48:57 2014/-kk/
 /targmatch.sed/1.1.1.1/Tue Aug 18 09:27:36 2009/-kk/
 /tekhex.c/1.1.1.3/Tue Oct 29 12:08:31 2013/-kk/
 /ticoff.h/1.1.1.3/Tue Oct 29 12:08:31 2013/-kk/

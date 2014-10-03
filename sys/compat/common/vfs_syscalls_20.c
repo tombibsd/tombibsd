@@ -179,7 +179,7 @@ compat_20_sys_fstatfs(struct lwp *l, const struct compat_20_sys_fstatfs_args *ua
 	/* fd_getvnode() will use the descriptor for us */
 	if ((error = fd_getvnode(SCARG(uap, fd), &fp)) != 0)
 		return (error);
-	mp = ((struct vnode *)fp->f_data)->v_mount;
+	mp = fp->f_vnode->v_mount;
 	sbuf = malloc(sizeof(*sbuf), M_TEMP, M_WAITOK);
 	if ((error = dostatvfs(mp, sbuf, l, 0, 1)) != 0)
 		goto out;

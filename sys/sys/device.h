@@ -138,6 +138,11 @@ struct device_suspensor {
 
 #define	DEVICE_SUSPENSORS_MAX	16
 
+struct device_garbage {
+	device_t	*dg_devs;
+	int		dg_ndevs;
+};
+
 struct device {
 	devclass_t	dv_class;	/* this device's classification */
 	TAILQ_ENTRY(device) dv_list;	/* entry on list of all devices */
@@ -182,10 +187,7 @@ struct device {
 	    *dv_bus_suspensors[DEVICE_SUSPENSORS_MAX],
 	    *dv_driver_suspensors[DEVICE_SUSPENSORS_MAX],
 	    *dv_class_suspensors[DEVICE_SUSPENSORS_MAX];
-	struct device_garbage {
-		device_t	*dg_devs;
-		int		dg_ndevs;
-	} dv_garbage;
+	struct device_garbage dv_garbage;
 };
 
 /* dv_flags */
