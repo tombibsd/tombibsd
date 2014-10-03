@@ -276,6 +276,7 @@ lua_url_decode(lua_State *L, char *s)
 			*q++ = *p;
 		}
 	}
+	*q = '\0';
 	lua_pushstring(L, val);
 	lua_setfield(L, -2, s);
 	free(val);

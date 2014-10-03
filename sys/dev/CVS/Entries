@@ -11,8 +11,8 @@
 /aurateconv.c/1.19/Wed Nov 23 23:07:31 2011/-kk/
 /bio.c/1.11/Fri Oct  3 09:09:12 2014/-kk/
 /biovar.h/1.8/Thu May  7 12:15:33 2009/-kk/
-/ccd.c/1.151/Fri Oct  3 09:09:12 2014/-kk/
-/ccdvar.h/1.33/Thu Oct 24 10:28:57 2013/-kk/
+/ccd.c/1.152/Fri Oct  3 09:36:15 2014/-kk/
+/ccdvar.h/1.34/Fri Oct  3 09:36:15 2014/-kk/
 /cgd.c/1.90/Fri Oct  3 09:09:12 2014/-kk/
 /cgd_crypto.c/1.12/Thu Oct 24 10:28:57 2013/-kk/
 /cgd_crypto.h/1.7/Wed Dec  5 02:23:20 2012/-kk/

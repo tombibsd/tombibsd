@@ -917,8 +917,11 @@ npf_conn_import(npf_conndb_t *cd, prop_dictionary_t cdict,
 	}
 	memcpy(&con->c_state, d, sizeof(npf_state_t));
 
-	/* Reconstruct NAT association, if any, or return NULL. */
-	con->c_nat = npf_nat_import(cdict, natlist, con);
+	/* Reconstruct NAT association, if any. */
+	if ((obj = prop_dictionary_get(cdict, "nat")) != NULL &&
+	    (con->c_nat = npf_nat_import(obj, natlist, con)) == NULL) {
+		goto err;
+	}
 
 	/*
 	 * Fetch and copy the keys for each direction.

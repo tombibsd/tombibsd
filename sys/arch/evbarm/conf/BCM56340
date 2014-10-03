@@ -90,6 +90,7 @@ options		NFS_BOOT_RWSIZE=1024
 
 options		COMPAT_NETBSD32	# allow running arm (e.g. non-earm) binaries
 #options 	COMPAT_43	# 4.3BSD compatibility.
+options 	COMPAT_70	# NetBSD 7.0 compatibility.
 options 	COMPAT_60	# NetBSD 6.0 compatibility.
 options 	COMPAT_50	# NetBSD 5.0 compatibility.
 options 	COMPAT_40	# NetBSD 4.0 compatibility.
@@ -120,8 +121,9 @@ options 	SYSVSHM		# System V-like memory sharing
 #options 	MINIROOTSIZE=1000	# Size in blocks
 #options 	MEMORY_DISK_IS_ROOT	# use memory disk as root
 
-options 	DKWEDGE_AUTODISCOVER
-options 	DKWEDGE_METHOD_GPT
+# Wedge support
+options 	DKWEDGE_AUTODISCOVER	# Automatically add dk(4) instances
+options 	DKWEDGE_METHOD_GPT	# Supports GPT partitions as wedges
 
 # Miscellaneous kernel options
 options 	MODULAR		# support dynamically loaded kernel modules
@@ -153,7 +155,7 @@ options 	DDB_COMMANDONENTER="show event"
 options 	DB_MAX_LINE=INT_MAX
 #options 	KGDB
 makeoptions	DEBUG="-g"	# compile full symbol table
-options 	SYMTAB_SPACE=590000
+makeoptions	COPY_SYMTAB=1
 
 ## USB Debugging options
 options USB_DEBUG

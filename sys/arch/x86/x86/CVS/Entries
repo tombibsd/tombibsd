@@ -50,7 +50,7 @@
 /vm_machdep.c/1.25/Tue Mar 25 02:35:30 2014/-kk/
 /vmt.c/1.10/Fri Oct  3 09:09:11 2014/-kk/
 /x86_autoconf.c/1.71/Sat Jun 14 03:56:37 2014/-kk/
-/x86_machdep.c/1.66/Fri Oct  3 09:09:11 2014/-kk/
+/x86_machdep.c/1.67/Fri Oct  3 09:36:13 2014/-kk/
 /x86_stub.c/1.4/Wed Oct 19 05:01:43 2011/-kk/
 /x86_userconf.c/1.1/Tue May 31 23:28:53 2011/-kk/
 D

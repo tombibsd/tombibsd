@@ -32,6 +32,9 @@
 #ifndef _MIPS_INT_FMTIO_H_
 #define _MIPS_INT_FMTIO_H_
 
+#ifdef __INTPTR_FMTd__
+#include <sys/common_int_fmtio.h>
+#else
 /*
  * 7.8.1 Macros for format specifiers
  */
@@ -398,5 +401,7 @@
 #else
 #define	SCNxPTR		"x"	/* uintptr_t		*/
 #endif
+
+#endif /* !__INTPTR_FMTd__ */
 
 #endif /* !_MIPS_INT_FMTIO_H_ */

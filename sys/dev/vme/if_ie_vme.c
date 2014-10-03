@@ -424,7 +424,7 @@ ie_vme_match(device_t parent, cfdata_t cf, void *aux)
 		return (0);
 	}
 	if (va->r[0].size != VMECF_LEN_DEFAULT &&
-	    va->r[0].size != sizeof(sizeof(struct ievme))) {
+	    va->r[0].size != sizeof(struct ievme)) {
 		printf("ie_vme_match: bad csr size\n");
 		return (0);
 	}

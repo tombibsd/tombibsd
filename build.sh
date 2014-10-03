@@ -1100,6 +1100,7 @@ parseoptions()
 {
 	opts='a:B:C:D:Ehj:M:m:N:nO:oR:rS:T:UuV:w:X:xY:yZ:'
 	opt_a=false
+	opt_m=false
 
 	if type getopts >/dev/null 2>&1; then
 		# Use POSIX getopts.
@@ -1177,6 +1178,7 @@ parseoptions()
 		-m)
 			eval ${optargcmd}
 			MACHINE="${OPTARG}"
+			opt_m=true
 			;;
 
 		-N)
@@ -1372,16 +1374,17 @@ parseoptions()
 
 	# Set up MACHINE*.  On a NetBSD host, these are allowed to be unset.
 	#
-	# MACHINE_ARCH from the environment may be overridden by getarch
-	# (based on the MACHINE), but MACHINE_ARCH from the -a option should
-	# not be overridden.
-	#
 	if [ -z "${MACHINE}" ]; then
 		[ "${uname_s}" = "NetBSD" ] ||
 		    bomb "MACHINE must be set, or -m must be used, for cross builds."
 		MACHINE=${uname_m}
 	fi
-	$opt_a || getarch
+	if $opt_m && ! $opt_a; then
+		# Settings implied by the command line -m option
+		# override MACHINE_ARCH from the environment (if any).
+		getarch
+	fi
+	[ -n "${MACHINE_ARCH}" ] || getarch
 	validatearch
 
 	# Set up default make(1) environment.

@@ -82,13 +82,12 @@ LINKFLAGS_NORMAL=	-X
 # Strip ARM mapping symbols from the kernel image, as they interfere
 # with ddb. Do it differently if 'makeoptions DEBUG="-g"' was specified.
 .if !defined(DEBUG) || empty(DEBUG:M-g*)
-SYSTEM_LD_TAIL?=	${SYSTEM_LD_TAIL_DBSYM} ; \
-			${OBJCOPY} --strip-symbol='$$a'	 \
-				    --strip-symbol='$$t'	 \
-				    --strip-symbol='$$d' $@	;\
+SYSTEM_LD_TAIL?=	${OBJCOPY} --wildcard --strip-symbol='[$$][atd]' \
+				    --strip-symbol='[$$][atd]\.*' $@;   \
 			${SIZE} $@; chmod 755 $@
 .else
-STRIPFLAGS=-g --strip-symbol='$$a' --strip-symbol='$$t' --strip-symbol='$$d'
+STRIPFLAGS=-g --wildcard --strip-symbol='[$$][atd]' \
+	   --strip-symbol='[$$][atd]\.*'
 .endif
 
 ##

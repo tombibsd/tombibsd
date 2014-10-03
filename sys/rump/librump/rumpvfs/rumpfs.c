@@ -1740,8 +1740,10 @@ rumpfs_mountfs(struct mount *mp)
 
 	rn = makeprivate(VDIR, RUMPFS_DEFAULTMODE, NODEV, DEV_BSIZE, false);
 	rn->rn_parent = rn;
-	if ((error = makevnode(mp, rn, &rfsmp->rfsmp_rvp)) != 0)
+	if ((error = makevnode(mp, rn, &rfsmp->rfsmp_rvp)) != 0) {
+		kmem_free(rfsmp, sizeof(*rfsmp));
 		return error;
+	}
 
 	rfsmp->rfsmp_rvp->v_vflag |= VV_ROOT;
 

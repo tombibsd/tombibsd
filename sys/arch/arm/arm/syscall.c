@@ -109,7 +109,7 @@ swi_handler(trapframe_t *tf)
 	if ((tf->tf_r15 & R15_IRQ_DISABLE) == 0)
 		int_on();
 #else
-	KASSERT((tf->tf_spsr & IF32_bits) == 0);
+	KASSERT(VALID_R15_PSR(tf->tf_pc, tf->tf_spsr));
 	restore_interrupts(tf->tf_spsr & IF32_bits);
 #endif
 

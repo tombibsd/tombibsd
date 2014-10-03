@@ -961,7 +961,7 @@ getenvvars(u_long flag, char *buf)
 	 * Get end of symbols for kernel debugging
 	 */
 	esym = (int *)getenv("END_SYM");
-#ifndef SYMTAB_SPACE
+#ifndef COPY_SYMTAB
 	if (esym == (int *)0)
 #endif
 		esym = (int *)&end;

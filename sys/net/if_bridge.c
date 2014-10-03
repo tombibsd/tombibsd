@@ -800,6 +800,10 @@ bridge_ioctl_add(struct bridge_softc *sc, void *arg)
 	if (ifs->if_input != ether_input)
 		return EINVAL;
 
+	/* FIXME: doesn't work with non-IFF_SIMPLEX interfaces */
+	if ((ifs->if_flags & IFF_SIMPLEX) == 0)
+		return EINVAL;
+
 	bif = malloc(sizeof(*bif), M_DEVBUF, M_NOWAIT);
 	if (bif == NULL)
 		return (ENOMEM);

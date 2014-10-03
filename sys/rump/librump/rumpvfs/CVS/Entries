@@ -6,7 +6,7 @@
 /rump_vfs.c/1.80/Tue Jun  3 03:10:02 2014/-kk/
 /rump_vfs_private.h/1.17/Thu Oct 24 10:28:58 2013/-kk/
 /rumpblk.c/1.57/Fri Oct  3 09:09:34 2014/-kk/
-/rumpfs.c/1.129/Wed Jun 18 08:43:12 2014/-kk/
+/rumpfs.c/1.130/Fri Oct  3 09:36:26 2014/-kk/
 /rumpvfs.ifspec/1.9/Tue May  6 05:50:23 2014/-kk/
 /rumpvfs_if_priv.h/1.12/Tue May  6 05:50:24 2014/-kk/
 /rumpvfs_if_wrappers.c/1.12/Tue May  6 05:50:24 2014/-kk/

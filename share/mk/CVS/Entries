@@ -25,12 +25,12 @@
 /bsd.man.mk/1.115/Fri Oct  3 09:25:27 2014/-kk/
 /bsd.nls.mk/1.47/Sat Sep 10 16:57:35 2011/-kk/
 /bsd.obj.mk/1.49/Mon Jan 25 00:43:00 2010/-kk/
-/bsd.own.mk/1.828/Fri Oct  3 09:25:27 2014/-kk/
+/bsd.own.mk/1.832/Fri Oct  3 09:35:58 2014/-kk/
 /bsd.prog.mk/1.290/Fri Apr 11 02:03:25 2014/-kk/
 /bsd.rpc.mk/1.13/Wed Dec 25 07:37:13 2013/-kk/
 /bsd.shlib.mk/1.8/Thu Aug 23 21:21:17 2012/-kk/
 /bsd.subdir.mk/1.52/Wed May 26 00:48:15 2010/-kk/
-/bsd.sys.mk/1.242/Fri Oct  3 09:25:27 2014/-kk/
+/bsd.sys.mk/1.244/Fri Oct  3 09:35:58 2014/-kk/
 /bsd.syscall.mk/1.2/Thu Jan 16 01:19:46 2014/-kk/
 /bsd.test.mk/1.24/Thu Oct 24 10:28:54 2013/-kk/
 /bsd.x11.mk/1.113/Sun Jul 20 13:58:33 2014/-kk/

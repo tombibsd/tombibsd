@@ -86,7 +86,11 @@ typedef	__greg_t	__gregset_t[_NGREG];
 #define	_REG_MQ		38		/* MQ Register (POWER only) */
 
 typedef struct {
+#ifdef _KERNEL
+	unsigned long long	__fpu_regs[32];	/* FP0-31 */
+#else
 	double		__fpu_regs[32];	/* FP0-31 */
+#endif
 	unsigned int	__fpu_fpscr;	/* FP Status and Control Register */
 	unsigned int	__fpu_valid;	/* Set together with _UC_FPU */
 } __fpregset_t;

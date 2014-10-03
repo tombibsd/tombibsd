@@ -1380,7 +1380,7 @@ fcntl(int fd, int cmd, ...)
 		 * for the file descriptors not dup2'd.
 		 */
 
-		for (i = 0, maxdup2 = 0; i <= DUP2HIGH; i++) {
+		for (i = 0, maxdup2 = -1; i <= DUP2HIGH; i++) {
 			if (dup2vec[i] & DUP2BIT) {
 				int val;
 

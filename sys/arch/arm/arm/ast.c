@@ -86,7 +86,8 @@ userret(struct lwp *l)
 #endif
 
 #if defined(__PROG32) && defined(DIAGNOSTIC)
-	KASSERT((lwp_trapframe(l)->tf_spsr & IF32_bits) == 0);
+	KASSERT(VALID_R15_PSR(lwp_trapframe(l)->tf_pc,
+	    lwp_trapframe(l)->tf_spsr));
 #endif
 }
 
@@ -111,7 +112,7 @@ ast(struct trapframe *tf)
 #endif
 
 #ifdef __PROG32
-	KASSERT((tf->tf_spsr & IF32_bits) == 0);
+	KASSERT(VALID_R15_PSR(tf->tf_pc, tf->tf_spsr));
 #endif
 
 	curcpu()->ci_data.cpu_ntrap++;

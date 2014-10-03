@@ -92,9 +92,10 @@ COPTS.e_sqrtl.c += -DHAVE_FENV_H
 COMMON_SRCS+= s_nexttoward.c
 .endif
 COMMON_SRCS+= s_fma.c s_fmaf.c s_fmal.c
-.elif ((${LIBC_MACHINE_ARCH} == "i386") || (${LIBC_MACHINE_ARCH} == "x86_64"))
+.elif ((${MACHINE_ARCH} == "i386") || (${MACHINE_ARCH} == "x86_64"))
 
-.if (${LIBC_MACHINE_ARCH} == "x86_64")
+# XXX consider making this LIBC_MACHINE_ARCH?
+.if (${MACHINE_ARCH} == "x86_64")
 .PATH: ${.CURDIR}/arch/x86_64
 .endif
 .PATH:	${.CURDIR}/arch/i387
@@ -116,7 +117,7 @@ ARCH_SRCS = e_acos.S e_asin.S e_atan2.S e_exp.S e_expf.S e_fmod.S e_log.S \
 # do not pick up the i387 asm version, it is incorrect
 s_modf.o s_modf.pico s_modf.po s_modf.d: s_modf.c
 
-.if (${LIBC_MACHINE_ARCH} == "i386")
+.if (${MACHINE_ARCH} == "i386")
 SUBDIR=arch/i387
 .endif
 .elif (${LIBC_MACHINE_ARCH} == "m68k")

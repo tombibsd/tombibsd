@@ -8,8 +8,8 @@ no options 	MIPS32
 options 	NOFPU			# No FPU
 options 	EXEC_ELF64
 options 	COMPAT_NETBSD32
-no options 	SYMTAB_SPACE
-options 	SYMTAB_SPACE=490000	# size for embedded symbol table
+no makeoptions	COPY_SYMTAB
+makeoptions	COPY_SYMTAB=1	# size for embedded symbol table
 
 #options 	UVMHIST, UVMHIST_PRINT
 

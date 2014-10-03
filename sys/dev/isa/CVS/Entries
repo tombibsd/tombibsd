@@ -37,10 +37,10 @@
 /elink.h/1.11/Mon Apr 28 20:23:52 2008/-kk/
 /esp_isa.c/1.36/Mon Apr 28 20:23:52 2008/-kk/
 /esp_isavar.h/1.5/Sun Apr 13 04:55:53 2008/-kk/
-/ess.c/1.80/Thu Nov 24 03:35:57 2011/-kk/
+/ess.c/1.82/Fri Oct  3 09:36:18 2014/-kk/
 /ess_isa.c/1.24/Sat May 22 16:35:00 2010/-kk/
-/essreg.h/1.16/Sun Dec 11 12:22:02 2005/-kk/
-/essvar.h/1.26/Wed Nov 23 23:07:32 2011/-kk/
+/essreg.h/1.17/Fri Oct  3 09:36:18 2014/-kk/
+/essvar.h/1.27/Fri Oct  3 09:36:18 2014/-kk/
 /fd.c/1.105/Fri Oct  3 09:26:00 2014/-kk/
 /fdc_isa.c/1.19/Thu Feb  2 19:43:04 2012/-kk/
 /fdcvar.h/1.10/Mon Apr 28 20:23:52 2008/-kk/

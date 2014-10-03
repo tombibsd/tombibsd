@@ -153,9 +153,10 @@ umapfs_mount(struct mount *mp, const char *path, void *data, size_t *data_len)
 	/*
 	 * Now copy in the number of entries and maps for umap mapping.
 	 */
-	if (args->nentries > MAPFILEENTRIES || args->gnentries > GMAPFILEENTRIES) {
+	if (args->nentries < 0 || args->nentries > MAPFILEENTRIES ||
+	    args->gnentries < 0 || args->gnentries > GMAPFILEENTRIES) {
 		vput(lowerrootvp);
-		return (error);
+		return (EINVAL);
 	}
 
 	amp->info_nentries = args->nentries;

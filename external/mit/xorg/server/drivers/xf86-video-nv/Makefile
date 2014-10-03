@@ -15,6 +15,16 @@ MAN=		nv.4
 CPPFLAGS+= -DAVOID_VGAHW
 .endif
 
+.if ${MACHINE} == "i386" || ${MACHINE} == "amd64"
+# XXX
+# the test uses pci_device_has_kernel_driver() which, for now at least, only 
+# makes sense on x86 ( it just checks if the kernel driver handling the
+# device is vga ) - and even there, genfb and the like don't do anything
+# that would prevent this driver from working. Might need to revisit this once
+# the new DRM2 code has nvidia support
+#CPPFLAGS+= -DNV_TEST_FOR_KERNEL_DRIVER
+.endif
+
 CPPFLAGS+= -DHAVE_XAA_H
 
 .include "../Makefile.xf86-driver"

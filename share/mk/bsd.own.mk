@@ -50,7 +50,7 @@ TOOLCHAIN_MISSING?=	yes
 
 TOOLCHAIN_MISSING?=	no
 
-.if ${MACHINE_CPU} == "aarch64" && ${MKLLVM:Uyes} != "no"
+.if ${MACHINE_CPU} == "aarch64" && !defined(EXTERNAL_TOOLCHAIN) && ${MKLLVM:Uyes} != "no"
 MKLLVM?=	yes
 HAVE_LLVM?=	yes
 MKGCC?=		no
@@ -96,6 +96,7 @@ _LIBC_COMPILER_RT.${MACHINE_ARCH}=	yes
 _LIBC_COMPILER_RT.aarch64=	yes
 _LIBC_COMPILER_RT.i386=		yes
 _LIBC_COMPILER_RT.powerpc=	yes
+_LIBC_COMPILER_RT.powerpc64=	yes
 _LIBC_COMPILER_RT.x86_64=	yes
 
 .if ${MKLLVM:Uno} == "yes" && ${_LIBC_COMPILER_RT.${MACHINE_ARCH}:Uno} == "yes"
@@ -709,6 +710,9 @@ MKGCC:= no
 MKGCC:= no
 .endif
 
+# No GDB support for aarch64
+MKGDB.aarch64=	no
+
 #
 # The m68000 port is incomplete.
 #
@@ -725,10 +729,8 @@ NOPROFILE=	# defined
 #
 # The ia64 port is incomplete.
 #
-.if ${MACHINE_ARCH} == "ia64"
-MKLINT=		no
-MKGDB=		no
-.endif
+MKLINT.ia64=	no
+MKGDB.ia64=	no
 
 #
 # On the MIPS, all libs are compiled with ABIcalls (and are thus PIC),
@@ -743,9 +745,7 @@ MKPICLIB:=	no
 # On VAX using ELF, all objects are PIC, not just shared libraries,
 # so don't build the _pic version.
 #
-.if ${MACHINE_ARCH} == "vax"
-MKPICLIB=	no
-.endif
+MKPICLIB.vax=	no
 
 #
 # Location of the file that contains the major and minor numbers of the
@@ -881,18 +881,17 @@ MK${var}:=	yes
 #
 .if ${MACHINE_ARCH} == "x86_64" || ${MACHINE_ARCH} == "sparc64" \
     || ${MACHINE_ARCH} == "mips64eb" || ${MACHINE_ARCH} == "mips64el" \
-    || ${MACHINE_ARCH} == "powerpc64"
+    || ${MACHINE_ARCH} == "powerpc64" || ${MACHINE_CPU} == "aarch64"
 MKCOMPAT?=	yes
-.elif !empty(MACHINE_ARCH:Mearm*) || ${MACHINE_CPU} == "aarch64"
+.elif !empty(MACHINE_ARCH:Mearm*)
 MKCOMPAT?=	no
 .else
 # Don't let this build where it really isn't supported.
 MKCOMPAT:=	no
 .endif
 
-#.if ${MACHINE_ARCH} == "x86_64" || ${MACHINE_ARCH} == "i386" || \
-
-.if ${MACHINE} == "evbppc" && ${MACHINE_ARCH} == "powerpc"
+.if ${MACHINE_ARCH} == "x86_64" || ${MACHINE_ARCH} == "i386" || \
+    (${MACHINE} == "evbppc" && ${MACHINE_ARCH} == "powerpc")
 MKCOMPATMODULES?=	yes
 .else
 MKCOMPATMODULES:=	no
@@ -964,7 +963,7 @@ _MKVARS.yes= \
 	MKX11FONTS \
 	MKYP
 .for var in ${_MKVARS.yes}
-${var}?=	yes
+${var}?=	${${var}.${MACHINE_ARCH}:Uyes}
 .endfor
 
 #
@@ -996,7 +995,7 @@ _MKVARS.no= \
 	MKSOFTFLOAT MKSTRIPIDENT MKTPM \
 	MKUNPRIVED MKUPDATE MKX11 MKX11MOTIF MKZFS
 .for var in ${_MKVARS.no}
-${var}?=no
+${var}?=	${${var}.${MACHINE_ARCH}:Uno}
 .endfor
 
 #
@@ -1103,10 +1102,11 @@ MKNLS:=		no
 .if !empty(MACHINE_ARCH:Mearm*)
 _NEEDS_LIBCXX.${MACHINE_ARCH}=	yes
 .endif
-_NEEDS_LIBCXX.i386=	yes
-_NEEDS_LIBCXX.powerpc=	yes
-_NEEDS_LIBCXX.x86_64=	yes
-_NEEDS_LIBCXX.aarch64=	yes
+_NEEDS_LIBCXX.i386=		yes
+_NEEDS_LIBCXX.powerpc=		yes
+_NEEDS_LIBCXX.powerpc64=	yes
+_NEEDS_LIBCXX.x86_64=		yes
+_NEEDS_LIBCXX.aarch64=		yes
 
 .if ${MKLLVM} == "yes" && ${_NEEDS_LIBCXX.${MACHINE_ARCH}:Uno} == "yes"
 MKLIBCXX:=	yes

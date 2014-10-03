@@ -82,10 +82,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <ufs/ext2fs/ext2fs.h>
 #include <ufs/ext2fs/ext2fs_extern.h>
 
-
-#define doclusterread 0 /* XXX underway */
-#define doclusterwrite 0
-
 /*
  * Vnode op for reading.
  */

@@ -4,7 +4,7 @@
  * THIS FILE AUTOMATICALLY GENERATED.  DO NOT EDIT.
  *
  * generated from:
- *	NetBSD: miidevs,v 1.120 2014/07/02 22:33:18 msaitoh Exp
+ *	NetBSD: miidevs,v 1.121 2014/08/20 08:00:18 msaitoh Exp
  */
 
 /*-

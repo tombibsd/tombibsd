@@ -1351,16 +1351,21 @@ rasops_rotate_font(int *cookie, int rotate)
 
 	f = malloc(sizeof(struct rotatedfont), M_DEVBUF, M_WAITOK);
 	if (f == NULL)
-		return;
+		goto fail0;
 
 	if ((ncookie = wsfont_rotate(*cookie, rotate)) == -1)
-		return;
+		goto fail1;
 
 	f->rf_cookie = *cookie;
 	f->rf_rotated = ncookie;
 	SLIST_INSERT_HEAD(&rotatedfonts, f, rf_next);
 
 	*cookie = ncookie;
+	return;
+
+fail1:	free(f, M_DEVBUF);
+fail0:	/* Just use the existing font, I guess...  */
+	return;
 }
 
 static void

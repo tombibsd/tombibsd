@@ -210,6 +210,7 @@
 #define	SCNxFAST64	"llx"	/* uint_fast64_t	*/
 #define	SCNxMAX		"llx"	/* uintmax_t		*/
 #define	SCNxPTR		"lx"	/* uintptr_t		*/
-#endif
+
+#endif /* !__INTPTR_FMTd__ */
 
 #endif /* !_ARM_INT_FMTIO_H_ */

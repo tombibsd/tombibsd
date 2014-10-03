@@ -369,6 +369,7 @@ module_init(void)
 	}
 
 	sysctl_module_setup();
+	aprint_normal("kern.module.path=%s\n", module_base);
 }
 
 /*
@@ -454,6 +455,12 @@ sysctl_module_setup(void)
 		CTLTYPE_BOOL, "verbose",
 		SYSCTL_DESCR("Enable verbose output"),
 		NULL, 0, &module_verbose_on, 0,
+		CTL_CREATE, CTL_EOL);
+	sysctl_createv(&module_sysctllog, 0, &node, NULL,
+		CTLFLAG_PERMANENT | CTLFLAG_READONLY,
+		CTLTYPE_STRING, "path",
+		SYSCTL_DESCR("Default module load path"),
+		NULL, 0, module_base, 0,
 		CTL_CREATE, CTL_EOL);
 	sysctl_createv(&module_sysctllog, 0, &node, NULL,
 		CTLFLAG_PERMANENT | CTLFLAG_READWRITE,

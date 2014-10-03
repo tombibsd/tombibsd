@@ -35,7 +35,7 @@ CLEANFILES+=	rt_${src}
 
 CPPFLAGS+=	-nostdinc++ -cxx-isystem ${LIBCXX_SRCDIR}/include -I${LIBCXXRT_SRCDIR}/src
 CPPFLAGS+=	-DLIBCXXRT
-CXXFLAGS+=	${${ACTIVE_CC} == "clang":? -std=c++11 : -std=c++0x}
+CXXFLAGS+=	-std=c++11
 
 CWARNFLAGS.gcc+=	-Wno-error
 

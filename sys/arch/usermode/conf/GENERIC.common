@@ -8,7 +8,7 @@ maxusers 	32
 
 makeoptions	DEBUG="-O1 -g3"
 
-options 	SYMTAB_SPACE=450000
+makeoptions	COPY_SYMTAB=1
 
 options 	RTC_OFFSET=0
 options 	NTP
@@ -31,6 +31,7 @@ options		CPU_DEBUG
 options 	COMPAT_BSDPTY
 options 	COMPAT_50
 options 	COMPAT_60
+options 	COMPAT_70
 options 	COMPAT_OSSAUDIO
 
 file-system	FFS

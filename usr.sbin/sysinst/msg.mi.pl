@@ -1198,7 +1198,7 @@ message lvmlv_regsiz_ask {MirrorLogRegionSize?}
 message lvmlv_readahsect_ask {ReadAheadSectors?}
 message lvmlv_stripes_ask {Stripes?}
 
-message addusername {8 character username to add:}
+message addusername {8 character username to add}
 message addusertowheel {Do you wish to add this user to group wheel?}
 message Delete_partition
 {Usun partycje}

@@ -317,6 +317,18 @@ Notes:
 Please submit all changes to the author.
 The distribution doesn't include the Linux specific bits or build system.
 
+Package:	gmake
+Version:	3.81
+Current Vers:	4.0
+Maintainer:	FSF
+Archive Site:	ftp://ftp.gnu.org/gnu/make/
+Home Page:	http://www.gnu.org/software/make/
+Mailing List:	bug-make@gnu.org
+Responsible:	
+License:	GPLv2+ (3.81), GPLv3+ (3.82 and later)
+Location:	external/gpl2/gmake
+Notes:
+
 Package:	diffutils
 Version:	2.8.1
 Current Vers:	3.3
@@ -1300,7 +1312,7 @@ Notes:
 Added changes from a5 -> a12 manually.
 
 Package:	tz
-Version:	tzcode2014e / tzdata2014f
+Version:	tzcode2014f / tzdata2014f
 Current Vers:	tzcode2014f / tzdata2014f
 Maintainer:	Paul Eggert <eggert@cs.ucla.edu>
 Archive Site:	ftp://ftp.iana.org/tz/releases/

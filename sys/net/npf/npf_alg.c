@@ -244,3 +244,24 @@ npf_alg_conn(npf_cache_t *npc, int di)
 	pserialize_read_exit(s);
 	return con;
 }
+
+prop_array_t
+npf_alg_export(void)
+{
+	prop_array_t alglist = prop_array_create();
+
+	KASSERT(npf_config_locked_p());
+
+	for (u_int i = 0; i < alg_count; i++) {
+		const npf_alg_t *alg = &alg_list[i];
+
+		if (alg->na_name == NULL) {
+			continue;
+		}
+		prop_dictionary_t algdict = prop_dictionary_create();
+		prop_dictionary_set_cstring(algdict, "name", alg->na_name);
+		prop_array_add(alglist, algdict);
+		prop_object_release(algdict);
+	}
+	return alglist;
+}

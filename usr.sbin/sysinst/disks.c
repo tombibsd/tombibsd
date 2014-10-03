@@ -1383,7 +1383,7 @@ get_dkwedges(struct dkwedge_info **dkw, const char *diskdev)
 		}
 	}
 
-	if (dkwl.dkwl_nwedges > 0)
+	if (dkwl.dkwl_nwedges > 0 && *dkw != NULL)
 		qsort(*dkw, dkwl.dkwl_nwedges, sizeof(**dkw), get_dkwedges_sort);
 
 	close(fd);

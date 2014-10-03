@@ -205,11 +205,6 @@ postinstall-fix-obsolete_stand: .NOTMAIN .PHONY
 #
 # Targets (in order!) called by "make build".
 #
-.if defined(HAVE_GCC)
-BUILD_CC_LIB_BASEDIR= external/gpl3/${EXTERNAL_GCC_SUBDIR}/lib
-BUILD_CC_LIB_BASETARGET= external-gpl3-gcc-lib
-.endif
-
 BUILDTARGETS+=	check-tools
 .if ${MKUPDATE} == "no" && !defined(NOCLEANDIR)
 BUILDTARGETS+=	cleandir

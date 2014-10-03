@@ -302,6 +302,7 @@ rump_init(void)
 	cprng_init();
 	kern_cprng = cprng_strong_create("kernel", IPL_VM,
 	    CPRNG_INIT_ANY|CPRNG_REKEY_ANY);
+
 	rump_hyperentropy_init();
 
 	procinit();
@@ -360,6 +361,9 @@ rump_init(void)
 
 		aprint_verbose("cpu%d at thinair0: rump virtual cpu\n", i);
 	}
+
+	/* Once all CPUs are detected, initialize the per-CPU cprng_fast.  */
+	cprng_fast_init();
 
 	/* CPUs are up.  allow kernel threads to run */
 	rump_thread_allow(NULL);

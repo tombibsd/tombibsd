@@ -2,7 +2,7 @@
 /TODO/1.3/Thu Jul 19 07:48:10 2007/-kk/
 /callcontext.c/1.27/Tue Dec  6 21:15:39 2011/-kk/
 /creds.c/1.16/Thu Mar 15 12:49:36 2012/-kk/
-/dispatcher.c/1.46/Tue Nov 12 02:18:29 2013/-kk/
+/dispatcher.c/1.47/Fri Oct  3 09:35:48 2014/-kk/
 /flush.c/1.16/Tue Aug 12 19:44:39 2008/-kk/
 /framebuf.c/1.32/Mon Jun 25 22:32:47 2012/-kk/
 /null.c/1.33/Fri Nov 25 15:02:02 2011/-kk/
@@ -11,13 +11,13 @@
 /pnode.c/1.13/Thu Aug 16 09:25:43 2012/-kk/
 /puffs.3/1.59/Tue Mar 25 02:35:05 2014/-kk/
 /puffs.c/1.117/Mon Nov 14 01:27:42 2011/-kk/
-/puffs.h/1.124/Thu Aug 16 09:25:44 2012/-kk/
+/puffs.h/1.125/Fri Oct  3 09:35:49 2014/-kk/
 /puffs_cc.3/1.14/Sat Apr 11 16:48:53 2009/-kk/
 /puffs_cred.3/1.5/Sat Apr 11 15:36:22 2009/-kk/
 /puffs_flush.3/1.8/Fri Feb 20 14:26:56 2009/-kk/
 /puffs_framebuf.3/1.29/Thu Apr  1 09:57:00 2010/-kk/
 /puffs_node.3/1.5/Wed May 13 22:42:31 2009/-kk/
-/puffs_ops.3/1.36/Thu Aug 16 11:28:38 2012/-kk/
+/puffs_ops.3/1.38/Fri Oct  3 09:35:49 2014/-kk/
 /puffs_path.3/1.4/Fri Feb 20 14:26:56 2009/-kk/
 /puffs_priv.h/1.45/Wed Apr 18 00:57:22 2012/-kk/
 /puffsdump.h/1.15/Sun Jul 11 12:29:08 2010/-kk/

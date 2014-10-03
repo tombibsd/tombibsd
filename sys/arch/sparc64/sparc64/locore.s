@@ -4465,6 +4465,7 @@ ENTRY_NOPROFILE(cpu_initialize)	/* for cosmetic reasons - nicer backtrace */
 	
 	set	1f, %o0		! Debug printf
 	call	_C_LABEL(prom_printf)
+	 nop
 	.data
 1:
 	.asciz	"Setting trap base...\r\n"

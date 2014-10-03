@@ -23,7 +23,7 @@ _C_LABEL(__curbrk):
 	.endm
 
 ENTRY(_sbrk)
-	ldAddr	%r6,__curbrk
+	LdAddr	%r6,__curbrk
 	add	%r3,%r3,%r6
 	mr	%r7,%r3				# r7 = new break
 	li	%r0,SYS_break

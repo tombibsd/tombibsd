@@ -37,6 +37,6 @@
 /netbsd32_sysent.c/1.108/Wed Jun 18 08:42:58 2014/-kk/
 /netbsd32_time.c/1.42/Tue Oct  2 01:44:28 2012/-kk/
 /netbsd32_wait.c/1.22/Sat Nov  3 23:22:22 2012/-kk/
-/syscalls.conf/1.12/Thu Oct 24 10:28:57 2013/-kk/
+/syscalls.conf/1.13/Fri Oct  3 09:36:14 2014/-kk/
 /syscalls.master/1.101/Wed Jun 18 08:42:58 2014/-kk/
 D

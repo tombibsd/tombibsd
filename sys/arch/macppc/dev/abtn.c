@@ -192,6 +192,6 @@ abtn_adbcomplete(uint8_t *buffer, uint8_t *data, int adb_command)
 
 	default:
 		printf("%s: unknown button 0x%x\n",
-		       device_xname(sc->sc_dev));
+		       device_xname(sc->sc_dev), cmd);
 	}
 }

@@ -236,6 +236,17 @@ Scope:		Entire tree. (src + xsrc)
 Notes:
 		Commits restricted to Release Engineering.
 
+Branch:		netbsd-7
+Description:	The NetBSD 7 release branch
+Status:		Active
+Start Date:	11 Aug 2014
+End Date:
+Base Tag:	netbsd-7-base
+Maintainer:	7.0 Release Engineering <releng-7@NetBSD.org>
+Scope:		Entire tree. (src + xsrc)
+Notes:
+		Commits restricted to Release Engineering.
+
 ########################################################################
 # Individual developers' branches (Active/Dormant):
 ########################################################################

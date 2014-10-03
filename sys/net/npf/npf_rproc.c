@@ -261,6 +261,22 @@ npf_rprocset_insert(npf_rprocset_t *rpset, npf_rproc_t *rp)
 	LIST_INSERT_HEAD(&rpset->rps_list, rp, rp_entry);
 }
 
+int
+npf_rprocset_export(const npf_rprocset_t *rpset, prop_array_t rprocs)
+{
+	prop_dictionary_t rpdict;
+	const npf_rproc_t *rp;
+
+	LIST_FOREACH(rp, &rpset->rps_list, rp_entry) {
+		rpdict = prop_dictionary_create();
+		prop_dictionary_set_cstring(rpdict, "name", rp->rp_name);
+		prop_dictionary_set_uint32(rpdict, "flags", rp->rp_flags);
+		prop_array_add(rprocs, rpdict);
+		prop_object_release(rpdict);
+	}
+	return 0;
+}
+
 /*
  * npf_rproc_create: construct a new rule procedure, lookup and associate
  * the extension calls with it.

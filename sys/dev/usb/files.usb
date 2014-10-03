@@ -6,7 +6,8 @@
 
 defflag	USBVERBOSE
 defflag	opt_usb.h	USB_FRAG_DMA_WORKAROUND
-defflag	opt_usb.h	EHCI_DEBUG OHCI_DEBUG UHCI_DEBUG UHUB_DEBUG USB_DEBUG
+defflag	opt_usb.h	UHUB_DEBUG USB_DEBUG
+defflag	opt_usb.h	EHCI_DEBUG OHCI_DEBUG UHCI_DEBUG XHCI_DEBUG
 
 defflag	opt_umodem.h	UMODEM_DEBUG
 defflag	opt_uvideo.h	UVIDEO_DEBUG

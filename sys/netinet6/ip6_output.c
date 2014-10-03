@@ -1601,6 +1601,8 @@ else 					\
 			optp = &in6p->in6p_outputopts;
 			error = ip6_pcbopt(optname, optbuf, optbuflen,
 			    optp, kauth_cred_get(), uproto);
+
+			free(optbuf, M_IP6OPT);
 			break;
 			}
 #undef OPTSET

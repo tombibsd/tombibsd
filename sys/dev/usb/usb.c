@@ -203,6 +203,7 @@ usb_attach(device_t parent, device_t self, void *aux)
 	case USBREV_1_0:
 	case USBREV_1_1:
 	case USBREV_2_0:
+	case USBREV_3_0:
 		break;
 	default:
 		aprint_error(", not supported\n");
@@ -284,6 +285,9 @@ usb_doattach(device_t self)
 		break;
 	case USBREV_2_0:
 		speed = USB_SPEED_HIGH;
+		break;
+	case USBREV_3_0:
+		speed = USB_SPEED_SUPER;
 		break;
 	default:
 		panic("usb_doattach");

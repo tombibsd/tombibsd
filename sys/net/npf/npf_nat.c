@@ -199,9 +199,10 @@ npf_nat_newpolicy(prop_dictionary_t natdict, npf_ruleset_t *rset)
 
 	np = kmem_zalloc(sizeof(npf_natpolicy_t), KM_SLEEP);
 
-	/* Translation type and flags. */
+	/* The translation type, flags and policy ID. */
 	prop_dictionary_get_int32(natdict, "type", &np->n_type);
 	prop_dictionary_get_uint32(natdict, "flags", &np->n_flags);
+	prop_dictionary_get_uint64(natdict, "nat-policy", &np->n_id);
 
 	/* Should be exclusively either inbound or outbound NAT. */
 	if (((np->n_type == NPF_NATIN) ^ (np->n_type == NPF_NATOUT)) == 0) {

@@ -853,9 +853,15 @@ int
 xhci_intr(void *v)
 {
 	struct xhci_softc * const sc = v;
+	int ret = 0;
 
-	if (sc == NULL || sc->sc_dying || !device_has_power(sc->sc_dev))
+	if (sc == NULL)
 		return 0;
+
+	mutex_spin_enter(&sc->sc_intr_lock);
+
+	if (sc->sc_dying || !device_has_power(sc->sc_dev))
+		goto done;
 
 	DPRINTF(("%s: %s\n", __func__, device_xname(sc->sc_dev)));
 
@@ -864,10 +870,13 @@ xhci_intr(void *v)
 #ifdef DIAGNOSTIC
 		DPRINTFN(16, ("xhci_intr: ignored interrupt while polling\n"));
 #endif
-		return 0;
+		goto done;
 	}
 
-	return xhci_intr1(sc);
+	ret = xhci_intr1(sc);
+done:
+	mutex_spin_exit(&sc->sc_intr_lock);
+	return ret;
 }
 
 int
@@ -1314,7 +1323,9 @@ xhci_poll(struct usbd_bus *bus)
 
 	DPRINTF(("%s: %s\n", __func__, device_xname(sc->sc_dev)));
 
+	mutex_spin_enter(&sc->sc_intr_lock);
 	xhci_intr1(sc);
+	mutex_spin_exit(&sc->sc_intr_lock);
 
 	return;
 }
@@ -1434,7 +1445,10 @@ xhci_new_device(device_t parent, usbd_bus_handle bus, int depth,
 	dev->def_ep_desc.bEndpointAddress = USB_CONTROL_ENDPOINT;
 	dev->def_ep_desc.bmAttributes = UE_CONTROL;
 	/* XXX */
-	USETW(dev->def_ep_desc.wMaxPacketSize, 64);
+	if (speed == USB_SPEED_LOW)
+		USETW(dev->def_ep_desc.wMaxPacketSize, USB_MAX_IPACKET);
+	else
+		USETW(dev->def_ep_desc.wMaxPacketSize, 64);
 	dev->def_ep_desc.bInterval = 0;
 
 	/* doesn't matter, just don't let it uninitialized */
@@ -1524,10 +1538,17 @@ xhci_new_device(device_t parent, usbd_bus_handle bus, int depth,
 		err = usbd_get_initial_ddesc(dev, dd);
 		if (err)
 			return err;
-		USETW(dev->def_ep_desc.wMaxPacketSize, dd->bMaxPacketSize);
+		/* 4.8.2.1 */
+		if (speed == USB_SPEED_SUPER)
+			USETW(dev->def_ep_desc.wMaxPacketSize,
+			    (1 << dd->bMaxPacketSize));
+		else
+	 		USETW(dev->def_ep_desc.wMaxPacketSize,
+			    dd->bMaxPacketSize);
 		device_printf(sc->sc_dev, "%s bMaxPacketSize %u\n", __func__,
 		    dd->bMaxPacketSize);
-		xhci_update_ep0_mps(sc, xs, dd->bMaxPacketSize);
+		xhci_update_ep0_mps(sc, xs,
+		    UGETW(dev->def_ep_desc.wMaxPacketSize));
 		err = usbd_reload_device_desc(dev);
 		if (err)
 			return err;

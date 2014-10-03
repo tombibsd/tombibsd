@@ -1488,10 +1488,12 @@ Cmd_Exec(const char *cmd, const char **errnum)
     int		status;		/* command exit status */
     Buffer	buf;		/* buffer to store the result */
     char	*cp;
-    int		cc;
+    int		cc;		/* bytes read, or -1 */
+    int		savederr;	/* saved errno */
 
 
     *errnum = NULL;
+    savederr = 0;
 
     if (!shellName)
 	Shell_Init();
@@ -1554,6 +1556,8 @@ Cmd_Exec(const char *cmd, const char **errnum)
 		Buf_AddBytes(&buf, cc, result);
 	}
 	while (cc > 0 || (cc == -1 && errno == EINTR));
+	if (cc == -1)
+	    savederr = errno;
 
 	/*
 	 * Close the input side of the pipe.
@@ -1570,7 +1574,7 @@ Cmd_Exec(const char *cmd, const char **errnum)
 	cc = Buf_Size(&buf);
 	res = Buf_Destroy(&buf, FALSE);
 
-	if (cc == 0)
+	if (savederr != 0)
 	    *errnum = "Couldn't read shell's output for \"%s\"";
 
 	if (WIFSIGNALED(status))

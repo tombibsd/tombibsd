@@ -51,7 +51,7 @@
 
 #elif defined(__arm__)
 
-#include <arm/asm.h>
+#include <arm/ptrace.h>
 
 #endif
 

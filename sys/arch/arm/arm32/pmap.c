@@ -3770,7 +3770,9 @@ pmap_kenter_pa(vaddr_t va, paddr_t pa, vm_prot_t prot, u_int flags)
 			pool_put(&pmap_pv_pool, pv);
 #endif
 	}
+#if defined(PMAP_CACHE_VIPT) && !defined(ARM_MMU_EXTENDED)
 	KASSERT(md == NULL || !pmap_page_locked_p(md));
+#endif
 	if (pmap_initialized) {
 		UVMHIST_LOG(maphist, "  <-- done (ptep %p: %#x -> %#x)",
 		    ptep, opte, npte, 0);
@@ -5518,19 +5520,27 @@ pmap_copy_page_xscale(paddr_t src, paddr_t dst)
 	 * the cache for the appropriate page. Invalidate the TLB
 	 * as required.
 	 */
-	*csrc_pte = L2_S_PROTO | src |
-	    L2_S_PROT(PTE_KERNEL, VM_PROT_READ) |
-	    L2_C | L2_XS_T_TEX(TEX_XSCALE_X);	/* mini-data */
+	const pt_entry_t nsrc_pte = L2_S_PROTO | src
+	    | L2_S_PROT(PTE_KERNEL, VM_PROT_READ)
+	    | L2_C | L2_XS_T_TEX(TEX_XSCALE_X);	/* mini-data */
+	l2pte_set(csrc_pte, nsrc_pte, 0);
 	PTE_SYNC(csrc_pte);
-	*cdst_pte = L2_S_PROTO | dst |
-	    L2_S_PROT(PTE_KERNEL, VM_PROT_WRITE) |
-	    L2_C | L2_XS_T_TEX(TEX_XSCALE_X);	/* mini-data */
+
+	const pt_entry_t ndst_pte = L2_S_PROTO | dst
+	    | L2_S_PROT(PTE_KERNEL, VM_PROT_WRITE)
+	    | L2_C | L2_XS_T_TEX(TEX_XSCALE_X);	/* mini-data */
+	l2pte_set(cdst_pte, ndst_pte, 0);
 	PTE_SYNC(cdst_pte);
+
 	cpu_tlb_flushD_SE(csrcp);
 	cpu_tlb_flushD_SE(cdstp);
 	cpu_cpwait();
 	bcopy_page(csrcp, cdstp);
 	xscale_cache_clean_minidata();
+	l2pte_reset(csrc_pte);
+	l2pte_reset(cdst_pte);
+	PTE_SYNC(csrc_pte);
+	PTE_SYNC(cdst_pte);
 }
 #endif /* ARM_MMU_XSCALE == 1 */
 

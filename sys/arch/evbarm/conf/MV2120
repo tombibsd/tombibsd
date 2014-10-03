@@ -5,7 +5,7 @@
 include 	"arch/evbarm/conf/std.mv2120"
 
 options 	INCLUDE_CONFIG_FILE	# embed config file in kernel binary
-options 	SYMTAB_SPACE=1024000
+makeoptions	COPY_SYMTAB=1
 
 makeoptions	DEBUG="-g"
 
@@ -111,6 +111,7 @@ options 	COMPAT_30	# NetBSD 3.0 compatibility.
 options 	COMPAT_40	# NetBSD 4.0 compatibility.
 options 	COMPAT_50	# NetBSD 5.0 compatibility.
 options 	COMPAT_60	# NetBSD 6.0 compatibility.
+options 	COMPAT_70	# NetBSD 7.0 compatibility.
 #options 	COMPAT_43	# 4.3BSD compatibility.
 #options 	TCP_COMPAT_42	# 4.2BSD TCP/IP bug compat. Not recommended.
 
@@ -344,7 +345,9 @@ options 	PAX_ASLR=0		# PaX Address Space Layout Randomization
 
 pseudo-device drvctl
 
-options DKWEDGE_AUTODISCOVER
-options DKWEDGE_METHOD_GPT
+# Wedge support
+options 	DKWEDGE_AUTODISCOVER	# Automatically add dk(4) instances
+options 	DKWEDGE_METHOD_GPT	# Supports GPT partitions as wedges
+
 options BUFQ_READPRIO
 options BUFQ_PRIOCSCAN

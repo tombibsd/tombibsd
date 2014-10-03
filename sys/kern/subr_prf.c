@@ -161,8 +161,8 @@ static void kprintf_rnd_get(size_t bytes, void *priv)
 			/* This is optional but seems useful. */
 			SHA512_Update(&kprnd_sha, kprnd_accum,
 				      sizeof(kprnd_accum));
+			mutex_exit(&kprintf_mtx);
 		}
-		mutex_exit(&kprintf_mtx);
 	}
 }
 
@@ -1200,7 +1200,6 @@ kprintf(const char *fmt0, int oflags, void *vp, char *sbuf, va_list ap)
 	const char *xdigs;	/* digits for [xX] conversion */
 	char bf[KPRINTF_BUFSIZE]; /* space for %c, %[diouxX] */
 	char *tailp;		/* tail pointer for snprintf */
-	struct timespec ts;
 
 	if (oflags == TOBUFONLY && (vp != NULL))
 		tailp = *(char **)vp;
@@ -1549,9 +1548,12 @@ done:
 		*(char **)vp = sbuf;
 	(*v_flush)();
 
-	(void)nanotime(&ts);
 #ifdef RND_PRINTF
-	SHA512_Update(&kprnd_sha, (char *)&ts, sizeof(ts));
+	if (!cold) {
+		struct timespec ts;
+		(void)nanotime(&ts);
+		SHA512_Update(&kprnd_sha, (char *)&ts, sizeof(ts));
+	}
 #endif
 	return ret;
 }

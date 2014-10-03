@@ -23,6 +23,7 @@ options 	FPU_VFP
 
 # All shipped Samsung SoC's that are not Samsung products have this
 options 	ARM_TRUSTZONE_FIRMWARE
+options		__NO_FIQ
 
 makeoptions	KERNEL_BASE_PHYS="0x80000000"
 makeoptions	KERNEL_BASE_VIRT="0x80000000"

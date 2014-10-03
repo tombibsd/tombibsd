@@ -540,6 +540,11 @@ uhub_explore(usbd_device_handle dev)
 		}
 
 		/* Figure out device speed */
+#if 0
+		if (status & UPS_SUPER_SPEED)
+			speed = USB_SPEED_SUPER;
+		else
+#endif
 		if (status & UPS_HIGH_SPEED)
 			speed = USB_SPEED_HIGH;
 		else if (status & UPS_LOW_SPEED)

@@ -155,7 +155,7 @@ struct vioif_softc {
 
 	uint8_t			sc_mac[ETHER_ADDR_LEN];
 	struct ethercom		sc_ethercom;
-	short			sc_ifflags;
+	short			sc_deferred_init_done;
 
 	/* bus_dmamem */
 	bus_dma_segment_t	sc_hdr_segs[1];
@@ -602,8 +602,6 @@ vioif_attach(device_t parent, device_t self, void *aux)
 
 	if (vioif_alloc_mems(sc) < 0)
 		goto err;
-	if (vsc->sc_nvqs == 3)
-		config_interrupts(self, vioif_deferred_init);
 
 	strlcpy(ifp->if_xname, device_xname(self), IFNAMSIZ);
 	ifp->if_softc = sc;
@@ -669,6 +667,14 @@ vioif_init(struct ifnet *ifp)
 	struct vioif_softc *sc = ifp->if_softc;
 
 	vioif_stop(ifp, 0);
+
+	if (!sc->sc_deferred_init_done) {
+		struct virtio_softc *vsc = sc->sc_virtio;
+
+		sc->sc_deferred_init_done = 1;
+		if (vsc->sc_nvqs == 3)
+			vioif_deferred_init(sc->sc_dev);
+	}
 
 	/* Have to set false before vioif_populate_rx_mbufs */
 	sc->sc_stopping = false;

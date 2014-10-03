@@ -264,7 +264,7 @@ get_ifconfig_info(struct net_desc *devs)
 		if (*ignore != NULL)
 			continue;
 
-		strncpy (devs[i].if_dev, buf, STRSIZE);
+		strlcpy (devs[i].if_dev, buf, STRSIZE);
 		i++;
 	}
 	strcpy(devs[i].if_dev, "\0");
@@ -1176,8 +1176,6 @@ mnt_net_config(void)
 			write_etc_hosts(hosts);
 			(void)fclose(hosts);
 			scripting_fprintf(NULL, "EOF\n");
-
-			fclose(hosts);
 		}
 
 		if (del_rc_conf("defaultroute") == 0)

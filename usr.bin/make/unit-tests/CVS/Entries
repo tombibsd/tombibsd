@@ -1,4 +1,4 @@
-/Makefile/1.38/Thu Oct 24 10:28:59 2013/-kk/
+/Makefile/1.39/Fri Oct  3 09:36:31 2014/-kk/
 /comment/1.3/Mon Jul 11 17:55:19 2005/-kk/
 /cond1/1.5/Sun Mar  6 00:02:14 2011/-kk/
 /doterror/1.1/Thu Apr  8 17:41:29 2010/-kk/
@@ -24,8 +24,9 @@
 /sunshcmd/1.1/Thu Oct 24 10:28:59 2013/-kk/
 /sysv/1.2/Fri Jun  3 21:10:42 2011/-kk/
 /ternary/1.2/Fri Feb 20 09:03:26 2004/-kk/
-/test.exp/1.43/Thu Oct 24 10:28:59 2013/-kk/
+/test.exp/1.44/Fri Oct  3 09:36:31 2014/-kk/
 /unexport-env/1.1/Thu Nov 19 00:30:25 2009/-kk/
 /unexport/1.1/Thu Nov 19 00:30:25 2009/-kk/
 /varcmd/1.3/Wed May 14 14:27:02 2008/-kk/
+/varshell/1.1/Wed Aug 20 08:39:14 2014/-kk/
 D

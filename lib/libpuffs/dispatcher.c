@@ -412,6 +412,14 @@ dispatch(struct puffs_cc *pcc)
 			struct puffs_vnmsg_open *auxt = auxbuf;
 			PUFFS_MAKECRED(pcr, &auxt->pvnr_cred);
 
+			if (pops->puffs_node_open2 != NULL) {
+				error = pops->puffs_node_open2(pu,
+				    opcookie, auxt->pvnr_mode, pcr, 
+				    &auxt->pvnr_oflags);
+
+				break;
+			}
+
 			if (pops->puffs_node_open == NULL) {
 				error = 0;
 				break;

@@ -1,9 +1,9 @@
 /exynos4_loc.c/1.9/Wed Jun 18 08:42:35 2014/-kk/
-/exynos4_reg.h/1.7/Wed Jun 18 08:42:35 2014/-kk/
-/exynos5_loc.c/1.7/Wed Jun 18 08:42:35 2014/-kk/
-/exynos5_reg.h/1.10/Wed Jun 18 08:42:35 2014/-kk/
+/exynos4_reg.h/1.8/Fri Oct  3 09:36:01 2014/-kk/
+/exynos5_loc.c/1.9/Fri Oct  3 09:36:01 2014/-kk/
+/exynos5_reg.h/1.11/Fri Oct  3 09:36:01 2014/-kk/
 /exynos_dma.c/1.1/Tue Apr 29 16:47:10 2014/-kk/
-/exynos_gpio.c/1.6/Tue Jun  3 03:09:18 2014/-kk/
+/exynos_gpio.c/1.7/Fri Oct  3 09:36:01 2014/-kk/
 /exynos_i2c.c/1.1/Wed May 21 12:19:59 2014/-kk/
 /exynos_intr.h/1.1/Sun Apr 13 02:26:26 2014/-kk/
 /exynos_io.c/1.6/Tue Jun  3 02:53:53 2014/-kk/

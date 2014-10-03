@@ -89,7 +89,11 @@ ttm_bo_uvm_fault(struct uvm_faultinfo *ufi, vaddr_t vaddr,
 	unsigned i;
 	vm_prot_t vm_prot;	/* VM_PROT_* */
 	pgprot_t pgprot;	/* VM_PROT_* | PMAP_* cacheability flags */
+	unsigned mmapflags;
 	int ret;
+
+	/* Thanks, uvm, but we don't need this lock.  */
+	mutex_exit(uobj->vmobjlock);
 
 	/* Copy-on-write mappings make no sense for the graphics aperture.  */
 	if (UVM_ET_ISCOPYONWRITE(ufi->entry)) {
@@ -178,13 +182,19 @@ ttm_bo_uvm_fault(struct uvm_faultinfo *ufi, vaddr_t vaddr,
 		/* XXX PGO_ALLPAGES?  */
 		if (pps[i] == PGO_DONTCARE)
 			continue;
-		if (bo->mem.bus.is_iomem)
-			paddr = bus_space_mmap(bdev->memt, u.base,
-			    ((startpage + i) << PAGE_SHIFT), vm_prot, 0);
-		else
+		if (bo->mem.bus.is_iomem) {
+			const paddr_t cookie = bus_space_mmap(bdev->memt,
+			    u.base, ((startpage + i) << PAGE_SHIFT), vm_prot,
+			    0);
+
+			paddr = pmap_phys_address(cookie);
+			mmapflags = pmap_mmap_flags(cookie);
+		} else {
 			paddr = page_to_phys(u.ttm->pages[startpage + i]);
+			mmapflags = 0;
+		}
 		ret = -pmap_enter(ufi->orig_map->pmap, vaddr + i*PAGE_SIZE,
-		    paddr, vm_prot, (PMAP_CANFAIL | pgprot));
+		    paddr, vm_prot, (PMAP_CANFAIL | pgprot | mmapflags));
 		if (ret)
 			goto out3;
 	}
@@ -192,7 +202,8 @@ ttm_bo_uvm_fault(struct uvm_faultinfo *ufi, vaddr_t vaddr,
 out3:	pmap_update(ufi->orig_map->pmap);
 out2:	ttm_mem_io_unlock(man);
 out1:	ttm_bo_unreserve(bo);
-out0:	uvmfault_unlockall(ufi, ufi->entry->aref.ar_amap, uobj);
+out0:	mutex_enter(uobj->vmobjlock);
+	uvmfault_unlockall(ufi, ufi->entry->aref.ar_amap, uobj);
 	/* XXX errno Linux->NetBSD */
 	return -ret;
 }

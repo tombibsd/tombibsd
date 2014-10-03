@@ -594,13 +594,13 @@ npe_load_stateinfo(struct ixpnpe_softc *sc,
 	    IX_NPEDL_OFFSET_STATE_ADDR_CTXT_NUM;
 	
 	/* error-check Context Register No. and Context Number values  */
-	if (!(0 <= reg && reg < IX_NPEDL_CTXT_REG_MAX)) {
+	if (reg >= IX_NPEDL_CTXT_REG_MAX) {
 	    printf("%s: invalid Context Register %u\n", device_xname(sc->sc_dev),
 		reg);
 	    error = EINVAL;
 	    break;
 	}    
-	if (!(0 <= cNum && cNum < IX_NPEDL_CTXT_NUM_MAX)) {
+	if (cNum >= IX_NPEDL_CTXT_NUM_MAX) {
 	    printf("%s: invalid Context Number %u\n", device_xname(sc->sc_dev),
 	        cNum);
 	    error = EINVAL;

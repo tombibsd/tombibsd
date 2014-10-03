@@ -34,6 +34,7 @@
 #ifndef _SYS_STDARG_H_
 #define	_SYS_STDARG_H_
 
+#include <sys/cdefs.h>
 #include <sys/ansi.h>
 #include <sys/featuretest.h>
 

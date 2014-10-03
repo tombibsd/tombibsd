@@ -46,7 +46,8 @@ SUBFILES= \
 	ternary \
 	unexport \
 	unexport-env \
-	varcmd
+	varcmd \
+	varshell
 
 all: ${SUBFILES}
 

@@ -250,6 +250,8 @@ struct puffs_ops {
 	    uint8_t *, off_t, size_t *, const struct puffs_cred *, int, int);
 	int (*puffs_node_reclaim2)(struct puffs_usermount *,
 	    puffs_cookie_t, int);
+	int (*puffs_node_open2)(struct puffs_usermount *,
+	    puffs_cookie_t, int, const struct puffs_cred *, int *);
 
 	void *puffs_ops_spare[28];
 };
@@ -410,7 +412,9 @@ enum {
 	    puffs_cookie_t, uint8_t *, off_t, size_t *,			\
 	    const struct puffs_cred *, int, int);			\
 	int fsname##_node_reclaim2(struct puffs_usermount *,		\
-	    puffs_cookie_t, int);
+	    puffs_cookie_t, int);					\
+	int fsname##_node_open2(struct puffs_usermount *,		\
+	    puffs_cookie_t, int, const struct puffs_cred *, int *);
 
 
 #define PUFFSOP_INIT(ops)						\

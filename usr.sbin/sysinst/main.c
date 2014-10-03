@@ -390,7 +390,10 @@ toplevel(void)
 	 * XXX must be idempotent, since we get run each time the main
 	 *     menu is displayed.
 	 */
-	chdir(getenv("HOME"));
+	char *home = getenv("HOME");
+	if (home != NULL)
+		if (chdir(home) != 0)
+			(void)chdir("/");
 	unwind_mounts();
 
 	/* Display banner message in (english, francais, deutsch..) */

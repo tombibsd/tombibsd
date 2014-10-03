@@ -338,7 +338,7 @@ rl_initialize(void)
 	el_set(e, EL_SIGNAL, rl_catch_signals);
 
 	/* set default mode to "emacs"-style and read setting afterwards */
-	/* so this can be overriden */
+	/* so this can be overridden */
 	el_set(e, EL_EDITOR, "emacs");
 	if (rl_terminal_name != NULL)
 		el_set(e, EL_TERMINAL, rl_terminal_name);

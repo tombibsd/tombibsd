@@ -64,7 +64,7 @@ __cpu_simple_lock_set(__cpu_simple_lock_t *__ptr)
 static __inline void __unused
 __cpu_simple_lock_init(__cpu_simple_lock_t *alp)
 {
-	__atomic_clear(alp, __ATOMIC_ACQUIRE);
+	__atomic_clear(alp, __ATOMIC_RELAXED);
 }
 
 static __inline void __unused

@@ -1563,6 +1563,7 @@ static struct {
 	{ "SUNW,fdtwo",	"fdc" },
 	{ "network",	"hme" }, /* Krups */
 	{ "SUNW,hme",   "hme" },
+	{ "SUNW,qfe",   "hme" },
 };
 
 static const char *

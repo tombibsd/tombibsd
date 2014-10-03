@@ -149,13 +149,12 @@ bool		npf_config_locked_p(void);
 int		npf_config_read_enter(void);
 void		npf_config_read_exit(int);
 
-void		npf_config_load(prop_dictionary_t, npf_ruleset_t *,
-		    npf_tableset_t *, npf_ruleset_t *, npf_rprocset_t *,
-		    npf_conndb_t *, bool);
+void		npf_config_load(npf_ruleset_t *, npf_tableset_t *,
+		    npf_ruleset_t *, npf_rprocset_t *, npf_conndb_t *, bool);
 npf_ruleset_t *	npf_config_ruleset(void);
 npf_ruleset_t *	npf_config_natset(void);
 npf_tableset_t *npf_config_tableset(void);
-prop_dictionary_t npf_config_dict(void);
+npf_rprocset_t *npf_config_rprocs(void);
 bool		npf_default_pass(void);
 
 int		npf_worker_sysinit(void);
@@ -237,7 +236,7 @@ int		npf_tableset_insert(npf_tableset_t *, npf_table_t *);
 npf_table_t *	npf_tableset_getbyname(npf_tableset_t *, const char *);
 npf_table_t *	npf_tableset_getbyid(npf_tableset_t *, u_int);
 void		npf_tableset_reload(npf_tableset_t *, npf_tableset_t *);
-void		npf_tableset_syncdict(const npf_tableset_t *, prop_dictionary_t);
+int		npf_tableset_export(const npf_tableset_t *, prop_array_t);
 
 npf_table_t *	npf_table_create(const char *, u_int, int, void *, size_t);
 void		npf_table_destroy(npf_table_t *);
@@ -292,6 +291,7 @@ npf_rprocset_t *npf_rprocset_create(void);
 void		npf_rprocset_destroy(npf_rprocset_t *);
 npf_rproc_t *	npf_rprocset_lookup(npf_rprocset_t *, const char *);
 void		npf_rprocset_insert(npf_rprocset_t *, npf_rproc_t *);
+int		npf_rprocset_export(const npf_rprocset_t *, prop_array_t);
 
 npf_rproc_t *	npf_rproc_create(prop_dictionary_t);
 void		npf_rproc_acquire(npf_rproc_t *);
@@ -338,6 +338,7 @@ npf_alg_t *	npf_alg_construct(const char *);
 bool		npf_alg_match(npf_cache_t *, npf_nat_t *, int);
 void		npf_alg_exec(npf_cache_t *, npf_nat_t *, bool);
 npf_conn_t *	npf_alg_conn(npf_cache_t *, int);
+prop_array_t	npf_alg_export(void);
 
 /* Debugging routines. */
 const char *	npf_addr_dump(const npf_addr_t *, int);

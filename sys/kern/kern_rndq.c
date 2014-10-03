@@ -802,12 +802,13 @@ rnd_add_data(krndsource_t *rs, const void *const data, uint32_t len,
 	 * itself, random.  Don't estimate entropy based on
 	 * timestamp, just directly add the data.
 	 */
-	mutex_spin_enter(&rndpool_mtx);
 	if (__predict_false(rs == NULL)) {
-		rs = &rnd_source_anonymous;
+		mutex_spin_enter(&rndpool_mtx);
+		rndpool_add_data(&rnd_pool, data, len, entropy);
+		mutex_spin_exit(&rndpool_mtx);
+	} else {
+		rnd_add_data_ts(rs, data, len, entropy, rnd_counter());
 	}
-	rndpool_add_data(&rnd_pool, data, len, entropy);
-	mutex_spin_exit(&rndpool_mtx);
 }
 
 static void
@@ -815,7 +816,8 @@ rnd_add_data_ts(krndsource_t *rs, const void *const data, u_int32_t len,
 		u_int32_t entropy, uint32_t ts)
 {
 	rnd_sample_t *state = NULL;
-	const uint32_t *dint = data;
+	const uint8_t *p = data;
+	uint32_t dint;
 	int todo, done, filled = 0;
 	int sample_count;
 	SIMPLEQ_HEAD(, _rnd_sample_t) tmp_samples =
@@ -827,7 +829,7 @@ rnd_add_data_ts(krndsource_t *rs, const void *const data, u_int32_t len,
 			     RND_FLAG_COLLECT_VALUE))))) {
 		return;
 	}
-	todo = len / sizeof(*dint);
+	todo = len / sizeof(dint);
 	/*
 	 * Let's try to be efficient: if we are warm, and a source
 	 * is adding entropy at a rate of at least 1 bit every 10 seconds,
@@ -873,7 +875,8 @@ rnd_add_data_ts(krndsource_t *rs, const void *const data, u_int32_t len,
 		}
 
 		state->ts[state->cursor] = ts;
-		state->values[state->cursor] = dint[done];
+		(void)memcpy(&dint, &p[done*4], 4);
+		state->values[state->cursor] = dint;
 		state->cursor++;
 
 		if (state->cursor == sample_count) {

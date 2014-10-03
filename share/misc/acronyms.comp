@@ -985,6 +985,7 @@ RA	router advertisement
 RAD	rapid application development
 RAID	redundant array of {independent,inexpensive} disks
 RAM	random access memory
+RAS	reliability, availability and serviceability
 RAS	remote access service
 RAS	restartable atomic sequence
 RAS	row address strobe

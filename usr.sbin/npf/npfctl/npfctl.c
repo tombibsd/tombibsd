@@ -506,7 +506,12 @@ npfctl_load(int fd)
 	if (ncf == NULL) {
 		return errno;
 	}
-	error = npf_config_submit(ncf, fd);
+	errno = error = npf_config_submit(ncf, fd);
+	if (error) {
+		nl_error_t ne;
+		_npf_config_error(ncf, &ne);
+		npfctl_print_error(&ne);
+	}
 	npf_config_destroy(ncf);
 	return error;
 }

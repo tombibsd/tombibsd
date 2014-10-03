@@ -212,8 +212,7 @@ rndpool_add_data(rndpool_t *rp,
 	buf = p;
 
 	for (; len > 3; len -= 4) {
-		val = *((const u_int32_t *)buf);
-
+		(void)memcpy(&val, buf, 4);
 		rndpool_add_one_word(rp, val);
 		buf += 4;
 	}

@@ -86,6 +86,11 @@
 
 #define ESS_1788_NDEVS		15
 
+#define ESS_SPATIALIZER		15
+#define ESS_SPATIALIZER_ENABLE	16
+
+#define ESS_18X9_NDEVS		17
+
 #define ESS_DAC_REC_VOL		15
 #define ESS_MIC_REC_VOL		16
 #define ESS_LINE_REC_VOL	17
@@ -165,6 +170,8 @@ struct ess_softc
 #define ESS_1888	10
 
 	u_int	sc_version;		/* Legacy ES688/ES1688 ID */
+
+	u_int	sc_spatializer;		/* spatializer enable */
 
 	/* game port on es1888 */
 	bus_space_tag_t sc_joy_iot;

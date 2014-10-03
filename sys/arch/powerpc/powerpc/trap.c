@@ -736,7 +736,7 @@ fix_unaligned(struct lwp *l, struct trapframe *tf)
 			struct pcb * const pcb = lwp_getpcb(l);
 			const int reg = EXC_ALI_RST(tf->tf_dsisr);
 			const int a_reg = EXC_ALI_RA(tf->tf_dsisr);
-			double * const fpreg = &pcb->pcb_fpu.fpreg[reg];
+			uint64_t * const fpreg = &pcb->pcb_fpu.fpreg[reg];
 			register_t* a_reg_addr = &tf->tf_fixreg[a_reg];
 
 			/*
@@ -782,7 +782,7 @@ fix_unaligned(struct lwp *l, struct trapframe *tf)
 			struct pcb * const pcb = lwp_getpcb(l);
 			const int reg = EXC_ALI_RST(tf->tf_dsisr);
 			const int a_reg = EXC_ALI_RA(tf->tf_dsisr);
-			double * const fpreg = &pcb->pcb_fpu.fpreg[reg];
+			uint64_t * const fpreg = &pcb->pcb_fpu.fpreg[reg];
 			register_t* a_reg_addr = &tf->tf_fixreg[a_reg];
 
 			/*

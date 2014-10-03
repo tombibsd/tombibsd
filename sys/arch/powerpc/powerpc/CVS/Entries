@@ -47,7 +47,7 @@
 /suword.c/1.5/Sun Dec 11 12:18:46 2005/-kk/
 /sys_machdep.c/1.13/Thu Apr  7 02:04:07 2011/-kk/
 /syscall.c/1.53/Mon Nov 11 15:21:32 2013/-kk/
-/trap.c/1.149/Fri Mar 14 04:28:17 2014/-kk/
+/trap.c/1.150/Fri Oct  3 09:36:10 2014/-kk/
 /trap_subr.S/1.78/Fri Oct  3 09:09:05 2014/-kk/
 /vm_machdep.c/1.98/Sat Oct 20 14:42:15 2012/-kk/
 D

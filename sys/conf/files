@@ -122,7 +122,8 @@ defflag opt_rnd_printf.h	RND_PRINTF
 # compatibility options
 #
 defflag opt_compat_netbsd.h	COMPAT_NETBSD
-defflag	opt_compat_netbsd.h	COMPAT_60: COMPAT_NETBSD
+defflag	opt_compat_netbsd.h	COMPAT_70: COMPAT_NETBSD
+defflag	opt_compat_netbsd.h	COMPAT_60: COMPAT_70, COMPAT_NETBSD
 defflag	opt_compat_netbsd.h	COMPAT_50: COMPAT_60, COMPAT_NETBSD
 defflag	opt_compat_netbsd.h	COMPAT_40: COMPAT_50, COMPAT_NETBSD
 defflag	opt_compat_netbsd.h	COMPAT_30: COMPAT_40, COMPAT_NETBSD
@@ -1354,7 +1355,6 @@ defpseudodev fss:	disk
 defpseudo pty:		tty
 defpseudo rnd
 defpseudo ksyms
-defparam opt_ksyms.h	SYMTAB_SPACE
 defpseudo nullcons
 defpseudo lockstat
 defpseudo bio:		sysmon_envsys

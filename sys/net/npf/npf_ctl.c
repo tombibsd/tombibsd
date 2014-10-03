@@ -84,7 +84,9 @@ npf_mk_table_entries(npf_table_t *t, prop_array_t entries)
 	prop_dictionary_t ent;
 	int error = 0;
 
-	/* Fill all the entries. */
+	if (prop_object_type(entries) != PROP_TYPE_ARRAY) {
+		return EINVAL;
+	}
 	eit = prop_array_iterator(entries);
 	while ((ent = prop_object_iterator_next(eit)) != NULL) {
 		const npf_addr_t *addr;
@@ -148,12 +150,7 @@ npf_mk_tables(npf_tableset_t *tblset, prop_array_t tables,
 		}
 
 		/* Get the entries or binary data. */
-		prop_array_t entries = prop_dictionary_get(tbldict, "entries");
-		if (prop_object_type(entries) != PROP_TYPE_ARRAY) {
-			NPF_ERR_DEBUG(errdict);
-			error = EINVAL;
-			break;
-		}
+		prop_array_t ents = prop_dictionary_get(tbldict, "entries");
 		prop_object_t obj = prop_dictionary_get(tbldict, "data");
 		void *blob = prop_data_data(obj);
 		size_t size = prop_data_size(obj);
@@ -177,11 +174,10 @@ npf_mk_tables(npf_tableset_t *tblset, prop_array_t tables,
 		error = npf_tableset_insert(tblset, t);
 		KASSERT(error == 0);
 
-		if ((error = npf_mk_table_entries(t, entries)) != 0) {
+		if (ents && (error = npf_mk_table_entries(t, ents)) != 0) {
 			NPF_ERR_DEBUG(errdict);
 			break;
 		}
-		prop_dictionary_remove(tbldict, "entries");
 	}
 	prop_object_iterator_release(it);
 	/*
@@ -547,6 +543,7 @@ npfctl_load(u_long cmd, void *data)
 	/* NAT policies. */
 	natlist = prop_dictionary_get(npf_dict, "nat");
 	if ((nitems = prop_array_count(natlist)) > NPF_MAX_RULES) {
+		error = E2BIG;
 		goto fail;
 	}
 
@@ -555,11 +552,11 @@ npfctl_load(u_long cmd, void *data)
 	if (error) {
 		goto fail;
 	}
-	prop_dictionary_remove(npf_dict, "nat");
 
 	/* Tables. */
 	tables = prop_dictionary_get(npf_dict, "tables");
 	if ((nitems = prop_array_count(tables)) > NPF_MAX_TABLES) {
+		error = E2BIG;
 		goto fail;
 	}
 	tblset = npf_tableset_create(nitems);
@@ -571,6 +568,7 @@ npfctl_load(u_long cmd, void *data)
 	/* Rule procedures. */
 	rprocs = prop_dictionary_get(npf_dict, "rprocs");
 	if ((nitems = prop_array_count(rprocs)) > NPF_MAX_RPROCS) {
+		error = E2BIG;
 		goto fail;
 	}
 	rpset = npf_rprocset_create();
@@ -582,6 +580,7 @@ npfctl_load(u_long cmd, void *data)
 	/* Rules. */
 	rules = prop_dictionary_get(npf_dict, "rules");
 	if ((nitems = prop_array_count(rules)) > NPF_MAX_RULES) {
+		error = E2BIG;
 		goto fail;
 	}
 
@@ -597,7 +596,6 @@ npfctl_load(u_long cmd, void *data)
 		if (error) {
 			goto fail;
 		}
-		prop_dictionary_remove(npf_dict, "conn-list");
 	}
 
 	flush = false;
@@ -606,7 +604,7 @@ npfctl_load(u_long cmd, void *data)
 	/*
 	 * Finally - perform the load.
 	 */
-	npf_config_load(npf_dict, rlset, tblset, nset, rpset, conndb, flush);
+	npf_config_load(rlset, tblset, nset, rpset, conndb, flush);
 
 	/* Done.  Since data is consumed now, we shall not destroy it. */
 	tblset = NULL;
@@ -630,9 +628,7 @@ fail:
 	if (tblset) {
 		npf_tableset_destroy(tblset);
 	}
-	if (error) {
-		prop_object_release(npf_dict);
-	}
+	prop_object_release(npf_dict);
 
 	/* Error report. */
 #ifndef _NPF_TESTING
@@ -653,12 +649,15 @@ int
 npfctl_save(u_long cmd, void *data)
 {
 	struct plistref *pref = data;
-	prop_array_t conlist, natlist;
-	prop_dictionary_t npf_dict;
+	prop_array_t rulelist, natlist, tables, rprocs, conlist;
+	prop_dictionary_t npf_dict = NULL;
 	int error;
 
-	conlist = prop_array_create();
+	rulelist = prop_array_create();
 	natlist = prop_array_create();
+	tables = prop_array_create();
+	rprocs = prop_array_create();
+	conlist = prop_array_create();
 
 	/*
 	 * Serialise the connections and NAT policies.
@@ -668,21 +667,45 @@ npfctl_save(u_long cmd, void *data)
 	if (error) {
 		goto out;
 	}
+	error = npf_ruleset_export(npf_config_ruleset(), rulelist);
+	if (error) {
+		goto out;
+	}
 	error = npf_ruleset_export(npf_config_natset(), natlist);
 	if (error) {
 		goto out;
 	}
-	npf_dict = npf_config_dict();
+	error = npf_tableset_export(npf_config_tableset(), tables);
+	if (error) {
+		goto out;
+	}
+	error = npf_rprocset_export(npf_config_rprocs(), rprocs);
+	if (error) {
+		goto out;
+	}
+	prop_array_t alglist = npf_alg_export();
+
+	npf_dict = prop_dictionary_create();
+	prop_dictionary_set_uint32(npf_dict, "version", NPF_VERSION);
+	prop_dictionary_set_and_rel(npf_dict, "algs", alglist);
+	prop_dictionary_set_and_rel(npf_dict, "rules", rulelist);
 	prop_dictionary_set_and_rel(npf_dict, "nat", natlist);
+	prop_dictionary_set_and_rel(npf_dict, "tables", tables);
+	prop_dictionary_set_and_rel(npf_dict, "rprocs", rprocs);
 	prop_dictionary_set_and_rel(npf_dict, "conn-list", conlist);
 	prop_dictionary_set_bool(npf_dict, "active", npf_pfil_registered_p());
 	error = prop_dictionary_copyout_ioctl(pref, cmd, npf_dict);
 out:
 	npf_config_exit();
 
-	if (error) {
-		prop_object_release(conlist);
+	if (!npf_dict) {
+		prop_object_release(rulelist);
 		prop_object_release(natlist);
+		prop_object_release(tables);
+		prop_object_release(rprocs);
+		prop_object_release(conlist);
+	} else {
+		prop_object_release(npf_dict);
 	}
 	return error;
 }

@@ -33,13 +33,13 @@
 __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <sys/types.h>
-#include <sys/bitops.h>
 #include <sys/param.h>
+#include <sys/bitops.h>
+#include <sys/cprng.h>
 #include <sys/cpu.h>
 #include <sys/intr.h>
 #include <sys/percpu.h>
-#include <sys/cprng.h>
-
+#include <sys/rnd.h>
 
 /* ChaCha core */
 
@@ -203,10 +203,11 @@ struct cprng_fast {
 
 __CTASSERT(sizeof ((struct cprng_fast *)0)->key == CPRNG_FAST_SEED_BYTES);
 
+static void	cprng_fast_init_cpu(void *, void *, struct cpu_info *);
 static void	cprng_fast_schedule_reseed(struct cprng_fast *);
 static void	cprng_fast_intr(void *);
 
-static inline void	cprng_fast_seed(struct cprng_fast *, const void *);
+static void	cprng_fast_seed(struct cprng_fast *, const void *);
 static void	cprng_fast_buf(struct cprng_fast *, void *, unsigned);
 
 static void	cprng_fast_buf_short(void *, size_t);
@@ -215,38 +216,42 @@ static void	cprng_fast_buf_long(void *, size_t);
 static percpu_t	*cprng_fast_percpu	__read_mostly;
 static void	*cprng_fast_softint	__read_mostly;
 
-extern int	rnd_initial_entropy;
-
 void
 cprng_fast_init(void)
 {
-	struct cpu_info *ci;
-	CPU_INFO_ITERATOR cii;
 
 	crypto_core_selftest();
 	cprng_fast_percpu = percpu_alloc(sizeof(struct cprng_fast));
-	for (CPU_INFO_FOREACH(cii, ci)) {
-		struct cprng_fast *cprng;
-		uint8_t seed[CPRNG_FAST_SEED_BYTES];
-
-		percpu_traverse_enter();
-		cprng = percpu_getptr_remote(cprng_fast_percpu, ci);
-		cprng_strong(kern_cprng, seed, sizeof(seed), FASYNC);
-		/* Can't do anything about it if not full entropy.  */
-		cprng_fast_seed(cprng, seed);
-		explicit_memset(seed, 0, sizeof(seed));
-		percpu_traverse_exit();
-	}
+	percpu_foreach(cprng_fast_percpu, &cprng_fast_init_cpu, NULL);
 	cprng_fast_softint = softint_establish(SOFTINT_SERIAL|SOFTINT_MPSAFE,
 	    &cprng_fast_intr, NULL);
 }
 
+static void
+cprng_fast_init_cpu(void *p, void *arg __unused, struct cpu_info *ci __unused)
+{
+	struct cprng_fast *const cprng = p;
+	uint8_t seed[CPRNG_FAST_SEED_BYTES];
+
+	cprng_strong(kern_cprng, seed, sizeof seed, FASYNC);
+	cprng_fast_seed(cprng, seed);
+	cprng->have_initial = rnd_initial_entropy;
+	(void)explicit_memset(seed, 0, sizeof seed);
+}
+
 static inline int
 cprng_fast_get(struct cprng_fast **cprngp)
 {
+	struct cprng_fast *cprng;
+	int s;
 
-	*cprngp = percpu_getref(cprng_fast_percpu);
-	return splvm();
+	*cprngp = cprng = percpu_getref(cprng_fast_percpu);
+	s = splvm();
+
+	if (__predict_false(!cprng->have_initial))
+		cprng_fast_schedule_reseed(cprng);
+
+	return s;
 }
 
 static inline void
@@ -258,8 +263,8 @@ cprng_fast_put(struct cprng_fast *cprng, int s)
 	splx(s);
 	percpu_putref(cprng_fast_percpu);
 }
-
-static inline void
+
+static void
 cprng_fast_schedule_reseed(struct cprng_fast *cprng __unused)
 {
 
@@ -271,11 +276,15 @@ cprng_fast_intr(void *cookie __unused)
 {
 	struct cprng_fast *cprng;
 	uint8_t seed[CPRNG_FAST_SEED_BYTES];
+	int s;
 
 	cprng_strong(kern_cprng, seed, sizeof(seed), FASYNC);
 
 	cprng = percpu_getref(cprng_fast_percpu);
+	s = splvm();
 	cprng_fast_seed(cprng, seed);
+	cprng->have_initial = rnd_initial_entropy;
+	splx(s);
 	percpu_putref(cprng_fast_percpu);
 
 	explicit_memset(seed, 0, sizeof(seed));
@@ -293,19 +302,13 @@ cprng_fast_intr(void *cookie __unused)
  */
 #define	CPRNG_FAST_BUFIDX	(crypto_core_OUTPUTWORDS - 1)
 
-static inline void
+static void
 cprng_fast_seed(struct cprng_fast *cprng, const void *seed)
 {
 
 	(void)memset(cprng->buffer, 0, sizeof cprng->buffer);
 	(void)memcpy(cprng->key, seed, sizeof cprng->key);
 	(void)memset(cprng->nonce, 0, sizeof cprng->nonce);
-
-	if (__predict_true(rnd_initial_entropy)) {
-		cprng->have_initial = true;
-	} else {
-		cprng->have_initial = false;
-	}
 }
 
 static inline uint32_t
@@ -322,12 +325,6 @@ cprng_fast_word(struct cprng_fast *cprng)
 		if (__predict_false(++cprng->nonce[0] == 0)) {
 			cprng->nonce[1]++;
 			cprng_fast_schedule_reseed(cprng);
-		} else {
-			if (__predict_false(false == cprng->have_initial)) {
-				if (rnd_initial_entropy) {
-					cprng_fast_schedule_reseed(cprng);
-				}
-			}
 		}
 		v = cprng->buffer[CPRNG_FAST_BUFIDX];
 		cprng->buffer[CPRNG_FAST_BUFIDX] = CPRNG_FAST_BUFIDX;
@@ -341,11 +338,17 @@ cprng_fast_buf(struct cprng_fast *cprng, void *buf, unsigned n)
 {
 	uint8_t *p = buf;
 	uint32_t v;
-	unsigned r;
+	unsigned w, r;
 
-	while (n) {
-		r = MIN(n, 4);
-		n -= r;
+	w = n / sizeof(uint32_t);
+	while (w--) {
+		v = cprng_fast_word(cprng);
+		(void)memcpy(p, &v, 4);
+		p += 4;
+	}
+
+	r = n % sizeof(uint32_t);
+	if (r) {
 		v = cprng_fast_word(cprng);
 		while (r--) {
 			*p++ = (v & 0xff);

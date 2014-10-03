@@ -31,6 +31,7 @@ __RCSID("$NetBSD$");
 
 #include <sys/types.h>
 
+#include <errno.h>
 #include <stdint.h>
 #include <unistd.h>
 

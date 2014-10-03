@@ -501,8 +501,6 @@ main(void)
 	kern_cprng = cprng_strong_create("kernel", IPL_VM,
 					 CPRNG_INIT_ANY|CPRNG_REKEY_ANY);
 
-	cprng_fast_init();
-					 
 	/* Initialize interfaces. */
 	ifinit1();
 
@@ -513,6 +511,9 @@ main(void)
 
 	/* Configure the system hardware.  This will enable interrupts. */
 	configure();
+
+	/* Once all CPUs are detected, initialize the per-CPU cprng_fast.  */
+	cprng_fast_init();
 
 	ssp_init();
 

@@ -237,11 +237,11 @@ npf_config_import(const char *path)
 	nl_config_t *ncf;
 
 	npf_dict = prop_dictionary_internalize_from_file(path);
-	if (npf_dict) {
+	if (!npf_dict) {
 		return NULL;
 	}
 	ncf = _npf_config_consdict(npf_dict);
-	if (ncf == NULL) {
+	if (!ncf) {
 		prop_object_release(npf_dict);
 		return NULL;
 	}

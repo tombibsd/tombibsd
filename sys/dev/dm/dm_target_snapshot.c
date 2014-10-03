@@ -221,8 +221,7 @@ dm_target_snapshot_init(dm_dev_t * dmv, void **target_config, char *params)
 	if ((dmp_snap = dm_pdev_insert(argv[0])) == NULL)
 		return ENOENT;
 
-	if ((tsc = kmem_alloc(sizeof(dm_target_snapshot_config_t), KM_NOSLEEP))
-	    == NULL)
+	if ((tsc = kmem_alloc(sizeof(*tsc), KM_NOSLEEP)) == NULL)
 		return 1;
 
 	tsc->tsc_persistent_dev = 0;
@@ -232,8 +231,10 @@ dm_target_snapshot_init(dm_dev_t * dmv, void **target_config, char *params)
 		tsc->tsc_persistent_dev = 1;
 
 		/* Insert cow device to global pdev list */
-		if ((dmp_cow = dm_pdev_insert(argv[1])) == NULL)
+		if ((dmp_cow = dm_pdev_insert(argv[1])) == NULL) {
+			kmem_free(tsc, sizeof(*tsc));
 			return ENOENT;
+		}
 	}
 	tsc->tsc_chunk_size = atoi(argv[3]);
 

@@ -151,6 +151,7 @@ cprng_strong_create(const char *name, int ipl, int flags)
 
 	/* Get some initial entropy.  Record whether it is full entropy.  */
 	uint8_t seed[NIST_BLOCK_KEYLEN_BYTES];
+	mutex_enter(&cprng->cs_lock);
 	cprng->cs_ready = rndsink_request(cprng->cs_rndsink, seed,
 	    sizeof(seed));
 	if (nist_ctr_drbg_instantiate(&cprng->cs_drbg, seed, sizeof(seed),
@@ -168,6 +169,7 @@ cprng_strong_create(const char *name, int ipl, int flags)
 	if (!cprng->cs_ready && !ISSET(flags, CPRNG_INIT_ANY))
 		printf("cprng %s: creating with partial entropy\n",
 		    cprng->cs_name);
+	mutex_exit(&cprng->cs_lock);
 
 	return cprng;
 }
