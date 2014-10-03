@@ -314,6 +314,4 @@ osf1_mount_nfs(struct lwp *l, const struct osf1_sys_mount_args *uap)
 
 	return do_sys_mount(l, vfs_getopsbyname("nfs"), NULL, SCARG(uap, path),
 	    SCARG(uap, flags), &bsd_na, UIO_SYSSPACE, sizeof bsd_na, &dummy);
-
-	return 0;
 }

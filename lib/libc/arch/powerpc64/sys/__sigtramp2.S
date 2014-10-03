@@ -46,3 +46,4 @@ ENTRY_NOPROFILE(__sigtramp_siginfo_2)
 	mr	%r3,%r30		/* restore ucontext pointer */
 	_DOSYSCALL(setcontext)		/* restore machine state */
 	_DOSYSCALL(exit)		/* or exit with errno if failed */
+END(__sigtramp_siginfo_2)

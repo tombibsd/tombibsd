@@ -134,7 +134,13 @@ iommu_init(char *name, struct iommu_state *is, int tsbsize, uint32_t iovabase)
 	 * be hard-wired, so we read the start and size from the PROM and
 	 * just use those values.
 	 */
-	is->is_cr = IOMMUCR_EN;
+	if (strncmp(name, "pyro", 4) == 0) {
+		is->is_cr = IOMMUREG_READ(is, iommu_cr);
+		is->is_cr &= ~IOMMUCR_FIRE_BE;
+		is->is_cr |= (IOMMUCR_FIRE_SE | IOMMUCR_FIRE_CM_EN |
+		    IOMMUCR_FIRE_TE);
+	} else 
+		is->is_cr = IOMMUCR_EN;
 	is->is_tsbsize = tsbsize;
 	if (iovabase == -1) {
 		is->is_dvmabase = IOTSB_VSTART(is->is_tsbsize);

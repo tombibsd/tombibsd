@@ -43,6 +43,9 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <subdev/fb.h>
 #include <subdev/timer.h>
 
+#include <asm/div64.h>	/* XXX */
+#include <linux/ktime.h>	/* XXX */
+
 #include "nv50.h"
 
 /*******************************************************************************

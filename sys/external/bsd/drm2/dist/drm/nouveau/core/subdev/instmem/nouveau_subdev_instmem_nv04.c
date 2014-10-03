@@ -121,8 +121,13 @@ nv04_instmem_dtor(struct nouveau_object *object)
 	nouveau_ramht_ref(NULL, &priv->ramht);
 	nouveau_gpuobj_ref(NULL, &priv->vbios);
 	nouveau_mm_fini(&priv->heap);
+#ifdef __NetBSD__
+	if (priv->iomemsz)
+		bus_space_unmap(priv->iomemt, priv->iomemh, priv->iomemsz);
+#else
 	if (priv->iomem)
 		iounmap(priv->iomem);
+#endif
 	nouveau_instmem_destroy(&priv->base);
 }
 

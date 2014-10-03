@@ -735,7 +735,6 @@ s3c24x0_lcd_mmap(void *v, void *vs, off_t offset, int prot)
 	    offset, prot, BUS_DMA_WAITOK|BUS_DMA_COHERENT);
 	/*	printf("s3c24x0_lcd_mmap: ret: %lx\n", ret);*/
 	return ret;
-	return -1;
 }
 
 

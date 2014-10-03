@@ -52,7 +52,7 @@ RUMP_COMPONENT(RUMP_COMPONENT_NET)
 {
 	extern struct domain mplsdomain;
 
-	DOMAINADD(mplsdomain);
+	domain_attach(&mplsdomain);
 
 	rump_netisr_register(NETISR_MPLS, mplsintr);
 }

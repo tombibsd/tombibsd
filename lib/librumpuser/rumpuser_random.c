@@ -1,3 +1,5 @@
+/*	$NetBSD$	*/
+
 /*
  * Copyright (c) 2014 Justin Cormack.  All Rights Reserved.
  *

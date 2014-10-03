@@ -95,6 +95,7 @@
 #define WM_F_HAS_MANAGE		0x00100000
 #define WM_F_WOL		0x00200000
 #define WM_F_EEE		0x00400000 /* Energy Efficiency Ethernet */
+#define WM_F_ATTACHED		0x00800000 /* attach() fininsed successfully */
 
 typedef enum {
 	WM_T_unknown		= 0,

@@ -149,19 +149,22 @@ ${LIB1ASMFUNCS}: ${.CURDIR}/Makefile
 	printf '#define L${.PREFIX}\n#include <${G_LIB1ASMSRC}>\n' >${.TARGET}
 .endif
 
-${LIB2_EH:.c=.o}:
+# Use dynamic sources to arrange for the C file to be the first dependency
+# so ${.IMPSRC} will work.
+
+${LIB2_EH:.c=.o}: $(.PREFIX).c
 	${_MKTARGET_COMPILE}
 	${COMPILE.c} -fexceptions ${COPTS.${.IMPSRC:T}} -o ${.TARGET} ${.IMPSRC}
 
-${LIB2_EH:.c=.pico}:
+${LIB2_EH:.c=.pico}: $(.PREFIX).c
 	${_MKTARGET_COMPILE}
 	${COMPILE.c} ${CPICFLAGS} -fexceptions ${COPTS.${.IMPSRC:T}} -o ${.TARGET} ${.IMPSRC}
 
-${G_LIB2_DIVMOD_FUNCS:=.o}:
+${G_LIB2_DIVMOD_FUNCS:=.o}: $(.PREFIX).c
 	${_MKTARGET_COMPILE}
 	${COMPILE.c} -fexceptions -fnon-call-exceptions ${COPTS.${.IMPSRC:T}} -o ${.TARGET} ${.IMPSRC}
 
-${G_LIB2_DIVMOD_FUNCS:=.pico}:
+${G_LIB2_DIVMOD_FUNCS:=.pico}: $(.PREFIX).c
 	${_MKTARGET_COMPILE}
 	${COMPILE.c} ${CPICFLAGS} -fexceptions -fnon-call-exceptions ${COPTS.${.IMPSRC:T}} -o ${.TARGET} ${.IMPSRC}
 

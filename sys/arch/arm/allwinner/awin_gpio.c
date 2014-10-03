@@ -30,6 +30,8 @@
 #include "locators.h"
 #include "gpio.h"
 
+#include "opt_arm_debug.h"
+
 #include <sys/cdefs.h>
 
 __KERNEL_RCSID(1, "$NetBSD$");

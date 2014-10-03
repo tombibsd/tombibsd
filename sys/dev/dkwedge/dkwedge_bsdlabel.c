@@ -150,7 +150,7 @@ bsdlabel_fstype_to_str(uint8_t fstype)
 	 */
 	switch (fstype) {
 #define FSTYPE_TO_STR_CASE(tag, number, name, fsck, mount) \
-	case __CONCAT(FS_,tag):	str = name;			break;
+	case __CONCAT(FS_,tag):	str = __CONCAT(DKW_PTYPE_,tag);			break;
 	FSTYPE_DEFN(FSTYPE_TO_STR_CASE)
 #undef FSTYPE_TO_STR_CASE
 	default:		str = NULL;			break;

@@ -82,7 +82,7 @@ static struct domain domain_dummy;
 __link_set_add_rodata(domains,domain_dummy);
 
 void
-domaininit(bool addroute)
+domaininit(bool attach)
 {
 	__link_set_decl(domains, struct domain);
 	struct domain * const * dpp;
@@ -94,16 +94,18 @@ domaininit(bool addroute)
 	 * Add all of the domains.  Make sure the PF_ROUTE
 	 * domain is added last.
 	 */
-	__link_set_foreach(dpp, domains) {
-		if (*dpp == &domain_dummy)
-			continue;
-		if ((*dpp)->dom_family == PF_ROUTE)
-			rt_domain = *dpp;
-		else
-			domain_attach(*dpp);
+	if (attach) {
+		__link_set_foreach(dpp, domains) {
+			if (*dpp == &domain_dummy)
+				continue;
+			if ((*dpp)->dom_family == PF_ROUTE)
+				rt_domain = *dpp;
+			else
+				domain_attach(*dpp);
+		}
+		if (rt_domain)
+			domain_attach(rt_domain);
 	}
-	if (rt_domain && addroute)
-		domain_attach(rt_domain);
 
 	callout_init(&pffasttimo_ch, CALLOUT_MPSAFE);
 	callout_init(&pfslowtimo_ch, CALLOUT_MPSAFE);

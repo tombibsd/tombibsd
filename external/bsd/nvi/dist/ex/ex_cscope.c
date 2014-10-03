@@ -542,6 +542,7 @@ cscope_find(SCR *sp, EXCMD *cmdp, const CHAR_T *pattern)
 	 */
 	if (TAILQ_EMPTY(&exp->tq)) {
 		TAILQ_INSERT_HEAD(&exp->tq, rtqp, q);
+		F_SET(rtqp, TAG_IS_LINKED);
 	} else {
 		free(rtqp);
 		rtqp = TAILQ_FIRST(&exp->tq);
@@ -549,6 +550,7 @@ cscope_find(SCR *sp, EXCMD *cmdp, const CHAR_T *pattern)
 
 	/* Link the current TAGQ structure into place. */
 	TAILQ_INSERT_HEAD(&exp->tq, tqp, q);
+	F_SET(tqp, TAG_IS_LINKED);
 
 	(void)cscope_search(sp, tqp, tqp->current);
 

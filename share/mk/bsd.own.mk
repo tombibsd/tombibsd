@@ -64,8 +64,7 @@ MKGCC?=		no
 # Platforms still using GCC 4.5
 .if \
       ${MACHINE_CPU} == "m68k" || \
-      ${MACHINE_ARCH} == "powerpc" || \
-      ${MACHINE_ARCH} == "powerpc64"
+      ${MACHINE_ARCH} == "powerpc"
 HAVE_GCC?=    45
 
 .elif ${MACHINE} == "playstation2" || ${MACHINE_CPU} == "aarch64"

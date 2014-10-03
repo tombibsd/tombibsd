@@ -31,6 +31,8 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <subdev/fb.h>
 
+#include <linux/err.h>		/* XXX */
+
 #include "nouveau_drm.h"
 #include "nouveau_dma.h"
 #include "nouveau_fence.h"
@@ -45,8 +47,10 @@ nouveau_gem_object_del(struct drm_gem_object *gem)
 	struct nouveau_bo *nvbo = nouveau_gem_object(gem);
 	struct ttm_buffer_object *bo = &nvbo->bo;
 
+#ifndef __NetBSD__		/* XXX drm prime */
 	if (gem->import_attach)
 		drm_prime_gem_destroy(gem, nvbo->bo.sg);
+#endif
 
 	drm_gem_object_release(gem);
 
@@ -458,6 +462,10 @@ validate_sync(struct nouveau_channel *chan, struct nouveau_bo *nvbo)
 
 	return ret;
 }
+
+#ifdef __NetBSD__		/* XXX yargleblargh */
+#  define	__force
+#endif
 
 static int
 validate_list(struct nouveau_channel *chan, struct nouveau_cli *cli,

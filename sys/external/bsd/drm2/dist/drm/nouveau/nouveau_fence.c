@@ -31,6 +31,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <drm/drmP.h>
 
+#include <asm/param.h>
 #include <linux/ktime.h>
 #include <linux/hrtimer.h>
 
@@ -210,12 +211,12 @@ nouveau_fence_wait_uevent(struct nouveau_fence *fence, bool intr)
 #ifdef __NetBSD__
 			spin_lock(&priv->waitlock);
 			if (intr) {
-				DRM_SPIN_TIMED_WAIT_UNITL(ret,
+				DRM_SPIN_TIMED_WAIT_UNTIL(ret,
 				    &priv->waitqueue, &priv->waitlock,
 				    timeout,
 				    nouveau_fence_done(fence));
 			} else {
-				DRM_SPIN_TIMED_WAIT_NOINTR_UNITL(ret,
+				DRM_SPIN_TIMED_WAIT_NOINTR_UNTIL(ret,
 				    &priv->waitqueue, &priv->waitlock,
 				    timeout,
 				    nouveau_fence_done(fence));
@@ -275,8 +276,10 @@ nouveau_fence_wait(struct nouveau_fence *fence, bool lazy, bool intr)
 {
 	struct nouveau_channel *chan = fence->channel;
 	struct nouveau_fence_priv *priv = chan ? chan->drm->fence : NULL;
+#ifndef __NetBSD__
 	unsigned long sleep_time = NSEC_PER_MSEC / 1000;
 	ktime_t t;
+#endif
 	int ret = 0;
 
 	while (priv && priv->uevent && lazy && !nouveau_fence_done(fence)) {

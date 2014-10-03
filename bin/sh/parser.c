@@ -839,15 +839,20 @@ xxreadtoken(void)
 			pungetc();
 			continue;
 		case '\\':
-			if (pgetc() == '\n') {
+			switch (pgetc()) {
+			case '\n':
 				startlinno = ++plinno;
 				if (doprompt)
 					setprompt(2);
 				else
 					setprompt(0);
 				continue;
+			case PEOF:
+				RETURN(TEOF);
+			default:
+				pungetc();
+				break;
 			}
-			pungetc();
 			goto breakloop;
 		case '\n':
 			plinno++;

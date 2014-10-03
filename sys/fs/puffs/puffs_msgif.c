@@ -856,7 +856,7 @@ puffsop_expire(struct puffs_mount *pmp, puffs_cookie_t cookie)
 	 * vrele should cause it to be reclaimed.
 	 * Otherwise, we have nothing to do.
 	 */
-	if (puffs_cookie2vnode(pmp, cookie, 0, 0, &vp) == 0) {
+	if (puffs_cookie2vnode(pmp, cookie, &vp) == 0) {
 		VPTOPP(vp)->pn_stat &= ~PNODE_SOPEXP;
 		vrele(vp); 
 	}
@@ -889,7 +889,7 @@ puffsop_flush(struct puffs_mount *pmp, struct puffs_flush *pf)
 	 * reason we need to eventually bump locking to userspace, as we
 	 * will need to lock the node if we wish to do flushes.
 	 */
-	rv = puffs_cookie2vnode(pmp, pf->pf_cookie, 0, 0, &vp);
+	rv = puffs_cookie2vnode(pmp, pf->pf_cookie, &vp);
 	if (rv) {
 		if (rv == PUFFS_NOSUCHCOOKIE)
 			rv = ENOENT;

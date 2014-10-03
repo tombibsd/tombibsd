@@ -54,6 +54,8 @@ install.sub: ${DISTRIBDIR}/miniroot/install.sub
 
 CLEANFILES+= install.sub
 
+fstab: .PHONY
+
 .include "${DISTRIBDIR}/common/Makefile.crunch"
 .include "${DISTRIBDIR}/common/Makefile.makedev"
 .include "${DISTRIBDIR}/common/Makefile.image"

@@ -1312,7 +1312,7 @@ pmap_alloc_l1(pmap_t pm)
 	KASSERTMSG(kernel_map != NULL, "pm %p", pm);
 	vaddr_t va = uvm_km_alloc(kernel_map, PAGE_SIZE, 0,
 	    UVM_KMF_WIRED|UVM_KMF_ZERO);
-	KASSERT(!va);
+	KASSERT(va);
 	pmap_extract(pmap_kernel(), va, &pm->pm_l1_pa);
 #endif
 	pm->pm_l1 = (pd_entry_t *)va;

@@ -1,3 +1,5 @@
+/*	$NetBSD$	*/
+
 /*-
  * Copyright (c) 2014 Antti Kantee.  All Rights Reserved.
  *
@@ -48,10 +50,10 @@ rumpuser_bio(int fd, int op, void *data, size_t dlen, int64_t doff,
 
 	if (op & RUMPUSER_BIO_READ) {
 		if ((rv = pread(fd, data, dlen, doff)) == -1)
-			error = errno;
+			error = rumpuser__errtrans(errno);
 	} else {
 		if ((rv = pwrite(fd, data, dlen, doff)) == -1)
-			error = errno;
+			error = rumpuser__errtrans(errno);
 		if (error == 0 && (op & RUMPUSER_BIO_SYNC)) {
 #ifdef __NetBSD__
 			fsync_range(fd, FDATASYNC, doff, dlen);

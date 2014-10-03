@@ -75,13 +75,10 @@ rump_consdev_init(void)
 	struct file *fp;
 	int fd, error;
 
-	/*
-	 * We want to open the descriptors for the implicit proc
-	 * so that they get inherited by default to all processes.
-	 */
-	KASSERT(curproc->p_pid == 1);
 	KASSERT(fd_getfile(0) == NULL);
-
+	KASSERT(fd_getfile(1) == NULL);
+	KASSERT(fd_getfile(2) == NULL);
+	
 	/* then, map a file descriptor to the device */
 	if ((error = fd_allocfile(&fp, &fd)) != 0)
 		panic("cons fd_allocfile failed: %d", error);

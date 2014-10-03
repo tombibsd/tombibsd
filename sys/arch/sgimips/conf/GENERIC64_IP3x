@@ -31,11 +31,11 @@ makeoptions	TEXTADDR="0xffffffff80069000"	# entry point
 #ident		"GENERIC64_IP3x-$Revision$"
 
 # Compatibility options
-#options 	COMPAT_15	# NetBSD 1.5
-#options 	COMPAT_16	# NetBSD 1.6
-#options 	COMPAT_20	# NetBSD 2.0
-#options 	COMPAT_30	# NetBSD 3.0
-#options 	COMPAT_40	# NetBSD 4.0 compatibility.
+#options 	COMPAT_15	# NetBSD 1.5,
+#options 	COMPAT_16	# NetBSD 1.6,
+#options 	COMPAT_20	# NetBSD 2.0,
+#options 	COMPAT_30	# NetBSD 3.0, and
+#options 	COMPAT_40	# NetBSD 4.0 binary compatibility.
 #options 	TCP_COMPAT_42	# 4.2BSD TCP/IP bug compat. Not recommended.
 
 #options 	COMPAT_LINUX	# binary compatibility with Linux

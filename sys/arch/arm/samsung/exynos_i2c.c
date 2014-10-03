@@ -108,8 +108,10 @@ CFATTACH_DECL_NEW(exynos_iic, sizeof(struct exynos_iic_softc),
 static int
 exynos_iic_match(device_t self, cfdata_t cf, void *aux)
 {
+#ifdef DIAGNOSTIC
 	struct exyo_attach_args *exyoaa = aux;
 	struct exyo_locators *loc = &exyoaa->exyo_loc;
+#endif
 	int i;
 
 	/* no locators expected */

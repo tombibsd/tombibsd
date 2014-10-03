@@ -23,7 +23,7 @@
 /cdbr.h/1.1/Wed Dec 11 01:24:08 2013/-kk/
 /cdefs.h/1.121/Fri Oct  3 09:26:22 2014/-kk/
 /cdefs_aout.h/1.20/Thu May 18 17:55:38 2006/-kk/
-/cdefs_elf.h/1.44/Tue Jun  3 02:54:47 2014/-kk/
+/cdefs_elf.h/1.46/Fri Oct  3 09:43:46 2014/-kk/
 /cdio.h/1.33/Thu Jan 29 19:36:28 2009/-kk/
 /chio.h/1.12/Mon Apr 28 20:24:10 2008/-kk/
 /clockctl.h/1.15/Sun Jan 11 02:45:55 2009/-kk/
@@ -52,7 +52,7 @@
 /dir.h/1.11/Sun Dec 11 12:25:20 2005/-kk/
 /dirent.h/1.28/Tue Sep 27 01:40:32 2011/-kk/
 /dirhash.h/1.6/Thu Oct 24 10:28:58 2013/-kk/
-/disk.h/1.60/Sat Apr 19 05:37:02 2014/-kk/
+/disk.h/1.61/Fri Oct  3 09:43:46 2014/-kk/
 /disklabel.h/1.116/Tue Nov 12 02:18:53 2013/-kk/
 /disklabel_acorn.h/1.6/Sun Dec 11 12:25:20 2005/-kk/
 /disklabel_gpt.h/1.12/Tue Dec 17 04:05:16 2013/-kk/
@@ -74,7 +74,7 @@
 /exec_aout.h/1.40/Sat Mar 17 21:54:12 2012/-kk/
 /exec_coff.h/1.7/Sun Dec 11 12:25:20 2005/-kk/
 /exec_ecoff.h/1.20/Thu Dec 10 14:13:54 2009/-kk/
-/exec_elf.h/1.142/Fri Oct  3 09:36:26 2014/-kk/
+/exec_elf.h/1.143/Fri Oct  3 09:43:46 2014/-kk/
 /exec_script.h/1.12/Sun Dec 11 12:25:20 2005/-kk/
 /extattr.h/1.9/Tue Mar 13 18:41:02 2012/-kk/
 /extent.h/1.19/Fri Jan 27 18:53:10 2012/-kk/

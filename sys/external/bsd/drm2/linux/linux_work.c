@@ -577,7 +577,9 @@ queue_delayed_work(struct workqueue_struct *wq, struct delayed_work *dw,
 			    &linux_worker_intr, dw);
 			dw->work.w_state = WORK_DELAYED;
 			dw->work.w_wq = wq;
+			mutex_enter(&wq->wq_lock);
 			TAILQ_INSERT_HEAD(&wq->wq_delayed, dw, dw_entry);
+			mutex_exit(&wq->wq_lock);
 		}
 		newly_queued = true;
 		break;
@@ -636,7 +638,9 @@ mod_delayed_work(struct workqueue_struct *wq, struct delayed_work *dw,
 			    &linux_worker_intr, dw);
 			dw->work.w_state = WORK_DELAYED;
 			dw->work.w_wq = wq;
+			mutex_enter(&wq->wq_lock);
 			TAILQ_INSERT_HEAD(&wq->wq_delayed, dw, dw_entry);
+			mutex_exit(&wq->wq_lock);
 		}
 		timer_modified = false;
 		break;

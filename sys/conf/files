@@ -1,7 +1,7 @@
 #	$NetBSD$
 #	@(#)files.newconf	7.5 (Berkeley) 5/10/93
 
-version 	20100430
+version 	20140824
 
 #
 # device classes
@@ -23,7 +23,8 @@ defflag				KTRACE
 defflag				MBUFTRACE
 defflag				PTRACE
 defflag				COREDUMP
-defflag				MODULAR
+defflag	opt_modular.h		MODULAR
+defflag	opt_modular.h		MODULAR_DEFAULT_AUTOLOAD
 defflag				KEYLOCK
 
 defparam			DEFCORENAME
@@ -911,6 +912,10 @@ file	dev/ic/ad1848.c			ad1848
 #
 define	am7930
 file	dev/ic/am7930.c			am7930
+
+# Siemens PSB2160 audio codec, as found in HP systems
+device	arcofi: audiobus, auconv, mulaw
+file	dev/ic/arcofi.c			arcofi
 
 # SPARC `SUNW,audiocs'
 #

@@ -62,8 +62,8 @@
 ./usr/include/mips/rwlock.h			comp-c-include
 ./usr/include/mips/setjmp.h			comp-c-include
 ./usr/include/mips/signal.h			comp-c-include
-./usr/include/mips/sljitarch.h			comp-obsolete		obsolete
 ./usr/include/mips/sljit_machdep.h		comp-c-include
+./usr/include/mips/sljitarch.h			comp-obsolete		obsolete
 ./usr/include/mips/stdarg.h			comp-obsolete		obsolete
 ./usr/include/mips/sysarch.h			comp-c-include
 ./usr/include/mips/trap.h			comp-c-include

@@ -323,7 +323,7 @@ gm107_graph_init_bios(struct nvc0_graph_priv *priv)
 	}
 }
 
-int
+static int
 gm107_graph_init(struct nouveau_object *object)
 {
 	struct nvc0_graph_oclass *oclass = (void *)object->oclass;

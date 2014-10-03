@@ -532,7 +532,7 @@ CWARNFLAGS+=	${CWARNFLAGS.${.IMPSRC:T}}
 
 locore.o machdep.o kern_ksyms.o: Makefile
 
-.if defined(COPY_SYMTAB})
+.if defined(COPY_SYMTAB)
 CPPFLAGS.locore.S+=		-DCOPY_SYMTAB
 CPPFLAGS.machdep.c+=		-DCOPY_SYMTAB
 CPPFLAGS.kern_ksyms.c+=		-DCOPY_SYMTAB

@@ -59,7 +59,11 @@ typedef struct ListNode {
 #define LN_DELETED  	0x0001      /* List node should be removed when done */
 
 typedef enum {
-    Head, Middle, Tail, Unknown
+    Head,	/* list is just opened and its empty */
+    Middle,	/* not empty and not at end */
+    Tail,	/* end has been reached, the result of previous Lst_Next()
+		 * is bogus */
+    Unknown	/* list is just opened and its not empty */
 } Where;
 
 typedef struct	List {

@@ -125,6 +125,7 @@ __RCSID("$NetBSD$");
 #include <fcntl.h>
 #include <math.h>
 #include <signal.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -1844,6 +1845,7 @@ pr_suptypes(struct icmp6_nodeinfo *ni /* ni->qtype must be SUPTYPES */,
 	}
 
 	while (cp < end) {
+		size_t skip = 0;
 		clen = (size_t)(end - cp);
 		if ((ni->ni_flags & NI_SUPTYPE_FLAG_COMPRESS) == 0) {
 			if (clen == 0 || clen > MAXQTYPES / 8 ||
@@ -1860,8 +1862,8 @@ pr_suptypes(struct icmp6_nodeinfo *ni /* ni->qtype must be SUPTYPES */,
 				return;
 			cp += sizeof(cbit);
 			clen = ntohs(cbit.words) * sizeof(v);
-			if (cur + clen * 8 + (u_long)ntohs(cbit.skip) * 32 >
-			    MAXQTYPES)
+			skip = (size_t)ntohs(cbit.skip) * 32;
+			if (cur + clen * 8 + skip > MAXQTYPES)
 				return;
 		}
 
@@ -1874,9 +1876,7 @@ pr_suptypes(struct icmp6_nodeinfo *ni /* ni->qtype must be SUPTYPES */,
 		b = pr_bitrange(0, (int)(cur + off * 8), b);
 
 		cp += clen;
-		cur += clen * 8;
-		if ((ni->ni_flags & NI_SUPTYPE_FLAG_COMPRESS) != 0)
-			cur += ntohs(cbit.skip) * 32;
+		cur += clen * 8 + skip;
 	}
 }
 

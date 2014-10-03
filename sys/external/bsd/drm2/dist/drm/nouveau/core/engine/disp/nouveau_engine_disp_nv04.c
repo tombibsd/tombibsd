@@ -32,6 +32,8 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <core/event.h>
 #include <core/class.h>
 
+#include <linux/ktime.h>	/* XXX */
+
 struct nv04_disp_priv {
 	struct nouveau_disp base;
 };

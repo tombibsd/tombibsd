@@ -317,8 +317,8 @@
 ./usr/lib/libisccc.so.8.0			base-bind-shlib
 ./usr/lib/libisccfg.so				base-bind-shlib
 ./usr/lib/libisccfg.so.8			base-bind-shlib
-./usr/lib/libisccfg.so.8.1			base-bind-shlib
 ./usr/lib/libisccfg.so.8.0			base-bind-shlib		obsolete
+./usr/lib/libisccfg.so.8.1			base-bind-shlib
 ./usr/lib/libiscsi.so				base-iscsi-shlib	iscsi
 ./usr/lib/libiscsi.so.2				base-iscsi-shlib	iscsi
 ./usr/lib/libiscsi.so.2.0			base-iscsi-shlib	iscsi
@@ -653,9 +653,9 @@
 ./usr/lib/librumpkern_solaris.so		base-rump-shlib		zfs,rump
 ./usr/lib/librumpkern_solaris.so.0		base-rump-shlib		zfs,rump
 ./usr/lib/librumpkern_solaris.so.0.0		base-rump-shlib		zfs,rump
-./usr/lib/librumpkern_time.so			base-rump-shlib	rump
-./usr/lib/librumpkern_time.so.0			base-rump-shlib	rump
-./usr/lib/librumpkern_time.so.0.0		base-rump-shlib	rump
+./usr/lib/librumpkern_time.so			base-obsolete obsolete
+./usr/lib/librumpkern_time.so.0			base-obsolete obsolete
+./usr/lib/librumpkern_time.so.0.0		base-obsolete obsolete
 ./usr/lib/librumpkern_tty.so			base-rump-shlib	rump
 ./usr/lib/librumpkern_tty.so.0			base-rump-shlib	rump
 ./usr/lib/librumpkern_tty.so.0.0		base-rump-shlib	rump

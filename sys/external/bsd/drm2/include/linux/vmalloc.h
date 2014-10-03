@@ -38,6 +38,19 @@
 
 #include <linux/mm_types.h>
 
+static inline bool
+is_vmalloc_addr(void *addr)
+{
+	/* XXX Assumes vmalloc and kmalloc both use malloc(9).  */
+	return true;
+}
+
+static inline void *
+vmalloc(unsigned long size)
+{
+	return malloc(size, M_TEMP, M_WAITOK);
+}
+
 static inline void *
 vmalloc_user(unsigned long size)
 {

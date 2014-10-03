@@ -139,7 +139,6 @@ compat_50_netbsd32_select(struct lwp *l,
 
 	return selcommon(retval, SCARG(uap, nd), SCARG_P32(uap, in),
 	    SCARG_P32(uap, ou), SCARG_P32(uap, ex), ts, NULL);
-	return 0;
 }
 
 int
@@ -563,7 +562,6 @@ compat_50_netbsd32__lwp_park(struct lwp *l,
 
 	return lwp_park(CLOCK_REALTIME, TIMER_ABSTIME, tsp,
 	    SCARG_P32(uap, hint));
-	return 0;
 }
 
 static int
@@ -681,7 +679,6 @@ compat_50_netbsd32_pselect(struct lwp *l,
 
 	return selcommon(retval, SCARG(uap, nd), SCARG_P32(uap, in),
 	    SCARG_P32(uap, ou), SCARG_P32(uap, ex), ts, mask);
-	return 0;
 }
 
 int

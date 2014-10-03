@@ -44,8 +44,8 @@
 ./usr/include/rs6000/rwlock.h			comp-c-include
 ./usr/include/rs6000/setjmp.h			comp-c-include
 ./usr/include/rs6000/signal.h			comp-c-include
-./usr/include/rs6000/sljitarch.h		comp-obsolete		obsolete
 ./usr/include/rs6000/sljit_machdep.h		comp-c-include
+./usr/include/rs6000/sljitarch.h		comp-obsolete		obsolete
 ./usr/include/rs6000/spr.h			comp-obsolete		obsolete
 ./usr/include/rs6000/stdarg.h			comp-obsolete		obsolete
 ./usr/include/rs6000/trap.h			comp-c-include

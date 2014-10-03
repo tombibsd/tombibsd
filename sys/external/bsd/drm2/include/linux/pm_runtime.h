@@ -56,6 +56,11 @@ pm_runtime_mark_last_busy(struct device *dev __unused)
 }
 
 static inline void
+pm_runtime_put(struct device *dev __unused)
+{
+}
+
+static inline void
 pm_runtime_put_autosuspend(struct device *dev __unused)
 {
 }

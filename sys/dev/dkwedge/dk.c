@@ -1350,6 +1350,8 @@ static int
 dkdiscard(dev_t dev, off_t pos, off_t len)
 {
 	struct dkwedge_softc *sc = dkwedge_lookup(dev);
+	unsigned shift;
+	off_t offset, maxlen;
 
 	if (sc == NULL)
 		return (ENODEV);
@@ -1358,6 +1360,21 @@ dkdiscard(dev_t dev, off_t pos, off_t len)
 	if (sc->sc_parent->dk_rawvp == NULL)
 		return (ENXIO);
 
+	shift = (sc->sc_parent->dk_blkshift + DEV_BSHIFT);
+	KASSERT(__type_fit(off_t, sc->sc_size));
+	KASSERT(__type_fit(off_t, sc->sc_offset));
+	KASSERT(0 <= sc->sc_offset);
+	KASSERT(sc->sc_size <= (__type_max(off_t) >> shift));
+	KASSERT(sc->sc_offset <= ((__type_max(off_t) >> shift) - sc->sc_size));
+	offset = ((off_t)sc->sc_offset << shift);
+	maxlen = ((off_t)sc->sc_size << shift);
+
+	if (len > maxlen)
+		return (EINVAL);
+	if (pos > (maxlen - len))
+		return (EINVAL);
+
+	pos += offset;
 	return VOP_FDISCARD(sc->sc_parent->dk_rawvp, pos, len);
 }
 

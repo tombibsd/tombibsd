@@ -69,13 +69,14 @@ struct nl_ext {
 };
 
 struct nl_config {
-	/* Rules, translations, tables, procedures. */
+	/* Rules, translations, procedures, tables, connections. */
 	prop_dictionary_t	ncf_dict;
 	prop_array_t		ncf_alg_list;
 	prop_array_t		ncf_rules_list;
 	prop_array_t		ncf_rproc_list;
 	prop_array_t		ncf_table_list;
 	prop_array_t		ncf_nat_list;
+	prop_array_t		ncf_conn_list;
 
 	/* Iterators. */
 	prop_object_iterator_t	ncf_rule_iter;
@@ -153,6 +154,10 @@ npf_config_submit(nl_config_t *ncf, int fd)
 	prop_dictionary_set(npf_dict, "rprocs", ncf->ncf_rproc_list);
 	prop_dictionary_set(npf_dict, "tables", ncf->ncf_table_list);
 	prop_dictionary_set(npf_dict, "nat", ncf->ncf_nat_list);
+	if (ncf->ncf_conn_list) {
+		prop_dictionary_set(npf_dict, "conn-list",
+		    ncf->ncf_conn_list);
+	}
 	prop_dictionary_set_bool(npf_dict, "flush", ncf->ncf_flush);
 	if (ncf->ncf_debug) {
 		prop_dictionary_set(npf_dict, "debug", ncf->ncf_debug);
@@ -194,6 +199,7 @@ _npf_config_consdict(prop_dictionary_t npf_dict)
 	ncf->ncf_rproc_list = prop_dictionary_get(npf_dict, "rprocs");
 	ncf->ncf_table_list = prop_dictionary_get(npf_dict, "tables");
 	ncf->ncf_nat_list = prop_dictionary_get(npf_dict, "nat");
+	ncf->ncf_conn_list = prop_dictionary_get(npf_dict, "conn-list");
 	return ncf;
 }
 

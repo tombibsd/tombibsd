@@ -13,7 +13,6 @@ options 	EVBARM_BOARDTYPE=mirabox
 #options 	VERBOSE_INIT_ARM
 no options	MEMSIZE
 options 	MEMSIZE=0x40000000
-options 	__HAVE_MM_MD_DIRECT_MAPPED_PHYS
 #options 	UVMHIST
 #options 	UVMHIST_PRINT,KERNHIST_DELAY=0
 no makeoptions	KERNEL_BASE_PHYS

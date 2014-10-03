@@ -51,8 +51,8 @@ RUMP_COMPONENT(RUMP_COMPONENT_NET)
 {
 	extern struct domain arpdomain, inetdomain;
 
-	DOMAINADD(arpdomain);
-	DOMAINADD(inetdomain);
+	domain_attach(&arpdomain);
+	domain_attach(&inetdomain);
 
 	carpattach(1);
 

@@ -50,8 +50,8 @@
 ./usr/include/amigappc/rwlock.h			comp-c-include
 ./usr/include/amigappc/setjmp.h			comp-c-include
 ./usr/include/amigappc/signal.h			comp-c-include
-./usr/include/amigappc/sljitarch.h		comp-obsolete		obsolete
 ./usr/include/amigappc/sljit_machdep.h		comp-c-include
+./usr/include/amigappc/sljitarch.h		comp-obsolete		obsolete
 ./usr/include/amigappc/spr.h			comp-obsolete		obsolete
 ./usr/include/amigappc/stdarg.h			comp-obsolete		obsolete
 ./usr/include/amigappc/trap.h			comp-c-include

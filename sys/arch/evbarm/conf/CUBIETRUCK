@@ -10,8 +10,10 @@ include "arch/evbarm/conf/CUBIEBOARD"
 #
 no makeoptions	KERNEL_BASE_PHYS
 no makeoptions	KERNEL_BASE_VIRT
+no makeoptions	BOARDTYPE
 makeoptions	KERNEL_BASE_PHYS="0x80000000"
 makeoptions	KERNEL_BASE_VIRT="0x80000000"
+makeoptions	BOARDTYPE="cubietruck"
 
 #
 # We need this too.

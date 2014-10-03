@@ -97,6 +97,7 @@ nv50_dac_mthd(struct nouveau_object *object, u32 mthd, void *args, u32 size)
 		break;
 	default:
 		BUG_ON(1);
+		ret = -EIO;	/* XXX GCC */
 	}
 
 	return ret;

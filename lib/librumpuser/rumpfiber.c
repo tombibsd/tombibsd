@@ -1,3 +1,5 @@
+/*	$NetBSD$	*/
+
 /*
  * Copyright (c) 2007-2013 Antti Kantee.  All Rights Reserved.
  * Copyright (c) 2014 Justin Cormack.  All Rights Reserved.

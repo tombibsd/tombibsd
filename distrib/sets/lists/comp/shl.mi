@@ -208,7 +208,7 @@
 ./usr/lib/librumpkern_ksem_pic.a		comp-obsolete		obsolete
 ./usr/lib/librumpkern_sljit_pic.a		comp-c-piclib		sljit,rump,picinstall
 ./usr/lib/librumpkern_solaris_pic.a		comp-c-piclib		zfs,rump,picinstall
-./usr/lib/librumpkern_time_pic.a			comp-c-piclib		rump,picinstall
+./usr/lib/librumpkern_time_pic.a			comp-obsolete obsolete
 ./usr/lib/librumpkern_tty_pic.a			comp-c-piclib		rump,picinstall
 ./usr/lib/librumpkern_z_pic.a			comp-c-piclib		rump,picinstall
 ./usr/lib/librumpnet_agr_pic.a			comp-c-piclib		rump,picinstall

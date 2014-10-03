@@ -177,6 +177,7 @@ DRM_SPIN_WAKEUP_ALL(drm_waitqueue_t *q, spinlock_t *interlock)
 	KASSERT(!cpu_intr_p());						\
 	KASSERT(!cpu_softintr_p());					\
 	KASSERT(!cold);							\
+	(RET) = 0;							\
 	while (!(CONDITION)) {						\
 		/* XXX errno NetBSD->Linux */				\
 		(RET) = -WAIT((Q), &(INTERLOCK)->sl_lock);		\

@@ -52,6 +52,10 @@ struct i2c_board_info {
 	void			*platform_data;
 };
 
+#define	I2C_BOARD_INFO(board_type, board_addr)		\
+	.type = (board_type),				\
+	.addr = (board_addr)
+
 static inline void
 i2c_new_device(const struct i2c_adapter *adapter __unused,
     const struct i2c_board_info *board __unused)

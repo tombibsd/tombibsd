@@ -98,8 +98,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <dev/usb/ukbdvar.h>
 #endif
 
-#include "ksyms.h"
-
 extern int KERNEL_BASE_phys[];
 extern int KERNEL_BASE_virt[];
 

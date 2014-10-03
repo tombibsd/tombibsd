@@ -1401,8 +1401,10 @@ static int
 nouveau_ttm_tt_populate(struct ttm_tt *ttm)
 {
 	struct ttm_dma_tt *ttm_dma = (void *)ttm;
-#ifndef __NetBSD__
+#if defined(__OS_HAS_AGP) || !defined(__NetBSD__)
 	struct nouveau_drm *drm;
+#endif
+#ifndef __NetBSD__
 	struct nouveau_device *device;
 	struct drm_device *dev;
 	unsigned i;
@@ -1425,8 +1427,10 @@ nouveau_ttm_tt_populate(struct ttm_tt *ttm)
 	}
 #endif
 
-#ifndef __NetBSD__
+#if defined(__OS_HAS_AGP) || !defined(__NetBSD__)
 	drm = nouveau_bdev(ttm->bdev);
+#endif
+#ifndef __NetBSD__
 	device = nv_device(drm->device);
 	dev = drm->dev;
 #endif
@@ -1472,8 +1476,10 @@ static void
 nouveau_ttm_tt_unpopulate(struct ttm_tt *ttm)
 {
 	struct ttm_dma_tt *ttm_dma = (void *)ttm;
-#ifndef __NetBSD__
+#if defined(__OS_HAS_AGP) || !defined(__NetBSD__)
 	struct nouveau_drm *drm;
+#endif
+#ifndef __NetBSD__
 	struct nouveau_device *device;
 	struct drm_device *dev;
 	unsigned i;
@@ -1483,8 +1489,10 @@ nouveau_ttm_tt_unpopulate(struct ttm_tt *ttm)
 	if (slave)
 		return;
 
-#ifndef __NetBSD__
+#if defined(__OS_HAS_AGP) || !defined(__NetBSD__)
 	drm = nouveau_bdev(ttm->bdev);
+#endif
+#ifndef __NetBSD__
 	device = nv_device(drm->device);
 	dev = drm->dev;
 #endif

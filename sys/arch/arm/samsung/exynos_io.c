@@ -139,6 +139,10 @@ exyo_attach(device_t parent, device_t self, void *aux)
 	aprint_naive(": Exynos %x\n", product_id);
 	aprint_normal(": Exynos %x\n", product_id);
 
+	/* add sysctl nodes */
+	exynos_sysctl_cpufreq_init();
+
+	/* add all children */
 #if defined(EXYNOS4)
 	if (IS_EXYNOS4_P()) {
 		l = exynos4_locinfo.locators;

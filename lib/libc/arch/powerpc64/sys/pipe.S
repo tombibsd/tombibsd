@@ -8,12 +8,12 @@ WEAK_ALIAS(pipe, _pipe)
 
 ENTRY(_pipe)
 	mr	%r5,%r3		# save pointer
-	li	%r0,SYS_pipe
-	sc			# assume, that r5 is kept
+	_DOSYSCALL(pipe)	# assume, that r5 is kept
 	bso	1f
-	stw	%r3,0(%r5)	# success, store fds
-	stw	%r4,4(%r5)
+	stint	%r3,0(%r5)	# success, store fds
+	stint	%r4,4(%r5)
 	li	%r3,0
 	blr			# and return 0
 1:
-	b	PIC_PLT(_C_LABEL(__cerror))
+	BRANCH_TO_CERROR()
+END(_pipe)

@@ -5,3 +5,4 @@
 include "arch/i386/conf/GENERIC"
 
 no options	MODULAR
+no options	MODULAR_DEFAULT_AUTOLOAD

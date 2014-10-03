@@ -487,7 +487,13 @@ _rtld_relocate_plt_object(const Obj_Entry *obj, Elf_Word sym, Elf_Addr *tp)
 	if (__predict_false(def == &_rtld_sym_zero))
 		return 0;
 
-	new_value = (Elf_Addr)(defobj->relocbase + def->st_value);
+	if (ELF_ST_TYPE(def->st_info) == STT_GNU_IFUNC) {
+		if (tp == NULL)
+			return 0;
+		new_value = _rtld_resolve_ifunc(defobj, def);
+	} else {
+		new_value = (Elf_Addr)(defobj->relocbase + def->st_value);
+	}
 	rdbg(("bind now/fixup in %s --> new=%p",
 	    defobj->strtab + def->st_name, (void *)new_value));
 	got[obj->local_gotno + sym - obj->gotsym] = new_value;

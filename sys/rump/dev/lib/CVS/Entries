@@ -16,6 +16,7 @@ D/libpci////
 D/libpci_if_iwn////
 D/libpci_if_pcn////
 D/libpci_if_wm////
+D/libpci_virtio////
 D/libpud////
 D/libputter////
 D/libraidframe////
@@ -28,5 +29,7 @@ D/libugenhc////
 D/libulpt////
 D/libumass////
 D/libusb////
+D/libvirtio_if_vioif////
+D/libvirtio_ld////
 D/libvnd////
 D/libwscons////

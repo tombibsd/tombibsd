@@ -2,8 +2,8 @@
 ./usr/X11R7/lib/modules/extensions/libdbe_g.a		-unknown-	debuglib,xorg
 ./usr/X11R7/lib/modules/extensions/libdri2_g.a		-unknown-	debuglib,xorg
 ./usr/X11R7/lib/modules/extensions/libdri_g.a		-unknown-	debuglib,xorg
-./usr/X11R7/lib/modules/extensions/libglx_g.a		-unknown-	debuglib,xorg
 ./usr/X11R7/lib/modules/extensions/libextmod_g.a	-unknown-	debuglib,xorg
+./usr/X11R7/lib/modules/extensions/libglx_g.a		-unknown-	debuglib,xorg
 ./usr/X11R7/lib/modules/extensions/librecord_g.a	-unknown-	debuglib,xorg
 ./usr/X11R7/lib/modules/extensions/libshadow_g.a	-unknown-	debuglib,xorg
 ./usr/X11R7/lib/modules/libexa_g.a			-unknown-	debuglib,xorg

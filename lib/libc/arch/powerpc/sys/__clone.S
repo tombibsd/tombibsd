@@ -44,9 +44,9 @@ ENTRY(__clone)
 	/*
 	 * Sanity checks: func and stack may not be NULL.
 	 */
-	cmpwi	%r3,0
+	cmpptri	%r3,0
 	beq	1f
-	cmpwi	%r4,0
+	cmpptri	%r4,0
 	beq	1f
 
 	mr	%r7,%r3		/* Save fn in r7. */
@@ -54,7 +54,7 @@ ENTRY(__clone)
 	_DOSYSCALL(__clone)	/* (flags, stack) */
 	bso	2f		/* error... */
 
-	cmpwi	%r3,0
+	cmpptri	%r3,0
 	bnelr			/* We're the parent, just return. */
 
 	mtlr	%r7		/* fn */
@@ -69,5 +69,5 @@ ENTRY(__clone)
 1:
 	li	%r3,EINVAL
 2:
-	b	_C_LABEL(__cerror)
+	BRANCH_TO_CERROR()
 END(__clone)

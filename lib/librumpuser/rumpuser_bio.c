@@ -75,7 +75,7 @@ dobio(struct rumpuser_bio *biop)
 		    biop->bio_dlen, biop->bio_off);
 		if (rv < 0) {
 			rv = 0;
-			error = errno;
+			error = rumpuser__errtrans(errno);
 		}
 	} else {
 		error = 0;
@@ -83,7 +83,7 @@ dobio(struct rumpuser_bio *biop)
 		    biop->bio_dlen, biop->bio_off);
 		if (rv < 0) {
 			rv = 0;
-			error = errno;
+			error = rumpuser__errtrans(errno);
 		} else if (biop->bio_op & RUMPUSER_BIO_SYNC) {
 #ifdef __NetBSD__
 			fsync_range(biop->bio_fd, FDATASYNC,

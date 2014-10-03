@@ -248,6 +248,17 @@ __link_set_add_data(dkwedge_methods, name ## _ddm)
 #define	DKW_PTYPE_MINIXFS3	"minixfs3"
 
 /*
+ * Ensure each symbol used in FSTYPE_DEFN in <sys/disklabel.h>
+ * has a corresponding DKW_PTYPE_* definition.
+ */
+#define	DKW_PTYPE_MSDOS		DKW_PTYPE_FAT
+#define	DKW_PTYPE_BSDFFS	DKW_PTYPE_FFS
+#define	DKW_PTYPE_BSDLFS	DKW_PTYPE_LFS
+#define	DKW_PTYPE_ADOS		DKW_PTYPE_AMIGADOS
+#define	DKW_PTYPE_EX2FS		DKW_PTYPE_EXT2FS
+#define	DKW_PTYPE_RAID		DKW_PTYPE_RAIDFRAME
+
+/*
  * Disk geometry dictionary.
  *
  * NOTE: Not all geometry information is relevant for every kind of disk.

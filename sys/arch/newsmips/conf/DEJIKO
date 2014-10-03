@@ -44,11 +44,11 @@ options 	NFS_BOOTPARAM_NOGATEWAY
 
 # Compatibility options
 options 	COMPAT_43		# compatibility with 4.3BSD binaries
-options 	COMPAT_14		# NetBSD 1.4 binary compatibility
-options 	COMPAT_15		# NetBSD 1.5 binary compatibility
-options 	COMPAT_16		# NetBSD 1.6 binary compatibility
-options 	COMPAT_20		# NetBSD 2.0 binary compatibility
-options 	COMPAT_30		# NetBSD 3.0 binary compatibility
+options 	COMPAT_14		# NetBSD 1.4,
+options 	COMPAT_15		# NetBSD 1.5,
+options 	COMPAT_16		# NetBSD 1.6,
+options 	COMPAT_20		# NetBSD 2.0,
+options 	COMPAT_30		# NetBSD 3.0, and
 options 	COMPAT_40		# NetBSD 4.0 binary compatibility
 options		COMPAT_BSDPTY	# /dev/[pt]ty?? ptys.
 

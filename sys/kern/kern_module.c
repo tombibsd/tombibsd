@@ -67,7 +67,11 @@ static struct modlist module_bootlist = TAILQ_HEAD_INITIALIZER(module_bootlist);
 
 static module_t	*module_active;
 static bool	module_verbose_on;
+#ifdef MODULAR_DEFAULT_AUTOLOAD
 static bool	module_autoload_on = true;
+#else
+static bool	module_autoload_on = false;
+#endif
 u_int		module_count;
 u_int		module_builtinlist;
 u_int		module_autotime = 10;

@@ -1,4 +1,4 @@
-/Makefile/1.616/Fri Oct  3 09:08:47 2014/-kk/
+/Makefile/1.617/Fri Oct  3 09:43:11 2014/-kk/
 /aac.4/1.14/Sat Feb 19 10:54:31 2011/-kk/
 /ac97.4/1.2/Wed Jun 22 04:19:09 2005/-kk/
 /acardide.4/1.4/Mon Oct 19 18:41:08 2009/-kk/
@@ -52,6 +52,7 @@
 /an.4/1.13/Tue Mar 25 02:35:14 2014/-kk/
 /aps.4/1.8/Tue Mar 25 02:35:14 2014/-kk/
 /arcmsr.4/1.8/Mon May 18 13:57:54 2009/-kk/
+/arcofi.4/1.2/Mon Aug 25 13:22:20 2014/-kk/
 /aria.4/1.10/Wed Apr 30 13:10:53 2008/-kk/
 /artsata.4/1.5/Mon Oct 19 18:41:08 2009/-kk/
 /ast.4/1.12/Tue May 11 22:42:47 2004/-kk/
@@ -374,7 +375,7 @@
 /oosiop.4/1.6/Sat Mar  1 06:04:19 2014/-kk/
 /opl.4/1.21/Sat Jan  3 18:27:19 2009/-kk/
 /optiide.4/1.3/Mon Oct 19 18:41:09 2009/-kk/
-/options.4/1.440/Fri Oct  3 09:35:57 2014/-kk/
+/options.4/1.442/Fri Oct  3 09:43:12 2014/-kk/
 /osiop.4/1.7/Sat Mar  1 06:04:19 2014/-kk/
 /otus.4/1.7/Tue Mar 25 02:35:15 2014/-kk/
 /owtemp.4/1.4/Tue Mar 25 02:35:15 2014/-kk/

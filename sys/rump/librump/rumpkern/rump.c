@@ -656,16 +656,34 @@ rump_hyp_rfork(void *priv, int flags, const char *comm)
 {
 	struct vmspace *newspace;
 	struct proc *p;
+	struct lwp *l;
 	int error;
+	bool initfds;
+
+	/*
+	 * If we are forking off of pid 1, initialize file descriptors.
+	 */
+	l = curlwp;
+	if (l->l_proc->p_pid == 1) {
+		KASSERT(flags == RUMP_RFFD_CLEAR);
+		initfds = true;
+	} else {
+		initfds = false;
+	}
 
 	if ((error = rump_lwproc_rfork(flags)) != 0)
 		return error;
 
 	/*
+	 * We forked in this routine, so cannot use curlwp (const)
+	 */
+	l = rump_lwproc_curlwp();
+	p = l->l_proc;
+
+	/*
 	 * Since it's a proxy proc, adjust the vmspace.
 	 * Refcount will eternally be 1.
 	 */
-	p = curproc;
 	newspace = kmem_zalloc(sizeof(*newspace), KM_SLEEP);
 	newspace->vm_refcnt = 1;
 	newspace->vm_map.pmap = priv;
@@ -673,6 +691,8 @@ rump_hyp_rfork(void *priv, int flags, const char *comm)
 	p->p_vmspace = newspace;
 	if (comm)
 		strlcpy(p->p_comm, comm, sizeof(p->p_comm));
+	if (initfds)
+		rump_consdev_init();
 
 	return 0;
 }
@@ -904,17 +924,4 @@ rump_boot_etfs_register(struct rump_boot_etfs *eb)
 	eb->_eb_next = ebstart;
 	eb->eb_status = -1;
 	ebstart = eb;
-}
-
-/*
- * Temporary notification that rumpkern_time is obsolete.  This is to
- * be removed along with obsoleting rumpkern_time in a few months.
- */
-#define RUMPKERN_TIME_WARN "rumpkern_time is obsolete, functionality in librump"
-__warn_references(rumpkern_time_is_obsolete,RUMPKERN_TIME_WARN)
-void rumpkern_time_is_obsolete(void);
-void
-rumpkern_time_is_obsolete(void)
-{
-	printf("WARNING: %s\n", RUMPKERN_TIME_WARN);
 }

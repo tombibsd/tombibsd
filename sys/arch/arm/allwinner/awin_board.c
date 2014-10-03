@@ -29,6 +29,7 @@
  */
 
 #include "opt_allwinner.h"
+#include "opt_arm_debug.h"
 
 #define	_ARM32_BUS_DMA_PRIVATE
 

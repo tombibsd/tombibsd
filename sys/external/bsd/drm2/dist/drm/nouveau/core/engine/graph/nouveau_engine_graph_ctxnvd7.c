@@ -222,7 +222,7 @@ nvd7_grctx_generate_mods(struct nvc0_graph_priv *priv, struct nvc0_grctx *info)
 	mmio_list(0x17e91c, 0x03060609, 0, 0); /* different from kepler */
 }
 
-void
+static void
 nvd7_grctx_generate_main(struct nvc0_graph_priv *priv, struct nvc0_grctx *info)
 {
 	struct nvc0_grctx_oclass *oclass = (void *)nv_engine(priv)->cclass;

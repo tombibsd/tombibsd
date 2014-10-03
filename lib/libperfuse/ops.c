@@ -2633,12 +2633,16 @@ perfuse_node_readlink(struct puffs_usermount *pu, puffs_cookie_t opc,
 	if (len == 0)
 		DERRX(EX_PROTOCOL, "path len = %zd too short", len);
 		
+	(void)memcpy(linkname, _GET_OUTPAYLOAD(ps, pm, char *), len);
+
 	/*
 	 * FUSE filesystems return a NUL terminated string, we 
-	 * do not want to trailing \0
+	 * do not want the trailing \0
 	 */
-	*linklen = len - 1;
-	(void)memcpy(linkname, _GET_OUTPAYLOAD(ps, pm, char *), len);
+	while (len > 0 && linkname[len - 1] == '\0')
+		len--;
+
+	*linklen = len;
 
 	ps->ps_destroy_msg(pm);
 	error = 0;

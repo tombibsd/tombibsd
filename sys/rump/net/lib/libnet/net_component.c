@@ -51,9 +51,9 @@ RUMP_COMPONENT(RUMP_COMPONENT_NET_ROUTE)
 {
 	extern struct domain routedomain, compat_50_routedomain, linkdomain;
 
-	DOMAINADD(linkdomain);
-	DOMAINADD(routedomain);
-	DOMAINADD(compat_50_routedomain);
+	domain_attach(&linkdomain);
+	domain_attach(&routedomain);
+	domain_attach(&compat_50_routedomain);
 }
 
 RUMP_COMPONENT(RUMP_COMPONENT_NET_IF)

@@ -43,6 +43,12 @@
 #include <lib/libkern/libkern.h>
 
 static inline unsigned long
+__ffs(unsigned long x)
+{
+	return ffs64(x);
+}
+
+static inline unsigned long
 __ffs64(uint64_t x)
 {
 	return ffs64(x);

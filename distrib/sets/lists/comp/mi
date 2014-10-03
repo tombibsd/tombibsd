@@ -2,7 +2,6 @@
 #
 # Note: don't delete entries from here - mark them as "obsolete" instead.
 #
-#./usr/libdata/lint/llib-ldtrace.ln		comp-c-lintlib		lint,dtrace
 ./etc/mtree/set.comp				comp-sys-root
 ./usr/bin/addr2line				comp-debug-bin		binutils
 ./usr/bin/ar					comp-util-bin		binutils
@@ -3861,8 +3860,8 @@
 ./usr/lib/librumpkern_sljit_p.a			comp-c-proflib		profile,sljit,rump
 ./usr/lib/librumpkern_solaris.a			comp-c-lib		zfs,rump
 ./usr/lib/librumpkern_solaris_p.a		comp-c-proflib		profile,zfs,rump
-./usr/lib/librumpkern_time.a			comp-c-lib		rump
-./usr/lib/librumpkern_time_p.a			comp-c-proflib		profile,rump
+./usr/lib/librumpkern_time.a			comp-obsolete obsolete
+./usr/lib/librumpkern_time_p.a			comp-obsolete obsolete
 ./usr/lib/librumpkern_tty.a			comp-c-lib		rump
 ./usr/lib/librumpkern_tty_p.a			comp-c-proflib		profile,rump
 ./usr/lib/librumpkern_z.a			comp-c-lib		rump
@@ -4002,6 +4001,7 @@
 ./usr/libdata/lint/llib-ldm.ln			comp-c-lintlib		lint
 ./usr/libdata/lint/llib-ldns.ln			comp-bind-lintlib	lint
 ./usr/libdata/lint/llib-ldns_sd.ln		comp-mdns-lintlib	lint,mdns
+#./usr/libdata/lint/llib-ldtrace.ln		comp-c-lintlib		lint,dtrace
 ./usr/libdata/lint/llib-ldwarf.ln		comp-c-lintlib		lint
 ./usr/libdata/lint/llib-ledit.ln		comp-c-lintlib		lint
 ./usr/libdata/lint/llib-lelf.ln			comp-c-lintlib		lint
@@ -4018,6 +4018,7 @@
 ./usr/libdata/lint/llib-lheimbase.ln		comp-krb5-lintlib	lint,kerberos
 ./usr/libdata/lint/llib-lintl.ln		comp-c-lintlib		lint
 ./usr/libdata/lint/llib-lipsec.ln		comp-c-lintlib		lint
+./usr/libdata/lint/llib-lirs.ln			comp-bind-lintlib	lint
 ./usr/libdata/lint/llib-lisc.ln			comp-bind-lintlib	lint
 ./usr/libdata/lint/llib-lisccc.ln		comp-bind-lintlib	lint
 ./usr/libdata/lint/llib-lisccfg.ln		comp-bind-lintlib	lint
@@ -5010,8 +5011,8 @@
 ./usr/share/man/cat3/SSL_CTX_set_session_cache_mode.0	comp-c-catman		crypto,.cat
 ./usr/share/man/cat3/SSL_CTX_set_session_id_context.0	comp-c-catman		crypto,.cat
 ./usr/share/man/cat3/SSL_CTX_set_ssl_version.0	comp-c-catman		crypto,.cat
-./usr/share/man/cat3/SSL_CTX_set_tlsext_ticket_key_cb.0	comp-c-catman		crypto,.cat
 ./usr/share/man/cat3/SSL_CTX_set_timeout.0	comp-c-catman		crypto,.cat
+./usr/share/man/cat3/SSL_CTX_set_tlsext_ticket_key_cb.0	comp-c-catman		crypto,.cat
 ./usr/share/man/cat3/SSL_CTX_set_tmp_dh_callback.0	comp-c-catman		crypto,.cat
 ./usr/share/man/cat3/SSL_CTX_set_tmp_rsa_callback.0	comp-c-catman		crypto,.cat
 ./usr/share/man/cat3/SSL_CTX_set_verify.0	comp-c-catman		crypto,.cat
@@ -11897,8 +11898,8 @@
 ./usr/share/man/html3/SSL_CTX_set_session_cache_mode.html	comp-c-htmlman		crypto,html
 ./usr/share/man/html3/SSL_CTX_set_session_id_context.html	comp-c-htmlman		crypto,html
 ./usr/share/man/html3/SSL_CTX_set_ssl_version.html	comp-c-htmlman		crypto,html
-./usr/share/man/html3/SSL_CTX_set_tlsext_ticket_key_cb.html	comp-c-htmlman		crypto,html
 ./usr/share/man/html3/SSL_CTX_set_timeout.html	comp-c-htmlman		crypto,html
+./usr/share/man/html3/SSL_CTX_set_tlsext_ticket_key_cb.html	comp-c-htmlman		crypto,html
 ./usr/share/man/html3/SSL_CTX_set_tmp_dh_callback.html	comp-c-htmlman		crypto,html
 ./usr/share/man/html3/SSL_CTX_set_tmp_rsa_callback.html	comp-c-htmlman		crypto,html
 ./usr/share/man/html3/SSL_CTX_set_verify.html	comp-c-htmlman		crypto,html
@@ -13734,8 +13735,8 @@
 ./usr/share/man/html3/hcreate_r.html		comp-c-htmlman		html
 ./usr/share/man/html3/hdestroy.html		comp-c-htmlman		html
 ./usr/share/man/html3/hdestroy1.html		comp-c-htmlman		html
-./usr/share/man/html3/hdestroy_r.html		comp-c-htmlman		html
 ./usr/share/man/html3/hdestroy1_r.html		comp-c-htmlman		html
+./usr/share/man/html3/hdestroy_r.html		comp-c-htmlman		html
 ./usr/share/man/html3/heapsort.html		comp-c-htmlman		html
 ./usr/share/man/html3/herror.html		comp-c-htmlman		html
 ./usr/share/man/html3/hesiod.html		comp-c-htmlman		hesiod,html
@@ -18587,8 +18588,8 @@
 ./usr/share/man/man3/SSL_CTX_set_session_cache_mode.3	comp-c-man		crypto,.man
 ./usr/share/man/man3/SSL_CTX_set_session_id_context.3	comp-c-man		crypto,.man
 ./usr/share/man/man3/SSL_CTX_set_ssl_version.3	comp-c-man		crypto,.man
-./usr/share/man/man3/SSL_CTX_set_tlsext_ticket_key_cb.3	comp-c-man		crypto,.man
 ./usr/share/man/man3/SSL_CTX_set_timeout.3	comp-c-man		crypto,.man
+./usr/share/man/man3/SSL_CTX_set_tlsext_ticket_key_cb.3	comp-c-man		crypto,.man
 ./usr/share/man/man3/SSL_CTX_set_tmp_dh_callback.3	comp-c-man		crypto,.man
 ./usr/share/man/man3/SSL_CTX_set_tmp_rsa_callback.3	comp-c-man		crypto,.man
 ./usr/share/man/man3/SSL_CTX_set_verify.3	comp-c-man		crypto,.man
@@ -20482,8 +20483,8 @@
 ./usr/share/man/man3/hcreate_r.3		comp-c-man		.man
 ./usr/share/man/man3/hdestroy.3			comp-c-man		.man
 ./usr/share/man/man3/hdestroy1.3		comp-c-man		.man
-./usr/share/man/man3/hdestroy_r.3		comp-c-man		.man
 ./usr/share/man/man3/hdestroy1_r.3		comp-c-man		.man
+./usr/share/man/man3/hdestroy_r.3		comp-c-man		.man
 ./usr/share/man/man3/heapsort.3			comp-c-man		.man
 ./usr/share/man/man3/herror.3			comp-c-man		.man
 ./usr/share/man/man3/hesiod.3			comp-c-man		hesiod,.man

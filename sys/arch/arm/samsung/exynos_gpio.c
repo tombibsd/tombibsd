@@ -326,8 +326,10 @@ CFATTACH_DECL_NEW(exynos_gpio, sizeof(struct exynos_gpio_softc),
 static int
 exynos_gpio_match(device_t parent, cfdata_t cf, void *aux)
 {
+#ifdef DIAGNOSTIC
 	struct exyo_attach_args * const exyoaa = aux;
 	struct exyo_locators *loc = &exyoaa->exyo_loc;
+#endif
 
 	/* no locators expected */
 	KASSERT(loc->loc_offset == 0);

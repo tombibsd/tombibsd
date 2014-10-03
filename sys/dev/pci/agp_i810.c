@@ -405,7 +405,9 @@ agp_i810_attach(device_t parent, device_t self, void *aux)
 		apbase = AGP_I965_GMADR;
 		mmadr_bar = AGP_I965_MMADR;
 		mmadr_type |= PCI_MAPREG_MEM_TYPE_64BIT;
-		isc->size = 512*1024;
+		if (pci_mapreg_info(isc->vga_pa.pa_pc, isc->vga_pa.pa_tag,
+			AGP_I965_MMADR, mmadr_type, NULL, &isc->size, NULL))
+			isc->size = 512*1024; /* XXX */
 		gtt_bar = 0;
 		gtt_off = AGP_I965_GTT;
 		break;
@@ -413,14 +415,18 @@ agp_i810_attach(device_t parent, device_t self, void *aux)
 		apbase = AGP_I965_GMADR;
 		mmadr_bar = AGP_I965_MMADR;
 		mmadr_type |= PCI_MAPREG_MEM_TYPE_64BIT;
-		isc->size = 512*1024;
+		if (pci_mapreg_info(isc->vga_pa.pa_pc, isc->vga_pa.pa_tag,
+			AGP_I965_MMADR, mmadr_type, NULL, &isc->size, NULL))
+			isc->size = 512*1024; /* XXX */
 		gtt_bar = 0;
 		gtt_off = AGP_G4X_GTT;
 		break;
 	default:
 		apbase = AGP_I810_GMADR;
 		mmadr_bar = AGP_I810_MMADR;
-		isc->size = 512*1024;
+		if (pci_mapreg_info(isc->vga_pa.pa_pc, isc->vga_pa.pa_tag,
+			AGP_I810_MMADR, mmadr_type, NULL, &isc->size, NULL))
+			isc->size = 512*1024; /* XXX */
 		gtt_bar = 0;
 		gtt_off = AGP_I810_GTT;
 		break;

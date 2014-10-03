@@ -27,7 +27,7 @@
 /s3c2440var.h/1.1/Mon Jan 30 03:28:33 2012/-kk/
 /s3c24x0_clk.c/1.14/Fri Feb 10 09:17:49 2012/-kk/
 /s3c24x0_intr.h/1.8/Sun Apr 27 18:58:45 2008/-kk/
-/s3c24x0_lcd.c/1.11/Fri Mar 14 04:28:13 2014/-kk/
+/s3c24x0_lcd.c/1.12/Fri Oct  3 09:43:14 2014/-kk/
 /s3c24x0_lcd.h/1.6/Mon Jan 30 03:28:33 2012/-kk/
 /s3c24x0_spi.h/1.3/Mon Jan 30 03:28:33 2012/-kk/
 /s3c24x0reg.h/1.10/Mon Jan 30 03:28:33 2012/-kk/

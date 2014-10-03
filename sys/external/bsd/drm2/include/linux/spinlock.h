@@ -35,6 +35,9 @@
 #include <sys/cdefs.h>
 #include <sys/mutex.h>
 
+#define	__acquires(lock)	/* XXX lockdep stuff */
+#define	__releases(lock)	/* XXX lockdep stuff */
+
 typedef struct spinlock {
 	kmutex_t sl_lock;
 } spinlock_t;

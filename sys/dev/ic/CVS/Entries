@@ -76,6 +76,8 @@
 /apple_smc_temp.c/1.4/Tue Apr  1 17:49:05 2014/-kk/
 /apple_smcreg.h/1.1/Tue Apr  1 17:47:36 2014/-kk/
 /apple_smcvar.h/1.4/Tue Apr  1 17:49:05 2014/-kk/
+/arcofi.c/1.1/Sun Aug 24 08:17:44 2014/-kk/
+/arcofivar.h/1.1/Sun Aug 24 08:17:44 2014/-kk/
 /arn5008.c/1.6/Sat Mar  1 06:04:41 2014/-kk/
 /arn5008.h/1.1/Thu Oct 24 10:28:57 2013/-kk/
 /arn5008reg.h/1.1/Thu Oct 24 10:28:57 2013/-kk/
@@ -363,7 +365,7 @@
 /mc68450reg.h/1.5/Mon Apr 28 20:23:50 2008/-kk/
 /mc6845reg.h/1.4/Sun Dec 11 12:21:27 2005/-kk/
 /mc6854reg.h/1.1/Mon Sep 10 23:41:49 2001/-kk/
-/mfi.c/1.53/Fri Oct  3 09:09:14 2014/-kk/
+/mfi.c/1.55/Fri Oct  3 09:43:35 2014/-kk/
 /mfiio.h/1.1/Wed Sep 19 21:24:29 2012/-kk/
 /mfireg.h/1.8/Wed Sep 19 21:24:29 2012/-kk/
 /mfivar.h/1.20/Wed Sep 19 21:24:29 2012/-kk/
@@ -565,12 +567,12 @@
 /upc.c/1.15/Sat Oct 27 17:18:23 2012/-kk/
 /upcreg.h/1.3/Sun Mar  2 00:21:47 2003/-kk/
 /upcvar.h/1.6/Sat Oct 27 17:18:23 2012/-kk/
-/vga.c/1.112/Sun Jul 20 13:58:47 2014/-kk/
+/vga.c/1.113/Fri Oct  3 09:43:35 2014/-kk/
 /vga_common.c/1.11/Thu Feb 19 00:39:26 2009/-kk/
-/vga_raster.c/1.41/Sun Jul 20 13:58:47 2014/-kk/
+/vga_raster.c/1.42/Fri Oct  3 09:43:35 2014/-kk/
 /vga_subr.c/1.25/Thu Aug  9 20:25:05 2012/-kk/
 /vgareg.h/1.9/Sun Dec 11 12:21:29 2005/-kk/
-/vgavar.h/1.30/Thu Oct 24 10:28:58 2013/-kk/
+/vgavar.h/1.31/Fri Oct  3 09:43:35 2014/-kk/
 /w83l518d.c/1.2/Thu Aug 19 14:58:22 2010/-kk/
 /w83l518d_sdmmc.c/1.3/Thu Oct  7 12:06:09 2010/-kk/
 /w83l518d_sdmmc.h/1.2/Thu Aug 19 14:58:22 2010/-kk/

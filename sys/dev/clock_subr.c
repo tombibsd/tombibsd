@@ -44,11 +44,16 @@
  * Derived from arch/hp300/hp300/clock.c
  */
 
+#ifdef _KERNEL
 #include <sys/cdefs.h>
 __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <sys/param.h>
 #include <sys/systm.h>
+#else
+#include <string.h>
+#include <time.h>
+#endif
 
 #include <dev/clock_subr.h>
 
@@ -116,7 +121,7 @@ clock_ymdhms_to_secs(struct clock_ymdhms *dt)
 	    * 60 + dt->dt_min)
 	    * 60 + dt->dt_sec;
 
-	if ((time_t)secs != secs)
+	if ((time_t)secs < 0 || secs > __type_max(time_t))
 		return -1;
 	return secs;
 }

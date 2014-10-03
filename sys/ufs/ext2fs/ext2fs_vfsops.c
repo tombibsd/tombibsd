@@ -1024,7 +1024,7 @@ ext2fs_loadvnode(struct mount *mp, struct vnode *vp,
 		if (++ext2gennumber < (u_long)time_second)
 			ext2gennumber = time_second;
 		ip->i_e2fs_gen = ext2gennumber;
-		if ((vp->v_mount->mnt_flag & MNT_RDONLY) == 0)
+		if ((mp->mnt_flag & MNT_RDONLY) == 0)
 			ip->i_flag |= IN_MODIFIED;
 	}
 	uvm_vnp_setsize(vp, ext2fs_size(ip));

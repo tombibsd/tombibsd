@@ -39,8 +39,10 @@ SAMISCMAKEFLAGS= SA_INCLUDE_NET=no SA_USE_CREAD=no
 ${PROG}.sym: ${OBJS} ${LIBSA} ${LIBKERN}
 	${_MKTARGET_LINK}
 	@${LD} -Ttext 0x20000000 -N --verbose 2>&1 \
-	    | ${TOOL_SED} -n '/^==========/,/^===========/{/^========/d; \
-	    s,^[[:blank:]]*\.eh_frame[[:blank:]]*:,  /DISCARD/ : ,;p;}' \
+	    | ${TOOL_SED} -n -e '/^==========/,/^===========/{' \
+	     -e '/^========/d' \
+	     -e 's,^[[:blank:]]*\.eh_frame[[:blank:]]*:,  /DISCARD/ : ,' \
+	     -e 'p' -e '}' \
 	    > ${PROG}.lds
 	${LD} -T ${PROG}.lds -Ttext ${BOOT_RELOC} -N -e start \
 	    -o ${PROG}.sym ${OBJS} ${LIBSA} ${LIBKERN} -Map ${PROG}.map

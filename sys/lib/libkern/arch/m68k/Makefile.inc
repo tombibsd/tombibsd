@@ -10,9 +10,5 @@ SRCS+=	ffs.S
 
 .if defined(MACHINE_ARCH) && (${MACHINE_ARCH} == "m68000")
 SRCS+=	mulsi3.S divsi3.S udivsi3.S modsi3.S umodsi3.S
-.endif
-.if defined(MACHINE_ARCH) && ${MACHINE_ARCH} == "m68k"
-SRCS+=	random.S
-.else
-random.o random.po random.pico random.d: random.c
+random.S: .INVISIBLE
 .endif

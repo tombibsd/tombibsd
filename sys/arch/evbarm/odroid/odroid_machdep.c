@@ -332,9 +332,11 @@ initarm(void *arg)
 	printf("initarm: cbar=%#x\n", armreg_cbar_read());
 #endif
 
-	/* init clocks */
-	/* determine cpu clock source */
-curcpu()->ci_data.cpu_cc_freq = 1*1000*1000*1000;	/* XXX hack XXX */
+	/* determine cpu0 clock rate */
+	exynos_clocks_bootstrap();
+#ifdef VERBOSE_INIT_ARM
+	printf("CPU0 now running on %"PRIu64" Mhz\n", exynos_get_cpufreq()/(1000*1000));
+#endif
 
 #if NARML2CC > 0
 	if (CPU_ID_CORTEX_A9_P(curcpu()->ci_arm_cpuid)) {
@@ -618,7 +620,8 @@ odroid_exynos5_gpio_ncs(device_t self, prop_dictionary_t dict) {
 	prop_dictionary_set_uint32(dict, "nc-GPY5", 0xff - 0b00000000);
 	prop_dictionary_set_uint32(dict, "nc-GPY6", 0xff - 0b00000000);
 	prop_dictionary_set_uint32(dict, "nc-ETC0", 0x3f - 0b00000000);
-	prop_dictionary_set_uint32(dict, "nc-ETC6", 0x7f - 0b00000000);
+	/* standard Xuhost bits at pin 5,6 */
+	prop_dictionary_set_uint32(dict, "nc-ETC6", 0x7f - 0b01100000);
 	prop_dictionary_set_uint32(dict, "nc-ETC7", 0x1f - 0b00000000);
 	prop_dictionary_set_uint32(dict, "nc-GPC4", 0x3f - 0b00000000);
 	/* usb hub communication at bit 6,7 : */
@@ -824,7 +827,7 @@ exynos_usb_powercycle_lan9730(device_t self)
 	struct i2c_controller *i2c;
 	const char *pin_enable;
 	uint8_t rdata, wdata, reg;
-	int error;
+	int error __diagused;
 	bool ok;
 
 	/*
@@ -846,14 +849,14 @@ exynos_usb_powercycle_lan9730(device_t self)
 	error = iic_exec(i2c, I2C_OP_WRITE_WITH_STOP, chipid, &reg, 1,
 			&wdata, sizeof(wdata), 0);
 	KASSERT(!error);
-	DELAY(10000);
+	DELAY(20000);
 
 	/* set power level back to 3.3v */
 	wdata = 0x33;
 	error = iic_exec(i2c, I2C_OP_WRITE_WITH_STOP, chipid, &reg, 1,
 			&wdata, sizeof(wdata), 0);
 	KASSERT(!error);
-	DELAY(10000);
+	DELAY(20000);
 
 	/* enable the bucket explicitly */
 	reg = buck_ctlreg;
@@ -864,7 +867,7 @@ exynos_usb_powercycle_lan9730(device_t self)
 	error = iic_exec(i2c, I2C_OP_WRITE_WITH_STOP, chipid, &reg, 1,
 			&rdata, sizeof(rdata), 0);
 	KASSERT(!error);
-	DELAY(20000);
+	DELAY(30000);
 
 	iic_release_bus(i2c, 0);
 
@@ -877,9 +880,9 @@ exynos_usb_powercycle_lan9730(device_t self)
 				"can't reserve GPIO pin %s\n", pin_enable);
 		} else {
 			exynos_gpio_pindata_write(&enable_pin, 0);
-			DELAY(20000);
+			DELAY(30000);
 			exynos_gpio_pindata_write(&enable_pin, 1);
-			DELAY(10000);
+			DELAY(30000);
 		}
 	} else {
 		aprint_error_dev(self, "failed to lookup lan_power GPIO pin");

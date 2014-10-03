@@ -443,7 +443,7 @@ tifb_attach(device_t parent, device_t self, void *aux)
 
 #ifdef TI_AM335X
 	/* configure output pins */
-	for (i = 0; i < ((sc->sc_panel->bpp == 16) ? 16 : 23); i++) {
+	for (i = 0; i < ((sc->sc_panel->bpp == 16) ? 16 : 24); i++) {
 		if (sitara_cm_padconf_get(tifb_padconf_data[i].padname,
 		    &mode, &state) == 0) {
 			aprint_debug(": %s mode %s state %d ",
@@ -778,6 +778,17 @@ tifb_ioctl(void *v, void *vs, u_long cmd, void *data, int flag,
 				}
 			}
 			return 0;
+
+		case WSDISPLAYIO_GET_FBINFO:
+			{
+				struct wsdisplayio_fbinfo *fbi = data;
+				int ret;
+				
+				ret = wsdisplayio_get_fbinfo(&ms->scr_ri, fbi);
+				fbi->fbi_flags |= WSFB_VRAM_IS_RAM;
+				fbi->fbi_fboffset = sc->sc_palettesize;
+				return ret;
+			}
 
 		case WSDISPLAYIO_GVIDEO:
 			{

@@ -118,6 +118,10 @@ extern void exynos_bootstrap(vaddr_t, vaddr_t);
 extern void exynos_dma_bootstrap(psize_t memsize);
 extern void exynos_gpio_bootstrap(void);
 
+extern void exynos_clocks_bootstrap(void);
+extern void exynos_sysctl_cpufreq_init(void);
+extern uint64_t exynos_get_cpufreq(void);
+
 extern void exynos_device_register(device_t self, void *aux);
 extern void exynos_device_register_post_config(device_t self, void *aux);
 extern void exyo_device_register(device_t self, void *aux);

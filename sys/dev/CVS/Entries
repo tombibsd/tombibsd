@@ -17,7 +17,7 @@
 /cgd_crypto.c/1.12/Thu Oct 24 10:28:57 2013/-kk/
 /cgd_crypto.h/1.7/Wed Dec  5 02:23:20 2012/-kk/
 /cgdvar.h/1.17/Tue Mar 25 02:35:31 2014/-kk/
-/clock_subr.c/1.16/Tue Feb  8 20:20:26 2011/-kk/
+/clock_subr.c/1.17/Fri Oct  3 09:43:34 2014/-kk/
 /clock_subr.h/1.21/Sat Dec 12 15:10:34 2009/-kk/
 /clockctl.c/1.32/Fri Oct  3 09:09:12 2014/-kk/
 /cninit.c/1.11/Tue Feb  8 20:20:26 2011/-kk/

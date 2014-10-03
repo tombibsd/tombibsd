@@ -41,5 +41,5 @@ RUMP_COMPONENT(RUMP_COMPONENT_NET)
 {
 	extern struct domain unixdomain;
 
-	DOMAINADD(unixdomain);
+	domain_attach(&unixdomain);
 }

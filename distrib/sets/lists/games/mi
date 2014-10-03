@@ -101,10 +101,10 @@
 ./usr/share/doc/reference/ref6/trek/trek.html		games-usd-doc		doc,html,groffhtmldoc
 ./usr/share/doc/reference/ref6/trek/trek.ps.gz		games-usd-doc		doc
 ./usr/share/doc/reference/ref6/trek/trek.txt		games-usd-doc		doc
-./usr/share/doc/usd/31.trek/trek.me		games-obsolete		obsolete
 ./usr/share/doc/usd/30.rogue/Makefile		games-obsolete		obsolete
 ./usr/share/doc/usd/30.rogue/rogue.me		games-obsolete		obsolete
 ./usr/share/doc/usd/31.trek/Makefile		games-obsolete		obsolete
+./usr/share/doc/usd/31.trek/trek.me		games-obsolete		obsolete
 ./usr/share/doc/usd/31.trek/trek.me		games-obsolete		obsolete
 ./usr/share/games/atc/ATC_scores		games-obsolete		obsolete
 ./usr/share/games/atc/Atlantis			games-games-share	share

@@ -461,7 +461,7 @@ COPTS.lcUTF8.c+=	-Wno-error
 COPTS.Font.c+=		-Wno-error	# XXX xf86bigfstr.h
 COPTS.OpenDis.c+=	-Wno-error	# XXX xf86bigfstr.h
 COPTS.XlibInt.c+=	-Wno-error	# XXX xcmiscstr.h
-COPTS.XKBBind.c+=	-Wno-error	# uses XKeycodeToKeysym
+COPTS.XKBBind.c+=	-Wno-deprecated-declarations	# uses XKeycodeToKeysym
 
 CWARNFLAGS.clang+=	-Wno-string-plus-int
 

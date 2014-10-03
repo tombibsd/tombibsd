@@ -12,6 +12,7 @@ include 	"arch/evbarm/conf/files.odroid"
 
 # To support easy transit to ../arch/arm/arm32
 options 	MODULAR
+options 	MODULAR_DEFAULT_AUTOLOAD
 options 	ARM_HAS_VBAR
 options 	CORTEX_PMC
 options 	__HAVE_CPU_COUNTER

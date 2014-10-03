@@ -30,11 +30,11 @@
  */
 
 #include "SYS.h"
+#include "assym.h"
 
-#if defined(SYSLIBC_SCCS) && !defined(lint)
-	.text
-	.asciz "$NetBSD$"
-#endif /* SYSLIBC_SCCS && !lint */
+#if defined(LIBC_SCCS) && !defined(lint)
+__RCSID("$NetBSD$")
+#endif /* LIBC_SCCS && !lint */
 
 #ifdef WEAK_ALIAS
 WEAK_ALIAS(getcontext, _getcontext)
@@ -42,12 +42,12 @@ WEAK_ALIAS(getcontext, _getcontext)
 
 ENTRY(_getcontext)
 	mr	%r5,%r3				# must save pointer
-	li	%r0,SYS_getcontext
-	sc
+	_DOSYSCALL(getcontext)
 	bso	1f
 	mflr	%r4
-	stw	%r4,(48 + 34 * 4)(%r5)		# saved pc <- lr
-	stw	%r3,(48 +  3 * 4)(%r5)		# arrange for return value 0
+	stptr	%r4,UC_GREGS_PC(%r5)		# saved pc <- lr
+	stint	%r3,UC_GREGS_R3(%r5)		# arrange for return value 0
 	blr
 1:
-	b	PIC_PLT(_C_LABEL(__cerror))
+	BRANCH_TO_CERROR()
+END(_getcontext)

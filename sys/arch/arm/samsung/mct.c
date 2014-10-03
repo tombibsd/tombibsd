@@ -239,7 +239,7 @@ clockhandler(void *arg)
 	/* ack the interrupt */
 	mct_write_global(sc, MCT_G_INT_CSTAT, G_INT_CSTAT_CLEAR);
 
-	/* check if we periods clock interrupts */
+	/* check if we missed clock interrupts */
 	if (periods > 1)
 		sc->sc_ev_missing_ticks.ev_count += periods - 1;
 
@@ -247,7 +247,8 @@ clockhandler(void *arg)
 	hardclock(cf);
 
 	if (sc->sc_has_blink_led) {
-		sc->sc_led_timer = sc->sc_led_timer - periods - 1;
+		/* we could subtract `periods' here */
+		sc->sc_led_timer = sc->sc_led_timer - 1;
 		if (sc->sc_led_timer <= 0) {
 			sc->sc_led_state = !sc->sc_led_state;
 			exynos_gpio_pindata_write(&sc->sc_gpio_led,

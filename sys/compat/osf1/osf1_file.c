@@ -133,7 +133,7 @@ osf1_sys_getdirentries(struct lwp *l, const struct osf1_sys_getdirentries_args *
 	/* {
 		syscallarg(int) fd;
 		syscallarg(char *) buf;
-		syscallarg(u_int) nbytes;
+		syscallarg(int) nbytes;
 		syscallarg(long *) basep;
 	} */
 	struct dirent *bdp;
@@ -150,6 +150,11 @@ osf1_sys_getdirentries(struct lwp *l, const struct osf1_sys_getdirentries_args *
 	int buflen, error, eofflag;
 	off_t *cookiebuf = NULL, *cookie;
 	int ncookies, fd;
+
+	if (SCARG(uap, nbytes) < 0)
+		return EINVAL;
+	if (SCARG(uap, nbytes) == 0)
+		return 0;
 
 	fd = SCARG(uap, fd);
 	if ((error = fd_getvnode(fd, &fp)) != 0)

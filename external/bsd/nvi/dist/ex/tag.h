@@ -104,6 +104,7 @@ struct _tagq {			/* Tag queue. */
 	size_t	 tlen;		/* Tag string length. */
 
 #define	TAG_CSCOPE	0x01	/* Cscope tag. */
+#define	TAG_IS_LINKED	0x02	/* Tag was inserted into linked list */
 	u_int8_t flags;
 
 	char	 buf[1];	/* Variable length buffer. */

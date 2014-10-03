@@ -30,13 +30,6 @@
 
 void		rump_netisr_register(int, void (*)(void));
 
-#define DOMAINADD(dom)							\
-do {									\
-	if (!pffinddomain(dom.dom_family)) {				\
-		domain_attach(&dom);					\
-        }								\
-} while (/*CONSTCOND*/0)
-
 #include "rumpnet_if_priv.h"
 
 #endif /* _SYS_RUMP_NET_PRIVATE_H_ */

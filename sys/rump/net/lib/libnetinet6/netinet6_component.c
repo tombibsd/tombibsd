@@ -48,7 +48,7 @@ RUMP_COMPONENT(RUMP_COMPONENT_NET)
 {
 	extern struct domain inet6domain;
 
-	DOMAINADD(inet6domain);
+	domain_attach(&inet6domain);
 }
 
 RUMP_COMPONENT(RUMP_COMPONENT_NET_IFCFG)

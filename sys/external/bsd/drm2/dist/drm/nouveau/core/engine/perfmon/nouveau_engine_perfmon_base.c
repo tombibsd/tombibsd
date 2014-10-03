@@ -60,7 +60,7 @@ nouveau_perfsig_find_(struct nouveau_perfdom *dom, const char *name, u32 size)
 	return NULL;
 }
 
-struct nouveau_perfsig *
+static struct nouveau_perfsig *
 nouveau_perfsig_find(struct nouveau_perfmon *ppm, const char *name, u32 size,
 		     struct nouveau_perfdom **pdom)
 {

@@ -402,13 +402,14 @@ vga_raster_init(struct vga_config *vc, bus_space_tag_t iot,
 	    &vh->vh_memh))
 		panic("vga_raster_init: mem subrange failed");
 
+#if 0
 	/* should only reserve the space (no need to map - save KVM) */
 	vc->vc_biostag = memt;
 	if (bus_space_map(vc->vc_biostag, 0xc0000, 0x8000, 0, &vc->vc_bioshdl))
 		vc->vc_biosmapped = 0;
 	else
 		vc->vc_biosmapped = 1;
-
+#endif
 	vc->nscreens = 0;
 	LIST_INIT(&vc->screens);
 	vc->active = NULL;
