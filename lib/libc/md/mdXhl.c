@@ -42,8 +42,6 @@ WA(MDNAME(Data),CONCAT(_,MDNAME(Data)))
 #include <stdlib.h>
 #include <unistd.h>
 
-
-
 char *
 MDNAME(End)(MDNAME(_CTX) *ctx, char *buf)
 {

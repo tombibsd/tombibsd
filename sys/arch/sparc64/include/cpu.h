@@ -223,6 +223,7 @@ struct cpu_bootargs {
 	vaddr_t cb_ekdata;
 
 	paddr_t	cb_cpuinfo;
+	int cb_cputyp;
 };
 
 extern struct cpu_bootargs *cpu_args;

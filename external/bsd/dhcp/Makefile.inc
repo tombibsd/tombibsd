@@ -36,15 +36,15 @@ LDADD+=-Wl,-Bstatic
 .endif
 LDADD+= -lirs -lisccfg -ldns -lisc
 LDADD+=-lpthread
-.if defined(PROG) && ${PROG} == "dhclient"
-LDADD+=-Wl,-Bdynamic
-.endif
 .if (${MKCRYPTO} != "no")
 .if (${MKKERBEROS} != "no")
 LDADD+= -lgssapi -lkrb5 -lhx509 -lheimntlm -lheimbase \
 	-lcom_err  -lroken -lasn1 -lwind
 DPADD+= ${LIBGSSAPI} ${LIBKRB5} ${LIBHX509} ${LIBHEIMNTLM} ${LIBHEIMBASE} \
 	${LIBCOM_ERR} ${LIBROKEN} ${LIBASN1} ${LIBWIND}
+.endif
+.if defined(PROG) && ${PROG} == "dhclient"
+LDADD+=-Wl,-Bdynamic
 .endif
 LDADD+= -lcrypto -lipsec -lcrypt
 DPADD+= ${LIBCRYPTO} ${LIBIPSEC} ${LIBCRYPT}

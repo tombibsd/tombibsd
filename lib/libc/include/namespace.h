@@ -278,9 +278,12 @@
 #define execl			_execl
 #define execle			_execle
 #define execlp			_execlp
+#define execlpe			_execlpe
 #define execv			_execv
 #define execvp			_execvp
+#define execvpe			_execvpe
 #define explicit_memset		_explicit_memset
+#define fdiscard		_fdiscard
 #define fdopen			_fdopen
 #define fgetln			_fgetln
 #define fgetwln			_fgetwln
@@ -520,6 +523,7 @@
 #define pread			_pread
 #define printf_l		_printf_l
 #define pselect			_pselect
+#define posix_fallocate		_posix_fallocate
 #define psignal			_psignal
 #define pthread_atfork		_pthread_atfork
 #define ptree_init		ptree_init

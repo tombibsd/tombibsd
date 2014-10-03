@@ -1437,8 +1437,10 @@ _bus_dmamem_alloc(bus_dma_tag_t t, bus_size_t size, bus_size_t alignment,
 	 */
 	error = uvm_pglistalloc(size, low, high,
 	    alignment, boundary, pglist, nsegs, (flags & BUS_DMA_NOWAIT) == 0);
-	if (error)
+	if (error) {
+		free(pglist, M_DEVBUF);
 		return (error);
+	}
 
 	/*
 	 * Compute the location, size, and number of segments actually

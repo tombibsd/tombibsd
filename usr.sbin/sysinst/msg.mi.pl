@@ -940,7 +940,7 @@ message Abandon {Przerwij instalacje}
 message Abort_fetch {Przerwij pobieranie}
 message Device {Urzadzenie}
 message File_system {SystemPlikow}
-message Select_IPv6_DNS_server {  Wybierz serwer nazw IPv6}
+message Select_DNS_server {  Wybierz serwer nazw}
 message other {inny  }
 message Perform_autoconfiguration {Wykonac autkonfiguracje?}
 message Root_shell {Powloka root'a}

@@ -100,6 +100,8 @@ file arch/zaurus/dev/ztp.c		ztp
 device zaudio: audiobus, auconv, mulaw, aurateconv, pxaiis
 attach zaudio at iic
 file arch/zaurus/dev/zaudio.c		zaudio
+file arch/zaurus/dev/wm8731_zaudio.c	zaudio & cpu_xscale_pxa250
+file arch/zaurus/dev/wm8750_zaudio.c	zaudio & cpu_xscale_pxa270
 defparam opt_zaudio.h			ZAUDIO_VOLUME_STRIDE
 
 # Zaurus remote control

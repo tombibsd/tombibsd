@@ -24,6 +24,10 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if HAVE_NBTOOL_CONFIG_H
+#include "nbtool_config.h"
+#endif
+
 #include <sys/cdefs.h>
 #ifdef __FBSDID
 __FBSDID("$FreeBSD: src/sbin/gpt/create.c,v 1.11 2005/08/31 01:47:19 marcel Exp $");
@@ -62,7 +66,6 @@ usage_create(void)
 static void
 create(int fd)
 {
-	uuid_t uuid;
 	off_t blocks, last;
 	map_t *gpt, *tpg;
 	map_t *tbl, *lbt;
@@ -99,7 +102,7 @@ create(int fd)
 			return;
 		}
 		mbr = gpt_read(fd, 0LL, 1);
-		bzero(mbr, sizeof(*mbr));
+		memset(mbr, 0, sizeof(*mbr));
 		mbr->mbr_sig = htole16(MBR_SIG);
 		mbr->mbr_part[0].part_shd = 0x00;
 		mbr->mbr_part[0].part_ssect = 0x02;
@@ -166,13 +169,12 @@ create(int fd)
 	hdr = gpt->map_data;
 	memcpy(hdr->hdr_sig, GPT_HDR_SIG, sizeof(hdr->hdr_sig));
 	hdr->hdr_revision = htole32(GPT_HDR_REVISION);
-	hdr->hdr_size = htole32(GPT_SIZE);
+	hdr->hdr_size = htole32(GPT_HDR_SIZE);
 	hdr->hdr_lba_self = htole64(gpt->map_start);
 	hdr->hdr_lba_alt = htole64(last);
 	hdr->hdr_lba_start = htole64(tbl->map_start + blocks);
 	hdr->hdr_lba_end = htole64(last - blocks - 1LL);
-	uuid_create(&uuid, NULL);
-	le_uuid_enc(hdr->hdr_uuid, &uuid);
+	gpt_uuid_copy(hdr->hdr_guid, gpt_uuid_nil);
 	hdr->hdr_lba_table = htole64(tbl->map_start);
 	hdr->hdr_entries = htole32((blocks * secsz) / sizeof(struct gpt_ent));
 	if (le32toh(hdr->hdr_entries) > parts)
@@ -181,8 +183,7 @@ create(int fd)
 
 	ent = tbl->map_data;
 	for (i = 0; i < le32toh(hdr->hdr_entries); i++) {
-		uuid_create(&uuid, NULL);
-		le_uuid_enc(ent[i].ent_uuid, &uuid);
+		gpt_uuid_copy(ent[i].ent_guid, gpt_uuid_nil);
 	}
 
 	hdr->hdr_crc_table = htole32(crc32(ent, le32toh(hdr->hdr_entries) *

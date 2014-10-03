@@ -182,6 +182,7 @@ define	CBA_KDATA	offsetof(struct cpu_bootargs, cb_kdata)
 define	CBA_KDATAP	offsetof(struct cpu_bootargs, cb_kdatap)
 define	CBA_EKDATA	offsetof(struct cpu_bootargs, cb_ekdata)
 define	CBA_CPUINFO	offsetof(struct cpu_bootargs, cb_cpuinfo)
+define	CBA_CPUTYP	offsetof(struct cpu_bootargs, cb_cputyp)
 
 # FPU state
 define	FS_REGS		offsetof(struct fpstate64, fs_regs)

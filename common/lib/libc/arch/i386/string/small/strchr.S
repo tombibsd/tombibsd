@@ -39,10 +39,10 @@ ENTRY(strchr)
 	pushl	%eax
 	pushl	%edx
 1:
-	cmpb	$0, 0(%eax)
-	je 2f
 	cmpb	%cl, 0(%eax)
 	je 3f
+	cmpb	$0, 0(%eax)
+	je 2f
 	incl	%eax
 	jmp 1b
 2:

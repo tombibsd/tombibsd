@@ -1623,7 +1623,7 @@ xbdback_iodone(struct buf *bp)
 	while(!SLIST_EMPTY(&xbd_io->xio_rq)) {
 		struct xbdback_fragment *xbd_fr;
 		struct xbdback_request *xbd_req;
-		struct xbdback_instance *rxbdi;
+		struct xbdback_instance *rxbdi __diagused;
 		int error;
 		
 		xbd_fr = SLIST_FIRST(&xbd_io->xio_rq);

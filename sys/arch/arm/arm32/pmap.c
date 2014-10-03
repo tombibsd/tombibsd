@@ -2405,7 +2405,9 @@ pmap_clearbit(struct vm_page_md *md, paddr_t pa, u_int maskbits)
 		const pt_entry_t opte = *ptep;
 		pt_entry_t npte = opte | execbits;
 
+#ifdef ARM_MMU_EXTENDED
 		KASSERT((opte & L2_XS_nG) == (pm == pmap_kernel() ? 0 : L2_XS_nG));
+#endif
 
 		NPDEBUG(PDB_BITS,
 		    printf( "%s: pv %p, pm %p, va 0x%08lx, flag 0x%x\n",
@@ -6233,12 +6235,6 @@ pmap_set_pt_cache_mode(pd_entry_t *kl1, vaddr_t va, size_t nptes)
 				rv = 1;
 			}
 			return rv;
-			if (pde & L1_S_V6_SUPER) {
-				va = (va & -L1_SS_SIZE) + L1_SS_SIZE;
-			} else {
-				va = (va & -L1_S_SIZE) + L1_S_SIZE;
-			}
-			continue;
 		}
 		vaddr_t pa = l1pte_pa(pde);
 		pt_entry_t *ptep = (pt_entry_t *)kernel_pt_lookup(pa);

@@ -360,8 +360,11 @@ privcmd_ioctl(void *v)
 			}
 			error  = privcmd_map_obj(vmm, va, maddr,
 			    mentry.npages, mcmd->dom);
-			if (error)
+			if (error) {
+				kmem_free(maddr, 
+				    sizeof(paddr_t) * mentry.npages);
 				return error;
+			}
 		}
 		break;
 	}
@@ -553,7 +556,7 @@ privcmd_map_obj(struct vm_map *map, vaddr_t start, paddr_t *maddr,
 	/* remove current entries */
 	uvm_unmap1(map, start, start + size, 0);
 
-	obj = kmem_alloc(sizeof(struct privcmd_object), KM_SLEEP);
+	obj = kmem_alloc(sizeof(*obj), KM_SLEEP);
 	if (obj == NULL) {
 		kmem_free(maddr, sizeof(paddr_t) * npages);
 		return ENOMEM;
@@ -573,6 +576,8 @@ privcmd_map_obj(struct vm_map *map, vaddr_t start, paddr_t *maddr,
 	if (error) {
 		if (obj)
 			obj->uobj.pgops->pgo_detach(&obj->uobj);
+		kmem_free(maddr, sizeof(paddr_t) * npages);
+		kmem_free(obj, sizeof(*obj));
 		return error;
 	}
 	if (newstart != start) {

@@ -60,7 +60,6 @@ WA(FNPREFIX(Data),CONCAT(_,FNPREFIX(Data)))
 #define	MIN(x,y)	((x)<(y)?(x):(y))
 #endif /* !MIN */
 
-
 char *
 FNPREFIX(End)(HASH_CTX *ctx, char *buf)
 {

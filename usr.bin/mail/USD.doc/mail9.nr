@@ -121,7 +121,7 @@ escape	valued	Escape character to be used instead of\ \ ~
 folder	valued	Directory to store folders in
 hold	binary	Hold messages in system mailbox by default
 ignore	binary	Ignore \s-2RUBOUT\s0 while sending mail
-ignoreeof	binary	Don't terminate letters/command input with \fB\(uaD\fP
+ignoreeof	binary	Don't terminate letters/command input with \fB\(haD\fP
 keep	binary	Don't unlink system mailbox when empty
 keepsave	binary	Don't delete \fBsave\fPd messages by default
 metoo	binary	Include sending user in aliases

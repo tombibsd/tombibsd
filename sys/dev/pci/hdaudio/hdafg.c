@@ -339,6 +339,7 @@ static int	hdafg_widget_info(void *, prop_dictionary_t,
 					prop_dictionary_t);
 static int	hdafg_codec_info(void *, prop_dictionary_t,
 				       prop_dictionary_t);
+static void	hdafg_enable_analog_beep(struct hdafg_softc *);
 
 CFATTACH_DECL2_NEW(
     hdafg,
@@ -3613,8 +3614,8 @@ hdafg_attach(device_t parent, device_t self, void *opaque)
 
 	prop_dictionary_get_uint16(args, "vendor-id", &sc->sc_vendor);
 	prop_dictionary_get_uint16(args, "product-id", &sc->sc_product);
-	get_hdaudio_vendor(vendor, sizeof(vendor), sc->sc_vendor);
-	get_hdaudio_product(product, sizeof(product), sc->sc_vendor,
+	hdaudio_findvendor(vendor, sizeof(vendor), sc->sc_vendor);
+	hdaudio_findproduct(product, sizeof(product), sc->sc_vendor,
 	    sc->sc_product);
 	hda_print1(sc, ": %s %s%s\n", vendor, product,
 	    sc->sc_config ? " (custom configuration)" : "");
@@ -3687,6 +3688,9 @@ hdafg_attach(device_t parent, device_t self, void *opaque)
 	hdafg_dump(sc);
 	if (1) hdafg_widget_pin_dump(sc);
 	hdafg_assoc_dump(sc);
+
+	hda_debug(sc, "enabling analog beep\n");
+	hdafg_enable_analog_beep(sc);
 
 	hda_debug(sc, "configuring encodings\n");
 	sc->sc_audiodev.ad_sc = sc;
@@ -3965,9 +3969,9 @@ hdafg_getdev(void *opaque, struct audio_device *audiodev)
 	struct hdaudio_audiodev *ad = opaque;
 	struct hdafg_softc *sc = ad->ad_sc;
 
-	get_hdaudio_vendor(audiodev->name, sizeof(audiodev->name),
+	hdaudio_findvendor(audiodev->name, sizeof(audiodev->name),
 	    sc->sc_vendor);
-	get_hdaudio_product(audiodev->version, sizeof(audiodev->version),
+	hdaudio_findproduct(audiodev->version, sizeof(audiodev->version),
 	    sc->sc_vendor, sc->sc_product);
 	snprintf(audiodev->config, sizeof(audiodev->config) - 1,
 	    "%02Xh", sc->sc_nid);
@@ -4359,5 +4363,69 @@ hdafg_modcmd(modcmd_t cmd, void *opaque)
 		return error;
 	default:
 		return ENOTTY;
+	}
+}
+
+#define HDAFG_GET_ANACTRL 		0xfe0
+#define HDAFG_SET_ANACTRL 		0x7e0
+#define HDAFG_ANALOG_BEEP_EN		__BIT(5)
+#define HDAFG_ALC231_MONO_OUT_MIXER 	0xf
+#define HDAFG_STAC9200_AFG		0x1
+#define HDAFG_STAC9200_GET_ANACTRL_PAYLOAD	0x0
+#define HDAFG_ALC231_INPUT_BOTH_CHANNELS_UNMUTE	0x7100
+
+static void
+hdafg_enable_analog_beep(struct hdafg_softc *sc)
+{
+	int nid;
+	uint32_t response;
+	
+	switch (sc->sc_vendor) {
+	case HDAUDIO_VENDOR_SIGMATEL:
+		switch (sc->sc_product) {
+		case HDAUDIO_PRODUCT_SIGMATEL_STAC9200:
+		case HDAUDIO_PRODUCT_SIGMATEL_STAC9200D:
+		case HDAUDIO_PRODUCT_SIGMATEL_STAC9202:
+		case HDAUDIO_PRODUCT_SIGMATEL_STAC9202D:
+		case HDAUDIO_PRODUCT_SIGMATEL_STAC9204:
+		case HDAUDIO_PRODUCT_SIGMATEL_STAC9204D:
+		case HDAUDIO_PRODUCT_SIGMATEL_STAC9205:
+		case HDAUDIO_PRODUCT_SIGMATEL_STAC9205_1:
+		case HDAUDIO_PRODUCT_SIGMATEL_STAC9205D:
+			nid = HDAFG_STAC9200_AFG;
+
+			response = hdaudio_command(sc->sc_codec, nid,
+			    HDAFG_GET_ANACTRL,
+			    HDAFG_STAC9200_GET_ANACTRL_PAYLOAD);
+			hda_delay(100);
+
+			response |= HDAFG_ANALOG_BEEP_EN;
+
+			hdaudio_command(sc->sc_codec, nid, HDAFG_SET_ANACTRL,
+			    response);
+			hda_delay(100);
+			break;
+		default:
+			break;
+		}
+		break;
+	case HDAUDIO_VENDOR_REALTEK:
+		switch (sc->sc_product) {
+		case HDAUDIO_PRODUCT_REALTEK_ALC269:
+			/* The Panasonic Toughbook CF19 - Mk 5 uses a Realtek
+			 * ALC231 that identifies as an ALC269.
+			 * This unmutes the PCBEEP on the speaker.
+			 */
+ 			nid = HDAFG_ALC231_MONO_OUT_MIXER;
+			response = hdaudio_command(sc->sc_codec, nid,
+			    CORB_SET_AMPLIFIER_GAIN_MUTE,
+			    HDAFG_ALC231_INPUT_BOTH_CHANNELS_UNMUTE);
+			hda_delay(100);
+			break;
+		default:
+			break;
+		}
+	default:
+		break;
 	}
 }

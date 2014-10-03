@@ -49,3 +49,11 @@ Changes from NetBSD 7.0 to NetBSD 8.0:
 	rtsol(8): Removed in favour of dhcpcd. [roy 20140911]
 	rtsold(8): Removed in favour of dhcpcd. [roy 20140911]
 	dhcpcd(8): Import dhcpcd-6.4.5. [roy 20140918]
+	arm: Add support for i.MX6 SoC. [ryo 20140925]
+	gpt(8): Completed overhaul, including adding follwing subcommands:
+		resize, set, unset, backup, restore, and resizedisk.
+		[jnemeth 20140926]
+	dhcpcd(8): Import dhcpcd-6.4.7. [roy 20140927]
+	mpt(4): added bio(4) support. [jmcneill 20140927]
+	gpt(8): added type subcommand to modify partition type.
+		[jnemeth 20140927]

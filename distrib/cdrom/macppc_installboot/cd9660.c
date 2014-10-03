@@ -34,7 +34,6 @@ __RCSID("$NetBSD$");
 #endif	/* !__lint */
 
 #include <sys/param.h>
-#include <sys/dirent.h>
 
 #if !HAVE_NBTOOL_CONFIG_H
 #include <sys/mount.h>
@@ -49,6 +48,7 @@ __RCSID("$NetBSD$");
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <dirent.h>
 
 #include <fs/cd9660/iso.h>
 

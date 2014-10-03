@@ -26,7 +26,7 @@
 /hosts/1.9/Tue Dec 17 03:59:07 2013/-kk/
 /inetd.conf/1.58/Tue Oct 16 02:47:14 2007/-kk/
 /locate.conf/1.2/Fri Oct  3 09:05:28 2014/-kk/
-/login.conf/1.5/Thu Oct 24 10:28:41 2013/-kk/
+/login.conf/1.6/Fri Oct  3 10:02:03 2014/-kk/
 /mailer.conf/1.18/Sun Jul 24 08:28:11 2011/-kk/
 /man.conf/1.35/Wed Jan  1 02:41:54 2014/-kk/
 /master.passwd/1.47/Thu Oct 24 10:28:41 2013/-kk/
@@ -56,7 +56,7 @@
 /rc.conf/1.97/Sun Jul 20 13:55:28 2014/-kk/
 /rc.local/1.32/Wed Jun 11 17:14:52 2008/-kk/
 /rc.shutdown/1.9/Mon Jun 25 07:22:45 2012/-kk/
-/rc.subr/1.94/Fri Oct  3 09:05:29 2014/-kk/
+/rc.subr/1.95/Fri Oct  3 10:02:03 2014/-kk/
 /rc/1.170/Fri Oct  3 09:05:28 2014/-kk/
 /remote/1.8/Wed Apr 25 23:46:12 2001/-kk/
 /rpc/1.7/Sat May 17 21:37:09 2008/-kk/

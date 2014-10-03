@@ -68,6 +68,7 @@ static void	om1_eraserows(void *, int, int, long);
 static void	om4_eraserows(void *, int, int, long);
 static int	om1_allocattr(void *, int, int, int, long *);
 static int	om4_allocattr(void *, int, int, int, long *);
+static void	om4_unpack_attr(long, int *, int *, int *);
 
 static int	omrasops_init(struct rasops_info *, int, int);
 
@@ -173,9 +174,10 @@ om4_putchar(void *cookie, int row, int startcol, u_int uc, long attr)
 	struct rasops_info *ri = cookie;
 	uint8_t *p;
 	int scanspan, startx, height, width, align, y;
-	uint32_t lmask, rmask, glyph;
-	uint32_t glyphbg, fg, bg;
-	int i;
+	uint32_t lmask, rmask, glyph, glyphbg, fgpat, bgpat;
+	uint32_t fgmask0, fgmask1, fgmask2, fgmask3;
+	uint32_t bgmask0, bgmask1, bgmask2, bgmask3;
+	int i, fg, bg;
 	uint8_t *fb;
 
 	scanspan = ri->ri_stride;
@@ -184,6 +186,15 @@ om4_putchar(void *cookie, int row, int startcol, u_int uc, long attr)
 	height = ri->ri_font->fontheight;
 	fb = (uint8_t *)ri->ri_font->data +
 	    (uc - ri->ri_font->firstchar) * ri->ri_fontscale;
+	om4_unpack_attr(attr, &fg, &bg, NULL);
+	fgmask0 = (fg & 0x01) ? ALL1BITS : ALL0BITS;
+	fgmask1 = (fg & 0x02) ? ALL1BITS : ALL0BITS;
+	fgmask2 = (fg & 0x04) ? ALL1BITS : ALL0BITS;
+	fgmask3 = (fg & 0x08) ? ALL1BITS : ALL0BITS;
+	bgmask0 = (bg & 0x01) ? ALL1BITS : ALL0BITS;
+	bgmask1 = (bg & 0x02) ? ALL1BITS : ALL0BITS;
+	bgmask2 = (bg & 0x04) ? ALL1BITS : ALL0BITS;
+	bgmask3 = (bg & 0x08) ? ALL1BITS : ALL0BITS;
 
 	p = (uint8_t *)ri->ri_bits + y * scanspan + ((startx / 32) * 4);
 	align = startx & ALIGNMASK;
@@ -199,18 +210,18 @@ om4_putchar(void *cookie, int row, int startcol, u_int uc, long attr)
 			glyph <<= (4 - ri->ri_font->stride) * NBBY;
 			glyph = (glyph >> align);
 			glyphbg = glyph ^ ALL1BITS;
-			fg = (attr & 0x01000000) ? glyph : 0;
-			bg = (attr & 0x00010000) ? glyphbg : 0;
-			P0(p) = (P0(p) & ~lmask) | ((fg | bg) & lmask);
-			fg = (attr & 0x02000000) ? glyph : 0;
-			bg = (attr & 0x00020000) ? glyphbg : 0;
-			P1(p) = (P1(p) & ~lmask) | ((fg | bg) & lmask);
-			fg = (attr & 0x04000000) ? glyph : 0;
-			bg = (attr & 0x00040000) ? glyphbg : 0;
-			P2(p) = (P2(p) & ~lmask) | ((fg | bg) & lmask);
-			fg = (attr & 0x08000000) ? glyph : 0;
-			bg = (attr & 0x00080000) ? glyphbg : 0;
-			P3(p) = (P3(p) & ~lmask) | ((fg | bg) & lmask);
+			fgpat = glyph   & fgmask0;
+			bgpat = glyphbg & bgmask0;
+			P0(p) = (P0(p) & ~lmask) | ((fgpat | bgpat) & lmask);
+			fgpat = glyph   & fgmask1;
+			bgpat = glyphbg & bgmask1;
+			P1(p) = (P1(p) & ~lmask) | ((fgpat | bgpat) & lmask);
+			fgpat = glyph   & fgmask2;
+			bgpat = glyphbg & bgmask2;
+			P2(p) = (P2(p) & ~lmask) | ((fgpat | bgpat) & lmask);
+			fgpat = glyph   & fgmask3;
+			bgpat = glyphbg & bgmask3;
+			P3(p) = (P3(p) & ~lmask) | ((fgpat | bgpat) & lmask);
 			p += scanspan;
 			height--;
 		}
@@ -226,33 +237,33 @@ om4_putchar(void *cookie, int row, int startcol, u_int uc, long attr)
 			glyph <<= (4 - ri->ri_font->stride) * NBBY;
 			lhalf = (glyph >> align);
 			lhalfbg = lhalf ^ ALL1BITS;
-			fg = (attr & 0x01000000) ? lhalf : 0;
-			bg = (attr & 0x00010000) ? lhalfbg : 0;
-			P0(p) = (P0(p) & ~lmask) | ((fg | bg) & lmask);
-			fg = (attr & 0x02000000) ? lhalf : 0;
-			bg = (attr & 0x00020000) ? lhalfbg : 0;
-			P1(p) = (P1(p) & ~lmask) | ((fg | bg) & lmask);
-			fg = (attr & 0x04000000) ? lhalf : 0;
-			bg = (attr & 0x00040000) ? lhalfbg : 0;
-			P2(p) = (P2(p) & ~lmask) | ((fg | bg) & lmask);
-			fg = (attr & 0x08000000) ? lhalf : 0;
-			bg = (attr & 0x00080000) ? lhalfbg : 0;
-			P3(p) = (P3(p) & ~lmask) | ((fg | bg) & lmask);
+			fgpat = lhalf   & fgmask0;
+			bgpat = lhalfbg & bgmask0;
+			P0(p) = (P0(p) & ~lmask) | ((fgpat | bgpat) & lmask);
+			fgpat = lhalf   & fgmask1;
+			bgpat = lhalfbg & bgmask1;
+			P1(p) = (P1(p) & ~lmask) | ((fgpat | bgpat) & lmask);
+			fgpat = lhalf   & fgmask2;
+			bgpat = lhalfbg & bgmask2;
+			P2(p) = (P2(p) & ~lmask) | ((fgpat | bgpat) & lmask);
+			fgpat = lhalf   & fgmask3;
+			bgpat = lhalfbg & bgmask3;
+			P3(p) = (P3(p) & ~lmask) | ((fgpat | bgpat) & lmask);
 			p += BYTESDONE;
 			rhalf = (glyph << (BLITWIDTH - align));
 			rhalfbg = rhalf ^ ALL1BITS;
-			fg = (attr & 0x01000000) ? rhalf : 0;
-			bg = (attr & 0x00010000) ? rhalfbg : 0;
-			P0(p) = ((fg | bg) & rmask) | (P0(p) & ~rmask);
-			fg = (attr & 0x02000000) ? rhalf : 0;
-			bg = (attr & 0x00020000) ? rhalfbg : 0;
-			P1(p) = ((fg | bg) & rmask) | (P1(p) & ~rmask);
-			fg = (attr & 0x04000000) ? rhalf : 0;
-			bg = (attr & 0x00040000) ? rhalfbg : 0;
-			P2(p) = ((fg | bg) & rmask) | (P2(p) & ~rmask);
-			fg = (attr & 0x08000000) ? rhalf : 0;
-			bg = (attr & 0x00080000) ? rhalfbg : 0;
-			P3(p) = ((fg | bg) & rmask) | (P3(p) & ~rmask);
+			fgpat = rhalf   & fgmask0;
+			bgpat = rhalfbg & bgmask0;
+			P0(p) = ((fgpat | bgpat) & rmask) | (P0(p) & ~rmask);
+			fgpat = rhalf   & fgmask1;
+			bgpat = rhalfbg & bgmask1;
+			P1(p) = ((fgpat | bgpat) & rmask) | (P1(p) & ~rmask);
+			fgpat = rhalf   & fgmask2;
+			bgpat = rhalfbg & bgmask2;
+			P2(p) = ((fgpat | bgpat) & rmask) | (P2(p) & ~rmask);
+			fgpat = rhalf   & fgmask3;
+			bgpat = rhalfbg & bgmask3;
+			P3(p) = ((fgpat | bgpat) & rmask) | (P3(p) & ~rmask);
 
 			p = (q += scanspan);
 			height--;
@@ -313,7 +324,7 @@ om4_erasecols(void *cookie, int row, int startcol, int ncols, long attr)
 {
 	struct rasops_info *ri = cookie;
 	uint8_t *p;
-	int scanspan, startx, height, width, align, w, y;
+	int scanspan, startx, height, width, align, w, y, fg, bg;
 	uint32_t lmask, rmask, fill0, fill1, fill2, fill3;
 
 	scanspan = ri->ri_stride;;
@@ -321,10 +332,11 @@ om4_erasecols(void *cookie, int row, int startcol, int ncols, long attr)
 	startx = ri->ri_font->fontwidth * startcol;
 	height = ri->ri_font->fontheight;
 	w = ri->ri_font->fontwidth * ncols;
-	fill0 = ((attr & 0x00010000) != 0) ? ALL1BITS : ALL0BITS;
-	fill1 = ((attr & 0x00020000) != 0) ? ALL1BITS : ALL0BITS;
-	fill2 = ((attr & 0x00040000) != 0) ? ALL1BITS : ALL0BITS;
-	fill3 = ((attr & 0x00080000) != 0) ? ALL1BITS : ALL0BITS;
+	om4_unpack_attr(attr, &fg, &bg, NULL);
+	fill0 = ((bg & 0x01) != 0) ? ALL1BITS : ALL0BITS;
+	fill1 = ((bg & 0x02) != 0) ? ALL1BITS : ALL0BITS;
+	fill2 = ((bg & 0x04) != 0) ? ALL1BITS : ALL0BITS;
+	fill3 = ((bg & 0x08) != 0) ? ALL1BITS : ALL0BITS;
 
 	p = (uint8_t *)ri->ri_bits + y * scanspan + ((startx / 32) * 4);
 	align = startx & ALIGNMASK;
@@ -413,17 +425,18 @@ om4_eraserows(void *cookie, int startrow, int nrows, long attr)
 {
 	struct rasops_info *ri = cookie;
 	uint8_t *p, *q;
-	int scanspan, starty, height, width, w;
+	int scanspan, starty, height, width, w, fg, bg;
 	uint32_t rmask, fill0, fill1, fill2, fill3;
 
 	scanspan = ri->ri_stride;
 	starty = ri->ri_font->fontheight * startrow;
 	height = ri->ri_font->fontheight * nrows;
 	w = ri->ri_emuwidth;
-	fill0 = ((attr & 0x00010000) != 0) ? ALL1BITS : ALL0BITS;
-	fill1 = ((attr & 0x00020000) != 0) ? ALL1BITS : ALL0BITS;
-	fill2 = ((attr & 0x00040000) != 0) ? ALL1BITS : ALL0BITS;
-	fill3 = ((attr & 0x00080000) != 0) ? ALL1BITS : ALL0BITS;
+	om4_unpack_attr(attr, &fg, &bg, NULL);
+	fill0 = ((bg & 0x01) != 0) ? ALL1BITS : ALL0BITS;
+	fill1 = ((bg & 0x02) != 0) ? ALL1BITS : ALL0BITS;
+	fill2 = ((bg & 0x04) != 0) ? ALL1BITS : ALL0BITS;
+	fill3 = ((bg & 0x08) != 0) ? ALL1BITS : ALL0BITS;
 
 	p = (uint8_t *)ri->ri_bits + starty * scanspan;
 	width = w;
@@ -1042,6 +1055,14 @@ om4_allocattr(void *id, int fg, int bg, int flags, long *attrp)
 
 	*attrp = (fg << 24) | (bg << 16);
 	return 0;
+}
+
+static void
+om4_unpack_attr(long attr, int *fg, int *bg, int *underline)
+{
+
+	*fg = ((u_int)attr >> 24) & 0xf;
+	*bg = ((u_int)attr >> 16) & 0xf;
 }
 
 /*

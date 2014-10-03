@@ -1011,7 +1011,7 @@ process_dofpregs(struct lwp *curl /*tracer*/,
 
 	kv += uio->uio_offset;
 	kl -= uio->uio_offset;
-	if ((size_t)kl > uio->uio_resid)
+	if (kl > uio->uio_resid)
 		kl = uio->uio_resid;
 
 	error = process_read_fpregs(l, &r, &kl);

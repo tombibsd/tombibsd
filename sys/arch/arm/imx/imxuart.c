@@ -100,6 +100,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include "opt_imxuart.h"
 #include "opt_ddb.h"
+#include "opt_ddbparam.h"
 #include "opt_kgdb.h"
 #include "opt_lockdebug.h"
 #include "opt_multiprocessor.h"
@@ -1931,6 +1932,14 @@ imxuintr_read(struct imxuart_softc *sc)
 		    rd & 0xff, imxuart_cnm_state);
 
 		if (!cn_trapped) {
+#if defined(DDB) && defined(DDB_KEYCODE)
+			/*
+			 * Temporary hack so that I can force the kernel into
+			 * the debugger via the serial port
+			 */
+			if ((rd & 0xff) == DDB_KEYCODE)
+				Debugger();
+#endif
 			sc->sc_rbuf_in = IMXUART_RBUF_INC(sc, sc->sc_rbuf_in, 1);
 			cc--;
 		}

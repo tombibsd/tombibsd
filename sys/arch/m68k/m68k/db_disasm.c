@@ -1189,7 +1189,7 @@ opcode_1000(dis_buffer_t *dbuf, u_short opc)
 		addstr(dbuf, "@-,");
 		PRINT_AREG(dbuf,BITFIELD(opc,11,9));
 		addstr(dbuf, "@-");
-	} else if (IS_INST(SBCDA,opc)) {
+	} else if (IS_INST(SBCDD,opc)) {
 		addstr(dbuf, "sbcd\t");
 		PRINT_DREG(dbuf,BITFIELD(opc,2,0));
 		addchar(',');
@@ -1247,7 +1247,7 @@ opcode_1100(dis_buffer_t *dbuf, u_short opc)
 		addstr(dbuf, "@-,");
 		PRINT_AREG(dbuf,BITFIELD(opc,11,9));
 		addstr(dbuf, "@-");
-	} else if (IS_INST(ABCDA,opc)) {
+	} else if (IS_INST(ABCDD,opc)) {
 		addstr(dbuf, "abcd\t");
 		PRINT_DREG(dbuf,BITFIELD(opc,2,0));
 		addchar(',');

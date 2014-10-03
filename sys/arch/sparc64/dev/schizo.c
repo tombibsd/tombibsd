@@ -195,6 +195,7 @@ schizo_attach(device_t parent, device_t self, void *aux)
 			  ma->ma_reg[0].ur_len,
 			  BUS_SPACE_MAP_LINEAR, &pbm->sp_intrh)) {
 		aprint_error(": failed to interrupt map registers\n");
+		kmem_free(pbm, sizeof(*pbm));
 		return;
 	}
 

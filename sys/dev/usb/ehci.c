@@ -1038,7 +1038,8 @@ ehci_idone(struct ehci_xfer *ex)
 
 	lsqtd = ex->sqtdend;
 	actlen = 0;
-	for (sqtd = ex->sqtdstart; sqtd != lsqtd->nextqtd; sqtd = sqtd->nextqtd) {
+	for (sqtd = ex->sqtdstart; sqtd != lsqtd->nextqtd;
+	     sqtd = sqtd->nextqtd) {
 		usb_syncmem(&sqtd->dma, sqtd->offs, sizeof(sqtd->qtd),
 		    BUS_DMASYNC_POSTWRITE | BUS_DMASYNC_POSTREAD);
 		nstatus = le32toh(sqtd->qtd.qtd_status);

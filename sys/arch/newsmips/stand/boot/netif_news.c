@@ -191,7 +191,7 @@ int
 prom_getether(struct romdev *pd, u_char *ea)
 {
 
-	if (apcall_ioctl(pd->fd, APIOCGIFHWADDR, ea));
+	if (apcall_ioctl(pd->fd, APIOCGIFHWADDR, ea))
 		return -1;
 
 #ifdef BOOT_DEBUG

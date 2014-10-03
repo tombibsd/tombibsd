@@ -1272,8 +1272,7 @@ psycho_intr_establish(bus_space_tag_t t, int ihandle, int level,
 	int ino;
 	long vec = INTVEC(ihandle);
 
-	ih = (struct intrhand *)
-		malloc(sizeof(struct intrhand), M_DEVBUF, M_NOWAIT);
+	ih = malloc(sizeof(struct intrhand), M_DEVBUF, M_NOWAIT);
 	if (ih == NULL)
 		return (NULL);
 
@@ -1342,6 +1341,7 @@ psycho_intr_establish(bus_space_tag_t t, int ihandle, int level,
 	}
 
 	printf("Cannot find interrupt vector %lx\n", vec);
+	free(ih, M_DEVBUF);
 	return (NULL);
 
 found:

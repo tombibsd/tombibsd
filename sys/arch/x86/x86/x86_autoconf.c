@@ -423,7 +423,6 @@ findroot(void)
 		for (dv = deviter_first(&di, DEVITER_F_ROOT_FIRST);
 		     dv != NULL;
 		     dv = deviter_next(&di)) {
-				continue;
 
 			if (device_is_a(dv, "fd") &&
 			    device_class(dv) == DV_DISK) {

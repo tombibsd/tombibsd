@@ -1428,7 +1428,7 @@ puffs_vnop_reclaim(void *v)
 		if (__predict_true(VPTOPP(vp)->pn_parent != NULL))
 			vrele(VPTOPP(vp)->pn_parent);
 		else
-			KASSERT(vp->v_vflag & VV_ROOT);
+			KASSERT(vp->v_type == VNON || (vp->v_vflag & VV_ROOT));
 	}
 
 	puffs_putvnode(vp);

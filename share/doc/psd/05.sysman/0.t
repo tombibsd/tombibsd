@@ -171,7 +171,7 @@ uint	unsigned int	/* System V compatibility */
 uint16_t	unsigned short	/* unsigned 16-bit integer */
 uint32_t	unsigned int	/* unsigned 32-bit integer */
 uint64_t	unsigned long long	/* unsigned 64-bit integer */
-uint8_t		unsigned char	/* unsigned 8-bit integer */
+uint8_t	unsigned char	/* unsigned 8-bit integer */
 ushort	unsigned short	/* System V compatibility */
 .TE
 .ft R

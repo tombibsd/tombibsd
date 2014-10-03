@@ -220,7 +220,7 @@ mpu_current_frequency_sysctl_helper(SYSCTLFN_ARGS)
 				mpu_frequency.mvolt = old_mvolt;
 			}
 		}
-		aprint_normal_dev(curcpu()->ci_dev,
+		aprint_debug_dev(curcpu()->ci_dev,
 		    "frequency changed from %d MHz to %d MHz\n",
 		    old_freq, freq);
 		pmf_event_inject(NULL, PMFE_SPEED_CHANGED);

@@ -1,6 +1,6 @@
 /am335x_cm_padconf.c/1.2/Thu Oct 24 10:28:57 2013/-kk/
 /am335x_dmtimer.c/1.1/Tue Dec 11 19:06:23 2012/-kk/
-/am335x_prcm.c/1.7/Mon Jul 21 08:07:27 2014/-kk/
+/am335x_prcm.c/1.8/Fri Oct  3 10:04:58 2014/-kk/
 /am335x_prcm.h/1.8/Mon Jul 21 08:07:27 2014/-kk/
 /files.omap/1.6/Wed Jun  6 20:21:45 2012/-kk/
 /files.omap2/1.29/Fri Oct  3 09:43:14 2014/-kk/

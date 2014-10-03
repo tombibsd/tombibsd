@@ -112,8 +112,8 @@ clock_gettime(clockid_t clk, struct timespec *ts)
 #include <sys/types.h>
 #include <sys/param.h>
 
-/* NetBSD is the only(?) platform with getenv_r() */
-#if !defined(__NetBSD__)
+/* NetBSD is almost the only platform with getenv_r() */
+#if !(defined(__NetBSD__) || defined(__minix__))
 #include <errno.h>
 #include <stdlib.h>
 #include <string.h>

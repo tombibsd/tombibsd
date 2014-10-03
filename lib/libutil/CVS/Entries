@@ -35,7 +35,7 @@
 /logwtmp.c/1.14/Thu Aug  7 16:44:59 2003/-kk/
 /logwtmpx.c/1.2/Thu Aug  7 16:44:59 2003/-kk/
 /opendisk.3/1.11/Wed Apr 30 13:10:52 2008/-kk/
-/opendisk.c/1.12/Tue Oct 13 22:00:31 2009/-kk/
+/opendisk.c/1.13/Fri Oct  3 10:04:48 2014/-kk/
 /openpty.3/1.17/Fri Jul 27 21:33:46 2012/-kk/
 /parsedate.3/1.12/Thu Oct 24 10:28:53 2013/-kk/
 /parsedate.y/1.16/Thu Oct 24 10:28:53 2013/-kk/

@@ -42,9 +42,9 @@
 #include "nbtool_config.h"
 #endif
 
-#include <assert.h>
 #include <sys/param.h>
-#include <sys/dirent.h>
+#include <assert.h>
+#include <dirent.h>
 
 #include <fs/cd9660/iso.h>
 #define KASSERT(x)	assert(x)	/* XXX for <fs/unicode.h> */

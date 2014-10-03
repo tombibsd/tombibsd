@@ -113,7 +113,7 @@ SUBDIR += .WAIT texinfo \
 		asn1_compile cksum compile_et db \
 		file lint1 slc \
 		makefs .WAIT menuc mkcsmapper mkesdb mklocale mknod msgc \
-		.WAIT disklabel \
+		.WAIT disklabel gpt \
 		.WAIT paxctl \
 		.WAIT fdisk \
 		.WAIT installboot \

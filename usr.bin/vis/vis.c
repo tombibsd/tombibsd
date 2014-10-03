@@ -70,7 +70,7 @@ main(int argc, char *argv[])
 	int ch;
 	int rval;
 
-	while ((ch = getopt(argc, argv, "bcde:F:fhlmnostw")) != -1)
+	while ((ch = getopt(argc, argv, "bcde:F:fhlMmnoSstw")) != -1)
 		switch((char)ch) {
 		case 'b':
 			eflags |= VIS_NOSLASH;
@@ -107,6 +107,9 @@ main(int argc, char *argv[])
 			if (foldwidth == 80)
 				foldwidth = 76;
 			break;
+		case 'M':
+			eflags |= VIS_META;
+			break;
 		case 'n':
 			none++;
 			break;
@@ -115,6 +118,9 @@ main(int argc, char *argv[])
 			break;
 		case 's':
 			eflags |= VIS_SAFE;
+			break;
+		case 'S':
+			eflags |= VIS_SHELL;
 			break;
 		case 't':
 			eflags |= VIS_TAB;
@@ -125,7 +131,7 @@ main(int argc, char *argv[])
 		case '?':
 		default:
 			(void)fprintf(stderr, 
-			    "Usage: %s [-bcfhlmnostw] [-e extra]" 
+			    "Usage: %s [-bcfhlMmnoSstw] [-e extra]" 
 			    " [-F foldwidth] [file ...]\n", getprogname());
 			return 1;
 		}

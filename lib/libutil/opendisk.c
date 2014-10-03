@@ -29,6 +29,10 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+#if HAVE_NBTOOL_CONFIG_H
+#include "nbtool_config.h"
+#endif
+
 #include <sys/cdefs.h>
 #if defined(LIBC_SCCS) && !defined(lint)
 __RCSID("$NetBSD$");
@@ -39,8 +43,12 @@ __RCSID("$NetBSD$");
 #include <assert.h>
 #include <errno.h>
 #include <fcntl.h>
+#ifndef HAVE_NBTOOL_CONFIG_H
 #include <util.h>
 #include <paths.h>
+#else
+#include "opendisk.h"
+#endif
 #include <stdio.h>
 #include <string.h>
 

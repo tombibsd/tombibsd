@@ -260,7 +260,7 @@ puffs_cookie2vnode(struct puffs_mount *pmp, puffs_cookie_t ck,
 		return 0;
 	}
 
-	rv = vcache_get(PMPTOMP(pmp), ck, sizeof(ck), vpp);
+	rv = vcache_get(PMPTOMP(pmp), &ck, sizeof(ck), vpp);
 	if (rv != 0)
 		return rv;
 	mutex_enter((*vpp)->v_interlock);
@@ -270,6 +270,7 @@ puffs_cookie2vnode(struct puffs_mount *pmp, puffs_cookie_t ck,
 		*vpp = NULL;
 		return PUFFS_NOSUCHCOOKIE;
 	}
+	mutex_exit((*vpp)->v_interlock);
 
 	return 0;
 }

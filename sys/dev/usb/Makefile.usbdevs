@@ -1,18 +1,14 @@
 #	$NetBSD$
-
-#	The header files depend on the correct version of usbdevs.
 #
-#	Thus, the procedure is:
-#	  1) change usbdevs
-#	  2) commit usbdevs
-#	  3) _then_ generate header files
-#	  4) commit them
+# As per tron@NetBSD.org, the proper procedure is
+#
+# 1.) Change "src/sys/dev/usb/usbdevs".
+# 2.) Commit "src/sys/dev/usb/usbdevs".
+# 3.) Execute "make -f Makefile.usbdevs" in "src/sys/dev/usb".
+# 4.) Commit "src/sys/dev/usb/usbdevs.h" and "src/sys/dev/usb/usbdevs_data.h".
 
 .include <bsd.own.mk>
 
-UNAME=	uname
-RM=	rm
-
-usbdevs.h usbdevs_data.h: usbdevs devlist2h.awk
-	${RM} -f usbdevs.h usbdevs_data.h
-	${TOOL_AWK} -v os=`${UNAME} -s` -f devlist2h.awk usbdevs
+usbdevs.h usbdevs_data.h: ${.CURDIR}/../devlist2h.awk usbdevs
+	/bin/rm -f usbdevs.h usbdevs_data.h
+	${TOOL_AWK} -f ${.ALLSRC}

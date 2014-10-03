@@ -593,6 +593,9 @@ void *setmode(const char *);
 #ifndef O_SHLOCK
 #define O_SHLOCK 0
 #endif
+#ifndef O_CLOEXEC
+#define O_CLOEXEC 0
+#endif
 
 /* <inttypes.h> */
 

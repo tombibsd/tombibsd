@@ -1378,7 +1378,7 @@ send_command(ccb_t *ccb, ccb_disp_t disp, bool waitok, bool immed)
 
 	s = splbio();
 	while (/*CONSTCOND*/ISCSI_THROTTLING_ENABLED &&
-	    /*CONSTCOND*/ISCSI_SERVER_TRUSTED &&
+	    /*CONSTCOND*/!ISCSI_SERVER_TRUSTED &&
 	    !sn_a_le_b(sess->CmdSN, sess->MaxCmdSN)) {
 
 		ccb->disp = disp;

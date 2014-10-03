@@ -23,7 +23,7 @@
 /intr.c/1.77/Tue Jun  3 02:54:25 2014/-kk/
 /ioapic.c/1.48/Thu Oct 24 10:28:57 2013/-kk/
 /ipi.c/1.26/Mon Jul 21 08:07:38 2014/-kk/
-/ipmi.c/1.57/Fri Oct  3 09:25:55 2014/-kk/
+/ipmi.c/1.59/Fri Oct  3 10:05:10 2014/-kk/
 /lapic.c/1.47/Mon Nov 18 05:31:36 2013/-kk/
 /linux_trap.c/1.11/Sun Feb 19 21:06:35 2012/-kk/
 /mp.c/1.3/Fri Jul  1 18:21:31 2011/-kk/
@@ -49,7 +49,7 @@
 /viac7temp.c/1.8/Fri Oct  3 09:25:56 2014/-kk/
 /vm_machdep.c/1.25/Tue Mar 25 02:35:30 2014/-kk/
 /vmt.c/1.10/Fri Oct  3 09:09:11 2014/-kk/
-/x86_autoconf.c/1.71/Sat Jun 14 03:56:37 2014/-kk/
+/x86_autoconf.c/1.72/Fri Oct  3 10:05:10 2014/-kk/
 /x86_machdep.c/1.67/Fri Oct  3 09:36:13 2014/-kk/
 /x86_stub.c/1.4/Wed Oct 19 05:01:43 2011/-kk/
 /x86_userconf.c/1.1/Tue May 31 23:28:53 2011/-kk/

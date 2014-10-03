@@ -266,8 +266,10 @@ extern	paddr_t avail_end;
 	 */
 	error = uvm_pglistalloc(size, low, high, 0, 0,
 				mlist, nsegs, (flags & BUS_DMA_NOWAIT) == 0);
-	if (error)
+	if (error) {
+		free(mlist, M_DEVBUF);
 		return (error);
+	}
 
 	/*
 	 * Simply keep a pointer around to the linked list, so

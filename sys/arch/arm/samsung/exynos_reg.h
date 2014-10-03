@@ -179,9 +179,10 @@
 #define EXYNOS_PMU_USB_HSIC_1_PHY_CTRL	0x708
 #define EXYNOS_PMU_USB_HSIC_2_PHY_CTRL	0x70C
 
-#define PMU_PHY_ENABLE			(1 << 0)
-#define PMU_PHY_DISABLE			(0)
+#define   PMU_PHY_ENABLE		(1 << 0)
+#define   PMU_PHY_DISABLE		(0)
 
+#define EXYNOS_PMU_DEBUG_CLKOUT		0x0A00
 
 /* used SYSREG registers */
 #define EXYNOS5_SYSREG_USB20_PHY_TYPE	0x230

@@ -34,7 +34,7 @@
 /kobj_machdep.c/1.3/Sun Jun 12 01:29:58 2011/-kk/
 /lock_stubs.s/1.12/Sun May 25 15:56:12 2008/-kk/
 /locore.s/1.268/Sun Nov  4 00:32:47 2012/-kk/
-/machdep.c/1.326/Sat Mar  1 06:04:33 2014/-kk/
+/machdep.c/1.327/Fri Oct  3 10:05:09 2014/-kk/
 /memecc.c/1.16/Thu Oct 24 10:28:57 2013/-kk/
 /memeccreg.h/1.2/Mon Apr 28 20:23:36 2008/-kk/
 /memreg.c/1.45/Sun Jul 29 00:04:05 2012/-kk/

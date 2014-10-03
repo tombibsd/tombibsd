@@ -2018,9 +2018,10 @@ gfe_hash_fill(struct gfe_softc *sc)
 
 	error = gfe_hash_entry_op(sc, GE_HASH_ADD, GE_RXPRIO_HI,
 	    CLLADDR(sc->sc_ec.ec_if.if_sadl));
-	if (error)
+	if (error) {
 		GE_FUNC_EXIT(sc, "!");
 		return error;
+	}
 
 	sc->sc_flags &= ~GE_ALLMULTI;
 	if ((sc->sc_ec.ec_if.if_flags & IFF_PROMISC) == 0)

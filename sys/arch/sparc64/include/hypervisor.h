@@ -25,6 +25,12 @@
  */
 
 /*
+ * FAST_TRAP function numbers
+ */
+
+#define FT_MMU_MAP_PERM_ADDR 0x25
+
+/*
  * API versioning
  */
 

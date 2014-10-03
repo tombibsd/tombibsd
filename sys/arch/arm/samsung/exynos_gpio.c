@@ -292,6 +292,17 @@ static struct exynos_gpio_pin_group exynos5_pin_groups[] = {
 	GPIO_GRP(5, RIGHT, 0x0100, GPH1, 8),
 	/* EXTINT skipped */
 
+	GPIO_GRP(5, USB,   0x0000, GPJ0, 8),	// unknown num bits
+	GPIO_GRP(5, USB,   0x0020, GPJ1, 8),	// unknown num bits
+	GPIO_GRP(5, USB,   0x0040, GPJ2, 8),	// unknown num bits
+	GPIO_GRP(5, USB,   0x0060, GPJ3, 8),	// unknown num bits
+	GPIO_GRP(5, USB,   0x0080, GPJ4, 8),	// unknown num bits
+	GPIO_GRP(5, USB,   0x00A0, GPK0, 8),	// unknown num bits
+	GPIO_GRP(5, USB,   0x00C0, GPK1, 8),	// unknown num bits
+	GPIO_GRP(5, USB,   0x00E0, GPK2, 8),	// unknown num bits
+	GPIO_GRP(5, USB,   0x0100, GPK3, 8),	// unknown num bits
+	/* unknown bits skipped */
+
 	GPIO_GRP(5, C2C,   0x0000, GPV0, 8),
 	GPIO_GRP(5, C2C,   0x0020, GPV1, 8),
 	GPIO_GRP(5, C2C,   0x0040, ETC5, 2),

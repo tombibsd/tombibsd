@@ -1457,7 +1457,7 @@ fd_copy(void)
 	ffp = fdp->fd_dt->dt_ff;
 	nffp = newdt->dt_ff;
 	newlast = -1;
-	for (i = 0; i <= (int)lastfile; i++, ffp++, nffp++) {
+	for (i = 0; i <= lastfile; i++, ffp++, nffp++) {
 		KASSERT(i >= NDFDFILE ||
 		    *nffp == (fdfile_t *)newfdp->fd_dfdfile[i]);
 		ff = *ffp;

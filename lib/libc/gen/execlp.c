@@ -42,9 +42,11 @@ __RCSID("$NetBSD$");
 #include <stdarg.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <errno.h>
 
 #ifdef __weak_alias
 __weak_alias(execlp,_execlp)
+__weak_alias(execlpe,_execlpe)
 #endif
 
 int
@@ -52,7 +54,7 @@ execlp(const char *name, const char *arg, ...)
 {
 	va_list ap;
 	char **argv;
-	int i;
+	size_t i;
 
 	va_start(ap, arg);
 	for (i = 2; va_arg(ap, char *) != NULL; i++)
@@ -68,4 +70,28 @@ execlp(const char *name, const char *arg, ...)
 	va_end(ap);
 	
 	return execvp(name, argv);
+}
+
+int
+execlpe(const char *name, const char *arg, ...)
+{
+	va_list ap;
+	char **argv, **envp;
+	size_t i;
+
+	va_start(ap, arg);
+	for (i = 2; va_arg(ap, char *) != NULL; i++)
+		continue;
+	va_end(ap);
+
+	argv = alloca(i * sizeof (char *));
+	
+	va_start(ap, arg);
+	argv[0] = __UNCONST(arg);
+	for (i = 1; (argv[i] = va_arg(ap, char *)) != NULL; i++) 
+		continue;
+	envp = va_arg(ap, char **);
+	va_end(ap);
+
+	return execvpe(name, argv, envp);
 }

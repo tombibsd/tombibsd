@@ -204,7 +204,7 @@ fi
 if test -n "$errmsg"; then
     if $re_exec_allowed; then
 	for othershell in \
-	    "${HOST_SH}" /usr/xpg4/bin/sh ksh ksh88 mksh pdksh bash dash
+	    "${HOST_SH}" /usr/xpg4/bin/sh ksh ksh88 mksh pdksh dash bash
 	    # NOTE: some shells known not to work are:
 	    # any shell using csh syntax;
 	    # Solaris /bin/sh (missing many modern features);

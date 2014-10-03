@@ -7,7 +7,7 @@
 /compat_16_machdep.c/1.15/Sat Nov 21 04:16:52 2009/-kk/
 /copy.S/1.4/Sat Jul 10 10:12:07 2010/-kk/
 /core_machdep.c/1.6/Tue Jan 14 16:05:01 2014/-kk/
-/cpu.c/1.117/Fri Oct  3 09:50:49 2014/-kk/
+/cpu.c/1.118/Fri Oct  3 10:05:09 2014/-kk/
 /cpu_in_cksum.S/1.3/Sat Dec 22 20:08:08 2012/-kk/
 /db_disasm.c/1.17/Sat Mar  1 06:04:33 2014/-kk/
 /db_interface.c/1.132/Thu Oct 24 10:28:57 2013/-kk/
@@ -15,7 +15,7 @@
 /db_tlb_access.S/1.2/Tue Feb 23 05:32:08 2010/-kk/
 /db_trace.c/1.50/Thu Oct 24 10:28:57 2013/-kk/
 /emul.c/1.21/Mon Apr 28 20:23:37 2008/-kk/
-/genassym.cf/1.74/Fri Oct  3 09:50:49 2014/-kk/
+/genassym.cf/1.75/Fri Oct  3 10:05:09 2014/-kk/
 /hvcall.S/1.4/Sat Jun 14 03:56:36 2014/-kk/
 /intr.c/1.67/Sat Aug 11 21:50:09 2012/-kk/
 /intreg.h/1.7/Sat Feb 11 17:57:32 2006/-kk/
@@ -24,9 +24,9 @@
 /kgdb_proto.h/1.3/Sun Dec 11 12:19:14 2005/-kk/
 /kobj_machdep.c/1.5/Thu Feb 13 15:35:53 2014/-kk/
 /lock_stubs.s/1.9/Thu Oct 24 10:28:57 2013/-kk/
-/locore.s/1.372/Fri Oct  3 09:50:49 2014/-kk/
-/machdep.c/1.278/Sun Jul 20 13:58:44 2014/-kk/
-/mp_subr.S/1.6/Sat Jun 14 03:56:36 2014/-kk/
+/locore.s/1.373/Fri Oct  3 10:05:09 2014/-kk/
+/machdep.c/1.279/Fri Oct  3 10:05:09 2014/-kk/
+/mp_subr.S/1.7/Fri Oct  3 10:05:09 2014/-kk/
 /netbsd32_machdep.c/1.103/Fri Mar 14 04:28:17 2014/-kk/
 /netbsd32_sigcode.s/1.6/Thu May 29 14:51:26 2008/-kk/
 /ofw_machdep.c/1.43/Fri Oct  3 09:50:49 2014/-kk/

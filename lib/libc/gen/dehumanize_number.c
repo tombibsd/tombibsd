@@ -29,6 +29,10 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
+#ifdef HAVE_NBTOOLS_CONFIG_H
+#include "nbtools_config.h"
+#endif /* HAVE_NBTOOLS_CONFIG_H */
+
 #include <sys/cdefs.h>
 #if defined(LIBC_SCCS) && !defined(lint)
 __RCSID("$NetBSD$");
@@ -111,7 +115,9 @@ dehumanize_number(const char *str, int64_t *size)
 		return -1; /* Out of range. */
 	}
 	tmp *= multiplier;
+#ifdef _DIAGASSERT
 	_DIAGASSERT(__type_fit(int64_t, tmp));
+#endif
 	*size = (int64_t)tmp;
 
 	return 0;

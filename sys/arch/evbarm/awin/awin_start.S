@@ -178,6 +178,10 @@ a20_mpinit:
 	movw	r5, #:lower16:(AWIN_CORE_PBASE+AWIN_CPUCFG_OFFSET)
 	movt	r5, #:upper16:(AWIN_CORE_PBASE+AWIN_CPUCFG_OFFSET)
 
+#ifdef __ARMEB__
+	setend	le			// everything here is little-endian
+#endif
+
 	/* Set where the other CPU(s) are going to execute */
 	movw	r1, #:lower16:cortex_mpstart
 	movt	r1, #:upper16:cortex_mpstart
@@ -210,7 +214,7 @@ a20_mpinit:
 
 	/* We need to wait (at least) 10ms */
 	mov	r0, #0x3b000			// 10.06ms
-	bl	_C_LABEL(gtmr_bootdelay)
+	bl	_C_LABEL(gtmr_bootdelay)	// endian-neutral
 
 	/* Clear power-off gating */
 	ldr	r1, [r5, #AWIN_CPUCFG_CPU1_PWROFF_REG] 
@@ -229,6 +233,10 @@ a20_mpinit:
 	orr	r1, r1, #(1 << 1)
 	str	r1, [r5, #AWIN_CPUCFG_DBGCTRL1_REG]
 	dsb
+
+#ifdef __ARMEB__
+	setend	be				// we're done with little endian
+#endif
 
 	//
 	// Wait up a second for CPU1 to hatch. 

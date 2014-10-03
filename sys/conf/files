@@ -331,6 +331,9 @@ attach	midi at midibus
 #
 define	audiobell
 
+# Base verbose vendor/product printing support
+file	dev/dev_verbose.c
+
 # video devices, attaches to video hardware driver
 #
 device	video

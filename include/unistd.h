@@ -328,6 +328,8 @@ int	 des_setkey(const char *);
 int	 dup3(int, int, int);
 void	 endusershell(void);
 int	 exect(const char *, char * const *, char * const *);
+int	 execvpe(const char *, char * const *, char * const *);
+int	 execlpe(const char *, const char *, ...);
 int	 fchroot(int);
 int	 fdiscard(int, off_t, off_t);
 int	 fsync_range(int, int, off_t, off_t);

@@ -313,6 +313,12 @@ unvis(char *cp, int c, int *astate, int flag)
 			 */
 			*astate = SS(0, S_GROUND);
 			return UNVIS_NOCHAR;
+		default:
+			if (isgraph(c)) {
+				*cp = c;
+				*astate = SS(0, S_GROUND);
+				return UNVIS_VALID;
+			}
 		}
 		goto bad;
 

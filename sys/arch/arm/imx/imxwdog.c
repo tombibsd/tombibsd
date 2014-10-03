@@ -184,6 +184,5 @@ wdog_attach_common(device_t parent, device_t self,
 			reg |= WCR_WDE;
 			wdog_write(sc, IMX_WDOG_WCR, reg);
 		}
- 	}
+	}
 }
-

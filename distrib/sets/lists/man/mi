@@ -2390,6 +2390,7 @@
 ./usr/share/man/cat8/dmsetup.0			man-lvm-catman		lvm,.cat
 ./usr/share/man/cat8/dnsblog.0			man-postfix-catman	postfix,.cat
 ./usr/share/man/cat8/dnssec-dsfromkey.0		man-bind-catman		.cat
+./usr/share/man/cat8/dnssec-importkey.0		man-bind-catman		.cat
 ./usr/share/man/cat8/dnssec-keyfromlabel.0	man-bind-catman		.cat
 ./usr/share/man/cat8/dnssec-keygen.0		man-bind-catman		.cat
 ./usr/share/man/cat8/dnssec-makekeyset.0	man-obsolete		obsolete

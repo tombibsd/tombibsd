@@ -445,7 +445,7 @@ cortex_init:
 
 	// For the A7, SMP must be on ldrex/strex to work.
 	//
-#if defined(MULTIPROCESSOR) || defined(CPU_CORTEXA7)
+#if defined(MULTIPROCESSOR) || defined(CPU_CORTEXA7) || defined(CPU_CORTEXA9)
 #if defined(CPU_CORTEXA5) || defined(CPU_CORTEXA7) || defined(CPU_CORTEXA9)
 	//
 	// Step 4a, set ACTLR.SMP=1

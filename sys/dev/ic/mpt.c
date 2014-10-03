@@ -565,10 +565,7 @@ mpt_send_ioc_init(mpt_softc_t *mpt, u_int32_t who)
  * Utiltity routine to read configuration headers and pages
  */
 
-static int
-mpt_read_cfg_header(mpt_softc_t *, int, int, int, fCONFIG_PAGE_HEADER *);
-
-static int
+int
 mpt_read_cfg_header(mpt_softc_t *mpt, int PageType, int PageNumber,
     int PageAddress, fCONFIG_PAGE_HEADER *rslt)
 {
@@ -1514,6 +1511,12 @@ mpt2host_config_page_raid_phys_disk_0(fCONFIG_PAGE_RAID_PHYS_DISK_0 *rpd0)
 	MPT_2_HOST16(rpd0, ErrorData.Reserved);
 	MPT_2_HOST16(rpd0, ErrorData.ErrorCount);
 	MPT_2_HOST16(rpd0, ErrorData.SmartCount);
+}
+
+void
+mpt2host_config_page_ioc_2(fCONFIG_PAGE_IOC_2 *ioc2)
+{
+	MPT_2_HOST32(ioc2, CapabilitiesFlags);
 }
 
 #endif

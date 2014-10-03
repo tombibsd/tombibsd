@@ -566,10 +566,10 @@ booke_sstep(struct trapframe *tf)
 			const int16_t off = insn & ~3;
 			iac2 = ((insn & 2) ? 0 : tf->tf_srr0) + off;
 			dbcr0 |= DBCR0_IAC2;
-		} else if ((insn & 0xfc00ffde) == 0x4c000420) {
+		} else if ((insn & 0xfc00fffe) == 0x4c000420) {
 			iac2 = tf->tf_ctr;
 			dbcr0 |= DBCR0_IAC2;
-		} else if ((insn & 0xfc00ffde) == 0x4c000020) {
+		} else if ((insn & 0xfc00fffe) == 0x4c000020) {
 			iac2 = tf->tf_lr;
 			dbcr0 |= DBCR0_IAC2;
 		}

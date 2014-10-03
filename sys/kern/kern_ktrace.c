@@ -930,7 +930,7 @@ ktruser(const char *id, void *addr, size_t len, int ustr)
 	ktp->ktr_id[KTR_USER_MAXIDLEN-1] = '\0';
 
 	user_dta = (void *)(ktp + 1);
-	if ((error = copyin(addr, (void *)user_dta, len)) != 0)
+	if ((error = copyin(addr, user_dta, len)) != 0)
 		len = 0;
 
 	ktraddentry(l, kte, KTA_WAITOK);

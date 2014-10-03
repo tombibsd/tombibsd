@@ -1127,9 +1127,6 @@ siop_checkintr(struct siop_softc *sc, u_char istat, u_char dstat,
 			}
 /*			rp->siop_dcntl |= SIOP_DCNTL_STD;*/
 			return (0);
-#ifdef DDB
-			Debugger();
-#endif
 		}
 #endif
 		*status = -1;

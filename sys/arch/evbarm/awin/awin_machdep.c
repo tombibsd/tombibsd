@@ -591,7 +591,7 @@ awin_device_register(device_t self, void *aux)
 		 */
 		prop_dictionary_set_cstring(dict, "satapwren",
 		    (cubietruck_p ? ">PH12" : ">PB8"));
-#if AWIN_board == AWIN_cubieboard || AWIN_board == AWIN_cubietruck
+#if AWIN_board == AWIN_cubieboard || AWIN_board == AWIN_cubietruck || AWIN_board == AWIN_bpi
 		if (cubietruck_p) {
 			prop_dictionary_set_cstring(dict, "usb0drv", ">PH17");
 		} else if (awin_chip_id() == AWIN_CHIP_ID_A20) {

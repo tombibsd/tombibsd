@@ -253,7 +253,7 @@ do_hypervisor_callback(struct intrframe *regs)
 	volatile shared_info_t *s = HYPERVISOR_shared_info;
 	struct cpu_info *ci;
 	volatile struct vcpu_info *vci;
-	int level;
+	int level __diagused;
 
 	ci = curcpu();
 	vci = ci->ci_vcpu;
