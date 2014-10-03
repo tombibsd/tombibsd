@@ -318,7 +318,7 @@ xbd_xenbus_attach(device_t parent, device_t self, void *aux)
 	}
 
 	rnd_attach_source(&sc->sc_rnd_source, device_xname(self),
-	    RND_TYPE_DISK, RND_FLAG_NO_COLLECT | RND_FLAG_NO_ESTIMATE);
+	    RND_TYPE_DISK, RND_FLAG_DEFAULT);
 
 	if (!pmf_device_register(self, xbd_xenbus_suspend, xbd_xenbus_resume))
 		aprint_error_dev(self, "couldn't establish power handler\n");

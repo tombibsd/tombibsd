@@ -255,7 +255,7 @@ elattach(device_t parent, device_t self, void *aux)
 
 	DPRINTF(("Attaching to random...\n"));
 	rnd_attach_source(&sc->rnd_source, device_xname(sc->sc_dev),
-			  RND_TYPE_NET, 0);
+			  RND_TYPE_NET, RND_FLAG_DEFAULT);
 
 	DPRINTF(("elattach() finished.\n"));
 }

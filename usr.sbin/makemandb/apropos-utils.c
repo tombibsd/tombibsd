@@ -704,9 +704,9 @@ callback_html(void *data, const char *section, const char *name,
 			break;
 		}
 	}
-	qsnippet[++i] = 0;
+	qsnippet[i] = 0;
 	(*callback)(orig_data->data, section, name, name_desc,
-		(const char *)qsnippet,	qsnippet_length);
+		(const char *)qsnippet,	strlen(qsnippet));
 	free(qsnippet);
 	return 0;
 }

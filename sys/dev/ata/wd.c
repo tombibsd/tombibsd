@@ -409,7 +409,7 @@ out:
 	disk_attach(&wd->sc_dk);
 	wd->sc_wdc_bio.lp = wd->sc_dk.dk_label;
 	rnd_attach_source(&wd->rnd_source, device_xname(wd->sc_dev),
-			  RND_TYPE_DISK, 0);
+			  RND_TYPE_DISK, RND_FLAG_DEFAULT);
 
 	/* Discover wedges on this disk. */
 	dkwedge_discover(&wd->sc_dk);

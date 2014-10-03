@@ -1276,7 +1276,7 @@ pipe1(struct lwp *l, register_t *retval, int flags)
 	wf->f_data = wso;
 	retval[1] = fd;
 	solock(wso);
-	error = unp_connect2(wso, rso, PRU_CONNECT2);
+	error = unp_connect2(wso, rso);
 	sounlock(wso);
 	if (error != 0)
 		goto free4;

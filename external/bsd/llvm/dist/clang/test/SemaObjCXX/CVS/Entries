@@ -52,6 +52,7 @@
 /instantiate-expr.mm/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
 /instantiate-message.mm/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
 /instantiate-method-return.mm/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
+/instantiate-property-access.mm/1.1.1.1/Sun Aug 10 17:08:37 2014/-kk/
 /instantiate-stmt.mm/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
 /ivar-construct.mm/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
 /ivar-lookup.mm/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
@@ -82,6 +83,7 @@
 /pointer-to-objc-pointer-conv.mm/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
 /propert-dot-error.mm/1.1.1.2/Thu Feb 27 08:51:51 2014/-kk/
 /properties.mm/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
+/property-invalid-type.mm/1.1.1.1/Sun Aug 10 17:08:37 2014/-kk/
 /property-reference.mm/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
 /property-synthesis-error.mm/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
 /property-type-mismatch.mm/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/

@@ -12,7 +12,8 @@ LIBCRTBEGIN=	# nothing
 LIBCRTEND=	# nothing
 LIBC=		# nothing
 
-CFLAGS=		-Os -mmultiple -Wall -msoft-float -ffreestanding
+CFLAGS=		-Os -Wall -ffreestanding
+CFLAGS+=	${${ACTIVE_CC} == "gcc":? -msoft-float :}
 CPPFLAGS+=	-D_STANDALONE -DPPC_OEA -I${.OBJDIR} -I${S}
 STRIPFLAG=
 LINKFLAGS=	-x -N -Ttext 4000 -e _start

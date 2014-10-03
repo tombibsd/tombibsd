@@ -409,7 +409,7 @@ fxp_attach(struct fxp_softc *sc)
 	if_attach(ifp);
 	ether_ifattach(ifp, enaddr);
 	rnd_attach_source(&sc->rnd_source, device_xname(sc->sc_dev),
-	    RND_TYPE_NET, 0);
+	    RND_TYPE_NET, RND_FLAG_DEFAULT);
 
 #ifdef FXP_EVENT_COUNTERS
 	evcnt_attach_dynamic(&sc->sc_ev_txstall, EVCNT_TYPE_MISC,

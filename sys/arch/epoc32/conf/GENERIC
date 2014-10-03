@@ -65,6 +65,7 @@ options 	INET6		# IPv6
 options 	PPP_FILTER	# Active filter support for PPP (requires bpf)
 
 # Compatibility options
+options		COMPAT_NETBSD32	# allow running arm (e.g. non-earm) binaries
 #options 	COMPAT_09	# NetBSD 0.9,
 #options 	COMPAT_10	# NetBSD 1.0,
 #options 	COMPAT_11	# NetBSD 1.1,

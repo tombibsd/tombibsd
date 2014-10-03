@@ -469,7 +469,7 @@ int l2cap_peeraddr_pcb(struct l2cap_channel *, struct sockaddr_bt *);
 int l2cap_disconnect_pcb(struct l2cap_channel *, int);
 void l2cap_detach_pcb(struct l2cap_channel **);
 int l2cap_listen_pcb(struct l2cap_channel *);
-int l2cap_send(struct l2cap_channel *, struct mbuf *);
+int l2cap_send_pcb(struct l2cap_channel *, struct mbuf *);
 int l2cap_setopt(struct l2cap_channel *, const struct sockopt *);
 int l2cap_getopt(struct l2cap_channel *, struct sockopt *);
 

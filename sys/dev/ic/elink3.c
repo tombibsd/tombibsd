@@ -488,7 +488,7 @@ epconfig(struct ep_softc *sc, u_short chipset, u_int8_t *enaddr)
 	GO_WINDOW(1);		/* Window 1 is operating window */
 
 	rnd_attach_source(&sc->rnd_source, device_xname(sc->sc_dev),
-	    RND_TYPE_NET, 0);
+	    RND_TYPE_NET, RND_FLAG_DEFAULT);
 
 	sc->tx_start_thresh = 20;	/* probably a good starting point. */
 

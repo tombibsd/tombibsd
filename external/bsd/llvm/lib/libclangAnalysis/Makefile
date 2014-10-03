@@ -14,6 +14,7 @@ SRCS+=	AnalysisDeclContext.cpp \
 	CallGraph.cpp \
 	CocoaConventions.cpp \
 	Consumed.cpp \
+	DataflowWorklist.cpp \
 	Dominators.cpp \
 	FormatString.cpp \
 	LiveVariables.cpp \

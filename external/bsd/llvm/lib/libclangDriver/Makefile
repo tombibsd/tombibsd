@@ -7,7 +7,6 @@ LIB=	clangDriver
 .PATH: ${CLANG_SRCDIR}/lib/Driver
 
 SRCS+=	Action.cpp \
-	CC1AsOptions.cpp \
 	Compilation.cpp \
 	Driver.cpp \
 	DriverOptions.cpp \

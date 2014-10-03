@@ -27,7 +27,7 @@
 /2005-12-06-AppendingZeroLengthArrays.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /2006-01-19-ConstantPacked.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /2006-06-15-GlobalVarAlignment.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
-/2008-03-05-AliasReference.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/2008-03-05-AliasReference.ll/1.1.1.2/Fri Oct  3 09:23:16 2014/-kk/
 /2008-03-05-AliasReference2.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /2008-03-07-DroppedSection_a.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /2008-03-07-DroppedSection_b.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
@@ -47,8 +47,8 @@
 /2011-08-18-unique-class-type2.ll/1.1.1.2/Tue Jan 14 16:02:15 2014/-kk/
 /2011-08-18-unique-debug-type.ll/1.1.1.2/Tue Jan 14 16:02:15 2014/-kk/
 /2011-08-18-unique-debug-type2.ll/1.1.1.2/Tue Jan 14 16:02:15 2014/-kk/
-/2011-08-22-ResolveAlias.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
-/2011-08-22-ResolveAlias2.ll/1.1.1.2/Tue Jun  3 03:03:57 2014/-kk/
+/2011-08-22-ResolveAlias.ll/1.1.1.2/Fri Oct  3 09:23:16 2014/-kk/
+/2011-08-22-ResolveAlias2.ll/1.1.1.3/Fri Oct  3 09:23:16 2014/-kk/
 /AppendingLinkage.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /AppendingLinkage2.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /ConstantGlobals1.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
@@ -58,11 +58,18 @@
 /DbgDeclare2.ll/1.1.1.2/Tue Jan 14 16:02:15 2014/-kk/
 /LinkOnce.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /PR8300.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
-/alias.ll/1.1.1.1/Fri May 30 18:11:24 2014/-kk/
+/alias.ll/1.1.1.2/Fri Oct  3 09:23:16 2014/-kk/
 /available_externally_a.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /available_externally_b.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /basiclink.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
-/cycle.ll/1.1.1.1/Fri May 30 18:11:24 2014/-kk/
+/comdat.ll/1.1.1.1/Sun Aug 10 17:04:48 2014/-kk/
+/comdat2.ll/1.1.1.1/Sun Aug 10 17:04:48 2014/-kk/
+/comdat3.ll/1.1.1.1/Sun Aug 10 17:04:48 2014/-kk/
+/comdat4.ll/1.1.1.1/Sun Aug 10 17:04:48 2014/-kk/
+/comdat5.ll/1.1.1.1/Sun Aug 10 17:04:48 2014/-kk/
+/comdat6.ll/1.1.1.1/Sun Aug 10 17:04:48 2014/-kk/
+/comdat7.ll/1.1.1.1/Sun Aug 10 17:04:48 2014/-kk/
+/comdat8.ll/1.1.1.1/Sun Aug 10 17:04:48 2014/-kk/
 /datalayout.ll/1.1.1.2/Tue Jun  3 03:03:57 2014/-kk/
 /debug-info-version-a.ll/1.1.1.1/Fri May 30 18:11:24 2014/-kk/
 /debug-info-version-b.ll/1.1.1.1/Fri May 30 18:11:24 2014/-kk/
@@ -115,11 +122,13 @@
 /type-unique-simple2-a.ll/1.1.1.1/Fri Feb 14 20:12:45 2014/-kk/
 /type-unique-simple2-b.ll/1.1.1.1/Fri Feb 14 20:12:45 2014/-kk/
 /type-unique-simple2.ll/1.1.1.2/Thu Feb 27 08:52:23 2014/-kk/
+/type-unique-type-array-a.ll/1.1.1.1/Sun Aug 10 17:04:48 2014/-kk/
+/type-unique-type-array-b.ll/1.1.1.1/Sun Aug 10 17:04:48 2014/-kk/
 /unnamed-addr-err-a.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /unnamed-addr-err-b.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
-/unnamed-addr1-a.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
-/unnamed-addr1-b.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/unnamed-addr1-a.ll/1.1.1.2/Fri Oct  3 09:23:16 2014/-kk/
+/unnamed-addr1-b.ll/1.1.1.2/Fri Oct  3 09:23:16 2014/-kk/
 /visibility1.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
-/visibility2.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/visibility2.ll/1.1.1.2/Fri Oct  3 09:23:16 2014/-kk/
 /weakextern.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 D/Inputs////

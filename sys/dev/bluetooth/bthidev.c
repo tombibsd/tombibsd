@@ -1017,7 +1017,7 @@ bthidev_output(struct bthidev *hidev, uint8_t *report, int rlen)
 	m->m_pkthdr.len = m->m_len = rlen + 2;
 
 	mutex_enter(bt_lock);
-	err = l2cap_send(sc->sc_int, m);
+	err = l2cap_send_pcb(sc->sc_int, m);
 	mutex_exit(bt_lock);
 
 	return err;

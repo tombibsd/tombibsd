@@ -1,0 +1,3 @@
+#	$NetBSD$
+
+file	crypto/cprng_fast/cprng_fast.c

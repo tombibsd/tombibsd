@@ -6,7 +6,10 @@ LIB=	LLVMProfileData
 
 .PATH: ${LLVM_SRCDIR}/lib/ProfileData
 
-SRCS+=	InstrProf.cpp \
+SRCS+=	CoverageMapping.cpp \
+	CoverageMappingReader.cpp \
+	CoverageMappingWriter.cpp \
+	InstrProf.cpp \
 	InstrProfReader.cpp \
 	InstrProfWriter.cpp
 

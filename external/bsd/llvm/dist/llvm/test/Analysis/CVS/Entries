@@ -14,4 +14,5 @@ D/MemoryDependenceAnalysis////
 D/PostDominators////
 D/RegionInfo////
 D/ScalarEvolution////
+D/ScopedNoAliasAA////
 D/TypeBasedAliasAnalysis////

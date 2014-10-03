@@ -915,10 +915,6 @@ omapfb_bitblt(struct omapfb_softc *sc, int xs, int ys, int xd, int yd,
 	int hstep, vstep;
 	uint32_t saddr, daddr;
 
-	/*
-	 * TODO:
-	 * - use 32bit transfers if we're properly aligned
-	 */
 	saddr = sc->sc_fbhwaddr + sc->sc_stride * ys + xs * bpp;
 	daddr = sc->sc_fbhwaddr + sc->sc_stride * yd + xd * bpp;
 

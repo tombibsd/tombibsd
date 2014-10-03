@@ -214,10 +214,10 @@ __cpu_simple_unlock(__cpu_simple_lock_t *__alp)
 
 #ifdef _ARM_ARCH_8
 	if (sizeof(*__alp) == 1) {
-		__asm __volatile("stab\t%0, [%1]"
+		__asm __volatile("stlb\t%0, [%1]"
 		    :: "r"(__SIMPLELOCK_UNLOCKED), "r"(__alp) : "memory");
 	} else {
-		__asm __volatile("sta\t%0, [%1]"
+		__asm __volatile("stl\t%0, [%1]"
 		    :: "r"(__SIMPLELOCK_UNLOCKED), "r"(__alp) : "memory");
 	}
 #else

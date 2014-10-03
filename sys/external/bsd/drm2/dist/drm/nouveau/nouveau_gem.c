@@ -1,3 +1,5 @@
+/*	$NetBSD$	*/
+
 /*
  * Copyright (C) 2008 Ben Skeggs.
  * All Rights Reserved.
@@ -24,6 +26,9 @@
  *
  */
 
+#include <sys/cdefs.h>
+__KERNEL_RCSID(0, "$NetBSD$");
+
 #include <subdev/fb.h>
 
 #include "nouveau_drm.h"
@@ -46,7 +51,12 @@ nouveau_gem_object_del(struct drm_gem_object *gem)
 	drm_gem_object_release(gem);
 
 	/* reset filp so nouveau_bo_del_ttm() can test for it */
+#ifdef __NetBSD__
+	/* XXX Whattakludge!  */
+	gem->gemo_shm_uao = NULL;
+#else
 	gem->filp = NULL;
+#endif
 	ttm_bo_unref(&bo);
 }
 
@@ -184,7 +194,9 @@ nouveau_gem_new(struct drm_device *dev, int size, int align, uint32_t domain,
 		return -ENOMEM;
 	}
 
+#ifndef __NetBSD__		/* XXX Let TTM swap; skip GEM like radeon.  */
 	nvbo->bo.persistent_swap_storage = nvbo->gem.filp;
+#endif
 	return 0;
 }
 

@@ -141,6 +141,8 @@
 ./@MODULEDIR@/tprof_pmi/tprof_pmi.kmod		base-kernel-modules	kmod
 ./@MODULEDIR@/tvpll				base-kernel-modules	kmod
 ./@MODULEDIR@/tvpll/tvpll.kmod			base-kernel-modules	kmod
+./@MODULEDIR@/ubsec				base-kernel-modules	kmod
+./@MODULEDIR@/ubsec/ubsec.kmod			base-kernel-modules	kmod
 ./@MODULEDIR@/viac7temp				base-kernel-modules	kmod
 ./@MODULEDIR@/viac7temp/viac7temp.kmod		base-kernel-modules	kmod
 ./@MODULEDIR@/viadrm				base-kernel-modules	kmod

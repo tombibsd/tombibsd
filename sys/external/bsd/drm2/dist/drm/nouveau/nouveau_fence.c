@@ -1,3 +1,5 @@
+/*	$NetBSD$	*/
+
 /*
  * Copyright (C) 2007 Ben Skeggs.
  * All Rights Reserved.
@@ -23,6 +25,9 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  */
+
+#include <sys/cdefs.h>
+__KERNEL_RCSID(0, "$NetBSD$");
 
 #include <drm/drmP.h>
 
@@ -169,7 +174,14 @@ static int
 nouveau_fence_wait_uevent_handler(void *data, int index)
 {
 	struct nouveau_fence_priv *priv = data;
+#ifdef __NetBSD__
+	spin_lock(&priv->waitlock);
+	/* XXX Set a flag...  */
+	DRM_SPIN_WAKEUP_ALL(&priv->waitqueue, &priv->waitlock);
+	spin_unlock(&priv->waitlock);
+#else
 	wake_up_all(&priv->waiting);
+#endif
 	return NVKM_EVENT_KEEP;
 }
 
@@ -195,6 +207,21 @@ nouveau_fence_wait_uevent(struct nouveau_fence *fence, bool intr)
 		unsigned long timeout = fence->timeout - jiffies;
 
 		if (time_before(jiffies, fence->timeout)) {
+#ifdef __NetBSD__
+			spin_lock(&priv->waitlock);
+			if (intr) {
+				DRM_SPIN_TIMED_WAIT_UNITL(ret,
+				    &priv->waitqueue, &priv->waitlock,
+				    timeout,
+				    nouveau_fence_done(fence));
+			} else {
+				DRM_SPIN_TIMED_WAIT_NOINTR_UNITL(ret,
+				    &priv->waitqueue, &priv->waitlock,
+				    timeout,
+				    nouveau_fence_done(fence));
+			}
+			spin_unlock(&priv->waitlock);
+#else
 			if (intr) {
 				ret = wait_event_interruptible_timeout(
 						priv->waiting,
@@ -205,6 +232,7 @@ nouveau_fence_wait_uevent(struct nouveau_fence *fence, bool intr)
 						nouveau_fence_done(fence),
 						timeout);
 			}
+#endif
 		}
 
 		if (ret >= 0) {
@@ -213,12 +241,26 @@ nouveau_fence_wait_uevent(struct nouveau_fence *fence, bool intr)
 				ret = -EBUSY;
 		}
 	} else {
+#ifdef __NetBSD__
+		spin_lock(&priv->waitlock);
+		if (intr) {
+			DRM_SPIN_WAIT_UNTIL(ret, &priv->waitqueue,
+			    &priv->waitlock,
+			    nouveau_fence_done(fence));
+		} else {
+			DRM_SPIN_WAIT_NOINTR_UNTIL(ret, &priv->waitqueue,
+			    &priv->waitlock,
+			    nouveau_fence_done(fence));
+		}
+		spin_unlock(&priv->waitlock);
+#else
 		if (intr) {
 			ret = wait_event_interruptible(priv->waiting,
 					nouveau_fence_done(fence));
 		} else {
 			wait_event(priv->waiting, nouveau_fence_done(fence));
 		}
+#endif
 	}
 
 	nouveau_event_ref(NULL, &handler);
@@ -249,6 +291,12 @@ nouveau_fence_wait(struct nouveau_fence *fence, bool lazy, bool intr)
 			break;
 		}
 
+#ifdef __NetBSD__
+		if (lazy)
+			kpause("nvfencep", intr, 1, NULL);
+		else
+			DELAY(1);
+#else
 		__set_current_state(intr ? TASK_INTERRUPTIBLE :
 					   TASK_UNINTERRUPTIBLE);
 		if (lazy) {
@@ -263,9 +311,12 @@ nouveau_fence_wait(struct nouveau_fence *fence, bool lazy, bool intr)
 			ret = -ERESTARTSYS;
 			break;
 		}
+#endif
 	}
 
+#ifndef __NetBSD__
 	__set_current_state(TASK_RUNNING);
+#endif
 	return ret;
 }
 

@@ -253,7 +253,7 @@ ucom_attach(device_t parent, device_t self, void *aux)
 	tty_attach(tp);
 
 	rnd_attach_source(&sc->sc_rndsource, device_xname(sc->sc_dev),
-			  RND_TYPE_TTY, 0);
+			  RND_TYPE_TTY, RND_FLAG_DEFAULT);
 
 	if (!pmf_device_register(self, NULL, NULL))
 		aprint_error_dev(self, "couldn't establish power handler\n");

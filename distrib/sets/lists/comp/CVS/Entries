@@ -1,14 +1,15 @@
+/ad.aarch64/1.2/Sun Aug 10 23:26:48 2014/-kk/
 /ad.arm.shl/1.6/Tue Jan 14 16:01:09 2014/-kk/
-/ad.arm/1.58/Fri Oct  3 09:05:24 2014/-kk/
+/ad.arm/1.59/Fri Oct  3 09:21:52 2014/-kk/
 /ad.hppa/1.7/Mon Nov 11 15:18:11 2013/-kk/
 /ad.m68k.shl/1.10/Tue Jan 14 16:01:09 2014/-kk/
 /ad.m68k/1.49/Mon Nov 11 15:18:11 2013/-kk/
 /ad.mips/1.50/Fri Oct  3 09:05:24 2014/-kk/
-/ad.powerpc/1.71/Fri Oct  3 09:05:24 2014/-kk/
+/ad.powerpc/1.72/Fri Oct  3 09:21:52 2014/-kk/
 /ad.sh3/1.29/Mon Nov 11 15:18:11 2013/-kk/
 /md.algor/1.16/Sun Jul 17 20:54:31 2011/-kk/
 /md.alpha/1.66/Tue Jan 14 16:01:10 2014/-kk/
-/md.amd64/1.223/Fri Oct  3 09:05:24 2014/-kk/
+/md.amd64/1.224/Fri Oct  3 09:21:52 2014/-kk/
 /md.amiga/1.59/Thu Oct 24 10:28:41 2013/-kk/
 /md.amigappc/1.12/Fri Oct  3 09:05:24 2014/-kk/
 /md.arc/1.24/Sun Jul 17 20:54:31 2011/-kk/
@@ -27,7 +28,7 @@
 /md.hpcmips/1.32/Fri Oct  3 09:05:24 2014/-kk/
 /md.hpcsh/1.27/Thu Oct 24 10:28:41 2013/-kk/
 /md.hppa/1.2/Fri Mar 14 04:22:38 2014/-kk/
-/md.i386/1.148/Fri Oct  3 09:05:24 2014/-kk/
+/md.i386/1.149/Fri Oct  3 09:21:52 2014/-kk/
 /md.ibmnws/1.12/Fri Oct  3 09:05:24 2014/-kk/
 /md.landisk/1.5/Thu Oct 24 10:28:41 2013/-kk/
 /md.luna68k/1.19/Sun Jul 17 20:54:31 2011/-kk/
@@ -54,7 +55,7 @@
 /md.sun3/1.62/Thu Oct 24 10:28:41 2013/-kk/
 /md.vax/1.40/Mon Nov 11 15:18:11 2013/-kk/
 /md.x68k/1.60/Thu Oct 24 10:28:41 2013/-kk/
-/mi/1.1904/Fri Oct  3 09:05:25 2014/-kk/
+/mi/1.1906/Fri Oct  3 09:21:52 2014/-kk/
 /shl.mi/1.266/Sun Jul 20 13:55:23 2014/-kk/
 /stl.mi/1.1/Fri Jul  2 21:19:00 2010/-kk/
 D

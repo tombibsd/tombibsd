@@ -11,6 +11,7 @@ SRCS+=	DynamicRegisterInfo.cpp \
 	HistoryThread.cpp \
 	HistoryUnwind.cpp \
 	InferiorCallPOSIX.cpp \
+	LinuxSignals.cpp \
 	RegisterContextDarwin_arm.cpp \
 	RegisterContextDarwin_arm64.cpp \
 	RegisterContextDarwin_i386.cpp \

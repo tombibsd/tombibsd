@@ -474,6 +474,7 @@
 ./usr/bin/du					base-util-bin
 ./usr/bin/egrep					base-util-bin
 ./usr/bin/eject					base-util-bin
+./usr/bin/ekermit				base-util-bin
 ./usr/bin/env					base-util-bin
 ./usr/bin/error					base-util-bin
 ./usr/bin/ex					base-util-bin
@@ -499,7 +500,7 @@
 ./usr/bin/getent				base-util-bin
 ./usr/bin/getextattr				base-util-bin
 ./usr/bin/getopt				base-util-bin
-./usr/bin/gkermit				base-util-bin
+./usr/bin/gkermit				base-obsolete		obsolete
 ./usr/bin/grep					base-util-bin
 ./usr/bin/groups				base-util-bin
 ./usr/bin/gss					base-obsolete		obsolete
@@ -729,6 +730,7 @@
 ./usr/bin/tftp					base-netutil-bin
 ./usr/bin/tic					base-util-bin
 ./usr/bin/time					base-util-bin
+./usr/bin/timeout				base-util-bin
 ./usr/bin/tip					base-util-bin
 ./usr/bin/tmux					base-util-bin
 ./usr/bin/tn3270				base-obsolete		obsolete
@@ -822,7 +824,8 @@
 ./usr/include/c++/ext				base-cxx-usr
 ./usr/include/cdk				base-obsolete		obsolete
 ./usr/include/clang-3.4				base-obsolete		obsolete
-./usr/include/clang-3.5				base-c-usr
+./usr/include/clang-3.5				base-obsolete		obsolete
+./usr/include/clang-3.6				base-c-usr
 ./usr/include/compat				base-obsolete		obsolete
 ./usr/include/crypto				base-c-usr
 ./usr/include/dev				base-c-usr
@@ -4889,7 +4892,13 @@
 ./usr/share/sushi/util/logging/func		base-obsolete	obsolete
 ./usr/share/sushi/util/scripting		base-obsolete	obsolete
 ./usr/share/sushi/util/scripting/func		base-obsolete	obsolete
-./usr/share/tabset				base-util-share
+./usr/share/sysinst				base-util-share
+./usr/share/sysinst/catalog			base-util-share
+./usr/share/sysinst/catalog/sysinstmsgs.de	base-util-share		obsolete
+./usr/share/sysinst/catalog/sysinstmsgs.es	base-util-share		obsolete
+./usr/share/sysinst/catalog/sysinstmsgs.fr	base-util-share		obsolete
+./usr/share/sysinst/catalog/sysinstmsgs.pl	base-util-share		obsolete
+./usr/share/tabset				base-util-share		share
 ./usr/share/tabset/3101				base-util-share		share
 ./usr/share/tabset/9837				base-util-share		share
 ./usr/share/tabset/aa				base-util-share		share
@@ -5224,6 +5233,7 @@
 ./usr/share/zoneinfo/Asia/Bishkek		base-sys-share		share
 ./usr/share/zoneinfo/Asia/Brunei		base-sys-share		share
 ./usr/share/zoneinfo/Asia/Calcutta		base-sys-share		share
+./usr/share/zoneinfo/Asia/Chita			base-sys-share		share
 ./usr/share/zoneinfo/Asia/Choibalsan		base-sys-share		share
 ./usr/share/zoneinfo/Asia/Chongqing		base-sys-share		share
 ./usr/share/zoneinfo/Asia/Chungking		base-sys-share		share
@@ -5285,6 +5295,7 @@
 ./usr/share/zoneinfo/Asia/Seoul			base-sys-share		share
 ./usr/share/zoneinfo/Asia/Shanghai		base-sys-share		share
 ./usr/share/zoneinfo/Asia/Singapore		base-sys-share		share
+./usr/share/zoneinfo/Asia/Srednekolymsk		base-sys-share		share
 ./usr/share/zoneinfo/Asia/Taipei		base-sys-share		share
 ./usr/share/zoneinfo/Asia/Tashkent		base-sys-share		share
 ./usr/share/zoneinfo/Asia/Tbilisi		base-sys-share		share
@@ -5632,8 +5643,10 @@
 ./usr/share/zoneinfo/WET			base-sys-share		share
 ./usr/share/zoneinfo/Zulu			base-sys-share		share
 ./usr/share/zoneinfo/iso3166.tab		base-sys-share		share
+./usr/share/zoneinfo/leapseconds		base-sys-share		share
 ./usr/share/zoneinfo/posixrules			base-sys-share		share
 ./usr/share/zoneinfo/zone.tab			base-sys-share		share
+./usr/share/zoneinfo/zone1970.tab		base-sys-share		share
 ./var						base-sys-root
 ./var/account					base-sys-root
 ./var/at					base-cron-root

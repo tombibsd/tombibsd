@@ -528,8 +528,8 @@ gre_sosend(struct socket *so, struct mbuf *top)
 	 */
 	if (so->so_state & SS_CANTSENDMORE)
 		snderr(EPIPE);
-	error = (*so->so_proto->pr_usrreqs->pr_generic)(so,
-	    PRU_SEND, top, NULL, NULL, l);
+	error = (*so->so_proto->pr_usrreqs->pr_send)(so,
+	    top, NULL, NULL, l);
 	top = NULL;
  release:
 	sbunlock(&so->so_snd);
@@ -724,8 +724,7 @@ gre_soreceive(struct socket *so, struct mbuf **mp0)
 	SBLASTRECORDCHK(&so->so_rcv, "soreceive 4");
 	SBLASTMBUFCHK(&so->so_rcv, "soreceive 4");
 	if (pr->pr_flags & PR_WANTRCVD && so->so_pcb)
-		(*pr->pr_usrreqs->pr_generic)(so, PRU_RCVD, NULL,
-		    (struct mbuf *)(long)flags, NULL, curlwp);
+		(*pr->pr_usrreqs->pr_rcvd)(so, flags, curlwp);
 	if (*mp0 == NULL && (flags & MSG_EOR) == 0 &&
 	    (so->so_state & SS_CANTRCVMORE) == 0) {
 		sbunlock(&so->so_rcv);

@@ -154,7 +154,7 @@ dp8390_config(struct dp8390_softc *sc)
 	ether_ifattach(ifp, sc->sc_enaddr);
 
 	rnd_attach_source(&sc->rnd_source, device_xname(sc->sc_dev),
-	    RND_TYPE_NET, 0);
+	    RND_TYPE_NET, RND_FLAG_DEFAULT);
 
 	/* The attach is successful. */
 	sc->sc_flags |= DP8390_ATTACHED;

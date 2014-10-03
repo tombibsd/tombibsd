@@ -181,6 +181,9 @@ static int
 tcp_getpcb(struct socket *so, struct inpcb **inp,
     struct in6pcb **in6p, struct tcpcb **tp)
 {
+
+	KASSERT(solocked(so));
+
 	/*
 	 * When a TCP is attached to a socket, then there will be
 	 * a (struct inpcb) pointed at by the socket, and this
@@ -221,19 +224,13 @@ static int
 tcp_usrreq(struct socket *so, int req, struct mbuf *m, struct mbuf *nam,
     struct mbuf *control, struct lwp *l)
 {
-	struct inpcb *inp = NULL;
-	struct in6pcb *in6p = NULL;
-	struct tcpcb *tp = NULL;
-	int s;
-	int error = 0;
-	int ostate = 0;
-
 	KASSERT(req != PRU_ATTACH);
 	KASSERT(req != PRU_DETACH);
 	KASSERT(req != PRU_ACCEPT);
 	KASSERT(req != PRU_BIND);
 	KASSERT(req != PRU_LISTEN);
 	KASSERT(req != PRU_CONNECT);
+	KASSERT(req != PRU_CONNECT2);
 	KASSERT(req != PRU_DISCONNECT);
 	KASSERT(req != PRU_SHUTDOWN);
 	KASSERT(req != PRU_ABORT);
@@ -241,99 +238,17 @@ tcp_usrreq(struct socket *so, int req, struct mbuf *m, struct mbuf *nam,
 	KASSERT(req != PRU_SENSE);
 	KASSERT(req != PRU_PEERADDR);
 	KASSERT(req != PRU_SOCKADDR);
+	KASSERT(req != PRU_RCVD);
 	KASSERT(req != PRU_RCVOOB);
+	KASSERT(req != PRU_SEND);
 	KASSERT(req != PRU_SENDOOB);
-
-	s = splsoftnet();
-
-	if (req == PRU_PURGEIF) {
-		mutex_enter(softnet_lock);
-		switch (so->so_proto->pr_domain->dom_family) {
-#ifdef INET
-		case PF_INET:
-			in_pcbpurgeif0(&tcbtable, (struct ifnet *)control);
-			in_purgeif((struct ifnet *)control);
-			in_pcbpurgeif(&tcbtable, (struct ifnet *)control);
-			break;
-#endif
-#ifdef INET6
-		case PF_INET6:
-			in6_pcbpurgeif0(&tcbtable, (struct ifnet *)control);
-			in6_purgeif((struct ifnet *)control);
-			in6_pcbpurgeif(&tcbtable, (struct ifnet *)control);
-			break;
-#endif
-		default:
-			mutex_exit(softnet_lock);
-			splx(s);
-			return (EAFNOSUPPORT);
-		}
-		mutex_exit(softnet_lock);
-		splx(s);
-		return (0);
-	}
+	KASSERT(req != PRU_PURGEIF);
 
 	KASSERT(solocked(so));
 
-	if ((error = tcp_getpcb(so, &inp, &in6p, &tp)) != 0) {
-		splx(s);
-		return error;
-	}
+	panic("tcp_usrreq");
 
-	ostate = tcp_debug_capture(tp, req);
-
-	KASSERT(!control || req == PRU_SEND);
-#ifdef INET6
-	/* XXX: KASSERT((inp != NULL) ^ (in6p != NULL)); */
-#endif
-
-	switch (req) {
-
-	/*
-	 * Create a TCP connection between two sockets.
-	 */
-	case PRU_CONNECT2:
-		error = EOPNOTSUPP;
-		break;
-
-	/*
-	 * After a receive, possibly send window update to peer.
-	 */
-	case PRU_RCVD:
-		/*
-		 * soreceive() calls this function when a user receives
-		 * ancillary data on a listening socket. We don't call
-		 * tcp_output in such a case, since there is no header
-		 * template for a listening socket and hence the kernel
-		 * will panic.
-		 */
-		if ((so->so_state & (SS_ISCONNECTED|SS_ISCONNECTING)) != 0)
-			(void) tcp_output(tp);
-		break;
-
-	/*
-	 * Do a send by putting data in output queue and updating urgent
-	 * marker if URG set.  Possibly send more data.
-	 */
-	case PRU_SEND:
-		if (control && control->m_len) {
-			m_freem(control);
-			m_freem(m);
-			error = EINVAL;
-			break;
-		}
-		sbappendstream(&so->so_snd, m);
-		error = tcp_output(tp);
-		break;
-
-	default:
-		panic("tcp_usrreq");
-	}
-
-	tcp_debug_trace(so, tp, ostate, req);
-	splx(s);
-
-	return error;
+	return 0;
 }
 
 static void
@@ -687,8 +602,6 @@ tcp_detach(struct socket *so)
 	struct tcpcb *tp = NULL;
 	int s;
 
-	KASSERT(solocked(so));
-
 	if (tcp_getpcb(so, &inp, &in6p, &tp) != 0)
 		return;
 
@@ -705,8 +618,7 @@ tcp_accept(struct socket *so, struct mbuf *nam)
 	struct tcpcb *tp = NULL;
 	int ostate = 0;
 	int error = 0;
-
-	KASSERT(solocked(so));
+	int s;
 
 	if ((error = tcp_getpcb(so, &inp, &in6p, &tp)) != 0)
 		return error;
@@ -718,6 +630,7 @@ tcp_accept(struct socket *so, struct mbuf *nam)
 	 * done at higher levels; just return the address
 	 * of the peer, storing through addr.
 	 */
+	s = splsoftnet();
 #ifdef INET
 	if (inp) {
 		in_setpeeraddr(inp, nam);
@@ -729,12 +642,13 @@ tcp_accept(struct socket *so, struct mbuf *nam)
 	}
 #endif
 	tcp_debug_trace(so, tp, ostate, PRU_ACCEPT);
+	splx(s);
 
 	return 0;
 }
 
 static int
-tcp_bind(struct socket *so, struct mbuf *nam)
+tcp_bind(struct socket *so, struct mbuf *nam, struct lwp *l)
 {
 	struct inpcb *inp = NULL;
 	struct in6pcb *in6p = NULL;
@@ -742,8 +656,6 @@ tcp_bind(struct socket *so, struct mbuf *nam)
 	int s;
 	int error = 0;
 	int ostate = 0;
-
-	KASSERT(solocked(so));
 
 	if ((error = tcp_getpcb(so, &inp, &in6p, &tp)) != 0)
 		return error;
@@ -757,12 +669,12 @@ tcp_bind(struct socket *so, struct mbuf *nam)
 	switch (so->so_proto->pr_domain->dom_family) {
 #ifdef INET
 	case PF_INET:
-		error = in_pcbbind(inp, nam);
+		error = in_pcbbind(inp, nam, l);
 		break;
 #endif
 #ifdef INET6
 	case PF_INET6:
-		error = in6_pcbbind(in6p, nam);
+		error = in6_pcbbind(in6p, nam, l);
 		if (!error) {
 			/* mapped addr case */
 			if (IN6_IS_ADDR_V4MAPPED(&in6p->in6p_laddr))
@@ -773,7 +685,6 @@ tcp_bind(struct socket *so, struct mbuf *nam)
 		break;
 #endif
 	}
-
 	tcp_debug_trace(so, tp, ostate, PRU_BIND);
 	splx(s);
 
@@ -781,16 +692,14 @@ tcp_bind(struct socket *so, struct mbuf *nam)
 }
 
 static int
-tcp_listen(struct socket *so)
+tcp_listen(struct socket *so, struct lwp *l)
 {
 	struct inpcb *inp = NULL;
 	struct in6pcb *in6p = NULL;
 	struct tcpcb *tp = NULL;
-	int s;
 	int error = 0;
 	int ostate = 0;
-
-	KASSERT(solocked(so));
+	int s;
 
 	if ((error = tcp_getpcb(so, &inp, &in6p, &tp)) != 0)
 		return error;
@@ -803,14 +712,14 @@ tcp_listen(struct socket *so)
 	s = splsoftnet();
 #ifdef INET
 	if (inp && inp->inp_lport == 0) {
-		error = in_pcbbind(inp, NULL);
+		error = in_pcbbind(inp, NULL, l);
 		if (error)
 			goto release;
 	}
 #endif
 #ifdef INET6
 	if (in6p && in6p->in6p_lport == 0) {
-		error = in6_pcbbind(in6p, NULL);
+		error = in6_pcbbind(in6p, NULL, l);
 		if (error)
 			goto release;
 	}
@@ -825,7 +734,7 @@ release:
 }
 
 static int
-tcp_connect(struct socket *so, struct mbuf *nam)
+tcp_connect(struct socket *so, struct mbuf *nam, struct lwp *l)
 {
 	struct inpcb *inp = NULL;
 	struct in6pcb *in6p = NULL;
@@ -834,14 +743,10 @@ tcp_connect(struct socket *so, struct mbuf *nam)
 	int error = 0;
 	int ostate = 0;
 
-	KASSERT(solocked(so));
-
 	if ((error = tcp_getpcb(so, &inp, &in6p, &tp)) != 0)
 		return error;
 
 	ostate = tcp_debug_capture(tp, PRU_CONNECT);
-
-	s = splsoftnet();
 
 	/*
 	 * Initiate connection to peer.
@@ -850,24 +755,25 @@ tcp_connect(struct socket *so, struct mbuf *nam)
 	 * Start keep-alive timer, and seed output sequence space.
 	 * Send initial segment on connection.
 	 */
+	s = splsoftnet();
 #ifdef INET
 	if (inp) {
 		if (inp->inp_lport == 0) {
-			error = in_pcbbind(inp, NULL);
+			error = in_pcbbind(inp, NULL, l);
 			if (error)
 				goto release;
 		}
-		error = in_pcbconnect(inp, nam, curlwp);
+		error = in_pcbconnect(inp, nam, l);
 	}
 #endif
 #ifdef INET6
 	if (in6p) {
 		if (in6p->in6p_lport == 0) {
-			error = in6_pcbbind(in6p, NULL);
+			error = in6_pcbbind(in6p, NULL, l);
 			if (error)
 				goto release;
 		}
-		error = in6_pcbconnect(in6p, nam, curlwp);
+		error = in6_pcbconnect(in6p, nam, l);
 		if (!error) {
 			/* mapped addr case */
 			if (IN6_IS_ADDR_V4MAPPED(&in6p->in6p_faddr))
@@ -915,16 +821,35 @@ release:
 }
 
 static int
+tcp_connect2(struct socket *so, struct socket *so2)
+{
+	struct inpcb *inp = NULL;
+	struct in6pcb *in6p = NULL;
+	struct tcpcb *tp = NULL;
+	int error = 0;
+	int ostate = 0;
+
+	KASSERT(solocked(so));
+
+	if ((error = tcp_getpcb(so, &inp, &in6p, &tp)) != 0)
+		return error;
+
+	ostate = tcp_debug_capture(tp, PRU_CONNECT2);
+
+	tcp_debug_trace(so, tp, ostate, PRU_CONNECT2);
+
+	return EOPNOTSUPP;
+}
+
+static int
 tcp_disconnect(struct socket *so)
 {
 	struct inpcb *inp = NULL;
 	struct in6pcb *in6p = NULL;
 	struct tcpcb *tp = NULL;
-	int s;
 	int error = 0;
 	int ostate = 0;
-
-	KASSERT(solocked(so));
+	int s;
 
 	if ((error = tcp_getpcb(so, &inp, &in6p, &tp)) != 0)
 		return error;
@@ -956,11 +881,9 @@ tcp_shutdown(struct socket *so)
 	struct inpcb *inp = NULL;
 	struct in6pcb *in6p = NULL;
 	struct tcpcb *tp = NULL;
-	int s;
 	int error = 0;
 	int ostate = 0;
-
-	KASSERT(solocked(so));
+	int s;
 
 	if ((error = tcp_getpcb(so, &inp, &in6p, &tp)) != 0)
 		return error;
@@ -986,11 +909,9 @@ tcp_abort(struct socket *so)
 	struct inpcb *inp = NULL;
 	struct in6pcb *in6p = NULL;
 	struct tcpcb *tp = NULL;
-	int s;
 	int error = 0;
 	int ostate = 0;
-
-	KASSERT(solocked(so));
+	int s;
 
 	if ((error = tcp_getpcb(so, &inp, &in6p, &tp)) != 0)
 		return error;
@@ -1042,12 +963,14 @@ tcp_peeraddr(struct socket *so, struct mbuf *nam)
 	struct tcpcb *tp = NULL;
 	int ostate = 0;
 	int error = 0;
+	int s;
 
 	if ((error = tcp_getpcb(so, &inp, &in6p, &tp)) != 0)
 		return error;
 
 	ostate = tcp_debug_capture(tp, PRU_PEERADDR);
 
+	s = splsoftnet();
 #ifdef INET
 	if (inp)
 		in_setpeeraddr(inp, nam);
@@ -1056,8 +979,8 @@ tcp_peeraddr(struct socket *so, struct mbuf *nam)
 	if (in6p)
 		in6_setpeeraddr(in6p, nam);
 #endif
-
 	tcp_debug_trace(so, tp, ostate, PRU_PEERADDR);
+	splx(s);
 
 	return 0;
 }
@@ -1070,12 +993,14 @@ tcp_sockaddr(struct socket *so, struct mbuf *nam)
 	struct tcpcb *tp = NULL;
 	int ostate = 0;
 	int error = 0;
+	int s;
 
 	if ((error = tcp_getpcb(so, &inp, &in6p, &tp)) != 0)
 		return error;
 
 	ostate = tcp_debug_capture(tp, PRU_SOCKADDR);
 
+	s = splsoftnet();
 #ifdef INET
 	if (inp)
 		in_setsockaddr(inp, nam);
@@ -1084,8 +1009,42 @@ tcp_sockaddr(struct socket *so, struct mbuf *nam)
 	if (in6p)
 		in6_setsockaddr(in6p, nam);
 #endif
-
 	tcp_debug_trace(so, tp, ostate, PRU_SOCKADDR);
+	splx(s);
+
+	return 0;
+}
+
+static int
+tcp_rcvd(struct socket *so, int flags, struct lwp *l)
+{
+	struct inpcb *inp = NULL;
+	struct in6pcb *in6p = NULL;
+	struct tcpcb *tp = NULL;
+	int ostate = 0;
+	int error = 0;
+	int s;
+
+	if ((error = tcp_getpcb(so, &inp, &in6p, &tp)) != 0)
+		return error;
+
+	ostate = tcp_debug_capture(tp, PRU_RCVD);
+
+	/*
+	 * After a receive, possibly send window update to peer.
+	 *
+	 * soreceive() calls this function when a user receives
+	 * ancillary data on a listening socket. We don't call
+	 * tcp_output in such a case, since there is no header
+	 * template for a listening socket and hence the kernel
+	 * will panic.
+	 */
+	s = splsoftnet();
+	if ((so->so_state & (SS_ISCONNECTED|SS_ISCONNECTING)) != 0)
+		(void) tcp_output(tp);
+	splx(s);
+
+	tcp_debug_trace(so, tp, ostate, PRU_RCVD);
 
 	return 0;
 }
@@ -1098,20 +1057,26 @@ tcp_recvoob(struct socket *so, struct mbuf *m, int flags)
 	struct tcpcb *tp = NULL;
 	int ostate = 0;
 	int error = 0;
+	int s;
 
 	if ((error = tcp_getpcb(so, &inp, &in6p, &tp)) != 0)
 		return error;
 
 	ostate = tcp_debug_capture(tp, PRU_RCVOOB);
 
+	s = splsoftnet();
 	if ((so->so_oobmark == 0 &&
 	    (so->so_state & SS_RCVATMARK) == 0) ||
 	    so->so_options & SO_OOBINLINE ||
-	    tp->t_oobflags & TCPOOB_HADDATA)
+	    tp->t_oobflags & TCPOOB_HADDATA) {
+		splx(s);
 		return EINVAL;
+	}
 
-	if ((tp->t_oobflags & TCPOOB_HAVEDATA) == 0)
+	if ((tp->t_oobflags & TCPOOB_HAVEDATA) == 0) {
+		splx(s);
 		return EWOULDBLOCK;
+	}
 
 	m->m_len = 1;
 	*mtod(m, char *) = tp->t_iobc;
@@ -1119,8 +1084,46 @@ tcp_recvoob(struct socket *so, struct mbuf *m, int flags)
 		tp->t_oobflags ^= (TCPOOB_HAVEDATA | TCPOOB_HADDATA);
 
 	tcp_debug_trace(so, tp, ostate, PRU_RCVOOB);
+	splx(s);
 
 	return 0;
+}
+
+static int
+tcp_send(struct socket *so, struct mbuf *m, struct mbuf *nam,
+    struct mbuf *control, struct lwp *l)
+{
+	struct inpcb *inp = NULL;
+	struct in6pcb *in6p = NULL;
+	struct tcpcb *tp = NULL;
+	int ostate = 0;
+	int error = 0;
+	int s;
+
+	if ((error = tcp_getpcb(so, &inp, &in6p, &tp)) != 0)
+		return error;
+
+	ostate = tcp_debug_capture(tp, PRU_SEND);
+
+	/*
+	 * Do a send by putting data in output queue and updating urgent
+	 * marker if URG set.  Possibly send more data.
+	 */
+	s = splsoftnet();
+	if (control && control->m_len) {
+		m_freem(control);
+		m_freem(m);
+		tcp_debug_trace(so, tp, ostate, PRU_SEND);
+		splx(s);
+		return EINVAL;
+	}
+
+	sbappendstream(&so->so_snd, m);
+	error = tcp_output(tp);
+	tcp_debug_trace(so, tp, ostate, PRU_SEND);
+	splx(s);
+
+	return error;
 }
 
 static int
@@ -1131,14 +1134,17 @@ tcp_sendoob(struct socket *so, struct mbuf *m, struct mbuf *control)
 	struct tcpcb *tp = NULL;
 	int ostate = 0;
 	int error = 0;
+	int s;
 
 	if ((error = tcp_getpcb(so, &inp, &in6p, &tp)) != 0)
 		return error;
 
 	ostate = tcp_debug_capture(tp, PRU_SENDOOB);
 
+	s = splsoftnet();
 	if (sbspace(&so->so_snd) < -512) {
 		m_freem(m);
+		splx(s);
 		return ENOBUFS;
 	}
 	/*
@@ -1154,10 +1160,43 @@ tcp_sendoob(struct socket *so, struct mbuf *m, struct mbuf *control)
 	tp->t_force = 1;
 	error = tcp_output(tp);
 	tp->t_force = 0;
-
 	tcp_debug_trace(so, tp, ostate, PRU_SENDOOB);
+	splx(s);
 
 	return error;
+}
+
+static int
+tcp_purgeif(struct socket *so, struct ifnet *ifp)
+{
+	int s;
+
+	s = splsoftnet();
+	mutex_enter(softnet_lock);
+	switch (so->so_proto->pr_domain->dom_family) {
+#ifdef INET
+	case PF_INET:
+		in_pcbpurgeif0(&tcbtable, ifp);
+		in_purgeif(ifp);
+		in_pcbpurgeif(&tcbtable, ifp);
+		break;
+#endif
+#ifdef INET6
+	case PF_INET6:
+		in6_pcbpurgeif0(&tcbtable, ifp);
+		in6_purgeif(ifp);
+		in6_pcbpurgeif(&tcbtable, ifp);
+		break;
+#endif
+	default:
+		mutex_exit(softnet_lock);
+		splx(s);
+		return EAFNOSUPPORT;
+	}
+	mutex_exit(softnet_lock);
+	splx(s);
+
+	return 0;
 }
 
 /*
@@ -2400,6 +2439,7 @@ PR_WRAP_USRREQS(tcp)
 #define	tcp_bind	tcp_bind_wrapper
 #define	tcp_listen	tcp_listen_wrapper
 #define	tcp_connect	tcp_connect_wrapper
+#define	tcp_connect2	tcp_connect2_wrapper
 #define	tcp_disconnect	tcp_disconnect_wrapper
 #define	tcp_shutdown	tcp_shutdown_wrapper
 #define	tcp_abort	tcp_abort_wrapper
@@ -2407,8 +2447,11 @@ PR_WRAP_USRREQS(tcp)
 #define	tcp_stat	tcp_stat_wrapper
 #define	tcp_peeraddr	tcp_peeraddr_wrapper
 #define	tcp_sockaddr	tcp_sockaddr_wrapper
+#define	tcp_rcvd	tcp_rcvd_wrapper
 #define	tcp_recvoob	tcp_recvoob_wrapper
+#define	tcp_send	tcp_send_wrapper
 #define	tcp_sendoob	tcp_sendoob_wrapper
+#define	tcp_purgeif	tcp_purgeif_wrapper
 #define	tcp_usrreq	tcp_usrreq_wrapper
 
 const struct pr_usrreqs tcp_usrreqs = {
@@ -2418,6 +2461,7 @@ const struct pr_usrreqs tcp_usrreqs = {
 	.pr_bind	= tcp_bind,
 	.pr_listen	= tcp_listen,
 	.pr_connect	= tcp_connect,
+	.pr_connect2	= tcp_connect2,
 	.pr_disconnect	= tcp_disconnect,
 	.pr_shutdown	= tcp_shutdown,
 	.pr_abort	= tcp_abort,
@@ -2425,7 +2469,10 @@ const struct pr_usrreqs tcp_usrreqs = {
 	.pr_stat	= tcp_stat,
 	.pr_peeraddr	= tcp_peeraddr,
 	.pr_sockaddr	= tcp_sockaddr,
+	.pr_rcvd	= tcp_rcvd,
 	.pr_recvoob	= tcp_recvoob,
+	.pr_send	= tcp_send,
 	.pr_sendoob	= tcp_sendoob,
+	.pr_purgeif	= tcp_purgeif,
 	.pr_generic	= tcp_usrreq,
 };

@@ -30,8 +30,8 @@ CLANG_LIBS+= \
 	clangSema \
 	clangEdit \
 	clangAnalysis \
-	clangRewriteFrontend \
-	clangRewriteCore \
+	clangFrontendRewrite \
+	clangRewrite \
 	clangAST \
 	clangLex \
 	clangBasic
@@ -45,8 +45,8 @@ LLVM_LIBS+= \
 	BitWriter \
 	AArch64CodeGen \
 	AArch64TargetInfo \
-	AArch64MCTargetDesc \
 	AArch64AsmParser \
+	AArch64MCTargetDesc \
 	AArch64AsmPrinter \
 	AArch64Utils \
 	ARMCodeGen \

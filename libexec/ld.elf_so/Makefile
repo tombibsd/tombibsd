@@ -26,7 +26,8 @@ ARCHSUBDIR=	${MACHINE_CPU}
 .endif
 M=		${.CURDIR}/arch/${ARCHSUBDIR}
 
-.if ((${LDELFSO_MACHINE_ARCH} == "alpha") ||				\
+.if ((${MACHINE_CPU} == "aarch64") ||					\
+     (${LDELFSO_MACHINE_ARCH} == "alpha") ||				\
      (${MACHINE_CPU} == "arm") ||					\
      (${LDELFSO_MACHINE_ARCH} == "coldfire") ||				\
      (${LDELFSO_MACHINE_ARCH} == "hppa") ||				\

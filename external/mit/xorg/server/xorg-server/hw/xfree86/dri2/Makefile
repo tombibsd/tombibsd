@@ -33,6 +33,7 @@ CPPFLAGS+=	-I${X11SRCDIR.xorg-server}/hw/xfree86/${LIB} \
 		-I${X11SRCDIR.xorg-server}/../include
 
 CPPFLAGS+=	-DXF86DRI \
+		-DCOMPOSITE \
 		${X11FLAGS.DIX}
 
 LIBDPLIBS=	drm ${.CURDIR}/../../../../../lib/libdrm

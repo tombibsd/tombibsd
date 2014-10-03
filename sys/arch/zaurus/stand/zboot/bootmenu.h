@@ -33,6 +33,5 @@
 
 void parsebootconf(const char *);
 void doboottypemenu(void);
-int atoi(const char *);
 
 #endif /* !_BOOTMENU_H */

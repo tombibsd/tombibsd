@@ -12,7 +12,7 @@ CLEANFILES+=	${KERNEL}
 
 ${KERNEL}: ${KERN}
 	-rm -f ${.TARGET}
-	${TOOL_GZIP} -9nc ${.ALLSRC} > ${.TARGET}
+	${TOOL_GZIP_N} -9c ${.ALLSRC} > ${.TARGET}
 
 realall: ${KERNEL}
 

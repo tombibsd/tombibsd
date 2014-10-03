@@ -108,7 +108,7 @@ rfcomm_attach(struct socket *so, int proto)
 	if (error)
 		return error;
 
-	error = rfcomm_rcvd(so->so_pcb, sbspace(&so->so_rcv));
+	error = rfcomm_rcvd_pcb(so->so_pcb, sbspace(&so->so_rcv));
 	if (error) {
 		rfcomm_detach_pcb((struct rfcomm_dlc **)&so->so_pcb);
 		return error;
@@ -142,7 +142,7 @@ rfcomm_accept(struct socket *so, struct mbuf *nam)
 }
 
 static int
-rfcomm_bind(struct socket *so, struct mbuf *nam)
+rfcomm_bind(struct socket *so, struct mbuf *nam, struct lwp *l)
 {
 	struct rfcomm_dlc *pcb = so->so_pcb;
 	struct sockaddr_bt *sa;
@@ -164,7 +164,7 @@ rfcomm_bind(struct socket *so, struct mbuf *nam)
 }
 
 static int
-rfcomm_listen(struct socket *so)
+rfcomm_listen(struct socket *so, struct lwp *l)
 {
 	struct rfcomm_dlc *pcb = so->so_pcb;
 
@@ -177,7 +177,7 @@ rfcomm_listen(struct socket *so)
 }
 
 static int
-rfcomm_connect(struct socket *so, struct mbuf *nam)
+rfcomm_connect(struct socket *so, struct mbuf *nam, struct lwp *l)
 {
 	struct rfcomm_dlc *pcb = so->so_pcb;
 	struct sockaddr_bt *sa;
@@ -197,6 +197,19 @@ rfcomm_connect(struct socket *so, struct mbuf *nam)
 
 	soisconnecting(so);
 	return rfcomm_connect_pcb(pcb, sa);
+}
+
+static int
+rfcomm_connect2(struct socket *so, struct socket *so2)
+{
+	struct rfcomm_dlc *pcb = so->so_pcb;
+
+	KASSERT(solocked(so));
+
+	if (pcb == NULL)
+		return EINVAL;
+
+	return EOPNOTSUPP;
 }
 
 static int
@@ -283,11 +296,57 @@ rfcomm_sockaddr(struct socket *so, struct mbuf *nam)
 }
 
 static int
+rfcomm_rcvd(struct socket *so, int flags, struct lwp *l)
+{
+	struct rfcomm_dlc *pcb = so->so_pcb;
+
+	KASSERT(solocked(so));
+
+	if (pcb == NULL)
+		return EINVAL;
+
+	return rfcomm_rcvd_pcb(pcb, sbspace(&so->so_rcv));
+}
+
+static int
 rfcomm_recvoob(struct socket *so, struct mbuf *m, int flags)
 {
 	KASSERT(solocked(so));
 
 	return EOPNOTSUPP;
+}
+
+static int
+rfcomm_send(struct socket *so, struct mbuf *m, struct mbuf *nam,
+    struct mbuf *control, struct lwp *l)
+{
+	struct rfcomm_dlc *pcb = so->so_pcb;
+	int err = 0;
+	struct mbuf *m0;
+
+	KASSERT(solocked(so));
+	KASSERT(m != NULL);
+
+	if (control)	/* no use for that */
+		m_freem(control);
+
+	if (pcb == NULL) {
+		err = EINVAL;
+		goto release;
+	}
+
+	m0 = m_copypacket(m, M_DONTWAIT);
+	if (m0 == NULL) {
+		err = ENOMEM;
+		goto release;
+	}
+
+	sbappendstream(&so->so_snd, m);
+	return rfcomm_send_pcb(pcb, m0);
+
+release:
+	m_freem(m);
+	return err;
 }
 
 static int
@@ -303,16 +362,19 @@ rfcomm_sendoob(struct socket *so, struct mbuf *m, struct mbuf *control)
 	return EOPNOTSUPP;
 }
 
+static int
+rfcomm_purgeif(struct socket *so, struct ifnet *ifp)
+{
+
+	return EOPNOTSUPP;
+}
+
 /*
  * User Request.
  * up is socket
  * m is optional mbuf chain containing message
- * nam is either
- *	optional mbuf chain containing an address
- *	message flags (PRU_RCVD)
  * ctl is either
  *	optional mbuf chain containing socket options
- *	optional interface pointer PRU_PURGEIF
  * l is pointer to process requesting action (if any)
  *
  * we are responsible for disposing of m and ctl if
@@ -323,7 +385,6 @@ rfcomm_usrreq(struct socket *up, int req, struct mbuf *m,
 		struct mbuf *nam, struct mbuf *ctl, struct lwp *l)
 {
 	struct rfcomm_dlc *pcb = up->so_pcb;
-	struct mbuf *m0;
 	int err = 0;
 
 	DPRINTFN(2, "%s\n", prurequests[req]);
@@ -333,6 +394,7 @@ rfcomm_usrreq(struct socket *up, int req, struct mbuf *m,
 	KASSERT(req != PRU_BIND);
 	KASSERT(req != PRU_LISTEN);
 	KASSERT(req != PRU_CONNECT);
+	KASSERT(req != PRU_CONNECT2);
 	KASSERT(req != PRU_DISCONNECT);
 	KASSERT(req != PRU_SHUTDOWN);
 	KASSERT(req != PRU_ABORT);
@@ -340,39 +402,18 @@ rfcomm_usrreq(struct socket *up, int req, struct mbuf *m,
 	KASSERT(req != PRU_SENSE);
 	KASSERT(req != PRU_PEERADDR);
 	KASSERT(req != PRU_SOCKADDR);
+	KASSERT(req != PRU_RCVD);
 	KASSERT(req != PRU_RCVOOB);
+	KASSERT(req != PRU_SEND);
 	KASSERT(req != PRU_SENDOOB);
+	KASSERT(req != PRU_PURGEIF);
 
-	switch (req) {
-	case PRU_PURGEIF:
-		return EOPNOTSUPP;
-	}
 	if (pcb == NULL) {
 		err = EINVAL;
 		goto release;
 	}
 
 	switch(req) {
-	case PRU_SEND:
-		KASSERT(m != NULL);
-
-		if (ctl)	/* no use for that */
-			m_freem(ctl);
-
-		m0 = m_copypacket(m, M_DONTWAIT);
-		if (m0 == NULL) {
-			err = ENOMEM;
-			goto release;
-		}
-
-		sbappendstream(&up->so_snd, m);
-
-		return rfcomm_send(pcb, m0);
-
-	case PRU_RCVD:
-		return rfcomm_rcvd(pcb, sbspace(&up->so_rcv));
-
-	case PRU_CONNECT2:
 	case PRU_FASTTIMO:
 	case PRU_SLOWTIMO:
 	case PRU_PROTORCV:
@@ -552,6 +593,7 @@ PR_WRAP_USRREQS(rfcomm)
 #define	rfcomm_bind		rfcomm_bind_wrapper
 #define	rfcomm_listen		rfcomm_listen_wrapper
 #define	rfcomm_connect		rfcomm_connect_wrapper
+#define	rfcomm_connect2		rfcomm_connect2_wrapper
 #define	rfcomm_disconnect	rfcomm_disconnect_wrapper
 #define	rfcomm_shutdown		rfcomm_shutdown_wrapper
 #define	rfcomm_abort		rfcomm_abort_wrapper
@@ -559,8 +601,11 @@ PR_WRAP_USRREQS(rfcomm)
 #define	rfcomm_stat		rfcomm_stat_wrapper
 #define	rfcomm_peeraddr		rfcomm_peeraddr_wrapper
 #define	rfcomm_sockaddr		rfcomm_sockaddr_wrapper
+#define	rfcomm_rcvd		rfcomm_rcvd_wrapper
 #define	rfcomm_recvoob		rfcomm_recvoob_wrapper
+#define	rfcomm_send		rfcomm_send_wrapper
 #define	rfcomm_sendoob		rfcomm_sendoob_wrapper
+#define	rfcomm_purgeif		rfcomm_purgeif_wrapper
 #define	rfcomm_usrreq		rfcomm_usrreq_wrapper
 
 const struct pr_usrreqs rfcomm_usrreqs = {
@@ -570,6 +615,7 @@ const struct pr_usrreqs rfcomm_usrreqs = {
 	.pr_bind	= rfcomm_bind,
 	.pr_listen	= rfcomm_listen,
 	.pr_connect	= rfcomm_connect,
+	.pr_connect2	= rfcomm_connect2,
 	.pr_disconnect	= rfcomm_disconnect,
 	.pr_shutdown	= rfcomm_shutdown,
 	.pr_abort	= rfcomm_abort,
@@ -577,7 +623,10 @@ const struct pr_usrreqs rfcomm_usrreqs = {
 	.pr_stat	= rfcomm_stat,
 	.pr_peeraddr	= rfcomm_peeraddr,
 	.pr_sockaddr	= rfcomm_sockaddr,
+	.pr_rcvd	= rfcomm_rcvd,
 	.pr_recvoob	= rfcomm_recvoob,
+	.pr_send	= rfcomm_send,
 	.pr_sendoob	= rfcomm_sendoob,
+	.pr_purgeif	= rfcomm_purgeif,
 	.pr_generic	= rfcomm_usrreq,
 };

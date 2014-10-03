@@ -247,7 +247,7 @@ glxsb_attach(device_t parent, device_t self, void *aux)
 	wrmsr(SB_GLD_MSR_CTRL, msr);
 
 	rnd_attach_source(&sc->sc_rnd_source, device_xname(self),
-			  RND_TYPE_RNG, RND_FLAG_NO_ESTIMATE);
+			  RND_TYPE_RNG, RND_FLAG_COLLECT_VALUE);
 
 	/* Install a periodic collector for the "true" (AMD's word) RNG */
 	callout_init(&sc->sc_co, 0);
@@ -279,7 +279,8 @@ glxsb_rnd(void *v)
 	status = bus_space_read_4(sc->sc_iot, sc->sc_ioh, SB_RANDOM_NUM_STATUS);
 	if (status & SB_RNS_TRNG_VALID) {
 		value = bus_space_read_4(sc->sc_iot, sc->sc_ioh, SB_RANDOM_NUM);
-		rnd_add_uint32(&sc->sc_rnd_source, value);
+		rnd_add_data(&sc->sc_rnd_source, &value, sizeof(value),
+			     sizeof(value) * NBBY);
 	}
 
 	callout_schedule(&sc->sc_co, (hz > 100) ? (hz / 100) : 1);

@@ -723,7 +723,7 @@ btmagic_ctl_send(struct btmagic_softc *sc, const uint8_t *data, size_t len)
 
 	memcpy(mtod(m, uint8_t *), data, len);
 	m->m_pkthdr.len = m->m_len = len;
-	return l2cap_send(sc->sc_ctl, m);
+	return l2cap_send_pcb(sc->sc_ctl, m);
 }
 
 /*

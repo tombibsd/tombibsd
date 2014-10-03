@@ -843,6 +843,7 @@
 ./usr/tests/bin/sh/t_wait			tests-bin-tests		atf
 ./usr/tests/bin/sh/dotcmd			tests-bin-tests
 ./usr/tests/bin/sh/dotcmd/Atffile	tests-bin-tests	atf
+./usr/tests/bin/sh/dotcmd/Kyuafile	tests-bin-tests	atf,kyua
 ./usr/tests/bin/sh/dotcmd/break_case	tests-bin-tests	atf
 ./usr/tests/bin/sh/dotcmd/break_compound	tests-bin-tests	atf
 ./usr/tests/bin/sh/dotcmd/break_file	tests-bin-tests	atf
@@ -2092,6 +2093,7 @@
 ./usr/tests/kernel/t_rnd			tests-kernel-tests		atf,rump
 ./usr/tests/kernel/t_sigaction			tests-obsolete			obsolete
 ./usr/tests/kernel/t_subr_prf			tests-kernel-tests		atf
+./usr/tests/kernel/t_sysctl			tests-kernel-tests		atf
 ./usr/tests/kernel/t_sysv			tests-kernel-tests		atf
 ./usr/tests/kernel/t_time			tests-obsolete			obsolete
 ./usr/tests/kernel/t_ucontext			tests-obsolete			obsolete

@@ -88,10 +88,10 @@ netif_init(void *self)
 	s->io_netif = dv;
 	memcpy(s->myea, enaddr, sizeof(s->myea));
 	/* build btinfo to identify NIF device */
-	snprintf(bi_net.devname, sizeof(bi_net.devname), dv->name);
+	snprintf(bi_net.devname, sizeof(bi_net.devname), "%s", dv->name);
 	memcpy(bi_net.mac_address, enaddr, sizeof(bi_net.mac_address));
 	bi_net.cookie = tag;
-	snprintf(bi_rdev.devname, sizeof(bi_rdev.devname), dv->name);
+	snprintf(bi_rdev.devname, sizeof(bi_rdev.devname), "%s", dv->name);
 	bi_rdev.cookie = tag;
 	return 1;
 }

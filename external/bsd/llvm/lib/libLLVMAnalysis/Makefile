@@ -32,6 +32,7 @@ SRCS+=	AliasAnalysis.cpp \
 	InstructionSimplify.cpp \
 	Interval.cpp \
 	IntervalPartition.cpp \
+	JumpInstrTableInfo.cpp \
 	LazyCallGraph.cpp \
 	LazyValueInfo.cpp \
 	LibCallAliasAnalysis.cpp \
@@ -55,6 +56,7 @@ SRCS+=	AliasAnalysis.cpp \
 	ScalarEvolutionAliasAnalysis.cpp \
 	ScalarEvolutionExpander.cpp \
 	ScalarEvolutionNormalization.cpp \
+	ScopedNoAliasAA.cpp \
 	SparsePropagation.cpp \
 	TargetTransformInfo.cpp \
 	Trace.cpp \

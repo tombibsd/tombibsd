@@ -778,6 +778,7 @@ out:
 		 */
 		TAILQ_FOREACH(edata, &sme->sme_sensors_list, sensors_head) {
 			if (edata->flags & ENVSYS_FHAS_ENTROPY) {
+				uint32_t rnd_type, rnd_flag = 0;
 				size_t n;
 				int tail = 1;
 
@@ -797,8 +798,34 @@ out:
 					} else
 						tail = 0;
 				}
+				rnd_flag |= RND_FLAG_COLLECT_TIME;
+				rnd_flag |= RND_FLAG_ESTIMATE_TIME;
+
+				switch (edata->units) {
+				    case ENVSYS_STEMP:
+				    case ENVSYS_SFANRPM:
+				    case ENVSYS_INTEGER:
+					rnd_type = RND_TYPE_ENV;
+					rnd_flag |= RND_FLAG_COLLECT_VALUE;
+					rnd_flag |= RND_FLAG_ESTIMATE_VALUE;
+					break;
+				    case ENVSYS_SVOLTS_AC:
+				    case ENVSYS_SVOLTS_DC:
+				    case ENVSYS_SOHMS:
+				    case ENVSYS_SWATTS:
+				    case ENVSYS_SAMPS:
+				    case ENVSYS_SWATTHOUR:
+				    case ENVSYS_SAMPHOUR:
+					rnd_type = RND_TYPE_POWER;
+					rnd_flag |= RND_FLAG_COLLECT_VALUE;
+					rnd_flag |= RND_FLAG_ESTIMATE_VALUE;
+					break;
+				    default:
+					rnd_type = RND_TYPE_UNKNOWN;
+					break;
+				}
 				rnd_attach_source(&edata->rnd_src, rnd_name,
-				    RND_TYPE_ENV, 0);
+				    rnd_type, rnd_flag);
 			}
 		}
 		DPRINTF(("%s: driver '%s' registered (nsens=%d nevent=%d)\n",
@@ -1206,7 +1233,10 @@ sme_remove_userprops(void)
 				snprintf(rnd_name, sizeof(rnd_name), "%s-%s",
 				    sme->sme_name, edata->desc);
 				rnd_attach_source(&edata->rnd_src, rnd_name,
-				    RND_TYPE_ENV, 0);
+				    RND_TYPE_ENV, RND_FLAG_COLLECT_VALUE|
+						  RND_FLAG_COLLECT_TIME|
+						  RND_FLAG_ESTIMATE_VALUE|
+						  RND_FLAG_ESTIMATE_TIME);
 			}
 		}
 

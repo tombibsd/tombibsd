@@ -40,7 +40,7 @@
 void
 md_init(void)
 {
-	errx(1, "sysinst has not been properly ported to this platform");
+	warnx("sysinst has not been properly ported to this platform");
 }
 
 void

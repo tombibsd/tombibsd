@@ -1,3 +1,5 @@
+/*	$NetBSD$	*/
+
 /*
  * Copyright 2013 Red Hat Inc.
  *
@@ -21,6 +23,9 @@
  *
  * Authors: Ben Skeggs <bskeggs@redhat.com>
  */
+
+#include <sys/cdefs.h>
+__KERNEL_RCSID(0, "$NetBSD$");
 
 #include "nouveau_sysfs.h"
 

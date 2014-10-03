@@ -1293,6 +1293,7 @@ static const char * const mpc8548cds_extirq_names[] = {
 };
 #endif
 
+#ifndef MPC8548
 static const char * const mpc85xx_extirq_names[] = {
 	[0] = "extirq 0",
 	[1] = "extirq 1",
@@ -1307,6 +1308,7 @@ static const char * const mpc85xx_extirq_names[] = {
 	[10] = "extirq 10",
 	[11] = "extirq 11",
 };
+#endif
 
 static void
 mpc85xx_extirq_setup(void)

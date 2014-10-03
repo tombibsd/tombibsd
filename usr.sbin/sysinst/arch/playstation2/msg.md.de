@@ -42,6 +42,11 @@ message md_hello
 {
 }
 
+message md_may_remove_boot_medium
+{Wenn Sie von einer Diskette gebootet haben, können Sie diese jetzt
+enfernen.
+}
+
 message dobad144
 {Installiere die Tabelle der defekten Blöcke ...
 }

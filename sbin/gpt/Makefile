@@ -3,7 +3,7 @@
 
 PROG=	gpt
 SRCS=	add.c backup.c biosboot.c create.c destroy.c gpt.c label.c map.c \
-	migrate.c recover.c remove.c resize.c set.c show.c unset.c
+	migrate.c recover.c remove.c resize.c restore.c set.c show.c unset.c
 MAN=	gpt.8
 
 LDADD+=	-lprop -lutil

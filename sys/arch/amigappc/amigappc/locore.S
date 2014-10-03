@@ -222,7 +222,7 @@ __start:
  */
 	mfpvr	3
 	rlwinm	3,3,16,16,31		/* CPU revision */
-	cmpi	0,3,9			/* 604e? */
+	cmpwi	%r3,9			/* 604e? */
 	bne	1f
 	mfspr	7,SPR_HID0
 	ori	7,7,HID0_SGE|HID0_BHT

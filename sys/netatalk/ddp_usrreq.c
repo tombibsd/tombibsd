@@ -88,6 +88,7 @@ ddp_usrreq(struct socket *so, int req, struct mbuf *m, struct mbuf *addr,
 	KASSERT(req != PRU_BIND);
 	KASSERT(req != PRU_LISTEN);
 	KASSERT(req != PRU_CONNECT);
+	KASSERT(req != PRU_CONNECT2);
 	KASSERT(req != PRU_DISCONNECT);
 	KASSERT(req != PRU_SHUTDOWN);
 	KASSERT(req != PRU_ABORT);
@@ -95,17 +96,14 @@ ddp_usrreq(struct socket *so, int req, struct mbuf *m, struct mbuf *addr,
 	KASSERT(req != PRU_SENSE);
 	KASSERT(req != PRU_PEERADDR);
 	KASSERT(req != PRU_SOCKADDR);
+	KASSERT(req != PRU_RCVD);
 	KASSERT(req != PRU_RCVOOB);
+	KASSERT(req != PRU_SEND);
 	KASSERT(req != PRU_SENDOOB);
+	KASSERT(req != PRU_PURGEIF);
 
 	ddp = sotoddpcb(so);
 
-	if (req == PRU_PURGEIF) {
-		mutex_enter(softnet_lock);
-		at_purgeif((struct ifnet *) rights);
-		mutex_exit(softnet_lock);
-		return (0);
-	}
 	if (rights && rights->m_len) {
 		error = EINVAL;
 		goto release;
@@ -115,49 +113,12 @@ ddp_usrreq(struct socket *so, int req, struct mbuf *m, struct mbuf *addr,
 		goto release;
 	}
 	switch (req) {
-	case PRU_SEND:{
-			int s = 0;
-
-			if (addr) {
-				if (ddp->ddp_fsat.sat_port != ATADDR_ANYPORT) {
-					error = EISCONN;
-					break;
-				}
-				s = splnet();
-				error = at_pcbconnect(ddp, addr);
-				if (error) {
-					splx(s);
-					break;
-				}
-			} else {
-				if (ddp->ddp_fsat.sat_port == ATADDR_ANYPORT) {
-					error = ENOTCONN;
-					break;
-				}
-			}
-
-			error = ddp_output(m, ddp);
-			m = NULL;
-			if (addr) {
-				at_pcbdisconnect(ddp);
-				splx(s);
-			}
-		}
-		break;
-
-	case PRU_CONNECT2:
 	case PRU_FASTTIMO:
 	case PRU_SLOWTIMO:
 	case PRU_PROTORCV:
 	case PRU_PROTOSEND:
 		error = EOPNOTSUPP;
 		break;
-
-	case PRU_RCVD:
-		/*
-		 * Don't mfree. Good architecture...
-		 */
-		return (EOPNOTSUPP);
 
 	default:
 		error = EOPNOTSUPP;
@@ -452,7 +413,7 @@ ddp_accept(struct socket *so, struct mbuf *nam)
 }
 
 static int
-ddp_bind(struct socket *so, struct mbuf *nam)
+ddp_bind(struct socket *so, struct mbuf *nam, struct lwp *l)
 {
 	KASSERT(solocked(so));
 	KASSERT(sotoddpcb(so) != NULL);
@@ -461,7 +422,7 @@ ddp_bind(struct socket *so, struct mbuf *nam)
 }
 
 static int
-ddp_listen(struct socket *so)
+ddp_listen(struct socket *so, struct lwp *l)
 {
 	KASSERT(solocked(so));
 
@@ -469,7 +430,7 @@ ddp_listen(struct socket *so)
 }
 
 static int
-ddp_connect(struct socket *so, struct mbuf *nam)
+ddp_connect(struct socket *so, struct mbuf *nam, struct lwp *l)
 {
 	struct ddpcb *ddp = sotoddpcb(so);
 	int error = 0;
@@ -485,6 +446,14 @@ ddp_connect(struct socket *so, struct mbuf *nam)
 		soisconnected(so);
 
 	return error;
+}
+
+static int
+ddp_connect2(struct socket *so, struct socket *so2)
+{
+	KASSERT(solocked(so));
+
+	return EOPNOTSUPP;
 }
 
 static int
@@ -557,11 +526,54 @@ ddp_sockaddr(struct socket *so, struct mbuf *nam)
 }
 
 static int
+ddp_rcvd(struct socket *so, int flags, struct lwp *l)
+{
+	KASSERT(solocked(so));
+
+	return EOPNOTSUPP;
+}
+
+static int
 ddp_recvoob(struct socket *so, struct mbuf *m, int flags)
 {
 	KASSERT(solocked(so));
 
 	return EOPNOTSUPP;
+}
+
+static int
+ddp_send(struct socket *so, struct mbuf *m, struct mbuf *nam,
+    struct mbuf *control, struct lwp *l)
+{
+	struct ddpcb *ddp = sotoddpcb(so);
+	int error = 0;
+	int s = 0; /* XXX gcc 4.8 warns on sgimips */
+
+	KASSERT(solocked(so));
+	KASSERT(ddp != NULL);
+
+	if (nam) {
+		if (ddp->ddp_fsat.sat_port != ATADDR_ANYPORT)
+			return EISCONN;
+		s = splnet();
+		error = at_pcbconnect(ddp, nam);
+		if (error) {
+			splx(s);
+			return error;
+		}
+	} else {
+		if (ddp->ddp_fsat.sat_port == ATADDR_ANYPORT)
+			return ENOTCONN;
+	}
+
+	error = ddp_output(m, ddp);
+	m = NULL;
+	if (nam) {
+		at_pcbdisconnect(ddp);
+		splx(s);
+	}
+
+	return error;
 }
 
 static int
@@ -573,6 +585,17 @@ ddp_sendoob(struct socket *so, struct mbuf *m, struct mbuf *control)
 		m_freem(m);
 
 	return EOPNOTSUPP;
+}
+
+static int
+ddp_purgeif(struct socket *so, struct ifnet *ifp)
+{
+
+	mutex_enter(softnet_lock);
+	at_purgeif(ifp);
+	mutex_exit(softnet_lock);
+
+	return 0;
 }
 
 /*
@@ -652,6 +675,7 @@ PR_WRAP_USRREQS(ddp)
 #define	ddp_bind	ddp_bind_wrapper
 #define	ddp_listen	ddp_listen_wrapper
 #define	ddp_connect	ddp_connect_wrapper
+#define	ddp_connect2	ddp_connect2_wrapper
 #define	ddp_disconnect	ddp_disconnect_wrapper
 #define	ddp_shutdown	ddp_shutdown_wrapper
 #define	ddp_abort	ddp_abort_wrapper
@@ -659,8 +683,11 @@ PR_WRAP_USRREQS(ddp)
 #define	ddp_stat	ddp_stat_wrapper
 #define	ddp_peeraddr	ddp_peeraddr_wrapper
 #define	ddp_sockaddr	ddp_sockaddr_wrapper
+#define	ddp_rcvd	ddp_rcvd_wrapper
 #define	ddp_recvoob	ddp_recvoob_wrapper
+#define	ddp_send	ddp_send_wrapper
 #define	ddp_sendoob	ddp_sendoob_wrapper
+#define	ddp_purgeif	ddp_purgeif_wrapper
 #define	ddp_usrreq	ddp_usrreq_wrapper
 
 const struct pr_usrreqs ddp_usrreqs = {
@@ -670,6 +697,7 @@ const struct pr_usrreqs ddp_usrreqs = {
 	.pr_bind	= ddp_bind,
 	.pr_listen	= ddp_listen,
 	.pr_connect	= ddp_connect,
+	.pr_connect2	= ddp_connect2,
 	.pr_disconnect	= ddp_disconnect,
 	.pr_shutdown	= ddp_shutdown,
 	.pr_abort	= ddp_abort,
@@ -677,8 +705,11 @@ const struct pr_usrreqs ddp_usrreqs = {
 	.pr_stat	= ddp_stat,
 	.pr_peeraddr	= ddp_peeraddr,
 	.pr_sockaddr	= ddp_sockaddr,
+	.pr_rcvd	= ddp_rcvd,
 	.pr_recvoob	= ddp_recvoob,
+	.pr_send	= ddp_send,
 	.pr_sendoob	= ddp_sendoob,
+	.pr_purgeif	= ddp_purgeif,
 	.pr_generic	= ddp_usrreq,
 };
 

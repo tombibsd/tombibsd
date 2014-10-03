@@ -1,4 +1,4 @@
-/*	$netbsd: ar_io.c,v 1.48 2007/04/23 18:40:22 christos Exp $	*/
+/*	$NetBSD$	*/
 
 /*-
  * Copyright (c) 1992 Keith Muller.

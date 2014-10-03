@@ -73,16 +73,6 @@ static void usage(void);
 static int devlookup(const char * ,int);
 static int devparse(const char *, int *, int*, int*, int*, int*, char **);
 
-int
-atoi(char *cp)
-{
-	int val = 0;
-
-	while (isdigit((unsigned char)*cp))
-		val = val * 10 + (*cp++ - '0');
-	return val;
-}
-
 void
 usage(void)
 {

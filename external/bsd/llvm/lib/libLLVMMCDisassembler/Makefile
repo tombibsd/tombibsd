@@ -6,7 +6,10 @@ LIB=	LLVMMCDisassembler
 
 .PATH: ${LLVM_SRCDIR}/lib/MC/MCDisassembler
 
-SRCS+=	Disassembler.cpp
+SRCS+=	Disassembler.cpp \
+	MCDisassembler.cpp \
+	MCExternalSymbolizer.cpp \
+	MCRelocationInfo.cpp \
 
 .if defined(HOSTLIB)
 .include <bsd.hostlib.mk>

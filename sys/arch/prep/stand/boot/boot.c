@@ -238,4 +238,5 @@ _rtt(void)
 {
 
 	/* XXXX */
+	__unreachable();
 }

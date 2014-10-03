@@ -33,7 +33,7 @@ options 	DIAGNOSTIC	# cheap kernel consistency checks
 options 	DDB		# in-kernel debugger
 options 	DDB_HISTORY_SIZE=512	# enable history editing in DDB
 #options 	TRAP_PANICWAIT
-options 	SYMTAB_SPACE=580000	# size for embedded symbol table
+options 	SYMTAB_SPACE=590000	# size for embedded symbol table
 
 #options 	KGDB		# remote debugger
 #options 	KGDB_DEVNAME="\"com\"",KGDB_DEVADDR=0xff600400,KGDB_DEVRATE=9600

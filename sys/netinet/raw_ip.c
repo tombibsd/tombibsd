@@ -558,7 +558,7 @@ rip_accept(struct socket *so, struct mbuf *nam)
 }
 
 static int
-rip_bind(struct socket *so, struct mbuf *nam)
+rip_bind(struct socket *so, struct mbuf *nam, struct lwp *l)
 {
 	struct inpcb *inp = sotoinpcb(so);
 	struct sockaddr_in *addr;
@@ -596,7 +596,7 @@ release:
 }
 
 static int
-rip_listen(struct socket *so)
+rip_listen(struct socket *so, struct lwp *l)
 {
 	KASSERT(solocked(so));
 
@@ -604,7 +604,7 @@ rip_listen(struct socket *so)
 }
 
 static int
-rip_connect(struct socket *so, struct mbuf *nam)
+rip_connect(struct socket *so, struct mbuf *nam, struct lwp *l)
 {
 	struct inpcb *inp = sotoinpcb(so);
 	int error = 0;
@@ -618,33 +618,50 @@ rip_connect(struct socket *so, struct mbuf *nam)
 	error = rip_connect_pcb(inp, nam);
 	if (! error)
 		soisconnected(so);
-
 	splx(s);
+
 	return error;
+}
+
+static int
+rip_connect2(struct socket *so, struct socket *so2)
+{
+	KASSERT(solocked(so));
+
+	return EOPNOTSUPP;
 }
 
 static int
 rip_disconnect(struct socket *so)
 {
 	struct inpcb *inp = sotoinpcb(so);
+	int s;
 
 	KASSERT(solocked(so));
 	KASSERT(inp != NULL);
 
+	s = splsoftnet();
 	soisdisconnected(so);
 	rip_disconnect1(inp);
+	splx(s);
+
 	return 0;
 }
 
 static int
 rip_shutdown(struct socket *so)
 {
+	int s;
+
 	KASSERT(solocked(so));
 
 	/*
 	 * Mark the connection as being incapable of further input.
 	 */
+	s = splsoftnet();
 	socantsendmore(so);
+	splx(s);
+
 	return 0;
 }
 
@@ -676,23 +693,41 @@ rip_stat(struct socket *so, struct stat *ub)
 static int
 rip_peeraddr(struct socket *so, struct mbuf *nam)
 {
+	int s;
+
 	KASSERT(solocked(so));
 	KASSERT(sotoinpcb(so) != NULL);
 	KASSERT(nam != NULL);
 
+	s = splsoftnet();
 	in_setpeeraddr(sotoinpcb(so), nam);
+	splx(s);
+
 	return 0;
 }
 
 static int
 rip_sockaddr(struct socket *so, struct mbuf *nam)
 {
+	int s;
+
 	KASSERT(solocked(so));
 	KASSERT(sotoinpcb(so) != NULL);
 	KASSERT(nam != NULL);
 
+	s = splsoftnet();
 	in_setsockaddr(sotoinpcb(so), nam);
+	splx(s);
+
 	return 0;
+}
+
+static int
+rip_rcvd(struct socket *so, int flags, struct lwp *l)
+{
+	KASSERT(solocked(so));
+
+	return EOPNOTSUPP;
 }
 
 static int
@@ -701,6 +736,55 @@ rip_recvoob(struct socket *so, struct mbuf *m, int flags)
 	KASSERT(solocked(so));
 
 	return EOPNOTSUPP;
+}
+
+static int
+rip_send(struct socket *so, struct mbuf *m, struct mbuf *nam,
+    struct mbuf *control, struct lwp *l)
+{
+	struct inpcb *inp = sotoinpcb(so);
+	int error = 0;
+	int s;
+
+	KASSERT(solocked(so));
+	KASSERT(inp != NULL);
+	KASSERT(m != NULL);
+
+	/*
+	 * Ship a packet out.  The appropriate raw output
+	 * routine handles any massaging necessary.
+	 */
+	if (control && control->m_len) {
+		m_freem(control);
+		m_freem(m);
+		return EINVAL;
+	}
+
+	s = splsoftnet();
+	if (nam) {
+		if ((so->so_state & SS_ISCONNECTED) != 0) {
+			error = EISCONN;
+			goto die;
+		}
+		error = rip_connect_pcb(inp, nam);
+		if (error) {
+		die:
+			m_freem(m);
+			splx(s);
+			return error;
+		}
+	} else {
+		if ((so->so_state & SS_ISCONNECTED) == 0) {
+			error = ENOTCONN;
+			goto die;
+		}
+	}
+	error = rip_output(m, inp);
+	if (nam)
+		rip_disconnect1(inp);
+
+	splx(s);
+	return error;
 }
 
 static int
@@ -714,19 +798,33 @@ rip_sendoob(struct socket *so, struct mbuf *m, struct mbuf *control)
 	return EOPNOTSUPP;
 }
 
+static int
+rip_purgeif(struct socket *so, struct ifnet *ifp)
+{
+	int s;
+
+	s = splsoftnet();
+	mutex_enter(softnet_lock);
+	in_pcbpurgeif0(&rawcbtable, ifp);
+	in_purgeif(ifp);
+	in_pcbpurgeif(&rawcbtable, ifp);
+	mutex_exit(softnet_lock);
+	splx(s);
+
+	return 0;
+}
+
 int
 rip_usrreq(struct socket *so, int req, struct mbuf *m, struct mbuf *nam,
     struct mbuf *control, struct lwp *l)
 {
-	struct inpcb *inp;
-	int s, error = 0;
-
 	KASSERT(req != PRU_ATTACH);
 	KASSERT(req != PRU_DETACH);
 	KASSERT(req != PRU_ACCEPT);
 	KASSERT(req != PRU_BIND);
 	KASSERT(req != PRU_LISTEN);
 	KASSERT(req != PRU_CONNECT);
+	KASSERT(req != PRU_CONNECT2);
 	KASSERT(req != PRU_DISCONNECT);
 	KASSERT(req != PRU_SHUTDOWN);
 	KASSERT(req != PRU_ABORT);
@@ -734,80 +832,20 @@ rip_usrreq(struct socket *so, int req, struct mbuf *m, struct mbuf *nam,
 	KASSERT(req != PRU_SENSE);
 	KASSERT(req != PRU_PEERADDR);
 	KASSERT(req != PRU_SOCKADDR);
+	KASSERT(req != PRU_RCVD);
 	KASSERT(req != PRU_RCVOOB);
+	KASSERT(req != PRU_SEND);
 	KASSERT(req != PRU_SENDOOB);
-
-	s = splsoftnet();
-	if (req == PRU_PURGEIF) {
-		mutex_enter(softnet_lock);
-		in_pcbpurgeif0(&rawcbtable, (struct ifnet *)control);
-		in_purgeif((struct ifnet *)control);
-		in_pcbpurgeif(&rawcbtable, (struct ifnet *)control);
-		mutex_exit(softnet_lock);
-		splx(s);
-		return 0;
-	}
+	KASSERT(req != PRU_PURGEIF);
 
 	KASSERT(solocked(so));
-	inp = sotoinpcb(so);
 
-	KASSERT(!control || (req == PRU_SEND || req == PRU_SENDOOB));
-	if (inp == NULL) {
-		splx(s);
+	if (sotoinpcb(so) == NULL)
 		return EINVAL;
-	}
 
-	switch (req) {
+	panic("rip_usrreq");
 
-	case PRU_CONNECT2:
-		error = EOPNOTSUPP;
-		break;
-
-	case PRU_RCVD:
-		error = EOPNOTSUPP;
-		break;
-
-	/*
-	 * Ship a packet out.  The appropriate raw output
-	 * routine handles any massaging necessary.
-	 */
-	case PRU_SEND:
-		if (control && control->m_len) {
-			m_freem(control);
-			m_freem(m);
-			error = EINVAL;
-			break;
-		}
-	{
-		if (nam) {
-			if ((so->so_state & SS_ISCONNECTED) != 0) {
-				error = EISCONN;
-				goto die;
-			}
-			error = rip_connect_pcb(inp, nam);
-			if (error) {
-			die:
-				m_freem(m);
-				break;
-			}
-		} else {
-			if ((so->so_state & SS_ISCONNECTED) == 0) {
-				error = ENOTCONN;
-				goto die;
-			}
-		}
-		error = rip_output(m, inp);
-		if (nam)
-			rip_disconnect1(inp);
-	}
-		break;
-
-	default:
-		panic("rip_usrreq");
-	}
-	splx(s);
-
-	return error;
+	return 0;
 }
 
 PR_WRAP_USRREQS(rip)
@@ -817,6 +855,7 @@ PR_WRAP_USRREQS(rip)
 #define	rip_bind	rip_bind_wrapper
 #define	rip_listen	rip_listen_wrapper
 #define	rip_connect	rip_connect_wrapper
+#define	rip_connect2	rip_connect2_wrapper
 #define	rip_disconnect	rip_disconnect_wrapper
 #define	rip_shutdown	rip_shutdown_wrapper
 #define	rip_abort	rip_abort_wrapper
@@ -824,8 +863,11 @@ PR_WRAP_USRREQS(rip)
 #define	rip_stat	rip_stat_wrapper
 #define	rip_peeraddr	rip_peeraddr_wrapper
 #define	rip_sockaddr	rip_sockaddr_wrapper
+#define	rip_rcvd	rip_rcvd_wrapper
 #define	rip_recvoob	rip_recvoob_wrapper
+#define	rip_send	rip_send_wrapper
 #define	rip_sendoob	rip_sendoob_wrapper
+#define	rip_purgeif	rip_purgeif_wrapper
 #define	rip_usrreq	rip_usrreq_wrapper
 
 const struct pr_usrreqs rip_usrreqs = {
@@ -835,6 +877,7 @@ const struct pr_usrreqs rip_usrreqs = {
 	.pr_bind	= rip_bind,
 	.pr_listen	= rip_listen,
 	.pr_connect	= rip_connect,
+	.pr_connect2	= rip_connect2,
 	.pr_disconnect	= rip_disconnect,
 	.pr_shutdown	= rip_shutdown,
 	.pr_abort	= rip_abort,
@@ -842,8 +885,11 @@ const struct pr_usrreqs rip_usrreqs = {
 	.pr_stat	= rip_stat,
 	.pr_peeraddr	= rip_peeraddr,
 	.pr_sockaddr	= rip_sockaddr,
+	.pr_rcvd	= rip_rcvd,
 	.pr_recvoob	= rip_recvoob,
+	.pr_send	= rip_send,
 	.pr_sendoob	= rip_sendoob,
+	.pr_purgeif	= rip_purgeif,
 	.pr_generic	= rip_usrreq,
 };
 

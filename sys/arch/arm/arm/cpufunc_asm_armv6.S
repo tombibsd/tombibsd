@@ -33,7 +33,7 @@
  * These routines can be used by any core that supports the mcrr address
  * range operations.
  */
- 
+
 #include "assym.h"
 #include <machine/asm.h>
 #include <arm/locore.h>

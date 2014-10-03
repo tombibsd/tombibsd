@@ -615,8 +615,8 @@ OF_boot(const char *bootspec)
 	ofw_stack();
 	ofbcopy(bootspec, OF_buf, l + 1);
 	args.bootspec = OF_buf;
-	if (openfirmware(&args) == -1)
-		panic("OF_boot didn't");
+	openfirmware(&args);
+	panic("OF_boot didn't");
 }
 
 void

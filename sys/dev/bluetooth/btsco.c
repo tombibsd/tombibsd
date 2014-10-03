@@ -1123,7 +1123,7 @@ btsco_dev_ioctl(void *hdl, u_long cmd, void *addr, int flag,
 /*
  * Our transmit interrupt. This is triggered when a new block is to be
  * sent.  We send mtu sized chunks of the block as mbufs with external
- * storage to sco_send()
+ * storage to sco_send_pcb()
  */
 static void
 btsco_intr(void *arg)
@@ -1163,7 +1163,7 @@ btsco_intr(void *arg)
 		m->m_pkthdr.len = m->m_len = mlen;
 		sc->sc_tx_pending++;
 
-		if (sco_send(sc->sc_sco, m) > 0) {
+		if (sco_send_pcb(sc->sc_sco, m) > 0) {
 			sc->sc_tx_pending--;
 			break;
 		}

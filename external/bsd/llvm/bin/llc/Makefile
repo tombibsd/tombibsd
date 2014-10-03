@@ -16,8 +16,8 @@ LLVM_LIBS+= \
 	BitReader \
 	AArch64CodeGen \
 	AArch64TargetInfo \
-	AArch64MCTargetDesc \
 	AArch64AsmParser \
+	AArch64MCTargetDesc \
 	AArch64AsmPrinter \
 	AArch64Utils \
 	ARMCodeGen \
@@ -46,6 +46,7 @@ LLVM_LIBS+= \
 	X86AsmParser \
 	X86AsmPrinter \
 	X86Utils \
+	MCDisassembler \
 	Object \
 	SelectionDAG \
 	CodeGen \
@@ -57,6 +58,9 @@ LLVM_LIBS+= \
 	MC \
 	IR \
 	Support
+
+LDADD+=	-lz
+DPADD+=	${LIBZ}
 
 .include "${.PARSEDIR}/../../link.mk"
 

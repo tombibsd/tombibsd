@@ -186,6 +186,7 @@ uint64_t perfuse_get_fh(puffs_cookie_t, int);
 uint64_t perfuse_next_unique(struct puffs_usermount *);
 char *perfuse_node_path(struct perfuse_state *, puffs_cookie_t);
 int perfuse_node_close_common(struct puffs_usermount *, puffs_cookie_t, int);
+int perfuse_ns_match(const int, const char *);
 const char *perfuse_native_ns(const int, const char *, char *);
 
 char *perfuse_fs_mount(int, ssize_t);

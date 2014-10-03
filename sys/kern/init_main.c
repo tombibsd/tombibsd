@@ -112,6 +112,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include "opt_compat_netbsd.h"
 #include "opt_wapbl.h"
 #include "opt_ptrace.h"
+#include "opt_rnd_printf.h"
 
 #include "drvctl.h"
 #include "ksyms.h"
@@ -499,6 +500,8 @@ main(void)
 	/* Initialize the kernel strong PRNG. */
 	kern_cprng = cprng_strong_create("kernel", IPL_VM,
 					 CPRNG_INIT_ANY|CPRNG_REKEY_ANY);
+
+	cprng_fast_init();
 					 
 	/* Initialize interfaces. */
 	ifinit1();
@@ -526,6 +529,11 @@ main(void)
 
 	/* Enable deferred processing of RNG samples */
 	rnd_init_softint();
+
+#ifdef RND_PRINTF
+	/* Enable periodic injection of console output into entropy pool */
+	kprintf_init_callout();
+#endif
 
 #ifdef SYSVSHM
 	/* Initialize System V style shared memory. */

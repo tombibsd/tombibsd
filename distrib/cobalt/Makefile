@@ -9,7 +9,7 @@ SUBDIR=		ramdisk .WAIT instkernel .WAIT cdroms
 TARGETS+=	release
 
 release: check_RELEASEDIR .WAIT ${BOOT}
-	${TOOL_GZIP} -9nc ${BOOT} \
+	${TOOL_GZIP_N} -9c ${BOOT} \
 	    > ${RELEASEDIR}/${RELEASEMACHINEDIR}/installation/boot.gz
 
 iso_image:

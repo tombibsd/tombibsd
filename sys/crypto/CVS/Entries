@@ -2,6 +2,7 @@ D/arc4////
 D/blowfish////
 D/camellia////
 D/cast128////
+D/cprng_fast////
 D/des////
 D/nist_ctr_drbg////
 D/rijndael////

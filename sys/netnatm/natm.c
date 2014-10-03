@@ -106,7 +106,7 @@ natm_accept(struct socket *so, struct mbuf *nam)
 }
 
 static int
-natm_bind(struct socket *so, struct mbuf *nam)
+natm_bind(struct socket *so, struct mbuf *nam, struct lwp *l)
 {
 	KASSERT(solocked(so));
 
@@ -114,7 +114,7 @@ natm_bind(struct socket *so, struct mbuf *nam)
 }
 
 static int
-natm_listen(struct socket *so)
+natm_listen(struct socket *so, struct lwp *l)
 {
 	KASSERT(solocked(so));
 
@@ -122,7 +122,7 @@ natm_listen(struct socket *so)
 }
 
 static int
-natm_connect(struct socket *so, struct mbuf *nam)
+natm_connect(struct socket *so, struct mbuf *nam, struct lwp *l)
 {
 	int error = 0, s2;
 	struct natmpcb *npcb;
@@ -187,6 +187,14 @@ natm_connect(struct socket *so, struct mbuf *nam)
 
 	soisconnected(so);
 	return error;
+}
+
+static int
+natm_connect2(struct socket *so, struct socket *so2)
+{
+	KASSERT(solocked(so));
+
+	return EOPNOTSUPP;
 }
 
 static int
@@ -313,25 +321,112 @@ natm_peeraddr(struct socket *so, struct mbuf *nam)
 static int
 natm_sockaddr(struct socket *so, struct mbuf *nam)
 {
-  KASSERT(solocked(so));
+	KASSERT(solocked(so));
 
-  return EOPNOTSUPP;
+	return EOPNOTSUPP;
+}
+
+static int
+natm_rcvd(struct socket *so, int flags, struct lwp *l)
+{
+	KASSERT(solocked(so));
+
+	return EOPNOTSUPP;
 }
 
 static int
 natm_recvoob(struct socket *so, struct mbuf *m, int flags)
 {
-  KASSERT(solocked(so));
+	KASSERT(solocked(so));
 
-  return EOPNOTSUPP;
+	return EOPNOTSUPP;
+}
+
+static int
+natm_send(struct socket *so, struct mbuf *m, struct mbuf *nam,
+    struct mbuf *control)
+{
+	struct natmpcb *npcb = (struct natmpcb *) so->so_pcb;
+	struct atm_pseudohdr *aph;
+
+	KASSERT(solocked(so));
+	KASSERT(pcb != NULL);
+	KASSERT(m != NULL);
+
+	if (control && control->m_len) {
+		m_freem(control);
+		m_freem(m);
+		return EINVAL;
+	}
+
+	/*
+	 * send the data.   we must put an atm_pseudohdr on first
+	 */
+	s = SPLSOFTNET();
+	M_PREPEND(m, sizeof(*aph), M_WAITOK);
+	if (m == NULL) {
+		error = ENOBUFS;
+		break;
+	}
+	aph = mtod(m, struct atm_pseudohdr *);
+	ATM_PH_VPI(aph) = npcb->npcb_vpi;
+	ATM_PH_SETVCI(aph, npcb->npcb_vci);
+	ATM_PH_FLAGS(aph) = (proto == PROTO_NATMAAL5) ? ATM_PH_AAL5 : 0;
+	error = atm_output(npcb->npcb_ifp, m, NULL, NULL);
+	splx(s);
+
+	return error;
+}
+
+static int
+natm_send(struct socket *so, struct mbuf *m, struct mbuf *nam,
+    struct mbuf *control, struct lwp *l)
+{
+	struct natmpcb *npcb = (struct natmpcb *) so->so_pcb;
+	struct atm_pseudohdr *aph;
+
+	KASSERT(solocked(so));
+	KASSERT(pcb != NULL);
+	KASSERT(m != NULL);
+
+	if (control && control->m_len) {
+		m_freem(control);
+		m_freem(m);
+		return EINVAL;
+	}
+
+	/*
+	 * send the data.   we must put an atm_pseudohdr on first
+	 */
+	s = SPLSOFTNET();
+	M_PREPEND(m, sizeof(*aph), M_WAITOK);
+	if (m == NULL) {
+		error = ENOBUFS;
+		break;
+	}
+	aph = mtod(m, struct atm_pseudohdr *);
+	ATM_PH_VPI(aph) = npcb->npcb_vpi;
+	ATM_PH_SETVCI(aph, npcb->npcb_vci);
+	ATM_PH_FLAGS(aph) = (proto == PROTO_NATMAAL5) ? ATM_PH_AAL5 : 0;
+	error = atm_output(npcb->npcb_ifp, m, NULL, NULL);
+	splx(s);
+
+	return error;
 }
 
 static int
 natm_sendoob(struct socket *so, struct mbuf *m, struct mbuf *control)
 {
-  KASSERT(solocked(so));
+	KASSERT(solocked(so));
 
-  return EOPNOTSUPP;
+	return EOPNOTSUPP;
+}
+
+static int
+natm_purgeif(struct socket *so, struct ifnet *ifp)
+{
+
+	return EOPNOTSUPP;
 }
 
 /*
@@ -356,6 +451,7 @@ natm_usrreq(struct socket *so, int req, struct mbuf *m, struct mbuf *nam,
   KASSERT(req != PRU_BIND);
   KASSERT(req != PRU_LISTEN);
   KASSERT(req != PRU_CONNECT);
+  KASSERT(req != PRU_CONNECT2);
   KASSERT(req != PRU_DISCONNECT);
   KASSERT(req != PRU_SHUTDOWN);
   KASSERT(req != PRU_ABORT);
@@ -363,47 +459,16 @@ natm_usrreq(struct socket *so, int req, struct mbuf *m, struct mbuf *nam,
   KASSERT(req != PRU_SENSE);
   KASSERT(req != PRU_PEERADDR);
   KASSERT(req != PRU_SOCKADDR);
+  KASSERT(req != PRU_RCVD);
   KASSERT(req != PRU_RCVOOB);
+  KASSERT(req != PRU_SEND);
   KASSERT(req != PRU_SENDOOB);
+  KASSERT(req != PRU_PURGEIF);
 
-  s = SPLSOFTNET();
-
-  npcb = (struct natmpcb *) so->so_pcb;
-
-  if (npcb == NULL) {
-    error = EINVAL;
-    goto done;
-  }
+  if (so->so_pcb == NULL)
+	return EINVAL;
 
   switch (req) {
-    case PRU_SEND:			/* send this data */
-      if (control && control->m_len) {
-	m_freem(control);
-	m_freem(m);
-	error = EINVAL;
-	break;
-      }
-
-      /*
-       * send the data.   we must put an atm_pseudohdr on first
-       */
-
-      M_PREPEND(m, sizeof(*aph), M_WAITOK);
-      if (m == NULL) {
-        error = ENOBUFS;
-	break;
-      }
-      aph = mtod(m, struct atm_pseudohdr *);
-      ATM_PH_VPI(aph) = npcb->npcb_vpi;
-      ATM_PH_SETVCI(aph, npcb->npcb_vci);
-      ATM_PH_FLAGS(aph) = (proto == PROTO_NATMAAL5) ? ATM_PH_AAL5 : 0;
-
-      error = atm_output(npcb->npcb_ifp, m, NULL, NULL);
-
-      break;
-
-    case PRU_CONNECT2:			/* connect two sockets */
-    case PRU_RCVD:			/* have taken data; more room now */
     case PRU_FASTTIMO:			/* 200ms timeout */
     case PRU_SLOWTIMO:			/* 500ms timeout */
     case PRU_PROTORCV:			/* receive from below */
@@ -418,8 +483,7 @@ natm_usrreq(struct socket *so, int req, struct mbuf *m, struct mbuf *nam,
   }
 
 done:
-  splx(s);
-  return(error);
+  return error;
 }
 
 /*
@@ -507,6 +571,7 @@ PR_WRAP_USRREQS(natm)
 #define	natm_bind	natm_bind_wrapper
 #define	natm_listen	natm_listen_wrapper
 #define	natm_connect	natm_connect_wrapper
+#define	natm_connect2	natm_connect2_wrapper
 #define	natm_disconnect	natm_disconnect_wrapper
 #define	natm_shutdown	natm_shutdown_wrapper
 #define	natm_abort	natm_abort_wrapper
@@ -514,8 +579,11 @@ PR_WRAP_USRREQS(natm)
 #define	natm_stat	natm_stat_wrapper
 #define	natm_peeraddr	natm_peeraddr_wrapper
 #define	natm_sockaddr	natm_sockaddr_wrapper
+#define	natm_rcvd	natm_rcvd_wrapper
 #define	natm_recvoob	natm_recvoob_wrapper
+#define	natm_send	natm_send_wrapper
 #define	natm_sendoob	natm_sendoob_wrapper
+#define	natm_purgeif	natm_purgeif_wrapper
 #define	natm_usrreq	natm_usrreq_wrapper
 
 const struct pr_usrreqs natm_usrreqs = {
@@ -525,6 +593,7 @@ const struct pr_usrreqs natm_usrreqs = {
 	.pr_bind	= natm_bind,
 	.pr_listen	= natm_listen,
 	.pr_connect	= natm_connect,
+	.pr_connect2	= natm_connect2,
 	.pr_disconnect	= natm_disconnect,
 	.pr_shutdown	= natm_shutdown,
 	.pr_abort	= natm_abort,
@@ -532,7 +601,10 @@ const struct pr_usrreqs natm_usrreqs = {
 	.pr_stat	= natm_stat,
 	.pr_peeraddr	= natm_peeraddr,
 	.pr_sockaddr	= natm_sockaddr,
+	.pr_rcvd	= natm_rcvd,
 	.pr_recvoob	= natm_recvoob,
+	.pr_send	= natm_send,
 	.pr_sendoob	= natm_sendoob,
+	.pr_purgeif	= natm_purgeif,
 	.pr_generic	= natm_usrreq,
 };

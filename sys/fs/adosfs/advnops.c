@@ -880,7 +880,7 @@ adosfs_reclaim(void *v)
 #endif
 	vp = sp->a_vp;
 	ap = VTOA(vp);
-	LIST_REMOVE(ap, link);
+	vcache_remove(vp->v_mount, &ap->block, sizeof(ap->block));
 	if (vp->v_type == VDIR && ap->tab)
 		free(ap->tab, M_ANODE);
 	else if (vp->v_type == VLNK && ap->slinkto)

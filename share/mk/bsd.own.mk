@@ -14,7 +14,7 @@ MAKECONF?=	/etc/mk.conf
 #
 # CPU model, derived from MACHINE_ARCH
 #
-MACHINE_CPU=	${MACHINE_ARCH:C/mipse[bl]/mips/:C/mips64e[bl]/mips/:C/sh3e[bl]/sh3/:S/coldfire/m68k/:S/m68000/m68k/:C/arm.*/arm/:C/earm.*/arm/:S/earm/arm/:S/powerpc64/powerpc/}
+MACHINE_CPU=	${MACHINE_ARCH:C/mipse[bl]/mips/:C/mips64e[bl]/mips/:C/sh3e[bl]/sh3/:S/coldfire/m68k/:S/m68000/m68k/:C/arm.*/arm/:C/earm.*/arm/:S/earm/arm/:S/powerpc64/powerpc/:S/aarch64eb/aarch64/}
 
 #
 # Subdirectory used below ${RELEASEDIR} when building a release
@@ -50,6 +50,12 @@ TOOLCHAIN_MISSING?=	yes
 
 TOOLCHAIN_MISSING?=	no
 
+.if ${MACHINE_CPU} == "aarch64" && ${MKLLVM:Uyes} != "no"
+MKLLVM?=	yes
+HAVE_LLVM?=	yes
+MKGCC?=		no
+.endif
+
 #
 # GCC Using platforms.
 #
@@ -62,7 +68,7 @@ TOOLCHAIN_MISSING?=	no
       ${MACHINE_ARCH} == "powerpc64"
 HAVE_GCC?=    45
 
-.elif ${MACHINE} == "playstation2"
+.elif ${MACHINE} == "playstation2" || ${MACHINE_CPU} == "aarch64"
 HAVE_GCC?=    0
 .else
 # Otherwise, default to GCC4.8
@@ -87,7 +93,9 @@ EXTERNAL_GCC_SUBDIR=	/does/not/exist
 _LIBC_COMPILER_RT.${MACHINE_ARCH}=	yes
 .endif
 
+_LIBC_COMPILER_RT.aarch64=	yes
 _LIBC_COMPILER_RT.i386=		yes
+_LIBC_COMPILER_RT.powerpc=	yes
 _LIBC_COMPILER_RT.x86_64=	yes
 
 .if ${MKLLVM:Uno} == "yes" && ${_LIBC_COMPILER_RT.${MACHINE_ARCH}:Uno} == "yes"
@@ -95,6 +103,7 @@ HAVE_LIBGCC?=	no
 .else
 HAVE_LIBGCC?=	yes
 .endif
+
 
 # ia64 is not support
 .if ${MKLLVM:Uno} == "yes" || !empty(MACHINE_ARCH:Mearm*)
@@ -515,6 +524,7 @@ CTFMERGE=	${TOOL_CTFMERGE}
 .endif
 
 # For each ${MACHINE_CPU}, list the ports that use it.
+MACHINES.aarch64=	evbarm64
 MACHINES.alpha=		alpha
 MACHINES.arm=		acorn26 acorn32 cats epoc32 evbarm hpcarm \
 			iyonix netwinder shark zaurus
@@ -747,6 +757,7 @@ SHLIB_VERSION_FILE?= ${.CURDIR}/shlib_version
 #
 # GNU sources and packages sometimes see architecture names differently.
 #
+GNU_ARCH.aarch64eb=aarch64_be
 GNU_ARCH.coldfire=m5407
 GNU_ARCH.earm=arm
 GNU_ARCH.earmhf=arm
@@ -872,7 +883,7 @@ MK${var}:=	yes
     || ${MACHINE_ARCH} == "mips64eb" || ${MACHINE_ARCH} == "mips64el" \
     || ${MACHINE_ARCH} == "powerpc64"
 MKCOMPAT?=	yes
-.elif !empty(MACHINE_ARCH:Mearm*)
+.elif !empty(MACHINE_ARCH:Mearm*) || ${MACHINE_CPU} == "aarch64"
 MKCOMPAT?=	no
 .else
 # Don't let this build where it really isn't supported.
@@ -1093,7 +1104,9 @@ MKNLS:=		no
 _NEEDS_LIBCXX.${MACHINE_ARCH}=	yes
 .endif
 _NEEDS_LIBCXX.i386=	yes
+_NEEDS_LIBCXX.powerpc=	yes
 _NEEDS_LIBCXX.x86_64=	yes
+_NEEDS_LIBCXX.aarch64=	yes
 
 .if ${MKLLVM} == "yes" && ${_NEEDS_LIBCXX.${MACHINE_ARCH}:Uno} == "yes"
 MKLIBCXX:=	yes
@@ -1174,11 +1187,17 @@ ${var}?= yes
 ${var}?= no
 .endfor
 
+#
+# TOOL_GZIP and friends.  These might refer to TOOL_PIGZ or to the host gzip.
+#
 .if ${USE_PIGZGZIP} != "no"
 TOOL_GZIP=		${TOOL_PIGZ}
+GZIP_N_FLAG?=		-nT
 .else
 TOOL_GZIP=		gzip
+GZIP_N_FLAG?=		-n
 .endif
+TOOL_GZIP_N=		${TOOL_GZIP} ${GZIP_N_FLAG}
 
 #
 # Where X11 sources are and where it is installed to.

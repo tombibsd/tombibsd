@@ -5,7 +5,8 @@ _BSD_ENDIAN_MK_=1
 
 .include <bsd.init.mk>
 
-.if ${MACHINE_ARCH} == "alpha" || \
+.if ${MACHINE_ARCH} == "aarch64" || \
+    ${MACHINE_ARCH} == "alpha" || \
     ${MACHINE_ARCH} == "arm" || \
     (!empty(MACHINE_ARCH:Mearm*) && empty(MACHINE_ARCH:Mearm*eb)) || \
     ${MACHINE_ARCH} == "i386" || \

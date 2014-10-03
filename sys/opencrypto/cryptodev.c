@@ -2085,6 +2085,8 @@ void	cryptoattach(int);
 void
 cryptoattach(int num)
 {
+	crypto_init();
+
 	pool_init(&fcrpl, sizeof(struct fcrypt), 0, 0, 0, "fcrpl",
 	    NULL, IPL_NET);	/* XXX IPL_NET ("splcrypto") */
 	pool_init(&csepl, sizeof(struct csession), 0, 0, 0, "csepl",

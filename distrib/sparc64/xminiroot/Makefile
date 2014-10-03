@@ -7,7 +7,7 @@
 
 .include "${.CURDIR}/../instfs/Makefile.instfs"
 IMAGE=		miniroot.fs
-NUMCYLS=	12 	# size of image in MB, tune this if we need more space
+NUMCYLS=	13 	# size of image in MB, tune this if we need more space
 SECSPERCYL=	2048
 CYLSIZE=	$$(( ${SECSPERCYL} * 512 ))
 IMAGESIZE=	$$(( ${NUMCYLS} * ${CYLSIZE} ))
@@ -32,7 +32,7 @@ ${CRUNCHBIN}: ${CRUNCHBINDIR}/${CRUNCHBIN}
 
 netbsd.gz: ${KERNOBJDIR}/GENERIC/netbsd
 	-rm -f ${.TARGET}
-	${TOOL_GZIP} -9nc ${.ALLSRC} > ${.TARGET}
+	${TOOL_GZIP_N} -9c ${.ALLSRC} > ${.TARGET}
 
 clean:	localclean
 

@@ -26,7 +26,8 @@ SUBDIR= apply asa at audio audiocfg \
 	rup ruptime rusers rwall rwho \
 	script sdiff sdpquery sed seq shar shlock \
 	showmount shuffle sockstat sort spell split stat su systat \
-	tabs tail talk tcopy tee telnet tftp tic time tip touch tpfmt tput \
+	tabs tail talk tcopy tee telnet tftp tic time timeout tip touch \
+	tpfmt tput \
 	tr true tset tsort tty ul uname unexpand unifdef \
 	uniq units unvis unzip usbhidaction usbhidctl users utoppya \
 	uudecode uuencode uuidgen vacation vgrind videoctl vis \

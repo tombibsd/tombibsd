@@ -315,7 +315,7 @@ at91usart_attach_subr(struct at91usart_softc *sc, struct at91bus_attach_args *sa
 
 #ifdef RND_COM
 	rnd_attach_source(&sc->rnd_source, device_xname(sc->sc_dev),
-			  RND_TYPE_TTY, 0);
+			  RND_TYPE_TTY, RND_FLAG_DEFAULT);
 #endif
 
 	/* if there are no enable/disable functions, assume the device

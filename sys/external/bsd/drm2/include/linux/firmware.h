@@ -42,7 +42,6 @@
 struct device;
 
 struct firmware {
-	firmware_handle_t	fw_h;
 	void			*data;
 	size_t			size;
 };
@@ -53,6 +52,7 @@ request_firmware(const struct firmware **fwp, const char *image_name,
 {
 	const char *drvname;
 	struct firmware *fw;
+	firmware_handle_t handle;
 	int ret;
 
 	fw = kmem_alloc(sizeof(*fw), KM_SLEEP);
@@ -68,14 +68,15 @@ request_firmware(const struct firmware **fwp, const char *image_name,
 		image_name += (strlen(drvname) + 1);
 
 	/* XXX errno NetBSD->Linux */
-	ret = -firmware_open(drvname, image_name, &fw->fw_h);
+	ret = -firmware_open(drvname, image_name, &handle);
 	if (ret)
 		goto fail0;
-	fw->size = firmware_get_size(fw->fw_h);
+	fw->size = firmware_get_size(handle);
 	fw->data = firmware_malloc(fw->size);
 
 	/* XXX errno NetBSD->Linux */
-	ret = -firmware_read(fw->fw_h, 0, fw->data, fw->size);
+	ret = -firmware_read(handle, 0, fw->data, fw->size);
+	(void)firmware_close(handle);
 	if (ret)
 		goto fail1;
 

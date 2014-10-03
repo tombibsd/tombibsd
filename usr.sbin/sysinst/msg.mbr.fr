@@ -148,8 +148,6 @@ message editparttable
 message Partition_table_ok
 {Table des partitions OK}
 
-message Delete_partition
-{Supprimer la partition}
 message Dont_change
 {Ne pas modifier}
 message Other_kind

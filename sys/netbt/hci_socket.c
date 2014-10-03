@@ -353,7 +353,7 @@ hci_cmdwait_flush(struct socket *so)
  *     This came from userland, so check it out.
  */
 static int
-hci_send(struct hci_pcb *pcb, struct mbuf *m, bdaddr_t *addr)
+hci_send_pcb(struct hci_pcb *pcb, struct mbuf *m, bdaddr_t *addr)
 {
 	struct hci_unit *unit;
 	struct mbuf *m0;
@@ -492,7 +492,7 @@ hci_accept(struct socket *so, struct mbuf *nam)
 }
 
 static int
-hci_bind(struct socket *so, struct mbuf *nam)
+hci_bind(struct socket *so, struct mbuf *nam, struct lwp *l)
 {
 	struct hci_pcb *pcb = so->so_pcb;
 	struct sockaddr_bt *sa;
@@ -519,7 +519,7 @@ hci_bind(struct socket *so, struct mbuf *nam)
 }
 
 static int
-hci_listen(struct socket *so)
+hci_listen(struct socket *so, struct lwp *l)
 {
 	KASSERT(solocked(so));
 
@@ -527,7 +527,7 @@ hci_listen(struct socket *so)
 }
 
 static int
-hci_connect(struct socket *so, struct mbuf *nam)
+hci_connect(struct socket *so, struct mbuf *nam, struct lwp *l)
 {
 	struct hci_pcb *pcb = so->so_pcb;
 	struct sockaddr_bt *sa;
@@ -549,6 +549,14 @@ hci_connect(struct socket *so, struct mbuf *nam)
 	bdaddr_copy(&pcb->hp_raddr, &sa->bt_bdaddr);
 	soisconnected(so);
 	return 0;
+}
+
+static int
+hci_connect2(struct socket *so, struct socket *so2)
+{
+	KASSERT(solocked(so));
+
+	return EOPNOTSUPP;
 }
 
 static int
@@ -647,11 +655,56 @@ hci_sockaddr(struct socket *so, struct mbuf *nam)
 }
 
 static int
+hci_rcvd(struct socket *so, int flags, struct lwp *l)
+{
+	KASSERT(solocked(so));
+
+	return EOPNOTSUPP;
+}
+
+static int
 hci_recvoob(struct socket *so, struct mbuf *m, int flags)
 {
 	KASSERT(solocked(so));
 
 	return EOPNOTSUPP;
+}
+
+static int
+hci_send(struct socket *so, struct mbuf *m, struct mbuf *nam,
+    struct mbuf *control, struct lwp *l)
+{
+	struct hci_pcb *pcb = so->so_pcb;
+	struct sockaddr_bt * sa = NULL;
+	int err = 0;
+
+	KASSERT(solocked(so));
+	KASSERT(pcb != NULL);
+
+	if (control) /* have no use for this */
+		m_freem(control);
+
+	if (nam) {
+		sa = mtod(nam, struct sockaddr_bt *);
+
+		if (sa->bt_len != sizeof(struct sockaddr_bt)) {
+			err = EINVAL;
+			goto release;
+		}
+
+		if (sa->bt_family != AF_BLUETOOTH) {
+			err = EAFNOSUPPORT;
+			goto release;
+		}
+	}
+
+	return hci_send_pcb(pcb, m, (sa ? &sa->bt_bdaddr : &pcb->hp_raddr));
+
+release:
+	if (m)
+		m_freem(m);
+
+	return err;
 }
 
 static int
@@ -663,6 +716,13 @@ hci_sendoob(struct socket *so, struct mbuf *m, struct mbuf *control)
 		m_freem(m);
 	if (control)
 		m_freem(control);
+
+	return EOPNOTSUPP;
+}
+
+static int
+hci_purgeif(struct socket *so, struct ifnet *ifp)
+{
 
 	return EOPNOTSUPP;
 }
@@ -681,8 +741,7 @@ static int
 hci_usrreq(struct socket *up, int req, struct mbuf *m,
 		struct mbuf *nam, struct mbuf *ctl, struct lwp *l)
 {
-	struct hci_pcb *pcb = (struct hci_pcb *)up->so_pcb;
-	struct sockaddr_bt *sa;
+	struct hci_pcb *pcb = up->so_pcb;
 	int err = 0;
 
 	DPRINTFN(2, "%s\n", prurequests[req]);
@@ -692,6 +751,7 @@ hci_usrreq(struct socket *up, int req, struct mbuf *m,
 	KASSERT(req != PRU_BIND);
 	KASSERT(req != PRU_LISTEN);
 	KASSERT(req != PRU_CONNECT);
+	KASSERT(req != PRU_CONNECT2);
 	KASSERT(req != PRU_DISCONNECT);
 	KASSERT(req != PRU_SHUTDOWN);
 	KASSERT(req != PRU_ABORT);
@@ -699,13 +759,11 @@ hci_usrreq(struct socket *up, int req, struct mbuf *m,
 	KASSERT(req != PRU_SENSE);
 	KASSERT(req != PRU_PEERADDR);
 	KASSERT(req != PRU_SOCKADDR);
+	KASSERT(req != PRU_RCVD);
 	KASSERT(req != PRU_RCVOOB);
+	KASSERT(req != PRU_SEND);
 	KASSERT(req != PRU_SENDOOB);
-
-	switch(req) {
-	case PRU_PURGEIF:
-		return EOPNOTSUPP;
-	}
+	KASSERT(req != PRU_PURGEIF);
 
 	/* anything after here *requires* a pcb */
 	if (pcb == NULL) {
@@ -714,31 +772,6 @@ hci_usrreq(struct socket *up, int req, struct mbuf *m,
 	}
 
 	switch(req) {
-	case PRU_SEND:
-		sa = NULL;
-		if (nam) {
-			sa = mtod(nam, struct sockaddr_bt *);
-
-			if (sa->bt_len != sizeof(struct sockaddr_bt)) {
-				err = EINVAL;
-				goto release;
-			}
-
-			if (sa->bt_family != AF_BLUETOOTH) {
-				err = EAFNOSUPPORT;
-				goto release;
-			}
-		}
-
-		if (ctl) /* have no use for this */
-			m_freem(ctl);
-
-		return hci_send(pcb, m, (sa ? &sa->bt_bdaddr : &pcb->hp_raddr));
-
-	case PRU_RCVD:
-		return EOPNOTSUPP;	/* (no release) */
-
-	case PRU_CONNECT2:
 	case PRU_FASTTIMO:
 	case PRU_SLOWTIMO:
 	case PRU_PROTORCV:
@@ -972,6 +1005,7 @@ PR_WRAP_USRREQS(hci)
 #define	hci_bind		hci_bind_wrapper
 #define	hci_listen		hci_listen_wrapper
 #define	hci_connect		hci_connect_wrapper
+#define	hci_connect2		hci_connect2_wrapper
 #define	hci_disconnect		hci_disconnect_wrapper
 #define	hci_shutdown		hci_shutdown_wrapper
 #define	hci_abort		hci_abort_wrapper
@@ -979,8 +1013,11 @@ PR_WRAP_USRREQS(hci)
 #define	hci_stat		hci_stat_wrapper
 #define	hci_peeraddr		hci_peeraddr_wrapper
 #define	hci_sockaddr		hci_sockaddr_wrapper
+#define	hci_rcvd		hci_rcvd_wrapper
 #define	hci_recvoob		hci_recvoob_wrapper
+#define	hci_send		hci_send_wrapper
 #define	hci_sendoob		hci_sendoob_wrapper
+#define	hci_purgeif		hci_purgeif_wrapper
 #define	hci_usrreq		hci_usrreq_wrapper
 
 const struct pr_usrreqs hci_usrreqs = {
@@ -990,6 +1027,7 @@ const struct pr_usrreqs hci_usrreqs = {
 	.pr_bind	= hci_bind,
 	.pr_listen	= hci_listen,
 	.pr_connect	= hci_connect,
+	.pr_connect2	= hci_connect2,
 	.pr_disconnect	= hci_disconnect,
 	.pr_shutdown	= hci_shutdown,
 	.pr_abort	= hci_abort,
@@ -997,7 +1035,10 @@ const struct pr_usrreqs hci_usrreqs = {
 	.pr_stat	= hci_stat,
 	.pr_peeraddr	= hci_peeraddr,
 	.pr_sockaddr	= hci_sockaddr,
+	.pr_rcvd	= hci_rcvd,
 	.pr_recvoob	= hci_recvoob,
+	.pr_send	= hci_send,
 	.pr_sendoob	= hci_sendoob,
+	.pr_purgeif	= hci_purgeif,
 	.pr_generic	= hci_usrreq,
 };

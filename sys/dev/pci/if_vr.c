@@ -1742,7 +1742,7 @@ vr_attach(device_t parent, device_t self, void *aux)
 	ether_ifattach(ifp, sc->vr_enaddr);
 
 	rnd_attach_source(&sc->rnd_source, device_xname(self),
-	    RND_TYPE_NET, 0);
+	    RND_TYPE_NET, RND_FLAG_DEFAULT);
 
 	if (pmf_device_register1(self, NULL, vr_resume, vr_shutdown))
 		pmf_class_network_register(self, ifp);

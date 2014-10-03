@@ -10,6 +10,7 @@ SRCS+=	AsmWriter.cpp \
 	Attributes.cpp \
 	AutoUpgrade.cpp \
 	BasicBlock.cpp \
+	Comdat.cpp \
 	ConstantFold.cpp \
 	ConstantRange.cpp \
 	Constants.cpp \
@@ -45,6 +46,7 @@ SRCS+=	AsmWriter.cpp \
 	Type.cpp \
 	TypeFinder.cpp \
 	Use.cpp \
+	UseListOrder.cpp \
 	User.cpp \
 	Value.cpp \
 	ValueSymbolTable.cpp \

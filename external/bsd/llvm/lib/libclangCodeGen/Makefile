@@ -35,7 +35,6 @@ SRCS+=	BackendUtil.cpp \
 	CGOpenCLRuntime.cpp \
 	CGOpenMPRuntime.cpp \
 	CGRecordLayoutBuilder.cpp \
-	CGRTTI.cpp \
 	CGStmt.cpp \
 	CGStmtOpenMP.cpp \
 	CGVTables.cpp \
@@ -47,10 +46,12 @@ SRCS+=	BackendUtil.cpp \
 	CodeGenPGO.cpp \
 	CodeGenTBAA.cpp \
 	CodeGenTypes.cpp \
+	CoverageMappingGen.cpp \
 	ItaniumCXXABI.cpp \
 	MicrosoftCXXABI.cpp \
-	MicrosoftRTTI.cpp \
 	ModuleBuilder.cpp \
+	SanitizerBlacklist.cpp \
+	SanitizerMetadata.cpp \
 	TargetInfo.cpp
 
 .if defined(HOSTLIB)

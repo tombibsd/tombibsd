@@ -1,5 +1,5 @@
 /Makefile.inc/1.10/Wed Mar 21 05:47:53 2012/-kk/
-/Makefile/1.217/Thu Apr 24 14:31:51 2014/-kk/
+/Makefile/1.218/Fri Oct  3 09:26:27 2014/-kk/
 D/apply////
 D/apropos////
 D/asa////
@@ -197,6 +197,7 @@ D/telnet////
 D/tftp////
 D/tic////
 D/time////
+D/timeout////
 D/tip////
 D/touch////
 D/tpfmt////

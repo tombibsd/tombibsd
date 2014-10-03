@@ -37,6 +37,9 @@ __RCSID("$NetBSD$");
 #include <sys/ipc.h>
 #include <sys/sem.h>
 #include <stdarg.h>
+#ifdef __lint__
+#include <string.h>
+#endif
 
 /* The kernel version [... == union semun *] */
 int ____semctl50(int, int, int, ...);

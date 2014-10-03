@@ -32,7 +32,7 @@
 TODO:
 - Better LBN bound checking, block padding for SD disks.
 - Formatting / "Set Density"
-- Better error handling / detailed error reason reportnig.
+- Better error handling / detailed error reason reporting.
 */
 
 #include <sys/cdefs.h>

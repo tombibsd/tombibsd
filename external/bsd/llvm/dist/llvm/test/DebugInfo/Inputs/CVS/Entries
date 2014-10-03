@@ -1,3 +1,5 @@
+/arange-overlap.cc/1.1.1.1/Sun Aug 10 17:04:41 2014/-kk/
+/arange-overlap.elf-x86_64/1.1.1.1/Sun Aug 10 17:04:41 2014/-kk/
 /arm-relocs.elf-arm/1.1.1.1/Fri May 30 18:11:22 2014/-kk/
 /dwarfdump-inl-test.cc/1.1.1.1/Thu Nov 28 14:18:09 2013/-kk/
 /dwarfdump-inl-test.elf-x86-64/1.1.1.1/Thu Nov 28 14:18:09 2013/-kk/
@@ -27,6 +29,8 @@
 /dwarfdump-test4.elf-x86-64/1.1.1.1/Thu Nov 28 14:18:09 2013/-kk/
 /dwarfdump-type-units.cc/1.1.1.1/Thu Nov 28 14:18:09 2013/-kk/
 /dwarfdump-type-units.elf-x86-64/1.1.1.1/Thu Nov 28 14:18:09 2013/-kk/
+/fission-ranges.cc/1.1.1.1/Sun Aug 10 17:04:41 2014/-kk/
+/fission-ranges.elf-x86_64/1.1.1.1/Sun Aug 10 17:04:41 2014/-kk/
 /llvm-symbolizer-dwo-test.cc/1.1.1.1/Fri May 30 18:11:22 2014/-kk/
 /llvm-symbolizer-dwo-test/1.1.1.1/Fri May 30 18:11:22 2014/-kk/
 /llvm-symbolizer-test.c/1.1.1.1/Fri Feb 14 20:12:31 2014/-kk/

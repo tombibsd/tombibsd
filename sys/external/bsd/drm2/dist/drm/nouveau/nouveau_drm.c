@@ -1,3 +1,5 @@
+/*	$NetBSD$	*/
+
 /*
  * Copyright 2012 Red Hat Inc.
  *
@@ -21,6 +23,9 @@
  *
  * Authors: Ben Skeggs
  */
+
+#include <sys/cdefs.h>
+__KERNEL_RCSID(0, "$NetBSD$");
 
 #include <linux/console.h>
 #include <linux/module.h>
@@ -123,7 +128,11 @@ nouveau_cli_create(u64 name, const char *sname,
 		return ret;
 	}
 
+#ifdef __NetBSD__
+	linux_mutex_init(&cli->mutex);
+#else
 	mutex_init(&cli->mutex);
+#endif
 	return 0;
 }
 
@@ -131,6 +140,11 @@ static void
 nouveau_cli_destroy(struct nouveau_cli *cli)
 {
 	struct nouveau_object *client = nv_object(cli);
+#ifdef __NetBSD__
+	linux_mutex_destroy(&cli->mutex);
+#else
+	mutex_destroy(&cli->mutex);
+#endif
 	nouveau_vm_ref(NULL, &cli->base.vm, NULL);
 	nouveau_client_fini(&cli->base, false);
 	atomic_set(&client->refcount, 1);
@@ -262,6 +276,7 @@ nouveau_accel_init(struct nouveau_drm *drm)
 	nouveau_bo_move_init(drm);
 }
 
+#ifndef __NetBSD__
 static int nouveau_drm_probe(struct pci_dev *pdev,
 			     const struct pci_device_id *pent)
 {
@@ -313,6 +328,7 @@ static int nouveau_drm_probe(struct pci_dev *pdev,
 
 	return 0;
 }
+#endif
 
 #define PCI_CLASS_MULTIMEDIA_HD_AUDIO 0x0403
 

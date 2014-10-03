@@ -505,7 +505,8 @@ imxuart_attach_common(device_t parent, device_t self,
 
 #ifdef RND_COM
 	rnd_attach_source(&sc->rnd_source, device_xname(sc->sc_dev),
-			  RND_TYPE_TTY, 0);
+			  RND_TYPE_TTY, RND_FLAG_COLLECT_TIME |
+					RND_FLAG_ESTIMATE_TIME);
 #endif
 
 	/* if there are no enable/disable functions, assume the device

@@ -51,6 +51,7 @@
 /cxx-functions.cpp/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /cxx-functions.h/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /cxx-implicit-moves.cpp/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
+/cxx-key-functions.cpp/1.1.1.1/Sun Aug 10 17:08:44 2014/-kk/
 /cxx-mangling.cpp/1.1.1.1/Fri May 30 18:14:48 2014/-kk/
 /cxx-member-init.cpp/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /cxx-method.cpp/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
@@ -173,7 +174,8 @@
 /pr4489.c/1.1.1.2/Tue Jun  3 03:04:55 2014/-kk/
 /pragma-diag-section.cpp/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /pragma-diag.c/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
-/pragma-optimize.c/1.1.1.1/Fri May 30 18:14:48 2014/-kk/
+/pragma-loop.cpp/1.1.1.1/Sun Aug 10 17:08:44 2014/-kk/
+/pragma-optimize.c/1.1.1.2/Fri Oct  3 09:22:36 2014/-kk/
 /pragma-weak.c/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /pragma-weak.h/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /preamble.c/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/

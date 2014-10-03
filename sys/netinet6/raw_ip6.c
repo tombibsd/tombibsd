@@ -653,7 +653,7 @@ rip6_accept(struct socket *so, struct mbuf *nam)
 }
 
 static int
-rip6_bind(struct socket *so, struct mbuf *nam)
+rip6_bind(struct socket *so, struct mbuf *nam, struct lwp *l)
 {
 	struct in6pcb *in6p = sotoin6pcb(so);
 	struct sockaddr_in6 *addr;
@@ -691,7 +691,7 @@ rip6_bind(struct socket *so, struct mbuf *nam)
 }
 
 static int
-rip6_listen(struct socket *so)
+rip6_listen(struct socket *so, struct lwp *l)
 {
 	KASSERT(solocked(so));
 
@@ -699,7 +699,7 @@ rip6_listen(struct socket *so)
 }
 
 static int
-rip6_connect(struct socket *so, struct mbuf *nam)
+rip6_connect(struct socket *so, struct mbuf *nam, struct lwp *l)
 {
 	struct in6pcb *in6p = sotoin6pcb(so);
 	struct sockaddr_in6 *addr;
@@ -752,6 +752,14 @@ rip6_connect(struct socket *so, struct mbuf *nam)
 	in6p->in6p_faddr = addr->sin6_addr;
 	soisconnected(so);
 	return error;
+}
+
+static int
+rip6_connect2(struct socket *so, struct socket *so2)
+{
+	KASSERT(solocked(so));
+
+	return EOPNOTSUPP;
 }
 
 static int
@@ -830,11 +838,74 @@ rip6_sockaddr(struct socket *so, struct mbuf *nam)
 }
 
 static int
+rip6_rcvd(struct socket *so, int flags, struct lwp *l)
+{
+	KASSERT(solocked(so));
+
+	return EOPNOTSUPP;
+}
+
+static int
 rip6_recvoob(struct socket *so, struct mbuf *m, int flags)
 {
 	KASSERT(solocked(so));
 
 	return EOPNOTSUPP;
+}
+
+static int
+rip6_send(struct socket *so, struct mbuf *m, struct mbuf *nam,
+    struct mbuf *control, struct lwp *l)
+{
+	struct in6pcb *in6p = sotoin6pcb(so);
+	struct sockaddr_in6 tmp;
+	struct sockaddr_in6 *dst;
+	int error = 0;
+
+	KASSERT(solocked(so));
+	KASSERT(in6p != NULL);
+	KASSERT(m != NULL);
+
+	/*
+	 * Ship a packet out. The appropriate raw output
+	 * routine handles any messaging necessary.
+	 */
+
+	/* always copy sockaddr to avoid overwrites */
+	if (so->so_state & SS_ISCONNECTED) {
+		if (nam) {
+			error = EISCONN;
+			goto release;
+		}
+		/* XXX */
+		sockaddr_in6_init(&tmp, &in6p->in6p_faddr, 0, 0, 0);
+		dst = &tmp;
+	} else {
+		if (nam == NULL) {
+			error = ENOTCONN;
+			goto release;
+		}
+		if (nam->m_len != sizeof(tmp)) {
+			error = EINVAL;
+			goto release;
+		}
+
+		tmp = *mtod(nam, struct sockaddr_in6 *);
+		dst = &tmp;
+
+		if (dst->sin6_family != AF_INET6) {
+			error = EAFNOSUPPORT;
+			goto release;
+		}
+	}
+	error = rip6_output(m, so, dst, control);
+	m = NULL;
+
+release:
+	if (m)
+		m_freem(m);
+
+	return error;
 }
 
 static int
@@ -848,17 +919,29 @@ rip6_sendoob(struct socket *so, struct mbuf *m, struct mbuf *control)
 	return EOPNOTSUPP;
 }
 
+static int
+rip6_purgeif(struct socket *so, struct ifnet *ifp)
+{
+
+	mutex_enter(softnet_lock);
+	in6_pcbpurgeif0(&raw6cbtable, ifp);
+	in6_purgeif(ifp);
+	in6_pcbpurgeif(&raw6cbtable, ifp);
+	mutex_exit(softnet_lock);
+
+	return 0;
+}
+
 int
 rip6_usrreq(struct socket *so, int req, struct mbuf *m, 
 	struct mbuf *nam, struct mbuf *control, struct lwp *l)
 {
-	struct in6pcb *in6p = sotoin6pcb(so);
-	int error = 0;
 
 	KASSERT(req != PRU_ACCEPT);
 	KASSERT(req != PRU_BIND);
 	KASSERT(req != PRU_LISTEN);
 	KASSERT(req != PRU_CONNECT);
+	KASSERT(req != PRU_CONNECT2);
 	KASSERT(req != PRU_DISCONNECT);
 	KASSERT(req != PRU_SHUTDOWN);
 	KASSERT(req != PRU_ABORT);
@@ -866,77 +949,15 @@ rip6_usrreq(struct socket *so, int req, struct mbuf *m,
 	KASSERT(req != PRU_SENSE);
 	KASSERT(req != PRU_PEERADDR);
 	KASSERT(req != PRU_SOCKADDR);
+	KASSERT(req != PRU_RCVD);
 	KASSERT(req != PRU_RCVOOB);
+	KASSERT(req != PRU_SEND);
+	KASSERT(req != PRU_PURGEIF);
 	KASSERT(req != PRU_SENDOOB);
 
-	if (req == PRU_PURGEIF) {
-		mutex_enter(softnet_lock);
-		in6_pcbpurgeif0(&raw6cbtable, (struct ifnet *)control);
-		in6_purgeif((struct ifnet *)control);
-		in6_pcbpurgeif(&raw6cbtable, (struct ifnet *)control);
-		mutex_exit(softnet_lock);
-		return 0;
-	}
+	panic("rip6_usrreq");
 
-	switch (req) {
-	case PRU_CONNECT2:
-		error = EOPNOTSUPP;
-		break;
-
-	/*
-	 * Ship a packet out. The appropriate raw output
-	 * routine handles any messaging necessary.
-	 */
-	case PRU_SEND:
-	{
-		struct sockaddr_in6 tmp;
-		struct sockaddr_in6 *dst;
-
-		/* always copy sockaddr to avoid overwrites */
-		if (so->so_state & SS_ISCONNECTED) {
-			if (nam) {
-				error = EISCONN;
-				break;
-			}
-			/* XXX */
-			sockaddr_in6_init(&tmp, &in6p->in6p_faddr, 0, 0, 0);
-			dst = &tmp;
-		} else {
-			if (nam == NULL) {
-				error = ENOTCONN;
-				break;
-			}
-			if (nam->m_len != sizeof(tmp)) {
-				error = EINVAL;
-				break;
-			}
-
-			tmp = *mtod(nam, struct sockaddr_in6 *);
-			dst = &tmp;
-
-			if (dst->sin6_family != AF_INET6) {
-				error = EAFNOSUPPORT;
-				break;
-			}
-		}
-		error = rip6_output(m, so, dst, control);
-		m = NULL;
-		break;
-	}
-
-	/*
-	 * Not supported.
-	 */
-	case PRU_RCVD:
-		error = EOPNOTSUPP;
-		break;
-
-	default:
-		panic("rip6_usrreq");
-	}
-	if (m != NULL)
-		m_freem(m);
-	return error;
+	return 0;
 }
 
 static int
@@ -985,6 +1006,7 @@ PR_WRAP_USRREQS(rip6)
 #define	rip6_bind		rip6_bind_wrapper
 #define	rip6_listen		rip6_listen_wrapper
 #define	rip6_connect		rip6_connect_wrapper
+#define	rip6_connect2		rip6_connect2_wrapper
 #define	rip6_disconnect		rip6_disconnect_wrapper
 #define	rip6_shutdown		rip6_shutdown_wrapper
 #define	rip6_abort		rip6_abort_wrapper
@@ -992,8 +1014,11 @@ PR_WRAP_USRREQS(rip6)
 #define	rip6_stat		rip6_stat_wrapper
 #define	rip6_peeraddr		rip6_peeraddr_wrapper
 #define	rip6_sockaddr		rip6_sockaddr_wrapper
+#define	rip6_rcvd		rip6_rcvd_wrapper
 #define	rip6_recvoob		rip6_recvoob_wrapper
+#define	rip6_send		rip6_send_wrapper
 #define	rip6_sendoob		rip6_sendoob_wrapper
+#define	rip6_purgeif		rip6_purgeif_wrapper
 #define	rip6_usrreq		rip6_usrreq_wrapper
 
 const struct pr_usrreqs rip6_usrreqs = {
@@ -1003,6 +1028,7 @@ const struct pr_usrreqs rip6_usrreqs = {
 	.pr_bind	= rip6_bind,
 	.pr_listen	= rip6_listen,
 	.pr_connect	= rip6_connect,
+	.pr_connect2	= rip6_connect2,
 	.pr_disconnect	= rip6_disconnect,
 	.pr_shutdown	= rip6_shutdown,
 	.pr_abort	= rip6_abort,
@@ -1010,7 +1036,10 @@ const struct pr_usrreqs rip6_usrreqs = {
 	.pr_stat	= rip6_stat,
 	.pr_peeraddr	= rip6_peeraddr,
 	.pr_sockaddr	= rip6_sockaddr,
+	.pr_rcvd	= rip6_rcvd,
 	.pr_recvoob	= rip6_recvoob,
+	.pr_send	= rip6_send,
 	.pr_sendoob	= rip6_sendoob,
+	.pr_purgeif	= rip6_purgeif,
 	.pr_generic	= rip6_usrreq,
 };

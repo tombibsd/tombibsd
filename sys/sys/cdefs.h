@@ -296,6 +296,12 @@
 #define	__noprofile	/* nothing */
 #endif
 
+#if __GNUC_PREREQ__(4, 6) || defined(__clang__)
+#define	__unreachable()	__builtin_unreachable()
+#else
+#define	__unreachable()	do {} while (0)
+#endif
+
 #if defined(__cplusplus)
 #define	__BEGIN_EXTERN_C	extern "C" {
 #define	__END_EXTERN_C		}

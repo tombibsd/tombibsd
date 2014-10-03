@@ -4,7 +4,7 @@
 
 SUBDIR+=	bc
 SUBDIR+=	c89 c99
-SUBDIR+=	dc diffutils gkermit
+SUBDIR+=	dc diffutils
 SUBDIR+=	rcs send-pr texinfo
 
 .if ${MKBSDGREP} == "no"

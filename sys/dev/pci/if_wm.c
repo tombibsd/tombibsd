@@ -72,6 +72,12 @@
  *
  * TODO (in order of importance):
  *
+ *	- Check XXX'ed comments
+ *	- Internal SERDES mode newer than or equal to 82575.
+ *	- EEE (Energy Efficiency Ethernet)
+ *	- MSI/MSI-X
+ *	- Virtual Function
+ *	- Set LED correctly (based on contents in EEPROM)
  *	- Rework how parameters are loaded from the EEPROM.
  */
 
@@ -2179,7 +2185,8 @@ wm_attach(device_t parent, device_t self, void *aux)
 	if_attach(ifp);
 	ether_ifattach(ifp, enaddr);
 	ether_set_ifflags_cb(&sc->sc_ethercom, wm_ifflags_cb);
-	rnd_attach_source(&sc->rnd_source, xname, RND_TYPE_NET, 0);
+	rnd_attach_source(&sc->rnd_source, xname, RND_TYPE_NET,
+			  RND_FLAG_DEFAULT);
 
 #ifdef WM_EVENT_COUNTERS
 	/* Attach event counters. */
@@ -8320,21 +8327,24 @@ wm_get_swsm_semaphore(struct wm_softc *sc)
 	int32_t timeout;
 	uint32_t swsm;
 
-	/* Get the SW semaphore. */
-	timeout = 1000 + 1; /* XXX */
-	while (timeout) {
-		swsm = CSR_READ(sc, WMREG_SWSM);
+	if (sc->sc_flags & WM_F_LOCK_SWSM) {
+		/* Get the SW semaphore. */
+		timeout = 1000 + 1; /* XXX */
+		while (timeout) {
+			swsm = CSR_READ(sc, WMREG_SWSM);
 
-		if ((swsm & SWSM_SMBI) == 0)
-			break;
+			if ((swsm & SWSM_SMBI) == 0)
+				break;
 
-		delay(50);
-		timeout--;
-	}
+			delay(50);
+			timeout--;
+		}
 
-	if (timeout == 0) {
-		aprint_error_dev(sc->sc_dev, "could not acquire SWSM SMBI\n");
-		return 1;
+		if (timeout == 0) {
+			aprint_error_dev(sc->sc_dev,
+			    "could not acquire SWSM SMBI\n");
+			return 1;
+		}
 	}
 
 	/* Get the FW semaphore. */

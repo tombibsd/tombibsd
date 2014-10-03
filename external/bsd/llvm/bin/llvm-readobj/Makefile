@@ -9,6 +9,7 @@ NOMAN=		yes
 
 SRCS=	llvm-readobj.cpp \
 	ARMAttributeParser.cpp \
+	ARMWinEHPrinter.cpp \
 	COFFDumper.cpp \
 	ELFDumper.cpp \
 	Error.cpp \
@@ -24,9 +25,10 @@ LLVM_LIBS+= \
 	PowerPCTargetInfo \
 	SparcTargetInfo \
 	X86TargetInfo \
-	MC \
-	BitReader \
 	Object \
+	MC \
+	MCParser \
+	BitReader \
 	IR \
 	Support
 

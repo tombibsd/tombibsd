@@ -3,7 +3,7 @@
 /agpio.h/1.10/Tue Feb 15 08:57:01 2011/-kk/
 /aio.h/1.12/Sat Jan  7 19:48:19 2012/-kk/
 /ansi.h/1.14/Sun Jul 17 20:54:54 2011/-kk/
-/aout_mids.h/1.2/Thu Dec 27 06:55:49 2012/-kk/
+/aout_mids.h/1.3/Fri Oct  3 09:26:22 2014/-kk/
 /ataio.h/1.9/Tue Jan 24 20:04:07 2012/-kk/
 /atomic.h/1.12/Sat Mar  1 06:05:16 2014/-kk/
 /audioio.h/1.34/Tue Sep  6 01:16:43 2011/-kk/
@@ -21,7 +21,7 @@
 /callout.h/1.31/Mon Apr 28 20:24:10 2008/-kk/
 /cctr.h/1.3/Mon Apr 28 20:24:10 2008/-kk/
 /cdbr.h/1.1/Wed Dec 11 01:24:08 2013/-kk/
-/cdefs.h/1.120/Sun Jul 20 13:59:14 2014/-kk/
+/cdefs.h/1.121/Fri Oct  3 09:26:22 2014/-kk/
 /cdefs_aout.h/1.20/Thu May 18 17:55:38 2006/-kk/
 /cdefs_elf.h/1.44/Tue Jun  3 02:54:47 2014/-kk/
 /cdio.h/1.33/Thu Jan 29 19:36:28 2009/-kk/
@@ -35,7 +35,7 @@
 /condvar.h/1.12/Sat Dec  5 22:38:19 2009/-kk/
 /conf.h/1.145/Fri Oct  3 09:09:34 2014/-kk/
 /core.h/1.12/Thu Aug 20 22:07:49 2009/-kk/
-/cprng.h/1.9/Fri Jan 31 08:48:57 2014/-kk/
+/cprng.h/1.10/Fri Oct  3 09:26:22 2014/-kk/
 /cpu.h/1.41/Tue Jun  3 02:54:47 2014/-kk/
 /cpu_data.h/1.37/Tue Jun  3 03:10:02 2014/-kk/
 /cpufreq.h/1.5/Thu Oct 27 05:13:04 2011/-kk/
@@ -113,7 +113,7 @@
 /kmem.h/1.9/Sun Feb  5 03:40:08 2012/-kk/
 /kobj.h/1.16/Sat Aug 13 21:04:07 2011/-kk/
 /kobj_impl.h/1.3/Sat Aug 13 21:04:07 2011/-kk/
-/kprintf.h/1.11/Sun Jul 17 20:54:54 2011/-kk/
+/kprintf.h/1.12/Fri Oct  3 09:26:22 2014/-kk/
 /ksem.h/1.14/Sun Nov 25 01:05:04 2012/-kk/
 /ksyms.h/1.28/Sun Nov 18 00:06:56 2012/-kk/
 /kthread.h/1.12/Mon Nov 21 04:36:05 2011/-kk/
@@ -131,7 +131,7 @@
 /md4.h/1.7/Mon Dec 26 18:41:36 2005/-kk/
 /md5.h/1.9/Mon Dec 26 18:41:36 2005/-kk/
 /midiio.h/1.15/Mon Apr 28 20:24:11 2008/-kk/
-/mman.h/1.47/Sun Jul 20 13:59:14 2014/-kk/
+/mman.h/1.48/Fri Oct  3 09:26:22 2014/-kk/
 /module.h/1.35/Tue May  6 05:50:26 2014/-kk/
 /mount.h/1.215/Sun Jul 20 13:08:42 2014/-kk/
 /mqueue.h/1.16/Mon Nov 21 04:36:05 2011/-kk/
@@ -159,7 +159,7 @@
 /power.h/1.19/Thu Oct 24 10:28:58 2013/-kk/
 /proc.h/1.320/Sat Mar  1 06:05:16 2014/-kk/
 /prot.h/1.2/Tue Apr 29 06:53:03 2008/-kk/
-/protosw.h/1.56/Fri Oct  3 09:09:34 2014/-kk/
+/protosw.h/1.60/Fri Oct  3 09:26:22 2014/-kk/
 /pserialize.h/1.1/Sat Jul 30 17:01:04 2011/-kk/
 /pset.h/1.4/Thu Oct 24 10:28:58 2013/-kk/
 /ptrace.h/1.45/Tue Jan 14 16:05:14 2014/-kk/
@@ -176,7 +176,7 @@
 /resource.h/1.33/Sat Jun  9 02:31:15 2012/-kk/
 /resourcevar.h/1.54/Sat Nov  3 23:22:22 2012/-kk/
 /rmd160.h/1.2/Sat Feb 16 17:37:13 2008/-kk/
-/rnd.h/1.40/Thu Oct 24 10:28:58 2013/-kk/
+/rnd.h/1.41/Fri Oct  3 09:26:22 2014/-kk/
 /rndsink.h/1.1/Thu Oct 24 10:28:58 2013/-kk/
 /rngtest.h/1.1/Sat Nov 19 22:51:31 2011/-kk/
 /rpst.h/1.3/Thu Apr 14 15:31:20 2011/-kk/
@@ -216,10 +216,10 @@
 /sysctl.h/1.213/Sun Jul 20 13:59:14 2014/-kk/
 /syslimits.h/1.27/Fri Dec  7 07:06:39 2012/-kk/
 /syslog.h/1.36/Mon Jul 21 08:07:51 2014/-kk/
-/systm.h/1.264/Sun Jul 20 13:59:14 2014/-kk/
+/systm.h/1.266/Fri Oct  3 09:26:22 2014/-kk/
 /tape.h/1.3/Mon Dec 26 18:41:36 2005/-kk/
 /termios.h/1.32/Thu Oct 24 10:28:58 2013/-kk/
-/time.h/1.65/Thu Oct 27 16:12:52 2011/-kk/
+/time.h/1.67/Fri Oct  3 09:26:22 2014/-kk/
 /timeb.h/1.14/Sun Dec 11 12:25:21 2005/-kk/
 /timepps.h/1.21/Thu Oct 24 10:28:58 2013/-kk/
 /times.h/1.13/Sun Dec 11 12:25:21 2005/-kk/
@@ -240,7 +240,7 @@
 /ucred.h/1.36/Wed Oct 12 23:03:36 2011/-kk/
 /uidinfo.h/1.3/Sat Jun  9 02:31:15 2012/-kk/
 /uio.h/1.36/Wed Jul 27 13:20:07 2011/-kk/
-/un.h/1.52/Fri Oct  3 09:09:34 2014/-kk/
+/un.h/1.55/Fri Oct  3 09:26:22 2014/-kk/
 /unistd.h/1.55/Wed Dec 25 07:37:48 2013/-kk/
 /unpcb.h/1.17/Thu Apr 24 11:38:39 2008/-kk/
 /user.h/1.19/Thu Feb 27 08:56:17 2014/-kk/

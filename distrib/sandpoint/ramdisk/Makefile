@@ -4,11 +4,11 @@
 .include "${NETBSDSRCDIR}/distrib/common/Makefile.distrib"
 
 IMAGE=		ramdisk.fs
-IMAGESIZE=	2048k
+IMAGESIZE=	2300k
 MAKEFS_FLAGS=	-f 15
 
 WARNS=		1
-DBG=		-Os -mmultiple -mstring
+DBG=		-Os
 
 CRUNCHBIN=	ramdiskbin
 CRUNCHGEN_FLAGS=-d "${DBG}"

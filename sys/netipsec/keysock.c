@@ -495,7 +495,7 @@ key_accept(struct socket *so, struct mbuf *nam)
 }
 
 static int
-key_bind(struct socket *so, struct mbuf *nam)
+key_bind(struct socket *so, struct mbuf *nam, struct lwp *l)
 {
 	KASSERT(solocked(so));
 
@@ -503,7 +503,7 @@ key_bind(struct socket *so, struct mbuf *nam)
 }
 
 static int
-key_listen(struct socket *so)
+key_listen(struct socket *so, struct lwp *l)
 {
 	KASSERT(solocked(so));
 
@@ -511,7 +511,15 @@ key_listen(struct socket *so)
 }
 
 static int
-key_connect(struct socket *so, struct mbuf *nam)
+key_connect(struct socket *so, struct mbuf *nam, struct lwp *l)
+{
+	KASSERT(solocked(so));
+
+	return EOPNOTSUPP;
+}
+
+static int
+key_connect2(struct socket *so, struct socket *so2)
 {
 	KASSERT(solocked(so));
 
@@ -609,11 +617,35 @@ key_sockaddr(struct socket *so, struct mbuf *nam)
 }
 
 static int
+key_rcvd(struct socket *so, int flags, struct lwp *l)
+{
+	KASSERT(solocked(so));
+
+	return EOPNOTSUPP;
+}
+
+static int
 key_recvoob(struct socket *so, struct mbuf *m, int flags)
 {
 	KASSERT(solocked(so));
 
 	return EOPNOTSUPP;
+}
+
+static int
+key_send(struct socket *so, struct mbuf *m, struct mbuf *nam,
+    struct mbuf *control, struct lwp *l)
+{
+	int error = 0;
+	int s;
+
+	KASSERT(solocked(so));
+
+	s = splsoftnet();
+	error = raw_send(so, m, nam, control, l);
+	splx(s);
+
+	return error;
 }
 
 static int
@@ -623,6 +655,15 @@ key_sendoob(struct socket *so, struct mbuf *m, struct mbuf *control)
 
 	m_freem(m);
 	m_freem(control);
+
+	return EOPNOTSUPP;
+}
+
+static int
+key_purgeif(struct socket *so, struct ifnet *ifa)
+{
+
+	panic("key_purgeif");
 
 	return EOPNOTSUPP;
 }
@@ -643,6 +684,7 @@ key_usrreq(struct socket *so, int req,struct mbuf *m, struct mbuf *nam,
 	KASSERT(req != PRU_BIND);
 	KASSERT(req != PRU_LISTEN);
 	KASSERT(req != PRU_CONNECT);
+	KASSERT(req != PRU_CONNECT2);
 	KASSERT(req != PRU_DISCONNECT);
 	KASSERT(req != PRU_SHUTDOWN);
 	KASSERT(req != PRU_ABORT);
@@ -650,8 +692,11 @@ key_usrreq(struct socket *so, int req,struct mbuf *m, struct mbuf *nam,
 	KASSERT(req != PRU_SENSE);
 	KASSERT(req != PRU_PEERADDR);
 	KASSERT(req != PRU_SOCKADDR);
+	KASSERT(req != PRU_RCVD);
 	KASSERT(req != PRU_RCVOOB);
+	KASSERT(req != PRU_SEND);
 	KASSERT(req != PRU_SENDOOB);
+	KASSERT(req != PRU_PURGEIF);
 
 	s = splsoftnet();
 	error = raw_usrreq(so, req, m, nam, control, l);
@@ -674,6 +719,7 @@ PR_WRAP_USRREQS(key)
 #define	key_bind	key_bind_wrapper
 #define	key_listen	key_listen_wrapper
 #define	key_connect	key_connect_wrapper
+#define	key_connect2	key_connect2_wrapper
 #define	key_disconnect	key_disconnect_wrapper
 #define	key_shutdown	key_shutdown_wrapper
 #define	key_abort	key_abort_wrapper
@@ -681,8 +727,11 @@ PR_WRAP_USRREQS(key)
 #define	key_stat	key_stat_wrapper
 #define	key_peeraddr	key_peeraddr_wrapper
 #define	key_sockaddr	key_sockaddr_wrapper
+#define	key_rcvd	key_rcvd_wrapper
 #define	key_recvoob	key_recvoob_wrapper
+#define	key_send	key_send_wrapper
 #define	key_sendoob	key_sendoob_wrapper
+#define	key_purgeif	key_purgeif_wrapper
 #define	key_usrreq	key_usrreq_wrapper
 
 const struct pr_usrreqs key_usrreqs = {
@@ -692,6 +741,7 @@ const struct pr_usrreqs key_usrreqs = {
 	.pr_bind	= key_bind,
 	.pr_listen	= key_listen,
 	.pr_connect	= key_connect,
+	.pr_connect2	= key_connect2,
 	.pr_disconnect	= key_disconnect,
 	.pr_shutdown	= key_shutdown,
 	.pr_abort	= key_abort,
@@ -699,8 +749,11 @@ const struct pr_usrreqs key_usrreqs = {
 	.pr_stat	= key_stat,
 	.pr_peeraddr	= key_peeraddr,
 	.pr_sockaddr	= key_sockaddr,
+	.pr_rcvd	= key_rcvd,
 	.pr_recvoob	= key_recvoob,
+	.pr_send	= key_send,
 	.pr_sendoob	= key_sendoob,
+	.pr_purgeif	= key_purgeif,
 	.pr_generic	= key_usrreq,
 };
 

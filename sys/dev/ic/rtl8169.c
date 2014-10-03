@@ -862,7 +862,7 @@ re_attach(struct rtk_softc *sc)
 	ether_ifattach(ifp, eaddr);
 
 	rnd_attach_source(&sc->rnd_source, device_xname(sc->sc_dev),
-	    RND_TYPE_NET, 0);
+	    RND_TYPE_NET, RND_FLAG_DEFAULT);
 
 	if (pmf_device_register(sc->sc_dev, NULL, NULL))
 		pmf_class_network_register(sc->sc_dev, ifp);

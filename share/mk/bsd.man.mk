@@ -40,7 +40,7 @@ _MSECTIONREGEX=	${_MSECTIONS:ts|} # e.g. 1|2|3|...
 MANCOMPRESS?=
 MANSUFFIX?=
 .else
-MANCOMPRESS?=	${TOOL_GZIP} -ncf
+MANCOMPRESS?=	${TOOL_GZIP_N} -cf
 MANSUFFIX?=	.gz
 .endif
 

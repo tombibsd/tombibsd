@@ -620,7 +620,7 @@ mec_attach(device_t parent, device_t self, void *aux)
 	cpu_intr_establish(maa->maa_intr, maa->maa_intrmask, mec_intr, sc);
 
 	rnd_attach_source(&sc->sc_rnd_source, device_xname(self),
-	    RND_TYPE_NET, 0);
+	    RND_TYPE_NET, RND_FLAG_DEFAULT);
 
 #ifdef MEC_EVENT_COUNTERS
 	evcnt_attach_dynamic(&sc->sc_ev_txpkts , EVCNT_TYPE_MISC,

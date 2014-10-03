@@ -458,9 +458,9 @@ __END_DECLS
 #if defined(__GNUC__) && defined(__STDC__)
 static __inline int __sputc(int _c, FILE *_p) {
 	if (--_p->_w >= 0 || (_p->_w >= _p->_lbfsize && (char)_c != '\n'))
-		return (*_p->_p++ = _c);
+		return *_p->_p++ = (unsigned char)_c;
 	else
-		return (__swbuf(_c, _p));
+		return __swbuf(_c, _p);
 }
 #else
 /*

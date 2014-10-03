@@ -2865,16 +2865,13 @@ ohci_root_intr_start(usbd_xfer_handle xfer)
 Static void
 ohci_root_intr_abort(usbd_xfer_handle xfer)
 {
-#ifdef DIAGNOSTIC
 	ohci_softc_t *sc = xfer->pipe->device->bus->hci_private;
-#endif
 
 	KASSERT(mutex_owned(&sc->sc_lock));
+	KASSERT(xfer->pipe->intrxfer == xfer);
 
-	if (xfer->pipe->intrxfer == xfer) {
-		DPRINTF(("ohci_root_intr_abort: remove\n"));
-		xfer->pipe->intrxfer = NULL;
-	}
+	sc->sc_intrxfer = NULL;
+
 	xfer->status = USBD_CANCELLED;
 	usb_transfer_complete(xfer);
 }
@@ -3256,11 +3253,8 @@ ohci_device_intr_abort(usbd_xfer_handle xfer)
 #endif
 
 	KASSERT(mutex_owned(&sc->sc_lock));
+	KASSERT(xfer->pipe->intrxfer == xfer);
 
-	if (xfer->pipe->intrxfer == xfer) {
-		DPRINTF(("ohci_device_intr_abort: remove\n"));
-		xfer->pipe->intrxfer = NULL;
-	}
 	ohci_abort_xfer(xfer, USBD_CANCELLED);
 }
 

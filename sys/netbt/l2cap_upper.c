@@ -372,7 +372,7 @@ l2cap_listen_pcb(struct l2cap_channel *chan)
 }
 
 /*
- * l2cap_send(l2cap_channel, mbuf)
+ * l2cap_send_pcb(l2cap_channel, mbuf)
  *
  *	Output SDU on channel described by channel. This corresponds
  *	to "Send Data Request" in the L2CAP specification. The upper
@@ -394,7 +394,7 @@ l2cap_listen_pcb(struct l2cap_channel *chan)
  *	B-Frame header and start sending if we are not already
  */
 int
-l2cap_send(struct l2cap_channel *chan, struct mbuf *m)
+l2cap_send_pcb(struct l2cap_channel *chan, struct mbuf *m)
 {
 	l2cap_hdr_t *hdr;
 	int plen;

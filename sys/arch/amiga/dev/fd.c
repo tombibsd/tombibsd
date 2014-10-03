@@ -1851,7 +1851,7 @@ again:
 		 * if we are at gap then we can no longer be sure
 		 * of correct sync marks
 		 */
-		if ((info && 0xff) == 1)
+		if ((info & 0xff) == 1)
 			doagain = 1;
 		else
 			doagain = 0;

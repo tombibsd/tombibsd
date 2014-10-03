@@ -102,7 +102,6 @@ static struct	ieee80211_node * wpi_node_alloc(struct ieee80211_node_table *);
 static void	wpi_newassoc(struct ieee80211_node *, int);
 static int	wpi_media_change(struct ifnet *);
 static int	wpi_newstate(struct ieee80211com *, enum ieee80211_state, int);
-static void	wpi_fix_channel(struct ieee80211com *, struct mbuf *);
 static void	wpi_mem_lock(struct wpi_softc *);
 static void	wpi_mem_unlock(struct wpi_softc *);
 static uint32_t	wpi_mem_read(struct wpi_softc *, uint16_t);
@@ -143,7 +142,7 @@ static int	wpi_get_power_index(struct wpi_softc *,
 		    struct wpi_power_group *, struct ieee80211_channel *, int);
 static int	wpi_setup_beacon(struct wpi_softc *, struct ieee80211_node *);
 static int	wpi_auth(struct wpi_softc *);
-static int	wpi_scan(struct wpi_softc *, uint16_t);
+static int	wpi_scan(struct wpi_softc *);
 static int	wpi_config(struct wpi_softc *);
 static void	wpi_stop_master(struct wpi_softc *);
 static int	wpi_power_up(struct wpi_softc *);
@@ -450,6 +449,7 @@ wpi_dma_contig_alloc(bus_dma_tag_t tag, struct wpi_dma_info *dma, void **kvap,
 		goto fail;
 
 	memset(dma->vaddr, 0, size);
+	bus_dmamap_sync(dma->tag, dma->map, 0, size, BUS_DMASYNC_PREWRITE);
 
 	dma->paddr = dma->map->dm_segs[0].ds_addr;
 	if (kvap != NULL)
@@ -535,7 +535,6 @@ wpi_alloc_rbuf(struct wpi_softc *sc)
 	rbuf = SLIST_FIRST(&sc->rxq.freelist);
 	if (rbuf != NULL) {
 		SLIST_REMOVE_HEAD(&sc->rxq.freelist, next);
-		sc->rxq.nb_free_entries --;
 	}
 	mutex_exit(&sc->rxq.freelist_mtx);
 
@@ -557,8 +556,6 @@ wpi_free_rbuf(struct mbuf* m, void *buf, size_t size, void *arg)
 	mutex_enter(&sc->rxq.freelist_mtx);
 	SLIST_INSERT_HEAD(&sc->rxq.freelist, rbuf, next);
 	mutex_exit(&sc->rxq.freelist_mtx);
-	/* No need to protect this with a mutex, see wpi_rx_intr */
-	sc->rxq.nb_free_entries ++;
 
 	if (__predict_true(m != NULL))
 		pool_cache_put(mb_cache, m);
@@ -592,7 +589,6 @@ wpi_alloc_rpool(struct wpi_softc *sc)
 		SLIST_INSERT_HEAD(&ring->freelist, rbuf, next);
 	}
 
-	ring->nb_free_entries = WPI_RBUF_COUNT;
 	return 0;
 }
 
@@ -605,12 +601,14 @@ wpi_free_rpool(struct wpi_softc *sc)
 static int
 wpi_alloc_rx_ring(struct wpi_softc *sc, struct wpi_rx_ring *ring)
 {
+	bus_size_t size;
 	int i, error;
 
 	ring->cur = 0;
 
+	size = WPI_RX_RING_COUNT * sizeof (uint32_t);
 	error = wpi_dma_contig_alloc(sc->sc_dmat, &ring->desc_dma,
-	    (void **)&ring->desc, WPI_RX_RING_COUNT * sizeof (uint32_t),
+	    (void **)&ring->desc, size,
 	    WPI_RING_DMA_ALIGN, BUS_DMA_NOWAIT);
 	if (error != 0) {
 		aprint_error_dev(sc->sc_dev,
@@ -624,6 +622,14 @@ wpi_alloc_rx_ring(struct wpi_softc *sc, struct wpi_rx_ring *ring)
 	for (i = 0; i < WPI_RX_RING_COUNT; i++) {
 		struct wpi_rx_data *data = &ring->data[i];
 		struct wpi_rbuf *rbuf;
+
+		error = bus_dmamap_create(sc->sc_dmat, WPI_RBUF_SIZE, 1,
+		    WPI_RBUF_SIZE, 0, BUS_DMA_NOWAIT, &data->map);
+		if (error) {
+			aprint_error_dev(sc->sc_dev,
+			    "could not allocate rx dma map\n");
+			goto fail;
+		}
 
 		MGETHDR(data->m, M_DONTWAIT, MT_DATA);
 		if (data->m == NULL) {
@@ -645,8 +651,20 @@ wpi_alloc_rx_ring(struct wpi_softc *sc, struct wpi_rx_ring *ring)
 		    rbuf);
 		data->m->m_flags |= M_EXT_RW;
 
+		error = bus_dmamap_load(sc->sc_dmat, data->map,
+		    mtod(data->m, void *), WPI_RBUF_SIZE, NULL,
+		    BUS_DMA_NOWAIT | BUS_DMA_READ);
+		if (error) {
+			aprint_error_dev(sc->sc_dev,
+			    "could not load mbuf: %d\n", error);
+			goto fail;
+		}
+
 		ring->desc[i] = htole32(rbuf->paddr);
 	}
+
+	bus_dmamap_sync(sc->sc_dmat, ring->desc_dma.map, 0, size,
+	    BUS_DMASYNC_PREWRITE);
 
 	return 0;
 
@@ -684,8 +702,13 @@ wpi_free_rx_ring(struct wpi_softc *sc, struct wpi_rx_ring *ring)
 	wpi_dma_contig_free(&ring->desc_dma);
 
 	for (i = 0; i < WPI_RX_RING_COUNT; i++) {
-		if (ring->data[i].m != NULL)
+		if (ring->data[i].m != NULL) {
+			bus_dmamap_unload(sc->sc_dmat, ring->data[i].map);
 			m_freem(ring->data[i].m);
+		}
+		if (ring->data[i].map != NULL) {
+			bus_dmamap_destroy(sc->sc_dmat, ring->data[i].map);
+		}
 	}
 }
 
@@ -711,6 +734,8 @@ wpi_alloc_tx_ring(struct wpi_softc *sc, struct wpi_tx_ring *ring, int count,
 
 	/* update shared page with ring's base address */
 	sc->shared->txbase[qid] = htole32(ring->desc_dma.paddr);
+	bus_dmamap_sync(sc->sc_dmat, sc->shared_dma.map, 0,
+	    sizeof(struct wpi_shared), BUS_DMASYNC_PREWRITE);
 
 	error = wpi_dma_contig_alloc(sc->sc_dmat, &ring->cmd_dma,
 	    (void **)&ring->cmd, count * sizeof (struct wpi_tx_cmd), 4,
@@ -851,6 +876,7 @@ wpi_newstate(struct ieee80211com *ic, enum ieee80211_state nstate, int arg)
 	struct ifnet *ifp = ic->ic_ifp;
 	struct wpi_softc *sc = ifp->if_softc;
 	struct ieee80211_node *ni;
+	enum ieee80211_state ostate = ic->ic_state;
 	int error;
 
 	callout_stop(&sc->calib_to);
@@ -862,20 +888,18 @@ wpi_newstate(struct ieee80211com *ic, enum ieee80211_state nstate, int arg)
 			break;
 
 		sc->is_scanning = true;
-		ieee80211_node_table_reset(&ic->ic_scan);
-		ic->ic_flags |= IEEE80211_F_SCAN | IEEE80211_F_ASCAN;
 
-		/* make the link LED blink while we're scanning */
-		wpi_set_led(sc, WPI_LED_LINK, 20, 2);
+		if (ostate != IEEE80211_S_SCAN) {
+			/* make the link LED blink while we're scanning */
+			wpi_set_led(sc, WPI_LED_LINK, 20, 2);
+		}
 
-		if ((error = wpi_scan(sc, IEEE80211_CHAN_G)) != 0) {
+		if ((error = wpi_scan(sc)) != 0) {
 			aprint_error_dev(sc->sc_dev,
 			    "could not initiate scan\n");
-			ic->ic_flags &= ~(IEEE80211_F_SCAN | IEEE80211_F_ASCAN);
 			return error;
 		}
-		ic->ic_state = nstate;
-		return 0;
+		break;
 
 	case IEEE80211_S_ASSOC:
 		if (ic->ic_state != IEEE80211_S_RUN)
@@ -934,7 +958,7 @@ wpi_newstate(struct ieee80211com *ic, enum ieee80211_state nstate, int arg)
 		}
 
 		/* configuration has changed, set Tx power accordingly */
-		if ((error = wpi_set_txpower(sc, ni->ni_chan, 1)) != 0) {
+		if ((error = wpi_set_txpower(sc, ic->ic_curchan, 1)) != 0) {
 			aprint_error_dev(sc->sc_dev,
 			    "could not set Tx power\n");
 			return error;
@@ -959,44 +983,6 @@ wpi_newstate(struct ieee80211com *ic, enum ieee80211_state nstate, int arg)
 	}
 
 	return sc->sc_newstate(ic, nstate, arg);
-}
-
-/*
- * XXX: Hack to set the current channel to the value advertised in beacons or
- * probe responses. Only used during AP detection.
- * XXX: Duplicated from if_iwi.c
- */
-static void
-wpi_fix_channel(struct ieee80211com *ic, struct mbuf *m)
-{
-	struct ieee80211_frame *wh;
-	uint8_t subtype;
-	uint8_t *frm, *efrm;
-
-	wh = mtod(m, struct ieee80211_frame *);
-
-	if ((wh->i_fc[0] & IEEE80211_FC0_TYPE_MASK) != IEEE80211_FC0_TYPE_MGT)
-		return;
-
-	subtype = wh->i_fc[0] & IEEE80211_FC0_SUBTYPE_MASK;
-
-	if (subtype != IEEE80211_FC0_SUBTYPE_BEACON &&
-	    subtype != IEEE80211_FC0_SUBTYPE_PROBE_RESP)
-		return;
-
-	frm = (uint8_t *)(wh + 1);
-	efrm = mtod(m, uint8_t *) + m->m_len;
-
-	frm += 12;	/* skip tstamp, bintval and capinfo fields */
-	while (frm < efrm) {
-		if (*frm == IEEE80211_ELEMID_DSPARMS)
-#if IEEE80211_CHAN_MAX < 255
-		if (frm[2] <= IEEE80211_CHAN_MAX)
-#endif
-			ic->ic_curchan = &ic->ic_channels[frm[2]];
-
-		frm += frm[1] + 2;
-	}
 }
 
 /*
@@ -1303,6 +1289,8 @@ wpi_load_firmware(struct wpi_softc *sc)
 	memcpy((char *)dma->vaddr + WPI_FW_INIT_DATA_MAXSZ, init_text,
 	    init_textsz);
 
+	bus_dmamap_sync(dma->tag, dma->map, 0, dma->size, BUS_DMASYNC_PREWRITE);
+
 	/* tell adapter where to find initialization images */
 	wpi_mem_lock(sc);
 	wpi_mem_write(sc, WPI_MEM_DATA_BASE, dma->paddr);
@@ -1332,6 +1320,8 @@ wpi_load_firmware(struct wpi_softc *sc)
 	memcpy(dma->vaddr, main_data, main_datasz);
 	memcpy((char *)dma->vaddr + WPI_FW_MAIN_DATA_MAXSZ, main_text,
 	    main_textsz);
+
+	bus_dmamap_sync(dma->tag, dma->map, 0, dma->size, BUS_DMASYNC_PREWRITE);
 
 	/* tell adapter where to find runtime images */
 	wpi_mem_lock(sc);
@@ -1417,7 +1407,7 @@ wpi_power_calibration(struct wpi_softc *sc, int temp)
 
 	sc->temp = temp;
 
-	if (wpi_set_txpower(sc, sc->sc_ic.ic_bss->ni_chan, 1) != 0) {
+	if (wpi_set_txpower(sc, sc->sc_ic.ic_curchan, 1) != 0) {
 		/* just warn, too bad for the automatic calibration... */
 		aprint_error_dev(sc->sc_dev, "could not adjust Tx power\n");
 	}
@@ -1437,8 +1427,10 @@ wpi_rx_intr(struct wpi_softc *sc, struct wpi_rx_desc *desc,
 	struct ieee80211_frame *wh;
 	struct ieee80211_node *ni;
 	struct mbuf *m, *mnew;
-	int data_off;
+	int data_off, error;
 
+	bus_dmamap_sync(sc->sc_dmat, data->map, 0, data->map->dm_mapsize,
+	    BUS_DMASYNC_POSTREAD);
 	stat = (struct wpi_rx_stat *)(desc + 1);
 
 	if (stat->len > WPI_STAT_MAXLEN) {
@@ -1469,61 +1461,59 @@ wpi_rx_intr(struct wpi_softc *sc, struct wpi_rx_desc *desc,
 	/* Compute where are the useful datas */
 	data_off = (char*)(head + 1) - mtod(data->m, char*);
 			
-	/*
-	 * If the number of free entry is too low
-	 * just dup the data->m socket and reuse the same rbuf entry
-	 * Note that thi test is not protected by a mutex because the
-	 * only path that causes nb_free_entries to decrease is through
-	 * this interrupt routine, which is not re-entrent.
-	 * What may not be obvious is that the safe path is if that test
-	 * evaluates as true, so nb_free_entries can grow any time.
-	 */
-	if (sc->rxq.nb_free_entries <= WPI_RBUF_LOW_LIMIT) {
-	
-		/* Prepare the mbuf for the m_dup */
-		data->m->m_pkthdr.len = data->m->m_len = le16toh(head->len);
-		data->m->m_data = (char*) data->m->m_data + data_off;
-
-		m = m_dup(data->m,0,M_COPYALL,M_DONTWAIT);
-
-		/* Restore the m_data pointer for future use */
-		data->m->m_data = (char*) data->m->m_data - data_off;
-
-		if (m == NULL) {
-			ifp->if_ierrors++;
-			return;
-		}
-	} else {
-
-		MGETHDR(mnew, M_DONTWAIT, MT_DATA);
-		if (mnew == NULL) {
-			ifp->if_ierrors++;
-			return;
-		}
-
-		rbuf = wpi_alloc_rbuf(sc);
-		KASSERT(rbuf != NULL);
-
-		/* attach Rx buffer to mbuf */
-		MEXTADD(mnew, rbuf->vaddr, WPI_RBUF_SIZE, 0, wpi_free_rbuf,
-			rbuf);
-		mnew->m_flags |= M_EXT_RW;
-
-		m = data->m;
-		data->m = mnew;
-
-		/* update Rx descriptor */
-		ring->desc[ring->cur] = htole32(rbuf->paddr);
-
-		m->m_data = (char*)m->m_data + data_off;
-		m->m_pkthdr.len = m->m_len = le16toh(head->len);
+	MGETHDR(mnew, M_DONTWAIT, MT_DATA);
+	if (mnew == NULL) {
+		ifp->if_ierrors++;
+		return;
 	}
+
+	rbuf = wpi_alloc_rbuf(sc);
+	if (rbuf == NULL) {
+		m_freem(mnew);
+		ifp->if_ierrors++;
+		return;
+	}
+
+	/* attach Rx buffer to mbuf */
+	MEXTADD(mnew, rbuf->vaddr, WPI_RBUF_SIZE, 0, wpi_free_rbuf,
+		rbuf);
+	mnew->m_flags |= M_EXT_RW;
+
+	bus_dmamap_unload(sc->sc_dmat, data->map);
+
+	error = bus_dmamap_load(sc->sc_dmat, data->map,
+	    mtod(mnew, void *), WPI_RBUF_SIZE, NULL,
+	    BUS_DMA_NOWAIT | BUS_DMA_READ);
+	if (error) {
+		device_printf(sc->sc_dev,
+		    "couldn't load rx mbuf: %d\n", error);
+		m_freem(mnew);
+		ifp->if_ierrors++;
+
+		error = bus_dmamap_load(sc->sc_dmat, data->map,
+		    mtod(data->m, void *), WPI_RBUF_SIZE, NULL,
+		    BUS_DMA_NOWAIT | BUS_DMA_READ);
+		if (error)
+			panic("%s: bus_dmamap_load failed: %d\n",
+			    device_xname(sc->sc_dev), error);
+		return;
+	}
+
+	/* new mbuf loaded successfully */
+	m = data->m;
+	data->m = mnew;
+
+	/* update Rx descriptor */
+	ring->desc[ring->cur] = htole32(rbuf->paddr);
+	bus_dmamap_sync(sc->sc_dmat, ring->desc_dma.map, 0,
+	    ring->desc_dma.size,
+	    BUS_DMASYNC_PREWRITE);
+
+	m->m_data = (char*)m->m_data + data_off;
+	m->m_pkthdr.len = m->m_len = le16toh(head->len);
 
 	/* finalize mbuf */
 	m->m_pkthdr.rcvif = ifp;
-
-	if (ic->ic_state == IEEE80211_S_SCAN)
-		wpi_fix_channel(ic, m);
 
 	if (sc->sc_drvbpf != NULL) {
 		struct wpi_rx_radiotap_header *tap = &sc->sc_rxtap;
@@ -1643,10 +1633,17 @@ wpi_notif_intr(struct wpi_softc *sc)
 	struct ifnet *ifp =  ic->ic_ifp;
 	uint32_t hw;
 
+	bus_dmamap_sync(sc->sc_dmat, sc->shared_dma.map, 0,
+	    sizeof(struct wpi_shared), BUS_DMASYNC_POSTREAD);
+
 	hw = le32toh(sc->shared->next);
 	while (sc->rxq.cur != hw) {
 		struct wpi_rx_data *data = &sc->rxq.data[sc->rxq.cur];
-		struct wpi_rx_desc *desc = mtod(data->m, struct wpi_rx_desc *);
+		struct wpi_rx_desc *desc;
+
+		bus_dmamap_sync(sc->sc_dmat, data->map, 0, data->map->dm_mapsize,
+		    BUS_DMASYNC_POSTREAD);
+		desc = mtod(data->m, struct wpi_rx_desc *);
 
 		DPRINTFN(4, ("rx notification qid=%x idx=%d flags=%x type=%d "
 		    "len=%d\n", desc->qid, desc->idx, desc->flags,
@@ -1702,6 +1699,7 @@ wpi_notif_intr(struct wpi_softc *sc)
 		}
 		case WPI_START_SCAN:
 		{
+#if 0
 			struct wpi_start_scan *scan =
 			    (struct wpi_start_scan *)(desc + 1);
 
@@ -1709,27 +1707,24 @@ wpi_notif_intr(struct wpi_softc *sc)
 			    scan->chan, le32toh(scan->status)));
 
 			/* fix current channel */
-			ic->ic_bss->ni_chan = &ic->ic_channels[scan->chan];
+			ic->ic_curchan = &ic->ic_channels[scan->chan];
+#endif
 			break;
 		}
 		case WPI_STOP_SCAN:
 		{
+#ifdef WPI_DEBUG
 			struct wpi_stop_scan *scan =
 			    (struct wpi_stop_scan *)(desc + 1);
+#endif
 
 			DPRINTF(("scan finished nchan=%d status=%d chan=%d\n",
 			    scan->nchan, scan->status, scan->chan));
 
-			if (scan->status == 1 && scan->chan <= 14) {
-				/*
-				 * We just finished scanning 802.11g channels,
-				 * start scanning 802.11a ones.
-				 */
-				if (wpi_scan(sc, IEEE80211_CHAN_A) == 0)
-					break;
-			}
 			sc->is_scanning = false;
-			ieee80211_end_scan(ic);
+			if (ic->ic_state == IEEE80211_S_SCAN)
+				ieee80211_next_scan(ic);
+
 			break;
 		}
 		}
@@ -1994,6 +1989,16 @@ wpi_tx_data(struct wpi_softc *sc, struct mbuf *m0, struct ieee80211_node *ni,
 	}
 
 	ring->queued++;
+
+	bus_dmamap_sync(sc->sc_dmat, data->map, 0,
+	    data->map->dm_mapsize,
+	    BUS_DMASYNC_PREWRITE);
+	bus_dmamap_sync(sc->sc_dmat, ring->cmd_dma.map, 0,
+	    ring->cmd_dma.size,
+	    BUS_DMASYNC_PREWRITE);
+	bus_dmamap_sync(sc->sc_dmat, ring->desc_dma.map, 0,
+	    ring->desc_dma.size,
+	    BUS_DMASYNC_PREWRITE);
 
 	/* kick ring */
 	ring->cur = (ring->cur + 1) % WPI_TX_RING_COUNT;
@@ -2290,6 +2295,7 @@ wpi_cmd(struct wpi_softc *sc, int code, const void *buf, int size, int async)
 	struct wpi_tx_ring *ring = &sc->cmdq;
 	struct wpi_tx_desc *desc;
 	struct wpi_tx_cmd *cmd;
+	struct wpi_dma_info *dma;
 
 	KASSERT(size <= sizeof cmd->data);
 
@@ -2302,10 +2308,16 @@ wpi_cmd(struct wpi_softc *sc, int code, const void *buf, int size, int async)
 	cmd->idx = ring->cur;
 	memcpy(cmd->data, buf, size);
 
+	dma = &ring->cmd_dma;
+	bus_dmamap_sync(dma->tag, dma->map, 0, dma->size, BUS_DMASYNC_PREWRITE);
+
 	desc->flags = htole32(WPI_PAD32(size) << 28 | 1 << 24);
 	desc->segs[0].addr = htole32(ring->cmd_dma.paddr +
 	    ring->cur * sizeof (struct wpi_tx_cmd));
 	desc->segs[0].len  = htole32(4 + size);
+
+	dma = &ring->desc_dma;
+	bus_dmamap_sync(dma->tag, dma->map, 0, dma->size, BUS_DMASYNC_PREWRITE);
 
 	/* kick cmd ring */
 	ring->cur = (ring->cur + 1) % WPI_CMD_RING_COUNT;
@@ -2627,6 +2639,11 @@ wpi_setup_beacon(struct wpi_softc *sc, struct ieee80211_node *ni)
 	desc->segs[1].addr = htole32(data->map->dm_segs[0].ds_addr);
 	desc->segs[1].len  = htole32(data->map->dm_segs[0].ds_len);
 
+	bus_dmamap_sync(sc->sc_dmat, ring->desc_dma.map, 0,
+	    ring->desc_dma.map->dm_mapsize, BUS_DMASYNC_PREWRITE);
+	bus_dmamap_sync(sc->sc_dmat, data->map, 0, data->map->dm_mapsize,
+	    BUS_DMASYNC_PREWRITE);
+
 	/* kick cmd ring */
 	ring->cur = (ring->cur + 1) % WPI_CMD_RING_COUNT;
 	WPI_WRITE(sc, WPI_TX_WIDX, ring->qid << 8 | ring->cur);
@@ -2700,7 +2717,7 @@ wpi_auth(struct wpi_softc *sc)
  * into a mbuf instead of using the pre-allocated set of commands.
  */
 static int
-wpi_scan(struct wpi_softc *sc, uint16_t flags)
+wpi_scan(struct wpi_softc *sc)
 {
 	struct ieee80211com *ic = &sc->sc_ic;
 	struct wpi_tx_ring *ring = &sc->cmdq;
@@ -2712,9 +2729,11 @@ wpi_scan(struct wpi_softc *sc, uint16_t flags)
 	struct ieee80211_frame *wh;
 	struct ieee80211_rateset *rs;
 	struct ieee80211_channel *c;
-	enum ieee80211_phymode mode;
 	uint8_t *frm;
 	int pktlen, error, nrates;
+
+	if (ic->ic_curchan == NULL)
+		return EIO;
 
 	desc = &ring->desc[ring->cur];
 	data = &ring->data[ring->cur];
@@ -2753,20 +2772,24 @@ wpi_scan(struct wpi_softc *sc, uint16_t flags)
 	hdr->quiet = htole16(5);	/* timeout in milliseconds */
 	hdr->plcp_threshold = htole16(1);	/* min # of packets */
 
-	if (flags & IEEE80211_CHAN_A) {
+	if (ic->ic_curchan->ic_flags & IEEE80211_CHAN_5GHZ) {
 		hdr->crc_threshold = htole16(1);
 		/* send probe requests at 6Mbps */
 		hdr->cmd.rate = wpi_plcp_signal(12);
+		rs = &ic->ic_sup_rates[IEEE80211_MODE_11A];
 	} else {
 		hdr->flags = htole32(WPI_CONFIG_24GHZ | WPI_CONFIG_AUTO);
 		/* send probe requests at 1Mbps */
 		hdr->cmd.rate = wpi_plcp_signal(2);
+		rs = &ic->ic_sup_rates[IEEE80211_MODE_11G];
 	}
 
 	/* for directed scans, firmware inserts the essid IE itself */
-	hdr->essid[0].id  = IEEE80211_ELEMID_SSID;
-	hdr->essid[0].len = ic->ic_des_esslen;
-	memcpy(hdr->essid[0].data, ic->ic_des_essid, ic->ic_des_esslen);
+	if (ic->ic_des_esslen != 0) {
+		hdr->essid[0].id  = IEEE80211_ELEMID_SSID;
+		hdr->essid[0].len = ic->ic_des_esslen;
+		memcpy(hdr->essid[0].data, ic->ic_des_essid, ic->ic_des_esslen);
+	}
 
 	/*
 	 * Build a probe request frame.  Most of the following code is a
@@ -2787,9 +2810,6 @@ wpi_scan(struct wpi_softc *sc, uint16_t flags)
 	/* add empty essid IE (firmware generates it for directed scans) */
 	*frm++ = IEEE80211_ELEMID_SSID;
 	*frm++ = 0;
-
-	mode = ieee80211_chan2mode(ic, ic->ic_ibss_chan);
-	rs = &ic->ic_sup_rates[mode];
 
 	/* add supported rates IE */
 	*frm++ = IEEE80211_ELEMID_RATES;
@@ -2813,33 +2833,29 @@ wpi_scan(struct wpi_softc *sc, uint16_t flags)
 	hdr->cmd.len = htole16(frm - (uint8_t *)wh);
 
 	chan = (struct wpi_scan_chan *)frm;
-	for (c  = &ic->ic_channels[1];
-	     c <= &ic->ic_channels[IEEE80211_CHAN_MAX]; c++) {
-		if ((c->ic_flags & flags) != flags)
-			continue;
+	c = ic->ic_curchan;
 
-		chan->chan = ieee80211_chan2ieee(ic, c);
-		chan->flags = 0;
-		if (!(c->ic_flags & IEEE80211_CHAN_PASSIVE)) {
-			chan->flags |= WPI_CHAN_ACTIVE;
-			if (ic->ic_des_esslen != 0)
-				chan->flags |= WPI_CHAN_DIRECT;
-		}
-		chan->dsp_gain = 0x6e;
-		if (IEEE80211_IS_CHAN_5GHZ(c)) {
-			chan->rf_gain = 0x3b;
-			chan->active  = htole16(10);
-			chan->passive = htole16(110);
-		} else {
-			chan->rf_gain = 0x28;
-			chan->active  = htole16(20);
-			chan->passive = htole16(120);
-		}
-		hdr->nchan++;
-		chan++;
-
-		frm += sizeof (struct wpi_scan_chan);
+	chan->chan = ieee80211_chan2ieee(ic, c);
+	chan->flags = 0;
+	if (!(c->ic_flags & IEEE80211_CHAN_PASSIVE)) {
+		chan->flags |= WPI_CHAN_ACTIVE;
+		if (ic->ic_des_esslen != 0)
+			chan->flags |= WPI_CHAN_DIRECT;
 	}
+	chan->dsp_gain = 0x6e;
+	if (IEEE80211_IS_CHAN_5GHZ(c)) {
+		chan->rf_gain = 0x3b;
+		chan->active  = htole16(10);
+		chan->passive = htole16(110);
+	} else {
+		chan->rf_gain = 0x28;
+		chan->active  = htole16(20);
+		chan->passive = htole16(120);
+	}
+	hdr->nchan++;
+	chan++;
+
+	frm += sizeof (struct wpi_scan_chan);
 
 	hdr->len = htole16(frm - (uint8_t *)hdr);
 	pktlen = frm - (uint8_t *)cmd;
@@ -2856,6 +2872,11 @@ wpi_scan(struct wpi_softc *sc, uint16_t flags)
 	desc->flags = htole32(WPI_PAD32(pktlen) << 28 | 1 << 24);
 	desc->segs[0].addr = htole32(data->map->dm_segs[0].ds_addr);
 	desc->segs[0].len  = htole32(data->map->dm_segs[0].ds_len);
+
+	bus_dmamap_sync(sc->sc_dmat, ring->desc_dma.map, 0,
+	    ring->desc_dma.map->dm_mapsize, BUS_DMASYNC_PREWRITE);
+	bus_dmamap_sync(sc->sc_dmat, data->map, 0, data->map->dm_mapsize,
+	    BUS_DMASYNC_PREWRITE);
 
 	/* kick cmd ring */
 	ring->cur = (ring->cur + 1) % WPI_CMD_RING_COUNT;
@@ -2900,9 +2921,9 @@ wpi_config(struct wpi_softc *sc)
 	IEEE80211_ADDR_COPY(ic->ic_myaddr, CLLADDR(ifp->if_sadl));
 	IEEE80211_ADDR_COPY(sc->config.myaddr, ic->ic_myaddr);
 	/* set default channel */
-	sc->config.chan = ieee80211_chan2ieee(ic, ic->ic_ibss_chan);
+	sc->config.chan = ieee80211_chan2ieee(ic, ic->ic_curchan);
 	sc->config.flags = htole32(WPI_CONFIG_TSF);
-	if (IEEE80211_IS_CHAN_2GHZ(ic->ic_ibss_chan)) {
+	if (IEEE80211_IS_CHAN_2GHZ(ic->ic_curchan)) {
 		sc->config.flags |= htole32(WPI_CONFIG_AUTO |
 		    WPI_CONFIG_24GHZ);
 	}
@@ -2935,7 +2956,7 @@ wpi_config(struct wpi_softc *sc)
 	}
 
 	/* configuration has changed, set Tx power accordingly */
-	if ((error = wpi_set_txpower(sc, ic->ic_ibss_chan, 0)) != 0) {
+	if ((error = wpi_set_txpower(sc, ic->ic_curchan, 0)) != 0) {
 		aprint_error_dev(sc->sc_dev, "could not set Tx power\n");
 		return error;
 	}

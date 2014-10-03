@@ -79,15 +79,15 @@ struct sockopt;
 extern const struct pr_usrreqs unp_usrreqs;
 
 int	uipc_ctloutput(int, struct socket *, struct sockopt *);
-void	uipc_init (void);
-kmutex_t *uipc_dgramlock (void);
-kmutex_t *uipc_streamlock (void);
-kmutex_t *uipc_rawlock (void);
+void	uipc_init(void);
+kmutex_t *uipc_dgramlock(void);
+kmutex_t *uipc_streamlock(void);
+kmutex_t *uipc_rawlock(void);
 
-int	unp_connect (struct socket *, struct mbuf *);
-int	unp_connect2 (struct socket *, struct socket *, int);
-void 	unp_dispose (struct mbuf *);
-int 	unp_externalize (struct mbuf *, struct lwp *, int);
+int	unp_connect(struct socket *, struct mbuf *, struct lwp *);
+int	unp_connect2(struct socket *, struct socket *);
+void 	unp_dispose(struct mbuf *);
+int 	unp_externalize(struct mbuf *, struct lwp *, int);
 
 #else /* !_KERNEL */
 

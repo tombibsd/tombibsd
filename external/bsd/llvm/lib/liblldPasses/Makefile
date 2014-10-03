@@ -6,11 +6,9 @@ LIB=	lldPasses
 
 .PATH: ${LLD_SRCDIR}/lib/Passes
 
-SRCS+=	GOTPass.cpp \
-	LayoutPass.cpp \
+SRCS+=	LayoutPass.cpp \
 	RoundTripNativePass.cpp \
-	RoundTripYAMLPass.cpp \
-	StubsPass.cpp
+	RoundTripYAMLPass.cpp
 
 .if defined(HOSTLIB)
 .include <bsd.hostlib.mk>

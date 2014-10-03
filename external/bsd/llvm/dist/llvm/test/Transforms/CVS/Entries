@@ -18,12 +18,12 @@ D/FunctionAttrs////
 D/GCOVProfiling////
 D/GVN////
 D/GlobalDCE////
-D/GlobalMerge////
 D/GlobalOpt////
 D/IPConstantProp////
 D/IndVarSimplify////
 D/Inline////
 D/InstCombine////
+D/InstMerge////
 D/InstSimplify////
 D/Internalize////
 D/JumpThreading////
@@ -48,6 +48,7 @@ D/MemCpyOpt////
 D/MergeFunc////
 D/MetaRenamer////
 D/ObjCARC////
+D/PartiallyInlineLibCalls////
 D/PhaseOrdering////
 D/PruneEH////
 D/Reassociate////

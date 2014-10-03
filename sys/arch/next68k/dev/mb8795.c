@@ -138,7 +138,7 @@ mb8795_config(struct mb8795_softc *sc, int *media, int nmedia, int defmedia)
     panic("mb8795_config: can't establish shutdownhook");
 
   rnd_attach_source(&sc->rnd_source, device_xname(sc->sc_dev),
-                    RND_TYPE_NET, 0);
+                    RND_TYPE_NET, RND_FLAG_DEFAULT);
 
 	DPRINTF(("%s: leaving mb8795_config()\n",device_xname(sc->sc_dev)));
 }

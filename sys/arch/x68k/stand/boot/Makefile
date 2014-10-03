@@ -19,10 +19,8 @@ BINMODE=	444
 STRIPFLAG=
 
 BFDNAME=	a.out-m68k-netbsd
-STRIP?=		/usr/bin/strip
-OBJCOPY?=	/usr/bin/objcopy
 
-SRCS=		srt0.S boot.c conf.c exec_image.S
+SRCS=		srt0.S boot.c conf.c switch.c exec_image.S
 S=		${.CURDIR}/../../../..
 M=		${.CURDIR}/../..
 COMMONDIR=	$M/stand/common

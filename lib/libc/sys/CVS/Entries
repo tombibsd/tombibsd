@@ -92,7 +92,7 @@
 /madvise.2/1.28/Sun Jul 20 13:58:22 2014/-kk/
 /makelintstub/1.25/Sun Feb 12 01:46:05 2012/-kk/
 /mincore.2/1.19/Thu May 13 10:20:58 2004/-kk/
-/minherit.2/1.19/Sun Jul 20 13:58:22 2014/-kk/
+/minherit.2/1.20/Fri Oct  3 09:25:13 2014/-kk/
 /mkdir.2/1.29/Thu Oct 24 10:28:53 2013/-kk/
 /mkfifo.2/1.27/Thu Oct 24 10:28:53 2013/-kk/
 /mknod.2/1.28/Thu Oct 24 10:28:53 2013/-kk/
@@ -145,7 +145,7 @@
 /sched.c/1.4/Sun Mar 18 02:04:39 2012/-kk/
 /select.2/1.41/Tue Dec 17 04:04:50 2013/-kk/
 /semctl.2/1.20/Mon Mar 22 19:30:55 2010/-kk/
-/semctl.c/1.15/Fri Jan 16 00:02:57 2009/-kk/
+/semctl.c/1.16/Fri Oct  3 09:25:13 2014/-kk/
 /semget.2/1.18/Sun Oct  8 08:22:34 2006/-kk/
 /semop.2/1.17/Mon Mar 22 19:30:55 2010/-kk/
 /send.2/1.31/Thu Oct 24 10:28:53 2013/-kk/

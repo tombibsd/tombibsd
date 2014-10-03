@@ -55,7 +55,7 @@ typedef struct dst_key {
 #define	dst_write_key		__dst_write_key
 
 /* 
- * DST Crypto API defintions 
+ * DST Crypto API definitions 
  */
 void     dst_init(void);
 int      dst_check_algorithm(const int);

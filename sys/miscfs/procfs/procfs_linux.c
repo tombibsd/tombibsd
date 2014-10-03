@@ -41,6 +41,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/param.h>
 #include <sys/systm.h>
 #include <sys/time.h>
+#include <sys/cpu.h>
 #include <sys/kernel.h>
 #include <sys/proc.h>
 #include <sys/vnode.h>

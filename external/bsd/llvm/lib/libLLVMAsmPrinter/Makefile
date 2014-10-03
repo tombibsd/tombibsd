@@ -17,10 +17,10 @@ SRCS+=	ARMException.cpp \
 	DwarfAccelTable.cpp \
 	DwarfCFIException.cpp \
 	DwarfDebug.cpp \
-	DwarfException.cpp \
 	DwarfFile.cpp \
 	DwarfStringPool.cpp \
 	DwarfUnit.cpp \
+	EHStreamer.cpp \
 	ErlangGCPrinter.cpp \
 	OcamlGCPrinter.cpp \
 	Win64Exception.cpp \

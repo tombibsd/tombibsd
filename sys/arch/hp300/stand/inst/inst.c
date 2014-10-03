@@ -760,18 +760,11 @@ resetsys(void)
 	__asm("stop #0x2700");
 }
 
-/*
- * XXX Should have a generic atoi for libkern/libsa.
- */
 int
 a2int(char *cp)
 {
-	int i = 0;
-
 	if (*cp == '\0')
-		return (-1);
+		return -1;
 
-	while (*cp != '\0')
-		i = i * 10 + *cp++ - '0';
-	return (i);
+	return atoi(cp);
 }

@@ -34,6 +34,7 @@
 ./rescue/echo					base-rescue-root
 ./rescue/ed					base-rescue-root
 ./rescue/egrep					base-rescue-root
+./rescue/ekermit				base-rescue-root
 ./rescue/ex					base-rescue-root
 ./rescue/expr					base-rescue-root
 ./rescue/fdisk					base-rescue-root

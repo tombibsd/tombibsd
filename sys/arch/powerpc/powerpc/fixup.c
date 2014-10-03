@@ -121,10 +121,8 @@ powerpc_fixup_stubs(uint32_t *start, uint32_t *end,
 			switch (i.i_any.i_opcd) {
 			case OPC_integer_31: {
 				const u_int rs = i.i_x.i_rs;
-#ifdef DIAGNOSTIC
 				const u_int ra = i.i_x.i_ra;
 				const u_int rb = i.i_x.i_rb;
-#endif
 				switch (i.i_x.i_xo) {
 				case OPC31_MFSPR: {
 #ifdef DIAGNOSTIC
@@ -142,6 +140,15 @@ powerpc_fixup_stubs(uint32_t *start, uint32_t *end,
 					KASSERT(spr == SPR_CTR);
 #endif
 					ctr = fixreg[rs];
+					break;
+				}
+				case OPC31_OR: {
+#ifdef DIAGNOSTIC
+					KASSERT(valid_mask & (1 << rs));
+					KASSERT(valid_mask & (1 << rb));
+#endif
+					fixreg[ra] = fixreg[rs] | fixreg[rb];
+					valid_mask |= 1 << ra;
 					break;
 				}
 				default:
@@ -176,7 +183,7 @@ powerpc_fixup_stubs(uint32_t *start, uint32_t *end,
 				break;
 			}
 			case OPC_STW: {
-				KASSERT(i.i_d.i_rs == r_lr && i.i_d.i_ra == 1);
+				KASSERT((i.i_d.i_rs == r_lr || i.i_d.i_rs == 31) && i.i_d.i_ra == 1);
 				break;
 			}
 			case OPC_STWU: {
@@ -193,6 +200,11 @@ powerpc_fixup_stubs(uint32_t *start, uint32_t *end,
 					    insnp + instr.i_i.i_li);
 				}
 				fixup.jfi_real = fixup_addr2offset(ctr);
+				break;
+			}
+			case OPC_RLWINM: {
+				// LLVM emits these for bool operands.
+				// Ignore them.
 				break;
 			}
 			default: {

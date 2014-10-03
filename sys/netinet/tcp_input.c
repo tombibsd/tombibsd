@@ -2879,7 +2879,7 @@ dodata:							/* XXX */
 	 * and arranging for acknowledgement of receipt if necessary.
 	 * This process logically involves adjusting tp->rcv_wnd as data
 	 * is presented to the user (this happens in tcp_usrreq.c,
-	 * case PRU_RCVD).  If a FIN has already been received on this
+	 * tcp_rcvd()).  If a FIN has already been received on this
 	 * connection then we just ignore the text.
 	 */
 	if ((tlen || (tiflags & TH_FIN)) &&

@@ -504,7 +504,7 @@ extern struct evcnt pmap_evcnt_idlezeroed_pages;
 #define	MFSRIN(va)	mfsrin(va)
 #define	MFTB()		mfrtcltbl()
 
-#if defined (PMAP_OEA) || defined (PMAP_OEA64_BRIDGE)
+#if defined(DDB) && !defined(PMAP_OEA64)
 static inline register_t
 mfsrin(vaddr_t va)
 {
@@ -512,7 +512,7 @@ mfsrin(vaddr_t va)
 	__asm volatile ("mfsrin %0,%1" : "=r"(sr) : "r"(va));
 	return sr;
 }
-#endif	/* PMAP_OEA*/
+#endif	/* DDB && !PMAP_OEA64 */
 
 #if defined (PMAP_OEA64_BRIDGE)
 extern void mfmsr64 (register64_t *result);

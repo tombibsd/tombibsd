@@ -595,20 +595,9 @@ hifn_init_pubrng(struct hifn_softc *sc)
 
 #ifdef __NetBSD__
 		rndsource_setcb(&sc->sc_rnd_source, hifn_rng_get, sc);
-		/*
-		 * XXX Careful!  The use of RND_FLAG_NO_ESTIMATE
-		 * XXX here is unobvious: we later feed raw bits
-		 * XXX into the "entropy pool" with rnd_add_data,
-		 * XXX explicitly supplying an entropy estimate.
-		 * XXX In this context, NO_ESTIMATE serves only
-		 * XXX to prevent rnd_add_data from trying to
-		 * XXX use the *time at which we added the data*
-		 * XXX as entropy, which is not a good idea since
-		 * XXX we add data periodically from a callout.
-		 */
 		rnd_attach_source(&sc->sc_rnd_source, device_xname(sc->sc_dv),
 				  RND_TYPE_RNG,
-				  RND_FLAG_NO_ESTIMATE|RND_FLAG_HASCB);
+				  RND_FLAG_COLLECT_VALUE|RND_FLAG_HASCB);
 #endif
 
 		if (hz >= 100)

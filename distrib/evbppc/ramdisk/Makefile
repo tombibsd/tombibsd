@@ -8,7 +8,7 @@ IMAGESIZE=	2880k
 MAKEFS_FLAGS=	-f 15
 
 WARNS=		1
-DBG=		-Os -mmultiple -mno-string -fno-pie -fno-pic
+DBG=		-Os
 
 CRUNCHBIN=	ramdiskbin
 CRUNCHGEN_FLAGS=-d "${DBG}"

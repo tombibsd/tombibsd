@@ -202,13 +202,13 @@ typedef uint32_t	pt_entry_t;	/* L2 table entry */
 #define	L2_TYPE_T	0x03		/* Tiny Page (not armv7) */
 #define	L2_TYPE_MASK	0x03		/* mask of type bits */
 
-	/*
-	 * This L2 Descriptor type is available on XScale processors
-	 * when using a Coarse L1 Descriptor.  The Extended Small
-	 * Descriptor has the same format as the XScale Tiny Descriptor,
-	 * but describes a 4K page, rather than a 1K page.
-	 * For V6 MMU, this is used when XP bit is cleared.
-	 */
+/*
+ * This L2 Descriptor type is available on XScale processors
+ * when using a Coarse L1 Descriptor.  The Extended Small
+ * Descriptor has the same format as the XScale Tiny Descriptor,
+ * but describes a 4K page, rather than a 1K page.
+ * For V6 MMU, this is used when XP bit is cleared.
+ */
 #define	L2_TYPE_XS	0x03		/* XScale/ARMv6 Extended Small Page */
 
 #define	L2_B		0x00000004	/* Bufferable page */
@@ -250,8 +250,8 @@ typedef uint32_t	pt_entry_t;	/* L2 table entry */
  */
 #define	AP_KR		0x00		/* kernel read */
 #define	AP_KRW		0x01		/* kernel read/write */
-#define	AP_KRWUR	0x02		/* kernel read/write usr read */
-#define	AP_KRWURW	0x03		/* kernel read/write usr read/write */
+#define	AP_KRWUR	0x02		/* kernel read/write user read */
+#define	AP_KRWURW	0x03		/* kernel read/write user read/write */
 
 /*
  * Note: These values assume the S (System) and the R (ROM) bits are clear and
@@ -269,9 +269,9 @@ typedef uint32_t	pt_entry_t;	/* L2 table entry */
  * Also used for ARMv6 with XP bit set.
  */
 #define	AP7_KR		0x21		/* kernel read */
-#define	AP7_KRUR	0x23		/* kernel read usr read */
+#define	AP7_KRUR	0x23		/* kernel read user read */
 #define	AP7_KRW		0x01		/* kernel read/write */
-#define	AP7_KRWURW	0x03		/* kernel read/write usr read/write */
+#define	AP7_KRWURW	0x03		/* kernel read/write user read/write */
 
 /*
  * Domain Types for the Domain Access Control Register.

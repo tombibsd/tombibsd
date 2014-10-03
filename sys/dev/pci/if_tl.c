@@ -470,7 +470,7 @@ tl_pci_attach(device_t parent, device_t self, void *aux)
 		aprint_error_dev(self, "couldn't establish power handler\n");
 
 	rnd_attach_source(&sc->rnd_source, device_xname(self),
-	    RND_TYPE_NET, 0);
+	    RND_TYPE_NET, RND_FLAG_DEFAULT);
 }
 
 static void

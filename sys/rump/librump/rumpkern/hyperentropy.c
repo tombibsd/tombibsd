@@ -59,11 +59,11 @@ rump_hyperentropy_init(void)
 	if (rump_threads) {
 		rndsource_setcb(&rndsrc, feedrandom, &rndsrc);
 		rnd_attach_source(&rndsrc, "rump_hyperent", RND_TYPE_VM,
-		    RND_FLAG_NO_ESTIMATE|RND_FLAG_HASCB);
+		    RND_FLAG_COLLECT_VALUE|RND_FLAG_HASCB);
 	} else {
 		/* without threads, just fill the pool */
 		rnd_attach_source(&rndsrc, "rump_hyperent", RND_TYPE_VM,
-		    RND_FLAG_NO_ESTIMATE);
+		    RND_FLAG_COLLECT_VALUE);
 		feedrandom(RND_POOLBITS/NBBY, NULL);
 	}
 }

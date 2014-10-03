@@ -47,7 +47,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/evcnt.h>
 
 /*
- * Priority related defintions.
+ * Priority related definitions.
  */
 #define	PRI_TS_COUNT	(NPRI_USER)
 #define	PRI_RT_COUNT	(PRI_COUNT - PRI_TS_COUNT)

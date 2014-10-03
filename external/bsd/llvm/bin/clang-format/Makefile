@@ -16,8 +16,7 @@ CLANG_LIBS+= \
 	clangSerialization \
 	clangDriver \
 	clangParse \
-	clangRewriteFrontend \
-	clangRewriteCore \
+	clangRewrite \
 	clangSema \
 	clangEdit \
 	clangAnalysis \

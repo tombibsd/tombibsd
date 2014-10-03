@@ -17,7 +17,7 @@ WARNS=		4
 
 SRCS+=	menu_defs.c msg_defs.c main.c install.c upgrade.c \
 	txtwalk.c run.c factor.c net.c disks.c disks_lfs.c util.c geom.c \
-	label.c target.c md.c sizemultname.c configmenu.c checkrc.c
+	label.c target.c md.c sizemultname.c configmenu.c checkrc.c partman.c
 
 SRCS+=	${MD_OPTIONS:MAOUT2ELF:S/AOUT2ELF/aout2elf.c/}
 SRCS+=	${MENUS_MD:Mmenus.mbr:S/menus.mbr/mbr.c/}
@@ -47,9 +47,16 @@ LDADD=		-lcurses -ltermlib -lutil
 UNIF_AWK=	${.CURDIR}/../../unif.awk
 MSG_XLAT_SH=	${.CURDIR}/../../msg_xlat.sh
 
+CATALOGDIR=	/usr/share/sysinst/catalog
 CPPFLAGS+=	-I. -I${.CURDIR}/../.. -I${.CURDIR} \
 		-DREL=\"${DISTRIBVER}\" -DMACH=\"${MACHINE}\" \
-		-DMACH_${MACHINE} -DARCH_${MACHINE_ARCH}
+		-DMACH_${MACHINE} -DARCH_${MACHINE_ARCH} \
+		${NODISKLABEL:D-DNO_DISKLABEL} \
+		-DCATALOG_DIR=\"${CATALOGDIR}\"
+
+.if (defined(DEBUG))
+CPPFLAGS+=-DDEBUG -g -O0
+.endif
 
 .if (!defined(SMALLPROG) || defined(SMALLPROG_INET6)) && (${USE_INET6} != "no")
 CPPFLAGS+=-DINET6
@@ -67,6 +74,7 @@ COPTS.mbr.c += -Wno-format-nonliteral
 COPTS.msg_defs.c += -Wno-format-nonliteral
 COPTS.bsddisklabel.c += -Wno-format-nonliteral
 COPTS.md.c += -Wno-format-nonliteral
+COPTS.partman.c += -Wno-format-nonliteral
 
 # Host to ftp from.  Default:
 #	"ftp.NetBSD.org"
@@ -155,6 +163,8 @@ sysinstmsgs.${LANG}: msg.mi.${LANG} ${MSG_MD:S/.${SYSINSTLANG}$/.${LANG}/} msgto
 	${HOST_SH} ${MSG_XLAT_SH} -f sysinstmsgs.fmtcnt > ${.TARGET}
 
 DPSRCS+=	sysinstmsgs.${LANG}
+# FILES+=		sysinstmsgs.${LANG}
+# FILESDIR_sysinstmsgs.${LANG}=	${CATALOGDIR}
 .endfor
 
 .include <bsd.prog.mk>

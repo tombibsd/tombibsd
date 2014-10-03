@@ -99,6 +99,7 @@ options 	NFS_BOOT_DHCP	# use NetBSD standard DHCP/NFS boot code
 
 # Compatibility options
 
+options		COMPAT_NETBSD32	# allow running arm (e.g. non-earm) binaries
 #options 	COMPAT_09	# NetBSD 0.9 compatibility.
 #options 	COMPAT_10	# NetBSD 1.0 compatibility.
 #options 	COMPAT_11	# NetBSD 1.1 compatibility.

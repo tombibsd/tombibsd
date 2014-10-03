@@ -55,8 +55,8 @@ MKUBOOTIMAGEARGS_GZ=    ${MKUBOOTIMAGEARGS} -C gz
 SYSTEM_LD_TAIL_EXTRA+=; \
 	echo ${OBJCOPY} -S -O binary $@ $@.bin; \
 	${OBJCOPY} -S -O binary $@ $@.bin; \
-	echo "${TOOL_GZIP} -nc $@.bin > $@.bin.gz"; \
-	${TOOL_GZIP} -nc $@.bin > $@.bin.gz; \
+	echo "${TOOL_GZIP_N} -c $@.bin > $@.bin.gz"; \
+	${TOOL_GZIP_N} -c $@.bin > $@.bin.gz; \
 	echo ${MKUBOOTIMAGE} ${MKUBOOTIMAGEARGS_GZ} $@.bin.gz $@.gz.ub; \
 	${MKUBOOTIMAGE} ${MKUBOOTIMAGEARGS_GZ} $@.bin.gz $@.gz.ub; \
 	echo ${MKUBOOTIMAGE} ${MKUBOOTIMAGEARGS_NONE} $@.bin $@.ub; \

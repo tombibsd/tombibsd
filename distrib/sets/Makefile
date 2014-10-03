@@ -16,7 +16,7 @@ all:
 .include "${NETBSDSRCDIR}/distrib/common/Makefile.distrib"
 
 COMPRESS_PROGRAM=${TOOL_GZIP}
-GZIP_FLAGS= -n
+GZIP_FLAGS= ${GZIP_N_FLAG}
 
 SETSENV=	DESTDIR=${DESTDIR:Q} \
 		MACHINE=${MACHINE:Q} \

@@ -1302,8 +1302,6 @@ static int eflash_write_at (struct eflash_softc *sc,
 /* Rest of code lifted with mods from the dev\ata\wd.c driver
  */
 
-/*	$NetBSD$ */
-
 /*
  * Copyright (c) 1998, 2001 Manuel Bouyer.  All rights reserved.
  *
@@ -1472,7 +1470,7 @@ eflashattach(struct eflash_softc *sc)
 	disk_attach(&sc->sc_dk);
 
 	rnd_attach_source(&sc->rnd_source, device_xname(sc->sc_dev),
-			  RND_TYPE_DISK, 0);
+			  RND_TYPE_DISK, RND_FLAG_DEFAULT);
 
 }
 

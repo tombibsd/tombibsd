@@ -32,6 +32,9 @@
 #ifndef _LINUX_MODULE_H_
 #define _LINUX_MODULE_H_
 
+#include <linux/export.h>
+#include <linux/moduleparam.h>
+
 #define	module_init(INIT)
 #define	module_exit(EXIT)
 

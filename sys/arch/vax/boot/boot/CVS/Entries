@@ -6,7 +6,7 @@
 /consio2.S/1.1/Sun Feb 24 01:04:24 2002/-kk/
 /ctu.c/1.8/Wed Mar 18 10:22:37 2009/-kk/
 /data.h/1.4/Sat Jul  1 05:55:34 2006/-kk/
-/devopen.c/1.16/Sat Mar 14 21:04:16 2009/-kk/
+/devopen.c/1.17/Fri Oct  3 09:25:54 2014/-kk/
 /hp.c/1.9/Wed Mar 18 16:00:15 2009/-kk/
 /if_de.c/1.8/Mon Oct 26 19:16:58 2009/-kk/
 /if_le.c/1.12/Mon Jan 12 11:32:45 2009/-kk/

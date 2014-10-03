@@ -1,3 +1,5 @@
+/*	$NetBSD$	*/
+
 /*
  * Copyright (C) 2008 Maarten Maathuis.
  * All Rights Reserved.
@@ -23,6 +25,11 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  */
+
+#include <sys/cdefs.h>
+__KERNEL_RCSID(0, "$NetBSD$");
+
+#include <linux/err.h>
 
 #include <drm/drmP.h>
 #include <drm/drm_crtc_helper.h>
@@ -82,7 +89,7 @@ calc(int blanks, int blanke, int total, int line)
 	return line;
 }
 
-int
+static int
 nouveau_display_scanoutpos_head(struct drm_crtc *crtc, int *vpos, int *hpos,
 				ktime_t *stime, ktime_t *etime)
 {
@@ -327,7 +334,7 @@ static const struct drm_mode_config_funcs nouveau_mode_config_funcs = {
 struct nouveau_drm_prop_enum_list {
 	u8 gen_mask;
 	int type;
-	char *name;
+	const char *name;
 };
 
 static struct nouveau_drm_prop_enum_list underscan[] = {

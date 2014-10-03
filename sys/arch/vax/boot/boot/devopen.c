@@ -43,7 +43,6 @@
 
 #include "vaxstand.h"
 
-int	atoi(char *);
 int nexaddr, csrbase;
 
 int

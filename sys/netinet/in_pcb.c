@@ -402,7 +402,7 @@ in_pcbbind_port(struct inpcb *inp, struct sockaddr_in *sin, kauth_cred_t cred)
 }
 
 int
-in_pcbbind(void *v, struct mbuf *nam)
+in_pcbbind(void *v, struct mbuf *nam, struct lwp *l)
 {
 	struct inpcb *inp = v;
 	struct sockaddr_in *sin = NULL; /* XXXGCC */
@@ -428,12 +428,12 @@ in_pcbbind(void *v, struct mbuf *nam)
 	}
 
 	/* Bind address. */
-	error = in_pcbbind_addr(inp, sin, curlwp->l_cred);
+	error = in_pcbbind_addr(inp, sin, l->l_cred);
 	if (error)
 		return (error);
 
 	/* Bind port. */
-	error = in_pcbbind_port(inp, sin, curlwp->l_cred);
+	error = in_pcbbind_port(inp, sin, l->l_cred);
 	if (error) {
 		inp->inp_laddr.s_addr = INADDR_ANY;
 
@@ -527,7 +527,7 @@ in_pcbconnect(void *v, struct mbuf *nam, struct lwp *l)
 		return (EADDRINUSE);
 	if (in_nullhost(inp->inp_laddr)) {
 		if (inp->inp_lport == 0) {
-			error = in_pcbbind(inp, NULL);
+			error = in_pcbbind(inp, NULL, l);
 			/*
 			 * This used to ignore the return value
 			 * completely, but we need to check for
@@ -593,19 +593,23 @@ in_pcbdetach(void *v)
 #if defined(IPSEC)
 	if (ipsec_enabled)
 		ipsec4_delete_pcbpolicy(inp);
-#endif /* IPSEC */
-	so->so_pcb = 0;
-	if (inp->inp_options)
-		(void)m_free(inp->inp_options);
-	rtcache_free(&inp->inp_route);
-	ip_freemoptions(inp->inp_moptions);
+#endif
+	so->so_pcb = NULL;
+
 	s = splnet();
 	in_pcbstate(inp, INP_ATTACHED);
 	LIST_REMOVE(&inp->inp_head, inph_lhash);
 	TAILQ_REMOVE(&inp->inp_table->inpt_queue, &inp->inp_head, inph_queue);
-	pool_put(&inpcb_pool, inp);
 	splx(s);
+
+	if (inp->inp_options) {
+		m_free(inp->inp_options);
+	}
+	rtcache_free(&inp->inp_route);
 	sofree(so);			/* drops the socket's lock */
+
+	ip_freemoptions(inp->inp_moptions);
+	pool_put(&inpcb_pool, inp);
 	mutex_enter(softnet_lock);	/* reacquire the softnet_lock */
 }
 

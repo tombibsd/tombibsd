@@ -324,8 +324,8 @@ nopages:
 				error = (*so->so_proto->pr_usrreqs->pr_sendoob)(so,
 				    top, NULL);
 			else
-				error = (*so->so_proto->pr_usrreqs->pr_generic)(so,
-				    PRU_SEND, top, NULL, NULL, l);
+				error = (*so->so_proto->pr_usrreqs->pr_send)(so,
+				    top, NULL, NULL, l);
 			if (dontroute)
 				so->so_options &= ~SO_DONTROUTE;
 			if (resid > 0)
@@ -635,8 +635,7 @@ kttcp_soreceive(struct socket *so, unsigned long long slen,
 			 * get it filled again.
 			 */
 			if ((pr->pr_flags & PR_WANTRCVD) && so->so_pcb) {
-				(*pr->pr_usrreqs->pr_generic)(so, PRU_RCVD, NULL,
-				    (struct mbuf *)(long)flags, NULL, NULL);
+				(*pr->pr_usrreqs->pr_rcvd)(so, flags, l);
 			}
 			SBLASTRECORDCHK(&so->so_rcv,
 			    "kttcp_soreceive sbwait 2");
@@ -675,8 +674,7 @@ kttcp_soreceive(struct socket *so, unsigned long long slen,
 		SBLASTRECORDCHK(&so->so_rcv, "kttcp_soreceive 4");
 		SBLASTMBUFCHK(&so->so_rcv, "kttcp_soreceive 4");
 		if (pr->pr_flags & PR_WANTRCVD && so->so_pcb) {
-			(*pr->pr_usrreqs->pr_generic)(so, PRU_RCVD, NULL,
-			    (struct mbuf *)(long)flags, NULL, NULL);
+			(*pr->pr_usrreqs->pr_rcvd)(so, flags, l);
 		}
 	}
 	if (orig_resid == resid && orig_resid &&

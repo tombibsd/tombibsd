@@ -32,4 +32,11 @@
 #ifndef _LINUX_PLATFORM_DEVICE_H_
 #define _LINUX_PLATFORM_DEVICE_H_
 
+#include <sys/device.h>
+
+struct platform_device {
+	struct device	dev;	/* XXX DON'T BELIEVE ME */
+	uint64_t	id;
+};
+
 #endif  /* _LINUX_PLATFORM_DEVICE_H_ */

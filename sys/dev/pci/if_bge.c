@@ -2369,6 +2369,15 @@ bge_chipinit(struct bge_softc *sc)
 				dma_rw_ctl |= BGE_PCIDMARWCTL_ONEDMA_ATONCE_GLOBAL;
 			else
 				dma_rw_ctl |= BGE_PCIDMARWCTL_ONEDMA_ATONCE_LOCAL;
+		} else if (BGE_ASICREV(sc->bge_chipid) == BGE_ASICREV_BCM5703) {
+			/*
+			 * In the BCM5703, the DMA read watermark should
+			 * be set to less than or equal to the maximum
+			 * memory read byte count of the PCI-X command
+			 * register.
+			 */
+			dma_rw_ctl |= BGE_PCIDMARWCTL_RD_WAT_SHIFT(4) |
+			    BGE_PCIDMARWCTL_WR_WAT_SHIFT(3);
 		} else if (BGE_ASICREV(sc->bge_chipid) == BGE_ASICREV_BCM5704) {
 			/* 1536 bytes for read, 384 bytes for write. */
 			dma_rw_ctl |= BGE_PCIDMARWCTL_RD_WAT_SHIFT(7) |
@@ -3989,7 +3998,7 @@ bge_attach(device_t parent, device_t self, void *aux)
 	ether_ifattach(ifp, eaddr);
 	ether_set_ifflags_cb(&sc->ethercom, bge_ifflags_cb);
 	rnd_attach_source(&sc->rnd_source, device_xname(sc->bge_dev),
-		RND_TYPE_NET, 0);
+		RND_TYPE_NET, RND_FLAG_DEFAULT);
 #ifdef BGE_EVENT_COUNTERS
 	/*
 	 * Attach event counters.

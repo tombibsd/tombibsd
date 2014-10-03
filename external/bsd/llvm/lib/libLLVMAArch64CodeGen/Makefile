@@ -8,7 +8,8 @@ LIB=	LLVMAArch64CodeGen
 
 CPPFLAGS+=	-I${LLVM_SRCDIR}/lib/Target/AArch64
 
-SRCS+=	AArch64AddressTypePromotion.cpp \
+SRCS+=	AArch64A57FPLoadBalancing.cpp \
+	AArch64AddressTypePromotion.cpp \
 	AArch64AdvSIMDScalarPass.cpp \
 	AArch64AsmPrinter.cpp \
 	AArch64BranchRelaxation.cpp \

@@ -32,7 +32,7 @@
 /arc-annotate.m/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 /arc-complete.m/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 /asm-attribute.c/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
-/attributes-cuda.cu/1.1.1.1/Fri May 30 18:14:48 2014/-kk/
+/attributes-cuda.cu/1.1.1.2/Fri Oct  3 09:22:35 2014/-kk/
 /attributes.c/1.1.1.2/Tue Jun  3 03:04:54 2014/-kk/
 /availability.c/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 /blocks.c/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
@@ -159,6 +159,7 @@
 /index-many-logical-ops.c/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 /index-module-with-vfs.m/1.1.1.1/Fri May 30 18:14:48 2014/-kk/
 /index-module.m/1.1.1.2/Tue Jun  3 03:04:54 2014/-kk/
+/index-pch-objc.m/1.1.1.1/Sun Aug 10 17:08:37 2014/-kk/
 /index-pch-with-module.m/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 /index-pch.cpp/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 /index-refs.cpp/1.1.1.2/Fri Mar 14 04:23:19 2014/-kk/
@@ -211,6 +212,7 @@
 /preamble_macro_template.cpp/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 /print-bitwidth.c/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 /print-display-names.cpp/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
+/print-mangled-name.cpp/1.1.1.1/Sun Aug 10 17:08:37 2014/-kk/
 /print-type-cxx11.cpp/1.1.1.2/Tue Jan 14 16:01:49 2014/-kk/
 /print-type-size.cpp/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 /print-type.c/1.1.1.2/Tue Jun  3 03:04:54 2014/-kk/

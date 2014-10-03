@@ -27,6 +27,7 @@ SRCS+=	ASTConsumers.cpp \
 	LangStandards.cpp \
 	LayoutOverrideSource.cpp \
 	LogDiagnosticPrinter.cpp \
+	ModuleDependencyCollector.cpp \
 	MultiplexConsumer.cpp \
 	PrintPreprocessedOutput.cpp \
 	SerializedDiagnosticPrinter.cpp \

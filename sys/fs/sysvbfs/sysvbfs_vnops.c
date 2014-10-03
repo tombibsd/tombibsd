@@ -450,7 +450,7 @@ sysvbfs_read(void *arg)
 		DPRINTF("%s: read %ldbyte\n", __func__, sz);
 	}
 
-	return  sysvbfs_update(v, NULL, NULL, UPDATE_WAIT);
+	return sysvbfs_update(v, NULL, NULL, UPDATE_WAIT);
 }
 
 int

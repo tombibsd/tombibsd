@@ -107,9 +107,9 @@ int
 md_post_newfs(void)
 {
 	/* boot blocks ... */
-	msg_display(MSG_dobootblks, diskdev);
+	msg_display(MSG_dobootblks, pm->diskdev);
 	return run_program(RUN_DISPLAY,
-	    "/usr/mdec/installboot -v /usr/mdec/xxboot /dev/r%sa", diskdev);
+	    "/usr/mdec/installboot -v /usr/mdec/xxboot /dev/r%sa", pm->diskdev);
 }
 
 int

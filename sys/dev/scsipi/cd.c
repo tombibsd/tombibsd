@@ -303,7 +303,7 @@ cdattach(device_t parent, device_t self, void *aux)
 	aprint_naive("\n");
 
 	rnd_attach_source(&cd->rnd_source, device_xname(cd->sc_dev),
-			  RND_TYPE_DISK, 0);
+			  RND_TYPE_DISK, RND_FLAG_DEFAULT);
 
 	if (!pmf_device_register(self, NULL, NULL))
 		aprint_error_dev(self, "couldn't establish power handler\n");

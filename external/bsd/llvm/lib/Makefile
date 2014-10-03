@@ -87,6 +87,7 @@ SUBDIR+= \
 SUBDIR+= \
 	libLLVMExecutionEngine \
 	libLLVMJIT \
+	libLLVMMCAnalysis \
 	libLLVMMCJIT \
 	libLLVMRuntimeDyld
 .endif
@@ -115,11 +116,11 @@ SUBDIR+= \
 	libclangDriver \
 	libclangEdit \
 	libclangFrontend \
+	libclangFrontendRewrite \
 	libclangFrontendTool \
 	libclangLex \
 	libclangParse \
-	libclangRewriteFrontend \
-	libclangRewriteCore \
+	libclangRewrite \
 	libclangSema \
 	libclangSerialization \
 	libclangStaticAnalyzerCheckers \
@@ -190,10 +191,12 @@ SUBDIR+= \
 	liblldbPluginABIMacOSX_arm \
 	liblldbPluginABIMacOSX_arm64 \
 	liblldbPluginABIMacOSX_i386 \
+	liblldbPluginABISysV_hexagon \
 	liblldbPluginABISysV_x86_64 \
 	liblldbPluginAppleObjCRuntime \
 	liblldbPluginCXXItaniumABI \
 	liblldbPluginDisassemblerLLVM \
+	liblldbPluginDynamicLoaderHexagonDYLD \
 	liblldbPluginDynamicLoaderMacOSXDYLD \
 	liblldbPluginDynamicLoaderPosixDYLD \
 	liblldbPluginDynamicLoaderStatic \
@@ -208,6 +211,7 @@ SUBDIR+= \
 	liblldbPluginObjectFilePECOFF \
 	liblldbPluginPlatformNetBSD \
 	liblldbPluginPlatformGDB \
+	liblldbPluginPlatformKalimba \
 	liblldbPluginPlatformLinux \
 	liblldbPluginPlatformMacOSX \
 	liblldbPluginPlatformPOSIX \

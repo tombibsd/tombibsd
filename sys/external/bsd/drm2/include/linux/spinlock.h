@@ -104,4 +104,19 @@ spin_lock_destroy(spinlock_t *spinlock)
 #define	assert_spin_locked(spinlock)	\
 	KASSERT(mutex_owned(&(spinlock)->sl_lock))
 
+/*
+ * Linux rwlocks are reader/writer spin locks.  We implement them as
+ * normal spin locks without reader/writer semantics for expedience.
+ * If that turns out to not work, adapting to reader/writer semantics
+ * shouldn't be too hard.
+ */
+
+#define	rwlock_t		spinlock_t
+#define	rwlock_init		spin_lock_init
+#define	rwlock_destroy		spin_lock_destroy
+#define	write_lock_irq		spin_lock_irq
+#define	write_unlock_irq	spin_unlock_irq
+#define	read_lock		spin_lock
+#define	read_unlock		spin_unlock
+
 #endif  /* _LINUX_SPINLOCK_H_ */

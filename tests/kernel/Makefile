@@ -14,6 +14,7 @@ TESTS_C+=	t_mqueue
 TESTS_C+=	t_sysv
 TESTS_C+=	t_subr_prf
 TESTS_C+=	t_kauth_pr_47598
+TESTS_C+=	t_sysctl
 
 TESTS_SH=	t_umount
 TESTS_SH+=	t_umountstress
@@ -49,6 +50,7 @@ CPPFLAGS.subr_extent.c=	-D_EXTENT_TESTING -D__POOL_EXPOSE
 
 t_subr_prf.c: gen_t_subr_prf ${NETBSDSRCDIR}/sys/kern/subr_prf.c
 	${HOST_SH} ${.ALLSRC} ${.TARGET}
+CPPFLAGS.t_subr_prf.c=	-Wno-pointer-sign	# XXX platform vs kernel SHA2
 
 CLEANFILES+=	t_subr_prf.c
 

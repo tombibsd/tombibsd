@@ -525,7 +525,7 @@ module_load(const char *kernel_path)
 		if (size < bm->bm_len)
 			printf("WARNING: couldn't load");
 		else {
-			snprintf(bi->kmod, sizeof(bi->kmod), bm->bm_kmod);
+			snprintf(bi->kmod, sizeof(bi->kmod), "%s", bm->bm_kmod);
 			bi->type = BI_MODULE_ELF;
 			bi->len = size;
 			bi->base = kmodloadp;

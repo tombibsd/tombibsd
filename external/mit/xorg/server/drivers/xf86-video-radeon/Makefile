@@ -18,10 +18,9 @@ CPPFLAGS+=	${X11FLAGS.DRI}
 
 # XXX
 .if ${MACHINE_ARCH} == "i386" || ${MACHINE_ARCH} == "x86_64"
-.if 0
 SRCS.KMS=	radeon_dri2.c radeon_kms.c drmmode_display.c radeon_vbo.c
 CPPFLAGS+=	-DXF86DRM_MODE
-.endif
+LIBDPLIBS+=	drm_radeon ${.CURDIR}/../../../lib/libdrm_radeon
 .endif
 
 SRCS.EXA=	radeon_exa.c r600_exa.c r6xx_accel.c \

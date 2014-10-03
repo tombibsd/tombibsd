@@ -201,7 +201,7 @@ sysmon_power_init(void)
 	selinit(&sysmon_power_event_queue_selinfo);
 
 	rnd_attach_source(&sysmon_rndsource, "system-power",
-			  RND_TYPE_POWER, 0);
+			  RND_TYPE_POWER, RND_FLAG_DEFAULT);
 
 }
 

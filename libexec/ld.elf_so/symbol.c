@@ -101,7 +101,7 @@ _rtld_is_exported(const Elf_Sym *def)
 		(fptr_t)___tls_get_addr,
 #endif
 #endif
-#ifdef __ARM_EABI__
+#if defined(__ARM_EABI__) && !defined(__ARM_DWARF_EH__)
 		(fptr_t)__gnu_Unwind_Find_exidx,	/* for gcc EHABI */
 #endif
 		NULL

@@ -103,7 +103,7 @@ mpls_accept(struct socket *so, struct mbuf *nam)
 }
 
 static int
-mpls_bind(struct socket *so, struct mbuf *nam)
+mpls_bind(struct socket *so, struct mbuf *nam, struct lwp *l)
 {
 	KASSERT(solocked(so));
 
@@ -111,7 +111,7 @@ mpls_bind(struct socket *so, struct mbuf *nam)
 }
 
 static int
-mpls_listen(struct socket *so)
+mpls_listen(struct socket *so, struct lwp *l)
 {
 	KASSERT(solocked(so));
 
@@ -119,7 +119,15 @@ mpls_listen(struct socket *so)
 }
 
 static int
-mpls_connect(struct socket *so, struct mbuf *nam)
+mpls_connect(struct socket *so, struct mbuf *nam, struct lwp *l)
+{
+	KASSERT(solocked(so));
+
+	return EOPNOTSUPP;
+}
+
+static int
+mpls_connect2(struct socket *so, struct socket *so2)
 {
 	KASSERT(solocked(so));
 
@@ -181,7 +189,24 @@ mpls_sockaddr(struct socket *so, struct mbuf *nam)
 }
 
 static int
+mpls_rcvd(struct socket *so, int flags, struct lwp *l)
+{
+	KASSERT(solocked(so));
+
+	return EOPNOTSUPP;
+}
+
+static int
 mpls_recvoob(struct socket *so, struct mbuf *m, int flags)
+{
+	KASSERT(solocked(so));
+
+	return EOPNOTSUPP;
+}
+
+static int
+mpls_send(struct socket *so, struct mbuf *m, struct mbuf *nam,
+    struct mbuf *control, struct lwp *l)
 {
 	KASSERT(solocked(so));
 
@@ -197,16 +222,23 @@ mpls_sendoob(struct socket *so, struct mbuf *m, struct mbuf *control)
 }
 
 static int
+mpls_purgeif(struct socket *so, struct ifnet *ifp)
+{
+
+	return EOPNOTSUPP;
+}
+
+static int
 mpls_usrreq(struct socket *so, int req, struct mbuf *m,
     struct mbuf *nam, struct mbuf *control, struct lwp *l)
 {
-
 	KASSERT(req != PRU_ATTACH);
 	KASSERT(req != PRU_DETACH);
 	KASSERT(req != PRU_ACCEPT);
 	KASSERT(req != PRU_BIND);
 	KASSERT(req != PRU_LISTEN);
 	KASSERT(req != PRU_CONNECT);
+	KASSERT(req != PRU_CONNECT2);
 	KASSERT(req != PRU_DISCONNECT);
 	KASSERT(req != PRU_SHUTDOWN);
 	KASSERT(req != PRU_ABORT);
@@ -214,8 +246,11 @@ mpls_usrreq(struct socket *so, int req, struct mbuf *m,
 	KASSERT(req != PRU_SENSE);
 	KASSERT(req != PRU_PEERADDR);
 	KASSERT(req != PRU_SOCKADDR);
+	KASSERT(req != PRU_RCVD);
 	KASSERT(req != PRU_RCVOOB);
+	KASSERT(req != PRU_SEND);
 	KASSERT(req != PRU_SENDOOB);
+	KASSERT(req != PRU_PURGEIF);
 
 	return EOPNOTSUPP;
 }
@@ -308,6 +343,7 @@ PR_WRAP_USRREQS(mpls)
 #define	mpls_bind	mpls_bind_wrapper
 #define	mpls_listen	mpls_listen_wrapper
 #define	mpls_connect	mpls_connect_wrapper
+#define	mpls_connect2	mpls_connect2_wrapper
 #define	mpls_disconnect	mpls_disconnect_wrapper
 #define	mpls_shutdown	mpls_shutdown_wrapper
 #define	mpls_abort	mpls_abort_wrapper
@@ -315,8 +351,11 @@ PR_WRAP_USRREQS(mpls)
 #define	mpls_stat	mpls_stat_wrapper
 #define	mpls_peeraddr	mpls_peeraddr_wrapper
 #define	mpls_sockaddr	mpls_sockaddr_wrapper
+#define	mpls_rcvd	mpls_rcvd_wrapper
 #define	mpls_recvoob	mpls_recvoob_wrapper
+#define	mpls_send	mpls_send_wrapper
 #define	mpls_sendoob	mpls_sendoob_wrapper
+#define	mpls_purgeif	mpls_purgeif_wrapper
 #define	mpls_usrreq	mpls_usrreq_wrapper
 
 static const struct pr_usrreqs mpls_usrreqs = {
@@ -326,6 +365,7 @@ static const struct pr_usrreqs mpls_usrreqs = {
 	.pr_bind	= mpls_bind,
 	.pr_listen	= mpls_listen,
 	.pr_connect	= mpls_connect,
+	.pr_connect2	= mpls_connect2,
 	.pr_disconnect	= mpls_disconnect,
 	.pr_shutdown	= mpls_shutdown,
 	.pr_abort	= mpls_abort,
@@ -333,8 +373,11 @@ static const struct pr_usrreqs mpls_usrreqs = {
 	.pr_stat	= mpls_stat,
 	.pr_peeraddr	= mpls_peeraddr,
 	.pr_sockaddr	= mpls_sockaddr,
+	.pr_rcvd	= mpls_rcvd,
 	.pr_recvoob	= mpls_recvoob,
+	.pr_send	= mpls_send,
 	.pr_sendoob	= mpls_sendoob,
+	.pr_purgeif	= mpls_purgeif,
 	.pr_generic	= mpls_usrreq,
 };
 

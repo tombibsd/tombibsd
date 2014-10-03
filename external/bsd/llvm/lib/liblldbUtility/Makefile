@@ -14,6 +14,7 @@ SRCS+=	ARM_DWARF_Registers.cpp \
 	SharingPtr.cpp \
 	StringExtractor.cpp \
 	StringExtractorGDBRemote.cpp \
+	StringLexer.cpp \
 	TimeSpecTimeout.cpp
 
 .if defined(HOSTLIB)

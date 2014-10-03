@@ -387,7 +387,7 @@ ae_attach(device_t parent, device_t self, void *aux)
 	ether_set_ifflags_cb(&sc->sc_ethercom, ae_ifflags_cb);
 
 	rnd_attach_source(&sc->sc_rnd_source, device_xname(sc->sc_dev),
-	    RND_TYPE_NET, 0);
+	    RND_TYPE_NET, RND_FLAG_DEFAULT);
 
 	/*
 	 * Make sure the interface is shutdown during reboot.

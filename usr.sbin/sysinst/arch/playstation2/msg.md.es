@@ -42,6 +42,10 @@ message md_hello
 {
 }
 
+message md_may_remove_boot_medium
+{Si ha iniciado desde disquette, ahora debería retirar el disco.
+}
+
 message dobad144
 {Instalando la tabla de bloques malos ...
 }

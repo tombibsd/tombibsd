@@ -42,6 +42,10 @@ message md_hello
 {
 }
 
+message md_may_remove_boot_medium
+{Si vous avez démarré sur une disquette, vous pouvez maintenant la retirer.
+}
+
 message dobad144
 {Installation de la table des blocs défectueux ...
 }

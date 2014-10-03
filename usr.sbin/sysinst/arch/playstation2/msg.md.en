@@ -42,6 +42,10 @@ message md_hello
 {
 }
 
+message md_may_remove_boot_medium
+{If you booted from a floppy, you may now remove the disk.
+}
+
 message dobad144
 {Installing the bad block table ...
 }

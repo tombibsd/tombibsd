@@ -249,7 +249,7 @@ xi_attach(struct xi_softc *sc, u_int8_t *myea)
 	ifmedia_set(&sc->sc_mii.mii_media, IFM_ETHER | IFM_AUTO);
 
 	rnd_attach_source(&sc->sc_rnd_source, device_xname(sc->sc_dev),
-			  RND_TYPE_NET, 0);
+			  RND_TYPE_NET, RND_FLAG_DEFAULT);
 }
 
 int

@@ -233,6 +233,11 @@ __strerror_r(int e, char *s, size_t l)
 #  define QUANTUM_2POW_MIN	4
 #  define SIZEOF_PTR_2POW	3
 #endif
+#ifdef __aarch64__
+#  define QUANTUM_2POW_MIN	4
+#  define SIZEOF_PTR_2POW	3
+#  define NO_TLS
+#endif
 #ifdef __alpha__
 #  define QUANTUM_2POW_MIN	4
 #  define SIZEOF_PTR_2POW	3

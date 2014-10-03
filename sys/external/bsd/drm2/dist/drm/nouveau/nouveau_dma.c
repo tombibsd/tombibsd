@@ -1,3 +1,5 @@
+/*	$NetBSD$	*/
+
 /*
  * Copyright (C) 2007 Ben Skeggs.
  * All Rights Reserved.
@@ -24,10 +26,18 @@
  *
  */
 
+#include <sys/cdefs.h>
+__KERNEL_RCSID(0, "$NetBSD$");
+
 #include <core/client.h>
 
 #include "nouveau_drm.h"
 #include "nouveau_dma.h"
+
+#ifdef __NetBSD__
+#  define	__iomem
+#  define	__force
+#endif
 
 void
 OUT_RINGp(struct nouveau_channel *chan, const void *data, unsigned nr_dwords)
@@ -41,6 +51,11 @@ OUT_RINGp(struct nouveau_channel *chan, const void *data, unsigned nr_dwords)
 		memcpy(mem, data, nr_dwords * 4);
 	chan->dma.cur += nr_dwords;
 }
+
+#ifdef __NetBSD__
+#  undef	__force
+#  undef	__iomem
+#endif
 
 /* Fetch and adjust GPU GET pointer
  *

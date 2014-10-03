@@ -51,9 +51,10 @@ static int sockaddr_dl_cmp(const struct sockaddr *, const struct sockaddr *);
 static int link_attach(struct socket *, int);
 static void link_detach(struct socket *);
 static int link_accept(struct socket *, struct mbuf *);
-static int link_bind(struct socket *, struct mbuf *);
-static int link_listen(struct socket *);
-static int link_connect(struct socket *, struct mbuf *);
+static int link_bind(struct socket *, struct mbuf *, struct lwp *);
+static int link_listen(struct socket *, struct lwp *);
+static int link_connect(struct socket *, struct mbuf *, struct lwp *);
+static int link_connect2(struct socket *, struct socket *);
 static int link_disconnect(struct socket *);
 static int link_shutdown(struct socket *);
 static int link_abort(struct socket *);
@@ -61,8 +62,12 @@ static int link_ioctl(struct socket *, u_long, void *, struct ifnet *);
 static int link_stat(struct socket *, struct stat *);
 static int link_peeraddr(struct socket *, struct mbuf *);
 static int link_sockaddr(struct socket *, struct mbuf *);
+static int link_rcvd(struct socket *, int, struct lwp *);
 static int link_recvoob(struct socket *, struct mbuf *, int);
+static int link_send(struct socket *, struct mbuf *, struct mbuf *,
+    struct mbuf *, struct lwp *);
 static int link_sendoob(struct socket *, struct mbuf *, struct mbuf *);
+static int link_purgeif(struct socket *, struct ifnet *);
 static int link_usrreq(struct socket *, int, struct mbuf *, struct mbuf *,
     struct mbuf *, struct lwp *);
 static void link_init(void);
@@ -80,6 +85,7 @@ static const struct pr_usrreqs link_usrreqs = {
 	.pr_bind	= link_bind,
 	.pr_listen	= link_listen,
 	.pr_connect	= link_connect,
+	.pr_connect2	= link_connect2,
 	.pr_disconnect	= link_disconnect,
 	.pr_shutdown	= link_shutdown,
 	.pr_abort	= link_abort,
@@ -87,8 +93,11 @@ static const struct pr_usrreqs link_usrreqs = {
 	.pr_stat	= link_stat,
 	.pr_peeraddr	= link_peeraddr,
 	.pr_sockaddr	= link_sockaddr,
+	.pr_rcvd	= link_rcvd,
 	.pr_recvoob	= link_recvoob,
+	.pr_send	= link_send,
 	.pr_sendoob	= link_sendoob,
+	.pr_purgeif	= link_purgeif,
 	.pr_generic	= link_usrreq,
 };
 
@@ -265,7 +274,7 @@ link_accept(struct socket *so, struct mbuf *nam)
 }
 
 static int
-link_bind(struct socket *so, struct mbuf *nam)
+link_bind(struct socket *so, struct mbuf *nam, struct lwp *l)
 {
 	KASSERT(solocked(so));
 
@@ -273,7 +282,7 @@ link_bind(struct socket *so, struct mbuf *nam)
 }
 
 static int
-link_listen(struct socket *so)
+link_listen(struct socket *so, struct lwp *l)
 {
 	KASSERT(solocked(so));
 
@@ -281,7 +290,15 @@ link_listen(struct socket *so)
 }
 
 static int
-link_connect(struct socket *so, struct mbuf *nam)
+link_connect(struct socket *so, struct mbuf *nam, struct lwp *l)
+{
+ 	KASSERT(solocked(so));
+
+	return EOPNOTSUPP;
+}
+
+static int
+link_connect2(struct socket *so, struct socket *so2)
 {
  	KASSERT(solocked(so));
 
@@ -343,7 +360,24 @@ link_sockaddr(struct socket *so, struct mbuf *nam)
 }
 
 static int
+link_rcvd(struct socket *so, int flags, struct lwp *l)
+{
+	KASSERT(solocked(so));
+
+	return EOPNOTSUPP;
+}
+
+static int
 link_recvoob(struct socket *so, struct mbuf *m, int flags)
+{
+	KASSERT(solocked(so));
+
+	return EOPNOTSUPP;
+}
+
+static int
+link_send(struct socket *so, struct mbuf *m, struct mbuf *nam,
+    struct mbuf *control, struct lwp *l)
 {
 	KASSERT(solocked(so));
 
@@ -359,6 +393,13 @@ link_sendoob(struct socket *so, struct mbuf *m, struct mbuf *control)
 }
 
 static int
+link_purgeif(struct socket *so, struct ifnet *ifp)
+{
+
+	return EOPNOTSUPP;
+}
+
+static int
 link_usrreq(struct socket *so, int req, struct mbuf *m, struct mbuf *nam,
 	struct mbuf *control, struct lwp *l)
 {
@@ -368,6 +409,7 @@ link_usrreq(struct socket *so, int req, struct mbuf *m, struct mbuf *nam,
 	KASSERT(req != PRU_BIND);
 	KASSERT(req != PRU_LISTEN);
 	KASSERT(req != PRU_CONNECT);
+	KASSERT(req != PRU_CONNECT2);
 	KASSERT(req != PRU_DISCONNECT);
 	KASSERT(req != PRU_SHUTDOWN);
 	KASSERT(req != PRU_ABORT);
@@ -375,8 +417,11 @@ link_usrreq(struct socket *so, int req, struct mbuf *m, struct mbuf *nam,
 	KASSERT(req != PRU_SENSE);
 	KASSERT(req != PRU_PEERADDR);
 	KASSERT(req != PRU_SOCKADDR);
+	KASSERT(req != PRU_RCVD);
 	KASSERT(req != PRU_RCVOOB);
+	KASSERT(req != PRU_SEND);
 	KASSERT(req != PRU_SENDOOB);
+	KASSERT(req != PRU_PURGEIF);
 
 	return EOPNOTSUPP;
 }

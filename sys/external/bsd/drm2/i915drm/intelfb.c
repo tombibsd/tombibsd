@@ -90,6 +90,12 @@ static int	intelfb_genfb_ioctl(void *, void *, unsigned long, void *,
 static paddr_t	intelfb_genfb_mmap(void *, void *, off_t, int);
 static int	intelfb_genfb_enable_polling(void *);
 static int	intelfb_genfb_disable_polling(void *);
+static bool	intelfb_genfb_shutdown(device_t, int);
+static bool	intelfb_genfb_setmode(struct genfb_softc *, int);
+
+static const struct genfb_mode_callback intelfb_genfb_mode_callback = {
+	.gmc_setmode = intelfb_genfb_setmode,
+};
 
 CFATTACH_DECL_NEW(intelfb, sizeof(struct intelfb_softc),
     intelfb_match, intelfb_attach, intelfb_detach, NULL);
@@ -192,16 +198,20 @@ intelfb_setconfig_task(struct i915drmkms_task *task)
 		    0, sc->sc_ifa.ifa_fb_size);
 
 	/* XXX Ugh...  Pass these parameters some other way!  */
-	prop_dictionary_set_uint32(dict, "width", sizes->fb_width);
-	prop_dictionary_set_uint32(dict, "height", sizes->fb_height);
+	prop_dictionary_set_uint32(dict, "width", sizes->surface_width);
+	prop_dictionary_set_uint32(dict, "height", sizes->surface_height);
 	prop_dictionary_set_uint8(dict, "depth", sizes->surface_bpp);
 	prop_dictionary_set_uint16(dict, "linebytes",
-	    roundup2((sizes->fb_width * howmany(sizes->surface_bpp, 8)), 64));
+	    roundup2((sizes->surface_width * howmany(sizes->surface_bpp, 8)),
+		64));
 	prop_dictionary_set_uint32(dict, "address", 0); /* XXX >32-bit */
 	CTASSERT(sizeof(uintptr_t) <= sizeof(uint64_t));
 	prop_dictionary_set_uint64(dict, "virtual_address",
 	    (uint64_t)(uintptr_t)bus_space_vaddr(sc->sc_ifa.ifa_fb_bst,
 		sc->sc_fb_bsh));
+
+	prop_dictionary_set_uint64(dict, "mode_callback",
+	    (uint64_t)(uintptr_t)&intelfb_genfb_mode_callback);
 
 	/* XXX Whattakludge!  */
 #if NVGA > 0
@@ -235,7 +245,8 @@ intelfb_setconfig_task(struct i915drmkms_task *task)
 	}
 	sc->sc_attached = true;
 
-	drm_fb_helper_set_config(sc->sc_ifa.ifa_fb_helper);
+	pmf_device_register1(sc->sc_dev, NULL, NULL,
+	    intelfb_genfb_shutdown);
 
 	/* Success!  */
 	sc->sc_scheduled = false;
@@ -409,4 +420,23 @@ intelfb_genfb_disable_polling(void *cookie)
 	    struct intelfb_softc, sc_genfb);
 
 	return drm_fb_helper_debug_leave_fb(sc->sc_ifa.ifa_fb_helper);
+}
+
+static bool
+intelfb_genfb_shutdown(device_t self, int flags)
+{
+	genfb_enable_polling(self);
+	return true;
+}
+
+static bool
+intelfb_genfb_setmode(struct genfb_softc *genfb, int mode)
+{
+	struct intelfb_softc *sc = (struct intelfb_softc *)genfb;
+
+	if (mode == WSDISPLAYIO_MODE_EMUL) {
+		drm_fb_helper_set_config(sc->sc_ifa.ifa_fb_helper);
+	}
+
+	return true;
 }

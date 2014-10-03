@@ -566,6 +566,7 @@ shmif_start(struct ifnet *ifp)
 
 		m_freem(m0);
 		wrote = true;
+		ifp->if_opackets++;
 
 		DPRINTF(("shmif_start: send %d bytes at off %d\n",
 		    pktsize, busmem->shm_last));
@@ -755,6 +756,7 @@ shmif_rcv(void *arg)
 		}
 
 		if (passup) {
+			ifp->if_ipackets++;
 			KERNEL_LOCK(1, NULL);
 			bpf_mtap(ifp, m);
 			ifp->if_input(ifp, m);

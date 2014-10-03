@@ -261,7 +261,7 @@ sco_listen_pcb(struct sco_pcb *pcb)
 }
 
 /*
- * sco_send(pcb, mbuf)
+ * sco_send_pcb(pcb, mbuf)
  *
  *	Send data on SCO pcb.
  *
@@ -271,7 +271,7 @@ sco_listen_pcb(struct sco_pcb *pcb)
  * we can drop a record from the socket buffer.
  */
 int
-sco_send(struct sco_pcb *pcb, struct mbuf *m)
+sco_send_pcb(struct sco_pcb *pcb, struct mbuf *m)
 {
 	hci_scodata_hdr_t *hdr;
 	int plen;

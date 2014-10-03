@@ -35,6 +35,8 @@ __RCSID("$NetBSD$");
 #include "debug.h"
 #include "rtld.h"
 
+#if defined(__ARM_EABI__) && !defined(__ARM_DWARF_EH__)
+
 _Unwind_Ptr
 __gnu_Unwind_Find_exidx(_Unwind_Ptr pc, int * pcount)
 {
@@ -84,3 +86,5 @@ __gnu_Unwind_Find_exidx(_Unwind_Ptr pc, int * pcount)
 	*pcount = count;
 	return start;
 }
+
+#endif

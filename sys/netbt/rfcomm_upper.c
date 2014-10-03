@@ -382,14 +382,14 @@ rfcomm_listen_pcb(struct rfcomm_dlc *dlc)
 }
 
 /*
- * rfcomm_send(dlc, mbuf)
+ * rfcomm_send_pcb(dlc, mbuf)
  *
  * Output data on DLC. This is streamed data, so we add it
  * to our buffer and start the DLC, which will assemble
  * packets and send them if it can.
  */
 int
-rfcomm_send(struct rfcomm_dlc *dlc, struct mbuf *m)
+rfcomm_send_pcb(struct rfcomm_dlc *dlc, struct mbuf *m)
 {
 
 	if (dlc->rd_txbuf != NULL) {
@@ -406,7 +406,7 @@ rfcomm_send(struct rfcomm_dlc *dlc, struct mbuf *m)
 }
 
 /*
- * rfcomm_rcvd(dlc, space)
+ * rfcomm_rcvd_pcb(dlc, space)
  *
  * Indicate space now available in receive buffer
  *
@@ -415,7 +415,7 @@ rfcomm_send(struct rfcomm_dlc *dlc, struct mbuf *m)
  * buffer after that.
  */
 int
-rfcomm_rcvd(struct rfcomm_dlc *dlc, size_t space)
+rfcomm_rcvd_pcb(struct rfcomm_dlc *dlc, size_t space)
 {
 
 	KASSERT(dlc != NULL);

@@ -1,3 +1,5 @@
+/*	$NetBSD$	*/
+
 /*
  * Copyright 2010 Red Hat Inc.
  *
@@ -21,6 +23,9 @@
  *
  * Authors: Ben Skeggs
  */
+
+#include <sys/cdefs.h>
+__KERNEL_RCSID(0, "$NetBSD$");
 
 #ifdef CONFIG_ACPI
 #include <linux/acpi.h>

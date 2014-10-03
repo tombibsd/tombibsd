@@ -6,13 +6,18 @@ LIB=	lldReaderWriterMachO
 
 .PATH: ${LLD_SRCDIR}/lib/ReaderWriter/MachO
 
-SRCS+=	MachOLinkingContext.cpp \
+SRCS+=	ArchHandler_x86.cpp \
+	ArchHandler_x86_64.cpp \
+	ArchHandler_arm.cpp \
+	ArchHandler.cpp \
+	GOTPass.cpp \
+	MachOLinkingContext.cpp \
 	MachONormalizedFileBinaryReader.cpp \
 	MachONormalizedFileBinaryWriter.cpp \
 	MachONormalizedFileFromAtoms.cpp \
 	MachONormalizedFileToAtoms.cpp \
 	MachONormalizedFileYAML.cpp \
-	ReferenceKinds.cpp \
+	StubsPass.cpp \
 	WriterMachO.cpp
 
 .if defined(HOSTLIB)

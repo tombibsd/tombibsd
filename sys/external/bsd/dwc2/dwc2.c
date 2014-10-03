@@ -904,17 +904,15 @@ dwc2_root_intr_start(usbd_xfer_handle xfer)
 Static void
 dwc2_root_intr_abort(usbd_xfer_handle xfer)
 {
-#ifdef DIAGNOSTIC
 	struct dwc2_softc *sc = DWC2_XFER2SC(xfer);
-#endif
+
 	DPRINTF("xfer=%p\n", xfer);
 
 	KASSERT(mutex_owned(&sc->sc_lock));
+	KASSERT(xfer->pipe->intrxfer == xfer);
 
-	if (xfer->pipe->intrxfer == xfer) {
-		DPRINTF("remove\n");
-		xfer->pipe->intrxfer = NULL;
-	}
+	sc->sc_intrxfer = NULL;
+
 	xfer->status = USBD_CANCELLED;
 	usb_transfer_complete(xfer);
 }
@@ -1124,12 +1122,10 @@ dwc2_device_intr_abort(usbd_xfer_handle xfer)
 #endif
 
 	KASSERT(mutex_owned(&sc->sc_lock));
+	KASSERT(xfer->pipe->intrxfer == xfer);
 
-	if (xfer->pipe->intrxfer == xfer) {
-		DPRINTF("remove\n");
-		xfer->pipe->intrxfer = NULL;
-	}
 	DPRINTF("xfer=%p\n", xfer);
+
 	dwc2_abort_xfer(xfer, USBD_CANCELLED);
 }
 

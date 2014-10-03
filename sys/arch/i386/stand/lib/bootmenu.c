@@ -40,8 +40,6 @@
 #include <libi386.h>
 #include <bootmenu.h>
 
-#define isnum(c) ((c) >= '0' && (c) <= '9')
-
 static void docommandchoice(int);
 
 extern struct x86_boot_params boot_params;
@@ -50,22 +48,6 @@ extern	const char bootprog_name[], bootprog_rev[], bootprog_kernrev[];
 #define MENUFORMAT_AUTO	  0
 #define MENUFORMAT_NUMBER 1
 #define MENUFORMAT_LETTER 2
-
-int
-atoi(const char *in)
-{
-	char *c;
-	int ret;
-
-	ret = 0;
-	c = (char *)in;
-	if (*c == '-')
-		c++;
-	for (; isnum(*c); c++)
-		ret = (ret * 10) + (*c - '0');
-
-	return (*in == '-') ? -ret : ret;
-}
 
 /*
  * XXX
@@ -105,14 +87,14 @@ getchoicefrominput(char *input, int def)
 		choice = (*input) - 'A';
 	else if (*input >= 'a' && *input < bootcfg_info.nummenu + 'a')
 		choice = (*input) - 'a';
-	else if (isnum(*input)) {
+	else if (isdigit(*input)) {
 		choice = atoi(input) - 1;
 		if (choice < 0 || choice >= bootcfg_info.nummenu)
 			choice = -1;
 	}
 
 	if (bootcfg_info.menuformat != MENUFORMAT_LETTER &&
-	    !isnum(*input) && !usedef)
+	    !isdigit(*input) && !usedef)
 		choice = -1;
 
 	return choice;

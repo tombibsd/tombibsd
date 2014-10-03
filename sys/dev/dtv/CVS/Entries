@@ -1,11 +1,11 @@
 /Makefile/1.1/Sat Jul  9 14:46:56 2011/-kk/
 /dtv_buffer.c/1.7/Tue Aug  9 01:42:24 2011/-kk/
-/dtv_demux.c/1.5/Thu Oct 24 10:28:57 2013/-kk/
-/dtv_device.c/1.10/Fri Oct  3 09:09:13 2014/-kk/
+/dtv_demux.c/1.6/Fri Oct  3 09:25:59 2014/-kk/
+/dtv_device.c/1.11/Fri Oct  3 09:25:59 2014/-kk/
 /dtv_ioctl.c/1.3/Wed Jul 13 22:43:04 2011/-kk/
 /dtv_math.c/1.5/Tue Aug  9 01:42:24 2011/-kk/
 /dtv_math.h/1.1/Tue Aug  9 10:53:10 2011/-kk/
-/dtv_scatter.c/1.1/Sat Jul  9 14:46:56 2011/-kk/
+/dtv_scatter.c/1.2/Fri Oct  3 09:25:59 2014/-kk/
 /dtv_scatter.h/1.1/Sat Jul  9 14:46:56 2011/-kk/
 /dtvif.h/1.3/Tue Aug  9 01:42:24 2011/-kk/
 /dtvio.h/1.1/Sat Jul  9 14:46:56 2011/-kk/

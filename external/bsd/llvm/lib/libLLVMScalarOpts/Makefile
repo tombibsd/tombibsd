@@ -14,7 +14,6 @@ SRCS+=	ADCE.cpp \
 	DeadStoreElimination.cpp \
 	EarlyCSE.cpp \
 	FlattenCFGPass.cpp \
-	GlobalMerge.cpp \
 	GVN.cpp \
 	IndVarSimplify.cpp \
 	JumpThreading.cpp \
@@ -30,6 +29,7 @@ SRCS+=	ADCE.cpp \
 	LoopUnswitch.cpp \
 	LowerAtomic.cpp \
 	MemCpyOptimizer.cpp \
+	MergedLoadStoreMotion.cpp \
 	PartiallyInlineLibCalls.cpp \
 	Reassociate.cpp \
 	Reg2Mem.cpp \

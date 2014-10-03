@@ -73,6 +73,7 @@ extern const char osrelease[];	/* short system version */
 extern const char ostype[];	/* system type */
 extern const char kernel_ident[];/* kernel configuration ID */
 extern const char version[];	/* system version */
+extern const char buildinfo[];	/* information from build environment */
 
 extern int autonicetime;        /* time (in seconds) before autoniceval */
 extern int autoniceval;         /* proc priority after autonicetime */

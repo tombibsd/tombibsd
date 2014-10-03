@@ -1,6 +1,6 @@
 #	$NetBSD$
 
-IMAGESIZE=	8192k
+IMAGESIZE=	9216k
 DBG=		-Os -fno-unwind-tables
 MAKEFS_FLAGS=   -o density=4k
 IMAGEENDIAN=	be

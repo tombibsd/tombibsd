@@ -19,9 +19,8 @@
 /debug_frame.s/1.1.1.2/Tue Jun  3 03:03:59 2014/-kk/
 /diff-with-two-sections.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /direction_labels.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
-/eh-frame-reloc.s/1.1.1.1/Fri May 30 18:11:25 2014/-kk/
-/eh-symbols.s/1.1.1.1/Fri May 30 18:11:25 2014/-kk/
-/eh_symbol.s/1.1.1.1/Fri May 30 18:11:25 2014/-kk/
+/eh-frame-reloc.s/1.1.1.2/Fri Oct  3 09:23:18 2014/-kk/
+/eh_symbol.s/1.1.1.2/Fri Oct  3 09:23:18 2014/-kk/
 /empty-dwarf-lines.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /file.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /gen-dwarf-cpp.s/1.1.1.3/Tue Jun  3 03:03:59 2014/-kk/
@@ -35,10 +34,11 @@
 /linker-option-1.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /linker-option-2.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /linker-options.ll/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
-/lit.local.cfg/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
+/lit.local.cfg/1.1.1.2/Fri Oct  3 09:23:18 2014/-kk/
 /loc.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /osx-version-min-load-command.s/1.1.1.1/Fri May 30 18:11:25 2014/-kk/
 /pcrel-to-other-section.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
+/pr19185.s/1.1.1.1/Sun Aug 10 17:04:39 2014/-kk/
 /previous.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /pushsection.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /relax-jumps.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
@@ -66,7 +66,7 @@
 /tlv.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /values.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /variable-errors.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
-/variable-exprs.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
+/variable-exprs.s/1.1.1.2/Fri Oct  3 09:23:18 2014/-kk/
 /weakdef.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /x86-data-in-code.ll/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /x86_32-optimal_nop.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/

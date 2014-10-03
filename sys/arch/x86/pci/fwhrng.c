@@ -194,7 +194,7 @@ fwhrng_attach(device_t parent, device_t self, void *aux)
 	callout_init(&sc->sc_rnd_ch, 0);
 	/* FWH is polled for entropy, so no estimate is available. */
 	rnd_attach_source(&sc->sc_rnd_source, device_xname(sc->sc_dev),
-	    RND_TYPE_RNG, RND_FLAG_NO_ESTIMATE);
+	    RND_TYPE_RNG, RND_FLAG_COLLECT_VALUE);
 	sc->sc_rnd_i = sizeof(sc->sc_rnd_ax);
 	fwhrng_callout(sc);
 

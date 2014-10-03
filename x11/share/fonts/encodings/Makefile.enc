@@ -11,7 +11,7 @@ CLEANFILES+=	${GZFILES:S/.gz$/.gz.tmp/}
 .SUFFIXES: .enc .enc.gz
 .enc.enc.gz:
 	${_MKTARGET_CREATE}
-	${TOOL_GZIP} -9nfc ${.IMPSRC} > ${.TARGET}.tmp \
+	${TOOL_GZIP_N} -9fc ${.IMPSRC} > ${.TARGET}.tmp \
 	    && mv ${.TARGET}.tmp ${.TARGET}
 
 

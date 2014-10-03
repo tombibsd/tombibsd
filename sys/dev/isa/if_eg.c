@@ -465,7 +465,7 @@ egattach(device_t parent, device_t self, void *aux)
 	    IST_EDGE, IPL_NET, egintr, sc);
 
 	rnd_attach_source(&sc->rnd_source, device_xname(sc->sc_dev),
-			  RND_TYPE_NET, 0);
+			  RND_TYPE_NET, RND_FLAG_DEFAULT);
 }
 
 void

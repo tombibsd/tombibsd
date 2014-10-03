@@ -155,8 +155,6 @@ Select the partition you wish to change:
 message Partition_table_ok
 {Partition table OK}
 
-message Delete_partition
-{Delete partition}
 message Dont_change
 {Don't change}
 message Other_kind

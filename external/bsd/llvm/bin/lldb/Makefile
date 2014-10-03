@@ -56,6 +56,7 @@ LLDB_LIBS+= \
 	PluginObjectFilePECOFF \
 	PluginPlatformNetBSD \
 	PluginPlatformGDB \
+	PluginPlatformKalimba \
 	PluginPlatformLinux \
 	PluginPlatformMacOSX \
 	PluginPlatformPOSIX \

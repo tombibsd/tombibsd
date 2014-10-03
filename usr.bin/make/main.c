@@ -99,14 +99,14 @@ __RCSID("$NetBSD$");
  *
  *	Error			Print a tagged error message. The global
  *				MAKE variable must have been defined. This
- *				takes a format string and two optional
- *				arguments for it.
+ *				takes a format string and optional arguments
+ *				for it.
  *
  *	Fatal			Print an error message and exit. Also takes
- *				a format string and two arguments.
+ *				a format string and arguments for it.
  *
  *	Punt			Aborts all jobs and exits with a message. Also
- *				takes a format string and two arguments.
+ *				takes a format string and arguments for it.
  *
  *	Finish			Finish things up by printing the number of
  *				errors which occurred, as passed to it, and

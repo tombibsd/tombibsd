@@ -363,7 +363,7 @@ iyattach(device_t parent, device_t self, void *aux)
 	    IST_EDGE, IPL_NET, iyintr, sc);
 
 	rnd_attach_source(&sc->rnd_source, device_xname(sc->sc_dev),
-			  RND_TYPE_NET, 0);
+			  RND_TYPE_NET, RND_FLAG_DEFAULT);
 
 	temp = bus_space_read_1(iot, ioh, INT_NO_REG);
 	bus_space_write_1(iot, ioh, INT_NO_REG, (temp & 0xf8) | sc->mappedirq);

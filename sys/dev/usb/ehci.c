@@ -2604,15 +2604,13 @@ ehci_root_intr_start(usbd_xfer_handle xfer)
 Static void
 ehci_root_intr_abort(usbd_xfer_handle xfer)
 {
-#ifdef DIAGNOSTIC
 	ehci_softc_t *sc = xfer->pipe->device->bus->hci_private;
-#endif
 
 	KASSERT(mutex_owned(&sc->sc_lock));
-	if (xfer->pipe->intrxfer == xfer) {
-		DPRINTF(("ehci_root_intr_abort: remove\n"));
-		xfer->pipe->intrxfer = NULL;
-	}
+	KASSERT(xfer->pipe->intrxfer == xfer);
+
+	sc->sc_intrxfer = NULL;
+
 	xfer->status = USBD_CANCELLED;
 	usb_transfer_complete(xfer);
 }
@@ -3832,10 +3830,8 @@ Static void
 ehci_device_intr_abort(usbd_xfer_handle xfer)
 {
 	DPRINTFN(1, ("ehci_device_intr_abort: xfer=%p\n", xfer));
-	if (xfer->pipe->intrxfer == xfer) {
-		DPRINTFN(1, ("echi_device_intr_abort: remove\n"));
-		xfer->pipe->intrxfer = NULL;
-	}
+	KASSERT(xfer->pipe->intrxfer == xfer);
+
 	/*
 	 * XXX - abort_xfer uses ehci_sync_hc, which syncs via the advance
 	 *       async doorbell. That's dependent on the async list, wheras
@@ -4195,7 +4191,7 @@ ehci_device_isoc_start(usbd_xfer_handle xfer)
 	exfer->itdstart = start;
 	exfer->itdend = stop;
 	exfer->sqtdstart = NULL;
-	exfer->sqtdstart = NULL;
+	exfer->sqtdend = NULL;
 
 	ehci_add_intr_list(sc, exfer);
 	xfer->status = USBD_IN_PROGRESS;

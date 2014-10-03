@@ -35,6 +35,7 @@ PROG	sbin/mount_msdos
 PROG	sbin/mount_nfs
 PROG	sbin/newfs	sbin/mount_mfs
 PROG	sbin/ping
+PROG	sbin/raidctl
 PROG	sbin/reboot	sbin/halt
 PROG	sbin/restore	sbin/rrestore
 PROG	sbin/route

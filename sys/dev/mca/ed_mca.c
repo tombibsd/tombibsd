@@ -189,7 +189,7 @@ ed_mca_attach(device_t parent, device_t self, void *aux)
 	disk_init(&ed->sc_dk, device_xname(ed->sc_dev), &eddkdriver);
 	disk_attach(&ed->sc_dk);
 	rnd_attach_source(&ed->rnd_source, device_xname(ed->sc_dev),
-			  RND_TYPE_DISK, 0);
+			  RND_TYPE_DISK, RND_FLAG_DEFAULT);
 
 	ed->sc_flags |= EDF_INIT;
 

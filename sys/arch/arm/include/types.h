@@ -93,9 +93,6 @@ typedef	volatile int		__cpu_simple_lock_t;
 #if defined(__ARM_EABI__) && defined(_ARM_ARCH_6)
 #define	__HAVE_ATOMIC64_OPS
 #endif
-#if defined(_ARM_ARCH_6)
-#define	__NO_STRICT_ALIGNMENT
-#endif
 
 #if defined(_KERNEL) || defined(_KMEMUSER)
 #define	PCU_FPU			0

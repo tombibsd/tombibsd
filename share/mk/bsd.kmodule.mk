@@ -31,7 +31,7 @@ CFLAGS+=	-fno-common -fno-unwind-tables
 .elif ${MACHINE_CPU} == "hppa"
 CFLAGS+=	-mlong-calls
 .elif ${MACHINE_CPU} == "powerpc"
-CFLAGS+=	-mlongcall
+CFLAGS+=	${${ACTIVE_CC} == "gcc":? -mlongcall :}
 .elif ${MACHINE_CPU} == "vax"
 CFLAGS+=	-fno-pic
 .endif

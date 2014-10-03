@@ -27,6 +27,8 @@ CLEANFILES+=	x86
 CLEANFILES+=	x86 i386
 .elif ${KLINK_MACHINE} == "evbmips"
 CLEANFILES+=	algor sbmips
+.elif ${MACHINE_CPU} == "aarch64"
+CLEANFILES+=	arm
 .endif
 
 .if defined(XEN_BUILD) || ${KLINK_MACHINE} == "xen"
@@ -65,6 +67,10 @@ CLEANFILES+=	x86
 .if ${MACHINE_CPU} == "i386" || ${MACHINE_CPU} == "x86_64"
 	-@rm -f x86 && \
 	    ln -s $S/arch/x86/include x86
+.endif
+.if ${MACHINE_CPU} == "aarch64"
+	-@rm -f arm && \
+	    ln -s $S/arch/arm/include arm
 .endif
 .if defined(XEN_BUILD) || ${KLINK_MACHINE} == "xen"
 	-@rm -f xen && \

@@ -9,7 +9,7 @@ CPPFLAGS+= -D__daddr_t=int32_t
 CPPFLAGS+= -I. -I${S} -I${.OBJDIR}
 CPPFLAGS+= -Werror -Wall -Wstrict-prototypes -Wmissing-prototypes
 
-CFLAGS= -Os -mmultiple -ffreestanding
+CFLAGS= -Os -ffreestanding
 
 .include <bsd.prog.mk>
 .include <bsd.klinks.mk>

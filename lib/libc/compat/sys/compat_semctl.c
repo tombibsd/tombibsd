@@ -46,6 +46,9 @@ __RCSID("$NetBSD$");
 #include <sys/null.h>
 #include <compat/sys/sem.h>
 #include <stdarg.h>
+#ifdef __lint__
+#include <string.h>
+#endif
 
 int
 semctl(int semid, int semnum, int cmd, ...)

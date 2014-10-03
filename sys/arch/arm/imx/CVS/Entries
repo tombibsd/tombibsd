@@ -100,7 +100,7 @@
 /imxspireg.h/1.1/Sat Mar 22 09:28:08 2014/-kk/
 /imxspivar.h/1.1/Sat Mar 22 09:28:08 2014/-kk/
 /imxssireg.h/1.1/Sat Nov 13 07:11:03 2010/-kk/
-/imxuart.c/1.13/Fri Oct  3 09:08:53 2014/-kk/
+/imxuart.c/1.14/Fri Oct  3 09:25:30 2014/-kk/
 /imxuartreg.h/1.5/Sat Sep  1 14:46:25 2012/-kk/
 /imxuartvar.h/1.5/Sat Oct 27 17:17:39 2012/-kk/
 /imxusb.c/1.6/Fri Oct  3 09:08:53 2014/-kk/

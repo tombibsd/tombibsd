@@ -85,6 +85,22 @@ rndpool_get_entropy_count(rndpool_t *rp)
 	return (rp->stats.curentropy);
 }
 
+void
+rndpool_set_entropy_count(rndpool_t *rp, u_int32_t count)
+{
+	int32_t difference = count - rp->stats.curentropy;
+
+	if (__predict_true(difference > 0)) {
+		rp->stats.added += difference;
+	}
+
+	rp->stats.curentropy = count;
+	if (rp->stats.curentropy > RND_POOLBITS) {
+		rp->stats.discarded += (rp->stats.curentropy - RND_POOLBITS);
+		rp->stats.curentropy = RND_POOLBITS;
+	}
+}
+
 void rndpool_get_stats(rndpool_t *rp, void *rsp, int size)
 {
 

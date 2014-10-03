@@ -156,8 +156,6 @@ Wählen Sie die Partition, die Sie verändern möchten:
 message Partition_table_ok
 {Partitionstabelle OK}
 
-message Delete_partition
-{Partition löschen}
 message Dont_change
 {Nicht verändern}
 message Other_kind

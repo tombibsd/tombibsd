@@ -13,6 +13,10 @@ SRCS=	LLVMSymbolize.cpp \
 LLVM_LIBS+= \
 	DebugInfo \
 	Object \
+	MCParser \
+	MC \
+	BitReader \
+	IR \
 	Support
 
 LDADD+=	-lz

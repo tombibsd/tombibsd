@@ -1093,9 +1093,8 @@ undo_option(struct hashtab *ht, struct nvlist **npp,
 		/*
 		 * -U command line option removals are always silent
 		 */
-		if (handling_cmdlineopts)
-			return 0;
-		cfgerror("%s `%s' is not defined", type, name);
+		if (!handling_cmdlineopts)
+			cfgwarn("%s `%s' is not defined", type, name);
 		return (1);
 	}
 	if (npp == NULL)

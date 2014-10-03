@@ -1,12 +1,12 @@
-/Makefile/1.7/Wed Dec 25 07:37:07 2013/-kk/
+/Makefile/1.8/Fri Oct  3 09:25:20 2014/-kk/
 /add.c/1.24/Tue Dec 17 04:13:17 2013/-kk/
 /backup.c/1.1/Thu Dec 19 06:46:51 2013/-kk/
 /biosboot.c/1.7/Tue Dec 17 04:04:52 2013/-kk/
 /create.c/1.7/Tue Dec 17 04:13:17 2013/-kk/
 /destroy.c/1.4/Sat Aug 27 17:38:16 2011/-kk/
 /gpt.8/1.28/Wed Dec 25 07:37:07 2013/-kk/
-/gpt.c/1.27/Wed Dec 25 07:37:07 2013/-kk/
-/gpt.h/1.10/Wed Dec 25 07:37:07 2013/-kk/
+/gpt.c/1.28/Fri Oct  3 09:25:20 2014/-kk/
+/gpt.h/1.11/Fri Oct  3 09:25:20 2014/-kk/
 /label.c/1.14/Tue Dec 17 04:04:52 2013/-kk/
 /map.c/1.6/Tue Dec 17 04:04:52 2013/-kk/
 /map.h/1.3/Tue Dec 17 04:04:52 2013/-kk/
@@ -14,6 +14,7 @@
 /recover.c/1.4/Sat Aug 27 17:38:16 2011/-kk/
 /remove.c/1.12/Tue Dec 17 04:04:52 2013/-kk/
 /resize.c/1.8/Tue Dec 17 04:13:17 2013/-kk/
+/restore.c/1.1/Sun Aug 10 18:27:15 2014/-kk/
 /set.c/1.2/Tue Dec 10 01:05:00 2013/-kk/
 /show.c/1.15/Wed Dec 25 07:37:07 2013/-kk/
 /unset.c/1.2/Tue Dec 10 01:05:00 2013/-kk/

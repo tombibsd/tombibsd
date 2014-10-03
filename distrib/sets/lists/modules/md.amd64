@@ -119,6 +119,8 @@
 ./@MODULEDIR@/tprof_pmi/tprof_pmi.kmod		base-kernel-modules	kmod
 ./@MODULEDIR@/tvpll				base-kernel-modules	kmod
 ./@MODULEDIR@/tvpll/tvpll.kmod			base-kernel-modules	kmod
+./@MODULEDIR@/ubsec				base-kernel-modules	kmod
+./@MODULEDIR@/ubsec/ubsec.kmod			base-kernel-modules	kmod
 ./@MODULEDIR@/vmt				base-kernel-modules	kmod
 ./@MODULEDIR@/vmt/vmt.kmod			base-kernel-modules	kmod
 ./@MODULEDIR@/wbsio				base-kernel-modules	kmod

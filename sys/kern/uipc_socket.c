@@ -629,7 +629,7 @@ sobind(struct socket *so, struct mbuf *nam, struct lwp *l)
 	int	error;
 
 	solock(so);
-	error = (*so->so_proto->pr_usrreqs->pr_bind)(so, nam);
+	error = (*so->so_proto->pr_usrreqs->pr_bind)(so, nam, l);
 	sounlock(so);
 	return error;
 }
@@ -645,7 +645,7 @@ solisten(struct socket *so, int backlog, struct lwp *l)
 		sounlock(so);
 		return EINVAL;
 	}
-	error = (*so->so_proto->pr_usrreqs->pr_listen)(so);
+	error = (*so->so_proto->pr_usrreqs->pr_listen)(so, l);
 	if (error != 0) {
 		sounlock(so);
 		return error;
@@ -826,7 +826,7 @@ soconnect(struct socket *so, struct mbuf *nam, struct lwp *l)
 	    (error = sodisconnect(so))))
 		error = EISCONN;
 	else
-		error = (*so->so_proto->pr_usrreqs->pr_connect)(so, nam);
+		error = (*so->so_proto->pr_usrreqs->pr_connect)(so, nam, l);
 
 	return error;
 }
@@ -836,8 +836,7 @@ soconnect2(struct socket *so1, struct socket *so2)
 {
 	KASSERT(solocked2(so1, so2));
 
-	return (*so1->so_proto->pr_usrreqs->pr_generic)(so1,
-	    PRU_CONNECT2, NULL, (struct mbuf *)so2, NULL, NULL);
+	return (*so1->so_proto->pr_usrreqs->pr_connect2)(so1, so2);
 }
 
 int
@@ -1052,8 +1051,8 @@ sosend(struct socket *so, struct mbuf *addr, struct uio *uio, struct mbuf *top,
 				error = (*so->so_proto->pr_usrreqs->pr_sendoob)(so,
 				    top, control);
 			else
-				error = (*so->so_proto->pr_usrreqs->pr_generic)(so,
-				    PRU_SEND, top, addr, control, curlwp);
+				error = (*so->so_proto->pr_usrreqs->pr_send)(so,
+				    top, addr, control, l);
 			if (dontroute)
 				so->so_options &= ~SO_DONTROUTE;
 			if (resid > 0)
@@ -1532,8 +1531,7 @@ soreceive(struct socket *so, struct mbuf **paddr, struct uio *uio,
 			 * get it filled again.
 			 */
 			if ((pr->pr_flags & PR_WANTRCVD) && so->so_pcb)
-				(*pr->pr_usrreqs->pr_generic)(so, PRU_RCVD,
-				    NULL, (struct mbuf *)(long)flags, NULL, l);
+				(*pr->pr_usrreqs->pr_rcvd)(so, flags, l);
 			SBLASTRECORDCHK(&so->so_rcv, "soreceive sbwait 2");
 			SBLASTMBUFCHK(&so->so_rcv, "soreceive sbwait 2");
 			if (wakeup_state & SS_RESTARTSYS)
@@ -1574,8 +1572,7 @@ soreceive(struct socket *so, struct mbuf **paddr, struct uio *uio,
 		SBLASTRECORDCHK(&so->so_rcv, "soreceive 4");
 		SBLASTMBUFCHK(&so->so_rcv, "soreceive 4");
 		if (pr->pr_flags & PR_WANTRCVD && so->so_pcb)
-			(*pr->pr_usrreqs->pr_generic)(so, PRU_RCVD, NULL,
-			    (struct mbuf *)(long)flags, NULL, l);
+			(*pr->pr_usrreqs->pr_rcvd)(so, flags, l);
 	}
 	if (orig_resid == uio->uio_resid && orig_resid &&
 	    (flags & MSG_EOR) == 0 && (so->so_state & SS_CANTRCVMORE) == 0) {

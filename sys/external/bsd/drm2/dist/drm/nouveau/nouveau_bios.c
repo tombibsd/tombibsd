@@ -1,3 +1,5 @@
+/*	$NetBSD$	*/
+
 /*
  * Copyright 2005-2006 Erik Waling
  * Copyright 2006 Stephane Marchesin
@@ -21,6 +23,9 @@
  * OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
+#include <sys/cdefs.h>
+__KERNEL_RCSID(0, "$NetBSD$");
 
 #include <subdev/bios.h>
 

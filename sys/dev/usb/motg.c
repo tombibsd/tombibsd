@@ -1185,17 +1185,14 @@ motg_root_intr_abort(usbd_xfer_handle xfer)
 	struct motg_softc *sc = xfer->pipe->device->bus->hci_private;
 
 	KASSERT(mutex_owned(&sc->sc_lock));
+	KASSERT(xfer->pipe->intrxfer == xfer);
 
 	sc->sc_intr_xfer = NULL;
 
-	if (xfer->pipe->intrxfer == xfer) {
-		DPRINTFN(MD_ROOT, ("motg_root_intr_abort: remove\n"));
-		xfer->pipe->intrxfer = 0;
-	}
-	xfer->status = USBD_CANCELLED;
 #ifdef DIAGNOSTIC
 	// XXX UXFER(xfer)->iinfo.isdone = 1;
 #endif
+	xfer->status = USBD_CANCELLED;
 	usb_transfer_complete(xfer);
 }
 
@@ -2423,7 +2420,7 @@ motg_device_xfer_abort(usbd_xfer_handle xfer)
 		DPRINTF(("motg_device_xfer_abort: already aborting\n"));
 		xfer->hcflags |= UXFER_ABORTWAIT;
 		while (xfer->hcflags & UXFER_ABORTING)
-		cv_wait(&xfer->hccv, &sc->sc_lock);
+			cv_wait(&xfer->hccv, &sc->sc_lock);
 		return;
 	}
 	xfer->hcflags |= UXFER_ABORTING;

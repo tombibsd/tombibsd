@@ -260,7 +260,7 @@ smap_attach(struct device *parent, struct device *self, void *aux)
 
 #if NRND > 0
 	rnd_attach_source(&sc->rnd_source, DEVNAME,
-	    RND_TYPE_NET, 0);
+	    RND_TYPE_NET, RND_FLAG_DEFAULT);
 #endif
 }
 

@@ -11,3 +11,6 @@ GNU as.
 
 src/external/gpl3/gcc/usr.bin/backend forces tree.c to be compiled with -O0.
 g++ otherwise on trivial input.
+
+src/external/mit/xorg/lib/pixman uses -fno-integrated-as on ARM for the
+macro (ab)use.

@@ -164,7 +164,7 @@ ldattach(struct ld_softc *sc)
 
 	/* Attach the device into the rnd source list. */
 	rnd_attach_source(&sc->sc_rnd_source, device_xname(sc->sc_dv),
-	    RND_TYPE_DISK, 0);
+	    RND_TYPE_DISK, RND_FLAG_DEFAULT);
 
 	/* Register with PMF */
 	if (!pmf_device_register1(sc->sc_dv, ld_suspend, NULL, ld_shutdown))

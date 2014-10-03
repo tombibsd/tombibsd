@@ -422,7 +422,7 @@ stattach(device_t parent, device_t self, void *aux)
 	    device_xname(st->sc_dev));
 
 	rnd_attach_source(&st->rnd_source, device_xname(st->sc_dev),
-	    RND_TYPE_TAPE, 0);
+	    RND_TYPE_TAPE, RND_FLAG_DEFAULT);
 }
 
 int

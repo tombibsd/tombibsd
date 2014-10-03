@@ -2,4 +2,4 @@
 
 define	arc4
 
-file	crypto/arc4/arc4.c		arc4
+file	crypto/arc4/arc4.c

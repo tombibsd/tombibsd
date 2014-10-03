@@ -225,7 +225,7 @@ wmcom_attach(device_t parent, device_t self, void *aux)
 
 #ifdef RND_COM
 	rnd_attach_source(&sc->rnd_source, device_xname(sc->sc_dev),
-	    RND_TYPE_TTY, 0);
+	    RND_TYPE_TTY, RND_FLAG_DEFAULT);
 #endif
 
 	SET(sc->sc_hwflags, COM_HW_DEV_OK);

@@ -334,7 +334,7 @@ sdattach(device_t parent, device_t self, void *aux)
 	 * attach the device into the random source list
 	 */
 	rnd_attach_source(&sd->rnd_source, device_xname(sd->sc_dev),
-			  RND_TYPE_DISK, 0);
+			  RND_TYPE_DISK, RND_FLAG_DEFAULT);
 
 	/* Discover wedges on this disk. */
 	dkwedge_discover(&sd->sc_dk);

@@ -68,6 +68,7 @@ options 	PPP_FILTER	# Active filter support for PPP (requires bpf)
 
 # Compatibility options
 
+options		COMPAT_NETBSD32	# allow running arm (e.g. non-earm) binaries
 options 	COMPAT_43	# 4.3BSD compatibility.
 options 	COMPAT_40	# NetBSD 4.0 compatibility.
 options 	COMPAT_30	# NetBSD 3.0 compatibility.

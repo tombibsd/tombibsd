@@ -428,7 +428,7 @@ rdattach(device_t parent, device_t self, void *aux)
 	 * attach the device into the random source list
 	 */
 	rnd_attach_source(&sc->rnd_source, device_xname(sc->sc_dev),
-			  RND_TYPE_DISK, 0);
+			  RND_TYPE_DISK, RND_FLAG_DEFAULT);
 }
 
 /*

@@ -154,11 +154,51 @@ raw_setpeeraddr(struct rawcb *rp, struct mbuf *nam)
 }
 
 int
-raw_usrreq(struct socket *so, int req, struct mbuf *m, struct mbuf *nam,
+raw_send(struct socket *so, struct mbuf *m, struct mbuf *nam,
     struct mbuf *control, struct lwp *l)
 {
 	struct rawcb *rp = sotorawcb(so);
-	int s, error = 0;
+	int error = 0;
+
+	KASSERT(rp != NULL);
+
+	/*
+	 * Ship a packet out.  The appropriate raw output
+	 * routine handles any massaging necessary.
+	 */
+	if (control && control->m_len) {
+		m_freem(control);
+		m_freem(m);
+		return EINVAL;
+	}
+	if (nam) {
+		if ((so->so_state & SS_ISCONNECTED) != 0) {
+			error = EISCONN;
+			goto die;
+		}
+		error = (*so->so_proto->pr_usrreqs->pr_connect)(so, nam, l);
+		if (error) {
+		die:
+			m_freem(m);
+			return error;
+		}
+	} else {
+		if ((so->so_state & SS_ISCONNECTED) == 0) {
+			error = ENOTCONN;
+			goto die;
+		}
+	}
+	error = (*so->so_proto->pr_output)(m, so);
+	if (nam)
+		raw_disconnect(rp);
+
+	return error;
+}
+
+int
+raw_usrreq(struct socket *so, int req, struct mbuf *m, struct mbuf *nam,
+    struct mbuf *control, struct lwp *l)
+{
 
 	KASSERT(req != PRU_ATTACH);
 	KASSERT(req != PRU_DETACH);
@@ -166,6 +206,7 @@ raw_usrreq(struct socket *so, int req, struct mbuf *m, struct mbuf *nam,
 	KASSERT(req != PRU_BIND);
 	KASSERT(req != PRU_LISTEN);
 	KASSERT(req != PRU_CONNECT);
+	KASSERT(req != PRU_CONNECT2);
 	KASSERT(req != PRU_DISCONNECT);
 	KASSERT(req != PRU_SHUTDOWN);
 	KASSERT(req != PRU_ABORT);
@@ -173,72 +214,16 @@ raw_usrreq(struct socket *so, int req, struct mbuf *m, struct mbuf *nam,
 	KASSERT(req != PRU_SENSE);
 	KASSERT(req != PRU_PEERADDR);
 	KASSERT(req != PRU_SOCKADDR);
+	KASSERT(req != PRU_RCVD);
 	KASSERT(req != PRU_RCVOOB);
+	KASSERT(req != PRU_SEND);
 	KASSERT(req != PRU_SENDOOB);
+	KASSERT(req != PRU_PURGEIF);
 
-	s = splsoftnet();
-	KERNEL_LOCK(1, NULL);
+	if (sotorawcb(so) == NULL)
+		return EINVAL;
 
-	KASSERT(!control || req == PRU_SEND);
-	if (rp == NULL) {
-		error = EINVAL;
-		goto release;
-	}
+	panic("raw_usrreq");
 
-	switch (req) {
-	/*
-	 * If a socket isn't bound to a single address,
-	 * the raw input routine will hand it anything
-	 * within that protocol family (assuming there's
-	 * nothing else around it should go to).
-	 */
-	case PRU_CONNECT2:
-		error = EOPNOTSUPP;
-		break;
-
-	case PRU_RCVD:
-		error = EOPNOTSUPP;
-		break;
-
-	/*
-	 * Ship a packet out.  The appropriate raw output
-	 * routine handles any massaging necessary.
-	 */
-	case PRU_SEND:
-		if (control && control->m_len) {
-			m_freem(control);
-			m_freem(m);
-			error = EINVAL;
-			break;
-		}
-		if (nam) {
-			if ((so->so_state & SS_ISCONNECTED) != 0) {
-				error = EISCONN;
-				goto die;
-			}
-			error = (*so->so_proto->pr_usrreqs->pr_connect)(so, nam);
-			if (error) {
-			die:
-				m_freem(m);
-				break;
-			}
-		} else {
-			if ((so->so_state & SS_ISCONNECTED) == 0) {
-				error = ENOTCONN;
-				goto die;
-			}
-		}
-		error = (*so->so_proto->pr_output)(m, so);
-		if (nam)
-			raw_disconnect(rp);
-		break;
-
-	default:
-		panic("raw_usrreq");
-	}
-
-release:
-	KERNEL_UNLOCK_ONE(NULL);
-	splx(s);
-	return (error);
+	return 0;
 }

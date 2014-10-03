@@ -2,7 +2,7 @@
 /consinit.c/1.8/Sat Oct 13 17:58:53 2012/-kk/
 /cpu.c/1.18/Fri Jul  1 20:52:02 2011/-kk/
 /ibm_machdep.c/1.16/Fri Apr 11 02:03:38 2014/-kk/
-/locore.S/1.18/Mon Jun 20 19:56:12 2011/-kk/
+/locore.S/1.19/Fri Oct  3 09:25:49 2014/-kk/
 /machdep.c/1.75/Sat Apr 19 05:36:49 2014/-kk/
 /mainbus.c/1.33/Fri Jan 27 18:53:00 2012/-kk/
 /platform.c/1.28/Sat Apr 19 05:36:49 2014/-kk/

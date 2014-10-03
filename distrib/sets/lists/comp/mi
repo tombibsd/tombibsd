@@ -263,8 +263,11 @@
 ./usr/include/c++/deque				comp-cxx-include	libcxx
 ./usr/include/c++/dynarray			comp-obsolete		obsolete
 ./usr/include/c++/exception			comp-cxx-include	libcxx
+./usr/include/c++/experimental/__config		comp-cxx-include	libcxx
 ./usr/include/c++/experimental/dynarray		comp-cxx-include	libcxx
 ./usr/include/c++/experimental/optional		comp-cxx-include	libcxx
+./usr/include/c++/experimental/string_view	comp-cxx-include	libcxx
+./usr/include/c++/experimental/utility		comp-cxx-include	libcxx
 ./usr/include/c++/ext/__hash			comp-cxx-include	libcxx
 ./usr/include/c++/ext/hash_map			comp-cxx-include	libcxx
 ./usr/include/c++/ext/hash_set			comp-cxx-include	libcxx
@@ -5004,6 +5007,7 @@
 ./usr/share/man/cat3/SSL_CTX_set_session_cache_mode.0	comp-c-catman		crypto,.cat
 ./usr/share/man/cat3/SSL_CTX_set_session_id_context.0	comp-c-catman		crypto,.cat
 ./usr/share/man/cat3/SSL_CTX_set_ssl_version.0	comp-c-catman		crypto,.cat
+./usr/share/man/cat3/SSL_CTX_set_tlsext_ticket_key_cb.0	comp-c-catman		crypto,.cat
 ./usr/share/man/cat3/SSL_CTX_set_timeout.0	comp-c-catman		crypto,.cat
 ./usr/share/man/cat3/SSL_CTX_set_tmp_dh_callback.0	comp-c-catman		crypto,.cat
 ./usr/share/man/cat3/SSL_CTX_set_tmp_rsa_callback.0	comp-c-catman		crypto,.cat
@@ -11890,6 +11894,7 @@
 ./usr/share/man/html3/SSL_CTX_set_session_cache_mode.html	comp-c-htmlman		crypto,html
 ./usr/share/man/html3/SSL_CTX_set_session_id_context.html	comp-c-htmlman		crypto,html
 ./usr/share/man/html3/SSL_CTX_set_ssl_version.html	comp-c-htmlman		crypto,html
+./usr/share/man/html3/SSL_CTX_set_tlsext_ticket_key_cb.html	comp-c-htmlman		crypto,html
 ./usr/share/man/html3/SSL_CTX_set_timeout.html	comp-c-htmlman		crypto,html
 ./usr/share/man/html3/SSL_CTX_set_tmp_dh_callback.html	comp-c-htmlman		crypto,html
 ./usr/share/man/html3/SSL_CTX_set_tmp_rsa_callback.html	comp-c-htmlman		crypto,html
@@ -18579,6 +18584,7 @@
 ./usr/share/man/man3/SSL_CTX_set_session_cache_mode.3	comp-c-man		crypto,.man
 ./usr/share/man/man3/SSL_CTX_set_session_id_context.3	comp-c-man		crypto,.man
 ./usr/share/man/man3/SSL_CTX_set_ssl_version.3	comp-c-man		crypto,.man
+./usr/share/man/man3/SSL_CTX_set_tlsext_ticket_key_cb.3	comp-c-man		crypto,.man
 ./usr/share/man/man3/SSL_CTX_set_timeout.3	comp-c-man		crypto,.man
 ./usr/share/man/man3/SSL_CTX_set_tmp_dh_callback.3	comp-c-man		crypto,.man
 ./usr/share/man/man3/SSL_CTX_set_tmp_rsa_callback.3	comp-c-man		crypto,.man

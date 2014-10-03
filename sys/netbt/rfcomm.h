@@ -415,8 +415,8 @@ int rfcomm_peeraddr_pcb(struct rfcomm_dlc *, struct sockaddr_bt *);
 int rfcomm_disconnect_pcb(struct rfcomm_dlc *, int);
 void rfcomm_detach_pcb(struct rfcomm_dlc **);
 int rfcomm_listen_pcb(struct rfcomm_dlc *);
-int rfcomm_send(struct rfcomm_dlc *, struct mbuf *);
-int rfcomm_rcvd(struct rfcomm_dlc *, size_t);
+int rfcomm_send_pcb(struct rfcomm_dlc *, struct mbuf *);
+int rfcomm_rcvd_pcb(struct rfcomm_dlc *, size_t);
 int rfcomm_setopt(struct rfcomm_dlc *, const struct sockopt *);
 int rfcomm_getopt(struct rfcomm_dlc *, struct sockopt *);
 

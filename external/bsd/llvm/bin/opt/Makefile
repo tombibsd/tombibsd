@@ -49,7 +49,10 @@ LLVM_LIBS+= \
 	X86TargetInfo \
 	X86Utils \
 	X86AsmPrinter \
+	MCDisassembler \
+	AsmPrinter \
 	Object \
+	MCParser \
 	SelectionDAG \
 	CodeGen \
 	Vectorize \
@@ -63,6 +66,9 @@ LLVM_LIBS+= \
 	ipa \
 	IR \
 	Support
+
+LDADD+=	-lz
+DPADD+=	${LIBZ}
 
 .include "${.PARSEDIR}/../../link.mk"
 

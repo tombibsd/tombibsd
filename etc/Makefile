@@ -47,6 +47,8 @@ CKSUM?=		${TOOL_CKSUM}
 MAKESUMS=	MAKE=${MAKE:Q} CKSUM=${CKSUM:Q} ${HOST_SH} ${NETBSDSRCDIR}/distrib/sets/makesums
 DISTRIBVER!=	${HOST_SH} ${NETBSDSRCDIR}/sys/conf/osrelease.sh
 
+GZIP_FLAGS= -9 ${GZIP_N_FLAG}
+
 # Flags for creating ISO CDROM image
 # mkisofs is expected to be in $PATH, install via pkgsrc/sysutils/cdrtools
 # Note: At least mkisofs 2.0 should be used.
@@ -177,10 +179,11 @@ motd: ${.CURDIR}/${MOTD_SOURCE} ${_NETBSD_VERSION_DEPENDS}
 	${HOST_INSTALL_FILE} ${.CURDIR}/${MOTD_SOURCE} ${.TARGET}
 
 CLEANFILES+=	MAKEDEV
+MAKEDEV_MACHINE=${"${MACHINE_CPU}" == "aarch64":?${MACHINE_CPU}:${MACHINE}}
 MAKEDEV: ${.CURDIR}/MAKEDEV.awk ${.CURDIR}/MAKEDEV.tmpl \
-    ${.CURDIR}/etc.${MACHINE}/MAKEDEV.conf
+    ${.CURDIR}/etc.${MAKEDEV_MACHINE}/MAKEDEV.conf
 	${_MKTARGET_CREATE}
-	MACHINE=${MACHINE:Q} MACHINE_ARCH=${MACHINE_ARCH:Q} \
+	MACHINE=${MAKEDEV_MACHINE:Q} MACHINE_ARCH=${MACHINE_ARCH:Q} \
 	    NETBSDSRCDIR=${NETBSDSRCDIR:Q} \
 	    ${TOOL_AWK} -f ${.CURDIR}/MAKEDEV.awk ${.CURDIR}/MAKEDEV.tmpl \
 	    > ${.TARGET}
@@ -193,12 +196,20 @@ etc-release: .EXEC .MAKE
 		echo ; \
 		cat ${NETBSDSRCDIR}/sys/conf/copyright; \
 		echo ; \
-		echo "Build settings:"; \
+		echo "Build information:"; \
 		printf "%20s   %s\n" "Build date" "$$(date -u)"; \
 		printf "%20s   %s\n"  "Built by" "$${USER-root}@$$(hostname)"; \
 		if [ -n "${BUILDID}" ]; then \
-		    printf "%20s   %s\n"  "Build ID:" "${BUILDID}" ; \
+		    printf "%20s   %s\n"  "Build ID" "${BUILDID}" ; \
 		fi ; \
+		if [ -n "${BUILDINFO}" ]; then \
+		    echo ; \
+		    info="$$(printf "%b" ${BUILDINFO:Q})" ; \
+		    printf "%s\n" "$${info}" \
+		    | ${TOOL_SED} -e 's/^/        /' ; \
+		fi ; \
+		echo ; \
+		echo "Build settings:"; \
 		echo ; \
 		${PRINT_PARAMS} ; \
 	) >${.OBJDIR}/${.TARGET}
@@ -270,8 +281,13 @@ install-etc-files: .PHONY .MAKE check_DESTDIR MAKEDEV
 	) | ${METALOG.add}
 .endif	# MKUNPRIVED != no
 	${_MKMSG_INSTALL} ${DESTDIR}/etc/ttys
+.if exists(${.CURDIR}/etc.${MACHINE}/ttys)
 	${ETC_INSTALL_OBJ_FILE} -o ${BINOWN} -g ${BINGRP} -m 644 \
 	    ${.CURDIR}/etc.${MACHINE}/ttys ${DESTDIR}/etc
+.else
+	${ETC_INSTALL_OBJ_FILE} -o ${BINOWN} -g ${BINGRP} -m 644 \
+	    ${.CURDIR}/etc.${MACHINE_CPU}/ttys ${DESTDIR}/etc
+.endif
 .if exists(etc.${MACHINE}/boot.cfg)
 	${_MKMSG_INSTALL} ${DESTDIR}/boot.cfg
 	${ETC_INSTALL_OBJ_FILE} -o ${BINOWN} -g ${BINGRP} -m 644 \
@@ -585,7 +601,7 @@ kernset-${configfile}: .PHONY build_kernels snap_pre
 	kerndir=${KERNOBJDIR}/${configfile:C/.*\///}; \
 	kernsuffixes="${KERNEL_SUFFIXES:S/^/./}"; \
 	kern_tgz=${RELEASEDIR}/${RELEASEMACHINEDIR}/binary/sets/kern-${configfile}.tgz; \
-	pax_cmd="COMPRESS_PROGRAM=${TOOL_GZIP:Q} GZIP=-9n ${TOOL_PAX} -O -zw -M -N ${NETBSDSRCDIR}/etc -f $${kern_tgz}"; \
+	pax_cmd="GZIP=${GZIP_FLAGS:Q} ${TOOL_PAX} --use-compress-program ${TOOL_GZIP:Q} -O -w -M -N ${NETBSDSRCDIR}/etc -f $${kern_tgz}"; \
 	cd $${kerndir} && { \
 		kernels=; newest=; \
 		for kernel in $${kernlist}; do \
@@ -630,8 +646,8 @@ releasekern-${configfile}: .PHONY build_kernels snap_pre
 				knl_gz="${RELEASEDIR}/${RELEASEMACHINEDIR}/binary/kernel/$${kernel}-${configfile:C/.*\///}$${s}.gz"; \
 				[ $${knl_gz} -nt $${ks} ] && continue; \
 				rm -f $${knl_gz}; \
-				echo "${TOOL_GZIP} -nc -9 < $${kerndir}/$${ks} > $${knl_gz}"; \
-				${TOOL_GZIP} -nc -9 < $${ks} > $${knl_gz}; \
+				echo "${TOOL_GZIP} ${GZIP_FLAGS} -c < $${kerndir}/$${ks} > $${knl_gz}"; \
+				${TOOL_GZIP} ${GZIP_FLAGS} -c < $${ks} > $${knl_gz}; \
 			done; \
 		done; \
 	}

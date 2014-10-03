@@ -85,6 +85,7 @@ options		DDB
 options		HZ=100
 options		INET		# IP + ICMP + TCP + UDP
 options		INET6		# IPv6
+options		COMPAT_NETBSD32	# allow running arm (e.g. non-earm) binaries
 options		COMPAT_60	# NetBSD 6.0 compatibility
 
 makeoptions     DEBUG="-g"      # compile full symbol table

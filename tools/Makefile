@@ -25,7 +25,7 @@
 TOOLS_BUILDRUMP?=no
 
 .if ${TOOLCHAIN_MISSING} == "no"
-. if defined(HAVE_GCC)
+. if defined(HAVE_GCC) && ${HAVE_GCC} > 0
 TOOLCHAIN_BITS= gmake .WAIT
 TOOLCHAIN_BITS+= gmp .WAIT
 TOOLCHAIN_BITS+= mpfr .WAIT
@@ -37,7 +37,7 @@ TOOLCHAIN_BITS+= mpc .WAIT
 TOOLCHAIN_BITS+= binutils .WAIT
 .endif
 
-.if defined(HAVE_GCC)
+.if defined(HAVE_GCC) && ${HAVE_GCC} > 0
 . if ${TOOLCHAIN_MISSING} == "no"
 TOOLCHAIN_BITS+= gcc
 .  if ${MKCROSSGDB:Uno} != "no" || make(obj)

@@ -28,9 +28,11 @@
 /2014-03-18-Maxlookup-reached.ll/1.1.1.1/Fri May 30 18:11:17 2014/-kk/
 /aligned-overread.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /args-rets-allocas-loads.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/assume.ll/1.1.1.1/Sun Aug 10 17:04:48 2014/-kk/
 /byval.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /cas.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /constant-over-index.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/cs-cs.ll/1.1.1.1/Sun Aug 10 17:04:48 2014/-kk/
 /dag.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /empty.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /featuretest.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/

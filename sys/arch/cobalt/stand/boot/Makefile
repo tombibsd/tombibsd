@@ -108,7 +108,7 @@ vers.c: ${.CURDIR}/version
 ${PROG}: ${LDSCRIPT} ${OBJS} ${LIBS}
 	${LD} ${LINKFORMAT} -Map ${PROG}.map -N -x -Ttext ${LOAD_ADDRESS} \
 	    -T ${LDSCRIPT} -e start -o ${PROG} ${OBJS} ${LIBS}
-	${TOOL_GZIP} -nc9 ${PROG} > ${PROG}.gz
+	${TOOL_GZIP_N} -c9 ${PROG} > ${PROG}.gz
 	@${SIZE} ${PROG}
 
 CLEANFILES+=	${PROG}.map ${PROG}.elf ${PROG}.gz

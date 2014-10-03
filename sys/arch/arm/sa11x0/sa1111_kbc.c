@@ -276,7 +276,7 @@ sackbc_attach(device_t parent, device_t self, void *aux)
 			continue;
 		sc->slot = slot;
 		rnd_attach_source(&sc->rnd_source, device_xname(child),
-		    RND_TYPE_TTY, 0);
+		    RND_TYPE_TTY, RND_FLAG_DEFAULT|RND_FLAG_ESTIMATE_VALUE);
 		/* only one of KBD_SLOT or AUX_SLOT is used. */
 		break;			
 	}

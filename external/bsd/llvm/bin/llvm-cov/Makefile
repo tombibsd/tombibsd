@@ -7,7 +7,8 @@ NOMAN=		yes
 
 .PATH: ${LLVM_SRCDIR}/tools/llvm-cov
 
-SRCS=	llvm-cov.cpp
+SRCS=	gcov.cpp \
+	llvm-cov.cpp
 
 LLVM_LIBS+= \
 	IR \

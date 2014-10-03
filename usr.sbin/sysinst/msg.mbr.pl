@@ -145,8 +145,6 @@ message editparttable
 message Partition_table_ok
 {Tablica partycji jest poprawna}
 
-message Delete_partition
-{Usun partycje}
 message Dont_change
 {Nie zmieniaj}
 message Other_kind

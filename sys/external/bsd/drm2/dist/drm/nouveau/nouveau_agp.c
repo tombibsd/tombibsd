@@ -1,4 +1,10 @@
+/*	$NetBSD$	*/
+
+#include <sys/cdefs.h>
+__KERNEL_RCSID(0, "$NetBSD$");
+
 #include <linux/module.h>
+#include <linux/moduleparam.h>
 
 #include <core/device.h>
 

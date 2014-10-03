@@ -268,7 +268,7 @@ pckbc_attach_slot(struct pckbc_softc *sc, pckbc_slot_t slot)
 
 	if (child != NULL && t->t_slotdata[slot] != NULL)
 		rnd_attach_source(&t->t_slotdata[slot]->rnd_source,
-		    device_xname(child), RND_TYPE_TTY, 0);
+		    device_xname(child), RND_TYPE_TTY, RND_FLAG_DEFAULT);
 
 	return child != NULL;
 }

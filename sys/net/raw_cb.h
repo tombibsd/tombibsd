@@ -70,6 +70,8 @@ int	raw_usrreq(struct socket *,
 	    int, struct mbuf *, struct mbuf *, struct mbuf *, struct lwp *);
 void	raw_setsockaddr(struct rawcb *, struct mbuf *);
 void	raw_setpeeraddr(struct rawcb *, struct mbuf *);
+int	raw_send(struct socket *,
+	    struct mbuf *, struct mbuf *, struct mbuf *, struct lwp *);
 
 #endif /* _KERNEL */
 

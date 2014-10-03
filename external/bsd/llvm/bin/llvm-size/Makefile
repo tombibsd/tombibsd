@@ -11,6 +11,10 @@ SRCS=	llvm-size.cpp
 
 LLVM_LIBS+= \
 	Object \
+	MCParser \
+	MC \
+	BitReader \
+	IR \
 	Support
 
 .include "${.PARSEDIR}/../../link.mk"

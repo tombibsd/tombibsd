@@ -173,8 +173,6 @@ const struct amiga_bus_space_methods amiga_bus_stride_1swap_abs = {
 	.bswms2 =	oabs(bswm2_),
 	.bsrr2 =	oabs(bsrr2_),           /* XXX swap? */
 	.bswr2 =	oabs(bswr2_),           /* XXX swap? */
-	.bsrr2 =	oabs(bsrr2_),
-	.bswr2 =	oabs(bswr2_),
 	.bssr2 =	oabs(bssr2_),           /* XXX swap? */
 	.bscr2 =	oabs(bscr2_),           /* XXX swap? */
 

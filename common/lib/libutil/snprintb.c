@@ -257,7 +257,7 @@ snprintb_m(char *buf, size_t buflen, const char *bitfmt, uint64_t val,
 		}
 	}
 	l_len++;
-	if (val != 0 && (size_t)(++t_len) < buflen)
+	if (sep != '<' && (size_t)(++t_len) < buflen)
 		*bp++ = '>';
 terminate:
 	*bp++ = '\0';

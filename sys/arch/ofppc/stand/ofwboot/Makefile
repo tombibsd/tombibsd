@@ -6,7 +6,8 @@ PROG=		ofwboot
 NOMAN=		# defined
 SRCS=		ofwstart.S Locore.c boot.c ofdev.c net.c netif_of.c
 SRCS+=		mbr.c rdb.c vers.c
-CFLAGS+=	-msoft-float -Wno-main -ffreestanding
+CFLAGS+=	${${ACTIVE_CC} == "gcc":? -msoft-float :}
+CFLAGS+=	-Wno-main -ffreestanding
 CFLAGS+=	-Wall -Wmissing-prototypes -Wstrict-prototypes -Wpointer-arith
 #CPPFLAGS+=	-g -DALLOC_TRACE -DDEBUG #-DOFW_DEBUG -DNETIF_DEBUG
 #CPPFLAGS+=	-DOFWDUMP
@@ -16,7 +17,7 @@ CPPFLAGS+=	-DHEAP_VARIABLE
 .include <bsd.own.mk>
 .include <bsd.klinks.mk>
 
-DBG=		-Os -mmultiple
+DBG=		-Os
 
 SRCS+=		ofwmagic.S
 .PATH:		${S}/arch/powerpc/powerpc

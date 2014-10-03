@@ -1,3 +1,5 @@
+/*	$NetBSD$	*/
+
 /*
  * Copyright © 2007 David Airlie
  *
@@ -23,6 +25,9 @@
  * Authors:
  *     David Airlie
  */
+
+#include <sys/cdefs.h>
+__KERNEL_RCSID(0, "$NetBSD$");
 
 #include <linux/module.h>
 #include <linux/kernel.h>

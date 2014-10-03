@@ -800,9 +800,7 @@ again:
 		     pr < dp->dom_protoswNPROTOSW; pr++) {
 			so.so_proto = pr;
 			if (pr->pr_usrreqs) {
-				(void) (*pr->pr_usrreqs->pr_generic)(&so,
-				    PRU_PURGEIF, NULL, NULL,
-				    (struct mbuf *) ifp, curlwp);
+				(void) (*pr->pr_usrreqs->pr_purgeif)(&so, ifp);
 				purged = 1;
 			}
 		}
@@ -852,9 +850,7 @@ again:
 		for (pr = dp->dom_protosw; pr < dp->dom_protoswNPROTOSW; pr++) {
 			so.so_proto = pr;
 			if (pr->pr_usrreqs && pr->pr_flags & PR_PURGEIF)
-				(void)(*pr->pr_usrreqs->pr_generic)(&so,
-				    PRU_PURGEIF, NULL, NULL,
-				    (struct mbuf *)ifp, curlwp);
+				(void)(*pr->pr_usrreqs->pr_purgeif)(&so, ifp);
 		}
 	}
 

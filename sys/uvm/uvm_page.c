@@ -1100,7 +1100,9 @@ attachrnd:
 	 * Attach RNG source for this CPU's VM events
 	 */
         rnd_attach_source(&uvm.cpus[cpu_index(ci)]->rs,
-			  ci->ci_data.cpu_name, RND_TYPE_VM, 0);
+			  ci->ci_data.cpu_name, RND_TYPE_VM,
+			  RND_FLAG_COLLECT_TIME|RND_FLAG_COLLECT_VALUE|
+			  RND_FLAG_ESTIMATE_VALUE);
 
 }
 

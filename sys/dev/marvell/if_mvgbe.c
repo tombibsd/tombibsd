@@ -894,7 +894,7 @@ mvgbe_attach(device_t parent, device_t self, void *aux)
 	    NULL, device_xname(sc->sc_dev), "wdogsoft");
 #endif
 	rnd_attach_source(&sc->sc_rnd_source, device_xname(sc->sc_dev),
-	    RND_TYPE_NET, 0);
+	    RND_TYPE_NET, RND_FLAG_DEFAULT);
 
 	return;
 

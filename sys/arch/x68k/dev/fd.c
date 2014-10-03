@@ -662,7 +662,7 @@ fdattach(device_t parent, device_t self, void *aux)
 	mountroothook_establish(fd_mountroot_hook, fd->sc_dev);
 
 	rnd_attach_source(&fd->rnd_source, device_xname(fd->sc_dev),
-	    RND_TYPE_DISK, 0);
+	    RND_TYPE_DISK, RND_FLAG_DEFAULT);
 }
 
 struct fd_type *

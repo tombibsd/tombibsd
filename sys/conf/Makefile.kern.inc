@@ -116,13 +116,6 @@ COPTS.kern_ssp.c+=	-fno-stack-protector -D__SSP__
 COPTS.cpu.c+=		-fno-stack-protector
 .endif
 
-# If we want the bpendtsleep: label in kern_synch.c, we need to use
-# -fno-reorder-blocks.  Don't make this a config(1) defflag without
-# making sure this fragment remains valid.
-.if defined(HAVE_GCC) && !empty(${CFLAGS:M-DKERN_SYNCH_BPENDTSLEEP_LABEL})
-COPTS.kern_synch.c+=	-fno-reorder-blocks
-.endif
-
 # Use the per-source COPTS variables to add -g to just those
 # files that match the shell patterns given in ${DEBUGLIST}
 #

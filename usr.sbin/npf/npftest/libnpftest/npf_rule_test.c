@@ -114,7 +114,7 @@ npf_blockall_rule(void)
 	prop_dictionary_t rldict;
 
 	rldict = prop_dictionary_create();
-	prop_dictionary_set_uint32(rldict, "attributes",
+	prop_dictionary_set_uint32(rldict, "attr",
 	    NPF_RULE_IN | NPF_RULE_OUT | NPF_RULE_DYNAMIC);
 	return npf_rule_alloc(rldict);
 }

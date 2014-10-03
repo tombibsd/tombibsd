@@ -1,3 +1,5 @@
+/*	$NetBSD$	*/
+
 /*
  * Copyright (C) 2008 Maarten Maathuis.
  * All Rights Reserved.
@@ -24,9 +26,14 @@
  *
  */
 
+#include <sys/cdefs.h>
+__KERNEL_RCSID(0, "$NetBSD$");
+
 #include <acpi/button.h>
 
+#include <linux/err.h>
 #include <linux/pm_runtime.h>
+#include <linux/string.h>
 
 #include <drm/drmP.h>
 #include <drm/drm_edid.h>
@@ -49,9 +56,12 @@ MODULE_PARM_DESC(tv_disable, "Disable TV-out detection");
 static int nouveau_tv_disable = 0;
 module_param_named(tv_disable, nouveau_tv_disable, int, 0400);
 
+#if defined(CONFIG_ACPI_BUTTON) || \
+	(defined(CONFIG_ACPI_BUTTON_MODULE) && defined(MODULE))
 MODULE_PARM_DESC(ignorelid, "Ignore ACPI lid status");
 static int nouveau_ignorelid = 0;
 module_param_named(ignorelid, nouveau_ignorelid, int, 0400);
+#endif
 
 MODULE_PARM_DESC(duallink, "Allow dual-link TMDS (default: enabled)");
 static int nouveau_duallink = 1;
@@ -1047,7 +1057,6 @@ nouveau_connector_create(struct drm_device *dev, int index)
 	 * figure out something suitable ourselves
 	 */
 	if (nv_connector->type == DCB_CONNECTOR_NONE) {
-		struct nouveau_drm *drm = nouveau_drm(dev);
 		struct dcb_table *dcbt = &drm->vbios.dcb;
 		u32 encoders = 0;
 		int i;

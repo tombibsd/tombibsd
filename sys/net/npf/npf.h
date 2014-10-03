@@ -45,7 +45,7 @@
 #include <netinet/in_systm.h>
 #include <netinet/in.h>
 
-#define	NPF_VERSION		16
+#define	NPF_VERSION		17
 
 /*
  * Public declarations and definitions.

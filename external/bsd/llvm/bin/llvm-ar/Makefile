@@ -10,9 +10,42 @@ NOMAN=		yes
 SRCS=	llvm-ar.cpp
 
 LLVM_LIBS+= \
+	AArch64AsmParser \
+	AArch64MCTargetDesc \
+	AArch64AsmPrinter \
+	AArch64TargetInfo \
+	AArch64Utils \
+	ARMAsmParser \
+	ARMMCTargetDesc \
+	ARMAsmPrinter \
+	ARMTargetInfo \
+	MipsAsmParser \
+	MipsMCTargetDesc \
+	MipsAsmPrinter \
+	MipsTargetInfo \
+	PowerPCAsmParser \
+	PowerPCMCTargetDesc \
+	PowerPCAsmPrinter \
+	PowerPCTargetInfo \
+	SparcTargetInfo \
+	SparcMCTargetDesc \
+	SparcAsmParser \
+	SparcAsmPrinter \
+	X86AsmParser \
+	X86MCTargetDesc \
+	X86AsmPrinter \
+	X86Utils \
+	X86TargetInfo \
+	MCDisassembler \
 	Object \
+	MCParser \
+	MC \
 	BitReader \
+	IR \
 	Support
+
+LDADD+=	-lz
+DPADD+=	${LIBZ}
 
 .include "${.PARSEDIR}/../../link.mk"
 

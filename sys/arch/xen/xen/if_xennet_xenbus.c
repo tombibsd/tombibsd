@@ -401,7 +401,7 @@ xennet_xenbus_attach(device_t parent, device_t self, void *aux)
 	}
 
 	rnd_attach_source(&sc->sc_rnd_source, device_xname(sc->sc_dev),
-	    RND_TYPE_NET, 0);
+	    RND_TYPE_NET, RND_FLAG_DEFAULT);
 
 	if (!pmf_device_register(self, xennet_xenbus_suspend,
 	    xennet_xenbus_resume))

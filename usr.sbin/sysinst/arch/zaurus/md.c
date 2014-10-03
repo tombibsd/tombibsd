@@ -100,7 +100,7 @@ md_pre_disklabel(void)
 	msg_display(MSG_dofdisk);
 
 	/* write edited MBR onto disk. */
-	if (write_mbr(diskdev, &mbr, 1) != 0) {
+	if (write_mbr(pm->diskdev, &mbr, 1) != 0) {
 		msg_display(MSG_wmbrfail);
 		process_menu(MENU_ok, NULL);
 		return 1;
@@ -130,7 +130,7 @@ md_post_newfs(void)
 	ssize_t sz;
 	int fd = -1;
 
-	snprintf(adevname, sizeof(adevname), "/dev/r%sa", diskdev);
+	snprintf(adevname, sizeof(adevname), "/dev/r%sa", pm->diskdev);
 	fd = open(adevname, O_RDWR);
 	if (fd < 0)
 		goto out;

@@ -76,7 +76,7 @@ int sco_peeraddr_pcb(struct sco_pcb *, struct sockaddr_bt *);
 int sco_disconnect_pcb(struct sco_pcb *, int);
 void sco_detach_pcb(struct sco_pcb **);
 int sco_listen_pcb(struct sco_pcb *);
-int sco_send(struct sco_pcb *, struct mbuf *);
+int sco_send_pcb(struct sco_pcb *, struct mbuf *);
 int sco_setopt(struct sco_pcb *, const struct sockopt *);
 int sco_getopt(struct sco_pcb *, struct sockopt *);
 

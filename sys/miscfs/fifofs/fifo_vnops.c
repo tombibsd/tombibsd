@@ -149,7 +149,7 @@ fifo_open(void *v)
 		}
 		fip->fi_writesock = wso;
 		solock(wso);
-		if ((error = unp_connect2(wso, rso, PRU_CONNECT2)) != 0) {
+		if ((error = unp_connect2(wso, rso)) != 0) {
 			sounlock(wso);
 			(void)soclose(wso);
 			(void)soclose(rso);

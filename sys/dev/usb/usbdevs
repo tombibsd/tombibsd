@@ -945,7 +945,7 @@ product ATI2 205		0xa001	USB Cable 205
 
 /* Atmel Comp. products */
 product ATMEL UHB124		0x3301	UHB124 hub
-product ATMEL WN210		0x3301	W-Buddie WN210
+product ATMEL WN210		0x4102	W-Buddie WN210
 product ATMEL DWL900AP		0x5601	DWL-900AP Wireless access point
 product ATMEL SAM_BA		0x6124	ARM SAM-BA programming port
 product ATMEL DWL120		0x7602	DWL-120 Wireless adapter
@@ -1998,6 +1998,7 @@ product LOGITEC RT2870_3	0x0164	RT2870
 product LOGITEC LANW300NU2	0x0166	LAN-W300N/U2
 product LOGITEC RT3020		0x0168	RT3020
 product LOGITEC LAN_W450ANU2E	0x016b	LAN-W450ANU2E
+product LOGITEC LAN_W300ANU2	0x0170	LAN-W300AN/U2
 
 /* Logitech products */
 product LOGITECH M2452		0x0203	M2452 keyboard
@@ -2973,6 +2974,7 @@ product SMK MCE_IR		0x031d	eHome Infrared Transceiver
 
 /* SMSC products */
 product SMSC 2020HUB		0x2020	USB Hub
+product SMSC LAN7500		0x7500	LAN7500 USB 2.0 gigabit ethernet device
 product SMSC SMSC9500		0x9500	SMSC9500 Ethernet device
 product SMSC SMSC9505		0x9505	SMSC9505 Ethernet device
 product SMSC SMSC9512		0x9512	SMSC9512 USB Hub

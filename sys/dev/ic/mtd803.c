@@ -177,7 +177,7 @@ mtd_config(struct mtd_softc *sc)
 
 	/* Initialise random source */
 	rnd_attach_source(&sc->rnd_src, device_xname(sc->dev),
-			  RND_TYPE_NET, 0);
+			  RND_TYPE_NET, RND_FLAG_DEFAULT);
 
 	/* Add shutdown hook to reset card when we reboot */
 	sc->sd_hook = shutdownhook_establish(mtd_shutdown, sc);

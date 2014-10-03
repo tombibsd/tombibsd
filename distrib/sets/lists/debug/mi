@@ -487,6 +487,7 @@
 ./usr/libdata/debug/usr/bin/dns-sd.debug	comp-mdns-debug		mdns,debug
 ./usr/libdata/debug/usr/bin/du.debug		comp-util-debug		debug
 ./usr/libdata/debug/usr/bin/eject.debug		comp-util-debug		debug
+./usr/libdata/debug/usr/bin/ekermit.debug	comp-util-debug		debug
 ./usr/libdata/debug/usr/bin/elfedit.debug	comp-util-debug		binutils,debug
 ./usr/libdata/debug/usr/bin/env.debug		comp-util-debug		debug
 ./usr/libdata/debug/usr/bin/eqn.debug		comp-groff-debug	groff,debug
@@ -521,7 +522,7 @@
 ./usr/libdata/debug/usr/bin/getextattr.debug	comp-util-debug		debug
 ./usr/libdata/debug/usr/bin/getopt.debug	comp-util-debug		debug
 ./usr/libdata/debug/usr/bin/gettext.debug	comp-c-debug		debug
-./usr/libdata/debug/usr/bin/gkermit.debug	comp-util-debug		debug
+./usr/libdata/debug/usr/bin/gkermit.debug	comp-obsolete		debug,obsolete
 ./usr/libdata/debug/usr/bin/gprof.debug		comp-debug-debug	binutils,debug
 ./usr/libdata/debug/usr/bin/grep.debug		comp-util-debug		debug
 ./usr/libdata/debug/usr/bin/grn.debug		comp-groff-debug	groff,debug
@@ -760,6 +761,7 @@
 ./usr/libdata/debug/usr/bin/tftp.debug		comp-netutil-debug	debug
 ./usr/libdata/debug/usr/bin/tic.debug		comp-util-debug		debug
 ./usr/libdata/debug/usr/bin/time.debug		comp-util-debug		debug
+./usr/libdata/debug/usr/bin/timeout.debug	comp-util-debug		debug
 ./usr/libdata/debug/usr/bin/tip.debug		comp-util-debug		debug
 ./usr/libdata/debug/usr/bin/tmux.debug		comp-util-debug		debug
 ./usr/libdata/debug/usr/bin/tn3270.debug	comp-obsolete		obsolete
@@ -1653,6 +1655,7 @@
 ./usr/libdata/debug/usr/tests/kernel/t_rnd.debug			tests-kernel-tests	debug,atf,rump
 ./usr/libdata/debug/usr/tests/kernel/t_sigaction.debug			tests-obsolete		obsolete
 ./usr/libdata/debug/usr/tests/kernel/t_subr_prf.debug			tests-kernel-tests	debug,atf
+./usr/libdata/debug/usr/tests/kernel/t_sysctl.debug			tests-kernel-tests	debug,atf
 ./usr/libdata/debug/usr/tests/kernel/t_sysv.debug			tests-kernel-tests	debug,atf
 ./usr/libdata/debug/usr/tests/kernel/t_time.debug			tests-obsolete		obsolete
 ./usr/libdata/debug/usr/tests/kernel/t_ucontext.debug			tests-obsolete		obsolete

@@ -183,7 +183,7 @@ ttm_bo_uvm_fault(struct uvm_faultinfo *ufi, vaddr_t vaddr,
 			    ((startpage + i) << PAGE_SHIFT), vm_prot, 0);
 		else
 			paddr = page_to_phys(u.ttm->pages[startpage + i]);
-		ret = -pmap_enter(ufi->orig_map->pmap, vaddr + i*PAGE_SHIFT,
+		ret = -pmap_enter(ufi->orig_map->pmap, vaddr + i*PAGE_SIZE,
 		    paddr, vm_prot, (PMAP_CANFAIL | pgprot));
 		if (ret)
 			goto out3;

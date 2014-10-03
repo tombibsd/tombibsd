@@ -587,7 +587,7 @@ v7fs_read(void *v)
 	}
 	v7node->update_atime = true;
 
-	return  error;
+	return error;
 }
 
 int

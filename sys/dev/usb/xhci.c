@@ -2452,15 +2452,15 @@ xhci_root_intr_start(usbd_xfer_handle xfer)
 static void
 xhci_root_intr_abort(usbd_xfer_handle xfer)
 {
-#ifdef DIAGNOSTIC
 	struct xhci_softc * const sc = xfer->pipe->device->bus->hci_private;
-#endif
 
 	KASSERT(mutex_owned(&sc->sc_lock));
-	if (xfer->pipe->intrxfer == xfer) {
-		DPRINTF(("%s: remove\n", __func__));
-		xfer->pipe->intrxfer = NULL;
-	}
+	KASSERT(xfer->pipe->intrxfer == xfer);
+
+	DPRINTF(("%s: remove\n", __func__));
+
+	sc->sc_intrxfer = NULL;
+
 	xfer->status = USBD_CANCELLED;
 	usb_transfer_complete(xfer);
 }
@@ -2865,10 +2865,7 @@ xhci_device_intr_abort(usbd_xfer_handle xfer)
 
 	KASSERT(mutex_owned(&sc->sc_lock));
 	device_printf(sc->sc_dev, "%s %p\n", __func__, xfer);
-	/* XXX */
-	if (xfer->pipe->intrxfer == xfer) {
-		xfer->pipe->intrxfer = NULL;
-	}
+	KASSERT(xfer->pipe->intrxfer == xfer);
 	xfer->status = USBD_CANCELLED;
 	usb_transfer_complete(xfer);
 }

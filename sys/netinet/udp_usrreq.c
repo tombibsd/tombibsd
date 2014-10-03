@@ -905,7 +905,7 @@ udp_accept(struct socket *so, struct mbuf *nam)
 }
 
 static int
-udp_bind(struct socket *so, struct mbuf *nam)
+udp_bind(struct socket *so, struct mbuf *nam, struct lwp *l)
 {
 	struct inpcb *inp = sotoinpcb(so);
 	int error = 0;
@@ -916,14 +916,14 @@ udp_bind(struct socket *so, struct mbuf *nam)
 	KASSERT(nam != NULL);
 
 	s = splsoftnet();
-	error = in_pcbbind(inp, nam);
+	error = in_pcbbind(inp, nam, l);
 	splx(s);
 
 	return error;
 }
 
 static int
-udp_listen(struct socket *so)
+udp_listen(struct socket *so, struct lwp *l)
 {
 	KASSERT(solocked(so));
 
@@ -931,7 +931,7 @@ udp_listen(struct socket *so)
 }
 
 static int
-udp_connect(struct socket *so, struct mbuf *nam)
+udp_connect(struct socket *so, struct mbuf *nam, struct lwp *l)
 {
 	struct inpcb *inp = sotoinpcb(so);
 	int error = 0;
@@ -942,11 +942,19 @@ udp_connect(struct socket *so, struct mbuf *nam)
 	KASSERT(nam != NULL);
 
 	s = splsoftnet();
-	error = in_pcbconnect(inp, nam, curlwp);
+	error = in_pcbconnect(inp, nam, l);
 	if (! error)
 		soisconnected(so);
 	splx(s);
 	return error;
+}
+
+static int
+udp_connect2(struct socket *so, struct socket *so2)
+{
+	KASSERT(solocked(so));
+
+	return EOPNOTSUPP;
 }
 
 static int
@@ -1011,23 +1019,41 @@ udp_stat(struct socket *so, struct stat *ub)
 static int
 udp_peeraddr(struct socket *so, struct mbuf *nam)
 {
+	int s;
+
 	KASSERT(solocked(so));
 	KASSERT(sotoinpcb(so) != NULL);
 	KASSERT(nam != NULL);
 
+	s = splsoftnet();
 	in_setpeeraddr(sotoinpcb(so), nam);
+	splx(s);
+
 	return 0;
 }
 
 static int
 udp_sockaddr(struct socket *so, struct mbuf *nam)
 {
+	int s;
+
 	KASSERT(solocked(so));
 	KASSERT(sotoinpcb(so) != NULL);
 	KASSERT(nam != NULL);
 
+	s = splsoftnet();
 	in_setsockaddr(sotoinpcb(so), nam);
+	splx(s);
+
 	return 0;
+}
+
+static int
+udp_rcvd(struct socket *so, int flags, struct lwp *l)
+{
+	KASSERT(solocked(so));
+
+	return EOPNOTSUPP;
 }
 
 static int
@@ -1036,6 +1062,58 @@ udp_recvoob(struct socket *so, struct mbuf *m, int flags)
 	KASSERT(solocked(so));
 
 	return EOPNOTSUPP;
+}
+
+static int
+udp_send(struct socket *so, struct mbuf *m, struct mbuf *nam,
+    struct mbuf *control, struct lwp *l)
+{
+	struct inpcb *inp = sotoinpcb(so);
+	int error = 0;
+	struct in_addr laddr;			/* XXX */
+	int s;
+
+	KASSERT(solocked(so));
+	KASSERT(inp != NULL);
+	KASSERT(m != NULL);
+
+	if (control && control->m_len) {
+		m_freem(control);
+		m_freem(m);
+		return EINVAL;
+	}
+
+	memset(&laddr, 0, sizeof laddr);
+
+	s = splsoftnet();
+	if (nam) {
+		laddr = inp->inp_laddr;		/* XXX */
+		if ((so->so_state & SS_ISCONNECTED) != 0) {
+			error = EISCONN;
+			goto die;
+		}
+		error = in_pcbconnect(inp, nam, l);
+		if (error)
+			goto die;
+	} else {
+		if ((so->so_state & SS_ISCONNECTED) == 0) {
+			error = ENOTCONN;
+			goto die;
+		}
+	}
+	error = udp_output(m, inp);
+	m = NULL;
+	if (nam) {
+		in_pcbdisconnect(inp);
+		inp->inp_laddr = laddr;		/* XXX */
+		in_pcbstate(inp, INP_BOUND);	/* XXX */
+	}
+  die:
+	if (m)
+		m_freem(m);
+
+	splx(s);
+	return error;
 }
 
 static int
@@ -1050,18 +1128,32 @@ udp_sendoob(struct socket *so, struct mbuf *m, struct mbuf *control)
 }
 
 static int
+udp_purgeif(struct socket *so, struct ifnet *ifp)
+{
+	int s;
+
+	s = splsoftnet();
+	mutex_enter(softnet_lock);
+	in_pcbpurgeif0(&udbtable, ifp);
+	in_purgeif(ifp);
+	in_pcbpurgeif(&udbtable, ifp);
+	mutex_exit(softnet_lock);
+	splx(s);
+
+	return 0;
+}
+
+static int
 udp_usrreq(struct socket *so, int req, struct mbuf *m, struct mbuf *nam,
     struct mbuf *control, struct lwp *l)
 {
-	struct inpcb *inp;
-	int s, error = 0;
-
 	KASSERT(req != PRU_ATTACH);
 	KASSERT(req != PRU_DETACH);
 	KASSERT(req != PRU_ACCEPT);
 	KASSERT(req != PRU_BIND);
 	KASSERT(req != PRU_LISTEN);
 	KASSERT(req != PRU_CONNECT);
+	KASSERT(req != PRU_CONNECT2);
 	KASSERT(req != PRU_DISCONNECT);
 	KASSERT(req != PRU_SHUTDOWN);
 	KASSERT(req != PRU_ABORT);
@@ -1069,87 +1161,20 @@ udp_usrreq(struct socket *so, int req, struct mbuf *m, struct mbuf *nam,
 	KASSERT(req != PRU_SENSE);
 	KASSERT(req != PRU_PEERADDR);
 	KASSERT(req != PRU_SOCKADDR);
+	KASSERT(req != PRU_RCVD);
 	KASSERT(req != PRU_RCVOOB);
+	KASSERT(req != PRU_SEND);
 	KASSERT(req != PRU_SENDOOB);
-
-	s = splsoftnet();
-	if (req == PRU_PURGEIF) {
-		mutex_enter(softnet_lock);
-		in_pcbpurgeif0(&udbtable, (struct ifnet *)control);
-		in_purgeif((struct ifnet *)control);
-		in_pcbpurgeif(&udbtable, (struct ifnet *)control);
-		mutex_exit(softnet_lock);
-		splx(s);
-		return 0;
-	}
+	KASSERT(req != PRU_PURGEIF);
 
 	KASSERT(solocked(so));
-	inp = sotoinpcb(so);
 
-	KASSERT(!control || req == PRU_SEND);
-	if (inp == NULL) {
-		splx(s);
+	if (sotoinpcb(so) == NULL)
 		return EINVAL;
-	}
 
-	/*
-	 * Note: need to block udp_input while changing
-	 * the udp pcb queue and/or pcb addresses.
-	 */
-	switch (req) {
-	case PRU_CONNECT2:
-		error = EOPNOTSUPP;
-		break;
+	panic("udp_usrreq");
 
-	case PRU_RCVD:
-		error = EOPNOTSUPP;
-		break;
-
-	case PRU_SEND:
-		if (control && control->m_len) {
-			m_freem(control);
-			m_freem(m);
-			error = EINVAL;
-			break;
-		}
-	{
-		struct in_addr laddr;			/* XXX */
-
-		memset(&laddr, 0, sizeof laddr);
-		if (nam) {
-			laddr = inp->inp_laddr;		/* XXX */
-			if ((so->so_state & SS_ISCONNECTED) != 0) {
-				error = EISCONN;
-				goto die;
-			}
-			error = in_pcbconnect(inp, nam, l);
-			if (error)
-				goto die;
-		} else {
-			if ((so->so_state & SS_ISCONNECTED) == 0) {
-				error = ENOTCONN;
-				goto die;
-			}
-		}
-		error = udp_output(m, inp);
-		m = NULL;
-		if (nam) {
-			in_pcbdisconnect(inp);
-			inp->inp_laddr = laddr;		/* XXX */
-			in_pcbstate(inp, INP_BOUND);	/* XXX */
-		}
-	  die:
-		if (m)
-			m_freem(m);
-	}
-		break;
-
-	default:
-		panic("udp_usrreq");
-	}
-	splx(s);
-
-	return error;
+	return 0;
 }
 
 static int
@@ -1376,6 +1401,7 @@ PR_WRAP_USRREQS(udp)
 #define	udp_bind	udp_bind_wrapper
 #define	udp_listen	udp_listen_wrapper
 #define	udp_connect	udp_connect_wrapper
+#define	udp_connect2	udp_connect2_wrapper
 #define	udp_disconnect	udp_disconnect_wrapper
 #define	udp_shutdown	udp_shutdown_wrapper
 #define	udp_abort	udp_abort_wrapper
@@ -1383,8 +1409,11 @@ PR_WRAP_USRREQS(udp)
 #define	udp_stat	udp_stat_wrapper
 #define	udp_peeraddr	udp_peeraddr_wrapper
 #define	udp_sockaddr	udp_sockaddr_wrapper
+#define	udp_rcvd	udp_rcvd_wrapper
 #define	udp_recvoob	udp_recvoob_wrapper
+#define	udp_send	udp_send_wrapper
 #define	udp_sendoob	udp_sendoob_wrapper
+#define	udp_purgeif	udp_purgeif_wrapper
 #define	udp_usrreq	udp_usrreq_wrapper
 
 const struct pr_usrreqs udp_usrreqs = {
@@ -1394,6 +1423,7 @@ const struct pr_usrreqs udp_usrreqs = {
 	.pr_bind	= udp_bind,
 	.pr_listen	= udp_listen,
 	.pr_connect	= udp_connect,
+	.pr_connect2	= udp_connect2,
 	.pr_disconnect	= udp_disconnect,
 	.pr_shutdown	= udp_shutdown,
 	.pr_abort	= udp_abort,
@@ -1401,7 +1431,10 @@ const struct pr_usrreqs udp_usrreqs = {
 	.pr_stat	= udp_stat,
 	.pr_peeraddr	= udp_peeraddr,
 	.pr_sockaddr	= udp_sockaddr,
+	.pr_rcvd	= udp_rcvd,
 	.pr_recvoob	= udp_recvoob,
+	.pr_send	= udp_send,
 	.pr_sendoob	= udp_sendoob,
+	.pr_purgeif	= udp_purgeif,
 	.pr_generic	= udp_usrreq,
 };

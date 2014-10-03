@@ -26,6 +26,9 @@
 /basictest.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /crash.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /debug-value.ll/1.1.1.2/Tue Jan 14 16:02:17 2014/-kk/
+/extra-copies.ll/1.1.1.1/Sun Aug 10 17:04:37 2014/-kk/
+/hoist-bitcast-load.ll/1.1.1.1/Sun Aug 10 17:04:37 2014/-kk/
+/hoist-deref-load.ll/1.1.1.1/Sun Aug 10 17:04:37 2014/-kk/
 /hoist-invariant-load.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /hoisting.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /lcssa-ssa-promoter.ll/1.1.1.1/Fri Feb 14 20:12:46 2014/-kk/

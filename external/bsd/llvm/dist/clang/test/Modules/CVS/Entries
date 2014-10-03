@@ -1,21 +1,21 @@
-/Rmodule-build.m/1.1.1.1/Fri May 30 18:14:48 2014/-kk/
+/Rmodule-build.m/1.1.1.2/Fri Oct  3 09:22:36 2014/-kk/
 /Werror-Wsystem-headers.m/1.1.1.1/Fri May 30 18:14:48 2014/-kk/
 /Werror.m/1.1.1.1/Fri May 30 18:14:48 2014/-kk/
 /auto-module-import.m/1.1.1.2/Tue Jan 14 16:01:50 2014/-kk/
-/autolink.m/1.1.1.2/Thu Feb 27 08:51:47 2014/-kk/
+/autolink.m/1.1.1.3/Fri Oct  3 09:22:36 2014/-kk/
 /build-fail-notes.m/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /builtins.m/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /compiler_builtins.m/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
-/compiler_builtins_arm.m/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
+/compiler_builtins_arm.m/1.1.1.2/Fri Oct  3 09:22:36 2014/-kk/
 /config_macros.m/1.1.1.2/Thu Feb 27 08:51:47 2014/-kk/
 /conflicts.m/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /cstd.m/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
-/cxx-decls.cpp/1.1.1.2/Tue Jun  3 03:04:54 2014/-kk/
+/cxx-decls.cpp/1.1.1.3/Fri Oct  3 09:22:36 2014/-kk/
 /cxx-inline-namespace.cpp/1.1.1.2/Tue Jun  3 03:04:54 2014/-kk/
-/cxx-irgen.cpp/1.1.1.1/Fri May 30 18:14:48 2014/-kk/
+/cxx-irgen.cpp/1.1.1.2/Fri Oct  3 09:22:36 2014/-kk/
 /cxx-linkage-cache.cpp/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /cxx-many-overloads.cpp/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
-/cxx-templates.cpp/1.1.1.2/Tue Jun  3 03:04:54 2014/-kk/
+/cxx-templates.cpp/1.1.1.3/Fri Oct  3 09:22:36 2014/-kk/
 /cycles.c/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /declare-use.S/1.1.1.1/Fri May 30 18:14:48 2014/-kk/
 /declare-use1.cpp/1.1.1.2/Tue Jan 14 16:01:50 2014/-kk/
@@ -24,6 +24,8 @@
 /declare-use4.cpp/1.1.1.1/Fri May 30 18:14:48 2014/-kk/
 /decldef.m/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /decldef.mm/1.1.1.2/Tue Jun  3 03:04:54 2014/-kk/
+/dependency-dump-dependent-module.m/1.1.1.1/Sun Aug 10 17:08:44 2014/-kk/
+/dependency-dump.m/1.1.1.1/Sun Aug 10 17:08:44 2014/-kk/
 /dependency-gen-inferred-map.m/1.1.1.1/Fri May 30 18:14:48 2014/-kk/
 /dependency-gen-pch.m/1.1.1.1/Fri May 30 18:14:48 2014/-kk/
 /dependency-gen.m/1.1.1.1/Fri May 30 18:14:48 2014/-kk/
@@ -41,10 +43,12 @@
 /global_index.m/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /header-import.m/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /ignored_macros.m/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
+/implementation-of-module.m/1.1.1.1/Sun Aug 10 17:08:44 2014/-kk/
 /import-decl.cpp/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /import-self.m/1.1.1.1/Fri May 30 18:14:48 2014/-kk/
 /include-relative.c/1.1.1.1/Fri May 30 18:14:48 2014/-kk/
 /incomplete-module.m/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
+/inferred-framework-case.m/1.1.1.1/Sun Aug 10 17:08:44 2014/-kk/
 /inferred-frameworks.m/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /inferred-submodules.m/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /initializer_list.cpp/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
@@ -55,21 +59,23 @@
 /load_failure.c/1.1.1.2/Thu Feb 27 08:51:47 2014/-kk/
 /lookup.cpp/1.1.1.2/Thu Feb 27 08:51:47 2014/-kk/
 /lookup.m/1.1.1.2/Thu Feb 27 08:51:47 2014/-kk/
+/macro-hiding.cpp/1.1.1.1/Sun Aug 10 17:08:44 2014/-kk/
 /macro-undef-through-pch.m/1.1.1.1/Fri May 30 18:14:48 2014/-kk/
-/macros.c/1.1.1.3/Fri Mar 14 04:23:20 2014/-kk/
+/macros.c/1.1.1.4/Fri Oct  3 09:22:36 2014/-kk/
 /macros2.c/1.1.1.2/Tue Jun  3 03:04:54 2014/-kk/
 /malformed.cpp/1.1.1.1/Sun Jan  5 15:40:34 2014/-kk/
+/merge-typedefs.cpp/1.1.1.1/Sun Aug 10 17:08:44 2014/-kk/
 /method_pool.m/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /missing-header.m/1.1.1.1/Fri May 30 18:14:48 2014/-kk/
 /missing-submodule.m/1.1.1.1/Fri May 30 18:14:48 2014/-kk/
 /modify-module.m/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /modular_maps.cpp/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /module-private.cpp/1.1.1.2/Thu Feb 27 08:51:47 2014/-kk/
-/module_file_info.m/1.1.1.3/Tue Jun  3 03:04:54 2014/-kk/
+/module_file_info.m/1.1.1.4/Fri Oct  3 09:22:36 2014/-kk/
 /modulemap-locations.m/1.1.1.1/Fri May 30 18:14:48 2014/-kk/
 /modules-with-same-name.m/1.1.1.1/Fri May 30 18:14:48 2014/-kk/
 /namespaces.cpp/1.1.1.3/Tue Jun  3 03:04:54 2014/-kk/
-/no-stale-modtime.m/1.1.1.1/Fri May 30 18:14:48 2014/-kk/
+/no-stale-modtime.m/1.1.1.2/Fri Oct  3 09:22:36 2014/-kk/
 /normal-module-map.cpp/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /objc-categories.m/1.1.1.2/Thu Feb 27 08:51:47 2014/-kk/
 /objc_redef.m/1.1.1.2/Thu Feb 27 08:51:47 2014/-kk/
@@ -105,7 +111,7 @@
 /system_headers.m/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /system_version.m/1.1.1.2/Tue Jun  3 03:04:55 2014/-kk/
 /template-specialization-visibility.cpp/1.1.1.1/Fri May 30 18:14:48 2014/-kk/
-/templates.mm/1.1.1.2/Tue Jun  3 03:04:55 2014/-kk/
+/templates.mm/1.1.1.3/Fri Oct  3 09:22:36 2014/-kk/
 /undefined-type-fixit1.cpp/1.1.1.1/Fri May 30 18:14:48 2014/-kk/
 /unnecessary-module-map-parsing.c/1.1.1.1/Sun Jan  5 15:40:34 2014/-kk/
 /update-after-load.cpp/1.1.1.1/Fri May 30 18:14:48 2014/-kk/
@@ -113,5 +119,6 @@
 /validate-system-headers.m/1.1.1.1/Fri May 30 18:14:48 2014/-kk/
 /wildcard-submodule-exports.cpp/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 D/Inputs////
+D/macro-reexport////
 D/redecls////
 D/self-import-header////

@@ -44,6 +44,10 @@ message md_hello
 {
 }
 
+message md_may_remove_boot_medium
+{Jesli uruchomiles komputer z dyskietki, mozesz ja teraz wyciagnac.
+}
+
 message dobad144
 {Instalowanie tablicy zlych blokow ...
 }

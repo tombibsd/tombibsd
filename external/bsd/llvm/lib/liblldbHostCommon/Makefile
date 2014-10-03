@@ -12,10 +12,18 @@ SRCS+=	Condition.cpp \
 	File.cpp \
 	FileSpec.cpp \
 	Host.cpp \
+	IOObject.cpp \
 	Mutex.cpp \
+	NativeBreakpoint.cpp \
+	NativeBreakpointList.cpp \
+	NativeProcessProtocol.cpp \
+	NativeThreadProtocol.cpp \
 	OptionParser.cpp \
+	Pipe.cpp \
 	ProcessRunLock.cpp \
+	Socket.cpp \
 	SocketAddress.cpp \
+	SoftwareBreakpoint.cpp \
 	Symbols.cpp \
 	Terminal.cpp \
 	TimeValue.cpp

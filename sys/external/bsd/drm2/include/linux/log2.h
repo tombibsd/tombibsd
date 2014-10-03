@@ -58,6 +58,14 @@ roundup_pow_of_two(unsigned long n)
 	return (n + 1);
 }
 
+static inline unsigned long
+rounddown_pow_of_two(unsigned long n)
+{
+
+	/* XXX fls64 is not fls_ulong, but it'll do for now.  */
+	return (1UL << (fls64(n) - 1));
+}
+
 static inline unsigned
 order_base_2(unsigned long n)
 {

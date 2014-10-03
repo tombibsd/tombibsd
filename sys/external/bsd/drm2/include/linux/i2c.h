@@ -49,13 +49,32 @@ struct i2c_msg;
 struct i2c_board_info {
 	char			type[I2C_NAME_SIZE];
 	uint16_t		addr;
+	void			*platform_data;
 };
 
 static inline void
-i2c_new_device(struct i2c_adapter *adapter __unused,
-    struct i2c_board_info *board __unused)
+i2c_new_device(const struct i2c_adapter *adapter __unused,
+    const struct i2c_board_info *board __unused)
 {
 }
+
+struct i2c_driver {
+};
+
+struct module;
+static inline int
+i2c_register_driver(const struct module *owner __unused,
+    const struct i2c_driver *driver __unused)
+{
+	return 0;
+}
+
+static inline void
+i2c_del_driver(const struct i2c_driver *driver __unused)
+{
+}
+
+struct i2c_client;
 
 struct i2c_adapter {
 	char		 		name[I2C_NAME_SIZE];

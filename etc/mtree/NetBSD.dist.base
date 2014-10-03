@@ -100,7 +100,7 @@
 ./usr/include/c++
 ./usr/include/c++/experimental
 ./usr/include/c++/ext
-./usr/include/clang-3.5
+./usr/include/clang-3.6
 ./usr/include/crypto
 ./usr/include/dev
 ./usr/include/dev/apm
@@ -1200,6 +1200,8 @@
 ./usr/share/nls/zh_CN.UTF-8
 ./usr/share/nvi
 ./usr/share/nvi/catalog
+./usr/share/sysinst
+./usr/share/sysinst/catalog
 ./usr/share/tabset
 ./usr/share/tmac
 ./usr/share/tmac/mdoc

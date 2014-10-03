@@ -30,8 +30,10 @@
 #
 
 include <arch/arm/samsung/sscom_reg.h>
+include <arch/evbarm/include/bootconfig.h>
 
 define	UTRSTAT_TXEMPTY		UTRSTAT_TXEMPTY
 define	UTRSTAT_TXSHIFTER_EMPTY	UTRSTAT_TXSHIFTER_EMPTY
 define	SSCOM_UTXH		SSCOM_UTXH
 define	SSCOM_UTRSTAT		SSCOM_UTRSTAT
+define	MAX_BOOT_STRING		MAX_BOOT_STRING

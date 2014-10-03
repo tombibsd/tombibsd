@@ -125,7 +125,7 @@ sco_accept(struct socket *so, struct mbuf *nam)
 }
 
 static int
-sco_bind(struct socket *so, struct mbuf *nam)
+sco_bind(struct socket *so, struct mbuf *nam, struct lwp *l)
 {
 	struct sco_pcb *pcb = so->so_pcb;
 	struct sockaddr_bt *sa;
@@ -147,7 +147,7 @@ sco_bind(struct socket *so, struct mbuf *nam)
 }
 
 static int
-sco_listen(struct socket *so)
+sco_listen(struct socket *so, struct lwp *l)
 {
 	struct sco_pcb *pcb = so->so_pcb;
 
@@ -160,7 +160,7 @@ sco_listen(struct socket *so)
 }
 
 static int
-sco_connect(struct socket *so, struct mbuf *nam)
+sco_connect(struct socket *so, struct mbuf *nam, struct lwp *l)
 {
 	struct sco_pcb *pcb = so->so_pcb;
 	struct sockaddr_bt *sa;
@@ -180,6 +180,19 @@ sco_connect(struct socket *so, struct mbuf *nam)
 
 	soisconnecting(so);
 	return sco_connect_pcb(pcb, sa);
+}
+
+static int
+sco_connect2(struct socket *so, struct socket *so2)
+{
+	struct sco_pcb *pcb = so->so_pcb;
+
+	KASSERT(solocked(so));
+
+	if (pcb == NULL)
+		return EINVAL;
+
+	return EOPNOTSUPP;
 }
 
 static int
@@ -266,11 +279,60 @@ sco_sockaddr(struct socket *so, struct mbuf *nam)
 }
 
 static int
+sco_rcvd(struct socket *so, int flags, struct lwp *l)
+{
+	KASSERT(solocked(so));
+
+	return EOPNOTSUPP;
+}
+
+static int
 sco_recvoob(struct socket *so, struct mbuf *m, int flags)
 {
 	KASSERT(solocked(so));
 
 	return EOPNOTSUPP;
+}
+
+static int
+sco_send(struct socket *so, struct mbuf *m, struct mbuf *nam,
+    struct mbuf *control, struct lwp *l)
+{
+	struct sco_pcb *pcb = so->so_pcb;
+	int err = 0;
+	struct mbuf *m0;
+
+	KASSERT(solocked(so));
+	KASSERT(m != NULL);
+
+	if (control) /* no use for that */
+		m_freem(control);
+
+	if (pcb == NULL) {
+		err = EINVAL;
+		goto release;
+	}
+
+	if (m->m_pkthdr.len == 0)
+		goto release;
+
+	if (m->m_pkthdr.len > pcb->sp_mtu) {
+		err = EMSGSIZE;
+		goto release;
+	}
+
+	m0 = m_copypacket(m, M_DONTWAIT);
+	if (m0 == NULL) {
+		err = ENOMEM;
+		goto release;
+	}
+
+	sbappendrecord(&so->so_snd, m);
+	return sco_send_pcb(pcb, m0);
+
+release:
+	m_freem(m);
+	return err;
 }
 
 static int
@@ -282,6 +344,13 @@ sco_sendoob(struct socket *so, struct mbuf *m, struct mbuf *control)
 		m_freem(m);
 	if (control)
 		m_freem(control);
+
+	return EOPNOTSUPP;
+}
+
+static int
+sco_purgeif(struct socket *so, struct ifnet *ifp)
+{
 
 	return EOPNOTSUPP;
 }
@@ -301,8 +370,7 @@ static int
 sco_usrreq(struct socket *up, int req, struct mbuf *m,
     struct mbuf *nam, struct mbuf *ctl, struct lwp *l)
 {
-	struct sco_pcb *pcb = (struct sco_pcb *)up->so_pcb;
-	struct mbuf *m0;
+	struct sco_pcb *pcb = up->so_pcb;
 	int err = 0;
 
 	DPRINTFN(2, "%s\n", prurequests[req]);
@@ -312,6 +380,7 @@ sco_usrreq(struct socket *up, int req, struct mbuf *m,
 	KASSERT(req != PRU_BIND);
 	KASSERT(req != PRU_LISTEN);
 	KASSERT(req != PRU_CONNECT);
+	KASSERT(req != PRU_CONNECT2);
 	KASSERT(req != PRU_DISCONNECT);
 	KASSERT(req != PRU_SHUTDOWN);
 	KASSERT(req != PRU_ABORT);
@@ -319,13 +388,11 @@ sco_usrreq(struct socket *up, int req, struct mbuf *m,
 	KASSERT(req != PRU_SENSE);
 	KASSERT(req != PRU_PEERADDR);
 	KASSERT(req != PRU_SOCKADDR);
+	KASSERT(req != PRU_RCVD);
 	KASSERT(req != PRU_RCVOOB);
+	KASSERT(req != PRU_SEND);
 	KASSERT(req != PRU_SENDOOB);
-
-	switch(req) {
-	case PRU_PURGEIF:
-		return EOPNOTSUPP;
-	}
+	KASSERT(req != PRU_PURGEIF);
 
 	/* anything after here *requires* a pcb */
 	if (pcb == NULL) {
@@ -334,32 +401,6 @@ sco_usrreq(struct socket *up, int req, struct mbuf *m,
 	}
 
 	switch(req) {
-	case PRU_SEND:
-		KASSERT(m != NULL);
-		if (m->m_pkthdr.len == 0)
-			break;
-
-		if (m->m_pkthdr.len > pcb->sp_mtu) {
-			err = EMSGSIZE;
-			break;
-		}
-
-		m0 = m_copypacket(m, M_DONTWAIT);
-		if (m0 == NULL) {
-			err = ENOMEM;
-			break;
-		}
-
-		if (ctl) /* no use for that */
-			m_freem(ctl);
-
-		sbappendrecord(&up->so_snd, m);
-		return sco_send(pcb, m0);
-
-	case PRU_RCVD:
-		return EOPNOTSUPP;	/* (no release) */
-
-	case PRU_CONNECT2:
 	case PRU_FASTTIMO:
 	case PRU_SLOWTIMO:
 	case PRU_PROTORCV:
@@ -506,6 +547,7 @@ PR_WRAP_USRREQS(sco)
 #define	sco_bind		sco_bind_wrapper
 #define	sco_listen		sco_listen_wrapper
 #define	sco_connect		sco_connect_wrapper
+#define	sco_connect2		sco_connect2_wrapper
 #define	sco_disconnect		sco_disconnect_wrapper
 #define	sco_shutdown		sco_shutdown_wrapper
 #define	sco_abort		sco_abort_wrapper
@@ -513,8 +555,11 @@ PR_WRAP_USRREQS(sco)
 #define	sco_stat		sco_stat_wrapper
 #define	sco_peeraddr		sco_peeraddr_wrapper
 #define	sco_sockaddr		sco_sockaddr_wrapper
+#define	sco_rcvd		sco_rcvd_wrapper
 #define	sco_recvoob		sco_recvoob_wrapper
+#define	sco_send		sco_send_wrapper
 #define	sco_sendoob		sco_sendoob_wrapper
+#define	sco_purgeif		sco_purgeif_wrapper
 #define	sco_usrreq		sco_usrreq_wrapper
 
 const struct pr_usrreqs sco_usrreqs = {
@@ -524,6 +569,7 @@ const struct pr_usrreqs sco_usrreqs = {
 	.pr_bind	= sco_bind,
 	.pr_listen	= sco_listen,
 	.pr_connect	= sco_connect,
+	.pr_connect2	= sco_connect2,
 	.pr_disconnect	= sco_disconnect,
 	.pr_shutdown	= sco_shutdown,
 	.pr_abort	= sco_abort,
@@ -531,7 +577,10 @@ const struct pr_usrreqs sco_usrreqs = {
 	.pr_stat	= sco_stat,
 	.pr_peeraddr	= sco_peeraddr,
 	.pr_sockaddr	= sco_sockaddr,
+	.pr_rcvd	= sco_rcvd,
 	.pr_recvoob	= sco_recvoob,
+	.pr_send	= sco_send,
 	.pr_sendoob	= sco_sendoob,
+	.pr_purgeif	= sco_purgeif,
 	.pr_generic	= sco_usrreq,
 };

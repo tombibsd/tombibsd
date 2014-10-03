@@ -358,7 +358,8 @@ nomem:
 #endif
 				rnd_attach_source(&csc->rnd_source,
 						  device_xname(dev),
-						  RND_TYPE_TTY, 0);
+						  RND_TYPE_TTY,
+						  RND_FLAG_DEFAULT);
 			}
 		}
 	}

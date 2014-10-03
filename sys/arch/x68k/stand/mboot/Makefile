@@ -15,8 +15,6 @@ BINDIR=		/usr/mdec
 BINMODE=	444
 STRIPFLAG=
 
-STRIP?=		/usr/bin/strip
-
 SRCS=		srt0.S mboot.c
 KERN!=		cd ${.CURDIR}/../../../..; pwd
 

@@ -14,7 +14,7 @@ CPPFLAGS+=-I${NETBSDSRCDIR}/sys
 
 AFLAGS+=-I${ARCHDIR}
 
-.if ${MACHINE_ARCH} == "powerpc64"
+.if ${LIBC_MACHINE_ARCH} == "powerpc64"
 # XXX: How come it does not resolve from libc?
 .PATH.c: ${NETBSDSRCDIR}/lib/libc/gen
 SRCS+= _errno.c

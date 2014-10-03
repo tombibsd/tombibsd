@@ -5143,7 +5143,7 @@ tulip_attach(
 
 #if defined(__NetBSD__)
     rnd_attach_source(&sc->tulip_rndsource, device_xname(sc->tulip_dev),
-		      RND_TYPE_NET, 0);
+		      RND_TYPE_NET, RND_FLAG_DEFAULT);
 #endif
 }
 

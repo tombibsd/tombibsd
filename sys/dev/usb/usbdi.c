@@ -548,7 +548,6 @@ usbd_status
 usbd_abort_pipe(usbd_pipe_handle pipe)
 {
 	usbd_status err;
-	usbd_xfer_handle intrxfer = pipe->intrxfer;
 
 #ifdef DIAGNOSTIC
 	if (pipe == NULL) {
@@ -559,8 +558,6 @@ usbd_abort_pipe(usbd_pipe_handle pipe)
 	usbd_lock_pipe(pipe);
 	err = usbd_ar_pipe(pipe);
 	usbd_unlock_pipe(pipe);
-	if (pipe->intrxfer != intrxfer)
-		usbd_free_xfer(intrxfer);
 	return (err);
 }
 

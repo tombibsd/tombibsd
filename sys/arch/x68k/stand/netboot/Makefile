@@ -22,14 +22,12 @@ BINMODE=	444
 STRIPFLAG=
 
 BFDNAME=	a.out-m68k-netbsd
-STRIP?=		/usr/bin/strip
-OBJCOPY?=	/usr/bin/objcopy
 
 # XXX shared sources should be in COMMONDIR
 BOOTDIR=	${.CURDIR}/../boot
 .PATH:		${BOOTDIR}
 
-SRCS=		srt0.S boot.c conf.c exec_image.S if_ne.c ne.c dp8390.c
+SRCS=		srt0.S boot.c conf.c switch.c exec_image.S if_ne.c ne.c dp8390.c
 S=		${.CURDIR}/../../../..
 M=		${.CURDIR}/../..
 COMMONDIR=	$M/stand/common

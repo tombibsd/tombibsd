@@ -1489,7 +1489,6 @@ nfs_init0(void)
 	nfs_ticks = (hz * NFS_TICKINTVL + 500) / 1000;
 	if (nfs_ticks < 1)
 		nfs_ticks = 1;
-	nfs_xid = cprng_fast32();
 	nfsdreq_init();
 
 	/*
@@ -2001,6 +2000,10 @@ u_int32_t
 nfs_getxid(void)
 {
 	u_int32_t newxid;
+
+	if (__predict_false(nfs_xid == 0)) {
+		nfs_xid = cprng_fast32();
+	}
 
 	/* get next xid.  skip 0 */
 	do {

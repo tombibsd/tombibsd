@@ -334,7 +334,7 @@ npe_attach(device_t parent, device_t self, void *arg)
 	if_attach(ifp);
 	ether_ifattach(ifp, sc->sc_enaddr);
 	rnd_attach_source(&sc->rnd_source, device_xname(sc->sc_dev),
-	    RND_TYPE_NET, 0);
+	    RND_TYPE_NET, RND_FLAG_DEFAULT);
 
 	/* callback function to reset MAC */
 	isc->macresetcbfunc = npeinit_resetcb;

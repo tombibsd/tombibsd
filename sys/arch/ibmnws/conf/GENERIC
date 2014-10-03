@@ -6,8 +6,6 @@ include "arch/ibmnws/conf/std.ibmnws"
 
 options 	INCLUDE_CONFIG_FILE	# embed config file in kernel binary
 
-#makeoptions	COPTS="-Os -mmultiple"	# -Os -mmultiple to reduce size.
-
 # Console settings
 options 	CONSOLE="\"genfb\""
 #options		CONSOLE="\"com\""

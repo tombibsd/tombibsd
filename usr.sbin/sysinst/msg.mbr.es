@@ -156,8 +156,6 @@ Seleccione la partición que desee editar:
 message Partition_table_ok
 {Tabla de particiones OK}
 
-message Delete_partition
-{Borrar partición}
 message Dont_change
 {No cambiar}
 message Other_kind

@@ -1,12 +1,12 @@
-/Makefile/1.28/Fri Jan 31 08:48:40 2014/-kk/
-/boot.c/1.19/Sat May 19 14:40:13 2012/-kk/
+/Makefile/1.29/Fri Oct  3 09:25:49 2014/-kk/
+/boot.c/1.20/Fri Oct  3 09:25:49 2014/-kk/
 /boot.h/1.10/Sat May 19 14:40:13 2012/-kk/
 /clock.c/1.10/Tue Mar  2 21:52:32 2010/-kk/
 /com.c/1.5/Mon Apr 10 18:40:06 2006/-kk/
 /conf.c/1.6/Sat May 19 14:40:13 2012/-kk/
 /cons.c/1.8/Tue Feb  8 20:20:22 2011/-kk/
 /cons.h/1.5/Tue Feb  8 20:20:22 2011/-kk/
-/devopen.c/1.4/Sat May 19 14:40:13 2012/-kk/
+/devopen.c/1.5/Fri Oct  3 09:25:49 2014/-kk/
 /filesystem.c/1.4/Sat May 19 14:40:13 2012/-kk/
 /inkernel.c/1.9/Mon Apr 28 20:23:33 2008/-kk/
 /io.c/1.5/Sat May 19 14:40:13 2012/-kk/

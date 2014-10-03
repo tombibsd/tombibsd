@@ -1462,8 +1462,6 @@ sysace_send_config(struct ace_softc *sc, uint32_t *Data, unsigned int nBytes)
  * Rest of code lifted with mods from the dev\ata\wd.c driver
  */
 
-/*	$NetBSD$ */
-
 /*
  * Copyright (c) 1998, 2001 Manuel Bouyer.  All rights reserved.
  *
@@ -1657,7 +1655,7 @@ aceattach(struct ace_softc *ace)
 	disk_attach(&ace->sc_dk);
 
 	rnd_attach_source(&ace->rnd_source, device_xname(ace->sc_dev),
-			  RND_TYPE_DISK, 0);
+			  RND_TYPE_DISK, RND_FLAG_DEFAULT);
 
 }
 

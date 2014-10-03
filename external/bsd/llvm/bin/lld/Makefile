@@ -27,6 +27,8 @@ LLD_LIBS+= \
 
 LLVM_LIBS+= \
 	Object \
+	MCParser \
+	MC \
 	BitReader \
 	IR \
 	DebugInfo \

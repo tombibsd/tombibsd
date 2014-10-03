@@ -223,7 +223,7 @@ enic_attach(device_t parent, device_t self, void *aux)
 		panic("enic_attach: cannot establish shutdown hook");
 
 	rnd_attach_source(&sc->rnd_source, device_xname(sc->sc_dev),
-			  RND_TYPE_NET, 0);
+			  RND_TYPE_NET, RND_FLAG_DEFAULT);
 
 	ebus_intr_establish(parent, (void *)ia->ia_cookie, IPL_NET,
 	    enic_intr, sc);
