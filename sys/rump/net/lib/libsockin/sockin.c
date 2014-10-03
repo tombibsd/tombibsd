@@ -69,10 +69,18 @@ static void	sockin_init(void);
 static int	sockin_attach(struct socket *, int);
 static void	sockin_detach(struct socket *);
 static int	sockin_accept(struct socket *, struct mbuf *);
+static int	sockin_bind(struct socket *, struct mbuf *);
+static int	sockin_listen(struct socket *);
+static int	sockin_connect(struct socket *, struct mbuf *);
+static int	sockin_disconnect(struct socket *);
+static int	sockin_shutdown(struct socket *);
+static int	sockin_abort(struct socket *);
 static int	sockin_ioctl(struct socket *, u_long, void *, struct ifnet *);
 static int	sockin_stat(struct socket *, struct stat *);
 static int	sockin_peeraddr(struct socket *, struct mbuf *);
 static int	sockin_sockaddr(struct socket *, struct mbuf *);
+static int	sockin_recvoob(struct socket *, struct mbuf *, int);
+static int	sockin_sendoob(struct socket *, struct mbuf *, struct mbuf *);
 static int	sockin_usrreq(struct socket *, int, struct mbuf *,
 			      struct mbuf *, struct mbuf *, struct lwp *);
 static int	sockin_ctloutput(int op, struct socket *, struct sockopt *);
@@ -81,10 +89,18 @@ static const struct pr_usrreqs sockin_usrreqs = {
 	.pr_attach = sockin_attach,
 	.pr_detach = sockin_detach,
 	.pr_accept = sockin_accept,
+	.pr_bind = sockin_bind,
+	.pr_listen = sockin_listen,
+	.pr_connect = sockin_connect,
+	.pr_disconnect = sockin_disconnect,
+	.pr_shutdown = sockin_shutdown,
+	.pr_abort = sockin_abort,
 	.pr_ioctl = sockin_ioctl,
 	.pr_stat = sockin_stat,
 	.pr_peeraddr = sockin_peeraddr,
 	.pr_sockaddr = sockin_sockaddr,
+	.pr_recvoob = sockin_recvoob,
+	.pr_sendoob = sockin_sendoob,
 	.pr_generic = sockin_usrreq,
 };
 
@@ -469,6 +485,66 @@ sockin_accept(struct socket *so, struct mbuf *nam)
 }
 
 static int
+sockin_bind(struct socket *so, struct mbuf *nam)
+{
+	KASSERT(solocked(so));
+	KASSERT(nam != NULL);
+
+	return rumpcomp_sockin_bind(SO2S(so),
+	    mtod(nam, const struct sockaddr *),
+	    nam->m_len);
+}
+
+static int
+sockin_listen(struct socket *so)
+{
+	KASSERT(solocked(so));
+
+	return rumpcomp_sockin_listen(SO2S(so), so->so_qlimit);
+}
+
+static int
+sockin_connect(struct socket *so, struct mbuf *nam)
+{
+	int error = 0;
+
+	KASSERT(solocked(so));
+	KASSERT(nam != NULL);
+
+	error = rumpcomp_sockin_connect(SO2S(so),
+	    mtod(nam, struct sockaddr *), nam->m_len);
+	if (error == 0)
+		soisconnected(so);
+
+	return error;
+}
+
+static int
+sockin_disconnect(struct socket *so)
+{
+	KASSERT(solocked(so));
+
+	panic("sockin_disconnect: IMPLEMENT ME, disconnect not supported");
+}
+
+static int
+sockin_shutdown(struct socket *so)
+{
+	KASSERT(solocked(so));
+
+	removesock(so);
+	return 0;
+}
+
+static int
+sockin_abort(struct socket *so)
+{
+	KASSERT(solocked(so));
+
+	panic("sockin_abort: IMPLEMENT ME, abort not supported");
+}
+
+static int
 sockin_ioctl(struct socket *so, u_long cmd, void *nam, struct ifnet *ifp)
 {
 	return ENOTTY;
@@ -513,35 +589,42 @@ sockin_sockaddr(struct socket *so, struct mbuf *nam)
 }
 
 static int
+sockin_recvoob(struct socket *so, struct mbuf *m, int flags)
+{
+	KASSERT(solocked(so));
+
+	panic("sockin_recvoob: IMPLEMENT ME, recvoob not supported");
+}
+
+static int
+sockin_sendoob(struct socket *so, struct mbuf *m, struct mbuf *control)
+{
+	KASSERT(solocked(so));
+
+	panic("sockin_sendoob: IMPLEMENT ME, sendoob not supported");
+}
+
+static int
 sockin_usrreq(struct socket *so, int req, struct mbuf *m, struct mbuf *nam,
 	struct mbuf *control, struct lwp *l)
 {
 	int error = 0;
 
 	KASSERT(req != PRU_ACCEPT);
+	KASSERT(req != PRU_BIND);
+	KASSERT(req != PRU_LISTEN);
+	KASSERT(req != PRU_CONNECT);
+	KASSERT(req != PRU_DISCONNECT);
+	KASSERT(req != PRU_SHUTDOWN);
+	KASSERT(req != PRU_ABORT);
 	KASSERT(req != PRU_CONTROL);
 	KASSERT(req != PRU_SENSE);
 	KASSERT(req != PRU_PEERADDR);
 	KASSERT(req != PRU_SOCKADDR);
+	KASSERT(req != PRU_RCVOOB);
+	KASSERT(req != PRU_SENDOOB);
 
 	switch (req) {
-	case PRU_BIND:
-		error = rumpcomp_sockin_bind(SO2S(so),
-		    mtod(nam, const struct sockaddr *),
-		    nam->m_len);
-		break;
-
-	case PRU_CONNECT:
-		error = rumpcomp_sockin_connect(SO2S(so),
-		    mtod(nam, struct sockaddr *), nam->m_len);
-		if (error == 0)
-			soisconnected(so);
-		break;
-
-	case PRU_LISTEN:
-		error = rumpcomp_sockin_listen(SO2S(so), so->so_qlimit);
-		break;
-
 	case PRU_SEND:
 	{
 		struct sockaddr *saddr;
@@ -596,10 +679,6 @@ sockin_usrreq(struct socket *so, int req, struct mbuf *m, struct mbuf *nam,
 		if (!rump_threads)
 			sockin_process(so);
 	}
-		break;
-
-	case PRU_SHUTDOWN:
-		removesock(so);
 		break;
 
 	default:

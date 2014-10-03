@@ -22,7 +22,7 @@ prepare_md_post:
 	    < ${.CURDIR}/boot.cfg.in > boot.cfg
 
 DISTRIBDIR!= cd ${.CURDIR}/../.. ; pwd
-SYSINSTDIR!= cd ${DISTRIBDIR}/utils/sysinst/arch/${MACHINE} && ${PRINTOBJDIR}
+SYSINSTDIR!= cd ${.CURDIR}/../../../usr.sbin/sysinst/arch/${MACHINE} && ${PRINTOBJDIR}
 
 SPEC_EXTRA=		${.CURDIR}/spec.inst
 IMGFILE_EXTRA=								\

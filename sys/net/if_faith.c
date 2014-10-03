@@ -136,7 +136,7 @@ faith_clone_destroy(struct ifnet *ifp)
 
 	bpf_detach(ifp);
 	if_detach(ifp);
-	free(ifp, M_DEVBUF);
+	if_free(ifp);
 
 	return (0);
 }

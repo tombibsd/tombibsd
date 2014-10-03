@@ -184,7 +184,7 @@ npf_packet_handler(void *arg, struct mbuf **mp, ifnet_t *ifp, int di)
 
 	/* If "passing" connection found - skip the ruleset inspection. */
 	if (con && npf_conn_pass(con, &rp)) {
-		npf_stats_inc(NPF_STAT_PASS_SESSION);
+		npf_stats_inc(NPF_STAT_PASS_CONN);
 		KASSERT(error == 0);
 		goto pass;
 	}

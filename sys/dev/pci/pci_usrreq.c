@@ -74,8 +74,10 @@ static int
 pciioctl(dev_t dev, u_long cmd, void *data, int flag, struct lwp *l)
 {
 	struct pci_softc *sc = device_lookup_private(&pci_cd, minor(dev));
+	struct pci_child *child;
 	struct pciio_bdf_cfgreg *bdfr;
 	struct pciio_businfo *binfo;
+	struct pciio_drvname *dname;
 	pcitag_t tag;
 
 	switch (cmd) {
@@ -103,6 +105,17 @@ pciioctl(dev_t dev, u_long cmd, void *data, int flag, struct lwp *l)
 		binfo = data;
 		binfo->busno = sc->sc_bus;
 		binfo->maxdevs = sc->sc_maxndevs;
+		return 0;
+
+	case PCI_IOC_DRVNAME:
+		dname = data;
+		if (dname->device >= sc->sc_maxndevs || dname->function > 7)
+			return EINVAL;
+		child = &sc->PCI_SC_DEVICESC(dname->device, dname->function);
+		if (!child->c_dev)
+			return ENXIO;
+		strlcpy(dname->name, device_xname(child->c_dev),
+			sizeof dname->name);
 		return 0;
 
 	default:
@@ -180,6 +193,7 @@ const struct cdevsw pci_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = pcimmap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_OTHER
 };
 

@@ -134,6 +134,7 @@ const struct cdevsw esh_cdevsw = {
 	.d_mmap = nommap,
 #endif
 	.d_kqfilter = nullkqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_OTHER
 };
 

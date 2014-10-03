@@ -125,10 +125,6 @@ ELFNAME2(netbsd32,probe_noteless)(struct lwp *l, struct exec_package *epp,
 	return 0;
 }
 
-/* round up and down to page boundaries. */
-#define	ELF_ROUND(a, b)		(((a) + (b) - 1) & ~((b) - 1))
-#define	ELF_TRUNC(a, b)		((a) & ~((b) - 1))
-
 /*
  * Copy arguments onto the stack in the normal way, but add some
  * extra information in case of dynamic binding.

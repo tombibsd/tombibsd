@@ -135,7 +135,7 @@ options 	RNDVERBOSE	# Verbose rnd messages
 # Development and Debugging options
 
 #options 	PERFCTRS	# performance counters
-options 	DIAGNOSTIC	# internally consistency checks
+options 	DIAGNOSTIC	# internal consistency checks
 options 	DEBUG
 #options 	LOCKDEBUG	# Enable lock debugging
 #options 	PMAP_DEBUG	# Enable pmap_debug_level code

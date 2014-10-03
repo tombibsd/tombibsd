@@ -100,7 +100,7 @@ genfb_init(struct genfb_softc *sc)
 
 	dict = device_properties(sc->sc_dev);
 #ifdef GENFB_DEBUG
-	printf(prop_dictionary_externalize(dict));
+	printf("%s", prop_dictionary_externalize(dict));
 #endif
 	prop_dictionary_get_bool(dict, "is_console", &console);
 
@@ -779,6 +779,8 @@ genfb_enable_polling(device_t dev)
 		SCREEN_ENABLE_DRAWING(&sc->sc_console_screen);
 		vcons_hard_switch(&sc->sc_console_screen);
 		vcons_enable_polling(&sc->vd);
+		if (sc->sc_ops.genfb_enable_polling)
+			(*sc->sc_ops.genfb_enable_polling)(sc);
 	}
 }
 
@@ -788,6 +790,8 @@ genfb_disable_polling(device_t dev)
 	struct genfb_softc *sc = device_private(dev);
 
 	if (sc->sc_console_screen.scr_vd) {
+		if (sc->sc_ops.genfb_disable_polling)
+			(*sc->sc_ops.genfb_disable_polling)(sc);
 		vcons_disable_polling(&sc->vd);
 	}
 }

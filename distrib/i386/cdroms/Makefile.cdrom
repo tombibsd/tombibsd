@@ -2,7 +2,7 @@
 
 .include <bsd.own.mk>
 
-SYSINSTDIR!= cd ${.CURDIR}/../../../utils/sysinst/arch/${MACHINE} && ${PRINTOBJDIR}
+SYSINSTDIR!= cd ${.CURDIR}/../../../../usr.sbin/sysinst/arch/${MACHINE} && ${PRINTOBJDIR}
 
 # Need multidot for the boot loader to read kernel modules as it doesn't
 # understand rockridge.

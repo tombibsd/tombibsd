@@ -198,6 +198,7 @@ const struct cdevsw sscom_cdevsw = {
 	.d_poll = sscompoll,
 	.d_mmap = nommap,
 	.d_kqfilter = ttykqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_TTY
 };
 

@@ -86,8 +86,8 @@ __start:
 	/*
 	 * Set all the registers we don't care about to a known junk value.
 	 */
-	lis	%r2,0xdeadbeef@ha
-	addi	%r2,%r2,0xdeadbeef@l
+	lis	%r2,0xdeadbeef@h
+	ori	%r2,%r2,0xdeadbeef@l
 	mr	%r9,%r2
 	mr	%r10,%r9
 	mr	%r11,%r9

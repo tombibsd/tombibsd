@@ -213,6 +213,7 @@ const struct cdevsw opms_cdevsw = {
 	.d_poll = opmspoll,
 	.d_mmap = nommap,
 	.d_kqfilter = opmskqfilter,
+	.d_discard = nodiscard,
 	.d_flag = 0
 };
 

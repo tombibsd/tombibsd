@@ -199,6 +199,7 @@ const struct cdevsw wsdisplay_cdevsw = {
 	.d_poll = wsdisplaypoll,
 	.d_mmap = wsdisplaymmap,
 	.d_kqfilter = wsdisplaykqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_TTY
 };
 

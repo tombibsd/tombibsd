@@ -102,12 +102,12 @@ l2cap_attach_pcb(struct l2cap_channel **handle,
 }
 
 /*
- * l2cap_bind(l2cap_channel, sockaddr)
+ * l2cap_bind_pcb(l2cap_channel, sockaddr)
  *
  *	set local address of channel
  */
 int
-l2cap_bind(struct l2cap_channel *chan, struct sockaddr_bt *addr)
+l2cap_bind_pcb(struct l2cap_channel *chan, struct sockaddr_bt *addr)
 {
 
 	if (chan->lc_lcid != L2CAP_NULL_CID)
@@ -131,7 +131,7 @@ l2cap_sockaddr_pcb(struct l2cap_channel *chan, struct sockaddr_bt *addr)
 }
 
 /*
- * l2cap_connect(l2cap_channel, sockaddr)
+ * l2cap_connect_pcb(l2cap_channel, sockaddr)
  *
  *	Initiate a connection to destination. This corresponds to
  *	"Open Channel Request" in the L2CAP specification and will
@@ -144,7 +144,7 @@ l2cap_sockaddr_pcb(struct l2cap_channel *chan, struct sockaddr_bt *addr)
  *		proto->connecting(upper)
  */
 int
-l2cap_connect(struct l2cap_channel *chan, struct sockaddr_bt *dest)
+l2cap_connect_pcb(struct l2cap_channel *chan, struct sockaddr_bt *dest)
 {
 	struct hci_unit *unit;
 	int err;
@@ -222,7 +222,7 @@ l2cap_peeraddr_pcb(struct l2cap_channel *chan, struct sockaddr_bt *addr)
 }
 
 /*
- * l2cap_disconnect(l2cap_channel, linger)
+ * l2cap_disconnect_pcb(l2cap_channel, linger)
  *
  *	Initiate L2CAP disconnection. This corresponds to
  *	"Close Channel Request" in the L2CAP specification
@@ -235,7 +235,7 @@ l2cap_peeraddr_pcb(struct l2cap_channel *chan, struct sockaddr_bt *addr)
  *	the queue.
  */
 int
-l2cap_disconnect(struct l2cap_channel *chan, int linger)
+l2cap_disconnect_pcb(struct l2cap_channel *chan, int linger)
 {
 	int err = 0;
 
@@ -291,7 +291,7 @@ l2cap_detach_pcb(struct l2cap_channel **handle)
 }
 
 /*
- * l2cap_listen(l2cap_channel)
+ * l2cap_listen_pcb(l2cap_channel)
  *
  *	Use this channel as a listening post (until detached). This will
  *	result in calls to:
@@ -308,7 +308,7 @@ l2cap_detach_pcb(struct l2cap_channel **handle)
  *	You cannot use this channel for anything else subsequent to this call
  */
 int
-l2cap_listen(struct l2cap_channel *chan)
+l2cap_listen_pcb(struct l2cap_channel *chan)
 {
 	struct l2cap_channel *used, *prev = NULL;
 	uint32_t psm;

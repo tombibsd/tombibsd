@@ -57,6 +57,8 @@ get_distname() {
 cleanup_dist() {
 	log "Removing unnecessary files from dist"
 	( cd dist && rm -rf ${CLEAN_PATTERNS} )
+	find dist -name .deps -exec rm -fr {} +
+	find dist -name .dirstamp -exec rm -f {} +
 }
 
 diff_dirs() {
@@ -98,6 +100,7 @@ main() {
 	extract_distfile "${distfile}" "${distname}"
 	cleanup_dist
 	diff_dirs dist.old dist
+	cleantags dist
 	log "Don't forget to update the -D flags in usr.bin/tmux/Makefile" \
 	    "and to update the version in doc/3RDPARTY"
 }

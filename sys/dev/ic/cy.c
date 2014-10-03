@@ -68,6 +68,7 @@ const struct cdevsw cy_cdevsw = {
 	.d_poll = cypoll,
 	.d_mmap = nommap,
 	.d_kqfilter = ttykqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_TTY
 };
 

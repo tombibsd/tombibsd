@@ -8,4 +8,4 @@
 PROG	sysinst
 PROG	usr/bin/progress
 
-SPECIAL	sysinst	srcdir	distrib/utils/sysinst/arch/${MACHINE}
+SPECIAL	sysinst	srcdir	usr.sbin/sysinst/arch/${MACHINE}

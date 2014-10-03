@@ -57,7 +57,8 @@
 ./usr/include/newsmips/rwlock.h			comp-c-include
 ./usr/include/newsmips/setjmp.h			comp-c-include
 ./usr/include/newsmips/signal.h			comp-c-include
-./usr/include/newsmips/sljitarch.h		comp-c-include
+./usr/include/newsmips/sljitarch.h		comp-obsolete		obsolete
+./usr/include/newsmips/sljit_machdep.h		comp-c-include
 ./usr/include/newsmips/stdarg.h			comp-obsolete		obsolete
 ./usr/include/newsmips/trap.h			comp-c-include
 ./usr/include/newsmips/types.h			comp-c-include

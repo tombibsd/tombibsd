@@ -126,6 +126,7 @@ const struct cdevsw uhid_cdevsw = {
 	.d_poll = uhidpoll,
 	.d_mmap = nommap,
 	.d_kqfilter = uhidkqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_OTHER | D_MPSAFE
 };
 

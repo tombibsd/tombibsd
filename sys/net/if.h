@@ -981,12 +981,16 @@ __END_DECLS
 #ifdef _KERNEL
 
 #define	IFNET_FIRST()			TAILQ_FIRST(&ifnet_list)
+#define	IFNET_EMPTY()			TAILQ_EMPTY(&ifnet_list)
 #define	IFNET_NEXT(__ifp)		TAILQ_NEXT((__ifp), if_list)
 #define	IFNET_FOREACH(__ifp)		TAILQ_FOREACH(__ifp, &ifnet_list, if_list)
 #define	IFADDR_FIRST(__ifp)		TAILQ_FIRST(&(__ifp)->if_addrlist)
 #define	IFADDR_NEXT(__ifa)		TAILQ_NEXT((__ifa), ifa_list)
 #define	IFADDR_FOREACH(__ifa, __ifp)	TAILQ_FOREACH(__ifa, \
 					    &(__ifp)->if_addrlist, ifa_list)
+#define	IFADDR_FOREACH_SAFE(__ifa, __ifp, __nifa) \
+					    TAILQ_FOREACH_SAFE(__ifa, \
+					    &(__ifp)->if_addrlist, ifa_list, __nifa)
 #define	IFADDR_EMPTY(__ifp)		TAILQ_EMPTY(&(__ifp)->if_addrlist)
 
 extern struct ifnet_head ifnet_list;

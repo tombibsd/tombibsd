@@ -252,6 +252,7 @@ const char * const dhcpcd_embedded_conf[] = {
 "define6 26 index embed prefix",
 "embed uint32 pltime",
 "embed uint32 vltime",
+"embed byte length",
 "embed ip6address prefix",
 "encap 13 option",
 "encap 67 option",

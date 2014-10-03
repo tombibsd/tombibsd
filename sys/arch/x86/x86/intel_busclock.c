@@ -144,18 +144,8 @@ p3_get_bus_clock(struct cpu_info *ci)
 		}
 		break;
 	case 0xe: /* Core Duo/Solo */
-		/*
-		 * XXX (See also case 0xc)
-		 * Newer CPUs will GP when attemping to access MSR_FSB_FREQ.
-		 * In the long-term, use ACPI instead of all this.
-		 */
-		if (rdmsr_safe(MSR_FSB_FREQ, &msr) == EFAULT) {
-			aprint_debug_dev(ci->ci_dev,
-			    "unable to determine bus speed");
-			goto print_msr;
-		}
-		/* FALLTHROUGH */
 	case 0xf: /* Core Xeon */
+	case 0x17: /* Xeon [35]000, Core 2 Quad [89]00 */
 		if (rdmsr_safe(MSR_FSB_FREQ, &msr) == EFAULT) {
 			aprint_debug_dev(ci->ci_dev,
 			    "unable to determine bus speed");
@@ -180,6 +170,9 @@ p3_get_bus_clock(struct cpu_info *ci)
 			break;
 		case 4:
 			bus_clock = 33333;
+			break;
+		case 6:
+			bus_clock = 40000;
 			break;
 		default:
 			aprint_debug("%s: unknown Core FSB_FREQ value %d",
@@ -247,7 +240,10 @@ p3_get_bus_clock(struct cpu_info *ci)
 		}
 		break;
 	case 0x37: /* Silvermont */
+	case 0x4a:
 	case 0x4d:
+	case 0x5a:
+	case 0x5d:
 		if (rdmsr_safe(MSR_FSB_FREQ, &msr) == EFAULT) {
 			aprint_debug_dev(ci->ci_dev,
 			    "unable to determine bus speed");
@@ -268,7 +264,7 @@ p3_get_bus_clock(struct cpu_info *ci)
 			bus_clock = 13333;
 			break;
 		case 3:
-			bus_clock = 16667;
+			bus_clock = 11667;
 			break;
 		default:
 			aprint_debug("%s: unknown Silvermont FSB_FREQ value %d",
@@ -277,7 +273,7 @@ p3_get_bus_clock(struct cpu_info *ci)
 		}
 		break;
 	default:
-		aprint_debug("%s: unknown i686 model %d, can't get bus clock",
+		aprint_debug("%s: unknown i686 model %02x, can't get bus clock",
 		    device_xname(ci->ci_dev),
 		    CPUID_TO_MODEL(ci->ci_signature));
 print_msr:

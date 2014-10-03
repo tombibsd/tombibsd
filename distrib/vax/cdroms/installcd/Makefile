@@ -9,7 +9,7 @@ CLEANFILES+= fs.spec
 
 # for PRINTOBJDIR
 .include <bsd.own.mk>
-SYSINSTDIR!= cd ${.CURDIR}/../../../utils/sysinst/arch/${MACHINE} && ${PRINTOBJDIR}
+SYSINSTDIR!= cd ${.CURDIR}/../../../../usr.sbin/sysinst/arch/${MACHINE} && ${PRINTOBJDIR}
 
 # prepare mutliuser install environment
 image_md_pre:

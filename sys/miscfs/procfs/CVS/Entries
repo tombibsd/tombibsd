@@ -1,6 +1,6 @@
 /Makefile/1.1/Fri Jun 12 23:23:04 1998/-kk/
 /files.procfs/1.8/Wed Aug 30 13:49:27 2006/-kk/
-/procfs.h/1.69/Sat Apr 19 05:37:01 2014/-kk/
+/procfs.h/1.70/Fri Oct  3 09:09:27 2014/-kk/
 /procfs_cmdline.c/1.28/Fri Mar  4 22:25:32 2011/-kk/
 /procfs_ctl.c/1.47/Wed Oct 21 21:12:06 2009/-kk/
 /procfs_fd.c/1.14/Mon Apr 28 20:24:08 2008/-kk/
@@ -11,7 +11,7 @@
 /procfs_note.c/1.15/Thu Nov 16 01:33:38 2006/-kk/
 /procfs_regs.c/1.23/Thu Nov 16 01:33:38 2006/-kk/
 /procfs_status.c/1.36/Wed Oct 21 21:12:06 2009/-kk/
-/procfs_subr.c/1.104/Thu Feb 13 15:36:02 2014/-kk/
-/procfs_vfsops.c/1.91/Thu Apr 24 14:31:24 2014/-kk/
-/procfs_vnops.c/1.189/Thu Feb 13 15:36:02 2014/-kk/
+/procfs_subr.c/1.105/Fri Oct  3 09:09:27 2014/-kk/
+/procfs_vfsops.c/1.92/Fri Oct  3 09:09:27 2014/-kk/
+/procfs_vnops.c/1.191/Fri Oct  3 09:09:27 2014/-kk/
 D

@@ -121,6 +121,7 @@ const struct cdevsw vcoda_cdevsw = {
 	.d_poll = vc_nb_poll,
 	.d_mmap = nommap,
 	.d_kqfilter = vc_nb_kqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_OTHER,
 };
 

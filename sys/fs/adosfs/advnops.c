@@ -105,6 +105,8 @@ const struct vnodeopv_entry_desc adosfs_vnodeop_entries[] = {
 	{ &vop_setattr_desc, adosfs_setattr },		/* setattr */
 	{ &vop_read_desc, adosfs_read },		/* read */
 	{ &vop_write_desc, adosfs_write },		/* write */
+	{ &vop_fallocate_desc, genfs_eopnotsupp },	/* fallocate */
+	{ &vop_fdiscard_desc, genfs_eopnotsupp },	/* fdiscard */
 	{ &vop_fcntl_desc, adosfs_fcntl },		/* fcntl */
 	{ &vop_ioctl_desc, adosfs_ioctl },		/* ioctl */
 	{ &vop_poll_desc, adosfs_poll },		/* poll */

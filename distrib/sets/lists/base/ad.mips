@@ -94,7 +94,7 @@
 ./usr/lib/64/libc++.so.1			base-compat-shlib	compat,pic,libcxx,arch64
 ./usr/lib/64/libc++.so.1.0			base-compat-shlib	compat,pic,libcxx,arch64
 ./usr/lib/64/libc.so.12				base-compat-shlib	compat,pic,arch64
-./usr/lib/64/libc.so.12.192			base-compat-shlib	compat,pic,arch64
+./usr/lib/64/libc.so.12.193			base-compat-shlib	compat,pic,arch64
 ./usr/lib/64/libcom_err.so.7			base-compat-shlib	compat,pic,kerberos,arch64
 ./usr/lib/64/libcom_err.so.7.0			base-compat-shlib	compat,pic,kerberos,arch64
 ./usr/lib/64/libcrypt.so.1			base-compat-shlib	compat,pic,arch64
@@ -241,7 +241,7 @@
 ./usr/lib/64/libpcap.so.5			base-compat-shlib	compat,pic,arch64
 ./usr/lib/64/libpcap.so.5.0			base-compat-shlib	compat,pic,arch64
 ./usr/lib/64/libpci.so.2			base-compat-shlib	compat,pic,arch64
-./usr/lib/64/libpci.so.2.0			base-compat-shlib	compat,pic,arch64
+./usr/lib/64/libpci.so.2.1			base-compat-shlib	compat,pic,arch64
 ./usr/lib/64/libperfuse.so.0			base-compat-shlib	compat,pic,arch64
 ./usr/lib/64/libperfuse.so.0.0			base-compat-shlib	compat,pic,arch64
 ./usr/lib/64/libposix.so.0			base-compat-shlib	compat,pic,arch64
@@ -329,6 +329,10 @@
 ./usr/lib/64/libz.so.1				base-compat-shlib	compat,pic,arch64
 ./usr/lib/64/libz.so.1.0			base-compat-shlib	compat,pic,arch64
 ./usr/lib/64/lua				base-compat-shlib	compat,arch64
+./usr/lib/64/lua/5.1				base-obsolete		obsolete
+./usr/lib/64/lua/5.1/gpio.so			base-obsolete		obsolete
+./usr/lib/64/lua/5.1/sqlite.so			base-obsolete		obsolete
+./usr/lib/64/lua/5.1/syslog.so			base-obsolete		obsolete
 ./usr/lib/64/lua/5.3				base-compat-shlib	compat,arch64
 ./usr/lib/64/lua/5.3/gpio.so			base-compat-shlib	compat,pic,arch64
 ./usr/lib/64/lua/5.3/sqlite.so			base-compat-shlib	compat,pic,arch64
@@ -437,7 +441,7 @@
 ./usr/lib/o32/libc++.so.1			base-compat-shlib	compat,pic,libcxx,arch64
 ./usr/lib/o32/libc++.so.1.0			base-compat-shlib	compat,pic,libcxx,arch64
 ./usr/lib/o32/libc.so.12			base-compat-shlib	compat,pic,arch64
-./usr/lib/o32/libc.so.12.192			base-compat-shlib	compat,pic,arch64
+./usr/lib/o32/libc.so.12.193			base-compat-shlib	compat,pic,arch64
 ./usr/lib/o32/libcom_err.so.7			base-compat-shlib	compat,pic,kerberos,arch64
 ./usr/lib/o32/libcom_err.so.7.0			base-compat-shlib	compat,pic,kerberos,arch64
 ./usr/lib/o32/libcrypt.so.1			base-compat-shlib	compat,pic,arch64
@@ -576,7 +580,7 @@
 ./usr/lib/o32/libpcap.so.5			base-compat-shlib	compat,pic,arch64
 ./usr/lib/o32/libpcap.so.5.0			base-compat-shlib	compat,pic,arch64
 ./usr/lib/o32/libpci.so.2			base-compat-shlib	compat,pic,arch64
-./usr/lib/o32/libpci.so.2.0			base-compat-shlib	compat,pic,arch64
+./usr/lib/o32/libpci.so.2.1			base-compat-shlib	compat,pic,arch64
 ./usr/lib/o32/libperfuse.so.0			base-compat-shlib	compat,pic,arch64
 ./usr/lib/o32/libperfuse.so.0.0			base-compat-shlib	compat,pic,arch64
 ./usr/lib/o32/libposix.so.0			base-compat-shlib	compat,pic,arch64
@@ -664,6 +668,10 @@
 ./usr/lib/o32/libz.so.1				base-compat-shlib	compat,pic,arch64
 ./usr/lib/o32/libz.so.1.0			base-compat-shlib	compat,pic,arch64
 ./usr/lib/o32/lua				base-compat-shlib	compat,arch64
+./usr/lib/o32/lua/5.1				base-obsolete		obsolete
+./usr/lib/o32/lua/5.1/gpio.so			base-obsolete		obsolete
+./usr/lib/o32/lua/5.1/sqlite.so			base-obsolete		obsolete
+./usr/lib/o32/lua/5.1/syslog.so			base-obsolete		obsolete
 ./usr/lib/o32/lua/5.3				base-compat-shlib	compat,arch64
 ./usr/lib/o32/lua/5.3/gpio.so			base-compat-shlib	compat,pic,arch64
 ./usr/lib/o32/lua/5.3/sqlite.so			base-compat-shlib	compat,pic,arch64

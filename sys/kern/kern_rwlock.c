@@ -290,7 +290,7 @@ rw_vector_enter(krwlock_t *rw, const krw_t op)
 	/*
 	 * We play a slight trick here.  If we're a reader, we want
 	 * increment the read count.  If we're a writer, we want to
-	 * set the owner field and whe WRITE_LOCKED bit.
+	 * set the owner field and the WRITE_LOCKED bit.
 	 *
 	 * In the latter case, we expect those bits to be zero,
 	 * therefore we can use an add operation to set them, which

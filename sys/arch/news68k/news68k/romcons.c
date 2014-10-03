@@ -92,6 +92,7 @@ const struct cdevsw romcons_cdevsw = {
 	.d_poll = romcons_poll,
 	.d_mmap = nommap,
 	.d_kqfilter = ttykqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_TTY
 };
 

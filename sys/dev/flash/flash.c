@@ -98,6 +98,7 @@ const struct bdevsw flash_bdevsw = {
 	.d_ioctl = flashioctl,
 	.d_dump = flashdump,
 	.d_psize = nosize,
+	.d_discard = nodiscard,	/* XXX this driver probably wants a discard */
 	.d_flag = D_DISK | D_MPSAFE
 };
 
@@ -115,6 +116,7 @@ const struct cdevsw flash_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = nommap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK | D_MPSAFE
 };
 

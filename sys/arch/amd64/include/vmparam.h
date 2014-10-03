@@ -157,12 +157,13 @@
 #define VM_PHYSSEG_MAX		32	/* 1 "hole" + 31 free lists */
 #define VM_PHYSSEG_STRAT	VM_PSTRAT_BIGFIRST
 
-#define	VM_NFREELIST		5
+#define	VM_NFREELIST		6
 #define	VM_FREELIST_DEFAULT	0
 #define	VM_FREELIST_FIRST1T	1
 #define	VM_FREELIST_FIRST64G	2
 #define	VM_FREELIST_FIRST4G	3
-#define	VM_FREELIST_FIRST16	4
+#define	VM_FREELIST_FIRST1G	4
+#define	VM_FREELIST_FIRST16	5
 
 #else	/*	!__x86_64__	*/
 

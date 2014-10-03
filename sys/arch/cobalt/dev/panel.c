@@ -115,6 +115,7 @@ const struct cdevsw panel_cdevsw = {
 	.d_poll = panelpoll,
 	.d_mmap = nommap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = 0
 };
 

@@ -30,6 +30,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #define	_INTR_PRIVATE	/* for arm/pic/picvar.h */
 
+#include "opt_imx.h"
 #include "locators.h"
 
 #include <sys/param.h>

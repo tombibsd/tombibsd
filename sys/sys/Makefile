@@ -7,7 +7,10 @@ INCSDIR= /usr/include/sys
 INCS=	acct.h agpio.h aio.h ansi.h aout_mids.h ataio.h atomic.h audioio.h \
 	bitops.h bootblock.h bswap.h buf.h \
 	callback.h callout.h cdbr.h cdefs.h cdefs_aout.h \
-	cdefs_elf.h cdio.h chio.h clockctl.h condvar.h conf.h core.h \
+	cdefs_elf.h cdio.h chio.h clockctl.h \
+	common_int_const.h common_int_fmtio.h common_int_limits.h \
+	common_int_mwgwtypes.h common_int_types.h \
+	condvar.h conf.h core.h \
 	cpufreq.h cpuio.h ctype_bits.h ctype_inline.h \
 	device.h device_if.h \
 	dir.h dirent.h \

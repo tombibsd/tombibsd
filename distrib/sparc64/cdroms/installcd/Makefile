@@ -5,7 +5,7 @@ CDRELEASE=	true			# include $RELEASEDIR/$MACHINE
 # for PRINTOBJDIR
 .include <bsd.own.mk>
 
-SYSINSTDIR!= cd ${.CURDIR}/../../../utils/sysinst/arch/${MACHINE} && ${PRINTOBJDIR}
+SYSINSTDIR!= cd ${.CURDIR}/../../../../usr.sbin/sysinst/arch/${MACHINE} && ${PRINTOBJDIR}
 
 CDRELEASE_NOISOS=	true
 CDBOOTIMAGEDIR!= cd ${NETBSDSRCDIR}/distrib/sparc64/bootfs && ${PRINTOBJDIR}

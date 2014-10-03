@@ -106,6 +106,7 @@ const struct cdevsw tun_cdevsw = {
 	.d_poll = tunpoll,
 	.d_mmap = nommap,
 	.d_kqfilter = tunkqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_OTHER
 };
 

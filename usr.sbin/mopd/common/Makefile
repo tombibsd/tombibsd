@@ -21,4 +21,3 @@ version.c: VERSION
 .include <bsd.lib.mk>
 
 COPTS.print.c+=	-Wno-pointer-sign
-COPTS.log.c+=	-Wno-format-nonliteral

@@ -56,7 +56,12 @@ jiffies_to_msecs(unsigned int j)
 static inline unsigned int
 usecs_to_jiffies(unsigned int usec)
 {
-	return mstohz((usec + (1000 / hz) - 1) / (1000 / hz));
+	const struct timeval tv = {
+		.tv_sec = usec / 1000000,
+		.tv_usec = usec % 1000000,
+	};
+
+	return tvtohz(&tv);
 }
 
 static inline unsigned int

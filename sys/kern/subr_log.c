@@ -425,5 +425,6 @@ const struct cdevsw log_cdevsw = {
 	.d_poll = logpoll,
 	.d_mmap = nommap,
 	.d_kqfilter = logkqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_OTHER | D_MPSAFE
 };

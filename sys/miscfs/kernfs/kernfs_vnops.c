@@ -191,6 +191,8 @@ const struct vnodeopv_entry_desc kernfs_vnodeop_entries[] = {
 	{ &vop_setattr_desc, kernfs_setattr },		/* setattr */
 	{ &vop_read_desc, kernfs_read },		/* read */
 	{ &vop_write_desc, kernfs_write },		/* write */
+	{ &vop_fallocate_desc, genfs_eopnotsupp },	/* fallocate */
+	{ &vop_fdiscard_desc, genfs_eopnotsupp },	/* fdiscard */
 	{ &vop_fcntl_desc, kernfs_fcntl },		/* fcntl */
 	{ &vop_ioctl_desc, kernfs_ioctl },		/* ioctl */
 	{ &vop_poll_desc, kernfs_poll },		/* poll */

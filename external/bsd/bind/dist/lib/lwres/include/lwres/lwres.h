@@ -215,9 +215,9 @@ typedef struct {
  * resolv.conf data
  */
 
-#define LWRES_CONFMAXNAMESERVERS 3	/*%< max 3 "nameserver" entries */
-#define LWRES_CONFMAXLWSERVERS 1	/*%< max 1 "lwserver" entry */
-#define LWRES_CONFMAXSEARCH 8		/*%< max 8 domains in "search" entry */
+#define LWRES_CONFMAXNAMESERVERS 3	/*%< max 3 nameserver entries */
+#define LWRES_CONFMAXLWSERVERS 1	/*%< max 1 lwserver entry */
+#define LWRES_CONFMAXSEARCH 8		/*%< max 8 domains in search entry */
 #define LWRES_CONFMAXLINELEN 256	/*%< max size of a line */
 #define LWRES_CONFMAXSORTLIST 10	/*%< max 10 */
 

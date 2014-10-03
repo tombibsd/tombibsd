@@ -134,6 +134,103 @@ l2cap_accept(struct socket *so, struct mbuf *nam)
 }
 
 static int
+l2cap_bind(struct socket *so, struct mbuf *nam)
+{
+	struct l2cap_channel *pcb = so->so_pcb;
+	struct sockaddr_bt *sa;
+
+	KASSERT(solocked(so));
+	KASSERT(nam != NULL);
+
+	if (pcb == NULL)
+		return EINVAL;
+
+	sa = mtod(nam, struct sockaddr_bt *);
+	if (sa->bt_len != sizeof(struct sockaddr_bt))
+		return EINVAL;
+
+	if (sa->bt_family != AF_BLUETOOTH)
+		return EAFNOSUPPORT;
+
+	return l2cap_bind_pcb(pcb, sa);
+}
+
+static int
+l2cap_listen(struct socket *so)
+{
+	struct l2cap_channel *pcb = so->so_pcb;
+
+	KASSERT(solocked(so));
+
+	if (pcb == NULL)
+		return EINVAL;
+
+	return l2cap_listen_pcb(pcb);
+}
+
+static int
+l2cap_connect(struct socket *so, struct mbuf *nam)
+{
+	struct l2cap_channel *pcb = so->so_pcb;
+	struct sockaddr_bt *sa;
+
+	KASSERT(solocked(so));
+	KASSERT(nam != NULL);
+
+	if (pcb == NULL)
+		return EINVAL;
+
+	sa = mtod(nam, struct sockaddr_bt *);
+	if (sa->bt_len != sizeof(struct sockaddr_bt))
+		return EINVAL;
+
+	if (sa->bt_family != AF_BLUETOOTH)
+		return EAFNOSUPPORT;
+
+	soisconnecting(so);
+	return l2cap_connect_pcb(pcb, sa);
+}
+
+static int
+l2cap_disconnect(struct socket *so)
+{
+	struct l2cap_channel *pcb = so->so_pcb;
+
+	KASSERT(solocked(so));
+
+	if (pcb == NULL)
+		return EINVAL;
+
+	soisdisconnecting(so);
+	return l2cap_disconnect_pcb(pcb, so->so_linger);
+}
+
+static int
+l2cap_shutdown(struct socket *so)
+{
+	KASSERT(solocked(so));
+
+	socantsendmore(so);
+	return 0;
+}
+
+static int
+l2cap_abort(struct socket *so)
+{
+	struct l2cap_channel *pcb = so->so_pcb;
+
+	KASSERT(solocked(so));
+
+	if (pcb == NULL)
+		return EINVAL;
+
+	l2cap_disconnect_pcb(pcb, 0);
+	soisdisconnected(so);
+	l2cap_detach(so);
+	return 0;
+}
+
+static int
 l2cap_ioctl(struct socket *so, u_long cmd, void *nam, struct ifnet *ifp)
 {
 	return EPASSTHROUGH;
@@ -177,6 +274,27 @@ l2cap_sockaddr(struct socket *so, struct mbuf *nam)
 	return l2cap_sockaddr_pcb(pcb, sa);
 }
 
+static int
+l2cap_recvoob(struct socket *so, struct mbuf *m, int flags)
+{
+	KASSERT(solocked(so));
+
+	return EOPNOTSUPP;
+}
+
+static int
+l2cap_sendoob(struct socket *so, struct mbuf *m, struct mbuf *control)
+{
+	KASSERT(solocked(so));
+
+	if (m)
+		m_freem(m);
+	if (control)
+		m_freem(control);
+
+	return EOPNOTSUPP;
+}
+
 /*
  * User Request.
  * up is socket
@@ -197,7 +315,6 @@ l2cap_usrreq(struct socket *up, int req, struct mbuf *m,
     struct mbuf *nam, struct mbuf *ctl, struct lwp *l)
 {
 	struct l2cap_channel *pcb = up->so_pcb;
-	struct sockaddr_bt *sa;
 	struct mbuf *m0;
 	int err = 0;
 
@@ -205,10 +322,18 @@ l2cap_usrreq(struct socket *up, int req, struct mbuf *m,
 	KASSERT(req != PRU_ATTACH);
 	KASSERT(req != PRU_DETACH);
 	KASSERT(req != PRU_ACCEPT);
+	KASSERT(req != PRU_BIND);
+	KASSERT(req != PRU_LISTEN);
+	KASSERT(req != PRU_CONNECT);
+	KASSERT(req != PRU_DISCONNECT);
+	KASSERT(req != PRU_SHUTDOWN);
+	KASSERT(req != PRU_ABORT);
 	KASSERT(req != PRU_CONTROL);
 	KASSERT(req != PRU_SENSE);
 	KASSERT(req != PRU_PEERADDR);
 	KASSERT(req != PRU_SOCKADDR);
+	KASSERT(req != PRU_RCVOOB);
+	KASSERT(req != PRU_SENDOOB);
 
 	switch (req) {
 	case PRU_PURGEIF:
@@ -221,45 +346,6 @@ l2cap_usrreq(struct socket *up, int req, struct mbuf *m,
 	}
 
 	switch(req) {
-	case PRU_DISCONNECT:
-		soisdisconnecting(up);
-		return l2cap_disconnect(pcb, up->so_linger);
-
-	case PRU_ABORT:
-		l2cap_disconnect(pcb, 0);
-		soisdisconnected(up);
-		l2cap_detach(up);
-		return 0;
-
-	case PRU_BIND:
-		KASSERT(nam != NULL);
-		sa = mtod(nam, struct sockaddr_bt *);
-
-		if (sa->bt_len != sizeof(struct sockaddr_bt))
-			return EINVAL;
-
-		if (sa->bt_family != AF_BLUETOOTH)
-			return EAFNOSUPPORT;
-
-		return l2cap_bind(pcb, sa);
-
-	case PRU_CONNECT:
-		KASSERT(nam != NULL);
-		sa = mtod(nam, struct sockaddr_bt *);
-
-		if (sa->bt_len != sizeof(struct sockaddr_bt))
-			return EINVAL;
-
-		if (sa->bt_family != AF_BLUETOOTH)
-			return EAFNOSUPPORT;
-
-		soisconnecting(up);
-		return l2cap_connect(pcb, sa);
-
-	case PRU_SHUTDOWN:
-		socantsendmore(up);
-		break;
-
 	case PRU_SEND:
 		KASSERT(m != NULL);
 		if (m->m_pkthdr.len == 0)
@@ -283,14 +369,9 @@ l2cap_usrreq(struct socket *up, int req, struct mbuf *m,
 		return l2cap_send(pcb, m0);
 
 	case PRU_RCVD:
-	case PRU_RCVOOB:
 		return EOPNOTSUPP;	/* (no release) */
 
-	case PRU_LISTEN:
-		return l2cap_listen(pcb);
-
 	case PRU_CONNECT2:
-	case PRU_SENDOOB:
 	case PRU_FASTTIMO:
 	case PRU_SLOWTIMO:
 	case PRU_PROTORCV:
@@ -429,7 +510,7 @@ l2cap_linkmode(void *arg, int new)
 	if (((mode & L2CAP_LM_AUTH) && !(new & L2CAP_LM_AUTH))
 	    || ((mode & L2CAP_LM_ENCRYPT) && !(new & L2CAP_LM_ENCRYPT))
 	    || ((mode & L2CAP_LM_SECURE) && !(new & L2CAP_LM_SECURE)))
-		l2cap_disconnect(so->so_pcb, 0);
+		l2cap_disconnect_pcb(so->so_pcb, 0);
 }
 
 static void
@@ -455,19 +536,35 @@ PR_WRAP_USRREQS(l2cap)
 #define	l2cap_attach		l2cap_attach_wrapper
 #define	l2cap_detach		l2cap_detach_wrapper
 #define	l2cap_accept		l2cap_accept_wrapper
+#define	l2cap_bind		l2cap_bind_wrapper
+#define	l2cap_listen		l2cap_listen_wrapper
+#define	l2cap_connect		l2cap_connect_wrapper
+#define	l2cap_disconnect	l2cap_disconnect_wrapper
+#define	l2cap_shutdown		l2cap_shutdown_wrapper
+#define	l2cap_abort		l2cap_abort_wrapper
 #define	l2cap_ioctl		l2cap_ioctl_wrapper
 #define	l2cap_stat		l2cap_stat_wrapper
 #define	l2cap_peeraddr		l2cap_peeraddr_wrapper
 #define	l2cap_sockaddr		l2cap_sockaddr_wrapper
+#define	l2cap_recvoob		l2cap_recvoob_wrapper
+#define	l2cap_sendoob		l2cap_sendoob_wrapper
 #define	l2cap_usrreq		l2cap_usrreq_wrapper
 
 const struct pr_usrreqs l2cap_usrreqs = {
 	.pr_attach	= l2cap_attach,
 	.pr_detach	= l2cap_detach,
 	.pr_accept	= l2cap_accept,
+	.pr_bind	= l2cap_bind,
+	.pr_listen	= l2cap_listen,
+	.pr_connect	= l2cap_connect,
+	.pr_disconnect	= l2cap_disconnect,
+	.pr_shutdown	= l2cap_shutdown,
+	.pr_abort	= l2cap_abort,
 	.pr_ioctl	= l2cap_ioctl,
 	.pr_stat	= l2cap_stat,
 	.pr_peeraddr	= l2cap_peeraddr,
 	.pr_sockaddr	= l2cap_sockaddr,
+	.pr_recvoob	= l2cap_recvoob,
+	.pr_sendoob	= l2cap_sendoob,
 	.pr_generic	= l2cap_usrreq,
 };

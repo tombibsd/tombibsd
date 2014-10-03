@@ -88,7 +88,7 @@ options 	KTRACE		# system call tracing, a la ktrace(1)
 
 # Development and Debugging options
 
-options 	DIAGNOSTIC	# internally consistency checks
+options 	DIAGNOSTIC	# internal consistency checks
 #options 	DEBUG
 #options 	PGALLOC_VERBOSE
 #options 	DEBUG_DMA

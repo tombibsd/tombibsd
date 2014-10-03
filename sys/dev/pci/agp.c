@@ -1122,6 +1122,7 @@ const struct cdevsw agp_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = agpmmap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_OTHER
 };
 

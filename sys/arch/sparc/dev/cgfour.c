@@ -163,6 +163,7 @@ const struct cdevsw cgfour_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = cgfourmmap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = 0
 };
 

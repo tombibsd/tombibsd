@@ -127,6 +127,10 @@ npf_conndb_destroy(npf_conndb_t *cd)
 {
 	size_t len = offsetof(npf_conndb_t, cd_hashtbl[CONNDB_HASH_BUCKETS]);
 
+	KASSERT(cd->cd_recent == NULL);
+	KASSERT(cd->cd_list == NULL);
+	KASSERT(cd->cd_tail == NULL);
+
 	for (u_int i = 0; i < CONNDB_HASH_BUCKETS; i++) {
 		npf_hashbucket_t *hb = &cd->cd_hashtbl[i];
 
@@ -252,6 +256,7 @@ npf_conndb_getlist(npf_conndb_t *cd)
 		KASSERT(cd->cd_list == NULL);
 		cd->cd_list = con;
 	} else {
+		KASSERT(prev->c_next == NULL);
 		prev->c_next = con;
 	}
 	return cd->cd_list;
@@ -264,5 +269,6 @@ void
 npf_conndb_settail(npf_conndb_t *cd, npf_conn_t *con)
 {
 	KASSERT(con || cd->cd_list == NULL);
+	KASSERT(!con || con->c_next == NULL);
 	cd->cd_tail = con;
 }

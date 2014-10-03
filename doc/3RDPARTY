@@ -305,8 +305,8 @@ Notes:
 Use the dhcp2netbsd script.
 
 Package:	dhcpcd
-Version:	6.4.2
-Current Vers:	6.4.2
+Version:	6.4.3
+Current Vers:	6.4.3
 Maintainer:	roy
 Archive Site:	ftp://roy.marples.name/pub/dhcpcd/
 Home Page:	http://roy.marples.name/projects/dhcpcd/
@@ -1261,7 +1261,7 @@ Use src/gnu/dist/texinfo/texinfo2netbsd for preparing the source tree
 for the import.
 
 Package:	tmux
-Version:	1.5
+Version:	1.9a
 Current Vers:	1.9a
 Maintainer:	Nicholas Marriott <nicm@users.sourceforge.net>
 Archive site:	http://downloads.sourceforge.net/tmux/

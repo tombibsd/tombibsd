@@ -163,6 +163,7 @@ const struct bdevsw sd_bdevsw = {
 	.d_ioctl = sdioctl,
 	.d_dump = sddump,
 	.d_psize = sdsize,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK
 };
 
@@ -177,6 +178,7 @@ const struct cdevsw sd_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = nommap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK
 };
 

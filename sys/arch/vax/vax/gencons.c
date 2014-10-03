@@ -97,6 +97,7 @@ const struct cdevsw gen_cdevsw = {
 	.d_poll = gencnpoll,
 	.d_mmap = nommap,
 	.d_kqfilter = ttykqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_TTY
 };
 

@@ -131,12 +131,8 @@ bus_dmamap_load_pglist(bus_dma_tag_t tag, bus_dmamap_t map,
 
 	nsegs = 0;
 	TAILQ_FOREACH(page, pglist, pageq.queue) {
-		if (nsegs == INT_MAX)
+		if (nsegs == MIN(INT_MAX, (SIZE_MAX / sizeof(segs[0]))))
 			return ENOMEM;
-#if __i386__
-		if (nsegs == (SIZE_MAX / sizeof(segs[0])))
-			return ENOMEM;
-#endif
 		nsegs++;
 	}
 
@@ -162,12 +158,13 @@ bus_dmamap_load_pglist(bus_dma_tag_t tag, bus_dmamap_t map,
 		goto fail0;
 
 	/* Success!  */
-	return 0;
+	error = 0;
+	goto out;
 
 fail1: __unused
 	bus_dmamap_unload(tag, map);
 fail0:	KASSERT(error);
-	kmem_free(segs, (nsegs * sizeof(segs[0])));
+out:	kmem_free(segs, (nsegs * sizeof(segs[0])));
 	return error;
 }
 

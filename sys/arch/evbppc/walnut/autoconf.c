@@ -68,7 +68,7 @@ cpu_configure(void)
 	/* Make sure that timers run at CPU frequency */
 	mtdcr(DCR_CPC0_CR1, mfdcr(DCR_CPC0_CR1) & ~CPC0_CR1_CETE);
 
-	if (config_rootfound("plb", &local_plb_devs) == NULL)
+	if (config_rootfound("plb", __UNCONST(&local_plb_devs)) == NULL)
 		panic("configure: plb not configured");
 
 	(void)spl0();

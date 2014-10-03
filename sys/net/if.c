@@ -96,6 +96,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include "opt_atalk.h"
 #include "opt_natm.h"
+#include "opt_wlan.h"
 
 #include <sys/param.h>
 #include <sys/mbuf.h>
@@ -137,6 +138,10 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <netinet6/in6_var.h>
 #include <netinet6/nd6.h>
 #endif
+
+#include "ether.h"
+#include "fddi.h"
+#include "token.h"
 
 #include "carp.h"
 #if NCARP > 0
@@ -252,6 +257,10 @@ ifinit1(void)
 
 	if_pfil = pfil_head_create(PFIL_TYPE_IFNET, NULL);
 	KASSERT(if_pfil != NULL);
+
+#if NETHER > 0 || NFDDI > 0 || defined(NETATALK) || NTOKEN > 0 || defined(WLAN)
+	etherinit();
+#endif
 }
 
 ifnet_t *
@@ -690,8 +699,7 @@ if_purgeaddrs(struct ifnet *ifp, int family, void (*purgeaddr)(struct ifaddr *))
 {
 	struct ifaddr *ifa, *nifa;
 
-	for (ifa = IFADDR_FIRST(ifp); ifa != NULL; ifa = nifa) {
-		nifa = IFADDR_NEXT(ifa);
+	IFADDR_FOREACH_SAFE(ifa, ifp, nifa) {
 		if (ifa->ifa_addr->sa_family != family)
 			continue;
 		(*purgeaddr)(ifa);

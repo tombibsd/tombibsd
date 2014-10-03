@@ -815,7 +815,7 @@ vmt_tclo_tick(void *xarg)
 				continue;
 			}
 
-			TAILQ_FOREACH(iface_addr, &iface->if_addrlist, ifa_list) {
+			IFADDR_FOREACH(iface_addr, iface) {
 				if (iface_addr->ifa_addr->sa_family != AF_INET) {
 					continue;
 				}

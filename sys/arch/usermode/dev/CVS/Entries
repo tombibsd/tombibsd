@@ -3,7 +3,7 @@
 /if_veth.c/1.5/Sat Jan 21 22:09:56 2012/-kk/
 /ld_thunkbus.c/1.30/Sat Jan 21 22:09:57 2012/-kk/
 /mainbus.c/1.9/Sat Jan  7 18:10:18 2012/-kk/
-/ttycons.c/1.19/Sat Mar  3 21:15:15 2012/-kk/
+/ttycons.c/1.20/Fri Oct  3 09:09:08 2014/-kk/
 /vaudio.c/1.4/Fri Apr 11 02:03:39 2014/-kk/
 /vncfb.c/1.12/Wed Jan  4 14:53:57 2012/-kk/
 /vnckbdmap.c/1.2/Fri Dec 30 12:14:44 2011/-kk/

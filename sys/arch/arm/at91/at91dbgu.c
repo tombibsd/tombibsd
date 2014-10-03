@@ -192,6 +192,7 @@ const struct cdevsw at91dbgu_cdevsw = {
 	.d_poll = at91dbgu_poll,
 	.d_mmap = nommap,
 	.d_kqfilter = ttykqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_TTY
 };
 

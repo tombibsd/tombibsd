@@ -76,6 +76,7 @@ const struct cdevsw drvctl_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = nommap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_OTHER
 };
 

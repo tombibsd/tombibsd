@@ -132,6 +132,7 @@ const struct cdevsw apmdev_cdevsw = {
 	.d_poll = apmdevpoll,
 	.d_mmap = nommap,
 	.d_kqfilter = apmdevkqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_OTHER
 };
 

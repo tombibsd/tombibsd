@@ -492,5 +492,6 @@ const struct cdevsw srt_cdevsw = {
 	.d_poll = nullpoll,
 	.d_mmap = nommap,
 	.d_kqfilter = nullkqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_OTHER
 };

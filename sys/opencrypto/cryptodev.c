@@ -1119,6 +1119,7 @@ struct cdevsw crypto_cdevsw = {
 	.d_poll = cryptoselect /*nopoll*/,
 	.d_mmap = nommap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_OTHER
 };
 

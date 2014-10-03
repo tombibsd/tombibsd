@@ -73,6 +73,7 @@ const struct cdevsw prom_cdevsw = {
 	.d_poll = prompoll,
 	.d_mmap = nommap,
 	.d_kqfilter = ttykqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_TTY
 };
 
@@ -275,6 +276,7 @@ const struct cdevsw prom_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = nommap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = 0
 };
 

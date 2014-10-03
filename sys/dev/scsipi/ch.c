@@ -131,6 +131,7 @@ const struct cdevsw ch_cdevsw = {
 	.d_poll = chpoll,
 	.d_mmap = nommap,
 	.d_kqfilter = chkqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_OTHER
 };
 

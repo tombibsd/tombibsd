@@ -464,7 +464,7 @@ radeonfb_attach(device_t parent, device_t dev, void *aux)
 
 	pci_aprint_devinfo(pa, NULL);
 
-	DPRINTF((prop_dictionary_externalize(device_properties(dev))));
+	DPRINTF(("%s", prop_dictionary_externalize(device_properties(dev))));
 
 	KASSERT(radeonfb_devices[i].devid != 0);
 	sc->sc_pt = pa->pa_tag;

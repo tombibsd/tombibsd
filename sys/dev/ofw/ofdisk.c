@@ -87,6 +87,7 @@ const struct bdevsw ofdisk_bdevsw = {
 	.d_ioctl = ofdisk_ioctl,
 	.d_dump = ofdisk_dump,
 	.d_psize = ofdisk_size,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK
 };
 
@@ -101,6 +102,7 @@ const struct cdevsw ofdisk_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = nommap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK
 };
 

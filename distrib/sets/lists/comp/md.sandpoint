@@ -53,7 +53,8 @@
 ./usr/include/sandpoint/rwlock.h		comp-c-include
 ./usr/include/sandpoint/setjmp.h		comp-c-include
 ./usr/include/sandpoint/signal.h		comp-c-include
-./usr/include/sandpoint/sljitarch.h		comp-c-include
+./usr/include/sandpoint/sljitarch.h		comp-obsolete		obsolete
+./usr/include/sandpoint/sljit_machdep.h		comp-c-include
 ./usr/include/sandpoint/spr.h			comp-obsolete		obsolete
 ./usr/include/sandpoint/stdarg.h		comp-obsolete		obsolete
 ./usr/include/sandpoint/trap.h			comp-c-include

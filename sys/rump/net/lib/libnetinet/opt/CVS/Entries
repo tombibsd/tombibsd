@@ -1,4 +1,5 @@
 /arcnet.h/1.1/Mon Oct  6 00:27:48 2008/-kk/
+/ether.h/1.1/Wed Jul 30 13:32:09 2014/-kk/
 /etherip.h/1.1/Mon Oct  6 00:27:48 2008/-kk/
 /faith.h/1.1/Mon Oct  6 00:27:48 2008/-kk/
 /fddi.h/1.1/Mon Oct  6 00:27:48 2008/-kk/
@@ -15,6 +16,7 @@
 /opt_tcp_congctl.h/1.1/Mon Oct  6 00:27:49 2008/-kk/
 /opt_tcp_debug.h/1.1/Mon Oct  6 00:27:49 2008/-kk/
 /opt_tcp_space.h/1.1/Mon Oct  6 00:27:49 2008/-kk/
+/opt_wlan.h/1.1/Wed Jul 30 13:32:09 2014/-kk/
 /rnd.h/1.1/Mon Oct  6 00:27:49 2008/-kk/
 /token.h/1.1/Mon Oct  6 00:27:49 2008/-kk/
 D

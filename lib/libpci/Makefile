@@ -4,7 +4,7 @@
 
 LIB=	pci
 
-SRCS=	pci_bus.c pci_device.c pci_subr.c pci_verbose.c
+SRCS=	pci_bus.c pci_device.c pci_drvname.c pci_subr.c pci_verbose.c
 
 .PATH.c: ${NETBSDSRCDIR}/sys/dev/pci
 

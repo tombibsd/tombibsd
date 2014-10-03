@@ -2069,12 +2069,10 @@ REALPOLLTS(struct pollfd *fds, nfds_t nfds, const struct timespec *ts,
 		errno_host = parg.errnum;
 
 		/* strip cross-thread notification from real results */
-		if (pfd_host[nfds].revents & POLLIN) {
-			assert(rv_host > 0);
+		if (rv_host > 0 && pfd_host[nfds].revents & POLLIN) {
 			rv_host--;
 		}
-		if (pfd_rump[nfds].revents & POLLIN) {
-			assert(rv_rump > 0);
+		if (rv_rump > 0 && pfd_rump[nfds].revents & POLLIN) {
 			rv_rump--;
 		}
 

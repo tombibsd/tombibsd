@@ -28,7 +28,7 @@
 #include <sys/cdefs.h>
 __KERNEL_RCSID(0, "$NetBSD$");
 
-#define _COBALT_BUS_DMA_PRIVATE
+#define _MIPS_BUS_DMA_PRIVATE
 
 #include <sys/param.h>
 #include <sys/bus.h>
@@ -51,20 +51,10 @@ __KERNEL_RCSID(0, "$NetBSD$");
  * PCI doesn't have any special needs; just use
  * the generic versions of these functions.
  */
-struct cobalt_bus_dma_tag pci_bus_dma_tag = {
-	_bus_dmamap_create,
-	_bus_dmamap_destroy,
-	_bus_dmamap_load,
-	_bus_dmamap_load_mbuf,
-	_bus_dmamap_load_uio,
-	_bus_dmamap_load_raw,
-	_bus_dmamap_unload,
-	_bus_dmamap_sync,
-	_bus_dmamem_alloc,
-	_bus_dmamem_free,
-	_bus_dmamem_map,
-	_bus_dmamem_unmap,
-	_bus_dmamem_mmap,
+struct mips_bus_dma_tag pci_bus_dma_tag = {
+	._dmamap_ops = _BUS_DMAMAP_OPS_INITIALIZER,
+	._dmamem_ops = _BUS_DMAMEM_OPS_INITIALIZER,
+	._dmatag_ops = _BUS_DMATAG_OPS_INITIALIZER,
 };
 
 void

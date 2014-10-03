@@ -348,19 +348,22 @@ const struct cpu_cpuid_nameclass i386_cpuid_cpus[] = {
 				[0x2f] = "Xeon E7 family",
 				[0x35] = "Atom Family",
 				[0x36] = "Atom S1000",
-				[0x37] = "Atom C2000, E3000",
+				[0x37] = "Atom E3000, Z3000",
 				[0x3a] = "Xeon E3-1200v2 and 3rd gen core, "
 					 "Ivy Bridge",
 				[0x3c] = "4th gen Core, Xeon E3-12xx v3 "
 					 "(Haswell)",
-				[0x3d] = "Next gen Core",
+				[0x3d] = "Core M based on Broadwell",
 				[0x3e] = "Xeon E5/E7, Ivy Bridge-EP",
-				[0x3f] = "Future gen Xeon",
+				[0x3f] = "Next gen Xeon based on Haswell",
 				[0x45] = "4th gen Core, Xeon E3-12xx v3 "
 					 "(Haswell)",
 				[0x46] = "4th gen Core, Xeon E3-12xx v3 "
 					 "(Haswell)",
-				[0x4d] = "Atom C2000, E3000",
+				[0x4a] = "Future Atom E3000, Z3000",
+				[0x4d] = "Atom C2000",
+				[0x5a] = "Future Atom E3000, Z3000",
+				[0x5d] = "Future Atom E3000, Z3000",
 			},
 			"Pentium Pro, II or III",	/* Default */
 			NULL,

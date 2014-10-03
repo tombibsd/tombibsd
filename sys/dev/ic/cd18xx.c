@@ -148,6 +148,7 @@ const struct cdevsw cdtty_cdevsw = {
 	.d_poll = cdttypoll,
 	.d_mmap = nommap,
 	.d_kqfilter = ttykqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_TTY
 };
 

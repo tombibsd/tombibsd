@@ -211,6 +211,7 @@ const struct bdevsw raid_bdevsw = {
 	.d_ioctl = raidioctl,
 	.d_dump = raiddump,
 	.d_psize = raidsize,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK
 };
 
@@ -225,6 +226,7 @@ const struct cdevsw raid_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = nommap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK
 };
 

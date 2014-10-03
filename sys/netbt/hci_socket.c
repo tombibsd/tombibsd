@@ -492,6 +492,105 @@ hci_accept(struct socket *so, struct mbuf *nam)
 }
 
 static int
+hci_bind(struct socket *so, struct mbuf *nam)
+{
+	struct hci_pcb *pcb = so->so_pcb;
+	struct sockaddr_bt *sa;
+
+	KASSERT(solocked(so));
+	KASSERT(pcb != NULL);
+	KASSERT(nam != NULL);
+
+	sa = mtod(nam, struct sockaddr_bt *);
+	if (sa->bt_len != sizeof(struct sockaddr_bt))
+		return EINVAL;
+
+	if (sa->bt_family != AF_BLUETOOTH)
+		return EAFNOSUPPORT;
+
+	bdaddr_copy(&pcb->hp_laddr, &sa->bt_bdaddr);
+
+	if (bdaddr_any(&sa->bt_bdaddr))
+		pcb->hp_flags |= HCI_PROMISCUOUS;
+	else
+		pcb->hp_flags &= ~HCI_PROMISCUOUS;
+
+	return 0;
+}
+
+static int
+hci_listen(struct socket *so)
+{
+	KASSERT(solocked(so));
+
+	return EOPNOTSUPP;
+}
+
+static int
+hci_connect(struct socket *so, struct mbuf *nam)
+{
+	struct hci_pcb *pcb = so->so_pcb;
+	struct sockaddr_bt *sa;
+
+	KASSERT(solocked(so));
+	KASSERT(pcb != NULL);
+	KASSERT(nam != NULL);
+
+	sa = mtod(nam, struct sockaddr_bt *);
+	if (sa->bt_len != sizeof(struct sockaddr_bt))
+		return EINVAL;
+
+	if (sa->bt_family != AF_BLUETOOTH)
+		return EAFNOSUPPORT;
+
+	if (hci_unit_lookup(&sa->bt_bdaddr) == NULL)
+		return EADDRNOTAVAIL;
+
+	bdaddr_copy(&pcb->hp_raddr, &sa->bt_bdaddr);
+	soisconnected(so);
+	return 0;
+}
+
+static int
+hci_disconnect(struct socket *so)
+{
+	struct hci_pcb *pcb = so->so_pcb;
+
+	KASSERT(solocked(so));
+	KASSERT(pcb != NULL);
+
+	bdaddr_copy(&pcb->hp_raddr, BDADDR_ANY);
+
+	/* XXX we cannot call soisdisconnected() here, as it sets
+	 * SS_CANTRCVMORE and SS_CANTSENDMORE. The problem being,
+	 * that soisconnected() does not clear these and if you
+	 * try to reconnect this socket (which is permitted) you
+	 * get a broken pipe when you try to write any data.
+	 */
+	so->so_state &= ~SS_ISCONNECTED;
+	return 0;
+}
+
+static int
+hci_shutdown(struct socket *so)
+{
+	KASSERT(solocked(so));
+
+	socantsendmore(so);
+	return 0;
+}
+
+static int
+hci_abort(struct socket *so)
+{
+	KASSERT(solocked(so));
+
+	soisdisconnected(so);
+	hci_detach(so);
+	return 0;
+}
+
+static int
 hci_ioctl(struct socket *so, u_long cmd, void *nam, struct ifnet *ifp)
 {
 	int err;
@@ -547,6 +646,27 @@ hci_sockaddr(struct socket *so, struct mbuf *nam)
 	return 0;
 }
 
+static int
+hci_recvoob(struct socket *so, struct mbuf *m, int flags)
+{
+	KASSERT(solocked(so));
+
+	return EOPNOTSUPP;
+}
+
+static int
+hci_sendoob(struct socket *so, struct mbuf *m, struct mbuf *control)
+{
+	KASSERT(solocked(so));
+
+	if (m)
+		m_freem(m);
+	if (control)
+		m_freem(control);
+
+	return EOPNOTSUPP;
+}
+
 /*
  * User Request.
  * up is socket
@@ -569,10 +689,18 @@ hci_usrreq(struct socket *up, int req, struct mbuf *m,
 	KASSERT(req != PRU_ATTACH);
 	KASSERT(req != PRU_DETACH);
 	KASSERT(req != PRU_ACCEPT);
+	KASSERT(req != PRU_BIND);
+	KASSERT(req != PRU_LISTEN);
+	KASSERT(req != PRU_CONNECT);
+	KASSERT(req != PRU_DISCONNECT);
+	KASSERT(req != PRU_SHUTDOWN);
+	KASSERT(req != PRU_ABORT);
 	KASSERT(req != PRU_CONTROL);
 	KASSERT(req != PRU_SENSE);
 	KASSERT(req != PRU_PEERADDR);
 	KASSERT(req != PRU_SOCKADDR);
+	KASSERT(req != PRU_RCVOOB);
+	KASSERT(req != PRU_SENDOOB);
 
 	switch(req) {
 	case PRU_PURGEIF:
@@ -586,63 +714,6 @@ hci_usrreq(struct socket *up, int req, struct mbuf *m,
 	}
 
 	switch(req) {
-	case PRU_DISCONNECT:
-		bdaddr_copy(&pcb->hp_raddr, BDADDR_ANY);
-
-		/* XXX we cannot call soisdisconnected() here, as it sets
-		 * SS_CANTRCVMORE and SS_CANTSENDMORE. The problem being,
-		 * that soisconnected() does not clear these and if you
-		 * try to reconnect this socket (which is permitted) you
-		 * get a broken pipe when you try to write any data.
-		 */
-		up->so_state &= ~SS_ISCONNECTED;
-		break;
-
-	case PRU_ABORT:
-		soisdisconnected(up);
-		hci_detach(up);
-		return 0;
-
-	case PRU_BIND:
-		KASSERT(nam != NULL);
-		sa = mtod(nam, struct sockaddr_bt *);
-
-		if (sa->bt_len != sizeof(struct sockaddr_bt))
-			return EINVAL;
-
-		if (sa->bt_family != AF_BLUETOOTH)
-			return EAFNOSUPPORT;
-
-		bdaddr_copy(&pcb->hp_laddr, &sa->bt_bdaddr);
-
-		if (bdaddr_any(&sa->bt_bdaddr))
-			pcb->hp_flags |= HCI_PROMISCUOUS;
-		else
-			pcb->hp_flags &= ~HCI_PROMISCUOUS;
-
-		return 0;
-
-	case PRU_CONNECT:
-		KASSERT(nam != NULL);
-		sa = mtod(nam, struct sockaddr_bt *);
-
-		if (sa->bt_len != sizeof(struct sockaddr_bt))
-			return EINVAL;
-
-		if (sa->bt_family != AF_BLUETOOTH)
-			return EAFNOSUPPORT;
-
-		if (hci_unit_lookup(&sa->bt_bdaddr) == NULL)
-			return EADDRNOTAVAIL;
-
-		bdaddr_copy(&pcb->hp_raddr, &sa->bt_bdaddr);
-		soisconnected(up);
-		return 0;
-
-	case PRU_SHUTDOWN:
-		socantsendmore(up);
-		break;
-
 	case PRU_SEND:
 		sa = NULL;
 		if (nam) {
@@ -665,12 +736,9 @@ hci_usrreq(struct socket *up, int req, struct mbuf *m,
 		return hci_send(pcb, m, (sa ? &sa->bt_bdaddr : &pcb->hp_raddr));
 
 	case PRU_RCVD:
-	case PRU_RCVOOB:
 		return EOPNOTSUPP;	/* (no release) */
 
 	case PRU_CONNECT2:
-	case PRU_LISTEN:
-	case PRU_SENDOOB:
 	case PRU_FASTTIMO:
 	case PRU_SLOWTIMO:
 	case PRU_PROTORCV:
@@ -901,19 +969,35 @@ PR_WRAP_USRREQS(hci)
 #define	hci_attach		hci_attach_wrapper
 #define	hci_detach		hci_detach_wrapper
 #define	hci_accept		hci_accept_wrapper
+#define	hci_bind		hci_bind_wrapper
+#define	hci_listen		hci_listen_wrapper
+#define	hci_connect		hci_connect_wrapper
+#define	hci_disconnect		hci_disconnect_wrapper
+#define	hci_shutdown		hci_shutdown_wrapper
+#define	hci_abort		hci_abort_wrapper
 #define	hci_ioctl		hci_ioctl_wrapper
 #define	hci_stat		hci_stat_wrapper
 #define	hci_peeraddr		hci_peeraddr_wrapper
 #define	hci_sockaddr		hci_sockaddr_wrapper
+#define	hci_recvoob		hci_recvoob_wrapper
+#define	hci_sendoob		hci_sendoob_wrapper
 #define	hci_usrreq		hci_usrreq_wrapper
 
 const struct pr_usrreqs hci_usrreqs = {
 	.pr_attach	= hci_attach,
 	.pr_detach	= hci_detach,
 	.pr_accept	= hci_accept,
+	.pr_bind	= hci_bind,
+	.pr_listen	= hci_listen,
+	.pr_connect	= hci_connect,
+	.pr_disconnect	= hci_disconnect,
+	.pr_shutdown	= hci_shutdown,
+	.pr_abort	= hci_abort,
 	.pr_ioctl	= hci_ioctl,
 	.pr_stat	= hci_stat,
 	.pr_peeraddr	= hci_peeraddr,
 	.pr_sockaddr	= hci_sockaddr,
+	.pr_recvoob	= hci_recvoob,
+	.pr_sendoob	= hci_sendoob,
 	.pr_generic	= hci_usrreq,
 };

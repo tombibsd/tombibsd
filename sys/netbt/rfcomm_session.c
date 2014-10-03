@@ -199,7 +199,7 @@ rfcomm_session_alloc(struct rfcomm_session_list *list,
 	if (laddr->bt_psm == L2CAP_PSM_ANY)
 		laddr->bt_psm = L2CAP_PSM_RFCOMM;
 
-	(void)l2cap_bind(rs->rs_l2cap, laddr);
+	(void)l2cap_bind_pcb(rs->rs_l2cap, laddr);
 
 	LIST_INSERT_HEAD(list, rs, rs_next);
 
@@ -499,7 +499,7 @@ rfcomm_session_complete(void *arg, int count)
 	 */
 	if (rs->rs_state == RFCOMM_SESSION_CLOSED) {
 		if (SIMPLEQ_EMPTY(&rs->rs_credits))
-			l2cap_disconnect(rs->rs_l2cap, 0);
+			l2cap_disconnect_pcb(rs->rs_l2cap, 0);
 	}
 }
 
@@ -853,7 +853,7 @@ rfcomm_session_recv_ua(struct rfcomm_session *rs, int dlci)
 		case RFCOMM_SESSION_WAIT_DISCONNECT:	/* We sent DISC */
 			callout_stop(&rs->rs_timeout);
 			rs->rs_state = RFCOMM_SESSION_CLOSED;
-			l2cap_disconnect(rs->rs_l2cap, 0);
+			l2cap_disconnect_pcb(rs->rs_l2cap, 0);
 			break;
 
 		default:

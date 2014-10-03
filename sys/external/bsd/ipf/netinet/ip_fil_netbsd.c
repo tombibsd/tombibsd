@@ -140,6 +140,7 @@ const struct cdevsw ipl_cdevsw = {
 #if  (__NetBSD_Version__ >= 200000000)
 	.d_kqfilter = nokqfilter,
 #endif
+	.d_discard = nodiscard,
 #ifdef D_OTHER
 	.d_flag = D_OTHER
 #else

@@ -354,6 +354,7 @@ const struct cdevsw qd_cdevsw = {
 	.d_poll = qdpoll,
 	.d_mmap = nommap,
 	.d_kqfilter = qdkqfilter,
+	.d_discard = nodiscard,
 	.d_flag = 0
 };
 

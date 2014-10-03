@@ -6,7 +6,7 @@ INCS=   bootinfo.h \
 	disklabel.h \
 	intr.h \
 	nvram.h \
-	sljitarch.h \
+	sljit_machdep.h \
 	spkr.h \
 	vmparam.h
 

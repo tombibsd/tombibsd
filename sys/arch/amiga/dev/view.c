@@ -90,6 +90,7 @@ const struct cdevsw view_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = viewmmap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = 0
 };
 

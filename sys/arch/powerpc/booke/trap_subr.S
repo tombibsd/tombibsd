@@ -858,7 +858,7 @@ _C_LABEL(exception_init):
 	ori	%r5,%r6,_C_LABEL(perfmon_vector)@l
 	mtspr	SPR_IVOR35, %r5
 
-	mfpir	%r5		/* get Process ID register */
+	mfspr	%r5, SPR_PIR	/* get Processor ID register */
 	cmplwi	%r5,0
 	bnelr			/* return if non-0 (non-primary) */
 

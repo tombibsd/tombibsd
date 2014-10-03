@@ -184,6 +184,7 @@ const struct cdevsw tap_cdevsw = {
 	.d_poll = tap_cdev_poll,
 	.d_mmap = nommap,
 	.d_kqfilter = tap_cdev_kqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_OTHER
 };
 

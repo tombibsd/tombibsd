@@ -41,7 +41,7 @@
 /ess_isa.c/1.24/Sat May 22 16:35:00 2010/-kk/
 /essreg.h/1.16/Sun Dec 11 12:22:02 2005/-kk/
 /essvar.h/1.26/Wed Nov 23 23:07:32 2011/-kk/
-/fd.c/1.102/Tue Mar 25 02:35:37 2014/-kk/
+/fd.c/1.104/Fri Oct  3 09:09:15 2014/-kk/
 /fdc_isa.c/1.19/Thu Feb  2 19:43:04 2012/-kk/
 /fdcvar.h/1.10/Mon Apr 28 20:23:52 2008/-kk/
 /fdreg.h/1.7/Thu Jun 30 20:09:39 2011/-kk/
@@ -99,7 +99,7 @@
 /isic_isa_tel_s0163.c/1.13/Sat Oct 27 17:18:25 2012/-kk/
 /isic_isa_tel_s08.c/1.9/Fri Oct 19 12:00:19 2007/-kk/
 /isic_isa_usr_sti.c/1.8/Fri Oct 19 12:00:20 2007/-kk/
-/isv.c/1.6/Fri Apr 11 02:03:42 2014/-kk/
+/isv.c/1.7/Fri Oct  3 09:09:15 2014/-kk/
 /isvio.h/1.1/Wed Apr  2 01:34:36 2008/-kk/
 /itesio_isa.c/1.24/Thu Nov 15 04:45:01 2012/-kk/
 /itesio_isavar.h/1.9/Thu Nov 15 04:45:01 2012/-kk/
@@ -111,7 +111,7 @@
 /lm_wbsio.c/1.2/Wed Jan 18 00:14:32 2012/-kk/
 /lpt_isa.c/1.68/Mon Nov 23 02:13:47 2009/-kk/
 /madreg.h/1.5/Tue Dec  8 14:26:57 1998/-kk/
-/mcd.c/1.111/Tue Mar 25 02:35:37 2014/-kk/
+/mcd.c/1.113/Fri Oct  3 09:09:15 2014/-kk/
 /mcdreg.h/1.9/Thu Jun  8 18:22:16 2000/-kk/
 /midi_pcppi.c/1.26/Mon Apr  9 10:18:17 2012/-kk/
 /moxa_isa.c/1.20/Sat Oct 27 17:18:25 2012/-kk/
@@ -137,7 +137,7 @@
 /radiotrack.c/1.20/Fri Apr 11 02:03:42 2014/-kk/
 /radiotrack2.c/1.16/Sat Oct 27 17:18:25 2012/-kk/
 /rtfps.c/1.58/Sat Oct 27 17:18:25 2012/-kk/
-/satlink.c/1.44/Tue Mar 25 02:35:37 2014/-kk/
+/satlink.c/1.45/Fri Oct  3 09:09:15 2014/-kk/
 /satlinkio.h/1.3/Mon Apr 28 20:23:52 2008/-kk/
 /satlinkreg.h/1.3/Mon Apr 28 20:23:52 2008/-kk/
 /sb.c/1.89/Wed Nov 23 23:07:32 2011/-kk/
@@ -152,7 +152,7 @@
 /smsc.c/1.11/Sun Jul 31 16:18:54 2011/-kk/
 /smscvar.h/1.5/Sat Oct 27 17:18:25 2012/-kk/
 /soekrisgpio.c/1.2/Thu Oct 24 10:28:58 2013/-kk/
-/spkr.c/1.34/Tue Mar 25 02:35:37 2014/-kk/
+/spkr.c/1.35/Fri Oct  3 09:09:15 2014/-kk/
 /spkrio.h/1.1/Wed Apr 15 20:26:19 1998/-kk/
 /tcic2_isa.c/1.26/Sat Oct 27 17:18:25 2012/-kk/
 /tcom.c/1.19/Tue May 12 09:10:16 2009/-kk/
@@ -177,7 +177,7 @@
 /wss_isa.c/1.29/Thu Jun  2 14:12:25 2011/-kk/
 /wssreg.h/1.4/Wed Mar 19 06:45:24 1997/-kk/
 /wssvar.h/1.9/Sun Dec 11 12:22:03 2005/-kk/
-/wt.c/1.84/Tue Mar 25 02:35:37 2014/-kk/
+/wt.c/1.86/Fri Oct  3 09:09:15 2014/-kk/
 /wtreg.h/1.8/Sun Dec 11 12:22:03 2005/-kk/
 /ym.c/1.44/Tue Nov 12 02:18:44 2013/-kk/
 /ymvar.h/1.13/Wed Nov 23 23:07:33 2011/-kk/

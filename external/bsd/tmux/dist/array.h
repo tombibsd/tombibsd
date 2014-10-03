@@ -1,4 +1,4 @@
-/* $Id$ */
+/* Id */
 
 /*
  * Copyright (c) 2006 Nicholas Marriott <nicm@users.sourceforge.net>
@@ -109,13 +109,12 @@
 } while (0)
 
 #define ARRAY_FREE(a) do {						\
-	if ((a)->list != NULL)						\
-		xfree((a)->list);					\
+	free((a)->list);						\
 	ARRAY_INIT(a);							\
 } while (0)
 #define ARRAY_FREEALL(a) do {						\
 	ARRAY_FREE(a);							\
-	xfree(a);							\
+	free(a);							\
 } while (0)
 
 #endif

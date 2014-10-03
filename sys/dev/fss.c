@@ -101,9 +101,11 @@ static struct vfs_hooks fss_vfs_hooks = {
 const struct bdevsw fss_bdevsw = {
 	.d_open = fss_open,
 	.d_close = fss_close,
-	.d_strategy = fss_strategy, fss_ioctl,
+	.d_strategy = fss_strategy,
+	.d_ioctl = fss_ioctl,
 	.d_dump = fss_dump,
 	.d_psize = fss_size,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK | D_MPSAFE
 };
 
@@ -118,6 +120,7 @@ const struct cdevsw fss_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = nommap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK | D_MPSAFE
 };
 

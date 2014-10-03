@@ -2,7 +2,7 @@
 /adb.c/1.34/Sat Oct 27 17:18:00 2012/-kk/
 /adb_direct.c/1.43/Wed Feb  1 02:02:07 2012/-kk/
 /adbvar.h/1.15/Sat Oct 27 17:18:00 2012/-kk/
-/aed.c/1.28/Tue Mar 25 02:35:27 2014/-kk/
+/aed.c/1.29/Fri Oct  3 09:09:02 2014/-kk/
 /aedvar.h/1.6/Sat Oct 27 17:18:00 2012/-kk/
 /akbd.c/1.45/Sat Oct 27 17:18:00 2012/-kk/
 /akbdmap.h/1.5/Sun Feb 23 18:09:25 2003/-kk/
@@ -11,7 +11,7 @@
 /am79c950reg.h/1.1/Fri May 15 10:15:47 1998/-kk/
 /ams.c/1.29/Sat Oct 27 17:18:00 2012/-kk/
 /amsvar.h/1.10/Sat Oct 27 17:18:00 2012/-kk/
-/apm.c/1.26/Tue Mar 25 02:35:27 2014/-kk/
+/apm.c/1.27/Fri Oct  3 09:09:02 2014/-kk/
 /awacs.c/1.43/Fri Nov  2 20:09:02 2012/-kk/
 /battery.c/1.15/Tue Jul 26 08:37:45 2011/-kk/
 /batteryvar.h/1.2/Tue Apr 29 06:53:02 2008/-kk/
@@ -39,11 +39,11 @@
 /mediabay.c/1.22/Tue Jul 26 08:36:02 2011/-kk/
 /mesh.c/1.36/Tue Mar 25 02:35:27 2014/-kk/
 /meshreg.h/1.2/Mon Oct 23 21:04:28 2000/-kk/
-/nvram.c/1.19/Tue Mar 25 02:35:27 2014/-kk/
+/nvram.c/1.20/Fri Oct  3 09:09:02 2014/-kk/
 /obio.c/1.40/Thu Oct 24 10:28:57 2013/-kk/
 /obiovar.h/1.2/Fri Sep 26 03:40:26 2008/-kk/
 /ofb.c/1.69/Sat Oct 27 17:18:00 2012/-kk/
-/ofcons.c/1.28/Tue Mar 25 02:35:27 2014/-kk/
+/ofcons.c/1.29/Fri Oct  3 09:09:02 2014/-kk/
 /pbms.c/1.13/Sat Oct 27 17:18:00 2012/-kk/
 /pm_direct.c/1.37/Wed Mar 18 10:22:32 2009/-kk/
 /pm_direct.h/1.12/Sat Mar 14 14:46:01 2009/-kk/

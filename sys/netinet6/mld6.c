@@ -972,7 +972,7 @@ in6_multicast_sysctl(SYSCTLFN_ARGS)
 
 	if (oldp == NULL) {
 		*oldlenp = 0;
-		TAILQ_FOREACH(ifa, &ifp->if_addrlist, ifa_list) {
+		IFADDR_FOREACH(ifa, ifp) {
 			if (ifa->ifa_addr == NULL)
 				continue;
 			if (ifa->ifa_addr->sa_family != AF_INET6)
@@ -988,7 +988,7 @@ in6_multicast_sysctl(SYSCTLFN_ARGS)
 
 	error = 0;
 	written = 0;
-	TAILQ_FOREACH(ifa, &ifp->if_addrlist, ifa_list) {
+	IFADDR_FOREACH(ifa, ifp) {
 		if (ifa->ifa_addr == NULL)
 			continue;
 		if (ifa->ifa_addr->sa_family != AF_INET6)
@@ -1025,6 +1025,12 @@ done:
 
 SYSCTL_SETUP(sysctl_in6_mklude_setup, "sysctl net.inet6.multicast_kludge subtree setup")
 {
+
+	sysctl_createv(clog, 0, NULL, NULL,
+		       CTLFLAG_PERMANENT,
+		       CTLTYPE_NODE, "inet6", NULL,
+		       NULL, 0, NULL, 0,
+		       CTL_NET, PF_INET6, CTL_EOL);
 
 	sysctl_createv(clog, 0, NULL, NULL,
 		       CTLFLAG_PERMANENT,

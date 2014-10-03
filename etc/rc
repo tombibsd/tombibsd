@@ -84,6 +84,7 @@ rc_real_work()
 	# with redirected output.
 	#
 	_rc_postprocessor_fd=9 ; export _rc_postprocessor_fd
+	_rc_pid=$$ ; export _rc_pid
 	eval "exec ${_rc_postprocessor_fd}>&1"
 
 	# Print a metadata line when we exit
@@ -126,6 +127,10 @@ rc_real_work()
 	# nevertheless attempt to print prompts and wait for input.
 	#
 	(
+	    # First detach from tty, to avoid intercepting SIGINFO.
+	    eval "exec ${_rc_original_stdout_fd}<&-"
+	    eval "exec ${_rc_original_stderr_fd}<&-"
+	    exec </dev/null >/dev/null 2>&1
 	    while kill -0 $RC_PID ; do
 		print_rc_metadata "nop"
 		sleep 3

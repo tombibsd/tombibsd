@@ -10,7 +10,7 @@
 /Lint_ptrace.c/1.2/Wed Jun 14 06:49:10 2000/-kk/
 /Lint_sbrk.c/1.3/Wed Jun 14 06:49:10 2000/-kk/
 /Lint_syscall.c/1.4/Sat Jan 18 11:32:58 2003/-kk/
-/Makefile.inc/1.223/Thu Feb 13 15:35:38 2014/-kk/
+/Makefile.inc/1.224/Fri Oct  3 09:08:39 2014/-kk/
 /__quotactl.2/1.3/Mon Feb 13 19:50:15 2012/-kk/
 /_exit.2/1.18/Mon Sep  8 17:54:34 2003/-kk/
 /_lwp_create.2/1.5/Mon May 21 14:15:16 2012/-kk/
@@ -50,6 +50,7 @@
 /extattr_get_file.2/1.5/Wed Aug  3 09:48:12 2011/-kk/
 /fcntl.2/1.41/Wed Jan  1 02:45:14 2014/-kk/
 /fdatasync.2/1.16/Wed Apr 30 13:10:51 2008/-kk/
+/fdiscard.2/1.2/Fri Jul 25 08:47:42 2014/-kk/
 /fhopen.2/1.17/Wed Aug  5 23:15:52 2009/-kk/
 /flock.2/1.22/Sat Oct 15 21:35:50 2011/-kk/
 /fork.2/1.22/Fri Jun 25 15:29:25 2004/-kk/
@@ -125,7 +126,7 @@
 /pread.c/1.9/Thu Nov 22 21:11:31 2007/-kk/
 /preadv.c/1.7/Tue Mar 20 16:26:12 2012/-kk/
 /profil.2/1.13/Thu Aug  7 16:44:04 2003/-kk/
-/ptrace.2/1.35/Wed Aug 31 23:04:33 2011/-kk/
+/ptrace.2/1.36/Fri Oct  3 09:08:39 2014/-kk/
 /pwrite.c/1.9/Thu Nov 22 21:11:32 2007/-kk/
 /pwritev.c/1.7/Tue Mar 20 16:26:12 2012/-kk/
 /rasctl.2/1.13/Tue Apr 29 21:06:28 2008/-kk/
@@ -186,7 +187,7 @@
 /timer_create.2/1.12/Tue Nov  6 21:16:21 2012/-kk/
 /timer_delete.2/1.5/Wed Apr 30 13:10:51 2008/-kk/
 /timer_settime.2/1.9/Tue Nov  6 23:25:44 2012/-kk/
-/truncate.2/1.28/Wed Jun 18 08:42:15 2014/-kk/
+/truncate.2/1.30/Fri Oct  3 09:08:40 2014/-kk/
 /truncate.c/1.13/Tue Mar 20 16:26:12 2012/-kk/
 /umask.2/1.16/Thu Aug  7 16:44:10 2003/-kk/
 /undelete.2/1.15/Sun Jan 11 02:46:30 2009/-kk/

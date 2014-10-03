@@ -269,6 +269,7 @@ const struct cdevsw ser_cdevsw = {
 	.d_poll = serpoll,
 	.d_mmap = nommap,
 	.d_kqfilter = ttykqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_TTY
 };
 

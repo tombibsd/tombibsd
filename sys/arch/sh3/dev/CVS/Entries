@@ -1,12 +1,12 @@
 /adc.c/1.13/Sun Aug  8 16:23:40 2010/-kk/
 /adcvar.h/1.2/Sun Dec 11 12:18:58 2005/-kk/
 /rtc.c/1.8/Sat May 22 15:51:32 2010/-kk/
-/sci.c/1.59/Sun Jun 22 14:32:10 2014/-kk/
-/scif.c/1.63/Tue Mar 25 02:35:29 2014/-kk/
+/sci.c/1.60/Fri Oct  3 09:09:06 2014/-kk/
+/scif.c/1.64/Fri Oct  3 09:09:06 2014/-kk/
 /scifvar.h/1.2/Sat Mar  2 22:26:27 2002/-kk/
 /scivar.h/1.1/Thu Feb 24 16:42:54 2000/-kk/
 /shb.c/1.14/Sun Apr  5 00:25:59 2009/-kk/
 /shpcic.c/1.17/Fri Jan 27 18:53:01 2012/-kk/
 /shpcicvar.h/1.9/Sat Jan 21 19:44:30 2012/-kk/
-/wdog.c/1.17/Tue Mar 25 02:35:29 2014/-kk/
+/wdog.c/1.18/Fri Oct  3 09:09:06 2014/-kk/
 D

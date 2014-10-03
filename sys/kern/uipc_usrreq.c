@@ -170,14 +170,18 @@ const struct sockaddr_un sun_noname = {
 };
 ino_t	unp_ino;			/* prototype for fake inode numbers */
 
-static void unp_detach(struct socket *);
-struct mbuf *unp_addsockcred(struct lwp *, struct mbuf *);
-static void unp_mark(file_t *);
-static void unp_scan(struct mbuf *, void (*)(file_t *), int);
-static void unp_discard_now(file_t *);
-static void unp_discard_later(file_t *);
-static void unp_thread(void *);
-static void unp_thread_kick(void);
+static struct mbuf * unp_addsockcred(struct lwp *, struct mbuf *);
+static void   unp_discard_later(file_t *);
+static void   unp_discard_now(file_t *);
+static void   unp_disconnect1(struct unpcb *);
+static bool   unp_drop(struct unpcb *, int);
+static int    unp_internalize(struct mbuf **);
+static void   unp_mark(file_t *);
+static void   unp_scan(struct mbuf *, void (*)(file_t *), int);
+static void   unp_shutdown1(struct unpcb *);
+static void   unp_thread(void *);
+static void   unp_thread_kick(void);
+
 static kmutex_t *uipc_lock;
 
 static kcondvar_t unp_thread_cv;
@@ -296,9 +300,8 @@ unp_free(struct unpcb *unp)
 	kmem_free(unp, sizeof(*unp));
 }
 
-int
-unp_output(struct mbuf *m, struct mbuf *control, struct unpcb *unp,
-	struct lwp *l)
+static int
+unp_output(struct mbuf *m, struct mbuf *control, struct unpcb *unp)
 {
 	struct socket *so2;
 	const struct sockaddr_un *sun;
@@ -315,7 +318,7 @@ unp_output(struct mbuf *m, struct mbuf *control, struct unpcb *unp,
 	else
 		sun = &sun_noname;
 	if (unp->unp_conn->unp_flags & UNP_WANTCRED)
-		control = unp_addsockcred(l, control);
+		control = unp_addsockcred(curlwp, control);
 	if (sbappendaddr(&so2->so_rcv, (const struct sockaddr *)sun, m,
 	    control) == 0) {
 		so2->so_rcv.sb_overflowed++;
@@ -329,7 +332,7 @@ unp_output(struct mbuf *m, struct mbuf *control, struct unpcb *unp,
 	}
 }
 
-void
+static void
 unp_setaddr(struct socket *so, struct mbuf *nam, bool peeraddr)
 {
 	const struct sockaddr_un *sun;
@@ -366,6 +369,25 @@ unp_setaddr(struct socket *so, struct mbuf *nam, bool peeraddr)
 }
 
 static int
+unp_recvoob(struct socket *so, struct mbuf *m, int flags)
+{
+	KASSERT(solocked(so));
+
+	return EOPNOTSUPP;
+}
+
+static int
+unp_sendoob(struct socket *so, struct mbuf *m, struct mbuf * control)
+{
+	KASSERT(solocked(so));
+
+	m_freem(m);
+	m_freem(control);
+
+	return EOPNOTSUPP;
+}
+
+static int
 unp_usrreq(struct socket *so, int req, struct mbuf *m, struct mbuf *nam,
     struct mbuf *control, struct lwp *l)
 {
@@ -377,52 +399,31 @@ unp_usrreq(struct socket *so, int req, struct mbuf *m, struct mbuf *nam,
 	KASSERT(req != PRU_ATTACH);
 	KASSERT(req != PRU_DETACH);
 	KASSERT(req != PRU_ACCEPT);
+	KASSERT(req != PRU_BIND);
+	KASSERT(req != PRU_LISTEN);
+	KASSERT(req != PRU_CONNECT);
+	KASSERT(req != PRU_DISCONNECT);
+	KASSERT(req != PRU_SHUTDOWN);
+	KASSERT(req != PRU_ABORT);
 	KASSERT(req != PRU_CONTROL);
 	KASSERT(req != PRU_SENSE);
 	KASSERT(req != PRU_PEERADDR);
 	KASSERT(req != PRU_SOCKADDR);
+	KASSERT(req != PRU_RCVOOB);
+	KASSERT(req != PRU_SENDOOB);
 
 	KASSERT(solocked(so));
 	unp = sotounpcb(so);
 
-	KASSERT(!control || (req == PRU_SEND || req == PRU_SENDOOB));
+	KASSERT(!control || req == PRU_SEND);
 	if (unp == NULL) {
 		error = EINVAL;
 		goto release;
 	}
 
 	switch (req) {
-	case PRU_BIND:
-		KASSERT(l != NULL);
-		error = unp_bind(so, nam, l);
-		break;
-
-	case PRU_LISTEN:
-		/*
-		 * If the socket can accept a connection, it must be
-		 * locked by uipc_lock.
-		 */
-		unp_resetlock(so);
-		if (unp->unp_vnode == NULL)
-			error = EINVAL;
-		break;
-
-	case PRU_CONNECT:
-		KASSERT(l != NULL);
-		error = unp_connect(so, nam, l);
-		break;
-
 	case PRU_CONNECT2:
 		error = unp_connect2(so, (struct socket *)nam, PRU_CONNECT2);
-		break;
-
-	case PRU_DISCONNECT:
-		unp_disconnect(unp);
-		break;
-
-	case PRU_SHUTDOWN:
-		socantsendmore(so);
-		unp_shutdown(unp);
 		break;
 
 	case PRU_RCVD:
@@ -494,7 +495,7 @@ unp_usrreq(struct socket *so, int req, struct mbuf *m, struct mbuf *nam,
 					 * intervening control ops, like
 					 * another connection.
 					 */
-					error = unp_connect(so, nam, l);
+					error = unp_connect(so, nam);
 				}
 			} else {
 				if ((so->so_state & SS_ISCONNECTED) == 0)
@@ -507,9 +508,9 @@ unp_usrreq(struct socket *so, int req, struct mbuf *m, struct mbuf *nam,
 				break;
 			}
 			KASSERT(l != NULL);
-			error = unp_output(m, control, unp, l);
+			error = unp_output(m, control, unp);
 			if (nam)
-				unp_disconnect(unp);
+				unp_disconnect1(unp);
 			break;
 		}
 
@@ -572,23 +573,6 @@ unp_usrreq(struct socket *so, int req, struct mbuf *m, struct mbuf *nam,
 		default:
 			panic("uipc 4");
 		}
-		break;
-
-	case PRU_ABORT:
-		(void)unp_drop(unp, ECONNABORTED);
-		KASSERT(so->so_head == NULL);
-		KASSERT(so->so_pcb != NULL);
-		unp_detach(so);
-		break;
-
-	case PRU_RCVOOB:
-		error = EOPNOTSUPP;
-		break;
-
-	case PRU_SENDOOB:
-		m_freem(control);
-		m_freem(m);
-		error = EOPNOTSUPP;
 		break;
 
 	default:
@@ -763,7 +747,7 @@ unp_detach(struct socket *so)
 		unp->unp_vnode = NULL;
 	}
 	if (unp->unp_conn)
-		unp_disconnect(unp);
+		unp_disconnect1(unp);
 	while (unp->unp_refs) {
 		KASSERT(solocked2(so, unp->unp_refs->unp_socket));
 		if (unp_drop(unp->unp_refs, ECONNRESET)) {
@@ -935,8 +919,8 @@ makeun(struct mbuf *nam, size_t *addrlen) {
 	return sun;
 }
 
-int
-unp_bind(struct socket *so, struct mbuf *nam, struct lwp *l)
+static int
+unp_bind(struct socket *so, struct mbuf *nam)
 {
 	struct sockaddr_un *sun;
 	struct unpcb *unp;
@@ -949,6 +933,11 @@ unp_bind(struct socket *so, struct mbuf *nam, struct lwp *l)
 	proc_t *p;
 
 	unp = sotounpcb(so);
+
+	KASSERT(solocked(so));
+	KASSERT(unp != NULL);
+	KASSERT(nam != NULL);
+
 	if (unp->unp_vnode != NULL)
 		return (EINVAL);
 	if ((unp->unp_flags & UNP_BUSY) != 0) {
@@ -961,7 +950,7 @@ unp_bind(struct socket *so, struct mbuf *nam, struct lwp *l)
 	unp->unp_flags |= UNP_BUSY;
 	sounlock(so);
 
-	p = l->l_proc;
+	p = curlwp->l_proc;
 	sun = makeun(nam, &addrlen);
 
 	pb = pathbuf_create(sun->sun_path);
@@ -1005,8 +994,8 @@ unp_bind(struct socket *so, struct mbuf *nam, struct lwp *l)
 	unp->unp_addrlen = addrlen;
 	unp->unp_addr = sun;
 	unp->unp_connid.unp_pid = p->p_pid;
-	unp->unp_connid.unp_euid = kauth_cred_geteuid(l->l_cred);
-	unp->unp_connid.unp_egid = kauth_cred_getegid(l->l_cred);
+	unp->unp_connid.unp_euid = kauth_cred_geteuid(curlwp->l_cred);
+	unp->unp_connid.unp_egid = kauth_cred_getegid(curlwp->l_cred);
 	unp->unp_flags |= UNP_EIDSBIND;
 	VOP_UNLOCK(vp);
 	vput(nd.ni_dvp);
@@ -1021,8 +1010,61 @@ unp_bind(struct socket *so, struct mbuf *nam, struct lwp *l)
 	return (error);
 }
 
+static int
+unp_listen(struct socket *so)
+{
+	struct unpcb *unp = sotounpcb(so);
+
+	KASSERT(solocked(so));
+	KASSERT(unp != NULL);
+
+	/*
+	 * If the socket can accept a connection, it must be
+	 * locked by uipc_lock.
+	 */
+	unp_resetlock(so);
+	if (unp->unp_vnode == NULL)
+		return EINVAL;
+
+	return 0;
+}
+
+static int
+unp_disconnect(struct socket *so)
+{
+	KASSERT(solocked(so));
+	KASSERT(sotounpcb(so) != NULL);
+
+	unp_disconnect1(sotounpcb(so));
+	return 0;
+}
+
+static int
+unp_shutdown(struct socket *so)
+{
+	KASSERT(solocked(so));
+	KASSERT(sotounpcb(so) != NULL);
+
+	socantsendmore(so);
+	unp_shutdown1(sotounpcb(so));
+	return 0;
+}
+
+static int
+unp_abort(struct socket *so)
+{
+	KASSERT(solocked(so));
+	KASSERT(sotounpcb(so) != NULL);
+
+	(void)unp_drop(sotounpcb(so), ECONNABORTED);
+	KASSERT(so->so_head == NULL);
+	KASSERT(so->so_pcb != NULL);
+	unp_detach(so);
+	return 0;
+}
+
 int
-unp_connect(struct socket *so, struct mbuf *nam, struct lwp *l)
+unp_connect(struct socket *so, struct mbuf *nam)
 {
 	struct sockaddr_un *sun;
 	vnode_t *vp;
@@ -1063,7 +1105,7 @@ unp_connect(struct socket *so, struct mbuf *nam, struct lwp *l)
 		goto bad;
 	}
 	pathbuf_destroy(pb);
-	if ((error = VOP_ACCESS(vp, VWRITE, l->l_cred)) != 0)
+	if ((error = VOP_ACCESS(vp, VWRITE, curlwp->l_cred)) != 0)
 		goto bad;
 	/* Acquire v_interlock to protect against unp_detach(). */
 	mutex_enter(vp->v_interlock);
@@ -1105,9 +1147,9 @@ unp_connect(struct socket *so, struct mbuf *nam, struct lwp *l)
 			unp3->unp_addrlen = unp2->unp_addrlen;
 		}
 		unp3->unp_flags = unp2->unp_flags;
-		unp3->unp_connid.unp_pid = l->l_proc->p_pid;
-		unp3->unp_connid.unp_euid = kauth_cred_geteuid(l->l_cred);
-		unp3->unp_connid.unp_egid = kauth_cred_getegid(l->l_cred);
+		unp3->unp_connid.unp_pid = curlwp->l_proc->p_pid;
+		unp3->unp_connid.unp_euid = kauth_cred_geteuid(curlwp->l_cred);
+		unp3->unp_connid.unp_egid = kauth_cred_getegid(curlwp->l_cred);
 		unp3->unp_flags |= UNP_EIDSVALID;
 		if (unp2->unp_flags & UNP_EIDSBIND) {
 			unp->unp_connid = unp2->unp_connid;
@@ -1187,8 +1229,8 @@ unp_connect2(struct socket *so, struct socket *so2, int req)
 	return (0);
 }
 
-void
-unp_disconnect(struct unpcb *unp)
+static void
+unp_disconnect1(struct unpcb *unp)
 {
 	struct unpcb *unp2 = unp->unp_conn;
 	struct socket *so;
@@ -1206,7 +1248,7 @@ unp_disconnect(struct unpcb *unp)
 			for (;;) {
 				KASSERT(solocked2(so, unp2->unp_socket));
 				if (unp2 == 0)
-					panic("unp_disconnect");
+					panic("unp_disconnect1");
 				if (unp2->unp_nextref == unp)
 					break;
 				unp2 = unp2->unp_nextref;
@@ -1227,8 +1269,8 @@ unp_disconnect(struct unpcb *unp)
 	}
 }
 
-void
-unp_shutdown(struct unpcb *unp)
+static void
+unp_shutdown1(struct unpcb *unp)
 {
 	struct socket *so;
 
@@ -1243,7 +1285,7 @@ unp_shutdown(struct unpcb *unp)
 	}
 }
 
-bool
+static bool
 unp_drop(struct unpcb *unp, int errno)
 {
 	struct socket *so = unp->unp_socket;
@@ -1251,7 +1293,7 @@ unp_drop(struct unpcb *unp, int errno)
 	KASSERT(solocked(so));
 
 	so->so_error = errno;
-	unp_disconnect(unp);
+	unp_disconnect1(unp);
 	if (so->so_head) {
 		so->so_pcb = NULL;
 		/* sofree() drops the socket lock */
@@ -1398,7 +1440,7 @@ unp_externalize(struct mbuf *rights, struct lwp *l, int flags)
 	return error;
 }
 
-int
+static int
 unp_internalize(struct mbuf **controlp)
 {
 	filedesc_t *fdescp = curlwp->l_fd;
@@ -1858,9 +1900,17 @@ const struct pr_usrreqs unp_usrreqs = {
 	.pr_attach	= unp_attach,
 	.pr_detach	= unp_detach,
 	.pr_accept	= unp_accept,
+	.pr_bind	= unp_bind,
+	.pr_listen	= unp_listen,
+	.pr_connect	= unp_connect,
+	.pr_disconnect	= unp_disconnect,
+	.pr_shutdown	= unp_shutdown,
+	.pr_abort	= unp_abort,
 	.pr_ioctl	= unp_ioctl,
 	.pr_stat	= unp_stat,
 	.pr_peeraddr	= unp_peeraddr,
 	.pr_sockaddr	= unp_sockaddr,
+	.pr_recvoob	= unp_recvoob,
+	.pr_sendoob	= unp_sendoob,
 	.pr_generic	= unp_usrreq,
 };

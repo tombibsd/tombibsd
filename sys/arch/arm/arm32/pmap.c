@@ -1304,7 +1304,7 @@ pmap_alloc_l1(pmap_t pm)
 	bool ok __diagused;
 	KASSERT(pg != NULL);
 	pm->pm_l1_pa = VM_PAGE_TO_PHYS(pg);
-	vaddr_t va = pmap_direct_mapped_phys(pm->pm_l1_pa, &ok, 0xdeadbeef);
+	vaddr_t va = pmap_direct_mapped_phys(pm->pm_l1_pa, &ok, 0);
 	KASSERT(ok);
 	KASSERT(va >= KERNEL_BASE);
 
@@ -1316,6 +1316,7 @@ pmap_alloc_l1(pmap_t pm)
 	pmap_extract(pmap_kernel(), va, &pm->pm_l1_pa);
 #endif
 	pm->pm_l1 = (pd_entry_t *)va;
+	PTE_SYNC_RANGE(pm->pm_l1, PAGE_SIZE / sizeof(pt_entry_t));
 #else
 	struct l1_ttable *l1;
 	uint8_t domain;

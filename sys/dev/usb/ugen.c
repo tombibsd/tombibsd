@@ -151,6 +151,7 @@ const struct cdevsw ugen_cdevsw = {
 	.d_poll = ugenpoll,
 	.d_mmap = nommap,
 	.d_kqfilter = ugenkqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_OTHER,
 };
 

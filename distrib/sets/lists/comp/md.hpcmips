@@ -54,7 +54,8 @@
 ./usr/include/hpcmips/rwlock.h			comp-c-include
 ./usr/include/hpcmips/setjmp.h			comp-c-include
 ./usr/include/hpcmips/signal.h			comp-c-include
-./usr/include/hpcmips/sljitarch.h		comp-c-include
+./usr/include/hpcmips/sljitarch.h		comp-obsolete		obsolete
+./usr/include/hpcmips/sljit_machdep.h		comp-c-include
 ./usr/include/hpcmips/stdarg.h			comp-obsolete		obsolete
 ./usr/include/hpcmips/sysconf.h			comp-c-include
 ./usr/include/hpcmips/trap.h			comp-c-include

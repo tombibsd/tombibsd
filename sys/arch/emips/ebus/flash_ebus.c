@@ -1402,6 +1402,7 @@ const struct bdevsw eflash_bdevsw = {
 	.d_ioctl = eflashioctl,
 	.d_dump = eflashdump,
 	.d_psize = eflashsize,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK
 };
 
@@ -1416,6 +1417,7 @@ const struct cdevsw eflash_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = nommap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK
 };
 

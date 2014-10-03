@@ -197,6 +197,7 @@ const struct bdevsw xbd_bdevsw = {
 	.d_ioctl = xbdioctl,
 	.d_dump = xbddump,
 	.d_psize = xbdsize,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK
 };
 
@@ -211,6 +212,7 @@ const struct cdevsw xbd_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = nommap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK
 };
 

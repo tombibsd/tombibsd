@@ -14,7 +14,7 @@ stop_cmd=":"
 
 mountcritremote_start()
 {
-	#	Mount critical filesystems that may be `remote'.
+	#	Mount critical file systems that may be `remote'.
 	#	(as specified in $critical_filesystems_remote)
 	#	This usually includes /usr.
 	#

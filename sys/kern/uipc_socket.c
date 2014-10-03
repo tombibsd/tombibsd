@@ -629,8 +629,7 @@ sobind(struct socket *so, struct mbuf *nam, struct lwp *l)
 	int	error;
 
 	solock(so);
-	error = (*so->so_proto->pr_usrreqs->pr_generic)(so,
-	    PRU_BIND, NULL, nam, NULL, l);
+	error = (*so->so_proto->pr_usrreqs->pr_bind)(so, nam);
 	sounlock(so);
 	return error;
 }
@@ -646,8 +645,7 @@ solisten(struct socket *so, int backlog, struct lwp *l)
 		sounlock(so);
 		return EINVAL;
 	}
-	error = (*so->so_proto->pr_usrreqs->pr_generic)(so,
-	    PRU_LISTEN, NULL, NULL, NULL, l);
+	error = (*so->so_proto->pr_usrreqs->pr_listen)(so);
 	if (error != 0) {
 		sounlock(so);
 		return error;
@@ -780,8 +778,7 @@ soabort(struct socket *so)
 	KASSERT(so->so_head == NULL);
 
 	so->so_aborting++;		/* XXX */
-	error = (*so->so_proto->pr_usrreqs->pr_generic)(so,
-	    PRU_ABORT, NULL, NULL, NULL, NULL);
+	error = (*so->so_proto->pr_usrreqs->pr_abort)(so);
 	refs = --so->so_aborting;	/* XXX */
 	if (error || (refs == 0)) {
 		sofree(so);
@@ -829,8 +826,7 @@ soconnect(struct socket *so, struct mbuf *nam, struct lwp *l)
 	    (error = sodisconnect(so))))
 		error = EISCONN;
 	else
-		error = (*so->so_proto->pr_usrreqs->pr_generic)(so,
-		    PRU_CONNECT, NULL, nam, NULL, l);
+		error = (*so->so_proto->pr_usrreqs->pr_connect)(so, nam);
 
 	return error;
 }
@@ -856,8 +852,7 @@ sodisconnect(struct socket *so)
 	} else if (so->so_state & SS_ISDISCONNECTING) {
 		error = EALREADY;
 	} else {
-		error = (*so->so_proto->pr_usrreqs->pr_generic)(so,
-		    PRU_DISCONNECT, NULL, NULL, NULL, NULL);
+		error = (*so->so_proto->pr_usrreqs->pr_disconnect)(so);
 	}
 	return (error);
 }
@@ -1053,9 +1048,12 @@ sosend(struct socket *so, struct mbuf *addr, struct uio *uio, struct mbuf *top,
 				so->so_options |= SO_DONTROUTE;
 			if (resid > 0)
 				so->so_state |= SS_MORETOCOME;
-			error = (*so->so_proto->pr_usrreqs->pr_generic)(so,
-			    (flags & MSG_OOB) ? PRU_SENDOOB : PRU_SEND,
-			    top, addr, control, curlwp);
+			if (flags & MSG_OOB)
+				error = (*so->so_proto->pr_usrreqs->pr_sendoob)(so,
+				    top, control);
+			else
+				error = (*so->so_proto->pr_usrreqs->pr_generic)(so,
+				    PRU_SEND, top, addr, control, curlwp);
 			if (dontroute)
 				so->so_options &= ~SO_DONTROUTE;
 			if (resid > 0)
@@ -1167,8 +1165,7 @@ soreceive(struct socket *so, struct mbuf **paddr, struct uio *uio,
 	if (flags & MSG_OOB) {
 		m = m_get(M_WAIT, MT_DATA);
 		solock(so);
-		error = (*pr->pr_usrreqs->pr_generic)(so, PRU_RCVOOB, m,
-		    (struct mbuf *)(long)(flags & MSG_PEEK), NULL, l);
+		error = (*pr->pr_usrreqs->pr_recvoob)(so, m, flags & MSG_PEEK);
 		sounlock(so);
 		if (error)
 			goto bad;
@@ -1612,8 +1609,7 @@ soshutdown(struct socket *so, int how)
 		error = 0;
 	}
 	if (how == SHUT_WR || how == SHUT_RDWR)
-		error = (*pr->pr_usrreqs->pr_generic)(so,
-		    PRU_SHUTDOWN, NULL, NULL, NULL, NULL);
+		error = (*pr->pr_usrreqs->pr_shutdown)(so);
 
 	return error;
 }

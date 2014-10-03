@@ -1,4 +1,4 @@
-/Makefile.rump/1.98/Sun Jun 22 14:32:22 2014/-kk/
+/Makefile.rump/1.99/Fri Oct  3 09:09:31 2014/-kk/
 /Makefile/1.6/Thu Jun 10 21:56:42 2010/-kk/
 /README.compileopts/1.6/Sun Jul 20 13:59:13 2014/-kk/
 /README.dirs/1.12/Thu Oct 24 10:28:58 2013/-kk/
@@ -8,7 +8,7 @@
 /linksyms_sun.c/1.1/Thu Oct 24 10:28:58 2013/-kk/
 /listsrcdirs/1.17/Sun Jul 20 13:26:35 2014/-kk/
 /makerumpsyscalls.sh/1.2/Sun Apr 27 16:28:21 2014/-kk/
-/rump.sysmap/1.1/Sun Apr 27 15:11:23 2014/-kk/
+/rump.sysmap/1.2/Fri Oct  3 09:09:31 2014/-kk/
 /sunldgen.sh/1.1/Thu Oct 24 10:28:58 2013/-kk/
 D/dev////
 D/fs////

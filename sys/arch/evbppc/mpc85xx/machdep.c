@@ -1183,7 +1183,7 @@ initppc(vaddr_t startkernel, vaddr_t endkernel,
 	/*
 	 * fill in with an absolute branch to a routine that will panic.
 	 */
-	*(int *)0 = 0x48000002 | (int) calltozero;
+	*(volatile int *)0 = 0x48000002 | (int) calltozero;
 
 	/*
 	 * Get the cache sizes.

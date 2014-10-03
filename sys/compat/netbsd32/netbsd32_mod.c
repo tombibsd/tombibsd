@@ -87,7 +87,7 @@ static struct execsw netbsd32_execsw[] = {
 			.elf_probe_func = netbsd32_elf32_probe,
 		},
 		.es_emul = &emul_netbsd32,
-		.es_prio = EXECSW_PRIO_FIRST,
+		.es_prio = EXECSW_PRIO_ANY,
 		.es_arglen = ELF32_AUXSIZE,
 		.es_copyargs = netbsd32_elf32_copyargs,
 		.es_setregs = NULL,

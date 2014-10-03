@@ -78,6 +78,7 @@ const struct bdevsw fw_bdevsw = {
 	.d_ioctl = fw_ioctl,
 	.d_dump = nodump,
 	.d_psize = nosize,
+	.d_discard = nodiscard,
 	.d_flag = D_OTHER
 };
 
@@ -92,6 +93,7 @@ const struct cdevsw fw_cdevsw = {
 	.d_poll = fw_poll,
 	.d_mmap = fw_mmap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_OTHER
 };
 

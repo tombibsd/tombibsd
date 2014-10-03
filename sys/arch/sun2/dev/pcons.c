@@ -91,6 +91,7 @@ const struct cdevsw pcons_cdevsw = {
 	.d_poll = pconspoll,
 	.d_mmap = nommap,
 	.d_kqfilter = ttykqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_TTY
 };
 

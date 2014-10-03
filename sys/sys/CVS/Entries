@@ -1,4 +1,4 @@
-/Makefile/1.148/Tue Mar 25 02:35:51 2014/-kk/
+/Makefile/1.149/Fri Oct  3 09:09:34 2014/-kk/
 /acct.h/1.27/Sun Jan 11 02:45:55 2009/-kk/
 /agpio.h/1.10/Tue Feb 15 08:57:01 2011/-kk/
 /aio.h/1.12/Sat Jan  7 19:48:19 2012/-kk/
@@ -27,8 +27,13 @@
 /cdio.h/1.33/Thu Jan 29 19:36:28 2009/-kk/
 /chio.h/1.12/Mon Apr 28 20:24:10 2008/-kk/
 /clockctl.h/1.15/Sun Jan 11 02:45:55 2009/-kk/
+/common_int_const.h/1.1/Fri Jul 25 21:43:13 2014/-kk/
+/common_int_fmtio.h/1.1/Fri Jul 25 21:43:13 2014/-kk/
+/common_int_limits.h/1.1/Fri Jul 25 21:43:13 2014/-kk/
+/common_int_mwgwtypes.h/1.1/Fri Jul 25 21:43:13 2014/-kk/
+/common_int_types.h/1.1/Fri Jul 25 21:43:13 2014/-kk/
 /condvar.h/1.12/Sat Dec  5 22:38:19 2009/-kk/
-/conf.h/1.144/Sat Oct 27 17:18:40 2012/-kk/
+/conf.h/1.145/Fri Oct  3 09:09:34 2014/-kk/
 /core.h/1.12/Thu Aug 20 22:07:49 2009/-kk/
 /cprng.h/1.9/Fri Jan 31 08:48:57 2014/-kk/
 /cpu.h/1.41/Tue Jun  3 02:54:47 2014/-kk/
@@ -50,7 +55,7 @@
 /disklabel_gpt.h/1.12/Tue Dec 17 04:05:16 2013/-kk/
 /disklabel_rdb.h/1.2/Sat Jun 19 08:45:25 2010/-kk/
 /dkbad.h/1.15/Mon Dec 26 18:41:36 2005/-kk/
-/dkio.h/1.18/Fri Oct 19 17:09:07 2012/-kk/
+/dkio.h/1.19/Fri Oct  3 09:09:34 2014/-kk/
 /dkstat.h/1.17/Mon Dec 26 18:41:36 2005/-kk/
 /domain.h/1.31/Sun Jun 26 16:43:12 2011/-kk/
 /drvctlio.h/1.7/Sat May 31 13:24:57 2008/-kk/
@@ -139,7 +144,7 @@
 /null.h/1.9/Tue Jul  6 11:56:20 2010/-kk/
 /once.h/1.5/Thu Oct  9 10:48:21 2008/-kk/
 /optstr.h/1.3/Mon Apr 28 20:24:11 2008/-kk/
-/param.h/1.457/Sun Jul 20 13:26:35 2014/-kk/
+/param.h/1.459/Fri Oct  3 09:09:34 2014/-kk/
 /pax.h/1.11/Thu Dec 27 15:21:53 2007/-kk/
 /pcq.h/1.2/Sat Jun 14 03:56:49 2014/-kk/
 /pcu.h/1.12/Tue Jun  3 02:54:47 2014/-kk/
@@ -154,7 +159,7 @@
 /power.h/1.19/Thu Oct 24 10:28:58 2013/-kk/
 /proc.h/1.320/Sat Mar  1 06:05:16 2014/-kk/
 /prot.h/1.2/Tue Apr 29 06:53:03 2008/-kk/
-/protosw.h/1.52/Sun Jul 20 13:26:35 2014/-kk/
+/protosw.h/1.56/Fri Oct  3 09:09:34 2014/-kk/
 /pserialize.h/1.1/Sat Jul 30 17:01:04 2011/-kk/
 /pset.h/1.4/Thu Oct 24 10:28:58 2013/-kk/
 /ptrace.h/1.45/Tue Jan 14 16:05:14 2014/-kk/
@@ -204,9 +209,9 @@
 /stdint.h/1.7/Thu Oct 24 10:28:58 2013/-kk/
 /swap.h/1.8/Wed Jan 14 02:20:45 2009/-kk/
 /syncobj.h/1.8/Wed Oct 21 21:12:07 2009/-kk/
-/syscall.h/1.271/Wed Jun 18 08:43:12 2014/-kk/
+/syscall.h/1.274/Fri Oct  3 09:09:34 2014/-kk/
 /syscall_stats.h/1.4/Wed Nov 12 12:36:28 2008/-kk/
-/syscallargs.h/1.254/Wed Jun 18 08:43:12 2014/-kk/
+/syscallargs.h/1.257/Fri Oct  3 09:09:34 2014/-kk/
 /syscallvar.h/1.9/Fri Mar 14 04:28:29 2014/-kk/
 /sysctl.h/1.213/Sun Jul 20 13:59:14 2014/-kk/
 /syslimits.h/1.27/Fri Dec  7 07:06:39 2012/-kk/
@@ -235,7 +240,7 @@
 /ucred.h/1.36/Wed Oct 12 23:03:36 2011/-kk/
 /uidinfo.h/1.3/Sat Jun  9 02:31:15 2012/-kk/
 /uio.h/1.36/Wed Jul 27 13:20:07 2011/-kk/
-/un.h/1.48/Tue Jun  3 02:54:47 2014/-kk/
+/un.h/1.52/Fri Oct  3 09:09:34 2014/-kk/
 /unistd.h/1.55/Wed Dec 25 07:37:48 2013/-kk/
 /unpcb.h/1.17/Thu Apr 24 11:38:39 2008/-kk/
 /user.h/1.19/Thu Feb 27 08:56:17 2014/-kk/
@@ -251,7 +256,7 @@
 /vmem_impl.h/1.3/Tue Dec 17 04:05:17 2013/-kk/
 /vmmeter.h/1.19/Wed Oct 21 21:12:07 2009/-kk/
 /vnode.h/1.249/Sun Jul 20 13:26:35 2014/-kk/
-/vnode_if.h/1.87/Thu Feb 13 15:36:03 2014/-kk/
+/vnode_if.h/1.88/Fri Oct  3 09:09:34 2014/-kk/
 /wait.h/1.26/Sun Jan 11 02:45:56 2009/-kk/
 /wapbl.h/1.15/Thu Oct 24 10:28:58 2013/-kk/
 /wapbl_replay.h/1.1/Mon Nov 24 16:05:21 2008/-kk/

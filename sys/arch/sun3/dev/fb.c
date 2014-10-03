@@ -76,6 +76,7 @@ const struct cdevsw fb_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = fbmmap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = 0
 };
 

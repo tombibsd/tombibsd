@@ -408,13 +408,13 @@ int rfcomm_ctloutput(int, struct socket *, struct sockopt *);
 
 /* rfcomm_upper.c */
 int rfcomm_attach_pcb(struct rfcomm_dlc **, const struct btproto *, void *);
-int rfcomm_bind(struct rfcomm_dlc *, struct sockaddr_bt *);
+int rfcomm_bind_pcb(struct rfcomm_dlc *, struct sockaddr_bt *);
 int rfcomm_sockaddr_pcb(struct rfcomm_dlc *, struct sockaddr_bt *);
-int rfcomm_connect(struct rfcomm_dlc *, struct sockaddr_bt *);
+int rfcomm_connect_pcb(struct rfcomm_dlc *, struct sockaddr_bt *);
 int rfcomm_peeraddr_pcb(struct rfcomm_dlc *, struct sockaddr_bt *);
-int rfcomm_disconnect(struct rfcomm_dlc *, int);
+int rfcomm_disconnect_pcb(struct rfcomm_dlc *, int);
 void rfcomm_detach_pcb(struct rfcomm_dlc **);
-int rfcomm_listen(struct rfcomm_dlc *);
+int rfcomm_listen_pcb(struct rfcomm_dlc *);
 int rfcomm_send(struct rfcomm_dlc *, struct mbuf *);
 int rfcomm_rcvd(struct rfcomm_dlc *, size_t);
 int rfcomm_setopt(struct rfcomm_dlc *, const struct sockopt *);

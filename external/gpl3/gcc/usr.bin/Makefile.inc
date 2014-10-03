@@ -68,7 +68,7 @@ DATESTAMPSTR=		"\"\""
 .include "${TOP}/tools/gcc/gcc-version.mk"
 
 # XXX pull this out of our configs
-G_BUGURL=<http://www.NetBSD.org/Misc/send-pr.html>
+G_BUGURL=<http://www.NetBSD.org/support/send-pr.html>
 G_BUGURL_s="\"${G_BUGURL}\""
 G_PKGVERSION=(${NETBSD_GCC_VERSION}) 
 G_PKGVERSION_s="\"${G_PKGVERSION} \""

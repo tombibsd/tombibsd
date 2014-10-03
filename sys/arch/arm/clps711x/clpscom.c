@@ -179,6 +179,7 @@ const struct cdevsw clpscom_cdevsw = {
 	.d_poll = clpscompoll,
 	.d_mmap = nommap,
 	.d_kqfilter = ttykqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_TTY
 };
 

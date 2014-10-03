@@ -90,6 +90,7 @@ const struct cdevsw aed_cdevsw = {
 	.d_poll = aedpoll,
 	.d_mmap = nommap,
 	.d_kqfilter = aedkqfilter,
+	.d_discard = nodiscard,
 	.d_flag = 0
 };
 

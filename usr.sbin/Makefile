@@ -25,7 +25,7 @@ SUBDIR=	ac accton acpitools altq apm apmd arp \
 	rarpd rbootd rdate repquota rmt rpc.bootparamd rpc.lockd \
 	rpc.pcnfsd rpc.statd rpcbind rwhod \
 	sa screenblank sdpd services_mkdb sesd schedctl sliplogin spray \
-	srtconfig sti sunlabel sup syslogd \
+	srtconfig sti sunlabel sup sysinst syslogd \
 	tadpolectl tcpdchk tcpdmatch tcpdrop timed tpctl tprof traceroute trpt \
 	unlink usbdevs user \
 	videomode vipw veriexecgen vnconfig \

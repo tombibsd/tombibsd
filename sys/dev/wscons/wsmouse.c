@@ -213,6 +213,7 @@ const struct cdevsw wsmouse_cdevsw = {
 	.d_poll = wsmousepoll,
 	.d_mmap = nommap,
 	.d_kqfilter = wsmousekqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_OTHER
 };
 

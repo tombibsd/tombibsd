@@ -32,6 +32,10 @@
 #ifndef _AMD64_INT_CONST_H_
 #define _AMD64_INT_CONST_H_
 
+#ifdef __INTMAX_C_SUFFIX__
+#include <sys/common_int_const.h>
+#else
+
 #ifdef __x86_64__
 
 /*
@@ -60,5 +64,7 @@
 #include <i386/int_const.h>
 
 #endif	/*	__x86_64__	*/
+
+#endif
 
 #endif /* !_AMD64_INT_CONST_H_ */

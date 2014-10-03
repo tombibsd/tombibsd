@@ -144,7 +144,11 @@ static inline void
 ww_mutex_init(struct ww_mutex *mutex, struct ww_class *class)
 {
 
-	mutex_init(&mutex->wwm_lock, MUTEX_DEFAULT, IPL_NONE);
+	/*
+	 * XXX Apparently Linux takes these with spin locks held.  That
+	 * strikes me as a bad idea, but so it is...
+	 */
+	mutex_init(&mutex->wwm_lock, MUTEX_DEFAULT, IPL_VM);
 	mutex->wwm_state = WW_UNLOCKED;
 	mutex->wwm_class = class;
 	rb_tree_init(&mutex->wwm_waiters, &ww_acquire_ctx_rb_ops);
@@ -230,7 +234,8 @@ ww_mutex_lock_wait(struct ww_mutex *mutex, struct ww_acquire_ctx *ctx)
 	    ctx->wwx_class, mutex->wwm_u.ctx->wwx_class);
 	KASSERTMSG((mutex->wwm_u.ctx->wwx_ticket != ctx->wwx_ticket),
 	    "ticket number reused: %"PRId64" (%p) %"PRId64" (%p)",
-	    ctx->wwx_ticket, ctx, mutex->wwm_u.ctx->wwx_ticket, mutex->wwm_u.ctx);
+	    ctx->wwx_ticket, ctx,
+	    mutex->wwm_u.ctx->wwx_ticket, mutex->wwm_u.ctx);
 
 	collision = rb_tree_insert_node(&mutex->wwm_waiters, ctx);
 	KASSERTMSG((collision == ctx),
@@ -257,7 +262,8 @@ ww_mutex_lock_wait_sig(struct ww_mutex *mutex, struct ww_acquire_ctx *ctx)
 	    ctx->wwx_class, mutex->wwm_u.ctx->wwx_class);
 	KASSERTMSG((mutex->wwm_u.ctx->wwx_ticket != ctx->wwx_ticket),
 	    "ticket number reused: %"PRId64" (%p) %"PRId64" (%p)",
-	    ctx->wwx_ticket, ctx, mutex->wwm_u.ctx->wwx_ticket, mutex->wwm_u.ctx);
+	    ctx->wwx_ticket, ctx,
+	    mutex->wwm_u.ctx->wwx_ticket, mutex->wwm_u.ctx);
 
 	collision = rb_tree_insert_node(&mutex->wwm_waiters, ctx);
 	KASSERTMSG((collision == ctx),
@@ -618,6 +624,8 @@ ww_mutex_unlock(struct ww_mutex *mutex)
 		mutex->wwm_state = WW_UNLOCKED;
 		break;
 	case WW_CTX:
+		KASSERT(mutex->wwm_u.ctx != NULL);
+		mutex->wwm_u.ctx->wwx_acquired--;
 		mutex->wwm_u.ctx = NULL;
 		/*
 		 * If there are any waiters with contexts, grant the

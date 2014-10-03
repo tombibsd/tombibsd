@@ -125,7 +125,6 @@ extern int astpending;		/* need to trap before returning to user mode */
  */
 
 #ifdef _KERNEL
-extern int machineid;
 extern uint8_t *intiobase;
 extern uint8_t *intiolimit;
 

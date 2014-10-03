@@ -96,12 +96,12 @@ rfcomm_attach_pcb(struct rfcomm_dlc **handle,
 }
 
 /*
- * rfcomm_bind(dlc, sockaddr)
+ * rfcomm_bind_pcb(dlc, sockaddr)
  *
  * bind DLC to local address
  */
 int
-rfcomm_bind(struct rfcomm_dlc *dlc, struct sockaddr_bt *addr)
+rfcomm_bind_pcb(struct rfcomm_dlc *dlc, struct sockaddr_bt *addr)
 {
 
 	if (dlc->rd_state != RFCOMM_DLC_CLOSED)
@@ -125,12 +125,12 @@ rfcomm_sockaddr_pcb(struct rfcomm_dlc *dlc, struct sockaddr_bt *addr)
 }
 
 /*
- * rfcomm_connect(dlc, sockaddr)
+ * rfcomm_connect_pcb(dlc, sockaddr)
  *
  * Initiate connection of RFCOMM DLC to remote address.
  */
 int
-rfcomm_connect(struct rfcomm_dlc *dlc, struct sockaddr_bt *dest)
+rfcomm_connect_pcb(struct rfcomm_dlc *dlc, struct sockaddr_bt *dest)
 {
 	struct rfcomm_session *rs;
 	int err = 0;
@@ -167,7 +167,7 @@ rfcomm_connect(struct rfcomm_dlc *dlc, struct sockaddr_bt *dest)
 		rs->rs_flags |= RFCOMM_SESSION_INITIATOR;
 		rs->rs_state = RFCOMM_SESSION_WAIT_CONNECT;
 
-		err = l2cap_connect(rs->rs_l2cap, &dlc->rd_raddr);
+		err = l2cap_connect_pcb(rs->rs_l2cap, &dlc->rd_raddr);
 		if (err) {
 			rfcomm_session_free(rs);
 			return err;
@@ -213,12 +213,12 @@ rfcomm_peeraddr_pcb(struct rfcomm_dlc *dlc, struct sockaddr_bt *addr)
 }
 
 /*
- * rfcomm_disconnect(dlc, linger)
+ * rfcomm_disconnect_pcb(dlc, linger)
  *
  * disconnect RFCOMM DLC
  */
 int
-rfcomm_disconnect(struct rfcomm_dlc *dlc, int linger)
+rfcomm_disconnect_pcb(struct rfcomm_dlc *dlc, int linger)
 {
 	struct rfcomm_session *rs = dlc->rd_session;
 	int err = 0;
@@ -301,7 +301,7 @@ rfcomm_detach_pcb(struct rfcomm_dlc **handle)
 }
 
 /*
- * rfcomm_listen(dlc)
+ * rfcomm_listen_pcb(dlc)
  *
  * This DLC is a listener. We look for an existing listening session
  * with a matching address to attach to or else create a new one on
@@ -309,7 +309,7 @@ rfcomm_detach_pcb(struct rfcomm_dlc **handle)
  * available for the session.
  */
 int
-rfcomm_listen(struct rfcomm_dlc *dlc)
+rfcomm_listen_pcb(struct rfcomm_dlc *dlc)
 {
 	struct rfcomm_session *rs;
 	struct rfcomm_dlc *used;
@@ -349,7 +349,7 @@ rfcomm_listen(struct rfcomm_dlc *dlc)
 
 		rs->rs_state = RFCOMM_SESSION_LISTEN;
 
-		err = l2cap_listen(rs->rs_l2cap);
+		err = l2cap_listen_pcb(rs->rs_l2cap);
 		if (err) {
 			rfcomm_session_free(rs);
 			return err;

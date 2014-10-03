@@ -115,6 +115,7 @@ const struct cdevsw isv_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = isv_mmap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_OTHER
 };
 

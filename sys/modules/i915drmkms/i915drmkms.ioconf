@@ -6,5 +6,7 @@ include "conf/files"
 include "dev/pci/files.pci"
 
 pseudo-root	pci*
+pseudo-root	intelfbbus*
 
 i915drmkms* 	at pci? dev ? function ?
+intelfb* 	at intelfbbus?

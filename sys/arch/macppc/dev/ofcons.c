@@ -89,6 +89,7 @@ const struct cdevsw macofcons_cdevsw = {
 	.d_poll = ofcpoll,
 	.d_mmap = nommap,
 	.d_kqfilter = ttykqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_TTY
 };
 

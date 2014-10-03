@@ -490,7 +490,75 @@ key_accept(struct socket *so, struct mbuf *nam)
 	KASSERT(solocked(so));
 
 	panic("key_accept");
-	/* NOT REACHED */
+
+	return EOPNOTSUPP;
+}
+
+static int
+key_bind(struct socket *so, struct mbuf *nam)
+{
+	KASSERT(solocked(so));
+
+	return EOPNOTSUPP;
+}
+
+static int
+key_listen(struct socket *so)
+{
+	KASSERT(solocked(so));
+
+	return EOPNOTSUPP;
+}
+
+static int
+key_connect(struct socket *so, struct mbuf *nam)
+{
+	KASSERT(solocked(so));
+
+	return EOPNOTSUPP;
+}
+
+static int
+key_disconnect(struct socket *so)
+{
+	struct rawcb *rp = sotorawcb(so);
+	int s;
+        
+	KASSERT(solocked(so));
+	KASSERT(rp != NULL);
+
+	s = splsoftnet();
+	soisdisconnected(so);
+	raw_disconnect(rp);
+	splx(s);
+ 
+	return 0;                               
+}
+
+static int
+key_shutdown(struct socket *so)
+{
+	int s;
+
+	KASSERT(solocked(so));
+
+	/*
+	 * Mark the connection as being incapable of further input.
+	 */
+	s = splsoftnet();
+	socantsendmore(so);
+	splx(s);
+
+	return 0;
+}
+
+static int
+key_abort(struct socket *so)
+{
+	KASSERT(solocked(so));
+
+	panic("key_abort");
+
 	return EOPNOTSUPP;
 }
 
@@ -540,6 +608,25 @@ key_sockaddr(struct socket *so, struct mbuf *nam)
 	return 0;
 }
 
+static int
+key_recvoob(struct socket *so, struct mbuf *m, int flags)
+{
+	KASSERT(solocked(so));
+
+	return EOPNOTSUPP;
+}
+
+static int
+key_sendoob(struct socket *so, struct mbuf *m, struct mbuf *control)
+{
+	KASSERT(solocked(so));
+
+	m_freem(m);
+	m_freem(control);
+
+	return EOPNOTSUPP;
+}
+
 /*
  * key_usrreq()
  * derived from net/rtsock.c:route_usrreq()
@@ -553,10 +640,18 @@ key_usrreq(struct socket *so, int req,struct mbuf *m, struct mbuf *nam,
 	KASSERT(req != PRU_ATTACH);
 	KASSERT(req != PRU_DETACH);
 	KASSERT(req != PRU_ACCEPT);
+	KASSERT(req != PRU_BIND);
+	KASSERT(req != PRU_LISTEN);
+	KASSERT(req != PRU_CONNECT);
+	KASSERT(req != PRU_DISCONNECT);
+	KASSERT(req != PRU_SHUTDOWN);
+	KASSERT(req != PRU_ABORT);
 	KASSERT(req != PRU_CONTROL);
 	KASSERT(req != PRU_SENSE);
 	KASSERT(req != PRU_PEERADDR);
 	KASSERT(req != PRU_SOCKADDR);
+	KASSERT(req != PRU_RCVOOB);
+	KASSERT(req != PRU_SENDOOB);
 
 	s = splsoftnet();
 	error = raw_usrreq(so, req, m, nam, control, l);
@@ -576,20 +671,36 @@ PR_WRAP_USRREQS(key)
 #define	key_attach	key_attach_wrapper
 #define	key_detach	key_detach_wrapper
 #define	key_accept	key_accept_wrapper
+#define	key_bind	key_bind_wrapper
+#define	key_listen	key_listen_wrapper
+#define	key_connect	key_connect_wrapper
+#define	key_disconnect	key_disconnect_wrapper
+#define	key_shutdown	key_shutdown_wrapper
+#define	key_abort	key_abort_wrapper
 #define	key_ioctl	key_ioctl_wrapper
 #define	key_stat	key_stat_wrapper
 #define	key_peeraddr	key_peeraddr_wrapper
 #define	key_sockaddr	key_sockaddr_wrapper
+#define	key_recvoob	key_recvoob_wrapper
+#define	key_sendoob	key_sendoob_wrapper
 #define	key_usrreq	key_usrreq_wrapper
 
 const struct pr_usrreqs key_usrreqs = {
 	.pr_attach	= key_attach,
 	.pr_detach	= key_detach,
 	.pr_accept	= key_accept,
+	.pr_bind	= key_bind,
+	.pr_listen	= key_listen,
+	.pr_connect	= key_connect,
+	.pr_disconnect	= key_disconnect,
+	.pr_shutdown	= key_shutdown,
+	.pr_abort	= key_abort,
 	.pr_ioctl	= key_ioctl,
 	.pr_stat	= key_stat,
 	.pr_peeraddr	= key_peeraddr,
 	.pr_sockaddr	= key_sockaddr,
+	.pr_recvoob	= key_recvoob,
+	.pr_sendoob	= key_sendoob,
 	.pr_generic	= key_usrreq,
 };
 

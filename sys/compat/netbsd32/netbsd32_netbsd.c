@@ -230,28 +230,12 @@ netbsd32_open(struct lwp *l, const struct netbsd32_open_args *uap, register_t *r
 		syscallarg(mode_t) mode;
 	} */
 	struct sys_open_args ua;
-	struct pathbuf *pb;
-	int error, fd;
 
 	NETBSD32TOP_UAP(path, const char);
 	NETBSD32TO64_UAP(flags);
 	NETBSD32TO64_UAP(mode);
-        
-	if (SCARG(&ua, path) != NULL) {
-		error = pathbuf_copyin(SCARG(&ua, path), &pb);
-		if (error) 
-			return error; 
-	} else {
-		pb = pathbuf_create(".");
-		if (pb == NULL)
-			return ENOMEM;
-	}
-                
-        error = do_open(l, NULL, pb, SCARG(&ua, flags), SCARG(&ua, mode), &fd);
-        pathbuf_destroy(pb);
-	if (error == 0)
-		*retval = fd;
-        return error;
+
+	return sys_open(l, &ua, retval);
 }
 
 int

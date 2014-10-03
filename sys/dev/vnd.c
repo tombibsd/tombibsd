@@ -203,6 +203,7 @@ const struct bdevsw vnd_bdevsw = {
 	.d_ioctl = vndioctl,
 	.d_dump = vnddump,
 	.d_psize = vndsize,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK
 };
 
@@ -217,6 +218,7 @@ const struct cdevsw vnd_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = nommap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK
 };
 
@@ -2039,7 +2041,13 @@ vnd_set_geometry(struct vnd_softc *vnd)
 
 #include <sys/module.h>
 
-MODULE(MODULE_CLASS_DRIVER, vnd, "zlib");
+#ifdef VND_COMPRESSION
+#define VND_DEPENDS "zlib"
+#else
+#define VND_DEPENDS NULL
+#endif
+
+MODULE(MODULE_CLASS_DRIVER, vnd, VND_DEPENDS);
 CFDRIVER_DECL(vnd, DV_DISK, NULL);
 
 static int

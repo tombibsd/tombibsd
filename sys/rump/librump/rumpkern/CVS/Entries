@@ -22,7 +22,7 @@
 /rump_curlwp___thread.h/1.2/Sun Mar 16 15:30:05 2014/-kk/
 /rump_curlwp_hypercall.h/1.2/Sun Mar 16 15:30:05 2014/-kk/
 /rump_private.h/1.85/Tue May  6 05:50:19 2014/-kk/
-/rump_syscalls.c/1.101/Wed Jun 18 08:43:12 2014/-kk/
+/rump_syscalls.c/1.104/Fri Oct  3 09:09:34 2014/-kk/
 /rumpcopy.c/1.18/Thu Oct 24 10:28:58 2013/-kk/
 /rumpkern.ifspec/1.13/Tue May  6 05:50:19 2014/-kk/
 /rumpkern_if_priv.h/1.16/Tue May  6 05:50:19 2014/-kk/

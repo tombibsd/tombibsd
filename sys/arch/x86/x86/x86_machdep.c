@@ -703,7 +703,9 @@ static struct {
 	/* 32-bit addresses needed for PCI 32-bit DMA and old graphics.  */
 	{ VM_FREELIST_FIRST4G,	4ULL * 1024 * 1024 * 1024 },
 #endif
-	/* 24-bit addresses needed for ISA DMA and ancient graphics.  */
+	/* 30-bit addresses needed for ancient graphics.  */
+	{ VM_FREELIST_FIRST1G,	1ULL * 1024 * 1024 * 1024 },
+	/* 24-bit addresses needed for ISA DMA.  */
 	{ VM_FREELIST_FIRST16,	16 * 1024 * 1024 },
 };
 

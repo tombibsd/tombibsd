@@ -402,7 +402,7 @@ in_pcbbind_port(struct inpcb *inp, struct sockaddr_in *sin, kauth_cred_t cred)
 }
 
 int
-in_pcbbind(void *v, struct mbuf *nam, struct lwp *l)
+in_pcbbind(void *v, struct mbuf *nam)
 {
 	struct inpcb *inp = v;
 	struct sockaddr_in *sin = NULL; /* XXXGCC */
@@ -428,12 +428,12 @@ in_pcbbind(void *v, struct mbuf *nam, struct lwp *l)
 	}
 
 	/* Bind address. */
-	error = in_pcbbind_addr(inp, sin, l->l_cred);
+	error = in_pcbbind_addr(inp, sin, curlwp->l_cred);
 	if (error)
 		return (error);
 
 	/* Bind port. */
-	error = in_pcbbind_port(inp, sin, l->l_cred);
+	error = in_pcbbind_port(inp, sin, curlwp->l_cred);
 	if (error) {
 		inp->inp_laddr.s_addr = INADDR_ANY;
 
@@ -527,7 +527,7 @@ in_pcbconnect(void *v, struct mbuf *nam, struct lwp *l)
 		return (EADDRINUSE);
 	if (in_nullhost(inp->inp_laddr)) {
 		if (inp->inp_lport == 0) {
-			error = in_pcbbind(inp, NULL, l);
+			error = in_pcbbind(inp, NULL);
 			/*
 			 * This used to ignore the return value
 			 * completely, but we need to check for

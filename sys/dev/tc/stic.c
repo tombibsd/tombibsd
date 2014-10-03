@@ -164,6 +164,7 @@ const struct cdevsw stic_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = sticmmap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = 0
 };
 

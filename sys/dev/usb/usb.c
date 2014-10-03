@@ -128,6 +128,7 @@ const struct cdevsw usb_cdevsw = {
 	.d_poll = usbpoll,
 	.d_mmap = nommap,
 	.d_kqfilter = usbkqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_OTHER
 };
 
@@ -364,7 +365,6 @@ usb_add_task(usbd_device_handle dev, struct usb_task *task, int queue)
 	    USB_NUM_TASKQS) {
 		DPRINTFN(2,("usb_add_task: task=%p\n", task));
 		TAILQ_INSERT_TAIL(&taskq->tasks, task, next);
-		task->queue = queue;
 		cv_signal(&taskq->cv);
 	} else {
 		DPRINTFN(3,("usb_add_task: task=%p on q\n", task));

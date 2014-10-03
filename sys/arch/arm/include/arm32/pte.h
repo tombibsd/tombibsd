@@ -326,8 +326,8 @@ typedef uint32_t	pt_entry_t;	/* L2 table entry */
  *          (non-cacheable for MPCore)
  *    1 1   Write back, no write alloc, buffered
  *          (write back, write alloc for MPCore)
- *    
- *    AA    external cache 
+ *
+ *    AA    external cache
  *    0 0   Non-cacheable non-buffered
  *    0 1   Write back, write alloc, buffered
  *    1 0   Write through, no write alloc, buffered

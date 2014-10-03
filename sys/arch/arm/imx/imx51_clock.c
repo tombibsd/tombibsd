@@ -27,6 +27,9 @@
 #include <sys/cdefs.h>
 __KERNEL_RCSID(0, "$NetBSD$");
 
+#include "opt_imx.h"
+#include "opt_imx51clk.h"
+
 #include <sys/param.h>
 #include <sys/systm.h>
 #include <sys/kernel.h>
@@ -52,7 +55,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <arm/imx/imxclockvar.h>
 
 #include "imxccm.h"	/* if CCM driver is configured into the kernel */
-#include "opt_imx51clk.h"
 
 
 

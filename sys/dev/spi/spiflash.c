@@ -147,6 +147,7 @@ const struct bdevsw spiflash_bdevsw = {
 	.d_ioctl = spiflash_ioctl,
 	.d_dump = nodump,
 	.d_psize = nosize,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK,
 };
 
@@ -161,6 +162,7 @@ const struct cdevsw spiflash_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = nommap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK,
 };
 

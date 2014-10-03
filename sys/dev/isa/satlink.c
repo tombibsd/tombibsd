@@ -119,6 +119,7 @@ const struct cdevsw satlink_cdevsw = {
 	.d_poll = satlinkpoll,
 	.d_mmap = nommap,
 	.d_kqfilter = satlinkkqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_OTHER
 };
 

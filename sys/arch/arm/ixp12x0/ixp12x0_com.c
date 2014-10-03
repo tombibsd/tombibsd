@@ -161,6 +161,7 @@ const struct cdevsw ixpcom_cdevsw = {
 	.d_poll = ixpcompoll,
 	.d_mmap = nommap,
 	.d_kqfilter = ttykqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_TTY
 };
 

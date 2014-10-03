@@ -77,6 +77,7 @@ const struct bdevsw cgd_bdevsw = {
 	.d_ioctl = cgdioctl,
 	.d_dump = cgddump,
 	.d_psize = cgdsize,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK
 };
 
@@ -91,6 +92,7 @@ const struct cdevsw cgd_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = nommap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK
 };
 

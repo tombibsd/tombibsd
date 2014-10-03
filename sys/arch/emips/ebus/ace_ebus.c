@@ -1562,6 +1562,7 @@ const struct bdevsw ace_bdevsw = {
 	.d_ioctl = aceioctl,
 	.d_dump = acedump,
 	.d_psize = acesize,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK
 };
 
@@ -1576,6 +1577,7 @@ const struct cdevsw ace_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = nommap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK
 };
 

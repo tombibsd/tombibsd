@@ -1572,6 +1572,8 @@ const struct vnodeopv_entry_desc nilfs_vnodeop_entries[] = {
 	{ &vop_setattr_desc, nilfs_setattr },	/* setattr */	/* TODO chflags */
 	{ &vop_read_desc, nilfs_read },		/* read */
 	{ &vop_write_desc, nilfs_write },	/* write */	/* WRITE */
+	{ &vop_fallocate_desc, genfs_eopnotsupp }, /* fallocate */
+	{ &vop_fdiscard_desc, genfs_eopnotsupp }, /* fdiscard */
 	{ &vop_fcntl_desc, genfs_fcntl },	/* fcntl */	/* TODO? */
 	{ &vop_ioctl_desc, genfs_enoioctl },	/* ioctl */	/* TODO? */
 	{ &vop_poll_desc, genfs_poll },		/* poll */	/* TODO/OK? */

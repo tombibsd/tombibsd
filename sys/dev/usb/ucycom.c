@@ -158,6 +158,7 @@ const struct cdevsw ucycom_cdevsw = {
 	.d_poll = ucycompoll,
 	.d_mmap = nommap,
 	.d_kqfilter = ttykqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_TTY
 };
 

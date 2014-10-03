@@ -437,7 +437,7 @@ soqremque(struct socket *so, int q)
  * socantsendmore: indicates that no more data will be sent on the
  * socket; it would normally be applied to a socket when the user
  * informs the system that no more data is to be sent, by the protocol
- * code (in case PRU_SHUTDOWN).
+ * code (in case pr_shutdown()).
  */
 void
 socantsendmore(struct socket *so)

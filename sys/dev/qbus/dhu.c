@@ -203,6 +203,7 @@ const struct cdevsw dhu_cdevsw = {
 	.d_poll = dhupoll,
 	.d_mmap = nommap,
 	.d_kqfilter = ttykqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_TTY
 };
 

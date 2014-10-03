@@ -167,6 +167,7 @@ const struct cdevsw sequencer_cdevsw = {
 	.d_poll = sequencerpoll,
 	.d_mmap = nommap,
 	.d_kqfilter = sequencerkqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_OTHER | D_MPSAFE
 };
 static LIST_HEAD(, sequencer_softc) sequencers = LIST_HEAD_INITIALIZER(sequencers);
@@ -1605,6 +1606,7 @@ const struct cdevsw midi_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = nommap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_OTHER | D_MPSAFE
 };
 

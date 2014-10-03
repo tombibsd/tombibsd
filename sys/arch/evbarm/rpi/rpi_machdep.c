@@ -36,6 +36,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include "opt_ddb.h"
 #include "opt_kgdb.h"
 #include "opt_arm_debug.h"
+#include "opt_vcprop.h"
 
 #include "sdhc.h"
 #include "bcmdwctwo.h"
@@ -103,7 +104,7 @@ extern int KERNEL_BASE_phys[];
 extern int KERNEL_BASE_virt[];
 
 BootConfig bootconfig;		/* Boot config storage */
-static char bootargs[MAX_BOOT_STRING];
+static char bootargs[VCPROP_MAXCMDLINE];
 char *boot_args = NULL;
 
 static void rpi_bootparams(void);

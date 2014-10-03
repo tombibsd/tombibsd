@@ -138,6 +138,7 @@ const struct cdevsw siotty_cdevsw = {
 	.d_poll = siopoll,
 	.d_mmap = nommap,
 	.d_kqfilter = ttykqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_TTY
 };
 

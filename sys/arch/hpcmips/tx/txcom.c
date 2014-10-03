@@ -187,6 +187,7 @@ const struct cdevsw txcom_cdevsw = {
 	.d_poll = txcompoll,
 	.d_mmap = nommap,
 	.d_kqfilter = ttykqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_TTY
 };
 

@@ -2,6 +2,6 @@
 
 INCSDIR=	/usr/include/evbarm
 
-INCS=		sljitarch.h
+INCS=		sljit_machdep.h
 
 .include "../../arm/include/Makefile.common"

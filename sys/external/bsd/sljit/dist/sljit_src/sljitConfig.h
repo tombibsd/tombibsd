@@ -57,7 +57,7 @@
 /* #define SLJIT_CONFIG_AUTO 1 */
 /* #define SLJIT_CONFIG_UNSUPPORTED 1 */
 
-#include <machine/sljitarch.h>
+#include <machine/sljit_machdep.h>
 
 #if defined(_KERNEL) && !defined(SLJIT_MALLOC)
 #define SLJIT_MALLOC(size) malloc((size), M_TEMP, M_WAITOK)

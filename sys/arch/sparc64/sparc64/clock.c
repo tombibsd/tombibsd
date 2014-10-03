@@ -511,16 +511,17 @@ cpu_initclocks(void)
 
 		if (ci->ci_system_clockrate[0] == 0) {
 			aprint_normal("No counter-timer -- using %%tick "
-			    "at %luMHz as system clock.\n",
-			    (unsigned long)ci->ci_cpu_clockrate[1]);
+			    "at %sMHz as system clock.\n",
+			    clockfreq(ci->ci_cpu_clockrate[0]));
 
 			/* We don't have a counter-timer -- use %tick */
 			tickintr_establish(PIL_CLOCK, tickintr);
 		} else if (CPU_ISSUN4U && CPU_IS_HUMMINGBIRD()) {
 #if NPSYCHO > 0
 			aprint_normal("No counter-timer -- using STICK "
-			    "at %luMHz as system clock.\n",
-			    (unsigned long)ci->ci_system_clockrate[1]);
+			    "at %sMHz as system clock.\n",
+			    clockfreq(ci->ci_system_clockrate[0]));
+
 			/* We don't have a counter-timer -- use STICK */
 			stick2eintr_establish(PIL_CLOCK, stick2eintr);
 #else
@@ -528,8 +529,8 @@ cpu_initclocks(void)
 #endif
 		} else {
 			aprint_normal("No counter-timer -- using %%stick "
-			    "at %luMHz as system clock.\n",
-			    (unsigned long)ci->ci_system_clockrate[1]);
+			    "at %sMHz as system clock.\n",
+			    clockfreq(ci->ci_system_clockrate[0]));
 
 			/* We don't have a counter-timer -- use %stick */
 			stickintr_establish(PIL_CLOCK, stickintr);

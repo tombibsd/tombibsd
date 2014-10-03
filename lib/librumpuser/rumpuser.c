@@ -57,27 +57,18 @@ struct rumpuser_hyperup rumpuser__hyp;
 int
 rumpuser_init(int version, const struct rumpuser_hyperup *hyp)
 {
+	int rv;
 
 	if (version != RUMPUSER_VERSION) {
 		fprintf(stderr, "rumpuser mismatch, kern: %d, hypervisor %d\n",
 		    version, RUMPUSER_VERSION);
-		return 1;
+		abort();
 	}
 
-#ifdef RUMPUSER_USE_DEVRANDOM
-	uint32_t rv;
-	int fd;
-
-	if ((fd = open("/dev/urandom", O_RDONLY)) == -1) {
-		srandom(time(NULL));
-	} else {
-		if (read(fd, &rv, sizeof(rv)) != sizeof(rv))
-			srandom(time(NULL));
-		else
-			srandom(rv);
-		close(fd);
+	rv = rumpuser__random_init();
+	if (rv != 0) {
+		ET(rv);
 	}
-#endif
 
 	rumpuser__thrinit();
 	rumpuser__hyp = *hyp;
@@ -275,24 +266,4 @@ rumpuser_kill(int64_t pid, int rumpsig)
 	if (sig > 0)
 		raise(sig);
 	return 0;
-}
-
-int
-rumpuser_getrandom(void *buf, size_t buflen, int flags, size_t *retp)
-{
-	size_t origlen = buflen;
-	uint32_t *p = buf;
-	uint32_t tmp;
-	int chunk;
-
-	do {
-		chunk = buflen < 4 ? buflen : 4; /* portable MIN ... */
-		tmp = RUMPUSER_RANDOM();
-		memcpy(p, &tmp, chunk);
-		p++;
-		buflen -= chunk;
-	} while (chunk);
-
-	*retp = origlen;
-	ET(0);
 }

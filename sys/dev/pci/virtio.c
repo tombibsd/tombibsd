@@ -170,8 +170,14 @@ virtio_attach(device_t parent, device_t self, void *aux)
 		virtio_set_status(sc, VIRTIO_CONFIG_DEVICE_STATUS_FAILED);
 		return;
 	}
+
 	intrstr = pci_intr_string(pc, ih, intrbuf, sizeof(intrbuf));
+
+	if (sc->sc_flags & VIRTIO_F_PCI_INTR_MPSAFE)
+		pci_intr_setattr(pc, &ih, PCI_INTR_MPSAFE, true);
+
 	sc->sc_ih = pci_intr_establish(pc, ih, sc->sc_ipl, virtio_intr, sc);
+
 	if (sc->sc_ih == NULL) {
 		aprint_error_dev(self, "couldn't establish interrupt");
 		if (intrstr != NULL)

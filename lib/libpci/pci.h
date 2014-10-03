@@ -52,6 +52,9 @@ int	pcibus_conf_write(int, u_int, u_int, u_int, u_int, pcireg_t);
 int	pcidev_conf_read(int, u_int, pcireg_t *);
 int	pcidev_conf_write(int, u_int, pcireg_t);
 
+/* pci_drvname.c */
+int	pci_drvname(int, u_int, u_int, char *, size_t);
+
 /* pci_subr.c */
 const char *pci_findvendor_real(pcireg_t);
 const char *pci_findproduct_real(pcireg_t);

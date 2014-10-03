@@ -112,9 +112,8 @@ struct inpcbtable rawcbtable;
 
 int	 rip_pcbnotify(struct inpcbtable *, struct in_addr,
     struct in_addr, int, int, void (*)(struct inpcb *, int));
-int	 rip_bind(struct inpcb *, struct mbuf *);
-int	 rip_connect(struct inpcb *, struct mbuf *);
-void	 rip_disconnect(struct inpcb *);
+int	 rip_connect_pcb(struct inpcb *, struct mbuf *);
+static void	 rip_disconnect1(struct inpcb *);
 
 static void sysctl_net_inet_raw_setup(struct sysctllog **);
 
@@ -482,31 +481,13 @@ rip_ctloutput(int op, struct socket *so, struct sockopt *sopt)
 }
 
 int
-rip_bind(struct inpcb *inp, struct mbuf *nam)
+rip_connect_pcb(struct inpcb *inp, struct mbuf *nam)
 {
 	struct sockaddr_in *addr = mtod(nam, struct sockaddr_in *);
 
 	if (nam->m_len != sizeof(*addr))
 		return (EINVAL);
-	if (!IFNET_FIRST())
-		return (EADDRNOTAVAIL);
-	if (addr->sin_family != AF_INET)
-		return (EAFNOSUPPORT);
-	if (!in_nullhost(addr->sin_addr) &&
-	    ifa_ifwithaddr(sintosa(addr)) == 0)
-		return (EADDRNOTAVAIL);
-	inp->inp_laddr = addr->sin_addr;
-	return (0);
-}
-
-int
-rip_connect(struct inpcb *inp, struct mbuf *nam)
-{
-	struct sockaddr_in *addr = mtod(nam, struct sockaddr_in *);
-
-	if (nam->m_len != sizeof(*addr))
-		return (EINVAL);
-	if (!IFNET_FIRST())
+	if (IFNET_EMPTY())
 		return (EADDRNOTAVAIL);
 	if (addr->sin_family != AF_INET)
 		return (EAFNOSUPPORT);
@@ -514,8 +495,8 @@ rip_connect(struct inpcb *inp, struct mbuf *nam)
 	return (0);
 }
 
-void
-rip_disconnect(struct inpcb *inp)
+static void
+rip_disconnect1(struct inpcb *inp)
 {
 
 	inp->inp_faddr = zeroin_addr;
@@ -572,7 +553,108 @@ rip_accept(struct socket *so, struct mbuf *nam)
 	KASSERT(solocked(so));
 
 	panic("rip_accept");
-	/* NOT REACHED */
+
+	return EOPNOTSUPP;
+}
+
+static int
+rip_bind(struct socket *so, struct mbuf *nam)
+{
+	struct inpcb *inp = sotoinpcb(so);
+	struct sockaddr_in *addr;
+	int error = 0;
+	int s;
+
+	KASSERT(solocked(so));
+	KASSERT(inp != NULL);
+	KASSERT(nam != NULL);
+
+	s = splsoftnet();
+	addr = mtod(nam, struct sockaddr_in *);
+	if (nam->m_len != sizeof(*addr)) {
+		error = EINVAL;
+		goto release;
+	}
+	if (IFNET_EMPTY()) {
+		error = EADDRNOTAVAIL;
+		goto release;
+	}
+	if (addr->sin_family != AF_INET) {
+		error = EAFNOSUPPORT;
+		goto release;
+	}
+	if (!in_nullhost(addr->sin_addr) &&
+	    ifa_ifwithaddr(sintosa(addr)) == 0) {
+		error = EADDRNOTAVAIL;
+		goto release;
+	}
+	inp->inp_laddr = addr->sin_addr;
+
+release:
+	splx(s);
+	return error;
+}
+
+static int
+rip_listen(struct socket *so)
+{
+	KASSERT(solocked(so));
+
+	return EOPNOTSUPP;
+}
+
+static int
+rip_connect(struct socket *so, struct mbuf *nam)
+{
+	struct inpcb *inp = sotoinpcb(so);
+	int error = 0;
+	int s;
+
+	KASSERT(solocked(so));
+	KASSERT(inp != NULL);
+	KASSERT(nam != NULL);
+
+	s = splsoftnet();
+	error = rip_connect_pcb(inp, nam);
+	if (! error)
+		soisconnected(so);
+
+	splx(s);
+	return error;
+}
+
+static int
+rip_disconnect(struct socket *so)
+{
+	struct inpcb *inp = sotoinpcb(so);
+
+	KASSERT(solocked(so));
+	KASSERT(inp != NULL);
+
+	soisdisconnected(so);
+	rip_disconnect1(inp);
+	return 0;
+}
+
+static int
+rip_shutdown(struct socket *so)
+{
+	KASSERT(solocked(so));
+
+	/*
+	 * Mark the connection as being incapable of further input.
+	 */
+	socantsendmore(so);
+	return 0;
+}
+
+static int
+rip_abort(struct socket *so)
+{
+	KASSERT(solocked(so));
+
+	panic("rip_abort");
+
 	return EOPNOTSUPP;
 }
 
@@ -613,6 +695,25 @@ rip_sockaddr(struct socket *so, struct mbuf *nam)
 	return 0;
 }
 
+static int
+rip_recvoob(struct socket *so, struct mbuf *m, int flags)
+{
+	KASSERT(solocked(so));
+
+	return EOPNOTSUPP;
+}
+
+static int
+rip_sendoob(struct socket *so, struct mbuf *m, struct mbuf *control)
+{
+	KASSERT(solocked(so));
+
+	m_freem(m);
+	m_freem(control);
+
+	return EOPNOTSUPP;
+}
+
 int
 rip_usrreq(struct socket *so, int req, struct mbuf *m, struct mbuf *nam,
     struct mbuf *control, struct lwp *l)
@@ -623,10 +724,18 @@ rip_usrreq(struct socket *so, int req, struct mbuf *m, struct mbuf *nam,
 	KASSERT(req != PRU_ATTACH);
 	KASSERT(req != PRU_DETACH);
 	KASSERT(req != PRU_ACCEPT);
+	KASSERT(req != PRU_BIND);
+	KASSERT(req != PRU_LISTEN);
+	KASSERT(req != PRU_CONNECT);
+	KASSERT(req != PRU_DISCONNECT);
+	KASSERT(req != PRU_SHUTDOWN);
+	KASSERT(req != PRU_ABORT);
 	KASSERT(req != PRU_CONTROL);
 	KASSERT(req != PRU_SENSE);
 	KASSERT(req != PRU_PEERADDR);
 	KASSERT(req != PRU_SOCKADDR);
+	KASSERT(req != PRU_RCVOOB);
+	KASSERT(req != PRU_SENDOOB);
 
 	s = splsoftnet();
 	if (req == PRU_PURGEIF) {
@@ -650,35 +759,8 @@ rip_usrreq(struct socket *so, int req, struct mbuf *m, struct mbuf *nam,
 
 	switch (req) {
 
-	case PRU_BIND:
-		error = rip_bind(inp, nam);
-		break;
-
-	case PRU_LISTEN:
-		error = EOPNOTSUPP;
-		break;
-
-	case PRU_CONNECT:
-		error = rip_connect(inp, nam);
-		if (error)
-			break;
-		soisconnected(so);
-		break;
-
 	case PRU_CONNECT2:
 		error = EOPNOTSUPP;
-		break;
-
-	case PRU_DISCONNECT:
-		soisdisconnected(so);
-		rip_disconnect(inp);
-		break;
-
-	/*
-	 * Mark the connection as being incapable of further input.
-	 */
-	case PRU_SHUTDOWN:
-		socantsendmore(so);
 		break;
 
 	case PRU_RCVD:
@@ -702,7 +784,7 @@ rip_usrreq(struct socket *so, int req, struct mbuf *m, struct mbuf *nam,
 				error = EISCONN;
 				goto die;
 			}
-			error = rip_connect(inp, nam);
+			error = rip_connect_pcb(inp, nam);
 			if (error) {
 			die:
 				m_freem(m);
@@ -716,18 +798,8 @@ rip_usrreq(struct socket *so, int req, struct mbuf *m, struct mbuf *nam,
 		}
 		error = rip_output(m, inp);
 		if (nam)
-			rip_disconnect(inp);
+			rip_disconnect1(inp);
 	}
-		break;
-
-	case PRU_RCVOOB:
-		error = EOPNOTSUPP;
-		break;
-
-	case PRU_SENDOOB:
-		m_freem(control);
-		m_freem(m);
-		error = EOPNOTSUPP;
 		break;
 
 	default:
@@ -742,20 +814,36 @@ PR_WRAP_USRREQS(rip)
 #define	rip_attach	rip_attach_wrapper
 #define	rip_detach	rip_detach_wrapper
 #define	rip_accept	rip_accept_wrapper
+#define	rip_bind	rip_bind_wrapper
+#define	rip_listen	rip_listen_wrapper
+#define	rip_connect	rip_connect_wrapper
+#define	rip_disconnect	rip_disconnect_wrapper
+#define	rip_shutdown	rip_shutdown_wrapper
+#define	rip_abort	rip_abort_wrapper
 #define	rip_ioctl	rip_ioctl_wrapper
 #define	rip_stat	rip_stat_wrapper
 #define	rip_peeraddr	rip_peeraddr_wrapper
 #define	rip_sockaddr	rip_sockaddr_wrapper
+#define	rip_recvoob	rip_recvoob_wrapper
+#define	rip_sendoob	rip_sendoob_wrapper
 #define	rip_usrreq	rip_usrreq_wrapper
 
 const struct pr_usrreqs rip_usrreqs = {
 	.pr_attach	= rip_attach,
 	.pr_detach	= rip_detach,
 	.pr_accept	= rip_accept,
+	.pr_bind	= rip_bind,
+	.pr_listen	= rip_listen,
+	.pr_connect	= rip_connect,
+	.pr_disconnect	= rip_disconnect,
+	.pr_shutdown	= rip_shutdown,
+	.pr_abort	= rip_abort,
 	.pr_ioctl	= rip_ioctl,
 	.pr_stat	= rip_stat,
 	.pr_peeraddr	= rip_peeraddr,
 	.pr_sockaddr	= rip_sockaddr,
+	.pr_recvoob	= rip_recvoob,
+	.pr_sendoob	= rip_sendoob,
 	.pr_generic	= rip_usrreq,
 };
 

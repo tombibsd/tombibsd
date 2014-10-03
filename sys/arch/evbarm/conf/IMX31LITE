@@ -119,7 +119,7 @@ options 	USERCONF	# userconf(4) support
 
 # Development and Debugging options
 
-options 	DIAGNOSTIC	# internally consistency checks
+options 	DIAGNOSTIC	# internal consistency checks
 options 	DEBUG
 #options 	LOCKDEBUG
 options 	PMAP_DEBUG	# Enable pmap_debug_level code

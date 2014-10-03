@@ -1808,8 +1808,8 @@ udf_write_metadata_partition_spacetable(struct udf_mount *ump, int waitfor)
 	dscr = (union dscrptr *) ump->metadata_unalloc_dscr;
 	new_inflen = udf_tagsize(dscr, 1);
 
-	DPRINTF(VOLUMES, ("Resize and write out metadata space bitmap from "
-		"%"PRIu64" to %"PRIu64" bytes\n", inflen, new_inflen));
+	DPRINTF(VOLUMES, ("Resize and write out metadata space bitmap "
+		" for %"PRIu64" bytes\n", new_inflen));
 
 	error = udf_resize_node(bitmap_node, new_inflen, &dummy);
 	if (error)

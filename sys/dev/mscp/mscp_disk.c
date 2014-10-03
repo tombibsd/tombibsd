@@ -163,6 +163,7 @@ const struct bdevsw ra_bdevsw = {
 	.d_ioctl = raioctl,
 	.d_dump = radump,
 	.d_psize = rasize,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK
 };
 
@@ -177,6 +178,7 @@ const struct cdevsw ra_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = nommap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK
 };
 
@@ -584,6 +586,7 @@ const struct bdevsw rx_bdevsw = {
 	.d_ioctl = rxioctl,
 	.d_dump = radump,
 	.d_psize = rxsize,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK
 };
 
@@ -598,6 +601,7 @@ const struct cdevsw rx_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = nommap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK
 };
 
@@ -655,6 +659,7 @@ const struct bdevsw racd_bdevsw = {
 	.d_ioctl = raioctl,
 	.d_dump = radump,
 	.d_psize = rasize,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK
 };
 
@@ -669,6 +674,7 @@ const struct cdevsw racd_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = nommap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK
 };
 

@@ -62,6 +62,8 @@ const struct vnodeopv_entry_desc tmpfs_specop_entries[] = {
 	{ &vop_setattr_desc,		tmpfs_spec_setattr },
 	{ &vop_read_desc,		tmpfs_spec_read },
 	{ &vop_write_desc,		tmpfs_spec_write },
+	{ &vop_fallocate_desc,		spec_fallocate },
+	{ &vop_fdiscard_desc,		spec_fdiscard },
 	{ &vop_ioctl_desc,		tmpfs_spec_ioctl },
 	{ &vop_fcntl_desc,		tmpfs_spec_fcntl },
 	{ &vop_poll_desc,		tmpfs_spec_poll },

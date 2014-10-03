@@ -113,6 +113,8 @@ const struct vnodeopv_entry_desc puffs_vnodeop_entries[] = {
         { &vop_setattr_desc, puffs_vnop_checkop },	/* setattr */
         { &vop_read_desc, puffs_vnop_checkop },		/* read */
         { &vop_write_desc, puffs_vnop_checkop },	/* write */
+	{ &vop_fallocate_desc, genfs_eopnotsupp },	/* fallocate */
+	{ &vop_fdiscard_desc, genfs_eopnotsupp },	/* fdiscard */
         { &vop_fsync_desc, puffs_vnop_fsync },		/* REAL fsync */
         { &vop_seek_desc, puffs_vnop_checkop },		/* seek */
         { &vop_remove_desc, puffs_vnop_checkop },	/* remove */
@@ -168,6 +170,8 @@ const struct vnodeopv_entry_desc puffs_specop_entries[] = {
 	{ &vop_setattr_desc, puffs_vnop_checkop },	/* setattr */
 	{ &vop_read_desc, puffs_vnop_spec_read },	/* update, read */
 	{ &vop_write_desc, puffs_vnop_spec_write },	/* update, write */
+	{ &vop_fallocate_desc, spec_fallocate },	/* fallocate */
+	{ &vop_fdiscard_desc, spec_fdiscard },		/* fdiscard */
 	{ &vop_ioctl_desc, spec_ioctl },		/* spec_ioctl */
 	{ &vop_fcntl_desc, genfs_fcntl },		/* dummy */
 	{ &vop_poll_desc, spec_poll },			/* spec_poll */
@@ -225,6 +229,8 @@ const struct vnodeopv_entry_desc puffs_fifoop_entries[] = {
 	{ &vop_setattr_desc, puffs_vnop_checkop },	/* setattr */
 	{ &vop_read_desc, puffs_vnop_fifo_read },	/* read, update */
 	{ &vop_write_desc, puffs_vnop_fifo_write },	/* write, update */
+	{ &vop_fallocate_desc, vn_fifo_bypass },	/* fallocate */
+	{ &vop_fdiscard_desc, vn_fifo_bypass },		/* fdiscard */
 	{ &vop_ioctl_desc, vn_fifo_bypass },		/* ioctl */
 	{ &vop_fcntl_desc, genfs_fcntl },		/* dummy */
 	{ &vop_poll_desc, vn_fifo_bypass },		/* poll */

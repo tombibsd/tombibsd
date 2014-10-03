@@ -229,7 +229,74 @@ COMPATNAME(route_accept)(struct socket *so, struct mbuf *nam)
 	KASSERT(solocked(so));
 
 	panic("route_accept");
-	/* NOT REACHED */
+
+	return EOPNOTSUPP;
+}
+
+static int
+COMPATNAME(route_bind)(struct socket *so, struct mbuf *nam)
+{
+	KASSERT(solocked(so));
+
+	return EOPNOTSUPP;
+}
+
+static int
+COMPATNAME(route_listen)(struct socket *so)
+{
+	KASSERT(solocked(so));
+
+	return EOPNOTSUPP;
+}
+
+static int
+COMPATNAME(route_connect)(struct socket *so, struct mbuf *nam)
+{
+	KASSERT(solocked(so));
+
+	return EOPNOTSUPP;
+}
+
+static int
+COMPATNAME(route_disconnect)(struct socket *so)
+{
+	struct rawcb *rp = sotorawcb(so);
+	int s;
+
+	KASSERT(solocked(so));
+	KASSERT(rp != NULL);
+
+	s = splsoftnet();
+	soisdisconnected(so);
+	raw_disconnect(rp);
+	splx(s);
+
+	return 0;
+}
+
+static int
+COMPATNAME(route_shutdown)(struct socket *so)
+{
+	int s;
+
+	KASSERT(solocked(so));
+
+	/*
+	 * Mark the connection as being incapable of further input.
+	 */
+	s = splsoftnet();
+	socantsendmore(so);
+	splx(s);
+	return 0;
+}
+
+static int
+COMPATNAME(route_abort)(struct socket *so)
+{
+	KASSERT(solocked(so));
+
+	panic("route_abort");
+
 	return EOPNOTSUPP;
 }
 
@@ -281,6 +348,26 @@ COMPATNAME(route_sockaddr)(struct socket *so, struct mbuf *nam)
 }
 
 static int
+COMPATNAME(route_recvoob)(struct socket *so, struct mbuf *m, int flags)
+{
+	KASSERT(solocked(so));
+
+	return EOPNOTSUPP;
+}
+
+static int
+COMPATNAME(route_sendoob)(struct socket *so, struct mbuf *m,
+    struct mbuf *control)
+{
+	KASSERT(solocked(so));
+
+	m_freem(m);
+	m_freem(control);
+
+	return EOPNOTSUPP;
+}
+
+static int
 COMPATNAME(route_usrreq)(struct socket *so, int req, struct mbuf *m,
     struct mbuf *nam, struct mbuf *control, struct lwp *l)
 {
@@ -289,10 +376,18 @@ COMPATNAME(route_usrreq)(struct socket *so, int req, struct mbuf *m,
 	KASSERT(req != PRU_ATTACH);
 	KASSERT(req != PRU_DETACH);
 	KASSERT(req != PRU_ACCEPT);
+	KASSERT(req != PRU_BIND);
+	KASSERT(req != PRU_LISTEN);
+	KASSERT(req != PRU_CONNECT);
+	KASSERT(req != PRU_DISCONNECT);
+	KASSERT(req != PRU_SHUTDOWN);
+	KASSERT(req != PRU_ABORT);
 	KASSERT(req != PRU_CONTROL);
 	KASSERT(req != PRU_SENSE);
 	KASSERT(req != PRU_PEERADDR);
 	KASSERT(req != PRU_SOCKADDR);
+	KASSERT(req != PRU_RCVOOB);
+	KASSERT(req != PRU_SENDOOB);
 
 	s = splsoftnet();
 	error = raw_usrreq(so, req, m, nam, control, l);
@@ -1390,10 +1485,18 @@ static const struct pr_usrreqs route_usrreqs = {
 	.pr_attach	= COMPATNAME(route_attach_wrapper),
 	.pr_detach	= COMPATNAME(route_detach_wrapper),
 	.pr_accept	= COMPATNAME(route_accept_wrapper),
+	.pr_bind	= COMPATNAME(route_bind_wrapper),
+	.pr_listen	= COMPATNAME(route_listen_wrapper),
+	.pr_connect	= COMPATNAME(route_connect_wrapper),
+	.pr_disconnect	= COMPATNAME(route_disconnect_wrapper),
+	.pr_shutdown	= COMPATNAME(route_shutdown_wrapper),
+	.pr_abort	= COMPATNAME(route_abort_wrapper),
 	.pr_ioctl	= COMPATNAME(route_ioctl_wrapper),
 	.pr_stat	= COMPATNAME(route_stat_wrapper),
 	.pr_peeraddr	= COMPATNAME(route_peeraddr_wrapper),
 	.pr_sockaddr	= COMPATNAME(route_sockaddr_wrapper),
+	.pr_recvoob	= COMPATNAME(route_recvoob_wrapper),
+	.pr_sendoob	= COMPATNAME(route_sendoob_wrapper),
 	.pr_generic	= COMPATNAME(route_usrreq_wrapper),
 };
 

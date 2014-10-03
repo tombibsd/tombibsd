@@ -187,6 +187,7 @@ const struct bdevsw ccd_bdevsw = {
 	.d_ioctl = ccdioctl,
 	.d_dump = nodump,
 	.d_psize = ccdsize,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK | D_MPSAFE
 };
 
@@ -201,6 +202,7 @@ const struct cdevsw ccd_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = nommap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK | D_MPSAFE
 };
 

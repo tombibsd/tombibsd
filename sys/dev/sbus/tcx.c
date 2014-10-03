@@ -148,6 +148,7 @@ const struct cdevsw tcx_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = tcxmmap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = 0
 };
 
@@ -163,6 +164,7 @@ static void tcx_loadcmap(struct tcx_softc *, int, int);
 static int	tcx_ioctl(void *, void *, u_long, void *, int, struct lwp *);
 static paddr_t	tcx_mmap(void *, void *, off_t, int);
 
+static void	tcx_init_cmap(struct tcx_softc *);
 static void	tcx_init_screen(void *, struct vcons_screen *, int, long *);
 static void	tcx_clearscreen(struct tcx_softc *, int);
 static void	tcx_copyrows(void *, int, int, int);
@@ -212,7 +214,7 @@ tcxattach(device_t parent, device_t self, void *args)
 	int node;
 	struct fbdevice *fb = &sc->sc_fb;
 	bus_space_handle_t bh;
-	int isconsole, i, j;
+	int isconsole;
 	uint32_t confreg;
 
 	sc->sc_dev = self;
@@ -377,17 +379,6 @@ tcxattach(device_t parent, device_t self, void *args)
 	/* reset cursor & frame buffer controls */
 	tcx_reset(sc);
 
-	/* Initialize the default color map. */
-	j = 0;
-	for (i = 0; i < 256; i++) {
-
-		sc->sc_cmap_red[i] = rasops_cmap[j];
-		sc->sc_cmap_green[i] = rasops_cmap[j + 1];
-		sc->sc_cmap_blue[i] = rasops_cmap[j + 2];
-		j += 3;
-	}
-	tcx_loadcmap(sc, 0, 256);
-
 	if (!sc->sc_8bit)
 	    tcx_set_cursor(sc);
 
@@ -415,6 +406,7 @@ tcxattach(device_t parent, device_t self, void *args)
 
 	sc->sc_bg = ri->ri_devcmap[(defattr >> 16) & 0xff];
 	tcx_clearscreen(sc, 0);
+	tcx_init_cmap(sc);
 
 	tcx_defscreendesc.nrows = ri->ri_rows;
 	tcx_defscreendesc.ncols = ri->ri_cols;
@@ -533,6 +525,23 @@ tcx_reset(struct tcx_softc *sc)
 	reg = bus_space_read_4(sc->sc_bustag, sc->sc_thc, THC_MISC);
 	reg |= THC_MISC_CURSRES;
 	bus_space_write_4(sc->sc_bustag, sc->sc_thc, THC_MISC, reg);
+}
+
+static void
+tcx_init_cmap(struct tcx_softc *sc)
+{
+	int i, j;
+
+	/* Initialize the default color map. */
+	j = 0;
+	for (i = 0; i < 256; i++) {
+
+		sc->sc_cmap_red[i] = rasops_cmap[j];
+		sc->sc_cmap_green[i] = rasops_cmap[j + 1];
+		sc->sc_cmap_blue[i] = rasops_cmap[j + 2];
+		j += 3;
+	}
+	tcx_loadcmap(sc, 0, 256);
 }
 
 static void
@@ -760,7 +769,7 @@ tcx_ioctl(void *v, void *vs, u_long cmd, void *data, int flag,
 					sc->sc_mode = new_mode;
 					if (new_mode == WSDISPLAYIO_MODE_EMUL)
 					{
-						tcx_loadcmap(sc, 0, 256);
+						tcx_init_cmap(sc);
 						tcx_clearscreen(sc, 0);
 						vcons_redraw_screen(ms);
 					} else if (!sc->sc_8bit)

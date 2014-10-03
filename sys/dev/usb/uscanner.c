@@ -251,6 +251,7 @@ const struct cdevsw uscanner_cdevsw = {
 	.d_poll = uscannerpoll,
 	.d_mmap = nommap,
 	.d_kqfilter = uscannerkqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_OTHER
 };
 

@@ -102,6 +102,7 @@ const struct bdevsw ed_bdevsw = {
 	.d_ioctl = edmcaioctl,
 	.d_dump = edmcadump,
 	.d_psize = edmcasize,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK
 };
 
@@ -116,6 +117,7 @@ const struct cdevsw ed_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = nommap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK
 };
 

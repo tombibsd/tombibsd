@@ -196,6 +196,7 @@ const struct cdevsw pc_cdevsw = {
 	.d_poll = pcpoll,
 	.d_mmap = pcmmap,
 	.d_kqfilter = ttykqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_TTY
 };
 

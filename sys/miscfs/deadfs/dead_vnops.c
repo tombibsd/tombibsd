@@ -87,6 +87,8 @@ const struct vnodeopv_entry_desc dead_vnodeop_entries[] = {
 	{ &vop_close_desc, dead_close },		/* close */
 	{ &vop_read_desc, dead_read },			/* read */
 	{ &vop_write_desc, dead_write },		/* write */
+	{ &vop_fallocate_desc, genfs_eopnotsupp },	/* fallocate */
+	{ &vop_fdiscard_desc, genfs_eopnotsupp },	/* fdiscard */
 	{ &vop_fcntl_desc, dead_fcntl },		/* fcntl */
 	{ &vop_ioctl_desc, dead_ioctl },		/* ioctl */
 	{ &vop_poll_desc, dead_poll },			/* poll */

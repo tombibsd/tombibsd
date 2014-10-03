@@ -7,7 +7,7 @@
 /if_admsw.c/1.12/Sun Jun 22 14:32:09 2014/-kk/
 /if_admswreg.h/1.1/Tue Mar 20 08:52:02 2007/-kk/
 /if_admswvar.h/1.5/Sat Oct 27 17:18:01 2012/-kk/
-/uart.c/1.11/Sun Jul 20 13:08:25 2014/-kk/
+/uart.c/1.12/Fri Oct  3 09:09:02 2014/-kk/
 /uart.h/1.1/Tue Mar 20 08:52:02 2007/-kk/
 /wdc_extio.c/1.8/Tue Jul 31 15:50:33 2012/-kk/
 D

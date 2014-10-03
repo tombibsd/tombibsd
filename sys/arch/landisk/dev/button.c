@@ -101,6 +101,7 @@ const struct cdevsw button_cdevsw = {
 	.d_poll = btnpoll,
 	.d_mmap = nommap,
 	.d_kqfilter = btnkqfilter,
+	.d_discard = nodiscard,
 	.d_flag = 0
 };
 

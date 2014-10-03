@@ -51,7 +51,7 @@ void _rtld_powerpc_pltresolve(Elf_Word, Elf_Word);
 #define __ha48		__u64(0xffffffff8000)
 #define __ha32		__u64(0xffff8000)
 #define __ha16		__u32(0x8000)
-#define __ha(x,n) ((((x) >> (n)) + ((x) & __ha##n) == __ha##n) & 0xffff)
+#define __ha(x,n) ((((x) >> (n)) + (((x) & __ha##n) == __ha##n)) & 0xffff)
 #define __hi(x,n) (((x) >> (n)) & 0xffff)
 #ifdef __LP64
 #define highesta(x)	__ha(__u64(x), 48)

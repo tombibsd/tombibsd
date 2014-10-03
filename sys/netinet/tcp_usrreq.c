@@ -177,6 +177,41 @@ tcp_debug_trace(struct socket *so, struct tcpcb *tp, int ostate, int req)
 #endif
 }
 
+static int
+tcp_getpcb(struct socket *so, struct inpcb **inp,
+    struct in6pcb **in6p, struct tcpcb **tp)
+{
+	/*
+	 * When a TCP is attached to a socket, then there will be
+	 * a (struct inpcb) pointed at by the socket, and this
+	 * structure will point at a subsidary (struct tcpcb).
+	 */
+	switch (so->so_proto->pr_domain->dom_family) {
+#ifdef INET
+	case PF_INET:
+		*inp = sotoinpcb(so);
+		if (*inp == NULL)
+			return EINVAL;
+		*tp = intotcpcb(*inp);
+		break;
+#endif
+#ifdef INET6
+	case PF_INET6:
+		*in6p = sotoin6pcb(so);
+		if (*in6p == NULL)
+			return EINVAL;
+		*tp = in6totcpcb(*in6p);
+		break;
+#endif
+	default:
+		return EAFNOSUPPORT;
+	}
+
+	KASSERT(tp != NULL);
+
+	return 0;
+}
+
 /*
  * Process a TCP user request for TCP tb.  If this is a send request
  * then m is the mbuf chain of send data.  If this is a timer expiration
@@ -186,31 +221,34 @@ static int
 tcp_usrreq(struct socket *so, int req, struct mbuf *m, struct mbuf *nam,
     struct mbuf *control, struct lwp *l)
 {
-	struct inpcb *inp;
-#ifdef INET6
-	struct in6pcb *in6p;
-#endif
+	struct inpcb *inp = NULL;
+	struct in6pcb *in6p = NULL;
 	struct tcpcb *tp = NULL;
 	int s;
 	int error = 0;
 	int ostate = 0;
-	int family;	/* family of the socket */
 
 	KASSERT(req != PRU_ATTACH);
 	KASSERT(req != PRU_DETACH);
 	KASSERT(req != PRU_ACCEPT);
+	KASSERT(req != PRU_BIND);
+	KASSERT(req != PRU_LISTEN);
+	KASSERT(req != PRU_CONNECT);
+	KASSERT(req != PRU_DISCONNECT);
+	KASSERT(req != PRU_SHUTDOWN);
+	KASSERT(req != PRU_ABORT);
 	KASSERT(req != PRU_CONTROL);
 	KASSERT(req != PRU_SENSE);
 	KASSERT(req != PRU_PEERADDR);
 	KASSERT(req != PRU_SOCKADDR);
-
-	family = so->so_proto->pr_domain->dom_family;
+	KASSERT(req != PRU_RCVOOB);
+	KASSERT(req != PRU_SENDOOB);
 
 	s = splsoftnet();
 
 	if (req == PRU_PURGEIF) {
 		mutex_enter(softnet_lock);
-		switch (family) {
+		switch (so->so_proto->pr_domain->dom_family) {
 #ifdef INET
 		case PF_INET:
 			in_pcbpurgeif0(&tcbtable, (struct ifnet *)control);
@@ -237,202 +275,25 @@ tcp_usrreq(struct socket *so, int req, struct mbuf *m, struct mbuf *nam,
 
 	KASSERT(solocked(so));
 
-	switch (family) {
-#ifdef INET
-	case PF_INET:
-		inp = sotoinpcb(so);
-#ifdef INET6
-		in6p = NULL;
-#endif
-		break;
-#endif
-#ifdef INET6
-	case PF_INET6:
-		inp = NULL;
-		in6p = sotoin6pcb(so);
-		break;
-#endif
-	default:
+	if ((error = tcp_getpcb(so, &inp, &in6p, &tp)) != 0) {
 		splx(s);
-		return EAFNOSUPPORT;
+		return error;
 	}
-	KASSERT(!control || (req == PRU_SEND || req == PRU_SENDOOB));
+
+	ostate = tcp_debug_capture(tp, req);
+
+	KASSERT(!control || req == PRU_SEND);
 #ifdef INET6
 	/* XXX: KASSERT((inp != NULL) ^ (in6p != NULL)); */
 #endif
-	/*
-	 * When a TCP is attached to a socket, then there will be
-	 * a (struct inpcb) pointed at by the socket, and this
-	 * structure will point at a subsidary (struct tcpcb).
-	 */
-	if (inp == NULL
-#ifdef INET6
-	    && in6p == NULL
-#endif
-	    )
-	{
-		error = EINVAL;
-		goto release;
-	}
-#ifdef INET
-	if (inp) {
-		tp = intotcpcb(inp);
-		/* WHAT IF TP IS 0? */
-		ostate = tcp_debug_capture(tp, req);
-	}
-#endif
-#ifdef INET6
-	if (in6p) {
-		tp = in6totcpcb(in6p);
-		/* WHAT IF TP IS 0? */
-		ostate = tcp_debug_capture(tp, req);
-	}
-#endif
 
 	switch (req) {
-
-	/*
-	 * Give the socket an address.
-	 */
-	case PRU_BIND:
-		switch (family) {
-#ifdef INET
-		case PF_INET:
-			error = in_pcbbind(inp, nam, l);
-			break;
-#endif
-#ifdef INET6
-		case PF_INET6:
-			error = in6_pcbbind(in6p, nam, l);
-			if (!error) {
-				/* mapped addr case */
-				if (IN6_IS_ADDR_V4MAPPED(&in6p->in6p_laddr))
-					tp->t_family = AF_INET;
-				else
-					tp->t_family = AF_INET6;
-			}
-			break;
-#endif
-		}
-		break;
-
-	/*
-	 * Prepare to accept connections.
-	 */
-	case PRU_LISTEN:
-#ifdef INET
-		if (inp && inp->inp_lport == 0) {
-			error = in_pcbbind(inp, NULL, l);
-			if (error)
-				break;
-		}
-#endif
-#ifdef INET6
-		if (in6p && in6p->in6p_lport == 0) {
-			error = in6_pcbbind(in6p, NULL, l);
-			if (error)
-				break;
-		}
-#endif
-		tp->t_state = TCPS_LISTEN;
-		break;
-
-	/*
-	 * Initiate connection to peer.
-	 * Create a template for use in transmissions on this connection.
-	 * Enter SYN_SENT state, and mark socket as connecting.
-	 * Start keep-alive timer, and seed output sequence space.
-	 * Send initial segment on connection.
-	 */
-	case PRU_CONNECT:
-#ifdef INET
-		if (inp) {
-			if (inp->inp_lport == 0) {
-				error = in_pcbbind(inp, NULL, l);
-				if (error)
-					break;
-			}
-			error = in_pcbconnect(inp, nam, l);
-		}
-#endif
-#ifdef INET6
-		if (in6p) {
-			if (in6p->in6p_lport == 0) {
-				error = in6_pcbbind(in6p, NULL, l);
-				if (error)
-					break;
-			}
-			error = in6_pcbconnect(in6p, nam, l);
-			if (!error) {
-				/* mapped addr case */
-				if (IN6_IS_ADDR_V4MAPPED(&in6p->in6p_faddr))
-					tp->t_family = AF_INET;
-				else
-					tp->t_family = AF_INET6;
-			}
-		}
-#endif
-		if (error)
-			break;
-		tp->t_template = tcp_template(tp);
-		if (tp->t_template == 0) {
-#ifdef INET
-			if (inp)
-				in_pcbdisconnect(inp);
-#endif
-#ifdef INET6
-			if (in6p)
-				in6_pcbdisconnect(in6p);
-#endif
-			error = ENOBUFS;
-			break;
-		}
-		/*
-		 * Compute window scaling to request.
-		 * XXX: This should be moved to tcp_output().
-		 */
-		while (tp->request_r_scale < TCP_MAX_WINSHIFT &&
-		    (TCP_MAXWIN << tp->request_r_scale) < sb_max)
-			tp->request_r_scale++;
-		soisconnecting(so);
-		TCP_STATINC(TCP_STAT_CONNATTEMPT);
-		tp->t_state = TCPS_SYN_SENT;
-		TCP_TIMER_ARM(tp, TCPT_KEEP, tp->t_keepinit);
-		tp->iss = tcp_new_iss(tp, 0);
-		tcp_sendseqinit(tp);
-		error = tcp_output(tp);
-		break;
 
 	/*
 	 * Create a TCP connection between two sockets.
 	 */
 	case PRU_CONNECT2:
 		error = EOPNOTSUPP;
-		break;
-
-	/*
-	 * Initiate disconnect from peer.
-	 * If connection never passed embryonic stage, just drop;
-	 * else if don't need to let data drain, then can just drop anyways,
-	 * else have to begin TCP shutdown process: mark socket disconnecting,
-	 * drain unread data, state switch to reflect user close, and
-	 * send segment (e.g. FIN) to peer.  Socket will be really disconnected
-	 * when peer sends FIN and acks ours.
-	 *
-	 * SHOULD IMPLEMENT LATER PRU_CONNECT VIA REALLOC TCPCB.
-	 */
-	case PRU_DISCONNECT:
-		tp = tcp_disconnect(tp);
-		break;
-
-	/*
-	 * Mark the connection as being incapable of further output.
-	 */
-	case PRU_SHUTDOWN:
-		socantsendmore(so);
-		tp = tcp_usrclosed(tp);
-		if (tp)
-			error = tcp_output(tp);
 		break;
 
 	/*
@@ -465,61 +326,14 @@ tcp_usrreq(struct socket *so, int req, struct mbuf *m, struct mbuf *nam,
 		error = tcp_output(tp);
 		break;
 
-	/*
-	 * Abort the TCP.
-	 */
-	case PRU_ABORT:
-		tp = tcp_drop(tp, ECONNABORTED);
-		break;
-
-	case PRU_RCVOOB:
-		if ((so->so_oobmark == 0 &&
-		    (so->so_state & SS_RCVATMARK) == 0) ||
-		    so->so_options & SO_OOBINLINE ||
-		    tp->t_oobflags & TCPOOB_HADDATA) {
-			error = EINVAL;
-			break;
-		}
-		if ((tp->t_oobflags & TCPOOB_HAVEDATA) == 0) {
-			error = EWOULDBLOCK;
-			break;
-		}
-		m->m_len = 1;
-		*mtod(m, char *) = tp->t_iobc;
-		if (((long)nam & MSG_PEEK) == 0)
-			tp->t_oobflags ^= (TCPOOB_HAVEDATA | TCPOOB_HADDATA);
-		break;
-
-	case PRU_SENDOOB:
-		if (sbspace(&so->so_snd) < -512) {
-			m_freem(m);
-			error = ENOBUFS;
-			break;
-		}
-		/*
-		 * According to RFC961 (Assigned Protocols),
-		 * the urgent pointer points to the last octet
-		 * of urgent data.  We continue, however,
-		 * to consider it to indicate the first octet
-		 * of data past the urgent section.
-		 * Otherwise, snd_up should be one lower.
-		 */
-		sbappendstream(&so->so_snd, m);
-		tp->snd_up = tp->snd_una + so->so_snd.sb_cc;
-		tp->t_force = 1;
-		error = tcp_output(tp);
-		tp->t_force = 0;
-		break;
-
 	default:
 		panic("tcp_usrreq");
 	}
 
 	tcp_debug_trace(so, tp, ostate, req);
-
-release:
 	splx(s);
-	return (error);
+
+	return error;
 }
 
 static void
@@ -542,7 +356,6 @@ change_keepalive(struct socket *so, struct tcpcb *tp)
 	if ((tp->t_state == TCPS_FIN_WAIT_2) && (tp->t_maxidle > 0))
 		TCP_TIMER_ARM(tp, TCPT_2MSL, tp->t_maxidle);
 }
-
 
 int
 tcp_ctloutput(int op, struct socket *so, struct sockopt *sopt)
@@ -869,36 +682,18 @@ out:
 static void
 tcp_detach(struct socket *so)
 {
-	struct inpcb *inp;
-#ifdef INET6
-	struct in6pcb *in6p;
-#endif
+	struct inpcb *inp = NULL;
+	struct in6pcb *in6p = NULL;
 	struct tcpcb *tp = NULL;
-	int s, family;
+	int s;
 
 	KASSERT(solocked(so));
 
-	s = splsoftnet();
-	family = so->so_proto->pr_domain->dom_family;
-	switch (family) {
-#ifdef INET
-	case PF_INET:
-		inp = sotoinpcb(so);
-		tp = intotcpcb(inp);
-		break;
-#endif
-#ifdef INET6
-	case PF_INET6:
-		in6p = sotoin6pcb(so);
-		tp = in6totcpcb(in6p);
-		break;
-#endif
-	default:
-		splx(s);
+	if (tcp_getpcb(so, &inp, &in6p, &tp) != 0)
 		return;
-	}
-	KASSERT(tp != NULL);
-	(void)tcp_disconnect(tp);
+
+	s = splsoftnet();
+	(void)tcp_disconnect1(tp);
 	splx(s);
 }
 
@@ -906,42 +701,17 @@ static int
 tcp_accept(struct socket *so, struct mbuf *nam)
 {
 	struct inpcb *inp = NULL;
-#ifdef INET6
 	struct in6pcb *in6p = NULL;
-#endif
 	struct tcpcb *tp = NULL;
 	int ostate = 0;
+	int error = 0;
 
 	KASSERT(solocked(so));
 
-	switch (so->so_proto->pr_domain->dom_family) {
-#ifdef INET
-	case PF_INET:
-		inp = sotoinpcb(so);
-		break;
-#endif
-#ifdef INET6
-	case PF_INET6:
-		in6p = sotoin6pcb(so);
-		break;
-#endif
-	default:
-		return EAFNOSUPPORT;
-	}
+	if ((error = tcp_getpcb(so, &inp, &in6p, &tp)) != 0)
+		return error;
 
-	/*
-	 * When a TCP is attached to a socket, then there will be
-	 * a (struct inpcb) pointed at by the socket, and this
-	 * structure will point at a subsidary (struct tcpcb).
-	 */
-	if (inp == NULL
-#ifdef INET6
-	    && in6p == NULL
-#endif
-	    )
-	{
-		return EINVAL;
-	}
+	ostate = tcp_debug_capture(tp, PRU_ACCEPT);
 
 	/*
 	 * Accept a connection.  Essentially all the work is
@@ -950,22 +720,292 @@ tcp_accept(struct socket *so, struct mbuf *nam)
 	 */
 #ifdef INET
 	if (inp) {
-		tp = intotcpcb(inp);
-		KASSERT(tp != NULL);
-		ostate = tcp_debug_capture(tp, PRU_ACCEPT);
 		in_setpeeraddr(inp, nam);
 	}
 #endif
 #ifdef INET6
 	if (in6p) {
-		tp = in6totcpcb(in6p);
-		KASSERT(tp != NULL);
-		ostate = tcp_debug_capture(tp, PRU_ACCEPT);
 		in6_setpeeraddr(in6p, nam);
 	}
 #endif
 	tcp_debug_trace(so, tp, ostate, PRU_ACCEPT);
+
 	return 0;
+}
+
+static int
+tcp_bind(struct socket *so, struct mbuf *nam)
+{
+	struct inpcb *inp = NULL;
+	struct in6pcb *in6p = NULL;
+	struct tcpcb *tp = NULL;
+	int s;
+	int error = 0;
+	int ostate = 0;
+
+	KASSERT(solocked(so));
+
+	if ((error = tcp_getpcb(so, &inp, &in6p, &tp)) != 0)
+		return error;
+
+	ostate = tcp_debug_capture(tp, PRU_BIND);
+
+	/*
+	 * Give the socket an address.
+	 */
+	s = splsoftnet();
+	switch (so->so_proto->pr_domain->dom_family) {
+#ifdef INET
+	case PF_INET:
+		error = in_pcbbind(inp, nam);
+		break;
+#endif
+#ifdef INET6
+	case PF_INET6:
+		error = in6_pcbbind(in6p, nam);
+		if (!error) {
+			/* mapped addr case */
+			if (IN6_IS_ADDR_V4MAPPED(&in6p->in6p_laddr))
+				tp->t_family = AF_INET;
+			else
+				tp->t_family = AF_INET6;
+		}
+		break;
+#endif
+	}
+
+	tcp_debug_trace(so, tp, ostate, PRU_BIND);
+	splx(s);
+
+	return error;
+}
+
+static int
+tcp_listen(struct socket *so)
+{
+	struct inpcb *inp = NULL;
+	struct in6pcb *in6p = NULL;
+	struct tcpcb *tp = NULL;
+	int s;
+	int error = 0;
+	int ostate = 0;
+
+	KASSERT(solocked(so));
+
+	if ((error = tcp_getpcb(so, &inp, &in6p, &tp)) != 0)
+		return error;
+
+	ostate = tcp_debug_capture(tp, PRU_LISTEN);
+
+	/*
+	 * Prepare to accept connections.
+	 */
+	s = splsoftnet();
+#ifdef INET
+	if (inp && inp->inp_lport == 0) {
+		error = in_pcbbind(inp, NULL);
+		if (error)
+			goto release;
+	}
+#endif
+#ifdef INET6
+	if (in6p && in6p->in6p_lport == 0) {
+		error = in6_pcbbind(in6p, NULL);
+		if (error)
+			goto release;
+	}
+#endif
+	tp->t_state = TCPS_LISTEN;
+
+release:
+	tcp_debug_trace(so, tp, ostate, PRU_LISTEN);
+	splx(s);
+
+	return error;
+}
+
+static int
+tcp_connect(struct socket *so, struct mbuf *nam)
+{
+	struct inpcb *inp = NULL;
+	struct in6pcb *in6p = NULL;
+	struct tcpcb *tp = NULL;
+	int s;
+	int error = 0;
+	int ostate = 0;
+
+	KASSERT(solocked(so));
+
+	if ((error = tcp_getpcb(so, &inp, &in6p, &tp)) != 0)
+		return error;
+
+	ostate = tcp_debug_capture(tp, PRU_CONNECT);
+
+	s = splsoftnet();
+
+	/*
+	 * Initiate connection to peer.
+	 * Create a template for use in transmissions on this connection.
+	 * Enter SYN_SENT state, and mark socket as connecting.
+	 * Start keep-alive timer, and seed output sequence space.
+	 * Send initial segment on connection.
+	 */
+#ifdef INET
+	if (inp) {
+		if (inp->inp_lport == 0) {
+			error = in_pcbbind(inp, NULL);
+			if (error)
+				goto release;
+		}
+		error = in_pcbconnect(inp, nam, curlwp);
+	}
+#endif
+#ifdef INET6
+	if (in6p) {
+		if (in6p->in6p_lport == 0) {
+			error = in6_pcbbind(in6p, NULL);
+			if (error)
+				goto release;
+		}
+		error = in6_pcbconnect(in6p, nam, curlwp);
+		if (!error) {
+			/* mapped addr case */
+			if (IN6_IS_ADDR_V4MAPPED(&in6p->in6p_faddr))
+				tp->t_family = AF_INET;
+			else
+				tp->t_family = AF_INET6;
+		}
+	}
+#endif
+	if (error)
+		goto release;
+	tp->t_template = tcp_template(tp);
+	if (tp->t_template == 0) {
+#ifdef INET
+		if (inp)
+			in_pcbdisconnect(inp);
+#endif
+#ifdef INET6
+		if (in6p)
+			in6_pcbdisconnect(in6p);
+#endif
+		error = ENOBUFS;
+		goto release;
+	}
+	/*
+	 * Compute window scaling to request.
+	 * XXX: This should be moved to tcp_output().
+	 */
+	while (tp->request_r_scale < TCP_MAX_WINSHIFT &&
+	    (TCP_MAXWIN << tp->request_r_scale) < sb_max)
+		tp->request_r_scale++;
+	soisconnecting(so);
+	TCP_STATINC(TCP_STAT_CONNATTEMPT);
+	tp->t_state = TCPS_SYN_SENT;
+	TCP_TIMER_ARM(tp, TCPT_KEEP, tp->t_keepinit);
+	tp->iss = tcp_new_iss(tp, 0);
+	tcp_sendseqinit(tp);
+	error = tcp_output(tp);
+
+release:
+	tcp_debug_trace(so, tp, ostate, PRU_CONNECT);
+	splx(s);
+
+	return error;
+}
+
+static int
+tcp_disconnect(struct socket *so)
+{
+	struct inpcb *inp = NULL;
+	struct in6pcb *in6p = NULL;
+	struct tcpcb *tp = NULL;
+	int s;
+	int error = 0;
+	int ostate = 0;
+
+	KASSERT(solocked(so));
+
+	if ((error = tcp_getpcb(so, &inp, &in6p, &tp)) != 0)
+		return error;
+
+	ostate = tcp_debug_capture(tp, PRU_DISCONNECT);
+
+	/*
+	 * Initiate disconnect from peer.
+	 * If connection never passed embryonic stage, just drop;
+	 * else if don't need to let data drain, then can just drop anyways,
+	 * else have to begin TCP shutdown process: mark socket disconnecting,
+	 * drain unread data, state switch to reflect user close, and
+	 * send segment (e.g. FIN) to peer.  Socket will be really disconnected
+	 * when peer sends FIN and acks ours.
+	 *
+	 * SHOULD IMPLEMENT LATER PRU_CONNECT VIA REALLOC TCPCB.
+	 */
+	s = splsoftnet();
+	tp = tcp_disconnect1(tp);
+	tcp_debug_trace(so, tp, ostate, PRU_DISCONNECT);
+	splx(s);
+
+	return error;
+}
+
+static int
+tcp_shutdown(struct socket *so)
+{
+	struct inpcb *inp = NULL;
+	struct in6pcb *in6p = NULL;
+	struct tcpcb *tp = NULL;
+	int s;
+	int error = 0;
+	int ostate = 0;
+
+	KASSERT(solocked(so));
+
+	if ((error = tcp_getpcb(so, &inp, &in6p, &tp)) != 0)
+		return error;
+
+	ostate = tcp_debug_capture(tp, PRU_SHUTDOWN);
+	/*
+	 * Mark the connection as being incapable of further output.
+	 */
+	s = splsoftnet();
+	socantsendmore(so);
+	tp = tcp_usrclosed(tp);
+	if (tp)
+		error = tcp_output(tp);
+	tcp_debug_trace(so, tp, ostate, PRU_SHUTDOWN);
+	splx(s);
+
+	return error;
+}
+
+static int
+tcp_abort(struct socket *so)
+{
+	struct inpcb *inp = NULL;
+	struct in6pcb *in6p = NULL;
+	struct tcpcb *tp = NULL;
+	int s;
+	int error = 0;
+	int ostate = 0;
+
+	KASSERT(solocked(so));
+
+	if ((error = tcp_getpcb(so, &inp, &in6p, &tp)) != 0)
+		return error;
+
+	ostate = tcp_debug_capture(tp, PRU_ABORT);
+
+	/*
+	 * Abort the TCP.
+	 */
+	s = splsoftnet();
+	tp = tcp_drop(tp, ECONNABORTED);
+	tcp_debug_trace(so, tp, ostate, PRU_ABORT);
+	splx(s);
+
+	return error;
 }
 
 static int
@@ -998,47 +1038,23 @@ static int
 tcp_peeraddr(struct socket *so, struct mbuf *nam)
 {
 	struct inpcb *inp = NULL;
-#ifdef INET6
 	struct in6pcb *in6p = NULL;
-#endif
 	struct tcpcb *tp = NULL;
 	int ostate = 0;
+	int error = 0;
 
-	switch (so->so_proto->pr_domain->dom_family) {
-#ifdef INET
-	case PF_INET:
-		inp = sotoinpcb(so);
-		break;
-#endif
-#ifdef INET6
-	case PF_INET6:
-		in6p = sotoin6pcb(so);
-		break;
-#endif
-	default:
-		return EAFNOSUPPORT;
-	}
+	if ((error = tcp_getpcb(so, &inp, &in6p, &tp)) != 0)
+		return error;
 
-	if (inp == NULL
-#ifdef INET6
-	    && in6p == NULL
-#endif
-	    )
-		return EINVAL;
+	ostate = tcp_debug_capture(tp, PRU_PEERADDR);
 
 #ifdef INET
-	if (inp) {
-		tp = intotcpcb(inp);
-		ostate = tcp_debug_capture(tp, PRU_PEERADDR);
+	if (inp)
 		in_setpeeraddr(inp, nam);
-	}
 #endif
 #ifdef INET6
-	if (in6p) {
-		tp = in6totcpcb(in6p);
-		ostate = tcp_debug_capture(tp, PRU_PEERADDR);
+	if (in6p)
 		in6_setpeeraddr(in6p, nam);
-	}
 #endif
 
 	tcp_debug_trace(so, tp, ostate, PRU_PEERADDR);
@@ -1050,52 +1066,98 @@ static int
 tcp_sockaddr(struct socket *so, struct mbuf *nam)
 {
 	struct inpcb *inp = NULL;
-#ifdef INET6
 	struct in6pcb *in6p = NULL;
-#endif
 	struct tcpcb *tp = NULL;
 	int ostate = 0;
+	int error = 0;
 
-	switch (so->so_proto->pr_domain->dom_family) {
-#ifdef INET
-	case PF_INET:
-		inp = sotoinpcb(so);
-		break;
-#endif
-#ifdef INET6
-	case PF_INET6:
-		in6p = sotoin6pcb(so);
-		break;
-#endif
-	default:
-		return EAFNOSUPPORT;
-	}
+	if ((error = tcp_getpcb(so, &inp, &in6p, &tp)) != 0)
+		return error;
 
-	if (inp == NULL
-#ifdef INET6
-	    && in6p == NULL
-#endif
-	    )
-		return EINVAL;
+	ostate = tcp_debug_capture(tp, PRU_SOCKADDR);
 
 #ifdef INET
-	if (inp) {
-		tp = intotcpcb(inp);
-		ostate = tcp_debug_capture(tp, PRU_SOCKADDR);
+	if (inp)
 		in_setsockaddr(inp, nam);
-	}
 #endif
 #ifdef INET6
-	if (in6p) {
-		tp = in6totcpcb(in6p);
-		ostate = tcp_debug_capture(tp, PRU_SOCKADDR);
+	if (in6p)
 		in6_setsockaddr(in6p, nam);
-	}
 #endif
 
 	tcp_debug_trace(so, tp, ostate, PRU_SOCKADDR);
 
 	return 0;
+}
+
+static int
+tcp_recvoob(struct socket *so, struct mbuf *m, int flags)
+{
+	struct inpcb *inp = NULL;
+	struct in6pcb *in6p = NULL;
+	struct tcpcb *tp = NULL;
+	int ostate = 0;
+	int error = 0;
+
+	if ((error = tcp_getpcb(so, &inp, &in6p, &tp)) != 0)
+		return error;
+
+	ostate = tcp_debug_capture(tp, PRU_RCVOOB);
+
+	if ((so->so_oobmark == 0 &&
+	    (so->so_state & SS_RCVATMARK) == 0) ||
+	    so->so_options & SO_OOBINLINE ||
+	    tp->t_oobflags & TCPOOB_HADDATA)
+		return EINVAL;
+
+	if ((tp->t_oobflags & TCPOOB_HAVEDATA) == 0)
+		return EWOULDBLOCK;
+
+	m->m_len = 1;
+	*mtod(m, char *) = tp->t_iobc;
+	if ((flags & MSG_PEEK) == 0)
+		tp->t_oobflags ^= (TCPOOB_HAVEDATA | TCPOOB_HADDATA);
+
+	tcp_debug_trace(so, tp, ostate, PRU_RCVOOB);
+
+	return 0;
+}
+
+static int
+tcp_sendoob(struct socket *so, struct mbuf *m, struct mbuf *control)
+{
+	struct inpcb *inp = NULL;
+	struct in6pcb *in6p = NULL;
+	struct tcpcb *tp = NULL;
+	int ostate = 0;
+	int error = 0;
+
+	if ((error = tcp_getpcb(so, &inp, &in6p, &tp)) != 0)
+		return error;
+
+	ostate = tcp_debug_capture(tp, PRU_SENDOOB);
+
+	if (sbspace(&so->so_snd) < -512) {
+		m_freem(m);
+		return ENOBUFS;
+	}
+	/*
+	 * According to RFC961 (Assigned Protocols),
+	 * the urgent pointer points to the last octet
+	 * of urgent data.  We continue, however,
+	 * to consider it to indicate the first octet
+	 * of data past the urgent section.
+	 * Otherwise, snd_up should be one lower.
+	 */
+	sbappendstream(&so->so_snd, m);
+	tp->snd_up = tp->snd_una + so->so_snd.sb_cc;
+	tp->t_force = 1;
+	error = tcp_output(tp);
+	tp->t_force = 0;
+
+	tcp_debug_trace(so, tp, ostate, PRU_SENDOOB);
+
+	return error;
 }
 
 /*
@@ -1107,7 +1169,7 @@ tcp_sockaddr(struct socket *so, struct mbuf *nam)
  * send segment to peer (with FIN).
  */
 struct tcpcb *
-tcp_disconnect(struct tcpcb *tp)
+tcp_disconnect1(struct tcpcb *tp)
 {
 	struct socket *so;
 
@@ -2335,19 +2397,35 @@ PR_WRAP_USRREQS(tcp)
 #define	tcp_attach	tcp_attach_wrapper
 #define	tcp_detach	tcp_detach_wrapper
 #define	tcp_accept	tcp_accept_wrapper
+#define	tcp_bind	tcp_bind_wrapper
+#define	tcp_listen	tcp_listen_wrapper
+#define	tcp_connect	tcp_connect_wrapper
+#define	tcp_disconnect	tcp_disconnect_wrapper
+#define	tcp_shutdown	tcp_shutdown_wrapper
+#define	tcp_abort	tcp_abort_wrapper
 #define	tcp_ioctl	tcp_ioctl_wrapper
 #define	tcp_stat	tcp_stat_wrapper
 #define	tcp_peeraddr	tcp_peeraddr_wrapper
 #define	tcp_sockaddr	tcp_sockaddr_wrapper
+#define	tcp_recvoob	tcp_recvoob_wrapper
+#define	tcp_sendoob	tcp_sendoob_wrapper
 #define	tcp_usrreq	tcp_usrreq_wrapper
 
 const struct pr_usrreqs tcp_usrreqs = {
 	.pr_attach	= tcp_attach,
 	.pr_detach	= tcp_detach,
 	.pr_accept	= tcp_accept,
+	.pr_bind	= tcp_bind,
+	.pr_listen	= tcp_listen,
+	.pr_connect	= tcp_connect,
+	.pr_disconnect	= tcp_disconnect,
+	.pr_shutdown	= tcp_shutdown,
+	.pr_abort	= tcp_abort,
 	.pr_ioctl	= tcp_ioctl,
 	.pr_stat	= tcp_stat,
 	.pr_peeraddr	= tcp_peeraddr,
 	.pr_sockaddr	= tcp_sockaddr,
+	.pr_recvoob	= tcp_recvoob,
+	.pr_sendoob	= tcp_sendoob,
 	.pr_generic	= tcp_usrreq,
 };

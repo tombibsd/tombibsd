@@ -5963,6 +5963,7 @@ done:
 #endif /* !__NetBSD__ */
 
 	if (log) {
+#if NPFLOG > 0
 		struct pf_rule *lr;
 
 		if (s != NULL && s->nat_rule.ptr != NULL &&
@@ -5972,6 +5973,7 @@ done:
 			lr = r;
 		PFLOG_PACKET(kif, h, m, AF_INET, dir, reason, lr, a, ruleset,
 		    &pd);
+#endif
 	}
 
 	kif->pfik_bytes[0][dir == PF_OUT][action != PF_PASS] += pd.tot_len;
@@ -6383,6 +6385,7 @@ done:
 #endif /* !__NetBSD__ */
 
 	if (log) {
+#if NPFLOG > 0
 		struct pf_rule *lr;
 
 		if (s != NULL && s->nat_rule.ptr != NULL &&
@@ -6392,6 +6395,7 @@ done:
 			lr = r;
 		PFLOG_PACKET(kif, h, m, AF_INET6, dir, reason, lr, a, ruleset,
 		    &pd);
+#endif
 	}
 
 	kif->pfik_bytes[1][dir == PF_OUT][action != PF_PASS] += pd.tot_len;

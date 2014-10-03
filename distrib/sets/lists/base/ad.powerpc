@@ -83,7 +83,7 @@
 ./usr/lib/powerpc/libc++.so.1			base-compat-shlib	compat,arch64,pic,libcxx
 ./usr/lib/powerpc/libc++.so.1.0			base-compat-shlib	compat,arch64,pic,libcxx
 ./usr/lib/powerpc/libc.so.12			base-compat-shlib	compat,arch64,pic
-./usr/lib/powerpc/libc.so.12.192		base-compat-shlib	compat,arch64,pic
+./usr/lib/powerpc/libc.so.12.193		base-compat-shlib	compat,arch64,pic
 ./usr/lib/powerpc/libcom_err.so.7		base-compat-shlib	compat,arch64,pic,kerberos
 ./usr/lib/powerpc/libcom_err.so.7.0		base-compat-shlib	compat,arch64,pic,kerberos
 ./usr/lib/powerpc/libcrypt.so.1			base-compat-shlib	compat,arch64,pic
@@ -220,7 +220,7 @@
 ./usr/lib/powerpc/libpcap.so.5			base-compat-shlib	compat,arch64,pic
 ./usr/lib/powerpc/libpcap.so.5.0		base-compat-shlib	compat,arch64,pic
 ./usr/lib/powerpc/libpci.so.2			base-compat-shlib	compat,arch64,pic
-./usr/lib/powerpc/libpci.so.2.0			base-compat-shlib	compat,arch64,pic
+./usr/lib/powerpc/libpci.so.2.1			base-compat-shlib	compat,arch64,pic
 ./usr/lib/powerpc/libperfuse.so			base-compat-shlib       compat,arch64,pic		
 ./usr/lib/powerpc/libperfuse.so.0		base-compat-shlib       compat,arch64,pic
 ./usr/lib/powerpc/libperfuse.so.0.0		base-compat-shlib       compat,arch64,pic
@@ -301,6 +301,10 @@
 ./usr/lib/powerpc/libz.so.1			base-compat-shlib	compat,arch64,pic
 ./usr/lib/powerpc/libz.so.1.0			base-compat-shlib	compat,arch64,pic
 ./usr/lib/powerpc/lua				base-compat-shlib	compat,arch64
+./usr/lib/powerpc/lua/5.1			base-obsolete		obsolete
+./usr/lib/powerpc/lua/5.1/gpio.so		base-obsolete		obsolete
+./usr/lib/powerpc/lua/5.1/sqlite.so		base-obsolete		obsolete
+./usr/lib/powerpc/lua/5.1/syslog.so		base-obsolete		obsolete
 ./usr/lib/powerpc/lua/5.3			base-compat-shlib	compat,arch64
 ./usr/lib/powerpc/lua/5.3/gpio.so		base-compat-shlib	compat,arch64,pic
 ./usr/lib/powerpc/lua/5.3/sqlite.so		base-compat-shlib	compat,arch64,pic

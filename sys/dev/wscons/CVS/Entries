@@ -12,7 +12,7 @@
 /wscons_rinit.c/1.7/Tue Oct 29 08:21:44 2013/-kk/
 /wscons_rops.c/1.11/Sun Dec 11 12:24:12 2005/-kk/
 /wsconsio.h/1.108/Thu Oct 24 10:28:58 2013/-kk/
-/wsdisplay.c/1.137/Tue Mar 25 02:35:40 2014/-kk/
+/wsdisplay.c/1.138/Fri Oct  3 09:09:20 2014/-kk/
 /wsdisplay_compat_usl.c/1.48/Thu Oct 24 10:28:58 2013/-kk/
 /wsdisplay_glyphcache.c/1.6/Fri Jan 31 08:48:49 2014/-kk/
 /wsdisplay_glyphcachevar.h/1.4/Thu Oct  4 10:26:32 2012/-kk/
@@ -33,13 +33,13 @@
 /wsemulvar.h/1.15/Tue Feb  2 16:18:29 2010/-kk/
 /wsevent.c/1.35/Thu May 24 18:16:31 2012/-kk/
 /wseventvar.h/1.15/Fri Jan 16 15:14:11 2009/-kk/
-/wskbd.c/1.133/Tue Mar 25 02:35:40 2014/-kk/
+/wskbd.c/1.134/Fri Oct  3 09:09:20 2014/-kk/
 /wskbdutil.c/1.18/Fri Feb  5 18:26:38 2010/-kk/
 /wskbdvar.h/1.19/Sun Sep  2 21:14:56 2012/-kk/
 /wsksymdef.h/1.66/Sun Apr 22 14:32:08 2012/-kk/
 /wsksymvar.h/1.11/Mon Apr 28 20:24:01 2008/-kk/
-/wsmouse.c/1.65/Tue Mar 25 02:35:40 2014/-kk/
+/wsmouse.c/1.66/Fri Oct  3 09:09:20 2014/-kk/
 /wsmousevar.h/1.11/Tue May 12 14:47:55 2009/-kk/
-/wsmux.c/1.57/Tue Mar 25 02:35:40 2014/-kk/
+/wsmux.c/1.58/Fri Oct  3 09:09:20 2014/-kk/
 /wsmuxvar.h/1.15/Tue Dec 17 04:05:08 2013/-kk/
 D

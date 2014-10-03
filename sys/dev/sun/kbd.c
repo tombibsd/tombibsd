@@ -99,6 +99,7 @@ const struct cdevsw kbd_cdevsw = {
 	.d_poll = kbdpoll,
 	.d_mmap = nommap,
 	.d_kqfilter = kbdkqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_OTHER
 };
 

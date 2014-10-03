@@ -215,6 +215,7 @@ const struct cdevsw video_cdevsw = {
 	.d_poll = videopoll,
 	.d_mmap = videommap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_OTHER
 };
 

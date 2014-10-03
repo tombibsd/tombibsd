@@ -901,7 +901,7 @@ void	 *tcp6_ctlinput(int, const struct sockaddr *, void *);
 void	 *tcp_ctlinput(int, const struct sockaddr *, void *);
 int	 tcp_ctloutput(int, struct socket *, struct sockopt *);
 struct tcpcb *
-	 tcp_disconnect(struct tcpcb *);
+	 tcp_disconnect1(struct tcpcb *);
 struct tcpcb *
 	 tcp_drop(struct tcpcb *, int);
 #ifdef TCP_SIGNATURE

@@ -126,6 +126,7 @@ const struct cdevsw bwtwo_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = bwtwommap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_OTHER
 };
 

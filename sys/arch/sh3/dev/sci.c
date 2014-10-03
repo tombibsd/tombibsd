@@ -258,6 +258,7 @@ const struct cdevsw sci_cdevsw = {
 	.d_poll = scipoll,
 	.d_mmap = nommap,
 	.d_kqfilter = ttykqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_TTY
 };
 

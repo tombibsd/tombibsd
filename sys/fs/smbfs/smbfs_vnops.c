@@ -127,6 +127,8 @@ static struct vnodeopv_entry_desc smbfs_vnodeop_entries[] = {
 	{ &vop_advlock_desc,		smbfs_advlock },
 	{ &vop_close_desc,		smbfs_close },
 	{ &vop_create_desc,		smbfs_create },
+	{ &vop_fallocate_desc,		genfs_eopnotsupp },
+	{ &vop_fdiscard_desc,		genfs_eopnotsupp },
 	{ &vop_fsync_desc,		smbfs_fsync },
 	{ &vop_getattr_desc,		smbfs_getattr },
 	{ &vop_getpages_desc,		genfs_compat_getpages },

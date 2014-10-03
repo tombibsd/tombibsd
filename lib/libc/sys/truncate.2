@@ -29,7 +29,7 @@
 .\"
 .\"     @(#)truncate.2	8.1 (Berkeley) 6/4/93
 .\"
-.Dd June 14, 2014
+.Dd July 23, 2014
 .Dt TRUNCATE 2
 .Os
 .Sh NAME
@@ -133,6 +133,7 @@ the
 is not open for writing.
 .El
 .Sh SEE ALSO
+.Xr fdiscard 2 ,
 .Xr open 2
 .Sh STANDARDS
 Use of
@@ -151,6 +152,3 @@ and
 .Fn ftruncate
 function calls appeared in
 .Bx 4.2 .
-.Sh BUGS
-These calls should be generalized to allow ranges
-of bytes in a file to be discarded.

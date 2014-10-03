@@ -307,6 +307,7 @@ const struct cdevsw wskbd_cdevsw = {
 	.d_poll = wskbdpoll,
 	.d_mmap = nommap,
 	.d_kqfilter = wskbdkqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_OTHER
 };
 

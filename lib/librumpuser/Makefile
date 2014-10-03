@@ -41,7 +41,7 @@ SRCS+=		rumpfiber_sp.c
 .error Unsupported rumpuser threading type: ${RUMPUSER_THREADS}
 .endif
 
-SRCS+=		rumpuser_component.c
+SRCS+=		rumpuser_component.c rumpuser_random.c
 SRCS+=		rumpuser_file.c rumpuser_mem.c
 
 SRCS+=		rumpuser_errtrans.c rumpuser_sigtrans.c

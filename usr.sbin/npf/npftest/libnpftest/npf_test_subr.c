@@ -40,7 +40,7 @@ int
 npf_test_load(const void *xml)
 {
 	prop_dictionary_t npf_dict = prop_dictionary_internalize(xml);
-	return npfctl_reload(0, npf_dict);
+	return npfctl_load(0, npf_dict);
 }
 
 ifnet_t *

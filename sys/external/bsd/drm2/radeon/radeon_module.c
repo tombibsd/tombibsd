@@ -43,7 +43,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include "radeon_drv.h"
 
-MODULE(MODULE_CLASS_DRIVER, radeon, "drmkms,drmkms_pci,drmkms_ttm"); /* XXX drmkms_i2c */
+MODULE(MODULE_CLASS_DRIVER, radeon, "drmkms,drmkms_pci"); /* XXX drmkms_i2c, drmkms_ttm */
 
 #ifdef _MODULE
 #include "ioconf.c"

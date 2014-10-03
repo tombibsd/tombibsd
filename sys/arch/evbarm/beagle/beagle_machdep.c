@@ -1111,11 +1111,14 @@ beagle_device_register(device_t self, void *aux)
 		if (use_fb_console)
 			prop_dictionary_set_bool(dict, "is_console", false);
 	}
+#if defined(TI_AM335X)
 	if (device_is_a(self, "tps65217pmic")) {
 		pmic_dev = self;
 	}
+#endif
 }
 
+#if defined(TI_AM335X)
 int
 set_mpu_volt(int mvolt)
 {
@@ -1125,3 +1128,4 @@ set_mpu_volt(int mvolt)
 	/* MPU voltage is on vdcd2 */
 	return tps65217pmic_set_volt(pmic_dev, "DCDC2", mvolt);
 }
+#endif

@@ -81,6 +81,7 @@ const struct cdevsw nvram_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = nvrammmap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = 0
 };
 

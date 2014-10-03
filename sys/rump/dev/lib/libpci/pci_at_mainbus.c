@@ -61,7 +61,7 @@ RUMP_COMPONENT(RUMP_COMPONENT_DEV)
 
 	if ((error = rump_vfs_makedevnodes(S_IFCHR, "/dev/pci", '0',
 	    cmaj, 0, 4)) != 0)
-		printf("pci: failed to create /dev/pci nodes: %d", error);
+		printf("pci: failed to create /dev/pci nodes: %d\n", error);
 }
 
 RUMP_COMPONENT(RUMP_COMPONENT_DEV_AFTERMAINBUS)

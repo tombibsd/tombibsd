@@ -362,7 +362,7 @@ in6_pcbbind_port(struct in6pcb *in6p, struct sockaddr_in6 *sin6, struct lwp *l)
 }
 
 int
-in6_pcbbind(void *v, struct mbuf *nam, struct lwp *l)
+in6_pcbbind(void *v, struct mbuf *nam)
 {
 	struct in6pcb *in6p = v;
 	struct sockaddr_in6 lsin6;
@@ -394,12 +394,12 @@ in6_pcbbind(void *v, struct mbuf *nam, struct lwp *l)
 	}
 
 	/* Bind address. */
-	error = in6_pcbbind_addr(in6p, sin6, l);
+	error = in6_pcbbind_addr(in6p, sin6, curlwp);
 	if (error)
 		return (error);
 
 	/* Bind port. */
-	error = in6_pcbbind_port(in6p, sin6, l);
+	error = in6_pcbbind_port(in6p, sin6, curlwp);
 	if (error) {
 		/*
 		 * Reset the address here to "any" so we don't "leak" the
@@ -540,7 +540,7 @@ in6_pcbconnect(void *v, struct mbuf *nam, struct lwp *l)
 	     in6p->in6p_laddr.s6_addr32[3] == 0))
 	{
 		if (in6p->in6p_lport == 0) {
-			error = in6_pcbbind(in6p, NULL, l);
+			error = in6_pcbbind(in6p, NULL);
 			if (error != 0)
 				return error;
 		}

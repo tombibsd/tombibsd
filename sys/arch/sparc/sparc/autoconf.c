@@ -1034,8 +1034,13 @@ char *
 clockfreq(int freq)
 {
 	static char buf[10];
+	size_t len;
 
-	humanize_number(buf, sizeof(buf), freq / 1000, "", 1000);
+	freq /= 1000;
+	len = snprintf(buf, sizeof(buf), "%d", freq / 1000);
+	freq %= 1000;
+	if (freq)
+		snprintf(buf + len, sizeof(buf) - len, ".%03d", freq);
 	return buf;
 }
 

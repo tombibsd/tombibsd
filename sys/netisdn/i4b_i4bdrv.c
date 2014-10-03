@@ -206,6 +206,7 @@ const struct cdevsw isdn_cdevsw = {
 	.d_poll = isdnpoll,
 	.d_mmap = nommap,
 	.d_kqfilter = isdnkqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_OTHER
 };
 #endif /* __NetBSD__ */

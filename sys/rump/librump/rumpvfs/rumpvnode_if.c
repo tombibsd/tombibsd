@@ -5,7 +5,7 @@
  * (Modifications made here may easily be lost!)
  *
  * Created from the file:
- *	NetBSD: vnode_if.src,v 1.66 2014/02/07 15:26:42 hannken Exp
+ *	NetBSD: vnode_if.src,v 1.67 2014/07/25 08:16:47 dholland Exp
  * by the script:
  *	NetBSD: vnode_if.sh,v 1.60 2014/01/13 12:07:55 hannken Exp
  */
@@ -202,6 +202,34 @@ RUMP_VOP_WRITE(struct vnode *vp,
 
 	rump_schedule();
 	error = VOP_WRITE(vp, uio, ioflag, cred);
+	rump_unschedule();
+
+	return error;
+}
+
+int
+RUMP_VOP_FALLOCATE(struct vnode *vp,
+    off_t pos,
+    off_t len)
+{
+	int error;
+
+	rump_schedule();
+	error = VOP_FALLOCATE(vp, pos, len);
+	rump_unschedule();
+
+	return error;
+}
+
+int
+RUMP_VOP_FDISCARD(struct vnode *vp,
+    off_t pos,
+    off_t len)
+{
+	int error;
+
+	rump_schedule();
+	error = VOP_FDISCARD(vp, pos, len);
 	rump_unschedule();
 
 	return error;

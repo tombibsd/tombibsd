@@ -76,6 +76,7 @@ const struct cdevsw uart_cdevsw = {
 	.d_poll = uart_poll,
 	.d_mmap = nommap,
 	.d_kqfilter = ttykqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_TTY
 };
 

@@ -2821,7 +2821,8 @@ xhci_device_intr_start(usbd_xfer_handle xfer)
 static void
 xhci_device_intr_done(usbd_xfer_handle xfer)
 {
-	struct xhci_softc * const sc = xfer->pipe->device->bus->hci_private;
+	struct xhci_softc * const sc __diagused =
+		xfer->pipe->device->bus->hci_private;
 #ifdef XHCI_DEBUG
 	struct xhci_slot * const xs = xfer->pipe->device->hci_private;
 	const u_int dci = xhci_ep_get_dci(xfer->pipe->endpoint->edesc);

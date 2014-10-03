@@ -32,6 +32,10 @@
 #ifndef _AMD64_INT_MWGWTYPES_H_
 #define _AMD64_INT_MWGWTYPES_H_
 
+#ifdef __UINT_FAST64_TYPE__
+#include <sys/common_int_mwgwtypes.h>
+#else
+
 #ifdef __x86_64__
 
 /*
@@ -69,5 +73,7 @@ typedef	unsigned long int	     uintmax_t;
 #include <i386/int_mwgwtypes.h>
 
 #endif	/*	__x86_64__	*/
+
+#endif
 
 #endif /* !_AMD64_INT_MWGWTYPES_H_ */

@@ -164,6 +164,7 @@ const struct cdevsw cgeight_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = cgeightmmap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = 0
 };
 

@@ -155,6 +155,8 @@ const struct vnodeopv_entry_desc union_vnodeop_entries[] = {
 	{ &vop_setattr_desc, union_setattr },		/* setattr */
 	{ &vop_read_desc, union_read },			/* read */
 	{ &vop_write_desc, union_write },		/* write */
+	{ &vop_fallocate_desc, genfs_eopnotsupp },	/* fallocate */
+	{ &vop_fdiscard_desc, genfs_eopnotsupp },	/* fdiscard */
 	{ &vop_ioctl_desc, union_ioctl },		/* ioctl */
 	{ &vop_poll_desc, union_poll },			/* select */
 	{ &vop_revoke_desc, union_revoke },		/* revoke */

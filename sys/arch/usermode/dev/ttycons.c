@@ -95,6 +95,7 @@ const struct cdevsw ttycons_cdevsw = {
 	.d_poll = ttycons_poll,
 	.d_kqfilter = ttykqfilter,
 	.d_flag = D_TTY,
+	.d_discard = nodiscard,
 };
 
 static void	ttycons_start(struct tty *);

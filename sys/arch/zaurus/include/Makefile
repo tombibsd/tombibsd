@@ -1,6 +1,6 @@
 #	$NetBSD$
 
 INCSDIR=	/usr/include/zaurus
-INCS=		sljitarch.h
+INCS=		sljit_machdep.h
 
 .include "../../arm/include/Makefile.common"

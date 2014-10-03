@@ -48,7 +48,7 @@
 
 #define	NPF_DEV_PATH	"/dev/npf"
 #define	NPF_CONF_PATH	"/etc/npf.conf"
-#define	NPF_SESSDB_PATH	"/var/db/npf_sessions.db"
+#define	NPF_DB_PATH	"/var/db/npf.db"
 
 typedef struct fam_addr_mask {
 	sa_family_t	fam_family;

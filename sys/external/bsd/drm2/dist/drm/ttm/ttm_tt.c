@@ -181,15 +181,13 @@ void ttm_tt_destroy(struct ttm_tt *ttm)
 	if (ttm->state == tt_unbound)
 		ttm_tt_unpopulate(ttm);
 
+#ifndef __NetBSD__
 	if (!(ttm->page_flags & TTM_PAGE_FLAG_PERSISTENT_SWAP) &&
 	    ttm->swap_storage)
-#ifdef __NetBSD__
-		uao_detach(ttm->swap_storage);
-#else
 		fput(ttm->swap_storage);
-#endif
 
 	ttm->swap_storage = NULL;
+#endif
 	ttm->func->destroy(ttm);
 }
 
@@ -224,8 +222,10 @@ EXPORT_SYMBOL(ttm_tt_init);
 
 void ttm_tt_fini(struct ttm_tt *ttm)
 {
+#ifdef __NetBSD__
 	uao_detach(ttm->swap_storage);
 	ttm->swap_storage = NULL;
+#endif
 	drm_free_large(ttm->pages);
 	ttm->pages = NULL;
 }
@@ -297,7 +297,10 @@ void ttm_dma_tt_fini(struct ttm_dma_tt *ttm_dma)
 {
 	struct ttm_tt *ttm = &ttm_dma->ttm;
 
+#ifdef __NetBSD__
 	uao_detach(ttm->swap_storage);
+	ttm->swap_storage = NULL;
+#endif
 	drm_free_large(ttm->pages);
 	ttm->pages = NULL;
 #ifdef __NetBSD__
@@ -313,7 +316,7 @@ EXPORT_SYMBOL(ttm_dma_tt_fini);
 
 void ttm_tt_unbind(struct ttm_tt *ttm)
 {
-	int ret;
+	int ret __diagused;
 
 	if (ttm->state == tt_bound) {
 		ret = ttm->func->unbind(ttm);

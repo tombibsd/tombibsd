@@ -21,7 +21,7 @@
 /lfs_subr.c/1.80/Thu Oct 24 10:28:58 2013/-kk/
 /lfs_syscalls.c/1.155/Thu Apr 24 14:31:38 2014/-kk/
 /lfs_vfsops.c/1.321/Thu Apr 24 14:31:38 2014/-kk/
-/lfs_vnops.c/1.268/Tue Jun  3 02:54:47 2014/-kk/
+/lfs_vnops.c/1.269/Fri Oct  3 09:09:34 2014/-kk/
 /ulfs_bmap.c/1.5/Thu Oct 24 10:28:58 2013/-kk/
 /ulfs_bswap.h/1.6/Thu Oct 24 10:28:58 2013/-kk/
 /ulfs_dinode.h/1.11/Thu Oct 24 10:28:58 2013/-kk/

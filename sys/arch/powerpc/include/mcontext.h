@@ -152,7 +152,7 @@ __lwp_gettcb_fast(void)
 	void *__tcb;
 
 	__asm __volatile(
-		"addi %[__tcb],%%r2,%[__offset]@l"
+		"addi %[__tcb],%%r2,%[__offset]"
 	    :	[__tcb] "=r" (__tcb)
 	    :	[__offset] "n" (-(TLS_TP_OFFSET + sizeof(struct tls_tcb))));
 
@@ -163,7 +163,7 @@ static __inline void
 __lwp_settcb(void *__tcb)
 {
 	__asm __volatile(
-		"addi %%r2,%[__tcb],%[__offset]@l"
+		"addi %%r2,%[__tcb],%[__offset]"
 	    :
 	    :	[__tcb] "r" (__tcb),
 		[__offset] "n" (TLS_TP_OFFSET + sizeof(struct tls_tcb)));

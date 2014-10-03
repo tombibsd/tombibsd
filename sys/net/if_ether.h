@@ -324,6 +324,7 @@ vlan_input_tag(struct ifnet *ifp, struct mbuf *m, u_int vlanid)
 /* test if any VLAN is configured for this interface */
 #define VLAN_ATTACHED(ec)	((ec)->ec_nvlans > 0)
 
+void	etherinit(void);
 void	ether_ifattach(struct ifnet *, const uint8_t *);
 void	ether_ifdetach(struct ifnet *);
 int	ether_mediachange(struct ifnet *);

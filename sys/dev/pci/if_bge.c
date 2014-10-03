@@ -2176,7 +2176,7 @@ bge_poll_fw(struct bge_softc *sc)
 			aprint_error_dev(sc->bge_dev, "reset timed out\n");
 			return -1;
 		}
-	} else if ((sc->bge_flags & BGEF_NO_EEPROM) == 0) {
+	} else {
 		/*
 		 * Poll the value location we just wrote until
 		 * we see the 1's complement of the magic number.
@@ -2191,7 +2191,8 @@ bge_poll_fw(struct bge_softc *sc)
 			DELAY(10);
 		}
 
-		if (i >= BGE_TIMEOUT) {
+		if ((i >= BGE_TIMEOUT)
+		    && ((sc->bge_flags & BGEF_NO_EEPROM) == 0)) {
 			aprint_error_dev(sc->bge_dev,
 			    "firmware handshake timed out, val = %x\n", val);
 			return -1;
@@ -3313,6 +3314,7 @@ bge_attach(device_t parent, device_t self, void *aux)
 	bool			no_seeprom;
 	int			capmask;
 	int			mii_flags;
+	int			map_flags;
 	char intrbuf[PCI_INTRSTR_LEN];
 
 	bp = bge_lookup(pa);
@@ -3349,10 +3351,28 @@ bge_attach(device_t parent, device_t self, void *aux)
 	switch (memtype) {
 	case PCI_MAPREG_TYPE_MEM | PCI_MAPREG_MEM_TYPE_32BIT:
 	case PCI_MAPREG_TYPE_MEM | PCI_MAPREG_MEM_TYPE_64BIT:
+#if 0
 		if (pci_mapreg_map(pa, BGE_PCI_BAR0,
 		    memtype, 0, &sc->bge_btag, &sc->bge_bhandle,
 		    &memaddr, &sc->bge_bsize) == 0)
 			break;
+#else
+		/*
+		 * Workaround for PCI prefetchable bit. Some BCM5717-5720 based
+		 * system get NMI on boot (PR#48451). This problem might not be
+		 * the driver's bug but our PCI common part's bug. Until we
+		 * find a real reason, we ignore the prefetchable bit.
+		 */
+		if (pci_mapreg_info(pa->pa_pc, pa->pa_tag, BGE_PCI_BAR0,
+		    memtype, &memaddr, &sc->bge_bsize, &map_flags) == 0) {
+			map_flags &= ~BUS_SPACE_MAP_PREFETCHABLE;
+			if (bus_space_map(pa->pa_memt, memaddr, sc->bge_bsize,
+			    map_flags, &sc->bge_bhandle) == 0) {
+				sc->bge_btag = pa->pa_memt;
+				break;
+			}
+		}
+#endif
 	default:
 		aprint_error_dev(sc->bge_dev, "can't find mem space\n");
 		return;
@@ -3490,6 +3510,7 @@ bge_attach(device_t parent, device_t self, void *aux)
 	/* Chips with APE need BAR2 access for APE registers/memory. */
 	if ((sc->bge_flags & BGEF_APE) != 0) {
 		memtype = pci_mapreg_type(pa->pa_pc, pa->pa_tag, BGE_PCI_BAR2);
+#if 0
 		if (pci_mapreg_map(pa, BGE_PCI_BAR2, memtype, 0,
 			&sc->bge_apetag, &sc->bge_apehandle, NULL,
 			&sc->bge_apesize)) {
@@ -3497,6 +3518,29 @@ bge_attach(device_t parent, device_t self, void *aux)
 			    "couldn't map BAR2 memory\n");
 			return;
 		}
+#else
+		/*
+		 * Workaround for PCI prefetchable bit. Some BCM5717-5720 based
+		 * system get NMI on boot (PR#48451). This problem might not be
+		 * the driver's bug but our PCI common part's bug. Until we
+		 * find a real reason, we ignore the prefetchable bit.
+		 */
+		if (pci_mapreg_info(pa->pa_pc, pa->pa_tag, BGE_PCI_BAR2,
+		    memtype, &memaddr, &sc->bge_apesize, &map_flags) != 0) {
+			aprint_error_dev(sc->bge_dev,
+			    "couldn't map BAR2 memory\n");
+			return;
+		}
+
+		map_flags &= ~BUS_SPACE_MAP_PREFETCHABLE;
+		if (bus_space_map(pa->pa_memt, memaddr,
+		    sc->bge_apesize, map_flags, &sc->bge_apehandle) != 0) {
+			aprint_error_dev(sc->bge_dev,
+			    "couldn't map BAR2 memory\n");
+			return;
+		}
+		sc->bge_apetag = pa->pa_memt;
+#endif
 
 		/* Enable APE register/memory access by host driver. */
 		reg = pci_conf_read(pa->pa_pc, pa->pa_tag, BGE_PCI_PCISTATE);
@@ -4248,13 +4292,13 @@ bge_reset(struct bge_softc *sc)
 		BGE_SETBIT(sc, BGE_TLP_CONTROL_REG, BGE_TLP_DATA_FIFO_PROTECT);
 	}
 
-	/* 5718 reset step 13, 57XX step 17 */
-	/* Poll until the firmware initialization is complete */
-	bge_poll_fw(sc);
-
 	/* 5718 reset step 12, 57XX step 15 and 16 */
 	/* Fix up byte swapping */
 	CSR_WRITE_4(sc, BGE_MODE_CTL, BGE_DMA_SWAP_OPTIONS);
+
+	/* 5718 reset step 13, 57XX step 17 */
+	/* Poll until the firmware initialization is complete */
+	bge_poll_fw(sc);
 
 	/* 57XX step 21 */
 	if (BGE_CHIPREV(sc->bge_chipid) == BGE_CHIPREV_5704_BX) {

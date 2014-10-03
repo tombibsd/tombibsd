@@ -1145,5 +1145,6 @@ const struct cdevsw ksyms_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = nommap,
 	.d_kqfilter = nullkqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_OTHER | D_MPSAFE
 };

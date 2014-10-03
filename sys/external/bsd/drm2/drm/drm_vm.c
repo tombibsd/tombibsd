@@ -47,7 +47,7 @@ static paddr_t	drm_mmap_map_paddr(struct drm_device *, struct drm_local_map *,
 
 int
 drm_mmap_object(struct drm_device *dev, off_t offset, size_t size, int prot,
-    struct uvm_object **uobjp, voff_t *uoffsetp)
+    struct uvm_object **uobjp, voff_t *uoffsetp, struct file *file __unused)
 {
 	dev_t devno = cdevsw_lookup_major(&drm_cdevsw);
 	struct uvm_object *uobj;

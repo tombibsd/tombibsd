@@ -1,4 +1,4 @@
-/*	Id: order.c,v 1.14 2011/02/18 17:08:31 ragge Exp 	*/	
+/*	Id: order.c,v 1.17 2014/04/29 18:16:09 ragge Exp 	*/	
 /*	$NetBSD$	*/
 /*
  * Copyright (c) 2008 Michael Shalayeff
@@ -41,6 +41,8 @@ int canaddr(NODE *);
 int
 notoff(TWORD t, int r, CONSZ off, char *cp)
 {
+	if (off > MAX_INT || off < MIN_INT)
+		return 1; /* max signed 32-bit offset */
 	return(0);  /* YES */
 }
 
@@ -93,7 +95,10 @@ offstar(NODE *p, int shape)
 	if (findls(p, 0))
 		return; /* Matched (,%rax,8) */
 
-	if ((p->n_op == PLUS || p->n_op == MINUS) && p->n_left->n_op == ICON) {
+	if ((p->n_op == PLUS || p->n_op == MINUS) &&
+	    p->n_left->n_op == ICON &&
+	    p->n_left->n_name[0] == '\0' &&
+	    notoff(0, 0,  p->n_left->n_lval, 0) == 0) {
 		l = p->n_right;
 		if (isreg(l))
 			return; /* Matched 4(%rax) */

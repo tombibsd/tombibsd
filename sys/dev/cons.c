@@ -77,6 +77,7 @@ const struct cdevsw cons_cdevsw = {
 	.d_poll = cnpoll,
 	.d_mmap = nommap,
 	.d_kqfilter = cnkqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_TTY
 };
 

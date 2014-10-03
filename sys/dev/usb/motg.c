@@ -170,6 +170,8 @@ UREAD2(struct motg_softc *sc, bus_size_t r)
 	UBARR(sc);
 	return bus_space_read_2(sc->sc_iot, sc->sc_ioh, r);
 }
+
+#if 0
 static __inline uint32_t
 UREAD4(struct motg_softc *sc, bus_size_t r)
 {
@@ -177,6 +179,7 @@ UREAD4(struct motg_softc *sc, bus_size_t r)
 	UBARR(sc);
 	return bus_space_read_4(sc->sc_iot, sc->sc_ioh, r);
 }
+#endif
 
 static void
 musbotg_pull_common(struct motg_softc *sc, uint8_t on)  

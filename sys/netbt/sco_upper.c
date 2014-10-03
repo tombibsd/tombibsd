@@ -82,12 +82,12 @@ sco_attach_pcb(struct sco_pcb **handle,
 }
 
 /*
- * sco_bind(pcb, sockaddr)
+ * sco_bind_pcb(pcb, sockaddr)
  *
  *	Bind SCO pcb to local address
  */
 int
-sco_bind(struct sco_pcb *pcb, struct sockaddr_bt *addr)
+sco_bind_pcb(struct sco_pcb *pcb, struct sockaddr_bt *addr)
 {
 
 	if (pcb->sp_link != NULL || pcb->sp_flags & SP_LISTENING)
@@ -114,12 +114,12 @@ sco_sockaddr_pcb(struct sco_pcb *pcb, struct sockaddr_bt *addr)
 }
 
 /*
- * sco_connect(pcb, sockaddr)
+ * sco_connect_pcb(pcb, sockaddr)
  *
  *	Initiate a SCO connection to the destination address.
  */
 int
-sco_connect(struct sco_pcb *pcb, struct sockaddr_bt *dest)
+sco_connect_pcb(struct sco_pcb *pcb, struct sockaddr_bt *dest)
 {
 	hci_add_sco_con_cp cp;
 	struct hci_unit *unit;
@@ -193,12 +193,12 @@ sco_peeraddr_pcb(struct sco_pcb *pcb, struct sockaddr_bt *addr)
 }
 
 /*
- * sco_disconnect(pcb, linger)
+ * sco_disconnect_pcb(pcb, linger)
  *
  *	Initiate disconnection of connected SCO pcb
  */
 int
-sco_disconnect(struct sco_pcb *pcb, int linger)
+sco_disconnect_pcb(struct sco_pcb *pcb, int linger)
 {
 	hci_discon_cp cp;
 	struct hci_link *sco;
@@ -236,7 +236,7 @@ sco_detach_pcb(struct sco_pcb **handle)
 	*handle = NULL;
 
 	if (pcb->sp_link != NULL) {
-		sco_disconnect(pcb, 0);
+		sco_disconnect_pcb(pcb, 0);
 		pcb->sp_link = NULL;
 	}
 
@@ -245,12 +245,12 @@ sco_detach_pcb(struct sco_pcb **handle)
 }
 
 /*
- * sco_listen(pcb)
+ * sco_listen_pcb(pcb)
  *
  *	Mark pcb as a listener.
  */
 int
-sco_listen(struct sco_pcb *pcb)
+sco_listen_pcb(struct sco_pcb *pcb)
 {
 
 	if (pcb->sp_link != NULL)

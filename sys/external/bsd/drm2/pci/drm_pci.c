@@ -280,7 +280,7 @@ drm_pci_get_name(struct drm_device *dev)
 static int
 drm_pci_format_unique(struct drm_device *dev, char *buf, size_t size)
 {
-	const unsigned int domain = 0; /* XXX PCI domains? */
+	const unsigned int domain = device_unit(device_parent(dev->dev));
 	const unsigned int bus = dev->pdev->pd_pa.pa_bus;
 	const unsigned int device = dev->pdev->pd_pa.pa_device;
 	const unsigned int function = dev->pdev->pd_pa.pa_function;

@@ -359,6 +359,7 @@ const struct cdevsw audio_cdevsw = {
 	.d_poll = audiopoll,
 	.d_mmap = audiommap,
 	.d_kqfilter = audiokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_OTHER | D_MPSAFE
 };
 

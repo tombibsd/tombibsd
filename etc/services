@@ -19742,7 +19742,7 @@ chat		531/udp
 uucpd		540/tcp
 uucpd		540/udp
 rdist		541/tcp	rdistd
-rfs_server	556/tcp	rfs		# Brunhoff remote filesystem
+rfs_server	556/tcp	rfs		# Brunhoff remote file system
 smtps		465/tcp			# smtp protocol over TLS/SSL
 smtps		465/udp			# smtp protocol over TLS/SSL
 kdc		750/tcp	kerberos4

@@ -1,4 +1,4 @@
-/Makefile/1.35/Sun Nov 25 21:55:51 2012/-kk/
+/Makefile/1.36/Fri Oct  3 09:09:04 2014/-kk/
 /adrsmap.h/1.8/Sun Dec 11 12:18:24 2005/-kk/
 /ansi.h/1.1/Wed Feb 18 13:48:14 1998/-kk/
 /apbus.h/1.5/Sun Dec 11 12:18:24 2005/-kk/
@@ -54,7 +54,7 @@
 /rwlock.h/1.2/Fri Feb  9 21:55:07 2007/-kk/
 /setjmp.h/1.1/Wed Feb 18 13:48:27 1998/-kk/
 /signal.h/1.1/Wed Feb 18 13:48:27 1998/-kk/
-/sljitarch.h/1.1/Sun Nov 25 21:55:51 2012/-kk/
+/sljit_machdep.h/1.1/Wed Jul 23 18:19:44 2014/-kk/
 /trap.h/1.1/Wed Feb 18 13:48:27 1998/-kk/
 /types.h/1.12/Sun Jan 20 18:09:08 2008/-kk/
 /vmparam.h/1.5/Mon Dec 14 00:46:09 2009/-kk/

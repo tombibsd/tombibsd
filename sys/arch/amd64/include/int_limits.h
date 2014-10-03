@@ -32,6 +32,10 @@
 #ifndef _AMD64_INT_LIMITS_H_
 #define _AMD64_INT_LIMITS_H_
 
+#ifdef __SIG_ATOMIC_MAX__
+#include <sys/common_int_limits.h>
+#else
+
 #ifdef __x86_64__
 
 /*
@@ -131,5 +135,7 @@
 #include <i386/int_limits.h>
 
 #endif	/*	__x86_64__	*/
+
+#endif
 
 #endif /* !_AMD64_INT_LIMITS_H_ */

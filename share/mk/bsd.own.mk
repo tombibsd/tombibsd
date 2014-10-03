@@ -262,6 +262,7 @@ TOOL_OBJC.clang=	${TOOLDIR}/bin/${MACHINE_GNU_PLATFORM}-clang
 # PCC supports C and Fortran
 TOOL_CC.pcc=		${TOOLDIR}/bin/${MACHINE_GNU_PLATFORM}-pcc
 TOOL_CPP.pcc=		${TOOLDIR}/libexec/${MACHINE_GNU_PLATFORM}-cpp
+TOOL_CXX.pcc=		${TOOLDIR}/bin/${MACHINE_GNU_PLATFORM}-p++
 
 #
 # Make sure DESTDIR is set, so that builds with these tools always
@@ -398,6 +399,7 @@ TOOL_OBJC.gcc=	gcc
 # PCC supports C and Fortran
 TOOL_CC.pcc=		pcc
 TOOL_CPP.pcc=		/usr/libexec/pcpp
+TOOL_CXX.pcc=		p++
 
 TOOL_AMIGAAOUT2BB=	amiga-aout2bb
 TOOL_AMIGAELF2BB=	amiga-elf2bb

@@ -9,7 +9,7 @@
 /ebus.c/1.61/Wed Sep 19 06:55:25 2012/-kk/
 /ebus_mainbus.c/1.12/Wed Dec 25 07:37:33 2013/-kk/
 /ebusvar.h/1.11/Fri Jul  1 18:48:36 2011/-kk/
-/fdc.c/1.39/Tue Mar 25 02:35:29 2014/-kk/
+/fdc.c/1.41/Fri Oct  3 09:09:07 2014/-kk/
 /fdcreg.h/1.1/Fri Oct  6 08:44:59 2006/-kk/
 /fdcvar.h/1.3/Thu Jun 30 20:09:36 2011/-kk/
 /ffb.c/1.55/Thu Oct 24 10:28:57 2013/-kk/
@@ -25,7 +25,7 @@
 /iommu.c/1.107/Sun Mar 25 03:51:33 2012/-kk/
 /iommureg.h/1.19/Sun Mar 20 20:42:06 2011/-kk/
 /iommuvar.h/1.21/Sun Mar 25 03:51:33 2012/-kk/
-/kd.c/1.52/Tue Mar 25 02:35:29 2014/-kk/
+/kd.c/1.53/Fri Oct  3 09:09:07 2014/-kk/
 /lom.c/1.13/Sat Mar  1 06:04:33 2014/-kk/
 /lpt_ebus.c/1.24/Mon May 19 16:26:13 2014/-kk/
 /mkclock.c/1.12/Sat Oct 27 17:18:12 2012/-kk/
@@ -33,7 +33,7 @@
 /pcfiic_ebus.c/1.4/Thu Oct 24 10:28:57 2013/-kk/
 /pci_machdep.c/1.77/Fri Apr 11 02:03:39 2014/-kk/
 /pckbc_ebus.c/1.1/Tue Oct  9 20:55:04 2012/-kk/
-/pcons.c/1.33/Tue Mar 25 02:35:29 2014/-kk/
+/pcons.c/1.34/Fri Oct  3 09:09:07 2014/-kk/
 /pld_wdog.c/1.11/Sat Oct 27 17:18:12 2012/-kk/
 /power.c/1.12/Fri Jun  3 03:20:39 2011/-kk/
 /power.h/1.2/Fri May 12 23:35:24 2006/-kk/
@@ -45,7 +45,7 @@
 /pyro.c/1.15/Thu Oct 24 10:28:57 2013/-kk/
 /pyrovar.h/1.3/Fri Jun  3 03:05:21 2011/-kk/
 /rtc.c/1.8/Fri Jul  1 18:48:37 2011/-kk/
-/sab.c/1.51/Tue Mar 25 02:35:29 2014/-kk/
+/sab.c/1.52/Fri Oct  3 09:09:07 2014/-kk/
 /sab82532reg.h/1.2/Sat May  3 18:11:02 2003/-kk/
 /sbus.c/1.93/Mon Jan 30 04:25:15 2012/-kk/
 /sbusreg.h/1.10/Wed Mar 16 05:49:43 2011/-kk/

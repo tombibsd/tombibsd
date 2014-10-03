@@ -82,7 +82,8 @@ bcmgenfb_attach(device_t parent, device_t self, void *aux)
 	struct bcmgenfb_softc *sc = device_private(self);
 	struct amba_attach_args *aaa = aux;
 	prop_dictionary_t dict = device_properties(self);
-	struct genfb_ops ops;
+	static const struct genfb_ops zero_ops;
+	struct genfb_ops ops = zero_ops;
 	bool is_console = false;
 	int error;
 
@@ -113,7 +114,6 @@ bcmgenfb_attach(device_t parent, device_t self, void *aux)
 	}
 	sc->sc_gen.sc_fbaddr = bus_space_vaddr(sc->sc_iot, sc->sc_ioh);
 
-	memset(&ops, 0, sizeof(ops));
 	ops.genfb_ioctl = bcmgenfb_ioctl;
 	ops.genfb_mmap = bcmgenfb_mmap;
 

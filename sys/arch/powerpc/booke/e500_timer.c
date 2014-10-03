@@ -69,14 +69,6 @@ static struct timecounter ppcbooke_timecounter = {
 	NULL			/* tc_next */
 };
 
-static inline uint32_t 
-openpic_read(struct cpu_softc *cpu, bus_size_t offset)
-{
-
-	return bus_space_read_4(cpu->cpu_bst, cpu->cpu_bsh,
-	    OPENPIC_BASE + offset);
-}
-
 static inline void 
 openpic_write(struct cpu_softc *cpu, bus_size_t offset, uint32_t val)
 {

@@ -172,6 +172,7 @@ const struct cdevsw epcom_cdevsw = {
 	.d_poll = epcompoll,
 	.d_mmap = nommap,
 	.d_kqfilter = ttykqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_TTY
 };
 
