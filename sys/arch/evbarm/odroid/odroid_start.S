@@ -182,7 +182,7 @@ _C_LABEL(odroid_start):
 #ifdef EXYNOS4
 	adr	r1, .Lsscom_exynos4_table
 #endif
-#ifdef EXYNO55
+#ifdef EXYNOS5
 	adr	r1, .Lsscom_exynos5_table
 #endif
 #ifdef SSCOM0CONSOLE

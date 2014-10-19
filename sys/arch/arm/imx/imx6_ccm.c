@@ -55,10 +55,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <arm/imx/imx6var.h>
 #include <arm/imx/imx6_reg.h>
 
-#ifndef IMX6_OSC_FREQ
-#define IMX6_OSC_FREQ	(24 * 1000 * 1000)	/* 24MHz */
-#endif
-
 struct imxccm_softc {
 	device_t sc_dev;
 	bus_space_tag_t sc_iot;
@@ -171,13 +167,13 @@ imxccm_attach(device_t parent, device_t self, void *aux)
 	    imx6_get_clock(IMX6CLK_AXI));
 
 	aprint_verbose_dev(self, "IMX6CLK_USDHC1=%d\n",
-	    imx6_get_clock(IMX6CLK_USDHC1_CLK_ROOT));
+	    imx6_get_clock(IMX6CLK_USDHC1));
 	aprint_verbose_dev(self, "IMX6CLK_USDHC2=%d\n",
-	    imx6_get_clock(IMX6CLK_USDHC2_CLK_ROOT));
+	    imx6_get_clock(IMX6CLK_USDHC2));
 	aprint_verbose_dev(self, "IMX6CLK_USDHC3=%d\n",
-	    imx6_get_clock(IMX6CLK_USDHC3_CLK_ROOT));
+	    imx6_get_clock(IMX6CLK_USDHC3));
 	aprint_verbose_dev(self, "IMX6CLK_USDHC4=%d\n",
-	    imx6_get_clock(IMX6CLK_USDHC4_CLK_ROOT));
+	    imx6_get_clock(IMX6CLK_USDHC4));
 }
 
 static int
@@ -634,33 +630,39 @@ imx6_get_clock(enum imx6_clock clk)
 		}
 		break;
 
-	case IMX6CLK_USDHC1_CLK_ROOT:
+	case IMX6CLK_USDHC1:
 		v = imx6_ccm_read(CCM_CSCMR1);
 		freq = imx6_get_clock((v & CCM_CSCMR1_USDHC1_CLK_SEL) ?
 		    IMX6CLK_PLL2_PFD0 : IMX6CLK_PLL2_PFD2);
 		v = imx6_ccm_read(CCM_CSCDR1);
 		freq = freq / (__SHIFTOUT(v, CCM_CSCDR1_USDHC1_PODF) + 1);
 		break;
-	case IMX6CLK_USDHC2_CLK_ROOT:
+	case IMX6CLK_USDHC2:
 		v = imx6_ccm_read(CCM_CSCMR1);
 		freq = imx6_get_clock((v & CCM_CSCMR1_USDHC2_CLK_SEL) ?
 		    IMX6CLK_PLL2_PFD0 : IMX6CLK_PLL2_PFD2);
 		v = imx6_ccm_read(CCM_CSCDR1);
 		freq = freq / (__SHIFTOUT(v, CCM_CSCDR1_USDHC2_PODF) + 1);
 		break;
-	case IMX6CLK_USDHC3_CLK_ROOT:
+	case IMX6CLK_USDHC3:
 		v = imx6_ccm_read(CCM_CSCMR1);
 		freq = imx6_get_clock((v & CCM_CSCMR1_USDHC3_CLK_SEL) ?
 		    IMX6CLK_PLL2_PFD0 : IMX6CLK_PLL2_PFD2);
 		v = imx6_ccm_read(CCM_CSCDR1);
 		freq = freq / (__SHIFTOUT(v, CCM_CSCDR1_USDHC3_PODF) + 1);
 		break;
-	case IMX6CLK_USDHC4_CLK_ROOT:
+	case IMX6CLK_USDHC4:
 		v = imx6_ccm_read(CCM_CSCMR1);
 		freq = imx6_get_clock((v & CCM_CSCMR1_USDHC4_CLK_SEL) ?
 		    IMX6CLK_PLL2_PFD0 : IMX6CLK_PLL2_PFD2);
 		v = imx6_ccm_read(CCM_CSCDR1);
 		freq = freq / (__SHIFTOUT(v, CCM_CSCDR1_USDHC4_PODF) + 1);
+		break;
+
+	case IMX6CLK_PERCLK:
+		freq = imx6_get_clock(IMX6CLK_IPG);
+		v = imx6_ccm_read(CCM_CSCMR1);
+		freq = freq / (__SHIFTOUT(v, CCM_CSCMR1_PERCLK_PODF) + 1);
 		break;
 
 	default:

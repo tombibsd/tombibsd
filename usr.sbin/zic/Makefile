@@ -9,7 +9,8 @@ COPTS.scheck.c	+= -Wno-format-nonliteral
 PROG=	zic
 SRCS=	zic.c scheck.c ialloc.c
 MAN=	zic.8
-CPPFLAGS+=-Dunix
+TZVERSION!= ${TOOL_SED} -ne 's/VERSION=[ 	]*//p' ${NETBSDSRCDIR}/lib/libc/time/Makefile
+CPPFLAGS+=-DPKGVERSION='"(tzcode) "' -DTZVERSION='"${TZVERSION}"'
 
 .PATH: ${NETBSDSRCDIR}/lib/libc/time
 

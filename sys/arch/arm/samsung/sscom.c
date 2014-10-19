@@ -180,7 +180,9 @@ static int	sscom_to_tiocm(struct sscom_softc *);
 static void	sscom_iflush(struct sscom_softc *);
 
 static int	sscomhwiflow(struct tty *tp, int block);
-#if defined(KGDB) || defined(SSCOM0CONSOLE) || defined(SSCOM1CONSOLE)
+#if defined(KGDB) || \
+    defined(SSCOM0CONSOLE) || defined(SSCOM1CONSOLE) || \
+    defined(SSCOM2CONSOLE) || defined(SSCOM3CONSOLE)
 static int	sscom_init(bus_space_tag_t, bus_space_handle_t,
 		    const struct sscom_uart_info *,
 		    int, int, tcflag_t, bus_space_handle_t *);
@@ -1835,7 +1837,9 @@ sscomintr(void *v)
 }
 
 
-#if defined(KGDB) || defined(SSCOM0CONSOLE) || defined(SSCOM1CONSOLE)
+#if defined(KGDB) || \
+    defined(SSCOM0CONSOLE) || defined(SSCOM1CONSOLE) || \
+    defined(SSCOM2CONSOLE) || defined(SSCOM3CONSOLE)
 /*
  * Initialize UART for use as console or KGDB line.
  */
@@ -1881,7 +1885,9 @@ sscom_init(bus_space_tag_t iot, bus_space_handle_t base_ioh,
 
 #endif
 
-#if defined(SSCOM0CONSOLE) || defined(SSCOM1CONSOLE)
+#if \
+    defined(SSCOM0CONSOLE) || defined(SSCOM1CONSOLE) || \
+    defined(SSCOM2CONSOLE) || defined(SSCOM3CONSOLE)
 /*
  * Following are all routines needed for SSCOM to act as console
  */

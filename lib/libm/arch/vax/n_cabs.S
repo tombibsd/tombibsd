@@ -55,6 +55,8 @@ ENTRY(_hypotf, 0)
 
 #ifdef WEAK_ALIAS
 WEAK_ALIAS(hypot, _hypot)
+WEAK_ALIAS(hypotl, _hypot)
+WEAK_ALIAS(_hypotl, _hypot)
 #endif
 
 ALTENTRY(cabs)

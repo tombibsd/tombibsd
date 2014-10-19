@@ -192,6 +192,7 @@ struct rtk_softc {
 #define RTKQ_MACSTAT		0x00000100	/* set MACSTAT_DIS on init */
 #define RTKQ_CMDSTOP		0x00000200	/* set STOPREQ on stop */
 #define RTKQ_PHYWAKE_PM		0x00000400	/* wake PHY from power down */
+#define RTKQ_RXDV_GATED		0x00000800
 
 	bus_dma_tag_t		sc_dmat;
 

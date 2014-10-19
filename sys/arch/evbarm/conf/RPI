@@ -197,6 +197,7 @@ plcom0		at obio?
 genfb0		at obio?
 wsdisplay*	at genfb?
 options		VCONS_DRAW_INTR
+#options 	RPI_HWCURSOR
 
 # System timer
 bcmtmr0		at obio?

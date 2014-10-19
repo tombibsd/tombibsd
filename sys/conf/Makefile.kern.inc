@@ -156,6 +156,12 @@ NORMAL_S?=	@${_MKSHMSG} "compile  ${.CURDIR:T}/${.TARGET}" && \
 		${_MKSHECHO}\
 		${CC} ${AFLAGS} ${AFLAGS.${<:T}} ${CPPFLAGS} -c $< && \
 		${CC} ${AFLAGS} ${AFLAGS.${<:T}} ${CPPFLAGS} -c $<
+ 
+# link rules: 
+LINK_O?=	@${_MKSHMSG} "   link  ${.CURDIR:T}/${.TARGET}" && \
+		${_MKSHECHO}\
+		${LD} -r -o ${.TARGET} ${.ALLSRC} && \
+		${LD} -r -o ${.TARGET} ${.ALLSRC}
 
 ##
 ## (3) libkern and compat

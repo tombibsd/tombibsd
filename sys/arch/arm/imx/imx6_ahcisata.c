@@ -73,10 +73,20 @@ imx6_ahcisata_match(device_t parent, cfdata_t match, void *aux)
 {
 	struct axi_attach_args * const aa = aux;
 
-	if (aa->aa_addr == IMX6_SATA_BASE)
-		return 1;
+	if (aa->aa_addr != IMX6_SATA_BASE)
+		return 0;
 
-	return 0;
+	/* i.MX6 Solo/SoloLite/DualLite has no SATA interface */
+	switch (IMX6_CHIPID_MAJOR(imx6_chip_id())) {
+	case CHIPID_MAJOR_IMX6SL:
+	case CHIPID_MAJOR_IMX6DL:
+	case CHIPID_MAJOR_IMX6SOLO:
+		return 0;
+	default:
+		break;
+	}
+
+	return 1;
 }
 
 static void

@@ -187,6 +187,7 @@ resizedisk(int fd)
 	hdr = gpt->map_data;
 	hdr->hdr_lba_alt = tpg->map_start;
 	hdr->hdr_crc_self = 0;
+	hdr->hdr_lba_end = htole64(lbt->map_start - 1);
 	hdr->hdr_crc_self =
 	    htole32(crc32(gpt->map_data, GPT_HDR_SIZE));
 	gpt_write(fd, gpt);
@@ -194,6 +195,7 @@ resizedisk(int fd)
 	hdr = tpg->map_data;
 	hdr->hdr_lba_self = htole64(tpg->map_start);
 	hdr->hdr_lba_alt = htole64(gpt->map_start);
+	hdr->hdr_lba_end = htole64(lbt->map_start - 1);
 	hdr->hdr_lba_table = htole64(lbt->map_start);
 	hdr->hdr_crc_self = 0;
 	hdr->hdr_crc_self =

@@ -1293,7 +1293,8 @@ CFDRIVER_DECL(fss, DV_DISK, NULL);
 static int
 fss_modcmd(modcmd_t cmd, void *arg)
 {
-	int bmajor = -1, cmajor = -1,  error = 0;
+	devmajor_t bmajor = -1, cmajor = -1;
+	int error = 0;
 
 	switch (cmd) {
 	case MODULE_CMD_INIT:

@@ -219,7 +219,7 @@ iic*		at exyoiic?
 
 
 # serial console connectivity
-options		SSCOM0CONSOLE, CONSPEED=115200
+options		SSCOM2CONSOLE, CONSPEED=115200
 
 # include all USB devices
 include "dev/usb/usbdevices.config"

@@ -1293,6 +1293,7 @@ again:
 	}
 
 	/* Load the fs node.  Exclusive as new_node->vn_vnode is NULL. */
+	vp->v_iflag |= VI_CHANGING;
 	error = VFS_LOADVNODE(mp, vp, key, key_len, &new_key);
 	if (error) {
 		mutex_enter(&vcache.lock);
@@ -1320,6 +1321,10 @@ again:
 	new_node->vn_key.vk_key = new_key;
 	new_node->vn_vnode = vp;
 	mutex_exit(&vcache.lock);
+	mutex_enter(vp->v_interlock);
+	vp->v_iflag &= ~VI_CHANGING;
+	cv_broadcast(&vp->v_cv);
+	mutex_exit(vp->v_interlock);
 	*vpp = vp;
 	return 0;
 }

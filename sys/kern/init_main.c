@@ -605,9 +605,6 @@ main(void)
 	ptrace_init();
 #endif /* PTRACE */
 
-	/* Initialize the UUID system calls. */
-	uuid_init();
-
 	machdep_init();
 
 	procinit_sysctl();

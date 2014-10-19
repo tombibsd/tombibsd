@@ -190,7 +190,7 @@
 ./usr/lib/powerpc/liblzma.so.1			base-compat-shlib	compat,arch64,pic
 ./usr/lib/powerpc/liblzma.so.1.1		base-compat-shlib	compat,arch64,pic
 ./usr/lib/powerpc/libm.so.0			base-compat-shlib	compat,arch64,pic
-./usr/lib/powerpc/libm.so.0.10			base-compat-shlib	compat,arch64,pic
+./usr/lib/powerpc/libm.so.0.11			base-compat-shlib	compat,arch64,pic
 ./usr/lib/powerpc/libmagic.so.5			base-compat-shlib	compat,arch64,pic
 ./usr/lib/powerpc/libmagic.so.5.0		base-compat-shlib	compat,arch64,pic
 ./usr/lib/powerpc/libmenu.so.6			base-compat-shlib	compat,arch64,pic
@@ -279,7 +279,7 @@
 ./usr/lib/powerpc/libstdc++.so.7		base-compat-shlib	compat,arch64,pic,gcccmds,libstdcxx
 ./usr/lib/powerpc/libstdc++.so.7.0		base-compat-shlib	compat,arch64,pic,gcc=4,libstdcxx
 ./usr/lib/powerpc/libstdc++.so.7.1		base-compat-shlib	compat,arch64,pic,gcc=45,libstdcxx
-./usr/lib/powerpc/libstdc++.so.7.2		base-compat-shlib	compat,arch64,pic,gcc=48,libstdcxx
+./usr/lib/powerpc/libstdc++.so.7.3		base-compat-shlib	compat,arch64,pic,gcc=48,libstdcxx
 ./usr/lib/powerpc/libtermcap.so.0		base-compat-shlib	compat,arch64,pic
 ./usr/lib/powerpc/libtermcap.so.0.6		base-compat-shlib	compat,arch64,pic
 ./usr/lib/powerpc/libterminfo.so.1		base-compat-shlib	compat,arch64,pic

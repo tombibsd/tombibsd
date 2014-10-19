@@ -335,7 +335,7 @@ migrate(int fd)
 	hdr->hdr_lba_alt = htole64(tpg->map_start);
 	hdr->hdr_lba_start = htole64(tbl->map_start + blocks);
 	hdr->hdr_lba_end = htole64(lbt->map_start - 1LL);
-	gpt_uuid_copy(hdr->hdr_guid, gpt_uuid_nil);
+	gpt_uuid_generate(hdr->hdr_guid);
 	hdr->hdr_lba_table = htole64(tbl->map_start);
 	hdr->hdr_entries = htole32((blocks * secsz) / sizeof(struct gpt_ent));
 	if (le32toh(hdr->hdr_entries) > parts)
@@ -344,7 +344,7 @@ migrate(int fd)
 
 	ent = tbl->map_data;
 	for (i = 0; i < le32toh(hdr->hdr_entries); i++) {
-		gpt_uuid_copy(ent[i].ent_guid, gpt_uuid_nil);
+		gpt_uuid_generate(ent[i].ent_guid);
 	}
 
 	/* Mirror partitions. */

@@ -7,6 +7,9 @@ PROG=	zdump
 SRCS=	zdump.c ialloc.c
 MAN=	zdump.8
 
+TZVERSION!= ${TOOL_SED} -ne 's/VERSION=[ 	]*//p' ${NETBSDSRCDIR}/lib/libc/time/Makefile
+CPPFLAGS+=-DPKGVERSION='"(tzcode) "' -DTZVERSION='"${TZVERSION}"'
+
 COPTS.zdump.c += -Wno-format-nonliteral
 
 .PATH: ${NETBSDSRCDIR}/lib/libc/time

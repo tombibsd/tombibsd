@@ -63,11 +63,15 @@ extern struct pool puffs_vapool;
 
 #ifdef PUFFSDEBUG
 extern int puffsdebug; /* puffs_subr.c */
-#define DPRINTF(x) if (puffsdebug > 0) printf x
-#define DPRINTF_VERBOSE(x) if (puffsdebug > 1) printf x
+#define DPRINTF(x) do { \
+		if (puffsdebug > 0) printf x; \
+	} while (/*CONSTCOND*/0)
+#define DPRINTF_VERBOSE(x) do { \
+		if (puffsdebug > 1) printf x; \
+	} while (/*CONSTCOND*/0)
 #else
-#define DPRINTF(x)
-#define DPRINTF_VERBOSE(x)
+#define DPRINTF(x) ((void)0)
+#define DPRINTF_VERBOSE(x) ((void)0)
 #endif
 
 #define MPTOPUFFSMP(mp) ((struct puffs_mount *)((mp)->mnt_data))

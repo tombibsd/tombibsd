@@ -61,14 +61,14 @@
 /if_stf.h/1.4/Sun Dec 11 23:05:25 2005/-kk/
 /if_strip.c/1.97/Mon Jun  9 00:29:31 2014/-kk/
 /if_stripvar.h/1.19/Sat Jul 14 21:02:42 2007/-kk/
-/if_tap.c/1.78/Fri Oct  3 09:51:01 2014/-kk/
+/if_tap.c/1.79/Sun Oct 19 16:06:55 2014/-kk/
 /if_tap.h/1.5/Tue Apr 29 06:53:03 2008/-kk/
 /if_token.h/1.16/Wed Feb 20 17:05:53 2008/-kk/
 /if_tokensubr.c/1.65/Mon Jun  9 00:29:31 2014/-kk/
 /if_tun.c/1.120/Fri Oct  3 09:09:29 2014/-kk/
 /if_tun.h/1.17/Sat Jan 28 01:02:27 2012/-kk/
 /if_types.h/1.26/Sun Aug  5 21:21:41 2012/-kk/
-/if_vlan.c/1.74/Fri Oct  3 09:57:53 2014/-kk/
+/if_vlan.c/1.75/Sun Oct 19 16:06:55 2014/-kk/
 /if_vlanvar.h/1.9/Mon Apr 28 20:24:09 2008/-kk/
 /link_proto.c/1.24/Fri Oct  3 09:26:19 2014/-kk/
 /net_osdep.h/1.18/Wed May  6 22:17:41 2009/-kk/

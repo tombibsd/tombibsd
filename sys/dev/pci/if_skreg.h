@@ -390,6 +390,7 @@
 #define SK_YUKON_EC_U		0xB4
 #define SK_YUKON_EC		0xB6
 #define SK_YUKON_FE		0xB7
+#define SK_YUKON_FE_P		0xB8
 #define SK_YUKON_FAMILY(x) ((x) & 0xB0)
 
 #define SK_IS_GENESIS(sc) \
@@ -397,7 +398,7 @@
 #define SK_IS_YUKON(sc) \
     ((sc)->sk_type >= SK_YUKON && (sc)->sk_type <= SK_YUKON_LP)
 #define SK_IS_YUKON2(sc) \
-    ((sc)->sk_type >= SK_YUKON_XL && (sc)->sk_type <= SK_YUKON_FE)
+    ((sc)->sk_type >= SK_YUKON_XL && (sc)->sk_type <= SK_YUKON_FE_P)
 
 /* Known revisions in SK_CONFIG */
 #define SK_YUKON_LITE_REV_A0	0x0 /* invented, see test in skc_attach */

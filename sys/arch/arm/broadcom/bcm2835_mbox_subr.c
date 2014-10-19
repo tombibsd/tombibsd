@@ -44,12 +44,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <arm/broadcom/bcm2835_mboxreg.h>
 #include <arm/broadcom/bcm2835reg.h>
 
-
-#define	BCM2835_MBOX_CHAN(chan) ((chan) & 0xf)
-#define	BCM2835_MBOX_DATA(data) ((data) & ~0xf)
-
-#define	BCM2835_MBOX_MSG(chan, data) (((chan) & 0xf) | ((data) & ~0xf))
-
 void
 bcm2835_mbox_read(bus_space_tag_t iot, bus_space_handle_t ioh, uint8_t chan,
     uint32_t *data)

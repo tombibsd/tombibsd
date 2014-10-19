@@ -156,7 +156,8 @@ static int
 dm_modcmd(modcmd_t cmd, void *arg)
 {
 #ifdef _MODULE
-	int error, bmajor, cmajor;
+	int error;
+	devmajor_t bmajor, cmajor;
 
 	error = 0;
 	bmajor = -1;

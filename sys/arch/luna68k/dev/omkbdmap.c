@@ -2,7 +2,7 @@
 /*	$OpenBSD: omkbdmap.c,v 1.2 2013/11/16 18:31:44 miod Exp $	*/
 
 /* Partially from:
- *	$NetBSD$
+ *	NetBSD: lunaws.c,v 1.6 2002/03/17 19:40:42 atatat Exp
  *
  * Copyright (c) 2000 The NetBSD Foundation, Inc.
  * All rights reserved.

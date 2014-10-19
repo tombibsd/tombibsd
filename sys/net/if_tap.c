@@ -50,7 +50,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/device.h>
 #include <sys/file.h>
 #include <sys/filedesc.h>
-#include <sys/ksyms.h>
 #include <sys/poll.h>
 #include <sys/proc.h>
 #include <sys/select.h>

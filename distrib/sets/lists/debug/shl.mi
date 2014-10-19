@@ -10,7 +10,7 @@
 ./usr/libdata/debug/lib/libkvm.so.6.0.debug		comp-sys-debug	debug
 ./usr/libdata/debug/lib/liblzf.so.1.0.debug		comp-sys-debug	debug
 ./usr/libdata/debug/lib/liblzma.so.1.1.debug		comp-sys-debug	debug
-./usr/libdata/debug/lib/libm.so.0.10.debug		comp-sys-debug	debug
+./usr/libdata/debug/lib/libm.so.0.11.debug		comp-sys-debug	debug
 ./usr/libdata/debug/lib/libnpf.so.0.0.debug		comp-sys-debug	debug
 ./usr/libdata/debug/lib/libpcap.so.5.0.debug		comp-sys-debug	debug
 ./usr/libdata/debug/lib/libppath.so.0.0.debug		comp-sys-debug	debug
@@ -124,7 +124,7 @@
 ./usr/libdata/debug/usr/lib/liblwres.so.8.0.debug	comp-bind-debug	debug
 ./usr/libdata/debug/usr/lib/liblzf.so.1.0.debug		comp-sys-debug	debug
 ./usr/libdata/debug/usr/lib/liblzma.so.1.1.debug	comp-sys-debug	debug
-./usr/libdata/debug/usr/lib/libm.so.0.10.debug		comp-sys-debug	debug
+./usr/libdata/debug/usr/lib/libm.so.0.11.debug		comp-sys-debug	debug
 ./usr/libdata/debug/usr/lib/libmagic.so.5.0.debug	comp-sys-debug	debug
 ./usr/libdata/debug/usr/lib/libmenu.so.6.0.debug	comp-sys-debug	debug
 ./usr/libdata/debug/usr/lib/libmj.so.1.0.debug		comp-crypto-debug	debug
@@ -252,7 +252,7 @@
 ./usr/libdata/debug/usr/lib/libstdc++.so.5.0.debug	comp-sys-debug	gcc=3,cxx,debug,libstdcxx
 ./usr/libdata/debug/usr/lib/libstdc++.so.7.0.debug	comp-sys-debug	gcc=4,cxx,debug,libstdcxx
 ./usr/libdata/debug/usr/lib/libstdc++.so.7.1.debug	comp-sys-debug	gcc=45,cxx,debug,libstdcxx
-./usr/libdata/debug/usr/lib/libstdc++.so.7.2.debug	comp-sys-debug	gcc=48,cxx,debug,libstdcxx
+./usr/libdata/debug/usr/lib/libstdc++.so.7.3.debug	comp-sys-debug	gcc=48,cxx,debug,libstdcxx
 ./usr/libdata/debug/usr/lib/libterminfo.so.1.0.debug	comp-sys-debug	debug
 ./usr/libdata/debug/usr/lib/libtpm_unseal.so.1.0.debug	comp-tpm-debug	tpm,debug
 ./usr/libdata/debug/usr/lib/libtre.so.0.8.debug		comp-sys-debug	debug

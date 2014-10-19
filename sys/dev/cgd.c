@@ -1006,7 +1006,7 @@ cgd_modcmd(modcmd_t cmd, void *arg)
 	int error = 0;
 
 #ifdef _MODULE
-	int bmajor = -1, cmajor = -1;
+	devmajor_t bmajor = -1, cmajor = -1;
 #endif
 
 	switch (cmd) {

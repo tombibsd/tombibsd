@@ -107,7 +107,7 @@ extern const char *progname;
  * The next two lines define the current version of the config(1) binary,
  * and the minimum version of the configuration files it supports.
  */
-#define CONFIG_VERSION		20140824
+#define CONFIG_VERSION		20141010
 #define CONFIG_MINVERSION	0
 
 /*
@@ -166,14 +166,19 @@ struct defoptlist {
  */
 struct attr {
 	const char *a_name;		/* name of this attribute */
+	struct	attrlist *a_deps;	/* we depend on these other attrs */
+	int	a_expanding;		/* to detect cycles in attr graph */
+	TAILQ_HEAD(, files) a_files;	/* files in this attr */
+
+	/* "interface attribute" */
 	int	a_iattr;		/* true => allows children */
-	const char *a_devclass;		/* device class described */
 	struct	loclist *a_locs;	/* locators required */
 	int	a_loclen;		/* length of above list */
 	struct	nvlist *a_devs;		/* children */
 	struct	nvlist *a_refs;		/* parents */
-	struct	attrlist *a_deps;	/* we depend on these other attrs */
-	int	a_expanding;		/* to detect cycles in attr graph */
+
+	/* "device class" */
+	const char *a_devclass;		/* device class described */
 };
 
 /*
@@ -319,10 +324,10 @@ struct filetype
 	char	fit_lastc;	/* last char from path */
 	const char *fit_path;	/* full file path */
 	const char *fit_prefix;	/* any file prefix */
+	struct attr *fit_attr;	/* owner attr */
+	TAILQ_ENTRY(files) fit_anext;	/* next file in attr */
 };
 /* Anything less than 0x10 is sub-type specific */
-#define FIT_NOPROLOGUE  0x10    /* Don't prepend $S/ */
-#define FIT_FORCESELECT 0x20    /* Always include this file */
 
 /*
  * Files.  Each file is either standard (always included) or optional,
@@ -350,6 +355,8 @@ struct files {
 #define fi_lastc   fi_fit.fit_lastc
 #define fi_path    fi_fit.fit_path
 #define fi_prefix  fi_fit.fit_prefix
+#define fi_attr    fi_fit.fit_attr
+#define fi_anext   fi_fit.fit_anext
 
 /* flags */
 #define	FI_SEL		0x01	/* selected */
@@ -502,6 +509,7 @@ SLIST_HEAD(, prefix)	prefixes,	/* prefix stack */
 			allprefixes;	/* all prefixes used (after popped) */
 SLIST_HEAD(, prefix)	curdirs;	/* curdir stack */
 
+extern struct attr allattr;
 struct	devi **packed;		/* arrayified table for packed devi's */
 size_t	npacked;		/* size of packed table, <= ndevi */
 
@@ -600,6 +608,7 @@ int	emitioconfh(void);
 int	mkioconf(void);
 
 /* mkmakefile.c */
+extern int usekobjs;
 int	mkmakefile(void);
 
 /* mkswap.c */
@@ -622,6 +631,15 @@ int	onlist(struct nvlist *, void *);
 void	prefix_push(const char *);
 void	prefix_pop(void);
 char	*sourcepath(const char *);
+#ifndef MAKE_BOOTSTRAP
+extern	int dflag;
+#define	CFGDBG(n, ...) \
+	do { if ((dflag) >= (n)) cfgdbg(__VA_ARGS__); } while (0)
+void	cfgdbg(const char *, ...)			/* debug info */
+     __printflike(1, 2);
+#else
+#define	CFGDBG(n, ...) /* */
+#endif
 void	cfgwarn(const char *, ...)			/* immediate warns */
      __printflike(1, 2);
 void	cfgxwarn(const char *, int, const char *, ...)	/* delayed warns */

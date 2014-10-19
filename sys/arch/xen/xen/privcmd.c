@@ -576,12 +576,13 @@ privcmd_map_obj(struct vm_map *map, vaddr_t start, paddr_t *maddr,
 	if (error) {
 		if (obj)
 			obj->uobj.pgops->pgo_detach(&obj->uobj);
-		kmem_free(maddr, sizeof(paddr_t) * npages);
-		kmem_free(obj, sizeof(*obj));
 		return error;
 	}
 	if (newstart != start) {
 		printf("uvm_map didn't give us back our vm space\n");
+		uvm_unmap1(map, newstart, newstart + size, 0);
+		if (obj)
+			obj->uobj.pgops->pgo_detach(&obj->uobj);
 		return EINVAL;
 	}
 	return 0;

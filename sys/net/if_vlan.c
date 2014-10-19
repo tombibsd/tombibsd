@@ -695,7 +695,9 @@ vlan_start(struct ifnet *ifp)
 	int error;
 	ALTQ_DECL(struct altq_pktattr pktattr;)
 
+#ifndef NET_MPSAFE
 	KASSERT(KERNEL_LOCKED_P());
+#endif
 
 	ifp->if_flags |= IFF_OACTIVE;
 

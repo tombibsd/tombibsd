@@ -65,6 +65,7 @@ const char *s_none;
 
 static struct hashtab *cfhashtab;	/* for config lookup */
 struct hashtab *devitab;		/* etc */
+struct attr allattr;
 
 static struct attr errattr;
 static struct devbase errdev;
@@ -95,6 +96,12 @@ initsem(void)
 {
 
 	attrtab = ht_new();
+
+	allattr.a_name = "netbsd";
+	TAILQ_INIT(&allattr.a_files);
+	(void)ht_insert(attrtab, allattr.a_name, &allattr);
+	selectattr(&allattr);
+
 	errattr.a_name = "<internal>";
 
 	TAILQ_INIT(&allbases);
@@ -197,19 +204,24 @@ setident(const char *i)
  * all locator lists include a dummy head node, which we discard here.
  */
 int
+defattr0(const char *name, struct loclist *locs, struct attrlist *deps,
+    int devclass)
+{
+
+	if (locs != NULL)
+		return defiattr(name, locs, deps, devclass);
+	else if (devclass)
+		return defdevclass(name, locs, deps, devclass);
+	else
+		return defattr(name, locs, deps, devclass);
+}
+
+int
 defattr(const char *name, struct loclist *locs, struct attrlist *deps,
     int devclass)
 {
 	struct attr *a, *dep;
 	struct attrlist *al;
-	struct loclist *ll;
-	int len;
-
-	if (locs != NULL && devclass)
-		panic("defattr(%s): locators and devclass", name);
-
-	if (deps != NULL && devclass)
-		panic("defattr(%s): dependencies and devclass", name);
 
 	/*
 	 * If this attribute depends on any others, make sure none of
@@ -224,54 +236,96 @@ defattr(const char *name, struct loclist *locs, struct attrlist *deps,
 		}
 	}
 
-	a = ecalloc(1, sizeof *a);
-	if (ht_insert(attrtab, name, a)) {
-		free(a);
+	if (getrefattr(name, &a)) {
 		cfgerror("attribute `%s' already defined", name);
 		loclist_destroy(locs);
 		return (1);
 	}
+	if (a == NULL)
+		a = mkattr(name);
 
-	a->a_name = name;
-	if (locs != NULL) {
-		a->a_iattr = 1;
-		/* unwrap */
-		a->a_locs = locs->ll_next;
-		locs->ll_next = NULL;
-		loclist_destroy(locs);
-	} else {
-		a->a_iattr = 0;
-		a->a_locs = NULL;
+	a->a_deps = deps;
+	expandattr(a, NULL);
+	CFGDBG(3, "attr `%s' defined", a->a_name);
+
+	return (0);
+}
+
+struct attr *
+mkattr(const char *name)
+{
+	struct attr *a;
+
+	a = ecalloc(1, sizeof *a);
+	if (ht_insert(attrtab, name, a)) {
+		free(a);
+		return NULL;
 	}
-	if (devclass) {
-		char classenum[256], *cp;
-		int errored = 0;
+	a->a_name = name;
+	TAILQ_INIT(&a->a_files);
+	CFGDBG(3, "attr `%s' allocated", name);
 
-		(void)snprintf(classenum, sizeof(classenum), "DV_%s", name);
-		for (cp = classenum + 3; *cp; cp++) {
-			if (!errored &&
-			    (!isalnum((unsigned char)*cp) ||
-			      (isalpha((unsigned char)*cp) && !islower((unsigned char)*cp)))) {
-				cfgerror("device class names must be "
-				    "lower-case alphanumeric characters");
-				errored = 1;
-			}
-			*cp = toupper((unsigned char)*cp);
-		}
-		a->a_devclass = intern(classenum);
-	} else
-		a->a_devclass = NULL;
+	return a;
+}
+
+/* "interface attribute" initialization */
+int
+defiattr(const char *name, struct loclist *locs, struct attrlist *deps,
+    int devclass)
+{
+	struct attr *a;
+	int len;
+	struct loclist *ll;
+
+	if (devclass)
+		panic("defattr(%s): locators and devclass", name);
+
+	if (defattr(name, locs, deps, devclass) != 0)
+		return (1);
+
+	a = getattr(name);
+	a->a_iattr = 1;
+	/* unwrap */
+	a->a_locs = locs->ll_next;
+	locs->ll_next = NULL;
+	loclist_destroy(locs);
 	len = 0;
 	for (ll = a->a_locs; ll != NULL; ll = ll->ll_next)
 		len++;
 	a->a_loclen = len;
-	a->a_devs = NULL;
-	a->a_refs = NULL;
-	a->a_deps = deps;
-	a->a_expanding = 0;
+	if (deps)
+		CFGDBG(2, "attr `%s' iface with deps", a->a_name);
+	return (0);
+}
 
-	/* Expand the attribute to check for cycles in the graph. */
-	expandattr(a, NULL);
+/* "device class" initialization */
+int
+defdevclass(const char *name, struct loclist *locs, struct attrlist *deps,
+    int devclass)
+{
+	struct attr *a;
+	char classenum[256], *cp;
+	int errored = 0;
+
+	if (deps)
+		panic("defattr(%s): dependencies and devclass", name);
+
+	if (defattr(name, locs, deps, devclass) != 0)
+		return (1);
+
+	a = getattr(name);
+	(void)snprintf(classenum, sizeof(classenum), "DV_%s", name);
+	for (cp = classenum + 3; *cp; cp++) {
+		if (!errored &&
+		    (!isalnum((unsigned char)*cp) ||
+		      (isalpha((unsigned char)*cp) && !islower((unsigned char)*cp)))) {
+			cfgerror("device class names must be "
+			    "lower-case alphanumeric characters");
+			errored = 1;
+		}
+		*cp = toupper((unsigned char)*cp);
+	}
+	a->a_devclass = intern(classenum);
 
 	return (0);
 }
@@ -354,7 +408,7 @@ defdev(struct devbase *dev, struct loclist *loclist, struct attrlist *attrs,
 	if (loclist != NULL) {
 		ll = loclist;
 		loclist = NULL;	/* defattr disposes of them for us */
-		if (defattr(dev->d_name, ll, NULL, 0))
+		if (defiattr(dev->d_name, ll, NULL, 0))
 			goto bad;
 		attrs = attrlist_cons(attrs, getattr(dev->d_name));
 		/* This used to be stored but was never used */
@@ -386,6 +440,11 @@ defdev(struct devbase *dev, struct loclist *loclist, struct attrlist *attrs,
 	dev->d_ispseudo = ispseudo;
 	dev->d_attrs = attrs;
 	dev->d_classattr = NULL;		/* for now */
+
+	/*
+	 * Implicit attribute definition for device.
+	 */
+	refattr(dev->d_name);
 
 	/*
 	 * For each interface attribute this device refers to, add this
@@ -504,6 +563,12 @@ defdevattach(struct deva *deva, struct devbase *dev, struct nvlist *atlist,
 	deva->d_attrs = attrs;
 	deva->d_atlist = atlist;
 	deva->d_devbase = dev;
+	CFGDBG(3, "deva `%s' defined", deva->d_name);
+
+	/*
+	 * Implicit attribute definition for device attachment.
+	 */
+	refattr(deva->d_name);
 
 	/*
 	 * Turn the `at' list into interface attributes (map each
@@ -602,6 +667,41 @@ getattr(const char *name)
 		a = &errattr;
 	}
 	return (a);
+}
+
+/*
+ * Implicit attribute definition.
+ */
+struct attr *
+refattr(const char *name)
+{
+	struct attr *a;
+
+	if ((a = ht_lookup(attrtab, name)) == NULL)
+		a = mkattr(name);
+	return a;
+}
+
+int
+getrefattr(const char *name, struct attr **ra)
+{
+	struct attr *a;
+
+	a = ht_lookup(attrtab, name);
+	if (a == NULL) {
+		*ra = NULL;
+		return (0);
+	}
+	/*
+	 * Check if the existing attr is only referenced, not really defined.
+	 */
+	if (a->a_deps == NULL &&
+	    a->a_iattr == 0 &&
+	    a->a_devclass == 0) {
+		*ra = a;
+		return (0);
+	}
+	return (1);
 }
 
 /*
@@ -1763,8 +1863,15 @@ split(const char *name, size_t nlen, char *base, size_t bsize, int *aunit)
 void
 selectattr(struct attr *a)
 {
+	struct attrlist *al;
+	struct attr *dep;
 
+	for (al = a->a_deps; al != NULL; al = al->al_next) {
+		dep = al->al_this;
+		selectattr(dep);
+	}
 	(void)ht_insert(selecttab, a->a_name, __UNCONST(a->a_name));
+	CFGDBG(3, "attr selected `%s'", a->a_name);
 }
 
 /*
@@ -1778,12 +1885,14 @@ selectbase(struct devbase *d, struct deva *da)
 	struct attrlist *al;
 
 	(void)ht_insert(selecttab, d->d_name, __UNCONST(d->d_name));
+	CFGDBG(3, "devbase selected `%s'", d->d_name);
 	for (al = d->d_attrs; al != NULL; al = al->al_next) {
 		a = al->al_this;
 		expandattr(a, selectattr);
 	}
 	if (da != NULL) {
 		(void)ht_insert(selecttab, da->d_name, __UNCONST(da->d_name));
+		CFGDBG(3, "devattr selected `%s'", da->d_name);
 		for (al = da->d_attrs; al != NULL; al = al->al_next) {
 			a = al->al_this;
 			expandattr(a, selectattr);

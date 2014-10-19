@@ -281,3 +281,5 @@ extern const int cputyp;
 #define	PGSHIFT		13		/* log2(NBPG) */
 #define	NBPG		(1<<PGSHIFT)	/* bytes/page */
 #define	PGOFSET		(NBPG-1)	/* byte offset into page */
+
+#define PCI_MAGIC_IO_RANGE	0x100000000LL

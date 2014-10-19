@@ -92,6 +92,7 @@ int	yyparse(void);
 
 #ifndef MAKE_BOOTSTRAP
 extern int yydebug;
+int	dflag;
 #endif
 
 static struct dlhash *obsopttab;
@@ -160,14 +161,19 @@ main(int argc, char **argv)
 
 	pflag = 0;
 	xflag = 0;
-	while ((ch = getopt(argc, argv, "D:LPU:dgpvb:s:x")) != -1) {
+	while ((ch = getopt(argc, argv, "D:LMPU:dgpvb:s:x")) != -1) {
 		switch (ch) {
 
 #ifndef MAKE_BOOTSTRAP
 		case 'd':
 			yydebug = 1;
+			dflag++;
 			break;
 #endif
+
+		case 'M':
+			usekobjs = 1;
+			break;
 
 		case 'L':
 			Lflag = 1;
@@ -281,8 +287,6 @@ main(int argc, char **argv)
 	minmaxusers = 1;
 	maxmaxusers = 10000;
 	initintern();
-	initfiles();
-	initsem();
 	ident = NULL;
 	devbasetab = ht_new();
 	devroottab = ht_new();
@@ -310,6 +314,8 @@ main(int argc, char **argv)
 	nextappmkopt = &appmkoptions;
 	nextcndmkopt = &condmkoptions;
 	nextfsopt = &fsoptions;
+	initfiles();
+	initsem();
 
 	/*
 	 * Handle profiling (must do this before we try to create any
@@ -525,6 +531,8 @@ dependopts_one(const char *name)
 	if (fs != NULL) {
 		do_depends(fs->nv_ptr);
 	}
+
+	CFGDBG(3, "depend `%s' searched", name);
 }
 
 static void
@@ -548,6 +556,7 @@ do_depend(struct nvlist *nv)
 		 * If the dependency is an attribute, then just add
 		 * it to the selecttab.
 		 */
+		CFGDBG(3, "depend attr `%s'", nv->nv_name);
 		if ((a = ht_lookup(attrtab, nv->nv_name)) != NULL) {
 			if (a->a_iattr)
 				panic("do_depend(%s): dep `%s' is an iattr",
@@ -692,6 +701,13 @@ deffilesystem(struct nvlist *fses, struct nvlist *deps)
 			    nv->nv_name);
 
 		add_fs_dependencies(nv, deps);
+
+		/*
+		 * Implicit attribute definition for filesystem.
+		 */
+		const char *n; 
+		n = strtolower(nv->nv_name);
+		refattr(n);
 	}
 }
 
@@ -862,6 +878,13 @@ defopt(struct dlhash *ht, const char *fname, struct defoptlist *opts,
 				olddl = olddl->dl_next;
 			olddl->dl_next = dl;
 		}
+
+		/*
+		 * Implicit attribute definition for option.
+		 */
+		const char *n; 
+		n = strtolower(dl->dl_name);
+		refattr(n);
 	}
 }
 
@@ -954,6 +977,14 @@ addoption(const char *name, const char *value)
 	/* make lowercase, then add to select table */
 	n = strtolower(name);
 	(void)ht_insert(selecttab, n, (void *)__UNCONST(n));
+	CFGDBG(3, "option selected `%s'", n);
+
+	/*
+	 * Select attribute if one exists.
+	 */
+	struct attr *a;
+	if ((a = ht_lookup(attrtab, n)) != NULL)
+		selectattr(a);
 }
 
 void
@@ -993,6 +1024,14 @@ addfsoption(const char *name)
 
 	/* Add to select table. */
 	(void)ht_insert(selecttab, n, __UNCONST(n));
+	CFGDBG(3, "fs selected `%s'", name);
+
+	/*
+	 * Select attribute if one exists.
+	 */
+	struct attr *a;
+	if ((a = ht_lookup(attrtab, n)) != NULL)
+		selectattr(a);
 }
 
 void

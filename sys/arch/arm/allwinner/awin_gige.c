@@ -126,10 +126,10 @@ awin_gige_attach(device_t parent, device_t self, void *aux)
 	/*
 	 * We use RGMII phy mode, set up clock accordingly
 	 */
+	bus_space_write_4(aio->aio_core_bst, aio->aio_ccm_bsh,
+	    AWIN_GMAC_CLK_REG, 4); /* GPIT = RMII */
 	awin_reg_set_clear(aio->aio_core_bst, aio->aio_ccm_bsh,
-	    AWIN_GMAC_CLK_REG, 4, 3);
-	awin_reg_set_clear(aio->aio_core_bst, aio->aio_ccm_bsh,
-	    AWIN_GMAC_CLK_REG, 2, 0);
+	    AWIN_GMAC_CLK_REG, 2, 0); /* GTCS = internal transmit clock */
 
 	dwc_gmac_attach(&sc->sc_core, 2);
 }

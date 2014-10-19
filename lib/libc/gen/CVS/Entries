@@ -46,7 +46,7 @@
 /ctype_.c/1.20/Thu Oct 24 10:28:53 2013/-kk/
 /daemon.3/1.15/Thu Aug  7 16:42:46 2003/-kk/
 /daemon.c/1.10/Mon Jun 25 22:32:43 2012/-kk/
-/dehumanize_number.c/1.5/Fri Oct  3 10:04:44 2014/-kk/
+/dehumanize_number.c/1.7/Sun Oct 19 16:06:19 2014/-kk/
 /devname.3/1.12/Sun Jun  3 21:42:46 2012/-kk/
 /devname.c/1.22/Sun Jun  3 21:42:46 2012/-kk/
 /directory.3/1.38/Mon Oct  8 18:15:09 2012/-kk/

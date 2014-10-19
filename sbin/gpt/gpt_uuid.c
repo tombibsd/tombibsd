@@ -35,14 +35,18 @@
 __RCSID("$NetBSD$");
 #endif
 
+#include <err.h>
+#include <fcntl.h>
 #include <stdio.h>
+#include <unistd.h>
 
 #include "map.h"
 #include "gpt.h"
 
-#ifndef HAVE_NBTOOLS_CONFIG_H
+#if defined(HAVE_SYS_ENDIAN_H) || ! defined(HAVE_NBTOOL_CONFIG_H)
 #include <sys/endian.h>
 #endif
+
 
 const gpt_uuid_t gpt_uuid_nil;
 
@@ -211,8 +215,10 @@ gpt_uuid_parse(const char *s, gpt_uuid_t uuid)
 {
 	struct dce_uuid u;
 
-	if (gpt_uuid_parse_numeric(s, &u) != -1)
+	if (gpt_uuid_parse_numeric(s, &u) != -1) {
+		gpt_dce_to_uuid(&u, uuid);
 		return 0;
+	}
 
 	if (gpt_uuid_parse_symbolic(s, &u) == -1)
 		return -1;
@@ -227,4 +233,39 @@ gpt_uuid_create(gpt_type_t t, gpt_uuid_t u, uint16_t *b, size_t s)
 	gpt_dce_to_uuid(&gpt_nv[t].u, u);
 	if (b)
 		utf8_to_utf16((const uint8_t *)gpt_nv[t].d, b, s / sizeof(*b));
+}
+
+void
+gpt_uuid_generate(gpt_uuid_t t)
+{
+	struct dce_uuid u;
+	int fd;
+	uint8_t *p;
+	size_t n;
+	ssize_t nread;
+
+	/* Randomly generate the content.  */
+	fd = open("/dev/urandom", O_RDONLY | O_CLOEXEC);
+	if (fd == -1)
+		err(1, "open(/dev/urandom)");
+	for (p = (void *)&u, n = sizeof u; 0 < n; p += nread, n -= nread) {
+		nread = read(fd, p, n);
+		if (nread < 0)
+			err(1, "read(/dev/urandom)");
+		if (nread == 0)
+			errx(1, "EOF from /dev/urandom");
+		if ((size_t)nread > n)
+			errx(1, "read too much: %zd > %zu", nread, n);
+	}
+	(void)close(fd);
+
+	/* Set the version number to 4.  */
+	u.time_hi_and_version &= ~(uint32_t)0xf000;
+	u.time_hi_and_version |= 0x4000;
+
+	/* Fix the reserved bits.  */
+	u.clock_seq_hi_and_reserved &= ~(uint8_t)0x40;
+	u.clock_seq_hi_and_reserved |= 0x80;
+
+	gpt_dce_to_uuid(&u, t);
 }

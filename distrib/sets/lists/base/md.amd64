@@ -204,7 +204,7 @@
 ./usr/lib/i386/liblzma.so.1			base-compat-shlib	compat,pic
 ./usr/lib/i386/liblzma.so.1.1			base-compat-shlib	compat,pic
 ./usr/lib/i386/libm.so.0			base-compat-shlib	compat,pic
-./usr/lib/i386/libm.so.0.10			base-compat-shlib	compat,pic
+./usr/lib/i386/libm.so.0.11			base-compat-shlib	compat,pic
 ./usr/lib/i386/libmagic.so.5			base-compat-shlib	compat,pic
 ./usr/lib/i386/libmagic.so.5.0			base-compat-shlib	compat,pic
 ./usr/lib/i386/libmenu.so.6			base-compat-shlib	compat,pic
@@ -299,7 +299,7 @@
 ./usr/lib/i386/libstdc++.so.7			base-compat-shlib	compat,pic,gcccmds,libstdcxx
 ./usr/lib/i386/libstdc++.so.7.0			base-compat-shlib	gcc=4,compat,pic,libstdcxx
 ./usr/lib/i386/libstdc++.so.7.1			base-compat-shlib	gcc=45,compat,pic,libstdcxx
-./usr/lib/i386/libstdc++.so.7.2			base-compat-shlib	gcc=48,compat,pic,libstdcxx
+./usr/lib/i386/libstdc++.so.7.3			base-compat-shlib	gcc=48,compat,pic,libstdcxx
 ./usr/lib/i386/libsupc++.so.1			base-obsolete		obsolete
 ./usr/lib/i386/libsupc++.so.1.0			base-obsolete		obsolete
 ./usr/lib/i386/libtermcap.so.0			base-compat-shlib	compat,pic

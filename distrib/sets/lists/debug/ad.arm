@@ -136,7 +136,7 @@
 ./usr/libdata/debug/usr/lib/oabi/liblwres.so.8.0.debug	comp-bind-debug	debug,compat
 ./usr/libdata/debug/usr/lib/oabi/liblzf.so.1.0.debug		comp-sys-debug	debug,compat
 ./usr/libdata/debug/usr/lib/oabi/liblzma.so.1.1.debug	comp-sys-debug	debug,compat
-./usr/libdata/debug/usr/lib/oabi/libm.so.0.10.debug		comp-sys-debug	debug,compat
+./usr/libdata/debug/usr/lib/oabi/libm.so.0.11.debug		comp-sys-debug	debug,compat
 ./usr/libdata/debug/usr/lib/oabi/libmagic.so.5.0.debug	comp-sys-debug	debug,compat
 ./usr/libdata/debug/usr/lib/oabi/libmenu.so.6.0.debug	comp-sys-debug	debug,compat
 ./usr/libdata/debug/usr/lib/oabi/libmj.so.1.0.debug		comp-crypto-debug	debug,compat
@@ -190,7 +190,7 @@
 ./usr/libdata/debug/usr/lib/oabi/libstdc++.so.5.0.debug	comp-sys-debug	gcc=3,cxx,debug,compat,libstdcxx
 ./usr/libdata/debug/usr/lib/oabi/libstdc++.so.7.0.debug	comp-sys-debug	gcc=4,cxx,debug,compat,libstdcxx
 ./usr/libdata/debug/usr/lib/oabi/libstdc++.so.7.1.debug	comp-sys-debug	gcc=45,cxx,debug,compat,libstdcxx
-./usr/libdata/debug/usr/lib/oabi/libstdc++.so.7.2.debug	comp-sys-debug	gcc=48,cxx,debug,compat,libstdcxx
+./usr/libdata/debug/usr/lib/oabi/libstdc++.so.7.3.debug	comp-sys-debug	gcc=48,cxx,debug,compat,libstdcxx
 ./usr/libdata/debug/usr/lib/oabi/libterminfo.so.1.0.debug	comp-sys-debug	debug,compat
 ./usr/libdata/debug/usr/lib/oabi/libtre.so.0.8.debug	comp-sys-debug	debug,compat
 ./usr/libdata/debug/usr/lib/oabi/libukfs.so.1.0.debug	comp-sys-debug	debug,compat,rump

@@ -80,6 +80,7 @@ static char sccsid[] = "@(#)sinh.c	8.1 (Berkeley) 6/4/93";
 
 #ifdef __weak_alias
 __weak_alias(sinh, _sinh);
+__weak_alias(_sinhl, _sinh);
 __weak_alias(sinhf, _sinhf);
 #endif
 

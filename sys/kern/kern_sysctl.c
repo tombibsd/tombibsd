@@ -1636,6 +1636,7 @@ sysctl_mmap(SYSCTLFN_ARGS)
 	const struct sysctlnode *node;
 	struct sysctlnode nnode;
 	int error;
+	int sysctl_num;
 
 	if (SYSCTL_VERS(rnode->sysctl_flags) != SYSCTL_VERSION) {
 		printf("sysctl_mmap: rnode %p wrong version\n", rnode);
@@ -1663,7 +1664,8 @@ sysctl_mmap(SYSCTLFN_ARGS)
 	if (namelen != 1)
 		return (EOPNOTSUPP);
 	node = rnode;
-        error = sysctl_locate(l, &nnode.sysctl_num, 1, &node, NULL);
+	sysctl_num = nnode.sysctl_num;
+	error = sysctl_locate(l, &sysctl_num, 1, &node, NULL);
 	if (error)
 		return (error);
 

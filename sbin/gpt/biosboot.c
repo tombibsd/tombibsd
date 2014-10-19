@@ -43,7 +43,9 @@ __RCSID("$NetBSD$");
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <sys/ioctl.h>
+#ifdef DIOCGWEDGEINFO
 #include <sys/disk.h>
+#endif
 #include <sys/param.h>
 #include <sys/bootblock.h>
 

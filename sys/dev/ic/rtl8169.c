@@ -611,6 +611,14 @@ re_attach(struct rtk_softc *sc)
 			sc->sc_quirk |= RTKQ_DESCV2 | RTKQ_NOEECMD |
 			    RTKQ_MACSTAT | RTKQ_CMDSTOP | RTKQ_NOJUMBO;
 			break;
+		case RTK_HWREV_8168G:
+		case RTK_HWREV_8168G_SPIN1:
+		case RTK_HWREV_8168G_SPIN2:
+		case RTK_HWREV_8168G_SPIN4:
+			sc->sc_quirk |= RTKQ_DESCV2 | RTKQ_NOEECMD |
+			    RTKQ_MACSTAT | RTKQ_CMDSTOP | RTKQ_NOJUMBO | 
+			    RTKQ_RXDV_GATED;
+			break;
 		case RTK_HWREV_8100E:
 		case RTK_HWREV_8100E_SPIN2:
 		case RTK_HWREV_8101E:
@@ -1834,6 +1842,11 @@ re_init(struct ifnet *ifp)
 	CSR_WRITE_4(sc, RTK_TXLIST_ADDR_LO,
 	    RE_ADDR_LO(sc->re_ldata.re_tx_list_map->dm_segs[0].ds_addr));
 
+	if (sc->sc_quirk & RTKQ_RXDV_GATED) {
+		CSR_WRITE_4(sc, RTK_MISC,
+		    CSR_READ_4(sc, RTK_MISC) & ~RTK_MISC_RXDV_GATED_EN);
+	}
+		
 	/*
 	 * Enable transmit and receive.
 	 */

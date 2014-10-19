@@ -5,6 +5,7 @@
 # Included by ports that need it.
 
 defflag	opt_sdmmc.h			SDMMC_DEBUG SDHC_DEBUG SDMMCCISDEBUG
+defflag	opt_sdmmc.h			LD_SDMMC_DEBUG
 
 device sdmmc {}
 attach sdmmc at sdmmcbus

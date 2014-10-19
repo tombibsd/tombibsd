@@ -613,6 +613,8 @@ vioif_attach(device_t parent, device_t self, void *aux)
 	ifp->if_capabilities = 0;
 	ifp->if_watchdog = vioif_watchdog;
 
+	sc->sc_ethercom.ec_capabilities |= ETHERCAP_VLAN_MTU;
+
 	if_attach(ifp);
 	ether_ifattach(ifp, sc->sc_mac);
 
@@ -650,12 +652,13 @@ vioif_deferred_init(device_t self)
 	struct ifnet *ifp = &sc->sc_ethercom.ec_if;
 	int r;
 
+	if (ifp->if_flags & IFF_PROMISC)
+		return;
+
 	r =  vioif_set_promisc(sc, false);
 	if (r != 0)
 		aprint_error_dev(self, "resetting promisc mode failed, "
 				 "errror code %d\n", r);
-	else
-		ifp->if_flags &= ~IFF_PROMISC;
 }
 
 /*

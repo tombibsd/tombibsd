@@ -49,6 +49,10 @@ COMMON_CONFIGURE_ARGS+=	--with-arch=${GCC_CONFIG_ARCH.${MACHINE_ARCH}}
 COMMON_CONFIGURE_ARGS+=	--with-tune=${GCC_CONFIG_TUNE.${MACHINE_ARCH}}
 .endif
 
+.if ${HAVE_GCC} == 48
+COMMON_CONFIGURE_ARGS+= --enable-libstdcxx-time=rt
+.endif
+
 CONFIGURE_ARGS=	${COMMON_CONFIGURE_ARGS}
 CONFIGURE_ARGS+= \
 		--with-sysroot=${DESTDIR} \

@@ -927,8 +927,6 @@ makeun(struct mbuf *nam, size_t *addrlen) {
 	sun = malloc(*addrlen, M_SONAME, M_WAITOK);
 	m_copydata(nam, 0, nam->m_len, (void *)sun);
 	*(((char *)sun) + nam->m_len) = '\0';
-	sun->sun_len = strlen(sun->sun_path) +
-	    offsetof(struct sockaddr_un, sun_path);
 	return sun;
 }
 

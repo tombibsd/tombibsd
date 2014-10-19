@@ -29,9 +29,10 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#ifdef HAVE_NBTOOLS_CONFIG_H
-#include "nbtools_config.h"
-#endif /* HAVE_NBTOOLS_CONFIG_H */
+
+#ifdef HAVE_NBTOOL_CONFIG_H
+#include "nbtool_config.h"
+#endif /* HAVE_NBTOOL_CONFIG_H */
 
 #include <sys/cdefs.h>
 #if defined(LIBC_SCCS) && !defined(lint)

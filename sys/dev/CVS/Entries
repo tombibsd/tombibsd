@@ -12,7 +12,7 @@
 /biovar.h/1.8/Thu May  7 12:15:33 2009/-kk/
 /ccd.c/1.152/Fri Oct  3 09:36:15 2014/-kk/
 /ccdvar.h/1.34/Fri Oct  3 09:36:15 2014/-kk/
-/cgd.c/1.90/Fri Oct  3 09:09:12 2014/-kk/
+/cgd.c/1.91/Sun Oct 19 16:06:44 2014/-kk/
 /cgd_crypto.c/1.12/Thu Oct 24 10:28:57 2013/-kk/
 /cgd_crypto.h/1.7/Wed Dec  5 02:23:20 2012/-kk/
 /cgdvar.h/1.17/Tue Mar 25 02:35:31 2014/-kk/
@@ -27,9 +27,10 @@
 /devlist2h.awk/1.1/Sun Sep 21 14:30:22 2014/-kk/
 /dksubr.c/1.51/Wed Jun 18 08:42:58 2014/-kk/
 /dkvar.h/1.19/Tue Jun  3 03:09:43 2014/-kk/
+/files.audio/1.2/Fri Oct 10 17:21:20 2014/-kk/
 /firmload.c/1.19/Fri Apr 11 02:03:41 2014/-kk/
 /firmload.h/1.2/Mon Apr 28 20:23:46 2008/-kk/
-/fss.c/1.91/Fri Oct  3 09:09:12 2014/-kk/
+/fss.c/1.92/Sun Oct 19 16:06:44 2014/-kk/
 /fssvar.h/1.28/Sat Mar  1 06:04:40 2014/-kk/
 /keylock.c/1.3/Sat Mar  1 06:04:40 2014/-kk/
 /keylock.h/1.1/Sat Aug 15 09:43:58 2009/-kk/

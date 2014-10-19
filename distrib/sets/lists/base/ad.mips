@@ -207,7 +207,7 @@
 ./usr/lib/64/liblzma.so.1			base-compat-shlib	compat,pic,arch64
 ./usr/lib/64/liblzma.so.1.1			base-compat-shlib	compat,pic,arch64
 ./usr/lib/64/libm.so.0				base-compat-shlib	compat,pic,arch64
-./usr/lib/64/libm.so.0.10			base-compat-shlib	compat,pic,arch64
+./usr/lib/64/libm.so.0.11			base-compat-shlib	compat,pic,arch64
 ./usr/lib/64/libmagic.so.5			base-compat-shlib	compat,pic,arch64
 ./usr/lib/64/libmagic.so.5.0			base-compat-shlib	compat,pic,arch64
 ./usr/lib/64/libmenu.so.6			base-compat-shlib	compat,pic,arch64
@@ -305,7 +305,7 @@
 ./usr/lib/64/libstdc++.so.7			base-compat-shlib	compat,pic,cxx,gcccmds,libstdcxx,arch64
 ./usr/lib/64/libstdc++.so.7.0			base-compat-shlib	gcc=4,compat,pic,cxx,libstdcxx,arch64
 ./usr/lib/64/libstdc++.so.7.1			base-compat-shlib	gcc=45,compat,pic,cxx,libstdcxx,arch64
-./usr/lib/64/libstdc++.so.7.2			base-compat-shlib	gcc=48,compat,pic,cxx,libstdcxx,arch64
+./usr/lib/64/libstdc++.so.7.3			base-compat-shlib	gcc=48,compat,pic,cxx,libstdcxx,arch64
 ./usr/lib/64/libsupc++.so.0			base-compat-shlib	obsolete,arch64
 ./usr/lib/64/libsupc++.so.0.0			base-compat-shlib	obsolete,arch64
 ./usr/lib/64/libtermcap.so.0			base-compat-shlib	compat,pic,arch64
@@ -546,7 +546,7 @@
 ./usr/lib/o32/liblzma.so.1			base-compat-shlib	compat,pic,arch64
 ./usr/lib/o32/liblzma.so.1.1			base-compat-shlib	compat,pic,arch64
 ./usr/lib/o32/libm.so.0				base-compat-shlib	compat,pic,arch64
-./usr/lib/o32/libm.so.0.10			base-compat-shlib	compat,pic,arch64
+./usr/lib/o32/libm.so.0.11			base-compat-shlib	compat,pic,arch64
 ./usr/lib/o32/libmagic.so.5			base-compat-shlib	compat,pic,arch64
 ./usr/lib/o32/libmagic.so.5.0			base-compat-shlib	compat,pic,arch64
 ./usr/lib/o32/libmenu.so.6			base-compat-shlib	compat,pic,arch64
@@ -644,7 +644,7 @@
 ./usr/lib/o32/libstdc++.so.7			base-compat-shlib	compat,pic,cxx,gcccmds,libstdcxx,arch64
 ./usr/lib/o32/libstdc++.so.7.0			base-compat-shlib	gcc=4,compat,pic,cxx,libstdcxx,arch64
 ./usr/lib/o32/libstdc++.so.7.1			base-compat-shlib	gcc=45,compat,pic,cxx,libstdcxx,arch64
-./usr/lib/o32/libstdc++.so.7.2			base-compat-shlib	gcc=48,compat,pic,cxx,libstdcxx,arch64
+./usr/lib/o32/libstdc++.so.7.3			base-compat-shlib	gcc=48,compat,pic,cxx,libstdcxx,arch64
 ./usr/lib/o32/libsupc++.so.0			base-compat-shlib	obsolete,arch64
 ./usr/lib/o32/libsupc++.so.0.0			base-compat-shlib	obsolete,arch64
 ./usr/lib/o32/libtermcap.so.0			base-compat-shlib	compat,pic,arch64

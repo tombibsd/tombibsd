@@ -3,7 +3,7 @@
 /acpi.c/1.258/Sat Mar  1 06:04:40 2014/-kk/
 /acpi_acad.c/1.50/Fri Jun  3 18:40:41 2011/-kk/
 /acpi_apm.c/1.20/Sun Oct 24 07:53:04 2010/-kk/
-/acpi_bat.c/1.112/Tue Aug 14 14:36:43 2012/-kk/
+/acpi_bat.c/1.113/Sun Oct 19 16:06:44 2014/-kk/
 /acpi_button.c/1.41/Sun Feb 20 06:59:53 2011/-kk/
 /acpi_cpu.c/1.50/Sat Mar  1 06:04:40 2014/-kk/
 /acpi_cpu.h/1.44/Fri Apr 27 04:38:24 2012/-kk/

@@ -82,7 +82,7 @@ static int bcmemmc_match(device_t, struct cfdata *, void *);
 static void bcmemmc_attach(device_t, device_t, void *);
 static void bcmemmc_attach_i(device_t);
 #if NBCMDMAC > 0
-static int bcmemmc_xfer_data_dma(struct sdhc_host *, struct sdmmc_command *);
+static int bcmemmc_xfer_data_dma(struct sdhc_softc *, struct sdmmc_command *);
 static void bcmemmc_dma_done(void *);
 #endif
 
@@ -118,7 +118,7 @@ bcmemmc_attach(device_t parent, device_t self, void *aux)
 	sc->sc.sc_flags |= SDHC_FLAG_HOSTCAPS;
 	sc->sc.sc_flags |= SDHC_FLAG_NO_HS_BIT;
 	sc->sc.sc_caps = SDHC_VOLTAGE_SUPP_3_3V | SDHC_HIGH_SPEED_SUPP |
-	    SDHC_MAX_BLK_LEN_1024;
+	    (SDHC_MAX_BLK_LEN_1024 << SDHC_MAX_BLK_LEN_SHIFT);
 
 	sc->sc.sc_host = sc->sc_hosts;
 	sc->sc.sc_clkbase = 50000;	/* Default to 50MHz */
@@ -239,9 +239,9 @@ fail:
 
 #if NBCMDMAC > 0
 static int
-bcmemmc_xfer_data_dma(struct sdhc_host *hp, struct sdmmc_command *cmd)
+bcmemmc_xfer_data_dma(struct sdhc_softc *sdhc_sc, struct sdmmc_command *cmd)
 {
-	struct bcmemmc_softc * const sc = *(void **)hp;	/* XXX XXX XXX */
+	struct bcmemmc_softc * const sc = device_private(sdhc_sc->sc_dev);
 	size_t seg;
 	int error;
 

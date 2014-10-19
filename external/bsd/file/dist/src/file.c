@@ -34,7 +34,7 @@
 
 #ifndef	lint
 #if 0
-FILE_RCSID("@(#)$File: file.c,v 1.153 2014/02/11 15:41:04 christos Exp $")
+FILE_RCSID("@(#)$File: file.c,v 1.154 2014/09/10 18:41:51 christos Exp $")
 #else
 __RCSID("$NetBSD$");
 #endif
@@ -58,9 +58,6 @@ __RCSID("$NetBSD$");
 #endif
 #ifdef HAVE_UNISTD_H
 #include <unistd.h>	/* for read() */
-#endif
-#ifdef HAVE_LOCALE_H
-#include <locale.h>
 #endif
 #ifdef HAVE_WCHAR_H
 #include <wchar.h>

@@ -59,7 +59,7 @@ libgcc.map:	${LIBGCC_S_OBJS} ${G_SHLIB_MKMAP} ${G_SHLIB_MAPFILES}
 		${NM} ${G_SHLIB_NM_FLAGS} ${LIBGCC_S_OBJS}; \
 		echo %%; \
 		for f in ${G_SHLIB_MAPFILES}; do \
-			if [ -f ${.OBJDIR}/$${f}]; then \
+			if [ -f ${.OBJDIR}/$${f} ]; then \
 				cat ${.OBJDIR}/$${f}; \
 			else \
 				cat $${f}; \

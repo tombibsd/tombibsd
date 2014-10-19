@@ -381,7 +381,10 @@ acpibat_get_info(device_t dv)
 			goto out;
 		}
 
-		KDASSERT((uint64_t)elm[i].Integer.Value < INT_MAX);
+		if (elm[i].Integer.Value >= INT_MAX) {
+			rv = AE_LIMIT;
+			goto out;
+		}
 	}
 
 	if ((elm[ACPIBAT_BIF_UNIT].Integer.Value & ACPIBAT_PWRUNIT_MA) != 0) {
