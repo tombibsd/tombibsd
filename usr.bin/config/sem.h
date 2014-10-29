@@ -61,6 +61,7 @@ struct attr    *refattr(const char *);
 int		getrefattr(const char *, struct attr **);
 void		expandattr(struct attr *, void (*)(struct attr *));
 void		selectattr(struct attr *);
+void		dependattrs(void);
 void		setmajor(struct devbase *, int);
 void		addconf(struct config *);
 void		setconf(struct nvlist **, const char *, struct nvlist *);

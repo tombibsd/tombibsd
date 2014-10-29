@@ -84,7 +84,7 @@
 #define	FAT32(pmp)	(pmp->pm_fatmask == FAT32_MASK)
 
 /*
- * M$ in it's unlimited wisdom desided that EOF mark is anything
+ * M$ in its unlimited wisdom decided that EOF mark is anything
  * between 0xfffffff8 and 0xffffffff (masked by appropriate fatmask,
  * of course).
  * Note that cn is supposed to be already adjusted accordingly to FAT type.

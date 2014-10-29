@@ -61,7 +61,7 @@ extern cyclic_clock_func_t	cyclic_clock_func[];
 /*
  * The dtrace module handles traps that occur during a DTrace probe.
  * This type definition is used in the trap handler to provide a
- * hook for the dtrace module to register it's handler with.
+ * hook for the dtrace module to register its handler with.
  */
 typedef int (*dtrace_trap_func_t)(struct trapframe *, u_int);
 

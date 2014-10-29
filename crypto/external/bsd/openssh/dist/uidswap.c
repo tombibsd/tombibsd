@@ -1,5 +1,5 @@
 /*	$NetBSD$	*/
-/* $OpenBSD: uidswap.c,v 1.35 2006/08/03 03:34:42 deraadt Exp $ */
+/* $OpenBSD: uidswap.c,v 1.36 2013/11/08 11:15:19 dtucker Exp $ */
 /*
  * Author: Tatu Ylonen <ylo@cs.hut.fi>
  * Copyright (c) 1995 Tatu Ylonen <ylo@cs.hut.fi>, Espoo, Finland
@@ -21,6 +21,7 @@ __RCSID("$NetBSD$");
 #include <string.h>
 #include <unistd.h>
 #include <stdarg.h>
+#include <stdlib.h>
 
 #include "log.h"
 #include "uidswap.h"

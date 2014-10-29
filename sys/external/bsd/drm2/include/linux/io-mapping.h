@@ -146,7 +146,7 @@ static inline void
 io_mapping_unmap_atomic(struct io_mapping *mapping, void *ptr)
 {
 
-	return io_mapping_unmap(mapping, ptr);
+	io_mapping_unmap(mapping, ptr);
 }
 
 #endif  /* _LINUX_IO_MAPPING_H_ */

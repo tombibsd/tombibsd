@@ -437,7 +437,7 @@ pmap_tlb_asid_reinitialize(struct pmap_tlb_info *ti, enum tlb_invalidate_op op)
 			tlb_invalidate_asids(KERNEL_PID + 1, ti->ti_asid_max);
 #else /* MULTIPROCESSOR && !PMAP_NEED_TLB_SHOOTDOWN */
 			/*
-			 * For those systems (PowerPC) that don't need require
+			 * For those systems (PowerPC) that don't require
 			 * cross cpu TLB shootdowns, we have to invalidate the
 			 * entire TLB because we can't record the ASIDs in use
 			 * on the other CPUs.  This is hopefully cheaper than

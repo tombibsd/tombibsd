@@ -1603,7 +1603,7 @@ send_adb_iop(int cmd, u_char * buffer, void *compRout, void *data)
  *
  * If in->unsol is 1, then this packet was unsolicited and
  * so we look up the device in the ADB device table to determine
- * what it's default service routine is.
+ * what its default service routine is.
  *
  * If in->ack_only is 1, then we really only need to call
  * the completion routine, so don't do any other stuff.

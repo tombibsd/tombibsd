@@ -1,5 +1,5 @@
 /*	$NetBSD$	*/
-/* $OpenBSD: auth2-chall.c,v 1.38.2.1 2013/11/08 01:33:56 djm Exp $ */
+/* $OpenBSD: auth2-chall.c,v 1.41 2014/02/02 03:44:31 djm Exp $ */
 /*
  * Copyright (c) 2001 Markus Friedl.  All rights reserved.
  * Copyright (c) 2001 Per Allansson.  All rights reserved.
@@ -41,6 +41,7 @@ __RCSID("$NetBSD$");
 #include "packet.h"
 #include "dispatch.h"
 #include "log.h"
+#include "misc.h"
 #include "servconf.h"
 
 /* import */    
@@ -122,7 +123,7 @@ kbdint_alloc(const char *devs)
 			    strlen(devices[i]->name));
 		}
 		buffer_append(&b, "\0", 1);
-		kbdintctxt->devices = xstrdup(buffer_ptr(&b));
+		kbdintctxt->devices = xstrdup((const char *)buffer_ptr(&b));
 		buffer_free(&b);
 	} else {
 		kbdintctxt->devices = xstrdup(devs);
@@ -149,7 +150,7 @@ kbdint_free(KbdintAuthctxt *kbdintctxt)
 	if (kbdintctxt->device)
 		kbdint_reset_device(kbdintctxt);
 	free(kbdintctxt->devices);
-	bzero(kbdintctxt, sizeof(*kbdintctxt));
+	explicit_bzero(kbdintctxt, sizeof(*kbdintctxt));
 	free(kbdintctxt);
 }
 /* get next device */
@@ -313,7 +314,7 @@ input_userauth_info_response(int type, u_int32_t seq, void *ctxt)
 	res = kbdintctxt->device->respond(kbdintctxt->ctxt, nresp, response);
 
 	for (i = 0; i < nresp; i++) {
-		memset(response[i], 'r', strlen(response[i]));
+		explicit_bzero(response[i], strlen(response[i]));
 		free(response[i]);
 	}
 	free(response);

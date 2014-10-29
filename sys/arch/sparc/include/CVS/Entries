@@ -17,7 +17,7 @@
 /ctlreg.h/1.29/Tue Dec 17 04:13:29 2013/-kk/
 /db_machdep.h/1.26/Thu May 26 15:34:13 2011/-kk/
 /disklabel.h/1.6/Tue Aug 30 12:39:58 2011/-kk/
-/eeprom.h/1.9/Mon Apr 28 20:23:36 2008/-kk/
+/eeprom.h/1.10/Wed Oct 29 08:13:12 2014/-kk/
 /elf_machdep.h/1.7/Sat May 30 05:56:53 2009/-kk/
 /endian.h/1.13/Fri Mar 17 00:09:25 2000/-kk/
 /endian_machdep.h/1.1/Fri Mar 17 00:09:25 2000/-kk/

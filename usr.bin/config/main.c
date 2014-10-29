@@ -92,8 +92,8 @@ int	yyparse(void);
 
 #ifndef MAKE_BOOTSTRAP
 extern int yydebug;
-int	dflag;
 #endif
+int	dflag;
 
 static struct dlhash *obsopttab;
 static struct hashtab *mkopttab;
@@ -149,6 +149,7 @@ static	int	extract_config(const char *, const char *, int);
 int badfilename(const char *fname);
 
 const char *progname;
+extern const char *yyfile;
 
 int
 main(int argc, char **argv)
@@ -164,12 +165,12 @@ main(int argc, char **argv)
 	while ((ch = getopt(argc, argv, "D:LMPU:dgpvb:s:x")) != -1) {
 		switch (ch) {
 
-#ifndef MAKE_BOOTSTRAP
 		case 'd':
+#ifndef MAKE_BOOTSTRAP
 			yydebug = 1;
+#endif
 			dflag++;
 			break;
-#endif
 
 		case 'M':
 			usekobjs = 1;
@@ -407,16 +408,19 @@ main(int argc, char **argv)
 	/*
 	 * Handle command line overrides
 	 */
+	yyfile = "handle_cmdline_makeoptions";
 	handle_cmdline_makeoptions();
 
 	/*
 	 * Detect and properly ignore orphaned devices
 	 */
+	yyfile = "kill_orphans";
 	kill_orphans();
 
 	/*
 	 * Select devices and pseudo devices and their attributes
 	 */
+	yyfile = "fixdevis";
 	if (fixdevis())
 		stop();
 
@@ -424,33 +428,44 @@ main(int argc, char **argv)
 	 * If working on an ioconf-only config, process here and exit
 	 */
 	if (ioconfname) {
+		yyfile = "pack";
 		pack();
+		yyfile = "mkioconf";
 		mkioconf();
+		yyfile = "emitlocs";
 		emitlocs();
+		yyfile = "emitioconfh";
 		emitioconfh();
 		return 0;
 	}
 
+	yyfile = "dependattrs";
+	dependattrs();
+
 	/*
 	 * Deal with option dependencies.
 	 */
+	yyfile = "dependopts";
 	dependopts();
 
 	/*
 	 * Fix (as in `set firmly in place') files.
 	 */
+	yyfile = "fixfiles";
 	if (fixfiles())
 		stop();
 
 	/*
 	 * Fix objects and libraries.
 	 */
+	yyfile = "fixobjects";
 	if (fixobjects())
 		stop();
 
 	/*
 	 * Fix device-majors.
 	 */
+	yyfile = "fixdevsw";
 	if (fixdevsw())
 		stop();
 
@@ -474,10 +489,13 @@ main(int argc, char **argv)
 	 * Squeeze things down and finish cross-checks (STAR checks must
 	 * run after packing).
 	 */
+	yyfile = "pack";
 	pack();
+	yyfile = "badstar";
 	if (badstar())
 		stop();
 
+	yyfile = NULL;
 	/*
 	 * Ready to go.  Build all the various files.
 	 */
@@ -878,13 +896,6 @@ defopt(struct dlhash *ht, const char *fname, struct defoptlist *opts,
 				olddl = olddl->dl_next;
 			olddl->dl_next = dl;
 		}
-
-		/*
-		 * Implicit attribute definition for option.
-		 */
-		const char *n; 
-		n = strtolower(dl->dl_name);
-		refattr(n);
 	}
 }
 
@@ -991,6 +1002,7 @@ void
 deloption(const char *name)
 {
 
+	CFGDBG(4, "deselecting opt `%s'", name);
 	if (undo_option(opttab, &options, &nextopt, name, "options"))
 		return;
 	if (undo_option(selecttab, NULL, NULL, strtolower(name), "options"))
@@ -1039,6 +1051,7 @@ delfsoption(const char *name)
 {
 	const char *n;
 
+	CFGDBG(4, "deselecting fs `%s'", name);
 	n = strtolower(name);
 	if (undo_option(fsopttab, &fsoptions, &nextfsopt, name, "file-system"))
 		return;
@@ -1060,6 +1073,7 @@ void
 delmkoption(const char *name)
 {
 
+	CFGDBG(4, "deselecting mkopt `%s'", name);
 	(void)undo_option(mkopttab, &mkoptions, &nextmkopt, name,
 	    "makeoptions");
 }
@@ -1136,8 +1150,10 @@ undo_option(struct hashtab *ht, struct nvlist **npp,
 			cfgwarn("%s `%s' is not defined", type, name);
 		return (1);
 	}
-	if (npp == NULL)
+	if (npp == NULL) {
+		CFGDBG(2, "opt `%s' deselected", name);
 		return (0);
+	}
 
 	for ( ; *npp != NULL; npp = &(*npp)->nv_next) {
 		if ((*npp)->nv_name != name)
@@ -1145,6 +1161,7 @@ undo_option(struct hashtab *ht, struct nvlist **npp,
 		if (next != NULL && *next == &(*npp)->nv_next)
 			*next = npp;
 		nv = (*npp)->nv_next;
+		CFGDBG(2, "opt `%s' deselected", (*npp)->nv_name);
 		nvfree(*npp);
 		*npp = nv;
 		return (0);

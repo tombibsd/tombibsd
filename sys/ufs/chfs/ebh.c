@@ -425,7 +425,7 @@ nand_check_eb_hdr(struct chfs_ebh *ebh, void *buf)
  *
  * @ebh: chfs eraseblock handler
  * @pebnr: eraseblock number
- * @lid: leb id (it's bit number 31 will be set to 0)
+ * @lid: leb id (its bit number 31 will be set to 0)
  *
  * It pulls the CHFS_LID_NOT_DIRTY_BIT to zero on flash.
  *

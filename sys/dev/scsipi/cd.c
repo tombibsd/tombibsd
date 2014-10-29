@@ -1901,7 +1901,7 @@ read_cd_capacity(struct scsipi_periph *periph, uint32_t *blksize, u_long *last_l
 }
 
 /*
- * Find out from the device what it's capacity is
+ * Find out from the device what its capacity is
  */
 static u_long
 cd_size(struct cd_softc *cd, int flags)

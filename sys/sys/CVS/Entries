@@ -62,7 +62,7 @@
 /dkstat.h/1.17/Mon Dec 26 18:41:36 2005/-kk/
 /domain.h/1.31/Sun Jun 26 16:43:12 2011/-kk/
 /drvctlio.h/1.7/Sat May 31 13:24:57 2008/-kk/
-/dtrace_bsd.h/1.7/Sun Dec  2 01:05:16 2012/-kk/
+/dtrace_bsd.h/1.8/Wed Oct 29 08:13:32 2014/-kk/
 /dvdio.h/1.8/Mon Dec 26 18:41:36 2005/-kk/
 /endian.h/1.29/Tue Mar 25 02:35:51 2014/-kk/
 /envsys.h/1.34/Tue Jun  3 02:54:47 2014/-kk/
@@ -167,7 +167,7 @@
 /pset.h/1.4/Thu Oct 24 10:28:58 2013/-kk/
 /ptrace.h/1.45/Tue Jan 14 16:05:14 2014/-kk/
 /ptree.h/1.8/Sat Oct  6 22:15:09 2012/-kk/
-/pty.h/1.10/Sat Apr 19 05:37:02 2014/-kk/
+/pty.h/1.11/Wed Oct 29 08:13:32 2014/-kk/
 /queue.h/1.67/Tue Jun  3 02:54:47 2014/-kk/
 /quota.h/1.12/Mon Jan 30 00:56:19 2012/-kk/
 /quotactl.h/1.38/Sun Jul 20 13:08:42 2014/-kk/
@@ -187,7 +187,7 @@
 /scanio.h/1.2/Tue Feb 10 00:25:44 1998/-kk/
 /sched.h/1.75/Mon Nov 21 04:36:05 2011/-kk/
 /scsiio.h/1.12/Sun Mar  4 06:03:41 2007/-kk/
-/sdt.h/1.4/Thu Oct 24 10:28:58 2013/-kk/
+/sdt.h/1.5/Wed Oct 29 08:13:32 2014/-kk/
 /select.h/1.37/Tue May  6 05:50:27 2014/-kk/
 /selinfo.h/1.8/Thu Jul  8 12:23:31 2010/-kk/
 /sem.h/1.30/Fri Oct  3 09:51:03 2014/-kk/

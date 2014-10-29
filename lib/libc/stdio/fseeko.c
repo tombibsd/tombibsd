@@ -115,11 +115,21 @@ fseeko(FILE *fp, off_t offset, int whence)
 			curoff += fp->_p - fp->_bf._base;
 
 		offset += curoff;
+		if (offset < 0) {
+			errno = EINVAL;
+			FUNLOCKFILE(fp);
+			return -1;
+		}	
 		whence = SEEK_SET;
 		havepos = 1;
 		break;
 
 	case SEEK_SET:
+		if (offset < 0) {
+			errno = EINVAL;
+			FUNLOCKFILE(fp);
+			return -1;
+		}
 	case SEEK_END:
 		curoff = 0;		/* XXX just to keep gcc quiet */
 		havepos = 0;

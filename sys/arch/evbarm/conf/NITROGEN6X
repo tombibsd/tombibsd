@@ -308,6 +308,8 @@ usb*		at ehci?
 # USB device drivers
 include "dev/usb/usbdevices.config"
 
+midi*		at midibus?
+
 # SD/MMC controller
 #sdhc0		at axi? addr 0x02190000 irq 54		# uSDHC1
 #sdhc1		at axi? addr 0x02194000 irq 55		# uSDHC2

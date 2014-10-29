@@ -590,7 +590,7 @@ sys___getlogin(struct lwp *l, const struct sys___getlogin_args *uap, register_t 
 	} */
 	struct proc *p = l->l_proc;
 	char login[sizeof(p->p_session->s_login)];
-	int namelen = SCARG(uap, namelen);
+	size_t namelen = SCARG(uap, namelen);
 
 	if (namelen > sizeof(login))
 		namelen = sizeof(login);

@@ -222,6 +222,8 @@ options		SSCOM1CONSOLE, CONSPEED=115200
 # include all USB devices
 include "dev/usb/usbdevices.config"
 
+midi*		at midibus?
+
 
 # Pseudo-Devices
 

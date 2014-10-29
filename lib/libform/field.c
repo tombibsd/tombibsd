@@ -835,7 +835,7 @@ new_field(int rows, int cols, int frow, int fcol, int nrows, int nbuf)
 }
 
 /*
- * Duplicate the given field, including it's buffers.
+ * Duplicate the given field, including its buffers.
  */
 FIELD *
 dup_field(FIELD *field, int frow, int fcol)

@@ -67,7 +67,7 @@ typedef	void (*sdt_probe_func_t)(uint32_t, uintptr_t arg0, uintptr_t arg1,
 
 /*
  * The hook for the probe function. See kern_sdt.c which defaults this to
- * it's own stub. The 'sdt' provider will set it to dtrace_probe when it
+ * its own stub. The 'sdt' provider will set it to dtrace_probe when it
  * loads.
  */
 extern sdt_probe_func_t	sdt_probe_func;

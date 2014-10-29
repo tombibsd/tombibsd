@@ -1311,9 +1311,19 @@ re_rxeof(struct rtk_softc *sc)
 						    M_CSUM_TCP_UDP_BAD;
 				} else if (RE_UDPPKT(rxstat)) {
 					m->m_pkthdr.csum_flags |= M_CSUM_UDPv4;
-					if (rxstat & RE_RDESC_STAT_UDPSUMBAD)
-						m->m_pkthdr.csum_flags |=
-						    M_CSUM_TCP_UDP_BAD;
+					if (rxstat & RE_RDESC_STAT_UDPSUMBAD) {
+						/*
+						 * XXX: 8139C+ thinks UDP csum
+						 * 0xFFFF is bad, force software
+						 * calculation.
+						 */
+						if (sc->sc_quirk & RTKQ_8139CPLUS)
+							m->m_pkthdr.csum_flags
+							    &= ~M_CSUM_UDPv4;
+						else
+							m->m_pkthdr.csum_flags
+							    |= M_CSUM_TCP_UDP_BAD;
+					}
 				}
 			}
 		} else {

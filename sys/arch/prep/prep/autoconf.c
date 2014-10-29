@@ -267,7 +267,7 @@ gen_fwpath(device_t dev)
 }
 
 /*
- * Generate properties for each device by totaling up it's parent device
+ * Generate properties for each device by totaling up its parent device
  */
 static void
 build_fwpath(void)

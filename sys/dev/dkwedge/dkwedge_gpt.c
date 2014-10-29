@@ -54,7 +54,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
  * GUID to dkw_ptype mapping information.
  *
  * GPT_ENT_TYPE_MS_BASIC_DATA is not suited to mapping.  Aside from being
- * used for multiple Microsoft file systems, Linux uses it for it's own
+ * used for multiple Microsoft file systems, Linux uses it for its own
  * set of native file systems.  Treating this GUID as unknown seems best.
  */
 

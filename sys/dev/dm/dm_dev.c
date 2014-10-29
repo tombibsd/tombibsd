@@ -115,7 +115,7 @@ dm_dev_lookup_minor(int dm_dev_minor)
 	return NULL;
 }
 /*
- * Lookup device with it's device name.
+ * Lookup device with its device name.
  */
 static dm_dev_t *
 dm_dev_lookup_name(const char *dm_dev_name)
@@ -143,7 +143,7 @@ dm_dev_lookup_name(const char *dm_dev_name)
 	return NULL;
 }
 /*
- * Lookup device with it's device uuid. Used mostly by LVM2tools.
+ * Lookup device with its device uuid. Used mostly by LVM2tools.
  */
 static dm_dev_t *
 dm_dev_lookup_uuid(const char *dm_dev_uuid)

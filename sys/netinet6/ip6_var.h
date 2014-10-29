@@ -316,6 +316,7 @@ extern const struct pr_usrreqs rip6_usrreqs;
 
 int	icmp6_ctloutput(int, struct socket *, struct sockopt *);
 
+struct mbuf;
 void	ip6_init(void);
 void	ip6_input(struct mbuf *);
 const struct ip6aux *ip6_getdstifaddr(struct mbuf *);
@@ -329,7 +330,7 @@ int	ip6_lasthdr(struct mbuf *, int, int, int *);
 struct m_tag *ip6_addaux(struct mbuf *);
 struct m_tag *ip6_findaux(struct mbuf *);
 void	ip6_delaux(struct mbuf *);
-
+struct ip6_hdr;
 int	ip6_mforward(struct ip6_hdr *, struct ifnet *, struct mbuf *);
 int	ip6_hopopts_input(u_int32_t *, u_int32_t *, struct mbuf **, int *);
 void	ip6_savecontrol(struct in6pcb *, struct mbuf **, struct ip6_hdr *,
@@ -395,6 +396,8 @@ struct 	in6_addr *in6_selectsrc(struct sockaddr_in6 *,
 int in6_selectroute(struct sockaddr_in6 *, struct ip6_pktopts *,
 	struct ip6_moptions *, struct route *, struct ifnet **,
 	struct rtentry **, int);
+int	ip6_get_membership(const struct sockopt *, struct ifnet **, void *,
+	size_t);
 
 u_int32_t ip6_randomid(void);
 u_int32_t ip6_randomflowlabel(void);

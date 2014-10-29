@@ -62,7 +62,7 @@ struct kmutex {
 		/* Spin mutex */
 		struct {
 			/*
-			 * Since the low bit of mtax_owner is used to flag this
+			 * Since the low bit of mtxa_owner is used to flag this
 			 * mutex as a spin mutex, we can't use the first byte
 			 * or the last byte to store the ipl or lock values.
 			 */

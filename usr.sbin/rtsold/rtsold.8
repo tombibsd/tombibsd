@@ -28,7 +28,7 @@
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
 .\"
-.Dd September 9, 2014
+.Dd October 12, 2014
 .Dt RTSOLD 8
 .Os
 .\"
@@ -44,3 +44,9 @@ have been removed from
 .Nx
 as their functionality is now included in
 .Xr dhcpcd 8 .
+.Pp
+For example to send a routing solicitation message and print information
+about it without changing the actual routing table:
+.Bd -literal
+	dhcpcd -dB6T --nodhcp6 <interface>
+.Ed

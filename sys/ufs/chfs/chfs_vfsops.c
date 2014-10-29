@@ -152,8 +152,10 @@ chfs_mount(struct mount *mp,
 		}
 		/* Look up the name and verify that it's sane. */
 		NDINIT(&nd, LOOKUP, FOLLOW, pb);
-		if ((err = namei(&nd)) != 0 )
-			return (err);
+		err = namei(&nd);
+		pathbuf_destroy(pb);
+		if (err)
+			return err;
 		devvp = nd.ni_vp;
 
 		/* Be sure this is a valid block device */

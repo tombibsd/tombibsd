@@ -285,7 +285,7 @@ ipflow_fastforward(struct mbuf *m)
 	}
 
 	/*
-	 * Send the packet on it's way.  All we can get back is ENOBUFS
+	 * Send the packet on its way.  All we can get back is ENOBUFS
 	 */
 	ipf->ipf_uses++;
 	PRT_SLOW_ARM(ipf->ipf_timer, IPFLOW_TIMER);
@@ -436,7 +436,7 @@ ipflow_create(const struct route *ro, struct mbuf *m)
 	KERNEL_LOCK(1, NULL);
 
 	/*
-	 * See if an existing flow struct exists.  If so remove it from it's
+	 * See if an existing flow struct exists.  If so remove it from its
 	 * list and free the old route.  If not, try to malloc a new one
 	 * (if we aren't at our limit).
 	 */

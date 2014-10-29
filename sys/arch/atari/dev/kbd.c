@@ -211,7 +211,7 @@ kbdattach(device_t parent, device_t self, void *aux)
 		timeout = KBD->ac_da;
 
 	/*
-	 * Now send the reset string, and read+ignore it's response
+	 * Now send the reset string, and read+ignore its response
 	 */
 	if (!kbd_write_poll(kbd_rst, 2))
 		printf("kbd: error cannot reset keyboard\n");

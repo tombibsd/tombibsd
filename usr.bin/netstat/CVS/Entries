@@ -9,7 +9,7 @@
 /mbuf.c/1.31/Tue Mar 20 20:34:58 2012/-kk/
 /mroute.c/1.24/Tue Mar 20 20:34:58 2012/-kk/
 /mroute6.c/1.14/Thu Oct 24 10:28:59 2013/-kk/
-/netstat.1/1.68/Sun Oct 19 16:07:03 2014/-kk/
+/netstat.1/1.70/Wed Oct 29 08:13:38 2014/-kk/
 /netstat.h/1.50/Tue May  6 05:50:32 2014/-kk/
 /netstat_hostops.c/1.1/Mon Dec 13 21:15:30 2010/-kk/
 /netstat_rumpops.c/1.1/Mon Dec 13 21:15:30 2010/-kk/

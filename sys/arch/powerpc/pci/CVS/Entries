@@ -1,6 +1,6 @@
 /pchb.c/1.9/Mon Jan 23 16:22:57 2012/-kk/
 /pci_machdep_common.c/1.20/Fri Apr 11 02:03:38 2014/-kk/
-/pci_machdep_ofw.c/1.20/Fri Apr 11 02:03:38 2014/-kk/
+/pci_machdep_ofw.c/1.21/Wed Oct 29 08:13:10 2014/-kk/
 /pci_module.c/1.1/Wed Jun 22 18:20:59 2011/-kk/
 /pcib.c/1.7/Fri Jul  1 18:59:19 2011/-kk/
 /pciconf_indirect.c/1.5/Sat Jun 18 06:41:43 2011/-kk/

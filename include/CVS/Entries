@@ -77,7 +77,7 @@
 /stab.h/1.6/Thu Aug  7 09:44:11 2003/-kk/
 /stdbool.h/1.5/Thu Oct 24 10:28:53 2013/-kk/
 /stddef.h/1.17/Wed Dec 25 07:36:53 2013/-kk/
-/stdio.h/1.91/Fri Oct  3 09:25:07 2014/-kk/
+/stdio.h/1.92/Wed Oct 29 08:12:36 2014/-kk/
 /stdlib.h/1.110/Sun Jun 22 14:31:45 2014/-kk/
 /string.h/1.49/Fri Oct  3 10:04:40 2014/-kk/
 /stringlist.h/1.7/Mon Apr 28 20:22:54 2008/-kk/
@@ -98,7 +98,7 @@
 /utmpx.h/1.17/Sun Jan 11 19:09:29 2009/-kk/
 /uuid.h/1.2/Wed Apr 23 07:52:32 2008/-kk/
 /vis.h/1.22/Fri Oct  3 10:04:40 2014/-kk/
-/wchar.h/1.40/Tue Dec 17 04:04:48 2013/-kk/
+/wchar.h/1.41/Wed Oct 29 08:12:36 2014/-kk/
 /wctype.h/1.9/Thu Oct 24 10:28:53 2013/-kk/
 /wordexp.h/1.2/Tue Apr  1 19:23:28 2008/-kk/
 D/arpa////

@@ -300,7 +300,7 @@ ENTRY(cpu_switchto)
 .Lswitch_return:
 	/* cpu_switchto returns the old lwp */
 	mov	r0, r4
-	/* lwp_trampoline expects new lwp as it's second argument */
+	/* lwp_trampoline expects new lwp as its second argument */
 	mov	r1, r6
 
 #ifdef _ARM_ARCH_7
@@ -413,7 +413,7 @@ ENTRY_NP(softint_switch)
 
 	/*
 	 * Normally, we'd get {r8-r13} but since this is a softint lwp
-	 * it's existing state doesn't matter.  We start the stack just
+	 * its existing state doesn't matter.  We start the stack just
 	 * below the trapframe.
 	 */
 	ldr	sp, [r5, #(L_MD_TF)]	/* get new lwp's stack ptr */

@@ -232,9 +232,7 @@ spiflash_attach(device_t parent, device_t self, void *aux)
 	bufq_alloc(&sc->sc_workq, "fcfs", BUFQ_SORT_RAWBLOCK);
 	bufq_alloc(&sc->sc_doneq, "fcfs", BUFQ_SORT_RAWBLOCK);
 
-	sc->sc_dk.dk_driver = &spiflash_dkdriver;
-	sc->sc_dk.dk_name = device_xname(self);
-
+	disk_init(&sc->sc_dk, device_xname(self), &spiflash_dkdriver);
 	disk_attach(&sc->sc_dk);
 
 	/* arrange to allocate the kthread */

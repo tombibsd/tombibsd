@@ -441,7 +441,7 @@ cpu_attach_common(device_t parent, device_t self, void *aux)
 		cpu_init(ci);
 		pmap_cpu_init_late(ci);
 
-		/* Every processor needs to init it's own ipi h/w (similar to lapic) */
+		/* Every processor needs to init its own ipi h/w (similar to lapic) */
 		xen_ipi_init();
 
 		/* Make sure DELAY() is initialized. */

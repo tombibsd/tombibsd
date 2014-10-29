@@ -286,7 +286,7 @@ psycho_dump_intmap(struct psycho_softc *sc)
  *	- get interrupt-map and interrupt-map-mask
  *	- setup the chipsets.
  *	- if we're the first of the pair, initialise the IOMMU, otherwise
- *	  just copy it's tags and addresses.
+ *	  just copy its tags and addresses.
  */
 static	void
 psycho_attach(device_t parent, device_t self, void *aux)
@@ -755,7 +755,7 @@ psycho_power_button_pressed(void *arg)
  */
 
 /*
- * allocate a PCI chipset tag and set it's cookie.
+ * allocate a PCI chipset tag and set its cookie.
  */
 static pci_chipset_tag_t
 psycho_alloc_chipset(struct psycho_pbm *pp, int node, pci_chipset_tag_t pc)

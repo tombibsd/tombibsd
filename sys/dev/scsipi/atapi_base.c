@@ -62,7 +62,7 @@ atapi_interpret_sense(struct scsipi_xfer *xs)
 	const char *msg = NULL;
 
 	/*
-	 * If the device has it's own error handler, call it first.
+	 * If the device has its own error handler, call it first.
 	 * If it returns a legit error value, return that, otherwise
 	 * it wants us to continue with normal error processing.
 	 */

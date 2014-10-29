@@ -13,6 +13,3 @@ options 	CPU_IN_CKSUM
 options 	EXEC_ELF64	# exec ELF binaries
 options 	EXEC_SCRIPT	# exec #! scripts
 options 	MTRR
-
-# Atheros HAL options
-include "external/isc/atheros_hal/conf/std.ath_hal"

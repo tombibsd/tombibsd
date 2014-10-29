@@ -423,7 +423,7 @@ ld*	at mlx? unit ?
 ## Floppy controller and drive found on SPARCstations.
 
 # need share with the sparc, and everyone else.  needs to use auxio.
-# actually, the ebus version has (will have) direct access to it's AUXIO
+# actually, the ebus version has (will have) direct access to its AUXIO
 # register space (it is mapped in to fdthree not auxio).
 fdc0	at sbus? slot ? offset ?		# SUNW,fdtwo
 #fdc0	at ebus?				# fdthree, EXPERIMENTAL

@@ -17,9 +17,8 @@ options 	EVBARM_BOARDTYPE=hpt5325
 
 # CPU options
 options 	CPU_SHEEVA
-#options 	MV_L2_CACHE_ENABLE
-#options 	MV_L2_CACHE_WRITE_THROUGH
-options 	MV_CACHE_RANGE_OPS
+#options 	SHEEVA_L2_CACHE
+#options 	SHEEVA_L2_CACHE_WT
 #makeoptions	CPUFLAGS="-march=armv5te"
 makeoptions	CPUFLAGS="-mtune=arm9e"
 

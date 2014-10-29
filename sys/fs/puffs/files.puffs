@@ -2,6 +2,7 @@
 
 deffs	PUFFS
 
+define	puffs: vfs
 file	fs/puffs/puffs_compat.c		puffs
 file	fs/puffs/puffs_msgif.c		puffs
 file	fs/puffs/puffs_node.c		puffs

@@ -302,7 +302,7 @@ esp_isa_init(struct esp_isa_softc *esc, struct esp_isa_probe_data *epd)
 
 /*
  * Check the slots looking for a board we recognise
- * If we find one, note it's address (slot) and call
+ * If we find one, note its address (slot) and call
  * the actual probe routine to check it out.
  */
 int

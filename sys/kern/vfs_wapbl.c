@@ -2926,7 +2926,7 @@ wapbl_replay_read(struct wapbl_replay *wr, void *data, daddr_t blk, long len)
 
 #ifdef _KERNEL
 /*
- * This is not really a module now, but maybe on it's way to
+ * This is not really a module now, but maybe on its way to
  * being one some day.
  */
 MODULE(MODULE_CLASS_VFS, wapbl, NULL);

@@ -11,7 +11,7 @@
 /ibm4xx_machdep.c/1.18/Mon Dec 12 11:38:26 2011/-kk/
 /pic_uic.c/1.4/Tue Nov 26 03:29:48 2013/-kk/
 /pmap.c/1.72/Fri Jan 27 19:48:39 2012/-kk/
-/trap.c/1.66/Thu Oct 24 10:28:57 2013/-kk/
+/trap.c/1.67/Wed Oct 29 08:13:10 2014/-kk/
 /trap_subr.S/1.24/Thu Oct 24 10:28:57 2013/-kk/
 D/dev////
 D/openbios////

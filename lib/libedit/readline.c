@@ -634,7 +634,7 @@ get_history_event(const char *cmd, int *cindex, int qchar)
  * returns 0 if data was not modified, 1 if it was and 2 if the string
  * should be only printed and not executed; in case of error,
  * returns -1 and *result points to NULL
- * it's callers responsibility to free() string returned in *result
+ * it's the caller's responsibility to free() the string returned in *result
  */
 static int
 _history_expand_command(const char *command, size_t offs, size_t cmdlen,
@@ -1694,7 +1694,7 @@ filename_completion_function(const char *name, int state)
  * which starts with supplied text
  * text contains a partial username preceded by random character
  * (usually '~'); state resets search from start (??? should we do that anyway)
- * it's callers responsibility to free returned value
+ * it's the caller's responsibility to free the returned value
  */
 char *
 username_completion_function(const char *text, int state)

@@ -65,7 +65,6 @@ SRCS+= \
 main.c \
 config_file.c \
 ctrl_iface.c \
-dump_state.c \
 eap_register.c
 
 # l2_packet

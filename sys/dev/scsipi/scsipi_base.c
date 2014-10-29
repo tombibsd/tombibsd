@@ -808,7 +808,7 @@ scsipi_interpret_sense(struct scsipi_xfer *xs)
 #endif
 
 	/*
-	 * If the periph has it's own error handler, call it first.
+	 * If the periph has its own error handler, call it first.
 	 * If it returns a legit error value, return that, otherwise
 	 * it wants us to continue with normal error processing.
 	 */
@@ -2451,7 +2451,7 @@ scsipi_sync_factor_to_freq(int factor)
 
 #ifdef SCSIPI_DEBUG
 /*
- * Given a scsipi_xfer, dump the request, in all it's glory
+ * Given a scsipi_xfer, dump the request, in all its glory
  */
 void
 show_scsipi_xs(struct scsipi_xfer *xs)

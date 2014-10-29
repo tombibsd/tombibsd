@@ -33,6 +33,8 @@
 #include <sys/cdefs.h>
 __KERNEL_RCSID(0, "$NetBSD$");
 
+#include "bridge.h"
+#include "carp.h"
 #include "opt_ipsec.h"
 
 #include <sys/param.h>
@@ -183,14 +185,14 @@ nd6_ifattach(struct ifnet *ifp)
 
 	/* A loopback interface always has ND6_IFF_AUTO_LINKLOCAL.
 	 * A bridge interface should not have ND6_IFF_AUTO_LINKLOCAL
-	 * because one of it's members should. */
+	 * because one of its members should. */
 	if ((ip6_auto_linklocal && ifp->if_type != IFT_BRIDGE) ||
 	    (ifp->if_flags & IFF_LOOPBACK))
 		nd->flags |= ND6_IFF_AUTO_LINKLOCAL;
 
 	/* A loopback interface does not need to accept RTADV.
 	 * A bridge interface should not accept RTADV
-	 * because one of it's members should. */
+	 * because one of its members should. */
 	if (ip6_accept_rtadv &&
 	    !(ifp->if_flags & IFF_LOOPBACK) &&
 	    !(ifp->if_type != IFT_BRIDGE))
@@ -906,7 +908,7 @@ nd6_lookup1(const struct in6_addr *addr6, int create, struct ifnet *ifp,
 	    rt->rt_flags & (RTF_CLONING | RTF_CLONED) &&
 	    (rt->rt_ifp == ifp
 #if NBRIDGE > 0
-	    || SAME_BRIDGE(rt->rt_ifp->if_bridgeport, ifp->if_bridgeport)
+	    || rt->rt_ifp->if_bridge == ifp->if_bridge
 #endif
 #if NCARP > 0
 	    || (ifp->if_type == IFT_CARP && rt->rt_ifp == ifp->if_carpdev) ||

@@ -34,7 +34,10 @@ SRCS+=	atomic_nand_16_cas.c atomic_nand_8_cas.c	\
 	atomic_cas_16_cas.c atomic_cas_8_cas.c		\
 	atomic_sub_16_cas.c atomic_sub_8_cas.c		\
 	atomic_or_16_cas.c atomic_or_8_cas.c		\
-	atomic_swap_16_cas.c atomic_swap_8_cas.c
+	atomic_swap_16_cas.c atomic_swap_8_cas.c	\
+	atomic_c11_compare_exchange_cas_32.c		\
+	atomic_c11_compare_exchange_cas_16.c		\
+	atomic_c11_compare_exchange_cas_8.c
 .  endif
 
 .  if (${LIB} == "kern" || ${LIB} == "rump")

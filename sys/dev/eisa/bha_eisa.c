@@ -95,7 +95,7 @@ bha_eisa_address(bus_space_tag_t iot, bus_space_handle_t ioh, int *portp)
 
 /*
  * Check the slots looking for a board we recognise
- * If we find one, note it's address (slot) and call
+ * If we find one, note its address (slot) and call
  * the actual probe routine to check it out.
  */
 static int

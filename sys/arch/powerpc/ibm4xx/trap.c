@@ -293,7 +293,7 @@ trap(struct trapframe *tf)
 		/*
 		 * Illegal insn:
 		 *
-		 * let's try to see if it's FPU and can be emulated.
+		 * let's try to see if its FPU and can be emulated.
 		 */
 		curcpu()->ci_data.cpu_ntrap++;
 		pcb = lwp_getpcb(l);

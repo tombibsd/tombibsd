@@ -276,6 +276,7 @@ struct ip_opts {
 #define	IP_MULTICAST_IF		9    /* in_addr; set/get IP multicast i/f  */
 #define	IP_MULTICAST_TTL	10   /* u_char; set/get IP multicast ttl */
 #define	IP_MULTICAST_LOOP	11   /* u_char; set/get IP multicast loopback */
+/* The add and drop membership option numbers need to match with the v6 ones */
 #define	IP_ADD_MEMBERSHIP	12   /* ip_mreq; add an IP group membership */
 #define	IP_DROP_MEMBERSHIP	13   /* ip_mreq; drop an IP group membership */
 #define	IP_PORTALGO		18   /* int; port selection algo (rfc6056) */

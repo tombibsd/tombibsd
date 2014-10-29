@@ -1009,7 +1009,7 @@ void isp_async(ispsoftc_t *, ispasync_t, ...);
 #define	ISP_LOGTDEBUG2	0x8000	/* log all debug messages (target) */
 
 /*
- * Each Platform provides it's own isposinfo substructure of the ispsoftc
+ * Each Platform provides its own isposinfo substructure of the ispsoftc
  * defined above.
  *
  * Each platform must also provide the following macros/defines:

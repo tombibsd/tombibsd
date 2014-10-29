@@ -78,7 +78,6 @@ static cmdloop_branch_t branch[2];
 
 static const struct kwinst ia6flagskw[] = {
 	  IFKW("anycast",	IN6_IFF_ANYCAST)
-	, IFKW("tentative",	IN6_IFF_TENTATIVE)
 	, IFKW("deprecated",	IN6_IFF_DEPRECATED)
 };
 
@@ -476,7 +475,7 @@ in6_usage(prop_dictionary_t env)
 {
 	fprintf(stderr,
 	    "\t[ anycast | -anycast ] [ deprecated | -deprecated ]\n"
-	    "\t[ tentative | -tentative ] [ pltime n ] [ vltime n ] "
+	    "\t[ pltime n ] [ vltime n ] "
 	    "[ eui64 ]\n");
 }
 

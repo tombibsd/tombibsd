@@ -133,7 +133,7 @@ attach ofb at pci
 file arch/macppc/dev/ofb.c			ofb needs-flag
 
 # PCI-Host bridge chipsets
-device pchb: agpbus, agp_apple
+device pchb: agpbus
 attach pchb at pci
 file arch/powerpc/pci/pchb.c			pchb
 

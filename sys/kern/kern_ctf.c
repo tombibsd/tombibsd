@@ -168,7 +168,7 @@ mod_ctf_get(struct module *mod, mod_ctf_t *mc)
 	}
 
 	/*
-	 * Allocate memory to buffer the CTF data in it's decompressed
+	 * Allocate memory to buffer the CTF data in its decompressed
 	 * form.
 	 */
 	if (compressed) {

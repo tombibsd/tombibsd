@@ -2,7 +2,7 @@
 
 COMPILER_RT_SRCDIR=	${NETBSDSRCDIR}/sys/external/bsd/compiler_rt/dist
 
-.if ${MACHINE_ARCH} == "powerpc"
+.if ${MACHINE_CPU} == "powerpc"
 COMPILER_RT_CPU_DIR=	${COMPILER_RT_SRCDIR}/lib/builtins/ppc
 COMPILER_RT_ARCH_DIR=	${COMPILER_RT_SRCDIR}/lib/builtins/ppc
 .else
@@ -21,6 +21,12 @@ GENERIC_SRCS+= \
 	divxc3.c \
 	divdc3.c \
 	divsc3.c
+
+.if ${MACHINE_CPU} == "powerpc"
+GENERIC_SRCS+= \
+	divtc3.c \
+	multc3.c
+.endif
 
 .for src in ${GENERIC_SRCS}
 .  if exists(${COMPILER_RT_CPU_DIR}/${src:R}.S) || \

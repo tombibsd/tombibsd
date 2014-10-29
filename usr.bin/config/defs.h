@@ -483,6 +483,7 @@ struct	dlhash *defoptlint;	/* lint values for options */
 struct	nvhash *deffstab;	/* defined file systems */
 struct	dlhash *optfiletab;	/* "defopt"'d option .h files */
 struct	hashtab *attrtab;	/* attributes (locators, etc.) */
+struct	hashtab *attrdeptab;	/* attribute dependencies */
 struct	hashtab *bdevmtab;	/* block devm lookup */
 struct	hashtab *cdevmtab;	/* character devm lookup */
 
@@ -536,14 +537,20 @@ int	expr_eval(struct condexpr *, int (*)(const char *, void *), void *);
 /* hash.c */
 struct	hashtab *ht_new(void);
 void	ht_free(struct hashtab *);
+int	ht_insrep2(struct hashtab *, const char *, const char *, void *, int);
 int	ht_insrep(struct hashtab *, const char *, void *, int);
+#define	ht_insert2(ht, nam1, nam2, val) ht_insrep2(ht, nam1, nam2, val, 0)
 #define	ht_insert(ht, nam, val) ht_insrep(ht, nam, val, 0)
 #define	ht_replace(ht, nam, val) ht_insrep(ht, nam, val, 1)
+int	ht_remove2(struct hashtab *, const char *, const char *);
 int	ht_remove(struct hashtab *, const char *);
+void	*ht_lookup2(struct hashtab *, const char *, const char *);
 void	*ht_lookup(struct hashtab *, const char *);
 void	initintern(void);
 const char *intern(const char *);
+typedef int (*ht_callback2)(const char *, const char *, void *, void *);
 typedef int (*ht_callback)(const char *, void *, void *);
+int	ht_enumerate2(struct hashtab *, ht_callback2, void *);
 int	ht_enumerate(struct hashtab *, ht_callback, void *);
 
 /* typed hash, named struct HT, whose type is string -> struct VT */
@@ -631,15 +638,11 @@ int	onlist(struct nvlist *, void *);
 void	prefix_push(const char *);
 void	prefix_pop(void);
 char	*sourcepath(const char *);
-#ifndef MAKE_BOOTSTRAP
 extern	int dflag;
 #define	CFGDBG(n, ...) \
 	do { if ((dflag) >= (n)) cfgdbg(__VA_ARGS__); } while (0)
 void	cfgdbg(const char *, ...)			/* debug info */
      __printflike(1, 2);
-#else
-#define	CFGDBG(n, ...) /* */
-#endif
 void	cfgwarn(const char *, ...)			/* immediate warns */
      __printflike(1, 2);
 void	cfgxwarn(const char *, int, const char *, ...)	/* delayed warns */

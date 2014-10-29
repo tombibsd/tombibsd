@@ -45,7 +45,7 @@
  */
 
 /*
- *	This driver is at it's last beta release.  It should not cause
+ *	This driver is at its last beta release.  It should not cause
  *	any problems (Touch wood)
  *
  * 	If it passes field tests again.  This will constitute the realse
@@ -965,7 +965,7 @@ iestop(struct ie_softc *sc)
 }
 
 /*
- * Send a command to the card and awaits it's completion.
+ * Send a command to the card and await its completion.
  * Timeout if it's taking too long
  */
 

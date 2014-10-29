@@ -1125,7 +1125,7 @@ mrg_initadbintr(void)
 }
 
 /*
- * NOTE:  By eliminating the setvectors routine and moving it's function
+ * NOTE:  By eliminating the setvectors routine and moving its function
  *        to here we only have to deal with re-locating MacOS Addresses
  *        once and all in one place.
  */

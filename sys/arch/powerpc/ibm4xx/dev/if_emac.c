@@ -1671,7 +1671,7 @@ emac_rxeob_intr(void *arg)
 
 		/*
 		 * Pass this up to any BPF listeners, but only
-		 * pass if up the stack if it's for us.
+		 * pass it up the stack if it's for us.
 		 */
 		bpf_mtap(ifp, m);
 

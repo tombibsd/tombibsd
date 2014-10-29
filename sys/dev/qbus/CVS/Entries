@@ -17,7 +17,7 @@
 /if_qtreg.h/1.5/Sun Dec 11 12:23:29 2005/-kk/
 /if_uba.c/1.31/Sat Nov 13 13:52:10 2010/-kk/
 /if_uba.h/1.15/Sun Mar  4 06:02:29 2007/-kk/
-/qd.c/1.55/Fri Oct  3 09:09:19 2014/-kk/
+/qd.c/1.56/Wed Oct 29 08:13:22 2014/-kk/
 /qdioctl.h/1.7/Sun Mar  4 06:02:29 2007/-kk/
 /qdreg.h/1.8/Sun Dec 11 12:23:29 2005/-kk/
 /qduser.h/1.7/Sun Dec 11 12:23:29 2005/-kk/

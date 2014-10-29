@@ -321,7 +321,7 @@ fuse_attr_to_vap(struct perfuse_state *ps, struct vattr *vap,
 	vap->va_gen = 0; 
 	vap->va_flags = 0;
 	vap->va_rdev = fa->rdev;
-	vap->va_bytes = fa->size;
+	vap->va_bytes = fa->blocks * S_BLKSIZE;
 	vap->va_filerev = (u_quad_t)PUFFS_VNOVAL;
 	vap->va_vaflags = 0;
 

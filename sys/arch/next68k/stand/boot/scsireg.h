@@ -44,6 +44,6 @@
 
 #define	SCSI_INTR	(1<<12)	/* I_BIT(I_SCSI) */
 
-/* XXX floppy register (will get it's own header file some time) */
+/* XXX floppy register (will get its own header file some time) */
 #define	FLP_CTRL	8
 #define  FLC_82077_SEL		0x40	/* set = 82077, clear = 53C90A */

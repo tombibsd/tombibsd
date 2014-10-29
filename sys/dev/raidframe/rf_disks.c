@@ -506,7 +506,7 @@ rf_AutoConfigureDisks(RF_Raid_t *raidPtr, RF_Config_t *cfgPtr,
 			if (ac->clabel->mod_counter != mod_counter) {
 				/* Even though we've filled in all of
 				   the above, we don't trust this
-				   component since it's modification
+				   component since its modification
 				   counter is not in sync with the
 				   rest, and we really consider it to
 				   be failed.  */

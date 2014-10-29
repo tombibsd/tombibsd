@@ -1321,7 +1321,7 @@ radeonfb_loadbios(struct radeonfb_softc *sc, const struct pci_attach_args *pa)
 		return;
 	}
 
-	pci_find_rom(pa, romt, romh, PCI_ROM_CODE_TYPE_X86, &biosh,
+	pci_find_rom(pa, romt, romh, romsz, PCI_ROM_CODE_TYPE_X86, &biosh,
 	    &sc->sc_biossz);
 	if (sc->sc_biossz == 0) {
 		aprint_verbose("%s: Video BIOS not present\n", XNAME(sc));

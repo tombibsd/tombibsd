@@ -1401,7 +1401,7 @@ _bus_dmamem_unmap(bus_dma_tag_t t, void *kva, size_t size)
 
 #ifdef __HAVE_MM_MD_DIRECT_MAPPED_PHYS
 	/*
-	 * Check to see if this used direct mapped memory.  Get it's physical
+	 * Check to see if this used direct mapped memory.  Get its physical
 	 * address and try to map it.  If the resultant matches the kva, then
 	 * it was and so we can just return since we have notice to free up.
 	 */

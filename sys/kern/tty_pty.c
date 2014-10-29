@@ -243,7 +243,7 @@ pty_check(int ptn)
 
 		/*
 		 * Now grab the pty array mutex - we need to ensure
-		 * that the pty array is consistent while copying it's
+		 * that the pty array is consistent while copying its
 		 * content to newly allocated, larger space; we also
 		 * need to be safe against pty_maxptys().
 		 */

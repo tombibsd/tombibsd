@@ -6241,7 +6241,7 @@ wm_gmii_mediainit(struct wm_softc *sc, pci_product_id_t prodid)
 	 *  For some devices, we can determine the PHY access method
 	 * from sc_type.
 	 *
-	 *  For ICH8 variants, it's difficult to detemine the PHY access
+	 *  For ICH8 variants, it's difficult to determine the PHY access
 	 * method by sc_type, so use the PCI product ID for some devices.
 	 * For other ICH8 variants, try to use igp's method. If the PHY
 	 * can't detect, then use bm's method.

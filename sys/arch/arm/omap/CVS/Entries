@@ -91,7 +91,7 @@
 /omapl1x_reg.h/1.1/Thu Oct 24 10:28:57 2013/-kk/
 /omapl1x_timer.c/1.1/Thu Oct 24 10:28:57 2013/-kk/
 /omapl1x_tipb.c/1.1/Thu Oct 24 10:28:57 2013/-kk/
-/sitara_cm.c/1.1/Thu Oct 24 10:28:57 2013/-kk/
+/sitara_cm.c/1.2/Wed Oct 29 08:12:59 2014/-kk/
 /sitara_cm.h/1.1/Thu Oct 24 10:28:57 2013/-kk/
 /sitara_cmreg.h/1.2/Sun Jul 20 13:58:34 2014/-kk/
 /ti_iic.c/1.7/Fri Apr 11 02:03:28 2014/-kk/

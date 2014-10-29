@@ -31,6 +31,7 @@ __FBSDID("$FreeBSD: head/lib/msun/src/s_csqrtl.c 181402 2008-08-08 00:15:16Z das
 __RCSID("$NetBSD$");
 #endif
 
+#include "../src/namespace.h"
 #include <complex.h>
 #include <float.h>
 #include <math.h>

@@ -102,7 +102,8 @@ install_coproc_handler(int coproc, undef_handler_t handler)
 	KASSERT(coproc >= 0 && coproc < NUM_UNKNOWN_HANDLERS);
 	KASSERT(handler != NULL); /* Used to be legal. */
 
-	uh = kmem_alloc(sizeof(*uh), KM_SLEEP);
+	uh = kmem_alloc(sizeof(*uh), KM_NOSLEEP);
+	KASSERT(uh != NULL);
 	uh->uh_handler = handler;
 	install_coproc_handler_static(coproc, uh);
 	return uh;

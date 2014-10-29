@@ -261,6 +261,8 @@ usb*		at ehci?
 # USB device drivers, just as soon as we have something to attach them to
 include "dev/usb/usbdevices.config"
 
+midi*		at midibus?
+
 ukphy*		at mii? phy ?
 
 # Pseudo-Devices

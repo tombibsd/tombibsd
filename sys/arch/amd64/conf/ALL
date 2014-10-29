@@ -454,6 +454,7 @@ hpet0	at ichlpcib?			# High Precision Event Timer
 fwhrng* at ichlpcib?			# Intel 82802 FWH Random Number Generator
 rdcpcib* at pci? dev ? function ?	# RDC Vortex86/PMX-1000 PCI-ISA w/
 pchb*	at pci? dev ? function ?	# PCI-Host bridges
+options 	AGP_X86
 pcib*	at pci? dev ? function ?	# PCI-ISA bridges
 ppb*	at pci? dev ? function ?	# PCI-PCI bridges
 # XXX 'puc's aren't really bridges, but there's no better place for them here

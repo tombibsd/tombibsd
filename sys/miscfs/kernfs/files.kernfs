@@ -2,5 +2,6 @@
 
 deffs					KERNFS
 
+define	kernfs: vfs
 file	miscfs/kernfs/kernfs_vfsops.c	kernfs
 file	miscfs/kernfs/kernfs_vnops.c	kernfs

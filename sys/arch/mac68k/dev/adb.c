@@ -260,7 +260,7 @@ adbprint(void *args, const char *name)
  * returning.
  *
  * NOTE: The user specified compRout is ignored, since this routine specifies
- * it's own to adb_op, which is why you really called this in the first place
+ * its own to adb_op, which is why you really called this in the first place
  * anyway.
  */
 int

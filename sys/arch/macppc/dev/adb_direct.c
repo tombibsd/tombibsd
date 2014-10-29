@@ -680,7 +680,7 @@ adb_intr(void *arg)
  *
  * If in->unsol is 1, then this packet was unsolicited and
  * so we look up the device in the ADB device table to determine
- * what it's default service routine is.
+ * what its default service routine is.
  *
  * If in->ack_only is 1, then we really only need to call
  * the completion routine, so don't do any other stuff.
@@ -1314,7 +1314,7 @@ adb_cmd_extra(u_char *in)
  * returning.
  *
  * NOTE: The user specified compRout is ignored, since this routine specifies
- * it's own to adb_op, which is why you really called this in the first place
+ * its own to adb_op, which is why you really called this in the first place
  * anyway.
  */
 int

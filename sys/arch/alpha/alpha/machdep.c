@@ -130,6 +130,8 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #ifdef DEBUG
 #include <machine/sigdebug.h>
+int sigdebug = 0x0;
+int sigpid = 0;
 #endif
 
 #include <machine/alpha.h>

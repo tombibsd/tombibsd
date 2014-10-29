@@ -46,6 +46,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <arm/allwinner/awin_var.h>
 
 #define AWIN_MMC_NDESC		16
+#define AWIN_MMC_DMA_FTRGLEVEL	0x20070008
 
 static int	awin_mmc_match(device_t, cfdata_t, void *);
 static void	awin_mmc_attach(device_t, device_t, void *);
@@ -104,7 +105,6 @@ struct awin_mmc_softc {
 	unsigned int sc_pll_freq;
 	unsigned int sc_mod_clk;
 
-	uint32_t sc_dma_ftrgl;
 	uint32_t sc_fifo_reg;
 
 	uint32_t sc_idma_xferlen;
@@ -186,6 +186,12 @@ awin_mmc_probe_clocks(struct awin_mmc_softc *sc, struct awinio_attach_args *aio)
 	bus_space_write_4(aio->aio_core_bst, aio->aio_ccm_bsh,
 	    AWIN_SD0_CLK_REG + (sc->sc_mmc_number * 4),
 	    AWIN_PLL_CFG_ENABLE | AWIN_PLL_CFG_PLL6 | div);
+
+	if (awin_chip_id() == AWIN_CHIP_ID_A31) {
+		awin_reg_set_clear(aio->aio_core_bst, aio->aio_ccm_bsh,
+		    AWIN_A31_AHB_RESET0_REG,
+		    AWIN_A31_AHB_RESET0_SD0_RST << sc->sc_mmc_number, 0);
+	}
 
 #ifdef AWIN_MMC_DEBUG
 	aprint_normal_dev(sc->sc_dev, "PLL6 @ %u Hz\n", freq);
@@ -290,10 +296,8 @@ awin_mmc_attach(device_t parent, device_t self, void *aux)
 	}
 
 	if (awin_chip_id() == AWIN_CHIP_ID_A31) {
-		sc->sc_dma_ftrgl = 0x2007000f;
 		sc->sc_fifo_reg = AWIN_A31_MMC_FIFO;
 	} else {
-		sc->sc_dma_ftrgl = 0x20070008;
 		sc->sc_fifo_reg = AWIN_MMC_FIFO;
 	}
 
@@ -727,7 +731,7 @@ awin_mmc_dma_prepare(struct awin_mmc_softc *sc, struct sdmmc_command *cmd)
 		val |= AWIN_MMC_IDST_TRANSMIT_INT;
 	MMC_WRITE(sc, AWIN_MMC_IDIE, val);
 	MMC_WRITE(sc, AWIN_MMC_DLBA, desc_paddr);
-	MMC_WRITE(sc, AWIN_MMC_FTRGLEVEL, sc->sc_dma_ftrgl);
+	MMC_WRITE(sc, AWIN_MMC_FTRGLEVEL, AWIN_MMC_DMA_FTRGLEVEL);
 
 	return 0;
 }

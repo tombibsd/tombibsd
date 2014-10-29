@@ -2,6 +2,7 @@
 
 deffs	NILFS
 
+define	nilfs: vfs
 file	fs/nilfs/nilfs_vfsops.c		nilfs
 file	fs/nilfs/nilfs_vnops.c		nilfs
 file	fs/nilfs/nilfs_subr.c		nilfs

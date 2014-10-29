@@ -1,4 +1,4 @@
-/autoconf.c/1.199/Fri Oct  3 09:36:11 2014/-kk/
+/autoconf.c/1.200/Wed Oct 29 08:13:13 2014/-kk/
 /bsd_fdintr.s/1.3/Thu Jul 13 06:25:55 2000/-kk/
 /cache.c/1.8/Mon Jun  6 02:49:39 2011/-kk/
 /cache.h/1.23/Sat Jun 14 03:56:35 2014/-kk/
@@ -24,7 +24,7 @@
 /kgdb_proto.h/1.3/Sun Dec 11 12:19:14 2005/-kk/
 /kobj_machdep.c/1.5/Thu Feb 13 15:35:53 2014/-kk/
 /lock_stubs.s/1.9/Thu Oct 24 10:28:57 2013/-kk/
-/locore.s/1.373/Fri Oct  3 10:05:09 2014/-kk/
+/locore.s/1.375/Wed Oct 29 08:13:13 2014/-kk/
 /machdep.c/1.279/Fri Oct  3 10:05:09 2014/-kk/
 /mp_subr.S/1.7/Fri Oct  3 10:05:09 2014/-kk/
 /netbsd32_machdep.c/1.103/Fri Mar 14 04:28:17 2014/-kk/

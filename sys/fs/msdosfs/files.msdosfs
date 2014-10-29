@@ -2,6 +2,7 @@
 
 deffs	MSDOSFS
 
+define	msdosfs: vfs
 file	fs/msdosfs/msdosfs_conv.c		msdosfs
 file	fs/msdosfs/msdosfs_denode.c		msdosfs
 file	fs/msdosfs/msdosfs_fat.c		msdosfs

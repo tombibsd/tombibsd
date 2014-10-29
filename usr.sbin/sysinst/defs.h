@@ -549,6 +549,7 @@ void	get_tz_default(void);
 int	extract_file(distinfo *, int);
 void	do_coloring (unsigned int, unsigned int);
 int set_menu_select(menudesc *, void *);
+const char *safectime(time_t *);
 
 /* from target.c */
 #if defined(DEBUG)  ||	defined(DEBUG_ROOT)

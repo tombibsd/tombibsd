@@ -600,7 +600,7 @@ vidcvideo_cursor_init(int width, int height)
 		IOMD_WRITE_WORD(IOMD_CURSINIT, pa);
 	}
 
-	/* Blank the cursor while initialising it's sprite */
+	/* Blank the cursor while initialising its sprite */
 
 	vidcvideo_write ( VIDC_CP1, 0x0 );
 	vidcvideo_write ( VIDC_CP2, 0x0 );

@@ -330,7 +330,7 @@ sysctl_hw_iostats(SYSCTLFN_ARGS)
 
 	/*
 	 * The original hw.diskstats call was broken and did not require
-	 * the userland to pass in it's size of struct disk_sysctl.  This
+	 * the userland to pass in its size of struct disk_sysctl.  This
 	 * was fixed after NetBSD 1.6 was released.
 	 */
 	if (namelen == 0)

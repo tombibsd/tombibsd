@@ -360,11 +360,25 @@ awin_pll2_enable(void)
 	    AWIN_CCM_OFFSET + AWIN_PLL2_CFG_REG);
 
 	uint32_t ncfg = ocfg;
-	ncfg &= ~(AWIN_PLL2_CFG_PREVDIV|AWIN_PLL2_CFG_FACTOR_N|AWIN_PLL2_CFG_POSTDIV);
-	ncfg |= __SHIFTIN(21, AWIN_PLL2_CFG_PREVDIV);
-	ncfg |= __SHIFTIN(86, AWIN_PLL2_CFG_FACTOR_N);
-	ncfg |= __SHIFTIN(4, AWIN_PLL2_CFG_POSTDIV);
-	ncfg |= AWIN_PLL_CFG_ENABLE;
+
+	if (awin_chip_id() == AWIN_CHIP_ID_A31) {
+		ncfg &= ~(AWIN_A31_PLL2_CFG_PREVDIV_M|
+			  AWIN_A31_PLL2_CFG_FACTOR_N|
+			  AWIN_A31_PLL2_CFG_POSTDIV_P);
+		ncfg |= __SHIFTIN(20, AWIN_A31_PLL2_CFG_PREVDIV_M);
+		ncfg |= __SHIFTIN(85, AWIN_A31_PLL2_CFG_FACTOR_N);
+		ncfg |= __SHIFTIN(3, AWIN_A31_PLL2_CFG_POSTDIV_P);
+		ncfg |= AWIN_PLL_CFG_ENABLE;
+	} else {
+		ncfg &= ~(AWIN_PLL2_CFG_PREVDIV|
+			  AWIN_PLL2_CFG_FACTOR_N|
+			  AWIN_PLL2_CFG_POSTDIV);
+		ncfg |= __SHIFTIN(21, AWIN_PLL2_CFG_PREVDIV);
+		ncfg |= __SHIFTIN(86, AWIN_PLL2_CFG_FACTOR_N);
+		ncfg |= __SHIFTIN(4, AWIN_PLL2_CFG_POSTDIV);
+		ncfg |= AWIN_PLL_CFG_ENABLE;
+	}
+
 	if (ncfg != ocfg) {
 		bus_space_write_4(bst, bsh,
 		    AWIN_CCM_OFFSET + AWIN_PLL2_CFG_REG, ncfg);
@@ -384,9 +398,17 @@ awin_pll7_enable(void)
 	    AWIN_CCM_OFFSET + AWIN_PLL7_CFG_REG);
 
 	uint32_t ncfg = ocfg;
-	ncfg &= ~(AWIN_PLL7_MODE_SEL|AWIN_PLL7_FRAC_SET|AWIN_PLL7_FACTOR_M);
-	ncfg |= AWIN_PLL7_FRAC_SET;
-	ncfg |= AWIN_PLL_CFG_ENABLE;
+
+	if (awin_chip_id() == AWIN_CHIP_ID_A31) {
+		ncfg &= ~AWIN_A31_PLL7_CFG_MODE_SEL;
+		ncfg |= AWIN_A31_PLL7_CFG_FRAC_CLK_OUT;
+		ncfg |= AWIN_PLL_CFG_ENABLE;
+	} else {
+		ncfg &= ~AWIN_PLL7_MODE_SEL;
+		ncfg |= AWIN_PLL7_FRAC_SET;
+		ncfg |= AWIN_PLL_CFG_ENABLE;
+	}
+
 	if (ncfg != ocfg) {
 		bus_space_write_4(bst, bsh,
 		    AWIN_CCM_OFFSET + AWIN_PLL7_CFG_REG, ncfg);

@@ -6,12 +6,13 @@ file 	arch/x86/pci/aapic.c		aapic
 
 file	arch/x86/pci/agp_machdep.c	agp
 
+define	agp_x86: agp_ali, agp_amd, agp_amd64, agp_i810, agp_intel, agp_sis, agp_via
+defflag	AGP_X86
+
 define amdnb_miscbus {}
 
 # PCI-Host bridge chipsets
-device	pchb:	pcibus, agpbus,
-		agp_ali, agp_amd, agp_amd64, agp_i810,
-		agp_intel, agp_sis, agp_via
+device	pchb:	pcibus, agpbus
 attach	pchb at pci
 file	arch/x86/pci/pchb.c		pchb		needs-flag
 

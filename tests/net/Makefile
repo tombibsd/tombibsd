@@ -4,7 +4,7 @@
 
 TESTSDIR=	${TESTSBASE}/net
 
-TESTS_SUBDIRS=		fdpass net route sys
+TESTS_SUBDIRS=		fdpass mcast net route sys
 .if (${MKRUMP} != "no")
 TESTS_SUBDIRS+=		bpf bpfilter carp icmp if if_bridge if_loop mpls npf
 .if (${MKSLJIT} != "no")

@@ -278,6 +278,8 @@ usb*		at ehci?
 
 include "dev/usb/usbdevices.config"
 
+midi*		at midibus?
+
 ukphy*		at mii? phy ?
 
 # Hardware clocking and power management

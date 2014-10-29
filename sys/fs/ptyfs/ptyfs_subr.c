@@ -177,6 +177,12 @@ ptyfs_get_node(ptyfstype type, int pty)
 	    pp->ptyfs_atime = pp->ptyfs_ctime;
 	pp->ptyfs_flags = 0;
 	mutex_enter(&ptyfs_hashlock);
+	/*
+	 * XXX We have minimum race condition when opening master side
+	 * first time, if other threads through other mount points, trying
+	 * opening the same device. As follow we have little chance have
+	 * unused list entries.
+	 */
 	SLIST_INSERT_HEAD(ppp, pp, ptyfs_hash);
 	mutex_exit(&ptyfs_hashlock);
 	return pp;

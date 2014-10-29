@@ -64,7 +64,7 @@ static const Char break_chars[] = { ' ', '\t', '\n', '"', '\\', '\'', '`', '@',
  * if ``user'' isn't valid user name or ``txt'' doesn't start
  * w/ '~', returns pointer to strdup()ed copy of ``txt''
  *
- * it's callers's responsibility to free() returned string
+ * it's the caller's responsibility to free() the returned string
  */
 char *
 fn_tilde_expand(const char *txt)
@@ -137,7 +137,7 @@ fn_tilde_expand(const char *txt)
  * such file can be found
  * value of ``state'' is ignored
  *
- * it's caller's responsibility to free returned string
+ * it's the caller's responsibility to free the returned string
  */
 char *
 fn_filename_completion_function(const char *text, int state)

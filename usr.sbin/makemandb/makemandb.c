@@ -501,7 +501,7 @@ traversedir(const char *parent, const char *file, sqlite3 *db,
 }
 
 /* build_file_cache --
- *   This function generates an md5 hash of the file passed as it's 2nd parameter
+ *   This function generates an md5 hash of the file passed as its 2nd parameter
  *   and stores it in a temporary table file_cache along with the full file path.
  *   This is done to support incremental updation of the database.
  *   The temporary table file_cache is dropped thereafter in the function

@@ -1,4 +1,4 @@
-/DEVNAMES/1.291/Sun Jul 20 13:58:46 2014/-kk/
+/DEVNAMES/1.292/Wed Oct 29 08:13:17 2014/-kk/
 /Makefile/1.35/Wed Jun 20 21:38:26 2012/-kk/
 /auconv.c/1.25/Wed Nov 23 23:07:31 2011/-kk/
 /auconv.h/1.16/Wed Nov 23 23:07:31 2011/-kk/
@@ -10,7 +10,7 @@
 /aurateconv.c/1.19/Wed Nov 23 23:07:31 2011/-kk/
 /bio.c/1.11/Fri Oct  3 09:09:12 2014/-kk/
 /biovar.h/1.8/Thu May  7 12:15:33 2009/-kk/
-/ccd.c/1.152/Fri Oct  3 09:36:15 2014/-kk/
+/ccd.c/1.154/Wed Oct 29 08:13:18 2014/-kk/
 /ccdvar.h/1.34/Fri Oct  3 09:36:15 2014/-kk/
 /cgd.c/1.91/Sun Oct 19 16:06:44 2014/-kk/
 /cgd_crypto.c/1.12/Thu Oct 24 10:28:57 2013/-kk/
@@ -25,7 +25,7 @@
 /dev_verbose.c/1.1/Sun Sep 21 14:30:22 2014/-kk/
 /dev_verbose.h/1.1/Sun Sep 21 14:30:22 2014/-kk/
 /devlist2h.awk/1.1/Sun Sep 21 14:30:22 2014/-kk/
-/dksubr.c/1.51/Wed Jun 18 08:42:58 2014/-kk/
+/dksubr.c/1.53/Wed Oct 29 08:13:18 2014/-kk/
 /dkvar.h/1.19/Tue Jun  3 03:09:43 2014/-kk/
 /files.audio/1.2/Fri Oct 10 17:21:20 2014/-kk/
 /firmload.c/1.19/Fri Apr 11 02:03:41 2014/-kk/
@@ -38,7 +38,7 @@
 /kloader.h/1.7/Mon Sep  8 23:36:54 2008/-kk/
 /kttcp.c/1.37/Fri Oct  3 09:25:58 2014/-kk/
 /kttcpio.h/1.1/Fri Jun 28 23:27:14 2002/-kk/
-/ld.c/1.76/Fri Oct  3 09:50:53 2014/-kk/
+/ld.c/1.77/Wed Oct 29 08:13:19 2014/-kk/
 /ldvar.h/1.21/Thu May  3 21:21:08 2012/-kk/
 /lockstat.c/1.19/Fri Oct  3 09:09:12 2014/-kk/
 /lockstat.h/1.10/Tue Jan 20 14:49:00 2009/-kk/
@@ -66,7 +66,7 @@
 /verified_exec.c/1.69/Fri Oct  3 09:09:12 2014/-kk/
 /video.c/1.32/Fri Oct  3 09:09:12 2014/-kk/
 /video_if.h/1.7/Fri Dec 24 20:54:28 2010/-kk/
-/vnd.c/1.232/Fri Oct  3 09:09:12 2014/-kk/
+/vnd.c/1.233/Wed Oct 29 08:13:19 2014/-kk/
 /vndvar.h/1.33/Thu Oct 24 10:28:58 2013/-kk/
 D/acpi////
 D/adb////

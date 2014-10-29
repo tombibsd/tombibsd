@@ -1723,7 +1723,7 @@ handle_stdout(void)
 		return;
 	}
 #endif
-	/* If stdin is a file use it's mtime, otherwise use current time */
+	/* If stdin is a file use its mtime, otherwise use current time */
 	ret = fstat(STDIN_FILENO, &sb);
 
 #ifndef SMALL

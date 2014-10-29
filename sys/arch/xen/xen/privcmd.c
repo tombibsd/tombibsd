@@ -360,11 +360,8 @@ privcmd_ioctl(void *v)
 			}
 			error  = privcmd_map_obj(vmm, va, maddr,
 			    mentry.npages, mcmd->dom);
-			if (error) {
-				kmem_free(maddr, 
-				    sizeof(paddr_t) * mentry.npages);
+			if (error)
 				return error;
-			}
 		}
 		break;
 	}

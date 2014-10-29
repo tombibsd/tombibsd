@@ -119,7 +119,7 @@ pic_ipi_generic(void *arg)
 int
 pic_ipi_ddb(void *arg)
 {
-	printf("%s: %s: tf=%p\n", __func__, curcpu()->ci_cpuname, arg);
+//	printf("%s: %s: tf=%p\n", __func__, curcpu()->ci_cpuname, arg);
 	kdb_trap(-1, arg);
 	return 1;
 }

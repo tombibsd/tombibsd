@@ -209,7 +209,7 @@ chfs_write_wbuf(struct chfs_mount* chmp, const struct iovec *invecs, long count,
 		donelen += wbuf_retlen;
 
 		/* if there is more residual data than the length of the wbuf
-		 * write it out directly until it's fit in the wbuf */
+		 * write it out directly until it fits in the wbuf */
 		if (vlen >= chmp->chm_wbuf_pagesize) {
 			ret = chfs_write_leb(chmp, lnr, v, outvec_to, PAGE_DIV(vlen), &wbuf_retlen);
 			vlen -= wbuf_retlen;

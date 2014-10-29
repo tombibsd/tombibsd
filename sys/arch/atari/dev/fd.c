@@ -252,7 +252,7 @@ uint8_t read_dmastat(void)
 /*
  * Config switch stuff. Used only for the floppy type for now. That's
  * why it's here...
- * XXX: If needed in more places, it should be moved to it's own include file.
+ * XXX: If needed in more places, it should be moved to its own include file.
  * Note: This location _must_ be read as an u_short. Failure to do so
  *       will return garbage!
  */

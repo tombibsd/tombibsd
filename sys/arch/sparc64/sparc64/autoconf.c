@@ -751,7 +751,7 @@ romgetcursoraddr(int **rowp, int **colp)
 
 /*
  * Match a device_t against the bootpath, by
- * comparing it's firmware package handle. If they match
+ * comparing its firmware package handle. If they match
  * exactly, we found the boot device.
  */
 static void
@@ -767,7 +767,7 @@ dev_path_exact_match(device_t dev, int ofnode)
 
 /*
  * Match a device_t against the bootpath, by
- * comparing it's firmware package handle and calculating
+ * comparing its firmware package handle and calculating
  * the target/lun suffix and comparing that against
  * the bootpath remainder.
  */
@@ -1208,7 +1208,7 @@ device_register_post_config(device_t dev, void *aux)
 
 		/*
 		 * If this is a FC-AL drive it will have
-		 * aquired it's WWN device property by now,
+		 * aquired its WWN device property by now,
 		 * so we can properly match it.
 		 */
 		if (prop_dictionary_get_uint64(device_properties(dev),

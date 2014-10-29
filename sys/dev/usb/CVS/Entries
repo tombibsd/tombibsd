@@ -31,7 +31,7 @@
 /hid.h/1.13/Wed May 12 18:44:49 2010/-kk/
 /if_athn_usb.c/1.6/Tue Oct 29 12:11:56 2013/-kk/
 /if_athn_usb.h/1.2/Thu Oct 24 10:28:58 2013/-kk/
-/if_atu.c/1.49/Thu Oct 24 10:28:58 2013/-kk/
+/if_atu.c/1.50/Wed Oct 29 08:13:22 2014/-kk/
 /if_atureg.h/1.10/Sun Sep 23 01:08:17 2012/-kk/
 /if_aue.c/1.132/Fri Oct  3 09:26:03 2014/-kk/
 /if_auereg.h/1.25/Thu Feb  2 19:43:07 2012/-kk/

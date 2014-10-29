@@ -537,7 +537,7 @@ ppbus_pnp_detect(device_t dev)
 	}
 
 #ifdef DEBUG_1284
-	printf("%s: <PnP> %d characters: ", device_xname(dev), len);
+	printf("%s: <PnP> %zu characters: ", device_xname(dev), len);
 	for (i = 0; i < len; i++)
 		printf("%c(0x%x) ", str[i], str[i]);
 	printf("\n");

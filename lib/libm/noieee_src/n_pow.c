@@ -126,6 +126,7 @@ static double pow_P (double, double);
 __weak_alias(_powf, powf);
 __weak_alias(_pow, pow);
 __weak_alias(_powl, pow);
+__weak_alias(powl, pow);
 #endif
 
 float

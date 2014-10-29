@@ -1409,7 +1409,7 @@ lwp_find(struct proc *p, lwpid_t id)
  *
  * This happens early in the syscall path, on user trap, and on LWP
  * creation.  A long-running LWP can also voluntarily choose to update
- * it's credentials by calling this routine.  This may be called from
+ * its credentials by calling this routine.  This may be called from
  * LWP_CACHE_CREDS(), which checks l->l_cred != p->p_cred beforehand.
  */
 void

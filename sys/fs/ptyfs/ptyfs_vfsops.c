@@ -217,7 +217,8 @@ ptyfs__allocvp(struct mount *mp, struct lwp *l, struct vnode **vpp,
 		*vpp = NULL;
 		return error;
 	}
-	if (type == PTYFSptc)
+	/* Activate node only after we have grabbed device. */
+	if (type == PTYFSpts)
 		ptyfs_set_active(mp, minor(dev));
 	return 0;
 }
@@ -415,7 +416,8 @@ ptyfs_sync(struct mount *mp, int waitfor,
 
 /*
  * Initialize this vnode / ptynode pair.
- * Caller assures no other thread will try to load this node.
+ * Only for the slave side of a pty, caller assures
+ * no other thread will try to load this node.
  */
 int
 ptyfs_loadvnode(struct mount *mp, struct vnode *vp,

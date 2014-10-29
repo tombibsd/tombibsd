@@ -40,7 +40,7 @@
 /aic77xx.c/1.8/Sat Mar 14 15:36:17 2009/-kk/
 /aic77xxreg.h/1.1/Wed Mar 15 02:06:18 2000/-kk/
 /aic77xxvar.h/1.3/Sun Dec 11 12:21:25 2005/-kk/
-/aic79xx.c/1.49/Thu Apr 24 14:30:59 2014/-kk/
+/aic79xx.c/1.50/Wed Oct 29 08:13:19 2014/-kk/
 /aic79xx_inline.h/1.22/Thu Oct 24 10:28:57 2013/-kk/
 /aic79xx_osm.c/1.32/Thu Oct 24 10:28:57 2013/-kk/
 /aic79xx_osm.h/1.23/Thu Oct 24 08:25:27 2013/-kk/
@@ -99,7 +99,7 @@
 /arn9380.c/1.3/Thu Feb 13 15:22:29 2014/-kk/
 /arn9380.h/1.1/Thu Oct 24 10:28:57 2013/-kk/
 /arn9380reg.h/1.1/Thu Oct 24 10:28:57 2013/-kk/
-/ath.c/1.116/Thu Oct 24 10:28:57 2013/-kk/
+/ath.c/1.117/Wed Oct 29 08:13:19 2014/-kk/
 /ath_netbsd.c/1.22/Sat Mar  1 06:04:41 2014/-kk/
 /ath_netbsd.h/1.15/Thu Oct 24 10:28:57 2013/-kk/
 /athioctl.h/1.15/Fri Oct  3 09:25:59 2014/-kk/
@@ -112,7 +112,7 @@
 /athrate-onoe.h/1.2/Sun Feb  5 06:03:26 2006/-kk/
 /athrate-sample.c/1.19/Thu Nov  8 20:43:55 2012/-kk/
 /athrate-sample.h/1.4/Thu Nov  8 20:43:55 2012/-kk/
-/athrate.h/1.2/Sun Feb  5 06:03:26 2006/-kk/
+/athrate.h/1.3/Wed Oct 29 08:13:19 2014/-kk/
 /athvar.h/1.36/Thu Oct 24 10:28:57 2013/-kk/
 /atppc.c/1.32/Sun Jul 20 13:58:46 2014/-kk/
 /atppcreg.h/1.5/Sun Dec 11 12:21:25 2005/-kk/
@@ -155,7 +155,7 @@
 /ciss.c/1.32/Thu Oct 24 10:28:57 2013/-kk/
 /cissreg.h/1.4/Thu Oct 24 10:28:57 2013/-kk/
 /cissvar.h/1.6/Thu Oct 24 10:28:57 2013/-kk/
-/clmpcc.c/1.49/Fri Oct  3 09:09:14 2014/-kk/
+/clmpcc.c/1.50/Wed Oct 29 08:13:19 2014/-kk/
 /clmpccreg.h/1.4/Mon Apr 28 20:23:49 2008/-kk/
 /clmpccvar.h/1.13/Sat Oct 27 17:18:20 2012/-kk/
 /com.c/1.327/Fri Oct  3 09:25:59 2014/-kk/
@@ -205,15 +205,15 @@
 /dp83932.c/1.36/Tue Oct 29 08:21:44 2013/-kk/
 /dp83932reg.h/1.7/Mon Apr 28 20:23:49 2008/-kk/
 /dp83932var.h/1.12/Tue Sep  1 15:20:53 2009/-kk/
-/dpt.c/1.71/Fri Oct  3 09:09:14 2014/-kk/
+/dpt.c/1.72/Wed Oct 29 08:13:19 2014/-kk/
 /dptreg.h/1.19/Mon Sep  8 23:36:54 2008/-kk/
 /dptvar.h/1.16/Sat Oct 27 17:18:20 2012/-kk/
 /ds.h/1.10/Sun Feb 12 16:34:11 2012/-kk/
 /ds1286reg.h/1.8/Sun Dec 11 12:21:26 2005/-kk/
 /ds1687reg.h/1.10/Sun May  4 12:50:38 2008/-kk/
-/dwc_gmac.c/1.8/Sun Oct 19 16:06:45 2014/-kk/
-/dwc_gmac_reg.h/1.4/Sun Oct 19 16:06:45 2014/-kk/
-/dwc_gmac_var.h/1.3/Fri Oct  3 09:57:48 2014/-kk/
+/dwc_gmac.c/1.19/Wed Oct 29 08:13:19 2014/-kk/
+/dwc_gmac_reg.h/1.10/Wed Oct 29 08:13:19 2014/-kk/
+/dwc_gmac_var.h/1.4/Wed Oct 29 08:13:19 2014/-kk/
 /elink3.c/1.135/Fri Oct  3 09:25:59 2014/-kk/
 /elink3reg.h/1.31/Sun Nov  5 05:57:53 2006/-kk/
 /elink3var.h/1.38/Thu Feb  2 19:43:03 2012/-kk/
@@ -313,7 +313,7 @@
 /isp_ioctl.h/1.11/Tue Mar 11 05:33:30 2008/-kk/
 /isp_library.c/1.7/Mon Feb 28 17:17:55 2011/-kk/
 /isp_library.h/1.4/Fri Mar 26 20:52:00 2010/-kk/
-/isp_netbsd.c/1.86/Tue Aug 21 15:53:07 2012/-kk/
+/isp_netbsd.c/1.87/Wed Oct 29 08:13:20 2014/-kk/
 /isp_netbsd.h/1.74/Sun Jul 17 20:54:51 2011/-kk/
 /isp_stds.h/1.5/Fri Mar 26 20:52:00 2010/-kk/
 /isp_target.c/1.34/Fri Mar 26 20:52:00 2010/-kk/
@@ -321,7 +321,7 @@
 /isp_tpublic.h/1.19/Sun Jan  3 02:47:09 2010/-kk/
 /ispmbox.h/1.56/Thu Oct 24 10:28:58 2013/-kk/
 /ispreg.h/1.34/Fri Mar 26 20:52:01 2010/-kk/
-/ispvar.h/1.72/Mon Feb 28 17:17:55 2011/-kk/
+/ispvar.h/1.73/Wed Oct 29 08:13:20 2014/-kk/
 /joy.c/1.20/Fri Oct  3 09:09:14 2014/-kk/
 /joyvar.h/1.7/Wed Nov 23 23:07:32 2011/-kk/
 /lan9118.c/1.17/Fri Oct  3 09:25:59 2014/-kk/
@@ -479,7 +479,7 @@
 /rtl80x9.c/1.16/Sun Jun 22 14:32:15 2014/-kk/
 /rtl80x9reg.h/1.7/Mon Apr 28 20:23:51 2008/-kk/
 /rtl80x9var.h/1.6/Mon Apr 28 20:23:51 2008/-kk/
-/rtl8169.c/1.141/Sun Oct 19 16:06:46 2014/-kk/
+/rtl8169.c/1.142/Wed Oct 29 08:13:20 2014/-kk/
 /rtl8169var.h/1.4/Tue May 12 14:25:18 2009/-kk/
 /rtl81x9.c/1.95/Fri Oct  3 09:26:00 2014/-kk/
 /rtl81x9reg.h/1.46/Sun Oct 19 16:06:46 2014/-kk/

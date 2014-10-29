@@ -357,7 +357,7 @@ sys_setcontext(struct lwp *l, const struct sys_setcontext_args *uap,
  * of sigwaitinfo() and sigwait().
  *
  * This only handles single LWP in signal wait. libpthread provides
- * it's own sigtimedwait() wrapper to DTRT WRT individual threads.
+ * its own sigtimedwait() wrapper to DTRT WRT individual threads.
  */
 int
 sys_____sigtimedwait50(struct lwp *l,

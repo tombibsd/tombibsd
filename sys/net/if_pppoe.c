@@ -1447,7 +1447,7 @@ pppoe_tls(struct sppp *sp)
 	    sc->sc_sppp.pp_auth_failures > 0) {
 		/*
 		 * Delay trying to reconnect a bit more - the peer
-		 * might have failed to contact it's radius server.
+		 * might have failed to contact its radius server.
 		 */
 		wtime = PPPOE_RECON_FAST * sc->sc_sppp.pp_auth_failures;
 		if (wtime > PPPOE_SLOW_RETRY)

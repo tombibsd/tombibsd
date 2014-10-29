@@ -256,7 +256,7 @@ dst_s_filename_length(const char *name, const char *suffix)
 
 /*%
  *  dst_s_build_filename ()
- *	Builds a key filename from the key name, it's id, and a
+ *	Builds a key filename from the key name, its id, and a
  *	suffix.  '\', '/' and ':' are not allowed. fA filename is of the
  *	form:  K&lt;keyname&gt;&lt;id&gt;.&lt;suffix&gt;
  *	form: K&lt;keyname&gt;+&lt;alg&gt;+&lt;id&gt;.&lt;suffix&gt;

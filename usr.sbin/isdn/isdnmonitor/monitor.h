@@ -121,7 +121,7 @@
 #define	I4B_MON_IDEV_STATE		I4B_MON_EVNT_HDR+I4B_MAX_MON_STRING+0	/* 2 byte: state of device */
 
 /*
- * The client sets it's protocol version and event mask (usually once after
+ * The client sets its protocol version and event mask (usually once after
  * connection establishement)
  */
 #define	I4B_MON_CCMD_SETMASK		0x7e			/* command code */

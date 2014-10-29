@@ -3,6 +3,7 @@
 /Makefile.tconfigh/1.1/Wed Jun 29 01:56:58 2011/-kk/
 /Makefile/1.7/Fri Mar 14 04:26:54 2014/-kk/
 D/crtstuff////
+D/libasan////
 D/libbacktrace////
 D/libgcc////
 D/libgomp////

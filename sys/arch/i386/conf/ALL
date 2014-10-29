@@ -497,6 +497,7 @@ viapcib* at pci? dev ? function ?	# VIA VT8235 PCI-ISA w/ SMBus support
 iic*	at viapcib?
 rdcpcib* at pci? dev ? function ?	# RDC Vortex86/PMX-1000 PCI-ISA w/
 pchb*	at pci? dev ? function ?	# PCI-Host bridges
+options 	AGP_X86
 pceb*	at pci? dev ? function ?	# PCI-EISA bridges
 pcib*	at pci? dev ? function ?	# PCI-ISA bridges
 pcmb*	at pci? dev ? function ?	# PCI-MCA bridges

@@ -404,7 +404,7 @@ udp6_output(struct in6pcb * const in6p, struct mbuf *m,
 
 		UDP_STATINC(UDP_STAT_OPACKETS);
 		error = ip_output(m, NULL, &in6p->in6p_route, flags /* XXX */,
-		    NULL, (struct socket *)in6p->in6p_socket);
+		    in6p->in6p_v4moptions, (struct socket *)in6p->in6p_socket);
 		break;
 #else
 		error = EAFNOSUPPORT;

@@ -35,7 +35,7 @@
 /*
  * This file defines the D-channel interface between layer 1 (physical
  * card hardware) and layer 2 of a passive ISDN card (i.e. a card that
- * does not run it's own ISDN stack in firmware).
+ * does not run its own ISDN stack in firmware).
  *
  * Since each layer 1 driver knows in advance it will need to attach
  * to this layer 2, the whole layer 2 softc struct is typically included

@@ -234,7 +234,7 @@ ebus_init_wiring_table(struct ebus_softc *sc)
 
 
 /*
- * attach an ebus and all it's children.  this code is modeled
+ * attach an ebus and all its children.  this code is modeled
  * after the sbus code which does similar things.
  */
 static void

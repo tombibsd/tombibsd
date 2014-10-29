@@ -172,11 +172,6 @@ struct nilfs_mount {
 	/* instance values */
 	struct nilfs_node	*ifile_node;
 
-	/* hash table to lookup ino -> nilfs_node */
-	kmutex_t		 ihash_lock;
-	kmutex_t		 get_node_lock;
-	LIST_HEAD(, nilfs_node)  nilfs_nodes[NILFS_INODE_HASHSIZE];
-
 	/* lists */
 	STAILQ_ENTRY(nilfs_mount) next_mount;		/* in nilfs_device   */
 };

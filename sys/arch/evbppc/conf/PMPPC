@@ -348,6 +348,7 @@ uaudio*	at uhub? port ? configuration ?
 
 # USB MIDI
 umidi* at uhub? port ? configuration ?
+midi*	at midibus?
 
 # USB IrDA
 # USB-IrDA bridge spec

@@ -86,7 +86,7 @@ intr_init(void)
  *			means:
  *				- This vector can't be shared
  *				- 'ih_fun' must save registers
- *				- 'ih_fun' must do it's own interrupt accounting
+ *				- 'ih_fun' must do its own interrupt accounting
  *				- The argument to 'ih_fun' is a standard
  *				  interrupt frame.
  *		- ARG_CLOCKRAME

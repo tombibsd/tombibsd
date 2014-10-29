@@ -358,7 +358,7 @@ struct name {
 struct var {
 	struct	var *v_link;		/* Forward link to next variable */
 	char	*v_name;		/* The variable's name */
-	char	*v_value;		/* And it's current value */
+	char	*v_value;		/* And its current value */
 };
 
 struct group {

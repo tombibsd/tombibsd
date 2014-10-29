@@ -1187,6 +1187,7 @@ run			MI
 rx			MI
 ry			vax
 rz			pmax
+s390rtc			MI
 sab			MI
 sableio			alpha
 sacc			hpcarm

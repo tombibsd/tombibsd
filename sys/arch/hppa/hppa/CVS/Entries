@@ -8,7 +8,7 @@
 /db_machdep.c/1.7/Mon Apr  2 13:18:04 2012/-kk/
 /db_memrw.c/1.7/Tue Nov  3 05:07:26 2009/-kk/
 /db_trace.c/1.13/Thu Oct 24 10:28:57 2013/-kk/
-/disksubr.c/1.1/Mon Feb 24 07:23:43 2014/-kk/
+/disksubr.c/1.2/Wed Oct 29 08:13:03 2014/-kk/
 /fpemu.S/1.6/Tue Nov  3 05:07:26 2009/-kk/
 /fpu.c/1.24/Fri Apr  6 12:21:59 2012/-kk/
 /genassym.cf/1.1/Mon Feb 24 07:23:43 2014/-kk/

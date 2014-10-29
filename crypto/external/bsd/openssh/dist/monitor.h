@@ -1,5 +1,5 @@
 /*	$NetBSD$	*/
-/* $OpenBSD: monitor.h,v 1.17 2012/12/02 20:34:10 djm Exp $ */
+/* $OpenBSD: monitor.h,v 1.18 2014/01/29 06:18:35 djm Exp $ */
 
 /*
  * Copyright 2002 Niels Provos <provos@citi.umich.edu>

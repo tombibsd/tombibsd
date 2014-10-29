@@ -21,7 +21,7 @@
 
 /*
  * The address to which unspecified mapping requests default
- * Put the stack in it's own segment and start mmaping at the
+ * Put the stack in its own segment and start mmaping at the
  * top of the next lower segment.
  */
 #define	__USE_TOPDOWN_VM

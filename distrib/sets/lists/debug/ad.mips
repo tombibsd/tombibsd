@@ -71,7 +71,7 @@
 ./usr/libdata/debug/usr/lib/64/libbluetooth.so.4.2.debug	comp-sys-debug	debug,compat,arch64
 ./usr/libdata/debug/usr/lib/64/libbsdmalloc.so.0.0.debug	comp-sys-debug	debug,compat,arch64
 ./usr/libdata/debug/usr/lib/64/libbz2.so.1.1.debug		comp-sys-debug	debug,compat,arch64
-./usr/libdata/debug/usr/lib/64/libc.so.12.195.debug	comp-sys-debug	debug,compat,arch64
+./usr/libdata/debug/usr/lib/64/libc.so.12.196.debug	comp-sys-debug	debug,compat,arch64
 ./usr/libdata/debug/usr/lib/64/libcom_err.so.6.0.debug	 comp-compat-shlib	 compat,pic,kerberos,debug,obsolete,arch64
 ./usr/libdata/debug/usr/lib/64/libcom_err.so.7.0.debug	 comp-compat-shlib	 compat,pic,kerberos,debug,arch64
 ./usr/libdata/debug/usr/lib/64/libcrypt.so.1.0.debug	comp-sys-debug	debug,compat,arch64
@@ -189,7 +189,7 @@
 ./usr/libdata/debug/usr/lib/64/libsl.so.5.0.debug		comp-krb5-debug	kerberos,debug,compat,arch64
 ./usr/libdata/debug/usr/lib/64/libsqlite3.so.1.2.debug	comp-sys-debug	debug,compat,arch64
 ./usr/libdata/debug/usr/lib/64/libss.so.6.0.debug		comp-krb5-debug	obsolete
-./usr/libdata/debug/usr/lib/64/libssh.so.22.0.debug	comp-secsh-debug	crypto,debug,compat,arch64
+./usr/libdata/debug/usr/lib/64/libssh.so.23.0.debug	comp-secsh-debug	crypto,debug,compat,arch64
 ./usr/libdata/debug/usr/lib/64/libssl.so.10.4.debug		comp-crypto-debug	crypto,debug,compat,arch64
 ./usr/libdata/debug/usr/lib/64/libstdc++.so.5.0.debug	comp-sys-debug	gcc=3,cxx,debug,compat,libstdcxx,arch64
 ./usr/libdata/debug/usr/lib/64/libstdc++.so.7.0.debug	comp-sys-debug	gcc=4,cxx,debug,compat,libstdcxx,arch64
@@ -249,7 +249,7 @@
 ./usr/libdata/debug/usr/lib/o32/libbluetooth.so.4.2.debug	comp-sys-debug	debug,compat,arch64
 ./usr/libdata/debug/usr/lib/o32/libbsdmalloc.so.0.0.debug	comp-sys-debug	debug,compat,arch64
 ./usr/libdata/debug/usr/lib/o32/libbz2.so.1.1.debug		comp-sys-debug	debug,compat,arch64
-./usr/libdata/debug/usr/lib/o32/libc.so.12.195.debug	comp-sys-debug	debug,compat,arch64
+./usr/libdata/debug/usr/lib/o32/libc.so.12.196.debug	comp-sys-debug	debug,compat,arch64
 ./usr/libdata/debug/usr/lib/o32/libcom_err.so.6.0.debug	 comp-compat-shlib	 compat,pic,kerberos,debug,obsolete,arch64
 ./usr/libdata/debug/usr/lib/o32/libcom_err.so.7.0.debug	 comp-compat-shlib	 compat,pic,kerberos,debug,arch64
 ./usr/libdata/debug/usr/lib/o32/libcrypt.so.1.0.debug	comp-sys-debug	debug,compat,arch64
@@ -367,7 +367,7 @@
 ./usr/libdata/debug/usr/lib/o32/libsl.so.5.0.debug		comp-krb5-debug	kerberos,debug,compat,arch64
 ./usr/libdata/debug/usr/lib/o32/libsqlite3.so.1.2.debug	comp-sys-debug	debug,compat,arch64
 ./usr/libdata/debug/usr/lib/o32/libss.so.6.0.debug		comp-krb5-debug	obsolete
-./usr/libdata/debug/usr/lib/o32/libssh.so.22.0.debug	comp-secsh-debug	crypto,debug,compat,arch64
+./usr/libdata/debug/usr/lib/o32/libssh.so.23.0.debug	comp-secsh-debug	crypto,debug,compat,arch64
 ./usr/libdata/debug/usr/lib/o32/libssl.so.10.4.debug		comp-crypto-debug	crypto,debug,compat,arch64
 ./usr/libdata/debug/usr/lib/o32/libstdc++.so.5.0.debug	comp-sys-debug	gcc=3,cxx,debug,compat,libstdcxx,arch64
 ./usr/libdata/debug/usr/lib/o32/libstdc++.so.7.0.debug	comp-sys-debug	gcc=4,cxx,debug,compat,libstdcxx,arch64

@@ -9,12 +9,12 @@
 /arm-ldmstm.ml/1.1.1.2/Mon Mar  3 02:45:02 2014/-kk/
 /arm-modes.def/1.1.1.2/Fri Mar 14 04:25:39 2014/-kk/
 /arm-opts.h/1.1.1.1/Sat Mar  1 08:43:30 2014/-kk/
-/arm-protos.h/1.1.1.2/Fri Mar 14 04:25:39 2014/-kk/
+/arm-protos.h/1.1.1.3/Wed Oct 29 08:10:28 2014/-kk/
 /arm-tables.opt/1.1.1.1/Sat Mar  1 08:43:28 2014/-kk/
 /arm-tune.md/1.1.1.2/Fri Mar 14 04:25:39 2014/-kk/
-/arm.c/1.1.1.4/Tue Jun  3 03:06:37 2014/-kk/
+/arm.c/1.1.1.5/Wed Oct 29 08:10:29 2014/-kk/
 /arm.h/1.9/Tue Jun  3 03:06:37 2014/-kk/
-/arm.md/1.6/Fri Mar 14 04:25:40 2014/-kk/
+/arm.md/1.7/Wed Oct 29 08:10:29 2014/-kk/
 /arm.opt/1.1.1.2/Fri Mar 14 04:25:40 2014/-kk/
 /arm1020e.md/1.1.1.2/Fri Mar 14 04:25:40 2014/-kk/
 /arm1026ejs.md/1.1.1.2/Fri Mar 14 04:25:40 2014/-kk/
@@ -24,7 +24,7 @@
 /bpabi-netbsd.c/1.1/Mon Aug  6 00:24:13 2012/-kk/
 /bpabi.h/1.5/Fri Mar 14 04:25:40 2014/-kk/
 /coff.h/1.1.1.2/Fri Mar 14 04:25:40 2014/-kk/
-/constraints.md/1.1.1.2/Fri Mar 14 04:25:40 2014/-kk/
+/constraints.md/1.1.1.3/Wed Oct 29 08:10:29 2014/-kk/
 /cortex-a15-neon.md/1.1.1.1/Sat Mar  1 08:43:30 2014/-kk/
 /cortex-a15.md/1.1.1.1/Sat Mar  1 08:43:28 2014/-kk/
 /cortex-a5.md/1.1.1.1/Sat Mar  1 08:43:30 2014/-kk/
@@ -74,7 +74,7 @@
 /t-bpabi/1.1.1.2/Fri Mar 14 04:25:40 2014/-kk/
 /t-linux-androideabi/1.1.1.1/Sat Mar  1 08:43:30 2014/-kk/
 /t-linux-eabi/1.1.1.2/Fri Mar 14 04:25:40 2014/-kk/
-/t-rtems-eabi/1.1.1.1/Sat Mar  1 08:43:30 2014/-kk/
+/t-rtems-eabi/1.1.1.2/Wed Oct 29 08:10:29 2014/-kk/
 /t-symbian/1.1.1.2/Fri Mar 14 04:25:40 2014/-kk/
 /t-vxworks/1.1.1.2/Fri Mar 14 04:25:40 2014/-kk/
 /thumb2.md/1.3/Fri Mar 14 04:25:40 2014/-kk/

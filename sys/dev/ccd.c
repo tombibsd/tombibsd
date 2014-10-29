@@ -1479,7 +1479,10 @@ ccdgetdefaultlabel(struct ccd_softc *cs, struct disklabel *lp)
 
 	memset(lp, 0, sizeof(*lp));
 
-	lp->d_secperunit = cs->sc_size;
+	if (cs->sc_size > UINT32_MAX)
+		lp->d_secperunit = UINT32_MAX;
+	else
+		lp->d_secperunit = cs->sc_size;
 	lp->d_secsize = ccg->ccg_secsize;
 	lp->d_nsectors = ccg->ccg_nsectors;
 	lp->d_ntracks = ccg->ccg_ntracks;
@@ -1494,7 +1497,7 @@ ccdgetdefaultlabel(struct ccd_softc *cs, struct disklabel *lp)
 	lp->d_flags = 0;
 
 	lp->d_partitions[RAW_PART].p_offset = 0;
-	lp->d_partitions[RAW_PART].p_size = cs->sc_size;
+	lp->d_partitions[RAW_PART].p_size = lp->d_secperunit;
 	lp->d_partitions[RAW_PART].p_fstype = FS_UNUSED;
 	lp->d_npartitions = RAW_PART + 1;
 
@@ -1549,7 +1552,9 @@ ccdgetdisklabel(dev_t dev)
 		 * same componets are used, and old disklabel may used
 		 * if that is found.
 		 */
-		if (lp->d_secperunit != cs->sc_size)
+		if (lp->d_secperunit < UINT32_MAX ?
+			lp->d_secperunit != cs->sc_size :
+			lp->d_secperunit > cs->sc_size)
 			printf("WARNING: %s: "
 			    "total sector size in disklabel (%ju) != "
 			    "the size of ccd (%ju)\n", cs->sc_xname,

@@ -1,5 +1,5 @@
 /ABOUT-GCC-NLS/1.1.1.2/Fri Mar 14 04:24:57 2014/-kk/
-/BASE-VER/1.1.1.3/Fri Mar 14 04:24:57 2014/-kk/
+/BASE-VER/1.1.1.4/Wed Oct 29 08:10:27 2014/-kk/
 /COPYING.LIB/1.1.1.1/Tue Jun 21 01:20:08 2011/-kk/
 /COPYING/1.1.1.1/Tue Jun 21 01:19:55 2011/-kk/
 /COPYING3.LIB/1.1.1.1/Tue Jun 21 01:20:01 2011/-kk/
@@ -26,9 +26,9 @@
 /ChangeLog.ptr/1.1.1.2/Fri Mar 14 04:25:06 2014/-kk/
 /ChangeLog.tree-ssa/1.1.1.2/Fri Mar 14 04:25:06 2014/-kk/
 /ChangeLog.tuples/1.1.1.2/Fri Mar 14 04:25:06 2014/-kk/
-/ChangeLog/1.8/Tue Jun  3 03:06:35 2014/-kk/
-/DATESTAMP/1.1.1.5/Tue Jun  3 03:06:35 2014/-kk/
-/DEV-PHASE/1.1.1.3/Tue Jun  3 03:06:35 2014/-kk/
+/ChangeLog/1.9/Wed Oct 29 08:10:27 2014/-kk/
+/DATESTAMP/1.1.1.6/Wed Oct 29 08:10:27 2014/-kk/
+/DEV-PHASE/1.1.1.4/Wed Oct 29 08:10:27 2014/-kk/
 /FSFChangeLog.10/1.1.1.2/Fri Mar 14 04:25:06 2014/-kk/
 /FSFChangeLog.11/1.1.1.2/Fri Mar 14 04:25:06 2014/-kk/
 /FSFChangeLog/1.1.1.2/Fri Mar 14 04:25:06 2014/-kk/
@@ -77,7 +77,7 @@
 /cgraph.h/1.1.1.2/Fri Mar 14 04:25:09 2014/-kk/
 /cgraphbuild.c/1.1.1.2/Fri Mar 14 04:25:09 2014/-kk/
 /cgraphclones.c/1.1.1.1/Sat Mar  1 08:42:12 2014/-kk/
-/cgraphunit.c/1.1.1.2/Fri Mar 14 04:25:09 2014/-kk/
+/cgraphunit.c/1.1.1.3/Wed Oct 29 08:10:27 2014/-kk/
 /cif-code.def/1.1.1.2/Fri Mar 14 04:25:09 2014/-kk/
 /collect2-aix.c/1.1.1.2/Fri Mar 14 04:25:09 2014/-kk/
 /collect2-aix.h/1.1.1.2/Fri Mar 14 04:25:09 2014/-kk/
@@ -85,7 +85,7 @@
 /collect2.h/1.1.1.2/Fri Mar 14 04:25:09 2014/-kk/
 /combine-stack-adj.c/1.1.1.2/Fri Mar 14 04:25:09 2014/-kk/
 /combine.c/1.1.1.4/Fri Mar 14 04:25:09 2014/-kk/
-/common.opt/1.1.1.2/Fri Mar 14 04:25:09 2014/-kk/
+/common.opt/1.1.1.3/Wed Oct 29 08:10:27 2014/-kk/
 /compare-elim.c/1.1.1.1/Sat Mar  1 08:42:12 2014/-kk/
 /conditions.h/1.1.1.2/Fri Mar 14 04:25:10 2014/-kk/
 /config.build/1.1.1.2/Fri Mar 14 04:25:10 2014/-kk/
@@ -138,7 +138,7 @@
 /dominance.c/1.1.1.2/Fri Mar 14 04:25:11 2014/-kk/
 /domwalk.c/1.1.1.2/Fri Mar 14 04:25:11 2014/-kk/
 /domwalk.h/1.1.1.2/Fri Mar 14 04:25:11 2014/-kk/
-/double-int.c/1.1.1.2/Fri Mar 14 04:25:11 2014/-kk/
+/double-int.c/1.1.1.3/Wed Oct 29 08:10:27 2014/-kk/
 /double-int.h/1.1.1.2/Fri Mar 14 04:25:11 2014/-kk/
 /dse.c/1.3/Tue Jun  3 03:06:35 2014/-kk/
 /dumpfile.c/1.1.1.1/Sat Mar  1 08:42:04 2014/-kk/
@@ -146,10 +146,10 @@
 /dwarf2asm.c/1.1.1.2/Fri Mar 14 04:25:11 2014/-kk/
 /dwarf2asm.h/1.1.1.2/Fri Mar 14 04:25:11 2014/-kk/
 /dwarf2cfi.c/1.1.1.1/Sat Mar  1 08:42:49 2014/-kk/
-/dwarf2out.c/1.3/Fri Mar 14 04:25:16 2014/-kk/
+/dwarf2out.c/1.4/Wed Oct 29 08:10:27 2014/-kk/
 /dwarf2out.h/1.1.1.2/Fri Mar 14 04:25:16 2014/-kk/
-/emit-rtl.c/1.1.1.2/Fri Mar 14 04:25:16 2014/-kk/
-/emit-rtl.h/1.1.1.2/Fri Mar 14 04:25:16 2014/-kk/
+/emit-rtl.c/1.1.1.3/Wed Oct 29 08:10:27 2014/-kk/
+/emit-rtl.h/1.1.1.3/Wed Oct 29 08:10:27 2014/-kk/
 /errors.c/1.1.1.2/Fri Mar 14 04:25:16 2014/-kk/
 /errors.h/1.1.1.2/Fri Mar 14 04:25:16 2014/-kk/
 /et-forest.c/1.1.1.2/Fri Mar 14 04:25:16 2014/-kk/
@@ -160,7 +160,7 @@
 /explow.c/1.1.1.2/Fri Mar 14 04:25:16 2014/-kk/
 /expmed.c/1.1.1.2/Fri Mar 14 04:25:16 2014/-kk/
 /expmed.h/1.1.1.1/Sat Mar  1 08:42:45 2014/-kk/
-/expr.c/1.5/Tue Jun  3 03:06:36 2014/-kk/
+/expr.c/1.6/Wed Oct 29 08:10:27 2014/-kk/
 /expr.h/1.1.1.4/Tue Jun  3 03:06:36 2014/-kk/
 /file-find.c/1.1.1.1/Sat Mar  1 08:42:55 2014/-kk/
 /file-find.h/1.1.1.1/Sat Mar  1 08:42:01 2014/-kk/
@@ -169,9 +169,9 @@
 /fixed-value.h/1.1.1.2/Fri Mar 14 04:25:16 2014/-kk/
 /flag-types.h/1.1.1.1/Sat Mar  1 08:42:23 2014/-kk/
 /flags.h/1.1.1.2/Fri Mar 14 04:25:16 2014/-kk/
-/fold-const.c/1.1.1.5/Tue Jun  3 03:06:36 2014/-kk/
+/fold-const.c/1.1.1.6/Wed Oct 29 08:10:27 2014/-kk/
 /fp-test.c/1.1.1.2/Fri Mar 14 04:25:16 2014/-kk/
-/function.c/1.1.1.4/Tue Jun  3 03:06:36 2014/-kk/
+/function.c/1.1.1.5/Wed Oct 29 08:10:27 2014/-kk/
 /function.h/1.1.1.2/Fri Mar 14 04:25:17 2014/-kk/
 /fwprop.c/1.1.1.3/Fri Mar 14 04:25:17 2014/-kk/
 /gcc-ar.c/1.1.1.1/Sat Mar  1 08:42:21 2014/-kk/
@@ -224,7 +224,7 @@
 /ggc-none.c/1.1.1.2/Fri Mar 14 04:25:18 2014/-kk/
 /ggc-page.c/1.1.1.2/Fri Mar 14 04:25:18 2014/-kk/
 /ggc.h/1.1.1.2/Fri Mar 14 04:25:18 2014/-kk/
-/gimple-fold.c/1.1.1.2/Mon Mar  3 02:44:18 2014/-kk/
+/gimple-fold.c/1.1.1.3/Wed Oct 29 08:10:27 2014/-kk/
 /gimple-fold.h/1.1.1.1/Sat Mar  1 08:42:46 2014/-kk/
 /gimple-iterator.c/1.1.1.2/Fri Mar 14 04:25:18 2014/-kk/
 /gimple-low.c/1.1.1.2/Fri Mar 14 04:25:18 2014/-kk/
@@ -262,7 +262,7 @@
 /gsyms.h/1.1.1.2/Fri Mar 14 04:25:20 2014/-kk/
 /gsyslimits.h/1.1.1.1/Tue Jun 21 01:20:19 2011/-kk/
 /gtm-builtins.def/1.1.1.1/Sat Mar  1 08:42:52 2014/-kk/
-/haifa-sched.c/1.1.1.2/Fri Mar 14 04:25:20 2014/-kk/
+/haifa-sched.c/1.1.1.3/Wed Oct 29 08:10:27 2014/-kk/
 /hard-reg-set.h/1.1.1.2/Fri Mar 14 04:25:20 2014/-kk/
 /hash-table.c/1.1.1.1/Sat Mar  1 08:42:16 2014/-kk/
 /hash-table.h/1.1.1.1/Sat Mar  1 08:42:16 2014/-kk/
@@ -276,7 +276,7 @@
 /hw-doloop.h/1.1.1.1/Sat Mar  1 08:42:22 2014/-kk/
 /hwint.c/1.1.1.1/Sat Mar  1 08:42:52 2014/-kk/
 /hwint.h/1.3/Fri Mar 14 04:25:20 2014/-kk/
-/ifcvt.c/1.1.1.3/Fri Mar 14 04:25:20 2014/-kk/
+/ifcvt.c/1.1.1.4/Wed Oct 29 08:10:27 2014/-kk/
 /incpath.c/1.1.1.2/Fri Mar 14 04:25:20 2014/-kk/
 /incpath.h/1.1.1.2/Fri Mar 14 04:25:20 2014/-kk/
 /init-regs.c/1.1.1.2/Fri Mar 14 04:25:20 2014/-kk/
@@ -289,7 +289,7 @@
 /internal-fn.h/1.1.1.1/Sat Mar  1 08:42:07 2014/-kk/
 /intl.c/1.1.1.2/Fri Mar 14 04:25:20 2014/-kk/
 /intl.h/1.1.1.2/Fri Mar 14 04:25:20 2014/-kk/
-/ipa-cp.c/1.1.1.4/Tue Jun  3 03:06:36 2014/-kk/
+/ipa-cp.c/1.1.1.5/Wed Oct 29 08:10:27 2014/-kk/
 /ipa-inline-analysis.c/1.1.1.1/Sat Mar  1 08:42:39 2014/-kk/
 /ipa-inline-transform.c/1.1.1.1/Sat Mar  1 08:42:09 2014/-kk/
 /ipa-inline.c/1.1.1.2/Fri Mar 14 04:25:21 2014/-kk/
@@ -365,7 +365,7 @@
 /omega.c/1.1.1.2/Fri Mar 14 04:25:23 2014/-kk/
 /omega.h/1.1.1.2/Fri Mar 14 04:25:23 2014/-kk/
 /omp-builtins.def/1.1.1.2/Fri Mar 14 04:25:23 2014/-kk/
-/omp-low.c/1.1.1.2/Fri Mar 14 04:25:23 2014/-kk/
+/omp-low.c/1.1.1.3/Wed Oct 29 08:10:28 2014/-kk/
 /opt-functions.awk/1.1.1.2/Fri Mar 14 04:25:23 2014/-kk/
 /opt-gather.awk/1.1.1.2/Fri Mar 14 04:25:23 2014/-kk/
 /opt-include.awk/1.1.1.1/Sat Mar  1 08:42:53 2014/-kk/
@@ -416,7 +416,7 @@
 /ree.c/1.1.1.1/Sat Mar  1 08:42:53 2014/-kk/
 /reg-notes.def/1.1.1.2/Fri Mar 14 04:25:25 2014/-kk/
 /reg-stack.c/1.1.1.2/Fri Mar 14 04:25:25 2014/-kk/
-/regcprop.c/1.1.1.2/Fri Mar 14 04:25:25 2014/-kk/
+/regcprop.c/1.1.1.3/Wed Oct 29 08:10:28 2014/-kk/
 /reginfo.c/1.1.1.2/Fri Mar 14 04:25:25 2014/-kk/
 /regmove.c/1.1.1.3/Fri Mar 14 04:25:25 2014/-kk/
 /regrename.c/1.1.1.2/Fri Mar 14 04:25:25 2014/-kk/
@@ -441,7 +441,7 @@
 /sanitizer.def/1.1.1.1/Sat Mar  1 08:42:10 2014/-kk/
 /sbitmap.c/1.1.1.2/Fri Mar 14 04:25:26 2014/-kk/
 /sbitmap.h/1.1.1.2/Fri Mar 14 04:25:26 2014/-kk/
-/sched-deps.c/1.1.1.2/Fri Mar 14 04:25:26 2014/-kk/
+/sched-deps.c/1.1.1.3/Wed Oct 29 08:10:28 2014/-kk/
 /sched-ebb.c/1.1.1.2/Fri Mar 14 04:25:26 2014/-kk/
 /sched-int.h/1.1.1.2/Fri Mar 14 04:25:26 2014/-kk/
 /sched-rgn.c/1.1.1.2/Fri Mar 14 04:25:26 2014/-kk/
@@ -450,7 +450,7 @@
 /sdbout.h/1.1.1.2/Fri Mar 14 04:25:26 2014/-kk/
 /sel-sched-dump.c/1.1.1.2/Fri Mar 14 04:25:26 2014/-kk/
 /sel-sched-dump.h/1.1.1.2/Fri Mar 14 04:25:26 2014/-kk/
-/sel-sched-ir.c/1.1.1.2/Fri Mar 14 04:25:26 2014/-kk/
+/sel-sched-ir.c/1.1.1.3/Wed Oct 29 08:10:28 2014/-kk/
 /sel-sched-ir.h/1.1.1.2/Fri Mar 14 04:25:26 2014/-kk/
 /sel-sched.c/1.1.1.3/Fri Mar 14 04:25:26 2014/-kk/
 /sel-sched.h/1.1.1.2/Fri Mar 14 04:25:26 2014/-kk/
@@ -487,7 +487,7 @@
 /timevar.def/1.1.1.2/Fri Mar 14 04:25:27 2014/-kk/
 /timevar.h/1.1.1.2/Fri Mar 14 04:25:27 2014/-kk/
 /tlink.c/1.1.1.2/Fri Mar 14 04:25:27 2014/-kk/
-/toplev.c/1.1.1.2/Fri Mar 14 04:25:27 2014/-kk/
+/toplev.c/1.1.1.3/Wed Oct 29 08:10:28 2014/-kk/
 /toplev.h/1.1.1.2/Fri Mar 14 04:25:27 2014/-kk/
 /tracer.c/1.1.1.2/Fri Mar 14 04:25:27 2014/-kk/
 /trans-mem.c/1.1.1.1/Sat Mar  1 08:42:39 2014/-kk/
@@ -498,7 +498,7 @@
 /tree-browser.def/1.1.1.2/Fri Mar 14 04:25:28 2014/-kk/
 /tree-call-cdce.c/1.1.1.2/Fri Mar 14 04:25:28 2014/-kk/
 /tree-cfg.c/1.4/Fri Mar 14 04:25:28 2014/-kk/
-/tree-cfgcleanup.c/1.1.1.4/Tue Jun  3 03:06:36 2014/-kk/
+/tree-cfgcleanup.c/1.1.1.5/Wed Oct 29 08:10:28 2014/-kk/
 /tree-chrec.c/1.1.1.2/Fri Mar 14 04:25:28 2014/-kk/
 /tree-chrec.h/1.1.1.2/Fri Mar 14 04:25:28 2014/-kk/
 /tree-complex.c/1.1.1.2/Fri Mar 14 04:25:28 2014/-kk/
@@ -537,7 +537,7 @@
 /tree-profile.c/1.1.1.2/Fri Mar 14 04:25:29 2014/-kk/
 /tree-scalar-evolution.c/1.1.1.3/Fri Mar 14 04:25:30 2014/-kk/
 /tree-scalar-evolution.h/1.1.1.2/Fri Mar 14 04:25:30 2014/-kk/
-/tree-sra.c/1.1.1.4/Tue Jun  3 03:06:36 2014/-kk/
+/tree-sra.c/1.1.1.5/Wed Oct 29 08:10:28 2014/-kk/
 /tree-ssa-address.c/1.1.1.2/Fri Mar 14 04:25:30 2014/-kk/
 /tree-ssa-alias.c/1.1.1.2/Fri Mar 14 04:25:30 2014/-kk/
 /tree-ssa-alias.h/1.1.1.2/Fri Mar 14 04:25:30 2014/-kk/
@@ -549,7 +549,7 @@
 /tree-ssa-dom.c/1.1.1.3/Fri Mar 14 04:25:31 2014/-kk/
 /tree-ssa-dse.c/1.1.1.2/Fri Mar 14 04:25:31 2014/-kk/
 /tree-ssa-forwprop.c/1.1.1.2/Fri Mar 14 04:25:31 2014/-kk/
-/tree-ssa-ifcombine.c/1.1.1.2/Fri Mar 14 04:25:31 2014/-kk/
+/tree-ssa-ifcombine.c/1.1.1.3/Wed Oct 29 08:10:28 2014/-kk/
 /tree-ssa-live.c/1.1.1.3/Fri Mar 14 04:25:31 2014/-kk/
 /tree-ssa-live.h/1.1.1.2/Fri Mar 14 04:25:31 2014/-kk/
 /tree-ssa-loop-ch.c/1.1.1.2/Fri Mar 14 04:25:31 2014/-kk/
@@ -561,7 +561,7 @@
 /tree-ssa-loop-prefetch.c/1.1.1.2/Fri Mar 14 04:25:31 2014/-kk/
 /tree-ssa-loop-unswitch.c/1.1.1.2/Fri Mar 14 04:25:31 2014/-kk/
 /tree-ssa-loop.c/1.1.1.2/Fri Mar 14 04:25:31 2014/-kk/
-/tree-ssa-math-opts.c/1.1.1.3/Tue Jun  3 03:06:37 2014/-kk/
+/tree-ssa-math-opts.c/1.1.1.4/Wed Oct 29 08:10:28 2014/-kk/
 /tree-ssa-operands.c/1.1.1.3/Tue Jun  3 03:06:37 2014/-kk/
 /tree-ssa-operands.h/1.1.1.2/Fri Mar 14 04:25:31 2014/-kk/
 /tree-ssa-phiopt.c/1.1.1.2/Fri Mar 14 04:25:31 2014/-kk/
@@ -570,12 +570,12 @@
 /tree-ssa-propagate.c/1.1.1.3/Tue Jun  3 03:06:37 2014/-kk/
 /tree-ssa-propagate.h/1.1.1.2/Fri Mar 14 04:25:31 2014/-kk/
 /tree-ssa-reassoc.c/1.1.1.3/Tue Jun  3 03:06:37 2014/-kk/
-/tree-ssa-sccvn.c/1.1.1.3/Fri Mar 14 04:25:32 2014/-kk/
+/tree-ssa-sccvn.c/1.1.1.4/Wed Oct 29 08:10:28 2014/-kk/
 /tree-ssa-sccvn.h/1.1.1.2/Fri Mar 14 04:25:32 2014/-kk/
 /tree-ssa-sink.c/1.1.1.2/Fri Mar 14 04:25:32 2014/-kk/
 /tree-ssa-strlen.c/1.1.1.1/Sat Mar  1 08:42:05 2014/-kk/
 /tree-ssa-structalias.c/1.1.1.4/Tue Jun  3 03:06:37 2014/-kk/
-/tree-ssa-tail-merge.c/1.1.1.1/Sat Mar  1 08:42:03 2014/-kk/
+/tree-ssa-tail-merge.c/1.1.1.2/Wed Oct 29 08:10:28 2014/-kk/
 /tree-ssa-ter.c/1.1.1.2/Fri Mar 14 04:25:32 2014/-kk/
 /tree-ssa-threadedge.c/1.1.1.2/Fri Mar 14 04:25:32 2014/-kk/
 /tree-ssa-threadupdate.c/1.1.1.2/Fri Mar 14 04:25:32 2014/-kk/
@@ -591,15 +591,15 @@
 /tree-streamer.h/1.1.1.1/Sat Mar  1 08:42:07 2014/-kk/
 /tree-switch-conversion.c/1.1.1.3/Fri Mar 14 04:25:32 2014/-kk/
 /tree-tailcall.c/1.1.1.3/Fri Mar 14 04:25:32 2014/-kk/
-/tree-vect-data-refs.c/1.1.1.5/Tue Jun  3 03:06:37 2014/-kk/
+/tree-vect-data-refs.c/1.1.1.6/Wed Oct 29 08:10:28 2014/-kk/
 /tree-vect-generic.c/1.1.1.3/Tue Jun  3 03:06:37 2014/-kk/
 /tree-vect-loop-manip.c/1.1.1.3/Fri Mar 14 04:25:32 2014/-kk/
-/tree-vect-loop.c/1.1.1.5/Tue Jun  3 03:06:37 2014/-kk/
-/tree-vect-patterns.c/1.1.1.2/Fri Mar 14 04:25:33 2014/-kk/
-/tree-vect-slp.c/1.1.1.2/Fri Mar 14 04:25:33 2014/-kk/
-/tree-vect-stmts.c/1.1.1.4/Fri Mar 14 04:25:33 2014/-kk/
+/tree-vect-loop.c/1.1.1.6/Wed Oct 29 08:10:28 2014/-kk/
+/tree-vect-patterns.c/1.1.1.3/Wed Oct 29 08:10:28 2014/-kk/
+/tree-vect-slp.c/1.1.1.3/Wed Oct 29 08:10:28 2014/-kk/
+/tree-vect-stmts.c/1.1.1.5/Wed Oct 29 08:10:28 2014/-kk/
 /tree-vectorizer.c/1.1.1.2/Fri Mar 14 04:25:33 2014/-kk/
-/tree-vectorizer.h/1.1.1.4/Fri Mar 14 04:25:33 2014/-kk/
+/tree-vectorizer.h/1.1.1.5/Wed Oct 29 08:10:28 2014/-kk/
 /tree-vrp.c/1.1.1.3/Fri Mar 14 04:25:33 2014/-kk/
 /tree.c/1.1.1.3/Tue Jun  3 03:06:37 2014/-kk/
 /tree.def/1.1.1.2/Fri Mar 14 04:25:33 2014/-kk/

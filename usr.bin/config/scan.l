@@ -530,6 +530,7 @@ include(const char *fname, int ateof, int conditional, int direct)
 	if (interesting)
 		logconfig_include(fp, fname);
 	incl = in;
+	CFGDBG(1, "include `%s' from `%s' line %d", fname, yyfile, yyline);
 	yy_switch_to_buffer(yy_create_buffer(fp, YY_BUF_SIZE));
 	yyfile = intern(s);
 	yyline = 1;

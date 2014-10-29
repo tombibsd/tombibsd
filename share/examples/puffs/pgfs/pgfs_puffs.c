@@ -548,7 +548,7 @@ pgfs_node_read(struct puffs_usermount *pu, puffs_cookie_t opc,
 retry:
 	xc = begin(pu, "read");
 	/*
-	 * try to update atime first as it's prune to conflict with other
+	 * try to update atime first as it's prone to conflict with other
 	 * transactions.  eg. read-ahead requests can conflict each other.
 	 * we don't want to retry my_lo_read as it's expensive.
 	 *

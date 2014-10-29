@@ -1086,7 +1086,7 @@ ufs_mkdir(void *v)
 	memcpy((void *)bp->b_data, (void *)&dirtemplate, sizeof dirtemplate);
 
 	/*
-	 * Directory set up, now install it's entry in the parent directory.
+	 * Directory set up, now install its entry in the parent directory.
 	 * We must write out the buffer containing the new directory body
 	 * before entering the new name in the parent.
 	 */

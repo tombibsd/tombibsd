@@ -601,7 +601,12 @@ awin_device_register(device_t self, void *aux)
 		}
 #endif
 #if AWIN_board == AWIN_hummingbird_a31
+		prop_dictionary_set_cstring(dict, "usb0iddet", "<PA15");
+		prop_dictionary_set_cstring(dict, "usb0vbusdet", "<PA16");
+		prop_dictionary_set_cstring(dict, "usb0drv", ">PA17");
+		prop_dictionary_set_cstring(dict, "usb0restrict", ">PA18");
 		prop_dictionary_set_cstring(dict, "usb1drv", ">PH27");
+		prop_dictionary_set_cstring(dict, "usb1restrict", ">PH26");
 		prop_dictionary_set_cstring(dict, "usb2drv", ">PH24");
 #else
 		prop_dictionary_set_cstring(dict, "usb2drv", ">PH3");
@@ -627,7 +632,16 @@ awin_device_register(device_t self, void *aux)
 #elif AWIN_board == AWIN_hummingbird_a31
 		prop_dictionary_set_cstring(dict, "mmc0detect", "<PH8");
 #endif
+
+#if AWIN_board == AWIN_hummingbird_a31
+		prop_dictionary_set_cstring(dict, "audiopactrl", ">PH22");
+#else
 		prop_dictionary_set_cstring(dict, "audiopactrl", ">PH15");
+#endif
+
+#if AWIN_board == AWIN_bpi
+		prop_dictionary_set_cstring(dict, "gmacpwren", ">PH23");
+#endif
 
 		/*
 		 * These pins have no connections.
@@ -664,6 +678,37 @@ awin_device_register(device_t self, void *aux)
 
 	if (device_is_a(self, "awinac")) {
 		prop_dictionary_set_cstring(dict, "pactrl-gpio", "audiopactrl");
+		return;
+	}
+
+	if (device_is_a(self, "awge")) {
+		/*
+		 * Get the GMAC MAC address from cmdline.
+		 */
+		uint8_t enaddr[ETHER_ADDR_LEN];
+		char argname[strlen("awge?.mac-address") + 1];
+		char *mac_addr;
+		snprintf(argname, sizeof(argname), "%s.mac-address",
+		    device_xname(self));
+		if (get_bootconf_option(boot_args, argname,
+		    BOOTOPT_TYPE_STRING, &mac_addr) &&
+		    ether_aton_r(enaddr, sizeof(enaddr), mac_addr) == 0) {
+			prop_data_t pd;
+			pd = prop_data_create_data(enaddr, sizeof(enaddr));
+			KASSERT(pd != NULL);
+			prop_dictionary_set(dict, "mac-address", pd);
+			prop_object_release(pd);
+		}
+
+#if AWIN_board == AWIN_cubieboard
+		if (awin_chip_id() == AWIN_CHIP_ID_A20) {
+			/* Cubieboard2 uses GMAC with a 100Mbit PHY */
+			prop_dictionary_set_cstring(dict, "phy-type", "mii");
+		}
+#endif
+#if AWIN_BOARD == AWIN_bpi
+		prop_dictionary_set_cstring(dict, "phy-power", "gmacpwren");
+#endif
 		return;
 	}
 

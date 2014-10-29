@@ -6,7 +6,7 @@
 /com_ebus.c/1.33/Fri Jul  1 18:48:36 2011/-kk/
 /cons.h/1.9/Fri Jun  3 03:20:39 2011/-kk/
 /consinit.c/1.27/Thu Oct 24 10:28:57 2013/-kk/
-/ebus.c/1.61/Wed Sep 19 06:55:25 2012/-kk/
+/ebus.c/1.62/Wed Oct 29 08:13:12 2014/-kk/
 /ebus_mainbus.c/1.14/Fri Oct  3 09:43:31 2014/-kk/
 /ebusvar.h/1.12/Fri Oct  3 09:43:31 2014/-kk/
 /fdc.c/1.42/Fri Oct  3 09:36:11 2014/-kk/
@@ -39,7 +39,7 @@
 /power.h/1.2/Fri May 12 23:35:24 2006/-kk/
 /psm.c/1.10/Sat Oct 27 17:18:12 2012/-kk/
 /psmreg.h/1.2/Thu Jun 30 20:09:36 2011/-kk/
-/psycho.c/1.119/Fri Oct  3 10:05:09 2014/-kk/
+/psycho.c/1.120/Wed Oct 29 08:13:12 2014/-kk/
 /psychoreg.h/1.19/Thu Oct 24 10:28:57 2013/-kk/
 /psychovar.h/1.21/Tue Dec 17 04:13:29 2013/-kk/
 /pyro.c/1.15/Thu Oct 24 10:28:57 2013/-kk/

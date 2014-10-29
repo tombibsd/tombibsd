@@ -65,7 +65,7 @@ CFATTACH_DECL_NEW(ahc_eisa, sizeof(struct ahc_softc),
 
 /*
  * Check the slots looking for a board we recognise
- * If we find one, note it's address (slot) and call
+ * If we find one, note its address (slot) and call
  * the actual probe routine to check it out.
  */
 static int

@@ -636,8 +636,8 @@ device_format(int argc, char *argv[])
 /*
  * device_identify:
  *
- *	Display the identity of the device, including it's SCSI bus,
- *	target, lun, and it's vendor/product/revision information.
+ *	Display the identity of the device, including its SCSI bus,
+ *	target, lun, and its vendor/product/revision information.
  */
 static void
 device_identify(int argc, char *argv[])

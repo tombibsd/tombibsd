@@ -279,8 +279,8 @@ usb*		at ohci?
 usb*		at ehci?
 
 # USB OTG
-#motg0		at awinio0
-#usb*		at motg?
+motg0		at awinio0
+usb*		at motg?
 
 # SATA
 ahcisata*	at awinio0
@@ -293,6 +293,8 @@ awe0		at awinio0 port ?
 awge0		at awinio0 port ?
 
 include "dev/usb/usbdevices.config"
+
+midi*		at midibus?
 
 rlphy*		at mii? phy ?
 rgephy* 	at mii? phy ?

@@ -216,7 +216,7 @@ we_vme_probe(device_t parent, cfdata_t cf, void *aux)
 	bus_space_write_1(asict, asich, WE_MSR,
 	    bus_space_read_1(asict, asich, WE_MSR) & ~WE_MSR_RST);
 
-	/* Wait in case the card is reading it's EEPROM. */
+	/* Wait in case the card is reading its EEPROM. */
 	delay(5000);
 
 	/*

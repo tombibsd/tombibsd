@@ -64,7 +64,7 @@
 /rpb.h/1.42/Mon Feb  6 02:14:13 2012/-kk/
 /rwlock.h/1.4/Mon Apr 28 20:23:11 2008/-kk/
 /setjmp.h/1.4/Mon Feb  6 02:14:13 2012/-kk/
-/sigdebug.h/1.1/Wed Dec 27 23:47:59 2000/-kk/
+/sigdebug.h/1.2/Wed Oct 29 08:12:57 2014/-kk/
 /signal.h/1.16/Mon Feb  6 02:14:13 2012/-kk/
 /sysarch.h/1.20/Mon Feb  6 02:14:13 2012/-kk/
 /tc_machdep.h/1.6/Tue Nov 12 02:18:33 2013/-kk/

@@ -883,7 +883,7 @@ bt_done(struct bt_softc *sc, struct bt_ccb *ccb)
 }
 
 /*
- * Find the board and find it's irq/drq
+ * Find the board and find its irq/drq
  */
 int
 bt_find(struct isa_attach_args *ia, struct bt_softc *sc)

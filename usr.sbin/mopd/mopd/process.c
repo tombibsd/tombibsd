@@ -217,7 +217,7 @@ mopStartLoad(const u_char *dst, const u_char *src, struct dllist *dl_rpr,
 
 	slot = -1;
 	
-	/* Look if we have a non terminated load, if so, use it's slot */
+	/* Look if we have a non terminated load, if so, use its slot */
 
 	for (i = 0, dle = dllist; i < MAXDL; i++, dle++) {
 		if (dle->status != DL_STATUS_FREE) {

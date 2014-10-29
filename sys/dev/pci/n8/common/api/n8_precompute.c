@@ -52,7 +52,7 @@ static char const n8_id[] = "$Id$";
  * 02/15/02 brr   Modified include files to build in kernel context.
  * 01/25/02 bac   Corrected signatures to placate the compiler on all
  *                platforms. 
- * 01/23/02 dws   Changed TLS functions to return the hashed key and it's
+ * 01/23/02 dws   Changed TLS functions to return the hashed key and its
  *                length.  The length of the hashed key is the hash function's
  *                digest size.
  * 01/23/02 bac   Removed debug printfs.

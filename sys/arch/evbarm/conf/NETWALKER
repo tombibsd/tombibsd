@@ -264,6 +264,8 @@ usb*		at ehci?
 # USB device drivers
 include "dev/usb/usbdevices.config"
 
+midi*		at midibus?
+
 ukphy*		at mii? phy ?
 
 # IPUv3 LCD Controller

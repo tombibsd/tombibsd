@@ -58,7 +58,7 @@ CFATTACH_DECL_NEW(bha_isa, sizeof(struct bha_softc),
 
 /*
  * Check the slots looking for a board we recognise
- * If we find one, note it's address (slot) and call
+ * If we find one, note its address (slot) and call
  * the actual probe routine to check it out.
  */
 int

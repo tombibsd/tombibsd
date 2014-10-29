@@ -24,7 +24,6 @@ TESTNAMES= \
 	comment \
 	cond1 \
 	error \
-	escape \
 	export \
 	export-all \
 	export-env \
@@ -33,7 +32,6 @@ TESTNAMES= \
 	forloop \
 	forsubst \
 	hash \
-	impsrc \
 	misc \
 	moderrs \
 	modmatch \
@@ -42,11 +40,8 @@ TESTNAMES= \
 	modts \
 	modword \
 	order \
-	phony-end \
 	posix \
-	posix1 \
 	qequals \
-	suffixes \
 	sunshcmd \
 	sysv \
 	ternary \
@@ -55,6 +50,14 @@ TESTNAMES= \
 	varcmd \
 	varmisc \
 	varshell
+
+# these tests were broken by referting POSIX chanegs
+STRICT_POSIX_TESTS = \
+	escape \
+	impsrc \
+	phony-end \
+	posix1 \
+	suffixes
 
 # Override make flags for certain tests
 flags.doterror=
