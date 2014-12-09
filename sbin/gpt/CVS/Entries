@@ -5,8 +5,8 @@
 /create.c/1.12/Sun Oct 19 16:06:24 2014/-kk/
 /destroy.c/1.6/Fri Oct  3 10:04:51 2014/-kk/
 /gpt.8/1.34/Sun Oct 19 16:06:24 2014/-kk/
-/gpt.c/1.36/Sun Oct 19 16:06:24 2014/-kk/
-/gpt.h/1.16/Fri Oct  3 10:04:51 2014/-kk/
+/gpt.c/1.39/Tue Dec  9 04:34:34 2014/-kk/
+/gpt.h/1.17/Tue Dec  9 04:34:34 2014/-kk/
 /gpt_uuid.c/1.9/Sun Oct 19 16:06:24 2014/-kk/
 /gpt_uuid.h/1.3/Sun Oct 19 16:06:24 2014/-kk/
 /label.c/1.18/Fri Oct  3 10:04:51 2014/-kk/

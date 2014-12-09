@@ -1159,9 +1159,18 @@ static const struct wm_product {
 	  "I350 Gigabit Connection",
 	  WM_T_I350,		WMP_F_COPPER },
 
+	{ PCI_VENDOR_INTEL,	PCI_PRODUCT_INTEL_C2000_1000KX,
+	  "I354 Gigabit Ethernet (KX)",
+	  WM_T_I354,		WMP_F_SERDES },
+
 	{ PCI_VENDOR_INTEL,	PCI_PRODUCT_INTEL_C2000_SGMII,
-	  "I354 Gigabit Connection",
+	  "I354 Gigabit Ethernet (SGMII)",
 	  WM_T_I354,		WMP_F_COPPER },
+
+	{ PCI_VENDOR_INTEL,	PCI_PRODUCT_INTEL_C2000_25GBE,
+	  "I354 Gigabit Ethernet (2.5G)",
+	  WM_T_I354,		WMP_F_COPPER },
+
 	{ PCI_VENDOR_INTEL,	PCI_PRODUCT_INTEL_I210_T1,
 	  "I210-T1 Ethernet Server Adapter",
 	  WM_T_I210,		WMP_F_COPPER },

@@ -20,6 +20,11 @@ CPPFLAGS+=	${X11FLAGS.THREADLIB}
 CPPFLAGS+=	-DFREETYPE2 -I${DESTDIR}${X11INCDIR}/freetype2 -DXFREE86_FT2
 CPPFLAGS+=	-I${DESTDIR}${X11INCDIR}/X11/Xft
 
+.if !empty(MACHINE_ARCH:Mearm*)
+# Workaround a crash in XftGlyphSpecRender with GCC 4.8.4
+COPTS.xftrender.c+= -O0
+.endif
+
 LIBDPLIBS=	X11		${.CURDIR}/../libX11/dynamic \
 		fontconfig	${.CURDIR}/../fontconfig/src \
 		freetype	${.CURDIR}/../freetype \

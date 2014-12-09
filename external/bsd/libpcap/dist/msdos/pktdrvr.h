@@ -1,5 +1,3 @@
-/*	$NetBSD$	*/
-
 #ifndef __PKTDRVR_H
 #define __PKTDRVR_H
 

@@ -75,9 +75,9 @@ static void	clmpcc_set_params(struct clmpcc_chan *);
 static void	clmpcc_start(struct tty *);
 static int 	clmpcc_modem_control(struct clmpcc_chan *, int, int);
 
-#define	CLMPCCUNIT(x)		(minor(x) & 0x7fffc)
-#define CLMPCCCHAN(x)		(minor(x) & 0x00003)
-#define	CLMPCCDIALOUT(x)	(minor(x) & 0x80000)
+#define	CLMPCCUNIT(x)		(TTUNIT(x) & ~0x3)	// XXX >> 2? 
+#define	CLMPCCCHAN(x)		(TTUNIT(x) & 0x3)
+#define	CLMPCCDIALOUT(x)	TTDIALOUT(x)
 
 /*
  * These should be in a header file somewhere...

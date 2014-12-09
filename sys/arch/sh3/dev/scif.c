@@ -187,11 +187,8 @@ static int scif_attached = 0;	/* XXX: FIXME: don't limit to just one! */
 
 extern struct cfdriver scif_cd;
 
-#define	SCIFUNIT_MASK		0x7ffff
-#define	SCIFDIALOUT_MASK	0x80000
-
-#define	SCIFUNIT(x)	(minor(x) & SCIFUNIT_MASK)
-#define	SCIFDIALOUT(x)	(minor(x) & SCIFDIALOUT_MASK)
+#define	SCIFUNIT(x)	TTUNIT(x)
+#define	SCIFDIALOUT(x)	TTDIALOUT(x)
 
 
 /* console */

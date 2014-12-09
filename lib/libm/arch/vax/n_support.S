@@ -32,7 +32,8 @@
 #include <machine/asm.h>
 
 WEAK_ALIAS(logbl,logb)
-WEAK_ALIAS(copysignl, copysign)
+WEAK_ALIAS(copysignl, _copysignl)
+WEAK_ALIAS(_copysignl, copysign)
 
 	.text
 _sccsid:

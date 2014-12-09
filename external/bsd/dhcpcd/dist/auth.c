@@ -29,7 +29,6 @@
  */
 
 #include <sys/file.h>
-#include <sys/queue.h>
 #include <errno.h>
 #include <fcntl.h>
 #include <inttypes.h>

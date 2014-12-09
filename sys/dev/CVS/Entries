@@ -2,12 +2,14 @@
 /Makefile/1.35/Wed Jun 20 21:38:26 2012/-kk/
 /auconv.c/1.25/Wed Nov 23 23:07:31 2011/-kk/
 /auconv.h/1.16/Wed Nov 23 23:07:31 2011/-kk/
-/audio.c/1.265/Tue Dec  9 04:23:58 2014/-kk/
-/audio_if.h/1.69/Tue Dec  9 04:23:58 2014/-kk/
+/audio.c/1.266/Tue Dec  9 04:34:54 2014/-kk/
+/audio_if.h/1.70/Tue Dec  9 04:34:54 2014/-kk/
 /audiobell.c/1.8/Tue May 12 10:22:31 2009/-kk/
 /audiobellvar.h/1.6/Tue May 12 10:22:31 2009/-kk/
 /audiovar.h/1.46/Wed Nov 23 23:07:31 2011/-kk/
 /aurateconv.c/1.19/Wed Nov 23 23:07:31 2011/-kk/
+/auvolconv.c/1.1/Tue Nov 18 01:53:17 2014/-kk/
+/auvolconv.h/1.1/Tue Nov 18 01:53:17 2014/-kk/
 /bio.c/1.11/Fri Oct  3 09:09:12 2014/-kk/
 /biovar.h/1.8/Thu May  7 12:15:33 2009/-kk/
 /ccd.c/1.154/Wed Oct 29 08:13:18 2014/-kk/
@@ -16,8 +18,8 @@
 /cgd_crypto.c/1.12/Thu Oct 24 10:28:57 2013/-kk/
 /cgd_crypto.h/1.7/Wed Dec  5 02:23:20 2012/-kk/
 /cgdvar.h/1.17/Tue Mar 25 02:35:31 2014/-kk/
-/clock_subr.c/1.22/Fri Oct  3 09:50:53 2014/-kk/
-/clock_subr.h/1.22/Fri Oct  3 09:50:53 2014/-kk/
+/clock_subr.c/1.25/Tue Dec  9 04:34:54 2014/-kk/
+/clock_subr.h/1.25/Tue Dec  9 04:34:54 2014/-kk/
 /clockctl.c/1.32/Fri Oct  3 09:09:12 2014/-kk/
 /cninit.c/1.11/Tue Feb  8 20:20:26 2011/-kk/
 /cons.c/1.72/Fri Oct  3 09:09:12 2014/-kk/
@@ -27,7 +29,7 @@
 /devlist2h.awk/1.1/Sun Sep 21 14:30:22 2014/-kk/
 /dksubr.c/1.54/Tue Dec  9 04:23:58 2014/-kk/
 /dkvar.h/1.19/Tue Jun  3 03:09:43 2014/-kk/
-/files.audio/1.2/Fri Oct 10 17:21:20 2014/-kk/
+/files.audio/1.3/Tue Dec  9 04:34:54 2014/-kk/
 /firmload.c/1.19/Fri Apr 11 02:03:41 2014/-kk/
 /firmload.h/1.2/Mon Apr 28 20:23:46 2008/-kk/
 /fss.c/1.92/Sun Oct 19 16:06:44 2014/-kk/

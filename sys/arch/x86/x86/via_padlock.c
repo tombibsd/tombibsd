@@ -626,7 +626,7 @@ via_padlock_detach(device_t self, int flags)
 	struct via_padlock_softc *sc = device_private(self);
 
 	if (sc->sc_rnd_attached) {
-		callout_stop(&sc->sc_rnd_co);
+		callout_halt(&sc->sc_rnd_co, NULL);
 		callout_destroy(&sc->sc_rnd_co);
 		rnd_detach_source(&sc->sc_rnd_source);
 		sc->sc_rnd_attached = false;

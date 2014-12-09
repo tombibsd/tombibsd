@@ -857,7 +857,7 @@ txcomopen(dev_t dev, int flag, int mode, struct lwp *l)
 	}
 
 	splx(s);
-#define	TXCOMDIALOUT(x)	(minor(x) & 0x80000)
+#define	TXCOMDIALOUT(x)	TTDIALOUT(x)
 	if ((err = ttyopen(tp, TXCOMDIALOUT(dev), ISSET(flag, O_NONBLOCK)))) {
 		DPRINTF("ttyopen failed\n");
 		goto out;

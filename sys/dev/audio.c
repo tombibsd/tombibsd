@@ -4246,6 +4246,14 @@ audioprint(void *aux, const char *pnp)
 #endif /* NAUDIO > 0 || (NMIDI > 0 || NMIDIBUS > 0) */
 
 #if NAUDIO > 0
+device_t
+audio_get_device(struct audio_softc *sc)
+{
+	return sc->sc_dev;
+}
+#endif
+
+#if NAUDIO > 0
 static void
 audio_mixer_capture(struct audio_softc *sc)
 {

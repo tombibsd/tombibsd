@@ -40,6 +40,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/systm.h>
 
 #include <drm/drmP.h>
+#include <drm/drm_sysctl.h>
 
 #include <core/object.h>
 #include <engine/device.h>
@@ -49,6 +50,8 @@ MODULE(MODULE_CLASS_DRIVER, nouveau, "drmkms,drmkms_pci"); /* XXX drmkms_i2c, dr
 #ifdef _MODULE
 #include "ioconf.c"
 #endif
+
+struct drm_sysctl_def nouveau_def = DRM_SYSCTL_INIT();
 
 extern struct drm_driver *const nouveau_drm_driver; /* XXX */
 
@@ -73,6 +76,7 @@ nouveau_init(void)
 #if 0				/* XXX nouveau acpi */
 	nouveau_register_dsm_handler();
 #endif
+	drm_sysctl_init(&nouveau_def);
 
 	return 0;
 }
@@ -94,6 +98,7 @@ static void
 nouveau_fini(void)
 {
 
+	drm_sysctl_fini(&nouveau_def);
 #if 0				/* XXX nouveau acpi */
 	nouveau_unregister_dsm_handler();
 #endif

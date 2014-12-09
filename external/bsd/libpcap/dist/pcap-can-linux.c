@@ -34,6 +34,9 @@
  *
  */
 
+#include <sys/cdefs.h>
+__RCSID("$NetBSD$");
+
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
@@ -245,7 +248,7 @@ can_read_linux(pcap_t *handle, int max_packets, pcap_handler callback, u_char *u
 		}
 	} while ((pkth.caplen == -1) && (errno == EINTR));
 
-	if (pkth.caplen < 0)
+	if (pkth.caplen == -1)
 	{
 		snprintf(handle->errbuf, PCAP_ERRBUF_SIZE, "Can't receive packet %d:%s",
 			errno, strerror(errno));

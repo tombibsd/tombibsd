@@ -62,7 +62,7 @@ LDSCRIPT?=	${A64}/conf/kern.ldscript
 LOADADDRESS?=	0xFFFFFFFF00000000
 LINKFLAGS_NORMAL=	-X
 .if "${LDSCRIPT}" != ""
-LINKFLAGS_NORMAL+=	-T ${LDSCRIPT}
+LINKSCRIPT=	-T ${LDSCRIPT}
 .endif
 
 # Strip AArch64 mapping symbols from the kernel image, as they interfere

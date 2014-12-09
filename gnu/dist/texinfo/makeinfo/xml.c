@@ -870,7 +870,7 @@ xml_insert_element_with_attribute (elt, arg, format, va_alist)
       return;
     }
 
-  if (!xml_element_list[elt].name || !strlen (xml_element_list[elt].name))
+  if (!strlen (xml_element_list[elt].name))
     {
       /*printf ("Warning: Inserting empty element %d\n", elt);*/
       return;

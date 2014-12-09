@@ -108,7 +108,7 @@ dependkernlib:	assym.h
 ## (5) link settings
 ##
 TEXTADDR?=	01000000
-LINKFORMAT=	-T ${SPARC64}/conf/${KERN_LDSCRIPT}
+LINKSCRIPT=	-T ${SPARC64}/conf/${KERN_LDSCRIPT}
 .if ${LP64} == "yes"
 KERN_LDSCRIPT?= kern.ldscript
 .else

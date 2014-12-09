@@ -37,9 +37,12 @@ __RCSID("$NetBSD$");
 #endif
 #endif
 
+#define NETDISECT_REWORKED
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
+
+#include <tcpdump-stdinc.h>
 
 #include <sys/param.h>
 #include <sys/time.h>
@@ -53,9 +56,11 @@ struct rtentry;
 #endif
 #include <net/if.h>
 
+#if 0
 #include <netinet/in.h>
 #include <netinet/in_systm.h>
 #include <netinet/ip.h>
+#endif
 
 #include <net/pfvar.h>
 #include <net/if_pfsync.h>
@@ -77,14 +82,14 @@ const char *pfsync_acts[] = { PFSYNC_ACTIONS };
 static void pfsync_print(struct pfsync_header *, int);
 
 u_int
-pfsync_if_print(const struct pcap_pkthdr *h, const u_char *p)
+pfsync_if_print(netdissect_options *ndo, const struct pcap_pkthdr *h, const u_char *p)
 {
 	u_int caplen = h->caplen;
 
-	ts_print(&h->ts);
+	ts_print(ndo, &h->ts);
 
 	if (caplen < PFSYNC_HDRLEN) {
-		printf("[|pfsync]");
+		ND_PRINT((ndo, "[|pfsync]"));
 		goto out;
 	}
 

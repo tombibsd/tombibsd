@@ -203,10 +203,10 @@ vrrtc_attach(device_t parent, device_t self, void *aux)
 	 * be on Jan 1.
 	 */
 	for (year = EPOCHYEAR; year < POSIX_BASE_YEAR; year++) {
-		sc->sc_epoch += LEAPYEAR4(year) ? SECYR + SECDAY : SECYR;
+		sc->sc_epoch += days_per_year(year) * SECS_PER_DAY;
 	}
 	for (year = POSIX_BASE_YEAR; year < EPOCHYEAR; year++) {
-		sc->sc_epoch -= LEAPYEAR4(year) ? SECYR + SECDAY : SECYR;
+		sc->sc_epoch -= days_per_year(year) * SECS_PER_DAY;
 	}
 
 	/*

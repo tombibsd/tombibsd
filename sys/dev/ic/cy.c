@@ -246,8 +246,8 @@ cy_attach(struct cy_softc *sc)
 	    CY_CLEAR_INTR << sc->sc_bustype, 0);
 }
 
-#define	CYDIALOUT_MASK		0x80000
-#define	CY_DIALOUT(dev)		(minor(dev) & CYDIALOUT_MASK)
+#define	CY_UNIT(dev)		TTUNIT(dev)
+#define	CY_DIALOUT(dev)		TTDIALOUT(dev)
 
 #define	CY_PORT(dev)		cy_getport((dev))
 #define	CY_BOARD(cy)		((cy)->cy_softc)
@@ -255,7 +255,7 @@ cy_attach(struct cy_softc *sc)
 static struct cy_port *
 cy_getport(dev_t dev)
 {
-	int i, j, k, u = minor(dev) & ~CYDIALOUT_MASK;
+	int i, j, k, u = CY_UNIT(dev);
 	struct cy_softc *sc;
 
 	for (i = 0, j = 0; i < cy_cd.cd_ndevs; i++) {

@@ -158,6 +158,8 @@ addfile(const char *path, struct condexpr *optx, u_char flags, const char *rule)
 	fi->fi_base = intern(base);
 	fi->fi_prefix = SLIST_EMPTY(&prefixes) ? NULL :
 			SLIST_FIRST(&prefixes)->pf_prefix;
+	fi->fi_len = strlen(path);
+	fi->fi_suffix = path[fi->fi_len - 1];
 	fi->fi_optx = optx;
 	fi->fi_optf = NULL;
 	fi->fi_mkrule = rule;

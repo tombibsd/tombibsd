@@ -6,6 +6,7 @@
 # ports should define any machine-specific files they need in their
 # own file lists.
 
+define	compat_freebsd
 file	compat/freebsd/freebsd_exec.c		compat_freebsd
 file	compat/freebsd/freebsd_exec_elf32.c	compat_freebsd & exec_elf32
 file	compat/freebsd/freebsd_exec_aout.c	compat_freebsd & exec_aout

@@ -1,5 +1,3 @@
-/*	$NetBSD$	*/
-
 /*
  * Copyright (C) 1999 WIDE Project.
  * All rights reserved.

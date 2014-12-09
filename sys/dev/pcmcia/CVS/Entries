@@ -3,7 +3,7 @@
 /aic_pcmcia.c/1.43/Thu Nov 12 19:24:06 2009/-kk/
 /bluecardreg.h/1.1/Mon Aug 20 00:29:43 2007/-kk/
 /bt3c.c/1.23/Tue Jun  3 02:54:38 2014/-kk/
-/btbc.c/1.16/Tue Jun  3 02:54:38 2014/-kk/
+/btbc.c/1.17/Tue Dec  9 04:34:59 2014/-kk/
 /com_pcmcia.c/1.61/Mon Nov 23 02:13:47 2009/-kk/
 /devlist2h.awk/1.12/Fri May  2 18:11:06 2008/-kk/
 /esp_pcmcia.c/1.38/Tue May 12 14:42:18 2009/-kk/

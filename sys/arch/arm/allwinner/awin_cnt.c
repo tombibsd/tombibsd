@@ -84,7 +84,7 @@ awin_cnt_attach(device_t parent, device_t self, void *aux)
 
 	sc->sc_dev = self;
 	sc->sc_bst = aio->aio_core_bst;
-	mutex_init(&sc->sc_lock, MUTEX_DEFAULT, IPL_SCHED);
+	mutex_init(&sc->sc_lock, MUTEX_DEFAULT, IPL_HIGH);
 	bus_space_subregion(sc->sc_bst, aio->aio_core_bsh,
 	    loc->loc_offset, loc->loc_size, &sc->sc_bsh);
 

@@ -7,11 +7,12 @@
 .PATH:	${S}/external/bsd/drm2/pci
 .PATH:	${S}/external/bsd/drm2/dist/drm
 
+MKLDSCRIPT=yes
 KMOD=	drmkms
 
 # Upstream source files.
 #SRCS+=	ati_pcigart.c		# Moved to drmkms_pci module.
-#SRCS+=	drm_agpsupport.c	# Moved to drmkms_pci module.
+SRCS+=	drm_agpsupport.c	# Moved to drmkms_pci module.
 SRCS+=	drm_auth.c
 SRCS+=	drm_buffer.c
 SRCS+=	drm_bufs.c
@@ -46,6 +47,7 @@ SRCS+=	drm_probe_helper.c
 SRCS+=	drm_rect.c
 SRCS+=	drm_scatter.c
 SRCS+=	drm_stub.c
+SRCS+=	drm_sysctl.c
 SRCS+=	drm_sysfs.c
 SRCS+=	drm_vm.c
 SRCS+=	drm_vma_manager.c
@@ -57,5 +59,7 @@ SRCS+=	drm_module.c
 COPTS.drm_crtc.c+=	-Wno-shadow
 COPTS.drm_crtc.c+=	-Wno-missing-field-initializers
 COPTS.drm_edid.c+=	-Wno-shadow
+
+CPPFLAGS+=		-DNACPICA=1
 
 .include <bsd.kmodule.mk>

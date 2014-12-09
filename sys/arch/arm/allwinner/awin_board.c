@@ -518,7 +518,7 @@ awin_pll5x_get_rate(void)
 	    AWIN_CCM_OFFSET + AWIN_PLL5_CFG_REG);
 
 	n = __SHIFTOUT(cfg, AWIN_PLL_CFG_FACTOR_N);
-	k = __SHIFTOUT(cfg, AWIN_PLL_CFG_FACTOR_K);
+	k = __SHIFTOUT(cfg, AWIN_PLL_CFG_FACTOR_K) + 1;
 	p = __SHIFTOUT(cfg, AWIN_PLL5_OUT_EXT_DIV_P);
 
 	return (AWIN_REF_FREQ * n * k) >> p;

@@ -251,8 +251,7 @@ btkbd_detach(device_t self, int flags)
 
 #ifdef WSDISPLAY_COMPAT_RAWKBD
 #ifdef BTKBD_REPEAT
-	callout_stop(&sc->sc_repeat);
-	KASSERT(!callout_invoking(&sc->sc_repeat));
+	callout_halt(&sc->sc_repeat, NULL);
 	callout_destroy(&sc->sc_repeat);
 #endif
 #endif

@@ -48,7 +48,19 @@ run_and_check_pass()
 
 	run_and_check_prep "${name}"
 
-	atf_check -o ignore \
+	atf_check -o ignore -s eq:0 \
+	    config -s "${supportdir}" -b "compile/${name}" "${config}"
+}
+
+run_and_check_warn()
+{
+	local name="${1}"; shift
+
+	run_and_check_prep "${name}"
+
+	local stderr
+	eval stderr=\$${name}_stderr
+	atf_check -o ignore -e "${stderr}" -s eq:0 \
 	    config -s "${supportdir}" -b "compile/${name}" "${config}"
 }
 
@@ -121,7 +133,8 @@ no_undefined_opt_config_str='
 include "../d_min"
 no options UNDEFINED
 '
-test_case no_undefined_opt pass \
+no_undefined_opt_stderr='match:UNDEFINED'
+test_case no_undefined_opt warn \
     "Checks that config allows a negation for an undefined options"
 
 # Attribute selection

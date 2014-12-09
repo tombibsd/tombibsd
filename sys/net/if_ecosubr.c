@@ -860,7 +860,7 @@ eco_retry_free(struct eco_retry *er)
 {
 	int s;
 
-	callout_stop(&er->er_callout);
+	callout_halt(&er->er_callout, NULL);
 	m_freem(er->er_packet);
 	s = splnet();
 	LIST_REMOVE(er, er_link);

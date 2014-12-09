@@ -121,7 +121,7 @@ mkclock_isa_match(device_t parent, cfdata_t cf, void *aux)
 		goto restore;
 
 	/* Read from the seconds counter. */
-	t1 = FROMBCD(mkclock_isa_nvrd(sc, MK48T18_CLKOFF + MK48TXX_ISEC));
+	t1 = bcdtobin(mkclock_isa_nvrd(sc, MK48T18_CLKOFF + MK48TXX_ISEC));
 	if (t1 > 59)
 		goto restore;
 
@@ -129,7 +129,7 @@ mkclock_isa_match(device_t parent, cfdata_t cf, void *aux)
 	mkclock_isa_nvwr(sc, MK48T18_CLKOFF + MK48TXX_ICSR, ocsr);
 	DELAY(1100000);
 	mkclock_isa_nvwr(sc, MK48T18_CLKOFF + MK48TXX_ICSR, csr);
-	t2 = FROMBCD(mkclock_isa_nvrd(sc, MK48T18_CLKOFF + MK48TXX_ISEC));
+	t2 = bcdtobin(mkclock_isa_nvrd(sc, MK48T18_CLKOFF + MK48TXX_ISEC));
 	if (t2 > 59)
 		goto restore;
 

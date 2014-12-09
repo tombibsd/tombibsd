@@ -40,6 +40,6 @@
 #define	KERNBASE		0x100000
 #define	__NO_FIXED_MSGBUF
 
-#endif /* _KENREL && !_MODULE */
+#endif /* _KERNEL && !_MODULE */
 
 #include <powerpc/param.h>

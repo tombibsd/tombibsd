@@ -50,7 +50,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/sysctl.h>
 #include <sys/rnd.h>
 #include <sys/rndsink.h>
-#if DEBUG
+#if DIAGNOSTIC
 #include <sys/rngtest.h>
 #endif
 
@@ -67,7 +67,7 @@ static void	cprng_strong_generate(struct cprng_strong *, void *, size_t);
 static void	cprng_strong_reseed(struct cprng_strong *);
 static void	cprng_strong_reseed_from(struct cprng_strong *, const void *,
 		    size_t, bool);
-#if DEBUG
+#if DIAGNOSTIC
 static void	cprng_strong_rngtest(struct cprng_strong *);
 #endif
 
@@ -447,12 +447,12 @@ cprng_strong_reseed_from(struct cprng_strong *cprng,
 		/* XXX Fix nist_ctr_drbg API so this can't happen.  */
 		panic("cprng %s: NIST CTR_DRBG reseed failed", cprng->cs_name);
 
-#if DEBUG
+#if DIAGNOSTIC
 	cprng_strong_rngtest(cprng);
 #endif
 }
 
-#if DEBUG
+#if DIAGNOSTIC
 /*
  * Generate some output and apply a statistical RNG test to it.
  */

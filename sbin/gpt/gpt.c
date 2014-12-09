@@ -65,7 +65,7 @@ __RCSID("$NetBSD$");
 
 char	device_path[MAXPATHLEN];
 const char *device_arg;
-char	*device_name;
+const char *device_name;
 
 off_t	mediasz;
 
@@ -563,7 +563,7 @@ gpt_open(const char *dev)
 
 	mode = readonly ? O_RDONLY : O_RDWR|O_EXCL;
 
-	device_arg = dev;
+	device_arg = device_name = dev;
 	fd = opendisk(dev, mode, device_path, sizeof(device_path), 0);
 	if (fd == -1)
 		return -1;

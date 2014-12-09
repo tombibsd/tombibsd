@@ -400,14 +400,14 @@ Static void uhso_tty_start(struct tty *);
 Static int  uhso_tty_param(struct tty *, struct termios *);
 Static int  uhso_tty_control(struct uhso_port *, u_long, int);
 
-#define UHSO_UNIT_MASK		0x0fff0
+#define UHSO_UNIT_MASK		TTUNIT_MASK
 #define UHSO_PORT_MASK		0x0000f
-#define UHSO_DIALOUT_MASK	0x80000
-#define UHSO_CALLUNIT_MASK	0x40000
+#define UHSO_DIALOUT_MASK	TTDIALOUT_MASK
+#define UHSO_CALLUNIT_MASK	TTCALLUNIT_MASK
 
-#define UHSOUNIT(x)	((minor(x) & UHSO_UNIT_MASK) >> 4)
-#define UHSOPORT(x)	(minor(x) & UHSO_PORT_MASK)
-#define UHSODIALOUT(x)	(minor(x) & UHSO_DIALOUT_MASK)
+#define UHSOUNIT(x)	(TTUNIT(x) >> 4)
+#define UHSOPORT(x)	(TTUNIT(x) & UHSO_PORT_MASK)
+#define UHSODIALOUT(x)	TTDIALOUT(x)
 #define UHSOMINOR(u, p)	((((u) << 4) & UHSO_UNIT_MASK) | ((p) & UHSO_UNIT_MASK))
 
 Static void uhso_ifnet_attach(struct uhso_softc *, usbd_interface_handle, int);

@@ -69,7 +69,7 @@
 /omap_ocp.c/1.5/Fri Jul  1 20:30:21 2011/-kk/
 /omap_ocp.h/1.1/Sat Jan  6 00:29:52 2007/-kk/
 /omap_reg.h/1.1/Sat Jan  6 00:29:52 2007/-kk/
-/omap_rtc.c/1.5/Fri Jul  1 20:30:21 2011/-kk/
+/omap_rtc.c/1.6/Tue Dec  9 04:34:40 2014/-kk/
 /omap_space.c/1.7/Thu Oct 24 10:28:57 2013/-kk/
 /omap_start.S/1.5/Sat Sep  1 14:46:25 2012/-kk/
 /omap_tipb.c/1.6/Thu Oct 24 10:28:57 2013/-kk/

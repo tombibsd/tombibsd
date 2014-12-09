@@ -29,7 +29,9 @@
 
 #include <sys/callout.h>
 
+#ifdef _KERNEL_OPT
 #include "opt_vga.h"
+#endif
 
 struct vga_handle {
 	struct pcdisplay_handle vh_ph;

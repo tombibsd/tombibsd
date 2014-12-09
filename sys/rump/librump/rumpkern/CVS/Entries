@@ -4,7 +4,7 @@
 /atomic_cas_generic.c/1.2/Fri Dec 18 22:37:18 2009/-kk/
 /cons.c/1.4/Fri Oct  3 09:43:46 2014/-kk/
 /devsw.c/1.7/Fri Feb 25 18:56:20 2011/-kk/
-/emul.c/1.166/Tue Jun  3 03:10:02 2014/-kk/
+/emul.c/1.168/Tue Dec  9 04:35:05 2014/-kk/
 /etfs_wrap.c/1.1/Fri Apr 25 13:10:42 2014/-kk/
 /hyperentropy.c/1.7/Fri Oct  3 09:36:26 2014/-kk/
 /hyperstubs.c/1.2/Thu Oct 24 10:28:58 2013/-kk/

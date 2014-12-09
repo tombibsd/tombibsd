@@ -126,15 +126,16 @@ static void sockaddr(const char *, struct sockaddr *);
 
 int	pid, rtm_addrs;
 int	sock;
-int	forcehost, forcenet, doflush, nflag, af, qflag, tflag, Sflag, Tflag;
-int	iflag, verbose, aflen = sizeof(struct sockaddr_in), rtag;
+int	forcehost, forcenet, doflush, af;
+int	iflag, Lflag, nflag, qflag, tflag, Sflag, Tflag;
+int	verbose, aflen = sizeof(struct sockaddr_in), rtag;
 int	locking, lockrest, debugonly, shortoutput;
 struct	rt_metrics rt_metrics;
 int	rtm_inits;
 short ns_nullh[] = {0,0,0};
 short ns_bh[] = {-1,-1,-1};
 
-static const char opts[] = "dfnqSsTtv";
+static const char opts[] = "dfLnqSsTtv";
 
 void
 usage(const char *cp)
@@ -167,6 +168,9 @@ main(int argc, char * const *argv)
 			break;
 		case 'f':
 			doflush = 1;
+			break;
+		case 'L':
+			Lflag = RT_LFLAG;
 			break;
 		case 'n':
 			nflag = RT_NFLAG;
@@ -228,7 +232,7 @@ main(int argc, char * const *argv)
 		return newroute(argc, argv);
 
 	case K_SHOW:
-		show(argc, argv, nflag|Tflag|verbose);
+		show(argc, argv, Lflag|nflag|Tflag|verbose);
 		return 0;
 
 #ifndef SMALL

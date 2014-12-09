@@ -411,9 +411,6 @@ in6_setscope(struct in6_addr *in6, const struct ifnet *ifp, uint32_t *ret_id)
 
 	scope = in6_addrscope(in6);
 
-	if (!sid->s6id_list)
-		return 0;
-
 	switch (scope) {
 	case IPV6_ADDR_SCOPE_INTFACELOCAL: /* should be interface index */
 		zoneid = sid->s6id_list[IPV6_ADDR_SCOPE_INTFACELOCAL];

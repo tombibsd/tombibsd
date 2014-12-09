@@ -67,7 +67,7 @@ locore.o: ${HPPA}/hppa/locore.S
 ##
 ## (5) link settings
 ##
-LINKFORMAT=	-T ${HPPA}/conf/ld.script
+LINKSCRIPT=	-T ${HPPA}/conf/ld.script
 TEXTADDR?=	00200000
 LINKFLAGS_NORMAL=       -X
 EXTRA_LINKFLAGS= -Map $@.map

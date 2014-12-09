@@ -5,7 +5,7 @@
 
 LIB=	rumpdev_pad
 
-SRCS=	pad.c padvol.c
+SRCS=	pad.c
 SRCS+=	pad_component.c
 
 CPPFLAGS+=	-I${.CURDIR}/../../../librump/rumpvfs

@@ -103,7 +103,7 @@
 /radeon_drv.h/1.1.1.1/Wed Jul 16 19:35:28 2014/-kk/
 /radeon_encoders.c/1.1.1.1/Wed Jul 16 19:35:28 2014/-kk/
 /radeon_family.h/1.1.1.1/Wed Jul 16 19:35:28 2014/-kk/
-/radeon_fb.c/1.4/Fri Oct  3 09:09:23 2014/-kk/
+/radeon_fb.c/1.5/Tue Dec  9 04:35:01 2014/-kk/
 /radeon_fence.c/1.5/Fri Oct  3 09:26:11 2014/-kk/
 /radeon_gart.c/1.5/Fri Oct  3 09:09:23 2014/-kk/
 /radeon_gem.c/1.2/Wed Jul 16 20:59:57 2014/-kk/

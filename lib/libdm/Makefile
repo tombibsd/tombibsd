@@ -1,4 +1,6 @@
 # $NetBSD$
+
+USE_SHLIBDIR= yes
 USE_FORT?= no  # network protocol library
 
 LIB=    dm

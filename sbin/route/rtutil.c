@@ -261,6 +261,9 @@ p_rtentry(struct rt_msghdr *rtm, int flags, int interesting)
 	char		 ifbuf[IF_NAMESIZE];
 #endif
 
+	if ((flags & RT_LFLAG) && (rtm->rtm_flags & RTF_LLINFO))
+		return;
+
 	if (old_af != sa->sa_family) {
 		old_af = sa->sa_family;
 		p_family(sa->sa_family);

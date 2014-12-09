@@ -21,12 +21,7 @@
 
 #include <sys/cdefs.h>
 #ifndef lint
-#if 0
-static const char rcsid[] _U_ =
-    "@(#) Header: /tcpdump/master/tcpdump/vfprintf.c,v 1.6 2003-11-16 09:36:45 guy Exp  (LBL)";
-#else
 __RCSID("$NetBSD$");
-#endif
 #endif
 
 #ifdef HAVE_CONFIG_H

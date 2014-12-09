@@ -1,5 +1,3 @@
-/*	$NetBSD$	*/
-
 /*
  *  File.........: pktdrvr.c
  *

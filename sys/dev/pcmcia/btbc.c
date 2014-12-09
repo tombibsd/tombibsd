@@ -210,7 +210,7 @@ btbc_detach(device_t self, int flags)
 	pmf_device_deregister(self);
 	btbc_disable(sc->sc_dev);
 
-	callout_stop(&sc->sc_ledch);
+	callout_halt(&sc->sc_ledch, NULL);
 	callout_destroy(&sc->sc_ledch);
 
 	if (sc->sc_unit) {

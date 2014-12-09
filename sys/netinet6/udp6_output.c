@@ -67,7 +67,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include "opt_inet.h"
 
 #include <sys/param.h>
-#include <sys/malloc.h>
 #include <sys/mbuf.h>
 #include <sys/protosw.h>
 #include <sys/socket.h>

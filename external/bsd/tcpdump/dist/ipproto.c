@@ -15,14 +15,10 @@
 
 #include <sys/cdefs.h>
 #ifndef lint
-#if 0
-static const char rcsid[] _U_ =
-    "@(#) Header: /tcpdump/master/tcpdump/ipproto.c,v 1.6 2005-09-20 06:01:22 guy Exp  (LBL)";
-#else
 __RCSID("$NetBSD$");
 #endif
-#endif
 
+#define NETDISSECT_REWORKED
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif

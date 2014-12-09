@@ -40,6 +40,7 @@ int		rump_devnull_init(void);
 int	rumpblk_register(const char *, devminor_t *, uint64_t, uint64_t);
 int	rumpblk_deregister(const char *);
 int	rumpblk_init(void);
+void	rumpblk_fini(void);
 
 void	rump_biodone(void *, size_t, int);
 

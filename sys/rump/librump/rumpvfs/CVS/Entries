@@ -4,9 +4,9 @@
 /devnodes.c/1.10/Sun Jun 22 14:32:23 2014/-kk/
 /devnull.c/1.6/Fri Oct  3 09:09:34 2014/-kk/
 /rump_etfs.3/1.1/Sun Nov  9 17:39:38 2014/-kk/
-/rump_vfs.c/1.80/Tue Jun  3 03:10:02 2014/-kk/
-/rump_vfs_private.h/1.17/Thu Oct 24 10:28:58 2013/-kk/
-/rumpblk.c/1.57/Fri Oct  3 09:09:34 2014/-kk/
+/rump_vfs.c/1.81/Tue Dec  9 04:35:05 2014/-kk/
+/rump_vfs_private.h/1.18/Tue Dec  9 04:35:05 2014/-kk/
+/rumpblk.c/1.58/Tue Dec  9 04:35:05 2014/-kk/
 /rumpfs.4/1.1/Sun Nov  9 17:39:38 2014/-kk/
 /rumpfs.c/1.130/Fri Oct  3 09:36:26 2014/-kk/
 /rumpvfs.ifspec/1.9/Tue May  6 05:50:23 2014/-kk/

@@ -245,11 +245,10 @@ int	plcom_kgdb_getc (void *);
 void	plcom_kgdb_putc (void *, int);
 #endif /* KGDB */
 
-#define	PLCOMUNIT_MASK		0x7ffff
-#define	PLCOMDIALOUT_MASK	0x80000
+#define	PLCOMDIALOUT_MASK	TTDIALOUT_MASK
 
-#define	PLCOMUNIT(x)	(minor(x) & PLCOMUNIT_MASK)
-#define	PLCOMDIALOUT(x)	(minor(x) & PLCOMDIALOUT_MASK)
+#define	PLCOMUNIT(x)	TTUNIT(x)
+#define	PLCOMDIALOUT(x)	TTDIALOUT(x)
 
 #define	PLCOM_ISALIVE(sc)	((sc)->enabled != 0 && \
 				 device_is_active((sc)->sc_dev))

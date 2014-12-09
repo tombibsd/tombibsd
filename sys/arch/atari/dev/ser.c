@@ -144,8 +144,8 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 /* #define SER_DEBUG */
 
-#define	SERUNIT(x)	(minor(x) & 0x7ffff)
-#define	SERDIALOUT(x)	(minor(x) & 0x80000)
+#define	SERUNIT(x)	TTUNIT(x)
+#define	SERDIALOUT(x)	TTDIALOUT(x)
 
 /* XXX */
 #define	CONSBAUD	9600

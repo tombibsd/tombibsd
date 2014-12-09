@@ -138,6 +138,7 @@
 ./usr/lib/librumpclient_g.a			comp-c-debuglib		debuglib,rump
 ./usr/lib/librumpcrypto_g.a			comp-obsolete		obsolete
 ./usr/lib/librumpdev_audio_g.a			comp-c-debuglib		debuglib,rump
+./usr/lib/librumpdev_audio_ac97_g.a			comp-obsolete	obsolete
 ./usr/lib/librumpdev_bpf_g.a			comp-c-debuglib		debuglib,rump
 ./usr/lib/librumpdev_cgd_g.a			comp-c-debuglib		debuglib,rump
 ./usr/lib/librumpdev_disk_g.a			comp-c-debuglib		debuglib,rump

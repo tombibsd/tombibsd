@@ -848,7 +848,7 @@ rf_ASMParityAdjust(RF_PhysDiskAddr_t *toAdjust,
 }
 
 /* Check if a disk has been spared or failed. If spared, redirect the
- * I/O.  If it has been failed, record it in the asm pointer.  Fourth
+ * I/O.  If it has been failed, record it in the asm pointer.  Fifth
  * arg is whether data or parity.  */
 void
 rf_ASMCheckStatus(RF_Raid_t *raidPtr, RF_PhysDiskAddr_t *pda_p,

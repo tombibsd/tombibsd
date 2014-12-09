@@ -69,6 +69,7 @@
 ./usr/include/clang-3.6/avxintrin.h		comp-c-include		llvm
 ./usr/include/clang-3.6/bmi2intrin.h		comp-c-include		llvm
 ./usr/include/clang-3.6/bmiintrin.h		comp-c-include		llvm
+./usr/include/clang-3.6/cpuid.h			comp-c-include		llvm
 ./usr/include/clang-3.6/emmintrin.h		comp-c-include		llvm
 ./usr/include/clang-3.6/f16cintrin.h		comp-c-include		llvm
 ./usr/include/clang-3.6/fma4intrin.h		comp-c-include		llvm

@@ -79,6 +79,7 @@ fini(void)
 {
 
 	vfs_shutdown();
+	rumpblk_fini();
 }
 
 static void

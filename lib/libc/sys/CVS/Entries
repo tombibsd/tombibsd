@@ -47,7 +47,7 @@
 /connect.2/1.28/Mon May 31 12:16:20 2010/-kk/
 /dup.2/1.30/Wed Jan  1 02:45:14 2014/-kk/
 /execve.2/1.40/Mon May 31 12:16:20 2010/-kk/
-/extattr_get_file.2/1.5/Wed Aug  3 09:48:12 2011/-kk/
+/extattr_get_file.2/1.6/Tue Dec  9 04:34:28 2014/-kk/
 /fcntl.2/1.41/Wed Jan  1 02:45:14 2014/-kk/
 /fdatasync.2/1.16/Wed Apr 30 13:10:51 2008/-kk/
 /fdiscard.2/1.2/Fri Jul 25 08:47:42 2014/-kk/
@@ -81,7 +81,7 @@
 /issetugid.2/1.12/Sat Apr 21 12:27:27 2012/-kk/
 /kill.2/1.23/Sun Jul 20 13:58:22 2014/-kk/
 /kqueue.2/1.33/Sat Nov 24 15:16:52 2012/-kk/
-/ktrace.2/1.17/Thu May 13 10:20:58 2004/-kk/
+/ktrace.2/1.18/Tue Dec  9 04:34:28 2014/-kk/
 /lfs_bmapv.2/1.10/Wed Apr 30 13:10:51 2008/-kk/
 /lfs_markv.2/1.11/Wed Apr 30 13:10:51 2008/-kk/
 /lfs_segclean.2/1.8/Wed Apr 30 13:10:51 2008/-kk/
@@ -137,7 +137,7 @@
 /reboot.2/1.29/Mon Mar 22 19:30:55 2010/-kk/
 /recv.2/1.36/Thu Oct 24 10:28:53 2013/-kk/
 /rename.2/1.32/Thu Oct 24 10:28:53 2013/-kk/
-/revoke.2/1.15/Fri Jul  8 19:26:19 2011/-kk/
+/revoke.2/1.16/Tue Dec  9 04:34:28 2014/-kk/
 /rmdir.2/1.22/Wed Oct 29 08:12:42 2014/-kk/
 /sa_enable.2/1.4/Sun Mar 14 23:05:09 2004/-kk/
 /sa_register.2/1.2/Sun Mar 14 10:19:59 2004/-kk/
@@ -192,7 +192,7 @@
 /truncate.2/1.30/Fri Oct  3 09:08:40 2014/-kk/
 /truncate.c/1.13/Tue Mar 20 16:26:12 2012/-kk/
 /umask.2/1.16/Thu Aug  7 16:44:10 2003/-kk/
-/undelete.2/1.15/Sun Jan 11 02:46:30 2009/-kk/
+/undelete.2/1.16/Tue Dec  9 04:34:28 2014/-kk/
 /unlink.2/1.28/Thu Oct 24 10:28:53 2013/-kk/
 /utimes.2/1.40/Thu Oct 24 10:28:53 2013/-kk/
 /utrace.2/1.13/Fri May  2 18:38:32 2008/-kk/

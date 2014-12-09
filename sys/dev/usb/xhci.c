@@ -1384,7 +1384,7 @@ xhci_allocm(struct usbd_bus *bus, usb_dma_t *dma, uint32_t size)
 
 	XHCIHIST_FUNC(); XHCIHIST_CALLED();
 
-	err = usb_allocmem_flags(&sc->sc_bus, size, 0, dma, 0);
+	err = usb_allocmem(&sc->sc_bus, size, 0, dma);
 #if 0
 	if (err == USBD_NOMEM)
 		err = usb_reserve_allocm(&sc->sc_dma_reserve, dma, size);
@@ -2491,7 +2491,7 @@ xhci_root_ctrl_done(usbd_xfer_handle xfer)
 	xfer->hcpriv = NULL;
 }
 
-/* root hub intrerrupt */
+/* root hub interrupt */
 
 static usbd_status
 xhci_root_intr_transfer(usbd_xfer_handle xfer)
@@ -2657,9 +2657,9 @@ xhci_device_ctrl_start(usbd_xfer_handle xfer)
 
 no_data:
 	parameter = 0;
-	status = XHCI_TRB_2_IRQ_SET(0) | XHCI_TRB_2_TDSZ_SET(1);
+	status = XHCI_TRB_2_IRQ_SET(0);
 	/* the status stage has inverted direction */
-	control = (isread ? 0 : XHCI_TRB_3_DIR_IN) |
+	control = ((isread && (len > 0)) ? 0 : XHCI_TRB_3_DIR_IN) |
 	    XHCI_TRB_3_TYPE_SET(XHCI_TRB_TYPE_STATUS_STAGE) |
 	    XHCI_TRB_3_CHAIN_BIT | XHCI_TRB_3_ENT_BIT;
 	xhci_trb_put(&xx->xx_trb[i++], parameter, status, control);

@@ -22,7 +22,7 @@
 /scsiconf.c/1.273/Fri Oct  3 09:09:20 2014/-kk/
 /scsiconf.h/1.58/Fri Apr 20 20:23:21 2012/-kk/
 /scsipi_all.h/1.33/Tue Dec 25 18:33:42 2007/-kk/
-/scsipi_base.c/1.162/Wed Oct 29 08:13:22 2014/-kk/
+/scsipi_base.c/1.164/Tue Dec  9 04:34:59 2014/-kk/
 /scsipi_base.h/1.22/Mon Apr 28 20:23:58 2008/-kk/
 /scsipi_cd.h/1.21/Wed Apr  1 12:19:04 2009/-kk/
 /scsipi_debug.h/1.17/Mon Apr 28 20:23:58 2008/-kk/

@@ -6,7 +6,7 @@
 .include <bsd.kernobj.mk>
 
 WARNS=		1
-DBG=		-Os
+DBG=		-Os -m68020-60	# -m68020-60 seems to generate smaller binaries
 
 CRUNCHBIN=	instbin
 LISTS=		${.CURDIR}/list ${.CURDIR}/../common/list.images

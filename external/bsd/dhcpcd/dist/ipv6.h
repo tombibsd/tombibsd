@@ -30,7 +30,6 @@
 #ifndef IPV6_H
 #define IPV6_H
 
-#include <sys/queue.h>
 #include <sys/uio.h>
 
 #include <netinet/in.h>
@@ -40,6 +39,7 @@
 #  include <linux/ipv6.h>
 #endif
 
+#include "config.h"
 #include "dhcpcd.h"
 
 #define ALLROUTERS "ff02::2"

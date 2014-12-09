@@ -541,15 +541,15 @@ struct {								\
 	QUEUEDEBUG_TAILQ_POSTREMOVE((elm), field);			\
 } while (/*CONSTCOND*/0)
 
-#define TAILQ_REPLACE(head, elm, elm2, field) do {                      \
+#define TAILQ_REPLACE(head, elm, elm2, field) do {			\
         if (((elm2)->field.tqe_next = (elm)->field.tqe_next) != 	\
 	    TAILQ_END(head))   						\
-                (elm2)->field.tqe_next->field.tqe_prev =                \
-                    &(elm2)->field.tqe_next;                            \
-        else                                                            \
-                (head)->tqh_last = &(elm2)->field.tqe_next;             \
-        (elm2)->field.tqe_prev = (elm)->field.tqe_prev;                 \
-        *(elm2)->field.tqe_prev = (elm2);                               \
+                (elm2)->field.tqe_next->field.tqe_prev =		\
+                    &(elm2)->field.tqe_next;				\
+        else								\
+                (head)->tqh_last = &(elm2)->field.tqe_next;		\
+        (elm2)->field.tqe_prev = (elm)->field.tqe_prev;			\
+        *(elm2)->field.tqe_prev = (elm2);				\
 	QUEUEDEBUG_TAILQ_POSTREMOVE((elm), field);			\
 } while (/*CONSTCOND*/0)
 

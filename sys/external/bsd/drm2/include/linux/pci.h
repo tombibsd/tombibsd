@@ -32,11 +32,13 @@
 #ifndef _LINUX_PCI_H_
 #define _LINUX_PCI_H_
 
+#ifdef _KERNEL_OPT
 #if defined(i386) || defined(amd64)
 #include "acpica.h"
 #else	/* !(i386 || amd64) */
 #define NACPICA	0
 #endif	/* i386 || amd64 */
+#endif
 
 #include <sys/types.h>
 #include <sys/param.h>

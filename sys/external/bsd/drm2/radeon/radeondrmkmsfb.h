@@ -39,6 +39,7 @@ struct radeonfb_attach_args {
 	struct drm_fb_helper			*rfa_fb_helper;
 	struct drm_fb_helper_surface_size	rfa_fb_sizes;
 	void					*rfa_fb_ptr;
+	uint32_t				rfa_fb_linebytes;
 };
 
 #endif	/* _RADEON_RADEONDRMKMS_H_ */

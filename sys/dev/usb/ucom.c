@@ -76,13 +76,13 @@ int ucomdebug = 0;
 #endif
 #define DPRINTF(x) DPRINTFN(0, x)
 
-#define	UCOMUNIT_MASK		0x3ffff
-#define	UCOMDIALOUT_MASK	0x80000
-#define	UCOMCALLUNIT_MASK	0x40000
+#define	UCOMCALLUNIT_MASK	TTCALLUNIT_MASK
+#define	UCOMUNIT_MASK		TTUNIT_MASK
+#define	UCOMDIALOUT_MASK	TTDIALOUT_MASK
 
-#define	UCOMUNIT(x)		(minor(x) & UCOMUNIT_MASK)
-#define	UCOMDIALOUT(x)		(minor(x) & UCOMDIALOUT_MASK)
-#define	UCOMCALLUNIT(x)		(minor(x) & UCOMCALLUNIT_MASK)
+#define	UCOMCALLUNIT(x)		TTCALLUNIT(x)
+#define	UCOMUNIT(x)		TTUNIT(x)
+#define	UCOMDIALOUT(x)		TTDIALOUT(x)
 
 /*
  * XXX: We can submit multiple input/output buffers to the usb stack

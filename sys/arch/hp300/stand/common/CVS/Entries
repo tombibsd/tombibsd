@@ -1,7 +1,7 @@
 /apci.c/1.13/Thu Apr 24 14:30:23 2014/-kk/
 /apcireg.h/1.2/Sun Dec 11 12:17:19 2005/-kk/
 /autoconf.c/1.13/Tue Feb  8 20:20:14 2011/-kk/
-/clock.c/1.12/Thu Apr 24 14:30:23 2014/-kk/
+/clock.c/1.13/Tue Dec  9 04:34:44 2014/-kk/
 /conf.c/1.12/Sun Dec 23 03:11:32 2007/-kk/
 /conf.h/1.2/Sun Dec 11 12:17:19 2005/-kk/
 /cons.c/1.7/Tue Feb  8 20:20:14 2011/-kk/

@@ -245,7 +245,7 @@ irframet_detach(device_t dev, int flags)
 	struct irframet_softc *sc = device_private(dev);
 	int rc;
 
-	callout_stop(&sc->sc_timeout);
+	callout_halt(&sc->sc_timeout, NULL);
 
 	rc = irframe_detach(dev, flags);
 

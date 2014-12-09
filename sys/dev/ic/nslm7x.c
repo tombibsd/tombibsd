@@ -1703,7 +1703,7 @@ lm_attach(struct lm_softc *lmsc)
 void
 lm_detach(struct lm_softc *lmsc)
 {
-	callout_stop(&lmsc->sc_callout);
+	callout_halt(&lmsc->sc_callout, NULL);
 	callout_destroy(&lmsc->sc_callout);
 	sysmon_envsys_unregister(lmsc->sc_sme);
 }

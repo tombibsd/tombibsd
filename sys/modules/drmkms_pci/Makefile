@@ -9,7 +9,7 @@
 KMOD=	drmkms_pci
 
 #SRCS+=	ati_pcigart.c		# XXX Restore for ATI support.
-SRCS+=	drm_agpsupport.c
+#SRCS+=	drm_agpsupport.c
 SRCS+=	drm_pci.c
 SRCS+=	drm_pci_module.c
 

@@ -6,6 +6,7 @@
 # ports should define any machine-specific files they need in their
 # own file lists.
 
+define	compat_linux
 file	compat/linux/common/linux_blkio.c	compat_linux
 file	compat/linux/common/linux_cdrom.c	compat_linux
 file	compat/linux/common/linux_errno.c	compat_linux

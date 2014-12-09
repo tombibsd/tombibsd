@@ -382,11 +382,10 @@ int	imxuart_kgdb_getc(void *);
 void	imxuart_kgdb_putc(void *, int);
 #endif /* KGDB */
 
-#define	IMXUART_UNIT_MASK	0x7ffff
-#define	IMXUART_DIALOUT_MASK	0x80000
+#define	IMXUART_DIALOUT_MASK	TTDIALOUT_MASK
 
-#define	IMXUART_UNIT(x)	(minor(x) & IMXUART_UNIT_MASK)
-#define	IMXUART_DIALOUT(x)	(minor(x) & IMXUART_DIALOUT_MASK)
+#define	IMXUART_UNIT(x)		TTUNIT(x)
+#define	IMXUART_DIALOUT(x)	TTDIALOUT(x)
 
 #define	IMXUART_ISALIVE(sc)	((sc)->enabled != 0 && \
 			 device_is_active((sc)->sc_dev))

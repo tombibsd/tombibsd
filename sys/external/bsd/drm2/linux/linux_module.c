@@ -108,6 +108,7 @@ linux_fini(void)
 	linux_writecomb_fini();
 	linux_workqueue_fini();
 	linux_kmap_fini();
+	linux_idr_module_fini();
 }
 
 static int

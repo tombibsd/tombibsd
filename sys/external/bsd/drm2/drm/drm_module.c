@@ -45,6 +45,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <linux/mutex.h>
 
 #include <drm/drmP.h>
+#include <drm/drm_sysctl.h>
 
 /*
  * XXX I2C stuff should be moved to a separate drmkms_i2c module.
@@ -52,6 +53,8 @@ __KERNEL_RCSID(0, "$NetBSD$");
 MODULE(MODULE_CLASS_DRIVER, drmkms, "iic,drmkms_linux");
 
 struct mutex	drm_global_mutex;
+
+struct drm_sysctl_def drm_def = DRM_SYSCTL_INIT();
 
 static int
 drm_init(void)
@@ -71,6 +74,7 @@ drm_init(void)
 	linux_mutex_init(&drm_global_mutex);
 	drm_connector_ida_init();
 	drm_global_init();
+	drm_sysctl_init(&drm_def);
 
 	return 0;
 }
@@ -91,7 +95,7 @@ drm_guarantee_initialized(void)
 static void
 drm_fini(void)
 {
-
+	drm_sysctl_fini(&drm_def);
 	drm_global_release();
 	drm_connector_ida_destroy();
 	linux_mutex_destroy(&drm_global_mutex);

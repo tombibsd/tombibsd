@@ -33,11 +33,10 @@
  * By Paolo Abeni <paolo.abeni@email.it>
  *
  */
-#ifndef lint
-static const char rcsid[] _U_ =
-    "@(#) Header: /tcpdump/master/libpcap/pcap-bt-linux.c,v 1.15 2008-07-01 07:05:54 guy Exp  (LBL)";
-#endif
  
+#include <sys/cdefs.h>
+__RCSID("$NetBSD$");
+
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif

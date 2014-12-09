@@ -84,6 +84,7 @@ options 	FIFO		# POSIX fifo support (in all filesystems)
 #options 	QUOTA		# legacy UFS quotas
 #options 	QUOTA2		# new, in-filesystem UFS quotas
 #options 	NFSSERVER	# Network filesystem server
+#options 	UFS_EXTATTR	# Extended attribute support for UFS1
 
 # Networking options
 options 	INET		# Internet protocols

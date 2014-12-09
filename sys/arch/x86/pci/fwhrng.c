@@ -211,7 +211,7 @@ fwhrng_detach(device_t self, int flags)
 
 	rnd_detach_source(&sc->sc_rnd_source);
 
-	callout_stop(&sc->sc_rnd_ch);
+	callout_halt(&sc->sc_rnd_ch, NULL);
 	callout_destroy(&sc->sc_rnd_ch);
 
 	/* Disable the RNG. */

@@ -199,7 +199,7 @@ sdmmc_detach(device_t self, int flags)
 	}
 
 	if (ISSET(sc->sc_caps, SMC_CAPS_POLL_CARD_DET)) {
-		callout_stop(&sc->sc_card_detect_ch);
+		callout_halt(&sc->sc_card_detect_ch, NULL);
 		callout_destroy(&sc->sc_card_detect_ch);
 	}
 

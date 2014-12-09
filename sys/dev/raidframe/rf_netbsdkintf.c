@@ -1532,6 +1532,10 @@ raidioctl(dev_t dev, u_long cmd, void *data, int flag, struct lwp *l)
 		}
 		for (j = d_cfg->cols, i = 0; i < d_cfg->nspares; i++, j++) {
 			d_cfg->spares[i] = raidPtr->Disks[j];
+			if (d_cfg->spares[i].status == rf_ds_rebuilding_spare) {
+				/* XXX: raidctl(8) expects to see this as a used spare */
+				d_cfg->spares[i].status = rf_ds_used_spare;
+			}
 		}
 		retcode = copyout(d_cfg, *ucfgp, sizeof(RF_DeviceConfig_t));
 		RF_Free(d_cfg, sizeof(RF_DeviceConfig_t));

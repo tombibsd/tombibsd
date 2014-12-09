@@ -4,6 +4,9 @@
 
 #include <machine/asm.h>
 
+STRONG_ALIAS(_copysignl, copysign)
+WEAK_ALIAS(copysignl, _copysignl)
+
 ENTRY(copysign)
 	fsgnj.d	fv0, fa0, fa1
 	ret

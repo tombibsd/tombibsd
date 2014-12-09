@@ -88,6 +88,8 @@ __RCSID("$NetBSD$");
 
 #include "installboot.h"
 
+#define	VAX_LABELOFFSET		64
+
 #ifndef __CTASSERT
 #define	__CTASSERT(X)
 #endif
@@ -210,12 +212,12 @@ vax_setboot(ib_params *params)
 
 	/*
 	 * Copy disklabel from old boot block to new.
-	 * Assume everything between LABELOFFSET and the start of
+	 * Assume everything between VAX_LABELOFFSET and the start of
 	 * the param block is scratch area and can be copied over.
 	 */
-	memcpy(bootstrapbuf+LABELOFFSET,
-	    oldbb+LABELOFFSET,
-	    offsetof(struct vax_boot_block,bb_magic1)-LABELOFFSET);
+	memcpy(bootstrapbuf + VAX_LABELOFFSET,
+	    oldbb + VAX_LABELOFFSET,
+	    offsetof(struct vax_boot_block,bb_magic1) - VAX_LABELOFFSET);
 
 	/* point to bootblock at begining of bootstrap */
 	bb = (struct vax_boot_block*)bootstrapbuf;

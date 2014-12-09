@@ -198,7 +198,7 @@ yeartonum(int y)
 	int n;
 
 	for (n = 0, y -= 1; y > 1969; y--)
-		n += SECPERYEAR(y);
+ 		n += days_per_year(y) * SECS_PER_DAY;
 	return n;
 }
 
@@ -209,7 +209,7 @@ int
 numtoyear(int num)
 {
 	int y = 1970, j;
-	while(num >= (j = SECPERYEAR(y))) {
+	while(num >= (j = days_per_year(y) * SECS_PER_DAY)) {
 		y++;
 		num -= j;
 	}

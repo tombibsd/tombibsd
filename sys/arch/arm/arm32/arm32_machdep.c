@@ -108,6 +108,7 @@ int cpu_simd_present;
 int cpu_simdex_present;
 int cpu_umull_present;
 int cpu_synchprim_present;
+int cpu_unaligned_sigbus;
 const char *cpu_arch = "";
 
 int cpu_instruction_set_attributes[6];
@@ -503,6 +504,13 @@ SYSCTL_SETUP(sysctl_machdep_setup, "sysctl machdep subtree setup")
 		       CTLFLAG_PERMANENT|CTLFLAG_READWRITE,
 		       CTLTYPE_INT, "printfataltraps", NULL,
 		       NULL, 0, &cpu_printfataltraps, 0,
+		       CTL_MACHDEP, CTL_CREATE, CTL_EOL);
+	cpu_unaligned_sigbus = !CPU_IS_ARMV6_P() && !CPU_IS_ARMV7_P();
+	sysctl_createv(clog, 0, NULL, NULL,
+		       CTLFLAG_PERMANENT|CTLFLAG_READONLY,
+		       CTLTYPE_INT, "unaligned_sigbus",
+		       SYSCTL_DESCR("Do SIGBUS for fixed unaligned accesses"),
+		       NULL, 0, &cpu_unaligned_sigbus, 0,
 		       CTL_MACHDEP, CTL_CREATE, CTL_EOL);
 
 

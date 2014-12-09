@@ -196,4 +196,6 @@ LIBDPLIBS+=	pthread		${NETBSDSRCDIR}/lib/libpthread
 CWARNFLAGS.clang+=	-Wno-parentheses -Wno-tautological-compare \
 			-Wno-empty-body -Wno-error
 
+COPTS.sna_display.c=	-Wno-stack-protector
+
 .include <bsd.subdir.mk>

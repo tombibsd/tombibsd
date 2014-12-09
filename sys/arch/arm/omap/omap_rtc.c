@@ -127,31 +127,31 @@ omaprtc_gettime(todr_chip_handle_t tch, struct clock_ymdhms *dt)
 	}
 
 	dt->dt_year =
-		FROMBCD(bus_space_read_1(sc->sc_iot,
+		bcdtobin(bus_space_read_1(sc->sc_iot,
 					 sc->sc_ioh,
 					 YEARS_REG)) + BASEYEAR;
 	dt->dt_mon =
-		FROMBCD(bus_space_read_1(sc->sc_iot,
+		bcdtobin(bus_space_read_1(sc->sc_iot,
 					 sc->sc_ioh,
 					 MONTHS_REG));
 	dt->dt_wday =
-		FROMBCD(bus_space_read_1(sc->sc_iot,
+		bcdtobin(bus_space_read_1(sc->sc_iot,
 					 sc->sc_ioh,
 					 WEEKS_REG) & 0x0f);
 	dt->dt_day =
-		FROMBCD(bus_space_read_1(sc->sc_iot,
+		bcdtobin(bus_space_read_1(sc->sc_iot,
 					 sc->sc_ioh,
 					 DAYS_REG));
 	dt->dt_sec =
-		FROMBCD(bus_space_read_1(sc->sc_iot,
+		bcdtobin(bus_space_read_1(sc->sc_iot,
 					 sc->sc_ioh,
 					 SECONDS_REG));
 	dt->dt_hour =
-		FROMBCD(bus_space_read_1(sc->sc_iot,
+		bcdtobin(bus_space_read_1(sc->sc_iot,
 					 sc->sc_ioh,
 					 HOURS_REG));
 	dt->dt_min =
-		FROMBCD(bus_space_read_1(sc->sc_iot,
+		bcdtobin(bus_space_read_1(sc->sc_iot,
 					 sc->sc_ioh,
 					 MINUTES_REG));
 	restore_interrupts(s);
@@ -177,19 +177,19 @@ omaprtc_settime(todr_chip_handle_t tch, struct clock_ymdhms *dt)
 	 */
 
 	bus_space_write_1(sc->sc_iot, sc->sc_ioh,
-			  YEARS_REG, TOBCD(dt->dt_year - BASEYEAR));
+			  YEARS_REG, bintobcd(dt->dt_year - BASEYEAR));
 	bus_space_write_1(sc->sc_iot, sc->sc_ioh,
-			  MONTHS_REG, TOBCD(dt->dt_mon));
+			  MONTHS_REG, bintobcd(dt->dt_mon));
 	bus_space_write_1(sc->sc_iot, sc->sc_ioh,
-			  WEEKS_REG, TOBCD(dt->dt_wday & 0x0f));
+			  WEEKS_REG, bintobcd(dt->dt_wday & 0x0f));
 	bus_space_write_1(sc->sc_iot, sc->sc_ioh,
-			  DAYS_REG, TOBCD(dt->dt_day));
+			  DAYS_REG, bintobcd(dt->dt_day));
 	bus_space_write_1(sc->sc_iot, sc->sc_ioh,
-			  SECONDS_REG, TOBCD(dt->dt_sec));
+			  SECONDS_REG, bintobcd(dt->dt_sec));
 	bus_space_write_1(sc->sc_iot, sc->sc_ioh,
-			  HOURS_REG, TOBCD(dt->dt_hour));
+			  HOURS_REG, bintobcd(dt->dt_hour));
 	bus_space_write_1(sc->sc_iot, sc->sc_ioh,
-			  MINUTES_REG, TOBCD(dt->dt_min));
+			  MINUTES_REG, bintobcd(dt->dt_min));
 	restore_interrupts(s);
         return 0;
 }

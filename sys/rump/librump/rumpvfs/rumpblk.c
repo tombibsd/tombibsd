@@ -341,6 +341,25 @@ rumpblk_deregister(const char *path)
 	return 0;
 }
 
+/*
+ * Release all backend resources, to be called only when the rump
+ * kernel is being shut down.
+ * This routine does not do a full "fini" since we're going down anyway.
+ */
+void
+rumpblk_fini(void)
+{
+	int i;
+
+	for (i = 0; i < RUMPBLK_SIZE; i++) {
+		struct rblkdev *rblk;
+
+		rblk = &minors[i];
+		if (rblk->rblk_fd != -1)
+			backend_close(rblk);
+	}
+}
+
 static int
 backend_open(struct rblkdev *rblk, const char *path)
 {

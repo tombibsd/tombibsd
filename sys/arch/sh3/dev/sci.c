@@ -196,11 +196,8 @@ integrate void sci_stsoft(struct sci_softc *, struct tty *);
 integrate void sci_schedrx(struct sci_softc *);
 void	scidiag(void *);
 
-#define	SCIUNIT_MASK		0x7ffff
-#define	SCIDIALOUT_MASK	0x80000
-
-#define	SCIUNIT(x)	(minor(x) & SCIUNIT_MASK)
-#define	SCIDIALOUT(x)	(minor(x) & SCIDIALOUT_MASK)
+#define	SCIUNIT(x)	TTUNIT(x)
+#define	SCIDIALOUT(x)	TTDIALOUT(x)
 
 /* Hardware flag masks */
 #define	SCI_HW_NOIEN	0x01

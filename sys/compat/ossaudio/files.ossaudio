@@ -4,4 +4,5 @@
 # compatibility.  Used by e.g. compat_linux and compat_freebsd.
 # Included by ports that need it.
 
+define	compat_ossaudio
 file	compat/ossaudio/ossaudio.c		compat_ossaudio | compat_linux | compat_freebsd

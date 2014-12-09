@@ -5,4 +5,4 @@ CPPFLAGS+=	-D${MACHINE}
 SYSTEM_FIRST_OBJ=	nwmmu.o
 SYSTEM_FIRST_SFILE=	${THISARM}/${MACHINE}/nwmmu.S
 
-LINKFLAGS=		-T ${THISARM}/conf/kern.ldscript
+LINKSCRIPT=		-T ${THISARM}/conf/kern.ldscript

@@ -55,9 +55,12 @@ fseek(FILE *fp, long l_offset, int whence)
 {
 	off_t offset;
 
+#if 0
+	/* This is a bad idea because makes fseek(fp, -6, SEEK_SET) work... */
 	if (whence == SEEK_SET)
 		offset = (unsigned long)l_offset;
 	else
+#endif
 		offset = l_offset;
 	return fseeko(fp, offset, whence);
 }

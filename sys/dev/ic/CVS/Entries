@@ -151,14 +151,14 @@
 /cd1400reg.h/1.6/Sun Dec 11 12:21:26 2005/-kk/
 /cd18xx.c/1.31/Fri Oct  3 09:09:14 2014/-kk/
 /cd18xxreg.h/1.4/Thu May 29 14:51:27 2008/-kk/
-/cd18xxvar.h/1.4/Sat Oct 27 17:18:19 2012/-kk/
+/cd18xxvar.h/1.5/Tue Dec  9 04:34:57 2014/-kk/
 /ciss.c/1.32/Thu Oct 24 10:28:57 2013/-kk/
 /cissreg.h/1.4/Thu Oct 24 10:28:57 2013/-kk/
 /cissvar.h/1.6/Thu Oct 24 10:28:57 2013/-kk/
-/clmpcc.c/1.50/Wed Oct 29 08:13:19 2014/-kk/
+/clmpcc.c/1.51/Tue Dec  9 04:34:57 2014/-kk/
 /clmpccreg.h/1.4/Mon Apr 28 20:23:49 2008/-kk/
 /clmpccvar.h/1.13/Sat Oct 27 17:18:20 2012/-kk/
-/com.c/1.327/Fri Oct  3 09:25:59 2014/-kk/
+/com.c/1.328/Tue Dec  9 04:34:57 2014/-kk/
 /com_cpcbus.c/1.11/Mon Apr 28 20:23:49 2008/-kk/
 /com_upc.c/1.11/Sun Jan 25 14:34:14 2009/-kk/
 /comreg.h/1.22/Thu Oct 24 10:28:57 2013/-kk/
@@ -179,7 +179,7 @@
 /ct65550.c/1.10/Tue Jan 14 16:05:03 2014/-kk/
 /ct65550reg.h/1.2/Wed Mar 23 04:02:43 2011/-kk/
 /ct65550var.h/1.2/Wed Mar 23 04:02:43 2011/-kk/
-/cy.c/1.59/Fri Oct  3 09:09:14 2014/-kk/
+/cy.c/1.60/Tue Dec  9 04:34:57 2014/-kk/
 /cyreg.h/1.5/Sun Dec 11 12:21:26 2005/-kk/
 /cyvar.h/1.9/Wed Mar 26 17:50:32 2008/-kk/
 /daic.c/1.31/Sat Oct 27 17:18:20 2012/-kk/
@@ -363,7 +363,7 @@
 /mb89352.c/1.54/Tue Nov 12 02:18:44 2013/-kk/
 /mb89352reg.h/1.6/Sun Dec 11 12:21:27 2005/-kk/
 /mb89352var.h/1.15/Thu Nov 12 20:15:02 2009/-kk/
-/mc146818.c/1.18/Sat Dec 13 17:32:53 2008/-kk/
+/mc146818.c/1.19/Tue Dec  9 04:34:57 2014/-kk/
 /mc146818reg.h/1.9/Wed Mar  8 23:46:25 2006/-kk/
 /mc146818var.h/1.7/Wed May 14 13:29:29 2008/-kk/
 /mc68450reg.h/1.5/Mon Apr 28 20:23:50 2008/-kk/
@@ -376,14 +376,14 @@
 /midway.c/1.94/Tue Mar 13 18:40:31 2012/-kk/
 /midwayreg.h/1.14/Sun Mar  4 06:01:58 2007/-kk/
 /midwayvar.h/1.19/Sat Oct 27 17:18:21 2012/-kk/
-/mk48txx.c/1.26/Tue Jan  4 01:28:15 2011/-kk/
+/mk48txx.c/1.27/Tue Dec  9 04:34:57 2014/-kk/
 /mk48txxreg.h/1.11/Tue Jan  4 01:28:15 2011/-kk/
 /mk48txxvar.h/1.7/Tue Jan  4 01:28:15 2011/-kk/
 /mlx.c/1.62/Fri Oct  3 09:09:14 2014/-kk/
 /mlxio.h/1.3/Mon Aug 26 17:02:15 2002/-kk/
 /mlxreg.h/1.8/Mon Sep  8 23:36:54 2008/-kk/
 /mlxvar.h/1.15/Sat Oct 27 17:18:22 2012/-kk/
-/mm58167.c/1.15/Thu Oct 24 10:28:58 2013/-kk/
+/mm58167.c/1.16/Tue Dec  9 04:34:57 2014/-kk/
 /mm58167var.h/1.6/Sun Jul  6 13:29:50 2008/-kk/
 /monitors.h/1.2/Mon Apr 28 20:23:50 2008/-kk/
 /mpc105reg.h/1.3/Mon Apr 28 20:23:50 2008/-kk/
@@ -432,7 +432,7 @@
 /ns16450reg.h/1.6/Sun Dec 11 12:21:28 2005/-kk/
 /ns16550reg.h/1.10/Thu Oct 24 10:28:58 2013/-kk/
 /ns8477reg.h/1.3/Mon Apr 28 20:23:50 2008/-kk/
-/nslm7x.c/1.60/Sun Oct 27 08:20:01 2013/-kk/
+/nslm7x.c/1.61/Tue Dec  9 04:34:57 2014/-kk/
 /nslm7xvar.h/1.28/Tue Jan 17 16:14:47 2012/-kk/
 /oosiop.c/1.14/Fri Oct  3 09:36:17 2014/-kk/
 /oosiopreg.h/1.4/Sun Dec 11 12:21:28 2005/-kk/
@@ -451,7 +451,7 @@
 /pcdisplay.h/1.1/Thu May 14 23:11:03 1998/-kk/
 /pcdisplay_chars.c/1.16/Thu Feb 25 11:20:10 2010/-kk/
 /pcdisplay_subr.c/1.35/Tue Oct 19 22:27:19 2010/-kk/
-/pcdisplayvar.h/1.19/Sun Mar 15 15:52:12 2009/-kk/
+/pcdisplayvar.h/1.20/Tue Dec  9 04:34:57 2014/-kk/
 /pcf8584.c/1.11/Thu Feb 13 15:22:29 2014/-kk/
 /pcf8584reg.h/1.1/Sat Apr 14 19:33:30 2007/-kk/
 /pcf8584var.h/1.4/Sun Feb 28 11:47:28 2010/-kk/
@@ -466,7 +466,7 @@
 /rrunner.c/1.78/Fri Oct  3 09:09:14 2014/-kk/
 /rrunnerreg.h/1.9/Mon Apr 28 20:23:51 2008/-kk/
 /rrunnervar.h/1.14/Sat Oct 27 17:18:22 2012/-kk/
-/rs5c313.c/1.9/Tue Apr  6 15:29:19 2010/-kk/
+/rs5c313.c/1.10/Tue Dec  9 04:34:57 2014/-kk/
 /rs5c313reg.h/1.3/Tue Apr  6 15:29:19 2010/-kk/
 /rs5c313var.h/1.3/Tue Apr  6 15:29:19 2010/-kk/
 /rt2560.c/1.25/Sat Feb 18 13:38:35 2012/-kk/
@@ -576,7 +576,7 @@
 /vga_raster.c/1.42/Fri Oct  3 09:43:35 2014/-kk/
 /vga_subr.c/1.25/Thu Aug  9 20:25:05 2012/-kk/
 /vgareg.h/1.9/Sun Dec 11 12:21:29 2005/-kk/
-/vgavar.h/1.31/Fri Oct  3 09:43:35 2014/-kk/
+/vgavar.h/1.32/Tue Dec  9 04:34:58 2014/-kk/
 /w83l518d.c/1.2/Thu Aug 19 14:58:22 2010/-kk/
 /w83l518d_sdmmc.c/1.3/Thu Oct  7 12:06:09 2010/-kk/
 /w83l518d_sdmmc.h/1.2/Thu Aug 19 14:58:22 2010/-kk/
@@ -599,6 +599,6 @@
 /z8530reg.h/1.12/Sun Dec 11 12:21:29 2005/-kk/
 /z8530sc.c/1.31/Thu Oct 24 10:28:58 2013/-kk/
 /z8530sc.h/1.26/Fri May 22 03:51:30 2009/-kk/
-/z8530tty.c/1.130/Fri Oct  3 09:09:15 2014/-kk/
+/z8530tty.c/1.131/Tue Dec  9 04:34:58 2014/-kk/
 /z8536reg.h/1.3/Tue Jan 31 22:13:19 2012/-kk/
 D

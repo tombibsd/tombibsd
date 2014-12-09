@@ -174,6 +174,12 @@ struct tty {
 #define	TTMAXLOWAT	(tp->t_qsize >> 2)
 #define	TTMINLOWAT	(tp->t_qsize >> 5)
 #define	TTROUND		64
+#define	TTDIALOUT_MASK	0x80000		/* dialout=524288 in MAKEDEV.tmpl */
+#define	TTCALLUNIT_MASK	0x40000		/* XXX: compat */
+#define	TTUNIT_MASK	0x3ffff
+#define	TTDIALOUT(d)	(minor(d) & TTDIALOUT_MASK)
+#define	TTCALLUNIT(d)	(minor(d) & TTCALLUNIT_MASK)
+#define	TTUNIT(d)	(minor(d) & TTUNIT_MASK)
 #endif /* _KERNEL */
 
 /* These flags are kept in t_state. */

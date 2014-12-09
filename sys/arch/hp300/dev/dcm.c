@@ -191,8 +191,8 @@ struct	dcmstats {
 };
 #endif
 
-#define DCMUNIT(x)		(minor(x) & 0x7ffff)
-#define	DCMDIALOUT(x)		(minor(x) & 0x80000)
+#define DCMUNIT(x)		TTUNIT(x)
+#define	DCMDIALOUT(x)		TTDIALOUT(x)
 #define	DCMBOARD(x)		(((x) >> 2) & 0x3f)
 #define DCMPORT(x)		((x) & 3)
 

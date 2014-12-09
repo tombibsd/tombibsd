@@ -40,6 +40,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/systm.h>
 
 #include <drm/drmP.h>
+#include <drm/drm_sysctl.h>
 
 #include "i915_drv.h"
 
@@ -53,6 +54,8 @@ MODULE(MODULE_CLASS_DRIVER, i915drmkms, "drmkms,drmkms_pci"); /* XXX drmkms_i2c 
 extern struct drm_driver *const i915_drm_driver;
 extern const struct pci_device_id *const i915_device_ids;
 extern const size_t i915_n_device_ids;
+
+struct drm_sysctl_def i915_def = DRM_SYSCTL_INIT();
 
 static int
 i915drmkms_init(void)
@@ -74,6 +77,7 @@ i915drmkms_init(void)
 		    error);
 		return error;
 	}
+	drm_sysctl_init(&i915_def);
 
 	return 0;
 }
@@ -96,6 +100,7 @@ i915drmkms_fini(void)
 {
 
 	drm_pci_exit(i915_drm_driver, NULL);
+	drm_sysctl_fini(&i915_def);
 }
 
 static int

@@ -250,4 +250,6 @@
 #define	EDID_DESC_STD_TIMING_START		5
 #define	EDID_DESC_STD_TIMING_COUNT		6
 
+#define	EDID_EXT_BLOCK_COUNT(ptr)		((ptr)[126])
+
 #endif /* _DEV_VIDEOMODE_EDIDREG_H */

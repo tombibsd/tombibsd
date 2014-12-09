@@ -46,6 +46,7 @@
 #define scalblnf _scalblnf
 #define scalblnl _scalblnl
 
+#define copysignl _copysignl
 #define sqrtl _sqrtl
 #define cbrtl _cbrtl
 #define ceill _ceill
@@ -69,3 +70,6 @@
 #define tanhl _tanhl
 #define atanhl _atanhl
 #define log10l _log10l
+
+#define erfl	_erfl
+#define erfcl	_erfcl

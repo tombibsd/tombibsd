@@ -270,11 +270,10 @@ const bus_size_t com_std_map[16] = COM_REG_16550;
 #endif /* COM_16750 */
 #endif /* COM_REGMAP */
 
-#define	COMUNIT_MASK	0x7ffff
-#define	COMDIALOUT_MASK	0x80000
+#define	COMDIALOUT_MASK	TTDIALOUT_MASK
 
-#define	COMUNIT(x)	(minor(x) & COMUNIT_MASK)
-#define	COMDIALOUT(x)	(minor(x) & COMDIALOUT_MASK)
+#define	COMUNIT(x)	TTUNIT(x)
+#define	COMDIALOUT(x)	TTDIALOUT(x)
 
 #define	COM_ISALIVE(sc)	((sc)->enabled != 0 && \
 			 device_is_active((sc)->sc_dev))

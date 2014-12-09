@@ -454,7 +454,7 @@ main(int argc, char *argv[])
 			iflag = 1;
 			break;
 		case 'L':
-			Lflag = 1;
+			Lflag = RT_LFLAG;
 			break;
 		case 'l':
 			lflag = 1;
@@ -639,7 +639,7 @@ main(int argc, char *argv[])
 			else {
 				if (use_sysctl)
 					p_rttables(af,
-					    nflag|tagflag|vflag, 0, ~0);
+					    nflag|tagflag|vflag|Lflag, 0, ~0);
 				else
 					routepr(nl[N_RTREE].n_value);
 			}

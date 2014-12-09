@@ -71,8 +71,8 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include "locators.h"
 
-#define SABUNIT(x)		(minor(x) & 0x7ffff)
-#define SABDIALOUT(x)		(minor(x) & 0x80000)
+#define SABUNIT(x)		TTUNIT(x)
+#define SABDIALOUT(x)		TTDIALOUT(x)
 
 #define	SABTTY_RBUF_SIZE	1024	/* must be divisible by 2 */
 

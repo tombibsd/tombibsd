@@ -97,7 +97,7 @@ mc146818_gettime_ymdhms(todr_chip_handle_t handle, struct clock_ymdhms *dt)
 		}
 	}
 
-#define	FROMREG(x)	((sc->sc_flag & MC146818_BCD) ? FROMBCD(x) : (x))
+#define	FROMREG(x)	((sc->sc_flag & MC146818_BCD) ? bcdtobin(x) : (x))
 
 	dt->dt_sec  = FROMREG((*sc->sc_mcread)(sc, MC_SEC));
 	dt->dt_min  = FROMREG((*sc->sc_mcread)(sc, MC_MIN));
@@ -150,7 +150,7 @@ mc146818_settime_ymdhms(todr_chip_handle_t handle, struct clock_ymdhms *dt)
 	(*sc->sc_mcwrite)(sc, MC_REGB,
 	    (*sc->sc_mcread)(sc, MC_REGB) | MC_REGB_SET);
 
-#define	TOREG(x)	((sc->sc_flag & MC146818_BCD) ? TOBCD(x) : (x))
+#define	TOREG(x)	((sc->sc_flag & MC146818_BCD) ? bintobcd(x) : (x))
 
 	(*sc->sc_mcwrite)(sc, MC_SEC, TOREG(dt->dt_sec));
 	(*sc->sc_mcwrite)(sc, MC_MIN, TOREG(dt->dt_min));

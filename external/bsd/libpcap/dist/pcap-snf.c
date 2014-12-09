@@ -1,3 +1,6 @@
+#include <sys/cdefs.h>
+__RCSID("$NetBSD$");
+
 /*	$NetBSD$	*/
 
 #ifdef HAVE_CONFIG_H
@@ -120,7 +123,7 @@ snf_read(pcap_t *p, int cnt, pcap_handler callback, u_char *user)
 		return -1;
 
 	n = 0;
-	while (n < cnt || cnt < 0) {
+	while (n < cnt || PACKET_COUNT_IS_UNLIMITED(cnt)) {
 		/*
 		 * Has "pcap_breakloop()" been called?
 		 */

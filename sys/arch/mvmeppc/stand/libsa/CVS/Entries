@@ -2,7 +2,7 @@
 /Makefile/1.11/Thu Oct 24 10:28:57 2013/-kk/
 /bugsyscalls.S/1.3/Wed Jan 19 09:03:15 2011/-kk/
 /bugsyscalls.h/1.2/Mon Apr 28 20:23:30 2008/-kk/
-/clock.c/1.3/Wed Mar 18 10:22:33 2009/-kk/
+/clock.c/1.5/Tue Dec  9 04:34:48 2014/-kk/
 /exec_mvme.c/1.5/Sat Mar 14 15:36:11 2009/-kk/
 /getchar.c/1.2/Mon Apr 28 20:23:30 2008/-kk/
 /if_bug.c/1.4/Sat Mar 14 15:36:11 2009/-kk/

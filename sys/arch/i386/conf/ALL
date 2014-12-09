@@ -205,7 +205,6 @@ options 	LFS_KERNEL_RFW
 options 	LFS_EI		# LFS endian-independent support - experimental
 options 	LFS_DIRHASH	# LFS version of UFS_DIRHASH - experimental
 options 	LFS_EXTATTR	# extended attributes for LFS - experimental
-options 	LFS_EXTATTR_AUTOSTART	# like UFS_EXTATTR_AUTOSTART
 options 	LFS_QUOTA	# quotas for LFS - experimental
 options 	LFS_QUOTA2	# new-style quotas for LFS - experimental
 options 	NFSSERVER	# Network File System server

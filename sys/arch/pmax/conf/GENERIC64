@@ -93,6 +93,7 @@ options 	QUOTA2		# new, in-filesystem UFS quotas
 options 	SOFTDEP		# FFS soft updates support.
 options 	WAPBL		# File system journaling support
 #options 	FFS_NO_SNAPSHOT	# No FFS snapshot support
+options 	UFS_EXTATTR	# Extended attribute support for UFS1
 #options 	UFS_DIRHASH	# UFS Large Directory Hashing - Experimental
 
 # Networking options

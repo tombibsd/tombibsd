@@ -137,7 +137,7 @@ usage(void)
 	fprintf(stderr, "       %s online cpuno\n", progname);
 	fprintf(stderr, "       %s intr cpuno\n", progname);
 	fprintf(stderr, "       %s nointr cpuno\n", progname);
-	fprintf(stderr, "       %s ucode [file]\n", progname);
+	fprintf(stderr, "       %s ucode [cpuno] [file]\n", progname);
 	exit(EXIT_FAILURE);
 	/* NOTREACHED */
 }

@@ -13,5 +13,8 @@ SRCS+=	netsmb_component.c
 CPPFLAGS+=	-I${RUMPTOP}/librump/rumpvfs
 #CPPFLAGS+=	-DSMB_SOCKET_DEBUG -DSMB_IOD_DEBUG
 
+SRCS+=	netsmb_iconv.c
+RUMPCOMP_USER_SRCS=	netsmb_user.c
+
 .include <bsd.lib.mk>
 .include <bsd.klinks.mk>

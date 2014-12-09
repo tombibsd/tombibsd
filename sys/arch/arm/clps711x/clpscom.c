@@ -56,11 +56,8 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include "ioconf.h"
 #include "locators.h"
 
-#define COMUNIT_MASK	0x7ffff
-#define COMDIALOUT_MASK	0x80000
-
-#define COMUNIT(x)	(minor(x) & COMUNIT_MASK)
-#define COMDIALOUT(x)	(minor(x) & COMDIALOUT_MASK)
+#define COMUNIT(x)	TTUNIT(x)
+#define COMDIALOUT(x)	TTDIALOUT(x)
 
 #define CLPSCOM_RING_SIZE	2048
 #define UART_FIFO_SIZE		16

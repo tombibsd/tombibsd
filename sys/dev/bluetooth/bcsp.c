@@ -349,10 +349,10 @@ bcsp_detach(device_t self, int flags __unused)
 		sc->sc_unit = NULL;
 	}
 
-	callout_stop(&sc->sc_seq_timer);
+	callout_halt(&sc->sc_seq_timer, NULL);
 	callout_destroy(&sc->sc_seq_timer);
 
-	callout_stop(&sc->sc_le_timer);
+	callout_halt(&sc->sc_le_timer, NULL);
 	callout_destroy(&sc->sc_le_timer);
 
 	return 0;
