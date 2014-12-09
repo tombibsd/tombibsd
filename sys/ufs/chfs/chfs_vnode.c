@@ -34,7 +34,6 @@
 
 #include "chfs.h"
 #include "chfs_inode.h"
-#include <sys/malloc.h>
 #include <sys/kauth.h>
 #include <sys/namei.h>
 #include <sys/uio.h>

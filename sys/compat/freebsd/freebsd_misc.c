@@ -48,7 +48,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/mount.h>
 #include <sys/signal.h>
 #include <sys/signalvar.h>
-#include <sys/malloc.h>
 #include <sys/mman.h>
 #include <sys/ktrace.h>
 

@@ -1249,8 +1249,6 @@ smbfs_lookup(void *v)
 		if (newvp != dvp)
 			vn_lock(newvp, LK_SHARED | LK_RETRY);
 		error = VOP_GETATTR(newvp, &vattr, cnp->cn_cred);
-		if (newvp != dvp)
-			VOP_UNLOCK(newvp);
 		/*
 		 * If the file type on the server is inconsistent
 		 * with what it was when we created the vnode,
@@ -1267,6 +1265,8 @@ smbfs_lookup(void *v)
 		else if (error == 0
 			&& vattr.va_ctime.tv_sec == VTOSMB(newvp)->n_ctime)
 		{
+			if (newvp != dvp)
+				VOP_UNLOCK(newvp);
 			/* nfsstats.lookupcache_hits++; */
 			return (0);
 		}

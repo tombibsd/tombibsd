@@ -33,6 +33,7 @@ __RCSID("$NetBSD$");
 #include <stdlib.h>
 #include <string.h>
 #include <strings.h>
+#include <inttypes.h>
 #include <stdio.h>
 #include <unistd.h>
 
@@ -184,7 +185,7 @@ readboot(int dosfs, struct bootblock *boot)
 		return FSFATAL;
 	}
 
-	boot->ClusterOffset = (boot->RootDirEnts * 32 + boot->BytesPerSec - 1)
+	boot->ClusterOffset = (int)(boot->RootDirEnts * 32 + boot->BytesPerSec - 1)
 	    / boot->BytesPerSec
 	    + boot->ResSectors
 	    + boot->FATs * boot->FATsecs
@@ -205,8 +206,8 @@ readboot(int dosfs, struct bootblock *boot)
 		boot->NumSectors = boot->HugeSectors;
 	boot->NumClusters = (boot->NumSectors - boot->ClusterOffset) / boot->SecPerClust;
 
-	if (boot->ClusterOffset > boot->NumSectors) {
-		pfatal("Cluster offset too large (%u clusters)\n",
+	if (boot->ClusterOffset > (intmax_t)boot->NumSectors) {
+		pfatal("Cluster offset too large (%d sectors)\n",
 		    boot->ClusterOffset);
 		return FSFATAL;
 	}

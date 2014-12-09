@@ -33,7 +33,7 @@
 /kern_descrip.c/1.228/Fri Oct  3 10:05:18 2014/-kk/
 /kern_drvctl.c/1.36/Fri Oct  3 09:09:25 2014/-kk/
 /kern_event.c/1.82/Fri Oct  3 09:51:00 2014/-kk/
-/kern_exec.c/1.409/Tue Dec  9 04:16:18 2014/-kk/
+/kern_exec.c/1.410/Tue Dec  9 04:24:04 2014/-kk/
 /kern_exit.c/1.244/Mon May 19 16:26:37 2014/-kk/
 /kern_fileassoc.c/1.36/Sun Jul 20 13:26:33 2014/-kk/
 /kern_fork.c/1.193/Tue Dec 17 04:05:10 2013/-kk/
@@ -90,7 +90,7 @@
 /makesyscalls.sh/1.145/Fri Oct  3 09:09:25 2014/-kk/
 /sched_4bsd.c/1.30/Thu Jun 26 06:46:35 2014/-kk/
 /sched_m2.c/1.32/Thu Jun 26 06:46:35 2014/-kk/
-/subr_autoconf.c/1.232/Fri Oct  3 09:51:00 2014/-kk/
+/subr_autoconf.c/1.233/Tue Dec  9 04:24:04 2014/-kk/
 /subr_blist.c/1.12/Tue Dec 17 04:13:38 2013/-kk/
 /subr_bufq.c/1.21/Sat Mar  1 06:05:14 2014/-kk/
 /subr_callback.c/1.7/Tue Nov 24 20:11:50 2009/-kk/

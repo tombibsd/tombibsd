@@ -135,7 +135,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/vnode.h>
 #include <sys/mount.h>
 #include <sys/namei.h>
-#include <sys/malloc.h>
 #include <sys/buf.h>
 #include <miscfs/genfs/genfs.h>
 #include <miscfs/overlay/overlay.h>

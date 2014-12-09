@@ -160,8 +160,8 @@ NORMAL_S?=	@${_MKSHMSG} "compile  ${.CURDIR:T}/${.TARGET}" && \
 # link rules: 
 LINK_O?=	@${_MKSHMSG} "   link  ${.CURDIR:T}/${.TARGET}" && \
 		${_MKSHECHO}\
-		${LD} -r -o ${.TARGET} ${.ALLSRC} && \
-		${LD} -r -o ${.TARGET} ${.ALLSRC}
+		${LD} -r -Map=${.TARGET}.map -o ${.TARGET} ${.ALLSRC} && \
+		${LD} -r -Map=${.TARGET}.map -o ${.TARGET} ${.ALLSRC}
 
 ##
 ## (3) libkern and compat
@@ -249,7 +249,7 @@ LINKFLAGS?=	${LINKFORMAT} ${LINKTEXT} ${LINKDATA} ${LINKENTRY} \
 
 LINKFLAGS_DEBUG?=	-X
 
-SYSTEM_LD_TAIL?=@${TOOL_SED} '/const char sccs/!d;s/.*@(.)//;s/\\.*//' vers.c; \
+SYSTEM_LD_TAIL?=@${TOOL_SED} '/const char sccs/!d;s/.*@(.)//;s/" "//;s/\\.*//' vers.c; \
 		${SIZE} $@; chmod 755 $@; \
 		${SYSTEM_CTFMERGE}
 SYSTEM_LD_TAIL_DEBUG?=; \
@@ -346,7 +346,7 @@ assym.h machdep.o: Makefile
 .if !target(__CLEANKERNEL)
 __CLEANKERNEL: .USE
 	${_MKMSG} "${.TARGET}ing the kernel objects"
-	rm -f ${KERNELS} eddep tags *.[io] *.ln [a-z]*.s vers.c \
+	rm -f ${KERNELS} *.map eddep tags *.[io] *.ko *.ln [a-z]*.s vers.c \
 	    [Ee]rrs linterrs makelinks assym.h.tmp assym.h \
 	    ${EXTRA_KERNELS} ${EXTRA_CLEAN}
 .endif

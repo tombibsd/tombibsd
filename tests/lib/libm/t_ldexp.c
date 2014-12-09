@@ -34,7 +34,6 @@ __RCSID("$NetBSD$");
 #include <sys/param.h>
 
 #include <atf-c.h>
-#include <atf-c/config.h>
 
 #include <math.h>
 #include <limits.h>

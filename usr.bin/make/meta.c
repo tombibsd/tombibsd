@@ -167,7 +167,7 @@ filemon_read(FILE *mfp, int fd)
     /* rewind */
     (void)lseek(fd, (off_t)0, SEEK_SET);
 
-    fprintf(mfp, "-- filemon acquired metadata --\n");
+    fprintf(mfp, "\n-- filemon acquired metadata --\n");
 
     while ((n = read(fd, buf, sizeof(buf))) > 0) {
 	fwrite(buf, 1, n, mfp);

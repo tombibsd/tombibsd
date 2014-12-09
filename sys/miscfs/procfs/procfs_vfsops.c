@@ -94,7 +94,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/dirent.h>
 #include <sys/signalvar.h>
 #include <sys/vnode.h>
-#include <sys/malloc.h>
 #include <sys/file.h>
 #include <sys/filedesc.h>
 #include <sys/kauth.h>

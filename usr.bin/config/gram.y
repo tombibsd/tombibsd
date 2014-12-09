@@ -908,7 +908,7 @@ dev_spec:
 
 /* major and minor device number */
 major_minor:
-	MAJOR NUMBER MINOR NUMBER	{ $$ = makedev($2.val, $4.val); }
+	MAJOR NUMBER MINOR NUMBER	{ $$ = (int64_t)makedev($2.val, $4.val); }
 ;
 
 /* filesystem type for root fs specification */

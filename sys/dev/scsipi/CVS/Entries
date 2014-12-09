@@ -31,7 +31,7 @@
 /scsipi_verbose.c/1.32/Sun Jul 25 13:49:58 2010/-kk/
 /scsipiconf.c/1.40/Sat Aug 21 13:18:36 2010/-kk/
 /scsipiconf.h/1.122/Sun Jul 20 13:58:49 2014/-kk/
-/sd.c/1.309/Fri Oct  3 09:50:56 2014/-kk/
+/sd.c/1.310/Tue Dec  9 04:24:01 2014/-kk/
 /sdvar.h/1.35/Fri Oct  3 09:50:56 2014/-kk/
 /ses.c/1.47/Fri Oct  3 09:09:20 2014/-kk/
 /ses.h/1.3/Sun Dec 11 12:23:51 2005/-kk/

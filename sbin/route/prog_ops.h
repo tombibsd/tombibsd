@@ -32,8 +32,12 @@
 #include <sys/types.h>
 
 #ifndef CRUNCHOPS
+/* XXX: Keep same order with netstat! */
 struct prog_ops {
 	int (*op_init)(void);
+
+	int (*op_sysctl)(const int *, u_int, void *, size_t *,
+			 const void *, size_t);
 
 	int (*op_socket)(int, int, int);
 	int (*op_open)(const char *, int, ...);
@@ -42,8 +46,6 @@ struct prog_ops {
 	ssize_t (*op_read)(int, void *, size_t);
 	ssize_t (*op_write)(int, const void *, size_t);
 
-	int (*op_sysctl)(const int *, u_int, void *, size_t *,
-			 const void *, size_t);
 
 	int (*op_shutdown)(int, int);
 };

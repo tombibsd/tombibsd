@@ -530,6 +530,15 @@ raioctl(dev_t dev, u_long cmd, void *data, int flag, struct lwp *l)
 		return (dkwedge_list(&ra->ra_disk, dkwl, l));
 	    }
 
+	case DIOCMWEDGES:
+	    {
+	    	if ((flag & FWRITE) == 0)
+			return (EBADF);
+
+		dkwedge_discover(&ra->ra_disk);
+		return 0;
+	    }
+
 	default:
 		error = ENOTTY;
 		break;

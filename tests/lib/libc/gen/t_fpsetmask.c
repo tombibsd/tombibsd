@@ -29,7 +29,6 @@
 #include <sys/param.h>
 
 #include <atf-c.h>
-#include <atf-c/config.h>
 
 #include <stdio.h>
 #include <signal.h>

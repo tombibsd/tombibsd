@@ -1,12 +1,14 @@
-/Makefile/1.25/Mon Dec 13 17:39:47 2010/-kk/
-/extern.h/1.14/Wed Oct 21 01:07:46 2009/-kk/
+/Makefile/1.26/Tue Dec  9 04:23:40 2014/-kk/
+/extern.h/1.15/Tue Dec  9 04:23:40 2014/-kk/
 /keywords.c/1.10/Thu Oct 24 10:28:53 2013/-kk/
 /keywords.h/1.13/Thu Oct 24 10:28:53 2013/-kk/
 /keywords.sh/1.11/Thu Oct 24 10:28:53 2013/-kk/
-/prog_ops.h/1.2/Mon Dec 13 19:19:10 2010/-kk/
-/route.8/1.50/Tue Nov 12 02:18:30 2013/-kk/
-/route.c/1.144/Thu Oct 24 10:28:53 2013/-kk/
+/prog_ops.h/1.3/Tue Dec  9 04:23:40 2014/-kk/
+/route.8/1.51/Tue Dec  9 04:23:40 2014/-kk/
+/route.c/1.146/Tue Dec  9 04:23:40 2014/-kk/
 /route_hostops.c/1.1/Mon Dec 13 17:39:47 2010/-kk/
 /route_rumpops.c/1.1/Mon Dec 13 17:39:47 2010/-kk/
-/show.c/1.45/Thu Oct 24 10:28:53 2013/-kk/
+/rtutil.c/1.2/Sat Nov  8 00:47:32 2014/-kk/
+/rtutil.h/1.1/Thu Nov  6 21:29:32 2014/-kk/
+/show.c/1.46/Tue Dec  9 04:23:40 2014/-kk/
 D

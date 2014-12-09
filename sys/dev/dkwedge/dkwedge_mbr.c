@@ -168,7 +168,7 @@ dkwedge_discover_mbr(struct disk *pdk, struct vnode *vp)
 	mbr_args_t a;
 
 	a.pdk = pdk;
-	a.secsize = pdk->dk_label->d_secsize;
+	a.secsize = DEV_BSIZE << pdk->dk_blkshift;  
 	a.vp = vp;
 	a.buf = malloc(a.secsize, M_DEVBUF, M_WAITOK);
 	a.error = 0;

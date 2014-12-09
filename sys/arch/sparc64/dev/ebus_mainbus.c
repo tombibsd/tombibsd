@@ -277,7 +277,6 @@ ebus_mainbus_intr_establish(bus_space_tag_t t, int ihandle, int level,
 	u_int64_t *imap, *iclr;
 	int ino;
 
-#ifdef SUN4V
 #if 0
 XXX
 	if (CPU_ISSUN4V) {
@@ -328,7 +327,6 @@ XXX
 
 		return (ih);
 	}
-#endif
 #endif
 
 	ino = INTINO(ihandle);

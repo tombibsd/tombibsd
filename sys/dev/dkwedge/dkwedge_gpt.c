@@ -265,13 +265,15 @@ dkwedge_discover_gpt(struct disk *pdk, struct vnode *vp)
 		 * Try with the partition name first.  If that fails,
 		 * use the GUID string.  If that fails, punt.
 		 */
-		if ((error = dkwedge_add(&dkw)) == EEXIST) {
-			aprint_error("%s: wedge named '%s' already exists, "
-			    "trying '%s'\n", pdk->dk_name,
-			    dkw.dkw_wname, /* XXX Unicode */
-			    ent_guid_str);
+		if ((error = dkwedge_add(&dkw)) == EEXIST &&
+		    strcmp(dkw.dkw_wname, ent_guid_str) != 0) {
 			strcpy(dkw.dkw_wname, ent_guid_str);
 			error = dkwedge_add(&dkw);
+			if (!error)
+				aprint_error("%s: wedge named '%s' already "
+				    "existed, using '%s'\n", pdk->dk_name,
+				    dkw.dkw_wname, /* XXX Unicode */
+				    ent_guid_str);
 		}
 		if (error == EEXIST)
 			aprint_error("%s: wedge named '%s' already exists, "

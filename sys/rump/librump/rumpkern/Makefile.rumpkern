@@ -7,6 +7,8 @@
 
 LIB=		rump
 
+MAN=		rump.3 rump_lwproc.3
+
 .PATH:	${RUMPTOP}/librump/rumpkern				\
 	${RUMPTOP}/librump/rumpkern/arch/generic		\
 	${RUMPTOP}/../kern					\

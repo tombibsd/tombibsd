@@ -44,7 +44,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/proc.h>
 #include <sys/uio.h>
 #include <sys/time.h>
-#include <sys/malloc.h>
 #include <sys/mman.h>
 #include <sys/systm.h>
 #include <sys/stat.h>

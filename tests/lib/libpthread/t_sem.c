@@ -99,7 +99,6 @@ __RCSID("$NetBSD$");
 #include <unistd.h>
 
 #include <atf-c.h>
-#include <atf-c/config.h>
 
 #include "h_common.h"
 

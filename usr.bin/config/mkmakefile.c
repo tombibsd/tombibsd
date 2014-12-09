@@ -85,9 +85,6 @@ static void emitappmkoptions(FILE *);
 static void emitsubs(FILE *, const char *, const char *, int);
 static int  selectopt(const char *, void *);
 
-/* Generate Makefile to build things per-attribute *.ko (a.k.a modular build). */
-int usekobjs = 0;
-
 int
 mkmakefile(void)
 {
@@ -132,7 +129,7 @@ mkmakefile(void)
 			continue;
 		}
 		if (strcmp(line, "%OBJS\n") == 0)
-			fn = usekobjs ? emitkobjs : emitobjs;
+			fn = Mflag ? emitkobjs : emitobjs;
 		else if (strcmp(line, "%CFILES\n") == 0)
 			fn = emitcfiles;
 		else if (strcmp(line, "%SFILES\n") == 0)

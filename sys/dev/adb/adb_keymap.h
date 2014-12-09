@@ -148,7 +148,9 @@ static const keysym_t akbd_keydesc_us[] = {
     KC(120),KS_Cmd_Screen1,	KS_f2,
     KC(121),KS_Cmd_ScrollFastDown, KS_Next,
     KC(122),KS_Cmd_Screen0,	KS_f1,
-
+    KC(123),			KS_Shift_R,
+    KC(124),			KS_Alt_R,
+    KC(125),			KS_Control_R,
     KC(127),  KS_Cmd_Debugger,
 };
 

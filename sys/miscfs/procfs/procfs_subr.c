@@ -110,7 +110,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/kernel.h>
 #include <sys/proc.h>
 #include <sys/vnode.h>
-#include <sys/malloc.h>
 #include <sys/stat.h>
 #include <sys/file.h>
 #include <sys/filedesc.h>

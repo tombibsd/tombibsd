@@ -89,6 +89,7 @@ COPYRIGHT("@(#) Copyright (c) 1992, 1993\
 int	vflag;				/* verbose output */
 int	Pflag;				/* pack locators */
 int	Lflag;				/* lint config generation */
+int	Mflag;				/* modular build */
 int	handling_cmdlineopts;		/* currently processing -D/-U options */
 
 int	yyparse(void);
@@ -176,7 +177,7 @@ main(int argc, char **argv)
 			break;
 
 		case 'M':
-			usekobjs = 1;
+			Mflag = 1;
 			break;
 
 		case 'L':
@@ -1556,7 +1557,7 @@ strtolower(const char *name)
 	char c;
 
 	for (n = name, p = low; (c = *n) != '\0'; n++)
-		*p++ = isupper((u_char)c) ? tolower((u_char)c) : c;
+		*p++ = isupper((u_char)c) ? (char)tolower((u_char)c) : c;
 	*p = 0;
 	return (intern(low));
 }

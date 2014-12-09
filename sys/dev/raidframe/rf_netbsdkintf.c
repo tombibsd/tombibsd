@@ -1090,6 +1090,7 @@ raidioctl(dev_t dev, u_long cmd, void *data, int flag, struct lwp *l)
 	case DIOCWLABEL:
 	case DIOCAWEDGE:
 	case DIOCDWEDGE:
+	case DIOCMWEDGES:
 	case DIOCSSTRATEGY:
 		if ((flag & FWRITE) == 0)
 			return (EBADF);
@@ -1112,6 +1113,7 @@ raidioctl(dev_t dev, u_long cmd, void *data, int flag, struct lwp *l)
 	case DIOCAWEDGE:
 	case DIOCDWEDGE:
 	case DIOCLWEDGES:
+	case DIOCMWEDGES:
 	case DIOCCACHESYNC:
 	case RAIDFRAME_SHUTDOWN:
 	case RAIDFRAME_REWRITEPARITY:
@@ -1917,6 +1919,9 @@ raidioctl(dev_t dev, u_long cmd, void *data, int flag, struct lwp *l)
 	case DIOCLWEDGES:
 		return dkwedge_list(&rs->sc_dkdev,
 		    (struct dkwedge_list *)data, l);
+	case DIOCMWEDGES:
+		dkwedge_discover(&rs->sc_dkdev);
+		return 0;
 	case DIOCCACHESYNC:
 		return rf_sync_component_caches(raidPtr);
 

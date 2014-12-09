@@ -5,10 +5,10 @@
 /linux_exec.h/1.9/Thu Feb 13 15:35:58 2014/-kk/
 /linux_fcntl.h/1.5/Thu Jun 26 06:46:21 2014/-kk/
 /linux_ioctl.h/1.2/Mon Apr 28 20:23:42 2008/-kk/
-/linux_machdep.c/1.31/Thu Oct 24 10:28:57 2013/-kk/
+/linux_machdep.c/1.32/Tue Dec  9 04:23:58 2014/-kk/
 /linux_machdep.h/1.6/Mon Apr 28 20:23:42 2008/-kk/
 /linux_mmap.h/1.4/Mon Apr 28 20:23:42 2008/-kk/
-/linux_ptrace.c/1.17/Tue Sep  4 00:08:59 2012/-kk/
+/linux_ptrace.c/1.18/Tue Dec  9 04:23:58 2014/-kk/
 /linux_sigarray.c/1.4/Mon Apr 28 20:23:42 2008/-kk/
 /linux_siginfo.h/1.2/Mon Jun  8 11:46:07 2009/-kk/
 /linux_signal.h/1.9/Mon Apr 28 20:23:42 2008/-kk/

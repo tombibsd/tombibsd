@@ -602,6 +602,15 @@ edmcaioctl(dev_t dev, u_long xfer, void *addr, int flag, struct lwp *l)
 		return (dkwedge_list(&ed->sc_dk, dkwl, l));
 	    }
 
+	case DIOCMWEDGES:
+	    {
+		if ((flag & FWRITE) == 0)
+			return (EBADF);
+
+		dkwedge_discover(&ed->sc_dk);
+		return 0;
+	    }
+
 	default:
 		return ENOTTY;
 	}

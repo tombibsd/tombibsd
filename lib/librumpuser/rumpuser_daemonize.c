@@ -42,10 +42,10 @@ __RCSID("$NetBSD$");
 
 #include "rumpuser_int.h"
 
-#ifdef __sun__
-#define _PATH_DEVNULL "/dev/null"
-#else
+#if defined(HAVE_PATHS_H)
 #include <paths.h>
+#else
+#define _PATH_DEVNULL "/dev/null"
 #endif
 
 static int isdaemonizing;

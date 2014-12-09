@@ -2195,6 +2195,15 @@ eflashioctl(dev_t dev, u_long xfer, void *addr, int flag, struct lwp *l)
 		return (dkwedge_list(&sc->sc_dk, dkwl, l));
 	    }
 
+	case DIOCMWEDGES:
+	    {
+	    	if ((flag & FWRITE) == 0)
+			return (EBADF);
+
+		dkwedge_discover(&sc->sc_dk);
+		return 0;
+	    }
+
 	case DIOCGSTRATEGY:
 	    {
 		struct disk_strategy *dks = (void *)addr;

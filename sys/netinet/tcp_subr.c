@@ -103,7 +103,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/atomic.h>
 #include <sys/proc.h>
 #include <sys/systm.h>
-#include <sys/malloc.h>
 #include <sys/mbuf.h>
 #include <sys/once.h>
 #include <sys/socket.h>

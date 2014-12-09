@@ -334,6 +334,7 @@ struct wsmouse_repeat {
 #define WSDISPLAY_TYPE_OMAP3	57	/* OMAP 3530 */
 #define WSDISPLAY_TYPE_WINDERMERE 58	/* SoC for EPOC32 Series 5mx */
 #define WSDISPLAY_TYPE_CLPS711X	59	/* CL PS-711x  */
+#define WSDISPLAY_TYPE_ALLWINNER 60	/* Allwinner ARM SoC */
 
 /* Basic display information.  Not applicable to all display types. */
 struct wsdisplay_fbinfo {

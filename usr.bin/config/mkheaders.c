@@ -323,7 +323,7 @@ locators_print(const char *name, void *value, void *arg)
 		locdup = estrdup(name);
 		for (cp = locdup; *cp; cp++)
 			if (islower((unsigned char)*cp))
-				*cp = toupper((unsigned char)*cp);
+				*cp = (char)toupper((unsigned char)*cp);
 		for (i = 0, ll = a->a_locs; ll; ll = ll->ll_next, i++) {
 			if (strchr(ll->ll_name, ' ') != NULL ||
 			    strchr(ll->ll_name, '\t') != NULL)
@@ -335,7 +335,7 @@ locators_print(const char *name, void *value, void *arg)
 			namedup = estrdup(ll->ll_name);
 			for (cp = namedup; *cp; cp++)
 				if (islower((unsigned char)*cp))
-					*cp = toupper((unsigned char)*cp);
+					*cp = (char)toupper((unsigned char)*cp);
 				else if (*cp == ARRCHR)
 					*cp = '_';
 			fprintf(fp, "#define %sCF_%s %d\n", locdup, namedup, i);
@@ -533,7 +533,7 @@ cntname(const char *src)
 	dst = buf;
 	*dst++ = 'N';
 	while ((c = *src++) != 0)
-		*dst++ = islower((u_char)c) ? toupper((u_char)c) : c;
+		*dst++ = islower((u_char)c) ? (char)toupper((u_char)c) : c;
 	*dst = 0;
 	return (buf);
 }

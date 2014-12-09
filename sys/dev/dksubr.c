@@ -304,6 +304,7 @@ dk_ioctl(struct dk_intf *di, struct dk_softc *dksc, dev_t dev,
 	case DIOCAWEDGE:
 	case DIOCDWEDGE:
 	case DIOCLWEDGES:
+	case DIOCMWEDGES:
 	case DIOCCACHESYNC:
 #ifdef __HAVE_OLD_DISKLABEL
 	case ODIOCGDINFO:
@@ -431,6 +432,15 @@ dk_ioctl(struct dk_intf *di, struct dk_softc *dksc, dev_t dev,
 	    	struct dkwedge_list *dkwl = (void *)data;
 
 		return (dkwedge_list(&dksc->sc_dkdev, dkwl, l));
+	    }
+
+	case DIOCMWEDGES:
+	    {
+		if ((flag & FWRITE) == 0)
+			return (EBADF);
+
+	    	dkwedge_discover(&dksc->sc_dkdev);
+		return 0;
 	    }
 
 	case DIOCGSTRATEGY:

@@ -79,7 +79,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/mount.h>
 #include <sys/namei.h>
 #include <sys/kmem.h>
-#include <sys/malloc.h>
 
 #include <miscfs/genfs/layer.h>
 #include <miscfs/genfs/layer_extern.h>

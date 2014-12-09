@@ -143,7 +143,8 @@ rumpuser_clock_sleep(int enum_rumpclock, int64_t sec, long nsec)
 #else
 			/* le/la/der/die/das sigh. timevalspec tailspin */
 			struct timespec ts, tsr;
-			clock_gettime(CLOCK_REALTIME, &ts);
+			if ((rv = clock_gettime(CLOCK_REALTIME, &ts)) == -1)
+				continue;
 			if (ts.tv_sec == rqt.tv_sec ?
 			    ts.tv_nsec > rqt.tv_nsec : ts.tv_sec > rqt.tv_sec) {
 				rv = 0;

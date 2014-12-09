@@ -36,6 +36,9 @@
 #endif
 #include <sys/atomic.h>
 
+bool __atomic_compare_exchange_1(volatile uint8_t *, uint8_t *, uint8_t,
+    bool, int, int);
+
 bool
 __atomic_compare_exchange_1(volatile uint8_t *mem,
     uint8_t *expected, uint8_t desired,

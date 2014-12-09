@@ -27,7 +27,6 @@
  */
 
 #include <atf-c.h>
-#include <atf-c/config.h>
 
 #include <sys/inttypes.h>
 #include <sys/resource.h>

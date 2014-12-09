@@ -64,6 +64,7 @@ __RCSID("$NetBSD$");
 #include <string.h>
 #include <unistd.h>
 #include "netstat.h"
+#include "rtutil.h"
 #include "prog_ops.h"
 
 struct nlist nl[] = {
@@ -420,7 +421,7 @@ main(int argc, char *argv[])
 	    "AabBdf:ghI:LliM:mN:nP:p:qrsStTuVvw:X")) != -1)
 		switch (ch) {
 		case 'A':
-			Aflag = 1;
+			Aflag = RT_AFLAG;
 			break;
 		case 'a':
 			aflag = 1;
@@ -468,7 +469,7 @@ main(int argc, char *argv[])
 			nlistf = optarg;
 			break;
 		case 'n':
-			numeric_addr = numeric_port = nflag = 1;
+			numeric_addr = numeric_port = nflag = RT_NFLAG;
 			break;
 		case 'P':
 			errno = 0;
@@ -500,7 +501,7 @@ main(int argc, char *argv[])
 			tflag = 1;
 			break;
 		case 'T':
-			tagflag = 1;
+			tagflag = RT_TFLAG;
 			break;
 		case 'u':
 			af = AF_LOCAL;
@@ -509,7 +510,7 @@ main(int argc, char *argv[])
 			Vflag++;
 			break;
 		case 'v':
-			vflag++;
+			vflag = RT_VFLAG;
 			break;
 		case 'w':
 			interval = atoi(optarg);
@@ -637,7 +638,8 @@ main(int argc, char *argv[])
 				rt_stats(use_sysctl ? 0 : nl[N_RTSTAT].n_value);
 			else {
 				if (use_sysctl)
-					p_rttables(af);
+					p_rttables(af,
+					    nflag|tagflag|vflag, 0, ~0);
 				else
 					routepr(nl[N_RTREE].n_value);
 			}

@@ -535,6 +535,14 @@ rlioctl(dev_t dev, u_long cmd, void *addr, int flag, struct lwp *l)
 		return dkwedge_list(&rc->rc_disk, dkwl, l);
 	}
 
+	case DIOCMWEDGES: {
+		if ((flag & FWRITE) == 0)
+			return (EBADF);
+
+		dkwedge_discover(&rc->rc_disk);
+		return 0;
+	}
+
 	default:
 		err = ENOTTY;
 		break;

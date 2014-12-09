@@ -1177,7 +1177,7 @@ Go to one of the
 mirror sites and download the CD-R image
 .Pa NetBSD-\*V-macppc.iso
 from the
-.Pa pub/NetBSD/iso
+.Pa pub/NetBSD/images
 directory.
 .Lk http://www.NetBSD.org/mirrors/#iso
 .Pp

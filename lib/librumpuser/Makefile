@@ -52,8 +52,6 @@ SRCS+=		rumpuser_dl.c rumpuser_daemonize.c
 INCSDIR=	/usr/include/rump
 INCS=		rumpuser_component.h rumpuser_port.h
 
-MAN=		rumpuser.3
-
 CPPFLAGS+=	-D_REENTRANT
 
 .include <bsd.lib.mk>

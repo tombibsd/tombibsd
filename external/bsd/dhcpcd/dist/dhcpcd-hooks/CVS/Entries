@@ -1,11 +1,11 @@
-/01-test/1.3/Wed Oct 29 08:09:09 2014/-kk/
-/02-dump/1.3/Wed Oct 29 08:09:09 2014/-kk/
-/10-mtu/1.3/Wed Oct 29 08:09:09 2014/-kk/
-/10-wpa_supplicant/1.3/Wed Oct 29 08:09:09 2014/-kk/
-/15-timezone/1.3/Wed Oct 29 08:09:09 2014/-kk/
-/20-resolv.conf/1.3/Wed Oct 29 08:09:09 2014/-kk/
-/29-lookup-hostname/1.3/Wed Oct 29 08:09:09 2014/-kk/
-/30-hostname/1.3/Wed Oct 29 08:09:09 2014/-kk/
-/50-ntp.conf/1.3/Wed Oct 29 08:09:09 2014/-kk/
-/50-ypbind/1.3/Wed Oct 29 08:09:09 2014/-kk/
+/01-test/1.6/Tue Dec  9 04:21:12 2014/-kk/
+/02-dump/1.6/Tue Dec  9 04:21:12 2014/-kk/
+/10-mtu/1.6/Tue Dec  9 04:21:12 2014/-kk/
+/10-wpa_supplicant/1.6/Tue Dec  9 04:21:12 2014/-kk/
+/15-timezone/1.6/Tue Dec  9 04:21:12 2014/-kk/
+/20-resolv.conf/1.6/Tue Dec  9 04:21:12 2014/-kk/
+/29-lookup-hostname/1.6/Tue Dec  9 04:21:12 2014/-kk/
+/30-hostname/1.6/Tue Dec  9 04:21:12 2014/-kk/
+/50-ntp.conf/1.6/Tue Dec  9 04:21:12 2014/-kk/
+/50-ypbind/1.6/Tue Dec  9 04:21:12 2014/-kk/
 D

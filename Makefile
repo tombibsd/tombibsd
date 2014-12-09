@@ -64,11 +64,11 @@
 #	Populate ${RELEASEDIR}/${RELEASEMACHINEDIR}/binary/syspkgs
 #	from ${DESTDIR}
 #   iso-image:
-#	Create CD-ROM image in RELEASEDIR/iso.
+#	Create CD-ROM image in RELEASEDIR/images.
 #	RELEASEDIR must already have been populated by `make release'
 #	or equivalent.
 #   iso-image-source:
-#	Create CD-ROM image with source in RELEASEDIR/iso.
+#	Create CD-ROM image with source in RELEASEDIR/images.
 #	RELEASEDIR must already have been populated by
 #	`make release sourcesets' or equivalent.
 #   live-image:

@@ -42,7 +42,6 @@ __RCSID("$NetBSD$");
 #include <unistd.h>
 
 #include <atf-c.h>
-#include <atf-c/config.h>
 
 #define PATH_DEV	__BIT(0)	/* A device node	*/
 #define PATH_DIR	__BIT(1)	/* A directory		*/

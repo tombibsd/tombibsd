@@ -345,9 +345,9 @@ extern int		arm_poolpage_vmfreelist;
 
 #define pmap_phys_address(ppn)		(arm_ptob((ppn)))
 u_int arm32_mmap_flags(paddr_t);
-#define ARM32_MMAP_WRITECOMBINE	0x40000000
+#define ARM32_MMAP_WRITECOMBINE		0x40000000
 #define ARM32_MMAP_CACHEABLE		0x20000000
-#define pmap_mmap_flags(ppn)			arm32_mmap_flags(ppn)
+#define pmap_mmap_flags(ppn)		arm32_mmap_flags(ppn)
 
 #define	PMAP_PTE			0x10000000 /* kenter_pa */
 

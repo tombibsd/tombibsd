@@ -473,6 +473,18 @@ ofdisk_ioctl(dev_t dev, u_long cmd, void *data, int flag, struct lwp *l)
 		return (dkwedge_list(&of->sc_dk, dkwl, l));
 	    }
 
+	case DIOCMWEDGES:
+	    {
+		if (OFDISK_FLOPPY_P(of))
+			return (ENOTTY);
+
+		if ((flag & FWRITE) == 0)
+			return (EBADF);
+
+		dkwedge_discover(&of->sc_dk);
+		return 0;
+	    }
+
 	default:
 		return ENOTTY;
 	}

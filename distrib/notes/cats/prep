@@ -36,7 +36,7 @@ install kernel onto a CD-R.
 Go to one of the
 .Nx
 mirror sites and download CD-R image from the
-.Pa pub/NetBSD/iso
+.Pa pub/NetBSD/images
 directory.
 .Lk http://www.NetBSD.org/mirrors/#iso
 .Pp

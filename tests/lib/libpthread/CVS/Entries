@@ -17,13 +17,13 @@
 /t_fpu.c/1.2/Thu Oct 24 10:28:58 2013/-kk/
 /t_join.c/1.8/Mon Mar 12 20:17:16 2012/-kk/
 /t_kill.c/1.1/Fri Jul 16 15:42:53 2010/-kk/
-/t_mutex.c/1.6/Thu Feb 13 15:36:04 2014/-kk/
+/t_mutex.c/1.7/Tue Dec  9 04:24:10 2014/-kk/
 /t_name.c/1.1/Fri Jul 16 15:42:53 2010/-kk/
 /t_once.c/1.1/Fri Jul 16 15:42:53 2010/-kk/
 /t_preempt.c/1.2/Wed Nov  3 16:10:22 2010/-kk/
 /t_resolv.sh/1.1/Fri Jul 16 15:42:53 2010/-kk/
 /t_rwlock.c/1.1/Fri Jul 16 15:42:53 2010/-kk/
-/t_sem.c/1.7/Fri Mar  9 19:46:37 2012/-kk/
+/t_sem.c/1.8/Tue Dec  9 04:24:10 2014/-kk/
 /t_sigalarm.c/1.1/Fri Jul 16 15:42:53 2010/-kk/
 /t_siglongjmp.c/1.1/Fri Jul 16 15:42:53 2010/-kk/
 /t_sigmask.c/1.3/Thu Oct 24 10:28:58 2013/-kk/

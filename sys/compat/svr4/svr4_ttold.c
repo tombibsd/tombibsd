@@ -43,7 +43,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/socket.h>
 #include <sys/mount.h>
 #include <net/if.h>
-#include <sys/malloc.h>
 #include <sys/ioctl_compat.h>
 
 #include <sys/syscallargs.h>

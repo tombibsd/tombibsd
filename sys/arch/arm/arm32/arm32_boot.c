@@ -352,13 +352,13 @@ cpu_hatch(struct cpu_info *ci, cpuid_t cpuid, void (*md_cpu_init)(struct cpu_inf
 	printf(" stacks");
 #endif
 	set_stackptr(PSR_FIQ32_MODE,
-	    fiqstack.pv_va + cpu_index(ci) * FIQ_STACK_SIZE * PAGE_SIZE);
+	    fiqstack.pv_va + (cpu_index(ci) + 1) * FIQ_STACK_SIZE * PAGE_SIZE);
 	set_stackptr(PSR_IRQ32_MODE,
-	    irqstack.pv_va + cpu_index(ci) * IRQ_STACK_SIZE * PAGE_SIZE);
+	    irqstack.pv_va + (cpu_index(ci) + 1) * IRQ_STACK_SIZE * PAGE_SIZE);
 	set_stackptr(PSR_ABT32_MODE,
-	    abtstack.pv_va + cpu_index(ci) * ABT_STACK_SIZE * PAGE_SIZE);
+	    abtstack.pv_va + (cpu_index(ci) + 1) * ABT_STACK_SIZE * PAGE_SIZE);
 	set_stackptr(PSR_UND32_MODE,
-	    undstack.pv_va + cpu_index(ci) * UND_STACK_SIZE * PAGE_SIZE);
+	    undstack.pv_va + (cpu_index(ci) + 1) * UND_STACK_SIZE * PAGE_SIZE);
 
 	ci->ci_lastlwp = NULL;
 	ci->ci_pmap_lastuser = NULL;

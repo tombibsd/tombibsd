@@ -231,6 +231,7 @@ struct radeonfb_softc {
 	bus_size_t		sc_iosz;
 	bus_addr_t		sc_ioaddr;
 
+	int			sc_needs_unmap;
 	int			sc_mapped;
 
 	/* size of a single display */

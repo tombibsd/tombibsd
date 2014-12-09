@@ -8,7 +8,7 @@ NOMAN=		# defined
 
 .include <bsd.own.mk>
 
-SRCS=		route.c show.c keywords.c
+SRCS=		keywords.c route.c rtutil.c show.c
 
 CPPFLAGS+=	-DSMALL -I${SRCDIR} -DCRUNCHOPS
 .if defined(SMALLPROG_INET6) && (${USE_INET6} != "no")

@@ -55,7 +55,7 @@ rumpuser_bio(int fd, int op, void *data, size_t dlen, int64_t doff,
 		if ((rv = pwrite(fd, data, dlen, doff)) == -1)
 			error = rumpuser__errtrans(errno);
 		if (error == 0 && (op & RUMPUSER_BIO_SYNC)) {
-#ifdef __NetBSD__
+#ifdef HAVE_FSYNC_RANGE
 			fsync_range(fd, FDATASYNC, doff, dlen);
 #else
 			fsync(fd);

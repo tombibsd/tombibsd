@@ -707,11 +707,12 @@ config_stdsubmatch(device_t parent, cfdata_t cf, const int *locs, void *aux)
 	KASSERT(!nlocs || locs);
 	for (i = 0; i < nlocs; i++) {
 		cl = &ci->ci_locdesc[i];
-		/* !cld_defaultstr means no default value */
-		if ((!(cl->cld_defaultstr)
-		     || (cf->cf_loc[i] != cl->cld_default))
-		    && cf->cf_loc[i] != locs[i])
-			return 0;
+		if (cl->cld_defaultstr != NULL &&
+		    cf->cf_loc[i] == cl->cld_default)
+			continue;
+		if (cf->cf_loc[i] == locs[i])
+			continue;
+		return 0;
 	}
 
 	return config_match(parent, cf, aux);

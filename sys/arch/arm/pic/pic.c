@@ -30,6 +30,7 @@
 
 #define _INTR_PRIVATE
 #include "opt_ddb.h"
+#include "opt_multiprocessor.h"
 
 #include <sys/cdefs.h>
 __KERNEL_RCSID(0, "$NetBSD$");

@@ -82,7 +82,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/disklabel.h>
 #include <sys/ioctl.h>
 #include <sys/errno.h>
-#include <sys/malloc.h>
 #include <sys/pool.h>
 #include <sys/lock.h>
 #include <sys/conf.h>

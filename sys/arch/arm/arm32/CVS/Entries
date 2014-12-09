@@ -1,11 +1,11 @@
 /arm11_pmc.c/1.4/Tue Dec 17 04:13:25 2013/-kk/
-/arm32_boot.c/1.9/Tue Dec  9 04:15:53 2014/-kk/
+/arm32_boot.c/1.10/Tue Dec  9 04:23:46 2014/-kk/
 /arm32_kvminit.c/1.32/Tue Dec  9 04:15:53 2014/-kk/
 /arm32_machdep.c/1.107/Tue Dec  9 04:15:53 2014/-kk/
 /arm32_reboot.c/1.6/Thu Oct 24 10:28:57 2013/-kk/
 /arm32_tlb.c/1.7/Tue Dec  9 04:15:53 2014/-kk/
 /bcopy_page.S/1.10/Wed Dec 25 07:37:18 2013/-kk/
-/bus_dma.c/1.88/Wed Oct 29 08:12:58 2014/-kk/
+/bus_dma.c/1.89/Tue Dec  9 04:23:46 2014/-kk/
 /cortex_pmc.c/1.2/Wed Aug 29 19:10:15 2012/-kk/
 /cpu.c/1.105/Fri Oct  3 09:50:37 2014/-kk/
 /cpuswitch.S/1.85/Wed Oct 29 08:12:58 2014/-kk/
@@ -17,10 +17,10 @@
 /intr.c/1.34/Sat Sep  1 12:15:39 2012/-kk/
 /irq_dispatch.S/1.15/Thu Oct 24 10:28:57 2013/-kk/
 /kgdb_machdep.c/1.7/Sun Oct 18 18:14:00 2009/-kk/
-/kobj_machdep.c/1.9/Thu Oct 24 10:28:57 2013/-kk/
+/kobj_machdep.c/1.10/Tue Dec  9 04:23:46 2014/-kk/
 /locore.S/1.37/Fri Oct  3 09:43:14 2014/-kk/
 /netbsd32_machdep.c/1.6/Mon May 19 16:25:38 2014/-kk/
-/pmap.c/1.307/Tue Dec  9 04:15:53 2014/-kk/
+/pmap.c/1.316/Tue Dec  9 04:23:46 2014/-kk/
 /setcpsr.S/1.3/Thu Oct 24 10:28:57 2013/-kk/
 /setstack.S/1.6/Thu Oct 24 10:28:57 2013/-kk/
 /spl.S/1.10/Tue Dec 17 04:13:25 2013/-kk/

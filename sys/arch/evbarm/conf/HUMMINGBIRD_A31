@@ -173,7 +173,7 @@ config		netbsd		root on ? type ?
 mainbus0	at root
 
 # CPU
-#options 	MULTIPROCESSOR
+options 	MULTIPROCESSOR
 cpu*		at mainbus?
 
 # Specify the memory size in megabytes.
@@ -198,6 +198,9 @@ awinicu0	at awinio0
 # DMA Controller
 awindma0	at awinio0
 
+# 64-bit counter
+awincnt0	at awinio0
+
 # GPIO Controller
 awingpio0	at awinio0
 
@@ -217,6 +220,10 @@ axp22x0		at iic1 addr 0x34	# AXP221 Power Management Unit
 com0		at awinio? port 0			# UART0 (console)
 options 	CONADDR=0x01c28000, CONSPEED=115200
 
+# Consumer IR
+awinir0		at awinio?
+cir0		at awinir0
+
 # Watchdog timers
 awinwdt*	at awinio?
 
@@ -229,6 +236,28 @@ audio0		at awinac0
 
 # GMAC Ethernet
 awge0		at awinio0 port ?
+
+# HDMI
+awinhdmi0	at awinio0
+
+# TCON
+awintcon0	at awinio0 port 0
+
+# DE-BE
+awindebe0	at awinio0 port 0
+
+# Framebuffer
+genfb0		at awindebe0
+wsdisplay*	at genfb?
+options 	VCONS_DRAW_INTR
+options 	WSEMUL_VT100
+options 	WS_KERNEL_FG=WSCOL_GREEN
+options 	WS_KERNEL_BG=WSCOL_BLACK
+options 	WSDISPLAY_COMPAT_PCVT
+options 	WSDISPLAY_COMPAT_SYSCONS
+options 	WSDISPLAY_COMPAT_USL
+options 	WSDISPLAY_COMPAT_RAWKBD
+options 	WSDISPLAY_DEFAULTSCREENS=4
 
 # On-board USB
 awinusb0	at awinio0 port 0
@@ -270,5 +299,9 @@ pseudo-device	pty			# pseudo-terminals
 #pseudo-device	clockctl		# user control of clock subsystem
 pseudo-device	ksyms			# /dev/ksyms
 pseudo-device	lockstat		# lock profiling
+
+# wscons pseudo-devices
+pseudo-device 	wsmux			# mouse & keyboard mux
+pseudo-device 	wsfont
 
 cinclude "arch/evbarm/conf/HUMMINGBIRD_A31.local"

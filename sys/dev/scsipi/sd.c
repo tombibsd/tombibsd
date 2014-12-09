@@ -1256,6 +1256,15 @@ sdioctl(dev_t dev, u_long cmd, void *addr, int flag, struct lwp *l)
 		return (dkwedge_list(&sd->sc_dk, dkwl, l));
 	    }
 
+	case DIOCMWEDGES:
+	    {
+		if ((flag & FWRITE) == 0)
+			return (EBADF);
+
+		dkwedge_discover(&sd->sc_dk);
+		return 0;
+	    }
+
 	case DIOCGSTRATEGY:
 	    {
 		struct disk_strategy *dks = addr;

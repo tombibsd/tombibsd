@@ -187,6 +187,7 @@ int agp_amd64_match(const struct pci_attach_args *);
 
 int agp_ali_attach(device_t, device_t, void *);
 int agp_amd_attach(device_t, device_t, void *);
+int agp_apple_attach(device_t, device_t, void *);
 int agp_i810_attach(device_t, device_t, void *);
 int agp_intel_attach(device_t, device_t, void *);
 int agp_via_attach(device_t, device_t, void *);

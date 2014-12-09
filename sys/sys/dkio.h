@@ -112,4 +112,7 @@
 /* 129 was DIOCGDISCARDPARAMS during 6.99 */
 /* 130 was DIOCDISCARD during 6.99 */
 
+		/* trigger wedge auto discover */
+#define	DIOCMWEDGES	_IOR('d', 131, int)	/* make wedges */
+
 #endif /* _SYS_DKIO_H_ */

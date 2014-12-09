@@ -543,6 +543,7 @@ initdefaults()
 	do_release=false
 	do_kernel=false
 	do_releasekernel=false
+	do_kernels=false
 	do_modules=false
 	do_installmodules=false
 	do_install=false
@@ -1027,6 +1028,7 @@ Usage: ${progname} [-EhnorUuxy] [-a arch] [-B buildid] [-C cdextras]
     kernel.gdb=conf     Build kernel (including netbsd.gdb) with config
     			file \`conf'
     releasekernel=conf  Install kernel built by kernel=conf to RELEASEDIR.
+    kernels		Build all kernels
     installmodules=idir Run "make installmodules" to \`idir' to install all
                         kernel modules.
     modules             Build kernel modules.
@@ -1037,8 +1039,8 @@ Usage: ${progname} [-EhnorUuxy] [-a arch] [-B buildid] [-C cdextras]
     sourcesets          Create source sets in RELEASEDIR/source/sets.
     syspkgs             Create syspkgs in
                         RELEASEDIR/RELEASEMACHINEDIR/binary/syspkgs.
-    iso-image           Create CD-ROM image in RELEASEDIR/iso.
-    iso-image-source    Create CD-ROM image with source in RELEASEDIR/iso.
+    iso-image           Create CD-ROM image in RELEASEDIR/images.
+    iso-image-source    Create CD-ROM image with source in RELEASEDIR/images.
     live-image          Create bootable live image in
                         RELEASEDIR/RELEASEMACHINEDIR/installation/liveimage.
     install-image       Create bootable installation image in
@@ -1317,25 +1319,6 @@ parseoptions()
 			exit $?
 			;;
 
-		makewrapper|cleandir|obj|tools|build|distribution|release|sets|sourcesets|syspkgs|params)
-			;;
-
-		iso-image)
-			op=iso_image	# used as part of a variable name
-			;;
-
-		iso-image-source)
-			op=iso_image_source   # used as part of a variable name
-			;;
-
-		live-image)
-			op=live_image	# used as part of a variable name
-			;;
-
-		install-image)
-			op=install_image # used as part of a variable name
-			;;
-
 		kernel=*|releasekernel=*|kernel.gdb=*)
 			arg=${op#*=}
 			op=${op%%=*}
@@ -1351,10 +1334,6 @@ parseoptions()
 
 			;;
 
-		modules)
-			op=modules
-			;;
-
 		install=*|installmodules=*)
 			arg=${op#*=}
 			op=${op%%=*}
@@ -1362,8 +1341,25 @@ parseoptions()
 			    bomb "Must supply a directory with \`install=...'"
 			;;
 
-		rump|rumptest)
-			op=${op}
+		build|\
+		cleandir|\
+		distribution|\
+		install-image|\
+		iso-image-source|\
+		iso-image|\
+		kernels|\
+		live-image|\
+		makewrapper|\
+		modules|\
+		obj|\
+		params|\
+		release|\
+		rump|\
+		rumptest|\
+		sets|\
+		sourcesets|\
+		syspkgs|\
+		tools)
 			;;
 
 		*)
@@ -1371,6 +1367,9 @@ parseoptions()
 			;;
 
 		esac
+		# ${op} may contain chars that are not allowed in variable
+		# names.  Replace them with '_' before setting do_${op}.
+		op="$( echo "$op" | tr -s '.-' '__')"
 		eval do_${op}=true
 	done
 	[ -n "${operations}" ] || usage "Missing operation to perform."
@@ -2020,6 +2019,14 @@ releasekernel()
 	done
 }
 
+buildkernels()
+{
+	allkernels=$( make_in_dir etc '-V ${ALL_KERNELS}' )
+	for k in $allkernels; do
+		buildkernel "${k}"
+	done
+}
+
 buildmodules()
 {
 	setmakeenv MKBINUTILS no
@@ -2243,6 +2250,10 @@ main()
 		releasekernel=*)
 			arg=${op#*=}
 			releasekernel "${arg}"
+			;;
+
+		kernels)
+			buildkernels
 			;;
 
 		disk-image=*)

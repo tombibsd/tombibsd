@@ -60,7 +60,7 @@ __dead static void
 usage(void)
 {
 
-#ifndef PLATFORM_HAS_SETGETPROGNAME
+#ifndef HAVE_GETPROGNAME
 #define getprogname() "shmif_dumpbus"
 #endif
 
@@ -128,10 +128,7 @@ main(int argc, char *argv[])
 	FILE *dumploc = stdout;
 	int useversion;
 
-#ifdef PLATFORM_HAS_SETGETPROGNAME
 	setprogname(argv[0]);
-#endif
-
 	while ((ch = getopt(argc, argv, "hp:")) != -1) {
 		switch (ch) {
 		case 'h':

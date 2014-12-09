@@ -26,6 +26,7 @@ defflag opt_allwinner.h				AWINETH_COUNTERS
 defflag opt_allwinner.h				ALLWINNER_A10
 defflag opt_allwinner.h				ALLWINNER_A20
 defflag opt_allwinner.h				ALLWINNER_A31
+defflag opt_allwinner.h				ALLWINNER_A80
 defflag opt_allwinner.h				AWIN_GPIO_IGNORE_FW
 
 # SoC I/O attach point
@@ -52,6 +53,11 @@ file	arch/arm/allwinner/awin_rtc.c		awin_rtc
 device	awintmr
 attach	awintmr at awinio with awin_tmr
 file	arch/arm/allwinner/awin_tmr.c		awin_tmr
+
+# A20/A31 64-bit counter
+device	awincnt
+attach	awincnt at awinio with awin_cnt
+file	arch/arm/allwinner/awin_cnt.c		awin_cnt
 
 # A10/A20 UART
 options 	COM_16750			# for IIR_BUSY
@@ -128,7 +134,26 @@ device	awinac: audiobus, auconv, mulaw, aurateconv
 attach	awinac at awinio with awin_ac
 file	arch/arm/allwinner/awin_ac.c		awin_ac
 
-# A10/A20 HDMI
-device	awinhdmi: edid, ddc_read_edid
+# A10/A20/A31 HDMI
+device	awinhdmi: edid, ddc_read_edid, videomode
 attach	awinhdmi at awinio with awin_hdmi
 file	arch/arm/allwinner/awin_hdmi.c		awin_hdmi
+
+# A10/A20/A31 LCD/TV timing controller (TCON)
+device	awintcon
+attach	awintcon at awinio with awin_tcon
+file	arch/arm/allwinner/awin_tcon.c		awin_tcon | awin_hdmi
+
+# A10/A20/A31 Display engine backend (DE-BE)
+device	awindebe { }
+attach	awindebe at awinio with awin_debe
+file	arch/arm/allwinner/awin_debe.c		awin_debe | awin_hdmi
+
+# Framebuffer
+attach	genfb at awindebe with awin_fb: edid
+file	arch/arm/allwinner/awin_fb.c		awin_fb		needs-flag
+
+# A10/A20/A31 Consumer IR (CIR)
+device	awinir: irbus
+attach	awinir at awinio with awin_ir
+file	arch/arm/allwinner/awin_ir.c		awin_ir

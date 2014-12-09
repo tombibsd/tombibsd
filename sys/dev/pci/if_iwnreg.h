@@ -201,7 +201,7 @@
 
 /* Possible flags for register IWN_HW_REV. */
 #define IWN_HW_REV_TYPE_SHIFT	4
-#define IWN_HW_REV_TYPE_MASK	0x000000f0
+#define IWN_HW_REV_TYPE_MASK	0x000001f0
 #define IWN_HW_REV_TYPE_4965	0
 #define IWN_HW_REV_TYPE_5300	2
 #define IWN_HW_REV_TYPE_5350	3

@@ -35,7 +35,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/param.h>
 #include <sys/hash.h>
 #include <sys/kmem.h>
-#include <sys/malloc.h>
 #include <sys/mount.h>
 #include <sys/namei.h>
 #include <sys/vnode.h>
@@ -266,6 +265,7 @@ puffs_cookie2vnode(struct puffs_mount *pmp, puffs_cookie_t ck,
 	mutex_enter((*vpp)->v_interlock);
 	if ((*vpp)->v_type == VNON) {
 		mutex_exit((*vpp)->v_interlock);
+		/* XXX vrele() calls VOP_INACTIVE() with VNON node */
 		vrele(*vpp);
 		*vpp = NULL;
 		return PUFFS_NOSUCHCOOKIE;

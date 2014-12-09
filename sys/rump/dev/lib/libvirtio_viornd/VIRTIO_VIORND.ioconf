@@ -1,0 +1,12 @@
+#	$NetBSD$
+#
+
+ioconf virtio_viornd
+
+include "conf/files"
+include "dev/pci/files.pci"
+include "rump/dev/files.rump"
+
+pseudo-root virtio*
+
+viornd* at virtio?			# Virtio entropy device

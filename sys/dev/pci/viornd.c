@@ -61,7 +61,7 @@
 
 #define	VIORND_BUFSIZE			32
 
-#define VIORND_DEBUG 1
+#define VIORND_DEBUG 0
 
 struct viornd_softc {
 	device_t		sc_dev;
@@ -91,8 +91,10 @@ viornd_get(size_t bytes, void *priv)
         struct virtqueue *vq = &sc->sc_vq;
         int slot;
 
+#if VIORND_DEBUG
 	aprint_normal("%s: asked for %d bytes of entropy\n", __func__,
 		      VIORND_BUFSIZE);
+#endif
 	mutex_enter(&sc->sc_mutex);
 
 	if (sc->sc_active) {
@@ -102,10 +104,10 @@ viornd_get(size_t bytes, void *priv)
         bus_dmamap_sync(vsc->sc_dmat, sc->sc_dmamap, 0, VIORND_BUFSIZE,
             BUS_DMASYNC_PREREAD);
 	if (virtio_enqueue_prep(vsc, vq, &slot)) {
-		virtio_enqueue_abort(vsc, vq, slot);
 		goto out;
 	}
         if (virtio_enqueue_reserve(vsc, vq, slot, 1)) {
+		virtio_enqueue_abort(vsc, vq, slot);
 		goto out;
 	}
         virtio_enqueue(vsc, vq, slot, sc->sc_dmamap, 0);
@@ -143,6 +145,9 @@ viornd_attach( device_t parent, device_t self, void *aux)
 	vsc->sc_intrhand = virtio_vq_intr;
 	sc->sc_virtio = vsc;
 	sc->sc_dev = self;
+
+	aprint_normal("\n");
+	aprint_naive("\n");
 
 	(void)virtio_negotiate_features(vsc, 0);
 

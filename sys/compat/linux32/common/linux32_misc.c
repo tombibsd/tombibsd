@@ -38,7 +38,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/proc.h>
 #include <sys/time.h>
 #include <sys/types.h>
-#include <sys/malloc.h>
 #include <sys/fstypes.h>
 #include <sys/vfs_syscalls.h>
 #include <sys/ptrace.h>

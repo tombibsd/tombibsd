@@ -151,26 +151,43 @@ _C_LABEL(awin_start):
 	// Make sure the cache is flushed out to RAM for the other CPUs
 	bl	_C_LABEL(armv7_dcache_wbinv_all)
 
+#if defined(ALLWINNER_A20) + defined(ALLWINNER_A31) + defined(ALLWINNER_A80) > 1
 	// Read SoC ID
 	movw	r5, #:lower16:(AWIN_CORE_PBASE+AWIN_SRAM_OFFSET)
 	movt	r5, #:upper16:(AWIN_CORE_PBASE+AWIN_SRAM_OFFSET)
 	ldr	r1, [r5, #AWIN_SRAM_VER_REG]
-	orr	r1, r1, AWIN_SRAM_VER_R_EN
+#ifdef __ARMEB__
+	orr	r1, r1, #(AWIN_SRAM_VER_R_EN << 8)	# it's bit 15
+#else
+	orr	r1, r1, #AWIN_SRAM_VER_R_EN
+#endif
 	str	r1, [r5, #AWIN_SRAM_VER_REG]
 	dsb
 	ldr	r1, [r5, #AWIN_SRAM_VER_REG]
+#ifdef __ARMEB__
+	rev	r1, r1
+#endif
 	lsr	r1, r1, #16
+#endif /* ALLWINNER_A20 + ALLWINNER_A31 + ALLWINNER_A80 > 1 */
 
 	// MP init based on SoC ID
 #if defined(ALLWINNER_A20)
+# if defined(ALLWINNER_A31) || defined(ALLWINNER_A80)
 	movw	r0, #AWIN_SRAM_VER_KEY_A20
 	cmp	r1, r0
 	bleq	a20_mpinit
+# else
+	bl	a20_mpinit
+# endif
 #endif
 #if defined(ALLWINNER_A31)
+# if defined(ALLWINNER_A20) || defined(ALLWINNER_A80)
 	movw	r0, #AWIN_SRAM_VER_KEY_A31
 	cmp	r1, r0
 	bleq	a31_mpinit
+# else
+	bl	a31_mpinit
+# endif
 #endif
 
 	XPUTC2(#62)

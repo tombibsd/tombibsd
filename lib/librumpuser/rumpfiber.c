@@ -119,8 +119,10 @@ static int64_t
 now(void)
 {
 	struct timespec ts;
+	int rv;
 
-	clock_gettime(CLOCK_MONOTONIC, &ts);
+	rv = clock_gettime(CLOCK_MONOTONIC, &ts);
+	assert(rv == 0);
 	return (ts.tv_sec * 1000LL) + (ts.tv_nsec / 1000000LL);
 }
 
@@ -179,7 +181,8 @@ schedule(void)
 }
 
 static void
-create_ctx(ucontext_t *ctx, void *stack, size_t stack_size)
+create_ctx(ucontext_t *ctx, void *stack, size_t stack_size,
+	void (*f)(void *), void *data)
 {
 
 	getcontext(ctx);
@@ -187,9 +190,10 @@ create_ctx(ucontext_t *ctx, void *stack, size_t stack_size)
 	ctx->uc_stack.ss_size = stack_size;
 	ctx->uc_stack.ss_flags = 0;
 	ctx->uc_link = NULL; /* TODO may link to main thread */
+	/* may have to do bounce function to call, if args to makecontext are ints */
+	makecontext(ctx, (void (*)(void))f, 1, data);
 }
 
-/* may have to do bounce function to call, if args to makecontext are ints */
 /* TODO see notes in rumpuser_thread_create, have flags here */
 struct thread *
 create_thread(const char *name, void *cookie, void (*f)(void *), void *data,
@@ -197,19 +201,23 @@ create_thread(const char *name, void *cookie, void (*f)(void *), void *data,
 {
 	struct thread *thread = calloc(1, sizeof(struct thread));
 
+	if (!thread) {
+		return NULL;
+	}
+
 	if (!stack) {
 		assert(stack_size == 0);
 		stack = mmap(NULL, STACKSIZE, PROT_READ | PROT_WRITE,
 		    MAP_SHARED | MAP_ANON, -1, 0);
 		if (stack == MAP_FAILED) {
+			free(thread);
 			return NULL;
 		}
 		stack_size = STACKSIZE;
 	} else {
 		thread->flags = THREAD_EXTSTACK;
 	}
-	create_ctx(&thread->ctx, stack, stack_size);
-	makecontext(&thread->ctx, (void (*)(void))f, 1, data);
+	create_ctx(&thread->ctx, stack, stack_size, f, data);
 	
 	thread->name = strdup(name);
 	thread->cookie = cookie;
@@ -380,7 +388,6 @@ init_sched(void)
 {
 	struct thread *thread = calloc(1, sizeof(struct thread));
 
-	getcontext(&thread->ctx);
 	thread->name = strdup("init");
 	thread->flags = 0;
 	thread->wakeup_time = -1;

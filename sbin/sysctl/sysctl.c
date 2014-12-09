@@ -181,6 +181,7 @@ static const struct handlespec {
 	const void *ps_d;
 } handlers[] = {
 	{ "/kern/clockrate",			kern_clockrate, NULL, NULL },
+	{ "/kern/evcnt",			printother, NULL, "vmstat -e" },
 	{ "/kern/vnode",			printother, NULL, "pstat" },
 	{ "/kern/proc(2|_args)?",		printother, NULL, "ps" },
 	{ "/kern/file2?",			printother, NULL, "pstat" },
@@ -1701,8 +1702,8 @@ sysctlerror(int soft)
 		case EOPNOTSUPP:
 		case EPROTONOSUPPORT:
 			if (Aflag || req)
-				sysctlperror("%s: the value is not available\n",
-					     gsname);
+				sysctlperror("%s: the value is not available "
+				    "(%s)\n", gsname, strerror(errno));
 			return;
 		}
 	}

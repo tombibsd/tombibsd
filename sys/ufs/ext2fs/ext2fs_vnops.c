@@ -79,7 +79,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/namei.h>
 #include <sys/vnode.h>
 #include <sys/lockf.h>
-#include <sys/malloc.h>
 #include <sys/pool.h>
 #include <sys/signalvar.h>
 #include <sys/kauth.h>

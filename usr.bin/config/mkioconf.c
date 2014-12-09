@@ -324,10 +324,6 @@ emitloc(FILE *fp)
 		for (i = 0; i < locators.used; i++)
 			fprintf(fp, "%s%s,", SEP(i, 8), locators.vec[i]);
 		fprintf(fp, "\n};\n");
-	} else if (*packed != NULL) {
-		/* We need to have *something*. */
-		fprintf(fp, "\n/* locators */\n"
-			"static int loc[1] = { -1 };\n");
 	}
 }
 
@@ -433,7 +429,7 @@ emitcfdata(FILE *fp)
 			    i->i_locoff);
 			loc = locbuf;
 		} else
-			loc = "loc";
+			loc = "NULL";
 		fprintf(fp, "    { \"%s\",%s\"%s\",%s%2d, %s, %7s, %#6x, ",
 			    basename, strlen(basename) < 7 ? "\t\t"
 			    				   : "\t",
@@ -484,7 +480,7 @@ emitpseudo(FILE *fp)
 		fprintf(fp, "void %sattach(int);\n",
 		    i->i_base->d_name);
 	}
-	fputs("\nstruct pdevinit pdevinit[] = {\n", fp);
+	fputs("\nconst struct pdevinit pdevinit[] = {\n", fp);
 	TAILQ_FOREACH(i, &allpseudo, i_next) {
 		d = i->i_base;
 		fprintf(fp, "\t{ %sattach, %d },\n",

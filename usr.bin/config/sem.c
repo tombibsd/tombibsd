@@ -398,7 +398,7 @@ defdevclass(const char *name, struct loclist *locs, struct attrlist *deps,
 			    "lower-case alphanumeric characters");
 			errored = 1;
 		}
-		*cp = toupper((unsigned char)*cp);
+		*cp = (char)toupper((unsigned char)*cp);
 	}
 	a->a_devclass = intern(classenum);
 
@@ -964,7 +964,7 @@ resolve(struct nvlist **nvp, const char *name, const char *what,
 			    name, what, nv->nv_str);
 			return (1);
 		}
-		nv->nv_num = makedev(maj, unit * maxpartitions + part);
+		nv->nv_num = (long long)makedev(maj, unit * maxpartitions + part);
 	}
 
 	nv->nv_name = dev->d_name;
@@ -1329,7 +1329,8 @@ remove_devi(struct devi *i)
 	 *      list.
 	 */
 	if (i != f) {
-		for (j = f; j->i_alias != i; j = j->i_alias);
+		for (j = f; j->i_alias != i; j = j->i_alias)
+			continue;
 		j->i_alias = i->i_alias;
 	} else {
 		if (i->i_alias == NULL) {
@@ -1352,7 +1353,8 @@ remove_devi(struct devi *i)
 		 */
 		for (ppi = &d->d_ihead;
 		    *ppi != NULL && *ppi != i && (*ppi)->i_bsame != i;
-		    ppi = &(*ppi)->i_bsame);
+		    ppi = &(*ppi)->i_bsame)
+			continue;
 		if (*ppi == NULL)
 			panic("deldev: dev (%s) doesn't list the devi"
 			    " (%s at %s)", d->d_name, i->i_name, i->i_at);
@@ -1378,7 +1380,8 @@ remove_devi(struct devi *i)
 	iba = i->i_atdeva;
 	for (ppi = &iba->d_ihead;
 	    *ppi != NULL && *ppi != i && (*ppi)->i_asame != i;
-	    ppi = &(*ppi)->i_asame);
+	    ppi = &(*ppi)->i_asame)
+		continue;
 	if (*ppi == NULL)
 		panic("deldev: deva (%s) doesn't list the devi (%s)",
 		    iba->d_name, i->i_name);
@@ -1442,7 +1445,8 @@ remove_devi(struct devi *i)
 			panic("remove_devi(%s) - can't add to deaddevitab",
 			    i->i_name);
 	} else {
-		for (j = f; j->i_alias != NULL; j = j->i_alias);
+		for (j = f; j->i_alias != NULL; j = j->i_alias)
+			continue;
 		j->i_alias = i;
 	}
 	/*

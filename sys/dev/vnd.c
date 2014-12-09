@@ -1592,6 +1592,13 @@ unlock_and_exit:
 
 		return dkwedge_list(&vnd->sc_dkdev, dkwl, l);
 
+	case DIOCMWEDGES:
+		if ((flag & FWRITE) == 0)
+			return EBADF;
+
+		dkwedge_discover(&vnd->sc_dkdev);
+		return 0;
+
 	default:
 		return ENOTTY;
 	}
