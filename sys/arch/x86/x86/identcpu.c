@@ -757,10 +757,9 @@ cpu_probe_fpu(struct cpu_info *ci)
 	/* XXX these probably ought to be per-cpu */
 	if (descs[2] > 512)
 	    x86_fpu_save_size = descs[2];
-#ifdef XEN
-	if (cpu_vendor != CPUVENDOR_AMD)
+#ifndef XEN
+	x86_xsave_features = (uint64_t)descs[3] << 32 | descs[0];
 #endif
-		x86_xsave_features = (uint64_t)descs[3] << 32 | descs[0];
 }
 
 void

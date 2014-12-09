@@ -26,6 +26,7 @@
 ./usr/lib/i18n/libmapper_zone_g.a		comp-c-debuglib		debuglib
 ./usr/lib/libamu_g.a				comp-c-debuglib		debuglib
 ./usr/lib/libarchive_g.a			comp-c-debuglib		debuglib
+./usr/lib/libasan_g.a				comp-c-debuglib		debuglib,gcc=48
 ./usr/lib/libasn1_g.a				comp-c-debuglib		debuglib,kerberos
 ./usr/lib/libatf-c++_g.a			comp-c-debuglib		atf,debuglib
 ./usr/lib/libatf-c_g.a				comp-c-debuglib		atf,debuglib

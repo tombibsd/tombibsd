@@ -127,6 +127,7 @@ __KERNEL_RCSID(1, "$NetBSD$");
 
 #include "opt_ddb.h"
 #include "opt_kgdb.h"
+#include "opt_multiprocessor.h"
 
 #include <sys/param.h>
 #include <sys/reboot.h>

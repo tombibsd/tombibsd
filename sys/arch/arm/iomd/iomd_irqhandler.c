@@ -49,12 +49,12 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/syslog.h>
 #include <sys/malloc.h>
 
+#include <arm/cpufunc.h>
 #include <arm/iomd/iomdreg.h>
 #include <arm/iomd/iomdvar.h>
 
 #include <machine/intr.h>
 #include <machine/cpu.h>
-#include <arm/arm32/katelib.h>
 
 irqhandler_t *irqhandlers[NIRQS];
 

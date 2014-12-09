@@ -50,7 +50,7 @@ SRCS+=		rumpuser_errtrans.c rumpuser_sigtrans.c
 SRCS+=		rumpuser_dl.c rumpuser_daemonize.c
 
 INCSDIR=	/usr/include/rump
-INCS=		rumpuser.h rumpuser_component.h rumpuser_port.h
+INCS=		rumpuser_component.h rumpuser_port.h
 
 MAN=		rumpuser.3
 

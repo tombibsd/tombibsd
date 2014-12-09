@@ -1888,6 +1888,12 @@ ip6_sprintf(const struct in6_addr *addr)
 	ip6round = (ip6round + 1) & 7;
 	cp = ip6buf[ip6round];
 
+	if (IN6_IS_ADDR_V4MAPPED(addr)) {
+		struct in_addr ia = { .s_addr = addr->s6_addr32[3] };
+		snprintf(cp, 48, "::ffff:%s", inet_ntoa(ia));
+		return cp;
+	}
+
 	for (i = 0; i < 8; i++) {
 		if (dcolon == 1) {
 			if (*a == 0) {

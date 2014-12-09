@@ -65,6 +65,8 @@
 ./usr/lib/sparc/libamu.so.4.0			base-compat-shlib	compat,pic
 ./usr/lib/sparc/libarchive.so.3			base-compat-shlib	compat,pic
 ./usr/lib/sparc/libarchive.so.3.1		base-compat-shlib	compat,pic
+./usr/lib/sparc/libasan.so.0			base-compat-shlib	compat,pic,gcc=48
+./usr/lib/sparc/libasan.so.0.0			base-compat-shlib	compat,pic,gcc=48
 ./usr/lib/sparc/libasn1.so.9			base-compat-shlib	compat,pic,kerberos
 ./usr/lib/sparc/libasn1.so.9.0			base-compat-shlib	compat,pic,kerberos
 ./usr/lib/sparc/libatf-c++.so.1			base-compat-shlib	compat,pic,atf

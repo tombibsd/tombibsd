@@ -11,3 +11,8 @@
 #define	SNG_QUIETNAN	(1 << 22)
 #define	DBL_QUIETNAN	(1 << 19)
 #endif
+
+union ldbl_u {
+	long double	ldblu_ld;
+	double		ldblu_d[2];
+};

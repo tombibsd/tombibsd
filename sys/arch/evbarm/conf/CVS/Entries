@@ -14,13 +14,13 @@
 /BEAGLEBOARD_INSTALL/1.2/Mon May 19 16:25:47 2014/-kk/
 /BEAGLEBONE/1.29/Wed Oct 29 08:13:00 2014/-kk/
 /BEAGLEBONE_INSTALL/1.2/Mon May 19 16:25:47 2014/-kk/
-/BPI/1.4/Wed Oct 29 08:13:00 2014/-kk/
+/BPI/1.7/Tue Dec  9 04:15:56 2014/-kk/
 /BPI_INSTALL/1.1/Sun Sep  7 20:17:57 2014/-kk/
 /CP3100/1.42/Fri Oct  3 09:43:15 2014/-kk/
 /CP3100_INSTALL/1.2/Mon May 19 16:25:47 2014/-kk/
-/CUBIEBOARD/1.28/Wed Oct 29 08:13:00 2014/-kk/
+/CUBIEBOARD/1.29/Tue Dec  9 04:15:56 2014/-kk/
 /CUBIEBOARD_INSTALL/1.2/Mon May 19 16:25:47 2014/-kk/
-/CUBIETRUCK/1.3/Fri Oct  3 09:43:15 2014/-kk/
+/CUBIETRUCK/1.4/Tue Dec  9 04:15:56 2014/-kk/
 /CUBIETRUCK_INSTALL/1.1/Fri Apr 11 04:19:47 2014/-kk/
 /CUBOX-I/1.2/Wed Oct 29 08:13:00 2014/-kk/
 /DEVKIT8000/1.1/Wed Sep  8 22:53:53 2010/-kk/
@@ -93,7 +93,7 @@
 /PANDABOARD_INSTALL/1.2/Mon May 19 16:25:48 2014/-kk/
 /README.evbarm/1.8/Fri Oct  3 09:08:56 2014/-kk/
 /RPI/1.58/Wed Oct 29 08:13:00 2014/-kk/
-/RPI_INSTALL/1.5/Fri Oct  3 09:36:03 2014/-kk/
+/RPI_INSTALL/1.6/Tue Dec  9 04:15:56 2014/-kk/
 /SHEEVAPLUG/1.46/Wed Oct 29 08:13:00 2014/-kk/
 /SHEEVAPLUG_INSTALL/1.2/Mon May 19 16:25:48 2014/-kk/
 /SMDK2410/1.57/Fri Oct  3 09:43:16 2014/-kk/
@@ -118,7 +118,7 @@
 /files.adi_brh/1.4/Mon Dec  3 15:33:29 2007/-kk/
 /files.armadaxp/1.3/Fri Apr 11 02:03:29 2014/-kk/
 /files.armadillo9/1.4/Mon Mar 17 09:30:02 2008/-kk/
-/files.awin/1.1/Sun Aug 31 19:13:01 2014/-kk/
+/files.awin/1.3/Tue Dec  9 04:15:56 2014/-kk/
 /files.bcm53xx/1.1/Sat Sep  1 00:15:11 2012/-kk/
 /files.beagle/1.4/Wed Sep  5 00:09:35 2012/-kk/
 /files.cp3100/1.2/Mon Dec  3 15:33:29 2007/-kk/
@@ -199,7 +199,7 @@
 /std.adi_brh/1.10/Sun Dec 16 23:47:56 2012/-kk/
 /std.armadaxp/1.3/Fri Apr 11 02:03:29 2014/-kk/
 /std.armadillo9/1.7/Sun Dec 16 23:47:56 2012/-kk/
-/std.awin/1.4/Wed Oct 29 08:13:00 2014/-kk/
+/std.awin/1.5/Tue Dec  9 04:15:56 2014/-kk/
 /std.bcm53xx/1.14/Sat Mar  1 06:04:25 2014/-kk/
 /std.beagle/1.13/Fri Oct  3 09:43:16 2014/-kk/
 /std.cp3100/1.5/Sun Dec 16 23:47:56 2012/-kk/

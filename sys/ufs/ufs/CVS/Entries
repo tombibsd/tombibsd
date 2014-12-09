@@ -13,8 +13,8 @@
 /ufs_bswap.h/1.20/Thu Oct 24 10:28:58 2013/-kk/
 /ufs_dirhash.c/1.36/Sat Mar  1 06:05:16 2014/-kk/
 /ufs_extattr.c/1.43/Thu Feb 13 15:36:03 2014/-kk/
-/ufs_extern.h/1.75/Tue Jun  3 03:10:03 2014/-kk/
-/ufs_inode.c/1.90/Mon May 19 16:26:50 2014/-kk/
+/ufs_extern.h/1.77/Tue Dec  9 04:16:23 2014/-kk/
+/ufs_inode.c/1.92/Tue Dec  9 04:16:23 2014/-kk/
 /ufs_lookup.c/1.132/Mon Jun  9 00:29:36 2014/-kk/
 /ufs_quota.c/1.117/Sun Jul 20 13:08:42 2014/-kk/
 /ufs_quota.h/1.22/Sun Jul 20 13:08:42 2014/-kk/
@@ -23,7 +23,7 @@
 /ufs_readwrite.c/1.107/Thu Oct 24 10:28:58 2013/-kk/
 /ufs_rename.c/1.11/Tue Jun  3 03:10:03 2014/-kk/
 /ufs_vfsops.c/1.53/Mon May 19 16:26:50 2014/-kk/
-/ufs_vnops.c/1.222/Wed Oct 29 08:13:32 2014/-kk/
+/ufs_vnops.c/1.224/Tue Dec  9 04:16:23 2014/-kk/
 /ufs_wapbl.c/1.23/Fri Jan 27 19:22:50 2012/-kk/
 /ufs_wapbl.h/1.8/Mon Nov 18 05:31:48 2013/-kk/
 /ufsmount.h/1.41/Thu Oct 24 10:28:58 2013/-kk/

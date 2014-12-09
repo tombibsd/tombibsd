@@ -1,5 +1,3 @@
-/*	$NetBSD$	*/
-
 /*
  * This file is part of flex.
  *

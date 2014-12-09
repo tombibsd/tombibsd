@@ -67,6 +67,8 @@
 ./usr/lib/i386/libamu.so.4.0			base-compat-shlib	compat,pic
 ./usr/lib/i386/libarchive.so.3			base-compat-shlib	compat,pic
 ./usr/lib/i386/libarchive.so.3.1		base-compat-shlib	compat,pic
+./usr/lib/i386/libasan.so.0			base-compat-shlib	compat,pic,gcc=48
+./usr/lib/i386/libasan.so.0.0			base-compat-shlib	compat,pic,gcc=48
 ./usr/lib/i386/libasn1.so.9			base-compat-shlib	compat,pic,kerberos
 ./usr/lib/i386/libasn1.so.9.0			base-compat-shlib	compat,pic,kerberos
 ./usr/lib/i386/libatf-c++.so.1			base-compat-shlib	compat,pic,atf

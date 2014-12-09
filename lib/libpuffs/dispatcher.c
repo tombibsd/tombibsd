@@ -1140,6 +1140,34 @@ dispatch(struct puffs_cc *pcc)
 			break;
 		}
 
+		case PUFFS_VN_FALLOCATE:
+		{
+			struct puffs_vnmsg_fallocate *auxt = auxbuf;
+
+			if (pops->puffs_node_fallocate == NULL) {
+				error = EOPNOTSUPP;
+				break;
+			}
+
+			error = pops->puffs_node_fallocate(pu,
+			    opcookie, auxt->pvnr_off, auxt->pvnr_len);
+			break;
+		}
+
+		case PUFFS_VN_FDISCARD:
+		{
+			struct puffs_vnmsg_fdiscard *auxt = auxbuf;
+
+			if (pops->puffs_node_fdiscard == NULL) {
+				error = EOPNOTSUPP;
+				break;
+			}
+
+			error = pops->puffs_node_fdiscard(pu,
+			    opcookie, auxt->pvnr_off, auxt->pvnr_len);
+			break;
+		}
+
 		default:
 			printf("inval op %d\n", preq->preq_optype);
 			error = EINVAL;

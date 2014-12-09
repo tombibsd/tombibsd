@@ -217,8 +217,7 @@ ptyfs__allocvp(struct mount *mp, struct lwp *l, struct vnode **vpp,
 		*vpp = NULL;
 		return error;
 	}
-	/* Activate node only after we have grabbed device. */
-	if (type == PTYFSpts)
+	if (type == PTYFSptc)
 		ptyfs_set_active(mp, minor(dev));
 	return 0;
 }

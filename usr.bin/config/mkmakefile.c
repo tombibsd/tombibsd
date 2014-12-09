@@ -44,6 +44,9 @@
 #include "nbtool_config.h"
 #endif
 
+#include <sys/cdefs.h>
+__RCSID("$NetBSD$");
+
 #include <sys/param.h>
 #include <ctype.h>
 #include <errno.h>
@@ -432,7 +435,7 @@ static void
 emitfiles(FILE *fp, int suffix, int upper_suffix)
 {
 	struct files *fi;
-	int len;
+	size_t len;
 	const char *fpath;
  	struct config *cf;
  	char swapname[100];

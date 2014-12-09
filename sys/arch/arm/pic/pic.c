@@ -646,7 +646,7 @@ pic_establish_intr(struct pic_softc *pic, int irq, int ipl, int type,
 	is->is_func = func;
 	is->is_arg = arg;
 #ifdef MULTIPROCESSOR
-	is->is_mpsafe = (type & IST_MPSAFE);
+	is->is_mpsafe = (type & IST_MPSAFE) || ipl != IPL_VM;
 #endif
 
 	if (pic->pic_ops->pic_source_name)

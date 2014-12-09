@@ -47,6 +47,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include "opt_modular.h"
 #include "opt_md.h"
 #include "opt_pmap_debug.h"
+#include "opt_multiprocessor.h"
 
 #include <sys/param.h>
 #include <sys/systm.h>
@@ -74,7 +75,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <arm/locore.h>
 
-#include <arm/arm32/katelib.h>
 #include <arm/arm32/machdep.h>
 
 #include <machine/bootconfig.h>

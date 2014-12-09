@@ -599,10 +599,13 @@ cpu_reboot(int howto, char *user_boot_string)
 	 */
 	maybe_dump(howto);
 
-	if ((howto & RB_NOSYNC) == 0 && !syncdone) {
+	/*
+	 * If we've panic'd, don't make the situation potentially
+	 * worse by syncing or unmounting the file systems.
+	 */
+	if ((howto & RB_NOSYNC) == 0 && panicstr == NULL) {
 		if (!syncdone) {
-		syncdone = true;
-		vfs_shutdown();
+			syncdone = true;
 			/* XXX used to force unmount as well, here */
 			vfs_sync_all(l);
 			/*
@@ -630,6 +633,7 @@ cpu_reboot(int howto, char *user_boot_string)
 	splhigh();
 
 haltsys:
+	doshutdownhooks();
 
 #ifdef MULTIPROCESSOR
 	/* Stop all secondary cpus */

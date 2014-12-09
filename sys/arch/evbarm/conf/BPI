@@ -17,15 +17,16 @@ options 	RTC_OFFSET=0	# hardware clock is this many mins. west of GMT
 
 # CPU options
 
+no makeoptions	CPUFLAGS
+makeoptions	CPUFLAGS="-mcpu=cortex-a7 -mfpu=neon"
 no makeoptions	BOARDTYPE
 makeoptions	BOARDTYPE="bpi"
 #options 	UVMHIST,UVMHIST_PRINT
-options 	CPU_CORTEXA8
 options 	CPU_CORTEXA7
-options 	ALLWINNER_A10
 options 	ALLWINNER_A20
 options 	PMAPCOUNTERS
 options 	AWIN_CONSOLE_EARLY
+#options 	MULTIPROCESSOR
 
 # Architecture options
 
@@ -229,7 +230,7 @@ gpio*		at awingpio?
 awiniic0	at awinio? port 0
 #awiniic*	at awinio? port ?
 iic*		at awiniic?
-axp20x0 	at iic0 addr 0x34	# AXP209 Power Management Unit
+#axp20x0 	at iic0 addr 0x34	# AXP209 Power Management Unit
 
 # On-board 16550 UARTs
 com0		at awinio? port 0			# UART0 (console)

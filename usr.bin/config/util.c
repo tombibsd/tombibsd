@@ -44,6 +44,9 @@
 #include "nbtool_config.h"
 #endif
 
+#include <sys/cdefs.h>
+__RCSID("$NetBSD$");
+
 #include <sys/types.h>
 #include <assert.h>
 #include <ctype.h>

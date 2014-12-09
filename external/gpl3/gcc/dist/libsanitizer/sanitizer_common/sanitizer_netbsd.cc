@@ -29,7 +29,6 @@
 #include <sys/time.h>
 #include <sys/types.h>
 #include <unistd.h>
-#include <unwind.h>
 #include <errno.h>
 
 namespace __sanitizer {
@@ -392,13 +391,11 @@ bool SanitizerGetThreadName(char *name, int max_len) {
 #ifndef SANITIZER_GO
 //------------------------- SlowUnwindStack -----------------------------------
 #ifdef __arm__
+#include "unwind-arm-common.h"
 #define UNWIND_STOP _URC_END_OF_STACK
 #define UNWIND_CONTINUE _URC_NO_REASON
 #else
-#ifndef _URC_NORMAL_STOP
-#define _URC_NORMAL_STOP 0
-#define _URC_NO_REASON 1
-#endif
+#include <unwind.h>
 #define UNWIND_STOP _URC_NORMAL_STOP
 #define UNWIND_CONTINUE _URC_NO_REASON
 #endif

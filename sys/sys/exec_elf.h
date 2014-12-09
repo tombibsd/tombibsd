@@ -46,6 +46,11 @@
 #include <inttypes.h>
 #endif /* _KERNEL || _STANDALONE */
 
+#ifdef   _BSD_SIZE_T_
+typedef  _BSD_SIZE_T_    size_t;
+#undef   _BSD_SIZE_T_
+#endif
+
 #if HAVE_NBTOOL_CONFIG_H
 #include <nbinclude/machine/elf_machdep.h>
 #else

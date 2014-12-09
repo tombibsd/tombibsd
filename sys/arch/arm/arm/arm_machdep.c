@@ -75,6 +75,7 @@
 #include "opt_cpuoptions.h"
 #include "opt_cputypes.h"
 #include "opt_arm_debug.h"
+#include "opt_multiprocessor.h"
 
 #include <sys/param.h>
 

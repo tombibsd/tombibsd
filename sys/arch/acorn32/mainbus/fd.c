@@ -113,7 +113,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <machine/cpu.h>
 #include <machine/intr.h>
 #include <machine/io.h>
-#include <arm/arm32/katelib.h>
 
 #include <arm/iomd/iomdreg.h>
 #include <arm/iomd/iomdvar.h>

@@ -19,6 +19,13 @@ See also: BUILDING, build.sh, Makefile.
 Recent changes:
 ^^^^^^^^^^^^^^^
 
+20141026:
+	A mishap during the import of pppd may cause your corruption
+	in your cvs directory if you happened to do a cvs update
+	during a short period of time. To fix, just remove the
+	directory src/external/bsd/ppp/dist/pppd completely
+	and let cvs restore it on next update.
+
 20140721:
 	The src/external/mit/lua/src directory was accidentally created
 	and then deleted in the CVS repository.  If you get errors like

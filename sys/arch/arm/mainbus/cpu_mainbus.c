@@ -42,6 +42,7 @@
  */
 
 #include "locators.h"
+#include "opt_multiprocessor.h"
 
 #include <sys/cdefs.h>
 __KERNEL_RCSID(0, "$NetBSD$");

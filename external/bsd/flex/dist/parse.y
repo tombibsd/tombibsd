@@ -64,8 +64,9 @@
 /*  IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED */
 /*  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR */
 /*  PURPOSE. */
-
 #include "flexdef.h"
+__RCSID("$NetBSD$");
+
 #include "tables.h"
 
 int pat, scnum, eps, headcnt, trailcnt, lastchar, i, rulelen;

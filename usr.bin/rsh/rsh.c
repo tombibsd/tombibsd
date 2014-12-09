@@ -203,6 +203,7 @@ main(int argc, char **argv)
 #else
 		if (asrsh)
 			*argv = __UNCONST("rlogin");
+		setuid(uid);
 		execv(_PATH_RLOGIN, argv);
 		err(1, "can't exec %s", _PATH_RLOGIN);
 #endif

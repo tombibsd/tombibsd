@@ -117,7 +117,7 @@ typedef struct {
 #define	_UC_TLSBASE	0x00080000	/* see <sys/ucontext.h> */
 
 #define _UC_MACHINE_SP(uc)	((uc)->uc_mcontext.__gregs[_REG_SP])
-#define _UC_MACHINE_PC(uc)	((uc)->uc_mcontext.__gregs[_REG_LR])
+#define _UC_MACHINE_PC(uc)	((uc)->uc_mcontext.__gregs[_REG_PC])
 #define _UC_MACHINE_INTRV(uc)	((uc)->uc_mcontext.__gregs[_REG_RV])
 
 #define	_UC_MACHINE_SET_PC(uc, pc)	_UC_MACHINE_PC(uc) = (pc)

@@ -39,6 +39,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include "opt_ddb.h"
 #include "opt_kgdb.h"
+#include "opt_multiprocessor.h"
 
 #include <sys/param.h>
 #include <sys/proc.h>
@@ -51,7 +52,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <uvm/uvm_extern.h>
 
 #include <arm/arm32/db_machdep.h>
-#include <arm/arm32/katelib.h>
 #include <arm/undefined.h>
 #include <ddb/db_access.h>
 #include <ddb/db_command.h>

@@ -51,12 +51,17 @@ schedule_timeout_uninterruptible(long timeout)
 {
 	int start, end;
 
+	if (cold) {
+		DELAY(timeout);
+		return 0;
+	}
+
 	start = hardclock_ticks;
 	/* XXX Integer truncation...not likely to matter here.  */
 	(void)kpause("loonix", false /*!intr*/, timeout, NULL);
 	end = hardclock_ticks;
 
-	return (end - start);
+	return (end - start) > 0 ? (end - start) : 0;
 }
 
 #endif  /* _LINUX_SCHED_H_ */

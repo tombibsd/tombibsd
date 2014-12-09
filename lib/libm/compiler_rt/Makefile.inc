@@ -16,11 +16,12 @@ COMPILER_RT_ARCH_DIR=	${COMPILER_RT_SRCDIR}/lib/builtins/${MACHINE_ARCH}
 
 # Needs scaling support
 GENERIC_SRCS+= \
-	mulxc3.c \
+	muldc3.c \
 	mulsc3.c \
-	divxc3.c \
+	mulxc3.c \
 	divdc3.c \
-	divsc3.c
+	divsc3.c \
+	divxc3.c
 
 .if ${MACHINE_CPU} == "powerpc"
 GENERIC_SRCS+= \

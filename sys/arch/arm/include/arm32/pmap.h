@@ -75,6 +75,7 @@
 #ifndef _LOCORE
 #if defined(_KERNEL_OPT)
 #include "opt_arm32_pmap.h"
+#include "opt_multiprocessor.h"
 #endif
 #include <arm/cpufunc.h>
 #include <uvm/uvm_object.h>

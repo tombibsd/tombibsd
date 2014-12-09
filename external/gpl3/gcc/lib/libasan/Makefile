@@ -45,8 +45,15 @@ SANITIZER_SRCS= \
 	sanitizer_symbolizer_linux.cc \
 	sanitizer_win.cc
 
+# The linux build does this to avoid preinit sections on shared libraries
+CSHLIBFLAGS+= -DPIC
+
 LIB=	asan
 SRCS=	${ASAN_SRCS} ${INTERCEPTION_SRCS} ${SANITIZER_SRCS}
-CPPFLAGS+=-I${ASAN}/include -I${ASAN} -I${NETBSDSRCDIR}/lib/libexecinfo
+CPPFLAGS+=-I${ASAN}/include -I${ASAN}
+CPPFLAGS.sanitizer_netbsd.cc+=-I${GCCDIST}/gcc/ginclude
+
+LIBDPLIBS+=    stdc++ ${.CURDIR}/../libstdc++-v3
+LIBDPLIBS+=    pthread ${.CURDIR}/../../../../../lib/libpthread
 
 .include <bsd.lib.mk>

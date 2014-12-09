@@ -90,7 +90,7 @@ uvm_pglist_add(struct vm_page *pg, struct pglist *rlist)
 	free_list = uvm_page_lookup_freelist(pg);
 	color = VM_PGCOLOR_BUCKET(pg);
 	pgflidx = (pg->flags & PG_ZERO) ? PGFL_ZEROS : PGFL_UNKNOWN;
-#ifdef NOT_DEBUG
+#ifdef UVMDEBUG
 	struct vm_page *tp;
 	LIST_FOREACH(tp,
 	    &uvm.page_free[free_list].pgfl_buckets[color].pgfl_queues[pgflidx],

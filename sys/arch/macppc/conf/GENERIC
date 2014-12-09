@@ -296,7 +296,6 @@ voodoofb*	at pci? function ?	# 3Dfx Voodoo3
 
 # ATI Radeon. Still has problems on some hardware
 radeonfb*	at pci? function ?
-options 	RADEONFB_MMAP_BARS	# allow mmap()ing BARs - needed for X
 
 # generic PCI framebuffer, should work with everything supported by OF
 genfb*		at pci? function ?

@@ -1,5 +1,3 @@
-/*	$NetBSD$	*/
-
 /*-
  * Copyright (c) 2012 Dag-Erling Smørgrav
  * All rights reserved.

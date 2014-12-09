@@ -1,5 +1,3 @@
-/*	$NetBSD$	*/
-
 /* Oops; slight change from wc3.l introduces backtracking */
 
 ws    [ \t]

@@ -253,7 +253,6 @@ acpi_probe(void)
 	/*
 	 * Start up ACPICA.
 	 */
-	AcpiGbl_AllMethodsSerialized = false;
 	AcpiGbl_EnableInterpreterSlack = true;
 
 	rv = AcpiInitializeSubsystem();

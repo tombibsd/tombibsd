@@ -4,7 +4,7 @@
 .include "${NETBSDSRCDIR}/distrib/common/Makefile.distrib"
 
 IMAGE=		sshramdisk.fs
-IMAGESIZE=	8900k
+IMAGESIZE=	13m
 MAKEFS_FLAGS=	-f 15
 
 WARNS=		1

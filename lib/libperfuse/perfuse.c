@@ -503,6 +503,9 @@ perfuse_init(struct perfuse_callbacks *pc, struct perfuse_mount_info *pmi)
 #ifdef PUFFS_OPEN_IO_DIRECT 
 	PUFFSOP_SET(pops, perfuse, node, open2);
 #endif /* PUFFS_OPEN_IO_DIRECT */
+#ifdef PUFFS_HAVE_FALLOCATE
+	PUFFSOP_SET(pops, perfuse, node, fallocate);
+#endif /* PUFFS_HAVE_FALLOCATE */
 
 	/*
 	 * PUFFS_KFLAG_NOCACHE_NAME is required so that we can see changes

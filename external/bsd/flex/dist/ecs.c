@@ -1,5 +1,3 @@
-/*	$NetBSD$	*/
-
 /* ecs - equivalence class routines */
 
 /*  Copyright (c) 1990 The Regents of the University of California. */
@@ -32,9 +30,8 @@
 /*  IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED */
 /*  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR */
 /*  PURPOSE. */
-
-
 #include "flexdef.h"
+__RCSID("$NetBSD$");
 
 /* ccl2ecl - convert character classes to set of equivalence classes */
 

@@ -106,6 +106,8 @@ fillvnopmask(struct puffs_ops *pops, struct puffs_kargs *pa)
 	FILLOP(setextattr,  SETEXTATTR);
 	FILLOP(listextattr, LISTEXTATTR);
 	FILLOP(deleteextattr, DELETEEXTATTR);
+	FILLOP(fallocate, FALLOCATE);
+	FILLOP(fdiscard, FDISCARD);
 }
 #undef FILLOP
 

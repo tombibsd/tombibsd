@@ -197,20 +197,17 @@ openredirect(union node *redir, char memory[10], int flags)
 	case NTO:
 		if (Cflag) {
 			fname = redir->nfile.expfname;
-			if (stat(fname, &sb) == -1) {
+			if ((f = open(fname, O_WRONLY)) == -1) {
 				if ((f = open(fname, O_WRONLY|O_CREAT|O_EXCL,
 				    0666)) < 0)
 					goto ecreate;
-			} else if (!S_ISREG(sb.st_mode)) {
-				if ((f = open(fname, O_WRONLY, 0666)) < 0)
-					goto ecreate;
-				if (fstat(f, &sb) != -1 &&
-				    S_ISREG(sb.st_mode)) {
-					close(f);
-					errno = EEXIST;
-					goto ecreate;
-				}
-			} else {
+			} else if (fstat(f, &sb) == -1) {
+				int serrno = errno;
+				close(f);
+				errno = serrno;
+				goto ecreate;
+			} else if (S_ISREG(sb.st_mode)) {
+				close(f);
 				errno = EEXIST;
 				goto ecreate;
 			}

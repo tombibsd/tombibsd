@@ -179,7 +179,7 @@ initarm(void *arg)
             ((vsize_t)&KERNEL_BASE_phys));
 
         arm32_kernel_vm_init(KERNEL_VM_BASE, ARM_VECTORS_HIGH, 0, devmap,
-	    true);
+	    false);
 
         return initarm_common(KERNEL_VM_BASE, KERNEL_VM_SIZE, NULL, 0);
 }

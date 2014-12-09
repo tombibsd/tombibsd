@@ -117,6 +117,8 @@ const char *puffsdump_vnop_revmap[] = {
 	"PUFFS_VN_DELETEEXTATTR",
 	"PUFFS_VN_SETEXTATTR",
 	"PUFFS_VN_CLOSEEXTATTR",
+	"PUFFS_VN_FALLOCATE",
+	"PUFFS_VN_FDISCARD",
 };
 size_t puffsdump_vnop_count = __arraycount(puffsdump_vnop_revmap);
 

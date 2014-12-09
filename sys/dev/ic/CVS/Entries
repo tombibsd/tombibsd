@@ -211,9 +211,9 @@
 /ds.h/1.10/Sun Feb 12 16:34:11 2012/-kk/
 /ds1286reg.h/1.8/Sun Dec 11 12:21:26 2005/-kk/
 /ds1687reg.h/1.10/Sun May  4 12:50:38 2008/-kk/
-/dwc_gmac.c/1.19/Wed Oct 29 08:13:19 2014/-kk/
-/dwc_gmac_reg.h/1.10/Wed Oct 29 08:13:19 2014/-kk/
-/dwc_gmac_var.h/1.4/Wed Oct 29 08:13:19 2014/-kk/
+/dwc_gmac.c/1.24/Tue Dec  9 04:16:12 2014/-kk/
+/dwc_gmac_reg.h/1.12/Tue Dec  9 04:16:12 2014/-kk/
+/dwc_gmac_var.h/1.5/Tue Dec  9 04:16:12 2014/-kk/
 /elink3.c/1.135/Fri Oct  3 09:25:59 2014/-kk/
 /elink3reg.h/1.31/Sun Nov  5 05:57:53 2006/-kk/
 /elink3var.h/1.38/Thu Feb  2 19:43:03 2012/-kk/
@@ -484,9 +484,9 @@
 /rtl81x9.c/1.95/Fri Oct  3 09:26:00 2014/-kk/
 /rtl81x9reg.h/1.46/Sun Oct 19 16:06:46 2014/-kk/
 /rtl81x9var.h/1.54/Sun Oct 19 16:06:46 2014/-kk/
-/rtsx.c/1.1/Wed Mar 19 15:26:41 2014/-kk/
-/rtsxreg.h/1.1/Wed Mar 19 15:26:41 2014/-kk/
-/rtsxvar.h/1.1/Wed Mar 19 15:26:41 2014/-kk/
+/rtsx.c/1.2/Tue Dec  9 04:16:12 2014/-kk/
+/rtsxreg.h/1.2/Tue Dec  9 04:16:12 2014/-kk/
+/rtsxvar.h/1.2/Tue Dec  9 04:16:12 2014/-kk/
 /rtw.c/1.121/Sat Mar  1 06:04:42 2014/-kk/
 /rtwphy.c/1.16/Mon Nov 18 05:31:38 2013/-kk/
 /rtwphy.h/1.6/Mon Oct 19 23:19:39 2009/-kk/

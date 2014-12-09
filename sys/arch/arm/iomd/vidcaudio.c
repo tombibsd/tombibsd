@@ -84,7 +84,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <machine/intr.h>
 #include <machine/machdep.h>
-#include <arm/arm32/katelib.h>
 
 #include <arm/iomd/vidcaudiovar.h>
 #include <arm/iomd/iomdreg.h>
@@ -104,6 +103,12 @@ extern int *vidc_base;
 #else
 #define DPRINTF(x)
 #endif
+
+#define WriteWord(a, b) \
+*((volatile unsigned int *)(a)) = (b)
+
+#define ReadWord(a) \
+(*((volatile unsigned int *)(a)))
 
 struct vidcaudio_softc {
 	device_t	sc_dev;

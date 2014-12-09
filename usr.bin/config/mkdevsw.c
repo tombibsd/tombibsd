@@ -33,6 +33,9 @@
 #include "nbtool_config.h"
 #endif
 
+#include <sys/cdefs.h>
+__RCSID("$NetBSD$");
+
 #include <stdio.h>
 #include <string.h>
 #include <errno.h>
@@ -189,7 +192,9 @@ emitconv(FILE *fp)
 				d_flags = nv->nv_str;
 				break;
 			}
-			d_vec[i++] = nv->nv_num;
+			if (nv->nv_num > INT_MAX || nv->nv_num < INT_MIN)
+				panic("out of range devnode definition");
+			d_vec[i++] = (int)nv->nv_num;
 		}
 
 		fprintf(fp, "\t{ \"%s\", %d, %d, %s, %s, { %d, %d }},\n",

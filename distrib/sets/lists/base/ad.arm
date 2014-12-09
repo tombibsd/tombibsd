@@ -73,6 +73,8 @@
 ./usr/lib/oabi/libarchive.so.3.1		base-compat-shlib	compat,pic
 ./usr/lib/oabi/libarm.so.0			base-sys-shlib		compat,pic
 ./usr/lib/oabi/libarm.so.0.0			base-sys-shlib		compat,pic
+./usr/lib/oabi/libasan.so.0			base-compat-shlib	compat,pic,gcc=48
+./usr/lib/oabi/libasan.so.0.0			base-compat-shlib	compat,pic,gcc=48
 ./usr/lib/oabi/libasn1.so.9			base-compat-shlib	compat,pic,kerberos
 ./usr/lib/oabi/libasn1.so.9.0			base-compat-shlib	compat,pic,kerberos
 ./usr/lib/oabi/libatf-c++.so.1			base-compat-shlib	compat,pic,atf

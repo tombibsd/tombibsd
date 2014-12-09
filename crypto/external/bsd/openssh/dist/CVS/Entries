@@ -241,13 +241,13 @@
 /sshbuf-getput-crypto.c/1.2/Sun Oct 19 16:30:59 2014/-kk/
 /sshbuf-misc.c/1.2/Sun Oct 19 16:30:59 2014/-kk/
 /sshbuf.c/1.2/Sun Oct 19 16:30:59 2014/-kk/
-/sshbuf.h/1.2/Sun Oct 19 16:30:59 2014/-kk/
+/sshbuf.h/1.3/Tue Dec  9 04:12:14 2014/-kk/
 /sshconnect.c/1.10/Wed Oct 29 08:08:44 2014/-kk/
 /sshconnect.h/1.5/Wed Oct 29 08:08:44 2014/-kk/
 /sshconnect1.c/1.5/Wed Oct 29 08:08:44 2014/-kk/
 /sshconnect2.c/1.18/Wed Oct 29 08:08:44 2014/-kk/
 /sshd.8/1.12/Wed Oct 29 08:08:44 2014/-kk/
-/sshd.c/1.14/Wed Oct 29 08:08:44 2014/-kk/
+/sshd.c/1.15/Tue Dec  9 04:12:14 2014/-kk/
 /sshd_config.5/1.16/Wed Oct 29 08:08:44 2014/-kk/
 /sshd_config/1.12/Wed Oct 29 08:08:44 2014/-kk/
 /ssherr.c/1.2/Sun Oct 19 16:30:59 2014/-kk/
@@ -264,7 +264,7 @@
 /ttymodes.h/1.3/Wed Oct 29 08:08:44 2014/-kk/
 /uidswap.c/1.3/Wed Oct 29 08:08:44 2014/-kk/
 /uidswap.h/1.3/Wed Oct 29 08:08:44 2014/-kk/
-/umac.c/1.7/Wed Oct 29 08:08:44 2014/-kk/
+/umac.c/1.8/Tue Dec  9 04:12:14 2014/-kk/
 /umac.h/1.5/Wed Oct 29 08:08:44 2014/-kk/
 /umac128.c/1.1/Mon Oct 20 03:05:13 2014/-kk/
 /uuencode.c/1.6/Wed Oct 29 08:08:44 2014/-kk/

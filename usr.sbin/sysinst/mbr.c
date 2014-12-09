@@ -1459,6 +1459,11 @@ read_mbr(const char *disk, mbr_info_t *mbri)
 	 */
 	if (bsec == 0)
 		bsec = pm->dlsec;
+	if (bhead == 0)
+		bhead = pm->dlhead;
+	if (bcyl == 0)
+		bhead = pm->dlcyl;
+
 	ptn_0_offset = bsec;
 	/* use 1MB default offset on large disks as fdisk(8) */
 	if (pm->dlsize > 2048 * 1024 * 128)

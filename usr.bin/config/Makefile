@@ -2,6 +2,7 @@
 #	from: @(#)Makefile	8.2 (Berkeley) 4/19/94
 
 .include <bsd.own.mk>
+WARNS=6
 
 PROG=	config
 SRCS=	files.c gram.y hash.c lint.c main.c mkdevsw.c mkheaders.c mkioconf.c \

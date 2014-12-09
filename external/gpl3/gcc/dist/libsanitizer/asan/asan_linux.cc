@@ -48,15 +48,41 @@ void *AsanDoesNotSupportStaticLinkage() {
   return &_DYNAMIC;  // defined in link.h
 }
 
-#ifdef __NetBSD__
-#define gregs __gregs
-#define REG_RIP _REG_RIP
-#define REG_RBP _REG_RBP
-#define REG_RSP _REG_RSP
-#endif
-
 void GetPcSpBp(void *context, uptr *pc, uptr *sp, uptr *bp) {
-#if ASAN_ANDROID
+#ifdef __NetBSD__
+# define __UC_MACHINE_FP(ucontext, r) \
+    (ucontext)->uc_mcontext.__gregs[(r)]
+/*
+ * Unfortunately we don't have a portable frame pointer (yet)
+ */
+# if defined(__alpha__)
+#  define _UC_MACHINE_FP(ucontext) __UC_MACHINE_FP(ucontext, _REG_S6)
+# elif defined(__arm__)
+#  define _UC_MACHINE_FP(ucontext) __UC_MACHINE_FP(ucontext, _REG_FP)
+# elif defined(__x86_64__)
+#  define _UC_MACHINE_FP(ucontext) __UC_MACHINE_FP(ucontext, _REG_RBP)
+# elif defined(__i386__)
+#  define _UC_MACHINE_FP(ucontext) __UC_MACHINE_FP(ucontext, _REG_EBP)
+# elif defined(__m68k__)
+#  define _UC_MACHINE_FP(ucontext) __UC_MACHINE_FP(ucontext, _REG_A6)
+# elif defined(__mips__)
+#  define _UC_MACHINE_FP(ucontext) __UC_MACHINE_FP(ucontext, _REG_S8)
+# elif defined(__powerpc__) || defined(__powerpc64__)
+#  define _UC_MACHINE_FP(ucontext) __UC_MACHINE_FP(ucontext, _REG_R1)
+# elif defined(__sparc__)
+#  define _UC_MACHINE_FP(ucontext) sp[15]
+# elif defined(__sh3__)
+#  define _UC_MACHINE_FP(ucontext) __UC_MACHINE_FP(ucontext, _REG_R14)
+# elif defined(__vax__)
+#  define _UC_MACHINE_FP(ucontext) __UC_MACHINE_FP(ucontext, _REG_FP)
+# else
+#  define _UC_MACHINE_FP(ucontext) 0
+# endif
+  ucontext_t *ucontext = (ucontext_t*)context;
+  *pc = _UC_MACHINE_PC(ucontext);
+  *sp = _UC_MACHINE_SP(ucontext);
+  *bp = _UC_MACHINE_FP(ucontext);
+#elif ASAN_ANDROID
   *pc = *sp = *bp = 0;
 #elif defined(__arm__)
   ucontext_t *ucontext = (ucontext_t*)context;

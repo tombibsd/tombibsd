@@ -167,8 +167,8 @@ const char * const db_Grp9[] = {
 	"",
 	"",
 	"",
-	"",
-	"",
+	"vmptrld",
+	"vmptrst"
 };
 
 const struct inst db_inst_0f0x[] = {
@@ -219,7 +219,7 @@ const struct inst db_inst_0f3x[] = {
 /*34*/	{ "sysenter",false,NONE, 0,	      0 },
 /*35*/	{ "sysexit",false, NONE, 0,	      0 },
 /*36*/	{ "",	   false, NONE,  0,	      0 },
-/*37*/	{ "",	   false, NONE,  0,	      0 },
+/*37*/	{ "getsec",false, NONE,  0,	      0 },
 
 /*38*/	{ "",	   false, NONE,  0,	      0 },
 /*39*/	{ "",	   false, NONE,  0,	      0 },

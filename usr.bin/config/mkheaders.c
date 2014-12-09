@@ -44,6 +44,9 @@
 #include "nbtool_config.h"
 #endif
 
+#include <sys/cdefs.h>
+__RCSID("$NetBSD$");
+
 #include <sys/param.h>
 #include <ctype.h>
 #include <errno.h>
@@ -137,10 +140,14 @@ fprint_global(FILE *fp, const char *name, long long value)
 static unsigned int
 global_hash(const char *str)
 {
-        unsigned int h;
+	unsigned long h;
 	char *ep;
 
-	/* If the value is a valid numeric, just use it */
+	/*
+	 * If the value is a valid numeric, just use it
+	 * We don't care about negative values here, we
+	 * just use the value as a hash.
+	 */
 	h = strtoul(str, &ep, 0);
 	if (*ep != 0)
 		/* Otherwise shove through a 32bit CRC function */
@@ -148,7 +155,7 @@ global_hash(const char *str)
 
 	/* Avoid colliding with the value used for undefined options. */
 	/* At least until I stop any options being set to zero */
-	return h != UNDEFINED ? h : DEFINED;
+	return (unsigned int)(h != UNDEFINED ? h : DEFINED);
 }
 
 static void
@@ -520,13 +527,13 @@ static char *
 cntname(const char *src)
 {
 	char *dst;
-	unsigned char c;
+	char c;
 	static char buf[100];
 
 	dst = buf;
 	*dst++ = 'N';
 	while ((c = *src++) != 0)
-		*dst++ = islower(c) ? toupper(c) : c;
+		*dst++ = islower((u_char)c) ? toupper((u_char)c) : c;
 	*dst = 0;
 	return (buf);
 }

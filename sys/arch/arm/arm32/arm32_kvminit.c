@@ -121,6 +121,8 @@
  * SUCH DAMAGE.
  */
 
+#include "opt_multiprocessor.h"
+
 #include <sys/cdefs.h>
 __KERNEL_RCSID(0, "$NetBSD$");
 
@@ -139,8 +141,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <arm/undefined.h>
 #include <arm/bootconfig.h>
 #include <arm/arm32/machdep.h>
-
-#include "ksyms.h"
 
 struct bootmem_info bootmem_info;
 

@@ -8,6 +8,10 @@ WARNS?=4
 INCSDIR=/usr/include
 INCS=execinfo.h
 
+.if ${HAVE_LIBGCC_EH} == "yes"
+INCS+=	unwind.h
+.endif
+
 #CPPFLAGS+='-D__RCSID(a)=' -D_GNU_SOURCE '-D__printflike(a,b)='
 #CPPFLAGS+=-I/usr/include/libelf
 #COPTS+=-std=gnu99

@@ -195,7 +195,7 @@ awin_dma_a10_alloc(struct awin_dma_softc *sc, const char *type,
 			ch->ch_callbackarg = cbarg;
 
 			irqen = DMA_READ(sc, AWIN_DMA_IRQ_EN_REG);
-			if (type == CH_NDMA)
+			if (ch->ch_type == CH_NDMA)
 				irqen |= AWIN_DMA_IRQ_NDMA_END(index);
 			else
 				irqen |= AWIN_DMA_IRQ_DDMA_END(index);

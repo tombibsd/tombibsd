@@ -541,6 +541,9 @@ pmap_mp_init(void)
 				1, /* valid */
 				0 /* ie */);
 		tp[i].data |= TLB_L | TLB_CV;
+		if (CPU_ISSUN4V)
+			tp[i].data |= SUN4V_TLB_X;
+			
 		DPRINTF(PDB_BOOT1, ("xtlb[%d]: Tag: %" PRIx64 " Data: %"
 				PRIx64 "\n", i, tp[i].tag, tp[i].data));
 	}

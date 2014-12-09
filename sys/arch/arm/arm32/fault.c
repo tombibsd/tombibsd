@@ -99,8 +99,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <arm/locore.h>
 
-#include <arm/arm32/katelib.h>
-
 #include <machine/pcb.h>
 #if defined(DDB) || defined(KGDB)
 #include <machine/db_machdep.h>

@@ -168,7 +168,7 @@ awin_com_attach(device_t parent, device_t self, void *aux)
 
 	KASSERT(loc->loc_intr != AWINIO_INTR_DEFAULT);
 	asc->asc_ih = intr_establish(loc->loc_intr, IPL_SERIAL,
-	    IST_EDGE /* | IST_MPSAFE */, comintr, sc);
+	    IST_EDGE | IST_MPSAFE, comintr, sc);
 	if (asc->asc_ih == NULL)
 		panic("%s: failed to establish interrupt %d",
 		    device_xname(self), loc->loc_intr);

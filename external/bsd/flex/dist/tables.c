@@ -33,9 +33,10 @@
  *  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
  *  PURPOSE.
  */
+#include "flexdef.h"
+__RCSID("$NetBSD$");
 
 
-#include "flexdef.h"
 #include "tables.h"
 
 /** Convert size_t to t_flag.

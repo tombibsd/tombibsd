@@ -169,6 +169,9 @@ enum fuse_opcode {
 	FUSE_DESTROY       = 38,
 	FUSE_IOCTL         = 39,
 	FUSE_POLL          = 40,
+	FUSE_NOTIFY_REPLY  = 41,
+	FUSE_BATCH_FORGET  = 42,
+	FUSE_FALLOCATE     = 43,
 	FUSE_OPCODE_MAX,
 
 	FUSE_CUSE_INIT     = 4096
@@ -439,6 +442,14 @@ struct fuse_poll_out {
 
 struct fuse_notify_poll_wakeup_out {
 	uint64_t	kh;
+};
+
+struct fuse_fallocate_in {
+	uint64_t	fh;
+	uint64_t	offset;
+	uint64_t	length;
+	uint32_t	mode;
+	uint32_t	padding;
 };
 
 #if 0 /* Duplicated in perfuse.h to avoid making fuse.h public */

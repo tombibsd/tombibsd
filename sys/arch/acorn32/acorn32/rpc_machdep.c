@@ -85,7 +85,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <arm/locore.h>
 #include <arm/undefined.h>
-#include <arm/arm32/katelib.h>
 #include <arm/arm32/machdep.h>
 #include <arm/arm32/pmap.h>
 

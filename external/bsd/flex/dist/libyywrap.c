@@ -22,6 +22,10 @@
 /*  IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED */
 /*  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR */
 /*  PURPOSE. */
+#include <sys/cdefs.h>
+#ifdef __RCSID
+__RCSID("$NetBSD$");
+#endif
 
 int yywrap(void);
 int

@@ -2238,7 +2238,7 @@ uvm_unmap_remove(struct vm_map *map, vaddr_t start, vaddr_t end,
 			uvm_map_unlock_entry(entry);
 		}
 
-#if defined(DEBUG)
+#if defined(UVMDEBUG)
 		/*
 		 * check if there's remaining mapping,
 		 * which is a bug in caller.
@@ -2257,7 +2257,7 @@ uvm_unmap_remove(struct vm_map *map, vaddr_t start, vaddr_t end,
 			uvm_km_check_empty(map, entry->start,
 			    entry->end);
 		}
-#endif /* defined(DEBUG) */
+#endif /* defined(UVMDEBUG) */
 
 		/*
 		 * remove entry from map and put it on our list of entries

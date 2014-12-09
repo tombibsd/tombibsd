@@ -49,6 +49,7 @@
 ./usr/libdata/debug/usr/lib/i18n/libmapper_zone.so.5.0.debug	comp-i18n-debug		debug
 ./usr/libdata/debug/usr/lib/libamu.so.4.0.debug		comp-amd-debug	debug
 ./usr/libdata/debug/usr/lib/libarchive.so.3.1.debug	comp-sys-debug	debug
+./usr/libdata/debug/usr/lib/libasan.so.0.0.debug	comp-krb5-debug	debug,gcc=48
 ./usr/libdata/debug/usr/lib/libasn1.so.9.0.debug	comp-krb5-debug	kerberos,debug
 ./usr/libdata/debug/usr/lib/libatf-c++.so.0.0.debug	comp-atf-debug	atf,debug,obsolete
 ./usr/libdata/debug/usr/lib/libatf-c++.so.1.0.debug	comp-atf-debug	atf,debug

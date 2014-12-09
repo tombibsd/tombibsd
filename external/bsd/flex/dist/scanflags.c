@@ -32,8 +32,8 @@
 /*  IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED */
 /*  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR */
 /*  PURPOSE. */
-
 #include "flexdef.h"
+__RCSID("$NetBSD$");
 
 scanflags_t* _sf_stk = NULL;
 size_t _sf_top_ix=0, _sf_max=0;

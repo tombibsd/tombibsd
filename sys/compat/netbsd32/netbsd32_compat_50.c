@@ -247,30 +247,31 @@ compat_50_netbsd32_adjtime(struct lwp *l,
 		return (error);
 
 	if (SCARG_P32(uap, olddelta)) {
+		mutex_spin_enter(&timecounter_lock);
 		atv.tv_sec = time_adjtime / 1000000;
 		atv.tv_usec = time_adjtime % 1000000;
 		if (atv.tv_usec < 0) {
 			atv.tv_usec += 1000000;
 			atv.tv_sec--;
 		}
-		(void) copyout(&atv,
-			       SCARG_P32(uap, olddelta), 
-			       sizeof(atv));
+		mutex_spin_exit(&timecounter_lock);
+
+		error = copyout(&atv, SCARG_P32(uap, olddelta), sizeof(atv));
 		if (error)
 			return (error);
 	}
 	
 	if (SCARG_P32(uap, delta)) {
-		error = copyin(SCARG_P32(uap, delta), &atv,
-			       sizeof(struct timeval));
+		error = copyin(SCARG_P32(uap, delta), &atv, sizeof(atv));
 		if (error)
 			return (error);
 
+		mutex_spin_enter(&timecounter_lock);
 		time_adjtime = (int64_t)atv.tv_sec * 1000000 + atv.tv_usec;
-
 		if (time_adjtime)
 			/* We need to save the system time during shutdown */
 			time_adjusted |= 1;
+		mutex_spin_exit(&timecounter_lock);
 	}
 
 	return 0;

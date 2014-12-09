@@ -31,6 +31,7 @@
 #define IPV4LL_H
 
 void ipv4ll_start(void *);
+void ipv4ll_claimed(void *);
 void ipv4ll_handle_failure(void *);
 
 #endif

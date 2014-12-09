@@ -89,7 +89,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <machine/signal.h>
 #include <machine/bootconfig.h>
 #include <machine/io.h>
-#include <arm/arm32/katelib.h>
 #include <arm/arm32/machdep.h>
 #include <machine/rtc.h>
 

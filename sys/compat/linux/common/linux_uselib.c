@@ -100,6 +100,11 @@ linux_sys_uselib(struct lwp *l, const struct linux_sys_uselib_args *uap, registe
 	if (error != 0)
 		return error;
 
+	if (vp->v_type != VREG) {
+		error = EINVAL;
+		goto out;
+	}
+
 	if ((error = vn_rdwr(UIO_READ, vp, (void *) &hdr, LINUX_AOUT_HDR_SIZE,
 			     0, UIO_SYSSPACE, IO_NODELOCKED, l->l_cred,
 			     &rem, NULL))) {

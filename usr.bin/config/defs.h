@@ -107,7 +107,7 @@ extern const char *progname;
  * The next two lines define the current version of the config(1) binary,
  * and the minimum version of the configuration files it supports.
  */
-#define CONFIG_VERSION		20141010
+#define CONFIG_VERSION		20141030
 #define CONFIG_MINVERSION	0
 
 /*
@@ -304,8 +304,8 @@ struct devi {
 
 	/* created during packing or ioconf.c generation */
 	short	i_collapsed;	/* set => this alias no longer needed */
-	short	i_cfindex;	/* our index in cfdata */
-	short	i_locoff;	/* offset in locators.vec */
+	u_short	i_cfindex;	/* our index in cfdata */
+	int	i_locoff;	/* offset in locators.vec */
 
 };
 /* special units */
@@ -530,8 +530,8 @@ void	checkfiles(void);
 int	fixfiles(void);		/* finalize */
 int	fixobjects(void);
 int	fixdevsw(void);
-void	addfile(const char *, struct condexpr *, int, const char *);
-void	addobject(const char *, struct condexpr *, int);
+void	addfile(const char *, struct condexpr *, u_char, const char *);
+void	addobject(const char *, struct condexpr *, u_char);
 int	expr_eval(struct condexpr *, int (*)(const char *, void *), void *);
 
 /* hash.c */
@@ -625,7 +625,7 @@ int	mkswap(void);
 void	pack(void);
 
 /* scan.l */
-int	currentline(void);
+u_short	currentline(void);
 int	firstfile(const char *);
 void	package(const char *);
 int	include(const char *, int, int, int);

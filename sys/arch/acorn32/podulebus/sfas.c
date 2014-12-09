@@ -100,7 +100,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <machine/cpu.h>
 #include <machine/io.h>
 #include <machine/intr.h>
-#include <arm/arm32/katelib.h>
 #include <acorn32/podulebus/podulebus.h>
 #include <acorn32/podulebus/sfasreg.h>
 #include <acorn32/podulebus/sfasvar.h>

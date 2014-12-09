@@ -86,6 +86,7 @@ struct dwc_gmac_softc {
 	bus_dma_segment_t sc_dma_ring_seg;	/* and TX ring */
 	struct dwc_gmac_rx_ring sc_rxq;
 	struct dwc_gmac_tx_ring sc_txq;
+	short sc_if_flags;			/* shadow of ether flags */
 	uint16_t sc_mii_clk;
 };
 

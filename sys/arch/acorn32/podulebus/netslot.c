@@ -44,13 +44,17 @@ __KERNEL_RCSID(1, "$NetBSD$");
 #include <sys/device.h>
 #include <uvm/uvm_extern.h>
 #include <machine/io.h>
-#include <arm/arm32/katelib.h>
 #include <machine/intr.h>
 #include <machine/bootconfig.h>
 #include <arm/iomd/iomdreg.h>
 #include <arm/iomd/iomdvar.h>
 #include <dev/podulebus/podulebus.h>
 #include <dev/podulebus/podules.h>
+
+#define WriteByte(a, b) \
+    *((volatile unsigned char *)(a)) = (b)
+#define ReadByte(a) \
+    (*((volatile unsigned char *)(a)))
 
 u_int netslotread(u_int, int);
 

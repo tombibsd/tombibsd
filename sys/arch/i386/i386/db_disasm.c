@@ -204,10 +204,10 @@ const struct inst db_inst_0f3x[] = {
 /*31*/	{ "rdtsc", false, NONE,  0,	      0 },
 /*32*/	{ "rdmsr", false, NONE,  0,	      0 },
 /*33*/	{ "rdpmc", false, NONE,  0,	      0 },
-/*34*/	{ "",	   false, NONE,  0,	      0 },
-/*35*/	{ "",	   false, NONE,  0,	      0 },
+/*34*/	{ "sysenter",false,NONE, 0,	      0 },
+/*35*/	{ "sysexit",false, NONE, 0,	      0 },
 /*36*/	{ "",	   false, NONE,  0,	      0 },
-/*37*/	{ "",	   false, NONE,  0,	      0 },
+/*37*/	{ "getsec",false, NONE,  0,	      0 },
 
 /*38*/	{ "",	   false, NONE,  0,	      0 },
 /*39*/	{ "",	   false, NONE,  0,	      0 },

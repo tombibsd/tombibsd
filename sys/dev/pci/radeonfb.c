@@ -1254,8 +1254,6 @@ radeonfb_mmap(void *v, void *vs, off_t offset, int prot)
 	dp = (struct radeonfb_display *)vd->cookie;
 	sc = dp->rd_softc;
 
-	/* XXX: note that we don't allow mapping of registers right now */
-	/* XXX: this means that the XFree86 radeon driver won't work */
 	if ((offset >= 0) && (offset < (dp->rd_virty * dp->rd_stride))) {
 		pa = bus_space_mmap(sc->sc_memt,
 		    sc->sc_memaddr + dp->rd_offset + offset, 0,
@@ -1263,7 +1261,6 @@ radeonfb_mmap(void *v, void *vs, off_t offset, int prot)
 		return pa;
 	}
 
-#ifdef RADEONFB_MMAP_BARS
 	/*
 	 * restrict all other mappings to processes with superuser privileges
 	 * or the kernel itself
@@ -1301,8 +1298,6 @@ radeonfb_mmap(void *v, void *vs, off_t offset, int prot)
 		return pa;
 	}	
 #endif /* PCI_MAGIC_IO_RANGE */
-
-#endif /* RADEONFB_MMAP_BARS */
 
 	return -1;
 }

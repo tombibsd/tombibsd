@@ -48,7 +48,7 @@
 /cpu_startup.9/1.7/Tue Apr 13 12:04:25 2010/-kk/
 /cpu_switchto.9/1.14/Fri Jun  3 08:06:54 2011/-kk/
 /cpufreq.9/1.6/Thu Oct 27 05:25:08 2011/-kk/
-/csf.9/1.7/Thu Dec  2 12:54:13 2010/-kk/
+/csf.9/1.8/Tue Dec  9 04:15:51 2014/-kk/
 /ctod.9/1.4/Fri Apr  8 07:55:04 2011/-kk/
 /curproc.9/1.5/Thu Jul  1 15:12:31 2010/-kk/
 /ddc.9/1.7/Tue Jan 14 16:04:50 2014/-kk/
@@ -145,7 +145,7 @@
 /optstr.9/1.4/Wed Apr 30 13:10:58 2008/-kk/
 /panic.9/1.21/Tue Jun 12 21:06:43 2012/-kk/
 /pathbuf.9/1.2/Tue Nov 30 10:32:46 2010/-kk/
-/pci.9/1.36/Mon Jan 30 19:20:13 2012/-kk/
+/pci.9/1.38/Tue Dec  9 04:15:51 2014/-kk/
 /pci_configure_bus.9/1.16/Sat Jul 14 05:32:17 2012/-kk/
 /pci_intr.9/1.17/Fri Apr 11 02:03:25 2014/-kk/
 /pckbport.9/1.5/Mon Mar  9 19:24:32 2009/-kk/
@@ -214,7 +214,7 @@
 /tvtohz.9/1.7/Tue Mar 25 02:35:17 2014/-kk/
 /ubc.9/1.7/Tue Jun 14 00:19:20 2011/-kk/
 /ucas.9/1.2/Thu Oct 27 07:23:23 2011/-kk/
-/ucom.9/1.16/Sun Aug  5 01:58:36 2012/-kk/
+/ucom.9/1.17/Tue Dec  9 04:15:51 2014/-kk/
 /uiomove.9/1.17/Mon Apr 26 07:51:36 2010/-kk/
 /usbd_status.9/1.2/Sun May 13 11:57:05 2012/-kk/
 /usbdi.9/1.29/Thu Oct 24 10:28:54 2013/-kk/

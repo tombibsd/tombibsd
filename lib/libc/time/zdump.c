@@ -863,7 +863,7 @@ delta(struct tm *newp, struct tm *oldp)
 
 #ifndef TM_GMTOFF
 /* Return A->tm_yday, adjusted to compare it fairly to B->tm_yday.
-  Assume A and B differ by at most one year.  */
+   Assume A and B differ by at most one year.  */
 static int
 adjusted_yday(struct tm const *a, struct tm const *b)
 {

@@ -30,6 +30,8 @@
 #ifndef _ARM_PIC_PICVAR_H_
 #define _ARM_PIC_PICVAR_H_
 
+#include "opt_multiprocessor.h"
+
 #ifdef MULTIPROCESSOR
 #include <sys/kcpuset.h>
 #endif

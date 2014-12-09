@@ -63,6 +63,8 @@
 ./usr/lib/rv32/libamu.so.4.0			base-compat-shlib	compat,pic,arch64
 ./usr/lib/rv32/libarchive.so.3			base-compat-shlib	compat,pic,arch64
 ./usr/lib/rv32/libarchive.so.3.1		base-compat-shlib	compat,pic,arch64
+./usr/lib/rv32/libasan.so.0			base-compat-shlib	compat,pic,gcc=48
+./usr/lib/rv32/libasan.so.0.0			base-compat-shlib	compat,pic,gcc=48
 ./usr/lib/rv32/libasn1.so.9			base-compat-shlib	compat,pic,kerberos,arch64
 ./usr/lib/rv32/libasn1.so.9.0			base-compat-shlib	compat,pic,kerberos,arch64
 ./usr/lib/rv32/libatf-c++.so.1			base-compat-shlib	compat,pic,atf,arch64

@@ -80,8 +80,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <machine/netbsd32_machdep.h>
 
-int netbsd32_copyinargs(struct exec_package *, struct ps_strings *,
-			void *, size_t, const void *, const void *);
 int ELFNAME2(netbsd32,probe_noteless)(struct lwp *, struct exec_package *epp,
 				      void *eh, char *itp, vaddr_t *pos);
 extern int ELFNAME2(netbsd,signature)(struct lwp *, struct exec_package *,

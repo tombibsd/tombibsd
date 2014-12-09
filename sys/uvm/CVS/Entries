@@ -27,7 +27,7 @@
 /uvm_kmguard.h/1.2/Sun Feb  5 03:40:07 2012/-kk/
 /uvm_loan.c/1.83/Mon Jul 30 23:56:48 2012/-kk/
 /uvm_loan.h/1.17/Wed Feb  2 15:13:34 2011/-kk/
-/uvm_map.c/1.330/Sun Jul 20 13:59:14 2014/-kk/
+/uvm_map.c/1.331/Tue Dec  9 04:16:23 2014/-kk/
 /uvm_map.h/1.72/Mon Oct 29 16:00:05 2012/-kk/
 /uvm_meter.c/1.63/Sat Mar  1 06:05:16 2014/-kk/
 /uvm_mmap.c/1.149/Fri Oct  3 09:51:04 2014/-kk/
@@ -45,7 +45,7 @@
 /uvm_pdpolicy_clock.c/1.17/Mon Jan 30 17:21:52 2012/-kk/
 /uvm_pdpolicy_clockpro.c/1.17/Mon Jun 20 23:18:58 2011/-kk/
 /uvm_pdpolicy_impl.h/1.2/Fri Sep 15 15:51:13 2006/-kk/
-/uvm_pglist.c/1.66/Fri Oct  3 09:51:04 2014/-kk/
+/uvm_pglist.c/1.67/Tue Dec  9 04:16:23 2014/-kk/
 /uvm_pglist.h/1.8/Sat Nov  6 15:48:00 2010/-kk/
 /uvm_pmap.h/1.38/Thu Oct 24 10:28:58 2013/-kk/
 /uvm_prot.h/1.4/Sun Dec 11 12:25:29 2005/-kk/

@@ -180,7 +180,7 @@ ffs_snapshot_cb(kauth_cred_t cred, kauth_action_t action, void *cookie,
     void *arg0, void *arg1, void *arg2, void *arg3)
 {
 	vnode_t *vp = arg2;
-	int result = KAUTH_RESULT_DEFER;;
+	int result = KAUTH_RESULT_DEFER;
 
 	if (action != KAUTH_SYSTEM_FS_SNAPSHOT)
 		return result;
@@ -974,7 +974,7 @@ ffs_mountfs(struct vnode *devvp, struct mount *mp, struct lwp *l)
 			continue;
 
 		/* Validate size of superblock */
-		if (sbsize > MAXBSIZE || sbsize < sizeof(struct fs))
+		if (sbsize > SBLOCKSIZE || sbsize < sizeof(struct fs))
 			continue;
 
 		/* Check that we can handle the file system blocksize */

@@ -32,9 +32,10 @@
 /*  IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED */
 /*  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR */
 /*  PURPOSE. */
+#include "flexdef.h"
+__RCSID("$NetBSD$");
 
 #include <ctype.h>
-#include "flexdef.h"
 #include "parse.h"
 
 

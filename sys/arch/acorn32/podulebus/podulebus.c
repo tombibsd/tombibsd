@@ -52,7 +52,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/device.h>
 #include <uvm/uvm_extern.h>
 #include <machine/io.h>
-#include <arm/arm32/katelib.h>
 #include <machine/intr.h>
 #include <machine/bootconfig.h>
 #include <machine/pmap.h>
@@ -63,6 +62,11 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <dev/podulebus/podule_data.h>
 
 #include "locators.h"
+
+#define WriteByte(a, b) \
+    *((volatile unsigned char *)(a)) = (b)
+#define ReadByte(a) \
+    (*((volatile unsigned char *)(a)))
 
 /* Array of podule structures, one per possible podule */
 

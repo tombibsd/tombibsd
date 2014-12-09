@@ -1,5 +1,3 @@
-/*	$NetBSD$	*/
-
 /* ccl - routines for character classes */
 
 /*  Copyright (c) 1990 The Regents of the University of California. */
@@ -32,8 +30,9 @@
 /*  IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED */
 /*  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR */
 /*  PURPOSE. */
-
 #include "flexdef.h"
+__RCSID("$NetBSD$");
+
 
 /* return true if the chr is in the ccl. Takes negation into account. */
 static bool

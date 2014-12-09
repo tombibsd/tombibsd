@@ -78,9 +78,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <machine/frame.h>
 #include <machine/netbsd32_machdep.h>
 
-int netbsd32_copyinargs(struct exec_package *, struct ps_strings *,
-			     void *, size_t, const void *, const void *);
-
 /*
  * exec_netbsd32_makecmds(): Check if it's an netbsd32 a.out format
  * executable.

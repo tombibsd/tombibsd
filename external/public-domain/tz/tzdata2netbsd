@@ -13,8 +13,8 @@
 #    redo non-trivial work done by earlier runs.
 #
 
-OLDVER=2014f
-NEWVER=2014g
+OLDVER=2014h
+NEWVER=2014i
 
 # Uppercase variants of OLDVER and NEWVER
 OLDVER_UC="$( echo "${OLDVER}" | tr '[a-z]' '[A-Z]' )"
@@ -216,7 +216,7 @@ EOF
 			goodsection = 0;
 			havesentence = 0;
 			print "Import tzdata"newver" from "disturl;
-			print "and NEWS file from "newsurl;
+			#print "and NEWS file from "newsurl;
 		}
 		/^Release/ {
 			# "Release <version> - <date>"

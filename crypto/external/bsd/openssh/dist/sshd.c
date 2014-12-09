@@ -287,7 +287,7 @@ close_startup_pipes(void)
  */
 
 /*ARGSUSED*/
-__dead static void
+static void
 sighup_handler(int sig)
 {
 	int save_errno = errno;

@@ -239,7 +239,7 @@ xor64(uint8_t *dp, int di, uint8_t *sp, int si)
     memcpy(dp + sizeof(dst) * di, &dst, sizeof(dst));
 }
 
-static inline void
+__unused static inline void
 xor32(uint8_t *dp, int di, uint8_t *sp, int si)
 {
     uint32_t dst, src;

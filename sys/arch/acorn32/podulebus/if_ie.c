@@ -71,7 +71,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/device.h>
 #include <machine/io.h>
 #include <machine/intr.h>
-#include <arm/arm32/katelib.h>
 #include <acorn32/podulebus/podulebus.h>
 #include <dev/podulebus/podules.h>
 
