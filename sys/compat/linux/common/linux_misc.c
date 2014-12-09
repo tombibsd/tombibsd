@@ -928,7 +928,7 @@ linux_sys_ppoll(struct lwp *l,
 {
 	/* {
 		syscallarg(struct pollfd *) fds;
-		syscallarg(int) nfds;
+		syscallarg(u_int) nfds;
 		syscallarg(struct linux_timespec *) timeout;
 		syscallarg(linux_sigset_t *) sigset;
 	} */

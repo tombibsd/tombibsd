@@ -454,8 +454,8 @@ re_diag(struct rtk_softc *sc)
 	/* Put some data in the mbuf */
 
 	eh = mtod(m0, struct ether_header *);
-	memcpy(eh->ether_dhost, (char *)&dst, ETHER_ADDR_LEN);
-	memcpy(eh->ether_shost, (char *)&src, ETHER_ADDR_LEN);
+	memcpy(eh->ether_dhost, &dst, ETHER_ADDR_LEN);
+	memcpy(eh->ether_shost, &src, ETHER_ADDR_LEN);
 	eh->ether_type = htons(ETHERTYPE_IP);
 	m0->m_pkthdr.len = m0->m_len = ETHER_MIN_LEN - ETHER_CRC_LEN;
 
@@ -517,8 +517,8 @@ re_diag(struct rtk_softc *sc)
 
 	/* Test that the received packet data matches what we sent. */
 
-	if (memcmp((char *)&eh->ether_dhost, (char *)&dst, ETHER_ADDR_LEN) ||
-	    memcmp((char *)&eh->ether_shost, (char *)&src, ETHER_ADDR_LEN) ||
+	if (memcmp(&eh->ether_dhost, &dst, ETHER_ADDR_LEN) ||
+	    memcmp(&eh->ether_shost, &src, ETHER_ADDR_LEN) ||
 	    ntohs(eh->ether_type) != ETHERTYPE_IP) {
 		aprint_error_dev(sc->sc_dev, "WARNING, DMA FAILURE!\n"
 		    "expected TX data: %s/%s/0x%x\n"

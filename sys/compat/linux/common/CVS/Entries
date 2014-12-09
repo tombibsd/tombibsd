@@ -6,7 +6,7 @@
 /linux_dirent.h/1.12/Sat Sep 11 20:53:04 2010/-kk/
 /linux_emuldata.h/1.18/Tue Nov  2 18:18:07 2010/-kk/
 /linux_errno.c/1.15/Wed Jan  1 02:45:27 2014/-kk/
-/linux_errno.h/1.14/Wed Dec 25 07:37:37 2013/-kk/
+/linux_errno.h/1.15/Tue Dec  9 04:43:45 2014/-kk/
 /linux_errno_generic.h/1.1/Tue Dec 17 22:14:24 2013/-kk/
 /linux_exec.c/1.117/Tue Dec  9 04:23:58 2014/-kk/
 /linux_exec.h/1.51/Sat Mar  1 06:04:36 2014/-kk/
@@ -34,7 +34,7 @@
 /linux_limit.h/1.6/Sat Sep 22 22:34:02 2012/-kk/
 /linux_llseek.c/1.34/Tue Dec  9 04:23:58 2014/-kk/
 /linux_machdep.h/1.19/Wed Jul  7 01:30:35 2010/-kk/
-/linux_misc.c/1.229/Tue Jun  3 03:09:42 2014/-kk/
+/linux_misc.c/1.230/Tue Dec  9 04:43:45 2014/-kk/
 /linux_misc.h/1.24/Tue Nov 26 03:29:51 2013/-kk/
 /linux_misc_notalpha.c/1.109/Tue Dec  9 04:23:58 2014/-kk/
 /linux_mmap.h/1.21/Mon Apr 28 20:23:43 2008/-kk/
@@ -67,7 +67,7 @@
 /linux_signal.c/1.76/Tue Dec  9 04:23:58 2014/-kk/
 /linux_signal.h/1.30/Fri May 29 14:19:13 2009/-kk/
 /linux_signo.c/1.6/Mon Apr 28 20:23:44 2008/-kk/
-/linux_socket.c/1.120/Tue Dec  9 04:23:58 2014/-kk/
+/linux_socket.c/1.122/Tue Dec  9 04:43:45 2014/-kk/
 /linux_socket.h/1.22/Thu Feb 13 15:22:27 2014/-kk/
 /linux_socket_generic.h/1.1/Sat Jan 25 13:49:27 2014/-kk/
 /linux_socketcall.c/1.45/Tue Dec  9 04:23:58 2014/-kk/

@@ -578,7 +578,7 @@ build_kernels: .PHONY
 .for configfile in ${ALL_KERNELS}					# {
 build_kernels: kern-${configfile}
 kern-${configfile}: .PHONY .MAKE
-	cd ${KERNCONFDIR} && ${TOOL_CONFIG} -s ${KERNSRCDIR} \
+	cd ${KERNCONFDIR} && ${TOOL_CONFIG} ${CONFIGOPTS} -s ${KERNSRCDIR} \
 	    -U DEBUG -b ${KERNOBJDIR}/${configfile:C/.*\///} ${configfile}
 .if ${MKUPDATE} == "no"
 	cd ${KERNOBJDIR}/${configfile:C/.*\///} && ${MAKE} distclean

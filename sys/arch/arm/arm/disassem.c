@@ -320,7 +320,7 @@ static void disassemble_printaddr(u_int address);
 vaddr_t
 disasm(const disasm_interface_t *di, vaddr_t loc, int altfmt)
 {
-	struct arm32_insn *i_ptr = (struct arm32_insn *)&arm32_i;
+	const struct arm32_insn *i_ptr = (const struct arm32_insn *)&arm32_i;
 
 	u_int insn;
 	int matchp;

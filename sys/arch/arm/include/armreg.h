@@ -225,6 +225,7 @@
 #define CPU_ID_CORTEXA9R4	0x413fc090
 #define CPU_ID_CORTEXA15R2	0x412fc0f0
 #define CPU_ID_CORTEXA15R3	0x413fc0f0
+#define CPU_ID_CORTEXA17R1	0x411fc0e0
 #define CPU_ID_CORTEX_P(n)	((n & 0xff0ff000) == 0x410fc000)
 #define CPU_ID_CORTEX_A5_P(n)	((n & 0xff0ff0f0) == 0x410fc050)
 #define CPU_ID_CORTEX_A7_P(n)	((n & 0xff0ff0f0) == 0x410fc070)

@@ -408,7 +408,7 @@ fpudna(struct trapframe *frame)
 	/* Save our state if on a remote CPU. */
 	if (pcb->pcb_fpcpu != NULL) {
 		/* Explicitly disable preemption before dropping spl. */
-		KPREEMPT_DISABLE(l);
+		kpreempt_disable();
 		splx(s);
 
 		/* Actually enable interrupts */
@@ -417,7 +417,7 @@ fpudna(struct trapframe *frame)
 		fpusave_lwp(l, true);
 		KASSERT(pcb->pcb_fpcpu == NULL);
 		s = splhigh();
-		KPREEMPT_ENABLE(l);
+		kpreempt_enable();
 	}
 
 	/*

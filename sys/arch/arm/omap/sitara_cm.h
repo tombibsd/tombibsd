@@ -59,8 +59,8 @@ struct sitara_cm_padstate {
 struct sitara_cm_device {
 	uint16_t			padconf_muxmode_mask;
 	uint16_t			padconf_sate_mask;
-	struct sitara_cm_padstate	*padstate;
-	struct sitara_cm_padconf		*padconf;
+	const struct sitara_cm_padstate	*padstate;
+	const struct sitara_cm_padconf	*padconf;
 };
 
 int sitara_cm_padconf_set(const char *padname, const char *muxmode, 

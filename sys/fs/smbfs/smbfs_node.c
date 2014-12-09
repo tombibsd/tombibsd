@@ -197,10 +197,10 @@ allocnew:
 		    || memcmp(name, np2->n_name, nmlen) != 0)
 			continue;
 		mutex_exit(&smp->sm_hashlock);
-		pool_put(&smbfs_node_pool, np);
-		ungetnewvnode(vp);
 		if ((np->n_flag & NREFPARENT) != 0)
 			vrele(dvp);
+		ungetnewvnode(vp);
+		pool_put(&smbfs_node_pool, np);
 		goto retry;
 	}
 

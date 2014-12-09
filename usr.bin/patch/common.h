@@ -43,6 +43,7 @@
 #define INITHUNKMAX 125		/* initial dynamic allocation size */
 #define MAXLINELEN 8192
 #define BUFFERSIZE 1024
+#define LINENUM_MAX LONG_MAX
 
 #define SCCSPREFIX "s."
 #define GET "get -e %s"

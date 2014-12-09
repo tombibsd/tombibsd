@@ -415,6 +415,7 @@ extern device_t booted_device;		/* the device we booted from */
 extern int booted_partition;		/* the partition on that device */
 extern daddr_t booted_startblk;		/* or the start of a wedge */
 extern uint64_t booted_nblks;		/* and the size of that wedge */
+extern char *bootspec;			/* and the device/wedge name */
 
 struct vnode *opendisk(device_t);
 int getdisksize(struct vnode *, uint64_t *, unsigned int *);

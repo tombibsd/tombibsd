@@ -464,6 +464,9 @@ rshrcmd(int af, char **ahost, u_int32_t rport, const char *locuser,
 			const char *program;
 			program = strrchr(rshcmd, '/');
 			program = program ? program + 1 : rshcmd;
+			if (fd2p)
+				/* ask rcmd to relay signal information */
+				setenv("RCMD_RELAY_SIGNAL", "YES", 1);
 			switch (af) {
 			case AF_INET:
 				execlp(rshcmd, program, "-4", "-l", remuser,

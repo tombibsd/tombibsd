@@ -69,7 +69,7 @@ const char *s_none;
 static struct hashtab *cfhashtab;	/* for config lookup */
 struct hashtab *devitab;		/* etc */
 struct attr allattr;
-int nattrs;
+size_t nattrs;
 
 static struct attr errattr;
 static struct devbase errdev;

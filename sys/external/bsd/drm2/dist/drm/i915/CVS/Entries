@@ -49,7 +49,7 @@
 /intel_i2c.c/1.4/Sun Jul 20 13:58:55 2014/-kk/
 /intel_lvds.c/1.6/Fri Oct  3 09:50:59 2014/-kk/
 /intel_modes.c/1.1.1.2/Sun Jul 20 13:58:55 2014/-kk/
-/intel_opregion.c/1.7/Tue Dec  9 04:24:03 2014/-kk/
+/intel_opregion.c/1.8/Tue Dec  9 04:43:51 2014/-kk/
 /intel_overlay.c/1.6/Tue Dec  9 04:24:03 2014/-kk/
 /intel_panel.c/1.6/Tue Dec  9 04:24:03 2014/-kk/
 /intel_pm.c/1.5/Fri Oct  3 09:50:59 2014/-kk/

@@ -73,9 +73,8 @@ getsecs(void)
 		days++;
 
 	/* now we have days since Jan 1, 1970. the rest is easy... */
-	return days * SECS_PER_DAY) + (hour * SECS_PER_HOUR)
-	    + (min * SECS_PER_MINUTE) + sec
-	    + (rtc_offset * 60);
+	return (days * SECS_PER_DAY) + (hour * SECS_PER_HOUR)
+	    + (min * SECS_PER_MINUTE) + sec + (rtc_offset * 60);
 }
 
 void

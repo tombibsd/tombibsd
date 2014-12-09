@@ -3571,8 +3571,6 @@ ifnet_detach(softc_t *sc)
 
   IFQ_PURGE(&sc->ifp->if_snd);
 
-  if_free_sadl(sc->ifp);
-
   if_detach(sc->ifp);
 
   }

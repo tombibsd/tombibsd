@@ -707,9 +707,6 @@ ieee1394_ifdetach(struct ifnet *ifp)
 	bpf_detach(ifp);
 	free(__UNCONST(ifp->if_broadcastaddr), M_DEVBUF);
 	ifp->if_broadcastaddr = NULL;
-#if 0	/* done in if_detach() */
-	if_free_sadl(ifp);
-#endif
 }
 
 int

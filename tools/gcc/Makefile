@@ -181,6 +181,10 @@ NATIVE_CONFIGURE_ARGS+= --enable-tls
 NATIVE_CONFIGURE_ARGS+=	--enable-initfini-array
 .endif
 
+.if ${MACHINE_ARCH} == "m68000"
+NATIVE_CONFIGURE_ARGS+= --disable-shared
+.endif
+
 NATIVE_CONFIGURE_ARGS+=	\
 			--disable-multilib \
 			--disable-symvers \

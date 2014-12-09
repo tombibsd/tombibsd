@@ -38,6 +38,7 @@
 #include <netinet/in_systm.h>
 #include <lib/libsa/net.h>
 
+#include <dev/clock_subr.h>
 #include <dev/ic/mc146818reg.h>
 
 #include <mips/cpuregs.h>

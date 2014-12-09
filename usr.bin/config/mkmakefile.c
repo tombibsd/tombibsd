@@ -364,18 +364,18 @@ static void weighattr(struct attr *a);
 static int attrcmp(const void *l, const void *r);
 
 struct attr **attrbuf;
-int attridx;
+size_t attridx;
 
 static void
 emitallkobjs(FILE *fp)
 {
-	int i;
+	size_t i;
 
-	attrbuf = emalloc((size_t)nattrs * sizeof(attrbuf));
+	attrbuf = emalloc(nattrs * sizeof(*attrbuf));
 
 	ht_enumerate(attrtab, emitallkobjsweighcb, NULL);
 	ht_enumerate(attrtab, emitallkobjscb, NULL);
-	qsort(attrbuf, (size_t)attridx, sizeof(struct attr *), attrcmp);
+	qsort(attrbuf, attridx, sizeof(struct attr *), attrcmp);
 
 	fputs("OBJS= \\\n", fp);
 	for (i = 0; i < attridx; i++)
@@ -398,7 +398,7 @@ emitallkobjscb(const char *name, void *v, void *arg)
 	/* XXX nattrs tracking is not exact yet */
 	if (attridx == nattrs) {
 		nattrs *= 2;
-		attrbuf = erealloc(attrbuf, (size_t)nattrs * sizeof(attrbuf));
+		attrbuf = erealloc(attrbuf, nattrs * sizeof(*attrbuf));
 	}
 	return 0;
 }

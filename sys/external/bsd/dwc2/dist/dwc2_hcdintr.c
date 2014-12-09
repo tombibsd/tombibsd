@@ -1211,21 +1211,21 @@ static void dwc2_hc_nak_intr(struct dwc2_hsotg *hsotg,
 			 chnum);
 
 	/*
-	 * When we get control/bulk NAKs then remember this so we holdoff on
-	 * this qh until the beginning of the next frame
-	 */
-	switch (dwc2_hcd_get_pipe_type(&qtd->urb->pipe_info)) {
-	case USB_ENDPOINT_XFER_CONTROL:
-	case USB_ENDPOINT_XFER_BULK:
-		chan->qh->nak_frame = dwc2_hcd_get_frame_number(hsotg);
-		break;
-	}
-
-	/*
 	 * Handle NAK for IN/OUT SSPLIT/CSPLIT transfers, bulk, control, and
 	 * interrupt. Re-start the SSPLIT transfer.
 	 */
 	if (chan->do_split) {
+		/*
+		 * When we get control/bulk NAKs then remember this so we holdoff on
+		 * this qh until the beginning of the next frame
+		 */
+		switch (dwc2_hcd_get_pipe_type(&qtd->urb->pipe_info)) {
+		case USB_ENDPOINT_XFER_CONTROL:
+		case USB_ENDPOINT_XFER_BULK:
+			chan->qh->nak_frame = dwc2_hcd_get_frame_number(hsotg);
+			break;
+		}
+
 		if (chan->complete_split)
 			qtd->error_count = 0;
 		qtd->complete_split = 0;

@@ -254,7 +254,7 @@ int		npf_table_flush(npf_table_t *);
 npf_ruleset_t *	npf_ruleset_create(size_t);
 void		npf_ruleset_destroy(npf_ruleset_t *);
 void		npf_ruleset_insert(npf_ruleset_t *, npf_rule_t *);
-void		npf_ruleset_reload(npf_ruleset_t *, npf_ruleset_t *);
+void		npf_ruleset_reload(npf_ruleset_t *, npf_ruleset_t *, bool);
 npf_rule_t *	npf_ruleset_sharepm(npf_ruleset_t *, npf_natpolicy_t *);
 npf_natpolicy_t *npf_ruleset_findnat(npf_ruleset_t *, uint64_t);
 void		npf_ruleset_freealg(npf_ruleset_t *, npf_alg_t *);

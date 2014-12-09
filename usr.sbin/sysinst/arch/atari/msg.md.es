@@ -58,7 +58,8 @@ particiones a NetBSD antes de que NetBSD pueda usar el disco. Cambie la 'id'
 de todas las particiones en las que quiera usar sistemas de archivos NetBSD
 a 'NBD'. Cambie la 'id' de la partición en la que quiera usar swap a 'SWP'.
 
-Quiere un particionaje compatible con AHDI? }
+Quiere un particionaje compatible con AHDI?
+}
 
 message set_kernel_1
 {Núcleo (ATARITT)}

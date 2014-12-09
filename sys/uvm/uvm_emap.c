@@ -298,12 +298,12 @@ uvm_emap_consume(u_int gen)
 	 * This test assumes two's complement arithmetic and allows
 	 * ~2B missed updates before it will produce bad results.
 	 */
-	KPREEMPT_DISABLE(l);
+	kpreempt_disable();
 	ci = l->l_cpu;
 	ucpu = ci->ci_data.cpu_uvm;
 	if (__predict_true((signed int)(ucpu->emap_gen - gen) >= 0)) {
 		l->l_emap_gen = ucpu->emap_gen;
-		KPREEMPT_ENABLE(l);
+		kpreempt_enable();
 		return;
 	}
 
@@ -329,7 +329,7 @@ uvm_emap_consume(u_int gen)
 	ucpu->emap_gen = curgen;
 	l->l_emap_gen = curgen;
 	KASSERT((signed int)(curgen - gen) >= 0);
-	KPREEMPT_ENABLE(l);
+	kpreempt_enable();
 }
 
 /*

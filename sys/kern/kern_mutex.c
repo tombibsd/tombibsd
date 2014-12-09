@@ -534,7 +534,7 @@ mutex_vector_enter(kmutex_t *mtx)
 			continue;
 		}
 		if (__predict_false(panicstr != NULL)) {
-			kpreempt_enable();
+			KPREEMPT_ENABLE(curlwp);
 			return;
 		}
 		if (__predict_false(MUTEX_OWNER(owner) == curthread)) {

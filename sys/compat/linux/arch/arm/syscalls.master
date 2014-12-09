@@ -531,7 +531,7 @@
 334	STD		{ int|linux_sys||faccessat(int fd, const char *path, \
 			    int amode); }
 335	UNIMPL		pselect6
-336	STD		{ int|linux_sys||ppoll(struct pollfd *fds, int nfds, \
+336	STD		{ int|linux_sys||ppoll(struct pollfd *fds, u_int nfds, \
 			    struct linux_timespec *timeout, \
 			    linux_sigset_t *sigset); }
 337	UNIMPL		unshare

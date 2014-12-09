@@ -18,7 +18,7 @@
 /ufs_lookup.c/1.132/Mon Jun  9 00:29:36 2014/-kk/
 /ufs_quota.c/1.117/Sun Jul 20 13:08:42 2014/-kk/
 /ufs_quota.h/1.22/Sun Jul 20 13:08:42 2014/-kk/
-/ufs_quota1.c/1.20/Tue Jun  3 03:10:03 2014/-kk/
+/ufs_quota1.c/1.21/Tue Dec  9 04:43:56 2014/-kk/
 /ufs_quota2.c/1.39/Sun Jul 20 13:08:42 2014/-kk/
 /ufs_readwrite.c/1.107/Thu Oct 24 10:28:58 2013/-kk/
 /ufs_rename.c/1.11/Tue Jun  3 03:10:03 2014/-kk/

@@ -152,6 +152,7 @@ void	in_pcbnotifyall(struct inpcbtable *, struct in_addr, int,
 	    void (*)(struct inpcb *, int));
 void	in_pcbpurgeif0(struct inpcbtable *, struct ifnet *);
 void	in_pcbpurgeif(struct inpcbtable *, struct ifnet *);
+void	in_purgeifmcast(struct ip_moptions *, struct ifnet *);
 void	in_pcbstate(struct inpcb *, int);
 void	in_rtchange(struct inpcb *, int);
 void	in_setpeeraddr(struct inpcb *, struct mbuf *);

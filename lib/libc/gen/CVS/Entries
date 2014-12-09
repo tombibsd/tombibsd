@@ -194,7 +194,7 @@
 /nlist_elf32.c/1.35/Wed Mar 21 02:18:14 2012/-kk/
 /nlist_elf64.c/1.6/Sat Jul 26 19:24:43 2003/-kk/
 /nlist_private.h/1.22/Tue Mar 20 16:36:05 2012/-kk/
-/opendir.c/1.38/Sat Oct 15 23:00:01 2011/-kk/
+/opendir.c/1.39/Tue Dec  9 04:43:24 2014/-kk/
 /pause.3/1.15/Thu Aug  7 16:42:55 2003/-kk/
 /pause.c/1.11/Sun Jun 24 15:26:03 2012/-kk/
 /popen.3/1.18/Mon Jun 27 08:21:07 2011/-kk/

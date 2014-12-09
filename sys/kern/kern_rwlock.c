@@ -334,7 +334,7 @@ rw_vector_enter(krwlock_t *rw, const krw_t op)
 			continue;
 		}
 		if (__predict_false(panicstr != NULL)) {
-			kpreempt_enable();
+			KPREEMPT_ENABLE(curlwp);
 			return;
 		}
 		if (__predict_false(RW_OWNER(rw) == curthread)) {

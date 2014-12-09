@@ -76,7 +76,7 @@
 	/*								\
 	 * Restore registers that were trashed during mcount		\
 	 */								\
-	__asm("pop	{r0-r3, pc}");					\
+	__asm("pop	{r0-r3, lr, pc}");				\
 	__asm(".size	" MCOUNT_ASM_NAME ", .-" MCOUNT_ASM_NAME);
 #elif defined(__ARM_DWARF_EH__)
 #define	MCOUNT								\

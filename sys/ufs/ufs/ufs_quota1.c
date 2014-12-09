@@ -860,7 +860,7 @@ dq1sync(struct vnode *vp, struct dquot *dq)
 	aiov.iov_base = (void *)&dq->dq_un.dq1_dqb;
 	aiov.iov_len = sizeof (struct dqblk);
 	auio.uio_resid = sizeof (struct dqblk);
-	auio.uio_offset = (off_t)(dq->dq_id * sizeof (struct dqblk));
+	auio.uio_offset = (off_t)dq->dq_id * sizeof (struct dqblk);
 	auio.uio_rw = UIO_WRITE;
 	UIO_SETUP_SYSSPACE(&auio);
 	error = VOP_WRITE(dqvp, &auio, 0, dq->dq_ump->um_cred[dq->dq_type]);

@@ -18,7 +18,8 @@
 CONFIGDEP=${TOOL_CONFIG}
 .endif
 ioconf.c: ${IOCONF} ${CONFIGDEP}
-	${TOOL_CONFIG} -b ${.OBJDIR} -s ${S} ${IOCONFDIR:U${.CURDIR}}/${IOCONF}
+	${TOOL_CONFIG} ${CONFIGOPTS} -b ${.OBJDIR} -s ${S} \
+	    ${IOCONFDIR:U${.CURDIR}}/${IOCONF}
 	# config doesn't change the files if they're unchanged.  however,
 	# here we want to satisfy our make dependency, so force a
 	# timestamp update

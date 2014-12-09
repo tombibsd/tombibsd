@@ -337,4 +337,4 @@ pseudo-device	pty			# pseudo-terminals
 pseudo-device	ksyms			# /dev/ksyms
 pseudo-device	lockstat		# lock profiling
 
-cinclude "arch/evbarm/conf/CUBIEBOARD.local"
+cinclude "arch/evbarm/conf/BPI.local"

@@ -695,7 +695,7 @@ eagain:
 	/* let the user know how much data was returned */
 	if (crp->crp_olen) {
 		if (crp->crp_olen > (cop->dst_len ? cop->dst_len : cop->len)) {
-			error = ENOMEM;
+			error = ENOSPC;
 			goto bail;
 		}
 		dst_len = cop->dst_len = crp->crp_olen;

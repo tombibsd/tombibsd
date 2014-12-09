@@ -541,6 +541,7 @@ bozo_read_request(bozohttpd_t *httpd)
 	request->hr_virthostname = NULL;
 	request->hr_file = NULL;
 	request->hr_oldfile = NULL;
+	bozo_auth_init(request);
 
 	slen = sizeof(ss);
 	if (getpeername(0, (struct sockaddr *)(void *)&ss, &slen) < 0)
@@ -1093,8 +1094,8 @@ check_virtual(bozo_httpreq_t *request)
 				}
 				debug((httpd, DEBUG_OBESE, "looking at dir``%s''",
 			 	   d->d_name));
-				if (strncasecmp(d->d_name, request->hr_host,
-				    len) == 0) {
+				if (d->d_namlen == len && strcmp(d->d_name,
+				    request->hr_host) == 0) {
 					/* found it, punch it */
 					debug((httpd, DEBUG_OBESE, "found it punch it"));
 					request->hr_virthostname =

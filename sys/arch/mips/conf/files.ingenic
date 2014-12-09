@@ -1,0 +1,6 @@
+#	$NetBSD$
+
+# On-chip UART device
+attach	com at mainbus with com_mainbus
+file	arch/mips/ingenic/ingenic_com.c	com_mainbus
+

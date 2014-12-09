@@ -66,7 +66,7 @@ linux32_syscall(struct trapframe *frame)
 	if (__predict_false(p->p_trace_enabled)) {
 		narg = callp->sy_narg;
 		if (__predict_false(narg > __arraycount(args)))
-			panic("impossible syscall narg, code %d, narg %zd",
+			panic("impossible syscall narg, code %d, narg %zu",
 			    code, narg);
 		for (i = 0; i < narg; i++)
 			args64[i] = args[i] & 0xffffffff;

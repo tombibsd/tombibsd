@@ -1713,5 +1713,7 @@ ip_mloopback(struct ifnet *ifp, struct mbuf *m, const struct sockaddr_in *dst)
 
 	ip->ip_sum = 0;
 	ip->ip_sum = in_cksum(copym, ip->ip_hl << 2);
+	KERNEL_LOCK(1, NULL);
 	(void)looutput(ifp, copym, sintocsa(dst), NULL);
+	KERNEL_UNLOCK_ONE(NULL);
 }

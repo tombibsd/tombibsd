@@ -310,7 +310,7 @@ in_pcbbind_port(struct inpcb *inp, struct sockaddr_in *sin, kauth_cred_t cred)
 		 * and a multicast address is bound on both
 		 * new and duplicated sockets.
 		 */
-		if (so->so_options & SO_REUSEADDR)
+		if (so->so_options & (SO_REUSEADDR | SO_REUSEPORT))
 			reuseport = SO_REUSEADDR|SO_REUSEPORT;
 	} 
 
@@ -698,40 +698,44 @@ in_pcbnotifyall(struct inpcbtable *table, struct in_addr faddr, int errno,
 }
 
 void
+in_purgeifmcast(struct ip_moptions *imo, struct ifnet *ifp)
+{
+	int i, gap;
+
+	if (imo == NULL)
+		return;
+
+	/*
+	 * Unselect the outgoing interface if it is being
+	 * detached.
+	 */
+	if (imo->imo_multicast_ifp == ifp)
+		imo->imo_multicast_ifp = NULL;
+
+	/*
+	 * Drop multicast group membership if we joined
+	 * through the interface being detached.
+	 */
+	for (i = 0, gap = 0; i < imo->imo_num_memberships; i++) {
+		if (imo->imo_membership[i]->inm_ifp == ifp) {
+			in_delmulti(imo->imo_membership[i]);
+			gap++;
+		} else if (gap != 0)
+			imo->imo_membership[i - gap] = imo->imo_membership[i];
+	}
+	imo->imo_num_memberships -= gap;
+}
+
+void
 in_pcbpurgeif0(struct inpcbtable *table, struct ifnet *ifp)
 {
 	struct inpcb_hdr *inph, *ninph;
-	struct ip_moptions *imo;
-	int i, gap;
 
 	TAILQ_FOREACH_SAFE(inph, &table->inpt_queue, inph_queue, ninph) {
 		struct inpcb *inp = (struct inpcb *)inph;
 		if (inp->inp_af != AF_INET)
 			continue;
-		imo = inp->inp_moptions;
-		if (imo != NULL) {
-			/*
-			 * Unselect the outgoing interface if it is being
-			 * detached.
-			 */
-			if (imo->imo_multicast_ifp == ifp)
-				imo->imo_multicast_ifp = NULL;
-
-			/*
-			 * Drop multicast group membership if we joined
-			 * through the interface being detached.
-			 */
-			for (i = 0, gap = 0; i < imo->imo_num_memberships;
-			    i++) {
-				if (imo->imo_membership[i]->inm_ifp == ifp) {
-					in_delmulti(imo->imo_membership[i]);
-					gap++;
-				} else if (gap != 0)
-					imo->imo_membership[i - gap] =
-					    imo->imo_membership[i];
-			}
-			imo->imo_num_memberships -= gap;
-		}
+		in_purgeifmcast(inp->inp_moptions, ifp);
 	}
 }
 

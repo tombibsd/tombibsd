@@ -159,6 +159,7 @@ device_t booted_device;
 int booted_partition;
 daddr_t booted_startblk;
 uint64_t booted_nblks;
+char *bootspec;
 
 /*
  * Use partition letters if it's a disk class but not a wedge.
@@ -207,6 +208,12 @@ setroot(device_t bootdv, int bootpartition)
 		if (bootdv == NULL)
 			panic("Cannot open \"md0\" (root)");
 	}
+
+	/*
+	 * Let bootcode augment "rootspec".
+	 */
+	if (rootspec == NULL)
+		rootspec = bootspec;
 
 	/*
 	 * If NFS is specified as the file system, and we found
@@ -422,7 +429,8 @@ setroot(device_t bootdv, int bootpartition)
 		}
 
 		if (rootdev == NODEV &&
-		    device_class(dv) == DV_DISK && device_is_a(dv, "dk") &&
+		    dv != NULL && device_class(dv) == DV_DISK &&
+		    device_is_a(dv, "dk") &&
 		    (majdev = devsw_name2blk(device_xname(dv), NULL, 0)) >= 0)
 			rootdev = makedev(majdev, device_unit(dv));
 

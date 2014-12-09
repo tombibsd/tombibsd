@@ -722,6 +722,8 @@ icmp6_input(struct mbuf **mp, int *offp, int proto)
 			n->m_pkthdr.rcvif = NULL;
 			n->m_len = 0;
 			maxhlen = M_TRAILINGSPACE(n) - ICMP6_MAXLEN;
+			if (maxhlen < 0)
+				break;
 			if (maxhlen > hostnamelen)
 				maxhlen = hostnamelen;
 			/*

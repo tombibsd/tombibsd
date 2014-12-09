@@ -76,6 +76,7 @@ struct awin_gpio_pinset {
 	uint8_t pinset_func;
 	uint32_t pinset_mask;
 	int pinset_flags;
+	int pinset_drv;
 };
 
 struct awin_gpio_pindata {

@@ -12,7 +12,7 @@ KMOD=	drmkms
 
 # Upstream source files.
 #SRCS+=	ati_pcigart.c		# Moved to drmkms_pci module.
-SRCS+=	drm_agpsupport.c	# Moved to drmkms_pci module.
+#SRCS+=	drm_agpsupport.c	# Moved to drmkms_pci module.
 SRCS+=	drm_auth.c
 SRCS+=	drm_buffer.c
 SRCS+=	drm_bufs.c

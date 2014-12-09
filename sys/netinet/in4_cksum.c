@@ -58,15 +58,16 @@ in4_cksum(struct mbuf *m, u_int8_t nxt, int off, int len)
 	uint32_t sum;
 	uint16_t *w;
 
-	if (__predict_false(off < sizeof(struct ip)))
-		PANIC("%s: offset %d too short for IP header %zu", __func__,
-		    off, sizeof(struct ip));
 	if (__predict_false(m->m_len < sizeof(struct ip)))
 		PANIC("%s: mbuf %d too short for IP header %zu", __func__,
 		    m->m_len, sizeof(struct ip));
 
 	if (nxt == 0)
 		return cpu_in_cksum(m, len, off, 0);
+
+	if (__predict_false(off < sizeof(struct ip)))
+		PANIC("%s: offset %d too short for IP header %zu", __func__,
+		    off, sizeof(struct ip));
 
 	/*
 	 * Compute the equivalent of:

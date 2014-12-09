@@ -66,7 +66,7 @@ static const struct awin_gpio_pinset awin_gige_gpio_pinset = {
 };
 
 static const struct awin_gpio_pinset awin_gige_gpio_pinset_a31 = {
-	'A', AWIN_A31_PIO_PA_GMAC_FUNC, AWIN_A31_PIO_PA_GMAC_PINS,
+	'A', AWIN_A31_PIO_PA_GMAC_FUNC, AWIN_A31_PIO_PA_GMAC_PINS, 0, 3
 };
 
 

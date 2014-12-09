@@ -28,7 +28,7 @@
 /float.h/1.1/Sat Apr 26 18:39:40 2003/-kk/
 /fpu.h/1.14/Thu Feb 27 08:55:37 2014/-kk/
 /frame.h/1.17/Sat Mar  1 06:04:21 2014/-kk/
-/frame_regs.h/1.4/Wed Feb  6 22:02:17 2008/-kk/
+/frame_regs.h/1.5/Tue Dec  9 04:43:36 2014/-kk/
 /frameasm.h/1.20/Sun Jul 15 15:17:56 2012/-kk/
 /gdt.h/1.7/Wed Jul  7 01:14:52 2010/-kk/
 /i82093reg.h/1.5/Thu Jul  3 14:02:25 2008/-kk/

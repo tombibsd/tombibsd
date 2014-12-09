@@ -1048,10 +1048,6 @@ ether_ifdetach(struct ifnet *ifp)
 	}
 	splx(s);
 
-#if 0	/* done in if_detach() */
-	if_free_sadl(ifp);
-#endif
-
 	ifp->if_mowner = NULL;
 	MOWNER_DETACH(&ec->ec_rx_mowner);
 	MOWNER_DETACH(&ec->ec_tx_mowner);

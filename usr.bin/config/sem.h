@@ -88,4 +88,4 @@ int		has_attr(struct attrlist *, const char *);
 extern const char *s_qmark;
 extern const char *s_none;
 extern const char *s_ifnet;
-extern int nattrs;
+extern size_t nattrs;

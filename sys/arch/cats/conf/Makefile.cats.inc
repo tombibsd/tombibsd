@@ -14,6 +14,7 @@ LINKSCRIPT=	-T ${THISARM}/conf/ldscript.elf
 CFLAGS+=	-fno-unwind-tables
 
 LINKSCRIPT=	-T ldscript
+LOADADDRESS=	0xF0000020
 
 SYSTEM_LD_HEAD_EXTRA+=; \
 	( cat ${ARM}/conf/kern.ldscript.head ; \

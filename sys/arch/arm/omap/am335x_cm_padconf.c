@@ -295,8 +295,8 @@ const struct sitara_cm_padconf ti_padconf_devmap[] = {
 const struct sitara_cm_device sitara_cm_dev = {
 	.padconf_muxmode_mask	= 0x7,
 	.padconf_sate_mask	= 0x78,
-	.padstate		= (struct sitara_cm_padstate *) &ti_padstate_devmap,
-	.padconf		= (struct sitara_cm_padconf *) &ti_padconf_devmap,
+	.padstate		= ti_padstate_devmap,
+	.padconf		= ti_padconf_devmap,
 };
 
 int

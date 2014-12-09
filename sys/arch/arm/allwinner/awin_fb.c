@@ -143,11 +143,17 @@ awin_fb_ioctl(void *v, void *vs, u_long cmd, void *data, int flag, lwp_t *l)
 		fbi = data;
 		ri = &sc->sc_gen.vd.active->scr_ri;
 		error = wsdisplayio_get_fbinfo(ri, fbi);
-		if (error == 0)
+		if (error == 0) {
 			fbi->fbi_flags |= WSFB_VRAM_IS_RAM;
+			fbi->fbi_fbsize = sc->sc_dmasegs[0].ds_len;
+		}
 		return error;
 	case WSDISPLAYIO_SVIDEO:
 	case WSDISPLAYIO_GVIDEO:
+	case WSDISPLAYIO_GCURPOS:
+	case WSDISPLAYIO_SCURPOS:
+	case WSDISPLAYIO_GCURMAX:
+	case WSDISPLAYIO_SCURSOR:
 		return awin_debe_ioctl(sc->sc_debedev, cmd, data);
 	default:
 		return EPASSTHROUGH;
@@ -159,7 +165,7 @@ awin_fb_mmap(void *v, void *vs, off_t off, int prot)
 {
 	struct awin_fb_softc *sc = v;
 
-	if (off < 0 || off >= sc->sc_gen.sc_fbsize)
+	if (off < 0 || off >= sc->sc_dmasegs[0].ds_len)
 		return -1;
 
 	return bus_dmamem_mmap(sc->sc_dmat, sc->sc_dmasegs, sc->sc_ndmasegs,

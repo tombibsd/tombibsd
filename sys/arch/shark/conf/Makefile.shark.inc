@@ -8,6 +8,7 @@ GENASSYM_EXTRAS+=	${THISARM}/shark/genassym.cf
 # can load it.
 
 LINKSCRIPT=	-T ldscript
+LOADADDRESS=	0xF0000020
 
 SYSTEM_LD_HEAD_EXTRA+=; \
 	( cat ${ARM}/conf/kern.ldscript.head ; \

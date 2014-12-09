@@ -3689,8 +3689,10 @@
 ./usr/tests/usr.bin/xlint/lint1/d_c99_decls_after_stmt.c	tests-usr.bin-tests	atf
 ./usr/tests/usr.bin/xlint/lint1/d_c99_decls_after_stmt2.c	tests-usr.bin-tests	atf
 ./usr/tests/usr.bin/xlint/lint1/d_c99_decls_after_stmt3.c	tests-usr.bin-tests	atf
+./usr/tests/usr.bin/xlint/lint1/d_c99_flex_array_packed.c	tests-usr.bin-tests	atf
 ./usr/tests/usr.bin/xlint/lint1/d_c99_for_loops.c		tests-usr.bin-tests	atf
 ./usr/tests/usr.bin/xlint/lint1/d_c99_func.c			tests-usr.bin-tests	atf
+./usr/tests/usr.bin/xlint/lint1/d_c99_nested_struct.c		tests-usr.bin-tests	atf
 ./usr/tests/usr.bin/xlint/lint1/d_c99_recursive_init.c		tests-usr.bin-tests	atf
 ./usr/tests/usr.bin/xlint/lint1/d_c99_struct_init.c		tests-usr.bin-tests	atf
 ./usr/tests/usr.bin/xlint/lint1/d_c99_union_init1.c		tests-usr.bin-tests	atf

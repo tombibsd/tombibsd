@@ -72,6 +72,7 @@
 #define	FIFO_RCV_RST	0x02	/* Reset RX FIFO */
 #define	FIFO_XMT_RST	0x04	/* Reset TX FIFO */
 #define	FIFO_DMA_MODE	0x08
+#define	FIFO_UART_ON	0x10	/* JZ47xx only */
 #define	FIFO_64B_ENABLE	0x20	/* 64byte FIFO Enable (16750) */
 #define	FIFO_TRIGGER_1	0x00	/* Trigger RXRDY intr on 1 character */
 #define	FIFO_TRIGGER_4	0x40	/* ibid 4 */

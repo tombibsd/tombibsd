@@ -680,11 +680,11 @@ npf_conn_release(npf_conn_t *con)
 }
 
 /*
- * npf_conn_retnat: return associated NAT data entry and indicate
+ * npf_conn_getnat: return associated NAT data entry and indicate
  * whether it is a "forwards" or "backwards" stream.
  */
 npf_nat_t *
-npf_conn_retnat(npf_conn_t *con, const int di, bool *forw)
+npf_conn_getnat(npf_conn_t *con, const int di, bool *forw)
 {
 	KASSERT(con->c_refcnt > 0);
 	*forw = (con->c_flags & PFIL_ALL) == di;

@@ -108,8 +108,8 @@ axp22x_sensors_refresh(struct sysmon_envsys *sme, envsys_data_t *edata)
 	if (error) {
 		edata->state = ENVSYS_SINVALID;
 	} else {
-		/* between -267.7C and 165.8C, step +0.1C */
-		edata->value_cur = (((buf[0] << 4) | (buf[1] & 0xf)) - 2677)
+		/* between -243.7C and 165.8C, step +0.1C */
+		edata->value_cur = (((buf[0] << 4) | (buf[1] & 0xf)) - 2437)
 				   * 100000 + 273150000;
 		edata->state = ENVSYS_SVALID;
 	}

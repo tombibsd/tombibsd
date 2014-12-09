@@ -172,7 +172,7 @@ crom_parse_text(struct crom_context *cc, char *buf, int len)
 	struct csrtext *textleaf;
 	uint32_t *bp;
 	int i, qlen;
-	static char *nullstr = (char *)&"(null)";
+	static const char nullstr[] = "(null)";
 
 	if (cc->depth < 0)
 		return;

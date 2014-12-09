@@ -554,7 +554,4 @@ token_ifdetach(struct ifnet *ifp)
 {
 
 	bpf_detach(ifp);
-#if 0	/* done in if_detach() */
-	if_free_sadl(ifp);
-#endif
 }

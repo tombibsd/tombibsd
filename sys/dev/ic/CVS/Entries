@@ -28,7 +28,7 @@
 /aha.c/1.61/Sat Nov 13 13:52:00 2010/-kk/
 /ahareg.h/1.15/Sat May 10 11:52:20 2008/-kk/
 /ahavar.h/1.15/Mon Sep 21 08:12:47 2009/-kk/
-/ahcisata_core.c/1.51/Sat Mar  1 06:04:41 2014/-kk/
+/ahcisata_core.c/1.52/Tue Dec  9 04:43:47 2014/-kk/
 /ahcisatareg.h/1.12/Wed Oct 17 23:40:42 2012/-kk/
 /ahcisatavar.h/1.16/Sat Mar  1 06:04:41 2014/-kk/
 /aic6360.c/1.99/Mon Nov 23 02:13:46 2009/-kk/
@@ -158,11 +158,11 @@
 /clmpcc.c/1.51/Tue Dec  9 04:34:57 2014/-kk/
 /clmpccreg.h/1.4/Mon Apr 28 20:23:49 2008/-kk/
 /clmpccvar.h/1.13/Sat Oct 27 17:18:20 2012/-kk/
-/com.c/1.328/Tue Dec  9 04:34:57 2014/-kk/
+/com.c/1.329/Tue Dec  9 04:43:47 2014/-kk/
 /com_cpcbus.c/1.11/Mon Apr 28 20:23:49 2008/-kk/
 /com_upc.c/1.11/Sun Jan 25 14:34:14 2009/-kk/
-/comreg.h/1.22/Thu Oct 24 10:28:57 2013/-kk/
-/comvar.h/1.78/Thu Oct 24 10:28:57 2013/-kk/
+/comreg.h/1.23/Tue Dec  9 04:43:47 2014/-kk/
+/comvar.h/1.79/Tue Dec  9 04:43:47 2014/-kk/
 /cpc700.c/1.19/Fri Jan 27 18:53:07 2012/-kk/
 /cpc700reg.h/1.5/Mon Apr 28 20:23:49 2008/-kk/
 /cpc700uic.h/1.4/Mon Apr 28 20:23:49 2008/-kk/
@@ -193,7 +193,7 @@
 /dl10019.c/1.12/Sun Jul 22 14:32:56 2012/-kk/
 /dl10019reg.h/1.2/Mon Apr 28 20:23:49 2008/-kk/
 /dl10019var.h/1.2/Mon Apr 28 20:23:49 2008/-kk/
-/dm9000.c/1.4/Sat Jan 28 08:29:55 2012/-kk/
+/dm9000.c/1.5/Tue Dec  9 04:43:47 2014/-kk/
 /dm9000reg.h/1.2/Sat Jan 28 08:29:55 2012/-kk/
 /dm9000var.h/1.2/Sat Jan 28 08:29:55 2012/-kk/
 /dp8390.c/1.81/Fri Oct  3 09:25:59 2014/-kk/
@@ -211,9 +211,9 @@
 /ds.h/1.10/Sun Feb 12 16:34:11 2012/-kk/
 /ds1286reg.h/1.8/Sun Dec 11 12:21:26 2005/-kk/
 /ds1687reg.h/1.10/Sun May  4 12:50:38 2008/-kk/
-/dwc_gmac.c/1.24/Tue Dec  9 04:16:12 2014/-kk/
-/dwc_gmac_reg.h/1.12/Tue Dec  9 04:16:12 2014/-kk/
-/dwc_gmac_var.h/1.5/Tue Dec  9 04:16:12 2014/-kk/
+/dwc_gmac.c/1.28/Tue Dec  9 04:43:47 2014/-kk/
+/dwc_gmac_reg.h/1.14/Tue Dec  9 04:43:47 2014/-kk/
+/dwc_gmac_var.h/1.6/Tue Dec  9 04:43:47 2014/-kk/
 /elink3.c/1.135/Fri Oct  3 09:25:59 2014/-kk/
 /elink3reg.h/1.31/Sun Nov  5 05:57:53 2006/-kk/
 /elink3var.h/1.38/Thu Feb  2 19:43:03 2012/-kk/
@@ -259,7 +259,7 @@
 /i8253reg.h/1.9/Sun Dec 11 12:21:26 2005/-kk/
 /i82557.c/1.142/Fri Oct  3 09:25:59 2014/-kk/
 /i82557reg.h/1.25/Fri Sep  2 03:16:19 2011/-kk/
-/i82557var.h/1.50/Thu Feb  2 19:43:03 2012/-kk/
+/i82557var.h/1.51/Tue Dec  9 04:43:47 2014/-kk/
 /i82586.c/1.70/Sat Jul  2 13:13:22 2011/-kk/
 /i82586reg.h/1.13/Mon Apr 28 20:23:50 2008/-kk/
 /i82586var.h/1.23/Fri Jun  3 16:28:40 2011/-kk/
@@ -479,7 +479,7 @@
 /rtl80x9.c/1.16/Sun Jun 22 14:32:15 2014/-kk/
 /rtl80x9reg.h/1.7/Mon Apr 28 20:23:51 2008/-kk/
 /rtl80x9var.h/1.6/Mon Apr 28 20:23:51 2008/-kk/
-/rtl8169.c/1.142/Wed Oct 29 08:13:20 2014/-kk/
+/rtl8169.c/1.143/Tue Dec  9 04:43:48 2014/-kk/
 /rtl8169var.h/1.4/Tue May 12 14:25:18 2009/-kk/
 /rtl81x9.c/1.95/Fri Oct  3 09:26:00 2014/-kk/
 /rtl81x9reg.h/1.46/Sun Oct 19 16:06:46 2014/-kk/

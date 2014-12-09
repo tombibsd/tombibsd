@@ -40,6 +40,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <drm/drm_sysctl.h>
 
+#ifdef SYSCTL_INCLUDE_DESCR
 static const char *
 drm_sysctl_get_description(const struct linux_module_param_info *p,
     const struct drm_sysctl_def *def)
@@ -53,6 +54,7 @@ drm_sysctl_get_description(const struct linux_module_param_info *p,
 	}
 	return NULL;
 }
+#endif
 
 #ifdef notyet
 static uint64_t

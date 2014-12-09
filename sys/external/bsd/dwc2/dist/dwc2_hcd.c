@@ -894,8 +894,7 @@ enum dwc2_transaction_type dwc2_hcd_select_transactions(
 		 * retransmissions to reduce NAK interrupt overhead for
 		 * cheeky devices that just hold off using NAKs.
 		 */
-		if (qh->do_split &&
-		    qh->nak_frame != 0xffff &&
+		if (qh->nak_frame != 0xffff &&
 		    dwc2_full_frame_num(qh->nak_frame) ==
 		    dwc2_full_frame_num(dwc2_hcd_get_frame_number(hsotg))) {
 			qh_ptr = qh_ptr->next;

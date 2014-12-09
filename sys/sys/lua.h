@@ -32,6 +32,8 @@
 #ifndef _SYS_LUA_H_
 #define _SYS_LUA_H_
 
+#include <sys/param.h>
+
 #include <lua.h>		/* for lua_State */
 
 #ifdef _KERNEL

@@ -653,7 +653,7 @@ sysmon_power_make_dictionary(prop_dictionary_t dict, void *power_data,
 
 #define SETPROP(key, str)						\
 do {									\
-	if ((str) && !prop_dictionary_set_cstring(dict,			\
+	if ((str) != NULL && !prop_dictionary_set_cstring(dict,		\
 						  (key),		\
 						  (str))) {		\
 		printf("%s: failed to set %s\n", __func__, (str));	\

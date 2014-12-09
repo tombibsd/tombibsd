@@ -307,7 +307,7 @@ in6_pcbbind_port(struct in6pcb *in6p, struct sockaddr_in6 *sin6, struct lwp *l)
 		 * and a multicast address is bound on both
 		 * new and duplicated sockets.
 		 */
-		if (so->so_options & SO_REUSEADDR)
+		if (so->so_options & (SO_REUSEADDR | SO_REUSEPORT))
 			reuseport = SO_REUSEADDR|SO_REUSEPORT;
 	}
 
@@ -848,6 +848,7 @@ in6_pcbpurgeif0(struct inpcbtable *table, struct ifnet *ifp)
 				}
 			}
 		}
+		in_purgeifmcast(in6p->in6p_v4moptions, ifp);
 	}
 }
 

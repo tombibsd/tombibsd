@@ -12,12 +12,12 @@
 /uvm_ddb.h/1.15/Tue May 17 04:18:07 2011/-kk/
 /uvm_device.c/1.63/Fri Jan 27 19:48:41 2012/-kk/
 /uvm_device.h/1.12/Wed Feb  2 15:13:34 2011/-kk/
-/uvm_emap.c/1.10/Thu Oct 24 10:28:58 2013/-kk/
+/uvm_emap.c/1.11/Tue Dec  9 04:43:56 2014/-kk/
 /uvm_extern.h/1.191/Sun Jul 20 13:26:35 2014/-kk/
 /uvm_fault.c/1.196/Fri Oct  3 09:26:22 2014/-kk/
 /uvm_fault.h/1.20/Wed Feb  2 15:13:34 2011/-kk/
 /uvm_fault_i.h/1.28/Sun Feb 19 00:05:56 2012/-kk/
-/uvm_glue.c/1.160/Sat Sep  1 00:26:37 2012/-kk/
+/uvm_glue.c/1.161/Tue Dec  9 04:43:56 2014/-kk/
 /uvm_glue.h/1.10/Wed Feb  2 15:13:34 2011/-kk/
 /uvm_init.c/1.45/Thu Oct 24 10:28:58 2013/-kk/
 /uvm_io.c/1.27/Fri Jan 27 19:48:41 2012/-kk/

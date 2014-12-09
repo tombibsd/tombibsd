@@ -1634,6 +1634,7 @@ pci_conf_print_pcie_cap(const pcireg_t *regs, int capoff)
 		/* Root Capability Register */
 		printf("    Root Capability Register: %04x\n",
 		    reg >> 16);
+		onoff("CRS Software Visibility", reg, PCIE_RCR_CRS_SV);
 
 		/* Root Status Register */
 		reg = regs[o2i(capoff + PCIE_RSR)];

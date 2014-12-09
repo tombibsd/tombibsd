@@ -58,7 +58,8 @@ partitions to NetBSD before NetBSD is able to use the disk. Change the 'id'
 of all partitions you want to use for NetBSD file systems to 'NBD'. Change
 the 'id' of the partition you wish to use for swap to 'SWP'.
 
-Do you want AHDI compatible partitioning? }
+Do you want AHDI compatible partitioning?
+}
 
 message set_kernel_1
 {Kernel (ATARITT)}

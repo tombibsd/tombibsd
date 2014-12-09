@@ -350,7 +350,7 @@ ohci_detach(struct ohci_softc *sc, int flags)
 	if (rv != 0)
 		return (rv);
 
-	callout_stop(&sc->sc_tmo_rhsc);
+	callout_halt(&sc->sc_tmo_rhsc, &sc->sc_lock);
 
 	usb_delay_ms(&sc->sc_bus, 300); /* XXX let stray task complete */
 	callout_destroy(&sc->sc_tmo_rhsc);

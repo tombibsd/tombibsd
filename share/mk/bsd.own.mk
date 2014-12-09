@@ -576,6 +576,7 @@ OBJCOPY_ELF2AOUT_FLAGS?=	\
 	-R .debug_loc		\
 	-R .debug_pubnames	\
 	-R .debug_pubtypes	\
+	-R .debug_ranges	\
 	-R .debug_str		\
 	-R .eh_frame		\
 	-R .note.netbsd.ident

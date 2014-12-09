@@ -185,7 +185,7 @@
 /if_levar.h/1.9/Mon Apr 28 20:23:55 2008/-kk/
 /if_lii.c/1.13/Fri Apr 11 02:03:48 2014/-kk/
 /if_liireg.h/1.2/Tue Apr 29 06:53:03 2008/-kk/
-/if_lmc.c/1.55/Mon Jun  9 00:29:11 2014/-kk/
+/if_lmc.c/1.56/Tue Dec  9 04:43:49 2014/-kk/
 /if_lmc.h/1.21/Sat Oct 27 17:18:33 2012/-kk/
 /if_malo_pci.c/1.5/Fri Apr 11 02:03:48 2014/-kk/
 /if_msk.c/1.47/Sun Oct 19 16:06:47 2014/-kk/
@@ -232,7 +232,7 @@
 /if_wi_pci.c/1.55/Fri Apr 11 02:03:49 2014/-kk/
 /if_wm.c/1.308/Tue Dec  9 04:34:58 2014/-kk/
 /if_wmreg.h/1.65/Tue Dec  9 04:16:13 2014/-kk/
-/if_wmvar.h/1.21/Sun Oct 19 16:06:47 2014/-kk/
+/if_wmvar.h/1.23/Tue Dec  9 04:43:49 2014/-kk/
 /if_wpi.c/1.68/Fri Oct  3 09:26:02 2014/-kk/
 /if_wpireg.h/1.13/Sun Jul 20 13:26:25 2014/-kk/
 /if_wpivar.h/1.18/Fri Oct  3 09:26:02 2014/-kk/
@@ -312,7 +312,7 @@
 /pci_map.c/1.31/Wed Oct 29 08:13:21 2014/-kk/
 /pci_quirks.c/1.9/Wed Aug 19 16:31:28 2009/-kk/
 /pci_stub.c/1.1/Wed Aug 24 20:27:35 2011/-kk/
-/pci_subr.c/1.132/Tue Dec  9 04:16:13 2014/-kk/
+/pci_subr.c/1.133/Tue Dec  9 04:43:49 2014/-kk/
 /pci_usrreq.c/1.28/Fri Oct  3 09:09:19 2014/-kk/
 /pci_verbose.c/1.9/Fri Oct  3 10:05:14 2014/-kk/
 /pci_verbose.h/1.4/Fri Oct  3 10:05:14 2014/-kk/
@@ -347,7 +347,7 @@
 /pciidereg.h/1.11/Fri Nov 24 22:04:25 2006/-kk/
 /pciidevar.h/1.46/Tue Jul 31 15:50:36 2012/-kk/
 /pciio.h/1.4/Fri Oct  3 09:09:19 2014/-kk/
-/pcireg.h/1.99/Tue Dec  9 04:16:13 2014/-kk/
+/pcireg.h/1.100/Tue Dec  9 04:43:49 2014/-kk/
 /pcivar.h/1.100/Wed Oct 29 08:13:21 2014/-kk/
 /pcscp.c/1.47/Fri Apr 11 02:03:49 2014/-kk/
 /pcscpreg.h/1.2/Mon Apr 28 20:23:55 2008/-kk/

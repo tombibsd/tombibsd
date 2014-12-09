@@ -48,5 +48,11 @@ SRCS =				\
 
 MAN= kadm5_pwcheck.3
 
+MLINKS= \
+        kadm5_pwcheck.3      kadm5_setup_passwd_quality_check.3        \
+        kadm5_pwcheck.3      kadm5_add_passwd_quality_verifier.3        \
+        kadm5_pwcheck.3      kadm5_check_password_quality.3        \
+        kadm5_pwcheck.3      krb5_pwcheck.3        \
+
 .include <${HEIMBASE}/Makefile.rules.inc>
 .include <bsd.lib.mk>

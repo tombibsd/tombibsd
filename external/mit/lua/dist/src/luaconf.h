@@ -13,6 +13,10 @@
 #ifndef _KERNEL
 #include <limits.h>
 #include <stddef.h>
+#else
+/* limits.h */
+#include <machine/limits.h>
+#include <sys/systm.h>
 #endif
 
 
@@ -696,7 +700,6 @@
 #ifndef _KERNEL
 #include <stdint.h>
 #else
-#include <sys/systm.h>
 
 #undef LUA_NUMBER
 #undef LUA_NUMBER_FMT
@@ -722,9 +725,6 @@
 
 #define BUFSIZ			(1024)
 #define sprintf(s,fmt,...)	snprintf(s, sizeof(s), fmt, __VA_ARGS__)
-
-/* limits.h */
-#include <machine/limits.h>
 
 /* string.h */
 #define strcoll strcmp

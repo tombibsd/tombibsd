@@ -3,7 +3,7 @@
 /Lint_ntohl.c/1.4/Wed Aug 22 07:42:09 2001/-kk/
 /Lint_ntohs.c/1.4/Wed Aug 22 07:42:09 2001/-kk/
 /Makefile.inc/1.85/Thu Oct 24 10:28:53 2013/-kk/
-/base64.c/1.14/Mon Jun 25 22:32:44 2012/-kk/
+/base64.c/1.16/Tue Dec  9 04:43:24 2014/-kk/
 /byteorder.3/1.15/Tue May  3 04:07:39 2011/-kk/
 /ethers.3/1.13/Wed Apr 16 13:34:41 2003/-kk/
 /ethers.c/1.25/Fri Oct  3 09:57:25 2014/-kk/
@@ -58,7 +58,7 @@
 /nsparser.y/1.12/Tue Mar 20 17:44:18 2012/-kk/
 /protoent.h/1.2/Mon Apr 28 20:23:00 2008/-kk/
 /rcmd.3/1.28/Mon Mar 22 19:30:54 2010/-kk/
-/rcmd.c/1.70/Fri Oct  3 09:57:25 2014/-kk/
+/rcmd.c/1.71/Tue Dec  9 04:43:24 2014/-kk/
 /recv.c/1.10/Tue Mar 20 17:44:18 2012/-kk/
 /resolver.3/1.28/Mon Nov 18 05:31:22 2013/-kk/
 /rthdr.c/1.18/Tue Mar 13 21:13:42 2012/-kk/

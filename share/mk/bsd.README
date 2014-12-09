@@ -1436,6 +1436,8 @@ CLEANDIRFILES	Additional files to remove for the cleandir target.
 
 CLEANFILES	Additional files to remove for the clean and cleandir targets.
 
+CONFIGOPTS	Additional flags to config(1) when building kernels.
+
 COPTS		Additional flags to the compiler when creating C objects.
 
 COPTS.<fn>	Additional flags to the compiler when creating the

@@ -528,6 +528,9 @@ main(void)
 	/* Now timer is working.  Enable preemption. */
 	kpreempt_enable();
 
+	/* Get the threads going and into any sleeps before continuing. */
+	yield();
+
 	/* Enable deferred processing of RNG samples */
 	rnd_init_softint();
 
@@ -803,9 +806,6 @@ configure2(void)
 	 * devices that want interrupts enabled.
 	 */
 	config_create_interruptthreads();
-
-	/* Get the threads going and into any sleeps before continuing. */
-	yield();
 }
 
 static void
