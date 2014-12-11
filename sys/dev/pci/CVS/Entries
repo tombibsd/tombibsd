@@ -206,7 +206,7 @@
 /if_sf_pci.c/1.20/Fri Apr 11 02:03:49 2014/-kk/
 /if_sip.c/1.158/Fri Oct  3 09:26:02 2014/-kk/
 /if_sipreg.h/1.19/Mon Apr 28 20:23:55 2008/-kk/
-/if_sk.c/1.78/Fri Oct  3 09:26:02 2014/-kk/
+/if_sk.c/1.79/Thu Dec 11 09:09:49 2014/-kk/
 /if_skreg.h/1.15/Sun Oct 19 16:06:47 2014/-kk/
 /if_skvar.h/1.17/Thu Feb  2 19:43:05 2012/-kk/
 /if_ste.c/1.45/Fri Apr 11 02:03:49 2014/-kk/
@@ -358,7 +358,7 @@
 /piixpmreg.h/1.7/Tue Mar 25 02:35:39 2014/-kk/
 /plx9060reg.h/1.1/Wed May 17 17:47:00 2000/-kk/
 /plx9060var.h/1.3/Sun Dec 11 12:22:50 2005/-kk/
-/pm2fb.c/1.25/Thu Oct 24 10:28:58 2013/-kk/
+/pm2fb.c/1.26/Thu Dec 11 09:09:50 2014/-kk/
 /pm2reg.h/1.8/Wed Sep 12 12:07:04 2012/-kk/
 /ppb.c/1.54/Fri Oct  3 10:05:14 2014/-kk/
 /ppbreg.h/1.6/Sun Dec 11 12:22:50 2005/-kk/

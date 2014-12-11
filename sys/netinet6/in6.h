@@ -818,4 +818,10 @@ extern struct in6_addr *inet6_rth_getaddr(const void *, int);
 __END_DECLS
 #endif /* _NETBSD_SOURCE */
 
+#if defined(_KERNEL) || defined(_TEST)
+int	in6_print(char *, size_t, const struct in6_addr *);
+#define IN6_PRINT(b, a) (in6_print((b), sizeof(b), (a)), (b))
+int	sin6_print(char *, size_t, const void *);
+#endif
+
 #endif /* !_NETINET6_IN6_H_ */

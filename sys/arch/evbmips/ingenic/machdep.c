@@ -42,12 +42,11 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/mount.h>
 #include <sys/reboot.h>
 #include <sys/cpu.h>
+#include <sys/bus.h>
 
 #include <uvm/uvm_extern.h>
 
 #include <dev/cons.h>
-
-#include <mips/ingenic/ingenic_regs.h>
 
 #include "ksyms.h"
 
@@ -59,6 +58,9 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <mips/cache.h>
 #include <mips/locore.h>
 #include <mips/cpuregs.h>
+
+#include <mips/ingenic/ingenic_regs.h>
+#include <mips/ingenic/ingenic_var.h>
 
 /* Maps for VM objects. */
 struct vm_map *phys_map = NULL;
@@ -178,6 +180,7 @@ mach_init(void)
 	 */
 	mips_init_lwp0_uarea();
 
+	apbus_init();
 	/*
 	 * Initialize debuggers, and break into them, if appropriate.
 	 */
@@ -278,7 +281,7 @@ cpu_reboot(int howto, char *bootstr)
 	if (boothowto & RB_DUMP)
 		dumpsys();
 
- haltsys:
+haltsys:
 	/* Run any shutdown hooks. */
 	doshutdownhooks();
 
@@ -327,20 +330,4 @@ ingenic_reset(void)
 	writereg(JZ_WDOG_TDR, 128);	/* wait for ~1s */
 	writereg(JZ_WDOG_TCSR, TCSR_RTC_EN | TCSR_DIV_256);
 	writereg(JZ_WDOG_TCER, TCER_ENABLE);	/* fire! */	
-}
-
-void
-evbmips_intr_init(void)
-{
-#if notyet
-	(*platformsw->apsw_intr_init)();
-#endif
-}
-
-void
-evbmips_iointr(int ipl, vaddr_t pc, uint32_t ipending)
-{
-#if notyet
-	(*platformsw->apsw_intrsw->aisw_iointr)(ipl, pc, ipending);
-#endif
 }

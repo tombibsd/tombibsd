@@ -1,9 +1,10 @@
 /Makefile/1.2/Tue Nov 26 23:30:32 2002/-kk/
 /aarp.c/1.36/Tue Jan 31 09:53:44 2012/-kk/
 /aarp.h/1.3/Sun May  8 13:51:31 2011/-kk/
-/at.h/1.7/Sat Dec 10 23:29:05 2005/-kk/
+/at.h/1.8/Thu Dec 11 09:09:54 2014/-kk/
 /at_control.c/1.37/Wed Oct 29 08:13:31 2014/-kk/
 /at_extern.h/1.18/Sun Jul 20 13:26:34 2014/-kk/
+/at_print.c/1.1/Tue Dec  2 19:33:44 2014/-kk/
 /at_proto.c/1.18/Tue Jun  3 02:54:45 2014/-kk/
 /at_rmx.c/1.6/Thu Aug 17 17:11:28 2006/-kk/
 /at_var.h/1.7/Thu Aug 30 02:17:36 2007/-kk/
@@ -13,6 +14,6 @@
 /ddp_private.h/1.2/Mon Apr 28 20:24:09 2008/-kk/
 /ddp_usrreq.c/1.63/Fri Oct  3 09:26:19 2014/-kk/
 /ddp_var.h/1.4/Wed Apr 23 15:17:42 2008/-kk/
-/files.netatalk/1.1/Thu Oct 10 22:10:53 2002/-kk/
+/files.netatalk/1.3/Thu Dec 11 09:09:54 2014/-kk/
 /phase2.h/1.2/Sat Dec 10 23:29:05 2005/-kk/
 D

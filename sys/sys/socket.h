@@ -605,7 +605,7 @@ const struct sockaddr *sockaddr_any_by_family(int);
 const void *sockaddr_anyaddr(const struct sockaddr *, socklen_t *);
 int sockaddr_cmp(const struct sockaddr *, const struct sockaddr *);
 struct sockaddr *sockaddr_dup(const struct sockaddr *, int);
-void sockaddr_format(const struct sockaddr *, char *, size_t);
+int sockaddr_format(const struct sockaddr *, char *, size_t);
 void sockaddr_free(struct sockaddr *);
 __END_DECLS
 #endif /* _KERNEL */

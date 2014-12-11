@@ -2220,7 +2220,10 @@ sk_tick(void *xsc_if)
 	SK_XM_CLRBIT_2(sc_if, XM_IMR, XM_IMR_GP0_SET);
 	SK_XM_READ_2(sc_if, XM_ISR);
 	mii_tick(mii);
-	callout_stop(&sc_if->sk_tick_ch);
+	if (ifp->if_link_state != LINK_STATE_UP)
+		callout_reset(&sc_if->sk_tick_ch, hz, sk_tick, sc_if);
+	else
+		callout_stop(&sc_if->sk_tick_ch);
 }
 
 void
@@ -2872,6 +2875,7 @@ sk_init(struct ifnet *ifp)
 
 	ifp->if_flags |= IFF_RUNNING;
 	ifp->if_flags &= ~IFF_OACTIVE;
+	callout_reset(&sc_if->sk_tick_ch, hz, sk_tick, sc_if);
 
 out:
 	splx(s);

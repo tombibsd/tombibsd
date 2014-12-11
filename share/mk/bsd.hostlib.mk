@@ -7,7 +7,7 @@
 
 ##### Default values
 CFLAGS+=	${COPTS}
-MKDEP_SUFFIXES?=	.o .lo
+MKDEP_SUFFIXES?=	.o .lo .d
 
 # Override these:
 MKDEP:=		${HOST_MKDEP}

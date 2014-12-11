@@ -65,6 +65,7 @@ static const struct {
 	const char *d;
 } gpt_nv[] = {
 	{ GPT_ENT_TYPE_APPLE_HFS, "apple", "Apple HFS" },
+	{ GPT_ENT_TYPE_APPLE_UFS, "apple-ufs", "Apple UFS" },
 	{ GPT_ENT_TYPE_BIOS, "bios", "BIOS Boot" },
 	{ GPT_ENT_TYPE_EFI, "efi", "EFI System" },
 	{ GPT_ENT_TYPE_FREEBSD, "fbsd-legacy", "FreeBSD legacy" },
@@ -73,7 +74,9 @@ static const struct {
 	{ GPT_ENT_TYPE_FREEBSD_VINUM, "fbsd-vinum", "FreeBSD vinum" },
 	{ GPT_ENT_TYPE_FREEBSD_ZFS, "fbsd-zfs", "FreeBSD ZFS" },
 	{ GPT_ENT_TYPE_LINUX_DATA, "linux-data", "Linux data" },
+	{ GPT_ENT_TYPE_LINUX_RAID, "linux-raid", "Linux RAID" },
 	{ GPT_ENT_TYPE_LINUX_SWAP, "linux-swap", "Linux swap" },
+	{ GPT_ENT_TYPE_LINUX_LVM, "linux-lvm", "Linux LVM" },
 	{ GPT_ENT_TYPE_MS_BASIC_DATA, "windows", "Windows basic data" },
 	{ GPT_ENT_TYPE_MS_RESERVED, "windows-reserved", "Windows reserved" },
 	{ GPT_ENT_TYPE_NETBSD_CCD, "ccd", "NetBSD ccd component" },

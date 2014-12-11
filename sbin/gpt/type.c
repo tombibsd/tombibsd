@@ -124,7 +124,7 @@ chtype(int fd)
 			    (char *)utf16_to_utf8(ent->ent_name)) != 0)
 				continue;
 
-		if (!gpt_uuid_is_nil(ent->ent_type) &&
+		if (!gpt_uuid_is_nil(type) &&
 		    !gpt_uuid_equal(type, ent->ent_type))
 			continue;
 

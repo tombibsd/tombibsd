@@ -1,4 +1,5 @@
 /Makefile/1.3/Sun Oct  2 16:39:47 2011/-kk/
+/ac100.c/1.1/Sun Dec  7 14:24:11 2014/-kk/
 /adm1021.c/1.8/Sat Oct 27 17:18:17 2012/-kk/
 /at24cxx.c/1.18/Fri Oct  3 09:09:13 2014/-kk/
 /at24cxxvar.h/1.2/Sun Dec 11 12:21:22 2005/-kk/
@@ -11,6 +12,10 @@
 /au8522var.h/1.4/Sun Jul 10 00:47:34 2011/-kk/
 /axp20x.c/1.2/Tue Sep  9 23:39:16 2014/-kk/
 /axp22x.c/1.2/Tue Dec  9 04:43:47 2014/-kk/
+/axp806.c/1.1/Sun Dec  7 00:33:26 2014/-kk/
+/axp806.h/1.1/Sun Dec  7 00:33:26 2014/-kk/
+/axp809.c/1.1/Sun Dec  7 00:33:26 2014/-kk/
+/axp809.h/1.1/Sun Dec  7 00:33:26 2014/-kk/
 /cx24227.c/1.6/Thu Mar 15 16:20:36 2012/-kk/
 /cx24227var.h/1.1/Thu Aug  4 01:48:34 2011/-kk/
 /dbcool.c/1.41/Fri Oct  3 09:25:59 2014/-kk/
@@ -21,7 +26,7 @@
 /ddcvar.h/1.2/Tue Dec  9 04:34:56 2014/-kk/
 /ds1307.c/1.21/Tue Dec  9 04:34:56 2014/-kk/
 /ds1307reg.h/1.5/Wed Oct 29 08:13:19 2014/-kk/
-/files.i2c/1.58/Wed Oct 29 08:13:19 2014/-kk/
+/files.i2c/1.61/Thu Dec 11 09:09:47 2014/-kk/
 /g760a.c/1.4/Sun Jul 29 07:04:09 2012/-kk/
 /g760areg.h/1.1/Sat Oct  2 06:07:37 2010/-kk/
 /gttwsi_core.c/1.2/Tue Dec  9 04:43:47 2014/-kk/
@@ -30,7 +35,7 @@
 /hytp14.c/1.2/Sun Jul 20 13:08:32 2014/-kk/
 /hytp14reg.h/1.2/Sun Jul 20 13:08:32 2014/-kk/
 /hytp14var.h/1.2/Fri Oct  3 09:25:59 2014/-kk/
-/i2c.c/1.44/Fri Oct  3 09:09:13 2014/-kk/
+/i2c.c/1.45/Thu Dec 11 09:09:47 2014/-kk/
 /i2c_bitbang.c/1.13/Sun Apr 25 00:35:58 2010/-kk/
 /i2c_bitbang.h/1.2/Sun Dec 11 12:21:22 2005/-kk/
 /i2c_exec.c/1.9/Thu Oct 24 10:28:57 2013/-kk/

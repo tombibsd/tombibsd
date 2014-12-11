@@ -1,11 +1,11 @@
-/Makefile.in/1.1.1.5/Fri Mar 14 04:22:57 2014/-kk/
-/api/1.1.1.7/Sun Jul 20 13:23:26 2014/-kk/
-/context.c/1.4/Sun Jul 20 13:23:26 2014/-kk/
-/dnsconf.c/1.4/Thu Oct 24 10:28:41 2013/-kk/
-/gai_strerror.c/1.4/Sun Jul 20 13:23:26 2014/-kk/
-/getaddrinfo.c/1.6/Sun Jul 20 13:23:26 2014/-kk/
-/getnameinfo.c/1.5/Thu Oct 24 10:28:41 2013/-kk/
-/resconf.c/1.7/Sun Jul 20 13:23:26 2014/-kk/
-/version.c/1.3/Tue Jun  5 00:42:24 2012/-kk/
+/Makefile.in/1.1.1.6/Thu Dec 11 09:05:51 2014/-kk/
+/api/1.1.1.8/Thu Dec 11 09:05:51 2014/-kk/
+/context.c/1.5/Thu Dec 11 09:05:51 2014/-kk/
+/dnsconf.c/1.5/Thu Dec 11 09:05:51 2014/-kk/
+/gai_strerror.c/1.5/Thu Dec 11 09:05:51 2014/-kk/
+/getaddrinfo.c/1.7/Thu Dec 11 09:05:51 2014/-kk/
+/getnameinfo.c/1.6/Thu Dec 11 09:05:51 2014/-kk/
+/resconf.c/1.8/Thu Dec 11 09:05:51 2014/-kk/
+/version.c/1.4/Thu Dec 11 09:05:51 2014/-kk/
 D/include////
 D/win32////

@@ -4,6 +4,6 @@
 
 TESTSDIR=	${TESTSBASE}/sys
 
-TESTS_SUBDIRS+= 	rc
+TESTS_SUBDIRS+= 	net netatalk netinet netinet6 rc
 
 .include <bsd.test.mk>

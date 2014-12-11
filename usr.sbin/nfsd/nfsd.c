@@ -140,7 +140,6 @@ tryconf(struct conf *cfg, int t, int reregister)
 	struct addrinfo hints;
 	int ecode;
 
-	memset(cfg, 0, sizeof(*cfg));
 	memset(&hints, 0, sizeof hints);
 	hints.ai_flags = AI_PASSIVE;
 	hints.ai_family = cfg_family[t];
@@ -473,6 +472,7 @@ main(int argc, char *argv[])
 
 	openlog("nfsd", LOG_PID, LOG_DAEMON);
 
+	memset(cfg, 0, sizeof(cfg));
 	for (i = 0; i < __arraycount(cfg); i++) {
 		if (ip4flag == 0 && cfg_family[i] == PF_INET)
 			continue;

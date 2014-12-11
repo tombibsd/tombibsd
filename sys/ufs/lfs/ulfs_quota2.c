@@ -1274,7 +1274,7 @@ lfsquota2_handle_cmd_cursorget(struct ulfsmount *ump, struct quotakcursor *qkc,
 	struct q2cursor_state state;
 	struct quota2_entry default_q2e;
 	int idtype;
-	int quota2_hash_size;
+	int quota2_hash_size = 0; /* XXXuninit */
 
 	/*
 	 * Convert and validate the cursor.

@@ -8,11 +8,11 @@
 /config.h/1.7/Tue Dec  9 04:29:44 2014/-kk/
 /control.c/1.6/Tue Dec  9 04:21:12 2014/-kk/
 /control.h/1.6/Tue Dec  9 04:21:12 2014/-kk/
-/defs.h/1.9/Tue Dec  9 04:41:01 2014/-kk/
+/defs.h/1.10/Thu Dec 11 09:05:54 2014/-kk/
 /dev.h/1.6/Tue Dec  9 04:21:12 2014/-kk/
 /dhcp-common.c/1.6/Tue Dec  9 04:21:12 2014/-kk/
 /dhcp-common.h/1.6/Tue Dec  9 04:21:12 2014/-kk/
-/dhcp.c/1.24/Tue Dec  9 04:41:01 2014/-kk/
+/dhcp.c/1.25/Thu Dec 11 09:05:54 2014/-kk/
 /dhcp.h/1.6/Tue Dec  9 04:21:12 2014/-kk/
 /dhcp6.c/1.7/Tue Dec  9 04:41:01 2014/-kk/
 /dhcp6.h/1.6/Tue Dec  9 04:21:12 2014/-kk/
@@ -22,9 +22,9 @@
 /dhcpcd-embedded.h.in/1.1.1.2/Fri Jan 31 08:45:14 2014/-kk/
 /dhcpcd-embedded.h/1.6/Tue Dec  9 04:21:12 2014/-kk/
 /dhcpcd-run-hooks.8.in/1.12/Tue Dec  9 04:21:12 2014/-kk/
-/dhcpcd-run-hooks.in/1.7/Tue Dec  9 04:41:01 2014/-kk/
-/dhcpcd.8.in/1.37/Tue Dec  9 04:41:01 2014/-kk/
-/dhcpcd.c/1.18/Tue Dec  9 04:41:01 2014/-kk/
+/dhcpcd-run-hooks.in/1.8/Thu Dec 11 09:05:54 2014/-kk/
+/dhcpcd.8.in/1.38/Thu Dec 11 09:05:54 2014/-kk/
+/dhcpcd.c/1.19/Thu Dec 11 09:05:54 2014/-kk/
 /dhcpcd.conf.5.in/1.16/Tue Dec  9 04:21:12 2014/-kk/
 /dhcpcd.conf/1.15/Tue Dec  9 04:21:12 2014/-kk/
 /dhcpcd.h/1.8/Tue Dec  9 04:41:01 2014/-kk/
@@ -35,7 +35,7 @@
 /if-bsd.c/1.15/Tue Dec  9 04:21:12 2014/-kk/
 /if-options.c/1.19/Tue Dec  9 04:41:01 2014/-kk/
 /if-options.h/1.7/Tue Dec  9 04:41:01 2014/-kk/
-/if.c/1.7/Tue Dec  9 04:41:01 2014/-kk/
+/if.c/1.9/Thu Dec 11 09:05:54 2014/-kk/
 /if.h/1.6/Tue Dec  9 04:21:12 2014/-kk/
 /ipv4.c/1.9/Tue Dec  9 04:41:01 2014/-kk/
 /ipv4.h/1.7/Tue Dec  9 04:41:01 2014/-kk/
@@ -45,7 +45,7 @@
 /ipv6.h/1.7/Tue Dec  9 04:29:44 2014/-kk/
 /ipv6nd.c/1.18/Tue Dec  9 04:41:01 2014/-kk/
 /ipv6nd.h/1.7/Tue Dec  9 04:29:44 2014/-kk/
-/script.c/1.15/Tue Dec  9 04:41:01 2014/-kk/
+/script.c/1.16/Thu Dec 11 09:05:54 2014/-kk/
 /script.h/1.6/Tue Dec  9 04:21:12 2014/-kk/
 D/crypt////
 D/dhcpcd-hooks////

@@ -490,6 +490,10 @@ calcsb(const char *dev, int devfd, struct m_ext2fs *fs)
 		    fstypenames[pp->p_fstype] : "unknown");
 		return 0;
 	}
+	if (pp->p_fsize == 0) {
+		pfatal("%s: PARTITION SIZE IS 0\n", dev);
+		return 0;
+	}
 	memset(fs, 0, sizeof(struct m_ext2fs));
 	fs->e2fs_bsize = pp->p_fsize;
 	fs->e2fs.e2fs_log_bsize = pp->p_fsize / 1024;

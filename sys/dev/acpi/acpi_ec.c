@@ -267,6 +267,8 @@ acpiec_attach(device_t parent, device_t self, void *aux)
 		aprint_normal(": using %s\n", device_xname(ec_singleton));
 		goto fail0;
 	}
+	aprint_naive("\n");
+	aprint_normal("\n");
 
 	if (!acpiec_parse_gpe_package(self, aa->aa_node->ad_handle,
 				      &gpe_handle, &gpebit))

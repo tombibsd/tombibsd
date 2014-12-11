@@ -182,10 +182,6 @@ SRCS+=		subr_lockdebug.c
 SRCS+=		kern_ktrace.c
 .endif
 
-# no shlib_version because this is automatically in sync with lib/librump
-SHLIB_MAJOR=    0
-SHLIB_MINOR=    0
-
 CPPFLAGS+=	-I${RUMPTOP}/librump/rumpkern -I${RUMPTOP}/librump/rumpvfs
 CPPFLAGS+=	-I${RUMPTOP}/librump/rumpnet -I${RUMPTOP}/librump/rumpdev
 AFLAGS+=	-D_LOCORE -Wa,--fatal-warnings

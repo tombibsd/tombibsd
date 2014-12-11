@@ -6,7 +6,7 @@ PROG=hkpd
 BINDIR=/usr/sbin
 SRCS=hkpd.c main.c
 
-LIBNETPGPDIR!=	cd ${.CURDIR}/../../lib && ${PRINTOBJDIR}
+LIBNETPGPDIR!=	cd ${.CURDIR}/../../lib/netpgp && ${PRINTOBJDIR}
 LDADD+=		-L${LIBNETPGPDIR} -lnetpgp
 DPADD+=		${LIBNETPGPDIR}/libnetpgp.a
 

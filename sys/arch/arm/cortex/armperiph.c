@@ -170,6 +170,11 @@ armperiph_attach(device_t parent, device_t self, void *aux)
 	struct mainbus_attach_args * const mb = aux;
 	bus_addr_t cbar = armreg_cbar_read();
 	const struct mpcore_config * const cfg = armperiph_find_config();
+	prop_dictionary_t prop = device_properties(self);
+	uint32_t cbar_override;
+
+	if (prop_dictionary_get_uint32(prop, "cbar", &cbar_override))
+		cbar = (bus_addr_t)cbar_override;
 
 	/*
 	 * The normal mainbus bus space will not work for us so the port's

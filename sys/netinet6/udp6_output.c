@@ -177,11 +177,11 @@ udp6_output(struct in6pcb * const in6p, struct mbuf *m,
 
 	if (sin6) {
 		/*
-		 * IPv4 version of udp_output calls in_pcbconnect in this case,
-		 * which needs splnet and affects performance.
-		 * We have to do this as well, since in6_pcbsetport needs to
-		 * know the foreign address for some of the algorithms that
-		 * it employs.
+		 * Slightly different than v4 version in that we call
+		 * in6_selectsrc and in6_pcbsetport to fill in the local
+		 * address and port rather than in_pcbconnect. in_pcbconnect
+		 * sets in6p_faddr which causes EISCONN below to be hit on
+		 * subsequent sendto.
 		 */
 		if (sin6->sin6_port == 0) {
 			error = EADDRNOTAVAIL;

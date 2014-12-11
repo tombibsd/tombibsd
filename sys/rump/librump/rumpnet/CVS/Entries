@@ -1,6 +1,6 @@
-/Makefile.rumpnet/1.15/Mon Jun  9 00:29:34 2014/-kk/
+/Makefile.rumpnet/1.17/Thu Dec 11 09:09:55 2014/-kk/
 /Makefile/1.1/Wed Oct 15 13:00:39 2008/-kk/
-/net_stub.c/1.19/Tue Dec  9 04:43:56 2014/-kk/
+/net_stub.c/1.21/Thu Dec 11 09:09:55 2014/-kk/
 /netisr.c/1.9/Mon Jun  9 00:29:34 2014/-kk/
 /rump_net.c/1.17/Thu Feb 27 08:56:16 2014/-kk/
 /rump_net_private.h/1.10/Fri Oct  3 09:43:46 2014/-kk/

@@ -309,7 +309,9 @@ callout_destroy(callout_t *cs)
 	 * of c->c_flags.  If the callout could potentially have been
 	 * running, the current thread should have stopped it.
 	 */
-	KASSERT((c->c_flags & CALLOUT_PENDING) == 0);
+	KASSERTMSG((c->c_flags & CALLOUT_PENDING) == 0,
+	    "callout %p: c_func (%p) c_flags (%#x) destroyed from %p",
+	    c, c->c_func, c->c_flags, __builtin_return_address(0));
 	KASSERT(c->c_cpu->cc_lwp == curlwp || c->c_cpu->cc_active != c);
 	KASSERTMSG(c->c_magic == CALLOUT_MAGIC,
 	    "callout %p: c_magic (%#x) != CALLOUT_MAGIC (%#x)",

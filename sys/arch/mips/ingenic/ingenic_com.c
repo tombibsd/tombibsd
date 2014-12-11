@@ -60,8 +60,8 @@ void	ingenic_putchar(char);
 #endif
 
 
-struct mips_bus_space	ingenic_com_mbst;
-int			mbst_valid = 0;
+static struct mips_bus_space	ingenic_com_mbst;
+static int	mbst_valid = 0;
 static void	ingenic_com_bus_mem_init(bus_space_tag_t, void *);
 void		ingenic_com_cnattach(void);
 

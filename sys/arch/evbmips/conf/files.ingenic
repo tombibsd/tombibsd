@@ -1,13 +1,14 @@
 #	$NetBSD$
 
-#file	arch/evbmips/ingenic/intr.c
+
+file	arch/mips/mips/bus_dma.c
+
+file	arch/evbmips/evbmips/disksubr.c
+file	arch/evbmips/evbmips/interrupt.c
 
 file	arch/evbmips/ingenic/autoconf.c
 file	arch/evbmips/ingenic/machdep.c
-
-file	arch/mips/mips/bus_dma.c
-file	arch/evbmips/evbmips/disksubr.c
-file	arch/evbmips/evbmips/interrupt.c
+file	arch/evbmips/ingenic/intr.c
 file	arch/evbmips/ingenic/clock.c
 
 # System bus

@@ -4,7 +4,6 @@
 /rump_cygwin_syscallargs.h/1.2/Thu Oct 24 10:28:58 2013/-kk/
 /rump_cygwin_syscalls.c/1.2/Thu Oct 24 10:28:58 2013/-kk/
 /rump_cygwin_sysent.c/1.2/Thu Oct 24 10:28:58 2013/-kk/
-/shlib_version/1.1/Thu Oct 24 10:28:58 2013/-kk/
 /sys_cygwin_component.c/1.1/Thu Mar 13 02:03:16 2014/-kk/
 /syscalls.conf/1.1/Thu Oct 24 10:28:58 2013/-kk/
 /syscalls.master/1.2/Thu Oct 24 10:28:58 2013/-kk/

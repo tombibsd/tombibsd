@@ -616,4 +616,10 @@ sockaddr_in_alloc(const struct in_addr *addr, in_port_t port, int flags)
 }
 #endif /* _KERNEL */
 
+#if defined(_KERNEL) || defined(_TEST)
+int	in_print(char *, size_t, const struct in_addr *);
+#define IN_PRINT(b, a)	(in_print((b), sizeof(b), a), (b))
+int	sin_print(char *, size_t, const void *);
+#endif
+
 #endif /* !_NETINET_IN_H_ */

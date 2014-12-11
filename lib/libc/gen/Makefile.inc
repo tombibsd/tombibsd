@@ -4,7 +4,11 @@
 # gen sources
 .PATH: ${ARCHDIR}/gen ${.CURDIR}/gen
 
-SRCS+= 	_errno.c alarm.c alphasort.c arc4random.c assert.c asysctl.c \
+.if ${RUMPRUN} != "yes"
+SRCS+=	_errno.c
+.endif
+
+SRCS+=	alarm.c alphasort.c arc4random.c assert.c asysctl.c \
 	basename.c clock.c closedir.c closefrom.c \
 	confstr.c ctermid.c ctype_.c daemon.c \
 	dehumanize_number.c devname.c dirname.c disklabel.c err.c errx.c \

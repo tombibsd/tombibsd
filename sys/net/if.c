@@ -194,6 +194,10 @@ static void sysctl_sndq_setup(struct sysctllog **, const char *,
     struct ifaltq *);
 static void if_slowtimo(void *);
 static void if_free_sadl(struct ifnet *);
+static void if_attachdomain1(struct ifnet *);
+static int ifconf(u_long, void *);
+static int if_clone_create(const char *);
+static int if_clone_destroy(const char *);
 
 #if defined(INET) || defined(INET6)
 static void sysctl_net_pktq_setup(struct sysctllog **, int);
@@ -655,7 +659,7 @@ if_attachdomain(void)
 	splx(s);
 }
 
-void
+static void
 if_attachdomain1(struct ifnet *ifp)
 {
 	struct domain *dp;
@@ -968,7 +972,7 @@ if_rt_walktree(struct rtentry *rt, void *v)
 /*
  * Create a clone network interface.
  */
-int
+static int
 if_clone_create(const char *name)
 {
 	struct if_clone *ifc;
@@ -987,7 +991,7 @@ if_clone_create(const char *name)
 /*
  * Destroy a clone network interface.
  */
-int
+static int
 if_clone_destroy(const char *name)
 {
 	struct if_clone *ifc;
@@ -2109,7 +2113,7 @@ ifioctl_detach(struct ifnet *ifp)
  * would have been written had there been adequate space.
  */
 /*ARGSUSED*/
-int
+static int
 ifconf(u_long cmd, void *data)
 {
 	struct ifconf *ifc = (struct ifconf *)data;
@@ -2120,8 +2124,11 @@ ifconf(u_long cmd, void *data)
 	const int sz = (int)sizeof(struct ifreq);
 	const bool docopy = ifc->ifc_req != NULL;
 
-	if (docopy)
+	if (docopy) {
 		space = ifc->ifc_len;
+		ifrp = ifc->ifc_req;
+	}
+
 	IFNET_FOREACH(ifp) {
 		(void)strncpy(ifr.ifr_name, ifp->if_xname,
 		    sizeof(ifr.ifr_name));
@@ -2322,17 +2329,6 @@ if_mcast_op(ifnet_t *ifp, const unsigned long cmd, const struct sockaddr *sa)
 	}
 
 	return rc;
-}
-
-void
-if_drain_all(void)
-{
-	struct ifnet *ifp;
-
-	IFNET_FOREACH(ifp) {
-		if (ifp->if_drain)
-			(*ifp->if_drain)(ifp);
-	}
 }
 
 static void

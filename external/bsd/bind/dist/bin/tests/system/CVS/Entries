@@ -1,26 +1,26 @@
-/Makefile.in/1.1.1.8/Fri Mar 14 04:22:47 2014/-kk/
+/Makefile.in/1.1.1.9/Thu Dec 11 09:05:46 2014/-kk/
 /README/1.1.1.4/Tue Jan 14 16:01:21 2014/-kk/
-/ans.pl/1.1.1.4/Fri Mar 14 04:22:47 2014/-kk/
-/cleanall.sh/1.1.1.5/Thu Oct 24 10:28:41 2013/-kk/
+/ans.pl/1.1.1.5/Thu Dec 11 09:05:46 2014/-kk/
+/cleanall.sh/1.1.1.6/Thu Dec 11 09:05:46 2014/-kk/
 /cleanpkcs11.sh/1.1.1.5/Fri Mar 14 04:22:47 2014/-kk/
-/conf.sh.in/1.1.1.13/Sun Jul 20 13:23:20 2014/-kk/
+/conf.sh.in/1.1.1.14/Thu Dec 11 09:05:46 2014/-kk/
 /digcomp.pl/1.1.1.5/Tue Jan 14 16:01:21 2014/-kk/
-/genzone.sh/1.1.1.7/Tue Jan 14 16:01:21 2014/-kk/
+/genzone.sh/1.1.1.8/Thu Dec 11 09:05:46 2014/-kk/
 /ifconfig.sh/1.1.1.7/Thu Oct 24 10:28:41 2013/-kk/
 /org.isc.bind.system.plist/1.1.1.1/Tue Feb 15 19:31:07 2011/-kk/
 /org.isc.bind.system/1.1.1.4/Fri Mar 14 04:22:47 2014/-kk/
 /packet.pl/1.1.1.3/Tue Dec  4 19:22:27 2012/-kk/
-/run.sh/1.1.1.6/Fri Mar 14 04:22:47 2014/-kk/
-/runall.sh/1.1.1.6/Sun Jul 20 13:23:20 2014/-kk/
+/run.sh/1.1.1.7/Thu Dec 11 09:05:46 2014/-kk/
+/runall.sh/1.1.1.7/Thu Dec 11 09:05:46 2014/-kk/
 /send.pl/1.1.1.5/Tue Dec  4 19:22:27 2012/-kk/
-/setup.sh/1.1.1.4/Tue Dec  4 19:22:27 2012/-kk/
+/setup.sh/1.1.1.5/Thu Dec 11 09:05:46 2014/-kk/
 /start.pl/1.1.1.11/Fri Mar 14 04:22:47 2014/-kk/
 /start.sh/1.1.1.4/Tue Dec  4 19:22:27 2012/-kk/
 /stop.pl/1.1.1.4/Tue Dec  4 19:22:27 2012/-kk/
 /stop.sh/1.1.1.4/Tue Dec  4 19:22:27 2012/-kk/
 /testcrypto.sh/1.1.1.2/Sun Jul 20 13:23:20 2014/-kk/
 /testsock.pl/1.1.1.7/Thu Oct 24 10:28:41 2013/-kk/
-/testsock6.pl/1.3/Sun Jul 20 13:23:20 2014/-kk/
+/testsock6.pl/1.4/Thu Dec 11 09:05:46 2014/-kk/
 D/acl////
 D/additional////
 D/addzone////
@@ -64,6 +64,7 @@ D/masterfile////
 D/masterformat////
 D/metadata////
 D/notify////
+D/nslookup////
 D/nsupdate////
 D/pending////
 D/pkcs11////

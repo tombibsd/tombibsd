@@ -1,5 +1,6 @@
 /ADI_BRH/1.69/Fri Oct  3 09:43:15 2014/-kk/
 /ADI_BRH_INSTALL/1.2/Mon May 19 16:25:47 2014/-kk/
+/ALLWINNER_A80/1.12/Sun Dec  7 20:10:08 2014/-kk/
 /ARMADAXP/1.15/Fri Oct  3 09:43:15 2014/-kk/
 /ARMADAXP_INSTALL/1.2/Mon May 19 16:25:47 2014/-kk/
 /ARMADILLO210/1.34/Fri Oct  3 09:43:15 2014/-kk/
@@ -12,7 +13,7 @@
 /BEAGLEBOARDXM/1.19/Wed Oct 29 08:13:00 2014/-kk/
 /BEAGLEBOARDXM_INSTALL/1.2/Mon May 19 16:25:47 2014/-kk/
 /BEAGLEBOARD_INSTALL/1.2/Mon May 19 16:25:47 2014/-kk/
-/BEAGLEBONE/1.29/Wed Oct 29 08:13:00 2014/-kk/
+/BEAGLEBONE/1.30/Thu Dec 11 09:09:35 2014/-kk/
 /BEAGLEBONE_INSTALL/1.2/Mon May 19 16:25:47 2014/-kk/
 /BPI/1.13/Tue Dec  9 04:43:37 2014/-kk/
 /BPI_INSTALL/1.1/Sun Sep  7 20:17:57 2014/-kk/
@@ -123,7 +124,7 @@
 /files.beagle/1.4/Wed Sep  5 00:09:35 2012/-kk/
 /files.cp3100/1.2/Mon Dec  3 15:33:29 2007/-kk/
 /files.devkit8000/1.1/Wed Sep  8 22:53:53 2010/-kk/
-/files.evbarm/1.23/Thu Oct 24 10:28:57 2013/-kk/
+/files.evbarm/1.25/Thu Dec 11 09:09:36 2014/-kk/
 /files.g42xxeb/1.7/Thu Sep 23 07:08:57 2010/-kk/
 /files.gemini/1.1/Fri Oct 24 04:23:18 2008/-kk/
 /files.goldengate/1.1/Thu Oct 24 10:28:57 2013/-kk/

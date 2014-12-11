@@ -1225,7 +1225,7 @@ static bool
 read_pkt_insn(const struct bpf_insn *pc, bpfjit_abc_length_t *length)
 {
 	bool rv;
-	bpfjit_abc_length_t width;
+	bpfjit_abc_length_t width = 0; /* XXXuninit */
 
 	switch (BPF_CLASS(pc->code)) {
 	default:

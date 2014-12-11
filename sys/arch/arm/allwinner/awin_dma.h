@@ -74,7 +74,7 @@ void awin_dma_a10_dump_regs(struct awin_dma_softc *);
 #endif
 
 #endif
-#if defined(ALLWINNER_A31)
+#if defined(ALLWINNER_A31) || defined(ALLWINNER_A80)
 void awin_dma_a31_attach(struct awin_dma_softc *, struct awinio_attach_args *,
 			 const struct awin_locators * const);
 #if defined(DDB)

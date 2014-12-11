@@ -56,6 +56,7 @@ void
 module_load_vfs_init(void)
 {
 	module_load_vfs_vec = module_load_vfs;
+	aprint_normal("kern.module.path=%s\n", module_base);
 }
 
 int

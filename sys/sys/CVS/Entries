@@ -3,7 +3,7 @@
 /agpio.h/1.10/Tue Feb 15 08:57:01 2011/-kk/
 /aio.h/1.12/Sat Jan  7 19:48:19 2012/-kk/
 /ansi.h/1.14/Sun Jul 17 20:54:54 2011/-kk/
-/aout_mids.h/1.4/Fri Oct  3 09:51:03 2014/-kk/
+/aout_mids.h/1.6/Thu Dec 11 09:09:55 2014/-kk/
 /ataio.h/1.9/Tue Jan 24 20:04:07 2012/-kk/
 /atomic.h/1.12/Sat Mar  1 06:05:16 2014/-kk/
 /audioio.h/1.34/Tue Sep  6 01:16:43 2011/-kk/
@@ -11,7 +11,7 @@
 /blist.h/1.8/Tue Dec 17 04:13:40 2013/-kk/
 /boot_flag.h/1.7/Tue Apr 29 19:16:08 2008/-kk/
 /bootblock.h/1.57/Fri Oct  3 09:57:55 2014/-kk/
-/bswap.h/1.16/Sat Aug  8 21:23:15 2009/-kk/
+/bswap.h/1.17/Thu Dec 11 09:09:55 2014/-kk/
 /buf.h/1.119/Fri Feb 17 08:45:11 2012/-kk/
 /bufq.h/1.10/Tue Jan 13 13:35:54 2009/-kk/
 /bufq_impl.h/1.9/Wed Nov  2 13:52:34 2011/-kk/
@@ -23,7 +23,7 @@
 /cdbr.h/1.1/Wed Dec 11 01:24:08 2013/-kk/
 /cdefs.h/1.122/Fri Oct  3 09:51:03 2014/-kk/
 /cdefs_aout.h/1.20/Thu May 18 17:55:38 2006/-kk/
-/cdefs_elf.h/1.46/Fri Oct  3 09:43:46 2014/-kk/
+/cdefs_elf.h/1.47/Thu Dec 11 09:09:55 2014/-kk/
 /cdio.h/1.33/Thu Jan 29 19:36:28 2009/-kk/
 /chio.h/1.12/Mon Apr 28 20:24:10 2008/-kk/
 /clock.h/1.3/Mon Nov 17 17:11:29 2014/-kk/
@@ -100,7 +100,7 @@
 /ieee754.h/1.15/Thu Feb 13 15:36:03 2014/-kk/
 /intr.h/1.17/Tue Jun  3 03:10:02 2014/-kk/
 /inttypes.h/1.6/Thu Oct 24 10:28:58 2013/-kk/
-/ioccom.h/1.11/Wed Oct 19 10:53:12 2011/-kk/
+/ioccom.h/1.12/Thu Dec 11 09:09:55 2014/-kk/
 /ioctl.h/1.36/Fri Feb 13 22:41:04 2009/-kk/
 /ioctl_compat.h/1.16/Thu Oct 24 10:28:58 2013/-kk/
 /iostat.h/1.10/Sat Apr  4 07:30:09 2009/-kk/
@@ -119,7 +119,7 @@
 /kobj_impl.h/1.3/Sat Aug 13 21:04:07 2011/-kk/
 /kprintf.h/1.12/Fri Oct  3 09:26:22 2014/-kk/
 /ksem.h/1.14/Sun Nov 25 01:05:04 2012/-kk/
-/ksyms.h/1.28/Sun Nov 18 00:06:56 2012/-kk/
+/ksyms.h/1.29/Thu Dec 11 09:09:55 2014/-kk/
 /kthread.h/1.12/Mon Nov 21 04:36:05 2011/-kk/
 /ktrace.h/1.61/Tue Dec 17 04:13:40 2013/-kk/
 /localedef.h/1.10/Thu Oct 24 10:28:58 2013/-kk/
@@ -200,7 +200,7 @@
 /signalvar.h/1.86/Tue Jun  3 02:54:47 2014/-kk/
 /sigtypes.h/1.10/Sun Feb 19 21:07:00 2012/-kk/
 /sleepq.h/1.23/Tue May  6 05:50:27 2014/-kk/
-/socket.h/1.110/Tue Jun  3 03:10:03 2014/-kk/
+/socket.h/1.111/Thu Dec 11 09:09:55 2014/-kk/
 /socketvar.h/1.135/Fri Oct  3 09:51:03 2014/-kk/
 /sockio.h/1.32/Thu Oct 24 10:28:58 2013/-kk/
 /spawn.h/1.5/Fri Oct  3 09:51:03 2014/-kk/

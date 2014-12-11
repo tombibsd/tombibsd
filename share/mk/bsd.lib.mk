@@ -64,7 +64,7 @@ DPADD+=		${LIBDO.${_lib}}/lib${_lib}.so	# Don't use _LIB_PREFIX
 .endif									# }
 
 ##### Build and install rules
-MKDEP_SUFFIXES?=	.o .po .pico .go .ln
+MKDEP_SUFFIXES?=	.o .po .pico .go .ln .d
 
 .if !defined(SHLIB_MAJOR) && exists(${SHLIB_VERSION_FILE})		# {
 SHLIB_MAJOR != . ${SHLIB_VERSION_FILE} ; echo $$major

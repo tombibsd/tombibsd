@@ -39,7 +39,7 @@
 /ulfs_quota1.c/1.8/Tue Jun  3 03:10:03 2014/-kk/
 /ulfs_quota1.h/1.4/Thu Oct 24 10:28:58 2013/-kk/
 /ulfs_quota1_subr.c/1.3/Thu Oct 24 10:28:58 2013/-kk/
-/ulfs_quota2.c/1.16/Sun Jul 20 13:08:42 2014/-kk/
+/ulfs_quota2.c/1.17/Thu Dec 11 09:09:56 2014/-kk/
 /ulfs_quota2.h/1.4/Thu Oct 24 10:28:58 2013/-kk/
 /ulfs_quota2_subr.c/1.6/Thu Oct 24 10:28:58 2013/-kk/
 /ulfs_quotacommon.h/1.4/Thu Oct 24 10:28:58 2013/-kk/

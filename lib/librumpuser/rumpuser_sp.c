@@ -862,7 +862,7 @@ int
 rumpuser_sp_anonmmap(void *arg, size_t howmuch, void **addr)
 {
 	struct spclient *spc = arg;
-	void *resp, *rdata;
+	void *resp, *rdata = NULL; /* XXXuninit */
 	int nlocks, rv;
 
 	rumpkern_unsched(&nlocks, NULL);

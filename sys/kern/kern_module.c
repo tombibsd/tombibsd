@@ -373,7 +373,6 @@ module_init(void)
 	}
 
 	sysctl_module_setup();
-	aprint_normal("kern.module.path=%s\n", module_base);
 }
 
 /*

@@ -427,6 +427,7 @@ in_control(struct socket *so, u_long cmd, void *data, struct ifnet *ifp)
 			ia->ia_ifa.ifa_getifa = NULL;
 #endif /* IPSELSRC */
 			ia->ia_sockmask.sin_len = 8;
+			ia->ia_sockmask.sin_family = AF_INET;
 			if (ifp->if_flags & IFF_BROADCAST) {
 				ia->ia_broadaddr.sin_len = sizeof(ia->ia_addr);
 				ia->ia_broadaddr.sin_family = AF_INET;
@@ -473,7 +474,14 @@ in_control(struct socket *so, u_long cmd, void *data, struct ifnet *ifp)
 		break;
 
 	case SIOCGIFNETMASK:
-		ifreq_setaddr(cmd, ifr, sintocsa(&ia->ia_sockmask));
+		/* 
+		 * We keep the number of trailing zero bytes the sin_len field
+		 * of ia_sockmask, so we fix this before we pass it back to
+		 * userland.
+		 */
+		oldaddr = ia->ia_sockmask;
+		oldaddr.sin_len = sizeof(struct sockaddr_in);
+		ifreq_setaddr(cmd, ifr, (const void *)&oldaddr);
 		break;
 
 	case SIOCSIFDSTADDR:

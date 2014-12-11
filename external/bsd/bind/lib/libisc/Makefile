@@ -28,7 +28,7 @@ CRYPTO_SRCS=	aes.c
 .endif
 
 SRCS=		assertions.c base32.c base64.c bind9.c buffer.c \
-		bufferlist.c commandline.c crc64.c error.c event.c \
+		bufferlist.c commandline.c crc64.c counter.c error.c event.c \
 		hash.c heap.c hex.c hmacmd5.c hmacsha.c httpd.c inet_aton.c \
 		iterated_hash.c lex.c lfsr.c lib.c log.c md5.c mem.c \
 		mutexblock.c netaddr.c netscope.c ondestroy.c parseint.c \

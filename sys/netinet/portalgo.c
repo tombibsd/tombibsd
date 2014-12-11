@@ -796,21 +796,24 @@ portalgo_randport(uint16_t *port, struct inpcb_hdr *inp_hdr, kauth_cred_t cred)
 	switch (inp_hdr->inph_af) {
 #ifdef INET
 	case AF_INET: {
+		char buf[INET_ADDRSTRLEN];
 		struct inpcb *inp = (struct inpcb *)(void *)inp_hdr;
-		DPRINTF("local addr: %s\n", inet_ntoa(inp->inp_laddr));
+		DPRINTF("local addr: %s\n", IN_PRINT(buf, &inp->inp_laddr));
 		DPRINTF("local port: %d\n", inp->inp_lport);
-		DPRINTF("foreign addr: %s\n", inet_ntoa(inp->inp_faddr));
+		DPRINTF("foreign addr: %s\n", IN_PRINT(buf, &inp->inp_faddr));
 		DPRINTF("foreign port: %d\n", inp->inp_fport);
 		break;
 	}
 #endif
 #ifdef INET6
 	case AF_INET6: {
+		char buf[INET6_ADDRSTRLEN];
 		struct in6pcb *in6p = (struct in6pcb *)(void *)inp_hdr;
 
-		DPRINTF("local addr: %s\n", ip6_sprintf(&in6p->in6p_laddr));
+		DPRINTF("local addr: %s\n", IN6_PRINT(buf, &in6p->in6p_laddr));
 		DPRINTF("local port: %d\n", in6p->in6p_lport);
-		DPRINTF("foreign addr: %s\n", ip6_sprintf(&in6p->in6p_faddr));
+		DPRINTF("foreign addr: %s\n", IN6_PRINT(buf,
+		    &in6p->in6p_laddr));
 		DPRINTF("foreign port: %d\n", in6p->in6p_fport);
 		break;
 	}

@@ -23,6 +23,10 @@ USE_SHLIBDIR=	yes
 
 .include <bsd.own.mk>
 
+# build libc suitable for rumprun software stack, i.e. are system calls
+# rump kernel function calls instead of kernel traps?
+RUMPRUN?=	no
+
 WARNS=5
 CPPFLAGS+=	-D_LIBC -DLIBC_SCCS -DSYSLIBC_SCCS -D_REENTRANT
 CPPFLAGS+=	-D_DIAGNOSTIC -DMLIBDIR=\"${MLIBDIR}\"

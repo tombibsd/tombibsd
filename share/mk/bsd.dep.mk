@@ -9,7 +9,7 @@ beforedepend .depend afterdepend: # ensure existence
 ##### Default values
 MKDEP?=			mkdep
 MKDEPCXX?=		mkdep
-MKDEP_SUFFIXES?=	.o
+MKDEP_SUFFIXES?=	.o .d
 
 ##### Build rules
 # some of the rules involve .h sources, so remove them from mkdep line

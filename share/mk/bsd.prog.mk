@@ -59,7 +59,7 @@ CFLAGS+=	${COPTS}
 CFLAGS+=	-g
 .endif
 OBJCFLAGS+=	${OBJCOPTS}
-MKDEP_SUFFIXES?=	.o .ln
+MKDEP_SUFFIXES?=	.o .ln .d
 
 # CTF preserve debug symbols
 .if (${MKCTF:Uno} != "no") && (${CFLAGS:M-g} != "")

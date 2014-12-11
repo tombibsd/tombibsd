@@ -24,10 +24,12 @@ SRCS+=	div.c ldiv.c imaxdiv.c
 # This might be replaced by erand48.c
 SRCS+= erand48_ieee754.c
 
+.if ${RUMPRUN} != "yes"
 .if (${USE_JEMALLOC} != "no")
 SRCS+=	jemalloc.c
 .else
 SRCS+=	malloc.c
+.endif
 .endif
 
 CPPFLAGS.strtol.c+=	-I${LIBCDIR}/../../common/lib/libc/stdlib

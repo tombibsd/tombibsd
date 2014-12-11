@@ -28,7 +28,7 @@
 /aha.c/1.61/Sat Nov 13 13:52:00 2010/-kk/
 /ahareg.h/1.15/Sat May 10 11:52:20 2008/-kk/
 /ahavar.h/1.15/Mon Sep 21 08:12:47 2009/-kk/
-/ahcisata_core.c/1.52/Tue Dec  9 04:43:47 2014/-kk/
+/ahcisata_core.c/1.53/Thu Dec 11 09:09:47 2014/-kk/
 /ahcisatareg.h/1.12/Wed Oct 17 23:40:42 2012/-kk/
 /ahcisatavar.h/1.16/Sat Mar  1 06:04:41 2014/-kk/
 /aic6360.c/1.99/Mon Nov 23 02:13:46 2009/-kk/
@@ -211,7 +211,7 @@
 /ds.h/1.10/Sun Feb 12 16:34:11 2012/-kk/
 /ds1286reg.h/1.8/Sun Dec 11 12:21:26 2005/-kk/
 /ds1687reg.h/1.10/Sun May  4 12:50:38 2008/-kk/
-/dwc_gmac.c/1.28/Tue Dec  9 04:43:47 2014/-kk/
+/dwc_gmac.c/1.29/Thu Dec 11 09:09:47 2014/-kk/
 /dwc_gmac_reg.h/1.14/Tue Dec  9 04:43:47 2014/-kk/
 /dwc_gmac_var.h/1.6/Tue Dec  9 04:43:47 2014/-kk/
 /elink3.c/1.135/Fri Oct  3 09:25:59 2014/-kk/

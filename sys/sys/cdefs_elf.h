@@ -65,6 +65,12 @@
     __asm(".weak " _C_LABEL_STRING(#sym));
 
 #if __GNUC_PREREQ__(4, 0)
+#define	__weak	__attribute__((__weak__))
+#else
+#define	__weak
+#endif
+
+#if __GNUC_PREREQ__(4, 0)
 #define	__weak_reference(sym)	__attribute__((__weakref__(#sym)))
 #else
 #define	__weak_reference(sym)	; __asm(".weak " _C_LABEL_STRING(#sym))
@@ -169,7 +175,7 @@
 
 #define	__link_set_decl(set, ptype)					\
 	extern ptype * const __link_set_start(set)[] __dso_hidden;	\
-	extern ptype * const __link_set_end(set)[] __dso_hidden
+	extern ptype * const __link_set_end(set)[] __weak __dso_hidden
 
 #define	__link_set_count(set)						\
 	(__link_set_end(set) - __link_set_start(set))

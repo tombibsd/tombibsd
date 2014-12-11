@@ -18,7 +18,7 @@ LDFLAGS+=-g -O0
 .endif
 
 MAN=	netpgpverify.1
-WARNS=	6
+WARNS=	5
 
 .include <bsd.prog.mk>
 

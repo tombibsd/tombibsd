@@ -40,7 +40,7 @@
 /drm_probe_helper.c/1.2/Wed Jul 16 20:56:24 2014/-kk/
 /drm_rect.c/1.1.1.1/Wed Jul 16 19:35:24 2014/-kk/
 /drm_scatter.c/1.1.1.2/Sun Jul 20 13:58:51 2014/-kk/
-/drm_stub.c/1.7/Tue Dec  9 04:43:51 2014/-kk/
+/drm_stub.c/1.8/Thu Dec 11 09:09:51 2014/-kk/
 /drm_vm.c/1.1.1.2/Sun Jul 20 13:58:51 2014/-kk/
 /drm_vma_manager.c/1.1.1.1/Wed Jul 16 19:35:24 2014/-kk/
 D/ast////
