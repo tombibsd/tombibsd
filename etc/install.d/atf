@@ -49,7 +49,7 @@ handle_atf_user()
 	if grep '[^#]*unprivileged-user[ \t]*=.*_atf' "${conf}" >/dev/null
 	then
 		if [ "$1" = "fix" ]; then
-			sed -e \
+			${SED} -e \
 			    "/[^#]*unprivileged-user[\ t]*=/s/_atf/_tests/" \
 			    "${conf}" >"${conf}.new"
 			failed=$(( ${failed} + $? ))

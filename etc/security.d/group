@@ -31,7 +31,8 @@ fi
 awk -F: '{ print $1 }' $GRP | sort | uniq -d > $OUTPUT
 dupgroups=""
 for group in $(cat $OUTPUT) ; do
-	gcount=$(awk -F: "/$group/ { print \$1,\$3 }" $GRP | sort -u | wc -l)
+	gcount=$(awk -F: "/$group/ { print \$1,\$3 }" $GRP |
+		sort -u | wc -l)
 	if [ $gcount -gt 1 ]; then
 		dupgroups="$dupgroups $group"
 	fi

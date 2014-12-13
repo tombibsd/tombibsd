@@ -14,7 +14,7 @@ while read uid homedir; do
 	fi
 done < $MPBYPATH |
 awk -v "usergroups=$permit_usergroups" \
-    -v "permit_owners_list=$check_homes_permit_other_owner"  '
+            -v "permit_owners_list=$check_homes_permit_other_owner"  '
      BEGIN {
 	split(permit_owners_list, a);
 	for (i in a) permit_owners[a[i]]++;
@@ -42,7 +42,7 @@ while read uid homedir; do
 	done
 done < $MPBYPATH |
 awk -v "usergroups=$permit_usergroups" \
-    -v "permit_owners_list=$check_homes_permit_other_owner"  '
+            -v "permit_owners_list=$check_homes_permit_other_owner"  '
      BEGIN {
 	split(permit_owners_list, a);
 	for (i in a) permit_owners[a[i]]++;
@@ -76,7 +76,7 @@ while read uid homedir; do
 	done
 done < $MPBYPATH |
 awk -v "usergroups=$permit_usergroups" \
-    -v "permit_owners_list=$check_homes_permit_other_owner"  '
+            -v "permit_owners_list=$check_homes_permit_other_owner"  '
      BEGIN {
 	split(permit_owners_list, a);
 	for (i in a) permit_owners[a[i]]++;

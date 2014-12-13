@@ -29,7 +29,7 @@ ${pcpath} was a directory, should be a file.
 		_notfixed="${NOT_FIXED}"
 	fi
 
-	if [ ! -d "${DESTDIR}${pcpath}" ]; then
+	if [ ! -d "${DEST_DIR}${pcpath}" ]; then
 		return 0
 	fi
 
@@ -37,7 +37,7 @@ ${pcpath} was a directory, should be a file.
 	# itself.  If the directory contains unexpected extra files
 	# then it will not be deleted.
 	( [ -f "${DEST_DIR}"/var/db/obsolete/xbase ] \
-	    &&  sort -ru "${DEST_DIR}"/var/db/obsolete/xbase \
+	    &&  ${SORT} -ru "${DEST_DIR}"/var/db/obsolete/xbase \
 	    | ${GREP} -E "^\\.?${pcpath}/" ;
 	    echo "${pcpath}" ) \
 	| obsolete_paths "${op}"
@@ -45,7 +45,7 @@ ${pcpath} was a directory, should be a file.
 
 	# If the directory was removed above, then try to replace it with
 	# a file.
-	if [ -d "${DESTDIR}${pcpath}" ]; then
+	if [ -d "${DEST_DIR}${pcpath}" ]; then
 		msg "${filemsg}${_notfixed}"
 		failed=$(( ${failed} + 1 ))
 	else

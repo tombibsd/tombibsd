@@ -1,6 +1,7 @@
 #	$NetBSD$
 
-	# generate list of existing LVM elements Physical Volumes, Volume Groups and Logical Volumes.
+# generate list of existing LVM elements Physical Volumes, Volume Groups
+# and Logical Volumes.
 if [ -x /sbin/lvm ]; then
 	lvm pvdisplay -m >"$work_dir/lvm.pv" 2>/dev/null
 	lvm vgdisplay -m >"$work_dir/lvm.vg" 2>/dev/null

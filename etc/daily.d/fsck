@@ -1,5 +1,5 @@
 #	$NetBSD$
 
 echo ""
-echo "Checking filesystems:"
+echo "Checking file systems:"
 fsck -n -f ${run_fsck_flags} | grep -v '^\*\* Phase'

@@ -214,7 +214,7 @@ do_rc()
 		# generate scripts
 		mkdir "${SCRATCHDIR}/rc"
 		for f in ${generated_scripts}; do
-			sed -e "s,@X11ROOTDIR@,${X11ROOTDIR},g" \
+			${SED} -e "s,@X11ROOTDIR@,${X11ROOTDIR},g" \
 			    < "${SRC_DIR}/etc/rc.d/${f}.in" \
 			    > "${SCRATCHDIR}/rc/${f}"
 		done

@@ -20,9 +20,9 @@ do_ddbonpanic()
 			result=1
 		else
 			echo >> "${DEST_DIR}/etc/sysctl.conf"
-			sed < "${SRC_DIR}/etc/sysctl.conf" \
+			${SED} < "${SRC_DIR}/etc/sysctl.conf" \
 			   -e '/^ddb\.onpanic/q' | \
-			       sed -e '1,/^$/d' >> \
+			       ${SED} -e '1,/^$/d' >> \
 			    "${DEST_DIR}/etc/sysctl.conf"
 			result=$?
 		fi

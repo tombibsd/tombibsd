@@ -12,7 +12,7 @@ do_obsolete()
 	op="$1"
 	failed=0
 
-	sort -ru "${DEST_DIR}"/var/db/obsolete/* | obsolete_paths "${op}"
+	${SORT} -ru "${DEST_DIR}"/var/db/obsolete/* | obsolete_paths "${op}"
 	failed=$(( ${failed} + $? ))
 
 	(

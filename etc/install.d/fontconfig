@@ -16,9 +16,14 @@ do_fontconfig()
 
 	# First, check for updates we can handle.
 	if ! $SOURCEMODE; then
-		FONTCONFIG_DIR="${SRC_DIR}/etc/fonts/conf.avail"
+		FONTCONFIG_DIR="${SRC_DIR}/etc/fonts/conf.avail" 
 	else
 		FONTCONFIG_DIR="${XSRC_DIR}/external/mit/fontconfig/dist/conf.d"
+	fi
+
+	if [ ! -d "${FONTCONFIG_DIR}" ]; then
+		msg "${FONTCONFIG_DIR} is not a directory; skipping check"
+		return 0
 	fi
 
 	populate_dir "$op" false "${FONTCONFIG_DIR}" "${DEST_DIR}/etc/fonts/conf.avail" 444 \
@@ -52,7 +57,7 @@ do_fontconfig()
 		80-delicious.conf \
 		90-synthetic.conf
 	failed=$(( ${failed} + $? ))
-
+		
 	# We can't modify conf.d easily; someone might have removed a file.
 
 	conf_d_failed=0
@@ -67,7 +72,7 @@ do_fontconfig()
 		msg \
     "Broken fontconfig configuration found; please delete these files"
 		msg \
-    "in the ${DESTDIR}/etc/fonts/conf.d/ subdirectory:"
+    "in the ${DEST_DIR}/etc/fonts/conf.d/ subdirectory:"
 		msg \
     "   10-autohint.conf 10-no-sub-pixel.conf 10-sub-pixel-bgr.conf"
 		msg \
