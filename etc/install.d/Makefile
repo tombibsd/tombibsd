@@ -25,6 +25,7 @@ CONFIGFILES.etc=\
 		mtree \
 		named \
 		obsolete \
+		obsolete_stand \
 		pam \
 		periodic \
 		pf \

@@ -109,6 +109,7 @@
 ./etc/install.d/mtree				etc-sys-etc
 ./etc/install.d/named				etc-sys-etc
 ./etc/install.d/obsolete			etc-sys-etc
+./etc/install.d/obsolete_stand			etc-sys-etc
 ./etc/install.d/pam				etc-sys-etc
 ./etc/install.d/periodic			etc-sys-etc
 ./etc/install.d/pf				etc-sys-etc

@@ -1,0 +1,24 @@
+#	$NetBSD$
+
+#
+#	obsolete_stand
+#
+
+adddisableditem obsolete_stand "remove obsolete files from /stand"
+do_obsolete_stand()
+{
+	[ -n "$1" ] || err 3 "USAGE: do_obsolete_stnd  fix|check"
+	op="$1"
+	failed=0
+
+	for dir in \
+	    /stand/${MACHINE} \
+	    /stand/${MACHINE}-xen \
+	    /stand/${MACHINE}pae-xen
+	do
+		[ -d "${DESTDIR}${dir}" ] && obsolete_stand "${dir}"
+	done | obsolete_paths "${op}"
+	failed=$(( ${failed} + $? ))
+
+	return ${failed}
+}
