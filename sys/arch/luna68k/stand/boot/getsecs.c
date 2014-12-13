@@ -35,6 +35,8 @@
 #include <lib/libsa/stand.h>
 #include <lib/libsa/net.h>
 
+#include <dev/clock_subr.h>
+
 #include <luna68k/dev/timekeeper.h>
 #include <luna68k/stand/boot/samachdep.h>
 

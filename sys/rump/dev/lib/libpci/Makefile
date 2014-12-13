@@ -23,6 +23,10 @@ SRCS+=	pci_at_mainbus.c
 CPPFLAGS+= -I${.CURDIR}/opt -I${RUMPTOP}/librump/rumpkern
 CPPFLAGS+= -I${RUMPTOP}/librump/rumpvfs
 
+.if ${RUMP_PCI_IOSPACE:Uno} == "yes"
+CPPFLAGS+=-DRUMP_PCI_IOSPACE
+.endif
+
 .if defined(RUMP_PCI_USER)
 RUMPCOMP_USER_SRCS=	${RUMP_PCI_USER}
 RUMPCOMP_INCS_DIR:=	${.PARSEDIR}

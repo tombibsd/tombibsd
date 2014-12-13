@@ -7,7 +7,7 @@ LIB=	LLVMX86CodeGen
 .PATH: ${LLVM_SRCDIR}/lib/Target/X86
 
 SRCS+=	X86AsmPrinter.cpp \
-	X86COFFMachineModuleInfo.cpp \
+	X86AtomicExpandPass.cpp \
 	X86CodeEmitter.cpp \
 	X86FastISel.cpp \
 	X86FixupLEAs.cpp \

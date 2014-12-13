@@ -71,14 +71,6 @@ struct keycb {
 };
 
 int key_output (struct mbuf *, ...);
-#ifndef __NetBSD__
-int key_usrreq (struct socket *,
-	int, struct mbuf *, struct mbuf *, struct mbuf *);
-#else
-int key_usrreq (struct socket *,
-	int, struct mbuf *, struct mbuf *, struct mbuf *, struct lwp *);
-#endif
-
 int key_sendup (struct socket *, struct sadb_msg *, u_int, int);
 int key_sendup_mbuf (struct socket *, struct mbuf *, int);
 #endif /* _KERNEL */

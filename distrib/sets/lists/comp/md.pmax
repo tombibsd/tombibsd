@@ -58,6 +58,8 @@
 ./usr/include/pmax/rwlock.h			comp-c-include
 ./usr/include/pmax/setjmp.h			comp-c-include
 ./usr/include/pmax/signal.h			comp-c-include
+./usr/include/pmax/sljit_machdep.h		comp-c-include
+./usr/include/pmax/sljitarch.h			comp-obsolete		obsolete
 ./usr/include/pmax/stdarg.h			comp-obsolete		obsolete
 ./usr/include/pmax/tc_machdep.h			comp-c-include
 ./usr/include/pmax/trap.h			comp-c-include

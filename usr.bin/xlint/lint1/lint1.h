@@ -118,7 +118,7 @@ typedef struct {
  * Structures of type str_t uniqely identify structures. This can't
  * be done in structures of type type_t, because these are copied
  * if they must be modified. So it would not be possible to check
- * if to structures are identical by comparing the pointers to
+ * if two structures are identical by comparing the pointers to
  * the type structures.
  *
  * The typename is used if the structure is unnamed to identify

@@ -1,5 +1,4 @@
 /*	$NetBSD$	*/
-
 #include "config.h"
 #include "t_api.h"
 

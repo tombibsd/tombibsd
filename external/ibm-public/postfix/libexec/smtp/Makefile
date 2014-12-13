@@ -12,7 +12,7 @@ DIST=	${NETBSDSRCDIR}/external/ibm-public/postfix/dist/src/${PROG}
 SRCS=	smtp.c smtp_connect.c smtp_proto.c smtp_chat.c smtp_session.c \
 	smtp_addr.c smtp_trouble.c smtp_state.c smtp_rcpt.c \
 	smtp_sasl_proto.c smtp_sasl_glue.c smtp_reuse.c smtp_map11.c \
-	smtp_sasl_auth_cache.c
+	smtp_sasl_auth_cache.c smtp_key.c smtp_tls_policy.c
 
 LINKS+=	 ${PFIX_LIBEXECDIR}/smtp ${PFIX_LIBEXECDIR}/lmtp
 

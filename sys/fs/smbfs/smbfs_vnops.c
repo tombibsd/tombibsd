@@ -127,6 +127,8 @@ static struct vnodeopv_entry_desc smbfs_vnodeop_entries[] = {
 	{ &vop_advlock_desc,		smbfs_advlock },
 	{ &vop_close_desc,		smbfs_close },
 	{ &vop_create_desc,		smbfs_create },
+	{ &vop_fallocate_desc,		genfs_eopnotsupp },
+	{ &vop_fdiscard_desc,		genfs_eopnotsupp },
 	{ &vop_fsync_desc,		smbfs_fsync },
 	{ &vop_getattr_desc,		smbfs_getattr },
 	{ &vop_getpages_desc,		genfs_compat_getpages },
@@ -1247,8 +1249,6 @@ smbfs_lookup(void *v)
 		if (newvp != dvp)
 			vn_lock(newvp, LK_SHARED | LK_RETRY);
 		error = VOP_GETATTR(newvp, &vattr, cnp->cn_cred);
-		if (newvp != dvp)
-			VOP_UNLOCK(newvp);
 		/*
 		 * If the file type on the server is inconsistent
 		 * with what it was when we created the vnode,
@@ -1265,6 +1265,8 @@ smbfs_lookup(void *v)
 		else if (error == 0
 			&& vattr.va_ctime.tv_sec == VTOSMB(newvp)->n_ctime)
 		{
+			if (newvp != dvp)
+				VOP_UNLOCK(newvp);
 			/* nfsstats.lookupcache_hits++; */
 			return (0);
 		}

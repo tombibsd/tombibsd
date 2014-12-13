@@ -8,7 +8,7 @@ SRCS=		bootimx23.c power_prep.c clock_prep.c emi_prep.c pinctrl_prep.c common.c 
 
 CLEANFILES+=	${PROG}
 CFLAGS+=	-Wall -Wno-main -ffreestanding -fno-unwind-tables
-CFLAGS+=	-march=armv5te -mtune=arm926ej-s
+CPUFLAGS=	-march=armv5te -mtune=arm926ej-s
 CPPFLAGS+=	-D_STANDALONE -DMEMSIZE=64
 CPPFLAGS+=	-DKERNEL_BOOT_ARGS=\"root=ld0a\"
 CPPFLAGS+=	-nostdinc -I. -I${.CURDIR} -I${.OBJDIR} -I${S} -I${S}/arch

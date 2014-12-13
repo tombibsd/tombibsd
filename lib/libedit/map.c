@@ -1396,7 +1396,7 @@ protected int
 map_addfunc(EditLine *el, const Char *name, const Char *help, el_func_t func)
 {
 	void *p;
-	size_t nf = (size_t)el->el_map.nfunc + 1;
+	size_t nf = el->el_map.nfunc + 1;
 
 	if (name == NULL || help == NULL || func == NULL)
 		return -1;

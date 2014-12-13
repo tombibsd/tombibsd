@@ -6,7 +6,9 @@ LIB=	lldbPluginProcessElfCore
 
 .PATH: ${LLDB_SRCDIR}/source/Plugins/Process/elf-core
 
-CPPFLAGS.RegisterContextPOSIXCore_mips64.cpp+= -I${LLDB_SRCDIR}/source/Plugins/Process/POSIX
+CPPFLAGS.RegisterContextPOSIXCore_mips64.cpp+= -I${LLDB_SRCDIR}/source/Plugins/Process/Utility
+CPPFLAGS.RegisterContextPOSIXCore_x86_64.cpp+= -I${LLDB_SRCDIR}/source/Plugins/Process/Utility
+CPPFLAGS.ThreadElfCore.cpp+= -I${LLDB_SRCDIR}/source/Plugins/Process/Utility
 
 SRCS+=	ProcessElfCore.cpp \
 	RegisterContextPOSIXCore_mips64.cpp \

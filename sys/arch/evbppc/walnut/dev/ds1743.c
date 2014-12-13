@@ -234,14 +234,14 @@ dsrtc_write(todr_chip_handle_t tch, struct clock_ymdhms *dt)
 
 	key = ds1743_lock(sc, DS_CTL_W);
 	
-	ds1743_write(sc, DS_SECONDS, TOBCD(dt->dt_sec) & 0x7f);
-	ds1743_write(sc, DS_MINUTES, TOBCD(dt->dt_min) & 0x7f);
-	ds1743_write(sc, DS_HOURS, TOBCD(dt->dt_hour)  & 0x3f);
-	ds1743_write(sc, DS_DATE, TOBCD(dt->dt_day)    & 0x3f);
-	ds1743_write(sc, DS_MONTH, TOBCD(dt->dt_mon)   & 0x1f);
-	ds1743_write(sc, DS_YEAR, TOBCD(dt->dt_year % 100));
+	ds1743_write(sc, DS_SECONDS, bintobcd(dt->dt_sec) & 0x7f);
+	ds1743_write(sc, DS_MINUTES, bintobcd(dt->dt_min) & 0x7f);
+	ds1743_write(sc, DS_HOURS, bintobcd(dt->dt_hour)  & 0x3f);
+	ds1743_write(sc, DS_DATE, bintobcd(dt->dt_day)    & 0x3f);
+	ds1743_write(sc, DS_MONTH, bintobcd(dt->dt_mon)   & 0x1f);
+	ds1743_write(sc, DS_YEAR, bintobcd(dt->dt_year % 100));
 	ds1743_write(sc, DS_CENTURY, ((ds1743_read(sc, DS_CENTURY) & DS_CTL_RW)
-				      | TOBCD(dt->dt_year / 100)));
+				      | bintobcd(dt->dt_year / 100)));
 
 	ds1743_unlock(sc, key);
 	return(0);
@@ -254,14 +254,14 @@ dsrtc_read(todr_chip_handle_t tch, struct clock_ymdhms *dt)
 	u_char key;
 	
 	key = ds1743_lock(sc, DS_CTL_R);
-	dt->dt_sec = FROMBCD(ds1743_read(sc, DS_SECONDS) & 0x7f);
-	dt->dt_min = FROMBCD(ds1743_read(sc, DS_MINUTES) & 0x7f);
-	dt->dt_hour = FROMBCD(ds1743_read(sc, DS_HOURS) & 0x3f);
-	dt->dt_day = FROMBCD(ds1743_read(sc, DS_DATE)   & 0x3f);
-	dt->dt_mon = FROMBCD(ds1743_read(sc, DS_MONTH)   & 0x1f);
+	dt->dt_sec = bcdtobin(ds1743_read(sc, DS_SECONDS) & 0x7f);
+	dt->dt_min = bcdtobin(ds1743_read(sc, DS_MINUTES) & 0x7f);
+	dt->dt_hour = bcdtobin(ds1743_read(sc, DS_HOURS) & 0x3f);
+	dt->dt_day = bcdtobin(ds1743_read(sc, DS_DATE)   & 0x3f);
+	dt->dt_mon = bcdtobin(ds1743_read(sc, DS_MONTH)   & 0x1f);
 	dt->dt_year =
-	    FROMBCD(ds1743_read(sc, DS_YEAR)) +
-	    FROMBCD(ds1743_read(sc, DS_CENTURY) & ~DS_CTL_RW) * 100; 
+	    bcdtobin(ds1743_read(sc, DS_YEAR)) +
+	    bcdtobin(ds1743_read(sc, DS_CENTURY) & ~DS_CTL_RW) * 100; 
 
 	ds1743_unlock(sc, key);
 	return(0);

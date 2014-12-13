@@ -9,7 +9,9 @@ TESTS_C=	t_swwdog
 
 LDADD+=	-lrumpdev_sysmon -lrumpdev -lrumpvfs
 LDADD+=	-lrump
-LDADD+=	-lrumpuser -lpthread
+LDADD+=	-lrumpuser
+LDADD+=	-lrump
+LDADD+=	-lpthread
 
 WARNS=	4
 

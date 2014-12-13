@@ -985,6 +985,7 @@ RA	router advertisement
 RAD	rapid application development
 RAID	redundant array of {independent,inexpensive} disks
 RAM	random access memory
+RAS	reliability, availability and serviceability
 RAS	remote access service
 RAS	restartable atomic sequence
 RAS	row address strobe
@@ -1353,6 +1354,7 @@ XIP	execute in place
 XML	Extensible Markup Language
 XOR	exclusive or
 XP	extreme programming
+XSI	X/Open System Interface
 XSL	extensible stylesheet language
 XSS	cross site scripting
 XT	extended technology

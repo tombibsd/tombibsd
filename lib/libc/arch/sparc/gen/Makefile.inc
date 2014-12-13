@@ -20,7 +20,13 @@ SRCS+=	sigsetjmp.S
 
 SRCS+=	makecontext.c resumecontext.c _lwp.c swapcontext.S
 
-SRCS+=	fixunsdfsi.S mul.S umul.S saveregs.S
+.if ${MACHINE} == "sparc64"
+.PATH: ${NETBSDSRCDIR}/lib/libarch/sparc/v8
+SRCS+=	sparc_v8.S
+.else
+SRCS+=	mul.S umul.S
+.endif
+SRCS+=	fixunsdfsi.S saveregs.S
 SRCS+=	bswap16.c bswap32.c bswap64.c
 
 LSRCS.sparc.gen=	Lint_swapcontext.c

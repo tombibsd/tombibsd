@@ -184,6 +184,9 @@ cpu_getmcontext(struct lwp *l, mcontext_t *mcp, unsigned int *flags)
 	gr[_REG_PC]   = tf->tf_pc;
 	gr[_REG_CPSR] = tf->tf_spsr;
 
+	KASSERTMSG(VALID_R15_PSR(gr[_REG_PC], gr[_REG_CPSR]), "%#x %#x",
+	    gr[_REG_PC], gr[_REG_CPSR]);
+
 	if ((ras_pc = (__greg_t)ras_lookup(l->l_proc,
 	    (void *) gr[_REG_PC])) != -1)
 		gr[_REG_PC] = ras_pc;

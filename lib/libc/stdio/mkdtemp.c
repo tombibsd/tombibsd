@@ -29,9 +29,7 @@
  * SUCH DAMAGE.
  */
 
-#if HAVE_NBTOOL_CONFIG_H
-#include "nbtool_config.h"
-#endif
+#include "gettemp.h"
 
 #if !HAVE_NBTOOL_CONFIG_H || !HAVE_MKDTEMP
 
@@ -44,25 +42,12 @@ __RCSID("$NetBSD$");
 #endif
 #endif /* LIBC_SCCS and not lint */
 
-#if HAVE_NBTOOL_CONFIG_H
-#define	GETTEMP		__nbcompat_gettemp
-#else
-#include <assert.h>
-#include <errno.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include "reentrant.h"
-#include "local.h"
-#define	GETTEMP		__gettemp
-#endif
-
 char *
 mkdtemp(char *path)
 {
 	_DIAGASSERT(path != NULL);
 
-	return GETTEMP(path, NULL, 1) ? path : NULL;
+	return GETTEMP(path, NULL, 1, 0, 0) ? path : NULL;
 }
 
 #endif /* !HAVE_NBTOOL_CONFIG_H || !HAVE_MKDTEMP */

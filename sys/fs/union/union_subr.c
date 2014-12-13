@@ -811,6 +811,7 @@ union_mkshadow(struct union_mount *um, struct vnode *dvp,
 	va.va_type = VDIR;
 	va.va_mode = um->um_cmode;
 
+	KASSERT(*vpp == NULL);
 	error = VOP_MKDIR(dvp, vpp, &cn, &va);
 	VOP_UNLOCK(dvp);
 	PNBUF_PUT(pnbuf);
@@ -889,11 +890,15 @@ union_vn_create(struct vnode **vpp, struct union_node *un, struct lwp *l)
 	vap->va_type = VREG;
 	vap->va_mode = cmode;
 	vref(un->un_dirvp);
+	vp = NULL;
 	error = VOP_CREATE(un->un_dirvp, &vp, &cn, vap);
-	if (error)
+	if (error) {
+		VOP_UNLOCK(un->un_dirvp);
 		return error;
+	}
 
 	vn_lock(vp, LK_EXCLUSIVE | LK_RETRY);
+	VOP_UNLOCK(un->un_dirvp);
 	error = VOP_OPEN(vp, fmode, cred);
 	if (error) {
 		vput(vp);
@@ -1190,7 +1195,7 @@ union_readdirhook(struct vnode **vpp, struct file *fp, struct lwp *l)
 		return (error);
 	}
 	VOP_UNLOCK(lvp);
-	fp->f_data = lvp;
+	fp->f_vnode = lvp;
 	fp->f_offset = 0;
 	error = vn_close(vp, FREAD, fp->f_cred);
 	if (error)

@@ -7,15 +7,12 @@ SRCS+=	libunwind.cxx \
 
 INCS+=	unwind.h
 
-.if ${HAVE_GCC:U48} == "4"
-CLEANFILES+=	cstdint
-DPSRCS+=	cstdint
-
-cstdint:
-	echo '#include <stdint.h>' > ${.TARGET}
-
-COPTS.libunwind.cxx+=	"-D__builtin_unreachable()=abort()"
-.else
 COPTS.libunwind.cxx+=	${${ACTIVE_CXX} == "gcc":? -std=c++0x : -std=c++11 }
+COPTS.libunwind.cxx+=	-funwind-tables -fno-rtti
+COPTS.libunwind.cxx+=	-fno-exceptions -fvisibility=hidden
+COPTS.libunwind.cxx+=	-Wno-old-style-cast
+CPPFLAGS.libunwind.cxx+=-I${NETBSDSRCDIR}/sys/lib/libunwind
+
+.if ${MACHINE_CPU} == "arm"
+AFLAGS.unwind_registers.S+=	${${ACTIVE_CC} == "clang":? -no-integrated-as :}
 .endif
-COPTS.libunwind.cxx+=	-funwind-tables -fno-rtti -fno-exceptions -fvisibility=hidden -Wno-old-style-cast

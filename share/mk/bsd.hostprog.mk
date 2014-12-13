@@ -81,7 +81,7 @@ LIBRUMPFS_TMPFS?=	/usr/lib/librumpfs_tmpfs.a
 LIBRUMPFS_UDF?=		/usr/lib/librumpfs_udf.a
 LIBRUMPFS_UFS?=		/usr/lib/librumpfs_ufs.a
 
-MKDEP_SUFFIXES?=	.lo .ln
+MKDEP_SUFFIXES?=	.lo .ln .d
 
 # Override these:
 INSTALL:=	${INSTALL:NSTRIP=*}

@@ -1,9 +1,9 @@
 /*	$NetBSD$	*/
 
-/* OpenLDAP: pkg/ldap/libraries/liblunicode/ucdata/ucpgba.c,v 1.7.2.5 2010/04/13 20:23:04 kurt Exp */
+/* $OpenLDAP$ */
 /* This work is part of OpenLDAP Software <http://www.openldap.org/>.
  *
- * Copyright 1998-2010 The OpenLDAP Foundation.
+ * Copyright 1998-2014 The OpenLDAP Foundation.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -34,7 +34,7 @@
  * OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR
  * THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-/* Id: ucpgba.c,v 1.5 2001/01/02 18:46:20 mleisher Exp */
+/* Id: ucpgba.c,v 1.5 2001/01/02 18:46:20 mleisher Exp  */
 
 #include "portable.h"
 

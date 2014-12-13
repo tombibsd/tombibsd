@@ -75,9 +75,9 @@ static void	clmpcc_set_params(struct clmpcc_chan *);
 static void	clmpcc_start(struct tty *);
 static int 	clmpcc_modem_control(struct clmpcc_chan *, int, int);
 
-#define	CLMPCCUNIT(x)		(minor(x) & 0x7fffc)
-#define CLMPCCCHAN(x)		(minor(x) & 0x00003)
-#define	CLMPCCDIALOUT(x)	(minor(x) & 0x80000)
+#define	CLMPCCUNIT(x)		(TTUNIT(x) & ~0x3)	// XXX >> 2? 
+#define	CLMPCCCHAN(x)		(TTUNIT(x) & 0x3)
+#define	CLMPCCDIALOUT(x)	TTDIALOUT(x)
 
 /*
  * These should be in a header file somewhere...
@@ -106,6 +106,7 @@ const struct cdevsw clmpcc_cdevsw = {
 	.d_poll = clmpccpoll,
 	.d_mmap = nommap,
 	.d_kqfilter = ttykqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_TTY
 };
 
@@ -366,7 +367,7 @@ clmpcc_init(struct clmpcc_softc *sc)
 	delay(1000);
 
 	/*
-	 * The chip will set it's firmware revision register to a non-zero
+	 * The chip will set its firmware revision register to a non-zero
 	 * value to indicate completion of reset.
 	 */
 	for (i = 10000; clmpcc_rdreg(sc, CLMPCC_REG_GFRCR) == 0 && i; i--)

@@ -66,3 +66,4 @@ err:
 #else
 	jmp	CERROR
 #endif
+END(vfork)

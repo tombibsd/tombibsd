@@ -58,6 +58,16 @@ basic()
 	atf_check -s exit:0 $(atf_get_srcdir)/h_client/h_simplecli
 }
 
+stress_short_head()
+{
+	atf_set "require.memory" "64M"
+}
+
+stress_long_head()
+{
+	atf_set "require.memory" "64M"
+}
+
 stress()
 {
 

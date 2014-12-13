@@ -4,8 +4,8 @@
 PROG=	ifmcstat
 MAN=	ifmcstat.8
 
-LDADD=	-lkvm
-DPADD=	${LIBKVM}
+LDADD+=	-lutil
+DPADD+=	${LIBUTIL}
 
 CPPFLAGS+=	-DINET6
 

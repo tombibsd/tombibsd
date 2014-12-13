@@ -50,7 +50,7 @@ typedef struct pad_softc {
 	uint32_t	sc_buflen;
 	uint32_t	sc_rpos, sc_wpos;
 
-	u_int		sc_swvol;
+	uint8_t		sc_swvol;
 } pad_softc_t;
 
 #endif /* !_SYS_DEV_PAD_PADVAR_H */

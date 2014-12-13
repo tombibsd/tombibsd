@@ -1,5 +1,3 @@
-/*	$NetBSD$	*/
-
 /* C code supplied at the beginning of the file.  */
 
 %{

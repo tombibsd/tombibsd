@@ -320,8 +320,10 @@ intr_claim(int irq, int level, int (*ih_func)(void *), void *ih_arg, const char 
 	ih->ih_arg = ih_arg;
 	ih->ih_flags = 0;
 
-	if (irq_claim(irq, ih, group, name) != 0) 
+	if (irq_claim(irq, ih, group, name) != 0) {
+		free(ih, M_DEVBUF);
 		return(NULL);
+	}
 
 	return(ih);
 }

@@ -61,12 +61,6 @@ struct ebus_softc {
 
 	int				sc_nrange;	/* counters */
 	int				sc_nintmap;
-
-	int				sc_ign;
-
-	bus_space_tag_t			sc_bust;
-	bus_addr_t			sc_csr;
-	bus_space_handle_t		sc_csrh;
 };
 
 int	ebus_setup_attach_args(struct ebus_softc *, int,

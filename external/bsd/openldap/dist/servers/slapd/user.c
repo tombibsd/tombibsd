@@ -1,10 +1,10 @@
 /*	$NetBSD$	*/
 
 /* user.c - set user id, group id and group access list */
-/* OpenLDAP: pkg/ldap/servers/slapd/user.c,v 1.25.2.5 2010/04/13 20:23:22 kurt Exp */
+/* $OpenLDAP$ */
 /* This work is part of OpenLDAP Software <http://www.openldap.org/>.
  *
- * Copyright 1998-2010 The OpenLDAP Foundation.
+ * Copyright 1998-2014 The OpenLDAP Foundation.
  * Portions Copyright 1999 PM Lashley.
  * All rights reserved.
  *

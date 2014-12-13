@@ -563,7 +563,7 @@ MakeHandleUse(void *cgnp, void *pgnp)
  *	in the comments below.
  *
  * Results:
- *	returns 0 if the gnode does not exist, or it's filesystem
+ *	returns 0 if the gnode does not exist, or its filesystem
  *	time if it does.
  *
  * Side Effects:

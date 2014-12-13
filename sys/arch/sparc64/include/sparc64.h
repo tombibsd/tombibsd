@@ -58,5 +58,6 @@ bool prom_has_stopself(void);
 int  prom_stop_other(u_int);
 bool prom_has_stop_other(void);
 void prom_startcpu(u_int, void *, u_long);
+int prom_startcpu_by_cpuid(u_int, void *, u_long arg);
 
 #endif	/* _MACHINE_SPARC64_H_ */

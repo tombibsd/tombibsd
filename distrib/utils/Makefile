@@ -19,10 +19,6 @@ SUBDIR+=x_ping6
 
 .endif
 
-.if exists(sysinst/arch/${MACHINE})
-SUBDIR+=sysinst
-.endif
-
 release:
 
 .include <bsd.subdir.mk>

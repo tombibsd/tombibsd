@@ -930,7 +930,7 @@ ktruser(const char *id, void *addr, size_t len, int ustr)
 	ktp->ktr_id[KTR_USER_MAXIDLEN-1] = '\0';
 
 	user_dta = (void *)(ktp + 1);
-	if ((error = copyin(addr, (void *)user_dta, len)) != 0)
+	if ((error = copyin(addr, user_dta, len)) != 0)
 		len = 0;
 
 	ktraddentry(l, kte, KTA_WAITOK);
@@ -1402,6 +1402,9 @@ ktrace_thread(void *arg)
 	}
 
 	TAILQ_REMOVE(&ktdq, ktd, ktd_list);
+
+	callout_halt(&ktd->ktd_wakch, &ktrace_lock);
+	callout_destroy(&ktd->ktd_wakch);
 	mutex_exit(&ktrace_lock);
 
 	/*
@@ -1415,8 +1418,6 @@ ktrace_thread(void *arg)
 	cv_destroy(&ktd->ktd_sync_cv);
 	cv_destroy(&ktd->ktd_cv);
 
-	callout_stop(&ktd->ktd_wakch);
-	callout_destroy(&ktd->ktd_wakch);
 	kmem_free(ktd, sizeof(*ktd));
 
 	kthread_exit(0);

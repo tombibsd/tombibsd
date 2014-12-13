@@ -1033,7 +1033,7 @@ cmalo_tx(struct malo_softc *sc, struct mbuf *m)
 	/* prepare TX descriptor */
 	txdesc->pkgoffset = htole32(sizeof(*txdesc));
 	txdesc->pkglen = htole16(m->m_pkthdr.len);
-	memcpy(txdesc->dstaddrhigh, data, ETHER_ADDR_LEN);
+	memcpy(txdesc->dstaddr, data, ETHER_ADDR_LEN);
 
 	/* copy mbuf data to the buffer */
 	m_copydata(m, 0, m->m_pkthdr.len, sc->sc_data + sizeof(*txdesc));

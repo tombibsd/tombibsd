@@ -19,8 +19,10 @@ class MCAsmInfo;
 class MCAsmLayout;
 class MCAssembler;
 class MCContext;
+class MCFixup;
 class MCSection;
 class MCSectionData;
+class MCStreamer;
 class MCSymbol;
 class MCValue;
 class raw_ostream;
@@ -53,8 +55,10 @@ protected:
 
   bool EvaluateAsRelocatableImpl(MCValue &Res, const MCAssembler *Asm,
                                  const MCAsmLayout *Layout,
-                                 const SectionAddrMap *Addrs,
-                                 bool InSet) const;
+                                 const MCFixup *Fixup,
+                                 const SectionAddrMap *Addrs, bool InSet,
+                                 bool ForceVarExpansion) const;
+
 public:
   /// @name Accessors
   /// @{
@@ -90,8 +94,19 @@ public:
   ///
   /// @param Res - The relocatable value, if evaluation succeeds.
   /// @param Layout - The assembler layout object to use for evaluating values.
+  /// @param Fixup - The Fixup object if available.
   /// @result - True on success.
-  bool EvaluateAsRelocatable(MCValue &Res, const MCAsmLayout &Layout) const;
+  bool EvaluateAsRelocatable(MCValue &Res, const MCAsmLayout *Layout,
+                             const MCFixup *Fixup) const;
+
+  /// \brief Try to evaluate the expression to the form (a - b + constant) where
+  /// neither a nor b are variables.
+  ///
+  /// This is a more aggressive variant of EvaluateAsRelocatable. The intended
+  /// use is for when relocations are not available, like the symbol value in
+  /// the symbol table.
+  bool EvaluateAsValue(MCValue &Res, const MCAsmLayout *Layout,
+                       const MCFixup *Fixup) const;
 
   /// FindAssociatedSection - Find the "associated section" for this expression,
   /// which is currently defined as the absolute section for constants, or
@@ -158,8 +173,15 @@ public:
     VK_TLSLDM,
     VK_TPOFF,
     VK_DTPOFF,
-    VK_TLVP,      // Mach-O thread local variable relocation
+    VK_TLVP,      // Mach-O thread local variable relocations
+    VK_TLVPPAGE,
+    VK_TLVPPAGEOFF,
+    VK_PAGE,
+    VK_PAGEOFF,
+    VK_GOTPAGE,
+    VK_GOTPAGEOFF,
     VK_SECREL,
+    VK_WEAKREF,   // The link between the symbols in .weakref foo, bar
 
     VK_ARM_NONE,
     VK_ARM_TARGET1,
@@ -246,6 +268,8 @@ public:
     VK_Mips_GOT_LO16,
     VK_Mips_CALL_HI16,
     VK_Mips_CALL_LO16,
+    VK_Mips_PCREL_HI16,
+    VK_Mips_PCREL_LO16,
 
     VK_COFF_IMGREL32 // symbol@imgrel (image-relative)
   };
@@ -505,8 +529,9 @@ public:
 
   virtual void PrintImpl(raw_ostream &OS) const = 0;
   virtual bool EvaluateAsRelocatableImpl(MCValue &Res,
-                                         const MCAsmLayout *Layout) const = 0;
-  virtual void AddValueSymbols(MCAssembler *) const = 0;
+                                         const MCAsmLayout *Layout,
+                                         const MCFixup *Fixup) const = 0;
+  virtual void visitUsedExpr(MCStreamer& Streamer) const = 0;
   virtual const MCSection *FindAssociatedSection() const = 0;
 
   virtual void fixELFSymbolsInTLSFixups(MCAssembler &) const = 0;

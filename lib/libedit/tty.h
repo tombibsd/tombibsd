@@ -442,6 +442,7 @@
 #define	QU_IO	2	/* used only for quoted chars	*/
 #define	NN_IO	3	/* The number of entries	*/
 
+/* Don't re-order */
 #define	MD_INP	0
 #define	MD_OUT	1
 #define	MD_CTL	2

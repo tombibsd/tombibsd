@@ -30,25 +30,35 @@
 #ifndef IPV6_H
 #define IPV6_H
 
-#include <sys/queue.h>
 #include <sys/uio.h>
 
 #include <netinet/in.h>
 
-#ifdef __linux__
+#if defined(__linux__) && defined(__GLIBC__)
 #  define _LINUX_IN6_H
 #  include <linux/ipv6.h>
 #endif
 
+#include "config.h"
 #include "dhcpcd.h"
 
 #define ALLROUTERS "ff02::2"
 
-#define ROUNDUP8(a) (1 + (((a) - 1) | 7))
+#define ROUNDUP8(a)  (1 + (((a) - 1) |  7))
+#define ROUNDUP16(a) (1 + (((a) - 1) | 16))
+
+#define EUI64_GBIT		0x01
+#define EUI64_UBIT		0x02
+#define EUI64_TO_IFID(in6)	do {(in6)->s6_addr[8] ^= EUI64_UBIT; } while (0)
+#define EUI64_GROUP(in6)	((in6)->s6_addr[8] & EUI64_GBIT)
 
 #ifndef ND6_INFINITE_LIFETIME
 #  define ND6_INFINITE_LIFETIME		((uint32_t)~0)
 #endif
+
+/* RFC7217 constants */
+#define IDGEN_RETRIES	3
+#define IDGEN_DELAY	1 /* second */
 
 /*
  * BSD kernels don't inform userland of DAD results.
@@ -64,17 +74,15 @@
 #endif
 
 /* This was fixed in NetBSD */
-#ifdef __NetBSD_Prereq__
-#  if __NetBSD_Prereq__(6, 99, 20)
-#    undef IPV6_POLLADDRFLAG
-#  endif
+#if defined(__NetBSD_Version__) && __NetBSD_Version__ >= 699002000
+#  undef IPV6_POLLADDRFLAG
 #endif
 
 struct ipv6_addr {
 	TAILQ_ENTRY(ipv6_addr) next;
 	struct interface *iface;
 	struct in6_addr prefix;
-	int prefix_len;
+	uint8_t prefix_len;
 	uint32_t prefix_vltime;
 	uint32_t prefix_pltime;
 	struct in6_addr addr;
@@ -82,9 +90,13 @@ struct ipv6_addr {
 	short flags;
 	char saddr[INET6_ADDRSTRLEN];
 	uint8_t iaid[4];
+	uint16_t ia_type;
 	struct interface *delegating_iface;
+	uint8_t prefix_exclude_len;
+	struct in6_addr prefix_exclude;
 
 	void (*dadcallback)(void *);
+	int dadcounter;
 	uint8_t *ns;
 	size_t nslen;
 	int nsprobes;
@@ -99,6 +111,9 @@ TAILQ_HEAD(ipv6_addrhead, ipv6_addr);
 #define IPV6_AF_DUPLICATED	0x0020
 #define IPV6_AF_DADCOMPLETED	0x0040
 #define IPV6_AF_DELEGATED	0x0080
+#define IPV6_AF_DELEGATEDPFX	0x0100
+#define IPV6_AF_DELEGATEDZERO	0x0200
+#define IPV6_AF_REQUEST		0x0400
 
 struct rt6 {
 	TAILQ_ENTRY(rt6) next;
@@ -106,7 +121,8 @@ struct rt6 {
 	struct in6_addr net;
 	struct in6_addr gate;
 	const struct interface *iface;
-	int metric;
+	unsigned int flags;
+	unsigned int metric;
 	unsigned int mtu;
 };
 TAILQ_HEAD(rt6_head, rt6);
@@ -145,9 +161,6 @@ struct ipv6_ctx {
 	const char *sfrom;
 
 	int nd_fd;
-#ifdef IPV6_POLLADDRFLAG
-	uint8_t polladdr_warned;
-#endif
 	struct ra_head *ra_routers;
 	struct rt6_head *routes;
 
@@ -157,12 +170,15 @@ struct ipv6_ctx {
 
 #ifdef INET6
 struct ipv6_ctx *ipv6_init(struct dhcpcd_ctx *);
-ssize_t ipv6_printaddr(char *, ssize_t, const uint8_t *, const char *);
+ssize_t ipv6_printaddr(char *, size_t, const uint8_t *, const char *);
+int ipv6_makestableprivate(struct in6_addr *addr,
+    const struct in6_addr *prefix, int prefix_len,
+    const struct interface *ifp, int *dad_counter);
 int ipv6_makeaddr(struct in6_addr *, const struct interface *,
     const struct in6_addr *, int);
 int ipv6_makeprefix(struct in6_addr *, const struct in6_addr *, int);
 int ipv6_mask(struct in6_addr *, int);
-int ipv6_prefixlen(const struct in6_addr *);
+uint8_t ipv6_prefixlen(const struct in6_addr *);
 int ipv6_userprefix( const struct in6_addr *, short prefix_len,
     uint64_t user_number, struct in6_addr *result, short result_len);
 void ipv6_checkaddrflags(void *);
@@ -174,29 +190,23 @@ void ipv6_handleifa(struct dhcpcd_ctx *ctx, int, struct if_head *,
     const char *, const struct in6_addr *, int);
 int ipv6_handleifa_addrs(int, struct ipv6_addrhead *,
     const struct in6_addr *, int);
-const struct ipv6_addr *ipv6_findaddr(const struct interface *,
+const struct ipv6_addr *ipv6_iffindaddr(const struct interface *,
     const struct in6_addr *);
-#define ipv6_linklocal(ifp) (ipv6_findaddr((ifp), NULL))
+struct ipv6_addr *ipv6_findaddr(struct dhcpcd_ctx *,
+    const struct in6_addr *, short);
+#define ipv6_linklocal(ifp) (ipv6_iffindaddr((ifp), NULL))
 int ipv6_addlinklocalcallback(struct interface *, void (*)(void *), void *);
 void ipv6_free_ll_callbacks(struct interface *);
+int ipv6_start(struct interface *);
 void ipv6_free(struct interface *);
 void ipv6_ctxfree(struct dhcpcd_ctx *);
+int ipv6_routedeleted(struct dhcpcd_ctx *, const struct rt6 *);
 int ipv6_removesubnet(struct interface *, struct ipv6_addr *);
 void ipv6_buildroutes(struct dhcpcd_ctx *);
 
-int if_address6(const struct ipv6_addr *, int);
-#define add_address6(a) if_address6(a, 1)
-#define del_address6(a) if_address6(a, -1)
-int in6_addr_flags(const char *, const struct in6_addr *);
-
-int if_route6(const struct rt6 *rt, int);
-#define add_route6(rt) if_route6(rt, 1)
-#define change_route6(rt) if_route6(rt, 0)
-#define del_route6(rt) if_route6(rt, -1)
-#define del_src_route6(rt) if_route6(rt, -2);
-
 #else
 #define ipv6_init(a) NULL
+#define ipv6_start(a) (-1)
 #define ipv6_free_ll_callbacks(a)
 #define ipv6_free(a)
 #define ipv6_ctxfree(a)

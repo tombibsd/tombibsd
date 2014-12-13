@@ -1079,7 +1079,7 @@ lfs_gro_rename(struct mount *mp, kauth_cred_t cred,
 	KASSERT(VOP_ISLOCKED(tdvp) == LK_EXCLUSIVE);
 	KASSERT((tvp == NULL) || (VOP_ISLOCKED(tvp) == LK_EXCLUSIVE));
 
-	error = SET_DIROP_REMOVE(tdvp, tvp);
+	error = lfs_set_dirop(tdvp, tvp);
 	if (error != 0)
 		return error;
 
@@ -1092,7 +1092,15 @@ lfs_gro_rename(struct mount *mp, kauth_cred_t cred,
 
 	UNMARK_VNODE(fdvp);
 	UNMARK_VNODE(fvp);
-	SET_ENDOP_REMOVE(VFSTOULFS(mp)->um_lfs, tdvp, tvp, "rename");
+	UNMARK_VNODE(tdvp);
+	if (tvp) {
+		UNMARK_VNODE(tvp);
+	}
+	lfs_unset_dirop(VFSTOULFS(mp)->um_lfs, tdvp, "rename");
+	vrele(tdvp);
+	if (tvp) {
+		vrele(tvp);
+	}
 
 	return error;
 }

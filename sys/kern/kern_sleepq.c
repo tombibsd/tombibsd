@@ -230,7 +230,7 @@ sleepq_enqueue(sleepq_t *sq, wchan_t wchan, const char *wmesg, syncobj_t *sobj)
  *	timo is a timeout in ticks.  timo = 0 specifies an infinite timeout.
  */
 int
-sleepq_block(int timo, bool catch)
+sleepq_block(int timo, bool catch_p)
 {
 	int error = 0, sig;
 	struct proc *p;
@@ -244,7 +244,7 @@ sleepq_block(int timo, bool catch)
 	 * If sleeping interruptably, check for pending signals, exits or
 	 * core dump events.
 	 */
-	if (catch) {
+	if (catch_p) {
 		l->l_flag |= LW_SINTR;
 		if ((l->l_flag & (LW_CANCELLED|LW_WEXIT|LW_WCORE)) != 0) {
 			l->l_flag &= ~LW_CANCELLED;
@@ -274,7 +274,7 @@ sleepq_block(int timo, bool catch)
 		}
 	}
 
-	if (catch && error == 0) {
+	if (catch_p && error == 0) {
 		p = l->l_proc;
 		if ((l->l_flag & (LW_CANCELLED | LW_WEXIT | LW_WCORE)) != 0)
 			error = EINTR;

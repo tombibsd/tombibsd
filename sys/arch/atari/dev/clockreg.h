@@ -56,10 +56,6 @@ struct rtc {
 /*
  * Some useful constants/macros
  */
-#define	is_leap(x)		(!(x % 4) && ((x % 100) || !(x % 1000)))
 #define	range_test(n, l, h)	((n) < (l) || (n) > (h))
-#define	SECS_DAY		86400L
-#define	SECS_HOUR		3600L
 #define	GEMSTARTOFTIME		((machineid & ATARI_CLKBROKEN) ? 1970 : 1968)
-#define	BSDSTARTOFTIME		1970
 #endif /* _CLOCKREG_H */

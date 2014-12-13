@@ -2059,7 +2059,7 @@ ieee80211_pwrsave(struct ieee80211com *ic, struct ieee80211_node *ni,
 		return;
 	}
 	/*
-	 * Tag the frame with it's expiry time and insert
+	 * Tag the frame with its expiry time and insert
 	 * it in the queue.  The aging interval is 4 times
 	 * the listen interval specified by the station. 
 	 * Frames that sit around too long are reclaimed

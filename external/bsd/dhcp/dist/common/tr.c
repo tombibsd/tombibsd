@@ -1,5 +1,4 @@
 /*	$NetBSD$	*/
-
 /* tr.c
 
    token ring interface support

@@ -1277,4 +1277,6 @@ admsw_mediastatus(struct ifnet *ifp, struct ifmediareq *ifmr)
 	ifmr->ifm_active |= (status & PHY_ST_100M) ? IFM_100_TX : IFM_10_T;
 	if (status & PHY_ST_FDX)
 		ifmr->ifm_active |= IFM_FDX;
+	else
+		ifmr->ifm_active |= IFM_HDX;
 }

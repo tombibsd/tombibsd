@@ -27,9 +27,11 @@ rm -f ns2/private.secure.example.db
 rm -f ns2/badparam.db ns2/badparam.db.bad
 rm -f ns2/single-nsec3.db
 rm -f ns2/nsec3chain-test.db
+rm -f ns2/in-addr.arpa.db
 rm -f */example.bk
 rm -f dig.out.*
-rm -f delve.out.*
+rm -f rndc.out.*
+rm -f delv.out*
 rm -f ns2/dlv.db
 rm -f ns3/multiple.example.db ns3/nsec3-unknown.example.db ns3/nsec3.example.db
 rm -f ns3/optout-unknown.example.db ns3/optout.example.db
@@ -69,3 +71,4 @@ rm -f signing.out*
 rm -f canonical?.*
 rm -f ns3/siginterval.conf
 rm -f ns4/named_dump.db
+rm -f ns7/split-rrsig.db ns7/split-rrsig.db.unsplit

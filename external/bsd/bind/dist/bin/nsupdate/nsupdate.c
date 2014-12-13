@@ -964,7 +964,12 @@ get_addresses(char *host, in_port_t port,
 		      host, isc_result_totext(result));
 }
 
-#define PARSE_ARGS_FMT "dDML:y:ghlovk:p:Pr:R::t:Tu:"
+static void
+version(void) {
+	fputs("nsupdate " VERSION "\n", stderr);
+}
+
+#define PARSE_ARGS_FMT "dDML:y:ghlovk:p:Pr:R::t:Tu:V"
 
 static void
 pre_parse_args(int argc, char **argv) {
@@ -990,7 +995,7 @@ pre_parse_args(int argc, char **argv) {
 					argv[0], isc_commandline_option);
 			fprintf(stderr, "usage: nsupdate [-dD] [-L level] [-l]"
 				"[-g | -o | -y keyname:secret | -k keyfile] "
-				"[-v] [filename]\n");
+				"[-v] [-V] [filename]\n");
 			exit(1);
 
 		case 'P':
@@ -1012,6 +1017,11 @@ pre_parse_args(int argc, char **argv) {
 				if (strncmp(buf, "TYPE", 4) != 0)
 					fprintf(stdout, "%s\n", buf);
 			}
+			doexit = ISC_TRUE;
+			break;
+
+		case 'V':
+			version();
 			doexit = ISC_TRUE;
 			break;
 
@@ -2024,6 +2034,7 @@ do_next_command(char *cmdline) {
 	}
 	if (strcasecmp(word, "help") == 0) {
 		fprintf(stdout,
+"nsupdate " VERSION ":\n"
 "local address [port]      (set local resolver)\n"
 "server address [port]     (set master server for zone)\n"
 "send                      (send the update request)\n"
@@ -2042,6 +2053,10 @@ do_next_command(char *cmdline) {
 "[prereq] yxrrset ....     (does this RRset not exist)\n"
 "[update] add ....         (add the given record to the zone)\n"
 "[update] del[ete] ....    (remove the given record(s) from the zone)\n");
+		return (STATUS_MORE);
+	}
+	if (strcasecmp(word, "version") == 0) {
+		fprintf(stdout, "nsupdate " VERSION "\n");
 		return (STATUS_MORE);
 	}
 	fprintf(stderr, "incorrect section name: %s\n", word);
@@ -2123,12 +2138,12 @@ check_tsig_error(dns_rdataset_t *rdataset, isc_buffer_t *b) {
 	if (tsig.error != 0) {
 		if (isc_buffer_remaininglength(b) < 1)
 		      check_result(ISC_R_NOSPACE, "isc_buffer_remaininglength");
-		isc__buffer_putstr(b, "(" /*)*/);
+		isc_buffer_putstr(b, "(" /*)*/);
 		result = dns_tsigrcode_totext(tsig.error, b);
 		check_result(result, "dns_tsigrcode_totext");
 		if (isc_buffer_remaininglength(b) < 1)
 		      check_result(ISC_R_NOSPACE, "isc_buffer_remaininglength");
-		isc__buffer_putstr(b,  /*(*/ ")");
+		isc_buffer_putstr(b,  /*(*/ ")");
 	}
 }
 

@@ -63,7 +63,7 @@ static void	sdt_load(void *);
 
 static const struct cdevsw sdt_cdevsw = {
 	sdt_open, noclose, noread, nowrite, noioctl,
-	nostop, notty, nopoll, nommap, nokqfilter,
+	nostop, notty, nopoll, nommap, nokqfilter, nodiscard,
 	D_OTHER
 };
 

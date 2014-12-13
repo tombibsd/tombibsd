@@ -41,7 +41,7 @@ __RCSID("$NetBSD$");
 
 #include "extern.h"
 
- __weak_alias(__sigaction14, __libc_sigaction14)
+__weak_alias(__sigaction14, __libc_sigaction14)
 
 int
 __libc_sigaction14(int sig, const struct sigaction *act, struct sigaction *oact)

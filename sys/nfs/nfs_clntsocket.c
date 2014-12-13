@@ -964,13 +964,13 @@ nfs_sndlock(struct nfsmount *nmp, struct nfsreq *rep)
 {
 	struct lwp *l;
 	int timeo = 0;
-	bool catch = false;
+	bool catch_p = false;
 	int error = 0;
 
 	if (rep) {
 		l = rep->r_lwp;
 		if (rep->r_nmp->nm_flag & NFSMNT_INT)
-			catch = true;
+			catch_p = true;
 	} else
 		l = NULL;
 	mutex_enter(&nmp->nm_lock);
@@ -979,13 +979,13 @@ nfs_sndlock(struct nfsmount *nmp, struct nfsreq *rep)
 			error = EINTR;
 			goto quit;
 		}
-		if (catch) {
+		if (catch_p) {
 			cv_timedwait_sig(&nmp->nm_sndcv, &nmp->nm_lock, timeo);
 		} else {
 			cv_timedwait(&nmp->nm_sndcv, &nmp->nm_lock, timeo);
 		}
-		if (catch) {
-			catch = false;
+		if (catch_p) {
+			catch_p = false;
 			timeo = 2 * hz;
 		}
 	}

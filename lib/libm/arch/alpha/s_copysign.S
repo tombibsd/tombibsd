@@ -31,6 +31,9 @@
 
 #include <machine/asm.h>
 
+STRONG_ALIAS(_copysignl, copysign)
+WEAK_ALIAS(copysignl, _copysignl)
+
 LEAF(copysign, 2)
 	cpys	fa1, fa0, fv0
 	RET

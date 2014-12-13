@@ -24,12 +24,12 @@ fpsetround(fp_rnd rnd_dir)
 	fp_rnd old;
 	fp_rnd new;
 
-	__asm("cfc1 %0,$31" : "=r" (old));
+	__asm(".set push; .set noat; cfc1 %0,$31; .set pop" : "=r" (old));
 
 	new = old & ~0x03;
 	new |= rnd_dir & 0x03;
 
-	__asm("ctc1 %0,$31" : : "r" (new));
+	__asm(".set push; .set noat; ctc1 %0,$31; .set pop" : "=r" (new));
 
 	return old & 0x03;
 }

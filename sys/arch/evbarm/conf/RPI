@@ -17,10 +17,7 @@ options 	RTC_OFFSET=0	# hardware clock is this many mins. west of GMT
 
 # CPU options
 
-options 	CPU_ARM1176
-options 	BCM2835
 options 	PMAPCOUNTERS
-options 	FPU_VFP
 
 # Architecture options
 
@@ -70,8 +67,8 @@ options 	INET6		# IPV6
 #options 	PPP_FILTER	# Active filter support for PPP (requires bpf)
 #options 	TCP_DEBUG	# Record last TCP_NDEBUG packets with SO_DEBUG
 
-#options 	NFS_BOOT_BOOTP
-#options 	NFS_BOOT_DHCP
+options 	NFS_BOOT_BOOTP
+options 	NFS_BOOT_DHCP
 #options		NFS_BOOT_BOOTSTATIC
 #options		NFS_BOOTSTATIC_MYIP="\"192.168.1.4\""
 #options		NFS_BOOTSTATIC_GWIP="\"192.168.1.1\""
@@ -83,20 +80,22 @@ options		NFS_BOOT_RWSIZE=1024
 
 # Compatibility options
 
+options		COMPAT_NETBSD32	# allow running arm (e.g. non-earm) binaries
 #options 	COMPAT_43	# 4.3BSD compatibility.
-options 	COMPAT_60	# NetBSD 6.0 compatibility.
-#options 	COMPAT_50	# NetBSD 5.0 compatibility.
-#options 	COMPAT_40	# NetBSD 4.0 compatibility.
-#options 	COMPAT_30	# NetBSD 3.0 compatibility.
-#options 	COMPAT_20	# NetBSD 2.0 compatibility.
-#options 	COMPAT_16	# NetBSD 1.6 compatibility.
-#options 	COMPAT_15	# NetBSD 1.5 compatibility.
-#options 	COMPAT_14	# NetBSD 1.4 compatibility.
-#options 	COMPAT_13	# NetBSD 1.3 compatibility.
-#options 	COMPAT_12	# NetBSD 1.2 compatibility.
-#options 	COMPAT_11	# NetBSD 1.1 compatibility.
-#options 	COMPAT_10	# NetBSD 1.0 compatibility.
-#options 	COMPAT_09	# NetBSD 0.9 compatibility.
+#options 	COMPAT_09	# NetBSD 0.9,
+#options 	COMPAT_10	# NetBSD 1.0,
+#options 	COMPAT_11	# NetBSD 1.1,
+#options 	COMPAT_12	# NetBSD 1.2,
+#options 	COMPAT_13	# NetBSD 1.3,
+#options 	COMPAT_14	# NetBSD 1.4,
+#options 	COMPAT_15	# NetBSD 1.5,
+#options 	COMPAT_16	# NetBSD 1.6,
+#options 	COMPAT_20	# NetBSD 2.0,
+#options 	COMPAT_30	# NetBSD 3.0,
+#options 	COMPAT_40	# NetBSD 4.0,
+#options 	COMPAT_50	# NetBSD 5.0,
+options 	COMPAT_60	# NetBSD 6.0, and
+options 	COMPAT_70	# NetBSD 7.0 binary compatibility.
 #options 	TCP_COMPAT_42	# 4.2BSD TCP/IP bug compat. Not recommended.
 #options		COMPAT_BSDPTY	# /dev/[pt]ty?? ptys.
 
@@ -129,7 +128,7 @@ options 	KTRACE		# system call tracing, a la ktrace(1)
 
 # Development and Debugging options
 #options 	PERFCTRS	# performance counters
-options 	DIAGNOSTIC	# internally consistency checks
+options 	DIAGNOSTIC	# internal consistency checks
 options 	DEBUG
 #options 	LOCKDEBUG
 #options 	IPKDB		# remote kernel debugging
@@ -139,7 +138,7 @@ options		DDB_ONPANIC=1
 options 	DDB_HISTORY_SIZE=100	# Enable history editing in DDB
 #options 	KGDB,KGDB_PLCOMUNIT=0,KGDB_DEVRATE=115200,KGDB_CONMODE=0xB00
 makeoptions	DEBUG="-g"	# compile full symbol table
-options 	SYMTAB_SPACE=880000
+makeoptions	COPY_SYMTAB=1
 options 	PLCONSOLE
 #options 	PLCONSOLE,PLCOMCNUNIT=0,PLCONSPEED=115200,PLCONMODE=0xB00
 
@@ -178,6 +177,9 @@ bcmicu0		at obio?
 bcmmbox0	at obio?
 vcmbox0 	at bcmmbox0
 
+# DMA Controller
+bcmdmac0	at obio?
+
 # VCHIQ
 vchiq0		at obio?
 
@@ -192,6 +194,7 @@ plcom0		at obio?
 genfb0		at obio?
 wsdisplay*	at genfb?
 options		VCONS_DRAW_INTR
+#options 	RPI_HWCURSOR
 
 # System timer
 bcmtmr0		at obio?
@@ -219,11 +222,41 @@ usb* 		at dwctwo?
 # USB device drivers
 include "dev/usb/usbdevices.config"
 
-ukphy*		at mii? phy ?
+midi*		at midibus?
+
+# MII/PHY support
+exphy* 		at mii? phy ?		# 3Com internal PHYs
+gentbi* 	at mii? phy ?		# Generic Ten-Bit 1000BASE-[CLS]X PHYs
+glxtphy*	at mii? phy ?		# Level One LXT-1000 PHYs
+gphyter* 	at mii? phy ?		# NS83861 Gig-E PHY
+icsphy*		at mii? phy ?		# Integrated Circuit Systems ICS189x
+igphy*		at mii? phy ?		# Intel IGP01E1000
+ihphy*		at mii? phy ?		# Intel 82577 PHYs
+ikphy*		at mii? phy ?		# Intel 82563 PHYs
+inphy*		at mii? phy ?		# Intel 82555 PHYs
+iophy*		at mii? phy ?		# Intel 82553 PHYs
+lxtphy*		at mii? phy ?		# Level One LXT-970 PHYs
+makphy*		at mii? phy ?		# Marvell Semiconductor 88E1000 PHYs
+nsphy*		at mii? phy ?		# NS83840 PHYs
+nsphyter*	at mii? phy ? 		# NS83843 PHYs
+pnaphy*		at mii? phy ?		# generic HomePNA PHYs
+qsphy*		at mii? phy ?		# Quality Semiconductor QS6612 PHYs
+rdcphy*		at mii? phy ?		# RDC R6040 10/100 PHY
+rgephy*		at mii? phy ?		# Realtek 8169S/8110S internal PHYs
+rlphy*		at mii? phy ?		# Realtek 8139/8201L PHYs
+sqphy*		at mii? phy ?		# Seeq 80220/80221/80223 PHYs
+tlphy*		at mii? phy ?		# ThunderLAN PHYs
+tqphy*		at mii? phy ?		# TDK Semiconductor PHYs
+urlphy*		at mii? phy ?		# Realtek RTL8150L internal PHYs
+ukphy*		at mii? phy ?		# generic unknown PHYs
 
 # Broadcom Serial Control (I2C)
 bsciic* at obio?
 iic* at i2cbus?
+
+# 'DS3231 Raspberry Pi RTC Board Real Time Clock Module for Arduino'
+# sold by linksprite.com
+#dsrtc* at iic1 addr 0x68 flags 3231
 
 # SPI controller
 bcmspi* at obio?
@@ -231,7 +264,7 @@ spi* at spibus?
 
 # PIFace or other boards using that chip (needs gpio)
 #mcp23s17gpio0 at spi? slave 0 flags 0
-#mcp23s17gpio1 at spi? slave 0 flags 1 
+#mcp23s17gpio1 at spi? slave 0 flags 1
 #mcp23s17gpio2 at spi? slave 0 flags 2
 #mcp23s17gpio3 at spi? slave 0 flags 3
 

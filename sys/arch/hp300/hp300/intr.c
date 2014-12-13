@@ -45,6 +45,8 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/cpu.h>
 #include <sys/intr.h>
 
+#include "audio.h"
+
 /*
  * The location and size of the autovectored interrupt portion
  * of the vector table.
@@ -208,6 +210,12 @@ intr_dispatch(int evec /* format | vector offset */)
 	for (ih = LIST_FIRST(&list->hi_q) ; ih != NULL;
 	    ih = LIST_NEXT(ih, ih_q))
 		handled |= (*ih->ih_fn)(ih->ih_arg);
+
+#if NAUDIO > 0
+	/* hardclock() on ipl 6 is already handled in locore.s */
+	if (ipl == 6)
+		return;
+#endif
 
 	if (handled)
 		straycount = 0;

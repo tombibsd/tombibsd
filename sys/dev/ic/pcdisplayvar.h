@@ -26,7 +26,9 @@
  *
  */
 
+#ifdef _KERNEL_OPT
 #include "opt_pcdisplay.h"
+#endif
 
 struct pcdisplayscreen {
 	struct pcdisplay_handle *hdl;

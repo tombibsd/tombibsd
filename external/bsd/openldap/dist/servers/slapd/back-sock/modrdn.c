@@ -1,10 +1,10 @@
 /*	$NetBSD$	*/
 
 /* modrdn.c - sock backend modrdn function */
-/* OpenLDAP: pkg/ldap/servers/slapd/back-sock/modrdn.c,v 1.3.2.3 2010/04/13 20:23:41 kurt Exp */
+/* $OpenLDAP$ */
 /* This work is part of OpenLDAP Software <http://www.openldap.org/>.
  *
- * Copyright 2007-2010 The OpenLDAP Foundation.
+ * Copyright 2007-2014 The OpenLDAP Foundation.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without

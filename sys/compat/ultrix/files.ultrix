@@ -6,6 +6,7 @@
 # ports should define any machine-specific files they need in their
 # own file lists.
 
+define	compat_ultrix
 file	compat/ultrix/ultrix_exec_ecoff.c	compat_ultrix & exec_ecoff
 file	compat/ultrix/ultrix_pathname.c		compat_ultrix
 file	compat/ultrix/ultrix_ioctl.c		compat_ultrix

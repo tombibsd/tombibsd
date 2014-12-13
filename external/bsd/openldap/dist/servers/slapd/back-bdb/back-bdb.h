@@ -1,10 +1,10 @@
 /*	$NetBSD$	*/
 
 /* back-bdb.h - bdb back-end header file */
-/* OpenLDAP: pkg/ldap/servers/slapd/back-bdb/back-bdb.h,v 1.141.2.24 2010/04/13 20:23:23 kurt Exp */
+/* $OpenLDAP$ */
 /* This work is part of OpenLDAP Software <http://www.openldap.org/>.
  *
- * Copyright 2000-2010 The OpenLDAP Foundation.
+ * Copyright 2000-2014 The OpenLDAP Foundation.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without

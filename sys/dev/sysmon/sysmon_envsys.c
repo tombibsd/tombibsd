@@ -579,6 +579,7 @@ sysmon_envsys_sensor_detach(struct sysmon_envsys *sme, envsys_data_t *edata)
 {
 	envsys_data_t *oedata;
 	bool found = false;
+	bool destroy = false;
 
 	KASSERT(sme != NULL || edata != NULL);
 
@@ -604,10 +605,17 @@ sysmon_envsys_sensor_detach(struct sysmon_envsys *sme, envsys_data_t *edata)
 	 * remove it, unhook from rnd(4), and decrement the sensors count.
 	 */
 	sme_event_unregister_sensor(sme, edata);
+	if (LIST_EMPTY(&sme->sme_events_list)) {
+		sme_events_halt_callout(sme);
+		destroy = true;
+	}
 	TAILQ_REMOVE(&sme->sme_sensors_list, edata, sensors_head);
 	sme->sme_nsensors--;
 	sysmon_envsys_release(sme, true);
 	mutex_exit(&sme->sme_mtx);
+
+	if (destroy)
+		sme_events_destroy(sme);
 
 	return 0;
 }
@@ -778,6 +786,7 @@ out:
 		 */
 		TAILQ_FOREACH(edata, &sme->sme_sensors_list, sensors_head) {
 			if (edata->flags & ENVSYS_FHAS_ENTROPY) {
+				uint32_t rnd_type, rnd_flag = 0;
 				size_t n;
 				int tail = 1;
 
@@ -797,8 +806,34 @@ out:
 					} else
 						tail = 0;
 				}
+				rnd_flag |= RND_FLAG_COLLECT_TIME;
+				rnd_flag |= RND_FLAG_ESTIMATE_TIME;
+
+				switch (edata->units) {
+				    case ENVSYS_STEMP:
+				    case ENVSYS_SFANRPM:
+				    case ENVSYS_INTEGER:
+					rnd_type = RND_TYPE_ENV;
+					rnd_flag |= RND_FLAG_COLLECT_VALUE;
+					rnd_flag |= RND_FLAG_ESTIMATE_VALUE;
+					break;
+				    case ENVSYS_SVOLTS_AC:
+				    case ENVSYS_SVOLTS_DC:
+				    case ENVSYS_SOHMS:
+				    case ENVSYS_SWATTS:
+				    case ENVSYS_SAMPS:
+				    case ENVSYS_SWATTHOUR:
+				    case ENVSYS_SAMPHOUR:
+					rnd_type = RND_TYPE_POWER;
+					rnd_flag |= RND_FLAG_COLLECT_VALUE;
+					rnd_flag |= RND_FLAG_ESTIMATE_VALUE;
+					break;
+				    default:
+					rnd_type = RND_TYPE_UNKNOWN;
+					break;
+				}
 				rnd_attach_source(&edata->rnd_src, rnd_name,
-				    RND_TYPE_ENV, 0);
+				    rnd_type, rnd_flag);
 			}
 		}
 		DPRINTF(("%s: driver '%s' registered (nsens=%d nevent=%d)\n",
@@ -891,10 +926,6 @@ sysmon_envsys_unregister(struct sysmon_envsys *sme)
 	KASSERT(sme != NULL);
 
 	/*
-	 * Unregister all events associated with device.
-	 */
-	sme_event_unregister_all(sme);
-	/*
 	 * Decrement global sensors counter and the first_sensor index
 	 * for remaining devices in the list (only used for compatibility
 	 * with previous API), and remove the device from the list.
@@ -907,6 +938,11 @@ sysmon_envsys_unregister(struct sysmon_envsys *sme)
 	}
 	LIST_REMOVE(sme, sme_list);
 	mutex_exit(&sme_global_mtx);
+
+	/*
+	 * Unregister all events associated with device.
+	 */
+	sme_event_unregister_all(sme);
 
 	/*
 	 * Remove the device (and all its objects) from the global dictionary.
@@ -1206,7 +1242,10 @@ sme_remove_userprops(void)
 				snprintf(rnd_name, sizeof(rnd_name), "%s-%s",
 				    sme->sme_name, edata->desc);
 				rnd_attach_source(&edata->rnd_src, rnd_name,
-				    RND_TYPE_ENV, 0);
+				    RND_TYPE_ENV, RND_FLAG_COLLECT_VALUE|
+						  RND_FLAG_COLLECT_TIME|
+						  RND_FLAG_ESTIMATE_VALUE|
+						  RND_FLAG_ESTIMATE_TIME);
 			}
 		}
 

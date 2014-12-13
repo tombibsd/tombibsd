@@ -7,6 +7,9 @@ LIB=	xcb
 .PATH:	${X11SRCDIR.${LIB}}
 .PATH:	${.CURDIR}/../files
 
+SHLIB_MAJOR=	2
+SHLIB_MINOR=	0
+
 SRCS=	xcb_auth.c \
 	xcb_conn.c \
 	xcb_ext.c \

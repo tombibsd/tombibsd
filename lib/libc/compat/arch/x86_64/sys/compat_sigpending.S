@@ -48,3 +48,4 @@ _SYSCALL(sigpending,compat_13_sigpending13)
 	movl	%eax,(%rdi)		# store old mask
 	xorl	%eax,%eax
 	ret
+END(sigpending)

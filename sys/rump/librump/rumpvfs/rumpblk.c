@@ -101,6 +101,7 @@ static const struct bdevsw rumpblk_bdevsw = {
 	.d_ioctl = rumpblk_ioctl,
 	.d_dump = nodump,
 	.d_psize = nosize,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK
 };
 
@@ -111,6 +112,7 @@ static const struct bdevsw rumpblk_bdevsw_fail = {
 	.d_ioctl = rumpblk_ioctl,
 	.d_dump = nodump,
 	.d_psize = nosize,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK
 };
 
@@ -125,6 +127,7 @@ static const struct cdevsw rumpblk_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = nommap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK
 };
 
@@ -336,6 +339,25 @@ rumpblk_deregister(const char *path)
 	rblk->rblk_path = NULL;
 
 	return 0;
+}
+
+/*
+ * Release all backend resources, to be called only when the rump
+ * kernel is being shut down.
+ * This routine does not do a full "fini" since we're going down anyway.
+ */
+void
+rumpblk_fini(void)
+{
+	int i;
+
+	for (i = 0; i < RUMPBLK_SIZE; i++) {
+		struct rblkdev *rblk;
+
+		rblk = &minors[i];
+		if (rblk->rblk_fd != -1)
+			backend_close(rblk);
+	}
 }
 
 static int

@@ -533,11 +533,13 @@ acpi_pci_link_attach(struct acpi_pci_link_softc *sc)
 	 * run _DIS (i.e., the method doesn't exist), assume the initial
 	 * IRQ was routed by the BIOS.
 	 */
+#ifndef ACPI__DIS_IS_BROKEN
 	if (ACPI_SUCCESS(AcpiEvaluateObject(sc->pl_handle, "_DIS", NULL,
 	    NULL)))
 		for (i = 0; i < sc->pl_num_links; i++)
 			sc->pl_links[i].l_irq = PCI_INVALID_IRQ;
 	else
+#endif
 		for (i = 0; i < sc->pl_num_links; i++)
 			if (PCI_INTERRUPT_VALID(sc->pl_links[i].l_irq))
 				sc->pl_links[i].l_routed = TRUE;

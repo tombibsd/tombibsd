@@ -241,10 +241,11 @@
  * Prevent Linux spurious warnings
  */
 #if defined(__linux__) && defined(__GNUC__) && (__GNUC__ > 3)
-#define isc_util_fwrite(a, b, c, d)	\
+#define isc_util_fwrite(a, b, c, d)    \
 	__builtin_expect(fwrite((a), (b), (c), (d)), (c))
 #else
-#define isc_util_fwrite(a, b, c, d)	fwrite((a), (b), (c), (d))
+#define isc_util_fwrite(a, b, c, d)    fwrite((a), (b), (c), (d))
 #endif
+
 
 #endif /* ISC_UTIL_H */

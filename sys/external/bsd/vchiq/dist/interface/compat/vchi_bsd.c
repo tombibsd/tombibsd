@@ -106,7 +106,7 @@ int
 del_timer_sync(struct timer_list *t)
 {
 	spin_lock(&t->mtx);
-	callout_stop(&t->callout);
+	callout_halt(&t->callout, &t->mtx);
 	spin_unlock(&t->mtx);
 
 	spin_lock_destroy(&t->mtx);
@@ -136,7 +136,7 @@ void
 _sema_init(struct semaphore *s, int value)
 {
 	memset(s, 0, sizeof(*s));
-	mutex_init(&s->mtx, MUTEX_DEFAULT, IPL_VM);
+	mutex_init(&s->mtx, MUTEX_DEFAULT, IPL_SCHED);
 	cv_init(&s->cv, "semacv");
 	s->value = value;
 }
@@ -314,8 +314,8 @@ vchiq_thread_create(int (*threadfn)(void *data),
 	va_end(ap);
 
 	newt = NULL;
-	if (kthread_create(PRI_NONE, 0, NULL, kthread_wrapper, slot, &newt,
-	    "%s", name) != 0) {
+	if (kthread_create(PRI_NONE, KTHREAD_MPSAFE, NULL, kthread_wrapper,
+	    slot, &newt, "%s", name) != 0) {
 		/* Just to be sure */
 		newt = NULL;
 	} else {

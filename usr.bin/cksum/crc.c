@@ -115,7 +115,7 @@ int
 crc(int fd, u_int32_t *cval, off_t *clen)
 {
 	u_char *p;
-	int nr;
+	ssize_t nr;
 	u_int32_t thecrc;
 	off_t len;
 	u_char buf[16 * 1024];

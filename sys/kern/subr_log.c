@@ -387,8 +387,26 @@ logputchar(int c)
 				mbp->msg_bufx = 0;
 			/* If the buffer is full, keep the most recent data. */
 			if (mbp->msg_bufr == mbp->msg_bufx) {
-				 if (++mbp->msg_bufr >= mbp->msg_bufs)
-					mbp->msg_bufr = 0;
+				char c0;
+				int i;
+
+				/*
+				 * Move forward read pointer to the next line
+				 * in the buffer.  Note that the buffer is
+				 * a ring buffer so we should reset msg_bufr
+				 * to 0 when msg_bufr exceeds msg_bufs.
+				 *
+				 * To prevent to loop forever, give up if we
+				 * cannot find a newline in mbp->msg_bufs
+				 * characters (the max size of the buffer).
+				 */
+				for (i = 0; i < mbp->msg_bufs; i++) {
+					c0 = mbp->msg_bufc[mbp->msg_bufr];
+					if (++mbp->msg_bufr >= mbp->msg_bufs)
+						mbp->msg_bufr = 0;
+					if (c0 == '\n')
+						break;
+				}
 			}
 		}
 	}
@@ -407,5 +425,6 @@ const struct cdevsw log_cdevsw = {
 	.d_poll = logpoll,
 	.d_mmap = nommap,
 	.d_kqfilter = logkqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_OTHER | D_MPSAFE
 };

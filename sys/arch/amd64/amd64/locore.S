@@ -520,7 +520,7 @@ ENTRY(start)
 
 	/* Find end of kernel image. */
 	movl	$RELOC(end),%edi
-#if (NKSYMS || defined(DDB) || defined(MODULAR)) && !defined(SYMTAB_SPACE)
+#if (NKSYMS || defined(DDB) || defined(MODULAR)) && !defined(COPY_SYMTAB)
 	/* Save the symbols (if loaded). */
 	movl	RELOC(esym),%eax
 	testl	%eax,%eax
@@ -1017,9 +1017,8 @@ ENTRY(cpu_switchto)
 	jne	5f
 
 	/*
-	 * Restore cr0 (including FPU state).  Raise the IPL to IPL_HIGH.
-	 * FPU IPIs can alter the LWP's saved cr0.  Dropping the priority
-	 * is deferred until mi_switch(), when cpu_switchto() returns.
+	 * Restore cr0 including FPU state (may have CR0_TS set).  Note that
+	 * IPL_SCHED prevents from FPU interrupt altering the LWP's saved cr0.
 	 */
 2:
 #ifndef XEN

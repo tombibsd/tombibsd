@@ -500,29 +500,14 @@ prom_get_msgbuf(int len, int align)
 		cell_t phys_lo;
 	} args;
 	paddr_t addr;
-	int rooth;
-	int is_e250 = 1;
-
-	/* E250s and E450s tend to have buggy PROMs that break on test-method */
-	/* XXX - need to find the reason why this breaks someday */
-	if ((rooth = OF_finddevice("/")) != -1) {
-		char name[80];
-
-		if ((OF_getprop(rooth, "name", &name, sizeof(name))) != -1) {
-			if (strcmp(name, "SUNW,Ultra-250")
-			    && strcmp(name, "SUNW,Ultra-4")) 
-				is_e250 = 0;
-		} else prom_printf("prom_get_msgbuf: cannot get \"name\"\r\n");
-	} else prom_printf("prom_get_msgbuf: cannot open root device \r\n");
 
 	if (memh == -1 && ((memh = get_memory_handle()) == -1)) {
 		prom_printf("prom_get_msgbuf: cannot get memh\r\n");
 		return -1;
 	}
-	if (is_e250) {
-		prom_printf("prom_get_msgbuf: Cannot recover msgbuf on E250\r\n");
-	} else if (OF_test("test-method") == 0) {
-		if (OF_test_method(memh, "SUNW,retain") != 0) {
+	if (OF_test("test-method") == 0) {
+		if (OF_test_method(OF_instance_to_package(memh),
+		    "SUNW,retain") == 0) {
 			args.name = ADR2CELL(&"call-method");
 			args.nargs = 5;
 			args.nreturns = 3;
@@ -551,7 +536,7 @@ prom_get_msgbuf(int len, int align)
 
 #ifdef MULTIPROCESSOR
 /*
- * Start secondary cpu, arrange 'func' as the entry.
+ * Start secondary cpu identified by node, arrange 'func' as the entry.
  */
 void
 prom_startcpu(u_int cpu, void *func, u_long arg)
@@ -573,6 +558,37 @@ prom_startcpu(u_int cpu, void *func, u_long arg)
         args.arg = (cell_t)arg;
 
         openfirmware(&args);
+}
+
+/*
+ * Start secondary cpu identified by cpuid, arrange 'func' as the entry.
+ * Returns -1 in case the openfirmware method is not available.
+ * Otherwise the result value from the openfirmware call is returned.
+ */
+int
+prom_startcpu_by_cpuid(u_int cpu, void *func, u_long arg)
+{
+	static struct {
+		cell_t  name;
+		cell_t  nargs;
+		cell_t  nreturns;
+		cell_t  cpu;
+		cell_t  func;
+		cell_t  arg;
+		cell_t	status;
+	} args;
+
+	if (OF_test("SUNW,start-cpu-by-cpuid") != 0)
+		return -1;
+	
+	args.name = ADR2CELL("SUNW,start-cpu-by-cpuid");
+	args.nargs = 3;
+	args.nreturns = 1;
+	args.cpu = cpu;
+	args.func = ADR2CELL(func);
+	args.arg = arg;
+
+	return openfirmware(&args);
 }
 
 /*

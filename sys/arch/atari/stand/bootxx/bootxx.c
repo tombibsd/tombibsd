@@ -49,6 +49,11 @@ int	bootxxx(void *, void *, struct osdsc *);
 int	load_booter(struct osdsc *);
 int	usr_info(struct osdsc *);
 
+#define	BOOTXXX_MAXSIZE	(64 * 1024)
+#define	HEAPSIZE	(64 * 1024)	/* should be >32KB for ffs blocksize */
+#define	HEAPSTART	(LOADADDR3 + BOOTXXX_MAXSIZE)
+#define	HEAPEND		(HEAPSTART + HEAPSIZE)
+
 int
 bootxx(void *readsector, void *disklabel, int autoboot)
 {
@@ -58,7 +63,7 @@ bootxx(void *readsector, void *disklabel, int autoboot)
 	bxxx_t		bootxxx = (bxxx_t)(LOADADDR3);
 
 	memset(edata, 0, end - edata);
-	setheap(end, (void*)(LOADADDR3 - 4));
+	setheap((void *)HEAPSTART, (void *)HEAPEND);
 
 	printf("\033v\nNetBSD/atari secondary bootloader"
 						" ($Revision$)\n\n");

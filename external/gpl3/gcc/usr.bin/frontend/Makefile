@@ -31,6 +31,8 @@ HOST_CPPFLAGS+=	-I${GCCARCH} ${G_ALL_CFLAGS:M-D*} ${G_INCLUDES:M-I*:N-I.*}
 
 DPSRCS+=	specs.h
 
+${SRCS}: ${GCCARCH}/defs.mk
+
 MKPIC:=		no
 MKPICLIB:=	no
 

@@ -1,4 +1,4 @@
-/Makefile/1.15/Sat Nov 24 14:00:36 2012/-kk/
+/Makefile/1.16/Fri Oct  3 09:08:56 2014/-kk/
 /ansi.h/1.1/Thu Mar  7 14:43:59 2002/-kk/
 /asm.h/1.1/Thu Mar  7 14:43:59 2002/-kk/
 /bswap.h/1.1/Thu Mar  7 14:43:59 2002/-kk/
@@ -51,7 +51,7 @@
 /rwlock.h/1.2/Fri Feb  9 21:55:03 2007/-kk/
 /setjmp.h/1.1/Thu Mar  7 14:44:02 2002/-kk/
 /signal.h/1.1/Thu Mar  7 14:44:02 2002/-kk/
-/sljitarch.h/1.2/Sun Nov 25 21:55:50 2012/-kk/
+/sljit_machdep.h/1.1/Wed Jul 23 18:19:43 2014/-kk/
 /trap.h/1.1/Thu Mar  7 14:44:02 2002/-kk/
 /types.h/1.9/Sun Jul 17 01:36:51 2011/-kk/
 /uboot.h/1.1/Sun Jul 10 00:00:13 2011/-kk/

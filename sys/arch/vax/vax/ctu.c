@@ -105,6 +105,7 @@ const struct bdevsw ctu_bdevsw = {
 	.d_ioctl = noioctl,
 	.d_dump = nodump,
 	.d_psize = nosize,
+	.d_discard = nodiscard,
 	.d_flag = D_TAPE
 };
 
@@ -120,6 +121,7 @@ const struct cdevsw ctu_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = nommap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_TAPE
 };
 #endif

@@ -26,14 +26,17 @@ ARCHSUBDIR=	${MACHINE_CPU}
 .endif
 M=		${.CURDIR}/arch/${ARCHSUBDIR}
 
-.if ((${LDELFSO_MACHINE_ARCH} == "alpha") ||				\
+.if ((${MACHINE_CPU} == "aarch64") ||					\
+     (${LDELFSO_MACHINE_ARCH} == "alpha") ||				\
      (${MACHINE_CPU} == "arm") ||					\
      (${LDELFSO_MACHINE_ARCH} == "coldfire") ||				\
      (${LDELFSO_MACHINE_ARCH} == "hppa") ||				\
      (${LDELFSO_MACHINE_ARCH} == "i386") ||				\
      (${LDELFSO_MACHINE_ARCH} == "m68k") ||				\
      (${MACHINE_CPU} == "mips") ||					\
+     (${MACHINE_CPU} == "or1k") ||					\
      (${MACHINE_CPU} == "powerpc") ||					\
+     (${MACHINE_CPU} == "riscv") ||					\
      (${MACHINE_CPU} == "sh3") ||					\
      (${LDELFSO_MACHINE_ARCH} == "sparc") ||				\
      (${LDELFSO_MACHINE_ARCH} == "sparc64") ||				\

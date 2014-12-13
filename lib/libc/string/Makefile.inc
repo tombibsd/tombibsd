@@ -18,7 +18,7 @@ SRCS+=	bm.c stpcpy.c stpncpy.c \
 SRCS+=	bcmp.c bcopy.c bzero.c ffs.c memchr.c memcmp.c memset.c
 SRCS+=	strcat.c strcmp.c strcpy.c strcspn.c strlen.c
 SRCS+=	strncat.c strncmp.c strncpy.c strpbrk.c strsep.c
-SRCS+=	strspn.c strstr.c swab.c
+SRCS+=	strspn.c strstr.c swab.c strnstr.c
 SRCS+=	explicit_memset.c consttime_memequal.c
 
 SRCS+=	memccpy.c memcpy.c memmem.c memmove.c
@@ -58,6 +58,7 @@ MLINKS+=strcpy.3 strncpy.3 strcpy.3 stpcpy.3 strcpy.3 stpncpy.3
 MLINKS+=strlcpy.3 strlcat.3
 MLINKS+=strlen.3 strnlen.3
 MLINKS+=strstr.3 strcasestr.3
+MLINKS+=strstr.3 strnstr.3
 MLINKS+=memchr.3 memrchr.3
 MLINKS+=strtok.3 strtok_r.3
 MLINKS+=strerror.3 strerror_r.3 strerror.3 perror.3 \

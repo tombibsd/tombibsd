@@ -44,6 +44,9 @@
 #include "nbtool_config.h"
 #endif
 
+#include <sys/cdefs.h>
+__RCSID("$NetBSD$");
+
 #include <sys/param.h>
 #include <stdlib.h>
 #include <string.h>
@@ -137,7 +140,7 @@ packdevi(void)
 {
 	struct devi *firststar, *i, **ip, *l, *p;
 	struct devbase *d;
-	int j, m, n;
+	u_short j, m, n;
 
 	/*
 	 * Sort all the cloning units to after the non-cloning units,

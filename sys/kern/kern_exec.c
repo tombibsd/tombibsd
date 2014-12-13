@@ -75,7 +75,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/kernel.h>
 #include <sys/proc.h>
 #include <sys/mount.h>
-#include <sys/malloc.h>
 #include <sys/kmem.h>
 #include <sys/namei.h>
 #include <sys/vnode.h>
@@ -339,8 +338,8 @@ check_exec(struct lwp *l, struct exec_package *epp, struct pathbuf *pb)
 		return error;
 	epp->ep_vp = vp = nd.ni_vp;
 	/* normally this can't fail */
-	if ((error = copystr(nd.ni_pnbuf, epp->ep_resolvedname, PATH_MAX, NULL)))
-		goto bad1;
+	error = copystr(nd.ni_pnbuf, epp->ep_resolvedname, PATH_MAX, NULL);
+	KASSERT(error == 0);
 
 #ifdef DIAGNOSTIC
 	/* paranoia (take this out once namei stuff stabilizes) */
@@ -1336,6 +1335,12 @@ execve1(struct lwp *l, const char *path, char * const *args,
 }
 
 static size_t
+ptrsz(const struct exec_package *epp)
+{
+	return (epp->ep_flags & EXEC_32) ?  sizeof(int) : sizeof(char *);
+}
+
+static size_t
 calcargs(struct execve_data * restrict data, const size_t argenvstrlen)
 {
 	struct exec_package	* const epp = &data->ed_pack;
@@ -1348,10 +1353,7 @@ calcargs(struct execve_data * restrict data, const size_t argenvstrlen)
 	    1 +				/* \0 */
 	    epp->ep_esch->es_arglen;	/* auxinfo */
 
-	const size_t ptrsz = (epp->ep_flags & EXEC_32) ?
-	    sizeof(int) : sizeof(char *);
-
-	return (nargenvptrs * ptrsz) + argenvstrlen;
+	return (nargenvptrs * ptrsz(epp)) + argenvstrlen;
 }
 
 static size_t
@@ -1506,7 +1508,7 @@ copyinargs(struct execve_data * restrict data, char * const *args,
 		return EINVAL;
 	}
 	if (epp->ep_flags & EXEC_SKIPARG)
-		args++;
+		args = (const void *)((const char *)args + ptrsz(epp));
 	i = 0;
 	error = copyinargstrs(data, args, fetch_element, &dp, &i, ktr_execarg);
 	if (error != 0) {

@@ -128,6 +128,8 @@ extern int udf_verbose;
 #define UDF_DISC_SLACK		(128)			/* picked, at least 64 kb or 128 */
 #define UDF_ISO_VRS_SIZE	(32*2048)		/* 32 ISO `sectors' */
 
+#define UDF_MAX_INDIRS_FOLLOW	1024			/* picked */
+
 
 /* structure space */
 #define UDF_ANCHORS		4	/* 256, 512, N-256, N */

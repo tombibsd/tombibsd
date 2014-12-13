@@ -49,6 +49,7 @@ enum __e_fmtcheck_types {
 	FMTCHECK_INT,
 	FMTCHECK_LONG,
 	FMTCHECK_QUAD,
+	FMTCHECK_POINTER,
 	FMTCHECK_SHORTPOINTER,
 	FMTCHECK_INTPOINTER,
 	FMTCHECK_LONGPOINTER,
@@ -149,7 +150,7 @@ get_next_format_from_precision(const char **pf)
 	if (*f == 'p') {
 		if (sh + lg + quad + longdouble)
 			RETURN(pf,f,FMTCHECK_UNKNOWN);
-		RETURN(pf,f,FMTCHECK_LONG);
+		RETURN(pf,f,FMTCHECK_POINTER);
 	}
 	RETURN(pf,f,FMTCHECK_UNKNOWN);
 	/*NOTREACHED*/

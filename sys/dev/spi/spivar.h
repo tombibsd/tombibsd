@@ -49,7 +49,7 @@
 /*
  * Serial Peripheral Interface bus.  This is a 4-wire bus common for
  * connecting flash, clocks, sensors, and various other low-speed
- * peripherials.
+ * peripherals.
  */
 
 struct spi_handle;

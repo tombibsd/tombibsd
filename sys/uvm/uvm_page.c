@@ -886,7 +886,7 @@ static inline int
 vm_physseg_find_bsearch(struct vm_physseg *segs, int nsegs, paddr_t pframe, int *offp)
 {
 	/* binary search for it */
-	u_int	start, len, try;
+	u_int	start, len, guess;
 
 	/*
 	 * if try is too large (thus target is less than try) we reduce
@@ -902,17 +902,17 @@ vm_physseg_find_bsearch(struct vm_physseg *segs, int nsegs, paddr_t pframe, int 
 	 */
 
 	for (start = 0, len = nsegs ; len != 0 ; len = len / 2) {
-		try = start + (len / 2);	/* try in the middle */
+		guess = start + (len / 2);	/* try in the middle */
 
 		/* start past our try? */
-		if (pframe >= segs[try].start) {
+		if (pframe >= segs[guess].start) {
 			/* was try correct? */
-			if (pframe < segs[try].end) {
+			if (pframe < segs[guess].end) {
 				if (offp)
-					*offp = pframe - segs[try].start;
-				return(try);            /* got it */
+					*offp = pframe - segs[guess].start;
+				return guess;            /* got it */
 			}
-			start = try + 1;	/* next time, start here */
+			start = guess + 1;	/* next time, start here */
 			len--;			/* "adjust" */
 		} else {
 			/*
@@ -1100,7 +1100,9 @@ attachrnd:
 	 * Attach RNG source for this CPU's VM events
 	 */
         rnd_attach_source(&uvm.cpus[cpu_index(ci)]->rs,
-			  ci->ci_data.cpu_name, RND_TYPE_VM, 0);
+			  ci->ci_data.cpu_name, RND_TYPE_VM,
+			  RND_FLAG_COLLECT_TIME|RND_FLAG_COLLECT_VALUE|
+			  RND_FLAG_ESTIMATE_VALUE);
 
 }
 

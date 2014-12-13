@@ -56,7 +56,7 @@ get_bootconf_option(char *opts, const char *opt, int type, void *result)
 {
 	char *ptr;
 	char *optstart;
-	int not;
+	bool neg;
 
 	ptr = opts;
 
@@ -68,12 +68,12 @@ get_bootconf_option(char *opts, const char *opt, int type, void *result)
 		if (*ptr == 0)
 			break;
 
-		not = 0;
+		neg = false;
 
 		/* Is it a negate option */
 		if ((type & BOOTOPT_TYPE_MASK) == BOOTOPT_TYPE_BOOLEAN &&
 		    *ptr == '!') {
-			not = 1;
+			neg = true;
 			++ptr;
 		}
 
@@ -99,7 +99,7 @@ get_bootconf_option(char *opts, const char *opt, int type, void *result)
 						    ((u_int)strtoul(ptr, NULL,
 						    10) != 0);
 					else
-						*((int *)result) = !not;
+						*((int *)result) = !neg;
 					break;
 				case BOOTOPT_TYPE_STRING :
 					*((char **)result) = ptr;

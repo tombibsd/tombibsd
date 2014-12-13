@@ -1,7 +1,10 @@
 /Makefile.inc/1.21/Wed Dec 12 15:12:11 2012/-kk/
-/Makefile/1.81/Fri Apr 11 02:03:52 2014/-kk/
+/Makefile/1.84/Fri Oct  3 09:26:15 2014/-kk/
 /alloc.c/1.26/Sat Jul 30 03:43:20 2011/-kk/
 /arp.c/1.34/Fri Apr 11 02:03:52 2014/-kk/
+/atoi.c/1.1/Sun Aug 10 07:40:49 2014/-kk/
+/bootcfg.c/1.2/Fri Oct  3 09:26:15 2014/-kk/
+/bootcfg.h/1.1/Sat Jun 28 09:16:18 2014/-kk/
 /bootp.c/1.39/Fri Apr 11 02:03:52 2014/-kk/
 /bootp.h/1.9/Sat Jan 17 14:00:36 2009/-kk/
 /bootparam.c/1.19/Wed Oct 21 23:12:10 2009/-kk/
@@ -75,10 +78,10 @@
 /saerrno.h/1.11/Mon Dec  3 09:51:31 2007/-kk/
 /saioctl.h/1.4/Sun Dec 11 12:24:46 2005/-kk/
 /snprintf.c/1.5/Sun Jul 17 20:54:52 2011/-kk/
-/stand.h/1.78/Fri Apr 11 02:03:52 2014/-kk/
+/stand.h/1.79/Fri Oct  3 09:26:15 2014/-kk/
 /stat.c/1.7/Sat Nov 24 13:20:57 2007/-kk/
 /strerror.c/1.20/Sat Nov 24 13:20:57 2007/-kk/
-/subr_prf.c/1.24/Fri Apr 11 02:03:52 2014/-kk/
+/subr_prf.c/1.27/Fri Oct  3 09:43:41 2014/-kk/
 /tftp.c/1.35/Tue Mar 25 02:35:43 2014/-kk/
 /tftp.h/1.6/Sun Dec 11 12:24:46 2005/-kk/
 /twiddle.c/1.8/Wed Apr 30 16:18:09 2008/-kk/

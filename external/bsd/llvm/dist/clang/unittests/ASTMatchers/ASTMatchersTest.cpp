@@ -44,14 +44,15 @@ TEST(IsDerivedFromDeathTest, DiesOnEmptyBaseName) {
 
 TEST(Finder, DynamicOnlyAcceptsSomeMatchers) {
   MatchFinder Finder;
-  EXPECT_TRUE(Finder.addDynamicMatcher(decl(), NULL));
-  EXPECT_TRUE(Finder.addDynamicMatcher(callExpr(), NULL));
-  EXPECT_TRUE(Finder.addDynamicMatcher(constantArrayType(hasSize(42)), NULL));
+  EXPECT_TRUE(Finder.addDynamicMatcher(decl(), nullptr));
+  EXPECT_TRUE(Finder.addDynamicMatcher(callExpr(), nullptr));
+  EXPECT_TRUE(Finder.addDynamicMatcher(constantArrayType(hasSize(42)),
+                                       nullptr));
 
   // Do not accept non-toplevel matchers.
-  EXPECT_FALSE(Finder.addDynamicMatcher(isArrow(), NULL));
-  EXPECT_FALSE(Finder.addDynamicMatcher(hasSize(2), NULL));
-  EXPECT_FALSE(Finder.addDynamicMatcher(hasName("x"), NULL));
+  EXPECT_FALSE(Finder.addDynamicMatcher(isArrow(), nullptr));
+  EXPECT_FALSE(Finder.addDynamicMatcher(hasSize(2), nullptr));
+  EXPECT_FALSE(Finder.addDynamicMatcher(hasName("x"), nullptr));
 }
 
 TEST(Decl, MatchesDeclarations) {
@@ -105,8 +106,9 @@ TEST(NameableDeclaration, REMatchesVariousDecls) {
 
 TEST(DeclarationMatcher, MatchClass) {
   DeclarationMatcher ClassMatcher(recordDecl());
-  if (llvm::Triple(llvm::sys::getDefaultTargetTriple()).getOS() !=
-      llvm::Triple::Win32)
+  llvm::Triple Triple(llvm::sys::getDefaultTargetTriple());
+  if (Triple.getOS() != llvm::Triple::Win32 ||
+      Triple.getEnvironment() != llvm::Triple::MSVC)
     EXPECT_FALSE(matches("", ClassMatcher));
   else
     // Matches class type_info.
@@ -641,6 +643,30 @@ TEST(DeclarationMatcher, HasDescendant) {
       "};", ZDescendantClassXDescendantClassY));
 }
 
+TEST(DeclarationMatcher, HasDescendantMemoization) {
+  DeclarationMatcher CannotMemoize =
+      decl(hasDescendant(typeLoc().bind("x")), has(decl()));
+  EXPECT_TRUE(matches("void f() { int i; }", CannotMemoize));
+}
+
+TEST(DeclarationMatcher, MatchCudaDecl) {
+  EXPECT_TRUE(matchesWithCuda("__global__ void f() { }"
+                              "void g() { f<<<1, 2>>>(); }",
+                              CUDAKernelCallExpr()));
+  EXPECT_TRUE(matchesWithCuda("__attribute__((device)) void f() {}",
+                              hasCudaDeviceAttr()));
+  EXPECT_TRUE(matchesWithCuda("__attribute__((host)) void f() {}",
+                              hasCudaHostAttr()));
+  EXPECT_TRUE(matchesWithCuda("__attribute__((global)) void f() {}",
+                              hasCudaGlobalAttr()));
+  EXPECT_FALSE(matchesWithCuda("void f() {}",
+                               hasCudaGlobalAttr()));
+  EXPECT_TRUE(notMatchesWithCuda("void f() {}",
+                                 hasCudaGlobalAttr()));
+  EXPECT_FALSE(notMatchesWithCuda("__attribute__((global)) void f() {}",
+                                  hasCudaGlobalAttr()));
+}
+
 // Implements a run method that returns whether BoundNodes contains a
 // Decl bound to Id that can be dynamically cast to T.
 // Optionally checks that the check succeeded a specific number of times.
@@ -665,7 +691,7 @@ public:
       : Id(Id), ExpectedCount(ExpectedCount), Count(0),
         ExpectedName(ExpectedName) {}
 
-  void onEndOfTranslationUnit() LLVM_OVERRIDE {
+  void onEndOfTranslationUnit() override {
     if (ExpectedCount != -1)
       EXPECT_EQ(ExpectedCount, Count);
     if (!ExpectedName.empty())
@@ -696,7 +722,8 @@ public:
         EXPECT_EQ(Nodes->getNodeAs<T>(Id), I->second.get<T>());
       return true;
     }
-    EXPECT_TRUE(M.count(Id) == 0 || M.find(Id)->second.template get<T>() == 0);
+    EXPECT_TRUE(M.count(Id) == 0 ||
+                M.find(Id)->second.template get<T>() == nullptr);
     return false;
   }
 
@@ -1014,6 +1041,17 @@ TEST(Matcher, ForRange) {
                          forRangeStmt()));
 }
 
+TEST(Matcher, SubstNonTypeTemplateParm) {
+  EXPECT_FALSE(matches("template<int N>\n"
+                       "struct A {  static const int n = 0; };\n"
+                       "struct B : public A<42> {};",
+                       substNonTypeTemplateParmExpr()));
+  EXPECT_TRUE(matches("template<int N>\n"
+                      "struct A {  static const int n = N; };\n"
+                      "struct B : public A<42> {};",
+                      substNonTypeTemplateParmExpr()));
+}
+
 TEST(Matcher, UserDefinedLiteral) {
   EXPECT_TRUE(matches("constexpr char operator \"\" _inc (const char i) {"
                       "  return i + 1;"
@@ -1040,7 +1078,7 @@ TEST(HasType, MatchesAsString) {
   EXPECT_TRUE(matches("namespace ns { struct A {}; }  struct B { ns::A a; };",
       fieldDecl(hasType(asString("ns::A")))));
   EXPECT_TRUE(matches("namespace { struct A {}; }  struct B { A a; };",
-      fieldDecl(hasType(asString("struct <anonymous namespace>::A")))));
+      fieldDecl(hasType(asString("struct (anonymous namespace)::A")))));
 }
 
 TEST(Matcher, OverloadedOperatorCall) {
@@ -1081,12 +1119,19 @@ TEST(Matcher, HasOperatorNameForOverloadedOperatorCall) {
               "bool operator&&(Y x, Y y) { return true; }; "
               "Y a; Y b; bool c = a && b;",
               OpCallLessLess));
+  StatementMatcher OpStarCall =
+      operatorCallExpr(hasOverloadedOperatorName("*"));
+  EXPECT_TRUE(matches("class Y; int operator*(Y &); void f(Y &y) { *y; }",
+              OpStarCall));
   DeclarationMatcher ClassWithOpStar =
     recordDecl(hasMethod(hasOverloadedOperatorName("*")));
   EXPECT_TRUE(matches("class Y { int operator*(); };",
                       ClassWithOpStar));
   EXPECT_TRUE(notMatches("class Y { void myOperator(); };",
               ClassWithOpStar)) ;
+  DeclarationMatcher AnyOpStar = functionDecl(hasOverloadedOperatorName("*"));
+  EXPECT_TRUE(matches("class Y; int operator*(Y &);", AnyOpStar));
+  EXPECT_TRUE(matches("class Y { int operator*(); };", AnyOpStar));
 }
 
 TEST(Matcher, NestedOverloadedOperatorCalls) {
@@ -1162,6 +1207,18 @@ TEST(Matcher, VariableUsage) {
       "void z(const Y &y) {"
       "  bool b = y.x();"
       "}", Reference));
+}
+
+TEST(Matcher, VarDecl_Storage) {
+  auto M = varDecl(hasName("X"), hasLocalStorage());
+  EXPECT_TRUE(matches("void f() { int X; }", M));
+  EXPECT_TRUE(notMatches("int X;", M));
+  EXPECT_TRUE(notMatches("void f() { static int X; }", M));
+
+  M = varDecl(hasName("X"), hasGlobalStorage());
+  EXPECT_TRUE(notMatches("void f() { int X; }", M));
+  EXPECT_TRUE(matches("int X;", M));
+  EXPECT_TRUE(matches("void f() { static int X; }", M));
 }
 
 TEST(Matcher, FindsVarDeclInFunctionParameter) {
@@ -1772,6 +1829,9 @@ TEST(ConstructorDeclaration, IsImplicit) {
                       constructorDecl(isImplicit())));
   EXPECT_TRUE(matches("class Foo { Foo(){} };",
                       constructorDecl(unless(isImplicit()))));
+  // The compiler added an implicit assignment operator.
+  EXPECT_TRUE(matches("struct A { int x; } a = {0}, b = a; void f() { a = b; }",
+                      methodDecl(isImplicit(), hasName("operator="))));
 }
 
 TEST(DestructorDeclaration, MatchesVirtualDestructor) {
@@ -1960,6 +2020,17 @@ TEST(Matcher, Conditions) {
   EXPECT_TRUE(notMatches("void x() { bool a = true; if (a) {} }", Condition));
   EXPECT_TRUE(notMatches("void x() { if (true || false) {} }", Condition));
   EXPECT_TRUE(notMatches("void x() { if (1) {} }", Condition));
+}
+
+TEST(IfStmt, ChildTraversalMatchers) {
+  EXPECT_TRUE(matches("void f() { if (false) true; else false; }",
+                      ifStmt(hasThen(boolLiteral(equals(true))))));
+  EXPECT_TRUE(notMatches("void f() { if (false) false; else true; }",
+                         ifStmt(hasThen(boolLiteral(equals(true))))));
+  EXPECT_TRUE(matches("void f() { if (false) false; else true; }",
+                      ifStmt(hasElse(boolLiteral(equals(true))))));
+  EXPECT_TRUE(notMatches("void f() { if (false) true; else false; }",
+                         ifStmt(hasElse(boolLiteral(equals(true))))));
 }
 
 TEST(MatchBinaryOperator, HasOperatorName) {
@@ -2387,6 +2458,9 @@ TEST(For, ForLoopInternals) {
 TEST(For, ForRangeLoopInternals) {
   EXPECT_TRUE(matches("void f(){ int a[] {1, 2}; for (int i : a); }",
                       forRangeStmt(hasLoopVariable(anything()))));
+  EXPECT_TRUE(matches(
+      "void f(){ int a[] {1, 2}; for (int i : a); }",
+      forRangeStmt(hasRangeInit(declRefExpr(to(varDecl(hasName("a"))))))));
 }
 
 TEST(For, NegativeForLoopInternals) {
@@ -2425,6 +2499,8 @@ TEST(HasBody, FindsBodyOfForWhileDoLoops) {
               whileStmt(hasBody(compoundStmt()))));
   EXPECT_TRUE(matches("void f() { do {} while(true); }",
               doStmt(hasBody(compoundStmt()))));
+  EXPECT_TRUE(matches("void f() { int p[2]; for (auto x : p) {} }",
+              forRangeStmt(hasBody(compoundStmt()))));
 }
 
 TEST(HasAnySubstatement, MatchesForTopLevelCompoundStatement) {
@@ -2942,6 +3018,15 @@ TEST(DeclarationStatement, MatchesVariableDeclarationStatements) {
   EXPECT_TRUE(matches("void x() { int a; }", declStmt()));
 }
 
+TEST(ExprWithCleanups, MatchesExprWithCleanups) {
+  EXPECT_TRUE(matches("struct Foo { ~Foo(); };"
+                      "const Foo f = Foo();",
+                      varDecl(hasInitializer(exprWithCleanups()))));
+  EXPECT_FALSE(matches("struct Foo { };"
+                      "const Foo f = Foo();",
+                      varDecl(hasInitializer(exprWithCleanups()))));
+}
+
 TEST(InitListExpression, MatchesInitListExpression) {
   EXPECT_TRUE(matches("int a[] = { 1, 2 };",
                       initListExpr(hasType(asString("int [2]")))));
@@ -2975,6 +3060,13 @@ TEST(UsingDeclaration, ThroughUsingDeclaration) {
   EXPECT_TRUE(notMatches(
       "namespace a { void f(); } using a::f; void g() { a::f(); }",
       declRefExpr(throughUsingDecl(anything()))));
+}
+
+TEST(UsingDirectiveDeclaration, MatchesUsingNamespace) {
+  EXPECT_TRUE(matches("namespace X { int x; } using namespace X;",
+                      usingDirectiveDecl()));
+  EXPECT_FALSE(
+      matches("namespace X { int x; } using X::x;", usingDirectiveDecl()));
 }
 
 TEST(SingleDecl, IsSingleDecl) {
@@ -3580,6 +3672,27 @@ TEST(HasParent, MatchesAllParents) {
                  compoundStmt(hasParent(recordDecl()))));
 }
 
+TEST(HasParent, NoDuplicateParents) {
+  class HasDuplicateParents : public BoundNodesCallback {
+  public:
+    bool run(const BoundNodes *Nodes) override { return false; }
+    bool run(const BoundNodes *Nodes, ASTContext *Context) override {
+      const Stmt *Node = Nodes->getNodeAs<Stmt>("node");
+      std::set<const void *> Parents;
+      for (const auto &Parent : Context->getParents(*Node)) {
+        if (!Parents.insert(Parent.getMemoizationData()).second) {
+          return true;
+        }
+      }
+      return false;
+    }
+  };
+  EXPECT_FALSE(matchAndVerifyResultTrue(
+      "template <typename T> int Foo() { return 1 + 2; }\n"
+      "int x = Foo<int>() + Foo<unsigned>();",
+      stmt().bind("node"), new HasDuplicateParents()));
+}
+
 TEST(TypeMatching, MatchesTypes) {
   EXPECT_TRUE(matches("struct S {};", qualType().bind("loc")));
 }
@@ -3667,12 +3780,16 @@ TEST(TypeMatching, MatchesVariableArrayType) {
 }
 
 TEST(TypeMatching, MatchesAtomicTypes) {
-  EXPECT_TRUE(matches("_Atomic(int) i;", atomicType()));
+  if (llvm::Triple(llvm::sys::getDefaultTargetTriple()).getOS() !=
+      llvm::Triple::Win32) {
+    // FIXME: Make this work for MSVC.
+    EXPECT_TRUE(matches("_Atomic(int) i;", atomicType()));
 
-  EXPECT_TRUE(matches("_Atomic(int) i;",
-                      atomicType(hasValueType(isInteger()))));
-  EXPECT_TRUE(notMatches("_Atomic(float) f;",
-                         atomicType(hasValueType(isInteger()))));
+    EXPECT_TRUE(matches("_Atomic(int) i;",
+                        atomicType(hasValueType(isInteger()))));
+    EXPECT_TRUE(notMatches("_Atomic(float) f;",
+                           atomicType(hasValueType(isInteger()))));
+  }
 }
 
 TEST(TypeMatching, MatchesAutoTypes) {
@@ -4070,8 +4187,8 @@ public:
 
   virtual bool run(const BoundNodes *Nodes, ASTContext *Context) {
     const T *Node = Nodes->getNodeAs<T>(Id);
-    return selectFirst<const T>(InnerId,
-                                match(InnerMatcher, *Node, *Context)) != NULL;
+    return selectFirst<T>(InnerId, match(InnerMatcher, *Node, *Context)) !=
+           nullptr;
   }
 private:
   std::string Id;
@@ -4125,24 +4242,32 @@ public:
   }
 
   bool verify(const BoundNodes &Nodes, ASTContext &Context, const Stmt *Node) {
-    return selectFirst<const T>(
-        "", match(stmt(hasParent(stmt(has(stmt(equalsNode(Node)))).bind(""))),
-                  *Node, Context)) != NULL;
+    // Use the original typed pointer to verify we can pass pointers to subtypes
+    // to equalsNode.
+    const T *TypedNode = cast<T>(Node);
+    return selectFirst<T>(
+               "", match(stmt(hasParent(
+                             stmt(has(stmt(equalsNode(TypedNode)))).bind(""))),
+                         *Node, Context)) != nullptr;
   }
   bool verify(const BoundNodes &Nodes, ASTContext &Context, const Decl *Node) {
-    return selectFirst<const T>(
-        "", match(decl(hasParent(decl(has(decl(equalsNode(Node)))).bind(""))),
-                  *Node, Context)) != NULL;
+    // Use the original typed pointer to verify we can pass pointers to subtypes
+    // to equalsNode.
+    const T *TypedNode = cast<T>(Node);
+    return selectFirst<T>(
+               "", match(decl(hasParent(
+                             decl(has(decl(equalsNode(TypedNode)))).bind(""))),
+                         *Node, Context)) != nullptr;
   }
 };
 
 TEST(IsEqualTo, MatchesNodesByIdentity) {
   EXPECT_TRUE(matchAndVerifyResultTrue(
       "class X { class Y {}; };", recordDecl(hasName("::X::Y")).bind(""),
-      new VerifyAncestorHasChildIsEqual<Decl>()));
-  EXPECT_TRUE(
-      matchAndVerifyResultTrue("void f() { if(true) {} }", ifStmt().bind(""),
-                               new VerifyAncestorHasChildIsEqual<Stmt>()));
+      new VerifyAncestorHasChildIsEqual<CXXRecordDecl>()));
+  EXPECT_TRUE(matchAndVerifyResultTrue(
+      "void f() { if (true) if(true) {} }", ifStmt().bind(""),
+      new VerifyAncestorHasChildIsEqual<IfStmt>()));
 }
 
 class VerifyStartOfTranslationUnit : public MatchFinder::MatchCallback {
@@ -4161,12 +4286,13 @@ TEST(MatchFinder, InterceptsStartOfTranslationUnit) {
   MatchFinder Finder;
   VerifyStartOfTranslationUnit VerifyCallback;
   Finder.addMatcher(decl(), &VerifyCallback);
-  OwningPtr<FrontendActionFactory> Factory(newFrontendActionFactory(&Finder));
+  std::unique_ptr<FrontendActionFactory> Factory(
+      newFrontendActionFactory(&Finder));
   ASSERT_TRUE(tooling::runToolOnCode(Factory->create(), "int x;"));
   EXPECT_TRUE(VerifyCallback.Called);
 
   VerifyCallback.Called = false;
-  OwningPtr<ASTUnit> AST(tooling::buildASTFromCode("int x;"));
+  std::unique_ptr<ASTUnit> AST(tooling::buildASTFromCode("int x;"));
   ASSERT_TRUE(AST.get());
   Finder.matchAST(AST->getASTContext());
   EXPECT_TRUE(VerifyCallback.Called);
@@ -4188,12 +4314,13 @@ TEST(MatchFinder, InterceptsEndOfTranslationUnit) {
   MatchFinder Finder;
   VerifyEndOfTranslationUnit VerifyCallback;
   Finder.addMatcher(decl(), &VerifyCallback);
-  OwningPtr<FrontendActionFactory> Factory(newFrontendActionFactory(&Finder));
+  std::unique_ptr<FrontendActionFactory> Factory(
+      newFrontendActionFactory(&Finder));
   ASSERT_TRUE(tooling::runToolOnCode(Factory->create(), "int x;"));
   EXPECT_TRUE(VerifyCallback.Called);
 
   VerifyCallback.Called = false;
-  OwningPtr<ASTUnit> AST(tooling::buildASTFromCode("int x;"));
+  std::unique_ptr<ASTUnit> AST(tooling::buildASTFromCode("int x;"));
   ASSERT_TRUE(AST.get());
   Finder.matchAST(AST->getASTContext());
   EXPECT_TRUE(VerifyCallback.Called);
@@ -4254,7 +4381,6 @@ TEST(EqualsBoundNodeMatcher, Type) {
 }
 
 TEST(EqualsBoundNodeMatcher, UsingForEachDescendant) {
-
   EXPECT_TRUE(matchAndVerifyResultTrue(
       "int f() {"
       "  if (1) {"
@@ -4286,6 +4412,38 @@ TEST(EqualsBoundNodeMatcher, FiltersMatchedCombinations) {
           hasName("f"), forEachDescendant(varDecl().bind("d")),
           forEachDescendant(declRefExpr(to(decl(equalsBoundNode("d")))))),
       new VerifyIdIsBoundTo<VarDecl>("d", 5)));
+}
+
+TEST(EqualsBoundNodeMatcher, UnlessDescendantsOfAncestorsMatch) {
+  EXPECT_TRUE(matchAndVerifyResultTrue(
+      "struct StringRef { int size() const; const char* data() const; };"
+      "void f(StringRef v) {"
+      "  v.data();"
+      "}",
+      memberCallExpr(
+          callee(methodDecl(hasName("data"))),
+          on(declRefExpr(to(varDecl(hasType(recordDecl(hasName("StringRef"))))
+                                .bind("var")))),
+          unless(hasAncestor(stmt(hasDescendant(memberCallExpr(
+              callee(methodDecl(anyOf(hasName("size"), hasName("length")))),
+              on(declRefExpr(to(varDecl(equalsBoundNode("var")))))))))))
+          .bind("data"),
+      new VerifyIdIsBoundTo<Expr>("data", 1)));
+
+  EXPECT_FALSE(matches(
+      "struct StringRef { int size() const; const char* data() const; };"
+      "void f(StringRef v) {"
+      "  v.data();"
+      "  v.size();"
+      "}",
+      memberCallExpr(
+          callee(methodDecl(hasName("data"))),
+          on(declRefExpr(to(varDecl(hasType(recordDecl(hasName("StringRef"))))
+                                .bind("var")))),
+          unless(hasAncestor(stmt(hasDescendant(memberCallExpr(
+              callee(methodDecl(anyOf(hasName("size"), hasName("length")))),
+              on(declRefExpr(to(varDecl(equalsBoundNode("var")))))))))))
+          .bind("data")));
 }
 
 } // end namespace ast_matchers

@@ -18,7 +18,7 @@
 SYSTEMTESTTOP=..
 . $SYSTEMTESTTOP/conf.sh
 
-test -e $RANDFILE || $GENRANDOM 400 $RANDFILE
+test -r $RANDFILE || $GENRANDOM 400 $RANDFILE
 
 #
 # jnl and database files MUST be removed before we start
@@ -60,4 +60,4 @@ $DDNSCONFGEN -q -r $RANDFILE -a hmac-sha256 -k sha256-key -z keytests.nil > ns1/
 $DDNSCONFGEN -q -r $RANDFILE -a hmac-sha384 -k sha384-key -z keytests.nil > ns1/sha384.key
 $DDNSCONFGEN -q -r $RANDFILE -a hmac-sha512 -k sha512-key -z keytests.nil > ns1/sha512.key
 
-(cd ns3; sh -e sign.sh)
+(cd ns3; $SHELL -e sign.sh)

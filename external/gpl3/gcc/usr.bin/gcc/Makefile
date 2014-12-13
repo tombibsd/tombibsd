@@ -24,6 +24,8 @@ DPADD+=		${LIBINTL}
 
 .include "../Makefile.frontend"
 
+${SRCS}: ${GCCARCH}/defs.mk
+
 .include <bsd.info.mk>
 
 COPTS.gcc.c=	-Wno-stack-protector

@@ -126,15 +126,6 @@ procfs_domap(struct lwp *curl, struct proc *p, struct pfsnode *pfs,
 	if (uio->uio_rw != UIO_READ)
 		return EOPNOTSUPP;
 
-	if (uio->uio_offset != 0) {
-		/*
-		 * we return 0 here, so that the second read returns EOF
-		 * we don't support reading from an offset because the
-		 * map could have changed between the two reads.
-		 */
-		return 0;
-	}
-
 	error = 0;
 
 	if (linuxmode != 0)
@@ -220,7 +211,16 @@ again:
 	vm_map_unlock_read(map);
 	uvmspace_free(vm);
 
-	error = uiomove(buffer, pos, uio);
+	/*
+	 * We support reading from an offset, because linux does.
+	 * The map could have changed between the two reads, and
+	 * that could result in junk, but typically it does not.
+	 */
+	if (uio->uio_offset < pos)
+		error = uiomove(buffer + uio->uio_offset,
+		    pos - uio->uio_offset, uio);
+	else
+		error = 0;
 out:
 	if (path != NULL)
 		free(path, M_TEMP);

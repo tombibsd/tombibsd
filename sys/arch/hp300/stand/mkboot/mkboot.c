@@ -1,4 +1,4 @@
-/*	$NetBSD$
+/*	$NetBSD$	*/
 
 /*
  * Copyright (c) 1990, 1993

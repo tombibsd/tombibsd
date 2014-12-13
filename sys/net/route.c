@@ -236,15 +236,15 @@ rt_replace_ifa(struct rtentry *rt, struct ifaddr *ifa)
 		}
 	}
 
-	IFAREF(ifa);
-	IFAFREE(rt->rt_ifa);
+	ifaref(ifa);
+	ifafree(rt->rt_ifa);
 	rt_set_ifa1(rt, ifa);
 }
 
 static void
 rt_set_ifa(struct rtentry *rt, struct ifaddr *ifa)
 {
-	IFAREF(ifa);
+	ifaref(ifa);
 	rt_set_ifa1(rt, ifa);
 }
 
@@ -301,7 +301,7 @@ rtflushall(int family)
 	rtcache_invalidate(&dom->dom_rtcache);
 }
 
-void
+static void
 rtcache(struct route *ro)
 {
 	struct domain *dom;
@@ -376,40 +376,21 @@ rtfree(struct rtentry *rt)
 {
 	struct ifaddr *ifa;
 
-	if (rt == NULL)
-		panic("rtfree");
+	KASSERT(rt != NULL);
+	KASSERT(rt->rt_refcnt > 0);
+
 	rt->rt_refcnt--;
-	if (rt->rt_refcnt <= 0 && (rt->rt_flags & RTF_UP) == 0) {
+	if (rt->rt_refcnt == 0 && (rt->rt_flags & RTF_UP) == 0) {
 		rt_assert_inactive(rt);
 		rttrash--;
-		if (rt->rt_refcnt < 0) {
-			printf("rtfree: %p not freed (neg refs)\n", rt);
-			return;
-		}
 		rt_timer_remove_all(rt, 0);
 		ifa = rt->rt_ifa;
 		rt->rt_ifa = NULL;
-		IFAFREE(ifa);
+		ifafree(ifa);
 		rt->rt_ifp = NULL;
 		rt_destroy(rt);
 		pool_put(&rtentry_pool, rt);
 	}
-}
-
-void
-ifafree(struct ifaddr *ifa)
-{
-
-#ifdef DIAGNOSTIC
-	if (ifa == NULL)
-		panic("ifafree: null ifa");
-	if (ifa->ifa_refcnt != 0)
-		panic("ifafree: ifa_refcnt != 0 (%d)", ifa->ifa_refcnt);
-#endif
-#ifdef IFAREF_DEBUG
-	printf("ifafree: freeing ifaddr %p\n", ifa);
-#endif
-	free(ifa, M_IFADDR);
 }
 
 /*
@@ -703,7 +684,7 @@ rtrequest1(int req, struct rt_addrinfo *info, struct rtentry **ret_nrt)
 		if ((rt = rt_deladdr(rtbl, dst, netmask)) == NULL)
 			senderr(ESRCH);
 		if (rt->rt_gwroute) {
-			RTFREE(rt->rt_gwroute);
+			rtfree(rt->rt_gwroute);
 			rt->rt_gwroute = NULL;
 		}
 		if (rt->rt_parent) {
@@ -795,12 +776,12 @@ rtrequest1(int req, struct rt_addrinfo *info, struct rtentry **ret_nrt)
 				rtdeletemsg(crt);
 				rc = rt_addaddr(rtbl, rt, netmask);
 			}
-			RTFREE(crt);
+			rtfree(crt);
 			RT_DPRINTF("rt->_rt_key = %p\n", (void *)rt->_rt_key);
 		}
 		RT_DPRINTF("rt->_rt_key = %p\n", (void *)rt->_rt_key);
 		if (rc != 0) {
-			IFAFREE(ifa);
+			ifafree(ifa);
 			if ((rt->rt_flags & RTF_CLONED) != 0 && rt->rt_parent)
 				rtfree(rt->rt_parent);
 			if (rt->rt_gwroute)
@@ -851,7 +832,7 @@ rt_setgate(struct rtentry *rt, const struct sockaddr *gate)
 	RT_DPRINTF("rt->_rt_key = %p\n", (void *)rt->_rt_key);
 
 	if (rt->rt_gwroute) {
-		RTFREE(rt->rt_gwroute);
+		rtfree(rt->rt_gwroute);
 		rt->rt_gwroute = NULL;
 	}
 	KASSERT(rt->_rt_key != NULL);
@@ -860,7 +841,7 @@ rt_setgate(struct rtentry *rt, const struct sockaddr *gate)
 		sockaddr_free(rt->rt_gateway);
 	KASSERT(rt->_rt_key != NULL);
 	RT_DPRINTF("rt->_rt_key = %p\n", (void *)rt->_rt_key);
-	if ((rt->rt_gateway = sockaddr_dup(gate, M_NOWAIT)) == NULL)
+	if ((rt->rt_gateway = sockaddr_dup(gate, M_ZERO | M_NOWAIT)) == NULL)
 		return ENOMEM;
 	KASSERT(rt->_rt_key != NULL);
 	RT_DPRINTF("rt->_rt_key = %p\n", (void *)rt->_rt_key);
@@ -1284,7 +1265,7 @@ rtcache_clear(struct route *ro)
 
 	LIST_REMOVE(ro, ro_rtcache_next);
 
-	RTFREE(ro->_ro_rt);
+	rtfree(ro->_ro_rt);
 	ro->_ro_rt = NULL;
 	ro->ro_invalid = false;
 	rtcache_invariants(ro);
@@ -1349,7 +1330,7 @@ rtcache_setdst(struct route *ro, const struct sockaddr *sa)
 
 	KASSERT(ro->_ro_rt == NULL);
 
-	if ((ro->ro_sa = sockaddr_dup(sa, M_NOWAIT)) == NULL) {
+	if ((ro->ro_sa = sockaddr_dup(sa, M_ZERO | M_NOWAIT)) == NULL) {
 		rtcache_invariants(ro);
 		return ENOMEM;
 	}
@@ -1363,7 +1344,7 @@ rt_settag(struct rtentry *rt, const struct sockaddr *tag)
 	if (rt->rt_tag != tag) {
 		if (rt->rt_tag != NULL)
 			sockaddr_free(rt->rt_tag);
-		rt->rt_tag = sockaddr_dup(tag, M_NOWAIT);
+		rt->rt_tag = sockaddr_dup(tag, M_ZERO | M_NOWAIT);
 	}
 	return rt->rt_tag; 
 }

@@ -2,6 +2,7 @@
 
 deffs	UNION
 
+define	union: vfs
 file	fs/union/union_subr.c		union
 file	fs/union/union_vfsops.c		union
 file	fs/union/union_vnops.c		union

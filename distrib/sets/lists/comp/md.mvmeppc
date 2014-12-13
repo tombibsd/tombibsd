@@ -52,7 +52,8 @@
 ./usr/include/mvmeppc/rwlock.h			comp-c-include
 ./usr/include/mvmeppc/setjmp.h			comp-c-include
 ./usr/include/mvmeppc/signal.h			comp-c-include
-./usr/include/mvmeppc/sljitarch.h		comp-c-include
+./usr/include/mvmeppc/sljit_machdep.h		comp-c-include
+./usr/include/mvmeppc/sljitarch.h		comp-obsolete		obsolete
 ./usr/include/mvmeppc/spr.h			comp-obsolete		obsolete
 ./usr/include/mvmeppc/stdarg.h			comp-obsolete		obsolete
 ./usr/include/mvmeppc/trap.h			comp-c-include

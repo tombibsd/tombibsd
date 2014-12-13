@@ -357,6 +357,7 @@ cpu_attach(device_t parent, device_t self, void *aux)
 	ci->ci_acpiid = caa->cpu_id;
 	ci->ci_cpuid = caa->cpu_number;
 	ci->ci_func = caa->cpu_func;
+	aprint_normal("\n");
 
 	/* Must be before mi_cpu_attach(). */
 	cpu_vm_init(ci);
@@ -366,7 +367,6 @@ cpu_attach(device_t parent, device_t self, void *aux)
 
 		error = mi_cpu_attach(ci);
 		if (error != 0) {
-			aprint_normal("\n");
 			aprint_error_dev(self,
 			    "mi_cpu_attach failed with %d\n", error);
 			return;
@@ -446,7 +446,6 @@ cpu_attach(device_t parent, device_t self, void *aux)
 #endif
 
 	default:
-		aprint_normal("\n");
 		panic("unknown processor type??\n");
 	}
 
@@ -855,9 +854,11 @@ cpu_hatch(void *v)
 
 	cpu_init_idt();
 	gdt_init_cpu(ci);
+#if NLAPIC > 0
 	lapic_enable();
 	lapic_set_lvt();
 	lapic_initclocks();
+#endif
 
 	fpuinit(ci);
 	lldt(GSYSSEL(GLDT_SEL, SEL_KPL));
@@ -1039,7 +1040,9 @@ mp_cpu_start(struct cpu_info *ci, paddr_t target)
 	dwordptr[0] = 0;
 	dwordptr[1] = target >> 4;
 
+#if NLAPIC > 0
 	memcpy((uint8_t *)cmos_data_mapping + 0x467, dwordptr, 4);
+#endif
 
 	if ((cpu_feature[0] & CPUID_APIC) == 0) {
 		aprint_error("mp_cpu_start: CPU does not have APIC\n");

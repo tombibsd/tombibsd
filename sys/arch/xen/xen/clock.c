@@ -419,7 +419,7 @@ static struct evcnt hardclock_called[MAXCPUS];
 void
 xen_initclocks(void)
 {
-	int err;
+	int err __diagused;
 	static bool tcdone = false;
 
 	struct cpu_info *ci = curcpu();

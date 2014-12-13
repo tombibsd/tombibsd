@@ -12,7 +12,6 @@
 //
 //===---------------------------------------------------------------------===//
 
-#define DEBUG_TYPE "jit"
 #include "Sparc.h"
 #include "MCTargetDesc/SparcMCExpr.h"
 #include "SparcRelocations.h"
@@ -24,6 +23,8 @@
 #include "llvm/Support/Debug.h"
 
 using namespace llvm;
+
+#define DEBUG_TYPE "jit"
 
 STATISTIC(NumEmitted, "Number of machine instructions emitted");
 
@@ -39,7 +40,7 @@ class SparcCodeEmitter : public MachineFunctionPass {
   const std::vector<MachineConstantPoolEntry> *MCPEs;
   bool IsPIC;
 
-  void getAnalysisUsage(AnalysisUsage &AU) const {
+  void getAnalysisUsage(AnalysisUsage &AU) const override {
     AU.addRequired<MachineModuleInfo> ();
     MachineFunctionPass::getAnalysisUsage(AU);
   }
@@ -48,13 +49,13 @@ class SparcCodeEmitter : public MachineFunctionPass {
 
 public:
   SparcCodeEmitter(TargetMachine &tm, JITCodeEmitter &mce)
-    : MachineFunctionPass(ID), JTI(0), II(0), TD(0),
-      TM(tm), MCE(mce), MCPEs(0),
+    : MachineFunctionPass(ID), JTI(nullptr), II(nullptr), TD(nullptr),
+      TM(tm), MCE(mce), MCPEs(nullptr),
       IsPIC(TM.getRelocationModel() == Reloc::PIC_) {}
 
-  bool runOnMachineFunction(MachineFunction &MF);
+  bool runOnMachineFunction(MachineFunction &MF) override;
 
-  virtual const char *getPassName() const {
+  const char *getPassName() const override {
     return "Sparc Machine Code Emitter";
   }
 
@@ -76,6 +77,10 @@ private:
                                 unsigned) const;
   unsigned getBranchTargetOpValue(const MachineInstr &MI,
                                   unsigned) const;
+  unsigned getBranchPredTargetOpValue(const MachineInstr &MI,
+                                      unsigned) const;
+  unsigned getBranchOnRegTargetOpValue(const MachineInstr &MI,
+                                       unsigned) const;
 
   void emitWord(unsigned Word);
 
@@ -95,10 +100,10 @@ bool SparcCodeEmitter::runOnMachineFunction(MachineFunction &MF) {
   SparcTargetMachine &Target = static_cast<SparcTargetMachine &>(
                                 const_cast<TargetMachine &>(MF.getTarget()));
 
-  JTI = Target.getJITInfo();
-  II = Target.getInstrInfo();
-  TD = Target.getDataLayout();
-  Subtarget = &TM.getSubtarget<SparcSubtarget> ();
+  JTI = Target.getSubtargetImpl()->getJITInfo();
+  II = Target.getSubtargetImpl()->getInstrInfo();
+  TD = Target.getSubtargetImpl()->getDataLayout();
+  Subtarget = &TM.getSubtarget<SparcSubtarget>();
   MCPEs = &MF.getConstantPool()->getConstants();
   JTI->Initialize(MF, IsPIC);
   MCE.setModuleInfo(&getAnalysis<MachineModuleInfo> ());
@@ -141,7 +146,8 @@ void SparcCodeEmitter::emitInstruction(MachineBasicBlock::instr_iterator MI,
     }
     break;
   }
-  case TargetOpcode::PROLOG_LABEL:
+  case TargetOpcode::CFI_INSTRUCTION:
+    break;
   case TargetOpcode::EH_LABEL: {
     MCE.emitLabel(MI->getOperand(0).getMCSymbol());
     break;
@@ -171,7 +177,8 @@ void SparcCodeEmitter::emitWord(unsigned Word) {
 unsigned SparcCodeEmitter::getMachineOpValue(const MachineInstr &MI,
                                              const MachineOperand &MO) const {
   if (MO.isReg())
-    return TM.getRegisterInfo()->getEncodingValue(MO.getReg());
+    return TM.getSubtargetImpl()->getRegisterInfo()->getEncodingValue(
+        MO.getReg());
   else if (MO.isImm())
     return static_cast<unsigned>(MO.getImm());
   else if (MO.isGlobal())
@@ -194,6 +201,18 @@ unsigned SparcCodeEmitter::getCallTargetOpValue(const MachineInstr &MI,
 
 unsigned SparcCodeEmitter::getBranchTargetOpValue(const MachineInstr &MI,
                                                   unsigned opIdx) const {
+  const MachineOperand MO = MI.getOperand(opIdx);
+  return getMachineOpValue(MI, MO);
+}
+
+unsigned SparcCodeEmitter::getBranchPredTargetOpValue(const MachineInstr &MI,
+                                                      unsigned opIdx) const {
+  const MachineOperand MO = MI.getOperand(opIdx);
+  return getMachineOpValue(MI, MO);
+}
+
+unsigned SparcCodeEmitter::getBranchOnRegTargetOpValue(const MachineInstr &MI,
+                                                       unsigned opIdx) const {
   const MachineOperand MO = MI.getOperand(opIdx);
   return getMachineOpValue(MI, MO);
 }

@@ -246,6 +246,8 @@ iophy_status(struct mii_softc *sc)
 
 		if (ext0 & EXT0_DUPLEX)
 			mii->mii_media_active |= IFM_FDX;
+		else
+			mii->mii_media_active |= IFM_HDX;
 	} else
 		mii->mii_media_active = ife->ifm_media;
 }

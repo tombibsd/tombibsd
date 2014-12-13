@@ -15,21 +15,15 @@
 # 16.awk 21.troff 22.trofftut 23.eqn 24.eqnguide
 # 25.tbl 26.refer 27.invert 29.diction
 
-BINDIR=	/usr/share/doc/usd
-.if ${MKDOC} != "no"
-FILES=	00.contents Makefile Title
-.endif
 SUBDIR+=01.begin 17.msmacros 18.msdiffs 19.memacros 20.meref
-.if !make(install)
-SUBDIR+=04.csh 07.mail 11.edit 12.ex 13.viref
-SUBDIR+=30.rogue 31.trek
-.endif
+#SUBDIR+=04.csh 07.mail 11.edit 12.ex 13.viref
+#SUBDIR+=30.rogue 31.trek
 
-Title.ps: ${FILES}
-	${TOOL_ROFF_PS} -ms Title > ${.TARGET}
+SECTION=usd
+SUBARTICLES=title contents
+SRCS.title=Title
+SRCS.contents=00.contents
+MACROS=-ms
 
-contents.ps: ${FILES}
-	${TOOL_ROFF_PS} -ms 00.contents > ${.TARGET}
-
-.include <bsd.prog.mk>
+.include <bsd.doc.mk>
 .include <bsd.subdir.mk>

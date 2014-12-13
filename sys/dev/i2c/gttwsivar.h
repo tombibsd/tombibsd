@@ -87,6 +87,8 @@ struct gttwsi_softc {
 	kmutex_t sc_buslock;
 	kmutex_t sc_mtx;
 	kcondvar_t sc_cv;
+
+	bool sc_iflg_rwc;
 };
 
 void	gttwsi_attach_subr(device_t, bus_space_tag_t, bus_space_handle_t);

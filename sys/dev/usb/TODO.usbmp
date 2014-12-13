@@ -6,11 +6,6 @@ the majority of the USB MP device interface is documented in usbdivar.h.
 
 flesh out most of usbdi(9).
 
-
-host controllers needing to be ported:
-  - rump/dev/lib/libugenhc/ugenhc.c
-
-
 usb_event_thread() startup should use something to sync companions
 
 

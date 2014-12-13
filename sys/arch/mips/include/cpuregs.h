@@ -973,6 +973,11 @@
 #define	MIPS_eMIPS	0x04	/* MSR's eMIPS */
 
 /*
+ * CPU processor revision IDs for company ID == e1 (Ingenic)
+ */
+#define	MIPS_XBURST	0x02	/* Ingenic XBurst */
+
+/*
  * FPU processor revision ID
  */
 #define	MIPS_SOFT	0x00	/* Software emulation		ISA I	*/

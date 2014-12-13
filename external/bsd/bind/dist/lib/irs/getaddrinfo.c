@@ -180,6 +180,7 @@ static int add_ipv6(const char *hostname, int flags, struct addrinfo **aip,
 		    int socktype, int port);
 static void set_order(int, int (**)(const char *, int, struct addrinfo **,
 				    int, int));
+static void _freeaddrinfo(struct addrinfo *ai);
 
 #define FOUND_IPV4	0x1
 #define FOUND_IPV6	0x2
@@ -341,7 +342,7 @@ getaddrinfo(const char *hostname, const char *servname,
 		if (family == AF_INET6 || family == 0) {
 			ai = ai_alloc(AF_INET6, sizeof(struct sockaddr_in6));
 			if (ai == NULL) {
-				freeaddrinfo(ai_list);
+				_freeaddrinfo(ai_list);
 				return (EAI_MEMORY);
 			}
 			ai->ai_socktype = socktype;
@@ -455,12 +456,13 @@ getaddrinfo(const char *hostname, const char *servname,
 					SIN6(ai->ai_addr)->sin6_scope_id =
 						scopeid;
 #endif
-				if (getnameinfo(ai->ai_addr, ai->ai_addrlen,
+				if (getnameinfo(ai->ai_addr,
+						(socklen_t)ai->ai_addrlen,
 						nbuf, sizeof(nbuf), NULL, 0,
 						NI_NUMERICHOST) == 0) {
 					ai->ai_canonname = strdup(nbuf);
 					if (ai->ai_canonname == NULL) {
-						freeaddrinfo(ai);
+						_freeaddrinfo(ai);
 						return (EAI_MEMORY);
 					}
 				} else {
@@ -483,7 +485,7 @@ getaddrinfo(const char *hostname, const char *servname,
 					     socktype, port);
 			if (err != 0) {
 				if (ai_list != NULL) {
-					freeaddrinfo(ai_list);
+					_freeaddrinfo(ai_list);
 					ai_list = NULL;
 				}
 				break;
@@ -543,7 +545,7 @@ make_resstate(isc_mem_t *mctx, gai_statehead_t *head, const char *hostname,
 	gai_resstate_t *state;
 	dns_fixedname_t fixeddomain;
 	dns_name_t *qdomain;
-	size_t namelen;
+	unsigned int namelen;
 	isc_buffer_t b;
 	isc_boolean_t need_v4 = ISC_FALSE;
 	isc_boolean_t need_v6 = ISC_FALSE;
@@ -833,7 +835,7 @@ process_answer(isc_task_t *task, isc_event_t *event) {
 			error = EAI_NONAME;
 	} else {
 		if (trans->ai_sentinel.ai_next != NULL) {
-			freeaddrinfo(trans->ai_sentinel.ai_next);
+			_freeaddrinfo(trans->ai_sentinel.ai_next);
 			trans->ai_sentinel.ai_next = NULL;
 		}
 	}
@@ -1125,7 +1127,7 @@ add_ipv4(const char *hostname, int flags, struct addrinfo **aip,
 
 	ai = ai_clone(*aip, AF_INET); /* don't use ai_clone() */
 	if (ai == NULL) {
-		freeaddrinfo(*aip);
+		_freeaddrinfo(*aip);
 		return (EAI_MEMORY);
 	}
 
@@ -1163,6 +1165,11 @@ add_ipv6(const char *hostname, int flags, struct addrinfo **aip,
 /*% Free address info. */
 void
 freeaddrinfo(struct addrinfo *ai) {
+	_freeaddrinfo(ai);
+}
+
+static void
+_freeaddrinfo(struct addrinfo *ai) {
 	struct addrinfo *ai_next;
 
 	while (ai != NULL) {

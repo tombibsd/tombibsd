@@ -64,7 +64,6 @@ RCSID("$NetBSD$")
 
 #define	INTSTK	0
 
-	.machine e500
 /*
  * This symbol is here for the benefit of kvm_mkdb, and is supposed to
  * mark the start of kernel text.
@@ -86,8 +85,8 @@ __start:
 	/*
 	 * Set all the registers we don't care about to a known junk value.
 	 */
-	lis	%r2,0xdeadbeef@ha
-	addi	%r2,%r2,0xdeadbeef@l
+	lis	%r2,0xdeadbeef@h
+	ori	%r2,%r2,0xdeadbeef@l
 	mr	%r9,%r2
 	mr	%r10,%r9
 	mr	%r11,%r9

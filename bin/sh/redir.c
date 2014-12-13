@@ -164,10 +164,11 @@ redirect(union node *redir, int flags)
 STATIC void
 openredirect(union node *redir, char memory[10], int flags)
 {
+	struct stat sb;
 	int fd = redir->nfile.fd;
 	char *fname;
 	int f;
-	int oflags = O_WRONLY|O_CREAT|O_TRUNC, eflags;
+	int eflags;
 
 	/*
 	 * We suppress interrupts so that we won't leave open file
@@ -194,12 +195,28 @@ openredirect(union node *redir, char memory[10], int flags)
 			goto ecreate;
 		break;
 	case NTO:
-		if (Cflag)
-			oflags |= O_EXCL;
+		if (Cflag) {
+			fname = redir->nfile.expfname;
+			if ((f = open(fname, O_WRONLY)) == -1) {
+				if ((f = open(fname, O_WRONLY|O_CREAT|O_EXCL,
+				    0666)) < 0)
+					goto ecreate;
+			} else if (fstat(f, &sb) == -1) {
+				int serrno = errno;
+				close(f);
+				errno = serrno;
+				goto ecreate;
+			} else if (S_ISREG(sb.st_mode)) {
+				close(f);
+				errno = EEXIST;
+				goto ecreate;
+			}
+			break;
+		}
 		/* FALLTHROUGH */
 	case NCLOBBER:
 		fname = redir->nfile.expfname;
-		if ((f = open(fname, oflags, 0666)) < 0)
+		if ((f = open(fname, O_WRONLY|O_CREAT|O_TRUNC, 0666)) < 0)
 			goto ecreate;
 		break;
 	case NAPPEND:

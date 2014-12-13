@@ -24,10 +24,12 @@ SRCS+=	div.c ldiv.c imaxdiv.c
 # This might be replaced by erand48.c
 SRCS+= erand48_ieee754.c
 
+.if ${RUMPRUN} != "yes"
 .if (${USE_JEMALLOC} != "no")
 SRCS+=	jemalloc.c
 .else
 SRCS+=	malloc.c
+.endif
 .endif
 
 CPPFLAGS.strtol.c+=	-I${LIBCDIR}/../../common/lib/libc/stdlib
@@ -66,6 +68,7 @@ MLINKS+=getenv.3 setenv.3 getenv.3 unsetenv.3 getenv.3 putenv.3
 MLINKS+=getenv.3 getenv_r.3
 MLINKS+=hcreate.3 hdestroy.3 hcreate.3 hsearch.3
 MLINKS+=hcreate.3 hcreate_r.3 hcreate.3 hdestroy_r.3 hcreate.3 hsearch_r.3
+MLINKS+=hcreate.3 hdestroy1.3 hcreate.3 hdestroy1_r.3
 MLINKS+=insque.3 remque.3
 MLINKS+=lsearch.3 lfind.3
 MLINKS+=malloc.3 calloc.3 malloc.3 realloc.3 malloc.3 free.3

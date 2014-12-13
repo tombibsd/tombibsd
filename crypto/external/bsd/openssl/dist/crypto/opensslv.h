@@ -1,6 +1,10 @@
 #ifndef HEADER_OPENSSLV_H
 #define HEADER_OPENSSLV_H
 
+#ifdef  __cplusplus
+extern "C" {
+#endif
+
 /* Numeric release version identifier:
  * MNNFFPPS: major minor fix patch status
  * The status nibble has one of the values 0 for development, 1 to e for betas
@@ -25,11 +29,11 @@
  * (Prior to 0.9.5a beta1, a different scheme was used: MMNNFFRBB for
  *  major minor fix final patch/beta)
  */
-#define OPENSSL_VERSION_NUMBER	0x1000107fL
+#define OPENSSL_VERSION_NUMBER	0x100010afL
 #ifdef OPENSSL_FIPS
-#define OPENSSL_VERSION_TEXT	"OpenSSL 1.0.1g-fips 7 Apr 2014"
+#define OPENSSL_VERSION_TEXT	"OpenSSL 1.0.1j-fips 15 Oct 2014"
 #else
-#define OPENSSL_VERSION_TEXT	"OpenSSL 1.0.1g 7 Apr 2014"
+#define OPENSSL_VERSION_TEXT	"OpenSSL 1.0.1j 15 Oct 2014"
 #endif
 #define OPENSSL_VERSION_PTEXT	" part of " OPENSSL_VERSION_TEXT
 
@@ -85,10 +89,8 @@
 #define SHLIB_VERSION_HISTORY ""
 #define SHLIB_VERSION_NUMBER "1.0.0"
 
-/* The following macro indicates that this version of OpenSSL
- * contains the security related patch from
- * http://www.openssl.org/news/patch-CAN-2005-2969.txt
- */
-#define OPENSSL_HAS_20051011_FIX
 
+#ifdef  __cplusplus
+}
+#endif
 #endif /* HEADER_OPENSSLV_H */

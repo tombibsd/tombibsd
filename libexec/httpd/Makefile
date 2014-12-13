@@ -84,9 +84,9 @@ export-distfile:
 	); \
 	pax -wf ${TAR} ${BASE}; \
 	gzip -nc9 ${TAR} > ${TAR}.gz; \
-	bzip2 -9 ${TAR}
-	@echo "Exported two files in ${dir}:"
-	@echo ${TAR}.gz
-	@echo ${TAR}.bz2
+	bzip2 -9 ${TAR}; \
+	echo "Exported two files in $${dir}:"; \
+	echo ${TAR}.gz; \
+	echo ${TAR}.bz2
 
 .include <bsd.prog.mk>

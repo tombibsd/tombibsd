@@ -39,5 +39,5 @@ RUMP_COMPONENT(RUMP_COMPONENT_NET)
 {
 	extern struct domain btdomain;
 
-	DOMAINADD(btdomain);
+	domain_attach(&btdomain);
 }

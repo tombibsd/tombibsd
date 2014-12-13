@@ -39,14 +39,13 @@ void ptmattach(int);
 int pty_fill_ptmget(struct lwp *, dev_t, int, int, void *, struct mount *);
 int pty_grant_slave(struct lwp *, dev_t, struct mount *);
 dev_t pty_makedev(char, int);
-int pty_vn_open(struct vnode *, struct lwp *);
 struct ptm_pty *pty_sethandler(struct ptm_pty *);
 int pty_getmp(struct lwp *, struct mount **);
 
 /*
  * Ptm_pty is used for switch ptm{x} driver between BSDPTY, PTYFS.
  * Functions' argument (struct mount *) is used only PTYFS,
- * in the case BSDPTY can be NULL, and arg must be NULL.
+ * in the case BSDPTY can be NULL.
  */
 struct ptm_pty {
 	int (*allocvp)(struct mount *, struct lwp *, struct vnode **, dev_t,

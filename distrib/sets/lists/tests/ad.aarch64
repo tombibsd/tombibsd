@@ -1,0 +1,3 @@
+# $NetBSD$
+-./usr/tests/lib/libc/gen/t_fpsetmask
+-./usr/tests/lib/libc/gen/t_fpsetround

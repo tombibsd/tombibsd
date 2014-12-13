@@ -124,6 +124,7 @@ static void update_db(sqlite3 *, struct mparse *, mandb_rec *);
 __dead static void usage(void);
 static void optimize(sqlite3 *);
 static char *parse_escape(const char *);
+static void replace_hyph(char *);
 static makemandb_flags mflags = { .verbosity = 1 };
 
 typedef	void (*pman_nf)(const struct man_node *n, mandb_rec *);
@@ -500,7 +501,7 @@ traversedir(const char *parent, const char *file, sqlite3 *db,
 }
 
 /* build_file_cache --
- *   This function generates an md5 hash of the file passed as it's 2nd parameter
+ *   This function generates an md5 hash of the file passed as its 2nd parameter
  *   and stores it in a temporary table file_cache along with the full file path.
  *   This is done to support incremental updation of the database.
  *   The temporary table file_cache is dropped thereafter in the function
@@ -978,6 +979,7 @@ pmdoc_Nd(const struct mdoc_node *n, mandb_rec *rec)
 	 */
 	char *buf = NULL;
 	char *temp;
+	char *nd_text;
 
 	if (n == NULL)
 		return;
@@ -995,7 +997,10 @@ pmdoc_Nd(const struct mdoc_node *n, mandb_rec *rec)
 			free(buf);
 			free(temp);
 		} else {
-			concat(&rec->name_desc, n->string);
+			nd_text = estrdup(n->string);
+			replace_hyph(nd_text);
+			concat(&rec->name_desc, nd_text);
+			free(nd_text);
 		}
 		rec->xr_found = 0;
 	} else if (mdocs[n->tok] == pmdoc_Xr) {
@@ -1713,7 +1718,7 @@ insert_into_db(sqlite3 *db, mandb_rec *rec)
 
 	rc = sqlite3_step(stmt);
 	sqlite3_finalize(stmt);
-	if (rc == SQLITE_CONSTRAINT) {
+	if (rc == SQLITE_CONSTRAINT_UNIQUE) {
 		/* The *most* probable reason for reaching here is that
 		 * the UNIQUE contraint on the file column of the mandb_meta
 		 * table was violated.
@@ -2008,6 +2013,10 @@ replace_hyph(char *str)
 {
 	char *iter = str;
 	while ((iter = strchr(iter, ASCII_HYPH)) != NULL)
+		*iter = '-';
+
+	iter = str;
+	while ((iter = strchr(iter, ASCII_NBRSP)) != NULL)
 		*iter = '-';
 }
 

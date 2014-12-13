@@ -314,6 +314,7 @@ struct cdevsw drm_cdevsw = {
 	.d_poll = drm_poll,
 	.d_mmap = drm_mmap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_TTY | D_NEGOFFSAFE
 };
 
@@ -1123,7 +1124,7 @@ drm_linux_ioctl(DRM_STRUCTPROC *p, struct linux_ioctl_args* args)
 #if defined(__NetBSD__)
 /* Module support */
 
-MODULE(MODULE_CLASS_MISC, drm, "pci");
+MODULE(MODULE_CLASS_DRIVER, drm, "pci");
 
 static int
 drm_modcmd(modcmd_t cmd, void *arg)

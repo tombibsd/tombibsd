@@ -87,6 +87,7 @@ const struct bdevsw ofdisk_bdevsw = {
 	.d_ioctl = ofdisk_ioctl,
 	.d_dump = ofdisk_dump,
 	.d_psize = ofdisk_size,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK
 };
 
@@ -101,6 +102,7 @@ const struct cdevsw ofdisk_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = nommap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK
 };
 
@@ -469,6 +471,18 @@ ofdisk_ioctl(dev_t dev, u_long cmd, void *data, int flag, struct lwp *l)
 			return (ENOTTY);
 
 		return (dkwedge_list(&of->sc_dk, dkwl, l));
+	    }
+
+	case DIOCMWEDGES:
+	    {
+		if (OFDISK_FLOPPY_P(of))
+			return (ENOTTY);
+
+		if ((flag & FWRITE) == 0)
+			return (EBADF);
+
+		dkwedge_discover(&of->sc_dk);
+		return 0;
 	    }
 
 	default:

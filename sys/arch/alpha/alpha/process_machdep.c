@@ -127,8 +127,7 @@ process_write_fpregs(struct lwp *l, const struct fpreg *regs, size_t sz)
 {
 	struct pcb *pcb = lwp_getpcb(l);
 
-	fpu_discard();
-	fpu_mark_used(l);
+	fpu_discard(true);
 
 	memcpy(&pcb->pcb_fp, regs, sizeof(struct fpreg));
 	return (0);

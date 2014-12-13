@@ -18,7 +18,7 @@ TESTS_SH=	t_sp
 
 SUBDIR+=	h_client h_server
 
-ADD_TO_LD=	-lrumpvfs -lrump -lrumpuser -lpthread
+ADD_TO_LD=	-lrumpvfs -lrump -lrumpuser -lrump -lpthread
 LDADD.t_modlinkset+=	-lukfs -lrumpdev_disk -lrumpdev -lrumpfs_msdos 
 LDADD.t_modlinkset+=	-lrumpfs_cd9660 ${ADD_TO_LD}
 LDADD+=			${ADD_TO_LD}

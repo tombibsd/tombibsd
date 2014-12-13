@@ -461,7 +461,7 @@ bce_attach(device_t parent, device_t self, void *aux)
 	    ether_sprintf(sc->enaddr));
 	ether_ifattach(ifp, sc->enaddr);
 	rnd_attach_source(&sc->rnd_source, device_xname(self),
-	    RND_TYPE_NET, 0);
+	    RND_TYPE_NET, RND_FLAG_DEFAULT);
 	callout_init(&sc->bce_timeout, 0);
 
 	if (pmf_device_register(self, NULL, bce_resume))

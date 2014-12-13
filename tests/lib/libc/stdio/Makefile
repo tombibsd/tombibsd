@@ -8,6 +8,7 @@ TESTS_C+=	t_clearerr
 TESTS_C+=	t_fflush
 TESTS_C+=	t_fmemopen
 TESTS_C+=	t_fopen
+TESTS_C+=	t_open_memstream
 TESTS_C+=	t_fputc
 TESTS_C+=	t_mktemp
 TESTS_C+=	t_popen

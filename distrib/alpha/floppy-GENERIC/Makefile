@@ -42,7 +42,7 @@ netbsd: ${FLOPPYKERNEL}
 	@rm -f ${.TARGET} ${.TARGET}.tmp
 	cp ${.ALLSRC} ${.TARGET}.tmp
 	${STRIP} ${.TARGET}.tmp
-	${TOOL_GZIP} -9nf ${.TARGET}.tmp
+	${TOOL_GZIP_N} -9f ${.TARGET}.tmp
 	mv ${.TARGET}.tmp.gz ${.TARGET}
 
 CLEANFILES+=	netbsd netbsd.tmp netbsd.tmp.gz

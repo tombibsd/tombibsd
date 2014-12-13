@@ -106,6 +106,9 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <net/net_osdep.h>
 
+int ipsec_used = 0;
+int ipsec_enabled = 1;
+
 #ifdef IPSEC_DEBUG
 int ipsec_debug = 1;
 
@@ -1745,7 +1748,7 @@ ipsec_get_reqlevel(const struct ipsecrequest *isr)
     (((lev) != IPSEC_LEVEL_USE && (lev) != IPSEC_LEVEL_REQUIRE		\
     && (lev) != IPSEC_LEVEL_UNIQUE) ?					\
 	(ipsec_debug ? log(LOG_INFO, "fixed system default level " #lev \
-	":%d->%d\n", (lev), IPSEC_LEVEL_REQUIRE) : 0),			\
+	":%d->%d\n", (lev), IPSEC_LEVEL_REQUIRE) : (void)0),		\
 	(lev) = IPSEC_LEVEL_REQUIRE, (lev)				\
     : (lev))
 

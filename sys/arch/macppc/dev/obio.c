@@ -627,9 +627,7 @@ sysctl_cpuspeed_available(SYSCTLFN_ARGS)
 	struct sysctlnode node = *rnode;
 	struct obio_softc *sc = node.sysctl_data;
 	char buf[128];
-	int speed;
 
-	speed = obio_get_cpu_speed(sc);
 	snprintf(buf, 128, "%d %d", sc->sc_spd_lo, sc->sc_spd_hi);	
 	node.sysctl_data = buf;
 	return(sysctl_lookup(SYSCTLFN_CALL(&node)));

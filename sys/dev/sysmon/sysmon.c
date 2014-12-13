@@ -71,6 +71,7 @@ const struct cdevsw sysmon_cdevsw = {
 	.d_poll = sysmonpoll,
 	.d_mmap = nommap,
 	.d_kqfilter = sysmonkqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_OTHER | D_MPSAFE
 };
 

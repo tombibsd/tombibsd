@@ -86,6 +86,7 @@ const struct cdevsw svr4_net_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = nommap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_OTHER,
 };
 
@@ -217,7 +218,7 @@ svr4_netopen(dev_t dev, int flag, int mode, struct lwp *l)
 int
 svr4_soo_close(file_t *fp)
 {
-	struct socket *so = fp->f_data;
+	struct socket *so = fp->f_socket;
 
 	svr4_delete_socket(curproc, fp);
 	free(so->so_internal, M_NETADDR);
@@ -234,7 +235,7 @@ svr4_stream_get(file_t *fp)
 	if (fp == NULL || fp->f_type != DTYPE_SOCKET)
 		return NULL;
 
-	so = fp->f_data;
+	so = fp->f_socket;
 
 	if (so->so_internal)
 		return so->so_internal;

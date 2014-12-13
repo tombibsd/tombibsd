@@ -24,6 +24,9 @@ along with GCC; see the file COPYING3.  If not see
    malloc & co, which are poisoned by "system.h".  The proper solution is
    to include <cstdlib> in "system.h" instead of <stdlib.h>.  */
 #include <cstdlib>
+#include <sstream>
+#include <vector>
+#include <algorithm>
 
 #include "config.h"
 #include "system.h"
@@ -59,10 +62,6 @@ along with GCC; see the file COPYING3.  If not see
 #include "alloc-pool.h"
 #include "tm-constrs.h"
 #include "opts.h"
-
-#include <sstream>
-#include <vector>
-#include <algorithm>
 
 int code_for_indirect_jump_scratch = CODE_FOR_indirect_jump_scratch;
 
@@ -809,6 +808,12 @@ sh_option_override (void)
        targetm.asm_out.aligned_op.di = NULL;
        targetm.asm_out.unaligned_op.di = NULL;
     }
+
+  /* User/priviledged mode is supported only on SH3*, SH4* and SH5*.
+     Disable it for everything else.  */
+  if (! (TARGET_SH3 || TARGET_SH5) && TARGET_USERMODE)
+    TARGET_USERMODE = false;
+
   if (TARGET_SH1)
     {
       if (! strcmp (sh_div_str, "call-div1"))

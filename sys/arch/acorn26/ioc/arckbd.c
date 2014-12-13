@@ -219,8 +219,10 @@ arckbd_attach(device_t parent, device_t self, void *aux)
 
 	aprint_normal("\n");
 
+	/* XXX We do not ESTIMATE_VALUE because we are feeding two
+	   data streams (mouse, kbd) into the same source. XXX */
 	rnd_attach_source(&sc->sc_rnd_source, device_xname(self),
-	    RND_TYPE_TTY, 0);
+	    RND_TYPE_TTY, RND_FLAG_DEFAULT);
 
 	wskbdargs.console = 1; /* XXX FIXME */
 	wskbdargs.keymap = &sc->sc_mapdata;

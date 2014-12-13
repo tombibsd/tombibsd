@@ -4,6 +4,7 @@
 
 TESTSDIR=	${TESTSBASE}/lib/libc/string
 
+TESTS_C+=	t_bm
 TESTS_C+=	t_memchr
 TESTS_C+=	t_memcpy
 TESTS_C+=	t_memmem

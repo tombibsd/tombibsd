@@ -211,6 +211,7 @@ const struct bdevsw raid_bdevsw = {
 	.d_ioctl = raidioctl,
 	.d_dump = raiddump,
 	.d_psize = raidsize,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK
 };
 
@@ -225,6 +226,7 @@ const struct cdevsw raid_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = nommap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK
 };
 
@@ -343,7 +345,7 @@ raidcreate(int unit) {
 		return NULL;
 	}
 	sc->sc_unit = unit;
-	bufq_alloc(&sc->buf_queue, BUFQ_DISK_DEFAULT_STRAT, BUFQ_SORT_RAWBLOCK);
+	bufq_alloc(&sc->buf_queue, "fcfs", BUFQ_SORT_RAWBLOCK);
 	return sc;
 }
 
@@ -527,11 +529,22 @@ rf_buildroothack(RF_ConfigSet_t *config_sets)
 
 	/* we found something bootable... */
 
+	/*
+	 * XXX: The following code assumes that the root raid
+	 * is the first ('a') partition. This is about the best
+	 * we can do with a BSD disklabel, but we might be able
+	 * to do better with a GPT label, by setting a specified
+	 * attribute to indicate the root partition. We can then
+	 * stash the partition number in the r->root_partition
+	 * high bits (the bottom 2 bits are already used). For
+	 * now we just set booted_partition to 0 when we override
+	 * root.
+	 */
 	if (num_root == 1) {
 		device_t candidate_root;
 		if (rsc->sc_dkdev.dk_nwedges != 0) {
-			/* XXX: How do we find the real root partition? */
 			char cname[sizeof(cset->ac->devname)];
+			/* XXX: assume 'a' */
 			snprintf(cname, sizeof(cname), "%s%c",
 			    device_xname(rsc->sc_dev), 'a');
 			candidate_root = dkwedge_find_by_wname(cname);
@@ -539,8 +552,10 @@ rf_buildroothack(RF_ConfigSet_t *config_sets)
 			candidate_root = rsc->sc_dev;
 		if (booted_device == NULL ||
 		    rsc->sc_r.root_partition == 1 ||
-		    rf_containsboot(&rsc->sc_r, booted_device))
+		    rf_containsboot(&rsc->sc_r, booted_device)) {
 			booted_device = candidate_root;
+			booted_partition = 0;	/* XXX assume 'a' */
+		}
 	} else if (num_root > 1) {
 
 		/* 
@@ -571,6 +586,7 @@ rf_buildroothack(RF_ConfigSet_t *config_sets)
 
 		if (num_root == 1) {
 			booted_device = rsc->sc_dev;
+			booted_partition = 0;	/* XXX assume 'a' */
 		} else {
 			/* we can't guess.. require the user to answer... */
 			boothowto |= RB_ASKNAME;
@@ -1074,6 +1090,7 @@ raidioctl(dev_t dev, u_long cmd, void *data, int flag, struct lwp *l)
 	case DIOCWLABEL:
 	case DIOCAWEDGE:
 	case DIOCDWEDGE:
+	case DIOCMWEDGES:
 	case DIOCSSTRATEGY:
 		if ((flag & FWRITE) == 0)
 			return (EBADF);
@@ -1096,6 +1113,7 @@ raidioctl(dev_t dev, u_long cmd, void *data, int flag, struct lwp *l)
 	case DIOCAWEDGE:
 	case DIOCDWEDGE:
 	case DIOCLWEDGES:
+	case DIOCMWEDGES:
 	case DIOCCACHESYNC:
 	case RAIDFRAME_SHUTDOWN:
 	case RAIDFRAME_REWRITEPARITY:
@@ -1514,6 +1532,10 @@ raidioctl(dev_t dev, u_long cmd, void *data, int flag, struct lwp *l)
 		}
 		for (j = d_cfg->cols, i = 0; i < d_cfg->nspares; i++, j++) {
 			d_cfg->spares[i] = raidPtr->Disks[j];
+			if (d_cfg->spares[i].status == rf_ds_rebuilding_spare) {
+				/* XXX: raidctl(8) expects to see this as a used spare */
+				d_cfg->spares[i].status = rf_ds_used_spare;
+			}
 		}
 		retcode = copyout(d_cfg, *ucfgp, sizeof(RF_DeviceConfig_t));
 		RF_Free(d_cfg, sizeof(RF_DeviceConfig_t));
@@ -1901,6 +1923,9 @@ raidioctl(dev_t dev, u_long cmd, void *data, int flag, struct lwp *l)
 	case DIOCLWEDGES:
 		return dkwedge_list(&rs->sc_dkdev,
 		    (struct dkwedge_list *)data, l);
+	case DIOCMWEDGES:
+		dkwedge_discover(&rs->sc_dkdev);
+		return 0;
 	case DIOCCACHESYNC:
 		return rf_sync_component_caches(raidPtr);
 
@@ -2349,7 +2374,10 @@ raidgetdefaultlabel(RF_Raid_t *raidPtr, struct raid_softc *rs,
 	memset(lp, 0, sizeof(*lp));
 
 	/* fabricate a label... */
-	lp->d_secperunit = raidPtr->totalSectors;
+	if (raidPtr->totalSectors > UINT32_MAX)
+		lp->d_secperunit = UINT32_MAX;
+	else
+		lp->d_secperunit = raidPtr->totalSectors;
 	lp->d_secsize = raidPtr->bytesPerSector;
 	lp->d_nsectors = raidPtr->Layout.dataSectorsPerStripe;
 	lp->d_ntracks = 4 * raidPtr->numCol;
@@ -2365,7 +2393,7 @@ raidgetdefaultlabel(RF_Raid_t *raidPtr, struct raid_softc *rs,
 	lp->d_flags = 0;
 
 	lp->d_partitions[RAW_PART].p_offset = 0;
-	lp->d_partitions[RAW_PART].p_size = raidPtr->totalSectors;
+	lp->d_partitions[RAW_PART].p_size = lp->d_secperunit;
 	lp->d_partitions[RAW_PART].p_fstype = FS_UNUSED;
 	lp->d_npartitions = RAW_PART + 1;
 
@@ -2421,17 +2449,21 @@ raidgetdisklabel(dev_t dev)
 		 * same components are used, and old disklabel may used
 		 * if that is found.
 		 */
-		if (lp->d_secperunit != rs->sc_size)
+		if (lp->d_secperunit < UINT32_MAX ?
+		    lp->d_secperunit != rs->sc_size :
+		    lp->d_secperunit > rs->sc_size)
 			printf("raid%d: WARNING: %s: "
-			    "total sector size in disklabel (%" PRIu32 ") != "
-			    "the size of raid (%" PRIu64 ")\n", unit, rs->sc_xname,
-			    lp->d_secperunit, rs->sc_size);
+			    "total sector size in disklabel (%ju) != "
+			    "the size of raid (%ju)\n", unit, rs->sc_xname,
+			    (uintmax_t)lp->d_secperunit,
+			    (uintmax_t)rs->sc_size);
 		for (i = 0; i < lp->d_npartitions; i++) {
 			pp = &lp->d_partitions[i];
 			if (pp->p_offset + pp->p_size > rs->sc_size)
 				printf("raid%d: WARNING: %s: end of partition `%c' "
-				       "exceeds the size of raid (%" PRIu64 ")\n",
-				       unit, rs->sc_xname, 'a' + i, rs->sc_size);
+				       "exceeds the size of raid (%ju)\n",
+				       unit, rs->sc_xname, 'a' + i,
+				       (uintmax_t)rs->sc_size);
 		}
 	}
 

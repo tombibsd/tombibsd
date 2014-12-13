@@ -181,7 +181,7 @@ struct tl_Tx_list {
 
 struct Rx_list {
 	struct mbuf *m; /* mbuf associated with this list */
-	bus_dmamap_t m_dmamap; /* and it's DMA map */
+	bus_dmamap_t m_dmamap; /* and its DMA map */
 	struct Rx_list *next;
 	bus_addr_t hw_listaddr;
 	struct tl_Rx_list *hw_list;
@@ -189,7 +189,7 @@ struct Rx_list {
 
 struct Tx_list {
 	struct mbuf *m; /* mbuf associated with this list */
-	bus_dmamap_t m_dmamap; /* and it's DMA map */
+	bus_dmamap_t m_dmamap; /* and its DMA map */
 	struct Tx_list *next;
 	bus_addr_t hw_listaddr;
 	struct tl_Tx_list *hw_list;

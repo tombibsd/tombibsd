@@ -26,7 +26,7 @@
 /int_mwgwtypes.h/1.1/Sat Apr 14 12:19:51 2001/-kk/
 /int_types.h/1.1/Mon Jun 26 15:42:26 2000/-kk/
 /intr.h/1.21/Wed Jul  8 12:23:10 2009/-kk/
-/iomap.h/1.15/Fri Aug 10 17:43:32 2012/-kk/
+/iomap.h/1.16/Wed Oct 29 08:12:59 2014/-kk/
 /isa_machdep.h/1.17/Sat Oct 27 17:17:43 2012/-kk/
 /isapnp_machdep.h/1.5/Mon Apr 28 20:23:15 2008/-kk/
 /kcore.h/1.1/Sun Mar 10 21:54:59 1996/-kk/
@@ -58,6 +58,6 @@
 /trap.h/1.1.1.1/Sun Mar 26 07:12:06 1995/-kk/
 /types.h/1.16/Sun Dec 18 09:12:18 2011/-kk/
 /video.h/1.7/Tue Oct 20 19:10:11 2009/-kk/
-/vmparam.h/1.28/Tue Feb  8 20:20:10 2011/-kk/
+/vmparam.h/1.29/Fri Oct  3 09:08:54 2014/-kk/
 /wchar_limits.h/1.2/Sun Dec 11 12:16:59 2005/-kk/
 D

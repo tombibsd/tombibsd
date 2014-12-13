@@ -192,22 +192,14 @@ int
 dm_target_linear_deps(dm_table_entry_t * table_en, prop_array_t prop_array)
 {
 	dm_target_linear_config_t *tlc;
-	struct vattr va;
-
-	int error;
 
 	if (table_en->target_config == NULL)
 		return ENOENT;
 
 	tlc = table_en->target_config;
 
-	vn_lock(tlc->pdev->pdev_vnode, LK_SHARED | LK_RETRY);
-	error = VOP_GETATTR(tlc->pdev->pdev_vnode, &va, curlwp->l_cred);
-	VOP_UNLOCK(tlc->pdev->pdev_vnode);
-	if (error != 0)
-		return error;
-
-	prop_array_add_uint64(prop_array, (uint64_t) va.va_rdev);
+	prop_array_add_uint64(prop_array,
+	    (uint64_t) tlc->pdev->pdev_vnode->v_rdev);
 
 	return 0;
 }

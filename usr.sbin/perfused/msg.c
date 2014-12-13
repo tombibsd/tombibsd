@@ -493,7 +493,10 @@ perfused_readframe(struct puffs_usermount *pu, struct puffs_framebuf *pufbuf,
 
 	switch (readen = recv(fd, data, len, MSG_NOSIGNAL|MSG_PEEK)) {
 	case 0:
-		perfused_panic();
+		DPRINTF("Filesystem exit\n");
+		/* NOTREACHED */
+		exit(0);
+		break;
 	case -1:
 		if (errno == EAGAIN)
 			return 0;

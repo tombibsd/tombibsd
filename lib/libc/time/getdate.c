@@ -82,7 +82,7 @@ getdate(const char *str)
 		return (NULL);
 	}
 
-	if ((fp = fopen(datemsk, "r")) == NULL) {
+	if ((fp = fopen(datemsk, "re")) == NULL) {
 		getdate_err = 2;
 		return (NULL);
 	}

@@ -105,6 +105,7 @@
 __KERNEL_RCSID(0, "$NetBSD$");
 
 #include "opt_evbarm_boardtype.h"
+#include "opt_arm_debug.h"
 #include "opt_cputypes.h"
 #include "opt_ddb.h"
 #include "opt_kgdb.h"
@@ -115,9 +116,11 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include "opt_imx.h"
 #include "opt_imx51_ipuv3.h"
 #include "wsdisplay.h"
+#include "opt_machdep.h"
 
 #include <sys/param.h>
 #include <sys/device.h>
+#include <sys/reboot.h>
 #include <sys/termios.h>
 #include <sys/bus.h>
 
@@ -448,18 +451,16 @@ const struct iomux_setup iomux_setup_data[] = {
 	IOMUX_DATA(IOMUXC_GPIO3_IPP_IND_G_IN_3_SELECT_INPUT, INPUT_DAISY_0),
 	IOMUX_MP(CSI2_D12, ALT3, KEEPER | DSEHIGH | SRE), /* GPIO4_9 */
 	IOMUX_MP(CSI2_D13, ALT3, KEEPER | DSEHIGH | SRE),
-	IOMUX_MP(GPIO1_2, ALT0, ODE | DSEHIGH),
+#if 1
+	IOMUX_MP(GPIO1_2, ALT1, DSEHIGH | ODE),	/* LCD backlight by PWM */
+#else
+	IOMUX_MP(GPIO1_2, ALT0, DSEHIGH | ODE),	/* LCD backlight by GPIO */
+#endif
 	IOMUX_MP(EIM_A19, ALT1, SRE | DSEHIGH),
 	/* XXX VGA pins */
 	IOMUX_M(DI_GP4, ALT4),
 	IOMUX_M(GPIO1_8, SION | ALT0),
 
-
-#if 0
-	IOMUX_MP(GPIO1_2, ALT1, DSEHIGH | ODE),	/* LCD backlight by PWM */
-#else
-	IOMUX_P(GPIO1_2, DSEHIGH | ODE),	/* LCD backlight by GPIO */
-#endif
 	IOMUX_MP(GPIO1_8, SION | ALT0, HYS | DSEMID | PU_100K),
 	/* I2C1 */
 	IOMUX_MP(EIM_D16, SION | ALT4, HYS | ODE | DSEHIGH | SRE),

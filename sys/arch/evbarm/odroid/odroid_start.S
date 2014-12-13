@@ -95,6 +95,63 @@ _C_LABEL(odroid_start):
 	stmia	r4, {r0-r3}			// Save the arguments
 
 	/*
+	 * Rescue passed "bootargs" env variable. This is not trivial
+	 * since we can be booted using either `go' or trough `bootm'.
+	 *
+	 * 'go' passes R0 = argc, R1 = argv
+	 * 'bootm' passes R0 = uboot_bootinfo, R3 = bootargs
+	 */
+
+	movw	r4, #:lower16:bootargs
+	movt	r4, #:upper16:bootargs
+	sub	r4, r4, #KERNEL_BASE_VOFFSET
+
+	cmp	r0, #0
+	beq	1f
+	cmp	r0, #MAX_BOOT_STRING
+	bge	1f
+
+	/* `go' method */
+	cmp	r0, #1					// extra argument?
+	beq	3f
+	ldr	r5, [r1, #4]				// load argv[1]
+2:
+	ldrb	r0, [r5], #1
+	strb	r0, [r4], #1
+	teq	r0, #0
+	bne	2b
+
+	b	3f
+1:
+	/* `bootm' method */
+	mov	r6, r0					// save binfo pointer
+
+	cmp	r3, #0
+	beq	1f
+2:
+	ldrb	r0, [r3], #1
+	strb	r0, [r4], #1
+	teq	r0, #0
+	bne	2b
+
+1:
+	cmp	r6, #0					// binfo passed?
+	beq	3f
+
+	add	r6, r6, #0x250				// to eth addr
+
+	movw	r4, #:lower16:uboot_enaddr
+	movt	r4, #:upper16:uboot_enaddr
+	mov	r2, #6
+2:
+	ldrb	r0, [r6], #1
+	strb	r0, [r4], #1
+	subs	r2, r2, #1
+	bne	2b
+	
+3:
+
+	/*
 	 * For easy and early SoC / PoP dependency, retrieve the IDs
 	 */
 #if 1
@@ -121,13 +178,26 @@ _C_LABEL(odroid_start):
 	str	r0, [r4]				// save pop_id
 #endif
 
-	/* Pick uart address and initial MMU table for the SoC */
-	mov	r2, #0
-	ubfx	r1, r5, #24, #8
-	cmp	r1, #0xe5
-	movteq	r2, #:upper16:(EXYNOS_CORE_PBASE + EXYNOS5_UART2_OFFSET)
-	cmp	r1, #0xe4
-	movteq	r2, #:upper16:(EXYNOS_CORE_PBASE + EXYNOS4_UART1_OFFSET)
+	/* Pick uart address for the SoC */
+#ifdef EXYNOS4
+	adr	r1, .Lsscom_exynos4_table
+#endif
+#ifdef EXYNOS5
+	adr	r1, .Lsscom_exynos5_table
+#endif
+#ifdef SSCOM0CONSOLE
+	ldr	r2, [r1, #0*8+4]
+#endif
+#ifdef SSCOM1CONSOLE
+	ldr	r2, [r1, #1*8+4]
+#endif
+#ifdef SSCOM2CONSOLE
+	ldr	r2, [r1, #2*8+4]
+#endif
+#ifdef SSCOM3CONSOLE
+	ldr	r2, [r1, #3*8+4]
+#endif
+	add	r2, r2, #EXYNOS_CORE_PBASE
 	mcr	p15, 0, r2, c13, c0, 3		// TPIDRURO set (uart address)
 
 	/*
@@ -179,6 +249,33 @@ _C_LABEL(odroid_start):
 	.popsection				// back to .start
 
 	/* NOTREACHED */
+
+	.align 0
+	.global _C_LABEL(num_exynos_uarts_entries)
+_C_LABEL(num_exynos_uarts_entries):
+	.word	8				// update number of entries!!!
+	.global _C_LABEL(exynos_uarts)
+_C_LABEL(exynos_uarts):
+.Lsscom_exynos4_table:
+	.word	0
+	.word	EXYNOS4_UART0_OFFSET
+	.word	1
+	.word	EXYNOS4_UART1_OFFSET
+	.word	2
+	.word	EXYNOS4_UART2_OFFSET
+	.word	3
+	.word	EXYNOS4_UART3_OFFSET
+
+.Lsscom_exynos5_table:
+	.word	0
+	.word	EXYNOS5_UART0_OFFSET
+	.word	1
+	.word	EXYNOS5_UART1_OFFSET
+	.word	2
+	.word	EXYNOS5_UART2_OFFSET
+	.word	3
+	.word	EXYNOS5_UART3_OFFSET
+
 
 #if defined(VERBOSE_INIT_ARM)
 	.align 0

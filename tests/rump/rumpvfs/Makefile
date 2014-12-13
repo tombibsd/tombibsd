@@ -8,7 +8,7 @@ TESTS_C=	t_basic
 TESTS_C+=	t_etfs
 TESTS_C+=	t_p2kifs
 
-LDADD=	-lrumpvfs -lrump -lrumpuser -lpthread
+LDADD=	-lrumpvfs -lrump -lrumpuser -lrump -lpthread
 
 WARNS=	4
 

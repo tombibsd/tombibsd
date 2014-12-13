@@ -93,4 +93,21 @@ struct pciio_businfo {
 
 #define	PCI_IOC_BUSINFO		 _IOR('P', 4, struct pciio_businfo)
 
+/*
+ * pciio_drvname:
+ *
+ *      Driver info for a PCI device (autoconfiguration node) instance.
+ *      Must be run on the correct bus.
+ */
+
+#define PCI_IO_DRVNAME_LEN	16
+struct pciio_drvname {
+	u_int	device;				/* in: device number */
+	u_int	function;			/* in: function number */
+	char	name[PCI_IO_DRVNAME_LEN];
+};
+
+#define	PCI_IOC_DRVNAME		_IOWR('P', 5, struct pciio_drvname)
+
+
 #endif /* _DEV_PCI_PCIIO_H_ */

@@ -51,8 +51,8 @@ PROG	usr/bin/sed
 # PROG	usr/bin/less	usr/bin/more
 # PROG	usr/bin/more	usr/bin/less
 
-# sysinst doesn't use installboot
-# PROG	usr/sbin/installboot
+# sysinst doesn't use installboot (yet)
+PROG	usr/sbin/installboot
 
 PROG	usr/sbin/chroot
 

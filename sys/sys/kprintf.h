@@ -57,6 +57,7 @@
 #define	NOLOCK		0x1000	/* don't acquire a tty lock */
 
 void	kprintf_init(void);
+void	kprintf_init_callout(void);
 void	kprintf_lock(void);
 void	kprintf_unlock(void);
 /*

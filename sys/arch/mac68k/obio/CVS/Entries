@@ -1,4 +1,4 @@
-/asc.c/1.56/Tue Mar 25 02:35:27 2014/-kk/
+/asc.c/1.57/Fri Oct  3 09:09:02 2014/-kk/
 /ascvar.h/1.8/Sat Oct 27 17:18:00 2012/-kk/
 /esp.c/1.55/Sat Feb 18 23:51:27 2012/-kk/
 /espvar.h/1.7/Sun Apr 13 04:55:52 2008/-kk/
@@ -6,7 +6,7 @@
 /if_mc_obio.c/1.18/Sat Oct 27 17:18:00 2012/-kk/
 /if_sn_obio.c/1.28/Wed Apr 23 13:29:45 2008/-kk/
 /iwm.s/1.6/Tue Nov 30 16:05:55 2010/-kk/
-/iwm_fd.c/1.48/Tue Mar 25 02:35:27 2014/-kk/
+/iwm_fd.c/1.50/Fri Oct  3 09:09:02 2014/-kk/
 /iwm_fdvar.h/1.15/Sat Oct 27 17:18:00 2012/-kk/
 /iwmreg.h/1.8/Sun Mar  4 06:00:09 2007/-kk/
 /obio.c/1.25/Mon Jun  6 16:52:18 2011/-kk/

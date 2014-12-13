@@ -100,6 +100,7 @@ struct cdevsw iscsi_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = nommap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_OTHER
 };
 
@@ -505,12 +506,14 @@ iscsi_done(ccb_t *ccb)
 #include <sys/module.h>
 
 MODULE(MODULE_CLASS_DRIVER, iscsi, NULL);
+
+#ifdef _MODULE
 static const struct cfiattrdata ibescsi_info = { "scsi", 1,
 	{{"channel", "-1", -1},}
 };
+
 static const struct cfiattrdata *const iscsi_attrs[] = { &ibescsi_info, NULL };
 
-#ifdef _MODULE
 CFDRIVER_DECL(iscsi, DV_DULL, iscsi_attrs);
 
 static struct cfdata iscsi_cfdata[] = {

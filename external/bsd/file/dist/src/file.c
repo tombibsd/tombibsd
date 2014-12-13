@@ -1,5 +1,4 @@
 /*	$NetBSD$	*/
-
 /*
  * Copyright (c) Ian F. Darwin 1986-1995.
  * Software written by Ian F. Darwin and others;
@@ -35,7 +34,7 @@
 
 #ifndef	lint
 #if 0
-FILE_RCSID("@(#)$File: file.c,v 1.152 2013/06/26 14:46:54 christos Exp $")
+FILE_RCSID("@(#)$File: file.c,v 1.155 2014/10/11 15:03:16 christos Exp $")
 #else
 __RCSID("$NetBSD$");
 #endif
@@ -60,9 +59,6 @@ __RCSID("$NetBSD$");
 #ifdef HAVE_UNISTD_H
 #include <unistd.h>	/* for read() */
 #endif
-#ifdef HAVE_LOCALE_H
-#include <locale.h>
-#endif
 #ifdef HAVE_WCHAR_H
 #include <wchar.h>
 #endif
@@ -77,9 +73,9 @@ int getopt_long(int argc, char * const *argv, const char *optstring, const struc
 #endif
 
 #ifdef S_IFLNK
-#define FILE_FLAGS "-bchikLlNnprsvz0"
+#define FILE_FLAGS "-bcEhikLlNnprsvz0"
 #else
-#define FILE_FLAGS "-bciklNnprsvz0"
+#define FILE_FLAGS "-bcEiklNnprsvz0"
 #endif
 
 # define USAGE  \
@@ -107,7 +103,7 @@ private const struct option long_options[] = {
 #undef OPT_LONGONLY
     {0, 0, NULL, 0}
 };
-#define OPTSTRING	"bcCde:f:F:hiklLm:nNprsvz0"
+#define OPTSTRING	"bcCde:Ef:F:hiklLm:nNprsvz0"
 
 private const struct {
 	const char *name;
@@ -157,7 +153,9 @@ main(int argc, char *argv[])
 	const char *magicfile = NULL;		/* where the magic is	*/
 
 	/* makes islower etc work for other langs */
+#ifdef HAVE_SETLOCALE
 	(void)setlocale(LC_CTYPE, "");
+#endif
 
 #ifdef __EMX__
 	/* sh-like wildcard expansion! Shouldn't hurt at least ... */
@@ -205,6 +203,9 @@ main(int argc, char *argv[])
 			break;
 		case 'd':
 			flags |= MAGIC_DEBUG|MAGIC_CHECK;
+			break;
+		case 'E':
+			flags |= MAGIC_ERROR;
 			break;
 		case 'e':
 			for (i = 0; i < sizeof(nv) / sizeof(nv[0]); i++)

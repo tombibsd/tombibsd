@@ -24,6 +24,11 @@ __RCSID("$NetBSD$");
 #include "math.h"
 #include "math_private.h"
 
+#ifndef __HAVE_LONG_DOUBLE
+__strong_alias(_copysignl, copysign)
+__weak_alias(copysignl, copysign)
+#endif
+
 double
 copysign(double x, double y)
 {

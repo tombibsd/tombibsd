@@ -81,3 +81,4 @@ NENTRY(_resumecontext)	/* profiling prologue would clobber TOS */
 	pushl	$-1
 	pushl	%eax	/* unused return address */
 	SYSTRAP(exit)
+END(_resumecontext)

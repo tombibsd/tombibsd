@@ -30,6 +30,11 @@ __RCSID("$NetBSD$");
 
 static const double one = 1.0;
 
+#ifndef __HAVE_LONG_DOUBLE
+__strong_alias(_modfl, modf)
+__weak_alias(modfl, modf)
+#endif
+
 double
 modf(double x, double *iptr)
 {

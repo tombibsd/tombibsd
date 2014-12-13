@@ -52,7 +52,7 @@ ex_mkexrc(SCR *sp, EXCMD *cmdp)
 	size_t flen;
 
 	switch (cmdp->argc) {
-	case 0:
+	case 1:
 		fname = _PATH_EXRC;
 		INT2CHAR(sp, cmdp->argv[0]->bp, cmdp->argv[0]->len + 1, 
 			    fname, flen);

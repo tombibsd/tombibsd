@@ -78,10 +78,10 @@ npf_log_dtor(npf_rproc_t *rp, void *meta)
 	kmem_free(meta, sizeof(npf_ext_log_t));
 }
 
-static void
-npf_log(npf_cache_t *npc, nbuf_t *nbuf, void *meta, int *decision)
+static bool
+npf_log(npf_cache_t *npc, void *meta, int *decision)
 {
-	struct mbuf *m = nbuf_head_mbuf(nbuf);
+	struct mbuf *m = nbuf_head_mbuf(npc->npc_nbuf);
 	const npf_ext_log_t *log = meta;
 	ifnet_t *ifp;
 	int family;
@@ -102,7 +102,7 @@ npf_log(npf_cache_t *npc, nbuf_t *nbuf, void *meta, int *decision)
 	if (ifp == NULL) {
 		/* No interface. */
 		KERNEL_UNLOCK_ONE(NULL);
-		return;
+		return true;
 	}
 
 	/* Pass through BPF. */
@@ -110,6 +110,8 @@ npf_log(npf_cache_t *npc, nbuf_t *nbuf, void *meta, int *decision)
 	ifp->if_obytes += m->m_pkthdr.len;
 	bpf_mtap_af(ifp, family, m);
 	KERNEL_UNLOCK_ONE(NULL);
+
+	return true;
 }
 
 /*

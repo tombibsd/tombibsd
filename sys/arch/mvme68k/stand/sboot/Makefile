@@ -13,7 +13,7 @@ SRCS=		start.s clock.c console.c etherfun.c le_poll.c \
 		oc_cksum.s sboot.c
 SRTOBJ=
 PROG=		sboot
-LIBS=		${LIBSA}
+LIBS=		${LIBSA} ${LIBKERN}
 DPADD=		${LIBS}
 CLEANFILES+=	sboot.srec
 

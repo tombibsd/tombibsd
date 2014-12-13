@@ -2,6 +2,7 @@
 
 deffs	CD9660
 
+define	cd9660: vfs
 file	fs/cd9660/cd9660_bmap.c		cd9660
 file	fs/cd9660/cd9660_lookup.c	cd9660
 file	fs/cd9660/cd9660_node.c		cd9660

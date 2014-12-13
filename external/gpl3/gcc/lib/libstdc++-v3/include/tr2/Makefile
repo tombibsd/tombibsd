@@ -1,13 +1,13 @@
 #	$NetBSD$
 
-.include <bsd.own.mk>
 .include <bsd.init.mk>
 
 .include "${.CURDIR}/../../arch/${GCC_MACHINE_ARCH}/defs.mk"
 
 .cc: # disable .cc->NULL transform
 
-DIST=		${NETBSDSRCDIR}/external/gpl3/gcc/dist
+DIST=		${GCCDIST}
+GNUHOSTDIST=	${DIST}
 
 INCS=		${G_tr2_headers}
 INCSDIR=	/usr/include/g++/tr2

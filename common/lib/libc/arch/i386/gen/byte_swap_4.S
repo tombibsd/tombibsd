@@ -50,3 +50,10 @@ _PROF_PROLOGUE
 	movl	4(%esp),%eax
 	bswap	%eax
 	ret
+#if defined(_KERNEL) || defined(_STANDALONE)
+END(_C_LABEL(bswap32))
+#else /* defined(_KERNEL) || defined(_STANDALONE) */
+END(_C_LABEL(__bswap32))
+#endif /* defined(_KERNEL) || defined(_STANDALONE) */
+END(_C_LABEL(ntohl))
+END(_C_LABEL(htonl))

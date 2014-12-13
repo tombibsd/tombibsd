@@ -42,6 +42,7 @@
 /MagicPointer.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /PHINode.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /PR16069.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/PR17073.ll/1.1.1.1/Sun Aug 10 17:04:36 2014/-kk/
 /PR9946.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /PhiBlockMerge.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /PhiBlockMerge2.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
@@ -52,6 +53,7 @@
 /SpeculativeExec.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /UncondBranchToReturn.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /UnreachableEliminate.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/assume.ll/1.1.1.1/Sun Aug 10 17:04:36 2014/-kk/
 /attr-noduplicate.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /basictest.ll/1.1.1.2/Thu Feb 27 08:52:26 2014/-kk/
 /branch-cond-merge.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
@@ -64,13 +66,14 @@
 /dbginfo.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /dce-cond-after-folding-terminator.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /duplicate-phis.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/extract-cost.ll/1.1.1.1/Fri May 30 18:11:27 2014/-kk/
 /hoist-common-code.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /hoist-dbgvalue.ll/1.1.1.2/Tue Jan 14 16:02:17 2014/-kk/
 /indirectbr.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /invoke.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /invoke_unwind.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /iterative-simplify.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
-/lifetime.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/lifetime.ll/1.1.1.2/Fri Oct  3 09:23:20 2014/-kk/
 /multiple-phis.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /no_speculative_loads_with_tsan.ll/1.1.1.1/Sun Jan  5 16:16:51 2014/-kk/
 /noreturn-call.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
@@ -83,6 +86,7 @@
 /sink-common-code.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /speculate-math.ll/1.1.1.1/Fri Feb 14 20:12:48 2014/-kk/
 /speculate-store.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/speculate-vector-ops.ll/1.1.1.1/Sun Aug 10 17:04:36 2014/-kk/
 /speculate-with-offset.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /switch-masked-bits.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /switch-on-const-select.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
@@ -92,7 +96,7 @@
 /switch_switch_fold.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /switch_thread.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /trap-debugloc.ll/1.1.1.2/Tue Jan 14 16:02:17 2014/-kk/
-/trapping-load-unreachable.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/trapping-load-unreachable.ll/1.1.1.2/Tue Jun  3 03:04:01 2014/-kk/
 /trivial-throw.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /two-entry-phi-return.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /unreachable-blocks.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/

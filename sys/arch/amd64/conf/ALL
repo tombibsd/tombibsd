@@ -90,6 +90,7 @@ options 	SEMMNU=30	# number of undo structures in system
 options 	SYSVSHM		# System V-like memory sharing
 
 options 	MODULAR		# new style module(7) framework
+options 	MODULAR_DEFAULT_AUTOLOAD
 
 options 	USERCONF	# userconf(4) support
 options 	PIPE_SOCKETPAIR	# smaller, but slower pipe(2)
@@ -108,7 +109,7 @@ options 	BUFQ_READPRIO
 options 	BUFQ_PRIOCSCAN
 
 # Diagnostic/debugging support options
-options 	DIAGNOSTIC	# expensive kernel consistency checks
+options 	DIAGNOSTIC	# inexpensive kernel consistency checks
 options 	DEBUG		# expensive debugging checks/support
 options 	LOCKDEBUG	# expensive locking checks/support
 options 	KMEMSTATS	# kernel memory statistics (vmstat -m)
@@ -128,20 +129,22 @@ options 	KDTRACE_HOOKS	# kernel DTrace hooks
 
 # Compatibility options
 #options 	COMPAT_NOMID	# NetBSD 0.8, 386BSD, and BSDI
-#options 	COMPAT_09	# NetBSD 0.9
-#options 	COMPAT_10	# NetBSD 1.0
-#options 	COMPAT_11	# NetBSD 1.1
-#options 	COMPAT_12	# NetBSD 1.2, 386BSD, and BSDI
-#options 	COMPAT_13	# NetBSD 1.3, 386BSD, and BSDI
-#options 	COMPAT_14	# NetBSD 1.4
-#options 	COMPAT_15	# NetBSD 1.5
-options 	COMPAT_16	# NetBSD 1.6
-options 	COMPAT_20	# NetBSD 2.0
-options 	COMPAT_30	# NetBSD 3.0
-options 	COMPAT_40	# NetBSD 4.0
-options 	COMPAT_50	# NetBSD 5.0
-options 	COMPAT_60	# NetBSD 6.0 compatibility.
+#options 	COMPAT_09	# NetBSD 0.9,
+#options 	COMPAT_10	# NetBSD 1.0,
+#options 	COMPAT_11	# NetBSD 1.1,
+#options 	COMPAT_12	# NetBSD 1.2 (and 386BSD and BSDI),
+#options 	COMPAT_13	# NetBSD 1.3 (and 386BSD and BSDI),
+#options 	COMPAT_14	# NetBSD 1.4,
+#options 	COMPAT_15	# NetBSD 1.5,
+options 	COMPAT_16	# NetBSD 1.6,
+options 	COMPAT_20	# NetBSD 2.0,
+options 	COMPAT_30	# NetBSD 3.0,
+options 	COMPAT_40	# NetBSD 4.0,
+options 	COMPAT_50	# NetBSD 5.0,
+options 	COMPAT_60	# NetBSD 6.0, and
+options 	COMPAT_70	# NetBSD 7.0 binary compatibility.
 options 	COMPAT_43	# 4.3BSD, 386BSD, and BSDI
+options 	COMPAT_44	# 4.4BSD
 options 	COMPAT_386BSD_MBRPART # recognize old partition ID
 options 	TCP_COMPAT_42	# 4.2BSD TCP/IP bug compat. Not recommended.
 
@@ -157,9 +160,8 @@ options 	COMPAT_BSDPTY	# /dev/[pt]ty?? ptys.
 # Wedge support
 options 	DKWEDGE_AUTODISCOVER	# Automatically add dk(4) instances
 options 	DKWEDGE_METHOD_GPT	# Supports GPT partitions as wedges
-# The following two options can break /etc/fstab, so handle with care
-options 	DKWEDGE_METHOD_BSDLABEL	# Support disklabel entries as wedges
-options 	DKWEDGE_METHOD_MBR	# Support MBR partitions as wedges
+#options 	DKWEDGE_METHOD_BSDLABEL	# Support disklabel entries as wedges
+#options 	DKWEDGE_METHOD_MBR	# Support MBR partitions as wedges
 options 	DKWEDGE_METHOD_APPLE    # Support Apple partitions as wedges
 
 # File systems
@@ -204,7 +206,6 @@ options 	LFS_KERNEL_RFW
 options 	LFS_EI		# LFS endian-independent support - experimental
 options 	LFS_DIRHASH	# LFS version of UFS_DIRHASH - experimental
 options 	LFS_EXTATTR	# extended attributes for LFS - experimental
-options 	LFS_EXTATTR_AUTOSTART	# like UFS_EXTATTR_AUTOSTART
 options 	LFS_QUOTA	# quotas for LFS - experimental
 options 	LFS_QUOTA2	# new-style quotas for LFS - experimental
 options 	NFSSERVER	# Network File System server
@@ -251,6 +252,7 @@ options 	ALTQ_WFQ	# Weighted Fair Queueing
 options 	ACPIVERBOSE	# verbose ACPI device autoconfig messages
 options 	EISAVERBOSE	# verbose EISA device autoconfig messages
 options 	MIIVERBOSE	# verbose PHY autoconfig messages
+options 	MPVERBOSE	# verbose mpbios config messages
 options 	PCIVERBOSE	# verbose PCI device autoconfig messages
 options 	PCI_CONFIG_DUMP	# verbosely dump PCI config space
 options 	PCMCIAVERBOSE	# verbose PCMCIA configuration messages
@@ -259,6 +261,7 @@ options 	USBVERBOSE	# verbose USB device autoconfig messages
 options 	PNPBIOSVERBOSE	# verbose PnP BIOS messages
 #options 	PNPBIOSDEBUG	# more fulsome PnP BIOS debugging messages
 options 	MCAVERBOSE	# verbose MCA device autoconfig messages
+options 	HDAUDIOVERBOSE	# verbose HDAUDIO driver messages
 
 options 	NFS_BOOT_DHCP,NFS_BOOT_BOOTPARAM
 
@@ -450,6 +453,7 @@ hpet0	at ichlpcib?			# High Precision Event Timer
 fwhrng* at ichlpcib?			# Intel 82802 FWH Random Number Generator
 rdcpcib* at pci? dev ? function ?	# RDC Vortex86/PMX-1000 PCI-ISA w/
 pchb*	at pci? dev ? function ?	# PCI-Host bridges
+options 	AGP_X86
 pcib*	at pci? dev ? function ?	# PCI-ISA bridges
 ppb*	at pci? dev ? function ?	# PCI-PCI bridges
 # XXX 'puc's aren't really bridges, but there's no better place for them here
@@ -497,6 +501,7 @@ wsmouse*	at pms? mux 0
 
 chipsfb*	at pci? dev ? function ?
 genfb*		at pci? dev ? function ?
+gffb*		at pci? dev ? function ?
 igsfb*		at pci? dev ? function ?
 machfb* 	at pci? dev ? function ?
 pm2fb*		at pci? dev ? function ?
@@ -508,17 +513,27 @@ voodoofb*	at pci? dev ? function ?
 wcfb*	at pci? dev ? function ?
 wsdisplay*	at wsemuldisplaydev?
 
-# DRI driver
-i915drm*	at drm?		# Intel i915, i945 DRM driver
-mach64drm*	at drm?		# mach64 (3D Rage Pro, Rage) DRM driver
-mgadrm* 	at drm?		# Matrox G[24]00, G[45]50 DRM driver
-r128drm*	at drm?		# ATI Rage 128 DRM driver
-radeondrm*	at drm?		# ATI Radeon DRM driver
-savagedrm*	at drm?		# S3 Savage DRM driver
-sisdrm* 	at drm?		# SiS DRM driver
-tdfxdrm*	at drm?		# 3dfx (voodoo) DRM driver
-vboxdrm*	at drm?		# VirtualBox DRM driver
-viadrm* 	at drm?		# VIA UniChrome DRM driver
+# DRI legacy drivers
+#i915drm*	at drm?		# Intel i915, i945 DRM driver
+#mach64drm*	at drm?		# mach64 (3D Rage Pro, Rage) DRM driver
+#mgadrm* 	at drm?		# Matrox G[24]00, G[45]50 DRM driver
+#r128drm*	at drm?		# ATI Rage 128 DRM driver
+#radeondrm*	at drm?		# ATI Radeon DRM driver
+#savagedrm*	at drm?		# S3 Savage DRM driver
+#sisdrm* 	at drm?		# SiS DRM driver
+#tdfxdrm*	at drm?		# 3dfx (voodoo) DRM driver
+#vboxdrm*	at drm?		# VirtualBox DRM driver
+#viadrm* 	at drm?		# VIA UniChrome DRM driver
+
+# DRMKMS drivers
+i915drmkms*     at pci? dev ? function ?
+intelfb*        at intelfbbus?
+
+radeon*         at pci? dev ? function ?
+radeondrmkmsfb* at radeonfbbus?
+
+#nouveau*       at pci? dev ? function ?
+#nouveaufb*     at nouveaufbbus
 
 attimer0	at isa?
 pcppi0		at isa?
@@ -927,6 +942,7 @@ tl*	at pci? dev ? function ?	# ThunderLAN-based Ethernet
 tlp*	at pci? dev ? function ?	# DECchip 21x4x and clones
 txp*	at pci? dev ? function ?	# 3com 3cr990
 vge*	at pci? dev ? function ?	# VIATech VT612X Gigabit Ethernet
+vmx*	at pci? dev ? function ?	# VMware VMXNET3
 vr*	at pci? dev ? function ?	# VIA Rhine Fast Ethernet
 vte*	at pci? dev ? function ?	# Vortex86 RDC R6040 Fast Ethernet
 wi*	at pci? dev ? function ?	# Intersil Prism Mini-PCI (802.11b)
@@ -1827,7 +1843,6 @@ options DEBUG_FIND_COMPORT
 options DEBUG_FIND_PCIC
 options DEBUG_FIND_PCIC_I82365SL_ONLY
 options DEBUG_FPE
-options DEBUG_FREEBSD_ELF
 options DEBUG_GPIO
 options DEBUG_GPIO2
 options DEBUG_HPUX
@@ -2023,6 +2038,7 @@ options NETATALKDEBUG
 options NETDOCK_DEBUG_DRIVER
 options NETIF_DEBUG
 options NET_DEBUG
+options NET_MPSAFE
 options NFE_DEBUG
 options NFS_DEBUG
 options NFS_DEBUG_COMMIT

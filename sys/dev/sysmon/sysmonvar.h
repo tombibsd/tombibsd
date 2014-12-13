@@ -208,7 +208,6 @@ struct sysmon_envsys {
 	 * Locking/synchronization.
 	 */
 	kmutex_t sme_mtx;
-	kmutex_t sme_callout_mtx;
 	kcondvar_t sme_condvar;
 };
 

@@ -407,7 +407,7 @@ error_exit:
 		free(pmp);
 	}
 	errno = error;
-	return pmp;
+	return NULL;
 }
 
 int

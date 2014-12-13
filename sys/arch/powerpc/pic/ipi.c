@@ -39,6 +39,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/param.h>
 #include <sys/kernel.h>
 #include <sys/xcall.h>
+#include <sys/ipi.h>
 #include <sys/atomic.h>
 #include <sys/cpu.h>
 
@@ -70,6 +71,9 @@ ipi_intr(void *v)
 
 	if (ipi & IPI_XCALL)
 		xc_ipi_handler();
+
+	if (ipi & IPI_GENERIC)
+		ipi_cpu_handler();
 
 	if (ipi & IPI_HALT) {
 		aprint_normal("halting CPU %d\n", cpu_id);

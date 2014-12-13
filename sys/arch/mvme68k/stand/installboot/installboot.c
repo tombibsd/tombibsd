@@ -219,10 +219,6 @@ loadprotoblocks(char *fname, size_t *size)
 	}
 
 	return (char *)bp;
-
-	if (bp)
-		free((void *)bp);
-	return NULL;
 }
 
 static void

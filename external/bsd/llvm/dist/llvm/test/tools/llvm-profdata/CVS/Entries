@@ -1,3 +1,16 @@
-/errors.test/1.1.1.1/Tue Mar  4 20:54:52 2014/-kk/
-/simple.test/1.1.1.1/Tue Mar  4 20:54:52 2014/-kk/
+/c-general.test/1.1.1.2/Fri Oct  3 09:23:21 2014/-kk/
+/compat.proftext/1.1.1.1/Sun Aug 10 17:04:40 2014/-kk/
+/count-mismatch.proftext/1.1.1.1/Sun Aug 10 17:04:40 2014/-kk/
+/general.proftext/1.1.1.1/Sun Aug 10 17:04:40 2014/-kk/
+/hash-mismatch.proftext/1.1.1.1/Sun Aug 10 17:04:40 2014/-kk/
+/lit.local.cfg/1.1.1.1/Sun Aug 10 17:04:40 2014/-kk/
+/multiple-inputs.test/1.1.1.1/Sun Aug 10 17:04:40 2014/-kk/
+/overflow.proftext/1.1.1.1/Sun Aug 10 17:04:40 2014/-kk/
+/raw-32-bits-be.test/1.1.1.1/Fri May 30 18:11:27 2014/-kk/
+/raw-32-bits-le.test/1.1.1.1/Fri May 30 18:11:27 2014/-kk/
+/raw-64-bits-be.test/1.1.1.1/Fri May 30 18:11:27 2014/-kk/
+/raw-64-bits-le.test/1.1.1.1/Fri May 30 18:11:27 2014/-kk/
+/raw-magic-but-no-header.test/1.1.1.1/Fri May 30 18:11:27 2014/-kk/
+/raw-two-profiles.test/1.1.1.1/Fri May 30 18:11:27 2014/-kk/
+/text-format-errors.test/1.1.1.1/Sun Aug 10 17:04:40 2014/-kk/
 D/Inputs////

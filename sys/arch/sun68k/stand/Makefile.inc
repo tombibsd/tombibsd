@@ -14,7 +14,11 @@ LIBSA!=cd ${.CURDIR}/../libsa && ${PRINTOBJDIR}
 
 MDEC_DIR?=/usr/mdec
 
+.if ${MACHINE} == "sun3"
+RELOC?= 280000
+.else
 RELOC?= 240000
+.endif
 DEFS?= -Dsun3 -D_STANDALONE -D__daddr_t=int32_t
 INCL?= -I. -I${.CURDIR} -I${.CURDIR}/../libsa -I${S}/lib/libsa -I${S}
 

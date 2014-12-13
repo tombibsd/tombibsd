@@ -47,6 +47,12 @@ udelay(unsigned int usec)
 }
 
 static inline void
+usleep_range(unsigned long minimum, unsigned long maximum __unused)
+{
+	DELAY(minimum);
+}
+
+static inline void
 mdelay(unsigned int msec)
 {
 
@@ -64,6 +70,13 @@ msleep(unsigned int msec)
 		mdelay(msec);
 	else
 		(void)kpause("lnxmslep", false, mstohz(msec), NULL);
+}
+
+static inline void
+ndelay(unsigned int nsec)
+{
+
+	DELAY(nsec / 1000);
 }
 
 #endif  /* _LINUX_DELAY_H_ */

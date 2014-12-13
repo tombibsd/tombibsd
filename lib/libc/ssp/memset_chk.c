@@ -38,6 +38,8 @@ __RCSID("$NetBSD$");
 
 #undef memset
 
+void *__memset_chk(void * __restrict, int, size_t, size_t);
+
 void *
 __memset_chk(void * __restrict dst, int val, size_t len, size_t slen)
 {

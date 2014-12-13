@@ -81,7 +81,7 @@ static const struct ambadev_locators bcm2835_ambadev_locs[] = {
 		.ad_name = "bcmmbox",
 		.ad_addr = BCM2835_ARMMBOX_BASE,
 		.ad_size = BCM2835_ARMMBOX_SIZE,
-		.ad_intr = -1, /* BCM2835_INT_ARMMAILBOX */
+		.ad_intr = BCM2835_INT_ARMMAILBOX
 	},
 	{
 		/* System Timer */
@@ -102,6 +102,13 @@ static const struct ambadev_locators bcm2835_ambadev_locs[] = {
 		.ad_name = "bcmpm",
 		.ad_addr = BCM2835_PM_BASE,
 		.ad_size = BCM2835_PM_SIZE,
+		.ad_intr = -1,
+	},
+	{
+		/* DMA Controller */
+		.ad_name = "bcmdmac",
+		.ad_addr = BCM2835_DMA0_BASE,
+		.ad_size = BCM2835_DMA0_SIZE,
 		.ad_intr = -1,
 	},
 	{

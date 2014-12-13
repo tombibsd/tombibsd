@@ -91,7 +91,8 @@ genfb_attach_sbus(device_t parent, device_t self, void *args)
 {
 	struct genfb_sbus_softc *sc = device_private(self);
 	struct sbus_attach_args *sa = args;
-	struct genfb_ops ops;
+	static const struct genfb_ops zero_ops;
+	struct genfb_ops ops = zero_ops;
 	prop_dictionary_t dict;
 	bus_space_handle_t bh;
 	paddr_t fbpa;

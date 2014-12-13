@@ -87,9 +87,10 @@ Here's the short story for getting up and running quickly with LLVM:
    * ``make check-all`` --- This run the regression tests to ensure everything
      is in working order.
 
-   * It is also possible to use CMake instead of the makefiles. With CMake it is
-     possible to generate project files for several IDEs: Xcode, Eclipse CDT4,
-     CodeBlocks, Qt-Creator (use the CodeBlocks generator), KDevelop3.
+   * It is also possible to use `CMake <CMake.html>`_ instead of the makefiles.
+     With CMake it is possible to generate project files for several IDEs:
+     Xcode, Eclipse CDT4, CodeBlocks, Qt-Creator (use the CodeBlocks
+     generator), KDevelop3.
 
    * If you get an "internal compiler error (ICE)" or test failures, see
      `below`.
@@ -182,7 +183,7 @@ Package                                                     Version      Notes
    #. If you want to make changes to the configure scripts, you will need GNU
       autoconf (2.60), and consequently, GNU M4 (version 1.4 or higher). You
       will also need automake (1.9.6). We only use aclocal from that package.
-#.Optional, adds compression / uncompression capabilities to selected LLVM
+   #. Optional, adds compression / uncompression capabilities to selected LLVM
       tools.
 
 Additionally, your compilation host is expected to have the usual plethora of
@@ -330,10 +331,23 @@ of this information from.
 .. _GCC wiki entry:
   http://gcc.gnu.org/wiki/InstallingGCC
 
-Once you have a GCC toolchain, use it as your host compiler. Things should
-generally "just work". You may need to pass a special linker flag,
-``-Wl,-rpath,$HOME/toolchains/lib`` or some variant thereof to get things to
-find the libstdc++ DSO in this toolchain.
+Once you have a GCC toolchain, configure your build of LLVM to use the new
+toolchain for your host compiler and C++ standard library. Because the new
+version of libstdc++ is not on the system library search path, you need to pass
+extra linker flags so that it can be found at link time (``-L``) and at runtime
+(``-rpath``). If you are using CMake, this invocation should produce working
+binaries:
+
+.. code-block:: console
+
+  % mkdir build
+  % cd build
+  % CC=$HOME/toolchains/bin/gcc CXX=$HOME/toolchains/bin/g++ \
+    cmake .. -DCMAKE_CXX_LINK_FLAGS="-Wl,-rpath,$HOME/toolchains/lib64 -L$HOME/toolchains/lib64"
+
+If you fail to set rpath, most LLVM binaries will fail on startup with a message
+from the loader similar to ``libstdc++.so.6: version `GLIBCXX_3.4.20' not
+found``. This means you need to tweak the -rpath linker flag.
 
 When you build Clang, you will need to give *it* access to modern C++11
 standard library in order to use it as your new host in part of a bootstrap.
@@ -561,8 +575,9 @@ Then, your .git/config should have [imap] sections.
         pass = himitsu!
         port = 993
         sslverify = false
-  ;
-in English folder = "[Gmail]/Drafts"; example for Japanese, "Modified UTF-7" encoded.
+  ; in English
+        folder = "[Gmail]/Drafts"
+  ; example for Japanese, "Modified UTF-7" encoded.
         folder = "[Gmail]/&Tgtm+DBN-"
   ; example for Traditional Chinese
         folder = "[Gmail]/&g0l6Pw-"
@@ -679,7 +694,7 @@ The following options can be used to set or enable LLVM specific options:
 
   Enables optimized compilation (debugging symbols are removed and GCC
   optimization flags are enabled). Note that this is the default setting if you
-  are using the LLVM distribution. The default behavior of an Subversion
+  are using the LLVM distribution. The default behavior of a Subversion
   checkout is to use an unoptimized build (also known as a debug build).
 
 ``--enable-debug-runtime``
@@ -697,14 +712,12 @@ The following options can be used to set or enable LLVM specific options:
 
   Controls which targets will be built and linked into llc. The default value
   for ``target_options`` is "all" which builds and links all available targets.
-  The value "host-only" can be specified to build only a native compiler (no
-  cross-compiler targets available). The "native" target is selected as the
-  target of the build host. You can also specify a comma separated list of
-  target names that you want available in llc. The target names use all lower
-  case. The current set of targets is:
+  The "host" target is selected as the target of the build host. You can also
+  specify a comma separated list of target names that you want available in llc.
+  The target names use all lower case. The current set of targets is:
 
-    ``arm, cpp, hexagon, mips, mipsel, msp430, powerpc, ptx, sparc, spu,
-    systemz, x86, x86_64, xcore``.
+    ``aarch64, arm, arm64, cpp, hexagon, mips, mipsel, mips64, mips64el, msp430,
+    powerpc, nvptx, r600, sparc, systemz, x86, x86_64, xcore``.
 
 ``--enable-doxygen``
 
@@ -712,13 +725,6 @@ The following options can be used to set or enable LLVM specific options:
   documentation from the source code. This is disabled by default because
   generating the documentation can take a long time and producess 100s of
   megabytes of output.
-
-``--with-udis86``
-
-  LLVM can use external disassembler library for various purposes (now it's used
-  only for examining code produced by JIT). This option will enable usage of
-  `udis86 <http://udis86.sourceforge.net/>`_ x86 (both 32 and 64 bits)
-  disassembler library.
 
 To configure LLVM, follow these steps:
 
@@ -742,7 +748,7 @@ builds:
 
 Debug Builds
 
-  These builds are the default when one is using an Subversion checkout and
+  These builds are the default when one is using a Subversion checkout and
   types ``gmake`` (unless the ``--enable-optimized`` option was used during
   configuration).  The build system will compile the tools and libraries with
   debugging information.  To get a Debug Build using the LLVM distribution the
@@ -1077,8 +1083,7 @@ different `tools`_.
 
 This directory contains projects that are not strictly part of LLVM but are
 shipped with LLVM. This is also the directory where you should create your own
-LLVM-based projects. See ``llvm/projects/sample`` for an example of how to set
-up your own project.
+LLVM-based projects.
 
 ``llvm/runtime``
 ----------------

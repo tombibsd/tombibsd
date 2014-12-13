@@ -82,10 +82,10 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/vnode.h>
 #include <sys/mount.h>
 #include <sys/namei.h>
-#include <sys/malloc.h>
 #include <sys/kauth.h>
 #include <sys/module.h>
 
+#include <miscfs/specfs/specdev.h>
 #include <miscfs/genfs/layer.h>
 #include <miscfs/genfs/layer_extern.h>
 
@@ -200,6 +200,43 @@ layerfs_sync(struct mount *mp, int waitfor,
 	/*
 	 * XXX - Assumes no data cached at layer.
 	 */
+	return 0;
+}
+
+int
+layerfs_loadvnode(struct mount *mp, struct vnode *vp,
+    const void *key, size_t key_len, const void **new_key)
+{
+	struct layer_mount *lmp = MOUNTTOLAYERMOUNT(mp);
+	struct vnode *lowervp;
+	struct layer_node *xp;
+
+	KASSERT(key_len == sizeof(struct vnode *));
+	memcpy(&lowervp, key, key_len);
+
+	xp = kmem_alloc(lmp->layerm_size, KM_SLEEP);
+	if (xp == NULL)
+		return ENOMEM;
+
+	/* Share the interlock with the lower node. */
+	mutex_obj_hold(lowervp->v_interlock);
+	uvm_obj_setlock(&vp->v_uobj, lowervp->v_interlock);
+	vp->v_iflag |= VI_LAYER | VI_LOCKSHARE;
+
+	vp->v_tag = lmp->layerm_tag;
+	vp->v_type = lowervp->v_type;
+	vp->v_op = lmp->layerm_vnodeop_p;
+	if (vp->v_type == VBLK || vp->v_type == VCHR)
+		spec_node_init(vp, lowervp->v_rdev);
+	vp->v_data = xp;
+	xp->layer_vnode = vp;
+	xp->layer_lowervp = lowervp;
+	xp->layer_flags = 0;
+	uvm_vnp_setsize(vp, 0);
+
+	/*  Add a reference to the lower node. */
+	vref(lowervp);
+	*new_key = &xp->layer_lowervp;
 	return 0;
 }
 

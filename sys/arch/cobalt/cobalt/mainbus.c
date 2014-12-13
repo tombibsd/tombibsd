@@ -90,7 +90,7 @@ mainbus_print(void *aux, const char *pnp)
 		return QUIET;
 
 	if (ma->ma_addr != MAINBUSCF_ADDR_DEFAULT)
-		aprint_normal(" addr 0x%lx", ma->ma_addr);
+		aprint_normal(" addr 0x%"PRIxBUSADDR, ma->ma_addr);
 	if (ma->ma_level != MAINBUSCF_LEVEL_DEFAULT)
 		aprint_normal(" level %d", ma->ma_level);
 	if (ma->ma_irq != MAINBUSCF_IRQ_DEFAULT)

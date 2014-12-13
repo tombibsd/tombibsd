@@ -101,3 +101,4 @@ ENTRY(__clone)
 5:
 	popl	%ebp
 	jmp	CERROR
+END(__clone)

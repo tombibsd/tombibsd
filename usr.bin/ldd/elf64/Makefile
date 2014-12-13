@@ -25,6 +25,8 @@ RTLD_FUNCS	= \
 	_rtld_map_object \
 	_rtld_obj_free \
 	_rtld_obj_new \
+	_rtld_object_add_name \
+	_rtld_object_match_name \
 	_rtld_add_paths \
 	_rtld_process_hints \
 	_rtld_sysctl \

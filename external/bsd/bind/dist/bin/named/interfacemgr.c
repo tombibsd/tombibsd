@@ -106,6 +106,7 @@ route_event(isc_task_t *task, isc_event_t *event) {
 	isc_region_t r;
 	isc_result_t result;
 	struct MSGHDR *rtm;
+	isc_boolean_t done = ISC_TRUE;
 
 	UNUSED(task);
 
@@ -132,8 +133,6 @@ route_event(isc_task_t *task, isc_event_t *event) {
 			      "rtm->rtm_version mismatch (%u != %u) "
 			      "recompile required", rtm->rtm_version,
 			      RTM_VERSION);
-		isc_task_detach(&mgr->task);
-		isc_socket_detach(&mgr->route);
 		ns_interfacemgr_detach(&mgr);
 		isc_event_free(&event);
 		return;
@@ -143,23 +142,31 @@ route_event(isc_task_t *task, isc_event_t *event) {
 	switch (rtm->MSGTYPE) {
 	case RTM_NEWADDR:
 	case RTM_DELADDR:
-		if (ns_g_server->interface_auto)
+		if (mgr->route != NULL && ns_g_server->interface_auto)
 			ns_server_scan_interfaces(ns_g_server);
 		break;
 	default:
 		break;
 	}
 
-	/*
-	 * Look for next route event.
-	 */
-	r.base = mgr->buf;
-	r.length = sizeof(mgr->buf);
-	result = isc_socket_recv(mgr->route, &r, 1, mgr->task,
-				 route_event, mgr);
-	if (result != ISC_R_SUCCESS)
+	LOCK(&mgr->lock);
+	if (mgr->route != NULL) {
+		/*
+		 * Look for next route event.
+		 */
+		r.base = mgr->buf;
+		r.length = sizeof(mgr->buf);
+		result = isc_socket_recv(mgr->route, &r, 1, mgr->task,
+					 route_event, mgr);
+		if (result == ISC_R_SUCCESS)
+			done = ISC_FALSE;
+	}
+	UNLOCK(&mgr->lock);
+
+	if (done)
 		ns_interfacemgr_detach(&mgr);
 	isc_event_free(&event);
+	return;
 }
 #endif
 
@@ -167,10 +174,14 @@ isc_result_t
 ns_interfacemgr_create(isc_mem_t *mctx, isc_taskmgr_t *taskmgr,
 		       isc_socketmgr_t *socketmgr,
 		       dns_dispatchmgr_t *dispatchmgr,
-		       ns_interfacemgr_t **mgrp)
+		       isc_task_t *task, ns_interfacemgr_t **mgrp)
 {
 	isc_result_t result;
 	ns_interfacemgr_t *mgr;
+
+#ifndef USE_ROUTE_SOCKET
+	UNUSED(task);
+#endif
 
 	REQUIRE(mctx != NULL);
 	REQUIRE(mgrp != NULL);
@@ -227,11 +238,8 @@ ns_interfacemgr_create(isc_mem_t *mctx, isc_taskmgr_t *taskmgr,
 	}
 
 	mgr->task = NULL;
-	if (mgr->route != NULL) {
-		result = isc_task_create(taskmgr, 0, &mgr->task);
-		if (result != ISC_R_SUCCESS)
-			goto cleanup_route;
-	}
+	if (mgr->route != NULL)
+		isc_task_attach(task, &mgr->task);
 	mgr->references = (mgr->route != NULL) ? 2 : 1;
 #else
 	mgr->references = 1;
@@ -245,16 +253,16 @@ ns_interfacemgr_create(isc_mem_t *mctx, isc_taskmgr_t *taskmgr,
 
 		result = isc_socket_recv(mgr->route, &r, 1, mgr->task,
 					 route_event, mgr);
-		if (result != ISC_R_SUCCESS)
+		if (result != ISC_R_SUCCESS) {
+			isc_task_detach(&mgr->task);
+			isc_socket_detach(&mgr->route);
 			ns_interfacemgr_detach(&mgr);
+		}
 	}
 #endif
 	return (ISC_R_SUCCESS);
 
 #ifdef USE_ROUTE_SOCKET
- cleanup_route:
-	if (mgr->route != NULL)
-		isc_socket_detach(&mgr->route);
  cleanup_aclenv:
 	dns_aclenv_destroy(&mgr->aclenv);
 #endif
@@ -328,8 +336,13 @@ ns_interfacemgr_shutdown(ns_interfacemgr_t *mgr) {
 	 */
 	mgr->generation++;
 #ifdef USE_ROUTE_SOCKET
-	if (mgr->route != NULL)
+	LOCK(&mgr->lock);
+	if (mgr->route != NULL) {
 		isc_socket_cancel(mgr->route, mgr->task, ISC_SOCKCANCEL_RECV);
+		isc_socket_detach(&mgr->route);
+		isc_task_detach(&mgr->task);
+	}
+	UNLOCK(&mgr->lock);
 #endif
 	purge_old_interfaces(mgr);
 }

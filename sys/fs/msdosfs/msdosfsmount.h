@@ -251,5 +251,9 @@ void msdosfs_init(void);
 void msdosfs_reinit(void);
 void msdosfs_done(void);
 
+#ifndef MAKEFS
+VFS_PROTOS(msdosfs);
+#endif
+
 #endif /* _KERNEL || MAKEFS */
 #endif /* _MSDOSFS_MSDOSFSMOUNT_H_ */

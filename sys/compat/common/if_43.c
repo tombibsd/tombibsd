@@ -49,7 +49,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/stat.h>
 #include <sys/ioctl.h>
 #include <sys/fcntl.h>
-#include <sys/malloc.h>
 #include <sys/syslog.h>
 #include <sys/unistd.h>
 #include <sys/resourcevar.h>
@@ -216,7 +215,7 @@ compat_ifioctl(struct socket *so, u_long ocmd, u_long cmd, void *data,
     struct lwp *l)
 {
 	int error;
-	struct ifreq *ifr = data;
+	struct ifreq *ifr = (struct ifreq *)data;
 	struct ifnet *ifp = ifunit(ifr->ifr_name);
 	struct sockaddr *sa;
 
@@ -256,8 +255,7 @@ compat_ifioctl(struct socket *so, u_long ocmd, u_long cmd, void *data,
 		cmd = SIOCGIFNETMASK;
 	}
 
-	error = (*so->so_proto->pr_usrreq)(so, PRU_CONTROL,
-	    (struct mbuf *)cmd, (struct mbuf *)ifr, (struct mbuf *)ifp, l);
+	error = (*so->so_proto->pr_usrreqs->pr_ioctl)(so, cmd, ifr, ifp);
 
 	switch (ocmd) {
 	case OOSIOCGIFADDR:

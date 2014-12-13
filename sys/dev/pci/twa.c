@@ -2284,6 +2284,7 @@ const struct cdevsw twa_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = nommap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_OTHER
 };
 
@@ -2954,7 +2955,7 @@ twa_describe_controller(struct twa_softc *sc)
 	uint32_t		dsize;
 	uint8_t			ports;
 
-	memset(p, sizeof(struct twa_param_9k *), 10);
+	memset(p, 0, sizeof(p));
 
 	/* Get the port count. */
 	rv |= twa_get_param(sc, TWA_PARAM_CONTROLLER,

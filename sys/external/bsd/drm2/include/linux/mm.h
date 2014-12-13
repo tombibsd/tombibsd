@@ -39,6 +39,9 @@
 #include <sys/vnode.h>
 
 #include <uvm/uvm_extern.h>
+#include <uvm/uvm_map.h>
+
+#include <asm/page.h>
 
 /* XXX Ugh bletch!  Whattakludge!  Linux's sense is reversed...  */
 #undef	PAGE_MASK
@@ -46,6 +49,22 @@
 
 #define	PAGE_ALIGN(x)		(((x) + (PAGE_SIZE-1)) & ~(PAGE_SIZE-1))
 #define	offset_in_page(x)	((x) & (PAGE_SIZE-1))
+
+struct sysinfo {
+	unsigned long totalram;
+	unsigned long totalhigh;
+	uint32_t mem_unit;
+};
+
+static inline void
+si_meminfo(struct sysinfo *si)
+{
+
+	si->totalram = uvmexp.npages;
+	si->totalhigh = kernel_map->size >> PAGE_SHIFT;
+	si->mem_unit = PAGE_SIZE;
+	/* XXX Fill in more as needed.  */
+}
 
 /*
  * ###################################################################

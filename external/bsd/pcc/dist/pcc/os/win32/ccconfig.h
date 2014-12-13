@@ -1,9 +1,5 @@
-/*	Id: ccconfig.h,v 1.17 2011/09/27 08:22:55 plunky Exp 	*/	
+/*	Id: ccconfig.h,v 1.18 2012/08/05 14:35:00 ragge Exp 	*/	
 /*	$NetBSD$	*/
-
-#ifndef LIBDIR
-#define LIBDIR "/usr/lib/"
-#endif
 
 /*
  * Currently only supports console applications.

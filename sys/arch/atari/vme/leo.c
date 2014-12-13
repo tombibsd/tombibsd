@@ -118,6 +118,7 @@ const struct cdevsw leo_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = leommap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = 0
 };
 

@@ -228,6 +228,12 @@ struct ether_multi {
 	LIST_ENTRY(ether_multi) enm_list;
 };
 
+struct ether_multi_sysctl {
+	u_int   enm_refcount;
+	uint8_t enm_addrlo[ETHER_ADDR_LEN];
+	uint8_t enm_addrhi[ETHER_ADDR_LEN];
+};
+
 /*
  * Structure used by macros below to remember position when stepping through
  * all of the ether_multi records.
@@ -318,6 +324,7 @@ vlan_input_tag(struct ifnet *ifp, struct mbuf *m, u_int vlanid)
 /* test if any VLAN is configured for this interface */
 #define VLAN_ATTACHED(ec)	((ec)->ec_nvlans > 0)
 
+void	etherinit(void);
 void	ether_ifattach(struct ifnet *, const uint8_t *);
 void	ether_ifdetach(struct ifnet *);
 int	ether_mediachange(struct ifnet *);

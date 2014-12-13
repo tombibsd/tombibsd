@@ -938,6 +938,14 @@ ipmi_smbios_probe(struct smbios_ipmi *pipmi, struct ipmi_attach_args *ia)
 	if (pipmi->smipmi_base_flags & SMIPMI_FLAG_ODDOFFSET)
 		ia->iaa_if_iobase++;
 
+	if (strcmp(pmf_get_platform("system-product"),
+            "ProLiant MicroServer") == 0) {
+                ia->iaa_if_iospacing = 1;
+                ia->iaa_if_iobase = pipmi->smipmi_base_address - 7;
+                ia->iaa_if_iotype = 'i';
+                return;
+        }
+
 	if (pipmi->smipmi_base_flags == 0x7f) {
 		/* IBM 325 eServer workaround */
 		ia->iaa_if_iospacing = 1;
@@ -1209,6 +1217,7 @@ get_sdr(struct ipmi_softc *sc, uint16_t recid, uint16_t *nxtrec)
 		    psdr + offset, NULL)) {
 			printf("ipmi: get chunk : %d,%d fails\n",
 			    offset, len);
+			free(psdr, M_DEVBUF);
 			return (-1);
 		}
 	}
@@ -1511,10 +1520,6 @@ ipmi_convert_sensor(uint8_t *reading, struct ipmi_sensor *psensor)
 		val = 0;
 		break;
 	}
-	if (val != psensor->i_prevval) {
-		rnd_add_uint32(&psensor->i_rnd, val);
-		psensor->i_prevval = val;
-	}
 	return val;
 }
 
@@ -1811,7 +1816,7 @@ add_child_sensors(struct ipmi_softc *sc, uint8_t *psdr, int count,
 	char			*e;
 	struct ipmi_sensor	*psensor;
 	struct sdrtype1		*s1 = (struct sdrtype1 *)psdr;
-
+	
 	typ = ipmi_sensor_type(sensor_type, ext_type, entity);
 	if (typ == -1) {
 		dbg_printf(5, "Unknown sensor type:%.2x et:%.2x sn:%.2x "
@@ -1868,22 +1873,6 @@ add_child_sensors(struct ipmi_softc *sc, uint8_t *psdr, int count,
 			         ipmi_is_dupname(psensor->i_envdesc));
 		}
 
-		/*
-		 * Add entropy source.
-		 */
-		switch (psensor->i_envtype) {
-		    case ENVSYS_STEMP:
-		    case ENVSYS_SFANRPM:
-			rnd_attach_source(&psensor->i_rnd,
-					  psensor->i_envdesc,
-					  RND_TYPE_ENV, 0);
-		        break;
-		    default:	/* XXX intrusion sensors? */
-			rnd_attach_source(&psensor->i_rnd,
-					  psensor->i_envdesc,
-					  RND_TYPE_POWER, 0);
-		}
-		    
 		dbg_printf(5, "add sensor:%.4x %.2x:%d ent:%.2x:%.2x %s\n",
 		    s1->sdrhdr.record_id, s1->sensor_type,
 		    typ, s1->entity_id, s1->entity_instance,
@@ -2078,6 +2067,7 @@ ipmi_thread(void *cookie)
 		ipmi_s->i_envnum = -1;
 		sc->sc_sensor[i].units = ipmi_s->i_envtype;
 		sc->sc_sensor[i].state = ENVSYS_SINVALID;
+		sc->sc_sensor[i].flags |= ENVSYS_FHAS_ENTROPY;
 		/*
 		 * Monitor threshold limits in the sensors.
 		 */

@@ -30,6 +30,9 @@
 #include "nbtool_config.h"
 #endif
 
+#include <sys/cdefs.h>
+__RCSID("$NetBSD$");
+
 #include <assert.h>
 #include <stdlib.h>
 

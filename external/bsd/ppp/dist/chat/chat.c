@@ -91,7 +91,7 @@
 static const char rcsid[] = "Id: chat.c,v 1.30 2004/01/17 05:47:55 carlsonj Exp ";
 #endif
 #else
-__RCSID("$NetBSD$");
+__RCSID("NetBSD: chat.c,v 1.2 2013/11/28 22:33:42 christos Exp ");
 #endif
 
 #include <stdio.h>

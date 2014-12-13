@@ -66,6 +66,7 @@ typedef struct {
 
 #define _UC_UCONTEXT_ALIGN	(~0xf)
 
+/* AMD64 ABI 128-bytes "red zone". */
 #define _UC_MACHINE_SP(uc)	((uc)->uc_mcontext.__gregs[_REG_RSP] - 128)
 #define _UC_MACHINE_PC(uc)	((uc)->uc_mcontext.__gregs[_REG_RIP])
 #define _UC_MACHINE_INTRV(uc)	((uc)->uc_mcontext.__gregs[_REG_RAX])

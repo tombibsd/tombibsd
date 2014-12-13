@@ -130,6 +130,7 @@ const struct cdevsw cgfourteen_cdevsw = {
 	.d_poll = cgfourteenpoll,
 	.d_mmap = cgfourteenmmap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = 0
 };
 

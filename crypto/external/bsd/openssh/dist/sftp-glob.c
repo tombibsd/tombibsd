@@ -1,5 +1,5 @@
 /*	$NetBSD$	*/
-/* $OpenBSD: sftp-glob.c,v 1.24.2.1 2013/11/08 01:33:56 djm Exp $ */
+/* $OpenBSD: sftp-glob.c,v 1.26 2013/11/08 11:15:19 dtucker Exp $ */
 /*
  * Copyright (c) 2001-2004 Damien Miller <djm@openbsd.org>
  *
@@ -23,6 +23,7 @@ __RCSID("$NetBSD$");
 
 #include <dirent.h>
 #include <glob.h>
+#include <stdlib.h>
 #include <string.h>
 
 #include "xmalloc.h"

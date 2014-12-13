@@ -431,11 +431,11 @@ uvm_proc_exit(struct proc *p)
 	/*
 	 * borrow proc0's address space.
 	 */
-	KPREEMPT_DISABLE(l);
+	kpreempt_disable();
 	pmap_deactivate(l);
 	p->p_vmspace = proc0.p_vmspace;
 	pmap_activate(l);
-	KPREEMPT_ENABLE(l);
+	kpreempt_enable();
 
 	uvmspace_free(ovm);
 }

@@ -1,5 +1,6 @@
-/Makefile/1.43/Fri Apr 11 02:03:25 2014/-kk/
+/Makefile/1.45/Fri Oct  3 09:50:36 2014/-kk/
 /README/1.62/Fri Apr 11 02:03:25 2014/-kk/
+D/aarch64////
 D/acorn26////
 D/acorn32////
 D/algor////
@@ -18,6 +19,7 @@ D/dreamcast////
 D/emips////
 D/epoc32////
 D/evbarm////
+D/evbarm64////
 D/evbcf////
 D/evbmips////
 D/evbppc////
@@ -49,10 +51,12 @@ D/news68k////
 D/newsmips////
 D/next68k////
 D/ofppc////
+D/or1k////
 D/playstation2////
 D/pmax////
 D/powerpc////
 D/prep////
+D/riscv////
 D/rs6000////
 D/sandpoint////
 D/sbmips////

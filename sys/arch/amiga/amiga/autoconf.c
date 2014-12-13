@@ -481,11 +481,11 @@ findroot(void)
 			maj = bdevsw_lookup_major(bdp);
 
 			/* Open disk; forces read of disklabel. */
-			if ((*bdp->d_open)(MAKEDISKDEV(maj,
-			    unit, 0), FREAD|FNONBLOCK, 0, &lwp0))
+			if ((*bdp->d_open)(MAKEDISKDEV(maj, unit, RAW_PART),
+				FREAD|FNONBLOCK, 0, &lwp0))
 				continue;
-			(void)(*bdp->d_close)(MAKEDISKDEV(maj,
-			    unit, 0), FREAD|FNONBLOCK, 0, &lwp0);
+			(void)(*bdp->d_close)(MAKEDISKDEV(maj, unit, RAW_PART),
+				FREAD|FNONBLOCK, 0, &lwp0);
 
 			pp = &dkp->dk_label->d_partitions[0];
 			if (pp->p_size != 0 && pp->p_fstype == FS_BSDFFS) {

@@ -7,7 +7,7 @@
 /iomd_io.c/1.6/Fri Jul  1 20:26:35 2011/-kk/
 /iomd_io_asm.S/1.1/Fri Oct  5 22:27:41 2001/-kk/
 /iomd_irq.S/1.16/Tue Dec 17 04:13:25 2013/-kk/
-/iomd_irqhandler.c/1.20/Fri Apr 11 02:03:28 2014/-kk/
+/iomd_irqhandler.c/1.22/Tue Dec  9 04:15:53 2014/-kk/
 /iomdiic.c/1.7/Mon May 14 10:38:08 2012/-kk/
 /iomdiicvar.h/1.2/Sun Dec 11 12:16:47 2005/-kk/
 /iomdkbc.c/1.5/Mon May 14 10:38:08 2012/-kk/
@@ -18,9 +18,9 @@
 /qms.c/1.18/Mon May 14 10:38:08 2012/-kk/
 /vidc.h/1.13/Fri Aug 18 23:25:10 2006/-kk/
 /vidc20.c/1.17/Mon May 14 10:38:08 2012/-kk/
-/vidc20config.c/1.32/Sun Mar 15 22:24:57 2009/-kk/
+/vidc20config.c/1.34/Tue Dec  9 04:15:53 2014/-kk/
 /vidc20config.h/1.7/Mon May 19 15:30:51 2008/-kk/
-/vidcaudio.c/1.51/Wed Oct 10 22:00:22 2012/-kk/
+/vidcaudio.c/1.53/Tue Dec  9 04:15:53 2014/-kk/
 /vidcaudiovar.h/1.1/Mon Feb 18 12:52:09 2002/-kk/
 /vidcvideo.c/1.44/Thu Feb 13 15:22:13 2014/-kk/
 /vidcvideo.h/1.4/Mon Apr 28 20:23:14 2008/-kk/

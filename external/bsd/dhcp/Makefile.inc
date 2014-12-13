@@ -23,7 +23,7 @@ CPPFLAGS+=	-DDHCPv6
 CPPFLAGS+= -DISC_PLATFORM_USETHREADS -DHAVE_CONFIG_H
 CPPFLAGS+= -I${DIST} -I${DIST}/includes -I${DIST}/../include
 CPPFLAGS+= -I${BIND} -I${BIND}/includes -I${BIND}/../include
-.for dir in isc dns
+.for dir in isc dns irs
 CPPFLAGS+= -I${BIND}/lib/${dir}/include
 CPPFLAGS+= -I${BIND}/lib/${dir}/unix/include
 CPPFLAGS+= -I${BIND}/lib/${dir}/pthreads/include
@@ -34,17 +34,17 @@ LDADD+= ${OMOBJDIR}/libomapi.a ${DSTOBJDIR}/libdst.a
 .if defined(PROG) && ${PROG} == "dhclient"
 LDADD+=-Wl,-Bstatic
 .endif
-LDADD+= -ldns -lisc
+LDADD+= -lirs -lisccfg -ldns -lisc
 LDADD+=-lpthread
-.if defined(PROG) && ${PROG} == "dhclient"
-LDADD+=-Wl,-Bdynamic
-.endif
 .if (${MKCRYPTO} != "no")
 .if (${MKKERBEROS} != "no")
 LDADD+= -lgssapi -lkrb5 -lhx509 -lheimntlm -lheimbase \
 	-lcom_err  -lroken -lasn1 -lwind
 DPADD+= ${LIBGSSAPI} ${LIBKRB5} ${LIBHX509} ${LIBHEIMNTLM} ${LIBHEIMBASE} \
 	${LIBCOM_ERR} ${LIBROKEN} ${LIBASN1} ${LIBWIND}
+.endif
+.if defined(PROG) && ${PROG} == "dhclient"
+LDADD+=-Wl,-Bdynamic
 .endif
 LDADD+= -lcrypto -lipsec -lcrypt
 DPADD+= ${LIBCRYPTO} ${LIBIPSEC} ${LIBCRYPT}

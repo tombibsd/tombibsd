@@ -61,9 +61,10 @@ bus_space_map(bus_space_tag_t t, bus_addr_t bpa, bus_size_t size, int flags,
 		return 0;
 	}
 
-	if (t == NEWS68K_BUS_SPACE_EIO)
+	if (t == NEWS68K_BUS_SPACE_EIO) {
 		*bshp = (bus_space_handle_t)bpa; /* XXX use tt0 mapping */
 		return 0;
+	}
 
 	return 1;
 }

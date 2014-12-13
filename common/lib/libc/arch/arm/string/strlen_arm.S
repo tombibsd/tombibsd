@@ -56,13 +56,17 @@ RCSID("$NetBSD$")
 	.text
 ENTRY(FUNCNAME)
 #if defined(__ARM_EABI__) && defined(__UNWIND_TABLES__)
+# if !defined(__ARM_DWARF_EH__)
 	.fnstart
+# endif
 	.cfi_startproc
 #endif
 #ifdef STRNLEN
 	push	{r4,r5}			/* save some registers */
 #if defined(__ARM_EABI__) && defined(__UNWIND_TABLES__)
+# if !defined(__ARM_DWARF_EH__)
 	.save	{r4,r5}
+# endif
 	.cfi_def_cfa_offset 8
 	.cfi_offset 5, -4
 	.cfi_offset 4, -8
@@ -175,6 +179,8 @@ ENTRY(FUNCNAME)
 #endif
 #if defined(__ARM_EABI__) && defined(__UNWIND_TABLES__)
 	.cfi_endproc
+# if !defined(__ARM_DWARF_EH__)
 	.fnend
+# endif
 #endif
 END(FUNCNAME)

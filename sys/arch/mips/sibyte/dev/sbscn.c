@@ -196,6 +196,7 @@ const struct cdevsw sbscn_cdevsw = {
 	.d_poll = sbscnpoll,
 	.d_mmap = nommap,
 	.d_kqfilter = ttykqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_TTY
 };
 
@@ -393,7 +394,8 @@ sbscn_attach_channel(struct sbscn_softc *sc, int chan, int intr)
 
 #ifdef RND_SBSCN
 	rnd_attach_source(&ch->ch_rnd_source, device_xname(sc->sc_dev),
-			  RND_TYPE_TTY, 0);
+			  RND_TYPE_TTY, RND_FLAG_COLLECT_TIME|
+					RND_FLAG_ESTIMATE_TIME);
 #endif
 
 	sbscn_config(ch);

@@ -69,7 +69,7 @@ static  int		in_file(const char *, FILE *, int);
 static  int 		relinguish_priv(void);
 static  int 		regain_priv(void);
 
-static void
+static __dead void
 usage(const char *msg) {
 	(void)fprintf(stderr, "%s: usage error: %s\n", getprogname(), msg);
 	(void)fprintf(stderr, "usage:\t%s [-u user] file\n", getprogname());
@@ -560,7 +560,8 @@ edit_cmd(void) {
  */
 static int
 replace_cmd(void) {
-	char n[MAX_FNAME], n2[MAX_FNAME], envstr[MAX_ENVSTR], lastch;
+	char n[MAX_FNAME], n2[MAX_FNAME], envstr[MAX_ENVSTR];
+	int lastch;
 	FILE *tmp, *fmaxtabsize;
 	int ch, eof, fd;
 	int error = 0;
@@ -613,7 +614,7 @@ replace_cmd(void) {
 	    if (fgets(n2, (int)sizeof(n2), fmaxtabsize) == NULL)  {
 		maxtabsize = 0;
 	    } else {
-		maxtabsize = atoi(n2);
+		maxtabsize = (size_t)atoi(n2);
 	    }
 	    (void)fclose(fmaxtabsize);
 	} else {
@@ -646,9 +647,9 @@ replace_cmd(void) {
 	Set_LineNum(1);
 	lastch = EOF;
 	while (EOF != (ch = get_char(NewCrontab)))
-		(void)putc(lastch = ch, tmp);
+		(void)putc(lastch = (char)ch, tmp);
 
-	if (lastch != (char)EOF && lastch != '\n') {
+	if (lastch != EOF && lastch != '\n') {
 		warnx("missing trailing newline in `%s'", Filename);
 		error = -1;
 		goto done;
@@ -680,6 +681,7 @@ replace_cmd(void) {
 	 */
 	Set_LineNum(1 - NHEADER_LINES);
 	CheckErrorCount = 0;  eof = FALSE;
+	rewind(tmp);
 	while (!CheckErrorCount && !eof) {
 		switch (load_env(envstr, tmp)) {
 		case ERR:

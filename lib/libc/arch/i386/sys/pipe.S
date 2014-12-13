@@ -51,3 +51,4 @@ _SYSCALL(_pipe,pipe)
 	movl	%edx,4(%ecx)
 	xorl	%eax,%eax
 	ret
+END(_pipe)

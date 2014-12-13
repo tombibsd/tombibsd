@@ -69,11 +69,9 @@ CWARNFLAGS+=	-Wextra
 .if ${MKSHARE} != "no"
 FILESDIR=		/usr/share/misc
 FILES=			mail.help mail.tildehelp
+.endif
 
-.if make(install)
 SUBDIR+= USD.doc
-.endif
-.endif
 
 CONFIGFILES=		mail.rc
 FILESDIR_mail.rc=	/etc

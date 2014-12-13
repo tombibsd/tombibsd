@@ -2837,6 +2837,7 @@ HBZ:Heber Springs Municipal Airport, AR, USA
 HCA:Big Spring, TX, USA
 HCB:Shoal Cove, AK, USA
 HCD:Hutchinson (Butler Field), MN, USA
+HCJ:Hechi Jinchengjiang Airport, China
 HCM:Ell, Somalia
 HCQ:Halls Creek, Western Australia, Australia
 HCR:Holy Cross Airport, AK, USA
@@ -3729,7 +3730,7 @@ KGX:Grayling Airport, AK, USA
 KGY:Kingaroy, Queensland, Australia
 KGZ:Glacier Creek Airport, AK, USA
 KHA:Khaneh, Iran
-KHC:Kerch, Krym (Crimea), Ukraine
+KHC:Kerch, Ukraine
 KHE:Kherson, Mykolayiv, Ukraine
 KHG:Kashi, China
 KHH:Kaohsiung International, Taiwan
@@ -4080,6 +4081,7 @@ LAH:Labuha, Indonesia
 LAI:Lannion, France
 LAJ:Lages, SC, Brazil
 LAK:Aklavik Airport, NT, Canada
+LAKU:Shaikh Zayed International Airport, Kukes, Albania
 LAL:Lakeland Regional Airport, FL, USA
 LAM:Los Alamos Airport, NM, USA
 LAN:Lansing Capital City, Michigan, USA
@@ -7028,7 +7030,7 @@ SIL:Sila, Papua New Guinea
 SIM:Simbai, Papua New Guinea
 SIN:Singapore
 SIO:Smithton, Tasmania, Australia
-SIP:Simferopol, Adygea, Ukraine
+SIP:Simferopol, Ukraine
 SIQ:Singkep (Dabo Airport), Indonesia
 SIR:Sion (Sitten), Switzerland
 SIS:Sishen, South Africa
@@ -7319,7 +7321,7 @@ SUE:Sturgeon Bay (Door County), WI, USA
 SUF:Lamezia Terme, Italy
 SUG:Surigao, Philippines
 SUH:Sur, Oman
-SUI:Sokhumi, Abkhazia, Georgia
+SUI:Sukhum, Abkhazia
 SUJ:Satu Mare, Romania
 SUK:Samchok, South Korea
 SUL:Sui, Pakistan
@@ -8171,7 +8173,7 @@ VIH:Rolla/Vichy (Rolla National Airport), MO, USA
 VIJ:Virgin Gorda (Valley), British Virgin Islands
 VIK:Kavik, AK, USA
 VIL:Dakhla (Villa Cisneros), Western Sahara
-VIN:Vinnytsya, Russia
+VIN:Vinnytsya, Ukraine
 VIQ:Viqueque, Indonesia
 VIS:Visalia Municipal Airport, CA, USA
 VIT:Vitoria, Spain

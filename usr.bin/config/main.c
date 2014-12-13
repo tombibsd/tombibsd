@@ -44,6 +44,9 @@
 #include "nbtool_config.h"
 #endif
 
+#include <sys/cdefs.h>
+__RCSID("$NetBSD$");
+
 #ifndef MAKE_BOOTSTRAP
 #include <sys/cdefs.h>
 #define	COPYRIGHT(x)	__COPYRIGHT(x)
@@ -86,12 +89,15 @@ COPYRIGHT("@(#) Copyright (c) 1992, 1993\
 int	vflag;				/* verbose output */
 int	Pflag;				/* pack locators */
 int	Lflag;				/* lint config generation */
+int	Mflag;				/* modular build */
+int	handling_cmdlineopts;		/* currently processing -D/-U options */
 
 int	yyparse(void);
 
 #ifndef MAKE_BOOTSTRAP
 extern int yydebug;
 #endif
+int	dflag;
 
 static struct dlhash *obsopttab;
 static struct hashtab *mkopttab;
@@ -100,6 +106,7 @@ static struct nvlist **nextmkopt;
 static struct nvlist **nextappmkopt;
 static struct nvlist **nextcndmkopt;
 static struct nvlist **nextfsopt;
+static struct nvlist *cmdlinedefs, *cmdlineundefs;
 
 static	void	usage(void) __dead;
 static	void	dependopts(void);
@@ -119,6 +126,9 @@ static	int	mkident(void);
 static	int	devbase_has_dead_instances(const char *, void *, void *);
 static	int	devbase_has_any_instance(struct devbase *, int, int, int);
 static	int	check_dead_devi(const char *, void *, void *);
+static	void	add_makeopt(const char *);
+static	void	remove_makeopt(const char *);
+static	void	handle_cmdline_makeoptions(void);
 static	void	kill_orphans(void);
 static	void	do_kill_orphans(struct devbase *, struct attr *,
     struct devbase *, int);
@@ -143,6 +153,7 @@ static	int	extract_config(const char *, const char *, int);
 int badfilename(const char *fname);
 
 const char *progname;
+extern const char *yyfile;
 
 int
 main(int argc, char **argv)
@@ -155,14 +166,19 @@ main(int argc, char **argv)
 
 	pflag = 0;
 	xflag = 0;
-	while ((ch = getopt(argc, argv, "DLPgpvb:s:x")) != -1) {
+	while ((ch = getopt(argc, argv, "D:LMPU:dgpvb:s:x")) != -1) {
 		switch (ch) {
 
+		case 'd':
 #ifndef MAKE_BOOTSTRAP
-		case 'D':
 			yydebug = 1;
-			break;
 #endif
+			dflag++;
+			break;
+
+		case 'M':
+			Mflag = 1;
+			break;
 
 		case 'L':
 			Lflag = 1;
@@ -179,7 +195,7 @@ main(int argc, char **argv)
 			 * do that for you, but you really should just
 			 * put them in the config file.
 			 */
-			warnx("-g is obsolete (use makeoptions DEBUG=\"-g\")");
+			warnx("-g is obsolete (use -D DEBUG=\"-g\")");
 			usage();
 			/*NOTREACHED*/
 
@@ -211,6 +227,14 @@ main(int argc, char **argv)
 
 		case 'x':
 			xflag = 1;
+			break;
+
+		case 'D':
+			add_makeopt(optarg);
+			break;
+
+		case 'U':
+			remove_makeopt(optarg);
 			break;
 
 		case '?':
@@ -268,8 +292,6 @@ main(int argc, char **argv)
 	minmaxusers = 1;
 	maxmaxusers = 10000;
 	initintern();
-	initfiles();
-	initsem();
 	ident = NULL;
 	devbasetab = ht_new();
 	devroottab = ht_new();
@@ -297,6 +319,8 @@ main(int argc, char **argv)
 	nextappmkopt = &appmkoptions;
 	nextcndmkopt = &condmkoptions;
 	nextfsopt = &fsoptions;
+	initfiles();
+	initsem();
 
 	/*
 	 * Handle profiling (must do this before we try to create any
@@ -386,13 +410,21 @@ main(int argc, char **argv)
 		unlink(cname);
 
 	/*
+	 * Handle command line overrides
+	 */
+	yyfile = "handle_cmdline_makeoptions";
+	handle_cmdline_makeoptions();
+
+	/*
 	 * Detect and properly ignore orphaned devices
 	 */
+	yyfile = "kill_orphans";
 	kill_orphans();
 
 	/*
 	 * Select devices and pseudo devices and their attributes
 	 */
+	yyfile = "fixdevis";
 	if (fixdevis())
 		stop();
 
@@ -400,33 +432,44 @@ main(int argc, char **argv)
 	 * If working on an ioconf-only config, process here and exit
 	 */
 	if (ioconfname) {
+		yyfile = "pack";
 		pack();
+		yyfile = "mkioconf";
 		mkioconf();
+		yyfile = "emitlocs";
 		emitlocs();
+		yyfile = "emitioconfh";
 		emitioconfh();
 		return 0;
 	}
 
+	yyfile = "dependattrs";
+	dependattrs();
+
 	/*
 	 * Deal with option dependencies.
 	 */
+	yyfile = "dependopts";
 	dependopts();
 
 	/*
 	 * Fix (as in `set firmly in place') files.
 	 */
+	yyfile = "fixfiles";
 	if (fixfiles())
 		stop();
 
 	/*
 	 * Fix objects and libraries.
 	 */
+	yyfile = "fixobjects";
 	if (fixobjects())
 		stop();
 
 	/*
 	 * Fix device-majors.
 	 */
+	yyfile = "fixdevsw";
 	if (fixdevsw())
 		stop();
 
@@ -450,10 +493,13 @@ main(int argc, char **argv)
 	 * Squeeze things down and finish cross-checks (STAR checks must
 	 * run after packing).
 	 */
+	yyfile = "pack";
 	pack();
+	yyfile = "badstar";
 	if (badstar())
 		stop();
 
+	yyfile = NULL;
 	/*
 	 * Ready to go.  Build all the various files.
 	 */
@@ -468,7 +514,8 @@ main(int argc, char **argv)
 static void
 usage(void)
 {
-	(void)fprintf(stderr, "Usage: %s [-Ppv] [-s srcdir] [-b builddir] "
+	(void)fprintf(stderr, "Usage: %s [-Ppv] [-b builddir] [-D var=value] "
+	    "[-s srcdir] [-U var] "
 	    "[config-file]\n\t%s -x [kernel-file]\n"
 	    "\t%s -L [-v] [-s srcdir] [config-file]\n", 
 	    getprogname(), getprogname(), getprogname());
@@ -506,6 +553,8 @@ dependopts_one(const char *name)
 	if (fs != NULL) {
 		do_depends(fs->nv_ptr);
 	}
+
+	CFGDBG(3, "depend `%s' searched", name);
 }
 
 static void
@@ -529,6 +578,7 @@ do_depend(struct nvlist *nv)
 		 * If the dependency is an attribute, then just add
 		 * it to the selecttab.
 		 */
+		CFGDBG(3, "depend attr `%s'", nv->nv_name);
 		if ((a = ht_lookup(attrtab, nv->nv_name)) != NULL) {
 			if (a->a_iattr)
 				panic("do_depend(%s): dep `%s' is an iattr",
@@ -673,6 +723,13 @@ deffilesystem(struct nvlist *fses, struct nvlist *deps)
 			    nv->nv_name);
 
 		add_fs_dependencies(nv, deps);
+
+		/*
+		 * Implicit attribute definition for filesystem.
+		 */
+		const char *n; 
+		n = strtolower(nv->nv_name);
+		refattr(n);
 	}
 }
 
@@ -935,12 +992,14 @@ addoption(const char *name, const char *value)
 	/* make lowercase, then add to select table */
 	n = strtolower(name);
 	(void)ht_insert(selecttab, n, (void *)__UNCONST(n));
+	CFGDBG(3, "option selected `%s'", n);
 }
 
 void
 deloption(const char *name)
 {
 
+	CFGDBG(4, "deselecting opt `%s'", name);
 	if (undo_option(opttab, &options, &nextopt, name, "options"))
 		return;
 	if (undo_option(selecttab, NULL, NULL, strtolower(name), "options"))
@@ -974,6 +1033,14 @@ addfsoption(const char *name)
 
 	/* Add to select table. */
 	(void)ht_insert(selecttab, n, __UNCONST(n));
+	CFGDBG(3, "fs selected `%s'", name);
+
+	/*
+	 * Select attribute if one exists.
+	 */
+	struct attr *a;
+	if ((a = ht_lookup(attrtab, n)) != NULL)
+		selectattr(a);
 }
 
 void
@@ -981,6 +1048,7 @@ delfsoption(const char *name)
 {
 	const char *n;
 
+	CFGDBG(4, "deselecting fs `%s'", name);
 	n = strtolower(name);
 	if (undo_option(fsopttab, &fsoptions, &nextfsopt, name, "file-system"))
 		return;
@@ -1002,6 +1070,7 @@ void
 delmkoption(const char *name)
 {
 
+	CFGDBG(4, "deselecting mkopt `%s'", name);
 	(void)undo_option(mkopttab, &mkoptions, &nextmkopt, name,
 	    "makeoptions");
 }
@@ -1071,11 +1140,17 @@ undo_option(struct hashtab *ht, struct nvlist **npp,
 	struct nvlist *nv;
 	
 	if (ht_remove(ht, name)) {
-		cfgerror("%s `%s' is not defined", type, name);
+		/*
+		 * -U command line option removals are always silent
+		 */
+		if (!handling_cmdlineopts)
+			cfgwarn("%s `%s' is not defined", type, name);
 		return (1);
 	}
-	if (npp == NULL)
+	if (npp == NULL) {
+		CFGDBG(2, "opt `%s' deselected", name);
 		return (0);
+	}
 
 	for ( ; *npp != NULL; npp = &(*npp)->nv_next) {
 		if ((*npp)->nv_name != name)
@@ -1083,6 +1158,7 @@ undo_option(struct hashtab *ht, struct nvlist **npp,
 		if (next != NULL && *next == &(*npp)->nv_next)
 			*next = npp;
 		nv = (*npp)->nv_next;
+		CFGDBG(2, "opt `%s' deselected", (*npp)->nv_name);
 		nvfree(*npp);
 		*npp = nv;
 		return (0);
@@ -1478,10 +1554,10 @@ strtolower(const char *name)
 {
 	const char *n;
 	char *p, low[500];
-	unsigned char c;
+	char c;
 
 	for (n = name, p = low; (c = *n) != '\0'; n++)
-		*p++ = isupper(c) ? tolower(c) : c;
+		*p++ = isupper((u_char)c) ? (char)tolower((u_char)c) : c;
 	*p = 0;
 	return (intern(low));
 }
@@ -1506,8 +1582,9 @@ static int
 extract_config(const char *kname, const char *cname, int cfd)
 {
 	char *ptr;
-	int found, kfd, i;
+	int found, kfd;
 	struct stat st;
+	off_t i;
 
 	found = 0;
 
@@ -1517,7 +1594,7 @@ extract_config(const char *kname, const char *cname, int cfd)
 		err(EXIT_FAILURE, "cannot open %s", kname);
 	if (fstat(kfd, &st) == -1)
 		err(EXIT_FAILURE, "cannot stat %s", kname);
-	ptr = mmap(0, st.st_size, PROT_READ, MAP_FILE | MAP_SHARED,
+	ptr = mmap(0, (size_t)st.st_size, PROT_READ, MAP_FILE | MAP_SHARED,
 	    kfd, 0);
 	if (ptr == MAP_FAILED)
 		err(EXIT_FAILURE, "cannot mmap %s", kname);
@@ -1769,4 +1846,57 @@ static void
 kill_orphans(void)
 {
 	ht_enumerate(devroottab, kill_orphans_cb, NULL);
+}
+
+static void
+add_makeopt(const char *opt)
+{
+	struct nvlist *p;
+	char *buf = estrdup(opt);
+	char *eq = strchr(buf, '=');
+
+	if (!eq)
+		errx(EXIT_FAILURE, "-D %s is not in var=value format", opt);
+
+	*eq = 0;
+	p = newnv(estrdup(buf), estrdup(eq+1), NULL, 0, NULL);
+	free(buf);
+	p->nv_next = cmdlinedefs;
+	cmdlinedefs = p;
+}
+
+static void
+remove_makeopt(const char *opt)
+{
+	struct nvlist *p;
+
+	p = newnv(estrdup(opt), NULL, NULL, 0, NULL);
+	p->nv_next = cmdlineundefs;
+	cmdlineundefs = p;
+}
+
+static void
+handle_cmdline_makeoptions(void)
+{
+	struct nvlist *p, *n;
+
+	handling_cmdlineopts = 1;
+	for (p = cmdlineundefs; p; p = n) {
+		n = p->nv_next;
+		delmkoption(intern(p->nv_name));
+		free(__UNCONST(p->nv_name));
+		nvfree(p);
+	}
+	for (p = cmdlinedefs; p; p = n) {
+		const char *name = intern(p->nv_name);
+
+		n = p->nv_next;
+		delmkoption(name);
+		addmkoption(name, intern(p->nv_str));
+		free(__UNCONST(p->nv_name));
+		free(__UNCONST(p->nv_str));
+
+		nvfree(p);
+	}
+	handling_cmdlineopts = 0;
 }

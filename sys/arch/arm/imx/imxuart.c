@@ -100,6 +100,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include "opt_imxuart.h"
 #include "opt_ddb.h"
+#include "opt_ddbparam.h"
 #include "opt_kgdb.h"
 #include "opt_lockdebug.h"
 #include "opt_multiprocessor.h"
@@ -348,6 +349,7 @@ const struct cdevsw imxcom_cdevsw = {
 	.d_poll = imxupoll,
 	.d_mmap = nommap,
 	.d_kqfilter = ttykqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_TTY
 };
 
@@ -380,11 +382,10 @@ int	imxuart_kgdb_getc(void *);
 void	imxuart_kgdb_putc(void *, int);
 #endif /* KGDB */
 
-#define	IMXUART_UNIT_MASK	0x7ffff
-#define	IMXUART_DIALOUT_MASK	0x80000
+#define	IMXUART_DIALOUT_MASK	TTDIALOUT_MASK
 
-#define	IMXUART_UNIT(x)	(minor(x) & IMXUART_UNIT_MASK)
-#define	IMXUART_DIALOUT(x)	(minor(x) & IMXUART_DIALOUT_MASK)
+#define	IMXUART_UNIT(x)		TTUNIT(x)
+#define	IMXUART_DIALOUT(x)	TTDIALOUT(x)
 
 #define	IMXUART_ISALIVE(sc)	((sc)->enabled != 0 && \
 			 device_is_active((sc)->sc_dev))
@@ -504,7 +505,8 @@ imxuart_attach_common(device_t parent, device_t self,
 
 #ifdef RND_COM
 	rnd_attach_source(&sc->rnd_source, device_xname(sc->sc_dev),
-			  RND_TYPE_TTY, 0);
+			  RND_TYPE_TTY, RND_FLAG_COLLECT_TIME |
+					RND_FLAG_ESTIMATE_TIME);
 #endif
 
 	/* if there are no enable/disable functions, assume the device
@@ -1929,6 +1931,14 @@ imxuintr_read(struct imxuart_softc *sc)
 		    rd & 0xff, imxuart_cnm_state);
 
 		if (!cn_trapped) {
+#if defined(DDB) && defined(DDB_KEYCODE)
+			/*
+			 * Temporary hack so that I can force the kernel into
+			 * the debugger via the serial port
+			 */
+			if ((rd & 0xff) == DDB_KEYCODE)
+				Debugger();
+#endif
 			sc->sc_rbuf_in = IMXUART_RBUF_INC(sc, sc->sc_rbuf_in, 1);
 			cc--;
 		}
@@ -2223,7 +2233,7 @@ imxuart_common_getc(dev_t dev, struct imxuart_regs *regsp)
 	c = 0xff & bus_space_read_4(iot, ioh, IMX_URXD);
 
 	{
-		int cn_trapped = 0; /* unused */
+		int __attribute__((__unused__))cn_trapped = 0; /* unused */
 #ifdef DDB
 		extern int db_active;
 		if (!db_active)
@@ -2246,7 +2256,7 @@ imxuart_common_putc(dev_t dev, struct imxuart_regs *regsp, int c)
 	if (!READAHEAD_IS_FULL() &&
 	    ((usr2 = bus_space_read_4(iot, ioh, IMX_USR2)) & IMX_USR2_RDR)) {
 
-		int cn_trapped = 0;
+		int __attribute__((__unused__))cn_trapped = 0;
 		cin = bus_space_read_4(iot, ioh, IMX_URXD);
 		cn_check_magic(dev, cin & 0xff, imxuart_cnm_state);
 		imxuart_readahead_in = (imxuart_readahead_in + 1) &

@@ -11,6 +11,7 @@ YHEADER=
 #DBG=-g
 #CPPFLAGS+=-DYYDEBUG=1
 #YFLAGS+=-v
+#LFLAGS+=-d
 
 CPPFLAGS+=	-I${.CURDIR} -I. -DPASS=\"${PROG}.h\"
 

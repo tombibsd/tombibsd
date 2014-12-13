@@ -950,7 +950,7 @@ ieee80211_auth_open(struct ieee80211com *ic, struct ieee80211_frame *wh,
 		} else if ((ni->ni_flags & IEEE80211_NODE_AREF) == 0)
 			(void) ieee80211_ref_node(ni);
 		/*
-		 * Mark the node as referenced to reflect that it's
+		 * Mark the node as referenced to reflect that its
 		 * reference count has been bumped to insure it remains
 		 * after the transaction completes.
 		 */
@@ -1145,7 +1145,7 @@ ieee80211_auth_shared(struct ieee80211com *ic, struct ieee80211_frame *wh,
 				allocbs = 0;
 			}
 			/*
-			 * Mark the node as referenced to reflect that it's
+			 * Mark the node as referenced to reflect that its
 			 * reference count has been bumped to insure it remains
 			 * after the transaction completes.
 			 */

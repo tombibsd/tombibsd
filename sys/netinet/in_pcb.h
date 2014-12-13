@@ -152,14 +152,13 @@ void	in_pcbnotifyall(struct inpcbtable *, struct in_addr, int,
 	    void (*)(struct inpcb *, int));
 void	in_pcbpurgeif0(struct inpcbtable *, struct ifnet *);
 void	in_pcbpurgeif(struct inpcbtable *, struct ifnet *);
+void	in_purgeifmcast(struct ip_moptions *, struct ifnet *);
 void	in_pcbstate(struct inpcb *, int);
 void	in_rtchange(struct inpcb *, int);
 void	in_setpeeraddr(struct inpcb *, struct mbuf *);
 void	in_setsockaddr(struct inpcb *, struct mbuf *);
 struct rtentry *
 	in_pcbrtentry(struct inpcb *);
-extern struct sockaddr_in *in_selectsrc(struct sockaddr_in *,
-	struct route *, int, struct ip_moptions *, int *);
 #endif
 
 #endif /* !_NETINET_IN_PCB_H_ */

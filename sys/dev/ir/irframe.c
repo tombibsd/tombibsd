@@ -77,6 +77,7 @@ const struct cdevsw irframe_cdevsw = {
 	.d_poll = irframepoll,
 	.d_mmap = nommap,
 	.d_kqfilter = irframekqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_OTHER
 };
 

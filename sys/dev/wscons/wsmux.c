@@ -134,6 +134,7 @@ const struct cdevsw wsmux_cdevsw = {
 	.d_poll = wsmuxpoll,
 	.d_mmap = nommap,
 	.d_kqfilter = wsmuxkqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_OTHER
 };
 

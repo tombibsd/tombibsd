@@ -1,5 +1,3 @@
-/*	$NetBSD$	*/
-
 /* Somewhat faster still: potentially match a lot of text with each rule */
 
 ws    [ \t]

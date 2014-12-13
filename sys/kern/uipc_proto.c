@@ -57,25 +57,22 @@ const struct protosw unixsw[] = {
 		.pr_domain = &unixdomain,
 		.pr_flags = PR_CONNREQUIRED|PR_WANTRCVD|PR_RIGHTS|PR_LISTEN,
 		.pr_ctloutput = uipc_ctloutput,
-		.pr_usrreq = uipc_usrreq,
-	}, {
+		.pr_usrreqs = &unp_usrreqs,
+	},
+	{
 		.pr_type = SOCK_DGRAM,
 		.pr_domain = &unixdomain,
 		.pr_flags = PR_ATOMIC|PR_ADDR|PR_RIGHTS,
 		.pr_ctloutput = uipc_ctloutput,
-		.pr_usrreq = uipc_usrreq,
-	}, {
+		.pr_usrreqs = &unp_usrreqs,
+	},
+	{
 		.pr_type = SOCK_SEQPACKET,
 		.pr_domain = &unixdomain,
 		.pr_flags = PR_CONNREQUIRED|PR_WANTRCVD|PR_RIGHTS|PR_LISTEN|
 			    PR_ATOMIC,
 		.pr_ctloutput = uipc_ctloutput,
-		.pr_usrreq = uipc_usrreq,
-	}, {
-		.pr_input = raw_input,
-		.pr_ctlinput = raw_ctlinput,
-		.pr_usrreq = raw_usrreq,
-		.pr_init = raw_init,
+		.pr_usrreqs = &unp_usrreqs,
 	}
 };
 

@@ -9,7 +9,7 @@ set -e
 
 cd dist
 rm -rf .svn
-rm -rf SDKs cmake include make third_party unittests www
+rm -rf SDKs android cmake include make third_party unittests www
 rm -f .arcconfig .gitignore CMakeLists.txt Makefile
 rm -rf lib/BlocksRuntime lib/asan lib/dfsan lib/interception lib/lsan
 rm -rf lib/msan lib/msandr lib/sanitizer_common lib/tsan lib/ubsan

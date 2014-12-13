@@ -1,5 +1,3 @@
-/*	$NetBSD$	*/
-
 /*
  * expr.y : A simple yacc expression parser
  *          Based on the Bison manual example. 

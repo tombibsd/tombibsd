@@ -1,5 +1,3 @@
-/*	$NetBSD$	*/
-
 /* Fastest version of wc: add rules to pick up newlines, too */
 
 ws    [ \t]

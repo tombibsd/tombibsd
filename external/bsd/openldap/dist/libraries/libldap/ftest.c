@@ -1,10 +1,10 @@
 /*	$NetBSD$	*/
 
 /* ftest.c -- OpenLDAP Filter API Test */
-/* OpenLDAP: pkg/ldap/libraries/libldap/ftest.c,v 1.15.2.5 2010/04/13 20:22:57 kurt Exp */
+/* $OpenLDAP$ */
 /* This work is part of OpenLDAP Software <http://www.openldap.org/>.
  *
- * Copyright 1998-2010 The OpenLDAP Foundation.
+ * Copyright 1998-2014 The OpenLDAP Foundation.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without

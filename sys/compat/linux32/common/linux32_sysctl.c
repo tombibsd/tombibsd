@@ -65,7 +65,7 @@ struct sysctlnode linux32_sysctl_root = {
 	    CTLFLAG_ROOT|CTLTYPE_NODE|CTLFLAG_READWRITE,
 	.sysctl_num = 0,
 	.sysctl_name = "(linux32_root)",
-	sysc_init_field(_sysctl_size, sizeof(struct sysctlnode)),
+	.sysctl_size = sizeof(struct sysctlnode),
 };
 
 static struct sysctllog *linux32_clog1;

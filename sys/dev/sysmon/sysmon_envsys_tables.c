@@ -51,6 +51,7 @@ static const struct sme_descr_entry sme_units_description[] = {
 	{ ENVSYS_DRIVE,		PENVSYS_TYPE_DRIVE,	"Drive" },
 	{ ENVSYS_BATTERY_CAPACITY, PENVSYS_TYPE_BATTERY,"Battery capacity" },
 	{ ENVSYS_BATTERY_CHARGE, -1,			"Battery charge" },
+	{ ENVSYS_SRELHUMIDITY,	-1,			"relative Humidity" },
 	{ -1,			-1,			"unknown" }
 };
 

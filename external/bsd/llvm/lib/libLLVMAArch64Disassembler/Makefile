@@ -9,7 +9,8 @@ CPPFLAGS+=	-I${AARCH64_OBJDIR} -I${LLVM_SRCDIR}/lib/Target/AArch64
 
 .PATH: ${LLVM_SRCDIR}/lib/Target/AArch64/Disassembler
 
-SRCS+=	AArch64Disassembler.cpp
+SRCS+=	AArch64Disassembler.cpp \
+	AArch64ExternalSymbolizer.cpp
 
 .if defined(HOSTLIB)
 .include <bsd.hostlib.mk>

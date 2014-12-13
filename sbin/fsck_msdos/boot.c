@@ -1,4 +1,3 @@
-/*	$NetBSD$	*/
 
 /*
  * Copyright (C) 1995, 1997 Wolfgang Solfrank
@@ -33,6 +32,8 @@ __RCSID("$NetBSD$");
 
 #include <stdlib.h>
 #include <string.h>
+#include <strings.h>
+#include <inttypes.h>
 #include <stdio.h>
 #include <unistd.h>
 
@@ -64,8 +65,16 @@ readboot(int dosfs, struct bootblock *boot)
 	/* decode bios parameter block */
 	boot->BytesPerSec = block[11] + (block[12] << 8);
 	boot->SecPerClust = block[13];
+	if (boot->SecPerClust == 0 || popcount(boot->SecPerClust) != 1) {
+ 		pfatal("Invalid cluster size: %u\n", boot->SecPerClust);
+		return FSFATAL;
+	}
 	boot->ResSectors = block[14] + (block[15] << 8);
 	boot->FATs = block[16];
+	if (boot->FATs == 0) {
+		pfatal("Invalid number of FATs: %u\n", boot->FATs);
+		return FSFATAL;
+	}
 	boot->RootDirEnts = block[17] + (block[18] << 8);
 	boot->Sectors = block[19] + (block[20] << 8);
 	boot->Media = block[21];
@@ -171,8 +180,12 @@ readboot(int dosfs, struct bootblock *boot)
 		}
 		/* Check backup FSInfo?					XXX */
 	}
+	if (boot->FATsecs == 0) {
+		pfatal("Invalid number of FAT sectors: %u\n", boot->FATsecs);
+		return FSFATAL;
+	}
 
-	boot->ClusterOffset = (boot->RootDirEnts * 32 + boot->BytesPerSec - 1)
+	boot->ClusterOffset = (int)(boot->RootDirEnts * 32 + boot->BytesPerSec - 1)
 	    / boot->BytesPerSec
 	    + boot->ResSectors
 	    + boot->FATs * boot->FATsecs
@@ -192,6 +205,12 @@ readboot(int dosfs, struct bootblock *boot)
 	} else
 		boot->NumSectors = boot->HugeSectors;
 	boot->NumClusters = (boot->NumSectors - boot->ClusterOffset) / boot->SecPerClust;
+
+	if (boot->ClusterOffset > (intmax_t)boot->NumSectors) {
+		pfatal("Cluster offset too large (%d sectors)\n",
+		    boot->ClusterOffset);
+		return FSFATAL;
+	}
 
 	if (boot->flags&FAT32)
 		boot->ClustMask = CLUST32_MASK;

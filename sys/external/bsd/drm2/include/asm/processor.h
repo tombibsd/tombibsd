@@ -30,7 +30,7 @@
  */
 
 #ifndef _ASM_PROCESSOR_H_
-#define _ASM_CURRENT_H_
+#define _ASM_PROCESSOR_H_
 
 #include <machine/param.h>
 

@@ -115,8 +115,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <dev/scsipi/scsipi_all.h>
 #include <dev/scsipi/scsiconf.h>
 
-#include <arm/arm32/katelib.h>
-
 #include <dev/podulebus/podules.h>
 #include <dev/podulebus/powerromreg.h>
 

@@ -135,6 +135,7 @@ const struct cdevsw cgsix_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = cgsixmmap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_OTHER
 };
 

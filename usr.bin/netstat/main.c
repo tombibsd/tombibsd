@@ -64,6 +64,7 @@ __RCSID("$NetBSD$");
 #include <string.h>
 #include <unistd.h>
 #include "netstat.h"
+#include "rtutil.h"
 #include "prog_ops.h"
 
 struct nlist nl[] = {
@@ -79,8 +80,8 @@ struct nlist nl[] = {
 	{ "_udbtable", 0, 0, 0, 0 },
 #define	N_UDPSTAT	5
 	{ "_udpstat", 0, 0, 0, 0 },	/* not available via kvm */
-#define	N_IFNET		6
-	{ "_ifnet", 0, 0, 0, 0 },
+#define	N_IFNET_LIST		6
+	{ "_ifnet_list", 0, 0, 0, 0 },
 #define	N_ICMPSTAT	7
 	{ "_icmpstat", 0, 0, 0, 0 },	/* not available via kvm */
 #define	N_RTSTAT	8
@@ -344,12 +345,17 @@ prepare(const char *nf, const char *mf, struct protox *tp)
 	/*
 	 * Try to figure out if we can use sysctl or not.
 	 */
-	if (nf != NULL && mf != NULL) {
+	if (nf != NULL || mf != NULL) {
 		/* Of course, we can't use sysctl with dumps. */
 		if (force_sysctl)
 			errx(EXIT_FAILURE, "can't use sysctl with dumps");
 
-		/* If we have -M and -N, we're not dealing with live memory. */
+		/*
+		 * If we have -M or -N, we're not dealing with live memory
+		 * or want to use kvm interface explicitly.  It is sometimes
+		 * useful to dig inside of kernel without extending
+		 * sysctl interface (i.e., without rebuilding kernel).
+		 */
 		use_sysctl = 0;
 	} else if (qflag ||
 		   iflag ||
@@ -415,7 +421,7 @@ main(int argc, char *argv[])
 	    "AabBdf:ghI:LliM:mN:nP:p:qrsStTuVvw:X")) != -1)
 		switch (ch) {
 		case 'A':
-			Aflag = 1;
+			Aflag = RT_AFLAG;
 			break;
 		case 'a':
 			aflag = 1;
@@ -448,7 +454,7 @@ main(int argc, char *argv[])
 			iflag = 1;
 			break;
 		case 'L':
-			Lflag = 1;
+			Lflag = RT_LFLAG;
 			break;
 		case 'l':
 			lflag = 1;
@@ -463,7 +469,7 @@ main(int argc, char *argv[])
 			nlistf = optarg;
 			break;
 		case 'n':
-			numeric_addr = numeric_port = nflag = 1;
+			numeric_addr = numeric_port = nflag = RT_NFLAG;
 			break;
 		case 'P':
 			errno = 0;
@@ -495,7 +501,7 @@ main(int argc, char *argv[])
 			tflag = 1;
 			break;
 		case 'T':
-			tagflag = 1;
+			tagflag = RT_TFLAG;
 			break;
 		case 'u':
 			af = AF_LOCAL;
@@ -504,7 +510,7 @@ main(int argc, char *argv[])
 			Vflag++;
 			break;
 		case 'v':
-			vflag++;
+			vflag = RT_VFLAG;
 			break;
 		case 'w':
 			interval = atoi(optarg);
@@ -570,7 +576,7 @@ main(int argc, char *argv[])
 	}
 	if (pflag) {
 		if (iflag && tp->pr_istats)
-			intpr(interval, nl[N_IFNET].n_value, tp->pr_istats);
+			intpr(interval, nl[N_IFNET_LIST].n_value, tp->pr_istats);
 		else if (tp->pr_stats)
 			(*tp->pr_stats)(nl[tp->pr_sindex].n_value,
 				tp->pr_name);
@@ -624,7 +630,7 @@ main(int argc, char *argv[])
 			if (af != AF_UNSPEC)
 				goto protostat;
 
-			intpr(interval, nl[N_IFNET].n_value, NULL);
+			intpr(interval, nl[N_IFNET_LIST].n_value, NULL);
 			break;
 		}
 		if (rflag) {
@@ -632,7 +638,8 @@ main(int argc, char *argv[])
 				rt_stats(use_sysctl ? 0 : nl[N_RTSTAT].n_value);
 			else {
 				if (use_sysctl)
-					p_rttables(af);
+					p_rttables(af,
+					    nflag|tagflag|vflag|Lflag, 0, ~0);
 				else
 					routepr(nl[N_RTREE].n_value);
 			}
@@ -723,7 +730,7 @@ printproto(struct protox *tp, const char *name)
 	if (sflag) {
 		if (iflag) {
 			if (tp->pr_istats)
-				intpr(interval, nl[N_IFNET].n_value,
+				intpr(interval, nl[N_IFNET_LIST].n_value,
 				      tp->pr_istats);
 			return;
 		}

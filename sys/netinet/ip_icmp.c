@@ -100,10 +100,10 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <sys/param.h>
 #include <sys/systm.h>
-#include <sys/malloc.h>
 #include <sys/mbuf.h>
 #include <sys/protosw.h>
 #include <sys/socket.h>
+#include <sys/kmem.h>
 #include <sys/time.h>
 #include <sys/kernel.h>
 #include <sys/syslog.h>
@@ -204,10 +204,7 @@ icmp_mtudisc_callback_register(void (*func)(struct in_addr))
 			return;
 	}
 
-	mc = malloc(sizeof(*mc), M_PCB, M_NOWAIT);
-	if (mc == NULL)
-		panic("icmp_mtudisc_callback_register");
-
+	mc = kmem_alloc(sizeof(*mc), KM_SLEEP);
 	mc->mc_func = func;
 	LIST_INSERT_HEAD(&icmp_mtudisc_callbacks, mc, mc_list);
 }
@@ -411,8 +408,10 @@ icmp_input(struct mbuf *m, ...)
 	icmplen = ntohs(ip->ip_len) - hlen;
 #ifdef ICMPPRINTFS
 	if (icmpprintfs) {
-		printf("icmp_input from `%s' to ", inet_ntoa(ip->ip_src));
-		printf("`%s', len %d\n", inet_ntoa(ip->ip_dst), icmplen);
+		char sbuf[INET_ADDRSTRLEN], dbuf[INET_ADDRSTRLEN];
+		printf("icmp_input from `%s' to `%s', len %d\n",
+		    IN_PRINT(sbuf, &ip->ip_src), IN_PRINT(dbuf, &ip->ip_dst),
+		    icmplen);
 	}
 #endif
 	if (icmplen < ICMP_MINLEN) {
@@ -618,9 +617,10 @@ reflect:
 		icmpdst.sin_addr = icp->icmp_gwaddr;
 #ifdef	ICMPPRINTFS
 		if (icmpprintfs) {
+			char gbuf[INET_ADDRSTRLEN], dbuf[INET_ADDRSTRLEN];
 			printf("redirect dst `%s' to `%s'\n",
-			    inet_ntoa(icp->icmp_ip.ip_dst),
-			    inet_ntoa(icp->icmp_gwaddr));
+			    IN_PRINT(dbuf, &icp->icmp_ip.ip_dst),
+			    IN_PRINT(gbuf, &icp->icmp_gwaddr));
 		}
 #endif
 		icmpsrc.sin_addr = icp->icmp_ip.ip_dst;
@@ -630,18 +630,21 @@ reflect:
 		if (rt != NULL && icmp_redirtimeout != 0) {
 			i = rt_timer_add(rt, icmp_redirect_timeout,
 					 icmp_redirect_timeout_q);
-			if (i)
+			if (i) {
+				char buf[INET_ADDRSTRLEN];
 				log(LOG_ERR, "ICMP:  redirect failed to "
-				    "register timeout for route to %x, "
+				    "register timeout for route to %s, "
 				    "code %d\n",
-				    icp->icmp_ip.ip_dst.s_addr, i);
+				    IN_PRINT(buf, &icp->icmp_ip.ip_dst), i);
+			}
 		}
 		if (rt != NULL)
 			rtfree(rt);
 
 		pfctlinput(PRC_REDIRECT_HOST, sintosa(&icmpsrc));
 #if defined(IPSEC)
-		key_sa_routechange((struct sockaddr *)&icmpsrc);
+		if (ipsec_used)
+			key_sa_routechange((struct sockaddr *)&icmpsrc);
 #endif
 		break;
 
@@ -900,8 +903,9 @@ icmp_send(struct mbuf *m, struct mbuf *opts)
 	m->m_len += hlen;
 #ifdef ICMPPRINTFS
 	if (icmpprintfs) {
+		char sbuf[INET_ADDRSTRLEN], dbuf[INET_ADDRSTRLEN];
 		printf("icmp_send to destination `%s' from `%s'\n",
-		    inet_ntoa(ip->ip_dst), inet_ntoa(ip->ip_src));
+		    IN_PRINT(dbuf, &ip->ip_dst), IN_PRINT(sbuf, &ip->ip_src));
 	}
 #endif
 	(void)ip_output(m, opts, NULL, 0, NULL, NULL);

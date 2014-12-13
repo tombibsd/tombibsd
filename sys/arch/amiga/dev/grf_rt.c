@@ -582,7 +582,7 @@ rt_load_mon(struct grf_softc *gp, struct MonDef *md)
 						| (0	 			& 0x1f)));
 
 
-	/* not it's time for guessing... */
+	/* now it's time for guessing... */
 
 	vgaw (ba, VDAC_REG_D, 	   0x02);
 

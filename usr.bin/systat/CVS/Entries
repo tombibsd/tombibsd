@@ -4,15 +4,15 @@
 /cmdtab.c/1.24/Fri Jan  6 14:08:08 2012/-kk/
 /df.c/1.4/Sat Dec 24 21:14:50 2005/-kk/
 /disks.c/1.19/Fri Mar 14 04:28:32 2014/-kk/
-/extern.h/1.42/Fri Jan  6 14:08:08 2012/-kk/
+/extern.h/1.43/Mon Jun  9 00:29:57 2014/-kk/
 /fetch.c/1.13/Mon Apr 13 23:20:27 2009/-kk/
 /globalcmds.c/1.15/Sun Nov  1 22:08:14 2009/-kk/
-/icmp.c/1.12/Thu Apr 10 17:16:39 2008/-kk/
+/icmp.c/1.13/Mon Jun  9 00:29:57 2014/-kk/
 /iostat.c/1.37/Mon Apr 13 23:20:27 2009/-kk/
-/ip.c/1.17/Thu Apr 10 17:16:39 2008/-kk/
-/ip6.c/1.15/Thu Apr 10 17:16:39 2008/-kk/
+/ip.c/1.18/Mon Jun  9 00:29:57 2014/-kk/
+/ip6.c/1.16/Mon Jun  9 00:29:57 2014/-kk/
 /keyboard.c/1.25/Thu Oct 24 10:28:59 2013/-kk/
-/main.c/1.47/Fri Nov 23 03:47:36 2012/-kk/
+/main.c/1.48/Mon Jun  9 00:29:57 2014/-kk/
 /mbufs.c/1.16/Fri Nov 23 01:43:10 2012/-kk/
 /netcmds.c/1.21/Sat Feb 26 22:12:33 2005/-kk/
 /netstat.c/1.29/Tue Dec 17 04:05:19 2013/-kk/
@@ -23,7 +23,7 @@
 /syscall.c/1.9/Thu Feb 27 08:56:27 2014/-kk/
 /systat.1/1.43/Thu Oct 24 10:28:59 2013/-kk/
 /systat.h/1.11/Sat Feb 26 22:12:34 2005/-kk/
-/tcp.c/1.15/Thu Apr 10 17:16:39 2008/-kk/
-/vmstat.c/1.77/Fri Apr 30 16:21:05 2010/-kk/
+/tcp.c/1.16/Mon Jun  9 00:29:57 2014/-kk/
+/vmstat.c/1.80/Sun Jun 22 14:32:28 2014/-kk/
 /vmstat.h/1.1/Sat Mar 18 14:58:49 2006/-kk/
 D

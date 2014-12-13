@@ -121,7 +121,7 @@ struct nameidata {
                  */
                 const char *cn_nameptr; /* pointer to looked up name */
                 size_t cn_namelen;      /* length of looked up component */
-                size_t cn_consume;      /* chars to consume in lookup() */
+                size_t cn_consume;      /* chars to be consumed this time */
         } ni_cnd;
 };
 .Ed

@@ -16,7 +16,7 @@
  * PERFORMANCE OF THIS SOFTWARE.
  */
 
-/* Id: acconfig.h,v 1.53 2008/12/01 23:47:44 tbox Exp */
+/* Id: acconfig.h,v 1.53 2008/12/01 23:47:44 tbox Exp  */
 
 /*! \file */
 
@@ -72,6 +72,9 @@
 
 /** define if arc4random() exists */
 #undef HAVE_ARC4RANDOM
+
+/** define if arc4random_addrandom() exists */
+#undef HAVE_ARC4RANDOM_ADDRANDOM
 
 /**
  * define if pthread_setconcurrency() should be called to tell the
@@ -173,9 +176,6 @@ int sigwait(const unsigned int *set, int *sig);
 /* Define to enable rpz-nsip rules. */
 #undef ENABLE_RPZ_NSIP
 
-/* Define to enable 'sit' support. */
-#undef ENABLE_SIT
-
 /* Solaris hack to get select_large_fdset. */
 #undef FD_SETSIZE
 
@@ -187,9 +187,6 @@ int sigwait(const unsigned int *set, int *sig);
    instead. Don't use 'offsetof (struct s, d[0])', as this doesn't work with
    MSVC and with C++ compilers. */
 #undef FLEXIBLE_ARRAY_MEMBER
-
-/* Define to 1 if you have the `AES_encrypt' function. */
-#undef HAVE_AES_ENCRYPT
 
 /* Define to 1 if you have the `chroot' function. */
 #undef HAVE_CHROOT
@@ -245,6 +242,9 @@ int sigwait(const unsigned int *set, int *sig);
 /* Define to 1 if you have the <gssapi_krb5.h> header file. */
 #undef HAVE_GSSAPI_KRB5_H
 
+/* Define to 1 if you have the `if_nametoindex' function. */
+#undef HAVE_IF_NAMETOINDEX
+
 /* Define to 1 if you have the <inttypes.h> header file. */
 #undef HAVE_INTTYPES_H
 
@@ -283,6 +283,9 @@ int sigwait(const unsigned int *set, int *sig);
 
 /* Define to 1 if you have the `scf' library (-lscf). */
 #undef HAVE_LIBSCF
+
+/* Define to use libseccomp system call filtering. */
+#undef HAVE_LIBSECCOMP
 
 /* Define to 1 if you have the `socket' library (-lsocket). */
 #undef HAVE_LIBSOCKET
@@ -323,8 +326,14 @@ int sigwait(const unsigned int *set, int *sig);
 /* Define to 1 if you have the <net/route.h> header file. */
 #undef HAVE_NET_ROUTE_H
 
+/* Define if your OpenSSL version supports AES */
+#undef HAVE_OPENSSL_AES
+
 /* Define if your OpenSSL version supports ECDSA. */
 #undef HAVE_OPENSSL_ECDSA
+
+/* Define if your OpenSSL version supports EVP AES */
+#undef HAVE_OPENSSL_EVP_AES
 
 /* Define if your OpenSSL version supports GOST. */
 #undef HAVE_OPENSSL_GOST
@@ -334,6 +343,9 @@ int sigwait(const unsigned int *set, int *sig);
 
 /* Define if your PKCS11 provider supports GOST. */
 #undef HAVE_PKCS11_GOST
+
+/* Support for PTHREAD_MUTEX_ADAPTIVE_NP */
+#undef HAVE_PTHREAD_MUTEX_ADAPTIVE_NP
 
 /* Define to 1 if you have the `pthread_yield' function. */
 #undef HAVE_PTHREAD_YIELD

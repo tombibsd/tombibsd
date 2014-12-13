@@ -256,10 +256,9 @@ npf_tableset_reload(npf_tableset_t *nts, npf_tableset_t *ots)
 	}
 }
 
-void
-npf_tableset_syncdict(const npf_tableset_t *ts, prop_dictionary_t ndict)
+int
+npf_tableset_export(const npf_tableset_t *ts, prop_array_t tables)
 {
-	prop_array_t tables = prop_array_create();
 	const npf_table_t *t;
 
 	KASSERT(npf_config_locked_p());
@@ -276,9 +275,7 @@ npf_tableset_syncdict(const npf_tableset_t *ts, prop_dictionary_t ndict)
 		prop_array_add(tables, tdict);
 		prop_object_release(tdict);
 	}
-	prop_dictionary_remove(ndict, "tables");
-	prop_dictionary_set(ndict, "tables", tables);
-	prop_object_release(tables);
+	return 0;
 }
 
 /*

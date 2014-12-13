@@ -65,7 +65,7 @@ bool		kcpuset_match(const kcpuset_t *, const kcpuset_t *);
 void		kcpuset_intersect(kcpuset_t *, const kcpuset_t *);
 void		kcpuset_merge(kcpuset_t *, const kcpuset_t *);
 void		kcpuset_remove(kcpuset_t *, const kcpuset_t *);
-int		kcpuset_countset(kcpuset_t *);
+int		kcpuset_countset(const kcpuset_t *);
 
 cpuid_t		kcpuset_ffs(const kcpuset_t *);
 cpuid_t		kcpuset_ffs_intersecting(const kcpuset_t *, const kcpuset_t *);

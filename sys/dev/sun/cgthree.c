@@ -91,6 +91,7 @@ const struct cdevsw cgthree_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = cgthreemmap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_OTHER
 };
 

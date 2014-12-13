@@ -537,7 +537,7 @@ gfe_attach(device_t parent, device_t self, void *aux)
 	ether_ifattach(ifp, enaddr);
 	bpf_attach(ifp, DLT_EN10MB, sizeof(struct ether_header));
 	rnd_attach_source(&sc->sc_rnd_source, device_xname(self), RND_TYPE_NET,
-	    0);
+	    RND_FLAG_DEFAULT);
 	marvell_intr_establish(mva->mva_irq, IPL_NET, gfe_intr, sc);
 }
 
@@ -2018,9 +2018,10 @@ gfe_hash_fill(struct gfe_softc *sc)
 
 	error = gfe_hash_entry_op(sc, GE_HASH_ADD, GE_RXPRIO_HI,
 	    CLLADDR(sc->sc_ec.ec_if.if_sadl));
-	if (error)
+	if (error) {
 		GE_FUNC_EXIT(sc, "!");
 		return error;
+	}
 
 	sc->sc_flags &= ~GE_ALLMULTI;
 	if ((sc->sc_ec.ec_if.if_flags & IFF_PROMISC) == 0)

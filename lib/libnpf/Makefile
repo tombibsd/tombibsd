@@ -5,7 +5,7 @@
 USE_SHLIBDIR=   yes
 
 LIB=		npf
-MAN=		npf.3
+MAN=		libnpf.3
 
 SRCS=		npf.c
 

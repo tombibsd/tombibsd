@@ -250,6 +250,7 @@ ld_virtio_attach(device_t parent, device_t self, void *aux)
 	vsc->sc_nvqs = 1;
 	vsc->sc_config_change = 0;
 	vsc->sc_intrhand = virtio_vq_intr;
+	vsc->sc_flags = 0;
 
 	features = virtio_negotiate_features(vsc,
 					     (VIRTIO_BLK_F_SIZE_MAX |

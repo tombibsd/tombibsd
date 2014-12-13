@@ -56,6 +56,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/atomic.h>
 #include <sys/kmem.h>
 #include <sys/xcall.h>
+#include <sys/ipi.h>
 
 #include <dev/mm.h>
 
@@ -488,6 +489,20 @@ xc_send_ipi(struct cpu_info *ci)
 	/* Broadcast: all, but local CPU (caller will handle it). */
 	cpu_send_ipi(target, IPI_XCALL);
 }
+
+void
+cpu_ipi(struct cpu_info *ci)
+{
+	KASSERT(kpreempt_disabled());
+	KASSERT(curcpu() != ci);
+
+	cpuid_t target = (ci != NULL ? cpu_index(ci) : IPI_DST_NOTME);
+
+	/* Unicast: remote CPU. */
+	/* Broadcast: all, but local CPU (caller will handle it). */
+	cpu_send_ipi(target, IPI_GENERIC);
+}
+
 #endif /* MULTIPROCESSOR */
 
 #ifdef MODULAR

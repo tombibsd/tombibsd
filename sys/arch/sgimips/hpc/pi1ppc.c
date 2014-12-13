@@ -1217,7 +1217,7 @@ pi1ppc_nibble_read(struct pi1ppc_softc *pi1ppc)
 			ctr &= ~HOSTBUSY;
 			pi1ppc_w_ctr(pi1ppc, ctr);
 
-			/* Event 11 - wait ack from peripherial */
+			/* Event 11 - wait ack from peripheral */
 			if (pi1ppc->sc_use & PI1PPC_USE_INTR)
 				pi1ppc->sc_inerr = pi1ppc_wait_interrupt(pi1ppc,
 				    &pi1ppc->sc_in_cv, PI1PPC_IRQ_nACK);

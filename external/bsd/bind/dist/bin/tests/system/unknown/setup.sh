@@ -15,7 +15,8 @@
 SYSTEMTESTTOP=..
 . $SYSTEMTESTTOP/conf.sh
 
-sh clean.sh 
-test -e $RANDFILE || $GENRANDOM 400 $RANDFILE
+$SHELL clean.sh 
 
-(cd ns3; sh -e sign.sh)
+test -r $RANDFILE || $GENRANDOM 400 $RANDFILE
+
+(cd ns3; $SHELL -e sign.sh)

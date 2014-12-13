@@ -854,7 +854,6 @@ void ps_printer::encode_fonts()
 
 void ps_printer::encode_subfont(subencoding *sub)
 {
-  assert(sub->glyphs != 0);
   out.put_literal_symbol(make_subencoding_name(sub->idx))
      .put_delimiter('[');
   for (int i = 0; i < 256; i++)

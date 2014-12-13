@@ -9,7 +9,7 @@ Section "ServerLayout"
 EndSection
 	
 Section "Files"
-#	FontPath	"/usr/pkg/lib/X11/fonts/TTF/"
+#	FontPath	"/usr/pkg/share/fonts/X11/TTF/"
 EndSection
 
 Section "InputDevice"

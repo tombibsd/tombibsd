@@ -82,6 +82,7 @@
  */
 
 #include <machine/psl.h>
+#include <machine/hypervisor.h>
 
 /* Various cache size/line sizes */
 extern	int	ecache_min_line_size;
@@ -118,9 +119,20 @@ void sp_tlb_flush_all_us(void);
 void sp_tlb_flush_all_usiii(void);
 
 static __inline__ void
+sp_tlb_flush_pte_sun4v(vaddr_t va, int ctx)
+{
+	int64_t hv_rc;
+	hv_rc = hv_mmu_demap_page(va, ctx, MAP_DTLB|MAP_ITLB);
+	if ( hv_rc != H_EOK )
+		panic("hv_mmu_demap_page(%p,%d) failed - rc = %" PRIx64 "\n", (void*)va, ctx, hv_rc);
+}
+
+static __inline__ void
 sp_tlb_flush_pte(vaddr_t va, int ctx)
 {
-	if (CPU_IS_USIII_UP() || CPU_IS_SPARC64_V_UP())
+	if (CPU_ISSUN4V)
+		sp_tlb_flush_pte_sun4v(va, ctx);
+	else if (CPU_IS_USIII_UP() || CPU_IS_SPARC64_V_UP())
 		sp_tlb_flush_pte_usiii(va, ctx);
 	else
 		sp_tlb_flush_pte_us(va, ctx);

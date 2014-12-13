@@ -135,7 +135,7 @@ st_scsibus_ops(struct st_softc *st, int op, int flags)
 }
 
 /*
- * Ask the drive what it's min and max blk sizes are.
+ * Ask the drive what its min and max blk sizes are.
  */
 static int
 st_scsibus_read_block_limits(struct st_softc *st, int flags)

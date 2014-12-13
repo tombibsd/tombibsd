@@ -6,6 +6,7 @@
 # ports should define any machine-specific files they need in their
 # own file lists.
 
+define	compat_ibcs2
 file	compat/ibcs2/ibcs2_errno.c	compat_ibcs2
 file	compat/ibcs2/ibcs2_exec.c	compat_ibcs2
 file	compat/ibcs2/ibcs2_exec_coff.c	compat_ibcs2

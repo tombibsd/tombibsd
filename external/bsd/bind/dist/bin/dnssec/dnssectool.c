@@ -17,8 +17,6 @@
  * PERFORMANCE OF THIS SOFTWARE.
  */
 
-/* Id: dnssectool.c,v 1.63 2011/10/21 03:55:33 marka Exp  */
-
 /*! \file */
 
 /*%
@@ -121,6 +119,12 @@ vbprintf(int level, const char *fmt, ...) {
 	fprintf(stderr, "%s: ", program);
 	vfprintf(stderr, fmt, ap);
 	va_end(ap);
+}
+
+void
+version(const char *program) {
+	fprintf(stderr, "%s %s\n", program, VERSION);
+	exit(0);
 }
 
 void

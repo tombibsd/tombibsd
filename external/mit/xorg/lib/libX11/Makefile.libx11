@@ -461,11 +461,7 @@ COPTS.lcUTF8.c+=	-Wno-error
 COPTS.Font.c+=		-Wno-error	# XXX xf86bigfstr.h
 COPTS.OpenDis.c+=	-Wno-error	# XXX xf86bigfstr.h
 COPTS.XlibInt.c+=	-Wno-error	# XXX xcmiscstr.h
-COPTS.XKBBind.c+=	-Wno-error	# uses XKeycodeToKeysym
-.if defined(HAVE_GCC) &&  ${HAVE_GCC} < 45
-COPTS.LiHosts.c+=	-Wno-error	# XXX: old gcc figures out that const
-					# cond because nHosts < max_hosts
-.endif
+COPTS.XKBBind.c+=	-Wno-deprecated-declarations	# uses XKeycodeToKeysym
 
 CWARNFLAGS.clang+=	-Wno-string-plus-int
 

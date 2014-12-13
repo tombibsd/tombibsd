@@ -1,5 +1,3 @@
-/*	$NetBSD$	*/
-
 /* Somewhat faster "wc" tool: match more text with each rule */
 
 ws    [ \t]

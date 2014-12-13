@@ -45,6 +45,8 @@ SRCS+=					\
 
 # XXX
 
+# missing: HAVE_GCC_VECTOR_EXTENSIONS
+
 .if ${MACHINE_ARCH} == "i386" || ${MACHINE_ARCH} == "x86_64"
 . if ${MACHINE_ARCH} == "i386"
 SRCS+= pixman-mmx.c
@@ -58,7 +60,7 @@ MKDEPFLAGS+=		-mmmx
 SRCS+=	pixman-sse2.c pixman-ssse3.c
 COPTS.pixman-sse2.c=	-msse2 -fvisibility=hidden
 COPTS.pixman-ssse3.c=	-msse3 -mssse3 -fvisibility=hidden
-CPPFLAGS+=		-DUSE_SSE2 -DUSE_SSE3
+CPPFLAGS+=		-DUSE_SSE2 -DUSE_SSSE3
 MKDEPFLAGS+=		-msse2 -mssse3 -mssse3 -fvisibility=hidden
 .endif
 
@@ -80,6 +82,8 @@ SRCS+=		pixman-arm-neon.c		\
 		pixman-arm-neon-asm.S		\
 		pixman-arm-neon-asm-bilinear.S
 CPPFLAGS+=	-DUSE_ARM_NEON
+
+AFLAGS+=	${${ACTIVE_CC} == "clang" :? -fno-integrated-as :}
 # ARM iwMMX
 #SRCS+=		pixman-mmx.c
 #COPTS.pixman-mmx.c=	-mcpu=iwmmxt

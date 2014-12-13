@@ -258,6 +258,7 @@ const struct cdevsw mfcs_cdevsw = {
 	.d_poll = mfcspoll,
 	.d_mmap = nommap,
 	.d_kqfilter = ttykqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_TTY
 };
 

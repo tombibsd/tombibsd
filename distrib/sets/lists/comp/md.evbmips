@@ -52,7 +52,8 @@
 ./usr/include/evbmips/rwlock.h			comp-c-include
 ./usr/include/evbmips/setjmp.h			comp-c-include
 ./usr/include/evbmips/signal.h			comp-c-include
-./usr/include/evbmips/sljitarch.h		comp-c-include
+./usr/include/evbmips/sljit_machdep.h		comp-c-include
+./usr/include/evbmips/sljitarch.h		comp-obsolete		obsolete
 ./usr/include/evbmips/stdarg.h			comp-obsolete		obsolete
 ./usr/include/evbmips/trap.h			comp-c-include
 ./usr/include/evbmips/types.h			comp-c-include

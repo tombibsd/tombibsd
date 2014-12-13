@@ -17,3 +17,4 @@ ENTRY(div)
 	salq	$32, %rdx
 	orq	%rdx,%rax
 	ret
+END(div)

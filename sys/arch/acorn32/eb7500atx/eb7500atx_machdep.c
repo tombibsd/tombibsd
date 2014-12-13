@@ -89,7 +89,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <machine/signal.h>
 #include <machine/bootconfig.h>
 #include <machine/io.h>
-#include <arm/arm32/katelib.h>
 #include <arm/arm32/machdep.h>
 #include <machine/rtc.h>
 
@@ -709,7 +708,7 @@ initarm(void *cookie)
 	/* Map the core memory needed before autoconfig */
 	loop = 0;
 	while (l1_sec_table[loop].size) {
-		vm_size_t sz;
+		vsize_t sz;
 
 #ifdef VERBOSE_INIT_ARM
 		printf("%08lx -> %08lx @ %08lx\n", l1_sec_table[loop].pa,

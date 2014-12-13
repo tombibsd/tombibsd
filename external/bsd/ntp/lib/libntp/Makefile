@@ -77,9 +77,7 @@ ymd2yd.c
 
 CPPFLAGS+= -I${IDIST}/sntp/libopts
 
-.if !defined(HAVE_GCC) || ${HAVE_GCC} >= 45
 COPTS.msyslog.c+=	-Wno-error=format-nonliteral
-.endif
 
 # For MKREPRO, avoid using __DATE__ and __TIME__.
 # Instead, use the date and time from ${IMPORTDATE_FILE}.

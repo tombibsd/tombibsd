@@ -1255,10 +1255,10 @@ void
 mmu_reservemon4_4c(int *nrp, int *nsp)
 {
 	u_int va = 0, eva = 0;
-	int mmuseg, i, nr, ns, vr, lastvr;
+	int mmuseg, i, nr, ns, vr;
 	int *pte;
 #if defined(SUN4_MMU3L)
-	int mmureg;
+	int mmureg, lastvr = 0;
 #endif
 	struct regmap *rp;
 
@@ -1276,7 +1276,6 @@ mmu_reservemon4_4c(int *nrp, int *nsp)
 #endif
 	ns = *nsp;
 	nr = *nrp;
-	lastvr = 0;
 	while (va < eva) {
 		vr = VA_VREG(va);
 		rp = &pmap_kernel()->pm_regmap[vr];

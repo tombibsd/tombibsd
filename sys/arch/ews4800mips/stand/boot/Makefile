@@ -140,7 +140,7 @@ ${BOOT_KERNEL}.gz: ${BINKERNEL_O} ${OBJS} ${LIBS}
 	    ${BINKERNEL_O}
 	mv ${BOOT_KERNEL}.elf ${BOOT_KERNEL}
 	${OBJDUMP} -h ${BOOT_KERNEL}
-	${TOOL_GZIP} -9nc ${BOOT_KERNEL} > ${.TARGET}.tmp
+	${TOOL_GZIP_N} -9c ${BOOT_KERNEL} > ${.TARGET}.tmp
 	mv ${.TARGET}.tmp ${.TARGET}
 	ls -al ${.TARGET}
 

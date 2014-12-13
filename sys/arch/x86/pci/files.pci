@@ -6,12 +6,13 @@ file 	arch/x86/pci/aapic.c		aapic
 
 file	arch/x86/pci/agp_machdep.c	agp
 
+define	agp_x86: agp_ali, agp_amd, agp_amd64, agp_i810, agp_intel, agp_sis, agp_via
+defflag	AGP_X86
+
 define amdnb_miscbus {}
 
 # PCI-Host bridge chipsets
-device	pchb:	pcibus, agpbus,
-		agp_ali, agp_amd, agp_amd64, agp_i810,
-		agp_intel, agp_sis, agp_via
+device	pchb:	pcibus, agpbus, agp_x86
 attach	pchb at pci
 file	arch/x86/pci/pchb.c		pchb		needs-flag
 
@@ -59,3 +60,8 @@ file	arch/x86/pci/tcpcib.c		tcpcib
 device	fwhrng
 attach	fwhrng at fwhichbus
 file	arch/x86/pci/fwhrng.c		fwhrng needs-flag
+
+# VMware VMXNET3 virtual interface
+device	vmx: ether, ifnet, arp
+attach	vmx at pci
+file	arch/x86/pci/if_vmx.c		vmx

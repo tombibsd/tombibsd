@@ -100,6 +100,7 @@ const struct cdevsw ms_cdevsw = {
 	.d_poll = mspoll,
 	.d_mmap = nommap,
 	.d_kqfilter = mskqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_OTHER
 };
 

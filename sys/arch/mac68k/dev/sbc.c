@@ -426,7 +426,6 @@ sbc_drq_intr(void *p)
 	volatile u_int8_t *drq = 0;	/* XXX gcc4 -Wuninitialized */
 	u_int8_t *data;
 	int count, dcount, resid;
-	u_int8_t tmp;
 
 	/*
 	 * If we're not ready to xfer data, or have no more, just return.
@@ -534,7 +533,7 @@ sbc_drq_intr(void *p)
 		 */
 		if (dcount >= MAX_DMA_LEN)
 			drq = (volatile u_int8_t *)sc->sc_drq_addr;
-		tmp = *drq;
+		(void)*drq;
 	} else {	/* Data In */
 		/*
 		 * Get the dest address aligned.

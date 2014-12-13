@@ -46,7 +46,7 @@ struct pci_attach_args;
  * NOT TO BE USED DIRECTLY BY MACHINE INDEPENDENT CODE.
  */
 
-extern struct cobalt_bus_dma_tag pci_bus_dma_tag;
+extern struct mips_bus_dma_tag pci_bus_dma_tag;
 
 /*
  * Types provided to machine-independent PCI code

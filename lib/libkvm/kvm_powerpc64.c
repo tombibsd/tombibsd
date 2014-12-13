@@ -117,17 +117,16 @@ _kvm_initvtop(kvm_t *kd)
 int
 _kvm_kvatop(kvm_t *kd, vaddr_t va, paddr_t *pa)
 {
-	cpu_kcore_hdr_t	*cpu_kh;
-	uint32_t	pvr;
 
 	if (ISALIVE(kd)) {
 		_kvm_err(kd, 0, "vatop called in live kernel!");
 		return 0;
 	}
 
-	cpu_kh = kd->cpu_data;
-
-	pvr = (cpu_kh->pvr >> 16);
+#if 0
+	cpu_kcore_hdr_t	*cpu_kh = kd->cpu_data;
+	uint32_t pvr = (cpu_kh->pvr >> 16);
+#endif
 
 
 	/* No hit -- no translation */

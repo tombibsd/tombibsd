@@ -84,6 +84,7 @@ ENTRY(_atan2f, 0)
 
 #ifdef WEAK_ALIAS
 WEAK_ALIAS(atan2, _atan2)
+WEAK_ALIAS(_atan2l, _atan2)
 #endif
 
 ENTRY(_atan2, 0x0fc0)

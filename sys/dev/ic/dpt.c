@@ -147,6 +147,7 @@ const struct cdevsw dpt_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = nommap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_OTHER,
 };
 
@@ -607,7 +608,7 @@ dpt_readcfg(struct dpt_softc *sc)
 
 /*
  * Our `shutdownhook' to cleanly shut down the HBA.  The HBA must flush all
- * data from it's cache and mark array groups as clean.
+ * data from its cache and mark array groups as clean.
  *
  * XXX This doesn't always work (i.e., the HBA may still be flushing after
  * we tell root that it's safe to power off).

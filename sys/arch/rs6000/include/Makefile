@@ -5,7 +5,7 @@ INCSDIR= /usr/include/rs6000
 INCS=   bootinfo.h \
 	disklabel.h \
 	intr.h \
-	sljitarch.h \
+	sljit_machdep.h \
 	vmparam.h
 
 .include "../../powerpc/include/Makefile"

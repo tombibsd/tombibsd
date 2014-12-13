@@ -1,6 +1,6 @@
 /* Native-dependent code for SPARC.
 
-   Copyright (C) 2003-2013 Free Software Foundation, Inc.
+   Copyright (C) 2003-2014 Free Software Foundation, Inc.
 
    This file is part of GDB.
 
@@ -24,7 +24,7 @@
 
 #include "gdb_assert.h"
 #include <signal.h>
-#include "gdb_string.h"
+#include <string.h>
 #include <sys/ptrace.h>
 #include "gdb_wait.h"
 #ifdef HAVE_MACHINE_REG_H
@@ -142,7 +142,7 @@ sparc_fetch_inferior_registers (struct target_ops *ops,
   struct gdbarch *gdbarch = get_regcache_arch (regcache);
   int pid;
 
-  pid = PIDGET (inferior_ptid);
+  pid = ptid_get_pid (inferior_ptid);
 
   if (regnum == SPARC_G0_REGNUM)
     {
@@ -156,7 +156,7 @@ sparc_fetch_inferior_registers (struct target_ops *ops,
     {
       gregset_t regs;
 
-      if (ptrace (PTRACE_GETREGS, pid, (PTRACE_TYPE_ARG3) &regs, TIDGET (inferior_ptid)) == -1)
+      if (ptrace (PTRACE_GETREGS, pid, (PTRACE_TYPE_ARG3) &regs, ptid_get_lwp (inferior_ptid)) == -1)
 	perror_with_name (_("Couldn't get registers"));
 
       sparc_supply_gregset (sparc_gregset, regcache, -1, &regs);
@@ -168,7 +168,7 @@ sparc_fetch_inferior_registers (struct target_ops *ops,
     {
       fpregset_t fpregs;
 
-      if (ptrace (PTRACE_GETFPREGS, pid, (PTRACE_TYPE_ARG3) &fpregs, TIDGET (inferior_ptid)) == -1)
+      if (ptrace (PTRACE_GETFPREGS, pid, (PTRACE_TYPE_ARG3) &fpregs, ptid_get_lwp (inferior_ptid)) == -1)
 	perror_with_name (_("Couldn't get floating point status"));
 
       sparc_supply_fpregset (sparc_fpregset, regcache, -1, &fpregs);
@@ -182,18 +182,18 @@ sparc_store_inferior_registers (struct target_ops *ops,
   struct gdbarch *gdbarch = get_regcache_arch (regcache);
   int pid;
 
-  pid = PIDGET (inferior_ptid);
+  pid = ptid_get_pid (inferior_ptid);
 
   if (regnum == -1 || sparc_gregset_supplies_p (gdbarch, regnum))
     {
       gregset_t regs;
 
-      if (ptrace (PTRACE_GETREGS, pid, (PTRACE_TYPE_ARG3) &regs, TIDGET (inferior_ptid)) == -1)
+      if (ptrace (PTRACE_GETREGS, pid, (PTRACE_TYPE_ARG3) &regs, ptid_get_lwp (inferior_ptid)) == -1)
 	perror_with_name (_("Couldn't get registers"));
 
       sparc_collect_gregset (sparc_gregset, regcache, regnum, &regs);
 
-      if (ptrace (PTRACE_SETREGS, pid, (PTRACE_TYPE_ARG3) &regs, TIDGET (inferior_ptid)) == -1)
+      if (ptrace (PTRACE_SETREGS, pid, (PTRACE_TYPE_ARG3) &regs, ptid_get_lwp (inferior_ptid)) == -1)
 	perror_with_name (_("Couldn't write registers"));
 
       /* Deal with the stack regs.  */
@@ -214,7 +214,7 @@ sparc_store_inferior_registers (struct target_ops *ops,
     {
       fpregset_t fpregs, saved_fpregs;
 
-      if (ptrace (PTRACE_GETFPREGS, pid, (PTRACE_TYPE_ARG3) &fpregs, TIDGET (inferior_ptid)) == -1)
+      if (ptrace (PTRACE_GETFPREGS, pid, (PTRACE_TYPE_ARG3) &fpregs, ptid_get_lwp (inferior_ptid)) == -1)
 	perror_with_name (_("Couldn't get floating-point registers"));
 
       memcpy (&saved_fpregs, &fpregs, sizeof (fpregs));
@@ -227,7 +227,7 @@ sparc_store_inferior_registers (struct target_ops *ops,
       if (memcmp (&saved_fpregs, &fpregs, sizeof (fpregs)) != 0)
 	{
 	  if (ptrace (PTRACE_SETFPREGS, pid,
-		      (PTRACE_TYPE_ARG3) &fpregs, TIDGET (inferior_ptid)) == -1)
+		      (PTRACE_TYPE_ARG3) &fpregs, ptid_get_lwp (inferior_ptid)) == -1)
 	    perror_with_name (_("Couldn't write floating-point registers"));
 	}
 
@@ -263,7 +263,7 @@ sparc_xfer_wcookie (struct target_ops *ops, enum target_object object,
   {
     int pid;
 
-    pid = PIDGET (inferior_ptid);
+    pid = ptid_get_pid (inferior_ptid);
 
     /* Sanity check.  The proper type for a cookie is register_t, but
        we can't assume that this type exists on all systems supported
@@ -292,9 +292,7 @@ sparc_xfer_wcookie (struct target_ops *ops, enum target_object object,
   return len;
 }
 
-LONGEST (*inf_ptrace_xfer_partial) (struct target_ops *, enum target_object,
-				    const char *, gdb_byte *, const gdb_byte *,
-				    ULONGEST, LONGEST);
+target_xfer_partial_ftype *inf_ptrace_xfer_partial;
 
 static LONGEST
 sparc_xfer_partial (struct target_ops *ops, enum target_object object,

@@ -52,9 +52,9 @@
 #define EXIT(x) do { fprintf(stderr, "EXIT %s\n", (x)); } while (/*CONSTCOND*/0)
 #define NOTICE(x) do { fprintf(stderr, "NOTICE %s\n", (x)); } while (/*CONSTCOND*/0)
 #else
-#define ENTER(x) do { } while(0)
-#define EXIT(x) do { } while(0)
-#define NOTICE(x) do { } while(0)
+#define ENTER(x) do { } while(/*CONSTCOND*/0)
+#define EXIT(x) do { } while(/*CONSTCOND*/0)
+#define NOTICE(x) do { } while(/*CONSTCOND*/0)
 #endif
 
 #define HTTP_RECVLEN			1024

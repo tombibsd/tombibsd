@@ -30,3 +30,8 @@ ENTRY(fpsetsticky)
 
 	addl $28,%esp
 	ret
+#ifdef WEAK_ALIAS
+END(_fpsetsticky)
+#else
+END(fpsetsticky)
+#endif

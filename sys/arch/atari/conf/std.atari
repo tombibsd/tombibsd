@@ -6,8 +6,6 @@ machine		atari m68k
 include		"conf/std"			# MI standard options
 include		"arch/m68k/conf/std.m68k"	# m68k standard options
 
-makeoptions	COPTS="-Os"		# XXX for wasteful gcc 4.5
-
 options 	_ATARIHW_		# Original Atari like mainboard hw.
 
 mainbus0	at root

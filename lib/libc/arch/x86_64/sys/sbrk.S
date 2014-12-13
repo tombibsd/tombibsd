@@ -83,3 +83,4 @@ out:
 err:
 	jmp	CERROR
 #endif
+END(_sbrk)

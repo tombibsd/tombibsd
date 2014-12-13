@@ -15,7 +15,9 @@ SRCS+=	AArch64AsmBackend.cpp \
 	AArch64MCAsmInfo.cpp \
 	AArch64MCCodeEmitter.cpp \
 	AArch64MCExpr.cpp \
-	AArch64MCTargetDesc.cpp
+	AArch64MCTargetDesc.cpp \
+	AArch64MachObjectWriter.cpp \
+	AArch64TargetStreamer.cpp
 
 .if defined(HOSTLIB)
 .include <bsd.hostlib.mk>

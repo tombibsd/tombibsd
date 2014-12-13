@@ -506,7 +506,7 @@ search_token(char *str, int slen, const char *token)
 	return (NULL);
 }
 
-/* Stores the class ID of the peripherial in soft config data */
+/* Stores the class ID of the peripheral in soft config data */
 void
 ppbus_pnp_detect(device_t dev)
 {
@@ -537,7 +537,7 @@ ppbus_pnp_detect(device_t dev)
 	}
 
 #ifdef DEBUG_1284
-	printf("%s: <PnP> %d characters: ", device_xname(dev), len);
+	printf("%s: <PnP> %zu characters: ", device_xname(dev), len);
 	for (i = 0; i < len; i++)
 		printf("%c(0x%x) ", str[i], str[i]);
 	printf("\n");

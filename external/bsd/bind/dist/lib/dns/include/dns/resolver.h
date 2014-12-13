@@ -97,10 +97,11 @@ typedef struct dns_fetchevent {
 #define DNS_FETCHOPT_NOVALIDATE		0x020	     /*%< Disable validation. */
 #define DNS_FETCHOPT_EDNS512		0x040	     /*%< Advertise a 512 byte
 							  UDP buffer. */
-#define DNS_FETCHOPT_WANTNSID		0x080         /*%< Request NSID */
-#define DNS_FETCHOPT_PREFETCH		0x100         /*%< Request NSID */
+#define DNS_FETCHOPT_WANTNSID		0x080	     /*%< Request NSID */
+#define DNS_FETCHOPT_PREFETCH		0x100	     /*%< Do prefetch */
 #define DNS_FETCHOPT_NOCDFLAG		0x200	     /*%< Don't set CD flag. */
 
+/* Reserved in use by adb.c		0x00400000 */
 #define	DNS_FETCHOPT_EDNSVERSIONSET	0x00800000
 #define	DNS_FETCHOPT_EDNSVERSIONMASK	0xff000000
 #define	DNS_FETCHOPT_EDNSVERSIONSHIFT	24
@@ -274,6 +275,18 @@ dns_resolver_createfetch2(dns_resolver_t *res, dns_name_t *name,
 			  dns_forwarders_t *forwarders,
 			  isc_sockaddr_t *client, isc_uint16_t id,
 			  unsigned int options, isc_task_t *task,
+			  isc_taskaction_t action, void *arg,
+			  dns_rdataset_t *rdataset,
+			  dns_rdataset_t *sigrdataset,
+			  dns_fetch_t **fetchp);
+isc_result_t
+dns_resolver_createfetch3(dns_resolver_t *res, dns_name_t *name,
+			  dns_rdatatype_t type,
+			  dns_name_t *domain, dns_rdataset_t *nameservers,
+			  dns_forwarders_t *forwarders,
+			  isc_sockaddr_t *client, isc_uint16_t id,
+			  unsigned int options, unsigned int depth,
+			  isc_counter_t *qc, isc_task_t *task,
 			  isc_taskaction_t action, void *arg,
 			  dns_rdataset_t *rdataset,
 			  dns_rdataset_t *sigrdataset,
@@ -624,6 +637,30 @@ dns_resolver_getquerydscp6(dns_resolver_t *resolver);
 /*%
  * Get and set the DSCP values for the resolver's IPv4 and IPV6 query
  * sources.
+ *
+ * Requires:
+ * \li	resolver to be valid.
+ */
+
+void
+dns_resolver_setmaxdepth(dns_resolver_t *resolver, unsigned int maxdepth);
+unsigned int
+dns_resolver_getmaxdepth(dns_resolver_t *resolver);
+/*%
+ * Get and set how many NS indirections will be followed when looking for
+ * nameserver addresses.
+ *
+ * Requires:
+ * \li	resolver to be valid.
+ */
+
+void
+dns_resolver_setmaxqueries(dns_resolver_t *resolver, unsigned int queries);
+unsigned int
+dns_resolver_getmaxqueries(dns_resolver_t *resolver);
+/*%
+ * Get and set how many iterative queries will be allowed before
+ * terminating a recursive query.
  *
  * Requires:
  * \li	resolver to be valid.

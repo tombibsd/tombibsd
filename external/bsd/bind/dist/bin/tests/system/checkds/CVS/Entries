@@ -1,6 +1,7 @@
 /clean.sh/1.1.1.2/Thu Oct 24 10:28:41 2013/-kk/
+/dig.pl/1.1.1.1/Tue Jul  8 04:46:15 2014/-kk/
 /dig.sh/1.1.1.2/Thu Oct 24 10:28:41 2013/-kk/
-/missing.example.dlv.example.dlv.db/1.2/Tue Dec  4 23:38:39 2012/-kk/
+/missing.example.dlv.example.dlv.db/1.3/Sun Jul 20 13:23:20 2014/-kk/
 /missing.example.dnskey.db/1.1.1.1/Tue Dec  4 19:22:32 2012/-kk/
 /missing.example.ds.db/1.1.1.1/Tue Dec  4 19:22:32 2012/-kk/
 /none.example.dlv.example.dlv.db/1.1.1.1/Tue Dec  4 19:22:32 2012/-kk/
@@ -9,8 +10,8 @@
 /ok.example.dlv.example.dlv.db/1.1.1.1/Tue Dec  4 19:22:32 2012/-kk/
 /ok.example.dnskey.db/1.1.1.1/Tue Dec  4 19:22:32 2012/-kk/
 /ok.example.ds.db/1.1.1.1/Tue Dec  4 19:22:32 2012/-kk/
-/setup.sh/1.1.1.2/Thu Oct 24 10:28:41 2013/-kk/
-/tests.sh/1.1.1.2/Thu Oct 24 10:28:41 2013/-kk/
+/setup.sh/1.1.1.3/Thu Dec 11 09:05:46 2014/-kk/
+/tests.sh/1.1.1.3/Thu Dec 11 09:05:46 2014/-kk/
 /wrong.example.dlv.example.dlv.db/1.1.1.1/Tue Dec  4 19:22:32 2012/-kk/
 /wrong.example.dnskey.db/1.1.1.1/Tue Dec  4 19:22:32 2012/-kk/
 /wrong.example.ds.db/1.1.1.1/Tue Dec  4 19:22:32 2012/-kk/

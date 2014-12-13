@@ -101,7 +101,7 @@ extern kcpuset_t *kcpuset_attached;
 extern kcpuset_t *kcpuset_running;
 
 static inline u_int
-cpu_index(struct cpu_info *ci)
+cpu_index(const struct cpu_info *ci)
 {
 	return ci->ci_index;
 }

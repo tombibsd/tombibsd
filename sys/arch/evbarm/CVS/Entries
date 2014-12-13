@@ -2,12 +2,12 @@
 D/adi_brh////
 D/armadaxp////
 D/armadillo////
+D/awin////
 D/bcm53xx////
 D/beagle////
 D/compile////
 D/conf////
 D/cp3100////
-D/cubie////
 D/dev////
 D/devkit8000////
 D/evbarm////
@@ -26,6 +26,7 @@ D/iq80310////
 D/iq80321////
 D/ixdp425////
 D/ixm1200////
+D/kobo////
 D/lubbock////
 D/marvell////
 D/mini2440////
@@ -33,6 +34,7 @@ D/mmnet////
 D/mpcsa////
 D/n900////
 D/netwalker////
+D/nitrogen6////
 D/npwr_fc////
 D/nslu2////
 D/odroid////

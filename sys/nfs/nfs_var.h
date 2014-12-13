@@ -80,7 +80,6 @@ void nfs_kqinit(void);
 void nfs_kqfini(void);
 
 /* nfs_node.c */
-void nfs_rbtinit(struct nfsmount *);
 void nfs_node_init(void);
 void nfs_node_done(void);
 

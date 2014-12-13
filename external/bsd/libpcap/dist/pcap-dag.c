@@ -17,10 +17,8 @@
  *                Stephen Donnelly <support@endace.com>
  */
 
-#ifndef lint
-static const char rcsid[] _U_ =
-	"@(#) Header: /tcpdump/master/libpcap/pcap-dag.c,v 1.39 2008-04-14 20:40:58 guy Exp  (LBL)";
-#endif
+#include <sys/cdefs.h>
+__RCSID("$NetBSD$");
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -581,7 +579,7 @@ dag_read(pcap_t *p, int cnt, pcap_handler callback, u_char *user)
 	
 			/* Only count packets that pass the filter, for consistency with standard Linux behaviour. */
 			processed++;
-			if (processed == cnt && cnt > 0)
+			if (processed == cnt && !PACKET_COUNT_IS_UNLIMITED(cnt))
 			{
 				/* Reached the user-specified limit. */
 				return cnt;

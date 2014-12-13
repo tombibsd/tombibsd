@@ -68,6 +68,8 @@ const struct vnodeopv_entry_desc mfs_vnodeop_entries[] = {
 	{ &vop_setattr_desc, mfs_setattr },		/* setattr */
 	{ &vop_read_desc, mfs_read },			/* read */
 	{ &vop_write_desc, mfs_write },			/* write */
+	{ &vop_fallocate_desc, genfs_eopnotsupp },	/* fallocate */
+	{ &vop_fdiscard_desc, genfs_eopnotsupp },	/* fdiscard */
 	{ &vop_ioctl_desc, mfs_ioctl },			/* ioctl */
 	{ &vop_poll_desc, mfs_poll },			/* poll */
 	{ &vop_revoke_desc, mfs_revoke },		/* revoke */

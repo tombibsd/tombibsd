@@ -17,6 +17,16 @@ SUBDIR=		mips64 mips32 mipso32
 CXXCONFIGARGS=	mips64 _ABI64 mipso32 _ABIO32 mips32
 .endif
 
+.if ${MACHINE_ARCH} == "powerpc64"
+SUBDIR=		powerpc powerpc64
+CXXCONFIGARGS=	powerpc64 _LP64 powerpc
+.endif
+
+.if ${MACHINE_ARCH} == "riscv64"
+SUBDIR=		riscv32 riscv64
+CXXCONFIGARGS=	riscv64 _LP64 riscv32
+.endif
+
 # XXX arm variants are missing, but hopefully won't need them
 # until aarch64 anyway.
 

@@ -71,8 +71,8 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include "locators.h"
 
-#define SABUNIT(x)		(minor(x) & 0x7ffff)
-#define SABDIALOUT(x)		(minor(x) & 0x80000)
+#define SABUNIT(x)		TTUNIT(x)
+#define SABDIALOUT(x)		TTDIALOUT(x)
 
 #define	SABTTY_RBUF_SIZE	1024	/* must be divisible by 2 */
 
@@ -152,7 +152,7 @@ void sabtty_flush(struct sabtty_softc *);
 int sabtty_speed(int);
 void sabtty_console_flags(struct sabtty_softc *);
 void sabtty_cnpollc(struct sabtty_softc *, int);
-void sabtty_shutdown(void *);
+bool sabtty_shutdown(device_t, int);
 int sabttyparam(struct sabtty_softc *, struct tty *, struct termios *);
 
 #ifdef KGDB
@@ -195,6 +195,7 @@ const struct cdevsw sabtty_cdevsw = {
 	.d_poll = sabpoll,
 	.d_mmap = nommap,
 	.d_kqfilter = ttykqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_TTY
 };
 
@@ -469,7 +470,7 @@ sabtty_attach(device_t parent, device_t self, void *aux)
 			cn_tab->cn_getc = sab_cngetc;
 			maj = cdevsw_lookup_major(&sabtty_cdevsw);
 			cn_tab->cn_dev = makedev(maj, device_unit(self));
-			shutdownhook_establish(sabtty_shutdown, sc);
+			pmf_device_register1(self, NULL, NULL, sabtty_shutdown);
 			cn_init_magic(&sabtty_cnm_state);
 			cn_set_magic("\047\001"); /* default magic is BREAK */
 		}
@@ -1320,10 +1321,10 @@ sabtty_console_flags(struct sabtty_softc *sc)
 		sc->sc_flags |= SABTTYF_IS_RSC;
 }
 
-void
-sabtty_shutdown(void *vsc)
+bool
+sabtty_shutdown(device_t dev, int how)
 {
-	struct sabtty_softc *sc = vsc;
+	struct sabtty_softc *sc = device_private(dev);
 
 	/* Have to put the chip back into single char mode */
 	sc->sc_flags |= SABTTYF_DONTDDB;
@@ -1331,6 +1332,7 @@ sabtty_shutdown(void *vsc)
 	sabtty_cec_wait(sc);
 	SAB_WRITE(sc, SAB_CMDR, SAB_CMDR_RRES);
 	sabtty_cec_wait(sc);
+	return true;
 }
 
 #ifdef KGDB

@@ -1462,7 +1462,7 @@ sk_attach(device_t parent, device_t self, void *aux)
 	ether_ifattach(ifp, sc_if->sk_enaddr);
 
         rnd_attach_source(&sc->rnd_source, device_xname(sc->sk_dev),
-            RND_TYPE_NET, 0);
+            RND_TYPE_NET, RND_FLAG_DEFAULT);
 
 	if (pmf_device_register(self, NULL, sk_resume))
 		pmf_class_network_register(self, ifp);
@@ -2220,7 +2220,10 @@ sk_tick(void *xsc_if)
 	SK_XM_CLRBIT_2(sc_if, XM_IMR, XM_IMR_GP0_SET);
 	SK_XM_READ_2(sc_if, XM_ISR);
 	mii_tick(mii);
-	callout_stop(&sc_if->sk_tick_ch);
+	if (ifp->if_link_state != LINK_STATE_UP)
+		callout_reset(&sc_if->sk_tick_ch, hz, sk_tick, sc_if);
+	else
+		callout_stop(&sc_if->sk_tick_ch);
 }
 
 void
@@ -2872,6 +2875,7 @@ sk_init(struct ifnet *ifp)
 
 	ifp->if_flags |= IFF_RUNNING;
 	ifp->if_flags &= ~IFF_OACTIVE;
+	callout_reset(&sc_if->sk_tick_ch, hz, sk_tick, sc_if);
 
 out:
 	splx(s);

@@ -48,3 +48,4 @@ NENTRY(__sigtramp_siginfo_2)
 	movq	$-1,%rdi /* if we return here, something is wrong */
 	movq	$SYS_exit, %rax
 	syscall
+END(__sigtramp_siginfo_2)

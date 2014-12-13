@@ -130,11 +130,6 @@ int  (*rump_vfs_makeonedevnode)(dev_t, const char *,
 int  (*rump_vfs_makedevnodes)(dev_t, const char *, char,
 			      devmajor_t, devminor_t, int) = (void *)nullop;
 
-int rump__unavailable(void);
-int rump__unavailable() {return EOPNOTSUPP;}
-
-__weak_alias(biodone,rump__unavailable);
-
 rump_proc_vfs_init_fn rump_proc_vfs_init = (void *)nullop;
 rump_proc_vfs_release_fn rump_proc_vfs_release = (void *)nullop;
 
@@ -307,6 +302,7 @@ rump_init(void)
 	cprng_init();
 	kern_cprng = cprng_strong_create("kernel", IPL_VM,
 	    CPRNG_INIT_ANY|CPRNG_REKEY_ANY);
+
 	rump_hyperentropy_init();
 
 	procinit();
@@ -365,6 +361,9 @@ rump_init(void)
 
 		aprint_verbose("cpu%d at thinair0: rump virtual cpu\n", i);
 	}
+
+	/* Once all CPUs are detected, initialize the per-CPU cprng_fast.  */
+	cprng_fast_init();
 
 	/* CPUs are up.  allow kernel threads to run */
 	rump_thread_allow(NULL);
@@ -536,7 +535,7 @@ rump_component_load(const struct rump_component *rc_const)
 	 */
 	rc = __UNCONST(rc_const);
 
-	KASSERT(curlwp == bootlwp);
+	KASSERT(!rump_inited || curlwp == bootlwp);
 
 	LIST_FOREACH(rc_iter, &rchead, rc_entries) {
 		if (rc_iter == rc)
@@ -657,16 +656,34 @@ rump_hyp_rfork(void *priv, int flags, const char *comm)
 {
 	struct vmspace *newspace;
 	struct proc *p;
+	struct lwp *l;
 	int error;
+	bool initfds;
+
+	/*
+	 * If we are forking off of pid 1, initialize file descriptors.
+	 */
+	l = curlwp;
+	if (l->l_proc->p_pid == 1) {
+		KASSERT(flags == RUMP_RFFD_CLEAR);
+		initfds = true;
+	} else {
+		initfds = false;
+	}
 
 	if ((error = rump_lwproc_rfork(flags)) != 0)
 		return error;
 
 	/*
+	 * We forked in this routine, so cannot use curlwp (const)
+	 */
+	l = rump_lwproc_curlwp();
+	p = l->l_proc;
+
+	/*
 	 * Since it's a proxy proc, adjust the vmspace.
 	 * Refcount will eternally be 1.
 	 */
-	p = curproc;
 	newspace = kmem_zalloc(sizeof(*newspace), KM_SLEEP);
 	newspace->vm_refcnt = 1;
 	newspace->vm_map.pmap = priv;
@@ -674,6 +691,8 @@ rump_hyp_rfork(void *priv, int flags, const char *comm)
 	p->p_vmspace = newspace;
 	if (comm)
 		strlcpy(p->p_comm, comm, sizeof(p->p_comm));
+	if (initfds)
+		rump_consdev_init();
 
 	return 0;
 }
@@ -890,15 +909,19 @@ rump_syscall_boot_establish(const struct rump_onesyscall *calls, size_t ncall)
 	}
 }
 
-/*
- * Temporary notification that rumpkern_time is obsolete.  This is to
- * be removed along with obsoleting rumpkern_time in a few months.
- */
-#define RUMPKERN_TIME_WARN "rumpkern_time is obsolete, functionality in librump"
-__warn_references(rumpkern_time_is_obsolete,RUMPKERN_TIME_WARN)
-void rumpkern_time_is_obsolete(void);
+struct rump_boot_etfs *ebstart;
 void
-rumpkern_time_is_obsolete(void)
+rump_boot_etfs_register(struct rump_boot_etfs *eb)
 {
-	printf("WARNING: %s\n", RUMPKERN_TIME_WARN);
+
+	/*
+	 * Could use atomics, but, since caller would need to synchronize
+	 * against calling rump_init() anyway, easier to just specify the
+	 * interface as "caller serializes".  This solve-by-specification
+	 * approach avoids the grey area of using atomics before rump_init()
+	 * runs.
+	 */
+	eb->_eb_next = ebstart;
+	eb->eb_status = -1;
+	ebstart = eb;
 }

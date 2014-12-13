@@ -32,6 +32,8 @@
 #ifndef _LINUX_PAGEMAP_H_
 #define _LINUX_PAGEMAP_H_
 
+#include <sys/types.h>
+
 static inline int
 fault_in_multipages_readable(const char *uaddr __unused, size_t len __unused)
 {

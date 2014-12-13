@@ -88,7 +88,7 @@ __start:
 	addi	%r8, %r8, _C_LABEL(end)@l
 	/* zero bss */
 	li	%r4, 0
-2:	stwu	%r4, %r4(3)
+2:	stwu	%r4, 4(%r3)
 	cmpw	%r3, %r8
 	bne+	2b
 

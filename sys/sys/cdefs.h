@@ -296,6 +296,12 @@
 #define	__noprofile	/* nothing */
 #endif
 
+#if __GNUC_PREREQ__(4, 6) || defined(__clang__)
+#define	__unreachable()	__builtin_unreachable()
+#else
+#define	__unreachable()	do {} while (0)
+#endif
+
 #if defined(__cplusplus)
 #define	__BEGIN_EXTERN_C	extern "C" {
 #define	__END_EXTERN_C		}
@@ -353,14 +359,10 @@
 #define	__packed	__packed
 #define	__aligned(x)	/* delete */
 #define	__section(x)	/* delete */
-#elif __GNUC_PREREQ__(2, 7)
+#elif __GNUC_PREREQ__(2, 7) || defined(__PCC__)
 #define	__packed	__attribute__((__packed__))
 #define	__aligned(x)	__attribute__((__aligned__(x)))
 #define	__section(x)	__attribute__((__section__(x)))
-#elif defined(__PCC__)
-#define	__packed	_Pragma("packed 1")
-#define	__aligned(x)   	_Pragma("aligned " __STRING(x))
-#define	__section(x)   	_Pragma("section " ## x)
 #elif defined(_MSC_VER)
 #define	__packed	/* ignore */
 #else
@@ -413,7 +415,7 @@
 #error "No function renaming possible"
 #endif /* __GNUC__ */
 #else /* _STANDALONE || _KERNEL */
-#define	__RENAME(x)	no renaming in kernel or standalone environment
+#define	__RENAME(x)	no renaming in kernel/standalone environment
 #endif
 
 /*

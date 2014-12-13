@@ -58,6 +58,8 @@ __weak_alias(atanl, _atanl)
 __weak_alias(acoshl, _acoshl)
 __weak_alias(asinhl, _asinhl)
 __weak_alias(atanhl, _atanhl)
+__weak_alias(erfl, _erfl)
+__weak_alias(erfcl, _erfcl)
 
 long double
 atan2l(long double y, long double x)
@@ -172,4 +174,16 @@ long double
 atanhl(long double x)
 {
 	return atanh(x);
+}
+
+long double
+erfl(long double x)
+{
+	return erf(x);
+}
+
+long double
+erfcl(long double x)
+{
+	return erfc(x);
 }

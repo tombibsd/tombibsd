@@ -44,8 +44,8 @@ CPPFLAGS.config.c=	${CONN_DEFINES}
 # XXX
 CPPFLAGS.xfstrans.c+=	-Wno-error
 
-X11EXTRAMANDEFS+=	-e 's%__configfilepath__%${XFSCONFIGDIR}/config%g; \
-			s%__configfiledesc__%the default file,%g'
+X11EXTRAMANDEFS+=	-e 's%__configfilepath__%${XFSCONFIGDIR}/config%g' \
+			-e 's%__configfiledesc__%the default file,%g'
 
 
 .PATH:	${XFSDIR}/config

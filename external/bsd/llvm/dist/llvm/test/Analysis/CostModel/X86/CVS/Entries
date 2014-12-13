@@ -1,3 +1,4 @@
+/alternate-shuffle-cost.ll/1.1.1.1/Sun Aug 10 17:04:48 2014/-kk/
 /arith.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /cast.ll/1.1.1.2/Thu Feb 27 08:52:08 2014/-kk/
 /cmp.ll/1.1.1.2/Fri Mar 14 04:23:32 2014/-kk/
@@ -5,17 +6,20 @@
 /gep.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /i32.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /insert-extract-at-zero.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
-/intrinsic-cost.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
-/lit.local.cfg/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/intrinsic-cost.ll/1.1.1.2/Tue Jun  3 03:05:17 2014/-kk/
+/lit.local.cfg/1.1.1.2/Fri Oct  3 09:22:58 2014/-kk/
 /load_store.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /loop_v2.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /reduction.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/scalarize.ll/1.1.1.1/Fri May 30 18:11:17 2014/-kk/
 /sitofp.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /testshiftashr.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /testshiftlshr.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /testshiftshl.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /tiny.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /uitofp.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/vdiv-cost.ll/1.1.1.1/Fri May 30 18:11:17 2014/-kk/
 /vectorized-loop.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/vselect-cost.ll/1.1.1.1/Fri May 30 18:11:17 2014/-kk/
 /vshift-cost.ll/1.1.1.1/Tue Mar  4 20:54:03 2014/-kk/
 D

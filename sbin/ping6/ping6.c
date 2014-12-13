@@ -125,6 +125,7 @@ __RCSID("$NetBSD$");
 #include <fcntl.h>
 #include <math.h>
 #include <signal.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -254,7 +255,7 @@ static int	 get_pathmtu(struct msghdr *);
 static struct in6_pktinfo *get_rcvpktinfo(struct msghdr *);
 static void	 onsignal(int);
 static void	 retransmit(void);
-__dead static void	 onint(int);
+__dead static void	 onsigexit(int);
 static size_t	 pingerlen(void);
 static int	 pinger(void);
 static const char *pr_addr(struct sockaddr *, int);
@@ -1031,7 +1032,7 @@ main(int argc, char *argv[])
 			continue;
 		}
 		if (seenint) {
-			onint(SIGINT);
+			onsigexit(SIGINT);
 			seenint = 0;
 			continue;
 		}
@@ -1153,7 +1154,7 @@ retransmit(void)
 	itimer.it_interval.tv_usec = 0;
 	itimer.it_value.tv_usec = 0;
 
-	(void)signal(SIGALRM, onint);
+	(void)signal(SIGALRM, onsigexit);
 	(void)setitimer(ITIMER_REAL, &itimer, NULL);
 }
 
@@ -1844,6 +1845,7 @@ pr_suptypes(struct icmp6_nodeinfo *ni /* ni->qtype must be SUPTYPES */,
 	}
 
 	while (cp < end) {
+		size_t skip = 0;
 		clen = (size_t)(end - cp);
 		if ((ni->ni_flags & NI_SUPTYPE_FLAG_COMPRESS) == 0) {
 			if (clen == 0 || clen > MAXQTYPES / 8 ||
@@ -1860,8 +1862,8 @@ pr_suptypes(struct icmp6_nodeinfo *ni /* ni->qtype must be SUPTYPES */,
 				return;
 			cp += sizeof(cbit);
 			clen = ntohs(cbit.words) * sizeof(v);
-			if (cur + clen * 8 + (u_long)ntohs(cbit.skip) * 32 >
-			    MAXQTYPES)
+			skip = (size_t)ntohs(cbit.skip) * 32;
+			if (cur + clen * 8 + skip > MAXQTYPES)
 				return;
 		}
 
@@ -1874,9 +1876,7 @@ pr_suptypes(struct icmp6_nodeinfo *ni /* ni->qtype must be SUPTYPES */,
 		b = pr_bitrange(0, (int)(cur + off * 8), b);
 
 		cp += clen;
-		cur += clen * 8;
-		if ((ni->ni_flags & NI_SUPTYPE_FLAG_COMPRESS) != 0)
-			cur += ntohs(cbit.skip) * 32;
+		cur += clen * 8 + skip;
 	}
 }
 
@@ -2055,19 +2055,18 @@ tvsub(struct timeval *out, struct timeval *in)
 }
 
 /*
- * onint --
- *	SIGINT handler.
+ * onsigexit --
  */
-/* ARGSUSED */
 static void
-onint(int notused)
+onsigexit(int sig)
 {
 	summary();
 
-	(void)signal(SIGINT, SIG_DFL);
-	(void)kill(getpid(), SIGINT);
+	if (sig == SIGINT) {
+		(void)signal(SIGINT, SIG_DFL);
+		(void)kill(getpid(), SIGINT);
+	}
 
-	/* NOTREACHED */
 	exit(1);
 }
 

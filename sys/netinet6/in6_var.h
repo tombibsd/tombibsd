@@ -98,6 +98,7 @@ struct in6_ifextra {
 	int ndefrouters;
 };
 
+LIST_HEAD(in6_multihead, in6_multi);
 struct	in6_ifaddr {
 	struct	ifaddr ia_ifa;		/* protocol-independent info */
 #define	ia_ifp		ia_ifa.ifa_ifp
@@ -108,7 +109,7 @@ struct	in6_ifaddr {
 	struct	sockaddr_in6 ia_prefixmask; /* prefix mask */
 	u_int32_t ia_plen;		/* prefix length */
 	struct	in6_ifaddr *ia_next;	/* next in6 list of IP6 addresses */
-	LIST_HEAD(in6_multihead, in6_multi) ia6_multiaddrs;
+	struct	in6_multihead ia6_multiaddrs;
 					/* list of multicast addresses */
 	int	ia6_flags;
 
@@ -479,6 +480,11 @@ struct	in6_rrenumreq {
 #endif
 
 #ifdef _KERNEL
+
+#include <net/pktqueue.h>
+
+extern pktqueue_t *ip6_pktq;
+
 MALLOC_DECLARE(M_IP6OPT);
 
 extern struct in6_ifaddr *in6_ifaddr;
@@ -489,7 +495,6 @@ do {								\
 		((struct in6_ifextra *)((ifp)->if_afdata[AF_INET6]))->in6_ifstat->tag++; \
 } while (/*CONSTCOND*/ 0)
 
-extern struct ifqueue ip6intrq;		/* IP6 packet input queue */
 extern const struct in6_addr zeroin6_addr;
 extern const u_char inet6ctlerrmap[];
 extern unsigned long in6_maxmtu;
@@ -676,8 +681,7 @@ struct in6_multi_mship *in6_joingroup(struct ifnet *, struct in6_addr *,
 	int *, int);
 int	in6_leavegroup(struct in6_multi_mship *);
 int	in6_mask2len(struct in6_addr *, u_char *);
-int	in6_control(struct socket *, u_long, void *, struct ifnet *,
-	struct lwp *);
+int	in6_control(struct socket *, u_long, void *, struct ifnet *);
 int	in6_update_ifa(struct ifnet *, struct in6_aliasreq *,
 	struct in6_ifaddr *, int);
 void	in6_purgeaddr(struct ifaddr *);

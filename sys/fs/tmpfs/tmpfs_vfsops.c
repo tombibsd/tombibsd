@@ -132,7 +132,15 @@ tmpfs_mount(struct mount *mp, const char *path, void *data, size_t *data_len)
 
 
 	/* Prohibit mounts if there is not enough memory. */
-	if (tmpfs_mem_info(true) < TMPFS_PAGES_RESERVED)
+	if (tmpfs_mem_info(true) < uvmexp.freetarg)
+		return EINVAL;
+
+	/* Check for invalid uid and gid arguments */
+	if (args->ta_root_uid == VNOVAL || args->ta_root_gid == VNOVAL)
+		return EINVAL;
+
+	/* This can never happen? */
+	if ((args->ta_root_mode & ALLPERMS) == VNOVAL)
 		return EINVAL;
 
 	/* Get the memory usage limit for this file-system. */

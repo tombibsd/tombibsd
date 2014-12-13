@@ -123,6 +123,8 @@ sysctl_vm_uvmexp2(SYSCTLFN_ARGS)
 	u.swpginuse = uvmexp.swpginuse;
 	u.swpgonly = uvmexp.swpgonly;
 	u.nswget = uvmexp.nswget;
+	u.cpuhit = uvmexp.cpuhit;
+	u.cpumiss = uvmexp.cpumiss;
 	for (CPU_INFO_FOREACH(cii, ci)) {
 		u.faults += ci->ci_data.cpu_nfault;
 		u.traps += ci->ci_data.cpu_ntrap;
@@ -174,8 +176,7 @@ sysctl_vm_uvmexp2(SYSCTLFN_ARGS)
 	u.execpages = uvmexp.execpages;
 	u.colorhit = uvmexp.colorhit;
 	u.colormiss = uvmexp.colormiss;
-	u.cpuhit = uvmexp.cpuhit;
-	u.cpumiss = uvmexp.cpumiss;
+	u.ncolors = uvmexp.ncolors;
 
 	node = *rnode;
 	node.sysctl_data = &u;

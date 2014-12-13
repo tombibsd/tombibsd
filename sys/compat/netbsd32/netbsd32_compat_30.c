@@ -78,6 +78,9 @@ compat_30_netbsd32_getdents(struct lwp *l, const struct compat_30_netbsd32_getde
 		error = EBADF;
 		goto out;
 	}
+	if (count == 0)
+		goto out;
+
 	buf = kmem_alloc(count, KM_SLEEP);
 	error = vn_readdir(fp, buf, UIO_SYSSPACE, count, &done, l, 0, 0);
 	if (error == 0) {

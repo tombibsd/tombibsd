@@ -3066,7 +3066,7 @@ uaudio_set_params(void *addr, int setmode, int usemode,
 		uaudio_chan_init(&sc->sc_playchan, paltidx, p, 0);
 	}
 	if ((setmode & AUMODE_RECORD)) {
-		p = rfil->req_size > 0 ? &pfil->filters[0].param : rec;
+		p = rfil->req_size > 0 ? &rfil->filters[0].param : rec;
 		/* XXX abort transfer if currently happening? */
 		uaudio_chan_init(&sc->sc_recchan, raltidx, p,
 		    UGETW(sc->sc_alts[raltidx].edesc->wMaxPacketSize));

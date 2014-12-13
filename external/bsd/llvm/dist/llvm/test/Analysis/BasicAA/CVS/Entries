@@ -16,8 +16,8 @@
 /2007-08-01-NoAliasAndGEP.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /2007-08-05-GetOverloadedModRef.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /2007-10-24-ArgumentsGlobals.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
-/2007-11-05-SizeCrash.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
-/2007-12-08-OutOfBoundsCrash.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/2007-11-05-SizeCrash.ll/1.1.1.2/Tue Jun  3 03:05:17 2014/-kk/
+/2007-12-08-OutOfBoundsCrash.ll/1.1.1.2/Tue Jun  3 03:05:17 2014/-kk/
 /2008-04-15-Byval.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /2008-06-02-GEPTailCrash.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /2008-11-23-NoaliasRet.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
@@ -25,11 +25,14 @@
 /2009-10-13-AtomicModRef.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /2009-10-13-GEP-BaseNoAlias.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /2010-09-15-GEP-SignedArithmetic.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/2014-03-18-Maxlookup-reached.ll/1.1.1.1/Fri May 30 18:11:17 2014/-kk/
 /aligned-overread.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /args-rets-allocas-loads.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/assume.ll/1.1.1.1/Sun Aug 10 17:04:48 2014/-kk/
 /byval.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /cas.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /constant-over-index.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/cs-cs.ll/1.1.1.1/Sun Aug 10 17:04:48 2014/-kk/
 /dag.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /empty.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /featuretest.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/

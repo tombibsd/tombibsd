@@ -1606,6 +1606,7 @@ dbcool_setup_sensors(struct dbcool_softc *sc)
 			sc->sc_sensor[i].units = ENVSYS_STEMP;
 			sc->sc_sensor[i].state = ENVSYS_SINVALID;
 			sc->sc_sensor[i].flags |= ENVSYS_FMONLIMITS;
+			sc->sc_sensor[i].flags |= ENVSYS_FHAS_ENTROPY;
 			error = dbcool_attach_sensor(sc, i);
 			break;
 		case DBC_VOLT:
@@ -1622,12 +1623,14 @@ dbcool_setup_sensors(struct dbcool_softc *sc)
 			sc->sc_sensor[i].units = ENVSYS_SVOLTS_DC;
 			sc->sc_sensor[i].state = ENVSYS_SINVALID;
 			sc->sc_sensor[i].flags |= ENVSYS_FMONLIMITS;
+			sc->sc_sensor[i].flags |= ENVSYS_FHAS_ENTROPY;
 			error = dbcool_attach_sensor(sc, i);
 			break;
 		case DBC_FAN:
 			sc->sc_sensor[i].units = ENVSYS_SFANRPM;
 			sc->sc_sensor[i].state = ENVSYS_SINVALID;
 			sc->sc_sensor[i].flags |= ENVSYS_FMONLIMITS;
+			sc->sc_sensor[i].flags |= ENVSYS_FHAS_ENTROPY;
 			error = dbcool_attach_sensor(sc, i);
 			break;
 		case DBC_VID:

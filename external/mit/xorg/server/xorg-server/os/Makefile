@@ -27,7 +27,8 @@ CPPFLAGS+=	${X11FLAGS.DIX} \
 		${X11FLAGS.OS_DEFINES} \
 		-DUSE_RGB_TXT \
 		-UDDXTIME \
-		-DHAVE_SHA1_IN_LIBC
+		-DHAVE_SHA1_IN_LIBC \
+		-DMONOTONIC_CLOCK
 
 .include "../Makefile.common"
 

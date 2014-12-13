@@ -87,7 +87,9 @@ struct	udpiphdr {
 }
 
 #ifdef _KERNEL
+
 extern	struct	inpcbtable udbtable;
+extern const struct pr_usrreqs udp_usrreqs;
 
 void	 *udp_ctlinput(int, const struct sockaddr *, void *);
 int	 udp_ctloutput(int, struct socket *, struct sockopt *);
@@ -96,8 +98,6 @@ void	 udp_init_common(void);
 void	 udp_input(struct mbuf *, ...);
 int	 udp_output(struct mbuf *, ...);
 int	 udp_sysctl(int *, u_int, void *, size_t *, void *, size_t);
-int	 udp_usrreq(struct socket *,
-	    int, struct mbuf *, struct mbuf *, struct mbuf *, struct lwp *);
 
 int	udp_input_checksum(int af, struct mbuf *, const struct udphdr *, int,
 	    int);

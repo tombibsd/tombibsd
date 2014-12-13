@@ -20,7 +20,7 @@ LDFLAGS+=-g -O0
 .endif
 
 MAN=	netpgpverify.1
-WARNS=	4
+WARNS=	5
 
 EXTDIST=${.CURDIR}/../../dist
 

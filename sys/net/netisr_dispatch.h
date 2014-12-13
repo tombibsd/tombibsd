@@ -31,10 +31,6 @@
 #if NARP > 0
 	DONETISR(NETISR_ARP,arpintr);
 #endif
-	DONETISR(NETISR_IP,ipintr);
-#endif
-#ifdef INET6
-	DONETISR(NETISR_IPV6,ip6intr);
 #endif
 #ifdef NETATALK
 	DONETISR(NETISR_ATALK,atintr);

@@ -178,8 +178,8 @@ pingtest(const char *dst, unsigned int wirelen, const char tail[7])
 
 	memcpy(pkt + pktsize - 7, tail, 7);
 	icmp->icmp_type = ICMP_ECHO;
-	icmp->icmp_id = htons(37); 
-	icmp->icmp_seq = htons(1); 
+	icmp->icmp_id = htons(37);
+	icmp->icmp_seq = htons(1);
 	icmp->icmp_cksum = in_cksum(pkt, pktsize);
 
 	slen = sizeof(sin);

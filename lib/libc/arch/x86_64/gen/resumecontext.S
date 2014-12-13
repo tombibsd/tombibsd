@@ -77,3 +77,4 @@ NENTRY(_resumecontext)	/* profiling prologue would clobber TOS */
 	movq	$SYS_exit,%rax
 	syscall
 	/* NOTREACHED */
+END(_resumecontext)

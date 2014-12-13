@@ -75,6 +75,7 @@ struct edid_info {
 	uint8_t		edid_max_vsize;		/* in cm */
 	uint8_t		edid_gamma;
 	uint8_t		edid_features;
+	uint8_t		edid_ext_block_count;
 
 	int			edid_have_range;
 	struct edid_range	edid_range;

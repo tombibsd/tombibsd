@@ -72,7 +72,8 @@
 #define	IPI_SUSPEND	5		/* DDB suspend signaling */
 #define	IPI_HALT	6		/* halt cpu */
 #define	IPI_XCALL	7		/* xcall */
-#define	NIPIS		8
+#define	IPI_GENERIC	8		/* generic IPI */
+#define	NIPIS		9
 
 #ifdef __INTR_PRIVATE
 struct splsw {

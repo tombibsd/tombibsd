@@ -144,6 +144,9 @@ along with GCC; see the file COPYING3.  If not see
 #undef LIB_SPEC
 #define LIB_SPEC NETBSD_LIB_SPEC
 
+#undef STATIC_LIBASAN_LIBS
+#define STATIC_LIBASAN_LIBS "-lstdc++ -lpthread"
+
 /* Pass -cxx-isystem to cc1/cc1plus.  */
 #define NETBSD_CC1_AND_CC1PLUS_SPEC		\
   "%{cxx-isystem}"
@@ -188,7 +191,7 @@ along with GCC; see the file COPYING3.  If not see
 #undef WINT_TYPE
 #define WINT_TYPE "int"
 
-#define LINK_EH_SPEC "--eh-frame-hdr "
+#define LINK_EH_SPEC "%{!static:--eh-frame-hdr} "
 
 /* Use --as-needed -lgcc_s for eh support.  */
 #ifdef HAVE_LD_AS_NEEDED

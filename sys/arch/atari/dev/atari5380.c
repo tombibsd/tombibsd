@@ -445,7 +445,7 @@ tt_get_dma_result(SC_REQ *reqp, u_long *bytes_left)
 	if (dmastat & SD_BUSERR) {
 		/*
 		 * The DMA-controller seems to access 8 bytes beyond
-		 * it's limits on output. Therefore check also the byte
+		 * its limits on output. Therefore check also the byte
 		 * count. If it's zero, ignore the bus error.
 		 */
 		if (leftover != 0) {
@@ -731,9 +731,8 @@ scsi_falcon_idisable(void)
 static inline void
 scsi_falcon_clr_ipend(void)
 {
-	int tmp;
 
-	tmp = get_falcon_5380_reg(NCR5380_IRCV);
+	(void)get_falcon_5380_reg(NCR5380_IRCV);
 	rem_sicallback((si_farg)ncr_ctrl_intr);
 }
 

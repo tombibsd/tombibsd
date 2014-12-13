@@ -8,7 +8,7 @@ TESTS_C=	t_sem_pth
 
 CPPFLAGS+=	-I${.CURDIR}/..
 
-LDADD+=		-lrump -lrumpuser -lpthread
+LDADD+=		-lrump -lrumpuser -lrump -lpthread
 
 WARNS=	4
 

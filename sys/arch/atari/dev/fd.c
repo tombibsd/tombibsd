@@ -252,7 +252,7 @@ uint8_t read_dmastat(void)
 /*
  * Config switch stuff. Used only for the floppy type for now. That's
  * why it's here...
- * XXX: If needed in more places, it should be moved to it's own include file.
+ * XXX: If needed in more places, it should be moved to its own include file.
  * Note: This location _must_ be read as an u_short. Failure to do so
  *       will return garbage!
  */
@@ -286,6 +286,7 @@ const struct bdevsw fd_bdevsw = {
 	.d_ioctl = fdioctl,
 	.d_dump = nodump,
 	.d_psize = nosize,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK
 };
 
@@ -300,6 +301,7 @@ const struct cdevsw fd_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = nommap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK
 };
 

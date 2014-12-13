@@ -84,6 +84,7 @@ npfctl_parse_string(const char *str)
 ID	[a-zA-Z_][a-zA-Z_0-9]*
 DID	[a-zA-Z_][a-zA-Z_0-9-]*
 NUMBER	[0-9]+
+HEXDIG	[0-9a-fA-F]+
 
 %%
 alg			return ALG;
@@ -151,7 +152,7 @@ any			return ANY;
 ","			return COMMA;
 "="			return EQ;
 
-"0x"[0-9a-fA-F]+ {
+"0x"{HEXDIG} {
 			char *endp, *buf = ecalloc(1, yyleng + 1);
 			buf[yyleng] = 0;
 			yylval.num = strtoul(buf+2, &endp, 16);
@@ -166,7 +167,12 @@ any			return ANY;
 			return FPNUM;
 		}
 
-[0-9a-fA-F]+":"[0-9a-fA-F:]* {
+{HEXDIG}":"[0-9a-fA-F:]* {
+			yylval.str = estrndup(yytext, yyleng);
+			return IPV6ADDR;
+		}
+
+"::"{HEXDIG}[0-9a-fA-F:]* {
 			yylval.str = estrndup(yytext, yyleng);
 			return IPV6ADDR;
 		}

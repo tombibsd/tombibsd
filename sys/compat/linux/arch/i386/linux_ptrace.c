@@ -33,7 +33,6 @@
 __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <sys/param.h>
-#include <sys/malloc.h>
 #include <sys/mount.h>
 #include <sys/proc.h>
 #include <sys/ptrace.h>
@@ -182,7 +181,8 @@ linux_sys_ptrace_arch(struct lwp *l, const struct linux_sys_ptrace_args *uap,
 	mutex_enter(proc_lock);
 	if ((t = proc_find(SCARG(uap, pid))) == NULL) {
 		mutex_exit(proc_lock);
-		return ESRCH;
+		error = ESRCH;
+		goto out;
 	}
 	mutex_enter(t->p_lock);
 	mutex_exit(proc_lock);

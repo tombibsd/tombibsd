@@ -1,5 +1,4 @@
 /*	$NetBSD$	*/
-
 /*
  * Adapted from: apptype.c, Written by Eberhard Mattes and put into the
  * public domain

@@ -1,9 +1,12 @@
+/aliased-symbols.s/1.1.1.1/Sun Aug 10 17:04:39 2014/-kk/
 /bad-darwin-ARM-reloc.s/1.1.1.1/Sun Jan  5 16:17:10 2014/-kk/
+/bad-darwin-directives.s/1.1.1.1/Fri May 30 18:11:25 2014/-kk/
 /darwin-ARM-reloc.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /darwin-Thumb-reloc.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /data-in-code.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /empty-function-nop.ll/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
-/lit.local.cfg/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
+/ios-version-min-load-command.s/1.1.1.1/Fri May 30 18:11:25 2014/-kk/
+/lit.local.cfg/1.1.1.2/Fri Oct  3 09:23:18 2014/-kk/
 /llvm-objdump-macho-stripped.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /llvm-objdump-macho.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /long-call-branch-island-relocation.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
@@ -19,4 +22,6 @@
 /thumb2-function-relative-load.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /thumb2-movt-fixup.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /thumb2-movw-fixup.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
+/version-min-diagnostics.s/1.1.1.1/Fri May 30 18:11:25 2014/-kk/
+/version-min.s/1.1.1.1/Fri May 30 18:11:25 2014/-kk/
 D

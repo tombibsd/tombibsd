@@ -344,7 +344,7 @@ semundo_adjust(struct proc *p, struct sem_undo **supptr, int semid, int semnum,
     int adjval)
 {
 	struct sem_undo *suptr;
-	struct undo *sunptr;
+	struct sem_undo_entry *sunptr;
 	int i;
 
 	KASSERT(mutex_owned(&semlock));
@@ -402,7 +402,7 @@ void
 semundo_clear(int semid, int semnum)
 {
 	struct sem_undo *suptr;
-	struct undo *sunptr, *sunend;
+	struct sem_undo_entry *sunptr, *sunend;
 
 	KASSERT(mutex_owned(&semlock));
 

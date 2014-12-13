@@ -324,7 +324,7 @@ fpu_execute(struct trapframe *tf, struct fpemu *fe, union instr *insn)
 		 * Convert to/from single if needed, calculate addr,
 		 * and update index reg if needed.
 		 */
-		double buf;
+		uint64_t buf;
 		size_t size = sizeof(float);
 		int store, update;
 

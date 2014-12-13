@@ -113,6 +113,7 @@ struct vfsops nfs_vfsops = {
 	.vfs_quotactl = (void *)eopnotsupp,
 	.vfs_statvfs = nfs_statvfs,
 	.vfs_sync = nfs_sync,
+	.vfs_loadvnode = nfs_loadvnode,
 	.vfs_vget = nfs_vget,
 	.vfs_fhtovp = nfs_fhtovp,
 	.vfs_vptofh = nfs_vptofh,
@@ -721,12 +722,10 @@ mountnfs(struct nfs_args *argp, struct mount *mp, struct mbuf *nam, const char *
 		TAILQ_INIT(&nmp->nm_bufq);
 		rw_init(&nmp->nm_writeverflock);
 		mutex_init(&nmp->nm_lock, MUTEX_DEFAULT, IPL_NONE);
-		rw_init(&nmp->nm_rbtlock);
 		cv_init(&nmp->nm_rcvcv, "nfsrcv");
 		cv_init(&nmp->nm_sndcv, "nfssnd");
 		cv_init(&nmp->nm_aiocv, "nfsaio");
 		cv_init(&nmp->nm_disconcv, "nfsdis");
-		nfs_rbtinit(nmp);
 	}
 	vfs_getnewfsid(mp);
 	nmp->nm_mountp = mp;
@@ -826,7 +825,6 @@ mountnfs(struct nfs_args *argp, struct mount *mp, struct mbuf *nam, const char *
 bad:
 	nfs_disconnect(nmp);
 	rw_destroy(&nmp->nm_writeverflock);
-	rw_destroy(&nmp->nm_rbtlock);
 	mutex_destroy(&nmp->nm_lock);
 	cv_destroy(&nmp->nm_rcvcv);
 	cv_destroy(&nmp->nm_sndcv);
@@ -903,7 +901,6 @@ nfs_unmount(struct mount *mp, int mntflags)
 	m_freem(nmp->nm_nam);
 
 	rw_destroy(&nmp->nm_writeverflock);
-	rw_destroy(&nmp->nm_rbtlock);
 	mutex_destroy(&nmp->nm_lock);
 	cv_destroy(&nmp->nm_rcvcv);
 	cv_destroy(&nmp->nm_sndcv);
@@ -937,6 +934,13 @@ nfs_root(struct mount *mp, struct vnode **vpp)
 
 extern int syncprt;
 
+static bool
+nfs_sync_selector(void *cl, struct vnode *vp)
+{
+
+	return !LIST_EMPTY(&vp->v_dirtyblkhd) || !UVM_OBJ_IS_CLEAN(&vp->v_uobj);
+}
+
 /*
  * Flush out the buffer cache
  */
@@ -952,15 +956,12 @@ nfs_sync(struct mount *mp, int waitfor, kauth_cred_t cred)
 	 * Force stale buffer cache information to be flushed.
 	 */
 	vfs_vnode_iterator_init(mp, &marker);
-	while (vfs_vnode_iterator_next(marker, &vp)) {
+	while ((vp = vfs_vnode_iterator_next(marker, nfs_sync_selector,
+	    NULL)))
+	{
 		error = vn_lock(vp, LK_EXCLUSIVE);
 		if (error) {
 			vrele(vp);
-			continue;
-		}
-		if (LIST_EMPTY(&vp->v_dirtyblkhd) &&
-		    UVM_OBJ_IS_CLEAN(&vp->v_uobj)) {
-			vput(vp);
 			continue;
 		}
 		error = VOP_FSYNC(vp, cred,

@@ -20,6 +20,8 @@ SRCS=	kvm.c kvm_file.c kvm_getloadavg.c kvm_proc.c
 .include <bsd.own.mk>
 .if exists(kvm_${KVM_MACHINE_ARCH}.c)
 SRCS+=	kvm_${KVM_MACHINE_ARCH}.c
+.elif exists(kvm_${KVM_MACHINE_CPU}.c)
+SRCS+=	kvm_${KVM_MACHINE_CPU}.c
 .elif exists(kvm_${MACHINE_ARCH}.c)
 SRCS+=	kvm_${MACHINE_ARCH}.c
 .elif  exists(kvm_${MACHINE_CPU}.c)

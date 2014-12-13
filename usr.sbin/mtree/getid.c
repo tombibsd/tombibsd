@@ -236,7 +236,7 @@ grscan(int search, gid_t gid, const char *name)
 			continue;
 		}
 		/* skip comments */
-		if (pwline[0] == '#')
+		if (grline[0] == '#')
 			continue;
 		if (grmatchline(search, gid, name))
 			return 1;

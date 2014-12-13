@@ -44,6 +44,7 @@
  * Virtual Memory parameters common to all arm32 platforms.
  */
 
+#include <arm/cpuconf.h>
 #include <arm/arm32/pte.h>	/* pt_entry_t */
 
 #define	USRSTACK	VM_MAXUSER_ADDRESS

@@ -307,6 +307,7 @@ const struct cdevsw wskbd_cdevsw = {
 	.d_poll = wskbdpoll,
 	.d_mmap = nommap,
 	.d_kqfilter = wskbdkqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_OTHER
 };
 
@@ -633,7 +634,7 @@ wskbd_detach(device_t self, int flags)
 		wsmux_detach_sc(&sc->sc_base);
 #endif
 
-	callout_stop(&sc->sc_repeat_ch);
+	callout_halt(&sc->sc_repeat_ch, NULL);
 	callout_destroy(&sc->sc_repeat_ch);
 
 	if (sc->sc_isconsole) {

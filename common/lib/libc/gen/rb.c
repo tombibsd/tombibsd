@@ -145,7 +145,7 @@ rb_tree_find_node_geq(struct rb_tree *rbt, const void *key)
 		parent = parent->rb_nodes[diff < 0];
 	}
 
-	return RB_NODETOITEM(rbto, last);
+	return last == NULL ? NULL : RB_NODETOITEM(rbto, last);
 }
 
 void *
@@ -166,7 +166,7 @@ rb_tree_find_node_leq(struct rb_tree *rbt, const void *key)
 		parent = parent->rb_nodes[diff < 0];
 	}
 
-	return RB_NODETOITEM(rbto, last);
+	return last == NULL ? NULL : RB_NODETOITEM(rbto, last);
 }
 
 void *

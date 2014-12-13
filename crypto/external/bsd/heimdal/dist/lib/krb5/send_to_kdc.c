@@ -62,7 +62,8 @@ timed_connect(int s, struct addrinfo *addr, time_t tmout)
     if (flags == -1)
 	return -1;
 
-    fcntl(s, F_SETFL, flags | O_NONBLOCK);
+    if (fcntl(s, F_SETFL, flags | O_NONBLOCK) == -1)
+	return -1;
     ret = connect(s, addr->ai_addr, addr->ai_addrlen);
     if (ret == -1 && errno != EINPROGRESS)
 	return -1;
@@ -78,7 +79,8 @@ timed_connect(int s, struct addrinfo *addr, time_t tmout)
 	if (ret != -1 || errno != EINTR)
 	    break;
     }
-    fcntl(s, F_SETFL, flags);
+    if (fcntl(s, F_SETFL, flags) == -1)
+	return -1;
 
     if (ret != 1)
 	return -1;

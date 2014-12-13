@@ -19,7 +19,7 @@ SYSTEM_LD_TAIL_EXTRA+=; \
 
 KERNEL_BASE_VIRT=	$(LOADADDRESS)
 
-LINKFLAGS=		-T ldscript
+LINKSCRIPT=		-T ldscript
 
 EXTRA_CLEAN+=		netbsd.map assym.d ldscript tmp
 

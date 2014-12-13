@@ -71,5 +71,6 @@ ENTRY(__fixunsdfsi)
 	movl	4(%esp),%eax
 	orl	$0x80000000,%eax	/* restore bias */
 	ret
+END(__fixunsdfsi)
 
 fbiggestsigned:	.double	2147483648.0

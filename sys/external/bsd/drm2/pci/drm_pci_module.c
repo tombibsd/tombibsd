@@ -48,6 +48,7 @@ const struct drm_agp_hooks drmkms_pci_agp_hooks = {
 	.agph_bind_ioctl = &drm_agp_bind_ioctl,
 	.agph_unbind_ioctl = &drm_agp_unbind_ioctl,
 	.agph_release = &drm_agp_release,
+	.agph_clear = &drm_agp_clear,
 };
 
 static int

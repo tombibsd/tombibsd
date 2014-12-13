@@ -8,7 +8,7 @@
 .if ${MKSHARE} != "no" || \
 	make(clean) || make(cleandir) || make(distclean) || make(obj)
 SUBDIR=	dict doc examples legal man me misc mk \
-	tabset terminfo tmac wscons xml zoneinfo
+	tabset terminfo tmac wscons xml
 .if ${MKNLS} != "no"
 SUBDIR+=i18n locale nls
 .endif

@@ -183,6 +183,7 @@ const struct cdevsw pnozz_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = p9100mmap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = 0
 };
 

@@ -44,6 +44,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include "hdaudiovar.h"
 #include "hdaudioreg.h"
 #include "hdaudioio.h"
+#include "hdaudio_verbose.h"
 
 /* #define	HDAUDIO_DEBUG */
 
@@ -68,6 +69,7 @@ const struct cdevsw hdaudio_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = nommap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_OTHER
 };
 
@@ -1628,3 +1630,5 @@ hdaudio_modcmd(modcmd_t cmd, void *opaque)
 		return ENOTTY;
 	}
 }
+
+DEV_VERBOSE_DEFINE(hdaudio);

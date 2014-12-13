@@ -86,13 +86,13 @@ tsrtc_match(device_t parent, cfdata_t cf, void *aux)
 		return (0);
 
 	/* Read from the seconds counter. */
-	t1 = FROMBCD(tsrtc_read(sc, MC_SEC));
+	t1 = bcdtobin(tsrtc_read(sc, MC_SEC));
 	if (t1 > 59)
 		goto unmap;
 
 	/* Wait, then look again. */
 	DELAY(1100000);
-	t2 = FROMBCD(tsrtc_read(sc, MC_SEC));
+	t2 = bcdtobin(tsrtc_read(sc, MC_SEC));
 	if (t2 > 59)
 		goto unmap;
 

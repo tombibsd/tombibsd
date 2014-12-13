@@ -27,6 +27,8 @@ GENPROG_ERROR_DEPENDS=errors.lo
 .include "../Makefile.options"
 .include "../../Makefile.hooks"
 
+${SRCS}: ${GCCARCH}/defs.mk
+
 ${G_common_out_file:T:R}.o:  common/common-target-hooks-def.h
 
 DPSRCS+=	options.h

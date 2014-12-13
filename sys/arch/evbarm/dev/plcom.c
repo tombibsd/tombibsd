@@ -204,6 +204,7 @@ const struct cdevsw plcom_cdevsw = {
 	.d_poll = plcompoll,
 	.d_mmap = nommap,
 	.d_kqfilter = ttykqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_TTY
 };
 
@@ -244,11 +245,10 @@ int	plcom_kgdb_getc (void *);
 void	plcom_kgdb_putc (void *, int);
 #endif /* KGDB */
 
-#define	PLCOMUNIT_MASK		0x7ffff
-#define	PLCOMDIALOUT_MASK	0x80000
+#define	PLCOMDIALOUT_MASK	TTDIALOUT_MASK
 
-#define	PLCOMUNIT(x)	(minor(x) & PLCOMUNIT_MASK)
-#define	PLCOMDIALOUT(x)	(minor(x) & PLCOMDIALOUT_MASK)
+#define	PLCOMUNIT(x)	TTUNIT(x)
+#define	PLCOMDIALOUT(x)	TTDIALOUT(x)
 
 #define	PLCOM_ISALIVE(sc)	((sc)->enabled != 0 && \
 				 device_is_active((sc)->sc_dev))
@@ -561,7 +561,7 @@ plcom_attach_subr(struct plcom_softc *sc)
 
 #ifdef RND_COM
 	rnd_attach_source(&sc->rnd_source, device_xname(sc->sc_dev),
-	    RND_TYPE_TTY, 0);
+	    RND_TYPE_TTY, RND_FLAG_DEFAULT);
 #endif
 
 	/*

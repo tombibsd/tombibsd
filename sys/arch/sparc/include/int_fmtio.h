@@ -32,6 +32,9 @@
 #ifndef _SPARC_INT_FMTIO_H_
 #define _SPARC_INT_FMTIO_H_
 
+#ifdef __INTPTR_FMTd__
+#include <sys/common_int_fmtio.h>
+#else
 /*
  * 7.8.1 Macros for format specifiers
  */
@@ -405,5 +408,7 @@
 #define	SCNxMAX		"llx"	/* uintmax_t		*/
 #endif
 #define	SCNxPTR		"lx"	/* uintptr_t		*/
+
+#endif /* !__INTPTR_FMTd__ */
 
 #endif /* !_SPARC_INT_FMTIO_H_ */

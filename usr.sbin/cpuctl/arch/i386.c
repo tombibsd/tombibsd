@@ -220,6 +220,7 @@ static void	tmx86_get_longrun_status(u_int *, u_int *, u_int *);
 static void	transmeta_cpu_info(struct cpu_info *);
 /* Common functions */
 static void	cpu_probe_base_features(struct cpu_info *, const char *);
+static void	cpu_probe_hv_features(struct cpu_info *, const char *);
 static void	cpu_probe_features(struct cpu_info *);
 static void	print_bits(const char *, const char *, const char *, uint32_t);
 static void	identifycpu_cpuids(struct cpu_info *);
@@ -348,19 +349,26 @@ const struct cpu_cpuid_nameclass i386_cpuid_cpus[] = {
 				[0x2f] = "Xeon E7 family",
 				[0x35] = "Atom Family",
 				[0x36] = "Atom S1000",
-				[0x37] = "Atom C2000, E3000",
+				[0x37] = "Atom E3000, Z3000",
 				[0x3a] = "Xeon E3-1200v2 and 3rd gen core, "
 					 "Ivy Bridge",
 				[0x3c] = "4th gen Core, Xeon E3-12xx v3 "
 					 "(Haswell)",
-				[0x3d] = "Next gen Core",
-				[0x3e] = "Xeon E5/E7, Ivy Bridge-EP",
-				[0x3f] = "Future gen Xeon",
+				[0x3d] = "Core M-5xxx (Broadwell)",
+				[0x3e] = "Xeon E5/E7 v2 (Ivy Bridge-E), "
+					 "Core i7-49xx Extreme",
+				[0x3f] = "Xeon E5-2600/1600 v3 (Haswell-E), "
+					 "Core i7-59xx Extreme",
 				[0x45] = "4th gen Core, Xeon E3-12xx v3 "
 					 "(Haswell)",
 				[0x46] = "4th gen Core, Xeon E3-12xx v3 "
 					 "(Haswell)",
-				[0x4d] = "Atom C2000, E3000",
+				[0x4a] = "Future Atom E3000, Z3000",
+				[0x4d] = "Atom C2000",
+				[0x4e] = "Future Core",
+				[0x56] = "Future Xeon",
+				[0x5a] = "Future Atom E3000, Z3000",
+				[0x5d] = "Future Atom E3000, Z3000",
 			},
 			"Pentium Pro, II or III",	/* Default */
 			NULL,
@@ -997,6 +1005,9 @@ intel_cpu_cacheinfo(struct cpu_info *ci)
 				    desc);
 				if (cai != NULL)
 					ci->ci_cinfo[cai->cai_index] = *cai;
+				else if ((verbose != 0) && (desc != 0xff))
+					printf("Unknown cacheinfo desc %02x\n",
+					    desc);
 			}
 		}
 		x86_cpuid(2, descs);
@@ -1433,39 +1444,16 @@ cpu_probe_base_features(struct cpu_info *ci, const char *cpuname)
 	ci->ci_vendor[1] = descs[3];
 	ci->ci_vendor[3] = 0;
 
-	aprint_verbose("%s: highest basic info %08x\n", cpuname,
-	    ci->ci_cpuid_level);
-	if (verbose) {
-		int bf;
-		
-		for (bf = 0; bf <= ci->ci_cpuid_level; bf++) {
-			x86_cpuid(bf, descs);
-			printf("%s: %08x: %08x %08x %08x %08x\n", cpuname,
-			    bf, descs[0], descs[1], descs[2], descs[3]);
-		}
-	}
-
 	/*
 	 * Fn8000_0000:
 	 * - Get cpuid extended function's max level.
 	 */
 	x86_cpuid(0x80000000, descs);
-	if (descs[0] >=  0x80000000) {
+	if (descs[0] >= 0x80000000)
 		ci->ci_cpuid_extlevel = descs[0];
-		aprint_verbose("%s: highest extended info %08x\n", cpuname,
-		    ci->ci_cpuid_extlevel);
-	} else {
+	else {
 		/* Set lower value than 0x80000000 */
 		ci->ci_cpuid_extlevel = 0;
-	}
-	if (verbose) {
-		unsigned int ef;
-
-		for (ef = 0x80000000; ef <= ci->ci_cpuid_extlevel; ef++) {
-			x86_cpuid(ef, descs);
-			printf("%s: %08x: %08x %08x %08x %08x\n", cpuname,
-			    ef, descs[0], descs[1], descs[2], descs[3]);
-		}
 	}
 
 	/*
@@ -1533,6 +1521,51 @@ cpu_probe_base_features(struct cpu_info *ci, const char *cpuname)
 	/* Additional flags (eg xsaveopt support) */
 	x86_cpuid2(0xd, 1, descs);
 	ci->ci_feat_val[6] = descs[0];   /* Actually 64 bits */
+}
+
+static void
+cpu_probe_hv_features(struct cpu_info *ci, const char *cpuname)
+{
+	uint32_t descs[4];
+	char hv_sig[13];
+	char *p;
+	const char *hv_name;
+	int i;
+
+	/*
+	 * [RFC] CPUID usage for interaction between Hypervisors and Linux.
+	 * http://lkml.org/lkml/2008/10/1/246
+	 *
+	 * KB1009458: Mechanisms to determine if software is running in
+	 * a VMware virtual machine
+	 * http://kb.vmware.com/kb/1009458
+	 */
+	if ((ci->ci_feat_val[1] & CPUID2_RAZ) != 0) {
+		x86_cpuid(0x40000000, descs);
+		for (i = 1, p = hv_sig; i < 4; i++, p += sizeof(descs) / 4)
+			memcpy(p, &descs[i], sizeof(descs[i]));
+		*p = '\0';
+		/*
+		 * HV vendor	ID string
+		 * ------------+--------------
+		 * KVM		"KVMKVMKVM"
+		 * Microsoft	"Microsoft Hv"
+		 * VMware	"VMwareVMware"
+		 * Xen		"XenVMMXenVMM"
+		 */
+		if (strncmp(hv_sig, "KVMKVMKVM", 9) == 0)
+			hv_name = "KVM";
+		else if (strncmp(hv_sig, "Microsoft Hv", 12) == 0)
+			hv_name = "Hyper-V";
+		else if (strncmp(hv_sig, "VMwareVMware", 12) == 0)
+			hv_name = "VMware";
+		else if (strncmp(hv_sig, "XenVMMXenVMM", 12) == 0)
+			hv_name = "Xen";
+		else
+			hv_name = "unknown";
+
+		printf("%s: Running on hypervisor: %s\n", cpuname, hv_name);
+	}
 }
 
 static void
@@ -1650,6 +1683,7 @@ identifycpu(int fd, const char *cpuname)
 	const struct cpu_cpuid_nameclass *cpup = NULL;
 	const struct cpu_cpuid_family *cpufam;
 	struct cpu_info *ci, cistore;
+	u_int descs[4];
 	size_t sz;
 	struct cpu_ucode_version ucode;
 	union {
@@ -1659,6 +1693,31 @@ identifycpu(int fd, const char *cpuname)
 
 	ci = &cistore;
 	cpu_probe_base_features(ci, cpuname);
+	aprint_verbose("%s: highest basic info %08x\n", cpuname,
+	    ci->ci_cpuid_level);
+	if (verbose) {
+		int bf;
+		
+		for (bf = 0; bf <= ci->ci_cpuid_level; bf++) {
+			x86_cpuid(bf, descs);
+			printf("%s: %08x: %08x %08x %08x %08x\n", cpuname,
+			    bf, descs[0], descs[1], descs[2], descs[3]);
+		}
+	}
+	if (ci->ci_cpuid_extlevel >=  0x80000000)
+		aprint_verbose("%s: highest extended info %08x\n", cpuname,
+		    ci->ci_cpuid_extlevel);
+	if (verbose) {
+		unsigned int ef;
+
+		for (ef = 0x80000000; ef <= ci->ci_cpuid_extlevel; ef++) {
+			x86_cpuid(ef, descs);
+			printf("%s: %08x: %08x %08x %08x %08x\n", cpuname,
+			    ef, descs[0], descs[1], descs[2], descs[3]);
+		}
+	}
+
+	cpu_probe_hv_features(ci, cpuname);
 	cpu_probe_features(ci);
 
 	if (ci->ci_cpu_type >= 0) {

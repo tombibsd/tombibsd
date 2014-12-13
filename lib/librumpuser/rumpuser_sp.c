@@ -862,7 +862,7 @@ int
 rumpuser_sp_anonmmap(void *arg, size_t howmuch, void **addr)
 {
 	struct spclient *spc = arg;
-	void *resp, *rdata;
+	void *resp, *rdata = NULL; /* XXXuninit */
 	int nlocks, rv;
 
 	rumpkern_unsched(&nlocks, NULL);
@@ -982,8 +982,11 @@ handlereq(struct spclient *spc)
 			/* XXX make sure it contains sensible chars? */
 			comm[commlen] = '\0';
 
+			/* make sure we fork off of proc1 */
+			_DIAGASSERT(lwproc_curlwp() == NULL);
+
 			if ((error = lwproc_rfork(spc,
-			    RUMP_RFCFDG, comm)) != 0) {
+			    RUMP_RFFD_CLEAR, comm)) != 0) {
 				shutdown(spc->spc_fd, SHUT_RDWR);
 			}
 
@@ -1048,7 +1051,8 @@ handlereq(struct spclient *spc)
 			 * the wrong spc pointer.  (yea, optimize
 			 * interfaces some day if anyone cares)
 			 */
-			if ((error = lwproc_rfork(spc, 0, NULL)) != 0) {
+			if ((error = lwproc_rfork(spc,
+			    RUMP_RFFD_SHARE, NULL)) != 0) {
 				send_error_resp(spc, reqno,
 				    RUMPSP_ERR_RFORK_FAILED);
 				shutdown(spc->spc_fd, SHUT_RDWR);
@@ -1108,7 +1112,7 @@ handlereq(struct spclient *spc)
 		 * above) so we can safely use it here.
 		 */
 		lwproc_switch(spc->spc_mainlwp);
-		if ((error = lwproc_rfork(spc, RUMP_RFFDG, NULL)) != 0) {
+		if ((error = lwproc_rfork(spc, RUMP_RFFD_COPY, NULL)) != 0) {
 			DPRINTF(("rump_sp: fork failed: %d (%p)\n",error, spc));
 			send_error_resp(spc, reqno, RUMPSP_ERR_RFORK_FAILED);
 			lwproc_switch(NULL);
@@ -1361,7 +1365,6 @@ rumpuser_sp_init(const char *url,
 		fprintf(stderr, "rump_sp: server bind failed\n");
 		goto out;
 	}
-
 	if (listen(s, MAXCLI) == -1) {
 		error = errno;
 		fprintf(stderr, "rump_sp: server listen failed\n");
@@ -1389,8 +1392,8 @@ rumpuser_sp_fini(void *arg)
 	}
 
 	/*
-	 * stuff response into the socket, since this process is just
-	 * about to exit
+	 * stuff response into the socket, since the rump kernel container
+	 * is just about to exit
 	 */
 	if (spc && spc->spc_syscallreq)
 		send_syscall_resp(spc, spc->spc_syscallreq, 0, retval);
@@ -1399,4 +1402,9 @@ rumpuser_sp_fini(void *arg)
 		shutdown(spclist[0].spc_fd, SHUT_RDWR);
 		spfini = 1;
 	}
+
+	/*
+	 * could release thread, but don't bother, since the container
+	 * will be stone dead in a moment.
+	 */
 }

@@ -507,7 +507,7 @@ kue_attach(device_t parent, device_t self, void *aux)
 	if_attach(ifp);
 	ether_ifattach(ifp, sc->kue_desc.kue_macaddr);
 	rnd_attach_source(&sc->rnd_source, device_xname(sc->kue_dev),
-	    RND_TYPE_NET, 0);
+	    RND_TYPE_NET, RND_FLAG_DEFAULT);
 
 	sc->kue_attached = true;
 	splx(s);

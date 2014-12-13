@@ -73,6 +73,7 @@ const struct cdevsw mem_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = mm_mmap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_MPSAFE
 };
 
@@ -88,6 +89,7 @@ const struct cdevsw mem_ultrix_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = mm_mmap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_MPSAFE
 };
 #endif

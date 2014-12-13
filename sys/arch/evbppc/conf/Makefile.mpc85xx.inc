@@ -1,9 +1,8 @@
 #	$NetBSD$
 
-CFLAGS+=		-mmultiple
-CFLAGS+=		-mno-string -misel -Wa,-me500
-CFLAGS+=		-fno-inline-functions-called-once
-AFLAGS+=		-Wa,-me500
+CFLAGS+=		${${ACTIVE_CC} == "gcc":? -misel -Wa,-me500 :}
+CFLAGS+=		${${ACTIVE_CC} == "gcc":? -fno-inline-functions-called-once :}
+AFLAGS+=		${${ACTIVE_CC} == "gcc":? -Wa,-me500 :}
 # gcc emits bad code with these options
 #AFLAGS+=		-mcpu=8548 
 #CFLAGS+=		-mcpu=8548 

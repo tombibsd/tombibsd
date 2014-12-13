@@ -38,6 +38,8 @@ __RCSID("$NetBSD$");
 
 #undef memcpy
 
+char *__strcpy_chk(char * __restrict, const char * __restrict, size_t);
+
 char *
 __strcpy_chk(char * __restrict dst, const char * __restrict src, size_t slen)
 {

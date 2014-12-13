@@ -139,6 +139,7 @@ const struct cdevsw kbd_cdevsw = {
 	.d_poll = kbdpoll,
 	.d_mmap = nommap,
 	.d_kqfilter = kbdkqfilter,
+	.d_discard = nodiscard,
 	.d_flag = 0
 };
 
@@ -210,7 +211,7 @@ kbdattach(device_t parent, device_t self, void *aux)
 		timeout = KBD->ac_da;
 
 	/*
-	 * Now send the reset string, and read+ignore it's response
+	 * Now send the reset string, and read+ignore its response
 	 */
 	if (!kbd_write_poll(kbd_rst, 2))
 		printf("kbd: error cannot reset keyboard\n");

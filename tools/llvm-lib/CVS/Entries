@@ -19,6 +19,7 @@ D/libLLVMAsmPrinter////
 D/libLLVMBitReader////
 D/libLLVMBitWriter////
 D/libLLVMCodeGen////
+D/libLLVMDebugInfo////
 D/libLLVMIR////
 D/libLLVMIRReader////
 D/libLLVMInstCombine////
@@ -42,6 +43,7 @@ D/libLLVMPowerPCCodeGen////
 D/libLLVMPowerPCDisassembler////
 D/libLLVMPowerPCMCTargetDesc////
 D/libLLVMPowerPCTargetInfo////
+D/libLLVMProfileData////
 D/libLLVMRuntimeDyld////
 D/libLLVMScalarOpts////
 D/libLLVMSelectionDAG////
@@ -88,12 +90,12 @@ D/libclangCodeGen////
 D/libclangDriver////
 D/libclangEdit////
 D/libclangFrontend////
+D/libclangFrontendRewrite////
 D/libclangFrontendTool////
 D/libclangIndex////
 D/libclangLex////
 D/libclangParse////
-D/libclangRewriteCore////
-D/libclangRewriteFrontend////
+D/libclangRewrite////
 D/libclangSema////
 D/libclangSerialization////
 D/libclangStaticAnalyzerCheckers////

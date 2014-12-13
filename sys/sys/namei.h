@@ -5,7 +5,7 @@
  * WARNING: GENERATED FILE.  DO NOT EDIT
  * (edit namei.src and run make namei in src/sys/sys)
  *   by:   NetBSD: gennameih.awk,v 1.5 2009/12/23 14:17:19 pooka Exp 
- *   from: NetBSD: namei.src,v 1.31 2012/11/18 18:25:08 dholland Exp 
+ *   from: NetBSD: namei.src,v 1.33 2014/06/03 21:16:15 joerg Exp 
  */
 
 /*
@@ -85,6 +85,26 @@ void pathbuf_stringcopy_put(struct pathbuf *, const char *);
 int pathbuf_maybe_copyin(const char *userpath, enum uio_seg seg, struct pathbuf **ret);
 
 /*
+ * Lookup parameters: this structure describes the subset of
+ * information from the nameidata structure that is passed
+ * through the VOP interface.
+ */
+struct componentname {
+	/*
+	 * Arguments to lookup.
+	 */
+	uint32_t	cn_nameiop;	/* namei operation */
+	uint32_t	cn_flags;	/* flags to namei */
+	kauth_cred_t 	cn_cred;	/* credentials */
+	/*
+	 * Shared between lookup and commit routines.
+	 */
+	const char 	*cn_nameptr;	/* pointer to looked up name */
+	size_t		cn_namelen;	/* length of looked up comp */
+	size_t		cn_consume;	/* chars to consume in lookup */
+};
+
+/*
  * Encapsulation of namei parameters.
  */
 struct nameidata {
@@ -115,20 +135,7 @@ struct nameidata {
 	 * information from the nameidata structure that is passed
 	 * through the VOP interface.
 	 */
-	struct componentname {
-		/*
-		 * Arguments to lookup.
-		 */
-		uint32_t	cn_nameiop;	/* namei operation */
-		uint32_t	cn_flags;	/* flags to namei */
-		kauth_cred_t 	cn_cred;	/* credentials */
-		/*
-		 * Shared between lookup and commit routines.
-		 */
-		const char 	*cn_nameptr;	/* pointer to looked up name */
-		size_t		cn_namelen;	/* length of looked up comp */
-		size_t		cn_consume;	/* chars to consume in lookup */
-	} ni_cnd;
+	struct componentname ni_cnd;
 };
 
 /*
@@ -229,8 +236,8 @@ struct cpu_info;
 
 extern pool_cache_t pnbuf_cache;	/* pathname buffer cache */
 
-#define	PNBUF_GET()	pool_cache_get(pnbuf_cache, PR_WAITOK)
-#define	PNBUF_PUT(pnb)	pool_cache_put(pnbuf_cache, (pnb))
+#define	PNBUF_GET()	((char *)pool_cache_get(pnbuf_cache, PR_WAITOK))
+#define	PNBUF_PUT(pnb)	pool_cache_put(pnbuf_cache, (void *)(pnb))
 
 /*
  * Typesafe flags for namei_simple/nameiat_simple.
@@ -286,6 +293,8 @@ void	cache_enter(struct vnode *, struct vnode *,
 			const char *, size_t, uint32_t);
 void	nchinit(void);
 void	nchreinit(void);
+void	namecache_count_pass2(void);
+void	namecache_count_2passes(void);
 void	cache_cpu_init(struct cpu_info *);
 void	cache_purgevfs(struct mount *);
 void	namecache_print(struct vnode *, void (*)(const char *, ...)
@@ -308,6 +317,19 @@ struct	nchstats {
 	long	ncs_2passes;		/* number of times we attempt it */
 	long	ncs_revhits;		/* reverse-cache hits */
 	long	ncs_revmiss;		/* reverse-cache misses */
+};
+
+struct	nchstats_sysctl {
+	uint64_t ncs_goodhits;		/* hits that we can really use */
+	uint64_t ncs_neghits;		/* negative hits that we can use */
+	uint64_t ncs_badhits;		/* hits we must drop */
+	uint64_t ncs_falsehits;		/* hits with id mismatch */
+	uint64_t ncs_miss;		/* misses */
+	uint64_t ncs_long;		/* long names that ignore cache */
+	uint64_t ncs_pass2;		/* names found with passes == 2 */
+	uint64_t ncs_2passes;		/* number of times we attempt it */
+	uint64_t ncs_revhits;		/* reverse-cache hits */
+	uint64_t ncs_revmiss;		/* reverse-cache misses */
 };
 
 #ifdef _KERNEL

@@ -36,6 +36,7 @@
 /2011-11-17-selfphi.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /2012-07-17-lftr-undef.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /2012-10-19-congruent-constant.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/2014-06-21-congruent-constant.ll/1.1.1.1/Sun Aug 10 17:04:36 2014/-kk/
 /ada-loops.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /ashr-tripcount.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /avoid-i0.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
@@ -81,6 +82,7 @@
 /overflowcheck.ll/1.1.1.1/Sun Jan  5 16:16:56 2014/-kk/
 /phi-uses-value-multiple-times.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /polynomial-expand.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/pr18223.ll/1.1.1.1/Fri May 30 18:11:26 2014/-kk/
 /preserve-signed-wrap.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /promote-iv-to-eliminate-casts.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /shrunk-constant.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/

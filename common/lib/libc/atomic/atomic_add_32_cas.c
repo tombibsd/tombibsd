@@ -74,3 +74,5 @@ __strong_alias(_atomic_add_long,_atomic_add_32)
 atomic_op_alias(atomic_add_ptr,_atomic_add_32)
 __strong_alias(_atomic_add_ptr,_atomic_add_32)
 #endif /* _LP64 */
+
+__strong_alias(__atomic_fetch_add_4,__sync_fetch_and_add_4)

@@ -290,6 +290,8 @@ mvphy_status(struct mii_softc *sc)
 			mii->mii_media_active |= IFM_10_T;
 		if (hwstatus & MV_STATUS_RESOLVED_DUPLEX_FULL)
 			mii->mii_media_active |= IFM_FDX;
+		else
+			mii->mii_media_active |= IFM_HDX;
 	} else {
 		mii->mii_media_active |= IFM_NONE;
 		/* XXX flush ATU only on link down transition */

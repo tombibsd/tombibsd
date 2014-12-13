@@ -60,4 +60,4 @@ void _sif_call_end(void);
 
 /* SPL */
 void md_ipl_register(enum ipl_type, struct _ipl_holder *);
-inline void md_imask_update(void);
+void md_imask_update(void);

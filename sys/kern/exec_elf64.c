@@ -60,7 +60,7 @@ static struct execsw exec_elf64_execsw[] = {
 			.elf_probe_func = netbsd_elf64_probe,
 		},
 		.es_emul = &emul_netbsd,
-		.es_prio = EXECSW_PRIO_ANY,
+		.es_prio = EXECSW_PRIO_FIRST,
 		.es_arglen = ELF64_AUXSIZE,
 		.es_copyargs = elf64_copyargs,
 		.es_setregs = NULL,

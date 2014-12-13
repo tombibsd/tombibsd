@@ -138,6 +138,7 @@ const struct cdevsw fcom_cdevsw = {
 	.d_poll = fcompoll,
 	.d_mmap = nommap,
 	.d_kqfilter = ttykqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_TTY
 };
 

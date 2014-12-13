@@ -928,7 +928,7 @@ linux_sys_ppoll(struct lwp *l,
 {
 	/* {
 		syscallarg(struct pollfd *) fds;
-		syscallarg(int) nfds;
+		syscallarg(u_int) nfds;
 		syscallarg(struct linux_timespec *) timeout;
 		syscallarg(linux_sigset_t *) sigset;
 	} */
@@ -1377,34 +1377,6 @@ linux_sys_getpriority(struct lwp *l, const struct linux_sys_getpriority_args *ua
         *retval = NZERO - *retval;
 
         return 0;
-}
-
-int
-linux_sys_utimes(struct lwp *l, const struct linux_sys_utimes_args *uap, register_t *retval)
-{
-	/* {
-		syscallarg(const char *) path;
-		syscallarg(const struct linux_timeval) *times;
-	} */
-	struct linux_timeval ltv[2];
-	struct timeval tv[2];
-	struct timeval *tptr = NULL;
-	int error;
-
-	if (SCARG(uap, times)) {
-		if ((error = copyin(SCARG(uap, times), &ltv, sizeof(ltv))))
-			return error;
-
-		tv[0].tv_sec = ltv[0].tv_sec;
-		tv[0].tv_usec = ltv[0].tv_usec;
-		tv[1].tv_sec = ltv[1].tv_sec;
-		tv[1].tv_usec = ltv[1].tv_usec;
-
-		tptr = tv;
-	}
-
-	return do_sys_utimes(l, NULL, SCARG(uap, path), FOLLOW,
-	    tptr, UIO_SYSSPACE);
 }
 
 int

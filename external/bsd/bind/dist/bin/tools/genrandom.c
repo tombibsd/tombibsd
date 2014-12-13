@@ -1,7 +1,7 @@
 /*	$NetBSD$	*/
 
 /*
- * Copyright (C) 2004, 2005, 2007, 2009, 2010, 2012  Internet Systems Consortium, Inc. ("ISC")
+ * Copyright (C) 2004, 2005, 2007, 2009, 2010, 2012, 2014  Internet Systems Consortium, Inc. ("ISC")
  * Copyright (C) 2000-2003  Internet Software Consortium.
  *
  * Permission to use, copy, modify, and/or distribute this software for any
@@ -122,7 +122,9 @@ main(int argc, char **argv) {
 		return (0);
 	}
 
-	len = strlen(argv[isc_commandline_index]) + 2;
+	len = strlen(argv[isc_commandline_index]);
+	INSIST((len + 2) > len);
+	len += 2;
 	name = (char *) malloc(len);
 	if (name == NULL) {
 		perror("malloc");

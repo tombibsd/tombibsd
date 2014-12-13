@@ -1,5 +1,5 @@
 /Makefile.inc/1.6/Wed Apr 22 15:23:01 2009/-kk/
-/Makefile/1.268/Tue Dec 17 04:05:19 2013/-kk/
+/Makefile/1.269/Fri Oct  3 09:09:42 2014/-kk/
 D/ac////
 D/accton////
 D/acpitools////
@@ -131,6 +131,7 @@ D/srtconfig////
 D/sti////
 D/sunlabel////
 D/sup////
+D/sysinst////
 D/syslogd////
 D/tadpolectl////
 D/tcpdchk////

@@ -97,8 +97,8 @@ static int	tcp_callrpc(const char *host, int prognum, int versnum,
     int procnum, xdrproc_t inproc, char *in, xdrproc_t outproc, char *out);
 
 /*
- * This command queries the NFS mount daemon for it's mount list and/or
- * it's exports list and prints them out.
+ * This command queries the NFS mount daemon for its mount list and/or
+ * its exports list and prints them out.
  * See "NFS: Network File System Protocol Specification, RFC1094, Appendix A"
  * and the "Network File System Protocol XXX.."
  * for detailed information on the protocol.

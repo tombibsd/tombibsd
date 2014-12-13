@@ -84,6 +84,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/syscallargs.h>
 #include <sys/kauth.h>
 #include <sys/ktrace.h>
+#include <sys/rnd.h>
 
 #define	MAXDESCLEN	1024
 MALLOC_DEFINE(M_SYSCTLNODE, "sysctlnode", "sysctl node structures");
@@ -123,13 +124,7 @@ struct sysctlnode sysctl_root = {
 	    CTLFLAG_ROOT|CTLFLAG_READWRITE|
 	    CTLTYPE_NODE,
 	.sysctl_num = 0,
-	/*
-	 * XXX once all ports are on gcc3, we can get rid of this
-	 * ugliness and simply make it into
-	 *
-	 *	.sysctl_size = sizeof(struct sysctlnode),
-	 */
-	sysc_init_field(_sysctl_size, sizeof(struct sysctlnode)),
+	.sysctl_size = sizeof(struct sysctlnode),
 	.sysctl_name = "(root)",
 };
 
@@ -304,14 +299,14 @@ sys___sysctl(struct lwp *l, const struct sys___sysctl_args *uap, register_t *ret
 
 	ktrmib(name, SCARG(uap, namelen));
 
-	sysctl_lock(SCARG(uap, new) != NULL);
+	sysctl_lock(SCARG(uap, newv) != NULL);
 
 	/*
 	 * do sysctl work (NULL means main built-in default tree)
 	 */
 	error = sysctl_dispatch(&name[0], SCARG(uap, namelen),
-				SCARG(uap, old), &oldlen,
-				SCARG(uap, new), SCARG(uap, newlen),
+				SCARG(uap, oldv), &oldlen,
+				SCARG(uap, newv), SCARG(uap, newlen),
 				&name[0], l, NULL);
 
 	/*
@@ -334,7 +329,7 @@ sys___sysctl(struct lwp *l, const struct sys___sysctl_args *uap, register_t *ret
 	 * if the only problem is that we weren't given enough space,
 	 * that's an ENOMEM error
 	 */
-	if (error == 0 && SCARG(uap, old) != NULL && savelen < oldlen)
+	if (error == 0 && SCARG(uap, oldv) != NULL && savelen < oldlen)
 		error = ENOMEM;
 
 	return (error);
@@ -1429,9 +1424,7 @@ sysctl_lookup(SYSCTLFN_ARGS)
 {
 	int error, rw;
 	size_t sz, len;
-	void *d, *d_out;
-	uint64_t qval;
-	int ival;
+	void *d;
 
 	KASSERT(rw_lock_held(&sysctl_treelock));
 
@@ -1507,38 +1500,13 @@ sysctl_lookup(SYSCTLFN_ARGS)
 		d = __UNCONST(&rnode->sysctl_qdata);
 	} else
 		d = rnode->sysctl_data;
-	d_out = d;
 
-	sz = rnode->sysctl_size;
-	switch (SYSCTL_TYPE(rnode->sysctl_flags)) {
-	case CTLTYPE_INT:
-		/* Allow for 64bit read of 32bit value */
-		if (*oldlenp != sz && *oldlenp == sizeof (uint64_t)) {
-			qval = *(int *)d;
-			d_out = &qval;
-			sz =  sizeof (uint64_t);
-		}
-		break;
-	case CTLTYPE_QUAD:
-		/* Allow for 32bit read of 64bit value */
-		if (*oldlenp != sz && *oldlenp == sizeof (int)) {
-			qval = *(uint64_t *)d;
-			ival = qval;
-			/* Replace out of range values with -1 */
-			if (ival != qval)
-				ival = -1;
-			d_out = &ival;
-			sz =  sizeof (int);
-		}
-		break;
-	case CTLTYPE_STRING:
+	if (SYSCTL_TYPE(rnode->sysctl_flags) == CTLTYPE_STRING)
 		sz = strlen(d) + 1; /* XXX@@@ possible fault here */
-		break;
-	default:
-		break;
-	}
+	else
+		sz = rnode->sysctl_size;
 	if (oldp != NULL) {
-		error = sysctl_copyout(l, d_out, oldp, MIN(sz, *oldlenp));
+		error = sysctl_copyout(l, d, oldp, MIN(sz, *oldlenp));
 		if (error) {
 			DPRINTF(("%s: bad copyout %d\n", __func__, error));
 			return error;
@@ -1581,27 +1549,6 @@ sysctl_lookup(SYSCTLFN_ARGS)
 	}
 	case CTLTYPE_INT:
 	case CTLTYPE_QUAD:
-		/* Allow 32bit of 64bit integers */
-		if (newlen == sizeof (uint64_t)) {
-			error = sysctl_copyin(l, newp, &qval, sizeof qval);
-		} else if (newlen == sizeof (int)) {
-			error = sysctl_copyin(l, newp, &ival, sizeof ival);
-			qval = ival;
-		} else {
-			goto bad_size;
-		}
-		if (!error) {
-			if (SYSCTL_TYPE(rnode->sysctl_flags) == CTLTYPE_INT) {
-				ival = qval;
-				/* Error out of range values */
-				if (ival != qval)
-					goto bad_size;
-				*(int *)d = ival;
-			} else {
-				*(uint64_t *)d = qval;
-			}
-		}
-		break;
 	case CTLTYPE_STRUCT:
 		/*
 		 * these data must be *exactly* the same size coming
@@ -1610,6 +1557,7 @@ sysctl_lookup(SYSCTLFN_ARGS)
 		if (newlen != sz)
 			goto bad_size;
 		error = sysctl_copyin(l, newp, d, sz);
+		rnd_add_data(NULL, d, sz, 0);
 		break;
 	case CTLTYPE_STRING: {
 		/*
@@ -1653,8 +1601,10 @@ sysctl_lookup(SYSCTLFN_ARGS)
 		/*
 		 * looks good, so pop it into place and zero the rest.
 		 */
-		if (len > 0)
+		if (len > 0) {
 			memcpy(d, newbuf, len);
+			rnd_add_data(NULL, d, len, 0);
+		}
 		if (sz != len)
 			memset((char*)d + len, 0, sz - len);
 		free(newbuf, M_SYSCTLDATA);
@@ -1686,6 +1636,7 @@ sysctl_mmap(SYSCTLFN_ARGS)
 	const struct sysctlnode *node;
 	struct sysctlnode nnode;
 	int error;
+	int sysctl_num;
 
 	if (SYSCTL_VERS(rnode->sysctl_flags) != SYSCTL_VERSION) {
 		printf("sysctl_mmap: rnode %p wrong version\n", rnode);
@@ -1713,7 +1664,8 @@ sysctl_mmap(SYSCTLFN_ARGS)
 	if (namelen != 1)
 		return (EOPNOTSUPP);
 	node = rnode;
-        error = sysctl_locate(l, &nnode.sysctl_num, 1, &node, NULL);
+	sysctl_num = nnode.sysctl_num;
+	error = sysctl_locate(l, &sysctl_num, 1, &node, NULL);
 	if (error)
 		return (error);
 

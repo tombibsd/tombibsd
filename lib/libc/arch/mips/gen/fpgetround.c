@@ -23,6 +23,6 @@ fpgetround(void)
 {
 	fp_rnd x;
 
-	__asm("cfc1 %0,$31" : "=r" (x));
+	__asm(".set push; .set noat; cfc1 %0,$31; .set pop" : "=r" (x));
 	return x & 0x03;
 }

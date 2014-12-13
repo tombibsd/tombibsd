@@ -75,6 +75,7 @@ ENTRY(__setjmp14)
 #endif
 2:	xorl	%eax,%eax
 	ret
+END(__setjmp14)
 
 ENTRY(__longjmp14)
 	movq	%rdi,%r12
@@ -106,3 +107,4 @@ ENTRY(__longjmp14)
 	incl	%eax
 1:	movq	%r11,0(%rsp)
 	ret
+END(__longjmp14)

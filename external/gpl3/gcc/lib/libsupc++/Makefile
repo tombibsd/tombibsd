@@ -8,7 +8,7 @@ NOPROFILE=	# defined
 CWARNFLAGS.clang+=	-Wno-parentheses
 UNSUPPORTED_COMPILER.clang=	# defined
 
-.include <bsd.own.mk>
+.include <bsd.init.mk>
 
 GCC_MACHINE_ARCH?=${MACHINE_ARCH:S/earmv5/earm/}
 
@@ -27,6 +27,10 @@ CXXFLAGS+=	${G_SECTION_FLAGS}
 
 COPTS.cp-demangle.c = -Wno-stack-protector
 
+.if ${HAVE_LIBGCC_EH} == "no"
+G_CONFIGLINKS:= ${G_CONFIGLINKS:S,libgcc/config/arm/unwind-arm.h,libgcc/unwind-generic.h,}
+.endif
+
 .if ${MKGCC} != "no"
 .if defined(G_CONFIGLINKS) && !empty(G_CONFIGLINKS)
 BUILDSYMLINKS+=        ${G_CONFIGLINKS}
@@ -35,10 +39,6 @@ DPSRCS+=       ${_dst}
 .endfor
 .endif
 .endif
-
-.for f in eh_ptr eh_throw guard atexit_thread nested_exception
-COPTS.${f}.cc+=	-std=gnu++0x
-.endfor
 
 .include <bsd.lib.mk>
 

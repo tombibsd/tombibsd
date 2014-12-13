@@ -154,6 +154,7 @@ fb_sbdio_attach(device_t parent, device_t self, void *aux)
 		ga = malloc(sizeof(struct ga), M_DEVBUF, M_NOWAIT | M_ZERO);
 		if (ga == NULL) {
 			printf(":can't allocate ga memory\n");
+			free(ri, M_DEVBUF);
 			return;
 		}
 		ga->reg_paddr = sa->sa_addr2;

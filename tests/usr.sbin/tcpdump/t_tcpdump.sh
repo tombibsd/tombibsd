@@ -42,6 +42,13 @@ promiscuous_head() {
 promiscuous_body() {
 
 	for i in $(ifconfig -l); do
+		case $i in
+		bridge*)
+			echo "Skipping $i"
+			continue
+			;;
+		esac
+
 		echo "Testing $i"
 		prom $i
 	done

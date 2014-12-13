@@ -6,7 +6,7 @@
 LIB=	rumpdev_audio
 IOCONF=	AUDIO.ioconf
 
-SRCS=	audio.c auconv.c aurateconv.c mulaw.c
+SRCS=	audio.c auconv.c aurateconv.c auvolconv.c mulaw.c
 SRCS+=	audio_component.c
 
 CPPFLAGS+=	-I${.CURDIR}/../../../librump/rumpvfs

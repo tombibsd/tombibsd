@@ -1,0 +1,10 @@
+#	$NetBSD$
+#
+# standard NetBSD/aarch64 options
+
+#maxpartitions	16
+
+options 	MULTIPROCESSOR
+
+options 	EXEC_ELF64
+options 	EXEC_SCRIPT

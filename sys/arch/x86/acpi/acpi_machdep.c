@@ -99,6 +99,7 @@ struct acpi_md_override {
 	int flags;
 };
 
+#if NIOAPIC > 0
 static ACPI_STATUS
 acpi_md_findoverride(ACPI_SUBTABLE_HEADER *hdrp, void *aux)
 {
@@ -117,6 +118,7 @@ acpi_md_findoverride(ACPI_SUBTABLE_HEADER *hdrp, void *aux)
 	}
 	return AE_OK;
 }
+#endif
 
 ACPI_STATUS
 acpi_md_OsInstallInterruptHandler(uint32_t InterruptNumber,

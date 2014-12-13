@@ -39,7 +39,7 @@
 .Fn uvm_km_free "struct vm_map *map" "vaddr_t addr" "vsize_t size" "uvm_flag_t flags"
 .Ft struct vm_map *
 .Fn uvm_km_suballoc "struct vm_map *map" "vaddr_t *min" "vaddr_t *max" \
-"vsize_t size" "int flags" "bool fixed" "struct vm_map_kernel *submap"
+"vsize_t size" "int flags" "bool fixed" "struct vm_map *submap"
 .Sh DESCRIPTION
 The UVM facility for allocation of kernel memory or address space in pages.
 Both wired and pageable memory can be allocated by this facility, as well

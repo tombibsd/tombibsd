@@ -1,5 +1,3 @@
-/*	$NetBSD$	*/
-
 /*	$NetBSD$ */
 
 /*-
@@ -49,6 +47,12 @@ __RCSID("$NetBSD$");
 #include <compat/sys/time.h>
 #include <sys/sem.h>
 #include <compat/sys/sem.h>
+#if defined(__clang__) && defined(__powerpc__) && !defined(__powerpc64__)
+#define __lint__
+#endif
+#ifdef __lint__
+#include <string.h>
+#endif
 
 __warn_references(__semctl13,
     "warning: reference to compatibility __semctl13(); include <sys/sem.h> to generate correct reference")

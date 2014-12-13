@@ -108,6 +108,7 @@ bcmgpio_attach(device_t parent, device_t self, void *aux)
 	
 	sc->sc_dev = self;
 	
+#if NGPIO > 0
 	if (device_unit(sc->sc_dev) > 1) {
 		aprint_naive(" NO GPIO\n");	
 		aprint_normal(": NO GPIO\n");
@@ -127,7 +128,6 @@ bcmgpio_attach(device_t parent, device_t self, void *aux)
 	sc->sc_iot = &bcm2835_bs_tag;
 	sc->sc_ioh = BCM2835_IOPHYSTOVIRT(BCM2835_GPIO_BASE);
 	
-#if NGPIO > 0
 	for (pin = minpin; pin <= maxpin; pin++) {
 	        int epin = pin - minpin;
 	

@@ -10,7 +10,9 @@ SRCS+=	AsmWriter.cpp \
 	Attributes.cpp \
 	AutoUpgrade.cpp \
 	BasicBlock.cpp \
+	Comdat.cpp \
 	ConstantFold.cpp \
+	ConstantRange.cpp \
 	Constants.cpp \
 	Core.cpp \
 	DIBuilder.cpp \
@@ -34,6 +36,7 @@ SRCS+=	AsmWriter.cpp \
 	LLVMContextImpl.cpp \
 	LeakDetector.cpp \
 	LegacyPassManager.cpp \
+	MDBuilder.cpp \
 	Mangler.cpp \
 	Metadata.cpp \
 	Module.cpp \
@@ -43,6 +46,7 @@ SRCS+=	AsmWriter.cpp \
 	Type.cpp \
 	TypeFinder.cpp \
 	Use.cpp \
+	UseListOrder.cpp \
 	User.cpp \
 	Value.cpp \
 	ValueSymbolTable.cpp \

@@ -69,6 +69,8 @@ struct smsc_softc {
 	uint32_t		sc_mac_csr;
 	uint32_t		sc_rev_id;
 
+	uint32_t		sc_coe_ctrl;
+
 	int			sc_if_flags;
 	int			sc_refcnt;
 

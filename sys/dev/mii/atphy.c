@@ -408,7 +408,7 @@ atphy_mii_phy_auto(struct mii_softc *sc)
 	sc->mii_ticks = 0;
 	anar = BMSR_MEDIA_TO_ANAR(sc->mii_capabilities) | ANAR_CSMA;
 	if (sc->mii_flags & MIIF_DOPAUSE)
-		anar |= ANAR_X_PAUSE_TOWARDS;
+		anar |= ANAR_PAUSE_TOWARDS;
 	PHY_WRITE(sc, MII_ANAR, anar);
 	if (sc->mii_extcapabilities & (EXTSR_1000TFDX | EXTSR_1000THDX))
 		PHY_WRITE(sc, MII_100T2CR, GTCR_ADV_1000TFDX |

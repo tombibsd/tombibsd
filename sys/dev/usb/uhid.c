@@ -126,6 +126,7 @@ const struct cdevsw uhid_cdevsw = {
 	.d_poll = uhidpoll,
 	.d_mmap = nommap,
 	.d_kqfilter = uhidkqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_OTHER | D_MPSAFE
 };
 
@@ -218,6 +219,8 @@ uhid_detach(device_t self, int flags)
 	DPRINTF(("uhid_detach: sc=%p flags=%d\n", sc, flags));
 
 	sc->sc_dying = 1;
+
+	pmf_device_deregister(self);
 
 	mutex_enter(&sc->sc_lock);
 	if (sc->sc_hdev.sc_state & UHIDEV_OPEN) {

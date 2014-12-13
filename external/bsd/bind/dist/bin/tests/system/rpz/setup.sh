@@ -14,17 +14,14 @@
 # OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
 # PERFORMANCE OF THIS SOFTWARE.
 
-# Id
-
-
 set -e
 
 SYSTEMTESTTOP=..
 . $SYSTEMTESTTOP/conf.sh
 
-QPERF=`sh qperf.sh`
+QPERF=`$SHELL qperf.sh`
 
-sh clean.sh
+$SHELL clean.sh
 
 # set up test policy zones.
 #   bl is the main test zone
@@ -37,7 +34,7 @@ for NM in '' -2 -given -disabled -passthru -no-op -nodata -nxdomain -cname -wild
 done
 
 # sign the root and a zone in ns2
-test -e $RANDFILE || $GENRANDOM 400 $RANDFILE
+test -r $RANDFILE || $GENRANDOM 400 $RANDFILE
 
 # $1=directory, $2=domain name, $3=input zone file, $4=output file
 signzone () {
@@ -118,3 +115,5 @@ $PERL -e 'for ($cnt = $val = 1; $cnt <= 3000; ++$cnt) {
 	}' >ns5/requests
 
 cp ns2/bl.tld2.db.in ns2/bl.tld2.db
+cp ns5/empty.db.in ns5/empty.db
+cp ns5/empty.db.in ns5/policy2.db

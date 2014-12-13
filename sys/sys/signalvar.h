@@ -130,7 +130,7 @@ void	kpsignal(struct proc *, struct ksiginfo *, void *);
 void	child_psignal(struct proc *, int);
 void	siginit(struct proc *);
 void	trapsignal(struct lwp *, struct ksiginfo *);
-void	sigexit(struct lwp *, int);
+void	sigexit(struct lwp *, int) __dead;
 void	killproc(struct proc *, const char *);
 void	setsigvec(struct proc *, int, struct sigaction *);
 int	killpg1(struct lwp *, struct ksiginfo *, int, int);

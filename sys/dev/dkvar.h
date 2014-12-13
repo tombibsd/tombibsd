@@ -74,7 +74,7 @@ struct dk_intf {
 	int	(*di_open)(dev_t, int, int, struct lwp *);
 	int	(*di_close)(dev_t, int, int, struct lwp *);
 	void	(*di_strategy)(struct buf *);
-	int	(*di_diskstart)(struct dk_softc *, struct buf *);
+	void	(*di_diskstart)(struct dk_softc *);
 };
 
 #define DK_BUSY(_dksc, _pmask)				\
@@ -93,8 +93,6 @@ int	dk_open(struct dk_intf *, struct dk_softc *, dev_t,
 int	dk_close(struct dk_intf *, struct dk_softc *, dev_t,
 		 int, int, struct lwp *);
 void	dk_strategy(struct dk_intf *, struct dk_softc *, struct buf *);
-void	dk_start(struct dk_intf *, struct dk_softc *);
-void	dk_iodone(struct dk_intf *, struct dk_softc *);
 int	dk_size(struct dk_intf *, struct dk_softc *, dev_t);
 int	dk_ioctl(struct dk_intf *, struct dk_softc *, dev_t,
 		 u_long, void *, int, struct lwp *);

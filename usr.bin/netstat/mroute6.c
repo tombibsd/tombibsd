@@ -117,6 +117,7 @@
 #include <stdio.h>
 #include <kvm.h>
 #include "netstat.h"
+#include "rtutil.h"
 
 #ifdef INET6
 
@@ -212,9 +213,9 @@ mroute6pr(u_long mrpaddr, u_long mfcaddr, u_long mifaddr)
 			}
 			
 			printf(" %-*.*s", WID_ORG, WID_ORG,
-			    routename6(&mfc.mf6c_origin));
+			    routename6(&mfc.mf6c_origin, nflag));
 			printf(" %-*.*s", WID_GRP, WID_GRP,
-			    routename6(&mfc.mf6c_mcastgrp));
+			    routename6(&mfc.mf6c_mcastgrp, nflag));
 			printf(" %9llu", (unsigned long long)mfc.mf6c_pkt_cnt);
 
 			for (waitings = 0, rtep = mfc.mf6c_stall; rtep; ) {

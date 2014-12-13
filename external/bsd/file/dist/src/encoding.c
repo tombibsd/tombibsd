@@ -1,5 +1,4 @@
 /*	$NetBSD$	*/
-
 /*
  * Copyright (c) Ian F. Darwin 1986-1995.
  * Software written by Ian F. Darwin and others;
@@ -38,7 +37,7 @@
 
 #ifndef	lint
 #if 0
-FILE_RCSID("@(#)$File: encoding.c,v 1.9 2013/11/19 20:45:50 christos Exp $")
+FILE_RCSID("@(#)$File: encoding.c,v 1.10 2014/09/11 12:08:52 christos Exp $")
 #else
 __RCSID("$NetBSD$");
 #endif
@@ -103,7 +102,6 @@ file_encoding(struct magic_set *ms, const unsigned char *buf, size_t nbytes, uni
 		*code_mime = "utf-8";
 	} else if (file_looks_utf8(buf, nbytes, *ubuf, ulen) > 1) {
 		DPRINTF(("utf8 %" SIZE_T_FORMAT "u\n", *ulen));
-		*code = "UTF-8 Unicode (with BOM)";
 		*code = "UTF-8 Unicode";
 		*code_mime = "utf-8";
 	} else if ((ucs_type = looks_ucs16(buf, nbytes, *ubuf, ulen)) != 0) {

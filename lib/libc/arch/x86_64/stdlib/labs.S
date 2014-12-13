@@ -29,3 +29,10 @@ ENTRY(labs)
         jns     1f
         negq    %rax
 1:      ret
+#ifdef WEAK_ALIAS
+END(_llabs)
+END(_labs)
+#else
+END(llabs)
+END(labs)
+#endif

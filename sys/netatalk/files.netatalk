@@ -2,8 +2,10 @@
 
 defflag opt_atalk.h			NETATALK
 
+define	netatalk
 file	netatalk/aarp.c			netatalk
 file	netatalk/at_control.c		netatalk
+file	netatalk/at_print.c
 file	netatalk/at_proto.c		netatalk
 file	netatalk/at_rmx.c		netatalkdebug
 file	netatalk/ddp_input.c		netatalk

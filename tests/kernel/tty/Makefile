@@ -6,6 +6,8 @@ TESTSDIR=	${TESTSBASE}/kernel/tty
 
 TESTS_C=	t_pr
 
-LDADD+=		-lrumpkern_tty -lrumpvfs -lrump -lrumpuser -lpthread
+LDADD+=		-lrumpkern_tty -lrumpvfs -lrump -lrumpuser
+LDADD+=		-lrump
+LDADD+=		-lpthread
 
 .include <bsd.test.mk>

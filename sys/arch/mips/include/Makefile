@@ -14,7 +14,7 @@ INCS=	ansi.h asm.h \
 	mips1_pte.h mips3_pte.h mips_opcode.h mips_param.h mutex.h \
 	pcb.h pmap.h pmc.h proc.h profile.h psl.h pte.h ptrace.h \
 	reg.h regdef.h regnum.h reloc.h rwlock.h \
-	setjmp.h signal.h sljitarch.h sysarch.h \
+	setjmp.h signal.h sljit_machdep.h sysarch.h \
 	trap.h types.h \
 	vmparam.h \
 	wchar_limits.h

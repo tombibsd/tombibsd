@@ -98,6 +98,7 @@ const struct cdevsw tctrl_cdevsw = {
 	.d_poll = tctrlpoll,
 	.d_mmap = nommap,
 	.d_kqfilter = tctrlkqfilter,
+	.d_discard = nodiscard,
 	.d_flag = 0
 };
 

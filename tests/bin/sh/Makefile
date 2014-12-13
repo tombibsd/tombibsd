@@ -1,8 +1,11 @@
 # $NetBSD$
+#
 
 .include <bsd.own.mk>
 
-TESTSDIR=	${TESTSBASE}/bin/sh
+TESTSDIR = ${TESTSBASE}/bin/sh
+
+TESTS_SUBDIRS += dotcmd
 
 TESTS_SH=	t_compexit
 TESTS_SH+=	t_exit

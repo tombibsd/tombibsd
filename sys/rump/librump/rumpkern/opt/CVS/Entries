@@ -20,6 +20,7 @@
 /opt_poollog.h/1.1/Fri Jan 23 13:14:17 2009/-kk/
 /opt_ptrace.h/1.1/Thu Aug 16 21:26:21 2007/-kk/
 /opt_revcache.h/1.1/Wed Aug  8 09:06:13 2007/-kk/
+/opt_rnd_printf.h/1.2/Sun Aug 10 16:44:36 2014/-kk/
 /opt_rtc_offset.h/1.1/Wed Aug  8 09:06:13 2007/-kk/
 /opt_sysv.h/1.1/Wed Aug  8 09:06:13 2007/-kk/
 /opt_sysvparam.h/1.1/Wed Aug  8 09:06:14 2007/-kk/

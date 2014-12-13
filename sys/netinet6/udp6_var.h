@@ -99,6 +99,9 @@
 }
 
 #ifdef _KERNEL
+
+extern const struct pr_usrreqs udp6_usrreqs;
+
 void	*udp6_ctlinput(int, const struct sockaddr *, void *);
 int	udp6_ctloutput(int, struct socket *, struct sockopt *);
 void	udp6_init(void);
@@ -108,6 +111,9 @@ int	udp6_output(struct in6pcb *, struct mbuf *, struct mbuf *,
 int	udp6_sysctl(int *, u_int, void *, size_t *, void *, size_t);
 int	udp6_usrreq(struct socket *, int, struct mbuf *, struct mbuf *,
     struct mbuf *, struct lwp *);
+int	udp6_realinput(int, struct sockaddr_in6 *, struct sockaddr_in6 *,
+    struct mbuf *, int);
+int	udp6_input_checksum(struct mbuf *, const struct udphdr *, int, int);
 
 void	udp6_statinc(u_int);
 #endif /* _KERNEL */

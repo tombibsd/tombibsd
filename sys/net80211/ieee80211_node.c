@@ -1163,7 +1163,7 @@ ieee80211_find_node(struct ieee80211_node_table *nt, const u_int8_t *macaddr)
  * Fake up a node; this handles node discovery in adhoc mode.
  * Note that for the driver's benefit we treat this like
  * an association so the driver has an opportunity to setup
- * it's private state.
+ * its private state.
  */
 struct ieee80211_node *
 ieee80211_fakeup_adhoc_node(struct ieee80211_node_table *nt,
@@ -1346,7 +1346,7 @@ ieee80211_init_neighbor(struct ieee80211com *ic, struct ieee80211_node *ni,
  * Do node discovery in adhoc mode on receipt of a beacon
  * or probe response frame.  Note that for the driver's
  * benefit we we treat this like an association so the
- * driver has an opportunity to setup it's private state.
+ * driver has an opportunity to setup its private state.
  */
 struct ieee80211_node *
 ieee80211_add_neighbor(struct ieee80211com *ic,
@@ -2313,7 +2313,7 @@ ieee80211_node_leave(struct ieee80211com *ic, struct ieee80211_node *ni)
 	 * Tell the authenticator the station is leaving.
 	 * Note that we must do this before yanking the
 	 * association id as the authenticator uses the
-	 * associd to locate it's state block.
+	 * associd to locate its state block.
 	 */
 	if (ic->ic_auth->ia_node_leave != NULL)
 		ic->ic_auth->ia_node_leave(ic, ni);

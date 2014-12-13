@@ -3,6 +3,10 @@
 # Gumstix. Inc. Gumstix boards configuration info
 #
 
+file	arch/arm/arm32/arm32_boot.c
+file	arch/arm/arm32/arm32_kvminit.c
+file	arch/arm/arm32/arm32_reboot.c
+
 file	arch/evbarm/gumstix/gumstix_machdep.c
 defflag opt_gumstix.h				GUMSTIX
 						GUMSTIX_NETBSD_ARGS_BUSHEADER

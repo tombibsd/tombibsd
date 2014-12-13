@@ -1,7 +1,7 @@
-/ChangeLog/1.1.1.1/Sat Mar  1 08:43:00 2014/-kk/
+/ChangeLog/1.1.1.2/Tue Jun  3 03:06:37 2014/-kk/
 /c-ada-spec.c/1.1.1.1/Sat Mar  1 08:43:01 2014/-kk/
 /c-ada-spec.h/1.1.1.1/Sat Mar  1 08:43:00 2014/-kk/
-/c-common.c/1.1.1.1/Sat Mar  1 08:43:01 2014/-kk/
+/c-common.c/1.1.1.2/Tue Jun  3 03:06:37 2014/-kk/
 /c-common.def/1.1.1.1/Sat Mar  1 08:43:01 2014/-kk/
 /c-common.h/1.1.1.1/Sat Mar  1 08:43:01 2014/-kk/
 /c-cppbuiltin.c/1.1.1.1/Sat Mar  1 08:43:01 2014/-kk/
@@ -12,10 +12,10 @@
 /c-lex.c/1.1.1.1/Sat Mar  1 08:43:01 2014/-kk/
 /c-objc.h/1.1.1.1/Sat Mar  1 08:43:00 2014/-kk/
 /c-omp.c/1.1.1.1/Sat Mar  1 08:43:01 2014/-kk/
-/c-opts.c/1.1.1.1/Sat Mar  1 08:43:00 2014/-kk/
+/c-opts.c/1.2/Mon Jun  9 00:18:13 2014/-kk/
 /c-pch.c/1.1.1.1/Sat Mar  1 08:43:01 2014/-kk/
 /c-ppoutput.c/1.1.1.1/Sat Mar  1 08:43:01 2014/-kk/
-/c-pragma.c/1.1.1.1/Sat Mar  1 08:43:01 2014/-kk/
+/c-pragma.c/1.1.1.2/Tue Jun  3 03:06:37 2014/-kk/
 /c-pragma.h/1.1.1.1/Sat Mar  1 08:43:01 2014/-kk/
 /c-pretty-print.c/1.1.1.1/Sat Mar  1 08:43:00 2014/-kk/
 /c-pretty-print.h/1.1.1.1/Sat Mar  1 08:43:00 2014/-kk/
@@ -23,7 +23,7 @@
 /c-target-def.h/1.1.1.1/Sat Mar  1 08:43:00 2014/-kk/
 /c-target.def/1.1.1.1/Sat Mar  1 08:43:01 2014/-kk/
 /c-target.h/1.1.1.1/Sat Mar  1 08:43:01 2014/-kk/
-/c.opt/1.1.1.1/Sat Mar  1 08:43:00 2014/-kk/
+/c.opt/1.2/Mon Jun  9 00:18:13 2014/-kk/
 /cppspec.c/1.1.1.1/Sat Mar  1 08:43:01 2014/-kk/
 /stub-objc.c/1.1.1.1/Sat Mar  1 08:43:01 2014/-kk/
 D

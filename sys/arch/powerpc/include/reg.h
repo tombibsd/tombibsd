@@ -58,8 +58,13 @@ struct reg {				/* base registers */
 };
 
 struct fpreg {				/* Floating Point registers */
+#ifdef _KERNEL
+	uint64_t fpreg[32];
+	uint64_t fpscr;			/* Status and Control Register */
+#else
 	double fpreg[32];
 	double fpscr;			/* Status and Control Register */
+#endif
 };
 
 struct vreg {				/* Vector registers */

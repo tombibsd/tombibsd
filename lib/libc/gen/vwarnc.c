@@ -53,7 +53,7 @@ __RCSID("$NetBSD$");
 __weak_alias(vwarnc, _vwarnc)
 #endif
 
-#if !HAVE_ERR_H
+#if !HAVE_ERR_H || !HAVE_DECL_VWARNC
 void
 vwarnc(int code, const char *fmt, va_list ap)
 {

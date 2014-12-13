@@ -52,6 +52,11 @@ attach cpu at mainbus
 file arch/ews4800mips/ews4800mips/cpu.c			cpu
 
 #
+# Stack-less Just-In-Time compiler
+#
+include	"external/bsd/sljit/conf/files.sljit"
+
+#
 # Machine-independent SCSI drivers
 #
 include "dev/scsipi/files.scsipi"

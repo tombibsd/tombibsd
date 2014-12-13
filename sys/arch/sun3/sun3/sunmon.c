@@ -82,7 +82,7 @@ _mode_kernel(void)
 /*
  * This function takes care of restoring enough of the
  * hardware state to allow the PROM to run normally.
- * The PROM needs: NMI enabled, it's own vector table.
+ * The PROM needs: NMI enabled, its own vector table.
  * In case of a temporary "drop into PROM", this will
  * also put our hardware state back into place after
  * the PROM "c" (continue) command is given.

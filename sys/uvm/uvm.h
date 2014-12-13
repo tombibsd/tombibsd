@@ -83,9 +83,6 @@ struct uvm_cpu {
 	int pages[PGFL_NQUEUES];	/* total of pages in page_free */
 	u_int emap_gen;			/* emap generation number */
 
-	uintptr_t last_fltaddr;		/* last faulted address */
-	uintptr_t last_delta;		/* difference of last two flt addrs */
-	uintptr_t last_delta2;		/* difference of differences */
 	krndsource_t rs;		/* entropy source */
 };
 

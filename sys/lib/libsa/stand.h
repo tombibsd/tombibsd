@@ -319,4 +319,6 @@ int	fnmatch(const char *, const char *);
 void	bcopy(const void *, void *, size_t);
 void	bzero(void *, size_t);
 
+int	atoi(const char *);
+
 #endif /* _LIBSA_STAND_H_ */

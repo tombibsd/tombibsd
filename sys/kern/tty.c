@@ -67,6 +67,8 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include "opt_compat_netbsd.h"
 
+#define TTY_ALLOW_PRIVATE
+
 #include <sys/param.h>
 #include <sys/systm.h>
 #include <sys/ioctl.h>
@@ -2667,7 +2669,7 @@ out:
  * Must be called with the tty lock held.
  */
 int
-ttysleep(struct tty *tp, kcondvar_t *cv, bool catch, int timo)
+ttysleep(struct tty *tp, kcondvar_t *cv, bool catch_p, int timo)
 {
 	int	error;
 	short	gen;
@@ -2676,8 +2678,8 @@ ttysleep(struct tty *tp, kcondvar_t *cv, bool catch, int timo)
 
 	gen = tp->t_gen;
 	if (cv == NULL)
-		error = kpause("ttypause", catch, timo, &tty_lock);
-	else if (catch)
+		error = kpause("ttypause", catch_p, timo, &tty_lock);
+	else if (catch_p)
 		error = cv_timedwait_sig(cv, &tty_lock, timo);
 	else
 		error = cv_timedwait(cv, &tty_lock, timo);
@@ -2915,7 +2917,7 @@ ttysigintr(void *cookie)
 	mutex_spin_enter(&tty_lock);
 	while ((tp = TAILQ_FIRST(&tty_sigqueue)) != NULL) {
 		KASSERT(tp->t_sigcount > 0);
-		for (st = 0; st < TTYSIG_COUNT; st++) {
+		for (st = TTYSIG_PG1; st < TTYSIG_COUNT; st++) {
 			if ((sig = firstsig(&tp->t_sigs[st])) != 0)
 				break;
 		}
@@ -2964,4 +2966,46 @@ ttysigintr(void *cookie)
 	}
 	mutex_spin_exit(&tty_lock);
 	mutex_exit(proc_lock);
+}
+
+unsigned char
+tty_getctrlchar(struct tty *tp, unsigned which)
+{
+	KASSERT(which < NCCS);
+	return tp->t_cc[which];
+}
+
+void
+tty_setctrlchar(struct tty *tp, unsigned which, unsigned char val)
+{
+	KASSERT(which < NCCS);
+	tp->t_cc[which] = val;
+}
+
+int
+tty_try_xonxoff(struct tty *tp, unsigned char c)
+{
+    const struct cdevsw *cdev;
+
+    if (tp->t_iflag & IXON) {
+	if (c == tp->t_cc[VSTOP] && tp->t_cc[VSTOP] != _POSIX_VDISABLE) {
+	    if ((tp->t_state & TS_TTSTOP) == 0) {
+		tp->t_state |= TS_TTSTOP;
+		cdev = cdevsw_lookup(tp->t_dev);
+		if (cdev != NULL)
+			(*cdev->d_stop)(tp, 0);
+	    }
+	    return 0;
+	}
+	if (c == tp->t_cc[VSTART] && tp->t_cc[VSTART] != _POSIX_VDISABLE) {
+	    tp->t_state &= ~TS_TTSTOP;
+	    if (tp->t_oproc != NULL) {
+	        mutex_spin_enter(&tty_lock);	/* XXX */
+		(*tp->t_oproc)(tp);
+	        mutex_spin_exit(&tty_lock);	/* XXX */
+	    }
+	    return 0;
+	}
+    }
+    return EAGAIN;
 }

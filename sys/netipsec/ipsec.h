@@ -274,8 +274,8 @@ ipsec4_getpolicybysock(
 
 static __inline int
 ipsec_copy_pcbpolicy(
-    struct inpcbpolicy *old,
-    struct inpcbpolicy *new
+    struct inpcbpolicy *oldp,
+    struct inpcbpolicy *newp
 )
 {
   /*XXX do nothing */
@@ -354,6 +354,7 @@ int ipsec_clear_socket_cache(struct mbuf *m)
 
 void nat_t_ports_get(struct mbuf *, u_int16_t *, u_int16_t *);
 
+extern int ipsec_used __read_mostly, ipsec_enabled __read_mostly;
 
 #endif /* _KERNEL */
 

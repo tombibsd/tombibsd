@@ -1,5 +1,3 @@
-/*	$NetBSD$	*/
-
 /*-
  * Copyright (c) 1980, 1983, 1988, 1993
  *     The Regents of the University of California.  All rights reserved.

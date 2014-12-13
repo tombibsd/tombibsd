@@ -4,9 +4,9 @@
 
 TESTSDIR=	${TESTSBASE}/lib/libm
 
-.if ${MACHINE} == "sparc" || ${MACHINE} == "i386" \
-	|| ${MACHINE} == "amd64" || ${MACHINE_CPU} == "arm"	\
-	|| ${MACHINE} == "sparc64"
+.if ${MACHINE_CPU} == "aarch64" || ${MACHINE_CPU} == "arm" \
+    || ${MACHINE_ARCH} == "sparc" || ${MACHINE_ARCH} == "sparc64" \
+    || ${MACHINE_ARCH} == "i386" || ${MACHINE_ARCH} == "x86_64"
 CPPFLAGS+=	-DHAVE_FENV_H
 .endif
 
@@ -27,6 +27,7 @@ TESTS_C+=	t_fmod
 TESTS_C+=	t_infinity
 TESTS_C+=	t_ldexp
 TESTS_C+=	t_log
+TESTS_C+=	t_modf
 TESTS_C+=	t_pow
 TESTS_C+=	t_precision
 TESTS_C+=	t_round

@@ -72,7 +72,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/proc.h>
 #include <sys/mount.h>
 #include <sys/vnode.h>
-#include <sys/malloc.h>
 #include <sys/signalvar.h>
 #include <sys/kauth.h>
 
@@ -81,10 +80,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <ufs/ufs/ufs_extern.h>
 #include <ufs/ext2fs/ext2fs.h>
 #include <ufs/ext2fs/ext2fs_extern.h>
-
-
-#define doclusterread 0 /* XXX underway */
-#define doclusterwrite 0
 
 /*
  * Vnode op for reading.

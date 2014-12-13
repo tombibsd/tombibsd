@@ -7,8 +7,8 @@ PROG=	showrgb
 CPPFLAGS+=-DNDBM -DRGB_DB=\"${X11LIBDIR}/rgb\" -DUSE_RGB_TXT
 CPPFLAGS+=-I${X11SRCDIR.rgb}/include
 
-X11EXTRAMANDEFS+=	-e 's,__RGB_DB__,${X11LIBDIR}/rgb,g; \
-			    s,__RGB_DB_TYPE__,text,g'
+X11EXTRAMANDEFS+=	-e 's,__RGB_DB__,${X11LIBDIR}/rgb,g' \
+			-e 's,__RGB_DB_TYPE__,text,g'
 
 FILES=	rgb.txt
 FILESDIR=${X11LIBDIR}

@@ -62,8 +62,10 @@ void	 hdestroy(void);
 ENTRY	*hsearch(ENTRY, ACTION);
 
 #ifdef _NETBSD_SOURCE
+void	 hdestroy1(void (*)(void *), void (*)(void *));
 int	 hcreate_r(size_t, struct hsearch_data *);
 void	 hdestroy_r(struct hsearch_data *);
+void	 hdestroy1_r(struct hsearch_data *, void (*)(void *), void (*)(void *));
 int	 hsearch_r(ENTRY, ACTION, ENTRY **, struct hsearch_data *);
 #endif /* _NETBSD_SOURCE */
 

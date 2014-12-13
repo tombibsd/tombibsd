@@ -47,7 +47,7 @@ __RCSID("$NetBSD$");
 
 #define ARGFLAGS "dhn"
 
-#ifndef PLATFORM_HAS_SETGETPROGNAME
+#ifndef HAVE_GETPROGNAME
 #define getprogname() "rump_halt"
 #endif
 
@@ -65,7 +65,6 @@ main(int argc, char *argv[])
 	int ch, flags;
 
 	setprogname(argv[0]);
-
 	flags = 0;
 	while ((ch = getopt(argc, argv, ARGFLAGS)) != -1) {
 		switch (ch) {

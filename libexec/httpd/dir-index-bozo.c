@@ -189,8 +189,8 @@ bozo_dir_index(bozo_httpreq_t *request, const char *dirname, int isindex)
 			spacebuf[i] = '\0';
 			bozo_printf(httpd, "%s", spacebuf);
 
-			bozo_printf(httpd, "%7ukB",
-			    ((unsigned)((unsigned)(sb.st_size) >> 10)));
+			bozo_printf(httpd, "%12llukB",
+				    (unsigned long long)sb.st_size >> 10);
 		}
 		bozo_printf(httpd, "\r\n");
 	}

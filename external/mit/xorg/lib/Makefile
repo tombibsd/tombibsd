@@ -34,5 +34,5 @@ SUBDIR+=libGLU libGLw libXaw6 libXaw libXcursor \
 	.WAIT \
 	libXdmGreet \
 	xcb-util
-	
+
 .include <bsd.subdir.mk>

@@ -78,6 +78,7 @@ ENTRY(pj4b_tlb_flushID)
 END(pj4b_tlb_flushID)
 
 ENTRY(pj4b_tlb_flushID_SE)
+	bfc	r0, #0, #12             @ always KERNEL_PID (i.e. 0)
 	mcr	p15, 0, r0, c8, c7, 1	@flush I+D tlb single entry
 #if PAGE_SIZE == 2 * L2_S_SIZE
 	add	r0, r0, L2_S_SIZE

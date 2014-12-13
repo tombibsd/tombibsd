@@ -216,7 +216,7 @@ struct isc__mempool {
 					  ISC_MEM_DEBUGRECORD)) != 0 && \
 		     b != NULL) \
 			 add_trace_entry(a, b, c, d, e); \
-	} while (0)
+	} while (/*CONSTCOND*/0)
 #define DELETE_TRACE(a, b, c, d, e)	delete_trace_entry(a, b, c, d, e)
 
 static void
@@ -1787,7 +1787,6 @@ isc__mem_setwater(isc_mem_t *ctx0, isc_mem_water_t water, void *water_arg,
 		ctx->water_arg = water_arg;
 		ctx->hi_water = hiwater;
 		ctx->lo_water = lowater;
-		ctx->hi_called = ISC_FALSE;
 	}
 	MCTXUNLOCK(ctx, &ctx->lock);
 
@@ -2268,7 +2267,7 @@ isc_mempool_getfillcount(isc_mempool_t *mpctx0) {
 }
 
 isc_result_t
-isc__mem_register() {
+isc__mem_register(void) {
 	return (isc_mem_register(isc_mem_create2));
 }
 
@@ -2357,7 +2356,7 @@ typedef struct summarystat {
 #endif
 
 #ifdef HAVE_LIBXML2
-#define TRY0(a) do { xmlrc = (a); if (xmlrc < 0) goto error; } while(0)
+#define TRY0(a) do { xmlrc = (a); if (xmlrc < 0) goto error; } while(/*CONSTCOND*/0)
 static int
 xml_renderctx(isc__mem_t *ctx, summarystat_t *summary,
 	      xmlTextWriterPtr writer)
@@ -2527,7 +2526,7 @@ isc_mem_renderxml(xmlTextWriterPtr writer) {
 		result = ISC_R_NOMEMORY;\
 		goto error;\
 	} \
-} while(0)
+} while(/*CONSTCOND*/0)
 
 static isc_result_t
 json_renderctx(isc__mem_t *ctx, summarystat_t *summary, json_object *array) {

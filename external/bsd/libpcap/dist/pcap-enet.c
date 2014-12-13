@@ -8,10 +8,9 @@
  *
  * Rayan Zachariassen, CA*Net
  */
-#ifndef lint
-static const char rcsid[] _U_ =
-    "@(#) Header: /tcpdump/master/libpcap/pcap-enet.c,v 1.9 2006-10-04 18:09:22 guy Exp ";
-#endif
+
+#include <sys/cdefs.h>
+__RCSID("$NetBSD$");
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

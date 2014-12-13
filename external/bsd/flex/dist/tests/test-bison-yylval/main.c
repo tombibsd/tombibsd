@@ -1,5 +1,3 @@
-/*	$NetBSD$	*/
-
 /*
  * This file is part of flex.
  * 
@@ -25,8 +23,6 @@
 
 #include "parser.h"
 #include "scanner.h"
-
-extern int testparse(yyscan_t);
 
 int main ( int argc, char** argv )
 {

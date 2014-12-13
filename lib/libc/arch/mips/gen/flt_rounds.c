@@ -28,7 +28,7 @@ __flt_rounds(void)
 #else
 	int x;
 
-	__asm("cfc1\t%0,$31" : "=r" (x));
+	__asm(".set push; .set noat; cfc1 %0,$31; .set pop" : "=r" (x));
 	return map[x & 0x03];
 #endif
 }

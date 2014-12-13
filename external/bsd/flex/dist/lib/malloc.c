@@ -1,5 +1,3 @@
-/*	$NetBSD$	*/
-
      #include <config.h>
      #undef malloc
      

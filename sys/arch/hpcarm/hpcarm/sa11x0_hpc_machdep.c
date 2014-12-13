@@ -105,7 +105,7 @@ extern paddr_t physical_freestart;
 extern paddr_t physical_freeend;
 extern paddr_t physical_end;
 
-extern vaddr_t msgbufphys;
+extern paddr_t msgbufphys;
 
 extern int end;
 

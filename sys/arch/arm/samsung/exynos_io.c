@@ -1,3 +1,5 @@
+/*	$NetBSD$	*/
+
 /*-
  * Copyright (c) 2014 The NetBSD Foundation, Inc.
  * All rights reserved.
@@ -78,6 +80,7 @@ exyo_match(device_t parent, cfdata_t cf, void *aux)
 	return 1;
 }
 
+
 static int
 exyo_print(void *aux, const char *pnp)
 {
@@ -89,20 +92,16 @@ exyo_print(void *aux, const char *pnp)
 	return QUIET;
 }
 
+
 void
 exyo_device_register(device_t self, void *aux)
 {
-	prop_dictionary_t dict = device_properties(self);
+}
 
-	if (device_is_a(self, "mct")) {
-		/*
-		 * This clock always runs at (arm_clk div 2) and only goes
-		 * to timers that are part of the A9 MP core subsystem.
-		 */
-		prop_dictionary_set_uint32(dict, "frequency",
-		    curcpu()->ci_data.cpu_cc_freq / 2);
-		return;
-	}
+
+void
+exyo_device_register_post_config(device_t self, void *aux)
+{
 }
 
 static int
@@ -142,6 +141,10 @@ exyo_attach(device_t parent, device_t self, void *aux)
 	aprint_naive(": Exynos %x\n", product_id);
 	aprint_normal(": Exynos %x\n", product_id);
 
+	/* add sysctl nodes */
+	exynos_sysctl_cpufreq_init();
+
+	/* add all children */
 #if defined(EXYNOS4)
 	if (IS_EXYNOS4_P()) {
 		l = exynos4_locinfo.locators;

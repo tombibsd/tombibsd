@@ -10,7 +10,7 @@ SRCS =	drvstats.c rstatd.c rstat_proc.c
 MAN =	rpc.rstatd.8
 MLINKS=	rpc.rstatd.8 rstatd.8
 
-DPADD=	${LIBRPCSVC} ${LIBKVM}
-LDADD=	-lrpcsvc -lkvm
+DPADD=	${LIBRPCSVC}
+LDADD=	-lrpcsvc
 
 .include <bsd.prog.mk>

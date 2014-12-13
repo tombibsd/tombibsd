@@ -2,9 +2,12 @@
 
 # list of subdirs used per-platform
 
-.if ${MACHINE} == "amd64" || ${MACHINE} == "i386"
-# not yet
-#ARCHDIR_SUBDIR=	x86/x86-xen
+.if ${MACHINE} == "amd64"
+ARCHDIR_SUBDIR=	x86/amd64-xen
+.endif
+
+.if ${MACHINE} == "i386"
+ARCHDIR_SUBDIR=	x86/i386-xen x86/i386pae-xen
 .endif
 
 .if ${MACHINE_ARCH} == "powerpc"

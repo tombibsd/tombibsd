@@ -48,16 +48,18 @@ class SanitizerArgs {
   unsigned Kind;
 
   std::string BlacklistFile;
-  bool MsanTrackOrigins;
+  int MsanTrackOrigins;
   bool AsanZeroBaseShadow;
   bool UbsanTrapOnError;
+  bool AsanSharedRuntime;
+  bool LinkCXXRuntimes;
 
  public:
-  SanitizerArgs();
   /// Parses the sanitizer arguments from an argument list.
   SanitizerArgs(const ToolChain &TC, const llvm::opt::ArgList &Args);
 
   bool needsAsanRt() const { return Kind & NeedsAsanRt; }
+  bool needsSharedAsanRt() const { return AsanSharedRuntime; }
   bool needsTsanRt() const { return Kind & NeedsTsanRt; }
   bool needsMsanRt() const { return Kind & NeedsMsanRt; }
   bool needsLeakDetection() const { return Kind & NeedsLeakDetection; }
@@ -75,6 +77,7 @@ class SanitizerArgs {
     return (Kind & HasZeroBaseShadow) || AsanZeroBaseShadow;
   }
   bool needsUnwindTables() const { return Kind & NeedsUnwindTables; }
+  bool linkCXXRuntimes() const { return LinkCXXRuntimes; }
   void addArgs(const llvm::opt::ArgList &Args,
                llvm::opt::ArgStringList &CmdArgs) const;
 
@@ -100,7 +103,7 @@ class SanitizerArgs {
 
   /// Produce an argument string from ArgList \p Args, which shows how it
   /// provides a sanitizer kind in \p Mask. For example, the argument list
-  /// "-fsanitize=thread,vptr -faddress-sanitizer" with mask \c NeedsUbsanRt
+  /// "-fsanitize=thread,vptr -fsanitize=address" with mask \c NeedsUbsanRt
   /// would produce "-fsanitize=vptr".
   static std::string lastArgumentForKind(const Driver &D,
                                          const llvm::opt::ArgList &Args,

@@ -321,7 +321,7 @@ clnt_tli_create(
 		if (!__rpc_fd2sockinfo(fd, &si))
 			goto err;
 
-		bindresvport(fd, NULL);
+		(void)bindresvport(fd, NULL);
 	} else {
 		if (!__rpc_fd2sockinfo(fd, &si))
 			goto err;
@@ -343,7 +343,7 @@ clnt_tli_create(
 		cl = clnt_vc_create(fd, svcaddr, prog, vers, sendsz, recvsz);
 		if (!nconf || !cl)
 			break;
-		__rpc_setnodelay(fd, &si);
+		(void)__rpc_setnodelay(fd, &si);
 		break;
 	case NC_TPI_CLTS:
 		cl = clnt_dg_create(fd, svcaddr, prog, vers, sendsz, recvsz);

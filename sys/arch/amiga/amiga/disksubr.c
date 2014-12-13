@@ -567,16 +567,6 @@ writedisklabel(dev_t dev, void (*strat)(struct buf *), struct disklabel *lp, str
 done:
 	brelse(bp, 0);
 	return (error); 
-
-	/*
-	 * get write out partition list iff cpu_label is valid.
-	 */
-	if (clp->valid == 0 ||
-	    (clp->rdblock <= 0 || clp->rdblock >= RDB_MAXBLOCKS))
-		return(EINVAL);
-
-	(void)getrdbmap(dev, strat, lp, clp);
-	return(EINVAL);
 }
 
 u_long

@@ -7,4 +7,7 @@
 #define LIBEXECDIR	"/libexec"
 #define DBDIR		"/var/db"
 #define RUNDIR		"/var/run"
-#include <spawn.h>
+#include		<sys/queue.h>
+#define HAVE_SPAWN_H
+#define HAVE_MD5_H
+#define SHA2_H		<sha2.h>

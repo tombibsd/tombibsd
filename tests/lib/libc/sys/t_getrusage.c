@@ -58,7 +58,11 @@ work(void)
 	size_t n = UINT16_MAX * 10;
 
 	while (n > 0) {
+#ifdef __or1k__
+		 asm volatile("l.nop");	/* Do something. */
+#else
 		 asm volatile("nop");	/* Do something. */
+#endif
 		 n--;
 	}
 }

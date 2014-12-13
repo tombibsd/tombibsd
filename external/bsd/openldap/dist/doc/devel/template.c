@@ -1,7 +1,7 @@
 /*	$NetBSD$	*/
 
 /* template.c -- example OpenLDAP source file */
-/* OpenLDAP: pkg/ldap/doc/devel/template.c,v 1.5 2003/12/07 06:38:07 kurt Exp */
+/* $OpenLDAP$ */
 /* This work is part of OpenLDAP Software <http://www.openldap.org/>.
  *
  * Copyright YEAR The OpenLDAP Foundation.

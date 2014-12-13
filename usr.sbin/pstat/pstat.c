@@ -330,6 +330,9 @@ vnodemode(void)
 			maddr = vp->v_mount;
 			mount_print(mp);
 			vnode_header();
+			/*
+			 * XXX do this in a more fs-independent way
+			 */
 			if (FSTYPE_IS(mp, MOUNT_FFS) ||
 			    FSTYPE_IS(mp, MOUNT_MFS)) {
 				ufs_header();
@@ -455,8 +458,6 @@ const struct flagbit_desc ufs_flags[] = {
 	{ IN_ACCESSED,	'a' },
 	{ IN_SHLOCK,	'S' },
 	{ IN_EXLOCK,	'E' },
-	{ IN_CLEANING,	'c' },
-	{ IN_ADIROP,	'D' },
 	{ IN_SPACECOUNTED, 's' },
 	{ 0,		'\0' },
 };

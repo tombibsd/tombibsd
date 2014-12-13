@@ -9,7 +9,7 @@ INCS=	adbsys.h apmvar.h autoconf.h \
 	grfioctl.h \
 	intr.h \
 	keyboard.h \
-	sljitarch.h \
+	sljit_machdep.h \
 	vmparam.h
 
 .include "../../powerpc/include/Makefile"

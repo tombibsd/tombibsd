@@ -100,7 +100,7 @@ genfb_init(struct genfb_softc *sc)
 
 	dict = device_properties(sc->sc_dev);
 #ifdef GENFB_DEBUG
-	printf(prop_dictionary_externalize(dict));
+	printf("%s", prop_dictionary_externalize(dict));
 #endif
 	prop_dictionary_get_bool(dict, "is_console", &console);
 
@@ -354,7 +354,7 @@ genfb_ioctl(void *v, void *vs, u_long cmd, void *data, int flag,
 	struct wsdisplay_fbinfo *wdf;
 	struct vcons_screen *ms = vd->active;
 	struct wsdisplay_param *param;
-	int new_mode, error, val;
+	int new_mode, error, val, ret;
 
 	switch (cmd) {
 		case WSDISPLAYIO_GINFO:
@@ -459,9 +459,22 @@ genfb_ioctl(void *v, void *vs, u_long cmd, void *data, int flag,
 				return sc->sc_backlight->gpc_set_parameter(
 				    sc->sc_backlight->gpc_cookie, val);
 			}
-			return EPASSTHROUGH;
-		
+			return EPASSTHROUGH;		
+	}
+	ret = EPASSTHROUGH;
+	if (sc->sc_ops.genfb_ioctl)
+		ret = sc->sc_ops.genfb_ioctl(sc, vs, cmd, data, flag, l);
+	if (ret != EPASSTHROUGH)
+		return ret;
+	/*
+	 * XXX
+	 * handle these only if there either is no ioctl() handler or it didn't
+	 * know how to deal with them. This allows bus frontends to override
+	 * them but still provides fallback implementations
+	 */
+	switch (cmd) {
 		case WSDISPLAYIO_GET_EDID: {
+			
 			struct wsdisplayio_edid_info *d = data;
 			return wsdisplayio_get_edid(sc->sc_dev, d);
 		}
@@ -470,11 +483,6 @@ genfb_ioctl(void *v, void *vs, u_long cmd, void *data, int flag,
 			struct wsdisplayio_fbinfo *fbi = data;
 			return wsdisplayio_get_fbinfo(&ms->scr_ri, fbi);
 		}
-		
-		default:
-			if (sc->sc_ops.genfb_ioctl)
-				return sc->sc_ops.genfb_ioctl(sc, vs, cmd,
-				    data, flag, l);
 	}
 	return EPASSTHROUGH;
 }
@@ -779,6 +787,8 @@ genfb_enable_polling(device_t dev)
 		SCREEN_ENABLE_DRAWING(&sc->sc_console_screen);
 		vcons_hard_switch(&sc->sc_console_screen);
 		vcons_enable_polling(&sc->vd);
+		if (sc->sc_ops.genfb_enable_polling)
+			(*sc->sc_ops.genfb_enable_polling)(sc);
 	}
 }
 
@@ -788,6 +798,8 @@ genfb_disable_polling(device_t dev)
 	struct genfb_softc *sc = device_private(dev);
 
 	if (sc->sc_console_screen.scr_vd) {
+		if (sc->sc_ops.genfb_disable_polling)
+			(*sc->sc_ops.genfb_disable_polling)(sc);
 		vcons_disable_polling(&sc->vd);
 	}
 }

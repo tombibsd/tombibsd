@@ -36,4 +36,11 @@
 
 typedef bus_addr_t dma_addr_t;
 
+static inline uintmax_t
+DMA_BIT_MASK(unsigned nbits)
+{
+
+	return ~(~(uintmax_t)0 << nbits);
+}
+
 #endif  /* _LINUX_DMA_MAPPING_H_ */

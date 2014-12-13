@@ -251,7 +251,7 @@ tlp_eisa_attach(device_t parent, device_t self, void *aux)
 	sc->sc_mediasw = &tlp_21040_mediasw;
 
 	/*
-	 * Figure out which IRQ we want to use, and determine of it's
+	 * Figure out which IRQ we want to use, and determine if it's
 	 * edge- or level-triggered.
 	 */
 	val = bus_space_read_4(iot, ioh, DE425_CFG0);

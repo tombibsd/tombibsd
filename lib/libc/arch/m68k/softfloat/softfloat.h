@@ -176,7 +176,7 @@ flag float32_lt( float32, float32 );
 flag float32_eq_signaling( float32, float32 );
 flag float32_le_quiet( float32, float32 );
 flag float32_lt_quiet( float32, float32 );
-#ifndef SOFTFLOAT_FOR_GCC
+#if !defined(SOFTFLOAT_FOR_GCC) || defined(SOFTFLOATM68K_FOR_GCC)
 flag float32_is_signaling_nan( float32 );
 #endif
 

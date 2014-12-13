@@ -10,7 +10,7 @@ CPPFLAGS+=	-I${X86_OBJDIR}
 .PATH: ${LLVM_SRCDIR}/lib/Target/X86/Disassembler
 
 SRCS+=	X86Disassembler.cpp \
-	X86DisassemblerDecoder.c
+	X86DisassemblerDecoder.cpp
 
 .for src in ${SRCS:M*.c}
 CPPFLAGS.${src}+=	-std=gnu99

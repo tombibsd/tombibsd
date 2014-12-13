@@ -72,6 +72,7 @@ ENTRY(__sigsetjmp14)
 
 2:	xorl	%eax,%eax
 	ret
+END(__sigsetjmp14)
 
 ENTRY(__siglongjmp14)
 	/* Check to see if we need to restore the signal mask. */
@@ -107,3 +108,4 @@ ENTRY(__siglongjmp14)
 	incl	%eax
 3:	movl	%ecx,0(%esp)
 	ret
+END(__siglongjmp14)

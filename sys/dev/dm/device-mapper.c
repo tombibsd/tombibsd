@@ -84,6 +84,7 @@ const struct bdevsw dm_bdevsw = {
 	.d_ioctl = dmioctl,
 	.d_dump = nodump,
 	.d_psize = dmsize,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK | D_MPSAFE
 };
 
@@ -98,6 +99,7 @@ const struct cdevsw dm_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = nommap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK | D_MPSAFE
 };
 
@@ -154,7 +156,8 @@ static int
 dm_modcmd(modcmd_t cmd, void *arg)
 {
 #ifdef _MODULE
-	int error, bmajor, cmajor;
+	int error;
+	devmajor_t bmajor, cmajor;
 
 	error = 0;
 	bmajor = -1;

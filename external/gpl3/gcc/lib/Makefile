@@ -11,4 +11,6 @@ SUBDIR+= liblto_plugin
 SUBDIR+= libsupc++ libstdc++-v3
 .endif
 
+SUBDIR+= libasan
+
 .include <bsd.subdir.mk>

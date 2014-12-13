@@ -9,6 +9,9 @@ COMMON_CODEDIRS+=hash/sha1 hash/sha2 hash/rmd160 hash/murmurhash
 .if defined(COMMON_MACHINE_ARCH) && !empty(COMMON_MACHINE_ARCH) && \
     exists(${COMMON_DIR}/arch/${COMMON_MACHINE_ARCH})
 COMMON_ARCHSUBDIR=	${COMMON_MACHINE_ARCH}
+.elif defined(COMMON_MACHINE_CPU) && !empty(COMMON_MACHINE_CPU) && \
+    exists(${COMMON_DIR}/arch/${COMMON_MACHINE_CPU})
+COMMON_ARCHSUBDIR=	${COMMON_MACHINE_CPU}
 .elif defined(LIBKERN_ARCH) && !empty(LIBKERN_ARCH) && \
     exists(${KERNDIR}/arch/${LIBKERN_ARCH})
 COMMON_ARCHSUBDIR=	${LIBKERN_ARCH}

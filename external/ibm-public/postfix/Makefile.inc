@@ -90,7 +90,7 @@ LIBP${_LL:tu}=	${POBJDIR.${_LL}}/lib${_LL}.a
 PFIX_LIBEXECDIR=/usr/libexec/postfix
 PFIX_ETCDIR=	/etc/postfix
 PFIX_EXAMPLEDIR=/usr/share/examples/postfix
-PFIX_HTMLDIR=	/usr/share/doc/html/postfix
+PFIX_HTMLDIR=	/usr/share/doc/reference/ref8/postfix
 PFIX_SBINDIR=	/usr/sbin
 
 # override defaults which are otherwise empty and/or so postconf is correct

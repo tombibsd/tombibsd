@@ -291,7 +291,7 @@ void *
 percpu_getref(percpu_t *pc)
 {
 
-	KPREEMPT_DISABLE(curlwp);
+	kpreempt_disable();
 	return percpu_getptr_remote(pc, curcpu());
 }
 
@@ -306,7 +306,7 @@ void
 percpu_putref(percpu_t *pc)
 {
 
-	KPREEMPT_ENABLE(curlwp);
+	kpreempt_enable();
 }
 
 /*

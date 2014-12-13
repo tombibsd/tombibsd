@@ -1,3 +1,5 @@
+/*	$NetBSD$	*/
+
 /*-
  * Copyright (c) 2014 The NetBSD Foundation, Inc.
  * All rights reserved.
@@ -35,17 +37,20 @@
 
 #include <arm/samsung/exynos_var.h>
 
+
 struct exyo_locinfo {
 	const struct exyo_locators *locators;
 	size_t nlocators;
 };
 
 extern const struct exyo_locinfo exynos4_locinfo;
+extern const struct exyo_locinfo exynos4_i2c_locinfo;
 extern const struct exyo_locinfo exynos5_locinfo;
+extern const struct exyo_locinfo exynos5_i2c_locinfo;
 
 /* XXXNH needed? */
 #define	NOPORT	EXYOCF_PORT_DEFAULT
-#define	NOINTR	EXYO_INTR_DEFAULT
+#define	NOINTR	EXYOCF_INTR_DEFAULT
 #define	EANY	EXYO_ALL
 #define	REQ	EXYO_REQUIRED
 

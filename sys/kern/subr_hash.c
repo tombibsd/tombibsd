@@ -40,6 +40,7 @@
 __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <sys/param.h>
+#include <sys/bitops.h>
 #include <sys/kmem.h>
 #include <sys/systm.h>
 
@@ -89,10 +90,9 @@ hashinit(u_int elements, enum hashtype htype, bool waitok, u_long *hashmask)
 	if (elements > MAXELEMENTS)
 		elements = MAXELEMENTS;
 
-	for (hashsize = 1; hashsize < elements; hashsize <<= 1)
-		continue;
-
+	hashsize = 1UL << (ilog2(elements - 1) + 1);
 	esize = hash_list_size(htype);
+
 	p = kmem_alloc(hashsize * esize, waitok ? KM_SLEEP : KM_NOSLEEP);
 	if (p == NULL)
 		return NULL;

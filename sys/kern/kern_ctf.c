@@ -168,7 +168,7 @@ mod_ctf_get(struct module *mod, mod_ctf_t *mc)
 	}
 
 	/*
-	 * Allocate memory to buffer the CTF data in it's decompressed
+	 * Allocate memory to buffer the CTF data in its decompressed
 	 * form.
 	 */
 	if (compressed) {
@@ -204,7 +204,7 @@ mod_ctf_get(struct module *mod, mod_ctf_t *mc)
 		}
 
 		zs.avail_in = ctfsize - CTF_HDR_SIZE;
-		zs.next_in = ((uint8_t *) ctfaddr) + CTF_HDR_SIZE;
+		zs.next_in = ctfaddr + CTF_HDR_SIZE;
 		zs.avail_out = sz - CTF_HDR_SIZE;
 		zs.next_out = ((uint8_t *) ctftab) + CTF_HDR_SIZE;
 		inflateReset(&zs);

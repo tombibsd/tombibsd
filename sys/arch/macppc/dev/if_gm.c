@@ -248,7 +248,8 @@ gmac_attach(device_t parent, device_t self, void *aux)
 
 	if_attach(ifp);
 	ether_ifattach(ifp, laddr);
-	rnd_attach_source(&sc->sc_rnd_source, xname, RND_TYPE_NET, 0); 
+	rnd_attach_source(&sc->sc_rnd_source, xname, RND_TYPE_NET,
+			  RND_FLAG_DEFAULT); 
 }
 
 u_int

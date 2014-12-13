@@ -41,6 +41,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #ifdef _KERNEL_OPT
 #include "opt_compat_netbsd.h"
+#include "opt_usb.h"
 #endif
 
 #include <sys/param.h>
@@ -81,6 +82,13 @@ int	ugendebug = 0;
 #define UGEN_BULK_RA_WB_BUFSIZE	16384		/* default buffer size */
 #define UGEN_BULK_RA_WB_BUFMAX	(1 << 20)	/* maximum allowed buffer */
 
+struct isoreq {
+	struct ugen_endpoint *sce;
+	usbd_xfer_handle xfer;
+	void *dmabuf;
+	u_int16_t sizes[UGEN_NISORFRMS];
+};
+
 struct ugen_endpoint {
 	struct ugen_softc *sc;
 	usb_endpoint_descriptor_t *edesc;
@@ -103,12 +111,7 @@ struct ugen_endpoint {
 	u_int32_t ra_wb_used;	 /* how much is in buffer */
 	u_int32_t ra_wb_xferlen; /* current xfer length for RA/WB */
 	usbd_xfer_handle ra_wb_xfer;
-	struct isoreq {
-		struct ugen_endpoint *sce;
-		usbd_xfer_handle xfer;
-		void *dmabuf;
-		u_int16_t sizes[UGEN_NISORFRMS];
-	} isoreqs[UGEN_NISOREQS];
+	struct isoreq isoreqs[UGEN_NISOREQS];
 	/* Keep these last; we don't overwrite them in ugen_set_config() */
 #define UGEN_ENDPOINT_NONZERO_CRUFT	offsetof(struct ugen_endpoint, rsel)
 	struct selinfo rsel;
@@ -151,6 +154,7 @@ const struct cdevsw ugen_cdevsw = {
 	.d_poll = ugenpoll,
 	.d_mmap = nommap,
 	.d_kqfilter = ugenkqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_OTHER,
 };
 

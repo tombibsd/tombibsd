@@ -143,7 +143,7 @@ bcmrng_ccb_attach(device_t parent, device_t self, void *aux)
 	callout_init(&sc->sc_rnd_callout, CALLOUT_MPSAFE);
 
 	rnd_attach_source(&sc->sc_rnd_source, device_xname(self), RND_TYPE_RNG,
-	    RND_FLAG_NO_ESTIMATE);
+	    RND_FLAG_COLLECT_VALUE);
 
 #ifdef RNG_USE_INTR
 	sc->sc_ih = intr_establish(loc->loc_intrs[0], IPL_VM, IST_LEVEL,

@@ -29,6 +29,13 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+/*
+ * Notes on porting:
+ *
+ * - Linux does not have teardown_timer.  You must add it yourself in
+ *   the appropriate place.
+ */
+
 #ifndef _LINUX_TIMER_H_
 #define _LINUX_TIMER_H_
 
@@ -53,6 +60,13 @@ setup_timer(struct timer_list *timer, void (*fn)(unsigned long),
 }
 
 static inline void
+teardown_timer(struct timer_list *timer)
+{
+
+	callout_destroy(&timer->tl_callout);
+}
+
+static inline void
 mod_timer(struct timer_list *timer, unsigned long then)
 {
 	const unsigned long now = jiffies;
@@ -61,10 +75,32 @@ mod_timer(struct timer_list *timer, unsigned long then)
 }
 
 static inline void
+mod_timer_pinned(struct timer_list *timer, unsigned long then)
+{
+
+	/* XXX Stay on the same CPU it was originally on...  */
+	mod_timer(timer, then);
+}
+
+static inline void
+del_timer(struct timer_list *timer)
+{
+
+	callout_stop(&timer->tl_callout);
+}
+
+static inline void
 del_timer_sync(struct timer_list *timer)
 {
+
 	callout_halt(&timer->tl_callout, NULL);
-	callout_destroy(&timer->tl_callout);
+}
+
+static inline bool
+timer_pending(struct timer_list *timer)
+{
+
+	return callout_pending(&timer->tl_callout);
 }
 
 /*

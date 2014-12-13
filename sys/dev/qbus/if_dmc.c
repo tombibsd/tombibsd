@@ -56,7 +56,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/device.h>
 
 #include <net/if.h>
-#include <net/netisr.h>
 
 #ifdef	INET
 #include <netinet/in.h>
@@ -553,7 +552,6 @@ dmcxint(void *a)
 
 	struct ifnet *ifp;
 	struct mbuf *m;
-	struct ifqueue *inq;
 	int arg, pkaddr, cmd, len, s;
 	struct ifrw *ifrw;
 	struct dmcbufs *rp;
@@ -624,11 +622,8 @@ dmcxint(void *a)
 			/* Shave off dmc_header */
 			m_adj(m, sizeof(struct dmc_header));
 			switch (dh->dmc_type) {
-
 #ifdef INET
 			case DMC_IPTYPE:
-				schednetisr(NETISR_IP);
-				inq = &ipintrq;
 				break;
 #endif
 			default:
@@ -637,11 +632,9 @@ dmcxint(void *a)
 			}
 
 			s = splnet();
-			if (IF_QFULL(inq)) {
-				IF_DROP(inq);
+			if (__predict_false(!pktq_enqueue(ip_pktq, m, 0))) {
 				m_freem(m);
-			} else
-				IF_ENQUEUE(inq, m);
+			}
 			splx(s);
 
 	setup:

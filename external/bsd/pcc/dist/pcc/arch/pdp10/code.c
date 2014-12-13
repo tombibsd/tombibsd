@@ -1,4 +1,4 @@
-/*	Id: code.c,v 1.41 2011/06/04 07:41:11 ragge Exp 	*/	
+/*	Id: code.c,v 1.42 2012/04/22 21:07:40 plunky Exp 	*/	
 /*	$NetBSD$	*/
 /*
  * Copyright (c) 2003 Anders Magnusson (ragge@ludd.luth.se).
@@ -68,7 +68,7 @@ defloc(struct symtab *sp)
  * code for the end of a function
  */
 void
-efcode()
+efcode(void)
 {
 }
 
@@ -114,14 +114,14 @@ bfcode(struct symtab **sp, int cnt)
 
 
 void
-bjobcode()
+bjobcode(void)
 {
 }
 
 /* called just before final exit */
 /* flag is 1 if errors, 0 if none */
 void
-ejobcode(int flag )
+ejobcode(int flag)
 {
 }
 

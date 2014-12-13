@@ -34,11 +34,17 @@
  */
 
 #include <machine/asm.h>
+#include <machine/math.h>
 
 ;_sccsid:
 ;.asciz	"from: @(#)support.s	5.2 (Berkeley) 5/17/90"
 
 RCSID("$NetBSD$")
+
+#if !defined(__HAVE_LONG_DOUBLE)
+STRONG_ALIAS(_copysignl, copysign)
+WEAK_ALIAS(copysignl, _copysignl)
+#endif
 
 | copysign(x,y)
 | returns x with the sign of y.

@@ -74,7 +74,6 @@ int cnputc(int);
 
 /* devopen.c */
 extern	u_int opendev;
-int atoi(char *);
 
 /* exec.c */
 void exec_hp300(char *, u_long, int);

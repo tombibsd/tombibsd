@@ -4713,7 +4713,7 @@ nfscl_layout(struct nfsmount *nmp, vnode_t vp, u_int8_t *fhp, int fhlen,
 	if (lyp == NULL) {
 		/*
 		 * Although no lyp was passed in, another thread might have
-		 * allocated one. If one is found, just increment it's ref
+		 * allocated one. If one is found, just increment its ref
 		 * count and return it.
 		 */
 		lyp = nfscl_findlayout(clp, fhp, fhlen);

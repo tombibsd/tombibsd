@@ -32,6 +32,9 @@
 #ifndef _ARM_INT_CONST_H_
 #define _ARM_INT_CONST_H_
 
+#ifdef __INTMAX_C_SUFFIX__
+#include <sys/common_int_const.h>
+#else
 /*
  * 7.18.4 Macros for integer constants
  */
@@ -52,5 +55,6 @@
 
 #define	INTMAX_C(c)	c ## LL
 #define	UINTMAX_C(c)	c ## ULL
+#endif
 
 #endif /* !_ARM_INT_CONST_H_ */

@@ -167,7 +167,7 @@ typedef isc_uint16_t in_port_t;
 	    break; \
 	} \
     } \
-} while (/*CONSTCOND*/0)
+} while (0)
 
 #undef FD_SET
 #define FD_SET(fd, set) do { \
@@ -183,7 +183,7 @@ typedef isc_uint16_t in_port_t;
 	    ((fd_set FAR *)(set))->fd_count++; \
 	} \
     } \
-} while (/*CONSTCOND*/0)
+} while (0)
 
 /*
  * Windows Sockets errors redefined as regular Berkeley error constants.

@@ -17,6 +17,5 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-#define _PATH_BOOTCONF		"boot.cfg"
 #define _PATH_ZBOOT		"/proc/zboot"
 #define _PATH_PARTITIONS	"/proc/partitions"

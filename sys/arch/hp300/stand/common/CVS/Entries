@@ -1,7 +1,7 @@
 /apci.c/1.13/Thu Apr 24 14:30:23 2014/-kk/
 /apcireg.h/1.2/Sun Dec 11 12:17:19 2005/-kk/
 /autoconf.c/1.13/Tue Feb  8 20:20:14 2011/-kk/
-/clock.c/1.12/Thu Apr 24 14:30:23 2014/-kk/
+/clock.c/1.13/Tue Dec  9 04:34:44 2014/-kk/
 /conf.c/1.12/Sun Dec 23 03:11:32 2007/-kk/
 /conf.h/1.2/Sun Dec 11 12:17:19 2005/-kk/
 /cons.c/1.7/Tue Feb  8 20:20:14 2011/-kk/
@@ -9,9 +9,9 @@
 /ct.c/1.7/Sun Jul 17 20:54:40 2011/-kk/
 /dca.c/1.7/Tue Feb  8 20:20:14 2011/-kk/
 /dcareg.h/1.2/Sun Dec 11 12:17:19 2005/-kk/
-/dcm.c/1.8/Tue Feb  8 20:20:14 2011/-kk/
+/dcm.c/1.9/Thu Jun 26 06:46:11 2014/-kk/
 /device.h/1.5/Sun Mar  4 05:59:50 2007/-kk/
-/devopen.c/1.10/Mon Apr 28 20:23:19 2008/-kk/
+/devopen.c/1.11/Fri Oct  3 09:25:35 2014/-kk/
 /dnkbd.c/1.13/Tue May  6 05:49:58 2014/-kk/
 /exec.c/1.5/Sun Dec 11 12:17:19 2005/-kk/
 /fhpib.c/1.6/Sun Jun 25 17:37:43 2006/-kk/
@@ -25,7 +25,7 @@
 /hilreg.h/1.2/Tue Feb  8 20:20:14 2011/-kk/
 /hpib.c/1.9/Sun Mar  4 05:59:50 2007/-kk/
 /hpibvar.h/1.5/Sun Jun 25 17:37:43 2006/-kk/
-/if_le.c/1.11/Mon Jan 12 11:32:43 2009/-kk/
+/if_le.c/1.13/Thu Jun 26 06:46:11 2014/-kk/
 /if_lereg.h/1.6/Thu Jul 26 17:15:22 2012/-kk/
 /ite.c/1.17/Sat Apr 19 08:04:01 2014/-kk/
 /ite_dumb.c/1.1/Sat Feb 12 05:08:41 2011/-kk/
@@ -52,7 +52,7 @@
 /rawfs.h/1.4/Sun Dec 11 12:17:19 2005/-kk/
 /rd.c/1.10/Sun Jul 17 20:54:40 2011/-kk/
 /rominfo.h/1.5/Tue Feb  8 20:20:14 2011/-kk/
-/samachdep.h/1.17/Thu Apr 24 14:30:23 2014/-kk/
+/samachdep.h/1.18/Fri Oct  3 09:25:35 2014/-kk/
 /scsi.c/1.11/Tue Jan 14 16:04:53 2014/-kk/
 /scsireg.h/1.3/Tue Feb  8 20:20:14 2011/-kk/
 /scsivar.h/1.4/Sun Dec 11 12:17:19 2005/-kk/

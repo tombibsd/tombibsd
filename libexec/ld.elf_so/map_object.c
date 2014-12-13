@@ -442,10 +442,10 @@ _rtld_obj_free(Obj_Entry *obj)
 	}
 	if (!obj->phdr_loaded)
 		xfree((void *)(uintptr_t)obj->phdr);
-	xfree(obj);
 #ifdef COMBRELOC
 	_rtld_combreloc_reset(obj);
 #endif
+	xfree(obj);
 }
 
 Obj_Entry *

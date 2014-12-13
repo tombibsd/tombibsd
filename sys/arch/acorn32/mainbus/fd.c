@@ -113,7 +113,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <machine/cpu.h>
 #include <machine/intr.h>
 #include <machine/io.h>
-#include <arm/arm32/katelib.h>
 
 #include <arm/iomd/iomdreg.h>
 #include <arm/iomd/iomdvar.h>
@@ -274,6 +273,7 @@ const struct bdevsw fd_bdevsw = {
 	.d_ioctl = fdioctl,
 	.d_dump = nodump,
 	.d_psize = nosize,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK
 };
 
@@ -288,6 +288,7 @@ const struct cdevsw fd_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = nommap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK
 };
 

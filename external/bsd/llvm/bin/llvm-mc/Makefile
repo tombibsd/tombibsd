@@ -50,6 +50,7 @@ LLVM_LIBS+= \
 	X86Disassembler \
 	X86AsmPrinter \
 	X86Utils \
+	MCDisassembler \
 	Object \
 	SelectionDAG \
 	CodeGen \
@@ -62,6 +63,9 @@ LLVM_LIBS+= \
 	MC \
 	IR \
 	Support
+
+LDADD+=	-lz
+DPADD+=	${LIBZ}
 
 .include "${.PARSEDIR}/../../link.mk"
 

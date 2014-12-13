@@ -32,6 +32,9 @@
 #ifndef _VAX_INT_MWGWTYPES_H_
 #define _VAX_INT_MWGWTYPES_H_
 
+#ifdef __UINT_FAST64_TYPE__
+#include <sys/common_int_mwgwtypes.h>
+#else
 /*
  * 7.18.1 Integer types
  */
@@ -83,5 +86,7 @@ typedef	long long int		      intmax_t;
 /* LONGLONG */
 typedef	unsigned long long int	     uintmax_t;
 #endif
+
+#endif /* !__UINT_FAST64_TYPE__ */
 
 #endif /* !_VAX_INT_MWGWTYPES_H_ */

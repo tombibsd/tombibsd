@@ -32,6 +32,9 @@
 #ifndef _SPARC_INT_LIMITS_H_
 #define _SPARC_INT_LIMITS_H_
 
+#ifdef __SIG_ATOMIC_MAX__
+#include <sys/common_int_limits.h>
+#else
 /*
  * 7.18.2 Limits of specified-width integer types
  */
@@ -180,5 +183,7 @@
 #else
 #define	SIZE_MAX	0xffffffffUL			/* size_t	  */
 #endif
+
+#endif /* !__SIG_ATOMIC_MAX__ */
 
 #endif /* !_SPARC_INT_LIMITS_H_ */

@@ -106,6 +106,8 @@ int key_parse (struct mbuf *, struct socket *);
 void key_init (void);
 void key_sa_recordxfer (struct secasvar *, struct mbuf *);
 void key_sa_routechange (struct sockaddr *);
+void key_update_used(void);
+int key_get_used(void);
 
 u_int16_t key_portfromsaddr (const union sockaddr_union *);
 

@@ -1,4 +1,5 @@
-/* $NetBSD */
+/*	$NetBSD$	*/
+
 /*-
  * Copyright (c) 2014 The NetBSD Foundation, Inc.
  * All rights reserved.
@@ -108,6 +109,28 @@
 #define EXYNOS_ACLK_REF_FREQ		(200*1000*1000)	/* 200 Mhz */
 #define EXYNOS_UART_FREQ		(109*1000*1000) /* should be EXYNOS_ACLK_REF_FREQ! */
 
+#define EXYNOS_F_IN_FREQ		(24*1000*1000)	/* 24 Mhz */
+#define EXYNOS_USB_FREQ			EXYNOS_F_IN_FREQ/* 24 Mhz */
+
+
+/* PLLs */
+#define PLL_LOCK_OFFSET			0x000
+#define PLL_CON0_OFFSET			0x100
+#define PLL_CON1_OFFSET			0x104
+
+#define PLL_CON0_ENABLE			__BIT(31)
+#define PLL_CON0_LOCKED			__BIT(29)	/* has the PLL locked on */
+#define PLL_CON0_M			__BITS(16,25)	/* PLL M divide value */
+#define PLL_CON0_P			__BITS( 8,13)	/* PLL P divide value */
+#define PLL_CON0_S			__BITS( 0, 2)	/* PLL S divide value */
+
+#define PLL_PMS2FREQ(F, M, P, S) (((M)*(F))/((P)*(1<<(S))))
+#define PLL_FREQ(f, v) PLL_PMS2FREQ( \
+	(f),\
+	__SHIFTOUT((v), PLL_CON0_M),\
+	__SHIFTOUT((v), PLL_CON0_P),\
+	__SHIFTOUT((v), PLL_CON0_S))
+
 
 /* Watchdog register definitions */
 #define EXYNOS_WDT_WTCON		0x0000
@@ -126,5 +149,53 @@
 #define  WTCNT_COUNT			__BITS(15,0)
 #define EXYNOS_WDT_WTCLRINT		0x000C
 
+
+/* GPIO register definitions */
+#define EXYNOS_GPIO_GRP_SIZE		0x20
+#define EXYNOS_GPIO_CON			0x00
+#define EXYNOS_GPIO_DAT			0x04
+#define EXYNOS_GPIO_PUD			0x08
+#define EXYNOS_GPIO_DRV			0x0C
+#define EXYNOS_GPIO_CONPWD		0x10
+#define EXYNOS_GPIO_PUDPWD		0x14
+/* rest of space is not used */
+
+#define EXYNOS_GPIO_FUNC_INPUT		0x0
+#define EXYNOS_GPIO_FUNC_OUTPUT		0x1
+/* intermediate values are devices, definitions dependent on pin */
+#define EXYNOS_GPIO_FUNC_EXTINT		0xF
+
+#define EXYNOS_GPIO_PIN_FLOAT		0
+#define EXYNOS_GPIO_PIN_PULL_DOWN	1
+#define EXYNOS_GPIO_PIN_PULL_UP		3
+
+
+/* used PMU registers */
+/* Exynos 4210 or Exynos 5 */
+#define EXYNOS_PMU_USBDEV_PHY_CTRL	0x704
+#define EXYNOS_PMU_USBHOST_PHY_CTRL	0x708
+/* Exynos 4x12 */
+#define EXYNOS_PMU_USB_PHY_CTRL		0x704
+#define EXYNOS_PMU_USB_HSIC_1_PHY_CTRL	0x708
+#define EXYNOS_PMU_USB_HSIC_2_PHY_CTRL	0x70C
+
+#define   PMU_PHY_ENABLE		(1 << 0)
+#define   PMU_PHY_DISABLE		(0)
+
+#define EXYNOS_PMU_DEBUG_CLKOUT		0x0A00
+
+/* used SYSREG registers */
+#define EXYNOS5_SYSREG_USB20_PHY_TYPE	0x230
+#define   USB20_PHY_HOST_LINK_EN	(1 << 0)
+
+
+/* Generic USB registers/constants */
+#define FSEL_CLKSEL_50M			7
+#define FSEL_CLKSEL_24M			5
+#define FSEL_CLKSEL_20M			4
+#define FSEL_CLKSEL_19200K		3
+#define FSEL_CLKSEL_12M			2
+#define FSEL_CLKSEL_10M			1
+#define FSEL_CLKSEL_9600K		0
 
 #endif /* _ARM_SAMSUNG_EXYNOS_REG_H_ */

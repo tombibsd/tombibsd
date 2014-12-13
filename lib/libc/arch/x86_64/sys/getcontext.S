@@ -61,3 +61,4 @@ _SYSCALL(_getcontext,getcontext)
 	movq	$0,(56 + 14 * 8)(%rdi)
 	xorl	%eax,%eax
 	ret
+END(_getcontext)

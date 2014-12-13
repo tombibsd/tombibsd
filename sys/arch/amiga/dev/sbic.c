@@ -2060,17 +2060,17 @@ sbicmsgin(struct sbic_softc *dev)
 			SET_SBIC_syn(regs,
 				     SBIC_SYN(dev->sc_sync[dev->target].offset,
 					      dev->sc_sync[dev->target].period));
-		} else if ((dev->sc_msg[0] == MSG_REJECT)) {
+		} else if (dev->sc_msg[0] == MSG_REJECT) {
 			QPRINTF(("REJECT"));
 			/*
 			 * we'll never REJECt a REJECT message..
 			 */
-		} else if ((dev->sc_msg[0] == MSG_SAVE_DATA_PTR)) {
+		} else if (dev->sc_msg[0] == MSG_SAVE_DATA_PTR) {
 			QPRINTF(("MSG_SAVE_DATA_PTR"));
 			/*
 			 * don't reject this either.
 			 */
-		} else if ((dev->sc_msg[0] == MSG_DISCONNECT)) {
+		} else if (dev->sc_msg[0] == MSG_DISCONNECT) {
 			QPRINTF(("DISCONNECT"));
 #ifdef DEBUG
 			if( reselect_debug>1 && dev->sc_msg[0] == MSG_DISCONNECT )

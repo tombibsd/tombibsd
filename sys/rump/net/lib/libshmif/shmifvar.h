@@ -31,7 +31,7 @@
 #define _RUMP_NET_SHMIFVAR_H_
 
 #define SHMIF_MAGIC 0xca11d054
-#define SHMIF_VERSION 2
+#define SHMIF_VERSION 3
 
 struct shmif_mem {
 	uint32_t shm_magic;
@@ -56,6 +56,8 @@ struct shmif_pkthdr {
 
 	uint32_t sp_sec;
 	uint32_t sp_usec;
+
+	uint64_t sp_sender;
 };
 
 #define BUSMEM_SIZE (1024*1024)
@@ -66,6 +68,7 @@ struct shmif_pkthdr {
 #include <rump/rumpuser.h>
 #define DPRINTF(x) rumpuser_dprintf x
 #else
+#include <stdio.h>
 #define DPRINTF(x) printf x
 #endif
 #else

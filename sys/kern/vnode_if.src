@@ -171,6 +171,24 @@ vop_write {
 };
 
 #
+#% fallocate  vp      L L L
+#
+vop_fallocate {
+	IN LOCKED=YES struct vnode *vp;
+	IN off_t pos;
+	IN off_t len;
+};
+
+#
+#% fdiscard   vp      L L L
+#
+vop_fdiscard {
+	IN LOCKED=YES struct vnode *vp;
+	IN off_t pos;
+	IN off_t len;
+};
+
+#
 #% ioctl      vp      U U U
 #
 vop_ioctl {

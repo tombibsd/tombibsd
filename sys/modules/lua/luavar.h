@@ -31,9 +31,11 @@
 #ifndef _LUA_VAR_
 #define _LUA_VAR_
 
+#include <lua.h>
+
 struct lua_module {
 	char			mod_name[LUA_MAX_MODNAME];
-	int 			(*open)(void *);
+	lua_CFunction		open;
 	int			refcount;
 	LIST_ENTRY(lua_module)	mod_next;
 };

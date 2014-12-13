@@ -41,7 +41,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/ioctl.h>
 #include <sys/kernel.h>
 #include <sys/mount.h>
-#include <sys/malloc.h>
 #include <sys/namei.h>
 #include <sys/vnode.h>
 #include <sys/tty.h>
@@ -73,5 +72,5 @@ linux_sys_fadvise64_64(struct lwp *l,
 	} */
 
 	return do_posix_fadvise(SCARG(uap, fd), SCARG(uap, offset),
-	    SCARG(uap, offset), linux_to_bsd_posix_fadv(SCARG(uap, advice)));
+	    SCARG(uap, len), linux_to_bsd_posix_fadv(SCARG(uap, advice)));
 }

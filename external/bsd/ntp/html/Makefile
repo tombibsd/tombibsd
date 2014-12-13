@@ -112,7 +112,7 @@ NTP_DOCFILES= \
 _FDIR:=		ntp/${F:H}				# subdir
 _FDIR:=		${_FDIR:S,/.$,,}			# remove trivial directory
 _FNAME:=	${F:T}					# name override
-_F:=		${DESTDIR}${HTMLDOCDIR}/${_FDIR}/${_FNAME}		# installed path
+_F:=		${DESTDIR}${NTP_HTMLDIR}/${_FDIR}/${_FNAME}		# installed path
 _FILE:=		${F}
 
 .if ${MKUPDATE} == "no"

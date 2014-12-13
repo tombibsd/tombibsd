@@ -196,7 +196,7 @@ mach_init(int x_boothowto, int x_bootdev, int x_bootname, int x_maxmem)
 #ifdef news5000
 	if (systype == NEWS5000) {
 		int i;
-		char *bootspec = (char *)x_bootdev;
+		char *bspec = (char *)x_bootdev;
 
 		if (bi_arg == NULL)
 			panic("news5000 requires BTINFO_BOOTARG to boot");
@@ -204,21 +204,21 @@ mach_init(int x_boothowto, int x_bootdev, int x_bootname, int x_maxmem)
 		_sip = (void *)bi_arg->sip;
 		x_maxmem = _sip->apbsi_memsize;
 		x_maxmem -= 0x00100000;	/* reserve 1MB for ROM monitor */
-		if (strncmp(bootspec, "scsi", 4) == 0) {
+		if (strncmp(bspec, "scsi", 4) == 0) {
 			x_bootdev = (5 << 28) | 0;	 /* magic, sd */
-			bootspec += 4;
-			if (*bootspec != '(' /*)*/)
+			bspec += 4;
+			if (*bspec != '(' /*)*/)
 				goto bootspec_end;
-			i = strtoul(bootspec + 1, &bootspec, 10);
+			i = strtoul(bspec + 1, &bspec, 10);
 			x_bootdev |= (i << 24);		/* bus */
-			if (*bootspec != ',')
+			if (*bspec != ',')
 				goto bootspec_end;
-			i = strtoul(bootspec + 1, &bootspec, 10);
+			i = strtoul(bspec + 1, &bspec, 10);
 			x_bootdev |= (i / 10) << 20;	/* controller */
 			x_bootdev |= (i % 10) << 16;	/* unit */
-			if (*bootspec != ',')
+			if (*bspec != ',')
 				goto bootspec_end;
-			i = strtoul(bootspec + 1, &bootspec, 10);
+			i = strtoul(bspec + 1, &bspec, 10);
 			x_bootdev |= (i << 8);		/* partition */
 		}
  bootspec_end:

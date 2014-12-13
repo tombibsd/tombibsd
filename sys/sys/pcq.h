@@ -37,12 +37,16 @@
 typedef struct pcq pcq_t;
 
 #ifdef _KERNEL
+
+#define	PCQ_MAXLEN	(0xffffU)
+
 bool	pcq_put(pcq_t *, void *);
 void *	pcq_peek(pcq_t *);
 void *	pcq_get(pcq_t *);
 size_t	pcq_maxitems(pcq_t *);
 pcq_t *	pcq_create(size_t, km_flag_t);
 void	pcq_destroy(pcq_t *);
+
 #endif /* _KERNEL */
 
 #endif /* _SYS_PCQ_H_ */

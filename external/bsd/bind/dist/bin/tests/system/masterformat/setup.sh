@@ -15,7 +15,7 @@
 SYSTEMTESTTOP=..
 . $SYSTEMTESTTOP/conf.sh
 
-test -e $RANDFILE || $GENRANDOM 400 $RANDFILE
+test -r $RANDFILE || $GENRANDOM 400 $RANDFILE
 
 rm -f named-compilezone
 ln -s $CHECKZONE named-compilezone
@@ -29,4 +29,4 @@ awk 'END {
 	 for (i = 0; i < 1024; i++ ) { print "b TXT", i; }
 	 for (i = 0; i < 2000; i++ ) { print "c TXT", i; }
 }' < /dev/null >> ns1/large.db
-cd ns1 && sh compile.sh
+cd ns1 && $SHELL compile.sh

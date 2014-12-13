@@ -169,19 +169,6 @@ umcs7840_reg_ctrl(int phyport)
 	}
 }
 
-static inline int
-umcs7840_reg_dcr0(int phyport)
-{
-	KASSERT(phyport >= 0 && phyport < 4);
-	switch (phyport) {
-	default:
-	case 0:	return MCS7840_DEV_REG_DCR0_1;
-	case 1:	return MCS7840_DEV_REG_DCR0_2;
-	case 2:	return MCS7840_DEV_REG_DCR0_3;
-	case 3:	return MCS7840_DEV_REG_DCR0_4;
-	}
-}
-
 static int
 umcs7840_match(device_t dev, cfdata_t match, void *aux)
 {
@@ -433,7 +420,8 @@ umcs7840_set_UART_reg(struct umcs7840_softc *sc, uint8_t portno, uint8_t reg, ui
 }
 
 static int
-umcs7840_set_baudrate(struct umcs7840_softc *sc, uint8_t portno, uint32_t rate)
+umcs7840_set_baudrate(struct umcs7840_softc *sc, uint8_t portno,
+	uint32_t rate)
 {
 	int err;
 	uint16_t divisor;
@@ -447,7 +435,8 @@ umcs7840_set_baudrate(struct umcs7840_softc *sc, uint8_t portno, uint32_t rate)
 		return (-1);
 	}
 	if (divisor == 0 || (clk & MCS7840_DEV_SPx_CLOCK_MASK) != clk) {
-		DPRINTF(("Port %d bad speed calculation: %d\n", portno, rate));
+		DPRINTF(("Port %d bad speed calculation: %d\n", portno,
+		    rate));
 		return (-1);
 	}
 	DPRINTF(("Port %d set speed: %d (%02x / %d)\n", portno, rate, clk, divisor));
@@ -598,20 +587,19 @@ static void
 umcs7840_set(void *self, int portno, int reg, int onoff)
 {
 	struct umcs7840_softc *sc = self;
-	int pn = sc->sc_ports[portno].sc_port_phys;
 
 	if (sc->sc_dying)
 		return;
 
 	switch (reg) {
 	case UCOM_SET_DTR:
-		umcs7840_dtr(sc, pn, onoff);
+		umcs7840_dtr(sc, portno, onoff);
 		break;
 	case UCOM_SET_RTS:
-		umcs7840_rts(sc, pn, onoff);
+		umcs7840_rts(sc, portno, onoff);
 		break;
 	case UCOM_SET_BREAK:
-		umcs7840_break(sc, pn, onoff);
+		umcs7840_break(sc, portno, onoff);
 		break;
 	default:
 		break;
@@ -678,7 +666,7 @@ umcs7840_param(void *self, int portno, struct termios *t)
 	umcs7840_set_UART_reg(sc, pn, MCS7840_UART_REG_MCR,
 	    sc->sc_ports[pn].sc_port_mcr);
 
-	if (umcs7840_set_baudrate(sc, pn, t->c_ospeed))
+	if (umcs7840_set_baudrate(sc, portno, t->c_ospeed))
 		return EIO;
 
 	return 0;
@@ -817,7 +805,7 @@ umcs7840_port_open(void *self, int portno)
 		return EIO;
 
 	/* Set speed 9600 */
-	if (umcs7840_set_baudrate(sc, pn, 9600))
+	if (umcs7840_set_baudrate(sc, portno, 9600))
 		return EIO;
 
 

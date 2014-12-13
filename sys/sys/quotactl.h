@@ -83,7 +83,7 @@ struct quotakcursor {
 #define QUOTACTL_OBJTYPESTAT	2
 #define QUOTACTL_GET		3
 #define QUOTACTL_PUT		4
-#define QUOTACTL_DELETE		5
+#define QUOTACTL_DEL		5
 #define QUOTACTL_CURSOROPEN	6
 #define QUOTACTL_CURSORCLOSE	7
 #define QUOTACTL_CURSORSKIPIDTYPE 8
@@ -118,7 +118,7 @@ struct quotactl_args {
 		} put;
 		struct {
 			const struct quotakey *qc_key;
-		} delete;
+		} del;
 		struct {
 			struct quotakcursor *qc_cursor;
 		} cursoropen;

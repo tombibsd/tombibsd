@@ -195,7 +195,7 @@ struct DMAreq_header *DMAheader[NQD];  /* DMA buffer header pntrs */
 /*
  * The driver assists a client in scroll operations by loading dragon
  * registers from an interrupt service routine.	The loading is done using
- * parameters found in memory shrade between the driver and it's client.
+ * parameters found in memory shrade between the driver and its client.
  * The scroll parameter structures are ALL loacted in the same memory page
  * for reasons of memory economy.
  */
@@ -354,6 +354,7 @@ const struct cdevsw qd_cdevsw = {
 	.d_poll = qdpoll,
 	.d_mmap = nommap,
 	.d_kqfilter = qdkqfilter,
+	.d_discard = nodiscard,
 	.d_flag = 0
 };
 
@@ -585,7 +586,7 @@ qd_match(device_t parent, cfdata_t match, void *aux)
 	 * is found via an array of pte ptrs called "QVmap[]" (ubavar.h)
 	 * which is also loaded at config time.   These are the
 	 * variables used below to find a vacant 64kb boundary in
-	 * Qbus memory, and load it's corresponding physical adrs
+	 * Qbus memory, and load its corresponding physical adrs
 	 * into the QDSS's I/O page CSR.
 	 */
 

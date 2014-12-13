@@ -632,6 +632,9 @@ int32_t vchi_service_open(VCHI_INSTANCE_T instance_handle,
 {
 	VCHIQ_INSTANCE_T instance = (VCHIQ_INSTANCE_T)instance_handle;
 	SHIM_SERVICE_T *service = service_alloc(instance, setup);
+
+	*handle = (VCHI_SERVICE_HANDLE_T)service;
+
 	if (service) {
 		VCHIQ_SERVICE_PARAMS_T params;
 		VCHIQ_STATUS_T status;
@@ -648,10 +651,9 @@ int32_t vchi_service_open(VCHI_INSTANCE_T instance_handle,
 		if (status != VCHIQ_SUCCESS) {
 			service_free(service);
 			service = NULL;
+			*handle = NULL;
 		}
 	}
-
-	*handle = (VCHI_SERVICE_HANDLE_T)service;
 
 	return (service != NULL) ? 0 : -1;
 }
@@ -663,6 +665,9 @@ int32_t vchi_service_create(VCHI_INSTANCE_T instance_handle,
 {
 	VCHIQ_INSTANCE_T instance = (VCHIQ_INSTANCE_T)instance_handle;
 	SHIM_SERVICE_T *service = service_alloc(instance, setup);
+
+	*handle = (VCHI_SERVICE_HANDLE_T)service;
+
 	if (service) {
 		VCHIQ_SERVICE_PARAMS_T params;
 		VCHIQ_STATUS_T status;
@@ -678,10 +683,9 @@ int32_t vchi_service_create(VCHI_INSTANCE_T instance_handle,
 		if (status != VCHIQ_SUCCESS) {
 			service_free(service);
 			service = NULL;
+			*handle = NULL;
 		}
 	}
-
-	*handle = (VCHI_SERVICE_HANDLE_T)service;
 
 	return (service != NULL) ? 0 : -1;
 }
@@ -721,7 +725,6 @@ int32_t vchi_service_destroy(const VCHI_SERVICE_HANDLE_T handle)
 }
 EXPORT_SYMBOL(vchi_service_destroy);
 
-#ifdef notyet
 int32_t vchi_get_peer_version( const VCHI_SERVICE_HANDLE_T handle, short *peer_version )
 {
    int32_t ret = -1;
@@ -735,6 +738,7 @@ int32_t vchi_get_peer_version( const VCHI_SERVICE_HANDLE_T handle, short *peer_v
 }
 EXPORT_SYMBOL(vchi_get_peer_version);
 
+#if notyet
 /* ----------------------------------------------------------------------
  * read a uint32_t from buffer.
  * network format is defined to be little endian

@@ -401,19 +401,29 @@ get_vis(void)
 {
 	int vis = 0;
 
-	if (GETVER_CPU_MANUF() == MANUF_FUJITSU) {
-		/* as far as I can tell SPARC64-III and up have VIS 1.0 */
-		if (GETVER_CPU_IMPL() >= IMPL_SPARC64_III) {
-			vis = 1;
+	if ( CPU_ISSUN4V ) {
+		/*
+		 * UA2005 and UA2007 supports VIS 1 and VIS 2.
+		 * Oracle SPARC Architecture 2011 supports VIS 3.
+		 *
+		 * XXX Settle with VIS 2 until we can determite the
+		 *     actual sun4v implementation.
+		 */
+		vis = 2;
+	} else {
+		if (GETVER_CPU_MANUF() == MANUF_FUJITSU) {
+			/* as far as I can tell SPARC64-III and up have VIS 1.0 */
+			if (GETVER_CPU_IMPL() >= IMPL_SPARC64_III) {
+				vis = 1;
+			}
+			/* XXX - which, if any, SPARC64 support VIS 2.0? */
+		} else { 
+			/* this better be Sun */
+			vis = 1;	/* all UltraSPARCs support at least VIS 1.0 */
+			if (CPU_IS_USIII_UP()) {
+				vis = 2;
+			}
 		}
-		/* XXX - which, if any, SPARC64 support VIS 2.0? */
-	} else { 
-		/* this better be Sun */
-		vis = 1;	/* all UltraSPARCs support at least VIS 1.0 */
-		if (CPU_IS_USIII_UP()) {
-			vis = 2;
-		}
-		/* UltraSPARC T4 supports VIS 3.0 */
 	}
 	return vis;
 }
@@ -448,10 +458,11 @@ SYSCTL_SETUP(sysctl_machdep_setup, "sysctl machdep subtree setup")
 		       NULL, 9, NULL, 0,
 		       CTL_MACHDEP, CPU_ARCH, CTL_EOL);
 	sysctl_createv(clog, 0, NULL, NULL,
-		       CTLFLAG_PERMANENT|CTLFLAG_IMMEDIATE,
-		       CTLTYPE_INT, "vis", NULL,
-		       NULL, get_vis(), NULL, 0,
-		       CTL_MACHDEP, CPU_VIS, CTL_EOL);
+	               CTLFLAG_PERMANENT|CTLFLAG_IMMEDIATE,
+	               CTLTYPE_INT, "vis",
+	               SYSCTL_DESCR("supported version of VIS instruction set"),
+	               NULL, get_vis(), NULL, 0,
+	               CTL_MACHDEP, CPU_VIS, CTL_EOL);
 }
 
 void *
@@ -588,10 +599,13 @@ cpu_reboot(int howto, char *user_boot_string)
 	 */
 	maybe_dump(howto);
 
-	if ((howto & RB_NOSYNC) == 0 && !syncdone) {
+	/*
+	 * If we've panic'd, don't make the situation potentially
+	 * worse by syncing or unmounting the file systems.
+	 */
+	if ((howto & RB_NOSYNC) == 0 && panicstr == NULL) {
 		if (!syncdone) {
-		syncdone = true;
-		vfs_shutdown();
+			syncdone = true;
 			/* XXX used to force unmount as well, here */
 			vfs_sync_all(l);
 			/*
@@ -619,6 +633,7 @@ cpu_reboot(int howto, char *user_boot_string)
 	splhigh();
 
 haltsys:
+	doshutdownhooks();
 
 #ifdef MULTIPROCESSOR
 	/* Stop all secondary cpus */
@@ -1426,8 +1441,10 @@ _bus_dmamem_alloc(bus_dma_tag_t t, bus_size_t size, bus_size_t alignment,
 	 */
 	error = uvm_pglistalloc(size, low, high,
 	    alignment, boundary, pglist, nsegs, (flags & BUS_DMA_NOWAIT) == 0);
-	if (error)
+	if (error) {
+		free(pglist, M_DEVBUF);
 		return (error);
+	}
 
 	/*
 	 * Compute the location, size, and number of segments actually
@@ -1599,27 +1616,6 @@ static int	sparc_bus_alloc(bus_space_tag_t, bus_addr_t, bus_addr_t, bus_size_t,
 static void	sparc_bus_free(bus_space_tag_t, bus_space_handle_t, bus_size_t);
 
 struct extent *io_space = NULL;
-
-void
-bus_space_barrier(bus_space_tag_t t, bus_space_handle_t h,
-	bus_size_t o, bus_size_t s, int f)
-{
-	/*
-	 * We have a bit of a problem with the bus_space_barrier()
-	 * interface.  It defines a read barrier and a write barrier
-	 * which really don't map to the 7 different types of memory
-	 * barriers in the SPARC v9 instruction set.
-	 */
-	if (f == BUS_SPACE_BARRIER_READ)
-		/* A load followed by a load to the same location? */
-		__asm volatile("membar #Lookaside");
-	else if (f == BUS_SPACE_BARRIER_WRITE)
-		/* A store followed by a store? */
-		__asm volatile("membar #StoreStore");
-	else 
-		/* A store followed by a load? */
-		__asm volatile("membar #StoreLoad|#MemIssue|#Lookaside");
-}
 
 int
 bus_space_alloc(bus_space_tag_t t, bus_addr_t rs, bus_addr_t re, bus_size_t s,

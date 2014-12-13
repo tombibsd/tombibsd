@@ -82,11 +82,8 @@ unsigned int gtmpsc_debug = 0;
 # define DPRINTF(x)
 #endif
 
-#define GTMPSCUNIT_MASK    0x7ffff
-#define GTMPSCDIALOUT_MASK 0x80000
-
-#define GTMPSCUNIT(x)      (minor(x) & GTMPSCUNIT_MASK)
-#define GTMPSCDIALOUT(x)   (minor(x) & GTMPSCDIALOUT_MASK)
+#define GTMPSCUNIT(x)      TTUNIT(x)
+#define GTMPSCDIALOUT(x)   TTDIALOUT(x)
 
 #define CLEANUP_AND_RETURN_RXDMA(sc, ix)				    \
 	do {								    \
@@ -168,6 +165,7 @@ const struct cdevsw gtmpsc_cdevsw = {
 	.d_poll = gtmpscpoll,
 	.d_mmap = nommap,
 	.d_kqfilter = ttykqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_TTY
 };
 

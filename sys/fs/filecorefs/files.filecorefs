@@ -2,6 +2,7 @@
 
 deffs	FILECORE
 
+define	filecore: vfs
 file	fs/filecorefs/filecore_bmap.c	filecore
 file	fs/filecorefs/filecore_lookup.c	filecore
 file	fs/filecorefs/filecore_node.c	filecore

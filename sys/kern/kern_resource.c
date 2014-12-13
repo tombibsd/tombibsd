@@ -385,7 +385,7 @@ dosetrlimit(struct lwp *l, struct proc *p, int which, struct rlimit *limp)
 		/*
 		 * Return EINVAL if the new stack size limit is lower than
 		 * current usage. Otherwise, the process would get SIGSEGV the
-		 * moment it would try to access anything on it's current stack.
+		 * moment it would try to access anything on its current stack.
 		 * This conforms to SUSv2.
 		 */
 		if (limp->rlim_cur < p->p_vmspace->vm_ssize * PAGE_SIZE ||

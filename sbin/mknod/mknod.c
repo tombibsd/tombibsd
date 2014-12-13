@@ -223,7 +223,7 @@ main(int argc, char **argv)
 		if (*p == 0 && errno == 0)
 			continue;
 #ifdef KERN_DRIVERS
-		if (n == 0) {
+		if (argc == 2 && n == 0) {
 			major = major_from_name(argv[0], mode);
 			if (major != -1) {
 				numbers[0] = major;

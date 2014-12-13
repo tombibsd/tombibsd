@@ -902,6 +902,7 @@ mmem			dreamcast
 mms			bebox
 mms			dreamcast
 mms			i386
+motg			MI
 motoi2c			MI		Attribute
 moxa			MI
 mppb			amiga
@@ -1186,6 +1187,7 @@ run			MI
 rx			MI
 ry			vax
 rz			pmax
+s390rtc			MI
 sab			MI
 sableio			alpha
 sacc			hpcarm
@@ -1326,6 +1328,8 @@ tea5757			MI
 tfb			MI
 tga			MI
 ti			MI
+tiotg			arm
+tifb			arm
 timer			news68k
 timer			sparc
 timer			sparc64

@@ -14,6 +14,7 @@ CPPFLAGS+=	-I${DESTDIR}${X11INCDIR}/libdrm
 CPPFLAGS+=	-I${DESTDIR}${X11INCDIR}/X11 -I${X11SRCDIR.drm}
 
 LIBDPLIBS=	drm	${.CURDIR}/../libdrm
+LIBDPLIBS+=	pciaccess	${.CURDIR}/../libpciaccess
 
 PKGCONFIG=	libdrm_intel
 PKGDIST=	drm

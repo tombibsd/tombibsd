@@ -153,7 +153,7 @@ static void	fbt_resume(void *, dtrace_id_t, void *);
 
 static const struct cdevsw fbt_cdevsw = {
 	fbt_open, noclose, noread, nowrite, noioctl,
-	nostop, notty, nopoll, nommap, nokqfilter,
+	nostop, notty, nopoll, nommap, nokqfilter, nodiscard,
 	D_OTHER
 };
 

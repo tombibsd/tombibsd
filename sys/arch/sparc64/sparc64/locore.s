@@ -88,12 +88,99 @@
 #include <machine/intr.h>
 #include <machine/asm.h>
 #include <machine/locore.h>
+#ifdef SUN4V
+#include <machine/hypervisor.h>
+#endif	
 #include <sys/syscall.h>
 
 #define BLOCK_SIZE SPARC64_BLOCK_SIZE
 #define BLOCK_ALIGN SPARC64_BLOCK_ALIGN
 
+#ifdef SUN4V
+#define SUN4V_N_REG_WINDOWS    8  /* As per UA2005 spec */
+#define SUN4V_NWINDOWS           (SUN4V_N_REG_WINDOWS-1) /* This is an index number, so subtract one */
+#endif
+	
 #include "ksyms.h"
+
+	/* Misc. macros */
+
+	.macro	GET_MAXCWP reg
+#ifdef SUN4V
+	sethi	%hi(cputyp), \reg
+	ld	[\reg + %lo(cputyp)], \reg
+	cmp	\reg, CPU_SUN4V
+	bne,pt	%icc, 2f
+	 nop
+	/* sun4v */
+	ba	3f
+	 mov	SUN4V_NWINDOWS, \reg
+2:		
+#endif	
+	/* sun4u */
+	rdpr	%ver, \reg
+	and	\reg, CWP, \reg
+3:
+	.endm
+
+	.macro	SET_MMU_CONTEXTID_SUN4U ctxid,ctx
+	stxa	\ctxid, [\ctx] ASI_DMMU;
+	.endm
+	
+#ifdef SUN4V
+	.macro	SET_MMU_CONTEXTID_SUN4V ctxid,ctx
+	stxa	\ctxid, [\ctx] ASI_MMU;
+	.endm
+#endif	
+		
+	.macro	SET_MMU_CONTEXTID ctxid,ctx,scratch
+#ifdef SUN4V
+	sethi	%hi(cputyp), \scratch
+	ld	[\scratch + %lo(cputyp)], \scratch
+	cmp	\scratch, CPU_SUN4V
+	bne,pt	%icc, 2f
+	 nop
+	/* sun4v */
+	SET_MMU_CONTEXTID_SUN4V \ctxid,\ctx
+	ba	3f
+	 nop
+2:		
+#endif	
+	/* sun4u */
+	SET_MMU_CONTEXTID_SUN4U \ctxid,\ctx
+3:
+	.endm
+
+#ifdef SUN4V
+	.macro	NORMAL_GLOBALS_SUN4V
+	 wrpr	%g0, 0, %gl				! Set globals to level 0
+	.endm
+#endif
+	.macro	NORMAL_GLOBALS_SUN4U
+	wrpr	%g0, PSTATE_KERN, %pstate		! Alternate Globals (AG) bit set to zero
+	.endm
+		
+#ifdef SUN4V
+	.macro	ALTERNATE_GLOBALS_SUN4V
+	 wrpr	%g0, 1, %gl				! Set globals to level 1
+	.endm
+#endif	
+	.macro	ALTERNATE_GLOBALS_SUN4U
+	 wrpr    %g0, PSTATE_KERN|PSTATE_AG, %pstate	! Alternate Globals (AG) bit set to one
+	.endm
+	
+	.macro	ENABLE_INTERRUPTS scratch
+	rdpr	 %pstate, \scratch
+	or	\scratch, PSTATE_IE, \scratch	! Interrupt Enable (IE) bit set to one
+	wrpr	%g0, \scratch, %pstate
+	.endm
+
+	.macro	DISABLE_INTERRUPTS scratch
+	rdpr	 %pstate, \scratch
+	and	\scratch, ~PSTATE_IE, \scratch	! Interrupt Enable (IE) bit set to zero
+	wrpr	%g0, \scratch, %pstate
+	.endm
+		
 
 #ifdef SUN4V
 	/* Misc. sun4v macros */
@@ -220,6 +307,9 @@ cputyp:	.word	CPU_SUN4U ! Default to sun4u
 	/* hardware interrupts (can be linked or made `fast') */
 #define	HARDINT4U(lev) \
 	VTRAP(lev, _C_LABEL(sparc_interrupt))
+#ifdef SUN4V
+#define HARDINT4V(lev) HARDINT4U(lev)	
+#endif
 
 	/* software interrupts (may not be made direct, sorry---but you
 	   should not be using them trivially anyway) */
@@ -403,41 +493,9 @@ label:	\
 	NOTREACHED; \
 	TA32
 
-	.globl	start, _C_LABEL(kernel_text)
-	_C_LABEL(kernel_text) = kernel_start		! for kvm_mkdb(8)
-kernel_start:
-	/* Traps from TL=0 -- traps from user mode */
-#ifdef __STDC__
-#define TABLE(name)	user_ ## name
-#else
-#define	TABLE(name)	user_/**/name
-#endif
-	.globl	_C_LABEL(trapbase)
-_C_LABEL(trapbase):
-	b dostart; nop; TA8	! 000 = reserved -- Use it to boot
-	/* We should not get the next 5 traps */
-	UTRAP(0x001)		! 001 = POR Reset -- ROM should get this
-	UTRAP(0x002)		! 002 = WDR -- ROM should get this
-	UTRAP(0x003)		! 003 = XIR -- ROM should get this
-	UTRAP(0x004)		! 004 = SIR -- ROM should get this
-	UTRAP(0x005)		! 005 = RED state exception
-	UTRAP(0x006); UTRAP(0x007)
-	VTRAP(T_INST_EXCEPT, textfault)	! 008 = instr. access except
-	VTRAP(T_TEXTFAULT, textfault)	! 009 = instr access MMU miss
-	VTRAP(T_INST_ERROR, textfault)	! 00a = instr. access err
-	UTRAP(0x00b); UTRAP(0x00c); UTRAP(0x00d); UTRAP(0x00e); UTRAP(0x00f)
-	TRAP(T_ILLINST)			! 010 = illegal instruction
-	TRAP(T_PRIVINST)		! 011 = privileged instruction
-	UTRAP(0x012)			! 012 = unimplemented LDD
-	UTRAP(0x013)			! 013 = unimplemented STD
-	UTRAP(0x014); UTRAP(0x015); UTRAP(0x016); UTRAP(0x017); UTRAP(0x018)
-	UTRAP(0x019); UTRAP(0x01a); UTRAP(0x01b); UTRAP(0x01c); UTRAP(0x01d)
-	UTRAP(0x01e); UTRAP(0x01f)
-	TRAP(T_FPDISABLED)		! 020 = fp instr, but EF bit off in psr
-	TRAP(T_FP_IEEE_754)		! 021 = ieee 754 exception
-	TRAP(T_FP_OTHER)		! 022 = other fp exception
-	TRAP(T_TAGOF)			! 023 = tag overflow
-	rdpr %cleanwin, %o7		! 024-027 = clean window trap
+	/* handle clean window trap when trap level = 0 */
+	.macro CLEANWIN0
+	rdpr %cleanwin, %o7
 	inc %o7				!	This handler is in-lined and cannot fault
 #ifdef DEBUG
 	set	0xbadcafe, %l0		! DEBUG -- compiler should not rely on zero-ed registers.
@@ -479,6 +537,74 @@ _C_LABEL(trapbase):
 	mov %l0, %o6; mov %l0, %o7
 	CLRTT
 	retry; nop; NOTREACHED; TA32
+	.endm
+
+	/* handle clean window trap when trap level = 1 */
+	.macro CLEANWIN1
+	clr	%l0
+#ifdef DEBUG
+	set	0xbadbeef, %l0		! DEBUG
+#endif
+	mov %l0, %l1; mov %l0, %l2
+	rdpr %cleanwin, %o7		!	This handler is in-lined and cannot fault
+	inc %o7; mov %l0, %l3		!       Nucleus (trap&IRQ) code does not need clean windows
+	wrpr %g0, %o7, %cleanwin	!	Clear out %l0-%l8 and %o0-%o8 and inc %cleanwin and done
+#ifdef NOT_DEBUG
+	!!
+	!! Check the sp redzone
+	!!
+	rdpr	%wstate, t1
+	cmp	t1, WSTATE_KERN
+	bne,pt	icc, 7f
+	 sethi	%hi(_C_LABEL(redzone)), t1
+	ldx	[t1 + %lo(_C_LABEL(redzone))], t2
+	cmp	%sp, t2			! if sp >= t2, not in red zone
+	blu	panic_red		! and can continue normally
+7:
+#endif
+	mov %l0, %l4; mov %l0, %l5; mov %l0, %l6; mov %l0, %l7
+	mov %l0, %o0; mov %l0, %o1; mov %l0, %o2; mov %l0, %o3
+
+	mov %l0, %o4; mov %l0, %o5; mov %l0, %o6; mov %l0, %o7
+	CLRTT
+	retry; nop; TA32
+	.endm
+	
+	.globl	start, _C_LABEL(kernel_text)
+	_C_LABEL(kernel_text) = kernel_start		! for kvm_mkdb(8)
+kernel_start:
+	/* Traps from TL=0 -- traps from user mode */
+#ifdef __STDC__
+#define TABLE(name)	user_ ## name
+#else
+#define	TABLE(name)	user_/**/name
+#endif
+	.globl	_C_LABEL(trapbase)
+_C_LABEL(trapbase):
+	b dostart; nop; TA8	! 000 = reserved -- Use it to boot
+	/* We should not get the next 5 traps */
+	UTRAP(0x001)		! 001 = POR Reset -- ROM should get this
+	UTRAP(0x002)		! 002 = WDR -- ROM should get this
+	UTRAP(0x003)		! 003 = XIR -- ROM should get this
+	UTRAP(0x004)		! 004 = SIR -- ROM should get this
+	UTRAP(0x005)		! 005 = RED state exception
+	UTRAP(0x006); UTRAP(0x007)
+	VTRAP(T_INST_EXCEPT, textfault)	! 008 = instr. access except
+	VTRAP(T_TEXTFAULT, textfault)	! 009 = instr access MMU miss
+	VTRAP(T_INST_ERROR, textfault)	! 00a = instr. access err
+	UTRAP(0x00b); UTRAP(0x00c); UTRAP(0x00d); UTRAP(0x00e); UTRAP(0x00f)
+	TRAP(T_ILLINST)			! 010 = illegal instruction
+	TRAP(T_PRIVINST)		! 011 = privileged instruction
+	UTRAP(0x012)			! 012 = unimplemented LDD
+	UTRAP(0x013)			! 013 = unimplemented STD
+	UTRAP(0x014); UTRAP(0x015); UTRAP(0x016); UTRAP(0x017); UTRAP(0x018)
+	UTRAP(0x019); UTRAP(0x01a); UTRAP(0x01b); UTRAP(0x01c); UTRAP(0x01d)
+	UTRAP(0x01e); UTRAP(0x01f)
+	TRAP(T_FPDISABLED)		! 020 = fp instr, but EF bit off in psr
+	TRAP(T_FP_IEEE_754)		! 021 = ieee 754 exception
+	TRAP(T_FP_OTHER)		! 022 = other fp exception
+	TRAP(T_TAGOF)			! 023 = tag overflow
+	CLEANWIN0			! 024-027 = clean window trap
 	TRAP(T_DIV0)			! 028 = divide by zero
 	UTRAP(0x029)			! 029 = internal processor error
 	UTRAP(0x02a); UTRAP(0x02b); UTRAP(0x02c); UTRAP(0x02d); UTRAP(0x02e); UTRAP(0x02f)
@@ -687,33 +813,7 @@ ktextfault:
 	TRAP(T_FP_IEEE_754)		! 021 = ieee 754 exception
 	TRAP(T_FP_OTHER)		! 022 = other fp exception
 	TRAP(T_TAGOF)			! 023 = tag overflow
-	clr	%l0
-#ifdef DEBUG
-	set	0xbadbeef, %l0		! DEBUG
-#endif
-	mov %l0, %l1; mov %l0, %l2	! 024-027 = clean window trap
-	rdpr %cleanwin, %o7		!	This handler is in-lined and cannot fault
-	inc %o7; mov %l0, %l3		!       Nucleus (trap&IRQ) code does not need clean windows
-	wrpr %g0, %o7, %cleanwin	!	Clear out %l0-%l8 and %o0-%o8 and inc %cleanwin and done
-#ifdef NOT_DEBUG
-	!!
-	!! Check the sp redzone
-	!!
-	rdpr	%wstate, t1
-	cmp	t1, WSTATE_KERN
-	bne,pt	icc, 7f
-	 sethi	%hi(_C_LABEL(redzone)), t1
-	ldx	[t1 + %lo(_C_LABEL(redzone))], t2
-	cmp	%sp, t2			! if sp >= t2, not in red zone
-	blu	panic_red		! and can continue normally
-7:
-#endif
-	mov %l0, %l4; mov %l0, %l5; mov %l0, %l6; mov %l0, %l7
-	mov %l0, %o0; mov %l0, %o1; mov %l0, %o2; mov %l0, %o3
-
-	mov %l0, %o4; mov %l0, %o5; mov %l0, %o6; mov %l0, %o7
-	CLRTT
-	retry; nop; TA32
+	CLEANWIN1			! 024-027 = clean window trap
 	TRAP(T_DIV0)			! 028 = divide by zero
 	UTRAP(0x029)			! 029 = internal processor error
 	UTRAP(0x02a); UTRAP(0x02b); UTRAP(0x02c); UTRAP(0x02d); UTRAP(0x02e); UTRAP(0x02f)
@@ -893,7 +993,7 @@ TABLE(syscall):
 
 	.macro	sun4v_trap_entry count
 	.rept	\count
-	ba,a,pt	%xcc, slowtrap
+	ba	slowtrap
 	 nop
 	.align	32
 	.endr
@@ -920,46 +1020,101 @@ _C_LABEL(trapbase_sun4v):
 	!
 	! trap level 0
 	!
-	sun4v_trap_entry 49				! 0x000-0x030
-	VTRAP(T_DATA_MMU_MISS, sun4v_tl0_dtsb_miss)	! 0x031 = data MMU miss
-	sun4v_trap_entry 78				! 0x032-0x07f
-	SPILL64(uspill8_sun4v,ASI_AIUS)			! 0x080 spill_0_normal -- used to save user windows in user mode
-	SPILL32(uspill4_sun4v,ASI_AIUS)			! 0x084 spill_1_normal
-	SPILLBOTH(uspill8_sun4v,uspill4_sun4v,ASI_AIUS)	! 0x088 spill_2_normal
-	sun4v_trap_entry_spill_fill_fail 1		! 0x08c spill_3_normal
-	SPILL64(kspill8_sun4v,ASI_N)			! 0x090 spill_4_normal  -- used to save supervisor windows
-	SPILL32(kspill4_sun4v,ASI_N)			! 0x094 spill_5_normal
-	SPILLBOTH(kspill8_sun4v,kspill4_sun4v,ASI_N)	! 0x098 spill_6_normal
+	sun4v_trap_entry 36					! 0x000-0x023
+	CLEANWIN0						! 0x24-0x27 = clean window
+	sun4v_trap_entry 9					! 0x028-0x030			
+	VTRAP(T_DATA_MMU_MISS, sun4v_dtsb_miss)			! 0x031 = data MMU miss
+	sun4v_trap_entry 15					! 0x032-0x040
+	HARDINT4V(1)						! 0x041 = level 1 interrupt
+	HARDINT4V(2)						! 0x042 = level 2 interrupt
+	HARDINT4V(3)						! 0x043 = level 3 interrupt
+	HARDINT4V(4)						! 0x044 = level 4 interrupt
+	HARDINT4V(5)						! 0x045 = level 5 interrupt
+	HARDINT4V(6)						! 0x046 = level 6 interrupt
+	HARDINT4V(7)						! 0x047 = level 7 interrupt
+	HARDINT4V(8)						! 0x048 = level 8 interrupt
+	HARDINT4V(9)						! 0x049 = level 9 interrupt
+	HARDINT4V(10)						! 0x04a = level 10 interrupt
+	HARDINT4V(11)						! 0x04b = level 11 interrupt
+	HARDINT4V(12)						! 0x04c = level 12 interrupt
+	HARDINT4V(13)						! 0x04d = level 13 interrupt
+	HARDINT4V(14)						! 0x04e = level 14 interrupt
+	HARDINT4V(15)						! 0x04f = level 15 interrupt
+	sun4v_trap_entry 48					! 0x050-0x07f
+	SPILL64(uspill8_sun4vt0,ASI_AIUS)			! 0x080 spill_0_normal -- used to save user windows in user mode
+	SPILL32(uspill4_sun4vt0,ASI_AIUS)			! 0x084 spill_1_normal
+	SPILLBOTH(uspill8_sun4vt0,uspill4_sun4vt0,ASI_AIUS)	! 0x088 spill_2_normal
+	sun4v_trap_entry_spill_fill_fail 1			! 0x08c spill_3_normal
+	SPILL64(kspill8_sun4vt0,ASI_N)				! 0x090 spill_4_normal  -- used to save supervisor windows
+	SPILL32(kspill4_sun4vt0,ASI_N)				! 0x094 spill_5_normal
+	SPILLBOTH(kspill8_sun4vt0,kspill4_sun4vt0,ASI_N)	! 0x098 spill_6_normal
 	sun4v_trap_entry_spill_fill_fail 1			! 0x09c spill_7_normal
-	SPILL64(uspillk8_sun4v,ASI_AIUS)			! 0x0a0 spill_0_other -- used to save user windows in supervisor mode
-	SPILL32(uspillk4_sun4v,ASI_AIUS)			! 0x0a4 spill_1_other
-	SPILLBOTH(uspillk8_sun4v,uspillk4_sun4v,ASI_AIUS)	! 0x0a8 spill_2_other
+	SPILL64(uspillk8_sun4vt0,ASI_AIUS)			! 0x0a0 spill_0_other -- used to save user windows in supervisor mode
+	SPILL32(uspillk4_sun4vt0,ASI_AIUS)			! 0x0a4 spill_1_other
+	SPILLBOTH(uspillk8_sun4vt0,uspillk4_sun4vt0,ASI_AIUS)	! 0x0a8 spill_2_other
 	sun4v_trap_entry_spill_fill_fail 1			! 0x0ac spill_3_other
 	sun4v_trap_entry_spill_fill_fail 1			! 0x0b0 spill_4_other
 	sun4v_trap_entry_spill_fill_fail 1			! 0x0b4 spill_5_other
 	sun4v_trap_entry_spill_fill_fail 1			! 0x0b8 spill_6_other
 	sun4v_trap_entry_spill_fill_fail 1			! 0x0bc spill_7_other
-	FILL64(ufill8_sun4v,ASI_AIUS)			! 0x0c0 fill_0_normal -- used to fill windows when running user mode
-	FILL32(ufill4_sun4v,ASI_AIUS)			! 0x0c4 fill_1_normal
-	FILLBOTH(ufill8_sun4v,ufill4_sun4v,ASI_AIUS)	! 0x0c8 fill_2_normal
-	sun4v_trap_entry_spill_fill_fail 1		! 0x0cc fill_3_normal
-	FILL64(kfill8_sun4v,ASI_N)			! 0x0d0 fill_4_normal  -- used to fill windows when running supervisor mode
-	FILL32(kfill4_sun4v,ASI_N)			! 0x0d4 fill_5_normal
-	FILLBOTH(kfill8_sun4v,kfill4_sun4v,ASI_N)	! 0x0d8 fill_6_normal
-	sun4v_trap_entry_spill_fill_fail 1		! 0x0dc fill_7_normal
-	FILL64(ufillk8_sun4v,ASI_AIUS)			! 0x0e0 fill_0_other
-	FILL32(ufillk4_sun4v,ASI_AIUS)			! 0x0e4 fill_1_other
-	FILLBOTH(ufillk8_sun4v,ufillk4_sun4v,ASI_AIUS)	! 0x0e8 fill_2_other
-	sun4v_trap_entry_spill_fill_fail 1		! 0x0ec fill_3_other
-	sun4v_trap_entry_spill_fill_fail 1		! 0x0f0 fill_4_other
-	sun4v_trap_entry_spill_fill_fail 1		! 0x0f4 fill_5_other
-	sun4v_trap_entry_spill_fill_fail 1		! 0x0f8 fill_6_other
-	sun4v_trap_entry_spill_fill_fail 1		! 0x0fc fill_7_other
-	sun4v_trap_entry 256				! 0x100-0x1ff
+	FILL64(ufill8_sun4vt0,ASI_AIUS)				! 0x0c0 fill_0_normal -- used to fill windows when running user mode
+	FILL32(ufill4_sun4vt0,ASI_AIUS)				! 0x0c4 fill_1_normal
+	FILLBOTH(ufill8_sun4vt0,ufill4_sun4vt0,ASI_AIUS)	! 0x0c8 fill_2_normal
+	sun4v_trap_entry_spill_fill_fail 1			! 0x0cc fill_3_normal
+	FILL64(kfill8_sun4vt0,ASI_N)				! 0x0d0 fill_4_normal  -- used to fill windows when running supervisor mode
+	FILL32(kfill4_sun4vt0,ASI_N)				! 0x0d4 fill_5_normal
+	FILLBOTH(kfill8_sun4vt0,kfill4_sun4vt0,ASI_N)		! 0x0d8 fill_6_normal
+	sun4v_trap_entry_spill_fill_fail 1			! 0x0dc fill_7_normal
+	FILL64(ufillk8_sun4vt0,ASI_AIUS)			! 0x0e0 fill_0_other
+	FILL32(ufillk4_sun4vt0,ASI_AIUS)			! 0x0e4 fill_1_other
+	FILLBOTH(ufillk8_sun4vt0,ufillk4_sun4vt0,ASI_AIUS)	! 0x0e8 fill_2_other
+	sun4v_trap_entry_spill_fill_fail 1			! 0x0ec fill_3_other
+	sun4v_trap_entry_spill_fill_fail 1			! 0x0f0 fill_4_other
+	sun4v_trap_entry_spill_fill_fail 1			! 0x0f4 fill_5_other
+	sun4v_trap_entry_spill_fill_fail 1			! 0x0f8 fill_6_other
+	sun4v_trap_entry_spill_fill_fail 1			! 0x0fc fill_7_other
+	sun4v_trap_entry 256					! 0x100-0x1ff
 	!
 	! trap level 1
 	!
-	sun4v_trap_entry_fail 512			! 0x000-0x1ff
+	sun4v_trap_entry_fail 36				! 0x000-0x023
+	CLEANWIN1						! 0x24-0x27 = clean window
+	sun4v_trap_entry_fail 9					! 0x028-0x030			
+	VTRAP(T_DATA_MMU_MISS, sun4v_dtsb_miss)			! 0x031 = data MMU miss
+	sun4v_trap_entry_fail 78				! 0x032-0x07f
+	SPILL64(uspill8_sun4vt1,ASI_AIUS)			! 0x080 spill_0_normal -- save user windows
+	SPILL32(uspill4_sun4vt1,ASI_AIUS)			! 0x084 spill_1_normal
+	SPILLBOTH(uspill8_sun4vt1,uspill4_sun4vt1,ASI_AIUS)	! 0x088 spill_2_normal
+	sun4v_trap_entry_spill_fill_fail 1			! 0x08c spill_3_normal
+	SPILL64(kspill8_sun4vt1,ASI_N)				! 0x090 spill_4_normal -- save supervisor windows
+	SPILL32(kspill4_sun4vt1,ASI_N)				! 0x094 spill_5_normal
+	SPILLBOTH(kspill8_sun4vt1,kspill4_sun4vt1,ASI_N)	! 0x098 spill_6_normal
+	sun4v_trap_entry_spill_fill_fail 1			! 0x09c spill_7_normal
+	SPILL64(uspillk8_sun4vt1,ASI_AIUS)			! 0x0a0 spill_0_other -- save user windows in nucleus mode
+	SPILL32(uspillk4_sun4vt1,ASI_AIUS)			! 0x0a4 spill_1_other
+	SPILLBOTH(uspillk8_sun4vt1,uspillk4_sun4vt1,ASI_AIUS)	! 0x0a8 spill_2_other
+	sun4v_trap_entry_spill_fill_fail 1			! 0x0ac spill_3_other
+	sun4v_trap_entry_spill_fill_fail 1			! 0x0b0 spill_4_other
+	sun4v_trap_entry_spill_fill_fail 1			! 0x0b4 spill_5_other
+	sun4v_trap_entry_spill_fill_fail 1			! 0x0b8 spill_6_other
+	sun4v_trap_entry_spill_fill_fail 1			! 0x0bc spill_7_other
+	FILL64(ufill8_sun4vt1,ASI_AIUS)				! 0x0c0 fill_0_normal -- fill windows when running nucleus mode from user
+	FILL32(ufill4_sun4vt1,ASI_AIUS)				! 0x0c4 fill_1_normal
+	FILLBOTH(ufill8_sun4vt1,ufill4_sun4vt1,ASI_AIUS)	! 0x0c8 fill_2_normal
+	sun4v_trap_entry_spill_fill_fail 1			! 0x0cc fill_3_normal
+	FILL64(kfill8_sun4vt1,ASI_N)				! 0x0d0 fill_4_normal -- fill windows when running nucleus mode from supervisor
+	FILL32(kfill4_sun4vt1,ASI_N)				! 0x0d4 fill_5_normal
+	FILLBOTH(kfill8_sun4vt1,kfill4_sun4vt1,ASI_N)		! 0x0d8 fill_6_normal
+	sun4v_trap_entry_spill_fill_fail 1			! 0x0dc fill_7_normal
+	FILL64(ufillk8_sun4vt1,ASI_AIUS)			! 0x0e0 fill_0_other -- fill user windows when running nucleus mode -- will we ever use this?
+	FILL32(ufillk4_sun4vt1,ASI_AIUS)			! 0x0e4 fill_1_other
+	FILLBOTH(ufillk8_sun4vt1,ufillk4_sun4vt1,ASI_AIUS)	! 0x0e8 fill_2_other
+	sun4v_trap_entry_spill_fill_fail 1			! 0x0ec fill_3_other
+	sun4v_trap_entry_spill_fill_fail 1			! 0x0f0 fill_4_other
+	sun4v_trap_entry_spill_fill_fail 1			! 0x0f4 fill_5_other
+	sun4v_trap_entry_spill_fill_fail 1			! 0x0f8 fill_6_other
+	sun4v_trap_entry_spill_fill_fail 1			! 0x0fc fill_7_other
+	sun4v_trap_entry_fail 256				! 0x100-0x1ff
 
 #endif
 		
@@ -1315,13 +1470,13 @@ intr_setup_msg:
 	\
 	wrpr	%g0, %g5, %otherwin; \
 	\
-	sethi	%hi(KERNBASE), %g5; \
 	mov	CTX_PRIMARY, %g7; \
 	\
 	wrpr	%g0, WSTATE_KERN, %wstate;			/* Enable kernel mode window traps -- now we can trap again */ \
 	\
-	stxa	%g0, [%g7] ASI_DMMU; 				/* Switch MMU to kernel primary context */ \
+	SET_MMU_CONTEXTID %g0, %g7, %g5;			/* Switch MMU to kernel primary context */ \
 	\
+	sethi	%hi(KERNBASE), %g5; \
 	flush	%g5;						/* Some convenient address that won't trap */ \
 1:
 	
@@ -1416,9 +1571,9 @@ intr_setup_msg:
 	wrpr	%g0, 0, %canrestore; \
 	mov	CTX_PRIMARY, %g7; \
 	wrpr	%g0, %g5, %otherwin; \
-	sethi	%hi(KERNBASE), %g5; \
 	wrpr	%g0, WSTATE_KERN, %wstate;			/* Enable kernel mode window traps -- now we can trap again */ \
-	stxa	%g0, [%g7] ASI_DMMU; 				/* Switch MMU to kernel primary context */ \
+	SET_MMU_CONTEXTID %g0, %g7, %g5;			/* Switch MMU to kernel primary context */ \
+	sethi	%hi(KERNBASE), %g5; \
 	flush	%g5;						/* Some convenient address that won't trap */ \
 1:
 #endif /* _LP64 */
@@ -2562,13 +2717,13 @@ text_error:
  * Traps for sun4v.
  */
 
-sun4v_tl0_dtsb_miss:
+sun4v_dtsb_miss:
 	GET_MMFSA %g1				! MMU Fault status area
-	add	%g1, 0x48, %g3			
+	add	%g1, 0x48, %g3
 	LDPTRA	[%g3] ASI_PHYS_CACHED, %g3	! Data fault address
-	add	%g1, 0x50, %g6			
+	add	%g1, 0x50, %g6
 	LDPTRA	[%g6] ASI_PHYS_CACHED, %g6	! Data fault context
-	
+
 	GET_CTXBUSY %g4
 	sllx	%g6, 3, %g6			! Make it into an offset into ctxbusy
 	LDPTR	[%g4 + %g6], %g4		! Load up our page table.
@@ -2628,17 +2783,27 @@ sun4v_tl0_dtsb_miss:
 	add	%g2, %g3, %g2			! location of TTE in ci_tsb_dmmu
 
 	membar	#StoreStore
-	
+
 	STPTR	%g4, [%g2 + 8]		! store TTE data
 	STPTR	%g1, [%g2]		! store TTE tag
 
 	retry
 	NOTREACHED
 
-sun4v_datatrap:
+sun4v_datatrap:			! branch further based on trap level
+	rdpr	%tl, %g1
+	dec	%g1
+	beq	sun4v_datatrap_tl0
+	 nop
+	ba	sun4v_datatrap_tl1
+	 nop
+sun4v_datatrap_tl0:
 	/* XXX missing implementaion */
 	sir
-
+sun4v_datatrap_tl1:
+	/* XXX missing implementaion */
+	sir
+			
 /*
  * End of traps for sun4v.
  */
@@ -3504,8 +3669,22 @@ ENTRY_NOPROFILE(sparc_interrupt)
 1:
 #endif
 	INTR_SETUP(-CC64FSZ-TF_SIZE)
+	
 	! Switch to normal globals so we can save them
-	wrpr	%g0, PSTATE_KERN, %pstate
+#ifdef SUN4V
+	sethi	%hi(cputyp), %g5
+	ld	[%g5 + %lo(cputyp)], %g5
+	cmp	%g5, CPU_SUN4V
+	bne,pt	%icc, 1f
+	 nop
+	NORMAL_GLOBALS_SUN4V
+	ba	2f
+	 nop
+1:		
+#endif
+	NORMAL_GLOBALS_SUN4U
+2:
+	! Save the normal globals
 	stx	%g1, [%sp + CC64FSZ + STKB + TF_G + ( 1*8)]
 	stx	%g2, [%sp + CC64FSZ + STKB + TF_G + ( 2*8)]
 	stx	%g3, [%sp + CC64FSZ + STKB + TF_G + ( 3*8)]
@@ -3774,11 +3953,20 @@ return_from_trap:
 	!!
 	bnz,pn	%icc, 1f				! Returning to userland?
 	 nop
-	wrpr	%g0, PSTATE_INTR, %pstate
+	ENABLE_INTERRUPTS %g5
 	wrpr	%g0, %g0, %pil				! Lower IPL
 1:
-	wrpr	%g0, PSTATE_KERN, %pstate		! Make sure we have normal globals & no IRQs
+	!! Make sure we have no IRQs
+	DISABLE_INTERRUPTS %g5
 
+#ifdef SUN4V
+	sethi	%hi(cputyp), %g5
+	ld	[%g5 + %lo(cputyp)], %g5
+	cmp	%g5, CPU_SUN4V
+	bne,pt	%icc, 1f
+	 nop
+	!! Make sure we have normal globals
+	NORMAL_GLOBALS_SUN4V
 	/* Restore normal globals */
 	ldx	[%sp + CC64FSZ + STKB + TF_G + (1*8)], %g1
 	ldx	[%sp + CC64FSZ + STKB + TF_G + (2*8)], %g2
@@ -3787,12 +3975,31 @@ return_from_trap:
 	ldx	[%sp + CC64FSZ + STKB + TF_G + (5*8)], %g5
 	ldx	[%sp + CC64FSZ + STKB + TF_G + (6*8)], %g6
 	ldx	[%sp + CC64FSZ + STKB + TF_G + (7*8)], %g7
-	/* Switch to alternate globals and load outs */
+	/* Switch to alternate globals */
+	ALTERNATE_GLOBALS_SUN4V
+	ba	2f
+	 nop
+1:		
+#endif
+	!! Make sure we have normal globals
+	NORMAL_GLOBALS_SUN4U
+	/* Restore normal globals */
+	ldx	[%sp + CC64FSZ + STKB + TF_G + (1*8)], %g1
+	ldx	[%sp + CC64FSZ + STKB + TF_G + (2*8)], %g2
+	ldx	[%sp + CC64FSZ + STKB + TF_G + (3*8)], %g3
+	ldx	[%sp + CC64FSZ + STKB + TF_G + (4*8)], %g4
+	ldx	[%sp + CC64FSZ + STKB + TF_G + (5*8)], %g5
+	ldx	[%sp + CC64FSZ + STKB + TF_G + (6*8)], %g6
+	ldx	[%sp + CC64FSZ + STKB + TF_G + (7*8)], %g7
+	/* Switch to alternate globals */
 #ifdef TRAPS_USE_IG
 	wrpr	%g0, PSTATE_KERN|PSTATE_IG, %pstate	! DEBUG
 #else
-	wrpr	%g0, PSTATE_KERN|PSTATE_AG, %pstate
+	ALTERNATE_GLOBALS_SUN4U
 #endif
+2:		
+	
+	/* Load outs */
 	ldx	[%sp + CC64FSZ + STKB + TF_O + (0*8)], %i0
 	ldx	[%sp + CC64FSZ + STKB + TF_O + (1*8)], %i1
 	ldx	[%sp + CC64FSZ + STKB + TF_O + (2*8)], %i2
@@ -4230,7 +4437,7 @@ dostart:
 
 ENTRY_NOPROFILE(cpu_initialize)	/* for cosmetic reasons - nicer backtrace */
 
-	/* Cache the cputyp in %l6 for later user below */
+	/* Cache the cputyp in %l6 for later use below */
 	sethi	%hi(cputyp), %l6
 	ld	[%l6 + %lo(cputyp)], %l6
 
@@ -4258,7 +4465,6 @@ ENTRY_NOPROFILE(cpu_initialize)	/* for cosmetic reasons - nicer backtrace */
 	 */
 	mov	%l1, %l7			! save cpu_info pointer
 	ldx	[%l1 + CI_PADDR], %l1		! Load the interrupt stack's PA
-
 #ifdef SUN4V
 	cmp	%l6, CPU_SUN4V
 	bne,pt	%icc, 3f
@@ -4282,7 +4488,7 @@ ENTRY_NOPROFILE(cpu_initialize)	/* for cosmetic reasons - nicer backtrace */
 	andn	%l1, %l4, %l1			! Mask the phys page number
 
 	or	%l2, %l1, %l1			! Now take care of the high bits
-	or	%l1, SUN4U_TTE_DATABITS, %l2		! And low bits:	L=1|CP=1|CV=?|E=0|P=1|W=1|G=0
+	or	%l1, SUN4U_TTE_DATABITS, %l2	! And low bits:	L=1|CP=1|CV=?|E=0|P=1|W=1|G=0
 
 	!!
 	!!  Now, map in the interrupt stack as context==0
@@ -4295,7 +4501,7 @@ ENTRY_NOPROFILE(cpu_initialize)	/* for cosmetic reasons - nicer backtrace */
 4:
 
 	!! Setup kernel stack (we rely on curlwp on this cpu
-	!! being lwp0 here and it's uarea is mapped special
+	!! being lwp0 here and its uarea is mapped special
 	!! and already accessible here)
 	flushw
 	LDPTR	[%l7 + CI_CPCB], %l0		! load PCB/uarea pointer
@@ -4317,6 +4523,7 @@ ENTRY_NOPROFILE(cpu_initialize)	/* for cosmetic reasons - nicer backtrace */
 	
 	set	1f, %o0		! Debug printf
 	call	_C_LABEL(prom_printf)
+	 nop
 	.data
 1:
 	.asciz	"Setting trap base...\r\n"
@@ -4338,6 +4545,7 @@ ENTRY_NOPROFILE(cpu_initialize)	/* for cosmetic reasons - nicer backtrace */
 	 nop
 
 	/* sun4v */
+	LDPTR	[%l7 + CI_TSB_DESC], %o0
 	call	_C_LABEL(pmap_setup_tsb_sun4v)
 	 nop
 	ba	1f
@@ -4372,10 +4580,10 @@ ENTRY_NOPROFILE(cpu_initialize)	/* for cosmetic reasons - nicer backtrace */
 	bne,pt	%icc, 6f
 	 nop
 	/* sun4v */
-	set	_C_LABEL(trapbase_sun4v), %o0
+	set	_C_LABEL(trapbase_sun4v), %l1
 	GET_MMFSA %o1
 	call	_C_LABEL(prom_set_trap_table_sun4v)	! Now we should be running 100% from our handlers
-	 nop
+	 mov	%l1, %o0
 	
 	ba	7f
 	 nop
@@ -4402,12 +4610,12 @@ ENTRY_NOPROFILE(cpu_initialize)	/* for cosmetic reasons - nicer backtrace */
 	wrpr	%g0, 0, %tl
 #endif
 
-#if 1
-!	set	_C_LABEL(pmapdebug), %o1
-!	ld	[%o1], %o1
-!	sethi	%hi(0x40000), %o2
-!	btst	%o2, %o1
-!	bz	0f
+#ifdef DEBUG
+	set	_C_LABEL(pmapdebug), %o1
+	ld	[%o1], %o1
+	sethi	%hi(0x40000), %o2
+	btst	%o2, %o1
+	bz	0f
 
 	LDPTR	[%l7 + CI_SPINUP], %o1
 	set	1f, %o0		! Debug printf
@@ -4466,10 +4674,62 @@ ENTRY(cpu_mp_startup)
 	wrpr	%g0, PSTATE_KERN, %pstate
 	flushw
 
+	/* Cache the cputyp in %l6 for later use below */
+	sethi	%hi(cputyp), %l6
+	ld	[%l6 + %lo(cputyp)], %l6
+	
 	/*
 	 * Get pointer to our cpu_info struct
 	 */
 	ldx	[%g2 + CBA_CPUINFO], %l1	! Load the interrupt stack's PA
+	
+#ifdef SUN4V
+	cmp	%l6, CPU_SUN4V
+	bne,pt	%icc, 3f
+	 nop
+	
+	/* sun4v */
+	
+	sethi	%hi(0x80000000), %l2		! V=1|NFO=0|SW=0
+	sllx	%l2, 32, %l2			! Shift it into place
+	mov	-1, %l3				! Create a nice mask
+	sllx	%l3, 56, %l4			! Mask off high 8 bits
+	or	%l4, 0xfff, %l4			! We can just load this in 12 (of 13) bits
+	andn	%l1, %l4, %l1			! Mask the phys page number into RA
+	or	%l2, %l1, %l1			! Now take care of the 8 high bits V|NFO|SW
+	or	%l1, 0x0141, %l2		! And low 13 bits IE=0|E=0|CP=0|CV=0|P=1|
+						!		  X=0|W=1|SW=00|SZ=0001
+
+	/*
+	 *  Now, map in the interrupt stack & cpu_info as context==0
+	 */
+	
+	set	INTSTACK, %o0			! vaddr
+	clr	%o1				! reserved
+	mov	%l2, %o2			! tte
+	mov	MAP_DTLB, %o3			! flags
+	mov	FT_MMU_MAP_PERM_ADDR, %o5	! hv fast trap function
+	ta	ST_FAST_TRAP
+	cmp	%o0, 0
+	be,pt	%icc, 5f
+	 nop
+	sir					! crash if mapping fails
+5:
+
+	/*
+	 * Set 0 as primary context XXX
+	 */
+	
+	mov	CTX_PRIMARY, %o0
+	SET_MMU_CONTEXTID_SUN4V %g0, %o0
+
+	ba	4f		
+	 nop
+3:
+#endif
+	
+	/* sun4u */
+	
 	sethi	%hi(0xa0000000), %l2		! V=1|SZ=01|NFO=0|IE=0
 	sllx	%l2, 32, %l2			! Shift it into place
 	mov	-1, %l3				! Create a nice mask
@@ -4477,11 +4737,12 @@ ENTRY(cpu_mp_startup)
 	or	%l4, 0xfff, %l4			! We can just load this in 12 (of 13) bits
 	andn	%l1, %l4, %l1			! Mask the phys page number
 	or	%l2, %l1, %l1			! Now take care of the high bits
-	or	%l1, SUN4U_TTE_DATABITS, %l2		! And low bits:	L=1|CP=1|CV=?|E=0|P=1|W=1|G=0
+	or	%l1, SUN4U_TTE_DATABITS, %l2	! And low bits:	L=1|CP=1|CV=?|E=0|P=1|W=1|G=0
 
 	/*
 	 *  Now, map in the interrupt stack & cpu_info as context==0
 	 */
+	
 	set	TLB_TAG_ACCESS, %l5
 	set	INTSTACK, %l0
 	stxa	%l0, [%l5] ASI_DMMU		! Make DMMU point to it
@@ -4490,8 +4751,11 @@ ENTRY(cpu_mp_startup)
 	/*
 	 * Set 0 as primary context XXX
 	 */
+	
 	mov	CTX_PRIMARY, %o0
-	stxa	%g0, [%o0] ASI_DMMU
+	SET_MMU_CONTEXTID_SUN4U %g0, %o0
+
+4:	
 	membar	#Sync
 
 	/*
@@ -4505,9 +4769,40 @@ ENTRY(cpu_mp_startup)
 	set	1, %fp
 	clr	%i7
 
+#ifdef SUN4V
+	cmp	%l6, CPU_SUN4V
+	bne,pt	%icc, 2f
+	 nop
+	
+	/* sun4v */
+	
 	/*
 	 * install our TSB pointers
 	 */
+
+	set	CPUINFO_VA, %o0
+	LDPTR	[%o0 + CI_TSB_DESC], %o0
+	call	_C_LABEL(pmap_setup_tsb_sun4v)
+	 nop
+
+	/* set trap table */
+
+	set	_C_LABEL(trapbase_sun4v), %l1
+	GET_MMFSA %o1
+	call	_C_LABEL(prom_set_trap_table_sun4v)
+	 mov	%l1, %o0
+
+	! Now we should be running 100% from our handlers	
+	ba	3f		
+	 nop
+2:
+#endif
+	/* sun4u */
+	
+	/*
+	 * install our TSB pointers
+	 */
+
 	sethi	%hi(CPUINFO_VA+CI_TSB_DMMU), %l0
 	sethi	%hi(CPUINFO_VA+CI_TSB_IMMU), %l1
 	sethi	%hi(_C_LABEL(tsbsize)), %l2
@@ -4533,9 +4828,11 @@ ENTRY(cpu_mp_startup)
 1:
 
 	/* set trap table */
+	
 	set	_C_LABEL(trapbase), %l1
 	call	_C_LABEL(prom_set_trap_table_sun4u)
 	 mov	%l1, %o0
+3:	
 	wrpr	%l1, 0, %tba			! Make sure the PROM didn't
 						! foul up.
 	/*
@@ -5430,10 +5727,9 @@ ENTRY(cpu_switchto)
 
 	wrpr	%g0, 0, %otherwin	! These two insns should be redundant
 	wrpr	%g0, 0, %canrestore
-	rdpr	%ver, %o3
-	and	%o3, CWP, %o3
+	GET_MAXCWP %o3
 	wrpr	%g0, %o3, %cleanwin
-	dec	1, %o3					! NWINDOWS-1-1
+	dec	1, %o3			! CANSAVE + CANRESTORE + OTHERWIN = MAXCWP - 1
 	/* Skip the rest if returning to a interrupted LWP. */
 	brnz,pn	%i2, Lsw_noras
 	 wrpr	%o3, %cansave
@@ -5490,7 +5786,7 @@ ENTRY(softint_fastintr)
 	wrpr	%g0, PIL_HIGH, %pil
 	LDPTR	[%l0 + CI_EINTSTACK], %l6	! l6 = ci_eintstack
 	add	%sp, -CC64FSZ, %l2		! ci_eintstack = sp - CC64FSZ
-	STPTR	%l2, [%l0 + CI_EINTSTACK]	! save intstack for nexted intr
+	STPTR	%l2, [%l0 + CI_EINTSTACK]	! save intstack for nested intr
 
 	mov	%i0, %o0			! o0/i0 = softint lwp
 	mov	%l7, %o1			! o1/i1 = ipl

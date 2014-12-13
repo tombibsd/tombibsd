@@ -17,7 +17,7 @@
 /PhiGrouping.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /README.txt/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /SelfReferential.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
-/aliasing-chain.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
+/alias.ll/1.1.1.2/Fri Oct  3 09:23:20 2014/-kk/
 /bitcast-address-space-nested-global-cycle.ll/1.1.1.2/Tue Jan 14 16:02:17 2014/-kk/
 /bitcast-address-space-nested-global.ll/1.1.1.2/Tue Jan 14 16:02:17 2014/-kk/
 /bitcast-address-space-through-constant-inttoptr-inside-gep-instruction.ll/1.1.1.2/Tue Jan 14 16:02:17 2014/-kk/
@@ -26,10 +26,12 @@
 /bitcast-address-space-through-gep.ll/1.1.1.2/Tue Jan 14 16:02:17 2014/-kk/
 /bitcast-address-space-through-inttoptr.ll/1.1.1.2/Tue Jan 14 16:02:17 2014/-kk/
 /bitcast-address-spaces.ll/1.1.1.2/Tue Jan 14 16:02:17 2014/-kk/
-/bitcast-alias-address-space.ll/1.1.1.2/Tue Jan 14 16:02:17 2014/-kk/
+/bitcast-alias-address-space.ll/1.1.1.4/Sun Aug 10 17:04:47 2014/-kk/
 /bitcast-vector-pointer-as.ll/1.1.1.2/Tue Jan 14 16:02:17 2014/-kk/
 /byval-1.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /byval-4.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
+/comdat.ll/1.1.1.1/Sun Aug 10 17:04:47 2014/-kk/
+/comdat2.ll/1.1.1.1/Sun Aug 10 17:04:47 2014/-kk/
 /cttz-undef-arg.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /dominates.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /fpmath.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
@@ -38,13 +40,16 @@
 /gcroot-meta.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /gcroot-ptrptr.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /gcwrite-ptrptr.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
+/global-ctors.ll/1.1.1.1/Fri May 30 18:11:27 2014/-kk/
 /ident-meta1.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /ident-meta2.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /ident-meta3.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
-/inalloca-vararg.ll/1.1.1.1/Fri Feb 14 20:12:44 2014/-kk/
+/inalloca-vararg.ll/1.1.1.2/Tue Jun  3 03:04:01 2014/-kk/
 /inalloca1.ll/1.1.1.2/Thu Feb 27 08:52:26 2014/-kk/
-/inalloca2.ll/1.1.1.2/Thu Feb 27 08:52:26 2014/-kk/
+/inalloca2.ll/1.1.1.3/Tue Jun  3 03:04:01 2014/-kk/
+/inalloca3.ll/1.1.1.1/Fri May 30 18:11:27 2014/-kk/
 /invoke.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
+/jumptable.ll/1.1.1.1/Sun Aug 10 17:04:47 2014/-kk/
 /llvm.compiler_used-invalid-type.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /llvm.used-invalid-init.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /llvm.used-invalid-init2.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
@@ -52,10 +57,13 @@
 /llvm.used-invalid-type2.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /llvm.used-ptr-type.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /module-flags-1.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
-/range-1.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
-/range-2.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
+/musttail-invalid.ll/1.1.1.1/Fri May 30 18:11:27 2014/-kk/
+/musttail-valid.ll/1.1.1.1/Fri May 30 18:11:27 2014/-kk/
+/range-1.ll/1.1.1.2/Fri Oct  3 09:23:20 2014/-kk/
+/range-2.ll/1.1.1.2/Fri Oct  3 09:23:20 2014/-kk/
 /recursive-type-1.ll/1.1.1.1/Sun Jan  5 16:18:20 2014/-kk/
 /recursive-type-2.ll/1.1.1.1/Sun Jan  5 16:18:20 2014/-kk/
 /recursive-type-3.ll/1.1.1.1/Sun Jan  5 16:18:20 2014/-kk/
+/sret.ll/1.1.1.1/Fri May 30 18:11:27 2014/-kk/
 /varargs-intrinsic.ll/1.1.1.2/Tue Jan 14 16:02:17 2014/-kk/
 D

@@ -70,7 +70,7 @@ atf_test_case invafd cleanup
 invafd_head()
 {
         atf_set "descr" "poll on invalid rump fd"
-	atf_set "timeout" "4"
+	atf_set "timeout" "10"
 }
 
 invafd_body()

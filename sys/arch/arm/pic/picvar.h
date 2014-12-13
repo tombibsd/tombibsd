@@ -30,6 +30,8 @@
 #ifndef _ARM_PIC_PICVAR_H_
 #define _ARM_PIC_PICVAR_H_
 
+#include "opt_multiprocessor.h"
+
 #ifdef MULTIPROCESSOR
 #include <sys/kcpuset.h>
 #endif
@@ -49,11 +51,12 @@ struct cpu_info;
 #define	IPI_NOP			2	/* just get an interrupt (armv6) */
 #define	IPI_SHOOTDOWN		3	/* cause a tlb shootdown */
 #define	IPI_DDB			4	/* enter DDB */
+#define	IPI_GENERIC		5	/* generic IPI */
 #ifdef __HAVE_PREEMPTION
-#define	IPI_KPREEMPT		5	/* cause a preemption */
-#define	NIPI			6
+#define	IPI_KPREEMPT		6	/* cause a preemption */
+#define	NIPI			7
 #else
-#define	NIPI			5
+#define	NIPI			6
 #endif
 
 int	pic_handle_intr(void *);
@@ -160,6 +163,7 @@ void	pic_do_pending_int(void);
 #ifdef MULTIPROCESSOR
 int	pic_ipi_nop(void *);
 int	pic_ipi_xcall(void *);
+int	pic_ipi_generic(void *);
 int	pic_ipi_shootdown(void *);
 int	pic_ipi_ddb(void *);
 #endif

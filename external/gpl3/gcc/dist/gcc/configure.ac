@@ -1516,8 +1516,13 @@ else
 	/* | [A-Za-z]:[\\/]* ) realsrcdir=${srcdir};;
 	*) realsrcdir=../${srcdir};;
 	esac
+	# Clearing GMPINC is necessary to prevent host headers being
+	# used by the build compiler.  Defining GENERATOR_FILE stops
+	# system.h from including gmp.h.
 	CC="${CC_FOR_BUILD}" CFLAGS="${CFLAGS_FOR_BUILD}" \
-	LDFLAGS="${LDFLAGS_FOR_BUILD}" GMPINC="" \
+	CXX="${CXX_FOR_BUILD}" CXXFLAGS="${CXXFLAGS_FOR_BUILD}" \
+	LD="${LD_FOR_BUILD}" LDFLAGS="${LDFLAGS_FOR_BUILD}" \
+	GMPINC="" CPPFLAGS="${CPPFLAGS} -DGENERATOR_FILE" \
 	${realsrcdir}/configure \
 		--enable-languages=${enable_languages-all} \
 		--target=$target_alias --host=$build_alias --build=$build_alias
@@ -3103,6 +3108,25 @@ x3:	.space 4
 	tls_first_minor=14
 	tls_as_opt="-a32 --fatal-warnings"
 	;;
+  riscv*-*-*)
+    conftest_s='
+	.section .tdata,"awT",@progbits
+x:
+	.word 2
+	.text
+	la.tls.gd a0,x
+	la.tls.ie a1,x
+	lui v0,%tls_ie_hi(x)
+	lw v0,%tls_ie_lo(x)(v0)
+	add v0,v0,tp,%tls_ie_add(x)
+	lw v0,%tls_ie_off(x)(v0)
+	lui v0,%tprel_hi(x)
+	add v0,v0,tp,%tprel_add(x)
+	lw v0,%tprel_lo(x)(v0)'
+	tls_first_major=2
+	tls_first_minor=21
+	tls_as_opt='-m32 --fatal-warnings'
+	;;
   s390-*-*)
     conftest_s='
 	.section ".tdata","awT",@progbits
@@ -3620,7 +3644,7 @@ foo:
        .align 4
        smac %g2, %g3, %g1
        umac %g2, %g3, %g1
-       cas [[%g2]], %g3, %g1],,
+       casa [[%g2]] 0xb, %g3, %g1],,
       [AC_DEFINE(HAVE_AS_LEON, 1,
                 [Define if your assembler supports LEON instructions.])])
     ;;

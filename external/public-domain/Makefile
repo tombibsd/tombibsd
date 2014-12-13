@@ -2,6 +2,6 @@
 
 .include <bsd.own.mk>
 
-SUBDIR+= sqlite xz
+SUBDIR+= sqlite tz xz
 
 .include <bsd.subdir.mk>

@@ -246,7 +246,7 @@ gffb_attach(device_t parent, device_t self, void *aux)
 	aprint_normal("%s: %d MB aperture at 0x%08x\n", device_xname(self),
 	    (int)(sc->sc_fbsize >> 20), (uint32_t)sc->sc_fb);
 	aprint_normal_dev(sc->sc_dev, "%d MB video memory\n",
-	    sc->sc_vramsize >> 20);
+	    (int)(sc->sc_vramsize >> 20));
 
 	sc->sc_defaultscreen_descr = (struct wsscreen_descr){
 		"default",

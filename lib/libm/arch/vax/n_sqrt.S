@@ -33,6 +33,7 @@
 #include <machine/asm.h>
 
 #ifdef WEAK_ALIAS
+WEAK_ALIAS(_sqrtl, sqrt)
 WEAK_ALIAS(sqrtl, sqrt)
 #endif
 

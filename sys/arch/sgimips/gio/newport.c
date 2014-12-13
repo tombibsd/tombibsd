@@ -433,7 +433,7 @@ newport_get_resolution(struct newport_devconfig *dc)
 static void
 newport_setup_hw(struct newport_devconfig *dc)
 {
-	uint16_t curp,tmp;
+	uint16_t __unused(curp), tmp;
 	int i;
 	uint32_t scratch;
 
@@ -882,7 +882,7 @@ newport_ioctl(void *v, void *vs, u_long cmd, void *data, int flag,
 {
 	struct vcons_data *vd;
 	struct newport_devconfig *dc;
-	struct vcons_screen *ms;
+	struct vcons_screen *__unused(ms);
 	int nmode;
 
 	vd = (struct vcons_data *)v;

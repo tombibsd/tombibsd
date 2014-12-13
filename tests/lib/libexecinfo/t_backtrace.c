@@ -32,7 +32,6 @@
 __RCSID("$NetBSD$");
 
 #include <atf-c.h>
-#include <atf-c/config.h>
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -147,7 +146,8 @@ myfunc(size_t ncalls)
 ATF_TC(backtrace_fmt_basic);
 ATF_TC_HEAD(backtrace_fmt_basic, tc)
 {
-        atf_tc_set_md_var(tc, "descr", "Test backtrace_fmt(3)");
+	atf_tc_set_md_var(tc, "descr", "Test backtrace_fmt(3)");
+	atf_tc_set_md_var(tc, "require.files", "/proc/self");
 }
 
 ATF_TC_BODY(backtrace_fmt_basic, tc)

@@ -32,3 +32,4 @@ L1:	incl	%eax
 L2:	popl	%esi
 	popl	%edi
 	ret
+END(bcmp)

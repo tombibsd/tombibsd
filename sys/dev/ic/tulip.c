@@ -524,7 +524,7 @@ tlp_attach(struct tulip_softc *sc, const uint8_t *enaddr)
 	ether_set_ifflags_cb(&sc->sc_ethercom, tlp_ifflags_cb);
 
 	rnd_attach_source(&sc->sc_rnd_source, device_xname(self),
-	    RND_TYPE_NET, 0);
+	    RND_TYPE_NET, RND_FLAG_DEFAULT);
 
 	if (pmf_device_register(self, NULL, NULL))
 		pmf_class_network_register(self, ifp);

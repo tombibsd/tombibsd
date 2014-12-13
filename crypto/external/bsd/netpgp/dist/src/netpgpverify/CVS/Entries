@@ -1,5 +1,5 @@
 /Makefile.am/1.4/Sat Nov  6 00:03:34 2010/-kk/
-/Makefile.bsd/1.1/Sun Mar  9 00:15:45 2014/-kk/
+/Makefile.bsd/1.2/Thu Dec 11 09:05:25 2014/-kk/
 /Makefile.in/1.8/Fri Mar 14 04:22:20 2014/-kk/
 /Makefile.lib.in/1.1/Sun Mar  9 00:15:45 2014/-kk/
 /Makefile.libtool.in/1.1/Sun Mar  9 00:15:45 2014/-kk/
@@ -10,8 +10,8 @@
 /array.h/1.1/Sun Mar  9 00:15:45 2014/-kk/
 /b64.c/1.1/Sun Mar  9 00:15:45 2014/-kk/
 /b64.h/1.1/Sun Mar  9 00:15:45 2014/-kk/
-/bignum.c/1.1/Sun Mar  9 00:15:45 2014/-kk/
-/bn.h/1.1/Sun Mar  9 00:15:45 2014/-kk/
+/bignum.c/1.2/Sun Jul 20 13:55:05 2014/-kk/
+/bn.h/1.2/Sun Jul 20 13:55:06 2014/-kk/
 /bufgap.c/1.1/Sun Mar  9 00:15:45 2014/-kk/
 /bufgap.h/1.1/Sun Mar  9 00:15:45 2014/-kk/
 /bzlib.c/1.2/Sun Mar  9 07:01:42 2014/-kk/
@@ -25,20 +25,20 @@
 /defs.h/1.1/Sun Mar  9 00:15:45 2014/-kk/
 /digest.c/1.1/Sun Mar  9 00:15:45 2014/-kk/
 /digest.h/1.1/Sun Mar  9 00:15:45 2014/-kk/
-/libnetpgpverify.3/1.1/Sun Mar  9 00:15:45 2014/-kk/
-/libverify.c/1.4/Tue Mar 25 02:32:08 2014/-kk/
-/main.c/1.4/Fri Mar 14 04:22:24 2014/-kk/
+/libnetpgpverify.3/1.2/Thu Dec 11 09:05:25 2014/-kk/
+/libverify.c/1.5/Thu Dec 11 09:05:25 2014/-kk/
+/main.c/1.5/Thu Dec 11 09:05:25 2014/-kk/
 /md5.h/1.1/Sun Mar  9 00:15:45 2014/-kk/
 /md5c.c/1.1/Sun Mar  9 00:15:45 2014/-kk/
-/misc.c/1.1/Sun Mar  9 00:15:45 2014/-kk/
-/misc.h/1.2/Tue Mar 25 02:32:08 2014/-kk/
+/misc.c/1.2/Thu Dec 11 09:05:25 2014/-kk/
+/misc.h/1.3/Thu Dec 11 09:05:25 2014/-kk/
 /netpgpverify.1/1.8/Fri Mar 14 04:22:24 2014/-kk/
 /pgpsum.c/1.1/Sun Mar  9 00:15:45 2014/-kk/
 /pgpsum.h/1.1/Sun Mar  9 00:15:45 2014/-kk/
 /pubring.gpg/1.1/Sun Mar  9 00:15:45 2014/-kk/
 /rmd160.c/1.1/Sun Mar  9 00:15:45 2014/-kk/
 /rmd160.h/1.1/Sun Mar  9 00:15:45 2014/-kk/
-/rsa.c/1.1/Sun Mar  9 00:15:45 2014/-kk/
+/rsa.c/1.2/Thu Dec 11 09:05:26 2014/-kk/
 /rsa.h/1.1/Sun Mar  9 00:15:45 2014/-kk/
 /sha1.c/1.1/Sun Mar  9 00:15:45 2014/-kk/
 /sha1.h/1.1/Sun Mar  9 00:15:45 2014/-kk/
@@ -46,10 +46,9 @@
 /sha2.h/1.1/Sun Mar  9 00:15:45 2014/-kk/
 /sshtest-20140202.pub/1.1/Sun Mar  9 00:15:45 2014/-kk/
 /sshtest-20140202/1.1/Sun Mar  9 00:15:45 2014/-kk/
-/tiger.c/1.1/Sun Mar  9 00:15:45 2014/-kk/
+/tiger.c/1.2/Tue Dec  9 04:40:39 2014/-kk/
 /tiger.h/1.1/Sun Mar  9 00:15:45 2014/-kk/
-/verify.c/1.15/Wed Sep  1 17:25:57 2010/-kk/
-/verify.h/1.1/Sun Mar  9 00:15:45 2014/-kk/
+/verify.h/1.3/Thu Dec 11 09:05:26 2014/-kk/
 /zlib.c/1.1/Sun Mar  9 00:15:45 2014/-kk/
 /zlib.h/1.1/Sun Mar  9 00:15:45 2014/-kk/
 D

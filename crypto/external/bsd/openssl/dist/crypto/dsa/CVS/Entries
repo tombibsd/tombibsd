@@ -1,8 +1,7 @@
-/Makefile.save/1.1.1.1/Sat Jan 11 18:11:14 2014/-kk/
 /Makefile/1.1.1.3/Sun Jun  5 14:58:29 2011/-kk/
 /README/1.1.1.1/Sun Jul 19 23:03:41 2009/-kk/
 /dsa.h/1.1.1.4/Thu Jul 26 15:01:16 2012/-kk/
-/dsa_ameth.c/1.1.1.3/Thu Jul 26 15:01:15 2012/-kk/
+/dsa_ameth.c/1.2/Wed Oct 29 08:08:45 2014/-kk/
 /dsa_asn1.c/1.1.1.3/Sun Jun  5 14:58:29 2011/-kk/
 /dsa_depr.c/1.1.1.1/Sun Jul 19 23:03:42 2009/-kk/
 /dsa_err.c/1.1.1.3/Thu Jul 26 15:01:15 2012/-kk/

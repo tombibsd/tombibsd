@@ -2,7 +2,7 @@
 /Makefile/1.54/Thu Oct 24 10:28:53 2013/-kk/
 /af_atalk.c/1.19/Thu Oct 24 10:28:53 2013/-kk/
 /af_inet.c/1.15/Mon Dec 13 17:35:08 2010/-kk/
-/af_inet6.c/1.29/Thu Oct 24 10:28:53 2013/-kk/
+/af_inet6.c/1.30/Wed Oct 29 08:12:48 2014/-kk/
 /af_inetany.c/1.17/Sun Dec 30 22:52:35 2012/-kk/
 /af_inetany.h/1.4/Wed Jul  2 07:44:14 2008/-kk/
 /af_link.c/1.7/Fri Jan 31 08:48:26 2014/-kk/
@@ -13,8 +13,8 @@
 /ether.c/1.2/Thu Nov  1 13:43:23 2012/-kk/
 /extern.h/1.14/Fri Aug  7 18:53:37 2009/-kk/
 /ieee80211.c/1.27/Tue Jan 14 16:04:47 2014/-kk/
-/ifconfig.8/1.106/Tue Jan 14 16:04:47 2014/-kk/
-/ifconfig.c/1.231/Thu Oct 24 10:28:53 2013/-kk/
+/ifconfig.8/1.109/Wed Oct 29 08:12:48 2014/-kk/
+/ifconfig.c/1.233/Fri Oct  3 09:57:27 2014/-kk/
 /ifconfig_hostops.c/1.1/Mon Dec 13 17:35:08 2010/-kk/
 /ifconfig_rumpops.c/1.1/Mon Dec 13 17:35:08 2010/-kk/
 /media.c/1.6/Mon Aug 29 14:35:00 2011/-kk/
@@ -26,5 +26,5 @@
 /tunnel.c/1.20/Thu Oct 24 10:28:53 2013/-kk/
 /util.c/1.17/Thu Oct 24 10:28:53 2013/-kk/
 /util.h/1.10/Thu Oct 24 10:28:53 2013/-kk/
-/vlan.c/1.13/Tue Jul 28 18:22:33 2009/-kk/
+/vlan.c/1.14/Fri Oct  3 09:57:27 2014/-kk/
 D

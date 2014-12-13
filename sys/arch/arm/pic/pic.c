@@ -30,6 +30,7 @@
 
 #define _INTR_PRIVATE
 #include "opt_ddb.h"
+#include "opt_multiprocessor.h"
 
 #include <sys/cdefs.h>
 __KERNEL_RCSID(0, "$NetBSD$");
@@ -42,6 +43,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/kernel.h>
 #include <sys/kmem.h>
 #include <sys/xcall.h>
+#include <sys/ipi.h>
 
 #include <arm/armreg.h>
 #include <arm/cpufunc.h>
@@ -107,11 +109,18 @@ pic_ipi_xcall(void *arg)
 	return 1;
 }
 
+int
+pic_ipi_generic(void *arg)
+{
+	ipi_cpu_handler();
+	return 1;
+}
+
 #ifdef DDB
 int
 pic_ipi_ddb(void *arg)
 {
-	printf("%s: %s: tf=%p\n", __func__, curcpu()->ci_cpuname, arg);
+//	printf("%s: %s: tf=%p\n", __func__, curcpu()->ci_cpuname, arg);
 	kdb_trap(-1, arg);
 	return 1;
 }
@@ -638,7 +647,7 @@ pic_establish_intr(struct pic_softc *pic, int irq, int ipl, int type,
 	is->is_func = func;
 	is->is_arg = arg;
 #ifdef MULTIPROCESSOR
-	is->is_mpsafe = (type & IST_MPSAFE);
+	is->is_mpsafe = (type & IST_MPSAFE) || ipl != IPL_VM;
 #endif
 
 	if (pic->pic_ops->pic_source_name)

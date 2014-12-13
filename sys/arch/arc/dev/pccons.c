@@ -196,6 +196,7 @@ const struct cdevsw pc_cdevsw = {
 	.d_poll = pcpoll,
 	.d_mmap = pcmmap,
 	.d_kqfilter = ttykqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_TTY
 };
 
@@ -438,7 +439,7 @@ get_cursor_shape(void)
 	/*
 	 * real 6845's, as found on, MDA, Hercules or CGA cards, do
 	 * not support reading the cursor shape registers. the 6845
-	 * tri-states it's data bus. This is _normally_ read by the
+	 * tri-states its data bus. This is _normally_ read by the
 	 * CPU as either 0x00 or 0xff.. in which case we just use
 	 * a line cursor.
 	 */

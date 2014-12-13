@@ -277,7 +277,7 @@ isc_hash_ctxinit(isc_hash_t *hctx) {
 }
 
 void
-isc_hash_init() {
+isc_hash_init(void) {
 	INSIST(hash != NULL && VALID_HASH(hash));
 
 	isc_hash_ctxinit(hash);
@@ -340,7 +340,7 @@ isc_hash_ctxdetach(isc_hash_t **hctxp) {
 }
 
 void
-isc_hash_destroy() {
+isc_hash_destroy(void) {
 	unsigned int refs;
 
 	INSIST(hash != NULL && VALID_HASH(hash));
@@ -394,4 +394,18 @@ isc_hash_calc(const unsigned char *key, unsigned int keylen,
 	REQUIRE(keylen <= hash->limit);
 
 	return (hash_calc(hash, key, keylen, case_sensitive));
+}
+
+void
+isc__hash_setvec(const isc_uint16_t *vec) {
+	int i;
+	hash_random_t *p;
+
+	if (hash == NULL)
+		return;
+
+	p = hash->rndvector;
+	for (i = 0; i < 256; i++) {
+		p[i] = vec[i];
+	}
 }

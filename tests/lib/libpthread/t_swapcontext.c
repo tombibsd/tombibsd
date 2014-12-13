@@ -59,6 +59,8 @@ swapfunc(void *arg)
 
 	ATF_REQUIRE_EQ(oself, nself);
 	printf("Test succeeded\n");
+	/* Go back in main */
+	ATF_REQUIRE(swapcontext(&nctx, &octx));
 
 	/* NOTREACHED */
 	return;
@@ -99,8 +101,7 @@ ATF_TC_BODY(swapcontext1, tc)
 
 	PTHREAD_REQUIRE(getcontext(&nctx));
 	PTHREAD_REQUIRE(pthread_create(&thread, NULL, threadfunc, NULL));
-	
-	return;
+	PTHREAD_REQUIRE(pthread_join(thread, NULL));
 }
 
 ATF_TP_ADD_TCS(tp)

@@ -101,6 +101,7 @@ const struct bdevsw hp_bdevsw = {
 	.d_ioctl = hpioctl,
 	.d_dump = nulldump,
 	.d_psize = hppsize,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK
 };
 
@@ -115,6 +116,7 @@ const struct cdevsw hp_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = nommap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK
 };
 

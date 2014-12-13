@@ -59,3 +59,5 @@ xor_and_fetch_4(volatile uint32_t *addr, uint32_t val, ...)
 	} while (atomic_cas_32(addr, old, new) != old);
 	return new;
 }
+
+__strong_alias(__atomic_fetch_xor_4,__sync_fetch_and_xor_4)

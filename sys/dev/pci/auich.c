@@ -123,6 +123,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/sysctl.h>
 #include <sys/audioio.h>
 #include <sys/bus.h>
+#include <sys/rnd.h>
 
 #include <dev/pci/pcidevs.h>
 #include <dev/pci/pcivar.h>
@@ -1700,6 +1701,8 @@ auich_calibrate(struct auich_softc *sc)
 		       PRIu64 " us\n", device_xname(sc->sc_dev), wait_us);
 		return;
 	}
+
+	rnd_add_data(NULL, &wait_us, sizeof(wait_us), 1);
 
 	actual_48k_rate = (bytes * UINT64_C(250000)) / wait_us;
 

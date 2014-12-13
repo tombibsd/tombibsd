@@ -98,7 +98,8 @@ pci_genfb_attach(device_t parent, device_t self, void *aux)
 {
 	struct pci_genfb_softc *sc = device_private(self);
 	struct pci_attach_args *pa = aux;
-	struct genfb_ops ops;
+	static const struct genfb_ops zero_ops;
+	struct genfb_ops ops = zero_ops;
 	pcireg_t rom;
 	int idx, bar, type;
 

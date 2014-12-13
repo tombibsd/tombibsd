@@ -40,5 +40,6 @@
  * autoconfiguration framework.
  */
 int ddc_read_edid(i2c_tag_t, u_int8_t *, size_t);
+int ddc_read_edid_block(i2c_tag_t, u_int8_t *, size_t, uint8_t);
 
 #endif /* _DEV_I2C_DDCVAR_H_ */

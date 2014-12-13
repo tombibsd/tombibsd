@@ -41,6 +41,8 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include "opt_ptm.h"
 
+#define TTY_ALLOW_PRIVATE
+
 #include <sys/param.h>
 #include <sys/systm.h>
 #include <sys/ioctl.h>
@@ -119,6 +121,7 @@ const struct cdevsw ptc_cdevsw = {
 	.d_poll = ptcpoll,
 	.d_mmap = nommap,
 	.d_kqfilter = ptckqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_TTY
 };
 
@@ -133,6 +136,7 @@ const struct cdevsw pts_cdevsw = {
 	.d_poll = ptspoll,
 	.d_mmap = nommap,
 	.d_kqfilter = ttykqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_TTY
 };
 
@@ -153,6 +157,7 @@ const struct cdevsw ptc_ultrix_cdevsw = {
 	.d_poll = ptcpoll,
 	.d_mmap = nommap,
 	.d_kqfilter = ptckqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_TTY
 };
 
@@ -167,6 +172,7 @@ const struct cdevsw pts_ultrix_cdevsw = {
 	.d_poll = ptspoll,
 	.d_mmap = nommap,
 	.d_kqfilter = ttykqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_TTY
 };
 #endif /* defined(pmax) */
@@ -237,7 +243,7 @@ pty_check(int ptn)
 
 		/*
 		 * Now grab the pty array mutex - we need to ensure
-		 * that the pty array is consistent while copying it's
+		 * that the pty array is consistent while copying its
 		 * content to newly allocated, larger space; we also
 		 * need to be safe against pty_maxptys().
 		 */

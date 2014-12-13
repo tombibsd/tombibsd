@@ -1,6 +1,6 @@
 -- $NetBSD$
 
-require 'sqlite'
+local sqlite = require 'sqlite'
 
 print(sqlite._VERSION .. ' - ' .. sqlite._DESCRIPTION)
 print(sqlite._COPYRIGHT)

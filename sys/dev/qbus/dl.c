@@ -168,6 +168,7 @@ const struct cdevsw dl_cdevsw = {
 	.d_poll = dlpoll,
 	.d_mmap = nommap,
 	.d_kqfilter = ttykqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_TTY
 };
 

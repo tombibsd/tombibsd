@@ -132,10 +132,11 @@
 #include "elf/moxie.h"
 #include "elf/mt.h"
 #include "elf/msp430.h"
-#include "elf/or32.h"
+#include "elf/or1k.h"
 #include "elf/pj.h"
 #include "elf/ppc.h"
 #include "elf/ppc64.h"
+#include "elf/riscv.h"
 #include "elf/rl78.h"
 #include "elf/rx.h"
 #include "elf/s390.h"
@@ -555,8 +556,7 @@ guess_is_rela (unsigned int e_machine)
     case EM_MIPS:
     case EM_MIPS_RS3_LE:
     case EM_CYGNUS_M32R:
-    case EM_OPENRISC:
-    case EM_OR32:
+    case EM_OR1K:
     case EM_SCORE:
     case EM_XGATE:
       return FALSE;
@@ -604,6 +604,7 @@ guess_is_rela (unsigned int e_machine)
     case EM_NIOS32:
     case EM_PPC64:
     case EM_PPC:
+    case EM_RISCV:
     case EM_RL78:
     case EM_RX:
     case EM_S390:
@@ -1134,9 +1135,8 @@ dump_relocations (FILE * file,
 	  rtype = elf_h8_reloc_type (type);
 	  break;
 
-	case EM_OPENRISC:
-	case EM_OR32:
-	  rtype = elf_or32_reloc_type (type);
+	case EM_OR1K:
+	  rtype = elf_or1k_reloc_type (type);
 	  break;
 
 	case EM_PJ:
@@ -1232,6 +1232,10 @@ dump_relocations (FILE * file,
 	case EM_MICROBLAZE:
 	case EM_MICROBLAZE_OLD:
 	  rtype = elf_microblaze_reloc_type (type);
+	  break;
+
+	case EM_RISCV:
+	  rtype = elf_riscv_reloc_type (type);
 	  break;
 
 	case EM_RL78:
@@ -1941,8 +1945,7 @@ get_machine_name (unsigned e_machine)
     case EM_S390:		return "IBM S/390";
     case EM_SCORE:		return "SUNPLUS S+Core";
     case EM_XSTORMY16:		return "Sanyo XStormy16 CPU core";
-    case EM_OPENRISC:
-    case EM_OR32:		return "OpenRISC";
+    case EM_OR1K:		return "OpenRISC";
     case EM_ARC_A5:		return "ARC International ARCompact processor";
     case EM_CRX:		return "National Semiconductor CRX microprocessor";
     case EM_ADAPTEVA_EPIPHANY:	return "Adapteva EPIPHANY";
@@ -8847,6 +8850,20 @@ get_symbol_visibility (unsigned int visibility)
 }
 
 static const char *
+get_alpha_symbol_other (unsigned int other)
+{   
+  switch (other)
+    {
+    case STO_ALPHA_NOPV:
+      return "NOPV";
+    case STO_ALPHA_STD_GPLOAD:
+      return "STD GPLOAD";
+    default:
+      return NULL;
+    } 
+}
+
+static const char *
 get_mips_symbol_other (unsigned int other)
 {
   switch (other)
@@ -8940,6 +8957,9 @@ get_symbol_other (unsigned int other)
 
   switch (elf_header.e_machine)
     {
+    case EM_ALPHA:
+      result = get_alpha_symbol_other (other);
+      break;
     case EM_MIPS:
       result = get_mips_symbol_other (other);
       break;
@@ -9907,9 +9927,8 @@ is_32bit_abs_reloc (unsigned int reloc_type)
     case EM_ALTERA_NIOS2:
     case EM_NIOS32:
       return reloc_type == 1; /* R_NIOS_32.  */
-    case EM_OPENRISC:
-    case EM_OR32:
-      return reloc_type == 1; /* R_OR32_32.  */
+    case EM_OR1K:
+      return reloc_type == 1; /* R_OR1K_32.  */
     case EM_PARISC:
       return (reloc_type == 1 /* R_PARISC_DIR32.  */
 	      || reloc_type == 41); /* R_PARISC_SECREL32.  */

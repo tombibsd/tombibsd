@@ -358,7 +358,8 @@ nomem:
 #endif
 				rnd_attach_source(&csc->rnd_source,
 						  device_xname(dev),
-						  RND_TYPE_TTY, 0);
+						  RND_TYPE_TTY,
+						  RND_FLAG_DEFAULT);
 			}
 		}
 	}
@@ -545,6 +546,10 @@ uhidev_open(struct uhidev *scd)
 		return (EBUSY);
 	}
 	scd->sc_state |= UHIDEV_OPEN;
+	if (sc->sc_refcnt++) {
+		mutex_exit(&sc->sc_lock);
+		return (0);
+	}
 	mutex_exit(&sc->sc_lock);
 
 	if (sc->sc_isize == 0)
@@ -604,6 +609,7 @@ out1:
 	free(sc->sc_ibuf, M_USBDEV);
 	mutex_enter(&sc->sc_lock);
 	scd->sc_state &= ~UHIDEV_OPEN;
+	sc->sc_refcnt = 0;
 	sc->sc_ibuf = NULL;
 	sc->sc_ipipe = NULL;
 	sc->sc_opipe = NULL;
@@ -623,6 +629,10 @@ uhidev_close(struct uhidev *scd)
 		return;
 	}
 	scd->sc_state &= ~UHIDEV_OPEN;
+	if (--sc->sc_refcnt) {
+		mutex_exit(&sc->sc_lock);
+		return;
+	}
 	mutex_exit(&sc->sc_lock);
 
 	DPRINTF(("uhidev_close: close pipe\n"));

@@ -233,6 +233,11 @@ __strerror_r(int e, char *s, size_t l)
 #  define QUANTUM_2POW_MIN	4
 #  define SIZEOF_PTR_2POW	3
 #endif
+#ifdef __aarch64__
+#  define QUANTUM_2POW_MIN	4
+#  define SIZEOF_PTR_2POW	3
+#  define NO_TLS
+#endif
 #ifdef __alpha__
 #  define QUANTUM_2POW_MIN	4
 #  define SIZEOF_PTR_2POW	3
@@ -270,6 +275,11 @@ __strerror_r(int e, char *s, size_t l)
 #  define SIZEOF_PTR_2POW	2
 #  define USE_BRK
 #endif
+#ifdef __or1k__
+#  define QUANTUM_2POW_MIN	4
+#  define SIZEOF_PTR_2POW	2
+#  define USE_BRK
+#endif
 #ifdef __vax__
 #  define QUANTUM_2POW_MIN	4
 #  define SIZEOF_PTR_2POW	2
@@ -285,10 +295,15 @@ __strerror_r(int e, char *s, size_t l)
 #  define SIZEOF_PTR_2POW	2
 #  define USE_BRK
 #endif
-#ifdef __mips__
-#  define QUANTUM_2POW_MIN	4
+#if defined(__mips__) || defined(__riscv__)
+# ifdef _LP64
+#  define SIZEOF_PTR_2POW	3
+#  define TINY_MIN_2POW		3
+# else
 #  define SIZEOF_PTR_2POW	2
-#  define USE_BRK
+# endif
+# define QUANTUM_2POW_MIN	4
+# define USE_BRK
 #endif
 #ifdef __hppa__                                                                                                                                         
 #  define QUANTUM_2POW_MIN     4                                                                                                                        
@@ -3928,7 +3943,6 @@ _malloc_prefork(void)
 		if (arenas[i] != NULL)
 			malloc_mutex_lock(&arenas[i]->mtx);
 	}
-	malloc_mutex_unlock(&arenas_mtx);
 
 	malloc_mutex_lock(&base_mtx);
 
@@ -3946,7 +3960,6 @@ _malloc_postfork(void)
 
 	malloc_mutex_unlock(&base_mtx);
 
-	malloc_mutex_lock(&arenas_mtx);
 	for (i = 0; i < narenas; i++) {
 		if (arenas[i] != NULL)
 			malloc_mutex_unlock(&arenas[i]->mtx);

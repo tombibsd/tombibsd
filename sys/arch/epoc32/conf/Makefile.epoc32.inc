@@ -8,7 +8,7 @@ SYSTEM_FIRST_SFILE=	${THISARM}/epoc32/epoc32_start.S
 
 KERNEL_BASE_VIRT=	$(LOADADDRESS)
 
-LINKFLAGS=		-T ldscript
+LINKSCRIPT=		-T ldscript
 
 EXTRA_CLEAN+=		netbsd.map assym.d ldscript tmp
 

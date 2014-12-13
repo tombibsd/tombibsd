@@ -32,6 +32,8 @@
 #include <sys/cdefs.h>
 __KERNEL_RCSID(0, "$NetBSD$");
 
+#include "opt_imx.h"
+
 #include "locators.h"
 #include "gpio.h"
 
@@ -71,6 +73,10 @@ imxgpio_match(device_t parent, cfdata_t cfdata, void *aux)
 	case GPIO2_BASE:
 	case GPIO3_BASE:
 	case GPIO4_BASE:
+#ifdef IMX50
+	case GPIO5_BASE:
+	case GPIO6_BASE:
+#endif
 		return 1;
 	}
 

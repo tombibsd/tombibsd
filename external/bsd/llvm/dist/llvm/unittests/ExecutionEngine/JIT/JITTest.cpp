@@ -8,7 +8,6 @@
 //===----------------------------------------------------------------------===//
 
 #include "llvm/ExecutionEngine/JIT.h"
-#include "llvm/ADT/OwningPtr.h"
 #include "llvm/ADT/SmallPtrSet.h"
 #include "llvm/AsmParser/Parser.h"
 #include "llvm/Bitcode/ReaderWriter.h"
@@ -77,7 +76,8 @@ std::string DumpFunction(const Function *F) {
 }
 
 class RecordingJITMemoryManager : public JITMemoryManager {
-  const OwningPtr<JITMemoryManager> Base;
+  const std::unique_ptr<JITMemoryManager> Base;
+
 public:
   RecordingJITMemoryManager()
     : Base(JITMemoryManager::CreateDefaultMemManager()) {
@@ -114,8 +114,8 @@ public:
     return Result;
   }
   int stubsAllocated;
-  virtual uint8_t *allocateStub(const GlobalValue* F, unsigned StubSize,
-                                unsigned Alignment) {
+  uint8_t *allocateStub(const GlobalValue *F, unsigned StubSize,
+                        unsigned Alignment) override {
     stubsAllocated++;
     return Base->allocateStub(F, StubSize, Alignment);
   }
@@ -169,7 +169,7 @@ public:
 bool LoadAssemblyInto(Module *M, const char *assembly) {
   SMDiagnostic Error;
   bool success =
-    NULL != ParseAssemblyString(assembly, M, Error, M->getContext());
+    nullptr != ParseAssemblyString(assembly, M, Error, M->getContext());
   std::string errMsg;
   raw_string_ostream os(errMsg);
   Error.print("", os);
@@ -193,7 +193,7 @@ class JITTest : public testing::Test {
                  .setJITMemoryManager(RJMM)
                  .setErrorStr(&Error)
                  .setTargetOptions(Options).create());
-    ASSERT_TRUE(TheJIT.get() != NULL) << Error;
+    ASSERT_TRUE(TheJIT.get() != nullptr) << Error;
   }
 
   void LoadAssembly(const char *assembly) {
@@ -203,7 +203,7 @@ class JITTest : public testing::Test {
   LLVMContext Context;
   Module *M;  // Owned by ExecutionEngine.
   RecordingJITMemoryManager *RJMM;
-  OwningPtr<ExecutionEngine> TheJIT;
+  std::unique_ptr<ExecutionEngine> TheJIT;
 };
 
 // Regression test for a bug.  The JIT used to allocate globals inside the same
@@ -220,13 +220,13 @@ TEST(JIT, GlobalInFunction) {
   // memory is more easily tested.
   MemMgr->setPoisonMemory(true);
   std::string Error;
-  OwningPtr<ExecutionEngine> JIT(EngineBuilder(M)
-                                 .setEngineKind(EngineKind::JIT)
-                                 .setErrorStr(&Error)
-                                 .setJITMemoryManager(MemMgr)
-                                 // The next line enables the fix:
-                                 .setAllocateGVsWithCode(false)
-                                 .create());
+  std::unique_ptr<ExecutionEngine> JIT(EngineBuilder(M)
+                                           .setEngineKind(EngineKind::JIT)
+                                           .setErrorStr(&Error)
+                                           .setJITMemoryManager(MemMgr)
+                                           // The next line enables the fix:
+                                           .setAllocateGVsWithCode(false)
+                                           .create());
   ASSERT_EQ(Error, "");
 
   // Create a global variable.
@@ -249,7 +249,7 @@ TEST(JIT, GlobalInFunction) {
 
   // Since F1 was codegen'd, a pointer to G should be available.
   int32_t *GPtr = (int32_t*)JIT->getPointerToGlobalIfAvailable(G);
-  ASSERT_NE((int32_t*)NULL, GPtr);
+  ASSERT_NE((int32_t*)nullptr, GPtr);
   EXPECT_EQ(0, *GPtr);
 
   // F1() should increment G.
@@ -633,10 +633,10 @@ ExecutionEngine *getJITFromBitcode(
   MemoryBuffer *BitcodeBuffer =
     MemoryBuffer::getMemBuffer(Bitcode, "Bitcode for test");
   ErrorOr<Module*> ModuleOrErr = getLazyBitcodeModule(BitcodeBuffer, Context);
-  if (error_code EC = ModuleOrErr.getError()) {
+  if (std::error_code EC = ModuleOrErr.getError()) {
     ADD_FAILURE() << EC.message();
     delete BitcodeBuffer;
-    return NULL;
+    return nullptr;
   }
   M = ModuleOrErr.get();
   std::string errMsg;
@@ -644,11 +644,11 @@ ExecutionEngine *getJITFromBitcode(
     .setEngineKind(EngineKind::JIT)
     .setErrorStr(&errMsg)
     .create();
-  if (TheJIT == NULL) {
+  if (TheJIT == nullptr) {
     ADD_FAILURE() << errMsg;
     delete M;
-    M = NULL;
-    return NULL;
+    M = nullptr;
+    return nullptr;
   }
   return TheJIT;
 }
@@ -669,7 +669,8 @@ TEST(LazyLoadedJITTest, MaterializableAvailableExternallyFunctionIsntCompiled) {
                       "} ");
   ASSERT_FALSE(Bitcode.empty()) << "Assembling failed";
   Module *M;
-  OwningPtr<ExecutionEngine> TheJIT(getJITFromBitcode(Context, Bitcode, M));
+  std::unique_ptr<ExecutionEngine> TheJIT(
+      getJITFromBitcode(Context, Bitcode, M));
   ASSERT_TRUE(TheJIT.get()) << "Failed to create JIT.";
   TheJIT->DisableLazyCompilation(true);
 
@@ -708,7 +709,8 @@ TEST(LazyLoadedJITTest, EagerCompiledRecursionThroughGhost) {
                       "} ");
   ASSERT_FALSE(Bitcode.empty()) << "Assembling failed";
   Module *M;
-  OwningPtr<ExecutionEngine> TheJIT(getJITFromBitcode(Context, Bitcode, M));
+  std::unique_ptr<ExecutionEngine> TheJIT(
+      getJITFromBitcode(Context, Bitcode, M));
   ASSERT_TRUE(TheJIT.get()) << "Failed to create JIT.";
   TheJIT->DisableLazyCompilation(true);
 

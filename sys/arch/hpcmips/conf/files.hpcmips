@@ -6,6 +6,12 @@ maxpartitions 8
 maxusers 2 8 64
 
 #
+# Stack-less Just-In-Time compiler
+#
+
+include	"external/bsd/sljit/conf/files.sljit"
+
+#
 # Machine-independent I2O drivers.
 #
 

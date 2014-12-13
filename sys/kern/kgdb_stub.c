@@ -465,9 +465,9 @@ kgdb_trap(int type, db_regs_t *regs)
 				kgdb_send("E05");
 				continue;
 			}
-			db_read_bytes(addr, (size_t)len,
-					(char *)buffer + sizeof(buffer) / 2);
-			mem2hex(buffer, buffer + sizeof(buffer) / 2, len);
+			char *ptr = (char *)buffer + sizeof(buffer) / 2;
+			db_read_bytes(addr, len, ptr);
+			mem2hex(buffer, ptr, len);
 			kgdb_send(buffer);
 			continue;
 
@@ -496,7 +496,7 @@ kgdb_trap(int type, db_regs_t *regs)
 				kgdb_send("E0A");
 				continue;
 			}
-			db_write_bytes(addr, (size_t)len, (char *)buffer);
+			db_write_bytes(addr, len, (char *)buffer);
 			kgdb_send("OK");
 			continue;
 

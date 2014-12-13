@@ -91,6 +91,10 @@
    don't. */
 #undef HAVE_DECL_BSWAP64
 
+/* Define to 1 if you have the declaration of `errc', and to 0 if you don't.
+   */
+#undef HAVE_DECL_ERRC
+
 /* Define to 1 if you have the declaration of `fstatvfs', and to 0 if you
    don't. */
 #undef HAVE_DECL_FSTATVFS
@@ -222,6 +226,18 @@
 /* Define to 1 if you have the declaration of `user_from_uid', and to 0 if you
    don't. */
 #undef HAVE_DECL_USER_FROM_UID
+
+/* Define to 1 if you have the declaration of `verrc', and to 0 if you don't.
+   */
+#undef HAVE_DECL_VERRC
+
+/* Define to 1 if you have the declaration of `vwarnc', and to 0 if you don't.
+   */
+#undef HAVE_DECL_VWARNC
+
+/* Define to 1 if you have the declaration of `warnc', and to 0 if you don't.
+   */
+#undef HAVE_DECL_WARNC
 
 /* Define if you have the `devname' function. */
 #undef HAVE_DEVNAME

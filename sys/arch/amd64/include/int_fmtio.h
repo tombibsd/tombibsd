@@ -32,6 +32,10 @@
 #ifndef _AMD64_INT_FMTIO_H_
 #define _AMD64_INT_FMTIO_H_
 
+#ifdef __INTPTR_FMTd__
+#include <sys/common_int_fmtio.h>
+#else
+
 #ifdef __x86_64__
 
 /*
@@ -216,5 +220,7 @@
 #include <i386/int_fmtio.h>
 
 #endif	/*	__x86_64__	*/
+
+#endif
 
 #endif /* !_AMD64_INT_FMTIO_H_ */

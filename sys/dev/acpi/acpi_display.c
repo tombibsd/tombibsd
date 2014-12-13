@@ -1871,16 +1871,40 @@ acpidisp_print_odinfo(device_t self, const struct acpidisp_odinfo *oi)
 	}
 }
 
+/*
+ * general purpose range printing function
+ * 1 -> 1
+ * 1 2 4 6 7-> [1-2,4,6-7]
+ */
+static void
+ranger(uint8_t *a, size_t l, void (*pr)(const char *, ...) __printflike(1, 2))
+{
+	uint8_t b, e; 
+
+	if (l > 1)
+		(*pr)("[");
+
+	for (size_t i = 0; i < l; i++) {
+		for (b = e = a[i]; i < l && a[i + 1] == e + 1; i++, e++)
+			continue;
+		(*pr)("%"PRIu8, b);
+		if (b != e)
+			(*pr)("-%"PRIu8, e);
+		if (i < l - 1)
+			(*pr)(",");
+	}
+
+	if (l > 1)
+		printf("]");
+}
+
 static void
 acpidisp_print_brctl(device_t self, const struct acpidisp_brctl *bc)
 {
-	uint16_t i;
-
 	KASSERT(bc != NULL);
 
-	aprint_verbose_dev(self, "brightness levels:");
-	for (i = 0; i < bc->bc_level_count; i++)
-		aprint_verbose(" %"PRIu8, bc->bc_level[i]);
+	aprint_verbose_dev(self, "brightness levels: ");
+	ranger(bc->bc_level, bc->bc_level_count, aprint_verbose);
 	aprint_verbose("\n");
 }
 

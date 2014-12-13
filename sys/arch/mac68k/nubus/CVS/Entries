@@ -1,10 +1,10 @@
-/cpi_nubus.c/1.8/Tue Mar 25 02:35:27 2014/-kk/
+/cpi_nubus.c/1.9/Fri Oct  3 09:09:02 2014/-kk/
 /cpi_nubusvar.h/1.4/Sat Oct 27 17:17:59 2012/-kk/
 /grf_nubus.c/1.77/Tue Oct 29 08:21:39 2013/-kk/
 /if_ae_nubus.c/1.41/Fri Jan 16 23:43:46 2009/-kk/
 /if_netdock_nubus.c/1.22/Sat Oct 27 17:17:59 2012/-kk/
 /if_sm_nubus.c/1.10/Sat Oct 27 17:17:59 2012/-kk/
 /if_sn_nubus.c/1.29/Wed Apr 23 13:29:45 2008/-kk/
-/nubus.c/1.64/Sat Oct 27 17:17:59 2012/-kk/
+/nubus.c/1.65/Wed Oct 29 08:13:08 2014/-kk/
 /nubus.h/1.66/Sat Oct 27 17:18:00 2012/-kk/
 D

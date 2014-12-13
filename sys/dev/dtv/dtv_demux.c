@@ -305,7 +305,7 @@ dtv_demux_open(struct dtv_softc *sc, int flags, int mode, lwp_t *l)
 	/* Default operation mode is unconfigured */
 	demux->dd_mode = DTV_DEMUX_MODE_NONE;
 	selinit(&demux->dd_sel);
-	mutex_init(&demux->dd_lock, MUTEX_DEFAULT, IPL_VM);
+	mutex_init(&demux->dd_lock, MUTEX_DEFAULT, IPL_SCHED);
 	cv_init(&demux->dd_section_cv, "dtvsec");
 
 	error = fd_allocfile(&fp, &fd);

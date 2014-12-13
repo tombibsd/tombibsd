@@ -82,7 +82,7 @@ struct sockaddr_un *
 svr4_32_find_socket(struct proc *p, struct file *fp, dev_t dev, svr4_ino_t ino)
 {
 	struct svr4_sockcache_entry *e;
-	void *cookie = ((struct socket *) fp->f_data)->so_internal;
+	void *cookie = fp->f_socekt->so_internal;
 
 	if (!initialized) {
 		DPRINTF(("svr4_32_find_socket: uninitialized [%p,%d,%d]\n",
@@ -115,7 +115,7 @@ void
 svr4_32_delete_socket(struct proc *p, struct file *fp)
 {
 	struct svr4_sockcache_entry *e;
-	void *cookie = ((struct socket *) fp->f_data)->so_internal;
+	void *cookie = fp->f_socket->so_internal;
 
 	if (!initialized) {
 		TAILQ_INIT(&svr4_head);

@@ -66,6 +66,7 @@ const struct bdevsw altmem_bdevsw = {
 	.d_ioctl = altmemioctl,
 	.d_dump = nodump,
 	.d_psize = altmemsize,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK
 };
 const struct cdevsw altmem_cdevsw = {
@@ -79,6 +80,7 @@ const struct cdevsw altmem_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = nommap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK
 };
 static struct dkdriver altmemdkdriver = { altmemstrategy, minphys };

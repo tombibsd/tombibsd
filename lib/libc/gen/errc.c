@@ -46,7 +46,7 @@ __RCSID("$NetBSD$");
 __weak_alias(errc, _errc)
 #endif
 
-#if !HAVE_ERR_H
+#if !HAVE_ERR_H || !HAVE_DECL_ERRC
 __dead void
 errc(int eval, int code, const char *fmt, ...)
 {

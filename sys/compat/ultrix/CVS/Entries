@@ -1,5 +1,5 @@
 /Makefile/1.6/Fri Jan 31 08:48:46 2014/-kk/
-/files.ultrix/1.5/Wed Nov 19 18:36:06 2008/-kk/
+/files.ultrix/1.6/Tue Dec  9 04:34:54 2014/-kk/
 /syscalls.conf/1.4/Fri Nov  1 21:24:19 2002/-kk/
 /syscalls.master/1.52/Tue Nov 12 02:18:43 2013/-kk/
 /ultrix_exec.h/1.6/Wed Nov 19 18:36:06 2008/-kk/
@@ -9,7 +9,7 @@
 /ultrix_ioctl.c/1.36/Mon Dec 14 00:47:12 2009/-kk/
 /ultrix_misc.c/1.122/Sun Feb 19 21:06:45 2012/-kk/
 /ultrix_mod.c/1.5/Fri Mar 14 04:28:19 2014/-kk/
-/ultrix_pathname.c/1.38/Mon Dec 14 00:47:12 2009/-kk/
+/ultrix_pathname.c/1.39/Fri Oct  3 09:50:52 2014/-kk/
 /ultrix_syscall.h/1.63/Tue Nov 12 02:18:43 2013/-kk/
 /ultrix_syscallargs.h/1.58/Tue Nov 12 02:18:43 2013/-kk/
 /ultrix_syscalls.c/1.62/Tue Nov 12 02:18:43 2013/-kk/

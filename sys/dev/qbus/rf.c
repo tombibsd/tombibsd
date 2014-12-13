@@ -32,7 +32,7 @@
 TODO:
 - Better LBN bound checking, block padding for SD disks.
 - Formatting / "Set Density"
-- Better error handling / detailed error reason reportnig.
+- Better error handling / detailed error reason reporting.
 */
 
 #include <sys/cdefs.h>
@@ -123,6 +123,7 @@ const struct bdevsw rf_bdevsw = {
 	.d_ioctl = rfioctl,
 	.d_dump = rfdump,
 	.d_psize = rfsize,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK
 };
 
@@ -137,6 +138,7 @@ const struct cdevsw rf_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = nommap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK
 };
 

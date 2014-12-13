@@ -44,3 +44,4 @@ L3:
 	jnz	L3
 L4:
 	ret
+END(swab)

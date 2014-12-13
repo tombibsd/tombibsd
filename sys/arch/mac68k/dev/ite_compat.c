@@ -73,6 +73,7 @@ const struct cdevsw ite_cdevsw = {
 	.d_poll = itepoll,
 	.d_mmap = nommap,
 	.d_kqfilter = itekqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_TTY
 };
 

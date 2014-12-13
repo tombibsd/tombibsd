@@ -37,7 +37,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <sys/kernel.h>
 #include <net/if.h>
-#include <net/radix.h>
 #include <net/if_ether.h>
 #include <netinet/in.h>
 #include <net/route.h>
@@ -50,9 +49,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 DOMAIN_DEFINE(atalkdomain);	/* forward declare and add to link set */
 
-PR_WRAP_USRREQ(ddp_usrreq)
-#define	ddp_usrreq	ddp_usrreq_wrapper
-
 const struct protosw atalksw[] = {
     {
 	.pr_type = SOCK_DGRAM,
@@ -60,7 +56,7 @@ const struct protosw atalksw[] = {
 	.pr_protocol = ATPROTO_DDP,
 	.pr_flags = PR_ATOMIC|PR_ADDR,
 	.pr_output = ddp_output,
-	.pr_usrreq = ddp_usrreq,
+	.pr_usrreqs = &ddp_usrreqs,
 	.pr_init = ddp_init,
     },
 };

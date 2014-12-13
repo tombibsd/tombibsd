@@ -16,10 +16,10 @@ TMPKERNEL=	${.OBJDIR}/netbsd
 BOOT_RELEASEDIR=	installation/bootfs
 
 ${IMAGE}.gz:	${KERNEL} ${BOOTLOADER}
-	${TOOL_GZIP} -cd ${KERNEL} > ${TMPKERNEL}
+	${TOOL_GZIP_N} -cd ${KERNEL} > ${TMPKERNEL}
 	${TOOL_POWERPCMKBOOTIMAGE} -m ${MACHINE} \
 	    -b ${BOOTLOADER} -k ${TMPKERNEL} ${IMAGE}
-	${TOOL_GZIP} -9nc ${IMAGE} > ${IMAGE}.tmp
+	${TOOL_GZIP_N} -9c ${IMAGE} > ${IMAGE}.tmp
 	mv ${IMAGE}.tmp ${.TARGET}
 
 CLEANFILES+=	${IMAGE} ${IMAGE}.tmp ${IMAGE}.gz

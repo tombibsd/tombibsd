@@ -88,6 +88,7 @@ const struct bdevsw ld_bdevsw = {
 	.d_ioctl = ldioctl,
 	.d_dump = lddump,
 	.d_psize = ldsize,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK
 };
 
@@ -102,6 +103,7 @@ const struct cdevsw ld_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = nommap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK
 };
 
@@ -162,7 +164,7 @@ ldattach(struct ld_softc *sc)
 
 	/* Attach the device into the rnd source list. */
 	rnd_attach_source(&sc->sc_rnd_source, device_xname(sc->sc_dv),
-	    RND_TYPE_DISK, 0);
+	    RND_TYPE_DISK, RND_FLAG_DEFAULT);
 
 	/* Register with PMF */
 	if (!pmf_device_register1(sc->sc_dv, ld_suspend, NULL, ld_shutdown))
@@ -553,6 +555,16 @@ ldioctl(dev_t dev, u_long cmd, void *addr, int32_t flag, struct lwp *l)
 
 		return (dkwedge_list(&sc->sc_dk, dkwl, l));
 	    }
+
+	case DIOCMWEDGES:
+	    {
+	    	if ((flag & FWRITE) == 0)
+			return (EBADF);
+
+		dkwedge_discover(&sc->sc_dk);
+		return 0;
+	    }
+
 	case DIOCGSTRATEGY:
 	    {
 		struct disk_strategy *dks = (void *)addr;
@@ -568,7 +580,7 @@ ldioctl(dev_t dev, u_long cmd, void *addr, int32_t flag, struct lwp *l)
 	case DIOCSSTRATEGY:
 	    {
 		struct disk_strategy *dks = (void *)addr;
-		struct bufq_state *new, *old;
+		struct bufq_state *new_bufq, *old_bufq;
 
 		if ((flag & FWRITE) == 0)
 			return EPERM;
@@ -577,17 +589,17 @@ ldioctl(dev_t dev, u_long cmd, void *addr, int32_t flag, struct lwp *l)
 			return EINVAL;
 
 		dks->dks_name[sizeof(dks->dks_name) - 1] = 0; /* ensure term */
-		error = bufq_alloc(&new, dks->dks_name,
+		error = bufq_alloc(&new_bufq, dks->dks_name,
 		    BUFQ_EXACT|BUFQ_SORT_RAWBLOCK);
 		if (error)
 			return error;
 
 		mutex_enter(&sc->sc_mutex);
-		old = sc->sc_bufq;
-		bufq_move(new, old);
-		sc->sc_bufq = new;
+		old_bufq = sc->sc_bufq;
+		bufq_move(new_bufq, old_bufq);
+		sc->sc_bufq = new_bufq;
 		mutex_exit(&sc->sc_mutex);
-		bufq_free(old);
+		bufq_free(old_bufq);
 
 		return 0;
 	    }
@@ -812,14 +824,16 @@ ldgetdefaultlabel(struct ld_softc *sc, struct disklabel *lp)
 	lp->d_type = DTYPE_LD;
 	strlcpy(lp->d_typename, "unknown", sizeof(lp->d_typename));
 	strlcpy(lp->d_packname, "fictitious", sizeof(lp->d_packname));
-	lp->d_secperunit = sc->sc_secperunit;
+	if (sc->sc_secperunit > UINT32_MAX)
+		lp->d_secperunit = UINT32_MAX;
+	else
+		lp->d_secperunit = sc->sc_secperunit;
 	lp->d_rpm = 7200;
 	lp->d_interleave = 1;
 	lp->d_flags = 0;
 
 	lp->d_partitions[RAW_PART].p_offset = 0;
-	lp->d_partitions[RAW_PART].p_size =
-	    lp->d_secperunit * (lp->d_secsize / DEV_BSIZE);
+	lp->d_partitions[RAW_PART].p_size = lp->d_secperunit;
 	lp->d_partitions[RAW_PART].p_fstype = FS_UNUSED;
 	lp->d_npartitions = RAW_PART + 1;
 

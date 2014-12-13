@@ -1,4 +1,4 @@
-/*	$NetBSD$	*/
+/*	NetBSD: deflate.c,v 1.2 2005/02/20 10:47:17 cube Exp 	*/
 
 /*
  * ppp_deflate.c - interface the zlib procedures for Deflate compression

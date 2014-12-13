@@ -95,8 +95,6 @@ struct auvitek_bulk {
 	usbd_pipe_handle	ab_pipe;
 	struct auvitek_bulk_xfer ab_bx[AUVITEK_NBULK_XFERS];
 	bool			ab_running;
-	kmutex_t		ab_lock;
-	kcondvar_t		ab_cv;
 };
 
 struct auvitek_softc {

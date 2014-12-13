@@ -41,7 +41,6 @@ __RCSID("$NetBSD$");
 #include <string.h>
 
 #include <atf-c.h>
-#include <atf-c/config.h>
 
 #if defined(__i386__) || defined(__amd64__) || defined(__sparc__)
 #include <fenv.h>

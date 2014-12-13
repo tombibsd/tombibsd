@@ -1,3 +1,4 @@
+D/aarch64////
 D/alpha////
 D/arm////
 D/hppa////
@@ -5,7 +6,9 @@ D/i386////
 D/ia64////
 D/m68k////
 D/mips////
+D/or1k////
 D/powerpc////
+D/riscv////
 D/sh3////
 D/sparc////
 D/sparc64////

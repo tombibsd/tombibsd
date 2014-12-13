@@ -429,7 +429,7 @@ aps_detach(device_t self, int flags)
 {
 	struct aps_softc *sc = device_private(self);
 
-        callout_stop(&sc->sc_callout);
+        callout_halt(&sc->sc_callout, NULL);
         callout_destroy(&sc->sc_callout);
 
 	if (sc->sc_sme)

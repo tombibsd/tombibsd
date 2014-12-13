@@ -43,7 +43,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #define G2RTC_REG_SIZE	12
 
 /* Offset by 20 years, 5 of them are leap */
-#define G2RTC_OFFSET	(20 * SECYR + 5 * SECDAY)
+#define G2RTC_OFFSET	(20 * SECS_PER_COMMON_YEAR + 5 * SECS_PER_DAY)
 
 struct g2rtc_softc {
 	device_t sc_dev;

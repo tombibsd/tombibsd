@@ -109,11 +109,11 @@ user_sysctl(const int *name, unsigned int namelen,
 #define _INT(s, n, v, d) {					\
 	.sysctl_flags = CTLFLAG_IMMEDIATE|CTLFLAG_PERMANENT|	\
 			CTLTYPE_INT|SYSCTL_VERSION,		\
-	sysc_init_field(_sysctl_size, sizeof(int)),		\
+	.sysctl_size = sizeof(int),				\
 	.sysctl_name = (s),					\
 	.sysctl_num = (n),					\
-	.sysctl_un = { .scu_idata = (v), },			\
-	sysc_init_field(_sysctl_desc, (d)),			\
+	.sysctl_un.scu_idata = (v),				\
+	.sysctl_desc = (d),					\
 	}
 
 	/*
@@ -129,22 +129,11 @@ user_sysctl(const int *name, unsigned int namelen,
 		{
 			.sysctl_flags = SYSCTL_VERSION|CTLFLAG_PERMANENT|
 				CTLTYPE_STRING,
-			sysc_init_field(_sysctl_size, sizeof(_PATH_STDPATH)),
+			.sysctl_size = sizeof(_PATH_STDPATH),
 			.sysctl_name = "cs_path",
 			.sysctl_num = USER_CS_PATH,
-			/*
-			 * XXX these nasty initializers (and the one in
-			 * the _INT() macro) can go away once all ports
-			 * are using gcc3, and become
-			 *
-			 *	.sysctl_data = _PATH_STDPATH,
-			 *	.sysctl_desc = NULL,
-			 */
-			.sysctl_un = { .scu_data = { 
-				sysc_init_field(_sud_data,
-				__UNCONST(_PATH_STDPATH)),
-				}, },
-			sysc_init_field(_sysctl_desc,
+			.sysctl_data = __UNCONST(_PATH_STDPATH),
+			.sysctl_desc = __UNCONST(
 				"A value for the PATH environment variable "
 				"that finds all the standard utilities"),
 		},
@@ -324,6 +313,7 @@ user_sysctl(const int *name, unsigned int namelen,
 			if (d2 != NULL)
 				memcpy(d2, d1, d);
 			sz += d;
+			d2 = (struct sysctldesc *)((char *)d2 + d);
 			if (node != NULL)
 				break;
 		}

@@ -37,14 +37,6 @@
 /*
  * Time constants. These are unlikely to change.
  */
-#define IS_LEAPYEAR(y) ((((y % 4) == 0) && ((y % 100) != 0)) || ((y % 400) == 0))
-
-#define SEC_PER_MIN	(60)
-#define SEC_PER_HOUR	(SEC_PER_MIN * 60)
-#define SEC_PER_DAY	(SEC_PER_HOUR * 24)
-#define DAYSPERYEAR(y)	(IS_LEAPYEAR(y) ? 366 : 365)
-#define SECPERYEAR(y)	(DAYSPERYEAR(y) * SEC_PER_DAY)
-
 #define TODRBASE	(1 << 28) /* Rumours says it comes from VMS */
 
 #define	SEC_OFF		0

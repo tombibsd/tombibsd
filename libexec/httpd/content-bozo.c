@@ -172,6 +172,7 @@ static bozo_content_map_t static_content_map[] = {
 	{ ".ice",	4, "x-conference/x-cooltalk",	"",		"", NULL },
 	{ ".wrl",	4, "x-world/x-vrml",		"",		"", NULL },
 	{ ".vrml",	5, "x-world/x-vrml",		"",		"", NULL },
+	{ ".svg",	5, "image/svg+xml",		"",		"", NULL },
 	{ NULL,		0, NULL,		NULL,		NULL, NULL }
 };
 

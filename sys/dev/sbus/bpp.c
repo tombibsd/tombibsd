@@ -136,6 +136,7 @@ const struct cdevsw bpp_cdevsw = {
 	.d_poll = bpppoll,
 	.d_mmap = nommap,
 	.d_kqfilter = bppkqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_TTY
 };
 

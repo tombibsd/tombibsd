@@ -133,6 +133,9 @@ ENTRY(biosdisk_read)
 	calll	_C_LABEL(real_to_prot) # back to protected mode
 	.code32
 
+	andl    $0x0000FFFF, %eax  # Some bioses set high bits in %eax
+	                           #  on success, interfering with our
+	                           #  return value.  Clear those out.
 	movl	%eax, 28(%esp)
 
 	popa

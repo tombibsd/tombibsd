@@ -301,7 +301,7 @@ __write_8(bus_addr_t a, u_int64_t v)
 	__asm volatile(
 		".set noreorder;"
 		".set push;"
-		".set r5900;"
+		".set arch = r5900;"
 		"pextlw	$8, %0, %1;"
 		"sd	$8, 0(%2);"
 		"sync.l;"

@@ -1,5 +1,3 @@
-/*	$NetBSD$	*/
-
 /* A simple but fairly efficient C version of the Unix "wc" tool */
 
 #include <stdio.h>

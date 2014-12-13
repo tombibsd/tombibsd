@@ -1,8 +1,7 @@
 /*	$NetBSD$	*/
-
 #ifdef HMAC_MD5
 #ifndef LINT
-static const char rcsid[] = "Header: /tmp/cvstest/DHCP/dst/hmac_link.c,v 1.5.6.1 2009/11/20 01:49:01 sar Exp ";
+static const char rcsid[] = "Header: /tmp/cvstest/DHCP/dst/hmac_link.c,v 1.6 2009/11/24 02:06:56 sar Exp ";
 #endif
 /*
  * Portions Copyright (c) 1995-1998 by Trusted Information Systems, Inc.
@@ -25,7 +24,6 @@ static const char rcsid[] = "Header: /tmp/cvstest/DHCP/dst/hmac_link.c,v 1.5.6.1
 
 #include <sys/cdefs.h>
 __RCSID("$NetBSD$");
-
 
 /* 
  * This file contains an implementation of the HMAC-MD5 algorithm.

@@ -446,14 +446,14 @@ luaopen_sqlite(lua_State* L)
 
 	sqlite3_initialize();
 
-	luaL_register(L, "sqlite", sqlite_methods);
-	luaL_register(L, NULL, db_methods);
-	luaL_register(L, NULL, stmt_methods);
+	luaL_newlib(L, sqlite_methods);
+	luaL_setfuncs(L, db_methods, 0);
+	luaL_setfuncs(L, stmt_methods, 0);
 	gpio_set_info(L);
 
 	/* The database connection metatable */
 	if (luaL_newmetatable(L, SQLITE_DB_METATABLE)) {
-		luaL_register(L, NULL, db_methods);
+		luaL_setfuncs(L, db_methods, 0);
 
 		lua_pushliteral(L, "__gc");
 		lua_pushcfunction(L, db_close);
@@ -471,7 +471,7 @@ luaopen_sqlite(lua_State* L)
 
 	/* The statement metatable */
 	if (luaL_newmetatable(L, SQLITE_STMT_METATABLE)) {
-		luaL_register(L, NULL, stmt_methods);
+		luaL_setfuncs(L, stmt_methods, 0);
 
 		lua_pushliteral(L, "__gc");
 		lua_pushcfunction(L, stmt_finalize);

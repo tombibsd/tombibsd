@@ -74,6 +74,8 @@ const struct vnodeopv_entry_desc tmpfs_vnodeop_entries[] = {
 	{ &vop_setattr_desc,		tmpfs_setattr },
 	{ &vop_read_desc,		tmpfs_read },
 	{ &vop_write_desc,		tmpfs_write },
+	{ &vop_fallocate_desc,		genfs_eopnotsupp },
+	{ &vop_fdiscard_desc,		genfs_eopnotsupp },
 	{ &vop_ioctl_desc,		tmpfs_ioctl },
 	{ &vop_fcntl_desc,		tmpfs_fcntl },
 	{ &vop_poll_desc,		tmpfs_poll },
@@ -343,7 +345,7 @@ tmpfs_mknod(void *v)
 	enum vtype vt = vap->va_type;
 
 	if (vt != VBLK && vt != VCHR && vt != VFIFO) {
-		vput(dvp);
+		*vpp = NULL;
 		return EINVAL;
 	}
 	return tmpfs_construct_node(dvp, vpp, vap, cnp, NULL);
@@ -1034,7 +1036,7 @@ tmpfs_readlink(void *v)
 	/* Note: readlink(2) returns the path without NUL terminator. */
 	if (node->tn_size > 0) {
 		error = uiomove(node->tn_spec.tn_lnk.tn_link,
-		    MIN(node->tn_size - 1, uio->uio_resid), uio);
+		    MIN(node->tn_size, uio->uio_resid), uio);
 	} else {
 		error = 0;
 	}

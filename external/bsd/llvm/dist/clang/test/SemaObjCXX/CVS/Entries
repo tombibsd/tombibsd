@@ -38,7 +38,7 @@
 /delay-parsing-cfunctions.mm/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
 /delay-parsing-cplusfuncs.mm/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
 /delay-parsing-func-tryblock.mm/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
-/exceptions-fragile.mm/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
+/exceptions-fragile.mm/1.1.1.2/Tue Jun  3 03:04:59 2014/-kk/
 /exceptions.mm/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
 /expr-objcxx.mm/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
 /foreach-block.mm/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
@@ -52,12 +52,14 @@
 /instantiate-expr.mm/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
 /instantiate-message.mm/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
 /instantiate-method-return.mm/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
+/instantiate-property-access.mm/1.1.1.1/Sun Aug 10 17:08:37 2014/-kk/
 /instantiate-stmt.mm/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
 /ivar-construct.mm/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
 /ivar-lookup.mm/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
 /ivar-reference-type.mm/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
 /ivar-struct.mm/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
 /linkage-spec.mm/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
+/lit.local.cfg/1.1.1.1/Fri May 30 18:14:49 2014/-kk/
 /literals.mm/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
 /message.mm/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
 /microsoft-abi-byval.mm/1.1.1.2/Fri Jan 31 08:45:35 2014/-kk/
@@ -70,9 +72,10 @@
 /objc-extern-c.mm/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
 /objc-pointer-conv.mm/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
 /objc2-merge-gc-attribue-decl.mm/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
-/objcbridge-attribute-arc.mm/1.1.1.1/Sun Jan  5 15:39:40 2014/-kk/
-/objcbridge-attribute.mm/1.1.1.1/Sun Jan  5 15:39:40 2014/-kk/
+/objcbridge-attribute-arc.mm/1.1.1.2/Tue Jun  3 03:04:59 2014/-kk/
+/objcbridge-attribute.mm/1.1.1.2/Tue Jun  3 03:04:59 2014/-kk/
 /objcbridge-related-attribute.mm/1.1.1.1/Sun Jan  5 15:39:40 2014/-kk/
+/objcbridge-static-cast.mm/1.1.1.1/Fri May 30 18:14:49 2014/-kk/
 /old-style-cast.mm/1.1.1.1/Sun Jan  5 15:39:39 2014/-kk/
 /overload-gc.mm/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
 /overload.mm/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
@@ -80,6 +83,7 @@
 /pointer-to-objc-pointer-conv.mm/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
 /propert-dot-error.mm/1.1.1.2/Thu Feb 27 08:51:51 2014/-kk/
 /properties.mm/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
+/property-invalid-type.mm/1.1.1.1/Sun Aug 10 17:08:37 2014/-kk/
 /property-reference.mm/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
 /property-synthesis-error.mm/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
 /property-type-mismatch.mm/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/

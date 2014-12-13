@@ -21,6 +21,7 @@ LLVM_LIBS+= \
 	AsmPrinter \
 	IRReader \
 	AsmParser \
+	Object \
 	MCParser \
 	BitReader \
 	JIT \
@@ -29,7 +30,6 @@ LLVM_LIBS+= \
 	Instrumentation \
 	Interpreter \
 	ExecutionEngine \
-	Object \
 	SelectionDAG \
 	CodeGen \
 	ScalarOpts \

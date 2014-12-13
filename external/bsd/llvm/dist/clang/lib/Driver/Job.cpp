@@ -41,7 +41,7 @@ static int skipArgs(const char *Flag) {
     .Cases("-internal-externc-isystem", "-iprefix", "-iwithprefix", true)
     .Cases("-iwithprefixbefore", "-isysroot", "-isystem", "-iquote", true)
     .Cases("-resource-dir", "-serialize-diagnostic-file", true)
-    .Case("-dwarf-debug-flags", true)
+    .Cases("-dwarf-debug-flags", "-ivfsoverlay", true)
     .Default(false);
 
   // Match found.
@@ -62,7 +62,8 @@ static int skipArgs(const char *Flag) {
 
   // These flags are treated as a single argument (e.g., -F<Dir>).
   StringRef FlagRef(Flag);
-  if (FlagRef.startswith("-F") || FlagRef.startswith("-I"))
+  if (FlagRef.startswith("-F") || FlagRef.startswith("-I") ||
+      FlagRef.startswith("-fmodules-cache-path="))
     return 1;
 
   return 0;
@@ -94,7 +95,9 @@ static void PrintArg(raw_ostream &OS, const char *Arg, bool Quote) {
 
 void Command::Print(raw_ostream &OS, const char *Terminator, bool Quote,
                     bool CrashReport) const {
-  OS << " \"" << Executable << '"';
+  // Always quote the exe.
+  OS << ' ';
+  PrintArg(OS, Executable, /*Quote=*/true);
 
   for (size_t i = 0, e = Arguments.size(); i < e; ++i) {
     const char *const Arg = Arguments[i];
@@ -123,9 +126,9 @@ int Command::Execute(const StringRef **Redirects, std::string *ErrMsg,
   Argv.push_back(Executable);
   for (size_t i = 0, e = Arguments.size(); i != e; ++i)
     Argv.push_back(Arguments[i]);
-  Argv.push_back(0);
+  Argv.push_back(nullptr);
 
-  return llvm::sys::ExecuteAndWait(Executable, Argv.data(), /*env*/ 0,
+  return llvm::sys::ExecuteAndWait(Executable, Argv.data(), /*env*/ nullptr,
                                    Redirects, /*secondsToWait*/ 0,
                                    /*memoryLimit*/ 0, ErrMsg, ExecutionFailed);
 }

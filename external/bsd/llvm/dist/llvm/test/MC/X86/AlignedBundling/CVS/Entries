@@ -5,7 +5,7 @@
 /bundle-group-too-large-error.s/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /bundle-lock-option-error.s/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /different-sections.s/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
-/lit.local.cfg/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/lit.local.cfg/1.1.1.2/Fri Oct  3 09:23:18 2014/-kk/
 /lock-without-bundle-mode-error.s/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /long-nop-pad.s/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /pad-align-to-bundle-end.s/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/

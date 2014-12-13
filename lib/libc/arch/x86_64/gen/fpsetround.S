@@ -40,3 +40,8 @@ ENTRY(fpsetround)
 	ldmxcsr	-4(%rsp)
 
 	ret
+#ifdef WEAK_ALIAS
+END(_fpsetround)
+#else
+END(fpsetround)
+#endif

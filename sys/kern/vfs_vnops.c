@@ -171,8 +171,25 @@ vn_open(struct nameidata *ndp, int fmode, int cmode)
 
 #if NVERIEXEC > 0
 	error = veriexec_openchk(l, ndp->ni_vp, pathstring, fmode);
-	if (error)
-		goto bad;
+	if (error) {
+		/* We have to release the locks ourselves */
+		if (fmode & O_CREAT) {
+			if (vp == NULL) {
+				vput(ndp->ni_dvp);
+			} else {
+				VOP_ABORTOP(ndp->ni_dvp, &ndp->ni_cnd);
+				if (ndp->ni_dvp == ndp->ni_vp)
+					vrele(ndp->ni_dvp);
+				else
+					vput(ndp->ni_dvp);
+				ndp->ni_dvp = NULL;
+				vput(vp);
+			}
+		} else {
+			vput(vp);
+		}
+		goto out;
+	}
 #endif /* NVERIEXEC > 0 */
 
 	if (fmode & O_CREAT) {
@@ -444,7 +461,7 @@ int
 vn_readdir(file_t *fp, char *bf, int segflg, u_int count, int *done,
     struct lwp *l, off_t **cookies, int *ncookies)
 {
-	struct vnode *vp = (struct vnode *)fp->f_data;
+	struct vnode *vp = fp->f_vnode;
 	struct iovec aiov;
 	struct uio auio;
 	int error, eofflag;
@@ -494,7 +511,7 @@ unionread:
 		vp = vp->v_mount->mnt_vnodecovered;
 		vref(vp);
 		mutex_enter(&fp->f_lock);
-		fp->f_data = vp;
+		fp->f_vnode = vp;
 		fp->f_offset = 0;
 		mutex_exit(&fp->f_lock);
 		vrele(tvp);
@@ -511,7 +528,7 @@ static int
 vn_read(file_t *fp, off_t *offset, struct uio *uio, kauth_cred_t cred,
     int flags)
 {
-	struct vnode *vp = (struct vnode *)fp->f_data;
+	struct vnode *vp = fp->f_vnode;
 	int error, ioflag, fflag;
 	size_t count;
 
@@ -542,7 +559,7 @@ static int
 vn_write(file_t *fp, off_t *offset, struct uio *uio, kauth_cred_t cred,
     int flags)
 {
-	struct vnode *vp = (struct vnode *)fp->f_data;
+	struct vnode *vp = fp->f_vnode;
 	int error, ioflag, fflag;
 	size_t count;
 
@@ -596,7 +613,7 @@ vn_write(file_t *fp, off_t *offset, struct uio *uio, kauth_cred_t cred,
 static int
 vn_statfile(file_t *fp, struct stat *sb)
 {
-	struct vnode *vp = fp->f_data;
+	struct vnode *vp = fp->f_vnode;
 	int error;
 
 	vn_lock(vp, LK_EXCLUSIVE | LK_RETRY);
@@ -671,7 +688,7 @@ vn_stat(struct vnode *vp, struct stat *sb)
 static int
 vn_fcntl(file_t *fp, u_int com, void *data)
 {
-	struct vnode *vp = fp->f_data;
+	struct vnode *vp = fp->f_vnode;
 	int error;
 
 	error = VOP_FCNTL(vp, com, data, fp->f_flag, kauth_cred_get());
@@ -684,7 +701,7 @@ vn_fcntl(file_t *fp, u_int com, void *data)
 static int
 vn_ioctl(file_t *fp, u_long com, void *data)
 {
-	struct vnode *vp = fp->f_data, *ovp;
+	struct vnode *vp = fp->f_vnode, *ovp;
 	struct vattr vattr;
 	int error;
 
@@ -759,7 +776,7 @@ static int
 vn_poll(file_t *fp, int events)
 {
 
-	return (VOP_POLL(fp->f_data, events));
+	return (VOP_POLL(fp->f_vnode, events));
 }
 
 /*
@@ -769,7 +786,7 @@ int
 vn_kqfilter(file_t *fp, struct knote *kn)
 {
 
-	return (VOP_KQFILTER(fp->f_data, kn));
+	return (VOP_KQFILTER(fp->f_vnode, kn));
 }
 
 /*
@@ -809,7 +826,7 @@ static int
 vn_closefile(file_t *fp)
 {
 
-	return vn_close(fp->f_data, fp->f_flag, fp->f_cred);
+	return vn_close(fp->f_vnode, fp->f_flag, fp->f_cred);
 }
 
 /*

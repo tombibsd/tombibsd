@@ -69,7 +69,7 @@ LIBDPLIBS=\
 .include <bsd.lib.mk>
 
 # Many const char * vs char * issues in xsrc/xfree
-.if defined(HAVE_GCC) && ${HAVE_GCC} >= 45
+.if defined(HAVE_GCC)
 # XXX -Wno-deprecated doesn't work?
 CXXFLAGS+=	-Wno-error
 .endif

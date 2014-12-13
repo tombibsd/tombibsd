@@ -1462,8 +1462,6 @@ sysace_send_config(struct ace_softc *sc, uint32_t *Data, unsigned int nBytes)
  * Rest of code lifted with mods from the dev\ata\wd.c driver
  */
 
-/*	$NetBSD$ */
-
 /*
  * Copyright (c) 1998, 2001 Manuel Bouyer.  All rights reserved.
  *
@@ -1562,6 +1560,7 @@ const struct bdevsw ace_bdevsw = {
 	.d_ioctl = aceioctl,
 	.d_dump = acedump,
 	.d_psize = acesize,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK
 };
 
@@ -1576,6 +1575,7 @@ const struct cdevsw ace_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = nommap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK
 };
 
@@ -1655,7 +1655,7 @@ aceattach(struct ace_softc *ace)
 	disk_attach(&ace->sc_dk);
 
 	rnd_attach_source(&ace->rnd_source, device_xname(ace->sc_dev),
-			  RND_TYPE_DISK, 0);
+			  RND_TYPE_DISK, RND_FLAG_DEFAULT);
 
 }
 
@@ -2276,6 +2276,15 @@ aceioctl(dev_t dev, u_long xfer, void *addr, int flag, struct lwp *l)
 		struct dkwedge_list *dkwl = (void *) addr;
 
 		return dkwedge_list(&ace->sc_dk, dkwl, l);
+	    }
+
+	case DIOCMWEDGES:
+	    {
+		if ((flag & FWRITE) == 0)
+			return EBADF;
+
+		dkwedge_discover(&ace->sc_dk);
+		return 0;
 	    }
 
 	case DIOCGSTRATEGY:

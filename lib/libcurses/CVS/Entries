@@ -1,11 +1,11 @@
-/Makefile/1.68/Sat Apr 21 14:39:35 2012/-kk/
+/Makefile/1.71/Sun Jul 20 13:25:59 2014/-kk/
 /acs.c/1.20/Sat Apr 21 12:27:27 2012/-kk/
 /add_wch.c/1.4/Tue Nov 12 02:18:28 2013/-kk/
 /add_wchstr.c/1.4/Tue Feb 23 19:48:26 2010/-kk/
 /addbytes.c/1.42/Tue Nov 12 02:18:28 2013/-kk/
 /addch.c/1.17/Tue Nov 12 02:18:28 2013/-kk/
 /addchnstr.c/1.6/Tue Nov 12 02:18:28 2013/-kk/
-/addnstr.c/1.13/Fri Sep 28 06:07:05 2012/-kk/
+/addnstr.c/1.14/Sun Jul 20 13:58:22 2014/-kk/
 /addwstr.c/1.2/Mon May 28 15:01:54 2007/-kk/
 /attributes.c/1.21/Sat Dec 25 10:08:20 2010/-kk/
 /background.c/1.15/Wed Jul 22 16:57:14 2009/-kk/

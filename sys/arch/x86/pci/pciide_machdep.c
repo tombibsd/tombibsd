@@ -70,8 +70,8 @@ pciide_machdep_compat_intr_establish(device_t dev,
 	void *cookie;
 #if NIOAPIC > 0
 	int mpih;
-#endif
 	char buf[PCI_INTRSTR_LEN];
+#endif
 
 	irq = PCIIDE_COMPAT_IRQ(chan);
 	cookie = isa_intr_establish(NULL, irq, IST_EDGE, IPL_BIO, func, arg);

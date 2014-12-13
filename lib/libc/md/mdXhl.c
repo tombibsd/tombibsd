@@ -42,8 +42,6 @@ WA(MDNAME(Data),CONCAT(_,MDNAME(Data)))
 #include <stdlib.h>
 #include <unistd.h>
 
-
-
 char *
 MDNAME(End)(MDNAME(_CTX) *ctx, char *buf)
 {
@@ -81,7 +79,7 @@ MDNAME(File)(const char *filename, char *buf)
 	/* buf may be NULL */
 
 	MDNAME(Init)(&ctx);
-	f = open(filename, O_RDONLY, 0666);
+	f = open(filename, O_RDONLY | O_CLOEXEC, 0666);
 	if (f < 0)
 		return NULL;
 

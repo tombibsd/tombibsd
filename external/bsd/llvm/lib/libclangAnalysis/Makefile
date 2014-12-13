@@ -14,6 +14,7 @@ SRCS+=	AnalysisDeclContext.cpp \
 	CallGraph.cpp \
 	CocoaConventions.cpp \
 	Consumed.cpp \
+	DataflowWorklist.cpp \
 	Dominators.cpp \
 	FormatString.cpp \
 	LiveVariables.cpp \
@@ -25,6 +26,9 @@ SRCS+=	AnalysisDeclContext.cpp \
 	ReachableCode.cpp \
 	ScanfFormatString.cpp \
 	ThreadSafety.cpp \
+	ThreadSafetyCommon.cpp \
+	ThreadSafetyLogical.cpp \
+	ThreadSafetyTIL.cpp \
 	UninitializedValues.cpp
 
 .if defined(HOSTLIB)

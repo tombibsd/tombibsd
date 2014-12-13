@@ -68,6 +68,8 @@
 #include <sys/cdefs.h>
 __KERNEL_RCSID(0, "$NetBSD$");
 
+#define TTY_ALLOW_PRIVATE
+
 #include <sys/param.h>
 #include <sys/systm.h>
 #include <sys/poll.h>

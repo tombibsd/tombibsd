@@ -36,8 +36,6 @@
 #include <machine/elf_machdep.h>
 #include <sys/syscall.h>
 
-#include <machine/intrcnt.h>
-
 #include "assym.h"
 
 	.section .data.proc0,"aw"
@@ -219,32 +217,6 @@ ENTRY_NOPROFILE(os_boot_rendez,0)
 END(os_boot_rendez)
 
 #endif /* MULTIPROCESSOR */
-
-/*
- * Create a default interrupt name table. The first entry (vector 0) is
- * hardwaired to the clock interrupt.
- */
-	.data
-	.align 8
-EXPORT(intrnames)
-	.ascii "clock"
-	.fill INTRNAME_LEN - 5 - 1, 1, ' '
-	.byte 0
-intr_n = 0
-.rept INTRCNT_COUNT - 1
-	.ascii "#"
-	.byte intr_n / 100 + '0'
-	.byte (intr_n % 100) / 10 + '0'
-	.byte intr_n % 10 + '0'
-	.fill INTRNAME_LEN - 1 - 3 - 1, 1, ' '
-	.byte 0
-	intr_n = intr_n + 1
-.endr
-EXPORT(eintrnames)
-	.align 8
-EXPORT(intrcnt)
-	.fill INTRCNT_COUNT, 8, 0
-EXPORT(eintrcnt)
 
 	.text
 	// in0:	image base

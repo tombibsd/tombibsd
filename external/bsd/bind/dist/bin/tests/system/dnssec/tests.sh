@@ -26,14 +26,14 @@ n=1
 rm -f dig.out.*
 
 DIGOPTS="+tcp +noadd +nosea +nostat +nocmd +dnssec -p 5300"
-DELVEOPTS="-a ns1/trusted.conf -p 5300"
+DELVOPTS="-a ns1/trusted.conf -p 5300"
 
 # convert private-type records to readable form
 showprivate () {
     echo "-- $@ --"
     $DIG $DIGOPTS +nodnssec +short @$2 -t type65534 $1 | cut -f3 -d' ' |
         while read record; do
-            perl -e 'my $rdata = pack("H*", @ARGV[0]);
+            $PERL -e 'my $rdata = pack("H*", @ARGV[0]);
                 die "invalid record" unless length($rdata) == 5;
                 my ($alg, $key, $remove, $complete) = unpack("CnCC", $rdata);
                 my $action = "signing";
@@ -58,7 +58,7 @@ checkprivate () {
 
 # check that a zone file is raw format, version 0
 israw0 () {
-    cat $1 | perl -e 'binmode STDIN;
+    cat $1 | $PERL -e 'binmode STDIN;
 		      read(STDIN, $input, 8);
                       ($style, $version) = unpack("NN", $input);
                       exit 1 if ($style != 2 || $version != 0);'
@@ -67,7 +67,7 @@ israw0 () {
 
 # check that a zone file is raw format, version 1
 israw1 () {
-    cat $1 | perl -e 'binmode STDIN;
+    cat $1 | $PERL -e 'binmode STDIN;
 		      read(STDIN, $input, 8);
                       ($style, $version) = unpack("NN", $input);
                       exit 1 if ($style != 2 || $version != 1);'
@@ -137,12 +137,12 @@ n=`expr $n + 1`
 if [ $ret != 0 ]; then echo "I:failed"; fi
 status=`expr $status + $ret`
 
-if [ -x ${DELVE} ] ; then
+if [ -x ${DELV} ] ; then
    ret=0
    echo "I:checking postive validation NSEC using dns_client ($n)"
-   $DELVE $DELVEOPTS @10.53.0.4 a a.example > delve.out$n || ret=1
-   grep "a.example..*10.0.0.1" delve.out$n > /dev/null || ret=1
-   grep "a.example..*.RRSIG.A 3 2 300 .*" delve.out$n > /dev/null || ret=1
+   $DELV $DELVOPTS @10.53.0.4 a a.example > delv.out$n || ret=1
+   grep "a.example..*10.0.0.1" delv.out$n > /dev/null || ret=1
+   grep "a.example..*.RRSIG.A 3 2 300 .*" delv.out$n > /dev/null || ret=1
    n=`expr $n + 1`
    if [ $ret != 0 ]; then echo "I:failed"; fi
    status=`expr $status + $ret`
@@ -160,12 +160,12 @@ n=`expr $n + 1`
 if [ $ret != 0 ]; then echo "I:failed"; fi
 status=`expr $status + $ret`
 
-if [ -x ${DELVE} ] ; then
+if [ -x ${DELV} ] ; then
    ret=0
    echo "I:checking positive validation NSEC3 using dns_client ($n)"
-   $DELVE $DELVEOPTS @10.53.0.4 a a.nsec3.example > delve.out$n || ret=1
-   grep "a.nsec3.example..*10.0.0.1" delve.out$n > /dev/null || ret=1
-   grep "a.nsec3.example..*RRSIG.A 7 3 300.*" delve.out$n > /dev/null || ret=1
+   $DELV $DELVOPTS @10.53.0.4 a a.nsec3.example > delv.out$n || ret=1
+   grep "a.nsec3.example..*10.0.0.1" delv.out$n > /dev/null || ret=1
+   grep "a.nsec3.example..*RRSIG.A 7 3 300.*" delv.out$n > /dev/null || ret=1
    n=`expr $n + 1`
    if [ $ret != 0 ]; then echo "I:failed"; fi
    status=`expr $status + $ret`
@@ -183,12 +183,12 @@ n=`expr $n + 1`
 if [ $ret != 0 ]; then echo "I:failed"; fi
 status=`expr $status + $ret`
 
-if [ -x ${DELVE} ] ; then
+if [ -x ${DELV} ] ; then
    ret=0
    echo "I:checking positive validation OPTOUT using dns_client ($n)"
-   $DELVE $DELVEOPTS @10.53.0.4 a a.optout.example > delve.out$n || ret=1
-   grep "a.optout.example..*10.0.0.1" delve.out$n > /dev/null || ret=1
-   grep "a.optout.example..*RRSIG.A 7 3 300.*" delve.out$n > /dev/null || ret=1
+   $DELV $DELVOPTS @10.53.0.4 a a.optout.example > delv.out$n || ret=1
+   grep "a.optout.example..*10.0.0.1" delv.out$n > /dev/null || ret=1
+   grep "a.optout.example..*RRSIG.A 7 3 300.*" delv.out$n > /dev/null || ret=1
    n=`expr $n + 1`
    if [ $ret != 0 ]; then echo "I:failed"; fi
    status=`expr $status + $ret`
@@ -209,12 +209,12 @@ n=`expr $n + 1`
 if [ $ret != 0 ]; then echo "I:failed"; fi
 status=`expr $status + $ret`
 
-if [ -x ${DELVE} ] ; then
+if [ -x ${DELV} ] ; then
    ret=0
    echo "I:checking positive wildcard validation NSEC using dns_client ($n)"
-   $DELVE $DELVEOPTS @10.53.0.4 a a.wild.example > delve.out$n || ret=1
-   grep "a.wild.example..*10.0.0.27" delve.out$n > /dev/null || ret=1
-   grep "a.wild.example..*RRSIG.A 3 2 300.*" delve.out$n > /dev/null || ret=1
+   $DELV $DELVOPTS @10.53.0.4 a a.wild.example > delv.out$n || ret=1
+   grep "a.wild.example..*10.0.0.27" delv.out$n > /dev/null || ret=1
+   grep "a.wild.example..*RRSIG.A 3 2 300.*" delv.out$n > /dev/null || ret=1
    n=`expr $n + 1`
    if [ $ret != 0 ]; then echo "I:failed"; fi
    status=`expr $status + $ret`
@@ -251,12 +251,12 @@ n=`expr $n + 1`
 if [ $ret != 0 ]; then echo "I:failed"; fi
 status=`expr $status + $ret`
 
-if [ -x ${DELVE} ] ; then
+if [ -x ${DELV} ] ; then
    ret=0
    echo "I:checking positive wildcard validation NSEC3 using dns_client ($n)"
-   $DELVE $DELVEOPTS @10.53.0.4 a a.wild.nsec3.example > delve.out$n || ret=1
-   grep "a.wild.nsec3.example..*10.0.0.6" delve.out$n > /dev/null || ret=1
-   grep "a.wild.nsec3.example..*RRSIG.A 7 3 300.*" delve.out$n > /dev/null || ret=1
+   $DELV $DELVOPTS @10.53.0.4 a a.wild.nsec3.example > delv.out$n || ret=1
+   grep "a.wild.nsec3.example..*10.0.0.6" delv.out$n > /dev/null || ret=1
+   grep "a.wild.nsec3.example..*RRSIG.A 7 3 300.*" delv.out$n > /dev/null || ret=1
    n=`expr $n + 1`
    if [ $ret != 0 ]; then echo "I:failed"; fi
    status=`expr $status + $ret`
@@ -271,18 +271,18 @@ $DIG $DIGOPTS a.wild.optout.example. \
 stripns dig.out.ns3.test$n > dig.out.ns3.stripped.test$n
 stripns dig.out.ns4.test$n > dig.out.ns4.stripped.test$n
 $PERL ../digcomp.pl dig.out.ns3.stripped.test$n dig.out.ns4.stripped.test$n || ret=1
-grep "flags:.*ad.*QUERY" dig.out.ns4.test$n > /dev/null || ret=1
+grep "flags:.*ad.*QUERY" dig.out.ns4.test$n > /dev/null && ret=1
 grep "status: NOERROR" dig.out.ns4.test$n > /dev/null || ret=1
 n=`expr $n + 1`
 if [ $ret != 0 ]; then echo "I:failed"; fi
 status=`expr $status + $ret`
 
-if [ -x ${DELVE} ] ; then
+if [ -x ${DELV} ] ; then
    ret=0
    echo "I:checking positive wildcard validation OPTOUT using dns_client ($n)"
-   $DELVE $DELVEOPTS @10.53.0.4 a a.wild.optout.example > delve.out$n || ret=1
-   grep "a.wild.optout.example..*10.0.0.6" delve.out$n > /dev/null || ret=1
-   grep "a.wild.optout.example..*RRSIG.A 7 3 300.*" delve.out$n > /dev/null || ret=1
+   $DELV $DELVOPTS @10.53.0.4 a a.wild.optout.example > delv.out$n || ret=1
+   grep "a.wild.optout.example..*10.0.0.6" delv.out$n > /dev/null || ret=1
+   grep "a.wild.optout.example..*RRSIG.A 7 3 300.*" delv.out$n > /dev/null || ret=1
    n=`expr $n + 1`
    if [ $ret != 0 ]; then echo "I:failed"; fi
    status=`expr $status + $ret`
@@ -299,11 +299,11 @@ n=`expr $n + 1`
 if [ $ret != 0 ]; then echo "I:failed"; fi
 status=`expr $status + $ret`
 
-if [ -x ${DELVE} ] ; then
+if [ -x ${DELV} ] ; then
    ret=0
    echo "I:checking negative validation NXDOMAIN NSEC using dns_client ($n)"
-   $DELVE $DELVEOPTS @10.53.0.4 a q.example > delve.out$n 2>&1 || ret=1
-   grep "resolution failed: ncache nxdomain" delve.out$n > /dev/null || ret=1
+   $DELV $DELVOPTS @10.53.0.4 a q.example > delv.out$n 2>&1 || ret=1
+   grep "resolution failed: ncache nxdomain" delv.out$n > /dev/null || ret=1
    n=`expr $n + 1`
    if [ $ret != 0 ]; then echo "I:failed"; fi
    status=`expr $status + $ret`
@@ -322,11 +322,11 @@ n=`expr $n + 1`
 if [ $ret != 0 ]; then echo "I:failed"; fi
 status=`expr $status + $ret`
 
-if [ -x ${DELVE} ] ; then
+if [ -x ${DELV} ] ; then
    ret=0
    echo "I:checking negative validation NXDOMAIN NSEC3 using dns_client ($n)"
-   $DELVE $DELVEOPTS @10.53.0.4 a q.nsec3.example > delve.out$n 2>&1 || ret=1
-   grep "resolution failed: ncache nxdomain" delve.out$n > /dev/null || ret=1
+   $DELV $DELVOPTS @10.53.0.4 a q.nsec3.example > delv.out$n 2>&1 || ret=1
+   grep "resolution failed: ncache nxdomain" delv.out$n > /dev/null || ret=1
    n=`expr $n + 1`
    if [ $ret != 0 ]; then echo "I:failed"; fi
    status=`expr $status + $ret`
@@ -346,11 +346,11 @@ n=`expr $n + 1`
 if [ $ret != 0 ]; then echo "I:failed"; fi
 status=`expr $status + $ret`
 
-if [ -x ${DELVE} ] ; then
+if [ -x ${DELV} ] ; then
    ret=0
    echo "I:checking negative validation NXDOMAIN OPTOUT using dns_client ($n)"
-   $DELVE $DELVEOPTS @10.53.0.4 a q.optout.example > delve.out$n 2>&1 || ret=1
-   grep "resolution failed: ncache nxdomain" delve.out$n > /dev/null || ret=1
+   $DELV $DELVOPTS @10.53.0.4 a q.optout.example > delv.out$n 2>&1 || ret=1
+   grep "resolution failed: ncache nxdomain" delv.out$n > /dev/null || ret=1
    n=`expr $n + 1`
    if [ $ret != 0 ]; then echo "I:failed"; fi
    status=`expr $status + $ret`
@@ -368,11 +368,11 @@ n=`expr $n + 1`
 if [ $ret != 0 ]; then echo "I:failed"; fi
 status=`expr $status + $ret`
 
-if [ -x ${DELVE} ] ; then
+if [ -x ${DELV} ] ; then
    ret=0
    echo "I:checking negative validation NODATA OPTOUT using dns_client ($n)"
-   $DELVE $DELVEOPTS @10.53.0.4 txt a.example > delve.out$n 2>&1 || ret=1
-   grep "resolution failed: ncache nxrrset" delve.out$n > /dev/null || ret=1
+   $DELV $DELVOPTS @10.53.0.4 txt a.example > delv.out$n 2>&1 || ret=1
+   grep "resolution failed: ncache nxrrset" delv.out$n > /dev/null || ret=1
    n=`expr $n + 1`
    if [ $ret != 0 ]; then echo "I:failed"; fi
    status=`expr $status + $ret`
@@ -392,11 +392,11 @@ n=`expr $n + 1`
 if [ $ret != 0 ]; then echo "I:failed"; fi
 status=`expr $status + $ret`
 
-if [ -x ${DELVE} ] ; then
+if [ -x ${DELV} ] ; then
    ret=0
    echo "I:checking negative validation NODATA NSEC3 using dns_client ($n)"
-   $DELVE $DELVEOPTS @10.53.0.4 txt a.nsec3.example > delve.out$n 2>&1 || ret=1
-   grep "resolution failed: ncache nxrrset" delve.out$n > /dev/null || ret=1
+   $DELV $DELVOPTS @10.53.0.4 txt a.nsec3.example > delv.out$n 2>&1 || ret=1
+   grep "resolution failed: ncache nxrrset" delv.out$n > /dev/null || ret=1
    n=`expr $n + 1`
    if [ $ret != 0 ]; then echo "I:failed"; fi
    status=`expr $status + $ret`
@@ -416,11 +416,11 @@ n=`expr $n + 1`
 if [ $ret != 0 ]; then echo "I:failed"; fi
 status=`expr $status + $ret`
 
-if [ -x ${DELVE} ] ; then
+if [ -x ${DELV} ] ; then
    ret=0
    echo "I:checking negative validation NODATA OPTOUT using dns_client ($n)"
-   $DELVE $DELVEOPTS @10.53.0.4 txt a.optout.example > delve.out$n 2>&1 || ret=1
-   grep "resolution failed: ncache nxrrset" delve.out$n > /dev/null || ret=1
+   $DELV $DELVOPTS @10.53.0.4 txt a.optout.example > delv.out$n 2>&1 || ret=1
+   grep "resolution failed: ncache nxrrset" delv.out$n > /dev/null || ret=1
    n=`expr $n + 1`
    if [ $ret != 0 ]; then echo "I:failed"; fi
    status=`expr $status + $ret`
@@ -437,11 +437,11 @@ n=`expr $n + 1`
 if [ $ret != 0 ]; then echo "I:failed"; fi
 status=`expr $status + $ret`
 
-if [ -x ${DELVE} ] ; then
+if [ -x ${DELV} ] ; then
    ret=0
    echo "I:checking negative wildcard validation NSEC using dns_client ($n)"
-   $DELVE $DELVEOPTS @10.53.0.4 txt b.wild.example > delve.out$n 2>&1 || ret=1
-   grep "resolution failed: ncache nxrrset" delve.out$n > /dev/null || ret=1
+   $DELV $DELVOPTS @10.53.0.4 txt b.wild.example > delv.out$n 2>&1 || ret=1
+   grep "resolution failed: ncache nxrrset" delv.out$n > /dev/null || ret=1
    n=`expr $n + 1`
    if [ $ret != 0 ]; then echo "I:failed"; fi
    status=`expr $status + $ret`
@@ -457,11 +457,11 @@ n=`expr $n + 1`
 if [ $ret != 0 ]; then echo "I:failed"; fi
 status=`expr $status + $ret`
 
-if [ -x ${DELVE} ] ; then
+if [ -x ${DELV} ] ; then
    ret=0
    echo "I:checking negative wildcard validation NSEC3 using dns_client ($n)"
-   $DELVE $DELVEOPTS @10.53.0.4 txt b.wild.nsec3.example > delve.out$n 2>&1 || ret=1
-   grep "resolution failed: ncache nxrrset" delve.out$n > /dev/null || ret=1
+   $DELV $DELVOPTS @10.53.0.4 txt b.wild.nsec3.example > delv.out$n 2>&1 || ret=1
+   grep "resolution failed: ncache nxrrset" delv.out$n > /dev/null || ret=1
    n=`expr $n + 1`
    if [ $ret != 0 ]; then echo "I:failed"; fi
    status=`expr $status + $ret`
@@ -481,11 +481,11 @@ n=`expr $n + 1`
 if [ $ret != 0 ]; then echo "I:failed"; fi
 status=`expr $status + $ret`
 
-if [ -x ${DELVE} ] ; then
+if [ -x ${DELV} ] ; then
    ret=0
    echo "I:checking negative wildcard validation OPTOUT using dns_client ($n)"
-   $DELVE $DELVEOPTS @10.53.0.4 txt b.optout.nsec3.example > delve.out$n 2>&1 || ret=1
-   grep "resolution failed: ncache nxrrset" delve.out$n > /dev/null || ret=1
+   $DELV $DELVOPTS @10.53.0.4 txt b.optout.nsec3.example > delv.out$n 2>&1 || ret=1
+   grep "resolution failed: ncache nxrrset" delv.out$n > /dev/null || ret=1
    n=`expr $n + 1`
    if [ $ret != 0 ]; then echo "I:failed"; fi
    status=`expr $status + $ret`
@@ -505,11 +505,11 @@ n=`expr $n + 1`
 if [ $ret != 0 ]; then echo "I:failed"; fi
 status=`expr $status + $ret`
 
-if [ -x ${DELVE} ] ; then
+if [ -x ${DELV} ] ; then
    ret=0
    echo "I:checking 1-server insecurity proof NSEC using dns_client ($n)"
-   $DELVE $DELVEOPTS @10.53.0.4 a a.insecure.example > delve.out$n || ret=1
-   grep "a.insecure.example..*10.0.0.1" delve.out$n > /dev/null || ret=1
+   $DELV $DELVOPTS @10.53.0.4 a a.insecure.example > delv.out$n || ret=1
+   grep "a.insecure.example..*10.0.0.1" delv.out$n > /dev/null || ret=1
    n=`expr $n + 1`
    if [ $ret != 0 ]; then echo "I:failed"; fi
    status=`expr $status + $ret`
@@ -527,11 +527,11 @@ n=`expr $n + 1`
 if [ $ret != 0 ]; then echo "I:failed"; fi
 status=`expr $status + $ret`
 
-if [ -x ${DELVE} ] ; then
+if [ -x ${DELV} ] ; then
    ret=0
    echo "I:checking 1-server insecurity proof NSEC3 using dns_client ($n)"
-   $DELVE $DELVEOPTS @10.53.0.4 a a.insecure.nsec3.example > delve.out$n || ret=1
-   grep "a.insecure.nsec3.example..*10.0.0.1" delve.out$n > /dev/null || ret=1
+   $DELV $DELVOPTS @10.53.0.4 a a.insecure.nsec3.example > delv.out$n || ret=1
+   grep "a.insecure.nsec3.example..*10.0.0.1" delv.out$n > /dev/null || ret=1
    n=`expr $n + 1`
    if [ $ret != 0 ]; then echo "I:failed"; fi
    status=`expr $status + $ret`
@@ -549,11 +549,11 @@ n=`expr $n + 1`
 if [ $ret != 0 ]; then echo "I:failed"; fi
 status=`expr $status + $ret`
 
-if [ -x ${DELVE} ] ; then
+if [ -x ${DELV} ] ; then
    ret=0
    echo "I:checking 1-server insecurity proof OPTOUT using dns_client ($n)"
-   $DELVE $DELVEOPTS @10.53.0.4 a a.insecure.optout.example > delve.out$n || ret=1
-   grep "a.insecure.optout.example..*10.0.0.1" delve.out$n > /dev/null || ret=1
+   $DELV $DELVOPTS @10.53.0.4 a a.insecure.optout.example > delv.out$n || ret=1
+   grep "a.insecure.optout.example..*10.0.0.1" delv.out$n > /dev/null || ret=1
    n=`expr $n + 1`
    if [ $ret != 0 ]; then echo "I:failed"; fi
    status=`expr $status + $ret`
@@ -573,11 +573,11 @@ n=`expr $n + 1`
 if [ $ret != 0 ]; then echo "I:failed"; fi
 status=`expr $status + $ret`
 
-if [ -x ${DELVE} ] ; then
+if [ -x ${DELV} ] ; then
    ret=0
    echo "I:checking 1-server negative insecurity proof NSEC using dns_client ($n)"
-   $DELVE $DELVEOPTS @10.53.0.4 a q.insecure.example > delve.out$n 2>&1 || ret=1
-   grep "resolution failed: ncache nxdomain" delve.out$n > /dev/null || ret=1
+   $DELV $DELVOPTS @10.53.0.4 a q.insecure.example > delv.out$n 2>&1 || ret=1
+   grep "resolution failed: ncache nxdomain" delv.out$n > /dev/null || ret=1
    n=`expr $n + 1`
    if [ $ret != 0 ]; then echo "I:failed"; fi
    status=`expr $status + $ret`
@@ -597,11 +597,11 @@ n=`expr $n + 1`
 if [ $ret != 0 ]; then echo "I:failed"; fi
 status=`expr $status + $ret`
 
-if [ -x ${DELVE} ] ; then
+if [ -x ${DELV} ] ; then
    ret=0
    echo "I:checking 1-server negative insecurity proof NSEC3 using dns_client ($n)"
-   $DELVE $DELVEOPTS @10.53.0.4 a q.insecure.nsec3.example > delve.out$n 2>&1 || ret=1
-   grep "resolution failed: ncache nxdomain" delve.out$n > /dev/null || ret=1
+   $DELV $DELVOPTS @10.53.0.4 a q.insecure.nsec3.example > delv.out$n 2>&1 || ret=1
+   grep "resolution failed: ncache nxdomain" delv.out$n > /dev/null || ret=1
    n=`expr $n + 1`
    if [ $ret != 0 ]; then echo "I:failed"; fi
    status=`expr $status + $ret`
@@ -621,11 +621,11 @@ n=`expr $n + 1`
 if [ $ret != 0 ]; then echo "I:failed"; fi
 status=`expr $status + $ret`
 
-if [ -x ${DELVE} ] ; then
+if [ -x ${DELV} ] ; then
    ret=0
    echo "I:checking 1-server negative insecurity proof OPTOUT using dns_client ($n)"
-   $DELVE $DELVEOPTS @10.53.0.4 a q.insecure.optout.example > delve.out$n 2>&1 || ret=1
-   grep "resolution failed: ncache nxdomain" delve.out$n > /dev/null || ret=1
+   $DELV $DELVOPTS @10.53.0.4 a q.insecure.optout.example > delv.out$n 2>&1 || ret=1
+   grep "resolution failed: ncache nxdomain" delv.out$n > /dev/null || ret=1
    n=`expr $n + 1`
    if [ $ret != 0 ]; then echo "I:failed"; fi
    status=`expr $status + $ret`
@@ -818,11 +818,11 @@ n=`expr $n + 1`
 if [ $ret != 0 ]; then echo "I:failed"; fi
 status=`expr $status + $ret`
 
-if [ -x ${DELVE} ] ; then
+if [ -x ${DELV} ] ; then
    ret=0
    echo "I:checking failed validation using dns_client ($n)"
-   $DELVE $DELVEOPTS +cd @10.53.0.4 a a.bogus.example > delve.out$n 2>&1 || ret=1
-   grep "resolution failed: RRSIG failed to verify" delve.out$n > /dev/null || ret=1
+   $DELV $DELVOPTS +cd @10.53.0.4 a a.bogus.example > delv.out$n 2>&1 || ret=1
+   grep "resolution failed: RRSIG failed to verify" delv.out$n > /dev/null || ret=1
    n=`expr $n + 1`
    if [ $ret != 0 ]; then echo "I:failed"; fi
    status=`expr $status + $ret`
@@ -863,11 +863,11 @@ n=`expr $n + 1`
 if [ $ret != 0 ]; then echo "I:failed"; fi
 status=`expr $status + $ret`
 
-if [ -x ${DELVE} ] ; then
+if [ -x ${DELV} ] ; then
    ret=0
    echo "I:checking that validation fails when key record is missing using dns_client ($n)"
-   $DELVE $DELVEOPTS +cd @10.53.0.4 a a.b.keyless.example > delve.out$n 2>&1 || ret=1
-   grep "resolution failed: broken trust chain" delve.out$n > /dev/null || ret=1
+   $DELV $DELVOPTS +cd @10.53.0.4 a a.b.keyless.example > delv.out$n 2>&1 || ret=1
+   grep "resolution failed: broken trust chain" delv.out$n > /dev/null || ret=1
    n=`expr $n + 1`
    if [ $ret != 0 ]; then echo "I:failed"; fi
    status=`expr $status + $ret`
@@ -1727,6 +1727,16 @@ n=`expr $n + 1`
 if [ $ret != 0 ]; then echo "I:failed"; fi
 status=`expr $status + $ret`
 
+echo "I:checking that DS at a RFC 1918 empty zone lookup succeeds ($n)"
+ret=0
+$DIG $DIGOPTS +noauth 10.in-addr.arpa ds @10.53.0.2 >dig.out.ns2.test$n || ret=1
+$DIG $DIGOPTS +noauth 10.in-addr.arpa ds @10.53.0.6 >dig.out.ns6.test$n || ret=1
+$PERL ../digcomp.pl dig.out.ns2.test$n dig.out.ns6.test$n || ret=1
+grep "status: NOERROR" dig.out.ns6.test$n > /dev/null || ret=1
+n=`expr $n + 1`
+if [ $ret != 0 ]; then echo "I:failed"; fi
+status=`expr $status + $ret`
+
 echo "I:checking expired signatures remain with "'"allow-update { none; };"'" and no keys available ($n)"
 ret=0
 $DIG $DIGOPTS +noauth expired.example. +dnssec @10.53.0.3 soa > dig.out.ns3.test$n || ret=1
@@ -1898,7 +1908,7 @@ ret=0
 $RNDC -c ../common/rndc.conf -s 10.53.0.3 -p 9953 signing -nsec3param 1 0 0 - inline.example > /dev/null 2>&1 || ret=1
 $RNDC -c ../common/rndc.conf -s 10.53.0.3 -p 9953 status > /dev/null || ret=1
 for i in 1 2 3 4 5 6 7 8 9 10 ; do
-        salt=`$DIG $DIGOPTS +nodnssec +short nsec3param inline.example. @10.53.0.3 | awk '{print $4}'`
+	salt=`$DIG $DIGOPTS +nodnssec +short nsec3param inline.example. @10.53.0.3 | awk '{print $4}'`
 	if [ "$salt" = "-" ]; then
 		break;
 	fi
@@ -1906,6 +1916,39 @@ for i in 1 2 3 4 5 6 7 8 9 10 ; do
 	sleep 1
 done;
 [ "$salt" = "-" ] || ret=1
+n=`expr $n + 1`
+if [ $ret != 0 ]; then echo "I:failed"; fi
+status=`expr $status + $ret`
+
+echo "I:check that 'rndc signing -nsec3param' works with 'auto' as salt ($n)"
+ret=0
+$RNDC -c ../common/rndc.conf -s 10.53.0.3 -p 9953 signing -nsec3param 1 0 0 auto inline.example > /dev/null 2>&1 || ret=1
+$RNDC -c ../common/rndc.conf -s 10.53.0.3 -p 9953 status > /dev/null || ret=1
+for i in 1 2 3 4 5 6 7 8 9 10 ; do
+	salt=`$DIG $DIGOPTS +nodnssec +short nsec3param inline.example. @10.53.0.3 | awk '{print $4}'`
+	[ -n "$salt" -a "$salt" != "-" ] && break
+	echo "I:sleeping ...."
+	sleep 1
+done;
+[ "$salt" != "-" ] || ret=1
+[ `expr "${salt}" : ".*"` -eq 16 ] || ret=1
+n=`expr $n + 1`
+if [ $ret != 0 ]; then echo "I:failed"; fi
+status=`expr $status + $ret`
+
+echo "I:check that 'rndc signing -nsec3param' with 'auto' as salt again generates a different salt ($n)"
+ret=0
+oldsalt=$salt
+$RNDC -c ../common/rndc.conf -s 10.53.0.3 -p 9953 signing -nsec3param 1 0 0 auto inline.example > /dev/null 2>&1 || ret=1
+$RNDC -c ../common/rndc.conf -s 10.53.0.3 -p 9953 status > /dev/null || ret=1
+for i in 1 2 3 4 5 6 7 8 9 10 ; do
+	salt=`$DIG $DIGOPTS +nodnssec +short nsec3param inline.example. @10.53.0.3 | awk '{print $4}'`
+	[ -n "$salt" -a "$salt" != "$oldsalt" ] && break
+	echo "I:sleeping ...."
+	sleep 1
+done;
+[ "$salt" != "$oldsalt" ] || ret=1
+[ `expr "$salt" : ".*"` -eq 16 ] || ret=1
 n=`expr $n + 1`
 if [ $ret != 0 ]; then echo "I:failed"; fi
 status=`expr $status + $ret`
@@ -2406,7 +2449,33 @@ n=`expr $n + 1`
 if [ $ret != 0 ]; then echo "I:failed"; fi
 status=`expr $status + $ret`
 
+echo "I:check the correct resigning time is reported in zonestatus ($n)"
+ret=0
+$RNDC -c ../common/rndc.conf -s 10.53.0.3 -p 9953 \
+		zonestatus secure.example > rndc.out.test$n
+# next resign node: secure.example/DNSKEY
+name=`awk '/next resign node:/ { print $4 }' rndc.out.test$n | sed 's;/; ;'`
+# next resign time: Thu, 24 Apr 2014 10:38:16 GMT
+time=`awk 'BEGIN { m["Jan"] = "01"; m["Feb"] = "02"; m["Mar"] = "03";
+		   m["Apr"] = "04"; m["May"] = "05"; m["Jun"] = "06";
+		   m["Jul"] = "07"; m["Aug"] = "08"; m["Sep"] = "09";
+		   m["Oct"] = "10"; m["Nov"] = "11"; m["Dec"] = "12";}
+	 /next resign time:/ { printf "%d%s%02d%s\n", $7, m[$6], $5, $8 }' rndc.out.test$n | sed 's/://g'`
+$DIG $DIGOPTS +noall +answer $name @10.53.0.3 -p 5300 > dig.out.test$n
+expire=`awk '$4 == "RRSIG" { print $9 }' dig.out.test$n`
+inception=`awk '$4 == "RRSIG" { print $10 }' dig.out.test$n`
+$PERL -e 'exit(0) if ("'"$time"'" lt "'"$expire"'" && "'"$time"'" gt "'"$inception"'"); exit(1);' || ret=1
+n=`expr $n + 1`
+if [ $ret != 0 ]; then echo "I:failed"; fi
+status=`expr $status + $ret`
 
+echo "I:check that split rrsigs are handled ($n)"
+ret=0
+$DIG $DIGOPTS split-rrsig soa @10.53.0.7 > dig.out.test$n || ret=1
+awk 'BEGIN { ok=0; } $4 == "SOA" { if ($7 > 1) ok=1; } END { if (!ok) exit(1); }' dig.out.test$n || ret=1 
+n=`expr $n + 1`
+if [ $ret != 0 ]; then echo "I:failed"; fi
+status=`expr $status + $ret`
 
 echo "I:exit status: $status"
 exit $status

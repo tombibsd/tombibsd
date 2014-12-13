@@ -20,6 +20,8 @@
 #ifndef ISC_PLATFORM_H
 #define ISC_PLATFORM_H 1
 
+#include <sys/atomic.h>
+
 /*! \file */
 
 /*****
@@ -321,6 +323,11 @@
  * Define if AES must be provided by OpenSSL.
  */
 #define ISC_PLATFORM_OPENSSLAES 1
+
+/*
+ * Define if AES support is wanted
+ */
+#define ISC_PLATFORM_WANTAES 1
 
 /*
  * Defines for the noreturn attribute.

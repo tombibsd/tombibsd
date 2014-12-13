@@ -21,14 +21,10 @@
 
 #include <sys/cdefs.h>
 #ifndef lint
-#if 0
-static const char rcsid[] _U_ =
-    "@(#) Header: /tcpdump/master/tcpdump/gmt2local.c,v 1.9 2003-11-16 09:36:09 guy Exp  (LBL)";
-#else
 __RCSID("$NetBSD$");
 #endif
-#endif
 
+#define NETDISSECT_REWORKED
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif

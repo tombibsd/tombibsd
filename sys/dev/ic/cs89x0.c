@@ -489,7 +489,7 @@ cs_attach(struct cs_softc *sc, u_int8_t *enaddr, int *media,
 	ether_ifattach(ifp, sc->sc_enaddr);
 
 	rnd_attach_source(&sc->rnd_source, device_xname(sc->sc_dev),
-			  RND_TYPE_NET, 0);
+			  RND_TYPE_NET, RND_FLAG_DEFAULT);
 	sc->sc_cfgflags |= CFGFLG_ATTACHED;
 
 	if (pmf_device_register1(sc->sc_dev, NULL, NULL, cs_shutdown))

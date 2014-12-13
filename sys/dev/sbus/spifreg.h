@@ -325,7 +325,7 @@
  *    |   |   |   |   |
  *    |   |   |   |   +---------------> unused
  *    |   |   |   |
- *    |   |   |   +-------------------> dialout (on tty ports)
+ *    |   |   |   +-------------------> unused
  *    |   |   |
  *    |   |   +-----------------------> unused
  *    |   |
@@ -339,9 +339,9 @@
 /*
  * device selectors
  */
-#define SPIF_CARD(x)	((minor(x) >> 6) & 0x03)
-#define SPIF_PORT(x)	(minor(x) & 0x07)
-#define STTY_DIALOUT(x) (minor(x) & 0x10)
+#define SPIF_CARD(x)	((TTUNIT(x) >> 6) & 0x03)
+#define SPIF_PORT(x)	(TTUNIT(x) & 0x07)
+#define STTY_DIALOUT(x) TTDIALOUT(x)
 
 #define	STTY_RX_FIFO_THRESHOLD	4
 #define	STTY_RX_DTR_THRESHOLD	7

@@ -17,7 +17,7 @@ SRCS=	radeon_bo.c \
 CPPFLAGS+=	-I${DESTDIR}${X11INCDIR}/libdrm
 CPPFLAGS+=	-I${DESTDIR}${X11INCDIR}/X11 -I${X11SRCDIR.drm}
 
-COPTS.radeon_cs_gem.c+=	-Wno-error	# XXX
+CWARNFLAGS.clang+=	-Wno-pointer-sign -Wno-parentheses-equality
 
 LIBDPLIBS=	drm	${.CURDIR}/../libdrm
 

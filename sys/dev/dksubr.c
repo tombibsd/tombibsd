@@ -48,6 +48,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/module.h>
 
 #include <dev/dkvar.h>
+#include <miscfs/specfs/specdev.h> /* for v_rdev */
 
 int	dkdebug = 0;
 
@@ -224,35 +225,9 @@ dk_strategy(struct dk_intf *di, struct dk_softc *dksc, struct buf *bp)
 	 */
 	s = splbio();
 	bufq_put(dksc->sc_bufq, bp);
-	dk_start(di, dksc);
+	di->di_diskstart(dksc);
 	splx(s);
 	return;
-}
-
-void
-dk_start(struct dk_intf *di, struct dk_softc *dksc)
-{
-	struct	buf *bp;
-
-	DPRINTF_FOLLOW(("dk_start(%s, %p)\n", di->di_dkname, dksc));
-
-	/* Process the work queue */
-	while ((bp = bufq_get(dksc->sc_bufq)) != NULL) {
-		if (di->di_diskstart(dksc, bp) != 0) {
-			bufq_put(dksc->sc_bufq, bp);
-			break;
-		}
-	}
-}
-
-void
-dk_iodone(struct dk_intf *di, struct dk_softc *dksc)
-{
-
-	DPRINTF_FOLLOW(("dk_iodone(%s, %p)\n", di->di_dkname, dksc));
-
-	/* We kick the queue in case we are able to get more work done */
-	dk_start(di, dksc);
 }
 
 int
@@ -329,6 +304,7 @@ dk_ioctl(struct dk_intf *di, struct dk_softc *dksc, dev_t dev,
 	case DIOCAWEDGE:
 	case DIOCDWEDGE:
 	case DIOCLWEDGES:
+	case DIOCMWEDGES:
 	case DIOCCACHESYNC:
 #ifdef __HAVE_OLD_DISKLABEL
 	case ODIOCGDINFO:
@@ -458,6 +434,15 @@ dk_ioctl(struct dk_intf *di, struct dk_softc *dksc, dev_t dev,
 		return (dkwedge_list(&dksc->sc_dkdev, dkwl, l));
 	    }
 
+	case DIOCMWEDGES:
+	    {
+		if ((flag & FWRITE) == 0)
+			return (EBADF);
+
+	    	dkwedge_discover(&dksc->sc_dkdev);
+		return 0;
+	    }
+
 	case DIOCGSTRATEGY:
 	    {
 		struct disk_strategy *dks = (void *)data;
@@ -555,7 +540,10 @@ dk_getdefaultlabel(struct dk_intf *di, struct dk_softc *dksc,
 
 	memset(lp, 0, sizeof(*lp));
 
-	lp->d_secperunit = dg->dg_secperunit;
+	if (dg->dg_secperunit > UINT32_MAX)
+		lp->d_secperunit = UINT32_MAX;
+	else
+		lp->d_secperunit = dg->dg_secperunit;
 	lp->d_secsize = dg->dg_secsize;
 	lp->d_nsectors = dg->dg_nsectors;
 	lp->d_ntracks = dg->dg_ntracks;
@@ -570,7 +558,7 @@ dk_getdefaultlabel(struct dk_intf *di, struct dk_softc *dksc,
 	lp->d_flags = 0;
 
 	lp->d_partitions[RAW_PART].p_offset = 0;
-	lp->d_partitions[RAW_PART].p_size = dg->dg_secperunit;
+	lp->d_partitions[RAW_PART].p_size = lp->d_secperunit;
 	lp->d_partitions[RAW_PART].p_fstype = FS_UNUSED;
 	lp->d_npartitions = RAW_PART + 1;
 
@@ -605,17 +593,21 @@ dk_getdisklabel(struct dk_intf *di, struct dk_softc *dksc, dev_t dev)
 		return;
 
 	/* Sanity check */
-	if (lp->d_secperunit != dg->dg_secperunit)
-		printf("WARNING: %s: total sector size in disklabel (%d) "
-		    "!= the size of %s (%" PRId64 ")\n", dksc->sc_xname,
-		    lp->d_secperunit, di->di_dkname, dg->dg_secperunit);
+	if (lp->d_secperunit < UINT32_MAX ?
+		lp->d_secperunit != dg->dg_secperunit :
+		lp->d_secperunit > dg->dg_secperunit)
+		printf("WARNING: %s: total sector size in disklabel (%ju) "
+		    "!= the size of %s (%ju)\n", dksc->sc_xname,
+		    (uintmax_t)lp->d_secperunit, di->di_dkname,
+		    (uintmax_t)dg->dg_secperunit);
 
 	for (i=0; i < lp->d_npartitions; i++) {
 		pp = &lp->d_partitions[i];
 		if (pp->p_offset + pp->p_size > dg->dg_secperunit)
 			printf("WARNING: %s: end of partition `%c' exceeds "
-			    "the size of %s (%" PRId64 ")\n", dksc->sc_xname,
-			    'a' + i, di->di_dkname, dg->dg_secperunit);
+			    "the size of %s (%ju)\n", dksc->sc_xname,
+			    'a' + i, di->di_dkname,
+			    (uintmax_t)dg->dg_secperunit);
 	}
 }
 
@@ -647,7 +639,6 @@ dk_lookup(struct pathbuf *pb, struct lwp *l, struct vnode **vpp)
 {
 	struct nameidata nd;
 	struct vnode *vp;
-	struct vattr va;
 	int     error;
 
 	if (l == NULL)
@@ -661,22 +652,29 @@ dk_lookup(struct pathbuf *pb, struct lwp *l, struct vnode **vpp)
 	}
 
 	vp = nd.ni_vp;
-	if ((error = VOP_GETATTR(vp, &va, l->l_cred)) != 0) {
-		DPRINTF((DKDB_FOLLOW|DKDB_INIT),
-		    ("dk_lookup: getattr error = %d\n", error));
-		goto out;
-	}
-
-	/* XXX: eventually we should handle VREG, too. */
-	if (va.va_type != VBLK) {
+	if (vp->v_type != VBLK) {
 		error = ENOTBLK;
 		goto out;
 	}
 
-	IFDEBUG(DKDB_VNODE, vprint("dk_lookup: vnode info", vp));
-
+	/* Reopen as anonymous vnode to protect against forced unmount. */
+	if ((error = bdevvp(vp->v_rdev, vpp)) != 0)
+		goto out;
 	VOP_UNLOCK(vp);
-	*vpp = vp;
+	if ((error = vn_close(vp, FREAD | FWRITE, l->l_cred)) != 0) {
+		vrele(*vpp);
+		return error;
+	}
+	if ((error = VOP_OPEN(*vpp, FREAD | FWRITE, l->l_cred)) != 0) {
+		vrele(*vpp);
+		return error;
+	}
+	mutex_enter((*vpp)->v_interlock);
+	(*vpp)->v_writecount++;
+	mutex_exit((*vpp)->v_interlock);
+
+	IFDEBUG(DKDB_VNODE, vprint("dk_lookup: vnode info", *vpp));
+
 	return 0;
 out:
 	VOP_UNLOCK(vp);

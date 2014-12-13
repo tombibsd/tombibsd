@@ -46,6 +46,7 @@ __RCSID("$NetBSD$");
 
 #include <err.h>
 #include <errno.h>
+#include <inttypes.h>
 #include <fts.h>
 #include <grp.h>
 #include <pwd.h>
@@ -136,8 +137,7 @@ printlong(DISPLAY *dp)
 			continue;
 		sp = p->fts_statp;
 		if (f_inode)
-			(void)printf("%*lu ", dp->s_inode,
-			    (unsigned long)sp->st_ino);
+			(void)printf("%*"PRIu64" ", dp->s_inode, sp->st_ino);
 		if (f_size) {
 			if (f_humanize) {
 				if ((humanize_number(szbuf, sizeof(szbuf),
@@ -365,7 +365,7 @@ printaname(FTSENT *p, int inodefield, int sizefield)
 	sp = p->fts_statp;
 	chcnt = 0;
 	if (f_inode)
-		chcnt += printf("%*lu ", inodefield, (unsigned long)sp->st_ino);
+		chcnt += printf("%*"PRIu64" ", inodefield, sp->st_ino);
 	if (f_size) {
 		if (f_humanize) {
 			if ((humanize_number(szbuf, sizeof(szbuf), sp->st_size,

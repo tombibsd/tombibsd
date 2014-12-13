@@ -4,4 +4,4 @@ BINDIR=		/usr/mdec
 
 CPPFLAGS+=	-D_STANDALONE
 
-CFLAGS+=	-msoft-float
+CFLAGS+=	${${ACTIVE_CC} == "gcc":? -msoft-float :}

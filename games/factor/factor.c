@@ -49,9 +49,7 @@ __RCSID("$NetBSD$");
 /*
  * factor - factor a number into primes
  *
- * By: Landon Curt Noll   chongo@toad.com,   ...!{sun,tolsoft}!hoptoad!chongo
- *
- *   chongo <for a good prime call: 391581 * 2^216193 - 1> /\oo/\
+ * By Landon Curt Noll, http://www.isthe.com/chongo/index.html /\oo/\
  *
  * usage:
  *	factor [number] ...
@@ -72,6 +70,7 @@ __RCSID("$NetBSD$");
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <inttypes.h>
 
 #ifdef HAVE_OPENSSL
 #include <openssl/bn.h>
@@ -93,8 +92,7 @@ static int BN_dec2bn(BIGNUM **a, const char *str);
  * We are able to sieve 2^32-1 because this byte table yields all primes
  * up to 65537 and 65537^2 > 2^32-1.
  */
-extern const ubig prime[];
-extern const ubig *pr_limit;		/* largest prime in the prime array */
+
 #if 0 /* debugging: limit table use to stress the "pollard" code */
 #define pr_limit &prime[0]
 #endif
@@ -198,7 +196,7 @@ main(int argc, char *argv[])
 static void
 pr_fact(BIGNUM *val)
 {
-	const ubig *fact;		/* The factor found. */
+	const uint64_t *fact;		/* The factor found. */
 
 	/* Firewall - catch 0 and 1. */
 	if (BN_is_zero(val) || BN_is_one(val))
@@ -239,7 +237,7 @@ pr_fact(BIGNUM *val)
 
 		/* Divide factor out until none are left. */
 		do {
-			printf(" %lu", *fact);
+			printf(" %" PRIu64, *fact);
 			BN_div_word(val, (BN_ULONG)*fact);
 		} while (BN_mod_word(val, (BN_ULONG)*fact) == 0);
 

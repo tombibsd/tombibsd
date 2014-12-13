@@ -139,7 +139,7 @@ const struct sockaddr_in6 sa6_any = {sizeof(sa6_any), AF_INET6,
 				     0, 0, IN6ADDR_ANY_INIT, 0};
 
 static int in6_lifaddr_ioctl(struct socket *, u_long, void *,
-	struct ifnet *, struct lwp *);
+	struct ifnet *);
 static int in6_ifinit(struct ifnet *, struct in6_ifaddr *,
 	const struct sockaddr_in6 *, int);
 static void in6_unlink_ifa(struct in6_ifaddr *, struct ifnet *);
@@ -360,8 +360,7 @@ in6_mask2len(struct in6_addr *mask, u_char *lim0)
 #define ia62ifa(ia6)	(&((ia6)->ia_ifa))
 
 static int
-in6_control1(struct socket *so, u_long cmd, void *data, struct ifnet *ifp,
-    lwp_t *l)
+in6_control1(struct socket *so, u_long cmd, void *data, struct ifnet *ifp)
 {
 	struct	in6_ifreq *ifr = (struct in6_ifreq *)data;
 	struct	in6_ifaddr *ia = NULL;
@@ -385,7 +384,7 @@ in6_control1(struct socket *so, u_long cmd, void *data, struct ifnet *ifp,
 	case SIOCSIFADDRPREF:
 		if (ifp == NULL)
 			return EINVAL;
-		return ifaddrpref_ioctl(so, cmd, data, ifp, l);
+		return ifaddrpref_ioctl(so, cmd, data, ifp);
 	}
 
 	if (ifp == NULL)
@@ -428,7 +427,7 @@ in6_control1(struct socket *so, u_long cmd, void *data, struct ifnet *ifp,
 		/* Privileged. */
 		/* FALLTHROUGH */
 	case SIOCGLIFADDR:
-		return in6_lifaddr_ioctl(so, cmd, data, ifp, l);
+		return in6_lifaddr_ioctl(so, cmd, data, ifp);
 	}
 
 	/*
@@ -644,12 +643,13 @@ in6_control1(struct socket *so, u_long cmd, void *data, struct ifnet *ifp,
 	case SIOCAIFADDR_IN6:
 	{
 		int i;
-		struct nd_prefixctl pr0;
+		struct nd_prefixctl prc0;
 		struct nd_prefix *pr;
 
 		/* reject read-only flags */
 		if ((ifra->ifra_flags & IN6_IFF_DUPLICATED) != 0 ||
 		    (ifra->ifra_flags & IN6_IFF_DETACHED) != 0 ||
+		    (ifra->ifra_flags & IN6_IFF_TENTATIVE) != 0 ||
 		    (ifra->ifra_flags & IN6_IFF_NODAD) != 0 ||
 		    (ifra->ifra_flags & IN6_IFF_AUTOCONF) != 0) {
 			return EINVAL;
@@ -680,17 +680,17 @@ in6_control1(struct socket *so, u_long cmd, void *data, struct ifnet *ifp,
 		 * convert mask to prefix length (prefixmask has already
 		 * been validated in in6_update_ifa().
 		 */
-		memset(&pr0, 0, sizeof(pr0));
-		pr0.ndpr_ifp = ifp;
-		pr0.ndpr_plen = in6_mask2len(&ifra->ifra_prefixmask.sin6_addr,
+		memset(&prc0, 0, sizeof(prc0));
+		prc0.ndprc_ifp = ifp;
+		prc0.ndprc_plen = in6_mask2len(&ifra->ifra_prefixmask.sin6_addr,
 		    NULL);
-		if (pr0.ndpr_plen == 128) {
+		if (prc0.ndprc_plen == 128) {
 			break;	/* we don't need to install a host route. */
 		}
-		pr0.ndpr_prefix = ifra->ifra_addr;
+		prc0.ndprc_prefix = ifra->ifra_addr;
 		/* apply the mask for safety. */
 		for (i = 0; i < 4; i++) {
-			pr0.ndpr_prefix.sin6_addr.s6_addr32[i] &=
+			prc0.ndprc_prefix.sin6_addr.s6_addr32[i] &=
 			    ifra->ifra_prefixmask.sin6_addr.s6_addr32[i];
 		}
 		/*
@@ -700,19 +700,19 @@ in6_control1(struct socket *so, u_long cmd, void *data, struct ifnet *ifp,
 		 * later advertised RAs (when accept_rtadv is non 0), which is
 		 * an intended behavior.
 		 */
-		pr0.ndpr_raf_onlink = 1; /* should be configurable? */
-		pr0.ndpr_raf_auto =
+		prc0.ndprc_raf_onlink = 1; /* should be configurable? */
+		prc0.ndprc_raf_auto =
 		    ((ifra->ifra_flags & IN6_IFF_AUTOCONF) != 0);
-		pr0.ndpr_vltime = ifra->ifra_lifetime.ia6t_vltime;
-		pr0.ndpr_pltime = ifra->ifra_lifetime.ia6t_pltime;
+		prc0.ndprc_vltime = ifra->ifra_lifetime.ia6t_vltime;
+		prc0.ndprc_pltime = ifra->ifra_lifetime.ia6t_pltime;
 
 		/* add the prefix if not yet. */
-		if ((pr = nd6_prefix_lookup(&pr0)) == NULL) {
+		if ((pr = nd6_prefix_lookup(&prc0)) == NULL) {
 			/*
 			 * nd6_prelist_add will install the corresponding
 			 * interface route.
 			 */
-			if ((error = nd6_prelist_add(&pr0, NULL, &pr)) != 0)
+			if ((error = nd6_prelist_add(&prc0, NULL, &pr)) != 0)
 				return error;
 			if (pr == NULL) {
 				log(LOG_ERR, "nd6_prelist_add succeeded but "
@@ -784,8 +784,7 @@ in6_control1(struct socket *so, u_long cmd, void *data, struct ifnet *ifp,
 }
 
 int
-in6_control(struct socket *so, u_long cmd, void *data, struct ifnet *ifp,
-    struct lwp *l)
+in6_control(struct socket *so, u_long cmd, void *data, struct ifnet *ifp)
 {
 	int error, s;
 
@@ -805,7 +804,7 @@ in6_control(struct socket *so, u_long cmd, void *data, struct ifnet *ifp,
 	case OSIOCAIFADDR_IN6:
 #endif
 	case SIOCAIFADDR_IN6:
-		if (kauth_authorize_network(l->l_cred,
+		if (kauth_authorize_network(curlwp->l_cred,
 		    KAUTH_NETWORK_SOCKET,
 		    KAUTH_REQ_NETWORK_SOCKET_SETPRIV,
 		    so, NULL, NULL))
@@ -814,7 +813,7 @@ in6_control(struct socket *so, u_long cmd, void *data, struct ifnet *ifp,
 	}
 
 	s = splnet();
-	error = in6_control1(so , cmd, data, ifp, l);
+	error = in6_control1(so , cmd, data, ifp);
 	splx(s);
 	return error;
 }
@@ -836,7 +835,7 @@ in6_update_ifa1(struct ifnet *ifp, struct in6_aliasreq *ifra,
 	struct in6_multi_mship *imm;
 	struct in6_multi *in6m_sol;
 	struct rtentry *rt;
-	int dad_delay;
+	int dad_delay, was_tentative;
 
 	in6m_sol = NULL;
 
@@ -1001,7 +1000,7 @@ in6_update_ifa1(struct ifnet *ifp, struct in6_aliasreq *ifra,
 		} else
 			in6_ifaddr = ia;
 		/* gain a refcnt for the link from in6_ifaddr */
-		IFAREF(&ia->ia_ifa);
+		ifaref(&ia->ia_ifa);
 
 		ifa_insert(ifp, &ia->ia_ifa);
 	}
@@ -1065,7 +1064,10 @@ in6_update_ifa1(struct ifnet *ifp, struct in6_aliasreq *ifra,
 
 	/*
 	 * configure address flags.
+	 * We need to preserve tentative state so DAD works if
+	 * something adds the same address before DAD finishes.
 	 */
+	was_tentative = ia->ia6_flags & (IN6_IFF_TENTATIVE|IN6_IFF_DUPLICATED);
 	ia->ia6_flags = ifra->ifra_flags;
 
 	/*
@@ -1077,7 +1079,7 @@ in6_update_ifa1(struct ifnet *ifp, struct in6_aliasreq *ifra,
 	if (ifp->if_link_state == LINK_STATE_DOWN) {
 		ia->ia6_flags |= IN6_IFF_DETACHED;
 		ia->ia6_flags &= ~IN6_IFF_TENTATIVE;
-	} else if (hostIsNew && in6if_do_dad(ifp))
+	} else if ((hostIsNew || was_tentative) && in6if_do_dad(ifp))
 		ia->ia6_flags |= IN6_IFF_TENTATIVE;
 
 	/*
@@ -1168,7 +1170,7 @@ in6_update_ifa1(struct ifnet *ifp, struct in6_aliasreq *ifra,
 			if (memcmp(&mltaddr.sin6_addr,
 			    &satocsin6(rt_getkey(rt))->sin6_addr,
 			    MLTMASK_LEN)) {
-				RTFREE(rt);
+				rtfree(rt);
 				rt = NULL;
 			} else if (rt->rt_ifp != ifp) {
 				IN6_DPRINTF("%s: rt_ifp %p -> %p (%s) "
@@ -1199,7 +1201,7 @@ in6_update_ifa1(struct ifnet *ifp, struct in6_aliasreq *ifra,
 			if (error)
 				goto cleanup;
 		} else {
-			RTFREE(rt);
+			rtfree(rt);
 		}
 		imm = in6_joingroup(ifp, &mltaddr.sin6_addr, &error, 0);
 		if (!imm) {
@@ -1253,7 +1255,7 @@ in6_update_ifa1(struct ifnet *ifp, struct in6_aliasreq *ifra,
 			if (memcmp(&mltaddr.sin6_addr,
 			    &satocsin6(rt_getkey(rt))->sin6_addr,
 			    32 / NBBY)) {
-				RTFREE(rt);
+				rtfree(rt);
 				rt = NULL;
 			} else if (rt->rt_ifp != ifp) {
 				IN6_DPRINTF("%s: rt_ifp %p -> %p (%s) "
@@ -1284,7 +1286,7 @@ in6_update_ifa1(struct ifnet *ifp, struct in6_aliasreq *ifra,
 				goto cleanup;
 #undef	MLTMASK_LEN
 		} else {
-			RTFREE(rt);
+			rtfree(rt);
 		}
 		imm = in6_joingroup(ifp, &mltaddr.sin6_addr, &error, 0);
 		if (!imm) {
@@ -1333,7 +1335,8 @@ in6_update_ifa1(struct ifnet *ifp, struct in6_aliasreq *ifra,
 				    mindelay;
 			}
 		}
-		nd6_dad_start(&ia->ia_ifa, dad_delay);
+		/* +1 ensures callout is always used */
+		nd6_dad_start(&ia->ia_ifa, dad_delay + 1);
 	}
 
 	return error;
@@ -1470,7 +1473,7 @@ in6_unlink_ifa(struct in6_ifaddr *ia, struct ifnet *ifp)
 	 * release another refcnt for the link from in6_ifaddr.
 	 * Note that we should decrement the refcnt at least once for all *BSD.
 	 */
-	IFAFREE(&oia->ia_ifa);
+	ifafree(&oia->ia_ifa);
 
 	splx(s);
 }
@@ -1508,7 +1511,7 @@ in6_purgeif(struct ifnet *ifp)
  */
 static int
 in6_lifaddr_ioctl(struct socket *so, u_long cmd, void *data, 
-	struct ifnet *ifp, struct lwp *l)
+	struct ifnet *ifp)
 {
 	struct in6_ifaddr *ia;
 	struct if_laddrreq *iflr = (struct if_laddrreq *)data;
@@ -1618,7 +1621,7 @@ in6_lifaddr_ioctl(struct socket *so, u_long cmd, void *data,
 		ifra.ifra_lifetime.ia6t_vltime = ND6_INFINITE_LIFETIME;
 		ifra.ifra_lifetime.ia6t_pltime = ND6_INFINITE_LIFETIME;
 		ifra.ifra_flags = iflr->flags & ~IFLR_PREFIX;
-		return in6_control(so, SIOCAIFADDR_IN6, &ifra, ifp, l);
+		return in6_control(so, SIOCAIFADDR_IN6, &ifra, ifp);
 	    }
 	case SIOCGLIFADDR:
 	case SIOCDLIFADDR:
@@ -1729,7 +1732,7 @@ in6_lifaddr_ioctl(struct socket *so, u_long cmd, void *data,
 			    ia->ia_prefixmask.sin6_len);
 
 			ifra.ifra_flags = ia->ia6_flags;
-			return in6_control(so, SIOCDIFADDR_IN6, &ifra, ifp, l);
+			return in6_control(so, SIOCDIFADDR_IN6, &ifra, ifp);
 		}
 	    }
 	}
@@ -1870,61 +1873,15 @@ bestia(struct in6_ifaddr *best_ia, struct in6_ifaddr *ia)
 /*
  * Convert IP6 address to printable (loggable) representation.
  */
-static int ip6round = 0;
 char *
 ip6_sprintf(const struct in6_addr *addr)
 {
-	static char ip6buf[8][48];
-	int i;
-	char *bp;
-	char *cp;
-	const u_int16_t *a = (const u_int16_t *)addr;
-	const u_int8_t *d;
-	int dcolon = 0;
+	static int ip6round = 0;
+	static char ip6buf[8][INET6_ADDRSTRLEN];
+	char *cp = ip6buf[ip6round++ & 7];
 
-	ip6round = (ip6round + 1) & 7;
-	cp = ip6buf[ip6round];
-
-	for (i = 0; i < 8; i++) {
-		if (dcolon == 1) {
-			if (*a == 0) {
-				if (i == 7)
-					*cp++ = ':';
-				a++;
-				continue;
-			} else
-				dcolon = 2;
-		}
-		if (*a == 0) {
-			if (dcolon == 0 && *(a + 1) == 0) {
-				if (i == 0)
-					*cp++ = ':';
-				*cp++ = ':';
-				dcolon = 1;
-			} else {
-				*cp++ = '0';
-				*cp++ = ':';
-			}
-			a++;
-			continue;
-		}
-		d = (const u_char *)a;
-		bp = cp;
-		*cp = hexdigits[*d >> 4];
-		if (*cp != '0')
-			cp++;
-		*cp = hexdigits[*d++ & 0xf];
-		if (cp != bp || *cp != '0')
-			cp++;
-		*cp = hexdigits[*d >> 4];
-		if (cp != bp || *cp != '0')
-			cp++;
-		*cp++ = hexdigits[*d & 0xf];
-		*cp++ = ':';
-		a++;
-	}
-	*--cp = 0;
-	return ip6buf[ip6round];
+	in6_print(cp, INET6_ADDRSTRLEN, addr);
+	return cp;
 }
 
 /*
@@ -2157,15 +2114,21 @@ in6_if_link_up(struct ifnet *ifp)
 		}
 
 		if (ia->ia6_flags & IN6_IFF_TENTATIVE) {
+			int rand_delay;
+
+			/* Clear the duplicated flag as we're starting DAD. */
+			ia->ia6_flags &= ~IN6_IFF_DUPLICATED;
+
 			/*
 			 * The TENTATIVE flag was likely set by hand
 			 * beforehand, implicitly indicating the need for DAD.
 			 * We may be able to skip the random delay in this
 			 * case, but we impose delays just in case.
 			 */
-			nd6_dad_start(ifa,
-			    cprng_fast32() %
-				(MAX_RTR_SOLICITATION_DELAY * hz));
+			rand_delay = cprng_fast32() %
+			    (MAX_RTR_SOLICITATION_DELAY * hz);
+			/* +1 ensures callout is always used */
+			nd6_dad_start(ifa, rand_delay + 1);
 		}
 	}
 
@@ -2185,6 +2148,7 @@ in6_if_up(struct ifnet *ifp)
 	/* interface may not support link state, so bring it up also */
 	in6_if_link_up(ifp);
 }
+
 /*
  * Mark all addresses as detached.
  */
@@ -2218,7 +2182,8 @@ in6_if_link_down(struct ifnet *ifp)
 			    "%s marked detached\n",
 			    ip6_sprintf(&ia->ia_addr.sin6_addr)));
 			ia->ia6_flags |= IN6_IFF_DETACHED;
-			ia->ia6_flags &= ~IN6_IFF_TENTATIVE;
+			ia->ia6_flags &=
+			    ~(IN6_IFF_TENTATIVE | IN6_IFF_DUPLICATED);
 			nd6_newaddrmsg(ifa);
 		}
 	}
@@ -2274,7 +2239,7 @@ in6_setmaxmtu(void)
 	unsigned long maxmtu = 0;
 	struct ifnet *ifp;
 
-	TAILQ_FOREACH(ifp, &ifnet, if_list) {
+	IFNET_FOREACH(ifp) {
 		/* this function can be called during ifnet initialization */
 		if (!ifp->if_afdata[AF_INET6])
 			continue;

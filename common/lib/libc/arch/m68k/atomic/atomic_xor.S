@@ -129,3 +129,7 @@ ENTRY(__sync_fetch_and_xor_1)
 	bne	1b
 	rts
 END(__sync_fetch_and_xor_1)
+
+CRT_ALIAS(__atomic_fetch_xor_1,__sync_fetch_and_xor_1)
+CRT_ALIAS(__atomic_fetch_xor_2,__sync_fetch_and_xor_2)
+CRT_ALIAS(__atomic_fetch_xor_4,__sync_fetch_and_xor_4)

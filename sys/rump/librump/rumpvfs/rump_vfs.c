@@ -35,6 +35,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/buf.h>
 #include <sys/conf.h>
 #include <sys/evcnt.h>
+#include <sys/fcntl.h>
 #include <sys/filedesc.h>
 #include <sys/fstrans.h>
 #include <sys/lockf.h>
@@ -78,6 +79,7 @@ fini(void)
 {
 
 	vfs_shutdown();
+	rumpblk_fini();
 }
 
 static void
@@ -135,8 +137,10 @@ RUMP_COMPONENT(RUMP__FACTION_VFS)
 	vfs_attach(&rumpfs_vfsops);
 	vfs_mountroot();
 
-	/* "mtree": create /dev */
+	/* "mtree": create /dev and /tmp */
 	do_sys_mkdir("/dev", 0755, UIO_SYSSPACE);
+	do_sys_mkdir("/tmp", 01777, UIO_SYSSPACE);
+	do_sys_chmodat(curlwp, AT_FDCWD, "/tmp", 01777, 0);
 
 	rump_proc_vfs_init = pvfs_init;
 	rump_proc_vfs_release = pvfs_rele;

@@ -45,9 +45,9 @@ ENTRY(_getcontext)
 	_DOSYSCALL(getcontext)
 	bso	1f
 	mflr	%r4
-	stw	%r4,UC_GREGS_PC(%r5)		# saved pc <- lr
-	stw	%r3,UC_GREGS_R3(%r5)		# arrange for return value 0
+	stptr	%r4,UC_GREGS_PC(%r5)		# saved pc <- lr
+	stint	%r3,UC_GREGS_R3(%r5)		# arrange for return value 0
 	blr
 1:
-	b	_C_LABEL(__cerror)
+	BRANCH_TO_CERROR()
 END(_getcontext)

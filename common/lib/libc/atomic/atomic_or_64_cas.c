@@ -56,6 +56,8 @@ atomic_or_64(volatile uint64_t *addr, uint64_t val)
 	(void) fetch_and_or_8(addr, val);
 }
 
+__strong_alias(__atomic_fetch_or_8,__sync_fetch_and_or_8)
+
 #undef atomic_or_64
 atomic_op_alias(atomic_or_64,_atomic_or_64)
 

@@ -62,15 +62,15 @@ __END_DECLS
 	 (((x) & 0x00ff) << 8))))
 
 #define	bswap64(x) \
-	(__builtin_constant_p((x)) ? \
+	__CAST(uint64_t, __builtin_constant_p((x)) ? \
 	 __byte_swap_u64_constant(x) : __BYTE_SWAP_U64_VARIABLE(x))
 
 #define	bswap32(x) \
-	(__builtin_constant_p((x)) ? \
+	__CAST(uint32_t, __builtin_constant_p((x)) ? \
 	 __byte_swap_u32_constant(x) : __BYTE_SWAP_U32_VARIABLE(x))
 
 #define	bswap16(x) \
-	(__builtin_constant_p((x)) ? \
+	__CAST(uint16_t, __builtin_constant_p((x)) ? \
 	 __byte_swap_u16_constant(x) : __BYTE_SWAP_U16_VARIABLE(x))
 
 #endif /* __GNUC__ && __OPTIMIZE__ */

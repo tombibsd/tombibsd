@@ -20,7 +20,7 @@
 #define _DEV_ATH_AR5210REG_H
 
 /*
- * Register defintions for the Atheros AR5210/5110 MAC/Basedband
+ * Register definitions for the Atheros AR5210/5110 MAC/Basedband
  * Processor for IEEE 802.11a 5-GHz Wireless LANs.
  */
 

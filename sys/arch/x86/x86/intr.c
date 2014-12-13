@@ -1083,7 +1083,7 @@ intr_printconfig(void)
 	for (CPU_INFO_FOREACH(cii, ci)) {
 		(*pr)("%s: interrupt masks:\n", device_xname(ci->ci_dev));
 		for (i = 0; i < NIPL; i++)
-			(*pr)("IPL %d mask %lx unmask %lx\n", i,
+			(*pr)("IPL %d mask %08lx unmask %08lx\n", i,
 			    (u_long)ci->ci_imask[i], (u_long)ci->ci_iunmask[i]);
 		for (i = 0; i < MAX_INTR_SOURCES; i++) {
 			isp = ci->ci_isources[i];

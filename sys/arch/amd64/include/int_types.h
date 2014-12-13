@@ -34,6 +34,10 @@
 #ifndef	_AMD64_INT_TYPES_H_
 #define	_AMD64_INT_TYPES_H_
 
+#ifdef __UINTPTR_TYPE__
+#include <sys/common_int_types.h>
+#else
+
 #ifdef __x86_64__
 
 #include <sys/cdefs.h>
@@ -65,5 +69,7 @@ typedef	unsigned long	      __uintptr_t;
 #include <i386/int_types.h>
 
 #endif	/*	__x86_64__	*/
+
+#endif
 
 #endif	/* !_AMD64_INT_TYPES_H_ */

@@ -45,7 +45,7 @@
 __KERNEL_RCSID(0, "$NetBSD$");
 
 #ifdef _KERNEL_OPT
-#include "opt_uvideo.h"
+#include "opt_usb.h"
 #endif
 
 #ifdef _MODULE

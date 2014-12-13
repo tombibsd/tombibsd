@@ -71,7 +71,7 @@ static struct sysctlnode sysctl_mibroot = {
 	0
 #else /* !lint */
 	.sysctl_flags = SYSCTL_VERSION|CTLFLAG_ROOT|CTLTYPE_NODE,
-	sysc_init_field(_sysctl_size, sizeof(struct sysctlnode)),
+	.sysctl_size = sizeof(struct sysctlnode),
 	.sysctl_name = "(root)",
 #endif /* !lint */
 };

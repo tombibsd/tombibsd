@@ -58,3 +58,4 @@ ENTRY(ptrace)
 	ret
 err:
 	jmp	CERROR
+END(ptrace)

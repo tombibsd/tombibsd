@@ -119,6 +119,8 @@ int	spec_close(void *);
 #define	spec_setattr	genfs_ebadf
 int	spec_read(void *);
 int	spec_write(void *);
+#define spec_fallocate	genfs_eopnotsupp
+int	spec_fdiscard(void *);
 #define spec_fcntl	genfs_fcntl
 int	spec_ioctl(void *);
 int	spec_poll(void *);

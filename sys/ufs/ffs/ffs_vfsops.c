@@ -141,7 +141,8 @@ struct vfsops ffs_vfsops = {
 	.vfs_quotactl = ufs_quotactl,
 	.vfs_statvfs = ffs_statvfs,
 	.vfs_sync = ffs_sync,
-	.vfs_vget = ffs_vget,
+	.vfs_vget = ufs_vget,
+	.vfs_loadvnode = ffs_loadvnode,
 	.vfs_fhtovp = ffs_fhtovp,
 	.vfs_vptofh = ffs_vptofh,
 	.vfs_init = ffs_init,
@@ -179,7 +180,7 @@ ffs_snapshot_cb(kauth_cred_t cred, kauth_action_t action, void *cookie,
     void *arg0, void *arg1, void *arg2, void *arg3)
 {
 	vnode_t *vp = arg2;
-	int result = KAUTH_RESULT_DEFER;;
+	int result = KAUTH_RESULT_DEFER;
 
 	if (action != KAUTH_SYSTEM_FS_SNAPSHOT)
 		return result;
@@ -807,7 +808,7 @@ ffs_reload(struct mount *mp, kauth_cred_t cred, struct lwp *l)
 	}
 
 	vfs_vnode_iterator_init(mp, &marker);
-	while (vfs_vnode_iterator_next(marker, &vp)) {
+	while ((vp = vfs_vnode_iterator_next(marker, NULL, NULL))) {
 		/*
 		 * Step 4: invalidate all inactive vnodes.
 		 */
@@ -973,7 +974,7 @@ ffs_mountfs(struct vnode *devvp, struct mount *mp, struct lwp *l)
 			continue;
 
 		/* Validate size of superblock */
-		if (sbsize > MAXBSIZE || sbsize < sizeof(struct fs))
+		if (sbsize > SBLOCKSIZE || sbsize < sizeof(struct fs))
 			continue;
 
 		/* Check that we can handle the file system blocksize */
@@ -1271,14 +1272,6 @@ ffs_mountfs(struct vnode *devvp, struct mount *mp, struct lwp *l)
 		}
 #endif
 	 }
-#ifdef UFS_EXTATTR
-	/*
-	 * Initialize file-backed extended attributes on UFS1 file
-	 * systems.
-	 */
-	if (ump->um_fstype == UFS1)
-		ufs_extattr_uepm_init(&ump->um_extattr);	
-#endif /* UFS_EXTATTR */
 
 	if (mp->mnt_flag & MNT_DISCARD)
 		ump->um_discarddata = ffs_discard_init(devvp, fs);
@@ -1526,6 +1519,7 @@ ffs_flushfiles(struct mount *mp, int flags, struct lwp *l)
 			ufs_extattr_stop(mp, l);
 		if (ump->um_extattr.uepm_flags & UFS_EXTATTR_UEPM_INITIALIZED)
 			ufs_extattr_uepm_destroy(&ump->um_extattr);
+		mp->mnt_flag &= ~MNT_EXTATTR;
 	}
 #endif
 	if ((error = vflush(mp, 0, SKIPSYSTEM | flags)) != 0)
@@ -1593,6 +1587,51 @@ ffs_statvfs(struct mount *mp, struct statvfs *sbp)
 	return (0);
 }
 
+struct ffs_sync_ctx {
+	int waitfor;
+	bool is_suspending;
+};
+
+static bool
+ffs_sync_selector(void *cl, struct vnode *vp)
+{
+	struct ffs_sync_ctx *c = cl;
+	struct inode *ip;
+
+	ip = VTOI(vp);
+	/*
+	 * Skip the vnode/inode if inaccessible.
+	 */
+	if (ip == NULL || vp->v_type == VNON)
+		return false;
+
+	/*
+	 * We deliberately update inode times here.  This will
+	 * prevent a massive queue of updates accumulating, only
+	 * to be handled by a call to unmount.
+	 *
+	 * XXX It would be better to have the syncer trickle these
+	 * out.  Adjustment needed to allow registering vnodes for
+	 * sync when the vnode is clean, but the inode dirty.  Or
+	 * have ufs itself trickle out inode updates.
+	 *
+	 * If doing a lazy sync, we don't care about metadata or
+	 * data updates, because they are handled by each vnode's
+	 * synclist entry.  In this case we are only interested in
+	 * writing back modified inodes.
+	 */
+	if ((ip->i_flag & (IN_ACCESS | IN_CHANGE | IN_UPDATE |
+	    IN_MODIFY | IN_MODIFIED | IN_ACCESSED)) == 0 &&
+	    (c->waitfor == MNT_LAZY || (LIST_EMPTY(&vp->v_dirtyblkhd) &&
+	    UVM_OBJ_IS_CLEAN(&vp->v_uobj))))
+		return false;
+
+	if (vp->v_type == VBLK && c->is_suspending)
+		return false;
+
+	return true;
+}
+
 /*
  * Go through the disk queues to initiate sandbagged IO;
  * go through the inodes to write those that have been modified;
@@ -1604,12 +1643,12 @@ int
 ffs_sync(struct mount *mp, int waitfor, kauth_cred_t cred)
 {
 	struct vnode *vp;
-	struct inode *ip;
 	struct ufsmount *ump = VFSTOUFS(mp);
 	struct fs *fs;
 	struct vnode_iterator *marker;
 	int error, allerror = 0;
 	bool is_suspending;
+	struct ffs_sync_ctx ctx;
 
 	fs = ump->um_fs;
 	if (fs->fs_fmod != 0 && fs->fs_ronly != 0) {		/* XXX */
@@ -1623,45 +1662,14 @@ ffs_sync(struct mount *mp, int waitfor, kauth_cred_t cred)
 	 * Write back each (modified) inode.
 	 */
 	vfs_vnode_iterator_init(mp, &marker);
-	while (vfs_vnode_iterator_next(marker, &vp)) {
+
+	ctx.waitfor = waitfor;
+	ctx.is_suspending = is_suspending;
+	while ((vp = vfs_vnode_iterator_next(marker, ffs_sync_selector, &ctx)))
+	{
 		error = vn_lock(vp, LK_EXCLUSIVE);
 		if (error) {
 			vrele(vp);
-			continue;
-		}
-		ip = VTOI(vp);
-		/*
-		 * Skip the vnode/inode if inaccessible.
-		 */
-		if (ip == NULL || vp->v_type == VNON) {
-			vput(vp);
-			continue;
-		}
-
-		/*
-		 * We deliberately update inode times here.  This will
-		 * prevent a massive queue of updates accumulating, only
-		 * to be handled by a call to unmount.
-		 *
-		 * XXX It would be better to have the syncer trickle these
-		 * out.  Adjustment needed to allow registering vnodes for
-		 * sync when the vnode is clean, but the inode dirty.  Or
-		 * have ufs itself trickle out inode updates.
-		 *
-		 * If doing a lazy sync, we don't care about metadata or
-		 * data updates, because they are handled by each vnode's
-		 * synclist entry.  In this case we are only interested in
-		 * writing back modified inodes.
-		 */
-		if ((ip->i_flag & (IN_ACCESS | IN_CHANGE | IN_UPDATE |
-		    IN_MODIFY | IN_MODIFIED | IN_ACCESSED)) == 0 &&
-		    (waitfor == MNT_LAZY || (LIST_EMPTY(&vp->v_dirtyblkhd) &&
-		    UVM_OBJ_IS_CLEAN(&vp->v_uobj)))) {
-			vput(vp);
-			continue;
-		}
-		if (vp->v_type == VBLK && is_suspending) {
-			vput(vp);
 			continue;
 		}
 		if (waitfor == MNT_LAZY) {
@@ -1725,99 +1733,52 @@ ffs_sync(struct mount *mp, int waitfor, kauth_cred_t cred)
 }
 
 /*
- * Look up a FFS dinode number to find its incore vnode, otherwise read it
- * in from disk.  If it is in core, wait for the lock bit to clear, then
- * return the inode locked.  Detection and handling of mount points must be
- * done by the calling routine.
+ * Read an inode from disk and initialize this vnode / inode pair.
+ * Caller assures no other thread will try to load this inode.
  */
 int
-ffs_vget(struct mount *mp, ino_t ino, struct vnode **vpp)
+ffs_loadvnode(struct mount *mp, struct vnode *vp,
+    const void *key, size_t key_len, const void **new_key)
 {
+	ino_t ino;
 	struct fs *fs;
 	struct inode *ip;
 	struct ufsmount *ump;
 	struct buf *bp;
-	struct vnode *vp;
 	dev_t dev;
 	int error;
 
+	KASSERT(key_len == sizeof(ino));
+	memcpy(&ino, key, key_len);
 	ump = VFSTOUFS(mp);
 	dev = ump->um_dev;
+	fs = ump->um_fs;
 
- retry:
-	if ((*vpp = ufs_ihashget(dev, ino, LK_EXCLUSIVE)) != NULL)
-		return (0);
+	/* Read in the disk contents for the inode. */
+	error = bread(ump->um_devvp, FFS_FSBTODB(fs, ino_to_fsba(fs, ino)),
+		      (int)fs->fs_bsize, NOCRED, 0, &bp);
+	if (error)
+		return error;
 
-	/* Allocate a new vnode/inode. */
-	error = getnewvnode(VT_UFS, mp, ffs_vnodeop_p, NULL, &vp);
-	if (error) {
-		*vpp = NULL;
-		return (error);
-	}
+	/* Allocate and initialize inode. */
 	ip = pool_cache_get(ffs_inode_cache, PR_WAITOK);
-
-	/*
-	 * If someone beat us to it, put back the freshly allocated
-	 * vnode/inode pair and retry.
-	 */
-	mutex_enter(&ufs_hashlock);
-	if (ufs_ihashget(dev, ino, 0) != NULL) {
-		mutex_exit(&ufs_hashlock);
-		ungetnewvnode(vp);
-		pool_cache_put(ffs_inode_cache, ip);
-		goto retry;
-	}
-
-	vp->v_vflag |= VV_LOCKSWORK;
-
-	/*
-	 * XXX MFS ends up here, too, to allocate an inode.  Should we
-	 * XXX create another pool for MFS inodes?
-	 */
-
 	memset(ip, 0, sizeof(struct inode));
+	vp->v_tag = VT_UFS;
+	vp->v_op = ffs_vnodeop_p;
+	vp->v_vflag |= VV_LOCKSWORK;
 	vp->v_data = ip;
 	ip->i_vnode = vp;
 	ip->i_ump = ump;
-	ip->i_fs = fs = ump->um_fs;
+	ip->i_fs = fs;
 	ip->i_dev = dev;
 	ip->i_number = ino;
 #if defined(QUOTA) || defined(QUOTA2)
 	ufsquota_init(ip);
 #endif
 
-	/*
-	 * Initialize genfs node, we might proceed to destroy it in
-	 * error branches.
-	 */
+	/* Initialize genfs node. */
 	genfs_node_init(vp, &ffs_genfsops);
 
-	/*
-	 * Put it onto its hash chain and lock it so that other requests for
-	 * this inode will block if they arrive while we are sleeping waiting
-	 * for old data structures to be purged or for the contents of the
-	 * disk portion of this inode to be read.
-	 */
-
-	ufs_ihashins(ip);
-	mutex_exit(&ufs_hashlock);
-
-	/* Read in the disk contents for the inode, copy into the inode. */
-	error = bread(ump->um_devvp, FFS_FSBTODB(fs, ino_to_fsba(fs, ino)),
-		      (int)fs->fs_bsize, NOCRED, 0, &bp);
-	if (error) {
-
-		/*
-		 * The inode does not contain anything useful, so it would
-		 * be misleading to leave it on its hash chain. With mode
-		 * still zero, it will be unlinked and returned to the free
-		 * list by vput().
-		 */
-
-		vput(vp);
-		*vpp = NULL;
-		return (error);
-	}
 	if (ip->i_ump->um_fstype == UFS1)
 		ip->i_din.ffs1_din = pool_cache_get(ffs_dinode1_cache,
 		    PR_WAITOK);
@@ -1827,17 +1788,10 @@ ffs_vget(struct mount *mp, ino_t ino, struct vnode **vpp)
 	ffs_load_inode(bp, ip, fs, ino);
 	brelse(bp, 0);
 
-	/*
-	 * Initialize the vnode from the inode, check for aliases.
-	 * Note that the underlying vnode may have changed.
-	 */
-
+	/* Initialize the vnode from the inode. */
 	ufs_vinit(mp, ffs_specop_p, ffs_fifoop_p, &vp);
 
-	/*
-	 * Finish inode initialization now that aliasing has been resolved.
-	 */
-
+	/* Finish inode initialization.  */
 	ip->i_devvp = ump->um_devvp;
 	vref(ip->i_devvp);
 
@@ -1851,8 +1805,8 @@ ffs_vget(struct mount *mp, ino_t ino, struct vnode **vpp)
 		ip->i_gid = ip->i_ffs1_ogid;			/* XXX */
 	}							/* XXX */
 	uvm_vnp_setsize(vp, ip->i_size);
-	*vpp = vp;
-	return (0);
+	*new_key = &ip->i_number;
+	return 0;
 }
 
 /*

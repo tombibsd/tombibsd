@@ -148,6 +148,7 @@ const struct cdevsw et4k_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = et4kmmap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = 0
 };
 

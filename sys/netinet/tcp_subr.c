@@ -103,7 +103,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/atomic.h>
 #include <sys/proc.h>
 #include <sys/systm.h>
-#include <sys/malloc.h>
 #include <sys/mbuf.h>
 #include <sys/once.h>
 #include <sys/socket.h>
@@ -635,7 +634,7 @@ tcp_template(struct tcpcb *tp)
  * segment are as specified by the parameters.
  */
 int
-tcp_respond(struct tcpcb *tp, struct mbuf *template, struct mbuf *m,
+tcp_respond(struct tcpcb *tp, struct mbuf *mtemplate, struct mbuf *m,
     struct tcphdr *th0, tcp_seq ack, tcp_seq seq, int flags)
 {
 #ifdef INET6
@@ -673,11 +672,11 @@ tcp_respond(struct tcpcb *tp, struct mbuf *template, struct mbuf *m,
 	ip6 = NULL;
 #endif
 	if (m == 0) {
-		if (!template)
+		if (!mtemplate)
 			return EINVAL;
 
 		/* get family information from template */
-		switch (mtod(template, struct ip *)->ip_v) {
+		switch (mtod(mtemplate, struct ip *)->ip_v) {
 		case 4:
 			family = AF_INET;
 			hlen = sizeof(struct ip);
@@ -710,8 +709,8 @@ tcp_respond(struct tcpcb *tp, struct mbuf *template, struct mbuf *m,
 			tlen = 0;
 
 		m->m_data += max_linkhdr;
-		bcopy(mtod(template, void *), mtod(m, void *),
-			template->m_len);
+		bcopy(mtod(mtemplate, void *), mtod(m, void *),
+			mtemplate->m_len);
 		switch (family) {
 		case AF_INET:
 			ip = mtod(m, struct ip *);

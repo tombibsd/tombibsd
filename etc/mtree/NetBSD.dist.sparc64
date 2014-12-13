@@ -7,7 +7,7 @@
 ./usr/lib/sparc
 ./usr/lib/sparc/i18n
 ./usr/lib/sparc/lua
-./usr/lib/sparc/lua/5.1
+./usr/lib/sparc/lua/5.3
 ./usr/lib/sparc/security
 ./usr/libdata/debug/lib/sparc
 ./usr/libdata/debug/lib/sparc/npf

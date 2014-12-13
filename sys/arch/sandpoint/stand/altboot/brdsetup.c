@@ -319,11 +319,11 @@ brdsetup(void)
 	brdfixup();
 
 	bi_mem.memsize = mpc107memsize();
-	snprintf(bi_cons.devname, sizeof(bi_cons.devname), consname);
+	snprintf(bi_cons.devname, sizeof(bi_cons.devname), "%s", consname);
 	bi_cons.addr = consport;
 	bi_cons.speed = brdprop->consspeed;
 	bi_clk.ticks_per_sec = ticks_per_sec;
-	snprintf(bi_fam.name, sizeof(bi_fam.name), brdprop->family);
+	snprintf(bi_fam.name, sizeof(bi_fam.name), "%s", brdprop->family);
 }
 
 struct brdprop *
@@ -859,7 +859,7 @@ _rtt(void)
 		asm volatile ("sync; isync");
 		run(0, 0, 0, 0, (void *)0xFFF00100); /* reset entry */
 	}
-	/*NOTREACHED*/
+	__unreachable();
 }
 
 satime_t

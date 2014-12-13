@@ -47,9 +47,9 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <dev/audio_if.h>
 #include <dev/audiovar.h>
 #include <dev/auconv.h>
+#include <dev/auvolconv.h>
 
 #include <dev/pad/padvar.h>
-#include <dev/pad/padvol.h>
 
 #define PADUNIT(x)	minor(x)
 
@@ -90,6 +90,12 @@ static int	pad_query_devinfo(void *, mixer_devinfo_t *);
 static int	pad_get_props(void *);
 static int	pad_round_blocksize(void *, int, int, const audio_params_t *);
 static void	pad_get_locks(void *, kmutex_t **, kmutex_t **);
+
+static stream_filter_t *pad_swvol_filter_le(struct audio_softc *,
+    const audio_params_t *, const audio_params_t *);
+static stream_filter_t *pad_swvol_filter_be(struct audio_softc *,
+    const audio_params_t *, const audio_params_t *);
+static void	pad_swvol_dtor(stream_filter_t *);
 
 static const struct audio_hw_if pad_hw_if = {
 	.query_encoding = pad_query_encoding,
@@ -133,6 +139,7 @@ const struct cdevsw pad_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = nommap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_OTHER | D_MPSAFE,
 };
 
@@ -419,11 +426,11 @@ pad_set_params(void *opaque, int setmode, int usemode,
 	switch (play->encoding) {
 	case AUDIO_ENCODING_SLINEAR_LE:
 		if (play->precision == 16 && play->validbits == 16)
-			pfil->prepend(pfil, pad_vol_slinear16_le, play);
+			pfil->prepend(pfil, pad_swvol_filter_le, play);
 		break;
 	case AUDIO_ENCODING_SLINEAR_BE:
 		if (play->precision == 16 && play->validbits == 16)
-			pfil->prepend(pfil, pad_vol_slinear16_be, play);
+			pfil->prepend(pfil, pad_swvol_filter_be, play);
 		break;
 	default:
 		break;
@@ -620,6 +627,49 @@ pad_get_locks(void *opaque, kmutex_t **intr, kmutex_t **thread)
 
 	*intr = &sc->sc_intr_lock;
 	*thread = &sc->sc_lock;
+}
+
+static stream_filter_t *
+pad_swvol_filter_le(struct audio_softc *asc,
+    const audio_params_t *from, const audio_params_t *to)
+{
+	auvolconv_filter_t *this;
+	device_t dev = audio_get_device(asc);
+	struct pad_softc *sc = device_private(dev);
+
+	this = kmem_alloc(sizeof(auvolconv_filter_t), KM_SLEEP);
+	this->base.base.fetch_to = auvolconv_slinear16_le_fetch_to;
+	this->base.dtor = pad_swvol_dtor;
+	this->base.set_fetcher = stream_filter_set_fetcher;
+	this->base.set_inputbuffer = stream_filter_set_inputbuffer;
+	this->vol = &sc->sc_swvol;
+
+	return (stream_filter_t *)this;
+}
+
+static stream_filter_t *
+pad_swvol_filter_be(struct audio_softc *asc,
+    const audio_params_t *from, const audio_params_t *to)
+{
+	auvolconv_filter_t *this;
+	device_t dev = audio_get_device(asc);
+	struct pad_softc *sc = device_private(dev);
+
+	this = kmem_alloc(sizeof(auvolconv_filter_t), KM_SLEEP);
+	this->base.base.fetch_to = auvolconv_slinear16_be_fetch_to;
+	this->base.dtor = pad_swvol_dtor;
+	this->base.set_fetcher = stream_filter_set_fetcher;
+	this->base.set_inputbuffer = stream_filter_set_inputbuffer;
+	this->vol = &sc->sc_swvol;
+
+	return (stream_filter_t *)this;
+}
+
+static void
+pad_swvol_dtor(stream_filter_t *this)
+{
+	if (this)
+		kmem_free(this, sizeof(auvolconv_filter_t));
 }
 
 #ifdef _MODULE

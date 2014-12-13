@@ -76,8 +76,8 @@ vsnprintf_l(char *str, size_t n, locale_t loc, const char *fmt, va_list ap)
 	_DIAGASSERT(n == 0 || str != NULL);
 	_DIAGASSERT(fmt != NULL);
 
-	if ((int)n < 0) {
-		errno = EINVAL;
+	if (n > INT_MAX) {
+		errno = EOVERFLOW;
 		return -1;
 	}
 

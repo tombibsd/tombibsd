@@ -16,10 +16,8 @@
  * (+961 3 485243)
  */
 
-#ifndef lint
-static const char rcsid[] _U_ =
-    "@(#) Header: /tcpdump/master/libpcap/pcap-septel.c,v 1.4 2008-04-14 20:40:58 guy Exp ";
-#endif
+#include <sys/cdefs.h>
+__RCSID("$NetBSD$");
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -261,13 +259,8 @@ static int septel_stats(pcap_t *p, struct pcap_stat *ps) {
 int
 septel_findalldevs(pcap_if_t **devlistp, char *errbuf)
 {
-unsigned char *p;
-  const char description[512]= "Intel/Septel device";
-  char name[512]="septel" ;
-  int ret = 0;
-  pcap_add_if(devlistp,name,0,description,errbuf);
-
-  return (ret); 
+  return (pcap_add_if(devlistp,"septel",0,
+                      "Intel/Septel device",errbuf));
 }
 
 

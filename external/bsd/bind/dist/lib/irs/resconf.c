@@ -43,12 +43,14 @@
 
 #include <config.h>
 
+#ifndef WIN32
 #include <sys/types.h>
 #include <sys/socket.h>
+#include <netdb.h>
+#endif
 
 #include <ctype.h>
 #include <errno.h>
-#include <netdb.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -59,6 +61,7 @@
 #include <isc/sockaddr.h>
 #include <isc/util.h>
 
+#include <irs/netdb.h>
 #include <irs/resconf.h>
 
 #define IRS_RESCONF_MAGIC		ISC_MAGIC('R', 'E', 'S', 'c')
@@ -239,7 +242,7 @@ add_server(isc_mem_t *mctx, const char *address_str,
 		result = ISC_R_RANGE;
 		goto cleanup;
 	}
-	address->length = res->ai_addrlen;
+	address->length = (unsigned int)res->ai_addrlen;
 	memmove(&address->type.ss, res->ai_addr, res->ai_addrlen);
 	ISC_LINK_INIT(address, link);
 	ISC_LIST_APPEND(*nameservers, address, link);

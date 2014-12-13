@@ -60,6 +60,7 @@ copyin_byte(const uint8_t * const usaddr8, register_t ds_msr)
 	return data;
 }
 
+#if 0
 static inline uint16_t
 copyin_halfword(const uint16_t * const usaddr16, register_t ds_msr)
 {
@@ -74,6 +75,7 @@ copyin_halfword(const uint16_t * const usaddr16, register_t ds_msr)
 	    : [ds_msr] "r" (ds_msr), [usaddr16] "b" (usaddr16));
 	return data;
 }
+#endif
 
 static inline uint32_t
 copyin_word(const uint32_t * const usaddr32, register_t ds_msr)

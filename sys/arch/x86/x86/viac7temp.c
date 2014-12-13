@@ -96,7 +96,7 @@ viac7temp_attach(device_t parent, device_t self, void *aux)
 	sc->sc_dev = self;
 
 	sc->sc_sensor.units = ENVSYS_STEMP;
-	sc->sc_sensor.flags = ENVSYS_FMONLIMITS;
+	sc->sc_sensor.flags = ENVSYS_FMONLIMITS|ENVSYS_FHAS_ENTROPY;
 	sc->sc_sensor.state = ENVSYS_SINVALID;
 
 	(void)strlcpy(sc->sc_sensor.desc, "temperature",

@@ -26,7 +26,6 @@ SRCS+=	SBAddress.cpp \
 	SBFrame.cpp \
 	SBFunction.cpp \
 	SBHostOS.cpp \
-	SBInputReader.cpp \
 	SBInstruction.cpp \
 	SBInstructionList.cpp \
 	SBLineEntry.cpp \
@@ -45,11 +44,13 @@ SRCS+=	SBAddress.cpp \
 	SBThread.cpp \
 	SBType.cpp \
 	SBTypeCategory.cpp \
+	SBTypeEnumMember.cpp \
 	SBTypeFilter.cpp \
 	SBTypeFormat.cpp \
 	SBTypeNameSpecifier.cpp \
 	SBTypeSummary.cpp \
 	SBTypeSynthetic.cpp \
+	SBUnixSignals.cpp \
 	SBValue.cpp \
 	SBValueList.cpp \
 	SBWatchpoint.cpp

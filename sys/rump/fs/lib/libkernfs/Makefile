@@ -5,7 +5,7 @@
 
 LIB=	rumpfs_kernfs
 
-SRCS=	kernfs_subr.c kernfs_vfsops.c kernfs_vnops.c
+SRCS=	kernfs_vfsops.c kernfs_vnops.c
 
 .include <bsd.lib.mk>
 .include <bsd.klinks.mk>

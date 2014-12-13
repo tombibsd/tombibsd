@@ -56,11 +56,8 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include "ioconf.h"
 #include "locators.h"
 
-#define COMUNIT_MASK	0x7ffff
-#define COMDIALOUT_MASK	0x80000
-
-#define COMUNIT(x)	(minor(x) & COMUNIT_MASK)
-#define COMDIALOUT(x)	(minor(x) & COMDIALOUT_MASK)
+#define COMUNIT(x)	TTUNIT(x)
+#define COMDIALOUT(x)	TTDIALOUT(x)
 
 #define WMCOM_RING_SIZE	2048
 
@@ -143,6 +140,7 @@ const struct cdevsw wmcom_cdevsw = {
 	.d_poll = wmcompoll,
 	.d_mmap = nommap,
 	.d_kqfilter = ttykqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_TTY
 };
 
@@ -224,7 +222,7 @@ wmcom_attach(device_t parent, device_t self, void *aux)
 
 #ifdef RND_COM
 	rnd_attach_source(&sc->rnd_source, device_xname(sc->sc_dev),
-	    RND_TYPE_TTY, 0);
+	    RND_TYPE_TTY, RND_FLAG_DEFAULT);
 #endif
 
 	SET(sc->sc_hwflags, COM_HW_DEV_OK);

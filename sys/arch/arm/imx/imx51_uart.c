@@ -25,7 +25,12 @@
  *
  */
 
+#include <sys/cdefs.h>
+__KERNEL_RCSID(0, "$NetBSD$");
+
+#include "opt_imx.h"
 #include "opt_imxuart.h"
+
 #include <sys/param.h>
 #include <sys/bus.h>
 #include <sys/device.h>
@@ -33,7 +38,6 @@
 #include <arm/imx/imx51var.h>
 #include <arm/imx/imxuartreg.h>
 #include <arm/imx/imxuartvar.h>
-
 
 int
 imxuart_match(device_t parent, struct cfdata *cf, void *aux)

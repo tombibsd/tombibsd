@@ -23,10 +23,14 @@ N: Howard Hinnant
 E: hhinnant@apple.com
 D: Architect and primary author of compiler-rt
 
-N: Matt Thomas
-E: matt@NetBSD.org
-D: ARM improvements.
+N: Guan-Hong Liu
+E: koviankevin@hotmail.com
+D: IEEE Quad-precision functions
 
 N: Joerg Sonnenberger
 E: joerg@NetBSD.org
-D: Maintains port.
+D: Maintains NetBSD port.
+
+N: Matt Thomas
+E: matt@NetBSD.org
+D: ARM improvements.

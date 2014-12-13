@@ -42,3 +42,8 @@ ENTRY(fpsetmask)
 	notl	%eax
 	andl	$0x0000003f, %eax
 	ret
+#ifdef WEAK_ALIAS
+END(_fpsetmask)
+#else
+END(fpsetmask)
+#endif

@@ -42,7 +42,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/ioctl.h>
 #include <sys/kernel.h>
 #include <sys/mount.h>
-#include <sys/malloc.h>
 #include <sys/vnode.h>
 #include <sys/kauth.h>
 
@@ -220,22 +219,16 @@ fd_revoke(struct lwp *l, int fd, register_t *retval)
 	vnode_t *vp;
 	int error;
 
-	if ((fp = fd_getfile(fd)) == NULL)
-		return EBADF;
+	if ((error = fd_getvnode(fd, &fp)) != 0)
+		return error;
 
-	if (fp->f_type != DTYPE_VNODE) {
-		fd_putfile(fd);
-		return EINVAL;
-	}
-
-	vp = (vnode_t *) fp->f_data;
+	vp = fp->f_vnode;
 	if (vp->v_type != VCHR && vp->v_type != VBLK) {
 		error = EINVAL;
-		goto out;
+	} else {
+		error = dorevoke(vp, l->l_cred);
 	}
 
-	error = dorevoke(vp, l->l_cred);
-out:
 	vrele(vp);
 	fd_putfile(fd);
 	return error;
@@ -258,7 +251,7 @@ fd_truncate(struct lwp *l, int fd, struct flock *flp, register_t *retval)
 	if ((fp = fd_getfile(fd)) == NULL)
 		return EBADF;
 
-	vp = fp->f_data;
+	vp = fp->f_vnode;
 	if (fp->f_type != DTYPE_VNODE || vp->v_type == VFIFO) {
 		fd_putfile(fd);
 		return ESPIPE;

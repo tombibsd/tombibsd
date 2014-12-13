@@ -101,7 +101,7 @@ struct group;
 #define __END_DECLS
 #endif
 
-/* Some things usually in BSD <sys/cdefs.h>. */
+/* Some things in NetBSD <sys/cdefs.h>. */
 
 #ifndef __CONCAT
 #define	__CONCAT(x,y)	x ## y
@@ -137,6 +137,20 @@ struct group;
 #define	__arraycount(__x)	(sizeof(__x) / sizeof(__x[0]))
 #undef __USE
 #define __USE(a) ((void)(a))
+#undef __type_min_s
+#define __type_min_s(t) ((t)((1ULL << (sizeof(t) * NBBY - 1))))
+#undef __type_max_s
+#define __type_max_s(t) ((t)~((1ULL << (sizeof(t) * NBBY - 1))))
+#undef __type_min_u
+#define __type_min_u(t) ((t)0ULL)
+#undef __type_max_u
+#define __type_max_u(t) ((t)~0ULL)
+#undef __type_is_signed
+#define __type_is_signed(t) (/*LINTED*/__type_min_s(t) + (t)1 < (t)1)
+#undef __type_min
+#define __type_min(t) (__type_is_signed(t) ? __type_min_s(t) : __type_min_u(t))
+#undef __type_max
+#define __type_max(t) (__type_is_signed(t) ? __type_max_s(t) : __type_max_u(t))
 
 /* Dirent support. */
 
@@ -259,6 +273,18 @@ void errx(int, const char *, ...);
 void warn(const char *, ...);
 void warnx(const char *, ...);
 void vwarnx(const char *, va_list);
+#endif
+#if !HAVE_DECL_WARNC
+void warnc(int, const char *, ...);
+#endif
+#if !HAVE_DECL_VWARNC
+void vwarnc(int, const char *, va_list);
+#endif
+#if !HAVE_DECL_ERRC
+void errc(int, int, const char *, ...);
+#endif
+#if !HAVE_DECL_VERRC
+void verrc(int, int, const char *, va_list);
 #endif
 
 #if !HAVE_ESETFUNC
@@ -566,6 +592,9 @@ void *setmode(const char *);
 #endif
 #ifndef O_SHLOCK
 #define O_SHLOCK 0
+#endif
+#ifndef O_CLOEXEC
+#define O_CLOEXEC 0
 #endif
 
 /* <inttypes.h> */

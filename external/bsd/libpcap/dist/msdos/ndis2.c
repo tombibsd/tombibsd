@@ -1,5 +1,3 @@
-/*	$NetBSD$	*/
-
 /* 
  * Copyright (c) 1993,1994
  *      Texas A&M University.  All rights reserved.

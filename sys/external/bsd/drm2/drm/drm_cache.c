@@ -49,6 +49,18 @@ static void		drm_md_clflush_page(struct page *);
 static void		drm_md_clflush_virt_range(const void *, size_t);
 
 void
+drm_clflush_pages(struct page **pages, unsigned long npages)
+{
+
+	if (drm_md_clflush_finegrained_p()) {
+		while (npages--)
+			drm_md_clflush_page(pages[npages]);
+	} else {
+		drm_md_clflush_all();
+	}
+}
+
+void
 drm_clflush_pglist(struct pglist *list)
 {
 

@@ -87,6 +87,9 @@ lookup_complex(const atf_tc_t *tc, const char *mountpath)
 
 	USES_DIRS;
 
+	if (FSTYPE_UDF(tc))
+		atf_tc_expect_fail("PR kern/49033");
+
 	sprintf(pb, "%s/dir", mountpath);
 	if (rump_sys_mkdir(pb, 0777) == -1)
 		atf_tc_fail_errno("mkdir");
@@ -97,7 +100,41 @@ lookup_complex(const atf_tc_t *tc, const char *mountpath)
 	if (rump_sys_stat(pb, &sb2) == -1)
 		atf_tc_fail_errno("stat 2");
 
-	ATF_REQUIRE(memcmp(&sb1, &sb2, sizeof(sb1)) == 0);
+	if (memcmp(&sb1, &sb2, sizeof(sb1)) != 0) {
+		printf("what\tsb1\t\tsb2\n");
+
+#define FIELD(FN)	\
+		printf(#FN "\t%lld\t%lld\n", \
+		(long long)sb1.FN, (long long)sb2.FN)
+#define TIME(FN)	\
+		printf(#FN "\t%lld.%ld\t%lld.%ld\n", \
+		(long long)sb1.FN.tv_sec, sb1.FN.tv_nsec, \
+		(long long)sb2.FN.tv_sec, sb2.FN.tv_nsec)
+
+		FIELD(st_dev);
+		FIELD(st_mode);
+		FIELD(st_ino);
+		FIELD(st_nlink);
+		FIELD(st_uid);
+		FIELD(st_gid);
+		FIELD(st_rdev);
+		TIME(st_atim);
+		TIME(st_mtim);
+		TIME(st_ctim);
+		TIME(st_birthtim);
+		FIELD(st_size);
+		FIELD(st_blocks);
+		FIELD(st_flags);
+		FIELD(st_gen);
+
+#undef FIELD
+#undef TIME
+
+		atf_tc_fail("stat results differ, see ouput for more details");
+	}
+	if (FSTYPE_UDF(tc))
+		atf_tc_fail("random failure of PR kern/49033 "
+			    "did not happen this time");
 }
 
 static void
@@ -514,16 +551,55 @@ rename_nametoolong(const atf_tc_t *tc, const char *mp)
 	rump_sys_chdir("/");
 }
 
+/*
+ * Test creating a symlink whose length is "len" bytes, not including
+ * the terminating NUL.
+ */
 static void
-symlink_zerolen(const atf_tc_t *tc, const char *mp)
+symlink_len(const atf_tc_t *tc, const char *mp, size_t len)
 {
+	char *buf;
+	int r;
 
 	USES_SYMLINKS;
 
 	RL(rump_sys_chdir(mp));
 
-	RL(rump_sys_symlink("", "afile"));
+	buf = malloc(len + 1);
+	ATF_REQUIRE(buf);
+	memset(buf, 'a', len);
+	buf[len] = '\0';
+	r = rump_sys_symlink(buf, "afile");
+	if (r == -1) {
+		ATF_REQUIRE_ERRNO(ENAMETOOLONG, r);
+	} else {
+		RL(rump_sys_unlink("afile"));
+	}
+	free(buf);
+
 	RL(rump_sys_chdir("/"));
+}
+
+static void
+symlink_zerolen(const atf_tc_t *tc, const char *mp)
+{
+	symlink_len(tc, mp, 0);
+}
+
+static void
+symlink_long(const atf_tc_t *tc, const char *mp)
+{
+	/*
+	 * Test lengths close to powers of two, as those are likely
+	 * to be edge cases.
+	 */
+	size_t len;
+	int fuzz;
+	for (len = 2; len <= 65536; len *= 2) {
+		for (fuzz = -1; fuzz <= 1; fuzz++) {
+			symlink_len(tc, mp, len + fuzz);
+		}
+	}
 }
 
 static void
@@ -847,6 +923,34 @@ read_directory(const atf_tc_t *tc, const char *mp)
 	FSTEST_EXIT();
 }
 
+static void
+lstat_symlink(const atf_tc_t *tc, const char *mp)
+{
+	const char *src, *dst;
+	int res;
+	struct stat st;
+
+	USES_SYMLINKS;
+
+	if (FSTYPE_V7FS(tc))
+		atf_tc_expect_fail("PR kern/48864");
+
+	FSTEST_ENTER();
+
+	src = "source";
+	dst = "destination";
+
+	res = rump_sys_symlink(src, dst);
+	ATF_REQUIRE(res != -1);
+	res = rump_sys_lstat(dst, &st);
+	ATF_REQUIRE(res != -1);
+
+	ATF_CHECK(S_ISLNK(st.st_mode) != 0);
+	ATF_CHECK(st.st_size == (off_t)strlen(src));
+
+	FSTEST_EXIT();
+}
+
 ATF_TC_FSAPPLY(lookup_simple, "simple lookup (./.. on root)");
 ATF_TC_FSAPPLY(lookup_complex, "lookup of non-dot entries");
 ATF_TC_FSAPPLY(dir_simple, "mkdir/rmdir");
@@ -859,13 +963,15 @@ ATF_TC_FSAPPLY(rename_reg_nodir, "rename regular files, no subdirectories");
 ATF_TC_FSAPPLY(create_nametoolong, "create file with name too long");
 ATF_TC_FSAPPLY(create_exist, "create with O_EXCL");
 ATF_TC_FSAPPLY(rename_nametoolong, "rename to file with name too long");
-ATF_TC_FSAPPLY(symlink_zerolen, "symlink with 0-len target");
+ATF_TC_FSAPPLY(symlink_zerolen, "symlink with target of length 0");
+ATF_TC_FSAPPLY(symlink_long, "symlink with target of length > 0");
 ATF_TC_FSAPPLY(symlink_root, "symlink to root directory");
 ATF_TC_FSAPPLY(attrs, "check setting attributes works");
 ATF_TC_FSAPPLY(fcntl_lock, "check fcntl F_SETLK");
 ATF_TC_FSAPPLY(fcntl_getlock_pids,"fcntl F_GETLK w/ many procs, PR kern/44494");
 ATF_TC_FSAPPLY(access_simple, "access(2)");
 ATF_TC_FSAPPLY(read_directory, "read(2) on directories");
+ATF_TC_FSAPPLY(lstat_symlink, "lstat(2) values for symbolic links");
 
 ATF_TP_ADD_TCS(tp)
 {
@@ -882,12 +988,14 @@ ATF_TP_ADD_TCS(tp)
 	ATF_TP_FSAPPLY(create_exist);
 	ATF_TP_FSAPPLY(rename_nametoolong);
 	ATF_TP_FSAPPLY(symlink_zerolen);
+	ATF_TP_FSAPPLY(symlink_long);
 	ATF_TP_FSAPPLY(symlink_root);
 	ATF_TP_FSAPPLY(attrs);
 	ATF_TP_FSAPPLY(fcntl_lock);
 	ATF_TP_FSAPPLY(fcntl_getlock_pids);
 	ATF_TP_FSAPPLY(access_simple);
 	ATF_TP_FSAPPLY(read_directory);
+	ATF_TP_FSAPPLY(lstat_symlink);
 
 	return atf_no_error();
 }

@@ -60,6 +60,17 @@ struct com_puc_softc {
 	void	*sc_ih;			/* interrupt handler */
 };
 
+/* Interface field in PCI Class register */
+static const char *serialtype[] = {
+	"Generic XT",
+	"16450",
+	"16550",
+	"16650",
+	"16750",
+	"16850",
+	"16950",
+};
+
 static int
 com_puc_probe(device_t parent, cfdata_t match, void *aux)
 {
@@ -82,10 +93,14 @@ com_puc_attach(device_t parent, device_t self, void *aux)
 	struct puc_attach_args *aa = aux;
 	const char *intrstr;
 	char intrbuf[PCI_INTRSTR_LEN];
+	unsigned int iface;
 
 	sc->sc_dev = self;
 
+	iface = PCI_INTERFACE(pci_conf_read(aa->pc, aa->tag, PCI_CLASS_REG));
 	aprint_naive(": Serial port");
+	if (iface < __arraycount(serialtype))
+		aprint_normal(" (%s-compatible)", serialtype[iface]);
 	aprint_normal(": ");
 
 	COM_INIT_REGS(sc->sc_regs, aa->t, aa->h, aa->a);

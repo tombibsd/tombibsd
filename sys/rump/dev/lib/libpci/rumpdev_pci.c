@@ -147,6 +147,19 @@ pci_intr_establish(pci_chipset_tag_t pc, pci_intr_handle_t ih,
 	return rumpcomp_pci_irq_establish(ih, func, arg);
 }
 
+int
+pci_intr_setattr(pci_chipset_tag_t pc, pci_intr_handle_t *ih,
+	int attr, uint64_t data)
+{
+
+	switch (attr) {
+	case PCI_INTR_MPSAFE:
+		return 0;
+	default:
+		return ENODEV;
+	}
+}
+
 void
 pci_intr_disestablish(pci_chipset_tag_t pc, void *not_your_above_ih)
 {

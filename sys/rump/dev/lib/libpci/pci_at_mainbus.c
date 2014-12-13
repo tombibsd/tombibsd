@@ -61,7 +61,7 @@ RUMP_COMPONENT(RUMP_COMPONENT_DEV)
 
 	if ((error = rump_vfs_makedevnodes(S_IFCHR, "/dev/pci", '0',
 	    cmaj, 0, 4)) != 0)
-		printf("pci: failed to create /dev/pci nodes: %d", error);
+		printf("pci: failed to create /dev/pci nodes: %d\n", error);
 }
 
 RUMP_COMPONENT(RUMP_COMPONENT_DEV_AFTERMAINBUS)
@@ -80,7 +80,7 @@ RUMP_COMPONENT(RUMP_COMPONENT_DEV_AFTERMAINBUS)
 #endif
 	pba.pba_flags = PCI_FLAGS_MEM_OKAY |
 	    PCI_FLAGS_MRL_OKAY | PCI_FLAGS_MRM_OKAY | PCI_FLAGS_MWI_OKAY;;
-#if 0
+#ifdef RUMP_PCI_IOSPACE
 	pba.pba_flags |= PCI_FLAGS_IO_OKAY;
 #endif
 

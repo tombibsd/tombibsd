@@ -219,7 +219,7 @@ micphy_service(struct mii_softc *sc, struct mii_data *mii, int cmd)
 
 static void micphy_writexreg(struct mii_softc *sc, uint32_t reg, uint32_t wval)
 {
-	int rval;
+	int rval __debugused;
 
 	PHY_WRITE(sc, XREG_CONTROL, XREG_CTL_SEL_WRITE | reg);
 	PHY_WRITE(sc, XREG_WRITE, wval);

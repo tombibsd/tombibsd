@@ -1,5 +1,4 @@
 /*	$NetBSD$	*/
-
 /* cltest.c
 
    Example program that uses the dhcpctl library. */
@@ -32,6 +31,8 @@
 
 #include <sys/cdefs.h>
 __RCSID("$NetBSD$");
+
+#include "config.h"
 
 #include <time.h>
 #include <sys/time.h>

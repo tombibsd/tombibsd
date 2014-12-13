@@ -4,7 +4,7 @@
 .include "${NETBSDSRCDIR}/distrib/common/Makefile.distrib"
 
 IMAGE=		sshramdisk.fs
-IMAGESIZE=	3800k
+IMAGESIZE=	13m
 MAKEFS_FLAGS=	-f 15
 
 WARNS=		1
@@ -20,6 +20,7 @@ IMAGEDEPENDS=	${CRUNCHBIN} \
 		${NETBSDSRCDIR}/etc/group \
 		${NETBSDSRCDIR}/etc/netconfig ${DISTRIBDIR}/common/protocols \
 		${DISTRIBDIR}/common/services
+IMAGEPREBUILD=	${TOOL_PAX} -rw -pp ${DESTDIR}/libdata/firmware ${WORKDIR}
 
 # Use stubs to eliminate some large stuff from libc
 HACKSRC=	${DISTRIBDIR}/utils/libhack

@@ -43,6 +43,7 @@ __RCSID("$NetBSD$");
 #include <errno.h>
 #include <getopt.h>
 #include <paths.h>
+#include <limits.h>
 #include <time.h>
 
 static struct option flock_longopts[] = {
@@ -155,6 +156,7 @@ main(int argc, char *argv[])
 	int fd = -1;
 	int debug = 0;
 	int verbose = 0;
+	long l;
 	char *mcargv[] = {
 	    __UNCONST(_PATH_BSHELL), __UNCONST("-c"), NULL, NULL
 	};
@@ -207,15 +209,21 @@ main(int argc, char *argv[])
 	argv += optind;
 
 	if ((lock & ~LOCK_NB) == 0)
-		usage("Missing lock type flag");
+		lock |= LOCK_EX;	/* default to exclusive like linux */
 
 	switch (argc) {
 	case 0:
 		usage("Missing lock file argument");
 	case 1:
 		if (cls)
-			usage("Close is valid only for descriptors");
-		fd = strtol(argv[0], NULL, 0);	// XXX: error checking
+			usage("Close is not valid for descriptors");
+		errno = 0;
+		l = strtol(argv[0], &v, 0);
+		if ((l == LONG_MIN || l == LONG_MAX) && errno == ERANGE)
+			err(EXIT_FAILURE, "Bad file descriptor `%s'", argv[0]);
+		if (l > INT_MAX || l < 0 || *v)
+			errx(EXIT_FAILURE, "Bad file descriptor `%s'", argv[0]);
+		fd = (int)l;
 		if (debug) {
 			fprintf(stderr, "descriptor %s lock %s\n",
 			    argv[0], lock2name(lock));

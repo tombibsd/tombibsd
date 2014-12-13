@@ -112,6 +112,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include "opt_compat_netbsd.h"
 #include "opt_wapbl.h"
 #include "opt_ptrace.h"
+#include "opt_rnd_printf.h"
 
 #include "drvctl.h"
 #include "ksyms.h"
@@ -157,6 +158,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/mbuf.h>
 #include <sys/sched.h>
 #include <sys/sleepq.h>
+#include <sys/ipi.h>
 #include <sys/iostat.h>
 #include <sys/vmem.h>
 #include <sys/uuid.h>
@@ -306,6 +308,7 @@ main(void)
 	evcnt_init();
 
 	uvm_init();
+	ubchist_init();
 	kcpuset_sysinit();
 
 	prop_kern_init();
@@ -497,7 +500,7 @@ main(void)
 	/* Initialize the kernel strong PRNG. */
 	kern_cprng = cprng_strong_create("kernel", IPL_VM,
 					 CPRNG_INIT_ANY|CPRNG_REKEY_ANY);
-					 
+
 	/* Initialize interfaces. */
 	ifinit1();
 
@@ -509,6 +512,9 @@ main(void)
 	/* Configure the system hardware.  This will enable interrupts. */
 	configure();
 
+	/* Once all CPUs are detected, initialize the per-CPU cprng_fast.  */
+	cprng_fast_init();
+
 	ssp_init();
 
 	ubc_init();		/* must be after autoconfig */
@@ -516,11 +522,22 @@ main(void)
 	mm_init();
 
 	configure2();
+
+	ipi_sysinit();
+
 	/* Now timer is working.  Enable preemption. */
 	kpreempt_enable();
 
+	/* Get the threads going and into any sleeps before continuing. */
+	yield();
+
 	/* Enable deferred processing of RNG samples */
 	rnd_init_softint();
+
+#ifdef RND_PRINTF
+	/* Enable periodic injection of console output into entropy pool */
+	kprintf_init_callout();
+#endif
 
 #ifdef SYSVSHM
 	/* Initialize System V style shared memory. */
@@ -590,9 +607,6 @@ main(void)
 	/* Initialize ptrace. */
 	ptrace_init();
 #endif /* PTRACE */
-
-	/* Initialize the UUID system calls. */
-	uuid_init();
 
 	machdep_init();
 
@@ -792,9 +806,6 @@ configure2(void)
 	 * devices that want interrupts enabled.
 	 */
 	config_create_interruptthreads();
-
-	/* Get the threads going and into any sleeps before continuing. */
-	yield();
 }
 
 static void

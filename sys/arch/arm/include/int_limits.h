@@ -32,6 +32,9 @@
 #ifndef _ARM_INT_LIMITS_H_
 #define _ARM_INT_LIMITS_H_
 
+#ifdef __SIG_ATOMIC_MAX__
+#include <sys/common_int_limits.h>
+#else
 /*
  * 7.18.2 Limits of specified-width integer types
  */
@@ -137,6 +140,7 @@
 #define	SIZE_MAX	0xffffffffffffffffUL		/* size_t	  */
 #else
 #define	SIZE_MAX	0xffffffffUL			/* size_t	  */
+#endif
 #endif
 
 #endif /* !_ARM_INT_LIMITS_H_ */

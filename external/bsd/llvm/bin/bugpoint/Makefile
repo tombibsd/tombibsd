@@ -18,6 +18,7 @@ SRCS=	BugDriver.cpp \
 	bugpoint.cpp
 
 LLVM_LIBS+= \
+	CodeGen \
 	ObjCARC \
 	IRReader \
 	AsmParser \

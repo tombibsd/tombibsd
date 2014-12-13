@@ -34,7 +34,7 @@
 __KERNEL_RCSID(0, "$NetBSD$");
 
 #ifdef _KERNEL_OPT
-#include "opt_umass.h"
+#include "opt_usb.h"
 #endif
 
 #include "atapibus.h"

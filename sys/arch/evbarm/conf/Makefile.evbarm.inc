@@ -33,7 +33,7 @@ EXTRA_CLEAN+= ldscript tmp ${KERNELS:=.map}
 .if defined(KERNEL_BASE_PHYS)
 LINKTEXT=
 KERNLDSCRIPT=	ldscript
-EXTRA_LINKFLAGS+=	-T ldscript
+LINKSCRIPT=	-T ldscript
 
 # generate ldscript from common template
 ldscript: ${THISARM}/conf/ldscript.evbarm ${THISARM}/conf/Makefile.evbarm.inc Makefile ${BOARDMKFRAG}

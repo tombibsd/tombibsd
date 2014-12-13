@@ -42,6 +42,6 @@ RUMP_COMPONENT(RUMP_COMPONENT_NET)
 	extern struct domain sockindomain;
 	extern struct domain sockin6domain;
 
-	DOMAINADD(sockindomain);
-	DOMAINADD(sockin6domain);
+	domain_attach(&sockindomain);
+	domain_attach(&sockin6domain);
 }

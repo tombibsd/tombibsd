@@ -37,7 +37,7 @@ struct emdtv_eeprom {
 	uint16_t	boardcfg;
 	uint16_t	string[3];
 	uint8_t		stringidx;
-} __attribute__((__packed__));
+} __packed;
 
 #define EM28XX_I2C_ADDR_EEPROM	0xa0
 

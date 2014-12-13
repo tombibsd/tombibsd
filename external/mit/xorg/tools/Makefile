@@ -11,7 +11,7 @@ SUBDIR+= makestrs .WAIT
 
 # XXX pswrap/gen_matypes -- missing
 
-SUBDIR+=bdftopcf fc-cache ucs2any glsl
+SUBDIR+=bdftopcf fc-cache ucs2any
 SUBDIR+=makekeys mkfontscale .WAIT xkbcomp
 
 .include <bsd.subdir.mk>

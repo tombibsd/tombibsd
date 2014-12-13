@@ -14,11 +14,11 @@ SRCS+=	ADCE.cpp \
 	DeadStoreElimination.cpp \
 	EarlyCSE.cpp \
 	FlattenCFGPass.cpp \
-	GlobalMerge.cpp \
 	GVN.cpp \
 	IndVarSimplify.cpp \
 	JumpThreading.cpp \
 	LICM.cpp \
+	LoadCombine.cpp \
 	LoopDeletion.cpp \
 	LoopIdiomRecognize.cpp \
 	LoopInstSimplify.cpp \
@@ -29,6 +29,7 @@ SRCS+=	ADCE.cpp \
 	LoopUnswitch.cpp \
 	LowerAtomic.cpp \
 	MemCpyOptimizer.cpp \
+	MergedLoadStoreMotion.cpp \
 	PartiallyInlineLibCalls.cpp \
 	Reassociate.cpp \
 	Reg2Mem.cpp \
@@ -38,6 +39,7 @@ SRCS+=	ADCE.cpp \
 	Scalar.cpp \
 	ScalarReplAggregates.cpp \
 	Scalarizer.cpp \
+	SeparateConstOffsetFromGEP.cpp \
 	SimplifyCFGPass.cpp \
 	Sink.cpp \
 	StructurizeCFG.cpp \

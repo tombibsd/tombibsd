@@ -18,6 +18,7 @@ SRCS+=	Mips16ISelDAGToDAG.cpp \
 	MipsCodeEmitter.cpp \
 	MipsConstantIslandPass.cpp \
 	MipsDelaySlotFiller.cpp \
+	MipsFastISel.cpp \
 	MipsFrameLowering.cpp \
 	MipsInstrInfo.cpp \
 	MipsISelDAGToDAG.cpp \
@@ -52,6 +53,7 @@ TABLEGEN_OUTPUT= \
 	MipsGenCodeEmitter.inc|-gen-emitter \
 	MipsGenDAGISel.inc|-gen-dag-isel \
 	MipsGenDisassemblerTables.inc|-gen-disassembler \
+	MipsGenFastISel.inc|-gen-fast-isel \
 	MipsGenMCCodeEmitter.inc|-gen-emitter^-mc-emitter \
 	MipsGenMCPseudoLowering.inc|-gen-pseudo-lowering \
 	MipsGenSubtargetInfo.inc|-gen-subtarget

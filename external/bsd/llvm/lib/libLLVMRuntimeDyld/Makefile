@@ -8,6 +8,7 @@ LIB=	LLVMRuntimeDyld
 
 SRCS+=	GDBRegistrar.cpp \
 	RuntimeDyld.cpp \
+	RuntimeDyldChecker.cpp \
 	RuntimeDyldELF.cpp \
 	RuntimeDyldMachO.cpp
 

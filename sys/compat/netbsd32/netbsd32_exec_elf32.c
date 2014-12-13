@@ -80,8 +80,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <machine/netbsd32_machdep.h>
 
-int netbsd32_copyinargs(struct exec_package *, struct ps_strings *,
-			void *, size_t, const void *, const void *);
 int ELFNAME2(netbsd32,probe_noteless)(struct lwp *, struct exec_package *epp,
 				      void *eh, char *itp, vaddr_t *pos);
 extern int ELFNAME2(netbsd,signature)(struct lwp *, struct exec_package *,
@@ -124,10 +122,6 @@ ELFNAME2(netbsd32,probe_noteless)(struct lwp *l, struct exec_package *epp,
 #endif
 	return 0;
 }
-
-/* round up and down to page boundaries. */
-#define	ELF_ROUND(a, b)		(((a) + (b) - 1) & ~((b) - 1))
-#define	ELF_TRUNC(a, b)		((a) & ~((b) - 1))
 
 /*
  * Copy arguments onto the stack in the normal way, but add some

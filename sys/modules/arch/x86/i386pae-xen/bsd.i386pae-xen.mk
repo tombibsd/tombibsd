@@ -1,0 +1,11 @@
+#	$NetBSD$
+
+.ifndef _BSD_I386PAE_XEN_MK_
+_BSD_I386PAE_XEN_MK_=1
+
+KMODULEARCHDIR:=	i386pae-xen
+
+XEN=	1
+PAE=	1
+
+.endif # _BSD_I386PAE_XEN_MK_

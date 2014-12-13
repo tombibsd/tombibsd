@@ -65,6 +65,12 @@
     __asm(".weak " _C_LABEL_STRING(#sym));
 
 #if __GNUC_PREREQ__(4, 0)
+#define	__weak	__attribute__((__weak__))
+#else
+#define	__weak
+#endif
+
+#if __GNUC_PREREQ__(4, 0)
 #define	__weak_reference(sym)	__attribute__((__weakref__(#sym)))
 #else
 #define	__weak_reference(sym)	; __asm(".weak " _C_LABEL_STRING(#sym))
@@ -105,6 +111,18 @@
 	  ".popsection");
 
 #endif /* !__STDC__ */
+
+#if __arm__
+#define __ifunc(name, resolver) \
+	__asm(".globl	" _C_LABEL_STRING(#name) "\n" \
+	      ".type	" _C_LABEL_STRING(#name) ", %gnu_indirect_function\n" \
+	       _C_LABEL_STRING(#name) " = " _C_LABEL_STRING(#resolver))
+#else
+#define __ifunc(name, resolver) \
+	__asm(".globl	" _C_LABEL_STRING(#name) "\n" \
+	      ".type	" _C_LABEL_STRING(#name) ", @gnu_indirect_function\n" \
+	      _C_LABEL_STRING(#name) " = " _C_LABEL_STRING(#resolver))
+#endif
 
 #if __STDC__
 #define	__SECTIONSTRING(_sec, _str)					\
@@ -152,12 +170,12 @@
 #define	__link_set_add_data2(set, sym, n)   __link_set_make_entry2(set, sym, n)
 #define	__link_set_add_bss2(set, sym, n)    __link_set_make_entry2(set, sym, n)
 
-#define	__link_set_decl(set, ptype)					\
-	extern ptype * const __start_link_set_##set[] __dso_hidden;	\
-	extern ptype * const __stop_link_set_##set[] __dso_hidden
-
 #define	__link_set_start(set)	(__start_link_set_##set)
 #define	__link_set_end(set)	(__stop_link_set_##set)
+
+#define	__link_set_decl(set, ptype)					\
+	extern ptype * const __link_set_start(set)[] __dso_hidden;	\
+	extern ptype * const __link_set_end(set)[] __weak __dso_hidden
 
 #define	__link_set_count(set)						\
 	(__link_set_end(set) - __link_set_start(set))

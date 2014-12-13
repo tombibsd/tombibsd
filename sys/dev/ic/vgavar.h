@@ -29,7 +29,9 @@
 
 #include <sys/callout.h>
 
+#ifdef _KERNEL_OPT
 #include "opt_vga.h"
+#endif
 
 struct vga_handle {
 	struct pcdisplay_handle vh_ph;
@@ -55,10 +57,11 @@ struct vga_config {
 	struct vgascreen *active; /* current display */
 	const struct wsscreen_descr *currenttype;
 
+#if 0
 	int vc_biosmapped;
 	bus_space_tag_t vc_biostag;
 	bus_space_handle_t vc_bioshdl;
-
+#endif
 	struct vgascreen *wantedscreen;
 	void (*switchcb)(void *, int, int);
 	void *switchcbarg;

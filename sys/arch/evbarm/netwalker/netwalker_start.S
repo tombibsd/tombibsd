@@ -198,6 +198,8 @@ relocated:
 	/* Move into supervisor mode and disable IRQs/FIQs. */
 	cpsid   if, #PSR_SVC32_MODE
 
+	bl	cortex_init
+
 	movw	r0, #:lower16:TEMP_L1_TABLE
 	movt	r0, #:upper16:TEMP_L1_TABLE
 	adr	r1, .Lmmu_init_table

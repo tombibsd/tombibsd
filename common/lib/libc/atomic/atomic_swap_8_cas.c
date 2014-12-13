@@ -48,3 +48,5 @@ atomic_swap_8(volatile uint8_t *addr, uint8_t new)
 
 	return old;
 }
+
+crt_alias(__atomic_exchange_1,__sync_lock_test_and_set_1)

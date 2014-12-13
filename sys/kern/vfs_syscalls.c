@@ -116,6 +116,11 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <nfs/nfs.h>
 #include <nfs/nfs_var.h>
 
+/* XXX this shouldn't be here */
+#ifndef OFF_T_MAX
+#define OFF_T_MAX __type_max(off_t)
+#endif
+
 static int change_flags(struct vnode *, u_long, struct lwp *);
 static int change_mode(struct vnode *, int, struct lwp *);
 static int change_owner(struct vnode *, uid_t, gid_t, struct lwp *, int);
@@ -169,7 +174,7 @@ fd_nameiat(struct lwp *l, int fdat, struct nameidata *ndp)
 		if ((error = fd_getvnode(fdat, &dfp)) != 0)
 			goto out;
 
-		NDAT(ndp, dfp->f_data);
+		NDAT(ndp, dfp->f_vnode);
 	}
 
 	error = namei(ndp);
@@ -192,7 +197,7 @@ fd_nameiat_simple_user(struct lwp *l, int fdat, const char *path,
 		if ((error = fd_getvnode(fdat, &dfp)) != 0)
 			goto out;
 
-		dvp = dfp->f_data;
+		dvp = dfp->f_vnode;
 	} else {
 		dvp = NULL;
 	}
@@ -213,7 +218,7 @@ open_setfp(struct lwp *l, file_t *fp, struct vnode *vp, int indx, int flags)
 	fp->f_flag = flags & FMASK;
 	fp->f_type = DTYPE_VNODE;
 	fp->f_ops = &vnops;
-	fp->f_data = vp;
+	fp->f_vnode = vp;
 
 	if (flags & (O_EXLOCK | O_SHLOCK)) {
 		struct flock lf;
@@ -569,7 +574,7 @@ sys_unmount(struct lwp *l, const struct sys_unmount_args *uap, register_t *retva
 		return error;
 	}
 
-	NDINIT(&nd, LOOKUP, FOLLOW | LOCKLEAF | TRYEMULROOT, pb);
+	NDINIT(&nd, LOOKUP, LOCKLEAF | TRYEMULROOT, pb);
 	if ((error = namei(&nd)) != 0) {
 		pathbuf_destroy(pb);
 		return error;
@@ -764,7 +769,7 @@ do_sys_quotactl_put(struct mount *mp, const struct quotakey *key_u,
 }
 
 static int
-do_sys_quotactl_delete(struct mount *mp, const struct quotakey *key_u)
+do_sys_quotactl_del(struct mount *mp, const struct quotakey *key_u)
 {
 	struct quotakey key_k;
 	int error;
@@ -774,7 +779,7 @@ do_sys_quotactl_delete(struct mount *mp, const struct quotakey *key_u)
 		return error;
 	}
 
-	return vfs_quotactl_delete(mp, &key_k);
+	return vfs_quotactl_del(mp, &key_k);
 }
 
 static int
@@ -1003,8 +1008,8 @@ do_sys_quotactl(const char *path_u, const struct quotactl_args *args)
 				args->u.put.qc_key,
 				args->u.put.qc_val);
 		break;
-	    case QUOTACTL_DELETE:
-		error = do_sys_quotactl_delete(mp, args->u.delete.qc_key);
+	    case QUOTACTL_DEL:
+		error = do_sys_quotactl_del(mp, args->u.del.qc_key);
 		break;
 	    case QUOTACTL_CURSOROPEN:
 		error = do_sys_quotactl_cursoropen(mp,
@@ -1196,7 +1201,7 @@ do_sys_fstatvfs(struct lwp *l, int fd, int flags, struct statvfs *sb)
 	/* fd_getvnode() will use the descriptor for us */
 	if ((error = fd_getvnode(fd, &fp)) != 0)
 		return (error);
-	mp = ((struct vnode *)fp->f_data)->v_mount;
+	mp = fp->f_vnode->v_mount;
 	error = dostatvfs(mp, sb, curlwp, flags, 1);
 	fd_putfile(fd);
 	return error;
@@ -1324,7 +1329,7 @@ sys_fchdir(struct lwp *l, const struct sys_fchdir_args *uap, register_t *retval)
 	fd = SCARG(uap, fd);
 	if ((error = fd_getvnode(fd, &fp)) != 0)
 		return (error);
-	vp = fp->f_data;
+	vp = fp->f_vnode;
 
 	vref(vp);
 	vn_lock(vp,  LK_EXCLUSIVE | LK_RETRY);
@@ -1387,7 +1392,7 @@ sys_fchroot(struct lwp *l, const struct sys_fchroot_args *uap, register_t *retva
 	/* fd_getvnode() will use the descriptor for us */
 	if ((error = fd_getvnode(fd, &fp)) != 0)
 		return error;
-	vp = fp->f_data;
+	vp = fp->f_vnode;
 	vn_lock(vp, LK_EXCLUSIVE | LK_RETRY);
 	if (vp->v_type != VDIR)
 		error = ENOTDIR;
@@ -1648,7 +1653,7 @@ do_sys_openat(lwp_t *l, int fdat, const char *path, int flags,
 		if ((error = fd_getvnode(fdat, &dfp)) != 0)
 			goto out;
 
-		dvp = dfp->f_data;
+		dvp = dfp->f_vnode;
 	}
 
 	error = do_open(l, dvp, pb, flags, mode, fd);
@@ -1706,9 +1711,6 @@ vfs__fhfree(fhandle_t *fhp)
 {
 	size_t fhsize;
 
-	if (fhp == NULL) {
-		return;
-	}
 	fhsize = FHANDLE_SIZE(fhp);
 	kmem_free(fhp, fhsize);
 }
@@ -1756,7 +1758,6 @@ vfs_composefh_alloc(struct vnode *vp, fhandle_t **fhpp)
 	size_t fidsize;
 	int error;
 
-	*fhpp = NULL;
 	mp = vp->v_mount;
 	fidsize = 0;
 	error = VFS_VPTOFH(vp, NULL, &fidsize);
@@ -1826,7 +1827,6 @@ vfs_copyinfh_alloc(const void *ufhp, size_t fhsize, fhandle_t **fhpp)
 	fhandle_t *fhp;
 	int error;
 
-	*fhpp = NULL;
 	if (fhsize > FHANDLE_SIZE_MAX) {
 		return EINVAL;
 	}
@@ -1915,7 +1915,7 @@ sys___getfh30(struct lwp *l, const struct sys___getfh30_args *uap, register_t *r
 	error = vfs_composefh_alloc(vp, &fh);
 	vput(vp);
 	if (error != 0) {
-		goto out;
+		return error;
 	}
 	error = copyin(SCARG(uap, fh_size), &usz, sizeof(size_t));
 	if (error != 0) {
@@ -2701,17 +2701,10 @@ do_sys_unlinkat(struct lwp *l, int fdat, const char *arg, int flags,
 		goto abort;
 	}
 
-
 #if NVERIEXEC > 0
 	/* Handle remove requests for veriexec entries. */
 	if ((error = veriexec_removechk(curlwp, nd.ni_vp, pathstring)) != 0) {
-		VOP_ABORTOP(nd.ni_dvp, &nd.ni_cnd);
-		if (nd.ni_dvp == vp)
-			vrele(nd.ni_dvp);
-		else
-			vput(nd.ni_dvp);
-		vput(vp);
-		goto out;
+		goto abort;
 	}
 #endif /* NVERIEXEC > 0 */
 	
@@ -2759,7 +2752,7 @@ sys_lseek(struct lwp *l, const struct sys_lseek_args *uap, register_t *retval)
 	if ((fp = fd_getfile(fd)) == NULL)
 		return (EBADF);
 
-	vp = fp->f_data;
+	vp = fp->f_vnode;
 	if (fp->f_type != DTYPE_VNODE || vp->v_type == VFIFO) {
 		error = ESPIPE;
 		goto out;
@@ -2818,7 +2811,7 @@ sys_pread(struct lwp *l, const struct sys_pread_args *uap, register_t *retval)
 		return (EBADF);
 	}
 
-	vp = fp->f_data;
+	vp = fp->f_vnode;
 	if (fp->f_type != DTYPE_VNODE || vp->v_type == VFIFO) {
 		error = ESPIPE;
 		goto out;
@@ -2885,7 +2878,7 @@ sys_pwrite(struct lwp *l, const struct sys_pwrite_args *uap, register_t *retval)
 		return (EBADF);
 	}
 
-	vp = fp->f_data;
+	vp = fp->f_vnode;
 	if (fp->f_type != DTYPE_VNODE || vp->v_type == VFIFO) {
 		error = ESPIPE;
 		goto out;
@@ -3267,7 +3260,7 @@ sys_fchflags(struct lwp *l, const struct sys_fchflags_args *uap, register_t *ret
 	/* fd_getvnode() will use the descriptor for us */
 	if ((error = fd_getvnode(SCARG(uap, fd), &fp)) != 0)
 		return (error);
-	vp = fp->f_data;
+	vp = fp->f_vnode;
 	error = change_flags(vp, SCARG(uap, flags), l);
 	VOP_UNLOCK(vp);
 	fd_putfile(SCARG(uap, fd));
@@ -3370,7 +3363,7 @@ sys_fchmod(struct lwp *l, const struct sys_fchmod_args *uap, register_t *retval)
 	/* fd_getvnode() will use the descriptor for us */
 	if ((error = fd_getvnode(SCARG(uap, fd), &fp)) != 0)
 		return (error);
-	error = change_mode(fp->f_data, SCARG(uap, mode), l);
+	error = change_mode(fp->f_vnode, SCARG(uap, mode), l);
 	fd_putfile(SCARG(uap, fd));
 	return (error);
 }
@@ -3517,7 +3510,7 @@ sys_fchown(struct lwp *l, const struct sys_fchown_args *uap, register_t *retval)
 	/* fd_getvnode() will use the descriptor for us */
 	if ((error = fd_getvnode(SCARG(uap, fd), &fp)) != 0)
 		return (error);
-	error = change_owner(fp->f_data, SCARG(uap, uid), SCARG(uap, gid),
+	error = change_owner(fp->f_vnode, SCARG(uap, uid), SCARG(uap, gid),
 	    l, 0);
 	fd_putfile(SCARG(uap, fd));
 	return (error);
@@ -3558,7 +3551,7 @@ sys___posix_fchown(struct lwp *l, const struct sys___posix_fchown_args *uap, reg
 	/* fd_getvnode() will use the descriptor for us */
 	if ((error = fd_getvnode(SCARG(uap, fd), &fp)) != 0)
 		return (error);
-	error = change_owner(fp->f_data, SCARG(uap, uid), SCARG(uap, gid),
+	error = change_owner(fp->f_vnode, SCARG(uap, uid), SCARG(uap, gid),
 	    l, 1);
 	fd_putfile(SCARG(uap, fd));
 	return (error);
@@ -3714,7 +3707,7 @@ sys___futimes50(struct lwp *l, const struct sys___futimes50_args *uap,
 	/* fd_getvnode() will use the descriptor for us */
 	if ((error = fd_getvnode(SCARG(uap, fd), &fp)) != 0)
 		return (error);
-	error = do_sys_utimes(l, fp->f_data, NULL, 0, SCARG(uap, tptr),
+	error = do_sys_utimes(l, fp->f_vnode, NULL, 0, SCARG(uap, tptr),
 	    UIO_USERSPACE);
 	fd_putfile(SCARG(uap, fd));
 	return (error);
@@ -3734,7 +3727,7 @@ sys_futimens(struct lwp *l, const struct sys_futimens_args *uap,
 	/* fd_getvnode() will use the descriptor for us */
 	if ((error = fd_getvnode(SCARG(uap, fd), &fp)) != 0)
 		return (error);
-	error = do_sys_utimensat(l, AT_FDCWD, fp->f_data, NULL, 0,
+	error = do_sys_utimensat(l, AT_FDCWD, fp->f_vnode, NULL, 0,
 	    SCARG(uap, tptr), UIO_USERSPACE);
 	fd_putfile(SCARG(uap, fd));
 	return (error);
@@ -3923,6 +3916,9 @@ sys_truncate(struct lwp *l, const struct sys_truncate_args *uap, register_t *ret
 	struct vattr vattr;
 	int error;
 
+	if (SCARG(uap, length) < 0)
+		return EINVAL;
+
 	error = namei_simple_user(SCARG(uap, path),
 				NSM_FOLLOW_TRYEMULROOT, &vp);
 	if (error != 0)
@@ -3957,6 +3953,9 @@ sys_ftruncate(struct lwp *l, const struct sys_ftruncate_args *uap, register_t *r
 	file_t *fp;
 	int error;
 
+	if (SCARG(uap, length) < 0)
+		return EINVAL;
+
 	/* fd_getvnode() will use the descriptor for us */
 	if ((error = fd_getvnode(SCARG(uap, fd), &fp)) != 0)
 		return (error);
@@ -3964,7 +3963,7 @@ sys_ftruncate(struct lwp *l, const struct sys_ftruncate_args *uap, register_t *r
 		error = EINVAL;
 		goto out;
 	}
-	vp = fp->f_data;
+	vp = fp->f_vnode;
 	vn_lock(vp, LK_EXCLUSIVE | LK_RETRY);
 	if (vp->v_type == VDIR)
 		error = EISDIR;
@@ -3996,7 +3995,7 @@ sys_fsync(struct lwp *l, const struct sys_fsync_args *uap, register_t *retval)
 	/* fd_getvnode() will use the descriptor for us */
 	if ((error = fd_getvnode(SCARG(uap, fd), &fp)) != 0)
 		return (error);
-	vp = fp->f_data;
+	vp = fp->f_vnode;
 	vn_lock(vp, LK_EXCLUSIVE | LK_RETRY);
 	error = VOP_FSYNC(vp, fp->f_cred, FSYNC_WAIT, 0, 0);
 	VOP_UNLOCK(vp);
@@ -4064,7 +4063,7 @@ sys_fsync_range(struct lwp *l, const struct sys_fsync_range_args *uap, register_
 		s = 0;
 	}
 
-	vp = fp->f_data;
+	vp = fp->f_vnode;
 	vn_lock(vp, LK_EXCLUSIVE | LK_RETRY);
 	error = VOP_FSYNC(vp, fp->f_cred, nflags, s, e);
 	VOP_UNLOCK(vp);
@@ -4094,7 +4093,7 @@ sys_fdatasync(struct lwp *l, const struct sys_fdatasync_args *uap, register_t *r
 		fd_putfile(SCARG(uap, fd));
 		return (EBADF);
 	}
-	vp = fp->f_data;
+	vp = fp->f_vnode;
 	vn_lock(vp, LK_EXCLUSIVE | LK_RETRY);
 	error = VOP_FSYNC(vp, fp->f_cred, FSYNC_WAIT|FSYNC_DATAONLY, 0, 0);
 	VOP_UNLOCK(vp);
@@ -4690,4 +4689,106 @@ sys_revoke(struct lwp *l, const struct sys_revoke_args *uap, register_t *retval)
 	error = dorevoke(vp, l->l_cred);
 	vrele(vp);
 	return (error);
+}
+
+/*
+ * Allocate backing store for a file, filling a hole without having to
+ * explicitly write anything out.
+ */
+/* ARGSUSED */
+int
+sys_posix_fallocate(struct lwp *l, const struct sys_posix_fallocate_args *uap,
+		register_t *retval)
+{
+	/* {
+		syscallarg(int) fd;
+		syscallarg(off_t) pos;
+		syscallarg(off_t) len;
+	} */
+	int fd;
+	off_t pos, len;
+	struct file *fp;
+	struct vnode *vp;
+	int error;
+
+	fd = SCARG(uap, fd);
+	pos = SCARG(uap, pos);
+	len = SCARG(uap, len);
+	
+	if (pos < 0 || len < 0 || len > OFF_T_MAX - pos) {
+		return EINVAL;
+	}
+	
+	error = fd_getvnode(fd, &fp);
+	if (error) {
+		return error;
+	}
+	if ((fp->f_flag & FWRITE) == 0) {
+		error = EBADF;
+		goto fail;
+	}
+	vp = fp->f_vnode;
+
+	vn_lock(vp, LK_EXCLUSIVE | LK_RETRY);
+	if (vp->v_type == VDIR) {
+		error = EISDIR;
+	} else {
+		error = VOP_FALLOCATE(vp, pos, len);
+	}
+	VOP_UNLOCK(vp);
+
+fail:
+	fd_putfile(fd);
+	return error;
+}
+
+/*
+ * Deallocate backing store for a file, creating a hole. Also used for
+ * invoking TRIM on disks.
+ */
+/* ARGSUSED */
+int
+sys_fdiscard(struct lwp *l, const struct sys_fdiscard_args *uap,
+		register_t *retval)
+{
+	/* {
+		syscallarg(int) fd;
+		syscallarg(off_t) pos;
+		syscallarg(off_t) len;
+	} */
+	int fd;
+	off_t pos, len;
+	struct file *fp;
+	struct vnode *vp;
+	int error;
+
+	fd = SCARG(uap, fd);
+	pos = SCARG(uap, pos);
+	len = SCARG(uap, len);
+
+	if (pos < 0 || len < 0 || len > OFF_T_MAX - pos) {
+		return EINVAL;
+	}
+	
+	error = fd_getvnode(fd, &fp);
+	if (error) {
+		return error;
+	}
+	if ((fp->f_flag & FWRITE) == 0) {
+		error = EBADF;
+		goto fail;
+	}
+	vp = fp->f_vnode;
+
+	vn_lock(vp, LK_EXCLUSIVE | LK_RETRY);
+	if (vp->v_type == VDIR) {
+		error = EISDIR;
+	} else {
+		error = VOP_FDISCARD(vp, pos, len);
+	}
+	VOP_UNLOCK(vp);
+
+fail:
+	fd_putfile(fd);
+	return error;
 }

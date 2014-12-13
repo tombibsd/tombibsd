@@ -94,7 +94,10 @@ _start(struct rpb *prpb)
 	extern uintptr_t scratch;
 	struct pte *pt;
 	vaddr_t uv;
-	const char *mv, *md;
+	const char *mv;
+#if VAX410 || VAXANY
+	const char *md;
+#endif
 
 	mtpr(AST_NO, PR_ASTLVL); /* Turn off ASTs */
 

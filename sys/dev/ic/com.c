@@ -225,6 +225,7 @@ const struct cdevsw com_cdevsw = {
 	.d_poll = compoll,
 	.d_mmap = nommap,
 	.d_kqfilter = ttykqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_TTY
 };
 
@@ -269,11 +270,10 @@ const bus_size_t com_std_map[16] = COM_REG_16550;
 #endif /* COM_16750 */
 #endif /* COM_REGMAP */
 
-#define	COMUNIT_MASK	0x7ffff
-#define	COMDIALOUT_MASK	0x80000
+#define	COMDIALOUT_MASK	TTDIALOUT_MASK
 
-#define	COMUNIT(x)	(minor(x) & COMUNIT_MASK)
-#define	COMDIALOUT(x)	(minor(x) & COMDIALOUT_MASK)
+#define	COMUNIT(x)	TTUNIT(x)
+#define	COMDIALOUT(x)	TTDIALOUT(x)
 
 #define	COM_ISALIVE(sc)	((sc)->enabled != 0 && \
 			 device_is_active((sc)->sc_dev))
@@ -403,7 +403,6 @@ com_attach_subr(struct com_softc *sc)
 
 	dict = device_properties(sc->sc_dev);
 	prop_dictionary_get_bool(dict, "is_console", &is_console);
-
 	callout_init(&sc->sc_diag_callout, 0);
 	mutex_init(&sc->sc_lock, MUTEX_DEFAULT, IPL_HIGH);
 
@@ -458,6 +457,12 @@ com_attach_subr(struct com_softc *sc)
 	case COM_TYPE_OMAP:
 		sc->sc_fifolen = 64;
 		fifo_msg = "OMAP UART, working fifo";
+		SET(sc->sc_hwflags, COM_HW_FIFO);
+		goto fifodelay;
+
+	case COM_TYPE_INGENIC:
+		sc->sc_fifolen = 64;
+		fifo_msg = "Ingenic UART, working fifo";
 		SET(sc->sc_hwflags, COM_HW_FIFO);
 		goto fifodelay;
 	}
@@ -625,7 +630,7 @@ fifodone:
 
 #ifdef RND_COM
 	rnd_attach_source(&sc->rnd_source, device_xname(sc->sc_dev),
-			  RND_TYPE_TTY, 0);
+			  RND_TYPE_TTY, RND_FLAG_DEFAULT);
 #endif
 
 	/* if there are no enable/disable functions, assume the device
@@ -2302,8 +2307,16 @@ cominit(struct com_regs *regsp, int rate, int frequency, int type,
 	}
 	CSR_WRITE_1(regsp, COM_REG_LCR, cflag2lcr(cflag));
 	CSR_WRITE_1(regsp, COM_REG_MCR, MCR_DTR | MCR_RTS);
-	CSR_WRITE_1(regsp, COM_REG_FIFO,
-	    FIFO_ENABLE | FIFO_RCV_RST | FIFO_XMT_RST | FIFO_TRIGGER_1);
+
+	if (type == COM_TYPE_INGENIC) {
+		CSR_WRITE_1(regsp, COM_REG_FIFO,
+		    FIFO_ENABLE | FIFO_RCV_RST | FIFO_XMT_RST |
+		    FIFO_TRIGGER_1 | FIFO_UART_ON);
+	} else {
+		CSR_WRITE_1(regsp, COM_REG_FIFO,
+		    FIFO_ENABLE | FIFO_RCV_RST | FIFO_XMT_RST |
+		    FIFO_TRIGGER_1);
+	}
 
 	if (type == COM_TYPE_OMAP) {
 		/* setup the fifos.  the FCR value is not used as long

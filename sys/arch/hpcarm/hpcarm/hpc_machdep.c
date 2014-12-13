@@ -92,7 +92,7 @@ int max_processes = 64;			/* Default number */
 char *boot_args = NULL;
 char boot_file[16];
 
-vaddr_t msgbufphys;
+paddr_t msgbufphys;
 
 /* Prototypes */
 void dumpsys(void);

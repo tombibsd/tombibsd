@@ -130,6 +130,8 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #ifdef DEBUG
 #include <machine/sigdebug.h>
+int sigdebug = 0x0;
+int sigpid = 0;
 #endif
 
 #include <machine/alpha.h>
@@ -1614,12 +1616,10 @@ setregs(register struct lwp *l, struct exec_package *pack, vaddr_t stack)
 	tfp->tf_regs[FRAME_A3] = l->l_proc->p_psstrp;	/* a3 = ps_strings */
 	tfp->tf_regs[FRAME_T12] = tfp->tf_regs[FRAME_PC];	/* a.k.a. PV */
 
-	l->l_md.md_flags &= ~MDLWP_FPUSED;
 	if (__predict_true((l->l_md.md_flags & IEEE_INHERIT) == 0)) {
 		l->l_md.md_flags &= ~MDLWP_FP_C;
 		pcb->pcb_fp.fpr_cr = FPCR_DYN(FP_RN);
 	}
-	fpu_discard();
 }
 
 /*
@@ -1795,7 +1795,7 @@ cpu_getmcontext(struct lwp *l, mcontext_t *mcp, unsigned int *flags)
 	*flags |= _UC_CPU | _UC_TLSBASE;
 
 	/* Save floating point register context, if any, and copy it. */
-	if (fpu_used_p(l)) {
+	if (fpu_valid_p(l)) {
 		fpu_save();
 		(void)memcpy(&mcp->__fpregs, &pcb->pcb_fp,
 		    sizeof (mcp->__fpregs));
@@ -1844,11 +1844,10 @@ cpu_setmcontext(struct lwp *l, const mcontext_t *mcp, unsigned int flags)
 	/* Restore floating point register context, if any. */
 	if (flags & _UC_FPU) {
 		/* If we have an FP register context, get rid of it. */
-		fpu_discard();
+		fpu_discard(true);
 		(void)memcpy(&pcb->pcb_fp, &mcp->__fpregs,
 		    sizeof (pcb->pcb_fp));
 		l->l_md.md_flags = mcp->__fpregs.__fp_fpcr & MDLWP_FP_C;
-		fpu_mark_used(l);
 	}
 
 	return (0);

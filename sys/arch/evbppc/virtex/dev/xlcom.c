@@ -148,6 +148,7 @@ const struct cdevsw xlcom_cdevsw = {
 	.d_poll = xlcom_poll,
 	.d_mmap = nommap,
 	.d_kqfilter = ttykqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_TTY
 };
 

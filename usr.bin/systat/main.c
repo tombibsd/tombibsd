@@ -78,7 +78,6 @@ int     turns = 2;	/* stay how many refresh-turns in 'all' mode? */
 int     allflag;
 int     allcounter;
 sig_atomic_t needsredraw = 0;
-int	use_sysctl = 1;
 
 static	WINDOW *wload;			/* one line window for load average */
 
@@ -106,7 +105,6 @@ main(int argc, char **argv)
 		switch(ch) {
 		case 'M':
 			memf = optarg;
-			use_sysctl = 0;
 			break;
 		case 'N':
 			nlistf = optarg;

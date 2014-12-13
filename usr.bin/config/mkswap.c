@@ -44,6 +44,9 @@
 #include "nbtool_config.h"
 #endif
 
+#include <sys/cdefs.h>
+__RCSID("$NetBSD$");
+
 #include <sys/param.h>
 #include <errno.h>
 #include <stdio.h>
@@ -114,7 +117,7 @@ mkoneswap(struct config *cf)
 		    cf->cf_root->nv_str);
 	fprintf(fp, "const char *rootspec = %s;\n", specinfo);
 	fprintf(fp, "dev_t\trootdev = %s;\t/* %s */\n\n",
-		mkdevstr(nv->nv_num),
+		mkdevstr((dev_t)nv->nv_num),
 		nv->nv_str == s_qmark ? "wildcarded" : nv->nv_str);
 
 	/*
@@ -127,7 +130,7 @@ mkoneswap(struct config *cf)
 		snprintf(specinfo, sizeof(specinfo), "\"%s\"", cf->cf_dump->nv_str);
 	fprintf(fp, "const char *dumpspec = %s;\n", specinfo);
 	fprintf(fp, "dev_t\tdumpdev = %s;\t/* %s */\n\n",
-		nv ? mkdevstr(nv->nv_num) : "NODEV",
+		nv ? mkdevstr((dev_t)nv->nv_num) : "NODEV",
 		nv ? nv->nv_str : "unspecified");
 
 	/*

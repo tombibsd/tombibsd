@@ -94,6 +94,20 @@ moveto(int r, int c)
 		putpad(buf);
 }
 
+static void
+setcolor(int c)
+{
+	char *buf;
+	if (nocolor == 1)
+		return;
+	if (set_a_foreground == NULL)
+		return;
+
+	buf = tiparm(set_a_foreground, c == 7 ? 0 : c);
+	if (buf != NULL)
+		putpad(buf);
+}
+
 /*
  * Set up from termcap.
  */
@@ -312,6 +326,7 @@ scr_update(void)
 						
 		/* draw */
 		putpad(enter_standout_mode);
+		setcolor(nextshape->color);
 		moveto(r, 2*c);
 		putstr("  ");
 		for(i=0; i<3; i++) {
@@ -349,7 +364,14 @@ scr_update(void)
 					    exit_standout_mode);
 					cur_so = so;
 				}
+				setcolor(so);
+#ifdef DEBUG
+				char buf[3];
+				snprintf(buf, sizeof(buf), "%d%d", so, so);
+				putstr(buf);
+#else
 				putstr("  ");
+#endif
 			} else
 				putstr(so ? "XX" : "  ");
 			ccol = i + 1;

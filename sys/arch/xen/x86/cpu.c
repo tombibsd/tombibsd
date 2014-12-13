@@ -403,6 +403,7 @@ cpu_attach_common(device_t parent, device_t self, void *aux)
 
 	KASSERT(ci->ci_func == 0);
 	ci->ci_func = caa->cpu_func;
+	aprint_normal("\n");
 
 	/* Must be called before mi_cpu_attach(). */
 	cpu_vm_init(ci);
@@ -414,7 +415,6 @@ cpu_attach_common(device_t parent, device_t self, void *aux)
 
 		KASSERT(ci->ci_data.cpu_idlelwp != NULL);
 		if (error != 0) {
-			aprint_normal("\n");
 			aprint_error_dev(self,
 			    "mi_cpu_attach failed with %d\n", error);
 			return;
@@ -425,6 +425,13 @@ cpu_attach_common(device_t parent, device_t self, void *aux)
 	}
 
 	KASSERT(ci->ci_cpuid == ci->ci_index);
+#ifdef __x86_64__
+	/* No user PGD mapped for this CPU yet */
+	ci->ci_xen_current_user_pgd = 0;
+#endif
+#if defined(__x86_64__) || defined(PAE)
+	mutex_init(&ci->ci_kpm_mtx, MUTEX_DEFAULT, IPL_VM);
+#endif
 	pmap_reference(pmap_kernel());
 	ci->ci_pmap = pmap_kernel();
 	ci->ci_tlbstate = TLBSTATE_STALE;
@@ -441,7 +448,7 @@ cpu_attach_common(device_t parent, device_t self, void *aux)
 		cpu_init(ci);
 		pmap_cpu_init_late(ci);
 
-		/* Every processor needs to init it's own ipi h/w (similar to lapic) */
+		/* Every processor needs to init its own ipi h/w (similar to lapic) */
 		xen_ipi_init();
 
 		/* Make sure DELAY() is initialized. */
@@ -494,12 +501,11 @@ cpu_attach_common(device_t parent, device_t self, void *aux)
 			tmp->ci_next = ci;
 		}
 #else
-		aprint_error(": not started\n");
+		aprint_error_dev(ci->ci_dev, "not started\n");
 #endif
 		break;
 
 	default:
-		aprint_normal("\n");
 		panic("unknown processor type??\n");
 	}
 
@@ -542,14 +548,6 @@ cpu_init(struct cpu_info *ci)
 		if (cpu_feature[0] & (CPUID_SSE|CPUID_SSE2))
 			lcr4(rcr4() | CR4_OSXMMEXCPT);
 	}
-
-#ifdef __x86_64__
-	/* No user PGD mapped for this CPU yet */
-	ci->ci_xen_current_user_pgd = 0;
-#endif
-#if defined(__x86_64__) || defined(PAE)
-	mutex_init(&ci->ci_kpm_mtx, MUTEX_DEFAULT, IPL_VM);
-#endif
 
 	atomic_or_32(&ci->ci_flags, CPUF_RUNNING);
 }

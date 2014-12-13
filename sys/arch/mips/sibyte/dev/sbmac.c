@@ -640,7 +640,7 @@ sbdma_add_txbuffer(sbmacdma_t *d, struct mbuf *m)
 			 * Check to see if the mbuf spans a page boundary.  If
 			 * it does, and the physical pages behind the virtual
 			 * pages are not contiguous, split it so that each
-			 * virtual page uses it's own Tx descriptor.
+			 * virtual page uses its own Tx descriptor.
 			 */
 			if (trunc_page(addr) != trunc_page(addr + len - 1)) {
 				next_len = (addr + len) - trunc_page(addr + len);

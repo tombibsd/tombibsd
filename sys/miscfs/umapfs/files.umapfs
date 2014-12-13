@@ -2,6 +2,7 @@
 
 deffs	UMAPFS
 
+define	umapfs: vfs, layerfs
 file	miscfs/umapfs/umap_subr.c	umapfs
 file	miscfs/umapfs/umap_vfsops.c	umapfs
 file	miscfs/umapfs/umap_vnops.c	umapfs

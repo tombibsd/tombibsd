@@ -16,7 +16,7 @@ LDAP_RUNDIR=	/var/openldap
 CPPFLAGS+=	-I${LDAP_SRCDIR}/include
 CPPFLAGS+=	-I${LDAP_DISTDIR}/include
 
-.for _LIB in lutil		# XXX lber ldap ldap_r lunicode rewrite
+.for _LIB in lutil ldap		# XXX lber ldap_r lunicode rewrite
 .if !defined(LDAPOBJDIR.${_LIB})
 LDAPOBJDIR.${_LIB}!=	cd ${LDAP_SRCDIR}/lib/lib${_LIB} && ${PRINTOBJDIR}
 .MAKEOVERRIDES+=	LDAPOBJDIR.${_LIB}

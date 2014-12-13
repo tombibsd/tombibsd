@@ -3,7 +3,7 @@
 /amd756reg.h/1.2/Mon Apr 28 20:23:24 2008/-kk/
 /elan520.c/1.50/Tue Nov 12 02:18:40 2013/-kk/
 /elan520reg.h/1.10/Mon Apr 28 20:23:24 2008/-kk/
-/gcscehci.c/1.10/Fri Apr 11 02:03:30 2014/-kk/
+/gcscehci.c/1.11/Fri Oct  3 10:05:03 2014/-kk/
 /gcscide.c/1.15/Thu Oct 24 10:28:57 2013/-kk/
 /gcscpcib_pci.c/1.2/Mon Aug 29 18:34:42 2011/-kk/
 /geode.c/1.15/Fri Jul  1 17:37:26 2011/-kk/
@@ -11,7 +11,7 @@
 /geodereg.h/1.9/Mon Oct 19 23:19:38 2009/-kk/
 /geodevar.h/1.4/Tue Oct 20 17:29:06 2009/-kk/
 /geodewdg.c/1.11/Fri Jul  1 17:37:26 2011/-kk/
-/glxsb.c/1.11/Sat Apr 19 05:36:47 2014/-kk/
+/glxsb.c/1.12/Fri Oct  3 09:25:39 2014/-kk/
 /gscpcib.c/1.18/Sun Nov 13 09:17:56 2011/-kk/
 /gscpcibreg.h/1.2/Sun Dec 11 12:17:43 2005/-kk/
 /opti82c558.c/1.10/Fri Jul  1 17:37:26 2011/-kk/
@@ -20,7 +20,7 @@
 /opti82c700reg.h/1.2/Tue Jul 18 11:07:21 2000/-kk/
 /p64h2apic.c/1.15/Mon May  4 12:15:51 2009/-kk/
 /pceb.c/1.24/Fri Jul  1 17:37:26 2011/-kk/
-/pci_intr_fixup.c/1.49/Fri Jul  1 17:37:26 2011/-kk/
+/pci_intr_fixup.c/1.50/Fri Oct  3 09:50:46 2014/-kk/
 /pci_intr_fixup.h/1.9/Thu Jun 22 16:24:34 2006/-kk/
 /pcibios.c/1.39/Mon Jul 26 22:33:23 2010/-kk/
 /pcibios.h/1.12/Tue Dec 25 18:33:33 2007/-kk/

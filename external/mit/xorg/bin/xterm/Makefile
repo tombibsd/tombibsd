@@ -9,6 +9,9 @@ SRCS=	button.c charproc.c charsets.c cursor.c data.c doublechr.c \
 	TekPrsTbl.c Tekproc.c VTPrsTbl.c main.c charclass.c precompose.c \
 	wcwidth.c xutf8.c cachedGCs.c xtermcap.c version.c
 
+# graphics_regis.c graphics_sixel.c
+# xterm.appdata.xml
+
 CPPFLAGS+=	-I${X11SRCDIR.${PROG}} \
 		-I${X11SRCDIR.${PROG}}/../include \
 		-I${DESTDIR}${X11INCDIR}/freetype2 \

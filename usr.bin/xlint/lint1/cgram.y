@@ -1526,10 +1526,14 @@ iteration_stmnt:
 	| for_exprs stmnt {
 		CLRWFLGS(__FILE__, __LINE__);
 		for2();
+		popdecl();
+		blklev--;
 	  }
 	| for_exprs error {
 		CLRWFLGS(__FILE__, __LINE__);
 		for2();
+		popdecl();
+		blklev--;
 	  }
 	;
 
@@ -1552,15 +1556,21 @@ do_while_expr:
 	  }
 	;
 
+for_start:
+	  T_FOR T_LPARN {
+		pushdecl(AUTO);
+		blklev++;
+	  }
+	;
 for_exprs:
-	    T_FOR T_LPARN declspecs deftyp notype_init_decls T_SEMI opt_expr
+	    for_start declspecs deftyp notype_init_decls T_SEMI opt_expr
 	    T_SEMI opt_expr T_RPARN {
 		c99ism(325);
-		for1(NULL, $7, $9);
+		for1(NULL, $6, $8);
 		CLRWFLGS(__FILE__, __LINE__);
 	    }
-	  | T_FOR T_LPARN opt_expr T_SEMI opt_expr T_SEMI opt_expr T_RPARN {
-		for1($3, $5, $7);
+	  | for_start opt_expr T_SEMI opt_expr T_SEMI opt_expr T_RPARN {
+		for1($2, $4, $6);
 		CLRWFLGS(__FILE__, __LINE__);
 	  }
 	;

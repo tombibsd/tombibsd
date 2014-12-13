@@ -805,11 +805,11 @@ nfs_timer(void *arg)
 		    nmp->nm_sent < nmp->nm_cwnd) &&
 		   (m = m_copym(rep->r_mreq, 0, M_COPYALL, M_DONTWAIT))){
 		        if (so->so_state & SS_ISCONNECTED)
-			    error = (*so->so_proto->pr_usrreq)(so, PRU_SEND, m,
-			    NULL, NULL, NULL);
+			    error = (*so->so_proto->pr_usrreqs->pr_send)(so,
+			    m, NULL, NULL, NULL);
 			else
-			    error = (*so->so_proto->pr_usrreq)(so, PRU_SEND, m,
-			    nmp->nm_nam, NULL, NULL);
+			    error = (*so->so_proto->pr_usrreqs->pr_send)(so,
+			    m, nmp->nm_nam, NULL, NULL);
 			if (error) {
 				if (NFSIGNORE_SOERROR(nmp->nm_soflags, error)) {
 #ifdef DEBUG
@@ -889,12 +889,12 @@ nfs_rcvlock(struct nfsmount *nmp, struct nfsreq *rep)
 {
 	int *flagp = &nmp->nm_iflag;
 	int slptimeo = 0;
-	bool catch;
+	bool catch_p;
 	int error = 0;
 
 	KASSERT(nmp == rep->r_nmp);
 
-	catch = (nmp->nm_flag & NFSMNT_INT) != 0;
+	catch_p = (nmp->nm_flag & NFSMNT_INT) != 0;
 	mutex_enter(&nmp->nm_lock);
 	while (/* CONSTCOND */ true) {
 		if (*flagp & NFSMNT_DISMNT) {
@@ -921,15 +921,15 @@ nfs_rcvlock(struct nfsmount *nmp, struct nfsreq *rep)
 			*flagp |= NFSMNT_RCVLOCK;
 			break;
 		}
-		if (catch) {
+		if (catch_p) {
 			cv_timedwait_sig(&nmp->nm_rcvcv, &nmp->nm_lock,
 			    slptimeo);
 		} else {
 			cv_timedwait(&nmp->nm_rcvcv, &nmp->nm_lock,
 			    slptimeo);
 		}
-		if (catch) {
-			catch = false;
+		if (catch_p) {
+			catch_p = false;
 			slptimeo = 2 * hz;
 		}
 	}

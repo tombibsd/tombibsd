@@ -938,9 +938,6 @@ Lebootcode:
  * Misc. global variables.
  */
 	.data
-GLOBAL(machineid)
-	.long	0			| default to X68030
-
 GLOBAL(mmutype)
 	.long	MMU_68030		| default to 030 internal MMU
 

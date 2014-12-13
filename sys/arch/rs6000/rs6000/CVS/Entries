@@ -1,7 +1,7 @@
 /autoconf.c/1.4/Sun Jul 29 18:05:47 2012/-kk/
 /consinit.c/1.3/Mon Jul 18 17:26:56 2011/-kk/
 /cpu.c/1.4/Mon Jul 18 17:26:56 2011/-kk/
-/locore.S/1.10/Mon Jun 20 19:56:13 2011/-kk/
+/locore.S/1.11/Fri Oct  3 09:25:49 2014/-kk/
 /machdep.c/1.10/Mon Jun 20 07:18:07 2011/-kk/
 /mainbus.c/1.5/Mon Jul 18 17:26:56 2011/-kk/
 /pic_iocc.c/1.4/Mon Jul 18 17:26:56 2011/-kk/

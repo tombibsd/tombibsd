@@ -106,9 +106,12 @@ static const struct uboot_arch {
 	const char *name;
 } uboot_arch[] = {
 	{ IH_ARCH_ARM,		"arm" },
+	{ IH_ARCH_I386,		"i386" },
 	{ IH_ARCH_MIPS,		"mips" },
 	{ IH_ARCH_MIPS64,	"mips64" },
 	{ IH_ARCH_PPC,		"powerpc" },
+	{ IH_ARCH_OPENRISC,	"or1k" },
+	{ IH_ARCH_ARM64,	"arm64" },
 };
 
 static enum uboot_image_arch
@@ -214,7 +217,8 @@ get_comp_name(enum uboot_image_comp comp)
 __dead static void
 usage(void)
 {
-	fprintf(stderr, "usage: mkubootimage -A <arm|mips|mips64|powerpc>");
+	fprintf(stderr, "usage: mkubootimage -A "
+	    "<arm|arm64|i386|mips|mips64|or1k|powerpc>");
 	fprintf(stderr, " -C <none|bz2|gz|lzma|lzo>");
 	fprintf(stderr, " -O <openbsd|netbsd|freebsd|linux>");
 	fprintf(stderr, " -T <standalone|kernel|ramdisk|fs|script>");

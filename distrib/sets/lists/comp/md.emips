@@ -48,7 +48,7 @@
 ./usr/include/emips/rwlock.h			comp-c-include
 ./usr/include/emips/setjmp.h			comp-c-include
 ./usr/include/emips/signal.h			comp-c-include
-./usr/include/emips/sljitarch.h			comp-c-include
+./usr/include/emips/sljitarch.h			comp-obsolete		obsolete
 ./usr/include/emips/stdarg.h			comp-obsolete		obsolete
 ./usr/include/emips/trap.h			comp-c-include
 ./usr/include/emips/types.h			comp-c-include

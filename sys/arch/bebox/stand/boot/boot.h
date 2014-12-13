@@ -84,7 +84,7 @@ int PCISlotnum(u_int, u_int, u_int);
 int PCIVendor(int);
 u_long PCIAddress(int, u_int, int);
 #ifdef DEBUG
-void printslots(void);
+void printPCIslots(void);
 #endif
 
 /*

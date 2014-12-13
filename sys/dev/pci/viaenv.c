@@ -343,8 +343,10 @@ viaenv_attach(device_t parent, device_t self, void *aux)
 
 #undef COPYDESCR
 
-	for (i = 0; i < 10; i++)
+	for (i = 0; i < 10; i++) {
 		sc->sc_sensor[i].state = ENVSYS_SINVALID;
+		sc->sc_sensor[i].flags |= ENVSYS_FHAS_ENTROPY;
+	}
 
 	sc->sc_sme = sysmon_envsys_create();
 

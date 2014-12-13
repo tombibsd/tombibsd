@@ -560,7 +560,7 @@ pccbbdetach(device_t self, int flags)
 	if (!TAILQ_EMPTY(&sc->sc_memwindow))
 		aprint_error_dev(self, "memory windows not empty");
 
-	callout_stop(&sc->sc_insert_ch);
+	callout_halt(&sc->sc_insert_ch, NULL);
 	callout_destroy(&sc->sc_insert_ch);
 
 	mutex_destroy(&sc->sc_pwr_mtx);

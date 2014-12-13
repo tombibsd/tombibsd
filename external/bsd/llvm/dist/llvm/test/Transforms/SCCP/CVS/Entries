@@ -31,6 +31,7 @@
 /apint-phi.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /apint-select.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /atomic-load-store.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/atomic.ll/1.1.1.1/Sun Aug 10 17:04:35 2014/-kk/
 /calltest.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /crash.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /ipsccp-addr-taken.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/

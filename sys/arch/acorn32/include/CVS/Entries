@@ -29,12 +29,13 @@
 /irqhandler.h/1.9/Sat Mar 14 14:45:51 2009/-kk/
 /joystick.h/1.3/Sun Dec 11 12:16:05 2005/-kk/
 /limits.h/1.1/Fri Oct  5 22:27:51 2001/-kk/
-/loadfile_machdep.h/1.5/Sat Mar 14 14:45:51 2009/-kk/
+/loadfile_machdep.h/1.6/Fri Oct  3 09:25:27 2014/-kk/
 /lock.h/1.9/Thu Jan 15 01:11:32 2009/-kk/
 /machdep.h/1.2/Sun Dec 11 12:16:05 2005/-kk/
 /math.h/1.1/Fri Oct  5 22:27:51 2001/-kk/
 /mcontext.h/1.2/Fri Jan 17 22:00:04 2003/-kk/
 /mutex.h/1.2/Fri Feb  9 21:55:00 2007/-kk/
+/netbsd32_machdep.h/1.1/Sun Aug  3 16:16:27 2014/-kk/
 /ofisa_machdep.h/1.1/Fri Oct  5 22:27:51 2001/-kk/
 /ofw.h/1.1/Fri Oct  5 22:27:51 2001/-kk/
 /param.h/1.6/Fri Jan  3 02:40:57 2003/-kk/

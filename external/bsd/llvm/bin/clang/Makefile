@@ -30,8 +30,8 @@ CLANG_LIBS+= \
 	clangSema \
 	clangEdit \
 	clangAnalysis \
-	clangRewriteFrontend \
-	clangRewriteCore \
+	clangFrontendRewrite \
+	clangRewrite \
 	clangAST \
 	clangLex \
 	clangBasic
@@ -45,8 +45,8 @@ LLVM_LIBS+= \
 	BitWriter \
 	AArch64CodeGen \
 	AArch64TargetInfo \
-	AArch64MCTargetDesc \
 	AArch64AsmParser \
+	AArch64MCTargetDesc \
 	AArch64AsmPrinter \
 	AArch64Utils \
 	ARMCodeGen \
@@ -75,10 +75,10 @@ LLVM_LIBS+= \
 	X86Utils \
 	X86AsmParser \
 	X86AsmPrinter \
-	Object \
 	SelectionDAG \
 	AsmPrinter \
 	CodeGen \
+	ProfileData \
 	Vectorize \
 	Target \
 	InstCombine \
@@ -88,6 +88,7 @@ LLVM_LIBS+= \
 	MCDisassembler \
 	MCParser \
 	MC \
+	Object \
 	Linker \
 	TransformsUtils \
 	ipa \
@@ -96,5 +97,10 @@ LLVM_LIBS+= \
 	Support
 
 .include "${.PARSEDIR}/../../link.mk"
+
+LDADD+=	-lz
+.if !defined(HOSTPROG)
+DPADD+=	${LIBZ}
+.endif
 
 .include <bsd.prog.mk>

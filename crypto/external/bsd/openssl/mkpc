@@ -3,7 +3,7 @@
 
 getversion() {
 	(echo '#include "opensslv.h"'; echo OPENSSL_VERSION_TEXT) |
-	    cpp -I$1 | grep OpenSSL | cut -d ' ' -f 2
+	    $CPP $CPPFLAGS -I$1 | grep OpenSSL | cut -d ' ' -f 2
 }
 VERSION="$(getversion $1)"
 

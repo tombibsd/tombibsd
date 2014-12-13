@@ -1,0 +1,11 @@
+#	$NetBSD$
+#
+
+ioconf pci_eap
+
+include "conf/files"
+include "dev/pci/files.pci"
+
+pseudo-root pci*
+
+eap* at pci?

@@ -17,8 +17,6 @@
  * PERFORMANCE OF THIS SOFTWARE.
  */
 
-/* Id: main.c,v 1.187 2012/02/06 23:46:44 tbox Exp  */
-
 /*! \file */
 
 #include <config.h>
@@ -52,8 +50,12 @@
 #include <dns/view.h>
 
 #include <dst/result.h>
+#ifdef PKCS11CRYPTO
+#include <pk11/result.h>
+#endif
 
 #include <dlz/dlz_dlopen_driver.h>
+
 
 /*
  * Defining NS_MAIN provides storage declarations (rather than extern)
@@ -70,6 +72,7 @@
 #include <named/server.h>
 #include <named/lwresd.h>
 #include <named/main.h>
+#include <named/seccomp.h>
 #ifdef HAVE_LIBSCF
 #include <named/ns_smf_globals.h>
 #endif
@@ -414,16 +417,16 @@ static void
 parse_command_line(int argc, char *argv[]) {
 	int ch;
 	int port;
+	const char *p;
 	isc_boolean_t disable6 = ISC_FALSE;
 	isc_boolean_t disable4 = ISC_FALSE;
 
 	save_command_line(argc, argv);
 
 	/* PLEASE keep options synchronized when main is hooked! */
+#define CMDLINE_FLAGS "46c:C:d:D:E:fFgi:lm:n:N:p:P:sS:t:T:U:u:vVx:"
 	isc_commandline_errprint = ISC_FALSE;
-	while ((ch = isc_commandline_parse(argc, argv,
-					   "46c:C:d:D:E:fFgi:lm:n:N:p:P:"
-					   "sS:t:T:U:u:vVx:")) != -1) {
+	while ((ch = isc_commandline_parse(argc, argv, CMDLINE_FLAGS)) != -1) {
 		switch (ch) {
 		case '4':
 			if (disable4)
@@ -612,8 +615,14 @@ parse_command_line(int argc, char *argv[]) {
 			usage();
 			if (isc_commandline_option == '?')
 				exit(0);
-			ns_main_earlyfatal("unknown option '-%c'",
-					   isc_commandline_option);
+			p = strchr(CMDLINE_FLAGS, isc_commandline_option);
+			if (p == NULL || *++p != ':')
+				ns_main_earlyfatal("unknown option '-%c'",
+						   isc_commandline_option);
+			else
+				ns_main_earlyfatal("option '-%c' requires "
+						   "an argument",
+						   isc_commandline_option);
 			/* FALLTHROUGH */
 		default:
 			ns_main_earlyfatal("parsing options returned %d", ch);
@@ -763,6 +772,60 @@ dump_symboltable(void) {
 		}
 	}
 }
+
+#ifdef HAVE_LIBSECCOMP
+static void
+setup_seccomp() {
+	scmp_filter_ctx ctx;
+	unsigned int i;
+	int ret;
+
+	/* Make sure the lists are in sync */
+	INSIST((sizeof(scmp_syscalls) / sizeof(int)) ==
+	       (sizeof(scmp_syscall_names) / sizeof(const char *)));
+
+	ctx = seccomp_init(SCMP_ACT_KILL);
+	if (ctx == NULL) {
+		isc_log_write(ns_g_lctx, NS_LOGCATEGORY_GENERAL,
+			      NS_LOGMODULE_MAIN, ISC_LOG_WARNING,
+			      "libseccomp activation failed");
+		return;
+	}
+
+	for (i = 0 ; i < sizeof(scmp_syscalls)/sizeof(*(scmp_syscalls)); i++) {
+		ret = seccomp_rule_add(ctx, SCMP_ACT_ALLOW,
+				       scmp_syscalls[i], 0);
+		if (ret < 0)
+			isc_log_write(ns_g_lctx, NS_LOGCATEGORY_GENERAL,
+				      NS_LOGMODULE_MAIN, ISC_LOG_WARNING,
+				      "libseccomp rule failed: %s",
+				      scmp_syscall_names[i]);
+
+		else
+			isc_log_write(ns_g_lctx, NS_LOGCATEGORY_GENERAL,
+				      NS_LOGMODULE_MAIN, ISC_LOG_DEBUG(9),
+				      "added libseccomp rule: %s",
+				      scmp_syscall_names[i]);
+	}
+
+	ret = seccomp_load(ctx);
+	if (ret < 0) {
+		isc_log_write(ns_g_lctx, NS_LOGCATEGORY_GENERAL,
+			      NS_LOGMODULE_MAIN, ISC_LOG_WARNING,
+			      "libseccomp unable to load filter");
+	} else {
+		isc_log_write(ns_g_lctx, NS_LOGCATEGORY_GENERAL,
+			      NS_LOGMODULE_MAIN, ISC_LOG_NOTICE,
+			      "libseccomp sandboxing active");
+	}
+
+	/*
+	 * Release filter in ctx. Filters already loaded are not
+	 * affected.
+	 */
+	seccomp_release(ctx);
+}
+#endif /* HAVE_LIBSECCOMP */
 
 static void
 setup(void) {
@@ -977,6 +1040,10 @@ setup(void) {
 #endif
 
 	ns_server_create(ns_g_mctx, &ns_g_server);
+
+#ifdef HAVE_LIBSECCOMP
+	setup_seccomp();
+#endif /* HAVE_LIBSECCOMP */
 }
 
 static void
@@ -1133,6 +1200,9 @@ main(int argc, char *argv[]) {
 	dns_result_register();
 	dst_result_register();
 	isccc_result_register();
+#ifdef PKCS11CRYPTO
+	pk11_result_register();
+#endif
 
 	parse_command_line(argc, argv);
 

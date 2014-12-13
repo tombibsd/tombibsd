@@ -74,13 +74,13 @@ int	ucycomdebug = 20;
 #endif
 
 
-#define UCYCOMUNIT_MASK		0x3ffff
-#define UCYCOMDIALOUT_MASK	0x80000
-#define UCYCOMCALLUNIT_MASK	0x40000
+#define	UCYCOMCALLUNIT_MASK	TTCALLUNIT_MASK
+#define	UCYCOMUNIT_MASK		TTUNIT_MASK
+#define	UCYCOMDIALOUT_MASK	TTDIALOUT_MASK
 
-#define UCYCOMUNIT(x)		(minor(x) & UCYCOMUNIT_MASK)
-#define UCYCOMDIALOUT(x)	(minor(x) & UCYCOMDIALOUT_MASK)
-#define UCYCOMCALLUNIT(x)	(minor(x) & UCYCOMCALLUNIT_MASK)
+#define	UCYCOMCALLUNIT(x)	TTCALLUNIT(x)
+#define	UCYCOMUNIT(x)		TTUNIT(x)
+#define	UCYCOMDIALOUT(x)	TTDIALOUT(x)
 
 /* Configuration Byte */
 #define UCYCOM_RESET		0x80
@@ -158,6 +158,7 @@ const struct cdevsw ucycom_cdevsw = {
 	.d_poll = ucycompoll,
 	.d_mmap = nommap,
 	.d_kqfilter = ttykqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_TTY
 };
 

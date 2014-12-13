@@ -467,10 +467,6 @@ skip_auth:
 		exit(EXIT_FAILURE);
 	}
 
-	if (tty[sizeof("tty")-1] == 'd')
-		syslog(LOG_INFO, "DIALUP %s, %s", tty, pwd->pw_name);
-
-
 	/*
 	 * Establish groups
 	 */

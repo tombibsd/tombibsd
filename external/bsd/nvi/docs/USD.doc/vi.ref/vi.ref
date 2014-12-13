@@ -113,7 +113,7 @@ Engineers, Inc.
 The financial support of UUNET Communications Services is gratefully
 acknowledged.
 .)q
-.sy echo -n >index
+.if \n[.U]==0 .sy echo -n >index
 .oh 'Vi/Ex Reference''USD:13-%'
 .eh 'USD:13-%''Vi/Ex Reference'
 .bp 4

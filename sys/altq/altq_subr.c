@@ -356,7 +356,7 @@ tbr_timeout(void *arg)
 
 	active = 0;
 	s = splnet();
-	for (ifp = TAILQ_FIRST(&ifnet); ifp; ifp = TAILQ_NEXT(ifp, if_list)) {
+	IFNET_FOREACH(ifp) {
 		if (!TBR_IS_ENABLED(&ifp->if_snd))
 			continue;
 		active++;

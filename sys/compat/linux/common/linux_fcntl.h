@@ -50,6 +50,7 @@
 #define LINUX_AT_NO_AUTOMOUNT		0x0800
 #define LINUX_AT_EMPTY_PATH		0x1000
 
+int linux_to_bsd_ioflags(int);
 int linux_to_bsd_atflags(int);
 
 struct linux_flock {

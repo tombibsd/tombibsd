@@ -73,7 +73,7 @@
 		union { const void *k; void *v; } _u; \
 		_u.k = konst; \
 		var = _u.v; \
-	} while (0)
+	} while (/*CONSTCOND*/0)
 
 /* fnmatch() return values. */
 #define	FNM_NOMATCH	1	/* Match failed. */

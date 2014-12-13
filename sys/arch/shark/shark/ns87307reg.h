@@ -240,7 +240,7 @@
 ** Set the irq number and triggering for the currently
 ** selected logical device.  If irqNum is unknown 
 ** the number won't be set and the device will be left
-** with it's default value. 
+** with its default value. 
 **
 ** sc        pointer to nsio devices softc 
 ** irqNum    irq number to set

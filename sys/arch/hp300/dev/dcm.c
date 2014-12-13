@@ -191,8 +191,8 @@ struct	dcmstats {
 };
 #endif
 
-#define DCMUNIT(x)		(minor(x) & 0x7ffff)
-#define	DCMDIALOUT(x)		(minor(x) & 0x80000)
+#define DCMUNIT(x)		TTUNIT(x)
+#define	DCMDIALOUT(x)		TTDIALOUT(x)
 #define	DCMBOARD(x)		(((x) >> 2) & 0x3f)
 #define DCMPORT(x)		((x) & 3)
 
@@ -341,6 +341,7 @@ const struct cdevsw dcm_cdevsw = {
 	.d_poll = dcmpoll,
 	.d_mmap = nommap,
 	.d_kqfilter = ttykqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_TTY
 };
 
@@ -1394,9 +1395,11 @@ dcmsetischeme(int brd, int flags)
 		for (i = 0; i < NDCMPORT; i++) {
 			tp = sc->sc_tty[i];
 
-			if ((c = tp->t_cc[VSTART]) != _POSIX_VDISABLE)
+			c = tty_getctrlchar(tp, VSTART);
+			if (c != _POSIX_VDISABLE)
 				dcm->dcm_bmap[c].data_data |= (1 << i);
-			if ((c = tp->t_cc[VSTOP]) != _POSIX_VDISABLE)
+			c = tty_getctrlchar(tp, VSTOP);
+			if (c != _POSIX_VDISABLE)
 				dcm->dcm_bmap[c].data_data |= (1 << i);
 		}
 	}

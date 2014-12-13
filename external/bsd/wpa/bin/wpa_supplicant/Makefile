@@ -22,6 +22,7 @@ eap_register.c \
 eapol_supp_sm.c \
 eloop.c \
 events.c \
+ieee802_11_common.c \
 l2_packet_freebsd.c \
 main.c \
 md5.c \

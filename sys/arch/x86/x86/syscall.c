@@ -47,6 +47,8 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <machine/psl.h>
 #include <machine/userret.h>
 
+#include "opt_dtrace.h"
+
 #ifndef __x86_64__
 #include "opt_vm86.h"
 #ifdef VM86
@@ -93,19 +95,17 @@ cpu_spawn_return(struct lwp *l)
 	userret(l);
 }
 	
-void
-syscall_intern(struct proc *p)
-{
-
-	p->p_md.md_syscall = syscall;
-}
-
 /*
  * syscall(frame):
  *	System call request from POSIX system call gate interface to kernel.
  *	Like trap(), argument is call by reference.
  */
-static void
+#ifdef KDTRACE_HOOKS
+void syscall(struct trapframe *);
+#else
+static
+#endif
+void
 syscall(struct trapframe *frame)
 {
 	const struct sysent *callp;
@@ -182,6 +182,13 @@ syscall(struct trapframe *frame)
 
 	SYSCALL_TIME_SYS_EXIT(l);
 	userret(l);
+}
+
+void
+syscall_intern(struct proc *p)
+{
+
+	p->p_md.md_syscall = syscall;
 }
 
 #ifdef VM86

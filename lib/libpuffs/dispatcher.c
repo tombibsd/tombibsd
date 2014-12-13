@@ -412,6 +412,14 @@ dispatch(struct puffs_cc *pcc)
 			struct puffs_vnmsg_open *auxt = auxbuf;
 			PUFFS_MAKECRED(pcr, &auxt->pvnr_cred);
 
+			if (pops->puffs_node_open2 != NULL) {
+				error = pops->puffs_node_open2(pu,
+				    opcookie, auxt->pvnr_mode, pcr, 
+				    &auxt->pvnr_oflags);
+
+				break;
+			}
+
 			if (pops->puffs_node_open == NULL) {
 				error = 0;
 				break;
@@ -1129,6 +1137,34 @@ dispatch(struct puffs_cc *pcc)
 			error = pops->puffs_node_deleteextattr(pu,
 			    opcookie, auxt->pvnr_attrnamespace,
 			    auxt->pvnr_attrname, pcr);
+			break;
+		}
+
+		case PUFFS_VN_FALLOCATE:
+		{
+			struct puffs_vnmsg_fallocate *auxt = auxbuf;
+
+			if (pops->puffs_node_fallocate == NULL) {
+				error = EOPNOTSUPP;
+				break;
+			}
+
+			error = pops->puffs_node_fallocate(pu,
+			    opcookie, auxt->pvnr_off, auxt->pvnr_len);
+			break;
+		}
+
+		case PUFFS_VN_FDISCARD:
+		{
+			struct puffs_vnmsg_fdiscard *auxt = auxbuf;
+
+			if (pops->puffs_node_fdiscard == NULL) {
+				error = EOPNOTSUPP;
+				break;
+			}
+
+			error = pops->puffs_node_fdiscard(pu,
+			    opcookie, auxt->pvnr_off, auxt->pvnr_len);
 			break;
 		}
 

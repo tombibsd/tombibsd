@@ -156,13 +156,9 @@ xhci_pci_attach(device_t parent, device_t self, void *aux)
 
 #if 0
 	/* Figure out vendor for root hub descriptor. */
-	vendor = pci_findvendor(pa->pa_id);
 	sc->sc_id_vendor = PCI_VENDOR(pa->pa_id);
-	if (vendor)
-		strlcpy(sc->sc_vendor, vendor, sizeof(sc->sc_vendor));
-	else
-		snprintf(sc->sc_vendor, sizeof(sc->sc_vendor),
-		    "vendor 0x%04x", PCI_VENDOR(pa->pa_id));
+	pci_findvendor(sc->sc_vendor, sizeof(sc->sc_vendor),
+	    sc->sc_id_vendor);
 #endif
 
 	err = xhci_init(sc);

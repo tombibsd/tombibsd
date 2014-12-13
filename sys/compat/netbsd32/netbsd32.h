@@ -167,6 +167,7 @@ typedef netbsd32_intptr_t netbsd32_semid_t;
 typedef netbsd32_pointer_t netbsd32_semidp_t;
 typedef netbsd32_uint64 netbsd32_dev_t;
 typedef netbsd32_int64 netbsd32_off_t;
+typedef netbsd32_uint64 netbsd32_ino_t;
 
 /* from <sys/uio.h> */
 typedef netbsd32_pointer_t netbsd32_iovecp_t;
@@ -300,7 +301,7 @@ struct netbsd32_quotactlargs {
 		} put;
 		struct {
 			netbsd32_pointer_t qc_key;
-		} delete;
+		} del;
 		struct {
 			netbsd32_pointer_t qc_cursor;
 		} cursoropen;
@@ -908,6 +909,20 @@ struct netbsd32_kevent {
 /* from <sys/sched.h> */
 typedef netbsd32_pointer_t netbsd32_sched_paramp_t;
 typedef netbsd32_pointer_t netbsd32_cpusetp_t;
+
+/* from <fs/tmpfs/tmpfs_args.h> */
+struct netbsd32_tmpfs_args {
+        int                     ta_version;
+
+        /* Size counters. */
+        netbsd32_ino_t          ta_nodes_max;
+        netbsd32_off_t          ta_size_max;
+
+        /* Root node attributes. */
+        uid_t                   ta_root_uid;
+        gid_t                   ta_root_gid;
+        mode_t                  ta_root_mode;
+};
 
 /* from <fs/cd9660/cd9660_mount.h> */
 struct netbsd32_iso_args {

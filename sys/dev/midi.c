@@ -119,6 +119,7 @@ const struct cdevsw midi_cdevsw = {
 	.d_poll = midipoll,
 	.d_mmap = nommap,
 	.d_kqfilter = midikqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_OTHER | D_MPSAFE
 };
 

@@ -150,7 +150,7 @@ failed:
 }
 
 /*
- * Start another L2CAP packet on its way. This is called from l2cap_send
+ * Start another L2CAP packet on its way. This is called from l2cap_send_pcb
  * (when no PDU is pending) and hci_acl_start (when PDU has been placed on
  * device queue). Thus we can have more than one PDU waiting at the device
  * if space is available but no single channel will hog the link.

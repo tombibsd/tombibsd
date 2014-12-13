@@ -41,18 +41,12 @@
 RCSID("$NetBSD$")
 
 | ceil(x)
-| -floor(-x), for all real x
 ENTRY(ceil)
 	fmovel	%fpcr,%d0	| save old FPCR
 	fmoved	%sp@(4),%fp0	| get argument
 	fbun	Lret		| if NaN, return NaN
-	fbolt	Lrtz		| <0, round to zero
-	fmovel	#0x30,%fpcr	| >=0, round to inf
-	jra	Ldoit
-Lrtz:
-	fmovel	#0x10,%fpcr
-Ldoit:
-	fintd	%sp@(4),%fp0	| truncate
+	fmovel	#0x30,%fpcr	| round to +inf
+	fintx	%fp0		| truncate
 	fmovel	%d0,%fpcr	| restore old FPCR
 Lret:
 #ifndef __SVR4_ABI__

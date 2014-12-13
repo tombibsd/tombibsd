@@ -33,7 +33,9 @@
 RCSID("$NetBSD$")
 
 	.text
+#ifndef __clang__
 	.machine	e500x2
+#endif
 /*
  * Lintstub: void vec_load_from_vreg(const struct vreg *);
  */

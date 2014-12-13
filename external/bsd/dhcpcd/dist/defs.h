@@ -30,7 +30,7 @@
 #define CONFIG_H
 
 #define PACKAGE			"dhcpcd"
-#define VERSION			"6.3.2"
+#define VERSION			"6.6.5"
 
 #ifndef CONFIG
 # define CONFIG			SYSCONFDIR "/" PACKAGE ".conf"
@@ -44,17 +44,23 @@
 #ifndef DUID
 # define DUID			SYSCONFDIR "/" PACKAGE ".duid"
 #endif
+#ifndef SECRET
+# define SECRET			SYSCONFDIR "/" PACKAGE ".secret"
+#endif
 #ifndef LEASEFILE
 # define LEASEFILE		DBDIR "/" PACKAGE "-%s.lease"
 #endif
 #ifndef LEASEFILE6
-# define LEASEFILE6		DBDIR "/" PACKAGE "-%s.lease6"
+# define LEASEFILE6		DBDIR "/" PACKAGE "-%s%s.lease6"
 #endif
 #ifndef PIDFILE
-# define PIDFILE		RUNDIR "/" PACKAGE "%s%s.pid"
+# define PIDFILE		RUNDIR "/" PACKAGE "%s%s%s.pid"
 #endif
 #ifndef CONTROLSOCKET
 # define CONTROLSOCKET		RUNDIR "/" PACKAGE "%s%s.sock"
+#endif
+#ifndef UNPRIVSOCKET
+# define UNPRIVSOCKET		RUNDIR "/" PACKAGE ".unpriv.sock"
 #endif
 #ifndef RDM_MONOFILE
 # define RDM_MONOFILE		DBDIR "/" PACKAGE "-rdm.monotonic"

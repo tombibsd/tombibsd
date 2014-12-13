@@ -1,0 +1,16 @@
+/invalid-mips1-wrong-error.s/1.1.1.2/Fri Oct  3 09:23:18 2014/-kk/
+/invalid-mips1.s/1.1.1.2/Fri Oct  3 09:23:18 2014/-kk/
+/invalid-mips2.s/1.1.1.2/Fri Oct  3 09:23:18 2014/-kk/
+/invalid-mips3-wrong-error.s/1.1.1.1/Fri May 30 18:11:25 2014/-kk/
+/invalid-mips3.s/1.1.1.2/Fri Oct  3 09:23:18 2014/-kk/
+/invalid-mips32-wrong-error.s/1.1.1.1/Sun Aug 10 17:04:39 2014/-kk/
+/invalid-mips4-wrong-error.s/1.1.1.1/Sun Aug 10 17:04:39 2014/-kk/
+/invalid-mips4.s/1.1.1.1/Sun Aug 10 17:04:39 2014/-kk/
+/invalid-mips5-wrong-error.s/1.1.1.2/Fri Oct  3 09:23:18 2014/-kk/
+/invalid-mips5.s/1.1.1.1/Sun Aug 10 17:04:39 2014/-kk/
+/invalid-mips64.s/1.1.1.1/Sun Aug 10 17:04:39 2014/-kk/
+/invalid.s/1.1.1.1/Sun Aug 10 17:04:39 2014/-kk/
+/relocations.s/1.1.1.2/Fri Oct  3 09:23:18 2014/-kk/
+/valid-xfail.s/1.1.1.1/Fri May 30 18:11:25 2014/-kk/
+/valid.s/1.1.1.2/Fri Oct  3 09:23:18 2014/-kk/
+D

@@ -227,7 +227,7 @@ compat_30_sys_getdents(struct lwp *l, const struct compat_30_sys_getdents_args *
 		goto out1;
 	}
 
-	vp = fp->f_data;
+	vp = fp->f_vnode;
 	if (vp->v_type != VDIR) {
 		error = EINVAL;
 		goto out1;
@@ -356,9 +356,11 @@ compat_30_sys_getfh(struct lwp *l, const struct compat_30_sys_getfh_args *uap, r
 	}
 	NDINIT(&nd, LOOKUP, FOLLOW | LOCKLEAF | TRYEMULROOT, pb);
 	error = namei(&nd);
+	pathbuf_destroy(pb);
 	if (error)
-		return (error);
+		return error;
 	vp = nd.ni_vp;
+
 	sz = sizeof(struct compat_30_fhandle);
 	error = vfs_composefh(vp, (void *)&fh, &sz);
 	vput(vp);

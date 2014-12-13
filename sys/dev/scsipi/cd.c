@@ -210,6 +210,7 @@ const struct bdevsw cd_bdevsw = {
 	.d_ioctl = cdioctl,
 	.d_dump = cddump,
 	.d_psize = cdsize,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK
 };
 
@@ -224,6 +225,7 @@ const struct cdevsw cd_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = nommap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK
 };
 
@@ -301,7 +303,7 @@ cdattach(device_t parent, device_t self, void *aux)
 	aprint_naive("\n");
 
 	rnd_attach_source(&cd->rnd_source, device_xname(cd->sc_dev),
-			  RND_TYPE_DISK, 0);
+			  RND_TYPE_DISK, RND_FLAG_DEFAULT);
 
 	if (!pmf_device_register(self, NULL, NULL))
 		aprint_error_dev(self, "couldn't establish power handler\n");
@@ -312,6 +314,9 @@ cddetach(device_t self, int flags)
 {
 	struct cd_softc *cd = device_private(self);
 	int s, bmaj, cmaj, i, mn;
+
+	if (cd->sc_dk.dk_openmask != 0 && (flags & DETACH_FORCE) == 0)
+		return EBUSY;
 
 	/* locate the major number */
 	bmaj = bdevsw_lookup_major(&cd_bdevsw);
@@ -1804,7 +1809,7 @@ cdgetdisklabel(struct cd_softc *cd)
  * we count.
  */
 static int
-read_cd_capacity(struct scsipi_periph *periph, u_int *blksize, u_long *last_lba)
+read_cd_capacity(struct scsipi_periph *periph, uint32_t *blksize, u_long *last_lba)
 {
 	struct scsipi_read_cd_capacity    cap_cmd;
 	/*
@@ -1896,12 +1901,12 @@ read_cd_capacity(struct scsipi_periph *periph, u_int *blksize, u_long *last_lba)
 }
 
 /*
- * Find out from the device what it's capacity is
+ * Find out from the device what its capacity is
  */
 static u_long
 cd_size(struct cd_softc *cd, int flags)
 {
-	u_int blksize = 2048;
+	uint32_t blksize = 2048;
 	u_long last_lba = 0, size;
 	int error;
 

@@ -68,3 +68,4 @@ ENTRY(swapcontext)
 	PIC_EPILOGUE
 	/* No need to error-check: setcontext() must have failed. */
 2:	ret	
+END(swapcontext)

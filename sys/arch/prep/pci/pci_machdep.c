@@ -183,7 +183,7 @@ prep_pci_intr_map(const struct pci_attach_args *pa, pci_intr_handle_t *ihp)
 		    "prep-pcibus-rawdevnum");
 		dev = prop_number_integer_value(pbus);
 
-		/* now that we know the parent bus, we need to find it's pbi */
+		/* now that we know the parent bus, we need to find its pbi */
 		pbi = SIMPLEQ_FIRST(&genppc_pct->pc_pbi);
 		while (busno--)
 			pbi = SIMPLEQ_NEXT(pbi, next);

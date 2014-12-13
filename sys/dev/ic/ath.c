@@ -2940,7 +2940,7 @@ ath_recv_mgmt(struct ieee80211com *ic, struct mbuf *m,
 			/*
 			 * Handle ibss merge as needed; check the tsf on the
 			 * frame before attempting the merge.  The 802.11 spec
-			 * says the station should change it's bssid to match
+			 * says the station should change its bssid to match
 			 * the oldest station with the same ssid, where oldest
 			 * is determined by the tsf.  Note that hardware
 			 * reconfiguration happens through callback to
@@ -3449,7 +3449,7 @@ ath_tx_cleanup(struct ath_softc *sc)
 /*
  * Defragment an mbuf chain, returning at most maxfrags separate
  * mbufs+clusters.  If this is not possible NULL is returned and
- * the original mbuf chain is left in it's present (potentially
+ * the original mbuf chain is left in its present (potentially
  * modified) state.  We use two techniques: collapsing consecutive
  * mbufs and replacing consecutive mbufs by a cluster.
  */

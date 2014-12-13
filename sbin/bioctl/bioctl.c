@@ -292,7 +292,7 @@ bio_show_volumes(struct biotmp *bt)
 	}
 
 	snprintf(bt->volname, sizeof(bt->volname), "%u", bv.bv_volid);
-	if (bv.bv_vendor)
+	if (bv.bv_vendor[0])
 		snprintf(tmp, sizeof(tmp), "%s %s", bv.bv_dev, bv.bv_vendor);
 	else
 		snprintf(tmp, sizeof(tmp), "%s", bv.bv_dev);

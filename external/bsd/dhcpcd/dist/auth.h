@@ -30,7 +30,7 @@
 #ifndef AUTH_H
 #define AUTH_H
 
-#include <sys/queue.h>
+#include "config.h"
 
 #define DHCPCD_AUTH_SEND	(1 << 0)
 #define DHCPCD_AUTH_REQUIRE	(1 << 1)
@@ -50,9 +50,9 @@
 struct token {
 	TAILQ_ENTRY(token) next;
 	uint32_t secretid;
-	unsigned int realm_len;
+	size_t realm_len;
 	unsigned char *realm;
-	unsigned int key_len;
+	size_t key_len;
 	unsigned char *key;
 	time_t expire;
 };
@@ -79,10 +79,10 @@ void dhcp_auth_reset(struct authstate *);
 
 const struct token * dhcp_auth_validate(struct authstate *,
     const struct auth *,
-    const uint8_t *, unsigned int, int, int,
-    const uint8_t *, unsigned int);
+    const uint8_t *, size_t, int, int,
+    const uint8_t *, size_t);
 
-int dhcp_auth_encode(struct auth *, const struct token *,
-    uint8_t *, unsigned int, int, int,
-    uint8_t *, unsigned int);
+ssize_t dhcp_auth_encode(struct auth *, const struct token *,
+    uint8_t *, size_t, int, int,
+    uint8_t *, size_t);
 #endif

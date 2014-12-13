@@ -91,12 +91,18 @@ ddc_attach(device_t parent, device_t self, void *aux)
 int
 ddc_read_edid(i2c_tag_t tag, uint8_t *dest, size_t len)
 {
+	return ddc_read_edid_block(tag, dest, len, DDC_EDID_START);
+}
+
+int
+ddc_read_edid_block(i2c_tag_t tag, uint8_t *dest, size_t len, uint8_t block)
+{
 	uint8_t		wbuf[2];
 
 	if (iic_acquire_bus(tag, I2C_F_POLL) != 0)
 		return -1;
 
-	wbuf[0] = DDC_EDID_START;	/* start address */
+	wbuf[0] = block;	/* start address */
 
 	if (iic_exec(tag, I2C_OP_READ_WITH_STOP, DDC_ADDR, wbuf, 1, dest,
 		len, I2C_F_POLL)) {

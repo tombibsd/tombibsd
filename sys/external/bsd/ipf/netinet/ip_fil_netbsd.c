@@ -140,6 +140,7 @@ const struct cdevsw ipl_cdevsw = {
 #if  (__NetBSD_Version__ >= 200000000)
 	.d_kqfilter = nokqfilter,
 #endif
+	.d_discard = nodiscard,
 #ifdef D_OTHER
 	.d_flag = D_OTHER
 #else
@@ -1209,7 +1210,9 @@ ipf_fastroute(mb_t *m0, mb_t **mpp, fr_info_t *fin, frdest_t *fdp)
 			ip->ip_sum = in_cksum(m, hlen);
 # endif /* M_CSUM_IPv4 */
 
+		KERNEL_LOCK(1, NULL);
 		error = (*ifp->if_output)(ifp, m, dst, rt);
+		KERNEL_UNLOCK_ONE(NULL);
 		goto done;
 	}
 
@@ -1296,7 +1299,9 @@ sendorfree:
 		m0 = m->m_act;
 		m->m_act = 0;
 		if (error == 0) {
+			KERNEL_LOCK(1, NULL);
 			error = (*ifp->if_output)(ifp, m, dst, rt);
+			KERNEL_UNLOCK_ONE(NULL);
 		} else {
 			FREE_MB_T(m);
 		}
@@ -1923,22 +1928,15 @@ ipf_inject(fr_info_t *fin, mb_t *m)
 	int error;
 
 	if (fin->fin_out == 0) {
-		struct ifqueue *ifq;
-
-		ifq = &ipintrq;
-
-		if (IF_QFULL(ifq)) {
-			IF_DROP(ifq);
+		if (__predict_false(!pktq_enqueue(ip_pktq, m, 0))) {
 			FREE_MB_T(m);
 			error = ENOBUFS;
 		} else {
-			IF_ENQUEUE(ifq, m);
 			error = 0;
 		}
 	} else {
 		error = ip_output(m, NULL, NULL, IP_FORWARDING, NULL);
 	}
-
 	return error;
 }
 

@@ -33,6 +33,10 @@
 #include <sys/cdefs.h>
 __KERNEL_RCSID(0, "$NetBSD$");
 
+#ifdef _KERNEL_OPT
+#include "opt_usb.h"
+#endif
+
 #include <sys/param.h>
 #include <sys/systm.h>
 #include <sys/kernel.h>
@@ -43,10 +47,10 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <dev/usb/usb.h>
 #include <dev/usb/usbhid.h>
-
 #include <dev/usb/usbdi.h>
 #include <dev/usb/usbdivar.h>
 #include <dev/usb/usbdi_util.h>
+#include <dev/usb/usbhist.h>
 
 #ifdef USB_DEBUG
 #define DPRINTF(x)	if (usbdebug) printf x
@@ -402,8 +406,9 @@ usbd_bulk_transfer(usbd_xfer_handle xfer, usbd_pipe_handle pipe,
 {
 	usbd_status err;
 
-	usbd_setup_xfer(xfer, pipe, 0, buf, *size, flags, timeout, NULL);
+	USBHIST_FUNC(); USBHIST_CALLED(usbdebug);
 
+	usbd_setup_xfer(xfer, pipe, 0, buf, *size, flags, timeout, NULL);
 	DPRINTFN(1, ("usbd_bulk_transfer: start transfer %d bytes\n", *size));
 	err = usbd_sync_transfer_sig(xfer);
 
@@ -413,6 +418,7 @@ usbd_bulk_transfer(usbd_xfer_handle xfer, usbd_pipe_handle pipe,
 		DPRINTF(("usbd_bulk_transfer: error=%d\n", err));
 		usbd_clear_endpoint_stall(pipe);
 	}
+	USBHIST_LOG(usbdebug, "<- done err %d", xfer, err, 0, 0);
 
 	return (err);
 }
@@ -423,6 +429,8 @@ usbd_intr_transfer(usbd_xfer_handle xfer, usbd_pipe_handle pipe,
 		   u_int32_t *size, const char *lbl)
 {
 	usbd_status err;
+
+	USBHIST_FUNC(); USBHIST_CALLED(usbdebug);
 
 	usbd_setup_xfer(xfer, pipe, 0, buf, *size, flags, timeout, NULL);
 
@@ -436,6 +444,8 @@ usbd_intr_transfer(usbd_xfer_handle xfer, usbd_pipe_handle pipe,
 		DPRINTF(("usbd_intr_transfer: error=%d\n", err));
 		usbd_clear_endpoint_stall(pipe);
 	}
+	USBHIST_LOG(usbdebug, "<- done err %d", xfer, err, 0, 0);
+
 	return (err);
 }
 

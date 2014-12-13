@@ -1299,7 +1299,7 @@ r_init(void)
 	 * Initialize Hitachi PUMA Plus - Model 1212E to desired settings.
 	 * The tablet must be configured to be in MM mode, NO parity,
 	 * Binary Format.  xf86Info.sampleRate controls the sensativity
-	 * of the tablet.  We only use this tablet for it's 4-button puck
+	 * of the tablet.  We only use this tablet for its 4-button puck
 	 * so we don't run in "Absolute Mode"
 	 */
 	write(rodent.mfd, "z8", 2);	/* Set Parity = "NONE" */

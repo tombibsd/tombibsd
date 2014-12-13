@@ -1354,9 +1354,13 @@ static int cfa_offset;
 #define STACK_POINTER_OFFSET	0
 #endif
 
+#if defined (REG_PARM_STACK_SPACE) && !defined (INCOMING_REG_PARM_STACK_SPACE)
+#define INCOMING_REG_PARM_STACK_SPACE REG_PARM_STACK_SPACE
+#endif
+
 /* If not defined, pick an appropriate default for the offset of dynamically
    allocated memory depending on the value of ACCUMULATE_OUTGOING_ARGS,
-   REG_PARM_STACK_SPACE, and OUTGOING_REG_PARM_STACK_SPACE.  */
+   INCOMING_REG_PARM_STACK_SPACE, and OUTGOING_REG_PARM_STACK_SPACE.  */
 
 #ifndef STACK_DYNAMIC_OFFSET
 
@@ -1368,12 +1372,12 @@ static int cfa_offset;
    `crtl->outgoing_args_size'.  Nevertheless, we must allow
    for it when allocating stack dynamic objects.  */
 
-#if defined(REG_PARM_STACK_SPACE)
+#ifdef INCOMING_REG_PARM_STACK_SPACE
 #define STACK_DYNAMIC_OFFSET(FNDECL)	\
 ((ACCUMULATE_OUTGOING_ARGS						      \
   ? (crtl->outgoing_args_size				      \
      + (OUTGOING_REG_PARM_STACK_SPACE ((!(FNDECL) ? NULL_TREE : TREE_TYPE (FNDECL))) ? 0 \
-					       : REG_PARM_STACK_SPACE (FNDECL))) \
+					       : INCOMING_REG_PARM_STACK_SPACE (FNDECL))) \
   : 0) + (STACK_POINTER_OFFSET))
 #else
 #define STACK_DYNAMIC_OFFSET(FNDECL)	\
@@ -2211,8 +2215,9 @@ assign_parms_initialize_all (struct assign_parm_data_all *all)
 #endif
   all->args_so_far = pack_cumulative_args (&all->args_so_far_v);
 
-#ifdef REG_PARM_STACK_SPACE
-  all->reg_parm_stack_space = REG_PARM_STACK_SPACE (current_function_decl);
+#ifdef INCOMING_REG_PARM_STACK_SPACE
+  all->reg_parm_stack_space
+    = INCOMING_REG_PARM_STACK_SPACE (current_function_decl);
 #endif
 }
 
@@ -2507,6 +2512,7 @@ assign_parm_find_entry_rtl (struct assign_parm_data_all *all,
     }
 
   locate_and_pad_parm (data->promoted_mode, data->passed_type, in_regs,
+		       all->reg_parm_stack_space,
 		       entry_parm ? data->partial : 0, current_function_decl,
 		       &all->stack_args_size, &data->locate);
 
@@ -3485,11 +3491,7 @@ assign_parms (tree fndecl)
   /* Adjust function incoming argument size for alignment and
      minimum length.  */
 
-#ifdef REG_PARM_STACK_SPACE
-  crtl->args.size = MAX (crtl->args.size,
-				    REG_PARM_STACK_SPACE (fndecl));
-#endif
-
+  crtl->args.size = MAX (crtl->args.size, all.reg_parm_stack_space);
   crtl->args.size = CEIL_ROUND (crtl->args.size,
 					   PARM_BOUNDARY / BITS_PER_UNIT);
 
@@ -3693,6 +3695,9 @@ gimplify_parameters (void)
    IN_REGS is nonzero if the argument will be passed in registers.  It will
    never be set if REG_PARM_STACK_SPACE is not defined.
 
+   REG_PARM_STACK_SPACE is the number of bytes of stack space reserved
+   for arguments which are passed in registers.
+
    FNDECL is the function in which the argument was defined.
 
    There are two types of rounding that are done.  The first, controlled by
@@ -3713,18 +3718,15 @@ gimplify_parameters (void)
 
 void
 locate_and_pad_parm (enum machine_mode passed_mode, tree type, int in_regs,
-		     int partial, tree fndecl ATTRIBUTE_UNUSED,
+		     int reg_parm_stack_space, int partial,
+		     tree fndecl ATTRIBUTE_UNUSED,
 		     struct args_size *initial_offset_ptr,
 		     struct locate_and_pad_arg_data *locate)
 {
   tree sizetree;
   enum direction where_pad;
   unsigned int boundary, round_boundary;
-  int reg_parm_stack_space = 0;
   int part_size_in_regs;
-
-#ifdef REG_PARM_STACK_SPACE
-  reg_parm_stack_space = REG_PARM_STACK_SPACE (fndecl);
 
   /* If we have found a stack parm before we reach the end of the
      area reserved for registers, skip that area.  */
@@ -3743,7 +3745,6 @@ locate_and_pad_parm (enum machine_mode passed_mode, tree type, int in_regs,
 	    initial_offset_ptr->constant = reg_parm_stack_space;
 	}
     }
-#endif /* REG_PARM_STACK_SPACE */
 
   part_size_in_regs = (reg_parm_stack_space == 0 ? partial : 0);
 
@@ -3806,11 +3807,7 @@ locate_and_pad_parm (enum machine_mode passed_mode, tree type, int in_regs,
 
   locate->slot_offset.constant += part_size_in_regs;
 
-  if (!in_regs
-#ifdef REG_PARM_STACK_SPACE
-      || REG_PARM_STACK_SPACE (fndecl) > 0
-#endif
-     )
+  if (!in_regs || reg_parm_stack_space > 0)
     pad_to_arg_alignment (&locate->slot_offset, boundary,
 			  &locate->alignment_pad);
 
@@ -3830,11 +3827,7 @@ locate_and_pad_parm (enum machine_mode passed_mode, tree type, int in_regs,
     pad_below (&locate->offset, passed_mode, sizetree);
 
 #else /* !ARGS_GROW_DOWNWARD */
-  if (!in_regs
-#ifdef REG_PARM_STACK_SPACE
-      || REG_PARM_STACK_SPACE (fndecl) > 0
-#endif
-      )
+  if (!in_regs || reg_parm_stack_space > 0)
     pad_to_arg_alignment (initial_offset_ptr, boundary,
 			  &locate->alignment_pad);
   locate->slot_offset = *initial_offset_ptr;
@@ -4530,6 +4523,7 @@ allocate_struct_function (tree fndecl, bool abstract_p)
       /* ??? This could be set on a per-function basis by the front-end
          but is this worth the hassle?  */
       cfun->can_throw_non_call_exceptions = flag_non_call_exceptions;
+      cfun->can_delete_dead_exceptions = flag_delete_dead_exceptions;
     }
 }
 
@@ -5093,6 +5087,7 @@ expand_function_end (void)
 	     amount.  BLKmode results are handled using the group load/store
 	     machinery.  */
 	  if (TYPE_MODE (TREE_TYPE (decl_result)) != BLKmode
+	      && REG_P (real_decl_rtl)
 	      && targetm.calls.return_in_msb (TREE_TYPE (decl_result)))
 	    {
 	      emit_move_insn (gen_rtx_REG (GET_MODE (decl_rtl),
@@ -5509,22 +5504,45 @@ move_insn_for_shrink_wrap (basic_block bb, rtx insn,
 	 except for any part that overlaps SRC (next loop).  */
       bb_uses = &DF_LR_BB_INFO (bb)->use;
       bb_defs = &DF_LR_BB_INFO (bb)->def;
-      for (i = dregno; i < end_dregno; i++)
+      if (df_live)
 	{
-	  if (REGNO_REG_SET_P (bb_uses, i) || REGNO_REG_SET_P (bb_defs, i))
-	    next_block = NULL;
-	  CLEAR_REGNO_REG_SET (live_out, i);
-	  CLEAR_REGNO_REG_SET (live_in, i);
-	}
+	  for (i = dregno; i < end_dregno; i++)
+	    {
+	      if (REGNO_REG_SET_P (bb_uses, i) || REGNO_REG_SET_P (bb_defs, i)
+		  || REGNO_REG_SET_P (&DF_LIVE_BB_INFO (bb)->gen, i))
+		next_block = NULL;
+	      CLEAR_REGNO_REG_SET (live_out, i);
+	      CLEAR_REGNO_REG_SET (live_in, i);
+	    }
 
-      /* Check whether BB clobbers SRC.  We need to add INSN to BB if so.
-	 Either way, SRC is now live on entry.  */
-      for (i = sregno; i < end_sregno; i++)
+	  /* Check whether BB clobbers SRC.  We need to add INSN to BB if so.
+	     Either way, SRC is now live on entry.  */
+	  for (i = sregno; i < end_sregno; i++)
+	    {
+	      if (REGNO_REG_SET_P (bb_defs, i)
+		  || REGNO_REG_SET_P (&DF_LIVE_BB_INFO (bb)->gen, i))
+		next_block = NULL;
+	      SET_REGNO_REG_SET (live_out, i);
+	      SET_REGNO_REG_SET (live_in, i);
+	    }
+	}
+      else
 	{
-	  if (REGNO_REG_SET_P (bb_defs, i))
-	    next_block = NULL;
-	  SET_REGNO_REG_SET (live_out, i);
-	  SET_REGNO_REG_SET (live_in, i);
+	  /* DF_LR_BB_INFO (bb)->def does not comprise the DF_REF_PARTIAL and
+	     DF_REF_CONDITIONAL defs.  So if DF_LIVE doesn't exist, i.e.
+	     at -O1, just give up searching NEXT_BLOCK.  */
+	  next_block = NULL;
+	  for (i = dregno; i < end_dregno; i++)
+	    {
+	      CLEAR_REGNO_REG_SET (live_out, i);
+	      CLEAR_REGNO_REG_SET (live_in, i);
+	    }
+
+	  for (i = sregno; i < end_sregno; i++)
+	    {
+	      SET_REGNO_REG_SET (live_out, i);
+	      SET_REGNO_REG_SET (live_in, i);
+	    }
 	}
 
       /* If we don't need to add the move to BB, look for a single

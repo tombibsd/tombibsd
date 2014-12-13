@@ -62,7 +62,8 @@
 ./usr/include/mips/rwlock.h			comp-c-include
 ./usr/include/mips/setjmp.h			comp-c-include
 ./usr/include/mips/signal.h			comp-c-include
-./usr/include/mips/sljitarch.h			comp-c-include
+./usr/include/mips/sljit_machdep.h		comp-c-include
+./usr/include/mips/sljitarch.h			comp-obsolete		obsolete
 ./usr/include/mips/stdarg.h			comp-obsolete		obsolete
 ./usr/include/mips/sysarch.h			comp-c-include
 ./usr/include/mips/trap.h			comp-c-include
@@ -175,6 +176,10 @@
 ./usr/lib/64/libarchive.so			base-sys-shlib		compat,pic
 ./usr/lib/64/libarchive_p.a			comp-c-proflib		compat,profile
 ./usr/lib/64/libarchive_pic.a			comp-c-piclib		compat,pic,picinstall
+./usr/lib/64/libasan.a				comp-c-lib		compat,gcc=48
+./usr/lib/64/libasan.so				base-sys-shlib		compat,pic,gcc=48
+./usr/lib/64/libasan_p.a			comp-c-proflib		compat,profile,gcc=48
+./usr/lib/64/libasan_pic.a			comp-c-piclib		compat,pic,picinstall,gcc=48
 ./usr/lib/64/libasn1.a				comp-c-lib		compat,kerberos
 ./usr/lib/64/libasn1.so				base-sys-shlib		compat,pic,kerberos
 ./usr/lib/64/libasn1_p.a			comp-c-proflib		compat,profile,kerberos
@@ -330,12 +335,12 @@
 ./usr/lib/64/libgnumalloc_p.a			comp-c-proflib		compat,profile
 ./usr/lib/64/libgnumalloc_pic.a			comp-c-piclib		compat,pic,picinstall
 ./usr/lib/64/libgomp.a				comp-c-lib		compat,gcc=45,notyet
-./usr/lib/64/libgomp.so				base-sys-shlib		compat,pic,gcc=45,notyet
-./usr/lib/64/libgomp_p.a			comp-c-proflib		compat,profile,gcc=45,notyet
-./usr/lib/64/libgomp_pic.a			comp-c-piclib		compat,pic,gcc=45,notyet,picinstall
 ./usr/lib/64/libgomp.a				comp-c-lib		compat,gcc=48,notyet
+./usr/lib/64/libgomp.so				base-sys-shlib		compat,pic,gcc=45,notyet
 ./usr/lib/64/libgomp.so				base-sys-shlib		compat,pic,gcc=48,notyet
+./usr/lib/64/libgomp_p.a			comp-c-proflib		compat,profile,gcc=45,notyet
 ./usr/lib/64/libgomp_p.a			comp-c-proflib		compat,profile,gcc=48,notyet
+./usr/lib/64/libgomp_pic.a			comp-c-piclib		compat,pic,gcc=45,notyet,picinstall
 ./usr/lib/64/libgomp_pic.a			comp-c-piclib		compat,pic,gcc=48,notyet,picinstall
 ./usr/lib/64/libgssapi.a			comp-c-lib		compat,kerberos
 ./usr/lib/64/libgssapi.so			base-sys-shlib		compat,pic,kerberos
@@ -368,6 +373,10 @@
 ./usr/lib/64/libipsec.so			base-sys-shlib		compat,pic
 ./usr/lib/64/libipsec_p.a			comp-c-proflib		compat,profile
 ./usr/lib/64/libipsec_pic.a			comp-c-piclib		compat,pic,picinstall
+./usr/lib/64/libirs.a				comp-c-lib		compat
+./usr/lib/64/libirs.so				base-sys-shlib		compat,pic
+./usr/lib/64/libirs_p.a				comp-c-proflib		compat,profile
+./usr/lib/64/libirs_pic.a			comp-c-piclib		compat,pic,picinstall
 ./usr/lib/64/libisc.a				comp-c-lib		compat
 ./usr/lib/64/libisc.so				base-sys-shlib		compat,pic
 ./usr/lib/64/libisc_p.a				comp-c-proflib		compat,profile
@@ -790,6 +799,10 @@
 ./usr/lib/o32/libarchive.so			base-sys-shlib		compat,pic
 ./usr/lib/o32/libarchive_p.a			comp-c-proflib		compat,profile
 ./usr/lib/o32/libarchive_pic.a			comp-c-piclib		compat,pic,picinstall
+./usr/lib/o32/libasan.a				comp-c-lib		compat,gcc=48
+./usr/lib/o32/libasan.so			base-sys-shlib		compat,pic,gcc=48
+./usr/lib/o32/libasan_p.a			comp-c-proflib		compat,profile,gcc=48
+./usr/lib/o32/libasan_pic.a			comp-c-piclib		compat,pic,picinstall,gcc=48
 ./usr/lib/o32/libasn1.a				comp-c-lib		compat,kerberos
 ./usr/lib/o32/libasn1.so			base-sys-shlib		compat,pic,kerberos
 ./usr/lib/o32/libasn1_p.a			comp-c-proflib		compat,profile,kerberos
@@ -939,12 +952,12 @@
 ./usr/lib/o32/libgnumalloc_p.a			comp-c-proflib		compat,profile
 ./usr/lib/o32/libgnumalloc_pic.a		comp-c-piclib		compat,pic,picinstall
 ./usr/lib/o32/libgomp.a				comp-c-lib		compat,gcc=45
-./usr/lib/o32/libgomp.so			base-sys-shlib		compat,pic,gcc=45
-./usr/lib/o32/libgomp_p.a			comp-c-proflib		compat,profile,gcc=45
-./usr/lib/o32/libgomp_pic.a			comp-c-piclib		compat,pic,gcc=45,picinstall
 ./usr/lib/o32/libgomp.a				comp-c-lib		compat,gcc=48
+./usr/lib/o32/libgomp.so			base-sys-shlib		compat,pic,gcc=45
 ./usr/lib/o32/libgomp.so			base-sys-shlib		compat,pic,gcc=48
+./usr/lib/o32/libgomp_p.a			comp-c-proflib		compat,profile,gcc=45
 ./usr/lib/o32/libgomp_p.a			comp-c-proflib		compat,profile,gcc=48
+./usr/lib/o32/libgomp_pic.a			comp-c-piclib		compat,pic,gcc=45,picinstall
 ./usr/lib/o32/libgomp_pic.a			comp-c-piclib		compat,pic,gcc=48,picinstall
 ./usr/lib/o32/libgssapi.a			comp-c-lib		compat,kerberos
 ./usr/lib/o32/libgssapi.so			base-sys-shlib		compat,pic,kerberos
@@ -977,6 +990,10 @@
 ./usr/lib/o32/libipsec.so			base-sys-shlib		compat,pic
 ./usr/lib/o32/libipsec_p.a			comp-c-proflib		compat,profile
 ./usr/lib/o32/libipsec_pic.a			comp-c-piclib		compat,pic,picinstall
+./usr/lib/o32/libirs.a				comp-c-lib		compat
+./usr/lib/o32/libirs.so				base-sys-shlib		compat,pic
+./usr/lib/o32/libirs_p.a			comp-c-proflib		compat,profile
+./usr/lib/o32/libirs_pic.a			comp-c-piclib		compat,pic,picinstall
 ./usr/lib/o32/libisc.a				comp-c-lib		compat
 ./usr/lib/o32/libisc.so				base-sys-shlib		compat,pic
 ./usr/lib/o32/libisc_p.a			comp-c-proflib		compat,profile

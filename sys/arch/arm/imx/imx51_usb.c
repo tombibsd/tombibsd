@@ -27,6 +27,8 @@
 #include <sys/cdefs.h>
 __KERNEL_RCSID(0, "$NetBSD$");
 
+#include "opt_imx.h"
+
 #include <sys/param.h>
 #include <sys/systm.h>
 #include <sys/conf.h>
@@ -49,6 +51,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include "locators.h"
 
 static int 	imxusbc_search(device_t, cfdata_t, const int *, void *);
+static int	imxusbc_print(void *, const char *);
 
 
 int
@@ -82,8 +85,17 @@ imxusbc_search(device_t parent, cfdata_t cf, const int *ldesc, void *aux)
 	aa.aa_irq = cf->cf_loc[IMXUSBCCF_IRQ];
 
         if (config_match(parent, cf, &aa) > 0)
-                config_attach(parent, cf, &aa, NULL);
+                config_attach(parent, cf, &aa, imxusbc_print);
 
         return 0;
 }
 
+/* ARGSUSED */
+static int
+imxusbc_print(void *aux, const char *name __unused)
+{
+	struct imxusbc_attach_args *aa = aux;
+
+	aprint_normal(" unit %d irq %d", aa->aa_unit, aa->aa_irq);
+	return (UNCONF);
+}

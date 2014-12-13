@@ -383,6 +383,7 @@ extern const struct in6_addr in6addr_linklocal_allrouters;
 #define IPV6_MULTICAST_IF	9  /* u_int; set/get IP6 multicast i/f  */
 #define IPV6_MULTICAST_HOPS	10 /* int; set/get IP6 multicast hops */
 #define IPV6_MULTICAST_LOOP	11 /* u_int; set/get IP6 multicast loopback */
+/* The join and leave membership option numbers need to match with the v4 ones */
 #define IPV6_JOIN_GROUP		12 /* ip6_mreq; join a group membership */
 #define IPV6_LEAVE_GROUP	13 /* ip6_mreq; leave a group membership */
 #define IPV6_PORTRANGE		14 /* int; range to choose for unspec port */
@@ -403,9 +404,7 @@ extern const struct in6_addr in6addr_linklocal_allrouters;
 #define IPV6_CHECKSUM		26 /* int; checksum offset for raw socket */
 #define IPV6_V6ONLY		27 /* bool; make AF_INET6 sockets v6 only */
 
-#if 1 /* IPSEC */
 #define IPV6_IPSEC_POLICY	28 /* struct; get/set security policy */
-#endif
 #define IPV6_FAITH		29 /* bool; accept FAITH'ed connections */
 
 /* new socket options introduced in RFC3542 */
@@ -573,11 +572,13 @@ struct ip6_mtuinfo {
 #define IPV6CTL_ANONPORTMAX	29	/* maximum ephemeral port */
 #define IPV6CTL_LOWPORTMIN	30	/* minimum reserved port */
 #define IPV6CTL_LOWPORTMAX	31	/* maximum reserved port */
-/* 32 to 38: reserved */
+/* 32 to 34: reserved */
+#define IPV6CTL_AUTO_LINKLOCAL	35	/* automatic link-local addr assign */
+/* 36 to 38: reserved */
 #define IPV6CTL_USE_DEFAULTZONE	39	/* use default scope zone */
 /* 40: reserved */
 #define IPV6CTL_MAXFRAGS	41	/* max fragments */
-#define IPV6CTL_IFQ		42	/* ip6intrq node */
+#define IPV6CTL_IFQ		42	/* IPv6 packet input queue */
 #define IPV6CTL_RTADV_MAXROUTES 43	/* maximum number of routes */
 					/* via router advertisement */
 #define IPV6CTL_RTADV_NUMROUTES 44	/* current number of routes */
@@ -816,5 +817,11 @@ extern int inet6_rth_segments(const void *);
 extern struct in6_addr *inet6_rth_getaddr(const void *, int);
 __END_DECLS
 #endif /* _NETBSD_SOURCE */
+
+#if defined(_KERNEL) || defined(_TEST)
+int	in6_print(char *, size_t, const struct in6_addr *);
+#define IN6_PRINT(b, a) (in6_print((b), sizeof(b), (a)), (b))
+int	sin6_print(char *, size_t, const void *);
+#endif
 
 #endif /* !_NETINET6_IN6_H_ */

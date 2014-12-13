@@ -32,13 +32,28 @@
 #ifndef _LINUX_MODULE_H_
 #define _LINUX_MODULE_H_
 
+#include <linux/export.h>
+#include <linux/moduleparam.h>
+
 #define	module_init(INIT)
 #define	module_exit(EXIT)
 
 #define	MODULE_AUTHOR(AUTHOR)
 #define	MODULE_DESCRIPTION(DESCRIPTION)
+#define	MODULE_DEVICE_TABLE(DESCRIPTION, IDLIST)
+#define	MODULE_FIRMWARE(FIRMWARE)
 #define	MODULE_LICENSE(LICENSE)
-#define	MODULE_PARM_DESC(PARAMETER, DESCRIPTION)
+struct linux_module_param_desc {
+	const char *name;
+	const char *description;
+};
+#define	MODULE_PARM_DESC(PARAMETER, DESCRIPTION) \
+static __attribute__((__used__)) \
+const struct linux_module_param_desc PARAMETER ## _desc = { \
+    .name = # PARAMETER, \
+    .description = DESCRIPTION, \
+}; \
+__link_set_add_rodata(linux_module_param_desc, PARAMETER ## _desc)
 
 #define	THIS_MODULE	0
 

@@ -49,12 +49,12 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/syslog.h>
 #include <sys/malloc.h>
 
+#include <arm/cpufunc.h>
 #include <arm/iomd/iomdreg.h>
 #include <arm/iomd/iomdvar.h>
 
 #include <machine/intr.h>
 #include <machine/cpu.h>
-#include <arm/arm32/katelib.h>
 
 irqhandler_t *irqhandlers[NIRQS];
 
@@ -356,8 +356,10 @@ intr_claim(int irq, int level, const char *name, int (*ih_func)(void *),
 	ih->ih_arg = ih_arg;
 	ih->ih_flags = 0;
 
-	if (irq_claim(irq, ih) != 0)
+	if (irq_claim(irq, ih) != 0) {
+		free(ih, M_DEVBUF);
 		return NULL;
+	}
 	return ih;
 }
 

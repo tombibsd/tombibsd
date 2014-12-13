@@ -66,7 +66,7 @@ DATESTAMPSTR=		"\"\""
 .endif
 
 # XXX pull this out of our configs
-G_BUGURL=<http://www.NetBSD.org/Misc/send-pr.html>
+G_BUGURL=<http://www.NetBSD.org/support/send-pr.html>
 G_BUGURL_s="\"${G_BUG_URL}\""
 G_PKGVERSION=(NetBSD nb1 20120916) 
 G_PKGVERSION_s="\"${G_PKGVERSION} \""

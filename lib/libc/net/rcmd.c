@@ -464,6 +464,9 @@ rshrcmd(int af, char **ahost, u_int32_t rport, const char *locuser,
 			const char *program;
 			program = strrchr(rshcmd, '/');
 			program = program ? program + 1 : rshcmd;
+			if (fd2p)
+				/* ask rcmd to relay signal information */
+				setenv("RCMD_RELAY_SIGNAL", "YES", 1);
 			switch (af) {
 			case AF_INET:
 				execlp(rshcmd, program, "-4", "-l", remuser,
@@ -670,7 +673,7 @@ iruserok_sa(const void *raddr, int rlen, int superuser, const char *ruser,
 
 	__rcmd_errstr = NULL;
 
-	hostf = superuser ? NULL : fopen(_PATH_HEQUIV, "r");
+	hostf = superuser ? NULL : fopen(_PATH_HEQUIV, "re");
 
 	if (hostf) {
 		if (__ivaliduser_sa(hostf, sa, (socklen_t)rlen, luser,
@@ -698,9 +701,9 @@ iruserok_sa(const void *raddr, int rlen, int superuser, const char *ruser,
 		uid = geteuid();
 		gid = getegid();
 		(void)setegid(pwd->pw_gid);
-		initgroups(pwd->pw_name, pwd->pw_gid);
+		(void)initgroups(pwd->pw_name, pwd->pw_gid);
 		(void)seteuid(pwd->pw_uid);
-		hostf = fopen(pbuf, "r");
+		hostf = fopen(pbuf, "re");
 
 		if (hostf != NULL) {
 			/*

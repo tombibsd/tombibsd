@@ -1628,7 +1628,7 @@ out:
 }
 
 /*
- * Translate an ASCII hex digit to it's binary value. Return -1 if the
+ * Translate an ASCII hex digit to its binary value. Return -1 if the
  * char isn't a hex digit.
  */
 static char

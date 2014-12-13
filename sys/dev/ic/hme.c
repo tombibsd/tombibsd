@@ -315,7 +315,7 @@ hme_config(struct hme_softc *sc)
 		    "couldn't establish power handler\n");
 
 	rnd_attach_source(&sc->rnd_source, device_xname(sc->sc_dev),
-			  RND_TYPE_NET, 0);
+			  RND_TYPE_NET, RND_FLAG_DEFAULT);
 
 	callout_init(&sc->sc_tick_ch, 0);
 }

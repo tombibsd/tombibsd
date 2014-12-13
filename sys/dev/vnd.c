@@ -203,6 +203,7 @@ const struct bdevsw vnd_bdevsw = {
 	.d_ioctl = vndioctl,
 	.d_dump = vnddump,
 	.d_psize = vndsize,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK
 };
 
@@ -217,6 +218,7 @@ const struct cdevsw vnd_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = nommap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK
 };
 
@@ -1590,6 +1592,13 @@ unlock_and_exit:
 
 		return dkwedge_list(&vnd->sc_dkdev, dkwl, l);
 
+	case DIOCMWEDGES:
+		if ((flag & FWRITE) == 0)
+			return EBADF;
+
+		dkwedge_discover(&vnd->sc_dkdev);
+		return 0;
+
 	default:
 		return ENOTTY;
 	}
@@ -1787,7 +1796,10 @@ vndgetdefaultlabel(struct vnd_softc *sc, struct disklabel *lp)
 
 	memset(lp, 0, sizeof(*lp));
 
-	lp->d_secperunit = sc->sc_size / (vng->vng_secsize / DEV_BSIZE);
+	if (sc->sc_size > UINT32_MAX)
+		lp->d_secperunit = UINT32_MAX;
+	else
+		lp->d_secperunit = sc->sc_size;
 	lp->d_secsize = vng->vng_secsize;
 	lp->d_nsectors = vng->vng_nsectors;
 	lp->d_ntracks = vng->vng_ntracks;
@@ -2039,7 +2051,13 @@ vnd_set_geometry(struct vnd_softc *vnd)
 
 #include <sys/module.h>
 
-MODULE(MODULE_CLASS_DRIVER, vnd, "zlib");
+#ifdef VND_COMPRESSION
+#define VND_DEPENDS "zlib"
+#else
+#define VND_DEPENDS NULL
+#endif
+
+MODULE(MODULE_CLASS_DRIVER, vnd, VND_DEPENDS);
 CFDRIVER_DECL(vnd, DV_DISK, NULL);
 
 static int

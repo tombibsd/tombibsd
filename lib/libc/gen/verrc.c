@@ -53,7 +53,7 @@ __RCSID("$NetBSD$");
 __weak_alias(verrc, _verrc)
 #endif
 
-#if !HAVE_ERR_H
+#if !HAVE_ERR_H || !HAVE_DECL_ERRC
 __dead void
 verrc(int eval, int code, const char *fmt, va_list ap)
 {

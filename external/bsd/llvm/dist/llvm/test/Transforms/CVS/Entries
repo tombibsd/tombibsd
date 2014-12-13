@@ -1,5 +1,7 @@
 D/ADCE////
+D/AddDiscriminators////
 D/ArgumentPromotion////
+D/AtomicExpandLoadLinked////
 D/BBVectorize////
 D/BranchFolding////
 D/CodeExtractor////
@@ -21,11 +23,13 @@ D/IPConstantProp////
 D/IndVarSimplify////
 D/Inline////
 D/InstCombine////
+D/InstMerge////
 D/InstSimplify////
 D/Internalize////
 D/JumpThreading////
 D/LCSSA////
 D/LICM////
+D/LoadCombine////
 D/LoopDeletion////
 D/LoopIdiom////
 D/LoopReroll////
@@ -44,6 +48,7 @@ D/MemCpyOpt////
 D/MergeFunc////
 D/MetaRenamer////
 D/ObjCARC////
+D/PartiallyInlineLibCalls////
 D/PhaseOrdering////
 D/PruneEH////
 D/Reassociate////
@@ -54,6 +59,7 @@ D/SROA////
 D/SampleProfile////
 D/ScalarRepl////
 D/Scalarizer////
+D/SeparateConstOffsetFromGEP////
 D/SimplifyCFG////
 D/Sink////
 D/StripSymbols////

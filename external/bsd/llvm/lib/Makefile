@@ -22,6 +22,7 @@ SUBDIR=	\
 	libLLVMObjCARC \
 	libLLVMObject \
 	libLLVMOption \
+	libLLVMProfileData \
 	libLLVMScalarOpts \
 	libLLVMSelectionDAG \
 	libLLVMSupport \
@@ -86,14 +87,18 @@ SUBDIR+= \
 SUBDIR+= \
 	libLLVMExecutionEngine \
 	libLLVMJIT \
+	libLLVMMCAnalysis \
 	libLLVMMCJIT \
 	libLLVMRuntimeDyld
 .endif
 
+.if (${NO_LLVM_DEVELOPER:Uno} == "no" && ${LLVM_DEVELOPER:U} == "yes") || ${MKLLD} == "yes"
+SUBDIR+= \
+	libLLVMDebugInfo
+.endif
 
 .if ${NO_LLVM_DEVELOPER:Uno} == "no" && ${LLVM_DEVELOPER:U} == "yes"
 SUBDIR+= \
-	libLLVMDebugInfo \
 	libLLVMCppBackend \
 	libLLVMCppBackendInfo \
 	libLLVMHello \
@@ -111,11 +116,11 @@ SUBDIR+= \
 	libclangDriver \
 	libclangEdit \
 	libclangFrontend \
+	libclangFrontendRewrite \
 	libclangFrontendTool \
 	libclangLex \
 	libclangParse \
-	libclangRewriteFrontend \
-	libclangRewriteCore \
+	libclangRewrite \
 	libclangSema \
 	libclangSerialization \
 	libclangStaticAnalyzerCheckers \
@@ -184,22 +189,29 @@ SUBDIR+= \
 	liblldbInterpreter \
 	liblldbLog \
 	liblldbPluginABIMacOSX_arm \
+	liblldbPluginABIMacOSX_arm64 \
 	liblldbPluginABIMacOSX_i386 \
+	liblldbPluginABISysV_hexagon \
 	liblldbPluginABISysV_x86_64 \
 	liblldbPluginAppleObjCRuntime \
 	liblldbPluginCXXItaniumABI \
 	liblldbPluginDisassemblerLLVM \
+	liblldbPluginDynamicLoaderHexagonDYLD \
 	liblldbPluginDynamicLoaderMacOSXDYLD \
 	liblldbPluginDynamicLoaderPosixDYLD \
 	liblldbPluginDynamicLoaderStatic \
 	liblldbPluginInstructionARM \
+	liblldbPluginInstructionARM64 \
+	liblldbPluginJITLoaderGDB \
 	liblldbPluginObjectContainerBSDArchive \
 	liblldbPluginObjectContainerMachOArchive \
 	liblldbPluginObjectFileELF \
+	liblldbPluginObjectFileJIT \
 	liblldbPluginObjectFileMachO \
 	liblldbPluginObjectFilePECOFF \
 	liblldbPluginPlatformNetBSD \
 	liblldbPluginPlatformGDB \
+	liblldbPluginPlatformKalimba \
 	liblldbPluginPlatformLinux \
 	liblldbPluginPlatformMacOSX \
 	liblldbPluginPlatformPOSIX \

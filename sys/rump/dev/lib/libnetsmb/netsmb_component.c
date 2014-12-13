@@ -48,7 +48,8 @@ RUMP_COMPONENT(RUMP_COMPONENT_DEV)
 	int error;
 
 	bmaj = cmaj = NODEVMAJOR;
-	if ((error = devsw_attach("nsmb", NULL, &bmaj, &nsmb_cdevsw, &cmaj))!=0)
+	error = devsw_attach("nsmb", NULL, &bmaj, &nsmb_cdevsw, &cmaj);
+	if (error && error != EEXIST)
 		panic("nsmb devsw attach failed: %d", error);
 	if ((error = rump_vfs_makedevnodes(S_IFCHR, "/dev/nsmb", '0',
 	    cmaj, 0, 4)) != 0)

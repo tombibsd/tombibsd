@@ -20,3 +20,8 @@ ENTRY(fpgetmask)
 	andl $63,%eax
 	addl $4,%esp
 	ret
+#ifdef WEAK_ALIAS
+END(_fpgetmask)
+#else
+END(fpgetmask)
+#endif

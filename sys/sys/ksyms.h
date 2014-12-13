@@ -58,6 +58,7 @@ struct ksyms_symtab {
  * Static allocated ELF header.
  * Basic info is filled in at attach, sizes at open.
  */
+#define	SHNOTE		0
 #define	SYMTAB		1
 #define	STRTAB		2
 #define	SHSTRTAB	3
@@ -66,13 +67,15 @@ struct ksyms_symtab {
 #define NSECHDR		6
 
 #define	NPRGHDR		1
-#define	SHSTRSIZ	42
+#define	SHSTRSIZ	64
 
 struct ksyms_hdr {
 	Elf_Ehdr	kh_ehdr;
 	Elf_Phdr	kh_phdr[NPRGHDR];
 	Elf_Shdr	kh_shdr[NSECHDR];
 	char 		kh_strtab[SHSTRSIZ];
+	/* 0=NameSize, 1=DescSize, 2=Tag, 3="NetB", 4="SD\0\0", 5=Version */
+	int32_t		kh_note[6];
 };
 #endif	/* _KSYMS_PRIVATE */
 

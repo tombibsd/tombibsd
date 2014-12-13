@@ -71,3 +71,4 @@ ENTRY(swapcontext)
 #endif
 2:
 	ret
+END(swapcontext)

@@ -39,6 +39,7 @@ SUBDIR+=	gpioiic
 SUBDIR+=	gpioow
 SUBDIR+=	gpiosim
 SUBDIR+=	hfs
+SUBDIR+=	hythygtemp
 SUBDIR+=	if_axe
 SUBDIR+=	if_axen
 SUBDIR+=	if_npflog
@@ -104,7 +105,6 @@ SUBDIR+=	zlib
 SUBDIR+=	tprof
 .if (defined(NOTYET))
 SUBDIR+=	hifn		# Builds on architectures with PCI bus
-SUBDIR+=	ubsec		# Builds on architectures with PCI bus
 SUBDIR+=	unionfs
 .endif
 .if ${MKBINUTILS} != "no"
@@ -117,11 +117,12 @@ SUBDIR+=	xldscripts
 SUBDIR+=	exec_aout
 .endif
 
-.if ${MACHINE_ARCH} != "alpha"
+.if ${MACHINE_ARCH} != "alpha" && ${MACHINE_CPU} != "aarch64"
 SUBDIR+=	exec_elf32
 .endif
 
-.if ${MACHINE_ARCH} == "alpha" || \
+.if ${MACHINE_CPU} == "aarch64" || \
+    ${MACHINE_ARCH} == "alpha" || \
     ${MACHINE_ARCH} == "sparc64" || \
     ${MACHINE_ARCH} == "x86_64"
 SUBDIR+=	exec_elf64
@@ -134,12 +135,18 @@ SUBDIR+=	coretemp
 SUBDIR+=	est
 SUBDIR+=	hdafg
 SUBDIR+=	hdaudio
+SUBDIR+=	hdaudioverbose
 SUBDIR+=	hpet
 SUBDIR+=	odcm
 SUBDIR+=	powernow
 SUBDIR+=	tprof_pmi
 SUBDIR+=	tprof_amdpmi
 SUBDIR+=	vmt
+.endif
+
+.if ${MACHINE_ARCH} == "i386" || \
+    ${MACHINE_ARCH} == "x86_64"
+SUBDIR+=	ubsec		# Builds on architectures with PCI bus
 .endif
 
 .if ${MKSLJIT} != "no"
@@ -189,28 +196,18 @@ SUBDIR+=	wmimsi
 .endif
 
 .if ${MACHINE_ARCH} == "x86_64"
-SUBDIR+=	azalia
-SUBDIR+=	compat_linux
 SUBDIR+=	compat_linux32
 SUBDIR+=	compat_netbsd32
-SUBDIR+=	drm
-SUBDIR+=	i915drm
-SUBDIR+=	pad
 .endif
 
 .if ${MACHINE_ARCH} == "i386"
 SUBDIR+=	ati_pcigart
-SUBDIR+=	azalia
 SUBDIR+=	compat_freebsd
 SUBDIR+=	compat_ibcs2
-SUBDIR+=	compat_linux
 SUBDIR+=	compat_svr4
-SUBDIR+=	drm
-SUBDIR+=	i915drm
 SUBDIR+=	mach64drm
 SUBDIR+=	mgadrm
 SUBDIR+=	nsclpcsio
-SUBDIR+=	pad
 SUBDIR+=	padlock
 SUBDIR+=	r128drm
 SUBDIR+=	radeondrm
@@ -221,11 +218,20 @@ SUBDIR+=	viac7temp
 SUBDIR+=	viadrm
 .endif
 
+.if ${MACHINE_ARCH} == "i386" || \
+    ${MACHINE_ARCH} == "x86_64"
+SUBDIR+=	azalia
+SUBDIR+=	compat_linux
+SUBDIR+=	drm
+SUBDIR+=	drmkms
+SUBDIR+=	drmkms_linux
+SUBDIR+=	drmkms_pci
+SUBDIR+=	i915drm
+SUBDIR+=	i915drmkms
+SUBDIR+=	pad
 #
 # ISA modules
 #
-.if ${MACHINE_ARCH} == "i386" || \
-    ${MACHINE_ARCH} == "x86_64"
 SUBDIR+=	aps
 SUBDIR+=	finsio
 SUBDIR+=	itesio

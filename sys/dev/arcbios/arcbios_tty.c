@@ -74,6 +74,7 @@ const struct cdevsw arcbios_cdevsw = {
 	.d_poll = arcbios_ttypoll,
 	.d_mmap = nommap,
 	.d_kqfilter = ttykqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_TTY,
 };
 

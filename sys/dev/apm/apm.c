@@ -124,6 +124,7 @@ const struct cdevsw apm_cdevsw = {
 	.d_poll = apmpoll,
 	.d_mmap = nommap,
 	.d_kqfilter = apmkqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_OTHER,
 };
 

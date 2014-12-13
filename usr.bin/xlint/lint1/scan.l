@@ -434,7 +434,7 @@ hash(const char *s)
  * more deeply by data written to yylval.
  *
  * If it is a symbol, T_NAME is returned and the pointer to a sbuf struct
- * is stored in yylval. This struct contains the name of the symbol, it's
+ * is stored in yylval. This struct contains the name of the symbol, its
  * length and hash value. If there is already a symbol of the same name
  * and type in the symbol table, the sbuf struct also contains a pointer
  * to the symbol table entry.

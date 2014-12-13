@@ -947,7 +947,7 @@ wchan(void *arg, VARENT *ve, enum mode mode)
 	l = arg;
 	v = ve->var;
 	if (l->l_wchan) {
-		if (l->l_wmesg) {
+		if (l->l_wmesg[0]) {
 			strprintorsetwidth(v, l->l_wmesg, mode);
 			v->width = min(v->width, KI_WMESGLEN);
 		} else {
@@ -1464,7 +1464,7 @@ lname(void *arg, VARENT *ve, enum mode mode)
 
 	l = arg;
 	v = ve->var;
-	if (l->l_name && l->l_name[0] != '\0') {
+	if (l->l_name[0] != '\0') {
 		strprintorsetwidth(v, l->l_name, mode);
 		v->width = min(v->width, KI_LNAMELEN);
 	} else {

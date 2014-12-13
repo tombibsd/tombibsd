@@ -36,7 +36,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/kernel.h>
 #include <sys/systm.h>
 #include <sys/buf.h>
-#include <sys/malloc.h>
 #include <sys/ioctl.h>
 #include <sys/tty.h>
 #include <sys/file.h>
@@ -125,7 +124,7 @@ linux_sys_socketcall(struct lwp *l, const struct linux_sys_socketcall_args *uap,
 	struct linux_socketcall_dummy_args lda;
 	int error;
 
-	if (SCARG(uap, what) < 0 || SCARG(uap, what) > LINUX_MAX_SOCKETCALL)
+	if (SCARG(uap, what) <= 0 || SCARG(uap, what) > LINUX_MAX_SOCKETCALL)
 		return ENOSYS;
 
 	if ((error = copyin(SCARG(uap, args), &lda,

@@ -75,6 +75,7 @@
 #ifndef _LOCORE
 #if defined(_KERNEL_OPT)
 #include "opt_arm32_pmap.h"
+#include "opt_multiprocessor.h"
 #endif
 #include <arm/cpufunc.h>
 #include <uvm/uvm_object.h>
@@ -84,7 +85,7 @@
 #define PMAP_TLB_MAX			1
 #define PMAP_TLB_HWPAGEWALKER		1
 #if PMAP_TLB_MAX > 1
-#define PMAP_TLB_NEED_SHOOTDOWN		1
+#define PMAP_NEED_TLB_SHOOTDOWN		1
 #endif
 #define PMAP_TLB_FLUSH_ASID_ON_RESET	(arm_has_tlbiasid_p)
 #define PMAP_TLB_NUM_PIDS		256
@@ -98,14 +99,14 @@
 #include <uvm/pmap/tlb.h>
 #include <uvm/pmap/pmap_tlb.h>
 
-/* 
+/*
  * If we have an EXTENDED MMU and the address space is split evenly between
  * user and kernel, we can use the TTBR0/TTBR1 to have separate L1 tables for
  * user and kernel address spaces.
- */      
+ */
 #if (KERNEL_BASE & 0x80000000) == 0
 #error ARMv6 or later systems must have a KERNEL_BASE >= 0x80000000
-#endif  
+#endif
 #endif  /* ARM_MMU_EXTENDED */
 
 /*
@@ -344,9 +345,9 @@ extern int		arm_poolpage_vmfreelist;
 
 #define pmap_phys_address(ppn)		(arm_ptob((ppn)))
 u_int arm32_mmap_flags(paddr_t);
-#define ARM32_MMAP_WRITECOMBINE	0x40000000
+#define ARM32_MMAP_WRITECOMBINE		0x40000000
 #define ARM32_MMAP_CACHEABLE		0x20000000
-#define pmap_mmap_flags(ppn)			arm32_mmap_flags(ppn)
+#define pmap_mmap_flags(ppn)		arm32_mmap_flags(ppn)
 
 #define	PMAP_PTE			0x10000000 /* kenter_pa */
 
@@ -401,7 +402,7 @@ void	pmap_devmap_bootstrap(vaddr_t, const struct pmap_devmap *);
 void	pmap_devmap_register(const struct pmap_devmap *);
 
 /*
- * Special page zero routine for use by the idle loop (no cache cleans). 
+ * Special page zero routine for use by the idle loop (no cache cleans).
  */
 bool	pmap_pageidlezero(paddr_t);
 #define PMAP_PAGEIDLEZERO(pa)	pmap_pageidlezero((pa))
@@ -432,7 +433,7 @@ extern vaddr_t pmap_directbase;
 #endif
 
 /*
- * Useful macros and constants 
+ * Useful macros and constants
  */
 
 /* Virtual address to page table entry */
@@ -481,7 +482,7 @@ extern int pmap_needs_pte_sync;
  * we need to do PTE syncs.  If only SA-1 is configured, then evaluate
  * this at compile time.
  */
-#if (ARM_MMU_SA1 + ARM_MMU_V6 != 0) && (ARM_NMMUS == 1) 
+#if (ARM_MMU_SA1 + ARM_MMU_V6 != 0) && (ARM_NMMUS == 1)
 #define	PMAP_INCLUDE_PTE_SYNC
 #if (ARM_MMU_V6 > 0)
 #define	PMAP_NEEDS_PTE_SYNC	1
@@ -588,7 +589,7 @@ l2pte_reset(pt_entry_t *ptep)
 	for (vsize_t k = 1; k < PAGE_SIZE / L2_S_SIZE; k++) {
 		ptep[k] = 0;
 	}
-}       
+}
 
 /* L1 and L2 page table macros */
 #define pmap_pde_v(pde)		l1pte_valid(*(pde))
@@ -739,6 +740,7 @@ extern void (*pmap_zero_page_func)(paddr_t);
 #define	L1_S_CACHE_MASK_generic	(L1_S_B|L1_S_C)
 #define	L1_S_CACHE_MASK_xscale	(L1_S_B|L1_S_C|L1_S_XS_TEX(TEX_XSCALE_X))
 #define	L1_S_CACHE_MASK_armv6	(L1_S_B|L1_S_C|L1_S_XS_TEX(TEX_ARMV6_TEX))
+#define	L1_S_CACHE_MASK_armv6n	(L1_S_B|L1_S_C|L1_S_XS_TEX(TEX_ARMV6_TEX)|L1_S_V6_S)
 #define	L1_S_CACHE_MASK_armv7	(L1_S_B|L1_S_C|L1_S_XS_TEX(TEX_ARMV6_TEX)|L1_S_V6_S)
 
 #define	L2_L_PROT_U_generic	(L2_AP(AP_U))
@@ -764,6 +766,7 @@ extern void (*pmap_zero_page_func)(paddr_t);
 #define	L2_L_CACHE_MASK_generic	(L2_B|L2_C)
 #define	L2_L_CACHE_MASK_xscale	(L2_B|L2_C|L2_XS_L_TEX(TEX_XSCALE_X))
 #define	L2_L_CACHE_MASK_armv6	(L2_B|L2_C|L2_V6_L_TEX(TEX_ARMV6_TEX))
+#define	L2_L_CACHE_MASK_armv6n	(L2_B|L2_C|L2_V6_L_TEX(TEX_ARMV6_TEX)|L2_XS_S)
 #define	L2_L_CACHE_MASK_armv7	(L2_B|L2_C|L2_V6_L_TEX(TEX_ARMV6_TEX)|L2_XS_S)
 
 #define	L2_S_PROT_U_generic	(L2_AP(AP_U))
@@ -822,7 +825,11 @@ extern void (*pmap_zero_page_func)(paddr_t);
 #else
 #define	L2_S_PROTO_armv6c	(L2_TYPE_S)	/* XP=0, subpage APs */
 #endif
+#ifdef ARM_MMU_EXTENDED
+#define	L2_S_PROTO_armv6n	(L2_TYPE_S|L2_XS_XN)
+#else
 #define	L2_S_PROTO_armv6n	(L2_TYPE_S)	/* with XP=1 */
+#endif
 #ifdef ARM_MMU_EXTENDED
 #define	L2_S_PROTO_armv7	(L2_TYPE_S|L2_XS_XN)
 #else
@@ -904,8 +911,8 @@ extern void (*pmap_zero_page_func)(paddr_t);
 #define	L2_L_PROT_RO		L2_L_PROT_RO_armv6n
 #define	L2_L_PROT_MASK		L2_L_PROT_MASK_armv6n
 
-#define	L1_S_CACHE_MASK		L1_S_CACHE_MASK_armv6
-#define	L2_L_CACHE_MASK		L2_L_CACHE_MASK_armv6
+#define	L1_S_CACHE_MASK		L1_S_CACHE_MASK_armv6n
+#define	L2_L_CACHE_MASK		L2_L_CACHE_MASK_armv6n
 #define	L2_S_CACHE_MASK		L2_S_CACHE_MASK_armv6n
 
 /* These prototypes make writeable mappings, while the other MMU types
@@ -1085,7 +1092,7 @@ struct vm_page_md {
 #define	VM_MDPAGE_PVH_ATTRS_INIT(pg) \
 	(pg)->mdpage.pvh_attrs = 0
 #endif
- 
+
 #define	VM_MDPAGE_INIT(pg)						\
 do {									\
 	SLIST_INIT(&(pg)->mdpage.pvh_list);				\

@@ -66,6 +66,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/kernel.h>
 #include <sys/evcnt.h>
 #include <sys/xcall.h>
+#include <sys/ipi.h>
 #include <sys/cpu.h>
 
 #include <uvm/uvm.h>
@@ -436,7 +437,7 @@ cpu_attach(struct cpu_softc *sc, int node, int mid)
 	/* Stuff to only run on the boot CPU */
 	cpu_setup();
 	snprintf(buf, sizeof buf, "%s @ %s MHz, %s FPU",
-		cpi->cpu_longname, clockfreq(cpi->hz / 1000), cpi->fpu_name);
+		cpi->cpu_longname, clockfreq(cpi->hz), cpi->fpu_name);
 	cpu_setmodel("%s (%s)", machine_model, buf);
 	printf(": %s\n", buf);
 	cache_print(sc);
@@ -812,6 +813,21 @@ xc_send_ipi(struct cpu_info *target)
 	else
 		cpuset = CPUSET_ALL & ~(1 << cpuinfo.ci_cpuid);
 	XCALL0(xc_ipi_handler, cpuset);
+}
+
+void
+cpu_ipi(struct cpu_info *target)
+{
+	u_int cpuset;
+
+	KASSERT(kpreempt_disabled());
+	KASSERT(curcpu() != target);
+
+	if (target)
+		cpuset = 1 << target->ci_cpuid;
+	else
+		cpuset = CPUSET_ALL & ~(1 << cpuinfo.ci_cpuid);
+	XCALL0(ipi_cpu_handler, cpuset);
 }
 
 /*

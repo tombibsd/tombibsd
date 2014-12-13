@@ -89,4 +89,10 @@
 #define LINUX_SO_PEEK_OFF	42
 #define LINUX_SO_NOFCS		43
 
+/*
+ * Flags for socket().
+ * These are provided in the "type" parameter.
+ */
+#define LINUX_SOCK_NONBLOCK	0x40000000
+
 #endif /* !_ALPHA_LINUX_SOCKET_H */

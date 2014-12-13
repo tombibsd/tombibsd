@@ -421,6 +421,7 @@ void	mips_page_physload(vaddr_t, vaddr_t,
 				/*	0x0a	unannounced */
 #define     MIPS_PRID_CID_LEXRA		0x0b	/* Lexra */
 #define     MIPS_PRID_CID_RMI		0x0c	/* RMI / NetLogic */
+#define     MIPS_PRID_CID_INGENIC	0xe1
 #define MIPS_PRID_COPTS(x)	(((x) >> 24) & 0x00ff)	/* Company Options */
 
 #ifdef _KERNEL

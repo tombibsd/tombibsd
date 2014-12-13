@@ -75,9 +75,6 @@ lock_stubs.o unimpl_emul.o: assym.h
 ## (7) misc settings
 ##
 
-# XXX recent gcc4 gets ICE on this one
-COPTS.db_command.c+=	-fno-tree-ter
-
 ##
 ## (8) config(8) generated machinery
 ##

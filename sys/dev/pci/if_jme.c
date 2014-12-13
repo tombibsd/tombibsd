@@ -510,7 +510,7 @@ jme_pci_attach(device_t parent, device_t self, void *aux)
 		aprint_error_dev(self, "couldn't establish power handler\n");
 
 	rnd_attach_source(&sc->rnd_source, device_xname(self),
-	    RND_TYPE_NET, 0);
+	    RND_TYPE_NET, RND_FLAG_DEFAULT);
 
 	sc->jme_intrxto = PCCRX_COAL_TO_DEFAULT;
 	sc->jme_intrxct = PCCRX_COAL_PKT_DEFAULT;

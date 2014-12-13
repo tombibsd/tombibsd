@@ -47,7 +47,6 @@ LINKFLAGS=   -n -Bstatic -T ${.CURDIR}/../xxboot.ldscript -M
 LINKFLAGS+=  -noinhibit-exec	# XXX
 .else
 LINKFLAGS=   -n -Bstatic -Ttext ${TEXT} -M
-OBJCOPY?=  objcopy
 .endif
 LIBIOCS!= cd $M/stand/libiocs && ${PRINTOBJDIR}
 LIBSA!=	  cd $M/stand/libsa && ${PRINTOBJDIR}

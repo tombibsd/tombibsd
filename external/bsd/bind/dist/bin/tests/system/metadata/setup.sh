@@ -16,9 +16,10 @@
 
 SYSTEMTESTTOP=..
 . $SYSTEMTESTTOP/conf.sh
-sh ./clean.sh
 
-test -e $RANDFILE || $GENRANDOM 400 $RANDFILE
+$SHELL ./clean.sh
+
+test -r $RANDFILE || $GENRANDOM 400 $RANDFILE
 
 pzone=parent.nil
 czone=child.parent.nil

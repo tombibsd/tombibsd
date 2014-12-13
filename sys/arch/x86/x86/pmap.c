@@ -2915,7 +2915,7 @@ pmap_extract(struct pmap *pmap, vaddr_t va, paddr_t *pap)
 	pa = 0;
 	l = curlwp;
 
-	KPREEMPT_DISABLE(l);
+	kpreempt_disable();
 	ci = l->l_cpu;
 	if (__predict_true(!ci->ci_want_pmapload && ci->ci_pmap == pmap) ||
 	    pmap == pmap_kernel()) {
@@ -2948,7 +2948,7 @@ pmap_extract(struct pmap *pmap, vaddr_t va, paddr_t *pap)
 	if (__predict_false(hard)) {
 		pmap_unmap_ptes(pmap, pmap2);
 	}
-	KPREEMPT_ENABLE(l);
+	kpreempt_enable();
 	if (pap != NULL) {
 		*pap = pa;
 	}
@@ -3011,9 +3011,13 @@ pmap_virtual_space(vaddr_t *startp, vaddr_t *endp)
 void
 pmap_zero_page(paddr_t pa)
 {
-#ifdef __HAVE_DIRECT_MAP
+#if defined(__HAVE_DIRECT_MAP)
 	pagezero(PMAP_DIRECT_MAP(pa));
 #else
+#if defined(XEN)
+	if (XEN_VERSION_SUPPORTED(3, 4))
+		xen_pagezero(pa);
+#endif
 	pt_entry_t *zpte;
 	void *zerova;
 	int id;
@@ -3039,7 +3043,7 @@ pmap_zero_page(paddr_t pa)
 	pmap_pte_flush();
 #endif
 	kpreempt_enable();
-#endif
+#endif /* defined(__HAVE_DIRECT_MAP) */
 }
 
 /*
@@ -3089,12 +3093,18 @@ pmap_pageidlezero(paddr_t pa)
 void
 pmap_copy_page(paddr_t srcpa, paddr_t dstpa)
 {
-#ifdef __HAVE_DIRECT_MAP
+#if defined(__HAVE_DIRECT_MAP)
 	vaddr_t srcva = PMAP_DIRECT_MAP(srcpa);
 	vaddr_t dstva = PMAP_DIRECT_MAP(dstpa);
 
 	memcpy((void *)dstva, (void *)srcva, PAGE_SIZE);
 #else
+#if defined(XEN)
+	if (XEN_VERSION_SUPPORTED(3, 4)) {
+		xen_copy_page(srcpa, dstpa);
+		return;
+	}
+#endif
 	pt_entry_t *spte;
 	pt_entry_t *dpte;
 	void *csrcva;
@@ -3124,7 +3134,7 @@ pmap_copy_page(paddr_t srcpa, paddr_t dstpa)
 	pmap_pte_flush();
 #endif
 	kpreempt_enable();
-#endif
+#endif /* defined(__HAVE_DIRECT_MAP) */
 }
 
 static pt_entry_t *
@@ -4101,21 +4111,27 @@ pmap_get_physpage(vaddr_t va, int level, paddr_t *paddrp)
 
 		if (!uvm_page_physget(paddrp))
 			panic("pmap_get_physpage: out of memory");
-#ifdef __HAVE_DIRECT_MAP
+#if defined(__HAVE_DIRECT_MAP)
 		pagezero(PMAP_DIRECT_MAP(*paddrp));
 #else
+#if defined(XEN)
+		if (XEN_VERSION_SUPPORTED(3, 4)) {
+			xen_pagezero(*paddrp);
+			return true;
+		}
+#endif
 		kpreempt_disable();
 		pmap_pte_set(early_zero_pte,
 		    pmap_pa2pte(*paddrp) | PG_V | PG_RW | PG_k);
 		pmap_pte_flush();
 		pmap_update_pg((vaddr_t)early_zerop);
 		memset(early_zerop, 0, PAGE_SIZE);
-#if defined(DIAGNOSTIC) || defined (XEN)
+#if defined(DIAGNOSTIC) || defined(XEN)
 		pmap_pte_set(early_zero_pte, 0);
 		pmap_pte_flush();
 #endif /* defined(DIAGNOSTIC) */
 		kpreempt_enable();
-#endif
+#endif /* defined(__HAVE_DIRECT_MAP) */
 	} else {
 		/* XXX */
 		ptp = uvm_pagealloc(NULL, 0, NULL,
@@ -4380,7 +4396,7 @@ pmap_update(struct pmap *pmap)
 	 * If we have torn down this pmap, invalidate non-global TLB
 	 * entries on any processors using it.
 	 */
-	KPREEMPT_DISABLE(l);
+	kpreempt_disable();
 	if (__predict_false(l->l_md.md_gc_pmap == pmap)) {
 		l->l_md.md_gc_pmap = NULL;
 		pmap_tlb_shootdown(pmap, (vaddr_t)-1LL, 0, TLBSHOOT_UPDATE);
@@ -4390,7 +4406,7 @@ pmap_update(struct pmap *pmap)
 	 * complete before returning control to the caller.
 	 */
 	pmap_tlb_shootnow();
-	KPREEMPT_ENABLE(l);
+	kpreempt_enable();
 
 	/*
 	 * Now that shootdowns are complete, process deferred frees,

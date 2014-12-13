@@ -31,6 +31,7 @@
 #include <sys/param.h>
 
 #include <lib/libsa/stand.h>
+#include <lib/libsa/bootcfg.h>
 #include <lib/libkern/libkern.h>
 
 extern int debug;

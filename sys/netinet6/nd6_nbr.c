@@ -1072,23 +1072,10 @@ nd6_newaddrmsg(struct ifaddr *ifa)
 	int e;
 
 	sockaddr_in6_init(&all1_sa, &in6mask128, 0, 0, 0);
-
 	e = rtrequest(RTM_GET, ifa->ifa_addr, ifa->ifa_addr,
-	    (struct sockaddr *)&all1_sa, RTF_UP|RTF_HOST|RTF_LLINFO, &nrt);
-	if (e != 0) {
-		log(LOG_ERR, "nd6_newaddrmsg: "
-		    "RTM_GET operation failed for %s (errno=%d)\n",
-		    ip6_sprintf(&((struct in6_ifaddr *)ifa)->ia_addr.sin6_addr),
-		    e);
-	}
-
+	    (struct sockaddr *)&all1_sa, RTF_UP | RTF_HOST | RTF_LLINFO, &nrt);
 	if (nrt) {
 		rt_newaddrmsg(RTM_ADD, ifa, e, nrt);
-#if 0
-		log(LOG_DEBUG, "nd6_newaddrmsg: announced %s\n",
-		    ip6_sprintf(&((struct in6_ifaddr *)ifa)->ia_addr.sin6_addr)
-		);
-#endif
 		nrt->rt_refcnt--;
 	}
 }
@@ -1096,6 +1083,8 @@ nd6_newaddrmsg(struct ifaddr *ifa)
 
 /*
  * Start Duplicate Address Detection (DAD) for specified interface address.
+ *
+ * Note that callout is used when xtick > 0 and not when xtick == 0.
  *
  * xtick: minimum delay ticks for IFF_UP event
  */
@@ -1160,7 +1149,7 @@ nd6_dad_start(struct ifaddr *ifa, int xtick)
 	 * (re)initialization.
 	 */
 	dp->dad_ifa = ifa;
-	IFAREF(ifa);	/* just for safety */
+	ifaref(ifa);	/* just for safety */
 	dp->dad_count = ip6_dad_count;
 	dp->dad_ns_icount = dp->dad_na_icount = 0;
 	dp->dad_ns_ocount = dp->dad_ns_tcount = 0;
@@ -1193,7 +1182,7 @@ nd6_dad_stop(struct ifaddr *ifa)
 	TAILQ_REMOVE(&dadq, dp, dad_list);
 	free(dp, M_IP6NDP);
 	dp = NULL;
-	IFAFREE(ifa);
+	ifafree(ifa);
 }
 
 static void
@@ -1238,7 +1227,7 @@ nd6_dad_timer(struct ifaddr *ifa)
 		TAILQ_REMOVE(&dadq, dp, dad_list);
 		free(dp, M_IP6NDP);
 		dp = NULL;
-		IFAFREE(ifa);
+		ifafree(ifa);
 		goto done;
 	}
 
@@ -1292,7 +1281,7 @@ nd6_dad_timer(struct ifaddr *ifa)
 			TAILQ_REMOVE(&dadq, dp, dad_list);
 			free(dp, M_IP6NDP);
 			dp = NULL;
-			IFAFREE(ifa);
+			ifafree(ifa);
 		}
 	}
 
@@ -1371,7 +1360,7 @@ nd6_dad_duplicated(struct ifaddr *ifa)
 	TAILQ_REMOVE(&dadq, dp, dad_list);
 	free(dp, M_IP6NDP);
 	dp = NULL;
-	IFAFREE(ifa);
+	ifafree(ifa);
 }
 
 static void

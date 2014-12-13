@@ -806,7 +806,7 @@ vmt_tclo_tick(void *xarg)
 
 		/* find first available ipv4 address */
 		guest_ip = NULL;
-		TAILQ_FOREACH(iface, &ifnet, if_list) {
+		IFNET_FOREACH(iface) {
 			struct ifaddr *iface_addr;
 
 			/* skip loopback */
@@ -815,7 +815,7 @@ vmt_tclo_tick(void *xarg)
 				continue;
 			}
 
-			TAILQ_FOREACH(iface_addr, &iface->if_addrlist, ifa_list) {
+			IFADDR_FOREACH(iface_addr, iface) {
 				if (iface_addr->ifa_addr->sa_family != AF_INET) {
 					continue;
 				}

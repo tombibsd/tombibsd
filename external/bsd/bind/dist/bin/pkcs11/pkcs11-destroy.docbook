@@ -17,10 +17,9 @@
  - PERFORMANCE OF THIS SOFTWARE.
 -->
 
-<!-- Id: pkcs11-destroy.docbook,v 1.2 2009/10/05 12:07:08 fdupont Exp  -->
 <refentry id="man.pkcs11-destroy">
   <refentryinfo>
-    <date>Sep 18, 2009</date>
+    <date>January 15, 2014</date>
   </refentryinfo>
 
   <refmeta>
@@ -139,10 +138,13 @@
     <title>SEE ALSO</title>
     <para>
       <citerefentry>
-        <refentrytitle>pkcs11-list</refentrytitle><manvolnum>3</manvolnum>
+        <refentrytitle>pkcs11-keygen</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>pkcs11-keygen</refentrytitle><manvolnum>3</manvolnum>
+        <refentrytitle>pkcs11-list</refentrytitle><manvolnum>8</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+        <refentrytitle>pkcs11-tokens</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>
     </para>
   </refsect1>

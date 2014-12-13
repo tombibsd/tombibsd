@@ -58,6 +58,8 @@
 : ${HOST_SH:=sh}
 : ${MAKE:=make}
 : ${PWD_MKDB:=/usr/sbin/pwd_mkdb}
+: ${SED:=sed}
+: ${SORT:=sort}
 : ${STAT:=stat}
 
 #
@@ -110,22 +112,71 @@ mkdtemp()
 #    eval "set -- $quotedlist"
 # or like this:
 #    eval "\$command $quotedlist \$filename"
+#
 shell_quote()
-{
+{(
 	local result=''
-	local arg
+	local arg qarg
+	LC_COLLATE=C ; export LC_COLLATE # so [a-zA-Z0-9] works in ASCII
 	for arg in "$@" ; do
-		# Append a space if necessary
-		result="${result}${result:+ }"
-		# Convert each embedded ' to '\'',
-		# then insert ' at the beginning of the first line,
-		# and append ' at the end of the last line.
-		result="${result}$(printf "%s\n" "$arg" | \
-			sed -e "s/'/'\\\\''/g" -e "1s/^/'/" -e "\$s/\$/'/")"
+		case "${arg}" in
+		'')
+			qarg="''"
+			;;
+		*[!-./a-zA-Z0-9]*)
+			# Convert each embedded ' to '\'',
+			# then insert ' at the beginning of the first line,
+			# and append ' at the end of the last line.
+			# Finally, elide unnecessary '' pairs at the
+			# beginning and end of the result and as part of
+			# '\'''\'' sequences that result from multiple
+			# adjacent quotes in he input.
+			qarg="$(printf "%s\n" "$arg" | \
+			    ${SED:-sed} -e "s/'/'\\\\''/g" \
+				-e "1s/^/'/" -e "\$s/\$/'/" \
+				-e "1s/^''//" -e "\$s/''\$//" \
+				-e "s/'''/'/g"
+				)"
+			;;
+		*)
+			# Arg is not the empty string, and does not contain
+			# any unsafe characters.  Leave it unchanged for
+			# readability.
+			qarg="${arg}"
+			;;
+		esac
+		result="${result}${result:+ }${qarg}"
 	done
 	printf "%s\n" "$result"
+)}
+
+# Convert arg $1 to a basic regular expression (as in sed)
+# that will match the arg.  This works by inserting backslashes
+# before characters that are special in basic regular expressions.
+# It also inserts backslashes before the extra characters specified
+# in $2 (which defaults to "/,").
+# XXX: Does not handle embedded newlines.
+# Usage: regex="$(bre_quote "${string}")"
+bre_quote()
+{
+	local arg="$1"
+	local extra="${2-/,}"
+	printf "%s\n" "${arg}" | ${SED} -e 's/[][^$.*\\'"${extra}"']/\\&/g'
 }
 
+# unprefix dir
+#	Remove any dir prefix from a list of paths on stdin,
+#	and write the result to stdout.  Useful for converting
+#	from ${DEST_DIR}/path to /path.
+#
+unprefix()
+{
+	[ $# -eq 1 ] || err 3 "USAGE: unprefix dir"
+	local prefix="${1%/}"
+	prefix="$(bre_quote "${prefix}")"
+
+	${SED} -e "s,^${prefix}/,/,"
+}
 
 # additem item description
 #	Add item to list of supported items to check/fix,
@@ -135,7 +186,7 @@ additem()
 {
 	[ $# -eq 2 ] || err 3 "USAGE: additem item description"
 	defaultitems="${defaultitems}${defaultitems:+ }$1"
-	eval desc_$1=\"$2\"
+	eval desc_$1=\"\$2\"
 }
 
 # adddisableditem item description
@@ -146,7 +197,7 @@ adddisableditem()
 {
 	[ $# -eq 2 ] || err 3 "USAGE: adddisableditem item description"
 	otheritems="${otheritems}${otheritems:+ }$1"
-	eval desc_$1=\"$2\"
+	eval desc_$1=\"\$2\"
 }
 
 # checkdir op dir mode
@@ -172,18 +223,24 @@ check_dir()
 	return 0
 }
 
-# check_ids op type file start id [...]
-#	Check if file of type "users" or "groups" contains the relevant IDs
+# check_ids op type file srcfile start id [...]
+#	Check if file of type "users" or "groups" contains the relevant IDs.
+#	Use srcfile as a reference for the expected contents.
+#	The specified "id" names should be given in numerical order,
+#	with the first name corresponding to numerical value "start",
+#	and with the special name "SKIP" being used to mark gaps in the
+#	sequence.
 #	Returns 0 if ok, 1 otherwise.
 #	
 check_ids()
 {
-	[ $# -ge 5 ] || err 3 "USAGE: checks_ids op type file start id [...]"
+	[ $# -ge 6 ] || err 3 "USAGE: checks_ids op type file start srcfile id [...]"
 	_op="$1"
 	_type="$2"
 	_file="$3"
-	_start="$4"
-	shift 4
+	_srcfile="$4"
+	_start="$5"
+	shift 5
 	#_ids="$@"
 
 	if [ ! -f "${_file}" ]; then
@@ -225,6 +282,14 @@ check_ids()
 	' "$@" < "${_file}")"	|| return 1
 	if [ -n "${_missing}" ]; then
 		msg "Error ${_type}${_notfixed}:" $(echo ${_missing})
+		msg "Use the following as a template:"
+		set -- ${_missing}
+		while [ $# -gt 0 ]
+		do
+			${GREP} -E "^${1}:" ${_srcfile}
+			shift 2
+		done
+		msg "and adjust if necessary."
 		return 1
 	fi
 	return 0
@@ -379,7 +444,7 @@ rcvar_is_enabled()
 	_rcie_var="$1"
 	(
 		[ -f "${DEST_DIR}/etc/rc.conf" ] && . "${DEST_DIR}/etc/rc.conf"
-		eval _rcie_val="\${${_rcie_var}}"
+		eval _rcie_val=\"\${${_rcie_var}}\"
 		case $_rcie_val in
 		#	"yes", "true", "on", or "1"
 		[Yy][Ee][Ss]|[Tt][Rr][Uu][Ee]|[Oo][Nn]|1)
@@ -448,8 +513,8 @@ file_exists_exact()
 
 # obsolete_paths op
 #	Obsolete the list of paths provided on stdin.
-#	Each path is relative to ${DEST_DIR}, and should
-#	be an absolute path or start with `./'.
+#	Each path should start with '/' or './', and
+#	will be interpreted relative to ${DEST_DIR}.
 #
 obsolete_paths()
 {
@@ -473,7 +538,7 @@ obsolete_paths()
 		if [ "${op}" = "check" ]; then
 			msg "Remove obsolete ${ftype} ${ofile}"
 			failed=1
-		elif ! eval "${cmd} \${ofile}"; then
+		elif ! eval "${cmd} \"\${ofile}\""; then
 			msg "Can't remove obsolete ${ftype} ${ofile}"
 			failed=1
 		else
@@ -561,6 +626,37 @@ function checklib(results, line, regex) {
 	)
 }
 
+# obsolete_stand dir
+#	Prints the names of all obsolete files and subdirs below the
+#	provided dir.  dir should be something like /stand/${MACHINE}.
+#	The input dir and all output paths are interpreted
+#	relative to ${DEST_DIR}.
+#
+#	Assumes that the numerically largest subdir is current, and all
+#	others are obsolete.
+#
+obsolete_stand()
+{
+	[ $# -eq 1 ] || err 3 "USAGE: obsolete_stand dir"
+	local dir="$1"
+	local subdir
+
+	if ! [ -d "${DEST_DIR}${dir}" ]; then
+		msg "${DEST_DIR}${dir} doesn't exist; can't check for obsolete files"
+		return 1
+	fi
+
+	( cd "${DEST_DIR}${dir}" && ls -1d [0-9]*[0-9]/. ) \
+	| ${GREP} -v '[^0-9./]' \
+	| sort -t. -r -k1n -k2n -k3n \
+	| tail -n +2 \
+	| while read subdir ; do
+		subdir="${subdir%/.}"
+		find "${DEST_DIR}${dir}/${subdir}" -depth -print
+	done \
+	| unprefix "${DEST_DIR}"
+}
+
 # modify_file op srcfile scratchfile awkprog
 #	Apply awkprog to srcfile sending output to scratchfile, and
 #	if appropriate replace srcfile with scratchfile.
@@ -634,9 +730,9 @@ get_makevar()
 
 	for _var in "$@"; do
 		_value="$(echo '.include <bsd.own.mk>' | \
-		    ${MAKE} -f - -V "${_var}")"
+		    ${MAKE} -f - -V "\${${_var}}")"
 
-		eval ${_var}=\"${_value}\"
+		eval ${_var}=\"\${_value}\"
 	done
 }
 

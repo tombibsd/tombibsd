@@ -480,7 +480,7 @@ kcpuset_remove(kcpuset_t *kcp1, const kcpuset_t *kcp2)
 }
 
 int
-kcpuset_countset(kcpuset_t *kcp)
+kcpuset_countset(const kcpuset_t *kcp)
 {
 	int count = 0;
 

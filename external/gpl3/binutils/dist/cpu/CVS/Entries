@@ -33,8 +33,11 @@
 /mep.opc/1.1.1.1/Thu Oct 24 10:28:51 2013/-kk/
 /mt.cpu/1.1.1.2/Sat Sep 24 22:37:40 2011/-kk/
 /mt.opc/1.1.1.3/Tue Oct 29 12:08:42 2013/-kk/
-/openrisc.cpu/1.1.1.1/Thu Oct 24 10:28:51 2013/-kk/
-/openrisc.opc/1.1.1.1/Thu Oct 24 10:28:51 2013/-kk/
+/or1k.cpu/1.1/Wed Sep  3 19:01:15 2014/-kk/
+/or1k.opc/1.1/Wed Sep  3 19:01:15 2014/-kk/
+/or1kcommon.cpu/1.1/Wed Sep  3 19:01:15 2014/-kk/
+/or1korbis.cpu/1.1/Wed Sep  3 19:01:15 2014/-kk/
+/or1korfpx.cpu/1.1/Wed Sep  3 19:01:15 2014/-kk/
 /sh.cpu/1.1.1.2/Sat Sep 24 22:37:39 2011/-kk/
 /sh.opc/1.1.1.2/Sat Sep 24 22:37:39 2011/-kk/
 /sh64-compact.cpu/1.1.1.2/Sat Sep 24 22:37:39 2011/-kk/

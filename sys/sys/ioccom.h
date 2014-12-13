@@ -72,4 +72,11 @@
 /* this should be _IORW, but stdio got there first */
 #define	_IOWR(g,n,t)	_IOC(IOC_INOUT,	(g), (n), sizeof(t))
 
+#define IOCSNPRINTF(buf, len, cmd) \
+    snprintf((buf), (len), "_IO%s%s('%c', %hhu)", \
+	(((cmd) >> 30) & 1) ? "W" : "", \
+	(((cmd) >> 30) & 2) ? "R" : "", \
+	(char)IOCGROUP(cmd), (unsigned char)(cmd))
+		
+
 #endif /* !_SYS_IOCCOM_H_ */

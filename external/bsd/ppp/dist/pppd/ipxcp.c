@@ -1,4 +1,4 @@
-/*	$NetBSD$ 	*/
+/*	NetBSD 	*/
 
 /*
  * ipxcp.c - PPP IPX Control Protocol.

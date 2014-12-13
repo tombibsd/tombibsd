@@ -46,7 +46,7 @@ extern vaddr_t	stio_addr;	/* Where the st io-area is mapped	*/
  * Each card gets an config area of PAGE_SIZE  bytes.
  * 'pci_mem_uncached' is used by the Milan interrupt handler that frobs
  * with the PLX. Also, the Milan uses the first page of 'pci_io_addr' for
- * access to some of it's ISA I/O devices (RTC, Interrupt controller, etc.)
+ * access to some of its ISA I/O devices (RTC, Interrupt controller, etc.)
  */
 extern vaddr_t	pci_conf_addr;	/* KVA base of PCI config space		*/
 extern vaddr_t	pci_io_addr;	/* KVA base of PCI io-space		*/

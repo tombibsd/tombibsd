@@ -34,7 +34,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include "debug_playstation2.h"
 
-#include "bpfilter.h"
 #include "rnd.h"
 
 #include <sys/param.h>
@@ -67,10 +66,8 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <netinet/ip.h>
 #include <netinet/if_inarp.h>
 
-#if NBPFILTER > 0
 #include <net/bpf.h>
 #include <net/bpfdesc.h>
-#endif
 
 #include <playstation2/dev/spdvar.h>
 #include <playstation2/dev/spdreg.h>
@@ -263,7 +260,7 @@ smap_attach(struct device *parent, struct device *self, void *aux)
 
 #if NRND > 0
 	rnd_attach_source(&sc->rnd_source, DEVNAME,
-	    RND_TYPE_NET, 0);
+	    RND_TYPE_NET, RND_FLAG_DEFAULT);
 #endif
 }
 
@@ -421,10 +418,8 @@ smap_rxeof(void *arg)
 		_wbflush();
 		
 		if (m != NULL) {
-#if NBPFILTER > 0
 			if (ifp->if_bpf)
 				bpf_mtap(ifp->if_bpf, m);
-#endif
 			(*ifp->if_input)(ifp, m);
 		}
 	}
@@ -523,10 +518,8 @@ smap_start(struct ifnet *ifp)
 
 		IFQ_DEQUEUE(&ifp->if_snd, m0);
 		KDASSERT(m0 != NULL);
-#if NBPFILTER > 0
 		if (ifp->if_bpf)
 			bpf_mtap(ifp->if_bpf, m0);
-#endif
 
 		p = (u_int8_t *)sc->tx_buf;
 		q = p + sz;

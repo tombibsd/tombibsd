@@ -115,6 +115,9 @@ ASENTRY_NP(start)
 ASEND(start)
 
 	.bss
+#ifdef __ARM_EABI__
+	.align	3
+#endif
 svcstk:
 	.space	INIT_ARM_STACK_SIZE
 

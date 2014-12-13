@@ -400,7 +400,7 @@ sys_mmap(struct lwp *l, const struct sys_mmap_args *uap, register_t *retval)
 			fd_putfile(fd);
 			return (ENODEV);		/* only mmap vnodes! */
 		}
-		vp = fp->f_data;		/* convert to vnode */
+		vp = fp->f_vnode;		/* convert to vnode */
 		if (vp->v_type != VREG && vp->v_type != VCHR &&
 		    vp->v_type != VBLK) {
 			fd_putfile(fd);

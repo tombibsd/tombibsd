@@ -3,7 +3,7 @@
 REQUIRETOOLS=	yes
 NOLINT=		# defined
 
-.include <bsd.own.mk>
+.include <bsd.init.mk>
 
 .include "Makefile.inc"
 
@@ -12,7 +12,14 @@ LDADD=		-lgcc_s
 
 LIBDPLIBS+=	m ${.CURDIR}/../../../../../lib/libm
 
-UNSUPPORTED_COMPILER.clang=	# defined
+#COPTS+=		-pthread
+#LDFLAGS+=	-pthread
+.if ${MACHINE_ARCH} == "i386" || ${MACHINE_ARCH} == "x86_64"
+COPTS.random.cc+=	${${ACTIVE_CC} == "clang":? -mrdrnd :}
+.endif
+
+CXXFLAGS.clang+=	-stdlib=libstdc++ -std=c++11 -D_GLIBCXX_ABI_TAG_CXX11=
+CXXFLAGS+=	${CXXFLAGS.${ACTIVE_CC}}
 CWARNFLAGS.clang+=	-Wno-logical-op-parentheses \
 			-Wno-deprecated-writable-strings -Wno-parentheses
 
@@ -22,7 +29,7 @@ CWARNFLAGS.clang+=	-Wno-logical-op-parentheses \
 .include "${.CURDIR}/arch/${LIBSTDCXX_MACHINE_ARCH}/defs.mk"
 
 SHLIB_MAJOR=	7
-SHLIB_MINOR=	2
+SHLIB_MINOR=	3
 
 SUBDIR=		include
 
@@ -34,24 +41,13 @@ CXXFLAGS+=	-fno-implicit-templates -fdiagnostics-show-location=once
 CPPFLAGS+=	-I${DIST}/libstdc++-v3/include
 CPPFLAGS+=	-I${.CURDIR}/arch/${LIBSTDCXX_MACHINE_ARCH}
 # include backwards compatible code
-CPPFLAGS+=     -D_GLIBCXX_SHARED
+CPPFLAGS+=     -D_GLIBCXX_SHARED -DGTHREAD_USE_WEAK -DSUPPORTS_WEAK
 
 CONF=		${DIST}/libstdc++-v3/config
 
 GLIBCPP_INCLUDE_DIR=	${DESTDIR}/usr/include/g++
 
-.if ${HAVE_GCC} >= 48
-# Template instantiation bug workaround for -Os
-.if (${MACHINE_ARCH} == "coldfire" || \
-     ${MACHINE_ARCH} == "sh3eb" || \
-     ${MACHINE_ARCH} == "sh3el" || \
-     ${MACHINE_ARCH} == "m68k" || \
-     ${MACHINE_ARCH} == "m68000" || \
-     ${MACHINE_ARCH} == "vax")
-COPTS.hashtable_c++0x.cc = -O2
-COPTS.bitmap_allocator.cc = -O2
-.endif
-.endif
+# Template instantiation bug workaround for -O<2/s
 COPTS.cp-demangle.c = -Wno-stack-protector
 COPTS.cp-demangle.c = -Wno-stack-protector
 COPTS.fstream-inst.cc = -Wno-stack-protector
@@ -60,11 +56,11 @@ COPTS.misc-inst.cc = -Wno-stack-protector
 COPTS.ostream-inst.cc = -Wno-stack-protector
 COPTS.valarray-inst.cc = -Wno-stack-protector
 COPTS.wlocale-inst.cc = -Wno-stack-protector
-COPTS.concept-inst.cc=	-D_GLIBCPP_CONCEPT_CHECKS -fimplicit-templates
+COPTS.concept-inst.cc=	-fimplicit-templates
+COPTS.hashtable_c++0x.cc=  -fimplicit-templates
+COPTS.bitmap_allocator.cc = -fimplicit-templates
 CPPFLAGS.strstream.cc=	-I$(GLIBCPP_INCLUDE_DIR)/backward -Wno-deprecated
 
-# For GCC 4.5
-.if ${HAVE_GCC} >= 45
 # XXX also need this for some PCHs.
 CPPFLAGS.atomic.cc = -std=gnu++0x
 CPPFLAGS.compatibility-c++0x.cc = -std=gnu++0x
@@ -87,7 +83,6 @@ CPPFLAGS.concept-inst.cc += -D_GLIBCXX_CONCEPT_CHECKS
 CPPFLAGS.parallel_list.cc += -D_GLIBCXX_PARALLEL
 CPPFLAGS.parallel_settings.cc += -D_GLIBCXX_PARALLEL
 CPPFLAGS.compatibility-parallel_list.cc += -D_GLIBCXX_PARALLEL
-.endif
 
 cp-demangle.d cp-demangle.o: cp-demangle.h
 
@@ -109,6 +104,10 @@ BUILDSYMLINKS+=	\
 	${GLIBCXX_SRCDIR}/${G_BASIC_FILE_CC} basic_file.cc \
 	${DIST}/libiberty/cp-demangle.c cp-demangle.c \
 	${DIST}/libiberty/cp-demangle.h cp-demangle.h
+
+.if ${HAVE_LIBGCC_EH} == "no"
+G_CONFIGLINKS:= ${G_CONFIGLINKS:S,libgcc/config/arm/unwind-arm.h,libgcc/unwind-generic.h,}
+.endif
 
 .if ${MKGCC} != "no"
 .if defined(G_CONFIGLINKS) && !empty(G_CONFIGLINKS)

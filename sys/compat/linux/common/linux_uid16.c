@@ -241,7 +241,7 @@ linux_sys_getgroups16(struct lwp *l, const struct linux_sys_getgroups16_args *ua
 	*retval = ngrps;
 	if (SCARG(uap, gidsetsize) == 0)
 		return 0;
-	if (SCARG(uap, gidsetsize) < ngrps)
+	if (SCARG(uap, gidsetsize) < (int)ngrps)
 		return EINVAL;
 
 	gidset = SCARG(uap, gidset);

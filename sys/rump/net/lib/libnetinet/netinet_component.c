@@ -51,12 +51,11 @@ RUMP_COMPONENT(RUMP_COMPONENT_NET)
 {
 	extern struct domain arpdomain, inetdomain;
 
-	DOMAINADD(arpdomain);
-	DOMAINADD(inetdomain);
+	domain_attach(&arpdomain);
+	domain_attach(&inetdomain);
 
 	carpattach(1);
 
-	rump_netisr_register(NETISR_IP, ipintr);
 	rump_netisr_register(NETISR_ARP, arpintr);
 }
 
@@ -88,7 +87,7 @@ RUMP_COMPONENT(RUMP_COMPONENT_NET_IFCFG)
 	sin->sin_len = sizeof(struct sockaddr_in);
 	sin->sin_addr.s_addr = inet_addr("127.255.255.255");
 
-	in_control(so, SIOCAIFADDR, &ia, lo0ifp, curlwp);
+	in_control(so, SIOCAIFADDR, &ia, lo0ifp);
 	if_up(lo0ifp);
 	soclose(so);
 }

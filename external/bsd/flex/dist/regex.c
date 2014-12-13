@@ -22,9 +22,8 @@
 /*  IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED */
 /*  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR */
 /*  PURPOSE. */
-
 #include "flexdef.h"
-
+__RCSID("$NetBSD$");
 
 static const char* REGEXP_LINEDIR = "^#line ([[:digit:]]+) \"(.*)\"";
 static const char* REGEXP_BLANK_LINE = "^[[:space:]]*$";

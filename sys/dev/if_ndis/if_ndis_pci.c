@@ -358,11 +358,6 @@ void ndis_attach_pci(device_t parent, device_t self, void *aux)
 	
 	printf("pci interrupt: %s\n", pci_intr_string(pa->pa_pc, ih));
 	
-	if(rl == NULL) {
-		sc->error = ENOMEM;
-		return;
-	}
-	
 	/* save resource list in the softc */
 	sc->ndis_rl = rl;
 	sc->ndis_rescnt = rl->cprl_count;

@@ -259,7 +259,11 @@ bozo_process_cgi(bozo_httpreq_t *request)
 	if (!httpd->cgibin && !httpd->process_cgi)
 		return 0;
 
-	uri = request->hr_oldfile ? request->hr_oldfile : request->hr_file;
+	if (request->hr_oldfile && strcmp(request->hr_oldfile, "/") != 0)
+		uri = request->hr_oldfile;
+	else
+		uri = request->hr_file;
+
 	if (uri[0] == '/')
 		file = bozostrdup(httpd, uri);
 	else

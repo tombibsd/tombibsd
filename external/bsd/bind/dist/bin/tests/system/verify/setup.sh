@@ -17,7 +17,8 @@
 SYSTEMTESTTOP=..
 . $SYSTEMTESTTOP/conf.sh
 
-sh clean.sh 
-test -e $RANDFILE || $GENRANDOM 400 $RANDFILE
+$SHELL clean.sh 
 
-(cd zones && sh genzones.sh)
+test -r $RANDFILE || $GENRANDOM 400 $RANDFILE
+
+(cd zones && $SHELL genzones.sh)

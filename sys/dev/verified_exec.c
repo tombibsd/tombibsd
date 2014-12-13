@@ -80,6 +80,7 @@ const struct cdevsw veriexec_cdevsw = {
 #endif
 	.d_poll = nopoll,
 	.d_mmap = nommap,
+	.d_discard = nodiscard,
 #if defined(__NetBSD__)
        .d_kqfilter = nokqfilter,
        .d_flag = D_OTHER,

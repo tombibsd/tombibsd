@@ -51,7 +51,7 @@
 STATIC int
 my_soo_read(connection_t *conn, struct uio *u, int flags)
 {
-	struct socket *so = (struct socket *) conn->sock->f_data;
+	struct socket *so = conn->sock->f_socket;
 	int ret;
 #ifdef ISCSI_DEBUG
 	size_t resid = u->uio_resid;

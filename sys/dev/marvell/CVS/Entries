@@ -11,7 +11,7 @@
 /gtidmacvar.h/1.2/Tue Mar 25 02:35:37 2014/-kk/
 /gtintrreg.h/1.5/Wed Apr 28 13:51:56 2010/-kk/
 /gtintrvar.h/1.1/Wed Apr 28 13:51:56 2010/-kk/
-/gtmpsc.c/1.44/Tue Mar 25 02:35:37 2014/-kk/
+/gtmpsc.c/1.46/Tue Dec  9 04:34:58 2014/-kk/
 /gtmpscreg.h/1.4/Wed Apr 28 13:51:56 2010/-kk/
 /gtmpscvar.h/1.8/Wed Apr 28 13:51:56 2010/-kk/
 /gtpci.c/1.31/Tue Nov 12 02:18:44 2013/-kk/
@@ -22,9 +22,9 @@
 /gtsdmavar.h/1.1/Wed Apr 28 13:51:56 2010/-kk/
 /gttwsi.c/1.11/Thu Oct 24 10:28:58 2013/-kk/
 /gtvar.h/1.15/Wed Apr 28 13:51:56 2010/-kk/
-/if_gfe.c/1.41/Sun Jul 22 14:32:59 2012/-kk/
+/if_gfe.c/1.43/Fri Oct  3 10:05:13 2014/-kk/
 /if_gfevar.h/1.12/Thu Feb  2 19:43:04 2012/-kk/
-/if_mvgbe.c/1.38/Tue Mar 25 02:35:37 2014/-kk/
+/if_mvgbe.c/1.39/Fri Oct  3 09:26:00 2014/-kk/
 /marvellreg.h/1.8/Tue Mar 25 02:35:37 2014/-kk/
 /marvellvar.h/1.5/Tue Mar 25 02:35:37 2014/-kk/
 /mvcesa.c/1.1/Fri Jul 27 03:00:01 2012/-kk/

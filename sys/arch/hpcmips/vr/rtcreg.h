@@ -42,9 +42,6 @@
 #define EPOCHMONTH	1			/* WINCE epoch month of year */
 #define EPOCHDATE	1			/* WINCE epoch date of month */
 
-#define	LEAPYEAR4(year)	((((year) % 4) == 0 && ((year) % 100) != 0) || ((year%400)) == 0)
-#define	LEAPYEAR2(year)	(((year) % 4) == 0)
-
 /*
  *	RTC (Real Time Clock Unit) Registers definitions.
  *		start 0x0B0000C0 (Vr4102-4121)

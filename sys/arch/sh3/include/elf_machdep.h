@@ -1,8 +1,6 @@
 /*	$NetBSD$	*/
 
-#if !defined(_BYTE_ORDER) && !defined(HAVE_NBTOOL_CONFIG_H)
-#error Define _BYTE_ORDER!
-#endif
+#include <machine/endian_machdep.h>
 
 #if _BYTE_ORDER == _LITTLE_ENDIAN
 #define	ELF32_MACHDEP_ENDIANNESS	ELFDATA2LSB

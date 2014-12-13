@@ -390,7 +390,7 @@
 			    off_t length); }
 201	STD 	 RUMP	{ int|sys||ftruncate(int fd, int PAD, off_t length); }
 202	STD	 RUMP 	{ int|sys||__sysctl(const int *name, u_int namelen, \
-			    void *old, size_t *oldlenp, const void *new, \
+			    void *oldv, size_t *oldlenp, const void *newv, \
 			    size_t newlen); }
 203	STD 		{ int|sys||mlock(const void *addr, size_t len); }
 204	STD 		{ int|sys||munlock(const void *addr, size_t len); }
@@ -629,7 +629,7 @@
 328	UNIMPL
 329	UNIMPL
 ; SA system calls.
-330	COMPAT_60 	{ int|sys||sa_register(void *new, void **old, \
+330	COMPAT_60 	{ int|sys||sa_register(void *newv, void **oldv, \
 				int flags, ssize_t stackinfo_offset); }
 331	COMPAT_60 	{ int|sys||sa_stacks(int num, stack_t *stacks); }
 332	COMPAT_60 	{ int|sys||sa_enable(void); }
@@ -944,3 +944,7 @@
 478	STD 		{ int|sys|60|_lwp_park(clockid_t clock_id, int flags, \
 			    const struct timespec *ts, lwpid_t unpark, \
 			    const void *hint, const void *unparkhint); }
+479	STD  RUMP	{ int|sys||posix_fallocate(int fd, int PAD, off_t pos, \
+			    off_t len); }
+480	STD  RUMP	{ int|sys||fdiscard(int fd, int PAD, off_t pos, \
+			    off_t len); }

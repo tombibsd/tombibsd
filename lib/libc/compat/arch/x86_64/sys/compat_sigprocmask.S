@@ -65,3 +65,4 @@ err:
 #else
 	jmp	CERROR
 #endif
+END(sigprocmask)

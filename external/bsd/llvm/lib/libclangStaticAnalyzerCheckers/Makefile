@@ -62,6 +62,7 @@ SRCS+=	AllocationDiagnostics.cpp \
 	StackAddrEscapeChecker.cpp \
 	StreamChecker.cpp \
 	TaintTesterChecker.cpp \
+	TestAfterDivZeroChecker.cpp \
 	TraversalChecker.cpp \
 	UndefBranchChecker.cpp \
 	UndefCapturedBlockVarChecker.cpp \

@@ -998,6 +998,7 @@ pq3pci_make_tag(void *v, int bus, int dev, int func)
 	return (bus << 16) | (dev << 11) | (func << 8);
 }
 
+#if 0
 static inline pcitag_t
 pq3pci_config_addr_read(pci_chipset_tag_t pc)
 {
@@ -1006,6 +1007,7 @@ pq3pci_config_addr_read(pci_chipset_tag_t pc)
         __asm volatile("mbar\n\tmsync");
 	return v;
 }
+#endif
 
 static inline void
 pq3pci_config_addr_write(pci_chipset_tag_t pc, pcitag_t v)

@@ -20,6 +20,8 @@ DPADD+=		${LIBINTL}
 
 .include "../Makefile.frontend"
 
+${SRCS}: ${GCCARCH}/defs.mk
+
 COPTS.gcc.c=	-Wno-stack-protector
 
 .PATH: ${DIST}/gcc/cp ${DIST}/gcc ${DIST}/gcc/cp

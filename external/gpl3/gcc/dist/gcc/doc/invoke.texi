@@ -864,7 +864,12 @@ See RS/6000 and PowerPC Options.
 -mno-recip-precision @gol
 -mveclibabi=@var{type} -mfriz -mno-friz @gol
 -mpointers-to-nested-functions -mno-pointers-to-nested-functions @gol
--msave-toc-indirect -mno-save-toc-indirect}
+-msave-toc-indirect -mno-save-toc-indirect @gol
+-mpower8-fusion -mno-mpower8-fusion -mpower8-vector -mno-power8-vector @gol
+-mcrypto -mno-crypto -mdirect-move -mno-direct-move @gol
+-mquad-memory -mno-quad-memory @gol
+-mquad-memory-atomic -mno-quad-memory-atomic @gol
+-mcompat-align-parm -mno-compat-align-parm}
 
 @emph{RX Options}
 @gccoptlist{-m64bit-doubles  -m32bit-doubles  -fpu  -nofpu@gol
@@ -934,6 +939,7 @@ See RS/6000 and PowerPC Options.
 -mhard-quad-float  -msoft-quad-float @gol
 -mstack-bias  -mno-stack-bias @gol
 -munaligned-doubles  -mno-unaligned-doubles @gol
+-muser-mode  -mno-user-mode @gol
 -mv8plus  -mno-v8plus  -mvis  -mno-vis @gol
 -mvis2  -mno-vis2  -mvis3  -mno-vis3 @gol
 -mcbcond -mno-cbcond @gol
@@ -1012,6 +1018,7 @@ See S/390 and zSeries Options.
 -ffixed-@var{reg}  -fexceptions @gol
 -fnon-call-exceptions  -fdelete-dead-exceptions  -funwind-tables @gol
 -fasynchronous-unwind-tables @gol
+-fno-gnu-unique @gol
 -finhibit-size-directive  -finstrument-functions @gol
 -finstrument-functions-exclude-function-list=@var{sym},@var{sym},@dots{} @gol
 -finstrument-functions-exclude-file-list=@var{file},@var{file},@dots{} @gol
@@ -11280,8 +11287,8 @@ of the @option{-mcpu=} option.  Permissible names are: @samp{armv2},
 
 @option{-march=native} causes the compiler to auto-detect the architecture
 of the build computer.  At present, this feature is only supported on
-Linux, and not all architectures are recognized.  If the auto-detect is
-unsuccessful the option has no effect.
+GNU/Linux, and not all architectures are recognized.  If the auto-detect
+is unsuccessful the option has no effect.
 
 @item -mtune=@var{name}
 @opindex mtune
@@ -11326,7 +11333,7 @@ this option may change in future GCC versions as CPU models come and go.
 
 @option{-mtune=native} causes the compiler to auto-detect the CPU
 of the build computer.  At present, this feature is only supported on
-Linux, and not all architectures are recognized.  If the auto-detect is
+GNU/Linux, and not all architectures are recognized.  If the auto-detect is
 unsuccessful the option has no effect.
 
 @item -mcpu=@var{name}
@@ -11347,8 +11354,8 @@ See @option{-mtune} for more information.
 
 @option{-mcpu=native} causes the compiler to auto-detect the CPU
 of the build computer.  At present, this feature is only supported on
-Linux, and not all architectures are recognized.  If the auto-detect is
-unsuccessful the option has no effect.
+GNU/Linux, and not all architectures are recognized.  If the auto-detect
+is unsuccessful the option has no effect.
 
 @item -mfpu=@var{name}
 @opindex mfpu
@@ -12488,7 +12495,7 @@ are compatible with as many systems and code bases as possible.
 @item -mkernel
 @opindex mkernel
 Enable kernel development mode.  The @option{-mkernel} option sets
-@option{-static}, @option{-fno-common}, @option{-fno-cxa-atexit},
+@option{-static}, @option{-fno-common}, @option{-fno-use-cxa-atexit},
 @option{-fno-exceptions}, @option{-fno-non-call-exceptions},
 @option{-fapple-kext}, @option{-fno-weak} and @option{-fno-rtti} where
 applicable.  This mode also sets @option{-mno-altivec},
@@ -17254,7 +17261,9 @@ following options:
 @gccoptlist{-maltivec  -mfprnd  -mhard-float  -mmfcrf  -mmultiple @gol
 -mpopcntb -mpopcntd  -mpowerpc64 @gol
 -mpowerpc-gpopt  -mpowerpc-gfxopt  -msingle-float -mdouble-float @gol
--msimple-fpu -mstring  -mmulhw  -mdlmzb  -mmfpgpr -mvsx}
+-msimple-fpu -mstring  -mmulhw  -mdlmzb  -mmfpgpr -mvsx @gol
+-mcrypto -mdirect-move -mpower8-fusion -mpower8-vector @gol
+-mquad-memory -mquad-memory-atomic}
 
 The particular options set for any particular CPU varies between
 compiler versions, depending on what setting seems to produce optimal
@@ -17304,6 +17313,38 @@ enable the use of built-in functions that allow more direct access to
 the AltiVec instruction set.  You may also need to set
 @option{-mabi=altivec} to adjust the current ABI with AltiVec ABI
 enhancements.
+
+When @option{-maltivec} is used, rather than @option{-maltivec=le} or
+@option{-maltivec=be}, the element order for Altivec intrinsics such
+as @code{vec_splat}, @code{vec_extract}, and @code{vec_insert} will
+match array element order corresponding to the endianness of the
+target.  That is, element zero identifies the leftmost element in a
+vector register when targeting a big-endian platform, and identifies
+the rightmost element in a vector register when targeting a
+little-endian platform.
+
+@item -maltivec=be
+@opindex maltivec=be
+Generate Altivec instructions using big-endian element order,
+regardless of whether the target is big- or little-endian.  This is
+the default when targeting a big-endian platform.
+
+The element order is used to interpret element numbers in Altivec
+intrinsics such as @code{vec_splat}, @code{vec_extract}, and
+@code{vec_insert}.  By default, these will match array element order
+corresponding to the endianness for the target.
+
+@item -maltivec=le
+@opindex maltivec=le
+Generate Altivec instructions using little-endian element order,
+regardless of whether the target is big- or little-endian.  This is
+the default when targeting a little-endian platform.  This option is
+currently ignored when targeting a big-endian platform.
+
+The element order is used to interpret element numbers in Altivec
+intrinsics such as @code{vec_splat}, @code{vec_extract}, and
+@code{vec_insert}.  By default, these will match array element order
+corresponding to the endianness for the target.
 
 @item -mvrsave
 @itemx -mno-vrsave
@@ -17371,6 +17412,55 @@ This option has been deprecated.  Use @option{-mspe} and
 Generate code that uses (does not use) vector/scalar (VSX)
 instructions, and also enable the use of built-in functions that allow
 more direct access to the VSX instruction set.
+
+@item -mcrypto
+@itemx -mno-crypto
+@opindex mcrypto
+@opindex mno-crypto
+Enable the use (disable) of the built-in functions that allow direct
+access to the cryptographic instructions that were added in version
+2.07 of the PowerPC ISA.
+
+@item -mdirect-move
+@itemx -mno-direct-move
+@opindex mdirect-move
+@opindex mno-direct-move
+Generate code that uses (does not use) the instructions to move data
+between the general purpose registers and the vector/scalar (VSX)
+registers that were added in version 2.07 of the PowerPC ISA.
+
+@item -mpower8-fusion
+@itemx -mno-power8-fusion
+@opindex mpower8-fusion
+@opindex mno-power8-fusion
+Generate code that keeps (does not keeps) some integer operations
+adjacent so that the instructions can be fused together on power8 and
+later processors.
+
+@item -mpower8-vector
+@itemx -mno-power8-vector
+@opindex mpower8-vector
+@opindex mno-power8-vector
+Generate code that uses (does not use) the vector and scalar
+instructions that were added in version 2.07 of the PowerPC ISA.  Also
+enable the use of built-in functions that allow more direct access to
+the vector instructions.
+
+@item -mquad-memory
+@itemx -mno-quad-memory
+@opindex mquad-memory
+@opindex mno-quad-memory
+Generate code that uses (does not use) the non-atomic quad word memory
+instructions.  The @option{-mquad-memory} option requires use of
+64-bit mode.
+
+@item -mquad-memory-atomic
+@itemx -mno-quad-memory-atomic
+@opindex mquad-memory-atomic
+@opindex mno-quad-memory-atomic
+Generate code that uses (does not use) the atomic quad word memory
+instructions.  The @option{-mquad-memory-atomic} option requires use of
+64-bit mode.
 
 @item -mfloat-gprs=@var{yes/single/double/no}
 @itemx -mfloat-gprs
@@ -17791,7 +17881,8 @@ SVR4 ABI)@.
 @opindex mabi
 Extend the current ABI with a particular extension, or remove such extension.
 Valid values are @var{altivec}, @var{no-altivec}, @var{spe},
-@var{no-spe}, @var{ibmlongdouble}, @var{ieeelongdouble}@.
+@var{no-spe}, @var{ibmlongdouble}, @var{ieeelongdouble},
+@var{elfv1}, @var{elfv2}@.
 
 @item -mabi=spe
 @opindex mabi=spe
@@ -17812,6 +17903,20 @@ This is a PowerPC 32-bit SYSV ABI option.
 @opindex mabi=ieeelongdouble
 Change the current ABI to use IEEE extended-precision long double.
 This is a PowerPC 32-bit Linux ABI option.
+
+@item -mabi=elfv1
+@opindex mabi=elfv1
+Change the current ABI to use the ELFv1 ABI.
+This is the default ABI for big-endian PowerPC 64-bit Linux.
+Overriding the default ABI requires special system support and is
+likely to fail in spectacular ways.
+
+@item -mabi=elfv2
+@opindex mabi=elfv2
+Change the current ABI to use the ELFv2 ABI.
+This is the default ABI for little-endian PowerPC 64-bit Linux.
+Overriding the default ABI requires special system support and is
+likely to fail in spectacular ways.
 
 @item -mprototype
 @itemx -mno-prototype
@@ -18098,6 +18203,23 @@ stack location in the function prologue if the function calls through
 a pointer on AIX and 64-bit Linux systems.  If the TOC value is not
 saved in the prologue, it is saved just before the call through the
 pointer.  The @option{-mno-save-toc-indirect} option is the default.
+
+@item -mcompat-align-parm
+@itemx -mno-compat-align-parm
+@opindex mcompat-align-parm
+Generate (do not generate) code to pass structure parameters with a
+maximum alignment of 64 bits, for compatibility with older versions
+of GCC.
+
+Older versions of GCC (prior to 4.9.0) incorrectly did not align a
+structure parameter on a 128-bit boundary when that structure contained
+a member requiring 128-bit alignment.  This is corrected in more
+recent versions of GCC.  This option may be used to generate code
+that is compatible with functions compiled with older versions of
+GCC.
+
+In this version of the compiler, the @option{-mcompat-align-parm}
+is the default, except when using the Linux ELFv2 ABI.
 @end table
 
 @node RX Options
@@ -18601,6 +18723,72 @@ single-precision mode by default.
 @opindex m4
 Generate code for the SH4.
 
+@item -m4-100
+@opindex m4-100
+Generate code for SH4-100.
+
+@item -m4-100-nofpu
+@opindex m4-100-nofpu
+Generate code for SH4-100 in such a way that the
+floating-point unit is not used.
+
+@item -m4-100-single
+@opindex m4-100-single
+Generate code for SH4-100 assuming the floating-point unit is in
+single-precision mode by default.
+
+@item -m4-100-single-only
+@opindex m4-100-single-only
+Generate code for SH4-100 in such a way that no double-precision
+floating-point operations are used.
+
+@item -m4-200
+@opindex m4-200
+Generate code for SH4-200.
+
+@item -m4-200-nofpu
+@opindex m4-200-nofpu
+Generate code for SH4-200 without in such a way that the
+floating-point unit is not used.
+
+@item -m4-200-single
+@opindex m4-200-single
+Generate code for SH4-200 assuming the floating-point unit is in
+single-precision mode by default.
+
+@item -m4-200-single-only
+@opindex m4-200-single-only
+Generate code for SH4-200 in such a way that no double-precision
+floating-point operations are used.
+
+@item -m4-300
+@opindex m4-300
+Generate code for SH4-300.
+
+@item -m4-300-nofpu
+@opindex m4-300-nofpu
+Generate code for SH4-300 without in such a way that the
+floating-point unit is not used.
+
+@item -m4-300-single
+@opindex m4-300-single
+Generate code for SH4-300 in such a way that no double-precision
+floating-point operations are used.
+
+@item -m4-300-single-only
+@opindex m4-300-single-only
+Generate code for SH4-300 in such a way that no double-precision
+floating-point operations are used.
+
+@item -m4-340
+@opindex m4-340
+Generate code for SH4-340 (no MMU, no FPU).
+
+@item -m4-500
+@opindex m4-500
+Generate code for SH4-500 (no FPU).  Passes @option{-isa=sh4-nofpu} to the
+assembler.
+
 @item -m4a-nofpu
 @opindex m4a-nofpu
 Generate code for the SH4al-dsp, or for a SH4a in such a way that the
@@ -18625,6 +18813,33 @@ Generate code for the SH4a.
 Same as @option{-m4a-nofpu}, except that it implicitly passes
 @option{-dsp} to the assembler.  GCC doesn't generate any DSP
 instructions at the moment.
+
+@item -m5-32media
+@opindex m5-32media
+Generate 32-bit code for SHmedia.
+
+@item -m5-32media-nofpu
+@opindex m5-32media-nofpu
+Generate 32-bit code for SHmedia in such a way that the
+floating-point unit is not used.
+
+@item -m5-64media
+@opindex m5-64media
+Generate 64-bit code for SHmedia.
+
+@item -m5-64media-nofpu
+@opindex m5-64media-nofpu
+Generate 64-bit code for SHmedia in such a way that the
+floating-point unit is not used.
+
+@item -m5-compact
+@opindex m5-compact
+Generate code for SHcompact.
+
+@item -m5-compact-nofpu
+@opindex m5-compact-nofpu
+Generate code for SHcompact in such a way that the
+floating-point unit is not used.
 
 @item -mb
 @opindex mb
@@ -18659,16 +18874,12 @@ Enable the use of bit manipulation instructions on SH2A.
 Enable the use of the instruction @code{fmovd}.  Check @option{-mdalign} for
 alignment constraints.
 
-@item -mhitachi
-@opindex mhitachi
-Comply with the calling conventions defined by Renesas.
-
 @item -mrenesas
-@opindex mhitachi
+@opindex mrenesas
 Comply with the calling conventions defined by Renesas.
 
 @item -mno-renesas
-@opindex mhitachi
+@opindex mno-renesas
 Comply with the calling conventions defined for GCC before the Renesas
 conventions were available.  This option is the default for all
 targets of the SH toolchain.
@@ -18676,12 +18887,12 @@ targets of the SH toolchain.
 @item -mnomacsave
 @opindex mnomacsave
 Mark the @code{MAC} register as call-clobbered, even if
-@option{-mhitachi} is given.
+@option{-mrenesas} is given.
 
 @item -mieee
 @itemx -mno-ieee
 @opindex mieee
-@opindex mnoieee
+@opindex mno-ieee
 Control the IEEE compliance of floating-point comparisons, which affects the
 handling of cases where the result of a comparison is unordered.  By default
 @option{-mieee} is implicitly enabled.  If @option{-ffinite-math-only} is
@@ -18721,14 +18932,14 @@ separated list.  For details on the atomic built-in functions see
 
 @item none
 Disable compiler generated atomic sequences and emit library calls for atomic
-operations.  This is the default if the target is not @code{sh-*-linux*}.
+operations.  This is the default if the target is not @code{sh*-*-linux*}.
 
 @item soft-gusa
 Generate GNU/Linux compatible gUSA software atomic sequences for the atomic
 built-in functions.  The generated atomic sequences require additional support
 from the interrupt/exception handling code of the system and are only suitable
 for SH3* and SH4* single-core systems.  This option is enabled by default when
-the target is @code{sh-*-linux*} and SH3* or SH4*.  When the target is SH4A,
+the target is @code{sh*-*-linux*} and SH3* or SH4*.  When the target is SH4A,
 this option will also partially utilize the hardware atomic instructions
 @code{movli.l} and @code{movco.l} to create more efficient code, unless
 @samp{strict} is specified.  
@@ -18747,7 +18958,7 @@ setting @code{SR.IMASK = 1111}.  This model works only when the program runs
 in privileged mode and is only suitable for single-core systems.  Additional
 support from the interrupt/exception handling code of the system is not
 required.  This model is enabled by default when the target is
-@code{sh-*-linux*} and SH1* or SH2*.
+@code{sh*-*-linux*} and SH1* or SH2*.
 
 @item hard-llcs
 Generate hardware atomic sequences using the @code{movli.l} and @code{movco.l}
@@ -18782,21 +18993,20 @@ that are implied by the @code{tas.b} instruction.  On multi-core SH4A
 processors the @code{tas.b} instruction must be used with caution since it
 can result in data corruption for certain cache configurations.
 
-@item -mspace
-@opindex mspace
-Optimize for space instead of speed.  Implied by @option{-Os}.
-
 @item -mprefergot
 @opindex mprefergot
 When generating position-independent code, emit function calls using
 the Global Offset Table instead of the Procedure Linkage Table.
 
 @item -musermode
+@itemx -mno-usermode
 @opindex musermode
-Don't generate privileged mode only code.  This option
-implies @option{-mno-inline-ic_invalidate}
-if the inlined code would not work in user mode.
-This is the default when the target is @code{sh-*-linux*}.
+@opindex mno-usermode
+Don't allow (allow) the compiler generating privileged mode code.  Specifying
+@option{-musermode} also implies @option{-mno-inline-ic_invalidate} if the
+inlined code would not work in user mode.  @option{-musermode} is the default
+when the target is @code{sh*-*-linux*}.  If the target is SH1* or SH2*
+@option{-musermode} has no effect, since there is no user mode.
 
 @item -multcost=@var{number}
 @opindex multcost=@var{number}
@@ -19082,8 +19292,9 @@ These @samp{-m} options are supported on the SPARC:
 @opindex mno-app-regs
 @opindex mapp-regs
 Specify @option{-mapp-regs} to generate output using the global registers
-2 through 4, which the SPARC SVR4 ABI reserves for applications.  This
-is the default.
+2 through 4, which the SPARC SVR4 ABI reserves for applications.  Like the
+global register 1, each global register 2 through 4 is then treated as an
+allocable register that is clobbered by function calls.  This is the default.
 
 To be fully SVR4 ABI-compliant at the cost of some performance loss,
 specify @option{-mno-app-regs}.  You should compile libraries and system
@@ -19157,6 +19368,14 @@ absolute address.  Otherwise, it assumes they have 4-byte alignment.
 Specifying this option avoids some rare compatibility problems with code
 generated by other compilers.  It is not the default because it results
 in a performance loss, especially for floating-point code.
+
+@item -muser-mode
+@itemx -mno-user-mode
+@opindex muser-mode
+@opindex mno-user-mode
+Do not generate code that can only run in supervisor mode.  This is relevant
+only for the @code{casa} instruction emitted for the LEON3 processor.  The
+default is @option{-mno-user-mode}.
 
 @item -mno-faster-structs
 @itemx -mfaster-structs
@@ -20241,6 +20460,20 @@ that needs this handling enables it on your behalf.
 Generate unwind table in DWARF 2 format, if supported by target machine.  The
 table is exact at each instruction boundary, so it can be used for stack
 unwinding from asynchronous events (such as debugger or garbage collector).
+
+@item -fno-gnu-unique
+@opindex fno-gnu-unique
+On systems with recent GNU assembler and C library, the C++ compiler
+uses the @code{STB_GNU_UNIQUE} binding to make sure that definitions
+of template static data members and static local variables in inline
+functions are unique even in the presence of @code{RTLD_LOCAL}; this
+is necessary to avoid problems with a library used by two different
+@code{RTLD_LOCAL} plugins depending on a definition in one of them and
+therefore disagreeing with the other one about the binding of the
+symbol.  But this causes @code{dlclose} to be ignored for affected
+DSOs; if your program relies on reinitialization of a DSO via
+@code{dlclose} and @code{dlopen}, you can use
+@option{-fno-gnu-unique}.
 
 @item -fpcc-struct-return
 @opindex fpcc-struct-return

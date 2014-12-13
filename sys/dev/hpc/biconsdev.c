@@ -106,6 +106,7 @@ const struct cdevsw biconsdev_cdevsw = {
 	.d_poll = biconsdevpoll,
 	.d_mmap = nommap,
 	.d_kqfilter = ttykqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_TTY
 };
 

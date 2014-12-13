@@ -163,6 +163,7 @@ const struct bdevsw sd_bdevsw = {
 	.d_ioctl = sdioctl,
 	.d_dump = sddump,
 	.d_psize = sdsize,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK
 };
 
@@ -177,6 +178,7 @@ const struct cdevsw sd_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = nommap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK
 };
 
@@ -332,7 +334,7 @@ sdattach(device_t parent, device_t self, void *aux)
 	 * attach the device into the random source list
 	 */
 	rnd_attach_source(&sd->rnd_source, device_xname(sd->sc_dev),
-			  RND_TYPE_DISK, 0);
+			  RND_TYPE_DISK, RND_FLAG_DEFAULT);
 
 	/* Discover wedges on this disk. */
 	dkwedge_discover(&sd->sc_dk);
@@ -1254,6 +1256,15 @@ sdioctl(dev_t dev, u_long cmd, void *addr, int flag, struct lwp *l)
 		return (dkwedge_list(&sd->sc_dk, dkwl, l));
 	    }
 
+	case DIOCMWEDGES:
+	    {
+		if ((flag & FWRITE) == 0)
+			return (EBADF);
+
+		dkwedge_discover(&sd->sc_dk);
+		return 0;
+	    }
+
 	case DIOCGSTRATEGY:
 	    {
 		struct disk_strategy *dks = addr;
@@ -1270,8 +1281,8 @@ sdioctl(dev_t dev, u_long cmd, void *addr, int flag, struct lwp *l)
 	case DIOCSSTRATEGY:
 	    {
 		struct disk_strategy *dks = addr;
-		struct bufq_state *new;
-		struct bufq_state *old;
+		struct bufq_state *new_bufq;
+		struct bufq_state *old_bufq;
 
 		if ((flag & FWRITE) == 0) {
 			return EBADF;
@@ -1281,17 +1292,17 @@ sdioctl(dev_t dev, u_long cmd, void *addr, int flag, struct lwp *l)
 			return EINVAL;
 		}
 		dks->dks_name[sizeof(dks->dks_name) - 1] = 0; /* ensure term */
-		error = bufq_alloc(&new, dks->dks_name,
+		error = bufq_alloc(&new_bufq, dks->dks_name,
 		    BUFQ_EXACT|BUFQ_SORT_RAWBLOCK);
 		if (error) {
 			return error;
 		}
 		s = splbio();
-		old = sd->buf_queue;
-		bufq_move(new, old);
-		sd->buf_queue = new;
+		old_bufq = sd->buf_queue;
+		bufq_move(new_bufq, old_bufq);
+		sd->buf_queue = new_bufq;
 		splx(s);
-		bufq_free(old);
+		bufq_free(old_bufq);
 		
 		return 0;
 	    }

@@ -55,4 +55,6 @@ ENTRY_NP(__sync_fetch_and_sub_8)
 	RET				/* return old value */
 END(__sync_fetch_and_sub_8)
 
+CRT_ALIAS(__atomic_fetch_sub_8,__sync_fetch_and_sub_8)
+
 #endif /* _ARM_ARCH_6 */

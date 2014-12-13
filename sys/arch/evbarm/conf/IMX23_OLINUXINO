@@ -78,6 +78,8 @@ ugen*		at uhub? port ?
 
 include "dev/usb/usbdevices.config"
 
+midi*		at midibus?
+
 ukphy*		at mii? phy ?
 
 options		MEMSIZE=64
@@ -85,16 +87,19 @@ options		DDB
 options		HZ=100
 options		INET		# IP + ICMP + TCP + UDP
 options		INET6		# IPv6
-options		COMPAT_60	# NetBSD 6.0 compatibility
+options		COMPAT_NETBSD32	# allow running arm (e.g. non-earm) binaries
+options		COMPAT_60	# NetBSD 6.0, and
+options		COMPAT_70	# NetBSD 7.0 binary compatibility.
 
 makeoptions     DEBUG="-g"      # compile full symbol table
-options         SYMTAB_SPACE=800000
+makeoptions	COPY_SYMTAB=1
 
 options		SYSVMSG		# System V-like message queues
 options		SYSVSEM		# System V-like semaphores
 options		SYSVSHM		# System V-like memory sharing
 
 #options		MODULAR
+#options		MODULAR_DEFAULT_AUTOLOAD
 options		KTRACE
 #options		DEBUG
 #options		DIAGNOSTIC

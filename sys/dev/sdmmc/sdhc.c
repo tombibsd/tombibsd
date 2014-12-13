@@ -222,7 +222,7 @@ sdhc_cfprint(void *aux, const char *pnp)
 {
 	const struct sdmmcbus_attach_args * const saa = aux;
 	const struct sdhc_host * const hp = saa->saa_sch;
-	
+
 	if (pnp) {
 		aprint_normal("sdmmc at %s", pnp);
 	}
@@ -353,8 +353,9 @@ sdhc_host_found(struct sdhc_softc *sc, bus_space_tag_t iot,
 	/*
 	 * Determine SD bus voltage levels supported by the controller.
 	 */
-	if (ISSET(caps, SDHC_EMBEDDED_SLOT) &&
-	    ISSET(caps, SDHC_VOLTAGE_SUPP_1_8V)) {
+	if (ISSET(caps, SDHC_VOLTAGE_SUPP_1_8V) &&
+	    (hp->specver < SDHC_SPEC_VERS_300 ||
+	     ISSET(caps, SDHC_EMBEDDED_SLOT))) {
 		SET(hp->ocr, MMC_OCR_1_7V_1_8V | MMC_OCR_1_8V_1_9V);
 	}
 	if (ISSET(caps, SDHC_VOLTAGE_SUPP_3_0V)) {
@@ -813,6 +814,7 @@ sdhc_clock_divisor(struct sdhc_host *hp, u_int freq, u_int *divp)
 	}
 	if (hp->specver == SDHC_SPEC_VERS_300) {
 		div = howmany(hp->clkbase, freq);
+		div = div > 1 ? howmany(div, 2) : 0;
 		if (div > 0x3ff)
 			return false;
 		*divp = (((div >> 8) & SDHC_SDCLK_XDIV_MASK)
@@ -1031,7 +1033,7 @@ sdhc_card_enable_intr(sdmmc_chipset_handle_t sch, int enable)
 	}
 }
 
-static void 
+static void
 sdhc_card_intr_ack(sdmmc_chipset_handle_t sch)
 {
 	struct sdhc_host *hp = (struct sdhc_host *)sch;
@@ -1074,7 +1076,7 @@ sdhc_exec_command(sdmmc_chipset_handle_t sch, struct sdmmc_command *cmd)
 		} else {
 			HSET2(hp, SDHC_NINTR_SIGNAL_EN, ready);
 			HSET2(hp, SDHC_NINTR_STATUS_EN, ready);
-		}  
+		}
 		mutex_exit(&hp->intr_mtx);
 	}
 
@@ -1196,7 +1198,8 @@ sdhc_start_command(struct sdhc_host *hp, struct sdmmc_command *cmd)
 		/* XXX only for memory commands? */
 		mode |= SDHC_AUTO_CMD12_ENABLE;
 	}
-	if (cmd->c_dmamap != NULL && cmd->c_datalen > 0) {
+	if (cmd->c_dmamap != NULL && cmd->c_datalen > 0 &&
+	    !ISSET(sc->sc_flags, SDHC_FLAG_EXTERNAL_DMA)) {
 		mode |= SDHC_DMA_ENABLE;
 	}
 
@@ -1229,8 +1232,10 @@ sdhc_start_command(struct sdhc_host *hp, struct sdmmc_command *cmd)
 	DPRINTF(1,("%s: writing cmd: blksize=%d blkcnt=%d mode=%04x cmd=%04x\n",
 	    HDEVNAME(hp), blksize, blkcount, mode, command));
 
-	blksize |= (MAX(0, PAGE_SHIFT - 12) & SDHC_DMA_BOUNDARY_MASK) <<
-	    SDHC_DMA_BOUNDARY_SHIFT;	/* PAGE_SIZE DMA boundary */
+	if (!ISSET(hp->sc->sc_flags, SDHC_FLAG_ENHANCED)) {
+		blksize |= (MAX(0, PAGE_SHIFT - 12) & SDHC_DMA_BOUNDARY_MASK) <<
+		    SDHC_DMA_BOUNDARY_SHIFT;	/* PAGE_SIZE DMA boundary */
+	}
 
 	mutex_enter(&hp->host_mtx);
 
@@ -1267,6 +1272,7 @@ sdhc_start_command(struct sdhc_host *hp, struct sdmmc_command *cmd)
 static void
 sdhc_transfer_data(struct sdhc_host *hp, struct sdmmc_command *cmd)
 {
+	struct sdhc_softc *sc = hp->sc;
 	int error;
 
 	DPRINTF(1,("%s: data transfer: resp=%08x datalen=%u\n", HDEVNAME(hp),
@@ -1282,9 +1288,17 @@ sdhc_transfer_data(struct sdhc_host *hp, struct sdmmc_command *cmd)
 	}
 #endif
 
-	if (cmd->c_dmamap != NULL)
-		error = sdhc_transfer_data_dma(hp, cmd);
-	else
+	if (cmd->c_dmamap != NULL) {
+		if (hp->sc->sc_vendor_transfer_data_dma != NULL) {
+			error = hp->sc->sc_vendor_transfer_data_dma(sc, cmd);
+			if (error == 0 && !sdhc_wait_intr(hp,
+			    SDHC_TRANSFER_COMPLETE, SDHC_TRANSFER_TIMEOUT)) {
+				error = ETIMEDOUT;
+			}
+		} else {
+			error = sdhc_transfer_data_dma(hp, cmd);
+		}
+	} else
 		error = sdhc_transfer_data_pio(hp, cmd);
 	if (error)
 		cmd->c_error = error;
@@ -1638,7 +1652,7 @@ sdhc_wait_intr(struct sdhc_host *hp, int mask, int timo)
 
 	DPRINTF(2,("%s: intr status %#x error %#x\n", HDEVNAME(hp), status,
 	    hp->intr_error_status));
-	
+
 	/* Command timeout has higher priority than command complete. */
 	if (ISSET(status, SDHC_ERROR_INTERRUPT) || hp->intr_error_status) {
 		hp->intr_error_status = 0;
@@ -1696,7 +1710,7 @@ sdhc_intr(void *arg)
 				HWRITE2(hp, SDHC_EINTR_STATUS, error);
 			}
 		}
-	
+
 		DPRINTF(2,("%s: interrupt status=%x error=%x\n", HDEVNAME(hp),
 		    status, error));
 
@@ -1719,7 +1733,9 @@ sdhc_intr(void *arg)
 		 * Wake up the sdmmc event thread to scan for cards.
 		 */
 		if (ISSET(status, SDHC_CARD_REMOVAL|SDHC_CARD_INSERTION)) {
-			sdmmc_needs_discover(hp->sdmmc);
+			if (hp->sdmmc != NULL) {
+				sdmmc_needs_discover(hp->sdmmc);
+			}
 			if (ISSET(sc->sc_flags, SDHC_FLAG_ENHANCED)) {
 				HCLR4(hp, SDHC_NINTR_STATUS_EN,
 				    status & (SDHC_CARD_REMOVAL|SDHC_CARD_INSERTION));

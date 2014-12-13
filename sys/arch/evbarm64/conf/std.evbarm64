@@ -1,0 +1,4 @@
+#	$NetBSD$
+
+include		"conf/std"
+include		"arch/aarch64/conf/std.aarch64"	# arch standard options

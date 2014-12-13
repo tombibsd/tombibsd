@@ -80,6 +80,11 @@ file	arch/arc/arc/arcbios.c
 
 file	arch/mips/mips/mips3_clock.c
 
+#
+# Stack-less Just-In-Time compiler
+#
+include	"external/bsd/sljit/conf/files.sljit"
+
 ##
 ##	Machine-independent ATAPI drivers
 ##

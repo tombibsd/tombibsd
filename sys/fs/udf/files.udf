@@ -2,6 +2,7 @@
 
 deffs	UDF
 
+define	udf: vfs
 file	fs/udf/udf_osta.c		udf
 file	fs/udf/udf_vfsops.c		udf
 file	fs/udf/udf_vnops.c		udf

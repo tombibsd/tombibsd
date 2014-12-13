@@ -667,6 +667,9 @@ cpu_probe_vortex86(struct cpu_info *ci)
 	case 0x33504d44:
 		strcpy(cpu_brand_string, "Vortex86MX");
 		break;
+	case 0x37504d44:
+		strcpy(cpu_brand_string, "Vortex86EX");
+		break;
 	default:
 		strcpy(cpu_brand_string, "Unknown Vortex86");
 		break;
@@ -754,7 +757,9 @@ cpu_probe_fpu(struct cpu_info *ci)
 	/* XXX these probably ought to be per-cpu */
 	if (descs[2] > 512)
 	    x86_fpu_save_size = descs[2];
+#ifndef XEN
 	x86_xsave_features = (uint64_t)descs[3] << 32 | descs[0];
+#endif
 }
 
 void
@@ -905,9 +910,9 @@ cpu_identify(struct cpu_info *ci)
 	cpu_setmodel("%s %d86-class",
 	    cpu_vendor_names[cpu_vendor], cpu_class + 3);
 	if (cpu_brand_string[0] != '\0') {
-		aprint_normal(": %s", cpu_brand_string);
+		aprint_normal_dev(ci->ci_dev, "%s", cpu_brand_string);
 	} else {
-		aprint_normal(": %s", cpu_getmodel());
+		aprint_normal_dev(ci->ci_dev, "%s", cpu_getmodel());
 		if (ci->ci_data.cpu_cc_freq != 0)
 			aprint_normal(", %dMHz",
 			    (int)(ci->ci_data.cpu_cc_freq / 1000000));

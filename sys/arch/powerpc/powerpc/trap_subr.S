@@ -489,7 +489,7 @@ _C_LABEL(tlbimiss):
 	mtctr	%r1			/* load counter */
 2:
 	ldregu	%r1,8(%r2)		/* get next pte */
-	cmpl	%cr0,%r1,%r3		/* see if found pte */
+	cmplw	%r1,%r3			/* see if found pte */
 	bdneq	2b			/* loop if not eq */
 	bne	3f			/* not found */
 	ldreg	%r1,4(%r2)		/* load tlb entry lower word */
@@ -550,7 +550,7 @@ _C_LABEL(tlbdlmiss):
 	mtctr	%r1			/* load counter */
 2:
 	ldregu	%r1,8(%r2)		/* get next pte */
-	cmpl	%cr0,%r1,%r3		/* see if found pte */
+	cmplw	%r1,%r3			/* see if found pte */
 	bdneq	2b			/* loop if not eq */
 	bne	3f			/* not found */
 	ldreg	%r1,4(%r2)		/* load tlb entry lower word */
@@ -606,7 +606,7 @@ _C_LABEL(tlbdsmiss):
 	mtctr	%r1			/* load counter */
 2:
 	ldregu	%r1,8(%r2)		/* get next pte */
-	cmpl	%cr0,%r1,%r3		/* see if found pte */
+	cmplw	%r1,%r3			/* see if found pte */
 	bdneq	2b			/* loop if not eq */
 	bne	3f			/* not found */
 	ldreg	%r1,4(%r2)		/* load tlb entry lower word */

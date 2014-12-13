@@ -109,7 +109,7 @@ static int	ocryptodev_msession(struct fcrypt *, struct osession_n_op *, int);
 int
 ocryptof_ioctl(struct file *fp, u_long cmd, void *data)
 {
-	struct fcrypt *fcr = fp->f_data;
+	struct fcrypt *fcr = fp->f_fcrypt;
 	struct csession *cse;
 	struct osession_op *osop;
 	struct osession_n_op *osnop;

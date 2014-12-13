@@ -55,7 +55,7 @@ SUBDIR+= cgdconfig
 .endif
 
 .if (${USE_INET6} != "no")
-SUBDIR+= ping6 rtsol
+SUBDIR+= ping6
 .endif
 
 .if (${MKISCSI} != "no")

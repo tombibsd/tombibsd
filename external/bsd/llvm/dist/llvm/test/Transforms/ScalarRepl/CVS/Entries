@@ -36,7 +36,7 @@
 /lifetime.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /load-store-aggregate.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /memcpy-align.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
-/memset-aggregate-byte-leader.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/memset-aggregate-byte-leader.ll/1.1.1.2/Tue Jun  3 03:04:01 2014/-kk/
 /memset-aggregate.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /negative-memset.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /nonzero-first-index.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
@@ -51,7 +51,7 @@
 /union-fp-int.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /union-packed.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /union-pointer.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
-/vector_memcpy.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/vector_memcpy.ll/1.1.1.2/Tue Jun  3 03:04:01 2014/-kk/
 /vector_promote.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /vectors-with-mismatched-elements.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /volatile.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/

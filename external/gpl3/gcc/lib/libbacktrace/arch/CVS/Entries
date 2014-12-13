@@ -25,7 +25,11 @@ D/mips64eb////
 D/mips64el////
 D/mipseb////
 D/mipsel////
+D/or1k////
 D/powerpc////
+D/powerpc64////
+D/riscv32////
+D/riscv64////
 D/sh3eb////
 D/sh3el////
 D/sparc////

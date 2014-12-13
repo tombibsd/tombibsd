@@ -35,6 +35,10 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+#ifdef _KERNEL_OPT
+#include "opt_i2c.h"
+#endif
+
 #include <sys/cdefs.h>
 __KERNEL_RCSID(0, "$NetBSD$");
 
@@ -55,7 +59,9 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include "locators.h"
 
+#ifndef I2C_MAX_ADDR
 #define I2C_MAX_ADDR	0x3ff	/* 10-bit address, max */
+#endif
 
 struct iic_softc {
 	i2c_tag_t sc_tag;
@@ -78,6 +84,7 @@ const struct cdevsw iic_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = nommap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_OTHER
 };
 

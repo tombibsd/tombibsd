@@ -182,6 +182,14 @@ _C_LABEL(gumstix_start):
 	mcr	p15, 0, r0, c2, c0, 0	/* Set TTB */
 	mcr	p15, 0, r0, c8, c7, 0	/* Flush TLB */
 
+#if defined(CPU_CORTEXA8)
+	mcr	p15, 0, r0, c2, c0, 1	/* Set TTB1 */
+	mov	r0, #TTBCR_S_N_1
+	mcr	p15, 0, r0, c2, c0, 2	/* Set TTBCR */
+	mov	r0, #0
+	mcr	p15, 0, r0, c8, c7, 0	/* Flush TLB */
+#endif
+
 	/*
 	 * Set the Domain Access register.  Very important!
 	 * startup_pagetable puts to domain 0 now.

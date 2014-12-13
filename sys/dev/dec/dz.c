@@ -197,6 +197,7 @@ const struct cdevsw dz_cdevsw = {
 	.d_poll = dzpoll,
 	.d_mmap = nommap,
 	.d_kqfilter = ttykqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_TTY
 };
 

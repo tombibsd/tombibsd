@@ -314,8 +314,10 @@ vcons_init_screen(struct vcons_data *vd, struct vcons_screen *scr,
 		if (vd->chars != NULL) free(vd->chars, M_DEVBUF);
 		if (vd->attrs != NULL) free(vd->attrs, M_DEVBUF);
 		vd->cells = size;
-		vd->chars = malloc(size * sizeof(uint32_t), M_DEVBUF, M_WAITOK);
-		vd->attrs = malloc(size * sizeof(long), M_DEVBUF, M_WAITOK);
+		vd->chars = malloc(size * sizeof(uint32_t), M_DEVBUF,
+		    M_WAITOK|M_ZERO);
+		vd->attrs = malloc(size * sizeof(long), M_DEVBUF,
+		    M_WAITOK|M_ZERO);
 		vcons_invalidate_cache(vd);
 	}
 #endif

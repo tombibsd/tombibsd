@@ -150,10 +150,10 @@ void cd18xx_attach(struct cd18xx_softc *);
  * the first 3 bits of the unit are the channel number inside a single
  * cd18xx instance, and the remaining bits indicate the instance number.
  */
-#define CD18XX_TTY(x)		(minor(x) & 0x7ffff)
-#define CD18XX_CHANNEL(x)	(minor(x) & 7)
-#define CD18XX_INSTANCE(x)	((minor(x) >> 3) & 0xffff)
-#define CD18XX_DIALOUT(x)	((minor(x) & 0x80000) != 0)
+#define CD18XX_TTY(x)		TTUNIT(x)
+#define CD18XX_CHANNEL(x)	(TTUNIT(x) & 7)
+#define CD18XX_INSTANCE(x)	(TTUNIT(x) >> 3)
+#define CD18XX_DIALOUT(x)	TTDIALOUT(x)
 
 /* short helpers for read/write */
 #define cd18xx_read(sc, o)		\

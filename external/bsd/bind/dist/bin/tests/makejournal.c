@@ -40,7 +40,7 @@
 		result = (r); \
 		if (result != ISC_R_SUCCESS) \
 		goto cleanup; \
-	} while (0)
+	} while (/*CONSTCOND*/0)
 
 isc_mem_t *mctx = NULL;
 isc_log_t *lctx = NULL;

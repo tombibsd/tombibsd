@@ -48,3 +48,4 @@ _SYSCALL(_getcontext,getcontext)
 	movl	$0,(36 + 11 * 4)(%ecx)		/* Arrange for return of 0. */
 	xorl	%eax,%eax
 	ret
+END(_getcontext)

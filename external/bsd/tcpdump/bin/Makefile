@@ -26,7 +26,9 @@ SRCS+= \
 print-802_11.c \
 print-802_15_4.c \
 print-ah.c \
+print-ahcp.c \
 print-aodv.c \
+print-aoe.c \
 print-ap1394.c \
 print-arcnet.c \
 print-arp.c \
@@ -82,9 +84,11 @@ print-ldp.c \
 print-llc.c \
 print-lldp.c \
 print-lmp.c \
+print-loopback.c \
 print-lspping.c \
 print-lwapp.c \
 print-lwres.c \
+print-m3ua.c \
 print-mobile.c \
 print-mobility.c \
 print-mpcp.c \
@@ -105,6 +109,7 @@ print-pflog.c \
 print-pfsync.c \
 print-pgm.c \
 print-pim.c \
+print-pktap.c \
 print-ppi.c \
 print-ppp.c \
 print-pppoe.c \

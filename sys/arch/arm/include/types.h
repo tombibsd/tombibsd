@@ -46,9 +46,6 @@ typedef struct label_t {	/* Used by setjmp & longjmp */
          
 /* NB: This should probably be if defined(_KERNEL) */
 #if defined(_NETBSD_SOURCE)
-typedef	unsigned long	vm_offset_t;	/* depreciated */
-typedef	unsigned long	vm_size_t;	/* depreciated */
-
 typedef unsigned long	paddr_t;
 typedef unsigned long	psize_t;
 typedef unsigned long	vaddr_t;
@@ -92,9 +89,6 @@ typedef	volatile int		__cpu_simple_lock_t;
 #define	__HAVE_OLD_DISKLABEL
 #if defined(__ARM_EABI__) && defined(_ARM_ARCH_6)
 #define	__HAVE_ATOMIC64_OPS
-#endif
-#if defined(_ARM_ARCH_6)
-#define	__NO_STRICT_ALIGNMENT
 #endif
 
 #if defined(_KERNEL) || defined(_KMEMUSER)

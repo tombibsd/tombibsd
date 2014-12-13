@@ -846,9 +846,8 @@ cz_wait_pci_doorbell(struct cz_softc *cz, const char *wstring)
  * Cyclades-Z TTY code starts here...
  *****************************************************************************/
 
-#define CZTTYDIALOUT_MASK	0x80000
-
-#define	CZTTY_DIALOUT(dev)	(minor((dev)) & CZTTYDIALOUT_MASK)
+#define	CZTTY_DIALOUT(dev)	TTDIALOUT(dev)
+#define	CZTTY_UNIT(dev)		TTUNIT(dev)
 #define	CZTTY_CZ(sc)		((sc)->sc_parent)
 
 #define	CZTTY_SOFTC(dev)	cztty_getttysoftc(dev)
@@ -856,7 +855,7 @@ cz_wait_pci_doorbell(struct cz_softc *cz, const char *wstring)
 static struct cztty_softc *
 cztty_getttysoftc(dev_t dev)
 {
-	int i, j, k = 0, u = minor(dev) & ~CZTTYDIALOUT_MASK;
+	int i, j, k = 0, u = CZTTY_UNIT(dev);
 	struct cz_softc *cz = NULL;
 
 	for (i = 0, j = 0; i < cz_cd.cd_ndevs; i++) {
@@ -1546,6 +1545,7 @@ const struct cdevsw cz_cdevsw = {
 	.d_poll = czttypoll,
 	.d_mmap = nommap,
 	.d_kqfilter = ttykqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_TTY
 };
 

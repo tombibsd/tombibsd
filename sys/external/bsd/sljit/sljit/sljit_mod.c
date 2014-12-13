@@ -51,8 +51,6 @@ sljit_modcmd(modcmd_t cmd, void *arg)
 		return 0;
 
 	case MODULE_CMD_FINI:
-		mutex_destroy(&sljit_global_mutex);
-		mutex_destroy(&sljit_allocator_mutex);
 		return EOPNOTSUPP;
 
 	default:

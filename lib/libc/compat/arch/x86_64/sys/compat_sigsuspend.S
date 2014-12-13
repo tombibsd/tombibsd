@@ -57,3 +57,4 @@ err:
 #else
 	jmp	CERROR
 #endif
+END(sigsuspend)

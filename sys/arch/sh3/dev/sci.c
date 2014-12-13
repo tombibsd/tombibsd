@@ -196,11 +196,8 @@ integrate void sci_stsoft(struct sci_softc *, struct tty *);
 integrate void sci_schedrx(struct sci_softc *);
 void	scidiag(void *);
 
-#define	SCIUNIT_MASK		0x7ffff
-#define	SCIDIALOUT_MASK	0x80000
-
-#define	SCIUNIT(x)	(minor(x) & SCIUNIT_MASK)
-#define	SCIDIALOUT(x)	(minor(x) & SCIDIALOUT_MASK)
+#define	SCIUNIT(x)	TTUNIT(x)
+#define	SCIDIALOUT(x)	TTDIALOUT(x)
 
 /* Hardware flag masks */
 #define	SCI_HW_NOIEN	0x01
@@ -258,6 +255,7 @@ const struct cdevsw sci_cdevsw = {
 	.d_poll = scipoll,
 	.d_mmap = nommap,
 	.d_kqfilter = ttykqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_TTY
 };
 
@@ -599,7 +597,6 @@ void
 sci_iflush(struct sci_softc *sc)
 {
 	unsigned char err_c;
-	volatile unsigned char c;
 
 	if (((err_c = SHREG_SCSSR)
 	     & (SCSSR_RDRF | SCSSR_ORER | SCSSR_FER | SCSSR_PER)) != 0) {
@@ -609,7 +606,7 @@ sci_iflush(struct sci_softc *sc)
 			return;
 		}
 
-		c = SHREG_SCRDR;
+		(void)SHREG_SCRDR;
 
 		SHREG_SCSSR &= ~SCSSR_RDRF;
 	}

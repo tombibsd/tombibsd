@@ -7,8 +7,8 @@
 
 MAN=	ascii.7 c.7 environ.7 glob.7 hier.7 hostname.7 intro.7 mailaddr.7 \
 	module.7 nls.7 operator.7 orders.7 pkgsrc.7 release.7  rfc6056.7 \
-	security.7 script.7 setuid.7 signal.7 sticky.7 symlink.7 sysctl.7 \
-	tests.7
+	security.7 script.7 setuid.7 signal.7 src.7 sticky.7 symlink.7 \
+	sysctl.7 tests.7
 
 CLEANFILES=	tests.7
 .if ${MKKYUA} != "no"

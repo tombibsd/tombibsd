@@ -110,6 +110,11 @@ struct iommu_strbuf {
 #define IOMMUCR_DE		0x000000000000000002LL	/* Diag enable */
 #define IOMMUCR_EN		0x000000000000000001LL	/* Enable IOMMU */
 
+#define IOMMUCR_FIRE_SE		0x000000000000000400LL	/* Snoop enable */
+#define IOMMUCR_FIRE_CM_EN	0x000000000000000300LL  /* Cache mode enable */
+#define IOMMUCR_FIRE_BE		0x000000000000000002LL	/* Bypass enable */
+#define IOMMUCR_FIRE_TE		0x000000000000000001LL	/* Translation enabled */
+
 /*
  * IOMMU stuff
  */

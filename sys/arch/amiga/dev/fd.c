@@ -260,6 +260,7 @@ const struct bdevsw fd_bdevsw = {
 	.d_ioctl = fdioctl,
 	.d_dump = nodump,
 	.d_psize = nosize,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK
 };
 
@@ -274,6 +275,7 @@ const struct cdevsw fd_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = nommap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK
 };
 
@@ -1849,7 +1851,7 @@ again:
 		 * if we are at gap then we can no longer be sure
 		 * of correct sync marks
 		 */
-		if ((info && 0xff) == 1)
+		if ((info & 0xff) == 1)
 			doagain = 1;
 		else
 			doagain = 0;

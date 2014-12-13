@@ -25,9 +25,7 @@ COPTS.meta.c += -DHAVE_FILEMON_H -I${FILEMON_H:H}
 .endif
 
 .PATH:	${.CURDIR}/lst.lib
-.if make(install)
 SUBDIR=	PSD.doc
-.endif
 .if make(obj) || make(clean)
 SUBDIR+= unit-tests
 .endif

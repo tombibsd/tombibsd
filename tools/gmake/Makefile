@@ -1,7 +1,7 @@
 #	$NetBSD$
 #
 
-GNUHOSTDIST=	${.CURDIR}/../../gnu/dist/gmake
+GNUHOSTDIST=	${.CURDIR}/../../external/gpl2/gmake/dist
 
 CONFIGURE_ENV+=	CC=${HOST_CC:Q} \
 		CFLAGS=${HOST_CFLAGS:Q} \

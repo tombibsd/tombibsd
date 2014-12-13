@@ -1,5 +1,5 @@
 /Common.h/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
-/GC-check-warn-nsalloc.m/1.1.1.2/Tue Jan 14 16:01:43 2014/-kk/
+/GC-check-warn-nsalloc.m/1.1.1.3/Tue Jun  3 03:04:47 2014/-kk/
 /GC-check.m/1.1.1.2/Tue Jan 14 16:01:43 2014/-kk/
 /GC-no-arc-runtime.m.result/1.1.1.2/Tue Jan 14 16:01:43 2014/-kk/
 /GC-no-arc-runtime.m/1.1.1.2/Tue Jan 14 16:01:43 2014/-kk/
@@ -42,6 +42,7 @@
 /init.m/1.1.1.2/Tue Jan 14 16:01:43 2014/-kk/
 /lit.local.cfg/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 /migrate-emit-errors.m/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
+/migrate-on-pch-and-module.m/1.1.1.1/Fri May 30 18:14:45 2014/-kk/
 /migrate-plist-output.m/1.1.1.2/Tue Jan 14 16:01:43 2014/-kk/
 /migrate-space-in-path.m/1.1.1.2/Tue Jan 14 16:01:43 2014/-kk/
 /migrate-with-pch.m/1.1.1.2/Tue Jan 14 16:01:43 2014/-kk/
@@ -50,18 +51,17 @@
 /nonobjc-to-objc-cast-2.m/1.1.1.2/Tue Jan 14 16:01:43 2014/-kk/
 /nonobjc-to-objc-cast.m.result/1.1.1.2/Tue Jan 14 16:01:43 2014/-kk/
 /nonobjc-to-objc-cast.m/1.1.1.2/Tue Jan 14 16:01:43 2014/-kk/
-/objcmt-arc-cf-annotations.m.result/1.1.1.2/Tue Jan 14 16:01:43 2014/-kk/
-/objcmt-arc-cf-annotations.m/1.1.1.2/Tue Jan 14 16:01:43 2014/-kk/
+/objcmt-arc-cf-annotations.m.result/1.1.1.3/Fri Oct  3 09:22:26 2014/-kk/
+/objcmt-arc-cf-annotations.m/1.1.1.3/Fri Oct  3 09:22:26 2014/-kk/
 /objcmt-atomic-property.m.result/1.1.1.2/Tue Jan 14 16:01:43 2014/-kk/
 /objcmt-atomic-property.m/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 /objcmt-boxing.m.result/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 /objcmt-boxing.m/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
-/objcmt-deprecated-category.m.result/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
-/objcmt-deprecated-category.m/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 /objcmt-designated-initializer.m.result/1.1.1.1/Sun Jan  5 15:39:44 2014/-kk/
 /objcmt-designated-initializer.m/1.1.1.1/Sun Jan  5 15:39:44 2014/-kk/
 /objcmt-instancetype-2.m.result/1.1.1.2/Tue Jan 14 16:01:43 2014/-kk/
 /objcmt-instancetype-2.m/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
+/objcmt-instancetype-unnecessary-diff.m/1.1.1.1/Fri May 30 18:14:45 2014/-kk/
 /objcmt-instancetype.m.result/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 /objcmt-instancetype.m/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/
 /objcmt-migrate-all.m.result/1.1.1.1/Thu Nov 28 14:14:54 2013/-kk/

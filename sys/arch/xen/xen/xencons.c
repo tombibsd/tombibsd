@@ -132,6 +132,7 @@ const struct cdevsw xencons_cdevsw = {
 	.d_poll = xencons_poll,
 	.d_mmap = NULL,	/* XXX: is this safe? - dholland 20140315 */
 	.d_kqfilter = ttykqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_TTY
 };
 

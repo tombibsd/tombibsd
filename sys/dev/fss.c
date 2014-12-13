@@ -101,9 +101,11 @@ static struct vfs_hooks fss_vfs_hooks = {
 const struct bdevsw fss_bdevsw = {
 	.d_open = fss_open,
 	.d_close = fss_close,
-	.d_strategy = fss_strategy, fss_ioctl,
+	.d_strategy = fss_strategy,
+	.d_ioctl = fss_ioctl,
 	.d_dump = fss_dump,
 	.d_psize = fss_size,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK | D_MPSAFE
 };
 
@@ -118,6 +120,7 @@ const struct cdevsw fss_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = nommap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK | D_MPSAFE
 };
 
@@ -1154,7 +1157,7 @@ fss_bs_thread(void *arg)
 				fss_error(sc, "write error on backing store");
 
 			scp->fc_type = FSS_CACHE_FREE;
-			cv_signal(&sc->sc_cache_cv);
+			cv_broadcast(&sc->sc_cache_cv);
 			break;
 		}
 
@@ -1290,7 +1293,8 @@ CFDRIVER_DECL(fss, DV_DISK, NULL);
 static int
 fss_modcmd(modcmd_t cmd, void *arg)
 {
-	int bmajor = -1, cmajor = -1,  error = 0;
+	devmajor_t bmajor = -1, cmajor = -1;
+	int error = 0;
 
 	switch (cmd) {
 	case MODULE_CMD_INIT:

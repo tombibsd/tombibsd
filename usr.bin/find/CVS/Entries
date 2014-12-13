@@ -1,12 +1,12 @@
 /Makefile/1.13/Tue Apr 14 22:15:20 2009/-kk/
 /extern.h/1.28/Thu Jul 19 07:49:30 2007/-kk/
-/find.1/1.80/Thu Oct 24 10:28:59 2013/-kk/
+/find.1/1.81/Tue Jun  3 02:54:52 2014/-kk/
 /find.c/1.29/Tue Mar 20 20:34:57 2012/-kk/
 /find.h/1.25/Thu Oct 24 10:28:59 2013/-kk/
 /function.c/1.72/Thu Oct 24 10:28:59 2013/-kk/
 /ls.c/1.21/Wed Aug 31 16:24:57 2011/-kk/
 /main.c/1.31/Thu Oct 24 10:28:59 2013/-kk/
 /misc.c/1.14/Wed Oct 11 19:51:10 2006/-kk/
-/operator.c/1.9/Wed Oct 11 19:51:10 2006/-kk/
+/operator.c/1.10/Wed Oct 29 08:13:37 2014/-kk/
 /option.c/1.26/Tue Feb  6 15:33:22 2007/-kk/
 D

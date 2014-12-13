@@ -75,17 +75,36 @@ opendir(const char *name)
 DIR *
 __opendir2(const char *name, int flags)
 {
+	DIR *dirp;
 	int fd;
 
-	if ((fd = open(name, O_RDONLY | O_NONBLOCK | O_CLOEXEC)) == -1)
+	if ((fd = open(name, O_RDONLY|O_DIRECTORY|O_NONBLOCK|O_CLOEXEC)) == -1)
 		return NULL;
-	return __opendir_common(fd, name, flags);
+
+	dirp = __opendir_common(fd, name, flags);
+	if (dirp == NULL) {
+		int serrno = errno;
+		(void)close(fd);
+		errno = serrno;
+	}
+	return dirp;
 }
 
 #ifndef __LIBC12_SOURCE__
 DIR *
 _fdopendir(int fd)
 {
+	struct stat sb;
+
+	if (fstat(fd, &sb) == -1)
+		return NULL;
+
+	if (!S_ISDIR(sb.st_mode)) {
+		errno = ENOTDIR;
+		return NULL;
+	}
+
+	/* This is optional according to POSIX, but a good measure */
 	if (fcntl(fd, F_SETFD, FD_CLOEXEC) == -1)
 		return NULL;
 
@@ -96,16 +115,11 @@ _fdopendir(int fd)
 static DIR *
 __opendir_common(int fd, const char *name, int flags)
 {
-	DIR *dirp = NULL;
+	DIR *dirp;
 	int serrno;
-	struct stat sb;
 	struct statvfs sfb;
 	int error;
 
-	if (fstat(fd, &sb) || !S_ISDIR(sb.st_mode)) {
-		errno = ENOTDIR;
-		goto error;
-	}
 	if ((dirp = malloc(sizeof(*dirp))) == NULL)
 		goto error;
 	dirp->dd_buf = NULL;
@@ -157,8 +171,6 @@ error:
 		free(dirp->dd_buf);
 	}
 	free(dirp);
-	if (fd != -1)
-		(void)close(fd);
 	errno = serrno;
 	return NULL;
 }

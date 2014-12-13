@@ -290,8 +290,9 @@ ihphy_status(struct mii_softc *sc)
 	}
 
 	if (esr & IHPHY_ESR_DUPLEX)
-		mii->mii_media_active |=
-		    IFM_FDX | mii_phy_flowstatus(sc);
+		mii->mii_media_active |= IFM_FDX | mii_phy_flowstatus(sc);
+	else
+		mii->mii_media_active |= IFM_HDX;
 }
 
 static void

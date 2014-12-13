@@ -49,6 +49,8 @@
 #include <sys/disk.h>
 #include <sys/disklabel.h>
 
+#include <miscfs/specfs/specdev.h> /* for v_rdev */
+
 #include <prop/proplib.h>
 
 #define DM_MAX_TYPE_NAME 16
@@ -248,7 +250,7 @@ typedef struct dm_target {
 	int (*secsize)(dm_table_entry_t *, unsigned *);
 
 	uint32_t version[3];
-	int ref_cnt;
+	uint32_t ref_cnt;
 
 	TAILQ_ENTRY(dm_target) dm_target_next;
 } dm_target_t;

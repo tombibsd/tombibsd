@@ -31,3 +31,8 @@ ENTRY(fpsetround)
 	fldcw	-4(%esp)
 
 	ret
+#ifdef WEAK_ALIAS
+END(_fpsetround)
+#else
+END(fpsetround)
+#endif

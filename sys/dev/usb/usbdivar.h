@@ -48,7 +48,7 @@
  *	allocx			-
  *	freex			-
  *	get_lock 		-	Called at attach time
- *	new_device		
+ *	new_device
  *
  *	PIPE METHOD		LOCK  NOTES
  *	----------------------- -------	-------------------------
@@ -61,7 +61,7 @@
  *
  * The above semantics are likely to change.  Little performance
  * evaluation has been done on this code and the locking strategy.
- * 
+ *
  * USB functions known to expect the lock taken include (this list is
  * probably not exhaustive):
  *    usb_transfer_complete()
@@ -164,7 +164,8 @@ struct usbd_bus {
 #define USBREV_1_0	2
 #define USBREV_1_1	3
 #define USBREV_2_0	4
-#define USBREV_STR { "unknown", "pre 1.0", "1.0", "1.1", "2.0" }
+#define USBREV_3_0	5
+#define USBREV_STR { "unknown", "pre 1.0", "1.0", "1.1", "2.0", "3.0" }
 
 	void		       *soft; /* soft interrupt cookie */
 	bus_dma_tag_t		dmatag;	/* DMA tag */

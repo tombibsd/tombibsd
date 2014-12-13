@@ -57,3 +57,4 @@ _ENTRY(CERROR)
 	movq	$-1,%rax
 	popq	%r12
 	ret
+END(CERROR)

@@ -1,5 +1,4 @@
 /*	$NetBSD$	*/
-
 #ifndef DST_INTERNAL_H
 #define DST_INTERNAL_H
 

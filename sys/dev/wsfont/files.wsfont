@@ -24,5 +24,6 @@ defflag	opt_wsfont.h		FONT_BOLD8x16
 				FONT_DEJAVU_SANS_MONO12x22
 				FONT_DROID_SANS_MONO12x22
 				FONT_DROID_SANS_MONO9x18
+				FONT_DROID_SANS_MONO19x36
 
 file	dev/wsfont/wsfontdev.c	wsfont needs-flag

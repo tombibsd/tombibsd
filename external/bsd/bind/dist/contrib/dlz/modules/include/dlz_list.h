@@ -22,14 +22,14 @@
 
 #define DLZ_LIST(type) struct { type *head, *tail; }
 #define DLZ_LIST_INIT(list) \
-	do { (list).head = NULL; (list).tail = NULL; } while (0)
+	do { (list).head = NULL; (list).tail = NULL; } while (/*CONSTCOND*/0)
 
 #define DLZ_LINK(type) struct { type *prev, *next; }
 #define DLZ_LINK_INIT(elt, link) \
 	do { \
 		(elt)->link.prev = (void *)(-1); \
 		(elt)->link.next = (void *)(-1); \
-	} while (0)
+	} while (/*CONSTCOND*/0)
 
 #define DLZ_LIST_HEAD(list) ((list).head)
 #define DLZ_LIST_TAIL(list) ((list).tail)
@@ -43,7 +43,7 @@
 		(elt)->link.prev = (list).tail; \
 		(elt)->link.next = NULL; \
 		(list).tail = (elt); \
-	} while (0)
+	} while (/*CONSTCOND*/0)
 
 #define DLZ_LIST_PREV(elt, link) ((elt)->link.prev)
 #define DLZ_LIST_NEXT(elt, link) ((elt)->link.next)

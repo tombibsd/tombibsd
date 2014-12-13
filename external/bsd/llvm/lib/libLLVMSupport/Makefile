@@ -12,13 +12,13 @@ SRCS+=	APFloat.cpp \
 	APInt.cpp \
 	APSInt.cpp \
 	ARMBuildAttrs.cpp \
+	ARMWinEH.cpp \
 	Allocator.cpp \
 	BlockFrequency.cpp \
 	BranchProbability.cpp \
 	circular_raw_ostream.cpp \
 	CommandLine.cpp \
 	Compression.cpp \
-	ConstantRange.cpp \
 	ConvertUTF.c \
 	ConvertUTFWrapper.cpp \
 	CrashRecoveryContext.cpp \
@@ -54,6 +54,7 @@ SRCS+=	APFloat.cpp \
 	SmallPtrSet.cpp \
 	SmallVector.cpp \
 	SourceMgr.cpp \
+	SpecialCaseList.cpp \
 	Statistic.cpp \
 	StreamableMemoryObject.cpp \
 	StringExtras.cpp \
@@ -80,20 +81,19 @@ SRCS+=	APFloat.cpp \
 	regstrlcpy.c
 
 SRCS+=	Atomic.cpp \
-	Disassembler.cpp \
 	DynamicLibrary.cpp \
 	Errno.cpp \
 	Host.cpp \
-	IncludeFile.cpp \
 	Memory.cpp \
 	Mutex.cpp \
 	Path.cpp \
 	Process.cpp \
 	Program.cpp \
 	RWMutex.cpp \
+	RandomNumberGenerator.cpp \
+	ScaledNumber.cpp \
 	SearchForAddressOfSpecialSymbol.cpp \
 	Signals.cpp \
-	system_error.cpp \
 	ThreadLocal.cpp \
 	Threading.cpp \
 	TimeValue.cpp \
@@ -110,22 +110,12 @@ SRCS+=	Host.inc \
 	RWMutex.inc \
 	Signals.inc \
 	Watchdog.inc \
-	system_error.inc \
 	ThreadLocal.inc \
 	TimeValue.inc
 
 .for src in ${SRCS:M*.c}
 CPPFLAGS.${src}+=	-std=gnu99
 .endfor
-
-.if !defined(HOSTLIB) && !empty(MACHINE_ARCH:M*arm*)
-# Missing __sync_fetch_and_add_4
-# Missing __sync_fetch_and_sub_4
-# Missing __sync_lock_test_and_set_4
-# Missing __sync_val_compare_and_swap_4
-# Missing __atomic_fetch_add_4
-COPTS.Atomic.cpp+= -march=armv6
-.endif
 
 .if defined(HOSTLIB)
 .include <bsd.hostlib.mk>

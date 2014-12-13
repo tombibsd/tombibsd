@@ -38,6 +38,11 @@ static char sccsid[] = "@(#)sincos.c	8.1 (Berkeley) 6/4/93";
 #include "mathimpl.h"
 #include "trig.h"
 
+#ifdef __weak_alias
+__weak_alias(_sinl, sin);
+__weak_alias(_cosl, cos);
+#endif
+
 double
 sin(double x)
 {

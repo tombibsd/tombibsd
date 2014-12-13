@@ -116,6 +116,7 @@ const struct cdevsw satmgr_cdevsw = {
 	.d_poll = satpoll,
 	.d_mmap = nommap,
 	.d_kqfilter = satkqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_OTHER
 };
 

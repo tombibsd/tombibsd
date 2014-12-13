@@ -16,8 +16,6 @@
  * PERFORMANCE OF THIS SOFTWARE.
  */
 
-/* Id: dnssec-revoke.c,v 1.24 2011/10/20 23:46:51 tbox Exp  */
-
 /*! \file */
 
 #include <config.h>
@@ -39,6 +37,10 @@
 #include <dns/result.h>
 
 #include <dst/dst.h>
+
+#ifdef PKCS11CRYPTO
+#include <pk11/result.h>
+#endif
 
 #include "dnssectool.h"
 
@@ -70,6 +72,7 @@ usage(void) {
 	fprintf(stderr, "    -r:	   remove old keyfiles after "
 					   "creating revoked version\n");
 	fprintf(stderr, "    -v level:	   set level of verbosity\n");
+	fprintf(stderr, "    -V: print version information\n");
 	fprintf(stderr, "Output:\n");
 	fprintf(stderr, "     K<name>+<alg>+<new id>.key, "
 			     "K<name>+<alg>+<new id>.private\n");
@@ -105,11 +108,14 @@ main(int argc, char **argv) {
 	if (result != ISC_R_SUCCESS)
 		fatal("Out of memory");
 
+#ifdef PKCS11CRYPTO
+	pk11_result_register();
+#endif
 	dns_result_register();
 
 	isc_commandline_errprint = ISC_FALSE;
 
-	while ((ch = isc_commandline_parse(argc, argv, "E:fK:rRhv:")) != -1) {
+	while ((ch = isc_commandline_parse(argc, argv, "E:fK:rRhv:V")) != -1) {
 		switch (ch) {
 		    case 'E':
 			engine = isc_commandline_argument;
@@ -145,7 +151,12 @@ main(int argc, char **argv) {
 					program, isc_commandline_option);
 			/* Falls into */
 		    case 'h':
+			/* Does not return. */
 			usage();
+
+		    case 'V':
+			/* Does not return. */
+			version(program);
 
 		    default:
 			fprintf(stderr, "%s: unhandled option -%c\n",
@@ -254,12 +265,10 @@ main(int argc, char **argv) {
 			dst_key_buildfilename(key, DST_TYPE_PRIVATE, dir, &buf);
 			if (strcmp(oldname, newname) == 0)
 				goto cleanup;
-			if (access(oldname, F_OK) == 0)
-				unlink(oldname);
+			(void)unlink(oldname);
 			isc_buffer_clear(&buf);
 			dst_key_buildfilename(key, DST_TYPE_PUBLIC, dir, &buf);
-			if (access(oldname, F_OK) == 0)
-				unlink(oldname);
+			(void)unlink(oldname);
 		}
 	} else {
 		dst_key_format(key, keystr, sizeof(keystr));

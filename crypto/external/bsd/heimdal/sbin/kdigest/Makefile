@@ -6,8 +6,7 @@
 .PATH: ${HEIMDIST}/kuser
 
 PROG= kdigest
-# no man-page yet
-MAN=
+MAN= kdigest.8
 
 HEIMSRCS+= kdigest.c kdigest-commands.in
 

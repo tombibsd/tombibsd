@@ -34,6 +34,9 @@
  *
  */
 
+#include <sys/cdefs.h>
+__RCSID("$NetBSD$");
+
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif

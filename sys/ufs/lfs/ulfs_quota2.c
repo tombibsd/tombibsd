@@ -672,7 +672,7 @@ dq2clear_callback(struct ulfsmount *ump, uint64_t *offp, struct quota2_entry *q2
 	return 0;
 }
 int
-lfsquota2_handle_cmd_delete(struct ulfsmount *ump, const struct quotakey *qk)
+lfsquota2_handle_cmd_del(struct ulfsmount *ump, const struct quotakey *qk)
 {
 	int idtype;
 	id_t id;
@@ -1274,7 +1274,7 @@ lfsquota2_handle_cmd_cursorget(struct ulfsmount *ump, struct quotakcursor *qkc,
 	struct q2cursor_state state;
 	struct quota2_entry default_q2e;
 	int idtype;
-	int quota2_hash_size;
+	int quota2_hash_size = 0; /* XXXuninit */
 
 	/*
 	 * Convert and validate the cursor.

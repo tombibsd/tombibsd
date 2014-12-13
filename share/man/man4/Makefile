@@ -6,13 +6,13 @@ MAN=	aac.4 ac97.4 acardide.4 aceride.4 acphy.4 \
 	adc.4 admtemp.4 adv.4 adw.4 age.4 agp.4 agr.4 ahb.4 ahc.4 \
 	ahcisata.4 ahd.4 \
 	aibs.4 alc.4 ale.4 alipm.4 altmem.4 altq.4 amdpm.4 amdtemp.4 amhphy.4 \
-	amr.4 aps.4 \
-	an.4 arcmsr.4 aria.4 artsata.4 ata.4 atalk.4 ataraid.4 \
+	amr.4 aps.4 asus.4 \
+	an.4 arcmsr.4 arcofi.4 aria.4 artsata.4 ata.4 atalk.4 ataraid.4 \
 	ath.4 athn.4 atphy.4 atppc.4 attimer.4 atw.4 \
 	auacer.4 audio.4 audiocs.4 auich.4 \
 	auixp.4 autri.4 auvia.4 awi.4 azalia.4 \
 	battery_pmu.4 bba.4 bce.4 bcsp.4 be.4 bge.4 bnx.4 bha.4 \
-	bio.4 bktr.4 bluetooth.4 bmtphy.4 bpf.4 \
+	bio.4 bktr.4 bluetooth.4 bmtphy.4 bpf.4 bpfjit.4 \
 	brgphy.4 bridge.4 bthidev.4 bthub.4 btkbd.4 \
 	btmagic.4 btms.4 btsco.4 btuart.4 \
 	bwi.4 \
@@ -28,7 +28,7 @@ MAN=	aac.4 ac97.4 acardide.4 aceride.4 acphy.4 \
 	gcscaudio.4 gem.4 genfb.4 gentbi.4 geodeide.4 \
 	glxtphy.4 gpib.4 gpio.4 gpiolock.4 gpiopwm.4 gpiosim.4 gre.4 \
 	gphyter.4 gsip.4 \
-	hdaudio.4 hifn.4 hme.4 hpacel.4 hpqlb.4 hptide.4 \
+	hdaudio.4 hifn.4 hme.4 hpacel.4 hpqlb.4 hptide.4 hythygtemp.4 \
 	ibmcd.4 ibmhawk.4 ichsmb.4 icmp.4 icp.4 icsphy.4 iee.4 ieee80211.4 \
 	ifmedia.4 igmafb.4 igphy.4 igsfb.4 iha.4 ihphy.4 iic.4 inet.4 ikphy.4 \
 	inphy.4 intersil7170.4 \
@@ -62,7 +62,8 @@ MAN=	aac.4 ac97.4 acardide.4 aceride.4 acphy.4 \
 	ti.4 tl.4 tlp.4 tlphy.4 tpm.4 tprof.4 tr.4 tra.4 \
 	trm.4 tty.4 tun.4 tqphy.4 twa.4 twe.4 txp.4 \
 	uark.4 ubsec.4 udp.4 uep.4 ug.4 uha.4 uk.4 ukphy.4 unix.4 userconf.4 \
-	vald.4 veriexec.4 vga.4 vge.4 viaide.4 video.4 vioif.4 viomb.4 virt.4 \
+	vald.4 veriexec.4 vga.4 vge.4 viaide.4 video.4 vioif.4 viomb.4 \
+	viornd.4 virt.4 \
 	virtio.4 vlan.4 vmmon.4 vmnet.4 vnd.4 voodoofb.4 vr.4 vte.4 \
 	wapbl.4 wb.4 wbsio.4 wd.4 wdc.4 wi.4 wm.4 wpi.4 \
 	wscons.4 wsdisplay.4 wsfont.4 wskbd.4 wsmouse.4 wsmux.4 \

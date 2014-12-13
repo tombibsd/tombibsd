@@ -43,7 +43,7 @@
 /tsan_suppressions.h/1.1.1.1/Sat Mar  1 08:41:18 2014/-kk/
 /tsan_symbolize.cc/1.1.1.1/Sat Mar  1 08:41:18 2014/-kk/
 /tsan_symbolize.h/1.1.1.1/Sat Mar  1 08:41:18 2014/-kk/
-/tsan_symbolize_addr2line_linux.cc/1.1.1.1/Sat Mar  1 08:41:18 2014/-kk/
+/tsan_symbolize_addr2line_linux.cc/1.2/Tue Dec  9 04:14:08 2014/-kk/
 /tsan_sync.cc/1.1.1.1/Sat Mar  1 08:41:18 2014/-kk/
 /tsan_sync.h/1.1.1.1/Sat Mar  1 08:41:18 2014/-kk/
 /tsan_trace.h/1.1.1.1/Sat Mar  1 08:41:18 2014/-kk/

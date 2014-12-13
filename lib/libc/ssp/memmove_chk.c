@@ -38,6 +38,8 @@ __RCSID("$NetBSD$");
 
 #undef memmove
 
+void *__memmove_chk(void *, void *src, size_t, size_t);
+
 void *
 __memmove_chk(void *dst, void *src, size_t len,
     size_t slen)

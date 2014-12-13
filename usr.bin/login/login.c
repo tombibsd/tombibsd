@@ -637,9 +637,6 @@ main(int argc, char *argv[])
 		(void)setenv("KRB5CCNAME", krb5tkfile_env, 1);
 #endif
 
-	if (tty[sizeof("tty")-1] == 'd')
-		syslog(LOG_INFO, "DIALUP %s, %s", tty, pwd->pw_name);
-
 	/* If fflag is on, assume caller/authenticator has logged root login. */
 	if (rootlogin && fflag == 0) {
 		if (hostname)

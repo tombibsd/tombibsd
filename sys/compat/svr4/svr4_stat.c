@@ -478,7 +478,6 @@ svr4_sys_systeminfo(struct lwp *l, const struct svr4_sys_systeminfo_args *uap, r
 #if defined(__i386__)
 		str = "i86pc";
 #elif defined(__sparc__)
-#elif defined(__sparc__)
 		{
 			extern char machine_model[];
 

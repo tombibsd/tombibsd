@@ -27,9 +27,16 @@
  */
 #include <sys/cdefs.h>
 __RCSID("$NetBSD$");
+#include "namespace.h"
 
 #include <math.h>
 #include <machine/ieee.h>
+
+#ifdef __HAVE_LONG_DOUBLE
+
+#ifdef __weak_alias
+__weak_alias(copysignl, _copysignl)
+#endif
 
 /*
  * copysignl(long double x, long double y)
@@ -48,4 +55,18 @@ copysignl(long double x, long double y)
 
 	return (ux.extu_ld);
 }
+#elif defined(__HAVE_IBM_LONGDOUBLE)
+long double
+copysignl(long double x, long double y)
+{
+	union ldbl_u ux, uy;
+
+	ux.ldblu_ld = x;
+	uy.ldblu_ld = y;
+	ux.ldblu_d[0] = copysign(ux.ldblu_d[0], uy.ldblu_d[0]);
+	ux.ldblu_d[1] = copysign(ux.ldblu_d[1], uy.ldblu_d[1]);
+
+	return ux.ldblu_ld;
+}
 #endif
+#endif /* __HAVE_LONG_DOUBLE */

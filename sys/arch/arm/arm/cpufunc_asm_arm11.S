@@ -29,11 +29,8 @@
  * SUCH DAMAGE.
  *
  * ARM11 assembly functions for CPU / MMU / TLB specific operations
- *
- * XXX We make no attempt at present to take advantage of the v6 memory
- * architecture or physically tagged cache.
  */
- 
+
 #include "assym.h"
 #include <machine/asm.h>
 #include <arm/locore.h>
@@ -50,9 +47,9 @@ ENTRY(arm11_setttb)
 #endif
 
 	cmp	r1, #0
-	mcr	p15, 0, r0, c2, c0, 0	/* TTBR0 set */
+	mcr	p15, 0, r0, c2, c0, 0	/* set the new TTBR0 */
 #ifdef ARM_MMU_EXTENDED
-	mcreq	p15, 0, r0, c2, c0, 1	/* TTBR1 set */
+	mcreq	p15, 0, r0, c2, c0, 1	/* set the new TTBR1 */
 #else
 	mcrne	p15, 0, r0, c8, c7, 0	/* invalidate I+D TLBs */
 	mcrne	p15, 0, r0, c7, c10, 4	/* drain write buffer */
@@ -71,13 +68,11 @@ ENTRY(arm11_context_switch)
 	 * We can assume that the caches will only contain kernel addresses
 	 * at this point.  So no need to flush them again.
 	 */
+	mcr	p15, 0, r0, c7, c10, 4	/* drain the write buffer */
+	mcr	p15, 0, r0, c2, c0, 0	/* set the new TTBR0 */
 #ifdef ARM_MMU_EXTENDED
 	cmp	r1, #0
-#endif
-	mcr	p15, 0, r0, c7, c10, 4	/* drain the write buffer */
-	mcr	p15, 0, r0, c2, c0, 0	/* TTBR0 set */
-#ifdef ARM_MMU_EXTENDED
-	mcreq	p15, 0, r0, c2, c0, 1	/* TTBR1 set is asid 0 */
+	mcreq	p15, 0, r0, c2, c0, 1	/* set the new TTBR1 */
 #else
 	mcr	p15, 0, r0, c8, c7, 0	/* and flush the I+D tlbs */
 #endif
@@ -102,7 +97,8 @@ END(arm11_tlb_flushI)
 
 ENTRY(arm11_tlb_flushI_SE)
 #ifdef ARM_MMU_EXTENDED
-	orr	r0, r0, r1		/* insert ASID into MVA */
+	bic	r0, r0, #0xff
+	bic	r0, r0, #0xf00		/* Always KERNEL_PID, i.e. 0 */
 #endif
 	mcr	p15, 0, r0, c8, c5, 1	/* flush I tlb single entry */
 #if PAGE_SIZE == 2 * L2_S_SIZE
@@ -124,7 +120,8 @@ END(arm11_tlb_flushD)
 
 ENTRY(arm11_tlb_flushD_SE)
 #ifdef ARM_MMU_EXTENDED
-	orr	r0, r0, r1		/* insert ASID into MVA */
+	bic	r0, r0, #0xff
+	bic	r0, r0, #0xf00		/* Always KERNEL_PID, i.e. 0 */
 #endif
 	mcr	p15, 0, r0, c8, c6, 1	/* flush D tlb single entry */
 #if PAGE_SIZE == 2 * L2_S_SIZE
@@ -145,7 +142,8 @@ END(arm11_tlb_flushID)
 
 ENTRY(arm11_tlb_flushID_SE)
 #ifdef ARM_MMU_EXTENDED
-	orr	r0, r0, r1		/* insert ASID into MVA */
+	bic	r0, r0, #0xff
+	bic	r0, r0, #0xf00		/* Always KERNEL_PID, i.e. 0 */
 #endif
 	mcr	p15, 0, r0, c8, c7, 1	/* flush I+D tlb single entry */
 #if PAGE_SIZE == 2 * L2_S_SIZE

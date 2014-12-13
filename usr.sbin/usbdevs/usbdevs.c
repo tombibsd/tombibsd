@@ -112,6 +112,7 @@ usbdev(int f, int a, int rec)
 		case USB_SPEED_LOW:  printf("low speed, "); break;
 		case USB_SPEED_FULL: printf("full speed, "); break;
 		case USB_SPEED_HIGH: printf("high speed, "); break;
+		case USB_SPEED_SUPER: printf("super speed, "); break;
 		default: break;
 		}
 		if (di.udi_power)

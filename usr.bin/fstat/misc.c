@@ -53,8 +53,8 @@ __RCSID("$NetBSD$");
 #define _LIB_LIBKERN_LIBKERN_H_
 #define mutex_enter(a)
 #define mutex_exit(a)
-#include <sys/cprng.h>
 #undef _KERNEL
+#include <sys/cprng.h>
 #include <sys/vnode.h>
 #include <sys/mount.h>
 

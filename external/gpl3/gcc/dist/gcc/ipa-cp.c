@@ -444,6 +444,11 @@ determine_versionability (struct cgraph_node *node)
     reason = "not a tree_versionable_function";
   else if (cgraph_function_body_availability (node) <= AVAIL_OVERWRITABLE)
     reason = "insufficient body availability";
+  else if (!opt_for_fn (node->symbol.decl, optimize)
+	   || !opt_for_fn (node->symbol.decl, flag_ipa_cp))
+    reason = "non-optimized function";
+  else if (node->tm_clone)
+    reason = "transactional memory clone";
 
   if (reason && dump_file && !node->alias && !node->thunk.thunk_p)
     fprintf (dump_file, "Function %s/%i is not versionable, reason: %s.\n",
@@ -1455,22 +1460,21 @@ propagate_constants_accross_call (struct cgraph_edge *cs)
   args_count = ipa_get_cs_argument_count (args);
   parms_count = ipa_get_param_count (callee_info);
 
-  /* If this call goes through a thunk we must not propagate to the first (0th)
-     parameter.  However, we might need to uncover a thunk from below a series
-     of aliases first.  */
+  /* If this call goes through a thunk we should not propagate because we
+     cannot redirect edges to thunks.  However, we might need to uncover a
+     thunk from below a series of aliases first.  */
   alias_or_thunk = cs->callee;
   while (alias_or_thunk->alias)
     alias_or_thunk = cgraph_alias_aliased_node (alias_or_thunk);
   if (alias_or_thunk->thunk.thunk_p)
     {
-      ret |= set_all_contains_variable (ipa_get_parm_lattices (callee_info,
-							       0));
-      i = 1;
+      for (i = 0; i < parms_count; i++)
+	ret |= set_all_contains_variable (ipa_get_parm_lattices (callee_info,
+								 i));
+      return ret;
     }
-  else
-    i = 0;
 
-  for (; (i < args_count) && (i < parms_count); i++)
+  for (i = 0; (i < args_count) && (i < parms_count); i++)
     {
       struct ipa_jump_func *jump_func = ipa_get_ith_jump_func (args, i);
       struct ipcp_param_lattices *dest_plats;
@@ -2900,6 +2904,11 @@ intersect_aggregates_with_edge (struct cgraph_edge *cs, int index,
 		intersect_with_agg_replacements (cs->caller, src_idx,
 						 &inter, 0);
 	    }
+	  else
+	    {
+	      inter.release ();
+	      return vNULL;
+	    }
 	}
       else
 	{
@@ -2914,6 +2923,11 @@ intersect_aggregates_with_edge (struct cgraph_edge *cs, int index,
 		inter = copy_plats_to_inter (src_plats, 0);
 	      else
 		intersect_with_plats (src_plats, &inter, 0);
+	    }
+	  else
+	    {
+	      inter.release ();
+	      return vNULL;
 	    }
 	}
     }
@@ -2998,7 +3012,8 @@ find_aggregate_values_for_callers_subset (struct cgraph_node *node,
 					  vec<cgraph_edge_p> callers)
 {
   struct ipa_node_params *dest_info = IPA_NODE_REF (node);
-  struct ipa_agg_replacement_value *res = NULL;
+  struct ipa_agg_replacement_value *res;
+  struct ipa_agg_replacement_value **tail = &res;
   struct cgraph_edge *cs;
   int i, j, count = ipa_get_param_count (dest_info);
 
@@ -3042,14 +3057,15 @@ find_aggregate_values_for_callers_subset (struct cgraph_node *node,
 	  v->offset = item->offset;
 	  v->value = item->value;
 	  v->by_ref = plats->aggs_by_ref;
-	  v->next = res;
-	  res = v;
+	  *tail = v;
+	  tail = &v->next;
 	}
 
     next_param:
       if (inter.exists ())
 	inter.release ();
     }
+  *tail = NULL;
   return res;
 }
 
@@ -3058,7 +3074,8 @@ find_aggregate_values_for_callers_subset (struct cgraph_node *node,
 static struct ipa_agg_replacement_value *
 known_aggs_to_agg_replacement_list (vec<ipa_agg_jump_function_t> known_aggs)
 {
-  struct ipa_agg_replacement_value *res = NULL;
+  struct ipa_agg_replacement_value *res;
+  struct ipa_agg_replacement_value **tail = &res;
   struct ipa_agg_jump_function *aggjf;
   struct ipa_agg_jf_item *item;
   int i, j;
@@ -3072,9 +3089,10 @@ known_aggs_to_agg_replacement_list (vec<ipa_agg_jump_function_t> known_aggs)
 	v->offset = item->offset;
 	v->value = item->value;
 	v->by_ref = aggjf->by_ref;
-	v->next = res;
-	res = v;
+	*tail = v;
+	tail = &v->next;
       }
+  *tail = NULL;
   return res;
 }
 

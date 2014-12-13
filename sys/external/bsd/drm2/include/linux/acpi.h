@@ -32,4 +32,6 @@
 #ifndef _LINUX_ACPI_H_
 #define _LINUX_ACPI_H_
 
+#include <dev/acpi/acpivar.h>
+
 #endif  /* _LINUX_ACPI_H_ */

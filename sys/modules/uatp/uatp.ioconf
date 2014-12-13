@@ -8,4 +8,3 @@ include "dev/usb/files.usb"
 pseudo-root	uhidev*
 
 uatp*		at uhidev? reportid ?
-wsmouse*	at uatp? mux 0

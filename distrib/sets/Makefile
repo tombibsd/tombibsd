@@ -16,7 +16,7 @@ all:
 .include "${NETBSDSRCDIR}/distrib/common/Makefile.distrib"
 
 COMPRESS_PROGRAM=${TOOL_GZIP}
-GZIP_FLAGS= -n
+GZIP_FLAGS= ${GZIP_N_FLAG}
 
 SETSENV=	DESTDIR=${DESTDIR:Q} \
 		MACHINE=${MACHINE:Q} \
@@ -210,7 +210,7 @@ maketars: .PRECIOUS .PHONY check_DESTDIR check_RELEASEDIR \
 maketarsetup: .EXEC
 .if defined(DESTDIR) && ${DESTDIR} != ""
 	${_MKMSG} "execute  checkflist"
-	${MAKE} checkflist
+	cd ${.CURDIR}; ${MAKE} checkflist
 .endif
 	mkdir -p ${TARDIR}
 	for i in MD5 SHA512; do \
@@ -304,14 +304,26 @@ makesyspkgsums: .PHONY check_RELEASEDIR
 makedeps: .PHONY
 	${SETSCMD} ./syspkgdeps all >${.CURDIR}/deps
 
-# Sort the lists files
+# Sort the lists files.
+#
+# The tricky stuff with awk and sort -k options is to ensure that the
+# heading remains undisturbed, and on non-heading lines anything before
+# the first "." is ignored, so that "./dir/file" and "#./dir/file" are
+# sorted together.
+#
 sortlists: .PHONY
-	find ${.CURDIR}/lists \! \( -name CVS -prune \) -type f -print \
+	find ${.CURDIR}/lists \! \( -name CVS -prune \) \! -name .#\* \
+	    -type f -print \
 	| while read f ; do \
 	    ${_MKSHMSG} "sorting $${f#${.CURDIR}/}" ; \
-	    { grep '^#' "$$f" ; \
-	      grep -v '^#' "$$f" | sort ; \
-	    } >"$$f".tmp; \
+	    awk 'BEGIN { inheader = 1 } \
+		 /^#*\.\// { inheader = 0 } \
+		 // { tag = (inheader ? NR : 999999); \
+		      print tag "." $$0 }' \
+		<"$$f" \
+	    | sort -t . -k 1n,2 -k 3 \
+	    | cut -d . -f 2- \
+	    | cat -s >"$$f".tmp; \
 	    if cmp "$$f" "$$f".tmp >/dev/null; then \
 	      : "$$f is unchanged" ; \
 	      rm "$$f".tmp ; \

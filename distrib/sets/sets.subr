@@ -205,6 +205,7 @@ SUBST="${SUBST};s#@MACHINE@#${MACHINE}#g"
 #	bsdgrep			${MKBSDGREP} != no
 #	catpages		${MKCATPAGES} != no
 #	compat			${MKCOMPAT} != no
+#	compatmodules		${MKCOMPATMODULES} != no
 #	crypto			${MKCRYPTO} != no
 #	crypto_rc5		${MKCRYPTO_RC5} != no
 #	cvs			${MKCVS} != no

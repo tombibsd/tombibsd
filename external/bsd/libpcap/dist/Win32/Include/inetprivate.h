@@ -1,5 +1,3 @@
-/*	$NetBSD$	*/
-
 /*
  * Copyright (c) 1999 - 2003
  * NetGroup, Politecnico di Torino (Italy)

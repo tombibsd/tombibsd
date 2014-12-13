@@ -175,7 +175,6 @@ stuirda_fwload(struct uirda_softc *sc) {
 	if (rc) {
 		printf("%s: Cannot load firmware\n",
 			device_xname(sc->sc_dev));
-		return 0;
 		return rc;
 	}
 	fwsize = firmware_get_size(fh);

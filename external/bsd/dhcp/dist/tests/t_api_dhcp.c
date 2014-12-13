@@ -1,5 +1,4 @@
 /*	$NetBSD$	*/
-
 /*
  * We have to have a number of symbols defined in order to build a
  * DHCP program.

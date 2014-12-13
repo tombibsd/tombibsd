@@ -14,7 +14,7 @@ stop_cmd="mountall_stop"
 
 mountall_start()
 {
-	echo 'Mounting all filesystems...'
+	echo 'Mounting all file systems...'
 	if [ -f /etc/zfs/zpool.cache ]; then
 		# Get ZFS module loaded (and thereby, zvols created).
 		zfs list > /dev/null 2>&1
@@ -32,7 +32,7 @@ mountall_start()
 
 mountall_stop()
 {
-	echo 'Unmounting all filesystems...'
+	echo 'Unmounting all file systems...'
 	if [ -f /etc/zfs/zpool.cache ]; then
 		# Unmount ZFS file systems.
 		zfs unmount -a

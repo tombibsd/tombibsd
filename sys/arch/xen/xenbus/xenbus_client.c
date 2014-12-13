@@ -159,7 +159,7 @@ static void
 _dev_error(struct xenbus_device *dev, int err, const char *fmt,
 		va_list ap)
 {
-	int ret;
+	int ret __diagused;
 	unsigned int len;
 	char *printf_buffer = NULL, *path_buffer = NULL;
 

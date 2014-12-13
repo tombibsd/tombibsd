@@ -97,6 +97,7 @@ const struct cdevsw fb_cdevsw = {
 	.d_poll = fbpoll,
 	.d_mmap = fbmmap,
 	.d_kqfilter = fbkqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_OTHER
 };
 

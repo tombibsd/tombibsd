@@ -591,7 +591,7 @@ selectroute(struct sockaddr_in6 *dstsock, struct ip6_pktopts *opts,
 	/* If the caller specify the outgoing interface explicitly, use it. */
 	if (opts && (pi = opts->ip6po_pktinfo) != NULL && pi->ipi6_ifindex) {
 		/* XXX boundary check is assumed to be already done. */
-		ifp = ifindex2ifnet[pi->ipi6_ifindex];
+		ifp = if_byindex(pi->ipi6_ifindex);
 		if (ifp != NULL &&
 		    (norouteok || retrt == NULL ||
 		    IN6_IS_ADDR_MULTICAST(dst))) {
@@ -970,11 +970,10 @@ init_policy_queue(void)
 static int
 add_addrsel_policyent(struct in6_addrpolicy *newpolicy)
 {
-	struct addrsel_policyent *new, *pol;
+	struct addrsel_policyent *newpol, *pol;
 
 	/* duplication check */
-	for (pol = TAILQ_FIRST(&addrsel_policytab); pol;
-	     pol = TAILQ_NEXT(pol, ape_entry)) {
+	TAILQ_FOREACH(pol, &addrsel_policytab, ape_entry) {
 		if (IN6_ARE_ADDR_EQUAL(&newpolicy->addr.sin6_addr,
 		    &pol->ape_policy.addr.sin6_addr) &&
 		    IN6_ARE_ADDR_EQUAL(&newpolicy->addrmask.sin6_addr,
@@ -983,12 +982,12 @@ add_addrsel_policyent(struct in6_addrpolicy *newpolicy)
 		}
 	}
 
-	new = malloc(sizeof(*new), M_IFADDR, M_WAITOK|M_ZERO);
+	newpol = malloc(sizeof(*newpol), M_IFADDR, M_WAITOK|M_ZERO);
 
 	/* XXX: should validate entry */
-	new->ape_policy = *newpolicy;
+	newpol->ape_policy = *newpolicy;
 
-	TAILQ_INSERT_TAIL(&addrsel_policytab, new, ape_entry);
+	TAILQ_INSERT_TAIL(&addrsel_policytab, newpol, ape_entry);
 
 	return (0);
 }

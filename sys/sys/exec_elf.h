@@ -46,6 +46,11 @@
 #include <inttypes.h>
 #endif /* _KERNEL || _STANDALONE */
 
+#ifdef   _BSD_SIZE_T_
+typedef  _BSD_SIZE_T_    size_t;
+#undef   _BSD_SIZE_T_
+#endif
+
 #if HAVE_NBTOOL_CONFIG_H
 #include <nbinclude/machine/elf_machdep.h>
 #else
@@ -280,7 +285,8 @@ typedef struct {
 #define EM_MN10300	89	/* Matsushita MN10300 */
 #define EM_MN10200	90	/* Matsushita MN10200 */
 #define EM_PJ		91	/* picoJava */
-#define EM_OPENRISC	92	/* OpenRISC 32-bit embedded processor */
+#define EM_OR1K		92	/* OpenRISC 32-bit embedded processor */
+#define EM_OPENRISC	EM_OR1K
 #define EM_ARC_A5	93	/* ARC Cores Tangent-A5 */
 #define EM_XTENSA	94	/* Tensilica Xtensa Architecture */
 #define EM_VIDEOCORE	95	/* Alphamosaic VideoCore processor */
@@ -300,6 +306,7 @@ typedef struct {
 #define EM_ARCA		109	/* Arca RISC microprocessor */
 #define EM_UNICORE	110	/* UNICORE from PKU-Unity Ltd. and MPRC Peking University */
 #define EM_AARCH64	183	/* AArch64 64-bit ARM microprocessor */
+#define EM_RISCV	243	/* RISCV */
 
 /* Unofficial machine types follow */
 #define EM_AVR32	6317	/* used by NetBSD/avr32 */
@@ -515,6 +522,7 @@ typedef struct {
 #define STT_NUM			7
 
 #define STT_LOOS		10	/* Operating system specific range */
+#define STT_GNU_IFUNC		10	/* GNU extension: indirect function */
 #define STT_HIOS		12
 #define STT_LOPROC		13	/* Processor-specific range */
 #define STT_HIPROC		15
@@ -1224,6 +1232,13 @@ typedef struct {
 typedef Elf32_Versym	Elf64_Versym;
 
 #ifdef _KERNEL
+
+/*
+ * Arbitrary limits to avoid DoS for excessive memory allocation.
+ */
+#define ELF_MAXPHNUM	128
+#define ELF_MAXSHNUM	32768
+#define ELF_MAXNOTESIZE	1024
 
 #define ELF_AUX_ENTRIES 15	/* Max size of aux array passed to loader */
 #define ELF32_NO_ADDR	(~(Elf32_Addr)0) /* Indicates addr. not yet filled in */

@@ -70,11 +70,11 @@
 **    Super I/O chip.  The main modification has been to change the 
 **    driver to use the bus_space_ macros.  This allows the mouse
 **    to be configured to any base address.  It relies on the keyboard
-**    passing it's io handle in the isa_attach_args structure.
+**    passing its io handle in the isa_attach_args structure.
 **
 **    NOTE : The mouse is an auxiliary device off the keyboard and as such
 **           shares the same device registers.  This shouldn't be an issue
-**           since each logical device generates it's own unique IRQ.  But
+**           since each logical device generates its own unique IRQ.  But
 **           it is worth noting that reseting or mucking with one can affect
 **           the other.
 **
@@ -213,6 +213,7 @@ const struct cdevsw opms_cdevsw = {
 	.d_poll = opmspoll,
 	.d_mmap = nommap,
 	.d_kqfilter = opmskqfilter,
+	.d_discard = nodiscard,
 	.d_flag = 0
 };
 

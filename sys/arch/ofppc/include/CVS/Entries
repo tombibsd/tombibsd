@@ -1,4 +1,4 @@
-/Makefile/1.20/Tue Nov 26 03:29:48 2013/-kk/
+/Makefile/1.21/Fri Oct  3 09:09:04 2014/-kk/
 /ansi.h/1.1/Thu May 28 08:12:13 1998/-kk/
 /aout_machdep.h/1.1/Thu May 28 08:12:13 1998/-kk/
 /asm.h/1.1/Thu May 28 08:12:13 1998/-kk/
@@ -30,7 +30,7 @@
 /isa_machdep.h/1.7/Wed Aug 19 15:01:46 2009/-kk/
 /kcore.h/1.1/Thu May 28 08:12:15 1998/-kk/
 /limits.h/1.1/Thu May 28 08:12:15 1998/-kk/
-/loadfile_machdep.h/1.5/Mon Apr 28 20:23:30 2008/-kk/
+/loadfile_machdep.h/1.6/Fri Oct  3 09:25:45 2014/-kk/
 /lock.h/1.1/Sat Apr 29 03:31:53 2000/-kk/
 /math.h/1.1/Thu Dec 23 10:15:14 1999/-kk/
 /mcontext.h/1.2/Sat Jan 18 06:11:50 2003/-kk/
@@ -55,7 +55,7 @@
 /rwlock.h/1.2/Fri Feb  9 21:55:07 2007/-kk/
 /setjmp.h/1.1/Thu May 28 08:12:16 1998/-kk/
 /signal.h/1.1/Thu May 28 08:12:16 1998/-kk/
-/sljitarch.h/1.1/Sun Nov 17 14:34:12 2013/-kk/
+/sljit_machdep.h/1.1/Wed Jul 23 18:19:44 2014/-kk/
 /trap.h/1.1/Thu May 28 08:12:16 1998/-kk/
 /types.h/1.11/Sun Jul 17 23:23:53 2011/-kk/
 /vmparam.h/1.23/Mon Jun 20 08:01:14 2011/-kk/

@@ -167,6 +167,7 @@ pcppi_isa_attach(device_t parent, device_t self, void *aux)
         if (bus_space_map(iot, IO_PPI, sc->sc_size, 0, &sc->sc_ppi_ioh))
                 panic("pcppi_attach: couldn't map");
 
+	aprint_naive("\n");
 	aprint_normal("\n");
         pcppi_attach(sc);
 }

@@ -71,9 +71,6 @@ void ast(struct trapframe *);
 void
 userret(struct lwp *l)
 {
-	/* Invoke MI userret code */
-	mi_userret(l);
-
 #if defined(__PROG32) && defined(ARM_MMU_EXTENDED)
 	/*
 	 * If our ASID got released, access via TTBR0 will have been disabled.
@@ -83,10 +80,15 @@ userret(struct lwp *l)
 	if (armreg_ttbcr_read() & TTBCR_S_PD0) {
 		pmap_activate(l);
 	}
+	KASSERT(!(armreg_ttbcr_read() & TTBCR_S_PD0));
 #endif
 
+	/* Invoke MI userret code */
+	mi_userret(l);
+
 #if defined(__PROG32) && defined(DIAGNOSTIC)
-	KASSERT((lwp_trapframe(l)->tf_spsr & IF32_bits) == 0);
+	KASSERT(VALID_R15_PSR(lwp_trapframe(l)->tf_pc,
+	    lwp_trapframe(l)->tf_spsr));
 #endif
 }
 
@@ -111,7 +113,7 @@ ast(struct trapframe *tf)
 #endif
 
 #ifdef __PROG32
-	KASSERT((tf->tf_spsr & IF32_bits) == 0);
+	KASSERT(VALID_R15_PSR(tf->tf_pc, tf->tf_spsr));
 #endif
 
 	curcpu()->ci_data.cpu_ntrap++;

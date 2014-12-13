@@ -45,6 +45,7 @@ struct	ifaltq {
 	int	ifq_len;
 	int	ifq_maxlen;
 	int	ifq_drops;
+	kmutex_t	*ifq_lock;
 
 	/* alternate queueing related fields */
 	int	altq_type;		/* discipline type */

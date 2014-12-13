@@ -2,9 +2,10 @@
 
 deffs	TMPFS
 
+define	tmpfs: vfs
 file	fs/tmpfs/tmpfs_fifoops.c	tmpfs
 file	fs/tmpfs/tmpfs_mem.c		tmpfs
-file	fs/tmpfs/tmpfs_rename.c	tmpfs
+file	fs/tmpfs/tmpfs_rename.c		tmpfs
 file	fs/tmpfs/tmpfs_specops.c	tmpfs
 file	fs/tmpfs/tmpfs_subr.c		tmpfs
 file	fs/tmpfs/tmpfs_vfsops.c		tmpfs

@@ -187,7 +187,7 @@ BranchDone(RF_DagNode_t *node)
 {
 	int     i;
 
-	/* return true if forward execution is completed for a node and it's
+	/* return true if forward execution is completed for a node and its
 	 * succedents */
 	switch (node->status) {
 	case rf_wait:

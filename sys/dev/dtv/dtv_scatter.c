@@ -48,14 +48,11 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <dev/dtv/dtvvar.h>
 
-#define IPL_DTV		IPL_VM
-#define spldtv()	splvm()
-
 void
 dtv_scatter_buf_init(struct dtv_scatter_buf *sb)
 {
 	sb->sb_pool = pool_cache_init(PAGE_SIZE, 0, 0, 0,
-				      "dtvscatter", NULL, IPL_DTV,
+				      "dtvscatter", NULL, IPL_SCHED,
 				      NULL, NULL, NULL);
 	sb->sb_size = 0;
 	sb->sb_npages = 0;

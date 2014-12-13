@@ -195,7 +195,8 @@ encode(void)
 static void
 usage(void)
 {
-	(void)fprintf(stderr, "usage: %s [-m] [inputfile] outputname\n",
+	(void)fprintf(stderr,
+		      "usage: %s [-m] [inputfile] headername > encodedfile\n",
 		      getprogname());
 	exit(1);
 }

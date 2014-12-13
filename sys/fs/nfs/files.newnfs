@@ -6,6 +6,8 @@ defflag opt_newnfs.h			NEW_NFS_BOOT_BOOTP
 					NEW_NFSLOCKD
 					NEW_NFS_BOOT
 
+# XXX
+define	new_nfsclient: vfs
 file	fs/nfs/client/nfs_clbio.c	 new_nfsclient
 file	fs/nfs/client/nfs_clcomsubs.c	 new_nfsclient
 file	fs/nfs/client/nfs_clkrpc.c	 new_nfsclient

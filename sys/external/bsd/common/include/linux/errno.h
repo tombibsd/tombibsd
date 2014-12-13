@@ -29,11 +29,23 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+/*
+ * Notes on porting:
+ *
+ * - Linux consistently passes around negative errno values.  NetBSD
+ *   consistently passes around positive ones, except the special magic
+ *   in-kernel ones (EJUSTRETURN, ERESTART, &c.) which should not be
+ *   exposed to userland.  Be careful!
+ */
+
 #ifndef _LINUX_ERRNO_H_
 #define _LINUX_ERRNO_H_
 
 #include <sys/errno.h>
 
 #define	ERESTARTSYS	ERESTART
+#define	ENOTSUPP	ENOTSUP	/* XXX ???  */
+#define	EREMOTEIO	EIO	/* XXX Urk...  */
+#define	ECHRNG		ERANGE	/* XXX ??? */
 
 #endif  /* _LINUX_ERRNO_H_ */

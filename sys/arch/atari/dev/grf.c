@@ -118,6 +118,7 @@ const struct cdevsw grf_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = grfmmap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = 0
 };
 

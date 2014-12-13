@@ -44,3 +44,4 @@ ENTRY(__divsi3)
 	cltd
 	idivl 8(%esp)
 	ret
+END(__divsi3)

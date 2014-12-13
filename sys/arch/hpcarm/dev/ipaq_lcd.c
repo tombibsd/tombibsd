@@ -49,7 +49,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <machine/bootinfo.h>
 #include <machine/intr.h>
 #include <arm/cpufunc.h>
-#include <arm/arm32/katelib.h>
 
 #include <arm/sa11x0/sa11x0_reg.h> 
 #include <arm/sa11x0/sa11x0_gpioreg.h>

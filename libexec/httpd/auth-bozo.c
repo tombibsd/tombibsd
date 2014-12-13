@@ -74,7 +74,11 @@ bozo_auth_check(bozo_httpreq_t *request, const char *file)
 	}
 	request->hr_authrealm = bozostrdup(httpd, dir);
 
-	snprintf(authfile, sizeof(authfile), "%s/%s", dir, AUTH_FILE);
+	if ((size_t)snprintf(authfile, sizeof(authfile), "%s/%s", dir, AUTH_FILE) >= 
+	  sizeof(authfile)) {
+		return bozo_http_error(httpd, 404, request,
+			"authfile path too long");
+	}
 	if (stat(authfile, &sb) < 0) {
 		debug((httpd, DEBUG_NORMAL,
 		    "bozo_auth_check realm `%s' dir `%s' authfile `%s' missing",
@@ -114,6 +118,13 @@ bozo_auth_check(bozo_httpreq_t *request, const char *file)
 }
 
 void
+bozo_auth_init(bozo_httpreq_t *request)
+{
+	request->hr_authuser = NULL;
+	request->hr_authpass = NULL;
+}
+
+void
 bozo_auth_cleanup(bozo_httpreq_t *request)
 {
 
@@ -146,6 +157,8 @@ bozo_auth_check_headers(bozo_httpreq_t *request, char *val, char *str, ssize_t l
 			return bozo_http_error(httpd, 400, request,
 			    "bad authorization field");
 		*pass++ = '\0';
+		free(request->hr_authuser);
+		free(request->hr_authpass);
 		request->hr_authuser = bozostrdup(httpd, authbuf);
 		request->hr_authpass = bozostrdup(httpd, pass);
 		debug((httpd, DEBUG_FAT,

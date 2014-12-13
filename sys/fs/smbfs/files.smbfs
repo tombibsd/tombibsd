@@ -2,6 +2,7 @@
 
 deffs	SMBFS
 
+define	smbfs: vfs
 file	fs/smbfs/smbfs_io.c		smbfs
 file	fs/smbfs/smbfs_kq.c		smbfs
 file	fs/smbfs/smbfs_node.c		smbfs

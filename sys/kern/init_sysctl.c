@@ -610,6 +610,19 @@ SYSCTL_SETUP(sysctl_kern_setup, "sysctl kern subtree setup")
 		       "it doesn't"),
 		       NULL, 1, NULL, 0,
 		       CTL_KERN, CTL_CREATE, CTL_EOL);
+	sysctl_createv(clog, 0, NULL, NULL,
+			CTLFLAG_PERMANENT,
+			CTLTYPE_STRING, "configname",
+			SYSCTL_DESCR("Name of config file"),
+			NULL, 0, __UNCONST(kernel_ident), 0,
+			CTL_KERN, CTL_CREATE, CTL_EOL);
+	sysctl_createv(clog, 0, NULL, NULL,
+			CTLFLAG_PERMANENT,
+			CTLTYPE_STRING, "buildinfo",
+			SYSCTL_DESCR("Information from build environment"),
+			NULL, 0, __UNCONST(buildinfo), 0,
+			CTL_KERN, CTL_CREATE, CTL_EOL);
+
 	/* kern.posix. */
 	sysctl_createv(clog, 0, NULL, &rnode,
 			CTLFLAG_PERMANENT,
@@ -623,12 +636,6 @@ SYSCTL_SETUP(sysctl_kern_setup, "sysctl kern subtree setup")
 			SYSCTL_DESCR("Maximal number of semaphores"),
 			NULL, 0, &ksem_max, 0,
 			CTL_CREATE, CTL_EOL);
-	sysctl_createv(clog, 0, NULL, NULL,
-			CTLFLAG_PERMANENT,
-			CTLTYPE_STRING, "configname",
-			SYSCTL_DESCR("Name of config file"),
-			NULL, 0, __UNCONST(kernel_ident), 0,
-			CTL_KERN, CTL_CREATE, CTL_EOL);
 }
 
 SYSCTL_SETUP(sysctl_hw_setup, "sysctl hw subtree setup")
@@ -854,12 +861,10 @@ sysctl_kern_maxvnodes(SYSCTLFN_ARGS)
 
 	old_vnodes = desiredvnodes;
 	desiredvnodes = new_vnodes;
-	if (new_vnodes < old_vnodes) {
-		error = vfs_drainvnodes(new_vnodes);
-		if (error) {
-			desiredvnodes = old_vnodes;
-			return (error);
-		}
+	error = vfs_drainvnodes(new_vnodes);
+	if (error) {
+		desiredvnodes = old_vnodes;
+		return (error);
 	}
 	vfs_reinit();
 	nchreinit();

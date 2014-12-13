@@ -13,8 +13,8 @@
 /ChangeLog-9899/1.1.1.1/Tue Aug 18 10:04:19 2009/-kk/
 /ChangeLog/1.4/Tue Oct 29 12:08:57 2013/-kk/
 /MAINTAINERS/1.1.1.1/Tue Aug 18 10:04:19 2009/-kk/
-/Makefile.am/1.8/Fri Mar 14 04:24:31 2014/-kk/
-/Makefile.in/1.8/Fri Mar 14 04:24:31 2014/-kk/
+/Makefile.am/1.11/Fri Oct  3 09:56:03 2014/-kk/
+/Makefile.in/1.11/Fri Oct  3 09:56:03 2014/-kk/
 /NEWS/1.1.1.3/Tue Oct 29 12:08:57 2013/-kk/
 /README/1.1.1.1/Tue Aug 18 10:04:24 2009/-kk/
 /TODO/1.1.1.1/Tue Aug 18 10:04:24 2009/-kk/
@@ -22,7 +22,7 @@
 /config.in/1.1.1.3/Tue Oct 29 12:08:57 2013/-kk/
 /configure.host/1.4/Sun Sep 25 04:32:43 2011/-kk/
 /configure.in/1.1.1.3/Tue Oct 29 12:08:57 2013/-kk/
-/configure.tgt/1.16/Fri Mar 14 04:24:31 2014/-kk/
+/configure.tgt/1.19/Fri Oct  3 09:56:03 2014/-kk/
 /configure/1.1.1.3/Tue Oct 29 12:08:57 2013/-kk/
 /deffile.h/1.1.1.3/Tue Oct 29 12:08:57 2013/-kk/
 /deffilep.c/1.1.1.3/Tue Oct 29 12:08:57 2013/-kk/
@@ -48,8 +48,8 @@
 /ldexp.h/1.1.1.3/Tue Oct 29 12:08:58 2013/-kk/
 /ldfile.c/1.1.1.3/Tue Oct 29 12:08:58 2013/-kk/
 /ldfile.h/1.1.1.3/Tue Oct 29 12:08:58 2013/-kk/
-/ldgram.c/1.1.1.3/Tue Oct 29 12:08:58 2013/-kk/
-/ldgram.h/1.1.1.3/Tue Oct 29 12:08:58 2013/-kk/
+/ldgram.c/1.4/Fri Oct  3 10:03:15 2014/-kk/
+/ldgram.h/1.4/Fri Oct  3 10:03:15 2014/-kk/
 /ldgram.y/1.1.1.3/Tue Oct 29 12:08:58 2013/-kk/
 /ldint.texinfo/1.1.1.2/Sat Sep 24 22:19:01 2011/-kk/
 /ldlang.c/1.4/Tue Oct 29 12:08:58 2013/-kk/

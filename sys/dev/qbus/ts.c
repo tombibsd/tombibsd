@@ -183,6 +183,7 @@ const struct bdevsw ts_bdevsw = {
 	.d_ioctl = tsioctl,
 	.d_dump = tsdump,
 	.d_psize = nosize,
+	.d_discard = nodiscard,
 	.d_flag = D_TAPE
 };
 
@@ -197,6 +198,7 @@ const struct cdevsw ts_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = nommap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_TAPE
 };
 

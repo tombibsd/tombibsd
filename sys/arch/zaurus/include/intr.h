@@ -64,20 +64,6 @@
 #define IST_EDGE_RISING  5
 #define IST_EDGE_BOTH    6
 
-#ifdef __OLD_INTERRUPT_CODE	/* XXX XXX XXX */
-
-/* Software interrupt priority levels */
-
-#define SOFTIRQ_CLOCK   0
-#define SOFTIRQ_NET     1
-#define SOFTIRQ_SERIAL  2
-
-#define SOFTIRQ_BIT(x)  (1 << x)
-
-#include <arm/arm32/psl.h>
-
-#else /* ! __OLD_INTERRUPT_CODE */
-
 #ifndef _LOCORE
 
 #include <sys/queue.h>
@@ -161,8 +147,6 @@ splraiseipl(ipl_cookie_t icookie)
 #include <sys/spl.h>
 
 #endif /* ! _LOCORE */
-
-#endif /* __OLD_INTERRUPT_CODE */
 
 #endif /* _KERNEL */
 

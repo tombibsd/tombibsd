@@ -1215,6 +1215,17 @@ static void dwc2_hc_nak_intr(struct dwc2_hsotg *hsotg,
 	 * interrupt. Re-start the SSPLIT transfer.
 	 */
 	if (chan->do_split) {
+		/*
+		 * When we get control/bulk NAKs then remember this so we holdoff on
+		 * this qh until the beginning of the next frame
+		 */
+		switch (dwc2_hcd_get_pipe_type(&qtd->urb->pipe_info)) {
+		case USB_ENDPOINT_XFER_CONTROL:
+		case USB_ENDPOINT_XFER_BULK:
+			chan->qh->nak_frame = dwc2_hcd_get_frame_number(hsotg);
+			break;
+		}
+
 		if (chan->complete_split)
 			qtd->error_count = 0;
 		qtd->complete_split = 0;
@@ -1891,12 +1902,20 @@ static void dwc2_hc_chhltd_intr_dma(struct dwc2_hsotg *hsotg,
 					"hcint 0x%08x, intsts 0x%08x\n",
 					chan->hcint,
 					DWC2_READ_4(hsotg, GINTSTS));
+				goto error;
 			}
 		}
 	} else {
 		dev_info(hsotg->dev,
 			 "NYET/NAK/ACK/other in non-error case, 0x%08x\n",
 			 chan->hcint);
+error:
+		/* use the 3-strikes rule */
+		qtd->error_count++;
+		dwc2_update_urb_state_abn(hsotg, chan, chnum, qtd->urb,
+					    qtd, DWC2_HC_XFER_XACT_ERR);
+		dwc2_hcd_save_data_toggle(hsotg, chan, chnum, qtd);
+		dwc2_halt_channel(hsotg, chan, qtd, DWC2_HC_XFER_XACT_ERR);
 	}
 }
 

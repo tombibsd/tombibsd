@@ -246,7 +246,7 @@ static const struct disklabel_params {
 	{ "sandpoint",	0, 1,   0, 16, 2, 0, BIG_ENDIAN },	/* powerpc */
 	{ "sgimips",	0, 1,   0, 16, 2, 0, BIG_ENDIAN },	/* mips */
 
-	{ "sbmips",	0, 1,   0, 16, 3, 0, 0 },	/* mips */
+	{ "sbmips",	0, 1,   0, 16, 3, 0, 0 },		/* mips */
 
 	{ "cesfic",	0, 2,   0,  8, 2, 0, BIG_ENDIAN },	/* m68k */
 	{ "hp300",	0, 2,   0,  8, 2, 0, BIG_ENDIAN },	/* m68k */
@@ -258,12 +258,15 @@ static const struct disklabel_params {
 
 	{ "prep",	1, 1,   0,  8, 2, 0, BIG_ENDIAN },	/* powerpc */
 
-	{ "dreadmcast",	1, 1,   0, 16, 2, 0, LITTLE_ENDIAN },	/* sh3 */
-	{ "evbsh3",	1, 1,   0, 16, 2, 0, 0 },		/* sh3 */
+	{ "dreamcast",	1, 1,   0, 16, 2, 0, LITTLE_ENDIAN },	/* sh3 */
+	{ "evbarm64",	1, 1,   0, 16, 2, 0, 0 },		/* aarch64 */
 	{ "evbcf",	1, 1,   0, 16, 2, 0, BIG_ENDIAN },	/* coldfire */
 	{ "evbppc-mbr",	1, 1,   0, 16, 2, 0, BIG_ENDIAN },	/* powerpc */
+	{ "evbsh3",	1, 1,   0, 16, 2, 0, 0 },		/* sh3 */
 	{ "hpcsh",	1, 1,   0, 16, 2, 0, LITTLE_ENDIAN },	/* sh3 */
 	{ "mmeye",	1, 1,   0, 16, 2, 0, 0 },		/* sh3 */
+	{ "or1k",	1, 1,   0, 16, 2, 0, BIG_ENDIAN },	/* or1k */
+	{ "riscv",	1, 1,   0, 16, 2, 0, LITTLE_ENDIAN },	/* riscv */
 
 	{ "acorn26",	1, 1,   0, 16, 2, 8, LITTLE_ENDIAN },	/* arm */
 	{ "acorn32",	1, 1,   0, 16, 2, 8, LITTLE_ENDIAN },	/* arm */
@@ -296,6 +299,7 @@ static const struct arch_endian {
 	int byteorder;
 	const char *arch;
 } arch_endians[] = {
+	{ LITTLE_ENDIAN, "aarch64" },
 	{ LITTLE_ENDIAN, "alpha" },
 	{ LITTLE_ENDIAN, "arm" },
 	{ LITTLE_ENDIAN, "earm" },
@@ -310,10 +314,13 @@ static const struct arch_endian {
 	{ LITTLE_ENDIAN, "ia64" },
 	{ LITTLE_ENDIAN, "mipsel" },
 	{ LITTLE_ENDIAN, "mips64el" },
+	{ LITTLE_ENDIAN, "riscv32" },
+	{ LITTLE_ENDIAN, "riscv64" },
 	{ LITTLE_ENDIAN, "sh3el" },
 	{ LITTLE_ENDIAN, "vax" },
 	{ LITTLE_ENDIAN, "x86_64" },
 
+	{ BIG_ENDIAN, "aarch64eb" },
 	{ BIG_ENDIAN, "armeb" },
 	{ BIG_ENDIAN, "coldfire" },
 	{ BIG_ENDIAN, "earmeb" },
@@ -329,6 +336,7 @@ static const struct arch_endian {
 	{ BIG_ENDIAN, "m68k" },
 	{ BIG_ENDIAN, "mipseb" },
 	{ BIG_ENDIAN, "mips64eb" },
+	{ BIG_ENDIAN, "or1k" },
 	{ BIG_ENDIAN, "powerpc" },
 	{ BIG_ENDIAN, "sh3eb" },
 	{ BIG_ENDIAN, "sparc" },
@@ -1384,7 +1392,7 @@ makedisktab(FILE *f, struct disklabel *lp)
 		did = "";
 	}
 	if (lp->d_headswitch != 0) {
-		(void) fprintf(f, "%shs#%" PRIu16 ":", did, lp->d_headswitch);
+		(void) fprintf(f, "%shs#%" PRIu32 ":", did, lp->d_headswitch);
 		did = "";
 	}
 	if (lp->d_trkseek != 0) {

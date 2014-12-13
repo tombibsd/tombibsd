@@ -27,7 +27,7 @@ NAMED_USE_PTHREADS?=no
 
 IDIST=		${NETBSDSRCDIR}/external/bsd/bind/dist
 BIND_SRCDIR=	${NETBSDSRCDIR}/external/bsd/bind
-BIND_HTMLDIR=	/usr/share/doc/html/bind9
+BIND_HTMLDIR=	/usr/share/doc/reference/ref8/bind9
 
 .include "${IDIST}/version"
 
@@ -50,7 +50,7 @@ CPPFLAGS+=-I${BIND_SRCDIR}/include \
 
 .if (${USE_INET6} != "no")
 CPPFLAGS+=	-DWANT_IPV6
-CPPFLAGS+=	-DALLOW_FILTER_AAAA_ON_V4
+CPPFLAGS+=	-DALLOW_FILTER_AAAA
 .endif
 
 .if defined(HAVE_GCC)

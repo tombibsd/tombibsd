@@ -14,6 +14,6 @@ DIST=	${IDIST}/lib/isccfg
 
 .PATH.c:	${DIST}/unix ${DIST}
 
-SRCS=	aclconf.c log.c namedconf.c parser.c version.c 
+SRCS=	aclconf.c log.c namedconf.c parser.c version.c dnsconf.c
 
 .include <bsd.lib.mk>

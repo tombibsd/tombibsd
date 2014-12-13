@@ -14,6 +14,7 @@ FILESDIR=		${TESTSDIR}
 FILES=			d_deffs_redef
 FILES+=			d_loop
 FILES+=			d_loop2
+FILES+=			d_min
 FILES+=			d_no_pseudo
 FILES+=			d_postponed_orphan
 FILES+=			d_pseudo_parent

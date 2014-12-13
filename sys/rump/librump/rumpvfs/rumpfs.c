@@ -428,7 +428,7 @@ etfsremove(const char *key)
 {
 	struct etfs *et;
 	size_t keylen;
-	int rv;
+	int rv __diagused;
 
 	if (key[0] != '/') {
 		return EINVAL;
@@ -1740,8 +1740,10 @@ rumpfs_mountfs(struct mount *mp)
 
 	rn = makeprivate(VDIR, RUMPFS_DEFAULTMODE, NODEV, DEV_BSIZE, false);
 	rn->rn_parent = rn;
-	if ((error = makevnode(mp, rn, &rfsmp->rfsmp_rvp)) != 0)
+	if ((error = makevnode(mp, rn, &rfsmp->rfsmp_rvp)) != 0) {
+		kmem_free(rfsmp, sizeof(*rfsmp));
 		return error;
+	}
 
 	rfsmp->rfsmp_rvp->v_vflag |= VV_ROOT;
 
@@ -1817,6 +1819,8 @@ rumpfs_init()
 {
 	extern rump_etfs_register_withsize_fn rump__etfs_register;
 	extern rump_etfs_remove_fn rump__etfs_remove;
+	extern struct rump_boot_etfs *ebstart;
+	struct rump_boot_etfs *eb;
 
 	CTASSERT(RUMP_ETFS_SIZE_ENDOFF == RUMPBLK_SIZENOTSET);
 
@@ -1825,6 +1829,11 @@ rumpfs_init()
 
 	rump__etfs_register = etfsregister;
 	rump__etfs_remove = etfsremove;
+
+	for (eb = ebstart; eb; eb = eb->_eb_next) {
+		eb->eb_status = etfsregister(eb->eb_key, eb->eb_hostpath,
+		    eb->eb_type, eb->eb_begin, eb->eb_size);
+	}
 }
 
 void

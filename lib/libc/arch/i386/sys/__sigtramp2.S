@@ -50,3 +50,4 @@ NENTRY(__sigtramp_siginfo_2)
 	SYSTRAP(setcontext)	/* do setcontext */
 	movl	$-1,4(%esp)	/* if we return here, something is wrong */
 	SYSTRAP(exit)		/* exit */
+END(__sigtramp_siginfo_2)

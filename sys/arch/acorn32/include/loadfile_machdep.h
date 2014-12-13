@@ -44,9 +44,14 @@
 #define READ(f, b, c)		boot32_read((f), (void *)LOADADDR(b), (c))
 #define	BCOPY(s, d, c)		boot32_memcpy((void *)LOADADDR(d), (s), (c))
 #define	BZERO(d, c)		boot32_memset((void *)LOADADDR(d), 0, (c))
-#define	WARN(a)			(void)(printf a, \
-				    printf((errno ? ": %s\n" : "\n"), \
-				    strerror(errno)))
+#define	WARN(a)			do { \
+					(void)printf a; \
+					if (errno) \
+						(void)printf(": %s\n", \
+						             strerror(errno)); \
+					else \
+						(void)printf("\n"); \
+				} while(/* CONSTCOND */0)
 #define	PROGRESS(a)		(void) printf a
 #define	ALLOC(a)		alloc(a)
 #define	DEALLOC(a, b)		dealloc(a, b)

@@ -53,13 +53,15 @@ CFATTACH_DECL_NEW(lpt_ebus, sizeof(struct lpt_softc),
     lpt_ebus_match, lpt_ebus_attach, NULL, NULL);
 
 #define	ROM_LPT_NAME	"ecpp"
+#define	ROM_LPT_NAME2	"parallel"
 
 int
 lpt_ebus_match(device_t parent, cfdata_t match, void *aux)
 {
 	struct ebus_attach_args *ea = aux;
 
-	if (strcmp(ea->ea_name, ROM_LPT_NAME) == 0)
+	if (strcmp(ea->ea_name, ROM_LPT_NAME) == 0
+	    || strcmp(ea->ea_name, ROM_LPT_NAME2) == 0)
 		return (1);
 
 	return (0);

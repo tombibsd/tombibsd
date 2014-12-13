@@ -66,7 +66,6 @@ void	uuid_dec_be(const void *, struct uuid *);
 void	uuid_dec_le(const void *, struct uuid *);
 void	uuid_enc_be(void *, const struct uuid *);
 void	uuid_enc_le(void *, const struct uuid *);
-void	uuid_init(void);
 int	uuidgen(struct uuid *, int);
 
 #else	/* _KERNEL */

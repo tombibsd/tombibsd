@@ -511,8 +511,13 @@ char *
 clockfreq(long freq)
 {
 	static char buf[10];
+	size_t len;
 
-	humanize_number(buf, sizeof(buf), freq / 1000, "", 1000);
+	freq /= 1000;
+	len = snprintf(buf, sizeof(buf), "%ld", freq / 1000);
+	freq %= 1000;
+	if (freq)
+		snprintf(buf + len, sizeof(buf) - len, ".%03ld", freq);
 	return buf;
 }
 
@@ -746,7 +751,7 @@ romgetcursoraddr(int **rowp, int **colp)
 
 /*
  * Match a device_t against the bootpath, by
- * comparing it's firmware package handle. If they match
+ * comparing its firmware package handle. If they match
  * exactly, we found the boot device.
  */
 static void
@@ -762,7 +767,7 @@ dev_path_exact_match(device_t dev, int ofnode)
 
 /*
  * Match a device_t against the bootpath, by
- * comparing it's firmware package handle and calculating
+ * comparing its firmware package handle and calculating
  * the target/lun suffix and comparing that against
  * the bootpath remainder.
  */
@@ -770,7 +775,7 @@ static void
 dev_path_drive_match(device_t dev, int ctrlnode, int target,
     uint64_t wwn, int lun)
 {
-	int child = 0;
+	int child = 0, ide_node = 0;
 	char buf[OFPATHLEN];
 
 	DPRINTF(ACDB_BOOTDEV, ("dev_path_drive_match: %s, controller %x, "
@@ -786,6 +791,27 @@ dev_path_drive_match(device_t dev, int ctrlnode, int target,
 		if (child == ofbootpackage)
 			break;
 
+	if (child != ofbootpackage) {
+		/*
+		 * Try Mac firmware style (also used by QEMU/OpenBIOS):
+		 * below the controller there is an intermediate node
+		 * for each IDE channel, and individual targets always
+		 * are "@0"
+		 */
+		for (ide_node = prom_firstchild(ctrlnode); ide_node != 0;
+		    ide_node = prom_nextsibling(ide_node)) {
+			const char * name = prom_getpropstring(ide_node,
+			    "device_type");
+			if (strcmp(name, "ide") != 0) continue;
+			for (child = prom_firstchild(ide_node); child != 0;
+			    child = prom_nextsibling(child))
+				if (child == ofbootpackage)
+					break;
+			if (child == ofbootpackage)
+				break;
+		}
+	}
+
 	if (child == ofbootpackage) {
 		const char * name = prom_getpropstring(child, "name");
 
@@ -800,6 +826,8 @@ dev_path_drive_match(device_t dev, int ctrlnode, int target,
 		if (wwn)
 			snprintf(buf, sizeof(buf), "%s@w%016" PRIx64 ",%d",
 			    name, wwn, lun);
+		else if (ide_node)
+			snprintf(buf, sizeof(buf), "%s@0", name);
 		else
 			snprintf(buf, sizeof(buf), "%s@%d,%d",
 			    name, target, lun);
@@ -1180,7 +1208,7 @@ device_register_post_config(device_t dev, void *aux)
 
 		/*
 		 * If this is a FC-AL drive it will have
-		 * aquired it's WWN device property by now,
+		 * aquired its WWN device property by now,
 		 * so we can properly match it.
 		 */
 		if (prop_dictionary_get_uint64(device_properties(dev),

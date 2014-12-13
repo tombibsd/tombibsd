@@ -189,6 +189,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #  error no prcm device configured.
 # endif
 # include <arm/omap/am335x_prcm.h>
+# include <dev/i2c/tps65217pmicvar.h>
 # if NSDHC > 0
 #  include <arm/omap/omap2_obiovar.h>
 #  include <arm/omap/omap3_sdmmcreg.h>
@@ -237,6 +238,9 @@ int use_fb_console = true;
 
 #ifdef CPU_CORTEXA15
 uint32_t omap5_cnt_frq;
+#endif
+#if defined(TI_AM335X)
+device_t pmic_dev = NULL;
 #endif
 
 /*
@@ -1098,8 +1102,30 @@ beagle_device_register(device_t self, void *aux)
 			prop_dictionary_set_bool(dict, "is_console", true);
 		return;
 	}
+	if (device_is_a(self, "tifb")) {
+		if (use_fb_console)
+			prop_dictionary_set_bool(dict, "is_console", true);
+		return;
+	}
 	if (device_is_a(self, "com")) {
 		if (use_fb_console)
 			prop_dictionary_set_bool(dict, "is_console", false);
 	}
+#if defined(TI_AM335X)
+	if (device_is_a(self, "tps65217pmic")) {
+		pmic_dev = self;
+	}
+#endif
 }
+
+#if defined(TI_AM335X)
+int
+set_mpu_volt(int mvolt)
+{
+	if (pmic_dev == NULL)
+		return ENODEV;
+
+	/* MPU voltage is on vdcd2 */
+	return tps65217pmic_set_volt(pmic_dev, "DCDC2", mvolt);
+}
+#endif

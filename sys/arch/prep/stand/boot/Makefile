@@ -24,7 +24,7 @@ SRCS+= filesystem.c inkernel.c io.c tgets.c prf.c monitor.c
 SRCS+= kbd.c ns16550.c vers.c vreset.c vga.c 
 SRCS+= pci.c sd.c siop.c
 
-CFLAGS= -Os -mmultiple -ffreestanding
+CFLAGS= -Os -ffreestanding
 CFLAGS+= -Werror -Wall -Wstrict-prototypes -Wmissing-prototypes
 AFLAGS= -x assembler-with-cpp
 

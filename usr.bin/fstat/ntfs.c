@@ -56,7 +56,7 @@ ntfs_filestat(struct vnode *vp, struct filestat *fsp)
 
 	/* to get the ntnode, we have to go in two steps - firstly
 	 * to read appropriate struct fnode and then getting the address
-	 * of ntnode and reading it's contents */
+	 * of ntnode and reading its contents */
 	if (!KVM_READ(VTOF(vp), &fn, sizeof (fn))) {
 		dprintf("can't read fnode at %p for pid %d", VTOF(vp), Pid);
 		return 0;

@@ -63,8 +63,6 @@ XXX some entries might be obsolete.
 
     o	fix mem_clusters[] usage.
 
-    o	intrcnt[] name cleanup, use MI evcnt(9)
-
     o	redesign interrupt handler framework.
 
     o	it is better to always disable the MIPS3 internal timer interrupts

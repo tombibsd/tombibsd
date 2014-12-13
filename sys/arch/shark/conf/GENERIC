@@ -65,6 +65,7 @@ options 	WAPBL		# File system journaling support
 #options	UFS_DIRHASH	# UFS Large Directory Hashing - Experimental
 options 	NFSSERVER
 #options 	FFS_NO_SNAPSHOT	# No FFS snapshot support
+#options 	UFS_EXTATTR	# Extended attribute support for UFS1
 
 # Networking options
 
@@ -99,19 +100,21 @@ options 	NFS_BOOT_DHCP	# use NetBSD standard DHCP/NFS boot code
 
 # Compatibility options
 
-#options 	COMPAT_09	# NetBSD 0.9 compatibility.
-#options 	COMPAT_10	# NetBSD 1.0 compatibility.
-#options 	COMPAT_11	# NetBSD 1.1 compatibility.
-options 	COMPAT_12	# NetBSD 1.2 compatibility.
-options 	COMPAT_13	# NetBSD 1.3 compatibility.
-options 	COMPAT_14	# NetBSD 1.4 compatibility.
-options 	COMPAT_15	# NetBSD 1.5 compatibility.
-options 	COMPAT_16	# NetBSD 1.6 compatibility.
-options 	COMPAT_20	# NetBSD 2.0 compatibility.
-options 	COMPAT_30	# NetBSD 3.0 compatibility.
-options 	COMPAT_40	# NetBSD 4.0 compatibility.
-options 	COMPAT_50	# NetBSD 5.0 compatibility.
-options 	COMPAT_60	# NetBSD 6.0 compatibility.
+options		COMPAT_NETBSD32	# allow running arm (e.g. non-earm) binaries
+#options 	COMPAT_09	# NetBSD 0.9,
+#options 	COMPAT_10	# NetBSD 1.0,
+#options 	COMPAT_11	# NetBSD 1.1,
+options 	COMPAT_12	# NetBSD 1.2,
+options 	COMPAT_13	# NetBSD 1.3,
+options 	COMPAT_14	# NetBSD 1.4,
+options 	COMPAT_15	# NetBSD 1.5,
+options 	COMPAT_16	# NetBSD 1.6,
+options 	COMPAT_20	# NetBSD 2.0,
+options 	COMPAT_30	# NetBSD 3.0,
+options 	COMPAT_40	# NetBSD 4.0,
+options 	COMPAT_50	# NetBSD 5.0,
+options 	COMPAT_60	# NetBSD 6.0, and
+options 	COMPAT_70	# NetBSD 7.0 binary compatibility.
 options 	COMPAT_43	# 4.3BSD compatibility.
 options 	COMPAT_LINUX	# Linux compatibility.
 #options 	TCP_COMPAT_42	# 4.2BSD TCP/IP bug compat. Not recommended.
@@ -145,6 +148,7 @@ options 	USERCONF	# userconf(4) support
 #options 	PIPE_SOCKETPAIR	# smaller, but slower pipe(2)
 options 	SYSCTL_INCLUDE_DESCR	# Include sysctl descriptions in kernel
 options 	MODULAR		# new style module(7) framework
+options 	MODULAR_DEFAULT_AUTOLOAD
 
 # Development and Debugging options
 
@@ -153,7 +157,7 @@ options 	MODULAR		# new style module(7) framework
 options 	DIAGNOSTIC	# internal consistency checks
 #options 	PMAP_DEBUG	# Enable pmap_debug_level code
 options 	DDB		# in-kernel debugger
-options 	SYMTAB_SPACE=690000 	# reserve symbol space for DDB
+makeoptions	COPY_SYMTAB=1 	# reserve symbol space for DDB
 				# (needed because we boot netbsd.aout)
 #options 	DDB_ONPANIC=0	# don't run DDB at panictime
 #options 	DDB_HISTORY_SIZE=100	# Enable history editing in DDB

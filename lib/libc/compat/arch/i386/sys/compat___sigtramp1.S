@@ -49,3 +49,4 @@ NENTRY(__sigtramp_sigcontext_1)
 	SYSTRAP(compat_16___sigreturn14) /* do sigreturn */
 	movl	%eax,4(%esp)	/* error code */
 	SYSTRAP(exit)		/* exit */
+END(__sigtramp_sigcontext_1)

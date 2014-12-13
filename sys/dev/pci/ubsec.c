@@ -510,7 +510,7 @@ ubsec_attach(device_t parent, device_t self, void *aux)
 		rndsource_setcb(&sc->sc_rnd_source, ubsec_rng_get, sc);
 		rnd_attach_source(&sc->sc_rnd_source, device_xname(sc->sc_dev),
 				  RND_TYPE_RNG,
-				  RND_FLAG_NO_ESTIMATE|RND_FLAG_HASCB);
+				  RND_FLAG_COLLECT_VALUE|RND_FLAG_HASCB);
 		if (hz >= 100)
 			sc->sc_rnghz = hz / 100;
 		else

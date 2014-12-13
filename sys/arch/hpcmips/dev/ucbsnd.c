@@ -186,6 +186,7 @@ const struct cdevsw ucbsnd_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = nullmmap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = 0
 };
 

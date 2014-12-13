@@ -131,6 +131,7 @@ const struct cdevsw asc_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = ascmmap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = 0
 };
 

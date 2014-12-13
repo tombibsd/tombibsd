@@ -18,7 +18,7 @@ LDADD+=		-lrumpdev_putter -lrumpdev
 LDADD+=		-lrumpfs_syspuffs -lrumpvfs_fifofs
 LDADD+=		-lrumpnet_local -lrumpnet_net -lrumpnet
 LDADD+=		-lrumpvfs
-LDADD+=		-lrump -lrumpuser -lpthread
+LDADD+=		-lrump -lrumpuser -lrump -lpthread
 
 # required by -DPUFFSDUMP
 #LDADD+= 	-lpuffs -lutil

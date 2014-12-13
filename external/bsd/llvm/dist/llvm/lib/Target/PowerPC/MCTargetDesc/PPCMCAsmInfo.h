@@ -21,15 +21,15 @@ namespace llvm {
 class Triple;
 
   class PPCMCAsmInfoDarwin : public MCAsmInfoDarwin {
-    virtual void anchor();
+    void anchor() override;
   public:
     explicit PPCMCAsmInfoDarwin(bool is64Bit, const Triple&);
   };
 
-  class PPCLinuxMCAsmInfo : public MCAsmInfoELF {
-    virtual void anchor();
+  class PPCELFMCAsmInfo : public MCAsmInfoELF {
+    void anchor() override;
   public:
-    explicit PPCLinuxMCAsmInfo(bool is64Bit, const Triple&);
+    explicit PPCELFMCAsmInfo(bool is64Bit, const Triple&);
   };
 
 } // namespace llvm

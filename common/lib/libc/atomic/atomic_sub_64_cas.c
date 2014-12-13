@@ -62,4 +62,6 @@ sub_and_fetch_8(volatile uint64_t *addr, uint64_t val, ...)
 	return new;
 }
 
+__strong_alias(__atomic_fetch_sub_8,__sync_fetch_and_sub_8)
+
 #endif

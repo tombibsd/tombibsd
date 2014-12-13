@@ -44,6 +44,7 @@ options 	SYSVSEM		# System V semaphores
 options 	SYSVSHM		# System V shared memory
 
 options 	MODULAR		# new style module(7) framework
+options 	MODULAR_DEFAULT_AUTOLOAD
 
 #options 	USERCONF	# userconf(4) support
 #options 	PIPE_SOCKETPAIR	# smaller, but slower pipe(2)
@@ -67,8 +68,9 @@ options		DDB_COMMANDONENTER="bt"
 #makeoptions 	DEBUG="-g"	# compile full symbol table
 
 # Compatibility options
-options 	COMPAT_50	# NetBSD 5.0 compatibility.
-options 	COMPAT_60	# NetBSD 6.0 compatibility.
+options 	COMPAT_50	# NetBSD 5.0,
+options 	COMPAT_60	# NetBSD 6.0, and
+options 	COMPAT_70	# NetBSD 7.0 binary compatibility.
 #options 	COMPAT_386BSD_MBRPART # recognize old partition ID
 #options 	COMPAT_LINUX	# Linux binary compatibility
 #options 	TCP_COMPAT_42	# 4.2BSD TCP/IP bug compat. Not recommended.
@@ -77,9 +79,9 @@ options 	COMPAT_BSDPTY	# /dev/[pt]ty?? ptys.
 # Wedge support
 options         DKWEDGE_AUTODISCOVER    # Automatically add dk(4) instances
 options         DKWEDGE_METHOD_GPT      # Supports GPT partitions as wedges
-# The following two options can break /etc/fstab, so handle with care
-#options        DKWEDGE_METHOD_BSDLABEL # Support disklabel entries as wedges
-#options        DKWEDGE_METHOD_MBR      # Support MBR partitions as wedges
+#options		DKWEDGE_METHOD_BSDLABEL # Support disklabel entries as wedges
+#options		DKWEDGE_METHOD_MBR      # Support MBR partitions as wedges
+options		DKWEDGE_METHOD_APPLE    # Support Apple partitions as wedges
 
 # File systems
 file-system 	FFS		# UFS
@@ -227,7 +229,6 @@ voodoofb*	at pci? function ?	# 3Dfx Voodoo3
 
 # ATI Radeon. Still has problems on some hardware
 #radeonfb*	at pci? function ?
-#options 	RADEONFB_MMAP_BARS	# allow mmap()ing BARs - needed for X
 
 # generic PCI framebuffer, should work with everything supported by OF
 genfb*		at pci? function ?

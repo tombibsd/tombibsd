@@ -1,5 +1,4 @@
 /*	$NetBSD$	*/
-
 /* ldap_casa.c
    
    CASA routines for DHCPD... */

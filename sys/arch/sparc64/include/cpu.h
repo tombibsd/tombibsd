@@ -71,6 +71,9 @@
 #include <machine/cpuset.h>
 #include <sparc64/sparc64/intreg.h>
 #endif
+#ifdef SUN4V
+#include <sparc64/hypervisor.h>
+#endif
 
 #include <sys/cpu_data.h>
 #include <sys/evcnt.h>
@@ -174,12 +177,23 @@ struct cpu_info {
 	pte_t			*ci_tsb_dmmu;
 	pte_t			*ci_tsb_immu;
 
+	/* TSB description (sun4v). */
+	struct tsb_desc         *ci_tsb_desc;
+	
 	/* MMU Fault Status Area (sun4v).
 	 * Will be initialized to the physical address of the bottom of
 	 * the interrupt stack.
 	 */
 	paddr_t			ci_mmfsa;
 
+	/*
+	 * sun4v mondo control fields
+	 */
+	paddr_t			ci_cpumq;  /* cpu mondo queue address */
+	paddr_t			ci_devmq;  /* device mondo queue address */
+	paddr_t			ci_cpuset; /* mondo recipient address */ 
+	paddr_t			ci_mondo;  /* mondo message address */
+	
 	/* probe fault in PCI config space reads */
 	bool			ci_pci_probe;
 	bool			ci_pci_fault;
@@ -209,6 +223,7 @@ struct cpu_bootargs {
 	vaddr_t cb_ekdata;
 
 	paddr_t	cb_cpuinfo;
+	int cb_cputyp;
 };
 
 extern struct cpu_bootargs *cpu_args;

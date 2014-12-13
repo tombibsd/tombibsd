@@ -502,7 +502,7 @@ dsk_open(struct open_file *f, ...)
 	d->part = part;
 	f->f_devdata = d;
 
-	snprintf(bi_path.bootpath, sizeof(bi_path.bootpath), name);
+	snprintf(bi_path.bootpath, sizeof(bi_path.bootpath), "%s", name);
 	if (dlp->d_partitions[part].p_fstype == FS_BSDFFS) {
 		if ((error = ffsv2_open(name, f)) == 0) {
 			fs = &fs_ffsv2;

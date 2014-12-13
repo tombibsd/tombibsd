@@ -142,12 +142,12 @@ again:
 	 * XXXX this assumption will fail in 2100, but somehow I don't think
 	 * I or the hardware will be functioning to see it.
 	 */
-	dt->dt_year = FROMBCD(rtcyear) + 2000;
-	dt->dt_mon = FROMBCD(rtcmonth);
-	dt->dt_day = FROMBCD(rtcday);
-	dt->dt_hour = FROMBCD(rtchour);
-	dt->dt_min = FROMBCD(rtcmin);
-	dt->dt_sec = FROMBCD(rtcsec);
+	dt->dt_year = bcdtobin(rtcyear) + 2000;
+	dt->dt_mon = bcdtobin(rtcmonth);
+	dt->dt_day = bcdtobin(rtcday);
+	dt->dt_hour = bcdtobin(rtchour);
+	dt->dt_min = bcdtobin(rtcmin);
+	dt->dt_sec = bcdtobin(rtcsec);
 
 	return 0;
 }
@@ -159,17 +159,17 @@ mvsocrtc_todr_settime(todr_chip_handle_t ch, struct clock_ymdhms *dt)
 	uint32_t reg;
 
 	/* compose & write time register contents */
-	reg = (TOBCD(dt->dt_sec) << MVSOCRTC_SECOND_OFFSET) |
-	   (TOBCD(dt->dt_min) << MVSOCRTC_MINUTE_OFFSET) |
-	   (TOBCD(dt->dt_hour) << MVSOCRTC_HOUR_OFFSET) |
-	   (TOBCD(dt->dt_wday) << MVSOCRTC_WDAY_OFFSET);
+	reg = (bintobcd(dt->dt_sec) << MVSOCRTC_SECOND_OFFSET) |
+	   (bintobcd(dt->dt_min) << MVSOCRTC_MINUTE_OFFSET) |
+	   (bintobcd(dt->dt_hour) << MVSOCRTC_HOUR_OFFSET) |
+	   (bintobcd(dt->dt_wday) << MVSOCRTC_WDAY_OFFSET);
 
 	bus_space_write_4(sc->sc_iot, sc->sc_ioh, MVSOCRTC_TIME, reg);
 
 	/* compose & write date register contents */
-	reg = (TOBCD(dt->dt_day) << MVSOCRTC_DAY_OFFSET) |
-	   (TOBCD(dt->dt_mon) << MVSOCRTC_MONTH_OFFSET) |
-	   (TOBCD(dt->dt_year % 100) << MVSOCRTC_YEAR_OFFSET);
+	reg = (bintobcd(dt->dt_day) << MVSOCRTC_DAY_OFFSET) |
+	   (bintobcd(dt->dt_mon) << MVSOCRTC_MONTH_OFFSET) |
+	   (bintobcd(dt->dt_year % 100) << MVSOCRTC_YEAR_OFFSET);
 
 	bus_space_write_4(sc->sc_iot, sc->sc_ioh, MVSOCRTC_DATE, reg);
 

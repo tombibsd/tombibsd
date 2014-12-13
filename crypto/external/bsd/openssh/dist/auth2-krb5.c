@@ -41,6 +41,7 @@ __RCSID("$NetBSD$");
 #include "ssh-gss.h"
 #endif
 #include "monitor_wrap.h"
+#include "misc.h"
 #include "servconf.h"
 
 /* import */

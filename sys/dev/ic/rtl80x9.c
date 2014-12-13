@@ -92,6 +92,8 @@ rtl80x9_mediastatus(struct dp8390_softc *sc, struct ifmediareq *ifmr)
 		if (NIC_GET(sc->sc_regt, sc->sc_regh, NERTL_RTL3_CONFIG3) &
 		    RTL3_CONFIG3_FUDUP)
 			ifmr->ifm_active |= IFM_FDX;
+		else
+			ifmr->ifm_active |= IFM_HDX;
 	}
 
 	/* Set NIC to page 0 registers. */

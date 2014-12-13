@@ -1,4 +1,4 @@
-/Makefile/1.19/Tue Jan 14 16:05:15 2014/-kk/
+/Makefile/1.20/Tue Dec  9 04:35:07 2014/-kk/
 D/awk////
 D/basename////
 D/bzip2////
@@ -14,6 +14,7 @@ D/gzip////
 D/id////
 D/infocmp////
 D/jot////
+D/ld////
 D/m4////
 D/make////
 D/mkdep////

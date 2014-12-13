@@ -32,7 +32,6 @@
 __RCSID("$NetBSD$");
 
 #include <atf-c.h>
-#include <atf-c/config.h>
 
 #include <float.h>
 #include <stdlib.h>

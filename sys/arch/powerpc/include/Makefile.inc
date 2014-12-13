@@ -4,7 +4,7 @@
 _POWERPC_MAKEFILE_INC=	yes
 
 .if !defined(RUMPKERNEL)
-CFLAGS+= -msoft-float
+CFLAGS+= ${${ACTIVE_CC} == "gcc":? -msoft-float :}
 .endif
 
 .endif

@@ -282,7 +282,7 @@ coda_nc_enter(struct cnode *dcp, const char *name, int namelen,
 }
 
 /*
- * Find the (dir cnode, name) pair in the cache, if it's cred
+ * Find the (dir cnode, name) pair in the cache, if its cred
  * matches the input, return it, otherwise return 0
  */
 struct cnode *
@@ -337,7 +337,7 @@ coda_nc_remove(struct coda_cache *cncp, enum dc_status dcstat)
 {
 	/*
 	 * remove an entry -- vrele(cncp->dcp, cp), crfree(cred),
-	 * remove it from it's hash chain, and
+	 * remove it from its hash chain, and
 	 * place it at the head of the lru list.
 	 */
         CODA_NC_DEBUG(CODA_NC_REMOVE,

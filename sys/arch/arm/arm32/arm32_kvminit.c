@@ -121,6 +121,8 @@
  * SUCH DAMAGE.
  */
 
+#include "opt_multiprocessor.h"
+
 #include <sys/cdefs.h>
 __KERNEL_RCSID(0, "$NetBSD$");
 
@@ -139,8 +141,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <arm/undefined.h>
 #include <arm/bootconfig.h>
 #include <arm/arm32/machdep.h>
-
-#include "ksyms.h"
 
 struct bootmem_info bootmem_info;
 
@@ -608,7 +608,7 @@ arm32_kernel_vm_init(vaddr_t kernel_vm_base, vaddr_t vectors, vaddr_t iovbase,
 #if (ARM_NMMUS > 1)
 	if (xscale_use_minidata)
 #endif          
-		valloc_pages(bmi, extrapv, nextrapages,
+		valloc_pages(bmi, &minidataclean, 1,
 		    VM_PROT_READ|VM_PROT_WRITE, 0, true);
 #endif
 
@@ -855,7 +855,7 @@ arm32_kernel_vm_init(vaddr_t kernel_vm_base, vaddr_t vectors, vaddr_t iovbase,
 #if (ARM_NMMUS > 1)
 	if (xscale_use_minidata)
 #endif          
-		xscale_setup_minidata(l1_va, minidataclean.pv_va,
+		xscale_setup_minidata(l1pt_va, minidataclean.pv_va,
 		    minidataclean.pv_pa);      
 #endif
 

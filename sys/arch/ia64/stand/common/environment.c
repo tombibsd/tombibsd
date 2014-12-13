@@ -46,7 +46,7 @@ static void	env_discard(struct env_var *ev);
 struct env_var	*environ = NULL;
 
 /*
- * Look up (name) and return it's env_var structure.
+ * Look up (name) and return its env_var structure.
  */
 struct env_var	*
 env_getenv(const char *name)

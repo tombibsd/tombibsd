@@ -55,7 +55,7 @@
  * date/time format in i4b log messages
  * ------------------------------------
  * Being year 2000 clean is not easy with the current state of the
- * ANSI C library standard and it's implementation for some locales.
+ * ANSI C library standard and its implementation for some locales.
  * You might like to use the "%c" format of "strftime" sometimes,
  * but this breaks Y2K in some locales. Also the old standard logfile
  * format "%d.%m.%y %H:%M:%S" is non compliant.

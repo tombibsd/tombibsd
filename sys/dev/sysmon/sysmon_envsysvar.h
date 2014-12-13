@@ -137,6 +137,7 @@ void	sme_event_unregister_all(struct sysmon_envsys *);
 void	sme_event_drvadd(void *);
 int	sme_events_init(struct sysmon_envsys *);
 void	sme_events_destroy(struct sysmon_envsys *);
+void	sme_events_halt_callout(struct sysmon_envsys *);
 void	sme_events_check(void *);
 void	sme_events_worker(struct work *, void *);
 void	sme_deliver_event(sme_event_t *);

@@ -315,6 +315,11 @@ union instr {
 #define OPC31_MTSPR	0x1d3
 
 /*
+ * Opcode 31 sub-types (integer only)
+ */
+#define OPC31_OR	0x1bc
+
+/*
  * Opcode 59 sub-types:
  */
 

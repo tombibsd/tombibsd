@@ -711,7 +711,7 @@ do_hwtid_rpl(struct toedev *dev, struct mbuf *m)
 
     printf("do_hwtid_rpl m=%p\n", m);
     return (0);
-
+#ifdef notyet
 
     hwtid = G_TID(ntohl(p->opcode_tid));
 
@@ -725,6 +725,7 @@ do_hwtid_rpl(struct toedev *dev, struct mbuf *m)
             dev->name, p->opcode);
         return CPL_RET_BUF_DONE | CPL_RET_BAD_MSG;
     }
+#endif
 }
 
 static int

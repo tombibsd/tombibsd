@@ -54,7 +54,7 @@ boot.cfg:	${FLOPPY_BOOT_CFG}
 CLEANFILES+=	netbsd netbsd.tmp
 .if ${FLOPPY_NETBSD:E}=="gz"
 COPY_CMD=	gunzip -c ${.ALLSRC} > ${.TARGET}.tmp
-COMPRESS_CMD=	${TOOL_GZIP} -9nc ${.TARGET}.tmp > ${.TARGET}; \
+COMPRESS_CMD=	${TOOL_GZIP_N} -9c ${.TARGET}.tmp > ${.TARGET}; \
 		rm -f ${.TARGET}.tmp
 .else
 COPY_CMD=	cp ${.ALLSRC} ${.TARGET}.tmp

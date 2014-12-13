@@ -1,4 +1,4 @@
-/Makefile/1.29/Thu Oct 24 10:28:57 2013/-kk/
+/Makefile/1.31/Fri Oct  3 09:09:00 2014/-kk/
 /ansi.h/1.1/Fri Feb 23 03:48:14 2001/-kk/
 /aout_machdep.h/1.1/Fri Feb 23 03:48:14 2001/-kk/
 /apmvar.h/1.6/Mon Apr 28 20:23:21 2008/-kk/
@@ -35,6 +35,7 @@
 /math.h/1.1/Fri Feb 23 03:48:17 2001/-kk/
 /mcontext.h/1.2/Fri Jan 17 22:55:20 2003/-kk/
 /mutex.h/1.2/Fri Feb  9 21:55:03 2007/-kk/
+/netbsd32_machdep.h/1.1/Mon Aug  4 07:06:47 2014/-kk/
 /param.h/1.5/Tue Feb 12 06:58:20 2002/-kk/
 /pcb.h/1.3/Mon Sep  3 19:20:29 2001/-kk/
 /platid.h/1.2/Fri Feb  1 18:16:05 2002/-kk/
@@ -50,6 +51,7 @@
 /rwlock.h/1.2/Fri Feb  9 21:55:04 2007/-kk/
 /setjmp.h/1.1/Fri Feb 23 03:48:19 2001/-kk/
 /signal.h/1.1/Fri Feb 23 03:48:19 2001/-kk/
+/sljit_machdep.h/1.1/Wed Jul 23 18:19:43 2014/-kk/
 /sysarch.h/1.3/Sat Jul 14 00:23:11 2001/-kk/
 /trap.h/1.1/Fri Feb 23 03:48:19 2001/-kk/
 /types.h/1.15/Thu Oct 24 10:28:57 2013/-kk/

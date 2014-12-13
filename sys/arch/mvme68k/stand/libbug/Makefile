@@ -19,12 +19,6 @@ CLEANFILES+= bugstart.o
 # only needed during build
 libinstall::
 
-# separate rule for bugstart.c
-# this is build separately from rest of libbug
-bugstart.o: bugstart.s
-	${CC} -x assembler-with-cpp -nostdinc ${INCPATH} \
-	-D_STANDALONE -c ${.IMPSRC}
-
 all realall: lib${LIB}.a
 
 .include <bsd.own.mk>

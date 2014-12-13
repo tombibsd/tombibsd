@@ -36,6 +36,7 @@ basic_head() {
 basic_body() {
 
 	atf_check -s exit:0 -o ignore -e empty -x "sysctl -a"
+	atf_check -s exit:0 -o ignore -e empty -x "sysctl -d"
 }
 
 atf_init_test_cases() {

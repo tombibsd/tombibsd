@@ -175,7 +175,7 @@ vlan_status(prop_dictionary_t env, prop_dictionary_t oenv)
 static void
 vlan_usage(prop_dictionary_t env)
 {
-	fprintf(stderr, "\t[ vlan n vlanif i ]\n");
+	fprintf(stderr, "\t[ vlan n vlanif i ] [ -vlanif i ]\n");
 }
 
 static void

@@ -568,15 +568,15 @@ frag6_deq(struct ip6asfrag *af6)
 }
 
 void
-frag6_insque(struct ip6q *new, struct ip6q *old)
+frag6_insque(struct ip6q *newq, struct ip6q *oldq)
 {
 
 	KASSERT(mutex_owned(&frag6_lock));
 
-	new->ip6q_prev = old;
-	new->ip6q_next = old->ip6q_next;
-	old->ip6q_next->ip6q_prev= new;
-	old->ip6q_next = new;
+	newq->ip6q_prev = oldq;
+	newq->ip6q_next = oldq->ip6q_next;
+	oldq->ip6q_next->ip6q_prev= newq;
+	oldq->ip6q_next = newq;
 }
 
 void

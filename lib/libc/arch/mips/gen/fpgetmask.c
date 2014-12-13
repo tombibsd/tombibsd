@@ -23,6 +23,6 @@ fpgetmask(void)
 {
 	fp_except x;
 
-	__asm("cfc1 %0,$31" : "=r" (x));
+	__asm(".set push; .set noat; cfc1 %0,$31; .set pop" : "=r" (x));
 	return (x >> 7) & 0x1f;
 }

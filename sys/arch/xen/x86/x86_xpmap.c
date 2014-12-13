@@ -490,6 +490,35 @@ xen_vcpu_bcast_invlpg(vaddr_t sva, vaddr_t eva)
 	return;
 }
 
+/* Copy a page */
+void
+xen_copy_page(paddr_t srcpa, paddr_t dstpa)
+{
+	mmuext_op_t op;
+
+	op.cmd = MMUEXT_COPY_PAGE;
+	op.arg1.mfn = xpmap_ptom(dstpa) >> PAGE_SHIFT;
+	op.arg2.src_mfn = xpmap_ptom(srcpa) >> PAGE_SHIFT;
+
+	if (HYPERVISOR_mmuext_op(&op, 1, NULL, DOMID_SELF) < 0) {
+		panic(__func__);
+	}
+}
+
+/* Zero a physical page */
+void
+xen_pagezero(paddr_t pa)
+{
+	mmuext_op_t op;
+
+	op.cmd = MMUEXT_CLEAR_PAGE;
+	op.arg1.mfn = xpmap_ptom(pa) >> PAGE_SHIFT;
+
+	if (HYPERVISOR_mmuext_op(&op, 1, NULL, DOMID_SELF) < 0) {
+		panic(__func__);
+	}
+}
+
 int
 xpq_update_foreign(paddr_t ptr, pt_entry_t val, int dom)
 {

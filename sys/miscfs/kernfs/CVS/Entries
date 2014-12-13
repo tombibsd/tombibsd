@@ -1,7 +1,6 @@
 /Makefile/1.1/Fri Jun 12 23:23:02 1998/-kk/
-/files.kernfs/1.4/Wed Mar  3 01:26:01 2010/-kk/
-/kernfs.h/1.37/Thu Mar 22 20:34:38 2012/-kk/
-/kernfs_subr.c/1.27/Sat Apr 19 05:37:01 2014/-kk/
-/kernfs_vfsops.c/1.93/Fri Apr 11 02:03:53 2014/-kk/
-/kernfs_vnops.c/1.151/Sat Apr 19 05:37:01 2014/-kk/
+/files.kernfs/1.6/Wed Oct 29 08:13:30 2014/-kk/
+/kernfs.h/1.40/Mon Jul 21 08:07:49 2014/-kk/
+/kernfs_vfsops.c/1.95/Mon Jul 21 08:07:49 2014/-kk/
+/kernfs_vnops.c/1.154/Fri Oct  3 09:09:27 2014/-kk/
 D

@@ -1,7 +1,8 @@
 /*	$NetBSD$	*/
 
+// $OpenLDAP$
 /*
- * Copyright 2008, OpenLDAP Foundation, All Rights Reserved.
+ * Copyright 2008-2014 The OpenLDAP Foundation, All Rights Reserved.
  * COPYING RESTRICTIONS APPLY, see COPYRIGHT file
  */
 

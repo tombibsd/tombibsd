@@ -54,7 +54,7 @@ locore.o: ${IA64}/ia64/locore.S assym.h
 ##TEXTADDR?=	0xdeadbeeffeeddead
 LINKFLAGS_NORMAL=	-X
 KERN_LDSCRIPT?=	kern.ldscript
-LINKFORMAT=	-T ${IA64}/conf/${KERN_LDSCRIPT}
+LINKSCRIPT=	-T ${IA64}/conf/${KERN_LDSCRIPT}
 
 ##
 ## (6) port specific target dependencies

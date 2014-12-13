@@ -1,7 +1,7 @@
 /*	$NetBSD$	*/
 
 /*
- * Copyright (C) 2004, 2005, 2007-2009, 2011-2013  Internet Systems Consortium, Inc. ("ISC")
+ * Copyright (C) 2004, 2005, 2007-2009, 2011-2014  Internet Systems Consortium, Inc. ("ISC")
  * Copyright (C) 1998-2002  Internet Software Consortium.
  *
  * Permission to use, copy, modify, and/or distribute this software for any
@@ -128,7 +128,7 @@ struct isc__timermgr {
 isc_result_t
 isc__timer_create(isc_timermgr_t *manager, isc_timertype_t type,
 		  const isc_time_t *expires, const isc_interval_t *interval,
-		  isc_task_t *task, isc_taskaction_t action, const void *arg,
+		  isc_task_t *task, isc_taskaction_t action, void *arg,
 		  isc_timer_t **timerp);
 isc_result_t
 isc__timer_reset(isc_timer_t *timer, isc_timertype_t type,
@@ -380,7 +380,7 @@ destroy(isc__timer_t *timer) {
 isc_result_t
 isc__timer_create(isc_timermgr_t *manager0, isc_timertype_t type,
 		  const isc_time_t *expires, const isc_interval_t *interval,
-		  isc_task_t *task, isc_taskaction_t action, const void *arg,
+		  isc_task_t *task, isc_taskaction_t action, void *arg,
 		  isc_timer_t **timerp)
 {
 	isc__timermgr_t *manager = (isc__timermgr_t *)manager0;
@@ -1052,7 +1052,7 @@ isc__timermgr_dispatch(isc_timermgr_t *manager0) {
 #endif /* USE_TIMER_THREAD */
 
 isc_result_t
-isc__timer_register() {
+isc__timer_register(void) {
 	return (isc_timer_register(isc__timermgr_create));
 }
 
@@ -1132,7 +1132,7 @@ isc_timermgr_destroy(isc_timermgr_t **managerp) {
 isc_result_t
 isc_timer_create(isc_timermgr_t *manager, isc_timertype_t type,
 		 const isc_time_t *expires, const isc_interval_t *interval,
-		 isc_task_t *task, isc_taskaction_t action, const void *arg,
+		 isc_task_t *task, isc_taskaction_t action, void *arg,
 		 isc_timer_t **timerp)
 {
 	REQUIRE(ISCAPI_TIMERMGR_VALID(manager));

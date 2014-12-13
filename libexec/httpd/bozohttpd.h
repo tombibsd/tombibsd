@@ -235,18 +235,19 @@ char	*bozostrdup(bozohttpd_t *, const char *);
 #ifdef NO_SSL_SUPPORT
 #define bozo_ssl_set_opts(w, x, y)	do { /* nothing */ } while (0)
 #define bozo_ssl_init(x)		do { /* nothing */ } while (0)
-#define bozo_ssl_accept(x)		do { /* nothing */ } while (0)
+#define bozo_ssl_accept(x)		(0)
 #define bozo_ssl_destroy(x)		do { /* nothing */ } while (0)
 #else
 void	bozo_ssl_set_opts(bozohttpd_t *, const char *, const char *);
 void	bozo_ssl_init(bozohttpd_t *);
-void	bozo_ssl_accept(bozohttpd_t *);
+int	bozo_ssl_accept(bozohttpd_t *);
 void	bozo_ssl_destroy(bozohttpd_t *);
 #endif
 
 
 /* auth-bozo.c */
 #ifdef DO_HTPASSWD
+void	bozo_auth_init(bozo_httpreq_t *);
 int	bozo_auth_check(bozo_httpreq_t *, const char *);
 void	bozo_auth_cleanup(bozo_httpreq_t *);
 int	bozo_auth_check_headers(bozo_httpreq_t *, char *, char *, ssize_t);
@@ -255,6 +256,7 @@ void	bozo_auth_check_401(bozo_httpreq_t *, int);
 void	bozo_auth_cgi_setenv(bozo_httpreq_t *, char ***);
 int	bozo_auth_cgi_count(bozo_httpreq_t *);
 #else
+#define	bozo_auth_init(x)			do { /* nothing */ } while (0)
 #define	bozo_auth_check(x, y)			0
 #define	bozo_auth_cleanup(x)			do { /* nothing */ } while (0)
 #define	bozo_auth_check_headers(y, z, a, b)	0

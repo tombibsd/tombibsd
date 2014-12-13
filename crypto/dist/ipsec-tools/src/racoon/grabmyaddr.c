@@ -783,6 +783,9 @@ kernel_handle_message(msg)
 #ifdef RTM_IFANNOUNCE
 	case RTM_IFANNOUNCE:
 #endif
+#ifdef RTM_IEEE80211
+	case RTM_IEEE80211:
+#endif
 		break;
 	default:
 		plog(LLV_WARNING, LOCATION, NULL,

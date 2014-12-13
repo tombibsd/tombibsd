@@ -143,6 +143,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/cpu.h>
 #include <sys/wapbl.h>
 #include <sys/bitops.h>
+#include <sys/cprng.h>
 
 #include <uvm/uvm.h>	/* extern struct uvm uvm */
 
@@ -441,6 +442,9 @@ bufinit(void)
 	struct bqueue *dp;
 	int use_std;
 	u_int i;
+	extern void (*biodone_vfs)(buf_t *);
+
+	biodone_vfs = biodone;
 
 	mutex_init(&bufcache_lock, MUTEX_DEFAULT, IPL_NONE);
 	mutex_init(&buffer_lock, MUTEX_DEFAULT, IPL_NONE);
@@ -529,7 +533,7 @@ bufinit2(void)
 static int
 buf_lotsfree(void)
 {
-	int try, thresh;
+	u_long guess;
 
 	/* Always allocate if less than the low water mark. */
 	if (bufmem < bufmem_lowater)
@@ -545,16 +549,14 @@ buf_lotsfree(void)
 
 	/*
 	 * The probabily of getting a new allocation is inversely
-	 * proportional to the current size of the cache, using
-	 * a granularity of 16 steps.
+	 * proportional  to the current size of the cache above
+	 * the low water mark.  Divide the total first to avoid overflows
+	 * in the product.
 	 */
-	try = random() & 0x0000000fL;
+	guess = cprng_fast32() % 16;
 
-	/* Don't use "16 * bufmem" here to avoid a 32-bit overflow. */
-	thresh = (bufmem - bufmem_lowater) /
-	    ((bufmem_hiwater - bufmem_lowater) / 16);
-
-	if (try >= thresh)
+	if ((bufmem_hiwater - bufmem_lowater) / 16 * guess >=
+	    (bufmem - bufmem_lowater))
 		return 1;
 
 	/* Otherwise don't allocate. */

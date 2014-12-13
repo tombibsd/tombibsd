@@ -15,3 +15,4 @@ ENTRY(bswap64)
 	bswapq	%rdi
 	movq	%rdi,%rax
 	ret
+END(bswap64)

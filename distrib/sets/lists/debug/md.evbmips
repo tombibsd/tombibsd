@@ -24,7 +24,8 @@
 ./usr/lib/64/i18n/libmapper_zone_g.a	comp-c-debuglib	compat,debuglib,arch64
 ./usr/lib/64/libamu_g.a		comp-c-debuglib	compat,debuglib,arch64
 ./usr/lib/64/libarchive_g.a	comp-c-debuglib	compat,debuglib,arch64
-./usr/lib/64/libasn1_g.a	comp-c-debuglib	compat,debuglib,arch64
+./usr/lib/64/libasan_g.a	comp-c-debuglib	compat,debuglib,arch64,gcc=48
+./usr/lib/64/libasn1_g.a	comp-c-debuglib	compat,debuglib,arch64,kerberos
 ./usr/lib/64/libatf-c++_g.a	comp-c-debuglib	compat,debuglib,arch64
 ./usr/lib/64/libatf-c_g.a	comp-c-debuglib	compat,debuglib,arch64
 ./usr/lib/64/libbfd_g.a		comp-c-debuglib	compat,debuglib,arch64
@@ -63,6 +64,7 @@
 ./usr/lib/64/libiberty_g.a	comp-c-debuglib	compat,debuglib,arch64
 ./usr/lib/64/libintl_g.a	comp-c-debuglib	compat,debuglib,arch64
 ./usr/lib/64/libipsec_g.a	comp-c-debuglib	compat,debuglib,arch64
+./usr/lib/64/libirs_g.a		comp-c-debuglib	compat,debuglib,arch64
 ./usr/lib/64/libisc_g.a		comp-c-debuglib	compat,debuglib,arch64
 ./usr/lib/64/libisccc_g.a	comp-c-debuglib	compat,debuglib,arch64
 ./usr/lib/64/libisccfg_g.a	comp-c-debuglib	compat,debuglib,arch64
@@ -156,7 +158,8 @@
 ./usr/lib/o32/i18n/libmapper_zone_g.a	comp-c-debuglib compat,debuglib,arch64
 ./usr/lib/o32/libamu_g.a	comp-c-debuglib compat,debuglib,arch64
 ./usr/lib/o32/libarchive_g.a	comp-c-debuglib compat,debuglib,arch64
-./usr/lib/o32/libasn1_g.a	comp-c-debuglib compat,debuglib,arch64
+./usr/lib/o32/libasan_g.a	comp-c-debuglib compat,debuglib,arch64,gcc=48
+./usr/lib/o32/libasn1_g.a	comp-c-debuglib compat,debuglib,arch64,kerberos
 ./usr/lib/o32/libatf-c++_g.a	comp-c-debuglib compat,debuglib,arch64
 ./usr/lib/o32/libatf-c_g.a	comp-c-debuglib compat,debuglib,arch64
 ./usr/lib/o32/libbfd_g.a	comp-c-debuglib compat,debuglib,arch64
@@ -202,6 +205,7 @@
 ./usr/lib/o32/libiberty_g.a	comp-c-debuglib compat,debuglib,arch64
 ./usr/lib/o32/libintl_g.a	comp-c-debuglib compat,debuglib,arch64
 ./usr/lib/o32/libipsec_g.a	comp-c-debuglib compat,debuglib,arch64
+./usr/lib/o32/libirs_g.a	comp-c-debuglib compat,debuglib,arch64
 ./usr/lib/o32/libisc_g.a	comp-c-debuglib compat,debuglib,arch64
 ./usr/lib/o32/libisccc_g.a	comp-c-debuglib compat,debuglib,arch64
 ./usr/lib/o32/libisccfg_g.a	comp-c-debuglib compat,debuglib,arch64

@@ -68,7 +68,7 @@ extern paddr_t avail_end;
  * We need these for the early memory allocator. The idea is this:
  * Allocate VA-space through ptextra (atari_init.c:startc()). When
  * The VA & size of this space are known, call bootm_init().
- * Until the VM-system is up, bus_mem_add_mapping() allocates it's virtual
+ * Until the VM-system is up, bus_mem_add_mapping() allocates its virtual
  * addresses from this extent-map.
  *
  * This allows for the console code to use the bus_space interface at a

@@ -294,7 +294,7 @@ mb86950_config(struct mb86950_softc *sc, int *media,
 	ether_ifattach(ifp, sc->sc_enaddr);
 
 	rnd_attach_source(&sc->rnd_source, device_xname(sc->sc_dev),
-	    RND_TYPE_NET, 0);
+	    RND_TYPE_NET, RND_FLAG_DEFAULT);
 
 /* XXX No! This doesn't work - DLCR6 of the mb86950 is different
 

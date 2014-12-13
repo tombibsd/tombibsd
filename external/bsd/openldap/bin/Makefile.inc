@@ -24,7 +24,7 @@ version.c: ../openldap.mk
 LDADD+=	-L${LDAPOBJDIR.lutil} -llutil
 DPADD+=	${LDAPLIB.lutil}
 
-LDADD+= -lldap
+LDADD+= -L${LDAPOBJDIR.ldap} -lldap
 DPADD+= ${LIBLDAP}
 LDADD+=	-llber
 DPADD+=	${LIBLBER}

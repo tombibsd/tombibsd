@@ -1,9 +1,13 @@
-/lit.local.cfg/1.1.1.1/Sun Jan  5 16:17:19 2014/-kk/
-/ppc64-encoding-bookII.txt/1.1.1.1/Sun Jan  5 16:17:19 2014/-kk/
-/ppc64-encoding-bookIII.txt/1.1.1.1/Sun Jan  5 16:17:19 2014/-kk/
-/ppc64-encoding-ext.txt/1.1.1.1/Sun Jan  5 16:17:18 2014/-kk/
+/lit.local.cfg/1.1.1.2/Fri Oct  3 09:23:17 2014/-kk/
+/ppc64-encoding-4xx.txt/1.1.1.1/Sun Aug 10 17:04:40 2014/-kk/
+/ppc64-encoding-6xx.txt/1.1.1.1/Sun Aug 10 17:04:40 2014/-kk/
+/ppc64-encoding-bookII.txt/1.1.1.2/Fri Oct  3 09:23:17 2014/-kk/
+/ppc64-encoding-bookIII.txt/1.1.1.2/Fri Oct  3 09:23:17 2014/-kk/
+/ppc64-encoding-e500.txt/1.1.1.1/Sun Aug 10 17:04:40 2014/-kk/
+/ppc64-encoding-ext.txt/1.1.1.2/Fri Oct  3 09:23:17 2014/-kk/
 /ppc64-encoding-fp.txt/1.1.1.1/Sun Jan  5 16:17:19 2014/-kk/
 /ppc64-encoding-vmx.txt/1.1.1.1/Sun Jan  5 16:17:19 2014/-kk/
-/ppc64-encoding.txt/1.1.1.1/Sun Jan  5 16:17:19 2014/-kk/
+/ppc64-encoding.txt/1.1.1.2/Fri Oct  3 09:23:17 2014/-kk/
 /ppc64-operands.txt/1.1.1.1/Sun Jan  5 16:17:19 2014/-kk/
+/vsx.txt/1.1.1.1/Fri May 30 18:11:25 2014/-kk/
 D

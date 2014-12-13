@@ -114,6 +114,7 @@ const struct cdevsw cgtwo_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = cgtwommap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = 0
 };
 

@@ -122,14 +122,15 @@ static const double zero=0.0, one=1.0, two=2.0, negone= -1.0;
 
 static double pow_P (double, double);
 
+#ifdef __weak_alias
+__weak_alias(_powf, powf);
+__weak_alias(_pow, pow);
+__weak_alias(_powl, pow);
+__weak_alias(powl, pow);
+#endif
+
 float
 powf(float x, float y)
-{
-   return pow((double) x, (double) (y));
-}
-
-long double
-powl(long double x, long double y)
 {
    return pow((double) x, (double) (y));
 }

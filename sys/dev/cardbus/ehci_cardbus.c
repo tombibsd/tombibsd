@@ -129,7 +129,6 @@ ehci_cardbus_attach(device_t parent, device_t self, void *aux)
 	pcireg_t csr;
 	char devinfo[256];
 	usbd_status r;
-	const char *vendor;
 	u_int ncomp;
 	const char *devname = device_xname(self);
 	struct usb_cardbus *up;
@@ -171,13 +170,9 @@ ehci_cardbus_attach(device_t parent, device_t self, void *aux)
 	}
 
 	/* Figure out vendor for root hub descriptor. */
-	vendor = pci_findvendor(ca->ca_id);
 	sc->sc.sc_id_vendor = PCI_VENDOR(ca->ca_id);
-	if (vendor)
-		strlcpy(sc->sc.sc_vendor, vendor, sizeof(sc->sc.sc_vendor));
-	else
-		snprintf(sc->sc.sc_vendor, sizeof(sc->sc.sc_vendor),
-		    "vendor 0x%04x", PCI_VENDOR(ca->ca_id));
+	pci_findvendor(sc->sc.sc_vendor, sizeof(sc->sc.sc_vendor),
+	    sc->sc.sc_id_vendor);
 
 	/*
 	 * Find companion controllers.  According to the spec they always

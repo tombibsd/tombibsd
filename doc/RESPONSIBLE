@@ -34,7 +34,7 @@ installboot(mi)	core
 kerberos	lha*, joda*
 less/more	mrg
 lint		christos
-lua/luac	mbalmer
+lua/luac	mbalmer, lneto
 make		christos, sjg, dholland
 named(bind)	christos
 ntp		simonb, jonathan*

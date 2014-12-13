@@ -107,7 +107,7 @@ cpu_initclocks(void)
 		(*systemsw.s_statclock_init)(systemsw.s_statclock_arg);
 
 	/*
-	 * ``Disable'' the compare interrupt by setting it to it's largest
+	 * ``Disable'' the compare interrupt by setting it to its largest
 	 * value.  Each hard clock interrupt we'll reset the CP0 compare
 	 * register to just bind the CP0 clock register.
 	 */

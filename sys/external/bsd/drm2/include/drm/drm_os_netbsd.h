@@ -36,6 +36,14 @@
 #include "opt_drmkms.h"
 #endif
 
+/*
+ * XXX Better to get rid of CONFIG_X86, but that's not convenient at
+ * the moment.
+ */
+#if defined(__i386__) || defined(__x86_64__)
+#define	CONFIG_X86	1
+#endif
+
 #include <drm/drm_agp_netbsd.h>
 #include <drm/drm_auth_netbsd.h>
 #include <drm/drm_copy_netbsd.h>

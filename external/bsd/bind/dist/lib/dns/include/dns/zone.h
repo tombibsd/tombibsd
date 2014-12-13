@@ -2061,7 +2061,7 @@ dns_zone_signwithkey(dns_zone_t *zone, dns_secalg_t algorithm,
 isc_result_t
 dns_zone_addnsec3chain(dns_zone_t *zone, dns_rdata_nsec3param_t *nsec3param);
 /*%<
- * Incrementally add a NSEC3 chain that corresponds to nsec3param.
+ * Incrementally add a NSEC3 chain that corresponds to 'nsec3param'.
  */
 
 void

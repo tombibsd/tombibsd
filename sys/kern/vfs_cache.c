@@ -65,6 +65,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <sys/param.h>
 #include <sys/systm.h>
+#include <sys/sysctl.h>
 #include <sys/time.h>
 #include <sys/mount.h>
 #include <sys/vnode.h>
@@ -101,7 +102,39 @@ __KERNEL_RCSID(0, "$NetBSD$");
  */
 
 /*
- * Per-cpu namecache data.
+ * The locking in this subsystem works as follows:
+ *
+ * When an entry is added to the cache, via cache_enter(),
+ * namecache_lock is taken to exclude other writers.  The new
+ * entry is added to the hash list in a way which permits
+ * concurrent lookups and invalidations in the cache done on
+ * other CPUs to continue in parallel.
+ *
+ * When a lookup is done in the cache, via cache_lookup() or
+ * cache_lookup_raw(), the per-cpu lock below is taken.  This
+ * protects calls to cache_lookup_entry() and cache_invalidate()
+ * against cache_reclaim() but allows lookups to continue in
+ * parallel with cache_enter().
+ *
+ * cache_revlookup() takes namecache_lock to exclude cache_enter()
+ * and cache_reclaim() since the list it operates on is not
+ * maintained to allow concurrent reads.
+ *
+ * When cache_reclaim() is called namecache_lock is held to hold
+ * off calls to cache_enter()/cache_revlookup() and each of the
+ * per-cpu locks is taken to hold off lookups.  Holding all these
+ * locks essentially idles the subsystem, ensuring there are no
+ * concurrent references to the cache entries being freed.
+ *
+ * As a side effect while running cache_reclaim(), once the per-cpu
+ * locks are held the per-cpu stats are sampled, added to the
+ * subsystem total and zeroed.  Only some of the per-cpu stats are
+ * incremented with the per-cpu lock held, however, and attempting
+ * to add locking around the remaining counters currently
+ * incremented without a lock can cause deadlock, so we don't
+ * do that.  XXX Fix this up in a later revision.
+ *
+ * Per-cpu namecache data is defined next.
  */
 struct nchcpu {
 	kmutex_t	cpu_lock;
@@ -238,28 +271,35 @@ cache_disassociate(struct namecache *ncp)
  * Lock all CPUs to prevent any cache lookup activity.  Conceptually,
  * this locks out all "readers".
  */
+#define	UPDATE(f) do { \
+	nchstats.f += cpup->cpu_stats.f; \
+	cpup->cpu_stats.f = 0; \
+} while (/* CONSTCOND */ 0)
+
 static void
 cache_lock_cpus(void)
 {
 	CPU_INFO_ITERATOR cii;
 	struct cpu_info *ci;
 	struct nchcpu *cpup;
-	long *s, *d, *m;
 
 	for (CPU_INFO_FOREACH(cii, ci)) {
 		cpup = ci->ci_data.cpu_nch;
 		mutex_enter(&cpup->cpu_lock);
-
-		/* Collate statistics. */
-		d = (long *)&nchstats;
-		s = (long *)&cpup->cpu_stats;
-		m = s + sizeof(nchstats) / sizeof(long);
-		for (; s < m; s++, d++) {
-			*d += *s;
-			*s = 0;
-		}
+		UPDATE(ncs_goodhits);
+		UPDATE(ncs_neghits);
+		UPDATE(ncs_badhits);
+		UPDATE(ncs_falsehits);
+		UPDATE(ncs_miss);
+		UPDATE(ncs_long);
+		UPDATE(ncs_pass2);
+		UPDATE(ncs_2passes);
+		UPDATE(ncs_revhits);
+		UPDATE(ncs_revmiss);
 	}
 }
+
+#undef UPDATE
 
 /*
  * Release all CPU locks.
@@ -565,6 +605,7 @@ cache_revlookup(struct vnode *vp, struct vnode **dvpp, char **bpp, char *bufp)
 {
 	struct namecache *ncp;
 	struct vnode *dvp;
+	struct nchcpu *cpup;
 	struct ncvhashhead *nvcpp;
 	char *bp;
 	int error, nlen;
@@ -573,6 +614,7 @@ cache_revlookup(struct vnode *vp, struct vnode **dvpp, char **bpp, char *bufp)
 		goto out;
 
 	nvcpp = &ncvhashtbl[NCVHASH(vp)];
+	cpup = curcpu()->ci_data.cpu_nch;
 
 	mutex_enter(namecache_lock);
 	LIST_FOREACH(ncp, nvcpp, nc_vhash) {
@@ -591,7 +633,7 @@ cache_revlookup(struct vnode *vp, struct vnode **dvpp, char **bpp, char *bufp)
 			    ncp->nc_name[1] == '.')
 				panic("cache_revlookup: found entry for ..");
 #endif
-			COUNT(nchstats, ncs_revhits);
+			COUNT(cpup->cpu_stats, ncs_revhits);
 			nlen = ncp->nc_nlen;
 
 			if (bufp) {
@@ -623,7 +665,7 @@ cache_revlookup(struct vnode *vp, struct vnode **dvpp, char **bpp, char *bufp)
 		}
 		mutex_exit(&ncp->nc_lock);
 	}
-	COUNT(nchstats, ncs_revmiss);
+	COUNT(cpup->cpu_stats, ncs_revmiss);
 	mutex_exit(namecache_lock);
  out:
 	*dvpp = NULL;
@@ -1065,3 +1107,65 @@ namecache_print(struct vnode *vp, void (*pr)(const char *, ...))
 	}
 }
 #endif
+
+void
+namecache_count_pass2(void)
+{
+	struct nchcpu *cpup = curcpu()->ci_data.cpu_nch;
+
+	COUNT(cpup->cpu_stats, ncs_pass2);
+}
+
+void
+namecache_count_2passes(void)
+{
+	struct nchcpu *cpup = curcpu()->ci_data.cpu_nch;
+
+	COUNT(cpup->cpu_stats, ncs_2passes);
+}
+
+static int
+cache_stat_sysctl(SYSCTLFN_ARGS)
+{
+	struct nchstats_sysctl stats;
+
+	if (oldp == NULL) {
+		*oldlenp = sizeof(stats);
+		return 0;
+	}
+
+	if (*oldlenp < sizeof(stats)) {
+		*oldlenp = 0;
+		return 0;
+	}
+
+	memset(&stats, 0, sizeof(stats));
+
+	sysctl_unlock();
+	cache_lock_cpus();
+	stats.ncs_goodhits = nchstats.ncs_goodhits;
+	stats.ncs_neghits = nchstats.ncs_neghits;
+	stats.ncs_badhits = nchstats.ncs_badhits;
+	stats.ncs_falsehits = nchstats.ncs_falsehits;
+	stats.ncs_miss = nchstats.ncs_miss;
+	stats.ncs_long = nchstats.ncs_long;
+	stats.ncs_pass2 = nchstats.ncs_pass2;
+	stats.ncs_2passes = nchstats.ncs_2passes;
+	stats.ncs_revhits = nchstats.ncs_revhits;
+	stats.ncs_revmiss = nchstats.ncs_revmiss;
+	cache_unlock_cpus();
+	sysctl_relock();
+
+	*oldlenp = sizeof(stats);
+	return sysctl_copyout(l, &stats, oldp, sizeof(stats));
+}
+
+SYSCTL_SETUP(sysctl_cache_stat_setup, "vfs.namecache_stats subtree setup")
+{
+	sysctl_createv(clog, 0, NULL, NULL,
+		       CTLFLAG_PERMANENT,
+		       CTLTYPE_STRUCT, "namecache_stats",
+		       SYSCTL_DESCR("namecache statistics"),
+		       cache_stat_sysctl, 0, NULL, 0,
+		       CTL_VFS, CTL_CREATE, CTL_EOL);
+}

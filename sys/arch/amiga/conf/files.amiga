@@ -247,7 +247,7 @@ device	xsh: xshbus
 attach	xsh at zbus
 file	arch/amiga/dev/xsh.c		xsh needs-flag
 
-attach	ne at xshbus with ne_xsh: dp8390nic
+attach	ne at xshbus with ne_xsh: ax88190
 file	arch/amiga/dev/if_ne_xsh.c	ne_xsh needs-flag
 
 # Hydra ethernet card

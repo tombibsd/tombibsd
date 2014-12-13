@@ -402,5 +402,7 @@ COPTS.lambda-code.c=		-O0
 COPTS.tree-loop-linear.c=	-O0
 .endif
 
+COPTS.tree.c=	${${ACTIVE_CC} == "clang" :? -O0 :}
+
 .PATH: ${DIST}/gcc ${DIST}/libiberty ${GCCARCH} ${G_out_file:H} ${DIST}/include
 .PATH: ${DIST}/gcc/config

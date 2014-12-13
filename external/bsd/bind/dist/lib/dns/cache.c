@@ -1413,7 +1413,7 @@ dns_cache_dumpstats(dns_cache_t *cache, FILE *fp) {
 }
 
 #ifdef HAVE_LIBXML2
-#define TRY0(a) do { xmlrc = (a); if (xmlrc < 0) goto error; } while(0)
+#define TRY0(a) do { xmlrc = (a); if (xmlrc < 0) goto error; } while(/*CONSTCOND*/0)
 static int
 renderstat(const char *name, isc_uint64_t value, xmlTextWriterPtr writer) {
 	int xmlrc;
@@ -1474,7 +1474,7 @@ error:
 		result = ISC_R_NOMEMORY;\
 		goto error;\
 	} \
-} while(0)
+} while(/*CONSTCOND*/0)
 
 isc_result_t
 dns_cache_renderjson(dns_cache_t *cache, json_object *cstats) {

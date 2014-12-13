@@ -24,12 +24,12 @@ fpsetsticky(fp_except sticky)
 	fp_except old;
 	fp_except new;
 
-	__asm("cfc1 %0,$31" : "=r" (old));
+	__asm(".set push; .set noat; cfc1 %0,$31; .set pop" : "=r" (old));
 
 	new = old & ~(0x1f << 2); 
 	new |= (sticky & 0x1f) << 2;
 
-	__asm("ctc1 %0,$31" : : "r" (new));
+	__asm(".set push; .set noat; ctc1 %0,$31; .set pop" : "=r" (new));
 
 	return (old >> 2) & 0x1f;
 }

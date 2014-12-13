@@ -77,6 +77,8 @@ struct mvmeppc_bootinfo	bootinfo;
 
 static u_int32_t ioctrl2cflag(u_int32_t);
 
+void main(void);
+
 void
 main(void)
 {

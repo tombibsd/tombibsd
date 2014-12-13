@@ -286,7 +286,7 @@ find_mapmaster(const char *host, const char *domain, const char *map,
 	size_t i;
 
 	/*
-         * we can either ask the hosts ypbind where it's ypserv is located,
+         * we can either ask the hosts ypbind where its ypserv is located,
          * or we can be forced to assume that ypserv is running on the host.
          */
 	if (force) {

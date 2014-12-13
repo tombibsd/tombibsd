@@ -191,6 +191,8 @@ static const struct usb_devno uplcom_devs[] = {
 	{ USB_VENDOR_NETINDEX, USB_PRODUCT_NETINDEX_WS002IN },
 	/* COREGA CG-USBRS232R */
 	{ USB_VENDOR_COREGA, USB_PRODUCT_COREGA_CGUSBRS232R },
+	/* Sharp CE-175TU (USB to Zaurus option port 15 adapter) */
+	{ USB_VENDOR_SHARP, USB_PRODUCT_SHARP_CE175TU },
 };
 #define uplcom_lookup(v, p) usb_lookup(uplcom_devs, v, p)
 

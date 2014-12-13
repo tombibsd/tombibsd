@@ -437,7 +437,7 @@ ex_config(struct ex_softc *sc)
 	/* TODO: set queues to 0 */
 
 	rnd_attach_source(&sc->rnd_source, device_xname(sc->sc_dev),
-			  RND_TYPE_NET, 0);
+			  RND_TYPE_NET, RND_FLAG_DEFAULT);
 
 	if (pmf_device_register1(sc->sc_dev, NULL, NULL, ex_shutdown))
 		pmf_class_network_register(sc->sc_dev, &sc->sc_ethercom.ec_if);

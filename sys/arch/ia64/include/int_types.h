@@ -34,6 +34,9 @@
 #ifndef	_IA64_INT_TYPES_H_
 #define	_IA64_INT_TYPES_H_
 
+#ifdef __UINTPTR_TYPE__
+#include <sys/common_int_types.h>
+#else
 /*
  * 7.18.1 Integer types
  */
@@ -70,5 +73,7 @@ typedef unsigned long int     __uintptr_t;
 typedef	int		       __intptr_t;
 typedef	unsigned int	      __uintptr_t;
 #endif
+
+#endif /* !__UINTPTR_TYPE__ */
 
 #endif	/* !_IA64_INT_TYPES_H_ */

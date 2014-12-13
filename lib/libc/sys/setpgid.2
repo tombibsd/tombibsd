@@ -68,6 +68,13 @@ returns 0 when the operation was successful.
 If the request failed, \-1 is returned and the global variable
 .Va errno
 indicates the reason.
+.Sh COMPATIBILITY
+.Fn setpgrp
+is identical to
+.Fn setpgid ,
+and is retained for calling convention compatibility with historical
+versions of
+.Bx .
 .Sh ERRORS
 .Fn setpgid
 will fail and the process group will not be altered if:
@@ -98,10 +105,3 @@ The
 .Fn setpgid
 function conforms to
 .St -p1003.1-90 .
-.Sh COMPATIBILITY
-.Fn setpgrp
-is identical to
-.Fn setpgid ,
-and is retained for calling convention compatibility with historical
-versions of
-.Bx .

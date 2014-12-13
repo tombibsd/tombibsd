@@ -539,11 +539,13 @@ void		vunmapbuf(struct buf *, vsize_t);
 
 /* uvm_aobj.c */
 struct uvm_object	*uao_create(vsize_t, int);
+void			uao_set_pgfl(struct uvm_object *, int);
 void			uao_detach(struct uvm_object *);
 void			uao_reference(struct uvm_object *);
 
 /* uvm_bio.c */
 void			ubc_init(void);
+void			ubchist_init(void);
 void *			ubc_alloc(struct uvm_object *, voff_t, vsize_t *, int,
 			    int);
 void			ubc_release(void *, int);

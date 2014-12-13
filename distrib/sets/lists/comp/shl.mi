@@ -7,6 +7,7 @@
 ./usr/lib/crtendS.o				comp-c-lib
 ./usr/lib/libamu_pic.a				comp-obsolete		obsolete
 ./usr/lib/libarchive_pic.a			comp-c-piclib	picinstall
+./usr/lib/libasan_pic.a				comp-c-piclib		picinstall,gcc=48
 ./usr/lib/libasn1_pic.a				comp-c-piclib		kerberos,picinstall
 ./usr/lib/libatf-c++_pic.a			comp-atf-piclib		atf,picinstall
 ./usr/lib/libatf-c_pic.a			comp-atf-piclib		atf,picinstall
@@ -64,6 +65,7 @@
 ./usr/lib/libhx509_pic.a			comp-c-piclib		kerberos,picinstall
 ./usr/lib/libintl_pic.a				comp-c-piclib	picinstall
 ./usr/lib/libipsec_pic.a			comp-c-piclib	picinstall
+./usr/lib/libirs_pic.a				comp-bind-piclib	picinstall
 ./usr/lib/libisc_pic.a				comp-bind-piclib	picinstall
 ./usr/lib/libisccc_pic.a			comp-bind-piclib	picinstall
 ./usr/lib/libisccfg_pic.a			comp-bind-piclib	picinstall
@@ -148,6 +150,7 @@
 ./usr/lib/librumpclient_pic.a			comp-c-piclib		rump,picinstall
 ./usr/lib/librumpcrypto_pic.a			comp-obsolete		obsolete
 ./usr/lib/librumpdev_audio_pic.a		comp-c-piclib		rump,picinstall
+./usr/lib/librumpdev_audio_ac97_pic.a		comp-obsolete		obsolete
 ./usr/lib/librumpdev_bpf_pic.a			comp-c-piclib		rump,picinstall
 ./usr/lib/librumpdev_cgd_pic.a			comp-c-piclib		rump,picinstall
 ./usr/lib/librumpdev_disk_pic.a			comp-c-piclib		rump,picinstall
@@ -172,6 +175,7 @@
 ./usr/lib/librumpdev_ulpt_pic.a			comp-c-piclib		rump,picinstall
 ./usr/lib/librumpdev_umass_pic.a		comp-c-piclib		rump,picinstall
 ./usr/lib/librumpdev_usb_pic.a			comp-c-piclib		rump,picinstall
+./usr/lib/librumpdev_vnd_pic.a			comp-c-piclib		rump,picinstall
 ./usr/lib/librumpdev_wscons_pic.a		comp-c-piclib		rump,picinstall
 ./usr/lib/librumpfs_cd9660_pic.a		comp-c-piclib		rump,picinstall
 ./usr/lib/librumpfs_efs_pic.a			comp-c-piclib		rump,picinstall
@@ -206,7 +210,7 @@
 ./usr/lib/librumpkern_ksem_pic.a		comp-obsolete		obsolete
 ./usr/lib/librumpkern_sljit_pic.a		comp-c-piclib		sljit,rump,picinstall
 ./usr/lib/librumpkern_solaris_pic.a		comp-c-piclib		zfs,rump,picinstall
-./usr/lib/librumpkern_time_pic.a			comp-c-piclib		rump,picinstall
+./usr/lib/librumpkern_time_pic.a			comp-obsolete obsolete
 ./usr/lib/librumpkern_tty_pic.a			comp-c-piclib		rump,picinstall
 ./usr/lib/librumpkern_z_pic.a			comp-c-piclib		rump,picinstall
 ./usr/lib/librumpnet_agr_pic.a			comp-c-piclib		rump,picinstall

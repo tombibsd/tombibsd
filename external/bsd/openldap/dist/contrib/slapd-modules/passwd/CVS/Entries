@@ -1,6 +1,7 @@
-/Makefile/1.1.1.1/Mon Mar  8 02:14:09 2010/-kk/
-/README/1.1.1.3/Sun Dec 12 15:19:13 2010/-kk/
-/kerberos.c/1.1.1.3/Sun Dec 12 15:19:13 2010/-kk/
-/netscape.c/1.1.1.3/Sun Dec 12 15:19:13 2010/-kk/
-/radius.c/1.1.1.3/Sun Dec 12 15:19:13 2010/-kk/
+/Makefile/1.1.1.2/Tue Jun  3 03:05:54 2014/-kk/
+/README/1.1.1.4/Tue Jun  3 03:05:54 2014/-kk/
+/apr1.c/1.1.1.1/Wed May 28 09:58:28 2014/-kk/
+/kerberos.c/1.1.1.4/Tue Jun  3 03:05:54 2014/-kk/
+/netscape.c/1.1.1.4/Tue Jun  3 03:05:54 2014/-kk/
+/radius.c/1.1.1.4/Tue Jun  3 03:05:54 2014/-kk/
 D/sha2////

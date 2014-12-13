@@ -37,3 +37,8 @@ ENTRY(fpsetprec)
 
 	fldcw	-4(%rsp)
 	ret
+#ifdef WEAK_ALIAS
+END(_fpsetprec)
+#else
+END(fpsetprec)
+#endif

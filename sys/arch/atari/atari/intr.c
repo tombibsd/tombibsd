@@ -86,7 +86,7 @@ intr_init(void)
  *			means:
  *				- This vector can't be shared
  *				- 'ih_fun' must save registers
- *				- 'ih_fun' must do it's own interrupt accounting
+ *				- 'ih_fun' must do its own interrupt accounting
  *				- The argument to 'ih_fun' is a standard
  *				  interrupt frame.
  *		- ARG_CLOCKRAME
@@ -132,21 +132,25 @@ intr_establish(int vector, int type, int pri, hw_ifun_t ih_fun, void *ih_arg)
 	 */
 	switch (type & (AUTO_VEC|USER_VEC)) {
 	case AUTO_VEC:
-		if (vector < AVEC_MIN || vector > AVEC_MAX)
+		if (vector < AVEC_MIN || vector > AVEC_MAX) {
+			free(ih, M_DEVBUF);
 			return NULL;
+		}
 		vec_list = &autovec_list[vector-1];
 		hard_vec = &autovects[vector-1];
 		ih->ih_intrcnt = &intrcnt_auto[vector-1];
 		break;
 	case USER_VEC:
-		if (vector < UVEC_MIN || vector > UVEC_MAX)
+		if (vector < UVEC_MIN || vector > UVEC_MAX) {
+			free(ih, M_DEVBUF);
 			return NULL;
+		}
 		vec_list = &uservec_list[vector];
 		hard_vec = &uservects[vector];
 		ih->ih_intrcnt = &intrcnt_user[vector];
 		break;
 	default:
-		printf("intr_establish: bogus vector type\n");
+		printf("%s: bogus vector type\n", __func__);
 		free(ih, M_DEVBUF);
 		return NULL;
 	}

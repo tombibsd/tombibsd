@@ -1,5 +1,3 @@
-/*	$NetBSD$	*/
-
 	// An example of using the flex C++ scanner class.
 
 %option C++ noyywrap

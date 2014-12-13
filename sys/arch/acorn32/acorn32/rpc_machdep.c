@@ -85,7 +85,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <arm/locore.h>
 #include <arm/undefined.h>
-#include <arm/arm32/katelib.h>
 #include <arm/arm32/machdep.h>
 #include <arm/arm32/pmap.h>
 
@@ -767,7 +766,7 @@ initarm(void *cookie)
 	/* Map the core memory needed before autoconfig */
 	loop = 0;
 	while (l1_sec_table[loop].size) {
-		vm_size_t sz;
+		vsize_t sz;
 
 #ifdef VERBOSE_INIT_ARM
 		printf("%08lx -> %08lx @ %08lx\n", l1_sec_table[loop].pa,

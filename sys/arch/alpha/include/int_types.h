@@ -34,6 +34,9 @@
 #ifndef	_ALPHA_INT_TYPES_H_
 #define	_ALPHA_INT_TYPES_H_
 
+#ifdef __UINTPTR_TYPE__
+#include <sys/common_int_types.h>
+#else
 #include <sys/cdefs.h>
 
 /*
@@ -62,5 +65,7 @@ typedef	unsigned long int      __uint64_t;
 
 typedef	long int	       __intptr_t;
 typedef	unsigned long int     __uintptr_t;
+
+#endif /* !__UINTPTR_TYPE__ */
 
 #endif	/* !_ALPHA_INT_TYPES_H_ */

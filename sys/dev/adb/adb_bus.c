@@ -171,7 +171,7 @@ nadb_init(device_t dev)
 			if (config_found(sc->sc_dev, &aaa, nadb_devprint)) {
 				devmask |= (1 << i);
 			} else {
-				printf(" not configured\n");
+				aprint_normal(" not configured\n");
 			}
 		}
 	}
@@ -183,7 +183,7 @@ nadb_init(device_t dev)
 int
 nadb_print(void *aux, const char *what)
 {
-	printf(": Apple Desktop Bus\n");
+	aprint_normal(": Apple Desktop Bus\n");
 	return 0;
 }
 
@@ -197,13 +197,13 @@ nadb_devprint(void *aux, const char *what)
 
 	switch(aaa->dev->original_addr) {
 		case 2:
-			printf("%s: ADB Keyboard", what);
+			aprint_normal("%s: ADB Keyboard", what);
 			break;
 		case 3:
-			printf("%s: ADB relative pointing device", what);
+			aprint_normal("%s: ADB relative pointing device", what);
 			break;
 		default:
-			printf("%s: something from address %d:%02x",
+			aprint_normal("%s: something from address %d:%02x",
 			    what,
 			    aaa->dev->original_addr,
 			    aaa->dev->handler_id);

@@ -42,7 +42,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
  *
  * Part of this module is derived from similar code in the Host
  * AP driver. The code is used with the consent of the author and
- * it's license is included below.
+ * its license is included below.
  */
 #include <sys/param.h>
 #include <sys/systm.h>

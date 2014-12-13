@@ -102,6 +102,7 @@ const struct bdevsw rl_bdevsw = {
 	.d_ioctl = rlioctl,
 	.d_dump = rldump,
 	.d_psize = rlpsize,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK
 };
 
@@ -116,6 +117,7 @@ const struct cdevsw rl_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = nommap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_DISK
 };
 
@@ -531,6 +533,14 @@ rlioctl(dev_t dev, u_long cmd, void *addr, int flag, struct lwp *l)
 		struct dkwedge_list *dkwl = (void *) addr;
 
 		return dkwedge_list(&rc->rc_disk, dkwl, l);
+	}
+
+	case DIOCMWEDGES: {
+		if ((flag & FWRITE) == 0)
+			return (EBADF);
+
+		dkwedge_discover(&rc->rc_disk);
+		return 0;
 	}
 
 	default:

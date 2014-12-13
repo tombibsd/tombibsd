@@ -44,7 +44,7 @@ __RCSID("$NetBSD$");
 #include <machine/float.h>
 
 /*
- * These come from <float.h> defintion
+ * These come from <float.h> definition
  */
 #define	FLT_ROUND_MAP \
 	( (0 << (FP_RZ*2))	/* round to zero */			\

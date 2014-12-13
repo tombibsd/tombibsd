@@ -54,6 +54,10 @@ options 	WAPBL			# File system journaling support
 options 	INET			# Internet protocols
 #options 	TCP_DEBUG	# Record last TCP_NDEBUG packets with SO_DEBUG
 
+# JIT compiler for bpfilter
+#options	SLJIT
+#options	BPFJIT
+
 
 # Workstation console options
 options 	FONT_BOLD8x16		# Font for fb devices

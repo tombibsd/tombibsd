@@ -67,7 +67,11 @@ static struct modlist module_bootlist = TAILQ_HEAD_INITIALIZER(module_bootlist);
 
 static module_t	*module_active;
 static bool	module_verbose_on;
+#ifdef MODULAR_DEFAULT_AUTOLOAD
 static bool	module_autoload_on = true;
+#else
+static bool	module_autoload_on = false;
+#endif
 u_int		module_count;
 u_int		module_builtinlist;
 u_int		module_autotime = 10;
@@ -87,7 +91,7 @@ __link_set_add_rodata(modules, module_dummy);
 static module_t	*module_newmodule(modsrc_t);
 static void	module_require_force(module_t *);
 static int	module_do_load(const char *, bool, int, prop_dictionary_t,
-		    module_t **, modclass_t class, bool);
+		    module_t **, modclass_t modclass, bool);
 static int	module_do_unload(const char *, bool);
 static int	module_do_builtin(const char *, module_t **, prop_dictionary_t);
 static int	module_fetch_info(module_t *);
@@ -101,14 +105,14 @@ static bool	module_merge_dicts(prop_dictionary_t, const prop_dictionary_t);
 static void	sysctl_module_setup(void);
 static int	sysctl_module_autotime(SYSCTLFN_PROTO);
 
-#define MODULE_CLASS_MATCH(mi, class) \
-	((class) == MODULE_CLASS_ANY || (class) == (mi)->mi_class)
+#define MODULE_CLASS_MATCH(mi, modclass) \
+	((modclass) == MODULE_CLASS_ANY || (modclass) == (mi)->mi_class)
 
 static void
-module_incompat(const modinfo_t *mi, int class)
+module_incompat(const modinfo_t *mi, int modclass)
 {
 	module_error("incompatible module class for `%s' (%d != %d)",
-	    mi->mi_name, class, mi->mi_class);
+	    mi->mi_name, modclass, mi->mi_class);
 }
 
 /*
@@ -456,6 +460,12 @@ sysctl_module_setup(void)
 		NULL, 0, &module_verbose_on, 0,
 		CTL_CREATE, CTL_EOL);
 	sysctl_createv(&module_sysctllog, 0, &node, NULL,
+		CTLFLAG_PERMANENT | CTLFLAG_READONLY,
+		CTLTYPE_STRING, "path",
+		SYSCTL_DESCR("Default module load path"),
+		NULL, 0, module_base, 0,
+		CTL_CREATE, CTL_EOL);
+	sysctl_createv(&module_sysctllog, 0, &node, NULL,
 		CTLFLAG_PERMANENT | CTLFLAG_READWRITE,
 		CTLTYPE_INT, "autotime",
 		SYSCTL_DESCR("Auto-unload delay"),
@@ -470,7 +480,7 @@ sysctl_module_setup(void)
  *	specified class.
  */
 void
-module_init_class(modclass_t class)
+module_init_class(modclass_t modclass)
 {
 	TAILQ_HEAD(, module) bi_fail = TAILQ_HEAD_INITIALIZER(bi_fail);
 	module_t *mod;
@@ -484,7 +494,7 @@ module_init_class(modclass_t class)
 	do {
 		TAILQ_FOREACH(mod, &module_builtins, mod_chain) {
 			mi = mod->mod_info;
-			if (!MODULE_CLASS_MATCH(mi, class))
+			if (!MODULE_CLASS_MATCH(mi, modclass))
 				continue;
 			/*
 			 * If initializing a builtin module fails, don't try
@@ -495,7 +505,7 @@ module_init_class(modclass_t class)
 			 * (If the module has previously been set to
 			 * MODFLG_MUST_FORCE, don't try to override that!)
 			 */
-			if (mod->mod_flags & MODFLG_MUST_FORCE ||
+			if ((mod->mod_flags & MODFLG_MUST_FORCE) ||
 			    module_do_builtin(mi->mi_name, NULL, NULL) != 0) {
 				TAILQ_REMOVE(&module_builtins, mod, mod_chain);
 				TAILQ_INSERT_TAIL(&bi_fail, mod, mod_chain);
@@ -511,10 +521,10 @@ module_init_class(modclass_t class)
 	do {
 		TAILQ_FOREACH(mod, &module_bootlist, mod_chain) {
 			mi = mod->mod_info;
-			if (!MODULE_CLASS_MATCH(mi, class))
+			if (!MODULE_CLASS_MATCH(mi, modclass))
 				continue;
 			module_do_load(mi->mi_name, false, 0, NULL, NULL,
-			    class, false);
+			    modclass, false);
 			break;
 		}
 	} while (mod != NULL);
@@ -555,7 +565,7 @@ module_compatible(int v1, int v2)
  */
 int
 module_load(const char *filename, int flags, prop_dictionary_t props,
-	    modclass_t class)
+	    modclass_t modclass)
 {
 	int error;
 
@@ -567,7 +577,7 @@ module_load(const char *filename, int flags, prop_dictionary_t props,
 	}
 
 	kernconfig_lock();
-	error = module_do_load(filename, false, flags, props, NULL, class,
+	error = module_do_load(filename, false, flags, props, NULL, modclass,
 	    false);
 	kernconfig_unlock();
 
@@ -580,7 +590,7 @@ module_load(const char *filename, int flags, prop_dictionary_t props,
  *	Load a single module from the file system, system initiated.
  */
 int
-module_autoload(const char *filename, modclass_t class)
+module_autoload(const char *filename, modclass_t modclass)
 {
 	int error;
 
@@ -604,7 +614,7 @@ module_autoload(const char *filename, modclass_t class)
 	    0, (void *)(uintptr_t)MODCTL_LOAD, (void *)(uintptr_t)1, NULL);
 
 	if (error == 0)
-		error = module_do_load(filename, false, 0, NULL, NULL, class,
+		error = module_do_load(filename, false, 0, NULL, NULL, modclass,
 		    true);
 
 	kernconfig_unlock();
@@ -842,7 +852,7 @@ module_do_builtin(const char *name, module_t **modp, prop_dictionary_t props)
  */
 static int
 module_do_load(const char *name, bool isdep, int flags,
-	       prop_dictionary_t props, module_t **modp, modclass_t class,
+	       prop_dictionary_t props, module_t **modp, modclass_t modclass,
 	       bool autoload)
 {
 #define MODULE_MAX_DEPTH 6
@@ -956,7 +966,7 @@ module_do_load(const char *name, bool isdep, int flags,
 			 * available for each architecture, so we don't
 			 * print an error if they are missing.
 			 */
-			if (class != MODULE_CLASS_EXEC || error != ENOENT)
+			if (modclass != MODULE_CLASS_EXEC || error != ENOENT)
 				module_error("vfs load failed for `%s', "
 				    "error %d", name, error);
 #endif
@@ -999,8 +1009,8 @@ module_do_load(const char *name, bool isdep, int flags,
 	 * If a specific kind of module was requested, ensure that we have
 	 * a match.
 	 */
-	if (!MODULE_CLASS_MATCH(mi, class)) {
-		module_incompat(mi, class);
+	if (!MODULE_CLASS_MATCH(mi, modclass)) {
+		module_incompat(mi, modclass);
 		error = ENOENT;
 		goto fail;
 	}
@@ -1081,8 +1091,9 @@ module_do_load(const char *name, bool isdep, int flags,
 			error = module_do_load(buf, true, flags, NULL,
 			    &mod2, MODULE_CLASS_ANY, true);
 			if (error != 0) {
-				module_error("recursive load failed for `%s', "
-				    "error %d", mi->mi_name, error);
+				module_error("recursive load failed for `%s' "
+				    "(`%s' required), error %d", mi->mi_name,
+				    buf, error);
 				goto fail;
 			}
 			mod->mod_required[mod->mod_nrequired++] = mod2;

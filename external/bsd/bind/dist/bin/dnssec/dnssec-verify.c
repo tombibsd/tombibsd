@@ -16,8 +16,6 @@
  * PERFORMANCE OF THIS SOFTWARE.
  */
 
-/* Id: dnssec-verify.c,v 1.1.2.1 2011/03/16 06:37:51 each Exp  */
-
 /*! \file */
 
 #include <config.h>
@@ -70,6 +68,10 @@
 #include <dns/time.h>
 
 #include <dst/dst.h>
+
+#ifdef PKCS11CRYPTO
+#include <pk11/result.h>
+#endif
 
 #include "dnssectool.h"
 
@@ -133,6 +135,7 @@ usage(void) {
 
 	fprintf(stderr, "Options: (default value in parenthesis) \n");
 	fprintf(stderr, "\t-v debuglevel (0)\n");
+	fprintf(stderr, "\t-V:\tprint version information\n");
 	fprintf(stderr, "\t-o origin:\n");
 	fprintf(stderr, "\t\tzone origin (name of zonefile)\n");
 	fprintf(stderr, "\t-I format:\n");
@@ -167,11 +170,11 @@ main(int argc, char *argv[]) {
 #endif
 	char *classname = NULL;
 	dns_rdataclass_t rdclass;
-	int ch;
 	char *endp;
+	int ch;
 
 #define CMDLINE_FLAGS \
-	"m:o:I:c:E:v:xz"
+	"hm:o:I:c:E:v:Vxz"
 
 	/*
 	 * Process memory debugging argument first.
@@ -201,6 +204,9 @@ main(int argc, char *argv[]) {
 	if (result != ISC_R_SUCCESS)
 		fatal("out of memory");
 
+#ifdef PKCS11CRYPTO
+	pk11_result_register();
+#endif
 	dns_result_register();
 
 	isc_commandline_errprint = ISC_FALSE;
@@ -213,10 +219,6 @@ main(int argc, char *argv[]) {
 
 		case 'E':
 			engine = isc_commandline_argument;
-			break;
-
-		case 'h':
-			usage();
 			break;
 
 		case 'I':
@@ -249,8 +251,15 @@ main(int argc, char *argv[]) {
 			if (isc_commandline_option != '?')
 				fprintf(stderr, "%s: invalid argument -%c\n",
 					program, isc_commandline_option);
+			/* FALLTHROUGH */
+
+		case 'h':
+			/* Does not return. */
 			usage();
-			break;
+
+		case 'V':
+			/* Does not return. */
+			version(program);
 
 		default:
 			fprintf(stderr, "%s: unhandled option -%c\n",

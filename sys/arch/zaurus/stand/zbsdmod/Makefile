@@ -9,6 +9,7 @@ SRCS=	zbsdmod.c
 NOMAN=	# defined
 
 realall: ${OBJS}
+	${OBJCOPY} -R .eh_frame ${.OBJDIR}/zbsdmod.o
 
 .include <bsd.klinks.mk>
 .include <bsd.prog.mk>

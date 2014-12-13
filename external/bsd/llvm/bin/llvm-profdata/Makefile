@@ -10,6 +10,7 @@ NOMAN=		yes
 SRCS=	llvm-profdata.cpp
 
 LLVM_LIBS+= \
+	ProfileData \
 	IR \
 	Support
 

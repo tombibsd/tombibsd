@@ -53,6 +53,6 @@ map: map.c
 
 .include <bsd.prog.mk>
 
-.if defined(HAVE_GCC) && ${HAVE_GCC} >= 45 && ${MACHINE_ARCH} == "vax"
+.if defined(HAVE_GCC) && ${MACHINE_ARCH} == "vax"
 COPTS.misc.c+=	-O0
 .endif

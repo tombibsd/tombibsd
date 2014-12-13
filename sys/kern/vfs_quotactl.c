@@ -93,12 +93,12 @@ vfs_quotactl_put(struct mount *mp, const struct quotakey *key,
 }
 
 int
-vfs_quotactl_delete(struct mount *mp, const struct quotakey *key)
+vfs_quotactl_del(struct mount *mp, const struct quotakey *key)
 {
 	struct quotactl_args args;
 
-	args.qc_op = QUOTACTL_DELETE;
-	args.u.delete.qc_key = key;
+	args.qc_op = QUOTACTL_DEL;
+	args.u.del.qc_key = key;
 	return VFS_QUOTACTL(mp, &args);
 }
 

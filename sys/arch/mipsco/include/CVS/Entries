@@ -1,4 +1,4 @@
-/Makefile/1.21/Sun Nov 25 21:55:51 2012/-kk/
+/Makefile/1.22/Sun Jul 20 13:58:38 2014/-kk/
 /ansi.h/1.1/Sat Aug 12 22:58:04 2000/-kk/
 /asm.h/1.1/Mon Sep 11 03:25:40 2000/-kk/
 /autoconf.h/1.7/Sat Mar 14 14:46:02 2009/-kk/
@@ -28,7 +28,7 @@
 /kcore.h/1.1/Sat Aug 12 22:58:23 2000/-kk/
 /kdbparam.h/1.1/Sat Aug 12 22:58:24 2000/-kk/
 /limits.h/1.2/Fri Aug 31 03:46:03 2001/-kk/
-/loadfile_machdep.h/1.4/Mon Apr 28 20:23:28 2008/-kk/
+/loadfile_machdep.h/1.5/Fri Oct  3 09:25:43 2014/-kk/
 /lock.h/1.2/Fri Aug 31 03:53:23 2001/-kk/
 /locore.h/1.2/Wed Jun  5 06:18:37 2002/-kk/
 /mainboard.h/1.4/Mon Apr 28 20:23:28 2008/-kk/
@@ -53,7 +53,6 @@
 /rwlock.h/1.2/Fri Feb  9 21:55:06 2007/-kk/
 /setjmp.h/1.1/Sat Aug 12 22:58:41 2000/-kk/
 /signal.h/1.1/Sat Aug 12 22:58:42 2000/-kk/
-/sljitarch.h/1.1/Sun Nov 25 21:55:51 2012/-kk/
 /sysconf.h/1.6/Sun Feb 20 07:56:16 2011/-kk/
 /trap.h/1.1/Sat Aug 12 22:58:44 2000/-kk/
 /types.h/1.7/Sun Jan 20 18:09:07 2008/-kk/

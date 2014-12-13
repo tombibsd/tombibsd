@@ -308,13 +308,14 @@ ip6flow_fastforward(struct mbuf **mp)
 
 	ip6f->ip6f_uses++;
 
+	KERNEL_LOCK(1, NULL);
 	/* Send on its way - straight to the interface output routine. */
 	if ((error = (*rt->rt_ifp->if_output)(rt->rt_ifp, m, dst, rt)) != 0) {
 		ip6f->ip6f_dropped++;
 	} else {
 		ip6f->ip6f_forwarded++;
 	}
-
+	KERNEL_UNLOCK_ONE(NULL);
 	return 1;
 }
 

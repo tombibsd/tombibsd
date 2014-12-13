@@ -14,3 +14,4 @@ ENTRY(alloca)
 	subq	%rdi,%rsp
 	movq	%rsp,%rax
 	jmp	*%rdx
+END(alloca)

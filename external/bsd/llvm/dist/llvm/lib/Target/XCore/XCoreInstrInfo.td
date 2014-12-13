@@ -412,7 +412,7 @@ def STW_l3r : _FL3R<0b000001100, (outs),
                     (ins GRRegs:$val, GRRegs:$addr, GRRegs:$offset),
                     "stw $val, $addr[$offset]", []>;
 
-def STW_2rus : _F2RUS<0b0000, (outs),
+def STW_2rus : _F2RUS<0b00000, (outs),
                       (ins GRRegs:$val, GRRegs:$addr, i32imm:$offset),
                       "stw $val, $addr[$offset]", []>;
 }
@@ -718,10 +718,10 @@ def BLACP_u10 : _FU10<0b111000, (outs), (ins i32imm:$a), "bla cp[$a]", []>;
 def BLACP_lu10 : _FLU10<0b111000, (outs), (ins i32imm:$a), "bla cp[$a]", []>;
 
 def BLRF_u10 : _FU10<0b110100, (outs), (ins pcrel_imm:$a), "bl $a",
-                     [(XCoreBranchLink immU10:$a)]>;
+                     []>;
 
 def BLRF_lu10 : _FLU10<0b110100, (outs), (ins pcrel_imm:$a), "bl $a",
-                       [(XCoreBranchLink immU20:$a)]>;
+                       [(XCoreBranchLink tglobaladdr:$a)]>;
 
 def BLRB_u10 : _FU10<0b110101, (outs), (ins pcrel_imm_neg:$a), "bl $a", []>;
 
@@ -902,7 +902,7 @@ def BYTEREV_l2r : _FL2R<0b0000011001, (outs GRRegs:$dst), (ins GRRegs:$src),
                         "byterev $dst, $src",
                         [(set GRRegs:$dst, (bswap GRRegs:$src))]>;
 
-def CLZ_l2r : _FL2R<0b000111000, (outs GRRegs:$dst), (ins GRRegs:$src),
+def CLZ_l2r : _FL2R<0b0000111000, (outs GRRegs:$dst), (ins GRRegs:$src),
                     "clz $dst, $src",
                     [(set GRRegs:$dst, (ctlz GRRegs:$src))]>;
 
@@ -1113,7 +1113,6 @@ def WAITEU_0R : _F0R<0b0000001100, (outs), (ins),
 // Non-Instruction Patterns
 //===----------------------------------------------------------------------===//
 
-def : Pat<(XCoreBranchLink tglobaladdr:$addr), (BLRF_lu10 tglobaladdr:$addr)>;
 def : Pat<(XCoreBranchLink texternalsym:$addr), (BLRF_lu10 texternalsym:$addr)>;
 
 /// sext_inreg

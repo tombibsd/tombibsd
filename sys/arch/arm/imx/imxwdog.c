@@ -131,7 +131,7 @@ wdog_setmode(struct sysmon_wdog *smw)
 }
 
 void
-wdog_attach_common(struct device *parent, struct device *self,
+wdog_attach_common(device_t parent, device_t self,
     bus_space_tag_t iot, paddr_t addr, size_t size, int irq)
 {
 	struct wdog_softc *sc = device_private(self);
@@ -184,6 +184,5 @@ wdog_attach_common(struct device *parent, struct device *self,
 			reg |= WCR_WDE;
 			wdog_write(sc, IMX_WDOG_WCR, reg);
 		}
- 	}
+	}
 }
-

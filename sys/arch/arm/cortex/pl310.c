@@ -249,10 +249,10 @@ arml2cc_enable(struct arml2cc_softc *sc)
 {
 	mutex_spin_enter(&sc->sc_lock);
 
-	arml2cc_write_4(sc, L2C_CTL, 1);	// turn it on
-
 	arml2cc_cache_way_op(sc, L2C_INV_WAY, sc->sc_waymask);
 	arml2cc_cache_sync(sc);
+
+	arml2cc_write_4(sc, L2C_CTL, 1);	// turn it on
 
 	mutex_spin_exit(&sc->sc_lock);
 }

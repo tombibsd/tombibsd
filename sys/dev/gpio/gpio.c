@@ -110,6 +110,7 @@ const struct cdevsw gpio_cdevsw = {
 	.d_poll = nopoll,
 	.d_mmap = nommap,
 	.d_kqfilter = nokqfilter,
+	.d_discard = nodiscard,
 	.d_flag = D_OTHER | D_MPSAFE
 };
 
@@ -208,6 +209,7 @@ gpio_attach(device_t parent, device_t self, void *aux)
 	sc->sc_npins = gba->gba_npins;
 
 	aprint_normal(": %d pins\n", sc->sc_npins);
+	aprint_naive("\n");
 
 	if (!pmf_device_register(self, NULL, gpio_resume))
 		aprint_error_dev(self, "couldn't establish power handler\n");
@@ -698,12 +700,14 @@ gpio_ioctl(struct gpio_softc *sc, u_long cmd, void *data, int flag,
 		/* check that the controller supports all requested flags */
 		if ((flags & sc->sc_pins[pin].pin_caps) != flags)
 			return ENODEV;
-		flags = set->gp_flags | GPIO_PIN_SET;
+		flags = set->gp_flags;
 
 		set->gp_caps = sc->sc_pins[pin].pin_caps;
 		/* return old value */
 		set->gp_flags = sc->sc_pins[pin].pin_flags;
+
 		if (flags > 0) {
+			flags |= GPIO_PIN_SET;
 			gpiobus_pin_ctl(gc, pin, flags);
 			/* update current value */
 			sc->sc_pins[pin].pin_flags = flags;

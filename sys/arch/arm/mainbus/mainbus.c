@@ -151,7 +151,9 @@ mainbussearch(device_t parent, cfdata_t cf, const int *ldesc, void *aux)
 		tryagain = 0;
 		if (config_match(parent, cf, &mb) > 0) {
 			config_attach(parent, cf, &mb, mainbusprint);
-/*			tryagain = (cf->cf_fstate == FSTATE_STAR);*/
+#ifdef MULTIPROCESSOR
+			tryagain = (cf->cf_fstate == FSTATE_STAR);
+#endif
 		}
 	} while (tryagain);
 

@@ -1,5 +1,5 @@
 /Makefile.inc/1.5/Fri Oct 17 10:48:55 1997/-kk/
-/Makefile/1.32/Wed Feb  3 15:34:44 2010/-kk/
+/Makefile/1.33/Fri Oct  3 09:25:21 2014/-kk/
 D/dict////
 D/doc////
 D/examples////
@@ -16,4 +16,3 @@ D/terminfo////
 D/tmac////
 D/wscons////
 D/xml////
-D/zoneinfo////

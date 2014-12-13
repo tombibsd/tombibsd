@@ -47,6 +47,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include "opt_modular.h"
 #include "opt_md.h"
 #include "opt_pmap_debug.h"
+#include "opt_multiprocessor.h"
 
 #include <sys/param.h>
 #include <sys/systm.h>
@@ -65,6 +66,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/module.h>
 #include <sys/atomic.h>
 #include <sys/xcall.h>
+#include <sys/ipi.h>
 
 #include <uvm/uvm_extern.h>
 
@@ -73,7 +75,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <arm/locore.h>
 
-#include <arm/arm32/katelib.h>
 #include <arm/arm32/machdep.h>
 
 #include <machine/bootconfig.h>
@@ -107,6 +108,7 @@ int cpu_simd_present;
 int cpu_simdex_present;
 int cpu_umull_present;
 int cpu_synchprim_present;
+int cpu_unaligned_sigbus;
 const char *cpu_arch = "";
 
 int cpu_instruction_set_attributes[6];
@@ -503,6 +505,13 @@ SYSCTL_SETUP(sysctl_machdep_setup, "sysctl machdep subtree setup")
 		       CTLTYPE_INT, "printfataltraps", NULL,
 		       NULL, 0, &cpu_printfataltraps, 0,
 		       CTL_MACHDEP, CTL_CREATE, CTL_EOL);
+	cpu_unaligned_sigbus = !CPU_IS_ARMV6_P() && !CPU_IS_ARMV7_P();
+	sysctl_createv(clog, 0, NULL, NULL,
+		       CTLFLAG_PERMANENT|CTLFLAG_READONLY,
+		       CTLTYPE_INT, "unaligned_sigbus",
+		       SYSCTL_DESCR("Do SIGBUS for fixed unaligned accesses"),
+		       NULL, 0, &cpu_unaligned_sigbus, 0,
+		       CTL_MACHDEP, CTL_CREATE, CTL_EOL);
 
 
 	/*
@@ -706,6 +715,16 @@ xc_send_ipi(struct cpu_info *ci)
 
 	intr_ipi_send(ci != NULL ? ci->ci_kcpuset : NULL, IPI_XCALL);
 }
+
+void
+cpu_ipi(struct cpu_info *ci)
+{
+	KASSERT(kpreempt_disabled());
+	KASSERT(curcpu() != ci);
+
+	intr_ipi_send(ci != NULL ? ci->ci_kcpuset : NULL, IPI_GENERIC);
+}
+
 #endif /* MULTIPROCESSOR */
 
 #ifdef __HAVE_MM_MD_DIRECT_MAPPED_PHYS

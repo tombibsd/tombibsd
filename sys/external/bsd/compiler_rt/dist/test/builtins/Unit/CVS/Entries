@@ -3,6 +3,7 @@
 /absvti2_test.c/1.1.1.2/Tue Mar 25 02:35:40 2014/-kk/
 /adddf3vfp_test.c/1.1.1.1/Wed Feb 26 22:31:30 2014/-kk/
 /addsf3vfp_test.c/1.1.1.1/Wed Feb 26 22:31:34 2014/-kk/
+/addtf3_test.c/1.1.1.1/Sun Aug 10 10:14:08 2014/-kk/
 /addvdi3_test.c/1.1.1.1/Wed Feb 26 22:31:30 2014/-kk/
 /addvsi3_test.c/1.1.1.1/Wed Feb 26 22:31:30 2014/-kk/
 /addvti3_test.c/1.1.1.2/Tue Mar 25 02:35:40 2014/-kk/
@@ -31,13 +32,17 @@
 /divsf3vfp_test.c/1.1.1.1/Wed Feb 26 22:31:30 2014/-kk/
 /divsi3_test.c/1.1.1.1/Wed Feb 26 22:31:30 2014/-kk/
 /divtc3_test.c/1.1.1.1/Wed Feb 26 22:31:30 2014/-kk/
+/divtf3_test.c/1.1.1.1/Sun Aug 10 10:14:08 2014/-kk/
 /divti3_test.c/1.1.1.2/Tue Mar 25 02:35:40 2014/-kk/
 /divxc3_test.c/1.1.1.1/Wed Feb 26 22:31:34 2014/-kk/
 /enable_execute_stack_test.c/1.1.1.1/Wed Feb 26 22:31:30 2014/-kk/
 /endianness.h/1.1.1.1/Wed Feb 26 22:31:30 2014/-kk/
 /eqdf2vfp_test.c/1.1.1.1/Wed Feb 26 22:31:34 2014/-kk/
 /eqsf2vfp_test.c/1.1.1.1/Wed Feb 26 22:31:30 2014/-kk/
+/eqtf2_test.c/1.1.1.1/Fri May 16 00:04:18 2014/-kk/
 /extebdsfdf2vfp_test.c/1.1.1.1/Wed Feb 26 22:31:34 2014/-kk/
+/extenddftf2_test.c/1.1.1.1/Sun Aug 10 10:14:08 2014/-kk/
+/extendsftf2_test.c/1.1.1.1/Sun Aug 10 10:14:08 2014/-kk/
 /ffsdi2_test.c/1.1.1.1/Wed Feb 26 22:31:30 2014/-kk/
 /ffsti2_test.c/1.1.1.2/Tue Mar 25 02:35:40 2014/-kk/
 /fixdfdi_test.c/1.1.1.1/Wed Feb 26 22:31:30 2014/-kk/
@@ -46,6 +51,7 @@
 /fixsfdi_test.c/1.1.1.1/Wed Feb 26 22:31:30 2014/-kk/
 /fixsfsivfp_test.c/1.1.1.1/Wed Feb 26 22:31:30 2014/-kk/
 /fixsfti_test.c/1.1.1.2/Tue Mar 25 02:35:40 2014/-kk/
+/fixtfsi_test.c/1.1.1.1/Sun Aug 10 10:14:08 2014/-kk/
 /fixunsdfdi_test.c/1.1.1.1/Wed Feb 26 22:31:30 2014/-kk/
 /fixunsdfsi_test.c/1.1.1.1/Wed Feb 26 22:31:30 2014/-kk/
 /fixunsdfsivfp_test.c/1.1.1.1/Wed Feb 26 22:31:30 2014/-kk/
@@ -55,6 +61,7 @@
 /fixunssfsivfp_test.c/1.1.1.1/Wed Feb 26 22:31:34 2014/-kk/
 /fixunssfti_test.c/1.1.1.2/Tue Mar 25 02:35:40 2014/-kk/
 /fixunstfdi_test.c/1.1.1.1/Wed Feb 26 22:31:30 2014/-kk/
+/fixunstfsi_test.c/1.1.1.1/Sun Aug 10 10:14:08 2014/-kk/
 /fixunsxfdi_test.c/1.1.1.1/Wed Feb 26 22:31:30 2014/-kk/
 /fixunsxfsi_test.c/1.1.1.1/Wed Feb 26 22:31:30 2014/-kk/
 /fixunsxfti_test.c/1.1.1.2/Tue Mar 25 02:35:40 2014/-kk/
@@ -76,18 +83,23 @@
 /floatuntidf_test.c/1.1.1.2/Tue Mar 25 02:35:41 2014/-kk/
 /floatuntisf_test.c/1.1.1.2/Tue Mar 25 02:35:41 2014/-kk/
 /floatuntixf_test.c/1.1.1.2/Tue Mar 25 02:35:41 2014/-kk/
+/fp_test.h/1.1.1.1/Fri May 16 00:04:18 2014/-kk/
 /gcc_personality_test.c/1.1.1.1/Wed Feb 26 22:31:30 2014/-kk/
 /gcc_personality_test_helper.cxx/1.1.1.1/Wed Feb 26 22:31:30 2014/-kk/
 /gedf2vfp_test.c/1.1.1.1/Wed Feb 26 22:31:34 2014/-kk/
 /gesf2vfp_test.c/1.1.1.1/Wed Feb 26 22:31:30 2014/-kk/
+/getf2_test.c/1.1.1.1/Fri May 16 00:04:18 2014/-kk/
 /gtdf2vfp_test.c/1.1.1.1/Wed Feb 26 22:31:30 2014/-kk/
 /gtsf2vfp_test.c/1.1.1.1/Wed Feb 26 22:31:34 2014/-kk/
+/gttf2_test.c/1.1.1.1/Fri May 16 00:04:18 2014/-kk/
 /ledf2vfp_test.c/1.1.1.1/Wed Feb 26 22:31:30 2014/-kk/
 /lesf2vfp_test.c/1.1.1.1/Wed Feb 26 22:31:34 2014/-kk/
+/letf2_test.c/1.1.1.1/Fri May 16 00:04:18 2014/-kk/
 /lshrdi3_test.c/1.1.1.1/Wed Feb 26 22:31:30 2014/-kk/
 /lshrti3_test.c/1.1.1.2/Tue Mar 25 02:35:41 2014/-kk/
 /ltdf2vfp_test.c/1.1.1.1/Wed Feb 26 22:31:34 2014/-kk/
 /ltsf2vfp_test.c/1.1.1.1/Wed Feb 26 22:31:30 2014/-kk/
+/lttf2_test.c/1.1.1.1/Fri May 16 00:04:18 2014/-kk/
 /moddi3_test.c/1.1.1.1/Wed Feb 26 22:31:30 2014/-kk/
 /modsi3_test.c/1.1.1.1/Wed Feb 26 22:31:30 2014/-kk/
 /modti3_test.c/1.1.1.2/Tue Mar 25 02:35:41 2014/-kk/
@@ -100,6 +112,7 @@
 /mulsc3_test.c/1.1.1.1/Wed Feb 26 22:31:34 2014/-kk/
 /mulsf3vfp_test.c/1.1.1.1/Wed Feb 26 22:31:30 2014/-kk/
 /multc3_test.c/1.1.1.1/Wed Feb 26 22:31:34 2014/-kk/
+/multf3_test.c/1.1.1.1/Sun Aug 10 10:14:08 2014/-kk/
 /multi3_test.c/1.1.1.2/Tue Mar 25 02:35:41 2014/-kk/
 /mulvdi3_test.c/1.1.1.1/Wed Feb 26 22:31:30 2014/-kk/
 /mulvsi3_test.c/1.1.1.1/Wed Feb 26 22:31:30 2014/-kk/
@@ -114,6 +127,7 @@
 /negvsi2_test.c/1.1.1.1/Wed Feb 26 22:31:30 2014/-kk/
 /negvti2_test.c/1.1.1.2/Tue Mar 25 02:35:41 2014/-kk/
 /nesf2vfp_test.c/1.1.1.1/Wed Feb 26 22:31:30 2014/-kk/
+/netf2_test.c/1.1.1.1/Fri May 16 00:04:18 2014/-kk/
 /paritydi2_test.c/1.1.1.1/Wed Feb 26 22:31:34 2014/-kk/
 /paritysi2_test.c/1.1.1.1/Wed Feb 26 22:31:30 2014/-kk/
 /parityti2_test.c/1.1.1.2/Tue Mar 25 02:35:41 2014/-kk/
@@ -126,12 +140,15 @@
 /powixf2_test.c/1.1.1.1/Wed Feb 26 22:31:34 2014/-kk/
 /subdf3vfp_test.c/1.1.1.1/Wed Feb 26 22:31:30 2014/-kk/
 /subsf3vfp_test.c/1.1.1.1/Wed Feb 26 22:31:30 2014/-kk/
+/subtf3_test.c/1.1.1.1/Sun Aug 10 10:14:08 2014/-kk/
 /subvdi3_test.c/1.1.1.1/Wed Feb 26 22:31:30 2014/-kk/
 /subvsi3_test.c/1.1.1.1/Wed Feb 26 22:31:30 2014/-kk/
 /subvti3_test.c/1.1.1.2/Tue Mar 25 02:35:41 2014/-kk/
 /test/1.1.1.1/Wed Feb 26 22:31:30 2014/-kk/
 /trampoline_setup_test.c/1.1.1.1/Wed Feb 26 22:31:34 2014/-kk/
 /truncdfsf2vfp_test.c/1.1.1.1/Wed Feb 26 22:31:30 2014/-kk/
+/trunctfdf2_test.c/1.1.1.1/Sun Aug 10 10:14:08 2014/-kk/
+/trunctfsf2_test.c/1.1.1.1/Sun Aug 10 10:14:08 2014/-kk/
 /ucmpdi2_test.c/1.1.1.1/Wed Feb 26 22:31:30 2014/-kk/
 /ucmpti2_test.c/1.1.1.2/Tue Mar 25 02:35:41 2014/-kk/
 /udivdi3_test.c/1.1.1.1/Wed Feb 26 22:31:34 2014/-kk/
@@ -145,4 +162,5 @@
 /umodti3_test.c/1.1.1.2/Tue Mar 25 02:35:41 2014/-kk/
 /unorddf2vfp_test.c/1.1.1.1/Wed Feb 26 22:31:34 2014/-kk/
 /unordsf2vfp_test.c/1.1.1.1/Wed Feb 26 22:31:30 2014/-kk/
+/unordtf2_test.c/1.1.1.1/Fri May 16 00:04:22 2014/-kk/
 D/ppc////

@@ -1,3 +1,5 @@
-/lit.local.cfg/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
-/switch_to_lookup_table.ll/1.1.1.2/Fri Jan 31 08:46:01 2014/-kk/
+/lit.local.cfg/1.1.1.2/Fri Oct  3 09:23:20 2014/-kk/
+/switch-covered-bug.ll/1.1.1.1/Sun Aug 10 17:04:36 2014/-kk/
+/switch-table-bug.ll/1.1.1.1/Sun Aug 10 17:04:36 2014/-kk/
+/switch_to_lookup_table.ll/1.1.1.4/Fri Oct  3 09:23:20 2014/-kk/
 D

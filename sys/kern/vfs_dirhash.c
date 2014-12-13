@@ -235,7 +235,7 @@ dirhash_put(struct dirhash *dirh)
 
 void
 dirhash_enter(struct dirhash *dirh,
-	struct dirent *dirent, uint64_t offset, uint32_t entry_size, int new)
+	struct dirent *dirent, uint64_t offset, uint32_t entry_size, int new_p)
 {
 	struct dirhash *del_dirh, *prev_dirh;
 	struct dirhash_entry *dirh_e;
@@ -247,7 +247,7 @@ dirhash_enter(struct dirhash *dirh,
 	KASSERT(dirh->refcnt > 0);
 
 	/* are we trying to re-enter an entry? */
-	if (!new && (dirh->flags & DIRH_COMPLETE))
+	if (!new_p && (dirh->flags & DIRH_COMPLETE))
 		return;
 
 	/* calculate our hash */

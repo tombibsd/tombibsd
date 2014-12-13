@@ -434,6 +434,8 @@ ch_init(EditLine *el)
 	el->el_chared.c_kill.last	= el->el_chared.c_kill.buf;
 	el->el_chared.c_resizefun	= NULL;
 	el->el_chared.c_resizearg	= NULL;
+	el->el_chared.c_aliasfun	= NULL;
+	el->el_chared.c_aliasarg	= NULL;
 
 	el->el_map.current		= el->el_map.key;
 
@@ -755,5 +757,13 @@ ch_resizefun(EditLine *el, el_zfunc_t f, void *a)
 {
 	el->el_chared.c_resizefun = f;
 	el->el_chared.c_resizearg = a;
+	return 0;
+}
+
+protected int
+ch_aliasfun(EditLine *el, el_afunc_t f, void *a)
+{
+	el->el_chared.c_aliasfun = f;
+	el->el_chared.c_aliasarg = a;
 	return 0;
 }

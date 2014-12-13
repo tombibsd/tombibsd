@@ -52,6 +52,8 @@
 ./usr/include/cobalt/rwlock.h			comp-c-include
 ./usr/include/cobalt/setjmp.h			comp-c-include
 ./usr/include/cobalt/signal.h			comp-c-include
+./usr/include/cobalt/sljit_machdep.h		comp-c-include
+./usr/include/cobalt/sljitarch.h		comp-obsolete		obsolete
 ./usr/include/cobalt/stdarg.h			comp-obsolete		obsolete
 ./usr/include/cobalt/trap.h			comp-c-include
 ./usr/include/cobalt/types.h			comp-c-include

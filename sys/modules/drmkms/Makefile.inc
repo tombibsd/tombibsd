@@ -6,8 +6,10 @@
 # it correctly triggers rebuilds.
 
 CPPFLAGS+=	-I${S}/external/bsd/drm2/include
-CPPFLAGS+=	-I${S}/external/bsd/drm2/dist/uapi
+CPPFLAGS+=	-I${S}/external/bsd/drm2/dist
 CPPFLAGS+=	-I${S}/external/bsd/drm2/dist/include
+CPPFLAGS+=	-I${S}/external/bsd/drm2/dist/include/drm
+CPPFLAGS+=	-I${S}/external/bsd/drm2/dist/uapi
 CPPFLAGS+=	-I${S}/external/bsd/common/include
 CPPFLAGS+=	-D__KERNEL__
 
@@ -17,5 +19,4 @@ CPPFLAGS+=	-DDIAGNOSTIC
 .if ${MACHINE_ARCH} == "i386" || ${MACHINE_ARCH} == "x86_64"
 CPPFLAGS+=	-DCONFIG_MTRR
 CPPFLAGS+=	-DCONFIG_X86
-CPPFLAGS+=	-DMTRR
 .endif

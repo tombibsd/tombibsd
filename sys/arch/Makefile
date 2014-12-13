@@ -16,7 +16,9 @@ ARCHSUBDIR= mips
 ARCHSUBDIR= powerpc
 .endif
 
-.if ${MACHINE_CPU} == "arm"
+.if ${MACHINE_CPU} == "aarch64"
+SUBDIR= evbarm64
+.elif ${MACHINE_CPU} == "arm"
 SUBDIR= acorn26 acorn32 cats epoc32 evbarm hpcarm iyonix netwinder shark zaurus
 .else
 SUBDIR=	${MACHINE}
@@ -26,6 +28,9 @@ SUBDIR=	${MACHINE}
 .if exists(${ARCHSUBDIR})
 SUBDIR+= ${ARCHSUBDIR}
 .endif
+.endif
+.if ${MACHINE_CPU} == "aarch64"
+SUBDIR+= arm
 .endif
 .if ${MACHINE} == sparc
 SUBDIR+= sparc64
@@ -40,7 +45,7 @@ SUBDIR+= sun68k
 SUBDIR+= xen
 .endif
 
-#SUBDIR=acorn26 acorn32 algor alpha amiga amigappc arm arc atari \
+#SUBDIR=aarch64 acorn26 acorn32 algor alpha amiga amigappc arm arc atari \
 #	bebox \
 #	cats cesfic cobalt \
 #	dreamcast \
@@ -50,7 +55,7 @@ SUBDIR+= xen
 #	luna68k \
 #	m68k mac68k macppc mips mipsco mmeye mvme68k \
 #	netwinder news68k newsmips next68k \
-#	ofppc \
+#	ofppc or1k \
 #	playstation2 pmax powerpc prep \
 #	sandpoint sbmips sgimips sh3 shark sparc sparc64 sun2 sun3 sun68k \
 #	rs6000 \
@@ -58,7 +63,7 @@ SUBDIR+= xen
 #	x68k x86_64 xen \
 #	zaurus
 
-.if ${MACHINE_CPU} == arm
+.if ${MACHINE_CPU} == aarch64 || ${MACHINE_CPU} == "arm"
 INCSYMLINKS= ${MACHINE_CPU} /usr/include/machine
 .else
 INCSYMLINKS= ${MACHINE} /usr/include/machine

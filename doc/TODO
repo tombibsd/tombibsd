@@ -40,9 +40,6 @@ User programs:
     add detachment to window(1)
     clean up gas config files, set up common defines
 
-Pie-in-the-Sky:
-    someone should actually test all the netiso stuff.
-
 Documentation:
     modify sys docs to reflect NetBSD/arch-specific stuff
     clean up src/share/man/{man0,tools} so that we can generate a printable

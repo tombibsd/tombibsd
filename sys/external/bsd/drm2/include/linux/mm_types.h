@@ -38,4 +38,12 @@ struct page {
 	struct vm_page p_vmp;
 };
 
+typedef unsigned pgprot_t;
+
+static inline unsigned
+pgprot_val(pgprot_t pgprot)
+{
+	return pgprot;
+}
+
 #endif  /* _LINUX_MM_TYPES_H_ */

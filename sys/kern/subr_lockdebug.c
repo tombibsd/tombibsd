@@ -101,6 +101,8 @@ static void	lockdebug_abort1(lockdebug_t *, int, const char *,
 				 const char *, bool);
 static int	lockdebug_more(int);
 static void	lockdebug_init(void);
+static void	lockdebug_dump(lockdebug_t *, void (*)(const char *, ...)
+    __printflike(1, 2));
 
 static signed int
 ld_rbto_compare_nodes(void *ctx, const void *n1, const void *n2)
@@ -663,8 +665,13 @@ lockdebug_barrier(volatile void *spinlock, int slplocks)
 	}
 	splx(s);
 	if (l->l_shlocks != 0) {
-		panic("lockdebug_barrier: holding %d shared locks",
-		    l->l_shlocks);
+		TAILQ_FOREACH(ld, &ld_all, ld_achain) {
+			if (ld->ld_lockops->lo_type == LOCKOPS_CV)
+				continue;
+			if (ld->ld_lwp == l)
+				lockdebug_dump(ld, printf);
+		}
+		panic("%s: holding %d shared locks", __func__, l->l_shlocks);
 	}
 }
 

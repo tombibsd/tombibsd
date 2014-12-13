@@ -438,7 +438,7 @@ aio_process(struct aio_job *a_job)
 			goto done;
 		}
 
-		vp = (struct vnode *)fp->f_data;
+		vp = fp->f_vnode;
 		vn_lock(vp, LK_EXCLUSIVE | LK_RETRY);
 		if (a_job->aio_op & AIO_DSYNC) {
 			error = VOP_FSYNC(vp, fp->f_cred,

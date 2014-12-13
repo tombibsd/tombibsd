@@ -89,7 +89,6 @@ extern int etext();
 #endif
 
 STATIC void read_profile(const char *);
-STATIC char *find_dot_file(char *);
 int main(int, char **);
 
 /*
@@ -239,6 +238,7 @@ cmdloop(int top)
 	struct stackmark smark;
 	int inter;
 	int numeof = 0;
+	enum skipstate skip;
 
 	TRACE(("cmdloop(%d) called\n", top));
 	setstackmark(&smark);
@@ -270,8 +270,18 @@ cmdloop(int top)
 		}
 		popstackmark(&smark);
 		setstackmark(&smark);
-		if (evalskip == SKIPFILE) {
-			evalskip = 0;
+
+		/*
+		 * Any SKIP* can occur here!  SKIP(FUNC|BREAK|CONT) occur when
+		 * a dotcmd is in a loop or a function body and appropriate
+		 * built-ins occurs in file scope in the sourced file.  Values
+		 * other than SKIPFILE are reset by the appropriate eval*()
+		 * that contained the dotcmd() call.
+		 */
+		skip = current_skipstate();
+		if (skip != SKIPNONE) {
+			if (skip == SKIPFILE)
+				stop_skipping();
 			break;
 		}
 	}
@@ -335,60 +345,6 @@ readcmdfile(char *name)
 	popfile();
 }
 
-
-
-/*
- * Take commands from a file.  To be compatible we should do a path
- * search for the file, which is necessary to find sub-commands.
- */
-
-
-STATIC char *
-find_dot_file(char *basename)
-{
-	char *fullname;
-	const char *path = pathval();
-	struct stat statb;
-
-	/* don't try this for absolute or relative paths */
-	if (strchr(basename, '/'))
-		return basename;
-
-	while ((fullname = padvance(&path, basename)) != NULL) {
-		if ((stat(fullname, &statb) == 0) && S_ISREG(statb.st_mode)) {
-			/*
-			 * Don't bother freeing here, since it will
-			 * be freed by the caller.
-			 */
-			return fullname;
-		}
-		stunalloc(fullname);
-	}
-
-	/* not found in the PATH */
-	error("%s: not found", basename);
-	/* NOTREACHED */
-}
-
-int
-dotcmd(int argc, char **argv)
-{
-	exitstatus = 0;
-
-	if (argc >= 2) {		/* That's what SVR2 does */
-		char *fullname;
-		struct stackmark smark;
-
-		setstackmark(&smark);
-		fullname = find_dot_file(argv[1]);
-		setinputfile(fullname, 1);
-		commandname = fullname;
-		cmdloop(0);
-		popfile();
-		popstackmark(&smark);
-	}
-	return exitstatus;
-}
 
 
 int

@@ -1,5 +1,3 @@
-/*	$NetBSD$	*/
-
 /* First cut at a flex-based "wc" tool. */
 
 ws    [ \t]

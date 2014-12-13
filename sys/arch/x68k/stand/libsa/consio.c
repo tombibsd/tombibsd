@@ -42,7 +42,7 @@ int
 consio_init(int device)
 {
 
-	if (device < 0) {	/* undetemined yet */
+	if (device < 0) {	/* undetermined yet */
 		if (KEYCTRL & 8)
 			device = ITE;
 		else {

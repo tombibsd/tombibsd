@@ -128,8 +128,8 @@ virtio_attach(device_t parent, device_t self, void *aux)
 	/* subsystem ID shows what I am */
 	id = pci_conf_read(pc, tag, PCI_SUBSYS_ID_REG);
 	aprint_normal_dev(self, "Virtio %s Device (rev. 0x%02x)\n",
-			  (PCI_PRODUCT(id) < NDEVNAMES?
-			   virtio_device_name[PCI_PRODUCT(id)] : "Unknown"),
+			  (PCI_SUBSYS_ID(id) < NDEVNAMES?
+			   virtio_device_name[PCI_SUBSYS_ID(id)] : "Unknown"),
 			  revision);
 
 	sc->sc_dev = self;
@@ -150,7 +150,7 @@ virtio_attach(device_t parent, device_t self, void *aux)
 	virtio_set_status(sc, VIRTIO_CONFIG_DEVICE_STATUS_DRIVER);
 
 	/* XXX: use softc as aux... */
-	sc->sc_childdevid = PCI_PRODUCT(id);
+	sc->sc_childdevid = PCI_SUBSYS_ID(id);
 	sc->sc_child = NULL;
 	config_found(self, sc, NULL);
 	if (sc->sc_child == NULL) {
@@ -170,8 +170,14 @@ virtio_attach(device_t parent, device_t self, void *aux)
 		virtio_set_status(sc, VIRTIO_CONFIG_DEVICE_STATUS_FAILED);
 		return;
 	}
+
 	intrstr = pci_intr_string(pc, ih, intrbuf, sizeof(intrbuf));
+
+	if (sc->sc_flags & VIRTIO_F_PCI_INTR_MPSAFE)
+		pci_intr_setattr(pc, &ih, PCI_INTR_MPSAFE, true);
+
 	sc->sc_ih = pci_intr_establish(pc, ih, sc->sc_ipl, virtio_intr, sc);
+
 	if (sc->sc_ih == NULL) {
 		aprint_error_dev(self, "couldn't establish interrupt");
 		if (intrstr != NULL)

@@ -554,7 +554,7 @@ p1212_parse_directory(struct p1212_dir *root, u_int32_t *addr, u_int32_t mask)
 			/*
 			 * Text descriptors are special. They describe the
 			 * last entry they follow. So they need to be included
-			 * with it's struct and there's nothing in the spec
+			 * with its struct and there's nothing in the spec
 			 * preventing one from putting text descriptors after
 			 * directory descriptors. Also they can be a single
 			 * value or a list of them in a directory format so

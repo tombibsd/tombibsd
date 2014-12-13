@@ -43,6 +43,7 @@ no options 	COMPAT_40
 no options 	COMPAT_43
 no options 	COMPAT_50
 no options 	COMPAT_60
+no options 	COMPAT_70
 
 no options 	COMPAT_AOUT_M68K
 no options 	EXEC_AOUT

@@ -41,7 +41,7 @@ RCSID("$NetBSD$")
 	/*
 	 * We have a problem with critical (MSR[CE] or machine check (MSR[ME])
 	 * or debug (MSR[DE]) interrupts/exception in that they could happen
-	 * inbewtween the mtsprg1 %r2 and mfsprg1 %r2.  If that happens, %r2
+	 * inbetween the mtsprg1 %r2 and mfsprg1 %r2.  If that happens, %r2
 	 * will be lost.  Even if we moved to a different sprg, subsequent
 	 * expceptions would use SPRG1 and its value would be lost.  The only
 	 * way to be safe for CE/ME/DE faults to save and restore SPRG1.
@@ -858,7 +858,7 @@ _C_LABEL(exception_init):
 	ori	%r5,%r6,_C_LABEL(perfmon_vector)@l
 	mtspr	SPR_IVOR35, %r5
 
-	mfpir	%r5		/* get Process ID register */
+	mfspr	%r5, SPR_PIR	/* get Processor ID register */
 	cmplwi	%r5,0
 	bnelr			/* return if non-0 (non-primary) */
 

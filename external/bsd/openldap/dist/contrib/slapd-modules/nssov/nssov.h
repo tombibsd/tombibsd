@@ -1,11 +1,12 @@
 /*	$NetBSD$	*/
 
 /* nssov.h - NSS overlay header file */
-/* OpenLDAP: pkg/ldap/contrib/slapd-modules/nssov/nssov.h,v 1.1.2.8 2010/04/15 21:32:56 quanah Exp */
+/* $OpenLDAP$ */
 /* This work is part of OpenLDAP Software <http://www.openldap.org/>.
  *
- * Copyright 2008-2010 The OpenLDAP Foundation.
+ * Copyright 2008-2014 The OpenLDAP Foundation.
  * Portions Copyright 2008 Howard Chu.
+ * Portions Copyright 2013 Ted C. Cheng, Symas Corp.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -90,6 +91,9 @@ typedef struct nssov_info
 	struct berval ni_pam_template;
 	struct berval ni_pam_defhost;
 	struct berval *ni_pam_sessions;
+	struct berval ni_pam_password_prohibit_message;
+	struct berval ni_pam_pwdmgr_dn;
+	struct berval ni_pam_pwdmgr_pwd;
 } nssov_info;
 
 #define NI_PAM_USERHOST		1	/* old style host checking */

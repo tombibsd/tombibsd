@@ -66,7 +66,6 @@
 #define LINUX_EPIPE		32
 #define LINUX_EDOM		33
 #define LINUX_ERANGE		34
-#define LINUX_EDEADLK		35
 
 
 /* Error numbers after here vary wildly    */

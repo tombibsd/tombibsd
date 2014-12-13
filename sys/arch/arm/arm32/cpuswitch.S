@@ -139,7 +139,7 @@ ENTRY(cpu_switchto)
 #ifdef TPIDRPRW_IS_CURCPU
 	GET_CURCPU(r3)
 #elif defined(TPIDRPRW_IS_CURLWP)
-	mcr	p15, 0, r0, c13, c0, 4		/* get old lwp (r4 maybe 0) */
+	mrc	p15, 0, r0, c13, c0, 4		/* get old lwp (r4 maybe 0) */
 	ldr	r3, [r0, #(L_CPU)]		/* get cpu from old lwp */
 #elif !defined(MULTIPROCESSOR) 
 	ldr	r3, [r6, #L_CPU]		/* get cpu from new lwp */
@@ -300,7 +300,7 @@ ENTRY(cpu_switchto)
 .Lswitch_return:
 	/* cpu_switchto returns the old lwp */
 	mov	r0, r4
-	/* lwp_trampoline expects new lwp as it's second argument */
+	/* lwp_trampoline expects new lwp as its second argument */
 	mov	r1, r6
 
 #ifdef _ARM_ARCH_7
@@ -413,7 +413,7 @@ ENTRY_NP(softint_switch)
 
 	/*
 	 * Normally, we'd get {r8-r13} but since this is a softint lwp
-	 * it's existing state doesn't matter.  We start the stack just
+	 * its existing state doesn't matter.  We start the stack just
 	 * below the trapframe.
 	 */
 	ldr	sp, [r5, #(L_MD_TF)]	/* get new lwp's stack ptr */

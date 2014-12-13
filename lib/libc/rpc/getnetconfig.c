@@ -449,7 +449,7 @@ getnetconfigent(const char *netid)
 			return(NULL);
 	}
 
-	if ((file = fopen(NETCONFIG, "r")) == NULL)
+	if ((file = fopen(NETCONFIG, "re")) == NULL)
 	    return (NULL);
 
 	if ((linep = malloc(MAXNETCONFIGLINE)) == NULL) {
