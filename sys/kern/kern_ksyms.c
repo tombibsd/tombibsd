@@ -878,7 +878,7 @@ ksyms_hdr_init(void *hdraddr)
 
 	uint32_t offs = 1;
 	/* First section header ".note.netbsd.ident" */
-	ksyms_hdr.kh_shdr[SHNOTE].sh_name = offs; /* Section 6 offset */
+	ksyms_hdr.kh_shdr[SHNOTE].sh_name = offs;
 	ksyms_hdr.kh_shdr[SHNOTE].sh_type = SHT_NOTE;
 	ksyms_hdr.kh_shdr[SHNOTE].sh_offset = 
 	    offsetof(struct ksyms_hdr, kh_note[0]);
@@ -892,7 +892,7 @@ ksyms_hdr_init(void *hdraddr)
 	ksyms_hdr.kh_shdr[SYMTAB].sh_type = SHT_SYMTAB;
 	ksyms_hdr.kh_shdr[SYMTAB].sh_offset = sizeof(struct ksyms_hdr);
 /*	ksyms_hdr.kh_shdr[SYMTAB].sh_size = filled in at open */
-	ksyms_hdr.kh_shdr[SYMTAB].sh_link = 2; /* Corresponding strtab */
+	ksyms_hdr.kh_shdr[SYMTAB].sh_link = STRTAB; /* Corresponding strtab */
 	ksyms_hdr.kh_shdr[SYMTAB].sh_addralign = sizeof(long);
 	ksyms_hdr.kh_shdr[SYMTAB].sh_entsize = sizeof(Elf_Sym);
 	SHTCOPY(".symtab");

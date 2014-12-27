@@ -43,7 +43,7 @@
 #define	UFS_EXTATTR_FSROOTSUBDIR	".attribute"
 #define	UFS_EXTATTR_SUBDIR_SYSTEM	"system"
 #define	UFS_EXTATTR_SUBDIR_USER		"user"
-#define	UFS_EXTATTR_MAXEXTATTRNAME	65	/* including null */
+#define	UFS_EXTATTR_MAXEXTATTRNAME	256	/* including null */
 
 #define	UFS_EXTATTR_ATTR_FLAG_INUSE	0x00000001	/* attr has been set */
 #define	UFS_EXTATTR_PERM_KERNEL		0x00000000

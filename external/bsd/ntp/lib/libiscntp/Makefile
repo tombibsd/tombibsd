@@ -35,6 +35,7 @@ SRCS=   assertions.c               \
         ondestroy.c                \
         random.c                   \
         result.c                   \
+	sha1.c			   \
         stdio.c                    \
         stdtime.c                  \
         strerror.c                 \

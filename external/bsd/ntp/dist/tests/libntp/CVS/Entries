@@ -1,5 +1,5 @@
-/Makefile.am/1.1.1.1/Fri Dec 27 23:31:38 2013/-kk/
-/Makefile.in/1.1.1.1/Fri Dec 27 23:31:38 2013/-kk/
+/Makefile.am/1.1.1.2/Sat Dec 27 03:33:46 2014/-kk/
+/Makefile.in/1.1.1.2/Sat Dec 27 03:33:46 2014/-kk/
 /a_md5encrypt.cpp/1.1.1.1/Fri Dec 27 23:31:38 2013/-kk/
 /atoint.cpp/1.1.1.1/Fri Dec 27 23:31:38 2013/-kk/
 /atouint.cpp/1.1.1.1/Fri Dec 27 23:31:38 2013/-kk/
@@ -14,10 +14,11 @@
 /hextoint.cpp/1.1.1.1/Fri Dec 27 23:31:38 2013/-kk/
 /hextolfp.cpp/1.1.1.1/Fri Dec 27 23:31:38 2013/-kk/
 /humandate.cpp/1.1.1.1/Fri Dec 27 23:31:38 2013/-kk/
-/lfptest.h/1.1.1.1/Fri Dec 27 23:31:38 2013/-kk/
+/lfpfunc.cpp/1.1.1.1/Fri Dec 19 20:37:49 2014/-kk/
+/lfptest.h/1.2/Sat Dec 27 03:33:46 2014/-kk/
 /lfptostr.cpp/1.1.1.1/Fri Dec 27 23:31:38 2013/-kk/
 /libntptest.cpp/1.1.1.1/Fri Dec 27 23:31:38 2013/-kk/
-/libntptest.h/1.1.1.1/Fri Dec 27 23:31:38 2013/-kk/
+/libntptest.h/1.2/Sat Dec 27 03:33:46 2014/-kk/
 /modetoa.cpp/1.1.1.1/Fri Dec 27 23:31:38 2013/-kk/
 /msyslog.cpp/1.1.1.1/Fri Dec 27 23:31:38 2013/-kk/
 /netof.cpp/1.1.1.1/Fri Dec 27 23:31:38 2013/-kk/
@@ -28,17 +29,18 @@
 /recvbuff.cpp/1.1.1.1/Fri Dec 27 23:31:38 2013/-kk/
 /refnumtoa.cpp/1.1.1.1/Fri Dec 27 23:31:38 2013/-kk/
 /sfptostr.cpp/1.1.1.1/Fri Dec 27 23:31:38 2013/-kk/
-/sockaddrtest.h/1.1.1.1/Fri Dec 27 23:31:38 2013/-kk/
+/sockaddrtest.h/1.2/Sat Dec 27 03:33:46 2014/-kk/
 /socktoa.cpp/1.1.1.1/Fri Dec 27 23:31:39 2013/-kk/
 /ssl_init.cpp/1.1.1.1/Fri Dec 27 23:31:38 2013/-kk/
 /statestr.cpp/1.1.1.1/Fri Dec 27 23:31:38 2013/-kk/
 /strtolfp.cpp/1.1.1.1/Fri Dec 27 23:31:38 2013/-kk/
 /timespecops.cpp/1.1.1.1/Fri Dec 27 23:31:38 2013/-kk/
 /timestructs.cpp/1.1.1.1/Fri Dec 27 23:31:38 2013/-kk/
-/timestructs.h/1.1.1.1/Fri Dec 27 23:31:39 2013/-kk/
+/timestructs.h/1.2/Sat Dec 27 03:33:46 2014/-kk/
 /timevalops.cpp/1.1.1.1/Fri Dec 27 23:31:39 2013/-kk/
 /tstotv.cpp/1.1.1.1/Fri Dec 27 23:31:38 2013/-kk/
 /tvtots.cpp/1.1.1.1/Fri Dec 27 23:31:38 2013/-kk/
 /uglydate.cpp/1.1.1.1/Fri Dec 27 23:31:38 2013/-kk/
+/vi64ops.cpp/1.1.1.1/Fri Dec 19 20:37:49 2014/-kk/
 /ymd2yd.cpp/1.1.1.1/Fri Dec 27 23:31:38 2013/-kk/
 D

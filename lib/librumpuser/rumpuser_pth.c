@@ -104,6 +104,17 @@ __dead void
 rumpuser_thread_exit(void)
 {
 
+	/*
+	 * FIXXXME: with glibc on ARM pthread_exit() aborts because
+	 * it fails to unwind the stack.  In the typical case, only
+	 * the mountroothook thread will exit and even that's
+	 * conditional on vfs being present.
+	 */
+#if (defined(__ARMEL__) || defined(__ARMEB__)) && defined(__GLIBC__)
+	for (;;)
+		pause();
+#endif
+
 	pthread_exit(NULL);
 }
 

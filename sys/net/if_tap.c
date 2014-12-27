@@ -341,10 +341,10 @@ tap_attach(device_t parent, device_t self, void *aux)
 
 	sc->sc_ec.ec_capabilities = ETHERCAP_VLAN_MTU | ETHERCAP_JUMBO_MTU;
 
-	/* Those steps are mandatory for an Ethernet driver, the fisrt call
-	 * being common to all network interface drivers. */
-	if_attach(ifp);
+	/* Those steps are mandatory for an Ethernet driver. */
+	if_initialize(ifp);
 	ether_ifattach(ifp, enaddr);
+	if_register(ifp);
 
 #if defined(COMPAT_40) || defined(MODULAR)
 	/*

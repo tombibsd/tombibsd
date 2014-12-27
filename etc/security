@@ -67,9 +67,9 @@ CHANGEFILES=changefiles.$$
 SPECIALSPEC=specialspec.$$
 
 if [ -n "${pkgdb_dir}" ]; then
-    echo "WARNING: Setting pkgdb_dir in security.conf(5) is deprecated"
-    echo "WARNING: Please define PKG_DBDIR in pkg_install.conf(5) instead"
-    _compat_K_flag="-K ${pkgdb_dir}"
+	echo "WARNING: Setting pkgdb_dir in security.conf(5) is deprecated"
+	echo "WARNING: Please define PKG_DBDIR in pkg_install.conf(5) instead"
+	_compat_K_flag="-K ${pkgdb_dir}"
 fi
 
 . /etc/security.subr

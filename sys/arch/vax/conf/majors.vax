@@ -84,6 +84,7 @@ device-major	wsfont		char 80			wsfont
 device-major	ses		char 81			ses
 
 device-major	nsmb		char 98			nsmb
+device-major	audio		char 99			audio
 
 #
 # block-device-only devices

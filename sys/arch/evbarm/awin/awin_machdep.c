@@ -318,6 +318,16 @@ static const struct pmap_devmap devmap[] = {
 		.pd_prot = VM_PROT_READ|VM_PROT_WRITE,
 		.pd_cache = PTE_NOCACHE
 	},
+	{
+		/*
+		 * A80 CPUCFG
+		 */
+		.pd_va = _A(AWIN_A80_RCPUCFG_VBASE),
+		.pd_pa = _A(AWIN_A80_RCPUCFG_PBASE),
+		.pd_size = _S(AWIN_A80_RCPUCFG_SIZE),
+		.pd_prot = VM_PROT_READ|VM_PROT_WRITE,
+		.pd_cache = PTE_NOCACHE
+	},
 #endif
 	{
 		/*

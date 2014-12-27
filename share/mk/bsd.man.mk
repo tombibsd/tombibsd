@@ -9,6 +9,17 @@
 .PHONY:		lintmanpages
 realinstall:	${MANINSTALL}
 
+# If our install destination is case-preserving, but case-insensitive
+# then we do filesystem comparisons in lower case to make sure that
+# we always refresh the target when needed. In general we don't
+# want to do this, otherwise things like _exit.2 -> _Exit.2 get
+# installed on each build even when they don't need to. Note that
+# the CASE_INSENSITIVE_DEST macro is currently not defined anywhere,
+# and the expansion does not really work because of make(1).
+.if defined(CASE_INSENSITIVE_DEST)
+_FLATTEN?=tl:
+.endif
+
 ##### Default values
 .if ${USETOOLS} == "yes"
 TMACDEPDIR?=	${TOOLDIR}/share/groff/tmac
@@ -109,7 +120,7 @@ _t:=${DESTDIR}${MANDIR}/man${_dst:T:E}${MANSUBDIR}/${_dst}${MANSUFFIX}
 
 # Handle case conflicts carefully, when _dst occurs
 # more than once after case flattening
-.if ${MKUPDATE} == "no" || ${MLINKS:tl:M${_dst:tl:Q}:[\#]} > 1
+.if ${MKUPDATE} == "no" || ${MLINKS:${_FLATTEN}M${_dst:${_FLATTEN}Q}:[\#]} > 1
 ${_t}!		${_l} __linkinstallpage
 .else
 ${_t}:		${_l} __linkinstallpage
@@ -177,7 +188,7 @@ _t:=${DESTDIR}${MANDIR}/cat${_dst:T:E}${MANSUBDIR}/${_dst:R}.0${MANSUFFIX}
 
 # Handle case conflicts carefully, when _dst occurs
 # more than once after case flattening
-.if ${MKUPDATE} == "no" || ${MLINKS:tl:M${_dst:tl:Q}:[\#]} > 1
+.if ${MKUPDATE} == "no" || ${MLINKS:${_FLATTEN}M${_dst:${_FLATTEN}Q}:[\#]} > 1
 ${_t}!		${_l} __linkinstallpage
 .else
 ${_t}:		${_l} __linkinstallpage
@@ -249,7 +260,7 @@ _t:=${HTMLDIR}/html${_dst:T:E}${MANSUBDIR}/${_dst:R:S-/index$-/x&-}.html
 
 # Handle case conflicts carefully, when _dst occurs
 # more than once after case flattening
-.if ${MKUPDATE} == "no" || ${MLINKS:tl:M${_dst:tl:Q}:[\#]} > 1
+.if ${MKUPDATE} == "no" || ${MLINKS:${_FLATTEN}M${_dst:${_FLATTEN}Q}:[\#]} > 1
 ${_t}!		${_l} __linkinstallpage
 .else
 ${_t}:		${_l} __linkinstallpage

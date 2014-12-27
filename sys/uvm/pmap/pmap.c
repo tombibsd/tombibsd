@@ -511,6 +511,11 @@ pmap_create(void)
 
 	pmap_segtab_init(pmap);
 
+#ifdef MULTIPROCESSOR
+	kcpuset_create(&pmap->pm_active, true);
+	kcpuset_create(&pmap->pm_onproc, true);
+#endif
+
 	UVMHIST_LOG(pmaphist, "<- pmap %p", pmap,0,0,0);
 	return pmap;
 }

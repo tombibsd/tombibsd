@@ -5,7 +5,10 @@
 
 .if ${MKSHARE} != "no"
 SUBDIR=	man0 man1 man2 man3 man3lua man4 man5 man6 man7 man8 man9 man9lua
+
+.if ${MKRUMP} != "no"
 SUBDIR+=${.CURDIR}/../../sys/rump/share/man
+.endif
 
 WHATISDBDIR?=	/usr/share/man
 

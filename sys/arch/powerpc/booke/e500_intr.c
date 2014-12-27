@@ -713,8 +713,10 @@ e500_intr_cpu_establish(struct cpu_info *ci, int irq, int ipl, int ist,
 
 	struct intr_source * const is = &e500_intr_sources[ii.irq_vector];
 	mutex_enter(&e500_intr_lock);
-	if (is->is_ipl != IPL_NONE)
+	if (is->is_ipl != IPL_NONE) {
+		mutex_exit(&e500_intr_lock);
 		return NULL;
+	}
 
 	is->is_func = handler;
 	is->is_arg = arg;

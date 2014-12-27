@@ -1,8 +1,7 @@
-/Makefile.in/1.1.1.1/Fri Dec 27 23:31:31 2013/-kk/
-/evdns.h/1.1.1.1/Fri Dec 27 23:31:31 2013/-kk/
-/event.h/1.1.1.1/Fri Dec 27 23:31:31 2013/-kk/
-/evhttp.h/1.1.1.1/Fri Dec 27 23:31:31 2013/-kk/
-/evrpc.h/1.1.1.1/Fri Dec 27 23:31:31 2013/-kk/
-/evutil.h/1.1.1.1/Fri Dec 27 23:31:31 2013/-kk/
-/include.am/1.1.1.1/Fri Dec 27 23:31:31 2013/-kk/
+/evdns.h/1.2/Sat Dec 27 03:33:46 2014/-kk/
+/event.h/1.2/Sat Dec 27 03:33:46 2014/-kk/
+/evhttp.h/1.2/Sat Dec 27 03:33:46 2014/-kk/
+/evrpc.h/1.2/Sat Dec 27 03:33:46 2014/-kk/
+/evutil.h/1.2/Sat Dec 27 03:33:46 2014/-kk/
+/include.am/1.1.1.2/Sat Dec 27 03:33:46 2014/-kk/
 D/event2////

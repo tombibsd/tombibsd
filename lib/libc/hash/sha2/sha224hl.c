@@ -1,4 +1,4 @@
-/* $NetBSD */
+/* $NetBSD$ */
 
 /*
  * Derived from code written by Jason R. Thorpe <thorpej@NetBSD.org>,

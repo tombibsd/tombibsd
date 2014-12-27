@@ -4,20 +4,12 @@
 #	rc
 #
 
-# XXX Don't hard-code
-rc_generated_scripts_mkx11="
-xdm
-xfs
-"
-
-# XXX Don't hard-code
+# XXX Generate these from ../../distrib/sets/lists
 rc_644_files="
 rc
 rc rc.subr
 rc.shutdown
 "
-
-# XXX Don't hard-code
 rc_555_files="
 DAEMON
 DISKS
@@ -134,8 +126,6 @@ ypbind
 yppasswdd
 ypserv
 "
-
-# XXX Don't hard-code
 rc_obsolete_files="
 NETWORK
 btattach
@@ -158,8 +148,6 @@ portmap
 sunndd
 xntpd
 "
-
-# XXX Don't hard-code
 rc_obsolete_vars="
 amd
 amd_master

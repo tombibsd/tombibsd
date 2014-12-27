@@ -71,6 +71,8 @@ struct params {
 #define VERIFY_DISKLABEL	0x2
 #define VERIFY_FFS		0x3
 #define VERIFY_REENTER		0x4
+#define VERIFY_MBR      	0x5
+#define VERIFY_GPT      	0x6
 
 __BEGIN_DECLS
 struct params	*params_new(void);

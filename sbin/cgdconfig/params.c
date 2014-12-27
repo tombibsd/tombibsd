@@ -268,6 +268,10 @@ params_verify_method(string_t *in)
 		p->verify_method = VERIFY_FFS;
 	if (!strcmp("re-enter", vm))
 		p->verify_method = VERIFY_REENTER;
+	if (!strcmp("mbr", vm))
+		p->verify_method = VERIFY_MBR;
+	if (!strcmp("gpt", vm))
+		p->verify_method = VERIFY_GPT;
 
 	string_free(in);
 
@@ -764,6 +768,12 @@ params_fput(struct params *p, FILE *f)
 		break;
 	case VERIFY_REENTER:
 		print_kvpair_cstr(f, ts, "verify_method", "re-enter");
+		break;
+	case VERIFY_MBR:
+		print_kvpair_cstr(f, ts, "verify_method", "mbr");
+		break;
+	case VERIFY_GPT:
+		print_kvpair_cstr(f, ts, "verify_method", "gpt");
 		break;
 	default:
 		warnx("unsupported verify_method (%d)", p->verify_method);

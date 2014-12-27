@@ -48,6 +48,7 @@ mstolfp.c \
 msyslog.c \
 netof.c \
 ntp_calendar.c \
+ntp_crypto_rnd.c \
 ntp_intres.c \
 ntp_libopts.c \
 ntp_lineedit.c \
@@ -71,6 +72,7 @@ syssignal.c \
 systime.c \
 timetoa.c \
 uglydate.c \
+vint64ops.c \
 work_fork.c \
 work_thread.c \
 ymd2yd.c

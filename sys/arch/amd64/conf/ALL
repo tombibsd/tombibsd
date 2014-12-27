@@ -2157,6 +2157,7 @@ options SMB_VNODE_DEBUG
 options SNAPPER_DEBUG
 options SNDEBUG
 options SOCKBUF_DEBUG
+options SOFTINT_INTR
 options SONIC_DEBUG
 options SPARC_PCI_DEBUG
 options SPC_DEBUG

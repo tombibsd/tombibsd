@@ -361,6 +361,7 @@ slide*  at	pci? dev ? function ?		# Symphony Labs IDE controllers
 viaide* at	pci? dev ? function ?		# VIA/AMD/Nvidia IDE controllers
 pcn*	at	pci? dev ? function ?		# AMD PCnet-PCI Ethernet
 pcscp*	at	pci? dev ? function ?		# AMD Am53c974 PCscsi-PCI
+pm2fb*	at	pci? dev ? function ?		# 3Dlabs Permedia 2 Graphics
 ppb*	at	pci? dev ? function ?		# PCI-PCI Bridges
 puc*	at 	pci? dev ? function ?		# PCI "universal" comm. cards
 radeonfb* at	pci? dev ? function ?		# ATI/AMD Radeon Graphics

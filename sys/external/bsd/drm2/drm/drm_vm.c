@@ -59,7 +59,7 @@ drm_mmap_object(struct drm_device *dev, off_t offset, size_t size, int prot,
 	 * access checks; offset does not become a base address for the
 	 * subsequent uvm_map, hence we set *uoffsetp to offset, not 0.
 	 */
-	uobj = udv_attach(&devno, prot, offset, size);
+	uobj = udv_attach(devno, prot, offset, size);
 	if (uobj == NULL)
 		return -EINVAL;
 

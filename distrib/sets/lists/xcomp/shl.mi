@@ -52,7 +52,8 @@
 ./usr/X11R7/lib/libGL_pic.a				-unknown-	xorg,picinstall
 ./usr/X11R7/lib/libGLw_pic.a				-unknown-	xorg,picinstall
 ./usr/X11R7/lib/libICE_pic.a				-unknown-	xorg,picinstall
-./usr/X11R7/lib/libOSMesa_pic.a				-unknown-	xorg,picinstall
+./usr/X11R7/lib/libOSMesa_pic.a				-unknown-	obsolete
+./usr/X11R7/lib/libglapi_pic.a				-unknown-	xorg,picinstall
 ./usr/X11R7/lib/libSM_pic.a				-unknown-	xorg,picinstall
 ./usr/X11R7/lib/libX11-xcb_pic.a			-unknown-	xorg,picinstall
 ./usr/X11R7/lib/libX11_pic.a				-unknown-	xorg,picinstall

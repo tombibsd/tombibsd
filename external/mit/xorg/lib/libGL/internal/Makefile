@@ -4,7 +4,7 @@
 
 .PATH:		${X11SRCDIR.MesaLib}/include/GL/internal
 
-INCS=	dri_interface.h sarea.h
+INCS=	dri_interface.h
 INCSDIR=${X11INCDIR}/GL/internal
 
 NOOBJ=	# defined

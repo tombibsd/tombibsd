@@ -1,6 +1,6 @@
 #	$NetBSD$
 
-IMAGESIZE=	6m
+IMAGESIZE=	7m
 MAKEFS_FLAGS=   -o density=4k
 IMAGEENDIAN=	be
 MAKEDEVTARGETS=	floppy

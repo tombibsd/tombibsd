@@ -1,3 +1,3 @@
 #	$NetBSD$
 
-MESA_VER=	7.8.2
+MESA_VER=	10.3.5

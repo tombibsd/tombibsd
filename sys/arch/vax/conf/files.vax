@@ -315,6 +315,11 @@ device	dh # XXX?
 attach	dh at uba
 file	arch/vax/uba/dh.c		dh needs-flag
 
+# Vaxstation 4000 audio
+device	vsaudio: audiobus, am7930
+attach	vsaudio at vsbus
+file	arch/vax/vsa/vsaudio.c		vsaudio needs-flag
+
 # These are general files needed for compilation.
 file	dev/cons.c
 file	dev/cninit.c

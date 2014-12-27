@@ -1033,8 +1033,10 @@ addtag(sup su, const char *s, int where)
 int
 prefixlen(const char *s, struct sou *soup)
 {
-	int len = atoi(s), q, r;
-	int max;
+	int max, len = atoi(s);
+#ifdef INET6
+	int q, r;
+#endif
 
 	switch (af) {
 	case AF_INET:
@@ -1054,8 +1056,10 @@ prefixlen(const char *s, struct sou *soup)
 	if (len < -1 || len > max)
 		errx(EXIT_FAILURE, "%s: bad value", s);
 	
+#ifdef INET6
 	q = len >> 3;
 	r = len & 7;
+#endif
 	switch (af) {
 	case AF_INET:
 		memset(soup->so_mask, 0, sizeof(*soup->so_mask));
@@ -1266,7 +1270,7 @@ mask_addr(struct sou *soup)
 const char * const msgtypes[] = {
 	[RTM_ADD] = "RTM_ADD: Add Route",
 	[RTM_DELETE] = "RTM_DELETE: Delete Route",
-	[RTM_CHANGE] = "RTM_CHANGE: Change Metrics or flags",
+	[RTM_CHANGE] = "RTM_CHANGE: Change Metrics, Flags or Gateway",
 	[RTM_GET] = "RTM_GET: Report Metrics",
 	[RTM_LOSING] = "RTM_LOSING: Kernel Suspects Partitioning",
 	[RTM_REDIRECT] = "RTM_REDIRECT: Told to use different route",
