@@ -1,13 +1,12 @@
-/Makefile/1.1.1.1/Fri Dec 27 23:30:45 2013/-kk/
-/dir.h/1.1.1.2/Wed Jan  1 02:42:42 2014/-kk/
-/int.h/1.1.1.2/Wed Jan  1 02:42:42 2014/-kk/
-/keyboard.h/1.1.1.2/Wed Jan  1 02:42:42 2014/-kk/
-/net.h/1.1.1.2/Wed Jan  1 02:42:42 2014/-kk/
-/netdb.h/1.1.1.2/Wed Jan  1 02:42:42 2014/-kk/
-/offset.h/1.1.1.2/Wed Jan  1 02:42:42 2014/-kk/
-/stat.h/1.1.1.2/Wed Jan  1 02:42:42 2014/-kk/
-/stdtime.h/1.1.1.2/Wed Jan  1 02:42:42 2014/-kk/
-/strerror.h/1.1.1.2/Wed Jan  1 02:42:42 2014/-kk/
-/syslog.h/1.1.1.2/Wed Jan  1 02:42:42 2014/-kk/
-/time.h/1.1.1.2/Wed Jan  1 02:42:42 2014/-kk/
+/dir.h/1.2/Sat Dec 27 03:33:41 2014/-kk/
+/int.h/1.2/Sat Dec 27 03:33:41 2014/-kk/
+/keyboard.h/1.2/Sat Dec 27 03:33:41 2014/-kk/
+/net.h/1.2/Sat Dec 27 03:33:41 2014/-kk/
+/netdb.h/1.2/Sat Dec 27 03:33:41 2014/-kk/
+/offset.h/1.2/Sat Dec 27 03:33:41 2014/-kk/
+/stat.h/1.2/Sat Dec 27 03:33:41 2014/-kk/
+/stdtime.h/1.2/Sat Dec 27 03:33:41 2014/-kk/
+/strerror.h/1.2/Sat Dec 27 03:33:41 2014/-kk/
+/syslog.h/1.2/Sat Dec 27 03:33:41 2014/-kk/
+/time.h/1.2/Sat Dec 27 03:33:41 2014/-kk/
 D

@@ -8,7 +8,7 @@
 /cons.h/1.8/Tue Feb  8 20:20:10 2011/-kk/
 /cpu.c/1.7/Sun Jun 12 07:07:17 2011/-kk/
 /devopen.c/1.11/Wed Dec 19 13:53:47 2012/-kk/
-/fd.c/1.10/Thu Oct 14 06:39:52 2010/-kk/
+/fd.c/1.11/Sat Dec 27 03:35:30 2014/-kk/
 /filesystem.c/1.9/Mon Oct 18 17:56:40 2010/-kk/
 /inkernel.c/1.9/Wed Mar 18 10:22:27 2009/-kk/
 /io.c/1.7/Thu Oct 14 05:52:01 2010/-kk/
@@ -23,13 +23,13 @@
 /prf.c/1.10/Fri Feb 25 10:12:44 2011/-kk/
 /sd.c/1.4/Sat Jun 14 03:56:26 2014/-kk/
 /sdvar.h/1.1/Thu Oct 14 06:58:22 2010/-kk/
-/siop.c/1.4/Wed Jun 18 08:42:37 2014/-kk/
+/siop.c/1.5/Sat Dec 27 03:35:30 2014/-kk/
 /srt0.s/1.4/Fri Oct  3 09:25:32 2014/-kk/
 /tgets.c/1.8/Fri Feb 25 10:12:44 2011/-kk/
 /version/1.12/Wed Dec 19 13:53:47 2012/-kk/
 /vga.c/1.10/Wed Mar 18 10:22:27 2009/-kk/
 /video.c/1.7/Sun Dec 11 12:17:04 2005/-kk/
-/vreset.c/1.13/Fri Oct 15 20:01:03 2010/-kk/
+/vreset.c/1.14/Sat Dec 27 03:35:30 2014/-kk/
 /wd.c/1.2/Sun Jul 17 20:54:38 2011/-kk/
 /wdc.c/1.1/Thu Oct 14 06:50:43 2010/-kk/
 /wdvar.h/1.1/Thu Oct 14 06:50:43 2010/-kk/

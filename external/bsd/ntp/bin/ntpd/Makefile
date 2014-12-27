@@ -15,7 +15,7 @@ SRCS=	cmd_args.c				\
 	ntp_leapsec.c				\
 	ntp_loopfilter.c			\
 	ntp_monitor.c				\
-	ntp_parser.c				\
+	ntp_parser.y				\
 	ntp_peer.c				\
 	ntp_prio_q.c				\
 	ntp_proto.c				\
@@ -41,6 +41,7 @@ SRCS=	cmd_args.c				\
 	refclock_datum.c			\
 	refclock_dumbclock.c			\
 	refclock_fg.c				\
+	refclock_gpsdjson.c			\
 	refclock_gpsvme.c			\
 	refclock_heath.c			\
 	refclock_hopfpci.c			\
@@ -79,12 +80,9 @@ COPTS.ntp_control.c+=	${${ACTIVE_CC} == "gcc":? -Wno-format-nonliteral :}
 
 DIST=${IDIST}/ntpd
 
-CPPFLAGS+=-I${IDIST}/include -I${IDIST}/sntp/libopts -I${IDIST}/ntpd
+CPPFLAGS+=-I${IDIST}/include -I${IDIST}/sntp/libopts -I${IDIST}/ntpd -I.
 
 .PATH: ${DIST}
+YHEADER=1
 
 .include <bsd.prog.mk>
-
-# kill default .y.c rule - to rebuild ntp_parser.c we need bison which is not part of the toolchain
-.y.c:
-

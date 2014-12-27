@@ -1,20 +1,2 @@
-/Makefile/1.18/Mon Nov 22 21:05:30 2010/-kk/
-/dri.mk/1.13/Sun Jul 20 13:25:15 2014/-kk/
-D/i810////
-D/i915////
-D/i965////
-D/libmesa////
-D/mach64////
-D/mga////
-D/r128////
-D/r200////
-D/r300////
-D/r600////
-D/radeon////
-D/s3v////
-D/savage////
-D/sis////
-D/swrast////
-D/tdfx////
-D/trident////
-D/unichrome////
+/Makefile/1.22/Sat Dec 27 03:34:44 2014/-kk/
+D

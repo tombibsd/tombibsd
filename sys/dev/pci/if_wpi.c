@@ -3170,6 +3170,7 @@ wpi_init(struct ifnet *ifp)
 	if (wpi_getrfkill(sc)) {
 		aprint_error_dev(sc->sc_dev,
 		    "radio is disabled by hardware switch\n");
+		ifp->if_flags &= ~IFF_UP;
 		error = EBUSY;
 		goto fail1;
 	}

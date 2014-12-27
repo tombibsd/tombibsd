@@ -155,15 +155,6 @@ __libc_static_tls_setup(void)
 	struct tls_tcb *tcb;
 
 	if (&rtld_DYNAMIC != NULL) {
-#ifdef __powerpc__
-		/*
-		 * Old powerpc crt0's are going to overwrite r2 so we need to
-		 * restore it but only do so if the saved value isn't NULL (if
-		 * it is NULL, ld.elf_so doesn't have the matching change).
-		 */
-		if ((tcb = _lwp_getprivate()) != NULL)
-			__lwp_settcb(tcb);
-#endif
 		return;
 	}
 

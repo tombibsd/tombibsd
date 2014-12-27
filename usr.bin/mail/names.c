@@ -254,6 +254,9 @@ outof(struct name *names, FILE *fo, struct header *hp)
 	int ispipe;
 	char tempname[PATHSIZE];
 
+	if (value("expandaddr") == NULL)
+		return names;
+
 	begin = names;
 	np = names;
 	(void)time(&now);
@@ -532,7 +535,7 @@ count(struct name *np)
  * Return an error if the name list won't fit.
  */
 PUBLIC const char **
-unpack(struct name *np)
+unpack(struct name *smopts, struct name *np)
 {
 	const char **ap, **begin;
 	struct name *n;
@@ -547,7 +550,7 @@ unpack(struct name *np)
 	 * the terminating 0 pointer.  Additional spots may be needed
 	 * to pass along -f to the host mailer.
 	 */
-	extra = 2;
+	extra = 3 * count(smopts);
 	extra++;
 	metoo = value(ENAME_METOO) != NULL;
 	if (metoo)
@@ -563,6 +566,10 @@ unpack(struct name *np)
 		*ap++ = "-m";
 	if (verbose)
 		*ap++ = "-v";
+	for (/*EMPTY*/; smopts != NULL; smopts = smopts->n_flink)
+		if ((smopts->n_type & GDEL) == 0)
+			*ap++ = smopts->n_name;
+	*ap++ = "--";
 	for (/*EMPTY*/; n != NULL; n = n->n_flink)
 		if ((n->n_type & GDEL) == 0)
 			*ap++ = n->n_name;

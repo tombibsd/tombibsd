@@ -164,6 +164,8 @@ static bozo_content_map_t static_content_map[] = {
 	{ ".mpeg",	5, "video/mpeg",		"",		"", NULL },
 	{ ".mpg",	4, "video/mpeg",		"",		"", NULL },
 	{ ".mpe",	4, "video/mpeg",		"",		"", NULL },
+	{ ".ts",	4, "video/mpeg",		"",		"", NULL },
+	{ ".vob",	4, "video/mpeg",		"",		"", NULL },
 	{ ".mp4",	4, "video/mp4",			"",		"", NULL },
 	{ ".qt",	3, "video/quicktime",		"",		"", NULL },
 	{ ".mov",	4, "video/quicktime",		"",		"", NULL },

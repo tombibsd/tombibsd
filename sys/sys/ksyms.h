@@ -58,13 +58,13 @@ struct ksyms_symtab {
  * Static allocated ELF header.
  * Basic info is filled in at attach, sizes at open.
  */
-#define	SHNOTE		0
-#define	SYMTAB		1
-#define	STRTAB		2
-#define	SHSTRTAB	3
-#define	SHBSS		4
-#define	SHCTF		5
-#define NSECHDR		6
+#define	SHNOTE		1
+#define	SYMTAB		2
+#define	STRTAB		3
+#define	SHSTRTAB	4
+#define	SHBSS		5
+#define	SHCTF		6
+#define	NSECHDR		7
 
 #define	NPRGHDR		1
 #define	SHSTRSIZ	64

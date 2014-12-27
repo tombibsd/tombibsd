@@ -11,7 +11,6 @@ KMOD=	compat
 # the symbols available for other emulations.  So include the source
 # files but don't hook them in via compat_modcmd().
 #
-.if (${MACHINE_ARCH} != "x86_64")
 CPPFLAGS+=	-DCOMPAT_09
 CPPFLAGS+=	-DCOMPAT_10
 CPPFLAGS+=	-DCOMPAT_11
@@ -20,7 +19,6 @@ CPPFLAGS+=	-DCOMPAT_13
 CPPFLAGS+=	-DCOMPAT_14
 CPPFLAGS+=	-DCOMPAT_15
 CPPFLAGS+=	-DCOMPAT_16
-.endif
 
 CPPFLAGS+=	-DCOMPAT_20
 CPPFLAGS+=	-DCOMPAT_30 -DCOMPAT_40 -DCOMPAT_50

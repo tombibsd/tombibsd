@@ -48,7 +48,7 @@
 /ka88.c/1.18/Fri Apr 11 02:03:39 2014/-kk/
 /lock_stubs.S/1.18/Tue Dec 17 04:13:29 2013/-kk/
 /locore.c/1.82/Tue Jun  3 03:09:38 2014/-kk/
-/machdep.c/1.190/Fri Apr 11 02:03:39 2014/-kk/
+/machdep.c/1.191/Sat Dec 27 03:35:41 2014/-kk/
 /multicpu.c/1.33/Tue Jun  3 02:54:24 2014/-kk/
 /nmi_mainbus.c/1.11/Tue Dec 14 23:44:49 2010/-kk/
 /opcodes.c/1.2/Sat Mar 14 15:36:15 2009/-kk/

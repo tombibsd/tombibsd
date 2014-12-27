@@ -660,7 +660,7 @@ npf_conn_setpass(npf_conn_t *con, npf_rproc_t *rp)
 	 * If rproc is set, the caller transfers its reference to us,
 	 * which will be released on npf_conn_destroy().
 	 */
-	con->c_flags |= CONN_PASS;
+	atomic_or_uint(&con->c_flags, CONN_PASS);
 	con->c_rproc = rp;
 }
 
@@ -673,7 +673,7 @@ npf_conn_release(npf_conn_t *con)
 {
 	if ((con->c_flags & (CONN_ACTIVE | CONN_EXPIRE)) == 0) {
 		/* Activate: after this, connection is globally visible. */
-		con->c_flags |= CONN_ACTIVE;
+		atomic_or_uint(&con->c_flags, CONN_ACTIVE);
 	}
 	KASSERT(con->c_refcnt > 0);
 	atomic_dec_uint(&con->c_refcnt);

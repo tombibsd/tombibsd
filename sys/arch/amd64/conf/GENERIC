@@ -129,6 +129,16 @@ options 	COMPAT_LINUX32	# req. COMPAT_LINUX and COMPAT_NETBSD32
 options 	EXEC_ELF32
 options 	COMPAT_BSDPTY	# /dev/[pt]ty?? ptys.
 
+# The following options are for running i386 binaries for pre-1.6
+#options	EXEC_AOUT
+#options 	COMPAT_NOMID	# NetBSD 0.8, 386BSD, and BSDI
+#options 	COMPAT_09	# NetBSD 0.9,
+#options 	COMPAT_10	# NetBSD 1.0,
+#options 	COMPAT_11	# NetBSD 1.1,
+#options 	COMPAT_12	# NetBSD 1.2 (and 386BSD and BSDI),
+#options 	COMPAT_13	# NetBSD 1.3 (and 386BSD and BSDI),
+#options 	COMPAT_14	# NetBSD 1.4,
+
 # Wedge support
 options 	DKWEDGE_AUTODISCOVER	# Automatically add dk(4) instances
 options 	DKWEDGE_METHOD_GPT	# Supports GPT partitions as wedges
@@ -527,14 +537,12 @@ ld*	at iop? tid ?			# block devices
 #dpti*	at iop? tid 0			# DPT/Adaptec control interface
 
 # GPIO devices
-#gpio*		at gpiobus?
-#gpioow*	at gpio?
-#onewire*	at gpioow?
+gpio*		at gpiobus?
 
 # 1- Wire support
 #gpioow*	at gpio? offset ? mask ?	# 1-wire bitbanging via gpio
-#gpioow*	at gpio?
-#onewire*	at gpioow?
+gpioow*	at gpio?
+onewire*	at gpioow?
 
 # I2C support
 #gpioiic*	at gpio?

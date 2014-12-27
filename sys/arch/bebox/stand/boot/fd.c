@@ -297,7 +297,7 @@ fdstrategy(void *devdata, int func, daddr_t blk, size_t size, void *buf,
 	int ctlr = un->ctlr;
 	int unit = un->unit;
 	int *stat = un->stat;
-	long nblock, blknum;
+	long blknum;
 	int fd_skip = 0;
 	u_char *cbuf = (u_char *)buf;
 
@@ -306,7 +306,6 @@ fdstrategy(void *devdata, int func, daddr_t blk, size_t size, void *buf,
 	}
 	fdDriveStatus(ctlr, unit, 0, stat);
 
-	nblock = un->un_type->maxseccount;
 	sectrac = un->un_type->seccount;	/* sector per track */
 	*rsize = 0;
 

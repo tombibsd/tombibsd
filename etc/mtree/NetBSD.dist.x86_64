@@ -2,8 +2,11 @@
 
 ./lib/i386
 ./lib/i386/npf
+./usr/include/amd64
 ./usr/include/g++/bits/i386
 ./usr/include/g++/bits/x86_64
+./usr/include/i386
+./usr/include/x86
 ./usr/lib/i386
 ./usr/lib/i386/i18n
 ./usr/lib/i386/lua

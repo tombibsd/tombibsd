@@ -87,7 +87,7 @@ sent_pkt *	fam_listheads[2];
 
 static union {
 	struct pkt pkt;
-	char   buf[1500];
+	char   buf[LEN_PKT_NOMAC + NTP_MAXEXTEN + MAX_MAC_LEN];
 } rbuf;
 
 #define r_pkt  rbuf.pkt

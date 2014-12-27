@@ -49,7 +49,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/proc.h>
 
 #include <sys/bus.h>
-#include <machine/autoconf.h>
 #include <sys/cpu.h>
 
 #include <sys/audioio.h>

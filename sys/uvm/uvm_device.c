@@ -106,11 +106,10 @@ udv_init(void)
  */
 
 struct uvm_object *
-udv_attach(void *arg, vm_prot_t accessprot,
+udv_attach(dev_t device, vm_prot_t accessprot,
     voff_t off,		/* used only for access check */
     vsize_t size	/* used only for access check */)
 {
-	dev_t device = *((dev_t *)arg);
 	struct uvm_device *udv, *lcv;
 	const struct cdevsw *cdev;
 	dev_type_mmap((*mapfn));

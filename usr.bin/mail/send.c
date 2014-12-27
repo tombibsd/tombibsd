@@ -761,7 +761,7 @@ mail1(struct header *hp, int printheaders)
 				goto out;
 			}
 	}
-	namelist = unpack(cat(hp->h_smopts, to));
+	namelist = unpack(hp->h_smopts, to);
 	mail2(mtf, namelist);
  out:
 	(void)Fclose(mtf);

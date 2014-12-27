@@ -122,6 +122,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <machine/nexus.h>
 #include <machine/reg.h>
 #include <machine/scb.h>
+#include <machine/leds.h>
 #include <vax/vax/gencons.h>
 
 #ifdef DDB
@@ -132,7 +133,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include "smg.h"
 #include "ksyms.h"
-#include "leds.h"
 
 #define DEV_LEDS	13	/* minor device 13 is leds */
 

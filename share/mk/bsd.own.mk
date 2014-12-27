@@ -63,8 +63,7 @@ MKGCC?=		no
 
 # Platforms still using GCC 4.5
 .if \
-      ${MACHINE_CPU} == "m68k" || \
-      ${MACHINE_ARCH} == "powerpc"
+      ${MACHINE_CPU} == "m68k"
 HAVE_GCC?=    45
 
 .elif ${MACHINE} == "playstation2" || ${MACHINE_CPU} == "aarch64"
@@ -1268,8 +1267,9 @@ X11SRCDIR.${_proto}proto?=		${X11SRCDIRMIT}/${_proto}proto/dist
 	xtrans fontconfig expat freetype evieext mkfontscale bdftopcf \
 	xkbcomp xorg-cf-files imake xorg-server xbiff xkbdata xkeyboard-config \
 	xbitmaps appres xeyes xev xedit sessreg pixman \
-	beforelight bitmap editres makedepend fonttosfnt fslsfonts \
-	fstobdf MesaDemos MesaGLUT MesaLib ico iceauth lbxproxy listres lndir \
+	beforelight bitmap editres makedepend fonttosfnt fslsfonts fstobdf \
+	glu glw mesa-demos MesaDemos MesaGLUT MesaLib \
+	ico iceauth lbxproxy listres lndir \
 	luit xproxymanagementprotocol mkfontdir oclock proxymngr rgb \
 	setxkbmap smproxy twm viewres x11perf xauth xcalc xclipboard \
 	xclock xcmsdb xconsole xcutsel xditview xdpyinfo xdriinfo xdm \

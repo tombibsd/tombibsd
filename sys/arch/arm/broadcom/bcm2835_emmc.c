@@ -278,6 +278,7 @@ bcmemmc_xfer_data_dma(struct sdhc_softc *sdhc_sc, struct sdmmc_command *cmd)
 			if ((sc->sc_cblk[seg].cb_txfr_len & 0xf) == 0)
 				sc->sc_cblk[seg].cb_ti |= DMAC_TI_SRC_WIDTH;
 			sc->sc_cblk[seg].cb_ti |= DMAC_TI_DEST_DREQ;
+			sc->sc_cblk[seg].cb_ti |= DMAC_TI_WAIT_RESP;
 			sc->sc_cblk[seg].cb_source_ad =
 			    cmd->c_dmamap->dm_segs[seg].ds_addr;
 			sc->sc_cblk[seg].cb_dest_ad =
@@ -286,7 +287,6 @@ bcmemmc_xfer_data_dma(struct sdhc_softc *sdhc_sc, struct sdmmc_command *cmd)
 		}
 		sc->sc_cblk[seg].cb_stride = 0;
 		if (seg == cmd->c_dmamap->dm_nsegs - 1) {
-			sc->sc_cblk[seg].cb_ti |= DMAC_TI_WAIT_RESP;
 			sc->sc_cblk[seg].cb_ti |= DMAC_TI_INTEN;
 			sc->sc_cblk[seg].cb_nextconbk = 0;
 		} else {

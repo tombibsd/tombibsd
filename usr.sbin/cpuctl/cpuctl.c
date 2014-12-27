@@ -119,7 +119,7 @@ main(int argc, char **argv)
 	}
 
 	if (ct->label == NULL)
-		errx(EXIT_FAILURE, "unknown command ``%s''", argv[optind]);
+		errx(EXIT_FAILURE, "unknown command ``%s''", argv[0]);
 
 	close(fd);
 	exit(EXIT_SUCCESS);

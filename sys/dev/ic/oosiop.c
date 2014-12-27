@@ -306,7 +306,7 @@ oosiop_alloc_cb(struct oosiop_softc *sc, int ncb)
 			    err);
 			goto loop_fail2;
 		}
-		err = bus_dmamap_load(sc->sc_dmat, cb[i].xferdma, xfer,
+		err = bus_dmamap_load(sc->sc_dmat, cb[i].xferdma, &xfer[i],
 		    sizeof(struct oosiop_xfer), NULL, BUS_DMA_NOWAIT);
 		if (err) {
 			printf(": failed to load xfer block, err=%d\n", err);

@@ -58,12 +58,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 extern int coda_nc_initialized;    /* Set if cache has been initialized */
 
-#ifndef _KERNEL_OPT
-#define	NVCODA 4
-#else
-#include <vcoda.h>
-#endif
-
 #include <sys/param.h>
 #include <sys/systm.h>
 #include <sys/kernel.h>

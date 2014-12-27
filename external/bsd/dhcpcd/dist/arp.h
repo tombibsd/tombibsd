@@ -67,6 +67,7 @@ struct arp_state {
 };
 TAILQ_HEAD(arp_statehead, arp_state);
 
+#ifdef INET
 void arp_report_conflicted(const struct arp_state *, const struct arp_msg *);
 void arp_announce(struct arp_state *);
 void arp_probe(struct arp_state *);
@@ -75,4 +76,7 @@ void arp_cancel(struct arp_state *);
 void arp_free(struct arp_state *);
 void arp_free_but(struct arp_state *);
 void arp_close(struct interface *);
+#else
+#define arp_close(a)
+#endif
 #endif

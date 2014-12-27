@@ -47,7 +47,7 @@ typedef struct npf_connkey npf_connkey_t;
 #include <sys/rbtree.h>
 
 /*
- * See npf_conn_key() function for the description key layout.
+ * See npf_conn_conkey() function for the key layout description.
  */
 #define	NPF_CONN_NKEYWORDS	(2 + ((sizeof(npf_addr_t) * 2) >> 2))
 #define	NPF_CONN_MAXKEYLEN	(NPF_CONN_NKEYWORDS * sizeof(uint32_t))

@@ -130,6 +130,9 @@ attach	fd at fdc
 #
 # Compatibility modules
 #
+# Binary compatibility with previous NetBSD releases (COMPAT_XX)
+file	arch/amd64/amd64/compat_13_machdep.c	compat_13
+file	arch/amd64/amd64/compat_16_machdep.c	compat_16
 
 # NetBSD/i386 32-bit binary compatibility (COMPAT_NETBSD32)
 include "compat/netbsd32/files.netbsd32"

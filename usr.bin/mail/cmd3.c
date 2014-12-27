@@ -577,7 +577,7 @@ bounce(void *v)
 	if (hdr.h_to == NULL)
 		return 1;
 
-	smargs = unpack(hdr.h_to);
+	smargs = unpack(NULL, hdr.h_to);
 	for (ip = msgvec; *ip; ip++) {
 		int e;
 		if ((e = bounce_one(*ip, smargs, hdr.h_to)) != 0)

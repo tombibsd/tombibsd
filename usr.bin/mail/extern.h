@@ -224,7 +224,7 @@ struct name * extract(char [], int);
 struct name * gexpand(struct name *, struct grouphead *, int, int);
 struct name * nalloc(char [], int);
 struct name * outof(struct name *, FILE *, struct header *);
-const char ** unpack(struct name *);
+const char ** unpack(struct name *, struct name *);
 struct name * usermap(struct name *);
 #if 0
 void	prettyprint(struct name *);	/* commented out? */

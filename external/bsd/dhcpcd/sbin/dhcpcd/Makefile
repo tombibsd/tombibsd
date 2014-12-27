@@ -14,8 +14,11 @@ USE_FORT?=	yes	# network client (local server)
 
 SRCS+=		auth.c hmac_md5.c
 
+USE_INET?=	yes
+.if (${USE_INET} != "no")
 CPPFLAGS+=	-DINET
 SRCS+=		arp.c dhcp.c ipv4.c ipv4ll.c
+.endif
 
 .if (${USE_INET6} != "no")
 CPPFLAGS+=	-DINET6

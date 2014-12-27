@@ -46,10 +46,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <machine/specialreg.h>
 #include <x86/cpu_ucode.h>
 
-#define MSR_IA32_PLATFORM_ID 0x17
-#define MSR_IA32_BIOS_UPDT_TRIGGER 0x79
-#define MSR_IA32_BIOS_SIGN_ID 0x8b
-
 static void
 intel_getcurrentucode(uint32_t *ucodeversion, int *platformid)
 {
@@ -58,9 +54,9 @@ intel_getcurrentucode(uint32_t *ucodeversion, int *platformid)
 
 	kpreempt_disable();
 
-	wrmsr(MSR_IA32_BIOS_SIGN_ID, 0);
+	wrmsr(MSR_BIOS_SIGN, 0);
 	x86_cpuid(0, unneeded_ids);
-	msr = rdmsr(MSR_IA32_BIOS_SIGN_ID);
+	msr = rdmsr(MSR_BIOS_SIGN);
 	*ucodeversion = msr >> 32;
 
 	kpreempt_enable();
@@ -138,7 +134,7 @@ cpu_ucode_intel_apply(struct cpu_ucode_softc *sc, int cpuno)
 		kpreempt_enable();
 		return EEXIST; /* ??? */
 	}
-	wrmsr(MSR_IA32_BIOS_UPDT_TRIGGER, (uintptr_t)(sc->sc_blob) + 48);
+	wrmsr(MSR_BIOS_UPDT_TRIG, (uintptr_t)(sc->sc_blob) + 48);
 	intel_getcurrentucode(&nucodeversion, &platformid);
 
 	kpreempt_enable();

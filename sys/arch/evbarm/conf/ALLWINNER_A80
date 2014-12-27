@@ -180,7 +180,7 @@ config		netbsd		root on ? type ?
 mainbus0	at root
 
 # CPU
-#options 	MULTIPROCESSOR
+options 	MULTIPROCESSOR
 cpu*		at mainbus?
 
 # Specify the memory size in megabytes.

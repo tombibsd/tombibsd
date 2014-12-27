@@ -1836,9 +1836,10 @@ identifycpu(int fd, const char *cpuname)
 	aprint_normal(" (%s-class)", classnames[class]);
 
 	if (ci->ci_tsc_freq != 0)
-		aprint_normal(", %ju.%02ju MHz\n",
+		aprint_normal(", %ju.%02ju MHz",
 		    ((uintmax_t)ci->ci_tsc_freq + 4999) / 1000000,
 		    (((uintmax_t)ci->ci_tsc_freq + 4999) / 10000) % 100);
+	aprint_normal("\n");
 
 	aprint_normal_dev(ci->ci_dev, "family %#x model %#x stepping %#x",
 	    ci->ci_family, ci->ci_model, CPUID_TO_STEPPING(ci->ci_signature));
@@ -1994,6 +1995,8 @@ identifycpu(int fd, const char *cpuname)
 		ucode_64.loader_version = ucode.loader_version;
 		if (ioctl(fd, IOC_CPU_UCODE_GET_VERSION_64, &ucode_64) < 0)
 			return;
+#else
+		return;
 #endif
 	}
 

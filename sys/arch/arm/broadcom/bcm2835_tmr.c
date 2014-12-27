@@ -201,7 +201,8 @@ clockhandler(void *arg)
 	if (!(status & BCM2835_STIMER_M3))
 		return 0;
 
-	bus_space_write_4(sc->sc_iot, sc->sc_ioh, BCM2835_STIMER_CS, status);
+	bus_space_write_4(sc->sc_iot, sc->sc_ioh, BCM2835_STIMER_CS,
+	    BCM2835_STIMER_M3);
 
 	hardclock(frame);
 

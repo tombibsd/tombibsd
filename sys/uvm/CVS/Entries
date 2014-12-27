@@ -10,10 +10,10 @@
 /uvm_bio.c/1.82/Fri Oct  3 09:51:04 2014/-kk/
 /uvm_coredump.c/1.6/Tue Jan 14 16:05:14 2014/-kk/
 /uvm_ddb.h/1.15/Tue May 17 04:18:07 2011/-kk/
-/uvm_device.c/1.63/Fri Jan 27 19:48:41 2012/-kk/
-/uvm_device.h/1.12/Wed Feb  2 15:13:34 2011/-kk/
+/uvm_device.c/1.64/Sat Dec 27 03:35:55 2014/-kk/
+/uvm_device.h/1.13/Sat Dec 27 03:35:55 2014/-kk/
 /uvm_emap.c/1.11/Tue Dec  9 04:43:56 2014/-kk/
-/uvm_extern.h/1.191/Sun Jul 20 13:26:35 2014/-kk/
+/uvm_extern.h/1.192/Sat Dec 27 03:35:55 2014/-kk/
 /uvm_fault.c/1.196/Fri Oct  3 09:26:22 2014/-kk/
 /uvm_fault.h/1.20/Wed Feb  2 15:13:34 2011/-kk/
 /uvm_fault_i.h/1.28/Sun Feb 19 00:05:56 2012/-kk/
@@ -30,7 +30,7 @@
 /uvm_map.c/1.331/Tue Dec  9 04:16:23 2014/-kk/
 /uvm_map.h/1.72/Mon Oct 29 16:00:05 2012/-kk/
 /uvm_meter.c/1.65/Thu Dec 11 09:09:56 2014/-kk/
-/uvm_mmap.c/1.149/Fri Oct  3 09:51:04 2014/-kk/
+/uvm_mmap.c/1.150/Sat Dec 27 03:35:55 2014/-kk/
 /uvm_mremap.c/1.17/Sun Jun 12 03:36:03 2011/-kk/
 /uvm_object.c/1.12/Tue Mar 25 02:35:52 2014/-kk/
 /uvm_object.h/1.33/Fri Sep 14 22:20:50 2012/-kk/

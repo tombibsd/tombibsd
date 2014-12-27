@@ -106,19 +106,6 @@ cpu_exec_aout_makecmds(struct lwp *p, struct exec_package *e)
 }
 #endif
 
-#ifdef COMPAT_16
-/*
- * There is no NetBSD-1.6 compatibility for native code.
- * COMPAT_16 is useful for i386 emulation (COMPAT_NETBSD32) only.
- */
-int
-compat_16_sys___sigreturn14(struct lwp *l, const struct compat_16_sys___sigreturn14_args *uap, register_t *retval)
-{
-
-	return ENOSYS;
-}
-#endif
-
 void
 netbsd32_setregs(struct lwp *l, struct exec_package *pack, vaddr_t stack)
 {
@@ -953,12 +940,6 @@ netbsd32_vm_default_addr(struct proc *p, vaddr_t base, vsize_t sz)
 }
 
 #ifdef COMPAT_13
-int
-compat_13_sys_sigreturn(struct lwp *l, const struct compat_13_sys_sigreturn_args *uap, register_t *retval)
-{
-	return ENOSYS;
-}
-
 int
 compat_13_netbsd32_sigreturn(struct lwp *l, const struct compat_13_netbsd32_sigreturn_args *uap, register_t *retval)
 {

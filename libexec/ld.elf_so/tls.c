@@ -106,13 +106,6 @@ _rtld_tls_initial_allocation(void)
 	tcb = _rtld_tls_allocate_locked();
 #ifdef __HAVE___LWP_SETTCB
 	__lwp_settcb(tcb);
-#ifdef __powerpc__
-	/*
-	 * Save the tcb pointer so that libc can retrieve it.  Older
-	 * crt0 will obliterate r2 so there is code in libc to restore it.
-	 */
-	_lwp_setprivate(tcb);
-#endif
 #else
 	_lwp_setprivate(tcb);
 #endif
