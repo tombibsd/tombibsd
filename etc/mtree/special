@@ -231,6 +231,9 @@
 ./etc/printcap			type=file mode=0644
 ./etc/profile			type=file mode=0644
 ./etc/protocols			type=file mode=0644
+./etc/racoon			type=dir  mode=0755 optional
+./etc/racoon/racoon.conf	type=file mode=0644 optional
+./etc/racoon/psk.txt		type=file mode=0600 optional tags=nodiff
 ./etc/rbootd.conf		type=file mode=0644 optional
 ./etc/rc			type=file mode=0644
 ./etc/rc.conf			type=file mode=0644
@@ -420,10 +423,7 @@
 ./etc/weekly.d/whatisdb		type=file mode=0444
 ./etc/weekly.local		type=file mode=0644 optional
 ./etc/wscons.conf		type=file mode=0644
-
-./etc/racoon			type=dir  mode=0755 optional
-./etc/racoon/racoon.conf	type=file mode=0644 optional
-./etc/racoon/psk.txt		type=file mode=0600 optional tags=nodiff
+./etc/zfs			type=dir  mode=0755
 
 ./private			type=dir mode=0755 optional
 ./private/tmp			type=dir mode=0111 optional ignore
