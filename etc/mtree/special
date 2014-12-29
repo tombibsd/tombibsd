@@ -106,8 +106,8 @@
 ./etc/install.d/daily		type=file mode=0444
 ./etc/install.d/ddbonpanic	type=file mode=0444
 ./etc/install.d/defaults	type=file mode=0444
-./etc/install.d/dhcpd		type=file mode=0444
-./etc/install.d/dhcpdrundir	type=file mode=0444
+./etc/install.d/dhcpcd		type=file mode=0444
+./etc/install.d/dhcpcdrundir	type=file mode=0444
 ./etc/install.d/envsys		type=file mode=0444
 ./etc/install.d/fontconfig	type=file mode=0444 optional
 ./etc/install.d/gid		type=file mode=0444
