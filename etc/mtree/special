@@ -254,6 +254,7 @@
 ./etc/rc.d/devpubd		type=file mode=0555
 ./etc/rc.d/dhclient		type=file mode=0555
 ./etc/rc.d/dhcpcd		type=file mode=0555
+./etc/rc.d/dhcpd		type=file mode=0555
 ./etc/rc.d/dhcrelay		type=file mode=0555
 ./etc/rc.d/dmesg		type=file mode=0555
 ./etc/rc.d/downinterfaces	type=file mode=0555
