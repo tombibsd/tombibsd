@@ -89,7 +89,7 @@
 ./etc/ftpwelcome		type=file mode=0644 optional
 ./etc/gateways			type=file mode=0644 optional
 ./etc/gettytab			type=file mode=0644
-./etc/gpio.conf			type=file mode=644
+./etc/gpio.conf			type=file mode=0644
 ./etc/group			type=file mode=0644
 ./etc/hesiod.conf		type=file mode=0644 optional
 ./etc/hosts			type=file mode=0644
