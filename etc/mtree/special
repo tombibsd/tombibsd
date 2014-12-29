@@ -122,6 +122,7 @@
 ./etc/install.d/mtree		type=file mode=0444
 ./etc/install.d/named		type=file mode=0444
 ./etc/install.d/obsolete	type=file mode=0444
+./etc/install.d/obsolete_stand	type=file mode=0444
 ./etc/install.d/pam		type=file mode=0444
 ./etc/install.d/periodic	type=file mode=0444
 ./etc/install.d/pf		type=file mode=0444
@@ -281,6 +282,8 @@
 ./etc/rc.d/local		type=file mode=0555
 ./etc/rc.d/lpd			type=file mode=0555
 ./etc/rc.d/lvm			type=file mode=0555
+./etc/rc.d/makemandb		type=file mode=0555
+./etc/rc.d/mdnsd		type=file mode=0555
 ./etc/rc.d/mixerctl		type=file mode=0555
 ./etc/rc.d/mopd			type=file mode=0555
 ./etc/rc.d/motd			type=file mode=0555
@@ -354,6 +357,11 @@
 ./etc/resolv.conf		type=file mode=0644 optional
 ./etc/rpc			type=file mode=0644
 ./etc/rtadvd.conf		type=file mode=0644 optional
+./etc/saslc.d			type=dir  mode=0755
+./etc/saslc.d/postfix		type=dir  mode=0755
+./etc/saslc.d/postfix/mech	type=dir  mode=0755
+./etc/saslc.d/saslc		type=dir  mode=0755
+./etc/saslc.d/saslc/mech	type=dir  mode=0755
 ./etc/security			type=file mode=0644
 ./etc/security.conf		type=file mode=0644
 ./etc/security.d		type=dir  mode=0755
@@ -370,9 +378,9 @@
 ./etc/security.d/mtree		type=file mode=0444
 ./etc/security.d/nfs		type=file mode=0444
 ./etc/security.d/passwd		type=file mode=0444
-./etc/security.d/pkgs		type=file mode=0444
 ./etc/security.d/pkg_signatures		type=file mode=0444
 ./etc/security.d/pkg_vulnerabilities	type=file mode=0444
+./etc/security.d/pkgs		type=file mode=0444
 ./etc/security.d/rhosts		type=file mode=0444
 ./etc/security.d/rootdotfiles	type=file mode=0444
 ./etc/security.d/varmail	type=file mode=0444
