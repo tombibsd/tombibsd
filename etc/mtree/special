@@ -168,6 +168,7 @@
 ./etc/mrouted.conf		type=file mode=0644
 ./etc/mtree			type=dir  mode=0755
 ./etc/mtree/special		type=file mode=0444
+./etc/mtree/special.d		type=dir  mode=0755
 ./etc/mtree/special.local	type=file mode=0644 optional
 ./etc/mygate			type=file mode=0644 optional
 ./etc/mygate6			type=file mode=0644 optional

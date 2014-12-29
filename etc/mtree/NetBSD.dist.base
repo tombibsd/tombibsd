@@ -42,6 +42,7 @@
 ./etc/mail
 ./etc/monthly.d
 ./etc/mtree
+./etc/mtree/special.d
 ./etc/namedb
 ./etc/openldap
 ./etc/openssl

@@ -106,6 +106,7 @@
 ./etc/monthly.d					base-sys-root
 ./etc/mtree					base-sys-root
 ./etc/mtree/set.base				base-sys-root
+./etc/mtree/special.d				base-sys-root
 ./etc/namedb					base-bind-root
 ./etc/obsolete					base-obsolete		obsolete
 ./etc/openldap					base-ldap-root
