@@ -110,6 +110,9 @@ if checkyesno run_calendar; then
 	. /etc/daily.d/calendar
 fi
 
+echo ""
+echo "Checking subsystem status:"
+
 if checkyesno check_disks; then
 	. /etc/daily.d/disks
 fi

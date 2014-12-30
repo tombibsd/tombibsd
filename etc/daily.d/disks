@@ -10,18 +10,15 @@ if [ -s /etc/dumpdates ] ; then
 fi
 if [ -s $TMP -o -s $TMP2 ]; then
 	echo ""
-	echo "Checking subsystem status:"
-	echo ""
 	echo "disks:"
 	if [ -s $TMP ]; then
-		cat $TMP | sed 's/Mounted on/Mount/'
 		echo ""
+		cat $TMP | sed 's/Mounted on/Mount/'
 	fi
 	if [ -s $TMP2 ]; then
-		cat $TMP2
 		echo ""
+		cat $TMP2
 	fi
-	echo ""
 fi
 rm -f $TMP $TMP2
 touch $TMP2

@@ -2,6 +2,7 @@
 
 echo ""
 echo "network:"
+echo ""
 if checkyesno full_netstat; then
 	netstat -inv
 else
@@ -21,8 +22,8 @@ else
 		}
 	}'
 fi
-echo ""
 t=/var/rwho/*
 if [ "$t" != '/var/rwho/*' ]; then
+	echo ""
 	ruptime
 fi
