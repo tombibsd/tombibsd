@@ -5770,6 +5770,7 @@
 ./var/spool/sockets				base-sys-root
 ./var/spool/uucp				base-obsolete		obsolete
 ./var/spool/uucppublic				base-obsolete		obsolete
+./var/sysinst					base-sys-root
 ./var/tmp					base-sys-root
 ./var/tmp/vi.recover				base-util-root
 ./var/tpm					base-sys-root

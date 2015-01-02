@@ -1322,6 +1322,7 @@
 ./var/spool/postfix
 ./var/spool/postfix/etc
 ./var/spool/sockets		mode=0777
+./var/sysinst			mode=0770
 ./var/tmp			mode=01777
 ./var/tmp/vi.recover		mode=01777
 ./var/tpm			uname=_tss gname=_tss mode=0750
