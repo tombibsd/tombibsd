@@ -50,11 +50,11 @@ struct midi_info {
  *
  *	METHOD			INTR	NOTES
  *	----------------------- ------- -------------------------
- *	open 			-	
- *	close 			-	
- *	output 			-	
- *	getinfo 		-	Called at attach time
- *	ioctl 			-	
+ *	open 			held	
+ *	close 			held	
+ *	output 			held	
+ *	getinfo 		held	Called at attach time
+ *	ioctl 			held	
  *	get_locks 		-	Called at attach time
  */
 

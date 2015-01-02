@@ -52,8 +52,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <dev/auconv.h>
 #include <dev/usb/usbdevs.h>
 #include <dev/usb/uaudioreg.h>
-#include <dev/usb/umidireg.h>
-#include <dev/usb/umidivar.h>
 #include <dev/usb/umidi_quirks.h>
 
 /*

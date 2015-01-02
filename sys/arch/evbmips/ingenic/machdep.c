@@ -62,6 +62,8 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <mips/ingenic/ingenic_regs.h>
 #include <mips/ingenic/ingenic_var.h>
 
+#include "opt_ingenic.h"
+
 /* Maps for VM objects. */
 struct vm_map *phys_map = NULL;
 

@@ -344,7 +344,6 @@ bfs_file_rename(struct bfs *bfs, const char *from_name, const char *to_name)
 		goto out;
 	}
 
-	bfs_file_delete(bfs, to_name, false);
 	strncpy(dirent->name, to_name, BFS_FILENAME_MAXLEN);
 	bfs_writeback_dirent(bfs, dirent, false);
 

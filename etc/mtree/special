@@ -329,6 +329,11 @@
 ./etc/rc.d/routed		type=file mode=0555
 ./etc/rc.d/rpcbind		type=file mode=0555
 ./etc/rc.d/rtadvd		type=file mode=0555
+./etc/saslc.d			type=dir  mode=0755
+./etc/saslc.d/postfix		type=dir  mode=0755
+./etc/saslc.d/postfix/mech	type=dir  mode=0755
+./etc/saslc.d/saslc		type=dir  mode=0755
+./etc/saslc.d/saslc/mech	type=dir  mode=0755
 ./etc/rc.d/rtclocaltime		type=file mode=0555
 ./etc/rc.d/rwho			type=file mode=0555
 ./etc/rc.d/savecore		type=file mode=0555

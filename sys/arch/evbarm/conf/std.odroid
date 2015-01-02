@@ -8,7 +8,7 @@ include 	"arch/evbarm/conf/std.evbarm"
 # Pull in ODROID config definitions
 include 	"arch/evbarm/conf/files.odroid"
 
-#makeoptions	CPUFLAGS="-mcpu=cortex-a9 -mfpu=neon"
+makeoptions	CPUFLAGS="-march=armv7-a -mfpu=neon"
 
 # To support easy transit to ../arch/arm/arm32
 options 	MODULAR

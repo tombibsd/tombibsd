@@ -120,7 +120,7 @@ static	void	gpsd_control	(int, const struct refclockstat *,
 static	void	gpsd_timer	(int, peerT *);
 static  void    gpsd_clockstats (int, peerT *);
 
-static  int     myasprintf(char**, char const*, ...);
+static  int     myasprintf(char**, char const*, ...) __printflike(2, 3);
 
 struct refclock refclock_gpsdjson = {
 	gpsd_start,		/* start up driver */
@@ -856,7 +856,7 @@ process_tpv(
 	const char * gps_time;
 	int          gps_mode;
 	double       ept, epp, epx, epy, epv;
-	int          log2;
+	int          xlog2;
 
 	gps_mode = (int)json_object_lookup_int_default(
 		jctx, 0, "mode", 0);
@@ -922,9 +922,9 @@ process_tpv(
 	ept = min(ept, epp  );
 	ept = min(ept, 0.5  );
 	ept = max(ept, 1.0-9);
-	ept = frexp(ept, &log2);
+	ept = frexp(ept, &xlog2);
 
-	peer->precision = log2;
+	peer->precision = xlog2;
 }
 
 /* ------------------------------------------------------------------ */

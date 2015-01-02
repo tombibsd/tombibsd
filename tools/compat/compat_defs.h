@@ -77,6 +77,11 @@
 #undef __UNCONST
 #endif
 #define __UNCONST(a)   ((void *)(unsigned long)(const void *)(a))
+#ifdef __UNVOLATILE
+#undef __UNVOLATILE
+#endif
+#define __UNVOLATILE(a)        ((void *)(unsigned long)(volatile void *)(a))
+
 
 #undef __predict_false
 #define __predict_false(x) (x)

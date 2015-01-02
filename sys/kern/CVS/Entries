@@ -100,9 +100,9 @@
 /subr_debug.c/1.7/Wed Apr 30 20:20:53 2008/-kk/
 /subr_device.c/1.2/Sun Jan 31 15:10:12 2010/-kk/
 /subr_devsw.c/1.33/Fri Oct  3 09:51:00 2014/-kk/
-/subr_disk.c/1.103/Thu Oct 24 10:28:58 2013/-kk/
+/subr_disk.c/1.110/Fri Jan  2 11:21:47 2015/-kk/
 /subr_disk_mbr.c/1.46/Thu Oct 24 10:28:58 2013/-kk/
-/subr_disk_open.c/1.11/Sat Oct 27 17:18:39 2012/-kk/
+/subr_disk_open.c/1.12/Fri Jan  2 11:21:47 2015/-kk/
 /subr_evcnt.c/1.12/Sat Mar  1 06:05:14 2014/-kk/
 /subr_exec_fd.c/1.7/Fri Oct  3 09:51:00 2014/-kk/
 /subr_extent.c/1.76/Sun Jul 20 13:26:33 2014/-kk/
@@ -176,7 +176,7 @@
 /uipc_syscalls.c/1.173/Fri Oct  3 09:51:01 2014/-kk/
 /uipc_usrreq.c/1.172/Sun Oct 19 16:06:54 2014/-kk/
 /vfs_bio.c/1.252/Fri Oct  3 09:51:01 2014/-kk/
-/vfs_cache.c/1.102/Thu Dec 11 09:09:52 2014/-kk/
+/vfs_cache.c/1.103/Fri Jan  2 11:21:47 2015/-kk/
 /vfs_cwd.c/1.4/Tue Feb 15 15:54:28 2011/-kk/
 /vfs_dirhash.c/1.12/Fri Oct  3 09:51:01 2014/-kk/
 /vfs_getcwd.c/1.50/Thu Feb 13 15:36:02 2014/-kk/

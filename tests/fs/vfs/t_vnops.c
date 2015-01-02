@@ -932,9 +932,6 @@ lstat_symlink(const atf_tc_t *tc, const char *mp)
 
 	USES_SYMLINKS;
 
-	if (FSTYPE_V7FS(tc))
-		atf_tc_expect_fail("PR kern/48864");
-
 	FSTEST_ENTER();
 
 	src = "source";

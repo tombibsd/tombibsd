@@ -116,7 +116,7 @@ smbfs_getino(struct smbnode *dnp, const char *name, int nmlen)
 #endif
 	u_int32_t ino;
 
-	ino = dnp->n_ino + smbfs_hash(name, nmlen);
+	ino = dnp->n_ino + hash32_strn(name, nmlen, HASH32_STR_INIT);
 	if (ino <= 2)
 		ino += 3;
 	return ino;

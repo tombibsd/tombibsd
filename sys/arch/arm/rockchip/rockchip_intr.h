@@ -1,10 +1,11 @@
 /*	$NetBSD$	*/
-/*
- * Copyright (c) 2001 The NetBSD Foundation, Inc.
+
+/*-
+ * Copyright (c) 2014 The NetBSD Foundation, Inc.
  * All rights reserved.
  *
  * This code is derived from software contributed to The NetBSD Foundation
- * by Takuya SHIOZAKI (tshiozak@NetBSD.org).
+ * by Hiroshi Tokuda
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -28,52 +29,13 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-/* Jack Descriptor */
-#define UMIDI_MS_HEADER	0x01
-#define UMIDI_IN_JACK	0x02
-#define UMIDI_OUT_JACK	0x03
+#ifndef _ARM_ROCKCHIP_ROCKCHIP_INTR_H_
+#define _ARM_ROCKCHIP_ROCKCHIP_INTR_H_
 
-/* Jack Type */
-#define UMIDI_EMBEDDED	0x01
-#define UMIDI_EXTERNAL	0x02
+#define	PIC_MAXSOURCES		(32+128)
+#define	PIC_MAXMAXSOURCES	(PIC_MAXSOURCES+6*32)
 
-/* generic, for iteration */
-typedef struct {
-	uByte		bLength;
-	uByte		bDescriptorType;
-	uByte		bDescriptorSubtype;
-} UPACKED umidi_cs_descriptor_t;
+#include <arm/cortex/gic_intr.h>
+#include <arm/cortex/a9tmr_intr.h>      /* A9 Timer PPIs */
 
-typedef struct {
-	uByte		bLength;
-	uByte		bDescriptorType;
-	uByte		bDescriptorSubtype;
-	uWord		bcdMSC;
-	uWord		wTotalLength;
-} UPACKED umidi_cs_interface_descriptor_t;
-#define UMIDI_CS_INTERFACE_DESCRIPTOR_SIZE 7
-
-typedef struct {
-	uByte		bLength;
-	uByte		bDescriptorType;
-	uByte		bDescriptorSubtype;
-	uByte		bNumEmbMIDIJack;
-} UPACKED umidi_cs_endpoint_descriptor_t;
-#define UMIDI_CS_ENDPOINT_DESCRIPTOR_SIZE 4
-
-typedef struct {
-	uByte		bLength;
-	uByte		bDescriptorType;
-	uByte		bDescriptorSubtype;
-	uByte		bJackType;
-	uByte		bJackID;
-} UPACKED umidi_jack_descriptor_t;
-#define	UMIDI_JACK_DESCRIPTOR_SIZE	5
-
-
-#define TO_D(p) ((usb_descriptor_t *)(p))
-#define NEXT_D(desc) TO_D((char *)(desc)+(desc)->bLength)
-#define TO_IFD(desc) ((usb_interface_descriptor_t *)(desc))
-#define TO_CSIFD(desc) ((umidi_cs_interface_descriptor_t *)(desc))
-#define TO_EPD(desc) ((usb_endpoint_descriptor_t *)(desc))
-#define TO_CSEPD(desc) ((umidi_cs_endpoint_descriptor_t *)(desc))
+#endif /* _ARM_ROCKCHIP_ROCKCHIP_INTR_H_ */

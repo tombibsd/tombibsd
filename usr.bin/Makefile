@@ -16,9 +16,9 @@ SUBDIR= apply asa at audio audiocfg \
 	head hexdump iconv id indent infocmp innetgr ipcrm ipcs join jot \
 	kdump ktrace ktruss lam last lastcomm ldd leave \
 	locale locate lock logger login logname look lorder m4 \
-	machine mail make man menuc mesg midiplay mixerctl mkcsmapper \
-	mkdep mkesdb mkfifo mklocale mkstr mktemp mkubootimage moduli \
-	msgc msgs \
+	machine mail make man menuc mesg midiplay midirecord mixerctl \
+	mkcsmapper mkdep mkesdb mkfifo mklocale mkstr mktemp mkubootimage \
+	moduli msgc msgs \
 	nbperf netgroup netstat newgrp newsyslog nfsstat nice nl nohup \
 	pagesize passwd paste patch pathchk pkill pmap pmc pr \
 	printenv printf progress pwhash qsubst quota radioctl rdist \

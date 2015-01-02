@@ -190,7 +190,7 @@ ingenic_com_attach(device_t parent, device_t self, void *args)
 	COM_INIT_REGS(sc->sc_regs, &ingenic_com_mbst, regh, 0);
 	com_attach_subr(sc);
 	printf("\n");
-	/* interrupt */
+	evbmips_intr_establish(51, comintr, sc);
 }
 
 #define CHIP	   		ingenic_com

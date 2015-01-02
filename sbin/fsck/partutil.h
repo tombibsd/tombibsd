@@ -32,8 +32,11 @@
 #define _PARTUTIL_H_
 
 __BEGIN_DECLS
+struct dkwedge_info;
+struct disk_geom;
 int getdiskinfo(const char *, int, const char *,
     struct disk_geom *, struct dkwedge_info *);
+int getdisksize(const char *, u_int *, off_t *);
 __END_DECLS
 
 #endif /* _PARTUTIL_H_ */

@@ -614,6 +614,7 @@
 ./usr/bin/merge					base-util-bin
 ./usr/bin/mesg					base-util-bin
 ./usr/bin/midiplay				base-audio-bin
+./usr/bin/midirecord				base-audio-bin
 ./usr/bin/mixerctl				base-audio-bin
 ./usr/bin/mk_cmds				base-obsolete		obsolete
 ./usr/bin/mkcsmapper				base-util-bin

@@ -800,6 +800,7 @@ raidopen(dev_t dev, int flags, int fmt,
 	pmask = (1 << part);
 
 	if ((rs->sc_flags & RAIDF_INITED) &&
+	    (rs->sc_dkdev.dk_nwedges == 0) &&
 	    (rs->sc_dkdev.dk_openmask == 0))
 		raidgetdisklabel(dev);
 
@@ -1061,7 +1062,6 @@ raidioctl(dev_t dev, u_long cmd, void *data, int flag, struct lwp *l)
 #ifdef __HAVE_OLD_DISKLABEL
 	struct disklabel newlabel;
 #endif
-	struct dkwedge_info *dkw;
 
 	if ((rs = raidget(unit)) == NULL)
 		return ENXIO;
@@ -1826,29 +1826,11 @@ raidioctl(dev_t dev, u_long cmd, void *data, int flag, struct lwp *l)
 	 * Add support for "regular" device ioctls here.
 	 */
 	
-	error = disk_ioctl(&rs->sc_dkdev, cmd, data, flag, l); 
+	error = disk_ioctl(&rs->sc_dkdev, dev, cmd, data, flag, l); 
 	if (error != EPASSTHROUGH)
 		return (error);
 
 	switch (cmd) {
-	case DIOCGDINFO:
-		*(struct disklabel *) data = *(rs->sc_dkdev.dk_label);
-		break;
-#ifdef __HAVE_OLD_DISKLABEL
-	case ODIOCGDINFO:
-		newlabel = *(rs->sc_dkdev.dk_label);
-		if (newlabel.d_npartitions > OLDMAXPARTITIONS)
-			return ENOTTY;
-		memcpy(data, &newlabel, sizeof (struct olddisklabel));
-		break;
-#endif
-
-	case DIOCGPART:
-		((struct partinfo *) data)->disklab = rs->sc_dkdev.dk_label;
-		((struct partinfo *) data)->part =
-		    &rs->sc_dkdev.dk_label->d_partitions[DISKPART(dev)];
-		break;
-
 	case DIOCWDINFO:
 	case DIOCSDINFO:
 #ifdef __HAVE_OLD_DISKLABEL
@@ -1912,20 +1894,6 @@ raidioctl(dev_t dev, u_long cmd, void *data, int flag, struct lwp *l)
 		break;
 #endif
 
-	case DIOCAWEDGE:
-	case DIOCDWEDGE:
-	    	dkw = (void *)data;
-
-		/* If the ioctl happens here, the parent is us. */
-		(void)strcpy(dkw->dkw_parent, rs->sc_xname);
-		return cmd == DIOCAWEDGE ? dkwedge_add(dkw) : dkwedge_del(dkw);
-
-	case DIOCLWEDGES:
-		return dkwedge_list(&rs->sc_dkdev,
-		    (struct dkwedge_list *)data, l);
-	case DIOCMWEDGES:
-		dkwedge_discover(&rs->sc_dkdev);
-		return 0;
 	case DIOCCACHESYNC:
 		return rf_sync_component_caches(raidPtr);
 
@@ -2018,16 +1986,15 @@ raidinit(struct raid_softc *rs)
 
 	disk_init(&rs->sc_dkdev, rs->sc_xname, &rf_dkdriver);
 	disk_attach(&rs->sc_dkdev);
-	disk_blocksize(&rs->sc_dkdev, raidPtr->bytesPerSector);
 
 	/* XXX There may be a weird interaction here between this, and
 	 * protectedSectors, as used in RAIDframe.  */
 
 	rs->sc_size = raidPtr->totalSectors;
 
-	dkwedge_discover(&rs->sc_dkdev);
-
 	rf_set_geometry(rs, raidPtr);
+
+	dkwedge_discover(&rs->sc_dkdev);
 
 }
 #if (RF_INCLUDE_PARITY_DECLUSTERING_DS > 0)

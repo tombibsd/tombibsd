@@ -1304,17 +1304,16 @@ fdioctl(dev_t dev, u_long cmd, void *addr, int flag, struct lwp *l)
 
 	switch (cmd) {
 	case DIOCGDINFO:
-		fdgetdisklabel(fd, dev);
-		*(struct disklabel *)addr = *(fd->sc_dk.dk_label);
-		return 0;
-
 	case DIOCGPART:
 		fdgetdisklabel(fd, dev);
-		((struct partinfo *)addr)->disklab = fd->sc_dk.dk_label;
-		((struct partinfo *)addr)->part =
-			      &fd->sc_dk.dk_label->d_partitions[RAW_PART];
-		return 0;
+		break;
+	}
 
+	error = disk_ioctl(&fd->sc_dk, RAW_PART, cmd, addr, flag, l);
+	if (error != EPASSTHROUGH)
+		return error;
+
+	switch (cmd) {
 	case DIOCWLABEL:
 		if ((flag & FWRITE) == 0)
 			return EBADF;

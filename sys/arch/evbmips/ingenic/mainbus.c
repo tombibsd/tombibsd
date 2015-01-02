@@ -38,6 +38,8 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <mips/ingenic/ingenic_regs.h>
 
+#include "opt_ingenic.h"
+
 #include "locators.h"
 
 static int	mainbus_match(device_t, cfdata_t, void *);

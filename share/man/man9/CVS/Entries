@@ -1,7 +1,7 @@
 /CTASSERT.9/1.2/Mon Apr  5 19:18:45 2010/-kk/
 /KASSERT.9/1.13/Tue Sep 27 00:36:51 2011/-kk/
 /LWP_CACHE_CREDS.9/1.2/Sun Dec  9 08:53:57 2007/-kk/
-/Makefile/1.378/Tue Jun  3 03:09:12 2014/-kk/
+/Makefile/1.380/Fri Jan  2 11:20:38 2015/-kk/
 /RUN_ONCE.9/1.8/Tue Jul  6 22:29:29 2010/-kk/
 /SET.9/1.3/Tue Mar 25 02:35:16 2014/-kk/
 /STACK.9/1.2/Fri Apr  8 07:55:04 2011/-kk/
@@ -28,6 +28,7 @@
 /callback.9/1.5/Thu Dec  2 12:54:13 2010/-kk/
 /callout.9/1.28/Tue Dec  9 04:34:37 2014/-kk/
 /cardbus.9/1.19/Sun Jul 20 13:58:32 2014/-kk/
+/clock.9/1.2/Fri Dec 26 14:15:18 2014/-kk/
 /cnmagic.9/1.14/Tue Jun  8 19:44:28 2010/-kk/
 /condvar.9/1.14/Thu Dec  2 12:54:13 2010/-kk/
 /config.9/1.29/Thu Dec  2 12:54:13 2010/-kk/
@@ -54,7 +55,7 @@
 /ddc.9/1.7/Tue Jan 14 16:04:50 2014/-kk/
 /delay.9/1.7/Wed Jul 20 05:20:54 2011/-kk/
 /deviter.9/1.5/Tue Mar 25 02:35:16 2014/-kk/
-/disk.9/1.36/Thu Dec  2 12:54:13 2010/-kk/
+/disk.9/1.40/Fri Jan  2 11:20:38 2015/-kk/
 /disklabel.9/1.13/Wed Apr 30 13:10:58 2008/-kk/
 /dmover.9/1.14/Mon Jan 25 19:34:37 2010/-kk/
 /do_setresuid.9/1.5/Thu Oct 24 10:28:54 2013/-kk/
@@ -122,7 +123,7 @@
 /ltsleep.9/1.17/Fri Apr 11 02:03:25 2014/-kk/
 /m_tag.9/1.5/Thu Dec  2 12:54:13 2010/-kk/
 /makeiplcookie.9/1.3/Sat Dec 23 10:01:32 2006/-kk/
-/malloc.9/1.49/Tue Jun  3 03:09:12 2014/-kk/
+/malloc.9/1.51/Fri Jan  2 11:20:38 2015/-kk/
 /mb.9/1.6/Sun Jan  2 07:14:02 2011/-kk/
 /mbuf.9/1.51/Thu Oct 24 10:28:54 2013/-kk/
 /mca.9/1.11/Thu Oct 24 10:28:54 2013/-kk/

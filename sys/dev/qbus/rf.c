@@ -1090,27 +1090,22 @@ int
 rfioctl(dev_t dev, u_long cmd, void *data, int fflag, struct lwp *l)
 {
 	struct rf_softc *rf_sc = device_lookup_private(&rf_cd, DISKUNIT(dev));
+	int error;
 
 	/* We are going to operate on a non-open dev? PANIC! */
 	if ((rf_sc->sc_state & 1 << (DISKPART(dev) + RFS_OPEN_SHIFT)) == 0)
 		panic("rfioctl: can not operate on non-open drive %s "
 		    "partition %"PRIu32, device_xname(rf_sc->sc_dev), DISKPART(dev));
+	error = disk_ioctl(&rf_sc->sc_disk, dev, cmd, data, fflag, l);
+	if (error != EPASSTHROUGH)
+		return error;
+
 	switch (cmd) {
 	/* get and set disklabel; DIOCGPART used internally */
-	case DIOCGDINFO: /* get */
-		memcpy(data, rf_sc->sc_disk.dk_label,
-		    sizeof(struct disklabel));
-		return(0);
 	case DIOCSDINFO: /* set */
 		return(0);
 	case DIOCWDINFO: /* set, update disk */
 		return(0);
-	case DIOCGPART:  /* get partition */
-		((struct partinfo *)data)->disklab = rf_sc->sc_disk.dk_label;
-		((struct partinfo *)data)->part =
-		    &rf_sc->sc_disk.dk_label->d_partitions[DISKPART(dev)];
-		return(0);
-
 	/* do format operation, read or write */
 	case DIOCRFORMAT:
 	break;

@@ -106,6 +106,7 @@ enum { NPFCTL_PARSE_FILE, NPFCTL_PARSE_STRING };
 
 bool		join(char *, size_t, int, char **, const char *);
 void		yyerror(const char *, ...) __printflike(1, 2) __dead;
+void		npfctl_bpfjit(bool);
 void		npfctl_parse_file(const char *);
 void		npfctl_parse_string(const char *);
 

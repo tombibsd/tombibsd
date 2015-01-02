@@ -4,7 +4,9 @@
 
 TESTSDIR=	${TESTSBASE}/lib/libm
 
+# ARM fenv is incomplete, so we can not enable that here
 .if ${MACHINE_CPU} == "aarch64" || ${MACHINE_CPU} == "arm" \
+    || ${MACHINE_ARCH} == "hppa" \
     || ${MACHINE_ARCH} == "sparc" || ${MACHINE_ARCH} == "sparc64" \
     || ${MACHINE_ARCH} == "i386" || ${MACHINE_ARCH} == "x86_64"
 CPPFLAGS+=	-DHAVE_FENV_H
@@ -23,6 +25,7 @@ TESTS_C+=	t_cos
 TESTS_C+=	t_cosh
 TESTS_C+=	t_erf
 TESTS_C+=	t_exp
+TESTS_C+=	t_fenv
 TESTS_C+=	t_fmod
 TESTS_C+=	t_infinity
 TESTS_C+=	t_ldexp

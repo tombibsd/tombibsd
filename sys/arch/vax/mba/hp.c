@@ -324,17 +324,11 @@ hpioctl(dev_t dev, u_long cmd, void *addr, int flag, struct lwp *l)
 	struct disklabel * const lp = sc->sc_disk.dk_label;
 	int	error;
 
+	error = disk_ioctl(&sc->sc_disk, dev, cmd, addr, flag, l); 
+	if (error != EPASSTHROUGH)
+		return error;
+
 	switch (cmd) {
-	case DIOCGDINFO:
-		*(struct disklabel *)addr = *lp;
-		return 0;
-
-	case DIOCGPART:
-		((struct partinfo *)addr)->disklab = lp;
-		((struct partinfo *)addr)->part =
-		    &lp->d_partitions[DISKPART(dev)];
-		break;
-
 	case DIOCSDINFO:
 		if ((flag & FWRITE) == 0)
 			return EBADF;

@@ -381,18 +381,22 @@ acpibat_get_info(device_t dv)
 			goto out;
 		}
 
-		if (elm[i].Integer.Value >= INT_MAX) {
+		if (elm[i].Integer.Value != ACPIBAT_VAL_UNKNOWN &&
+		    elm[i].Integer.Value >= INT_MAX) {
 			rv = AE_LIMIT;
 			goto out;
 		}
 	}
 
-	if ((elm[ACPIBAT_BIF_UNIT].Integer.Value & ACPIBAT_PWRUNIT_MA) != 0) {
+	switch (elm[ACPIBAT_BIF_UNIT].Integer.Value) {
+	case ACPIBAT_PWRUNIT_MA:
 		capunit = ENVSYS_SAMPHOUR;
 		rateunit = ENVSYS_SAMPS;
-	} else {
+		break;
+	default:
 		capunit = ENVSYS_SWATTHOUR;
 		rateunit = ENVSYS_SWATTS;
+		break;
 	}
 
 	sc->sc_sensor[ACPIBAT_DCAPACITY].units = capunit;
@@ -500,10 +504,14 @@ acpibat_print_info(device_t dv, ACPI_OBJECT *elm)
 	 * Granularity 2.	"Battery capacity granularity between warning
 	 *			 and full in [mAh] or [mWh]. [...]"
 	 */
-	if ((elm[ACPIBAT_BIF_UNIT].Integer.Value & ACPIBAT_PWRUNIT_MA) != 0)
+	switch (elm[ACPIBAT_BIF_UNIT].Integer.Value) {
+	case ACPIBAT_PWRUNIT_MA:
 		unit = "Ah";
-	else
+		break;
+	default:
 		unit = "Wh";
+		break;
+	}
 
 	aprint_verbose_dev(dv, "granularity: "
 	    "low->warn %d.%03d %s, warn->full %d.%03d %s\n",

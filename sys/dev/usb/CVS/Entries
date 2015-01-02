@@ -1,4 +1,4 @@
-/FILES/1.12/Tue Jan 17 03:49:20 2012/-kk/
+/FILES/1.13/Fri Jan  2 11:21:39 2015/-kk/
 /Makefile.usbdevs/1.7/Fri Oct  3 10:05:15 2014/-kk/
 /Makefile/1.9/Sun May 14 21:47:00 2006/-kk/
 /TODO.usbmp/1.8/Fri Oct  3 09:26:03 2014/-kk/
@@ -13,7 +13,7 @@
 /auvitek_video.c/1.6/Sun Oct  2 19:15:40 2011/-kk/
 /auvitekreg.h/1.1/Mon Dec 27 15:42:11 2010/-kk/
 /auvitekvar.h/1.8/Fri Oct  3 09:26:03 2014/-kk/
-/ehci.c/1.234/Fri Oct  3 10:05:15 2014/-kk/
+/ehci.c/1.235/Fri Jan  2 11:21:39 2015/-kk/
 /ehcireg.h/1.34/Sun Nov  4 12:01:55 2012/-kk/
 /ehcivar.h/1.42/Thu Oct 24 10:28:58 2013/-kk/
 /emdtv.c/1.9/Thu Dec 27 16:42:32 2012/-kk/
@@ -144,11 +144,9 @@
 /umcs.h/1.1/Sun Mar 16 09:34:45 2014/-kk/
 /umct.c/1.32/Fri Dec 23 00:51:47 2011/-kk/
 /umct.h/1.2/Mon Apr 28 20:24:00 2008/-kk/
-/umidi.c/1.65/Thu Oct 24 10:28:58 2013/-kk/
-/umidi_quirks.c/1.18/Fri May 18 07:52:54 2012/-kk/
+/umidi.c/1.66/Fri Jan  2 11:21:41 2015/-kk/
+/umidi_quirks.c/1.19/Fri Jan  2 11:21:41 2015/-kk/
 /umidi_quirks.h/1.8/Tue Jul  8 11:34:43 2008/-kk/
-/umidireg.h/1.8/Wed May 28 12:59:30 2008/-kk/
-/umidivar.h/1.19/Sun Mar 11 01:06:07 2012/-kk/
 /umodem.c/1.66/Sat Apr 19 05:36:59 2014/-kk/
 /umodem_common.c/1.22/Wed Nov  3 22:34:24 2010/-kk/
 /umodemvar.h/1.8/Wed Nov  3 22:34:24 2010/-kk/

@@ -222,18 +222,26 @@ main(int argc, char **argv)
 			continue;
 		++nusers;
 
+#ifndef SUPPORT_UTMP
 		if (wcmd == 0)
 			continue;
+#endif	/* !SUPPORT_UTMP */
 
 		if (sel_user &&
 		    strncmp(utx->ut_name, sel_user, sizeof(utx->ut_name)) != 0)
 			continue;
 		if ((ep = calloc(1, sizeof(struct entry))) == NULL)
 			err(1, NULL);
-		(void)memcpy(ep->name, utx->ut_name, sizeof(utx->ut_name));
 		(void)memcpy(ep->line, utx->ut_line, sizeof(utx->ut_line));
-		ep->name[sizeof(utx->ut_name)] = '\0';
 		ep->line[sizeof(utx->ut_line)] = '\0';
+		*nextp = ep;
+		nextp = &(ep->next);
+
+		if (wcmd == 0)
+			continue;
+
+		(void)memcpy(ep->name, utx->ut_name, sizeof(utx->ut_name));
+		ep->name[sizeof(utx->ut_name)] = '\0';
 		if (!nflag || getnameinfo((struct sockaddr *)&utx->ut_ss,
 		    utx->ut_ss.ss_len, ep->host, sizeof(ep->host), NULL, 0,
 		    NI_NUMERICHOST) != 0) {
@@ -245,10 +253,7 @@ main(int argc, char **argv)
 		ep->type[0] = 'x';
 		ep->tv = utx->ut_tv;
 		ep->pid = utx->ut_pid;
-		*nextp = ep;
-		nextp = &(ep->next);
-		if (wcmd != 0)
-			process(ep);
+		process(ep);
 	}
 #endif
 

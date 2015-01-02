@@ -40,6 +40,7 @@
 
 #include <linux/list.h>
 
+#include "opt_usb.h"
 // #define VERBOSE_DEBUG
 // #define DWC2_DUMP_FRREM
 // #define CONFIG_USB_DWC2_TRACK_MISSED_SOFS

@@ -100,7 +100,7 @@ ${PROG}.elf: ${OBJS} ${LIBSA} ${LIBZ} ${LIBKERN}
 
 ${PROG}.xcf: ${OBJS} ${XCOFFXTRAOBJ} ${LIBSA} ${LIBZ} ${LIBKERN}
 	${_MKTARGET_LINK}
-	${LD} -s -N -T ${.CURDIR}/../fixcoff/elf32_powerpc_merge.x -e _entry \
+	${LD} -N -T ${.CURDIR}/../fixcoff/elf32_powerpc_merge.x -e _entry \
 	    -Ttext ${RELOC} -Bstatic -o ${PROG}.mrg  ${XCOFFXTRAOBJ} \
 	    ${OBJS} ${LIBSA} ${LIBZ} ${LIBKERN}
 	${OBJCOPY} -O aixcoff-rs6000 -R .comment -R .note \

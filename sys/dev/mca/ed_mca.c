@@ -478,17 +478,11 @@ edmcaioctl(dev_t dev, u_long xfer, void *addr, int flag, struct lwp *l)
 	if ((ed->sc_flags & WDF_LOADED) == 0)
 		return EIO;
 
+        error = disk_ioctl(&ed->sc_dk, dev, xfer, addr, flag, l);
+	if (error != EPASSTHROUGH)
+		return error;
+
 	switch (xfer) {
-	case DIOCGDINFO:
-		*(struct disklabel *)addr = *(ed->sc_dk.dk_label);
-		return 0;
-
-	case DIOCGPART:
-		((struct partinfo *)addr)->disklab = ed->sc_dk.dk_label;
-		((struct partinfo *)addr)->part =
-		    &ed->sc_dk.dk_label->d_partitions[DISKPART(dev)];
-		return 0;
-
 	case DIOCWDINFO:
 	case DIOCSDINFO:
 	{
@@ -568,48 +562,6 @@ edmcaioctl(dev_t dev, u_long xfer, void *addr, int flag, struct lwp *l)
 		return error;
 		}
 #endif
-
-	case DIOCAWEDGE:
-	    {
-	    	struct dkwedge_info *dkw = (void *) addr;
-
-		if ((flag & FWRITE) == 0)
-			return (EBADF);
-
-		/* If the ioctl happens here, the parent is us. */
-		strlcpy(dkw->dkw_parent, device_xname(ed->sc_dev),
-			sizeof(dkw->dkw_parent));
-		return (dkwedge_add(dkw));
-	    }
-
-	case DIOCDWEDGE:
-	    {
-	    	struct dkwedge_info *dkw = (void *) addr;
-
-		if ((flag & FWRITE) == 0)
-			return (EBADF);
-
-		/* If the ioctl happens here, the parent is us. */
-		strlcpy(dkw->dkw_parent, device_xname(ed->sc_dev),
-			sizeof(dkw->dkw_parent));
-		return (dkwedge_del(dkw));
-	    }
-
-	case DIOCLWEDGES:
-	    {
-	    	struct dkwedge_list *dkwl = (void *) addr;
-
-		return (dkwedge_list(&ed->sc_dk, dkwl, l));
-	    }
-
-	case DIOCMWEDGES:
-	    {
-		if ((flag & FWRITE) == 0)
-			return (EBADF);
-
-		dkwedge_discover(&ed->sc_dk);
-		return 0;
-	    }
 
 	default:
 		return ENOTTY;

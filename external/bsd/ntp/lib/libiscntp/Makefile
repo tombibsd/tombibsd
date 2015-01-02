@@ -44,6 +44,8 @@ SRCS=   assertions.c               \
         time.c                     \
         sockaddr.c
 
+.if ${HAVE_GCC:U} != 4
 COPTS.log.c+=	-Wno-error=format-nonliteral
+.endif
 
 .include <bsd.lib.mk>

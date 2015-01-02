@@ -43,17 +43,8 @@
 struct malloc_type;
 
 #ifdef _KERNEL
-#define	MALLOC_JUSTDEFINE_LIMIT(type, shortdesc, longdesc, limit)
-
-#define	MALLOC_JUSTDEFINE(type, shortdesc, longdesc)			\
-	MALLOC_JUSTDEFINE_LIMIT(type, shortdesc, longdesc, 0)
-
-#define	MALLOC_DEFINE_LIMIT(type, shortdesc, longdesc, limit)		\
-	MALLOC_JUSTDEFINE_LIMIT(type, shortdesc, longdesc, limit)
-
-#define	MALLOC_DEFINE(type, shortdesc, longdesc)			\
-	MALLOC_DEFINE_LIMIT(type, shortdesc, longdesc, 0)
-
+#define	MALLOC_JUSTDEFINE(type, shortdesc, longdesc)
+#define	MALLOC_DEFINE(type, shortdesc, longdesc)
 #define	MALLOC_DECLARE(type)						\
 	static struct malloc_type *const __unused type = 0
 

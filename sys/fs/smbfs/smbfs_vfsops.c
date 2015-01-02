@@ -88,6 +88,7 @@ struct vfsops smbfs_vfsops = {
 	.vfs_statvfs = smbfs_statvfs,
 	.vfs_sync = smbfs_sync,
 	.vfs_vget = smbfs_vget,
+	.vfs_loadvnode = smbfs_loadvnode,
 	.vfs_fhtovp = (void *)eopnotsupp,
 	.vfs_vptofh = (void *)eopnotsupp,
 	.vfs_init = smbfs_init,
@@ -205,10 +206,6 @@ smbfs_mount(struct mount *mp, const char *path, void *data, size_t *data_len)
 	smp = malloc(sizeof(*smp), M_SMBFSDATA, M_WAITOK|M_ZERO);
 	mp->mnt_data = smp;
 
-	smp->sm_hash = hashinit(desiredvnodes, HASH_LIST, true,
-	    &smp->sm_hashlen);
-
-	mutex_init(&smp->sm_hashlock, MUTEX_DEFAULT, IPL_NONE);
 	smp->sm_share = ssp;
 	smp->sm_root = NULL;
 	smp->sm_args = *args;
@@ -261,8 +258,6 @@ smbfs_unmount(struct mount *mp, int mntflags)
 	smb_share_put(smp->sm_share, &scred);
 	mp->mnt_data = NULL;
 
-	hashdone(smp->sm_hash, HASH_LIST, smp->sm_hashlen);
-	mutex_destroy(&smp->sm_hashlock);
 	free(smp, M_SMBFSDATA);
 	return 0;
 }
@@ -295,14 +290,12 @@ smbfs_setroot(struct mount *mp)
 	 * Someone might have already set sm_root while we slept
 	 * in smb_lookup or vnode allocation.
 	 */
-	if (smp->sm_root)
-		vput(vp);
-	else {
+	if (smp->sm_root) {
+		KASSERT(smp->sm_root == VTOSMB(vp));
+		vrele(vp);
+	} else {
 		vp->v_vflag |= VV_ROOT;
 		smp->sm_root = VTOSMB(vp);
-
-		/* Keep reference, but unlock */
-		VOP_UNLOCK(vp);
 	}
 
 	return (0);

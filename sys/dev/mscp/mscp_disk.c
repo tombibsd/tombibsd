@@ -405,33 +405,20 @@ raioctl(dev_t dev, u_long cmd, void *data, int flag, struct lwp *l)
 {
 	struct disklabel *lp, *tp;
 	struct ra_softc *ra = mscp_device_lookup(dev);
-	int error = 0;
+	int error;
 #ifdef __HAVE_OLD_DISKLABEL
 	struct disklabel newlabel;
 #endif
 
 	lp = ra->ra_disk.dk_label;
 
+	error = disk_ioctl(&ra->ra_disk, dev, cmd, data, flag, l);
+	if (error != EPASSTHROUGH)
+		return error;
+	else
+		error = 0;
+
 	switch (cmd) {
-
-	case DIOCGDINFO:
-		memcpy(data, lp, sizeof (struct disklabel));
-		break;
-#ifdef __HAVE_OLD_DISKLABEL
-	case ODIOCGDINFO:
-		memcpy(&newlabel, lp, sizeof newlabel);
-		if (newlabel.d_npartitions > OLDMAXPARTITIONS)
-			return ENOTTY;
-		memcpy(data, &newlabel, sizeof (struct olddisklabel));
-		break;
-#endif
-
-	case DIOCGPART:
-		((struct partinfo *)data)->disklab = lp;
-		((struct partinfo *)data)->part =
-		    &lp->d_partitions[DISKPART(dev)];
-		break;
-
 	case DIOCWDINFO:
 	case DIOCSDINFO:
 #ifdef __HAVE_OLD_DISKLABEL
@@ -496,48 +483,6 @@ raioctl(dev_t dev, u_long cmd, void *data, int flag, struct lwp *l)
 		}
 #endif
 		break;
-
-	case DIOCAWEDGE:
-	    {
-	    	struct dkwedge_info *dkw = (void *) data;
-
-		if ((flag & FWRITE) == 0)
-			return (EBADF);
-
-		/* If the ioctl happens here, the parent is us. */
-		strlcpy(dkw->dkw_parent, device_xname(ra->ra_dev),
-			sizeof(dkw->dkw_parent));
-		return (dkwedge_add(dkw));
-	    }
-
-	case DIOCDWEDGE:
-	    {
-	    	struct dkwedge_info *dkw = (void *) data;
-
-		if ((flag & FWRITE) == 0)
-			return (EBADF);
-
-		/* If the ioctl happens here, the parent is us. */
-		strlcpy(dkw->dkw_parent, device_xname(ra->ra_dev),
-			sizeof(dkw->dkw_parent));
-		return (dkwedge_del(dkw));
-	    }
-
-	case DIOCLWEDGES:
-	    {
-	    	struct dkwedge_list *dkwl = (void *) data;
-
-		return (dkwedge_list(&ra->ra_disk, dkwl, l));
-	    }
-
-	case DIOCMWEDGES:
-	    {
-	    	if ((flag & FWRITE) == 0)
-			return (EBADF);
-
-		dkwedge_discover(&ra->ra_disk);
-		return 0;
-	    }
 
 	default:
 		error = ENOTTY;
@@ -907,25 +852,16 @@ int
 rxioctl(dev_t dev, u_long cmd, void *data, int flag, struct lwp *l)
 {
 	int unit = DISKUNIT(dev);
-	struct disklabel *lp;
 	struct rx_softc *rx = device_lookup_private(&rx_cd, unit);
-	int error = 0;
+	int error;
 
-	lp = rx->ra_disk.dk_label;
+        error = disk_ioctl(&rx->ra_disk, dev, cmd, data, flag, l);
+	if (error != EPASSTHROUGH)
+		return error;
+	else
+		error = 0;
 
 	switch (cmd) {
-
-	case DIOCGDINFO:
-		memcpy(data, lp, sizeof (struct disklabel));
-		break;
-
-	case DIOCGPART:
-		((struct partinfo *)data)->disklab = lp;
-		((struct partinfo *)data)->part =
-		    &lp->d_partitions[DISKPART(dev)];
-		break;
-
-
 	case DIOCWDINFO:
 	case DIOCSDINFO:
 	case DIOCWLABEL:

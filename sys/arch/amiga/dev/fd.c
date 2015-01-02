@@ -573,6 +573,10 @@ fdioctl(dev_t dev, u_long cmd, void *addr, int flag, struct lwp *l)
 	if ((sc->flags & FDF_HAVELABEL) == 0)
 		return(EBADF);
 
+	error = disk_ioctl(&sc->dkdev, dev, cmd, addr, flag, l);
+	if (error != EPASSTHROUGH)
+		return error;
+
 	switch (cmd) {
 	case DIOCSBAD:
 		return(EINVAL);
@@ -585,14 +589,6 @@ fdioctl(dev_t dev, u_long cmd, void *addr, int flag, struct lwp *l)
 		if (*(int *)addr < FDSTEPDELAY)
 			return(EINVAL);
 		sc->dkdev.dk_label->d_trkseek = sc->stepdelay = *(int *)addr;
-		return(0);
-	case DIOCGDINFO:
-		*(struct disklabel *)addr = *(sc->dkdev.dk_label);
-		return(0);
-	case DIOCGPART:
-		((struct partinfo *)addr)->disklab = sc->dkdev.dk_label;
-		((struct partinfo *)addr)->part =
-		    &sc->dkdev.dk_label->d_partitions[FDPART(dev)];
 		return(0);
 	case DIOCSDINFO:
 		if ((flag & FWRITE) == 0)

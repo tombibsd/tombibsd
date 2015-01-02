@@ -132,7 +132,7 @@ static const struct cardinfo ch_cards[] = {
 	{ "MU",
 		"Advance to the nearest Utility.\n"
 		"If unowned, you may buy it from the bank.\n"
-		"If owned, throw dice and pay oner a total of ten times\n"
+		"If owned, throw dice and pay owner a total of ten times\n"
 		"the amount thrown.\n"
 	},
 	{ "MB3",

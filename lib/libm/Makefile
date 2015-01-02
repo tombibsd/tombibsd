@@ -75,6 +75,11 @@ COPTS.fenv.c+=	-mfpu=vfp
 .PATH.S: ${.CURDIR}/arch/arm
 ARCH_SRCS = e_sqrt.S e_sqrtf.S lrint.S lrintf.S s_fabsf.S s_fma.S s_fmaf.S
 .endif
+.elif (${LIBC_MACHINE_ARCH} == "hppa")
+.PATH.c: ${.CURDIR}/arch/hppa
+COMMON_SRCS+= fenv.c s_nexttowardf.c \
+	s_nearbyint.c s_rintl.c
+COPTS.e_sqrtl.c += -DHAVE_FENV_H
 .elif (${LIBC_MACHINE_ARCH} == "sparc")
 .PATH: ${.CURDIR}/arch/sparc
 COMMON_SRCS+= fenv.c

@@ -256,6 +256,7 @@ npf_nat_newpolicy(prop_dictionary_t natdict, npf_ruleset_t *rset)
 	}
 	return np;
 err:
+	mutex_destroy(&np->n_lock);
 	kmem_free(np, sizeof(npf_natpolicy_t));
 	return NULL;
 }

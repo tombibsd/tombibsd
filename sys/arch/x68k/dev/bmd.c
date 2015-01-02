@@ -350,14 +350,15 @@ bmdioctl(dev_t dev, u_long cmd, void *data, int flag, struct lwp *l)
 	DPRINTF(("%s%d %ld\n", __func__, BMD_UNIT(dev), cmd));
 
 	sc = device_lookup_private(&bmd_cd, BMD_UNIT(dev));
+
 	if (sc == NULL)
 		return ENXIO;
 
-	switch (cmd) {
-	case DIOCGDINFO:
-		*(struct disklabel *)data = *(sc->sc_dkdev.dk_label);
-		break;
+	error = disk_ioctl(&sc->sc_dkdev, dev, cmd, data, flag, l); 
+	if (error != EPASSTHROUGH)
+		return error;
 
+	switch (cmd) {
 	case DIOCWDINFO:
 		if ((flag & FWRITE) == 0)
 			return EBADF;

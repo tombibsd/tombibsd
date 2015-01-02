@@ -1202,9 +1202,9 @@ wdioctl(dev_t dev, u_long xfer, void *addr, int flag, struct lwp *l)
 	if ((wd->sc_flags & WDF_LOADED) == 0)
 		return EIO;
 
-	error = disk_ioctl(&wd->sc_dk, xfer, addr, flag, l);
+	error = disk_ioctl(&wd->sc_dk, dev, xfer, addr, flag, l);
 	if (error != EPASSTHROUGH)
-		return (error);
+		return error;
 
 	error = 0;
 	switch (xfer) {
@@ -1272,28 +1272,6 @@ wdioctl(dev_t dev, u_long xfer, void *addr, int flag, struct lwp *l)
 		wd->sc_bscount = 0;
 		return 0;
 #endif
-	case DIOCGDINFO:
-		*(struct disklabel *)addr = *(wd->sc_dk.dk_label);
-		return 0;
-#ifdef __HAVE_OLD_DISKLABEL
-	case ODIOCGDINFO:
-		newlabel = malloc(sizeof *newlabel, M_TEMP, M_WAITOK);
-		if (newlabel == NULL)
-			return EIO;
-		*newlabel = *(wd->sc_dk.dk_label);
-		if (newlabel->d_npartitions <= OLDMAXPARTITIONS)
-			memcpy(addr, newlabel, sizeof (struct olddisklabel));
-		else
-			error = ENOTTY;
-		free(newlabel, M_TEMP);
-		return error;
-#endif
-
-	case DIOCGPART:
-		((struct partinfo *)addr)->disklab = wd->sc_dk.dk_label;
-		((struct partinfo *)addr)->part =
-		    &wd->sc_dk.dk_label->d_partitions[WDPART(dev)];
-		return 0;
 
 	case DIOCWDINFO:
 	case DIOCSDINFO:
@@ -1478,46 +1456,6 @@ wdioctl(dev_t dev, u_long xfer, void *addr, int flag, struct lwp *l)
 		wi_free(wi);
 		return(error1);
 		}
-
-	case DIOCAWEDGE:
-	    {
-	    	struct dkwedge_info *dkw = (void *) addr;
-
-		if ((flag & FWRITE) == 0)
-			return (EBADF);
-
-		/* If the ioctl happens here, the parent is us. */
-		strcpy(dkw->dkw_parent, device_xname(wd->sc_dev));
-		return (dkwedge_add(dkw));
-	    }
-
-	case DIOCDWEDGE:
-	    {
-	    	struct dkwedge_info *dkw = (void *) addr;
-
-		if ((flag & FWRITE) == 0)
-			return (EBADF);
-
-		/* If the ioctl happens here, the parent is us. */
-		strcpy(dkw->dkw_parent, device_xname(wd->sc_dev));
-		return (dkwedge_del(dkw));
-	    }
-
-	case DIOCLWEDGES:
-	    {
-	    	struct dkwedge_list *dkwl = (void *) addr;
-
-		return (dkwedge_list(&wd->sc_dk, dkwl, l));
-	    }
-
-	case DIOCMWEDGES:
-	    {
-	    	if ((flag & FWRITE) == 0)
-			return (EBADF);
-
-		dkwedge_discover(&wd->sc_dk);
-		return 0;
-	    }
 
 	case DIOCGSTRATEGY:
 	    {

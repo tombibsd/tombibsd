@@ -527,6 +527,7 @@
 #define	  MMUCFG_NTLBS_GET(n)	  (((n) >> 2) & 3) /* NTLBS is max value of MAS0[TLBSEL] */
 #define	  MMUCFG_MAVN		  0x00000003 /* MMU Architecture Version Number */
 #define	  MMUCFG_MAVN_V1	  0
+#define	  MMUCFG_MAVN_V2	  1
 #define	SPR_SVR			1023	/* E... System Version Register */
 
 #define	PMR_PMC0		16

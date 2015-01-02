@@ -11,6 +11,16 @@ MAN=	gpt.8
 SRCS+= backup.c restore.c
 LDADD+=	-lprop -lutil
 DPADD+= ${LIBPROP} ${LIBUTIL}
+
+.if ${USE_DRVCTL:Uno} == "yes"
+CPPFLAGS+=-DUSE_DRVCTL
+SRCS+=drvctl.c
+.else
+.PATH: ${.CURDIR}/../fsck
+CPPFLAGS+=-I${.CURDIR}/../fsck
+SRCS+=partutil.c
 .endif
+.endif
+
 
 .include <bsd.prog.mk>

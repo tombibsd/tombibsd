@@ -180,6 +180,7 @@ const char *audio_errstring (int);
  * generic routines?
  */
 void	decode_int (const char *, int *);
+void	decode_uint (const char *, unsigned *);
 void	decode_time (const char *, struct timeval *);
 void	decode_encoding (const char *, int *);
 

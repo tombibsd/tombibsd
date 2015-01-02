@@ -474,8 +474,6 @@ mdioctl(dev_t dev, u_long cmd, void *data, int flag, struct lwp *l)
 {
 	struct md_softc *sc;
 	struct md_conf *umd;
-	struct disklabel *lp;
-	struct partinfo *pp;
 	int error;
 
 	if ((sc = device_lookup_private(&md_cd, MD_UNIT(dev))) == NULL)
@@ -483,18 +481,8 @@ mdioctl(dev_t dev, u_long cmd, void *data, int flag, struct lwp *l)
 
 	mutex_enter(&sc->sc_lock);
 	if (sc->sc_type != MD_UNCONFIGURED) {
-		switch (cmd) {
-		case DIOCGDINFO:
-			lp = (struct disklabel *)data;
-			*lp = *sc->sc_dkdev.dk_label;
-			mutex_exit(&sc->sc_lock);
-			return 0;
-
-		case DIOCGPART:
-			pp = (struct partinfo *)data;
-			pp->disklab = sc->sc_dkdev.dk_label;
-			pp->part =
-			    &sc->sc_dkdev.dk_label->d_partitions[DISKPART(dev)];
+		error = disk_ioctl(&sc->sc_dkdev, dev, cmd, data, flag, l); 
+		if (error != EPASSTHROUGH) {
 			mutex_exit(&sc->sc_lock);
 			return 0;
 		}

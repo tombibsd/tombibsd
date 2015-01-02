@@ -1388,7 +1388,6 @@ static inline void
 bpf_deliver(struct bpf_if *bp, void *(*cpfn)(void *, const void *, size_t),
     void *pkt, u_int pktlen, u_int buflen, const bool rcv)
 {
-	const bpf_ctx_t *bc = NULL;
 	uint32_t mem[BPF_MEMWORDS];
 	bpf_args_t args = {
 		.pkt = (const uint8_t *)pkt,
@@ -1415,9 +1414,9 @@ bpf_deliver(struct bpf_if *bp, void *(*cpfn)(void *, const void *, size_t),
 		bpf_gstats.bs_recv++;
 
 		if (d->bd_jitcode)
-			slen = d->bd_jitcode(bc, &args);
+			slen = d->bd_jitcode(NULL, &args);
 		else
-			slen = bpf_filter_ext(bc, d->bd_filter, &args);
+			slen = bpf_filter_ext(NULL, d->bd_filter, &args);
 
 		if (!slen) {
 			continue;

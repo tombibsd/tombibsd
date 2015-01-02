@@ -891,6 +891,7 @@ dumpb(const char *lbl, int len, const uint8_t *data)
 void
 ipmi_smbios_probe(struct smbios_ipmi *pipmi, struct ipmi_attach_args *ia)
 {
+	const char *platform;
 
 	dbg_printf(1, "ipmi_smbios_probe: %02x %02x %02x %02x "
 	    "%08" PRIx64 " %02x %02x\n",
@@ -938,8 +939,9 @@ ipmi_smbios_probe(struct smbios_ipmi *pipmi, struct ipmi_attach_args *ia)
 	if (pipmi->smipmi_base_flags & SMIPMI_FLAG_ODDOFFSET)
 		ia->iaa_if_iobase++;
 
-	if (strcmp(pmf_get_platform("system-product"),
-            "ProLiant MicroServer") == 0) {
+	platform = pmf_get_platform("system-product");
+	if (platform != NULL &&
+	    strcmp(platform, "ProLiant MicroServer") == 0) {
                 ia->iaa_if_iospacing = 1;
                 ia->iaa_if_iobase = pipmi->smipmi_base_address - 7;
                 ia->iaa_if_iotype = 'i';

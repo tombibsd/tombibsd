@@ -1116,17 +1116,11 @@ rdioctl(dev_t dev, u_long cmd, void *data, int flag, struct lwp *l)
 	struct disklabel *lp = sc->sc_dkdev.dk_label;
 	int error, flags;
 
+	error = disk_ioctl(&sc->sc_dkdev, rdpart(dev), cmd, data, flag, l);
+	if (error != EPASSTHROUGH)
+		return error;
+
 	switch (cmd) {
-	case DIOCGDINFO:
-		*(struct disklabel *)data = *lp;
-		return 0;
-
-	case DIOCGPART:
-		((struct partinfo *)data)->disklab = lp;
-		((struct partinfo *)data)->part =
-		    &lp->d_partitions[rdpart(dev)];
-		return 0;
-
 	case DIOCWLABEL:
 		if ((flag & FWRITE) == 0)
 			return EBADF;

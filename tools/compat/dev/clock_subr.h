@@ -52,11 +52,4 @@ struct clock_ymdhms {
 time_t	clock_ymdhms_to_secs(struct clock_ymdhms *);
 int	clock_secs_to_ymdhms(time_t, struct clock_ymdhms *);
 
-/* Some handy constants. */
-#define SECDAY		(24 * 60 * 60)
-#define SECYR		(SECDAY * 365)
-
-/* Traditional POSIX base year */
-#define	POSIX_BASE_YEAR	1970
-
 #endif /* _DEV_CLOCK_SUBR_H_ */

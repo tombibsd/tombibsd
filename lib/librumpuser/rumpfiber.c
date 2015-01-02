@@ -108,6 +108,16 @@ static struct thread *current_thread = NULL;
 
 static void (*scheduler_hook)(void *, void *);
 
+static void printk(const char *s);
+
+static void
+printk(const char *msg)
+{
+	int ret __attribute__((unused));
+
+	ret = write(2, msg, strlen(msg));
+}
+
 static struct thread *
 get_current(void)
 {

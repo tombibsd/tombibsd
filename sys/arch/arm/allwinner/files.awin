@@ -31,6 +31,7 @@ defflag opt_allwinner.h				AWIN_GPIO_IGNORE_FW
 defflag opt_allwinner.h				AWIN_HDMI_DEBUG
 defflag opt_allwinner.h				AWIN_TCON_DEBUG
 defflag opt_allwinner.h				AWIN_DEBE_DEBUG
+defflag opt_allwinner.h				AWIN_DEBE_FWINIT
 defparam opt_allwinner.h			AWIN_DEBE_VIDEOMEM
 
 # SoC I/O attach point

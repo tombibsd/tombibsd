@@ -63,7 +63,7 @@ __RCSID("$NetBSD$");
 static struct Info {
 	struct	uvmexp_sysctl uvmexp;
 	struct	vmtotal Total;
-	struct	nchstats_sysctl nchstats;
+	struct	nchstats nchstats;
 	long	nchcount;
 	long	*intrcnt;
 	u_int64_t	*evcnt;

@@ -82,9 +82,6 @@ struct smbmount {
 	struct smb_share * 	sm_share;
 	struct smbnode *	sm_npstack[SMBFS_MAXPATHCOMP];
 	int			sm_caseopt;
-	kmutex_t		sm_hashlock;
-	LIST_HEAD(smbnode_hashhead, smbnode) *sm_hash;
-	u_long			sm_hashlen;
 	int			sm_didrele;
 };
 

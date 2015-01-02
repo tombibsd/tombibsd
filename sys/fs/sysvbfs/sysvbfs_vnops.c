@@ -581,21 +581,23 @@ sysvbfs_rename(void *arg)
 		goto out;
 	}
 
+	/*
+	 * Remove the target if it exists.
+	 */
+	if (tvp != NULL) {
+		error = bfs_file_delete(bfs, to_name, true);
+		if (error)
+			goto out;
+	}
 	error = bfs_file_rename(bfs, from_name, to_name);
  out:
-	if (tvp) {
-		if (error == 0) {
-			struct sysvbfs_node *tbnode = tvp->v_data;
-			tbnode->removed = 1;
-		}
-		vput(tvp);
-	}
-
 	/* tdvp == tvp probably can't happen with this fs, but safety first */
 	if (tdvp == tvp)
 		vrele(tdvp);
 	else
 		vput(tdvp);
+	if (tvp)
+		vput(tvp);
 
 	vrele(fdvp);
 	vrele(fvp);
@@ -695,13 +697,13 @@ sysvbfs_reclaim(void *v)
 	struct bfs *bfs = bnode->bmp->bfs;
 
 	DPRINTF("%s:\n", __func__);
+
+	vcache_remove(vp->v_mount,
+	    &bnode->inode->number, sizeof(bnode->inode->number));
 	if (bnode->removed) {
 		if (bfs_inode_delete(bfs, bnode->inode->number) != 0)
 			DPRINTF("%s: delete inode failed\n", __func__);
 	}
-	mutex_enter(&mntvnode_lock);
-	LIST_REMOVE(bnode, link);
-	mutex_exit(&mntvnode_lock);
 	genfs_node_destroy(vp);
 	pool_put(&sysvbfs_node_pool, bnode);
 	vp->v_data = NULL;

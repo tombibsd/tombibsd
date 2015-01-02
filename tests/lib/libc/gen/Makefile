@@ -41,8 +41,7 @@ TESTS_C+=	t_time
 TESTS_C+=	t_ttyname
 TESTS_C+=	t_vis
 
-# add back || ${MACHINE_CPU} == "arm" once feenableexcept() is implemented
-.if ${MACHINE_CPU} == "aarch64" \
+.if ${MACHINE_CPU} == "aarch64" || ${MACHINE_CPU} == "arm" \
     || ${MACHINE_ARCH} == "sparc" || ${MACHINE_ARCH} == "sparc64" \
     || ${MACHINE_ARCH} == "i386" || ${MACHINE_ARCH} == "x86_64"
 CPPFLAGS.t_siginfo.c+=	-DHAVE_FENV
