@@ -8,7 +8,7 @@
 /drm_scatter.c/1.3/Sun Jul 20 13:59:10 2014/-kk/
 /drm_sysctl.c/1.4/Tue Dec  9 04:43:52 2014/-kk/
 /drm_sysfs.c/1.3/Sun Jul 20 13:59:10 2014/-kk/
-/drm_vm.c/1.6/Sat Dec 27 03:35:52 2014/-kk/
+/drm_vm.c/1.7/Fri Jan  2 11:21:45 2015/-kk/
 /drm_vma_manager.c/1.1/Wed Jul 16 20:56:25 2014/-kk/
 /files.drmkms/1.9/Tue Dec  9 04:35:01 2014/-kk/
 D

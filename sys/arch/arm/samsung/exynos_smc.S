@@ -35,6 +35,8 @@
 
 RCSID("$NetBSD$")
 
+	.arch armv7-a
+	.arch_extension sec
 /*
  * void
  * exynos_smc(uint32_t cmd, uint32_t arg1, uint32_t arg2, uint32_t arg3)

@@ -1264,6 +1264,11 @@ file	dev/ic/w83l518d_sdmmc.c		wb
 device	rtsx: sdmmcbus
 file	dev/ic/rtsx.c			rtsx
 
+# DesignWare SD/MMC host controller
+defflag	opt_dwc_mmc.h	DWC_MMC_DEBUG
+device	dwcmmc: sdmmcbus
+file	dev/ic/dwc_mmc.c		dwcmmc
+
 # Myson MTD803 3-in-1 Fast Ethernet Controller
 device	mtd: arp, ether, ifnet, mii
 file	dev/ic/mtd803.c			mtd

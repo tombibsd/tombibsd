@@ -574,13 +574,17 @@ do {									\
 		rv = 0;
 	} else {
 		char rp[MAXPATHLEN];
+		size_t rplen,dirlen;
 
 		if (realpath(dir, rp) == NULL) {
 			rv = -1;
 			goto out;
 		}
 
-		if (strcmp(dir, rp) != 0) {
+		rplen = strlen(rp);
+		dirlen = strlen(dir);
+		if (strncmp(dir, rp, rplen) != 0 ||
+		    strspn(dir + rplen, "/") != dirlen - rplen) {
 			warnx("puffs_mount: \"%s\" is a relative path.", dir);
 			warnx("puffs_mount: using \"%s\" instead.", rp);
 		}

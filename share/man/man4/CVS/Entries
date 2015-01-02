@@ -111,7 +111,7 @@
 /btuart.4/1.11/Tue Mar 25 02:35:14 2014/-kk/
 /bwi.4/1.13/Tue Mar 25 02:35:14 2014/-kk/
 /cac.4/1.13/Wed Apr 30 13:10:53 2008/-kk/
-/cardbus.4/1.35/Wed Apr 25 04:14:03 2012/-kk/
+/cardbus.4/1.38/Fri Jan  2 11:20:36 2015/-kk/
 /carp.4/1.5/Tue Dec 17 04:13:19 2013/-kk/
 /cas.4/1.3/Fri Jan 15 19:24:49 2010/-kk/
 /ccd.4/1.32/Tue Dec  9 04:15:49 2014/-kk/
@@ -375,7 +375,7 @@
 /oosiop.4/1.6/Sat Mar  1 06:04:19 2014/-kk/
 /opl.4/1.21/Sat Jan  3 18:27:19 2009/-kk/
 /optiide.4/1.3/Mon Oct 19 18:41:09 2009/-kk/
-/options.4/1.442/Fri Oct  3 09:43:12 2014/-kk/
+/options.4/1.444/Fri Jan  2 11:20:37 2015/-kk/
 /osiop.4/1.7/Sat Mar  1 06:04:19 2014/-kk/
 /otus.4/1.7/Tue Mar 25 02:35:15 2014/-kk/
 /owtemp.4/1.4/Tue Mar 25 02:35:15 2014/-kk/

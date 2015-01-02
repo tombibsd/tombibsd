@@ -806,7 +806,7 @@ xy_getkauthreq(u_char cmd)
  * xyioctl: ioctls on XY drives.   based on ioctl's of other netbsd disks.
  */
 int 
-xyioctl(dev_t dev, u_long command, void *addr, int flag, struct lwp *l)
+xyioctl(dev_t dev, u_long cmd, void *addr, int flag, struct lwp *l)
 {
 	struct xy_softc *xy;
 	struct xd_iocmd *xio;
@@ -818,25 +818,19 @@ xyioctl(dev_t dev, u_long command, void *addr, int flag, struct lwp *l)
 	if (xy == NULL)
 		return ENXIO;
 
+	error = disk_ioctl(&xy->sc_dk, dev, cmd, addr, flag, l);
+	if (error != EPASSTHROUGH)
+		return error;
+
 	/* switch on ioctl type */
 
-	switch (command) {
+	switch (cmd) {
 	case DIOCSBAD:		/* set bad144 info */
 		if ((flag & FWRITE) == 0)
 			return EBADF;
 		s = splbio();
 		memcpy(&xy->dkb, addr, sizeof(xy->dkb));
 		splx(s);
-		return 0;
-
-	case DIOCGDINFO:	/* get disk label */
-		memcpy(addr, xy->sc_dk.dk_label, sizeof(struct disklabel));
-		return 0;
-
-	case DIOCGPART:	/* get partition info */
-		((struct partinfo *)addr)->disklab = xy->sc_dk.dk_label;
-		((struct partinfo *)addr)->part =
-		    &xy->sc_dk.dk_label->d_partitions[DISKPART(dev)];
 		return 0;
 
 	case DIOCSDINFO:	/* set disk label */

@@ -60,8 +60,7 @@ int
 rumpuser_sp_raise(void *arg, int signo)
 {
 
-	printk("rumphyper: unimplemented rumpuser_sp_raise\n");
-	exit(1);
+	abort();
 }
 
 /*ARGSUSED*/
@@ -69,8 +68,7 @@ int
 rumpuser_sp_copyin(void *arg, const void *raddr, void *laddr, size_t len)
 {
 
-	printk("rumphyper: unimplemented rumpuser_sp_copyin\n");
-	exit(1);
+	abort();
 }
 
 /*ARGSUSED*/
@@ -78,8 +76,7 @@ int
 rumpuser_sp_copyinstr(void *arg, const void *raddr, void *laddr, size_t *len)
 {
 
-	printk("rumphyper: unimplemented rumpuser_sp_copyinstr\n");
-	exit(1);
+	abort();
 }
 
 /*ARGSUSED*/
@@ -87,8 +84,7 @@ int
 rumpuser_sp_copyout(void *arg, const void *laddr, void *raddr, size_t dlen)
 {
 
-	printk("rumphyper: unimplemented rumpuser_sp_copyout\n");
-	exit(1);
+	abort();
 }
 
 /*ARGSUSED*/
@@ -96,8 +92,7 @@ int
 rumpuser_sp_copyoutstr(void *arg, const void *laddr, void *raddr, size_t *dlen)
 {
 
-	printk("rumphyper: unimplemented rumpuser_sp_copyoutstr\n");
-	exit(1);
+	abort();
 }
 
 /*ARGSUSED*/
@@ -105,6 +100,5 @@ int
 rumpuser_sp_anonmmap(void *arg, size_t howmuch, void **addr)
 {
 
-	printk("rumphyper: unimplemented rumpuser_sp_anonmmap\n");
-	exit(1);
+	abort();
 }

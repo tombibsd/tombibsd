@@ -686,6 +686,4 @@ dmgetproperties(struct disk *disk, dm_table_head_t *head)
 	dg->dg_ntracks = 64;
 
 	disk_set_info(NULL, disk, "ESDI");
-
-	disk_blocksize(disk, secsize);
 }

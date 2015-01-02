@@ -235,6 +235,7 @@ struct vfsops v7fs_vfsops = {
 	.vfs_statvfs = v7fs_statvfs,
 	.vfs_sync = v7fs_sync,
 	.vfs_vget = v7fs_vget,
+	.vfs_loadvnode = v7fs_loadvnode,
 	.vfs_fhtovp = v7fs_fhtovp,
 	.vfs_vptofh = v7fs_vptofh,
 	.vfs_init = v7fs_init,

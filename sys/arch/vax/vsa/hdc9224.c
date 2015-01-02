@@ -688,19 +688,15 @@ rdioctl(dev_t dev, u_long cmd, void *addr, int flag, struct lwp *l)
 {
 	struct rdsoftc * const rd = device_lookup_private(&rd_cd, DISKUNIT(dev));
 	struct disklabel * const lp = rd->sc_disk.dk_label;
-	int error = 0;
+	int error;
+
+	error = disk_ioctl(&rd->sc_disk, dev, cmd, addr, flag, l);
+	if (error != EPASSTHROUGH)
+		return error;
+	else
+		error = 0;
 
 	switch (cmd) {
-	case DIOCGDINFO:
-		*(struct disklabel *)addr = *lp;
-		break;
-
-	case DIOCGPART:
-		((struct partinfo *)addr)->disklab = lp;
-		((struct partinfo *)addr)->part =
-		  &lp->d_partitions[DISKPART(dev)];
-		break;
-
 	case DIOCWDINFO:
 	case DIOCSDINFO:
 		if ((flag & FWRITE) == 0)

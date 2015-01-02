@@ -548,15 +548,14 @@ cgdioctl(dev_t dev, u_long cmd, void *data, int flag, struct lwp *l)
 	struct	dk_softc *dksc;
 	int	part = DISKPART(dev);
 	int	pmask = 1 << part;
+	int	error;
 
 	DPRINTF_FOLLOW(("cgdioctl(0x%"PRIx64", %ld, %p, %d, %p)\n",
 	    dev, cmd, data, flag, l));
 
 	switch (cmd) {
-	case CGDIOCGET: /* don't call cgd_spawn() if the device isn't there */
-		cs = NULL;
-		dksc = NULL;
-		break;
+	case CGDIOCGET:
+		return cgd_ioctl_get(dev, data, l);
 	case CGDIOCSET:
 	case CGDIOCCLR:
 		if ((flag & FWRITE) == 0)
@@ -568,6 +567,10 @@ cgdioctl(dev_t dev, u_long cmd, void *data, int flag, struct lwp *l)
 		break;
 	}
 
+	error = disk_ioctl(&dksc->sc_dkdev, dev, cmd, data, flag, l);
+	if (error != EPASSTHROUGH)
+		return (error);
+
 	switch (cmd) {
 	case CGDIOCSET:
 		if (dksc->sc_flags & DKF_INITED)
@@ -577,8 +580,6 @@ cgdioctl(dev_t dev, u_long cmd, void *data, int flag, struct lwp *l)
 		if (DK_BUSY(&cs->sc_dksc, pmask))
 			return EBUSY;
 		return cgd_ioctl_clr(cs, l);
-	case CGDIOCGET:
-		return cgd_ioctl_get(dev, data, l);
 	case DIOCCACHESYNC:
 		/*
 		 * XXX Do we really need to care about having a writable
@@ -593,6 +594,9 @@ cgdioctl(dev_t dev, u_long cmd, void *data, int flag, struct lwp *l)
 		return VOP_IOCTL(cs->sc_tvn, cmd, data, flag, l->l_cred);
 	default:
 		return dk_ioctl(di, dksc, dev, cmd, data, flag, l);
+	case CGDIOCGET:
+		KASSERT(0);
+		return EINVAL;
 	}
 }
 

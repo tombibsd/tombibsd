@@ -1,5 +1,5 @@
 /Makefile.inc/1.10/Wed Mar 21 05:47:53 2012/-kk/
-/Makefile/1.218/Fri Oct  3 09:26:27 2014/-kk/
+/Makefile/1.219/Fri Jan  2 11:22:03 2015/-kk/
 D/apply////
 D/apropos////
 D/asa////
@@ -109,6 +109,7 @@ D/man////
 D/menuc////
 D/mesg////
 D/midiplay////
+D/midirecord////
 D/mixerctl////
 D/mkcsmapper////
 D/mkdep////

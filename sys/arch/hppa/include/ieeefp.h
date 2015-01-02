@@ -12,8 +12,8 @@
 
 #if defined(_NETBSD_SOURCE) || defined(_ISOC99_SOURCE)
 
-typedef int fenv_t;
-typedef int fexcept_t;
+typedef uint32_t fenv_t;
+typedef uint32_t fexcept_t;
 
 #define	FE_INEXACT	0x01	/* imprecise (loss of precision) */
 #define	FE_UNDERFLOW	0x02	/* underflow exception */

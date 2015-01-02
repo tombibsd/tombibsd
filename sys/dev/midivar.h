@@ -189,6 +189,8 @@ struct midi_softc {
 	struct	midi_buffer outbuf;
 	struct	midi_buffer inbuf;
 	int	props;
+	int	refcnt;
+	kcondvar_t detach_cv;
 	kcondvar_t rchan;
 	kcondvar_t wchan;
 	kmutex_t *lock;

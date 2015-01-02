@@ -3,7 +3,7 @@
 # mpc85xx-specific configuration info
 
 defflag	opt_mpc85xx.h	MPC8536 MPC8544 MPC8548 MPC8555 MPC8568 MPC8572
-			P1025 P2020 CADMUS PIXIS E500_WDOG_STACK
+			P1023 P1025 P2020 CADMUS PIXIS E500_WDOG_STACK
 defparam opt_mpc85xx.h	SYS_CLK MEMSIZE
 
 file	arch/evbppc/mpc85xx/autoconf.c

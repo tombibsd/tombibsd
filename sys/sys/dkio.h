@@ -115,4 +115,8 @@
 		/* trigger wedge auto discover */
 #define	DIOCMWEDGES	_IOR('d', 131, int)	/* make wedges */
 
+		/* query disk geometry */
+#define	DIOCGSECTORSIZE	_IOR('d', 133, u_int)	/* sector size in bytes */
+#define	DIOCGMEDIASIZE	_IOR('d', 132, off_t)	/* media size in bytes */
+
 #endif /* _SYS_DKIO_H_ */

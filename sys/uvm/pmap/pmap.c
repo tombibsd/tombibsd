@@ -219,6 +219,8 @@ struct pmap_limits pmap_limits;
 #ifdef UVMHIST
 static struct kern_history_ent pmapexechistbuf[10000];
 static struct kern_history_ent pmaphistbuf[10000];
+UVMHIST_DEFINE(pmapexechist);
+UVMHIST_DEFINE(pmaphist);
 #endif
 
 /*
@@ -541,6 +543,11 @@ pmap_destroy(pmap_t pmap)
 	kpreempt_disable();
 	pmap_tlb_asid_release_all(pmap);
 	pmap_segtab_destroy(pmap, NULL, 0);
+
+#ifdef MULTIPROCESSOR
+	kcpuset_destroy(pmap->pm_active);
+	kcpuset_destroy(pmap->pm_onproc);
+#endif
 
 	pool_put(&pmap_pmap_pool, pmap);
 	kpreempt_enable();

@@ -79,6 +79,7 @@
 ./usr/include/hppa/endian.h			comp-c-include
 ./usr/include/hppa/endian_machdep.h		comp-c-include
 ./usr/include/hppa/exec.h			comp-c-include
+./usr/include/hppa/fenv.h			comp-c-include
 ./usr/include/hppa/float.h			comp-c-include
 ./usr/include/hppa/frame.h			comp-c-include
 ./usr/include/hppa/ieee.h			comp-c-include

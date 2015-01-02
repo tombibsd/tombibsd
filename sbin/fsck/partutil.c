@@ -33,6 +33,7 @@
 __RCSID("$NetBSD$");
 
 #include <sys/types.h>
+#include <sys/param.h>
 #include <sys/disklabel.h>
 #include <sys/disk.h>
 #include <sys/ioctl.h>
@@ -124,6 +125,9 @@ getdiskinfo(const char *s, int fd, const char *dt, struct disk_geom *geo,
 		dict2geom(geo, geom_dict);
 	}
 
+	if (dkw == NULL)
+		return 0;
+
 	/* Get info about partition/wedge */
 	if (ioctl(fd, DIOCGWEDGEINFO, dkw) != -1) {
 		/* DIOCGWEDGEINFO didn't fail, we're done */
@@ -136,7 +140,6 @@ getdiskinfo(const char *s, int fd, const char *dt, struct disk_geom *geo,
 	}
 
 	/* DIOCGDINFO didn't fail */
-
 	(void)memset(dkw, 0, sizeof(*dkw));
 
 	if (stat(s, &sb) == -1)
@@ -159,5 +162,25 @@ getdiskinfo(const char *s, int fd, const char *dt, struct disk_geom *geo,
 	strlcpy(dkw->dkw_ptype, getfstypename(pp->p_fstype),
 	    sizeof(dkw->dkw_ptype));
 
+	return 0;
+}
+
+int
+getdisksize(const char *name, u_int *secsize, off_t *mediasize)
+{
+	char buf[MAXPATHLEN];
+	struct disk_geom geo;
+	int fd, error;
+
+	if ((fd = opendisk(name, O_RDONLY, buf, sizeof(buf), 0)) == -1)
+		return -1;
+
+	error = getdiskinfo(name, fd, NULL, &geo, NULL);
+	close(fd);
+	if (error)
+		return error;
+
+	*secsize = geo.dg_secsize;
+	*mediasize = geo.dg_secsize * geo.dg_secperunit;
 	return 0;
 }

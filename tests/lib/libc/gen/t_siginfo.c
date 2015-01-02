@@ -46,6 +46,7 @@
 
 #ifdef HAVE_FENV
 #include <fenv.h>
+#include <ieeefp.h>	/* only need for ARM Cortex/Neon hack */
 #elif defined(_FLOAT_IEEE754)
 #include <ieeefp.h>
 #endif

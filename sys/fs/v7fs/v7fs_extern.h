@@ -46,7 +46,6 @@ struct v7fs_mount {
 	struct mount *mountp;
 	struct vnode *devvp;		/* block device mounted vnode */
 	struct v7fs_self *core;		/* filesystem dependent implementation*/
-	LIST_HEAD(, v7fs_node) v7fs_node_head;
 };
 
 struct v7fs_node {
@@ -59,8 +58,6 @@ struct v7fs_node {
 	int update_ctime;
 	int update_atime;
 	int update_mtime;
-
-	LIST_ENTRY(v7fs_node) link;
 };
 
 #define	VFSTOV7FS(mp)	((struct v7fs_mount *)((mp)->mnt_data))

@@ -259,6 +259,9 @@ v7fs_file_deallocate(struct v7fs_self *fs, struct v7fs_inode *parent_dir,
 			DPRINTF("directory not empty.\n");
 			return ENOTEMPTY;/* t_vnops dir_noempty, rename_dir(6)*/
 		}
+		error = v7fs_datablock_size_change(fs, 0, &inode);
+		if (error)
+			return error;
 		inode.nlink = 0;	/* remove this. */
 	} else {
 		/* Decrement reference count. */
@@ -271,14 +274,7 @@ v7fs_file_deallocate(struct v7fs_self *fs, struct v7fs_inode *parent_dir,
 		return error;
 	DPRINTF("remove dirent\n");
 
-	if (inode.nlink == 0) {
-		v7fs_datablock_contract(fs, &inode, inode.filesize);
-		DPRINTF("remove datablock\n");
-		v7fs_inode_deallocate(fs, ino);
-		DPRINTF("remove inode\n");
-	} else {
-		v7fs_inode_writeback(fs, &inode);
-	}
+	v7fs_inode_writeback(fs, &inode);
 
 	return 0;
 }

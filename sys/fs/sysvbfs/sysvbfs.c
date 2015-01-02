@@ -121,6 +121,7 @@ struct vfsops sysvbfs_vfsops = {
 	.vfs_statvfs = sysvbfs_statvfs,
 	.vfs_sync = sysvbfs_sync,
 	.vfs_vget = sysvbfs_vget,
+	.vfs_loadvnode = sysvbfs_loadvnode,
 	.vfs_fhtovp = sysvbfs_fhtovp,
 	.vfs_vptofh = sysvbfs_vptofh,
 	.vfs_init = sysvbfs_init,

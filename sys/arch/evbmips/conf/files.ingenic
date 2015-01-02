@@ -2,9 +2,11 @@
 
 
 file	arch/mips/mips/bus_dma.c
-
-file	arch/evbmips/evbmips/disksubr.c
+file	kern/subr_disk_mbr.c
 file	arch/evbmips/evbmips/interrupt.c
+
+defflag	opt_ingenic.h	INGENIC_DEBUG INGENIC_CLOCK_DEBUG
+defflag	opt_ingenic.h	INGENIC_INTR_DEBUG
 
 file	arch/evbmips/ingenic/autoconf.c
 file	arch/evbmips/ingenic/machdep.c

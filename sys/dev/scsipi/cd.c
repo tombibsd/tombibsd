@@ -1321,35 +1321,12 @@ cdioctl(dev_t dev, u_long cmd, void *addr, int flag, struct lwp *l)
 		}
 	}
 
-	error = disk_ioctl(&cd->sc_dk, cmd, addr, flag, l); 
+	error = disk_ioctl(&cd->sc_dk, dev, cmd, addr, flag, l); 
 	if (error != EPASSTHROUGH)
 		return (error);
 
 	error = 0;
 	switch (cmd) {
-	case DIOCGDINFO:
-		*(struct disklabel *)addr = *(cd->sc_dk.dk_label);
-		return (0);
-#ifdef __HAVE_OLD_DISKLABEL
-	case ODIOCGDINFO:
-		newlabel = malloc(sizeof (*newlabel), M_TEMP, M_WAITOK);
-		if (newlabel == NULL)
-			return (EIO);
-		memcpy(newlabel, cd->sc_dk.dk_label, sizeof (*newlabel));
-		if (newlabel->d_npartitions > OLDMAXPARTITIONS)
-			error = ENOTTY;
-		else
-			memcpy(addr, newlabel, sizeof (struct olddisklabel));
-		free(newlabel, M_TEMP);
-		return error;
-#endif
-
-	case DIOCGPART:
-		((struct partinfo *)addr)->disklab = cd->sc_dk.dk_label;
-		((struct partinfo *)addr)->part =
-		    &cd->sc_dk.dk_label->d_partitions[part];
-		return (0);
-
 	case DIOCWDINFO:
 	case DIOCSDINFO:
 #ifdef __HAVE_OLD_DISKLABEL
@@ -2132,7 +2109,6 @@ cd_get_parms(struct cd_softc *cd, int flags)
 	 */
 	if (cd_size(cd, flags) == 0)
 		return (ENXIO);
-	disk_blocksize(&cd->sc_dk, cd->params.blksize);
 	return (0);
 }
 

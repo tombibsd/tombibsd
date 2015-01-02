@@ -2089,7 +2089,7 @@ eflashioctl(dev_t dev, u_long xfer, void *addr, int flag, struct lwp *l)
 	if ((sc->sc_flags & EFLASHF_LOADED) == 0)
 		return EIO;
 
-	error = disk_ioctl(&sc->sc_dk, xfer, addr, flag, l);
+	error = disk_ioctl(&sc->sc_dk, dev, xfer, addr, flag, l);
 	if (error != EPASSTHROUGH)
 		return (error);
 
@@ -2103,15 +2103,6 @@ eflashioctl(dev_t dev, u_long xfer, void *addr, int flag, struct lwp *l)
 		bad144intern(sc);
 		return 0;
 #endif
-	case DIOCGDINFO:
-		*(struct disklabel *)addr = *(sc->sc_dk.dk_label);
-		return 0;
-
-	case DIOCGPART:
-		((struct partinfo *)addr)->disklab = sc->sc_dk.dk_label;
-		((struct partinfo *)addr)->part =
-		    &sc->sc_dk.dk_label->d_partitions[EFLASHPART(dev)];
-		return 0;
 
 	case DIOCWDINFO:
 	case DIOCSDINFO:
@@ -2163,46 +2154,6 @@ eflashioctl(dev_t dev, u_long xfer, void *addr, int flag, struct lwp *l)
 
 	case DIOCCACHESYNC:
 		return 0;
-
-	case DIOCAWEDGE:
-	    {
-	    	struct dkwedge_info *dkw = (void *) addr;
-
-		if ((flag & FWRITE) == 0)
-			return (EBADF);
-
-		/* If the ioctl happens here, the parent is us. */
-		strcpy(dkw->dkw_parent, device_xname(sc->sc_dev));
-		return (dkwedge_add(dkw));
-	    }
-
-	case DIOCDWEDGE:
-	    {
-	    	struct dkwedge_info *dkw = (void *) addr;
-
-		if ((flag & FWRITE) == 0)
-			return (EBADF);
-
-		/* If the ioctl happens here, the parent is us. */
-		strcpy(dkw->dkw_parent, device_xname(sc->sc_dev));
-		return (dkwedge_del(dkw));
-	    }
-
-	case DIOCLWEDGES:
-	    {
-	    	struct dkwedge_list *dkwl = (void *) addr;
-
-		return (dkwedge_list(&sc->sc_dk, dkwl, l));
-	    }
-
-	case DIOCMWEDGES:
-	    {
-	    	if ((flag & FWRITE) == 0)
-			return (EBADF);
-
-		dkwedge_discover(&sc->sc_dk);
-		return 0;
-	    }
 
 	case DIOCGSTRATEGY:
 	    {

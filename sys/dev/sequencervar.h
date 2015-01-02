@@ -68,7 +68,6 @@ struct midi_dev {
 	int	instr_bank_size;
 	int	unit;
 	struct	sequencer_softc *seq;
-	struct	midi_softc *msc;
 	char	doingsysex;	/* doing a SEQ_SYSEX */
 	vnode_t *vp;
 };

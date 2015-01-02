@@ -155,6 +155,21 @@ decode_int(const char *arg, int *intp)
 }
 
 void
+decode_uint(const char *arg, unsigned *intp)
+{
+	char	*ep;
+	unsigned	ret;
+
+	ret = (unsigned)strtoul(arg, &ep, 10);
+
+	if (ep[0] == '\0') {
+		*intp = ret;
+		return;
+	}
+	errx(1, "argument `%s' not a valid integer", arg);
+}
+
+void
 decode_time(const char *arg, struct timeval *tvp)
 {
 	char	*s, *colon, *dot;

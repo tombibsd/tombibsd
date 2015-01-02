@@ -847,7 +847,7 @@ xbdioctl(dev_t dev, u_long cmd, void *data, int flag, struct lwp *l)
 	    dev, cmd, data, flag, l));
 	dksc = &sc->sc_dksc;
 
-	error = disk_ioctl(&sc->sc_dksc.sc_dkdev, cmd, data, flag, l);
+	error = disk_ioctl(&sc->sc_dksc.sc_dkdev, dev, cmd, data, flag, l);
 	if (error != EPASSTHROUGH)
 		return (error);
 

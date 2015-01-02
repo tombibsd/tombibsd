@@ -33,16 +33,6 @@
 #include <ucontext.h>
 #include <unistd.h>
 
-static void printk(const char *s);
-
-static void
-printk(const char *msg)
-{
-	int ret __attribute__((unused));
-
-	ret = write(2, msg, strlen(msg));
-}
-
 struct thread {
     char *name;
     void *lwp;

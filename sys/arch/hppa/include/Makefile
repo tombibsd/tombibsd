@@ -7,7 +7,7 @@ INCS=	ansi.h aout_machdep.h asm.h autoconf.h \
 	cdefs.h cpu.h cpufunc.h \
 	disklabel.h \
 	eisa_machdep.h elf_machdep.h endian.h endian_machdep.h exec.h \
-	float.h frame.h \
+	fenv.h float.h frame.h \
 	ieee.h ieeefp.h intr.h intrdefs.h iomod.h isa_machdep.h \
 	int_const.h int_fmtio.h int_limits.h int_mwgwtypes.h int_types.h \
 	kcore.h \

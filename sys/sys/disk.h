@@ -532,9 +532,8 @@ void	disk_destroy(struct disk *);
 void	disk_busy(struct disk *);
 void	disk_unbusy(struct disk *, long, int);
 bool	disk_isbusy(struct disk *);
-void	disk_blocksize(struct disk *, int);
 struct disk *disk_find(const char *);
-int	disk_ioctl(struct disk *, u_long, void *, int, struct lwp *);
+int	disk_ioctl(struct disk *, dev_t, u_long, void *, int, struct lwp *);
 void	disk_set_info(device_t, struct disk *, const char *);
 
 void	dkwedge_init(void);
