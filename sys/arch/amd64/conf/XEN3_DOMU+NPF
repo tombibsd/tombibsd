@@ -1,3 +1,5 @@
 include "arch/amd64/conf/XEN3_DOMU"
 
 pseudo-device	npf			# NPF packet filter
+options 	SLJIT
+options 	BPFJIT
