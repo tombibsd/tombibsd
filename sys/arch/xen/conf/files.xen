@@ -109,6 +109,12 @@ file	dev/cons.c
 
 
 #
+# Stack-less Just-In-Time compiler
+#
+
+include	"external/bsd/sljit/conf/files.sljit"
+
+#
 # Machine-independent SCSI drivers
 #
 
