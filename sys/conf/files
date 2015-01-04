@@ -198,7 +198,7 @@ include "dev/sysmon/files.sysmon"
 define	bpf_filter
 defparam opt_bpf.h	BPF_BUFSIZE
 
-defflag	opt_bpfjit.h	BPFJIT
+defflag	opt_bpf.h	BPFJIT
 
 file	net/bpfjit.c	sljit & bpfjit
 
