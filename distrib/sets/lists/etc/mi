@@ -96,7 +96,6 @@
 ./etc/install.d/dhcpd				etc-obsolete		obsolete
 ./etc/install.d/dhcpdrundir			etc-obsolete		obsolete
 ./etc/install.d/envsys				etc-sys-etc
-./etc/install.d/fontconfig			etc-obsolete		obsolete
 ./etc/install.d/gid				etc-sys-etc
 ./etc/install.d/gpio				etc-sys-etc
 ./etc/install.d/hosts				etc-sys-etc
@@ -125,8 +124,6 @@
 ./etc/install.d/varshm				etc-sys-etc
 ./etc/install.d/weekly				etc-sys-etc
 ./etc/install.d/wscons				etc-sys-etc
-./etc/install.d/x11				etc-obsolete		obsolete
-./etc/install.d/xkb				etc-obsolete		obsolete
 ./etc/iscsi/auths				etc-iscsi-etc		iscsi
 ./etc/iscsi/targets				etc-iscsi-etc		iscsi
 ./etc/kyua/kyua.conf				etc-kyua-etc		kyua
