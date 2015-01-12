@@ -39,7 +39,8 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <string.h>
-#include <sys/syslimits.h>
+#include <stdlib.h>
+#include <limits.h>
 #include <time.h>
 #include <vis.h>
 #include <stdint.h>

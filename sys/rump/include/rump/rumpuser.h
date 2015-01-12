@@ -235,6 +235,7 @@ void rumpuser_dl_bootstrap(rump_modinit_fn, rump_symload_fn, rump_compload_fn);
 int rumpuser_daemonize_begin(void);
 int rumpuser_daemonize_done(int);
 
+#if defined(_RUMP_SYSPROXY) || defined(LIBRUMPUSER)
 /*
  * syscall proxy
  */
@@ -248,5 +249,6 @@ int	rumpuser_sp_copyoutstr(void *, const void *, void *, size_t *);
 int	rumpuser_sp_anonmmap(void *, size_t, void **);
 int	rumpuser_sp_raise(void *, int);
 void	rumpuser_sp_fini(void *);
+#endif /* _RUMP_SYSPROXY || LIBRUMPUSER */
 
 #endif /* _RUMP_RUMPUSER_H_ */

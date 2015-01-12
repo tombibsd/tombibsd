@@ -1519,7 +1519,7 @@ ccdgetdefaultlabel(struct ccd_softc *cs, struct disklabel *lp)
 	lp->d_secpercyl = lp->d_ntracks * lp->d_nsectors;
 
 	strncpy(lp->d_typename, "ccd", sizeof(lp->d_typename));
-	lp->d_type = DTYPE_CCD;
+	lp->d_type = DKTYPE_CCD;
 	strncpy(lp->d_packname, "fictitious", sizeof(lp->d_packname));
 	lp->d_rpm = 3600;
 	lp->d_interleave = 1;

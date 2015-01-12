@@ -1992,7 +1992,7 @@ eflashgetdefaultlabel(struct eflash_softc *sc, struct disklabel *lp)
 	lp->d_ncylinders = 1;
 	lp->d_secpercyl = lp->d_ntracks * lp->d_nsectors;
 
-    lp->d_type = DTYPE_ST506; /* ?!? */
+	lp->d_type = DKTYPE_ST506; /* ?!? */
 
 	strncpy(lp->d_typename, ST506, 16);
 	strncpy(lp->d_packname, "fictitious", 16);

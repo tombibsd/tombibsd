@@ -684,7 +684,7 @@ pq3etsec_attach(device_t parent, device_t self, void *aux)
 	}
 
 	/*
-	 * If there was no MDIO 
+	 * If there was no MDIO
 	 */
 	if (mdio == CPUNODECF_MDIO_DEFAULT) {
 		aprint_normal("\n");

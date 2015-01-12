@@ -35,6 +35,7 @@
 #include <sys/cdefs.h>
 
 #define HW_RTC_BASE 0x8005C000
+#define HW_RTC_BASE_SIZE 0x2000
 
 /*
  * Real-Time Clock Control Register.

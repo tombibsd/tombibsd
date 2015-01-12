@@ -580,9 +580,9 @@ npfctl(int action, int argc, char **argv)
 		fun = "ioctl(IOC_NPF_SWITCH)";
 		break;
 	case NPFCTL_RELOAD:
-		npfctl_preload_bpfjit();
 		npfctl_config_init(false);
 		npfctl_parse_file(argc < 3 ? NPF_CONF_PATH : argv[2]);
+		npfctl_preload_bpfjit();
 		errno = ret = npfctl_config_send(fd, NULL);
 		fun = "npfctl_config_send";
 		break;

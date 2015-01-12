@@ -34,6 +34,7 @@ LDADD+=-lrumpdev_disk -lrumpdev					# disk device
 LDADD+=-lrumpvfs_fifofs -lrumpnet_local -lrumpnet_net -lrumpnet	# fifos
 VFSTESTDIR != cd ${.CURDIR}/../common && ${PRINTOBJDIR}
 LDADD+=-L${VFSTESTDIR} -lvfstest
-LDADD+=-lrumpvfs -lrump -lrumpuser -lpthread			# base
+LDADD+=-lrumpvfs -lrumpkern_sysproxy -lrump -lrumpuser		# base
+LDADD+=-lpthread
 
 .include <bsd.test.mk>

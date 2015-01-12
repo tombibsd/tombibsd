@@ -103,7 +103,7 @@
 ./usr/libdata/debug/usr/lib/rv32/liblzf.so.1.0.debug		comp-sys-debug	debug,compat,arch64
 ./usr/libdata/debug/usr/lib/rv32/liblzma.so.1.1.debug		comp-sys-debug	debug,compat,arch64
 ./usr/libdata/debug/usr/lib/rv32/libm.so.0.11.debug		comp-sys-debug	debug,compat,arch64
-./usr/libdata/debug/usr/lib/rv32/libmagic.so.5.0.debug		comp-sys-debug	debug,compat,arch64
+./usr/libdata/debug/usr/lib/rv32/libmagic.so.5.1.debug		comp-sys-debug	debug,compat,arch64
 ./usr/libdata/debug/usr/lib/rv32/libmenu.so.6.0.debug		comp-sys-debug	debug,compat,arch64
 ./usr/libdata/debug/usr/lib/rv32/libmj.so.1.0.debug		comp-crypto-debug	debug,compat,arch64
 ./usr/libdata/debug/usr/lib/rv32/libnetpgp.so.3.0.debug		comp-crypto-debug	crypto,debug,compat,arch64

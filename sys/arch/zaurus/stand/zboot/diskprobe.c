@@ -112,9 +112,9 @@ hardprobe(char *buf, size_t bufsiz)
 		} else {
 			/* Best guess */
 			switch (dip->disklabel.d_type) {
-			case DTYPE_SCSI:
-			case DTYPE_ESDI:
-			case DTYPE_ST506:
+			case DKTYPE_SCSI:
+			case DKTYPE_ESDI:
+			case DKTYPE_ST506:
 				dip->bios_info.flags |= BDI_GOODLABEL;
 				break;
 

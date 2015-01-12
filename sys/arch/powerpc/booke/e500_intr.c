@@ -1095,6 +1095,11 @@ e500_intr_init(void)
 	}
 
 	/*
+	 * Initialize interrupt handler lock
+	 */
+	mutex_init(&e500_intr_lock, MUTEX_DEFAULT, IPL_HIGH);
+
+	/*
 	 * We need to be in mixed mode.
 	 */
 	openpic_write(cpu, OPENPIC_GCR, GCR_M);

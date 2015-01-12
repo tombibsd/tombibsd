@@ -29,6 +29,8 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include "opt_imx.h"
+
 #include <sys/bus.h>
 #include <sys/cdefs.h>
 #include <sys/device.h>
@@ -65,6 +67,7 @@
 #endif
 
 #include "opt_evbarm_boardtype.h"
+#include "opt_machdep.h"
 
 #define	KERNEL_VM_BASE	(KERNEL_BASE + 0x8000000)
 #define	KERNEL_VM_SIZE	0x20000000
@@ -161,6 +164,9 @@ initarm(void *arg)
 	/* Copy boot arguments passed from bootimx23. */
 	boot_args = (char *)KERN_PHYSTOV(BOOTIMX23_ARGS);
 	memcpy(kernel_boot_args, boot_args, MAX_BOOT_STRING);
+#ifdef BOOT_ARGS
+	strcpy(kernel_boot_args, BOOT_ARGS);
+#endif
 	boot_args = kernel_boot_args;
 #ifdef VERBOSE_INIT_ARM
 	printf("boot_args @ %lx: '%s'\n", KERN_PHYSTOV(BOOTIMX23_ARGS),

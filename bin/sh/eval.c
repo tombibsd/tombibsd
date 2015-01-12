@@ -860,7 +860,7 @@ evalcommand(union node *cmd, int flgs, struct backcmd *backcmd)
 		 * child's address space is actually shared with the parent as
 		 * we rely on this.
 		 */
-		if (cmdentry.cmdtype == CMDNORMAL) {
+		if (usefork == 0 && cmdentry.cmdtype == CMDNORMAL) {
 			pid_t	pid;
 			int serrno;
 

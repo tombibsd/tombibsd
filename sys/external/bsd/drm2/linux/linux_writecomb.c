@@ -53,7 +53,7 @@ int
 linux_writecomb_init(void)
 {
 
-	mutex_init(&linux_writecomb.lock, MUTEX_DEFAULT, IPL_SCHED);
+	mutex_init(&linux_writecomb.lock, MUTEX_DEFAULT, IPL_VM);
 	idr_init(&linux_writecomb.idr);
 
 	return 0;

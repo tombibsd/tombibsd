@@ -9,7 +9,7 @@ TESTS_C=	h_simpleserver
 
 ATFFILE=	no
 
-LDADD+=	-lrump -lrumpuser -lrump -lpthread
+LDADD+=	-lrumpkern_sysproxy -lrump -lrumpuser -lrump -lpthread
 
 WARNS=	4
 NOMAN=

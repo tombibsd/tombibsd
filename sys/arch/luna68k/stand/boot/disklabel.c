@@ -204,7 +204,7 @@ disklabel(int argc, char *argv[])
 		bp->d_ntracks    = 12;
 		bp->d_ncylinders = 1076;
 
-		bp->d_type  = DTYPE_SCSI;
+		bp->d_type  = DKTYPE_SCSI;
 
 		bp->d_secpercyl  = bp->d_nsectors * bp->d_ntracks;
 		bp->d_secperunit = bp->d_secpercyl * bp->d_ncylinders;

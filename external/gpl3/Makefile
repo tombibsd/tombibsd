@@ -7,9 +7,7 @@ SUBDIR+=	binutils
 .endif
 
 .if ${MKGCC} != "no"
-.if ${MKGCCCMDS} != "no"
 SUBDIR+=	${EXTERNAL_GCC_SUBDIR}
-.endif
 .endif
 
 .if ${MKGDB} != "no"

@@ -605,7 +605,7 @@ cpu_ucode_load(struct cpu_ucode_softc *sc, const char *fwname)
 	int error;
 
 	if (sc->sc_blob != NULL) {
-		firmware_free(sc->sc_blob, 0);
+		firmware_free(sc->sc_blob, sc->sc_blobsize);
 		sc->sc_blob = NULL;
 		sc->sc_blobsize = 0;
 	}
@@ -632,7 +632,7 @@ cpu_ucode_load(struct cpu_ucode_softc *sc, const char *fwname)
 	return 0;
 
 err1:
-	firmware_free(sc->sc_blob, 0);
+	firmware_free(sc->sc_blob, sc->sc_blobsize);
 	sc->sc_blob = NULL;
 	sc->sc_blobsize = 0;
 err0:

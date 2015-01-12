@@ -8,9 +8,9 @@
 /ntfs_ihash.c/1.10/Fri Jan 27 19:48:40 2012/-kk/
 /ntfs_ihash.h/1.4/Thu Feb 15 15:40:52 2007/-kk/
 /ntfs_inode.h/1.9/Tue Dec  9 04:35:01 2014/-kk/
-/ntfs_subr.c/1.56/Fri Jan  2 11:21:46 2015/-kk/
+/ntfs_subr.c/1.58/Mon Jan 12 06:49:06 2015/-kk/
 /ntfs_subr.h/1.9/Tue Dec  9 04:35:01 2014/-kk/
-/ntfs_vfsops.c/1.100/Fri Jan  2 11:21:46 2015/-kk/
+/ntfs_vfsops.c/1.102/Mon Jan 12 06:49:06 2015/-kk/
 /ntfs_vfsops.h/1.9/Tue Dec  9 04:35:01 2014/-kk/
 /ntfs_vnops.c/1.59/Tue Dec  9 04:35:01 2014/-kk/
 /ntfsmount.h/1.5/Sat Dec  3 17:34:43 2005/-kk/

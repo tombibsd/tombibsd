@@ -1085,7 +1085,7 @@ fdioctl(dev_t dev, u_long cmd, void *addr, int flag, struct lwp *l)
 		memset(&buffer, 0, sizeof(buffer));
 
 		buffer.d_secpercyl = fd->sc_type->seccyl;
-		buffer.d_type = DTYPE_FLOPPY;
+		buffer.d_type = DKTYPE_FLOPPY;
 		buffer.d_secsize = FDC_BSIZE;
 
 		if (readdisklabel(dev, fdstrategy, &buffer, NULL) != NULL)

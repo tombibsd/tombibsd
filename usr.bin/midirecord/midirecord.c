@@ -75,7 +75,8 @@ static int	tempo = 120;
 static unsigned	notes_per_beat = 24;
 static bool ignore_timer_fail = false;
 
-static void debug_log(const char *, size_t, const char *, ...);
+static void debug_log(const char *, size_t, const char *, ...)
+    __printflike(3, 4);
 static size_t midi_event_local_to_output(seq_event_t, u_char *, size_t);
 static size_t midi_event_timer_wait_abs_to_output(seq_event_t, u_char *,
 						  size_t);
@@ -313,21 +314,21 @@ midi_event_timer_wait_abs_to_output(
 {
 	static unsigned prev_div;
 	unsigned cur_div;
-	unsigned val = 0, div;
+	unsigned val = 0, xdiv;
 	int vallen = 0, i;
 
 	if (prev_div == 0 && !oflag)
 		prev_div = e.t_WAIT_ABS.divisions;
 	cur_div = e.t_WAIT_ABS.divisions;
 
-	div = cur_div - prev_div;
-	if (div) {
-		while (div) {
+	xdiv = cur_div - prev_div;
+	if (xdiv) {
+		while (xdiv) {
 			uint32_t extra = val ? 0x80 : 0;
 
 			val <<= 8;
-			val |= (div & 0x7f) | extra;
-			div >>= 7;
+			val |= (xdiv & 0x7f) | extra;
+			xdiv >>= 7;
 			vallen++;
 		}
 	} else

@@ -368,7 +368,7 @@ disklabel_om_to_bsd(char *cp, struct disklabel *lp)
 	lp->d_magic2 = DISKMAGIC;
 	memcpy(lp->d_packname, sl->sl_text, sizeof(lp->d_packname));
 
-	lp->d_type	 = DTYPE_SCSI;
+	lp->d_type	 = DKTYPE_SCSI;
 	lp->d_secsize	 = 512;
 	lp->d_nsectors   = sl->sl_nsectors;
 	lp->d_ntracks    = sl->sl_ntracks;

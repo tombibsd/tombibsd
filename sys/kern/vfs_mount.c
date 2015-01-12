@@ -365,8 +365,10 @@ vfs_vnode_iterator_destroy(struct vnode_iterator *vi)
 
 	mutex_enter(&mntvnode_lock);
 	KASSERT(ISSET(mvp->v_iflag, VI_MARKER));
-	if (mvp->v_usecount != 0)
+	if (mvp->v_usecount != 0) {
 		TAILQ_REMOVE(&mvp->v_mount->mnt_vnodelist, mvp, v_mntvnodes);
+		mvp->v_usecount = 0;
+	}
 	mutex_exit(&mntvnode_lock);
 	vnfree(mvp);
 }

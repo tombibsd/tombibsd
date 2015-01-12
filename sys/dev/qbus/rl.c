@@ -294,7 +294,7 @@ rlattach(device_t parent, device_t self, void *aux)
 	dl->d_bbsize = BBSIZE;
 	dl->d_sbsize = SBLOCKSIZE;
 	dl->d_rpm = 2400;
-	dl->d_type = DTYPE_DEC;
+	dl->d_type = DKTYPE_DEC;
 	printf(": %s, %s\n", dl->d_typename, rlstate(rc->rc_rlc, ra->hwid));
 
 	/*

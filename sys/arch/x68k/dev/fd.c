@@ -1608,6 +1608,7 @@ fdioctl(dev_t dev, u_long cmd, void *addr, int flag, struct lwp *l)
 	struct fdformat_parms *form_parms;
 	struct fdformat_cmd *form_cmd;
 	struct ne7_fd_formb *fd_formb;
+	int part = DISKPART(dev);
 	struct disklabel buffer;
 	int error;
 	unsigned int scratch;
@@ -1876,7 +1877,7 @@ fdgetdisklabel(struct fd_softc *sc, dev_t dev)
 	lp->d_ncylinders  = sc->sc_type->size / lp->d_secpercyl;
 	lp->d_secperunit  = sc->sc_type->size;
 
-	lp->d_type        = DTYPE_FLOPPY;
+	lp->d_type        = DKTYPE_FLOPPY;
 	lp->d_rpm         = 300; 	/* XXX */
 	lp->d_interleave  = 1;		/* FIXME: is this OK?		*/
 	lp->d_bbsize      = 0;

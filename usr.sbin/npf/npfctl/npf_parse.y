@@ -31,10 +31,12 @@
 
 %{
 
-#include <stdio.h>
 #include <err.h>
-#include <vis.h>
 #include <netdb.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <vis.h>
 
 #include "npfctl.h"
 

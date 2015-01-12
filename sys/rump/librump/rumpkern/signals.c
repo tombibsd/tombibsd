@@ -93,7 +93,7 @@ rumpsig_raise(struct proc *p, int signo)
 	if (RUMP_LOCALPROC_P(p)) {
 		rumpuser_kill(p->p_pid, signo);
 	} else {
-		rumpuser_sp_raise(p->p_vmspace->vm_map.pmap, signo);
+		rump_sysproxy_raise(p->p_vmspace->vm_map.pmap, signo);
 	}
 }
 

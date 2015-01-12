@@ -381,7 +381,7 @@ mmem_defaultlabel(struct mmem_softc *sc, struct mmem_pt *pt,
 	memset(d, 0, sizeof *d);
 
 #if 0
-	d->d_type = DTYPE_FLOPPY;		/* XXX? */
+	d->d_type = DKTYPE_FLOPPY;		/* XXX? */
 #endif
 	strncpy(d->d_typename, sc->sc_devinfo->di_product_name,
 	    sizeof d->d_typename);

@@ -448,7 +448,7 @@ uvm_mmap_anon(struct proc *p, void **addrp, size_t size)
 	if (RUMP_LOCALPROC_P(curproc)) {
 		error = rumpuser_anonmmap(NULL, size, 0, 0, addrp);
 	} else {
-		error = rumpuser_sp_anonmmap(p->p_vmspace->vm_map.pmap,
+		error = rump_sysproxy_anonmmap(p->p_vmspace->vm_map.pmap,
 		    size, addrp);
 	}
 	return error;

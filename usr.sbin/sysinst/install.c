@@ -101,6 +101,7 @@ do_install(void)
 
 		if (md_pre_disklabel() != 0 ||
 			write_disklabel() != 0 ||
+                        set_swap_if_low_ram(pm->diskdev, pm->bsdlabel) != 0 || 
 			md_post_disklabel() != 0 ||
 			make_filesystems() ||
 			make_fstab() != 0 ||

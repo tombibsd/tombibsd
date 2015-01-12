@@ -1907,8 +1907,8 @@ ipw_cache_firmware(struct ipw_softc *sc)
 
 	return 0;
 
-fail3:	firmware_free(fw->ucode, 0);
-fail2:	firmware_free(fw->main, 0);
+fail3:	firmware_free(fw->ucode, fw->ucode_size);
+fail2:	firmware_free(fw->main, fw->main_size);
 fail1:  firmware_close(fwh);
 fail0:
 	return error;
@@ -1920,8 +1920,8 @@ ipw_free_firmware(struct ipw_softc *sc)
 	if (!(sc->flags & IPW_FLAG_FW_CACHED))
 		return;
 
-	firmware_free(sc->fw.main, 0);
-	firmware_free(sc->fw.ucode, 0);
+	firmware_free(sc->fw.main, sc->fw.main_size);
+	firmware_free(sc->fw.ucode, sc->fw.ucode_size);
 
 	sc->flags &= ~IPW_FLAG_FW_CACHED;
 }

@@ -546,7 +546,7 @@ md_set_disklabel(struct md_softc *sc)
 	lp->d_secpercyl = lp->d_ntracks*lp->d_nsectors;
 
 	strncpy(lp->d_typename, md_cd.cd_name, sizeof(lp->d_typename));
-	lp->d_type = DTYPE_UNKNOWN;
+	lp->d_type = DKTYPE_MD;
 	strncpy(lp->d_packname, "fictitious", sizeof(lp->d_packname));
 	lp->d_rpm = 3600;
 	lp->d_interleave = 1;

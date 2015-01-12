@@ -43,7 +43,7 @@ CLEANFILES+=	need-dl need-dl.c need-dl.out need-terminfo need-terminfo.c need-te
 
 cleandir: cleandir-llvm
 
-cleandir-llvm:
+cleandir-llvm: .PHONY
 	test ! -d config || rm -r config
 	rm -f need-dl need-dl.tmp
 

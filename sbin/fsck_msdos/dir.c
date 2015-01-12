@@ -326,7 +326,7 @@ delete(int f, struct bootblock *boot, struct fatEntry *fat, cl_t startcl,
 				break;
 			e = delbuf + endoff;
 		}
-		off = startcl * boot->SecPerClust + boot->ClusterOffset;
+		off = (startcl - CLUST_FIRST) * boot->SecPerClust + boot->FirstCluster;
 		off *= boot->BytesPerSec;
 		if (lseek(f, off, SEEK_SET) != off
 		    || read(f, delbuf, clsz) != clsz) {
@@ -491,7 +491,7 @@ readDosDirSection(int f, struct bootblock *boot, struct fatEntry *fat,
 			off = boot->ResSectors + boot->FATs * boot->FATsecs;
 		} else {
 			last = boot->SecPerClust * boot->BytesPerSec;
-			off = cl * boot->SecPerClust + boot->ClusterOffset;
+			off = (cl - CLUST_FIRST) * boot->SecPerClust + boot->FirstCluster;
 		}
 
 		off *= boot->BytesPerSec;
@@ -967,8 +967,8 @@ reconnect(int dosfs, struct bootblock *boot, struct fatEntry *fat, cl_t head)
 			pwarn("No space in %s\n", LOSTDIR);
 			return FSERROR;
 		}
-		lfoff = lfcl * boot->ClusterSize
-		    + boot->ClusterOffset * boot->BytesPerSec;
+		lfoff = (lfcl - CLUST_FIRST) * boot->ClusterSize
+		    + boot->FirstCluster * boot->BytesPerSec;
 		if (lseek(dosfs, lfoff, SEEK_SET) != lfoff
 		    || (size_t)read(dosfs, lfbuf, boot->ClusterSize) != boot->ClusterSize) {
 			perr("could not read LOST.DIR");

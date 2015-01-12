@@ -104,8 +104,8 @@ int
 linux_kmap_init(void)
 {
 
-	/* IPL_SCHED since interrupt handlers use kmap_atomic.  */
-	mutex_init(&linux_kmap_atomic_lock, MUTEX_DEFAULT, IPL_SCHED);
+	/* IPL_VM since interrupt handlers use kmap_atomic.  */
+	mutex_init(&linux_kmap_atomic_lock, MUTEX_DEFAULT, IPL_VM);
 
 	linux_kmap_atomic_vaddr = uvm_km_alloc(kernel_map, PAGE_SIZE, 0,
 	    (UVM_KMF_VAONLY | UVM_KMF_WAITVA));

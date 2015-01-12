@@ -283,18 +283,18 @@ rum_attachhook(void *xsc)
 	if (error != 0) {
 		printf("%s: failed to read firmware (error %d)\n",
 		    device_xname(sc->sc_dev), error);
-		firmware_free(ucode, 0);
+		firmware_free(ucode, size);
 		return error;
 	}
 
 	if (rum_load_microcode(sc, ucode, size) != 0) {
 		printf("%s: could not load 8051 microcode\n",
 		    device_xname(sc->sc_dev));
-		firmware_free(ucode, 0);
+		firmware_free(ucode, size);
 		return ENXIO;
 	}
 
-	firmware_free(ucode, 0);
+	firmware_free(ucode, size);
 	sc->sc_flags |= RT2573_FWLOADED;
 
 	return 0;

@@ -410,7 +410,7 @@ edgetdefaultlabel(struct ed_softc *ed, struct disklabel *lp)
 	lp->d_ncylinders = ed->cyl;
 	lp->d_secpercyl = lp->d_ntracks * lp->d_nsectors;
 
-	lp->d_type = DTYPE_ESDI;
+	lp->d_type = DKTYPE_ESDI;
 
 	strncpy(lp->d_typename, "ESDI", 16);
 	strncpy(lp->d_packname, "fictitious", 16);

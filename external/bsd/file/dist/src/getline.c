@@ -1,4 +1,5 @@
 /*	$NetBSD$	*/
+
 /*	NetBSD: getline.c,v 1.2 2014/09/16 17:23:50 christos Exp 	*/
 
 /*-
@@ -81,7 +82,7 @@ getdelim(char **buf, size_t *bufsiz, int delimiter, FILE *fp)
 	}
 }
 
-ssize_t
+public ssize_t
 getline(char **buf, size_t *bufsiz, FILE *fp)
 {
 	return getdelim(buf, bufsiz, '\n', fp);

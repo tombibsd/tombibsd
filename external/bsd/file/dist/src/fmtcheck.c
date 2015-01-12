@@ -1,4 +1,5 @@
 /*	$NetBSD$	*/
+
 /*	NetBSD: fmtcheck.c,v 1.8 2008/04/28 20:22:59 martin Exp 	*/
 
 /*-

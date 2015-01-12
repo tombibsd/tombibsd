@@ -2187,6 +2187,7 @@ iwi_cache_firmware(struct iwi_softc *sc)
 		error = EIO;
 		goto fail1;
 	}
+	sc->sc_blobsize = size;
 
 	sc->sc_blob = firmware_malloc(size);
 	if (sc->sc_blob == NULL) {
@@ -2246,7 +2247,7 @@ iwi_cache_firmware(struct iwi_softc *sc)
 	return 0;
 
 
-fail2:	firmware_free(sc->sc_blob, 0);
+fail2:	firmware_free(sc->sc_blob, sc->sc_blobsize);
 fail1:
 	return error;
 }
@@ -2258,7 +2259,7 @@ iwi_free_firmware(struct iwi_softc *sc)
 	if (!(sc->flags & IWI_FLAG_FW_CACHED))
 		return;
 
-	firmware_free(sc->sc_blob, 0);
+	firmware_free(sc->sc_blob, sc->sc_blobsize);
 
 	sc->flags &= ~IWI_FLAG_FW_CACHED;
 }

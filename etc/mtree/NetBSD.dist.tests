@@ -134,6 +134,7 @@
 ./usr/libdata/debug/usr/tests/net/icmp
 ./usr/libdata/debug/usr/tests/net/if
 ./usr/libdata/debug/usr/tests/net/if_loop
+./usr/libdata/debug/usr/tests/net/in_cksum
 ./usr/libdata/debug/usr/tests/net/mcast
 ./usr/libdata/debug/usr/tests/net/net
 ./usr/libdata/debug/usr/tests/net/sys
@@ -315,6 +316,7 @@
 ./usr/tests/net/if
 ./usr/tests/net/if_bridge
 ./usr/tests/net/if_loop
+./usr/tests/net/in_cksum
 ./usr/tests/net/mcast
 ./usr/tests/net/mpls
 ./usr/tests/net/net

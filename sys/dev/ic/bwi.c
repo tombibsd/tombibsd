@@ -1939,7 +1939,7 @@ invalid:
 	error = EINVAL;
 
 free_and_fail:
-	firmware_free(fwi->fwi_data, 0);
+	firmware_free(fwi->fwi_data, fwi->fwi_size);
 	fwi->fwi_data = NULL;
 	fwi->fwi_size = 0;
 
@@ -1953,7 +1953,7 @@ bwi_mac_fw_image_free(struct bwi_mac *mac, struct bwi_fw_image *fwi)
 	if (fwi->fwi_data != NULL) {
 		DPRINTF(mac->mac_sc, BWI_DBG_FIRMWARE, "freeing firmware %s\n",
 		    fwi->fwi_name);
-		firmware_free(fwi->fwi_data, 0);
+		firmware_free(fwi->fwi_data, fwi->fwi_size);
 		fwi->fwi_data = NULL;
 		fwi->fwi_size = 0;
 	}

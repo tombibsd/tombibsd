@@ -41,4 +41,6 @@ typedef int irqreturn_t;
 
 #define	IRQF_SHARED	0	/* XXX */
 
+#define	IPL_DRM		IPL_TTY	/* XXX */
+
 #endif  /* _DRM_DRM_IRQ_NETBSD_H_ */

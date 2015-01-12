@@ -1266,10 +1266,10 @@ sdgetdefaultlabel(struct sd_softc *sd, struct disklabel *lp)
 
 	switch (SCSIPI_BUSTYPE_TYPE(scsipi_periph_bustype(sd->sc_periph))) {
 	case SCSIPI_BUSTYPE_SCSI:
-		lp->d_type = DTYPE_SCSI;
+		lp->d_type = DKTYPE_SCSI;
 		break;
 	case SCSIPI_BUSTYPE_ATAPI:
-		lp->d_type = DTYPE_ATAPI;
+		lp->d_type = DKTYPE_ATAPI;
 		break;
 	}
 	/*

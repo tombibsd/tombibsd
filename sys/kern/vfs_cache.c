@@ -258,6 +258,9 @@ static void cache_reclaim(void);
 static int cache_ctor(void *, void *, int);
 static void cache_dtor(void *, void *);
 
+static struct sysctllog *sysctllog;
+static void sysctl_cache_stat_setup(void);
+
 /*
  * Compute the hash for an entry.
  *
@@ -885,6 +888,8 @@ nchinit(void)
 	   "namecache", "under scan target");
 	evcnt_attach_dynamic(&cache_ev_forced, EVCNT_TYPE_MISC, NULL,
 	   "namecache", "forced reclaims");
+
+	sysctl_cache_stat_setup();
 }
 
 static int
@@ -1250,9 +1255,12 @@ cache_stat_sysctl(SYSCTLFN_ARGS)
 	return sysctl_copyout(l, &stats, oldp, sizeof(stats));
 }
 
-SYSCTL_SETUP(sysctl_cache_stat_setup, "vfs.namecache_stats subtree setup")
+static void
+sysctl_cache_stat_setup(void)
 {
-	sysctl_createv(clog, 0, NULL, NULL,
+
+	KASSERT(sysctllog == NULL);
+	sysctl_createv(&sysctllog, 0, NULL, NULL,
 		       CTLFLAG_PERMANENT,
 		       CTLTYPE_STRUCT, "namecache_stats",
 		       SYSCTL_DESCR("namecache statistics"),

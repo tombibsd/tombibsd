@@ -474,7 +474,7 @@ sdgetdefaultlabel(struct sd_softc *sd, struct disklabel *lp)
 	lp->d_ncylinders = sd->sc_params.cyls;
 	lp->d_secpercyl = lp->d_ntracks * lp->d_nsectors;
 
-	lp->d_type = DTYPE_SCSI;
+	lp->d_type = DKTYPE_SCSI;
 
 	strncpy(lp->d_packname, "fictitious", 16);
 	lp->d_secperunit = sd->sc_params.disksize;

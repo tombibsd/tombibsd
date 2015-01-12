@@ -704,16 +704,8 @@ midi*	at pcppi?
 midi*	at sb?
 
 # Workstation Console attachments
-wsdisplay*	at	cfb?
-wsdisplay*	at	mfb?
-wsdisplay*	at	tfb?
-wsdisplay*	at	sfb?
-#wsdisplay*	at	sfbp?
-wsdisplay*	at	px?
-wsdisplay*	at	pxg?
-wsdisplay*	at	radeonfb?
-wsdisplay*	at	vga?
-wsdisplay*	at	tga?
+wsdisplay0	at	wsemuldisplaydev? console 1
+wsdisplay*	at	wsemuldisplaydev?
 wskbd*		at	lkkbd? console ?
 wsmouse*	at	vsms?
 wskbd*		at	pckbd?

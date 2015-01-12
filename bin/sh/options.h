@@ -99,9 +99,11 @@ DEF_OPT( "cdprint",	0 )	/* always print result of cd */
 #define	cdprint optlist[17].val
 DEF_OPT( "tabcomplete",	0 )	/* <tab> causes filename expansion */
 #define	tabcomplete optlist[18].val
+DEF_OPT( "fork",	'F' )	/* use fork(2) instead of vfork(2) */
+#define	usefork optlist[19].val
 #ifdef DEBUG
 DEF_OPT( "debug",	0 )	/* enable debug prints */
-#define	debug optlist[19].val
+#define	debug optlist[20].val
 #endif
 
 #ifdef DEFINE_OPTIONS

@@ -1,4 +1,5 @@
 /*	$NetBSD$	*/
+
 /*
  * Copyright (c) Ian F. Darwin 1986-1995.
  * Software written by Ian F. Darwin and others;
@@ -169,6 +170,7 @@ file_mdump(struct magic *m)
 		case FILE_MELDATE:
 			(void)fprintf(stderr, "%s,",
 			    file_fmttime(m->value.l, 0, tbuf));
+			break;
 		case FILE_QDATE:
 		case FILE_LEQDATE:
 		case FILE_BEQDATE:

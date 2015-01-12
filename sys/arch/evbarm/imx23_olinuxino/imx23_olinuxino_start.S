@@ -29,6 +29,8 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include "opt_imx.h"
+
 #include <machine/asm.h>
 #include <machine/pmap.h>
 #include <arm/armreg.h>

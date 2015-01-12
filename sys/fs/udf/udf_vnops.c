@@ -1742,6 +1742,8 @@ udf_symlink(void *v)
 			/* remove node */
 			udf_dir_detach(udf_node->ump, dir_node, udf_node, cnp);
 			udf_delete_node(udf_node);
+			vrele(*vpp);
+			*vpp = NULL;
 		}
 	}
 	return error;

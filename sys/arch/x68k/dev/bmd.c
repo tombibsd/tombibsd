@@ -426,7 +426,7 @@ bmd_getdisklabel(struct bmd_softc *sc, dev_t dev)
 	lp->d_secpercyl   = lp->d_nsectors * lp->d_ntracks;
 	lp->d_secperunit  = lp->d_secpercyl * lp->d_ncylinders;
 
-	lp->d_type        = DTYPE_LD;
+	lp->d_type        = DKTYPE_LD;
 	lp->d_rpm         = 300;	/* dummy */
 	lp->d_interleave  = 1;	/* dummy? */
 

@@ -214,7 +214,7 @@ adosfs_mountfs(struct vnode *devvp, struct mount *mp, struct lwp *l)
 	if (error)
 		goto fail;
 	parp = &dl.d_partitions[DISKPART(devvp->v_rdev)];
-	if (dl.d_type == DTYPE_FLOPPY) {
+	if (dl.d_type == DKTYPE_FLOPPY) {
 		amp->bsize = secsize;
 		secsperblk = 1;
 		resvblks   = 2;

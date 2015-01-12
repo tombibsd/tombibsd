@@ -737,6 +737,8 @@ ntfs_loadvnode(struct mount *mp, struct vnode *vp,
 
 	error = ntfs_ntvattrget(ntmp, ip, NTFS_A_NAME, NULL, 0, &vap);
 	if (error) {
+		printf("%s: attr %x for ino %" PRId64 ": error %d\n",
+		    __func__, NTFS_A_NAME, ip->i_number, error);
 		ntfs_ntput(ip);
 		goto out;
 	}
@@ -763,8 +765,12 @@ ntfs_loadvnode(struct mount *mp, struct vnode *vp,
 			fp->f_size = 0;
 			fp->f_allocated = 0;
 			error = 0;
-		} else
+		} else {
+			printf("%s: attr %x for ino %" PRId64 ": error %d\n",
+			    __func__, ntkey->k_attrtype, ip->i_number, error);
+			ntfs_ntput(ip);
 			goto out;
+		}
 	}
 
 	if (key_len <= sizeof(fp->f_smallkey))

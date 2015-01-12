@@ -5,7 +5,7 @@
 /ad.x86_64/1.6/Fri Jun 12 01:55:59 2009/-kk/
 /md.acorn32/1.7/Tue Sep  2 02:17:48 2008/-kk/
 /md.alpha/1.38/Sat Dec 27 03:32:28 2014/-kk/
-/md.amd64/1.74/Sat Dec 27 03:32:28 2014/-kk/
+/md.amd64/1.75/Mon Jan 12 06:41:01 2015/-kk/
 /md.amiga/1.21/Mon Feb  9 16:28:54 2009/-kk/
 /md.bebox/1.11/Sat Dec 27 03:32:28 2014/-kk/
 /md.cats/1.47/Tue Jan 14 16:01:10 2014/-kk/
@@ -17,7 +17,7 @@
 /md.hpcarm/1.18/Tue Jan 14 16:01:10 2014/-kk/
 /md.hpcmips/1.24/Tue Jan 14 16:01:10 2014/-kk/
 /md.hpcsh/1.17/Tue Jan 14 16:01:10 2014/-kk/
-/md.i386/1.93/Sat Dec 27 03:32:28 2014/-kk/
+/md.i386/1.94/Mon Jan 12 06:41:01 2015/-kk/
 /md.luna68k/1.13/Tue Jan 14 16:01:10 2014/-kk/
 /md.mac68k/1.14/Mon Feb  9 16:28:54 2009/-kk/
 /md.macppc/1.67/Sat Dec 27 03:32:29 2014/-kk/
@@ -34,5 +34,5 @@
 /md.vax/1.12/Tue Jan 14 16:01:10 2014/-kk/
 /md.x68k/1.18/Fri Mar 14 04:22:41 2014/-kk/
 /md.zaurus/1.14/Tue Jan 14 16:01:10 2014/-kk/
-/mi/1.34/Sat Dec 27 03:32:29 2014/-kk/
+/mi/1.35/Mon Jan 12 06:41:01 2015/-kk/
 D

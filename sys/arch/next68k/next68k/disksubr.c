@@ -89,7 +89,7 @@ parse_nextstep_label(struct next68k_disklabel *ondisk, struct disklabel *lp, str
 	
 	osdep->od_version = ondisk->cd_version;
 	lp->d_magic = lp->d_magic2 = DISKMAGIC;
-	lp->d_type = DTYPE_SCSI;
+	lp->d_type = DKTYPE_SCSI;
 	lp->d_subtype = 0;
 	if (sizeof (lp->d_typename) > sizeof (ondisk->cd_name))
 		lp->d_typename[sizeof (ondisk->cd_name)] = '\0';

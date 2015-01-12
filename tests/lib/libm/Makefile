@@ -16,6 +16,8 @@ CPPFLAGS+=	-DHAVE_FENV_H
 COPTS+=	-mfloat-ieee -mieee-with-inexact -mfp-trap-mode=sui -mtrap-precision=i
 .endif
 
+CPPFLAGS.t_fmod.c+=	-I${.CURDIR}/../libc/gen
+
 TESTS_C+=	t_acos
 TESTS_C+=	t_asin
 TESTS_C+=	t_atan

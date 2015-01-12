@@ -227,7 +227,7 @@ main(int argc, char **argv)
 	before = after = 0;
 	use_reform = yflag = year = 0;
 	when = NULL;
-	while ((ch = getopt(argc, argv, "A:B:d:hjR:ry3")) != -1) {
+	while ((ch = getopt(argc, argv, "A:B:C:d:hjR:ry3")) != -1) {
 		switch (ch) {
 		case 'A':
 			after = getnum(optarg);
@@ -238,6 +238,11 @@ main(int argc, char **argv)
 			before = getnum(optarg);
 			if (before < 0)
 				errx(1, "Argument to -B must be positive");
+			break;
+		case 'C':
+			after = before = getnum(optarg);
+			if (after < 0)
+				errx(1, "Argument to -C must be positive");
 			break;
 		case 'd':
 			dow = getnum(optarg);
@@ -764,7 +769,7 @@ gregorian_reform(const char *p)
 		errx(1, "reform name %s invalid", p);
 
 	/*
-	 * 
+	 *
 	 */
 	reform->missing_days =
 		j_leap_days(reform->year, reform->month, reform->date) -
@@ -913,7 +918,7 @@ usage(void)
 {
 
 	(void)fprintf(stderr,
-	    "usage: cal [-3hjry] [-A after] [-B before] [-d day-of-week] "
+	    "usage: cal [-3hjry] [-A after] [-B before] [-C context] [-d day-of-week] "
 	    "[-R reform-spec]\n           [[month] year]\n");
 	exit(1);
 }

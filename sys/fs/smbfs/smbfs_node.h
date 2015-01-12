@@ -58,7 +58,7 @@ struct smbfs_fctx;
 struct smbkey {
 	struct vnode *		k_parent;	/* Parent vnode. */
 	u_char			k_nmlen;	/* Name length. */
-	u_char			k_name[0];	/* Name (variable length). */
+	u_char			k_name[];	/* Name (variable length). */
 } __packed;
 
 struct smbnode {
