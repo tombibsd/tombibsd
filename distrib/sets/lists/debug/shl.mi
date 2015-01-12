@@ -126,7 +126,7 @@
 ./usr/libdata/debug/usr/lib/liblzf.so.1.0.debug		comp-sys-debug	debug
 ./usr/libdata/debug/usr/lib/liblzma.so.1.1.debug	comp-sys-debug	debug
 ./usr/libdata/debug/usr/lib/libm.so.0.11.debug		comp-sys-debug	debug
-./usr/libdata/debug/usr/lib/libmagic.so.5.0.debug	comp-sys-debug	debug
+./usr/libdata/debug/usr/lib/libmagic.so.5.1.debug	comp-sys-debug	debug
 ./usr/libdata/debug/usr/lib/libmenu.so.6.0.debug	comp-sys-debug	debug
 ./usr/libdata/debug/usr/lib/libmj.so.1.0.debug		comp-crypto-debug	debug
 ./usr/libdata/debug/usr/lib/libmpc.so.2.0.debug		comp-c-shlib	obsolete
@@ -222,6 +222,7 @@
 ./usr/libdata/debug/usr/lib/librumpkern_ksem.so.0.0.debug	comp-obsolete		obsolete,rump
 ./usr/libdata/debug/usr/lib/librumpkern_sljit.so.0.0.debug	comp-rump-debug	debug,sljit,rump
 ./usr/libdata/debug/usr/lib/librumpkern_solaris.so.0.0.debug	comp-rump-debug	debug,zfs,rump
+./usr/libdata/debug/usr/lib/librumpkern_sysproxy.so.0.0.debug	comp-rump-debug	debug,rump
 ./usr/libdata/debug/usr/lib/librumpkern_time.so.0.0.debug	comp-obsolete obsolete
 ./usr/libdata/debug/usr/lib/librumpkern_tty.so.0.0.debug	comp-rump-debug	debug,rump
 ./usr/libdata/debug/usr/lib/librumpkern_z.so.0.0.debug	comp-rump-debug	debug,rump

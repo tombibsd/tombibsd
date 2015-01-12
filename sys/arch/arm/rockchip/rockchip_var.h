@@ -40,6 +40,7 @@
 struct obio_attach_args {
 	bus_space_tag_t	obio_bst;	/* bus space tag */
 	bus_space_handle_t obio_bsh;	/* bus space handle */
+	bus_space_handle_t obio_grf_bsh; /* GRF bus space handle */
 	bus_addr_t	obio_base;	/* base address of handle */
 	bus_addr_t	obio_offset;	/* address of device */
 	bus_size_t	obio_size;	/* size of device */
@@ -59,21 +60,26 @@ extern bus_space_handle_t rockchip_core1_bsh;
 
 void rockchip_bootstrap(void);
 
+void rockchip_cpufreq_init(void);
+
 bool rockchip_is_chip(const char *);
 #define ROCKCHIP_CHIPVER_RK3066		"300A20111111V101"
 #define ROCKCHIP_CHIPVER_RK3188		"310B20121130V100"
 #define ROCKCHIP_CHIPVER_RK3188PLUS	"310B20130131V101"
 
 u_int rockchip_apll_get_rate(void);
-u_int rockchip_apll_set_rate(u_int);
 u_int rockchip_cpll_get_rate(void);
+u_int rockchip_dpll_get_rate(void);
 u_int rockchip_gpll_get_rate(void);
 u_int rockchip_cpu_get_rate(void);
 u_int rockchip_ahb_get_rate(void);
 u_int rockchip_apb_get_rate(void);
+u_int rockchip_pclk_cpu_get_rate(void);
 u_int rockchip_a9periph_get_rate(void);
 u_int rockchip_mmc0_get_rate(void);
 u_int rockchip_mmc0_set_div(u_int);
 u_int rockchip_i2c_get_rate(u_int);
+u_int rockchip_mac_get_rate(void);
+u_int rockchip_mac_set_rate(u_int);
 
 #endif /* _ARM_ROCKCHIP_ROCKCHIP_VAR_H_ */

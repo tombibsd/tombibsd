@@ -1754,7 +1754,7 @@ vndgetdefaultlabel(struct vnd_softc *sc, struct disklabel *lp)
 	lp->d_secpercyl = lp->d_ntracks * lp->d_nsectors;
 
 	strncpy(lp->d_typename, "vnd", sizeof(lp->d_typename));
-	lp->d_type = DTYPE_VND;
+	lp->d_type = DKTYPE_VND;
 	strncpy(lp->d_packname, "fictitious", sizeof(lp->d_packname));
 	lp->d_rpm = 3600;
 	lp->d_interleave = 1;

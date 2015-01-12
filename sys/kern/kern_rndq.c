@@ -222,7 +222,8 @@ rnd_counter(void)
 	uint32_t ret;
 
 #if defined(__HAVE_CPU_COUNTER)
-	return (cpu_counter32());
+	if (cpu_hascounter())
+		return cpu_counter32();
 #endif
 	if (rnd_ready) {
 		nanouptime(&ts);

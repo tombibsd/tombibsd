@@ -793,7 +793,7 @@ write_label(int f)
 	}
 
 #ifdef VAX_ALTLABELS
-	if (lab.d_type == DTYPE_SMD && lab.d_flags & D_BADSECT &&
+	if (lab.d_type == DKTYPE_SMD && lab.d_flags & D_BADSECT &&
 	    lab.d_secsize == 512) {
 		/* Write the label to the odd sectors of the last track! */
 		daddr_t	alt;

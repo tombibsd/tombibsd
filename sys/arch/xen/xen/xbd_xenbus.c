@@ -220,7 +220,7 @@ extern struct cfdriver xbd_cd;
 
 /* Pseudo-disk Interface */
 static struct dk_intf dkintf_esdi = {
-        DTYPE_ESDI,
+        DKTYPE_ESDI,
 	"Xen Virtual ESDI",
 	xbdopen,
 	xbdclose,
@@ -846,10 +846,6 @@ xbdioctl(dev_t dev, u_long cmd, void *data, int flag, struct lwp *l)
 	DPRINTF(("xbdioctl(%d, %08lx, %p, %d, %p)\n",
 	    dev, cmd, data, flag, l));
 	dksc = &sc->sc_dksc;
-
-	error = disk_ioctl(&sc->sc_dksc.sc_dkdev, dev, cmd, data, flag, l);
-	if (error != EPASSTHROUGH)
-		return (error);
 
 	switch (cmd) {
 	case DIOCSSTRATEGY:

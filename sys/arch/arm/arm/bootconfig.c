@@ -36,6 +36,8 @@
  * SUCH DAMAGE.
  */
 
+#include "ether.h"
+
 #include <sys/param.h>
 
 __KERNEL_RCSID(0, "$NetBSD$");
@@ -43,6 +45,10 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/systm.h>
 
 #include <machine/bootconfig.h>
+
+#if NETHER > 0
+#include <net/if_ether.h>
+#endif
 
 /* 
  * Function to identify and process different types of boot argument
@@ -116,6 +122,18 @@ get_bootconf_option(char *opts, const char *opt, int type, void *result)
 					*((int *)result) =
 					    (u_int)strtoul(ptr, NULL, 16);
 					break;
+#if NETHER > 0
+				case BOOTOPT_TYPE_MACADDR : {
+					char mac[18];
+					if (strlen(ptr) < ETHER_ADDR_LEN)
+						return 0;
+					strlcpy(mac, ptr, sizeof(mac));
+					if (ether_aton_r((u_char *)result,
+							 ETHER_ADDR_LEN, mac))
+						return 0;
+					break;
+				}
+#endif
 				default:
 					return 0;
 				}

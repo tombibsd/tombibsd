@@ -101,9 +101,11 @@ obio_attach(device_t parent, device_t self, void *aux)
 
 	/*
 	 * Attach all on-board devices as described in the kernel
-	 * configuration file.
+	 * configuration file. Attach devices marked "crit 1" first.
 	 */
-	config_search_ia(obio_search, self, "obio", NULL);
+	for (int crit = 1; crit >= 0; crit--) {
+		config_search_ia(obio_search, self, "obio", &crit);
+	}
 }
 
 int
@@ -131,6 +133,10 @@ obio_search(device_t parent, cfdata_t cf, const int *ldesc, void *aux)
 {
 	struct obio_attach_args obio;
 	bus_addr_t addr = cf->cf_loc[OBIOCF_ADDR];
+	int crit = *(int *)aux;
+
+	if (cf->cf_loc[OBIOCF_CRIT] != crit)
+		return 0;
 
 	if (addr >= ROCKCHIP_CORE0_BASE &&
 	    addr < ROCKCHIP_CORE0_BASE + ROCKCHIP_CORE0_SIZE) {
@@ -152,6 +158,9 @@ obio_search(device_t parent, cfdata_t cf, const int *ldesc, void *aux)
 	obio.obio_port = cf->cf_loc[OBIOCF_PORT];
 	obio.obio_dmat = &rockchip_bus_dma_tag;
 
+	bus_space_subregion(&rockchip_bs_tag, rockchip_core1_bsh,
+	    ROCKCHIP_GRF_OFFSET, ROCKCHIP_GRF_SIZE, &obio.obio_grf_bsh);
+
 	switch (cf->cf_loc[OBIOCF_MULT]) {
 	case 1:
 		obio.obio_bst = &rockchip_bs_tag;
@@ -169,10 +178,30 @@ obio_search(device_t parent, cfdata_t cf, const int *ldesc, void *aux)
 	return 0;
 }
 
+#define RK3188_GRF_GPIO0C_IOMUX_OFFSET	0x0068
+#define RK3188_GRF_GPIO0D_IOMUX_OFFSET	0x006C
+
+#define RK3188_GRF_GPIO1A_IOMUX_OFFSET	0x0070
+#define RK3188_GRF_GPIO1B_IOMUX_OFFSET	0x0074
+#define RK3188_GRF_GPIO1C_IOMUX_OFFSET	0x0078
+#define RK3188_GRF_GPIO1D_IOMUX_OFFSET	0x007C
+
+#define RK3188_GRF_GPIO2A_IOMUX_OFFSET	0x0080
+#define RK3188_GRF_GPIO2B_IOMUX_OFFSET	0x0084
+#define RK3188_GRF_GPIO2C_IOMUX_OFFSET	0x0088
+#define RK3188_GRF_GPIO2D_IOMUX_OFFSET	0x008C
+
 #define RK3188_GRF_GPIO3A_IOMUX_OFFSET	0x0090
 #define RK3188_GRF_GPIO3B_IOMUX_OFFSET	0x0094
 #define RK3188_GRF_GPIO3C_IOMUX_OFFSET	0x0098
 #define RK3188_GRF_GPIO3D_IOMUX_OFFSET	0x009C
+
+#define RK3188_GRF_SOC_CON0_OFFSET	0x00A0
+#define RK3188_GRF_SOC_CON1_OFFSET	0x00A4
+#define RK3188_GRF_SOC_CON2_OFFSET	0x00A8
+#define RK3188_GRF_SOC_STATUS_OFFSET	0x00AC
+
+#define RK3188_GRF_IO_CON3_OFFSET	0x0100
 
 #define GRF_GPIO0A_IOMUX_OFFSET	0x00a8
 #define GRF_GPIO3A_IOMUX_OFFSET	0x00d8
@@ -185,6 +214,15 @@ void obio_init_grf(void)
 	obio_iomux(RK3188_GRF_GPIO3A_IOMUX_OFFSET, 0x55555554); /* MMC0 */
 	obio_iomux(RK3188_GRF_GPIO3B_IOMUX_OFFSET, 0x00050001); /* MMC0 */
 	obio_iomux(RK3188_GRF_GPIO3D_IOMUX_OFFSET, 0x3c000000); /* VBUS */
+	obio_iomux(RK3188_GRF_GPIO1D_IOMUX_OFFSET, 0x55555555); /* I2C[0124] */
+	obio_iomux(RK3188_GRF_GPIO3B_IOMUX_OFFSET, 0xa000a000); /* I2C3 */
+	obio_iomux(RK3188_GRF_SOC_CON1_OFFSET,	   0xf800f800);	/* I2C[01234] */
+
+//	obio_iomux(RK3188_GRF_GPIO0C_IOMUX_OFFSET, 0x00030000); /* PHY */
+	obio_iomux(RK3188_GRF_GPIO3C_IOMUX_OFFSET, 0xffffaaaa); /* PHY */
+	obio_iomux(RK3188_GRF_GPIO3D_IOMUX_OFFSET, 0x003f000a); /* PHY */
+	obio_iomux(RK3188_GRF_SOC_CON1_OFFSET,     0x00030002); /* VMAC */
+	obio_iomux(RK3188_GRF_IO_CON3_OFFSET,      0x000f000f); /* VMAC */
 #else
 	/* ChipSPARK Rayeager PX2 */
 	obio_iomux(GRF_GPIO0A_IOMUX_OFFSET, 0x14000000); /* VBUS */
@@ -220,6 +258,18 @@ void obio_init_gpio(void)
 	obio_swporta(ROCKCHIP_GPIO0_OFFSET, GPIO_SWPORTA_DD_OFFSET, __BIT(3));
 	obio_swporta(ROCKCHIP_GPIO2_OFFSET, GPIO_SWPORTA_DR_OFFSET, __BIT(31));
 	obio_swporta(ROCKCHIP_GPIO2_OFFSET, GPIO_SWPORTA_DD_OFFSET, __BIT(31));
+
+	/* PHY */
+	obio_swporta(ROCKCHIP_GPIO3_OFFSET, GPIO_SWPORTA_DR_OFFSET, __BIT(26));
+	obio_swporta(ROCKCHIP_GPIO3_OFFSET, GPIO_SWPORTA_DD_OFFSET, __BIT(26));
+
+	/* Minix Neo X7 USB ethernet */
+	obio_swporta(ROCKCHIP_GPIO0_OFFSET, GPIO_SWPORTA_DR_OFFSET, __BIT(30));
+	obio_swporta(ROCKCHIP_GPIO0_OFFSET, GPIO_SWPORTA_DD_OFFSET, __BIT(30));
+
+	/* IT66121 HDMI */
+	obio_swporta(ROCKCHIP_GPIO3_OFFSET, GPIO_SWPORTA_DR_OFFSET, __BIT(10));
+	obio_swporta(ROCKCHIP_GPIO3_OFFSET, GPIO_SWPORTA_DD_OFFSET, __BIT(10));
 #else
 	/* ChipSPARK Rayeager PX2 */
 	obio_swporta(ROCKCHIP_GPIO0_OFFSET, GPIO_SWPORTA_DR_OFFSET, __BIT(5));
@@ -253,10 +303,12 @@ obio_dump_clocks(void)
 {
 	printf("APLL: %u Hz\n", rockchip_apll_get_rate());
 	printf("CPLL: %u Hz\n", rockchip_cpll_get_rate());
+	printf("DPLL: %u Hz\n", rockchip_dpll_get_rate());
 	printf("GPLL: %u Hz\n", rockchip_gpll_get_rate());
 	printf("CPU: %u Hz\n", rockchip_cpu_get_rate());
 	printf("AHB: %u Hz\n", rockchip_ahb_get_rate());
 	printf("APB: %u Hz\n", rockchip_apb_get_rate());
+	printf("PCLK_CPU: %u Hz\n", rockchip_pclk_cpu_get_rate());
 	printf("A9PERIPH: %u Hz\n", rockchip_a9periph_get_rate());
 }
 #endif

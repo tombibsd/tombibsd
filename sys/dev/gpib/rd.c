@@ -1022,7 +1022,7 @@ rdgetdefaultlabel(struct rd_softc *sc, struct disklabel *lp)
 
 	memset((void *)lp, 0, sizeof(struct disklabel));
 
-	lp->d_type = DTYPE_HPIB /* DTYPE_GPIB */;
+	lp->d_type = DKTYPE_HPIB /* DKTYPE_GPIB */;
 	lp->d_secsize = DEV_BSIZE;
 	lp->d_nsectors = rdidentinfo[type].ri_nbpt;
 	lp->d_ntracks = rdidentinfo[type].ri_ntpc;

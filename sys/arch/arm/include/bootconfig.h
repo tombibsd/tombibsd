@@ -42,6 +42,7 @@
 #define BOOTOPT_TYPE_INT		2
 #define BOOTOPT_TYPE_BININT		3
 #define BOOTOPT_TYPE_HEXINT		4
+#define BOOTOPT_TYPE_MACADDR		5
 #define BOOTOPT_TYPE_MASK		7
 
 struct boot_physmem {

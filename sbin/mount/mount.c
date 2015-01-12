@@ -473,9 +473,9 @@ mountfs(const char *vfstype, const char *spec, const char *name,
 			warn("Cannot create pipe");
 	}
 
-	switch (pid = vfork()) {
+	switch (pid = fork()) {
 	case -1:				/* Error. */
-		warn("vfork");
+		warn("fork");
 		if (optbuf)
 			free(optbuf);
 		free(argv);

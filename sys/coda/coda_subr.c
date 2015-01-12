@@ -297,8 +297,10 @@ coda_cacheprint(struct mount *whoIam)
 		coda_nc_name(VTOC(vp));
 		printf("\n");
 		count++;
+		vrele(vp);
 	}
 	printf("coda_cacheprint: count %d\n", count);
+	vfs_vnode_iterator_destroy(marker);
 }
 #endif
 

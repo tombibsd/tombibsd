@@ -1,4 +1,5 @@
 /*	$NetBSD$	*/
+
 /*	$File: ctime_r.c,v 1.1 2012/05/15 17:14:36 christos Exp $	*/
 
 #include "file.h"

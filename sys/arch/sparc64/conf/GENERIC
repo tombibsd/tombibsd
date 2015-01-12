@@ -888,6 +888,9 @@ cgthree*	at sbus? slot ? offset ?
 ## Sun "cgsix" accelerated color framebuffer.
 cgsix*		at sbus? slot ? offset ?
 
+## Southland Media Systems (now Quantum 3D) MGX
+mgx* 		at sbus? slot ? offset ?
+
 ## Sun FFB
 ffb*		at mainbus0
 upa*		at mainbus?
@@ -910,6 +913,7 @@ wcfb*		at pci?
 
 # generic PCI framebuffers
 genfb*		at pci?
+genfb* 		at sbus? slot ? offset ?
 
 # make sure the console display is always wsdisplay0
 wsdisplay0	at wsemuldisplaydev? console 1

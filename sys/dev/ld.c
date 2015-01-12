@@ -759,7 +759,7 @@ ldgetdefaultlabel(struct ld_softc *sc, struct disklabel *lp)
 	lp->d_nsectors = sc->sc_nsectors;
 	lp->d_ncylinders = sc->sc_ncylinders;
 	lp->d_secpercyl = lp->d_ntracks * lp->d_nsectors;
-	lp->d_type = DTYPE_LD;
+	lp->d_type = DKTYPE_LD;
 	strlcpy(lp->d_typename, "unknown", sizeof(lp->d_typename));
 	strlcpy(lp->d_packname, "fictitious", sizeof(lp->d_packname));
 	if (sc->sc_secperunit > UINT32_MAX)

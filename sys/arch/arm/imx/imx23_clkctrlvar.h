@@ -33,5 +33,6 @@
 #define _ARM_IMX_IMX23_CLKCTRLVAR_H_
 
 void clkctrl_en_usb(void);
+void clkctrl_en_filtclk(void);
 
 #endif /* !_ARM_IMX_IMX23_CLKCTRLVAR_H_ */

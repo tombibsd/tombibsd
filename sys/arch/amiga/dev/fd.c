@@ -743,7 +743,7 @@ fdgetdefaultlabel(struct fd_softc *sc, struct disklabel *lp, int part)
 	lp->d_ncylinders = sc->type->ncylinders;
 	lp->d_nsectors = sc->nsectors;
 	lp->d_secpercyl = lp->d_ntracks * lp->d_nsectors;
-	lp->d_type = DTYPE_FLOPPY;
+	lp->d_type = DKTYPE_FLOPPY;
 	lp->d_secperunit = lp->d_secpercyl * lp->d_ncylinders;
 	lp->d_rpm = 300; 		/* good guess I suppose. */
 	lp->d_interleave = 1;		/* should change when adding msdos */

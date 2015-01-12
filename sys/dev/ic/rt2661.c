@@ -2572,7 +2572,7 @@ rt2661_init(struct ifnet *ifp)
 
 		if (firmware_read(fh, 0, ucode, size) != 0) {
 			aprint_error_dev(sc->sc_dev, "could not read microcode %s\n", name);
-			firmware_free(ucode, 0);
+			firmware_free(ucode, size);
 			firmware_close(fh);
 			rt2661_stop(ifp, 1);
 			return EIO;
@@ -2580,13 +2580,13 @@ rt2661_init(struct ifnet *ifp)
 
 		if (rt2661_load_microcode(sc, ucode, size) != 0) {
 			aprint_error_dev(sc->sc_dev, "could not load 8051 microcode\n");
-			firmware_free(ucode, 0);
+			firmware_free(ucode, size);
 			firmware_close(fh);
 			rt2661_stop(ifp, 1);
 			return EIO;
 		}
 
-		firmware_free(ucode, 0);
+		firmware_free(ucode, size);
 		firmware_close(fh);
 		sc->sc_flags |= RT2661_FWLOADED;
 	}

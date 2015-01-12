@@ -1213,6 +1213,13 @@ mount_disks(void)
 }
 
 int
+set_swap_if_low_ram(const char *disk, partinfo *pp) {
+        if (get_ramsize() <= 32) 
+                return set_swap(disk, pp);
+        return 0;
+}
+
+int
 set_swap(const char *disk, partinfo *pp)
 {
 	int i;

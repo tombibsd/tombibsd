@@ -169,12 +169,12 @@
 /if_fxp_pci.c/1.81/Fri Apr 11 02:03:46 2014/-kk/
 /if_gem_pci.c/1.47/Fri Apr 11 02:03:46 2014/-kk/
 /if_hme_pci.c/1.37/Fri Apr 11 02:03:48 2014/-kk/
-/if_ipw.c/1.57/Fri Apr 11 02:03:48 2014/-kk/
+/if_ipw.c/1.58/Mon Jan 12 06:48:50 2015/-kk/
 /if_ipwreg.h/1.6/Tue Dec 25 18:33:40 2007/-kk/
 /if_ipwvar.h/1.16/Sat Oct 27 17:18:33 2012/-kk/
-/if_iwi.c/1.97/Fri Apr 11 02:03:48 2014/-kk/
+/if_iwi.c/1.98/Mon Jan 12 06:48:50 2015/-kk/
 /if_iwireg.h/1.19/Mon Sep  8 23:36:54 2008/-kk/
-/if_iwivar.h/1.16/Tue Jan 19 22:07:00 2010/-kk/
+/if_iwivar.h/1.17/Mon Jan 12 06:48:50 2015/-kk/
 /if_iwn.c/1.74/Tue Dec  9 04:24:01 2014/-kk/
 /if_iwnreg.h/1.15/Tue Dec  9 04:24:01 2014/-kk/
 /if_iwnvar.h/1.16/Tue Dec  9 04:16:13 2014/-kk/
@@ -233,9 +233,9 @@
 /if_wm.c/1.308/Tue Dec  9 04:34:58 2014/-kk/
 /if_wmreg.h/1.65/Tue Dec  9 04:16:13 2014/-kk/
 /if_wmvar.h/1.23/Tue Dec  9 04:43:49 2014/-kk/
-/if_wpi.c/1.69/Sat Dec 27 03:35:49 2014/-kk/
+/if_wpi.c/1.71/Mon Jan 12 06:48:51 2015/-kk/
 /if_wpireg.h/1.13/Sun Jul 20 13:26:25 2014/-kk/
-/if_wpivar.h/1.18/Fri Oct  3 09:26:02 2014/-kk/
+/if_wpivar.h/1.19/Mon Jan 12 06:48:51 2015/-kk/
 /if_xge.c/1.19/Fri Apr 11 02:03:49 2014/-kk/
 /if_xgereg.h/1.2/Sun Dec 11 12:22:50 2005/-kk/
 /ifpci.c/1.32/Fri Apr 11 02:03:49 2014/-kk/

@@ -72,7 +72,7 @@ ENTRY(cpu_in_cksum)
 	ldr	ip, [ip, #(M_NEXT)]
 .Lin_cksum_skip_entry:
 	subs	r2, r2, r1		/* offset = offset - mbuf length */
-	blt	.Lin_cksum_skip_done	/* if offset has gone negative start with this mbuf */
+	ble	.Lin_cksum_skip_done	/* if offset has gone negative start with this mbuf */
 	cmp	ip, #0x00
 	bne	.Lin_cksum_skip_loop
 	b	.Lin_cksum_whoops

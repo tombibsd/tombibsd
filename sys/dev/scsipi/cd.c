@@ -1698,10 +1698,10 @@ cdgetdefaultlabel(struct cd_softc *cd, struct cd_formatted_toc *toc,
 
 	switch (SCSIPI_BUSTYPE_TYPE(scsipi_periph_bustype(cd->sc_periph))) {
 	case SCSIPI_BUSTYPE_SCSI:
-		lp->d_type = DTYPE_SCSI;
+		lp->d_type = DKTYPE_SCSI;
 		break;
 	case SCSIPI_BUSTYPE_ATAPI:
-		lp->d_type = DTYPE_ATAPI;
+		lp->d_type = DKTYPE_ATAPI;
 		break;
 	}
 	/*

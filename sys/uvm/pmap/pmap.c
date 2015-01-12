@@ -197,7 +197,7 @@ CTASSERT(PMAP_ASID_RESERVED == 0);
  * Initialize the kernel pmap.
  */
 #ifdef MULTIPROCESSOR
-#define	PMAP_SIZE	offsetof(struct pmap, pm_pai[MAXCPUS])
+#define	PMAP_SIZE	offsetof(struct pmap, pm_pai[PMAP_TLB_MAX])
 #else
 #define	PMAP_SIZE	sizeof(struct pmap)
 kmutex_t pmap_pvlist_mutex __aligned(COHERENCY_UNIT);

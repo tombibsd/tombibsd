@@ -121,6 +121,7 @@ static const struct power_event_description pswitch_type_desc[] = {
 	{ PSWITCH_TYPE_RESET, 		"reset_button" },
 	{ PSWITCH_TYPE_ACADAPTER,	"acadapter" },
 	{ PSWITCH_TYPE_HOTKEY,		"hotkey_button" },
+	{ PSWITCH_TYPE_RADIO,		"radio_button" },
 	{ -1, NULL }
 };
 

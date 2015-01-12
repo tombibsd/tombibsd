@@ -143,6 +143,8 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include "ukbd.h"
 #endif
 #include "arml2cc.h"
+#include "act8846pm.h"
+#include "ether.h"
 
 #include <sys/param.h>
 #include <sys/systm.h>
@@ -182,6 +184,8 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <dev/ic/ns16550reg.h>
 #include <dev/ic/comreg.h>
 
+#include <dev/i2c/act8846.h>
+
 #include <arm/rockchip/rockchip_reg.h>
 #include <arm/rockchip/rockchip_crureg.h>
 #include <arm/rockchip/rockchip_var.h>
@@ -205,6 +209,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <dev/i2c/ddcreg.h>
 
 #include <dev/usb/ukbdvar.h>
+#include <net/if_ether.h>
 
 /*
  * ATAG cmdline length can be up to UINT32_MAX - 4, but Rockchip RK3188
@@ -465,7 +470,6 @@ initarm(void *arg)
 {
 	psize_t ram_size = 0;
 	char *ptr;
-	u_int cpufreq;
 	*(volatile int *)CONSADDR_VA  = 0x40;	/* output '@' */
 #if 1
 	rockchip_putchar('d');
@@ -595,11 +599,6 @@ initarm(void *arg)
 	if (get_bootconf_option(boot_args, "console",
 		    BOOTOPT_TYPE_STRING, &ptr) && strncmp(ptr, "fb", 2) == 0) {
 		use_fb_console = true;
-	}
-
-	if (get_bootconf_option(boot_args, "cpu.frequency",
-		    BOOTOPT_TYPE_INT, &cpufreq)) {
-		rockchip_apll_set_rate(cpufreq * 1000000);
 	}
 
 	curcpu()->ci_data.cpu_cc_freq = rockchip_cpu_get_rate();
@@ -733,6 +732,10 @@ rockchip_device_register(device_t self, void *aux)
 		return;
 	}
 
+	if (device_is_a(self, "cpu") && device_unit(self) == 0) {
+		rockchip_cpufreq_init();
+	}
+
 #ifdef CPU_CORTEXA9 
 	/*
 	 * We need to tell the A9 Global/Watchdog Timer
@@ -750,4 +753,54 @@ rockchip_device_register(device_t self, void *aux)
 		return;
 	}
 #endif
+
+	if (device_is_a(self, "dwcmmc") && device_unit(self) == 0) {
+#if NACT8846PM > 0
+		device_t pmic = device_find_by_driver_unit("act8846pm", 0);
+		if (pmic == NULL)
+			return;
+		struct act8846_ctrl *ctrl = act8846_lookup(pmic, "DCDC4");
+		if (ctrl == NULL)
+			return;
+		act8846_set_voltage(ctrl, 3300, 3300);
+#endif
+		return;
+	}
+
+	if (device_is_a(self, "rkemac") && device_unit(self) == 0) {
+#if NACT8846PM > 0
+		device_t pmic = device_find_by_driver_unit("act8846pm", 0);
+		if (pmic == NULL)
+			return;
+		struct act8846_ctrl *ctrl = act8846_lookup(pmic, "LDO5");
+		if (ctrl == NULL)
+			return;
+		act8846_set_voltage(ctrl, 3300, 3300);
+		act8846_enable(ctrl);
+#endif
+#if NETHER > 0
+		uint8_t enaddr[ETHER_ADDR_LEN];
+		if (get_bootconf_option(boot_args, "rkemac0.mac-address",
+		    BOOTOPT_TYPE_MACADDR, enaddr)) {
+			prop_data_t pd = prop_data_create_data(enaddr,
+			    sizeof(enaddr));
+			prop_dictionary_set(dict, "mac-address", pd);
+			prop_object_release(pd);
+		}
+#endif
+		return;
+	}
+
+	if (device_is_a(self, "ithdmi")) {
+#if NACT8846PM > 0
+		device_t pmic = device_find_by_driver_unit("act8846pm", 0);
+		if (pmic == NULL)
+			return;
+		struct act8846_ctrl *ctrl = act8846_lookup(pmic, "LDO2");
+		if (ctrl == NULL)
+			return;
+		act8846_enable(ctrl);
+#endif
+		return;
+	}
 }

@@ -11,7 +11,7 @@
 /dotlock.c/1.11/Wed Oct 21 01:07:46 2009/-kk/
 /edit.c/1.27/Sun Apr 29 23:50:22 2012/-kk/
 /extern.h/1.33/Sat Dec 27 03:36:00 2014/-kk/
-/fio.c/1.41/Sat Dec 27 03:36:00 2014/-kk/
+/fio.c/1.42/Mon Jan 12 06:49:39 2015/-kk/
 /format.c/1.15/Sat Apr 11 14:22:32 2009/-kk/
 /format.h/1.4/Mon Apr 28 20:24:14 2008/-kk/
 /getname.c/1.11/Tue Nov 28 18:45:32 2006/-kk/
@@ -34,7 +34,7 @@
 /mime_detach.h/1.2/Mon Apr 28 20:24:14 2008/-kk/
 /mime_header.c/1.9/Thu Oct 24 10:28:59 2013/-kk/
 /mime_header.h/1.5/Mon Apr 28 20:24:14 2008/-kk/
-/names.c/1.31/Sat Dec 27 03:36:00 2014/-kk/
+/names.c/1.32/Mon Jan 12 06:49:39 2015/-kk/
 /pathnames.h/1.8/Tue Nov 28 18:45:32 2006/-kk/
 /popen.c/1.27/Sun Apr 29 23:50:22 2012/-kk/
 /quit.c/1.28/Sun Apr 29 23:50:22 2012/-kk/

@@ -150,7 +150,6 @@ ntfs_findvattr(struct ntfsmount *ntmp, struct ntnode *ip, struct ntvattr **lvapp
 /*
  * Search attribute specified in ntnode (load ntnode if necessary).
  * If not found but ATTR_A_ATTRLIST present, read it in and search through.
- * VOP_VGET node needed, and lookup through its ntnode (load if necessary).
  *
  * ntnode should be locked
  */
@@ -161,7 +160,6 @@ ntfs_ntvattrget(struct ntfsmount *ntmp, struct ntnode *ip, u_int32_t type,
 	struct ntvattr *lvap = NULL;
 	struct attr_attrlist *aalp;
 	struct attr_attrlist *nextaalp;
-	struct vnode *newvp;
 	struct ntnode *newip;
 	void *alpool;
 	size_t namelen, len;
@@ -224,18 +222,17 @@ ntfs_ntvattrget(struct ntfsmount *ntmp, struct ntnode *ip, u_int32_t type,
 		dprintf(("%s: attribute in ino: %d\n", __func__,
 				 aalp->al_inumber));
 
-		error = ntfs_vgetex(ntmp->ntm_mountp, aalp->al_inumber,
-				NTFS_A_DATA, "", LK_EXCLUSIVE, &newvp);
+		error = ntfs_ntlookup(ntmp, aalp->al_inumber, &newip);
 		if (error) {
-			printf("%s: CAN'T VGET INO: %d\n", __func__,
-			    aalp->al_inumber);
+			printf("%s: can't lookup ino %d"
+			    " for %" PRId64 " attr %x: error %d\n", __func__,
+			    aalp->al_inumber, ip->i_number, type, error);
 			goto out;
 		}
-		newip = VTONT(newvp);
 		/* XXX have to lock ntnode */
 		error = ntfs_findvattr(ntmp, newip, &lvap, vapp,
 				type, name, namelen, vcn);
-		vput(newvp);
+		ntfs_ntput(newip);
 		if (error == 0)
 			goto out;
 		printf("%s: ATTRLIST ERROR.\n", __func__);

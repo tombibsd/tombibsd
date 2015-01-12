@@ -70,6 +70,7 @@ typedef	volatile int		__cpu_simple_lock_t;
 
 #define	__HAVE_NEW_STYLE_BUS_H
 #define	__HAVE_ATOMIC_OPERATIONS
+#define	__HAVE_MEMBAR_DATADEP_CONSUMER
 #define	__HAVE_CPU_COUNTER
 #define	__HAVE_SYSCALL_INTERN
 #define	__HAVE_MINIMAL_EMUL

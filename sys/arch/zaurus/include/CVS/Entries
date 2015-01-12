@@ -4,7 +4,7 @@
 /apmvar.h/1.2/Mon Apr 28 20:23:41 2008/-kk/
 /asm.h/1.1/Sat Dec 16 05:43:00 2006/-kk/
 /atomic.h/1.1/Sat Dec 16 05:43:06 2006/-kk/
-/bootconfig.h/1.1/Sat Dec 16 05:43:15 2006/-kk/
+/bootconfig.h/1.2/Mon Jan 12 06:48:37 2015/-kk/
 /bootinfo.h/1.5/Sat Jan 21 19:44:30 2012/-kk/
 /bswap.h/1.1/Sat Dec 16 05:43:29 2006/-kk/
 /bus_defs.h/1.1/Tue Jul 19 15:11:49 2011/-kk/

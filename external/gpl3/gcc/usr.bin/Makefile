@@ -16,6 +16,7 @@ SUBDIR+=	host-libiberty .WAIT \
 		common common-target .WAIT \
 		libcpp libdecnumber .WAIT \
 		gcov cc1 cc1obj cc1plus cpp g++ gcc \
+		lto1 lto-wrapper \
 		include
 
 .include <bsd.subdir.mk>

@@ -35,7 +35,8 @@ LDADD+=-L${VFSTESTDIR} -lvfstest
 
 LDADD+=-lrumpfs_nfs						# NFS
 LDADD+=-lrumpnet_shmif -lrumpnet_netinet -lrumpnet_net -lrumpnet
-LDADD+=-lrumpvfs -lrump -lrumpuser -lpthread			# base
+LDADD+=-lrumpvfs -lrumpkern_sysproxy -lrump -lrumpuser		# base
+LDADD+=-lpthread
 
 LDADD+=-lutil
 

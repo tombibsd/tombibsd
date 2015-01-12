@@ -74,6 +74,12 @@ HAVE_GCC?=    48
 .endif
 
 #
+# Platforms that can't run a modern GCC natively
+.if ${MACHINE_ARCH} == "m68000"
+MKGCCCMDS?=	no
+.endif
+
+#
 # We import the old gcc as "gcc.old" when upgrading.  EXTERNAL_GCC_SUBDIR is
 # set to the relevant subdirectory in src/external/gpl3 for his HAVE_GCC.
 #
@@ -1268,7 +1274,7 @@ X11SRCDIR.${_proto}proto?=		${X11SRCDIRMIT}/${_proto}proto/dist
 	xkbcomp xorg-cf-files imake xorg-server xbiff xkbdata xkeyboard-config \
 	xbitmaps appres xeyes xev xedit sessreg pixman \
 	beforelight bitmap editres makedepend fonttosfnt fslsfonts fstobdf \
-	glu glw mesa-demos MesaDemos MesaGLUT MesaLib \
+	glu glw mesa-demos MesaDemos MesaGLUT MesaLib MesaLib7 \
 	ico iceauth lbxproxy listres lndir \
 	luit xproxymanagementprotocol mkfontdir oclock proxymngr rgb \
 	setxkbmap smproxy twm viewres x11perf xauth xcalc xclipboard \

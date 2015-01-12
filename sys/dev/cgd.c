@@ -118,7 +118,7 @@ static void	cgd_cipher(struct cgd_softc *, void *, void *,
 /* Pseudo-disk Interface */
 
 static struct dk_intf the_dkintf = {
-	DTYPE_CGD,
+	DKTYPE_CGD,
 	"cgd",
 	cgdopen,
 	cgdclose,
@@ -548,7 +548,6 @@ cgdioctl(dev_t dev, u_long cmd, void *data, int flag, struct lwp *l)
 	struct	dk_softc *dksc;
 	int	part = DISKPART(dev);
 	int	pmask = 1 << part;
-	int	error;
 
 	DPRINTF_FOLLOW(("cgdioctl(0x%"PRIx64", %ld, %p, %d, %p)\n",
 	    dev, cmd, data, flag, l));
@@ -566,10 +565,6 @@ cgdioctl(dev_t dev, u_long cmd, void *data, int flag, struct lwp *l)
 		dksc = &cs->sc_dksc;
 		break;
 	}
-
-	error = disk_ioctl(&dksc->sc_dkdev, dev, cmd, data, flag, l);
-	if (error != EPASSTHROUGH)
-		return (error);
 
 	switch (cmd) {
 	case CGDIOCSET:

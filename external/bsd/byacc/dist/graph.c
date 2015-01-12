@@ -1,7 +1,7 @@
 /*	$NetBSD$	*/
-/* Id: graph.c,v 1.7 2009/10/27 09:25:20 tom Exp */
 
 #include "defs.h"
+/* Id: graph.c,v 1.8 2014/02/19 00:46:57 Tom.Shields Exp  */
 
 #include <sys/cdefs.h>
 __RCSID("$NetBSD$");
@@ -55,10 +55,10 @@ graph(void)
 static void
 graph_state(int stateno)
 {
-    short *isp;
+    Value_t *isp;
     int rule;
-    short *sp;
-    short *sp1;
+    Value_t *sp;
+    Value_t *sp1;
 
     larno = (unsigned)lookaheads[stateno];
     fprintf(graph_file, "\n\tq%d [label=\"%d:\\l", stateno, stateno);

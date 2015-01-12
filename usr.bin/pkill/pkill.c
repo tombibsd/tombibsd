@@ -128,8 +128,8 @@ main(int argc, char **argv)
 		action = grepact;
 		pgrep = 1;
 	} else if (strcmp(getprogname(), "prenice") == 0) {
+		action = reniceact;
 		prenice = 1;
-
 	} else {
 		action = killact;
 		p = argv[1];
@@ -171,7 +171,6 @@ main(int argc, char **argv)
 		if (argc < 2)
 			usage();
 
-		action = reniceact;
 		p = argv[1];
 
 		i = (int)strtol(p, &q, 10);

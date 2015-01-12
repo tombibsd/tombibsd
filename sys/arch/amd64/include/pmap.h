@@ -188,7 +188,7 @@
 
 #define NKL4_KIMG_ENTRIES	1
 #define NKL3_KIMG_ENTRIES	1
-#define NKL2_KIMG_ENTRIES	16
+#define NKL2_KIMG_ENTRIES	32
 
 /*
  * Since kva space is below the kernel in its entirety, we start off

@@ -187,4 +187,13 @@ struct wpi_softc {
 	bool		is_scanning;
 
 	struct sysctllog	*sc_sysctllog;
+	struct sysmon_pswitch 	sc_rsw;		/* for radio switch events */
+	int			sc_rsw_status;
+#define WPI_RSW_UNKNOWN		0
+#define WPI_RSW_OFF		1
+#define WPI_RSW_ON		2
+	struct lwp		*sc_rsw_lwp;
+	struct kmutex 		sc_rsw_mtx;
+	struct kcondvar 	sc_rsw_cv;
+	int 			sc_dying;
 };

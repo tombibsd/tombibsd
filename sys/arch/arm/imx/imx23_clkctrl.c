@@ -149,3 +149,22 @@ clkctrl_en_usb(void)
 
 	return;
 }
+
+/*
+ * Enable 24MHz clock for the Digital Filter. 
+ *
+ */
+void
+clkctrl_en_filtclk(void)
+{
+	struct clkctrl_softc *sc = _sc;
+
+	if (sc == NULL) {
+		aprint_error("clkctrl is not initalized");
+		return;
+	}
+
+	CLKCTRL_WR(sc, HW_CLKCTRL_XTAL_CLR, HW_CLKCTRL_XTAL_FILT_CLK24M_GATE);
+
+	return;
+}

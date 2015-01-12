@@ -1359,10 +1359,10 @@ dkioctl(dev_t dev, u_long cmd, void *data, int flag, struct lwp *l)
 		return (ENXIO);
 
 	/*
-	 * We pass 0 instead of our device to indicate we don't
+	 * We pass NODEV instead of our device to indicate we don't
 	 * want to handle disklabel ioctls
 	 */
-	error = disk_ioctl(&sc->sc_dk, 0, cmd, data, flag, l);
+	error = disk_ioctl(&sc->sc_dk, NODEV, cmd, data, flag, l);
 	if (error != EPASSTHROUGH)
 		return (error);
 

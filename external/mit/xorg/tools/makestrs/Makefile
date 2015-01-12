@@ -7,12 +7,6 @@ NOMAN=	1
 .PATH:	${X11SRCDIR.Xt}/util
 
 HOSTPROG=	makestrs
-HOST_CPPFLAGS+=	-I. -I${DESTDIR}${X11INCDIR}
-
-#	Can't use -I${DESTDIR}${X11INCDIR} since pswrap is needed
-#	to create some header files.
-#
-BUILDSYMLINKS=	${X11SRCDIR.Xt}/include/X11 X11
-DPSRCS+=	X11
+HOST_CPPFLAGS+=	-I.
 
 .include <bsd.hostprog.mk>

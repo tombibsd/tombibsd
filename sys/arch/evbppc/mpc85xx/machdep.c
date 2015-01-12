@@ -997,6 +997,10 @@ e500_cpu_hatch(struct cpu_info *ci)
 	 */
 	cpu_write_4(OPENPIC_BASE + OPENPIC_CTPR, 15);	/* IPL_HIGH */
 
+	/* Set the MAS4 defaults */
+	mtspr(SPR_MAS4, MAS4_TSIZED_4KB | MAS4_MD);
+	tlb_invalidate_all();
+
 	intr_cpu_hatch(ci);
 
 	cpu_probe_cache();

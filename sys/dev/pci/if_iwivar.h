@@ -123,6 +123,7 @@ struct iwi_softc {
 	struct iwi_firmware	fw;
 	const char		*sc_fwname;
 	char			*sc_blob;
+	size_t			sc_blobsize;
 
 	uint32_t		flags;
 #define IWI_FLAG_FW_CACHED	(1 << 0)

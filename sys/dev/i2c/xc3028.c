@@ -219,7 +219,7 @@ xc3028_firmware_open(struct xc3028 *xc)
 
 done:
 	if (fw)
-		firmware_free(fw, 0);
+		firmware_free(fw, fwlen);
 	mutex_exit(&xc3028_firmware_lock);
 
 	if (error)

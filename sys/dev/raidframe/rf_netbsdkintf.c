@@ -2279,8 +2279,9 @@ KernelWakeupFunc(struct buf *bp)
 		      rf_ds_used_spare)) && 
 		     (queue->raidPtr->numFailures <
 		      queue->raidPtr->Layout.map->faultsTolerated)) {
-			printf("raid%d: IO Error.  Marking %s as failed.\n",
+			printf("raid%d: IO Error (%d). Marking %s as failed.\n",
 			       queue->raidPtr->raidid,
+			       bp->b_error,
 			       queue->raidPtr->Disks[queue->col].devname);
 			queue->raidPtr->Disks[queue->col].status =
 			    rf_ds_failed;
@@ -2353,7 +2354,7 @@ raidgetdefaultlabel(RF_Raid_t *raidPtr, struct raid_softc *rs,
 	lp->d_secpercyl = lp->d_ntracks * lp->d_nsectors;
 
 	strncpy(lp->d_typename, "raid", sizeof(lp->d_typename));
-	lp->d_type = DTYPE_RAID;
+	lp->d_type = DKTYPE_RAID;
 	strncpy(lp->d_packname, "fictitious", sizeof(lp->d_packname));
 	lp->d_rpm = 3600;
 	lp->d_interleave = 1;

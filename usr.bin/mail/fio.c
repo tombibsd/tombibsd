@@ -475,6 +475,7 @@ expand(const char *name)
 
 	switch (e) {
 	case 0: /* OK */
+		break;
 	case WRDE_NOSPACE:
 		warnx("Out of memory expanding `%s'", name);
 		return NULL;
@@ -497,9 +498,9 @@ expand(const char *name)
 		warnx("No match for `%s'", name);
 		break;
 	case 1:
-		if (strlen(we.we_wordv[1]) >= PATHSIZE)
+		if (strlen(we.we_wordv[0]) >= PATHSIZE)
 			warnx("Expansion too long for `%s'", name);
-		strlcpy(xname, we.we_wordv[1], PATHSIZE);
+		strlcpy(xname, we.we_wordv[0], PATHSIZE);
 		break;
 	default:
 		warnx("Ambiguous expansion for `%s'", name);

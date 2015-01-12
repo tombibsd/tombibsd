@@ -2301,6 +2301,7 @@ pm_commit(menudesc *m, void *arg)
 #endif
 			if (
 				write_disklabel() != 0   || /* Write slices table (disklabel) */
+                                set_swap_if_low_ram(pm->diskdev, pm->bsdlabel) != 0 || 
 				md_post_disklabel() != 0 || /* Enable swap and check badblock */
 				make_filesystems() != 0     /* Create filesystems with newfs */
 			) {

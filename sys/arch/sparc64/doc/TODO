@@ -5,6 +5,7 @@ Things to be done:
 common:
 - make %g6 point to curcpu
 - make %g7 point to curlwp
+- change run-time checks for cpu type to function pointers
 
 sun4u:
 

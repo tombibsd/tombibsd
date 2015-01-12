@@ -156,6 +156,12 @@ void		membar_producer(void);
 void		membar_consumer(void);
 void		membar_sync(void);
 
+#ifdef	__HAVE_MEMBAR_DATADEP_CONSUMER
+void		membar_datadep_consumer(void);
+#else
+#define	membar_datadep_consumer()	((void)0)
+#endif
+
 __END_DECLS
 
 #endif /* ! _SYS_ATOMIC_H_ */

@@ -3,7 +3,7 @@
 
 .include <bsd.own.mk>
 
-RUMPKERNCOMPS=	crypto tty z
+RUMPKERNCOMPS=	crypto sysproxy tty z
 
 .if ${MKSLJIT} != "no"
 RUMPKERNCOMPS+=	sljit

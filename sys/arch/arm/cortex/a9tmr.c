@@ -40,6 +40,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/proc.h>
 #include <sys/systm.h>
 #include <sys/timetc.h>
+#include <sys/xcall.h>
 
 #include <prop/proplib.h>
 
@@ -139,7 +140,7 @@ a9tmr_attach(device_t parent, device_t self, void *aux)
 	    device_xname(self), "missing interrupts");
 
 	bus_space_subregion(sc->sc_memt, sc->sc_memh, 
-	    TMR_GLOBAL_BASE, TMR_GLOBAL_BASE, &sc->sc_global_memh);
+	    TMR_GLOBAL_BASE, TMR_GLOBAL_SIZE, &sc->sc_global_memh);
 	bus_space_subregion(sc->sc_memt, sc->sc_memh, 
 	    TMR_PRIVATE_BASE, TMR_PRIVATE_SIZE, &sc->sc_private_memh);
 	bus_space_subregion(sc->sc_memt, sc->sc_memh, 
@@ -245,6 +246,33 @@ cpu_initclocks(void)
 	a9tmr_timecounter.tc_name = device_xname(sc->sc_dev);
 	a9tmr_timecounter.tc_frequency = sc->sc_freq;
 
+	tc_init(&a9tmr_timecounter);
+}
+
+static void
+a9tmr_update_freq_cb(void *arg1, void *arg2)
+{
+	a9tmr_init_cpu_clock(curcpu());
+}
+
+void
+a9tmr_update_freq(uint32_t freq)
+{
+	struct a9tmr_softc * const sc = &a9tmr_sc;
+	uint64_t xc;
+
+	KASSERT(sc->sc_dev != NULL);
+	KASSERT(freq != 0);
+
+	tc_detach(&a9tmr_timecounter);
+
+	sc->sc_freq = freq;
+	sc->sc_autoinc = sc->sc_freq / hz;
+
+	xc = xc_broadcast(0, a9tmr_update_freq_cb, NULL, NULL);
+	xc_wait(xc);
+
+	a9tmr_timecounter.tc_frequency = sc->sc_freq;
 	tc_init(&a9tmr_timecounter);
 }
 

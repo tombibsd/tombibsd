@@ -243,7 +243,7 @@ drm_pci_irq_install(struct drm_device *dev, irqreturn_t (*handler)(void *),
 		return -ENOENT;
 
 	intrstr = pci_intr_string(pa->pa_pc, ih, intrbuf, sizeof(intrbuf));
-	ih_cookie = pci_intr_establish(pa->pa_pc, ih, IPL_SCHED, handler, arg);
+	ih_cookie = pci_intr_establish(pa->pa_pc, ih, IPL_DRM, handler, arg);
 	if (ih_cookie == NULL) {
 		aprint_error_dev(dev->dev,
 		    "couldn't establish interrupt at %s (%s)\n",

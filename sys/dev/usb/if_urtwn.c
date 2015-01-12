@@ -3085,7 +3085,7 @@ urtwn_load_firmware(struct urtwn_softc *sc)
 	if (error != 0) {
 		aprint_error_dev(sc->sc_dev,
 		    "failed to read firmware (error %d)\n", error);
-		firmware_free(fw, 0);
+		firmware_free(fw, len);
 		return (error);
 	}
 
@@ -3175,7 +3175,7 @@ urtwn_load_firmware(struct urtwn_softc *sc)
 		goto fail;
 	}
  fail:
-	firmware_free(fw, 0);
+	firmware_free(fw, len);
 	return (error);
 }
 

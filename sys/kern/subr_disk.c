@@ -502,7 +502,7 @@ disk_ioctl(struct disk *dk, dev_t dev, u_long cmd, void *data, int flag,
 		break;
 	}
 
-	if (dev == 0)
+	if (dev == NODEV)
 		return EPASSTHROUGH;
 
 	/* The following should be moved to dk_ioctl */
@@ -521,6 +521,8 @@ disk_ioctl(struct disk *dk, dev_t dev, u_long cmd, void *data, int flag,
 #endif
 
 	case DIOCGPART:
+		if (dk->dk_label == NULL)
+			return EBUSY;
 		pt = data;
 		pt->disklab = dk->dk_label;
 		pt->part = &dk->dk_label->d_partitions[DISKPART(dev)];

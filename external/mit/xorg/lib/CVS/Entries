@@ -1,11 +1,12 @@
 /Makefile.inc/1.1.1.1/Tue Jul 29 05:01:21 2008/-kk/
-/Makefile/1.30/Sat Dec 27 03:34:44 2014/-kk/
+/Makefile/1.32/Mon Jan 12 06:45:56 2015/-kk/
 /asm.mk/1.1/Thu Dec 18 06:24:28 2014/-kk/
 /driver.mk/1.1/Thu Dec 18 06:24:28 2014/-kk/
 /libglsl.mk/1.1/Thu Dec 18 06:24:28 2014/-kk/
 /libloader.mk/1.1/Thu Dec 18 06:24:28 2014/-kk/
 /libmesa.mk/1.1/Thu Dec 18 06:24:28 2014/-kk/
 D/dri////
+D/dri7////
 D/fontconfig////
 D/freetype////
 D/gallium////

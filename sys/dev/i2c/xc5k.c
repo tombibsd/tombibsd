@@ -174,7 +174,7 @@ xc5k_firmware_open(struct xc5k *xc)
 
 done:
 	if (fw)
-		firmware_free(fw, 0);
+		firmware_free(fw, fwlen);
 	mutex_exit(&xc5k_firmware_lock);
 
 	if (error)

@@ -262,8 +262,6 @@ md_pre_disklabel(void)
 int
 md_post_disklabel(void)
 {
-	if (get_ramsize() < 6)
-		set_swap(pm->diskdev, pm->bsdlabel);
 	return 0;
 }
 
@@ -305,8 +303,6 @@ md_cleanup_install(void)
 int
 md_pre_update(void)
 {
-	if (get_ramsize() < 6)
-		set_swap(pm->diskdev, NULL);
 	return 1;
 }
 

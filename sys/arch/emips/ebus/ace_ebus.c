@@ -2076,7 +2076,7 @@ acegetdefaultlabel(struct ace_softc *ace, struct disklabel *lp)
 	     ace->sc_params.CurrentSectorsPerTrack);
 	lp->d_secpercyl = lp->d_ntracks * lp->d_nsectors;
 
-	lp->d_type = DTYPE_ST506; /* ?!? */
+	lp->d_type = DKTYPE_ST506; /* ?!? */
 
 	strncpy(lp->d_typename, ace->sc_params.ModelNumber, 16);
 	strncpy(lp->d_packname, "fictitious", 16);

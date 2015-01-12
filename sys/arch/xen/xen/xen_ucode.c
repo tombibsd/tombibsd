@@ -115,7 +115,7 @@ cpu_ucode_apply(const struct cpu_ucode *data)
 	error = -HYPERVISOR_platform_op(&op);
 
 	if (sc->sc_blob)
-		firmware_free(sc->sc_blob, 0);
+		firmware_free(sc->sc_blob, sc->sc_blobsize);
 	sc->sc_blob = NULL;
 	sc->sc_blobsize = 0;
 	return error;
@@ -141,7 +141,7 @@ compat6_cpu_ucode_apply(const struct compat6_cpu_ucode *data)
 	error = -HYPERVISOR_platform_op(&op);
 
 	if (sc->sc_blob != NULL)
-		firmware_free(sc->sc_blob, 0);
+		firmware_free(sc->sc_blob, sc->sc_blobsize);
 	sc->sc_blob = NULL;
 	sc->sc_blobsize = 0;
 	return error;

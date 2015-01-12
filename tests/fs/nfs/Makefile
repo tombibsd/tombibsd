@@ -22,7 +22,8 @@ LDADD+=-lrumpfs_ffs -lrumpvfs                                   # ffs
 LDADD+=-lrumpdev_disk -lrumpdev                                 # disk device
 LDADD+=-lrumpnet_shmif 						# shmif
 LDADD+=-lrumpnet_netinet -lrumpnet_net -lrumpnet
-LDADD+=-lrump -lrumpuser -lrump -lpthread             		# base
+LDADD+=-lrumpkern_sysproxy -lrump -lrumpuser 			# base
+LDADD+=-lpthread
 
 LDADD+=-lutil
 

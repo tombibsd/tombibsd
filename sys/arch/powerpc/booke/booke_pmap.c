@@ -167,6 +167,9 @@ pmap_bootstrap(vaddr_t startkernel, vaddr_t endkernel,
 
 	KASSERT(endkernel == trunc_page(endkernel));
 
+	/* init the lock */
+	pmap_tlb_info_init(&pmap_tlb0_info);
+
 	/*
 	 * Compute the number of pages kmem_arena will have.
 	 */
@@ -361,8 +364,8 @@ pmap_copy_page(paddr_t src, paddr_t dst)
 	const vaddr_t end = src_va + PAGE_SIZE;
 
 	while (src_va < end) {
-		__asm(
-			"dcbt	%2,%1"	"\n\t"	/* touch next src cachline */
+		__asm __volatile(
+			"dcbt	%2,%0"	"\n\t"	/* touch next src cacheline */
 			"dcba	0,%1"	"\n\t" 	/* don't fetch dst cacheline */
 		    :: "b"(src_va), "b"(dst_va), "b"(line_size));
 		for (u_int i = 0;

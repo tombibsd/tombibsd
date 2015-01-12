@@ -176,6 +176,7 @@ auto-build.h: gmp.h Makefile
 		gcc_cv_ld=${LD} \
 		gcc_cv_as=${AS} \
 		${HOST_SH} ${GNUHOSTDIST}/gcc/configure \
+			--enable-lto \
 			--build=`${HOST_SH} ${GNUHOSTDIST}/config.guess` \
 			--host=`${HOST_SH} ${GNUHOSTDIST}/config.guess` \
 			--target=${MACHINE_GNU_PLATFORM} && \

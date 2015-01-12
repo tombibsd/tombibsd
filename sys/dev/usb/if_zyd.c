@@ -278,7 +278,7 @@ zyd_attachhook(device_t self)
 	if (error != 0) {
 		aprint_error_dev(sc->sc_dev,
 		    "failed to read firmware (error %d)\n", error);
-		firmware_free(fw, 0);
+		firmware_free(fw, size);
 		return;
 	}
 
@@ -286,11 +286,11 @@ zyd_attachhook(device_t self)
 	if (error != 0) {
 		aprint_error_dev(sc->sc_dev,
 		    "could not load firmware (error=%d)\n", error);
-		firmware_free(fw, 0);
+		firmware_free(fw, size);
 		return;
 	}
 
-	firmware_free(fw, 0);
+	firmware_free(fw, size);
 	sc->sc_flags |= ZD1211_FWLOADED;
 
 	/* complete the attach process */

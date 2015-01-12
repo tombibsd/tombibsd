@@ -6,7 +6,7 @@
 /compat_16_machdep.c/1.1/Sat Nov 22 01:53:41 2008/-kk/
 /core_machdep.c/1.5/Tue Jan 14 16:04:58 2014/-kk/
 /cpu.c/1.14/Sun Apr  5 00:04:51 2009/-kk/
-/cpu_in_cksum.S/1.4/Tue Sep 27 00:35:38 2011/-kk/
+/cpu_in_cksum.S/1.5/Mon Jan 12 06:48:25 2015/-kk/
 /db_disasm.c/1.22/Fri Apr 11 02:03:38 2014/-kk/
 /db_interface.c/1.61/Fri Jan 28 21:06:07 2011/-kk/
 /db_memrw.c/1.9/Sat Jun  7 03:25:13 2008/-kk/

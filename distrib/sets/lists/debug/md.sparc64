@@ -265,7 +265,7 @@
 ./usr/libdata/debug/usr/lib/sparc/liblzf.so.1.0.debug			comp-compat-shlib	compat,pic,debug
 ./usr/libdata/debug/usr/lib/sparc/liblzma.so.1.1.debug			comp-compat-shlib	compat,pic,debug
 ./usr/libdata/debug/usr/lib/sparc/libm.so.0.11.debug			comp-compat-shlib	compat,pic,debug
-./usr/libdata/debug/usr/lib/sparc/libmagic.so.5.0.debug			comp-compat-shlib	compat,pic,debug
+./usr/libdata/debug/usr/lib/sparc/libmagic.so.5.1.debug			comp-compat-shlib	compat,pic,debug
 ./usr/libdata/debug/usr/lib/sparc/libmenu.so.6.0.debug			comp-compat-shlib	compat,pic,debug
 ./usr/libdata/debug/usr/lib/sparc/libmj.so.1.0.debug			comp-compat-shlib	compat,pic,debug
 ./usr/libdata/debug/usr/lib/sparc/libnetpgp.so.3.0.debug		comp-compat-shlib	compat,pic,debug
