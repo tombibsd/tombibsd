@@ -145,7 +145,7 @@
 ./usr/libdata/debug/usr/lib/powerpc/i18n/libmapper_serial.so.5.0.debug	comp-i18n-shlib		compat,arch64,debug,pic
 ./usr/libdata/debug/usr/lib/powerpc/i18n/libmapper_std.so.5.0.debug	comp-i18n-shlib		compat,arch64,debug,pic
 ./usr/libdata/debug/usr/lib/powerpc/i18n/libmapper_zone.so.5.0.debug	comp-i18n-shlib		compat,arch64,debug,pic
-./usr/libdata/debug/usr/lib/powerpc/libamu.so.4.0.debug			comp-compat-shlib	compat,arch64,debug,pic
+./usr/libdata/debug/usr/lib/powerpc/libamu.so.5.0.debug			comp-compat-shlib	compat,arch64,debug,pic
 ./usr/libdata/debug/usr/lib/powerpc/libarchive.so.3.1.debug		comp-compat-shlib	compat,arch64,debug,pic
 ./usr/libdata/debug/usr/lib/powerpc/libasan.so.0.0.debug		comp-compat-shlib	compat,arch64,debug,pic,gcc=48
 ./usr/libdata/debug/usr/lib/powerpc/libasn1.so.9.0.debug		comp-compat-shlib	compat,arch64,debug,pic,kerberos
@@ -156,10 +156,10 @@
 ./usr/libdata/debug/usr/lib/powerpc/libbluetooth.so.4.2.debug		comp-compat-shlib	compat,arch64,debug,pic
 ./usr/libdata/debug/usr/lib/powerpc/libbsdmalloc.so.0.0.debug		comp-compat-shlib	compat,arch64,debug,pic
 ./usr/libdata/debug/usr/lib/powerpc/libbz2.so.1.1.debug			comp-compat-shlib	compat,arch64,debug,pic
-./usr/libdata/debug/usr/lib/powerpc/libc.so.12.196.debug			comp-compat-shlib	compat,arch64,debug,pic
+./usr/libdata/debug/usr/lib/powerpc/libc.so.12.197.debug			comp-compat-shlib	compat,arch64,debug,pic
 ./usr/libdata/debug/usr/lib/powerpc/libcom_err.so.7.0.debug	comp-compat-shlib	compat,arch64,debug,pic,kerberos
 ./usr/libdata/debug/usr/lib/powerpc/libcrypt.so.1.0.debug			comp-compat-shlib	compat,arch64,debug,pic
-./usr/libdata/debug/usr/lib/powerpc/libcrypto.so.8.3.debug		comp-compat-shlib	compat,arch64,debug,pic,crypto
+./usr/libdata/debug/usr/lib/powerpc/libcrypto.so.8.4.debug		comp-compat-shlib	compat,arch64,debug,pic,crypto
 ./usr/libdata/debug/usr/lib/powerpc/libcrypto_rc5.so.7.0.debug		comp-compat-shlib	compat,arch64,debug,pic,crypto,crypto_rc5
 ./usr/libdata/debug/usr/lib/powerpc/libcurses.so.7.0.debug		comp-compat-shlib	compat,arch64,debug,pic
 ./usr/libdata/debug/usr/lib/powerpc/libdes.so.8.2.debug			comp-compat-shlib	compat,arch64,debug,pic,crypto
@@ -250,7 +250,7 @@
 ./usr/libdata/debug/usr/lib/powerpc/libsl.so.5.0.debug			comp-compat-shlib	compat,arch64,debug,pic
 ./usr/libdata/debug/usr/lib/powerpc/libsqlite3.so.1.2.debug		comp-compat-shlib	compat,arch64,debug,pic
 ./usr/libdata/debug/usr/lib/powerpc/libssh.so.23.0.debug			comp-compat-shlib	compat,arch64,debug,pic
-./usr/libdata/debug/usr/lib/powerpc/libssl.so.10.4.debug			comp-compat-shlib	compat,arch64,debug,pic
+./usr/libdata/debug/usr/lib/powerpc/libssl.so.10.5.debug			comp-compat-shlib	compat,arch64,debug,pic
 ./usr/libdata/debug/usr/lib/powerpc/libstdc++.so.7.0.debug		comp-compat-shlib	gcc=4,compat,arch64,debug,pic,libstdcxx
 ./usr/libdata/debug/usr/lib/powerpc/libstdc++.so.7.1.debug		comp-compat-shlib	gcc=45,compat,arch64,debug,pic,libstdcxx
 ./usr/libdata/debug/usr/lib/powerpc/libstdc++.so.7.3.debug		comp-compat-shlib	gcc=48,compat,arch64,debug,pic,libstdcxx

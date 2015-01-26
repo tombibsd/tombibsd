@@ -63,7 +63,7 @@ ATF_TC_BODY(proc3, tc)
 
 	RL(kq = kqueue());
 
-	EV_SET(&ke, getpid(), EVFILT_PROC, EV_ADD, NOTE_TRACK, 0, 0);
+	EV_SET(&ke, (uintptr_t)getpid(), EVFILT_PROC, EV_ADD, NOTE_TRACK, 0, 0);
 
 	RL(kevent(kq, &ke, 1, NULL, 0, NULL));
 

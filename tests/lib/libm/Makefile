@@ -4,7 +4,6 @@
 
 TESTSDIR=	${TESTSBASE}/lib/libm
 
-# ARM fenv is incomplete, so we can not enable that here
 .if ${MACHINE_CPU} == "aarch64" || ${MACHINE_CPU} == "arm" \
     || ${MACHINE_ARCH} == "hppa" \
     || ${MACHINE_ARCH} == "sparc" || ${MACHINE_ARCH} == "sparc64" \

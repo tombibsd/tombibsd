@@ -138,7 +138,7 @@
 /match.h/1.4/Wed Oct 29 08:08:43 2014/-kk/
 /md-sha256.c/1.2/Wed Oct 29 08:08:43 2014/-kk/
 /misc.c/1.9/Wed Oct 29 08:08:43 2014/-kk/
-/misc.h/1.7/Wed Oct 29 08:08:43 2014/-kk/
+/misc.h/1.8/Mon Jan 26 07:07:15 2015/-kk/
 /moduli.5/1.2/Wed Oct 29 08:08:43 2014/-kk/
 /moduli.c/1.7/Wed Oct 29 08:08:43 2014/-kk/
 /moduli/1.3/Wed Oct 29 08:08:43 2014/-kk/
@@ -154,7 +154,7 @@
 /msg.h/1.3/Wed Oct 29 08:08:43 2014/-kk/
 /mux.c/1.10/Wed Oct 29 08:08:43 2014/-kk/
 /myproposal.h/1.9/Wed Oct 29 08:08:43 2014/-kk/
-/namespace.h/1.3/Wed Oct 29 08:08:43 2014/-kk/
+/namespace.h/1.4/Mon Jan 26 07:07:15 2015/-kk/
 /nchan.c/1.5/Wed Oct 29 08:08:43 2014/-kk/
 /nchan.ms/1.3/Wed Oct 29 08:08:43 2014/-kk/
 /nchan2.ms/1.3/Wed Oct 29 08:08:43 2014/-kk/
@@ -259,7 +259,6 @@
 /sshpty.c/1.3/Wed Oct 29 08:08:44 2014/-kk/
 /sshpty.h/1.4/Wed Oct 29 08:08:44 2014/-kk/
 /sshtty.c/1.4/Wed Oct 29 08:08:44 2014/-kk/
-/strtonum.c/1.2/Wed Oct 29 08:08:44 2014/-kk/
 /ttymodes.c/1.3/Wed Oct 29 08:08:44 2014/-kk/
 /ttymodes.h/1.3/Wed Oct 29 08:08:44 2014/-kk/
 /uidswap.c/1.3/Wed Oct 29 08:08:44 2014/-kk/

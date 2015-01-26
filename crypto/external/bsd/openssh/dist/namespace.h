@@ -22,7 +22,6 @@
 #define pwcopy		ssh_pwcopy
 #define replacearg	ssh_replacearg
 #define strdelim	ssh_strdelim
-#define strtonum	ssh_strtonum
 #define tohex		ssh_tohex
 #define uudecode	ssh_uudecode
 #define uuencode	ssh_uuencode

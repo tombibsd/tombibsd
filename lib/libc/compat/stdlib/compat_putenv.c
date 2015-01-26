@@ -43,7 +43,6 @@ __RCSID("$NetBSD$");
 #include <compat/include/stdlib.h>
 
 #include "env.h"
-#include "reentrant.h"
 #include "local.h"
 
 #ifdef __weak_alias

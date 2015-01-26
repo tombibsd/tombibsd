@@ -206,7 +206,7 @@ obiosdhc_attach(device_t parent, device_t self, void *aux)
 	KASSERT(i < __arraycount(am335x_sdhc));
 #endif
 
-	/* XXXXXX: Turn-on regurator via I2C. */
+	/* XXXXXX: Turn-on regulator via I2C. */
 	/* XXXXXX: And enable ICLOCK/FCLOCK. */
 
 	/* MMCHS Soft reset */

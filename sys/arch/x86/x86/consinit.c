@@ -39,6 +39,9 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <machine/bootinfo.h>
 #include <arch/x86/include/genfb_machdep.h>
 
+#include <dev/cons.h>
+
+#include "nullcons.h"
 #include "genfb.h"
 #include "vga.h"
 #include "ega.h"
@@ -232,6 +235,14 @@ dokbd:
 				 COM_FREQ, COM_TYPE_NORMAL, comcnmode);
 		if (rv != 0)
 			panic("can't init serial console @%x", consinfo->addr);
+		return;
+	}
+#endif
+#if (NNULLCONS > 0)
+	if (!strcmp(consinfo->devname, "nullcons")) {
+		void nullcninit(struct consdev *cn);
+
+		nullcninit(0);
 		return;
 	}
 #endif

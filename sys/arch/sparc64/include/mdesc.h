@@ -48,4 +48,6 @@ const char *mdesc_get_prop_data(int, const char *, size_t *);
 int	mdesc_find(const char *, uint64_t);
 int	mdesc_find_child(int, const char *, uint64_t);
 int	mdesc_find_node(const char *);
+int	mdesc_find_node_by_idx(int, const char *);
+int	mdesc_next_node(int);
 #endif

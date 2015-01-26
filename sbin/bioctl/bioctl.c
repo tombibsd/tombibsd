@@ -51,7 +51,6 @@ __RCSID("$NetBSD$");
 #include <unistd.h>
 #include <ctype.h>
 #include <util.h>
-#include "strtonum.h"
 
 struct command {
 	const char *cmd_name;

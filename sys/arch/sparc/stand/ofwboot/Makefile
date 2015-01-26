@@ -103,7 +103,7 @@ ${PROG}: ${OBJS} ${LIBSA} ${LIBZ} ${LIBKERN}
 .else
 ${PROG}: ${OBJS} ${LIBSA} ${LIBZ} ${LIBKERN}
 	${_MKTARGET_LINK}
-	${LD} -X -N -Ttext ${RELOC} -e ${ENTRY} -o ${PROG} \
+	${LD} -X -N -S -Ttext ${RELOC} -e ${ENTRY} -o ${PROG} \
 	    ${OBJS} ${LIBSA} ${LIBZ} ${LIBKERN}	# native linker
 .endif
 

@@ -65,6 +65,10 @@ CFATTACH_DECL_NEW(rktimer, sizeof(struct rktimer_softc),
 static int
 rktimer_match(device_t parent, cfdata_t cf, void *aux)
 {
+
+	if (rockchip_chip_id() == ROCKCHIP_CHIP_ID_RK3066)
+		return 0;
+
 	return 1;
 }
 

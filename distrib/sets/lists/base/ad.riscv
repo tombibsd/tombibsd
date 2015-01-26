@@ -59,8 +59,8 @@
 ./usr/lib/rv32/i18n/libmapper_std.so.5.0	base-i18n-shlib		compat,pic,arch64
 ./usr/lib/rv32/i18n/libmapper_zone.so.5		base-i18n-shlib		compat,pic,arch64
 ./usr/lib/rv32/i18n/libmapper_zone.so.5.0	base-i18n-shlib		compat,pic,arch64
-./usr/lib/rv32/libamu.so.4			base-compat-shlib	compat,pic,arch64
-./usr/lib/rv32/libamu.so.4.0			base-compat-shlib	compat,pic,arch64
+./usr/lib/rv32/libamu.so.5			base-compat-shlib	compat,pic,arch64
+./usr/lib/rv32/libamu.so.5.0			base-compat-shlib	compat,pic,arch64
 ./usr/lib/rv32/libarchive.so.3			base-compat-shlib	compat,pic,arch64
 ./usr/lib/rv32/libarchive.so.3.1		base-compat-shlib	compat,pic,arch64
 ./usr/lib/rv32/libasan.so.0			base-compat-shlib	compat,pic,gcc=48
@@ -84,13 +84,13 @@
 ./usr/lib/rv32/libc++.so.1			base-compat-shlib	compat,pic,libcxx,arch64
 ./usr/lib/rv32/libc++.so.1.0			base-compat-shlib	compat,pic,libcxx,arch64
 ./usr/lib/rv32/libc.so.12			base-compat-shlib	compat,pic,arch64
-./usr/lib/rv32/libc.so.12.196			base-compat-shlib	compat,pic,arch64
+./usr/lib/rv32/libc.so.12.197			base-compat-shlib	compat,pic,arch64
 ./usr/lib/rv32/libcom_err.so.7			base-compat-shlib	compat,pic,kerberos,arch64
 ./usr/lib/rv32/libcom_err.so.7.0		base-compat-shlib	compat,pic,kerberos,arch64
 ./usr/lib/rv32/libcrypt.so.1			base-compat-shlib	compat,pic,arch64
 ./usr/lib/rv32/libcrypt.so.1.0			base-compat-shlib	compat,pic,arch64
 ./usr/lib/rv32/libcrypto.so.8			base-compat-shlib	compat,pic,crypto,arch64
-./usr/lib/rv32/libcrypto.so.8.3			base-compat-shlib	compat,pic,crypto,arch64
+./usr/lib/rv32/libcrypto.so.8.4			base-compat-shlib	compat,pic,crypto,arch64
 ./usr/lib/rv32/libcrypto_rc5.so.7		base-compat-shlib	compat,pic,crypto,crypto_rc5,arch64
 ./usr/lib/rv32/libcrypto_rc5.so.7.0		base-compat-shlib	compat,pic,crypto,crypto_rc5,arch64
 ./usr/lib/rv32/libcurses.so.7			base-compat-shlib	compat,pic,arch64
@@ -268,7 +268,7 @@
 ./usr/lib/rv32/libssh.so.23			base-compat-shlib	compat,pic,crypto,arch64
 ./usr/lib/rv32/libssh.so.23.0			base-compat-shlib	compat,pic,crypto,arch64
 ./usr/lib/rv32/libssl.so.10			base-compat-shlib	compat,pic,crypto,arch64
-./usr/lib/rv32/libssl.so.10.4			base-compat-shlib	compat,pic,crypto,arch64
+./usr/lib/rv32/libssl.so.10.5			base-compat-shlib	compat,pic,crypto,arch64
 ./usr/lib/rv32/libstdc++.so.7			base-compat-shlib	compat,pic,cxx,gcccmds,libstdcxx,arch64
 ./usr/lib/rv32/libstdc++.so.7.0			base-compat-shlib	gcc=4,compat,pic,cxx,libstdcxx,arch64
 ./usr/lib/rv32/libstdc++.so.7.3			base-compat-shlib	gcc=48,compat,pic,cxx,libstdcxx,arch64

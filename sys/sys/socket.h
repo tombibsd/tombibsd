@@ -341,7 +341,7 @@ struct sockcred {
  * Compute size of a sockcred structure with groups.
  */
 #define	SOCKCREDSIZE(ngrps) \
-	(sizeof(struct sockcred) + (sizeof(gid_t) * \
+	(/*CONSTCOND*/sizeof(struct sockcred) + (sizeof(gid_t) * \
 	    ((ngrps) ? ((ngrps) - 1) : 0)))
 #endif /* _NETBSD_SOURCE */
 
@@ -528,10 +528,11 @@ struct cmsghdr {
 
 /* given pointer to struct cmsghdr, return pointer to data */
 #define	CMSG_DATA(cmsg) \
-	((u_char *)(void *)(cmsg) + __CMSG_ALIGN(sizeof(struct cmsghdr)))
+    ((void *)((u_char *)(void *)(cmsg) + \
+    __CMSG_ALIGN(sizeof(struct cmsghdr))))
 #define	CCMSG_DATA(cmsg) \
-	((const u_char *)(const void *)(cmsg) + \
-	__CMSG_ALIGN(sizeof(struct cmsghdr)))
+    ((const void *)((const u_char *)(const void *)(cmsg) + \
+    __CMSG_ALIGN(sizeof(struct cmsghdr))))
 
 /*
  * Alignment requirement for CMSG struct manipulation.
@@ -549,11 +550,11 @@ struct cmsghdr {
 
 /* given pointer to struct cmsghdr, return pointer to next cmsghdr */
 #define	CMSG_NXTHDR(mhdr, cmsg)	\
-	(((char *)(cmsg) + __CMSG_ALIGN((cmsg)->cmsg_len) + \
+	(((char *)(void *)(cmsg) + __CMSG_ALIGN((cmsg)->cmsg_len) + \
 			    __CMSG_ALIGN(sizeof(struct cmsghdr)) > \
-	    (((char *)(mhdr)->msg_control) + (mhdr)->msg_controllen)) ? \
+	    (((char *)(void *)(mhdr)->msg_control) + (mhdr)->msg_controllen)) ?\
 	    (struct cmsghdr *)0 : \
-	    (struct cmsghdr *)(void *)((char *)(cmsg) + \
+	    (struct cmsghdr *)(void *)((char *)(void *)(cmsg) + \
 	        __CMSG_ALIGN((cmsg)->cmsg_len)))
 
 /*
@@ -562,7 +563,7 @@ struct cmsghdr {
  */
 #define	CMSG_FIRSTHDR(mhdr) \
 	((mhdr)->msg_controllen >= sizeof(struct cmsghdr) ? \
-	 (struct cmsghdr *)(mhdr)->msg_control : \
+	 (struct cmsghdr *)(void *)(mhdr)->msg_control : \
 	 (struct cmsghdr *)0)
 
 #define CMSG_SPACE(l)	(__CMSG_ALIGN(sizeof(struct cmsghdr)) + __CMSG_ALIGN(l))

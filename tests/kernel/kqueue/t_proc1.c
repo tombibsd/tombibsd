@@ -99,7 +99,8 @@ ATF_TC_BODY(proc1, tc)
 {
 	struct kevent event[1];
 	pid_t pid;
-	int kq, want, status;
+	int kq, status;
+	u_int want;
 
 	RL(kq = kqueue());
 
@@ -112,7 +113,7 @@ ATF_TC_BODY(proc1, tc)
 
 	(void)sleep(1); /* give child some time to come up */
 
-	event[0].ident = pid;
+	event[0].ident = (uintptr_t)pid;
 	event[0].filter = EVFILT_PROC;
 	event[0].flags = EV_ADD | EV_ENABLE;
 	event[0].fflags = NOTE_EXIT | NOTE_FORK | NOTE_EXEC; /* | NOTE_TRACK;*/

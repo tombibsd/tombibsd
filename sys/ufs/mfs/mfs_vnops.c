@@ -280,8 +280,8 @@ mfs_inactive(void *v)
 	if (bufq_peek(mfsp->mfs_buflist) != NULL)
 		panic("mfs_inactive: not inactive (mfs_buflist %p)",
 			bufq_peek(mfsp->mfs_buflist));
-	VOP_UNLOCK(vp);
-	return (0);
+
+	return VOCALL(spec_vnodeop_p,  VOFFSET(vop_inactive), ap);
 }
 
 /*
@@ -308,7 +308,7 @@ mfs_reclaim(void *v)
 		kmem_free(mfsp, sizeof(*mfsp));
 	}
 
-	return (0);
+	return VOCALL(spec_vnodeop_p,  VOFFSET(vop_reclaim), ap);
 }
 
 /*

@@ -5,6 +5,9 @@ SRCS=		lto-partition.c lto-object.c lto.c lto-lang.c attribs.c main.c
 
 CPPFLAGS+=	-DPREFIX=\"/usr\"
 
+COPTS.lto.c+=		-Wno-stack-protector
+COPTS.lto-lang.c+=	-Wno-stack-protector
+
 .include "../Makefile.backend"
 .include "../Makefile.backtrace"
 .include "../Makefile.common"

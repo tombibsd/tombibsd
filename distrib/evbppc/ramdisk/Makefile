@@ -22,7 +22,7 @@ IMAGEDEPENDS=	${CRUNCHBIN} \
 		${NETBSDSRCDIR}/etc/netconfig ${DISTRIBDIR}/common/protocols \
 		${DISTRIBDIR}/common/services
 MAKEDEVTARGETS=	std md0 wd0 wd1 wd2 wd3 cd0 cd1 sd0 sd1 sd2 sd3 st0 ipty
-MAKEDEVTARGETS+= ld0 ld1
+MAKEDEVTARGETS+= ld0 ld1 bpf
 MAKEDEVTARGETS+= drvctl dk0 dk1 dk2 dk3
 MAKEDEVTARGETS+= flash0 flash1 flash2 flash3 flash4 flash5 flash6 flash7
 

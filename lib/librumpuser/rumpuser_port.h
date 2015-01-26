@@ -112,10 +112,6 @@ typedef uint16_t in_port_t;
 #include <sys/select.h>
 #define atomic_inc_uint(x)  __sync_fetch_and_add(x, 1)
 #define atomic_dec_uint(x)  __sync_fetch_and_sub(x, 1)
-#include <time.h>
-int clock_nanosleep (clockid_t, int, const struct timespec *, struct timespec *);
-#include <stdlib.h>
-void arc4random_buf(void*, size_t);
 #endif
 
 /* sunny magic */

@@ -585,14 +585,19 @@ ffs_mount(struct mount *mp, const char *path, void *data, size_t *data_len)
 			fs->fs_fmod = 1;
 #ifdef WAPBL
 			if (fs->fs_flags & FS_DOWAPBL) {
-				printf("%s: replaying log to disk\n",
-				    mp->mnt_stat.f_mntonname);
-				KDASSERT(mp->mnt_wapbl_replay);
+				const char *nm = mp->mnt_stat.f_mntonname;
+				if (!mp->mnt_wapbl_replay) {
+					printf("%s: log corrupted;"
+					    " replay cancelled\n", nm);
+					return EFTYPE;
+				}
+				printf("%s: replaying log to disk\n", nm);
 				error = wapbl_replay_write(mp->mnt_wapbl_replay,
-							   devvp);
+				    devvp);
 				if (error) {
-					DPRINTF(("%s: wapbl_replay_write %d\n",
-					    __func__, error));
+					DPRINTF((
+					    "%s: %s: wapbl_replay_write %d\n",
+					    __func__, nm, error));
 					return error;
 				}
 				wapbl_replay_stop(mp->mnt_wapbl_replay);

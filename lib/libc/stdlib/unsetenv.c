@@ -47,7 +47,6 @@ __RCSID("$NetBSD$");
 #include <bitstring.h>
 
 #include "env.h"
-#include "reentrant.h"
 #include "local.h"
 
 /*

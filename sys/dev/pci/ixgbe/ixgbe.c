@@ -1478,11 +1478,11 @@ ixgbe_legacy_irq(void *arg)
 {
 	struct ix_queue *que = arg;
 	struct adapter	*adapter = que->adapter;
+	struct ifnet   *ifp = adapter->ifp;
 	struct ixgbe_hw	*hw = &adapter->hw;
 	struct 		tx_ring *txr = adapter->tx_rings;
-	bool		more_tx, more_rx;
+	bool		more_tx = false, more_rx = false;
 	u32       	reg_eicr, loop = MAX_LOOP;
-
 
 	reg_eicr = IXGBE_READ_REG(hw, IXGBE_EICR);
 
@@ -1490,18 +1490,21 @@ ixgbe_legacy_irq(void *arg)
 	++que->irqs;
 	if (reg_eicr == 0) {
 		adapter->stats.intzero.ev_count++;
-		ixgbe_enable_intr(adapter);
+		if ((ifp->if_flags & IFF_UP) != 0)
+			ixgbe_enable_intr(adapter);
 		return 0;
 	}
 
-	more_rx = ixgbe_rxeof(que, adapter->rx_process_limit);
+	if ((ifp->if_flags & IFF_RUNNING) != 0) {
+		more_rx = ixgbe_rxeof(que, adapter->rx_process_limit);
 
-	IXGBE_TX_LOCK(txr);
-	do {
-		adapter->txloops.ev_count++;
-		more_tx = ixgbe_txeof(txr);
-	} while (loop-- && more_tx);
-	IXGBE_TX_UNLOCK(txr);
+		IXGBE_TX_LOCK(txr);
+		do {
+			adapter->txloops.ev_count++;
+			more_tx = ixgbe_txeof(txr);
+		} while (loop-- && more_tx);
+		IXGBE_TX_UNLOCK(txr);
+	}
 
 	if (more_rx || more_tx) {
 		if (more_rx)

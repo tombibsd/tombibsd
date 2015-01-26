@@ -13,9 +13,9 @@
 /hdaudio_pci.h/1.1/Sat Aug  7 16:59:48 2010/-kk/
 /hdaudio_verbose.c/1.2/Fri Oct  3 10:05:15 2014/-kk/
 /hdaudio_verbose.h/1.2/Fri Oct  3 10:05:15 2014/-kk/
-/hdaudiodevs.h/1.2/Fri Oct  3 10:05:15 2014/-kk/
-/hdaudiodevs/1.1/Fri Sep 19 17:23:35 2014/-kk/
-/hdaudiodevs_data.h/1.2/Fri Oct  3 10:05:15 2014/-kk/
+/hdaudiodevs.h/1.3/Mon Jan 26 07:10:27 2015/-kk/
+/hdaudiodevs/1.2/Mon Jan 26 07:10:27 2015/-kk/
+/hdaudiodevs_data.h/1.3/Mon Jan 26 07:10:27 2015/-kk/
 /hdaudioio.h/1.3/Sun Oct 11 08:50:12 2009/-kk/
 /hdaudioreg.h/1.7/Tue Sep  6 10:48:28 2011/-kk/
 /hdaudiovar.h/1.9/Sun Feb 13 17:49:12 2011/-kk/

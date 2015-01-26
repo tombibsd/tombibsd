@@ -41,11 +41,6 @@ __RCSID("$NetBSD$");
 #define FE_ROUND_MASK	(FE_TONEAREST | FE_DOWNWARD | \
 			FE_UPWARD | FE_TOWARDZERO)
 
-/*
- * Our constants start at bit 0, while the fpsr bitfield starts at 9
- */
-#define	FE_ROUND_SHIFT	9
-
 /* Load lower 32 bits from floating-point state register */
 static inline uint32_t
 readfpsr(void)
@@ -209,7 +204,7 @@ fegetround(void)
 
 	r = readfpsr();
 
-	return (r>>FE_ROUND_SHIFT) & FE_ROUND_MASK;
+	return r & FE_ROUND_MASK;
 }
 
 /*
@@ -227,8 +222,8 @@ fesetround(int round)
 		return -1;
 
 	r = readfpsr();
-	r &= ~(FE_ROUND_MASK << FE_ROUND_SHIFT);
-	r |= round << FE_ROUND_SHIFT;
+	r &= ~FE_ROUND_MASK;
+	r |= round;
 	writefpsr(r);
 
 	/* Success */

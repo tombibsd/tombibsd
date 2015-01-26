@@ -1,5 +1,5 @@
 /arm11_pmc.c/1.4/Tue Dec 17 04:13:25 2013/-kk/
-/arm32_boot.c/1.11/Sat Dec 27 03:35:29 2014/-kk/
+/arm32_boot.c/1.12/Mon Jan 26 07:10:14 2015/-kk/
 /arm32_kvminit.c/1.32/Tue Dec  9 04:15:53 2014/-kk/
 /arm32_machdep.c/1.108/Tue Dec  9 04:34:39 2014/-kk/
 /arm32_reboot.c/1.8/Mon Jan 12 06:47:53 2015/-kk/

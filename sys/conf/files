@@ -51,6 +51,7 @@ defflag	opt_sosend_loan.h	SOSEND_NO_LOAN
 defflag	opt_route.h		RTCACHE_DEBUG RTFLUSH_DEBUG
 
 defflag				MULTIPROCESSOR
+defflag				NET_MPSAFE
 
 defflag	opt_config.h		INCLUDE_CONFIG_FILE INCLUDE_JUST_CONFIG
 
@@ -119,6 +120,8 @@ defparam opt_wapbl.h		WAPBL_DEBUG_PRINT
 
 # printf entropy source
 defflag opt_rnd_printf.h	RND_PRINTF
+
+defflag opt_todr.h		TODR_DEBUG
 
 # compatibility options
 #
@@ -1094,6 +1097,10 @@ file	dev/ic/acpipmtimer.c	acpipmtimer
 
 device 	hpet
 file 	dev/ic/hpet.c		hpet			needs-flag
+
+# DesignWare timer
+device	dwctmr
+file	dev/ic/dwc_tmr.c	dwctmr
 
 # SMSC LAN9118 Family Ethernet Controller
 #

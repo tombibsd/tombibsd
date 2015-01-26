@@ -392,8 +392,10 @@ static malloc_mutex_t init_lock = {_SPINLOCK_INITIALIZER};
 /* Set to true once the allocator has been initialized. */
 static bool malloc_initialized = false;
 
+#ifdef _REENTRANT
 /* Used to avoid initialization races. */
 static mutex_t init_lock = MUTEX_INITIALIZER;
+#endif
 #endif
 
 /******************************************************************************/
@@ -704,8 +706,10 @@ static size_t		arena_maxclass; /* Max size class for arenas. */
  * Chunks.
  */
 
+#ifdef _REENTRANT
 /* Protects chunk-related data structures. */
 static malloc_mutex_t	chunks_mtx;
+#endif
 
 /* Tree of chunks that are stand-alone huge allocations. */
 static chunk_tree_t	huge;
@@ -756,7 +760,9 @@ static void		*base_pages;
 static void		*base_next_addr;
 static void		*base_past_addr; /* Addr immediately past base_pages. */
 static chunk_node_t	*base_chunk_nodes; /* LIFO cache of chunk nodes. */
+#ifdef _REENTRANT
 static malloc_mutex_t	base_mtx;
+#endif
 #ifdef MALLOC_STATS
 static size_t		base_mapped;
 #endif
@@ -773,7 +779,9 @@ static size_t		base_mapped;
 static arena_t		**arenas;
 static unsigned		narenas;
 static unsigned		next_arena;
+#ifdef _REENTRANT
 static malloc_mutex_t	arenas_mtx; /* Protects arenas initialization. */
+#endif
 
 #ifndef NO_TLS
 /*
@@ -784,7 +792,9 @@ static __thread arena_t	*arenas_map;
 #define	get_arenas_map()	(arenas_map)
 #define	set_arenas_map(x)	(arenas_map = x)
 #else
+#ifdef _REENTRANT
 static thread_key_t arenas_map_key;
+#endif
 #define	get_arenas_map()	thr_getspecific(arenas_map_key)
 #define	set_arenas_map(x)	thr_setspecific(arenas_map_key, x)
 #endif

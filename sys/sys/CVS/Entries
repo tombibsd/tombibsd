@@ -69,7 +69,7 @@
 /envsys.h/1.34/Tue Jun  3 02:54:47 2014/-kk/
 /errno.h/1.40/Thu Oct 24 10:28:58 2013/-kk/
 /evcnt.h/1.8/Sat Jan 29 18:21:22 2011/-kk/
-/event.h/1.23/Sun Jun 26 16:43:12 2011/-kk/
+/event.h/1.24/Mon Jan 26 07:10:31 2015/-kk/
 /eventvar.h/1.8/Fri Mar 21 21:53:35 2008/-kk/
 /exec.h/1.148/Sat Dec 27 03:35:54 2014/-kk/
 /exec_aout.h/1.40/Sat Mar 17 21:54:12 2012/-kk/
@@ -105,7 +105,7 @@
 /ioctl_compat.h/1.16/Thu Oct 24 10:28:58 2013/-kk/
 /iostat.h/1.10/Sat Apr  4 07:30:09 2009/-kk/
 /ipc.h/1.33/Tue Mar 13 18:41:02 2012/-kk/
-/ipi.h/1.2/Tue Jun  3 03:10:02 2014/-kk/
+/ipi.h/1.3/Mon Jan 26 07:10:31 2015/-kk/
 /joystick.h/1.2/Sat Dec  3 17:10:46 2005/-kk/
 /kauth.h/1.71/Thu Oct 24 10:28:58 2013/-kk/
 /kcore.h/1.4/Tue Jan 18 08:17:39 2011/-kk/
@@ -143,8 +143,8 @@
 /msgbuf.h/1.15/Wed Nov  7 00:19:08 2007/-kk/
 /mtio.h/1.23/Mon Dec 26 18:41:36 2005/-kk/
 /mutex.h/1.20/Mon Feb  8 09:54:27 2010/-kk/
-/namei.h/1.91/Fri Jan  2 11:21:55 2015/-kk/
-/namei.src/1.34/Fri Jan  2 11:21:55 2015/-kk/
+/namei.h/1.92/Mon Jan 26 07:10:31 2015/-kk/
+/namei.src/1.35/Mon Jan 26 07:10:31 2015/-kk/
 /null.h/1.9/Tue Jul  6 11:56:20 2010/-kk/
 /once.h/1.5/Thu Oct  9 10:48:21 2008/-kk/
 /optstr.h/1.3/Mon Apr 28 20:24:11 2008/-kk/
@@ -200,7 +200,7 @@
 /signalvar.h/1.86/Tue Jun  3 02:54:47 2014/-kk/
 /sigtypes.h/1.10/Sun Feb 19 21:07:00 2012/-kk/
 /sleepq.h/1.23/Tue May  6 05:50:27 2014/-kk/
-/socket.h/1.111/Thu Dec 11 09:09:55 2014/-kk/
+/socket.h/1.113/Mon Jan 26 07:10:32 2015/-kk/
 /socketvar.h/1.135/Fri Oct  3 09:51:03 2014/-kk/
 /sockio.h/1.32/Thu Oct 24 10:28:58 2013/-kk/
 /spawn.h/1.5/Fri Oct  3 09:51:03 2014/-kk/

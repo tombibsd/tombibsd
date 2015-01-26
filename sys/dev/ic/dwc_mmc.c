@@ -67,6 +67,11 @@ static int	dwc_mmc_pio_wait(struct dwc_mmc_softc *,
 static int	dwc_mmc_pio_transfer(struct dwc_mmc_softc *,
 				     struct sdmmc_command *);
 
+#ifdef DWC_MMC_DEBUG
+static void	dwc_mmc_print_rint(struct dwc_mmc_softc *, const char *,
+				   uint32_t);
+#endif
+
 void		dwc_mmc_dump_regs(void);
 
 static struct sdmmc_chip_functions dwc_mmc_chip_functions = {
@@ -142,7 +147,7 @@ dwc_mmc_intr(void *priv)
 	MMC_WRITE(sc, DWC_MMC_MINTSTS_REG, mint);
 
 #ifdef DWC_MMC_DEBUG
-	device_printf(sc->sc_dev, "mint %#x rint %#x\n", mint, rint);
+	dwc_mmc_print_rint(sc, "irq", rint);
 #endif
 
 	if (rint & DWC_MMC_INT_CARDDET) {
@@ -489,8 +494,7 @@ dwc_mmc_exec_command(sdmmc_chipset_handle_t sch, struct sdmmc_command *cmd)
 	    DWC_MMC_INT_ERROR|DWC_MMC_INT_CD, hz * 10);
 	if (cmd->c_error == 0 && (sc->sc_intr_rint & DWC_MMC_INT_ERROR)) {
 #ifdef DWC_MMC_DEBUG
-		device_printf(sc->sc_dev, "%s: rint %#x\n", __func__,
-		    sc->sc_intr_rint);
+		dwc_mmc_print_rint(sc, "exec1", sc->sc_intr_rint);
 #endif
 		if (sc->sc_intr_rint & DWC_MMC_INT_RTO) {
 			cmd->c_error = ETIMEDOUT;
@@ -509,8 +513,7 @@ dwc_mmc_exec_command(sdmmc_chipset_handle_t sch, struct sdmmc_command *cmd)
 		if (cmd->c_error == 0 &&
 		    (sc->sc_intr_rint & DWC_MMC_INT_ERROR)) {
 #ifdef DWC_MMC_DEBUG
-			device_printf(sc->sc_dev, "%s: rint2 %#x\n", __func__,
-			    sc->sc_intr_rint);
+			dwc_mmc_print_rint(sc, "exec2", sc->sc_intr_rint);
 #endif
 			cmd->c_error = ETIMEDOUT;
 		}
@@ -557,6 +560,16 @@ static void
 dwc_mmc_card_intr_ack(sdmmc_chipset_handle_t sch)
 {
 }
+
+#ifdef DWC_MMC_DEBUG
+static void
+dwc_mmc_print_rint(struct dwc_mmc_softc *sc, const char *tag, uint32_t rint)
+{
+	char buf[128];
+	snprintb(buf, sizeof(buf), DWC_MMC_INT_BITS, rint);
+	device_printf(sc->sc_dev, "[%s] rint %s\n", tag, buf);
+}
+#endif
 
 void
 dwc_mmc_dump_regs(void)

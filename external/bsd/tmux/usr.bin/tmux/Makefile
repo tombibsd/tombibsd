@@ -154,6 +154,7 @@ CPPFLAGS+=	-I${SRCDIR} -I${.CURDIR}
 # Would be nicer to stick this in a config.h file, but the upstream code
 # does not use one at this moment.
 
+CPPFLAGS+=	-DHAVE_STRTONUM=1 -D_OPENBSD_SOURCE
 CPPFLAGS+=	-DHAVE_ASPRINTF=1
 CPPFLAGS+=	-DHAVE_B64_NTOP=1
 CPPFLAGS+=	-DHAVE_BITSTRING_H=1

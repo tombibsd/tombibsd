@@ -71,8 +71,8 @@ strerror_setup(void)
 __aconst char *
 strerror_l(int num, locale_t loc)
 {
-#ifdef _REENTRANT
 	int error;
+#ifdef _REENTRANT
 	char *buf;
 
 	thr_once(&strerror_once, strerror_setup);

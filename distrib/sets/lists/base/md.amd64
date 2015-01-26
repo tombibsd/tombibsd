@@ -63,8 +63,8 @@
 ./usr/lib/i386/i18n/libmapper_std.so.5.0	base-i18n-shlib		compat,pic
 ./usr/lib/i386/i18n/libmapper_zone.so.5		base-i18n-shlib		compat,pic
 ./usr/lib/i386/i18n/libmapper_zone.so.5.0	base-i18n-shlib		compat,pic
-./usr/lib/i386/libamu.so.4			base-compat-shlib	compat,pic
-./usr/lib/i386/libamu.so.4.0			base-compat-shlib	compat,pic
+./usr/lib/i386/libamu.so.5			base-compat-shlib	compat,pic
+./usr/lib/i386/libamu.so.5.0			base-compat-shlib	compat,pic
 ./usr/lib/i386/libarchive.so.3			base-compat-shlib	compat,pic
 ./usr/lib/i386/libarchive.so.3.1		base-compat-shlib	compat,pic
 ./usr/lib/i386/libasan.so.0			base-compat-shlib	compat,pic,gcc=48
@@ -88,13 +88,13 @@
 ./usr/lib/i386/libc++.so.1			base-compat-shlib	compat,pic,libcxx
 ./usr/lib/i386/libc++.so.1.0			base-compat-shlib	compat,pic,libcxx
 ./usr/lib/i386/libc.so.12			base-compat-shlib	compat,pic
-./usr/lib/i386/libc.so.12.196			base-compat-shlib	compat,pic
+./usr/lib/i386/libc.so.12.197			base-compat-shlib	compat,pic
 ./usr/lib/i386/libcom_err.so.7			base-compat-shlib	compat,pic,kerberos
 ./usr/lib/i386/libcom_err.so.7.0		base-compat-shlib	compat,pic,kerberos
 ./usr/lib/i386/libcrypt.so.1			base-compat-shlib	compat,pic
 ./usr/lib/i386/libcrypt.so.1.0			base-compat-shlib	compat,pic
 ./usr/lib/i386/libcrypto.so.8			base-compat-shlib	compat,pic
-./usr/lib/i386/libcrypto.so.8.3			base-compat-shlib	compat,pic
+./usr/lib/i386/libcrypto.so.8.4			base-compat-shlib	compat,pic
 ./usr/lib/i386/libcrypto_idea.so.7		base-obsolete		obsolete
 ./usr/lib/i386/libcrypto_idea.so.7.0		base-obsolete		obsolete
 ./usr/lib/i386/libcrypto_mdc2.so.7		base-obsolete		obsolete
@@ -296,7 +296,7 @@
 ./usr/lib/i386/libssh.so.23			base-compat-shlib	compat,pic
 ./usr/lib/i386/libssh.so.23.0			base-compat-shlib	compat,pic
 ./usr/lib/i386/libssl.so.10			base-compat-shlib	compat,pic
-./usr/lib/i386/libssl.so.10.4			base-compat-shlib	compat,pic
+./usr/lib/i386/libssl.so.10.5			base-compat-shlib	compat,pic
 ./usr/lib/i386/libstdc++.so.7			base-compat-shlib	compat,pic,gcccmds,libstdcxx
 ./usr/lib/i386/libstdc++.so.7.0			base-compat-shlib	gcc=4,compat,pic,libstdcxx
 ./usr/lib/i386/libstdc++.so.7.1			base-compat-shlib	gcc=45,compat,pic,libstdcxx
