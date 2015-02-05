@@ -49,6 +49,9 @@ LDADD+=-Wl,-Bdynamic
 LDADD+= -lcrypto -lipsec -lcrypt
 DPADD+= ${LIBCRYPTO} ${LIBIPSEC} ${LIBCRYPT}
 .endif
+.if defined(PROG) && ${PROG} == "dhclient"
+LDADD+=-Wl,-Bdynamic
+.endif
 DPADD+= ${COBJDIR}/libdhcp.a
 DPADD+= ${OMOBJDIR}/libomapi.a ${DSTOBJDIR}/libdst.a
 DPADD+=	${LIBDNS} ${LIBISC}

@@ -36,6 +36,8 @@
 
 #include "opt_inet.h"
 #include "opt_mpc85xx.h"
+#include "opt_multiprocessor.h"
+#include "opt_net_mpsafe.h"
 
 #include <sys/cdefs.h>
 
@@ -677,7 +679,11 @@ pq3etsec_attach(device_t parent, device_t self, void *aux)
 		return;
 	}
 
-	sc->sc_soft_ih = softint_establish(SOFTINT_NET|SOFTINT_MPSAFE,
+	int softint_flags = SOFTINT_NET;
+#if !defined(MULTIPROCESSOR) || defined(NET_MPSAFE)
+	softint_flags |= SOFTINT_MPSAFE;
+#endif	/* !MULTIPROCESSOR || NET_MPSAFE */
+	sc->sc_soft_ih = softint_establish(softint_flags,
 	    pq3etsec_soft_intr, sc);
 	if (sc->sc_soft_ih == NULL) {
 		aprint_error(": failed to establish soft interrupt\n");

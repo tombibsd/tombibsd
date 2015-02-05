@@ -533,7 +533,7 @@ cntname(const char *src)
 	dst = buf;
 	*dst++ = 'N';
 	while ((c = *src++) != 0)
-		*dst++ = islower((u_char)c) ? (char)toupper((u_char)c) : c;
+		*dst++ = (char)(islower((u_char)c) ? toupper((u_char)c) : c);
 	*dst = 0;
 	return (buf);
 }

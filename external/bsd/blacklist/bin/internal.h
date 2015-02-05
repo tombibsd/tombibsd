@@ -1,7 +1,7 @@
 /*	$NetBSD$	*/
 
 /*-
- * Copyright (c) 2014 The NetBSD Foundation, Inc.
+ * Copyright (c) 2015 The NetBSD Foundation, Inc.
  * All rights reserved.
  *
  * This code is derived from software contributed to The NetBSD Foundation
@@ -31,16 +31,23 @@
 #ifndef _INTERNAL_H
 #define _INTERNAL_H
 
-#define	_PATH_BLCONF	"/etc/blacklistd/conf"
-#define	_PATH_BLCONTROL	"/etc/blacklistd/control"
-#define	_PATH_BLSTATE	"/var/run/blacklistd.db"
+#ifndef _PATH_BLCONF
+#define	_PATH_BLCONF	"/etc/blacklistd.conf"
+#endif
+#ifndef _PATH_BLCONTROL
+#define	_PATH_BLCONTROL	"/libexec/blacklistd-helper"
+#endif
+#ifndef _PATH_BLSTATE
+#define	_PATH_BLSTATE	"/var/db/blacklistd.db"
+#endif
 
-struct conf *conf;
-size_t nconf;
-int debug;
-const char *rulename;
-const char *controlprog;
+extern struct confset rconf, lconf;
+extern int debug;
+extern const char *rulename;
+extern const char *controlprog;
+extern struct ifaddrs *ifas;
 
-void (*lfun)(int, const char *, ...);
+void (*lfun)(int, const char *, ...)
+    __attribute__((__format__(__printf__, 2, 3)));
 
 #endif /* _INTERNAL_H */

@@ -109,7 +109,7 @@ crypto_le32enc(void *p, uint32_t v)
 #define	crypto_core_KEYBYTES	32
 #define	crypto_core_CONSTBYTES	16
 
-#define	crypto_core_ROUNDS	8
+#define	crypto_core_ROUNDS	20
 
 static uint32_t
 rotate(uint32_t u, unsigned c)

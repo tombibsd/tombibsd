@@ -41,7 +41,7 @@
 /cpufunc_asm_sheeva.S/1.6/Sat Apr 19 08:03:44 2014/-kk/
 /cpufunc_asm_xscale.S/1.23/Fri Apr 11 02:03:27 2014/-kk/
 /db_disasm.c/1.6/Wed Feb 21 22:59:38 2007/-kk/
-/db_trace.c/1.30/Fri Apr 11 02:03:27 2014/-kk/
+/db_trace.c/1.31/Thu Feb  5 08:40:57 2015/-kk/
 /disassem.c/1.31/Mon Jan 26 07:10:14 2015/-kk/
 /disassem.h/1.4/Sun Mar  4 04:15:58 2001/-kk/
 /disksubr.c/1.25/Tue May  6 05:49:51 2014/-kk/

@@ -109,6 +109,7 @@ __RCSID("$NetBSD$");
 #include "roaming.h"
 #include "ssh-sandbox.h"
 #include "version.h"
+#include "pfilter.h"
 
 #ifdef LIBWRAP
 #include <tcpd.h>
@@ -364,6 +365,7 @@ grace_alarm_handler(int sig)
 		killpg(0, SIGTERM);
 	}
 
+	pfilter_notify(1);
 	/* Log error and exit. */
 	sigdie("Timeout before authentication for %s", get_remote_ipaddr());
 }
@@ -1160,6 +1162,7 @@ server_accept_loop(int *sock_in, int *sock_out, int *newsock, int *config_s)
 	for (i = 0; i < options.max_startups; i++)
 		startup_pipes[i] = -1;
 
+	pfilter_init();
 	/*
 	 * Stay listening for connections until the system crashes or
 	 * the daemon is killed with a signal.

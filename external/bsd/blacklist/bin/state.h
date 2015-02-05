@@ -1,7 +1,7 @@
 /*	$NetBSD$	*/
 
 /*-
- * Copyright (c) 2014 The NetBSD Foundation, Inc.
+ * Copyright (c) 2015 The NetBSD Foundation, Inc.
  * All rights reserved.
  *
  * This code is derived from software contributed to The NetBSD Foundation
@@ -31,13 +31,19 @@
 #ifndef _STATE_H
 #define _STATE_H
 
+#ifdef HAVE_DB_185_H
+#include <db_185.h>
+#elif HAVE_DB_H
 #include <db.h>
+#else
+#error "no db.h"
+#endif
 #include <time.h>
 
 struct dbinfo {
 	int count;
 	time_t last;
-	int id;
+	char id[64];
 };
 
 __BEGIN_DECLS
@@ -46,13 +52,11 @@ struct conf;
 
 DB *state_open(const char *, int, mode_t);
 int state_close(DB *);
-int state_get(DB *, const struct sockaddr_storage *, const struct conf *,
-    struct dbinfo *);
-int state_put(DB *, const struct sockaddr_storage *, const struct conf *,
-    const struct dbinfo *);
-int state_del(DB *, const struct sockaddr_storage *, const struct conf *);
-int state_iterate(DB *, struct sockaddr_storage *, struct conf *,
-    struct dbinfo *, unsigned int);
+int state_get(DB *, const struct conf *, struct dbinfo *);
+int state_put(DB *, const struct conf *, const struct dbinfo *);
+int state_del(DB *, const struct conf *);
+int state_iterate(DB *, struct conf *, struct dbinfo *, unsigned int);
+int state_sync(DB *);
 __END_DECLS
 
 #endif /* _STATE_H */

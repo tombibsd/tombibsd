@@ -8,9 +8,11 @@ LIB=	clangDriver
 
 SRCS+=	Action.cpp \
 	Compilation.cpp \
+	CrossWindowsToolChain.cpp \
 	Driver.cpp \
 	DriverOptions.cpp \
 	Job.cpp \
+	MSVCToolChain.cpp \
 	Multilib.cpp \
 	Phases.cpp \
 	SanitizerArgs.cpp \
@@ -18,8 +20,7 @@ SRCS+=	Action.cpp \
 	ToolChain.cpp \
 	ToolChains.cpp \
 	Tools.cpp \
-	Types.cpp \
-	WindowsToolChain.cpp
+	Types.cpp
 
 .if defined(HOSTLIB)
 .include <bsd.hostlib.mk>

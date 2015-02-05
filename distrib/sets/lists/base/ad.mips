@@ -87,6 +87,8 @@
 ./usr/lib/64/libbfd.so.13.0			base-compat-shlib	compat,pic,binutils,arch64
 ./usr/lib/64/libbind9.so.8			base-compat-shlib	compat,pic,arch64
 ./usr/lib/64/libbind9.so.8.1			base-compat-shlib	compat,pic,arch64
+./usr/lib/64/libblacklist.so.0			base-compat-shlib	compat,pic,arch64
+./usr/lib/64/libblacklist.so.0.0		base-compat-shlib	compat,pic,arch64
 ./usr/lib/64/libbluetooth.so.4			base-compat-shlib	compat,pic,arch64
 ./usr/lib/64/libbluetooth.so.4.2		base-compat-shlib	compat,pic,arch64
 ./usr/lib/64/libbsdmalloc.so.0			base-compat-shlib	compat,pic,arch64
@@ -435,6 +437,8 @@
 ./usr/lib/o32/libbfd.so.13.0			base-compat-shlib	compat,pic,binutils,arch64
 ./usr/lib/o32/libbind9.so.8			base-compat-shlib	compat,pic,arch64
 ./usr/lib/o32/libbind9.so.8.1			base-compat-shlib	compat,pic,arch64
+./usr/lib/o32/libblacklist.so.0			base-compat-shlib	compat,pic,arch64
+./usr/lib/o32/libblacklist.so.0.0		base-compat-shlib	compat,pic,arch64
 ./usr/lib/o32/libbluetooth.so.4			base-compat-shlib	compat,pic,arch64
 ./usr/lib/o32/libbluetooth.so.4.2		base-compat-shlib	compat,pic,arch64
 ./usr/lib/o32/libbsdmalloc.so.0			base-compat-shlib	compat,pic,arch64

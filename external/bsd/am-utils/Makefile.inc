@@ -3,6 +3,7 @@
 .ifndef AMU_MAKEFILE_INC
 AMU_MAKEFILE_INC=
 WARNS?=	1
+CWARNFLAGS.clang+=	-Wno-error=enum-conversion
 
 .include <bsd.own.mk>
 

@@ -75,8 +75,13 @@ ipi_intr(void *v)
 	if (ipi & IPI_GENERIC)
 		ipi_cpu_handler();
 
+	if (ipi & IPI_SUSPEND)
+		cpu_pause(NULL);
+
 	if (ipi & IPI_HALT) {
+		struct cpuset_info * const csi = &cpuset_info;
 		aprint_normal("halting CPU %d\n", cpu_id);
+		kcpuset_set(csi->cpus_halted, cpu_id);
 		msr = (mfmsr() & ~PSL_EE) | PSL_POW;
 		for (;;) {
 			__asm volatile ("sync; isync");

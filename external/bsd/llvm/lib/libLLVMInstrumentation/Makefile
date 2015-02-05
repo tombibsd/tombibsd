@@ -9,10 +9,11 @@ LIB=	LLVMInstrumentation
 SRCS+=	AddressSanitizer.cpp \
 	BoundsChecking.cpp \
 	DataFlowSanitizer.cpp \
-	DebugIR.cpp \
 	GCOVProfiling.cpp \
+	InstrProfiling.cpp \
 	Instrumentation.cpp \
 	MemorySanitizer.cpp \
+	SanitizerCoverage.cpp \
 	ThreadSanitizer.cpp
 
 .if defined(HOSTLIB)

@@ -10,6 +10,7 @@ CPPFLAGS+=	-I${MIPS_OBJDIR} -I${LLVM_SRCDIR}/lib/Target/Mips
 .PATH: ${LLVM_SRCDIR}/lib/Target/Mips/MCTargetDesc
 
 SRCS+=	MipsABIFlagsSection.cpp \
+	MipsABIInfo.cpp \
 	MipsAsmBackend.cpp \
 	MipsELFObjectWriter.cpp \
 	MipsELFStreamer.cpp \

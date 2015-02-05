@@ -49,9 +49,6 @@ static void gpiounset(int pin, char *name);
 static void devattach(char *, int, uint32_t, uint32_t);
 __dead static void usage(void);
 
-extern long long strtonum(const char *numstr, long long minval,
-    long long maxval, const char **errstrp);
-
 static const struct bitstr {
 	unsigned int mask;
 	const char *string;

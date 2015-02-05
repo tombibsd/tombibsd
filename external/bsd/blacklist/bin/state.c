@@ -28,6 +28,9 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 
 #include <sys/cdefs.h>
 __RCSID("$NetBSD$");
@@ -72,6 +75,10 @@ state_open(const char *dbname, int flags, mode_t perm)
 {
 	DB *db;
 
+#ifdef __APPLE__
+	flags &= O_CREAT|O_EXCL|O_EXLOCK|O_NONBLOCK|O_RDONLY|
+	     O_RDWR|O_SHLOCK|O_TRUNC;
+#endif
 	db = dbopen(dbname, flags, perm, DB_HASH, &openinfo);
 	if (db == NULL) {
 		if (errno == ENOENT && (flags & O_CREAT) == 0)
@@ -81,60 +88,54 @@ state_open(const char *dbname, int flags, mode_t perm)
 	return db;
 }
 
-struct dbkey {
-	struct conf c;
-	struct sockaddr_storage ss;
-};
+static int
+state_sizecheck(const DBT *t)
+{
+	if (sizeof(struct conf) == t->size)
+		return 0;
+	(*lfun)(LOG_ERR, "Key size mismatch %zu != %zu", sizeof(struct conf),
+	    t->size);
+	return -1;
+}
 
 static void
-makekey(struct dbkey *k, const struct sockaddr_storage *ss,
-    const struct conf *c)
+dumpkey(const struct conf *k)
 {
-	memset(k, 0, sizeof(*k));
-	k->c = *c;
-	k->ss = *ss;
-	switch (k->ss.ss_family) {
-	case AF_INET6:
-		((struct sockaddr_in6 *)&k->ss)->sin6_port = htons(c->c_port);
-		break;
-	case AF_INET:
-		((struct sockaddr_in *)&k->ss)->sin_port = htons(c->c_port);
-		break;
-	default:
-		(*lfun)(LOG_ERR, "%s: bad family %d", __func__,
-		    k->ss.ss_family);
-		break;
+	char buf[10240];
+	size_t z;
+	int r;
+	const unsigned char *p = (const void *)k;
+	const unsigned char *e = p + sizeof(*k);
+	r = snprintf(buf, sizeof(buf), "%s: ", __func__);
+	if (r == -1 || (z = (size_t)r) >= sizeof(buf))
+		z = sizeof(buf);
+	while (p < e) {
+		r = snprintf(buf + z, sizeof(buf) - z, "%.2x", *p++);
+		if (r == -1 || (z += (size_t)r) >= sizeof(buf))
+			z = sizeof(buf);
 	}
-	if (debug) {
-		unsigned char *p = (void *)k;
-		unsigned char *e = p + sizeof(*k);
-		printf("%s: ", __func__);
-		while (p < e)
-			printf("%.2x", *p++);
-		printf("\n");
-	}
+	(*lfun)(LOG_DEBUG, "%s", buf);
 }
 
 int
-state_del(DB *db, const struct sockaddr_storage *ss, const struct conf *c)
+state_del(DB *db, const struct conf *c)
 {
-	struct dbkey key;
 	int rv;
 	DBT k;
 
 	if (db == NULL)
 		return -1;
 
-	makekey(&key, ss, c);
-
-	k.data = &key;
-	k.size = sizeof(key);
+	k.data = __UNCONST(c);
+	k.size = sizeof(*c);
 
 	switch (rv = (*db->del)(db, &k, 0)) {
 	case 0:
 	case 1:
-		if (debug)
-			printf("%s: returns %d\n", __func__, rv);
+		if (debug > 1) {
+			(*lfun)(LOG_DEBUG, "%s: returns %d", __func__, rv);
+			(*db->sync)(db, 0);
+		}
 		return 0;
 	default:
 		(*lfun)(LOG_ERR, "%s: failed (%m)", __func__);
@@ -143,31 +144,26 @@ state_del(DB *db, const struct sockaddr_storage *ss, const struct conf *c)
 }
 
 int
-state_get(DB *db, const struct sockaddr_storage *ss, const struct conf *c,
-    struct dbinfo *dbi)
+state_get(DB *db, const struct conf *c, struct dbinfo *dbi)
 {
-	struct dbkey key;
 	int rv;
 	DBT k, v;
 
 	if (db == NULL)
 		return -1;
 
-	makekey(&key, ss, c);
-
-	k.data = &key;
-	k.size = sizeof(key);
+	k.data = __UNCONST(c);
+	k.size = sizeof(*c);
 
 	switch (rv = (*db->get)(db, &k, &v, 0)) {
 	case 0:
 	case 1:
-		if (rv) {
+		if (rv)
 			memset(dbi, 0, sizeof(*dbi));
-			dbi->id = -1;
-		} else
+		else
 			memcpy(dbi, v.data, sizeof(*dbi));
-		if (debug)
-			printf("%s: returns %d\n", __func__, rv);
+		if (debug > 1)
+			(*lfun)(LOG_DEBUG, "%s: returns %d", __func__, rv);
 		return 0;
 	default:
 		(*lfun)(LOG_ERR, "%s: failed (%m)", __func__);
@@ -176,27 +172,25 @@ state_get(DB *db, const struct sockaddr_storage *ss, const struct conf *c,
 }
 
 int
-state_put(DB *db, const struct sockaddr_storage *ss, const struct conf *c,
-    const struct dbinfo *dbi)
+state_put(DB *db, const struct conf *c, const struct dbinfo *dbi)
 {
-	struct dbkey key;
 	int rv;
 	DBT k, v;
 
 	if (db == NULL)
 		return -1;
 
-	makekey(&key, ss, c);
-
-	k.data = &key;
-	k.size = sizeof(key);
+	k.data = __UNCONST(c);
+	k.size = sizeof(*c);
 	v.data = __UNCONST(dbi);
 	v.size = sizeof(*dbi);
 
 	switch (rv = (*db->put)(db, &k, &v, 0)) {
 	case 0:
-		if (debug)
-			printf("%s: returns %d\n", __func__, rv);
+		if (debug > 1) {
+			(*lfun)(LOG_DEBUG, "%s: returns %d", __func__, rv);
+			(*db->sync)(db, 0);
+		}
 		return 0;
 	case 1:
 		errno = EEXIST;
@@ -208,10 +202,8 @@ state_put(DB *db, const struct sockaddr_storage *ss, const struct conf *c,
 }
 
 int
-state_iterate(DB *db, struct sockaddr_storage *ss, struct conf *c,
-    struct dbinfo *dbi, unsigned int first)
+state_iterate(DB *db, struct conf *c, struct dbinfo *dbi, unsigned int first)
 {
-	struct dbkey *kp;
 	int rv;
 	DBT k, v;
 
@@ -222,19 +214,27 @@ state_iterate(DB *db, struct sockaddr_storage *ss, struct conf *c,
 
 	switch (rv = (*db->seq)(db, &k, &v, first)) {
 	case 0:
-		kp = k.data;	
-		*ss = kp->ss;
-		*c = kp->c;
+		if (state_sizecheck(&k) == -1)
+			return -1;
+		memcpy(c, k.data, sizeof(*c));
+		if (debug > 2)
+			dumpkey(c);
 		memcpy(dbi, v.data, sizeof(*dbi));
-		if (debug)
-			printf("%s: returns %d\n", __func__, rv);
+		if (debug > 1)
+			(*lfun)(LOG_DEBUG, "%s: returns %d", __func__, rv);
 		return 1;
 	case 1:
-		if (debug)
-			printf("%s: returns %d\n", __func__, rv);
+		if (debug > 1)
+			(*lfun)(LOG_DEBUG, "%s: returns %d", __func__, rv);
 		return 0;
 	default:
 		(*lfun)(LOG_ERR, "%s: failed (%m)", __func__);
 		return -1;
 	}
+}
+
+int
+state_sync(DB *db)
+{
+	return (*db->sync)(db, 0);
 }

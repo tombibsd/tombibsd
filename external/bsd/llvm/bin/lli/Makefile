@@ -24,7 +24,6 @@ LLVM_LIBS+= \
 	Object \
 	MCParser \
 	BitReader \
-	JIT \
 	MCJIT \
 	RuntimeDyld \
 	Instrumentation \

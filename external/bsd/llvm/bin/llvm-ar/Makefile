@@ -32,10 +32,12 @@ LLVM_LIBS+= \
 	SparcAsmParser \
 	SparcAsmPrinter \
 	X86AsmParser \
+	X86CodeGen \
 	X86MCTargetDesc \
 	X86AsmPrinter \
 	X86Utils \
 	X86TargetInfo \
+	CodeGen \
 	MCDisassembler \
 	Object \
 	MCParser \

@@ -143,7 +143,7 @@ SRCS+=		utmp.c
 #SRCS+=		forkpty-hpux.c
 SRCS+=		imsg-buffer.c
 SRCS+=		imsg.c
-SRCS+=		strtonum.c
+#SRCS+=		strtonum.c
 #SRCS+=		unvis.c
 #SRCS+=		vis.c
 

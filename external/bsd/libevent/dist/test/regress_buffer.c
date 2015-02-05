@@ -992,7 +992,9 @@ test_evbuffer_iterative(void *ptr)
 	n = 0;
 	for (i = 0; i < 1000; ++i) {
 		for (j = 1; j < strlen(abc); ++j) {
-			evbuffer_add_printf(buf, "%*.*s", j, j, abc);
+			char format[32];
+			evutil_snprintf(format, sizeof(format), "%%%u.%us", j, j);
+			evbuffer_add_printf(buf, fmtcheck(format, "%s"), abc);
 
 			/* Only check for rep violations every so often.
 			   Walking over the whole list of chains can get

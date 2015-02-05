@@ -39,6 +39,7 @@ SEVBARM+=	${SYSDIR}/arch/evbarm/smdk2xx0/*.[ch]
 SEVBARM+=	${SYSDIR}/arch/evbarm/tisdp24xx/*.[ch]
 SEVBARM+=	${SYSDIR}/arch/evbarm/tsarm/*.[ch]
 SEVBARM+=	${SYSDIR}/arch/evbarm/viper/*.[ch]
+SEVBARM+=	${SYSDIR}/arch/evbarm/zynq/*.[ch]
 SEVBARM+=	${SYSDIR}/arch/arm/xscale/*.[ch]
 
 AEVBARM=	${SYSDIR}/arch/evbarm/adi_brh/*.S
@@ -66,6 +67,7 @@ AEVBARM+=	${SYSDIR}/arch/arm/xscale/*.S
 AEVBARM+=	${SYSDIR}/arch/evbarm/integrator/*.S
 AEVBARM+=	${SYSDIR}/arch/evbarm/iq80310/*.S
 AEVBARM+=	${SYSDIR}/arch/evbarm/iq80321/*.S
+AEVBARM+=	${SYSDIR}/arch/evbarm/zynq/*.S
 
 # Directories in which to place tags links
 DEVBARM=	include

@@ -29,6 +29,7 @@ SRCS+=	Args.cpp \
 	OptionValueArgs.cpp \
 	OptionValueArray.cpp \
 	OptionValueBoolean.cpp \
+	OptionValueChar.cpp \
 	OptionValueDictionary.cpp \
 	OptionValueEnumeration.cpp \
 	OptionValueFileSpec.cpp \

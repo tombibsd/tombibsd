@@ -13,13 +13,14 @@ SRCS+=	Condition.cpp \
 	FileSpec.cpp \
 	Host.cpp \
 	IOObject.cpp \
+	MonitoringProcessLauncher.cpp \
 	Mutex.cpp \
 	NativeBreakpoint.cpp \
 	NativeBreakpointList.cpp \
 	NativeProcessProtocol.cpp \
 	NativeThreadProtocol.cpp \
 	OptionParser.cpp \
-	Pipe.cpp \
+	PipeBase.cpp \
 	ProcessRunLock.cpp \
 	Socket.cpp \
 	SocketAddress.cpp \

@@ -101,6 +101,8 @@
 ./usr/lib/eabi/libbfd.so.13.0			base-compat-shlib	compat,pic,binutils
 ./usr/lib/eabi/libbind9.so.8			base-compat-shlib	compat,pic
 ./usr/lib/eabi/libbind9.so.8.1			base-compat-shlib	compat,pic
+./usr/lib/eabi/libblacklist.so.0			base-compat-shlib	compat,pic
+./usr/lib/eabi/libblacklist.so.0.0		base-compat-shlib	compat,pic
 ./usr/lib/eabi/libbluetooth.so.4			base-compat-shlib	compat,pic
 ./usr/lib/eabi/libbluetooth.so.4.2		base-compat-shlib	compat,pic
 ./usr/lib/eabi/libbsdmalloc.so.0			base-compat-shlib	compat,pic
@@ -417,6 +419,8 @@
 ./usr/lib/eabihf/libbfd.so.13.0			base-compat-shlib	compat,pic,binutils
 ./usr/lib/eabihf/libbind9.so.8			base-compat-shlib	compat,pic
 ./usr/lib/eabihf/libbind9.so.8.1			base-compat-shlib	compat,pic
+./usr/lib/eabihf/libblacklist.so.0			base-compat-shlib	compat,pic
+./usr/lib/eabihf/libblacklist.so.0.0		base-compat-shlib	compat,pic
 ./usr/lib/eabihf/libbluetooth.so.4			base-compat-shlib	compat,pic
 ./usr/lib/eabihf/libbluetooth.so.4.2		base-compat-shlib	compat,pic
 ./usr/lib/eabihf/libbsdmalloc.so.0			base-compat-shlib	compat,pic
@@ -733,6 +737,8 @@
 ./usr/lib/oabi/libbfd.so.13.0			base-compat-shlib	compat,pic,binutils
 ./usr/lib/oabi/libbind9.so.8			base-compat-shlib	compat,pic
 ./usr/lib/oabi/libbind9.so.8.1			base-compat-shlib	compat,pic
+./usr/lib/oabi/libblacklist.so.0		base-compat-shlib	compat,pic
+./usr/lib/oabi/libblacklist.so.0.0		base-compat-shlib	compat,pic
 ./usr/lib/oabi/libbluetooth.so.4		base-compat-shlib	compat,pic
 ./usr/lib/oabi/libbluetooth.so.4.2		base-compat-shlib	compat,pic
 ./usr/lib/oabi/libbsdmalloc.so.0		base-compat-shlib	compat,pic

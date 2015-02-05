@@ -99,21 +99,22 @@ cleanup_old_pidfile(const char* path)
 }
 
 /* Constructs a name for a pidfile in the default location (/var/run).  If
- * 'basename' is NULL, uses the name of the current program for the name of
+ * 'bname' is NULL, uses the name of the current program for the name of
  * the pidfile.
  *
  * Returns a pointer to a dynamically-allocatd string containing the absolute
  * path to the pidfile; NULL on failure. */
 static char *
-generate_varrun_path(const char *basename)
+generate_varrun_path(const char *bname)
 {
 	char *path;
 
-	if (basename == NULL)
-		basename = getprogname();
+	if (bname == NULL)
+		bname = getprogname();
 
 	/* _PATH_VARRUN includes trailing / */
-	(void) asprintf(&path, "%s%s.pid", _PATH_VARRUN, basename);
+	if (asprintf(&path, "%s%s.pid", _PATH_VARRUN, bname) == -1)
+		return NULL;
 	return path;
 }
 

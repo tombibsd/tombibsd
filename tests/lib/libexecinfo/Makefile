@@ -5,6 +5,7 @@
 TESTSDIR=	${TESTSBASE}/lib/libexecinfo
 
 TESTS_C+=	t_backtrace
+STRIPFLAG=
 
 LDADD+=		-lexecinfo -lelf
 DPADD+=		${LIBEXECINFO} ${LIBELF}

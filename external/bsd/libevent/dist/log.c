@@ -60,7 +60,7 @@ __RCSID("$NetBSD$");
 #include "log-internal.h"
 
 static void _warn_helper(int severity, const char *errstr, const char *fmt,
-    va_list ap) EV_CHECK_FMT(3, 0);
+    va_list ap) __printflike(3, 0);
 static void event_log(int severity, const char *msg);
 static void event_exit(int errcode) EV_NORETURN;
 

@@ -47,6 +47,7 @@ TESTS_C+=		t_nanosleep
 TESTS_C+=		t_pipe
 TESTS_C+=		t_pipe2
 TESTS_C+=		t_poll
+TESTS_C+=		t_posix_fallocate
 TESTS_C+=		t_recvmmsg
 TESTS_C+=		t_revoke
 TESTS_C+=		t_select

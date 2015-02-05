@@ -230,3 +230,4 @@ pseudo-device	ksyms			# /dev/ksyms
 pseudo-device	pty			# pseudo-terminals
 pseudo-device	kttcp			# kernel ttcp
 pseudo-device	vlan			# 802.1Q VLANs
+pseudo-device	lockstat		# lock profiling

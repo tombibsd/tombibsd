@@ -8,6 +8,7 @@ LIB=	LLVMDebugInfo
 
 SRCS+=	DIContext.cpp \
 	DWARFAbbreviationDeclaration.cpp \
+	DWARFAcceleratorTable.cpp \
 	DWARFCompileUnit.cpp \
 	DWARFContext.cpp \
 	DWARFDebugAbbrev.cpp \
@@ -20,7 +21,8 @@ SRCS+=	DIContext.cpp \
 	DWARFDebugRangeList.cpp \
 	DWARFFormValue.cpp \
 	DWARFTypeUnit.cpp \
-	DWARFUnit.cpp
+	DWARFUnit.cpp \
+	SyntaxHighlighting.cpp
 
 .if defined(HOSTLIB)
 .include <bsd.hostlib.mk>

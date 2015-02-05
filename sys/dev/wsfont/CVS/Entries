@@ -3,8 +3,10 @@
 /Droid_Sans_Mono_19x36.h/1.2/Wed Nov  5 17:03:40 2014/-kk/
 /Droid_Sans_Mono_9x18.h/1.2/Tue Apr 10 16:16:03 2012/-kk/
 /bold8x16.h/1.13/Mon Apr 28 20:24:01 2008/-kk/
-/files.wsfont/1.20/Tue Dec  9 04:24:02 2014/-kk/
+/files.wsfont/1.21/Thu Feb  5 08:41:13 2015/-kk/
 /gallant12x22.h/1.11/Sun Dec 11 12:24:12 2005/-kk/
+/glass10x19.h/1.1/Sun Jan 25 20:09:42 2015/-kk/
+/glass10x25.h/1.1/Sun Jan 25 20:09:42 2015/-kk/
 /lucida16x29.h/1.10/Sun Dec 11 12:24:12 2005/-kk/
 /omron12x20.h/1.7/Sun Dec 11 12:24:12 2005/-kk/
 /qvss8x15.h/1.12/Sat Oct  7 02:34:59 2006/-kk/
@@ -16,7 +18,7 @@
 /vt220l8x10.h/1.9/Sun Dec 11 12:24:12 2005/-kk/
 /vt220l8x16.h/1.7/Wed Jul 21 12:10:18 2010/-kk/
 /vt220l8x8.h/1.9/Sun Dec 11 12:24:12 2005/-kk/
-/wsfont.c/1.56/Tue Dec  9 04:24:02 2014/-kk/
+/wsfont.c/1.57/Thu Feb  5 08:41:13 2015/-kk/
 /wsfont.h/1.24/Wed Jan 11 15:52:32 2012/-kk/
 /wsfontdev.c/1.16/Fri Oct  3 09:09:20 2014/-kk/
 D

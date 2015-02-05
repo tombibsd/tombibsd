@@ -1276,6 +1276,10 @@ defflag	opt_dwc_mmc.h	DWC_MMC_DEBUG
 device	dwcmmc: sdmmcbus
 file	dev/ic/dwc_mmc.c		dwcmmc
 
+# ARM PrimeCell PL181 (MMCI) host controller
+device	plmmc: sdmmcbus
+file	dev/ic/pl181.c			plmmc
+
 # Myson MTD803 3-in-1 Fast Ethernet Controller
 device	mtd: arp, ether, ifnet, mii
 file	dev/ic/mtd803.c			mtd

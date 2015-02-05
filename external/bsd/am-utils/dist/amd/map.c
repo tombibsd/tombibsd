@@ -754,7 +754,7 @@ umount_exported(void)
 	} else {
 	  am_unmounted(mp);
 	}
-	if (!(mf->mf_flags && (MFF_UNMOUNTING|MFF_MOUNTED)))
+	if (!(mf->mf_flags & (MFF_UNMOUNTING|MFF_MOUNTED)))
 	  exported_ap[i] = NULL;
       } else {
 	/*

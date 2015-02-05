@@ -16,7 +16,7 @@
 /disklabel.h/1.4/Thu Oct 24 10:28:57 2013/-kk/
 /elf_machdep.h/1.1/Fri Sep  1 21:26:18 2006/-kk/
 /endian.h/1.1/Fri Sep  1 21:26:18 2006/-kk/
-/endian_machdep.h/1.1/Fri Sep  1 21:26:18 2006/-kk/
+/endian_machdep.h/1.2/Thu Feb  5 08:41:02 2015/-kk/
 /float.h/1.1/Fri Sep  1 21:26:18 2006/-kk/
 /frame.h/1.1/Fri Sep  1 21:26:18 2006/-kk/
 /ieee.h/1.1/Fri Sep  1 21:26:18 2006/-kk/

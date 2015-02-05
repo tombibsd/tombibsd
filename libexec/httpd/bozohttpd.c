@@ -1566,6 +1566,7 @@ bozo_process_request(bozo_httpreq_t *request)
 		debug((httpd, DEBUG_FAT, "open failed: %s", strerror(errno)));
 		switch(errno) {
 		case EPERM:
+		case EACCES:
 			(void)bozo_http_error(httpd, 403, request,
 						"no permission to open file");
 			break;

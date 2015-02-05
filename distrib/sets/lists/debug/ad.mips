@@ -69,6 +69,7 @@
 ./usr/libdata/debug/usr/lib/64/libavl.so.0.0.debug		comp-zfs-debug	zfs,dynamicroot,debug,compat,arch64
 ./usr/libdata/debug/usr/lib/64/libbfd.so.13.0.debug	comp-sys-debug	binutils,debug,compat,arch64
 ./usr/libdata/debug/usr/lib/64/libbind9.so.8.1.debug	comp-bind-debug	debug,compat,arch64
+./usr/libdata/debug/usr/lib/64/libblacklist.so.0.0.debug	comp-sys-debug	debug,compat,arch64
 ./usr/libdata/debug/usr/lib/64/libbluetooth.so.4.2.debug	comp-sys-debug	debug,compat,arch64
 ./usr/libdata/debug/usr/lib/64/libbsdmalloc.so.0.0.debug	comp-sys-debug	debug,compat,arch64
 ./usr/libdata/debug/usr/lib/64/libbz2.so.1.1.debug		comp-sys-debug	debug,compat,arch64
@@ -247,6 +248,7 @@
 ./usr/libdata/debug/usr/lib/o32/libavl.so.0.0.debug		comp-zfs-debug	zfs,dynamicroot,debug,compat,arch64
 ./usr/libdata/debug/usr/lib/o32/libbfd.so.13.0.debug	comp-sys-debug	binutils,debug,compat,arch64
 ./usr/libdata/debug/usr/lib/o32/libbind9.so.8.1.debug	comp-bind-debug	debug,compat,arch64
+./usr/libdata/debug/usr/lib/o32/libblacklist.so.0.0.debug	comp-sys-debug	debug,compat,arch64
 ./usr/libdata/debug/usr/lib/o32/libbluetooth.so.4.2.debug	comp-sys-debug	debug,compat,arch64
 ./usr/libdata/debug/usr/lib/o32/libbsdmalloc.so.0.0.debug	comp-sys-debug	debug,compat,arch64
 ./usr/libdata/debug/usr/lib/o32/libbz2.so.1.1.debug		comp-sys-debug	debug,compat,arch64

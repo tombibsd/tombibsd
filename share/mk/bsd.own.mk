@@ -61,12 +61,7 @@ MKGCC?=		no
 #
 .if ${MKGCC:Uyes} != "no"
 
-# Platforms still using GCC 4.5
-.if \
-      ${MACHINE_CPU} == "m68k"
-HAVE_GCC?=    45
-
-.elif ${MACHINE} == "playstation2" || ${MACHINE_CPU} == "aarch64"
+.if ${MACHINE} == "playstation2" || ${MACHINE_CPU} == "aarch64"
 HAVE_GCC?=    0
 .else
 # Otherwise, default to GCC4.8

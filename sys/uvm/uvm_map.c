@@ -3798,6 +3798,9 @@ uvm_map_clean(struct vm_map *map, vaddr_t start, vaddr_t end, int flags)
 			if (pg == NULL) {
 				continue;
 			}
+			if (pg->flags & PG_BUSY) {
+				continue;
+			}
 
 			switch (flags & (PGO_CLEANIT|PGO_FREE|PGO_DEACTIVATE)) {
 

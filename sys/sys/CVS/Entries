@@ -21,7 +21,7 @@
 /callout.h/1.31/Mon Apr 28 20:24:10 2008/-kk/
 /cctr.h/1.3/Mon Apr 28 20:24:10 2008/-kk/
 /cdbr.h/1.1/Wed Dec 11 01:24:08 2013/-kk/
-/cdefs.h/1.122/Fri Oct  3 09:51:03 2014/-kk/
+/cdefs.h/1.124/Thu Feb  5 08:41:18 2015/-kk/
 /cdefs_aout.h/1.20/Thu May 18 17:55:38 2006/-kk/
 /cdefs_elf.h/1.47/Thu Dec 11 09:09:55 2014/-kk/
 /cdio.h/1.33/Thu Jan 29 19:36:28 2009/-kk/
@@ -200,7 +200,7 @@
 /signalvar.h/1.86/Tue Jun  3 02:54:47 2014/-kk/
 /sigtypes.h/1.10/Sun Feb 19 21:07:00 2012/-kk/
 /sleepq.h/1.23/Tue May  6 05:50:27 2014/-kk/
-/socket.h/1.113/Mon Jan 26 07:10:32 2015/-kk/
+/socket.h/1.115/Thu Feb  5 08:41:19 2015/-kk/
 /socketvar.h/1.135/Fri Oct  3 09:51:03 2014/-kk/
 /sockio.h/1.32/Thu Oct 24 10:28:58 2013/-kk/
 /spawn.h/1.5/Fri Oct  3 09:51:03 2014/-kk/

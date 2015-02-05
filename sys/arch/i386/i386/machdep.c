@@ -936,7 +936,8 @@ int xen_idt_idx;
 extern union descriptor tmpgdt[];
 #endif
 
-void cpu_init_idt(void)
+void 
+cpu_init_idt(void)
 {
 #ifndef XEN
 	struct region_descriptor region;

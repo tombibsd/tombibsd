@@ -41,16 +41,17 @@ LLVM_LIBS+= \
 	SparcTargetInfo \
 	X86Disassembler \
 	X86AsmParser \
+	X86CodeGen \
 	X86MCTargetDesc \
 	X86AsmPrinter \
 	X86TargetInfo \
 	X86Utils \
+	CodeGen \
 	MCDisassembler \
 	DebugInfo \
 	Object \
 	BitReader \
 	MCParser \
-	MCAnalysis \
 	MC \
 	IR \
 	Support

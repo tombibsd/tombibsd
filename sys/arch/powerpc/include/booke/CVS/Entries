@@ -3,10 +3,10 @@
 /e500reg.h/1.16/Fri Jan  2 11:21:17 2015/-kk/
 /e500var.h/1.7/Tue Nov 27 19:24:47 2012/-kk/
 /etsecreg.h/1.5/Tue Jul 17 01:36:13 2012/-kk/
-/intr.h/1.8/Tue Jun  3 02:54:16 2014/-kk/
+/intr.h/1.9/Thu Feb  5 08:41:04 2015/-kk/
 /obiovar.h/1.2/Thu Jun 30 04:45:38 2011/-kk/
 /openpicreg.h/1.7/Fri Jan  2 11:21:17 2015/-kk/
-/pmap.h/1.14/Sat Apr 19 05:36:49 2014/-kk/
+/pmap.h/1.15/Thu Feb  5 08:41:04 2015/-kk/
 /pte.h/1.6/Thu Jun 30 00:52:59 2011/-kk/
 /spr.h/1.13/Fri Jan  2 11:21:17 2015/-kk/
 /trap.h/1.2/Tue Jan 18 01:02:54 2011/-kk/

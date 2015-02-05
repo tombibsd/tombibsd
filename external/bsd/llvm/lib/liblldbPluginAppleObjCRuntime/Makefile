@@ -6,11 +6,11 @@ LIB=	lldbPluginAppleObjCRuntime
 
 .PATH: ${LLDB_SRCDIR}/source/Plugins/LanguageRuntime/ObjC/AppleObjCRuntime
 
-SRCS+=	AppleObjCRuntime.cpp \
+SRCS+=	AppleObjCDeclVendor.cpp \
+	AppleObjCRuntime.cpp \
 	AppleObjCRuntimeV1.cpp \
 	AppleObjCRuntimeV2.cpp \
 	AppleObjCTrampolineHandler.cpp \
-	AppleObjCTypeVendor.cpp \
 	AppleThreadPlanStepThroughObjCTrampoline.cpp
 
 .if defined(HOSTLIB)

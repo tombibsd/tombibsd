@@ -100,7 +100,7 @@ LIBDPLIBS= \
 
 PKGCONFIG=	freetype2
 PKGDIST.freetype2=	${.CURDIR}
-PKGCONFIG_VERSION.freetype2=	9.20.3
+PKGCONFIG_VERSION.freetype2=	17.2.11
 
 .include <bsd.x11.mk>
 .include <bsd.lib.mk>

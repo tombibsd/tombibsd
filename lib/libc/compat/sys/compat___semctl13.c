@@ -47,9 +47,6 @@ __RCSID("$NetBSD$");
 #include <compat/sys/time.h>
 #include <sys/sem.h>
 #include <compat/sys/sem.h>
-#if defined(__clang__) && defined(__powerpc__) && !defined(__powerpc64__)
-#define __lint__
-#endif
 #ifdef __lint__
 #include <string.h>
 #endif

@@ -576,6 +576,7 @@ INCITS	InterNational Committee for Information Technology Standards
 IO	input/output
 IOCTL	input/output control
 IOMMU	input/output memory management unit
+IOT	Internet of Things
 IP	Internet Protocol
 IP	intellectual property
 IPC	interprocess communication

@@ -268,7 +268,11 @@ sdhc_host_found(struct sdhc_softc *sc, bus_space_tag_t iot,
 	mutex_init(&hp->intr_mtx, MUTEX_DEFAULT, IPL_SDMMC);
 	cv_init(&hp->intr_cv, "sdhcintr");
 
-	sdhcver = HREAD2(hp, SDHC_HOST_CTL_VERSION);
+	if (ISSET(hp->sc->sc_flags, SDHC_FLAG_ENHANCED)) {
+		sdhcver = HREAD4(hp, SDHC_ESDHC_HOST_CTL_VERSION);
+	} else {
+		sdhcver = HREAD2(hp, SDHC_HOST_CTL_VERSION);
+	}
 	aprint_normal_dev(sc->sc_dev, "SD Host Specification ");
 	hp->specver = SDHC_SPEC_VERSION(sdhcver);
 	switch (SDHC_SPEC_VERSION(sdhcver)) {

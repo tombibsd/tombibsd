@@ -8,7 +8,6 @@ NOLINT=		# defined
 .include "Makefile.inc"
 
 LIB=		stdc++
-LDADD=		-lgcc_s
 
 LIBDPLIBS+=	m ${.CURDIR}/../../../../../lib/libm
 

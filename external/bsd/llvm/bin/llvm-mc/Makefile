@@ -43,10 +43,10 @@ LLVM_LIBS+= \
 	SparcMCTargetDesc \
 	SparcDisassembler \
 	SparcAsmPrinter \
+	X86AsmParser \
 	X86CodeGen \
 	X86TargetInfo \
 	X86MCTargetDesc \
-	X86AsmParser \
 	X86Disassembler \
 	X86AsmPrinter \
 	X86Utils \

@@ -28,6 +28,9 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
 #include <sys/cdefs.h>
 __RCSID("$NetBSD$");
 
@@ -35,7 +38,9 @@ __RCSID("$NetBSD$");
 #include <sys/socket.h>
 #include <sys/queue.h>
 
+#ifdef HAVE_UTIL_H
 #include <util.h>
+#endif
 #include <string.h>
 #include <signal.h>
 #include <netdb.h>
@@ -52,98 +57,113 @@ __RCSID("$NetBSD$");
 #include <err.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <util.h>
 #include <time.h>
+#include <ifaddrs.h>
+#include <netinet/in.h>
 
 #include "bl.h"
 #include "internal.h"
 #include "conf.h"
 #include "run.h"
 #include "state.h"
+#include "support.h"
 
 static const char *configfile = _PATH_BLCONF;
-
-int debug;
-const char *rulename = "blacklistd";
-const char *controlprog = _PATH_BLCONTROL;
-struct conf *conf;
-size_t nconf;
-
 static DB *state;
 static const char *dbfile = _PATH_BLSTATE;
-static sig_atomic_t rconf = 1;
+static sig_atomic_t readconf;
 static sig_atomic_t done;
-
-void (*lfun)(int, const char *, ...) = syslog;
+static int vflag;
 
 static void
-sighup(int n)
+sigusr1(int n __unused)
 {
-	rconf++;
+	debug++;
 }
 
 static void
-sigdone(int n)
+sigusr2(int n __unused)
+{
+	debug--;
+}
+
+static void
+sighup(int n __unused)
+{
+	readconf++;
+}
+
+static void
+sigdone(int n __unused)
 {
 	done++;
 }
+
 static __dead void
-usage(void)
+usage(int c)
 {
-	fprintf(stderr, "Usage: %s -d [-c <config>] [-r <rulename>] "
-	    "[-s <sockpath>] [-C <controlprog>] [-D <dbfile>]\n",
-	    getprogname());
+	if (c)
+		warnx("Unknown option `%c'", (char)c);
+	fprintf(stderr, "Usage: %s [-vdfr] [-c <config>] [-R <rulename>] "
+	    "[-P <sockpathsfile>] [-C <controlprog>] [-D <dbfile>] "
+	    "[-s <sockpath>] [-t <timeout>]\n", getprogname());
 	exit(EXIT_FAILURE);
 }
 
-static const char *
-expandm(char *buf, size_t len, const char *fmt)
+static int
+getremoteaddress(bl_info_t *bi, struct sockaddr_storage *rss, socklen_t *rsl)
 {
-	char *p;
-	size_t r;
+	*rsl = sizeof(*rss);
+	memset(rss, 0, *rsl);
 
-	if ((p = strstr(fmt, "%m")) == NULL)
-		return fmt;
+	if (getpeername(bi->bi_fd, (void *)rss, rsl) != -1)
+		return 0;
 
-	r = (size_t)(p - fmt);
-	if (r >= len)
-		return fmt;
+	if (errno != ENOTCONN) {
+		(*lfun)(LOG_ERR, "getpeername failed (%m)"); 
+		return -1;
+	}
 
-	strlcpy(buf, fmt, r + 1);
-	strlcat(buf, strerror(errno), len);
-	strlcat(buf, fmt + r + 2, len);
+	if (bi->bi_slen == 0) {
+		(*lfun)(LOG_ERR, "unconnected socket with no peer in message");
+		return -1;
+	}
 
-	return buf;
-}
+	switch (bi->bi_ss.ss_family) {
+	case AF_INET:
+		*rsl = sizeof(struct sockaddr_in);
+		break;
+	case AF_INET6:
+		*rsl = sizeof(struct sockaddr_in6);
+		break;
+	default:
+		(*lfun)(LOG_ERR, "bad client passed socket family %u",
+		    (unsigned)bi->bi_ss.ss_family); 
+		return -1;
+	}
 
-static void
-dlog(int level, const char *fmt, ...)
-{
-	char buf[BUFSIZ];
-	va_list ap;
+	if (*rsl != bi->bi_slen) {
+		(*lfun)(LOG_ERR, "bad client passed socket length %u != %u",
+		    (unsigned)*rsl, (unsigned)bi->bi_slen); 
+		return -1;
+	}
 
-	fprintf(stderr, "%s: ", getprogname());
-	va_start(ap, fmt);
-	vfprintf(stderr, expandm(buf, sizeof(buf), fmt), ap);
-	va_end(ap);
-	fprintf(stderr, "\n");
-}
+	memcpy(rss, &bi->bi_ss, *rsl);
 
-static const char *
-fmttime(char *b, size_t l, time_t t)
-{
-	struct tm tm;
-	if (localtime_r(&t, &tm) == NULL)
-		snprintf(b, l, "*%jd*", (intmax_t)t);
-	else
-		strftime(b, l, "%Y/%m/%d %H:%M:%S", &tm);
-	return b;
+#ifdef HAVE_STRUCT_SOCKADDR_SA_LEN
+	if (*rsl != rss->ss_len) {
+		(*lfun)(LOG_ERR,
+		    "bad client passed socket internal length %u != %u",
+		    (unsigned)*rsl, (unsigned)rss->ss_len); 
+		return -1;
+	}
+#endif
+	return 0;
 }
 
 static void
 process(bl_t bl)
 {
-	int rfd;
 	struct sockaddr_storage rss;
 	socklen_t rsl;
 	char rbuf[BUFSIZ];
@@ -157,33 +177,35 @@ process(bl_t bl)
 		return;
 	}
 
-	if ((bi = bl_recv(bl)) == NULL)
+	if ((bi = bl_recv(bl)) == NULL) {
+		(*lfun)(LOG_ERR, "no message (%m)"); 
 		return;
+	}
 
-	if (debug)
-		printf("got type=%d fd=[%d %d] msg=%s cred=[u=%lu, g=%lu]\n",
-		    bi->bi_type, bi->bi_fd[0], bi->bi_fd[1], bi->bi_msg,
-		    (unsigned long)bi->bi_cred->sc_euid,
-		    (unsigned long)bi->bi_cred->sc_egid);
-
-	if (findconf(bi, &c) == NULL)
+	if (getremoteaddress(bi, &rss, &rsl) == -1)
 		goto out;
 
-	rfd = bi->bi_fd[1];
-	rsl = sizeof(rss);
-	memset(&rss, 0, rsl);
-	if (getpeername(rfd, (void *)&rss, &rsl) == -1) {
-		(*lfun)(LOG_ERR, "getsockname failed (%m)"); 
+	if (debug) {
+		sockaddr_snprintf(rbuf, sizeof(rbuf), "%a:%p", (void *)&rss);
+		(*lfun)(LOG_DEBUG, "processing type=%d fd=%d remote=%s msg=%s"
+		    " uid=%lu gid=%lu", bi->bi_type, bi->bi_fd, rbuf,
+		    bi->bi_msg, (unsigned long)bi->bi_uid,
+		    (unsigned long)bi->bi_gid);
+	}
+
+	if (conf_find(bi->bi_fd, bi->bi_uid, &rss, &c) == NULL) {
+		(*lfun)(LOG_DEBUG, "no rule matched");
 		goto out;
 	}
-	if (state_get(state, &rss, &c, &dbi) == -1)
+
+
+	if (state_get(state, &c, &dbi) == -1)
 		goto out;
 
 	if (debug) {
 		char b1[128], b2[128];
-		sockaddr_snprintf(rbuf, sizeof(rbuf), "%a:%p", (void *)&rss);
-		printf("%s: %s count=%d nfail=%d last=%s now=%s\n", __func__,
-		    rbuf, dbi.count, c.c_nfail,
+		(*lfun)(LOG_DEBUG, "%s: db state info for %s: count=%d/%d "
+		    "last=%s now=%s", __func__, rbuf, dbi.count, c.c_nfail,
 		    fmttime(b1, sizeof(b1), dbi.last),
 		    fmttime(b2, sizeof(b2), ts.tv_sec));
 	}
@@ -192,15 +214,30 @@ process(bl_t bl)
 	case BL_ADD:
 		dbi.count++;
 		dbi.last = ts.tv_sec;
-		if (dbi.id != -1) {
-			(*lfun)(LOG_ERR, "rule exists %d", dbi.id);
-			goto out;
+		if (dbi.id[0]) {
+			/*
+			 * We should not be getting this since the rule
+			 * should have blocked the address. A possible
+			 * explanation is that someone removed that rule,
+			 * and another would be that we got another attempt
+			 * before we added the rule. In anycase, we remove
+			 * and re-add the rule because we don't want to add
+			 * it twice, because then we'd lose track of it.
+			 */
+			(*lfun)(LOG_DEBUG, "rule exists %s", dbi.id);
+			(void)run_change("rem", &c, dbi.id, 0);
+			dbi.id[0] = '\0';
 		}
-		if (dbi.count >= c.c_nfail) {
-			int res = run_add(c.c_proto, (in_port_t)c.c_port, &rss);
+		if (c.c_nfail != -1 && dbi.count >= c.c_nfail) {
+			int res = run_change("add", &c, dbi.id, sizeof(dbi.id));
 			if (res == -1)
 				goto out;
-			dbi.id = res;
+			sockaddr_snprintf(rbuf, sizeof(rbuf), "%a",
+			    (void *)&rss);
+			(*lfun)(LOG_INFO,
+			    "blocked %s/%d:%d for %d seconds",
+			    rbuf, c.c_lmask, c.c_port, c.c_duration);
+				
 		}
 		break;
 	case BL_DELETE:
@@ -211,60 +248,158 @@ process(bl_t bl)
 	default:
 		(*lfun)(LOG_ERR, "unknown message %d", bi->bi_type); 
 	}
-	if (state_put(state, &rss, &c, &dbi) == -1)
+	if (state_put(state, &c, &dbi) == -1)
 		goto out;
 out:
-	close(bi->bi_fd[0]);
-	close(bi->bi_fd[1]);
+	close(bi->bi_fd);
+}
+
+static void
+update_interfaces(void)
+{
+	struct ifaddrs *oifas, *nifas;
+
+	if (getifaddrs(&nifas) == -1)
+		return;
+
+	oifas = ifas;
+	ifas = nifas;
+
+	if (oifas)
+		freeifaddrs(oifas);
 }
 
 static void
 update(void)
 {
 	struct timespec ts;
-	struct sockaddr_storage ss;
 	struct conf c;
 	struct dbinfo dbi;
 	unsigned int f, n;
+	char buf[128];
+	void *ss = &c.c_ss;
 
 	if (clock_gettime(CLOCK_REALTIME, &ts) == -1) {
 		(*lfun)(LOG_ERR, "clock_gettime failed (%m)"); 
 		return;
 	}
 
-	for (n = 0, f = 1; state_iterate(state, &ss, &c, &dbi, f) == 1;
+	for (n = 0, f = 1; state_iterate(state, &c, &dbi, f) == 1;
 	    f = 0, n++)
 	{
 		time_t when = c.c_duration + dbi.last;
-		if (debug) {
-			char buf[128], b1[64], b2[64];
-			sockaddr_snprintf(buf, sizeof(buf), "%a:%p",
-			    (void *)&ss);
-			printf("%s:[%u] %s count=%d duration=%d exp=%s "
-			   "now=%s\n", __func__, n, buf, dbi.count,
-			   c.c_duration, fmttime(b1, sizeof(b1), when),
-			   fmttime(b2, sizeof(b2), ts.tv_sec));
+		if (debug > 1) {
+			char b1[64], b2[64];
+			sockaddr_snprintf(buf, sizeof(buf), "%a:%p", ss);
+			(*lfun)(LOG_DEBUG, "%s:[%u] %s count=%d duration=%d "
+			    "last=%s " "now=%s", __func__, n, buf, dbi.count,
+			    c.c_duration, fmttime(b1, sizeof(b1), dbi.last),
+			    fmttime(b2, sizeof(b2), ts.tv_sec));
 		}
-		if (when >= ts.tv_sec)
+		if (c.c_duration == -1 || when >= ts.tv_sec)
 			continue;
-		if (dbi.id != -1)
-			run_rem(dbi.id);
-		state_del(state, &ss, &c);
+		if (dbi.id[0]) {
+			run_change("rem", &c, dbi.id, 0);
+			sockaddr_snprintf(buf, sizeof(buf), "%a", ss);
+			syslog(LOG_INFO, "released %s/%d:%d after %d seconds",
+			    buf, c.c_lmask, c.c_port, c.c_duration);
+		}
+		state_del(state, &c);
+	}
+}
+
+static void
+addfd(struct pollfd **pfdp, bl_t **blp, size_t *nfd, size_t *maxfd,
+    const char *path)
+{
+	bl_t bl = bl_create(true, path, vflag ? vdlog : vsyslog);
+	if (bl == NULL || !bl_isconnected(bl))
+		exit(EXIT_FAILURE);
+	if (*nfd >= *maxfd) {
+		*maxfd += 10;
+		*blp = realloc(*blp, sizeof(**blp) * *maxfd);
+		if (*blp == NULL)
+			err(EXIT_FAILURE, "malloc");
+		*pfdp = realloc(*pfdp, sizeof(**pfdp) * *maxfd);
+		if (*pfdp == NULL)
+			err(EXIT_FAILURE, "malloc");
+	}
+
+	(*pfdp)[*nfd].fd = bl_getfd(bl);
+	(*pfdp)[*nfd].events = POLLIN;
+	(*blp)[*nfd] = bl;
+	*nfd += 1;
+}
+
+static void
+uniqueadd(struct conf ***listp, size_t *nlist, size_t *mlist, struct conf *c)
+{
+	struct conf **list = *listp;
+
+	if (c->c_name[0] == '\0')
+		return;
+	for (size_t i = 0; i < *nlist; i++) {
+		if (strcmp(list[i]->c_name, c->c_name) == 0)
+			return;
+	}
+	if (*nlist == *mlist) {
+		*mlist += 10;
+		void *p = realloc(*listp, *mlist * sizeof(*list));
+		if (p == NULL)
+			err(EXIT_FAILURE, "Can't allocate for rule list");
+		list = *listp = p;
+	}
+	list[(*nlist)++] = c;
+}
+
+static void
+rules_flush(void)
+{
+	struct conf **list;
+	size_t nlist, mlist;
+
+	list = NULL;
+	mlist = nlist = 0;
+	for (size_t i = 0; i < rconf.cs_n; i++)
+		uniqueadd(&list, &nlist, &mlist, &rconf.cs_c[i]);
+	for (size_t i = 0; i < lconf.cs_n; i++)
+		uniqueadd(&list, &nlist, &mlist, &lconf.cs_c[i]);
+
+	for (size_t i = 0; i < nlist; i++)
+		run_flush(list[i]);
+	free(list);
+}
+
+static void
+rules_restore(void)
+{
+	struct conf c;
+	struct dbinfo dbi;
+	unsigned int f;
+
+	for (f = 1; state_iterate(state, &c, &dbi, f) == 1; f = 0) {
+		if (dbi.id[0] == '\0')
+			continue;
+		(void)run_change("rem", &c, dbi.id, 0);
+		(void)run_change("add", &c, dbi.id, sizeof(dbi.id));
 	}
 }
 
 int
 main(int argc, char *argv[])
 {
-	int c;
-	bl_t bl;
-	int tout;
-	int flags = O_RDWR|O_EXCL|O_CLOEXEC;
-	const char *spath = _PATH_BLSOCK;
+	int c, tout, flags, flush, restore;
+	const char *spath, *blsock;
 
 	setprogname(argv[0]);
 
-	while ((c = getopt(argc, argv, "C:c:D:ds:r:")) != -1) {
+	spath = NULL;
+	blsock = _PATH_BLSOCK;
+	flush = 0;
+	restore = 0;
+	tout = 0;
+	flags = O_RDWR|O_EXCL|O_CLOEXEC;
+	while ((c = getopt(argc, argv, "C:c:D:dfP:rR:s:t:v")) != -1) {
 		switch (c) {
 		case 'C':
 			controlprog = optarg;
@@ -278,60 +413,118 @@ main(int argc, char *argv[])
 		case 'd':
 			debug++;
 			break;
-		case 'r':
-			rulename = optarg;
+		case 'f':
+			flush++;
 			break;
-		case 's':
+		case 'P':
 			spath = optarg;
 			break;
+		case 'R':
+			rulename = optarg;
+			break;
+		case 'r':
+			restore++;
+			break;
+		case 's':
+			blsock = optarg;
+			break;
+		case 't':
+			tout = atoi(optarg) * 1000;
+			break;
+		case 'v':
+			vflag++;
+			break;
 		default:
-			usage();
+			usage(c);
 		}
 	}
+
+	argc -= optind;
+	if (argc)
+		usage(0);
 
 	signal(SIGHUP, sighup);
 	signal(SIGINT, sigdone);
 	signal(SIGQUIT, sigdone);
 	signal(SIGTERM, sigdone);
+	signal(SIGUSR1, sigusr1);
+	signal(SIGUSR2, sigusr2);
+
+	openlog(getprogname(), LOG_PID, LOG_DAEMON);
 
 	if (debug) {
 		lfun = dlog;
-		tout = 5000;
+		if (tout == 0)
+			tout = 5000;
 	} else {
-		daemon(0, 0);
-		tout = 15000;
+		if (tout == 0)
+			tout = 15000;
 	}
 
-	run_flush();
+	update_interfaces();
+	conf_parse(configfile);
+	if (flush) {
+		rules_flush();
+		flags |= O_TRUNC;
+	}
 
-	bl = bl_create2(true, spath, lfun);
-	if (bl == NULL || !bl_isconnected(bl))
-		return EXIT_FAILURE;
+	if (restore)
+		rules_restore();
+
+	struct pollfd *pfd = NULL;
+	bl_t *bl = NULL;
+	size_t nfd = 0;
+	size_t maxfd = 0;
+
+	if (spath == NULL)
+		addfd(&pfd, &bl, &nfd, &maxfd, blsock);
+	else {
+		FILE *fp = fopen(spath, "r");
+		char *line;
+		if (fp == NULL)
+			err(EXIT_FAILURE, "Can't open `%s'", spath);
+		for (; (line = fparseln(fp, NULL, NULL, NULL, 0)) != NULL;
+		    free(line))
+			addfd(&pfd, &bl, &nfd, &maxfd, line);
+		fclose(fp);
+	}
+
 	state = state_open(dbfile, flags, 0600);
 	if (state == NULL)
 		state = state_open(dbfile,  flags | O_CREAT, 0600);
 	if (state == NULL)
 		return EXIT_FAILURE;
 
-	struct pollfd pfd;
-	pfd.fd = bl_getfd(bl);
-	pfd.events = POLLIN;
-	while (!done) {
-		if (rconf) {
-			rconf = 0;
-			parseconf(configfile);
+	if (!debug) {
+		if (daemon(0, 0) == -1)
+			err(EXIT_FAILURE, "daemon failed");
+		if (pidfile(NULL) == -1)
+			err(EXIT_FAILURE, "Can't create pidfile");
+	}
+
+	for (size_t t = 0; !done; t++) {
+		if (readconf) {
+			readconf = 0;
+			conf_parse(configfile);
 		}
-		switch (poll(&pfd, 1, tout)) {
+		switch (poll(pfd, (nfds_t)nfd, tout)) {
 		case -1:
 			if (errno == EINTR)
 				continue;
 			(*lfun)(LOG_ERR, "poll (%m)");
 			return EXIT_FAILURE;
 		case 0:
+			state_sync(state);
 			break;
 		default:
-			process(bl);
+			for (size_t i = 0; i < nfd; i++)
+				if (pfd[i].revents & POLLIN)
+					process(bl[i]);
 		}
+		if (t % 100 == 0)
+			state_sync(state);
+		if (t % 10000 == 0)
+			update_interfaces();
 		update();
 	}
 	state_close(state);

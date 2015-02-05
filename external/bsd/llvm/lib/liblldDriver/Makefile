@@ -9,6 +9,7 @@ LIB=	lldDriver
 SRCS+=	CoreDriver.cpp \
 	DarwinLdDriver.cpp \
 	Driver.cpp \
+	DarwinInputGraph.cpp \
 	GnuLdDriver.cpp \
 	GnuLdInputGraph.cpp \
 	UniversalDriver.cpp \

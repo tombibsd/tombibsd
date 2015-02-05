@@ -231,6 +231,9 @@ bsciic_exec(void *v, i2c_op_t op, i2c_addr_t addr, const void *cmdbuf,
 	c |= BSC_C_INTR | BSC_C_INTT | BSC_C_INTD;
 #endif
 
+	if (isread && cmdlen == 0)
+		goto only_read;
+
 	buf = __UNCONST(cmdbuf);
 	len = cmdlen;
 
@@ -295,9 +298,13 @@ flood_again:
 	if (s != 0)
 		bus_space_write_4(sc->sc_iot, sc->sc_ioh, BSC_S, s);
 
+	if (error == 0 && (s & (BSC_S_CLKT|BSC_S_ERR)) != 0)
+		error = EIO;
+
 	if (!isread)
 		goto done;
 
+only_read:
 	c |= BSC_C_READ;
 
 	buf = databuf;
@@ -368,6 +375,9 @@ done:
 		bus_space_write_4(sc->sc_iot, sc->sc_ioh, BSC_S, s);
 
 	bsciic_dump_regs(sc);
+
+	if (error == 0 && (s & (BSC_S_CLKT|BSC_S_ERR)) != 0)
+		error = EIO;
 
 	return error;
 }

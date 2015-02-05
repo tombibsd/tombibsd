@@ -2911,6 +2911,7 @@ product SILABS LIPOWSKY_HARP	0x8218	Lipowsky HARP-1
 product SILABS2 DCU11CLONE	0xaa26	DCU-11 clone
 product SILABS CP210X_1		0xea60	CP210x Serial
 product SILABS CP210X_2		0xea61	CP210x Serial
+product SILABS EC3		0x8044  EC3 USB Debug Adapter
 
 /* Silicon Portals Inc. */
 product SILICONPORTALS YAPPH_NF 0x0200	YAP Phone (no firmware)

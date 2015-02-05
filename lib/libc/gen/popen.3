@@ -96,8 +96,7 @@ using the
 .Fl c
 flag; interpretation, if any, is performed by the shell.
 .Pp
-.Pp
-The 
+The
 .Fn popenve
 function is similar to
 .Fn popen
@@ -163,12 +162,12 @@ command, if
 .Fa stream
 has already been
 .Dq pclosed ,
-setting errno to 
-.Dv ESRCH 
+setting errno to
+.Dv ESRCH
 or if
 .Xr wait4 2
 returns an error, preserving the errno returned by
-.Xr wait4 2.
+.Xr wait4 2 .
 .Sh SEE ALSO
 .Xr sh 1 ,
 .Xr execve 2 ,

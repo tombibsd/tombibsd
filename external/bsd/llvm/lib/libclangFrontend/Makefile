@@ -12,6 +12,7 @@ SRCS+=	ASTConsumers.cpp \
 	CacheTokens.cpp \
 	ChainedDiagnosticConsumer.cpp \
 	ChainedIncludesSource.cpp \
+	CodeGenOptions.cpp \
 	CompilerInstance.cpp \
 	CompilerInvocation.cpp \
 	CreateInvocationFromCommandLine.cpp \
@@ -31,6 +32,7 @@ SRCS+=	ASTConsumers.cpp \
 	MultiplexConsumer.cpp \
 	PrintPreprocessedOutput.cpp \
 	SerializedDiagnosticPrinter.cpp \
+	SerializedDiagnosticReader.cpp \
 	TextDiagnostic.cpp \
 	TextDiagnosticBuffer.cpp \
 	TextDiagnosticPrinter.cpp \

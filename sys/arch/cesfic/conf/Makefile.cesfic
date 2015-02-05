@@ -35,7 +35,7 @@ CPPFLAGS+=	-Dcesfic
 CWARNFLAGS+=	-Wno-format
 CFLAGS+=	-msoft-float
 AFLAGS+=	-x assembler-with-cpp
-AFLAGS+=	-Wa,-m68040 -Wa,-m68030 -Wa,-m68851
+AFLAGS+=	-Wa,-mcpu=68030 -Wa,-m68040 -Wa,-m68030 -Wa,-m68851
 
 ##
 ## (3) libkern and compat

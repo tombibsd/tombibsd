@@ -1713,6 +1713,9 @@ am_nfs3_fsstat_3_svc(am_FSSTAT3args *argp, struct svc_req *rqstp)
     if ((gopt.flags & CFM_SHOW_STATFS_ENTRIES) &&
 	mp->am_al->al_mnt && mp->am_al->al_mnt->mf_mopts) {
       mnt.mnt_opts = mp->am_al->al_mnt->mf_mopts;
+      blocks = 0;
+      bfree = 0;
+      bavail = 0;
       if (amu_hasmntopt(&mnt, "browsable")) {
 	count_map_entries(mp, &blocks, &bfree, &bavail);
       }

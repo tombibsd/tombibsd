@@ -1,2 +1,7 @@
+A D/AlignmentFromAssumptions////
+A D/AtomicExpand////
 A D/GlobalMerge////
+A D/Util////
 R D/GlobalMerge////
+R D/DebugIR////
+R D/AtomicExpandLoadLinked////

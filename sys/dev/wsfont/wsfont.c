@@ -115,6 +115,16 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <dev/wsfont/omron12x20.h>
 #endif
 
+#ifdef FONT_GLASS10x19
+#define HAVE_FONT 1
+#include <dev/wsfont/glass10x19.h>
+#endif
+
+#ifdef FONT_GLASS10x25
+#define HAVE_FONT 1
+#include <dev/wsfont/glass10x25.h>
+#endif
+
 #ifdef FONT_DEJAVU_SANS_MONO12x22
 #include <dev/wsfont/DejaVu_Sans_Mono_12x22.h>
 #endif
@@ -210,6 +220,12 @@ static struct font builtin_fonts[] = {
 #endif
 #ifdef FONT_OMRON12x20
 	{ { NULL, NULL }, &omron12x20, 0, 0, WSFONT_STATIC | WSFONT_BUILTIN },
+#endif
+#ifdef FONT_GLASS10x19
+	{ { NULL, NULL }, &Glass_TTY_VT220_10x19, 0, 0, WSFONT_STATIC | WSFONT_BUILTIN },
+#endif
+#ifdef FONT_GLASS10x25
+	{ { NULL, NULL }, &Glass_TTY_VT220_10x25, 0, 0, WSFONT_STATIC | WSFONT_BUILTIN },
 #endif
 #ifdef FONT_DEJAVU_SANS_MONO12x22
 	{ { NULL, NULL }, &DejaVu_Sans_Mono_12x22, 0, 0, WSFONT_STATIC | WSFONT_BUILTIN },

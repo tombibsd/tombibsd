@@ -290,8 +290,7 @@ dwc_mmc_host_reset(sdmmc_chipset_handle_t sch)
 		MMC_WRITE(sc, DWC_MMC_PWREN_REG, DWC_MMC_PWREN_POWER_ENABLE);
 	}
 
-	MMC_WRITE(sc, DWC_MMC_CTRL_REG,
-	    MMC_READ(sc, DWC_MMC_CTRL_REG) | DWC_MMC_CTRL_RESET_ALL);
+	MMC_WRITE(sc, DWC_MMC_CTRL_REG, DWC_MMC_CTRL_RESET_ALL);
 	while (--retry > 0) {
 		ctrl = MMC_READ(sc, DWC_MMC_CTRL_REG);
 		if ((ctrl & DWC_MMC_CTRL_RESET_ALL) == 0)

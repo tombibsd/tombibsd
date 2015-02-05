@@ -8,7 +8,9 @@ LIB=	clangStaticAnalyzerFrontend
 
 SRCS+=	AnalysisConsumer.cpp \
 	CheckerRegistration.cpp \
-	FrontendActions.cpp
+	FrontendActions.cpp \
+	ModelConsumer.cpp \
+	ModelInjector.cpp
 
 CHECKERS_OBJDIR!=	cd ${.CURDIR}/../libclangStaticAnalyzerCheckers && ${PRINTOBJDIR}
 CPPFLAGS+=	-I${CHECKERS_OBJDIR}

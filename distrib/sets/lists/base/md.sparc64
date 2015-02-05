@@ -77,6 +77,8 @@
 ./usr/lib/sparc/libbfd.so.13.0			base-compat-shlib	compat,pic,binutils
 ./usr/lib/sparc/libbind9.so.8			base-compat-shlib	compat,pic
 ./usr/lib/sparc/libbind9.so.8.1			base-compat-shlib	compat,pic
+./usr/lib/sparc/libblacklist.so.0		base-compat-shlib	compat,pic
+./usr/lib/sparc/libblacklist.so.0.0		base-compat-shlib	compat,pic
 ./usr/lib/sparc/libbluetooth.so.4		base-compat-shlib	compat,pic
 ./usr/lib/sparc/libbluetooth.so.4.2		base-compat-shlib	compat,pic
 ./usr/lib/sparc/libbsdmalloc.so.0		base-compat-shlib	compat,pic

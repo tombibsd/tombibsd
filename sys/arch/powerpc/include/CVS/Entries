@@ -9,9 +9,9 @@
 /bus_defs.h/1.2/Sat Mar  1 06:04:32 2014/-kk/
 /bus_funcs.h/1.1/Fri Jul  1 17:10:00 2011/-kk/
 /cdefs.h/1.10/Sat Mar  1 06:04:32 2014/-kk/
-/cpu.h/1.100/Fri Apr 11 02:03:38 2014/-kk/
+/cpu.h/1.101/Thu Feb  5 08:41:04 2015/-kk/
 /cpu_counter.h/1.8/Tue Jan 18 01:02:54 2011/-kk/
-/db_machdep.h/1.24/Tue Jun 14 03:28:32 2011/-kk/
+/db_machdep.h/1.25/Thu Feb  5 08:41:04 2015/-kk/
 /elf_machdep.h/1.12/Fri Mar 14 04:28:17 2014/-kk/
 /endian.h/1.9/Fri Mar 17 00:09:24 2000/-kk/
 /endian_machdep.h/1.1/Fri Mar 17 00:09:24 2000/-kk/

@@ -6,7 +6,8 @@ LIB=	LLVMExecutionEngine
 
 .PATH: ${LLVM_SRCDIR}/lib/ExecutionEngine
 
-SRCS+=	ExecutionEngine.cpp \
+SRCS+=	GDBRegistrationListener.cpp \
+	ExecutionEngine.cpp \
 	ExecutionEngineBindings.cpp \
 	RTDyldMemoryManager.cpp \
 	TargetSelect.cpp

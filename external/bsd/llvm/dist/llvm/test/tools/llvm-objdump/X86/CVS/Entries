@@ -1,4 +1,9 @@
 /disassembly-show-raw.test/1.1.1.1/Sun Aug 10 17:04:40 2014/-kk/
 /lit.local.cfg/1.1.1.1/Sun Aug 10 17:04:40 2014/-kk/
+/macho-private-headers.test/1.1.1.1/Thu Jan 29 19:54:45 2015/-kk/
+/macho-symbolized-disassembly.test/1.1.1.1/Thu Jan 29 19:54:45 2015/-kk/
+/macho-symbolized-subtractor-i386.test/1.1.1.1/Thu Jan 29 19:54:45 2015/-kk/
+/macho-symbolized-subtractor.test/1.1.1.1/Thu Jan 29 19:54:45 2015/-kk/
+/macho-universal-x86_64.i386.test/1.1.1.1/Thu Jan 29 19:54:45 2015/-kk/
 /out-of-section-sym.test/1.1.1.1/Sun Aug 10 17:04:40 2014/-kk/
 D/Inputs////

@@ -545,11 +545,6 @@ _bus_dmamap_sync(bus_dma_tag_t t, bus_dmamap_t map, bus_addr_t offset,
 			if (SH_HAS_WRITEBACK_CACHE)
 				sh_dcache_wb_range(naddr, minlen);
 			break;
-
-		case BUS_DMASYNC_POSTREAD:
-		case BUS_DMASYNC_POSTREAD|BUS_DMASYNC_POSTWRITE:
-			sh_dcache_inv_range(naddr, minlen);
-			break;
 		}
 		offset = 0;
 		len -= minlen;

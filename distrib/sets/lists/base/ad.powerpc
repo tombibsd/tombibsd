@@ -76,6 +76,8 @@
 ./usr/lib/powerpc/libbfd.so.13.0		base-compat-shlib	compat,arch64,pic,binutils
 ./usr/lib/powerpc/libbind9.so.8			base-compat-shlib	compat,arch64,pic
 ./usr/lib/powerpc/libbind9.so.8.1		base-compat-shlib	compat,arch64,pic
+./usr/lib/powerpc/libblacklist.so.0		base-compat-shlib	compat,arch64,pic
+./usr/lib/powerpc/libblacklist.so.0.0		base-compat-shlib	compat,arch64,pic
 ./usr/lib/powerpc/libbluetooth.so.4		base-compat-shlib	compat,arch64,pic
 ./usr/lib/powerpc/libbluetooth.so.4.2		base-compat-shlib	compat,arch64,pic
 ./usr/lib/powerpc/libbsdmalloc.so.0		base-compat-shlib	compat,arch64,pic

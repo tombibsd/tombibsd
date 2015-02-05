@@ -163,6 +163,10 @@ typedef long	kgdb_reg_t;
 void	kdb_kintr(void *);
 int	kdb_trap(int, void *);
 
+bool	ddb_running_on_this_cpu_p(void);
+bool	ddb_running_on_any_cpu_p(void);
+void	db_resume_others(void);
+
 /*
  * We have machine-dependent commands.
  */

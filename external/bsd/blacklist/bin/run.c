@@ -28,11 +28,17 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+
 #include <sys/cdefs.h>
 __RCSID("$NetBSD$");
 
 #include <stdio.h>
+#ifdef HAVE_UTIL_H
 #include <util.h>
+#endif
 #include <stdarg.h>
 #include <limits.h>
 #include <stdlib.h>
@@ -42,33 +48,43 @@ __RCSID("$NetBSD$");
 #include <netinet/in.h>
 
 #include "run.h"
+#include "conf.h"
 #include "internal.h"
 
 extern char **environ;
 
 static char *
-run(const char *cmd, ...)
+run(const char *cmd, const char *name, ...)
 {
 	const char *argv[20];
 	size_t i;
 	va_list ap;
 	FILE *fp;
-	char buf[BUFSIZ], *res;
+	char buf[10240], *res;
 
 	argv[0] = "control";
 	argv[1] = cmd;
-	argv[2] = rulename;
-	va_start(ap, cmd);
+	argv[2] = name;
+	va_start(ap, name);
 	for (i = 3; i < __arraycount(argv) &&
 	    (argv[i] = va_arg(ap, char *)) != NULL; i++)
 		continue;
 	va_end(ap);
 		
 	if (debug) {
-		printf("run %s [", controlprog);
-		for (i = 0; argv[i]; i++)
-			printf(" %s", argv[i]);
-		printf("]\n");
+		size_t z;
+		int r;
+
+		r = snprintf(buf, sizeof(buf), "run %s [", controlprog);
+		if (r == -1 || (z = (size_t)r) >= sizeof(buf))
+			z = sizeof(buf);
+		for (i = 0; argv[i]; i++) {
+			r = snprintf(buf + z, sizeof(buf) - z, "%s%s",
+			    argv[i], argv[i + 1] ? " " : "");
+			if (r == -1 || (z += (size_t)r) >= sizeof(buf))
+				z = sizeof(buf);
+		}
+		(*lfun)(LOG_DEBUG, "%s]", buf);
 	}
 
 	fp = popenve(controlprog, __UNCONST(argv), environ, "r");
@@ -82,25 +98,24 @@ run(const char *cmd, ...)
 		res = NULL;
 	pclose(fp);
 	if (debug)
-		printf("%s returns %s\n", cmd, res);
+		(*lfun)(LOG_DEBUG, "%s returns %s", cmd, res);
 	return res;
 }
 
 void
-run_flush(void)
+run_flush(const struct conf *c)
 {
-	free(run("flush", NULL));
+	free(run("flush", c->c_name, NULL));
 }
 
 int
-run_add(int proto, in_port_t port, const struct sockaddr_storage *ss)
+run_change(const char *how, const struct conf *c, char *id, size_t len)
 {
 	const char *prname;
-	char poname[64], adname[128], *rv;
-	int id, e;
+	char poname[64], adname[128], maskname[32], *rv;
 	size_t off;
 
-	switch (proto) {
+	switch (c->c_proto) {
 	case IPPROTO_TCP:
 		prname = "tcp";
 		break;
@@ -108,31 +123,22 @@ run_add(int proto, in_port_t port, const struct sockaddr_storage *ss)
 		prname = "udp";
 		break;
 	default:
-		(*lfun)(LOG_ERR, "%s: bad protocol %d", __func__, proto);
+		(*lfun)(LOG_ERR, "%s: bad protocol %d", __func__, c->c_proto);
 		return -1;
 	}
 
-	snprintf(poname, sizeof(poname), "%d", port);
-	sockaddr_snprintf(adname, sizeof(adname), "%a", (const void *)ss);
+	snprintf(poname, sizeof(poname), "%d", c->c_port);
+	snprintf(maskname, sizeof(maskname), "%d", c->c_lmask);
+	sockaddr_snprintf(adname, sizeof(adname), "%a", (const void *)&c->c_ss);
 
-	rv = run("add", prname, adname, poname, NULL);
+	rv = run(how, c->c_name, prname, adname, maskname, poname, id, NULL);
 	if (rv == NULL)
 		return -1;
-	rv[strcspn(rv, "\n")] = '\0';
-	off = strncmp(rv, "OK ", 3) == 0 ? 3 : 0;
-	id = (int)strtoi(rv + off, NULL, 0, 0, INT_MAX, &e);
-	if (e) {
-		(*lfun)(LOG_ERR, "%s: bad number %s (%m)", __func__, rv);
-		id = -1;
+	if (len != 0) {
+		rv[strcspn(rv, "\n")] = '\0';
+		off = strncmp(rv, "OK ", 3) == 0 ? 3 : 0;
+		strlcpy(id, rv + off, len);
 	}
 	free(rv);
-	return id;
-}
-
-void
-run_rem(int id)
-{
-	char buf[64];
-	snprintf(buf, sizeof(buf), "%d", id);
-	free(run("rem", buf, NULL));
+	return 0;
 }

@@ -1,7 +1,10 @@
+D/dsymutil////
 D/gold////
 D/llvm-cov////
 D/llvm-lit////
+D/llvm-mc////
 D/llvm-objdump////
 D/llvm-profdata////
 D/llvm-readobj////
+D/llvm-symbolizer////
 D/llvm-vtabledump////
