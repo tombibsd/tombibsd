@@ -754,7 +754,7 @@ thunk_idle(void)
 }
 
 int
-thunk_getcpuinfo(char *cp, int *len)
+thunk_getcpuinfo(char *cp, size_t *len)
 {
 	ssize_t rlen;
 	int fd;

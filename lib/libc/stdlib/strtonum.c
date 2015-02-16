@@ -48,7 +48,7 @@ strtonum(const char *nptr, long long minval, long long maxval,
 	if (errstr == NULL)
 		errstr = &resp;
 
-	rv = strtoi(nptr, NULL, 0, minval, maxval, &e);
+	rv = (long long)strtoi(nptr, NULL, 0, minval, maxval, &e);
 
 	if (e == 0) {
 		*errstr = NULL;

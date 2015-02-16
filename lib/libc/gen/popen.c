@@ -194,6 +194,7 @@ popen(const char *cmd, const char *type)
 #ifdef _REENTRANT
 		(void)rwlock_unlock(&pidlist_lock);
 #endif
+		pdes_error(pdes, cur);
 		errno = serrno;
 		return NULL;
 		/* NOTREACHED */

@@ -23,6 +23,7 @@ D/Linker////
 D/MC////
 D/Object////
 D/Other////
+D/SymbolRewriter////
 D/TableGen////
 D/Transforms////
 D/Unit////

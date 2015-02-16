@@ -15,7 +15,7 @@
 /t_getsid.c/1.1/Thu Jul  7 06:57:53 2011/-kk/
 /t_gettimeofday.c/1.1/Thu Jul  7 06:57:53 2011/-kk/
 /t_issetugid.c/1.1/Thu Jul  7 06:57:53 2011/-kk/
-/t_kevent.c/1.6/Thu Nov 29 09:13:44 2012/-kk/
+/t_kevent.c/1.7/Mon Feb 16 03:14:34 2015/-kk/
 /t_kill.c/1.1/Thu Jul  7 06:57:53 2011/-kk/
 /t_link.c/1.2/Tue May  6 05:50:30 2014/-kk/
 /t_listen.c/1.4/Sun Mar 18 07:00:52 2012/-kk/

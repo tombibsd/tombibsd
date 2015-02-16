@@ -18,6 +18,7 @@ D/CodeGenObjC////
 D/CodeGenObjCXX////
 D/CodeGenOpenCL////
 D/Coverage////
+D/CoverageMapping////
 D/Driver////
 D/FixIt////
 D/Format////

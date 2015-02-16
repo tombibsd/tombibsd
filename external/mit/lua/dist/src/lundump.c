@@ -1,17 +1,20 @@
 /*	$NetBSD$	*/
 
 /*
-** $Id$
+** Id: lundump.c,v 2.41 2014/11/02 19:19:04 roberto Exp 
 ** load precompiled Lua chunks
 ** See Copyright Notice in lua.h
 */
 
+#define lundump_c
+#define LUA_CORE
+
+#include "lprefix.h"
+
+
 #ifndef _KERNEL
 #include <string.h>
 #endif
-
-#define lundump_c
-#define LUA_CORE
 
 #include "lua.h"
 

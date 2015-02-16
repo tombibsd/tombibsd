@@ -59,6 +59,13 @@ typedef struct callout {
 #define	CALLOUT_MPSAFE		0x0100	/* does not need kernel_lock */
 #define	CALLOUT_FLAGMASK	0xff00
 
+#define CALLOUT_FMT	"\177\020\
+b\00BOUND\0\
+b\01PENDING\0\
+b\02FIRED\0\
+b\03INVOKING\0\
+b\10MPSAFE\0"
+
 #ifdef _CALLOUT_PRIVATE
 
 /* The following funkyness is to appease gcc3's strict aliasing. */

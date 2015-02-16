@@ -153,8 +153,14 @@ ATF_TC_BODY(kqueue_unsupported_fd, tc)
 	struct kevent ev;
 
 	fd = open(DRVCTLDEV, O_RDONLY);
-	if (fd == -1 && errno == ENOENT)
-		atf_tc_skip("no " DRVCTLDEV " available for testing");
+	if (fd == -1) {
+		switch (errno) {
+		case ENOENT:
+		case ENXIO:
+			atf_tc_skip("no " DRVCTLDEV " available for testing");
+			break;
+		}
+	}
 	ATF_REQUIRE(fd != -1);
 	ATF_REQUIRE((kq = kqueue()) != -1);
 

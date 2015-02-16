@@ -748,7 +748,7 @@ sdmmc_mem_mmc_init(struct sdmmc_softc *sc, struct sdmmc_function *sf)
 			aprint_error_dev(sc->sc_dev,
 			    "unrecognised future version (%d)\n",
 				ext_csd[EXT_CSD_STRUCTURE]);
-			return error;
+			return ENOTSUP;
 		}
 
 		if (ext_csd[EXT_CSD_CARD_TYPE] & EXT_CSD_CARD_TYPE_F_52M) {
@@ -761,7 +761,7 @@ sdmmc_mem_mmc_init(struct sdmmc_softc *sc, struct sdmmc_function *sf)
 			aprint_error_dev(sc->sc_dev,
 			    "unknown CARD_TYPE: 0x%x\n",
 			    ext_csd[EXT_CSD_CARD_TYPE]);
-			return error;
+			return ENOTSUP;
 		}
 
 		if (!ISSET(sc->sc_caps, SMC_CAPS_MMC_HIGHSPEED)) {

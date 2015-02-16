@@ -12,9 +12,8 @@ pea[ 	][._A-Za-z][A-Za-z0-9_.]*$	{printf("pea");munchit(yytext+3);}
 #include <string.h>
 
 void
-munchit(s)
-	char *s;
-{
+munchit(char *s) {
+
 	putchar(*s++);
 	if ((!strncmp(s, "fp", 2) ||
 	    !strncmp(s, "sp", 2) ||
@@ -23,4 +22,12 @@ munchit(s)
 		printf("%s", s);
 	else
 		printf("%%pc@(%s)",s);
+}
+
+int
+main(void) {
+	while (yylex() != 0)
+		;
+
+	return 0;
 }

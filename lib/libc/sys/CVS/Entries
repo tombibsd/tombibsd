@@ -50,7 +50,7 @@
 /extattr_get_file.2/1.6/Tue Dec  9 04:34:28 2014/-kk/
 /fcntl.2/1.41/Wed Jan  1 02:45:14 2014/-kk/
 /fdatasync.2/1.16/Wed Apr 30 13:10:51 2008/-kk/
-/fdiscard.2/1.2/Fri Jul 25 08:47:42 2014/-kk/
+/fdiscard.2/1.3/Mon Feb 16 03:13:51 2015/-kk/
 /fdiscard.c/1.1/Thu Sep 25 15:08:29 2014/-kk/
 /fhopen.2/1.17/Wed Aug  5 23:15:52 2009/-kk/
 /flock.2/1.22/Sat Oct 15 21:35:50 2011/-kk/
@@ -98,7 +98,7 @@
 /mkfifo.2/1.27/Thu Oct 24 10:28:53 2013/-kk/
 /mknod.2/1.28/Thu Oct 24 10:28:53 2013/-kk/
 /mknodat.c/1.1/Thu Oct 24 10:28:53 2013/-kk/
-/mlock.2/1.20/Mon Feb 28 07:17:02 2011/-kk/
+/mlock.2/1.22/Mon Feb 16 03:13:51 2015/-kk/
 /mlockall.2/1.13/Wed Apr 30 13:10:51 2008/-kk/
 /mmap.2/1.47/Thu Jan  5 15:19:52 2012/-kk/
 /mmap.c/1.15/Tue Mar 20 16:26:12 2012/-kk/

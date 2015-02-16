@@ -169,6 +169,10 @@ lan9118_attach(struct lan9118_softc *sc)
 		return EINVAL;
 	}
 
+	/* Configure interrupt polarity */
+	bus_space_write_4(sc->sc_iot, sc->sc_ioh, LAN9118_IRQ_CFG,
+	    LAN9118_IRQ_CFG_IRQ_TYPE | LAN9118_IRQ_CFG_IRQ_POL);
+
 	val = bus_space_read_4(sc->sc_iot, sc->sc_ioh, LAN9118_ID_REV);
 	sc->sc_id = LAN9118_ID_REV_ID(val);
 	sc->sc_rev = LAN9118_ID_REV_REV(val);

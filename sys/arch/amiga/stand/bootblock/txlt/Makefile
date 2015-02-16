@@ -2,7 +2,11 @@
 #
 PROG=txlt
 NOMAN=	# defined
-LDADD=-ll
 CLEANFILES+=	txlt.c
+
+.ifndef HOSTPROG
+LDADD+=		-ll
+DPADD+=		${LIBL}
+.endif
 
 .include <bsd.prog.mk>

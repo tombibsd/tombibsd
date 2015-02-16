@@ -641,7 +641,7 @@ pmap_update(struct pmap *pmap)
 		PMAP_COUNT(shootdown_ipis);
 #endif
 	pmap_md_tlb_miss_lock_enter();
-#ifdef DEBUG
+#if defined(DEBUG) && !defined(MULTIPROCESSOR)
 	pmap_tlb_check(pmap, pmap_md_tlb_check_entry);
 #endif /* DEBUG */
 

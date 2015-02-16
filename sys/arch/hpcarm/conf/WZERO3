@@ -48,6 +48,7 @@ file-system	FDESC		# /dev/fd
 file-system	KERNFS		# /kern
 file-system	NULLFS		# loopback file system
 #file-system 	OVERLAY		# overlay filesystem
+file-system	PUFFS		# Userspace file systems (e.g. ntfs-3g & sshfs)
 file-system	PROCFS		# /proc
 #file-system	UMAPFS		# NULLFS + uid and gid remapping
 file-system	UNION		# union file system
@@ -308,7 +309,9 @@ pseudo-device	biconsdev 1		# build-in console device
 
 pseudo-device	md			# Ramdisk driver
 pseudo-device	clockctl		# user control of clock subsystem
+pseudo-device	drvctl			# user control of drive subsystem
 pseudo-device	ksyms			# /dev/ksyms
+pseudo-device	putter			# for puffs and pud
 #pseudo-device	bcsp			# BlueCore Serial Protocol
 #pseudo-device	btuart			# Bluetooth HCI UART (H4)
 

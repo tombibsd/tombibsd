@@ -507,10 +507,10 @@ for import.
 Package:	heimdal
 Version:	1.5.3
 Current Vers:	1.5.3
-Maintainer:	Heimdal <heimdal@pdc.kth.se>
-Archive Site:	ftp://ftp.pdc.kth.se/pub/heimdal/src/
-Home Page:	http://www.pdc.kth.se/heimdal/
-Mailing List:	heimdal-discuss@pdc.kth.se
+Maintainer:	Heimdal <heimdal@h5l.org>
+Archive Site:	ftp://ftp.h5l.org/pub/heimdal/src/
+Home Page:	http://www.h5l.org/
+Mailing List:	heimdal-discuss@sics.se
 Responsible:	joda, lha
 License:	BSD
 Location:	crypto/external/bsd/heimdal/dist
@@ -1116,7 +1116,7 @@ now to do a new import.
 
 Package:	Postfix
 Version:	2.11.3
-Current Vers:	2.11.3
+Current Vers:	3.0
 Maintainer:	Wietse Venema <wietse@porcupine.org>
 Archive Site:	ftp://postfix.cloud9.net/official/
 Home Page:	http://www.postfix.org/

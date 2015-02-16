@@ -2,6 +2,7 @@
 
 # $FreeBSD: src/cddl/lib/libdtrace/Makefile,v 1.2.2.1 2009/08/03 08:13:06 kensmith Exp $
 
+WARNS=1
 .include <bsd.own.mk>
 
 .include	"../../Makefile.inc"

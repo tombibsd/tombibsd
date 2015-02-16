@@ -76,8 +76,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/malloc.h>
 #include <sys/kmem.h>
 
-#include <uvm/uvm_extern.h>
-
 /*
  * Built-in malloc types.  Note: ought to be removed.
  */
@@ -199,12 +197,4 @@ kern_realloc(void *curaddr, unsigned long newsize, int flags)
 	 */
 	free(curaddr, ksp);
 	return newaddr;
-}
-
-/*
- * Initialize the kernel memory allocator
- */
-void
-kmeminit(void)
-{
 }

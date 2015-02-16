@@ -7,7 +7,6 @@
 /dns.h/1.1.1.2/Thu Feb  5 08:37:25 2015/-kk/
 /dns_compat.h/1.1.1.2/Thu Feb  5 08:37:25 2015/-kk/
 /dns_struct.h/1.1.1.2/Thu Feb  5 08:37:25 2015/-kk/
-/event-config.h/1.1.1.1/Thu Jan 29 06:38:26 2015/-kk/
 /event.h/1.1.1.2/Thu Feb  5 08:37:25 2015/-kk/
 /event_compat.h/1.1.1.2/Thu Feb  5 08:37:25 2015/-kk/
 /event_struct.h/1.1.1.2/Thu Feb  5 08:37:25 2015/-kk/

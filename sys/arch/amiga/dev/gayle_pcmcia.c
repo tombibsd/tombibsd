@@ -211,6 +211,8 @@ pccard_attach(device_t parent, device_t self, void *aux)
 		delay(500);
 		gayle_intr_ack(0xfc);
 
+		delay(100*1000);
+
 		*reset_card_reg = 0x0;
 		delay(1000);
 		x = *reset_card_reg;

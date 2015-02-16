@@ -364,6 +364,7 @@ unsigned long long int
 	strtoull_l(const char * __restrict, char ** __restrict, int, locale_t);
 
 #  if defined(_NETBSD_SOURCE)
+void	*reallocarray(void *, size_t, size_t);
 quad_t	 strtoq_l(const char * __restrict, char ** __restrict, int, locale_t);
 u_quad_t strtouq_l(const char * __restrict, char ** __restrict, int, locale_t);
 

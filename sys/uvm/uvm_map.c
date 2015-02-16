@@ -1078,7 +1078,7 @@ uvm_map(struct vm_map *map, vaddr_t *startp /* IN/OUT */, vsize_t size,
 	}
 
 #if defined(DEBUG)
-	if (!error && VM_MAP_IS_KERNEL(map)) {
+	if (!error && VM_MAP_IS_KERNEL(map) && (flags & UVM_FLAG_NOWAIT) == 0) {
 		uvm_km_check_empty(map, *startp, *startp + size);
 	}
 #endif /* defined(DEBUG) */
@@ -2253,7 +2253,7 @@ uvm_unmap_remove(struct vm_map *map, vaddr_t start, vaddr_t end,
 			}
 		}
 
-		if (VM_MAP_IS_KERNEL(map)) {
+		if (VM_MAP_IS_KERNEL(map) && (flags & UVM_FLAG_NOWAIT) == 0) {
 			uvm_km_check_empty(map, entry->start,
 			    entry->end);
 		}

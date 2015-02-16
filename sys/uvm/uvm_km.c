@@ -364,10 +364,7 @@ uvm_km_bootstrap(vaddr_t start, vaddr_t end)
 void
 uvm_km_init(void)
 {
-
 	kmem_init();
-
-	kmeminit(); // killme
 }
 
 /*

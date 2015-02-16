@@ -2023,7 +2023,7 @@ releasekernel()
 
 buildkernels()
 {
-	allkernels=$( make_in_dir etc '-V ${ALL_KERNELS}' )
+	allkernels=$( runcmd= make_in_dir etc '-V ${ALL_KERNELS}' )
 	for k in $allkernels; do
 		buildkernel "${k}"
 	done

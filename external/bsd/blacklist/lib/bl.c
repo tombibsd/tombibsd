@@ -355,6 +355,7 @@ bl_send(bl_t b, bl_type_t e, int pfd, const struct sockaddr *sa,
 	msg.msg_namelen = 0;
 	msg.msg_iov = &iov;
 	msg.msg_iovlen = 1;
+	msg.msg_flags = 0;
 
 	msg.msg_control = ua.ctrl;
 	msg.msg_controllen = sizeof(ua.ctrl);
@@ -404,6 +405,7 @@ bl_recv(bl_t b)
 	msg.msg_namelen = 0;
 	msg.msg_iov = &iov;
 	msg.msg_iovlen = 1;
+	msg.msg_flags = 0;
 
 	msg.msg_control = ua.ctrl;
 	msg.msg_controllen = sizeof(ua.ctrl) + 100;

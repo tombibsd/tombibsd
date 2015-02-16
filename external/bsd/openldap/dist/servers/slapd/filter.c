@@ -1160,14 +1160,10 @@ get_vrFilter( Operation *op, BerElement *ber,
 void
 vrFilter_free( Operation *op, ValuesReturnFilter *vrf )
 {
-	ValuesReturnFilter	*p, *next;
+	ValuesReturnFilter	*next;
 
-	if ( vrf == NULL ) {
-		return;
-	}
-
-	for ( p = vrf; p != NULL; p = next ) {
-		next = p->vrf_next;
+	for ( p = vrf; vrf != NULL; vrf = next ) {
+		next = vrf->vrf_next;
 
 		switch ( vrf->vrf_choice & SLAPD_FILTER_MASK ) {
 		case LDAP_FILTER_PRESENT:

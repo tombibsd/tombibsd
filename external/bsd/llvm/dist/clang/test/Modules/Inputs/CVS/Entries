@@ -121,6 +121,7 @@
 /warn-unused-local-typedef.h/1.1.1.1/Thu Jan 29 19:57:36 2015/-kk/
 /warning.h/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
 /weird_objc.h/1.1.1.1/Thu Nov 28 14:14:56 2013/-kk/
+D/AddRemovePrivate.framework////
 D/AlsoDependsOnModule.framework////
 D/CmdLine.framework////
 D/Conflicts////
@@ -134,21 +135,31 @@ D/MutuallyRecursive1.framework////
 D/MutuallyRecursive2.framework////
 D/NoUmbrella.framework////
 D/NotAModule.framework////
+D/PR20399////
+D/PR20786////
 D/StdDef////
 D/System////
+D/attr-unavailable////
+D/cxx-lookup////
 D/declare-use////
 D/elsewhere////
 D/exclude-header////
+D/explicit-build////
+D/filename////
 D/include-relative////
+D/include_next////
+D/inferred-attr////
 D/macro-hiding////
 D/macro-undef-through-pch////
 D/malformed////
 D/merge-typedefs////
+D/merge-using-decls////
 D/modular_maps////
 D/modules-with-same-name////
 D/normal-module-map////
 D/odr////
 D/oldname////
+D/pr19692////
 D/private////
 D/private0////
 D/private1////
@@ -162,4 +173,5 @@ D/template-specialization-visibility////
 D/undefined-type-fixit////
 D/unnecessary-module-map-parsing////
 D/update-after-load////
+D/va_list////
 D/wildcard-submodule-exports////

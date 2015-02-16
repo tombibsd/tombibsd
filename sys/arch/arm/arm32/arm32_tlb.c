@@ -147,11 +147,11 @@ tlb_cortex_a5_record_asids(u_long *mapp)
 			const uint64_t d = ((uint64_t) armreg_tlbdata1_read())
 			    | armreg_tlbdata0_read();
 			if (!(d & ARM_TLBDATA_VALID)
-			    || !(d & ARM_V5_TLBDATA_nG))
+			    || !(d & ARM_A5_TLBDATA_nG))
 				continue;
 
 			const tlb_asid_t asid = __SHIFTOUT(d,
-			    ARM_V5_TLBDATA_ASID);
+			    ARM_A5_TLBDATA_ASID);
 			const u_long mask = 1L << (asid & 31);
 			const size_t idx = asid >> 5;
 			if (mapp[idx] & mask)

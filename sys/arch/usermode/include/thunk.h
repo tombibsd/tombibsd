@@ -156,7 +156,7 @@ int	thunk_idle(void);
 char *	thunk_getenv(const char *);
 vaddr_t	thunk_get_vm_min_address(void);
 
-int	thunk_getcpuinfo(char *, int *);
+int	thunk_getcpuinfo(char *, size_t *);
 
 int	thunk_getmachine(char *, size_t, char *, size_t);
 

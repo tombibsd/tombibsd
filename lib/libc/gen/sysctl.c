@@ -313,7 +313,7 @@ user_sysctl(const int *name, unsigned int namelen,
 			if (d2 != NULL)
 				memcpy(d2, d1, d);
 			sz += d;
-			d2 = (struct sysctldesc *)((char *)d2 + d);
+			d2 = (struct sysctldesc *)(void *)((char *)d2 + d);
 			if (node != NULL)
 				break;
 		}

@@ -3148,8 +3148,8 @@
 ./usr/tests/net/in_cksum/t_in_cksum		tests-net-tests		atf
 ./usr/tests/net/in_cksum/in_cksum		tests-net-tests		atf
 ./usr/tests/net/mcast				tests-net-tests
-./usr/tests/net/mcast/Atffile			tests-net-tests		atf,rump
-./usr/tests/net/mcast/Kyuafile			tests-net-tests		atf,rump,kyua
+./usr/tests/net/mcast/Atffile			tests-net-tests		atf
+./usr/tests/net/mcast/Kyuafile			tests-net-tests		atf,kyua
 ./usr/tests/net/mcast/t_mcast			tests-net-tests		atf
 ./usr/tests/net/mpls				tests-net-tests
 ./usr/tests/net/mpls/Atffile			tests-net-tests		atf,rump

@@ -15,7 +15,7 @@ INCS=	freetype.h ftadvanc.h ftbbox.h ftbdf.h ftbitmap.h ftbzip2.h ftcache.h \
 	ftpfr.h ftrender.h ftsizes.h ftsnames.h ftstroke.h ftsynth.h \
 	ftsystem.h fttrigon.h fttypes.h ftwinfnt.h ftxf86.h \
 	t1tables.h ttnameid.h tttables.h tttags.h ttunpat.h \
-	ftautoh.h ftcffdrv.h
+	ftautoh.h ftcffdrv.h ft2build.h
 
 SCRIPTS=	freetype-config
 

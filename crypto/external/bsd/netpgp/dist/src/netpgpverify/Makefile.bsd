@@ -34,6 +34,12 @@ tst:
 	@echo "expected failure, no valid key for verification"
 	-./${PROG} -k /dev/null NetBSD-6.0_RC1_hashes.gpg
 	@echo "dumping now"
-	./${PROG} -c dump -k pubring.gpg NetBSD-6.0_RC1_hashes.asc
+	./${PROG} -c dump -k pubring.gpg NetBSD-6.0_RC1_hashes.asc > /dev/null
 	@echo "dumping ssh now"
 	./${PROG} -c dump -S sshtest-20140202.pub data.gpg
+	@echo "testing pubring with one key"
+	uudecode 1keytest.gpg.uu
+	./${PROG} -k 1keypubring.gpg 1keytest.gpg
+	rm -f 1keytest.gpg
+	@echo "testing signing with a subkey"
+	./chk.sh -k joyent-pubring.gpg digest-20121220.tgz

@@ -163,6 +163,7 @@ pcb_getports(struct inpcb_hdr *inp_hdr, uint16_t *lastport,
 	so = inp_hdr->inph_socket;
 	switch (so->so_type) {
 	case SOCK_DGRAM: /* UDP or DCCP */
+	case SOCK_CONN_DGRAM:
 		portalgo_proto = PORTALGO_UDP;
 		break;
 	case SOCK_STREAM: /* TCP or SCTP */

@@ -3,6 +3,7 @@
 D/AST////
 D/ASTMatchers////
 D/Basic////
+D/CodeGen////
 D/Driver////
 D/Format////
 D/Frontend////

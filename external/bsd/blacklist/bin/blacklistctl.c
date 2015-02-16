@@ -99,6 +99,7 @@ main(int argc, char *argv[])
 			break;
 		case 'n':
 			noheader = 1;
+			break;
 		case 'r':
 			remain = 1;
 			break;

@@ -2144,6 +2144,7 @@ ip6_getpcbopt(struct ip6_pktopts *pktopt, int optname, struct sockopt *sopt)
 		else
 			optdata = (void *)&defpreftemp;
 		optdatalen = sizeof(int);
+		break;
 	default:		/* should not happen */
 #ifdef DIAGNOSTIC
 		panic("ip6_getpcbopt: unexpected option\n");

@@ -674,7 +674,7 @@ db_printf(const char *fmt, ...)
 		va_start(ap, fmt);
 		kprintf(fmt, TOLOG, NULL, NULL, ap);
 		va_end(ap);
-	};
+	}
 }
 
 void

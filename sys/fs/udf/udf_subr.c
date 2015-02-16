@@ -5335,8 +5335,9 @@ udf_get_node(struct udf_mount *ump, struct long_ad *node_icb_loc,
 
 	/* always return locked vnode */
 	if ((error = vn_lock(nvp, LK_EXCLUSIVE | LK_RETRY))) {
-		/* recycle vnode and unlock; simultanious will fail too */
+		/* recycle vnode and unlock; simultaneous will fail too */
 		ungetnewvnode(nvp);
+		pool_put(&udf_node_pool, udf_node);
 		mutex_exit(&ump->get_node_lock);
 		return error;
 	}

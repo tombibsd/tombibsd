@@ -461,6 +461,7 @@ chfs_scan_eraseblock(struct chfs_mount *chmp,
 			read_free += CHFS_NODE_HDR_SIZE;
 			if (read_free >= MAX_READ_FREE(chmp)) {
 				dbg("rest of the block is free. Size: %d\n", cheb->free_size);
+				kmem_free(buf, CHFS_MAX_NODE_SIZE);
 				return chfs_scan_classify_cheb(chmp, cheb);
 			}
 			ofs += CHFS_NODE_HDR_SIZE;

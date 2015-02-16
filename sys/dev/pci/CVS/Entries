@@ -110,7 +110,7 @@
 /esoreg.h/1.8/Sun Dec 11 12:22:49 2005/-kk/
 /esovar.h/1.11/Sat Oct 27 17:18:32 2012/-kk/
 /files.agp/1.11/Tue Dec  9 04:24:01 2014/-kk/
-/files.pci/1.372/Tue Dec  9 04:16:13 2014/-kk/
+/files.pci/1.373/Mon Feb 16 03:14:23 2015/-kk/
 /fms.c/1.42/Fri Apr 11 02:03:43 2014/-kk/
 /fmsvar.h/1.7/Sat Oct 27 17:18:32 2012/-kk/
 /fwohci_pci.c/1.42/Fri Apr 11 02:03:43 2014/-kk/
@@ -175,6 +175,9 @@
 /if_iwi.c/1.98/Mon Jan 12 06:48:50 2015/-kk/
 /if_iwireg.h/1.19/Mon Sep  8 23:36:54 2008/-kk/
 /if_iwivar.h/1.17/Mon Jan 12 06:48:50 2015/-kk/
+/if_iwm.c/1.1/Sat Feb  7 13:20:00 2015/-kk/
+/if_iwmreg.h/1.1/Sat Feb  7 13:20:00 2015/-kk/
+/if_iwmvar.h/1.1/Sat Feb  7 13:20:00 2015/-kk/
 /if_iwn.c/1.74/Tue Dec  9 04:24:01 2014/-kk/
 /if_iwnreg.h/1.15/Tue Dec  9 04:24:01 2014/-kk/
 /if_iwnvar.h/1.16/Tue Dec  9 04:16:13 2014/-kk/
