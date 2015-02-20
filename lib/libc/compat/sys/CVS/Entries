@@ -4,7 +4,7 @@
 /compat___lwp_park50.c/1.2/Thu Feb 13 15:35:37 2014/-kk/
 /compat___msgctl13.c/1.2/Sun Jan 11 02:46:25 2009/-kk/
 /compat___ntp_gettime30.c/1.2/Sun Jan 11 02:46:26 2009/-kk/
-/compat___semctl13.c/1.5/Fri Oct  3 09:35:43 2014/-kk/
+/compat___semctl13.c/1.6/Thu Feb  5 08:40:45 2015/-kk/
 /compat___shmctl13.c/1.2/Sun Jan 11 02:46:26 2009/-kk/
 /compat___stat13.c/1.6/Thu Oct 24 10:28:53 2013/-kk/
 /compat___stat30.c/1.4/Thu Oct 24 10:28:53 2013/-kk/
@@ -31,7 +31,7 @@
 /compat_ntp_gettime.c/1.2/Sun Jan 11 02:46:26 2009/-kk/
 /compat_sched.c/1.2/Sun Jan 11 02:46:26 2009/-kk/
 /compat_select.c/1.2/Sun Jan 11 02:46:26 2009/-kk/
-/compat_semctl.c/1.5/Fri Oct  3 09:35:43 2014/-kk/
+/compat_semctl.c/1.6/Thu Feb  5 08:40:45 2015/-kk/
 /compat_settimeofday.c/1.2/Sun Jan 11 02:46:26 2009/-kk/
 /compat_sigaltstack.c/1.5/Tue Mar 20 17:06:00 2012/-kk/
 /compat_sigtimedwait.c/1.2/Sun Jan 11 02:46:27 2009/-kk/

@@ -38,6 +38,8 @@
  *	@(#)clock.c	8.1 (Berkeley) 6/10/93
  */
 
+#include "opt_todr.h"
+
 #include <sys/cdefs.h>
 __KERNEL_RCSID(0, "$NetBSD$");
 

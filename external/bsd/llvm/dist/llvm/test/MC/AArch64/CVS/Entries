@@ -1,4 +1,4 @@
-/adrp-relocation.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
+/adrp-relocation.s/1.1.1.2/Thu Feb  5 08:38:26 2015/-kk/
 /alias-logicalimm.s/1.1.1.1/Sun Aug 10 17:04:39 2014/-kk/
 /arm64-adr.s/1.1.1.1/Fri May 30 18:11:24 2014/-kk/
 /arm64-advsimd.s/1.1.1.1/Fri May 30 18:11:24 2014/-kk/
@@ -15,7 +15,7 @@
 /arm64-diags.s/1.1.1.2/Fri Oct  3 09:23:17 2014/-kk/
 /arm64-directive_loh.s/1.1.1.1/Fri May 30 18:11:24 2014/-kk/
 /arm64-elf-reloc-condbr.s/1.1.1.1/Fri May 30 18:11:24 2014/-kk/
-/arm64-elf-relocs.s/1.1.1.1/Fri May 30 18:11:24 2014/-kk/
+/arm64-elf-relocs.s/1.1.1.2/Thu Feb  5 08:38:26 2015/-kk/
 /arm64-fp-encoding.s/1.1.1.1/Fri May 30 18:11:24 2014/-kk/
 /arm64-large-relocs.s/1.1.1.1/Fri May 30 18:11:24 2014/-kk/
 /arm64-leaf-compact-unwind.s/1.1.1.2/Fri Oct  3 09:23:17 2014/-kk/
@@ -29,16 +29,16 @@
 /arm64-simd-ldst.s/1.1.1.1/Fri May 30 18:11:24 2014/-kk/
 /arm64-small-data-fixups.s/1.1.1.1/Fri May 30 18:11:24 2014/-kk/
 /arm64-spsel-sysreg.s/1.1.1.1/Fri May 30 18:11:24 2014/-kk/
-/arm64-system-encoding.s/1.1.1.2/Fri Oct  3 09:23:17 2014/-kk/
+/arm64-system-encoding.s/1.1.1.3/Thu Feb  5 08:38:26 2015/-kk/
 /arm64-target-specific-sysreg.s/1.1.1.1/Fri May 30 18:11:24 2014/-kk/
 /arm64-tls-modifiers-darwin.s/1.1.1.1/Fri May 30 18:11:24 2014/-kk/
-/arm64-tls-relocs.s/1.1.1.1/Fri May 30 18:11:24 2014/-kk/
+/arm64-tls-relocs.s/1.1.1.2/Thu Feb  5 08:38:26 2015/-kk/
 /arm64-v128_lo-diagnostics.s/1.1.1.1/Fri May 30 18:11:24 2014/-kk/
 /arm64-variable-exprs.s/1.1.1.1/Fri May 30 18:11:24 2014/-kk/
 /arm64-vector-lists.s/1.1.1.1/Fri May 30 18:11:24 2014/-kk/
 /arm64-verbose-vector-case.s/1.1.1.1/Fri May 30 18:11:24 2014/-kk/
-/basic-a64-diagnostics.s/1.1.1.3/Fri Oct  3 09:23:17 2014/-kk/
-/basic-a64-instructions.s/1.1.1.4/Fri Oct  3 09:23:17 2014/-kk/
+/basic-a64-diagnostics.s/1.1.1.4/Thu Feb  5 08:36:55 2015/-kk/
+/basic-a64-instructions.s/1.1.1.5/Thu Feb  5 08:36:55 2015/-kk/
 /basic-pic.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /dot-req-case-insensitive.s/1.1.1.1/Sun Aug 10 17:04:39 2014/-kk/
 /dot-req-diagnostics.s/1.1.1.1/Sun Aug 10 17:04:39 2014/-kk/
@@ -56,7 +56,9 @@
 /elf_osabi_flags.s/1.1.1.1/Sun Aug 10 17:04:39 2014/-kk/
 /gicv3-regs-diagnostics.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /gicv3-regs.s/1.1.1.2/Tue Jun  3 03:03:58 2014/-kk/
-/inline-asm-modifiers.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
+/inline-asm-modifiers.s/1.1.1.2/Thu Feb  5 08:36:55 2015/-kk/
+/inst-directive-diagnostic.s/1.1.1.1/Thu Jan 29 19:54:38 2015/-kk/
+/inst-directive.s/1.1.1.1/Thu Jan 29 19:54:38 2015/-kk/
 /jump-table.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /ldr-pseudo-diagnostics.s/1.1.1.1/Sun Aug 10 17:04:39 2014/-kk/
 /ldr-pseudo-obj-errors.s/1.1.1.1/Sun Aug 10 17:04:39 2014/-kk/
@@ -123,7 +125,8 @@
 /neon-uxtl.s/1.1.1.1/Wed Jan 15 21:24:18 2014/-kk/
 /noneon-diagnostics.s/1.1.1.2/Tue Jun  3 03:03:58 2014/-kk/
 /optional-hash.s/1.1.1.1/Fri May 30 18:11:24 2014/-kk/
-/tls-relocs.s/1.1.1.2/Tue Jun  3 03:03:58 2014/-kk/
+/single-slash.s/1.1.1.1/Thu Jan 29 19:54:38 2015/-kk/
+/tls-relocs.s/1.1.1.3/Thu Feb  5 08:36:55 2015/-kk/
 /trace-regs-diagnostics.s/1.1.1.1/Thu Nov 28 14:18:08 2013/-kk/
 /trace-regs.s/1.1.1.2/Tue Jun  3 03:03:58 2014/-kk/
 D

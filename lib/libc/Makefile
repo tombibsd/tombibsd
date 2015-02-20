@@ -41,7 +41,6 @@ assym.h: ${ARCHDIR}/genassym.cf
 	mv -f assym.h.tmp assym.h
 .endif
 
-.if ${RUMPRUN} != "yes"
 # The following controls how to build compatibility code for old NetBSD
 # binaries. If BUILD_LEGACY is yes, then we build a separate library; otherwise
 # we include the code in libc.
@@ -54,7 +53,6 @@ COMPATDIR=${.CURDIR}/compat
 .include "${.CURDIR}/compat/Makefile.inc"
 # Marker for compat code that can't be easily isolated
 CPPFLAGS+=	-D__BUILD_LEGACY
-.endif
 .endif
 
 .include "${.CURDIR}/../../common/lib/libc/Makefile.inc"

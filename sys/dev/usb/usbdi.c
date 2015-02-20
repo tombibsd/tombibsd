@@ -849,13 +849,13 @@ usb_transfer_complete(usbd_xfer_handle xfer)
 
 	if (!(xfer->flags & USBD_NO_COPY) && xfer->actlen != 0 &&
 	    usbd_xfer_isread(xfer)) {
-#ifdef DIAGNOSTIC
 		if (xfer->actlen > xfer->length) {
+#ifdef DIAGNOSTIC
 			printf("%s: actlen (%d) > len (%d)\n", __func__,
 			       xfer->actlen, xfer->length);
+#endif
 			xfer->actlen = xfer->length;
 		}
-#endif
 		memcpy(xfer->buffer, KERNADDR(dmap, 0), xfer->actlen);
 	}
 

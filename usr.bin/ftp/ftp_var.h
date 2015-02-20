@@ -169,7 +169,7 @@ enum {
 /*
  * Global defines
  */
-#define	FTPBUFLEN	MAXPATHLEN + 200
+#define	FTPBUFLEN	(4 * MAXPATHLEN)
 #define	MAX_IN_PORT_T	0xffffU
 
 #define	HASHBYTES	1024	/* default mark for `hash' command */

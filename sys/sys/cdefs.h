@@ -299,7 +299,7 @@
 #if __GNUC_PREREQ__(4, 6) || defined(__clang__)
 #define	__unreachable()	__builtin_unreachable()
 #else
-#define	__unreachable()	do {} while (0)
+#define	__unreachable()	do {} while (/*CONSTCOND*/0)
 #endif
 
 #if defined(__cplusplus)
@@ -579,6 +579,9 @@
 #else
 #define __CAST(__dt, __st)	((__dt)(__st))
 #endif
+
+#define __CASTV(__dt, __st)	__CAST(__dt, __CAST(void *, __st))
+#define __CASTCV(__dt, __st)	__CAST(__dt, __CAST(const void *, __st))
 
 #define __USE(a) ((void)(a))
 

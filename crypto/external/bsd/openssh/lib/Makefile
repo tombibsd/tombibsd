@@ -88,8 +88,7 @@ ssh-dss.c \
 ssh-ecdsa.c \
 ssh-rsa.c
 
-#	umac.c
-SRCS+=	fmt_scaled.c strtonum.c
+SRCS+=	fmt_scaled.c
 SRCS+=	readpassphrase.c getpeereid.c getrrsetbyname.c
 COPTS.monitor_fdpass.c = -Wno-stack-protector
 

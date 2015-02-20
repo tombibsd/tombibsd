@@ -106,7 +106,8 @@ ATF_TC_BODY(proc2, tc)
 		/* NOTREACHED */
 	}
 
-	EV_SET(&ke, pid, EVFILT_PROC, EV_ADD, NOTE_FORK|NOTE_TRACK, 0, 0);
+	EV_SET(&ke, (uintptr_t)pid, EVFILT_PROC, EV_ADD, NOTE_FORK|NOTE_TRACK,
+	    0, 0);
 
 	RL(kevent(kq, &ke, 1, NULL, 0, &timeout));
 

@@ -2,6 +2,7 @@
 /2010-09-26-MergeConstantRange.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /basic.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /crash.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/icmp.ll/1.1.1.1/Thu Jan 29 19:54:37 2015/-kk/
 /non-null.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /range.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 D

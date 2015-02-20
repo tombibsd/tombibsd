@@ -1369,7 +1369,7 @@ test_loopexit(void)
 	evtimer_add(&ev, &tv);
 
 	tv.tv_usec = 0;
-	tv.tv_sec = SECONDS;
+	tv.tv_sec = 1;
 	event_loopexit(&tv);
 
 	evutil_gettimeofday(&tv_start, NULL);

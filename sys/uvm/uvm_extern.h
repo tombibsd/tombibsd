@@ -741,7 +741,6 @@ bool			uvn_needs_writefault_p(struct uvm_object *);
 
 /* kern_malloc.c */
 void			kmeminit_nkmempages(void);
-void			kmeminit(void);
 extern int		nkmempages;
 
 #endif /* _KERNEL */

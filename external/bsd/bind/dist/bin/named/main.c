@@ -83,6 +83,9 @@
 #ifdef HAVE_LIBXML2
 #include <libxml/xmlversion.h>
 #endif
+
+#include "pfilter.h"
+
 /*
  * Include header files for database drivers here.
  */
@@ -1205,6 +1208,8 @@ main(int argc, char *argv[]) {
 #endif
 
 	parse_command_line(argc, argv);
+
+	pfilter_open();
 
 	/*
 	 * Warn about common configuration error.

@@ -936,6 +936,11 @@ device	iwn: ifnet, arp, wlan, firmload
 attach	iwn at pci
 file	dev/pci/if_iwn.c		iwn
 
+# Intel Centrino 7260
+device	iwm: ifnet, arp, wlan, firmload
+attach	iwm at pci
+file	dev/pci/if_iwm.c		iwm
+
 # Workbit NinjaSCSI-32 controllers
 # device declaration in sys/conf/files
 attach	njs at pci with njs_pci

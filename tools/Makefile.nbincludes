@@ -26,6 +26,11 @@ _ARCH_INCS!=	${TOOL_SED} -e 's/^\#.*//' ${.CURDIR}/../headerlist
 
 _ARCH_INCS+=	ews4800mips/include/pdinfo.h ews4800mips/include/vtoc.h
 
+# for sh3/include/elf_machdep.h
+.for sh3mach in dreamcast evbsh3 hpcsh landisk mmeye sh3
+_ARCH_INCS+=	${sh3mach}/include/endian_machdep.h
+.endfor
+
 _INCS=		disktab.h
 _SYSINCS=	bootblock.h \
 		disklabel.h disklabel_acorn.h disklabel_gpt.h disklabel_rdb.h \

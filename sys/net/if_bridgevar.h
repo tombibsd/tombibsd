@@ -207,6 +207,10 @@ struct ifbrparam {
 #define	ifbrp_filter	ifbrp_ifbrpu.ifbrpu_int32	/* filtering flags */
 
 #ifdef _KERNEL
+#ifdef _KERNEL_OPT
+#include "opt_net_mpsafe.h"
+#endif /* _KERNEL_OPT */
+
 #include <sys/pserialize.h>
 #include <sys/workqueue.h>
 

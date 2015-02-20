@@ -46,7 +46,7 @@
     defined(__DragonFly__) || defined(__OpenBSD__)
 #define USE_KQUEUE
 #endif
-#if defined(__linux__) && !defined(__ANDROID__)
+#if defined(__linux__)
 #define USE_SIGNALFD
 #endif
 
@@ -86,17 +86,9 @@ int	(*host_socket)(int, int, int);
 int	(*host_close)(int);
 int	(*host_connect)(int, const struct sockaddr *, socklen_t);
 int	(*host_fcntl)(int, int, ...);
-#ifdef __ANDROID__
-int	(*host_poll)(struct pollfd *, nfds_t, long);
-#else
 int	(*host_poll)(struct pollfd *, nfds_t, int);
-#endif
 ssize_t	(*host_read)(int, void *, size_t);
-#ifdef __ANDROID__
-int	(*host_sendmsg)(int, const struct msghdr *, unsigned int);
-#else
 ssize_t (*host_sendmsg)(int, const struct msghdr *, int);
-#endif
 int	(*host_setsockopt)(int, int, int, const void *, socklen_t);
 int	(*host_dup)(int);
 

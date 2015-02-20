@@ -330,6 +330,9 @@ int	 pclose(FILE *);
 FILE	*popen(const char *, const char *);
 __END_DECLS
 #endif
+#ifdef _NETBSD_SOURCE
+FILE	*popenve(const char *, char *const *, char *const *, const char *);
+#endif
 
 /*
  * Functions defined in ISO XPG4.2, ISO C99, POSIX 1003.1-2001 or later.

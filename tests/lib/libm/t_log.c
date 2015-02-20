@@ -186,10 +186,6 @@ ATF_TC_BODY(log10f_inf_pos, tc)
 {
 	const float x = 1.0L / 0.0L;
 
-#if defined(__alpha__)
-	atf_tc_expect_fail("PR port-alpha/46301");
-#endif
-
 	ATF_CHECK(log10f(x) == x);
 }
 
@@ -562,10 +558,6 @@ ATF_TC_BODY(log2f_inf_pos, tc)
 {
 	const float x = 1.0L / 0.0L;
 
-#if defined(__alpha__)
-	atf_tc_expect_fail("PR port-alpha/46301");
-#endif
-
 	ATF_CHECK(log2f(x) == x);
 }
 
@@ -765,10 +757,6 @@ ATF_TC_HEAD(logf_inf_pos, tc)
 ATF_TC_BODY(logf_inf_pos, tc)
 {
 	const float x = 1.0L / 0.0L;
-
-#if defined(__alpha__)
-	atf_tc_expect_fail("PR port-alpha/46301");
-#endif
 
 	ATF_CHECK(logf(x) == x);
 }

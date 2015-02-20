@@ -23,11 +23,16 @@
 /hello-world.macho-x86_64/1.1.1.1/Sun Aug 10 17:04:47 2014/-kk/
 /macho-data-in-code.macho-thumbv7/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /macho-hello-g.macho-x86_64/1.1.1.1/Sun Aug 10 17:04:47 2014/-kk/
+/macho-no-exports.dylib/1.1.1.1/Thu Jan 29 19:54:45 2015/-kk/
+/macho-rpath-x86_64/1.1.1.1/Thu Jan 29 19:54:45 2015/-kk/
 /macho-text-data-bss.macho-x86_64/1.1.1.1/Fri May 30 18:11:26 2014/-kk/
 /macho-text-sections.macho-x86_64/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /macho-text.thumb/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /macho-universal-archive.x86_64.i386/1.1.1.1/Fri May 30 18:11:26 2014/-kk/
 /macho-universal.x86_64.i386/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
+/macho-zero-ncmds/1.1.1.1/Thu Jan 29 19:54:45 2015/-kk/
+/micro-mips.elf-mipsel/1.1.1.1/Thu Jan 29 19:54:45 2015/-kk/
+/mri-crlf.mri/1.1.1.1/Thu Jan 29 19:54:45 2015/-kk/
 /no-sections.elf-x86-64/1.1.1.1/Sun Aug 10 17:04:47 2014/-kk/
 /oddlen/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /program-headers.elf-i386/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
@@ -43,6 +48,7 @@
 /shared.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /thumb-symbols.elf.arm/1.1.1.1/Fri May 30 18:11:26 2014/-kk/
 /trivial-executable-test.macho-x86-64/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
+/trivial-label-test.elf-x86-64/1.1.1.1/Thu Jan 29 19:54:45 2015/-kk/
 /trivial-object-test.coff-i386/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /trivial-object-test.coff-x86-64/1.1.1.2/Tue Jun  3 03:03:59 2014/-kk/
 /trivial-object-test.elf-hexagon/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/

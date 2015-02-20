@@ -42,7 +42,9 @@ mdesc_init(void)
 	vaddr_t va;
 	int err;
 
-	hv_mach_desc((paddr_t)NULL, &len);
+	pa = 0;
+	len = 0;  /* trick to determine actual buffer size */
+	hv_mach_desc(pa, &len);
 	KASSERT(len != 0);
 
 again:
@@ -215,19 +217,18 @@ mdesc_find_child(int idx, const char *name, uint64_t cfg_handle)
 }
 
 int
-mdesc_find_node(const char *name)
+mdesc_find_node_by_idx(int idx, const char *name)
 {
 	struct md_header *hdr;
 	struct md_element *elem;
 	const char *name_blk;
 	const char *str;
-	int idx;
 
 	hdr = (struct md_header *)mdesc;
 	elem = (struct md_element *)(mdesc + sizeof(struct md_header));
 	name_blk = (char *)mdesc + sizeof(struct md_header) + hdr->node_blk_sz;
 
-	for (idx = 0; elem[idx].tag == 'N'; idx = elem[idx].d.val) {
+	for ( ; elem[idx].tag == 'N'; idx = elem[idx].d.val) {
 		str = name_blk + elem[idx].name_offset;
 		if (str && strcmp(str, name) == 0)
 			return (idx);
@@ -235,3 +236,20 @@ mdesc_find_node(const char *name)
 
 	return (-1);
 }
+
+int
+mdesc_find_node(const char *name)
+{
+	return mdesc_find_node_by_idx(0, name);
+}
+
+int
+mdesc_next_node(int idx)
+{
+	struct md_element *elem;
+
+	elem = (struct md_element *)(mdesc + sizeof(struct md_header));
+
+	return elem[idx].d.val;
+}
+

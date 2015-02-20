@@ -1956,8 +1956,10 @@ ebh_map_leb(struct chfs_ebh *ebh, int lnr)
 	ebhdr = kmem_alloc(sizeof(struct chfs_eb_hdr), KM_SLEEP);
 
 	err = leb_write_lock(ebh, lnr);
-	if (err)
+	if (err) {
+		kmem_free(ebhdr, sizeof(struct chfs_eb_hdr));
 		return err;
+	}
 
 retry:
 	pebnr = get_peb(ebh);

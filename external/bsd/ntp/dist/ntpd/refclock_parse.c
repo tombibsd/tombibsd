@@ -2535,6 +2535,7 @@ parsestate(
 	int i;
 	char *s, *t;
 
+	*buffer = '\0';
 	s = t = buffer;
 
 	i = 0;

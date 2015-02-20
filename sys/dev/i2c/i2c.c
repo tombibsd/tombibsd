@@ -525,6 +525,13 @@ iic_ioctl_exec(struct iic_softc *sc, i2c_ioctl_exec_t *iie, int flag)
 		}
 	}
 
+	if (iie->iie_buf != NULL && I2C_OP_WRITE_P(iie->iie_op)) {
+		error = copyin(iie->iie_buf, buf, iie->iie_buflen);
+		if (error) {
+			return error;
+		}
+	}
+
 	iic_acquire_bus(ic, 0);
 	error = iic_exec(ic, iie->iie_op, iie->iie_addr, cmd, iie->iie_cmdlen,
 	    buf, iie->iie_buflen, 0);
@@ -542,7 +549,7 @@ iic_ioctl_exec(struct iic_softc *sc, i2c_ioctl_exec_t *iie, int flag)
 	if (error)
 		return error;
 
-	if (iie->iie_buf)
+	if (iie->iie_buf != NULL && I2C_OP_READ_P(iie->iie_op))
 		error = copyout(buf, iie->iie_buf, iie->iie_buflen);
 
 	return error;

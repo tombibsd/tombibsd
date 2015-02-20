@@ -662,12 +662,12 @@ clnt_vc_destroy(CLIENT *cl)
 	_DIAGASSERT(cl != NULL);
 
 	ct = (struct ct_data *) cl->cl_private;
-	ct_fd = ct->ct_fd;
 
 	__clnt_sigfillset(&newmask);
 	thr_sigsetmask(SIG_SETMASK, &newmask, &mask);
 	mutex_lock(&clnt_fd_lock);
 #ifdef _REENTRANT
+	ct_fd = ct->ct_fd;
 	while (vc_fd_locks[ct_fd])
 		cond_wait(&vc_cv[ct_fd], &clnt_fd_lock);
 #endif

@@ -30,6 +30,7 @@
 ./usr/lib/64/libatf-c_g.a	comp-c-debuglib	compat,debuglib,arch64
 ./usr/lib/64/libbfd_g.a		comp-c-debuglib	compat,debuglib,arch64
 ./usr/lib/64/libbind9_g.a	comp-c-debuglib	compat,debuglib,arch64
+./usr/lib/64/libblacklist_g.a	comp-c-debuglib	compat,debuglib,arch64
 ./usr/lib/64/libbluetooth_g.a	comp-c-debuglib	compat,debuglib,arch64
 ./usr/lib/64/libbsdmalloc_g.a	comp-c-debuglib	compat,debuglib,arch64
 ./usr/lib/64/libbz2_g.a		comp-c-debuglib	compat,debuglib,arch64
@@ -164,6 +165,7 @@
 ./usr/lib/o32/libatf-c_g.a	comp-c-debuglib compat,debuglib,arch64
 ./usr/lib/o32/libbfd_g.a	comp-c-debuglib compat,debuglib,arch64
 ./usr/lib/o32/libbind9_g.a	comp-c-debuglib compat,debuglib,arch64
+./usr/lib/o32/libblacklist_g.a	comp-c-debuglib compat,debuglib,arch64
 ./usr/lib/o32/libbluetooth_g.a	comp-c-debuglib compat,debuglib,arch64
 ./usr/lib/o32/libbsdmalloc_g.a	comp-c-debuglib compat,debuglib,arch64
 ./usr/lib/o32/libbz2_g.a	comp-c-debuglib compat,debuglib,arch64

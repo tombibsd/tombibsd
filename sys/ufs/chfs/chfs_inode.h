@@ -77,8 +77,6 @@ struct chfs_inode
 	struct genfs_node	gnode;
 	kmutex_t inode_lock;		/* lock the fields of chfs_inode */
 
-	LIST_ENTRY(chfs_inode) hash_entry;	/* hash chain */
-
 	struct ufsmount *ump;		/* ufs mount - TODO we should remove it */
 	struct chfs_mount *chmp;	/* chfs mount point - TODO we should remove it */
 

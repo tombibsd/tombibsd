@@ -944,7 +944,7 @@ packet_send2_wrapped(void)
 	    len, padlen, aadlen));
 
 	/* compute MAC over seqnr and packet(length fields, payload, padding) */
-debug("mac %p, %d %d\n", mac, mac? mac->enabled : -1, mac ? mac->etm : -1);
+debug("mac %p, %d %d", mac, mac? mac->enabled : -1, mac ? mac->etm : -1);
 	if (mac && mac->enabled && !mac->etm) {
 		macbuf = mac_compute(mac, active_state->p_send.seqnr,
 		    buffer_ptr(&active_state->outgoing_packet), len);

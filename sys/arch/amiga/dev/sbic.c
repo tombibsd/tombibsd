@@ -1231,11 +1231,17 @@ int
 sbicxfin(sbic_regmap_t regs, int len, void *bp)
 {
 	int wait;
-	u_char *buf;
 	u_char orig_csr, csr, asr;
+	u_char *buf;
+#ifdef DEBUG
+	u_char *obp;
+#endif
 
 	wait = sbic_data_wait;
 	buf = bp;
+#ifdef DEBUG
+	obp = bp;
+#endif
 
 	GET_SBIC_csr (regs, orig_csr);
 	__USE(orig_csr);

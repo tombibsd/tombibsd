@@ -246,6 +246,8 @@ lwproc_freelwp(struct lwp *l)
 	if (--p->p_nlwps == 0) {
 		KASSERT(p != &proc0);
 		p->p_stat = SDEAD;
+	} else {
+		chglwpcnt(kauth_cred_getuid(p->p_cred), -1);
 	}
 	cv_broadcast(&p->p_lwpcv); /* nobody sleeps on this in a rump kernel? */
 	kauth_cred_free(l->l_cred);
@@ -276,7 +278,15 @@ static void
 lwproc_makelwp(struct proc *p, struct lwp *l, bool doswitch, bool procmake)
 {
 
-	p->p_nlwps++;
+	/*
+	 * Account the new lwp to the owner of the process.
+	 * For some reason, NetBSD doesn't count the first lwp
+	 * in a process as a lwp, so skip that.
+	 */
+	if (p->p_nlwps++) {
+		chglwpcnt(kauth_cred_getuid(p->p_cred), 1);
+	}
+
 	l->l_refcnt = 1;
 	l->l_proc = p;
 

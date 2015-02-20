@@ -2,7 +2,7 @@
 
 /*
  * dhcpcd - DHCP client daemon
- * Copyright (c) 2006-2014 Roy Marples <roy@marples.name>
+ * Copyright (c) 2006-2015 Roy Marples <roy@marples.name>
  * All rights reserved
 
  * Redistribution and use in source and binary forms, with or without
@@ -62,6 +62,9 @@ struct interface {
 	struct dhcpcd_ctx *ctx;
 	TAILQ_ENTRY(interface) next;
 	char name[IF_NAMESIZE];
+#ifdef __linux
+	char alias[IF_NAMESIZE];
+#endif
 	unsigned int index;
 	unsigned int flags;
 	sa_family_t family;

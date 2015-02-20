@@ -13,8 +13,7 @@ BUILD_KERNELS+=		INSTALL
 INSTALLATION_DIRS+=	installation/floppy	\
 			installation/diskimage	\
 			installation/instkernel	\
-			installation/netboot	\
-			installation/misc
+			installation/netboot
 
 snap_md_post:
 	cd ${KERNSRCDIR}/arch/alpha/stand/netboot && ${MAKE} release

@@ -398,9 +398,9 @@ COPTS.recog.c=-O0
 
 CFLAGS+=	-Wno-stack-protector
 
-.if ${GCC_MACHINE_ARCH} == "m68000" || ${GCC_MACHINE_ARCH} == "m68k"
-COPTS.lambda-code.c=		-O0
-COPTS.tree-loop-linear.c=	-O0
+.if ${GCC_MACHINE_ARCH} == "m68000" || ${GCC_MACHINE_ARCH} == "m68k" || \
+	${GCC_MACHINE_ARCH} == "coldfire"
+COPTS.tree-loop-distribution.c=	-O2
 .endif
 
 COPTS.tree.c=	${${ACTIVE_CC} == "clang" :? -O0 :}

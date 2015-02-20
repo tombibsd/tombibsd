@@ -83,6 +83,10 @@
 #include <sys/cdefs.h>
 __KERNEL_RCSID(0, "$NetBSD$");
 
+#ifdef _KERNEL_OPT
+#include "opt_net_mpsafe.h"
+#endif
+
 #include <sys/param.h>
 #include <sys/systm.h>
 #include <sys/callout.h>
@@ -1840,7 +1844,7 @@ wm_attach(device_t parent, device_t self, void *aux)
 	case WM_T_82571:
 	case WM_T_82572:
 		reg = CSR_READ(sc, WMREG_SWSM2);
-		if ((reg & SWSM2_LOCK) != 0) {
+		if ((reg & SWSM2_LOCK) == 0) {
 			CSR_WRITE(sc, WMREG_SWSM2, reg | SWSM2_LOCK);
 			force_clear_smbi = true;
 		} else

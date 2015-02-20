@@ -48,7 +48,6 @@ __RCSID("$NetBSD$");
 #include <paths.h>
 
 #include "env.h"
-#include "reentrant.h"
 
 int
 system(const char *command)

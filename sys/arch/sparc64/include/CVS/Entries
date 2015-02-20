@@ -45,7 +45,7 @@
 /locore.h/1.6/Thu Oct 24 10:28:57 2013/-kk/
 /math.h/1.7/Mon Dec 15 00:25:05 2008/-kk/
 /mcontext.h/1.9/Wed Sep 12 02:00:54 2012/-kk/
-/mdesc.h/1.1/Sat Jan 10 22:19:26 2015/-kk/
+/mdesc.h/1.2/Mon Jan 26 07:10:19 2015/-kk/
 /mutex.h/1.4/Mon Apr 28 20:23:37 2008/-kk/
 /netbsd32_machdep.h/1.28/Tue Jan 14 16:05:01 2014/-kk/
 /oldmon.h/1.4/Sun Dec 11 12:19:10 2005/-kk/

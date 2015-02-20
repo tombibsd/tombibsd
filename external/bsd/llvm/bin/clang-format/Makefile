@@ -11,6 +11,7 @@ SRCS=	ClangFormat.cpp
 
 CLANG_LIBS+= \
 	clangFormat \
+	clangToolingCore \
 	clangTooling \
 	clangFrontend \
 	clangSerialization \

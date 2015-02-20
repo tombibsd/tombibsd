@@ -3,6 +3,8 @@
 
 .PATH:	${.CURDIR}/../../../../netinet6
 
+CPPFLAGS+=	-DINET6
+
 # INET6
 SRCS+=	dest6.c frag6.c icmp6.c in6.c in6_cksum.c in6_ifattach.c	\
 	in6_offload.c in6_pcb.c in6_proto.c in6_src.c ip6_flow.c	\

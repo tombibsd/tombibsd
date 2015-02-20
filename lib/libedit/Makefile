@@ -13,6 +13,7 @@ LIBDPLIBS+=     terminfo ${.CURDIR}/../libterminfo
 
 COPTS+=	-Wunused-parameter
 CWARNFLAGS.gcc+=	-Wconversion
+CWARNFLAGS.clang+=	-Wno-cast-qual
 
 OSRCS=	chared.c common.c el.c emacs.c fcns.c filecomplete.c help.c \
 	hist.c keymacro.c map.c chartype.c \

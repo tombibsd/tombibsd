@@ -11,6 +11,7 @@ SRCS+=	BreakableToken.cpp \
 	Format.cpp \
 	FormatToken.cpp \
 	TokenAnnotator.cpp \
+	UnwrappedLineFormatter.cpp \
 	UnwrappedLineParser.cpp \
 	WhitespaceManager.cpp
 

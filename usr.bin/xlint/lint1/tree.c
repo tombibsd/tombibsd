@@ -2002,9 +2002,18 @@ cvtcon(op_t op, int arg, type_t *tp, val_t *nv, val_t *v)
 		v->v_ansiu = 0;
 	}
 
-	if (nt != FLOAT && nt != DOUBLE && nt != LDOUBLE) {
+	switch (nt) {
+	case FLOAT:
+	case FCOMPLEX:
+	case DOUBLE:
+	case DCOMPLEX:
+	case LDOUBLE:
+	case LCOMPLEX:
+		break;
+	default:
 		sz = tp->t_isfield ? tp->t_flen : size(nt);
 		nv->v_quad = xsign(nv->v_quad, nt, sz);
+		break;
 	}
 
 	if (rchk && op != CVT) {

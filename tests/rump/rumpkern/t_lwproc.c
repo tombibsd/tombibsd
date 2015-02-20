@@ -88,6 +88,7 @@ ATF_TC_BODY(proccreds, tc)
 	rump_init();
 	RZ(rump_pub_lwproc_rfork(RUMP_RFCFDG));
 	l1 = rump_pub_lwproc_curlwp();
+	RZ(rump_pub_lwproc_newlwp(rump_sys_getpid()));
 
 	RZ(rump_pub_lwproc_rfork(RUMP_RFCFDG));
 	l2 = rump_pub_lwproc_curlwp();

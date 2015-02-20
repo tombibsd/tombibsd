@@ -8,7 +8,7 @@
 /arc-nsconsumed-errors.mm/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
 /arc-objc-lifetime.mm/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
 /arc-overloading.mm/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
-/arc-ppe.mm/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
+/arc-ppe.mm/1.1.1.2/Thu Feb  5 08:37:51 2015/-kk/
 /arc-system-header.mm/1.1.1.2/Tue Jan 14 16:01:54 2014/-kk/
 /arc-templates.mm/1.1.1.2/Tue Jan 14 16:01:54 2014/-kk/
 /arc-type-conversion.mm/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
@@ -94,6 +94,7 @@
 /reserved-keyword-methods.mm/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
 /standard-conversion-to-bool.mm/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
 /static-cast.mm/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
+/synchronized.mm/1.1.1.1/Thu Jan 29 19:57:37 2015/-kk/
 /unknown-anytype.mm/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
 /vararg-non-pod.mm/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/
 /vla.mm/1.1.1.1/Thu Nov 28 14:14:55 2013/-kk/

@@ -101,11 +101,13 @@ D/libclangSerialization////
 D/libclangStaticAnalyzerCheckers////
 D/libclangStaticAnalyzerCore////
 D/libclangStaticAnalyzerFrontend////
+D/liblldConfig////
 D/liblldCore////
 D/liblldDriver////
 D/liblldPasses////
 D/liblldReaderWriter////
 D/liblldReaderWriterELF////
+D/liblldReaderWriterELFAArch64////
 D/liblldReaderWriterELFHexagon////
 D/liblldReaderWriterELFMips////
 D/liblldReaderWriterELFPPC////

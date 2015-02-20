@@ -576,6 +576,7 @@ INCITS	InterNational Committee for Information Technology Standards
 IO	input/output
 IOCTL	input/output control
 IOMMU	input/output memory management unit
+IOT	Internet of Things
 IP	Internet Protocol
 IP	intellectual property
 IPC	interprocess communication
@@ -659,6 +660,7 @@ LKML	Linux kernel mailing list
 LL	load linked
 LL/SC	load linked/store conditional
 LLC	logical link control
+LLDP	link layer discovery protocol
 LLF	low level format
 LLMNR	link-local multicast name resolution
 LLVM	Low Level Virtual Machine
@@ -883,6 +885,7 @@ PCI	peripheral component interconnect
 PCM	phase change memory
 PCM	pulse code modulation
 PCMCIA	Personal Computer Memory Card International Association
+PCP	Port Control Protocol
 PD	public domain
 PDA	personal digital assistant
 PDA	pushdown automaton

@@ -1,0 +1,12 @@
+#	$NetBSD$
+#
+# ZYNQ evaluation board configuration info
+#
+
+file	arch/evbarm/zynq/zynq_machdep.c
+
+# Kernel boot arguments
+defparam opt_machdep.h				BOOT_ARGS
+
+# CPU support and integrated peripherals
+include "arch/arm/zynq/files.zynq"

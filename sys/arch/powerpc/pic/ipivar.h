@@ -55,6 +55,7 @@ struct ipi_ops {
 #define IPI_XCALL		0x0002
 #define IPI_KPREEMPT		0x0004
 #define IPI_GENERIC		0x0008
+#define IPI_SUSPEND		0x0010
 
 /* OpenPIC */
 void setup_openpic_ipi(void);

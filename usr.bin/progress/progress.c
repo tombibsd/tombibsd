@@ -228,7 +228,12 @@ main(int argc, char *argv[])
 	signal(SIGPIPE, broken_pipe);
 	progressmeter(-1);
 
-	while ((nr = read(fd, fb_buf, buffersize)) > 0)
+	while (1) {
+		do {
+			nr = read(fd, fb_buf, buffersize);
+		} while (nr < 0 && errno == EINTR);
+		if (nr <= 0)
+			break;
 		for (off = 0; nr; nr -= nw, off += nw, bytes += nw)
 			if ((nw = write(outpipe[1], fb_buf + off,
 			    (size_t) nr)) < 0) {
@@ -236,6 +241,7 @@ main(int argc, char *argv[])
 				err(1, "writing %u bytes to output pipe",
 							(unsigned) nr);
 			}
+	}
 	close(outpipe[1]);
 
 	gzipstat = 0;

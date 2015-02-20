@@ -92,7 +92,7 @@
 /refclock_oncore.c/1.9/Sat Dec 27 03:33:44 2014/-kk/
 /refclock_palisade.c/1.2/Sat Dec 27 03:33:44 2014/-kk/
 /refclock_palisade.h/1.2/Sat Dec 27 03:33:44 2014/-kk/
-/refclock_parse.c/1.13/Sat Dec 27 03:33:44 2014/-kk/
+/refclock_parse.c/1.14/Thu Feb  5 08:39:10 2015/-kk/
 /refclock_pcf.c/1.5/Sat Dec 27 03:33:44 2014/-kk/
 /refclock_pst.c/1.2/Sat Dec 27 03:33:44 2014/-kk/
 /refclock_ripencc.c/1.2/Sat Dec 27 03:33:44 2014/-kk/

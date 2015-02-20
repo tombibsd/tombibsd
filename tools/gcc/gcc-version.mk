@@ -2,4 +2,4 @@
 
 # common location for tools and native build
 
-NETBSD_GCC_VERSION=nb1 20141012
+NETBSD_GCC_VERSION=nb2 20150115

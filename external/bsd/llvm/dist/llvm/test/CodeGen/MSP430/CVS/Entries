@@ -28,6 +28,7 @@
 /Inst8ri.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /Inst8rm.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /Inst8rr.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
+/asm-clobbers.ll/1.1.1.1/Thu Jan 29 19:54:43 2015/-kk/
 /bit.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /byval.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /cc_args.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
@@ -38,6 +39,7 @@
 /inline-asm.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /jumptable.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /lit.local.cfg/1.1.1.2/Fri Oct  3 09:23:01 2014/-kk/
+/memset.ll/1.1.1.1/Thu Jan 29 19:54:43 2015/-kk/
 /misched-msp430.ll/1.1.1.1/Fri Feb 14 20:12:42 2014/-kk/
 /mult-alt-generic-msp430.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /postinc.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/

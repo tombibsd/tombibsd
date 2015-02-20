@@ -63,9 +63,13 @@
 ./usr/include/clang-3.6/__wmmintrin_aes.h	comp-c-include		llvm
 ./usr/include/clang-3.6/__wmmintrin_pclmul.h	comp-c-include		llvm
 ./usr/include/clang-3.6/ammintrin.h		comp-c-include		llvm
+./usr/include/clang-3.6/adxintrin.h		comp-c-include		llvm
 ./usr/include/clang-3.6/avx2intrin.h		comp-c-include		llvm
+./usr/include/clang-3.6/avx512bwintrin.h	comp-c-include		llvm
 ./usr/include/clang-3.6/avx512erintrin.h	comp-c-include		llvm
 ./usr/include/clang-3.6/avx512fintrin.h		comp-c-include		llvm
+./usr/include/clang-3.6/avx512vlbwintrin.h	comp-c-include		llvm
+./usr/include/clang-3.6/avx512vlintrin.h	comp-c-include		llvm
 ./usr/include/clang-3.6/avxintrin.h		comp-c-include		llvm
 ./usr/include/clang-3.6/bmi2intrin.h		comp-c-include		llvm
 ./usr/include/clang-3.6/bmiintrin.h		comp-c-include		llvm

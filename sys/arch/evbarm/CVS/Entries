@@ -1,5 +1,6 @@
-/Makefile/1.9/Thu Jul 26 06:21:57 2012/-kk/
+/Makefile/1.10/Thu Feb  5 08:40:58 2015/-kk/
 D/adi_brh////
+D/amlogic////
 D/armadaxp////
 D/armadillo////
 D/awin////
@@ -45,4 +46,6 @@ D/smdk2xx0////
 D/stand////
 D/tisdp24xx////
 D/tsarm////
+D/vexpress////
 D/viper////
+D/zynq////

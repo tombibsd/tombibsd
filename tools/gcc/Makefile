@@ -50,7 +50,7 @@ COMMON_CONFIGURE_ARGS+=	--with-tune=${GCC_CONFIG_TUNE.${MACHINE_ARCH}}
 .endif
 
 .if ${HAVE_GCC} == 48
-COMMON_CONFIGURE_ARGS+= --enable-libstdcxx-time=rt
+COMMON_CONFIGURE_ARGS+= --enable-libstdcxx-time=rt --enable-lto
 .endif
 
 CONFIGURE_ARGS=	${COMMON_CONFIGURE_ARGS}

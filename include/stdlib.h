@@ -123,6 +123,9 @@ double	 strtod(const char * __restrict, char ** __restrict);
 long	 strtol(const char * __restrict, char ** __restrict, int);
 unsigned long
 	 strtoul(const char * __restrict, char ** __restrict, int);
+#ifdef _OPENBSD_SOURCE
+long long strtonum(const char *, long long, long long, const char **);
+#endif
 int	 system(const char *);
 
 /* These are currently just stubs. */
@@ -361,6 +364,7 @@ unsigned long long int
 	strtoull_l(const char * __restrict, char ** __restrict, int, locale_t);
 
 #  if defined(_NETBSD_SOURCE)
+void	*reallocarray(void *, size_t, size_t);
 quad_t	 strtoq_l(const char * __restrict, char ** __restrict, int, locale_t);
 u_quad_t strtouq_l(const char * __restrict, char ** __restrict, int, locale_t);
 

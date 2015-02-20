@@ -92,6 +92,12 @@ void	pmap_md_init(void);
 
 bool	pmap_md_tlb_check_entry(void *, vaddr_t, tlb_asid_t, pt_entry_t);
 
+#ifdef MULTIPROCESSOR
+#define	PMAP_MD_NEED_TLB_MISS_LOCK
+void	pmap_md_tlb_miss_lock_enter(void);
+void	pmap_md_tlb_miss_lock_exit(void);
+#endif	/* MULTIPROCESSOR */
+
 #ifdef PMAP_MINIMALTLB
 vaddr_t	pmap_kvptefill(vaddr_t, vaddr_t, pt_entry_t);
 #endif

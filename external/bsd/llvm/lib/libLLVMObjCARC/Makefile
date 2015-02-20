@@ -14,7 +14,8 @@ SRCS+=	DependencyAnalysis.cpp \
 	ObjCARCExpand.cpp \
 	ObjCARCOpts.cpp \
 	ObjCARCUtil.cpp \
-	ProvenanceAnalysis.cpp
+	ProvenanceAnalysis.cpp \
+	ProvenanceAnalysisEvaluator.cpp
 
 .if defined(HOSTLIB)
 .include <bsd.hostlib.mk>

@@ -39,7 +39,7 @@
 /HAWK/1.5/Fri Oct  3 09:43:15 2014/-kk/
 /HDL_G/1.43/Fri Oct  3 09:43:15 2014/-kk/
 /HPT5325/1.24/Wed Oct 29 08:13:00 2014/-kk/
-/HUMMINGBIRD_A31/1.20/Tue Dec  9 04:43:37 2014/-kk/
+/HUMMINGBIRD_A31/1.21/Mon Feb 16 03:14:06 2015/-kk/
 /HUMMINGBIRD_A31_INSTALL/1.3/Tue Oct 14 17:48:24 2014/-kk/
 /IGEPV2/1.26/Fri Oct  3 09:43:15 2014/-kk/
 /IMX23_OLINUXINO/1.11/Mon Jan 12 06:48:00 2015/-kk/
@@ -47,7 +47,8 @@
 /IMX31LITE/1.29/Fri Oct  3 09:43:15 2014/-kk/
 /INSTALL/1.7/Fri Mar 14 04:28:14 2014/-kk/
 /INTEGRATOR/1.79/Fri Oct  3 09:43:15 2014/-kk/
-/INTEGRATOR_CP/1.9/Fri Oct  3 09:43:15 2014/-kk/
+/INTEGRATOR_CP/1.10/Thu Feb  5 08:40:58 2015/-kk/
+/INTEGRATOR_CP_INSTALL/1.1/Tue Jan 27 20:26:15 2015/-kk/
 /INTEGRATOR_INSTALL/1.2/Mon May 19 16:25:47 2014/-kk/
 /IQ31244/1.69/Fri Oct  3 09:43:15 2014/-kk/
 /IQ80310/1.87/Fri Oct  3 09:43:15 2014/-kk/
@@ -80,6 +81,7 @@
 /NITROGEN6X/1.4/Wed Oct 29 08:13:00 2014/-kk/
 /NITROGEN6X_INSTALL/1.1/Sat Sep 27 04:03:24 2014/-kk/
 /NSLU2/1.38/Fri Oct  3 09:43:16 2014/-kk/
+/ODROID-C1/1.1/Sat Feb  7 17:20:16 2015/-kk/
 /ODROID-U/1.17/Wed Oct 29 08:13:00 2014/-kk/
 /ODROID-XU/1.4/Wed Oct 29 08:13:00 2014/-kk/
 /ODROID-XU_INSTALL/1.1/Fri Sep 26 15:33:58 2014/-kk/
@@ -93,8 +95,10 @@
 /OVERO/1.42/Wed Oct 29 08:13:00 2014/-kk/
 /PANDABOARD/1.17/Fri Oct  3 09:43:16 2014/-kk/
 /PANDABOARD_INSTALL/1.2/Mon May 19 16:25:48 2014/-kk/
+/PARALLELLA/1.1/Fri Jan 23 12:34:09 2015/-kk/
+/PARALLELLA_INSTALL/1.1/Fri Jan 23 12:34:09 2015/-kk/
 /README.evbarm/1.8/Fri Oct  3 09:08:56 2014/-kk/
-/ROCKCHIP/1.15/Mon Jan 12 06:48:00 2015/-kk/
+/ROCKCHIP/1.18/Mon Jan 26 07:10:15 2015/-kk/
 /RPI/1.59/Tue Dec  9 04:23:47 2014/-kk/
 /RPI_INSTALL/1.6/Tue Dec  9 04:15:56 2014/-kk/
 /SHEEVAPLUG/1.46/Wed Oct 29 08:13:00 2014/-kk/
@@ -115,10 +119,14 @@
 /TS7200_LCD/1.3/Sun Mar  6 02:22:27 2011/-kk/
 /TWINTAIL/1.65/Wed Oct 29 08:13:00 2014/-kk/
 /TWINTAIL_INSTALL/1.4/Mon May 19 16:25:48 2014/-kk/
+/VEXPRESS_A15/1.1/Mon Feb  9 07:50:24 2015/-kk/
 /VIPER/1.37/Fri Oct  3 09:43:16 2014/-kk/
 /ZAO425/1.57/Fri Oct  3 09:43:16 2014/-kk/
 /ZAO425_MD/1.3/Tue Nov 23 11:13:57 2010/-kk/
+/ZEDBOARD/1.1/Fri Jan 23 12:34:09 2015/-kk/
+/ZEDBOARD_INSTALL/1.1/Fri Jan 23 12:34:09 2015/-kk/
 /files.adi_brh/1.4/Mon Dec  3 15:33:29 2007/-kk/
+/files.amlogic/1.1/Sat Feb  7 17:20:16 2015/-kk/
 /files.armadaxp/1.3/Fri Apr 11 02:03:29 2014/-kk/
 /files.armadillo9/1.4/Mon Mar 17 09:30:02 2008/-kk/
 /files.awin/1.3/Tue Dec  9 04:15:56 2014/-kk/
@@ -135,7 +143,7 @@
 /files.hdl_g/1.3/Mon Dec  3 15:33:30 2007/-kk/
 /files.imx23_olinuxino/1.3/Mon Jan 12 06:48:00 2015/-kk/
 /files.imx31/1.3/Sat Nov 13 04:53:58 2010/-kk/
-/files.integrator/1.10/Thu Oct 24 10:28:57 2013/-kk/
+/files.integrator/1.11/Thu Feb  5 08:40:58 2015/-kk/
 /files.iq31244/1.8/Thu Oct 24 10:28:57 2013/-kk/
 /files.iq80310/1.12/Mon Dec  3 15:33:30 2007/-kk/
 /files.iq80321/1.9/Thu Oct 24 10:28:57 2013/-kk/
@@ -155,15 +163,20 @@
 /files.odroid/1.1/Sun Apr 13 02:26:26 2014/-kk/
 /files.osk5912/1.1/Sat Jan  6 08:16:26 2007/-kk/
 /files.overo/1.5/Tue Jun  3 03:09:21 2014/-kk/
+/files.parallella/1.1/Fri Jan 23 12:34:09 2015/-kk/
 /files.rockchip/1.1/Fri Dec 26 16:53:33 2014/-kk/
 /files.rpi/1.7/Sun Oct 19 16:06:33 2014/-kk/
 /files.smdk2410/1.5/Sun Dec 11 12:17:07 2005/-kk/
 /files.smdk2800/1.1/Wed Nov 20 18:06:25 2002/-kk/
 /files.tisdp24xx/1.2/Sun Apr 27 18:58:46 2008/-kk/
 /files.tsarm/1.11/Mon Mar 17 09:30:02 2008/-kk/
+/files.vexpress/1.1/Mon Feb  9 07:47:15 2015/-kk/
 /files.viper/1.2/Sun Dec 11 12:17:07 2005/-kk/
+/files.zedboard/1.1/Fri Jan 23 12:34:09 2015/-kk/
+/files.zynq/1.1/Fri Jan 23 12:34:09 2015/-kk/
 /ldscript.evbarm/1.8/Thu Feb 13 15:22:17 2014/-kk/
 /mk.adi_brh/1.2/Tue Jan  8 17:46:31 2008/-kk/
+/mk.amlogic/1.1/Sat Feb  7 17:20:16 2015/-kk/
 /mk.armadaxp/1.4/Fri Apr 11 02:03:29 2014/-kk/
 /mk.armadillo9/1.1/Sun Nov 13 06:33:06 2005/-kk/
 /mk.awin/1.4/Wed Oct 29 08:13:00 2014/-kk/
@@ -200,8 +213,11 @@
 /mk.smdk2xx0/1.3/Sun Dec 11 12:17:07 2005/-kk/
 /mk.tisdp24xx/1.5/Tue Dec 17 04:13:26 2013/-kk/
 /mk.tsarm/1.2/Sun Dec 11 12:17:07 2005/-kk/
+/mk.vexpress/1.1/Mon Feb  9 07:47:15 2015/-kk/
 /mk.viper/1.3/Thu Jun 30 18:20:24 2011/-kk/
+/mk.zynq/1.1/Fri Jan 23 12:34:09 2015/-kk/
 /std.adi_brh/1.10/Sun Dec 16 23:47:56 2012/-kk/
+/std.amlogic/1.1/Sat Feb  7 17:20:16 2015/-kk/
 /std.armadaxp/1.3/Fri Apr 11 02:03:29 2014/-kk/
 /std.armadillo9/1.7/Sun Dec 16 23:47:56 2012/-kk/
 /std.awin/1.5/Tue Dec  9 04:15:56 2014/-kk/
@@ -246,5 +262,7 @@
 /std.smdk2800/1.15/Sun Dec 16 23:47:56 2012/-kk/
 /std.tisdp24xx/1.9/Mon Nov 11 15:21:26 2013/-kk/
 /std.tsarm/1.8/Sun Dec 16 23:47:57 2012/-kk/
+/std.vexpress/1.1/Mon Feb  9 07:47:15 2015/-kk/
 /std.viper/1.8/Sun Dec 16 23:47:57 2012/-kk/
+/std.zynq/1.1/Fri Jan 23 12:34:09 2015/-kk/
 D

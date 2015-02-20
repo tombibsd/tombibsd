@@ -4,10 +4,12 @@ D/AsmParser////
 D/COFF////
 D/Disassembler////
 D/ELF////
+D/Hexagon////
 D/MachO////
 D/Markup////
 D/Mips////
 D/PowerPC////
+D/R600////
 D/Sparc////
 D/SystemZ////
 D/X86////

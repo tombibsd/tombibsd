@@ -32,7 +32,7 @@
 /*
  * Reference: BCM2835 ARM Periperhals
  *
- * 	http://dmkenr5gtnd8f.cloudfront.net/wp-content/uploads/2012/02/BCM2835-ARM-Peripherals.pdf
+ * 	http://www.raspberrypi.org/wp-content/uploads/2012/02/BCM2835-ARM-Peripherals.pdf
  */
 
 #ifndef	_BCM2835REG_H_

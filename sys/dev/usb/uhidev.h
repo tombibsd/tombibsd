@@ -57,6 +57,9 @@ struct uhidev_softc {
 	u_char sc_dying;
 
 	kmutex_t sc_lock;		/* protects writes to sc_state */
+
+	u_int sc_flags;
+#define UHIDEV_F_XB1	0x0001	/* Xbox 1 controller */
 };
 
 struct uhidev {

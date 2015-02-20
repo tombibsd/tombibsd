@@ -41,7 +41,7 @@
 /fd.c/1.95/Mon Jan 12 06:47:51 2015/-kk/
 /flsc.c/1.45/Mon Dec 20 00:25:25 2010/-kk/
 /flscvar.h/1.7/Wed Oct 21 23:53:38 2009/-kk/
-/gayle_pcmcia.c/1.30/Fri Oct  3 09:50:36 2014/-kk/
+/gayle_pcmcia.c/1.31/Mon Feb 16 03:14:04 2015/-kk/
 /genpar.c/1.10/Sun Dec 11 12:16:28 2005/-kk/
 /grf.c/1.62/Fri Oct  3 09:08:52 2014/-kk/
 /grf_cc.c/1.41/Sat Oct 27 17:17:28 2012/-kk/
@@ -129,7 +129,7 @@
 /rtc.h/1.10/Wed Nov 14 13:36:02 2012/-kk/
 /rtmondefs.c/1.4/Mon Jan 28 09:57:02 2002/-kk/
 /rtmons/1.3/Sat Jan 26 13:40:59 2002/-kk/
-/sbic.c/1.73/Fri Oct  3 09:25:29 2014/-kk/
+/sbic.c/1.74/Mon Jan 26 07:10:13 2015/-kk/
 /sbicreg.h/1.8/Fri Feb  5 12:13:36 2010/-kk/
 /sbicvar.h/1.24/Sat Oct 27 17:17:31 2012/-kk/
 /sci.c/1.36/Thu Feb 13 15:22:12 2014/-kk/

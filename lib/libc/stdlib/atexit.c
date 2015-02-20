@@ -120,10 +120,12 @@ atexit_handler_alloc(void *dso)
 void __section(".text.startup")
 __libc_atexit_init(void)
 {
+#ifdef _REENTRANT
 	mutexattr_t atexit_mutex_attr;
 	mutexattr_init(&atexit_mutex_attr);
 	mutexattr_settype(&atexit_mutex_attr, PTHREAD_MUTEX_RECURSIVE);
 	mutex_init(&__atexit_mutex, &atexit_mutex_attr);
+#endif
 }
 
 /*

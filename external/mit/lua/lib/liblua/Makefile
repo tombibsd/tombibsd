@@ -14,7 +14,7 @@ SRCS=		${LUA_CORE} ${LUA_LIB}
 INCS=		lauxlib.h lua.h lua.hpp luaconf.h lualib.h
 INCSDIR=	/usr/include
 
-CFLAGS+=	-DLUA_USE_POSIX -DLUA_USE_DLOPEN
+CPPFLAGS+=	-DLUA_USE_POSIX -DLUA_USE_DLOPEN -DLUA_C89_NUMBERS
 CWARNFLAGS.clang+=	-Wno-empty-body
 
 LIBDPLIBS+=	m		${NETBSDSRCDIR}/lib/libm

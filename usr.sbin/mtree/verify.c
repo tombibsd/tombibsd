@@ -149,6 +149,12 @@ vwalk(void)
 		if (!eflag && !(dflag && p->fts_info == FTS_SL)) {
 			printf("extra: %s", RP(p));
 			if (rflag) {
+#if HAVE_STRUCT_STAT_ST_FLAGS
+				if (rflag > 1 &&
+				    lchflags(p->fts_accpath, 0) == -1)
+					printf(" (chflags %s)",
+					    strerror(errno));
+#endif
 				if ((S_ISDIR(p->fts_statp->st_mode)
 				    ? rmdir : unlink)(p->fts_accpath)) {
 					printf(", not removed: %s",

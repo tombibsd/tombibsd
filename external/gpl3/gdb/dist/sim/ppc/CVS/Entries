@@ -32,8 +32,8 @@
 /dc-test.02/1.1.1.2/Tue Oct 29 12:10:51 2013/-kk/
 /debug.c/1.1.1.2/Tue Oct 29 12:10:51 2013/-kk/
 /debug.h/1.1.1.2/Tue Oct 29 12:10:51 2013/-kk/
-/device.c/1.1.1.2/Tue Oct 29 12:10:51 2013/-kk/
-/device.h/1.1.1.2/Tue Oct 29 12:10:51 2013/-kk/
+/device.c/1.2/Mon Jan 26 07:09:22 2015/-kk/
+/device.h/1.2/Mon Jan 26 07:09:22 2015/-kk/
 /device_table.c/1.1.1.2/Tue Oct 29 12:10:51 2013/-kk/
 /device_table.h/1.1.1.2/Tue Oct 29 12:10:51 2013/-kk/
 /dgen.c/1.1.1.2/Tue Oct 29 12:10:51 2013/-kk/
@@ -82,7 +82,7 @@
 /hw_ide.c/1.1.1.2/Tue Oct 29 12:10:51 2013/-kk/
 /hw_init.c/1.1.1.2/Tue Oct 29 12:10:51 2013/-kk/
 /hw_iobus.c/1.1.1.2/Tue Oct 29 12:10:51 2013/-kk/
-/hw_memory.c/1.1.1.2/Tue Oct 29 12:10:51 2013/-kk/
+/hw_memory.c/1.2/Mon Jan 26 07:09:22 2015/-kk/
 /hw_nvram.c/1.1.1.2/Tue Oct 29 12:10:51 2013/-kk/
 /hw_opic.c/1.1.1.2/Tue Oct 29 12:10:51 2013/-kk/
 /hw_pal.c/1.1.1.2/Tue Oct 29 12:10:51 2013/-kk/

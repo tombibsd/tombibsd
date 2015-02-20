@@ -78,12 +78,12 @@ LLVM_LIBS+= \
 	SelectionDAG \
 	AsmPrinter \
 	CodeGen \
-	ProfileData \
 	Vectorize \
 	Target \
 	InstCombine \
 	Instrumentation \
 	ScalarOpts \
+	ProfileData \
 	Analysis \
 	MCDisassembler \
 	MCParser \

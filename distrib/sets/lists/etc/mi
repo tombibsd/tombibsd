@@ -227,6 +227,7 @@
 ./etc/rc.d/altqd				etc-router-rc
 ./etc/rc.d/amd					etc-amd-rc
 ./etc/rc.d/apmd					etc-sys-rc
+./etc/rc.d/blacklistd				etc-sys-rc
 ./etc/rc.d/bluetooth				etc-sys-rc
 ./etc/rc.d/bootconf.sh				etc-sys-rc
 ./etc/rc.d/bootparams				etc-bootserver-rc

@@ -3072,7 +3072,7 @@ urtwn_load_firmware(struct urtwn_softc *sc)
 		    error);
 		return (error);
 	}
-	len = firmware_get_size(fwh);
+	const size_t fwlen = len = firmware_get_size(fwh);
 	fw = firmware_malloc(len);
 	if (fw == NULL) {
 		aprint_error_dev(sc->sc_dev,
@@ -3085,7 +3085,7 @@ urtwn_load_firmware(struct urtwn_softc *sc)
 	if (error != 0) {
 		aprint_error_dev(sc->sc_dev,
 		    "failed to read firmware (error %d)\n", error);
-		firmware_free(fw, len);
+		firmware_free(fw, fwlen);
 		return (error);
 	}
 
@@ -3175,7 +3175,7 @@ urtwn_load_firmware(struct urtwn_softc *sc)
 		goto fail;
 	}
  fail:
-	firmware_free(fw, len);
+	firmware_free(fw, fwlen);
 	return (error);
 }
 

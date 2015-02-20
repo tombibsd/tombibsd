@@ -14,6 +14,7 @@ SRCS+=	ASTDumper.cpp \
 	ClangExpressionParser.cpp \
 	ClangExpressionVariable.cpp \
 	ClangFunction.cpp \
+	ClangModulesDeclVendor.cpp \
 	ClangPersistentVariables.cpp \
 	ClangUserExpression.cpp \
 	ClangUtilityFunction.cpp \

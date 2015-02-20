@@ -67,6 +67,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include "opt_gateway.h"
 #include "opt_inet.h"
 #include "opt_ipsec.h"
+#include "opt_dccp.h"
 
 #include <sys/param.h>
 #include <sys/socket.h>
@@ -101,6 +102,12 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <netinet6/udp6.h>
 #include <netinet6/udp6_var.h>
+
+#ifdef DCCP
+#include <netinet/dccp.h>
+#include <netinet/dccp_var.h>
+#include <netinet6/dccp6_var.h>
+#endif
 
 #include <netinet6/pim6_var.h>
 
@@ -155,6 +162,14 @@ PR_WRAP_CTLOUTPUT(icmp6_ctloutput)
 #define	udp6_ctloutput	udp6_ctloutput_wrapper
 #define	icmp6_ctloutput	icmp6_ctloutput_wrapper
 
+#if defined(DCCP)
+PR_WRAP_CTLINPUT(dccp6_ctlinput)
+PR_WRAP_CTLOUTPUT(dccp_ctloutput)
+
+#define dccp6_ctlinput	dccp6_ctlinput_wrapper
+#define dccp_ctloutput	dccp_ctloutput_wrapper
+#endif
+
 #if defined(IPSEC)
 PR_WRAP_CTLINPUT(ah6_ctlinput)
 
@@ -206,6 +221,20 @@ const struct ip6protosw inet6sw[] = {
 	.pr_fasttimo = tcp_fasttimo,
 	.pr_drain = tcp_drainstub,
 },
+#ifdef DCCP
+{	.pr_type = SOCK_CONN_DGRAM,
+	.pr_domain = &inet6domain,
+	.pr_protocol = IPPROTO_DCCP,
+	.pr_flags = PR_CONNREQUIRED|PR_ATOMIC|PR_LISTEN,
+	.pr_input = dccp6_input,
+	.pr_ctlinput = dccp6_ctlinput,
+	.pr_ctloutput = dccp_ctloutput,
+	.pr_usrreqs = &dccp6_usrreqs,
+#ifndef INET
+	.pr_init = dccp_init,
+#endif
+},
+#endif /* DCCP */
 {	.pr_type = SOCK_RAW,
 	.pr_domain = &inet6domain,
 	.pr_protocol = IPPROTO_RAW,

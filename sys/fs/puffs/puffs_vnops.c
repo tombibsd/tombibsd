@@ -2279,9 +2279,17 @@ puffs_vnop_read(void *v)
 	if (uio->uio_offset < 0)
 		return EFBIG;
 
+	/*
+	 * On the case of reading empty files and (vp->v_size != 0) below:
+	 * some filesystems (hint: FUSE and distributed filesystems) still
+	 * expect to get the READ in order to update atime. Reading through
+	 * the case filters empty files, therefore we prefer to bypass the
+	 * cache here.
+	 */
 	if (vp->v_type == VREG &&
 	    PUFFS_USE_PAGECACHE(pmp) &&
-	    !(pn->pn_stat & PNODE_RDIRECT)) {
+	    !(pn->pn_stat & PNODE_RDIRECT) &&
+	    (vp->v_size != 0)) {
 		const int advice = IO_ADV_DECODE(ap->a_ioflag);
 
 		while (uio->uio_resid > 0) {

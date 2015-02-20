@@ -87,8 +87,6 @@
 #include <net/pktqueue.h>
 #endif
 
-//#define NET_MPSAFE 1
-
 /*
  * Always include ALTQ glue here -- we use the ALTQ interface queue
  * structure even when ALTQ is not configured into the kernel so that

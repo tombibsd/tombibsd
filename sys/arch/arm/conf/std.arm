@@ -2,4 +2,4 @@
 #
 # standard NetBSD/arm options
 
-options		CPU_IN_CKSUM
+#options		CPU_IN_CKSUM

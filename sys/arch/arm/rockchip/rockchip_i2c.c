@@ -319,16 +319,21 @@ rkiic_wait(struct rkiic_softc *sc, uint32_t mask, int timeout, int flags)
 		retry = timeout / hz;
 		while (retry > 0) {
 			error = cv_timedwait(&sc->sc_cv, &sc->sc_lock, hz);
-			if (error && error != EWOULDBLOCK)
-				return error;
+			if (error) {
+				if (error != EWOULDBLOCK) {
+					return error;
+				} else {
+					--retry;
+				}
+			}
 			if (sc->sc_intr_ipd & mask)
 				return 0;
-			--retry;
 		}
 	}
 
 #ifdef RKIIC_DEBUG
-	device_printf(sc->sc_dev, "%s: ipd %#x\n", __func__, sc->sc_intr_ipd);
+	device_printf(sc->sc_dev, "%s: ipd %#x flags %#x\n", __func__,
+	    sc->sc_intr_ipd, flags);
 #endif
 	return ETIMEDOUT;
 }

@@ -8,6 +8,8 @@ file	dev/wsfont/wsfont.c	(wsfont_glue & rasops_rotation) |
     rasterconsole | wsdisplay | wsfont		needs-flag
 
 defflag	opt_wsfont.h		FONT_BOLD8x16
+				FONT_GLASS10x19
+				FONT_GLASS10x25
 				FONT_GALLANT12x22
 				FONT_QVSS8x15
 				FONT_LUCIDA16x29

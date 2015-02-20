@@ -47,6 +47,10 @@ SRCS+=	db_sym.c db_variables.c db_write_cmd.c
 .PATH:	${S}/arch/${MACHINE_ARCH}/${MACHINE_ARCH}
 SRCS+=	db_disasm.c
 
+.PATH:  $S/kern
+SRCS+=	kern_timeout.c
+CPPFLAGS.kern_timeout.c += -DCRASH -DDDB
+
 CPPFLAGS+=	-I${S}/arch
 
 . if    ${MACHINE} == "amd64" \

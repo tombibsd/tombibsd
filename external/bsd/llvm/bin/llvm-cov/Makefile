@@ -8,9 +8,18 @@ NOMAN=		yes
 .PATH: ${LLVM_SRCDIR}/tools/llvm-cov
 
 SRCS=	gcov.cpp \
-	llvm-cov.cpp
+	llvm-cov.cpp \
+	CodeCoverage.cpp \
+	CoverageFilters.cpp \
+	CoverageReport.cpp \
+	CoverageSummary.cpp \
+	CoverageSummaryInfo.cpp \
+	SourceCoverageView.cpp \
+	TestingSupport.cpp
 
 LLVM_LIBS+= \
+	ProfileData \
+	Object \
 	IR \
 	Support
 

@@ -148,6 +148,11 @@ struct	ip6_pktopts {
 #define IP6PO_MINMTU_MCASTONLY	-1 /* default; send at min MTU for multicast*/
 #define IP6PO_MINMTU_DISABLE	 0 /* always perform pmtu disc */
 #define IP6PO_MINMTU_ALL	 1 /* always send at min MTU */
+	int	ip6po_prefer_tempaddr;	/* whether temporary addresses are
+					 * preferred as source address */
+#define IP6PO_TEMPADDR_SYSTEM	-1 /* follow the system default */
+#define IP6PO_TEMPADDR_NOTPREFER 0 /* not prefer temporary address */
+#define IP6PO_TEMPADDR_PREFER	 1 /* prefer temporary address */
 	int ip6po_flags;
 #if 0	/* parameters in this block is obsolete. do not reuse the values. */
 #define IP6PO_REACHCONF	0x01	/* upper-layer reachability confirmation. */

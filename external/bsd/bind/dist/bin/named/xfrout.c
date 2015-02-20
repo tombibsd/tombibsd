@@ -54,6 +54,8 @@
 #include <named/server.h>
 #include <named/xfrout.h>
 
+#include "pfilter.h"
+
 /*! \file
  * \brief
  * Outgoing AXFR and IXFR.
@@ -822,6 +824,7 @@ ns_xfr_start(ns_client_t *client, dns_rdatatype_t reqtype) {
 						     &client->peeraddr,
 						     &db);
 
+			pfilter_notify(result, client, "zonexfr");
 			if (result == ISC_R_NOPERM) {
 				char _buf1[DNS_NAME_FORMATSIZE];
 				char _buf2[DNS_RDATACLASS_FORMATSIZE];

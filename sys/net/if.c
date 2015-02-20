@@ -92,11 +92,14 @@
 #include <sys/cdefs.h>
 __KERNEL_RCSID(0, "$NetBSD$");
 
+#if defined(_KERNEL_OPT)
 #include "opt_inet.h"
 
 #include "opt_atalk.h"
 #include "opt_natm.h"
 #include "opt_wlan.h"
+#include "opt_net_mpsafe.h"
+#endif
 
 #include <sys/param.h>
 #include <sys/mbuf.h>

@@ -305,7 +305,7 @@ initarm_common(vaddr_t kvm_base, vsize_t kvm_size,
 #endif
 
 #ifdef MULTIPROCESSOR
-	mutex_init(&cpu_hatch_lock, MUTEX_DEFAULT, IPL_HIGH);
+	mutex_init(&cpu_hatch_lock, MUTEX_DEFAULT, IPL_NONE);
 #endif
 
 #ifdef VERBOSE_INIT_ARM

@@ -9,6 +9,7 @@ LIB=	lldReaderWriterELFX86
 CPPFLAGS+=	-I${LLD_SRCDIR}/lib/ReaderWriter/ELF
 
 SRCS+=	X86LinkingContext.cpp \
+	X86RelocationHandler.cpp \
 	X86TargetHandler.cpp
 
 .if defined(HOSTLIB)

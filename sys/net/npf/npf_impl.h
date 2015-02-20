@@ -344,6 +344,7 @@ prop_array_t	npf_alg_export(void);
 const char *	npf_addr_dump(const npf_addr_t *, int);
 void		npf_state_dump(const npf_state_t *);
 void		npf_nat_dump(const npf_nat_t *);
+void		npf_ruleset_dump(const char *);
 void		npf_state_setsampler(void (*)(npf_state_t *, bool));
 
 #endif	/* _NPF_IMPL_H_ */

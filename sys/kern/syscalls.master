@@ -944,7 +944,7 @@
 478	STD 		{ int|sys|60|_lwp_park(clockid_t clock_id, int flags, \
 			    const struct timespec *ts, lwpid_t unpark, \
 			    const void *hint, const void *unparkhint); }
-479	STD  RUMP	{ int|sys||posix_fallocate(int fd, int PAD, off_t pos, \
+479	NOERR	RUMP	{ int|sys||posix_fallocate(int fd, int PAD, off_t pos, \
 			    off_t len); }
 480	STD  RUMP	{ int|sys||fdiscard(int fd, int PAD, off_t pos, \
 			    off_t len); }

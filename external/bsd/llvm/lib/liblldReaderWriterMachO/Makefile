@@ -6,10 +6,12 @@ LIB=	lldReaderWriterMachO
 
 .PATH: ${LLD_SRCDIR}/lib/ReaderWriter/MachO
 
-SRCS+=	ArchHandler_x86.cpp \
+SRCS+=	ArchHandler_arm64.cpp \
+	ArchHandler_x86.cpp \
 	ArchHandler_x86_64.cpp \
 	ArchHandler_arm.cpp \
 	ArchHandler.cpp \
+	CompactUnwindPass.cpp \
 	GOTPass.cpp \
 	MachOLinkingContext.cpp \
 	MachONormalizedFileBinaryReader.cpp \
@@ -17,6 +19,7 @@ SRCS+=	ArchHandler_x86.cpp \
 	MachONormalizedFileFromAtoms.cpp \
 	MachONormalizedFileToAtoms.cpp \
 	MachONormalizedFileYAML.cpp \
+	ShimPass.cpp \
 	StubsPass.cpp \
 	WriterMachO.cpp
 

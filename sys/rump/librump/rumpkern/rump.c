@@ -307,7 +307,6 @@ rump_init(void)
 	prop_kern_init();
 
 	kmem_init();
-	kmeminit();
 
 	uvm_ra_init();
 	uao_init();

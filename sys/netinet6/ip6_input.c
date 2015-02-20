@@ -1902,6 +1902,14 @@ sysctl_net_inet6_ip6_setup(struct sysctllog **clog)
 		       CTL_CREATE, CTL_EOL);
 	sysctl_createv(clog, 0, NULL, NULL,
 		       CTLFLAG_PERMANENT|CTLFLAG_READWRITE,
+		       CTLTYPE_INT, "prefer_tempaddr",
+		       SYSCTL_DESCR("Prefer temporary address as source "
+		                    "address"),
+		       NULL, 0, &ip6_prefer_tempaddr, 0,
+		       CTL_NET, PF_INET6, IPPROTO_IPV6,
+		       CTL_CREATE, CTL_EOL);
+	sysctl_createv(clog, 0, NULL, NULL,
+		       CTLFLAG_PERMANENT|CTLFLAG_READWRITE,
 		       CTLTYPE_INT, "temppltime",
 		       SYSCTL_DESCR("preferred lifetime of a temporary address"),
 		       NULL, 0, &ip6_temp_preferred_lifetime, 0,

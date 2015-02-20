@@ -12,12 +12,14 @@ SRCS+=	AliasAnalysis.cpp \
 	AliasDebugger.cpp \
 	AliasSetTracker.cpp \
 	Analysis.cpp \
+	AssumptionCache.cpp \
 	BasicAliasAnalysis.cpp \
 	BlockFrequencyInfo.cpp \
 	BlockFrequencyInfoImpl.cpp \
 	BranchProbabilityInfo.cpp \
 	CFG.cpp \
 	CFGPrinter.cpp \
+	CFLAliasAnalysis.cpp \
 	CGSCCPassManager.cpp \
 	CaptureTracking.cpp \
 	CodeMetrics.cpp \
@@ -27,6 +29,7 @@ SRCS+=	AliasAnalysis.cpp \
 	DependenceAnalysis.cpp \
 	DomPrinter.cpp \
 	DominanceFrontier.cpp \
+	FunctionTargetTransformInfo.cpp \
 	IVUsers.cpp \
 	InstCount.cpp \
 	InstructionSimplify.cpp \

@@ -11,6 +11,10 @@ LDADD+=	-lcrypt -lutil
 MAN=	ftpd.conf.5 ftpusers.5 ftpd.8
 MLINKS=	ftpusers.5 ftpchroot.5
 
+SRCS+=	pfilter.c
+LDADD+=	-lblacklist
+DPADD+=	${LIBBLACKLIST}
+
 .if defined(NO_INTERNAL_LS)
 CPPFLAGS+=-DNO_INTERNAL_LS
 .else

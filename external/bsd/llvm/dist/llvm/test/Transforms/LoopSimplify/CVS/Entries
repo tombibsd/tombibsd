@@ -18,7 +18,7 @@
 /hardertest.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /indirectbr-backedge.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /indirectbr.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
-/merge-exits.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/merge-exits.ll/1.1.1.2/Thu Feb  5 08:39:02 2015/-kk/
 /notify-scev.ll/1.1.1.1/Wed Jan 15 21:24:16 2014/-kk/
 /phi-node-simplify.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /preserve-scev.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/

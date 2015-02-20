@@ -68,7 +68,7 @@
 /verified_exec.c/1.69/Fri Oct  3 09:09:12 2014/-kk/
 /video.c/1.32/Fri Oct  3 09:09:12 2014/-kk/
 /video_if.h/1.7/Fri Dec 24 20:54:28 2010/-kk/
-/vnd.c/1.239/Mon Jan 12 06:48:43 2015/-kk/
+/vnd.c/1.241/Thu Feb  5 08:41:09 2015/-kk/
 /vndvar.h/1.33/Thu Oct 24 10:28:58 2013/-kk/
 D/acpi////
 D/adb////
@@ -79,6 +79,7 @@ D/ata////
 D/bi////
 D/bluetooth////
 D/bus_dma////
+D/cadence////
 D/cardbus////
 D/dec////
 D/dkwedge////

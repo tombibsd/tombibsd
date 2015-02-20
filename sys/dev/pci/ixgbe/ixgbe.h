@@ -476,7 +476,7 @@ struct adapter {
 
 
 #define IXGBE_CORE_LOCK_INIT(_sc, _name) \
-        mutex_init(&(_sc)->core_mtx, MUTEX_DEFAULT, IPL_NET)
+        mutex_init(&(_sc)->core_mtx, MUTEX_DEFAULT, IPL_SOFTNET)
 #define IXGBE_CORE_LOCK_DESTROY(_sc)      mutex_destroy(&(_sc)->core_mtx)
 #define IXGBE_TX_LOCK_DESTROY(_sc)        mutex_destroy(&(_sc)->tx_mtx)
 #define IXGBE_RX_LOCK_DESTROY(_sc)        mutex_destroy(&(_sc)->rx_mtx)

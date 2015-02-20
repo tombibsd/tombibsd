@@ -330,6 +330,10 @@ in6_alias(const char *ifname, prop_dictionary_t env, prop_dictionary_t oenv,
 			printf(" detached");
 		if (ifr6.ifr_ifru.ifru_flags6 & IN6_IFF_DEPRECATED)
 			printf(" deprecated");
+		if (ifr6.ifr_ifru.ifru_flags6 & IN6_IFF_AUTOCONF)
+			printf(" autoconf");
+		if (ifr6.ifr_ifru.ifru_flags6 & IN6_IFF_TEMPORARY)
+			printf(" temporary");
 	}
 
 	if (scopeid)

@@ -31,7 +31,7 @@
 #include "event2/util.h"
 
 #ifdef __GNUC__
-#define EV_CHECK_FMT(a,b) __attribute__((__format__(__printf__, a, b)))
+#define EV_CHECK_FMT(a,b) __attribute__((format(printf, a, b)))
 #define EV_NORETURN __attribute__((noreturn))
 #else
 #define EV_CHECK_FMT(a,b)
@@ -54,5 +54,7 @@ void _event_debugx(const char *fmt, ...) EV_CHECK_FMT(1,2);
 #else
 #define event_debug(x) do {;} while (/*CONSTCOND*/0)
 #endif
+
+#undef EV_CHECK_FMT
 
 #endif

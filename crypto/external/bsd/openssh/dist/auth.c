@@ -62,6 +62,7 @@ __RCSID("$NetBSD$");
 #include "monitor_wrap.h"
 #include "krl.h"
 #include "compat.h"
+#include "pfilter.h"
 
 #ifdef HAVE_LOGIN_CAP
 #include <login_cap.h>
@@ -362,6 +363,8 @@ auth_log(Authctxt *authctxt, int authenticated, int partial,
 	    compat20 ? "ssh2" : "ssh1",
 	    authctxt->info != NULL ? ": " : "",
 	    authctxt->info != NULL ? authctxt->info : "");
+	if (!authctxt->postponed)
+		pfilter_notify(!authenticated);
 	free(authctxt->info);
 	authctxt->info = NULL;
 }

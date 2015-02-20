@@ -66,7 +66,6 @@ int	 unix_listener(const char *, int, int);
 
 int	bcrypt_pbkdf(const char *, size_t, const u_int8_t *, size_t,
     u_int8_t *, size_t, unsigned int);
-long long strtonum(const char *, long long, long long, const char **);
 
 struct passwd *pwcopy(struct passwd *);
 const char *ssh_gai_strerror(int);

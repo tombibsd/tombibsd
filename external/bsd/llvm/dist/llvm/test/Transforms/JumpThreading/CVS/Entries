@@ -5,9 +5,12 @@
 /2012-07-19-NoSuccessorIndirectBr.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /and-and-cond.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /and-cond.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/assume-edge-dom.ll/1.1.1.1/Thu Jan 29 19:54:37 2015/-kk/
+/assume.ll/1.1.1.1/Thu Jan 29 19:54:37 2015/-kk/
 /basic.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /branch-no-const.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /compare.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/conservative-lvi.ll/1.1.1.1/Thu Jan 29 19:54:37 2015/-kk/
 /crash.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /degenerate-phi.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /indirectbr.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
@@ -17,7 +20,8 @@
 /or-undef.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /phi-eq.ll/1.1.1.2/Tue Jun  3 03:04:01 2014/-kk/
 /pr15851_hang.ll/1.1.1.1/Sun Aug 10 17:04:37 2014/-kk/
+/pr22086.ll/1.1.1.1/Thu Jan 29 19:54:37 2015/-kk/
 /pr9331.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /select.ll/1.1.1.2/Fri Oct  3 09:23:20 2014/-kk/
-/thread-loads.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/thread-loads.ll/1.1.1.2/Thu Feb  5 08:39:02 2015/-kk/
 D

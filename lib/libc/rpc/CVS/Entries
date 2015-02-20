@@ -12,8 +12,8 @@
 /clnt_generic.c/1.33/Tue Jun  3 03:08:58 2014/-kk/
 /clnt_perror.c/1.30/Thu Oct 24 10:28:53 2013/-kk/
 /clnt_raw.c/1.32/Thu Oct 24 10:28:53 2013/-kk/
-/clnt_simple.c/1.32/Thu Oct 24 10:28:53 2013/-kk/
-/clnt_vc.c/1.25/Thu Feb 13 15:22:02 2014/-kk/
+/clnt_simple.c/1.33/Mon Jan 26 07:10:03 2015/-kk/
+/clnt_vc.c/1.26/Mon Jan 26 07:10:03 2015/-kk/
 /getnetconfig.3/1.7/Wed Apr 16 13:34:43 2003/-kk/
 /getnetconfig.c/1.22/Fri Oct  3 09:57:25 2014/-kk/
 /getnetpath.3/1.6/Wed Apr 16 13:34:43 2003/-kk/

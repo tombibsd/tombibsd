@@ -4372,8 +4372,10 @@ ahc_alloc_scbs(struct ahc_softc *ahc)
 			  AHC_MAXTRANSFER_SIZE, AHC_NSEG, MAXPHYS, 0,
 			  BUS_DMA_WAITOK|BUS_DMA_ALLOCNOW|ahc->sc_dmaflags,
 			  &next_scb->dmamap);
-		if (error != 0)
+		if (error != 0) {
+			free(pdata, M_DEVBUF);
 			break;
+		}
 
 		next_scb->hscb = &scb_data->hscbs[scb_data->numscbs];
 		next_scb->hscb->tag = ahc->scb_data->numscbs;

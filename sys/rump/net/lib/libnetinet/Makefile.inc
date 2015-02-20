@@ -3,6 +3,8 @@
 
 .PATH:	${.CURDIR}/../../../../netinet
 
+CPPFLAGS+=	-DINET
+
 # INET
 SRCS+=	in_proto.c igmp.c in.c in_offload.c in_pcb.c ip_carp.c ip_icmp.c\
 	ip_flow.c ip_id.c ip_input.c ip_reass.c ip_output.c raw_ip.c	\
