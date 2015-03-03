@@ -1,14 +1,14 @@
-/autoconf.c/1.22/Sat Oct 27 17:17:52 2012/-kk/
-/genassym.cf/1.8/Sat Sep 20 18:29:05 2008/-kk/
-/hpc_machdep.c/1.104/Fri Oct  3 09:57:38 2014/-kk/
-/intr.c/1.19/Fri Jul 27 05:36:10 2012/-kk/
-/kloader_machdep.c/1.2/Fri Mar 14 04:28:15 2014/-kk/
-/kloader_pxa2x0.S/1.1/Sat Mar 31 14:02:54 2012/-kk/
-/locore.S/1.18/Fri Mar 14 04:28:15 2014/-kk/
-/netbookpro_machdep.c/1.1/Sat Aug  6 03:53:40 2011/-kk/
-/pxa2x0_hpc_machdep.c/1.22/Fri Oct  3 09:57:38 2014/-kk/
-/sa11x0_hpc_machdep.c/1.10/Fri Oct  3 09:57:38 2014/-kk/
-/softintr.c/1.15/Tue Dec 17 04:13:27 2013/-kk/
-/spl.S/1.7/Tue Dec 17 04:13:27 2013/-kk/
-/wzero3_machdep.c/1.2/Thu Jun 23 12:40:32 2011/-kk/
+/autoconf.c/1.22/Tue Oct 29 07:19:12 2013/-kk/
+/genassym.cf/1.8/Tue Oct 29 07:19:12 2013/-kk/
+/hpc_machdep.c/1.104/Sat Dec 13 01:30:30 2014/-kk/
+/intr.c/1.19/Tue Oct 29 07:19:12 2013/-kk/
+/kloader_machdep.c/1.2/Sun Oct  5 15:52:10 2014/-kk/
+/kloader_pxa2x0.S/1.1/Tue Oct 29 07:19:12 2013/-kk/
+/locore.S/1.18/Sun Oct  5 15:52:10 2014/-kk/
+/netbookpro_machdep.c/1.1/Tue Oct 29 07:19:12 2013/-kk/
+/pxa2x0_hpc_machdep.c/1.22/Sat Dec 13 01:30:30 2014/-kk/
+/sa11x0_hpc_machdep.c/1.10/Sat Dec 13 01:30:30 2014/-kk/
+/softintr.c/1.15/Sun Oct  5 15:52:10 2014/-kk/
+/spl.S/1.7/Sun Oct  5 15:52:10 2014/-kk/
+/wzero3_machdep.c/1.2/Tue Oct 29 07:19:12 2013/-kk/
 D

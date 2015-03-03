@@ -60,7 +60,7 @@ start_rump() {
 
 common_head() {
 	atf_set	descr		"$1"
-	atf_set	timeout		60
+	atf_set	timeout		120
 	atf_set	require.progs	rump.powerd rump.envstat rump.modload	\
 				rump.halt   rump.sysctl  rump_server	\
 				sed         grep         awk		\

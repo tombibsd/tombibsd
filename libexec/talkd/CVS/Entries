@@ -1,9 +1,9 @@
-/Makefile/1.13/Sat Sep 27 04:41:20 2008/-kk/
-/announce.c/1.25/Mon Mar 16 01:13:38 2009/-kk/
-/extern.h/1.7/Wed Oct 21 01:07:46 2009/-kk/
-/print.c/1.10/Mon Mar 16 01:13:38 2009/-kk/
-/process.c/1.14/Mon Mar 16 01:13:38 2009/-kk/
-/table.c/1.10/Mon Mar 16 01:13:38 2009/-kk/
-/talkd.8/1.11/Mon Mar 22 19:01:49 2010/-kk/
-/talkd.c/1.21/Mon Mar 16 01:04:32 2009/-kk/
+/Makefile/1.13/Tue Oct 29 07:19:04 2013/-kk/
+/announce.c/1.25/Tue Oct 29 07:19:04 2013/-kk/
+/extern.h/1.7/Tue Oct 29 07:19:04 2013/-kk/
+/print.c/1.10/Tue Oct 29 07:19:04 2013/-kk/
+/process.c/1.14/Tue Oct 29 07:19:04 2013/-kk/
+/table.c/1.10/Tue Oct 29 07:19:04 2013/-kk/
+/talkd.8/1.11/Tue Oct 29 07:19:04 2013/-kk/
+/talkd.c/1.21/Tue Oct 29 07:19:04 2013/-kk/
 D

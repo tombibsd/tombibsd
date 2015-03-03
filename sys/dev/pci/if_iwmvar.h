@@ -138,7 +138,6 @@ struct iwm_tx_radiotap_header {
 	 (1 << IEEE80211_RADIOTAP_CHANNEL))
 
 #define IWM_UCODE_SECT_MAX 6
-#define IWM_FWNAME "iwm-7260-9"
 #define IWM_FWDMASEGSZ (192*1024)
 /* sanity check value */
 #define IWM_FWMAXSIZE (2*1024*1024)
@@ -168,7 +167,7 @@ struct iwm_fw_info {
 		struct iwm_fw_onesect {
 			void *fws_data;
 			uint32_t fws_len;
-			uint32_t fws_devoff; 
+			uint32_t fws_devoff;
 
 			void *fws_alloc;
 			size_t fws_allocsize;
@@ -293,11 +292,12 @@ struct iwm_rx_ring {
 #define IWM_FLAG_STOPPED	0x04
 #define IWM_FLAG_RFKILL		0x08
 #define IWM_FLAG_BUSY		0x10
+#define IWM_FLAG_ATTACHED	0x20
 
 struct iwm_ucode_status {
 	uint32_t uc_error_event_table;
 	uint32_t uc_log_event_table;
-	
+
 	int uc_ok;
 	int uc_intr;
 };
@@ -321,8 +321,8 @@ enum IWM_CMD_MODE {
 	IWM_CMD_SEND_IN_RFKILL	= (1 << 2),
 };
 enum iwm_hcmd_dataflag {
-        IWM_HCMD_DFL_NOCOPY     = (1 << 0),
-        IWM_HCMD_DFL_DUP        = (1 << 1),
+	IWM_HCMD_DFL_NOCOPY     = (1 << 0),
+	IWM_HCMD_DFL_DUP        = (1 << 1),
 };
 
 /*
@@ -364,7 +364,7 @@ struct iwm_bf_data {
 };
 
 struct iwm_softc {
-	struct device *sc_dev;
+	device_t sc_dev;
 	struct ethercom sc_ec;
 	struct ieee80211com sc_ic;
 
@@ -381,20 +381,21 @@ struct iwm_softc {
 	bus_dma_tag_t sc_dmat;
 	pci_chipset_tag_t sc_pct;
 	pcitag_t sc_pcitag;
+	pcireg_t sc_pciid;
 	const void *sc_ih;
 
 	/* TX scheduler rings. */
 	struct iwm_dma_info		sched_dma;
 	uint32_t			sched_base;
 
-        /* TX/RX rings. */
+	/* TX/RX rings. */
 	struct iwm_tx_ring txq[IWM_MVM_MAX_QUEUES];
 	struct iwm_rx_ring rxq;
 	int qfullmsk;
 
 	int sc_sf_state;
 
-        /* ICT table. */
+	/* ICT table. */
 	struct iwm_dma_info	ict_dma;
 	int			ict_cur;
 

@@ -1,12 +1,12 @@
-/OsdEnvironment.c/1.6/Sun Jun 12 11:31:31 2011/-kk/
-/OsdHardware.c/1.9/Wed Jan  1 02:45:27 2014/-kk/
-/OsdInterrupt.c/1.8/Tue Aug 18 16:41:02 2009/-kk/
-/OsdMemory.c/1.5/Sun Apr 22 06:33:04 2012/-kk/
-/OsdMisc.c/1.14/Wed Jan  1 02:45:27 2014/-kk/
-/OsdSchedule.c/1.17/Wed Jan  1 02:45:27 2014/-kk/
-/OsdStream.c/1.1/Thu Mar 23 13:41:13 2006/-kk/
-/OsdSynch.c/1.13/Tue Aug 18 16:41:02 2009/-kk/
-/README/1.6/Fri Jan 31 08:48:46 2014/-kk/
-/acpi_func.h/1.4/Sat Jul 24 21:53:54 2010/-kk/
-/files.acpica/1.15/Thu Feb 17 07:34:42 2011/-kk/
+/OsdEnvironment.c/1.6/Tue Oct 29 07:19:15 2013/-kk/
+/OsdHardware.c/1.9/Sun Oct  5 15:52:13 2014/-kk/
+/OsdInterrupt.c/1.8/Tue Oct 29 07:19:15 2013/-kk/
+/OsdMemory.c/1.5/Tue Oct 29 07:19:15 2013/-kk/
+/OsdMisc.c/1.14/Sun Oct  5 15:52:13 2014/-kk/
+/OsdSchedule.c/1.17/Sun Oct  5 15:52:13 2014/-kk/
+/OsdStream.c/1.1/Tue Oct 29 07:19:15 2013/-kk/
+/OsdSynch.c/1.13/Tue Oct 29 07:19:15 2013/-kk/
+/README/1.6/Sun Oct  5 15:52:13 2014/-kk/
+/acpi_func.h/1.4/Tue Oct 29 07:19:15 2013/-kk/
+/files.acpica/1.15/Tue Oct 29 07:19:15 2013/-kk/
 D

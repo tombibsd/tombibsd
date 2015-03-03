@@ -488,13 +488,12 @@ nouveau_clock_create_(struct nouveau_object *parent,
 		if (!strncasecmpz(mode, "disabled", arglen)) {
 			clk->ustate = -1;
 		} else {
-			char save = mode[arglen];
+			char *m = kstrndup(mode, arglen, GFP_KERNEL);
 			long v;
 
-			((char *)mode)[arglen] = '\0';
-			if (!kstrtol(mode, 0, &v))
+			if (!kstrtol(m, 0, &v))
 				nouveau_clock_ustate_update(clk, v);
-			((char *)mode)[arglen] = save;
+			kfree(m);
 		}
 	}
 

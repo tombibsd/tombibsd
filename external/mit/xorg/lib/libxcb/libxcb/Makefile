@@ -60,6 +60,7 @@ INCS=	\
 	xfixes.h \
 	xinerama.h \
 	xinput.h \
+	xkb.h \
 	xproto.h \
 	xselinux.h \
 	xtest.h \

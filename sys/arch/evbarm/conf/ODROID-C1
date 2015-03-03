@@ -171,9 +171,23 @@ options 	MEMSIZE=1024
 # On-board I/O
 amlogicio0	at mainbus?
 
-# On-board 16550 UARTs
-com0		at amlogicio0 port 0
+# On-board UARTs
+amlogiccom0	at amlogicio0 port 0
 options 	CONSADDR=0xc81004c0, CONSPEED=115200
+
+# USB
+dwctwo0		at amlogicio0 port 0
+dwctwo1		at amlogicio0 port 1
+usb*		at dwctwo?
+
+include "dev/usb/usbdevices.config"
+midi*		at midibus?
+
+## USB debugging options
+#options 	USBVERBOSE
+#options 	USB_DEBUG
+#options 	UHUB_DEBUG
+#options 	DWC2_DEBUG
 
 # Pseudo-Devices
 

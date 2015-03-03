@@ -1,12 +1,12 @@
-/Makefile.am/1.1.1.1/Mon Jun 20 05:54:55 2011/-kk/
-/Makefile.in/1.1.1.2/Tue Dec 17 04:03:55 2013/-kk/
-/doscan.c/1.1.1.1/Mon Jun 20 05:54:55 2011/-kk/
-/fscanf.c/1.1.1.1/Mon Jun 20 05:54:55 2011/-kk/
-/fscanffuns.c/1.1.1.2/Tue Dec 17 04:03:55 2013/-kk/
-/scanf.c/1.1.1.1/Mon Jun 20 05:54:55 2011/-kk/
-/sscanf.c/1.1.1.1/Mon Jun 20 05:54:55 2011/-kk/
-/sscanffuns.c/1.1.1.1/Mon Jun 20 05:54:55 2011/-kk/
-/vfscanf.c/1.1.1.1/Mon Jun 20 05:54:55 2011/-kk/
-/vscanf.c/1.1.1.1/Mon Jun 20 05:54:55 2011/-kk/
-/vsscanf.c/1.1.1.1/Mon Jun 20 05:54:55 2011/-kk/
+/Makefile.am/1.1.1.1/Tue Oct 29 07:18:44 2013/-kk/
+/Makefile.in/1.1.1.2/Sun Oct  5 15:52:01 2014/-kk/
+/doscan.c/1.1.1.1/Tue Oct 29 07:18:44 2013/-kk/
+/fscanf.c/1.1.1.1/Tue Oct 29 07:18:44 2013/-kk/
+/fscanffuns.c/1.1.1.2/Sun Oct  5 15:52:01 2014/-kk/
+/scanf.c/1.1.1.1/Tue Oct 29 07:18:44 2013/-kk/
+/sscanf.c/1.1.1.1/Tue Oct 29 07:18:44 2013/-kk/
+/sscanffuns.c/1.1.1.1/Tue Oct 29 07:18:44 2013/-kk/
+/vfscanf.c/1.1.1.1/Tue Oct 29 07:18:44 2013/-kk/
+/vscanf.c/1.1.1.1/Tue Oct 29 07:18:44 2013/-kk/
+/vsscanf.c/1.1.1.1/Tue Oct 29 07:18:44 2013/-kk/
 D

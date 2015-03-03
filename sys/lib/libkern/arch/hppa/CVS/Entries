@@ -1,8 +1,8 @@
-/Makefile.inc/1.12/Tue Mar 25 02:35:43 2014/-kk/
-/bcopy.S/1.14/Mon Jan 31 12:10:58 2011/-kk/
-/memcpy.S/1.1/Thu Jun  6 20:03:38 2002/-kk/
-/memmove.S/1.1/Thu Jun  6 20:03:38 2002/-kk/
-/milli.S/1.1/Thu Jun  6 20:03:39 2002/-kk/
-/prefix.h/1.2/Thu Oct 24 10:28:58 2013/-kk/
-/spcopy.S/1.1/Thu Jun  6 20:03:39 2002/-kk/
+/Makefile.inc/1.12/Sun Oct  5 15:52:15 2014/-kk/
+/bcopy.S/1.14/Tue Oct 29 07:19:17 2013/-kk/
+/memcpy.S/1.1/Tue Oct 29 07:19:17 2013/-kk/
+/memmove.S/1.1/Tue Oct 29 07:19:17 2013/-kk/
+/milli.S/1.1/Tue Oct 29 07:19:17 2013/-kk/
+/prefix.h/1.2/Tue Oct 29 07:19:17 2013/-kk/
+/spcopy.S/1.1/Tue Oct 29 07:19:17 2013/-kk/
 D

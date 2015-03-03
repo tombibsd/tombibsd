@@ -1,7 +1,7 @@
-/Makefile/1.13/Thu May 19 21:40:11 2011/-kk/
-/README.loadkmap/1.2/Mon Jan  5 20:52:27 1998/-kk/
-/ascii_kmap.c/1.7/Thu May 19 21:26:39 2011/-kk/
-/jis_kmap.c/1.6/Thu May 19 21:26:39 2011/-kk/
-/kbdmap.h/1.2/Mon Jan  5 20:52:29 1998/-kk/
-/loadkmap.c/1.10/Thu May 19 21:26:39 2011/-kk/
+/Makefile/1.13/Tue Oct 29 07:19:15 2013/-kk/
+/README.loadkmap/1.2/Tue Oct 29 07:19:15 2013/-kk/
+/ascii_kmap.c/1.7/Tue Oct 29 07:19:15 2013/-kk/
+/jis_kmap.c/1.6/Tue Oct 29 07:19:15 2013/-kk/
+/kbdmap.h/1.2/Tue Oct 29 07:19:15 2013/-kk/
+/loadkmap.c/1.10/Tue Oct 29 07:19:15 2013/-kk/
 D

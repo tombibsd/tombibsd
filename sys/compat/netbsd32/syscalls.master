@@ -1008,7 +1008,7 @@
 			    const netbsd32_charp path, \
 			    int oflags, ... \
 			    mode_t mode); }
-469	STD  		{ int|netbsd32||readlinkat(int fd, \
+469	STD  		{ netbsd32_ssize_t|netbsd32||readlinkat(int fd, \
 			    const netbsd32_charp path, \
 			    netbsd32_charp buf, \
 			    size_t bufsize); }

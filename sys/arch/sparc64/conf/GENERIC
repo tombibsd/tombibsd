@@ -238,11 +238,13 @@ sbus*	at mainbus0				# SBus-based systems
 psycho*	at mainbus0				# PCI-based systems
 schizo*	at mainbus?
 pyro*	at mainbus?
+vpci*	at mainbus0
 central* at mainbus?
 fhc*	at mainbus?
 pci*	at psycho?
 pci*	at schizo?
 pci*	at pyro?
+pci*	at vpci?
 pci*	at ppb?
 ppb*	at pci?
 fhc*	at central?

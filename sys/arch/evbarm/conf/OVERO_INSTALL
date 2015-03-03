@@ -1,0 +1,10 @@
+#	$NetBSD$
+#
+#	OVERO_INSTALL -- OVERO kernel with installation-sized ramdisk
+#
+
+include "arch/evbarm/conf/OVERO"
+include "arch/evbarm/conf/INSTALL"
+
+options BOOTHOWTO=RB_SINGLE
+no makeoptions	DEBUG

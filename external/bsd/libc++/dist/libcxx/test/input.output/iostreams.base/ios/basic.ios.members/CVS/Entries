@@ -1,14 +1,14 @@
-/copyfmt.pass.cpp/1.1.1.2/Fri Oct  3 09:22:10 2014/-kk/
-/fill.pass.cpp/1.1.1.1/Thu Oct 24 10:28:45 2013/-kk/
-/fill_char_type.pass.cpp/1.1.1.1/Thu Oct 24 10:28:45 2013/-kk/
-/imbue.pass.cpp/1.1.1.1/Thu Oct 24 10:28:45 2013/-kk/
-/move.pass.cpp/1.1.1.2/Fri Oct  3 09:22:10 2014/-kk/
-/narow.pass.cpp/1.1.1.1/Thu Oct 24 10:28:45 2013/-kk/
-/rdbuf.pass.cpp/1.1.1.1/Thu Oct 24 10:28:45 2013/-kk/
-/rdbuf_streambuf.pass.cpp/1.1.1.1/Thu Oct 24 10:28:45 2013/-kk/
-/set_rdbuf.pass.cpp/1.1.1.1/Thu Oct 24 10:28:45 2013/-kk/
-/swap.pass.cpp/1.1.1.2/Fri Oct  3 09:22:10 2014/-kk/
-/tie.pass.cpp/1.1.1.1/Thu Oct 24 10:28:45 2013/-kk/
-/tie_ostream.pass.cpp/1.1.1.1/Thu Oct 24 10:28:45 2013/-kk/
-/widen.pass.cpp/1.1.1.1/Thu Oct 24 10:28:45 2013/-kk/
+/copyfmt.pass.cpp/1.1.1.2/Sat Dec 13 01:30:17 2014/-kk/
+/fill.pass.cpp/1.1.1.1/Tue Oct 29 07:17:51 2013/-kk/
+/fill_char_type.pass.cpp/1.1.1.1/Tue Oct 29 07:17:51 2013/-kk/
+/imbue.pass.cpp/1.1.1.1/Tue Oct 29 07:17:51 2013/-kk/
+/move.pass.cpp/1.1.1.2/Sat Dec 13 01:30:17 2014/-kk/
+/narow.pass.cpp/1.1.1.1/Tue Oct 29 07:17:51 2013/-kk/
+/rdbuf.pass.cpp/1.1.1.1/Tue Oct 29 07:17:51 2013/-kk/
+/rdbuf_streambuf.pass.cpp/1.1.1.1/Tue Oct 29 07:17:51 2013/-kk/
+/set_rdbuf.pass.cpp/1.1.1.1/Tue Oct 29 07:17:51 2013/-kk/
+/swap.pass.cpp/1.1.1.2/Sat Dec 13 01:30:17 2014/-kk/
+/tie.pass.cpp/1.1.1.1/Tue Oct 29 07:17:51 2013/-kk/
+/tie_ostream.pass.cpp/1.1.1.1/Tue Oct 29 07:17:51 2013/-kk/
+/widen.pass.cpp/1.1.1.1/Tue Oct 29 07:17:51 2013/-kk/
 D

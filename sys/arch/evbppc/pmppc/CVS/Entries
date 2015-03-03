@@ -1,7 +1,7 @@
-/autoconf.c/1.7/Sun Jul 29 18:05:42 2012/-kk/
-/machdep.c/1.12/Thu Oct 24 10:28:57 2013/-kk/
-/mainbus.c/1.6/Fri Jul  1 19:03:08 2011/-kk/
-/pic_cpc700.c/1.6/Fri Jul  1 19:03:09 2011/-kk/
-/pmppc_locore.S/1.11/Mon Jun 20 19:56:11 2011/-kk/
+/autoconf.c/1.7/Tue Oct 29 07:19:07 2013/-kk/
+/machdep.c/1.12/Tue Oct 29 07:19:07 2013/-kk/
+/mainbus.c/1.6/Tue Oct 29 07:19:07 2013/-kk/
+/pic_cpc700.c/1.6/Tue Oct 29 07:19:07 2013/-kk/
+/pmppc_locore.S/1.11/Tue Oct 29 07:19:07 2013/-kk/
 D/dev////
 D/pci////

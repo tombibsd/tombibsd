@@ -1,9 +1,9 @@
-/Makefile.inc/1.5/Thu Jul 30 20:57:16 2009/-kk/
-/bcmp.S/1.10/Tue Jun  3 03:08:55 2014/-kk/
-/bcopy.S/1.15/Wed Feb  9 18:15:16 2005/-kk/
-/bzero.S/1.12/Wed Feb  9 18:15:16 2005/-kk/
-/index.S/1.14/Wed Feb  9 18:15:16 2005/-kk/
-/rindex.S/1.14/Wed Feb  9 18:15:16 2005/-kk/
-/strncmp.S/1.15/Tue Jun  3 03:08:55 2014/-kk/
-/swab.S/1.14/Tue Jun  3 03:08:55 2014/-kk/
+/Makefile.inc/1.5/Tue Oct 29 07:19:03 2013/-kk/
+/bcmp.S/1.10/Sat Dec 13 01:30:30 2014/-kk/
+/bcopy.S/1.15/Tue Oct 29 07:19:03 2013/-kk/
+/bzero.S/1.12/Tue Oct 29 07:19:03 2013/-kk/
+/index.S/1.14/Tue Oct 29 07:19:03 2013/-kk/
+/rindex.S/1.14/Tue Oct 29 07:19:03 2013/-kk/
+/strncmp.S/1.15/Sat Dec 13 01:30:30 2014/-kk/
+/swab.S/1.14/Sat Dec 13 01:30:30 2014/-kk/
 D

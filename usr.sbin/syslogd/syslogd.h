@@ -151,7 +151,8 @@ char *strndup(const char *str, size_t n);
 #ifdef NDEBUG
 #define DPRINTF(x, ...) (void)0
 #else
-void dbprintf(const char *, const char *, size_t, const char *, ...);
+void dbprintf(const char *, const char *, size_t, const char *, ...)
+    __printflike(4, 5);
 #define DPRINTF(x, ...) /*LINTED null effect */(void)(Debug & (x) \
     ? dbprintf(__FILE__, __func__, __LINE__, __VA_ARGS__) : 0)
 #endif

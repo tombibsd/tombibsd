@@ -40,7 +40,7 @@ struct thread {
     int64_t wakeup_time;
     TAILQ_ENTRY(thread) thread_list;
     ucontext_t ctx;
-    uint32_t flags;
+    int flags;
     int threrrno;
 };
 

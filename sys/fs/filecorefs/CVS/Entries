@@ -1,13 +1,13 @@
-/Makefile/1.1/Mon Dec 23 17:30:40 2002/-kk/
-/filecore.h/1.5/Tue Dec 25 18:33:43 2007/-kk/
-/filecore_bmap.c/1.10/Thu Dec 20 08:03:42 2012/-kk/
-/filecore_extern.h/1.22/Thu Oct 24 10:28:58 2013/-kk/
-/filecore_lookup.c/1.21/Sun Oct 19 16:06:54 2014/-kk/
-/filecore_mount.h/1.6/Sat Dec  3 17:34:43 2005/-kk/
-/filecore_node.c/1.27/Sun Oct 19 16:06:54 2014/-kk/
-/filecore_node.h/1.6/Sun Oct 19 16:06:54 2014/-kk/
-/filecore_utils.c/1.11/Thu Dec 20 08:03:42 2012/-kk/
-/filecore_vfsops.c/1.77/Sun Oct 19 16:06:54 2014/-kk/
-/filecore_vnops.c/1.42/Fri Oct  3 09:09:24 2014/-kk/
-/files.filecorefs/1.4/Wed Oct 29 08:13:26 2014/-kk/
+/Makefile/1.1/Tue Oct 29 07:19:17 2013/-kk/
+/filecore.h/1.5/Tue Oct 29 07:19:17 2013/-kk/
+/filecore_bmap.c/1.10/Tue Oct 29 07:19:17 2013/-kk/
+/filecore_extern.h/1.22/Tue Oct 29 07:19:17 2013/-kk/
+/filecore_lookup.c/1.21/Sat Dec 13 01:30:32 2014/-kk/
+/filecore_mount.h/1.6/Tue Oct 29 07:19:17 2013/-kk/
+/filecore_node.c/1.27/Sat Dec 13 01:30:32 2014/-kk/
+/filecore_node.h/1.6/Sat Dec 13 01:30:32 2014/-kk/
+/filecore_utils.c/1.11/Tue Oct 29 07:19:17 2013/-kk/
+/filecore_vfsops.c/1.77/Sat Dec 13 01:30:32 2014/-kk/
+/filecore_vnops.c/1.42/Sat Dec 13 01:30:32 2014/-kk/
+/files.filecorefs/1.4/Sat Dec 13 01:30:32 2014/-kk/
 D

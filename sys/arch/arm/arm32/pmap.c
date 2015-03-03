@@ -952,9 +952,7 @@ pmap_pte_sync_current(pmap_t pm, pt_entry_t *ptep)
 {
 	if (PMAP_NEEDS_PTE_SYNC && pmap_is_cached(pm))
 		PTE_SYNC(ptep);
-#if ARM_MMU_V7 > 0
-	__asm("dsb":::"memory");
-#endif
+	arm_dsb();
 }
 
 #ifdef PMAP_INCLUDE_PTE_SYNC

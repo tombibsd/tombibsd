@@ -1,0 +1,14 @@
+o CPU version/family/etc?
+
+  cpu_info::ci_signature == CPUID[1].EAX
+
+  shown as "id" in dmesg:
+
+cpu0 at mainbus0 apid 0: Intel(R) Xeon(R) CPU E5-2430L 0 @ 2.00GHz, id 0x206d7
+
+  Confusing...
+
+o Performace monitor feature?
+
+  Architectural Performance Monitoring Leaf
+  CPUID[0xA]

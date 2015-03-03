@@ -47,7 +47,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <uvm/uvm_extern.h>
 
-#define _SGIMIPS_BUS_DMA_PRIVATE
 #include <sys/bus.h>
 #include <machine/intr.h>
 #include <machine/sysconf.h>
@@ -57,7 +56,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <dev/pci/pcidevs.h>
 #include <dev/pci/pciconf.h>
 
-struct sgimips_bus_dma_tag pci_bus_dma_tag;
+struct mips_bus_dma_tag pci_bus_dma_tag;
 
 void
 pci_attach_hook(device_t parent, device_t self, struct pcibus_attach_args *pba)

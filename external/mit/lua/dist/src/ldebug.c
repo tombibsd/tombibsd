@@ -12,8 +12,8 @@
 #include "lprefix.h"
 
 
-#ifndef _KERNEL
 #include <stdarg.h>
+#ifndef _KERNEL
 #include <stddef.h>
 #include <string.h>
 #endif

@@ -1,11 +1,11 @@
-/autoconf.c/1.9/Sat Oct 27 17:18:09 2012/-kk/
-/console.c/1.6/Tue Aug 11 12:38:24 2009/-kk/
-/cpu.c/1.22/Fri Apr 11 02:03:38 2014/-kk/
-/disksubr.c/1.21/Thu Oct 24 10:28:57 2013/-kk/
-/locore_machdep.S/1.4/Sun Dec 11 12:18:51 2005/-kk/
-/machdep.c/1.53/Fri Apr 11 02:03:38 2014/-kk/
-/rtc.c/1.20/Tue Dec  9 04:34:50 2014/-kk/
-/sb1250_icu.c/1.13/Sat Jul  9 16:59:40 2011/-kk/
-/systemsw.c/1.18/Wed Oct 29 08:13:11 2014/-kk/
-/zbbus.c/1.12/Sun Feb 20 07:47:38 2011/-kk/
+/autoconf.c/1.9/Tue Oct 29 07:19:14 2013/-kk/
+/console.c/1.6/Tue Oct 29 07:19:14 2013/-kk/
+/cpu.c/1.22/Sun Oct  5 15:52:11 2014/-kk/
+/disksubr.c/1.21/Tue Oct 29 07:19:14 2013/-kk/
+/locore_machdep.S/1.4/Tue Oct 29 07:19:14 2013/-kk/
+/machdep.c/1.53/Sun Oct  5 15:52:11 2014/-kk/
+/rtc.c/1.20/Sat Dec 13 01:30:30 2014/-kk/
+/sb1250_icu.c/1.13/Tue Oct 29 07:19:14 2013/-kk/
+/systemsw.c/1.18/Sat Dec 13 01:30:30 2014/-kk/
+/zbbus.c/1.12/Tue Oct 29 07:19:14 2013/-kk/
 D

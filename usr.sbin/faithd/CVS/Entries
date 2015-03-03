@@ -1,10 +1,10 @@
-/Makefile/1.5/Fri Nov 26 18:58:43 2010/-kk/
-/README/1.13/Wed Nov 12 13:31:44 2003/-kk/
-/faithd.8/1.29/Thu Mar 15 22:35:03 2012/-kk/
-/faithd.c/1.36/Thu Oct 24 10:29:00 2013/-kk/
-/faithd.h/1.12/Fri Sep 16 15:39:37 2011/-kk/
-/ftp.c/1.19/Fri Nov 26 18:58:43 2010/-kk/
-/prefix.c/1.8/Fri Nov 26 18:58:43 2010/-kk/
-/prefix.h/1.2/Thu May  9 14:24:03 2002/-kk/
-/tcp.c/1.11/Tue Aug 30 21:14:06 2011/-kk/
+/Makefile/1.5/Tue Oct 29 07:19:19 2013/-kk/
+/README/1.13/Tue Oct 29 07:19:19 2013/-kk/
+/faithd.8/1.29/Tue Oct 29 07:19:19 2013/-kk/
+/faithd.c/1.36/Tue Oct 29 07:19:19 2013/-kk/
+/faithd.h/1.12/Tue Oct 29 07:19:19 2013/-kk/
+/ftp.c/1.19/Tue Oct 29 07:19:19 2013/-kk/
+/prefix.c/1.8/Tue Oct 29 07:19:19 2013/-kk/
+/prefix.h/1.2/Tue Oct 29 07:19:19 2013/-kk/
+/tcp.c/1.11/Tue Oct 29 07:19:19 2013/-kk/
 D

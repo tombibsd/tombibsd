@@ -1,8 +1,8 @@
-/Makefile.inc/1.2/Fri Mar 14 04:28:19 2014/-kk/
-/arcbios.c/1.13/Sun Feb 20 08:02:46 2011/-kk/
-/arcbios.h/1.13/Sun Feb 20 08:02:46 2011/-kk/
-/arcbios_calls.S/1.1/Sun Feb 20 08:02:46 2011/-kk/
-/arcbios_tty.c/1.25/Fri Oct  3 09:09:13 2014/-kk/
-/arcbiosvar.h/1.6/Mon Apr 28 20:23:47 2008/-kk/
-/genassym.cf/1.1/Sun Feb 20 08:02:46 2011/-kk/
+/Makefile.inc/1.2/Sun Oct  5 15:52:13 2014/-kk/
+/arcbios.c/1.13/Tue Oct 29 07:19:15 2013/-kk/
+/arcbios.h/1.13/Tue Oct 29 07:19:15 2013/-kk/
+/arcbios_calls.S/1.1/Tue Oct 29 07:19:15 2013/-kk/
+/arcbios_tty.c/1.25/Sat Dec 13 01:30:31 2014/-kk/
+/arcbiosvar.h/1.6/Tue Oct 29 07:19:15 2013/-kk/
+/genassym.cf/1.1/Tue Oct 29 07:19:15 2013/-kk/
 D

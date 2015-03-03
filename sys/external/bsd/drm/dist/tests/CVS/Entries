@@ -1,20 +1,20 @@
-/Makefile.am/1.1.1.2/Fri Jun 19 03:22:25 2009/-kk/
-/auth.c/1.1.1.1/Sat Jul 19 05:30:51 2008/-kk/
-/dristat.c/1.2/Fri Apr 11 02:03:51 2014/-kk/
-/drmstat.c/1.2/Fri Apr 11 02:03:51 2014/-kk/
-/drmtest.c/1.1.1.2/Fri Jun 19 03:22:25 2009/-kk/
-/drmtest.h/1.1.1.2/Fri Jun 19 03:22:25 2009/-kk/
-/gem_basic.c/1.1.1.1/Fri Jun 19 03:22:25 2009/-kk/
-/gem_flink.c/1.1.1.1/Fri Jun 19 03:22:25 2009/-kk/
-/gem_mmap.c/1.1.1.1/Fri Jun 19 03:22:25 2009/-kk/
-/gem_readwrite.c/1.1.1.1/Fri Jun 19 03:22:25 2009/-kk/
-/getclient.c/1.1.1.1/Sat Jul 19 05:30:51 2008/-kk/
-/getstats.c/1.1.1.1/Sat Jul 19 05:30:51 2008/-kk/
-/getversion.c/1.1.1.2/Fri Jun 19 03:22:25 2009/-kk/
-/lock.c/1.1.1.1/Sat Jul 19 05:30:51 2008/-kk/
-/openclose.c/1.1.1.1/Sat Jul 19 05:30:51 2008/-kk/
-/setversion.c/1.1.1.2/Fri Jun 19 03:22:25 2009/-kk/
-/updatedraw.c/1.1.1.2/Fri Jun 19 03:22:25 2009/-kk/
+/Makefile.am/1.1.1.2/Tue Oct 29 07:19:17 2013/-kk/
+/auth.c/1.1.1.1/Tue Oct 29 07:19:17 2013/-kk/
+/dristat.c/1.2/Sun Oct  5 15:52:14 2014/-kk/
+/drmstat.c/1.2/Sun Oct  5 15:52:14 2014/-kk/
+/drmtest.c/1.1.1.2/Tue Oct 29 07:19:17 2013/-kk/
+/drmtest.h/1.1.1.2/Tue Oct 29 07:19:17 2013/-kk/
+/gem_basic.c/1.1.1.1/Tue Oct 29 07:19:17 2013/-kk/
+/gem_flink.c/1.1.1.1/Tue Oct 29 07:19:17 2013/-kk/
+/gem_mmap.c/1.1.1.1/Tue Oct 29 07:19:17 2013/-kk/
+/gem_readwrite.c/1.1.1.1/Tue Oct 29 07:19:17 2013/-kk/
+/getclient.c/1.1.1.1/Tue Oct 29 07:19:17 2013/-kk/
+/getstats.c/1.1.1.1/Tue Oct 29 07:19:17 2013/-kk/
+/getversion.c/1.1.1.2/Tue Oct 29 07:19:17 2013/-kk/
+/lock.c/1.1.1.1/Tue Oct 29 07:19:17 2013/-kk/
+/openclose.c/1.1.1.1/Tue Oct 29 07:19:17 2013/-kk/
+/setversion.c/1.1.1.2/Tue Oct 29 07:19:17 2013/-kk/
+/updatedraw.c/1.1.1.2/Tue Oct 29 07:19:17 2013/-kk/
 D/modeprint////
 D/modetest////
 D/ttmtest////

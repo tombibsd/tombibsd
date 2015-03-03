@@ -1,7 +1,7 @@
-/Makefile/1.23/Thu Oct 22 22:50:35 2009/-kk/
-/inetd.8/1.57/Mon Apr 25 22:12:05 2011/-kk/
-/inetd.c/1.122/Sat Apr 19 05:37:11 2014/-kk/
-/ipsec.c/1.4/Wed Jan  4 16:09:43 2012/-kk/
-/ipsec.h/1.1/Mon Jan 31 14:28:20 2000/-kk/
-/pathnames.h/1.7/Thu Aug  7 11:25:22 2003/-kk/
+/Makefile/1.23/Tue Oct 29 07:19:19 2013/-kk/
+/inetd.8/1.57/Tue Oct 29 07:19:19 2013/-kk/
+/inetd.c/1.122/Sun Oct  5 15:52:22 2014/-kk/
+/ipsec.c/1.4/Tue Oct 29 07:19:19 2013/-kk/
+/ipsec.h/1.1/Tue Oct 29 07:19:19 2013/-kk/
+/pathnames.h/1.7/Tue Oct 29 07:19:19 2013/-kk/
 D

@@ -97,6 +97,10 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <uvm/uvm_extern.h>
 
+#if defined(__mips_o32) && defined(MIPS3)
+#define NEED_64BIT_ASM
+#endif
+
 #define	__C(A,B)	__CONCAT(A,B)
 #define	__S(S)		__STRING(S)
 
@@ -487,12 +491,12 @@ __BS(unmap)(void *v, bus_space_handle_t h, bus_size_t size, int acct)
 		printf("\n");
 #ifdef CHIP_W1_BUS_START
 		printf("%s: sys window[1]=0x%lx-0x%lx\n",
-		    __S(__BS(map)), (u_long)CHIP_W1_SYS_START(v),
+		    __S(__BS(unmap)), (u_long)CHIP_W1_SYS_START(v),
 		    (u_long)CHIP_W1_SYS_END(v));
 #endif
 #ifdef CHIP_W2_BUS_START
 		printf("%s: sys window[2]=0x%lx-0x%lx\n",
-		    __S(__BS(map)), (u_long)CHIP_W2_SYS_START(v),
+		    __S(__BS(unmap)), (u_long)CHIP_W2_SYS_START(v),
 		    (u_long)CHIP_W2_SYS_END(v));
 #endif
 #ifdef CHIP_W3_BUS_START
@@ -518,6 +522,9 @@ __BS(unmap)(void *v, bus_space_handle_t h, bus_size_t size, int acct)
 #endif
 	}	
 #endif /* CHIP_EXTENT */
+#if !defined(_LP64) || defined(CHIP_EXTENT)
+	__USE(addr);
+#endif
 }
 
 static int
@@ -734,7 +741,11 @@ __BS(read_8)(void *v, bus_space_handle_t h, bus_size_t off)
         h += CHIP_OFF64(off);
         shift = (h & (CHIP_ACCESS_SIZE - 1)) * 8;
         ptr = (void *)(h & ~((bus_space_handle_t)(CHIP_ACCESS_SIZE - 1)));
+#ifdef NEED_64BIT_ASM
+	r =  CHIP_SWAP64(mips3_ld(ptr) >> shift);
+#else
 	r =  CHIP_SWAP64(*ptr >> shift);
+#endif
 
 	return r;
 }
@@ -840,7 +851,11 @@ __BS(write_8)(void *v, bus_space_handle_t h, bus_size_t off, uint64_t val)
         h += CHIP_OFF64(off);
         shift = (h & (CHIP_ACCESS_SIZE - 1)) * 8;
         ptr = (void *)(h & ~((bus_space_handle_t)(CHIP_ACCESS_SIZE - 1)));
+#ifdef NEED_64BIT_ASM
+	mips3_sd(ptr, CHIP_SWAP64(val) << shift);
+#else
 	*ptr = CHIP_SWAP64(val) << shift;
+#endif
 }
 
 #define CHIP_write_multi_N(BYTES,TYPE)					\
@@ -980,7 +995,11 @@ __BS(read_stream_8)(void *v, bus_space_handle_t h, bus_size_t off)
 	volatile uint64_t *ptr;
 
 	ptr = (void *)(intptr_t)(h + CHIP_OFF64(off));
+#ifdef NEED_64BIT_ASM
+	return mips3_ld(ptr);
+#else
 	return *ptr;
+#endif
 }
 
 #define CHIP_read_multi_stream_N(BYTES,TYPE)				\
@@ -1065,7 +1084,11 @@ __BS(write_stream_8)(void *v, bus_space_handle_t h, bus_size_t off,
 	volatile uint64_t *ptr;
 
 	ptr = (void *)(intptr_t)(h + CHIP_OFF64(off));
+#ifdef NEED_64BIT_ASM
+	mips3_sd(ptr, val);
+#else
 	*ptr = val;
+#endif
 }
 
 #define CHIP_write_multi_stream_N(BYTES,TYPE)				\

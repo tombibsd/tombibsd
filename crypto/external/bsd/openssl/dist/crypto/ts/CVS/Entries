@@ -1,14 +1,14 @@
-/Makefile/1.1.1.2/Sun Jun  5 14:59:49 2011/-kk/
-/ts.h/1.1.1.2/Thu Jul 26 15:03:25 2012/-kk/
-/ts_asn1.c/1.1.1.1/Sun Jul 19 23:04:57 2009/-kk/
-/ts_conf.c/1.1.1.1/Sun Jul 19 23:04:58 2009/-kk/
-/ts_err.c/1.1.1.1/Sun Jul 19 23:04:59 2009/-kk/
-/ts_lib.c/1.1.1.1/Sun Jul 19 23:04:59 2009/-kk/
-/ts_req_print.c/1.1.1.1/Sun Jul 19 23:04:58 2009/-kk/
-/ts_req_utils.c/1.1.1.1/Sun Jul 19 23:04:59 2009/-kk/
-/ts_rsp_print.c/1.1.1.1/Sun Jul 19 23:04:59 2009/-kk/
-/ts_rsp_sign.c/1.1.1.2/Mon Jan 26 07:07:16 2015/-kk/
-/ts_rsp_utils.c/1.1.1.1/Sun Jul 19 23:05:00 2009/-kk/
-/ts_rsp_verify.c/1.1.1.3/Mon Jun  9 00:09:04 2014/-kk/
-/ts_verify_ctx.c/1.1.1.2/Sun Jun  5 14:59:51 2011/-kk/
+/Makefile/1.1.1.2/Tue Oct 29 07:17:43 2013/-kk/
+/ts.h/1.1.1.2/Tue Oct 29 07:17:43 2013/-kk/
+/ts_asn1.c/1.1.1.1/Tue Oct 29 07:17:43 2013/-kk/
+/ts_conf.c/1.1.1.1/Tue Oct 29 07:17:43 2013/-kk/
+/ts_err.c/1.1.1.1/Tue Oct 29 07:17:43 2013/-kk/
+/ts_lib.c/1.1.1.1/Tue Oct 29 07:17:43 2013/-kk/
+/ts_req_print.c/1.1.1.1/Tue Oct 29 07:17:43 2013/-kk/
+/ts_req_utils.c/1.1.1.1/Tue Oct 29 07:17:43 2013/-kk/
+/ts_rsp_print.c/1.1.1.1/Tue Oct 29 07:17:43 2013/-kk/
+/ts_rsp_sign.c/1.1.1.2/Fri Feb 20 07:39:35 2015/-kk/
+/ts_rsp_utils.c/1.1.1.1/Tue Oct 29 07:17:43 2013/-kk/
+/ts_rsp_verify.c/1.1.1.3/Sat Dec 13 01:30:16 2014/-kk/
+/ts_verify_ctx.c/1.1.1.2/Tue Oct 29 07:17:43 2013/-kk/
 D

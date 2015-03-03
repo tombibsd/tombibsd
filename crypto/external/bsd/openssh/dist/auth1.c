@@ -41,6 +41,7 @@ __RCSID("$NetBSD$");
 #endif
 #include "monitor_wrap.h"
 #include "buffer.h"
+#include "pfilter.h"
 
 /* import */
 extern ServerOptions options;
@@ -445,6 +446,7 @@ do_authentication(Authctxt *authctxt)
 	else {
 		debug("do_authentication: invalid user %s", user);
 		authctxt->pw = fakepw();
+		pfilter_notify(1);
 	}
 
 	/* Configuration may have changed as a result of Match */

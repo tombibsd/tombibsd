@@ -262,6 +262,10 @@ nouveau_bios_shadow_acpi(struct nouveau_bios *bios)
 	}
 }
 
+#ifdef __NetBSD__
+#  define	__iomem	__pci_rom_iomem
+#endif
+
 static void
 nouveau_bios_shadow_pci(struct nouveau_bios *bios)
 {
@@ -299,6 +303,10 @@ nouveau_bios_shadow_platform(struct nouveau_bios *bios)
 		}
 	}
 }
+
+#ifdef __NetBSD__
+#  undef	__iomem
+#endif
 
 static int
 nouveau_bios_score(struct nouveau_bios *bios, const bool writeable)

@@ -35,6 +35,8 @@
 #include <sys/cdefs.h>
 #include <sys/systm.h>
 
+#include <linux/string.h>
+
 /*
  * XXX This is bollocks, and is wrong on various architectures (should
  * work for x86; who knows what else), but bus_space_barrier won't work

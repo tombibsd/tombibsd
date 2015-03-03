@@ -1,8 +1,8 @@
-/futex.cc/1.1.1.1/Sat Mar  1 08:41:18 2014/-kk/
-/futex.h/1.1.1.1/Sat Mar  1 08:41:18 2014/-kk/
-/futex_bits.h/1.1.1.2/Tue Jun  3 03:07:00 2014/-kk/
-/rwlock.cc/1.1.1.1/Sat Mar  1 08:41:18 2014/-kk/
-/rwlock.h/1.1.1.1/Sat Mar  1 08:41:18 2014/-kk/
+/futex.cc/1.1.1.1/Sun Oct  5 15:51:55 2014/-kk/
+/futex.h/1.1.1.1/Sun Oct  5 15:51:55 2014/-kk/
+/futex_bits.h/1.1.1.2/Sat Dec 13 01:30:27 2014/-kk/
+/rwlock.cc/1.1.1.1/Sun Oct  5 15:51:55 2014/-kk/
+/rwlock.h/1.1.1.1/Sun Oct  5 15:51:55 2014/-kk/
 D/alpha////
 D/powerpc////
 D/sh////

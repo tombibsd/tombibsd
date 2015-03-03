@@ -111,7 +111,7 @@ pckbc_hpc_attach(device_t parent, device_t self, void *aux)
 
 		t = malloc(sizeof(struct pckbc_internal), M_DEVBUF,
 		    M_WAITOK | M_ZERO);
-		t->t_iot = haa->ha_st;
+		t->t_iot = hpc_memt;
 		t->t_ioh_d = ioh_d;
 		t->t_ioh_c = ioh_c;
 		t->t_addr = haa->ha_sh;

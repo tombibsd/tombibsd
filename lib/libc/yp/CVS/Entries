@@ -1,14 +1,14 @@
-/Makefile.inc/1.15/Fri Mar  2 17:27:49 2012/-kk/
-/local.h/1.4/Tue Mar 20 16:30:26 2012/-kk/
-/xdryp.c/1.32/Tue Mar 20 16:30:26 2012/-kk/
-/yp_all.c/1.13/Mon Jun 25 22:32:46 2012/-kk/
-/yp_first.c/1.16/Mon Jun 25 22:32:46 2012/-kk/
-/yp_maplist.c/1.13/Mon Jun 25 22:32:46 2012/-kk/
-/yp_master.c/1.15/Mon Jun 25 22:32:46 2012/-kk/
-/yp_match.c/1.19/Tue Mar 20 16:30:26 2012/-kk/
-/yp_order.c/1.14/Mon Jun 25 22:32:46 2012/-kk/
-/ypclnt.3/1.26/Sun Mar  4 11:52:32 2012/-kk/
-/yperr_string.c/1.8/Mon Jun 25 22:32:46 2012/-kk/
-/yplib.c/1.46/Fri Oct  3 09:57:26 2014/-kk/
-/ypprot_err.c/1.6/Mon Jun 25 22:32:46 2012/-kk/
+/Makefile.inc/1.15/Tue Oct 29 07:19:04 2013/-kk/
+/local.h/1.4/Tue Oct 29 07:19:04 2013/-kk/
+/xdryp.c/1.32/Tue Oct 29 07:19:04 2013/-kk/
+/yp_all.c/1.13/Tue Oct 29 07:19:04 2013/-kk/
+/yp_first.c/1.16/Tue Oct 29 07:19:04 2013/-kk/
+/yp_maplist.c/1.13/Tue Oct 29 07:19:04 2013/-kk/
+/yp_master.c/1.15/Tue Oct 29 07:19:04 2013/-kk/
+/yp_match.c/1.19/Tue Oct 29 07:19:04 2013/-kk/
+/yp_order.c/1.14/Tue Oct 29 07:19:04 2013/-kk/
+/ypclnt.3/1.26/Tue Oct 29 07:19:04 2013/-kk/
+/yperr_string.c/1.8/Tue Oct 29 07:19:04 2013/-kk/
+/yplib.c/1.46/Sat Dec 13 01:30:30 2014/-kk/
+/ypprot_err.c/1.6/Tue Oct 29 07:19:04 2013/-kk/
 D

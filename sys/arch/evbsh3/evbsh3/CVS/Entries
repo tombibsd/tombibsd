@@ -1,8 +1,8 @@
-/autoconf.c/1.11/Sun Jul 29 18:05:42 2012/-kk/
-/bus_dma.c/1.4/Thu Feb  5 08:40:59 2015/-kk/
-/conf.c/1.11/Sun Dec 11 12:17:13 2005/-kk/
-/kloader_machdep.c/1.1/Tue Apr  6 15:54:30 2010/-kk/
-/locore.S/1.11/Sat Oct  7 01:21:47 2006/-kk/
-/machdep.c/1.75/Sun Jun 22 14:32:02 2014/-kk/
-/mainbus.c/1.9/Sat Oct 27 17:17:51 2012/-kk/
+/autoconf.c/1.11/Tue Oct 29 07:19:07 2013/-kk/
+/bus_dma.c/1.4/Fri Feb 20 07:39:41 2015/-kk/
+/conf.c/1.11/Tue Oct 29 07:19:07 2013/-kk/
+/kloader_machdep.c/1.1/Tue Oct 29 07:19:07 2013/-kk/
+/locore.S/1.11/Tue Oct 29 07:19:07 2013/-kk/
+/machdep.c/1.75/Sat Dec 13 01:30:30 2014/-kk/
+/mainbus.c/1.9/Tue Oct 29 07:19:07 2013/-kk/
 D

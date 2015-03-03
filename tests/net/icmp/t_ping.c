@@ -60,7 +60,7 @@ ATF_TC_HEAD(simpleping, tc)
 {
 
 	atf_tc_set_md_var(tc, "descr", "check that kernel responds to ping");
-	atf_tc_set_md_var(tc, "timeout", "2");
+	atf_tc_set_md_var(tc, "timeout", "20");
 }
 
 ATF_TC_BODY(simpleping, tc)
@@ -316,7 +316,7 @@ ATF_TC_HEAD(ping_of_death, tc)
 {
 
 	atf_tc_set_md_var(tc, "descr", "send a \"ping of death\"");
-	atf_tc_set_md_var(tc, "timeout", "2");
+	atf_tc_set_md_var(tc, "timeout", "20");
 }
 
 ATF_TC_BODY(ping_of_death, tc)

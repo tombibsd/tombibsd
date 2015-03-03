@@ -1,14 +1,14 @@
-/asc_vsbus.c/1.43/Sat Oct 27 17:18:13 2012/-kk/
-/dz_vsbus.c/1.43/Thu Jun 28 13:58:21 2012/-kk/
-/hdc9224.c/1.57/Mon Jan 12 06:48:32 2015/-kk/
-/hdc9224.h/1.6/Sun Dec 11 12:19:37 2005/-kk/
-/lcg.c/1.2/Thu Dec 18 22:46:53 2014/-kk/
-/leds.c/1.9/Tue Dec 14 23:31:16 2010/-kk/
-/ncr.c/1.48/Tue Dec 14 23:31:16 2010/-kk/
-/smg.c/1.55/Wed Jan 11 21:26:13 2012/-kk/
-/spx.c/1.8/Fri Apr 11 02:03:39 2014/-kk/
-/tc_vsbus.c/1.7/Sun Jun  5 16:12:50 2011/-kk/
-/vsaudio.c/1.1/Fri Dec 19 04:44:13 2014/-kk/
-/vsbus.c/1.60/Thu Jun 28 13:58:21 2012/-kk/
-/vsbus_dma.c/1.16/Tue Dec 14 23:31:17 2010/-kk/
+/asc_vsbus.c/1.43/Tue Oct 29 07:19:14 2013/-kk/
+/dz_vsbus.c/1.43/Tue Oct 29 07:19:14 2013/-kk/
+/hdc9224.c/1.57/Mon Jan 12 15:00:44 2015/-kk/
+/hdc9224.h/1.6/Tue Oct 29 07:19:14 2013/-kk/
+/lcg.c/1.2/Sat Dec 27 05:17:33 2014/-kk/
+/leds.c/1.9/Tue Oct 29 07:19:14 2013/-kk/
+/ncr.c/1.48/Tue Oct 29 07:19:14 2013/-kk/
+/smg.c/1.55/Tue Oct 29 07:19:14 2013/-kk/
+/spx.c/1.8/Sun Oct  5 15:52:12 2014/-kk/
+/tc_vsbus.c/1.7/Tue Oct 29 07:19:14 2013/-kk/
+/vsaudio.c/1.1/Sat Dec 27 05:17:33 2014/-kk/
+/vsbus.c/1.60/Tue Oct 29 07:19:14 2013/-kk/
+/vsbus_dma.c/1.16/Tue Oct 29 07:19:14 2013/-kk/
 D

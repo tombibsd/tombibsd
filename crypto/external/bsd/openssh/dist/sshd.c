@@ -628,6 +628,8 @@ privsep_preauth_child(void)
 	explicit_bzero(pw->pw_passwd, strlen(pw->pw_passwd));
 	endpwent();
 
+	pfilter_init();
+
 	/* Change our root directory */
 	if (chroot(_PATH_PRIVSEP_CHROOT_DIR) == -1)
 		fatal("chroot(\"%s\"): %s", _PATH_PRIVSEP_CHROOT_DIR,

@@ -920,7 +920,8 @@ unp_sockaddr(struct socket *so, struct mbuf *nam)
  * what it calls "abstract" unix sockets.
  */
 static struct sockaddr_un *
-makeun(struct mbuf *nam, size_t *addrlen) {
+makeun(struct mbuf *nam, size_t *addrlen)
+{
 	struct sockaddr_un *sun;
 
 	*addrlen = nam->m_len + 1;

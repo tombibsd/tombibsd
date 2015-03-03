@@ -1,7 +1,7 @@
-/autoconf.c/1.10/Sat Oct 27 17:18:03 2012/-kk/
-/clock_machdep.c/1.6/Sat Feb 19 10:46:29 2011/-kk/
-/conf.c/1.14/Wed Feb  2 04:21:07 2011/-kk/
-/locore.S/1.11/Sat Feb 19 10:46:29 2011/-kk/
-/machdep.c/1.57/Tue Nov 12 02:18:40 2013/-kk/
-/mainbus.c/1.9/Sun Jun  5 17:03:18 2011/-kk/
+/autoconf.c/1.10/Tue Oct 29 07:19:14 2013/-kk/
+/clock_machdep.c/1.6/Tue Oct 29 07:19:14 2013/-kk/
+/conf.c/1.14/Tue Oct 29 07:19:14 2013/-kk/
+/locore.S/1.11/Tue Oct 29 07:19:14 2013/-kk/
+/machdep.c/1.57/Sun Oct  5 15:52:11 2014/-kk/
+/mainbus.c/1.9/Tue Oct 29 07:19:14 2013/-kk/
 D

@@ -1,7 +1,7 @@
-/ahc_isa.c/1.40/Wed Oct 29 08:13:03 2014/-kk/
-/cmos.c/1.11/Fri Oct  3 09:09:01 2014/-kk/
-/isapnp_machdep.c/1.17/Fri Jul  1 18:11:24 2011/-kk/
-/lms.c/1.56/Fri Jul  1 18:11:24 2011/-kk/
-/mms.c/1.53/Fri Jul  1 18:11:24 2011/-kk/
-/nvram.h/1.8/Sun Dec 11 12:17:43 2005/-kk/
+/ahc_isa.c/1.40/Sat Dec 13 01:30:30 2014/-kk/
+/cmos.c/1.11/Sat Dec 13 01:30:30 2014/-kk/
+/isapnp_machdep.c/1.17/Tue Oct 29 07:19:13 2013/-kk/
+/lms.c/1.56/Tue Oct 29 07:19:13 2013/-kk/
+/mms.c/1.53/Tue Oct 29 07:19:13 2013/-kk/
+/nvram.h/1.8/Tue Oct 29 07:19:13 2013/-kk/
 D

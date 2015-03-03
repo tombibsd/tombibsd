@@ -444,6 +444,7 @@ static inline void
 pci_unmap_rom(struct pci_dev *pdev, void __pci_rom_iomem *vaddr __unused)
 {
 
+	/* XXX Disable the ROM address decoder.  */
 	KASSERT(ISSET(pdev->pd_kludges, NBPCI_KLUDGE_MAP_ROM));
 	KASSERT(vaddr == pdev->pd_rom_vaddr);
 	bus_space_unmap(pdev->pd_rom_bst, pdev->pd_rom_bsh, pdev->pd_rom_size);
@@ -508,6 +509,48 @@ pci_map_rom(struct pci_dev *pdev, size_t *sizep)
 	*sizep = size;
 	pdev->pd_rom_vaddr = bus_space_vaddr(pdev->pd_rom_bst, bsh);
 	return pdev->pd_rom_vaddr;
+}
+
+static inline void __pci_rom_iomem *
+pci_platform_rom(struct pci_dev *pdev __unused, size_t *sizep)
+{
+
+	*sizep = 0;
+	return NULL;
+}
+
+static inline int
+pci_enable_rom(struct pci_dev *pdev)
+{
+	const pci_chipset_tag_t pc = pdev->pd_pa.pa_pc;
+	const pcitag_t tag = pdev->pd_pa.pa_tag;
+	pcireg_t addr;
+	int s;
+
+	/* XXX Don't do anything if the ROM isn't there.  */
+
+	s = splhigh();
+	addr = pci_conf_read(pc, tag, PCI_MAPREG_ROM);
+	addr |= PCI_MAPREG_ROM_ENABLE;
+	pci_conf_write(pc, tag, PCI_MAPREG_ROM, addr);
+	splx(s);
+
+	return 0;
+}
+
+static inline void
+pci_disable_rom(struct pci_dev *pdev)
+{
+	const pci_chipset_tag_t pc = pdev->pd_pa.pa_pc;
+	const pcitag_t tag = pdev->pd_pa.pa_tag;
+	pcireg_t addr;
+	int s;
+
+	s = splhigh();
+	addr = pci_conf_read(pc, tag, PCI_MAPREG_ROM);
+	addr &= ~(pcireg_t)PCI_MAPREG_ROM_ENABLE;
+	pci_conf_write(pc, tag, PCI_MAPREG_ROM, addr);
+	splx(s);
 }
 
 static inline bus_addr_t

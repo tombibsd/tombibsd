@@ -1,10 +1,10 @@
-/Makefile/1.23/Sat Sep 10 18:34:54 2011/-kk/
-/fstat.1/1.33/Wed Dec 25 07:37:52 2013/-kk/
-/fstat.c/1.108/Thu Feb 27 08:56:23 2014/-kk/
-/fstat.h/1.9/Sun Apr 12 06:36:12 2009/-kk/
-/isofs.c/1.7/Sun Apr 12 06:36:12 2009/-kk/
-/misc.c/1.14/Fri Oct  3 09:26:28 2014/-kk/
-/ntfs.c/1.13/Wed Oct 29 08:13:37 2014/-kk/
-/ptyfs.c/1.6/Sun Apr 12 06:36:12 2009/-kk/
-/tmpfs.c/1.9/Sun May 29 01:00:50 2011/-kk/
+/Makefile/1.23/Tue Oct 29 07:19:19 2013/-kk/
+/fstat.1/1.33/Sun Oct  5 15:52:21 2014/-kk/
+/fstat.c/1.108/Sun Oct  5 15:52:21 2014/-kk/
+/fstat.h/1.9/Tue Oct 29 07:19:19 2013/-kk/
+/isofs.c/1.7/Tue Oct 29 07:19:19 2013/-kk/
+/misc.c/1.14/Sat Dec 13 01:30:36 2014/-kk/
+/ntfs.c/1.13/Sat Dec 13 01:30:36 2014/-kk/
+/ptyfs.c/1.6/Tue Oct 29 07:19:19 2013/-kk/
+/tmpfs.c/1.9/Tue Oct 29 07:19:19 2013/-kk/
 D

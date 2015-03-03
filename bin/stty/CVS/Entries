@@ -1,11 +1,11 @@
-/Makefile/1.11/Wed Apr  4 10:59:44 2012/-kk/
-/cchar.c/1.16/Mon Oct 16 00:37:55 2006/-kk/
-/extern.h/1.13/Thu Oct 24 10:28:41 2013/-kk/
-/gfmt.c/1.17/Mon Aug 29 14:51:19 2011/-kk/
-/key.c/1.21/Thu Oct 24 10:28:41 2013/-kk/
-/modes.c/1.17/Mon Oct 16 00:37:55 2006/-kk/
-/print.c/1.23/Thu Oct 24 10:28:41 2013/-kk/
-/stty.1/1.41/Wed Jun 20 14:19:39 2012/-kk/
-/stty.c/1.23/Thu Oct 24 10:28:41 2013/-kk/
-/stty.h/1.11/Thu Oct 24 10:28:41 2013/-kk/
+/Makefile/1.11/Tue Oct 29 07:17:41 2013/-kk/
+/cchar.c/1.16/Tue Oct 29 07:17:41 2013/-kk/
+/extern.h/1.13/Tue Oct 29 07:17:41 2013/-kk/
+/gfmt.c/1.17/Tue Oct 29 07:17:41 2013/-kk/
+/key.c/1.21/Tue Oct 29 07:17:41 2013/-kk/
+/modes.c/1.17/Tue Oct 29 07:17:41 2013/-kk/
+/print.c/1.23/Tue Oct 29 07:17:41 2013/-kk/
+/stty.1/1.41/Tue Oct 29 07:17:41 2013/-kk/
+/stty.c/1.23/Tue Oct 29 07:17:41 2013/-kk/
+/stty.h/1.11/Tue Oct 29 07:17:41 2013/-kk/
 D

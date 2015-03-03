@@ -1,10 +1,10 @@
-/autoconf.c/1.27/Sat Oct 27 17:17:57 2012/-kk/
-/bus_space.c/1.19/Fri Jan 27 18:52:57 2012/-kk/
-/clock_machdep.c/1.5/Mon Apr 28 20:23:22 2008/-kk/
-/console.c/1.15/Wed Mar 18 10:22:30 2009/-kk/
-/debug.c/1.11/Mon Apr 28 20:23:22 2008/-kk/
-/kloader_machdep.c/1.14/Mon Apr 28 20:23:22 2008/-kk/
-/locore.S/1.12/Mon Apr 28 20:23:22 2008/-kk/
-/machdep.c/1.77/Fri Apr 11 02:03:30 2014/-kk/
-/mainbus.c/1.20/Sat Apr  4 23:45:24 2009/-kk/
+/autoconf.c/1.27/Tue Oct 29 07:19:13 2013/-kk/
+/bus_space.c/1.19/Tue Oct 29 07:19:13 2013/-kk/
+/clock_machdep.c/1.5/Tue Oct 29 07:19:13 2013/-kk/
+/console.c/1.15/Tue Oct 29 07:19:13 2013/-kk/
+/debug.c/1.11/Tue Oct 29 07:19:13 2013/-kk/
+/kloader_machdep.c/1.14/Tue Oct 29 07:19:13 2013/-kk/
+/locore.S/1.12/Tue Oct 29 07:19:13 2013/-kk/
+/machdep.c/1.77/Sun Oct  5 15:52:10 2014/-kk/
+/mainbus.c/1.20/Tue Oct 29 07:19:13 2013/-kk/
 D

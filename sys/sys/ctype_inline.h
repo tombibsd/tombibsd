@@ -66,7 +66,7 @@
 #define _toupper(c)	((c) - 'a' + 'A')
 #endif
 
-#if defined(_ISO_C99_SOURCE) || (_POSIX_C_SOURCE - 0) > 200112L || \
+#if defined(_ISOC99_SOURCE) || (_POSIX_C_SOURCE - 0) > 200112L || \
     (_XOPEN_SOURCE - 0) > 600 || defined(_NETBSD_SOURCE)
 #define	isblank(c)	((int)((_ctype_tab_ + 1)[(c)] & _CTYPE_BL))
 #endif

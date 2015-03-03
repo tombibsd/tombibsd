@@ -1,12 +1,12 @@
-/gbus.c/1.22/Tue Jun 14 15:34:23 2011/-kk/
-/gbusreg.h/1.2/Mon Apr 28 20:23:12 2008/-kk/
-/gbusvar.h/1.3/Fri Jul  1 19:19:50 2011/-kk/
-/kftxx.c/1.16/Tue Jun 14 15:34:23 2011/-kk/
-/kftxxreg.h/1.5/Wed Jul  8 00:45:08 1998/-kk/
-/kftxxvar.h/1.6/Mon Feb  6 02:14:16 2012/-kk/
-/mcclock_tlsb.c/1.17/Fri Jul  1 19:19:51 2011/-kk/
-/tlsb.c/1.38/Fri Apr 11 02:03:26 2014/-kk/
-/tlsbmem.c/1.11/Tue Jun 14 15:34:23 2011/-kk/
-/tlsbreg.h/1.6/Mon Feb  6 02:14:16 2012/-kk/
-/tlsbvar.h/1.7/Mon Feb  6 02:14:16 2012/-kk/
+/gbus.c/1.22/Tue Oct 29 07:19:06 2013/-kk/
+/gbusreg.h/1.2/Tue Oct 29 07:19:06 2013/-kk/
+/gbusvar.h/1.3/Tue Oct 29 07:19:06 2013/-kk/
+/kftxx.c/1.16/Tue Oct 29 07:19:06 2013/-kk/
+/kftxxreg.h/1.5/Tue Oct 29 07:19:06 2013/-kk/
+/kftxxvar.h/1.6/Tue Oct 29 07:19:06 2013/-kk/
+/mcclock_tlsb.c/1.17/Tue Oct 29 07:19:06 2013/-kk/
+/tlsb.c/1.38/Sun Oct  5 15:52:08 2014/-kk/
+/tlsbmem.c/1.11/Tue Oct 29 07:19:06 2013/-kk/
+/tlsbreg.h/1.6/Tue Oct 29 07:19:06 2013/-kk/
+/tlsbvar.h/1.7/Tue Oct 29 07:19:06 2013/-kk/
 D

@@ -210,9 +210,13 @@ cpu_icache_nlines(int node)
 static int
 cpu_icache_associativity(int node)
 {
-	if (CPU_ISSUN4V)
-		return cpu_cache_info_sun4v("instn", 1, "associativity");
-	else
+	if (CPU_ISSUN4V) {
+		int val;
+		val = cpu_cache_info_sun4v("instn", 1, "associativity");
+		if (val == 0)
+			val = 1;
+		return val;
+	} else
 		return prom_getpropint(node, "icache-associativity", 1);
 }
 
@@ -246,9 +250,13 @@ cpu_dcache_nlines(int node)
 static int
 cpu_dcache_associativity(int node)
 {
-	if (CPU_ISSUN4V)
-		return cpu_cache_info_sun4v("data", 1, "associativity");
-	else 
+	if (CPU_ISSUN4V) {
+		int val;
+		val = cpu_cache_info_sun4v("data", 1, "associativity");
+		if (val == 0)
+			val = 1;
+		return val;
+	} else
 		return prom_getpropint(node, "dcache-associativity", 1);
 }
 
@@ -282,9 +290,13 @@ cpu_ecache_nlines(int node)
 static int
 cpu_ecache_associativity(int node)
 {
-	if (CPU_ISSUN4V)
-		return cpu_cache_info_sun4v(NULL, 2, "associativity");
-	else
+	if (CPU_ISSUN4V) {
+		int val;
+		val = cpu_cache_info_sun4v(NULL, 2, "associativity");
+		if (val == 0)
+			val = 1;
+		return val;
+	} else
 		return prom_getpropint(node, "ecache-associativity", 1);
 }
 

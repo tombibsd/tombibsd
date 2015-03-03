@@ -1,9 +1,9 @@
-/files.gpio/1.10/Sun Nov 13 12:33:00 2011/-kk/
-/gpio.c/1.57/Fri Oct  3 09:09:13 2014/-kk/
-/gpioiic.c/1.6/Sat Oct 27 17:18:16 2012/-kk/
-/gpiolock.c/1.3/Sun Dec  6 22:33:44 2009/-kk/
-/gpioow.c/1.14/Wed Sep  7 07:43:05 2011/-kk/
-/gpiopwm.c/1.4/Sat Mar  1 06:04:40 2014/-kk/
-/gpiosim.c/1.16/Sat Mar  1 06:04:40 2014/-kk/
-/gpiovar.h/1.15/Sun Nov 13 13:20:02 2011/-kk/
+/files.gpio/1.10/Tue Oct  7 15:30:22 2014/-kk/
+/gpio.c/1.57/Sat Dec 13 01:30:31 2014/-kk/
+/gpioiic.c/1.6/Tue Oct 29 07:19:15 2013/-kk/
+/gpiolock.c/1.3/Tue Oct 29 07:19:15 2013/-kk/
+/gpioow.c/1.14/Tue Oct 29 07:19:15 2013/-kk/
+/gpiopwm.c/1.4/Sun Oct  5 15:52:13 2014/-kk/
+/gpiosim.c/1.16/Sun Oct  5 15:52:13 2014/-kk/
+/gpiovar.h/1.15/Tue Oct 29 07:19:15 2013/-kk/
 D

@@ -1,11 +1,11 @@
-/Makefile.inc/1.2/Fri Feb 12 22:34:38 2010/-kk/
-/atomic_add.3/1.1/Mon Jun 23 10:22:40 2008/-kk/
-/atomic_and.3/1.1/Mon Jun 23 10:22:40 2008/-kk/
-/atomic_cas.3/1.5/Thu Feb 13 15:35:37 2014/-kk/
-/atomic_dec.3/1.1/Mon Jun 23 10:22:40 2008/-kk/
-/atomic_inc.3/1.1/Mon Jun 23 10:22:40 2008/-kk/
-/atomic_ops.3/1.5/Wed Apr 14 08:49:49 2010/-kk/
-/atomic_or.3/1.1/Mon Jun 23 10:22:40 2008/-kk/
-/atomic_swap.3/1.1/Mon Jun 23 10:22:40 2008/-kk/
-/membar_ops.3/1.4/Mon Jan 12 06:47:20 2015/-kk/
+/Makefile.inc/1.2/Tue Oct 29 07:19:03 2013/-kk/
+/atomic_add.3/1.1/Tue Oct 29 07:19:03 2013/-kk/
+/atomic_and.3/1.1/Tue Oct 29 07:19:03 2013/-kk/
+/atomic_cas.3/1.5/Sun Oct  5 15:52:03 2014/-kk/
+/atomic_dec.3/1.1/Tue Oct 29 07:19:03 2013/-kk/
+/atomic_inc.3/1.1/Tue Oct 29 07:19:03 2013/-kk/
+/atomic_ops.3/1.5/Tue Oct 29 07:19:03 2013/-kk/
+/atomic_or.3/1.1/Tue Oct 29 07:19:03 2013/-kk/
+/atomic_swap.3/1.1/Tue Oct 29 07:19:03 2013/-kk/
+/membar_ops.3/1.4/Mon Jan 12 15:00:44 2015/-kk/
 D

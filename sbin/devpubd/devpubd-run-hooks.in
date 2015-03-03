@@ -5,14 +5,15 @@
 # devpubd run hooks
 
 devpubd_event=$1
-devpubd_device=$2
+shift
+devpubd_devices=$@
 devpubd_hooks_base=@HOOKSDIR@
 
 case $devpubd_event in
 device-attach|device-detach)
 	for hook in ${devpubd_hooks_base}/*; do
 		if [ -x "${hook}" ]; then
-			"${hook}" ${devpubd_event} ${devpubd_device}
+			"${hook}" ${devpubd_event} ${devpubd_devices}
 		fi
 	done
 	;;

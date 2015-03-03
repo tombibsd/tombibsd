@@ -628,8 +628,10 @@ bpf_validate(const struct bpf_insn *f, int signed_len)
 	if (len > BPF_MAXINSNS)
 		return 0;
 #endif
-	if (BPF_CLASS(f[len - 1].code) != BPF_RET)
+	if (f[len - 1].code != (BPF_RET|BPF_K) &&
+	    f[len - 1].code != (BPF_RET|BPF_A)) {
 		return 0;
+	}
 
 #if defined(KERNEL) || defined(_KERNEL)
 	/* Note: only the pre-initialised is valid on startup */

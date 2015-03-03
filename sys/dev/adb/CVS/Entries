@@ -1,9 +1,9 @@
-/adb_bt.c/1.6/Wed Sep  8 04:48:03 2010/-kk/
-/adb_bus.c/1.10/Tue Dec  9 04:23:59 2014/-kk/
-/adb_kbd.c/1.24/Tue Dec  9 04:23:59 2014/-kk/
-/adb_keymap.h/1.5/Tue Dec  9 04:23:59 2014/-kk/
-/adb_ms.c/1.16/Tue Dec  9 04:16:11 2014/-kk/
-/adb_usb_map.c/1.2/Tue Dec  9 04:23:59 2014/-kk/
-/adbvar.h/1.2/Tue Apr 29 06:53:02 2008/-kk/
-/files.adb/1.7/Thu Aug 30 01:27:44 2012/-kk/
+/adb_bt.c/1.6/Tue Oct 29 07:19:15 2013/-kk/
+/adb_bus.c/1.10/Sat Dec 13 01:30:31 2014/-kk/
+/adb_kbd.c/1.24/Sat Dec 13 01:30:31 2014/-kk/
+/adb_keymap.h/1.5/Sat Dec 13 01:30:31 2014/-kk/
+/adb_ms.c/1.16/Sat Dec 13 01:30:31 2014/-kk/
+/adb_usb_map.c/1.2/Sat Dec 13 01:30:31 2014/-kk/
+/adbvar.h/1.2/Tue Oct 29 07:19:15 2013/-kk/
+/files.adb/1.7/Tue Oct 29 07:19:15 2013/-kk/
 D

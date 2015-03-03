@@ -1,11 +1,11 @@
-/Makefile/1.48/Sat Mar  1 06:05:19 2014/-kk/
-/bbinfo.c/1.14/Sun Apr  5 11:55:39 2009/-kk/
-/ext2fs.c/1.9/Thu Oct 24 10:29:00 2013/-kk/
-/ffs.c/1.32/Thu Oct 24 10:29:00 2013/-kk/
-/fstypes.c/1.13/Thu Jan 14 16:27:49 2010/-kk/
-/installboot.8/1.87/Sat Mar  1 06:05:19 2014/-kk/
-/installboot.c/1.36/Thu Nov  3 20:46:41 2011/-kk/
-/installboot.h/1.39/Sat Mar  1 06:05:19 2014/-kk/
-/machines.c/1.39/Sat Mar  1 06:05:19 2014/-kk/
-/sum.c/1.5/Thu Jan 14 16:27:49 2010/-kk/
+/Makefile/1.48/Sun Oct  5 15:52:22 2014/-kk/
+/bbinfo.c/1.14/Tue Oct 29 07:19:19 2013/-kk/
+/ext2fs.c/1.9/Tue Oct 29 07:19:19 2013/-kk/
+/ffs.c/1.32/Tue Oct 29 07:19:19 2013/-kk/
+/fstypes.c/1.13/Tue Oct 29 07:19:19 2013/-kk/
+/installboot.8/1.87/Sun Oct  5 15:52:22 2014/-kk/
+/installboot.c/1.36/Tue Oct 29 07:19:19 2013/-kk/
+/installboot.h/1.39/Sun Oct  5 15:52:22 2014/-kk/
+/machines.c/1.39/Sun Oct  5 15:52:22 2014/-kk/
+/sum.c/1.5/Tue Oct 29 07:19:19 2013/-kk/
 D/arch////

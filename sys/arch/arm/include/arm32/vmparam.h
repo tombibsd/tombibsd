@@ -50,6 +50,14 @@
 #define	USRSTACK	VM_MAXUSER_ADDRESS
 
 /*
+ * ARMv4 systems are normaly configured for 256MB KVA only, so restrict
+ * the size of the pager map to 4MB.
+ */
+#ifndef _ARM_ARCH_5
+#define PAGER_MAP_DEFAULT_SIZE          (4 * 1024 * 1024)
+#endif
+
+/*
  * Note that MAXTSIZ can't be larger than 32M, otherwise the compiler
  * would have to be changed to not generate "bl" instructions.
  */

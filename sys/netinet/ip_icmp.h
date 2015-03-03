@@ -189,6 +189,7 @@ struct icmp {
 #define		ICMP_PHOTURIS_NEED_AUTHZ	5	/* no authorization */
 
 #define ICMP_MAXTYPE		40
+#define ICMP_NTYPES		(ICMP_MAXTYPE + 1)
 
 #ifdef ICMP_STRINGS
 static const char *icmp_type[] = {

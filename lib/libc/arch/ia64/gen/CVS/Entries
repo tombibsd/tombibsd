@@ -1,7 +1,7 @@
-/Makefile.inc/1.5/Thu Dec 27 10:41:18 2012/-kk/
-/flt_rounds.c/1.1/Fri Sep 22 17:59:47 2006/-kk/
-/fpgetmask.c/1.1/Fri Sep 22 17:59:47 2006/-kk/
-/fpgetround.c/1.1/Fri Sep 22 17:59:47 2006/-kk/
-/fpsetmask.c/1.1/Fri Sep 22 17:59:47 2006/-kk/
-/fpsetround.c/1.1/Fri Sep 22 17:59:47 2006/-kk/
+/Makefile.inc/1.5/Tue Oct 29 07:19:03 2013/-kk/
+/flt_rounds.c/1.1/Tue Oct 29 07:19:03 2013/-kk/
+/fpgetmask.c/1.1/Tue Oct 29 07:19:03 2013/-kk/
+/fpgetround.c/1.1/Tue Oct 29 07:19:03 2013/-kk/
+/fpsetmask.c/1.1/Tue Oct 29 07:19:03 2013/-kk/
+/fpsetround.c/1.1/Tue Oct 29 07:19:03 2013/-kk/
 D

@@ -446,9 +446,9 @@ carp_setroute(struct carp_softc *sc, int cmd)
 #ifdef INET6
 		case AF_INET6:
 			if (cmd == RTM_ADD)
-				in6_ifaddloop(ifa);
+				in6_ifaddlocal(ifa);
 			else
-				in6_ifremloop(ifa);
+				in6_ifremlocal(ifa);
 			break;
 #endif /* INET6 */
 		default:

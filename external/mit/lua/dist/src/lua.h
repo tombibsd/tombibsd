@@ -182,11 +182,7 @@ LUA_API void  (lua_xmove) (lua_State *from, lua_State *to, int n);
 ** access functions (stack -> C)
 */
 
-#ifndef _KERNEL
 LUA_API int             (lua_isnumber) (lua_State *L, int idx);
-#else /* _KERNEL */
-#define lua_isnumber	lua_isinteger
-#endif
 LUA_API int             (lua_isstring) (lua_State *L, int idx);
 LUA_API int             (lua_iscfunction) (lua_State *L, int idx);
 LUA_API int             (lua_isinteger) (lua_State *L, int idx);

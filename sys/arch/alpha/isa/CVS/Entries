@@ -1,5 +1,5 @@
-/isa_machdep.c/1.21/Mon Feb  6 02:14:13 2012/-kk/
-/isadma_bounce.c/1.12/Mon Feb  6 02:14:13 2012/-kk/
-/isapnp_machdep.c/1.8/Fri Jul  1 19:22:35 2011/-kk/
-/mcclock_isa.c/1.20/Fri Jul  1 19:22:35 2011/-kk/
+/isa_machdep.c/1.21/Tue Oct 29 07:19:06 2013/-kk/
+/isadma_bounce.c/1.12/Tue Oct 29 07:19:06 2013/-kk/
+/isapnp_machdep.c/1.8/Tue Oct 29 07:19:06 2013/-kk/
+/mcclock_isa.c/1.20/Tue Oct 29 07:19:06 2013/-kk/
 D

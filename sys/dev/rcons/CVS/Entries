@@ -1,9 +1,9 @@
-/README/1.1/Fri Dec 17 01:41:52 1999/-kk/
-/files.rcons/1.14/Sun Dec 11 12:23:44 2005/-kk/
-/raster.h/1.8/Sun Mar  4 06:02:39 2007/-kk/
-/raster_op.c/1.19/Tue Jan 31 04:28:02 2012/-kk/
-/raster_text.c/1.10/Tue Jan 31 04:28:03 2012/-kk/
-/rcons.h/1.16/Sun Dec 11 12:23:44 2005/-kk/
-/rcons_kern.c/1.22/Sat Mar 14 15:36:20 2009/-kk/
-/rcons_subr.c/1.18/Sat Mar 14 21:04:22 2009/-kk/
+/README/1.1/Tue Oct 29 07:19:16 2013/-kk/
+/files.rcons/1.14/Tue Oct 29 07:19:16 2013/-kk/
+/raster.h/1.8/Tue Oct 29 07:19:16 2013/-kk/
+/raster_op.c/1.19/Tue Oct 29 07:19:16 2013/-kk/
+/raster_text.c/1.10/Tue Oct 29 07:19:16 2013/-kk/
+/rcons.h/1.16/Tue Oct 29 07:19:16 2013/-kk/
+/rcons_kern.c/1.22/Tue Oct 29 07:19:16 2013/-kk/
+/rcons_subr.c/1.18/Tue Oct 29 07:19:16 2013/-kk/
 D

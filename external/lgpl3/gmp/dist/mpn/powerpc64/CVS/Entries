@@ -1,16 +1,16 @@
-/README/1.1.1.2/Tue Dec 17 04:03:54 2013/-kk/
-/aix.m4/1.1.1.2/Tue Dec 17 04:03:54 2013/-kk/
-/com.asm/1.1.1.2/Tue Dec 17 04:03:54 2013/-kk/
-/copyd.asm/1.1.1.2/Tue Dec 17 04:03:54 2013/-kk/
-/copyi.asm/1.1.1.2/Tue Dec 17 04:03:54 2013/-kk/
-/darwin.m4/1.1.1.2/Tue Dec 17 04:03:54 2013/-kk/
-/elf.m4/1.1.1.2/Tue Dec 17 04:03:54 2013/-kk/
-/logops_n.asm/1.1.1.2/Tue Dec 17 04:03:54 2013/-kk/
-/lshift.asm/1.1.1.2/Tue Dec 17 04:03:54 2013/-kk/
-/lshiftc.asm/1.1.1.1/Fri Nov 29 07:49:48 2013/-kk/
-/rshift.asm/1.1.1.2/Tue Dec 17 04:03:54 2013/-kk/
-/tabselect.asm/1.1.1.1/Fri Nov 29 07:49:48 2013/-kk/
-/umul.asm/1.1.1.1/Mon Jun 20 05:54:40 2011/-kk/
+/README/1.1.1.2/Sun Oct  5 15:52:01 2014/-kk/
+/aix.m4/1.1.1.2/Sun Oct  5 15:52:01 2014/-kk/
+/com.asm/1.1.1.2/Sun Oct  5 15:52:01 2014/-kk/
+/copyd.asm/1.1.1.2/Sun Oct  5 15:52:01 2014/-kk/
+/copyi.asm/1.1.1.2/Sun Oct  5 15:52:01 2014/-kk/
+/darwin.m4/1.1.1.2/Sun Oct  5 15:52:01 2014/-kk/
+/elf.m4/1.1.1.2/Sun Oct  5 15:52:01 2014/-kk/
+/logops_n.asm/1.1.1.2/Sun Oct  5 15:52:01 2014/-kk/
+/lshift.asm/1.1.1.2/Sun Oct  5 15:52:01 2014/-kk/
+/lshiftc.asm/1.1.1.1/Sun Oct  5 15:52:01 2014/-kk/
+/rshift.asm/1.1.1.2/Sun Oct  5 15:52:01 2014/-kk/
+/tabselect.asm/1.1.1.1/Sun Oct  5 15:52:01 2014/-kk/
+/umul.asm/1.1.1.1/Tue Oct 29 07:18:44 2013/-kk/
 D/mode32////
 D/mode64////
 D/p6////

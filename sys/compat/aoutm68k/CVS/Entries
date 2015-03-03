@@ -1,14 +1,14 @@
-/Makefile/1.7/Fri Jan 31 08:48:44 2014/-kk/
-/aoutm68k_exec.c/1.27/Sun Feb 19 21:06:36 2012/-kk/
-/aoutm68k_mod.c/1.3/Fri Mar 14 04:28:18 2014/-kk/
-/aoutm68k_stat.c/1.24/Mon Apr 28 20:23:41 2008/-kk/
-/aoutm68k_stat.h/1.8/Sun Jan 11 22:54:16 2009/-kk/
-/aoutm68k_syscall.h/1.43/Thu Feb 13 15:22:27 2014/-kk/
-/aoutm68k_syscallargs.h/1.41/Thu Feb 13 15:22:27 2014/-kk/
-/aoutm68k_syscalls.c/1.40/Thu Feb 13 15:22:27 2014/-kk/
-/aoutm68k_sysent.c/1.45/Thu Feb 13 15:22:27 2014/-kk/
-/aoutm68k_util.h/1.2/Mon Apr 28 20:23:41 2008/-kk/
-/files.aoutm68k/1.7/Tue Dec  9 04:34:53 2014/-kk/
-/syscalls.conf/1.2/Fri Nov  1 20:39:17 2002/-kk/
-/syscalls.master/1.37/Mon Mar  7 19:26:35 2011/-kk/
+/Makefile/1.7/Sun Oct  5 15:52:12 2014/-kk/
+/aoutm68k_exec.c/1.27/Tue Oct 29 07:19:15 2013/-kk/
+/aoutm68k_mod.c/1.3/Sun Oct  5 15:52:12 2014/-kk/
+/aoutm68k_stat.c/1.24/Tue Oct 29 07:19:15 2013/-kk/
+/aoutm68k_stat.h/1.8/Tue Oct 29 07:19:15 2013/-kk/
+/aoutm68k_syscall.h/1.43/Tue Oct 29 07:19:15 2013/-kk/
+/aoutm68k_syscallargs.h/1.41/Tue Oct 29 07:19:15 2013/-kk/
+/aoutm68k_syscalls.c/1.40/Tue Oct 29 07:19:15 2013/-kk/
+/aoutm68k_sysent.c/1.45/Sun Oct  5 15:52:12 2014/-kk/
+/aoutm68k_util.h/1.2/Tue Oct 29 07:19:15 2013/-kk/
+/files.aoutm68k/1.7/Sat Dec 13 01:30:31 2014/-kk/
+/syscalls.conf/1.2/Tue Oct 29 07:19:15 2013/-kk/
+/syscalls.master/1.37/Tue Oct 29 07:19:15 2013/-kk/
 D

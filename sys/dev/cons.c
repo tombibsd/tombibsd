@@ -56,6 +56,8 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <dev/cons.h>
 
+#include "nullcons.h"
+
 dev_type_open(cnopen);
 dev_type_close(cnclose);
 dev_type_read(cnread);
@@ -104,6 +106,11 @@ cnopen(dev_t dev, int flag, int mode, struct lwp *l)
 	 * open() calls.
 	 */
 	cndev = cn_tab->cn_dev;
+#if NNULLCONS > 0
+	if (cndev == NODEV) {
+		nullconsattach(0);
+	}
+#else /* NNULLCONS > 0 */
 	if (cndev == NODEV) {
 		/*
 		 * This is most likely an error in the console attach
@@ -112,6 +119,7 @@ cnopen(dev_t dev, int flag, int mode, struct lwp *l)
 		 */
 		panic("cnopen: no console device");
 	}
+#endif /* NNULLCONS > 0 */
 	if (dev == cndev) {
 		/*
 		 * This causes cnopen() to be called recursively, which

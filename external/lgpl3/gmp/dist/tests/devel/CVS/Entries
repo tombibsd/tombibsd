@@ -1,13 +1,13 @@
-/Makefile.am/1.1.1.2/Tue Dec 17 04:03:55 2013/-kk/
-/Makefile.in/1.1.1.2/Tue Dec 17 04:03:55 2013/-kk/
-/README/1.1.1.2/Tue Dec 17 04:03:55 2013/-kk/
-/anymul_1.c/1.1.1.2/Tue Dec 17 04:03:55 2013/-kk/
-/aors_n.c/1.1.1.2/Tue Dec 17 04:03:55 2013/-kk/
-/copy.c/1.1.1.2/Tue Dec 17 04:03:55 2013/-kk/
-/divmod_1.c/1.1.1.2/Tue Dec 17 04:03:55 2013/-kk/
-/divrem.c/1.1.1.2/Tue Dec 17 04:03:55 2013/-kk/
-/logops_n.c/1.1.1.2/Tue Dec 17 04:03:55 2013/-kk/
-/shift.c/1.1.1.2/Tue Dec 17 04:03:55 2013/-kk/
-/try.c/1.1.1.2/Tue Dec 17 04:03:55 2013/-kk/
-/tst-addsub.c/1.1.1.2/Tue Dec 17 04:03:55 2013/-kk/
+/Makefile.am/1.1.1.2/Sun Oct  5 15:52:01 2014/-kk/
+/Makefile.in/1.1.1.2/Sun Oct  5 15:52:01 2014/-kk/
+/README/1.1.1.2/Sun Oct  5 15:52:01 2014/-kk/
+/anymul_1.c/1.1.1.2/Sun Oct  5 15:52:01 2014/-kk/
+/aors_n.c/1.1.1.2/Sun Oct  5 15:52:01 2014/-kk/
+/copy.c/1.1.1.2/Sun Oct  5 15:52:01 2014/-kk/
+/divmod_1.c/1.1.1.2/Sun Oct  5 15:52:01 2014/-kk/
+/divrem.c/1.1.1.2/Sun Oct  5 15:52:01 2014/-kk/
+/logops_n.c/1.1.1.2/Sun Oct  5 15:52:01 2014/-kk/
+/shift.c/1.1.1.2/Sun Oct  5 15:52:01 2014/-kk/
+/try.c/1.1.1.2/Sun Oct  5 15:52:01 2014/-kk/
+/tst-addsub.c/1.1.1.2/Sun Oct  5 15:52:01 2014/-kk/
 D

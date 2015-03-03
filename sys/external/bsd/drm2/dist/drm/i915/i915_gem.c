@@ -1427,6 +1427,12 @@ __wait_seqno(struct intel_ring_buffer *ring, u32 seqno, unsigned reset_counter,
 		else
 			DRM_SPIN_TIMED_WAIT_NOINTR_UNTIL(ret, &ring->irq_queue,
 			    &dev_priv->irq_lock, ticks, EXIT_COND);
+		if (ret < 0)	/* Failure: return negative error as is.  */
+			;
+		else if (ret == 0) /* Timed out: return -ETIME.  */
+			ret = -ETIME;
+		else		/* Succeeded (ret > 0): return 0.  */
+			ret = 0;
 	} else {
 		if (interruptible)
 			DRM_SPIN_WAIT_UNTIL(ret, &ring->irq_queue,
@@ -1434,6 +1440,7 @@ __wait_seqno(struct intel_ring_buffer *ring, u32 seqno, unsigned reset_counter,
 		else
 			DRM_SPIN_WAIT_NOINTR_UNTIL(ret, &ring->irq_queue,
 			    &dev_priv->irq_lock, EXIT_COND);
+		/* ret is negative on failure or zero on success.  */
 	}
 #undef	EXIT_COND
 	spin_unlock(&dev_priv->irq_lock);
@@ -1441,9 +1448,29 @@ __wait_seqno(struct intel_ring_buffer *ring, u32 seqno, unsigned reset_counter,
 
 	if (!irq_test_in_progress)
 		ring->irq_put(ring);
-	if (timeout)
-		timespecsub(&after, &before, timeout);
-	return MAX(ret, 0);	/* ignore remaining ticks */
+	if (timeout) {
+		struct timespec slept;
+
+		/* Compute slept = after - before.  */
+		timespecsub(&after, &before, &slept);
+
+		/*
+		 * Return the time remaining, timeout - slept, if we
+		 * slept for less time than the timeout; or zero if we
+		 * timed out.
+		 */
+		if (timespeccmp(&slept, timeout, <))
+			timespecsub(timeout, &slept, timeout);
+		else
+			timespecclear(timeout);
+	}
+	if (wedged) {		/* GPU reset while we were waiting.  */
+		ret = i915_gem_check_wedge(&dev_priv->gpu_error,
+		    interruptible);
+		if (ret == 0)
+			ret = -EAGAIN;
+	}
+	return ret;
 }
 #else
 static int __wait_seqno(struct intel_ring_buffer *ring, u32 seqno,

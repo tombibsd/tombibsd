@@ -1,11 +1,11 @@
-/Makefile/1.15/Mon May 28 12:06:25 2007/-kk/
-/chpass.1/1.25/Sat Apr 21 12:27:29 2012/-kk/
-/chpass.c/1.35/Wed Aug 31 16:24:57 2011/-kk/
-/chpass.h/1.13/Mon Aug 29 14:08:39 2011/-kk/
-/edit.c/1.21/Wed Aug 31 16:24:57 2011/-kk/
-/field.c/1.12/Sat Apr 11 12:10:02 2009/-kk/
-/pathnames.h/1.4/Thu Aug  7 11:13:19 2003/-kk/
-/pw_yp.c/1.22/Sat Apr 11 12:10:02 2009/-kk/
-/table.c/1.7/Sat Apr 11 12:10:02 2009/-kk/
-/util.c/1.12/Thu Feb 17 17:09:48 2005/-kk/
+/Makefile/1.15/Tue Oct 29 07:19:19 2013/-kk/
+/chpass.1/1.25/Tue Oct 29 07:19:19 2013/-kk/
+/chpass.c/1.35/Tue Oct 29 07:19:19 2013/-kk/
+/chpass.h/1.13/Tue Oct 29 07:19:19 2013/-kk/
+/edit.c/1.21/Tue Oct 29 07:19:19 2013/-kk/
+/field.c/1.12/Tue Oct 29 07:19:19 2013/-kk/
+/pathnames.h/1.4/Tue Oct 29 07:19:19 2013/-kk/
+/pw_yp.c/1.22/Tue Oct 29 07:19:19 2013/-kk/
+/table.c/1.7/Tue Oct 29 07:19:19 2013/-kk/
+/util.c/1.12/Tue Oct 29 07:19:19 2013/-kk/
 D

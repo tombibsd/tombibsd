@@ -34,6 +34,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <sys/param.h>
 #include <sys/systm.h>
+#include <sys/atomic.h>
 #include <sys/malloc.h>
 #include <sys/kernel.h>
 #include <sys/proc.h>
@@ -156,6 +157,13 @@ void
 agp_i810_post_gtt_entry(struct agp_i810_softc *isc, off_t off)
 {
 
+	/*
+	 * See <https://bugs.freedesktop.org/show_bug.cgi?id=88191>.
+	 * Out of paranoia, let's do the write barrier and posting
+	 * read, because I don't have enough time or hardware to
+	 * conduct conclusive tests.
+	 */
+	membar_producer();
 	(void)bus_space_read_4(isc->gtt_bst, isc->gtt_bsh,
 	    4*(off >> AGP_PAGE_SHIFT));
 }

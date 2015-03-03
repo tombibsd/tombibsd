@@ -36,6 +36,9 @@ static bool
 probe_monitoring_device(struct nouveau_i2c_port *i2c,
 			struct i2c_board_info *info, void *data)
 {
+#ifdef __NetBSD__
+	return false;
+#else
 	struct nouveau_therm_priv *priv = data;
 	struct nvbios_therm_sensor *sensor = &priv->bios_sensor;
 	struct i2c_client *client;
@@ -59,6 +62,7 @@ probe_monitoring_device(struct nouveau_i2c_port *i2c,
 	priv->ic = client;
 
 	return true;
+#endif
 }
 
 static struct nouveau_i2c_board_info

@@ -14,3 +14,5 @@ ttya	"/usr/libexec/getty std.9600"	unknown	off secure
 ttyb	"/usr/libexec/getty std.9600"	unknown	off secure
 ttyh0   "/usr/libexec/getty std.9600"   unknown off secure
 ttyh1   "/usr/libexec/getty std.9600"   unknown off secure
+ttyC00  "/usr/libexec/getty std.9600"   unknown off secure
+ttyC01  "/usr/libexec/getty std.9600"   unknown off secure

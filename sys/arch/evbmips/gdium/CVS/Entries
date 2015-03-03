@@ -1,12 +1,12 @@
-/autoconf.c/1.6/Sat Oct 27 17:17:50 2012/-kk/
-/bonito_mainbus.c/1.3/Fri Jul  1 18:45:36 2011/-kk/
-/gdium_bus_io.c/1.2/Sun Jul 10 00:03:53 2011/-kk/
-/gdium_bus_mem.c/1.2/Sun Jul 10 00:03:53 2011/-kk/
-/gdium_dma.c/1.5/Sun Jul 10 00:03:53 2011/-kk/
-/gdium_genfb.c/1.6/Sun Jul 10 00:03:53 2011/-kk/
-/gdium_intr.c/1.7/Fri Apr 11 02:03:29 2014/-kk/
-/gdiumreg.h/1.2/Fri Jul 22 20:41:37 2011/-kk/
-/gdiumvar.h/1.2/Fri Jul  1 18:45:36 2011/-kk/
-/machdep.c/1.17/Fri Apr 11 02:03:29 2014/-kk/
-/mainbus.c/1.4/Fri Jan 27 18:52:54 2012/-kk/
+/autoconf.c/1.6/Tue Oct 29 07:19:07 2013/-kk/
+/bonito_mainbus.c/1.3/Tue Oct 29 07:19:07 2013/-kk/
+/gdium_bus_io.c/1.2/Tue Oct 29 07:19:07 2013/-kk/
+/gdium_bus_mem.c/1.2/Tue Oct 29 07:19:07 2013/-kk/
+/gdium_dma.c/1.5/Tue Oct 29 07:19:07 2013/-kk/
+/gdium_genfb.c/1.6/Tue Oct 29 07:19:07 2013/-kk/
+/gdium_intr.c/1.7/Sun Oct  5 15:52:10 2014/-kk/
+/gdiumreg.h/1.2/Tue Oct 29 07:19:07 2013/-kk/
+/gdiumvar.h/1.2/Tue Oct 29 07:19:07 2013/-kk/
+/machdep.c/1.17/Sun Oct  5 15:52:10 2014/-kk/
+/mainbus.c/1.4/Tue Oct 29 07:19:07 2013/-kk/
 D

@@ -93,11 +93,6 @@
 /* XXX max. amount of KVM to be used by buffers. */
 #ifndef VM_MAX_KERNEL_BUF
 #define VM_MAX_KERNEL_BUF	(0x10000000 * 7 / 10)
-
-/*
- * Override the default pager_map size, there's not enough KVA.
- */
-#define PAGER_MAP_DEFAULT_SIZE		(4 * 1024 * 1024)
 #endif
 
 #define	VM_PHYS_SIZE		(USRIOSIZE * PAGE_SIZE)

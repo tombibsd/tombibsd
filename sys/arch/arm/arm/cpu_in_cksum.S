@@ -190,9 +190,8 @@ ASENTRY_NP(arm_cksumdata)
 #else
 	RETc(eq)			/* done */
 #endif
-	adds	r7, r7, r1		/* undo sub */
-	adds	r7, r7, r1		/* r7 = offset + len */
-	rsb	r7, r7, #4
+	adds	r1, r1, r7		/* undo sub */
+	subs	r7, r7, r1
 	lsls	r7, r7, #3
 #if defined(__ARMEB__)
 	lsrs	r2, r2, r7

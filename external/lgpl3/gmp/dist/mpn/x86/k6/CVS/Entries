@@ -1,15 +1,15 @@
-/README/1.1.1.1/Mon Jun 20 05:54:43 2011/-kk/
-/aors_n.asm/1.1.1.1/Mon Jun 20 05:54:43 2011/-kk/
-/aorsmul_1.asm/1.1.1.2/Tue Dec 17 04:03:54 2013/-kk/
-/cross.pl/1.1.1.1/Mon Jun 20 05:54:43 2011/-kk/
-/divrem_1.asm/1.1.1.1/Mon Jun 20 05:54:43 2011/-kk/
-/gcd_1.asm/1.1.1.1/Mon Jun 20 05:54:43 2011/-kk/
-/gmp-mparam.h/1.1.1.2/Tue Dec 17 04:03:54 2013/-kk/
-/mod_34lsub1.asm/1.1.1.1/Mon Jun 20 05:54:43 2011/-kk/
-/mode1o.asm/1.1.1.1/Mon Jun 20 05:54:43 2011/-kk/
-/mul_1.asm/1.1.1.2/Tue Dec 17 04:03:54 2013/-kk/
-/mul_basecase.asm/1.1.1.1/Mon Jun 20 05:54:43 2011/-kk/
-/pre_mod_1.asm/1.1.1.1/Mon Jun 20 05:54:43 2011/-kk/
-/sqr_basecase.asm/1.1.1.1/Mon Jun 20 05:54:43 2011/-kk/
+/README/1.1.1.1/Tue Oct 29 07:18:44 2013/-kk/
+/aors_n.asm/1.1.1.1/Tue Oct 29 07:18:44 2013/-kk/
+/aorsmul_1.asm/1.1.1.2/Sun Oct  5 15:52:01 2014/-kk/
+/cross.pl/1.1.1.1/Tue Oct 29 07:18:44 2013/-kk/
+/divrem_1.asm/1.1.1.1/Tue Oct 29 07:18:44 2013/-kk/
+/gcd_1.asm/1.1.1.1/Tue Oct 29 07:18:44 2013/-kk/
+/gmp-mparam.h/1.1.1.2/Sun Oct  5 15:52:01 2014/-kk/
+/mod_34lsub1.asm/1.1.1.1/Tue Oct 29 07:18:44 2013/-kk/
+/mode1o.asm/1.1.1.1/Tue Oct 29 07:18:44 2013/-kk/
+/mul_1.asm/1.1.1.2/Sun Oct  5 15:52:01 2014/-kk/
+/mul_basecase.asm/1.1.1.1/Tue Oct 29 07:18:44 2013/-kk/
+/pre_mod_1.asm/1.1.1.1/Tue Oct 29 07:18:44 2013/-kk/
+/sqr_basecase.asm/1.1.1.1/Tue Oct 29 07:18:44 2013/-kk/
 D/k62mmx////
 D/mmx////
