@@ -81,6 +81,8 @@ svr4_32_copyargs(struct lwp *l, struct exec_package *pack, struct ps_strings *ar
 
 	a = ai;
 
+	memset(ai, 0, sizeof(ai));
+
 	/*
 	 * Push extra arguments on the stack needed by dynamically
 	 * linked binaries
@@ -199,6 +201,8 @@ svr4_32_copyargs(struct lwp *l, struct exec_package *pack, struct ps_strings *ar
 		return error;
 
 	a = ai;
+
+	memset(ai, 0, sizeof(ai));
 
 	/*
 	 * Push extra arguments on the stack needed by dynamically

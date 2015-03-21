@@ -436,6 +436,8 @@ initarm(void *arg)
 
 	db_trap_callback = amlogic_db_trap;
 
+	amlogic_cpufreq_bootstrap();
+
 	return initarm_common(KERNEL_VM_BASE, KERNEL_VM_SIZE, NULL, 0);
 
 }

@@ -18,6 +18,7 @@
 /floating-point-arithmetic.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /fold-builtin-fma.ll/1.1.1.1/Thu Jan 29 19:54:37 2015/-kk/
 /gep.ll/1.1.1.1/Thu Jan 29 19:54:37 2015/-kk/
+/load.ll/1.1.1.1/Wed Mar 18 17:23:42 2015/-kk/
 /maxmin.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /noalias-ptr.ll/1.1.1.1/Thu Jan 29 19:54:37 2015/-kk/
 /past-the-end.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/

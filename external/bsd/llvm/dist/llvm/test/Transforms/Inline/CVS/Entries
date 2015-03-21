@@ -50,6 +50,7 @@
 /ignore-debug-info.ll/1.1.1.2/Thu Feb  5 08:38:58 2015/-kk/
 /inline-byval-bonus.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /inline-cold.ll/1.1.1.2/Tue Jun  3 03:04:00 2014/-kk/
+/inline-indirect.ll/1.1.1.1/Wed Mar 18 17:23:42 2015/-kk/
 /inline-invoke-tail.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /inline-invoke-with-asm-call.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /inline-musttail-varargs.ll/1.1.1.1/Thu Jan 29 19:54:37 2015/-kk/

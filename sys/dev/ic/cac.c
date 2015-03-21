@@ -723,40 +723,10 @@ cac_sensor_refresh(struct sysmon_envsys *sme, envsys_data_t *edata)
 	memset(&bv, 0, sizeof(bv));
 	bv.bv_volid = edata->sensor;
 	s = splbio();
-	if (cac_ioctl_vol(sc, &bv)) {
-		splx(s);
-		return;
-	}
+	if (cac_ioctl_vol(sc, &bv))
+		bv.bv_status = BIOC_SVINVALID;
 	splx(s);
 
-	switch(bv.bv_status) {
-	case BIOC_SVOFFLINE:
-		edata->value_cur = ENVSYS_DRIVE_FAIL;
-		edata->state = ENVSYS_SCRITICAL;
-		break;
-
-	case BIOC_SVDEGRADED:
-		edata->value_cur = ENVSYS_DRIVE_PFAIL;
-		edata->state = ENVSYS_SCRITICAL;
-		break;
-
-	case BIOC_SVSCRUB:
-	case BIOC_SVONLINE:
-		edata->value_cur = ENVSYS_DRIVE_ONLINE;
-		edata->state = ENVSYS_SVALID;
-		break;
-
-	case BIOC_SVREBUILD:
-	case BIOC_SVBUILDING:
-		edata->value_cur = ENVSYS_DRIVE_REBUILD;
-		edata->state = ENVSYS_SVALID;
-		break;
-
-	case BIOC_SVINVALID:
-		/* FALLTRHOUGH */
-	default:
-		edata->value_cur = 0; /* unknown */
-		edata->state = ENVSYS_SINVALID;
-	}
+	bio_vol_to_envsys(edata, &bv);
 }
 #endif /* NBIO > 0 */

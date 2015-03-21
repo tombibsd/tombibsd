@@ -51,7 +51,7 @@
 /if_rum.c/1.49/Mon Jan 12 06:48:54 2015/-kk/
 /if_rumreg.h/1.4/Mon Feb 21 23:50:42 2011/-kk/
 /if_rumvar.h/1.9/Mon Feb 21 23:50:42 2011/-kk/
-/if_run.c/1.10/Thu Feb 13 15:22:32 2014/-kk/
+/if_run.c/1.11/Sat Mar 21 02:47:18 2015/-kk/
 /if_runvar.h/1.1/Wed May 30 14:30:35 2012/-kk/
 /if_smsc.c/1.22/Fri Oct  3 09:57:51 2014/-kk/
 /if_smscreg.h/1.5/Fri Oct  3 09:43:37 2014/-kk/
@@ -115,7 +115,7 @@
 /uhci.c/1.265/Sat Mar 21 02:37:52 2015/-kk/
 /uhcireg.h/1.19/Mon Apr 28 20:23:59 2008/-kk/
 /uhcivar.h/1.52/Thu Oct 24 10:28:58 2013/-kk/
-/uhid.c/1.93/Sat Mar 21 02:37:52 2015/-kk/
+/uhid.c/1.94/Sat Mar 21 02:47:18 2015/-kk/
 /uhidev.c/1.63/Sat Mar 21 02:37:52 2015/-kk/
 /uhidev.h/1.17/Sat Mar 21 02:37:52 2015/-kk/
 /uhmodem.c/1.13/Fri Dec 23 00:51:46 2011/-kk/
@@ -165,9 +165,9 @@
 /usb_verbose.h/1.4/Fri Oct  3 10:05:17 2014/-kk/
 /usbcdc.h/1.11/Mon Apr 28 20:24:00 2008/-kk/
 /usbdevices.config/1.24/Tue Mar 25 02:35:40 2014/-kk/
-/usbdevs.h/1.683/Sat Mar 21 02:37:52 2015/-kk/
-/usbdevs/1.691/Sat Mar 21 02:37:52 2015/-kk/
-/usbdevs_data.h/1.684/Sat Mar 21 02:37:52 2015/-kk/
+/usbdevs.h/1.685/Sat Mar 21 02:47:18 2015/-kk/
+/usbdevs/1.693/Sat Mar 21 02:47:18 2015/-kk/
+/usbdevs_data.h/1.686/Sat Mar 21 02:47:20 2015/-kk/
 /usbdi.c/1.163/Mon Feb 16 03:14:26 2015/-kk/
 /usbdi.h/1.90/Sun Jul 20 13:58:50 2014/-kk/
 /usbdi_util.c/1.63/Fri Oct  3 09:57:51 2014/-kk/

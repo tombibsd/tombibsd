@@ -62,14 +62,30 @@ struct mips_bus_dma_tag	apbus_dmat = {
 	._dmatag_ops = _BUS_DMATAG_OPS_INITIALIZER,
 };
 
-static const char *apbus_devs[] = {
-	"dwctwo",
-	"ohci",
-	"ehci",
-	"dme",
-	"jzgpio",
-	"jzfb",
-	NULL
+typedef struct apbus_dev {
+	const char *name;
+	bus_addr_t addr;
+	uint32_t irq;
+} apbus_dev_t;
+
+static const apbus_dev_t apbus_devs[] = {
+	{ "dwctwo",	JZ_DWC2_BASE,   21},
+	{ "ohci",	JZ_OHCI_BASE,    5 },
+	{ "ehci",	JZ_EHCI_BASE,   20},
+	{ "dme",	JZ_DME_BASE,    -1},	/* irq via gpio abuse */
+	{ "jzgpio",	JZ_GPIO_A_BASE, 17},
+	{ "jzgpio",	JZ_GPIO_B_BASE, 16},
+	{ "jzgpio",	JZ_GPIO_C_BASE, 15},
+	{ "jzgpio",	JZ_GPIO_D_BASE, 14},
+	{ "jzgpio",	JZ_GPIO_E_BASE, 13},
+	{ "jzgpio",	JZ_GPIO_F_BASE, 12},
+	{ "jziic",	JZ_SMB0_BASE,   60},
+	{ "jziic",	JZ_SMB1_BASE,   59},
+	{ "jziic",	JZ_SMB2_BASE,   58},
+	{ "jziic",	JZ_SMB3_BASE,   57},
+	{ "jziic",	JZ_SMB4_BASE,   56},
+	{ "jzfb",	-1,           -1},
+	{ NULL,		-1,           -1}
 };
 
 void
@@ -112,12 +128,17 @@ apbus_attach(device_t parent, device_t self, void *aux)
 
 	/* enable USB clocks */
 	reg = readreg(JZ_CLKGR1);
+	reg &= ~(1 << 0);	/* SMB3 clock */
 	reg &= ~(1 << 8);	/* OTG1 clock */
 	reg &= ~(1 << 11);	/* AHB_MON clock */
+	reg &= ~(1 << 12);	/* SMB4 clock */
 	writereg(JZ_CLKGR1, reg);
 
 	reg = readreg(JZ_CLKGR0);
+	reg &= ~(1 << 5);	/* SMB0 clock */
+	reg &= ~(1 << 6);	/* SMB1 clock */
 	reg &= ~(1 << 24);	/* UHC clock */
+	reg &= ~(1 << 25);	/* SMB2 clock */
 	writereg(JZ_CLKGR0, reg);
 
 	/* wake up the USB part */
@@ -135,10 +156,11 @@ apbus_attach(device_t parent, device_t self, void *aux)
 	printf("JZ_UHCCDR %08x\n", readreg(JZ_UHCCDR));
 #endif
 
-	for (const char **adv = apbus_devs; *adv != NULL; adv++) {
+	for (const apbus_dev_t *adv = apbus_devs; adv->name != NULL; adv++) {
 		struct apbus_attach_args aa;
-		aa.aa_name = *adv;
-		aa.aa_addr = 0;
+		aa.aa_name = adv->name;
+		aa.aa_addr = adv->addr;
+		aa.aa_irq  = adv->irq;
 		aa.aa_dmat = &apbus_dmat;
 		aa.aa_bst = apbus_memt;
 
@@ -151,12 +173,13 @@ apbus_print(void *aux, const char *pnp)
 {
 	struct apbus_attach_args *aa = aux;
 
-	if (pnp)
+	if (pnp) {
 		aprint_normal("%s at %s", aa->aa_name, pnp);
-
-	if (aa->aa_addr)
+	}
+	if (aa->aa_addr != -1)
 		aprint_normal(" addr 0x%" PRIxBUSADDR, aa->aa_addr);
-
+	if ((pnp == NULL) && (aa->aa_irq != -1))
+		aprint_normal(" irq %d", aa->aa_irq);
 	return (UNCONF);
 }
 

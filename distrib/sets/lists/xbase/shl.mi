@@ -323,7 +323,7 @@
 ./usr/X11R7/lib/libfontenc.so.2.0		-unknown-		xorg
 ./usr/X11R7/lib/libfreetype.so			-unknown-		xorg
 ./usr/X11R7/lib/libfreetype.so.17		-unknown-		xorg
-./usr/X11R7/lib/libfreetype.so.17.2.11		-unknown-		xorg
+./usr/X11R7/lib/libfreetype.so.17.4.11		-unknown-		xorg
 ./usr/X11R7/lib/libgbm.so			-unknown-		xorg
 ./usr/X11R7/lib/libgbm.so.1			-unknown-		xorg
 ./usr/X11R7/lib/libgbm.so.1.0			-unknown-		xorg

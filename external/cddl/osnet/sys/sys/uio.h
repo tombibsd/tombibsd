@@ -91,8 +91,8 @@ struct xuio {
 #define uio_extflg	uio_offset
 #define UIO_XUIO 0x0004	/* Structure is xuio_t */
 
-#define XUIO_XUZC_PRIV(xuio)	((xuio)->xuio_priv);
-#define XUIO_XUZC_RW(xuio)	((xuio)->xuio_rw);
+#define XUIO_XUZC_PRIV(xuio)	((xuio)->xuio_priv)
+#define XUIO_XUZC_RW(xuio)	((xuio)->xuio_rw)
 
 typedef	struct uio	uio_t;
 typedef struct xuio	xuio_t;

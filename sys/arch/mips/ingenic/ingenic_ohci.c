@@ -43,6 +43,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <dev/usb/usbdi.h>
 #include <dev/usb/usbdivar.h>
 #include <dev/usb/usb_mem.h>
+#include <dev/usb/usbdevs.h>
 
 #include <dev/usb/ohcireg.h>
 #include <dev/usb/ohcivar.h>
@@ -102,16 +103,18 @@ ingenic_ohci_attach(device_t parent, device_t self, void *aux)
 	bus_space_write_4(sc->iot, sc->ioh, OHCI_INTERRUPT_DISABLE,
 	    OHCI_ALL_INTRS);
 
-	ih = evbmips_intr_establish(5, ohci_intr, sc);
+	ih = evbmips_intr_establish(aa->aa_irq, ohci_intr, sc);
 
 	if (ih == NULL) {
 		aprint_error_dev(self, "failed to establish interrupt %d\n",
-		     5);
+		     aa->aa_irq);
 		goto fail;
 	}
 
-	/* we don't handle endianess in bus space */
 	sc->sc_endian = OHCI_LITTLE_ENDIAN;
+
+	sc->sc_id_vendor = USB_VENDOR_INGENIC;
+	strlcpy(sc->sc_vendor, "Ingenic", sizeof(sc->sc_vendor));
 
 	status = ohci_init(sc);
 	if (status != USBD_NORMAL_COMPLETION) {

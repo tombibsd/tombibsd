@@ -100,6 +100,7 @@
 #ifndef _STANDALONE
 
 struct vnode;
+struct vattr;
 
 /*
  * Structure per mounted file system.  Each mounted file system has an
@@ -222,6 +223,9 @@ struct vfsops {
 	int	(*vfs_vget)	(struct mount *, ino_t, struct vnode **);
 	int	(*vfs_loadvnode) (struct mount *, struct vnode *,
 				    const void *, size_t, const void **);
+	int	(*vfs_newvnode) (struct mount *, struct vnode *, struct vnode *,
+				    struct vattr *, kauth_cred_t,
+				    size_t *, const void **);
 	int	(*vfs_fhtovp)	(struct mount *, struct fid *,
 				    struct vnode **);
 	int	(*vfs_vptofh)	(struct vnode *, struct fid *, size_t *);
@@ -246,6 +250,8 @@ struct vfsops {
 #define VFS_VGET(MP, INO, VPP)    (*(MP)->mnt_op->vfs_vget)(MP, INO, VPP)
 #define VFS_LOADVNODE(MP, VP, KEY, KEY_LEN, NEW_KEY) \
 	(*(MP)->mnt_op->vfs_loadvnode)(MP, VP, KEY, KEY_LEN, NEW_KEY)
+#define VFS_NEWVNODE(MP, DVP, VP, VAP, CRED, NEW_LEN, NEW_KEY) \
+	(*(MP)->mnt_op->vfs_newvnode)(MP, DVP, VP, VAP, CRED, NEW_LEN, NEW_KEY)
 
 #define VFS_RENAMELOCK_ENTER(MP)  (*(MP)->mnt_op->vfs_renamelock_enter)(MP)
 #define VFS_RENAMELOCK_EXIT(MP)   (*(MP)->mnt_op->vfs_renamelock_exit)(MP)
@@ -287,6 +293,9 @@ int	fsname##_sync(struct mount *, int, struct kauth_cred *);	\
 int	fsname##_vget(struct mount *, ino_t, struct vnode **);		\
 int	fsname##_loadvnode(struct mount *, struct vnode *,		\
 		const void *, size_t, const void **);			\
+int	fsname##_newvnode(struct mount *, struct vnode *,		\
+		struct vnode *, struct vattr *, kauth_cred_t,		\
+		size_t *, const void **);				\
 int	fsname##_fhtovp(struct mount *, struct fid *, struct vnode **);	\
 int	fsname##_vptofh(struct vnode *, struct fid *, size_t *);	\
 void	fsname##_init(void);						\

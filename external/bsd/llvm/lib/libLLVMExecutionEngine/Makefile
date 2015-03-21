@@ -9,7 +9,6 @@ LIB=	LLVMExecutionEngine
 SRCS+=	GDBRegistrationListener.cpp \
 	ExecutionEngine.cpp \
 	ExecutionEngineBindings.cpp \
-	RTDyldMemoryManager.cpp \
 	TargetSelect.cpp
 
 .include <bsd.lib.mk>

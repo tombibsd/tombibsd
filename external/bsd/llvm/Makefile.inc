@@ -8,7 +8,7 @@ LLVM_TOPLEVEL_MK=
 SVN_ROOT=		http://llvm.org/svn/llvm-project
 SVN_BRANCH=		branches/release_36
 
-COMMON_REVISION=	227398
+COMMON_REVISION=	232565
 CLANG_REVISION=		${COMMON_REVISION}
 LLD_REVISION=		${COMMON_REVISION}
 LLDB_REVISION=		${COMMON_REVISION}
@@ -49,10 +49,10 @@ CLANG_INCLUDE_CONFIG=	${LLVM_TOPLEVEL}/config
 MCLINKER_INCLUDE_CONFIG= ${LLVM_TOPLEVEL}/config/mclinker
 LLVM_INCLUDE_OBJDIR!=	cd ${LLVM_TOPLEVEL}/include && ${PRINTOBJDIR}
 
-CPPFLAGS+=	-std=c++11
 .if ${MKLLDB:Uno} == "yes"
 CPPFLAGS+=	-DLLDB_DISABLE_PYTHON
 .endif
+CXXFLAGS+=	-std=c++11
 CXXFLAGS+=	-fno-rtti -fno-exceptions
 CXXFLAGS+=	-ffunction-sections -fdata-sections
 LDFLAGS+=	-Wl,--gc-sections

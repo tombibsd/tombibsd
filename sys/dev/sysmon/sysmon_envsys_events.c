@@ -42,6 +42,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/mutex.h>
 #include <sys/kmem.h>
 #include <sys/callout.h>
+#include <sys/syslog.h>
 
 #include <dev/sysmon/sysmonvar.h>
 #include <dev/sysmon/sysmon_envsysvar.h>
@@ -731,11 +732,23 @@ sme_events_check(void *arg)
 
 	KASSERT(sme != NULL);
 
+	mutex_enter(&sme->sme_work_mtx);
+	if (sme->sme_busy > 0) {
+		log(LOG_WARNING, "%s: workqueue busy: updates stopped\n",
+		    sme->sme_name);
+		mutex_exit(&sme->sme_work_mtx);
+		return;
+	}
+	mutex_exit(&sme->sme_work_mtx);
+
 	mutex_enter(&sme->sme_mtx);
+	mutex_enter(&sme->sme_work_mtx);
 	LIST_FOREACH(see, &sme->sme_events_list, see_list) {
 		workqueue_enqueue(sme->sme_wq, &see->see_wk, NULL);
 		see->see_edata->flags |= ENVSYS_FNEED_REFRESH;
+		sme->sme_busy++;
 	}
+	mutex_exit(&sme->sme_work_mtx);
 	if (!sysmon_low_power)
 		sme_schedule_callout(sme);
 	mutex_exit(&sme->sme_mtx);
@@ -815,6 +828,10 @@ sme_events_worker(struct work *wk, void *arg)
 out:
 	see->see_flags &= ~SEE_EVENT_WORKING;
 	cv_broadcast(&sme->sme_condvar);
+	mutex_enter(&sme->sme_work_mtx);
+	KASSERT(sme->sme_busy > 0);
+	sme->sme_busy--;
+	mutex_exit(&sme->sme_work_mtx);
 	mutex_exit(&sme->sme_mtx);
 }
 

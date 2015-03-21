@@ -56,6 +56,7 @@ extern struct arm32_bus_dma_tag amlogic_dma_tag;
 
 void	amlogic_bootstrap(void);
 
+void	amlogic_cpufreq_bootstrap(void);
 void	amlogic_cpufreq_init(void);
 
 void	amlogic_usbphy_init(int);

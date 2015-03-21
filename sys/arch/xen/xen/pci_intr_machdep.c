@@ -221,4 +221,5 @@ pci_intr_establish(pci_chipset_tag_t pcitag, pci_intr_handle_t intrh,
 void
 pci_intr_disestablish(pci_chipset_tag_t pcitag, void *cookie)
 {
+	pirq_disestablish(cookie);
 }

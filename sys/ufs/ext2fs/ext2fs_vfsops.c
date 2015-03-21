@@ -156,7 +156,6 @@ static const struct genfs_ops ext2fs_genfsops = {
 static const struct ufs_ops ext2fs_ufsops = {
 	.uo_itimes = ext2fs_itimes,
 	.uo_update = ext2fs_update,
-	.uo_vfree = ext2fs_vfree,
 };
 
 /* Fill in the inode uid/gid from ext2 halves.  */

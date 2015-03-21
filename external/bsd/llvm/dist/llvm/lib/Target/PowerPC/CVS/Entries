@@ -22,7 +22,7 @@
 /PPCInstrFormats.td/1.1.1.6/Thu Feb  5 08:37:58 2015/-kk/
 /PPCInstrInfo.cpp/1.1.1.8/Thu Feb  5 08:37:58 2015/-kk/
 /PPCInstrInfo.h/1.1.1.5/Thu Feb  5 08:37:58 2015/-kk/
-/PPCInstrInfo.td/1.1.1.7/Thu Feb  5 08:37:58 2015/-kk/
+/PPCInstrInfo.td/1.1.1.8/Sat Mar 21 02:42:53 2015/-kk/
 /PPCInstrSPE.td/1.1.1.1/Sun Aug 10 17:04:59 2014/-kk/
 /PPCInstrVSX.td/1.1.1.2/Thu Feb  5 08:37:58 2015/-kk/
 /PPCMCInstLower.cpp/1.1.1.7/Thu Feb  5 08:37:58 2015/-kk/

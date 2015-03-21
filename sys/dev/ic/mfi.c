@@ -2638,31 +2638,9 @@ mfi_sensor_refresh(struct sysmon_envsys *sme, envsys_data_t *edata)
 	splx(s);
 	KERNEL_UNLOCK_ONE(curlwp);
 	if (error)
-		return;
+		bv.bv_status = BIOC_SVINVALID;
 
-	switch(bv.bv_status) {
-	case BIOC_SVOFFLINE:
-		edata->value_cur = ENVSYS_DRIVE_FAIL;
-		edata->state = ENVSYS_SCRITICAL;
-		break;
-
-	case BIOC_SVDEGRADED:
-		edata->value_cur = ENVSYS_DRIVE_PFAIL;
-		edata->state = ENVSYS_SCRITICAL;
-		break;
-
-	case BIOC_SVSCRUB:
-	case BIOC_SVONLINE:
-		edata->value_cur = ENVSYS_DRIVE_ONLINE;
-		edata->state = ENVSYS_SVALID;
-		break;
-
-	case BIOC_SVINVALID:
-		/* FALLTRHOUGH */
-	default:
-		edata->value_cur = 0; /* unknown */
-		edata->state = ENVSYS_SINVALID;
-	}
+	bio_vol_to_envsys(edata, &bv);
 }
 
 #endif /* NBIO > 0 */

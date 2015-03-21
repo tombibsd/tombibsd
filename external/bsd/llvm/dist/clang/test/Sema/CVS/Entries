@@ -118,6 +118,7 @@
 /builtin-assume-aligned.c/1.1.1.1/Thu Jan 29 19:57:34 2015/-kk/
 /builtin-assume.c/1.1.1.2/Thu Feb  5 08:37:48 2015/-kk/
 /builtin-clear_cache.c/1.1.1.2/Tue Jun  3 03:04:56 2014/-kk/
+/builtin-longjmp.c/1.1.1.1/Wed Mar 18 17:26:41 2015/-kk/
 /builtin-object-size.c/1.1.1.2/Thu Feb  5 08:37:48 2015/-kk/
 /builtin-prefetch.c/1.1.1.1/Thu Nov 28 14:14:58 2013/-kk/
 /builtin-stackaddress.c/1.1.1.1/Thu Nov 28 14:14:58 2013/-kk/

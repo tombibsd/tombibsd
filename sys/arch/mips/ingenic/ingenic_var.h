@@ -36,6 +36,7 @@ struct apbus_attach_args {
 	bus_space_tag_t	aa_bst;
 	bus_dma_tag_t	aa_dmat;
 	bus_addr_t	aa_addr;
+	uint32_t	aa_irq;
 };
 
 extern bus_space_tag_t ingenic_memt;

@@ -431,13 +431,7 @@ rpi_bootparams(void)
 
 	bcm2835_mbox_read(iot, ioh, BCMMBOX_CHANARM2VC, &res);
 
-	/*
-	 * No need to invalid the cache as the memory has never been referenced
-	 * by the ARM.
-	 *
-	 * cpu_dcache_inv_range((vaddr_t)&vb, sizeof(vb));
-	 *
-	 */
+	cpu_dcache_inv_range((vaddr_t)&vb, sizeof(vb));
 
 	if (!vcprop_buffer_success_p(&vb.vb_hdr)) {
 		bootconfig.dramblocks = 1;

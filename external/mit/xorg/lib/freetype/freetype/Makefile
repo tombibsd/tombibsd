@@ -33,6 +33,7 @@ CONFIG_SUBST=	${TOOL_SED} \
 		-e 's,%LIBS_CONFIG%,-lfreetype -lz -lbz2,' \
 		-e 's,%LIBSSTATIC_CONFIG%,-lfreetype -lz -lbz2,' \
 		-e 's,%build_libtool_libs%,yes,' \
+		-e 's@%hardcode_libdir_flag_spec%@-Wl,-rpath,${X11USRLIBDIR}@' \
 		-e 's,%FT2_EXTRA_LIBS%,,' \
 		-e 's,%LIBZ%,-lz,' \
 		-e 's,%LIBBZ2%,-lbz2,' \

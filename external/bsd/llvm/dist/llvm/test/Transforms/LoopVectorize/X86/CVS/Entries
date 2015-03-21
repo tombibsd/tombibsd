@@ -12,7 +12,7 @@
 /gcc-examples.ll/1.1.1.2/Thu Feb  5 08:39:02 2015/-kk/
 /illegal-parallel-loop-uniform-write.ll/1.1.1.2/Thu Feb  5 08:39:02 2015/-kk/
 /lit.local.cfg/1.1.1.2/Fri Oct  3 09:23:20 2014/-kk/
-/masked_load_store.ll/1.1.1.1/Thu Jan 29 19:54:38 2015/-kk/
+/masked_load_store.ll/1.1.1.2/Sat Mar 21 02:43:21 2015/-kk/
 /metadata-enable.ll/1.1.1.4/Thu Feb  5 08:39:02 2015/-kk/
 /min-trip-count-switch.ll/1.1.1.2/Thu Feb  5 08:39:02 2015/-kk/
 /no-vector.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/

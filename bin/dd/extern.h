@@ -72,6 +72,10 @@ extern void		(*cfunc)(void);
 extern uint64_t		cpy_cnt;
 extern uint64_t		cbsz;
 extern u_int		ddflags;
+#ifndef NO_IOFLAG
+extern u_int		iflag;
+extern u_int		oflag;
+#endif /* NO_IOFLAG */
 extern u_int		files_cnt;
 extern uint64_t		progress;
 extern const u_char	*ctab;

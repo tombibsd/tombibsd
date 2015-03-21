@@ -38,7 +38,7 @@ CRYPTODIST=	${NETBSDSRCDIR}/crypto
 
 .include "srcs.inc"
 
-
+CFLAGS+=-O3
 AFLAGS+=-DELF
 LIBDPLIBS+= crypt ${NETBSDSRCDIR}/lib/libcrypt
 

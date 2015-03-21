@@ -32,7 +32,7 @@
 /amrio.h/1.1/Sun Jul 23 12:01:26 2006/-kk/
 /amrreg.h/1.5/Mon Sep  8 23:36:54 2008/-kk/
 /amrvar.h/1.10/Sat Mar 21 02:37:50 2015/-kk/
-/arcmsr.c/1.31/Fri Apr 11 02:03:42 2014/-kk/
+/arcmsr.c/1.32/Sat Mar 21 02:47:14 2015/-kk/
 /arcmsrvar.h/1.14/Mon Jun 20 13:26:58 2011/-kk/
 /artsata.c/1.26/Fri Apr 11 02:03:42 2014/-kk/
 /atppc_puc.c/1.14/Fri Apr 11 02:03:42 2014/-kk/
@@ -130,7 +130,7 @@
 /i82365_pcivar.h/1.7/Thu Sep 17 18:14:41 2009/-kk/
 /iavc_pci.c/1.16/Fri Apr 11 02:03:43 2014/-kk/
 /ibmcd.c/1.1/Mon Dec 17 20:38:00 2012/-kk/
-/ichsmb.c/1.38/Sat Dec 27 03:35:49 2014/-kk/
+/ichsmb.c/1.40/Sat Mar 21 02:47:14 2015/-kk/
 /icp_pci.c/1.22/Fri Apr 11 02:03:43 2014/-kk/
 /if_age.c/1.44/Fri Apr 11 02:03:43 2014/-kk/
 /if_agereg.h/1.3/Tue Jul 28 21:03:46 2009/-kk/
@@ -284,7 +284,7 @@
 /mlyio.h/1.4/Mon Apr 28 20:23:55 2008/-kk/
 /mlyreg.h/1.5/Mon Sep  8 23:36:54 2008/-kk/
 /mlyvar.h/1.6/Sat Oct 27 17:18:35 2012/-kk/
-/mpii.c/1.5/Fri Apr 11 02:03:49 2014/-kk/
+/mpii.c/1.6/Sat Mar 21 02:47:14 2015/-kk/
 /mpt_pci.c/1.23/Fri Apr 11 02:03:49 2014/-kk/
 /mpu_cmpci.c/1.16/Wed Nov 23 23:07:35 2011/-kk/
 /mpu_eso.c/1.17/Wed Nov 23 23:07:35 2011/-kk/
@@ -322,9 +322,9 @@
 /pcibusprint.c/1.3/Sun Dec 11 12:22:50 2005/-kk/
 /pciconf.c/1.37/Fri Oct  3 09:50:55 2014/-kk/
 /pciconf.h/1.12/Sat Sep  8 05:02:41 2012/-kk/
-/pcidevs.h/1.1210/Sat Mar 21 02:37:51 2015/-kk/
-/pcidevs/1.1216/Sat Mar 21 02:37:51 2015/-kk/
-/pcidevs_data.h/1.1209/Sat Mar 21 02:37:51 2015/-kk/
+/pcidevs.h/1.1213/Sat Mar 21 02:47:14 2015/-kk/
+/pcidevs/1.1219/Sat Mar 21 02:47:14 2015/-kk/
+/pcidevs_data.h/1.1212/Sat Mar 21 02:47:16 2015/-kk/
 /pciide.c/1.219/Sat Nov  6 00:29:09 2010/-kk/
 /pciide_acard_reg.h/1.8/Wed May 14 13:29:29 2008/-kk/
 /pciide_acer_reg.h/1.12/Mon Oct 19 18:41:15 2009/-kk/
@@ -368,7 +368,7 @@
 /puc.c/1.37/Thu Feb 13 15:36:00 2014/-kk/
 /puccn.c/1.14/Fri Mar 14 04:28:21 2014/-kk/
 /puccn.h/1.7/Fri Mar 14 04:28:21 2014/-kk/
-/pucdata.c/1.93/Thu Feb 13 15:36:00 2014/-kk/
+/pucdata.c/1.94/Sat Mar 21 02:47:17 2015/-kk/
 /pucvar.h/1.11/Tue Mar 25 02:35:39 2014/-kk/
 /pwdog.c/1.7/Tue Aug 30 07:22:12 2011/-kk/
 /r128fb.c/1.38/Thu Oct 24 10:28:58 2013/-kk/
@@ -444,7 +444,7 @@
 /voodoofbreg.h/1.4/Sat Jan 21 16:12:57 2012/-kk/
 /voyager.c/1.10/Fri Apr 11 02:03:50 2014/-kk/
 /voyagervar.h/1.4/Wed Dec  7 09:08:00 2011/-kk/
-/wcfb.c/1.12/Tue Oct  9 21:59:19 2012/-kk/
+/wcfb.c/1.13/Sat Mar 21 02:47:17 2015/-kk/
 /wcfbreg.h/1.2/Tue Oct  9 21:59:19 2012/-kk/
 /weasel_pci.c/1.15/Thu Oct 24 10:28:58 2013/-kk/
 /weaselreg.h/1.2/Mon Apr 28 20:23:55 2008/-kk/

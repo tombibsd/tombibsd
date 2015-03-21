@@ -3,9 +3,9 @@
 /pk7_asn1.c/1.1.1.1/Sun Jul 19 23:04:33 2009/-kk/
 /pk7_attr.c/1.1.1.1/Sun Jul 19 23:04:33 2009/-kk/
 /pk7_dgst.c/1.1.1.1/Sun Jul 19 23:04:33 2009/-kk/
-/pk7_doit.c/1.1.1.5/Mon Jun  9 00:09:02 2014/-kk/
+/pk7_doit.c/1.2/Sat Mar 21 02:41:50 2015/-kk/
 /pk7_enc.c/1.1.1.1/Sun Jul 19 23:04:33 2009/-kk/
-/pk7_lib.c/1.1.1.2/Sun Jun  5 14:59:24 2011/-kk/
+/pk7_lib.c/1.2/Sat Mar 21 02:41:50 2015/-kk/
 /pk7_mime.c/1.1.1.1/Sun Jul 19 23:04:34 2009/-kk/
 /pk7_smime.c/1.1.1.2/Thu Jul 26 15:02:40 2012/-kk/
 /pkcs7.h/1.2/Wed Oct 29 08:08:45 2014/-kk/

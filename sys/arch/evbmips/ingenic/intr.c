@@ -89,6 +89,7 @@ struct intrhand {
 };
 
 struct intrhand intrs[NINTR];
+struct evcnt clockintrs;
 
 void ingenic_irq(int);
 
@@ -99,6 +100,9 @@ evbmips_intr_init(void)
 	int i;
 
 	ipl_sr_map = ingenic_ipl_sr_map;
+
+	evcnt_attach_dynamic(&clockintrs,
+	    EVCNT_TYPE_INTR, NULL, "timer", "intr");
 
 	/* zero all handlers */
 	for (i = 0; i < NINTR; i++) {
@@ -181,6 +185,7 @@ evbmips_iointr(int ipl, vaddr_t pc, uint32_t ipending)
 	if (ipending & MIPS_INT_MASK_2) {
 		/* this is a timer interrupt */
 		ingenic_clockintr(id);
+		clockintrs.ev_count++;
 		ingenic_puts("INT2\n");
 	}
 	if (ipending & MIPS_INT_MASK_0) {
@@ -202,6 +207,7 @@ evbmips_iointr(int ipl, vaddr_t pc, uint32_t ipending)
 			writereg(JZ_ICMSR0, mask);
 			ingenic_clockintr(id);
 			writereg(JZ_ICMCR0, mask);
+			clockintrs.ev_count++;
 		}
 		ingenic_irq(ipl);
 		KASSERT(id == 0);

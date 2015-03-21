@@ -228,7 +228,7 @@ ATF_TC_BODY(ilog2_log2, tc)
 ATF_TP_ADD_TCS(tp)
 {
 
-        ATF_TP_ADD_TC(tp, bitmap_basic);
+	ATF_TP_ADD_TC(tp, bitmap_basic);
 	ATF_TP_ADD_TC(tp, fast_divide32);
 	ATF_TP_ADD_TC(tp, ffsfls);
 	ATF_TP_ADD_TC(tp, ilog2_basic);

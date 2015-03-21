@@ -207,7 +207,11 @@ struct sysmon_envsys {
 	/*
 	 * Locking/synchronization.
 	 */
+	int sme_busy;			/* number of items on workqueue,
+					   sme_mtx or sme_work_mtx to read,
+					   both to write */
 	kmutex_t sme_mtx;
+	kmutex_t sme_work_mtx;
 	kcondvar_t sme_condvar;
 };
 

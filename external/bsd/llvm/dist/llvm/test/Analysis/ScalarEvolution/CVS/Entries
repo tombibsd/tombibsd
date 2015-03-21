@@ -57,6 +57,7 @@
 /nw-sub-is-not-nw-add.ll/1.1.1.1/Thu Jan 29 19:54:45 2015/-kk/
 /pointer-sign-bits.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /pr22179.ll/1.1.1.1/Thu Jan 29 19:54:45 2015/-kk/
+/pr22856.ll/1.1.1.1/Wed Mar 18 17:23:46 2015/-kk/
 /pr3909.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /scev-aa.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /scev-invalid.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/

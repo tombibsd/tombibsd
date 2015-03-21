@@ -778,6 +778,9 @@ npfctl_rule(u_long cmd, void *data)
 	}
 	case NPF_CMD_RULE_LIST: {
 		retdict = npf_ruleset_list(rlset, ruleset_name);
+		if (!retdict) {
+			error = ESRCH;
+		}
 		break;
 	}
 	case NPF_CMD_RULE_FLUSH: {
@@ -797,6 +800,7 @@ npfctl_rule(u_long cmd, void *data)
 	npf_config_exit();
 
 	if (rl) {
+		KASSERT(error);
 		npf_rule_free(rl);
 	}
 out:

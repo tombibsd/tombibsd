@@ -240,7 +240,7 @@
 /adv-copy-opt.ll/1.1.1.1/Thu Jan 29 19:54:41 2015/-kk/
 /aliases.ll/1.1.1.3/Fri Oct  3 09:22:59 2014/-kk/
 /align.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
-/alloc-no-stack-realign.ll/1.1.1.2/Thu Feb  5 08:38:02 2015/-kk/
+/alloc-no-stack-realign.ll/1.1.1.3/Sat Mar 21 02:42:56 2015/-kk/
 /alloca.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /argaddr.ll/1.1.1.2/Tue Jun  3 03:05:20 2014/-kk/
 /arguments-nosplit-double.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
@@ -539,7 +539,7 @@
 /machine-licm.ll/1.1.1.2/Tue Jan 14 16:01:58 2014/-kk/
 /mature-mc-support.ll/1.1.1.1/Tue Mar  4 20:53:22 2014/-kk/
 /mem.ll/1.1.1.2/Tue Jun  3 03:05:20 2014/-kk/
-/memcpy-inline.ll/1.1.1.4/Thu Feb  5 08:38:03 2015/-kk/
+/memcpy-inline.ll/1.1.1.5/Sat Mar 21 02:42:57 2015/-kk/
 /memfunc.ll/1.1.1.3/Fri Jan 31 08:45:43 2014/-kk/
 /memset-inline.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /metadata-default.ll/1.1.1.2/Thu Feb  5 08:38:03 2015/-kk/
@@ -629,6 +629,7 @@
 /select.ll/1.1.1.2/Tue Jun  3 03:05:21 2014/-kk/
 /select_xform.ll/1.1.1.2/Thu Feb  5 08:38:03 2015/-kk/
 /setcc-sentinals.ll/1.1.1.3/Tue Jun  3 03:05:21 2014/-kk/
+/setcc-type-mismatch.ll/1.1.1.1/Wed Mar 18 17:23:38 2015/-kk/
 /shifter_operand.ll/1.1.1.1/Thu Nov 28 14:18:10 2013/-kk/
 /shuffle.ll/1.1.1.1/Thu Nov 28 14:18:10 2013/-kk/
 /sincos.ll/1.1.1.1/Thu Nov 28 14:18:10 2013/-kk/
@@ -653,7 +654,7 @@
 /struct-byval-frame-index.ll/1.1.1.2/Tue Jun  3 03:05:21 2014/-kk/
 /struct_byval.ll/1.1.1.1/Thu Nov 28 14:18:10 2013/-kk/
 /struct_byval_arm_t1_t2.ll/1.1.1.2/Thu Feb 27 08:52:10 2014/-kk/
-/sub-cmp-peephole.ll/1.1.1.2/Tue Jan 14 16:01:59 2014/-kk/
+/sub-cmp-peephole.ll/1.1.1.3/Sat Mar 21 02:42:57 2015/-kk/
 /sub.ll/1.1.1.2/Tue Jun  3 03:05:21 2014/-kk/
 /subreg-remat.ll/1.1.1.2/Fri Mar 14 04:23:36 2014/-kk/
 /swift-atomics.ll/1.1.1.2/Thu Feb  5 08:38:04 2015/-kk/
@@ -721,10 +722,8 @@
 /vdup.ll/1.1.1.4/Tue Jun  3 03:05:21 2014/-kk/
 /vector-DAGCombine.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /vector-extend-narrow.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
-/vector-load.ll/1.1.1.1/Thu Jan 29 19:54:41 2015/-kk/
 /vector-promotion.ll/1.1.1.1/Thu Jan 29 19:54:41 2015/-kk/
 /vector-spilling.ll/1.1.1.1/Sun Aug 10 17:04:44 2014/-kk/
-/vector-store.ll/1.1.1.1/Thu Jan 29 19:54:41 2015/-kk/
 /vext.ll/1.1.1.2/Tue Jun  3 03:05:21 2014/-kk/
 /vfcmp.ll/1.1.1.2/Tue Jun  3 03:05:21 2014/-kk/
 /vfloatintrinsics.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/

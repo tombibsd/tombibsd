@@ -2,7 +2,7 @@
 /linux32_errno.h/1.1/Thu Feb  9 19:18:57 2006/-kk/
 /linux32_exec.c/1.21/Sun Feb 19 21:06:38 2012/-kk/
 /linux32_exec.h/1.7/Wed Jul  7 01:30:35 2010/-kk/
-/linux32_exec_elf32.c/1.17/Sat Mar  1 06:04:36 2014/-kk/
+/linux32_exec_elf32.c/1.18/Sat Mar 21 02:47:09 2015/-kk/
 /linux32_fcntl.c/1.10/Tue Jun  3 02:54:28 2014/-kk/
 /linux32_ioctl.c/1.13/Tue Aug 18 02:02:58 2009/-kk/
 /linux32_ioctl.h/1.5/Thu Jun 19 16:09:25 2008/-kk/

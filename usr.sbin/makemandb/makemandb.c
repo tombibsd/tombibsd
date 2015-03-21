@@ -981,7 +981,7 @@ pmdoc_Nd(const struct mdoc_node *n, mandb_rec *rec)
 	char *temp;
 	char *nd_text;
 
-	if (n == NULL || n->tok == MDOC_MAX)
+	if (n == NULL || (n->type != MDOC_TEXT && n->tok == MDOC_MAX))
 		return;
 
 	if (n->type == MDOC_TEXT) {
@@ -1098,7 +1098,7 @@ pmdoc_Pp(const struct mdoc_node *n, mandb_rec *rec)
 static void
 pmdoc_Sh(const struct mdoc_node *n, mandb_rec *rec)
 {
-	if (n == NULL || n->tok == MDOC_MAX)
+	if (n == NULL || (n->type != MDOC_TEXT && n->tok == MDOC_MAX))
 		return;
 	int xr_found = 0;
 

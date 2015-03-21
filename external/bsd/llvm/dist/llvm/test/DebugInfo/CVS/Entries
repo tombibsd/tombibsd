@@ -60,6 +60,7 @@
 /inlined-vars.ll/1.1.1.5/Thu Feb  5 08:38:25 2015/-kk/
 /llvm-symbolizer-zlib.test/1.1.1.1/Fri May 30 18:11:22 2014/-kk/
 /llvm-symbolizer.test/1.1.1.7/Thu Feb  5 08:38:25 2015/-kk/
+/location-verifier.ll/1.1.1.1/Wed Mar 18 17:23:46 2015/-kk/
 /lto-comp-dir.ll/1.1.1.2/Thu Feb  5 08:38:25 2015/-kk/
 /member-order.ll/1.1.1.4/Thu Feb  5 08:38:25 2015/-kk/
 /member-pointers.ll/1.1.1.4/Thu Feb  5 08:38:25 2015/-kk/

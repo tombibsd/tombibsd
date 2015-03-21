@@ -364,9 +364,7 @@ uhidclose(dev_t dev, int flag, int mode, struct lwp *l)
 
 	mutex_enter(&sc->sc_access_lock);
 
-	mutex_enter(&sc->sc_lock);
 	uhidev_stop(&sc->sc_hdev);
-	mutex_exit(&sc->sc_lock);
 
 	clfree(&sc->sc_q);
 	free(sc->sc_obuf, M_USBDEV);

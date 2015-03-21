@@ -8,6 +8,7 @@ include "arch/evbarm/conf/RPI"
 
 no options 	CPU_ARM1176
 no options 	TPIDRPRW_IS_CURLWP
+no options 	ARM11_COMPAT_MMU
 no options 	__HAVE_MM_MD_CACHE_ALIASING
 no makeoptions	CPUFLAGS
 

@@ -327,7 +327,6 @@
 /20090313-signext.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /2010-01-05-ZExt-Shl.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /2010-01-07-ISelBug.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
-/2010-01-07-UAMemFeature.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /2010-01-08-Atomic64Bug.ll/1.1.1.2/Fri Oct  3 09:23:05 2014/-kk/
 /2010-01-11-ExtraPHIArg.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
 /2010-01-13-OptExtBug.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
@@ -541,6 +540,7 @@
 /alloca-align-rounding-32.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
 /alloca-align-rounding.ll/1.1.1.2/Fri Oct  3 09:23:08 2014/-kk/
 /allrem-moddi3.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
+/and-load-fold.ll/1.1.1.1/Wed Mar 18 17:23:41 2015/-kk/
 /and-or-fold.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /and-su.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /andimm8.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
@@ -633,7 +633,7 @@
 /avx2-conversions.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
 /avx2-gather.ll/1.1.1.2/Tue Jun  3 03:05:30 2014/-kk/
 /avx2-intrinsics-x86-upgrade.ll/1.1.1.1/Thu Jan 29 19:54:42 2015/-kk/
-/avx2-intrinsics-x86.ll/1.1.1.3/Thu Feb  5 08:38:11 2015/-kk/
+/avx2-intrinsics-x86.ll/1.1.1.4/Sat Mar 21 02:43:06 2015/-kk/
 /avx2-logic.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /avx2-nontemporal.ll/1.1.1.2/Thu Feb  5 08:38:11 2015/-kk/
 /avx2-phaddsub.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
@@ -764,7 +764,7 @@
 /codegen-prepare-extload.ll/1.1.1.3/Thu Feb  5 08:38:12 2015/-kk/
 /codegen-prepare.ll/1.1.1.2/Tue Jun  3 03:05:30 2014/-kk/
 /codemodel.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
-/coff-comdat.ll/1.1.1.2/Thu Feb  5 08:38:12 2015/-kk/
+/coff-comdat.ll/1.1.1.3/Sat Mar 21 02:43:07 2015/-kk/
 /coff-comdat2.ll/1.1.1.2/Thu Feb  5 08:38:12 2015/-kk/
 /coff-comdat3.ll/1.1.1.2/Thu Feb  5 08:38:12 2015/-kk/
 /coff-feat00.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
@@ -794,6 +794,7 @@
 /computeKnownBits_urem.ll/1.1.1.1/Sun Aug 10 17:04:46 2014/-kk/
 /conditional-indecrement.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /const-base-addr.ll/1.1.1.1/Fri May 30 18:11:21 2014/-kk/
+/constant-combines.ll/1.1.1.1/Wed Mar 18 17:23:41 2015/-kk/
 /constant-hoisting-shift-immediate.ll/1.1.1.1/Fri May 30 18:11:21 2014/-kk/
 /constant-pool-remat-0.ll/1.1.1.2/Fri Oct  3 09:23:09 2014/-kk/
 /constant-pool-sharing.ll/1.1.1.2/Fri Oct  3 09:23:09 2014/-kk/
@@ -830,8 +831,8 @@
 /divide-by-constant.ll/1.1.1.3/Fri Oct  3 09:23:09 2014/-kk/
 /divrem.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /divrem8_ext.ll/1.1.1.1/Thu Jan 29 19:54:43 2015/-kk/
-/dllexport-x86_64.ll/1.1.1.3/Fri Oct  3 09:23:09 2014/-kk/
-/dllexport.ll/1.1.1.4/Fri Oct  3 09:23:09 2014/-kk/
+/dllexport-x86_64.ll/1.1.1.4/Sat Mar 21 02:43:07 2015/-kk/
+/dllexport.ll/1.1.1.5/Sat Mar 21 02:43:07 2015/-kk/
 /dllimport-x86_64.ll/1.1.1.2/Thu Feb  5 08:38:15 2015/-kk/
 /dllimport.ll/1.1.1.2/Thu Feb  5 08:38:15 2015/-kk/
 /dollar-name.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
@@ -959,7 +960,7 @@
 /fold-tied-op.ll/1.1.1.1/Thu Jan 29 19:54:43 2015/-kk/
 /fold-vector-sext-crash.ll/1.1.1.1/Fri Feb 14 20:12:42 2014/-kk/
 /fold-vector-sext-zext.ll/1.1.1.1/Fri Feb 14 20:12:42 2014/-kk/
-/fold-vex.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
+/fold-vex.ll/1.1.1.2/Sat Mar 21 02:43:08 2015/-kk/
 /fold-xmm-zero.ll/1.1.1.2/Fri Mar 14 04:23:43 2014/-kk/
 /fold-zext-trunc.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
 /force-align-stack-alloca.ll/1.1.1.2/Thu Feb  5 08:38:16 2015/-kk/
@@ -1003,7 +1004,7 @@
 /ghc-cc.ll/1.1.1.2/Thu Feb  5 08:38:16 2015/-kk/
 /ghc-cc64.ll/1.1.1.2/Thu Feb  5 08:38:16 2015/-kk/
 /global-sections-tls.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
-/global-sections.ll/1.1.1.4/Thu Feb  5 08:38:16 2015/-kk/
+/global-sections.ll/1.1.1.5/Sat Mar 21 02:43:09 2015/-kk/
 /gs-fold.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
 /h-register-addressing-32.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /h-register-addressing-64.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
@@ -1163,7 +1164,7 @@
 /macho-comdat.ll/1.1.1.2/Thu Feb  5 08:38:18 2015/-kk/
 /masked-iv-safe.ll/1.1.1.2/Tue Jun  3 03:05:32 2014/-kk/
 /masked-iv-unsafe.ll/1.1.1.1/Thu Nov 28 14:18:13 2013/-kk/
-/masked_memop.ll/1.1.1.1/Thu Jan 29 19:54:43 2015/-kk/
+/masked_memop.ll/1.1.1.2/Sat Mar 21 02:43:10 2015/-kk/
 /maskmovdqu.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /mature-mc-support.ll/1.1.1.1/Tue Mar  4 20:53:49 2014/-kk/
 /mcinst-avx-lowering.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
@@ -1346,7 +1347,7 @@
 /pr1489.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /pr1505.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
 /pr1505b.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
-/pr15267.ll/1.1.1.2/Fri Oct  3 09:23:12 2014/-kk/
+/pr15267.ll/1.1.1.3/Sat Mar 21 02:43:11 2015/-kk/
 /pr15296.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /pr15309.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /pr16031.ll/1.1.1.2/Fri Jan 31 08:45:55 2014/-kk/
@@ -1401,7 +1402,7 @@
 /promote-i16.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
 /promote-trunc.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /promote.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
-/pshufb-mask-comments.ll/1.1.1.1/Thu Jan 29 19:54:42 2015/-kk/
+/pshufb-mask-comments.ll/1.1.1.2/Sat Mar 21 02:43:12 2015/-kk/
 /pshufd-combine-crash.ll/1.1.1.1/Sun Aug 10 17:04:46 2014/-kk/
 /psubus.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
 /ptr-rotate.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
@@ -1455,8 +1456,6 @@
 /sdiv-exact.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /segmented-stacks-dynamic.ll/1.1.1.3/Thu Feb  5 08:38:20 2015/-kk/
 /segmented-stacks.ll/1.1.1.3/Thu Feb  5 08:38:20 2015/-kk/
-/seh-basic.ll/1.1.1.1/Thu Jan 29 19:54:42 2015/-kk/
-/seh-safe-div.ll/1.1.1.1/Thu Jan 29 19:54:43 2015/-kk/
 /select-with-and-or.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /select.ll/1.1.1.2/Fri Oct  3 09:23:13 2014/-kk/
 /select_const.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
@@ -1544,6 +1543,7 @@
 /sse-load-ret.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /sse-minmax.ll/1.1.1.2/Thu Feb  5 08:38:20 2015/-kk/
 /sse-scalar-fp-arith.ll/1.1.1.2/Thu Feb  5 08:38:20 2015/-kk/
+/sse-unaligned-mem-feature.ll/1.1.1.1/Wed Mar 18 17:23:40 2015/-kk/
 /sse-varargs.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
 /sse1.ll/1.1.1.3/Thu Feb  5 08:38:20 2015/-kk/
 /sse2-intrinsics-x86.ll/1.1.1.4/Thu Feb  5 08:38:20 2015/-kk/
@@ -1846,7 +1846,7 @@
 /win64_params.ll/1.1.1.1/Thu Nov 28 14:18:12 2013/-kk/
 /win64_vararg.ll/1.1.1.2/Thu Feb  5 08:38:24 2015/-kk/
 /win_chkstk.ll/1.1.1.2/Tue Jan 14 16:02:14 2014/-kk/
-/win_cst_pool.ll/1.1.1.1/Sun Aug 10 17:04:46 2014/-kk/
+/win_cst_pool.ll/1.1.1.2/Sat Mar 21 02:43:16 2015/-kk/
 /win_ftol2.ll/1.1.1.1/Thu Nov 28 14:18:11 2013/-kk/
 /windows-itanium-alloca.ll/1.1.1.1/Thu Jan 29 19:54:43 2015/-kk/
 /x32-function_pointer-1.ll/1.1.1.1/Thu Jan 29 19:54:42 2015/-kk/

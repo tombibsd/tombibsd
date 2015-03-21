@@ -336,6 +336,7 @@ struct wsmouse_repeat {
 #define	WSDISPLAY_TYPE_CLPS711X	59	/* CL PS-711x  */
 #define	WSDISPLAY_TYPE_ALLWINNER 60	/* Allwinner ARM SoC */
 #define	WSDISPLAY_TYPE_MGX	61	/* SSB 4096V-MGX */
+#define	WSDISPLAY_TYPE_MESON	62	/* Amlogic Meson ARM Soc */
 
 /* Basic display information.  Not applicable to all display types. */
 struct wsdisplay_fbinfo {

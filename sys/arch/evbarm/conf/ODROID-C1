@@ -18,6 +18,7 @@ options 	RTC_OFFSET=0	# hardware clock is this many mins. west of GMT
 # CPU options
 
 options 	CPU_CORTEXA5
+options 	CPUFREQ=1512
 options 	PMAPCOUNTERS
 
 # Architecture options
@@ -134,11 +135,11 @@ options 	BUFQ_PRIOCSCAN
 
 #options 	PERFCTRS	# performance counters
 options 	DIAGNOSTIC	# internal consistency checks
-options 	DEBUG
-options 	LOCKDEBUG
+#options 	DEBUG
+#options 	LOCKDEBUG
 #options 	PMAP_DEBUG	# Enable pmap_debug_level code
 #options 	IPKDB		# remote kernel debugging
-options 	VERBOSE_INIT_ARM # verbose bootstraping messages
+#options 	VERBOSE_INIT_ARM # verbose bootstraping messages
 options 	DDB		# in-kernel debugger
 options		DDB_ONPANIC=1
 options 	DDB_HISTORY_SIZE=100	# Enable history editing in DDB
@@ -194,8 +195,7 @@ options 	CONSADDR=0xc81004c0, CONSPEED=115200
 amlogicrng0	at amlogicio0
 
 # SDHC controller
-amlogicsdhc0	at amlogicio0 port 1	# SD card
-#amlogicsdhc0	at amlogicio0 port 2	# EMMC
+amlogicsdhc0	at amlogicio0
 sdmmc*		at amlogicsdhc?
 ld*		at sdmmc?
 
@@ -221,7 +221,7 @@ midi*		at midibus?
 # Pseudo-Devices
 
 # disk/mass storage pseudo-devices
-pseudo-device	md			# memory disk device (ramdisk)
+#pseudo-device	md			# memory disk device (ramdisk)
 pseudo-device	vnd			# disk-like interface to files
 #pseudo-device	fss			# file system snapshot device
 pseudo-device	drvctl			# driver control

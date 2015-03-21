@@ -522,6 +522,7 @@
 /vperm-lowering.ll/1.1.1.1/Sun Aug 10 17:04:44 2014/-kk/
 /vrsave-spill.ll/1.1.1.1/Thu Nov 28 14:18:10 2013/-kk/
 /vrspill.ll/1.1.1.2/Thu Feb  5 08:38:06 2015/-kk/
+/vsel-prom.ll/1.1.1.1/Wed Mar 18 17:23:39 2015/-kk/
 /vsx-args.ll/1.1.1.2/Thu Feb  5 08:38:06 2015/-kk/
 /vsx-div.ll/1.1.1.1/Thu Jan 29 19:54:41 2015/-kk/
 /vsx-fma-m.ll/1.1.1.2/Thu Feb  5 08:38:06 2015/-kk/

@@ -47,6 +47,8 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <dev/usb/ehcireg.h>
 #include <dev/usb/ehcivar.h>
 
+#include <dev/usb/usbdevs.h>
+
 #include "opt_ingenic.h"
 #include "ohci.h"
 
@@ -114,11 +116,11 @@ ingenic_ehci_attach(device_t parent, device_t self, void *aux)
 	/* Disable EHCI interrupts */
 	bus_space_write_4(sc->iot, sc->ioh, EHCI_USBINTR, 0);
 
-	ih = evbmips_intr_establish(20, ehci_intr, sc);
+	ih = evbmips_intr_establish(aa->aa_irq, ehci_intr, sc);
 		
 	if (ih == NULL) {
 		aprint_error_dev(self, "failed to establish interrupt %d\n",
-		     20);
+		     aa->aa_irq);
 		goto fail;
 	}
 
@@ -131,6 +133,8 @@ ingenic_ehci_attach(device_t parent, device_t self, void *aux)
 #else
 	sc->sc_ncomp = 0;
 #endif
+	sc->sc_id_vendor = USB_VENDOR_INGENIC;
+	strlcpy(sc->sc_vendor, "Ingenic", sizeof(sc->sc_vendor));
 
 	status = ehci_init(sc);
 	if (status != USBD_NORMAL_COMPLETION) {

@@ -101,6 +101,7 @@ struct vfsops mfs_vfsops = {
 	.vfs_sync = ffs_sync,
 	.vfs_vget = ufs_vget,
 	.vfs_loadvnode = ffs_loadvnode,
+	.vfs_newvnode = ffs_newvnode,
 	.vfs_fhtovp = ffs_fhtovp,
 	.vfs_vptofh = ffs_vptofh,
 	.vfs_init = mfs_init,

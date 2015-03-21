@@ -3,6 +3,7 @@
 /2011-06-02-CallSlotOverwritten.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /align.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
 /atomic.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/
+/callslot_aa.ll/1.1.1.1/Wed Mar 18 17:23:43 2015/-kk/
 /callslot_deref.ll/1.1.1.1/Thu Jan 29 19:54:36 2015/-kk/
 /capturing-func.ll/1.1.1.1/Sun Aug 10 17:04:36 2014/-kk/
 /crash.ll/1.1.1.1/Thu Nov 28 14:18:06 2013/-kk/

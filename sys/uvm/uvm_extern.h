@@ -175,19 +175,23 @@
 /*
  * flags for ubc_alloc()
  */
-#define UBC_READ	0x001
-#define UBC_WRITE	0x002
-#define UBC_FAULTBUSY	0x004
+#define UBC_READ	0x001	/* reading from object */
+#define UBC_WRITE	0x002	/* writing to object */
+#define UBC_FAULTBUSY	0x004	/* nobody else is using these pages, so busy
+				 * them at alloc and unbusy at release (e.g.,
+				 * for writes extending a file) */
 
 /*
  * flags for ubc_release()
  */
-#define UBC_UNMAP	0x010
+#define UBC_UNMAP	0x010	/* unmap pages now -- don't leave the
+				 * mappings cached indefinitely */
 
 /*
- * flags for ubc_uiomve()
+ * flags for ubc_uiomove()
  */
-#define	UBC_PARTIALOK	0x100
+#define	UBC_PARTIALOK	0x100	/* return early on error; otherwise, zero all
+				 * remaining bytes after error */
 
 /*
  * flags for uvn_findpages().

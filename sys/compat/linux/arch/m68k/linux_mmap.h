@@ -38,13 +38,13 @@
 
 #define LINUX_MAP_FIXED		0x0010
 #define LINUX_MAP_ANON		0x0020
+#define LINUX_MAP_LOCKED	0x2000
 
 /* the following flags are silently ignored */
 
 #define LINUX_MAP_GROWSDOWN	0x0100
 #define LINUX_MAP_DENYWRITE	0x0800
 #define LINUX_MAP_EXECUTABLE	0x1000
-#define LINUX_MAP_LOCKED	0x2000
 #define LINUX_MAP_NORESERVE	0x4000
 
 #endif /* !_M68K_LINUX_MMAP_H */

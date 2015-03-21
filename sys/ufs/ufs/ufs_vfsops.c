@@ -239,6 +239,8 @@ ufs_fhtovp(struct mount *mp, struct ufid *ufhp, struct vnode **vpp)
 	int error;
 
 	if ((error = VFS_VGET(mp, ufhp->ufid_ino, &nvp)) != 0) {
+		if (error == ENOENT)
+			error = ESTALE;
 		*vpp = NULLVP;
 		return (error);
 	}

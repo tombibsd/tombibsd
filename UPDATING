@@ -19,6 +19,11 @@ See also: BUILDING, build.sh, Makefile.
 Recent changes:
 ^^^^^^^^^^^^^^^
 
+20150310:
+	Improvements to openssl for arm mean that update builds of
+	the openssl libraries will fail. A make cleandir in
+	external/bsd/openssl/lib is needed
+
 20141026:
 	A mishap during the import of pppd may cause your corruption
 	in your cvs directory if you happened to do a cvs update

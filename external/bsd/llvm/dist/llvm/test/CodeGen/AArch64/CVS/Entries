@@ -480,6 +480,7 @@
 /rm_redundant_cmp.ll/1.1.1.1/Thu Jan 29 19:54:44 2015/-kk/
 /sdivpow2.ll/1.1.1.2/Thu Feb  5 08:38:01 2015/-kk/
 /setcc-takes-i32.ll/1.1.1.2/Tue Jun  3 03:05:19 2014/-kk/
+/setcc-type-mismatch.ll/1.1.1.1/Wed Mar 18 17:23:42 2015/-kk/
 /sibling-call.ll/1.1.1.2/Tue Jun  3 03:05:19 2014/-kk/
 /sincos-expansion.ll/1.1.1.2/Tue Jun  3 03:05:19 2014/-kk/
 /sincospow-vector-expansion.ll/1.1.1.2/Tue Jun  3 03:05:19 2014/-kk/

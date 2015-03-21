@@ -256,4 +256,8 @@ struct bioc_volops {
 	int 		bc_volid;	/* volume id to be created/removed */
 };
 
+struct envsys_data;
+void bio_disk_to_envsys(struct envsys_data *, const struct bioc_disk *);
+void bio_vol_to_envsys(struct envsys_data *, const struct bioc_vol *) ;
+
 #endif /* ! _DEV_BIOVAR_H_ */

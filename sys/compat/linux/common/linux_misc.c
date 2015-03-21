@@ -465,6 +465,7 @@ linux_to_bsd_mmap_args(struct sys_mmap_args *cma, const struct linux_sys_mmap_ar
 	flags |= cvtto_bsd_mask(fl, LINUX_MAP_PRIVATE, MAP_PRIVATE);
 	flags |= cvtto_bsd_mask(fl, LINUX_MAP_FIXED, MAP_FIXED);
 	flags |= cvtto_bsd_mask(fl, LINUX_MAP_ANON, MAP_ANON);
+	flags |= cvtto_bsd_mask(fl, LINUX_MAP_LOCKED, MAP_WIRED);
 	/* XXX XAX ERH: Any other flags here?  There are more defined... */
 
 	SCARG(cma, addr) = (void *)SCARG(uap, addr);

@@ -10,6 +10,7 @@
 __RCSID("$NetBSD$");
 #endif /* LIBC_SCCS and not lint */
 
+#include "namespace.h"
 #include <machine/float.h>
 #include <ieeefp.h>
 
