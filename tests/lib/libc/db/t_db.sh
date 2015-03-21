@@ -801,7 +801,7 @@ ffactor=$ffactor,nelem=25000,cachesize=65536" hash in
 atf_test_case bsize_ffactor
 bsize_ffactor_head()
 {
-	atf_set "timeout" "480"
+	atf_set "timeout" "1800"
 	atf_set "descr" "Checks hash database with various" \
 					"bucketsizes and fill factors"
 }

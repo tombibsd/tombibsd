@@ -22,7 +22,7 @@
 /clock_subr.h/1.25/Tue Dec  9 04:34:54 2014/-kk/
 /clockctl.c/1.32/Fri Oct  3 09:09:12 2014/-kk/
 /cninit.c/1.11/Tue Feb  8 20:20:26 2011/-kk/
-/cons.c/1.72/Fri Oct  3 09:09:12 2014/-kk/
+/cons.c/1.73/Sat Mar 21 02:29:51 2015/-kk/
 /cons.h/1.27/Tue Feb  8 20:20:26 2011/-kk/
 /dev_verbose.c/1.1/Sun Sep 21 14:30:22 2014/-kk/
 /dev_verbose.h/1.1/Sun Sep 21 14:30:22 2014/-kk/

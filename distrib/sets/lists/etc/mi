@@ -216,6 +216,7 @@
 ./etc/rc.d/ipsec				etc-net-rc
 ./etc/rc.d/irdaattach				etc-sys-rc
 ./etc/rc.d/iscsi_target				etc-iscsi-rc
+./etc/rc.d/iscsid				etc-iscsi-rc
 ./etc/rc.d/isdnd				etc-isdn-rc
 ./etc/rc.d/isibootd				etc-bootserver-rc
 ./etc/rc.d/kdc					etc-krb5-rc

@@ -29,12 +29,14 @@
 #ifndef _ARM_AMLOGIC_INTR_H
 #define _ARM_AMLOGIC_INTR_H
 
-#define PIC_MAXSOURCES		224
-#define PIC_MAXMAXSOURCES	256
+#define PIC_MAXSOURCES		256
+#define PIC_MAXMAXSOURCES	282
 
 #include <arm/cortex/gic_intr.h>
 #include <arm/cortex/a9tmr_intr.h>
 
+#define AMLOGIC_INTR_USB0	62
+#define AMLOGIC_INTR_USB1	63
 #define AMLOGIC_INTR_UART2AO	70
 #define AMLOGIC_INTR_UART0AO	122
 

@@ -1490,9 +1490,9 @@ get_cachesize_cp15(int cssr)
 #if defined(CPU_ARMV7)
 	__asm volatile(".arch\tarmv7a");
 	__asm volatile("mcr p15, 2, %0, c0, c0, 0" :: "r" (cssr));
-	__asm volatile("isb");	/* sync to the new cssr */
+	__asm volatile("isb" ::: "memory");	/* sync to the new cssr */
 #else
-	__asm volatile("mcr p15, 1, %0, c0, c0, 2" :: "r" (cssr));
+	__asm volatile("mcr p15, 1, %0, c0, c0, 2" :: "r" (cssr) : "memory");
 #endif
 	__asm volatile("mrc p15, 1, %0, c0, c0, 0" : "=r" (csid));
 	return csid;

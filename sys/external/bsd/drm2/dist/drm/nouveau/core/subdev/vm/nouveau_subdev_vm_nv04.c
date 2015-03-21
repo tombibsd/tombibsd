@@ -137,10 +137,23 @@ nv04_vmmgr_dtor(struct nouveau_object *object)
 		nouveau_gpuobj_ref(NULL, &priv->vm->pgt[0].obj[0]);
 		nouveau_vm_ref(NULL, &priv->vm, NULL);
 	}
+#ifdef __NetBSD__
+	if (priv->nullp) {
+		/* XXX pa_dmat or pa_dmat64?  */
+		struct nouveau_device *device = nv_device(priv);
+		const bus_dma_tag_t dmat = device->pdev->pd_pa.pa_dmat64;
+
+		bus_dmamap_unload(dmat, priv->nullmap);
+		bus_dmamem_unmap(dmat, priv->nullp, PAGE_SIZE);
+		bus_dmamap_destroy(dmat, priv->nullmap);
+		bus_dmamem_free(dmat, &priv->nullseg, 1);
+	}
+#else
 	if (priv->nullp) {
 		pci_free_consistent(nv_device(priv)->pdev, 16 * 1024,
 				    priv->nullp, priv->null);
 	}
+#endif
 	nouveau_vmmgr_destroy(&priv->base);
 }
 

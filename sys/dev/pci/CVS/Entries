@@ -11,7 +11,7 @@
 /agp_amd.c/1.21/Sat Nov 13 13:52:04 2010/-kk/
 /agp_amd64.c/1.7/Sat Feb 25 21:21:09 2012/-kk/
 /agp_apple.c/1.7/Tue Dec  9 04:24:00 2014/-kk/
-/agp_i810.c/1.114/Fri Oct  3 09:43:36 2014/-kk/
+/agp_i810.c/1.116/Sat Mar 21 02:29:53 2015/-kk/
 /agp_i810var.h/1.5/Sat Jun 14 03:56:43 2014/-kk/
 /agp_intel.c/1.37/Mon Apr  4 20:37:56 2011/-kk/
 /agp_sis.c/1.14/Sat Nov 13 13:52:05 2010/-kk/
@@ -175,7 +175,7 @@
 /if_iwi.c/1.98/Mon Jan 12 06:48:50 2015/-kk/
 /if_iwireg.h/1.19/Mon Sep  8 23:36:54 2008/-kk/
 /if_iwivar.h/1.17/Mon Jan 12 06:48:50 2015/-kk/
-/if_iwm.c/1.11/Sat Mar 21 02:21:12 2015/-kk/
+/if_iwm.c/1.15/Sat Mar 21 02:29:54 2015/-kk/
 /if_iwmreg.h/1.2/Sat Mar 21 02:21:12 2015/-kk/
 /if_iwmvar.h/1.4/Sat Mar 21 02:21:12 2015/-kk/
 /if_iwn.c/1.74/Tue Dec  9 04:24:01 2014/-kk/
@@ -350,7 +350,7 @@
 /pciidereg.h/1.11/Fri Nov 24 22:04:25 2006/-kk/
 /pciidevar.h/1.46/Tue Jul 31 15:50:36 2012/-kk/
 /pciio.h/1.4/Fri Oct  3 09:09:19 2014/-kk/
-/pcireg.h/1.100/Tue Dec  9 04:43:49 2014/-kk/
+/pcireg.h/1.101/Sat Mar 21 02:29:55 2015/-kk/
 /pcivar.h/1.101/Fri Jan  2 11:21:38 2015/-kk/
 /pcscp.c/1.47/Fri Apr 11 02:03:49 2014/-kk/
 /pcscpreg.h/1.2/Mon Apr 28 20:23:55 2008/-kk/

@@ -425,7 +425,9 @@ sdhc_host_found(struct sdhc_softc *sc, bus_space_tag_t iot,
 	if (ISSET(caps, SDHC_HIGH_SPEED_SUPP))
 		saa.saa_caps |= SMC_CAPS_SD_HIGHSPEED;
 	if (ISSET(hp->flags, SHF_USE_DMA)) {
-		saa.saa_caps |= SMC_CAPS_DMA | SMC_CAPS_MULTI_SEG_DMA;
+		saa.saa_caps |= SMC_CAPS_DMA;
+		if (!ISSET(hp->sc->sc_flags, SDHC_FLAG_ENHANCED))
+			saa.saa_caps |= SMC_CAPS_MULTI_SEG_DMA;
 	}
 	if (ISSET(sc->sc_flags, SDHC_FLAG_SINGLE_ONLY))
 		saa.saa_caps |= SMC_CAPS_SINGLE_ONLY;
@@ -1629,7 +1631,7 @@ sdhc_soft_reset(struct sdhc_host *hp, int mask)
 	}
 
 	if (ISSET(hp->sc->sc_flags, SDHC_FLAG_ENHANCED)) {
-		HWRITE4(hp, SDHC_DMA_CTL, SDHC_DMA_SNOOP);
+		HSET4(hp, SDHC_DMA_CTL, SDHC_DMA_SNOOP);
 	}
 
 	return 0;

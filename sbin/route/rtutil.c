@@ -92,6 +92,7 @@ static const struct bits bits[] = {
 	{ RTF_CLONED,	'c' },
 	/* { RTF_JUMBO,	'J' }, */
 	{ RTF_ANNOUNCE,	'p' },
+	{ RTF_LOCAL, 'l'},
 	{ 0, 0 }
 };
 

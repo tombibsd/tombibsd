@@ -7,7 +7,7 @@
 /t_atoi.c/1.2/Thu Mar 29 05:56:36 2012/-kk/
 /t_div.c/1.2/Thu Jul  7 11:12:18 2011/-kk/
 /t_exit.c/1.1/Mon May  9 07:31:51 2011/-kk/
-/t_getenv.c/1.2/Fri Jul 15 13:54:31 2011/-kk/
+/t_getenv.c/1.3/Sat Mar 21 02:30:03 2015/-kk/
 /t_getenv_thread.c/1.2/Thu Mar 15 02:02:23 2012/-kk/
 /t_getopt.sh/1.1/Sat Jan  1 23:56:49 2011/-kk/
 /t_hsearch.c/1.4/Mon Jul 21 08:07:53 2014/-kk/

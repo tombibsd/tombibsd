@@ -29,14 +29,14 @@
 /netbsd32_sem.c/1.11/Fri Oct  3 09:57:47 2014/-kk/
 /netbsd32_signal.c/1.38/Thu Feb 13 15:22:27 2014/-kk/
 /netbsd32_socket.c/1.41/Sat Aug 18 15:25:15 2012/-kk/
-/netbsd32_syscall.h/1.109/Wed Jun 18 08:42:58 2014/-kk/
-/netbsd32_syscallargs.h/1.109/Wed Jun 18 08:42:58 2014/-kk/
-/netbsd32_syscalls.c/1.108/Wed Jun 18 08:42:58 2014/-kk/
+/netbsd32_syscall.h/1.110/Sat Mar 21 02:29:51 2015/-kk/
+/netbsd32_syscallargs.h/1.110/Sat Mar 21 02:29:51 2015/-kk/
+/netbsd32_syscalls.c/1.109/Sat Mar 21 02:29:51 2015/-kk/
 /netbsd32_sysctl.c/1.35/Wed Jun 18 08:42:58 2014/-kk/
 /netbsd32_sysctl.h/1.1/Wed Nov 19 18:36:05 2008/-kk/
-/netbsd32_sysent.c/1.108/Wed Jun 18 08:42:58 2014/-kk/
+/netbsd32_sysent.c/1.109/Sat Mar 21 02:29:51 2015/-kk/
 /netbsd32_time.c/1.42/Tue Oct  2 01:44:28 2012/-kk/
 /netbsd32_wait.c/1.22/Sat Nov  3 23:22:22 2012/-kk/
 /syscalls.conf/1.13/Fri Oct  3 09:36:14 2014/-kk/
-/syscalls.master/1.101/Wed Jun 18 08:42:58 2014/-kk/
+/syscalls.master/1.102/Sat Mar 21 02:29:51 2015/-kk/
 D

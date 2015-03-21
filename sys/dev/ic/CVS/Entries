@@ -211,7 +211,7 @@
 /ds.h/1.10/Sun Feb 12 16:34:11 2012/-kk/
 /ds1286reg.h/1.8/Sun Dec 11 12:21:26 2005/-kk/
 /ds1687reg.h/1.10/Sun May  4 12:50:38 2008/-kk/
-/dwc_gmac.c/1.31/Mon Jan 12 06:48:47 2015/-kk/
+/dwc_gmac.c/1.32/Sat Mar 21 02:29:52 2015/-kk/
 /dwc_gmac_reg.h/1.14/Tue Dec  9 04:43:47 2014/-kk/
 /dwc_gmac_var.h/1.6/Tue Dec  9 04:43:47 2014/-kk/
 /dwc_mmc.c/1.6/Thu Feb  5 08:41:10 2015/-kk/
@@ -270,7 +270,7 @@
 /i82586reg.h/1.13/Mon Apr 28 20:23:50 2008/-kk/
 /i82586var.h/1.23/Fri Jun  3 16:28:40 2011/-kk/
 /i82595reg.h/1.10/Mon Apr 28 20:23:50 2008/-kk/
-/i82596.c/1.31/Sat Mar  1 06:04:41 2014/-kk/
+/i82596.c/1.32/Sat Mar 21 02:29:52 2015/-kk/
 /i82596reg.h/1.4/Sat Apr  5 08:42:35 2008/-kk/
 /i82596var.h/1.15/Tue Dec  1 23:16:01 2009/-kk/
 /i8259reg.h/1.4/Mon Apr 28 20:23:50 2008/-kk/
@@ -564,7 +564,7 @@
 /tropic.c/1.44/Sat Oct 27 17:18:23 2012/-kk/
 /tropicreg.h/1.6/Sun Dec 11 12:21:28 2005/-kk/
 /tropicvar.h/1.14/Sat Oct 27 17:18:23 2012/-kk/
-/tulip.c/1.184/Fri Oct  3 09:26:00 2014/-kk/
+/tulip.c/1.185/Sat Mar 21 02:29:53 2015/-kk/
 /tulipreg.h/1.37/Mon Jan 16 17:58:02 2012/-kk/
 /tulipvar.h/1.68/Sun Jul 22 14:32:58 2012/-kk/
 /uda1341.c/1.1/Sat Jan 28 08:37:22 2012/-kk/

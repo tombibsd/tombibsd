@@ -96,7 +96,8 @@ a9tmr_match(device_t parent, cfdata_t cf, void *aux)
 	if ((armreg_pfr1_read() & ARM_PFR1_GTIMER_MASK) != 0)
 		return 0;
 
-	if (!CPU_ID_CORTEX_A9_P(curcpu()->ci_arm_cpuid))
+	if (!CPU_ID_CORTEX_A9_P(curcpu()->ci_arm_cpuid) &&
+	    !CPU_ID_CORTEX_A5_P(curcpu()->ci_arm_cpuid))
 		return 0;
 
 	if (strcmp(mpcaa->mpcaa_name, cf->cf_name) != 0)

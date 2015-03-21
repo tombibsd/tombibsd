@@ -100,7 +100,7 @@
 /mknodat.c/1.1/Thu Oct 24 10:28:53 2013/-kk/
 /mlock.2/1.22/Mon Feb 16 03:13:51 2015/-kk/
 /mlockall.2/1.13/Wed Apr 30 13:10:51 2008/-kk/
-/mmap.2/1.47/Thu Jan  5 15:19:52 2012/-kk/
+/mmap.2/1.48/Sat Mar 21 02:29:26 2015/-kk/
 /mmap.c/1.15/Tue Mar 20 16:26:12 2012/-kk/
 /modctl.2/1.10/Sun Jul 20 13:58:22 2014/-kk/
 /mount.2/1.49/Fri Nov 18 21:04:21 2011/-kk/

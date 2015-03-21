@@ -42,8 +42,8 @@ struct krwlock {
 
 #ifdef MULTIPROCESSOR
 #ifdef _ARM_ARCH_7
-#define	RW_RECEIVE(rw)			__asm __volatile("dmb")
-#define	RW_GIVE(rw)			__asm __volatile("dsb")
+#define	RW_RECEIVE(rw)			__asm __volatile("dmb" ::: "memory")
+#define	RW_GIVE(rw)			__asm __volatile("dsb" ::: "memory")
 #else
 #define	RW_RECEIVE(rw)			membar_consumer()
 #define	RW_GIVE(rw)			membar_producer()

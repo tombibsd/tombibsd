@@ -6,8 +6,7 @@
 #define _SYS_BSWAP_H_
 
 #ifndef _LOCORE
-#include <sys/cdefs.h>
-#include <sys/types.h>
+#include <sys/stdint.h>
 
 #include <machine/bswap.h>
 

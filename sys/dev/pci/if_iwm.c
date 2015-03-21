@@ -5329,7 +5329,8 @@ iwm_setrates(struct iwm_node *in)
 	int i, ridx, tab = 0;
 	int txant = 0;
 
-	if (nrates > __arraycount(lq->rs_table)) {
+	if (nrates > __arraycount(lq->rs_table) ||
+	    nrates > IEEE80211_RATE_MAXSIZE) {
 		DPRINTF(("%s: node supports %d rates, driver handles only "
 		    "%zu\n", DEVNAME(sc), nrates, __arraycount(lq->rs_table)));
 		return;
@@ -6295,8 +6296,9 @@ iwm_notif_intr(struct iwm_softc *sc)
 
 		default:
 			aprint_error_dev(sc->sc_dev,
-			    "frame %d/%d %x UNHANDLED (this should "
-			    "not happen)\n", qid, idx, pkt->len_n_flags);
+			    "code %02x frame %d/%d %x UNHANDLED "
+			    "(this should not happen)\n",
+			    pkt->hdr.code, qid, idx, pkt->len_n_flags);
 			break;
 		}
 

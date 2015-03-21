@@ -2551,6 +2551,23 @@ puffs_vnop_write(void *v)
 	uflags |= PUFFS_UPDATEMTIME;
 	puffs_updatenode(VPTOPP(vp), uflags, vp->v_size);
 
+	/*
+	 * If we do not use meta flush, we need to update the
+	 * filesystem now, otherwise we will get a stale value
+	 * on the next GETATTR
+	 */
+	if (!PUFFS_USE_METAFLUSH(pmp) && (uflags & PUFFS_UPDATESIZE)) {
+		struct vattr va;
+		int ret;
+
+		vattr_null(&va);
+		va.va_size = vp->v_size;
+		ret = dosetattr(vp, &va, FSCRED, 0);
+		if (ret) {
+			DPRINTF(("dosetattr set size to %jd failed: %d\n",
+			    (intmax_t)vp->v_size, ret));
+		}
+	}
 	mutex_exit(&pn->pn_sizemtx);
 	return error;
 }

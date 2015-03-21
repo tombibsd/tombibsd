@@ -47,7 +47,7 @@ __BEGIN_DECLS
 
 /* The socket name */
 
-#define ISCSID_SOCK_NAME   "/tmp/iscsid_socket"
+#define ISCSID_SOCK_NAME   "/var/run/iscsid_socket"
 
 
 /* ==== Requests ==== */

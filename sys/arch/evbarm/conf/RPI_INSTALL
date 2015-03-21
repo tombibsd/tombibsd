@@ -8,7 +8,7 @@ include "arch/evbarm/conf/RPI"
 include "arch/evbarm/conf/INSTALL"
 
 no options	MEMORY_DISK_ROOT_SIZE
-options 	MEMORY_DISK_ROOT_SIZE=28672
+options 	MEMORY_DISK_ROOT_SIZE=29696
 
 makeoptions	RAMDISKNAME=sshramdisk
 no makeoptions	DEBUG

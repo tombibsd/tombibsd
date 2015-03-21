@@ -47,11 +47,6 @@
 #define	KERNEL_BASE		0xf0000000
 
 /*
- * Override the default pager_map size, there's not enough KVA.
- */
-#define PAGER_MAP_DEFAULT_SIZE		(4 * 1024 * 1024)
-
-/*
  * Size of User Raw I/O map
  */
 

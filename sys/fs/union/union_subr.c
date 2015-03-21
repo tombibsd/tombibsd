@@ -534,8 +534,14 @@ union_freevp(struct vnode *vp)
 {
 	struct union_node *un = VTOUNION(vp);
 
+	/* Detach vnode from union node. */
+	un->un_vnode = NULL;
+	un->un_uppersz = VNOVAL;
+	un->un_lowersz = VNOVAL;
+
 	vcache_remove(vp->v_mount, &un, sizeof(un));
 
+	/* Detach union node from vnode. */
 	mutex_enter(vp->v_interlock);
 	vp->v_data = NULL;
 	mutex_exit(vp->v_interlock);

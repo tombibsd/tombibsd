@@ -1,5 +1,5 @@
 /nouveau_subdev_bios_P0260.c/1.1.1.1/Wed Aug  6 12:36:28 2014/-kk/
-/nouveau_subdev_bios_base.c/1.1.1.1/Wed Aug  6 12:36:28 2014/-kk/
+/nouveau_subdev_bios_base.c/1.2/Sat Mar 21 02:29:58 2015/-kk/
 /nouveau_subdev_bios_bit.c/1.1.1.1/Wed Aug  6 12:36:28 2014/-kk/
 /nouveau_subdev_bios_boost.c/1.1.1.1/Wed Aug  6 12:36:28 2014/-kk/
 /nouveau_subdev_bios_conn.c/1.1.1.1/Wed Aug  6 12:36:28 2014/-kk/
@@ -13,7 +13,7 @@
 /nouveau_subdev_bios_init.c/1.1.1.1/Wed Aug  6 12:36:29 2014/-kk/
 /nouveau_subdev_bios_mxm.c/1.1.1.1/Wed Aug  6 12:36:29 2014/-kk/
 /nouveau_subdev_bios_perf.c/1.1.1.1/Wed Aug  6 12:36:29 2014/-kk/
-/nouveau_subdev_bios_pll.c/1.1.1.1/Wed Aug  6 12:36:29 2014/-kk/
+/nouveau_subdev_bios_pll.c/1.2/Sat Mar 21 02:29:58 2015/-kk/
 /nouveau_subdev_bios_ramcfg.c/1.1.1.1/Wed Aug  6 12:36:29 2014/-kk/
 /nouveau_subdev_bios_rammap.c/1.1.1.1/Wed Aug  6 12:36:29 2014/-kk/
 /nouveau_subdev_bios_therm.c/1.1.1.1/Wed Aug  6 12:36:29 2014/-kk/

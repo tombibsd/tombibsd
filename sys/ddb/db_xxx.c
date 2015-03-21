@@ -161,6 +161,12 @@ db_show_files_cmd(db_expr_t addr, bool haddr,
 	bool full = false;
 	fdtab_t *dt;
 
+	if (!haddr) {
+		db_printf("usage: show files address\n");
+		db_printf("\taddress == an address of a proc structure\n");
+		return;
+	}
+
 	if (modif[0] == 'f')
 		full = true;
 

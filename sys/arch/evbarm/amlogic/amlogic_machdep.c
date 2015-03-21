@@ -132,11 +132,10 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include "opt_kgdb.h"
 #include "opt_ipkdb.h"
 #include "opt_md.h"
-#include "opt_com.h"
 #include "opt_amlogic.h"
 #include "opt_arm_debug.h"
 
-#include "com.h"
+#include "amlogic_com.h"
 #if 0
 #include "prcm.h"
 #include "sdhc.h"
@@ -182,8 +181,10 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <arm/mainbus/mainbus.h>
 
 #include <arm/amlogic/amlogic_reg.h>
+#include <arm/amlogic/amlogic_crureg.h>
 #include <arm/amlogic/amlogic_var.h>
 #include <arm/amlogic/amlogic_comreg.h>
+#include <arm/amlogic/amlogic_comvar.h>
 
 #include <arm/cortex/pl310_reg.h>
 #include <arm/cortex/scu_reg.h>
@@ -220,12 +221,6 @@ u_int uboot_args[4] = { 0 };	/* filled in by amlogic_start.S (not in bss) */
 extern char KERNEL_BASE_phys[];
 extern char _end[];
 
-#if NCOM > 0
-int use_fb_console = false;
-#else
-int use_fb_console = true;
-#endif
-
 /*
  * Macros to translate between physical and virtual for a subset of the
  * kernel address space.  *Not* for general use.
@@ -244,11 +239,6 @@ static void amlogic_device_register(device_t, void *);
 static void amlogic_reset(void);
 
 bs_protos(bs_notimpl);
-
-#if NCOM > 0
-#include <dev/ic/comreg.h>
-#include <dev/ic/comvar.h>
-#endif
 
 /*
  * Static device mappings. These peripheral registers are mapped at
@@ -297,14 +287,14 @@ amlogic_putchar(char c)
 	volatile uint32_t *uartaddr = (volatile uint32_t *)CONSADDR_VA;
 	int timo = 150000;
 
-	while ((uartaddr[UART_STATUS_REG] & UART_STATUS_TX_EMPTY) == 0) {
+	while ((uartaddr[UART_STATUS_REG/4] & UART_STATUS_TX_EMPTY) == 0) {
 		if (--timo == 0)
 			break;
 	}
 
-	uartaddr[UART_WFIFO_REG] = c;
+	uartaddr[UART_WFIFO_REG/4] = c;
 
-	while ((uartaddr[UART_STATUS_REG] & UART_STATUS_TX_EMPTY) == 0) {
+	while ((uartaddr[UART_STATUS_REG/4] & UART_STATUS_TX_EMPTY) == 0) {
 		if (--timo == 0)
 			break;
 	}
@@ -327,15 +317,14 @@ u_int
 initarm(void *arg)
 {
 	psize_t ram_size = 0;
-	char *ptr;
 	*(volatile int *)CONSADDR_VA  = 0x40;	/* output '@' */
-#if 1
-	amlogic_putchar('d');
-#endif
 
+	amlogic_putchar('d');
 	pmap_devmap_register(devmap);
+
 	amlogic_putchar('b');
 	amlogic_bootstrap();
+
 	amlogic_putchar('!');
 
 #ifdef MULTIPROCESSOR
@@ -434,7 +423,7 @@ initarm(void *arg)
 
 	arm32_bootmem_init(bootconfig.dram[0].address, ram_size,
 	    KERNEL_BASE_PHYS);
-	arm32_kernel_vm_init(KERNEL_VM_BASE, ARM_VECTORS_LOW, 0, devmap,
+	arm32_kernel_vm_init(KERNEL_VM_BASE, ARM_VECTORS_HIGH, 0, devmap,
 	    mapallmem_p);
 
 	printf("bootargs: %s\n", bootargs);
@@ -447,17 +436,6 @@ initarm(void *arg)
 
 	db_trap_callback = amlogic_db_trap;
 
-	if (get_bootconf_option(boot_args, "console",
-		    BOOTOPT_TYPE_STRING, &ptr) && strncmp(ptr, "fb", 2) == 0) {
-		use_fb_console = true;
-	}
-
-#if notyet
-	curcpu()->ci_data.cpu_cc_freq = amlogic_cpu_get_rate();
-#else
-	curcpu()->ci_data.cpu_cc_freq = 1000000;
-#endif
-
 	return initarm_common(KERNEL_VM_BASE, KERNEL_VM_SIZE, NULL, 0);
 
 }
@@ -468,7 +446,7 @@ init_clocks(void)
 	/* NOT YET */
 }
 
-#if NCOM > 0
+#if NAMLOGIC_COM > 0
 #ifndef CONSADDR
 #error Specify the address of the console UART with the CONSADDR option.
 #endif
@@ -487,9 +465,6 @@ static const int conmode = CONMODE;
 void
 consinit(void)
 {
-#if NCOM > 0
-	bus_space_handle_t bh;
-#endif
 	static int consinit_called = 0;
 
 	if (consinit_called != 0)
@@ -499,17 +474,11 @@ consinit(void)
 
 	amlogic_putchar('e');
 
-#if NCOM > 0
-	if (bus_space_map(&amlogic_a4x_bs_tag, consaddr, AMLOGIC_UART_SIZE, 0, &bh))
-		panic("Serial console can not be mapped.");
-
-	if (comcnattach(&amlogic_a4x_bs_tag, consaddr, conspeed,
-			AMLOGIC_UART_FREQ, COM_TYPE_NORMAL, conmode))
-		panic("Serial console can not be initialized.");
-
-	bus_space_unmap(&amlogic_a4x_bs_tag, bh, AMLOGIC_UART_SIZE);
+#if NAMLOGIC_COM > 0
+        const bus_space_handle_t bsh =
+            AMLOGIC_CORE_VBASE + (consaddr - AMLOGIC_CORE_BASE);
+	amlogic_com_cnattach(&amlogic_bs_tag, bsh, conspeed, conmode);
 #endif
-
 
 #if NUKBD > 0
 	ukbd_cnattach();	/* allow USB keyboard to become console */
@@ -522,16 +491,17 @@ consinit(void)
 void
 amlogic_reset(void)
 {
-#if notyet
 	bus_space_tag_t bst = &amlogic_bs_tag;
-	bus_space_handle_t bsh;
+	bus_space_handle_t bsh = amlogic_core_bsh;
+	bus_size_t off = AMLOGIC_CBUS_OFFSET;
 
-	bus_space_subregion(bst, amlogic_core1_bsh,
-	    ROCKCHIP_CRU_OFFSET, ROCKCHIP_CRU_SIZE, &bsh);
+	bus_space_write_4(bst, bsh, off + WATCHDOG_TC_REG,
+	    WATCHDOG_TC_CPUS | WATCHDOG_TC_ENABLE | 1);
+	bus_space_write_4(bst, bsh, off + WATCHDOG_RESET_REG, 0);
 
-	bus_space_write_4(bst, bsh, CRU_GLB_SRST_FST_REG,
-	    CRU_GLB_SRST_FST_MAGIC);
-#endif
+	for (;;) {
+		__asm("wfi");
+	}
 }
 
 #ifdef KGDB
@@ -589,8 +559,17 @@ amlogic_device_register(device_t self, void *aux)
 	 */
 	if (device_is_a(self, "a9tmr") || device_is_a(self, "a9wdt")) {
                 prop_dictionary_set_uint32(dict, "frequency",
-		    1600000000 / 2);
+		    amlogic_get_rate_a9periph());
 
 		return;
+	}
+
+	if (device_is_a(self, "arml2cc")) {
+		/*
+		 * L2 cache regs are at C4200000 and A9 periph base is
+		 * at C4300000; pass as a negative offset for the benefit
+		 * of armperiph bus.
+		 */
+		prop_dictionary_set_uint32(dict, "offset", 0xfff00000);
 	}
 }

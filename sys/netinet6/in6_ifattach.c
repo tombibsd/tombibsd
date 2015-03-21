@@ -848,7 +848,7 @@ in6_ifdetach(struct ifnet *ifp)
 	ip6_mrouter_detach(ifp);
 
 	/* remove neighbor management table */
-	nd6_purge(ifp);
+	nd6_purge(ifp, NULL);
 
 	/* XXX this code is duplicated in in6_purgeif() --dyoung */
 	/* nuke any of IPv6 addresses we have */
@@ -919,7 +919,7 @@ in6_ifdetach(struct ifnet *ifp)
 	 * prefixes after removing all addresses above.
 	 * (Or can we just delay calling nd6_purge until at this point?)
 	 */
-	nd6_purge(ifp);
+	nd6_purge(ifp, NULL);
 }
 
 int

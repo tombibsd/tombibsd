@@ -795,7 +795,7 @@ athn_usb_load_firmware(struct athn_usb_softc *usc)
 	usb_device_request_t req;
 	const char *name;
 	u_char *fw, *ptr;
-	size_t size;
+	size_t size, remain;
 	uint32_t addr;
 	int s, mlen, error;
 
@@ -841,8 +841,9 @@ athn_usb_load_firmware(struct athn_usb_softc *usc)
 	req.bmRequestType = UT_WRITE_VENDOR_DEVICE;
 	req.bRequest = AR_FW_DOWNLOAD;
 	USETW(req.wIndex, 0);
-	while (size > 0) {
-		mlen = MIN(size, 4096);
+	remain = size;
+	while (remain > 0) {
+		mlen = MIN(remain, 4096);
 
 		USETW(req.wValue, addr);
 		USETW(req.wLength, mlen);
@@ -851,9 +852,9 @@ athn_usb_load_firmware(struct athn_usb_softc *usc)
 			firmware_free(fw, size);
 			return error;
 		}
-		addr += mlen >> 8;
-		ptr  += mlen;
-		size -= mlen;
+		addr   += mlen >> 8;
+		ptr    += mlen;
+		remain -= mlen;
 	}
 	firmware_free(fw, size);
 

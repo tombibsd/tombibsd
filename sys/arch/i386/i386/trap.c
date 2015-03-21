@@ -653,15 +653,6 @@ faultcommon:
 			}
 			goto out;
 		}
-		KSI_INIT_TRAP(&ksi);
-		ksi.ksi_trap = type & ~T_USER;
-		ksi.ksi_addr = (void *)cr2;
-		if (error == EACCES) {
-			ksi.ksi_code = SEGV_ACCERR;
-			error = EFAULT;
-		} else {
-			ksi.ksi_code = SEGV_MAPERR;
-		}
 
 		if (type == T_PAGEFLT) {
 			onfault = onfault_handler(pcb, frame);
@@ -671,15 +662,37 @@ faultcommon:
 			    map, va, ftype, error);
 			goto kernelfault;
 		}
-		if (error == ENOMEM) {
-			ksi.ksi_signo = SIGKILL;
-			printf("UVM: pid %d (%s), uid %d killed: out of swap\n",
-			       p->p_pid, p->p_comm,
-			       l->l_cred ?
-			       kauth_cred_geteuid(l->l_cred) : -1);
-		} else {
+
+		KSI_INIT_TRAP(&ksi);
+		ksi.ksi_trap = type & ~T_USER;
+		ksi.ksi_addr = (void *)cr2;
+		switch (error) {
+		case EINVAL:
+			ksi.ksi_signo = SIGBUS;
+			ksi.ksi_code = BUS_ADRERR;
+			break;
+		case EACCES:
 			ksi.ksi_signo = SIGSEGV;
+			ksi.ksi_code = SEGV_ACCERR;
+			error = EFAULT;
+			break;
+		case ENOMEM:
+			ksi.ksi_signo = SIGKILL;
+			printf("UVM: pid %d.%d (%s), uid %d killed: "
+			    "out of swap\n", p->p_pid, l->l_lid, p->p_comm,
+			    l->l_cred ?  kauth_cred_geteuid(l->l_cred) : -1);
+			break;
+		default:
+			ksi.ksi_signo = SIGSEGV;
+			ksi.ksi_code = SEGV_MAPERR;
+			break;
 		}
+
+#ifdef TRAP_SIGDEBUG
+		printf("pid %d.%d (%s): signal %d at eip %x addr %lx "
+		    "error %d\n", p->p_pid, l->l_lid, p->p_comm, ksi.ksi_signo,
+		    frame->tf_eip, va, error);
+#endif
 		(*p->p_emul->e_trapsignal)(l, &ksi);
 		break;
 	}

@@ -207,9 +207,11 @@ arm_cpuinit:
 #endif
 	mcr	p15, 0, r1, c2, c0, 2	// TTBCR write
 
+#if !defined(CPU_CORTEXA5)
 	XPUTC(#73)
 	mov	r1, #0
 	mcr	p15, 0, r1, c8, c7, 0	// TLBIALL (just this core)
+#endif
 
 	XPUTC(#74)
 	mov	r1, #0			// get KERNEL_PID

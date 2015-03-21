@@ -832,13 +832,13 @@ _bus_dmamap_sync_segment(vaddr_t va, paddr_t pa, vsize_t len, int ops, bool read
 	 */
 	case BUS_DMASYNC_POSTREAD|BUS_DMASYNC_POSTWRITE:
 		STAT_INCR(sync_postreadwrite);
-		__asm __volatile("dmb" ::: "memory");
+		arm_dmb();
 		cpu_dcache_inv_range(va, len);
 		cpu_sdcache_inv_range(va, pa, len);
 		break;
 	case BUS_DMASYNC_POSTREAD:
 		STAT_INCR(sync_postread);
-		__asm __volatile("dmb" ::: "memory");
+		arm_dmb();
 		cpu_dcache_inv_range(va, len);
 		cpu_sdcache_inv_range(va, pa, len);
 		break;

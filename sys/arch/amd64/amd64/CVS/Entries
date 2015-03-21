@@ -30,6 +30,6 @@
 /process_machdep.c/1.29/Thu Feb 27 08:55:37 2014/-kk/
 /rbus_machdep.c/1.6/Sun Jul 20 13:08:17 2014/-kk/
 /spl.S/1.29/Tue Dec  9 04:43:36 2014/-kk/
-/trap.c/1.79/Wed Oct 29 08:12:58 2014/-kk/
+/trap.c/1.80/Sat Mar 21 02:29:37 2015/-kk/
 /vector.S/1.44/Thu Oct 24 10:28:57 2013/-kk/
 D

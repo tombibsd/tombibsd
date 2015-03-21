@@ -11,7 +11,7 @@
 /blist.h/1.8/Tue Dec 17 04:13:40 2013/-kk/
 /boot_flag.h/1.7/Tue Apr 29 19:16:08 2008/-kk/
 /bootblock.h/1.57/Fri Oct  3 09:57:55 2014/-kk/
-/bswap.h/1.17/Thu Dec 11 09:09:55 2014/-kk/
+/bswap.h/1.18/Sat Mar 21 02:30:01 2015/-kk/
 /buf.h/1.119/Fri Feb 17 08:45:11 2012/-kk/
 /bufq.h/1.10/Tue Jan 13 13:35:54 2009/-kk/
 /bufq_impl.h/1.9/Wed Nov  2 13:52:34 2011/-kk/
@@ -45,13 +45,13 @@
 /cpufreq.h/1.5/Thu Oct 27 05:13:04 2011/-kk/
 /cpuio.h/1.9/Thu Oct 24 10:28:58 2013/-kk/
 /ctype_bits.h/1.5/Thu Oct 24 10:28:58 2013/-kk/
-/ctype_inline.h/1.3/Thu Oct 24 10:28:58 2013/-kk/
+/ctype_inline.h/1.4/Sat Mar 21 02:30:01 2015/-kk/
 /debug.h/1.4/Sun Apr 15 19:07:40 2012/-kk/
 /device.h/1.146/Tue Dec  9 04:43:56 2014/-kk/
 /device_if.h/1.5/Wed Feb 24 22:38:10 2010/-kk/
 /devmon.h/1.1/Sun May 25 12:30:40 2008/-kk/
 /dir.h/1.11/Sun Dec 11 12:25:20 2005/-kk/
-/dirent.h/1.28/Tue Sep 27 01:40:32 2011/-kk/
+/dirent.h/1.29/Sat Mar 21 02:30:01 2015/-kk/
 /dirhash.h/1.6/Thu Oct 24 10:28:58 2013/-kk/
 /disk.h/1.63/Fri Jan  2 11:21:55 2015/-kk/
 /disklabel.h/1.118/Mon Jan 12 06:49:24 2015/-kk/
@@ -213,9 +213,9 @@
 /stdint.h/1.7/Thu Oct 24 10:28:58 2013/-kk/
 /swap.h/1.8/Wed Jan 14 02:20:45 2009/-kk/
 /syncobj.h/1.8/Wed Oct 21 21:12:07 2009/-kk/
-/syscall.h/1.275/Mon Feb 16 03:14:31 2015/-kk/
+/syscall.h/1.276/Sat Mar 21 02:30:01 2015/-kk/
 /syscall_stats.h/1.4/Wed Nov 12 12:36:28 2008/-kk/
-/syscallargs.h/1.258/Mon Feb 16 03:14:31 2015/-kk/
+/syscallargs.h/1.259/Sat Mar 21 02:30:01 2015/-kk/
 /syscallvar.h/1.9/Fri Mar 14 04:28:29 2014/-kk/
 /sysctl.h/1.215/Mon Jan 12 06:49:24 2015/-kk/
 /syslimits.h/1.27/Fri Dec  7 07:06:39 2012/-kk/

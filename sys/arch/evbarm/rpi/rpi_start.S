@@ -81,6 +81,12 @@
  * SUCH DAMAGE.
  */
 
+#include "opt_bcm283x.h"
+
+#if defined(BCM2836)
+#include <evbarm/rpi/rpi2_start.S>
+#else
+
 #include "opt_cputypes.h"
 #include "opt_cpuoptions.h"
 
@@ -347,6 +353,8 @@ mmu_init_table:
 
 	/* end of table */
 	MMU_INIT(0, 0, 0, 0)
+#endif
+
 
 	.globl	_C_LABEL(rpi_boot_regs)
 rpi_boot_regs:

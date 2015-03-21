@@ -1354,6 +1354,7 @@ ipnat
 ipsec
 irdaattach
 iscsi_target
+iscsid
 isdnd
 isibootd
 kdc

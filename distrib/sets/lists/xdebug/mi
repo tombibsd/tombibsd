@@ -100,6 +100,7 @@
 ./usr/X11R7/lib/libfontconfig_g.a			-unknown-	debuglib,xorg
 ./usr/X11R7/lib/libfontenc_g.a				-unknown-	debuglib,xorg
 ./usr/X11R7/lib/libfreetype_g.a				-unknown-	debuglib,xorg
+./usr/X11R7/lib/libgbm_g.a				-unknown-	debuglib,xorg
 ./usr/X11R7/lib/libglut_g.a				-unknown-	debuglib,xorg
 ./usr/X11R7/lib/liblbxutil_g.a				-obsolete-	obsolete
 ./usr/X11R7/lib/liblisp_g.a				-unknown-	debuglib,xorg

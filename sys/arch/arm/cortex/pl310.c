@@ -99,7 +99,8 @@ arml2cc_match(device_t parent, cfdata_t cf, void *aux)
 	if (arml2cc_sc)
 		return 0;
 
-	if (!CPU_ID_CORTEX_A9_P(curcpu()->ci_arm_cpuid))
+	if (!CPU_ID_CORTEX_A9_P(curcpu()->ci_arm_cpuid) &&
+	    !CPU_ID_CORTEX_A5_P(curcpu()->ci_arm_cpuid))
 		return 0;
 
 	if (strcmp(mpcaa->mpcaa_name, cf->cf_name) != 0)
@@ -138,7 +139,17 @@ arml2cc_attach(device_t parent, device_t self, void *aux)
 	prop_dictionary_t dict = device_properties(self);
 	uint32_t off;
 
+	aprint_naive("\n");
+
 	if (!prop_dictionary_get_uint32(dict, "offset", &off)) {
+		if (CPU_ID_CORTEX_A5_P(curcpu()->ci_arm_cpuid)) {
+			/*
+			 * PL310 on Cortex-A5 is external to PERIPHBASE, so
+			 * "offset" property is required.
+			 */
+			aprint_normal(": not configured\n");
+			return;
+		}
 		off = L2CC_BASE;
 	}
 
@@ -172,7 +183,6 @@ arml2cc_attach(device_t parent, device_t self, void *aux)
 
 	const bool enabled_p = arml2cc_read_4(sc, L2C_CTL) != 0;
 
-	aprint_naive("\n");
 	aprint_normal(": ARM PL310%s L2 Cache Controller%s\n",
 	    revstr, enabled_p ? "" : " (disabled)");
 

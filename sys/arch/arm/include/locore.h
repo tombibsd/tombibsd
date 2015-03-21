@@ -244,7 +244,7 @@ arm_dmb(void)
 	if (CPU_IS_ARMV6_P())
 		armreg_dmb_write(0);
 	else if (CPU_IS_ARMV7_P())
-		__asm __volatile("dmb");
+		__asm __volatile("dmb" ::: "memory");
 }
 
 static inline void
@@ -253,7 +253,7 @@ arm_dsb(void)
 	if (CPU_IS_ARMV6_P())
 		armreg_dsb_write(0);
 	else if (CPU_IS_ARMV7_P())
-		__asm __volatile("dsb");
+		__asm __volatile("dsb" ::: "memory");
 }
 
 static inline void
@@ -262,7 +262,7 @@ arm_isb(void)
 	if (CPU_IS_ARMV6_P())
 		armreg_isb_write(0);
 	else if (CPU_IS_ARMV7_P())
-		__asm __volatile("isb");
+		__asm __volatile("isb" ::: "memory");
 }
 #endif
 

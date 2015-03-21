@@ -120,7 +120,7 @@ ATF_TC_HEAD(setenv_basic, tc)
 {
 	atf_tc_set_md_var(tc, "descr",
 	    "Test setenv(3), getenv(3), unsetenv(3)");
-	atf_tc_set_md_var(tc, "timeout", "300");
+	atf_tc_set_md_var(tc, "timeout", "600");
 }
 
 ATF_TC_BODY(setenv_basic, tc)

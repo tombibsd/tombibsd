@@ -87,7 +87,7 @@ pq3sdhc_attach(device_t parent, device_t self, void *aux)
 	psc->sc_children |= cna->cna_childmask;
 	sc->sc.sc_dmat = cna->cna_dmat;
 	sc->sc.sc_dev = self;
-	//sc->sc.sc_flags |= SDHC_FLAG_USE_DMA;
+	sc->sc.sc_flags |= SDHC_FLAG_USE_DMA;
 	sc->sc.sc_flags |=
 	    SDHC_FLAG_HAVE_DVS | SDHC_FLAG_32BIT_ACCESS | SDHC_FLAG_ENHANCED;
 	sc->sc.sc_host = sc->sc_hosts;

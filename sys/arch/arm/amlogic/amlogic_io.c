@@ -56,8 +56,18 @@ static int	amlogicio_find(device_t, cfdata_t, const int *, void *);
 static bool amlogicio_found = false;
 
 static const struct amlogic_locators amlogic_locators[] = {
-  { "com", AMLOGIC_UART0AO_OFFSET, AMLOGIC_UART_SIZE, 0, AMLOGIC_INTR_UART0AO },
-  { "com", AMLOGIC_UART2AO_OFFSET, AMLOGIC_UART_SIZE, 2, AMLOGIC_INTR_UART2AO },
+  { "amlogiccom",
+    AMLOGIC_UART0AO_OFFSET, AMLOGIC_UART_SIZE, 0, AMLOGIC_INTR_UART0AO },
+  { "amlogiccom",
+    AMLOGIC_UART2AO_OFFSET, AMLOGIC_UART_SIZE, 2, AMLOGIC_INTR_UART2AO },
+  { "dwctwo",
+    AMLOGIC_USB0_OFFSET, AMLOGIC_USB_SIZE, 0, AMLOGIC_INTR_USB0 },
+  { "dwctwo",
+    AMLOGIC_USB1_OFFSET, AMLOGIC_USB_SIZE, 1, AMLOGIC_INTR_USB1 },
+#if notyet
+  { "amlogicmmc",
+    AMLOGIC_MMC_OFFSET, AMLOGIC_MMC_SIZE, 0, AMLOGIC_INTR_MMC },
+#endif
 };
 
 int
@@ -75,6 +85,9 @@ amlogicio_attach(device_t parent, device_t self, void *aux)
 
 	aprint_naive("\n");
 	aprint_normal("\n");
+
+	amlogic_usbphy_init(0);
+	amlogic_usbphy_init(1);
 
 	const struct amlogic_locators * const eloc =
 	    amlogic_locators + __arraycount(amlogic_locators);

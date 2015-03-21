@@ -119,7 +119,7 @@
 /radeon_mode.h/1.2/Wed Jul 16 20:59:57 2014/-kk/
 /radeon_object.c/1.2/Wed Jul 16 20:59:57 2014/-kk/
 /radeon_object.h/1.2/Wed Jul 16 20:59:57 2014/-kk/
-/radeon_pm.c/1.2/Wed Jul 16 20:59:57 2014/-kk/
+/radeon_pm.c/1.3/Sat Mar 21 02:29:58 2015/-kk/
 /radeon_prime.c/1.1.1.1/Wed Jul 16 19:35:29 2014/-kk/
 /radeon_reg.h/1.1.1.1/Wed Jul 16 19:35:29 2014/-kk/
 /radeon_ring.c/1.2/Wed Jul 16 20:59:57 2014/-kk/
@@ -134,7 +134,7 @@
 /radeon_vce.c/1.2/Wed Jul 16 20:59:57 2014/-kk/
 /radeon_vm.c/1.2/Wed Jul 16 20:59:57 2014/-kk/
 /rs100d.h/1.1.1.1/Wed Jul 16 19:35:29 2014/-kk/
-/rs400.c/1.2/Wed Jul 16 20:59:57 2014/-kk/
+/rs400.c/1.3/Sat Mar 21 02:29:58 2015/-kk/
 /rs400d.h/1.1.1.1/Wed Jul 16 19:35:29 2014/-kk/
 /rs600.c/1.2/Wed Jul 16 20:59:57 2014/-kk/
 /rs600d.h/1.1.1.1/Wed Jul 16 19:35:29 2014/-kk/

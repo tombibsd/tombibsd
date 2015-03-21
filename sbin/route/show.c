@@ -137,7 +137,7 @@ show(int argc, char *const *argv, int flags)
 {
 	int af, rflags;
 	static int interesting = RTF_UP | RTF_GATEWAY | RTF_HOST |
-	    RTF_REJECT | RTF_LLINFO;
+	    RTF_REJECT | RTF_LLINFO | RTF_LOCAL;
 
 	parse_show_opts(argc, argv, &af, &rflags, NULL, true);
 	p_rttables(af, flags, rflags, interesting);

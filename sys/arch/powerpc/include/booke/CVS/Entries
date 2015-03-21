@@ -2,7 +2,7 @@
 /cpuvar.h/1.17/Tue Oct  2 23:51:39 2012/-kk/
 /e500reg.h/1.16/Fri Jan  2 11:21:17 2015/-kk/
 /e500var.h/1.7/Tue Nov 27 19:24:47 2012/-kk/
-/etsecreg.h/1.6/Sat Mar 21 02:21:03 2015/-kk/
+/etsecreg.h/1.8/Sat Mar 21 02:29:46 2015/-kk/
 /intr.h/1.9/Thu Feb  5 08:41:04 2015/-kk/
 /obiovar.h/1.2/Thu Jun 30 04:45:38 2011/-kk/
 /openpicreg.h/1.7/Fri Jan  2 11:21:17 2015/-kk/
