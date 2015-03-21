@@ -412,6 +412,11 @@ MKX11MOTIF:	If "yes" and ${X11FLAVOUR} is "Xorg", build the native X11
 		using the X11MOTIFPATH variable.
 		Default: no
 
+MKX11RADEONKMS	If "no", build the xf86-video-ati 6.x driver (the last one
+		with user-mode switching support), otherwise build the
+		kernek-mode switching (KMS) requiring driver.
+		Default: yes on i386 and amd64, yes elsewhere.
+
 MKYP		If "no", disables building of YP (NIS)
 		infrastructure (libraries and support programs).
 		Default: yes

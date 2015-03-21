@@ -526,14 +526,14 @@ wsdisplay*	at wsemuldisplaydev?
 #viadrm* 	at drm?		# VIA UniChrome DRM driver
 
 # DRMKMS drivers
-i915drmkms*     at pci? dev ? function ?
-intelfb*        at intelfbbus?
+i915drmkms* 	at pci? dev ? function ?
+intelfb* 	at intelfbbus?
 
-radeon*         at pci? dev ? function ?
+radeon* 	at pci? dev ? function ?
 radeondrmkmsfb* at radeonfbbus?
 
-#nouveau*       at pci? dev ? function ?
-#nouveaufb*     at nouveaufbbus
+nouveau* 	at pci? dev ? function ?
+nouveaufb* 	at nouveaufbbus?
 
 attimer0	at isa?
 pcppi0		at isa?
@@ -2050,7 +2050,6 @@ options NOTDEF_DEBUG
 options NOT_DEBUG
 options NSIODEBUG
 options NTFS_DEBUG
-options NV_DEBUG
 options OBOE_DEBUG
 options OFW_DEBUG
 options OHCI_DEBUG

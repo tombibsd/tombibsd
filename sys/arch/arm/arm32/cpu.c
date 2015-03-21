@@ -579,7 +579,7 @@ static const char * const wtnames[] = {
 	"**unknown 9**",
 	"**unknown 10**",
 	"**unknown 11**",
-	"**unknown 12**",
+	"write-back",
 	"write-back-locking-line",
 	"write-back-locking-C",
 	"write-back-locking-D",

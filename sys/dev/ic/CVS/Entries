@@ -158,10 +158,10 @@
 /clmpcc.c/1.51/Tue Dec  9 04:34:57 2014/-kk/
 /clmpccreg.h/1.4/Mon Apr 28 20:23:49 2008/-kk/
 /clmpccvar.h/1.13/Sat Oct 27 17:18:20 2012/-kk/
-/com.c/1.329/Tue Dec  9 04:43:47 2014/-kk/
+/com.c/1.332/Sat Mar 21 02:37:49 2015/-kk/
 /com_cpcbus.c/1.11/Mon Apr 28 20:23:49 2008/-kk/
 /com_upc.c/1.11/Sun Jan 25 14:34:14 2009/-kk/
-/comreg.h/1.23/Tue Dec  9 04:43:47 2014/-kk/
+/comreg.h/1.24/Sat Mar 21 02:37:49 2015/-kk/
 /comvar.h/1.79/Tue Dec  9 04:43:47 2014/-kk/
 /cpc700.c/1.19/Fri Jan 27 18:53:07 2012/-kk/
 /cpc700reg.h/1.5/Mon Apr 28 20:23:49 2008/-kk/
@@ -193,7 +193,7 @@
 /dl10019.c/1.12/Sun Jul 22 14:32:56 2012/-kk/
 /dl10019reg.h/1.2/Mon Apr 28 20:23:49 2008/-kk/
 /dl10019var.h/1.2/Mon Apr 28 20:23:49 2008/-kk/
-/dm9000.c/1.5/Tue Dec  9 04:43:47 2014/-kk/
+/dm9000.c/1.6/Sat Mar 21 02:37:49 2015/-kk/
 /dm9000reg.h/1.2/Sat Jan 28 08:29:55 2012/-kk/
 /dm9000var.h/1.2/Sat Jan 28 08:29:55 2012/-kk/
 /dp8390.c/1.81/Fri Oct  3 09:25:59 2014/-kk/
@@ -580,9 +580,9 @@
 /upc.c/1.15/Sat Oct 27 17:18:23 2012/-kk/
 /upcreg.h/1.3/Sun Mar  2 00:21:47 2003/-kk/
 /upcvar.h/1.6/Sat Oct 27 17:18:23 2012/-kk/
-/vga.c/1.114/Mon Jan 26 07:10:25 2015/-kk/
+/vga.c/1.115/Sat Mar 21 02:37:50 2015/-kk/
 /vga_common.c/1.11/Thu Feb 19 00:39:26 2009/-kk/
-/vga_raster.c/1.43/Mon Jan 26 07:10:25 2015/-kk/
+/vga_raster.c/1.44/Sat Mar 21 02:37:50 2015/-kk/
 /vga_subr.c/1.25/Thu Aug  9 20:25:05 2012/-kk/
 /vgareg.h/1.9/Sun Dec 11 12:21:29 2005/-kk/
 /vgavar.h/1.33/Mon Jan 26 07:10:25 2015/-kk/

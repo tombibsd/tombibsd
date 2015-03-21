@@ -487,7 +487,7 @@ struct adapter {
 #define IXGBE_CORE_UNLOCK(_sc)            mutex_exit(&(_sc)->core_mtx)
 #define IXGBE_TX_UNLOCK(_sc)              mutex_exit(&(_sc)->tx_mtx)
 #define IXGBE_RX_UNLOCK(_sc)              mutex_exit(&(_sc)->rx_mtx)
-#define IXGBE_CORE_LOCK_ASSERT(_sc)       KASSERT(mutex_owned(&(_sc)->core_mtx)
+#define IXGBE_CORE_LOCK_ASSERT(_sc)       KASSERT(mutex_owned(&(_sc)->core_mtx))
 #define IXGBE_TX_LOCK_ASSERT(_sc)         KASSERT(mutex_owned(&(_sc)->tx_mtx))
 
 

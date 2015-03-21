@@ -1463,6 +1463,12 @@ sockargs(struct mbuf **mp, const void *bf, size_t buflen, int type)
 	if (buflen > (type == MT_SONAME ? UCHAR_MAX : PAGE_SIZE))
 		return EINVAL;
 
+	/*
+	 * length must greater than sizeof(sa_family) + sizeof(sa_len)
+	 */
+	if (type == MT_SONAME && buflen <= 2)
+		return EINVAL;
+
 	/* Allocate an mbuf to hold the arguments. */
 	m = m_get(M_WAIT, type);
 	/* can't claim.  don't who to assign it to. */

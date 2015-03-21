@@ -62,13 +62,13 @@ __RCSID("$NetBSD$");
 int
 set_utimes(const char *file, struct stat *fs)
 {
-    static struct timeval tv[2];
+    struct timespec ts[2];
 
-    TIMESPEC_TO_TIMEVAL(&tv[0], &fs->st_atimespec);
-    TIMESPEC_TO_TIMEVAL(&tv[1], &fs->st_mtimespec);
+    ts[0] = fs->st_atimespec;
+    ts[1] = fs->st_mtimespec;
 
-    if (lutimes(file, tv)) {
-	warn("lutimes: %s", file);
+    if (lutimens(file, ts)) {
+	warn("lutimens: %s", file);
 	return (1);
     }
     return (0);

@@ -289,7 +289,7 @@ sys_mmap(struct lwp *l, const struct sys_mmap_args *uap, register_t *retval)
 	struct proc *p = l->l_proc;
 	vaddr_t addr;
 	off_t pos;
-	vsize_t size, pageoff;
+	vsize_t size, pageoff, newsize;
 	vm_prot_t prot, maxprot;
 	int flags, fd, advice;
 	vaddr_t defaddr;
@@ -338,9 +338,13 @@ sys_mmap(struct lwp *l, const struct sys_mmap_args *uap, register_t *retval)
 	 */
 
 	pageoff = (pos & PAGE_MASK);
-	pos  -= pageoff;
-	size += pageoff;			/* add offset */
-	size = (vsize_t)round_page(size);	/* round up */
+	pos    -= pageoff;
+	newsize = size + pageoff;		/* add offset */
+	newsize = (vsize_t)round_page(newsize);	/* round up */
+
+	if (newsize < size)
+		return (ENOMEM);
+	size = newsize;
 
 	/*
 	 * now check (MAP_FIXED) or get (!MAP_FIXED) the "addr"

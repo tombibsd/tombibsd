@@ -15,7 +15,7 @@
 /dumpsys.c/1.16/Mon Dec 12 19:03:09 2011/-kk/
 /freebsd_machdep.c/1.60/Sat Mar  1 06:04:31 2014/-kk/
 /freebsd_sigcode.S/1.5/Mon Apr 28 20:23:24 2008/-kk/
-/freebsd_syscall.c/1.39/Thu Jul 12 18:13:08 2012/-kk/
+/freebsd_syscall.c/1.40/Sat Mar 21 02:37:37 2015/-kk/
 /gdt.c/1.53/Fri Feb 24 08:06:07 2012/-kk/
 /genassym.cf/1.97/Thu Feb 27 08:55:46 2014/-kk/
 /i386_trap.S/1.5/Thu Feb 27 08:55:46 2014/-kk/
@@ -23,12 +23,12 @@
 /i386func.S/1.17/Wed Aug 29 22:43:35 2012/-kk/
 /ibcs2_machdep.c/1.44/Sat Mar  1 06:04:31 2014/-kk/
 /ibcs2_sigcode.S/1.5/Mon Apr 28 20:23:24 2008/-kk/
-/ibcs2_syscall.c/1.48/Thu Jul 12 18:13:08 2012/-kk/
+/ibcs2_syscall.c/1.49/Sat Mar 21 02:37:37 2015/-kk/
 /ipkdb_glue.c/1.14/Wed Apr 28 19:17:03 2010/-kk/
 /kgdb_machdep.c/1.22/Sun Apr  3 22:29:26 2011/-kk/
 /kobj_machdep.c/1.7/Thu Jan  8 01:03:24 2009/-kk/
 /linux_sigcode.S/1.8/Mon Apr 28 20:23:24 2008/-kk/
-/linux_syscall.c/1.51/Wed Sep 28 17:27:21 2011/-kk/
+/linux_syscall.c/1.52/Sat Mar 21 02:37:37 2015/-kk/
 /lock_stubs.S/1.26/Fri Jan 31 08:48:36 2014/-kk/
 /locore.S/1.113/Fri Oct  3 09:36:08 2014/-kk/
 /longrun.c/1.4/Sun Oct 23 13:02:32 2011/-kk/
@@ -43,7 +43,7 @@
 /spl.S/1.40/Fri Jan 31 08:48:36 2014/-kk/
 /svr4_machdep.c/1.99/Sat Mar  1 06:04:31 2014/-kk/
 /svr4_sigcode.S/1.13/Wed Nov 19 18:35:59 2008/-kk/
-/svr4_syscall.c/1.47/Thu Jul 12 18:13:08 2012/-kk/
+/svr4_syscall.c/1.48/Sat Mar 21 02:37:37 2015/-kk/
 /trap.c/1.275/Sat Mar 21 02:29:44 2015/-kk/
 /vector.S/1.64/Thu Feb 13 15:22:18 2014/-kk/
 /vm86.c/1.51/Sat Nov 21 03:11:00 2009/-kk/

@@ -16,3 +16,13 @@ file	arch/mips/ingenic/apbus.c		apbus
 # USB
 attach dwctwo at apbus with ingenic_dwctwo
 file	arch/mips/ingenic/ingenic_dwctwo.c	ingenic_dwctwo	needs-flag
+
+attach ohci at apbus with ingenic_ohci
+file	arch/mips/ingenic/ingenic_ohci.c	ingenic_ohci	needs-flag
+
+attach ehci at apbus with ingenic_ehci
+file	arch/mips/ingenic/ingenic_ehci.c	ingenic_ehci	needs-flag
+
+# Ethernet
+attach dme at apbus with ingenic_dme
+file	arch/mips/ingenic/ingenic_dme.c		ingenic_dme	needs-flag

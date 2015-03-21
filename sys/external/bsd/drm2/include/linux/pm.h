@@ -45,4 +45,8 @@ struct dev_pm_domain {
 	char dummy;		/* XXX */
 };
 
+struct dev_pm_ops {
+	int	(*resume)(struct device *);
+};
+
 #endif  /* _LINUX_PM_H_ */

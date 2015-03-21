@@ -434,7 +434,7 @@ xc5k_get_status(struct xc5k *xc)
 	return festatus;
 }
 
-MODULE(MODULE_CLASS_DRIVER, xc5k, "iic");
+MODULE(MODULE_CLASS_DRIVER, xc5k, "i2cexec");
 
 static int
 xc5k_modcmd(modcmd_t cmd, void *opaque)

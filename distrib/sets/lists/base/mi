@@ -674,6 +674,7 @@
 ./usr/bin/printf				base-util-bin
 ./usr/bin/progress				base-util-bin
 ./usr/bin/purgestat				base-mailwrapper-bin
+./usr/bin/pwait					base-util-bin
 ./usr/bin/pwhash				base-util-bin
 ./usr/bin/qsafe					base-util-bin		crypto
 ./usr/bin/qsieve				base-util-bin		crypto

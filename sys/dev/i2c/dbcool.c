@@ -2161,7 +2161,7 @@ dbcool_set_fan_limits(struct dbcool_softc *sc, int idx,
 	}
 }
 
-MODULE(MODULE_CLASS_DRIVER, dbcool, "iic");
+MODULE(MODULE_CLASS_DRIVER, dbcool, "i2cexec");
 
 #ifdef _MODULE
 #include "ioconf.c"

@@ -79,17 +79,6 @@ if checkyesno rebuild_locatedb; then
 	fi
 fi
 
-if checkyesno rebuild_whatisdb; then
-	echo ""
-	if [ -x /usr/libexec/makewhatis -a \( -f /etc/man.conf \
-	     -o -d /usr/share/man \) ]; then
-		echo "Rebuilding whatis databases:"
-		nice -n 5 /usr/libexec/makewhatis -f
-	else
-		echo "Not rebuilding whatis databases"
-	fi
-fi
-
 if checkyesno rebuild_mandb; then
 	echo ""
 	if [ -f /etc/man.conf -a -x /usr/sbin/makemandb ]; then

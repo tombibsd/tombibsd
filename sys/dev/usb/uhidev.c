@@ -648,6 +648,30 @@ out1:
 }
 
 void
+uhidev_stop(struct uhidev *scd)
+{
+	struct uhidev_softc *sc = scd->sc_parent;
+
+	/* Disable interrupts. */
+	if (sc->sc_opipe != NULL) {
+		usbd_abort_pipe(sc->sc_opipe);
+		usbd_close_pipe(sc->sc_opipe);
+		sc->sc_opipe = NULL;
+	}
+
+	if (sc->sc_ipipe != NULL) {
+		usbd_abort_pipe(sc->sc_ipipe);
+		usbd_close_pipe(sc->sc_ipipe);
+		sc->sc_ipipe = NULL;
+	}
+
+	if (sc->sc_ibuf != NULL) {
+		free(sc->sc_ibuf, M_USBDEV);
+		sc->sc_ibuf = NULL;
+	}
+}
+
+void
 uhidev_close(struct uhidev *scd)
 {
 	struct uhidev_softc *sc = scd->sc_parent;
@@ -671,23 +695,8 @@ uhidev_close(struct uhidev *scd)
 		sc->sc_oxfer = NULL;
 	}
 
-	/* Disable interrupts. */
-	if (sc->sc_opipe != NULL) {
-		usbd_abort_pipe(sc->sc_opipe);
-		usbd_close_pipe(sc->sc_opipe);
-		sc->sc_opipe = NULL;
-	}
-
-	if (sc->sc_ipipe != NULL) {
-		usbd_abort_pipe(sc->sc_ipipe);
-		usbd_close_pipe(sc->sc_ipipe);
-		sc->sc_ipipe = NULL;
-	}
-
-	if (sc->sc_ibuf != NULL) {
-		free(sc->sc_ibuf, M_USBDEV);
-		sc->sc_ibuf = NULL;
-	}
+	/* Possibly redundant, but properly handled */
+	uhidev_stop(scd);
 }
 
 usbd_status

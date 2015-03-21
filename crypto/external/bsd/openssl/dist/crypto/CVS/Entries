@@ -6,8 +6,8 @@
 /LPdir_wince.c/1.1.1.1/Sun Jul 19 23:02:31 2009/-kk/
 /Makefile/1.3/Mon Jan 26 07:07:15 2015/-kk/
 /alphacpuid.pl/1.1.1.2/Thu Jul 26 14:59:04 2012/-kk/
-/arm_arch.h/1.1.1.1/Thu Jul 26 14:59:04 2012/-kk/
-/armcap.c/1.1.1.2/Fri Jan 31 08:44:57 2014/-kk/
+/arm_arch.h/1.2/Sat Mar 21 02:33:10 2015/-kk/
+/armcap.c/1.2/Sat Mar 21 02:33:10 2015/-kk/
 /armv4cpuid.S/1.1.1.1/Thu Jul 26 14:59:04 2012/-kk/
 /constant_time_locl.h/1.2/Mon Jan 26 07:07:15 2015/-kk/
 /constant_time_test.c/1.1.1.1/Tue Jan 13 07:59:18 2015/-kk/

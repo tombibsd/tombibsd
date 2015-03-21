@@ -309,3 +309,10 @@ obio_print(void *aux, const char *name)
 
 	return UNCONF;
 }
+
+#ifdef MULTIPROCESSOR
+void
+bcm2836_cpu_hatch(struct cpu_info *ci)
+{
+}
+#endif

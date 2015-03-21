@@ -241,7 +241,7 @@ krpc_call(struct sockaddr_in *sa, u_int prog, u_int vers, u_int func, struct mbu
 	 * Create socket and set its receive timeout.
 	 */
 	if ((error = socreate(AF_INET, &so, SOCK_DGRAM, 0, l, NULL)))
-		goto out;
+		return error;
 
 	if ((error = nfs_boot_setrecvtimo(so)))
 		goto out;

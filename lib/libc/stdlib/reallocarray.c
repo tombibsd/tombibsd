@@ -39,6 +39,9 @@ __RCSID("$NetBSD$");
 void *
 reallocarray(void *optr, size_t nmemb, size_t size)
 {
+	if (nmemb == 0 || size == 0)
+		return realloc(optr, 0);
+
 	int e = reallocarr(&optr, nmemb, size);
 
 	if (e == 0)

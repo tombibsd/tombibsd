@@ -304,6 +304,11 @@
 ./stand/i386-xen/@OSRELEASE@/modules/dtrace_profile/dtrace_profile.kmod	base-kernel-modules	kmod,dtrace,compatmodules
 ./stand/i386-xen/@OSRELEASE@/modules/dtrace_sdt				base-kernel-modules	kmod,dtrace,compatmodules
 ./stand/i386-xen/@OSRELEASE@/modules/dtrace_sdt/dtrace_sdt.kmod		base-kernel-modules	kmod,dtrace,compatmodules
+./stand/i386-xen/@OSRELEASE@/modules/dtrace_syscall			base-kernel-modules	kmod,dtrace,compatmodules
+./stand/i386-xen/@OSRELEASE@/modules/dtrace_syscall/dtrace_syscall.kmod	base-kernel-modules	kmod,dtrace,compatmodules
+./stand/i386-xen/@OSRELEASE@/modules/dtrace_syscall_linux		base-kernel-modules	kmod,dtrace,compatmodules
+./stand/i386-xen/@OSRELEASE@/modules/dtrace_syscall_linux/dtrace_syscall_linux.kmod	base-kernel-modules	kmod,dtrace,compatmodules
+./stand/i386-xen/@OSRELEASE@/modules/dtv				base-kernel-modules	kmod,compatmodules
 ./stand/i386-xen/@OSRELEASE@/modules/dtv				base-kernel-modules	kmod,compatmodules
 ./stand/i386-xen/@OSRELEASE@/modules/dtv/dtv.kmod			base-kernel-modules	kmod,compatmodules
 ./stand/i386-xen/@OSRELEASE@/modules/dtv_math				base-kernel-modules	kmod,compatmodules
@@ -364,6 +369,8 @@
 ./stand/i386-xen/@OSRELEASE@/modules/hpqlb/hpqlb.kmod			base-kernel-modules	kmod,compatmodules
 ./stand/i386-xen/@OSRELEASE@/modules/hythygtemp				base-kernel-modules	kmod,compatmodules
 ./stand/i386-xen/@OSRELEASE@/modules/hythygtemp/hythygtemp.kmod		base-kernel-modules	kmod,compatmodules
+./stand/i386-xen/@OSRELEASE@/modules/i2cexec				base-kernel-modules	kmod,compatmodules
+./stand/i386-xen/@OSRELEASE@/modules/i2cexec/i2cexec.kmod		base-kernel-modules	kmod,compatmodules
 ./stand/i386-xen/@OSRELEASE@/modules/i915drm				base-kernel-modules	kmod,compatmodules
 ./stand/i386-xen/@OSRELEASE@/modules/i915drm/i915drm.kmod		base-kernel-modules	kmod,compatmodules
 ./stand/i386-xen/@OSRELEASE@/modules/i915drmkms				base-kernel-modules	kmod,compatmodules
@@ -703,6 +710,10 @@
 ./stand/i386pae-xen/@OSRELEASE@/modules/dtrace_profile/dtrace_profile.kmod	base-kernel-modules	kmod,dtrace,compatmodules
 ./stand/i386pae-xen/@OSRELEASE@/modules/dtrace_sdt			base-kernel-modules	kmod,dtrace,compatmodules
 ./stand/i386pae-xen/@OSRELEASE@/modules/dtrace_sdt/dtrace_sdt.kmod	base-kernel-modules	kmod,dtrace,compatmodules
+./stand/i386pae-xen/@OSRELEASE@/modules/dtrace_syscall			base-kernel-modules	kmod,dtrace,compatmodules
+./stand/i386pae-xen/@OSRELEASE@/modules/dtrace_syscall/dtrace_syscall.kmod	base-kernel-modules	kmod,dtrace,compatmodules
+./stand/i386pae-xen/@OSRELEASE@/modules/dtrace_syscall_linux			base-kernel-modules	kmod,dtrace,compatmodules
+./stand/i386pae-xen/@OSRELEASE@/modules/dtrace_syscall_linux/dtrace_syscall_linux.kmod	base-kernel-modules	kmod,dtrace,compatmodules
 ./stand/i386pae-xen/@OSRELEASE@/modules/dtv				base-kernel-modules	kmod,compatmodules
 ./stand/i386pae-xen/@OSRELEASE@/modules/dtv/dtv.kmod			base-kernel-modules	kmod,compatmodules
 ./stand/i386pae-xen/@OSRELEASE@/modules/dtv_math			base-kernel-modules	kmod,compatmodules
@@ -763,6 +774,8 @@
 ./stand/i386pae-xen/@OSRELEASE@/modules/hpqlb/hpqlb.kmod		base-kernel-modules	kmod,compatmodules
 ./stand/i386pae-xen/@OSRELEASE@/modules/hythygtemp			base-kernel-modules	kmod,compatmodules
 ./stand/i386pae-xen/@OSRELEASE@/modules/hythygtemp/hythygtemp.kmod	base-kernel-modules	kmod,compatmodules
+./stand/i386pae-xen/@OSRELEASE@/modules/i2cexec				base-kernel-modules	kmod,compatmodules
+./stand/i386pae-xen/@OSRELEASE@/modules/i2cexec/i2cexec.kmod		base-kernel-modules	kmod,compatmodules
 ./stand/i386pae-xen/@OSRELEASE@/modules/i915drm				base-kernel-modules	kmod,compatmodules
 ./stand/i386pae-xen/@OSRELEASE@/modules/i915drm/i915drm.kmod		base-kernel-modules	kmod,compatmodules
 ./stand/i386pae-xen/@OSRELEASE@/modules/i915drmkms			base-kernel-modules	kmod,compatmodules

@@ -49,6 +49,7 @@ ENTRY(x86_cpuid2)
 END(x86_cpuid2)
 
 ENTRY(x86_xgetbv)
+	xorl	%ecx, %ecx
 	xgetbv
 	ret
 END(x86_xgetbv)

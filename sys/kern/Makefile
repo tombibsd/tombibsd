@@ -11,7 +11,7 @@ all:
 	@false
 
 SYSCALLSRC = makesyscalls.sh syscalls.conf syscalls.master
-init_sysent.c syscalls.c ../sys/syscall.h ../sys/syscallargs.h: ${SYSCALLSRC}
+init_sysent.c syscalls.c systrace_args.c ../sys/syscall.h ../sys/syscallargs.h: ${SYSCALLSRC}
 	${HOST_SH} makesyscalls.sh syscalls.conf syscalls.master
 
 VNODEIFSRC = vnode_if.sh vnode_if.src

@@ -172,7 +172,7 @@ consinit(void)
 	char buffer[128];
 	const char *consname = "unknown";
 
-	DBPRINT(("consinit()\r\n"));
+	DBPRINT(("consinit()\n"));
 
 	if (cn_tab != &consdev_prom)
 		return;
@@ -180,13 +180,13 @@ consinit(void)
 	if ((prom_stdin_node = prom_instance_to_package(prom_stdin())) == 0) {
 		printf("WARNING: no PROM stdin\n");
 	}
-	DBPRINT(("stdin node = %x\r\n", prom_stdin_node));
+	DBPRINT(("stdin node = %x\n", prom_stdin_node));
 
 	if ((prom_stdout_node = prom_instance_to_package(prom_stdout())) == 0)
 		printf("WARNING: no PROM stdout\n");
-	DBPRINT(("stdout package = %x\r\n", prom_stdout_node));
+	DBPRINT(("stdout package = %x\n", prom_stdout_node));
 
-	DBPRINT(("buffer @ %p\r\n", buffer));
+	DBPRINT(("buffer @ %p\n", buffer));
 
 	if (prom_stdin_node != 0 &&
 	    (prom_getproplen(prom_stdin_node, "keyboard") >= 0)) {

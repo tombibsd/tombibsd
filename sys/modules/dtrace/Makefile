@@ -3,6 +3,12 @@
 
 .include <bsd.own.mk>
 
-SUBDIR=		dtrace sdt fbt profile
+SUBDIR=		dtrace sdt fbt lockstat profile syscall
+SUBDIR+=	linux_syscall
+
+.if ${MACHINE_ARCH} == "x86_64"
+SUBDIR+=	netbsd32_syscall
+SUBDIR+=	linux32_syscall
+.endif
 
 .include <bsd.subdir.mk>

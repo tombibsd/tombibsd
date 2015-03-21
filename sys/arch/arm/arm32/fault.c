@@ -507,15 +507,26 @@ data_abort_handler(trapframe_t *tf)
 
 	KSI_INIT_TRAP(&ksi);
 
-	if (error == ENOMEM) {
+	switch (error) {
+	case ENOMEM:
 		printf("UVM: pid %d (%s), uid %d killed: "
 		    "out of swap\n", l->l_proc->p_pid, l->l_proc->p_comm,
 		    l->l_cred ? kauth_cred_geteuid(l->l_cred) : -1);
 		ksi.ksi_signo = SIGKILL;
-	} else
+		break;
+	case EACCES:
 		ksi.ksi_signo = SIGSEGV;
-
-	ksi.ksi_code = (error == EACCES) ? SEGV_ACCERR : SEGV_MAPERR;
+		ksi.ksi_code = SEGV_ACCERR;
+		break;
+	case EINVAL:
+		ksi.ksi_signo = SIGBUS;
+		ksi.ksi_code = BUS_ADRERR;
+		break;
+	default:
+		ksi.ksi_signo = SIGSEGV;
+		ksi.ksi_code = SEGV_MAPERR;
+		break;
+	}
 	ksi.ksi_addr = (uint32_t *)(intptr_t) far;
 	ksi.ksi_trap = fsr;
 	UVMHIST_LOG(maphist, " <- error (%d)", error, 0, 0, 0);

@@ -1711,7 +1711,14 @@ unp_gc(file_t *dp)
 			if ((fp->f_flag & FDEFER) != 0) {
 				atomic_and_uint(&fp->f_flag, ~FDEFER);
 				unp_defer--;
-				KASSERT(fp->f_count != 0);
+				if (fp->f_count == 0) {
+					/*
+					 * XXX: closef() doesn't pay attention
+					 * to FDEFER
+					 */
+					mutex_exit(&fp->f_lock);
+					continue;
+				}
 			} else {
 				if (fp->f_count == 0 ||
 				    (fp->f_flag & FMARK) != 0 ||

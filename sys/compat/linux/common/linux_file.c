@@ -417,6 +417,10 @@ linux_sys_fcntl(struct lwp *l, const struct linux_sys_fcntl_args *uap, register_
 		mutex_exit(proc_lock);
 		return 0;
 
+	case LINUX_F_DUPFD_CLOEXEC:
+		cmd = F_DUPFD_CLOEXEC;
+		break;
+
 	default:
 		return EOPNOTSUPP;
 	}

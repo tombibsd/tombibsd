@@ -33,6 +33,9 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/device.h>
 #include <sys/systm.h>
 
+/* Root device. */
+device_t			root_device;
+
 /*
  * Accessor functions for the device_t type.
  */

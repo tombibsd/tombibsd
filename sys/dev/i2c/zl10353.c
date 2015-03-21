@@ -650,7 +650,7 @@ zl10353_get_snr(struct zl10353 *zl)
 	return (val << 8) | val;
 }
 
-MODULE(MODULE_CLASS_DRIVER, zl10353, "iic");
+MODULE(MODULE_CLASS_DRIVER, zl10353, "i2cexec");
 
 static int
 zl10353_modcmd(modcmd_t cmd, void *aux)

@@ -96,9 +96,8 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <miscfs/syncfs/syncfs.h>
 #include <miscfs/specfs/specdev.h>
 
-/* Root filesystem and device. */
+/* Root filesystem. */
 vnode_t *			rootvnode;
-device_t			root_device;
 
 /* Mounted filesystem list. */
 struct mntlist			mountlist;

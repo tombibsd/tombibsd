@@ -44,6 +44,7 @@ ENTRY(x86_cpuid2)
 	ret
 
 ENTRY(x86_xgetbv)
+	xorl	%ecx, %ecx
 	xgetbv
 	ret
 

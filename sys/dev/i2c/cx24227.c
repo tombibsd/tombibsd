@@ -328,7 +328,7 @@ cx24227_init(struct cx24227 *sc)
 	return 0;
 }
 
-MODULE(MODULE_CLASS_DRIVER, cx24227, "iic");
+MODULE(MODULE_CLASS_DRIVER, cx24227, "i2cexec");
 
 static int
 cx24227_modcmd(modcmd_t cmd, void *priv)

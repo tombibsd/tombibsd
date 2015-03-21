@@ -35,9 +35,12 @@
 #include <arm/cortex/gic_intr.h>
 #include <arm/cortex/a9tmr_intr.h>
 
+#define AMLOGIC_INTR_GMAC	40
+#define AMLOGIC_INTR_SDIO	60
 #define AMLOGIC_INTR_USB0	62
 #define AMLOGIC_INTR_USB1	63
 #define AMLOGIC_INTR_UART2AO	70
+#define AMLOGIC_INTR_SDHC	110
 #define AMLOGIC_INTR_UART0AO	122
 
 #endif /* _ARM_AMLOGIC_INTR_H */

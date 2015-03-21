@@ -379,7 +379,11 @@ i915_gem_object_attach_phys(struct drm_i915_gem_object *obj,
 		memcpy(vaddr, src, PAGE_SIZE);
 		kunmap_atomic(src);
 
-#ifndef __NetBSD__
+#ifdef __NetBSD__
+		/* XXX mark page accessed */
+		uvm_obj_unwirepages(obj->base.gemo_shm_uao, i*PAGE_SIZE,
+		    (i + 1)*PAGE_SIZE);
+#else
 		mark_page_accessed(page);
 		page_cache_release(page);
 #endif
@@ -701,51 +705,21 @@ i915_gem_shmem_pread(struct drm_device *dev,
 	offset = args->offset;
 
 #ifdef __NetBSD__
-	/*
-	 * XXX This is a big #ifdef with a lot of duplicated code, but
-	 * factoring out the loop head -- which is all that
-	 * substantially differs -- is probably more trouble than it's
-	 * worth at the moment.
-	 */
-	while (0 < remain) {
-		/* Get the next page.  */
-		shmem_page_offset = offset_in_page(offset);
-		KASSERT(shmem_page_offset < PAGE_SIZE);
-		page_length = MIN(remain, (PAGE_SIZE - shmem_page_offset));
-		struct page *const page = i915_gem_object_get_page(obj,
-		    atop(offset));
-
-		/* Decide whether to swizzle bit 17.  */
-		page_do_bit17_swizzling = obj_do_bit17_swizzling &&
-		    (page_to_phys(page) & (1 << 17)) != 0;
-
-		/* Try the fast path.  */
-		ret = shmem_pread_fast(page, shmem_page_offset, page_length,
-		    user_data, page_do_bit17_swizzling, needs_clflush);
-		if (ret == 0)
-			goto next_page;
-
-		/* Fast path failed.  Try the slow path.  */
-		mutex_unlock(&dev->struct_mutex);
-		/* XXX prefault */
-		ret = shmem_pread_slow(page, shmem_page_offset, page_length,
-		    user_data, page_do_bit17_swizzling, needs_clflush);
-		mutex_lock(&dev->struct_mutex);
-		if (ret)
-			goto out;
-
-next_page:	KASSERT(page_length <= remain);
-		remain -= page_length;
-		user_data += page_length;
-		offset += page_length;
-	}
+	while (0 < remain)
 #else
 	for_each_sg_page(obj->pages->sgl, &sg_iter, obj->pages->nents,
-			 offset >> PAGE_SHIFT) {
+			 offset >> PAGE_SHIFT)
+#endif
+	{
+#ifdef __NetBSD__
+		struct page *const page = i915_gem_object_get_page(obj,
+		    atop(offset));
+#else
 		struct page *page = sg_page_iter_page(&sg_iter);
 
 		if (remain <= 0)
 			break;
+#endif
 
 		/* Operation in this page
 		 *
@@ -767,7 +741,7 @@ next_page:	KASSERT(page_length <= remain);
 			goto next_page;
 
 		mutex_unlock(&dev->struct_mutex);
-
+#ifndef __NetBSD__
 		if (likely(!i915.prefault_disable) && !prefaulted) {
 			ret = fault_in_multipages_writeable(user_data, remain);
 			/* Userspace is tricking us, but we've already clobbered
@@ -777,7 +751,7 @@ next_page:	KASSERT(page_length <= remain);
 			(void)ret;
 			prefaulted = 1;
 		}
-
+#endif
 		ret = shmem_pread_slow(page, shmem_page_offset, page_length,
 				       user_data, page_do_bit17_swizzling,
 				       needs_clflush);
@@ -792,7 +766,6 @@ next_page:
 		user_data += page_length;
 		offset += page_length;
 	}
-#endif
 
 out:
 	i915_gem_object_unpin_pages(obj);
@@ -1046,6 +1019,9 @@ i915_gem_shmem_pwrite(struct drm_device *dev,
 	int needs_clflush_before = 0;
 #ifndef __NetBSD__
 	struct sg_page_iter sg_iter;
+	int flush_mask = boot_cpu_data.x86_clflush_size - 1;
+#else
+	int flush_mask = cpu_info_primary.ci_cflush_lsize - 1;
 #endif
 
 	user_data = to_user_ptr(args->data_ptr);
@@ -1079,48 +1055,18 @@ i915_gem_shmem_pwrite(struct drm_device *dev,
 	obj->dirty = 1;
 
 #ifdef __NetBSD__
-	while (0 < remain) {
-		/* Get the next page.  */
-		shmem_page_offset = offset_in_page(offset);
-		KASSERT(shmem_page_offset < PAGE_SIZE);
-		page_length = MIN(remain, (PAGE_SIZE - shmem_page_offset));
-		struct page *const page = i915_gem_object_get_page(obj,
-		    atop(offset));
-
-		/* Decide whether to flush the cache or swizzle bit 17.  */
-		const bool partial_cacheline_write = needs_clflush_before &&
-		    ((shmem_page_offset | page_length)
-			& (cpu_info_primary.ci_cflush_lsize - 1));
-		page_do_bit17_swizzling = obj_do_bit17_swizzling &&
-		    (page_to_phys(page) & (1 << 17)) != 0;
-
-		/* Try the fast path.  */
-		ret = shmem_pwrite_fast(page, shmem_page_offset, page_length,
-		    user_data, page_do_bit17_swizzling,
-		    partial_cacheline_write, needs_clflush_after);
-		if (ret == 0)
-			goto next_page;
-
-		/* Fast path failed.  Try the slow path.  */
-		hit_slowpath = 1;
-		mutex_unlock(&dev->struct_mutex);
-		ret = shmem_pwrite_slow(page, shmem_page_offset, page_length,
-		    user_data, page_do_bit17_swizzling,
-		    partial_cacheline_write, needs_clflush_after);
-		mutex_lock(&dev->struct_mutex);
-		if (ret)
-			goto out;
-
-next_page:	KASSERT(page_length <= remain);
-		remain -= page_length;
-		user_data += page_length;
-		offset += page_length;
-	}
+	while (0 < remain)
 #else
 	for_each_sg_page(obj->pages->sgl, &sg_iter, obj->pages->nents,
-			 offset >> PAGE_SHIFT) {
+			 offset >> PAGE_SHIFT)
+#endif
+	{
+#ifdef __NetBSD__
+		struct page *const page = i915_gem_object_get_page(obj,
+		    atop(offset));
+#else
 		struct page *page = sg_page_iter_page(&sg_iter);
-		int partial_cacheline_write;
+#endif
 
 		if (remain <= 0)
 			break;
@@ -1139,9 +1085,8 @@ next_page:	KASSERT(page_length <= remain);
 		/* If we don't overwrite a cacheline completely we need to be
 		 * careful to have up-to-date data by first clflushing. Don't
 		 * overcomplicate things and flush the entire patch. */
-		partial_cacheline_write = needs_clflush_before &&
-			((shmem_page_offset | page_length)
-				& (boot_cpu_data.x86_clflush_size - 1));
+		const int partial_cacheline_write = needs_clflush_before &&
+			((shmem_page_offset | page_length) & flush_mask);
 
 		page_do_bit17_swizzling = obj_do_bit17_swizzling &&
 			(page_to_phys(page) & (1 << 17)) != 0;
@@ -1170,7 +1115,6 @@ next_page:
 		user_data += page_length;
 		offset += page_length;
 	}
-#endif
 
 out:
 	i915_gem_object_unpin_pages(obj);
@@ -1409,8 +1353,8 @@ __wait_seqno(struct intel_ring_buffer *ring, u32 seqno, unsigned reset_counter,
 	nanotime(&before);
 	spin_lock(&dev_priv->irq_lock);
 #define	EXIT_COND							      \
-	(((reset_counter != atomic_read(&dev_priv->gpu_error.reset_counter))  \
-	    ? wedged = true : false) ||					      \
+	((wedged = (reset_counter !=					      \
+		atomic_read(&dev_priv->gpu_error.reset_counter))) ||	      \
 	    i915_seqno_passed(ring->get_seqno(ring, false),		      \
 		seqno))
 
@@ -2418,6 +2362,7 @@ static void
 i915_gem_object_put_pages_gtt(struct drm_i915_gem_object *obj)
 {
 	struct drm_device *const dev = obj->base.dev;
+	struct vm_page *page;
 	int ret;
 
 	/* XXX Cargo-culted from the Linux code.  */
@@ -2434,7 +2379,15 @@ i915_gem_object_put_pages_gtt(struct drm_i915_gem_object *obj)
 	if (i915_gem_object_needs_bit17_swizzle(obj))
 		i915_gem_object_save_bit_17_swizzle(obj);
 
-	/* XXX Maintain dirty flag?  */
+	if (obj->madv == I915_MADV_DONTNEED)
+		obj->dirty = 0;
+
+	if (obj->dirty) {
+		TAILQ_FOREACH(page, &obj->igo_pageq, pageq.queue) {
+			page->flags &= ~PG_CLEAN;
+			/* XXX mark page accessed */
+		}
+	}
 
 	bus_dmamap_destroy(dev->dmat, obj->igo_dmamap);
 	bus_dmamem_unwire_uvm_object(dev->dmat, obj->base.gemo_shm_uao, 0,
@@ -2872,17 +2825,13 @@ i915_gem_object_move_to_inactive(struct drm_i915_gem_object *obj)
 	struct i915_vma *vma;
 
 	if ((obj->base.write_domain & I915_GEM_DOMAIN_GTT) != 0) {
-#if 0
 		printk(KERN_ERR "%s: %p 0x%x flushing gtt\n", __func__, obj,
 			obj->base.write_domain);
-#endif
 		i915_gem_object_flush_gtt_write_domain(obj);
 	}
 	if ((obj->base.write_domain & I915_GEM_DOMAIN_CPU) != 0) {
-#if 0
 		printk(KERN_ERR "%s: %p 0x%x flushing cpu\n", __func__, obj,
 			obj->base.write_domain);
-#endif
 		i915_gem_object_flush_cpu_write_domain(obj, false);
 	}
 	BUG_ON(obj->base.write_domain & ~I915_GEM_GPU_DOMAINS);

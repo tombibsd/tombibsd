@@ -1124,9 +1124,14 @@ ucycom_get_cfg(struct ucycom_softc *sc)
 Static void
 ucycom_cleanup(struct ucycom_softc *sc)
 {
+	uint8_t	*obuf;
+
 	DPRINTF(("ucycom_cleanup: closing uhidev\n"));
 
-	if (sc->sc_obuf !=NULL)
-		free (sc->sc_obuf, M_USBDEV);
+	obuf = sc->sc_obuf;
+	sc->sc_obuf = NULL;
 	uhidev_close(&sc->sc_hdev);
+
+	if (obuf != NULL)
+		free (obuf, M_USBDEV);
 }

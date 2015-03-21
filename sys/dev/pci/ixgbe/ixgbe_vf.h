@@ -108,6 +108,11 @@ struct ixgbevf_hw_stats {
 	u64 saved_reset_vfgorc;
 	u64 saved_reset_vfgotc;
 	u64 saved_reset_vfmprc;
+
+	struct evcnt ipcs;
+	struct evcnt ipcs_bad;
+	struct evcnt l4cs;
+	struct evcnt l4cs_bad;
 };
 
 #endif /* __IXGBE_VF_H__ */

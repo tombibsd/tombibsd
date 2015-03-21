@@ -1,7 +1,7 @@
 #	$NetBSD$
 
 CPPFLAGS+=		-D${MACHINE}
-COPTS+=			-fno-unwind-tables
+CFLAGS+=		-fno-unwind-tables
 GENASSYM_EXTRAS+=	${THISARM}/shark/genassym.cf
 
 # Need to convert the kernel from ELF to a.out so that OpenFirmware

@@ -88,9 +88,6 @@ static struct s_compunit **cu_nextp = &script;
 struct s_flist *files;
 static struct s_flist **fl_nextp = &files;
 
-FILE *infile;			/* Current input file */
-FILE *outfile;			/* Current output file */
-
 int aflag;
 static int eflag;
 int nflag;
@@ -188,7 +185,6 @@ main(int argc, char *argv[])
 	else
 		add_file(NULL);
 	rval = process();
-	cfclose(prog, NULL);
 	if (fclose(stdout))
 		err(1, "stdout");
 	exit(rval);

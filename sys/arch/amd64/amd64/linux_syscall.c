@@ -97,8 +97,8 @@ linux_syscall(struct trapframe *frame)
 	 * already adjacent in the syscall trapframe.
 	 */
 
-	if (__predict_false(p->p_trace_enabled)
-	    && (error = trace_enter(code, args, callp->sy_narg)) != 0)
+	if (__predict_false(p->p_trace_enabled || KDTRACE_ENTRY(callp->sy_entry))
+	    && (error = trace_enter(code, callp, args)) != 0)
 		goto out;
 
 	rval[0] = 0;
@@ -126,8 +126,8 @@ out:
 		break;
 	}
 
-	if (__predict_false(p->p_trace_enabled))
-		trace_exit(code, rval, error);
+	if (__predict_false(p->p_trace_enabled || KDTRACE_ENTRY(callp->sy_return)))
+		trace_exit(code, callp, args, rval, error);
 
 	userret(l);
 }

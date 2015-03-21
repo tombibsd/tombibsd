@@ -1627,7 +1627,7 @@ asmptechk:
 
 	.data
 2:
-	.asciz	"asmptechk: %x %x %x %x:%x\r\n"
+	.asciz	"asmptechk: %x %x %x %x:%x\n"
 	_ALIGN
 	.text
 #endif
@@ -2145,9 +2145,7 @@ winfixspill:
 	wrpr	%g0, 0, %otherwin
 	or	%lo(2f), %o0, %o0
 	wrpr	%g0, WSTATE_KERN, %wstate
-	sethi	%hi(PANICSTACK), %sp
-	LDPTR	[%sp + %lo(PANICSTACK)], %sp
-	add	%sp, -CC64FSZ-STKB, %sp
+	set	PANICSTACK-CC64FSZ-STKB, %sp
 	ta	1; nop					! This helps out traptrace.
 	call	_C_LABEL(panic)				! This needs to be fixed properly but we should panic here
 	 mov	%g1, %o1
@@ -2927,9 +2925,7 @@ slowtrap:
 	cmp	%g7, WSTATE_KERN
 	bnz,pt	%icc, 1f		! User stack -- we'll blow it away
 	 nop
-	sethi	%hi(PANICSTACK), %sp
-	LDPTR	[%sp + %lo(PANICSTACK)], %sp
-	add	%sp, -CC64FSZ-STKB, %sp	
+	set	PANICSTACK-CC64FSZ-STKB, %sp
 1:
 #endif
 	rdpr	%tt, %g4
@@ -3517,7 +3513,7 @@ setup_sparcintr:
 
 	STACKFRAME(-CC64FSZ)		! Get a clean register window
 	LOAD_ASCIZ(%o0,\
-	    "interrupt_vector: number %lx softint mask %lx pil %lu slot %p\r\n")
+	    "interrupt_vector: number %lx softint mask %lx pil %lu slot %p\n")
 	mov	%g2, %o1
 	rdpr	%pil, %o3
 	mov	%g1, %o4
@@ -3547,8 +3543,9 @@ ret_from_intr_vector:
 	 nop
 #endif
 #if 1
-	STACKFRAME(-CC64FSZ)		! Get a clean register window
-	LOAD_ASCIZ(%o0, "interrupt_vector: spurious vector %lx at pil %d\r\n")
+	set	PANICSTACK-STKB, %g1	! Use panic stack temporarily
+	save	%g1, -CC64FSZ, %sp	! Get a clean register window
+	LOAD_ASCIZ(%o0, "interrupt_vector: spurious vector %lx at pil %d\n")
 	mov	%g7, %o1
 	GLOBTOLOC
 	clr	%g4
@@ -3686,7 +3683,7 @@ ENTRY_NOPROFILE(sparc_interrupt)
 	stx	%g5, [%sp + CC64FSZ + STKB + TF_G + ( 5*8)]
 	stx	%g6, [%sp + CC64FSZ + STKB + TF_G + ( 6*8)]
 	stx	%g7, [%sp + CC64FSZ + STKB + TF_G + ( 7*8)]
-	ALTERNATE_GLOBALS_SUN4V
+
 	/*
 	 * In the EMBEDANY memory model %g4 points to the start of the
 	 * data segment.  In our case we need to clear it before calling
@@ -3694,8 +3691,6 @@ ENTRY_NOPROFILE(sparc_interrupt)
 	 */
 	clr	%g4
 
-	flushw			! Do not remove this insn -- causes interrupt loss
-	NORMAL_GLOBALS_SUN4V
 	ba	2f
 	 nop
 1:		
@@ -3709,7 +3704,7 @@ ENTRY_NOPROFILE(sparc_interrupt)
 	stx	%g5, [%sp + CC64FSZ + STKB + TF_G + ( 5*8)]
 	stx	%g6, [%sp + CC64FSZ + STKB + TF_G + ( 6*8)]
 	stx	%g7, [%sp + CC64FSZ + STKB + TF_G + ( 7*8)]
-	ALTERNATE_GLOBALS_SUN4U
+
 	/*
 	 * In the EMBEDANY memory model %g4 points to the start of the
 	 * data segment.  In our case we need to clear it before calling
@@ -3718,7 +3713,7 @@ ENTRY_NOPROFILE(sparc_interrupt)
 	clr	%g4
 
 	flushw			! Do not remove this insn -- causes interrupt loss
-	NORMAL_GLOBALS_SUN4U
+
 2:
 	rd	%y, %l6
 	INCR64(CPUINFO_VA+CI_NINTR)	! cnt.v_ints++ (clobbers %o0,%o1)
@@ -3833,7 +3828,7 @@ sparc_intr_retry:
 	 nop
 
 	STACKFRAME(-CC64FSZ)		! Get a clean register window
-	LOAD_ASCIZ(%o0, "sparc_interrupt: func %p arg %p\r\n")
+	LOAD_ASCIZ(%o0, "sparc_interrupt: func %p arg %p\n")
 	mov	%i0, %o2		! arg
 	GLOBTOLOC
 	call	prom_printf
@@ -3893,7 +3888,7 @@ intrcmplt:
 	 nop
 
 	STACKFRAME(-CC64FSZ)		! Get a clean register window
-	LOAD_ASCIZ(%o0, "sparc_interrupt:  done\r\n")
+	LOAD_ASCIZ(%o0, "sparc_interrupt:  done\n")
 	GLOBTOLOC
 	call	prom_printf
 	 nop
@@ -4545,7 +4540,7 @@ ENTRY_NOPROFILE(cpu_initialize)	/* for cosmetic reasons - nicer backtrace */
 	 nop
 	.data
 1:
-	.asciz	"Setting trap base...\r\n"
+	.asciz	"Setting trap base...\n"
 	_ALIGN
 	.text
 0:	
@@ -4643,7 +4638,7 @@ ENTRY_NOPROFILE(cpu_initialize)	/* for cosmetic reasons - nicer backtrace */
 
 	.data
 1:
-	.asciz	"Calling startup routine %p with stack at %p...\r\n"
+	.asciz	"Calling startup routine %p with stack at %p...\n"
 	_ALIGN
 	.text
 0:	
@@ -4662,7 +4657,7 @@ ENTRY_NOPROFILE(cpu_initialize)	/* for cosmetic reasons - nicer backtrace */
 	 nop
 	.data
 1:
-	.asciz	"main() returned\r\n"
+	.asciz	"main() returned\n"
 	_ALIGN
 	.text
 
@@ -5039,7 +5034,7 @@ ENTRY(sp_tlb_flush_pte_us)
 	restore
 	.data
 1:
-	.asciz	"sp_tlb_flush_pte_us:	demap ctx=%x va=%08x res=%x\r\n"
+	.asciz	"sp_tlb_flush_pte_us:	demap ctx=%x va=%08x res=%x\n"
 	_ALIGN
 	.text
 2:
@@ -5093,7 +5088,7 @@ ENTRY(sp_tlb_flush_pte_usiii)
 	restore
 	.data
 1:
-	.asciz	"sp_tlb_flush_pte_usiii:	demap ctx=%x va=%08x res=%x\r\n"
+	.asciz	"sp_tlb_flush_pte_usiii:	demap ctx=%x va=%08x res=%x\n"
 	_ALIGN
 	.text
 2:

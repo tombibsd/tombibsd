@@ -79,6 +79,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/acct.h>
 #include <sys/signal.h>
 #include <sys/device.h>
+#include <sys/kauth.h>
 #include <sys/kmem.h>
 #include <sys/userret.h>
 
@@ -881,9 +882,29 @@ do_onfault:
 				user_backtrace(frame, l, type);
 #endif
 				KSI_INIT_TRAP(&ksi);
-				ksi.ksi_signo = SIGSEGV;
-				ksi.ksi_code = (ret == EACCES ?
-						SEGV_ACCERR : SEGV_MAPERR);
+				switch (ret) {
+				case EACCES:
+					ksi.ksi_signo = SIGSEGV;
+					ksi.ksi_code = SEGV_ACCERR;
+					break;
+				case ENOMEM:
+					ksi.ksi_signo = SIGKILL;
+					printf("UVM: pid %d (%s), uid %d "
+					    "killed: out of swap\n",
+					    p->p_pid, p->p_comm,
+					    l->l_cred ? 
+						kauth_cred_geteuid(l->l_cred)
+						: -1);
+					break;
+				case EINVAL:
+					ksi.ksi_signo = SIGBUS;
+					ksi.ksi_code = BUS_ADRERR;
+					break;
+				default:
+					ksi.ksi_signo = SIGSEGV;
+					ksi.ksi_code = SEGV_MAPERR;
+					break;
+				}
 				ksi.ksi_trap = type;
 				ksi.ksi_addr = (void *)va;
 				trapsignal(l, &ksi);

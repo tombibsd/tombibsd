@@ -47,6 +47,7 @@
 #define HAVE_SYS_TYPES_H 1
 #define HAVE_UNISTD_H 1
 #define HAVE___QUOTACTL 1
+#define HAVE_UTIMENSAT 1
 #define PACKAGE_BUGREPORT "http://rumpkernel.org/"
 #define PACKAGE_NAME "rumpuser-posix"
 #define PACKAGE_STRING "rumpuser-posix 999"

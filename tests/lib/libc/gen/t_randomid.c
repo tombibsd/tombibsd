@@ -58,7 +58,7 @@ ATF_TC_BODY(randomid_basic, tc)
 
 	lowest = UINT32_MAX;
 
-	for (n = 0; n < 1000000; n++) {
+	for (n = 0; n < 100000; n++) {
 		id = randomid(ctx);
 
 		if (last[id] > 0) {

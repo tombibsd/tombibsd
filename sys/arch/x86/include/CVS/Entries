@@ -45,7 +45,7 @@
 /mtrr.h/1.5/Thu Dec 15 09:38:21 2011/-kk/
 /mutex.h/1.6/Fri Apr 24 17:49:51 2009/-kk/
 /nmi.h/1.1/Tue Feb 24 06:03:54 2009/-kk/
-/pci_machdep.h/1.14/Sun Mar 14 20:19:06 2010/-kk/
+/pci_machdep.h/1.15/Sat Mar 21 02:37:45 2015/-kk/
 /pci_machdep_common.h/1.13/Fri Apr 11 02:03:39 2014/-kk/
 /pic.h/1.7/Sun Apr 19 14:11:37 2009/-kk/
 /pio.h/1.9/Sun May 22 16:01:43 2011/-kk/

@@ -830,7 +830,7 @@ nxt2k_set_modulation(struct nxt2k *nxt, fe_modulation_t modulation)
 	return nxt2k_fe_set_frontend(nxt, modulation);
 }
 
-MODULE(MODULE_CLASS_DRIVER, nxt2k, "iic");
+MODULE(MODULE_CLASS_DRIVER, nxt2k, "i2cexec");
 
 static int
 nxt2k_modcmd(modcmd_t cmd, void *opaque)

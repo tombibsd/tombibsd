@@ -61,6 +61,10 @@ struct arm32_bus_dma_tag amlogic_dma_tag = {
 	bus_space_write_4(&amlogic_bs_tag, amlogic_core_bsh, \
 			  AMLOGIC_CBUS_OFFSET + (x), (v))
 
+#define CBUS_SET_CLEAR(x, s, c)	\
+	amlogic_reg_set_clear(&amlogic_bs_tag, amlogic_core_bsh, \
+			      AMLOGIC_CBUS_OFFSET + (x), (s), (c))
+
 void
 amlogic_bootstrap(void)
 {
@@ -96,6 +100,26 @@ amlogic_get_rate_sys(void)
 	mul = __SHIFTOUT(cntl, HHI_SYS_PLL_CNTL_MUL);
 	div = __SHIFTOUT(cntl, HHI_SYS_PLL_CNTL_DIV);
 	od = __SHIFTOUT(cntl, HHI_SYS_PLL_CNTL_OD);
+
+	clk *= mul;
+	clk /= div;
+	clk >>= od;
+
+	return (uint32_t)clk;
+}
+
+uint32_t
+amlogic_get_rate_fixed(void)
+{
+	uint32_t cntl;
+	uint64_t clk;
+	u_int mul, div, od;
+
+	clk = amlogic_get_rate_xtal();
+	cntl = CBUS_READ(HHI_MPLL_CNTL_REG);
+	mul = __SHIFTOUT(cntl, HHI_MPLL_CNTL_MUL);
+	div = __SHIFTOUT(cntl, HHI_MPLL_CNTL_DIV);
+	od = __SHIFTOUT(cntl, HHI_MPLL_CNTL_OD);
 
 	clk *= mul;
 	clk /= div;
@@ -155,6 +179,57 @@ amlogic_get_rate_a9periph(void)
 				     HHI_SYS_CPU_CLK_CNTL1_PERIPH_CLK_MUX) + 2;
 
 	return amlogic_get_rate_a9() / div;
+}
+
+void
+amlogic_eth_init(void)
+{
+	CBUS_WRITE(EE_CLK_GATING1_REG,
+	    CBUS_READ(EE_CLK_GATING1_REG) | EE_CLK_GATING1_ETHERNET);
+}
+
+void
+amlogic_rng_init(void)
+{
+	CBUS_WRITE(EE_CLK_GATING0_REG,
+	    CBUS_READ(EE_CLK_GATING0_REG) | EE_CLK_GATING0_RNG);
+	CBUS_WRITE(EE_CLK_GATING3_REG,
+	    CBUS_READ(EE_CLK_GATING3_REG) | EE_CLK_GATING3_RNG);
+}
+
+void
+amlogic_sdhc_init(void)
+{
+	/* enable SDHC clk */
+	CBUS_WRITE(EE_CLK_GATING0_REG,
+	    CBUS_READ(EE_CLK_GATING0_REG) | EE_CLK_GATING0_SDHC);
+}
+
+int
+amlogic_sdhc_select_port(int port)
+{
+	switch (port) {
+	case AMLOGIC_SDHC_PORT_B:
+		/* CARD -> SDHC pin mux settings */
+		CBUS_SET_CLEAR(PERIPHS_PIN_MUX_5_REG, 0, 0x00007c00);
+		CBUS_SET_CLEAR(PERIPHS_PIN_MUX_4_REG, 0, 0x7c000000);
+		CBUS_SET_CLEAR(PERIPHS_PIN_MUX_2_REG, 0, 0x0000fc00);
+		CBUS_SET_CLEAR(PERIPHS_PIN_MUX_8_REG, 0, 0x00000600);
+		CBUS_SET_CLEAR(PERIPHS_PIN_MUX_2_REG, 0x000000f0, 0);
+		break;
+	case AMLOGIC_SDHC_PORT_C:
+		/* BOOT -> SDHC pin mux settings */
+		CBUS_SET_CLEAR(PERIPHS_PIN_MUX_2_REG, 0, 0x04c000f0);
+		CBUS_SET_CLEAR(PERIPHS_PIN_MUX_5_REG, 0, 0x00007c00);
+		CBUS_SET_CLEAR(PERIPHS_PIN_MUX_6_REG, 0, 0xff000000);
+		CBUS_SET_CLEAR(PERIPHS_PIN_MUX_4_REG, 0x70000000, 0);
+		CBUS_SET_CLEAR(PERIPHS_PIN_MUX_7_REG, 0x000c0000, 0);
+		break;
+	default:
+		return EINVAL;
+	}
+
+	return 0;
 }
 
 static void
@@ -256,8 +331,6 @@ amlogic_usbphy_init(int port)
 	delay(50000);
 
 	ctrl = CBUS_READ(ctrl_reg);
-
-	printf("USBPHY: port %d, ctrl %#x\n", port, ctrl);
 
 	if ((ctrl & PREI_USB_PHY_CTRL_CLK_DET) == 0)
 		printf("WARNING: USB PHY port %d clock not detected\n", port);

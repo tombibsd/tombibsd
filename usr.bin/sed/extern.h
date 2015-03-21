@@ -56,20 +56,14 @@ struct s_flist {
 extern struct s_compunit *script;
 extern struct s_flist *files;
 extern struct s_command *prog;
-extern struct s_appends *appends;
-extern regmatch_t *match;
 extern size_t maxnsub;
 extern size_t appendnum;
 extern int aflag, nflag;
 extern int ispan;
-extern FILE *infile, *outfile;
 extern int rflags;	/* regex flags to use */
 
-void	 cfclose(struct s_command *, struct s_command *);
 void	 compile(void);
-void	 cspace(SPACE *, const char *, size_t, enum e_spflag);
 int	 process(void);
-void	 resetstate(void);
 char	*strregerror(int, regex_t *);
 void	*xmalloc(size_t);
 void	*xrealloc(void *, size_t);

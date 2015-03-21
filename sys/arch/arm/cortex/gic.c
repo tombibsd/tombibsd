@@ -371,7 +371,7 @@ armgic_establish_irq(struct pic_softc *pic, struct intrsource *is)
 			new_cfg |= 2 << twopair_shift;
 		}
 		if (new_cfg != cfg) {
-			gicd_write(sc, cfg_reg, cfg);
+			gicd_write(sc, cfg_reg, new_cfg);
 #if 0
 			printf("%s: irq %u: cfg changed from %#x to %#x\n",
 			    pic->pic_name, is->is_irq, cfg, new_cfg);
@@ -441,7 +441,7 @@ armgic_cpu_init_targets(struct armgic_softc *sc)
 	/*
 	 * Update the mpsafe targets 
 	 */
-	for (size_t irq = 32; irq < sc->sc_gic_lines; irq++) {
+	for (size_t irq = 32; irq < sc->sc_pic.pic_maxsources; irq++) {
 		struct intrsource * const is = sc->sc_pic.pic_sources[irq];
 		const bus_size_t targets_reg = GICD_ITARGETSRn(irq / 4);
 		if (is != NULL && is->is_mpsafe) {

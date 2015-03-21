@@ -64,6 +64,9 @@ struct mips_bus_dma_tag	apbus_dmat = {
 
 static const char *apbus_devs[] = {
 	"dwctwo",
+	"ohci",
+	"ehci",
+	"dme",
 	"jzgpio",
 	"jzfb",
 	NULL

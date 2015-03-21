@@ -712,6 +712,9 @@ main(void)
 	    uvm_aiodone_worker, NULL, PRI_VM, IPL_NONE, WQ_MPSAFE))
 		panic("fork aiodoned");
 
+	/* Wait for final configure threads to complete. */
+	config_finalize_mountroot();
+
 	/*
 	 * Okay, now we can let init(8) exec!  It's off to userland!
 	 */

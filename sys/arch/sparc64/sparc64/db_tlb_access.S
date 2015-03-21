@@ -105,7 +105,7 @@ ENTRY_NOPROFILE(print_itlb)
 2:
 	.asciz	"%2d:%016lx %016lx "
 3:
-	.asciz	"%2d:%016lx %016lx\r\n"
+	.asciz	"%2d:%016lx %016lx\n"
 	.text
 #else
 ENTRY_NOPROFILE(print_dtlb)
@@ -196,6 +196,6 @@ ENTRY_NOPROFILE(print_itlb)
 2:
 	.asciz	"%2d:%08x:%08x %08x:%08x "
 3:
-	.asciz	"%2d:%08x:%08x %08x:%08x\r\n"
+	.asciz	"%2d:%08x:%08x %08x:%08x\n"
 	.text
 #endif

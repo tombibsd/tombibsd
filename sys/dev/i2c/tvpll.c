@@ -153,7 +153,7 @@ tvpll_tune_dtv(struct tvpll *tvpll,
 	return rv;
 }
 
-MODULE(MODULE_CLASS_DRIVER, tvpll, "iic");
+MODULE(MODULE_CLASS_DRIVER, tvpll, "i2cexec");
 
 static int
 tvpll_modcmd(modcmd_t cmd, void *opaque)

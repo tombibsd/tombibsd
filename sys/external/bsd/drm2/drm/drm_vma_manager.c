@@ -164,11 +164,14 @@ drm_vma_offset_add(struct drm_vma_offset_manager *mgr,
 	if (0 < node->von_npages)
 		return 0;
 
-	error = vmem_alloc(mgr->vom_vmem, npages, VM_SLEEP|VM_BESTFIT,
+	error = vmem_alloc(mgr->vom_vmem, npages, VM_NOSLEEP|VM_BESTFIT,
 	    &startpage);
-	if (error)
+	if (error) {
+		if (error == ENOMEM)
+			error = ENOSPC;
 		/* XXX errno NetBSD->Linux */
 		return -error;
+	}
 
 	node->von_startpage = startpage;
 	node->von_npages = npages;

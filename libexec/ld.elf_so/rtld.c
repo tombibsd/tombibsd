@@ -1431,6 +1431,9 @@ _rtld_error(const char *fmt,...)
 void
 _rtld_debug_state(void)
 {
+#if defined(__hppa__)
+	__asm volatile("nop" ::: "memory");
+#endif
 
 	/* Prevent optimizer from removing calls to this function */
 	__insn_barrier();

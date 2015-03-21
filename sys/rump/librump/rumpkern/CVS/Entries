@@ -24,7 +24,7 @@
 /rump_curlwp_hypercall.h/1.2/Sun Mar 16 15:30:05 2014/-kk/
 /rump_lwproc.3/1.1/Sun Nov  9 17:39:38 2014/-kk/
 /rump_private.h/1.87/Mon Jan 12 06:49:22 2015/-kk/
-/rump_syscalls.c/1.105/Sat Mar 21 02:30:01 2015/-kk/
+/rump_syscalls.c/1.107/Sat Mar 21 02:38:00 2015/-kk/
 /rumpcopy.c/1.19/Mon Jan 12 06:49:22 2015/-kk/
 /rumpkern.ifspec/1.13/Tue May  6 05:50:19 2014/-kk/
 /rumpkern_if_priv.h/1.16/Tue May  6 05:50:19 2014/-kk/

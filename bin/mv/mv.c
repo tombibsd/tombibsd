@@ -255,7 +255,11 @@ do_move(char *from, char *to)
 static int
 fastcopy(char *from, char *to, struct stat *sbp)
 {
+#if defined(__NetBSD__)
+	struct timespec ts[2];
+#else
 	struct timeval tval[2];
+#endif
 	static blksize_t blen;
 	static char *bp;
 	int nread, from_fd, to_fd;
@@ -296,8 +300,13 @@ err:		if (unlink(to))
 
 	(void)close(from_fd);
 #ifdef BSD4_4
+#if defined(__NetBSD__)
+	ts[0] = sbp->st_atimespec;
+	ts[1] = sbp->st_mtimespec;
+#else
 	TIMESPEC_TO_TIMEVAL(&tval[0], &sbp->st_atimespec);
 	TIMESPEC_TO_TIMEVAL(&tval[1], &sbp->st_mtimespec);
+#endif
 #else
 	tval[0].tv_sec = sbp->st_atime;
 	tval[1].tv_sec = sbp->st_mtime;
@@ -307,7 +316,11 @@ err:		if (unlink(to))
 #ifdef __SVR4
 	if (utimes(to, tval))
 #else
+#if defined(__NetBSD__)
+	if (futimens(to_fd, ts))
+#else
 	if (futimes(to_fd, tval))
+#endif
 #endif
 		warn("%s: set times", to);
 	if (fchown(to_fd, sbp->st_uid, sbp->st_gid)) {

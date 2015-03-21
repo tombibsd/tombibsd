@@ -45,7 +45,7 @@
 /ncr5380.c/1.72/Wed Oct 29 08:12:59 2014/-kk/
 /ncr5380reg.h/1.23/Sun Jun  5 06:33:42 2011/-kk/
 /ncr5380var.h/1.8/Tue Apr 13 13:30:37 2010/-kk/
-/nvram.c/1.19/Sun Jun  5 06:33:43 2011/-kk/
+/nvram.c/1.20/Sat Mar 21 02:37:35 2015/-kk/
 /nvramvar.h/1.4/Sun Jun  5 06:33:43 2011/-kk/
 /ser.c/1.56/Tue Dec  9 04:34:41 2014/-kk/
 /serreg.h/1.2/Mon Apr 28 20:23:15 2008/-kk/

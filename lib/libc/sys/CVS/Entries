@@ -80,7 +80,7 @@
 /ioctl.2/1.23/Sun Dec 19 22:19:27 2010/-kk/
 /issetugid.2/1.12/Sat Apr 21 12:27:27 2012/-kk/
 /kill.2/1.23/Sun Jul 20 13:58:22 2014/-kk/
-/kqueue.2/1.33/Sat Nov 24 15:16:52 2012/-kk/
+/kqueue.2/1.34/Sat Mar 21 02:37:23 2015/-kk/
 /ktrace.2/1.18/Tue Dec  9 04:34:28 2014/-kk/
 /lfs_bmapv.2/1.10/Wed Apr 30 13:10:51 2008/-kk/
 /lfs_markv.2/1.11/Wed Apr 30 13:10:51 2008/-kk/

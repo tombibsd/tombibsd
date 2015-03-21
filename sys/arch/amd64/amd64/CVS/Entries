@@ -16,9 +16,9 @@
 /kgdb_machdep.c/1.8/Sun Apr  3 22:29:25 2011/-kk/
 /kobj_machdep.c/1.5/Mon Dec  8 08:41:36 2008/-kk/
 /linux32_sigcode.S/1.2/Mon Aug  1 22:21:01 2011/-kk/
-/linux32_syscall.c/1.31/Tue Dec  9 04:43:36 2014/-kk/
+/linux32_syscall.c/1.32/Sat Mar 21 02:37:31 2015/-kk/
 /linux_sigcode.S/1.2/Sun Dec 11 12:16:21 2005/-kk/
-/linux_syscall.c/1.31/Mon Dec 20 00:25:24 2010/-kk/
+/linux_syscall.c/1.32/Sat Mar 21 02:37:31 2015/-kk/
 /lock_stubs.S/1.25/Thu Oct 24 10:28:57 2013/-kk/
 /locore.S/1.77/Fri Oct  3 09:35:59 2014/-kk/
 /machdep.c/1.211/Tue Jun  3 02:53:41 2014/-kk/
@@ -26,7 +26,7 @@
 /mptramp.S/1.17/Fri Jan 31 08:48:34 2014/-kk/
 /netbsd32_machdep.c/1.93/Sat Dec 27 03:35:28 2014/-kk/
 /netbsd32_sigcode.S/1.7/Mon Apr 28 20:23:12 2008/-kk/
-/netbsd32_syscall.c/1.32/Tue Jun  3 02:53:42 2014/-kk/
+/netbsd32_syscall.c/1.33/Sat Mar 21 02:37:31 2015/-kk/
 /process_machdep.c/1.29/Thu Feb 27 08:55:37 2014/-kk/
 /rbus_machdep.c/1.6/Sun Jul 20 13:08:17 2014/-kk/
 /spl.S/1.29/Tue Dec  9 04:43:36 2014/-kk/

@@ -87,6 +87,16 @@ struct linux_flock64 {
 #error Undefined linux_fcntl.h machine type.
 #endif
 
+/* Linux specific fcntl(2) commands */
+#define	LINUX_F_SPECIFIC_BASE 	1024
+#define	LINUX_F_SETLEASE 	(LINUX_F_SPECIFIC_BASE + 0)
+#define	LINUX_F_GETLEASE 	(LINUX_F_SPECIFIC_BASE + 1)
+#define	LINUX_F_NOTIFY 		(LINUX_F_SPECIFIC_BASE + 2)
+#define	LINUX_F_CANCELLK 	(LINUX_F_SPECIFIC_BASE + 5)
+#define	LINUX_F_DUPFD_CLOEXEC 	(LINUX_F_SPECIFIC_BASE + 6)
+#define	LINUX_F_SETPIPE_SZ 	(LINUX_F_SPECIFIC_BASE + 7)
+#define	LINUX_F_GETPIPE_SZ 	(LINUX_F_SPECIFIC_BASE + 8)
+
 /*
  * We have to have 4 copies of the code that converts linux fcntl() file
  * locking to native form because there are 4 layouts for the structures.

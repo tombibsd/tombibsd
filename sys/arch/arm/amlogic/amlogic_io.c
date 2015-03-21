@@ -55,19 +55,30 @@ static int	amlogicio_find(device_t, cfdata_t, const int *, void *);
 
 static bool amlogicio_found = false;
 
+#define NOPORT	AMLOGICIOCF_PORT_DEFAULT
+#define NOINTR	AMLOGICIO_INTR_DEFAULT
+
 static const struct amlogic_locators amlogic_locators[] = {
   { "amlogiccom",
     AMLOGIC_UART0AO_OFFSET, AMLOGIC_UART_SIZE, 0, AMLOGIC_INTR_UART0AO },
   { "amlogiccom",
     AMLOGIC_UART2AO_OFFSET, AMLOGIC_UART_SIZE, 2, AMLOGIC_INTR_UART2AO },
+#if notyet
+  { "genfb",
+    AMLOGIC_DMC_OFFSET, AMLOGIC_DMC_SIZE, NOPORT, NOINTR },
+#endif
+  { "amlogicrng",
+    AMLOGIC_RAND_OFFSET, AMLOGIC_RAND_SIZE, NOPORT, NOINTR },
   { "dwctwo",
     AMLOGIC_USB0_OFFSET, AMLOGIC_USB_SIZE, 0, AMLOGIC_INTR_USB0 },
   { "dwctwo",
     AMLOGIC_USB1_OFFSET, AMLOGIC_USB_SIZE, 1, AMLOGIC_INTR_USB1 },
-#if notyet
-  { "amlogicmmc",
-    AMLOGIC_MMC_OFFSET, AMLOGIC_MMC_SIZE, 0, AMLOGIC_INTR_MMC },
-#endif
+  { "awge",
+    AMLOGIC_GMAC_OFFSET, AMLOGIC_GMAC_SIZE, NOPORT, AMLOGIC_INTR_GMAC },
+  { "amlogicsdhc",
+    AMLOGIC_SDHC_OFFSET, AMLOGIC_SDHC_SIZE, 1, AMLOGIC_INTR_SDHC },
+  { "amlogicsdhc",
+    AMLOGIC_SDHC_OFFSET, AMLOGIC_SDHC_SIZE, 2, AMLOGIC_INTR_SDHC },
 };
 
 int

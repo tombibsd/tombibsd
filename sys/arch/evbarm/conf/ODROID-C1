@@ -156,7 +156,7 @@ mainbus0	at root
 
 # The boot cpu
 cpu*		at mainbus?
-#options 	MULTIPROCESSOR
+options 	MULTIPROCESSOR
 
 # A5 core devices
 armperiph0	at mainbus?
@@ -166,7 +166,7 @@ a9tmr0		at armperiph?				# Global Timer
 a9wdt0		at armperiph?				# Watchdog
 
 # Specify the memory size in megabytes.
-options 	MEMSIZE=1024
+#options 	MEMSIZE=1024
 
 # On-board I/O
 amlogicio0	at mainbus?
@@ -174,6 +174,35 @@ amlogicio0	at mainbus?
 # On-board UARTs
 amlogiccom0	at amlogicio0 port 0
 options 	CONSADDR=0xc81004c0, CONSPEED=115200
+
+# Framebuffer
+#genfb0		at amlogicio0
+#wsdisplay*	at genfb?
+#options 	VCONS_DRAW_INTR
+#options 	WSEMUL_VT100
+#options 	WS_DEFAULT_FG=WSCOL_WHITE
+#options 	WS_DEFAULT_BG=WSCOL_BLACK
+#options 	WS_KERNEL_FG=WSCOL_GREEN
+#options 	WS_KERNEL_BG=WSCOL_BLACK
+#options 	WSDISPLAY_COMPAT_PCVT
+#options 	WSDISPLAY_COMPAT_SYSCONS
+#options 	WSDISPLAY_COMPAT_USL
+#options 	WSDISPLAY_COMPAT_RAWKBD
+#options 	WSDISPLAY_DEFAULTSCREENS=4
+
+# Hardware random number generator
+amlogicrng0	at amlogicio0
+
+# SDHC controller
+amlogicsdhc0	at amlogicio0 port 1	# SD card
+#amlogicsdhc0	at amlogicio0 port 2	# EMMC
+sdmmc*		at amlogicsdhc?
+ld*		at sdmmc?
+
+# Gigabit ethernet
+awge0		at amlogicio0
+rgephy*		at mii? phy ?
+ukphy*		at mii? phy ?
 
 # USB
 dwctwo0		at amlogicio0 port 0

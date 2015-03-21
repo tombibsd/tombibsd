@@ -177,6 +177,11 @@ struct emul {
 
 	size_t		e_ucsize;	/* size of ucontext_t */
 	void		(*e_startlwp)(void *);
+
+	/* Dtrace syscall probe */
+	void 		(*e_dtrace_syscall)(uint32_t, register_t,
+			    const struct sysent *, const void *,
+			    const register_t *, int);
 };
 
 /*

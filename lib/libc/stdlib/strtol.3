@@ -33,7 +33,7 @@
 .\"
 .\"     from: @(#)strtol.3	8.1 (Berkeley) 6/4/93
 .\"
-.Dd December 27, 2014
+.Dd Match 10, 2015
 .Dt STRTOL 3
 .Os
 .Sh NAME
@@ -243,7 +243,7 @@ function is the simplest to use:
 int e;
 intmax_t lval = strtoi(buf, NULL, 0, 1, 99, &e);
 if (e)
-	warn("conversion of `%s' to a number failed, using %jd",
+	warnc(e, "conversion of `%s' to a number failed, using %jd",
 	    buf, lval);
 .Ed
 .Pp

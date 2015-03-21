@@ -417,11 +417,22 @@ tlb_exception(struct lwp *l, struct trapframe *tf, uint32_t va)
 	/* Page not found. */
 	if (usermode) {
 		KSI_INIT_TRAP(&ksi);
-		if (err == ENOMEM)
+		switch (err) {
+		case ENOMEM:
 			ksi.ksi_signo = SIGKILL;
-		else {
+			break;
+		case EINVAL:
+			ksi.ksi_signo = SIGBUS;
+			ksi.ksi_code = BUS_ADRERR;
+			break;
+		case EACCES:
+			ksi.ksi_signo = SIGSEGV;
+			ksi.ksi_code = SEGV_ACCERR;
+			break;
+		default:
 			ksi.ksi_signo = SIGSEGV;
 			ksi.ksi_code = SEGV_MAPERR;
+			break;
 		}
 		goto user_fault;
 	} else {

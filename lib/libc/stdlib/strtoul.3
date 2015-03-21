@@ -33,7 +33,7 @@
 .\"
 .\"     from: @(#)strtoul.3	8.1 (Berkeley) 6/4/93
 .\"
-.Dd December 27, 2014
+.Dd March 10, 2015
 .Dt STRTOUL 3
 .Os
 .Sh NAME
@@ -240,7 +240,7 @@ function is the simplest to use:
 int e;
 uintmax_t lval = strtou(buf, NULL, 0, 1, 99, &e);
 if (e)
-	warn("conversion of `%s' to a number failed, using %ju",
+	warnc(e, "conversion of `%s' to a number failed, using %ju",
 	    buf, lval);
 .Ed
 .Pp

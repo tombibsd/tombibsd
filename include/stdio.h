@@ -331,7 +331,9 @@ FILE	*popen(const char *, const char *);
 __END_DECLS
 #endif
 #ifdef _NETBSD_SOURCE
+__BEGIN_DECLS
 FILE	*popenve(const char *, char *const *, char *const *, const char *);
+__END_DECLS
 #endif
 
 /*
@@ -576,8 +578,6 @@ int	 scanf_l(locale_t, const char * __restrict, ...)
     __scanflike(2, 3);
 int	 sscanf_l(const char * __restrict, locale_t,
     const char * __restrict, ...) __scanflike(3, 4);
-int	 vscanf_l(locale_t, const char * __restrict, __va_list)
-    __scanflike(2, 0);
 int	 vscanf_l(locale_t, const char * __restrict, __va_list)
     __scanflike(2, 0);
 int	 vfscanf_l(FILE * __restrict, locale_t, const char * __restrict,

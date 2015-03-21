@@ -162,22 +162,25 @@ nouveau_mc_create_(struct nouveau_object *parent, struct nouveau_object *engine,
 		}
 	}
 
-	ret = nv_device_get_irq(device, true);
-	if (ret < 0)
-		return ret;
-	pmc->irq = ret;
-
-#ifdef __NetBSD__
+#ifdef __NetBSD__		/* XXX nouveau platform */
 	if (nv_device_is_pci(device)) {
 		const pci_chipset_tag_t pc = device->pdev->pd_pa.pa_pc;
+		pci_intr_handle_t ih;
 
-		__CTASSERT(sizeof(pci_intr_handle_t) <= sizeof pmc->irq);
-		pmc->irq_cookie = pci_intr_establish(pc, pmc->irq, IPL_VM,
+		if (pci_intr_map(&device->pdev->pd_pa, &ih))
+			return -EIO;
+
+		pmc->irq_cookie = pci_intr_establish(pc, ih, IPL_VM,
 		    &nouveau_mc_intr, pmc);
 		if (pmc->irq_cookie == NULL)
 			return -EIO;
 	}
 #else
+	ret = nv_device_get_irq(device, true);
+	if (ret < 0)
+		return ret;
+	pmc->irq = ret;
+
 	ret = request_irq(pmc->irq, nouveau_mc_intr, IRQF_SHARED, "nouveau",
 			  pmc);
 

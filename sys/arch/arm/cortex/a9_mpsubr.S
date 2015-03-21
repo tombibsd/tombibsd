@@ -518,6 +518,10 @@ cortex_mpfault:
 // Secondary processors come here after exiting the SKU ROM.
 // Switches to kernel's endian almost immediately.
 //
+
+	.global	cortex_mpstart
+	.type	cortex_mpstart,%object
+
 cortex_mpstart:
 #ifndef MULTIPROCESSOR
 	//

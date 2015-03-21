@@ -150,6 +150,10 @@ uyurex_attach(device_t parent, device_t self, void *aux)
 	aprint_normal("\n");
 	aprint_naive("\n");
 
+	/*
+	 * XXX uhidev_open enables the interrupt, so we should do it as
+	 * one of the final things here.
+	 */
 	err = uhidev_open(&sc->sc_hdev);
 	if (err) {
 		aprint_error_dev(self, "uyurex_open: uhidev_open %d\n", err);

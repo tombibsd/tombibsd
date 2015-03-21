@@ -733,23 +733,30 @@ ffs_reload(struct mount *mp, kauth_cred_t cred, struct lwp *l)
 #endif
 		fs->fs_flags &= ~FS_SWAPPED;
 
-	/* We don't want the superblock size to change. */
-	if (newfs->fs_sbsize != fs_sbsize) {
-		brelse(bp, 0);
-		kmem_free(newfs, fs_sbsize);
-		return (EINVAL);
-	}
+	brelse(bp, 0);
+
 	if ((newfs->fs_magic != FS_UFS1_MAGIC &&
 	     newfs->fs_magic != FS_UFS2_MAGIC)) {
-		brelse(bp, 0);
 		kmem_free(newfs, fs_sbsize);
 		return (EIO);		/* XXX needs translation */
 	}
 	if (!ffs_superblock_validate(newfs)) {
-		brelse(bp, 0);
 		kmem_free(newfs, fs_sbsize);
 		return (EINVAL);
 	}
+
+	/*
+	 * The current implementation doesn't handle the possibility that
+	 * these values may have changed.
+	 */
+	if ((newfs->fs_sbsize != fs_sbsize) ||
+	    (newfs->fs_cssize != fs->fs_cssize) ||
+	    (newfs->fs_contigsumsize != fs->fs_contigsumsize) ||
+	    (newfs->fs_ncg != fs->fs_ncg)) {
+		kmem_free(newfs, fs_sbsize);
+		return (EINVAL);
+	}
+
 
 	/* Store off old fs_sblockloc for fs_oldfscompat_read. */
 	sblockloc = fs->fs_sblockloc;
@@ -764,7 +771,6 @@ ffs_reload(struct mount *mp, kauth_cred_t cred, struct lwp *l)
 	newfs->fs_ronly = fs->fs_ronly;
 	newfs->fs_active = fs->fs_active;
 	memcpy(fs, newfs, (u_int)fs_sbsize);
-	brelse(bp, 0);
 	kmem_free(newfs, fs_sbsize);
 
 	/* Recheck for apple UFS filesystem */
@@ -913,6 +919,7 @@ static int
 ffs_superblock_validate(struct fs *fs)
 {
 	int32_t i, fs_bshift = 0, fs_fshift = 0, fs_fragshift = 0, fs_frag;
+	int32_t fs_inopb;
 
 	/* Check the superblock size */
 	if (fs->fs_sbsize > SBLOCKSIZE || fs->fs_sbsize < sizeof(struct fs))
@@ -933,6 +940,14 @@ ffs_superblock_validate(struct fs *fs)
 	if (fs->fs_size == 0)
 		return 0;
 	if (fs->fs_cssize == 0)
+		return 0;
+
+	/* Check the number of inodes per block */
+	if (fs->fs_magic == FS_UFS1_MAGIC)
+		fs_inopb = fs->fs_bsize / sizeof(struct ufs1_dinode);
+	else /* fs->fs_magic == FS_UFS2_MAGIC */
+		fs_inopb = fs->fs_bsize / sizeof(struct ufs2_dinode);
+	if (fs->fs_inopb != fs_inopb)
 		return 0;
 
 	/* Block size cannot be smaller than fragment size */

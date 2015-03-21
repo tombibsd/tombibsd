@@ -80,12 +80,18 @@ static int mf_fgets(SPACE *, enum e_spflag);
 static int lastline(void);
 
 static __inline int	 applies(struct s_command *);
+static void		 cfclose(struct s_command *, struct s_command *);
+static void		 cspace(SPACE *, const char *, size_t, enum e_spflag);
 static void		 do_tr(struct s_tr *);
 static void		 flush_appends(void);
 static void		 lputs(char *, size_t);
 static __inline int	 regexec_e(regex_t *, const char *, int, int, size_t);
 static void		 regsub(SPACE *, char *, char *);
+static void		 resetstate(void);
 static int		 substitute(struct s_command *);
+
+static FILE *infile;		/* Current input file */
+static FILE *outfile;		/* Current output file */
 
 /*
  * Current file and line number; line numbers restart across compilation
@@ -101,7 +107,7 @@ static u_long linenum;
 
 static int rval;		/* Exit status */
 
-struct s_appends *appends;	/* Array of pointers to strings to append. */
+static struct s_appends *appends;	/* Array of pointers to strings to append. */
 static size_t appendx;		/* Index into appends array. */
 size_t appendnum;			/* Size of appends array. */
 
@@ -110,7 +116,7 @@ static int sdone;		/* If any substitutes since last line input. */
 				/* Iov structure for 'w' commands. */
 static regex_t *defpreg;
 size_t maxnsub;
-regmatch_t *match;
+static regmatch_t *match;
 
 #define OUT() do {fwrite(ps, 1, psl, outfile); fputc('\n', outfile);} while (0)
 
@@ -121,6 +127,10 @@ process(void)
 	SPACE tspace;
 	size_t oldpsl = 0;
 	char *p;
+
+	if (appendnum > 0)
+		appends = xmalloc(sizeof(struct s_appends) * appendnum);
+	match = xmalloc((maxnsub + 1) * sizeof(regmatch_t));
 
 	p = NULL;
 
@@ -289,6 +299,7 @@ new:		if (!nflag && !pd)
 			OUT();
 		flush_appends();
 	} /* for all lines */
+	cfclose(prog, NULL);
 	return rval;
 }
 
@@ -366,7 +377,7 @@ applies(struct s_command *cp)
 /*
  * Reset the sed processor to its initial state.
  */
-void
+static void
 resetstate(void)
 {
 	struct s_command *cp;
@@ -765,7 +776,7 @@ regsub(SPACE *sp, char *string, char *src)
  *	Concatenate space: append the source space to the destination space,
  *	allocating new space as necessary.
  */
-void
+static void
 cspace(SPACE *sp, const char *p, size_t len, enum e_spflag spflag)
 {
 	size_t tlen;
@@ -788,7 +799,7 @@ cspace(SPACE *sp, const char *p, size_t len, enum e_spflag spflag)
 /*
  * Close all cached opened files and report any errors
  */
-void
+static void
 cfclose(struct s_command *cp, struct s_command *end)
 {
 

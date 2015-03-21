@@ -13,7 +13,7 @@ no makeoptions	CPUFLAGS
 
 options 	BCM2836
 options 	CPU_CORTEXA7
-#options 	MULTIPROCESSOR
+options 	MULTIPROCESSOR
 options 	CORTEX_PMC
 options 	TPIDRPRW_IS_CURCPU
 makeoptions 	CPUFLAGS="-mcpu=cortex-a7 -mfpu=neon"

@@ -322,11 +322,11 @@ cnputc(int c)
 		return;
 
 	if (c) {
-		(*cn_tab->cn_putc)(cn_tab->cn_dev, c);
 		if (c == '\n') {
-			docritpollhooks();
 			(*cn_tab->cn_putc)(cn_tab->cn_dev, '\r');
+			docritpollhooks();
 		}
+		(*cn_tab->cn_putc)(cn_tab->cn_dev, c);
 	}
 }
 

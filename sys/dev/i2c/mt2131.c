@@ -255,7 +255,7 @@ mt2131_write(struct mt2131_softc *sc, uint8_t a, uint8_t v)
 	return ret;
 }
 
-MODULE(MODULE_CLASS_DRIVER, mt2131, "iic");
+MODULE(MODULE_CLASS_DRIVER, mt2131, "i2cexec");
 
 static int
 mt2131_modcmd(modcmd_t cmd, void *priv)
