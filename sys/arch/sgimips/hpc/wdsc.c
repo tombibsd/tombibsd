@@ -105,9 +105,6 @@ wdsc_match(device_t parent, cfdata_t cf, void *aux)
 		    haa->hpc_regs->scsi0_ctl);
 		asr = MIPS_PHYS_TO_KSEG1(haa->ha_sh + haa->ha_devoff);
 
-		/* XXX: hpc1 offset due to SGIMIPS_BUS_SPACE_HPC brain damage */
-		asr = (asr + 3) & ~0x3;
-
 		if (platform.badaddr((void *)reset, sizeof(reset)))
 			return 0;
 
@@ -149,14 +146,14 @@ wdsc_attach(device_t parent, device_t self, void *aux)
 	wsc->sc_hpcdma.hpc = haa->hpc_regs;
 
 	if ((err = bus_space_subregion(haa->ha_st, haa->ha_sh,
-	    haa->ha_devoff + 0, 4, &sc->sc_asr_regh)) != 0) {
+	    haa->ha_devoff + 0 + 3, 1, &sc->sc_asr_regh)) != 0) {
 		printf(": unable to map asr reg, err=%d\n", err);
 		return;
 	}
 
 	if ((err = bus_space_subregion(haa->ha_st, haa->ha_sh,
-	    haa->ha_devoff + 4,  4, &sc->sc_data_regh)) != 0) {
-		printf(": unable to map asr reg, err=%d\n", err);
+	    haa->ha_devoff + 4 + 3,  1, &sc->sc_data_regh)) != 0) {
+		printf(": unable to map data reg, err=%d\n", err);
 		return;
 	}
 

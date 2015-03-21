@@ -35,7 +35,7 @@
 /cons.9/1.18/Tue Jun  8 19:28:56 2010/-kk/
 /copy.9/1.19/Fri Sep 12 00:35:12 2008/-kk/
 /coredump_write.9/1.5/Thu Dec  2 12:54:13 2010/-kk/
-/cprng.9/1.9/Tue Mar 25 02:35:16 2014/-kk/
+/cprng.9/1.10/Sat Mar 21 02:20:49 2015/-kk/
 /cpu_configure.9/1.6/Tue Apr 13 12:04:25 2010/-kk/
 /cpu_coredump.9/1.10/Thu Dec  2 12:54:13 2010/-kk/
 /cpu_dumpconf.9/1.6/Wed Apr 30 13:10:58 2008/-kk/
@@ -225,7 +225,7 @@
 /uvm_map.9/1.6/Fri Oct  3 09:57:31 2014/-kk/
 /vattr.9/1.15/Thu Dec  2 12:54:13 2010/-kk/
 /vcons.9/1.2/Mon Feb 13 19:57:58 2006/-kk/
-/veriexec.9/1.27/Tue Mar 25 02:35:17 2014/-kk/
+/veriexec.9/1.28/Sat Mar 21 02:20:49 2015/-kk/
 /vfs.9/1.8/Wed Apr 30 13:10:59 2008/-kk/
 /vfs_hooks.9/1.4/Wed Apr 30 13:10:59 2008/-kk/
 /vfsops.9/1.46/Mon Feb 13 13:24:18 2012/-kk/

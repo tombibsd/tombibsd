@@ -124,7 +124,7 @@ bmccngetc(dev_t dev)
 	POP_RBUF(unit, c);
 
 #if 1
-	return c ;
+	return c;
 #else
 	return siocngetc(dev);
 #endif

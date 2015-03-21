@@ -98,8 +98,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 MODULE(MODULE_CLASS_VFS, union, NULL);
 
-VFS_PROTOS(union);
-
 static struct sysctllog *union_sysctl_log;
 
 /*
@@ -518,6 +516,7 @@ struct vfsops union_vfsops = {
 	.vfs_statvfs = union_statvfs,
 	.vfs_sync = union_sync,
 	.vfs_vget = union_vget,
+	.vfs_loadvnode = union_loadvnode,
 	.vfs_fhtovp = (void *)eopnotsupp,
 	.vfs_vptofh = (void *)eopnotsupp,
 	.vfs_init = union_init,

@@ -111,7 +111,7 @@ freebsd_sys_sysctl(struct lwp *l, const struct freebsd_sys_sysctl_args *uap, reg
 	/*
 	 * FreeBSD sysctl uses an undocumented set of special OIDs in its
 	 * sysctl MIB whose tree is rooted at oid 0.  These OIDs are
-	 * interpretted by their sysctl to implement functions that NetBSD
+	 * interpreted by their sysctl to implement functions that NetBSD
 	 * performs in libc, such as sysctlgetmibinfo.
 	 *
 	 * From the FreeBSD kern_sysctl.c, these OIDs are:

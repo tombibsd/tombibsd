@@ -98,6 +98,8 @@ extern int puffsdebug; /* puffs_subr.c */
     ((pmp)->pmp_flags & PUFFS_KFLAG_CACHE_FS_TTL)
 #define PUFFS_USE_DOTDOTCACHE(pmp)	\
     ((pmp)->pmp_flags & PUFFS_KFLAG_CACHE_DOTDOT)
+#define PUFFS_USE_METAFLUSH(pmp)	\
+    (((pmp)->pmp_flags & PUFFS_KFLAG_NOFLUSH_META) == 0)
 
 #define PUFFS_WCACHEINFO(pmp)	(__USE(pmp), 0)
 

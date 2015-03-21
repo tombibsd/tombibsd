@@ -176,6 +176,8 @@ int	hdaudio_rescan(struct hdaudio_softc *, const char *, const int *);
 void	hdaudio_childdet(struct hdaudio_softc *, device_t);
 
 uint32_t hdaudio_command(struct hdaudio_codec *, int, uint32_t, uint32_t);
+uint32_t hdaudio_command_unlocked(struct hdaudio_codec *, int, uint32_t,
+    uint32_t);
 int	hdaudio_intr(struct hdaudio_softc *);
 
 int	hdaudio_dma_alloc(struct hdaudio_softc *, struct hdaudio_dma *, int);

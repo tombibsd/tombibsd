@@ -276,13 +276,11 @@ LUA_API int lua_isinteger (lua_State *L, int idx) {
 }
 
 
-#ifndef _KERNEL
 LUA_API int lua_isnumber (lua_State *L, int idx) {
   lua_Number n;
   const TValue *o = index2addr(L, idx);
   return tonumber(o, &n);
 }
-#endif
 
 
 LUA_API int lua_isstring (lua_State *L, int idx) {

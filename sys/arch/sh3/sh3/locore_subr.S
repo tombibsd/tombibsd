@@ -645,7 +645,7 @@ ENTRY(copyinstr)
 
 	mov.l	.L_copyinstr_VM_MAXUSER_ADDRESS, r3
 	cmp/hi	r3,	r4		/* bomb if usrc isn't in user space */
-	bt	4f
+	bt	5f
 	mov	r3,	r0
 	sub	r4,	r0
 	cmp/hi	r6,	r0		/* don't beyond user space */

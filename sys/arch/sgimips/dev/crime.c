@@ -108,9 +108,9 @@ crime_attach(device_t parent, device_t self, void *aux)
 	uint32_t startctr, endctr, cps;
 
 	sc->sc_dev = self;
-	crm_iot = SGIMIPS_BUS_SPACE_CRIME;
+	crm_iot = normal_memt;
 
-	if (bus_space_map(crm_iot, ma->ma_addr, 0 /* XXX */,
+	if (bus_space_map(crm_iot, ma->ma_addr, 0x1000,
 	    BUS_SPACE_MAP_LINEAR, &crm_ioh))
 		panic("%s: can't map I/O space", __func__);
 

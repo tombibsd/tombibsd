@@ -547,6 +547,7 @@
 #define readdir			_readdir
 #define readdir_r		_readdir_r
 #define readlink		_readlink
+#define reallocarr		_reallocarr
 #define realpath		_realpath
 #define regcomp			_regcomp
 #define regerror		_regerror

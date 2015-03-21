@@ -59,7 +59,7 @@ const char a[] __section("hoge") = "hoge";
 /* read-write orphan */
 char b[] __section("fuga") = { 'f', 'u', 'g', 'a', '\0' };
 /* .data */
-int c = 123;
+int c[1024] = { 123, 20, 1, 0 };
 /* .bss */
 int d = 0;
 /* .text */

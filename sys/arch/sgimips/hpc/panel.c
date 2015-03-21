@@ -96,7 +96,7 @@ panel_attach(device_t parent, device_t self, void *aux)
 	
 	aprint_normal("\n");
 	if (bus_space_subregion(haa->ha_st, haa->ha_sh, haa->ha_devoff,
-			0x1, 		/* just a single register */
+			0x4, 		/* just a single register */
 			&sc->sc_hreg)) {
 		aprint_error(": unable to map panel register\n");
 		return;
@@ -126,8 +126,8 @@ panel_intr(void *cookie)
 	struct panel_softc *sc = cookie;
 	uint8_t reg;
 	
-	reg = bus_space_read_1(sc->sc_tag, sc->sc_hreg, 0);
-	bus_space_write_1(sc->sc_tag, sc->sc_hreg, 0,
+	reg = bus_space_read_4(sc->sc_tag, sc->sc_hreg, 0);
+	bus_space_write_4(sc->sc_tag, sc->sc_hreg, 0,
 	    IOC_PANEL_VDOWN_IRQ | IOC_PANEL_VUP_IRQ | IOC_PANEL_POWER_IRQ);
 	if ((reg & IOC_PANEL_POWER_IRQ) == 0) {
 		if (!sc->sc_fired)

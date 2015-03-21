@@ -95,8 +95,8 @@ pic_attach(device_t parent, device_t self, void *aux)
 	struct pic_attach_args iaa;
 	struct mainbus_attach_args *ma = aux;
 
-	psc.iot = SGIMIPS_BUS_SPACE_HPC;
-	if (bus_space_map(psc.iot, ma->ma_addr, 0,
+	psc.iot = normal_memt;
+	if (bus_space_map(psc.iot, ma->ma_addr, 0x20010,
 			  BUS_SPACE_MAP_LINEAR, &psc.ioh))
 		panic("pic_attach: could not allocate memory\n");
 

@@ -55,7 +55,7 @@
 /kern_ntptime.c/1.55/Sat Mar  1 06:05:13 2014/-kk/
 /kern_pax.c/1.27/Sat Mar  1 06:05:13 2014/-kk/
 /kern_physio.c/1.92/Thu Feb 10 14:46:45 2011/-kk/
-/kern_pmf.c/1.36/Tue Nov 13 14:08:07 2012/-kk/
+/kern_pmf.c/1.37/Sat Mar 21 02:21:18 2015/-kk/
 /kern_proc.c/1.193/Sun Jul 20 13:59:10 2014/-kk/
 /kern_prot.c/1.118/Wed Oct 29 08:13:26 2014/-kk/
 /kern_ras.c/1.36/Thu Oct 24 10:28:58 2013/-kk/
@@ -84,7 +84,7 @@
 /kern_turnstile.c/1.32/Fri Jun 15 13:51:40 2012/-kk/
 /kern_uidinfo.c/1.8/Thu Oct 24 10:28:58 2013/-kk/
 /kern_uuid.c/1.20/Sun Oct 19 16:06:54 2014/-kk/
-/kern_verifiedexec.c/1.134/Sat Apr 19 08:05:39 2014/-kk/
+/kern_veriexec.c/1.1/Fri Feb 13 17:50:48 2015/-kk/
 /kern_xxx.c/1.72/Thu Sep  1 18:25:44 2011/-kk/
 /kgdb_stub.c/1.28/Fri Oct  3 10:05:19 2014/-kk/
 /makesyscalls.sh/1.145/Fri Oct  3 09:09:25 2014/-kk/
@@ -187,7 +187,7 @@
 /vfs_mount.c/1.32/Mon Jan 12 06:49:08 2015/-kk/
 /vfs_quotactl.c/1.40/Sun Jul 20 13:08:38 2014/-kk/
 /vfs_subr.c/1.445/Fri Oct  3 09:51:01 2014/-kk/
-/vfs_syscalls.c/1.492/Tue Dec  9 04:43:52 2014/-kk/
+/vfs_syscalls.c/1.493/Sat Mar 21 02:21:18 2015/-kk/
 /vfs_trans.c/1.31/Fri Oct  3 09:51:01 2014/-kk/
 /vfs_vnode.c/1.39/Sun Oct 19 16:06:54 2014/-kk/
 /vfs_vnops.c/1.193/Mon Feb 16 03:14:28 2015/-kk/

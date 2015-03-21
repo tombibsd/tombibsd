@@ -20,7 +20,7 @@
 /BPI_INSTALL/1.1/Sun Sep  7 20:17:57 2014/-kk/
 /CP3100/1.42/Fri Oct  3 09:43:15 2014/-kk/
 /CP3100_INSTALL/1.2/Mon May 19 16:25:47 2014/-kk/
-/CUBIEBOARD/1.37/Tue Dec  9 04:34:42 2014/-kk/
+/CUBIEBOARD/1.38/Sat Mar 21 02:20:56 2015/-kk/
 /CUBIEBOARD_INSTALL/1.2/Mon May 19 16:25:47 2014/-kk/
 /CUBIETRUCK/1.6/Tue Dec  9 04:23:47 2014/-kk/
 /CUBIETRUCK_INSTALL/1.1/Fri Apr 11 04:19:47 2014/-kk/
@@ -39,7 +39,7 @@
 /HAWK/1.5/Fri Oct  3 09:43:15 2014/-kk/
 /HDL_G/1.43/Fri Oct  3 09:43:15 2014/-kk/
 /HPT5325/1.24/Wed Oct 29 08:13:00 2014/-kk/
-/HUMMINGBIRD_A31/1.21/Mon Feb 16 03:14:06 2015/-kk/
+/HUMMINGBIRD_A31/1.22/Sat Mar 21 02:20:56 2015/-kk/
 /HUMMINGBIRD_A31_INSTALL/1.3/Tue Oct 14 17:48:24 2014/-kk/
 /IGEPV2/1.26/Fri Oct  3 09:43:15 2014/-kk/
 /IMX23_OLINUXINO/1.11/Mon Jan 12 06:48:00 2015/-kk/
@@ -100,7 +100,7 @@
 /README.evbarm/1.8/Fri Oct  3 09:08:56 2014/-kk/
 /ROCKCHIP/1.18/Mon Jan 26 07:10:15 2015/-kk/
 /RPI/1.59/Tue Dec  9 04:23:47 2014/-kk/
-/RPI_INSTALL/1.6/Tue Dec  9 04:15:56 2014/-kk/
+/RPI_INSTALL/1.7/Sat Mar 21 02:20:56 2015/-kk/
 /SHEEVAPLUG/1.46/Wed Oct 29 08:13:00 2014/-kk/
 /SHEEVAPLUG_INSTALL/1.2/Mon May 19 16:25:48 2014/-kk/
 /SMDK2410/1.57/Fri Oct  3 09:43:16 2014/-kk/
@@ -119,7 +119,7 @@
 /TS7200_LCD/1.3/Sun Mar  6 02:22:27 2011/-kk/
 /TWINTAIL/1.65/Wed Oct 29 08:13:00 2014/-kk/
 /TWINTAIL_INSTALL/1.4/Mon May 19 16:25:48 2014/-kk/
-/VEXPRESS_A15/1.1/Mon Feb  9 07:50:24 2015/-kk/
+/VEXPRESS_A15/1.2/Sat Mar 21 02:20:56 2015/-kk/
 /VIPER/1.37/Fri Oct  3 09:43:16 2014/-kk/
 /ZAO425/1.57/Fri Oct  3 09:43:16 2014/-kk/
 /ZAO425_MD/1.3/Tue Nov 23 11:13:57 2010/-kk/
@@ -170,7 +170,7 @@
 /files.smdk2800/1.1/Wed Nov 20 18:06:25 2002/-kk/
 /files.tisdp24xx/1.2/Sun Apr 27 18:58:46 2008/-kk/
 /files.tsarm/1.11/Mon Mar 17 09:30:02 2008/-kk/
-/files.vexpress/1.1/Mon Feb  9 07:47:15 2015/-kk/
+/files.vexpress/1.2/Sat Mar 21 02:20:56 2015/-kk/
 /files.viper/1.2/Sun Dec 11 12:17:07 2005/-kk/
 /files.zedboard/1.1/Fri Jan 23 12:34:09 2015/-kk/
 /files.zynq/1.1/Fri Jan 23 12:34:09 2015/-kk/
@@ -262,7 +262,7 @@
 /std.smdk2800/1.15/Sun Dec 16 23:47:56 2012/-kk/
 /std.tisdp24xx/1.9/Mon Nov 11 15:21:26 2013/-kk/
 /std.tsarm/1.8/Sun Dec 16 23:47:57 2012/-kk/
-/std.vexpress/1.1/Mon Feb  9 07:47:15 2015/-kk/
+/std.vexpress/1.2/Sat Mar 21 02:20:56 2015/-kk/
 /std.viper/1.8/Sun Dec 16 23:47:57 2012/-kk/
 /std.zynq/1.1/Fri Jan 23 12:34:09 2015/-kk/
 D

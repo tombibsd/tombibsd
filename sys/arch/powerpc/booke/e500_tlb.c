@@ -781,7 +781,7 @@ e500_tlb_ioreserve(vaddr_t va, vsize_t len, pt_entry_t pte)
 	KASSERT(((pte & PTE_RPN_MASK) & (len - 1)) == 0);
 
 	if ((xtlb = e500_tlb_lookup_xtlb2(va, len)) != NULL) {
-		psize_t mask = ~(xtlb->e_tlb.tlb_size - 1);
+		psize_t mask __diagused = ~(xtlb->e_tlb.tlb_size - 1);
 		KASSERT(len <= xtlb->e_tlb.tlb_size);
 		KASSERT((pte & mask) == (xtlb->e_tlb.tlb_pte & mask));
 		xtlb->e_refcnt++;

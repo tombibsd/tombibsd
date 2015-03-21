@@ -141,8 +141,12 @@ int_attach(device_t parent, device_t self, void *aux)
 
 	printf(" addr 0x%x\n", address);
 
-	bus_space_map(iot, address, 0, 0, &ioh);
-	iot = SGIMIPS_BUS_SPACE_NORMAL;
+	iot = normal_memt;
+	/*
+	 * XXX INT1 registers are spread *way* out, but for now this should
+	 * work
+	 */ 
+	bus_space_map(iot, address, 0x100, 0, &ioh);
 
 	switch (mach_type) {
 	case MACH_SGI_IP6 | MACH_SGI_IP10:

@@ -76,7 +76,7 @@ struct sgimips_pci_chipset {
 	struct extent *pc_ioext;	/* PCI I/O space extent */
 };
 
-extern struct sgimips_bus_dma_tag pci_bus_dma_tag;
+extern struct mips_bus_dma_tag pci_bus_dma_tag;
 
 /*
  * Functions provided to machine-independent PCI code.

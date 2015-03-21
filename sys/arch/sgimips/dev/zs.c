@@ -530,9 +530,11 @@ zs_read_reg(struct zs_chanstate *cs, uint8_t reg)
 	uint8_t val;
 	struct zs_channel *zsc = (struct zs_channel *)cs;
 
-	bus_space_write_1(zsc->cs_bustag, zsc->cs_regs, ZS_REG_CSR, reg);
+	bus_space_write_1(zsc->cs_bustag, zsc->cs_regs,
+	    (ZS_REG_CSR << 2) + 3, reg);
 	ZS_DELAY();
-	val = bus_space_read_1(zsc->cs_bustag, zsc->cs_regs, ZS_REG_CSR);
+	val = bus_space_read_1(zsc->cs_bustag, zsc->cs_regs,
+	    (ZS_REG_CSR << 2) + 3);
 	ZS_DELAY();
 	return val;
 }
@@ -542,9 +544,11 @@ zs_write_reg(struct zs_chanstate *cs, uint8_t reg, uint8_t val)
 {
 	struct zs_channel *zsc = (struct zs_channel *)cs;
 
-	bus_space_write_1(zsc->cs_bustag, zsc->cs_regs, ZS_REG_CSR, reg);
+	bus_space_write_1(zsc->cs_bustag, zsc->cs_regs,
+	    (ZS_REG_CSR << 2) + 3, reg);
 	ZS_DELAY();
-	bus_space_write_1(zsc->cs_bustag, zsc->cs_regs, ZS_REG_CSR, val);
+	bus_space_write_1(zsc->cs_bustag, zsc->cs_regs,
+	    (ZS_REG_CSR << 2) + 3, val);
 	ZS_DELAY();
 }
 
@@ -554,7 +558,8 @@ zs_read_csr(struct zs_chanstate *cs)
 	struct zs_channel *zsc = (struct zs_channel *)cs;
 	uint8_t val;
 
-	val = bus_space_read_1(zsc->cs_bustag, zsc->cs_regs, ZS_REG_CSR);
+	val = bus_space_read_1(zsc->cs_bustag, zsc->cs_regs,
+	    (ZS_REG_CSR << 2) + 3);
 	ZS_DELAY();
 	return val;
 }
@@ -564,7 +569,8 @@ zs_write_csr(struct zs_chanstate *cs, uint8_t val)
 {
 	struct zs_channel *zsc = (struct zs_channel *)cs;
 
-	bus_space_write_1(zsc->cs_bustag, zsc->cs_regs, ZS_REG_CSR, val);
+	bus_space_write_1(zsc->cs_bustag, zsc->cs_regs,
+	    (ZS_REG_CSR << 2) + 3, val);
 	ZS_DELAY();
 }
 
@@ -574,7 +580,8 @@ zs_read_data(struct zs_chanstate *cs)
 	struct zs_channel *zsc = (struct zs_channel *)cs;
 	uint8_t val;
 
-	val = bus_space_read_1(zsc->cs_bustag, zsc->cs_regs, ZS_REG_DATA);
+	val = bus_space_read_1(zsc->cs_bustag, zsc->cs_regs,
+	    (ZS_REG_DATA << 2) + 3);
 	ZS_DELAY();
 	return val;
 }
@@ -584,7 +591,8 @@ zs_write_data(struct zs_chanstate *cs, uint8_t val)
 {
 	struct zs_channel *zsc = (struct zs_channel *)cs;
 
-	bus_space_write_1(zsc->cs_bustag, zsc->cs_regs, ZS_REG_DATA, val);
+	bus_space_write_1(zsc->cs_bustag, zsc->cs_regs,
+	    (ZS_REG_DATA << 2) + 3, val);
 	ZS_DELAY();
 }
 

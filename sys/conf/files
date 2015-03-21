@@ -1422,7 +1422,7 @@ file	dev/kttcp.c			kttcp		needs-flag
 
 # Veriexec
 defpseudo veriexec
-file	kern/kern_verifiedexec.c	veriexec
+file	kern/kern_veriexec.c	veriexec
 file	dev/verified_exec.c		veriexec	needs-flag
 
 # isochronous pseudo device for IEEE 1394, i.LINK or FireWire

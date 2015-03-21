@@ -139,7 +139,7 @@ __swp(int __val, __cpu_simple_lock_t *__ptr)
 }
 #endif /* !_ARM_ARCH_6 */
 
-static inline void
+static __inline void
 __arm_membar_producer(void)
 {
 #ifdef _ARM_ARCH_7
@@ -149,7 +149,7 @@ __arm_membar_producer(void)
 #endif
 }
 
-static inline void
+static __inline void
 __arm_membar_consumer(void)
 {
 #ifdef _ARM_ARCH_7

@@ -1828,6 +1828,7 @@ perfuse_node_setattr_ttl(struct puffs_usermount *pu, puffs_cookie_t opc,
 		fsi->valid |= FUSE_FATTR_LOCKOWNER;
 	}
 
+#ifndef PUFFS_KFLAG_NOFLUSH_META
 	/*
 	 * ftruncate() sends only va_size, and metadata cache
 	 * flush adds va_atime and va_mtime. Some FUSE
@@ -1856,6 +1857,7 @@ perfuse_node_setattr_ttl(struct puffs_usermount *pu, puffs_cookie_t opc,
 	 */
 	if (fsi->valid == FUSE_FATTR_ATIME)
 		fsi->valid &= ~FUSE_FATTR_ATIME;
+#endif /* PUFFS_KFLAG_NOFLUSH_META */
 		    
 	/*
 	 * If nothing remain, discard the operation.

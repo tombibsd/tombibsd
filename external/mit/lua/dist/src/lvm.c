@@ -65,7 +65,6 @@ static int tofloat (const TValue *obj, lua_Number *n) {
   }
   return 1;
 }
-#endif
 
 
 /*
@@ -86,6 +85,7 @@ int luaV_tonumber_ (const TValue *obj, lua_Number *n) {
   else
     return 0;  /* conversion failed */
 }
+#endif
 
 
 /*

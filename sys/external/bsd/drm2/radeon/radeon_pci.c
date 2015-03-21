@@ -82,6 +82,12 @@ struct radeon_softc {
 	}				sc_task_u;
 	struct drm_device		*sc_drm_dev;
 	struct pci_dev			sc_pci_dev;
+#ifdef __i386__
+#define RADEON_PCI_UGLY_MAP_HACK
+	/* XXX Used to claim the VGA device before attach_real */
+	bus_space_handle_t		sc_temp_memh;
+	bool				sc_temp_set;
+#endif
 };
 
 struct radeon_device *
@@ -165,6 +171,21 @@ radeon_attach(device_t parent, device_t self, void *aux)
 	sc->sc_dev = NULL;
 	sc->sc_pa = *pa;
 
+#ifdef RADEON_PCI_UGLY_MAP_HACK
+	/*
+	 * XXX
+	 * We map the VGA registers, so that other driver don't
+	 * think they can.  This stops vga@isa or pcdisplay@isa
+	 * attaching, and stealing wsdisplay0.  Yuck.
+	 */
+	int rv = bus_space_map(pa->pa_memt, 0xb0000, 0x10000, 0,
+			       &sc->sc_temp_memh);
+	sc->sc_temp_set = rv == 0;
+	if (rv != 0)
+		aprint_error_dev(self, "unable to reserve VGA registers for "
+				       "i386 radeondrmkms hack\n");
+#endif
+
 	config_mountroot(self, &radeon_attach_real);
 }
 
@@ -179,6 +200,15 @@ radeon_attach_real(device_t self)
 
 	ok = radeon_pci_lookup(pa, &flags);
 	KASSERT(ok);
+
+#ifdef RADEON_PCI_UGLY_MAP_HACK
+	/*
+	 * XXX
+	 * Unmap the VGA registers so the DRM code can map them.
+	 */
+	if (sc->sc_temp_set)
+		bus_space_unmap(pa->pa_memt, sc->sc_temp_memh, 0x10000);
+#endif
 
 	sc->sc_task_state = RADEON_TASK_ATTACH;
 	SIMPLEQ_INIT(&sc->sc_task_u.attach);

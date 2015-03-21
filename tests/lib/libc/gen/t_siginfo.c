@@ -311,7 +311,8 @@ ATF_TC_BODY(sigfpe_flt, tc)
 		atf_tc_skip("Test does not run correctly under QEMU");
 #if defined(__powerpc__)
 	atf_tc_skip("Test not valid on powerpc");
-#elif defined(__arm__) && !__SOFTFP__	/*
+#elif defined(__arm__) && !__SOFTFP__
+	/*
 	 * Some NEON fpus do not implement IEEE exception handling,
 	 * skip these tests if running on them and compiled for
 	 * hard float.
@@ -464,6 +465,10 @@ ATF_TC_BODY(sigbus_adraln, tc)
 	if (val == 0)
 		atf_tc_skip("No SIGBUS signal for unaligned accesses");
 #endif
+
+	/* m68k (except sun2) never issue SIGBUS (PR lib/49653) */
+	if (strcmp(MACHINE_ARCH, "m68k") == 0)
+		atf_tc_skip("No SIGBUS signal for unaligned accesses");
 
 	sa.sa_flags = SA_SIGINFO;
 	sa.sa_sigaction = sigbus_action;

@@ -52,6 +52,7 @@ __RCSID("$NetBSD$");
 #include "pathnames.h"
 #include "buffer.h"
 #include "canohost.h"
+#include "pfilter.h"
 
 #ifdef GSSAPI
 #include "ssh-gss.h"
@@ -256,6 +257,7 @@ input_userauth_request(int type, u_int32_t seq, void *ctxt)
 		} else {
 			logit("input_userauth_request: invalid user %s", user);
 			authctxt->pw = fakepw();
+			pfilter_notify(1);
 		}
 #ifdef USE_PAM
 		if (options.use_pam)

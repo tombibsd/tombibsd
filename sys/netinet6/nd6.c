@@ -2386,7 +2386,13 @@ nd6_storelladdr(const struct ifnet *ifp, const struct rtentry *rt,
 		return 0;
 	}
 	if (rt->rt_gateway->sa_family != AF_LINK) {
-		printf("%s: something odd happens\n", __func__);
+		char gbuf[256];
+		char dbuf[LINK_ADDRSTRLEN];
+		sockaddr_format(rt->rt_gateway, gbuf, sizeof(gbuf));
+		printf("%s: bad gateway address type %s for dst %s"
+		    " through interface %s\n", __func__, gbuf, 
+		    IN6_PRINT(dbuf, &satocsin6(dst)->sin6_addr),
+		    if_name(ifp));
 		m_freem(m);
 		return 0;
 	}
