@@ -829,7 +829,7 @@ wapbl_find_log_start(struct mount *mp, struct vnode *vp, off_t logsize,
 	    s++, n = -n, cg += n * s) {
 		DPRINTF("check cg %d of %d\n", cg, fs->fs_ncg);
 		error = bread(devvp, FFS_FSBTODB(fs, cgtod(fs, cg)),
-		    fs->fs_cgsize, FSCRED, 0, &bp);
+		    fs->fs_cgsize, 0, &bp);
 		if (error) {
 			continue;
 		}

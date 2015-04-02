@@ -16,8 +16,8 @@
 /ChangeLog-9899/1.1.1.1/Tue Aug 18 09:22:55 2009/-kk/
 /ChangeLog/1.6/Fri Oct  3 09:33:03 2014/-kk/
 /MAINTAINERS/1.1.1.1/Tue Aug 18 09:22:55 2009/-kk/
-/Makefile.am/1.1.1.3/Tue Oct 29 12:08:30 2013/-kk/
-/Makefile.in/1.2/Fri Oct  3 09:48:56 2014/-kk/
+/Makefile.am/1.2/Thu Apr  2 02:25:55 2015/-kk/
+/Makefile.in/1.3/Thu Apr  2 02:25:55 2015/-kk/
 /PORTING/1.1.1.1/Tue Aug 18 09:23:13 2009/-kk/
 /README/1.1.1.1/Tue Aug 18 09:23:13 2009/-kk/
 /TODO/1.1.1.1/Tue Aug 18 09:23:13 2009/-kk/
@@ -42,7 +42,7 @@
 /archures.c/1.6/Fri Oct  3 09:55:54 2014/-kk/
 /armnetbsd.c/1.1.1.1/Tue Aug 18 09:23:24 2009/-kk/
 /bfd-in.h/1.1.1.3/Tue Oct 29 12:08:30 2013/-kk/
-/bfd-in2.h/1.7/Fri Oct  3 09:55:54 2014/-kk/
+/bfd-in2.h/1.8/Thu Apr  2 02:25:55 2015/-kk/
 /bfd.c/1.4/Tue Oct 29 12:08:30 2013/-kk/
 /bfd.m4/1.1.1.2/Sat Sep 24 22:45:56 2011/-kk/
 /bfdio.c/1.1.1.3/Tue Oct 29 12:08:30 2013/-kk/
@@ -186,7 +186,7 @@
 /ecofflink.c/1.1.1.3/Tue Oct 29 12:08:30 2013/-kk/
 /ecoffswap.h/1.1.1.1/Tue Aug 18 09:24:17 2009/-kk/
 /elf-attrs.c/1.1.1.3/Tue Oct 29 12:08:30 2013/-kk/
-/elf-bfd.h/1.3/Fri Oct  3 09:55:54 2014/-kk/
+/elf-bfd.h/1.4/Thu Apr  2 02:25:55 2015/-kk/
 /elf-eh-frame.c/1.4/Tue Oct 29 12:08:30 2013/-kk/
 /elf-hppa.h/1.1.1.2/Sat Sep 24 22:44:17 2011/-kk/
 /elf-ifunc.c/1.1.1.2/Tue Oct 29 12:08:30 2013/-kk/
@@ -245,7 +245,6 @@
 /elf32-pj.c/1.1.1.1/Tue Aug 18 09:25:23 2009/-kk/
 /elf32-ppc.c/1.6/Tue Oct 29 12:08:31 2013/-kk/
 /elf32-ppc.h/1.1.1.3/Tue Oct 29 12:08:31 2013/-kk/
-/elf32-riscv.c/1.1/Fri Sep 19 17:19:52 2014/-kk/
 /elf32-rl78.c/1.1.1.1/Thu Oct 24 10:28:51 2013/-kk/
 /elf32-rx.c/1.1.1.2/Tue Oct 29 12:08:31 2013/-kk/
 /elf32-s390.c/1.1.1.3/Tue Oct 29 12:08:31 2013/-kk/
@@ -285,7 +284,6 @@
 /elf64-mmix.c/1.1.1.3/Tue Oct 29 12:08:31 2013/-kk/
 /elf64-ppc.c/1.6/Mon Jan 12 06:43:25 2015/-kk/
 /elf64-ppc.h/1.1.1.3/Tue Oct 29 12:08:31 2013/-kk/
-/elf64-riscv.c/1.1/Fri Sep 19 17:19:52 2014/-kk/
 /elf64-s390.c/1.1.1.3/Tue Oct 29 12:08:31 2013/-kk/
 /elf64-sh64.c/1.1.1.3/Tue Oct 29 12:08:31 2013/-kk/
 /elf64-sparc.c/1.1.1.3/Tue Oct 29 12:08:31 2013/-kk/
@@ -298,12 +296,13 @@
 /elflink.c/1.8/Fri Oct  3 09:33:03 2014/-kk/
 /elfn32-mips.c/1.4/Tue Oct 29 12:08:31 2013/-kk/
 /elfnn-ia64.c/1.1.1.1/Thu Oct 24 10:28:51 2013/-kk/
+/elfnn-riscv.c/1.2/Sat Mar 28 07:51:20 2015/-kk/
 /elfxx-ia64.c/1.1.1.3/Tue Oct 29 12:08:31 2013/-kk/
 /elfxx-ia64.h/1.1.1.1/Thu Oct 24 10:28:51 2013/-kk/
 /elfxx-mips.c/1.8/Fri Oct  3 09:41:34 2014/-kk/
 /elfxx-mips.h/1.1.1.3/Tue Oct 29 12:08:31 2013/-kk/
-/elfxx-riscv.c/1.1/Fri Sep 19 17:19:52 2014/-kk/
-/elfxx-riscv.h/1.1/Fri Sep 19 17:19:52 2014/-kk/
+/elfxx-riscv.c/1.2/Thu Apr  2 02:25:56 2015/-kk/
+/elfxx-riscv.h/1.2/Thu Apr  2 02:25:56 2015/-kk/
 /elfxx-sparc.c/1.6/Tue Oct 29 12:08:31 2013/-kk/
 /elfxx-sparc.h/1.1.1.3/Tue Oct 29 12:08:31 2013/-kk/
 /elfxx-target.h/1.1.1.3/Tue Oct 29 12:08:31 2013/-kk/
@@ -431,7 +430,7 @@
 /sunos.c/1.1.1.2/Tue Oct 29 12:08:31 2013/-kk/
 /syms.c/1.4/Tue Oct 29 12:08:31 2013/-kk/
 /sysdep.h/1.1.1.3/Tue Oct 29 12:08:31 2013/-kk/
-/targets.c/1.3/Fri Oct  3 09:55:55 2014/-kk/
+/targets.c/1.4/Thu Apr  2 02:25:56 2015/-kk/
 /targmatch.sed/1.1.1.1/Tue Aug 18 09:27:36 2009/-kk/
 /tekhex.c/1.1.1.3/Tue Oct 29 12:08:31 2013/-kk/
 /ticoff.h/1.1.1.3/Tue Oct 29 12:08:31 2013/-kk/

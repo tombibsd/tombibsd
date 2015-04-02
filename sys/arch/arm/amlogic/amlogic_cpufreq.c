@@ -68,10 +68,10 @@ static u_int	meson8b_cpu_get_rate(void);
 static size_t	meson8b_cpu_get_available(u_int *, size_t);
 
 #define CBUS_READ(x)		\
-	bus_space_read_4(&amlogic_bs_tag, amlogic_core_bsh, \
+	bus_space_read_4(&armv7_generic_bs_tag, amlogic_core_bsh, \
 			 AMLOGIC_CBUS_OFFSET + (x))
 #define CBUS_WRITE(x, v)	\
-	bus_space_write_4(&amlogic_bs_tag, amlogic_core_bsh, \
+	bus_space_write_4(&armv7_generic_bs_tag, amlogic_core_bsh, \
 			  AMLOGIC_CBUS_OFFSET + (x), (v))
 
 void

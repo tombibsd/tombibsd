@@ -40,11 +40,12 @@ WEAK_ALIAS(pipe, _pipe)
 #endif
 
 ENTRY(_pipe)
+	mv		a2, a0		# a0 will be overwritten
 	SYSTRAP(pipe)	# pipe(fildes) int fildes[2];
 	JUMP_TO_CERROR()	/* error */
 	/* success */
-	sw		v0, 0(a0)	# store the two file descriptors
-	sw		v1, __SIZEOF_INT__(a0)
-	li		v0, 0
+	sw		a0, 0(a2)	# store the two file descriptors
+	sw		a1, __SIZEOF_INT__(a2)
+	li		a0, 0
 	ret
 END(_pipe)

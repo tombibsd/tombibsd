@@ -32,7 +32,7 @@
 #include "atomic_op_asm.h"
 
 ENTRY_NP(_atomic_or_32)
-	amoor.w.aq	v0, a1, 0(a0)
+	amoor.w.aq	a0, a1, 0(a0)
 	ret
 END(_atomic_or_32)
 
@@ -47,8 +47,8 @@ CRT_ALIAS(__sync_fetch_and_or_4,_atomic_or_32)
 CRT_ALIAS(__atomic_fetch_or_4,_atomic_or_32)
 
 ENTRY_NP(_atomic_or_32_nv)
-	amoor.w.aq	v0, a1, 0(a0)	/* update memory and get old value */
-	or		v0, v0, a1	/* turn into new value */
+	amoor.w.aq	t0, a1, 0(a0)	/* update memory and get old value */
+	or		a0, t0, a1	/* turn into new value */
 	ret
 END(_atomic_or_32_nv)
 

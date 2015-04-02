@@ -81,16 +81,13 @@ struct cpu_info {
 
 extern struct cpu_info cpu_info_store;
 
-register struct lwp *riscv_curlwp __asm("x15");
-#define	curlwp		riscv_curlwp
+// This is also in <sys/lwp.h>
+struct lwp;
+static inline struct cpu_info *lwp_getcpu(struct lwp *);
 
-static inline struct cpu_info *
-curcpu(void)
-{
-	struct cpu_info *ci;
-	__asm("csrr\t%0, sup0" : "=r"(ci));
-	return ci;
-}
+register struct lwp *riscv_curlwp __asm("tp");
+#define	curlwp		riscv_curlwp
+#define	curcpu()	lwp_getcpu(curlwp)
 
 static inline cpuid_t
 cpu_number(void)

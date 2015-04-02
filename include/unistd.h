@@ -294,10 +294,11 @@ char	*getwd(char *);				/* obsoleted by getcwd() */
 /*
  * X/Open CAE Specification Issue 5 Version 2
  */
-#if (_XOPEN_SOURCE - 0) >= 500 || defined(_NETBSD_SOURCE)
+#if (_POSIX_C_SOURCE - 0) >= 200112L || (_XOPEN_SOURCE - 0) >= 500 || \
+    defined(_NETBSD_SOURCE)
 ssize_t	 pread(int, void *, size_t, off_t);
 ssize_t	 pwrite(int, const void *, size_t, off_t);
-#endif
+#endif /* (_POSIX_C_SOURCE - 0) >= 200112L || ... */
 
 /*
  * X/Open Extended API set 2 (a.k.a. C063)

@@ -3,6 +3,7 @@
 ioconf hdafg
 
 include "conf/files"
+# XXX shouldn't be here, but nbconfig crashes without it
 include "dev/pci/files.pci"
 
 pseudo-root hdaudio*

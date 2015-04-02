@@ -102,7 +102,6 @@
 __KERNEL_RCSID(0, "$NetBSD$");
 
 #include "opt_inet.h"
-#include "opt_ipsec.h"
 #include "opt_tcp_debug.h"
 #include "opt_mbuftrace.h"
 

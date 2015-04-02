@@ -555,7 +555,7 @@ nilfs_readdir(void *v)
 
 		blocknr = diroffset / blocksize;
 		blkoff  = diroffset % blocksize;
-		error = nilfs_bread(node, blocknr, NOCRED, 0, &bp);
+		error = nilfs_bread(node, blocknr, 0, &bp);
 		if (error)
 			return EIO;
 		while (diroffset < file_size) {
@@ -564,8 +564,7 @@ nilfs_readdir(void *v)
 			if (blkoff >= blocksize) {
 				blkoff = 0; blocknr++;
 				brelse(bp, BC_AGE);
-				error = nilfs_bread(node, blocknr, NOCRED, 0,
-						&bp);
+				error = nilfs_bread(node, blocknr, 0, &bp);
 				if (error)
 					return EIO;
 			}

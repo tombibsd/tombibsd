@@ -738,7 +738,7 @@ spec_read(void *v)
 			bn = (uio->uio_offset >> DEV_BSHIFT) &~ (bscale - 1);
 			on = uio->uio_offset % bsize;
 			n = min((unsigned)(bsize - on), uio->uio_resid);
-			error = bread(vp, bn, bsize, NOCRED, 0, &bp);
+			error = bread(vp, bn, bsize, 0, &bp);
 			if (error) {
 				return (error);
 			}
@@ -814,8 +814,7 @@ spec_write(void *v)
 			if (n == bsize)
 				bp = getblk(vp, bn, bsize, 0, 0);
 			else
-				error = bread(vp, bn, bsize, NOCRED,
-				    B_MODIFY, &bp);
+				error = bread(vp, bn, bsize, B_MODIFY, &bp);
 			if (error) {
 				return (error);
 			}

@@ -89,6 +89,8 @@
 ./@MODULEDIR@/hdafg/hdafg.kmod			base-kernel-modules	kmod
 ./@MODULEDIR@/hdaudio				base-kernel-modules	kmod
 ./@MODULEDIR@/hdaudio/hdaudio.kmod		base-kernel-modules	kmod
+./@MODULEDIR@/hdaudio_pci			base-kernel-modules	kmod
+./@MODULEDIR@/hdaudio_pci/hdaudio_pci.kmod	base-kernel-modules	kmod
 ./@MODULEDIR@/hdaudioverbose			base-kernel-modules	kmod
 ./@MODULEDIR@/hdaudioverbose/hdaudioverbose.kmod	base-kernel-modules	kmod
 ./@MODULEDIR@/hpacel				base-kernel-modules	kmod
@@ -338,6 +340,8 @@
 ./stand/amd64-xen/@OSRELEASE@/modules/hdafg/hdafg.kmod			base-kernel-modules	kmod,compatmodules
 ./stand/amd64-xen/@OSRELEASE@/modules/hdaudio				base-kernel-modules	kmod,compatmodules
 ./stand/amd64-xen/@OSRELEASE@/modules/hdaudio/hdaudio.kmod		base-kernel-modules	kmod,compatmodules
+./stand/amd64-xen/@OSRELEASE@/modules/hdaudio_pci			base-kernel-modules	kmod,compatmodules
+./stand/amd64-xen/@OSRELEASE@/modules/hdaudio_pci/hdaudio_pci.kmod	base-kernel-modules	kmod,compatmodules
 ./stand/amd64-xen/@OSRELEASE@/modules/hdaudioverbose			base-kernel-modules	kmod,compatmodules
 ./stand/amd64-xen/@OSRELEASE@/modules/hdaudioverbose/hdaudioverbose.kmod	base-kernel-modules	kmod,compatmodules
 ./stand/amd64-xen/@OSRELEASE@/modules/hfs				base-kernel-modules	kmod,compatmodules

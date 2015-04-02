@@ -216,9 +216,11 @@ cpu_lwp_free2(struct lwp *l)
 int
 vmapbuf(struct buf *bp, vsize_t len)
 {
+	struct pmap * const pm = vm_map_pmap(&bp->b_proc->p_vmspace->vm_map);
 	vaddr_t faddr, taddr, off;
 	paddr_t fpa;
 
+	KASSERT(pm != pmap_kernel());
 
 #ifdef PMAP_DEBUG
 	if (pmap_debug_level > 0)
@@ -242,8 +244,7 @@ vmapbuf(struct buf *bp, vsize_t len)
 	 * non-NULL.
 	 */
 	while (len) {
-		(void) pmap_extract(vm_map_pmap(&bp->b_proc->p_vmspace->vm_map),
-		    faddr, &fpa);
+		(void) pmap_extract(pm, faddr, &fpa);
 		pmap_kenter_pa(taddr, fpa, VM_PROT_READ|VM_PROT_WRITE,
 		    PMAP_WIRED);
 		faddr += PAGE_SIZE;

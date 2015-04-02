@@ -528,7 +528,7 @@ systrace_args(register_t sysnum, const void *params, uintptr_t *uarg, size_t *n_
 	case 83: {
 		struct sys_symlink_args *p = params;
 		uarg[0] = (intptr_t) SCARG(p, path); /* const char * */
-		uarg[1] = (intptr_t) SCARG(p, to); /* const char * */
+		uarg[1] = (intptr_t) SCARG(p, link); /* const char * */
 		*n_args = 2;
 		break;
 	}
@@ -536,14 +536,14 @@ systrace_args(register_t sysnum, const void *params, uintptr_t *uarg, size_t *n_
 	case 84: {
 		struct compat_43_sys_lstat_args *p = params;
 		uarg[0] = (intptr_t) SCARG(p, path); /* const char * */
-		uarg[1] = (intptr_t) SCARG(p, up); /* struct stat43 * */
+		uarg[1] = (intptr_t) SCARG(p, ub); /* struct stat43 * */
 		*n_args = 2;
 		break;
 	}
 	/* sys_readlink */
 	case 85: {
 		struct sys_readlink_args *p = params;
-		uarg[0] = (intptr_t) SCARG(p, name); /* const char * */
+		uarg[0] = (intptr_t) SCARG(p, path); /* const char * */
 		uarg[1] = (intptr_t) SCARG(p, buf); /* char * */
 		iarg[2] = SCARG(p, count); /* int */
 		*n_args = 3;

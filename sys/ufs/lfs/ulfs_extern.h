@@ -170,6 +170,8 @@ int	ulfs_makeinode(int, struct vnode *, const struct ulfs_lookup_results *,
 		      struct vnode **, struct componentname *);
 int	ulfs_gop_alloc(struct vnode *, off_t, off_t, int, kauth_cred_t);
 void	ulfs_gop_markupdate(struct vnode *, int);
+int	ulfs_bufio(enum uio_rw, struct vnode *, void *, size_t, off_t, int,
+	    kauth_cred_t, size_t *, struct lwp *);
 
 /*
  * Snapshot function prototypes.

@@ -254,7 +254,7 @@ filecore_read(void *v)
 			n = MIN(FILECORE_DIR_SIZE - on, uio->uio_resid);
 			size = FILECORE_DIR_SIZE;
 		} else {
-			error = bread(vp, lbn, size, NOCRED, 0, &bp);
+			error = bread(vp, lbn, size, 0, &bp);
 #ifdef FILECORE_DEBUG_BR
 			printf("bread(%p, %llx, %ld, CRED, %p)=%d\n",
 			    vp, (long long)lbn, size, bp, error);

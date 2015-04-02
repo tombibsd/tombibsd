@@ -118,10 +118,10 @@ lookup_complex(const atf_tc_t *tc, const char *mountpath)
 		FIELD(st_uid);
 		FIELD(st_gid);
 		FIELD(st_rdev);
-		TIME(st_atim);
-		TIME(st_mtim);
-		TIME(st_ctim);
-		TIME(st_birthtim);
+		TIME(st_atimespec);
+		TIME(st_mtimespec);
+		TIME(st_ctimespec);
+		TIME(st_birthtimespec);
 		FIELD(st_size);
 		FIELD(st_blocks);
 		FIELD(st_flags);

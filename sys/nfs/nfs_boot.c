@@ -432,7 +432,7 @@ int
 nfs_boot_sendrecv(struct socket *so, struct mbuf *nam,
 		int (*sndproc)(struct mbuf *, void *, int),
 		struct mbuf *snd,
-		int (*rcvproc)(struct mbuf *, void *),
+		int (*rcvproc)(struct mbuf **, void *),
 		struct mbuf **rcv, struct mbuf **from_p,
 		void *context, struct lwp *lwp)
 {
@@ -510,7 +510,7 @@ send_again:
 			panic("nfs_boot_sendrecv: return size");
 #endif
 
-		if ((*rcvproc)(m, context))
+		if ((*rcvproc)(&m, context))
 			continue;
 
 		if (rcv)

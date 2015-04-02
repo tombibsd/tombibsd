@@ -54,6 +54,8 @@
 #include "opt_arm_debug.h"
 #endif
 
+#include <sys/pcu.h>
+
 #include <arm/cpuconf.h>
 #include <arm/armreg.h>
 
@@ -87,7 +89,13 @@
 #define GET_CURLWP(rX)		GET_CURCPU(rX); ldr rX, [rX, #CI_CURLWP]
 #elif defined (TPIDRPRW_IS_CURLWP)
 #define GET_CURLWP(rX)		mrc	p15, 0, rX, c13, c0, 4
+#if defined (MULTIPROCESSOR)
 #define GET_CURCPU(rX)		GET_CURLWP(rX); ldr rX, [rX, #L_CPU]
+#elif defined(_ARM_ARCH_7)
+#define GET_CURCPU(rX)		movw rX, #:lower16:cpu_info_store; movt rX, #:upper16:cpu_info_store
+#else 
+#define GET_CURCPU(rX)		ldr rX, =_C_LABEL(cpu_info_store)
+#endif
 #elif !defined(MULTIPROCESSOR)
 #define GET_CURCPU(rX)		ldr rX, =_C_LABEL(cpu_info_store)
 #define GET_CURLWP(rX)		GET_CURCPU(rX); ldr rX, [rX, #CI_CURLWP]

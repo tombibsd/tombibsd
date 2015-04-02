@@ -40,6 +40,6 @@
 /compat_statfs.c/1.7/Thu Oct 24 10:28:53 2013/-kk/
 /compat_timer.c/1.2/Sun Jan 11 02:46:27 2009/-kk/
 /compat_utimes.c/1.2/Sun Jan 11 02:46:27 2009/-kk/
-/compat_wait4.c/1.2/Sun Jan 11 02:46:27 2009/-kk/
+/compat_wait4.c/1.3/Thu Apr  2 02:27:32 2015/-kk/
 /getdirentries.3/1.1/Tue Sep 13 01:44:09 2005/-kk/
 D

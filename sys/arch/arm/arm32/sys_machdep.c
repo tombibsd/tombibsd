@@ -171,7 +171,7 @@ cpu_lwp_setprivate(lwp_t *l, void *addr)
 #ifdef _ARM_ARCH_6
 	if (l == curlwp) {
 		kpreempt_disable();
-		__asm("mcr p15, 0, %0, c13, c0, 3" : : "r" (addr));
+		__asm __volatile("mcr p15, 0, %0, c13, c0, 3" : : "r" (addr));
 		kpreempt_enable();
 	}
 	return 0;

@@ -1,7 +1,6 @@
 /*	$NetBSD$	*/
 /*	$FreeBSD: src/sys/dev/usb/ohcireg.h,v 1.8 1999/11/17 22:33:40 n_hibma Exp $	*/
 
-
 /*
  * Copyright (c) 1998 The NetBSD Foundation, Inc.
  * All rights reserved.

@@ -186,6 +186,8 @@ void	ufs_vinit(struct mount *, int (**)(void *),
 		  int (**)(void *), struct vnode **);
 int	ufs_gop_alloc(struct vnode *, off_t, off_t, int, kauth_cred_t);
 void	ufs_gop_markupdate(struct vnode *, int);
+int	ufs_bufio(enum uio_rw, struct vnode *, void *, size_t, off_t, int,
+	    kauth_cred_t, size_t *, struct lwp *);
 
 __END_DECLS
 

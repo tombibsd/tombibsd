@@ -132,8 +132,10 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <netinet/ip_mroute.h>
 #endif
 
+#ifdef IPSEC
 #include <netipsec/ipsec.h>
 #include <netipsec/key.h>
+#endif
 
 static int ip_pcbopts(struct inpcb *, const struct sockopt *);
 static struct mbuf *ip_insertoptions(struct mbuf *, struct mbuf *, int *);
@@ -163,6 +165,7 @@ ip_output(struct mbuf *m0, ...)
 	struct route iproute;
 	const struct sockaddr_in *dst;
 	struct in_ifaddr *ia;
+	int isbroadcast;
 	struct mbuf *opt;
 	struct route *ro;
 	int flags, sw_csum;
@@ -257,12 +260,14 @@ ip_output(struct mbuf *m0, ...)
 		ifp = ia->ia_ifp;
 		mtu = ifp->if_mtu;
 		ip->ip_ttl = 1;
+		isbroadcast = in_broadcast(dst->sin_addr, ifp);
 	} else if ((IN_MULTICAST(ip->ip_dst.s_addr) ||
 	    ip->ip_dst.s_addr == INADDR_BROADCAST) &&
 	    imo != NULL && imo->imo_multicast_ifp != NULL) {
 		ifp = imo->imo_multicast_ifp;
 		mtu = ifp->if_mtu;
 		IFP_TO_IA(ifp, ia);
+		isbroadcast = 0;
 	} else {
 		if (rt == NULL)
 			rt = rtcache_init(ro);
@@ -278,6 +283,10 @@ ip_output(struct mbuf *m0, ...)
 		rt->rt_use++;
 		if (rt->rt_flags & RTF_GATEWAY)
 			dst = satosin(rt->rt_gateway);
+		if (rt->rt_flags & RTF_HOST)
+			isbroadcast = rt->rt_flags & RTF_BROADCAST;
+		else
+			isbroadcast = in_broadcast(dst->sin_addr, ifp);
 	}
 	rtmtu_nolock = rt && (rt->rt_rmx.rmx_locks & RTV_MTU) == 0;
 
@@ -412,7 +421,7 @@ ip_output(struct mbuf *m0, ...)
 	 * Look for broadcast address and and verify user is allowed to
 	 * send such a packet.
 	 */
-	if (in_broadcast(dst->sin_addr, ifp)) {
+	if (isbroadcast) {
 		if ((ifp->if_flags & IFF_BROADCAST) == 0) {
 			error = EADDRNOTAVAIL;
 			goto bad;

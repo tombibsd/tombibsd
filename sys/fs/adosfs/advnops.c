@@ -296,7 +296,7 @@ adosfs_read(void *v)
 		 * but not much as ados makes little attempt to
 		 * make things contigous
 		 */
-		error = bread(sp->a_vp, lbn, amp->bsize, NOCRED, 0, &bp);
+		error = bread(sp->a_vp, lbn, amp->bsize, 0, &bp);
 		if (error) {
 			goto reterr;
 		}
@@ -516,7 +516,7 @@ adosfs_bmap(void *v)
 			goto reterr;
 		}
 		error = bread(ap->amp->devvp, nb * ap->amp->bsize / DEV_BSIZE,
-			      ap->amp->bsize, NOCRED, 0, &flbp);
+			      ap->amp->bsize, 0, &flbp);
 		if (error) {
 			goto reterr;
 		}

@@ -646,7 +646,6 @@ bad:
 	return (error);
 }
 
-#ifdef IPSEC
 static int
 ipe4_init(struct secasvar *sav, const struct xformsw *xsp)
 {
@@ -724,8 +723,6 @@ static struct ip6protosw ipe4_protosw6 = {
  .pr_drain = 0,
 };
 #endif
-
-#endif /* IPSEC */
 
 /*
  * Check the encapsulated packet to see if we want it

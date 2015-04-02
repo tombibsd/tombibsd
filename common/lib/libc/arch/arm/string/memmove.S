@@ -585,7 +585,7 @@ END(memmove)
 END(bcopy)
 #endif
 
-#if defined(__ARM_EABI__) && !defined(BCOPY)
+#if defined(__ARM_EABI__) && !defined(BCOPY) && !defined(_RUMPKERNEL)
 STRONG_ALIAS(__aeabi_memmove, memmove)
 STRONG_ALIAS(__aeabi_memmove4, memmove)
 STRONG_ALIAS(__aeabi_memmove8, memmove)

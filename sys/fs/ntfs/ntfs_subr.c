@@ -284,7 +284,7 @@ ntfs_loadntnode(struct ntfsmount *ntmp, struct ntnode *ip)
 		off = ntfs_btocnoff(boff);
 
 		error = bread(ntmp->ntm_devvp, bn, ntfs_cntob(1),
-		    NOCRED, 0, &bp);
+		    0, &bp);
 		if (error) {
 			printf("%s: BREAD FAILED\n", __func__);
 			goto out;
@@ -1306,7 +1306,7 @@ ntfs_writentvattr_plain(struct ntfsmount *ntmp, struct ntnode *ip,
 				clrbuf(bp);
 			} else {
 				error = bread(ntmp->ntm_devvp, ntfs_cntobn(cn),
-				    ntfs_cntob(cl), NOCRED, B_MODIFY, &bp);
+				    ntfs_cntob(cl), B_MODIFY, &bp);
 				if (error)
 					return (error);
 			}
@@ -1404,7 +1404,7 @@ ntfs_readntvattr_plain(struct ntfsmount *ntmp, struct ntnode *ip,
 					error = bread(ntmp->ntm_devvp,
 						      ntfs_cntobn(cn),
 						      ntfs_cntob(cl),
-						      NOCRED, 0, &bp);
+						      0, &bp);
 					if (error) {
 						return (error);
 					}

@@ -111,7 +111,7 @@ evbmips_intr_init(void)
 		snprintf(intrs[i].ih_name, sizeof(intrs[i].ih_name),
 		    "irq %d", i);
 		evcnt_attach_dynamic(&intrs[i].ih_count, EVCNT_TYPE_INTR,
-		    NULL, "PIC", intrs[i].ih_name);
+		    NULL, "INTC", intrs[i].ih_name);
 	}
 
 	/* mask all peripheral IRQs */

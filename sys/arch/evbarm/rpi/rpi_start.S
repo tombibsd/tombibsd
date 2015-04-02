@@ -223,15 +223,15 @@ _C_LABEL(rpi_start):
 	// When using split TTBRs, we need to set both since the physical
 	// addresses we were/are using might be in either.
 	mcr	p15, 0, r0, c2, c0, 1	/* TTBR1 write */
-#endif  
+#endif
 
 #if defined(ARM_MMU_EXTENDED)
 	mov	r1, #TTBCR_S_N_1        /* make sure TTBCR_S_N is 1 */
-#else   
+#else
 	mov	r1, #0			/* make sure TTBCR is 0 */
 #endif
 	mcr	p15, 0, r1, c2, c0, 2	/* TTBCR write */
-  
+
 	mov     r0, #0
 	mcr	p15, 0, r0, c8, c7, 0	/* Invalidate TLBs */
 

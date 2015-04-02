@@ -55,15 +55,14 @@ _C_LABEL(__curbrk):
 	.text
 
 ENTRY(_brk)
-	auipc	t1, %pcrel_hi(_C_LABEL(__minbrk))
-	addi	t1, t1, %pcrel_lo(_C_LABEL(__minbrk))
-	PTR_L	v0, 0(t1)
-	bgeu	a0, v0, 1f
-	move	a0, v0		# dont allow break < minbrk
+	lla	t1, _C_LABEL(__minbrk)
+	PTR_L	t5, 0(t1)
+	bgeu	a0, t5, 1f
+	move	a0, t5		# dont allow break < minbrk
 1:
 	SYSTRAP(break)
 	JUMP_TO_CERROR()				/* error */
 	PTR_S	a0, __SIZEOF_POINTER__(t1)		/* success */
-	move	v0, zero
+	move	a0, zero
 	ret
 END(_brk)

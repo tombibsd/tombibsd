@@ -32,7 +32,7 @@
 #include <sys/syscall.h>
 #include <machine/asm.h>
 
-#define SYSTRAP(x)		li	v0,SYS_ ## x; scall
+#define SYSTRAP(x)		li	t6,SYS_ ## x; scall
 #define	JUMP_TO_CERROR()	j	_C_LABEL(__cerror)
 
 /*

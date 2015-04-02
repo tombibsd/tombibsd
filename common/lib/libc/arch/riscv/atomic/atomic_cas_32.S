@@ -31,10 +31,11 @@
 #include "atomic_op_asm.h"
 
 ENTRY_NP(_atomic_cas_32)
-1:	lr.w	v0, 0(a0)
-	bne	a1, v0, 2f
-	sc.w	v1, a2, 0(a0)
-	bnez	v1, 1b
+	mv	t0, a0
+1:	lr.w	a0, 0(t0)
+	bne	a1, a0, 2f
+	sc.w	t1, a2, 0(t0)
+	bnez	t1, 1b
 2:
 	ret
 END(_atomic_cas_32)
@@ -55,12 +56,13 @@ STRONG_ALIAS(_atomic_cas_ptr_ni,_atomic_cas_32)
 CRT_ALIAS(__sync_val_compare_and_swap_4,_atomic_cas_32)
 
 ENTRY_NP(_atomic_bool_cas_32)
-	li	v0, 0
-1:	lr.w	v1, 0(a0)
-	bne	a1, v1, 2f
-	sc.w	v1, a2, 0(a0)
-	bnez	v1, 1b
-	li	v0, 1
+	mv	t0, a0
+	li	a0, 0
+1:	lr.w	t1, 0(t0)
+	bne	a1, t1, 2f
+	sc.w	t1, a2, 0(t0)
+	bnez	t1, 1b
+	li	a0, 1
 2:
 	ret
 END(_atomic_bool_cas_32)

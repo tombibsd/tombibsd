@@ -1914,16 +1914,8 @@ again:
 	/*
 	** Do a binary search (this works whatever time_t's type is).
 	*/
-	/* LINTED const not */
-	if (!TYPE_SIGNED(time_t)) {
-		lo = 0;
-		hi = lo - 1;
-	} else {
-		lo = 1;
-		for (i = 0; i < (int) TYPE_BIT(time_t) - 1; ++i)
-			lo *= 2;
-		hi = -(lo + 1);
-	}
+	lo = time_t_min;
+	hi = time_t_max;
 #ifdef NO_ERROR_IN_DST_GAP
 	ilo = lo;
 #endif

@@ -161,18 +161,21 @@ cpu_cache_info_sun4v(const char *type, int level, const char *prop)
 	uint64_t val = 0;;
 	idx = mdesc_find_node_by_idx(idx, "cache");
 	while (idx != -1 && val == 0) {
-		const char *p;
-		size_t len = 0;
-		p = mdesc_get_prop_data(idx, "type", &len);
-		if (p == NULL)
-			panic("No type found\n");
-		if (len == 0)
-			panic("Len is zero");
-		if (type == NULL || strcmp(p, type) == 0) {
-			uint64_t l;
-			l = mdesc_get_prop_val(idx, "level");
-			if (l == level)
-				val = mdesc_get_prop_val(idx, prop);
+		const char *name = mdesc_name_by_idx(idx);
+		if (strcmp("cache", name) == 0) {
+			const char *p;
+			size_t len = 0;
+			p = mdesc_get_prop_data(idx, "type", &len);
+			if (p == NULL)
+				panic("No type found\n");
+			if (len == 0)
+				panic("Len is zero");
+			if (type == NULL || strcmp(p, type) == 0) {
+				uint64_t l;
+				l = mdesc_get_prop_val(idx, "level");
+				if (l == level)
+					val = mdesc_get_prop_val(idx, prop);
+			}
 		}
 		if (val == 0)
 			idx = mdesc_next_node(idx);

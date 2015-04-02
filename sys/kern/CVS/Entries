@@ -94,7 +94,7 @@
 /subr_blist.c/1.12/Tue Dec 17 04:13:38 2013/-kk/
 /subr_bufq.c/1.21/Sat Mar  1 06:05:14 2014/-kk/
 /subr_callback.c/1.7/Tue Nov 24 20:11:50 2009/-kk/
-/subr_copy.c/1.1/Wed Nov  4 16:54:00 2009/-kk/
+/subr_copy.c/1.5/Thu Apr  2 02:28:07 2015/-kk/
 /subr_cprng.c/1.26/Tue Dec  9 04:35:01 2014/-kk/
 /subr_cpufreq.c/1.9/Thu Feb 27 08:56:07 2014/-kk/
 /subr_debug.c/1.7/Wed Apr 30 20:20:53 2008/-kk/
@@ -130,7 +130,7 @@
 /subr_specificdata.c/1.13/Mon Apr 28 20:24:04 2008/-kk/
 /subr_spldebug.c/1.3/Sun Apr 25 11:49:22 2010/-kk/
 /subr_syscall_stats.c/1.3/Sat Mar  1 06:05:14 2014/-kk/
-/subr_tftproot.c/1.13/Fri Oct  3 09:43:40 2014/-kk/
+/subr_tftproot.c/1.14/Thu Apr  2 02:28:07 2015/-kk/
 /subr_time.c/1.17/Thu Oct 24 10:28:58 2013/-kk/
 /subr_userconf.c/1.26/Wed Jan  1 02:45:35 2014/-kk/
 /subr_vmem.c/1.92/Sat Apr 19 05:37:01 2014/-kk/
@@ -176,7 +176,7 @@
 /uipc_socket2.c/1.121/Fri Oct  3 09:51:01 2014/-kk/
 /uipc_syscalls.c/1.174/Sat Mar 21 02:37:59 2015/-kk/
 /uipc_usrreq.c/1.175/Sat Mar 21 02:37:59 2015/-kk/
-/vfs_bio.c/1.252/Fri Oct  3 09:51:01 2014/-kk/
+/vfs_bio.c/1.255/Thu Apr  2 02:28:07 2015/-kk/
 /vfs_cache.c/1.105/Mon Jan 26 07:10:30 2015/-kk/
 /vfs_cwd.c/1.4/Tue Feb 15 15:54:28 2011/-kk/
 /vfs_dirhash.c/1.12/Fri Oct  3 09:51:01 2014/-kk/

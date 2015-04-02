@@ -95,6 +95,7 @@ typedef struct {
 		__vfpregset_t __vfpregs;
 	} __fpu;
 	__greg_t	_mc_tlsbase;
+	__greg_t	_mc_user_tpid;
 } mcontext_t, mcontext32_t;
 
 /* Machine-dependent uc_flags */
@@ -106,7 +107,7 @@ typedef struct {
 
 #define	_UC_TLSBASE	0x00080000
 
-#define _UC_MACHINE_PAD	2		/* Padding appended to ucontext_t */
+#define _UC_MACHINE_PAD	1		/* Padding appended to ucontext_t */
 
 #define _UC_MACHINE_SP(uc)	((uc)->uc_mcontext.__gregs[_REG_SP])
 #define _UC_MACHINE_PC(uc)	((uc)->uc_mcontext.__gregs[_REG_PC])

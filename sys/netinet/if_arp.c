@@ -613,10 +613,24 @@ arp_rtrequest(int req, struct rtentry *rt, const struct rt_addrinfo *info)
 			log(LOG_DEBUG, "arp_rtrequest: bad gateway value\n");
 			break;
 		}
+
 		satosdl(gate)->sdl_type = ifp->if_type;
 		satosdl(gate)->sdl_index = ifp->if_index;
 		if (la != NULL)
 			break; /* This happens on a route change */
+
+		/* If the route is for a broadcast address mark it as such.
+		 * This way we can avoid an expensive call to in_broadcast()
+		 * in ip_output() most of the time (because the route passed
+		 * to ip_output() is almost always a host route). */
+		if (rt->rt_flags & RTF_HOST &&
+		    !(rt->rt_flags & RTF_BROADCAST) &&
+		    in_broadcast(satocsin(rt_getkey(rt))->sin_addr, rt->rt_ifp))
+			rt->rt_flags |= RTF_BROADCAST;
+		/* There is little point in resolving the broadcast address */
+		if (rt->rt_flags & RTF_BROADCAST)
+			break;
+
 		/*
 		 * Case 2:  This route may come from cloning, or a manual route
 		 * add with a LL address.

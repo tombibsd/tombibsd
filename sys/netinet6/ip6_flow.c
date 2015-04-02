@@ -275,10 +275,9 @@ ip6flow_fastforward(struct mbuf **mp)
 	 * Route and interface still up?
 	 */
 	if ((rt = rtcache_validate(&ip6f->ip6f_ro)) == NULL ||
-	    (rt->rt_ifp->if_flags & IFF_UP) == 0) {
-	    	/* Route or interface is down */
+	    (rt->rt_ifp->if_flags & IFF_UP) == 0 ||
+	    (rt->rt_flags & RTF_BLACKHOLE) != 0)
 		return 0;
-	}
 
 	/*
 	 * Packet size greater than MTU?

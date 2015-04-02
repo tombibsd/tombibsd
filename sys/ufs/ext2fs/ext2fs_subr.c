@@ -92,7 +92,7 @@ ext2fs_blkatoff(struct vnode *vp, off_t offset, char **res, struct buf **bpp)
 	lbn = ext2_lblkno(fs, offset);
 
 	*bpp = NULL;
-	if ((error = bread(vp, lbn, fs->e2fs_bsize, NOCRED, 0, &bp)) != 0) {
+	if ((error = bread(vp, lbn, fs->e2fs_bsize, 0, &bp)) != 0) {
 		return (error);
 	}
 	if (res)

@@ -68,7 +68,7 @@
 
 #include <machine/asm.h>
 
-#if defined(__ARM_EABI__) && !defined(_BZERO)
+#if defined(__ARM_EABI__) && !defined(_BZERO) && !defined(_RUMPKERNEL)
 ENTRY(__aeabi_memset)
 	mov	r3, r1
 	mov	r1, r2

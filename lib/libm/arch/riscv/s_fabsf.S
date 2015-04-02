@@ -5,6 +5,6 @@
 #include <machine/asm.h>
 
 ENTRY(fabsf)
-	fabs.s	fv0, fa0
+	fabs.s	fa0, fa0
 	ret
 END(fabsf)

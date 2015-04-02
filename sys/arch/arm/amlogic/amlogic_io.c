@@ -63,10 +63,8 @@ static const struct amlogic_locators amlogic_locators[] = {
     AMLOGIC_UART0AO_OFFSET, AMLOGIC_UART_SIZE, 0, AMLOGIC_INTR_UART0AO },
   { "amlogiccom",
     AMLOGIC_UART2AO_OFFSET, AMLOGIC_UART_SIZE, 2, AMLOGIC_INTR_UART2AO },
-#if notyet
   { "genfb",
     AMLOGIC_DMC_OFFSET, AMLOGIC_DMC_SIZE, NOPORT, NOINTR },
-#endif
   { "amlogicrng",
     AMLOGIC_RAND_OFFSET, AMLOGIC_RAND_SIZE, NOPORT, NOINTR },
   { "dwctwo",
@@ -79,6 +77,8 @@ static const struct amlogic_locators amlogic_locators[] = {
     AMLOGIC_SDHC_OFFSET, AMLOGIC_SDHC_SIZE, 1, AMLOGIC_INTR_SDHC },
   { "amlogicsdhc",
     AMLOGIC_SDHC_OFFSET, AMLOGIC_SDHC_SIZE, 2, AMLOGIC_INTR_SDHC },
+  { "amlogicrtc",
+    AMLOGIC_RTC_OFFSET, AMLOGIC_RTC_SIZE, NOPORT, AMLOGIC_INTR_RTC },
 };
 
 int
@@ -107,8 +107,8 @@ amlogicio_attach(device_t parent, device_t self, void *aux)
 	     loc++) {
 		struct amlogicio_attach_args aio = {
 			.aio_loc = *loc,
-			.aio_core_bst = &amlogic_bs_tag,
-			.aio_core_a4x_bst = &amlogic_a4x_bs_tag,
+			.aio_core_bst = &armv7_generic_bs_tag,
+			.aio_core_a4x_bst = &armv7_generic_a4x_bs_tag,
 			.aio_bsh = amlogic_core_bsh,
 			.aio_dmat = &amlogic_dma_tag,
 		};

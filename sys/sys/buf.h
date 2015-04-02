@@ -267,9 +267,9 @@ void	bawrite(buf_t *);
 void	bdwrite(buf_t *);
 void	biodone(buf_t *);
 int	biowait(buf_t *);
-int	bread(struct vnode *, daddr_t, int, struct kauth_cred *, int, buf_t **);
+int	bread(struct vnode *, daddr_t, int, int, buf_t **);
 int	breadn(struct vnode *, daddr_t, int, daddr_t *, int *, int,
-	       struct kauth_cred *, int, buf_t **);
+	       int, buf_t **);
 void	brelsel(buf_t *, int);
 void	brelse(buf_t *, int);
 void	bremfree(buf_t *);

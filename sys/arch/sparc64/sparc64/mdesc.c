@@ -253,3 +253,23 @@ mdesc_next_node(int idx)
 	return elem[idx].d.val;
 }
 
+const char *
+mdesc_name_by_idx(int idx)
+{
+	struct md_header *hdr;
+	struct md_element *elem;
+	const char *name_blk;
+	const char *str;
+
+	hdr = (struct md_header *)mdesc;
+	elem = (struct md_element *)(mdesc + sizeof(struct md_header));
+	name_blk = (char *)mdesc + sizeof(struct md_header) + hdr->node_blk_sz;
+
+	str = name_blk + elem[idx].name_offset;
+
+	return str;
+	
+}
+
+
+

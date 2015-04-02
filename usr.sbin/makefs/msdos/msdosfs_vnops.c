@@ -192,7 +192,7 @@ msdosfs_findslot(struct denode *dp, struct componentname *cnp)
 				break;
 			return (error);
 		}
-		error = bread(pmp->pm_devvp, de_bn2kb(pmp, bn), blsize, NOCRED,
+		error = bread(pmp->pm_devvp, de_bn2kb(pmp, bn), blsize,
 		    0, &bp);
 		if (error) {
 			return (error);
@@ -483,7 +483,7 @@ msdosfs_wfile(const char *path, struct denode *dep, fsnode *node)
 		    cn, (unsigned long long)bn,
 		    (unsigned long long)de_bn2kb(pmp, bn), blsize));
 		if ((error = bread(pmp->pm_devvp, de_bn2kb(pmp, bn), blsize,
-		    NULL, 0, &bp)) != 0) {
+		    0, &bp)) != 0) {
 			DPRINTF(("bread %d\n", error));
 			goto out;
 		} 

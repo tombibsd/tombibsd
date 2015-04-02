@@ -242,7 +242,7 @@
 ./usr/lib/oabi/libpam.so.4			base-compat-shlib	compat,pic,pam
 ./usr/lib/oabi/libpam.so.4.0			base-compat-shlib	compat,pic,pam
 ./usr/lib/oabi/libpcap.so.5			base-compat-shlib	compat,pic
-./usr/lib/oabi/libpcap.so.5.0			base-compat-shlib	compat,pic
+./usr/lib/oabi/libpcap.so.5.1			base-compat-shlib	compat,pic
 ./usr/lib/oabi/libpci.so.2			base-compat-shlib	compat,pic
 ./usr/lib/oabi/libpci.so.2.1			base-compat-shlib	compat,pic
 ./usr/lib/oabi/libperfuse.so.0			base-compat-shlib	compat,pic

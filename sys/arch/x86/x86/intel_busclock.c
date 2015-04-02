@@ -272,6 +272,56 @@ p3_get_bus_clock(struct cpu_info *ci)
 			goto print_msr;
 		}
 		break;
+	case 0x4c: /* Airmont */
+		if (rdmsr_safe(MSR_FSB_FREQ, &msr) == EFAULT) {
+			aprint_debug_dev(ci->ci_dev,
+			    "unable to determine bus speed");
+			goto print_msr;
+		}
+		bus = (msr >> 0) & 0xf;
+		switch (bus) {
+		case 0:
+			bus_clock =  8333;
+			break;
+		case 1:
+			bus_clock = 10000;
+			break;
+		case 2:
+			bus_clock = 13333;
+			break;
+		case 3:
+			bus_clock = 11650;
+			break;
+		case 4:
+			bus_clock =  8333;
+			break;
+		case 5:
+			bus_clock = 10000;
+			break;
+		case 6:
+			bus_clock = 13333;
+			break;
+		case 7:
+			bus_clock = 11666;
+			break;
+		case 12:
+			bus_clock =  8000;
+			break;
+		case 13:
+			bus_clock =  9333;
+			break;
+		case 14:
+			bus_clock =  9000;
+			break;
+		case 15:
+			bus_clock =  8888;
+			break;
+		default:
+			aprint_debug("%s: unknown Airmont FSB_FREQ value %d",
+			    device_xname(ci->ci_dev), bus);
+			goto print_msr;
+		}
+		break;
 	default:
 		aprint_debug("%s: unknown i686 model %02x, can't get bus clock",
 		    device_xname(ci->ci_dev),

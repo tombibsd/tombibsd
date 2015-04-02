@@ -46,7 +46,7 @@ file-system	PTYFS		# /dev/pts/N support
 # File system options
 #options 	QUOTA		# legacy UFS quotas
 #options 	QUOTA2		# new, in-filesystem UFS quotas
-#options 	FFS_EI		# FFS Endian Independant support
+#options 	FFS_EI		# FFS Endian Independent support
 #options 	NFSSERVER
 #options 	WAPBL		# File system journaling support - Experimental
 #options 	FFS_NO_SNAPSHOT	# No FFS snapshot support
@@ -177,22 +177,27 @@ amlogiccom0	at amlogicio0 port 0
 options 	CONSADDR=0xc81004c0, CONSPEED=115200
 
 # Framebuffer
-#genfb0		at amlogicio0
-#wsdisplay*	at genfb?
-#options 	VCONS_DRAW_INTR
-#options 	WSEMUL_VT100
-#options 	WS_DEFAULT_FG=WSCOL_WHITE
-#options 	WS_DEFAULT_BG=WSCOL_BLACK
-#options 	WS_KERNEL_FG=WSCOL_GREEN
-#options 	WS_KERNEL_BG=WSCOL_BLACK
-#options 	WSDISPLAY_COMPAT_PCVT
-#options 	WSDISPLAY_COMPAT_SYSCONS
-#options 	WSDISPLAY_COMPAT_USL
-#options 	WSDISPLAY_COMPAT_RAWKBD
-#options 	WSDISPLAY_DEFAULTSCREENS=4
+genfb0		at amlogicio0
+wsdisplay*	at genfb?
+options 	VCONS_DRAW_INTR
+options 	WSEMUL_VT100
+options 	WS_DEFAULT_FG=WSCOL_WHITE
+options 	WS_DEFAULT_BG=WSCOL_BLACK
+options 	WS_KERNEL_FG=WSCOL_GREEN
+options 	WS_KERNEL_BG=WSCOL_BLACK
+options 	WSDISPLAY_COMPAT_PCVT
+options 	WSDISPLAY_COMPAT_SYSCONS
+options 	WSDISPLAY_COMPAT_USL
+options 	WSDISPLAY_COMPAT_RAWKBD
+options 	WSDISPLAY_DEFAULTSCREENS=4
+pseudo-device	wsmux
+pseudo-device	wsfont
 
 # Hardware random number generator
 amlogicrng0	at amlogicio0
+
+# Real-time clock
+amlogicrtc0	at amlogicio0
 
 # SDHC controller
 amlogicsdhc0	at amlogicio0

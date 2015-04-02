@@ -51,7 +51,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <arm/cortex/a9tmr_var.h>
 
-static bus_space_tag_t bst = &rockchip_bs_tag;
+static bus_space_tag_t bst = &armv7_generic_bs_tag;
 static bus_space_handle_t cru_bsh;
 static bus_space_handle_t grf_bsh;
 

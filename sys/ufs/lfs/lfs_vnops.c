@@ -691,9 +691,9 @@ lfs_symlink(void *v)
 		if ((*vpp)->v_mount->mnt_flag & MNT_RELATIME)
 			ip->i_flag |= IN_ACCESS;
 	} else {
-		error = vn_rdwr(UIO_WRITE, *vpp, ap->a_target, len, (off_t)0,
-		    UIO_SYSSPACE, IO_NODELOCKED | IO_JOURNALLOCKED,
-		    ap->a_cnp->cn_cred, NULL, NULL);
+		error = ulfs_bufio(UIO_WRITE, *vpp, ap->a_target, len, (off_t)0,
+		    IO_NODELOCKED | IO_JOURNALLOCKED, ap->a_cnp->cn_cred, NULL,
+		    NULL);
 	}
 
 	VOP_UNLOCK(*vpp);

@@ -180,6 +180,6 @@ ENTRY(memcmp)
 #endif
 END(memcmp)
 
-#if defined(__ARM_EABI__)
+#if defined(__ARM_EABI__) && !defined(_RUMPKERNEL)
 STRONG_ALIAS(__aeabi_memcmp, memcmp)
 #endif

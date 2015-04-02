@@ -45,6 +45,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #ifdef __FreeBSD__
 #include "opt_inet6.h"
 #endif
+#include "opt_ipsec.h"
 
 #include <sys/param.h>
 #include <sys/systm.h>
@@ -891,7 +892,7 @@ ah_input_cb(struct cryptop *crp)
 	authsize = AUTHSIZE(sav);
 
 	if (ipsec_debug)
-	  memset(calc, 0, sizeof(calc));
+		memset(calc, 0, sizeof(calc));
 
 	/* Copy authenticator off the packet. */
 	m_copydata(m, skip + rplen, authsize, calc);

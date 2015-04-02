@@ -1709,7 +1709,7 @@ cryptodev_session(struct fcrypt *fcr, struct session_op *sop)
 
 	error = crypto_newsession(&sid, crihead, crypto_devallowsoft);
 	if (!error) {
-		DPRINTF(("cyrptodev_session: got session %d\n", (uint32_t)sid));
+		DPRINTF(("cryptodev_session: got session %d\n", (uint32_t)sid));
 		cse = csecreate(fcr, sid, crie.cri_key, crie.cri_klen,
 		    cria.cri_key, cria.cri_klen, (txform ? sop->cipher : 0), sop->mac,
 		    (tcomp ? sop->comp_alg : 0), txform, thash, tcomp);

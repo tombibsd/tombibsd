@@ -56,6 +56,9 @@
 #define	RGEPHY_SSR_JABBER	0x0001	/* Jabber */
 
 /* RTL8211F */
+#define RGEPHY_MII_PHYCR1	0x18	/* PHY Specific control register 1 */
+#define RGEPHY_PHYCR1_MDI_MMCE	__BIT(9)
+
 #define RGEPHY_MII_PHYSR	0x1a	/* PHY Specific status register */
 #define RGEPHY_PHYSR_ALDPS	__BIT(14)
 #define RGEPHY_PHYSR_MDI_PLUG	__BIT(13)

@@ -76,6 +76,7 @@ static const char* spdmem_basic_types[] = {
 	"DDR2 SDRAM FB",
 	"DDR2 SDRAM FB Probe",
 	"DDR3 SDRAM"
+	"DDR4 SDRAM"
 };
 
 static const char* spdmem_superset_types[] = {

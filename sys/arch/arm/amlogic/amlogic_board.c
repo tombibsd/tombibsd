@@ -55,14 +55,14 @@ struct arm32_bus_dma_tag amlogic_dma_tag = {
 };
 
 #define CBUS_READ(x)		\
-	bus_space_read_4(&amlogic_bs_tag, amlogic_core_bsh, \
+	bus_space_read_4(&armv7_generic_bs_tag, amlogic_core_bsh, \
 			 AMLOGIC_CBUS_OFFSET + (x))
 #define CBUS_WRITE(x, v)	\
-	bus_space_write_4(&amlogic_bs_tag, amlogic_core_bsh, \
+	bus_space_write_4(&armv7_generic_bs_tag, amlogic_core_bsh, \
 			  AMLOGIC_CBUS_OFFSET + (x), (v))
 
 #define CBUS_SET_CLEAR(x, s, c)	\
-	amlogic_reg_set_clear(&amlogic_bs_tag, amlogic_core_bsh, \
+	amlogic_reg_set_clear(&armv7_generic_bs_tag, amlogic_core_bsh, \
 			      AMLOGIC_CBUS_OFFSET + (x), (s), (c))
 
 void
@@ -70,7 +70,7 @@ amlogic_bootstrap(void)
 {
 	int error;
 
-	error = bus_space_map(&amlogic_bs_tag, AMLOGIC_CORE_BASE,
+	error = bus_space_map(&armv7_generic_bs_tag, AMLOGIC_CORE_BASE,
 	    AMLOGIC_CORE_SIZE, 0, &amlogic_core_bsh);
 	if (error)
 		panic("%s: failed to map CORE registers: %d", __func__, error);
@@ -260,7 +260,7 @@ amlogic_usbphy_clkgate_enable(int port)
 void
 amlogic_usbphy_init(int port)
 {
-	bus_space_tag_t bst = &amlogic_bs_tag;
+	bus_space_tag_t bst = &armv7_generic_bs_tag;
 	bus_space_handle_t bsh = amlogic_core_bsh;
 	bus_size_t ctrl_reg, cfg_reg, adp_bc_reg, gpioao_reg;
 	uint32_t ctrl, cfg, adp_bc, gpioao;

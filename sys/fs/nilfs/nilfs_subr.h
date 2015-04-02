@@ -46,7 +46,7 @@ int nilfs_get_segment_log(struct nilfs_device *nilfsdev, uint64_t *blocknr,
 void nilfs_search_super_root(struct nilfs_device *nilfsdev);
 
 /* reading */
-int nilfs_bread(struct nilfs_node *node, uint64_t blocknr, struct kauth_cred *cred,
+int nilfs_bread(struct nilfs_node *node, uint64_t blocknr,
 	int flags, struct buf **bpp);
 
 /* btree operations */

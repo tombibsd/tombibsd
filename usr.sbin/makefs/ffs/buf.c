@@ -60,8 +60,8 @@ __RCSID("$NetBSD$");
 TAILQ_HEAD(buftailhead,buf) buftail;
 
 int
-bread(struct vnode *vp, daddr_t blkno, int size, struct kauth_cred *u1 __unused,
-   int u2 __unused, struct buf **bpp)
+bread(struct vnode *vp, daddr_t blkno, int size, int u2 __unused,
+	struct buf **bpp)
 {
 	off_t	offset;
 	ssize_t	rv;

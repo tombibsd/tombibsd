@@ -167,15 +167,15 @@ obio_search(device_t parent, cfdata_t cf, const int *ldesc, void *aux)
 	obio.obio_port = cf->cf_loc[OBIOCF_PORT];
 	obio.obio_dmat = &rockchip_bus_dma_tag;
 
-	bus_space_subregion(&rockchip_bs_tag, rockchip_core1_bsh,
+	bus_space_subregion(&armv7_generic_bs_tag, rockchip_core1_bsh,
 	    ROCKCHIP_GRF_OFFSET, ROCKCHIP_GRF_SIZE, &obio.obio_grf_bsh);
 
 	switch (cf->cf_loc[OBIOCF_MULT]) {
 	case 1:
-		obio.obio_bst = &rockchip_bs_tag;
+		obio.obio_bst = &armv7_generic_bs_tag;
 		break;
 	case 4:
-		obio.obio_bst = &rockchip_a4x_bs_tag;
+		obio.obio_bst = &armv7_generic_a4x_bs_tag;
 		break;
 	default:
 		panic("Unsupported EMIFS multiplier.");
@@ -336,7 +336,7 @@ static void
 obio_grf_set(uint32_t offset, uint32_t value)
 {
 	bus_space_handle_t bh;
-	bus_space_tag_t bt = &rockchip_bs_tag;
+	bus_space_tag_t bt = &armv7_generic_bs_tag;
 	uint32_t old, new;
 
 	bus_space_subregion(bt, rockchip_core1_bsh, ROCKCHIP_GRF_OFFSET,
@@ -356,7 +356,7 @@ static int
 obio_gpio_set_out(u_int unit, u_int pin, u_int value)
 {
 	bus_space_handle_t bh;
-	bus_space_tag_t bt = &rockchip_bs_tag;
+	bus_space_tag_t bt = &armv7_generic_bs_tag;
 	uint32_t gpio_base = 0, gpio_size = 0;
 	uint32_t old, new;
 

@@ -59,11 +59,11 @@ __weak_alias(wait3, _wait3)
 /*
  * libc12 compatible wait4 routine.
  */
-int
+pid_t
 wait3(int *status, int options, struct rusage50 *ru50)
 {
 	struct rusage ru;
-	int rv;
+	pid_t rv;
 
 	if ((rv = __wait350(status, options, ru50 ? &ru : NULL)) == -1)
 		return rv;
@@ -72,11 +72,11 @@ wait3(int *status, int options, struct rusage50 *ru50)
 	return rv;
 }
 
-int
+pid_t
 wait4(pid_t wpid, int *status, int options, struct rusage50 *ru50)
 {
 	struct rusage ru;
-	int rv;
+	pid_t rv;
 
 	if ((rv = __wait450(wpid, status, options, ru50 ? &ru : NULL)) == -1)
 		return rv;

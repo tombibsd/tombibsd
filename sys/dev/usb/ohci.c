@@ -1872,8 +1872,8 @@ ohci_rem_ed(ohci_softc_t *sc, ohci_soft_ed_t *sed, ohci_soft_ed_t *head)
 	/* XXX */
 	for (p = head; p != NULL && p->next != sed; p = p->next)
 		;
-	if (p == NULL)
-		panic("ohci_rem_ed: ED not found");
+	KASSERT(p != NULL);
+
 	usb_syncmem(&sed->dma, sed->offs + offsetof(ohci_ed_t, ed_nexted),
 	    sizeof(sed->ed.ed_nexted),
 	    BUS_DMASYNC_POSTWRITE | BUS_DMASYNC_POSTREAD);

@@ -1419,8 +1419,6 @@ rtcache_lookup2(struct route *ro, const struct sockaddr *dst, int clone,
 	const struct sockaddr *odst;
 	struct rtentry *rt = NULL;
 
-	rtcache_invariants(ro);
-
 	odst = rtcache_getdst(ro);
 
 	if (odst == NULL)

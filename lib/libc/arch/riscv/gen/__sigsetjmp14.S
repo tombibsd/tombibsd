@@ -9,13 +9,13 @@ __RCSID("$NetBSD$")
 
 ENTRY(__sigsetjmp14)
 	bnez	a1, 1f
-	jump	PLT(_C_LABEL(_setjmp))
-1:	jump	PLT(_C_LABEL(__setjmp14))
+	tail	PLT(_C_LABEL(_setjmp))
+1:	tail	PLT(_C_LABEL(__setjmp14))
 END(__sigsetjmp14)
 
 ENTRY(__siglongjmp14)
 	REG_L	a2, JB_MAGIC(a0)
 	bnez	a2, 1f
-	jump	PLT(_C_LABEL(_longjmp))
-1:	jump	PLT(_C_LABEL(__longjmp14))
+	tail	PLT(_C_LABEL(_longjmp))
+1:	tail	PLT(_C_LABEL(__longjmp14))
 END(__siglongjmp14)

@@ -78,7 +78,6 @@
 
 #include "opt_ddb.h"
 #include "opt_inet.h"
-#include "opt_ipsec.h"
 #include "opt_inet_csum.h"
 #include "opt_tcp_debug.h"
 

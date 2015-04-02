@@ -234,7 +234,7 @@
 ./usr/lib/sparc/libpam.so.4			base-compat-shlib	compat,pic,pam
 ./usr/lib/sparc/libpam.so.4.0			base-compat-shlib	compat,pic,pam
 ./usr/lib/sparc/libpcap.so.5			base-compat-shlib	compat,pic
-./usr/lib/sparc/libpcap.so.5.0			base-compat-shlib	compat,pic
+./usr/lib/sparc/libpcap.so.5.1			base-compat-shlib	compat,pic
 ./usr/lib/sparc/libpci.so.2			base-compat-shlib	compat,pic
 ./usr/lib/sparc/libpci.so.2.1			base-compat-shlib	compat,pic
 ./usr/lib/sparc/libperfuse.so			base-compat-shlib       compat,pic		

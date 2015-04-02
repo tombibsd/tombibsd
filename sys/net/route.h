@@ -156,6 +156,7 @@ struct ortentry {
 #define RTF_SRC		0x10000		/* route has fixed source address */
 #define RTF_ANNOUNCE	0x20000		/* announce new ARP or NDP entry */
 #define RTF_LOCAL	0x40000		/* route represents a local address */
+#define RTF_BROADCAST	0x80000		/* route represents a bcast address */
 
 /*
  * Routing statistics.

@@ -1,0 +1,10 @@
+#	$NetBSD$
+
+ioconf hdaudio_pci
+
+include "conf/files"
+include "dev/pci/files.pci"
+
+pseudo-root pci*
+
+hdaudio* at pci? dev ? function ?

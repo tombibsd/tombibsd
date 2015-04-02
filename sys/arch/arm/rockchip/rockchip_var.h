@@ -52,8 +52,8 @@ struct obio_attach_args {
 	const char	*obio_name;
 };
 
-extern struct bus_space rockchip_bs_tag;
-extern struct bus_space rockchip_a4x_bs_tag;
+extern struct bus_space armv7_generic_bs_tag;
+extern struct bus_space armv7_generic_a4x_bs_tag;
 extern struct arm32_bus_dma_tag	rockchip_bus_dma_tag;
 extern bus_space_handle_t rockchip_core0_bsh;
 extern bus_space_handle_t rockchip_core1_bsh;

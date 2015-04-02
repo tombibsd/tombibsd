@@ -339,8 +339,7 @@ brelse(struct ubuf * bp, int set)
 
 /* Read the given block from disk, return it B_BUSY. */
 int
-bread(struct uvnode * vp, daddr_t lbn, int size, void * unused,
-    int flags, struct ubuf ** bpp)
+bread(struct uvnode * vp, daddr_t lbn, int size, int flags, struct ubuf ** bpp)
 {
 	struct ubuf *bp;
 	daddr_t daddr;

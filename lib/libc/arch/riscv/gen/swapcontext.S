@@ -44,18 +44,19 @@ ENTRY(swapcontext)
 	REG_S	a1, CALLFRAME_UCP(sp)		# save ucp
 
 	call	PLT(_C_LABEL(_getcontext))	# getcontext(oucp)
+	mv	t0, a0				# save return value
 
 	REG_L	ra, CALLFRAME_RA(sp)		# restore return address
 	REG_L	a0, CALLFRAME_UCP(sp)		# load ucp
 	REG_L	a1, CALLFRAME_OUCP(sp)		# load oucp for adjustment
 	addi	sp, sp, CALLFRAME_SIZ		# restore stack
 
-	bnez	v0, 1f				# error? yes, cleanup
+	bnez	t0, 1f				# error? yes, cleanup
 
 	REG_S	ra, UC_GREGS_PC(a1)		# pc <- ra
 	REG_S	sp, UC_GREGS_SP(a1)		# adjust sp
 
-	jump	PLT(_C_LABEL(setcontext))	# setcontext(ucp)
+	tail	PLT(_C_LABEL(setcontext))	# setcontext(ucp)
 
 1:	ret					# simply return
 END(swapcontext)

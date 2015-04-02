@@ -381,7 +381,7 @@
 
 #define	I2C1_BASE	(AIPSTZ2_BASE + 0x03fc8000)
 #define	I2C2_BASE	(AIPSTZ2_BASE + 0x03fc4000)
-/* register definitions in imxi2creg.h */
+#define	I2C_SIZE	0x4000
 
 #define	AUDMUX_BASE	(AIPSTZ2_BASE + 0x03fd0000)
 #define	AUDMUX_SIZE	0x4000

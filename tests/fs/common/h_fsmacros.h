@@ -110,10 +110,6 @@ do {									\
 		atf_tc_set_md_var(tc, "descr", type " test for " desc);	\
 		atf_tc_set_md_var(tc, "X-fs.type", #fs);		\
 		atf_tc_set_md_var(tc, "X-fs.mntname", type);		\
-		if (strcmp(#fs, "zfs") == 0) {				\
-			/* This should not be necessary. */		\
-			atf_tc_set_md_var(tc, "require.user", "root");	\
-		}							\
 	}								\
 	void *fs##func##tmp;						\
 									\
@@ -136,10 +132,6 @@ do {									\
 		atf_tc_set_md_var(tc, "descr",_type_" test for "_desc_);\
 		atf_tc_set_md_var(tc, "X-fs.type", #_fs_);		\
 		atf_tc_set_md_var(tc, "X-fs.mntname", _type_);		\
-		if (strcmp(#_fs_, "zfs") == 0) {			\
-			/* This should not be necessary. */		\
-			atf_tc_set_md_var(tc, "require.user", "root");	\
-		}							\
 	}								\
 	void *_fs_##_func_##tmp;					\
 									\

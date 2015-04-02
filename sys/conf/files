@@ -319,6 +319,9 @@ define	firmload
 
 include "dev/files.audio"
 
+# High definition audio
+include "dev/hdaudio/files.hdaudio"
+
 # Base verbose vendor/product printing support
 file	dev/dev_verbose.c
 

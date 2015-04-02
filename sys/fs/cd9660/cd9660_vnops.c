@@ -262,9 +262,9 @@ cd9660_read(void *v)
 		if (cd9660_lblktosize(imp, rablock) < ip->i_size) {
 			rasize = cd9660_blksize(imp, ip, rablock);
 			error = breadn(vp, lbn, size, &rablock,
-				       &rasize, 1, NOCRED, 0, &bp);
+				       &rasize, 1, 0, &bp);
 		} else {
-			error = bread(vp, lbn, size, NOCRED, 0, &bp);
+			error = bread(vp, lbn, size, 0, &bp);
 		}
 		if (error) {
 			return (error);
@@ -600,7 +600,7 @@ cd9660_readlink(void *v)
 	error = bread(imp->im_devvp,
 		      (ip->i_number >> imp->im_bshift) <<
 		      (imp->im_bshift - DEV_BSHIFT),
-		      imp->logical_block_size, NOCRED, 0, &bp);
+		      imp->logical_block_size, 0, &bp);
 	if (error) {
 		return (EINVAL);
 	}

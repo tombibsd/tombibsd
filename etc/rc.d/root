@@ -4,7 +4,7 @@
 #
 
 # PROVIDE: root
-# REQUIRE: fsck_root
+# REQUIRE: fsck_root resize_root
 
 $_rc_subr_loaded . /etc/rc.subr
 

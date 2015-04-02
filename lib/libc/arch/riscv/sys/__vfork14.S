@@ -45,14 +45,14 @@
 /*
  * pid = vfork();
  *
- * v1 == 0 in parent process, v1 == 1 in child process.
- * v0 == pid of child in parent, v0 == pid of parent in child.
+ * a1 == 0 in parent process, a1 == 1 in child process.
+ * a0 == pid of child in parent, a0 == pid of parent in child.
  */
 
 ENTRY(__vfork14)
 	SYSTRAP(__vfork14)
 	JUMP_TO_CERROR()		/* error */
-	addi	v1, v1, -1		/* success */
-	and	v0, v0, v1
+	addi	a1, a1, -1		/* success */
+	and	a0, a0, a1
 	ret
 END(__vfork14)

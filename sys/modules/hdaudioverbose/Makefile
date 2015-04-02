@@ -4,7 +4,7 @@
 
 KMOD=	hdaudioverbose
 
-.PATH:	${S}/dev/pci/hdaudio
+.PATH:	${S}/dev/hdaudio
 SRCS=	hdaudio_verbose.c
 
 .include <bsd.kmodule.mk>

@@ -1366,6 +1366,7 @@ lvm
 makemandb
 mdnsd
 mixerctl
+modules
 mopd
 motd
 mountall
@@ -1398,6 +1399,7 @@ raidframeparity
 random_seed
 rarpd
 rbootd
+resize_root
 rndctl
 root
 route6d

@@ -127,6 +127,10 @@ int	ffs_cgupdate(struct ufsmount *, int);
 /* ffs_vnops.c */
 int	ffs_read(void *);
 int	ffs_write(void *);
+int	ffs_bufio(enum uio_rw, struct vnode *, void *, size_t, off_t, int,
+	    kauth_cred_t, size_t *, struct lwp *);
+int	ffs_bufrd(struct vnode *, struct uio *, int, kauth_cred_t);
+int	ffs_bufwr(struct vnode *, struct uio *, int, kauth_cred_t);
 int	ffs_fsync(void *);
 int	ffs_spec_fsync(void *);
 int	ffs_reclaim(void *);

@@ -34,7 +34,6 @@
 __KERNEL_RCSID(0, "$NetBSD$");
 
 #include "opt_inet.h"
-#include "opt_ipsec.h"
 
 #include <sys/param.h>
 #include <sys/systm.h>

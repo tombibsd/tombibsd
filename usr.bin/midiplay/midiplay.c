@@ -404,7 +404,7 @@ playdata(u_char *buf, u_int tot, const char *name)
 
 	/* verify that the requested midi unit exists */
 	info.device = unit;
-	if (ioctl(fd, SEQUENCER_INFO, &info) < 0)
+	if (play && ioctl(fd, SEQUENCER_INFO, &info) < 0)
 		err(1, "ioctl(SEQUENCER_INFO) failed");
 
 	end = buf + tot;
@@ -488,7 +488,9 @@ playdata(u_char *buf, u_int tot, const char *name)
 	 * in some cases by frobbing tempo and timebase more obscurely, but this
 	 * player is meant to be simple and clear.
 	 */
-	if ((divfmt & 0x80) == 0) {
+	if (!play)
+		/* do nothing */;
+	else if ((divfmt & 0x80) == 0) {
 		ticks |= divfmt << 8;
 		if (ioctl(fd, SEQUENCER_TMR_TIMEBASE, &(int){ticks}) < 0)
 			err(1, "SEQUENCER_TMR_TIMEBASE");
@@ -681,7 +683,7 @@ playdata(u_char *buf, u_int tot, const char *name)
 			tp->delta = getvar(tp);
 		Heapify(tracks, ntrks, 0);
 	}
-	if (ioctl(fd, SEQUENCER_SYNC, 0) < 0)
+	if (play && ioctl(fd, SEQUENCER_SYNC, 0) < 0)
 		err(1, "SEQUENCER_SYNC");
 
  ret:

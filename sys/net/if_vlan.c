@@ -806,9 +806,10 @@ vlan_start(struct ifnet *ifp)
 				 * after deleting a tag.
 				 */
 				if (m->m_pkthdr.len <
-				    (ETHER_MIN_LEN + ETHER_VLAN_ENCAP_LEN)) {
+				    (ETHER_MIN_LEN - ETHER_CRC_LEN +
+				     ETHER_VLAN_ENCAP_LEN)) {
 					m_copyback(m, m->m_pkthdr.len,
-					    (ETHER_MIN_LEN +
+					    (ETHER_MIN_LEN - ETHER_CRC_LEN +
 					     ETHER_VLAN_ENCAP_LEN) -
 					     m->m_pkthdr.len,
 					    vlan_zero_pad_buff);

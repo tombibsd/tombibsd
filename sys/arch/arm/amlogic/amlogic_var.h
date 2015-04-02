@@ -49,8 +49,8 @@ struct amlogicio_attach_args {
 	bus_dma_tag_t aio_dmat;
 };
 
-extern struct bus_space amlogic_bs_tag;
-extern struct bus_space amlogic_a4x_bs_tag;
+extern struct bus_space armv7_generic_bs_tag;
+extern struct bus_space armv7_generic_a4x_bs_tag;
 extern bus_space_handle_t amlogic_core_bsh;
 extern struct arm32_bus_dma_tag amlogic_dma_tag;
 
@@ -73,6 +73,9 @@ uint32_t amlogic_get_rate_sys(void);
 uint32_t amlogic_get_rate_fixed(void);
 uint32_t amlogic_get_rate_a9(void);
 uint32_t amlogic_get_rate_a9periph(void);
+
+void	amlogic_genfb_ddb_trap_callback(int);
+void	amlogic_genfb_set_console_dev(device_t);
 
 static void inline
 amlogic_reg_set_clear(bus_space_tag_t bst, bus_space_handle_t bsh,

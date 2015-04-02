@@ -57,6 +57,8 @@ typedef uint64_t cell_t;
 typedef uint32_t cell_t;
 #define HDL2CELL(x)	(cell_t)(x)
 #define ADR2CELL(x)	(cell_t)(x)
+#define HDQ2CELL_HI(x)	(cell_t)((x) >> 32)
+#define HDQ2CELL_LO(x)	(cell_t)(x)
 #endif /* SUN4U */
 
 int	OF_test(const char *);

@@ -1182,8 +1182,8 @@ ufs_dirempty(struct inode *ip, ino_t parentino, kauth_cred_t cred)
 
 	for (off = 0; off < ip->i_size;
 	    off += ufs_rw16(dp->d_reclen, needswap)) {
-		error = vn_rdwr(UIO_READ, ITOV(ip), (void *)dp, MINDIRSIZ, off,
-		   UIO_SYSSPACE, IO_NODELOCKED, cred, &count, NULL);
+		error = ufs_bufio(UIO_READ, ITOV(ip), (void *)dp, MINDIRSIZ,
+		    off, IO_NODELOCKED, cred, &count, NULL);
 		/*
 		 * Since we read MINDIRSIZ, residual must
 		 * be 0 unless we're at end of file.
@@ -1279,7 +1279,7 @@ ufs_blkatoff(struct vnode *vp, off_t offset, char **res, struct buf **bpp,
 	}
 	KASSERT(run >= 1);
 	error = breadn(vp, blks[0], blksizes[0], &blks[1], &blksizes[1],
-	    run - 1, NOCRED, (modify ? B_MODIFY : 0), &bp);
+	    run - 1, (modify ? B_MODIFY : 0), &bp);
 	if (error != 0) {
 		*bpp = NULL;
 		goto out;

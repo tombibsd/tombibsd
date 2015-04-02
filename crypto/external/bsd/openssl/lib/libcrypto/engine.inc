@@ -25,12 +25,6 @@ ENGINE_SRCS = eng_err.c eng_lib.c eng_list.c eng_init.c eng_ctrl.c \
 	e_ubsec.c e_ubsec_err.c   \
 	e_padlock.c e_seed.c
 
-.if defined(AESNI)
-ENGINE_SRCS+=  eng_aesni.c
-.else
-CRYPTOCPPFLAGS+=-DOPENSSL_NO_HW_AESNI
-.endif
-
 ENGINE_SRCS += gost2001.c gost2001_keyx.c gost89.c gost94_keyx.c gost_ameth.c \
 	gost_asn1.c gost_crypt.c gost_ctl.c gost_eng.c gosthash.c \
 	gost_keywrap.c gost_md.c gost_params.c gost_pmeth.c gost_sign.c \

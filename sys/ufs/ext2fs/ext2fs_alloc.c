@@ -357,7 +357,7 @@ ext2fs_alloccg(struct inode *ip, int cg, daddr_t bpref, int size)
 		return (0);
 	error = bread(ip->i_devvp, EXT2_FSBTODB(fs,
 		fs->e2fs_gd[cg].ext2bgd_b_bitmap),
-		(int)fs->e2fs_bsize, NOCRED, B_MODIFY, &bp);
+		(int)fs->e2fs_bsize, B_MODIFY, &bp);
 	if (error) {
 		return (0);
 	}
@@ -443,7 +443,7 @@ ext2fs_nodealloccg(struct inode *ip, int cg, daddr_t ipref, int mode)
 		return (0);
 	error = bread(ip->i_devvp, EXT2_FSBTODB(fs,
 		fs->e2fs_gd[cg].ext2bgd_i_bitmap),
-		(int)fs->e2fs_bsize, NOCRED, B_MODIFY, &bp);
+		(int)fs->e2fs_bsize, B_MODIFY, &bp);
 	if (error) {
 		return (0);
 	}
@@ -510,7 +510,7 @@ ext2fs_blkfree(struct inode *ip, daddr_t bno)
 	}
 	error = bread(ip->i_devvp,
 		EXT2_FSBTODB(fs, fs->e2fs_gd[cg].ext2bgd_b_bitmap),
-		(int)fs->e2fs_bsize, NOCRED, B_MODIFY, &bp);
+		(int)fs->e2fs_bsize, B_MODIFY, &bp);
 	if (error) {
 		return;
 	}
@@ -553,7 +553,7 @@ ext2fs_vfree(struct vnode *pvp, ino_t ino, int mode)
 	cg = ino_to_cg(fs, ino);
 	error = bread(pip->i_devvp,
 		EXT2_FSBTODB(fs, fs->e2fs_gd[cg].ext2bgd_i_bitmap),
-		(int)fs->e2fs_bsize, NOCRED, B_MODIFY, &bp);
+		(int)fs->e2fs_bsize, B_MODIFY, &bp);
 	if (error) {
 		return (0);
 	}

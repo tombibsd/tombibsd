@@ -234,7 +234,7 @@ service_attribute_request(server_t *srv, int fd)
 
 	/*
 	 * Match the selected record against AttributeIDList, writing
-	 * the data to the sparce buffer.
+	 * the data to the sparse buffer.
 	 */
 	r = NULL;
 	db_next(srv, fd, &r);

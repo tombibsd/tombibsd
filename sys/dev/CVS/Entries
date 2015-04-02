@@ -1,5 +1,5 @@
 /DEVNAMES/1.292/Wed Oct 29 08:13:17 2014/-kk/
-/Makefile/1.35/Wed Jun 20 21:38:26 2012/-kk/
+/Makefile/1.36/Thu Apr  2 02:27:58 2015/-kk/
 /auconv.c/1.25/Wed Nov 23 23:07:31 2011/-kk/
 /auconv.h/1.16/Wed Nov 23 23:07:31 2011/-kk/
 /audio.c/1.266/Tue Dec  9 04:34:54 2014/-kk/
@@ -93,6 +93,7 @@ D/filemon////
 D/flash////
 D/gpib////
 D/gpio////
+D/hdaudio////
 D/hil////
 D/hpc////
 D/i2c////

@@ -93,6 +93,7 @@ static const struct bits bits[] = {
 	/* { RTF_JUMBO,	'J' }, */
 	{ RTF_ANNOUNCE,	'p' },
 	{ RTF_LOCAL, 'l'},
+	{ RTF_BROADCAST, 'b'},
 	{ 0, 0 }
 };
 

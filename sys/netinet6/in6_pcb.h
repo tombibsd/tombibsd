@@ -66,6 +66,7 @@
 
 #include <sys/queue.h>
 #include <netinet/in_pcb_hdr.h>
+#include <netinet/ip6.h>
 
 /*
  * Common structure pcb for internet protocol implementation.

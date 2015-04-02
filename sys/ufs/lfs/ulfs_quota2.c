@@ -149,8 +149,7 @@ getq2h(struct ulfsmount *ump, int type,
 	struct quota2_header *q2h;
 
 	KASSERT(mutex_owned(&lfs_dqlock));
-	error = bread(ump->um_quotas[type], 0, ump->umq2_bsize,
-	    ump->um_cred[type], flags, &bp);
+	error = bread(ump->um_quotas[type], 0, ump->umq2_bsize, flags, &bp);
 	if (error)
 		return error;
 	if (bp->b_resid != 0) 
@@ -176,8 +175,7 @@ getq2e(struct ulfsmount *ump, int type, daddr_t lblkno, int blkoffset,
 		panic("dq2get: %s quota file corrupted",
 		    lfs_quotatypes[type]);
 	}
-	error = bread(ump->um_quotas[type], lblkno, ump->umq2_bsize,
-	    ump->um_cred[type], flags, &bp);
+	error = bread(ump->um_quotas[type], lblkno, ump->umq2_bsize, flags, &bp);
 	if (error)
 		return error;
 	if (bp->b_resid != 0) {
@@ -218,8 +216,7 @@ quota2_walk_list(struct ulfsmount *ump, struct buf *hbp, int type,
 			bp = obp;
 		} else {
 			ret = bread(ump->um_quotas[type], lblkno, 
-			    ump->umq2_bsize,
-			    ump->um_cred[type], flags, &bp);
+			    ump->umq2_bsize, flags, &bp);
 			if (ret)
 				return ret;
 			if (bp->b_resid != 0) {

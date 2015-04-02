@@ -66,6 +66,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include "opt_inet.h"
 #include "opt_inet_csum.h"
+#include "opt_ipsec.h"
 
 #include <sys/param.h>
 #include <sys/mbuf.h>
@@ -102,6 +103,15 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <netinet6/udp6_private.h>
 #include <netinet6/ip6protosw.h>
 #include <netinet6/scope6_var.h>
+
+#ifdef IPSEC
+#include <netipsec/ipsec.h>
+#include <netipsec/ipsec_var.h>
+#include <netipsec/ipsec_private.h>
+#ifdef INET6
+#include <netipsec/ipsec6.h>
+#endif
+#endif	/* IPSEC */
 
 #include "faith.h"
 #if defined(NFAITH) && NFAITH > 0

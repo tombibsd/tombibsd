@@ -46,6 +46,7 @@ struct mdlwp {
 	struct trapframe *md_utf;	/* trapframe from userspace */
 	struct trapframe *md_ktf;	/* trapframe from userspace */
 	struct faultbuf *md_onfault;	/* registers to store on fault */
+	register_t md_usp;		/* for locore.S */
 	vaddr_t	md_ss_addr;		/* single step address for ptrace */
 	int	md_ss_instr;		/* single step instruction for ptrace */
 	volatile int md_astpending;	/* AST pending on return to userland */

@@ -40,6 +40,9 @@ usbd_status	usbd_get_desc(usbd_device_handle dev, int type,
 usbd_status	usbd_get_config_desc(usbd_device_handle, int,
 				     usb_config_descriptor_t *);
 usbd_status	usbd_get_config_desc_full(usbd_device_handle, int, void *, int);
+usbd_status	usbd_get_bos_desc(usbd_device_handle, int,
+				     usb_bos_descriptor_t *);
+usbd_status	usbd_get_bos_desc_full(usbd_device_handle, int, void *, int);
 usbd_status	usbd_get_device_desc(usbd_device_handle dev,
 				     usb_device_descriptor_t *d);
 usbd_status	usbd_set_address(usbd_device_handle dev, int addr);
