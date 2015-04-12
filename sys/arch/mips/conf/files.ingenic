@@ -26,3 +26,9 @@ file	arch/mips/ingenic/ingenic_ehci.c	ingenic_ehci	needs-flag
 # Ethernet
 attach dme at apbus with ingenic_dme
 file	arch/mips/ingenic/ingenic_dme.c		ingenic_dme	needs-flag
+
+# I2C
+device 	jziic : i2cbus
+attach 	jziic at apbus
+file 	arch/mips/ingenic/jziic.c	jziic
+defflag	opt_ingenic.h	JZIIC_DEBUG

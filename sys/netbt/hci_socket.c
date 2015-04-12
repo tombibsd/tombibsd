@@ -492,16 +492,15 @@ hci_accept(struct socket *so, struct mbuf *nam)
 }
 
 static int
-hci_bind(struct socket *so, struct mbuf *nam, struct lwp *l)
+hci_bind(struct socket *so, struct sockaddr *nam, struct lwp *l)
 {
 	struct hci_pcb *pcb = so->so_pcb;
-	struct sockaddr_bt *sa;
+	struct sockaddr_bt *sa = (struct sockaddr_bt *)nam;
 
 	KASSERT(solocked(so));
 	KASSERT(pcb != NULL);
 	KASSERT(nam != NULL);
 
-	sa = mtod(nam, struct sockaddr_bt *);
 	if (sa->bt_len != sizeof(struct sockaddr_bt))
 		return EINVAL;
 

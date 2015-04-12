@@ -74,6 +74,7 @@
 #ifndef	_COMMON_PMAP_TLB_H_
 #define	_COMMON_PMAP_TLB_H_
 
+#include <sys/evcnt.h>
 #include <sys/kcpuset.h>
 
 #if !defined(PMAP_TLB_MAX)

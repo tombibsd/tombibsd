@@ -171,7 +171,7 @@
 /print-raw.c/1.4/Tue Dec  9 04:31:35 2014/-kk/
 /print-rip.c/1.5/Tue Dec  9 04:31:35 2014/-kk/
 /print-ripng.c/1.4/Tue Dec  9 04:31:35 2014/-kk/
-/print-rpki-rtr.c/1.1.1.4/Thu Apr  2 02:25:52 2015/-kk/
+/print-rpki-rtr.c/1.2/Sun Apr 12 03:30:09 2015/-kk/
 /print-rrcp.c/1.4/Tue Dec  9 04:31:35 2014/-kk/
 /print-rsvp.c/1.7/Thu Apr  2 02:25:52 2015/-kk/
 /print-rt6.c/1.4/Tue Dec  9 04:31:35 2014/-kk/

@@ -5,6 +5,7 @@
 
 # PROVIDE: resize_root
 # REQUIRE: fsck_root
+# KEYWORD: interactive
 
 $_rc_subr_loaded . /etc/rc.subr
 
@@ -81,9 +82,12 @@ resize_root_start()
 
 	if resize_ffs -c $rootdev; then
 		echo "Resizing $rootmp"
-		if ! resize_ffs -y $rootdev; then
+		if ! resize_ffs -y $resize_root_flags $rootdev; then
 		    echo "Error resizing root."
 		    stop_boot
+		fi
+		if [ ! -z "${resize_root_postcmd}" ]; then
+			${resize_root_postcmd}
 		fi
 	else
 		echo "Not resizing $rootmp: already correct size"

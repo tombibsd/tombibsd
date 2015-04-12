@@ -111,6 +111,10 @@ struct isc_interfaceiter {
 #endif
 #endif
 
+/* Silence a warning when this file is #included */
+int
+isc_ioctl(int fildes, int req, char *arg);
+
 int
 isc_ioctl(int fildes, int req, char *arg) {
 	int trys;
@@ -590,6 +594,9 @@ internal_current4(isc_interfaceiter_t *iter) {
 		}
 		iter->current.netmask.type.in6.s6_addr[i] = (~0 << bits) & 0xff;
 	}
+#ifdef ISC_PLATFORM_HAVEIFNAMETOINDEX
+	iter->current.ifindex = if_nametoindex(iter->current.name);
+#endif
 	return (ISC_R_SUCCESS);
 
  inet:
@@ -666,6 +673,9 @@ internal_current4(isc_interfaceiter_t *iter) {
 	}
 	get_addr(family, &iter->current.netmask,
 		 (struct sockaddr *)&ifreq.ifr_addr, ifreq.ifr_name);
+#ifdef ISC_PLATFORM_HAVEIFNAMETOINDEX
+	iter->current.ifindex = if_nametoindex(iter->current.name);
+#endif
 	return (ISC_R_SUCCESS);
 }
 
@@ -706,7 +716,6 @@ internal_current6(isc_interfaceiter_t *iter) {
 	get_addr(family, &iter->current.address,
 		 (struct sockaddr *)&lifreq.lifr_addr, lifreq.lifr_name);
 
-	iter->current.ifindex = lifreq.lifr_index;
 	if (isc_netaddr_islinklocal(&iter->current.address))
 		isc_netaddr_setzone(&iter->current.address, 
 				    (isc_uint32_t)lifreq.lifr_index);
@@ -846,7 +855,9 @@ internal_current6(isc_interfaceiter_t *iter) {
 			iter->current.netmask.type.in6.s6_addr[i / 8] =
 				(~0 << bits) & 0xff;
 		}
-
+#ifdef ISC_PLATFORM_HAVEIFNAMETOINDEX
+		iter->current.ifindex = if_nametoindex(iter->current.name);
+#endif
 		return (ISC_R_SUCCESS);
 	}
 #endif
@@ -869,6 +880,9 @@ internal_current6(isc_interfaceiter_t *iter) {
 	get_addr(family, &iter->current.netmask,
 		 (struct sockaddr *)&lifreq.lifr_addr, lifreq.lifr_name);
 
+#ifdef ISC_PLATFORM_HAVEIFNAMETOINDEX
+	iter->current.ifindex = if_nametoindex(iter->current.name);
+#endif
 	return (ISC_R_SUCCESS);
 }
 #endif

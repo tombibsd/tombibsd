@@ -535,14 +535,25 @@ pmap_mp_init(void)
 				PGSZ_4M,		/* sz */
 				kernel_tlbs[i].te_pa,	/* pa */
 				1, /* priv */
-				1, /* write */
+				0, /* write */
 				1, /* cache */
 				1, /* aliased */
 				1, /* valid */
 				0 /* ie */);
 		tp[i].data |= TLB_L | TLB_CV;
-		if (CPU_ISSUN4V)
-			tp[i].data |= SUN4V_TLB_X;
+
+		/*
+		 * Assuming that the last tlb slot entry is the only data slot.
+		 *
+		 * If more than one data slot is required on day, perhaps
+		 * the bootinfo structure shared between ofwboot and the kernel
+		 * should be expanded to include the number of data slots.
+		 */
+		if (i == kernel_tlb_slots-1)
+			tp[i].data |= TLB_W;
+		else
+			if (CPU_ISSUN4V)
+				tp[i].data |= SUN4V_TLB_X;
 			
 		DPRINTF(PDB_BOOT1, ("xtlb[%d]: Tag: %" PRIx64 " Data: %"
 				PRIx64 "\n", i, tp[i].tag, tp[i].data));

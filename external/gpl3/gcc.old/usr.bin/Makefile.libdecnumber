@@ -1,4 +1,0 @@
-#	$NetBSD$
-
-DPADD+=		${LIBDECNUMBEROBJ}/libdecnumber.a
-LDADD+=		${LIBDECNUMBEROBJ}/libdecnumber.a

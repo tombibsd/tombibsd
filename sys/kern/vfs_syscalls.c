@@ -4281,12 +4281,14 @@ do_sys_renameat(struct lwp *l, int fromfd, const char *from, int tofd,
 	 * until the VOP_RENAME protocol changes, because file systems
 	 * will no doubt begin to depend on this check.
 	 */
-	if (((tnd.ni_cnd.cn_namelen == 1) &&
-		(tnd.ni_cnd.cn_nameptr[0] == '.')) ||
-	    ((tnd.ni_cnd.cn_namelen == 2) &&
-		(tnd.ni_cnd.cn_nameptr[0] == '.') &&
-		(tnd.ni_cnd.cn_nameptr[1] == '.'))) {
-		error = EINVAL;	/* XXX EISDIR?  */
+	if ((tnd.ni_cnd.cn_namelen == 1) && (tnd.ni_cnd.cn_nameptr[0] == '.')) {
+		error = EISDIR;
+		goto abort1;
+	}
+	if ((tnd.ni_cnd.cn_namelen == 2) &&
+	    (tnd.ni_cnd.cn_nameptr[0] == '.') &&
+	    (tnd.ni_cnd.cn_nameptr[1] == '.')) {
+		error = EINVAL;
 		goto abort1;
 	}
 

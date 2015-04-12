@@ -147,7 +147,8 @@ DRM_SPIN_WAKEUP_ALL(drm_waitqueue_t *q, spinlock_t *interlock)
 		(RET) = -cv_timedwait_sig((Q), &(INTERLOCK)->sl_lock, 1);     \
 		if (RET) {						      \
 			if ((RET) == -EWOULDBLOCK)			      \
-				(RET) = (CONDITION) ? 0 : -EBUSY;	      \
+				/* Waited only one tick.  */		      \
+				continue;				      \
 			break;						      \
 		}							      \
 	}								      \

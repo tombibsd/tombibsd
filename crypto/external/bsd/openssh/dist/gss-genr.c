@@ -1,5 +1,5 @@
 /*	$NetBSD$	*/
-/* $OpenBSD: gss-genr.c,v 1.22 2013/11/08 00:39:15 djm Exp $ */
+/* $OpenBSD: gss-genr.c,v 1.23 2015/01/20 23:14:00 deraadt Exp $ */
 
 /*
  * Copyright (c) 2001-2007 Simon Wilkinson. All rights reserved.
@@ -35,6 +35,7 @@ __RCSID("$NetBSD");
 #include <string.h>
 #include <unistd.h>
 #include <stdarg.h>
+#include <limits.h>
 
 #include "xmalloc.h"
 #include "buffer.h"

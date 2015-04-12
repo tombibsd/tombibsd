@@ -125,10 +125,10 @@ sco_accept(struct socket *so, struct mbuf *nam)
 }
 
 static int
-sco_bind(struct socket *so, struct mbuf *nam, struct lwp *l)
+sco_bind(struct socket *so, struct sockaddr *nam, struct lwp *l)
 {
 	struct sco_pcb *pcb = so->so_pcb;
-	struct sockaddr_bt *sa;
+	struct sockaddr_bt *sa = (struct sockaddr_bt *)nam;
 
 	KASSERT(solocked(so));
 	KASSERT(nam != NULL);
@@ -136,7 +136,6 @@ sco_bind(struct socket *so, struct mbuf *nam, struct lwp *l)
 	if (pcb == NULL)
 		return EINVAL;
 
-	sa = mtod(nam, struct sockaddr_bt *);
 	if (sa->bt_len != sizeof(struct sockaddr_bt))
 		return EINVAL;
 

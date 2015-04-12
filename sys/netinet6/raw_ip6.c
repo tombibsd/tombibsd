@@ -653,10 +653,10 @@ rip6_accept(struct socket *so, struct mbuf *nam)
 }
 
 static int
-rip6_bind(struct socket *so, struct mbuf *nam, struct lwp *l)
+rip6_bind(struct socket *so, struct sockaddr *nam, struct lwp *l)
 {
 	struct in6pcb *in6p = sotoin6pcb(so);
-	struct sockaddr_in6 *addr;
+	struct sockaddr_in6 *addr = (struct sockaddr_in6 *)nam;
 	struct ifaddr *ia = NULL;
 	int error = 0;
 
@@ -664,8 +664,7 @@ rip6_bind(struct socket *so, struct mbuf *nam, struct lwp *l)
 	KASSERT(in6p != NULL);
 	KASSERT(nam != NULL);
 
-	addr = mtod(nam, struct sockaddr_in6 *);
-	if (nam->m_len != sizeof(*addr))
+	if (addr->sin6_len != sizeof(*addr))
 		return EINVAL;
 	if (IFNET_EMPTY() || addr->sin6_family != AF_INET6)
 		return EADDRNOTAVAIL;

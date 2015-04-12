@@ -521,7 +521,7 @@ vattr_init_mask(vattr_t *vap)
 		vap->va_mask |= AT_ATIME;
 	if (vap->va_mtime.tv_sec != VNOVAL)
 		vap->va_mask |= AT_MTIME;
-	if (vap->va_mode != (u_short)VNOVAL)
+	if (vap->va_mode != (mode_t)VNOVAL)
 		vap->va_mask |= AT_MODE;
 }
 

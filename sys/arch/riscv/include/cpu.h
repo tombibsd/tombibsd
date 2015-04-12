@@ -33,6 +33,7 @@
 #define _RISCV_CPU_H_
 
 #if defined(_KERNEL) || defined(_KMEMUSER)
+
 struct clockframe {
 	uintptr_t cf_pc;
 	uint32_t cf_sr;
@@ -78,6 +79,10 @@ struct cpu_info {
 	struct evcnt ci_ev_fpu_loads;
 	struct evcnt ci_ev_fpu_reenables;
 };
+
+#endif /* _KERNEL || _KMEMUSER */
+
+#ifdef _KERNEL
 
 extern struct cpu_info cpu_info_store;
 
@@ -141,6 +146,6 @@ cpu_idle(void)
 {
 }
 
-#endif /* _KERNEL || _KMEMUSER */
+#endif /* _KERNEL */
 
 #endif /* _RISCV_CPU_H_ */

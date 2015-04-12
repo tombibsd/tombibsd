@@ -117,7 +117,11 @@ do {									\
 #define RUMPMEM_UNLIMITED ((unsigned long)-1)
 extern unsigned long rump_physmemlimit;
 
-#define RUMP_LOCALPROC_P(p) (p->p_vmspace == vmspace_kernel())
+extern struct vmspace *rump_vmspace_local;
+#define RUMP_LOCALPROC_P(p) \
+    (p->p_vmspace == vmspace_kernel() || p->p_vmspace == rump_vmspace_local)
+#define RUMP_PMAP_KERNEL ((struct pmap *const)-1)
+#define RUMP_PMAP_LOCAL ((struct pmap *)-2)
 
 void		rump_component_load(const struct rump_component *);
 void		rump_component_init(enum rump_component_type);
@@ -186,6 +190,7 @@ void	rump_hyperentropy_init(void);
 void	rump_lwproc_init(void);
 void	rump_lwproc_curlwp_set(struct lwp *);
 void	rump_lwproc_curlwp_clear(struct lwp *);
+int	rump_lwproc_rfork_vmspace(struct vmspace *, int);
 
 /*
  * sysproxy is an optional component.  The interfaces with "hyp"

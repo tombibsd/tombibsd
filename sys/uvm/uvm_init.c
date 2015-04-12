@@ -133,6 +133,9 @@ uvm_init(void)
 	 */
 
 	uvm_km_init();
+#ifdef __HAVE_PMAP_PV_TRACK
+	pmap_pv_init();
+#endif
 
 #ifdef DEBUG
 	debug_init();

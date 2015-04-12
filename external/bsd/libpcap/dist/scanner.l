@@ -24,6 +24,7 @@
 #include <sys/cdefs.h>
 __RCSID("$NetBSD$");
 
+#include "config.h"
 #ifdef WIN32
 #include <pcap-stdinc.h>
 #else /* WIN32 */

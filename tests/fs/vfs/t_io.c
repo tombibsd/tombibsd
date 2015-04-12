@@ -233,9 +233,6 @@ read_fault(const atf_tc_t *tc, const char *mp)
 	ATF_REQUIRE_EQ(rump_sys_write(fd, &ch, 1), 1);
 	RL(rump_sys_close(fd));
 	RL(fd = rump_sys_open("file", O_RDONLY | O_SYNC | O_RSYNC));
-	if (FSTYPE_MSDOS(tc) ||
-	    FSTYPE_SYSVBFS(tc))
-		atf_tc_expect_fail("bad sync atime update code path");
 	ATF_REQUIRE_ERRNO(EFAULT, rump_sys_read(fd, NULL, 1) == -1);
 	RL(rump_sys_close(fd));
 	FSTEST_EXIT();

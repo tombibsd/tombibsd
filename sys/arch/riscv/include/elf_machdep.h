@@ -97,6 +97,8 @@
 #define R_RISCV_GNU_VTINHERIT	41	// A & 0xffff
 #define R_RISCV_GNU_VTENTRY	42
 #define R_RISCV_ALIGN		43
+#define R_RISCV_RVC_BRANCH	44
+#define R_RISCV_RVC_JUMP	45
 
 /* These are aliases we can use R_TYPESZ */
 #define R_RISCV_ADDR32		R_RISCV_32

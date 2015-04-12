@@ -43,7 +43,7 @@ void *	dccp6_ctlinput(int, const struct sockaddr *, void *);
 int	dccp6_input(struct mbuf **, int *, int);
 int	dccp6_usrreq(struct socket *, int, struct mbuf *, struct mbuf *,
 		     struct mbuf *, struct lwp *);
-int	dccp6_bind(struct socket *, struct mbuf *, struct lwp *);
+int	dccp6_bind(struct socket *, struct sockaddr *, struct lwp *);
 int	dccp6_listen(struct socket *, struct lwp *);
 int	dccp6_connect(struct socket *, struct mbuf *, struct lwp *);
 int	dccp6_accept(struct socket *, struct mbuf *);

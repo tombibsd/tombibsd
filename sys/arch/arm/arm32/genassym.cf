@@ -78,10 +78,6 @@ ifdef __HAVE_PIC_FAST_SOFTINTS
 define	__HAVE_PIC_FAST_SOFTINTS	1
 endif
 
-ifdef __HAVE_UNNESTED_INTRS
-define	__HAVE_UNNESTED_INTRS	1
-endif
-
 ifdef ARM_MMU_EXTENDED
 define  ARM_MMU_EXTENDED	1
 endif

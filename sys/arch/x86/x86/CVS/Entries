@@ -20,7 +20,7 @@
 /identcpu.c/1.48/Thu Dec 11 09:09:44 2014/-kk/
 /idt.c/1.3/Sun Apr 19 14:11:37 2009/-kk/
 /intel_busclock.c/1.21/Thu Apr  2 02:27:57 2015/-kk/
-/intr.c/1.77/Tue Jun  3 02:54:25 2014/-kk/
+/intr.c/1.78/Sun Apr 12 03:34:57 2015/-kk/
 /ioapic.c/1.48/Thu Oct 24 10:28:57 2013/-kk/
 /ipi.c/1.26/Mon Jul 21 08:07:38 2014/-kk/
 /ipmi.c/1.60/Fri Jan  2 11:21:26 2015/-kk/
@@ -34,7 +34,7 @@
 /odcm.c/1.4/Fri Apr 11 02:03:40 2014/-kk/
 /patch.c/1.22/Mon Nov 18 05:31:36 2013/-kk/
 /platform.c/1.15/Fri Apr 11 02:03:40 2014/-kk/
-/pmap.c/1.187/Tue Dec  9 04:43:45 2014/-kk/
+/pmap.c/1.188/Sun Apr 12 03:34:57 2015/-kk/
 /pmap_tlb.c/1.6/Sat Apr 21 22:22:48 2012/-kk/
 /powernow.c/1.8/Mon Nov 18 05:31:36 2013/-kk/
 /procfs_machdep.c/1.6/Sat Apr 19 05:36:50 2014/-kk/

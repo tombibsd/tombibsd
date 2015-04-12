@@ -545,7 +545,7 @@ amlogic_device_register(device_t self, void *aux)
 #if NGENFB > 0
 	if (device_is_a(self, "genfb")) {
 		char *ptr;
-		int scale;
+		int scale, depth;
 		amlogic_genfb_set_console_dev(self);
 #ifdef DDB
 		db_trap_callback = amlogic_genfb_ddb_trap_callback;
@@ -562,6 +562,10 @@ amlogic_device_register(device_t self, void *aux)
 		if (get_bootconf_option(boot_args, "fb.scale",
 		    BOOTOPT_TYPE_INT, &scale) && scale > 0) {
 			prop_dictionary_set_uint32(dict, "scale", scale);
+		}
+		if (get_bootconf_option(boot_args, "fb.depth",
+		    BOOTOPT_TYPE_INT, &depth)) {
+			prop_dictionary_set_uint32(dict, "depth", depth);
 		}
 	}
 #endif

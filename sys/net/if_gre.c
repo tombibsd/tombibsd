@@ -444,7 +444,7 @@ gre_socreate(struct gre_softc *sc, const struct gre_soparm *sp, int *fdout)
 	sockaddr_copy(sa, MIN(MLEN, sizeof(sp->sp_src)), sstocsa(&sp->sp_src));
 	m->m_len = sp->sp_src.ss_len;
 
-	if ((rc = sobind(so, m, curlwp)) != 0) {
+	if ((rc = sobind(so, sa, curlwp)) != 0) {
 		GRE_DPRINTF(sc, "sobind failed\n");
 		goto out;
 	}

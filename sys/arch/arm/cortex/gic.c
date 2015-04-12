@@ -597,33 +597,33 @@ armgic_attach(device_t parent, device_t self, void *aux)
 		}
 	}
 #ifdef __HAVE_PIC_FAST_SOFTINTS
-	intr_establish(SOFTINT_BIO, IPL_SOFTBIO, IST_EDGE,
+	intr_establish(SOFTINT_BIO, IPL_SOFTBIO, IST_MPSAFE | IST_EDGE,
 	    pic_handle_softint, (void *)SOFTINT_BIO);
-	intr_establish(SOFTINT_CLOCK, IPL_SOFTCLOCK, IST_EDGE,
+	intr_establish(SOFTINT_CLOCK, IPL_SOFTCLOCK, IST_MPSAFE | IST_EDGE,
 	    pic_handle_softint, (void *)SOFTINT_CLOCK);
-	intr_establish(SOFTINT_NET, IPL_SOFTNET, IST_EDGE,
+	intr_establish(SOFTINT_NET, IPL_SOFTNET, IST_MPSAFE | IST_EDGE,
 	    pic_handle_softint, (void *)SOFTINT_NET);
-	intr_establish(SOFTINT_SERIAL, IPL_SOFTSERIAL, IST_EDGE,
+	intr_establish(SOFTINT_SERIAL, IPL_SOFTSERIAL, IST_MPSAFE | IST_EDGE,
 	    pic_handle_softint, (void *)SOFTINT_SERIAL);
 #endif
 #ifdef MULTIPROCESSOR
-	intr_establish(ARMGIC_SGI_IPIBASE + IPI_AST, IPL_VM, IST_EDGE,
-	    pic_ipi_nop, (void *)-1);
-	intr_establish(ARMGIC_SGI_IPIBASE + IPI_XCALL, IPL_VM, IST_EDGE,
-	    pic_ipi_xcall, (void *)-1);
-	intr_establish(ARMGIC_SGI_IPIBASE + IPI_GENERIC, IPL_VM, IST_EDGE,
-	    pic_ipi_generic, (void *)-1);
-	intr_establish(ARMGIC_SGI_IPIBASE + IPI_NOP, IPL_VM, IST_EDGE,
-	    pic_ipi_nop, (void *)-1);
-	intr_establish(ARMGIC_SGI_IPIBASE + IPI_SHOOTDOWN, IPL_VM, IST_EDGE,
-	    pic_ipi_shootdown, (void *)-1);
+	intr_establish(ARMGIC_SGI_IPIBASE + IPI_AST, IPL_VM,
+	    IST_MPSAFE | IST_EDGE, pic_ipi_nop, (void *)-1);
+	intr_establish(ARMGIC_SGI_IPIBASE + IPI_XCALL, IPL_VM,
+	    IST_MPSAFE | IST_EDGE, pic_ipi_xcall, (void *)-1);
+	intr_establish(ARMGIC_SGI_IPIBASE + IPI_GENERIC, IPL_VM,
+	    IST_MPSAFE | IST_EDGE, pic_ipi_generic, (void *)-1);
+	intr_establish(ARMGIC_SGI_IPIBASE + IPI_NOP, IPL_VM,
+	    IST_MPSAFE | IST_EDGE, pic_ipi_nop, (void *)-1);
+	intr_establish(ARMGIC_SGI_IPIBASE + IPI_SHOOTDOWN, IPL_VM,
+	    IST_MPSAFE | IST_EDGE, pic_ipi_shootdown, (void *)-1);
 #ifdef DDB
-	intr_establish(ARMGIC_SGI_IPIBASE + IPI_DDB, IPL_HIGH, IST_EDGE,
-	    pic_ipi_ddb, NULL);
+	intr_establish(ARMGIC_SGI_IPIBASE + IPI_DDB, IPL_HIGH,
+	    IST_MPSAFE | IST_EDGE, pic_ipi_ddb, NULL);
 #endif
 #ifdef __HAVE_PREEMPTION
-	intr_establish(ARMGIC_SGI_IPIBASE + IPI_KPREEMPT, IPL_VM, IST_EDGE,
-	    pic_ipi_nop, (void *)-1);
+	intr_establish(ARMGIC_SGI_IPIBASE + IPI_KPREEMPT, IPL_VM,
+	    IST_MPSAFE | IST_EDGE, pic_ipi_nop, (void *)-1);
 #endif
 	armgic_cpu_init(&sc->sc_pic, curcpu());
 #endif

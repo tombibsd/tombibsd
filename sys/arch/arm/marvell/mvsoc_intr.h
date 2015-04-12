@@ -33,6 +33,7 @@
 
 #if defined(ARMADAXP)
 #define __HAVE_PIC_SET_PRIORITY
+#define __HAVE_PIC_PENDING_INTRS
 #endif
 #endif
 

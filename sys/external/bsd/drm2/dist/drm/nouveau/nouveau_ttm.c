@@ -443,6 +443,11 @@ nouveau_ttm_init(struct nouveau_drm *drm)
 	drm->ttm.mtrr = arch_phys_wc_add(nv_device_resource_start(device, 1),
 					 nv_device_resource_len(device, 1));
 
+#ifdef __NetBSD__
+	pmap_pv_track(nv_device_resource_start(device, 1),
+	    nv_device_resource_len(device, 1));
+#endif
+
 	/* GART init */
 	if (drm->agp.stat != ENABLED) {
 		drm->gem.gart_available = nouveau_vmmgr(drm->device)->limit;
@@ -476,4 +481,9 @@ nouveau_ttm_fini(struct nouveau_drm *drm)
 
 	arch_phys_wc_del(drm->ttm.mtrr);
 	drm->ttm.mtrr = 0;
+
+#ifdef __NetBSD__
+	pmap_pv_untrack(nv_device_resource_start(nv_device(drm->device), 1),
+	    nv_device_resource_len(nv_device(drm->device), 1));
+#endif
 }

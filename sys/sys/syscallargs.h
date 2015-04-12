@@ -1681,13 +1681,11 @@ struct compat_50_sys_mq_timedreceive_args {
 check_syscall_args(compat_50_sys_mq_timedreceive)
 #endif /* !RUMP_CLIENT */
 
-#ifndef RUMP_CLIENT
 struct sys___posix_rename_args {
 	syscallarg(const char *) from;
 	syscallarg(const char *) to;
 };
 check_syscall_args(sys___posix_rename)
-#endif /* !RUMP_CLIENT */
 
 #ifndef RUMP_CLIENT
 struct sys_swapctl_args {

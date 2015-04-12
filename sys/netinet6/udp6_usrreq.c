@@ -696,9 +696,10 @@ udp6_accept(struct socket *so, struct mbuf *nam)
 }
 
 static int
-udp6_bind(struct socket *so, struct mbuf *nam, struct lwp *l)
+udp6_bind(struct socket *so, struct sockaddr *nam, struct lwp *l)
 {
 	struct in6pcb *in6p = sotoin6pcb(so);
+	struct sockaddr_in6 *sin6 = (struct sockaddr_in6 *)nam;
 	int error = 0;
 	int s;
 
@@ -706,7 +707,7 @@ udp6_bind(struct socket *so, struct mbuf *nam, struct lwp *l)
 	KASSERT(in6p != NULL);
 
 	s = splsoftnet();
-	error = in6_pcbbind(in6p, nam, l);
+	error = in6_pcbbind(in6p, sin6, l);
 	splx(s);
 	return error;
 }

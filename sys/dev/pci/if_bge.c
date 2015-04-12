@@ -5749,7 +5749,10 @@ bge_stop(struct ifnet *ifp, int disable)
 {
 	struct bge_softc *sc = ifp->if_softc;
 
-	callout_stop(&sc->bge_timeout);
+	if (disable)
+		callout_halt(&sc->bge_timeout, NULL);
+	else
+		callout_stop(&sc->bge_timeout);
 
 	/* Disable host interrupts. */
 	BGE_SETBIT(sc, BGE_PCI_MISC_CTL, BGE_PCIMISCCTL_MASK_PCI_INTR);

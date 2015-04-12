@@ -905,9 +905,10 @@ udp_accept(struct socket *so, struct mbuf *nam)
 }
 
 static int
-udp_bind(struct socket *so, struct mbuf *nam, struct lwp *l)
+udp_bind(struct socket *so, struct sockaddr *nam, struct lwp *l)
 {
 	struct inpcb *inp = sotoinpcb(so);
+	struct sockaddr_in *sin = (struct sockaddr_in *)nam;
 	int error = 0;
 	int s;
 
@@ -916,7 +917,7 @@ udp_bind(struct socket *so, struct mbuf *nam, struct lwp *l)
 	KASSERT(nam != NULL);
 
 	s = splsoftnet();
-	error = in_pcbbind(inp, nam, l);
+	error = in_pcbbind(inp, sin, l);
 	splx(s);
 
 	return error;

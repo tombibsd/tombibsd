@@ -242,6 +242,24 @@ struct sockproto {
 	u_short	sp_family;		/* address family */
 	u_short	sp_protocol;		/* protocol */
 };
+
+/*
+ * we make the entire struct at least UCHAR_MAX + 1 in size since existing
+ * use of sockaddr_un permits a path up to 253 bytes + '\0'.
+ * sizeof(sb_len) + sizeof(sb_family) + 253 + '\0'
+ */
+#define _SB_DATASIZE	254
+struct sockaddr_big {
+    union {
+	struct {
+	    __uint8_t	sb_len;
+	    sa_family_t	sb_family;
+	    char	sb_data[_SB_DATASIZE];
+	};
+	uint64_t dummy; /* solicit natural alignment */
+    };
+};
+
 #endif /* _KERNEL */
 
 #if 1

@@ -404,18 +404,14 @@ nfs_boot_enbroadcast(struct socket *so)
 int
 nfs_boot_sobind_ipport(struct socket *so, uint16_t port, struct lwp *l)
 {
-	struct mbuf *m;
-	struct sockaddr_in *sin;
+	struct sockaddr_in sin;
 	int error;
 
-	m = m_getclr(M_WAIT, MT_SONAME);
-	sin = mtod(m, struct sockaddr_in *);
-	sin->sin_len = m->m_len = sizeof(*sin);
-	sin->sin_family = AF_INET;
-	sin->sin_addr.s_addr = INADDR_ANY;
-	sin->sin_port = htons(port);
-	error = sobind(so, m, l);
-	m_freem(m);
+	sin.sin_len = sizeof(sin);
+	sin.sin_family = AF_INET;
+	sin.sin_addr.s_addr = INADDR_ANY;
+	sin.sin_port = htons(port);
+	error = sobind(so, (struct sockaddr *)&sin, l);
 	return (error);
 }
 

@@ -134,10 +134,10 @@ l2cap_accept(struct socket *so, struct mbuf *nam)
 }
 
 static int
-l2cap_bind(struct socket *so, struct mbuf *nam, struct lwp *l)
+l2cap_bind(struct socket *so, struct sockaddr *nam, struct lwp *l)
 {
 	struct l2cap_channel *pcb = so->so_pcb;
-	struct sockaddr_bt *sa;
+	struct sockaddr_bt *sa = (struct sockaddr_bt *)nam;
 
 	KASSERT(solocked(so));
 	KASSERT(nam != NULL);
@@ -145,7 +145,6 @@ l2cap_bind(struct socket *so, struct mbuf *nam, struct lwp *l)
 	if (pcb == NULL)
 		return EINVAL;
 
-	sa = mtod(nam, struct sockaddr_bt *);
 	if (sa->bt_len != sizeof(struct sockaddr_bt))
 		return EINVAL;
 

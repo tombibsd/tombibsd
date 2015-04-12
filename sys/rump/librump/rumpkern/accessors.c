@@ -68,7 +68,7 @@ rump_uio_setup(void *buf, size_t bufsize, off_t offset, enum rump_uiorw rw)
 	uio->uio_offset = offset;
 	uio->uio_resid = bufsize;
 	uio->uio_rw = uiorw;
-	UIO_SETUP_SYSSPACE(uio);
+	uio->uio_vmspace = curproc->p_vmspace;
 
 	return uio;
 }

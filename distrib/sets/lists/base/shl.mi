@@ -754,8 +754,8 @@
 ./usr/lib/libsqlite3.so.1.2			base-sys-shlib
 ./usr/lib/libss.so				base-obsolete		obsolete
 ./usr/lib/libssh.so				base-secsh-shlib	crypto
-./usr/lib/libssh.so.23				base-secsh-shlib	crypto
-./usr/lib/libssh.so.23.0			base-secsh-shlib	crypto
+./usr/lib/libssh.so.24				base-secsh-shlib	crypto
+./usr/lib/libssh.so.24.0			base-secsh-shlib	crypto
 ./usr/lib/libssl.so				base-crypto-shlib	crypto
 ./usr/lib/libssl.so.10				base-crypto-shlib	crypto
 ./usr/lib/libssl.so.10.5				base-crypto-shlib	crypto

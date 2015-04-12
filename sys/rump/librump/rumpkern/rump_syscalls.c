@@ -2954,6 +2954,35 @@ __weak_alias(__ksem_timedwait,rump___sysimpl__ksem_timedwait);
 __strong_alias(_sys__ksem_timedwait,rump___sysimpl__ksem_timedwait);
 #endif /* RUMP_KERNEL_IS_LIBC */
 
+int rump___sysimpl___posix_rename(const char *, const char *);
+int
+rump___sysimpl___posix_rename(const char * from, const char * to)
+{
+	register_t retval[2];
+	int error = 0;
+	int rv = -1;
+	struct sys___posix_rename_args callarg;
+
+	memset(&callarg, 0, sizeof(callarg));
+	SPARG(&callarg, from) = from;
+	SPARG(&callarg, to) = to;
+
+	error = rsys_syscall(SYS___posix_rename, &callarg, sizeof(callarg), retval);
+	rsys_seterrno(error);
+	if (error == 0) {
+		if (sizeof(int) > sizeof(register_t))
+			rv = *(int *)retval;
+		else
+			rv = *retval;
+	}
+	return rv;
+}
+#ifdef RUMP_KERNEL_IS_LIBC
+__weak_alias(__posix_rename,rump___sysimpl___posix_rename);
+__weak_alias(___posix_rename,rump___sysimpl___posix_rename);
+__strong_alias(_sys___posix_rename,rump___sysimpl___posix_rename);
+#endif /* RUMP_KERNEL_IS_LIBC */
+
 int rump___sysimpl_lchmod(const char *, mode_t);
 int
 rump___sysimpl_lchmod(const char * path, mode_t mode)
@@ -7519,8 +7548,9 @@ struct sysent rump_sysent[] = {
 		.sy_call = (sy_call_t *)rumpns_enosys,
 	},		/* 269 = filler */
 	{
+		ns(struct sys___posix_rename_args),
 		.sy_call = (sy_call_t *)rumpns_enosys,
-},		/* 270 = __posix_rename */
+	},		/* 270 = __posix_rename */
 	{
 		.sy_call = (sy_call_t *)rumpns_enosys,
 },		/* 271 = swapctl */

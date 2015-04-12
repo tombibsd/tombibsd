@@ -180,7 +180,7 @@ intelfb_attach_task(struct i915drmkms_task *task)
 		return;
 	}
 
-	if (pmf_device_register1(sc->sc_dev, NULL, NULL, &intelfb_shutdown))
+	if (!pmf_device_register1(sc->sc_dev, NULL, NULL, &intelfb_shutdown))
 		aprint_error_dev(sc->sc_dev,
 		    "failed to register shutdown handler\n");
 

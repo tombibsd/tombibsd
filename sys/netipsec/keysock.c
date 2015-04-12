@@ -493,7 +493,7 @@ key_accept(struct socket *so, struct mbuf *nam)
 }
 
 static int
-key_bind(struct socket *so, struct mbuf *nam, struct lwp *l)
+key_bind(struct socket *so, struct sockaddr *nam, struct lwp *l)
 {
 	KASSERT(solocked(so));
 

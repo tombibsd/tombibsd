@@ -42,6 +42,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/termios.h>
 #include <sys/bus.h>
 #include <sys/intr.h>
+#include <sys/lwp.h>
 
 #include <arm/locore.h>
 

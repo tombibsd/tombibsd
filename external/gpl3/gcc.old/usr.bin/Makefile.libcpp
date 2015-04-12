@@ -1,4 +1,0 @@
-#	$NetBSD$
-
-DPADD+=		${LIBCPPOBJ}/libcpp.a
-LDADD+=		${LIBCPPOBJ}/libcpp.a

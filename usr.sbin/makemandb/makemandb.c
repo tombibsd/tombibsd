@@ -75,7 +75,7 @@ typedef struct mandb_rec {
 	secbuff errors; // ERRORS
 	char section[2];
 
-	int xr_found;
+	int xr_found; // To track whether a .Xr was seen when parsing a section
 
 	/* Fields for mandb_meta table */
 	char *md5_hash;
@@ -973,12 +973,8 @@ pmdoc_Nm(const struct mdoc_node *n, mandb_rec *rec)
 static void
 pmdoc_Nd(const struct mdoc_node *n, mandb_rec *rec)
 {
-	/*
-	 * A static variable for keeping track of whether a Xr macro was seen
-	 * previously.
-	 */
 	char *buf = NULL;
-	char *temp;
+	char *name;
 	char *nd_text;
 
 	if (n == NULL || (n->type != MDOC_TEXT && n->tok == MDOC_MAX))
@@ -988,11 +984,12 @@ pmdoc_Nd(const struct mdoc_node *n, mandb_rec *rec)
 		if (rec->xr_found && n->next) {
 			/*
 			 * An Xr macro was seen previously, so parse this
-			 * and the next node.
+			 * and the next node, as "Name(Section)".
 			 */
-			temp = n->string;
+			name = n->string;
 			n = n->next;
-			easprintf(&buf, "%s(%s)", temp, n->string);
+			assert(n->type == MDOC_TEXT);
+			easprintf(&buf, "%s(%s)", name, n->string);
 			concat(&rec->name_desc, buf);
 			free(buf);
 		} else {

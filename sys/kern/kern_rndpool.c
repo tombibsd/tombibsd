@@ -49,16 +49,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #define	TAP4	 9
 #define	TAP5	 7
 
-/*
- * Let others know: the pool is full.
- *
- * XXX these should be per-pool if we really mean to allow multiple pools.
- */
-int rnd_full = 0;			/* Flag: is the pool full? */
-int rnd_filled = 0;			/* Count: how many times filled? */
-int rnd_empty = 1;			/* Flag: is the pool empty? */
-extern int	rnd_initial_entropy;	/* Have ever hit the "threshold" */
-
 static inline void rndpool_add_one_word(rndpool_t *, u_int32_t);
 
 void
@@ -237,8 +227,6 @@ rndpool_add_data(rndpool_t *rp,
 	if (rp->stats.curentropy > RND_POOLBITS) {
 		rp->stats.discarded += (rp->stats.curentropy - RND_POOLBITS);
 		rp->stats.curentropy = RND_POOLBITS;
-		rnd_filled++;
-		rnd_full = 1;
 	}
 }
 
@@ -269,10 +257,6 @@ rndpool_extract_data(rndpool_t *rp, void *p, u_int32_t len, u_int32_t mode)
 
 	buf = p;
 	remain = len;
-
-	if (rp->stats.curentropy < RND_POOLBITS / 2) {
-		rnd_full = 0;
-	}
 
 	KASSERT(RND_ENTROPY_THRESHOLD * 2 <= sizeof(digest));
 

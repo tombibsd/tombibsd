@@ -106,7 +106,7 @@ natm_accept(struct socket *so, struct mbuf *nam)
 }
 
 static int
-natm_bind(struct socket *so, struct mbuf *nam, struct lwp *l)
+natm_bind(struct socket *so, struct sockaddr *nam, struct lwp *l)
 {
 	KASSERT(solocked(so));
 

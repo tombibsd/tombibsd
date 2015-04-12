@@ -195,8 +195,11 @@ umass_isdata_attach(struct umass_softc *sc)
 	USETW(req.wLength, sizeof *cf);
 
 	err = usbd_do_request(sc->sc_udev, &req, cf);
-	if (err)
-		return (EIO);
+	if (err) {
+		sc->bus = NULL;
+		free(scbus, M_DEVBUF);
+		return EIO;
+	}
 	DPRINTF(("umass_wd_attach info:\n  EventNotification=0x%02x "
 		 "ExternalClock=0x%02x ATAInitTimeout=0x%02x\n"
 		 "  ATAMisc1=0x%02x ATAMajorCommand=0x%02x "

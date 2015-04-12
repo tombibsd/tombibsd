@@ -518,7 +518,7 @@ message net_ip
 {Twoj adres IPv4}
 
 message net_srv_ip
-{Server IPv4 number}
+{Server IPv4 address}
 
 message net_mask
 {Maska podsieci IPv4}

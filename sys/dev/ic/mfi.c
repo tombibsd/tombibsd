@@ -3404,8 +3404,7 @@ again:
 
 	ld_size = sizeof(*ld_sync) * sc->sc_ld_list.mll_no_ld;
 	
-	ld_sync = (struct mfi_ld *) malloc(ld_size, M_DEVBUF,
-	     M_WAITOK | M_ZERO);
+	ld_sync = malloc(ld_size, M_DEVBUF, M_WAITOK | M_ZERO);
 	if (ld_sync == NULL) {
 		aprint_error_dev(sc->sc_dev, "Failed to allocate sync\n");
 		goto err;
@@ -3416,7 +3415,6 @@ again:
 
 	if ((ccb = mfi_get_ccb(sc)) == NULL) {
 		aprint_error_dev(sc->sc_dev, "Failed to get sync command\n");
-		free(ld_sync, M_DEVBUF);
 		goto err;
 	}
 	sc->sc_ldsync_ccb = ccb;

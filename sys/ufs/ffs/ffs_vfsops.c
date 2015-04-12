@@ -952,6 +952,10 @@ ffs_superblock_validate(struct fs *fs)
 		return 0;
 	if (fs->fs_fpg == 0)
 		return 0;
+	if (fs->fs_ncg == 0)
+		return 0;
+	if (fs->fs_maxbpg == 0)
+		return 0;
 
 	/* Check the number of inodes per block */
 	if (fs->fs_magic == FS_UFS1_MAGIC)

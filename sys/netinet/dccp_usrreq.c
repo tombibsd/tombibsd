@@ -1820,12 +1820,11 @@ out:
 }
 
 static int
-dccp_bind(struct socket *so, struct mbuf *m, struct lwp *l)
+dccp_bind(struct socket *so, struct sockaddr *nam, struct lwp *l)
 {
 	struct inpcb *inp;
 	int error;
-	struct sockaddr_in *sinp;
-	struct sockaddr *nam;
+	struct sockaddr_in *sin = (struct sockaddr_in *)nam;
 
 	DCCP_DEBUG((LOG_INFO, "Entering dccp_bind!\n"));
 	INP_INFO_WLOCK(&dccpbinfo);
@@ -1836,15 +1835,13 @@ dccp_bind(struct socket *so, struct mbuf *m, struct lwp *l)
 	}
 
 	/* Do not bind to multicast addresses! */
-	nam = mtod(m, struct sockaddr *);
-	sinp = (struct sockaddr_in *)nam;
-	if (sinp->sin_family == AF_INET &&
-	    IN_MULTICAST(ntohl(sinp->sin_addr.s_addr))) {
+	if (sin->sin_family == AF_INET &&
+	    IN_MULTICAST(ntohl(sin->sin_addr.s_addr))) {
 		INP_INFO_WUNLOCK(&dccpbinfo);
 		return EAFNOSUPPORT;
 	}
 	INP_LOCK(inp);
-	error = in_pcbbind(inp, m, l);
+	error = in_pcbbind(inp, sin, l);
 	INP_UNLOCK(inp);
 	INP_INFO_WUNLOCK(&dccpbinfo);
 	return error;
@@ -1964,11 +1961,11 @@ dccp_doconnect(struct socket *so, struct mbuf *m, struct lwp *l, int isipv6)
 #ifdef INET6
 		if (isipv6) {
 			DCCP_DEBUG((LOG_INFO, "Running in6_pcbbind!\n"));
-			error = in6_pcbbind(in6p, (struct mbuf *)0, l);
+			error = in6_pcbbind(in6p, NULL, l);
 		} else
 #endif /* INET6 */
 		{
-			error = in_pcbbind(inp, (struct mbuf *)0, l);
+			error = in_pcbbind(inp, NULL, l);
 		}
 		if (error) {
 			DCCP_DEBUG((LOG_INFO, "in_pcbbind=%d\n",error));
@@ -2260,7 +2257,7 @@ dccp_listen(struct socket *so, struct lwp *td)
 	INP_INFO_RUNLOCK(&dccpbinfo);
 	dp = (struct dccpcb *)inp->inp_ppcb;
 	if (inp->inp_lport == 0)
-		error = in_pcbbind(inp, (struct mbuf *)0, td);
+		error = in_pcbbind(inp, NULL, td);
 	if (error == 0) {
 		dp->state = DCCPS_LISTEN;
 		dp->who = DCCP_LISTENER;

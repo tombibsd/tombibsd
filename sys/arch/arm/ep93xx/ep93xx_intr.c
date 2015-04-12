@@ -43,6 +43,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/systm.h>
 #include <sys/malloc.h>
 #include <sys/termios.h>
+#include <sys/lwp.h>
 
 #include <sys/bus.h>
 #include <sys/intr.h>

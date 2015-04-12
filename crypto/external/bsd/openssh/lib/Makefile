@@ -11,6 +11,7 @@ atomicio.c \
 authfd.c \
 authfile.c \
 bcrypt_pbkdf.c \
+bitmap.c \
 blocks.c \
 blowfish.c \
 bufaux.c \
@@ -26,7 +27,6 @@ cipher.c \
 chacha.c \
 cleanup.c \
 compat.c \
-compress.c \
 crc32.c \
 deattack.c \
 dh.c \
@@ -55,6 +55,7 @@ misc.c \
 monitor_fdpass.c \
 msg.c \
 nchan.c \
+opacket.c \
 packet.c \
 poly1305.c \
 progressmeter.c \

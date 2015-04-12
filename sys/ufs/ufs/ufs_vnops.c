@@ -723,27 +723,30 @@ ufs_remove(void *v)
 	} */ *ap = v;
 	struct vnode	*vp, *dvp;
 	struct inode	*ip;
+	struct mount	*mp;
 	int		error;
 	struct ufs_lookup_results *ulr;
 
 	vp = ap->a_vp;
 	dvp = ap->a_dvp;
 	ip = VTOI(vp);
+	mp = dvp->v_mount;
+	KASSERT(mp == vp->v_mount);
 
 	/* XXX should handle this material another way */
 	ulr = &VTOI(dvp)->i_crap;
 	UFS_CHECK_CRAPCOUNTER(VTOI(dvp));
 
-	fstrans_start(dvp->v_mount, FSTRANS_SHARED);
+	fstrans_start(mp, FSTRANS_SHARED);
 	if (vp->v_type == VDIR || (ip->i_flags & (IMMUTABLE | APPEND)) ||
 	    (VTOI(dvp)->i_flags & APPEND))
 		error = EPERM;
 	else {
-		error = UFS_WAPBL_BEGIN(dvp->v_mount);
+		error = UFS_WAPBL_BEGIN(mp);
 		if (error == 0) {
 			error = ufs_dirremove(dvp, ulr,
 					      ip, ap->a_cnp->cn_flags, 0);
-			UFS_WAPBL_END(dvp->v_mount);
+			UFS_WAPBL_END(mp);
 		}
 	}
 	VN_KNOTE(vp, NOTE_DELETE);
@@ -753,7 +756,7 @@ ufs_remove(void *v)
 	else
 		vput(vp);
 	vput(dvp);
-	fstrans_done(dvp->v_mount);
+	fstrans_done(mp);
 	return (error);
 }
 

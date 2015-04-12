@@ -158,7 +158,7 @@ nouveaufb_attach_task(struct nouveau_task *task)
 		return;
 	}
 
-	if (pmf_device_register1(sc->sc_dev, NULL, NULL, &nouveaufb_shutdown))
+	if (!pmf_device_register1(sc->sc_dev, NULL, NULL, &nouveaufb_shutdown))
 		aprint_error_dev(sc->sc_dev,
 		    "failed to register shutdown handler\n");
 

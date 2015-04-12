@@ -31,6 +31,8 @@
 #ifndef _ARM_CORTEX_GTMR_VAR_
 #define _ARM_CORTEX_GTMR_VAR_
 
+#include <sys/percpu.h>
+
 struct gtmr_softc {
 	device_t sc_dev;
 	struct evcnt sc_ev_missing_ticks;

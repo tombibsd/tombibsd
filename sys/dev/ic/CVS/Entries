@@ -4,7 +4,7 @@
 /aac_tables.h/1.5/Tue Jun  5 04:04:14 2007/-kk/
 /aacreg.h/1.13/Thu Oct  2 08:21:57 2008/-kk/
 /aacvar.h/1.14/Sat Oct 27 17:18:18 2012/-kk/
-/ac97.c/1.95/Sat Oct 27 17:18:18 2012/-kk/
+/ac97.c/1.96/Sun Apr 12 03:35:02 2015/-kk/
 /ac97reg.h/1.13/Sun Dec 11 12:21:25 2005/-kk/
 /ac97var.h/1.23/Sat Oct 27 17:18:18 2012/-kk/
 /acpipmtimer.c/1.8/Tue Aug 18 17:47:46 2009/-kk/
@@ -141,7 +141,7 @@
 /bt485reg.h/1.3/Sun Dec 11 12:21:26 2005/-kk/
 /bt485var.h/1.4/Mon Apr 28 20:23:49 2008/-kk/
 /bt8xx.h/1.9/Wed Jan 16 13:08:54 2008/-kk/
-/bwi.c/1.25/Mon Jan 12 06:48:47 2015/-kk/
+/bwi.c/1.26/Sun Apr 12 03:35:02 2015/-kk/
 /bwireg.h/1.3/Wed Jan 28 14:49:10 2009/-kk/
 /bwivar.h/1.9/Thu Apr 12 12:52:58 2012/-kk/
 /cac.c/1.55/Sat Mar 21 02:47:12 2015/-kk/
@@ -375,7 +375,7 @@
 /mc68450reg.h/1.5/Mon Apr 28 20:23:50 2008/-kk/
 /mc6845reg.h/1.4/Sun Dec 11 12:21:27 2005/-kk/
 /mc6854reg.h/1.1/Mon Sep 10 23:41:49 2001/-kk/
-/mfi.c/1.56/Sat Mar 21 02:47:12 2015/-kk/
+/mfi.c/1.57/Sun Apr 12 03:35:03 2015/-kk/
 /mfiio.h/1.1/Wed Sep 19 21:24:29 2012/-kk/
 /mfireg.h/1.8/Wed Sep 19 21:24:29 2012/-kk/
 /mfivar.h/1.20/Wed Sep 19 21:24:29 2012/-kk/
@@ -536,7 +536,7 @@
 /smc91cxxvar.h/1.19/Sat Oct 27 17:18:22 2012/-kk/
 /smc93cx6.c/1.15/Sat Mar 14 15:36:17 2009/-kk/
 /smc93cx6var.h/1.9/Sun Dec 11 12:21:28 2005/-kk/
-/spdmem.c/1.11/Thu Apr  2 02:28:02 2015/-kk/
+/spdmem.c/1.12/Sun Apr 12 03:35:03 2015/-kk/
 /spdmemreg.h/1.2/Thu Apr  2 02:28:02 2015/-kk/
 /spdmemvar.h/1.4/Tue Mar 25 02:35:36 2014/-kk/
 /spic.c/1.19/Thu Oct 24 10:28:58 2013/-kk/

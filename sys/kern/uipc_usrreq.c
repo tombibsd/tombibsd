@@ -931,8 +931,24 @@ makeun(struct mbuf *nam, size_t *addrlen)
 	return sun;
 }
 
+/*
+ * we only need to perform this allocation until syscalls other than
+ * bind are adjusted to use sockaddr_big.
+ */
+static struct sockaddr_un *
+makeun_sb(struct sockaddr *nam, size_t *addrlen)
+{
+	struct sockaddr_un *sun;
+
+	*addrlen = nam->sa_len + 1;
+	sun = malloc(*addrlen, M_SONAME, M_WAITOK);
+	memcpy(sun, nam, nam->sa_len);
+	*(((char *)sun) + nam->sa_len) = '\0';
+	return sun;
+}
+
 static int
-unp_bind(struct socket *so, struct mbuf *nam, struct lwp *l)
+unp_bind(struct socket *so, struct sockaddr *nam, struct lwp *l)
 {
 	struct sockaddr_un *sun;
 	struct unpcb *unp;
@@ -963,7 +979,7 @@ unp_bind(struct socket *so, struct mbuf *nam, struct lwp *l)
 	sounlock(so);
 
 	p = l->l_proc;
-	sun = makeun(nam, &addrlen);
+	sun = makeun_sb(nam, &addrlen);
 
 	pb = pathbuf_create(sun->sun_path);
 	if (pb == NULL) {

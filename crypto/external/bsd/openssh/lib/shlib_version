@@ -1,5 +1,5 @@
 #	$NetBSD$
 #	Remember to update distrib/sets/lists/base/shl.* when changing
 #
-major=23
+major=24
 minor=0

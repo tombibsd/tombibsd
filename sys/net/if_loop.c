@@ -72,7 +72,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include "opt_ipx.h"
 #include "opt_mbuftrace.h"
 #include "opt_mpls.h"
-
+#include "opt_net_mpsafe.h"
 
 #include <sys/param.h>
 #include <sys/systm.h>
@@ -218,7 +218,9 @@ looutput(struct ifnet *ifp, struct mbuf *m, const struct sockaddr *dst,
 	size_t pktlen;
 
 	MCLAIM(m, ifp->if_mowner);
+#ifndef NET_MPSAFE
 	KASSERT(KERNEL_LOCKED_P());
+#endif
 
 	if ((m->m_flags & M_PKTHDR) == 0)
 		panic("looutput: no header mbuf");

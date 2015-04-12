@@ -34,6 +34,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/param.h>
 #include <sys/atomic.h>
 #include <sys/evcnt.h>
+#include <sys/lwp.h>
 #include <sys/kernel.h>
 
 #include <dev/cons.h>

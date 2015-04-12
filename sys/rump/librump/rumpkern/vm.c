@@ -95,6 +95,9 @@ static unsigned int pdaemon_waiters;
 static kmutex_t pdaemonmtx;
 static kcondvar_t pdaemoncv, oomwait;
 
+/* all local non-proc0 processes share this vmspace */
+struct vmspace *rump_vmspace_local;
+
 unsigned long rump_physmemlimit = RUMPMEM_UNLIMITED;
 static unsigned long pdlimit = RUMPMEM_UNLIMITED; /* page daemon memlimit */
 static unsigned long curphysmem;
@@ -389,6 +392,10 @@ uvm_init(void)
 
 	pool_cache_bootstrap(&pagecache, sizeof(struct vm_page), 0, 0, 0,
 	    "page$", NULL, IPL_NONE, pgctor, pgdtor, NULL);
+
+	/* create vmspace used by local clients */
+	rump_vmspace_local = kmem_zalloc(sizeof(*rump_vmspace_local), KM_SLEEP);
+	uvmspace_init(rump_vmspace_local, RUMP_PMAP_LOCAL, 0, 0, false);
 }
 
 void
@@ -396,7 +403,7 @@ uvmspace_init(struct vmspace *vm, struct pmap *pmap, vaddr_t vmin, vaddr_t vmax,
     bool topdown)
 {
 
-	vm->vm_map.pmap = pmap_kernel();
+	vm->vm_map.pmap = pmap;
 	vm->vm_refcnt = 1;
 }
 

@@ -205,6 +205,7 @@ viornd_attach( device_t parent, device_t self, void *aux)
 	viornd_get(VIORND_BUFSIZE, sc);
 	return;
 vio_failed:
+	bus_dmamap_unload(vsc->sc_dmat, sc->sc_dmamap);
 load_failed:
 	bus_dmamap_destroy(vsc->sc_dmat, sc->sc_dmamap);
 create_failed:

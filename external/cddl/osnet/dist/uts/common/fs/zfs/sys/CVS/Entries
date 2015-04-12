@@ -44,7 +44,7 @@
 /zfs_ioctl.h/1.1.1.2/Sat Feb 27 22:31:44 2010/-kk/
 /zfs_rlock.h/1.2/Mon Oct 15 14:15:59 2012/-kk/
 /zfs_vfsops.h/1.1.1.2/Sat Feb 27 22:31:45 2010/-kk/
-/zfs_znode.h/1.6/Thu Dec 11 09:06:49 2014/-kk/
+/zfs_znode.h/1.7/Sun Apr 12 03:30:16 2015/-kk/
 /zil.h/1.1.1.2/Sat Feb 27 22:31:45 2010/-kk/
 /zil_impl.h/1.1.1.2/Sat Feb 27 22:31:45 2010/-kk/
 /zio.h/1.1.1.2/Sat Feb 27 22:31:45 2010/-kk/

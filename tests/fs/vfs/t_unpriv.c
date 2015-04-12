@@ -55,8 +55,6 @@ owner(const atf_tc_t *tc, const char *mp)
 	rump_pub_lwproc_rfork(RUMP_RFCFDG);
 	if (rump_sys_setuid(1) == -1)
 		atf_tc_fail_errno("setuid");
-	if (FSTYPE_ZFS(tc))
-		atf_tc_expect_fail("PR kern/47656: Test known to be broken");
         if (rump_sys_chown(".", 1, -1) != -1 || errno != EPERM)
 		atf_tc_fail_errno("chown");
         if (rump_sys_chmod(".", 0000) != -1 || errno != EPERM) 

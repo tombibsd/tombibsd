@@ -7,7 +7,7 @@ MAN=	zpool.8
 USETBL=	yes
 SRCS=	zpool_main.c zpool_iter.c zpool_util.c zpool_vdev.c
 
-CFLAGS+="-Dprint_timestamp(a)=((void)0)"
+CPPFLAGS+=	"-Dprint_timestamp(a)=((void)0)"
 
 DPADD=	${LIBAVL} ${LIBZFS} ${LIBM} ${LIBNVPAIR} ${LIBUUTIL} ${LIBUTIL} ${LIBUMEM}
 

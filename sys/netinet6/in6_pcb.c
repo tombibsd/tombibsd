@@ -364,11 +364,10 @@ in6_pcbbind_port(struct in6pcb *in6p, struct sockaddr_in6 *sin6, struct lwp *l)
 }
 
 int
-in6_pcbbind(void *v, struct mbuf *nam, struct lwp *l)
+in6_pcbbind(void *v, struct sockaddr_in6 *sin6, struct lwp *l)
 {
 	struct in6pcb *in6p = v;
 	struct sockaddr_in6 lsin6;
-	struct sockaddr_in6 *sin6 = NULL;
 	int error;
 
 	if (in6p->in6p_af != AF_INET6)
@@ -383,10 +382,9 @@ in6_pcbbind(void *v, struct mbuf *nam, struct lwp *l)
 	      in6p->in6p_laddr.s6_addr32[3] == 0)))
 		return (EINVAL);
 
-	if (nam != NULL) {
+	if (NULL != sin6) {
 		/* We were provided a sockaddr_in6 to use. */
-		sin6 = mtod(nam, struct sockaddr_in6 *);
-		if (nam->m_len != sizeof(*sin6))
+		if (sin6->sin6_len != sizeof(*sin6))
 			return (EINVAL);
 	} else {
 		/* We always bind to *something*, even if it's "anything". */

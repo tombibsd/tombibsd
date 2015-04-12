@@ -90,7 +90,7 @@ obio_attach(device_t parent, device_t self, void *aux)
 	obio_found = true;
 
 	aprint_naive("\n");
-	aprint_normal(": On-board I/O\n");
+	aprint_normal(": %s\n", rockchip_chip_name());
 
 #ifdef ROCKCHIP_CLOCK_DEBUG
 	obio_dump_clocks();

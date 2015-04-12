@@ -19,6 +19,12 @@ See also: BUILDING, build.sh, Makefile.
 Recent changes:
 ^^^^^^^^^^^^^^^
 
+20150404:
+	Lint changes require a full rebuild of the tool, so make
+	sure to build without -u option to build.sh, or manually
+	do a make cleandir in src/tools/lint1 and
+	src/usr.bin/xlint.
+
 20150310:
 	Improvements to openssl for arm mean that update builds of
 	the openssl libraries will fail. A make cleandir in

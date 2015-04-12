@@ -331,7 +331,7 @@ pci_clear_master(struct pci_dev *pdev)
 	    PCI_COMMAND_STATUS_REG, csr);
 }
 
-#define	PCIBIOS_MIN_MEM	0	/* XXX bogus x86 kludge bollocks */
+#define	PCIBIOS_MIN_MEM	0x100000	/* XXX bogus x86 kludge bollocks */
 
 static inline bus_addr_t
 pcibios_align_resource(void *p, const struct resource *resource,

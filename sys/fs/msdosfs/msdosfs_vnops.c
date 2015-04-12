@@ -532,8 +532,13 @@ msdosfs_read(void *v)
 	} while (error == 0 && uio->uio_resid > 0 && n != 0);
 
 out:
-	if ((ap->a_ioflag & IO_SYNC) == IO_SYNC)
-		error = deupdat(dep, 1);
+	if ((ap->a_ioflag & IO_SYNC) == IO_SYNC) {
+		int uerror;
+
+		uerror = deupdat(dep, 1);
+		if (error == 0)
+			error = uerror;
+	}
 bad:
 	fstrans_done(vp->v_mount);
 	return (error);

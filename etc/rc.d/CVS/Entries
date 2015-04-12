@@ -53,7 +53,7 @@
 /makemandb/1.4/Wed Aug 29 20:34:19 2012/-kk/
 /mdnsd/1.2/Sat Jan 23 17:44:44 2010/-kk/
 /mixerctl/1.10/Fri Mar 16 22:30:22 2007/-kk/
-/modules/1.1/Sat Mar 21 19:10:43 2015/-kk/
+/modules/1.2/Sun Apr 12 03:28:30 2015/-kk/
 /mopd/1.6/Fri Aug 13 18:08:03 2004/-kk/
 /motd/1.9/Fri Aug 13 18:08:03 2004/-kk/
 /mountall/1.9/Fri Oct  3 09:05:32 2014/-kk/
@@ -86,7 +86,7 @@
 /random_seed/1.7/Fri Oct  3 09:05:32 2014/-kk/
 /rarpd/1.6/Fri Aug 13 18:08:03 2004/-kk/
 /rbootd/1.7/Fri Aug 13 18:08:03 2004/-kk/
-/resize_root/1.1/Mon Mar 30 10:58:37 2015/-kk/
+/resize_root/1.3/Sun Apr 12 03:28:30 2015/-kk/
 /rndctl/1.3/Tue Apr 21 16:08:57 2009/-kk/
 /root/1.5/Thu Apr  2 02:24:35 2015/-kk/
 /route6d/1.9/Thu Aug 18 16:46:14 2011/-kk/

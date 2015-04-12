@@ -32,12 +32,14 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <uvm/uvm_extern.h>
 
+#include "rump_private.h"
+
 /*
  * This is the MI pmap implementation for rump kernels.  It's used only by
  * architectures which do not conform to the kernel ABI.
  */
 
-struct pmap *const kernel_pmap_ptr = (struct pmap *const)-1;
+struct pmap *const kernel_pmap_ptr = RUMP_PMAP_KERNEL;
 
 void
 pmap_kenter_pa(vaddr_t va, paddr_t pa, vm_prot_t prot, u_int fl)
