@@ -555,7 +555,7 @@ cache_lookup(struct vnode *dvp, const char *name, size_t namelen,
 	/*
 	 * Unlocked except for the vnode interlock.  Call vget().
 	 */
-	error = vget(vp, LK_NOWAIT);
+	error = vget(vp, LK_NOWAIT, false /* !wait */);
 	if (error) {
 		KASSERT(error == EBUSY);
 		/*
@@ -636,7 +636,7 @@ cache_lookup_raw(struct vnode *dvp, const char *name, size_t namelen,
 	/*
 	 * Unlocked except for the vnode interlock.  Call vget().
 	 */
-	error = vget(vp, LK_NOWAIT);
+	error = vget(vp, LK_NOWAIT, false /* !wait */);
 	if (error) {
 		KASSERT(error == EBUSY);
 		/*
@@ -724,7 +724,7 @@ cache_revlookup(struct vnode *vp, struct vnode **dvpp, char **bpp, char *bufp)
 			mutex_enter(dvp->v_interlock);
 			mutex_exit(&ncp->nc_lock); 
 			mutex_exit(namecache_lock);
-			error = vget(dvp, LK_NOWAIT);
+			error = vget(dvp, LK_NOWAIT, false /* !wait */);
 			if (error) {
 				KASSERT(error == EBUSY);
 				if (bufp)

@@ -146,10 +146,10 @@ acpi_pcidev_pciroot_bus_callback(ACPI_RESOURCE *res, void *context)
 	if (*bus != -1)
 		return AE_ALREADY_EXISTS;
 
-	if (addr64.Minimum > 0xFFFF)
+	if (addr64.Address.Minimum > 0xFFFF)
 		return AE_BAD_DATA;
 
-	*bus = (int32_t)addr64.Minimum;
+	*bus = (int32_t)addr64.Address.Minimum;
 
 	return AE_OK;
 }

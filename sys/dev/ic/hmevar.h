@@ -29,10 +29,8 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-
 #include <sys/callout.h>
-#include <sys/rnd.h>
-
+#include <sys/rndsource.h>
 
 struct hme_ring {
 	/* Ring Descriptors */

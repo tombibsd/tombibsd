@@ -193,8 +193,3 @@ DPSRCS+=	${_dst}
 
 EXTRA_FAKEHEADERS=	options.h libgcc_tm.h
 .include "../../Makefile.hacks"
-
-# XXX
-.if defined(HAVE_GCC) && ${HAVE_GCC} == 45 && ${LIBGCC_MACHINE_ARCH} == "m68k"
-COPTS._fixunsxfdi.c+=	-O0
-.endif

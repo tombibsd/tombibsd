@@ -59,9 +59,10 @@
 #include <uvm/uvm_pager.h>
 #include <uvm/uvm_pdaemon.h>
 #include <uvm/uvm_swap.h>
-#include <sys/rnd.h>
 
 #ifdef _KERNEL
+
+#include <sys/rndsource.h>
 
 /*
  * pull in VM_NFREELIST

@@ -1523,6 +1523,8 @@ btmagic_input_magict(struct btmagic_softc *sc, uint8_t *data, size_t len)
 				 */
 				 continue;
 			}
+			if (id >= __arraycount(sc->sc_ax))
+				continue;
 					
 			tx = ax - sc->sc_ax[id];
 			ty = ay - sc->sc_ay[id];
@@ -1561,6 +1563,9 @@ btmagic_input_magict(struct btmagic_softc *sc, uint8_t *data, size_t len)
 			}
 			break;
 		}
+
+		if (id >= __arraycount(sc->sc_ax))
+			continue;
 
 		sc->sc_ax[id] = ax;
 		sc->sc_ay[id] = ay;

@@ -83,7 +83,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/kmem.h>
 #include <sys/proc.h>
 #include <sys/device.h>
-#include <sys/rnd.h>
+#include <sys/rndsource.h>
 
 #include <dev/sysmon/sysmonvar.h>
 #include <prop/proplib.h>

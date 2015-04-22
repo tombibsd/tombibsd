@@ -132,8 +132,9 @@ lwproc_proc_free(struct proc *p)
 
 	/* non-local vmspaces are not shared */
 	if (!RUMP_LOCALPROC_P(p)) {
+		struct rump_spctl *ctl = (struct rump_spctl *)p->p_vmspace;
 		KASSERT(p->p_vmspace->vm_refcnt == 1);
-		kmem_free(p->p_vmspace, sizeof(*p->p_vmspace));
+		kmem_free(ctl, sizeof(*ctl));
 	}
 
 	proc_free_mem(p);
@@ -327,7 +328,7 @@ rump__lwproc_alloclwp(struct proc *p)
 	bool newproc = false;
 
 	if (p == NULL) {
-		p = lwproc_newproc(&proc0, rump_vmspace_local, 0);
+		p = lwproc_newproc(&proc0, rump_vmspace_local, RUMP_RFCFDG);
 		newproc = true;
 	}
 

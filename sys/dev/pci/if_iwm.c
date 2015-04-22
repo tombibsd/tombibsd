@@ -6616,6 +6616,11 @@ iwm_attach_hook(device_t dev)
 	callout_setfunc(&sc->sc_calib_to, iwm_calib_timeout, sc);
 
 	//task_set(&sc->init_task, iwm_init_task, sc);
+
+	if (pmf_device_register(dev, NULL, NULL))
+		pmf_class_network_register(dev, ifp);
+	else
+		aprint_error_dev(dev, "couldn't establish power handler\n");
 }
 
 static void

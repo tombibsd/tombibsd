@@ -30,6 +30,11 @@ file	arch/arm/amlogic/amlogic_com.c		amlogic_com needs-flag
 attach	genfb at amlogicio with amlogic_genfb
 file	arch/arm/amlogic/amlogic_genfb.c	amlogic_genfb needs-flag
 
+# SDIO
+device	amlogicsdio: sdmmcbus
+attach	amlogicsdio at amlogicio with amlogic_sdio
+file	arch/arm/amlogic/amlogic_sdio.c		amlogic_sdio
+
 # SDHC
 device	amlogicsdhc: sdmmcbus
 attach	amlogicsdhc at amlogicio with amlogic_sdhc

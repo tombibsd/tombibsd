@@ -496,6 +496,8 @@
 ./stand/amd64-xen/@OSRELEASE@/modules/swcrypto/swcrypto.kmod		base-kernel-modules	kmod,compatmodules
 ./stand/amd64-xen/@OSRELEASE@/modules/swsensor				base-kernel-modules	kmod,compatmodules
 ./stand/amd64-xen/@OSRELEASE@/modules/swsensor/swsensor.kmod		base-kernel-modules	kmod,compatmodules
+./stand/amd64-xen/@OSRELEASE@/modules/swwdog				base-kernel-modules	kmod,compatmodules
+./stand/amd64-xen/@OSRELEASE@/modules/swwdog/swwdog.kmod		base-kernel-modules	kmod,compatmodules
 ./stand/amd64-xen/@OSRELEASE@/modules/syscallemu			base-kernel-modules	kmod,compatmodules
 ./stand/amd64-xen/@OSRELEASE@/modules/syscallemu/syscallemu.kmod		base-kernel-modules	kmod,compatmodules
 ./stand/amd64-xen/@OSRELEASE@/modules/sysvbfs				base-kernel-modules	kmod,compatmodules

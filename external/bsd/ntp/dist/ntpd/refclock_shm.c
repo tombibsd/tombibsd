@@ -197,9 +197,8 @@ getShmTime(
 		return NULL;
 	}
 
-#endif
-
 	return p;
+#endif
 }
 /*
  * shm_start - attach to shared memory

@@ -28,6 +28,10 @@
 #ifndef _SYS_RUMP_PMAP_H_
 #define _SYS_RUMP_PMAP_H_
 
+struct pmap {
+	int vac_me_not_at_all;
+};
+
 #define pmap_update(v)
 #define pmap_is_modified(a) (true)
 #define pmap_is_referenced(a) (true)

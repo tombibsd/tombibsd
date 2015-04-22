@@ -364,7 +364,7 @@ adosfs_statvfs(struct mount *mp, struct statvfs *sbp)
 
 /*
  * lookup an anode, if not found, create
- * return locked and referenced al la vget(vp, LK_EXCLUSIVE);
+ * return locked and referenced
  */
 int
 adosfs_vget(struct mount *mp, ino_t an, struct vnode **vpp)

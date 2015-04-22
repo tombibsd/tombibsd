@@ -578,7 +578,6 @@ union_loadvnode(struct mount *mp, struct vnode *vp,
 
 	mutex_obj_hold(svp->v_interlock);
 	uvm_obj_setlock(&vp->v_uobj, svp->v_interlock);
-	vp->v_iflag |= VI_LOCKSHARE;
 
 	/* detect the root vnode (and aliases) */
 	if ((un->un_uppervp == um->um_uppervp) &&
@@ -589,8 +588,6 @@ union_loadvnode(struct mount *mp, struct vnode *vp,
 				vref(un->un_lowervp);
 		}
 		vp->v_vflag |= VV_ROOT;
-	} else {
-		vp->v_iflag |= VI_LAYER;
 	}
 
 	uppersz = lowersz = VNOVAL;
@@ -991,7 +988,7 @@ union_lowervp(struct vnode *vp)
 
 	if ((un->un_lowervp != NULLVP) &&
 	    (vp->v_type == un->un_lowervp->v_type)) {
-		if (vget(un->un_lowervp, 0) == 0)
+		if (vget(un->un_lowervp, 0, true /* wait */) == 0)
 			return (un->un_lowervp);
 	}
 

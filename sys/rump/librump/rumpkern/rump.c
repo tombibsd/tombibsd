@@ -71,6 +71,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/vmem.h>
 #include <sys/xcall.h>
 #include <sys/cprng.h>
+#include <sys/rnd.h>
 #include <sys/ktrace.h>
 
 #include <rump/rumpuser.h>
@@ -491,6 +492,7 @@ rump_init(void)
 	mutex_exit(proc_lock);
 	if (initproc == NULL)
 		panic("where in the world is initproc?");
+	strlcpy(initproc->p_comm, "rumplocal", sizeof(initproc->p_comm));
 
 	rump_component_init(RUMP_COMPONENT_POSTINIT);
 

@@ -66,7 +66,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/malloc.h>
 #include <sys/vnode.h>
 #include <sys/kauth.h>
-#include <sys/rnd.h>
 #if NBIO > 0
 #include <dev/ata/atavar.h>
 #include <dev/ata/atareg.h>

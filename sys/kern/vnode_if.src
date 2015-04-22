@@ -278,13 +278,14 @@ vop_remove {
 };
 
 #
-#% link               dvp     L U U
+#% link               dvp     L L L
 #% link               vp      U U U
 #
 #! link	 cnp	CREATE, LOCKPARENT
 #
 vop_link {
-	IN LOCKED=YES WILLPUT struct vnode *dvp;
+	VERSION 2
+	IN LOCKED=YES struct vnode *dvp;
 	IN LOCKED=NO struct vnode *vp;
 	IN struct componentname *cnp;
 };

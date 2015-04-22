@@ -37,7 +37,7 @@
 /hytp14.c/1.3/Sat Mar 21 02:37:48 2015/-kk/
 /hytp14reg.h/1.2/Sun Jul 20 13:08:32 2014/-kk/
 /hytp14var.h/1.2/Fri Oct  3 09:25:59 2014/-kk/
-/i2c.c/1.48/Sun Apr 12 03:35:01 2015/-kk/
+/i2c.c/1.49/Wed Apr 22 07:36:50 2015/-kk/
 /i2c_bitbang.c/1.13/Sun Apr 25 00:35:58 2010/-kk/
 /i2c_bitbang.h/1.2/Sun Dec 11 12:21:22 2005/-kk/
 /i2c_exec.c/1.10/Sat Mar 21 02:37:48 2015/-kk/
@@ -71,7 +71,7 @@
 /mt2131var.h/1.1/Thu Aug  4 01:45:37 2011/-kk/
 /nxt2k.c/1.4/Sat Mar 21 02:37:48 2015/-kk/
 /nxt2kvar.h/1.1/Mon Jul 11 00:30:23 2011/-kk/
-/pcf8563.c/1.6/Mon Jan 26 07:10:24 2015/-kk/
+/pcf8563.c/1.7/Wed Apr 22 07:36:50 2015/-kk/
 /pcf8563reg.h/1.2/Mon Jan 26 07:10:24 2015/-kk/
 /pcf8583.c/1.16/Tue Dec  9 04:34:57 2014/-kk/
 /pcf8583reg.h/1.3/Thu Oct 24 10:28:57 2013/-kk/

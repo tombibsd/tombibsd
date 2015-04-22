@@ -2781,7 +2781,7 @@ lfs_vref(struct vnode *vp)
  		return 0;
  	}
 
-	return vget(vp, LK_NOWAIT);
+	return vget(vp, LK_NOWAIT, false /* !wait */);
 }
 
 /*

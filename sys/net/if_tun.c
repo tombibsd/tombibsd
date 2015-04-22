@@ -435,13 +435,15 @@ tun_ioctl(struct ifnet *ifp, u_long cmd, void *data)
 {
 	int		error = 0, s;
 	struct tun_softc *tp = (struct tun_softc *)(ifp->if_softc);
-	struct ifreq *ifr = data;
+	struct ifreq *ifr = (struct ifreq *)data;
+	struct ifaddr *ifa = (struct ifaddr *)data;
 
 	s = splnet();
 
 	switch (cmd) {
 	case SIOCINITIFADDR:
 		tuninit(tp);
+		ifa->ifa_rtrequest = p2p_rtrequest;
 		TUNDEBUG("%s: address set\n", ifp->if_xname);
 		break;
 	case SIOCSIFBRDADDR:

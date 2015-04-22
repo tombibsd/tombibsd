@@ -32,6 +32,12 @@
  *
  */
 
+#ifndef	_DEV_PCI_UBSECVAR_H
+#define	_DEV_PCI_UBSECVAR_H
+
+#include <sys/types.h>
+#include <sys/rndsource.h>
+
 /* Maximum queue length */
 #ifndef UBS_MAX_NQUEUE
 #define UBS_MAX_NQUEUE		60
@@ -240,3 +246,5 @@ struct ubsec_stats {
 	u_int32_t hst_modexp;		/* MOD EXP requests */
 	u_int32_t hst_modexpcrt;	/* MOD EXP CRT requests */
 };
+
+#endif	/* _DEV_PCI_UBSECVAR_H */

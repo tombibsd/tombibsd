@@ -51,7 +51,7 @@
 #include <sys/kernel.h>
 #include <sys/device.h>
 #include <sys/callout.h>
-#include <sys/rnd.h>
+#include <sys/rndsource.h>
 #include <sys/mutex.h>
 #include <dev/pci/pcidevs.h>
 #include <dev/pci/pcivar.h>

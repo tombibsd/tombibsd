@@ -93,6 +93,7 @@ SUBDIR+=	sysvbfs
 SUBDIR+=	suser
 SUBDIR+=	swcrypto
 SUBDIR+=	swsensor
+SUBDIR+=	swwdog
 SUBDIR+=	tmpfs
 SUBDIR+=	uatp
 SUBDIR+=	udf

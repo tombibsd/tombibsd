@@ -521,6 +521,8 @@ genfs_getpages_read(struct vnode *vp, struct vm_page **pgs, int npages,
 	int i;
 	int error = 0;
 
+	UVMHIST_FUNC(__func__); UVMHIST_CALLED(ubchist);
+
 	/*
 	 * read the desired page(s).
 	 */

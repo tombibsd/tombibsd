@@ -59,7 +59,7 @@ amlogicrng0	at amlogicio0
 amlogicrtc0	at amlogicio0
 
 # SDHC controller
-amlogicsdhc0	at amlogicio0
+amlogicsdhc0	at amlogicio0 port 1
 sdmmc*		at amlogicsdhc?
 ld*		at sdmmc?
 

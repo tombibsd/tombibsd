@@ -1,3 +1,6 @@
-/xz_pipe_comp.c/1.1.1.1/Tue Feb 28 13:47:05 2012/-kk/
-/xz_pipe_decomp.c/1.1.1.1/Tue Feb 28 13:47:05 2012/-kk/
+/00_README.txt/1.1.1.1/Fri Apr 17 18:24:57 2015/-kk/
+/01_compress_easy.c/1.1.1.1/Fri Apr 17 18:24:57 2015/-kk/
+/02_decompress.c/1.1.1.1/Fri Apr 17 18:24:57 2015/-kk/
+/03_compress_custom.c/1.1.1.1/Fri Apr 17 18:24:57 2015/-kk/
+/04_compress_easy_mt.c/1.1.1.1/Fri Apr 17 18:24:57 2015/-kk/
 D

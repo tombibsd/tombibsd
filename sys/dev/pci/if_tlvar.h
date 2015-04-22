@@ -30,7 +30,7 @@
  * available from www.ti.com
  */
 
-#include <sys/rnd.h>
+#include <sys/rndsource.h>
 
 #include <dev/i2c/i2cvar.h>
 

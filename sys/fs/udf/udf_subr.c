@@ -6361,11 +6361,19 @@ derailed:
 		}
 
 		mutex_exit(&mntvnode_lock);
-		error = vget(vp, LK_EXCLUSIVE | LK_NOWAIT);
+		error = vget(vp, LK_NOWAIT, false /* !wait */);
 		if (error) {
 			mutex_enter(&mntvnode_lock);
 			if (error == ENOENT)
 				goto derailed;
+			*ndirty += 1;
+			continue;
+		}
+		error = vn_lock(vp, LK_EXCLUSIVE | LK_NOWAIT);
+		if (error) {
+			KASSERT(error == EBUSY);
+			vrele(vp);
+			mutex_enter(&mntvnode_lock);
 			*ndirty += 1;
 			continue;
 		}

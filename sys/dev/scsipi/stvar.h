@@ -49,7 +49,7 @@
  * A lot of rewhacking done by mjacob (mjacob@nas.nasa.gov).
  */
 
-#include <sys/rnd.h>
+#include <sys/rndsource.h>
 
 #include <dev/scsipi/scsipi_all.h>
 #include <dev/scsipi/scsiconf.h>

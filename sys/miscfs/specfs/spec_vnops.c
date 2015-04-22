@@ -309,7 +309,7 @@ spec_node_lookup_by_dev(enum vtype type, dev_t dev, vnode_t **vpp)
 		mutex_enter(vp->v_interlock);
 	}
 	mutex_exit(&device_lock);
-	error = vget(vp, 0);
+	error = vget(vp, 0, true /* wait */);
 	if (error != 0)
 		return error;
 	*vpp = vp;
@@ -344,7 +344,7 @@ spec_node_lookup_by_mount(struct mount *mp, vnode_t **vpp)
 	}
 	mutex_enter(vq->v_interlock);
 	mutex_exit(&device_lock);
-	error = vget(vq, 0);
+	error = vget(vq, 0, true /* wait */);
 	if (error != 0)
 		return error;
 	*vpp = vq;

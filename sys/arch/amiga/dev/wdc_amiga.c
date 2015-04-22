@@ -61,6 +61,7 @@ struct wdc_amiga_softc {
 	struct isr sc_isr;
 	struct bus_space_tag cmd_iot;
 	struct bus_space_tag ctl_iot;
+	bool gayle_intr;
 };
 
 int	wdc_amiga_probe(device_t, cfdata_t, void *);
@@ -95,8 +96,10 @@ wdc_amiga_attach(device_t parent, device_t self, void *aux)
 
 	if (is_a4000()) {
 		sc->cmd_iot.base = (bus_addr_t) ztwomap(GAYLE_IDE_BASE_A4000 + 2);
+		sc->gayle_intr = false;
 	} else {
 		sc->cmd_iot.base = (bus_addr_t) ztwomap(GAYLE_IDE_BASE + 2);
+		sc->gayle_intr = true;
 	}
 
 	sc->cmd_iot.absm = sc->ctl_iot.absm = &amiga_bus_stride_4swap;
@@ -142,7 +145,7 @@ wdc_amiga_attach(device_t parent, device_t self, void *aux)
 	sc->sc_isr.isr_ipl = 2;
 	add_isr (&sc->sc_isr);
 
-	if (!is_a4000())
+	if (sc->gayle_intr)
 		gayle_intr_enable_set(GAYLE_INT_IDE);
 
 	wdcattach(&sc->sc_channel);
@@ -160,7 +163,7 @@ wdc_amiga_intr(void *arg)
 	intreq = gayle_intr_status();
 
 	if (intreq & GAYLE_INT_IDE) {
-		if (!is_a4000())
+		if (sc->gayle_intr)
 			gayle_intr_ack(0x7C | (intreq & GAYLE_INT_IDEACK));
 		ret = wdcintr(&sc->sc_channel);
 	}

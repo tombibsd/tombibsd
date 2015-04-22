@@ -36,6 +36,7 @@
 
 #include <sys/queue.h>
 #include <sys/callout.h>
+#include <sys/rndsource.h>
 
 /*
  * Misc. definitions for Sun Cassini ethernet controllers.

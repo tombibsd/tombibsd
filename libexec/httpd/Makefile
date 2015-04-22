@@ -20,9 +20,10 @@
 #   % make COPTS="-DDO_HTPASSWD"
 
 COPTS+=	-DDO_HTPASSWD
-PROG=	httpd
-MAN=	httpd.8
-BUILDSYMLINKS+=bozohttpd.8 httpd.8
+PROG=	bozohttpd
+LINKS=	${BINDIR}/bozohttpd ${BINDIR}/httpd
+MAN=	bozohttpd.8
+MLINKS+=bozohttpd.8 httpd.8
 SRCS=	bozohttpd.c ssl-bozo.c auth-bozo.c cgi-bozo.c daemon-bozo.c \
 	tilde-luzah-bozo.c dir-index-bozo.c content-bozo.c lua-bozo.c
 SRCS+=	main.c

@@ -37,7 +37,8 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/device.h>
 #include <sys/kernel.h>
 #include <sys/bus.h>
-#include <sys/rnd.h>
+#include <sys/rndpool.h>
+#include <sys/rndsource.h>
 #include <sys/atomic.h>
 #include <sys/intr.h>
 

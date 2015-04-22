@@ -38,8 +38,8 @@
 
 void bcm2835_irq_handler(void *);
 
-#define PIC_MAXSOURCES 96
-#define PIC_MAXMAXSOURCES 128
+#define PIC_MAXSOURCES 96 + (4*32)
+#define PIC_MAXMAXSOURCES 96 + (4*32) + 32
 
 #include <arm/pic/picvar.h>
 
@@ -49,6 +49,8 @@ bcm2835_intr_establish(int irq, int ipl, int (*func)(void *), void *arg)
 
 	return intr_establish(irq, ipl, IST_LEVEL, func, arg);
 }
+
+void bcm2836mp_intr_init(struct cpu_info *);
 
 #endif	/* _LOCORE */
 

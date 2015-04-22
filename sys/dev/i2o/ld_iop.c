@@ -48,7 +48,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/dkio.h>
 #include <sys/disk.h>
 #include <sys/proc.h>
-#include <sys/rnd.h>
 
 #include <sys/bus.h>
 

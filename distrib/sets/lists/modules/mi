@@ -226,6 +226,8 @@
 ./@MODULEDIR@/swcrypto/swcrypto.kmod		base-kernel-modules	kmod
 ./@MODULEDIR@/swsensor				base-kernel-modules	kmod
 ./@MODULEDIR@/swsensor/swsensor.kmod		base-kernel-modules	kmod
+./@MODULEDIR@/swwdog				base-kernel-modules	kmod
+./@MODULEDIR@/swwdog/swwdog.kmod		base-kernel-modules	kmod
 ./@MODULEDIR@/sysvbfs				base-kernel-modules	kmod
 ./@MODULEDIR@/sysvbfs/sysvbfs.kmod		base-kernel-modules	kmod
 ./@MODULEDIR@/tmpfs				base-kernel-modules	kmod

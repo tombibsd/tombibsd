@@ -213,8 +213,8 @@
 ./usr/lib/eabi/liblwres.so.8.1			base-compat-shlib	compat,pic
 ./usr/lib/eabi/liblzf.so.1			base-compat-shlib	compat,pic
 ./usr/lib/eabi/liblzf.so.1.0			base-compat-shlib	compat,pic
-./usr/lib/eabi/liblzma.so.1			base-compat-shlib	compat,pic
-./usr/lib/eabi/liblzma.so.1.1			base-compat-shlib	compat,pic
+./usr/lib/eabi/liblzma.so.2			base-compat-shlib	compat,pic
+./usr/lib/eabi/liblzma.so.2.0			base-compat-shlib	compat,pic
 ./usr/lib/eabi/libm.so.0				base-compat-shlib	compat,pic
 ./usr/lib/eabi/libm.so.0.11			base-compat-shlib	compat,pic
 ./usr/lib/eabi/libmagic.so.5			base-compat-shlib	compat,pic
@@ -531,8 +531,8 @@
 ./usr/lib/eabihf/liblwres.so.8.1			base-compat-shlib	compat,pic
 ./usr/lib/eabihf/liblzf.so.1			base-compat-shlib	compat,pic
 ./usr/lib/eabihf/liblzf.so.1.0			base-compat-shlib	compat,pic
-./usr/lib/eabihf/liblzma.so.1			base-compat-shlib	compat,pic
-./usr/lib/eabihf/liblzma.so.1.1			base-compat-shlib	compat,pic
+./usr/lib/eabihf/liblzma.so.2			base-compat-shlib	compat,pic
+./usr/lib/eabihf/liblzma.so.2.0			base-compat-shlib	compat,pic
 ./usr/lib/eabihf/libm.so.0				base-compat-shlib	compat,pic
 ./usr/lib/eabihf/libm.so.0.11			base-compat-shlib	compat,pic
 ./usr/lib/eabihf/libmagic.so.5			base-compat-shlib	compat,pic
@@ -847,8 +847,8 @@
 ./usr/lib/oabi/liblwres.so.8.1			base-compat-shlib	compat,pic
 ./usr/lib/oabi/liblzf.so.1			base-compat-shlib	compat,pic
 ./usr/lib/oabi/liblzf.so.1.0			base-compat-shlib	compat,pic
-./usr/lib/oabi/liblzma.so.1			base-compat-shlib	compat,pic
-./usr/lib/oabi/liblzma.so.1.1			base-compat-shlib	compat,pic
+./usr/lib/oabi/liblzma.so.2			base-compat-shlib	compat,pic
+./usr/lib/oabi/liblzma.so.2.0			base-compat-shlib	compat,pic
 ./usr/lib/oabi/libm.so.0			base-compat-shlib	compat,pic
 ./usr/lib/oabi/libm.so.0.11			base-compat-shlib	compat,pic
 ./usr/lib/oabi/libmagic.so.5			base-compat-shlib	compat,pic

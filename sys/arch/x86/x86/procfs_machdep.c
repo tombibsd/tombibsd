@@ -196,7 +196,7 @@ procfs_getonecpu(int xcpu, struct cpu_info *ci, char *bf, size_t *len)
 
 		freq = (ci->ci_data.cpu_cc_freq + 4999) / 1000000;
 		fraq = ((ci->ci_data.cpu_cc_freq + 4999) / 10000) % 100;
-		l = snprintf(p, left, "cpu MHz\t\t: %" PRIu64 ".%" PRIu64 "\n",
+		l = snprintf(p, left, "cpu MHz\t\t: %" PRIu64 ".%02" PRIu64 "\n",
 		    freq, fraq);
 	} else
 		l = snprintf(p, left, "cpu MHz\t\t: unknown\n");

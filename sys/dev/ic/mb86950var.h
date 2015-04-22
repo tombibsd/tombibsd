@@ -30,6 +30,8 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <sys/rndsource.h>
+
 /*
  * Adapted from if_qnreg.h for the amiga port of NetBSD by Dave J. Barnes, 2004.
  */

@@ -77,7 +77,7 @@
 
 #include <sys/device.h>
 
-#include <sys/rnd.h>
+#include <sys/rndsource.h>
 
 #include <net/if.h>
 #include <net/if_dl.h>

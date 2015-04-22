@@ -49,7 +49,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/device.h>
 #include <sys/timetc.h>
 #include <sys/intr.h>
-#include <sys/rnd.h>
+#include <sys/rndsource.h>
 
 #include <dev/clock_subr.h>	/* hmm.. this should probably move to sys */
 

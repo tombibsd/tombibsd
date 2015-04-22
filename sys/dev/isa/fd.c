@@ -115,7 +115,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/fdio.h>
 #include <sys/conf.h>
 #include <sys/vnode.h>
-#include <sys/rnd.h>
+#include <sys/rndsource.h>
 
 #include <prop/proplib.h>
 

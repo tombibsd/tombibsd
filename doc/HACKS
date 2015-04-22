@@ -928,6 +928,16 @@ port	ia64
 		{standard input}:22978: Warning: This is the location of the conflicting usage
 	kcah
 
+	hack	libgcc unwind dummy function
+	cdate	Fri Apr 17 14:31:03 CEST 2015
+	who	martin
+	file	src/external/gpl3/gcc/dist/libgcc/config/ia64/unwind-ia64.c: 1.4
+	descr
+		Add an empty _Unwind_FindTableEntry() implementation.
+		In the end we will use our libc stuff, and this should
+		go away again.
+	kcah
+
 port	x68k
 
 	hack	compiler error with gcc 4.5.x

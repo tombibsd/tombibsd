@@ -73,7 +73,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <uvm/uvm.h>
 
-#include <sys/rnd.h>
+#include <sys/rndsource.h>
 
 #include <xen/hypervisor.h>
 #include <xen/evtchn.h>

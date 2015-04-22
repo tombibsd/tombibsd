@@ -744,7 +744,7 @@ out:
 int
 tmpfs_link(void *v)
 {
-	struct vop_link_args /* {
+	struct vop_link_v2_args /* {
 		struct vnode *a_dvp;
 		struct vnode *a_vp;
 		struct componentname *a_cnp;
@@ -801,7 +801,6 @@ tmpfs_link(void *v)
 	error = 0;
 out:
 	VOP_UNLOCK(vp);
-	vput(dvp);
 	return error;
 }
 

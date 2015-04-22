@@ -569,6 +569,9 @@ armgic_attach(device_t parent, device_t self, void *aux)
 	    "%zu sources (%zu valid)\n",
 	    sc->sc_pic.pic_maxsources, sc->sc_gic_lines);
 
+#ifdef MULTIPROCESSOR
+	sc->sc_pic.pic_cpus = kcpuset_running;
+#endif
 	pic_add(&sc->sc_pic, 0);
 
 	/*
@@ -608,7 +611,7 @@ armgic_attach(device_t parent, device_t self, void *aux)
 #endif
 #ifdef MULTIPROCESSOR
 	intr_establish(ARMGIC_SGI_IPIBASE + IPI_AST, IPL_VM,
-	    IST_MPSAFE | IST_EDGE, pic_ipi_nop, (void *)-1);
+	    IST_MPSAFE | IST_EDGE, pic_ipi_ast, (void *)-1);
 	intr_establish(ARMGIC_SGI_IPIBASE + IPI_XCALL, IPL_VM,
 	    IST_MPSAFE | IST_EDGE, pic_ipi_xcall, (void *)-1);
 	intr_establish(ARMGIC_SGI_IPIBASE + IPI_GENERIC, IPL_VM,
@@ -623,7 +626,7 @@ armgic_attach(device_t parent, device_t self, void *aux)
 #endif
 #ifdef __HAVE_PREEMPTION
 	intr_establish(ARMGIC_SGI_IPIBASE + IPI_KPREEMPT, IPL_VM,
-	    IST_MPSAFE | IST_EDGE, pic_ipi_nop, (void *)-1);
+	    IST_MPSAFE | IST_EDGE, pic_ipi_kpreempt, (void *)-1);
 #endif
 	armgic_cpu_init(&sc->sc_pic, curcpu());
 #endif

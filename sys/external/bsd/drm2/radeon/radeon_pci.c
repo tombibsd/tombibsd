@@ -264,20 +264,22 @@ radeon_detach(device_t self, int flags)
 		return error;
 
 	if (sc->sc_task_state == RADEON_TASK_ATTACH)
-		return 0;
+		goto out;
 	if (sc->sc_task_u.workqueue != NULL) {
 		workqueue_destroy(sc->sc_task_u.workqueue);
 		sc->sc_task_u.workqueue = NULL;
 	}
 
 	if (sc->sc_drm_dev == NULL)
-		return 0;
+		goto out;
 	/* XXX errno Linux->NetBSD */
 	error = -drm_pci_detach(sc->sc_drm_dev, flags);
 	if (error)
 		/* XXX Kinda too late to fail now...  */
 		return error;
 	sc->sc_drm_dev = NULL;
+
+out:	pmf_device_deregister(self);
 
 	return 0;
 }
@@ -288,11 +290,12 @@ radeon_do_suspend(device_t self, const pmf_qual_t *qual)
 	struct radeon_softc *const sc = device_private(self);
 	struct drm_device *const dev = sc->sc_drm_dev;
 	int ret;
+	bool is_console = true; /* XXX */
 
 	if (dev == NULL)
 		return true;
 
-	ret = radeon_suspend_kms(dev, true, true);
+	ret = radeon_suspend_kms(dev, true, is_console);
 	if (ret)
 		return false;
 
@@ -305,11 +308,12 @@ radeon_do_resume(device_t self, const pmf_qual_t *qual)
 	struct radeon_softc *const sc = device_private(self);
 	struct drm_device *const dev = sc->sc_drm_dev;
 	int ret;
+	bool is_console = true; /* XXX */
 
 	if (dev == NULL)
 		return true;
 
-	ret = radeon_resume_kms(dev, true, true);
+	ret = radeon_resume_kms(dev, true, is_console);
 	if (ret)
 		return false;
 

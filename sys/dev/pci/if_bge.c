@@ -97,7 +97,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <net/if_media.h>
 #include <net/if_ether.h>
 
-#include <sys/rnd.h>
+#include <sys/rndsource.h>
 
 #ifdef INET
 #include <netinet/in.h>

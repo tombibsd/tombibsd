@@ -111,7 +111,6 @@ doclock(void *noarg)
 	long nsec;
 	int error;
 	int cpuindx = curcpu()->ci_index;
-	extern int hz;
 
 	error = rumpuser_clock_gettime(RUMPUSER_CLOCK_ABSMONO, &sec, &nsec);
 	if (error)

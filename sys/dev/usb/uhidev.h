@@ -31,7 +31,7 @@
  */
 
 
-#include <sys/rnd.h>
+#include <sys/rndsource.h>
 
 struct uhidev_softc {
 	device_t sc_dev;		/* base device */

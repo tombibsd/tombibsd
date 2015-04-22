@@ -1279,7 +1279,7 @@ e500_intr_cpu_send_ipi(cpuid_t target, uint32_t ipimsg)
 
 typedef void (*ipifunc_t)(void);
 
-#ifdef __HAVE_PREEEMPTION
+#ifdef __HAVE_PREEMPTION
 static void
 e500_ipi_kpreempt(void)
 {

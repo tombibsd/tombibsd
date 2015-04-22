@@ -32,7 +32,7 @@ __RCSID("$NetBSD$");
 #include <sys/types.h>
 #include <sys/fcntl.h>
 #include <sys/ioctl.h>
-#include <sys/rnd.h>
+#include <sys/rndio.h>
 
 #include <atf-c.h>
 

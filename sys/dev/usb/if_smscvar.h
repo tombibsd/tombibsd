@@ -32,6 +32,8 @@
 #ifndef _IF_SMSCVAR_H_
 #define _IF_SMSCVAR_H_
 
+#include <sys/rndsource.h>
+
 struct smsc_chain {
 	struct smsc_softc	*sc_sc;
 	usbd_xfer_handle	 sc_xfer;

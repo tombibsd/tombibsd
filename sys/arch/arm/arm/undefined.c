@@ -475,24 +475,5 @@ undefinedinstruction(trapframe_t *tf)
 	if ((fault_code & FAULT_USER) == 0)
 		return;
 
-#ifdef FAST_FPE
-	/* Optimised exit code */
-	{
-		/*
-		 * Check for reschedule request, at the moment there is only
-		 * 1 ast so this code should always be run
-		 */
-		if (curcpu()->ci_want_resched) {
-			/*
-			 * We are being preempted.
-			 */
-			preempt();
-		}
-
-		/* Invoke MI userret code */
-		mi_userret(l);
-	}
-#else
 	userret(l);
-#endif
 }

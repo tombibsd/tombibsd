@@ -1721,7 +1721,8 @@ fork(void)
 }
 #ifdef VFORK
 /* we do not have the luxury of not requiring a stackframe */
-__strong_alias(VFORK,fork);
+#define	__strong_alias_macro(m, f)	__strong_alias(m, f)
+__strong_alias_macro(VFORK,fork);
 #endif
 
 int

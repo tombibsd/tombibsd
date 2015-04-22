@@ -39,7 +39,7 @@ __KERNEL_RCSID(1, "$NetBSD$");
 #include <sys/intr.h>
 #include <sys/ioctl.h>
 #include <sys/mutex.h>
-#include <sys/rnd.h>
+#include <sys/rndsource.h>
 #include <sys/systm.h>
 
 #include <net/if.h>

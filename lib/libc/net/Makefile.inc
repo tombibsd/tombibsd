@@ -17,9 +17,6 @@ SRCS+=	base64.c ethers.c gethnamaddr.c getifaddrs.c \
 
 .if (${MKHESIOD} != "no")
 SRCS+=	hesiod.c
-.if ${HAVE_GCC:U} == "45" && ${MACHINE_CPU} == "ia64"
-COPTS.hesiod.c+=	${${ACTIVE_CC} == "gcc" :? -O1 :}
-.endif
 .endif
 
 SRCS+=	getaddrinfo.c getnameinfo.c
@@ -43,11 +40,6 @@ nslexer.c: nslexer.l nsparser.h
 #	htonl() htons() ntohl() ntohs()
 
 .include "${ARCHDIR}/net/Makefile.inc"
-
-.if ${HAVE_GCC:U} == "45" && ${MACHINE_CPU} == "arm"
-COPTS.getaddrinfo.c+=	${${ACTIVE_CC} == "gcc" :? -fno-tree-ter :}
-COPTS.gethnamaddr.c+=	${${ACTIVE_CC} == "gcc" :? -fno-tree-ter :}
-.endif
 
 MAN+=	byteorder.3 ethers.3 gethostbyname.3 getifaddrs.3 \
 	getnetent.3 getprotoent.3 getpeereid.3 \

@@ -44,7 +44,7 @@
  * they are useful.
  */
 
-#include <sys/rnd.h>
+#include <sys/rndsource.h>
 
 /*
  * Default settings for fe driver specific options.

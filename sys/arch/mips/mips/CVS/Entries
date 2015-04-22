@@ -24,7 +24,7 @@
 /fp.S/1.44/Tue Aug 16 06:55:11 2011/-kk/
 /genassym.cf/1.54/Wed Apr  6 05:38:19 2011/-kk/
 /in_cksum.c/1.15/Sun Jul 10 23:13:22 2011/-kk/
-/ipifuncs.c/1.7/Tue Jun  3 02:54:11 2014/-kk/
+/ipifuncs.c/1.8/Wed Apr 22 07:36:14 2015/-kk/
 /kgdb_machdep.c/1.17/Sun Feb 20 07:45:47 2011/-kk/
 /linux_syscall.c/1.4/Mon Apr 28 20:23:28 2008/-kk/
 /linux_trap.c/1.10/Sat Nov 21 17:40:28 2009/-kk/

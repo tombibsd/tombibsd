@@ -27,8 +27,7 @@
 #ifndef _LEMAC_VAR_H
 #define	_LEMAC_VAR_H
 
-
-#include <sys/rnd.h>
+#include <sys/rndsource.h>
 
 /*
  * Ethernet status, per interface.

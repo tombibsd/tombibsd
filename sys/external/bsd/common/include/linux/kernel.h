@@ -37,6 +37,8 @@
 #include <sys/param.h>
 #include <sys/systm.h>
 
+#include <lib/libkern/libkern.h>
+
 #define	oops_in_progress	(panicstr != NULL)
 
 #define	IS_ENABLED(option)	0 /* XXX Hmm...  */
@@ -93,16 +95,6 @@
  */
 #define	upper_32_bits(X)	((uint32_t) (((X) >> 16) >> 16))
 #define	lower_32_bits(X)	((uint32_t) ((X) & 0xffffffffUL))
-
-/*
- * Given x = &c->f, container_of(x, T, f) gives us back c, where T is
- * the type of c.
- */
-#define	container_of(PTR, TYPE, FIELD)					\
-	((TYPE *)(((char *)(PTR)) - offsetof(TYPE, FIELD) +		\
-	    0*sizeof((PTR) -						\
-		&((TYPE *)(((char *)(PTR)) -				\
-			offsetof(TYPE, FIELD)))->FIELD)))
 
 #define	ARRAY_SIZE(ARRAY)	__arraycount(ARRAY)
 

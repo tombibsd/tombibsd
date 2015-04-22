@@ -274,18 +274,17 @@ cpu_need_resched(struct cpu_info *ci, int flags)
 #endif /* __HAVE_PREEMPTION */
 		return;
 	}
-#ifdef __HAVE_PREEMPTION
-	atomic_or_uint(&ci->ci_astpending, __BIT(0));
-#else
-	ci->ci_astpending = __BIT(0);
-#endif
 #ifdef MULTIPROCESSOR
-	if (ci == curcpu() || !immed)
+	if (ci == cur_ci || !immed) {
+		setsoftast(ci);
 		return;
+	}
 	ipi = IPI_AST;
 
    send_ipi:
 	intr_ipi_send(ci->ci_kcpuset, ipi);
+#else
+	setsoftast(ci);
 #endif /* MULTIPROCESSOR */
 }
 

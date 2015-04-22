@@ -108,8 +108,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include "opt_multiprocessor.h"
 #include "opt_ntp.h"
 
-#include "rnd.h"
-
 /*
  * Override cnmagic(9) macro before including <sys/systm.h>.
  * We need to know if cn_check_magic triggered debugger, so set a flag.
@@ -141,7 +139,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/kauth.h>
 #include <sys/intr.h>
 #ifdef RND_COM
-#include <sys/rnd.h>
+#include <sys/rndsource.h>
 #endif
 
 #include <sys/bus.h>

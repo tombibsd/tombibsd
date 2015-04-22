@@ -84,7 +84,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/syscallargs.h>
 #include <sys/kauth.h>
 #include <sys/ktrace.h>
-#include <sys/rnd.h>
+#include <sys/rndsource.h>
 
 #define	MAXDESCLEN	1024
 MALLOC_DEFINE(M_SYSCTLNODE, "sysctlnode", "sysctl node structures");

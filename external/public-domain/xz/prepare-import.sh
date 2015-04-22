@@ -4,8 +4,8 @@
 set -e
 
 rm -rf dist tmp
-tar xzf xz-5.0.3.tar.gz
-mv xz-5.0.3 dist
+tar xzf xz-5.2.1.tar.gz
+mv xz-5.2.1 dist
 
 cd dist
 # Binary files derived from distribution files

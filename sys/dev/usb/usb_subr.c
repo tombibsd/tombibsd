@@ -896,12 +896,13 @@ usbd_attachinterfaces(device_t parent, usbd_device_handle dev,
 					 usbd_ifprint, config_stdsubmatch);
 		if (!dv)
 			continue;
-		ifaces[i] = 0; /* claim */
+		/* claim */
+		ifaces[i] = NULL;
 		/* account for ifaces claimed by the driver behind our back */
 		for (j = 0; j < nifaces; j++) {
 			if (!ifaces[j] && !dev->subdevs[j]) {
 				DPRINTF(("%s: interface %d claimed "
-				    "behind our back", __func__, j));
+				    "behind our back\n", __func__, j));
 				dev->subdevs[j] = dv;
 				dev->nifaces_claimed++;
 			}

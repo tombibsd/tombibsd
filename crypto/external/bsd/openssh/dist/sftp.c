@@ -732,6 +732,8 @@ process_put(struct sftp_conn *conn, char *src, char *dst, char *pwd,
 			    fflag || global_fflag) == -1)
 				err = -1;
 		}
+		free(abs_dst);
+		abs_dst = NULL;
 	}
 
 out:

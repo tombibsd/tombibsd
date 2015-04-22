@@ -2407,6 +2407,8 @@ do_sys_linkat(struct lwp *l, int fdpath, const char *path, int fdlink,
 		goto abortop;
 	}
 	error = VOP_LINK(nd.ni_dvp, vp, &nd.ni_cnd);
+	VOP_UNLOCK(nd.ni_dvp);
+	vrele(nd.ni_dvp);
 out2:
 	pathbuf_destroy(linkpb);
 out1:

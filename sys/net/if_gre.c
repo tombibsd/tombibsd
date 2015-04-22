@@ -1180,6 +1180,7 @@ static int
 gre_ioctl(struct ifnet *ifp, const u_long cmd, void *data)
 {
 	struct ifreq *ifr;
+	struct ifaddr *ifa = (struct ifaddr *)data;
 	struct if_laddrreq *lifr = (struct if_laddrreq *)data;
 	struct gre_softc *sc = ifp->if_softc;
 	struct gre_soparm *sp;
@@ -1221,6 +1222,7 @@ gre_ioctl(struct ifnet *ifp, const u_long cmd, void *data)
 			break;
 		gre_clearconf(sp, false);
 		ifp->if_flags |= IFF_UP;
+		ifa->ifa_rtrequest = p2p_rtrequest;
 		goto mksocket;
 	case SIOCSIFFLAGS:
 		if ((error = ifioctl_common(ifp, cmd, data)) != 0)

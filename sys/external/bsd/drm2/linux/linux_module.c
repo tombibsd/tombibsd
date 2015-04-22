@@ -44,7 +44,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <linux/reservation.h>
 #include <linux/workqueue.h>
 
-MODULE(MODULE_CLASS_MISC, drmkms_linux, NULL);
+MODULE(MODULE_CLASS_MISC, drmkms_linux, "i2cexec");
 
 DEFINE_WW_CLASS(reservation_ww_class __cacheline_aligned);
 

@@ -76,6 +76,9 @@
 #include <sys/termios.h>
 #include <sys/callout.h>
 #include <sys/bus.h>
+#ifdef RND_COM
+#include <sys/rndsource.h>
+#endif
 
 #ifdef	SSCOM_S3C2410
 #include <arm/s3c2xx0/s3c2410reg.h>

@@ -30,14 +30,13 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "rnd.h"
 #include "opt_multiprocessor.h"
 #include "opt_lockdebug.h"
 #include "opt_plcom.h"
 #include "opt_kgdb.h"
 
 #ifdef RND_COM
-#include <sys/rnd.h>
+#include <sys/rndsource.h>
 #endif
 
 #include <sys/callout.h>

@@ -282,11 +282,12 @@ again:
 		atomic_or_32(&node->tn_gen, TMPFS_RECLAIMING_BIT);
 		mutex_enter(vp->v_interlock);
 		mutex_exit(&node->tn_vlock);
-		error = vget(vp, LK_EXCLUSIVE);
+		error = vget(vp, 0, true /* wait */);
 		if (error == ENOENT) {
 			mutex_enter(&node->tn_vlock);
 			goto again;
 		}
+		vn_lock(vp, LK_EXCLUSIVE);
 		atomic_and_32(&node->tn_gen, ~TMPFS_RECLAIMING_BIT);
 		*vpp = vp;
 		return error;

@@ -31,7 +31,7 @@
 #include "opt_wd_softbadsect.h"
 #endif
 
-#include <sys/rnd.h>
+#include <sys/rndsource.h>
 
 struct wd_softc {
 	/* General disk infos */

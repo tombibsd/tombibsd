@@ -30,6 +30,8 @@
 #ifndef _XEN_XBDVAR_H_
 #define _XEN_XBDVAR_H_
 
+#include <sys/rndsource.h>
+
 struct xbd_softc {
 	device_t		sc_dev;		/* base device glue */
 	struct dk_softc		sc_dksc;	/* generic disk interface */

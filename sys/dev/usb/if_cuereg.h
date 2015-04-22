@@ -37,6 +37,7 @@
  * Definitions for the CATC Netmate II USB to ethernet controller.
  */
 
+#include <sys/rndsource.h>
 
 /*
  * Vendor specific control commands.

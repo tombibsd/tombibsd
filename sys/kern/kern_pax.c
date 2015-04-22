@@ -47,7 +47,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #ifdef PAX_ASLR
 #include <sys/mman.h>
-#include <sys/rnd.h>
 #include <sys/exec.h>
 
 int pax_aslr_enabled = 1;

@@ -1075,9 +1075,9 @@ out:
 int
 chfs_link(void *v)
 {
-	struct vnode *dvp = ((struct vop_link_args *) v)->a_dvp;
-	struct vnode *vp = ((struct vop_link_args *) v)->a_vp;
-	struct componentname *cnp = ((struct vop_link_args *) v)->a_cnp;
+	struct vnode *dvp = ((struct vop_link_v2_args *) v)->a_dvp;
+	struct vnode *vp = ((struct vop_link_v2_args *) v)->a_vp;
+	struct componentname *cnp = ((struct vop_link_v2_args *) v)->a_cnp;
 
 	struct chfs_inode *ip, *parent;
 	int error = 0;
@@ -1106,7 +1106,6 @@ chfs_link(void *v)
 	if (dvp != vp)
 		VOP_UNLOCK(vp);
 out:
-	vput(dvp);
 	return error;
 }
 

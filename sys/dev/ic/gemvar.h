@@ -36,7 +36,7 @@
 #include <sys/queue.h>
 #include <sys/callout.h>
 
-#include <sys/rnd.h>
+#include <sys/rndsource.h>
 
 /*
  * Misc. definitions for the Sun ``Gem'' Ethernet controller family driver.

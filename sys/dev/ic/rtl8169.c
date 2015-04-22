@@ -134,7 +134,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <netinet/ip.h>		/* XXX for IP_MAXPACKET */
 
 #include <net/bpf.h>
-#include <sys/rnd.h>
+#include <sys/rndsource.h>
 
 #include <sys/bus.h>
 

@@ -89,7 +89,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/proc.h>
 #include <sys/stat.h>
 
-#include <sys/rnd.h>
+#include <sys/rndsource.h>
 
 #include <hp300/dev/hpibvar.h>
 

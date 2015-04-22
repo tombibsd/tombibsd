@@ -41,7 +41,7 @@
 
 Package:	acpica
 Version:	20140926
-Current Vers:	20140926
+Current Vers:	20150410
 Maintainer:	Intel
 Archive Site:	http://www.acpica.org/downloads/
 Home Page:	http://www.acpica.org/
@@ -1437,8 +1437,8 @@ Location:	external/zlib/pigz/dist
 Notes:
 
 Package:	xz
-Version:	5.0.0
-Current Vers:	5.0.5 (stable) / 5.1.3alpha (devel)
+Version:	5.2.1
+Current Vers:	5.2.1
 Maintainer:	Lasse Collin <lasse.collin@tukanni.org>
 Archive Site:	http://tukaani.org/xz/
 Home Page:	http://tukaani.org/xz/

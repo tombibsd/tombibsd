@@ -31,7 +31,8 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/param.h>
 #include <sys/atomic.h>
 #include <sys/kmem.h>
-#include <sys/rnd.h>
+#include <sys/rndpool.h>
+#include <sys/rndsource.h>
 
 #include <rump/rumpuser.h>
 

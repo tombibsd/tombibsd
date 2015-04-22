@@ -45,7 +45,7 @@
 #include <compat/netbsd32/netbsd32.h>
 #endif /* COMPAT_NETBSD32 */
 
-#include <sys/rnd.h>
+#include <sys/rndio.h>
 
 /*
  * NetBSD-5 used "void *state" in the rndsource_t struct.  rndsource_t

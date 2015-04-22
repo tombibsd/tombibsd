@@ -23,7 +23,7 @@
 
 #if defined(_KERNEL)
 
-#include <sys/rnd.h>
+#include <sys/rndsource.h>
 #include <sys/callout.h>
 #include <crypto/rijndael/rijndael.h>
 

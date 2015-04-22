@@ -13,7 +13,7 @@
  * the author assume any responsibility for damages incurred with its use.
  */
 
-#include <sys/rnd.h>
+#include <sys/rndsource.h>
 
 /*
  * We include MII glue here -- some DP8390 compatible chips have

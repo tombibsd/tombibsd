@@ -861,9 +861,13 @@ server_loop2(Authctxt *authctxt)
 		if (!rekeying) {
 			channel_after_select(readset, writeset);
 			if (packet_need_rekeying()) {
+				int r;
 				debug("need rekeying");
-				active_state->kex->done = 0;
-				kex_send_kexinit(active_state);
+				if (active_state->kex)
+					active_state->kex->done = 0;
+				if ((r = kex_send_kexinit(active_state)) != 0)
+					logit("%s: kex_send_kexinit: %s",
+					    __func__, ssh_err(r));
 			}
 		}
 		process_input(readset);

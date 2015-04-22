@@ -404,7 +404,7 @@ again:
 		TAILQ_INSERT_AFTER(&mp->mnt_vnodelist, vp, mvp, v_mntvnodes);
 		mvp->v_usecount = 1;
 		mutex_exit(&mntvnode_lock);
-		error = vget(vp, 0);
+		error = vget(vp, 0, true /* wait */);
 		KASSERT(error == 0 || error == ENOENT);
 	} while (error != 0);
 

@@ -60,7 +60,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <net/bpf.h>
 #include <net/bpfdesc.h>
 
-#include <sys/rnd.h>
+#include <sys/rndsource.h>
 
 #include <emips/ebus/ebusvar.h>
 #include <emips/emips/machdep.h>

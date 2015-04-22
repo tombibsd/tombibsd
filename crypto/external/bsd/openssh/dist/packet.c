@@ -1262,7 +1262,7 @@ int
 ssh_packet_read_seqnr(struct ssh *ssh, u_char *typep, u_int32_t *seqnr_p)
 {
 	struct session_state *state = ssh->state;
-	int len, r, ms_remain, cont;
+	int len, r, ms_remain = 0, cont;
 	fd_set *setp;
 	char buf[8192];
 	struct timeval timeout, start, *timeoutp = NULL;

@@ -338,7 +338,7 @@ WRITE(void *v)
 			mutex_enter(vp->v_interlock);
 			VOP_PUTPAGES(vp, trunc_page(osize & fs->fs_bmask),
 			    round_page(eob),
-			    PGO_CLEANIT | PGO_SYNCIO | PGO_JOURNALLOCKED);
+			    PGO_CLEANIT | PGO_SYNCIO);
 		}
 	}
 
@@ -348,7 +348,7 @@ WRITE(void *v)
 		off_t newoff;
 
 		if (ioflag & IO_DIRECT) {
-			genfs_directio(vp, uio, ioflag | IO_JOURNALLOCKED);
+			genfs_directio(vp, uio, ioflag);
 		}
 
 		oldoff = uio->uio_offset;
@@ -432,7 +432,7 @@ WRITE(void *v)
 			mutex_enter(vp->v_interlock);
 			error = VOP_PUTPAGES(vp, (oldoff >> 16) << 16,
 			    (uio->uio_offset >> 16) << 16,
-			    PGO_CLEANIT | PGO_JOURNALLOCKED | PGO_LAZY);
+			    PGO_CLEANIT | PGO_LAZY);
 			if (error)
 				break;
 		}
@@ -444,7 +444,7 @@ WRITE(void *v)
 		mutex_enter(vp->v_interlock);
 		error = VOP_PUTPAGES(vp, trunc_page(origoff & fs->fs_bmask),
 		    round_page(lfs_blkroundup(fs, uio->uio_offset)),
-		    PGO_CLEANIT | PGO_SYNCIO | PGO_JOURNALLOCKED);
+		    PGO_CLEANIT | PGO_SYNCIO);
 	}
 
 out:
@@ -465,7 +465,7 @@ BUFWR(struct vnode *vp, struct uio *uio, int ioflag, kauth_cred_t cred)
 	FS *fs;
 	int flags;
 	struct buf *bp;
-	off_t osize, origoff;
+	off_t osize;
 	int resid, xfersize, size, blkoffset;
 	daddr_t lbn;
 	int extended=0;
@@ -498,7 +498,6 @@ BUFWR(struct vnode *vp, struct uio *uio, int ioflag, kauth_cred_t cred)
 	fstrans_start(vp->v_mount, FSTRANS_SHARED);
 
 	flags = ioflag & IO_SYNC ? B_SYNC : 0;
-	origoff = uio->uio_offset;
 	resid = uio->uio_resid;
 	osize = ip->i_size;
 	error = 0;
@@ -511,9 +510,7 @@ BUFWR(struct vnode *vp, struct uio *uio, int ioflag, kauth_cred_t cred)
 #endif /* !LFS_READWRITE */
 
 	/* XXX Should never have pages cached here.  */
-	mutex_enter(vp->v_interlock);
-	VOP_PUTPAGES(vp, trunc_page(origoff), round_page(origoff + resid),
-	    PGO_CLEANIT | PGO_FREE | PGO_SYNCIO | PGO_JOURNALLOCKED);
+	KASSERT(vp->v_uobj.uo_npages == 0);
 	while (uio->uio_resid > 0) {
 		lbn = lfs_lblkno(fs, uio->uio_offset);
 		blkoffset = lfs_blkoff(fs, uio->uio_offset);

@@ -47,8 +47,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/device.h>
 #include <sys/kmem.h>
 
-#include <sys/rnd.h>
-
 #include <machine/endian.h>
 
 #include <sys/bus.h>

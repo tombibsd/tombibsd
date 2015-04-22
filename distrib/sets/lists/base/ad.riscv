@@ -185,8 +185,8 @@
 ./usr/lib/rv32/liblwres.so.8.1			base-compat-shlib	compat,pic,arch64
 ./usr/lib/rv32/liblzf.so.1			base-compat-shlib	compat,pic,arch64
 ./usr/lib/rv32/liblzf.so.1.0			base-compat-shlib	compat,pic,arch64
-./usr/lib/rv32/liblzma.so.1			base-compat-shlib	compat,pic,arch64
-./usr/lib/rv32/liblzma.so.1.1			base-compat-shlib	compat,pic,arch64
+./usr/lib/rv32/liblzma.so.2			base-compat-shlib	compat,pic,arch64
+./usr/lib/rv32/liblzma.so.2.0			base-compat-shlib	compat,pic,arch64
 ./usr/lib/rv32/libm.so.0			base-compat-shlib	compat,pic,arch64
 ./usr/lib/rv32/libm.so.0.11			base-compat-shlib	compat,pic,arch64
 ./usr/lib/rv32/libmagic.so.5			base-compat-shlib	compat,pic,arch64

@@ -130,6 +130,9 @@ struct pic_softc {
 	volatile uint32_t pic_blocked_irqs[(PIC_MAXSOURCES + 31) / 32];
 	volatile uint32_t pic_pending_ipls;
 #endif
+#ifdef MULTIPROCESSOR
+	kcpuset_t *pic_cpus;
+#endif
 	size_t pic_maxsources;
 	percpu_t *pic_percpu;
 	uint8_t pic_id;
@@ -169,11 +172,13 @@ void	pic_set_priority(struct cpu_info *, int);
 void	pic_add(struct pic_softc *, int);
 void	pic_do_pending_int(void);
 #ifdef MULTIPROCESSOR
-int	pic_ipi_nop(void *);		// IPI_KPREEMPT tto
+int	pic_ipi_ast(void *);
+int	pic_ipi_nop(void *);
 int	pic_ipi_xcall(void *);
 int	pic_ipi_generic(void *);
 int	pic_ipi_shootdown(void *);
 int	pic_ipi_ddb(void *);
+int	pic_ipi_kpreempt(void *);
 #endif
 #ifdef __HAVE_PIC_FAST_SOFTINTS
 int	pic_handle_softint(void *);

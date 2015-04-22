@@ -309,6 +309,33 @@ tolower(int ch)
 #endif
 #endif
 
+/*
+ * Return the container of an embedded struct.  Given x = &c->f,
+ * container_of(x, T, f) yields c, where T is the type of c.  Example:
+ *
+ *	struct foo { ... };
+ *	struct bar {
+ *		int b_x;
+ *		struct foo b_foo;
+ *		...
+ *	};
+ *
+ *	struct bar b;
+ *	struct foo *fp = b.b_foo;
+ *
+ * Now we can get at b from fp by:
+ *
+ *	struct bar *bp = container_of(fp, struct bar, b_foo);
+ *
+ * The 0*sizeof((PTR) - ...) causes the compiler to warn if the type of
+ * *fp does not match the type of struct bar::b_foo.
+ */
+#define	container_of(PTR, TYPE, FIELD)					\
+	((TYPE *)(((char *)(PTR)) - offsetof(TYPE, FIELD) +		\
+	    0*sizeof((PTR) -						\
+		&((TYPE *)(((char *)(PTR)) -				\
+			offsetof(TYPE, FIELD)))->FIELD)))
+
 #define	MTPRNG_RLEN		624
 struct mtprng_state {
 	unsigned int mt_idx; 

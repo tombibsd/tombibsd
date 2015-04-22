@@ -71,7 +71,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/errno.h>
 #include <sys/queue.h>
 #include <sys/bus.h>
-#include <sys/rnd.h>
+#include <sys/rndsource.h>
 
 #include <arm/sa11x0/sa1111_reg.h>
 #include <arm/sa11x0/sa1111_var.h>

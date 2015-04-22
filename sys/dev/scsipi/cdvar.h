@@ -24,6 +24,8 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <sys/rndsource.h>
+
 #define	CDRETRIES	4
 
 struct cd_softc {

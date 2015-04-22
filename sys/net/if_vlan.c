@@ -836,6 +836,10 @@ vlan_start(struct ifnet *ifp)
 		}
 
 		ifp->if_opackets++;
+
+		p->if_obytes += m->m_pkthdr.len;
+		if (m->m_flags & M_MCAST)
+			p->if_omcasts++;
 		if ((p->if_flags & (IFF_RUNNING|IFF_OACTIVE)) == IFF_RUNNING)
 			(*p->if_start)(p);
 	}

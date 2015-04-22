@@ -48,8 +48,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/errno.h>
 #include <sys/device.h>
 
-#include <sys/rnd.h>
-
 #include <net/if.h>
 #include <net/if_dl.h>
 #include <net/if_media.h>

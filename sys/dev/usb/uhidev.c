@@ -45,6 +45,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/device.h>
 #include <sys/ioctl.h>
 #include <sys/conf.h>
+#include <sys/rndsource.h>
 
 #include <dev/usb/usb.h>
 #include <dev/usb/usbhid.h>

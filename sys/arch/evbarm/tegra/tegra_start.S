@@ -115,7 +115,7 @@ _C_LABEL(tegra_start):
 	movw	r1, #:lower16:mmu_init_table
 	movt	r1, #:upper16:mmu_init_table
 	bl	arm_boot_l1pt_init
-	XPUTC(#68)
+	XPUTC(#'D')
 
 	/*
 	 * Turn on the MMU, Caches, etc.  Return to new enabled address space.
@@ -139,7 +139,7 @@ _C_LABEL(tegra_start):
 	.pushsection .text,"ax",%progbits
 1:
 #endif
-	XPUTC2(#90)
+	XPUTC2(#'Z')
 
 	/*
 	 * Jump to start in locore.S, which in turn will call initarm and main.

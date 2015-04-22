@@ -291,7 +291,7 @@ load_identity(char *filename)
 #define	SSH_COM_PRIVATE_KEY_MAGIC	0x3f6ff9eb
 
 #ifdef WITH_OPENSSL
-static void
+__dead static void
 do_convert_to_ssh2(struct passwd *pw, struct sshkey *k)
 {
 	size_t len;

@@ -29,6 +29,8 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <sys/cprng.h>
+
 #include "iscsi_globals.h"
 
 #ifdef ISCSI_TEST_MODE

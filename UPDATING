@@ -19,6 +19,11 @@ See also: BUILDING, build.sh, Makefile.
 Recent changes:
 ^^^^^^^^^^^^^^^
 
+20150413:
+	New acpica requires "make cleandir" and reinstalling yacc
+	in /usr/src/external/bsd/byacc and /usr/src/tools/yacc and
+	also "make cleandir" in /usr/src/external/bsd/acpica.
+
 20150404:
 	Lint changes require a full rebuild of the tool, so make
 	sure to build without -u option to build.sh, or manually

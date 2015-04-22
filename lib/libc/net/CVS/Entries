@@ -2,7 +2,7 @@
 /Lint_htons.c/1.4/Wed Aug 22 07:42:09 2001/-kk/
 /Lint_ntohl.c/1.4/Wed Aug 22 07:42:09 2001/-kk/
 /Lint_ntohs.c/1.4/Wed Aug 22 07:42:09 2001/-kk/
-/Makefile.inc/1.85/Thu Oct 24 10:28:53 2013/-kk/
+/Makefile.inc/1.86/Wed Apr 22 07:35:07 2015/-kk/
 /base64.c/1.16/Tue Dec  9 04:43:24 2014/-kk/
 /byteorder.3/1.15/Tue May  3 04:07:39 2011/-kk/
 /ethers.3/1.13/Wed Apr 16 13:34:41 2003/-kk/

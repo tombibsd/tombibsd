@@ -39,6 +39,8 @@
 #ifndef _IF_GFEVAR_H_
 #define _IF_GFEVAR_H_
 
+#include <sys/rndsource.h>
+
 #define	GE_RXDESC_MEMSIZE		(1 * PAGE_SIZE)
 #define	GE_RXDESC_MAX			64
 #define	GE_RXBUF_SIZE			2048

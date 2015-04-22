@@ -27,8 +27,3 @@ INCS=verify.h
 INCSDIR=/usr/include/netpgp
 
 .include <bsd.lib.mk>
-
-.if ${HAVE_GCC:U} == "45" && ${MACHINE_CPU} == "ia64"
-COPTS.bignum.c+=	${${ACTIVE_CC} == "gcc" :? -O1 :}
-.endif
-

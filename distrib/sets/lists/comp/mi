@@ -2503,7 +2503,8 @@
 ./usr/include/lzma/hardware.h			comp-c-include
 ./usr/include/lzma/index.h			comp-c-include
 ./usr/include/lzma/index_hash.h			comp-c-include
-./usr/include/lzma/lzma.h			comp-c-include
+./usr/include/lzma/lzma.h			comp-obsolete		obsolete
+./usr/include/lzma/lzma12.h			comp-c-include
 ./usr/include/lzma/stream_flags.h		comp-c-include
 ./usr/include/lzma/version.h			comp-c-include
 ./usr/include/lzma/vli.h			comp-c-include
@@ -3267,6 +3268,7 @@
 ./usr/include/sys/resourcevar.h			comp-c-include
 ./usr/include/sys/rmd160.h			comp-c-include
 ./usr/include/sys/rnd.h				comp-c-include
+./usr/include/sys/rndio.h			comp-c-include
 ./usr/include/sys/rwlock.h			comp-c-include
 ./usr/include/sys/sa.h				comp-obsolete		obsolete
 ./usr/include/sys/satypes.h			comp-obsolete		obsolete

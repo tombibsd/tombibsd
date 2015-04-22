@@ -63,7 +63,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #endif
 
 #if defined(__NetBSD__)
-#include <sys/rnd.h>
+#include <sys/rndsource.h>
 #endif
 
 #include <net/if.h>

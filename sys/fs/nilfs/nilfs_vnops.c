@@ -1189,7 +1189,7 @@ nilfs_do_link(struct vnode *dvp, struct vnode *vp, struct componentname *cnp)
 int
 nilfs_link(void *v)
 {
-	struct vop_link_args /* {
+	struct vop_link_v2_args /* {
 		struct vnode *a_dvp;
 		struct vnode *a_vp;
 		struct componentname *a_cnp;
@@ -1205,7 +1205,6 @@ nilfs_link(void *v)
 
 	VN_KNOTE(vp, NOTE_LINK);
 	VN_KNOTE(dvp, NOTE_WRITE);
-	vput(dvp);
 
 	return error;
 }

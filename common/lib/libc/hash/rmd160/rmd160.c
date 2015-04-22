@@ -49,6 +49,7 @@ __RCSID("$NetBSD$");
 
 #endif
 
+#include <sys/endian.h>
 #include <sys/types.h>
 #include <sys/param.h>
 #include <sys/rmd160.h>

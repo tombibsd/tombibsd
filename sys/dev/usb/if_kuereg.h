@@ -41,6 +41,8 @@
  * which is used to load the firmware.
  */
 
+#include <sys/rndsource.h>
+
 #define KUE_CONFIG_NO		1
 #define KUE_IFACE_IDX		0
 

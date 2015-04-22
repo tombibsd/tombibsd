@@ -38,7 +38,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/systm.h>
 #include <sys/kernel.h>
 #include <sys/device.h>
-#include <sys/rnd.h>
 #include <sys/mutex.h>
 
 #include <dev/pci/pcireg.h>

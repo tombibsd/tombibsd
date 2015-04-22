@@ -50,7 +50,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <dev/cons.h>
 
 #ifdef RND_COM
-#include <sys/rnd.h>
+#include <sys/rndsource.h>
 #endif
 
 #include "ioconf.h"

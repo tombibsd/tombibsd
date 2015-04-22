@@ -30,7 +30,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <sys/rnd.h>
+#include <sys/rndsource.h>
 
 struct lance_softc {
 	device_t sc_dev;		/* base device glue */

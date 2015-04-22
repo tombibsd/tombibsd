@@ -47,6 +47,8 @@
  * the RX case, the data includes an optional RX status word.
  */
 
+#include <sys/rndsource.h>
+
 #define AUE_UR_READREG		0xF0
 #define AUE_UR_WRITEREG		0xF1
 

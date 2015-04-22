@@ -899,6 +899,7 @@ struct	ifaddr *ifa_ifwithroute(int, const struct sockaddr *,
 struct	ifaddr *ifaof_ifpforaddr(const struct sockaddr *, struct ifnet *);
 void	ifafree(struct ifaddr *);
 void	link_rtrequest(int, struct rtentry *, const struct rt_addrinfo *);
+void	p2p_rtrequest(int, struct rtentry *, const struct rt_addrinfo *);
 
 void	if_clone_attach(struct if_clone *);
 void	if_clone_detach(struct if_clone *);

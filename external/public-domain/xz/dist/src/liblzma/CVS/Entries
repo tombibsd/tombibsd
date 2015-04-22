@@ -1,5 +1,7 @@
-/liblzma.pc.in/1.1.1.1/Tue Nov  2 15:20:39 2010/-kk/
+/liblzma.map/1.1.1.1/Fri Apr 17 18:24:55 2015/-kk/
+/liblzma.pc.in/1.1.1.2/Wed Apr 22 07:32:15 2015/-kk/
 /liblzma_w32res.rc/1.1.1.1/Tue Nov  2 15:20:39 2010/-kk/
+/validate_map.sh/1.1.1.1/Fri Apr 17 18:24:55 2015/-kk/
 D/api////
 D/check////
 D/common////

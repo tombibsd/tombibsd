@@ -773,6 +773,7 @@ struct option tar_longopts[] = {
 	{ "gunzip",		no_argument,		0,	'z' },
 	{ "read-full-blocks",	no_argument,		0,	'B' },
 	{ "directory",		required_argument,	0,	'C' },
+	{ "xz",			no_argument,		0,	'J' },
 	{ "to-stdout",		no_argument,		0,	'O' },
 	{ "absolute-paths",	no_argument,		0,	'P' },
 	{ "sparse",		no_argument,		0,	'S' },
@@ -798,8 +799,6 @@ struct option tar_longopts[] = {
 						OPT_EXCLUDE },
 	{ "no-recursion",	no_argument,		0,
 						OPT_NORECURSE },
-	{ "xz",			no_argument,		0,
-						OPT_XZ },
 #if !HAVE_NBTOOL_CONFIG_H
 	{ "chroot",		no_argument,		0,
 						OPT_CHROOT },
@@ -877,7 +876,7 @@ tar_options(int argc, char **argv)
 	 * process option flags
 	 */
 	while ((c = getoldopt(argc, argv,
-	    "+b:cef:hjklmopqrs:tuvwxzBC:HI:OPST:X:Z014578",
+	    "+b:cef:hjklmopqrs:tuvwxzBC:HI:JOPST:X:Z014578",
 	    tar_longopts, NULL))
 	    != -1)  {
 		switch(c) {
@@ -965,9 +964,6 @@ tar_options(int argc, char **argv)
 				pids = 0;
 				nopids = 1;
 			}
-			break;
-		case 'O':
-			Oflag = 1;
 			break;
 		case 'p':
 			/*
@@ -1064,6 +1060,12 @@ tar_options(int argc, char **argv)
 			incfiles[nincfiles - 1].file = optarg;
 			incfiles[nincfiles - 1].dir = chdname;
 			break;
+		case 'J':
+			gzip_program = XZ_CMD;
+			break;
+		case 'O':
+			Oflag = 1;
+			break;
 		case 'P':
 			/*
 			 * do not remove leading '/' from pathnames
@@ -1142,9 +1144,6 @@ tar_options(int argc, char **argv)
 			do_chroot = 1;
 			break;
 #endif
-		case OPT_XZ:
-			gzip_program = XZ_CMD;
-			break;
 		default:
 			tar_usage();
 			break;
@@ -2134,8 +2133,8 @@ pax_usage(void)
 static void
 tar_usage(void)
 {
-	(void)fputs("usage: tar [-]{crtux}[-befhjklmopqvwzHOPSXZ014578] [archive] "
-		    "[blocksize]\n"
+	(void)fputs("usage: tar [-]{crtux}[-befhjklmopqvwzHJOPSXZ014578] "
+		    "[archive] [blocksize]\n"
 		    "           [-C directory] [-T file] [-s replstr] "
 		    "[file ...]\n", stderr);
 	exit(1);

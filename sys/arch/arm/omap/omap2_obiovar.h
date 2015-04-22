@@ -40,6 +40,7 @@ struct obio_attach_args {
 	bus_dma_tag_t	obio_dmat;
 	unsigned int	obio_mult;
 	unsigned int	obio_intrbase;
+	int		obio_edmabase;
 };
 
 struct obio_softc {

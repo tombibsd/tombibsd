@@ -6,7 +6,7 @@ SRCS=	args.c coder.c file_io.c hardware.c list.c main.c \
 	message.c options.c signals.c suffix.c util.c \
 	tuklib_exit.c tuklib_cpucores.c tuklib_open_stdxxx.c \
 	tuklib_mbstr_fw.c tuklib_mbstr_width.c \
-	tuklib_physmem.c tuklib_progname.c
+	tuklib_physmem.c tuklib_progname.c mytime.c
 
 USETBL=	yes
 

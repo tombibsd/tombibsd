@@ -90,7 +90,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include "rnd.h"
 #ifdef RND_COM
-#include <sys/rnd.h>
+#include <sys/rndsource.h>
 #endif
 
 /*

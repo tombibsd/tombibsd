@@ -1482,6 +1482,58 @@ if_link_state_change(struct ifnet *ifp, int link_state)
 }
 
 /*
+ * Default action when installing a local route on a point-to-point
+ * interface.
+ */
+void
+p2p_rtrequest(int req, struct rtentry *rt,
+    __unused const struct rt_addrinfo *info)
+{
+	struct ifnet *ifp = rt->rt_ifp;
+	struct ifaddr *ifa, *lo0ifa;
+
+	switch (req) {
+	case RTM_ADD:
+		if ((rt->rt_flags & RTF_LOCAL) == 0)
+			break;
+
+		IFADDR_FOREACH(ifa, ifp) {
+			if (equal(rt_getkey(rt), ifa->ifa_addr))
+				break;
+		}
+		if (ifa == NULL)
+			break;
+
+		/*
+		 * Ensure lo0 has an address of the same family.
+		 */
+		IFADDR_FOREACH(lo0ifa, lo0ifp) {
+			if (lo0ifa->ifa_addr->sa_family ==
+			    ifa->ifa_addr->sa_family)
+				break;
+		}
+		if (lo0ifa == NULL)
+			break;
+
+		rt->rt_ifp = lo0ifp;
+		rt->rt_flags &= ~RTF_LLINFO;
+
+		/*
+		 * Make sure to set rt->rt_ifa to the interface
+		 * address we are using, otherwise we will have trouble
+		 * with source address selection.
+		 */
+		if (ifa != rt->rt_ifa)
+			rt_replace_ifa(rt, ifa);
+		break;
+	case RTM_DELETE:
+	case RTM_RESOLVE:
+	default:
+		break;
+	}
+}
+
+/*
  * Mark an interface down and notify protocols of
  * the transition.
  * NOTE: must be called at splsoftnet or equivalent.

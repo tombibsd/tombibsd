@@ -38,7 +38,7 @@
 
 #include <net/if_media.h>
 
-#include <sys/rnd.h>
+#include <sys/rndsource.h>
 
 /* Enumerate the possible cip variants */
 enum seeq_variant {

@@ -69,6 +69,8 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #else
  #include <sys/cprng.h>
  #include <sys/md5.h>
+ #include <sys/rndpool.h>
+ #include <sys/rndsource.h>
 #endif
 #include <sys/sha1.h>
 

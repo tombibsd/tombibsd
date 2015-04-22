@@ -51,7 +51,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 /*
  * XXX I2C stuff should be moved to a separate drmkms_i2c module.
  */
-MODULE(MODULE_CLASS_DRIVER, drmkms, "iic,drmkms_linux");
+MODULE(MODULE_CLASS_DRIVER, drmkms, "drmkms_linux");
 
 struct mutex	drm_global_mutex;
 

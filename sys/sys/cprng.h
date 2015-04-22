@@ -37,8 +37,6 @@
 #define _CPRNG_H
 
 #include <sys/types.h>
-#include <sys/fcntl.h>		/* XXX users bogusly transitively need this */
-#include <sys/rnd.h>		/* XXX users bogusly transitively need this */
 
 #include <crypto/nist_ctr_drbg/nist_ctr_drbg.h>
 #include <crypto/cprng_fast/cprng_fast.h>

@@ -76,7 +76,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/proc.h>
 #include <sys/mutex.h>
 #include <sys/kmem.h>
-#include <sys/rnd.h>
+#include <sys/rndsource.h>
 
 #include <dev/sysmon/sysmonvar.h>
 #include <dev/sysmon/sysmon_envsysvar.h>

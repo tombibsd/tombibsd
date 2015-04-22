@@ -1254,6 +1254,7 @@
 ./usr/libexec/atf-format			base-obsolete		obsolete
 ./usr/libexec/atf-killpg			base-obsolete		obsolete
 ./usr/libexec/atrun				base-cron-bin
+./usr/libexec/bozohttpd				base-netutil-bin
 ./usr/libexec/ching				base-games-usr
 ./usr/libexec/comsat				base-mail-bin
 ./usr/libexec/cpp0				base-obsolete		obsolete

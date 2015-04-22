@@ -2634,12 +2634,12 @@ pmap_clear_reference(struct vm_page *pg)
 	pv_entry_t pv;
 	int rv;
 	int changed = 0;
-#ifdef DEBUG
+#if defined(DEBUG) && !defined(MULTIPROCESSOR)
 	int referenced = 0;
 #endif
 
 	mutex_enter(&pmap_lock);
-#ifdef DEBUG
+#if defined(DEBUG) && !defined(MULTIPROCESSOR)
 	DPRINTF(PDB_CHANGEPROT|PDB_REF, ("pmap_clear_reference(%p)\n", pg));
 	referenced = pmap_is_referenced_locked(pg);
 #endif
@@ -2695,7 +2695,7 @@ pmap_clear_reference(struct vm_page *pg)
 	}
 	dcache_flush_page_all(VM_PAGE_TO_PHYS(pg));
 	pv_check();
-#ifdef DEBUG
+#if defined(DEBUG) && !defined(MULTIPROCESSOR)
 	if (pmap_is_referenced_locked(pg)) {
 		pv = &md->mdpg_pvh;
 		printf("pmap_clear_reference(): %p still referenced "

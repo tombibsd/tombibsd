@@ -31,6 +31,8 @@ swap1_start()
 swap1_stop()
 {
 	if checkyesno swapoff || [ -n "$rc_force" ]; then
+		echo "Forcibly unmounting tmpfs filesystems"
+		umount -aft tmpfs
 		echo "Removing block-type swap devices"
 		swapctl -U -t blk || [ $? = 2 ]
 	fi

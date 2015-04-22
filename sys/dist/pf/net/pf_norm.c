@@ -46,7 +46,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/pool.h>
 
 #ifdef __NetBSD__
-#include <sys/rnd.h>
 #include <sys/cprng.h>
 #else
 #include <dev/rndvar.h>

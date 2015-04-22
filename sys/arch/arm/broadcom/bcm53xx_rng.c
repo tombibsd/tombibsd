@@ -40,7 +40,7 @@ __KERNEL_RCSID(1, "$NetBSD$");
 #include <sys/callout.h>
 #include <sys/device.h>
 #include <sys/intr.h>
-#include <sys/rnd.h>
+#include <sys/rndsource.h>
 #include <sys/systm.h>
 
 #include <arm/broadcom/bcm53xx_reg.h>

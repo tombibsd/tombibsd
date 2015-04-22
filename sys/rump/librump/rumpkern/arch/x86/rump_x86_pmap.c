@@ -34,8 +34,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include "rump_private.h"
 
-struct pmap *const kernel_pmap_ptr = RUMP_PMAP_KERNEL;
-
 void
 pmap_kenter_pa(vaddr_t va, paddr_t pa, vm_prot_t prot, u_int fl)
 {

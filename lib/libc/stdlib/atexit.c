@@ -135,6 +135,17 @@ __libc_atexit_init(void)
  *
  *	http://www.codesourcery.com/cxx-abi/abi.html#dso-dtor
  */
+#if defined(__ARM_EABI__) && !defined(lint)
+int
+__aeabi_atexit(void *arg, void (*func)(void *), void *dso);
+
+int
+__aeabi_atexit(void *arg, void (*func)(void *), void *dso)
+{
+	return __cxa_atexit(func, arg, dso);
+}
+#endif
+
 int
 __cxa_atexit(void (*func)(void *), void *arg, void *dso)
 {

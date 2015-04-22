@@ -28,7 +28,7 @@
 #ifndef _LAN9118VAR_H_
 #define _LAN9118VAR_H_
 
-#include <sys/rnd.h>
+#include <sys/rndsource.h>
 
 #define LAN9118_DEFAULT_TX_FIF_SZ	5 /*kB*/
 

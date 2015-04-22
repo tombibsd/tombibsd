@@ -87,10 +87,6 @@ struct xuio {
 	void *xuio_priv;
 };
 
-/* XXX HACK ? how xuio can be handled properly */
-#define uio_extflg	uio_offset
-#define UIO_XUIO 0x0004	/* Structure is xuio_t */
-
 #define XUIO_XUZC_PRIV(xuio)	((xuio)->xuio_priv)
 #define XUIO_XUZC_RW(xuio)	((xuio)->xuio_rw)
 

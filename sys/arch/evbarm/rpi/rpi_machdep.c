@@ -491,17 +491,22 @@ rpi_bootstrap(void)
 #if defined(BCM2836)
 	arm_cpu_max = 4;
 	extern int cortex_mmuinfo;
-	bus_space_tag_t iot = &bcm2835_bs_tag;
-	bus_space_handle_t ioh = BCM2836_ARM_LOCAL_VBASE;
 
 #ifdef VERBOSE_INIT_ARM
 	printf("%s: %d cpus present\n", __func__, arm_cpu_max);
 #endif
 
-	extern void cortex_mpstart(void);
 	cortex_mmuinfo = armreg_ttbr_read();
+#ifdef VERBOSE_INIT_ARM
+	printf("%s: cortex_mmuinfo %x\n", __func__, cortex_mmuinfo);
+#endif
+
+	extern void cortex_mpstart(void);
 
 	for (size_t i = 1; i < arm_cpu_max; i++) {
+		bus_space_tag_t iot = &bcm2835_bs_tag;
+		bus_space_handle_t ioh = BCM2836_ARM_LOCAL_VBASE;
+
 		bus_space_write_4(iot, ioh,
 		    BCM2836_LOCAL_MAILBOX3_SETN(i),
 		    (uint32_t)cortex_mpstart);
@@ -529,11 +534,6 @@ rpi_bootstrap(void)
 			    __func__, i);
 		}
 	}
-
-	/*
-	 * XXXNH: Disable non-boot CPUs for now
-	 */
-	arm_cpu_hatched = 0;
 #endif
 }
 

@@ -954,6 +954,9 @@ cpsw_init(struct ifnet *ifp)
 	}
 	sc->sc_rxhead = 0;
 
+	/* turn off flow control */
+	cpsw_write_4(sc, CPSW_SS_FLOW_CONTROL, 0);
+
 	/* align layer 3 header to 32-bit */
 	cpsw_write_4(sc, CPSW_CPDMA_RX_BUFFER_OFFSET, ETHER_ALIGN);
 

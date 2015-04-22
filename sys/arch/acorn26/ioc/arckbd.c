@@ -70,8 +70,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include "wskbd.h"
 #include "wsmouse.h"
 
-
-#include <sys/rnd.h>
+#include <sys/rndsource.h>
 
 /* #define ARCKBD_DEBUG */
 

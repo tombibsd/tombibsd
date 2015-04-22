@@ -31,6 +31,9 @@
 
 #include <sys/tty.h>
 #include <arm/at91/at91pdcvar.h>
+#ifdef RND_COM
+#include <sys/rndsource.h>
+#endif
 
 /* Hardware flag masks */
 #define COM_HW_NOIEN		0x01

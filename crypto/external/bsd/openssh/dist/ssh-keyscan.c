@@ -284,6 +284,7 @@ static void
 keyprint(con *c, struct sshkey *key)
 {
 	char *host = c->c_output_name ? c->c_output_name : c->c_name;
+	int r;
 
 	if (!key)
 		return;
@@ -291,7 +292,9 @@ keyprint(con *c, struct sshkey *key)
 		fatal("host_hash failed");
 
 	fprintf(stdout, "%s ", host);
-	sshkey_write(key, stdout);
+	if ((r = sshkey_write(key, stdout)) != 0)
+		fprintf(stderr, "key_write failed: %s", ssh_err(r));
+
 	fputs("\n", stdout);
 }
 

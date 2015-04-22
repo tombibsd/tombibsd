@@ -66,6 +66,10 @@ ifdef __ARM_FIQ_INDIRECT
 define	__ARM_FIQ_INDIRECT	1
 endif
 
+ifdef __HAVE_PREEMPTION
+define	__HAVE_PREEMPTION	1
+endif
+
 ifdef __HAVE_MM_MD_DIRECT_MAPPED_PHYS
 define	__HAVE_MM_MD_DIRECT_MAPPED_PHYS	1
 endif

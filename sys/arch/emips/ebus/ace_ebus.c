@@ -54,7 +54,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/lock.h>
 #include <sys/queue.h>
 
-#include <sys/rnd.h>
+#include <sys/rndsource.h>
 
 #include <machine/intr.h>
 #include <machine/bus.h>

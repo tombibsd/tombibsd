@@ -76,6 +76,9 @@
 #include <sys/termios.h>
 #include <sys/callout.h>
 #include <sys/bus.h>
+#ifdef RND_COM
+#include <sys/rndsource.h>
+#endif
 
 #include <arm/samsung/sscom_reg.h>
 

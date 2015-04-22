@@ -1695,7 +1695,9 @@ in6_ifinit(struct ifnet *ifp, struct in6_ifaddr *ia,
 	/* Add ownaddr as loopback rtentry, if necessary (ex. on p2p link). */
 	if (newhost) {
 		/* set the rtrequest function to create llinfo */
-		if ((ifp->if_flags & (IFF_LOOPBACK | IFF_POINTOPOINT)) == 0)
+		if (ifp->if_flags & IFF_POINTOPOINT)
+			ia->ia_ifa.ifa_rtrequest = p2p_rtrequest;
+		else if ((ifp->if_flags & IFF_LOOPBACK) == 0)
 			ia->ia_ifa.ifa_rtrequest = nd6_rtrequest;
 		in6_ifaddlocal(&ia->ia_ifa);
 	} else {

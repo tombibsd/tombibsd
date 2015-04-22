@@ -5,7 +5,7 @@
 /copyinout.S/1.1/Sun Aug 10 05:47:37 2014/-kk/
 /core_machdep.c/1.1/Sun Aug 10 05:47:37 2014/-kk/
 /cpu_in_cksum.S/1.1/Sun Aug 10 05:47:37 2014/-kk/
-/cpu_machdep.c/1.1/Sun Aug 10 05:47:37 2014/-kk/
+/cpu_machdep.c/1.2/Wed Apr 22 07:35:39 2015/-kk/
 /db_disasm.c/1.1/Sun Aug 10 05:47:37 2014/-kk/
 /db_interface.c/1.1/Sun Aug 10 05:47:37 2014/-kk/
 /db_machdep.c/1.1/Sun Aug 10 05:47:37 2014/-kk/

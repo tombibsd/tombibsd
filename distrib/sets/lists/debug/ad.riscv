@@ -102,7 +102,7 @@
 ./usr/libdata/debug/usr/lib/rv32/liblutok.so.2.0.debug		comp-kyua-debug	kyua,debug,compat,arch64
 ./usr/libdata/debug/usr/lib/rv32/liblwres.so.8.1.debug		comp-bind-debug	debug,compat,arch64
 ./usr/libdata/debug/usr/lib/rv32/liblzf.so.1.0.debug		comp-sys-debug	debug,compat,arch64
-./usr/libdata/debug/usr/lib/rv32/liblzma.so.1.1.debug		comp-sys-debug	debug,compat,arch64
+./usr/libdata/debug/usr/lib/rv32/liblzma.so.2.0.debug		comp-sys-debug	debug,compat,arch64
 ./usr/libdata/debug/usr/lib/rv32/libm.so.0.11.debug		comp-sys-debug	debug,compat,arch64
 ./usr/libdata/debug/usr/lib/rv32/libmagic.so.5.1.debug		comp-sys-debug	debug,compat,arch64
 ./usr/libdata/debug/usr/lib/rv32/libmenu.so.6.0.debug		comp-sys-debug	debug,compat,arch64

@@ -96,7 +96,7 @@
 /refclock_pcf.c/1.6/Sun Apr 12 03:30:02 2015/-kk/
 /refclock_pst.c/1.2/Sat Dec 27 03:33:44 2014/-kk/
 /refclock_ripencc.c/1.2/Sat Dec 27 03:33:44 2014/-kk/
-/refclock_shm.c/1.4/Sun Apr 12 03:30:02 2015/-kk/
+/refclock_shm.c/1.5/Wed Apr 22 07:25:40 2015/-kk/
 /refclock_tpro.c/1.2/Sat Dec 27 03:33:44 2014/-kk/
 /refclock_true.c/1.4/Sun Apr 12 03:30:02 2015/-kk/
 /refclock_tsyncpci.c/1.2/Sat Dec 27 03:33:44 2014/-kk/

@@ -44,7 +44,7 @@
 #include <sys/callout.h>
 #include <sys/mutex.h>
 #include <sys/condvar.h>
-#include <sys/rnd.h>
+#include <sys/rndsource.h>
 
 struct lwp;
 struct proc;
@@ -104,7 +104,7 @@ struct envsys_data {
 	int32_t		value_min;	/* min value */
 	int32_t		private;	/* private data for drivers */
 	sysmon_envsys_lim_t limits;	/* thresholds for monitoring */
-	int		upropset;	/* userland property set? */
+	uint32_t	upropset;	/* userland property set? */
 	krndsource_t	rnd_src;	/* source element for rnd(4) */
 	char		desc[ENVSYS_DESCLEN];	/* sensor description */
 };

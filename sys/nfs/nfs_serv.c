@@ -2222,6 +2222,9 @@ out:
 		nqsrv_getl(vp, ND_WRITE);
 		nqsrv_getl(xp, ND_WRITE);
 		error = VOP_LINK(nd.ni_dvp, vp, &nd.ni_cnd);
+		if (nd.ni_dvp != nd.ni_vp)
+			VOP_UNLOCK(nd.ni_dvp);
+		vrele(nd.ni_dvp);
 	} else {
 		VOP_ABORTOP(nd.ni_dvp, &nd.ni_cnd);
 		if (nd.ni_dvp == nd.ni_vp)
