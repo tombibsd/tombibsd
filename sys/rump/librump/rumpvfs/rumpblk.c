@@ -159,7 +159,7 @@ makedefaultlabel(struct disklabel *lp, off_t size, int part)
 	strncpy(lp->d_typename, "rumpd", sizeof(lp->d_typename));
 	strncpy(lp->d_packname, "fictitious", sizeof(lp->d_packname));
 
-	lp->d_type = DTYPE_RUMPD;
+	lp->d_type = DKTYPE_RUMPD;
 	lp->d_rpm = 11;
 	lp->d_interleave = 1;
 	lp->d_flags = 0;

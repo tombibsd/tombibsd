@@ -15,6 +15,7 @@
  */
 
 /* $OpenBSD: cipher-chachapoly.c,v 1.6 2014/07/03 12:42:16 jsing Exp $ */
+/* $OpenBSD: cipher-chachapoly.c,v 1.7 2015/01/14 10:24:42 markus Exp $ */
 #include "includes.h"
 __RCSID("$NetBSD$");
 
@@ -116,4 +117,3 @@ chachapoly_get_length(struct chachapoly_ctx *ctx,
 	*plenp = PEEK_U32(buf);
 	return 0;
 }
-

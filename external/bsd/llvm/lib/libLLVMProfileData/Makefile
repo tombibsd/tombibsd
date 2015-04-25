@@ -11,7 +11,10 @@ SRCS+=	CoverageMapping.cpp \
 	CoverageMappingWriter.cpp \
 	InstrProf.cpp \
 	InstrProfReader.cpp \
-	InstrProfWriter.cpp
+	InstrProfWriter.cpp \
+	SampleProf.cpp \
+	SampleProfReader.cpp \
+	SampleProfWriter.cpp
 
 .if defined(HOSTLIB)
 .include <bsd.hostlib.mk>

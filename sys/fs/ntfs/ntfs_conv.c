@@ -36,24 +36,13 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/param.h>
 #include <sys/systm.h>
 #include <sys/namei.h>
-#include <sys/proc.h>
 #include <sys/kernel.h>
-#include <sys/vnode.h>
 #include <sys/mount.h>
-#include <sys/buf.h>
-#include <sys/file.h>
 #include <sys/malloc.h>
-#include <sys/lock.h>
-
-#include <miscfs/specfs/specdev.h>
 
 #include <fs/ntfs/ntfs.h>
-#include <fs/ntfs/ntfsmount.h>
 #include <fs/ntfs/ntfs_inode.h>
-#include <fs/ntfs/ntfs_vfsops.h>
 #include <fs/ntfs/ntfs_subr.h>
-#include <fs/ntfs/ntfs_compr.h>
-#include <fs/ntfs/ntfs_ihash.h>
 
 /* UTF-8 encoding stuff */
 #include <fs/unicode.h>

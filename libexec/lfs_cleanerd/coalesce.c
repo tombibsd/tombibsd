@@ -118,7 +118,7 @@ get_dinode(struct clfs *fs, ino_t ino)
 	if (daddr == 0x0)
 		return NULL;
 
-	bread(fs->clfs_devvp, daddr, fs->lfs_ibsize, NOCRED, 0, &bp);
+	bread(fs->clfs_devvp, daddr, fs->lfs_ibsize, 0, &bp);
 	for (dip = (struct ulfs1_dinode *)bp->b_data;
 	     dip < (struct ulfs1_dinode *)(bp->b_data + fs->lfs_ibsize); dip++)
 		if (dip->di_inumber == ino) {
@@ -297,7 +297,7 @@ clean_inode(struct clfs *fs, ino_t ino)
 	bps = lfs_segtod(fs, 1);
 	for (tbip = bip; tbip < bip + nb; tbip += bps) {
 		do {
-			bread(fs->lfs_ivnode, 0, fs->lfs_bsize, NOCRED, 0, &bp);
+			bread(fs->lfs_ivnode, 0, fs->lfs_bsize, 0, &bp);
 			cip = *(CLEANERINFO *)bp->b_data;
 			brelse(bp, B_INVAL);
 

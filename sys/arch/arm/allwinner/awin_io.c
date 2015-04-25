@@ -219,8 +219,8 @@ awinio_attach(device_t parent, device_t self, void *aux)
 
 	sc->sc_dev = self;
 
-	sc->sc_bst = &awin_bs_tag;
-	sc->sc_a4x_bst = &awin_a4x_bs_tag;
+	sc->sc_bst = &armv7_generic_bs_tag;
+	sc->sc_a4x_bst = &armv7_generic_a4x_bs_tag;
 	sc->sc_bsh = awin_core_bsh;
 	sc->sc_dmat = &awin_dma_tag;
 	sc->sc_coherent_dmat = &awin_coherent_dma_tag;

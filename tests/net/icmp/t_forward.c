@@ -129,7 +129,7 @@ ATF_TC_HEAD(returndatabytes, tc)
 
 	atf_tc_set_md_var(tc, "descr", "icmp.returndatabytes with certain "
 	    "packets can cause kernel panic (PR kern/43548)");
-	atf_tc_set_md_var(tc, "timeout", "4"); /* just in case */
+	atf_tc_set_md_var(tc, "timeout", "20"); /* just in case */
 }
 
 ATF_TC_BODY(returndatabytes, tc)

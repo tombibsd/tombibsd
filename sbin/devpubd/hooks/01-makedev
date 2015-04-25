@@ -6,10 +6,11 @@
 #
 
 event="$1"
-device="$2"
+shift
+devices=$@
 
 case $event in
 device-attach)
-	cd /dev && sh MAKEDEV -u "$device" 2>/dev/null
+	cd /dev && sh MAKEDEV -u $devices 2>/dev/null
 	;;
 esac

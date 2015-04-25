@@ -51,6 +51,7 @@ SUBDIR+=	../external/apache2/mDNSResponder/lib
 .endif
 
 SUBDIR+=	../external/bsd/am-utils/lib
+SUBDIR+=	../external/bsd/blacklist/lib
 
 SUBDIR+=	../external/bsd/flex/lib
 SUBDIR+=	../external/bsd/tre/lib
@@ -66,7 +67,6 @@ SUBDIR+=	libbpfjit
 SUBDIR+=	../external/mit/expat/lib
 
 SUBDIR+=	../external/public-domain/sqlite/lib
-SUBDIR+=	../external/public-domain/xz/lib
 
 SUBDIR+=	../gnu/lib/libmalloc
 
@@ -89,6 +89,8 @@ SUBDIR+=	../external/lgpl3/mpc/lib/libmpc
 #
 #==================== 1st library dependency barrier ====================
 SUBDIR+=	.WAIT
+
+SUBDIR+=	../external/public-domain/xz/lib	# depends on libpthread
 
 .if (${MKCRYPTO} != "no")
 SUBDIR+=	../crypto/external/bsd/netpgp/libmj
@@ -125,8 +127,6 @@ SUBDIR+=	../external/bsd/file/lib	# depends on libz
 SUBDIR+=	../external/bsd/iscsi/lib	# depends on libpthread
 .endif
 
-SUBDIR+=	../external/bsd/libarchive/lib	# depends on libxz
-
 .if (${MKLVM} != "no")
 SUBDIR+=	../external/gpl2/lvm2/lib	# depends on libprop
 .endif
@@ -150,6 +150,8 @@ SUBDIR+=	${SANITIZER_DIR}
 
 #==================== 2nd library dependency barrier ====================
 SUBDIR+=	.WAIT
+
+SUBDIR+=	../external/bsd/libarchive/lib	# depends on libxz
 
 .if (${MKNPF} != "no")
 SUBDIR+=	npf		# depends on libnpf

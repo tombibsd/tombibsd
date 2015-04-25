@@ -479,6 +479,7 @@ void	config_create_mountrootthreads(void);
 
 int	config_finalize_register(device_t, int (*)(device_t));
 void	config_finalize(void);
+void	config_finalize_mountroot(void);
 
 void	config_twiddle_init(void);
 void	config_twiddle_fn(void *);

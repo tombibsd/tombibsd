@@ -69,6 +69,7 @@
 __KERNEL_RCSID(0, "$NetBSD$");
 
 #include "opt_ddb.h"
+#include "opt_uvm.h"
 #include "opt_uvmhist.h"
 #include "opt_readahead.h"
 
@@ -107,7 +108,10 @@ bool vm_page_zero_enable = false;
 /*
  * number of pages per-CPU to reserve for the kernel.
  */
-int vm_page_reserve_kernel = 5;
+#ifndef	UVM_RESERVED_PAGES_PER_CPU
+#define	UVM_RESERVED_PAGES_PER_CPU	5
+#endif
+int vm_page_reserve_kernel = UVM_RESERVED_PAGES_PER_CPU;
 
 /*
  * physical memory size;

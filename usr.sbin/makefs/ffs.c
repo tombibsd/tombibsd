@@ -164,7 +164,7 @@ ffs_prep_opts(fsinfo_t *fsopts)
 	      1, INT_MAX, "bytes per inode" },
 	    { 'm', "minfree", &ffs_opts->minfree, OPT_INT32,
 	      0, 99, "minfree" },
-	    { 'M', "maxbpf", &ffs_opts->maxbpg, OPT_INT32,
+	    { 'M', "maxbpg", &ffs_opts->maxbpg, OPT_INT32,
 	      1, INT_MAX, "max blocks per file in a cg" },
 	    { 'a', "avgfilesize", &ffs_opts->avgfilesize, OPT_INT32,
 	      1, INT_MAX, "expected average file size" },

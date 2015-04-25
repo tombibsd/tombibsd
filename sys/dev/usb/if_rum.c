@@ -283,18 +283,18 @@ rum_attachhook(void *xsc)
 	if (error != 0) {
 		printf("%s: failed to read firmware (error %d)\n",
 		    device_xname(sc->sc_dev), error);
-		firmware_free(ucode, 0);
+		firmware_free(ucode, size);
 		return error;
 	}
 
 	if (rum_load_microcode(sc, ucode, size) != 0) {
 		printf("%s: could not load 8051 microcode\n",
 		    device_xname(sc->sc_dev));
-		firmware_free(ucode, 0);
+		firmware_free(ucode, size);
 		return ENXIO;
 	}
 
-	firmware_free(ucode, 0);
+	firmware_free(ucode, size);
 	sc->sc_flags |= RT2573_FWLOADED;
 
 	return 0;
@@ -483,6 +483,9 @@ rum_attach(device_t parent, device_t self, void *aux)
 	usbd_add_drv_event(USB_EVENT_DRIVER_ATTACH, sc->sc_udev,
 	    sc->sc_dev);
 
+	if (!pmf_device_register(self, NULL, NULL))
+		aprint_error_dev(self, "couldn't establish power handler\n");
+
 	return;
 }
 
@@ -496,6 +499,8 @@ rum_detach(device_t self, int flags)
 
 	if (!ifp->if_softc)
 		return 0;
+
+	pmf_device_deregister(self);
 
 	s = splusb();
 

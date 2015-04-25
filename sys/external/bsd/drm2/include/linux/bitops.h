@@ -167,4 +167,11 @@ find_first_zero_bit(const unsigned long *ptr, unsigned long nbits)
 	return result;
 }
 
+static inline unsigned
+hweight8(unsigned w)
+{
+
+	return popcount(w & 0xff);
+}
+
 #endif  /* _LINUX_BITOPS_H_ */

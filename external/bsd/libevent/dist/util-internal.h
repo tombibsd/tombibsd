@@ -62,7 +62,7 @@ extern "C" {
  */
 #define _EVUTIL_NIL_CONDITION(condition) do { \
 	(void)sizeof(!(condition));  \
-} while (/*CONSTCOND*/0)
+} while(/*CONSTCOND*/0)
 
 /* Internal use only: macros to match patterns of error codes in a
    cross-platform way.  We need these macros because of two historical
@@ -320,6 +320,8 @@ HANDLE evutil_load_windows_system_library(const TCHAR *library_name);
 #define EV_SSIZE_ARG(x) EV_I64_ARG(x)
 #endif
 #endif
+
+void evutil_memclear_(void *mem, size_t len);
 
 #ifdef __cplusplus
 }

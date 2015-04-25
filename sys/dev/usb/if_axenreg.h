@@ -6,6 +6,8 @@
  *
  */
 
+#include <sys/rndsource.h>
+
 /*
  * Definitions for the ASIX Electronics AX88179 to ethernet controller.
  */

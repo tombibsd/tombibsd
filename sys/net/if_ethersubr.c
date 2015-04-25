@@ -70,6 +70,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include "opt_mpls.h"
 #include "opt_gateway.h"
 #include "opt_pppoe.h"
+#include "opt_net_mpsafe.h"
 #include "vlan.h"
 #include "pppoe.h"
 #include "bridge.h"
@@ -93,6 +94,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/intr.h>
 #include <sys/device.h>
 #include <sys/rnd.h>
+#include <sys/rndsource.h>
 
 #include <net/if.h>
 #include <net/netisr.h>
@@ -214,7 +216,9 @@ ether_output(struct ifnet * const ifp0, struct mbuf * const m0,
 	struct at_ifaddr *aa;
 #endif /* NETATALK */
 
+#ifndef NET_MPSAFE
 	KASSERT(KERNEL_LOCKED_P());
+#endif
 
 #ifdef MBUFTRACE
 	m_claimm(m, ifp->if_mowner);

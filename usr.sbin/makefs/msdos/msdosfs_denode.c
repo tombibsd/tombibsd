@@ -259,7 +259,7 @@ detrunc(struct denode *dep, u_long length, int flags, struct kauth_cred *cred)
 		if (isadir) {
 			bn = cntobn(pmp, eofentry);
 			error = bread(pmp->pm_devvp, de_bn2kb(pmp, bn),
-			    pmp->pm_bpcluster, NOCRED, B_MODIFY, &bp);
+			    pmp->pm_bpcluster, B_MODIFY, &bp);
 			if (error) {
 #ifdef MSDOSFS_DEBUG
 				printf("detrunc(): bread fails %d\n", error);

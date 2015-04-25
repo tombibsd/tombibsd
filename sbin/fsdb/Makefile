@@ -40,8 +40,3 @@ COPTS.pass1.c+=	-fno-tree-fre -fno-tree-lrs
 .endif
 
 .include <bsd.prog.mk>
-
-# XXX
-.if defined(HAVE_GCC) && ${HAVE_GCC} == 45 && ${MACHINE_ARCH} == "vax"
-COPTS.fsdb.c+=	-O0
-.endif

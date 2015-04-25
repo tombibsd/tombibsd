@@ -71,7 +71,9 @@ rk_dwcmmc_attach(device_t parent, device_t self, void *aux)
 	sc->sc_flags = DWC_MMC_F_USE_HOLD_REG | DWC_MMC_F_PWREN_CLEAR |
 		       DWC_MMC_F_FORCE_CLK;
 	sc->sc_clock_freq = rockchip_mmc0_get_rate();
+#if 0
 	sc->sc_clock_max = 24000;
+#endif
 	sc->sc_fifo_depth = 32;
 
 	bus_space_subregion(obio->obio_bst, obio->obio_bsh, obio->obio_offset,

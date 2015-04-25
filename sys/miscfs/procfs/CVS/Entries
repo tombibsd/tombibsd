@@ -13,5 +13,5 @@
 /procfs_status.c/1.36/Wed Oct 21 21:12:06 2009/-kk/
 /procfs_subr.c/1.106/Tue Dec  9 04:24:05 2014/-kk/
 /procfs_vfsops.c/1.94/Tue Dec  9 04:24:05 2014/-kk/
-/procfs_vnops.c/1.192/Fri Oct  3 09:51:01 2014/-kk/
+/procfs_vnops.c/1.193/Wed Apr 22 07:37:35 2015/-kk/
 D

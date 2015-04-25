@@ -105,6 +105,33 @@ usbd_get_config_desc_full(usbd_device_handle dev, int conf, void *d, int size)
 }
 
 usbd_status
+usbd_get_bos_desc(usbd_device_handle dev, int confidx,
+		     usb_bos_descriptor_t *d)
+{
+	usbd_status err;
+
+	DPRINTFN(3,("usbd_get_bos_desc: confidx=%d\n", confidx));
+	err = usbd_get_desc(dev, UDESC_BOS, confidx,
+			    USB_BOS_DESCRIPTOR_SIZE, d);
+	if (err)
+		return (err);
+	if (d->bDescriptorType != UDESC_BOS) {
+		DPRINTFN(-1,("usbd_get_bos_desc: confidx=%d, bad desc "
+			     "len=%d type=%d\n",
+			     confidx, d->bLength, d->bDescriptorType));
+		return (USBD_INVAL);
+	}
+	return (USBD_NORMAL_COMPLETION);
+}
+
+usbd_status
+usbd_get_bos_desc_full(usbd_device_handle dev, int conf, void *d, int size)
+{
+	DPRINTFN(3,("usbd_get_bos_desc_full: conf=%d\n", conf));
+	return (usbd_get_desc(dev, UDESC_BOS, conf, size, d));
+}
+
+usbd_status
 usbd_get_device_desc(usbd_device_handle dev, usb_device_descriptor_t *d)
 {
 	DPRINTFN(3,("usbd_get_device_desc:\n"));

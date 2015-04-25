@@ -45,6 +45,8 @@
 
 #ifdef _KERNEL
 
+#include <sys/rndsource.h>
+
 /*
  *  Some configurable values for the driver
  */

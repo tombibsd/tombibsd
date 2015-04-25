@@ -930,7 +930,7 @@ BZFILE * bzopen_or_bzdopen
    int    smallMode     = 0;
    int    nUnused       = 0; 
 
-   __USE(blockSize100k);
+   USE_ARG(blockSize100k);
 
    if (mode == NULL) return NULL;
    while (*mode) {

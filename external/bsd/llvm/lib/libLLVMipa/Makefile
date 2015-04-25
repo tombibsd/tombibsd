@@ -9,7 +9,6 @@ LIB=	LLVMipa
 SRCS+=	CallPrinter.cpp \
 	CallGraph.cpp \
 	CallGraphSCCPass.cpp \
-	FindUsedTypes.cpp \
 	GlobalsModRef.cpp \
 	IPA.cpp \
 	InlineCost.cpp

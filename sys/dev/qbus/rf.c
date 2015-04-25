@@ -460,7 +460,7 @@ rf_attach(device_t parent, device_t self, void *aux)
 	disk_init(&rf_sc->sc_disk, device_xname(rf_sc->sc_dev), &rfdkdriver);
 	disk_attach(&rf_sc->sc_disk);
 	dl = rf_sc->sc_disk.dk_label;
-	dl->d_type = DTYPE_FLOPPY;		/* drive type */
+	dl->d_type = DKTYPE_FLOPPY;		/* drive type */
 	dl->d_magic = DISKMAGIC;		/* the magic number */
 	dl->d_magic2 = DISKMAGIC;
 	dl->d_typename[0] = 'R';

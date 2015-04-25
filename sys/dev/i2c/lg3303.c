@@ -351,7 +351,7 @@ lg3303_get_ucblocks(struct lg3303 *lg)
 	return (buffer[0] << 8) | buffer[1];
 }
 
-MODULE(MODULE_CLASS_DRIVER, lg3303, "iic,dtv_math");
+MODULE(MODULE_CLASS_DRIVER, lg3303, "i2cexec,dtv_math");
 
 static int
 lg3303_modcmd(modcmd_t cmd, void *opaque)

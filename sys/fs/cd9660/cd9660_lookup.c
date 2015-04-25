@@ -394,7 +394,7 @@ cd9660_blkatoff(struct vnode *vp, off_t offset, char **res, struct buf **bpp)
 		*bpp = NULL;
 		return error;
 	}
-	if ((error = bread(devvp, lbn, bsize, NOCRED, 0, &bp)) != 0) {
+	if ((error = bread(devvp, lbn, bsize, 0, &bp)) != 0) {
 		*bpp = NULL;
 		return (error);
 	}

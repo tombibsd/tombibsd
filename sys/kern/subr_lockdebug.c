@@ -862,5 +862,6 @@ lockdebug_abort(volatile void *lock, lockops_t *ops, const char *func,
 		printf_nolog("\n");
 	}
 
-	panic("lock error");
+	panic("lock error: %s: %s: %s: lock %p cpu %d lwp %p",
+	    ops->lo_name, func, msg, lock, cpu_index(curcpu()), curlwp);
 }

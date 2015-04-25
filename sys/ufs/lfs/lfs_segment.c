@@ -702,7 +702,7 @@ lfs_segwrite(struct mount *mp, int flags)
 		for (n = 0; n < fs->lfs_segtabsz; n++) {
 			dirty = 0;
 			if (bread(fs->lfs_ivnode, fs->lfs_cleansz + n,
-			    fs->lfs_bsize, NOCRED, B_MODIFY, &bp))
+			    fs->lfs_bsize, B_MODIFY, &bp))
 				panic("lfs_segwrite: ifile read");
 			segusep = (SEGUSE *)bp->b_data;
 			maxseg = min(segleft, fs->lfs_sepb);
@@ -1504,7 +1504,7 @@ lfs_update_single(struct lfs *fs, struct segment *sp,
 		    break;
 	    default:
 		    ap = &a[num - 1];
-		    if (bread(vp, ap->in_lbn, fs->lfs_bsize, NOCRED,
+		    if (bread(vp, ap->in_lbn, fs->lfs_bsize,
 			B_MODIFY, &bp))
 			    panic("lfs_updatemeta: bread bno %" PRId64,
 				  ap->in_lbn);
@@ -2781,7 +2781,7 @@ lfs_vref(struct vnode *vp)
  		return 0;
  	}
 
-	return vget(vp, LK_NOWAIT);
+	return vget(vp, LK_NOWAIT, false /* !wait */);
 }
 
 /*

@@ -34,8 +34,6 @@
 #include <sys/cdefs.h>
 __KERNEL_RCSID(0, "$NetBSD$");
 
-#include "opt_ipsec.h"
-
 /* This code has derived from sys/net/rtsock.c on FreeBSD2.2.5 */
 
 #include <sys/types.h>
@@ -495,7 +493,7 @@ key_accept(struct socket *so, struct mbuf *nam)
 }
 
 static int
-key_bind(struct socket *so, struct mbuf *nam, struct lwp *l)
+key_bind(struct socket *so, struct sockaddr *nam, struct lwp *l)
 {
 	KASSERT(solocked(so));
 

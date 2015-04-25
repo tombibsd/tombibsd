@@ -20,5 +20,6 @@ SRCS+=	linux_list_sort.c
 SRCS+=	linux_module.c
 SRCS+=	linux_work.c
 SRCS+=	linux_writecomb.c
+SRCS+=	linux_ww_mutex.c
 
 .include <bsd.kmodule.mk>

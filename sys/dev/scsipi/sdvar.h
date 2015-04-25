@@ -51,7 +51,7 @@
 
 #include "opt_scsi.h"
 
-#include <sys/rnd.h>
+#include <sys/rndsource.h>
 
 #ifndef	SDRETRIES
 #define	SDRETRIES	4

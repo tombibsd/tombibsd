@@ -96,9 +96,8 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <miscfs/syncfs/syncfs.h>
 #include <miscfs/specfs/specdev.h>
 
-/* Root filesystem and device. */
+/* Root filesystem. */
 vnode_t *			rootvnode;
-device_t			root_device;
 
 /* Mounted filesystem list. */
 struct mntlist			mountlist;
@@ -365,8 +364,10 @@ vfs_vnode_iterator_destroy(struct vnode_iterator *vi)
 
 	mutex_enter(&mntvnode_lock);
 	KASSERT(ISSET(mvp->v_iflag, VI_MARKER));
-	if (mvp->v_usecount != 0)
+	if (mvp->v_usecount != 0) {
 		TAILQ_REMOVE(&mvp->v_mount->mnt_vnodelist, mvp, v_mntvnodes);
+		mvp->v_usecount = 0;
+	}
 	mutex_exit(&mntvnode_lock);
 	vnfree(mvp);
 }
@@ -403,7 +404,7 @@ again:
 		TAILQ_INSERT_AFTER(&mp->mnt_vnodelist, vp, mvp, v_mntvnodes);
 		mvp->v_usecount = 1;
 		mutex_exit(&mntvnode_lock);
-		error = vget(vp, 0);
+		error = vget(vp, 0, true /* wait */);
 		KASSERT(error == 0 || error == ENOENT);
 	} while (error != 0);
 

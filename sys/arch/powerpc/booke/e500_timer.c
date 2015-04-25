@@ -53,6 +53,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <powerpc/booke/e500var.h>
 #include <powerpc/booke/openpicreg.h>
 
+uint32_t ticks_per_sec;
 static u_long ns_per_tick;
 
 static void init_ppcbooke_tc(void);
@@ -173,6 +174,7 @@ calc_delayconst(void)
 	struct cpu_info * const ci = curcpu();
 
 	ci->ci_data.cpu_cc_freq = board_info_get_number("timebase-frequency");
+	ticks_per_sec = (uint32_t)ci->ci_data.cpu_cc_freq;
 	ns_per_tick = 1000000000 / (u_int)ci->ci_data.cpu_cc_freq;
 }
 

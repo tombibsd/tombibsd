@@ -39,7 +39,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/cpu.h>
 #include <sys/intr.h>
 #include <sys/percpu.h>
-#include <sys/rnd.h>
+#include <sys/rnd.h>		/* rnd_initial_entropy */
 
 /* ChaCha core */
 
@@ -233,7 +233,7 @@ cprng_fast_init_cpu(void *p, void *arg __unused, struct cpu_info *ci __unused)
 	struct cprng_fast *const cprng = p;
 	uint8_t seed[CPRNG_FAST_SEED_BYTES];
 
-	cprng_strong(kern_cprng, seed, sizeof seed, FASYNC);
+	cprng_strong(kern_cprng, seed, sizeof seed, 0);
 	cprng_fast_seed(cprng, seed);
 	cprng->have_initial = rnd_initial_entropy;
 	(void)explicit_memset(seed, 0, sizeof seed);
@@ -278,7 +278,7 @@ cprng_fast_intr(void *cookie __unused)
 	uint8_t seed[CPRNG_FAST_SEED_BYTES];
 	int s;
 
-	cprng_strong(kern_cprng, seed, sizeof(seed), FASYNC);
+	cprng_strong(kern_cprng, seed, sizeof(seed), 0);
 
 	cprng = percpu_getref(cprng_fast_percpu);
 	s = splvm();

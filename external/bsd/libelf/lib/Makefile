@@ -49,10 +49,6 @@ LIBELF_GENSRCS=	libelf_fsize.c libelf_msize.c libelf_convert.c
 CLEANFILES+=	${LIBELF_GENSRCS}
 CPPFLAGS+=	-I${.CURDIR}
 
-.if ${HAVE_GCC:U} == "45" && ${MACHINE_CPU} == "ia64"
-COPTS.libelf_extended.c+=	${${ACTIVE_CC} == "gcc" :? -O1 :}
-.endif
-
 MAN=		elf.3							\
 		elf_begin.3						\
 		elf_cntl.3						\

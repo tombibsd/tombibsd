@@ -20,6 +20,7 @@ SRCS+=	SBAddress.cpp \
 	SBDeclaration.cpp \
 	SBError.cpp \
 	SBEvent.cpp \
+	SBExecutionContext.cpp \
 	SBExpressionOptions.cpp \
 	SBFileSpec.cpp \
 	SBFileSpecList.cpp \
@@ -42,6 +43,7 @@ SRCS+=	SBAddress.cpp \
 	SBSymbolContextList.cpp \
 	SBTarget.cpp \
 	SBThread.cpp \
+	SBThreadPlan.cpp \
 	SBType.cpp \
 	SBTypeCategory.cpp \
 	SBTypeEnumMember.cpp \

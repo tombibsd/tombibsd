@@ -39,6 +39,11 @@ extern struct bus_space bcm2835_bs_tag;
 extern struct bus_space bcm2835_a4x_bs_tag;
 extern struct arm32_bus_dma_tag bcm2835_bus_dma_tag;
 
+extern bus_space_tag_t al_iot;
+extern bus_space_handle_t al_ioh;
+
 bus_dma_tag_t bcm2835_bus_dma_init(struct arm32_bus_dma_tag *);
+
+void bcm2836_cpu_hatch(struct cpu_info *);
 
 #endif	/* _ARM_BROADCOM_BCM2835_VAR_H_ */

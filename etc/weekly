@@ -70,10 +70,6 @@ if checkyesno rebuild_locatedb; then
 	. /etc/weekly.d/locatedb
 fi
 
-if checkyesno rebuild_whatisdb; then
-	. /etc/weekly.d/whatisdb
-fi
-
 if checkyesno rebuild_mandb; then
 	. /etc/weekly.d/mandb
 fi

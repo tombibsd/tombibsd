@@ -33,9 +33,7 @@ GENASSYM_CONF=	${SUN3}/${MACHTYPE}/genassym.cf
 ##
 CPPFLAGS+=	-Dsun3
 CFLAGS+=	${CMACHFLAGS} -fno-defer-pop
-.if defined(HAVE_GCC) && ${HAVE_GCC} != 45
 CFLAGS+=	-msoft-float
-.endif
 AFLAGS+=	-x assembler-with-cpp
 
 ##

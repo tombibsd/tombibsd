@@ -11,8 +11,8 @@ SRCS=	atalk.c bpf.c fast_ipsec.c if.c inet.c inet6.c \
 	unix.c vtw.c rtutil.c
 BINGRP=	kmem
 BINMODE=2555
-LDADD=	-lkvm
-DPADD=	${LIBKVM}
+LDADD=	-lutil -lkvm
+DPADD=	${LIBUTIL} ${LIBKVM}
 CPPFLAGS+= -DIPSEC -I${.CURDIR}
 CPPFLAGS+= -I${NETBSDSRCDIR}/sys/dist/pf
 CPPFLAGS+= -I${NETBSDSRCDIR}/sbin/route

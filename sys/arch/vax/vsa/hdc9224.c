@@ -830,7 +830,7 @@ rdmakelabel(struct disklabel *dl, struct rdgeom *g)
 	}
 	dl->d_typename[p++] = n + '0';
 	dl->d_typename[p] = 0;
-	dl->d_type = DTYPE_MSCP; /* XXX - what to use here??? */
+	dl->d_type = DKTYPE_MSCP; /* XXX - what to use here??? */
 	dl->d_rpm = 3600;
 	dl->d_secsize = DEV_BSIZE;
 

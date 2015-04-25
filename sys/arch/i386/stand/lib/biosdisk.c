@@ -330,9 +330,6 @@ read_gpt(struct biosdisk *d)
 		gptsector[1] = d->ll.chs_sectors - 1;
 	}
 
-	/*
-	 * Use any valid GPT available, do not require both GPTs to be valid
-	 */
 	for (i = 0; i < __arraycount(gptsector); i++) {
 		error = check_gpt(d, gptsector[i]);
 		if (error == 0)
@@ -343,6 +340,15 @@ read_gpt(struct biosdisk *d)
 		memset(d->part, 0, sizeof(d->part));
 		return -1;
 	}
+
+#ifndef USE_SECONDARY_GPT
+	if (i > 0) {
+#ifdef DISK_DEBUG
+		printf("ignoring valid secondary GPT\n");
+#endif
+		return -1;
+	}
+#endif
 
 #ifdef DISK_DEBUG
 	printf("using %s GPT\n", (i == 0) ? "primary" : "secondary");

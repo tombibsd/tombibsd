@@ -1,0 +1,18 @@
+/files.tegra/1.2/Sun Mar 29 22:27:04 2015/-kk/
+/soc_tegra124.c/1.1/Sun Mar 29 10:41:59 2015/-kk/
+/tegra_ahcisata.c/1.1/Sun Mar 29 10:41:59 2015/-kk/
+/tegra_apbreg.h/1.1/Sun Mar 29 10:41:59 2015/-kk/
+/tegra_com.c/1.1/Sun Mar 29 10:41:59 2015/-kk/
+/tegra_ehci.c/1.1/Sun Mar 29 10:41:59 2015/-kk/
+/tegra_hdaudio.c/1.1/Sun Mar 29 10:41:59 2015/-kk/
+/tegra_intr.h/1.2/Sun Mar 29 10:44:54 2015/-kk/
+/tegra_io.c/1.2/Sun Mar 29 22:27:04 2015/-kk/
+/tegra_mc.c/1.2/Sun Mar 29 22:27:04 2015/-kk/
+/tegra_mcreg.h/1.1/Sun Mar 29 10:41:59 2015/-kk/
+/tegra_pmc.c/1.2/Sun Mar 29 22:27:04 2015/-kk/
+/tegra_pmcreg.h/1.1/Sun Mar 29 10:41:59 2015/-kk/
+/tegra_reg.h/1.1/Sun Mar 29 10:41:59 2015/-kk/
+/tegra_sdhc.c/1.1/Sun Mar 29 10:41:59 2015/-kk/
+/tegra_soc.c/1.2/Sun Mar 29 22:27:04 2015/-kk/
+/tegra_var.h/1.2/Sun Mar 29 22:27:04 2015/-kk/
+D

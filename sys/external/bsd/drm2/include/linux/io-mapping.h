@@ -36,6 +36,7 @@
 #include <sys/bus.h>
 #include <sys/kmem.h>
 #include <sys/systm.h>
+#include <sys/mman.h>
 
 #include <uvm/uvm_extern.h>
 

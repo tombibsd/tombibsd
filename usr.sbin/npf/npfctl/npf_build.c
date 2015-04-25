@@ -91,6 +91,10 @@ npfctl_config_send(int fd, const char *out)
 	}
 	npf_rule_insert(npf_conf, NULL, defgroup);
 	error = npf_config_submit(npf_conf, fd);
+	if (error == EEXIST) { /* XXX */
+		errx(EXIT_FAILURE, "(re)load failed: "
+		    "some table has a duplicate entry?");
+	}
 	if (error) {
 		nl_error_t ne;
 		_npf_config_error(npf_conf, &ne);

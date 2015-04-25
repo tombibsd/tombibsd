@@ -15,7 +15,7 @@ config/config.status: ${LLVM_SRCDIR}/configure
 	mkdir -p config
 	printf '#!/bin/sh\necho 2.7.3' > config/python
 	chmod 755 config/python
-	cd config && ${LLVM_SRCDIR}/configure ${LLVM_CONFIGURE_ARGS} \
+	cd config && ${HOST_SH} ${LLVM_SRCDIR}/configure ${LLVM_CONFIGURE_ARGS} \
 	    --enable-optimized CC=${HOST_CC:Q} CXX=${HOST_CXX:Q} \
 	    --with-python=${.OBJDIR}/config/python
 # --disable-assertions
@@ -43,7 +43,7 @@ CLEANFILES+=	need-dl need-dl.c need-dl.out need-terminfo need-terminfo.c need-te
 
 cleandir: cleandir-llvm
 
-cleandir-llvm:
+cleandir-llvm: .PHONY
 	test ! -d config || rm -r config
 	rm -f need-dl need-dl.tmp
 

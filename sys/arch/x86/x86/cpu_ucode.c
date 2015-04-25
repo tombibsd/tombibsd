@@ -116,7 +116,7 @@ cpu_ucode_apply(const struct cpu_ucode *data)
 	}
 
 	if (sc->sc_blob != NULL)
-		firmware_free(sc->sc_blob, 0);
+		firmware_free(sc->sc_blob, sc->sc_blobsize);
 	sc->sc_blob = NULL;
 	sc->sc_blobsize = 0;
 	return error;
@@ -140,7 +140,7 @@ compat6_cpu_ucode_apply(const struct compat6_cpu_ucode *data)
 	error = cpu_ucode_amd_apply(sc, CPU_UCODE_ALL_CPUS);
 
 	if (sc->sc_blob != NULL)
-		firmware_free(sc->sc_blob, 0);
+		firmware_free(sc->sc_blob, sc->sc_blobsize);
 	sc->sc_blob = NULL;
 	sc->sc_blobsize = 0;
 	return error;

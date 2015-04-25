@@ -41,7 +41,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/systm.h>
 #include <sys/device.h>
 
-#define _SGIMIPS_BUS_DMA_PRIVATE
 #include <sys/bus.h>
 #include <machine/machtype.h>
 #include <machine/sysconf.h>
@@ -208,7 +207,8 @@ gio_attach(device_t parent, device_t self, void *aux)
 
 		ga.ga_slot = -1;
 		ga.ga_addr = gfx_bases[i].base;
-		ga.ga_iot = SGIMIPS_BUS_SPACE_NORMAL;
+		ga.ga_iot = normal_memt;
+		/* XXX bus_space_map() */
 		ga.ga_ioh = MIPS_PHYS_TO_KSEG1(ga.ga_addr);
 		ga.ga_dmat = &sgimips_default_bus_dma_tag;
 		ga.ga_product = -1;
@@ -252,7 +252,7 @@ gio_attach(device_t parent, device_t self, void *aux)
 
 		ga.ga_slot = slot_bases[i].slot;
 		ga.ga_addr = slot_bases[i].base;
-		ga.ga_iot = SGIMIPS_BUS_SPACE_NORMAL;
+		ga.ga_iot = normal_memt;
 		ga.ga_ioh = MIPS_PHYS_TO_KSEG1(ga.ga_addr);
 		ga.ga_dmat = &sgimips_default_bus_dma_tag;
 
@@ -366,7 +366,7 @@ gio_cnattach(void)
 
 		ga.ga_slot = -1;
 		ga.ga_addr = gfx_bases[i].base;
-		ga.ga_iot = SGIMIPS_BUS_SPACE_NORMAL;
+		ga.ga_iot = normal_memt;
 		ga.ga_ioh = MIPS_PHYS_TO_KSEG1(ga.ga_addr);
 		ga.ga_dmat = &sgimips_default_bus_dma_tag;
 		ga.ga_product = -1;

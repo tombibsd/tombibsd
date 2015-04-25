@@ -391,6 +391,8 @@ ELFNAME2(linux,copyargs)(struct lwp *l, struct exec_package *pack,
 
 	a = ai;
 
+	memset(ai, 0, sizeof(ai));
+
 	/*
 	 * Push extra arguments used by glibc on the stack.
 	 */

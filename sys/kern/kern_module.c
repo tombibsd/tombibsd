@@ -966,7 +966,8 @@ module_do_load(const char *name, bool isdep, int flags,
 			 * available for each architecture, so we don't
 			 * print an error if they are missing.
 			 */
-			if (modclass != MODULE_CLASS_EXEC || error != ENOENT)
+			if ((modclass != MODULE_CLASS_EXEC || error != ENOENT)
+			    && root_device != NULL)
 				module_error("vfs load failed for `%s', "
 				    "error %d", name, error);
 #endif

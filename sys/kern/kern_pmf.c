@@ -82,9 +82,6 @@ int pmf_debug_transition;
 
 /* #define PMF_DEBUG */
 
-#include <sys/mallocvar.h>
-MALLOC_DEFINE(M_PMF, "pmf", "device pmf messaging memory");
-
 static prop_dictionary_t pmf_platform = NULL;
 static struct workqueue *pmf_event_workqueue;
 static struct workqueue *pmf_suspend_workqueue;

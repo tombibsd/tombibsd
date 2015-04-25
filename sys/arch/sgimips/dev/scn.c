@@ -815,7 +815,6 @@ scn_attach(device_t parent, device_t self, void *aux)
 	u_char mr1, mr2;
 	enum scntype scntype = SCNUNK;
 	const char *duart_type = "Unknown";
-	char *intrname;
 	bool console, first;
 	devmajor_t major;
 
@@ -905,9 +904,6 @@ scn_attach(device_t parent, device_t self, void *aux)
 		ch_base[CH_MR] = mr1;
 		ch_base[CH_MR] = mr2;
 		splx(s);
-
-		intrname = malloc(sizeof("scnXX"), M_DEVBUF, M_NOWAIT);
-		snprintf(intrname, sizeof("scnXX"), "scn%d", unit);
 
 		/*
 		 * On IP6 the console chip is duart1. The keyboard/mouse

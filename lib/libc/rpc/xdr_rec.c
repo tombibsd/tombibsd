@@ -507,7 +507,7 @@ xdrrec_eof(XDR *xdrs)
  * pipelined procedure calls.)  TRUE => immmediate flush to tcp connection.
  */
 bool_t
-xdrrec_endofrecord(XDR *xdrs, bool_t sendnow)
+xdrrec_endofrecord(XDR *xdrs, int sendnow)
 {
 	RECSTREAM *rstrm = (RECSTREAM *)(xdrs->x_private);
 	u_long len;  /* fragment length */

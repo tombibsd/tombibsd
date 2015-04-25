@@ -72,7 +72,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/socket.h>
 #include <sys/bus.h>
 #include <sys/device.h>
-#include <sys/rnd.h>
 
 #include <net/if.h>
 #include <net/if_arp.h>

@@ -10,7 +10,7 @@
 /Makefile.libdecnumber/1.2/Fri Mar 14 04:26:57 2014/-kk/
 /Makefile.libiberty/1.1/Sat Mar  1 10:00:49 2014/-kk/
 /Makefile.options/1.1/Sat Mar  1 10:00:49 2014/-kk/
-/Makefile/1.5/Fri Mar 14 04:26:57 2014/-kk/
+/Makefile/1.7/Mon Jan 12 06:45:14 2015/-kk/
 D/backend////
 D/cc1////
 D/cc1obj////
@@ -29,3 +29,5 @@ D/host-libiberty////
 D/include////
 D/libcpp////
 D/libdecnumber////
+D/lto-wrapper////
+D/lto1////

@@ -126,7 +126,8 @@ ATF_TC(day);
 ATF_TC_HEAD(day, tc)
 {
 
-	atf_tc_set_md_var(tc, "descr", "Checks strptime(3): day names");
+	atf_tc_set_md_var(tc, "descr",
+			  "Checks strptime(3) day name conversions [aA]");
 }
 
 ATF_TC_BODY(day, tc)
@@ -178,7 +179,8 @@ ATF_TC(month);
 ATF_TC_HEAD(month, tc)
 {
 
-	atf_tc_set_md_var(tc, "descr", "Checks strptime(3): month names");
+	atf_tc_set_md_var(tc, "descr",
+			  "Checks strptime(3) month name conversions [bB]");
 }
 
 ATF_TC_BODY(month, tc)

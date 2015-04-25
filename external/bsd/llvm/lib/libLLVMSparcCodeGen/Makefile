@@ -8,11 +8,9 @@ LIB=	LLVMSparcCodeGen
 
 SRCS+=	DelaySlotFiller.cpp \
 	SparcAsmPrinter.cpp \
-	SparcCodeEmitter.cpp \
 	SparcInstrInfo.cpp \
 	SparcISelDAGToDAG.cpp \
 	SparcISelLowering.cpp \
-	SparcJITInfo.cpp \
 	SparcFrameLowering.cpp \
 	SparcMCInstLower.cpp \
 	SparcMachineFunctionInfo.cpp \
@@ -33,7 +31,7 @@ TABLEGEN_OUTPUT= \
 	SparcGenCodeEmitter.inc|-gen-emitter \
 	SparcGenDisassemblerTables.inc|-gen-disassembler \
 	SparcGenInstrInfo.inc|-gen-instr-info \
-	SparcGenMCCodeEmitter.inc|-gen-emitter^-mc-emitter \
+	SparcGenMCCodeEmitter.inc|-gen-emitter \
 	SparcGenRegisterInfo.inc|-gen-register-info \
 	SparcGenSubtargetInfo.inc|-gen-subtarget
 

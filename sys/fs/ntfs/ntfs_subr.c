@@ -150,7 +150,6 @@ ntfs_findvattr(struct ntfsmount *ntmp, struct ntnode *ip, struct ntvattr **lvapp
 /*
  * Search attribute specified in ntnode (load ntnode if necessary).
  * If not found but ATTR_A_ATTRLIST present, read it in and search through.
- * VOP_VGET node needed, and lookup through its ntnode (load if necessary).
  *
  * ntnode should be locked
  */
@@ -161,7 +160,6 @@ ntfs_ntvattrget(struct ntfsmount *ntmp, struct ntnode *ip, u_int32_t type,
 	struct ntvattr *lvap = NULL;
 	struct attr_attrlist *aalp;
 	struct attr_attrlist *nextaalp;
-	struct vnode *newvp;
 	struct ntnode *newip;
 	void *alpool;
 	size_t namelen, len;
@@ -224,18 +222,17 @@ ntfs_ntvattrget(struct ntfsmount *ntmp, struct ntnode *ip, u_int32_t type,
 		dprintf(("%s: attribute in ino: %d\n", __func__,
 				 aalp->al_inumber));
 
-		error = ntfs_vgetex(ntmp->ntm_mountp, aalp->al_inumber,
-				NTFS_A_DATA, "", LK_EXCLUSIVE, &newvp);
+		error = ntfs_ntlookup(ntmp, aalp->al_inumber, &newip);
 		if (error) {
-			printf("%s: CAN'T VGET INO: %d\n", __func__,
-			    aalp->al_inumber);
+			printf("%s: can't lookup ino %d"
+			    " for %" PRId64 " attr %x: error %d\n", __func__,
+			    aalp->al_inumber, ip->i_number, type, error);
 			goto out;
 		}
-		newip = VTONT(newvp);
 		/* XXX have to lock ntnode */
 		error = ntfs_findvattr(ntmp, newip, &lvap, vapp,
 				type, name, namelen, vcn);
-		vput(newvp);
+		ntfs_ntput(newip);
 		if (error == 0)
 			goto out;
 		printf("%s: ATTRLIST ERROR.\n", __func__);
@@ -287,7 +284,7 @@ ntfs_loadntnode(struct ntfsmount *ntmp, struct ntnode *ip)
 		off = ntfs_btocnoff(boff);
 
 		error = bread(ntmp->ntm_devvp, bn, ntfs_cntob(1),
-		    NOCRED, 0, &bp);
+		    0, &bp);
 		if (error) {
 			printf("%s: BREAD FAILED\n", __func__);
 			goto out;
@@ -759,9 +756,9 @@ ntfs_ntlookupfile(struct ntfsmount *ntmp, struct vnode *vp,
 {
 	struct fnode   *fp = VTOF(vp);
 	struct ntnode  *ip = FTONT(fp);
-	struct ntvattr *vap;	/* Root attribute */
+	struct ntvattr *vap = NULL;	/* Root attribute */
 	cn_t            cn = 0;	/* VCN in current attribute */
-	void *        rdbuf;	/* Buffer to read directory's blocks  */
+	void *        rdbuf = NULL;	/* Buffer to read directory's blocks  */
 	u_int32_t       blsize;
 	u_int32_t       rdsize;	/* Length of data to read from current block */
 	struct attr_indexentry *iep;
@@ -779,8 +776,10 @@ ntfs_ntlookupfile(struct ntfsmount *ntmp, struct vnode *vp,
 		return (error);
 
 	error = ntfs_ntvattrget(ntmp, ip, NTFS_A_INDXROOT, "$I30", 0, &vap);
-	if (error || (vap->va_flag & NTFS_AF_INRUN))
-		return (ENOTDIR);
+	if (error || (vap->va_flag & NTFS_AF_INRUN)) {
+		error = ENOTDIR;
+		goto fail;
+	}
 
 	/*
 	 * Divide file name into: foofilefoofilefoofile[:attrspec]
@@ -966,9 +965,11 @@ fail:
 			free(tctx, M_TEMP);
 		}
 	}
-	ntfs_ntvattrrele(vap);
+	if (vap)
+		ntfs_ntvattrrele(vap);
+	if (rdbuf)
+		free(rdbuf, M_TEMP);
 	ntfs_ntput(ip);
-	free(rdbuf, M_TEMP);
 	return (error);
 }
 
@@ -1029,8 +1030,10 @@ ntfs_ntreaddir(struct ntfsmount *ntmp, struct fnode *fp, u_int32_t num,
 		return (error);
 
 	error = ntfs_ntvattrget(ntmp, ip, NTFS_A_INDXROOT, "$I30", 0, &vap);
-	if (error)
-		return (ENOTDIR);
+	if (error) {
+		error = ENOTDIR;
+		goto fail;
+	}
 
 	if (fp->f_dirblbuf == NULL) {
 		fp->f_dirblsz = vap->va_a_iroot->ir_size;
@@ -1180,7 +1183,7 @@ ntfs_nttimetounix(u_int64_t nt)
 }
 
 /*
- * This is one of write routine.
+ * This is one of the write routines.
  */
 int
 ntfs_writeattr_plain(struct ntfsmount *ntmp, struct ntnode *ip,
@@ -1228,7 +1231,7 @@ ntfs_writeattr_plain(struct ntfsmount *ntmp, struct ntnode *ip,
 }
 
 /*
- * This is one of write routine.
+ * This is one of the write routines.
  *
  * ntnode should be locked.
  */
@@ -1303,7 +1306,7 @@ ntfs_writentvattr_plain(struct ntfsmount *ntmp, struct ntnode *ip,
 				clrbuf(bp);
 			} else {
 				error = bread(ntmp->ntm_devvp, ntfs_cntobn(cn),
-				    ntfs_cntob(cl), NOCRED, B_MODIFY, &bp);
+				    ntfs_cntob(cl), B_MODIFY, &bp);
 				if (error)
 					return (error);
 			}
@@ -1330,7 +1333,7 @@ ntfs_writentvattr_plain(struct ntfsmount *ntmp, struct ntnode *ip,
 }
 
 /*
- * This is one of read routines.
+ * This is one of the read routines.
  *
  * ntnode should be locked.
  */
@@ -1401,7 +1404,7 @@ ntfs_readntvattr_plain(struct ntfsmount *ntmp, struct ntnode *ip,
 					error = bread(ntmp->ntm_devvp,
 						      ntfs_cntobn(cn),
 						      ntfs_cntob(cl),
-						      NOCRED, 0, &bp);
+						      0, &bp);
 					if (error) {
 						return (error);
 					}
@@ -1457,7 +1460,7 @@ ntfs_readntvattr_plain(struct ntfsmount *ntmp, struct ntnode *ip,
 }
 
 /*
- * This is one of read routines.
+ * This is one of the read routines.
  */
 int
 ntfs_readattr_plain(struct ntfsmount *ntmp, struct ntnode *ip,
@@ -1505,7 +1508,7 @@ ntfs_readattr_plain(struct ntfsmount *ntmp, struct ntnode *ip,
 }
 
 /*
- * This is one of read routines.
+ * This is one of the read routines.
  */
 int
 ntfs_readattr(struct ntfsmount *ntmp, struct ntnode *ip, u_int32_t attrnum,

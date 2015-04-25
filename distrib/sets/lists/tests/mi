@@ -148,6 +148,7 @@
 ./usr/libdata/debug/usr/tests/net/icmp					tests-net-debug
 ./usr/libdata/debug/usr/tests/net/if					tests-net-debug
 ./usr/libdata/debug/usr/tests/net/if_loop					tests-net-debug
+./usr/libdata/debug/usr/tests/net/in_cksum				tests-net-debug
 ./usr/libdata/debug/usr/tests/net/mcast					tests-net-debug
 ./usr/libdata/debug/usr/tests/net/net					tests-net-debug
 ./usr/libdata/debug/usr/tests/net/sys					tests-net-debug
@@ -2065,6 +2066,7 @@
 ./usr/tests/kernel/kqueue/t_proc2		tests-kernel-tests		atf
 ./usr/tests/kernel/kqueue/t_proc3		tests-kernel-tests		atf
 ./usr/tests/kernel/kqueue/t_sig			tests-kernel-tests		atf
+./usr/tests/kernel/kqueue/t_vnode		tests-kernel-tests		atf
 ./usr/tests/kernel/kqueue/write			tests-kernel-tests
 ./usr/tests/kernel/kqueue/write/Atffile		tests-kernel-tests		atf
 ./usr/tests/kernel/kqueue/write/Kyuafile	tests-kernel-tests		atf,kyua
@@ -2094,6 +2096,7 @@
 ./usr/tests/kernel/t_poll3w			tests-obsolete			obsolete
 ./usr/tests/kernel/t_pollts			tests-obsolete			obsolete
 ./usr/tests/kernel/t_posix_fadvise		tests-obsolete			obsolete
+./usr/tests/kernel/t_posix_fallocate		tests-obsolete			obsolete
 ./usr/tests/kernel/t_ps_strings			tests-kernel-tests		atf
 ./usr/tests/kernel/t_pty			tests-kernel-tests		atf
 ./usr/tests/kernel/t_rnd			tests-kernel-tests		atf,rump
@@ -2451,6 +2454,7 @@
 ./usr/tests/lib/libc/inet			tests-lib-tests
 ./usr/tests/lib/libc/inet/Atffile		tests-lib-tests		atf
 ./usr/tests/lib/libc/inet/Kyuafile		tests-lib-tests		atf,kyua
+./usr/tests/lib/libc/inet/t_inet_addr		tests-lib-tests		atf
 ./usr/tests/lib/libc/inet/t_inet_network	tests-lib-tests		atf
 ./usr/tests/lib/libc/locale			tests-lib-tests
 ./usr/tests/lib/libc/locale/Atffile		tests-lib-tests		atf
@@ -2635,6 +2639,7 @@
 ./usr/tests/lib/libc/sys/Atffile		tests-lib-tests		atf
 ./usr/tests/lib/libc/sys/Kyuafile		tests-lib-tests		atf,kyua
 ./usr/tests/lib/libc/sys/t_access		tests-lib-tests		atf
+./usr/tests/lib/libc/sys/t_bind			tests-lib-tests		atf
 ./usr/tests/lib/libc/sys/t_bitops		tests-obsolete		obsolete
 ./usr/tests/lib/libc/sys/t_cerror		tests-obsolete		obsolete
 ./usr/tests/lib/libc/sys/t_chroot		tests-lib-tests		atf
@@ -2677,6 +2682,7 @@
 ./usr/tests/lib/libc/sys/t_pipe2		tests-lib-tests		atf
 ./usr/tests/lib/libc/sys/t_poll			tests-lib-tests		atf
 ./usr/tests/lib/libc/sys/t_posix_fadvise	tests-lib-tests		atf,rump
+./usr/tests/lib/libc/sys/t_posix_fallocate	tests-lib-tests		atf
 ./usr/tests/lib/libc/sys/t_recvmmsg		tests-lib-tests		atf
 ./usr/tests/lib/libc/sys/t_revoke		tests-lib-tests		atf
 ./usr/tests/lib/libc/sys/t_select		tests-lib-tests		atf
@@ -2889,7 +2895,8 @@
 ./usr/tests/lib/libobjc				tests-lib-tests		atf
 ./usr/tests/lib/libobjc/Atffile			tests-lib-tests		atf
 ./usr/tests/lib/libobjc/Kyuafile		tests-lib-tests		atf,kyua
-./usr/tests/lib/libobjc/t_threads		tests-lib-tests		atf,gcccmds
+./usr/tests/lib/libobjc/t_threads		tests-lib-tests		atf,gcc=45
+./usr/tests/lib/libobjc/t_threads		tests-lib-tests		atf,gcc=48
 ./usr/tests/lib/libposix			tests-lib-tests		atf
 ./usr/tests/lib/libposix/Atffile		tests-lib-tests		atf
 ./usr/tests/lib/libposix/Kyuafile		tests-lib-tests		atf,kyua
@@ -3137,9 +3144,14 @@
 ./usr/tests/net/if_loop/Atffile			tests-net-tests		atf,rump
 ./usr/tests/net/if_loop/Kyuafile		tests-net-tests		atf,rump,kyua
 ./usr/tests/net/if_loop/t_pr		tests-net-tests		atf,rump
+./usr/tests/net/in_cksum			tests-net-tests
+./usr/tests/net/in_cksum/Atffile		tests-net-tests		atf
+./usr/tests/net/in_cksum/Kyuafile		tests-net-tests		atf,kyua
+./usr/tests/net/in_cksum/t_in_cksum		tests-net-tests		atf
+./usr/tests/net/in_cksum/in_cksum		tests-net-tests		atf
 ./usr/tests/net/mcast				tests-net-tests
-./usr/tests/net/mcast/Atffile			tests-net-tests		atf,rump
-./usr/tests/net/mcast/Kyuafile			tests-net-tests		atf,rump,kyua
+./usr/tests/net/mcast/Atffile			tests-net-tests		atf
+./usr/tests/net/mcast/Kyuafile			tests-net-tests		atf,kyua
 ./usr/tests/net/mcast/t_mcast			tests-net-tests		atf
 ./usr/tests/net/mpls				tests-net-tests
 ./usr/tests/net/mpls/Atffile			tests-net-tests		atf,rump
@@ -3235,6 +3247,7 @@
 ./usr/tests/sbin/resize_ffs			tests-sbin-tests
 ./usr/tests/sbin/resize_ffs/Atffile		tests-sbin-tests	atf
 ./usr/tests/sbin/resize_ffs/Kyuafile		tests-sbin-tests	atf,kyua
+./usr/tests/sbin/resize_ffs/t_check		tests-sbin-tests	atf
 ./usr/tests/sbin/resize_ffs/t_grow		tests-sbin-tests	atf
 ./usr/tests/sbin/resize_ffs/t_grow_swapped	tests-sbin-tests	atf
 ./usr/tests/sbin/resize_ffs/t_resize_ffs	tests-obsolete		obsolete
@@ -3751,6 +3764,7 @@
 ./usr/tests/usr.bin/xlint/lint1/d_type_conv1.c			tests-usr.bin-tests	atf
 ./usr/tests/usr.bin/xlint/lint1/d_type_conv2.c			tests-usr.bin-tests	atf
 ./usr/tests/usr.bin/xlint/lint1/d_type_conv3.c			tests-usr.bin-tests	atf
+./usr/tests/usr.bin/xlint/lint1/d_typefun.c			tests-usr.bin-tests	atf
 ./usr/tests/usr.bin/xlint/lint1/d_typename_as_var.c		tests-usr.bin-tests	atf
 ./usr/tests/usr.bin/xlint/lint1/d_zero_sized_arrays.c		tests-usr.bin-tests	atf
 ./usr/tests/usr.bin/xlint/lint1/t_integration			tests-usr.bin-tests	atf

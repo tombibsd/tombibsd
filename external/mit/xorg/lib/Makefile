@@ -9,7 +9,7 @@ SUBDIR+=libdrm_intel
 .endif
 SUBDIR+=libdrm_radeon pixman xkeyboard-config libxcb \
 	.WAIT
-SUBDIR+=dri gallium fontconfig libSM libX11 \
+SUBDIR+=dri7 dri gallium fontconfig libSM libX11 \
 	.WAIT \
 	libXcomposite libXdamage libXext libXfixes libXt \
 	libxkbfile \
@@ -34,5 +34,7 @@ SUBDIR+=libGLU libGLw libXaw6 libXaw libXcursor \
 	.WAIT \
 	libXdmGreet \
 	xcb-util
+SUBDIR+=libgbm
 
+.include <bsd.buildinstall.mk>
 .include <bsd.subdir.mk>

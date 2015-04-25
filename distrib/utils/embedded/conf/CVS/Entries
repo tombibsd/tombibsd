@@ -1,9 +1,9 @@
 /amd64.conf/1.2/Fri Apr  4 16:45:51 2014/-kk/
-/beagleboard.conf/1.18/Fri Oct  3 10:02:02 2014/-kk/
-/evbarm.conf/1.17/Tue Dec  9 04:40:54 2014/-kk/
+/armv7.conf/1.2/Wed Apr 22 07:25:54 2015/-kk/
+/evbarm.conf/1.22/Sun Apr 12 03:28:28 2015/-kk/
 /i386.conf/1.1/Fri Apr  4 16:45:51 2014/-kk/
-/rpi.conf/1.24/Tue Dec 17 03:59:06 2013/-kk/
-/rpi_inst.conf/1.5/Sat Apr 19 05:33:51 2014/-kk/
-/usermode.conf/1.3/Thu Oct 24 10:28:41 2013/-kk/
-/x86.conf/1.5/Sat Dec 27 03:32:30 2014/-kk/
+/rpi.conf/1.29/Wed Apr 22 07:25:54 2015/-kk/
+/rpi_inst.conf/1.8/Wed Apr 22 07:25:54 2015/-kk/
+/usermode.conf/1.5/Wed Apr 22 07:25:54 2015/-kk/
+/x86.conf/1.7/Thu Feb  5 08:37:09 2015/-kk/
 D

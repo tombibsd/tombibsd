@@ -34,7 +34,7 @@
  *	FreeBSD Id: if_rlreg.h,v 1.9 1999/06/20 18:56:09 wpaul Exp
  */
 
-#include <sys/rnd.h>
+#include <sys/rndsource.h>
 
 #define RTK_ETHER_ALIGN	2
 #define RTK_RXSTAT_LEN	4

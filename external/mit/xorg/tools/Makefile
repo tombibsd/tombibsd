@@ -14,4 +14,5 @@ SUBDIR+= makestrs .WAIT
 SUBDIR+=bdftopcf fc-cache ucs2any
 SUBDIR+=makekeys mkfontscale .WAIT xkbcomp
 
+.include <bsd.buildinstall.mk>
 .include <bsd.subdir.mk>

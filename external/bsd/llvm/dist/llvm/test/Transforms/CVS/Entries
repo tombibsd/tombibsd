@@ -1,7 +1,8 @@
 D/ADCE////
 D/AddDiscriminators////
+D/AlignmentFromAssumptions////
 D/ArgumentPromotion////
-D/AtomicExpandLoadLinked////
+D/AtomicExpand////
 D/BBVectorize////
 D/BranchFolding////
 D/CodeExtractor////
@@ -12,7 +13,6 @@ D/ConstantMerge////
 D/CorrelatedValuePropagation////
 D/DeadArgElim////
 D/DeadStoreElimination////
-D/DebugIR////
 D/EarlyCSE////
 D/FunctionAttrs////
 D/GCOVProfiling////
@@ -66,3 +66,4 @@ D/StripSymbols////
 D/StructurizeCFG////
 D/TailCallElim////
 D/TailDup////
+D/Util////

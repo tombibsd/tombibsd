@@ -5,6 +5,6 @@
 #include <machine/asm.h>
 
 ENTRY(__ieee754_sqrt)
-	fsqrt.d	fv0, fa0
+	fsqrt.d	fa0, fa0
 	ret
 END(__ieee754_sqrt)

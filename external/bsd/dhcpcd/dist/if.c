@@ -3,7 +3,7 @@
 
 /*
  * dhcpcd - DHCP client daemon
- * Copyright (c) 2006-2014 Roy Marples <roy@marples.name>
+ * Copyright (c) 2006-2015 Roy Marples <roy@marples.name>
  * All rights reserved
 
  * Redistribution and use in source and binary forms, with or without
@@ -60,7 +60,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <syslog.h>
 #include <unistd.h>
 
 #include "config.h"
@@ -73,6 +72,11 @@
 #include "ipv4.h"
 #include "ipv6nd.h"
 
+#ifdef __QNX__
+/* QNX carries defines for, but does not actually support PF_LINK */
+#undef IFLR_ACTIVE
+#endif
+
 void
 if_free(struct interface *ifp)
 {
@@ -81,9 +85,9 @@ if_free(struct interface *ifp)
 		return;
 	ipv4_free(ifp);
 	dhcp_free(ifp);
-	ipv6_free(ifp);
 	dhcp6_free(ifp);
 	ipv6nd_free(ifp);
+	ipv6_free(ifp);
 	free_options(ifp->options);
 	free(ifp);
 }
@@ -96,20 +100,11 @@ if_carrier(struct interface *iface)
 #ifdef SIOCGIFMEDIA
 	struct ifmediareq ifmr;
 #endif
-#ifdef __linux__
-	char *p;
-#endif
 
 	if ((s = socket(PF_INET, SOCK_DGRAM, 0)) == -1)
 		return LINK_UNKNOWN;
 	memset(&ifr, 0, sizeof(ifr));
 	strlcpy(ifr.ifr_name, iface->name, sizeof(ifr.ifr_name));
-#ifdef __linux__
-	/* We can only test the real interface up */
-	if ((p = strchr(ifr.ifr_name, ':')))
-		*p = '\0';
-#endif
-
 	if (ioctl(s, SIOCGIFFLAGS, &ifr) == -1) {
 		close(s);
 		return LINK_UNKNOWN;
@@ -136,19 +131,11 @@ if_setflag(struct interface *ifp, short flag)
 {
 	struct ifreq ifr;
 	int s, r;
-#ifdef __linux__
-	char *p;
-#endif
 
 	if ((s = socket(PF_INET, SOCK_DGRAM, 0)) == -1)
 		return -1;
 	memset(&ifr, 0, sizeof(ifr));
 	strlcpy(ifr.ifr_name, ifp->name, sizeof(ifr.ifr_name));
-#ifdef __linux__
-	/* We can only bring the real interface up */
-	if ((p = strchr(ifr.ifr_name, ':')))
-		*p = '\0';
-#endif
 	r = -1;
 	if (ioctl(s, SIOCGIFFLAGS, &ifr) == 0) {
 		if (flag == 0 || (ifr.ifr_flags & flag) == flag)
@@ -193,7 +180,7 @@ if_discover(struct dhcpcd_ctx *ctx, int argc, char * const *argv)
 	const struct sockaddr_in *dst;
 #endif
 #ifdef INET6
-	struct sockaddr_in6 *sin6;
+	struct sockaddr_in6 *sin6, *net6;
 	int ifa_flags;
 #endif
 #ifdef AF_LINK
@@ -271,6 +258,9 @@ if_discover(struct dhcpcd_ctx *ctx, int argc, char * const *argv)
 			p = argv[i];
 		} else {
 			p = ifa->ifa_name;
+#ifdef __linux__
+			strlcpy(ifn, ifa->ifa_name, sizeof(ifn));
+#endif
 			/* -1 means we're discovering against a specific
 			 * interface, but we still need the below rules
 			 * to apply. */
@@ -300,18 +290,23 @@ if_discover(struct dhcpcd_ctx *ctx, int argc, char * const *argv)
 		}
 
 		if (if_vimaster(p) == 1) {
-			syslog(argc ? LOG_ERR : LOG_DEBUG,
+			logger(ctx, argc ? LOG_ERR : LOG_DEBUG,
 			    "%s: is a Virtual Interface Master, skipping", p);
 			continue;
 		}
 
 		ifp = calloc(1, sizeof(*ifp));
 		if (ifp == NULL) {
-			syslog(LOG_ERR, "%s: %m", __func__);
+			logger(ctx, LOG_ERR, "%s: %m", __func__);
 			break;
 		}
 		ifp->ctx = ctx;
+#ifdef __linux__
+		strlcpy(ifp->name, ifn, sizeof(ifp->name));
+		strlcpy(ifp->alias, p, sizeof(ifp->alias));
+#else
 		strlcpy(ifp->name, p, sizeof(ifp->name));
+#endif
 		ifp->flags = ifa->ifa_flags;
 		ifp->carrier = if_carrier(ifp);
 
@@ -326,7 +321,7 @@ if_discover(struct dhcpcd_ctx *ctx, int argc, char * const *argv)
 			memcpy(&iflr.addr, ifa->ifa_addr,
 			    MIN(ifa->ifa_addr->sa_len, sizeof(iflr.addr)));
 			iflr.flags = IFLR_PREFIX;
-			iflr.prefixlen = sdl->sdl_alen * NBBY;
+			iflr.prefixlen = (unsigned int)sdl->sdl_alen * NBBY;
 			if (ioctl(s_link, SIOCGLIFADDR, &iflr) == -1 ||
 			    !(iflr.flags & IFLR_ACTIVE))
 			{
@@ -335,25 +330,35 @@ if_discover(struct dhcpcd_ctx *ctx, int argc, char * const *argv)
 			}
 #endif
 
-#ifdef __FreeBSD__
-			memcpy(&ifp->linkaddr, sdl, sdl->sdl_len);
-#endif
 			ifp->index = sdl->sdl_index;
 			switch(sdl->sdl_type) {
 #ifdef IFT_BRIDGE
-			case IFT_BRIDGE:
-				/* Don't allow bridge unless explicit */
+			case IFT_BRIDGE: /* FALLTHROUGH */
+#endif
+#ifdef IFT_PPP
+			case IFT_PPP: /* FALLTHROUGH */
+#endif
+#ifdef IFT_PROPVIRTUAL
+			case IFT_PROPVIRTUAL: /* FALLTHROUGH */
+#endif
+#if defined(IFT_BRIDGE) || defined(IFT_PPP) || defined(IFT_PROPVIRTUAL)
+				/* Don't allow unless explicit */
 				if ((argc == 0 || argc == -1) &&
 				    ctx->ifac == 0 &&
 				    !if_hasconf(ctx, ifp->name))
 				{
+					logger(ifp->ctx, LOG_DEBUG,
+					    "%s: ignoring due to"
+					    " interface type and"
+					    " no config",
+					    ifp->name);
 					if_free(ifp);
 					continue;
 				}
-				/* FALLTHOUGH */
+				/* FALLTHROUGH */
 #endif
 #ifdef IFT_L2VLAN
-			case IFT_L2VLAN: /* FALLTHOUGH */
+			case IFT_L2VLAN: /* FALLTHROUGH */
 #endif
 #ifdef IFT_L3IPVLAN
 			case IFT_L3IPVLAN: /* FALLTHROUGH */
@@ -380,9 +385,9 @@ if_discover(struct dhcpcd_ctx *ctx, int argc, char * const *argv)
 					if_free(ifp);
 					continue;
 				}
-				syslog(LOG_WARNING,
+				logger(ifp->ctx, LOG_WARNING,
 				    "%s: unsupported interface type %.2x",
-				    ifp->name, ifp->family);
+				    ifp->name, sdl->sdl_type);
 				/* Pretend it's ethernet */
 				ifp->family = ARPHRD_ETHER;
 				break;
@@ -430,7 +435,7 @@ if_discover(struct dhcpcd_ctx *ctx, int argc, char * const *argv)
 /* IFT already checked */
 #ifndef AF_LINK
 			default:
-				syslog(LOG_WARNING,
+				logger(ifp->ctx, LOG_WARNING,
 				    "%s: unsupported interface family %.2x",
 				    ifp->name, ifp->family);
 				break;
@@ -440,7 +445,7 @@ if_discover(struct dhcpcd_ctx *ctx, int argc, char * const *argv)
 
 		/* Handle any platform init for the interface */
 		if (if_init(ifp) == -1) {
-			syslog(LOG_ERR, "%s: if_init: %m", p);
+			logger(ifp->ctx, LOG_ERR, "%s: if_init: %m", p);
 			if_free(ifp);
 			continue;
 		}
@@ -449,7 +454,7 @@ if_discover(struct dhcpcd_ctx *ctx, int argc, char * const *argv)
 		if (if_getmtu(ifp->name) < MTU_MIN &&
 		    if_setmtu(ifp->name, MTU_MIN) == -1)
 		{
-			syslog(LOG_ERR, "%s: set_mtu: %m", p);
+			logger(ifp->ctx, LOG_ERR, "%s: set_mtu: %m", p);
 			if_free(ifp);
 			continue;
 		}
@@ -503,6 +508,7 @@ if_discover(struct dhcpcd_ctx *ctx, int argc, char * const *argv)
 			if (ifp == NULL)
 				break; /* Should be impossible */
 			sin6 = (struct sockaddr_in6 *)(void *)ifa->ifa_addr;
+			net6 = (struct sockaddr_in6 *)(void *)ifa->ifa_netmask;
 #ifdef __KAME__
 			if (IN6_IS_ADDR_LINKLOCAL(&sin6->sin6_addr))
 				/* Remove the scope from the address */
@@ -513,7 +519,9 @@ if_discover(struct dhcpcd_ctx *ctx, int argc, char * const *argv)
 			if (ifa_flags != -1)
 				ipv6_handleifa(ctx, RTM_NEWADDR, ifs,
 				    ifa->ifa_name,
-				    &sin6->sin6_addr, ifa_flags);
+				    &sin6->sin6_addr,
+				    ipv6_prefixlen(&net6->sin6_addr),
+				    ifa_flags);
 			break;
 #endif
 		}
@@ -541,6 +549,9 @@ if_findindexname(struct dhcpcd_ctx *ctx, unsigned int idx, const char *name)
 			if ((ifp->options == NULL ||
 			    !(ifp->options->options & DHCPCD_PFXDLGONLY)) &&
 			    ((name && strcmp(ifp->name, name) == 0) ||
+#ifdef __linux__
+			    (name && strcmp(ifp->alias, name) == 0) ||
+#endif
 			    (!name && ifp->index == idx)))
 				return ifp;
 		}
@@ -578,4 +589,81 @@ if_domtu(const char *ifname, short int mtu)
 	if (r == -1)
 		return -1;
 	return ifr.ifr_mtu;
+}
+
+/* Interface comparer for working out ordering. */
+static int
+if_cmp(const struct interface *si, const struct interface *ti)
+{
+#ifdef INET
+	int r;
+#endif
+
+	/* Always prefer master interfaces */
+	if (!(si->options->options & DHCPCD_PFXDLGONLY) &&
+	    ti->options->options & DHCPCD_PFXDLGONLY)
+		return -1;
+	if (si->options->options & DHCPCD_PFXDLGONLY &&
+	    !(ti->options->options & DHCPCD_PFXDLGONLY))
+		return 1;
+
+	if (D_STATE_RUNNING(si) && !D_STATE_RUNNING(ti))
+		return -1;
+	if (!D_STATE_RUNNING(si) && D_STATE_RUNNING(ti))
+		return 1;
+	if (RS_STATE_RUNNING(si) && !RS_STATE_RUNNING(ti))
+		return -1;
+	if (!RS_STATE_RUNNING(si) && RS_STATE_RUNNING(ti))
+		return 1;
+	if (D6_STATE_RUNNING(si) && !D6_STATE_RUNNING(ti))
+		return -1;
+	if (!D6_STATE_RUNNING(si) && D6_STATE_RUNNING(ti))
+		return 1;
+
+#ifdef INET
+	/* Special attention needed hereto due take states and IPv4LL. */
+	if ((r = ipv4_ifcmp(si, ti)) != 0)
+		return r;
+#endif
+
+	/* Then carrier status. */
+	if (si->carrier > ti->carrier)
+		return -1;
+	if (si->carrier < ti->carrier)
+		return 1;
+	/* Finally, metric */
+	if (si->metric < ti->metric)
+		return -1;
+	if (si->metric > ti->metric)
+		return 1;
+	return 0;
+}
+
+/* Sort the interfaces into a preferred order - best first, worst last. */
+void
+if_sortinterfaces(struct dhcpcd_ctx *ctx)
+{
+	struct if_head sorted;
+	struct interface *ifp, *ift;
+
+	if (ctx->ifaces == NULL ||
+	    (ifp = TAILQ_FIRST(ctx->ifaces)) == NULL ||
+	    TAILQ_NEXT(ifp, next) == NULL)
+		return;
+
+	TAILQ_INIT(&sorted);
+	TAILQ_REMOVE(ctx->ifaces, ifp, next);
+	TAILQ_INSERT_HEAD(&sorted, ifp, next);
+	while ((ifp = TAILQ_FIRST(ctx->ifaces))) {
+		TAILQ_REMOVE(ctx->ifaces, ifp, next);
+		TAILQ_FOREACH(ift, &sorted, next) {
+			if (if_cmp(ifp, ift) == -1) {
+				TAILQ_INSERT_BEFORE(ift, ifp, next);
+				break;
+			}
+		}
+		if (ift == NULL)
+			TAILQ_INSERT_TAIL(&sorted, ifp, next);
+	}
+	TAILQ_CONCAT(ctx->ifaces, &sorted, next);
 }

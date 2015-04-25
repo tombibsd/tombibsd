@@ -555,7 +555,7 @@ struct segusage_v1 {
 	VTOI((F)->lfs_ivnode)->i_flag |= IN_ACCESS;			\
 	if ((_e = bread((F)->lfs_ivnode,				\
 	    ((IN) / (F)->lfs_sepb) + (F)->lfs_cleansz,			\
-	    (F)->lfs_bsize, NOCRED, 0, &(BP))) != 0)			\
+	    (F)->lfs_bsize, 0, &(BP))) != 0)			\
 		panic("lfs: ifile read: %d", _e);			\
 	if ((F)->lfs_version == 1)					\
 		(SP) = (SEGUSE *)((SEGUSE_V1 *)(BP)->b_data +		\
@@ -623,7 +623,7 @@ struct ifile_v1 {
 	VTOI((F)->lfs_ivnode)->i_flag |= IN_ACCESS;			\
 	if ((_e = bread((F)->lfs_ivnode,				\
 	(IN) / (F)->lfs_ifpb + (F)->lfs_cleansz + (F)->lfs_segtabsz,	\
-	(F)->lfs_bsize, NOCRED, 0, &(BP))) != 0)			\
+	(F)->lfs_bsize, 0, &(BP))) != 0)			\
 		panic("lfs: ifile ino %d read %d", (int)(IN), _e);	\
 	if ((F)->lfs_version == 1)					\
 		(IP) = (IFILE *)((IFILE_V1 *)(BP)->b_data +		\
@@ -656,7 +656,7 @@ typedef struct _cleanerinfo {
 	SHARE_IFLOCK(F);						\
 	VTOI((F)->lfs_ivnode)->i_flag |= IN_ACCESS;			\
 	if (bread((F)->lfs_ivnode,					\
-	    (daddr_t)0, (F)->lfs_bsize, NOCRED, 0, &(BP)))		\
+	    (daddr_t)0, (F)->lfs_bsize, 0, &(BP)))		\
 		panic("lfs: ifile read");				\
 	(CP) = (CLEANERINFO *)(BP)->b_data;				\
 	UNSHARE_IFLOCK(F);						\

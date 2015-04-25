@@ -160,7 +160,7 @@ static suffixes_t suffixes[] = {
 #define NUM_SUFFIXES (sizeof suffixes / sizeof suffixes[0])
 #define SUFFIX_MAXLEN	30
 
-static	const char	gzip_version[] = "NetBSD gzip 20101018";
+static	const char	gzip_version[] = "NetBSD gzip 20150113";
 
 static	int	cflag;			/* stdout mode */
 static	int	dflag;			/* decompress mode */
@@ -1311,7 +1311,7 @@ file_uncompress(char *file, char *outfile, size_t outsize)
 #ifndef SMALL
 	ssize_t rv;
 	time_t timestamp = 0;
-	unsigned char name[PATH_MAX + 1];
+	char name[PATH_MAX + 1];
 #endif
 
 	/* gather the old name info */
@@ -1366,21 +1366,33 @@ file_uncompress(char *file, char *outfile, size_t outsize)
 		timestamp = ts[3] << 24 | ts[2] << 16 | ts[1] << 8 | ts[0];
 
 		if (header1[3] & ORIG_NAME) {
-			rbytes = pread(fd, name, sizeof name, GZIP_ORIGNAME);
+			rbytes = pread(fd, name, sizeof(name) - 1, GZIP_ORIGNAME);
 			if (rbytes < 0) {
 				maybe_warn("can't read %s", file);
 				goto lose;
 			}
-			if (name[0] != 0) {
+			if (name[0] != '\0') {
+				char *dp, *nf;
+
+				/* Make sure that name is NUL-terminated */
+				name[rbytes] = '\0';
+
+				/* strip saved directory name */
+				nf = strrchr(name, '/');
+				if (nf == NULL)
+					nf = name;
+				else
+					nf++;
+
 				/* preserve original directory name */
-				char *dp = strrchr(file, '/');
+				dp = strrchr(file, '/');
 				if (dp == NULL)
 					dp = file;
 				else
 					dp++;
 				snprintf(outfile, outsize, "%.*s%.*s",
 						(int) (dp - file), 
-						file, (int) rbytes, name);
+						file, (int) rbytes, nf);
 			}
 		}
 	}

@@ -116,9 +116,8 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include "opt_ddb.h"
 #include "ioconf.h"
 
-#include "rnd.h"
 #ifdef RND_SBSCN
-#include <sys/rnd.h>
+#include <sys/rndsource.h>
 #endif
 
 #include <sys/param.h>

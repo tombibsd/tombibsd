@@ -32,7 +32,7 @@
 #include "atomic_op_asm.h"
 
 ENTRY_NP(_atomic_and_64)
-	amoand.d.aq	v0, a1, 0(a0)
+	amoand.d.aq	a0, a1, 0(a0)
 	ret
 END(_atomic_and_64)
 
@@ -43,8 +43,8 @@ CRT_ALIAS(__sync_fetch_and_and_8,_atomic_and_64)
 CRT_ALIAS(__atomic_fetch_and_8,_atomic_and_64)
 
 ENTRY_NP(_atomic_and_64_nv)
-	amoand.d.aq	v0, a1, 0(a0)	/* update memory and get old value */
-	and		v0, v0, a1	/* turn into new value */
+	amoand.d.aq	t0, a1, 0(a0)	/* update memory and get old value */
+	and		a0, t0, a1	/* turn into new value */
 	ret
 END(_atomic_and_64_nv)
 ATOMIC_OP_ALIAS(atomic_and_64_nv,_atomic_and_64_nv)

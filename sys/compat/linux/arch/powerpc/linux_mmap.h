@@ -42,6 +42,7 @@
  */
 #define LINUX_MAP_FIXED		0x0010
 #define LINUX_MAP_ANON		0x0020
+#define LINUX_MAP_LOCKED	0x0080
 
 /* Ignored */
 #define LINUX_MAP_NORESERVE	0x0040

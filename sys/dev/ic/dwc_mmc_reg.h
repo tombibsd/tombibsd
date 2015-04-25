@@ -113,6 +113,27 @@
 	 DWC_MMC_INT_RTO | DWC_MMC_INT_DRTO | DWC_MMC_INT_HTO | \
 	 DWC_MMC_INT_HLE | DWC_MMC_INT_SBE | DWC_MMC_INT_EBE)
 
+#define DWC_MMC_INT_BITS	\
+	"\20"			\
+	"\x19"	"SDIO_INT"	\
+	"\x11"	"NEW_INT"	\
+	"\x10"	"EBE"		\
+	"\x0f"	"ACD"		\
+	"\x0e"	"SBE"		\
+	"\x0d"	"HLE"		\
+	"\x0c"	"FRUN"		\
+	"\x0b"	"HTO"		\
+	"\x0a"	"DRTO"		\
+	"\x09"	"RTO"		\
+	"\x08"	"DCRC"		\
+	"\x07"	"RCRC"		\
+	"\x06"	"RXDR"		\
+	"\x05"	"TXDR"		\
+	"\x04"	"DTO"		\
+	"\x03"	"CD"		\
+	"\x02"	"RE"		\
+	"\x01"	"CARDDET"
+
 #define DWC_MMC_CMD_START_CMD			__BIT(31)
 #define DWC_MMC_CMD_USE_HOLD_REG		__BIT(29)
 #define DWC_MMC_CMD_VOLT_SWITCH			__BIT(28)

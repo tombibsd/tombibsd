@@ -1,12 +1,11 @@
 /Makefile.inc/1.10/Wed Mar 21 05:47:53 2012/-kk/
-/Makefile/1.219/Fri Jan  2 11:22:03 2015/-kk/
+/Makefile/1.220/Sat Mar 21 02:38:02 2015/-kk/
 D/apply////
 D/apropos////
 D/asa////
 D/at////
 D/audio////
 D/audiocfg////
-D/awk////
 D/banner////
 D/basename////
 D/bdes////
@@ -144,6 +143,7 @@ D/pr////
 D/printenv////
 D/printf////
 D/progress////
+D/pwait////
 D/pwhash////
 D/qsubst////
 D/quota////

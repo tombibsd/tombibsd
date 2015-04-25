@@ -57,13 +57,11 @@ YHEADER=	1
 
 YPREFIX.sun_map_parse.y =	sun_map_
 LPREFIX.sun_map_tok.l =	sun_map_
-CPPFLAGS.sun_map_tok.c += -Dyylval=sun_map_lval -Dyyerror=sun_map_error
 
 CWARNFLAGS.clang+=	-Wno-unneeded-internal-declaration
 
 YPREFIX.conf_parse.y =	conf_
 LPREFIX.conf_tok.l =	conf_
-CPPFLAGS.conf_tok.c += -Dyylval=conf_lval -Dyyerror=conf_error
 
 CLEANFILES+=	build_version.h
 DPSRCS+=	build_version.h

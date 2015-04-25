@@ -16,7 +16,3 @@ SRCS.softfloat= softfloat-wrapper.c
 SRCS+= ${SRCS.softfloat}
 CPPFLAGS+=      -I${ARCHDIR}/softfloat -I${.CURDIR}/softfloat \
 		-I${.CURDIR}/softfloat/bits64
-
-#.if ${HAVE_GCC} == 45
-#COPTS.softfloat-wrapper.c+=	-Wno-enum-compare
-#.endif

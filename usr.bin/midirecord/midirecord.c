@@ -74,8 +74,10 @@ static struct timeval start_time;
 static int	tempo = 120;
 static unsigned	notes_per_beat = 24;
 static bool ignore_timer_fail = false;
+static bool stdout_mode = false;
 
-static void debug_log(const char *, size_t, const char *, ...);
+static void debug_log(const char *, size_t, const char *, ...)
+    __printflike(3, 4);
 static size_t midi_event_local_to_output(seq_event_t, u_char *, size_t);
 static size_t midi_event_timer_wait_abs_to_output(seq_event_t, u_char *,
 						  size_t);
@@ -120,7 +122,7 @@ main(int argc, char *argv[])
 			    "channels");
 			break;
 		case 'D':
-			debug++;
+			debug = true;
 			break;
 		case 'd':
 			parse_ints(optarg, &filt_devnos, &num_filt_devnos,
@@ -190,8 +192,10 @@ main(int argc, char *argv[])
 		outfd = open(*argv, mode, 0666);
 		if (outfd < 0)
 			err(1, "could not open %s", *argv);
-	} else
+	} else {
+		stdout_mode = true;
 		outfd = STDOUT_FILENO;
+	}
 
 	/* open the raw output file */
 	if (raw_output) {
@@ -233,7 +237,7 @@ main(int argc, char *argv[])
 	data_size = 0;
 
 	if (verbose)
-		fprintf(stderr, "tempo=%d notes_per_beat=%d\n",
+		fprintf(stderr, "tempo=%d notes_per_beat=%u\n",
 		   tempo, notes_per_beat);
 
 	if (!no_time_limit && verbose)
@@ -278,7 +282,7 @@ debug_log(const char *file, size_t line, const char *fmt, ...)
 
 	if (!debug)
 		return;
-	fprintf(stderr, "%s:%zd: ", file, line);
+	fprintf(stderr, "%s:%zu: ", file, line);
 	va_start(ap, fmt);
 	vfprintf(stderr, fmt, ap);
 	va_end(ap);
@@ -313,21 +317,21 @@ midi_event_timer_wait_abs_to_output(
 {
 	static unsigned prev_div;
 	unsigned cur_div;
-	unsigned val = 0, div;
+	unsigned val = 0, xdiv;
 	int vallen = 0, i;
 
 	if (prev_div == 0 && !oflag)
 		prev_div = e.t_WAIT_ABS.divisions;
 	cur_div = e.t_WAIT_ABS.divisions;
 
-	div = cur_div - prev_div;
-	if (div) {
-		while (div) {
+	xdiv = cur_div - prev_div;
+	if (xdiv) {
+		while (xdiv) {
 			uint32_t extra = val ? 0x80 : 0;
 
 			val <<= 8;
-			val |= (div & 0x7f) | extra;
-			div >>= 7;
+			val |= (xdiv & 0x7f) | extra;
+			xdiv >>= 7;
 			vallen++;
 		}
 	} else
@@ -710,7 +714,7 @@ rewrite_header(void)
 {
 
 	/* can't do this here! */
-	if (outfd == STDOUT_FILENO)
+	if (stdout_mode)
 		return;
 
 	if (lseek(outfd, (off_t)0, SEEK_SET) == (off_t)-1)
@@ -733,7 +737,7 @@ write_midi_header(void)
 		0, 0, /* ntracks */
 		0, 0, /* notes per beat */
 	};
-	/* XXX only spport one track so far */
+	/* XXX only support one track so far */
 	unsigned ntracks = 1;
 	unsigned char track[] = {
 		'M', 'T', 'r', 'k',

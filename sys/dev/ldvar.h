@@ -34,7 +34,7 @@
 
 #include <sys/mutex.h>
 #include <sys/device.h>	/* for device_t */
-#include <sys/rnd.h>
+#include <sys/rndsource.h>
 
 struct ld_softc {
 	device_t sc_dv;

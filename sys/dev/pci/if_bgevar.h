@@ -67,6 +67,7 @@
 #define _DEV_PCI_IF_BGEVAR_H_
 
 #include <sys/bus.h>
+#include <sys/rndsource.h>
 #include <net/if_ether.h>
 #include <dev/pci/pcivar.h>
 

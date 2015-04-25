@@ -5,6 +5,6 @@
 #include <machine/asm.h>
 
 ENTRY(fmaddf)
-	fmadd.s	fv0, fa0, fa1, fa2
+	fmadd.s	fa0, fa0, fa1, fa2
 	ret
 END(fmaddf)

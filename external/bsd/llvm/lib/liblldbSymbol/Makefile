@@ -13,6 +13,7 @@ SRCS+=	Block.cpp \
 	ClangExternalASTSourceCallbacks.cpp \
 	ClangExternalASTSourceCommon.cpp \
 	ClangNamespaceDecl.cpp \
+	CompactUnwindInfo.cpp \
 	CompileUnit.cpp \
 	Declaration.cpp \
 	DWARFCallFrameInfo.cpp \

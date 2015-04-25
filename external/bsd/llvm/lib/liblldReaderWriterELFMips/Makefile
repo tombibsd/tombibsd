@@ -9,6 +9,7 @@ LIB=	lldReaderWriterELFMips
 CPPFLAGS+=	-I${LLD_SRCDIR}/lib/ReaderWriter/ELF
 
 SRCS+=	MipsCtorsOrderPass.cpp \
+	MipsELFFlagsMerger.cpp \
 	MipsLinkingContext.cpp \
 	MipsRelocationHandler.cpp \
 	MipsRelocationPass.cpp \

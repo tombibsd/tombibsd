@@ -77,10 +77,6 @@ SRCS+=	type42.c
 .PATH:	${FREETYPE}/src/winfonts
 SRCS+=	winfnt.c
 
-.PATH:	${FREETYPE}/include
-INCS=	ft2build.h
-INCSDIR=${X11INCDIR}
-
 CPPFLAGS+=	${X11FLAGS.THREADLIB}
 CPPFLAGS+=	-DFT_CONFIG_OPTION_SYSTEM_ZLIB \
 		-DFT_CONFIG_CONFIG_H="<ftconfig.h>" \
@@ -100,7 +96,7 @@ LIBDPLIBS= \
 
 PKGCONFIG=	freetype2
 PKGDIST.freetype2=	${.CURDIR}
-PKGCONFIG_VERSION.freetype2=	9.20.3
+PKGCONFIG_VERSION.freetype2=	17.4.11
 
 .include <bsd.x11.mk>
 .include <bsd.lib.mk>

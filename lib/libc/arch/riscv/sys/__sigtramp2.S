@@ -50,6 +50,5 @@ ENTRY_NP(__sigtramp_siginfo_2)
 	addi		a0, sp, SIGINFO_SIZE	/* address of ucontext */
 	SYSTRAP(setcontext)			/* and do setcontext */
 	nop
-	move		a0, v0			/* exit with errno */
 	SYSTRAP(exit)				/* if sigreturn fails */
 END(__sigtramp_siginfo_2)

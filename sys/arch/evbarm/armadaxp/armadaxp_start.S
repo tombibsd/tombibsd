@@ -78,6 +78,10 @@ _C_LABEL(armadaxp_start):
 	dsb
 	isb
 
+	/* Save U-Boot arguments */
+	adr	r4, uboot_regs_pa
+	stmia	r4!, {r0, r1, r2, r3}
+
 	/* build page table from scratch */
 	movw	r0, #:lower16:STARTUP_PAGETABLE_ADDR
 	movt	r0, #:upper16:STARTUP_PAGETABLE_ADDR
@@ -132,6 +136,10 @@ _C_LABEL(armadaxp_start):
 	bx	ip
 
 	/* NOTREACHED */
+
+	.global _C_LABEL(uboot_regs_pa)
+uboot_regs_pa:
+	.space	16 /* r0, r1, r2, r3 */
 
 #define MMU_INIT(va,pa,n_sec,attr) \
 	.word	n_sec					; \

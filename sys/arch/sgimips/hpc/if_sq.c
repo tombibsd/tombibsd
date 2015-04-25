@@ -124,9 +124,9 @@ CFATTACH_DECL_NEW(sq, sizeof(struct sq_softc),
 #define ETHER_PAD_LEN (ETHER_MIN_LEN - ETHER_CRC_LEN)
 
 #define sq_seeq_read(sc, off) \
-	bus_space_read_1(sc->sc_regt, sc->sc_regh, off)
+	bus_space_read_1(sc->sc_regt, sc->sc_regh, (off << 2) + 3)
 #define sq_seeq_write(sc, off, val) \
-	bus_space_write_1(sc->sc_regt, sc->sc_regh, off, val)
+	bus_space_write_1(sc->sc_regt, sc->sc_regh, (off << 2) + 3, val)
 
 #define sq_hpc_read(sc, off) \
 	bus_space_read_4(sc->sc_hpct, sc->sc_hpch, off)

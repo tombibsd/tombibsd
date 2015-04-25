@@ -18,7 +18,7 @@
  *    derived from this software without specific prior written permission.
  */
 
-#include <sys/rnd.h>
+#include <sys/rndsource.h>
 
 struct xi_softc {
 	device_t sc_dev;			/* Generic device info */

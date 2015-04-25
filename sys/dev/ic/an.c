@@ -569,8 +569,8 @@ an_init(struct ifnet *ifp)
 	if (ic->ic_des_esslen)
 		memcpy(sc->sc_buf.sc_ssidlist.an_entry[0].an_ssid,
 		    ic->ic_des_essid, ic->ic_des_esslen);
-	if (an_write_rid(sc, AN_RID_SSIDLIST, &sc->sc_buf,
-	    sizeof(sc->sc_buf.sc_ssidlist)) != 0) {
+	if ((error = an_write_rid(sc, AN_RID_SSIDLIST, &sc->sc_buf,
+	    sizeof(sc->sc_buf.sc_ssidlist))) != 0) {
 		printf("%s: failed to write ssid list\n", ifp->if_xname);
 		an_stop(ifp, 1);
 		return error;
@@ -604,8 +604,8 @@ an_init(struct ifnet *ifp)
 		printf("\n");
 	}
 #endif
-	if (an_write_rid(sc, AN_RID_GENCONFIG, &sc->sc_config,
-	    sizeof(sc->sc_config)) != 0) {
+	if ((error = an_write_rid(sc, AN_RID_GENCONFIG, &sc->sc_config,
+	    sizeof(sc->sc_config))) != 0) {
 		printf("%s: failed to write config\n", ifp->if_xname);
 		an_stop(ifp, 1);
 		return error;

@@ -30,3 +30,6 @@ tmpfs	/tmp		tmpfs	rw
 
 # Mounts a tmpfs instance to be used by a specific user.
 #tmpfs	/home/foo/tmp	tmpfs	rw,-ufoo,-gusers,-s50M
+
+# Shared memory tempfs template allocating 25% of available memory
+tmpfs	/var/shm	tmpfs	rw,-m1777,-sram%25

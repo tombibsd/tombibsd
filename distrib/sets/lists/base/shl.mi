@@ -13,15 +13,18 @@
 #
 # Note:	libtermcap and libtermlib are hardlinked and share the same version.
 #
+./lib/libblacklist.so				base-sys-shlib		dynamicroot
+./lib/libblacklist.so.0				base-sys-shlib		dynamicroot
+./lib/libblacklist.so.0.0			base-sys-shlib		dynamicroot
 ./lib/libc.so					base-sys-shlib		dynamicroot
 ./lib/libc.so.12				base-sys-shlib		dynamicroot
-./lib/libc.so.12.196				base-sys-shlib		dynamicroot
+./lib/libc.so.12.197				base-sys-shlib		dynamicroot
 ./lib/libcrypt.so				base-sys-shlib		dynamicroot
 ./lib/libcrypt.so.1				base-sys-shlib		dynamicroot
 ./lib/libcrypt.so.1.0				base-sys-shlib		dynamicroot
 ./lib/libcrypto.so				base-crypto-shlib	crypto,dynamicroot
 ./lib/libcrypto.so.8				base-crypto-shlib	crypto,dynamicroot
-./lib/libcrypto.so.8.3				base-crypto-shlib	crypto,dynamicroot
+./lib/libcrypto.so.8.4				base-crypto-shlib	crypto,dynamicroot
 ./lib/libdevmapper.so				base-lvm-shlib		lvm,dynamicroot
 ./lib/libdevmapper.so.1				base-lvm-shlib		lvm,dynamicroot
 ./lib/libdevmapper.so.1.0			base-lvm-shlib		lvm,dynamicroot
@@ -47,8 +50,8 @@
 ./lib/liblzf.so.1				base-sys-shlib		dynamicroot
 ./lib/liblzf.so.1.0				base-sys-shlib		dynamicroot
 ./lib/liblzma.so				base-sys-shlib		dynamicroot
-./lib/liblzma.so.1				base-sys-shlib		dynamicroot
-./lib/liblzma.so.1.1				base-sys-shlib		dynamicroot
+./lib/liblzma.so.2				base-sys-shlib		dynamicroot
+./lib/liblzma.so.2.0				base-sys-shlib		dynamicroot
 ./lib/libm.so					base-sys-shlib		dynamicroot
 ./lib/libm.so.0					base-sys-shlib		dynamicroot
 ./lib/libm.so.0.11				base-sys-shlib		dynamicroot
@@ -57,7 +60,7 @@
 ./lib/libnpf.so.0.0				base-npf-shlib		npf,dynamicroot
 ./lib/libpcap.so				base-sys-shlib		dynamicroot
 ./lib/libpcap.so.5				base-sys-shlib		dynamicroot
-./lib/libpcap.so.5.0				base-sys-shlib		dynamicroot
+./lib/libpcap.so.5.1				base-sys-shlib		dynamicroot
 ./lib/libppath.so				base-sys-shlib		dynamicroot
 ./lib/libppath.so.0				base-sys-shlib		dynamicroot
 ./lib/libppath.so.0.0				base-sys-shlib		dynamicroot
@@ -164,8 +167,8 @@
 ./usr/lib/i18n/libmapper_zone.so		base-i18n-shlib
 ./usr/lib/i18n/libmapper_zone.so.5		base-i18n-shlib
 ./usr/lib/i18n/libmapper_zone.so.5.0		base-i18n-shlib
-./usr/lib/libamu.so.4				base-amd-shlib
-./usr/lib/libamu.so.4.0				base-amd-shlib
+./usr/lib/libamu.so.5				base-amd-shlib
+./usr/lib/libamu.so.5.0				base-amd-shlib
 ./usr/lib/libarchive.so				base-sys-shlib
 ./usr/lib/libarchive.so.3			base-sys-shlib
 ./usr/lib/libarchive.so.3.1			base-sys-shlib
@@ -189,6 +192,9 @@
 ./usr/lib/libbind9.so				base-bind-shlib
 ./usr/lib/libbind9.so.8				base-bind-shlib
 ./usr/lib/libbind9.so.8.1			base-bind-shlib
+./usr/lib/libblacklist.so			base-sys-shlib
+./usr/lib/libblacklist.so.0			base-sys-shlib
+./usr/lib/libblacklist.so.0.0			base-sys-shlib
 ./usr/lib/libbluetooth.so			base-sys-shlib
 ./usr/lib/libbluetooth.so.4			base-sys-shlib
 ./usr/lib/libbluetooth.so.4.2			base-sys-shlib
@@ -203,7 +209,7 @@
 ./usr/lib/libc++.so.1.0				base-sys-shlib		libcxx
 ./usr/lib/libc.so				base-sys-shlib
 ./usr/lib/libc.so.12				base-sys-shlib
-./usr/lib/libc.so.12.196			base-sys-shlib
+./usr/lib/libc.so.12.197			base-sys-shlib
 ./usr/lib/libcdk.so				base-obsolete		obsolete
 ./usr/lib/libcom_err.so				base-krb5-shlib		kerberos
 ./usr/lib/libcom_err.so.7			base-krb5-shlib		kerberos
@@ -213,7 +219,7 @@
 ./usr/lib/libcrypt.so.1.0			base-sys-shlib
 ./usr/lib/libcrypto.so				base-crypto-shlib	crypto
 ./usr/lib/libcrypto.so.8			base-crypto-shlib	crypto
-./usr/lib/libcrypto.so.8.3			base-crypto-shlib	crypto
+./usr/lib/libcrypto.so.8.4			base-crypto-shlib	crypto
 ./usr/lib/libcrypto_idea.so.7			base-obsolete		obsolete
 ./usr/lib/libcrypto_idea.so.7.0			base-obsolete		obsolete
 ./usr/lib/libcrypto_mdc2.so.7			base-obsolete		obsolete
@@ -376,14 +382,14 @@
 ./usr/lib/liblzf.so.1				base-sys-shlib
 ./usr/lib/liblzf.so.1.0				base-sys-shlib
 ./usr/lib/liblzma.so				base-sys-shlib
-./usr/lib/liblzma.so.1				base-sys-shlib
-./usr/lib/liblzma.so.1.1			base-sys-shlib
+./usr/lib/liblzma.so.2				base-sys-shlib
+./usr/lib/liblzma.so.2.0			base-sys-shlib
 ./usr/lib/libm.so				base-sys-shlib
 ./usr/lib/libm.so.0				base-sys-shlib
 ./usr/lib/libm.so.0.11				base-sys-shlib
 ./usr/lib/libmagic.so				base-sys-shlib
 ./usr/lib/libmagic.so.5				base-sys-shlib
-./usr/lib/libmagic.so.5.0			base-sys-shlib
+./usr/lib/libmagic.so.5.1			base-sys-shlib
 ./usr/lib/libmenu.so				base-sys-shlib
 ./usr/lib/libmenu.so.6				base-sys-shlib
 ./usr/lib/libmenu.so.6.0			base-sys-shlib
@@ -423,7 +429,7 @@
 ./usr/lib/libpam.so.4.0				base-sys-shlib		pam
 ./usr/lib/libpcap.so				base-net-shlib
 ./usr/lib/libpcap.so.5				base-net-shlib
-./usr/lib/libpcap.so.5.0			base-net-shlib
+./usr/lib/libpcap.so.5.1			base-net-shlib
 ./usr/lib/libpci.so				base-sys-shlib
 ./usr/lib/libpci.so.2				base-sys-shlib
 ./usr/lib/libpci.so.2.1				base-sys-shlib
@@ -661,6 +667,9 @@
 ./usr/lib/librumpkern_solaris.so		base-rump-shlib		zfs,rump
 ./usr/lib/librumpkern_solaris.so.0		base-rump-shlib		zfs,rump
 ./usr/lib/librumpkern_solaris.so.0.0		base-rump-shlib		zfs,rump
+./usr/lib/librumpkern_sysproxy.so			base-rump-shlib	rump
+./usr/lib/librumpkern_sysproxy.so.0			base-rump-shlib	rump
+./usr/lib/librumpkern_sysproxy.so.0.0			base-rump-shlib	rump
 ./usr/lib/librumpkern_time.so			base-obsolete obsolete
 ./usr/lib/librumpkern_time.so.0			base-obsolete obsolete
 ./usr/lib/librumpkern_time.so.0.0		base-obsolete obsolete
@@ -745,11 +754,11 @@
 ./usr/lib/libsqlite3.so.1.2			base-sys-shlib
 ./usr/lib/libss.so				base-obsolete		obsolete
 ./usr/lib/libssh.so				base-secsh-shlib	crypto
-./usr/lib/libssh.so.23				base-secsh-shlib	crypto
-./usr/lib/libssh.so.23.0			base-secsh-shlib	crypto
+./usr/lib/libssh.so.24				base-secsh-shlib	crypto
+./usr/lib/libssh.so.24.0			base-secsh-shlib	crypto
 ./usr/lib/libssl.so				base-crypto-shlib	crypto
 ./usr/lib/libssl.so.10				base-crypto-shlib	crypto
-./usr/lib/libssl.so.10.4				base-crypto-shlib	crypto
+./usr/lib/libssl.so.10.5				base-crypto-shlib	crypto
 ./usr/lib/libstdc++.so				base-sys-shlib		gcc,cxx,libstdcxx
 ./usr/lib/libstdc++.so.5			base-sys-shlib		gcc=3,libstdcxx
 ./usr/lib/libstdc++.so.5.0			base-sys-shlib		gcc=3,cxx,libstdcxx

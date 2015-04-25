@@ -48,7 +48,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <dev/i2c/i2cvar.h>
 
-#define RKIIC_CLOCK_RATE	400000
+#define RKIIC_CLOCK_RATE	100000
 
 struct rkiic_softc {
 	device_t sc_dev;
@@ -129,6 +129,14 @@ rkiic_attach(device_t parent, device_t self, void *aux)
 		}
 	}
 
+	if (rkiic_set_rate(sc, RKIIC_CLOCK_RATE) != 0) {
+		aprint_error_dev(sc->sc_dev, "couldn't set clock rate\n");
+		return;
+	}
+
+	I2C_WRITE(sc, I2C_CON_REG, 0);
+	I2C_WRITE(sc, I2C_IEN_REG, 0);
+
 	sc->sc_ic.ic_cookie = sc;
 	sc->sc_ic.ic_acquire_bus = rkiic_acquire_bus;
 	sc->sc_ic.ic_release_bus = rkiic_release_bus;
@@ -150,6 +158,10 @@ rkiic_intr(void *priv)
 		return 0;
 
 	I2C_WRITE(sc, I2C_IPD_REG, ipd);
+
+#ifdef RKIIC_INTR
+	device_printf(sc->sc_dev, "%s: ipd %#x\n", __func__, ipd);
+#endif
 
 	mutex_enter(&sc->sc_lock);
 	sc->sc_intr_ipd |= ipd;
@@ -183,46 +195,51 @@ rkiic_exec(void *priv, i2c_op_t op, i2c_addr_t addr,
 {
 	struct rkiic_softc *sc = priv;
 	uint32_t con, ien;
-	u_int mode;
+	u_int mode, sraddr;
 	int error;
 
 	KASSERT(mutex_owned(&sc->sc_lock));
 
-	if (sc->sc_ih == NULL) {
+	if (sc->sc_ih == NULL || cold) {
 		flags |= I2C_F_POLL;
 	}
 
 	if (cmdlen != 0 && cmdlen != 1)
 		return EINVAL;
 
+	if (I2C_OP_READ_P(op)) {
+		if (len > 32)
+			return EINVAL;
+	} else {
+		if (len > 30)
+			return EINVAL;
+	}
+
 	error = rkiic_set_rate(sc, RKIIC_CLOCK_RATE);
 	if (error)
 		return error;
 
-	I2C_WRITE(sc, I2C_MRXADDR_REG, I2C_MRXADDR_ADDLVLD |
-	    __SHIFTIN(addr, I2C_MRXADDR_SADDR));
-
 	if (cmdlen == 1) {
-		const uint8_t reg = *(const uint8_t *)cmdbuf;
 		if (I2C_OP_READ_P(op)) {
 			mode = I2C_CON_MODE_TRX;
 		} else {
 			mode = I2C_CON_MODE_TX;
 		}
-		I2C_WRITE(sc, I2C_MRXRADDR_REG, I2C_MRXRADDR_SRADDLVLD |
-		    __SHIFTIN(reg, I2C_MRXRADDR_SRADDR));
+		sraddr = *(const uint8_t *)cmdbuf;
 	} else {
 		if (I2C_OP_READ_P(op)) {
 			mode = I2C_CON_MODE_RX;
 		} else {
 			mode = I2C_CON_MODE_TX;
 		}
-		I2C_WRITE(sc, I2C_MRXRADDR_REG, 0);
+		sraddr = 0;
 	}
 
 	sc->sc_intr_ipd = 0;
+	I2C_WRITE(sc, I2C_IPD_REG, I2C_READ(sc, I2C_IPD_REG));
 
-	ien = I2C_INT_START | (I2C_OP_READ_P(op) ? I2C_INT_MBRF : I2C_INT_MBTF);
+	ien = I2C_OP_READ_P(op) ? I2C_INT_MBRF : I2C_INT_MBTF;
+	ien |= I2C_INT_START | I2C_INT_STOP | I2C_INT_NAKRCV;
 	I2C_WRITE(sc, I2C_IEN_REG, ien);
 
 	con = I2C_CON_START | I2C_CON_EN | I2C_CON_ACK |
@@ -236,18 +253,45 @@ rkiic_exec(void *priv, i2c_op_t op, i2c_addr_t addr,
 #endif
 		goto done;
 	}
+	con &= ~I2C_CON_START;
+	I2C_WRITE(sc, I2C_CON_REG, con);
+
+	I2C_WRITE(sc, I2C_MRXADDR_REG, I2C_MRXADDR_ADDLVLD |
+	    __SHIFTIN((addr << 1), I2C_MRXADDR_SADDR));
+	I2C_WRITE(sc, I2C_MRXRADDR_REG, I2C_MRXRADDR_SRADDLVLD |
+	    __SHIFTIN(sraddr, I2C_MRXRADDR_SRADDR));
 
 	if (I2C_OP_READ_P(op)) {
 		error = rkiic_read(sc, addr, buf, len, flags);
 	} else {
-		error = rkiic_write(sc, addr, buf, len, flags);
+		uint8_t tmp_buf[32];
+		tmp_buf[0] = addr << 1;
+		if (cmdlen == 1) {
+			tmp_buf[1] = sraddr;
+			memcpy(&tmp_buf[2], buf, len);
+		} else {
+			memcpy(&tmp_buf[1], buf, len);
+		}
+		error = rkiic_write(sc, addr, tmp_buf, len + cmdlen + 1, flags);
 	}
 
 	if (I2C_OP_STOP_P(op)) {
-		I2C_WRITE(sc, I2C_CON_REG, I2C_CON_STOP);
+		con = I2C_READ(sc, I2C_CON_REG);
+		con |= I2C_CON_STOP;
+		I2C_WRITE(sc, I2C_CON_REG, con);
+		if (rkiic_wait(sc, I2C_INT_STOP, hz, flags) != 0) {
+#ifdef RKIIC_DEBUG
+			device_printf(sc->sc_dev, "timeout waiting for stop\n");
+#endif
+			error = ETIMEDOUT;
+			goto done;
+		}
+		con &= ~I2C_CON_STOP;
+		I2C_WRITE(sc, I2C_CON_REG, con);
 	}
 
 done:
+	I2C_WRITE(sc, I2C_CON_REG, 0);
 	I2C_WRITE(sc, I2C_IEN_REG, 0);
 	return error;
 }
@@ -275,14 +319,22 @@ rkiic_wait(struct rkiic_softc *sc, uint32_t mask, int timeout, int flags)
 		retry = timeout / hz;
 		while (retry > 0) {
 			error = cv_timedwait(&sc->sc_cv, &sc->sc_lock, hz);
-			if (error && error != EWOULDBLOCK)
-				return error;
+			if (error) {
+				if (error != EWOULDBLOCK) {
+					return error;
+				} else {
+					--retry;
+				}
+			}
 			if (sc->sc_intr_ipd & mask)
 				return 0;
-			--retry;
 		}
 	}
 
+#ifdef RKIIC_DEBUG
+	device_printf(sc->sc_dev, "%s: ipd %#x flags %#x\n", __func__,
+	    sc->sc_intr_ipd, flags);
+#endif
 	return ETIMEDOUT;
 }
 
@@ -305,6 +357,13 @@ rkiic_read(struct rkiic_softc *sc, i2c_addr_t addr, uint8_t *buf,
 		device_printf(sc->sc_dev, "read timeout\n");
 #endif
 		return error;
+	}
+
+	if (sc->sc_intr_ipd & I2C_INT_NAKRCV) {
+#ifdef RKIIC_DEBUG
+		device_printf(sc->sc_dev, "nak received\n");
+#endif
+		return EIO;
 	}
 
 	for (off = 0, resid = buflen; off < 8 && resid > 0; off++) {
@@ -331,7 +390,7 @@ rkiic_write(struct rkiic_softc *sc, i2c_addr_t addr, const uint8_t *buf,
 	for (off = 0, resid = buflen; off < 8 && resid > 0; off++) {
 		uint32_t data = 0;
 		for (byte = 0; byte < 4 && resid > 0; byte++, resid--) {
-			data |= buf[off * 4 + byte] << (byte * 8);
+			data |= (uint32_t)buf[off * 4 + byte] << (byte * 8);
 		}
 		I2C_WRITE(sc, I2C_TXDATA_REG(off), data);
 	}
@@ -344,6 +403,13 @@ rkiic_write(struct rkiic_softc *sc, i2c_addr_t addr, const uint8_t *buf,
 		device_printf(sc->sc_dev, "write timeout\n");
 #endif
 		return error;
+	}
+
+	if (sc->sc_intr_ipd & I2C_INT_NAKRCV) {
+#ifdef RKIIC_DEBUG
+		device_printf(sc->sc_dev, "nak received\n");
+#endif
+		return EIO;
 	}
 
 	return 0;

@@ -57,7 +57,7 @@ static int linux_to_bsd_limit(int);
     linux_to_bsd_rlimit1(b, l, rlim_max)
 
 #define linux32_to_bsd_rlimit1(b, l, f) \
-    (b)->f = (l)->f == LINUX32_RLIM_INFINITY ? RLIM_INFINITY : (l)->f
+    (b)->f = (l)->f == LINUX32_RLIM_INFINITY ? RLIM_INFINITY : (uint32_t)(l)->f
 #define linux32_to_bsd_rlimit(b, l) \
     linux32_to_bsd_rlimit1(b, l, rlim_cur); \
     linux32_to_bsd_rlimit1(b, l, rlim_max)

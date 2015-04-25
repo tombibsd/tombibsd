@@ -96,8 +96,8 @@ const char * const ifpga_irqnames[] = {
 	"pci lb",	/* 20 */
 	"autoPC",	/* 21 */
 	"irq 22",	/* 22 */
-	"irq 23",	/* 23 */
-	"irq 24",	/* 24 */
+	"mmc 0",	/* 23 */
+	"mmc 1",	/* 24 */
 	"irq 25",	/* 25 */
 	"irq 26",	/* 26 */
 	"irq 27",	/* 27 */

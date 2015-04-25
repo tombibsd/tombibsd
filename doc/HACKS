@@ -928,6 +928,16 @@ port	ia64
 		{standard input}:22978: Warning: This is the location of the conflicting usage
 	kcah
 
+	hack	libgcc unwind dummy function
+	cdate	Fri Apr 17 14:31:03 CEST 2015
+	who	martin
+	file	src/external/gpl3/gcc/dist/libgcc/config/ia64/unwind-ia64.c: 1.4
+	descr
+		Add an empty _Unwind_FindTableEntry() implementation.
+		In the end we will use our libc stuff, and this should
+		go away again.
+	kcah
+
 port	x68k
 
 	hack	compiler error with gcc 4.5.x
@@ -952,7 +962,7 @@ descr
 	This applies only if RPCGEN_CPP is not set and /usr/bin/cpp is not executable.
 kcah
 
-port	hp700
+port	hppa
 
 	hack	compiler error with gcc 4.5.x
 	cdate	Tue Jul 23 07:42:28 BST 2013
@@ -960,6 +970,17 @@ port	hp700
 	file	src/sys/lib/libkern/Makefile.libkern: 1.26
 	descr
 		workaround for unanalysed codegen bug affecting md5c.c.
+	kcah
+
+	hack	gdb vs _rtld_debug_state problem
+	cdate	Thu Mar  5 09:49:53 UTC 2015
+	who	skrll
+	file	src/libexec/ld.elf_so/rtld.c: 1.175
+	descr
+		workaround for problem where gdb misses the breakpoint on
+		_rtld_debug_state when the function is only the
+		bv,n %r0(%rp) instruction - the nullify seems to
+		confuse something
 	kcah
 
 port	mips64*
@@ -982,3 +1003,9 @@ file	src/sys/arch/vax/boot/boot/Makefile: 1.41
 descr	/boot does not work when compiled with -O2 and gcc 4.8
 kcah
 
+port	arm
+hack	avoid using labels in a 12-bit constant.
+who	matt
+file	crypto/external/bsd/openssl/lib/libcrypto/arch/arm/aes-armv4.S: 1.2
+descr	workaround for clang misassembling an instruction
+kcah

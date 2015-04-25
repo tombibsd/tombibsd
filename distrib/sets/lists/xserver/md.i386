@@ -405,8 +405,8 @@
 ./usr/X11R7/lib/modules/dri/r128_dri.so.0		-unknown-	obsolete
 ./usr/X11R7/lib/modules/dri/r200_dri.so			-unknown-	xorg
 ./usr/X11R7/lib/modules/dri/r200_dri.so.0		-unknown-	xorg
-./usr/X11R7/lib/modules/dri/r300_dri.so			-unknown-	obsolete
-./usr/X11R7/lib/modules/dri/r300_dri.so.0		-unknown-	obsolete
+./usr/X11R7/lib/modules/dri/r300_dri.so			-unknown-	xorg
+./usr/X11R7/lib/modules/dri/r300_dri.so.0		-unknown-	xorg
 ./usr/X11R7/lib/modules/dri/r600_dri.so			-unknown-	xorg
 ./usr/X11R7/lib/modules/dri/r600_dri.so.0		-unknown-	xorg
 ./usr/X11R7/lib/modules/dri/radeon_dri.so		-unknown-	xorg
@@ -486,7 +486,8 @@
 ./usr/X11R7/lib/modules/drivers/r128_drv.so		-unknown-	xorg
 ./usr/X11R7/lib/modules/drivers/r128_drv.so.6		-unknown-	xorg
 ./usr/X11R7/lib/modules/drivers/radeon_drv.so		-unknown-	xorg
-./usr/X11R7/lib/modules/drivers/radeon_drv.so.6		-unknown-	xorg
+./usr/X11R7/lib/modules/drivers/radeon_drv.so.6		-unknown-	xorg,!x11radeonkms
+./usr/X11R7/lib/modules/drivers/radeon_drv.so.7		-unknown-	xorg,x11radeonkms
 ./usr/X11R7/lib/modules/drivers/radeonhd_drv.so		-unknown-	xorg
 ./usr/X11R7/lib/modules/drivers/radeonhd_drv.so.1	-unknown-	xorg
 ./usr/X11R7/lib/modules/drivers/s3_drv.so		-unknown-	xorg

@@ -8,13 +8,13 @@
 /coda_opstats.h/1.6/Sun Dec 11 12:19:50 2005/-kk/
 /coda_pioctl.h/1.8/Sat Aug  7 20:39:33 2010/-kk/
 /coda_psdev.c/1.54/Sat Dec 27 03:35:42 2014/-kk/
-/coda_subr.c/1.30/Sat Dec 27 03:35:42 2014/-kk/
+/coda_subr.c/1.31/Mon Jan 12 06:48:37 2015/-kk/
 /coda_subr.h/1.9/Thu Aug  2 16:06:58 2012/-kk/
 /coda_venus.c/1.30/Thu Oct 24 10:28:57 2013/-kk/
 /coda_venus.h/1.11/Sun Mar  4 06:01:12 2007/-kk/
 /coda_vfsops.c/1.84/Sat Dec 27 03:35:42 2014/-kk/
 /coda_vfsops.h/1.19/Sat Dec 27 03:35:42 2014/-kk/
-/coda_vnops.c/1.101/Sat Dec 27 03:35:42 2014/-kk/
+/coda_vnops.c/1.102/Wed Apr 22 07:36:41 2015/-kk/
 /coda_vnops.h/1.16/Thu Aug  2 16:06:59 2012/-kk/
 /files.coda/1.6/Tue Mar  2 16:43:48 2010/-kk/
 D

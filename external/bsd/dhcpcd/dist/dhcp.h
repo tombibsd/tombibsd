@@ -2,7 +2,7 @@
 
 /*
  * dhcpcd - DHCP client daemon
- * Copyright (c) 2006-2014 Roy Marples <roy@marples.name>
+ * Copyright (c) 2006-2015 Roy Marples <roy@marples.name>
  * All rights reserved
 
  * Redistribution and use in source and binary forms, with or without
@@ -183,7 +183,6 @@ struct dhcp_lease {
 	uint32_t renewaltime;
 	uint32_t rebindtime;
 	struct in_addr server;
-	time_t leasedfrom;
 	uint8_t frominfo;
 	uint32_t cookie;
 };
@@ -225,7 +224,7 @@ struct dhcp_state {
 	struct in_addr dst;
 	uint8_t added;
 
-	char leasefile[sizeof(LEASEFILE) + IF_NAMESIZE];
+	char leasefile[sizeof(LEASEFILE) + IF_NAMESIZE + (IF_SSIDSIZE * 4)];
 	time_t start_uptime;
 
 	unsigned char *clientid;
@@ -292,13 +291,13 @@ void dhcp_close(struct interface *);
 void dhcp_free(struct interface *);
 int dhcp_dump(struct interface *);
 #else
-#define dhcp_drop(a, b)
+#define dhcp_drop(a, b) {}
 #define dhcp_start(a) {}
-#define dhcp_reboot(a, b) b = b
-#define dhcp_reboot_newopts(a, b)
-#define dhcp_close(a)
-#define dhcp_free(a)
-#define dhcp_dump(a) -1
+#define dhcp_reboot(a, b) (b = b)
+#define dhcp_reboot_newopts(a, b) (b = b)
+#define dhcp_close(a) {}
+#define dhcp_free(a) {}
+#define dhcp_dump(a) (-1)
 #endif
 
 #endif

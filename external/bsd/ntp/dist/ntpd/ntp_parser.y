@@ -222,6 +222,8 @@
 %token	<Integer>	T_Stats
 %token	<Integer>	T_Statsdir
 %token	<Integer>	T_Step
+%token	<Integer>	T_Stepback
+%token	<Integer>	T_Stepfwd
 %token	<Integer>	T_Stepout
 %token	<Integer>	T_Stratum
 %token	<String>	T_String		/* not a token */
@@ -1111,6 +1113,8 @@ tinker_option_keyword
 	|	T_Huffpuff
 	|	T_Panic
 	|	T_Step
+	|	T_Stepback
+	|	T_Stepfwd
 	|	T_Stepout
 	|	T_Tick
 	;

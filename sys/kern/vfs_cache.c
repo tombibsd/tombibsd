@@ -258,6 +258,9 @@ static void cache_reclaim(void);
 static int cache_ctor(void *, void *, int);
 static void cache_dtor(void *, void *);
 
+static struct sysctllog *sysctllog;
+static void sysctl_cache_stat_setup(void);
+
 /*
  * Compute the hash for an entry.
  *
@@ -394,7 +397,7 @@ cache_lookup_entry(const struct vnode *dvp, const char *name, size_t namelen)
 	ncpp = &nchashtbl[NCHASH2(hash, dvp)];
 
 	LIST_FOREACH(ncp, ncpp, nc_hash) {
-		/* XXX Needs barrier for Alpha here */
+		membar_datadep_consumer();	/* for Alpha... */
 		if (ncp->nc_dvp != dvp ||
 		    ncp->nc_nlen != namelen ||
 		    memcmp(ncp->nc_name, name, (u_int)ncp->nc_nlen))
@@ -552,7 +555,7 @@ cache_lookup(struct vnode *dvp, const char *name, size_t namelen,
 	/*
 	 * Unlocked except for the vnode interlock.  Call vget().
 	 */
-	error = vget(vp, LK_NOWAIT);
+	error = vget(vp, LK_NOWAIT, false /* !wait */);
 	if (error) {
 		KASSERT(error == EBUSY);
 		/*
@@ -633,7 +636,7 @@ cache_lookup_raw(struct vnode *dvp, const char *name, size_t namelen,
 	/*
 	 * Unlocked except for the vnode interlock.  Call vget().
 	 */
-	error = vget(vp, LK_NOWAIT);
+	error = vget(vp, LK_NOWAIT, false /* !wait */);
 	if (error) {
 		KASSERT(error == EBUSY);
 		/*
@@ -721,7 +724,7 @@ cache_revlookup(struct vnode *vp, struct vnode **dvpp, char **bpp, char *bufp)
 			mutex_enter(dvp->v_interlock);
 			mutex_exit(&ncp->nc_lock); 
 			mutex_exit(namecache_lock);
-			error = vget(dvp, LK_NOWAIT);
+			error = vget(dvp, LK_NOWAIT, false /* !wait */);
 			if (error) {
 				KASSERT(error == EBUSY);
 				if (bufp)
@@ -885,6 +888,8 @@ nchinit(void)
 	   "namecache", "under scan target");
 	evcnt_attach_dynamic(&cache_ev_forced, EVCNT_TYPE_MISC, NULL,
 	   "namecache", "forced reclaims");
+
+	sysctl_cache_stat_setup();
 }
 
 static int
@@ -1250,9 +1255,12 @@ cache_stat_sysctl(SYSCTLFN_ARGS)
 	return sysctl_copyout(l, &stats, oldp, sizeof(stats));
 }
 
-SYSCTL_SETUP(sysctl_cache_stat_setup, "vfs.namecache_stats subtree setup")
+static void
+sysctl_cache_stat_setup(void)
 {
-	sysctl_createv(clog, 0, NULL, NULL,
+
+	KASSERT(sysctllog == NULL);
+	sysctl_createv(&sysctllog, 0, NULL, NULL,
 		       CTLFLAG_PERMANENT,
 		       CTLTYPE_STRUCT, "namecache_stats",
 		       SYSCTL_DESCR("namecache statistics"),

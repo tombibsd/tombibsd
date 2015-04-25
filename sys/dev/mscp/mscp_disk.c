@@ -472,7 +472,7 @@ raioctl(dev_t dev, u_long cmd, void *data, int flag, struct lwp *l)
 		tp->d_ncylinders = lp->d_ncylinders;
 		tp->d_secpercyl = lp->d_secpercyl;
 		tp->d_secperunit = lp->d_secperunit;
-		tp->d_type = DTYPE_MSCP;
+		tp->d_type = DKTYPE_MSCP;
 		tp->d_rpm = 3600;
 		rrmakelabel(tp, ra->ra_mediaid);
 #ifdef __HAVE_OLD_DISKLABEL
@@ -960,10 +960,10 @@ rronline(device_t usc, struct mscp *mp)
 
 	if (dl->d_secpercyl) {
 		dl->d_ncylinders = dl->d_secperunit/dl->d_secpercyl;
-		dl->d_type = DTYPE_MSCP;
+		dl->d_type = DKTYPE_MSCP;
 		dl->d_rpm = 3600;
 	} else {
-		dl->d_type = DTYPE_FLOPPY;
+		dl->d_type = DKTYPE_FLOPPY;
 		dl->d_rpm = 300;
 	}
 	rrmakelabel(dl, ra->ra_mediaid);

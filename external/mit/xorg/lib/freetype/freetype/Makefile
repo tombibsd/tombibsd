@@ -15,7 +15,7 @@ INCS=	freetype.h ftadvanc.h ftbbox.h ftbdf.h ftbitmap.h ftbzip2.h ftcache.h \
 	ftpfr.h ftrender.h ftsizes.h ftsnames.h ftstroke.h ftsynth.h \
 	ftsystem.h fttrigon.h fttypes.h ftwinfnt.h ftxf86.h \
 	t1tables.h ttnameid.h tttables.h tttags.h ttunpat.h \
-	ftautoh.h ftcffdrv.h
+	ftautoh.h ftcffdrv.h ft2build.h
 
 SCRIPTS=	freetype-config
 
@@ -33,6 +33,7 @@ CONFIG_SUBST=	${TOOL_SED} \
 		-e 's,%LIBS_CONFIG%,-lfreetype -lz -lbz2,' \
 		-e 's,%LIBSSTATIC_CONFIG%,-lfreetype -lz -lbz2,' \
 		-e 's,%build_libtool_libs%,yes,' \
+		-e 's@%hardcode_libdir_flag_spec%@-Wl,-rpath,${X11USRLIBDIR}@' \
 		-e 's,%FT2_EXTRA_LIBS%,,' \
 		-e 's,%LIBZ%,-lz,' \
 		-e 's,%LIBBZ2%,-lbz2,' \

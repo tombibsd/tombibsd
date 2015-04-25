@@ -244,18 +244,28 @@ if(faultdebug)printf("trap accflt type %lx, code %lx, pc %lx, psl %lx\n",
 				panic("SEGV in kernel mode: pc %#lx addr %#lx",
 				    tf->tf_pc, tf->tf_code);
 			}
-			code = SEGV_ACCERR;
-			if (rv == ENOMEM) {
+			switch (rv) {
+			case ENOMEM:
 				printf("UVM: pid %d (%s), uid %d killed: "
 				       "out of swap\n",
 				       p->p_pid, p->p_comm,
 				       l->l_cred ?
 				       kauth_cred_geteuid(l->l_cred) : -1);
 				sig = SIGKILL;
-			} else {
+				code = SI_NOINFO;
+				break;
+			case EINVAL:
+				code = BUS_ADRERR;
+				sig = SIGBUS;
+				break;
+			case EACCES:
+				code = SEGV_ACCERR;
 				sig = SIGSEGV;
-				if (rv != EACCES)
-					code = SEGV_MAPERR;
+				break;
+			default:
+				code = SEGV_MAPERR;
+				sig = SIGSEGV;
+				break;
 			}
 		} else {
 			trapsig = false;

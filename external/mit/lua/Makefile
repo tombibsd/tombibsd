@@ -1,5 +1,5 @@
 #	$NetBSD$
 
-SUBDIR+=	usr.bin
+SUBDIR+=	lib .WAIT usr.bin
 
 .include <bsd.subdir.mk>

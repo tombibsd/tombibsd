@@ -141,7 +141,8 @@ pcq_peek(pcq_t *pcq)
 	pcq_split(v, &p, &c);
 
 	/* See comment on race below in pcq_get(). */
-	return (p == c) ? NULL : pcq->pcq_items[c];
+	return (p == c) ? NULL :
+	    (membar_datadep_consumer(), pcq->pcq_items[c]);
 }
 
 /*
@@ -162,6 +163,8 @@ pcq_get(pcq_t *pcq)
 		/* Queue is empty: nothing to return. */
 		return NULL;
 	}
+	/* Make sure we read pcq->pcq_pc before pcq->pcq_items[c].  */
+	membar_datadep_consumer();
 	item = pcq->pcq_items[c];
 	if (item == NULL) {
 		/*

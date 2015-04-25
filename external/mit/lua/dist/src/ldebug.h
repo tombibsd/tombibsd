@@ -1,5 +1,3 @@
-/*	$NetBSD$	*/
-
 /*
 ** $Id$
 ** Auxiliary functions from Debug Interface module
@@ -27,8 +25,9 @@ LUAI_FUNC l_noret luaG_typeerror (lua_State *L, const TValue *o,
                                                 const char *opname);
 LUAI_FUNC l_noret luaG_concaterror (lua_State *L, const TValue *p1,
                                                   const TValue *p2);
-LUAI_FUNC l_noret luaG_aritherror (lua_State *L, const TValue *p1,
-                                                 const TValue *p2);
+LUAI_FUNC l_noret luaG_opinterror (lua_State *L, const TValue *p1,
+                                                 const TValue *p2,
+                                                 const char *msg);
 LUAI_FUNC l_noret luaG_tointerror (lua_State *L, const TValue *p1,
                                                  const TValue *p2);
 LUAI_FUNC l_noret luaG_ordererror (lua_State *L, const TValue *p1,

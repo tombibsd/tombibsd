@@ -42,8 +42,8 @@
 #include <unistd.h>
 #include <ctype.h>
 
-#include <dev/pci/hdaudio/hdaudioio.h>
-#include <dev/pci/hdaudio/hdaudioreg.h>
+#include <dev/hdaudio/hdaudioio.h>
+#include <dev/hdaudio/hdaudioreg.h>
 
 #include "hdaudioctl.h"
 

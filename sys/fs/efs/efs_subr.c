@@ -188,7 +188,7 @@ efs_bread(struct efs_mount *emp, uint32_t bboff, struct lwp *l, struct buf **bp)
 	KASSERT(bboff < EFS_SIZE_MAX);
 
 	return (bread(emp->em_devvp, (daddr_t)bboff * (EFS_BB_SIZE / DEV_BSIZE),
-	    EFS_BB_SIZE, (l == NULL) ? NOCRED : l->l_cred, 0, bp));
+	    EFS_BB_SIZE, 0, bp));
 }
 
 /*

@@ -107,7 +107,7 @@ static inline void RESTORE(const char *file, size_t line)
 #endif
 %}
 
-%expect 75
+%expect 78
 
 %union {
 	int	y_int;
@@ -1025,7 +1025,7 @@ notype_param_decl:
 	;
 
 direct_notype_param_decl:
-	  T_NAME {
+	  identifier {
 		$$ = dname(getsym($1));
 	  }
 	| T_LPARN notype_param_decl T_RPARN {

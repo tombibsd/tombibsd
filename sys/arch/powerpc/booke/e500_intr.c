@@ -35,6 +35,8 @@
  */
 
 #include "opt_mpc85xx.h"
+#include "opt_multiprocessor.h"
+#include "opt_ddb.h"
 
 #define __INTR_PRIVATE
 
@@ -83,6 +85,7 @@ struct intr_source {
 	int8_t is_ipl;
 	uint8_t is_ist;
 	uint8_t is_irq;
+	uint8_t is_refcnt;
 	bus_size_t is_vpr;
 	bus_size_t is_dr;
 };
@@ -406,6 +409,7 @@ static void 	e500_intr_cpu_attach(struct cpu_info *ci);
 static void 	e500_intr_cpu_hatch(struct cpu_info *ci);
 static void	e500_intr_cpu_send_ipi(cpuid_t, uintptr_t);
 static void 	e500_intr_init(void);
+static void 	e500_intr_init_precpu(void);
 static const char *e500_intr_string(int, int, char *, size_t);
 static const char *e500_intr_typename(int);
 static void 	e500_critintr(struct trapframe *tf);
@@ -737,8 +741,16 @@ e500_intr_cpu_establish(struct cpu_info *ci, int irq, int ipl, int ist,
 	struct intr_source * const is = &e500_intr_sources[ii.irq_vector];
 	mutex_enter(&e500_intr_lock);
 	if (is->is_ipl != IPL_NONE) {
-		mutex_exit(&e500_intr_lock);
-		return NULL;
+		/* XXX IPI0 is shared by all CPU. */
+		if (is->is_ist != IST_IPI ||
+		    is->is_irq != irq ||
+		    is->is_ipl != ipl ||
+		    is->is_ist != ist ||
+		    is->is_func != handler ||
+		    is->is_arg != arg) {
+			mutex_exit(&e500_intr_lock);
+			return NULL;
+		}
 	}
 
 	is->is_func = handler;
@@ -746,6 +758,7 @@ e500_intr_cpu_establish(struct cpu_info *ci, int irq, int ipl, int ist,
 	is->is_ipl = ipl;
 	is->is_ist = ist;
 	is->is_irq = irq;
+	is->is_refcnt++;
 	is->is_vpr = ii.irq_vpr;
 	is->is_dr = ii.irq_dr;
 
@@ -812,6 +825,12 @@ e500_intr_disestablish(void *vis)
 	KASSERT(is - e500_intr_sources == ii.irq_vector);
 
 	mutex_enter(&e500_intr_lock);
+
+	if (is->is_refcnt-- > 1) {
+		mutex_exit(&e500_intr_lock);
+		return;
+	}
+
 	/*
 	 * Mask the source using the mask (MSK) bit in the vector/priority reg.
 	 */
@@ -1095,6 +1114,11 @@ e500_intr_init(void)
 	}
 
 	/*
+	 * Initialize interrupt handler lock
+	 */
+	mutex_init(&e500_intr_lock, MUTEX_DEFAULT, IPL_HIGH);
+
+	/*
 	 * We need to be in mixed mode.
 	 */
 	openpic_write(cpu, OPENPIC_GCR, GCR_M);
@@ -1118,6 +1142,22 @@ e500_intr_init(void)
 	for (u_int irq = 0; irq < e500_intr_info.ii_external_sources; irq++) { 
 		openpic_write(cpu, OPENPIC_EIVPR(irq),
 		    VPR_VECTOR_MAKE(irq) | VPR_LEVEL_LOW);
+	}
+}
+
+static void
+e500_intr_init_precpu(void)
+{
+	struct cpu_info const *ci = curcpu();
+	struct cpu_softc * const cpu = ci->ci_softc;
+	bus_addr_t dr;
+
+	/*
+	 * timer's DR is set to be delivered to cpu0 as initial value.
+	 */
+	for (u_int irq = 0; irq < e500_intr_info.ii_timer_sources; irq++) { 
+		dr = OPENPIC_GTDR(ci->ci_cpuid, irq);
+		openpic_write(cpu, dr, 0);	/* stop delivery */
 	}
 }
 
@@ -1239,13 +1279,22 @@ e500_intr_cpu_send_ipi(cpuid_t target, uint32_t ipimsg)
 
 typedef void (*ipifunc_t)(void);
 
-#ifdef __HAVE_PREEEMPTION
+#ifdef __HAVE_PREEMPTION
 static void
 e500_ipi_kpreempt(void)
 {
 	poowerpc_softint_trigger(1 << IPL_NONE);
 }
 #endif
+
+static void
+e500_ipi_suspend(void)
+{
+
+#ifdef MULTIPROCESSOR
+	cpu_pause(NULL);
+#endif	/* MULTIPROCESSOR */
+}
 
 static const ipifunc_t e500_ipifuncs[] = {
 	[ilog2(IPI_XCALL)] =	xc_ipi_handler,
@@ -1255,6 +1304,7 @@ static const ipifunc_t e500_ipifuncs[] = {
 	[ilog2(IPI_KPREEMPT)] =	e500_ipi_kpreempt,
 #endif
 	[ilog2(IPI_TLB1SYNC)] =	e500_tlb1_sync,
+	[ilog2(IPI_SUSPEND)] =	e500_ipi_suspend,
 };
 
 static int
@@ -1279,6 +1329,10 @@ e500_ipi_intr(void *v)
 static void
 e500_intr_cpu_hatch(struct cpu_info *ci)
 {
+
+	/* Initialize percpu interupts. */
+	e500_intr_init_precpu();
+
 	/*
 	 * Establish clock interrupt for this CPU.
 	 */

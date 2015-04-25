@@ -1557,8 +1557,8 @@ strtolower(const char *name)
 	char c;
 
 	for (n = name, p = low; (c = *n) != '\0'; n++)
-		*p++ = isupper((u_char)c) ? (char)tolower((u_char)c) : c;
-	*p = 0;
+		*p++ = (char)(isupper((u_char)c) ? tolower((u_char)c) : c);
+	*p = '\0';
 	return (intern(low));
 }
 

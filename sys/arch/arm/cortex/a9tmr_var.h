@@ -47,6 +47,7 @@ struct a9tmr_softc {
 #ifdef _KERNEL
 struct cpu_info;
 void	a9tmr_init_cpu_clock(struct cpu_info *);
+void	a9tmr_update_freq(uint32_t);
 void	a9tmr_delay(unsigned int n);
 #endif
 

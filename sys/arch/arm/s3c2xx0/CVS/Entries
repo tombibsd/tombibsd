@@ -45,9 +45,9 @@
 /s3c2xx0_space.c/1.9/Fri Jul  1 20:31:39 2011/-kk/
 /s3c2xx0reg.h/1.7/Tue Mar 25 02:35:18 2014/-kk/
 /s3c2xx0var.h/1.7/Mon Jan 30 03:28:33 2012/-kk/
-/sscom.c/1.46/Fri Oct  3 09:25:30 2014/-kk/
+/sscom.c/1.47/Wed Apr 22 07:35:49 2015/-kk/
 /sscom_s3c2410.c/1.7/Tue Mar 25 02:35:18 2014/-kk/
 /sscom_s3c2440.c/1.4/Tue Mar 25 02:35:18 2014/-kk/
 /sscom_s3c2800.c/1.10/Tue Mar 25 02:35:18 2014/-kk/
-/sscom_var.h/1.13/Tue Mar 25 02:35:18 2014/-kk/
+/sscom_var.h/1.14/Wed Apr 22 07:35:49 2015/-kk/
 D

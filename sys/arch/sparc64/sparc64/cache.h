@@ -101,15 +101,7 @@ void 	blast_icache_usiii(void);	/* Clear entire I$ */
 /* The following flush a range from the D$ and I$ but not E$. */
 void	cache_flush_phys_us(paddr_t, psize_t, int);
 void	cache_flush_phys_usiii(paddr_t, psize_t, int);
-
-static __inline__ void
-cache_flush_phys(paddr_t pa, psize_t size, int ecache)
-{
-	if (CPU_IS_USIII_UP() || CPU_IS_SPARC64_V_UP())
-		cache_flush_phys_usiii(pa, size, ecache);
-	else
-		cache_flush_phys_us(pa, size, ecache);
-}
+extern void (*cache_flush_phys)(paddr_t, psize_t, int);
 
 /* SPARC64 specific */
 /* Assembly routines to flush TLB mappings */

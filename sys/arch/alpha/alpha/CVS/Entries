@@ -36,7 +36,7 @@
 /kgdb_machdep.c/1.8/Fri Jul  1 19:22:35 2011/-kk/
 /kobj_machdep.c/1.2/Mon Apr 28 20:23:10 2008/-kk/
 /linux_sigcode.s/1.4/Sat Feb 12 16:30:42 2011/-kk/
-/linux_syscall.c/1.32/Mon Feb  6 02:14:11 2012/-kk/
+/linux_syscall.c/1.33/Sat Mar 21 02:37:31 2015/-kk/
 /linux_trap.c/1.8/Sat Nov 21 05:35:40 2009/-kk/
 /lock_stubs.s/1.3/Mon Apr 28 20:23:10 2008/-kk/
 /locore.s/1.122/Sun Feb 19 21:05:58 2012/-kk/
@@ -46,7 +46,7 @@
 /mcclockvar.h/1.5/Sat Jul 21 11:59:56 2007/-kk/
 /multiproc.s/1.13/Mon Apr 28 20:23:10 2008/-kk/
 /osf1_sigcode.s/1.3/Mon Jul  1 03:10:02 2002/-kk/
-/osf1_syscall.c/1.34/Mon Feb  6 02:14:12 2012/-kk/
+/osf1_syscall.c/1.35/Sat Mar 21 02:37:31 2015/-kk/
 /pal.s/1.15/Mon May 13 21:38:30 2002/-kk/
 /patch.c/1.4/Mon Apr 28 20:23:10 2008/-kk/
 /pmap.c/1.259/Tue Jan 14 16:04:51 2014/-kk/
@@ -58,6 +58,6 @@
 /sys_machdep.c/1.21/Mon Feb  6 02:14:12 2012/-kk/
 /syscall.c/1.42/Thu Oct 24 10:28:57 2013/-kk/
 /transfer.s/1.3/Tue Apr 10 10:09:46 2001/-kk/
-/trap.c/1.131/Tue Jun  3 02:53:40 2014/-kk/
+/trap.c/1.132/Sat Mar 21 02:37:31 2015/-kk/
 /vm_machdep.c/1.113/Tue Jun  3 02:53:40 2014/-kk/
 D

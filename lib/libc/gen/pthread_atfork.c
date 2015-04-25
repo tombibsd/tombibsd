@@ -61,7 +61,9 @@ struct atfork_callback {
  * across the fork, forking is going to be serialized anyway.
  */
 static struct atfork_callback atfork_builtin;
+#ifdef _REENTRANT
 static mutex_t atfork_lock = MUTEX_INITIALIZER;
+#endif
 SIMPLEQ_HEAD(atfork_callback_q, atfork_callback);
 
 static struct atfork_callback_q prepareq = SIMPLEQ_HEAD_INITIALIZER(prepareq);

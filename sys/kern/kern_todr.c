@@ -38,6 +38,8 @@
  *	@(#)clock.c	8.1 (Berkeley) 6/10/93
  */
 
+#include "opt_todr.h"
+
 #include <sys/cdefs.h>
 __KERNEL_RCSID(0, "$NetBSD$");
 
@@ -47,7 +49,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/device.h>
 #include <sys/timetc.h>
 #include <sys/intr.h>
-#include <sys/rnd.h>
+#include <sys/rndsource.h>
 
 #include <dev/clock_subr.h>	/* hmm.. this should probably move to sys */
 

@@ -624,11 +624,15 @@ sofamily(const struct socket *so)
 }
 
 int
-sobind(struct socket *so, struct mbuf *nam, struct lwp *l)
+sobind(struct socket *so, struct sockaddr *nam, struct lwp *l)
 {
 	int	error;
 
 	solock(so);
+	if (nam->sa_family != so->so_proto->pr_domain->dom_family) {
+		sounlock(so);
+		return EAFNOSUPPORT;
+	}
 	error = (*so->so_proto->pr_usrreqs->pr_bind)(so, nam, l);
 	sounlock(so);
 	return error;

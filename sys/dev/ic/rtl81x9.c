@@ -106,7 +106,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <net/if_media.h>
 
 #include <net/bpf.h>
-#include <sys/rnd.h>
+#include <sys/rndsource.h>
 
 #include <sys/bus.h>
 #include <machine/endian.h>

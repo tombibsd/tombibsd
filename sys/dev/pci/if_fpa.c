@@ -410,6 +410,8 @@ pdq_pci_attach(device_t const parent, device_t const self, void *const aux)
 
     aprint_naive(": FDDI controller\n");
 
+    sc->sc_dev = self;
+
     data = pci_conf_read(pa->pa_pc, pa->pa_tag, PCI_CFLT);
     if ((data & 0xFF00) < (DEFPA_LATENCY << 8)) {
 	data &= ~0xFF00;

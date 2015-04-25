@@ -1,5 +1,5 @@
 /Makefile.xf86-driver/1.19/Tue Nov 23 08:22:29 2010/-kk/
-/Makefile/1.63/Thu Jul 19 19:23:52 2012/-kk/
+/Makefile/1.65/Sat Mar 21 02:35:35 2015/-kk/
 D/xf86-input-elographics////
 D/xf86-input-keyboard////
 D/xf86-input-mouse////
@@ -34,6 +34,7 @@ D/xf86-video-nvxbox////
 D/xf86-video-openchrome////
 D/xf86-video-pnozz////
 D/xf86-video-r128////
+D/xf86-video-radeon-kms////
 D/xf86-video-radeon////
 D/xf86-video-radeonhd////
 D/xf86-video-rendition////

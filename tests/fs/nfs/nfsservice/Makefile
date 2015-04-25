@@ -23,7 +23,7 @@ LDADD+=	-lrumpdev_disk -lrumpdev				# disk devices
 LDADD+=	-lrumpfs_ffs -lrumpvfs					# FFS
 LDADD+=	-lrumpnet_netinet -lrumpnet_net -lrumpnet_local		# TCP/IP
 LDADD+=	-lrumpnet_shmif						# shmif
-LDADD+=	-lrumpnet -lrump -lrumpuser				# base
+LDADD+=	-lrumpnet -lrumpkern_sysproxy -lrump -lrumpuser		# base
 LDADD+=	-lpthread -lutil
 
 CPPFLAGS+=	-DDEBUG -DMOUNT_NOMAIN -D_REENTRANT

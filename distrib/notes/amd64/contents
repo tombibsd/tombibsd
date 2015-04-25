@@ -75,10 +75,6 @@ see below.
 .
 \*M bootable cdrom images; see below.
 .
-.		It Pa floppy/
-.
-\*M boot and installation floppies; see below.
-.
 .		It Pa misc/
 .
 Miscellaneous \*M installation utilities; see

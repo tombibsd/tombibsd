@@ -39,6 +39,7 @@
  */
 
 #include <sys/callout.h>
+#include <sys/rndsource.h>
 
 struct	rdidentinfo {
 	short	ri_hwid;		/* 2 byte HW id */

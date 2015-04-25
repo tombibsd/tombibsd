@@ -74,6 +74,7 @@
 #ifndef	_COMMON_PMAP_TLB_H_
 #define	_COMMON_PMAP_TLB_H_
 
+#include <sys/evcnt.h>
 #include <sys/kcpuset.h>
 
 #if !defined(PMAP_TLB_MAX)
@@ -144,7 +145,7 @@ struct pmap_tlb_info {
 #ifdef	_KERNEL
 extern struct pmap_tlb_info pmap_tlb0_info;
 #ifdef MULTIPROCESSOR
-extern struct pmap_tlb_info *pmap_tlbs[MAXCPUS];
+extern struct pmap_tlb_info *pmap_tlbs[PMAP_TLB_MAX];
 extern u_int pmap_ntlbs;
 #endif
 

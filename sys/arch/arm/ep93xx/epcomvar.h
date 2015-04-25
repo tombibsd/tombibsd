@@ -28,6 +28,10 @@
 #ifndef _EPCOMVAR_H_
 #define _EPCOMVAR_H_
 
+#ifdef RND_COM
+#include <sys/rndsource.h>
+#endif
+
 /* Hardware flag masks */
 #define COM_HW_NOIEN		0x01
 #define COM_HW_DEV_OK		0x20

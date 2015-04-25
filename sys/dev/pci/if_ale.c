@@ -69,8 +69,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <net/bpf.h>
 
-#include <sys/rnd.h>
-
 #include <dev/mii/mii.h>
 #include <dev/mii/miivar.h>
 

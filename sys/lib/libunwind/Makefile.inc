@@ -13,6 +13,6 @@ COPTS.libunwind.cxx+=	-fno-exceptions -fvisibility=hidden
 COPTS.libunwind.cxx+=	-Wno-old-style-cast
 CPPFLAGS.libunwind.cxx+=-I${NETBSDSRCDIR}/sys/lib/libunwind
 
-.if ${MACHINE_CPU} == "arm"
-AFLAGS.unwind_registers.S+=	${${ACTIVE_CC} == "clang":? -no-integrated-as :}
+.if ${LIBC_MACHINE_CPU} == "arm"
+AFLAGS.unwind_registers.S+=	${${ACTIVE_CC} == "clang":? -mfpu=vfp3 :}
 .endif

@@ -4495,6 +4495,11 @@ frrequest(ipf_main_softc_t *softc, int unit, ioctlcmd_t req, void *data,
 			if (addrem == 0) {
 				fg = ipf_group_add(softc, group, NULL,
 						   fp->fr_flags, unit, set);
+				if (fg == NULL) {
+					IPFERROR(152);
+					error = ESRCH;
+					goto donenolock;
+				}
 				fp->fr_grp = fg;
 			} else {
 				fg = ipf_findgroup(softc, group, unit,

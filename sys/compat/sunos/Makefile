@@ -1,5 +1,5 @@
 #	$NetBSD$
 
-SYACALL_PREFIX=sunos
+SYSCALL_PREFIX=sunos
 
 .include <bsd.syscall.mk>

@@ -98,7 +98,7 @@ camellia_cleanup() {
 
 atf_test_case cbcdes cleanup
 cbcdes_head() {
-	common_head "Test ARC4 crypto"
+	common_head "Test DES_CBC crypto"
 }
 
 cbcdes_body() {

@@ -165,6 +165,8 @@ __RCSID("$NetBSD$");
 #include <security/pam_appl.h>
 #endif
 
+#include "pfilter.h"
+
 #define	GLOBAL
 #include "extern.h"
 #include "pathnames.h"
@@ -470,6 +472,8 @@ main(int argc, char *argv[])
 	}
 	if (EMPTYSTR(confdir))
 		confdir = _DEFAULT_CONFDIR;
+
+	pfilter_open();
 
 	if (dowtmp) {
 #ifdef SUPPORT_UTMPX
@@ -1401,6 +1405,7 @@ do_pass(int pass_checked, int pass_rval, const char *passwd)
 		if (rval) {
 			reply(530, "%s", rval == 2 ? "Password expired." :
 			    "Login incorrect.");
+			pfilter_notify(1, rval == 2 ? "exppass" : "badpass");
 			if (logging) {
 				syslog(LOG_NOTICE,
 				    "FTP LOGIN FAILED FROM %s", remoteloghost);
@@ -1444,6 +1449,7 @@ do_pass(int pass_checked, int pass_rval, const char *passwd)
 				*remote_ip = 0;
 		remote_ip[sizeof(remote_ip) - 1] = 0;
 		if (!auth_hostok(lc, remotehost, remote_ip)) {
+			pfilter_notify(1, "bannedhost");
 			syslog(LOG_INFO|LOG_AUTH,
 			    "FTP LOGIN FAILED (HOST) as %s: permission denied.",
 			    pw->pw_name);

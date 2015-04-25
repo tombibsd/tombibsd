@@ -67,7 +67,8 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #else
 #include <opencrypto/cryptodev.h>
 #include <sys/cprng.h>
-#include <sys/rnd.h>
+#include <sys/rndpool.h>
+#include <sys/rndsource.h>
 #include <sys/sha1.h>
 #endif
 

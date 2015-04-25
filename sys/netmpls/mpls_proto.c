@@ -103,7 +103,7 @@ mpls_accept(struct socket *so, struct mbuf *nam)
 }
 
 static int
-mpls_bind(struct socket *so, struct mbuf *nam, struct lwp *l)
+mpls_bind(struct socket *so, struct sockaddr *nam, struct lwp *l)
 {
 	KASSERT(solocked(so));
 

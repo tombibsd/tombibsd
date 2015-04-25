@@ -47,9 +47,9 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <dev/usb/usbdi.h>
 #include <dev/usb/usbdivar.h>
 #include <dev/usb/usb_mem.h>
+#include <dev/usb/usbdevs.h>
 
 #include <dwc2/dwc2var.h>
-
 #include <dwc2/dwc2.h>
 #include "dwc2_core.h"
 
@@ -124,7 +124,7 @@ ingenic_dwc2_attach(device_t parent, device_t self, void *aux)
 	sc->sc_dwc2.sc_params = &ingenic_dwc2_params;
 
 	if (aa->aa_addr == 0)
-		aa->aa_addr = 0x13500000;
+		aa->aa_addr = JZ_DWC2_BASE;
 
 	error = bus_space_map(aa->aa_bst, aa->aa_addr, 0x20000, 0,
 	    &sc->sc_dwc2.sc_ioh);
@@ -137,6 +137,10 @@ ingenic_dwc2_attach(device_t parent, device_t self, void *aux)
 	aprint_naive(": USB controller\n");
 	aprint_normal(": USB controller\n");
 
+	gpio_set(5, 15, 0);
+	delay(250000);
+	gpio_set(5, 15, 1);
+	
 	reg = readreg(JZ_USBPCR);
 	reg |= PCR_VBUSVLDEXTSEL;
 	reg |= PCR_VBUSVLDEXT;
@@ -172,11 +176,11 @@ ingenic_dwc2_attach(device_t parent, device_t self, void *aux)
 
 	delay(10000);
 
-	sc->sc_ih = evbmips_intr_establish(21, dwc2_intr, &sc->sc_dwc2);
+	sc->sc_ih = evbmips_intr_establish(aa->aa_irq, dwc2_intr, &sc->sc_dwc2);
 
 	if (sc->sc_ih == NULL) {
 		aprint_error_dev(self, "failed to establish interrupt %d\n",
-		     21);
+		     aa->aa_irq);
 		goto fail;
 	}
 
@@ -198,6 +202,8 @@ ingenic_dwc2_deferred(device_t self)
 	struct ingenic_dwc2_softc *sc = device_private(self);
 	int error;
 
+	sc->sc_dwc2.sc_id_vendor = USB_VENDOR_INGENIC;
+	strlcpy(sc->sc_dwc2.sc_vendor, "Ingenic", sizeof(sc->sc_dwc2.sc_vendor));
 	error = dwc2_init(&sc->sc_dwc2);
 	if (error != 0) {
 		aprint_error_dev(self, "couldn't initialize host, error=%d\n",

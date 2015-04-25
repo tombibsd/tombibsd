@@ -19,7 +19,7 @@ typedef	struct	{
 
 static ipf_error_entry_t *find_error __P((int));
 
-#define	IPF_NUM_ERRORS	475
+#define	IPF_NUM_ERRORS	476
 
 /*
  * NO REUSE OF NUMBERS!
@@ -179,6 +179,7 @@ static ipf_error_entry_t ipf_errors[IPF_NUM_ERRORS] = {
 	{	149,	"object size validation failed for kernel copyout" },
 	{	150,	"error copying data out for kernel copyout" },
 	{	151,	"version mismatch for kernel copyout" },
+	{	152,	"direction does not match the group rule" },
 /* -------------------------------------------------------------------------- */
 	{	10001,	"could not find token for auth iterator" },
 	{	10002,	"write permissions require to add/remove auth rule" },

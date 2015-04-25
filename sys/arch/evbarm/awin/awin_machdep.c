@@ -540,7 +540,7 @@ static const int conmode = CONMODE;
 void
 consinit(void)
 {
-	bus_space_tag_t bst = &awin_a4x_bs_tag;
+	bus_space_tag_t bst = &armv7_generic_a4x_bs_tag;
 #if NCOM > 0
 	bus_space_handle_t bh;
 #endif
@@ -638,7 +638,7 @@ awin_device_register(device_t self, void *aux)
 		 * bus space used for the armcore regisers (which armperiph uses). 
 		 */
 		struct mainbus_attach_args * const mb = aux;
-		mb->mb_iot = &awin_bs_tag;
+		mb->mb_iot = &armv7_generic_bs_tag;
 		return;
 	}
  
@@ -783,28 +783,18 @@ awin_device_register(device_t self, void *aux)
 		return;
 	}
 
-	if (device_is_a(self, "awge")) {
+	if (device_is_a(self, "awge") && device_unit(self) == 0) {
 #if NETHER > 0
 		/*
 		 * Get the GMAC MAC address from cmdline.
 		 */
 		uint8_t enaddr[ETHER_ADDR_LEN];
-		char argname[strlen("awge?.mac-address") + 1];
-		char *mac_addr;
-		snprintf(argname, sizeof(argname), "%s.mac-address",
-		    device_xname(self));
-
-		if (get_bootconf_option(boot_args, argname,
-		    BOOTOPT_TYPE_STRING, &mac_addr)) {
-			char mac[strlen("XX:XX:XX:XX:XX:XX") + 1];
-			strlcpy(mac, mac_addr, sizeof(mac));
-			if (!ether_aton_r(enaddr, sizeof(enaddr), mac)) {
-				prop_data_t pd;
-				pd = prop_data_create_data(enaddr, sizeof(enaddr));
-				KASSERT(pd != NULL);
-				prop_dictionary_set(dict, "mac-address", pd);
-				prop_object_release(pd);
-			}
+		if (get_bootconf_option(boot_args, "awge0.mac-address",
+		    BOOTOPT_TYPE_MACADDR, enaddr)) {
+			prop_data_t pd = prop_data_create_data(enaddr,
+			    sizeof(enaddr));
+			prop_dictionary_set(dict, "mac-address", pd);
+			prop_object_release(pd);
 		}
 #endif
 
@@ -814,10 +804,10 @@ awin_device_register(device_t self, void *aux)
 			prop_dictionary_set_cstring(dict, "phy-type", "mii");
 		}
 #endif
-#if AWIN_BOARD == AWIN_bpi
+#if AWIN_board == AWIN_bpi
 		prop_dictionary_set_cstring(dict, "phy-power", "gmacpwren");
 		prop_dictionary_set_cstring(dict, "phy-type", "rgmii-bpi");
-		prop_dictionary_set_uint8(dict, "pinset-func", 5);
+		prop_dictionary_set_uint8(dict, "pinset-func", 3);
 #endif
 		return;
 	}

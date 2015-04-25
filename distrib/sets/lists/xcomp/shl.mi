@@ -99,6 +99,7 @@
 ./usr/X11R7/lib/libfontconfig_pic.a			-unknown-	xorg,picinstall
 ./usr/X11R7/lib/libfontenc_pic.a			-unknown-	xorg,picinstall
 ./usr/X11R7/lib/libfreetype_pic.a			-unknown-	xorg,picinstall
+./usr/X11R7/lib/libgbm_pic.a				-unknown-	xorg,picinstall
 ./usr/X11R7/lib/libglut_pic.a				-unknown-	xorg,picinstall
 ./usr/X11R7/lib/liblbxutil_pic.a			-obsolete-	obsolete
 ./usr/X11R7/lib/liblisp_pic.a				-unknown-	xorg,picinstall

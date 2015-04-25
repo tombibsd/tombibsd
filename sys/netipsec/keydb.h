@@ -36,8 +36,6 @@
 
 #ifdef _KERNEL
 
-#include "opt_ipsec.h"
-
 #include <netipsec/key_var.h>
 #include <net/route.h>
 #include <netinet/in.h>

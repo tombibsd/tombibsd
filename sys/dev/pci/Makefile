@@ -2,8 +2,6 @@
 
 # use 'make -f Makefile.pcidevs' to make pcidevs.h and pcidevs_data.h
 
-SUBDIR=	hdaudio
-
 INCSDIR= /usr/include/dev/pci
 
 # Only install includes which are used by userland

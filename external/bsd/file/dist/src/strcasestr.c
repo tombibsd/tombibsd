@@ -1,4 +1,5 @@
 /*	$NetBSD$	*/
+
 /*	NetBSD: strcasestr.c,v 1.3 2005/11/29 03:12:00 christos Exp 	*/
 
 /*-

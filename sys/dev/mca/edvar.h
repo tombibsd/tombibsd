@@ -30,6 +30,7 @@
  */
 
 #include <sys/mutex.h>
+#include <sys/rndsource.h>
 
 struct edc_mca_softc;
 

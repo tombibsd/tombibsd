@@ -48,7 +48,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include "locators.h"
 
-#include <sys/rnd.h>
+#include <sys/rndsource.h>
 
 /* data per slave device */
 struct pckbc_slotdata {

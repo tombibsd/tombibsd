@@ -272,6 +272,9 @@ int lfs_write	 (void *);
 int lfs_getpages (void *);
 int lfs_putpages (void *);
 
+int lfs_bufrd(struct vnode *, struct uio *, int, kauth_cred_t);
+int lfs_bufwr(struct vnode *, struct uio *, int, kauth_cred_t);
+
 extern int lfs_mount_type;
 extern int (**lfs_vnodeop_p)(void *);
 extern int (**lfs_specop_p)(void *);

@@ -1,7 +1,7 @@
 /autoconf.c/1.27/Sat Oct 27 17:18:07 2012/-kk/
 /clock.c/1.12/Sat Apr 24 19:58:13 2010/-kk/
 /conf.c/1.17/Sun Dec 11 12:18:29 2005/-kk/
-/disksubr.c/1.27/Fri Apr 11 02:03:37 2014/-kk/
+/disksubr.c/1.28/Mon Jan 12 06:48:18 2015/-kk/
 /genassym.cf/1.26/Fri Jan 14 02:06:29 2011/-kk/
 /isr.c/1.28/Mon Dec 20 00:25:40 2010/-kk/
 /isr.h/1.7/Mon Apr 28 20:23:30 2008/-kk/
@@ -14,6 +14,6 @@
 /rtc.c/1.18/Tue Dec  9 04:34:48 2014/-kk/
 /rtc.h/1.5/Mon Apr 28 20:23:30 2008/-kk/
 /seglist.h/1.6/Fri Oct 23 17:01:08 2009/-kk/
-/trap.c/1.87/Fri Apr 11 02:03:37 2014/-kk/
+/trap.c/1.88/Sat Mar 21 02:37:40 2015/-kk/
 /vectors.s/1.11/Tue Feb  8 20:20:21 2011/-kk/
 D

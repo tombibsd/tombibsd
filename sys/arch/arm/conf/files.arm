@@ -68,6 +68,8 @@ defflag	 opt_cpuoptions.h	ARM_HAS_LPAE
 # use extended small page in compatible MMU mode for ARMv6
 defflag  opt_cpuoptions.h	SHEEVA_L2_CACHE
 defflag  opt_cpuoptions.h	SHEEVA_L2_CACHE_WT: SHEEVA_L2_CACHE
+# override configuration base address register
+defparam opt_cpuoptions.h	ARM_CBAR
 
 # Interrupt implementation header definition.
 defparam opt_arm_intr_impl.h	ARM_INTR_IMPL

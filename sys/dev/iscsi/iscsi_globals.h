@@ -45,7 +45,6 @@
 #include <sys/kernel.h>
 #include <sys/kthread.h>
 #include <sys/systm.h>
-#include <sys/rnd.h>
 #include <sys/device.h>
 
 #include <dev/scsipi/scsi_all.h>

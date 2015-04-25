@@ -2,7 +2,10 @@
 
 .include <bsd.own.mk>
 
+.if ${MKCXX} != "no"
+
 SUBDIR=	lib .WAIT usr.sbin
 
-.include <bsd.subdir.mk>
+.endif
 
+.include <bsd.subdir.mk>

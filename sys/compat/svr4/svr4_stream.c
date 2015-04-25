@@ -750,12 +750,12 @@ ti_bind(file_t *fp, int fd, struct svr4_strioctl *ioc, struct lwp *l)
 {
 	int error;
 	struct svr4_strm *st = svr4_stream_get(fp);
-	struct sockaddr_in sain;
-	struct sockaddr_un saun;
-	void *skp, *sup = NULL;
+	struct sockaddr_in *sain;
+	struct sockaddr_un *saun;
+	struct sockaddr_big sbig;
+	void *sup = NULL;
 	int sasize;
 	struct svr4_strmcmd bnd;
-	struct mbuf *name;
 
 	if (st == NULL) {
 		DPRINTF(("ti_bind: bad file descriptor\n"));
@@ -775,34 +775,34 @@ ti_bind(file_t *fp, int fd, struct svr4_strioctl *ioc, struct lwp *l)
 
 	switch (st->s_family) {
 	case AF_INET:
-		skp = &sain;
-		sasize = sizeof(sain);
+		sain = (struct sockaddr_in *)&sbig;
+		sasize = sizeof(*sain);
 
 		if (bnd.offs == 0)
 			goto reply;
 
-		netaddr_to_sockaddr_in(&sain, &bnd);
+		netaddr_to_sockaddr_in(sain, &bnd);
 
 		DPRINTF(("TI_BIND: fam %d, port %d, addr %x\n",
-			 sain.sin_family, sain.sin_port,
-			 sain.sin_addr.s_addr));
+			 sain->sin_family, sain->sin_port,
+			 sain->sin_addr.s_addr));
 		break;
 
 	case AF_LOCAL:
-		skp = &saun;
-		sasize = sizeof(saun);
+		saun = (struct sockaddr_un *)&sbig;
+		sasize = sizeof(*saun);
 		if (bnd.offs == 0)
 			goto reply;
 
-		netaddr_to_sockaddr_un(&saun, &bnd);
+		netaddr_to_sockaddr_un(saun, &bnd);
 
-		if (saun.sun_path[0] == '\0')
+		if (saun->sun_path[0] == '\0')
 			goto reply;
 
 		DPRINTF(("TI_BIND: fam %d, path %s\n",
-			 saun.sun_family, saun.sun_path));
+			 saun->sun_family, saun->sun_path));
 
-		if ((error = clean_pipe(l, saun.sun_path)) != 0)
+		if ((error = clean_pipe(l, saun->sun_path)) != 0)
 			return error;
 
 		bnd.pad[28] = 0x00001000;	/* magic again */
@@ -814,15 +814,9 @@ ti_bind(file_t *fp, int fd, struct svr4_strioctl *ioc, struct lwp *l)
 		return ENOSYS;
 	}
 
-	name = m_get(M_WAIT, MT_SONAME);
-	if (sasize > MLEN)
-		MEXTMALLOC(name, sasize, M_WAITOK);
-
-	memcpy(mtod(name, void *), skp, sasize);
-
 	DPRINTF(("TI_BIND: fileno %d\n", fd));
 
-	error = do_sys_bind(l, fd, name);
+	error = do_sys_bind(l, fd, (struct sockaddr *)&sbig);
 	if (error != 0) {
 		DPRINTF(("TI_BIND: bind failed %d\n", error));
 		return error;

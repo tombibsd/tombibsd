@@ -4,8 +4,8 @@
 /autoconf.h/1.11/Fri Jul  1 21:00:21 2011/-kk/
 /bootinfo.h/1.6/Fri Aug  8 15:07:52 2008/-kk/
 /bswap.h/1.1/Wed Jun 14 15:39:57 2000/-kk/
-/bus_defs.h/1.1/Fri Jul  1 17:10:01 2011/-kk/
-/bus_funcs.h/1.1/Fri Jul  1 17:10:01 2011/-kk/
+/bus_defs.h/1.2/Sat Mar 21 02:21:05 2015/-kk/
+/bus_funcs.h/1.2/Sat Mar 21 02:21:05 2015/-kk/
 /cdefs.h/1.1/Wed Jun 14 15:39:57 2000/-kk/
 /cpu.h/1.4/Tue Sep  4 06:23:17 2001/-kk/
 /cpu_counter.h/1.1/Wed Feb  5 13:58:02 2003/-kk/
@@ -39,7 +39,7 @@
 /netbsd32_machdep.h/1.2/Mon Dec 14 00:46:13 2009/-kk/
 /param.h/1.16/Mon Jul  4 12:18:53 2011/-kk/
 /pcb.h/1.1/Wed Jun 14 15:39:59 2000/-kk/
-/pci_machdep.h/1.13/Sat Apr 19 05:36:49 2014/-kk/
+/pci_machdep.h/1.14/Sat Mar 21 02:21:05 2015/-kk/
 /pmap.h/1.1/Wed Jun 14 15:39:59 2000/-kk/
 /pmc.h/1.1/Wed Aug  7 05:15:58 2002/-kk/
 /proc.h/1.1/Wed Jun 14 15:39:59 2000/-kk/

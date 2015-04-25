@@ -30,6 +30,8 @@
  *
  */
 
+#include <sys/rndsource.h>
+
 #define	UDAV_IFACE_INDEX	0
 #define	UDAV_CONFIG_NO		1
 

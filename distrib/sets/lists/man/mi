@@ -452,6 +452,7 @@
 ./usr/share/man/cat1/ps.0			man-util-catman		.cat
 ./usr/share/man/cat1/pstat.0			man-obsolete		obsolete
 ./usr/share/man/cat1/pushd.0			man-util-catman		.cat
+./usr/share/man/cat1/pwait.0			man-util-catman		.cat
 ./usr/share/man/cat1/pwd.0			man-util-catman		.cat
 ./usr/share/man/cat1/pwhash.0			man-util-catman		.cat
 ./usr/share/man/cat1/qsafe.0			man-util-catman		crypto,.cat
@@ -1326,6 +1327,7 @@
 ./usr/share/man/cat4/itesio.0			man-sys-catman		.cat
 ./usr/share/man/cat4/iwi.0			man-sys-catman		.cat
 ./usr/share/man/cat4/iwic.0			man-sys-catman		.cat
+./usr/share/man/cat4/iwm.0			man-sys-catman		.cat
 ./usr/share/man/cat4/iwn.0			man-sys-catman		.cat
 ./usr/share/man/cat4/ix.0			man-sys-catman		.cat
 ./usr/share/man/cat4/ixg.0			man-sys-catman		.cat
@@ -2112,6 +2114,7 @@
 ./usr/share/man/cat5/master.passwd.0		man-sys-catman		.cat
 ./usr/share/man/cat5/memcache_table.0		man-postfix-catman	postfix,.cat
 ./usr/share/man/cat5/mixerctl.conf.0		man-audio-catman	.cat
+./usr/share/man/cat5/modules.conf.0		man-sys-catman		.cat
 ./usr/share/man/cat5/moduli.0			man-secsh-catman	crypto,.cat
 ./usr/share/man/cat5/monthly.0			man-sys-catman		.cat
 ./usr/share/man/cat5/monthly.conf.0		man-sys-catman		.cat
@@ -2326,6 +2329,7 @@
 ./usr/share/man/cat8/bootptest.0		man-bootserver-catman	.cat
 ./usr/share/man/cat8/bootselect.0		man-obsolete		obsolete
 ./usr/share/man/cat8/bounce.0			man-postfix-catman	postfix,.cat
+./usr/share/man/cat8/bozohttpd.0		man-netutil-catman	.cat
 ./usr/share/man/cat8/brconfig.0			man-netutil-catman	.cat
 ./usr/share/man/cat8/btattach.0			man-sysutil-catman	.cat
 ./usr/share/man/cat8/btconfig.0			man-sysutil-catman	.cat
@@ -2424,7 +2428,7 @@
 ./usr/share/man/cat8/etcupdate.0		man-sysutil-catman	.cat
 ./usr/share/man/cat8/evbarm/MAKEDEV.0		man-obsolete		obsolete
 ./usr/share/man/cat8/evbarm/bootmini2440.0	man-sysutil-catman	.cat
-./usr/share/man/cat8/evbarm/elftosb.0		man-sysutil-catman	.cat
+./usr/share/man/cat8/evbarm/elftosb.0		man-sysutil-catman	.cat,cxx
 ./usr/share/man/cat8/evbarm/makedev.0		man-obsolete		obsolete
 ./usr/share/man/cat8/evbarm/sbkeygen.0		man-sysutil-catman	.cat
 ./usr/share/man/cat8/evbarm/sbtool.0		man-sysutil-catman	.cat
@@ -2944,6 +2948,7 @@
 ./usr/share/man/cat8/sdpd.0			man-sysutil-catman	.cat
 ./usr/share/man/cat8/security.0			man-obsolete		obsolete
 ./usr/share/man/cat8/sendmail.0			man-obsolete		obsolete
+./usr/share/man/cat8/service.0			man-sysutil-catman	.cat
 ./usr/share/man/cat8/services_mkdb.0		man-sysutil-catman	.cat
 ./usr/share/man/cat8/sesd.0			man-sysutil-catman	.cat
 ./usr/share/man/cat8/setencstat.0		man-sysutil-catman	.cat
@@ -3055,8 +3060,6 @@
 ./usr/share/man/cat8/trace.0			man-postfix-catman	postfix,.cat
 ./usr/share/man/cat8/trace.0		man-postfix-catman	postfix,.cat
 ./usr/share/man/cat8/traceroute.0		man-netutil-catman	.cat
-./usr/share/man/cat8/traceroute.0		man-netutil-catman	.cat
-./usr/share/man/cat8/traceroute6.0		man-netutil-catman	use_inet6,.cat
 ./usr/share/man/cat8/traceroute6.0		man-netutil-catman	use_inet6,.cat
 ./usr/share/man/cat8/trivial-rewrite.0		man-postfix-catman	postfix,.cat
 ./usr/share/man/cat8/trivial-rewrite.0	man-postfix-catman	postfix,.cat
@@ -3568,6 +3571,7 @@
 ./usr/share/man/html1/progress.html		man-util-htmlman	html
 ./usr/share/man/html1/ps.html			man-util-htmlman	html
 ./usr/share/man/html1/pushd.html		man-util-htmlman	html
+./usr/share/man/html1/pwait.html		man-util-htmlman	html
 ./usr/share/man/html1/pwd.html			man-util-htmlman	html
 ./usr/share/man/html1/pwhash.html		man-util-htmlman	html
 ./usr/share/man/html1/qsafe.html		man-util-htmlman	crypto,html
@@ -4346,6 +4350,7 @@
 ./usr/share/man/html4/itesio.html		man-sys-htmlman		html
 ./usr/share/man/html4/iwi.html			man-sys-htmlman		html
 ./usr/share/man/html4/iwic.html			man-sys-htmlman		html
+./usr/share/man/html4/iwm.html			man-sys-htmlman		html
 ./usr/share/man/html4/iwn.html			man-sys-htmlman		html
 ./usr/share/man/html4/ix.html			man-sys-htmlman		html
 ./usr/share/man/html4/ixg.html			man-sys-htmlman		html
@@ -4983,6 +4988,7 @@
 ./usr/share/man/html5/ar.html			man-sys-htmlman		html
 ./usr/share/man/html5/atf-formats.html		man-atf-htmlman		html,atf
 ./usr/share/man/html5/audit-packages.conf.html	man-obsolete		obsolete
+./usr/share/man/html5/blacklistd.conf.html	man-sysutil-htmlman	html
 ./usr/share/man/html5/body_checks.html		man-postfix-htmlman	postfix,html
 ./usr/share/man/html5/boot.cfg.html		man-sys-htmlman		html
 ./usr/share/man/html5/bootparams.html		man-bootserver-htmlman	html
@@ -5078,6 +5084,7 @@
 ./usr/share/man/html5/master.passwd.html	man-sys-htmlman		html
 ./usr/share/man/html5/memcache_table.html		man-postfix-htmlman	postfix,html
 ./usr/share/man/html5/mixerctl.conf.html	man-audio-htmlman	html
+./usr/share/man/html5/modules.conf.html		man-sys-htmlman		html
 ./usr/share/man/html5/moduli.html		man-secsh-htmlman	crypto,html
 ./usr/share/man/html5/monthly.conf.html		man-sys-htmlman		html
 ./usr/share/man/html5/monthly.html		man-sys-htmlman		html
@@ -5241,6 +5248,8 @@
 ./usr/share/man/html8/bad144.html		man-sysutil-htmlman	html
 ./usr/share/man/html8/badsect.html		man-sysutil-htmlman	html
 ./usr/share/man/html8/bioctl.html		man-sysutil-htmlman	html
+./usr/share/man/html8/blacklistctl.html		man-sysutil-htmlman	html
+./usr/share/man/html8/blacklistd.html		man-sysutil-htmlman	html
 ./usr/share/man/html8/boot.html			man-sysutil-htmlman	html
 ./usr/share/man/html8/bootparamd.html		man-bootserver-htmlman	html
 ./usr/share/man/html8/bootpd.html		man-bootserver-htmlman	html
@@ -5248,6 +5257,7 @@
 ./usr/share/man/html8/bootpgw.html		man-bootserver-htmlman	html
 ./usr/share/man/html8/bootptest.html		man-bootserver-htmlman	html
 ./usr/share/man/html8/bounce.html		man-postfix-htmlman	postfix,html
+./usr/share/man/html8/bozohttpd.html		man-netutil-htmlman	html
 ./usr/share/man/html8/brconfig.html		man-netutil-htmlman	html
 ./usr/share/man/html8/btattach.html		man-sysutil-htmlman	html
 ./usr/share/man/html8/btconfig.html		man-sysutil-htmlman	html
@@ -5328,7 +5338,7 @@
 ./usr/share/man/html8/eshconfig.html		man-sysutil-htmlman	html
 ./usr/share/man/html8/etcupdate.html		man-sysutil-htmlman	html
 ./usr/share/man/html8/evbarm/bootmini2440.html	man-sysutil-htmlman	html
-./usr/share/man/html8/evbarm/elftosb.html	man-sysutil-htmlman	html
+./usr/share/man/html8/evbarm/elftosb.html	man-sysutil-htmlman	html,cxx
 ./usr/share/man/html8/evbarm/sbkeygen.html	man-sysutil-htmlman	html
 ./usr/share/man/html8/evbarm/sbtool.html	man-sysutil-htmlman	html
 ./usr/share/man/html8/extattrctl.html		man-sysutil-htmlman	html
@@ -5740,6 +5750,7 @@
 ./usr/share/man/html8/scsictl.html		man-sysutil-htmlman	html
 ./usr/share/man/html8/sdpd.html			man-sysutil-htmlman	html
 ./usr/share/man/html8/security.html		man-obsolete		obsolete
+./usr/share/man/html8/service.html		man-sysutil-htmlman	html
 ./usr/share/man/html8/services_mkdb.html	man-sysutil-htmlman	html
 ./usr/share/man/html8/sesd.html			man-sysutil-htmlman	html
 ./usr/share/man/html8/setencstat.html		man-sysutil-htmlman	html
@@ -6330,6 +6341,7 @@
 ./usr/share/man/man1/ps.1			man-util-man		.man
 ./usr/share/man/man1/pstat.1			man-obsolete		obsolete
 ./usr/share/man/man1/pushd.1			man-util-man		.man
+./usr/share/man/man1/pwait.1			man-util-man		.man
 ./usr/share/man/man1/pwd.1			man-util-man		.man
 ./usr/share/man/man1/pwhash.1			man-util-man		.man
 ./usr/share/man/man1/qsafe.1			man-util-man		crypto,.man
@@ -7204,6 +7216,7 @@
 ./usr/share/man/man4/itesio.4			man-sys-man		.man
 ./usr/share/man/man4/iwi.4			man-sys-man		.man
 ./usr/share/man/man4/iwic.4			man-sys-man		.man
+./usr/share/man/man4/iwm.4			man-sys-man		.man
 ./usr/share/man/man4/iwn.4			man-sys-man		.man
 ./usr/share/man/man4/ix.4			man-sys-man		.man
 ./usr/share/man/man4/ixg.4			man-sys-man		.man
@@ -7887,6 +7900,7 @@
 ./usr/share/man/man5/ar.5			man-sys-man		.man
 ./usr/share/man/man5/atf-formats.5		man-atf-man		.man,atf
 ./usr/share/man/man5/audit-packages.conf.5	man-obsolete		obsolete
+./usr/share/man/man5/blacklistd.conf.5		man-sysutil-man		.man
 ./usr/share/man/man5/bluetooth.conf.5		man-obsolete		obsolete
 ./usr/share/man/man5/body_checks.5		man-postfix-man		postfix,.man
 ./usr/share/man/man5/boot.cfg.5			man-sys-man		.man
@@ -7990,6 +8004,7 @@
 ./usr/share/man/man5/master.passwd.5		man-sys-man		.man
 ./usr/share/man/man5/memcache_table.5		man-postfix-man		postfix,.man
 ./usr/share/man/man5/mixerctl.conf.5		man-audio-man		.man
+./usr/share/man/man5/modules.conf.5		man-sys-man		.man
 ./usr/share/man/man5/moduli.5			man-secsh-man		crypto,.man
 ./usr/share/man/man5/monthly.5			man-sys-man		.man
 ./usr/share/man/man5/monthly.conf.5		man-sys-man		.man
@@ -8195,6 +8210,8 @@
 ./usr/share/man/man8/bebox/MAKEDEV.8		man-obsolete		obsolete
 ./usr/share/man/man8/bebox/makedev.8		man-obsolete		obsolete
 ./usr/share/man/man8/bioctl.8			man-sysutil-man		.man
+./usr/share/man/man8/blacklistctl.8		man-sysutil-man		.man
+./usr/share/man/man8/blacklistd.8		man-sysutil-man		.man
 ./usr/share/man/man8/boot.8			man-sysutil-man		.man
 ./usr/share/man/man8/bootparamd.8		man-bootserver-man	.man
 ./usr/share/man/man8/bootpd.8			man-bootserver-man	.man
@@ -8203,6 +8220,7 @@
 ./usr/share/man/man8/bootptest.8		man-bootserver-man	.man
 ./usr/share/man/man8/bootselect.8		man-obsolete		obsolete
 ./usr/share/man/man8/bounce.8			man-postfix-man		postfix,.man
+./usr/share/man/man8/bozohttpd.8		man-netutil-man		.man
 ./usr/share/man/man8/brconfig.8			man-netutil-man		.man
 ./usr/share/man/man8/btattach.8			man-sysutil-man		.man
 ./usr/share/man/man8/btconfig.8			man-sysutil-man		.man
@@ -8301,7 +8319,7 @@
 ./usr/share/man/man8/etcupdate.8		man-sysutil-man		.man
 ./usr/share/man/man8/evbarm/MAKEDEV.8		man-obsolete		obsolete
 ./usr/share/man/man8/evbarm/bootmini2440.8	man-sysutils-man	.man
-./usr/share/man/man8/evbarm/elftosb.8		man-sysutil-man		.man
+./usr/share/man/man8/evbarm/elftosb.8		man-sysutil-man		.man,cxx
 ./usr/share/man/man8/evbarm/makedev.8		man-obsolete		obsolete
 ./usr/share/man/man8/evbarm/sbkeygen.8		man-sysutil-man		.man
 ./usr/share/man/man8/evbarm/sbtool.8		man-sysutil-man		.man
@@ -8822,6 +8840,7 @@
 ./usr/share/man/man8/sdpd.8			man-sysutil-man		.man
 ./usr/share/man/man8/security.8			man-obsolete		obsolete
 ./usr/share/man/man8/sendmail.8			man-obsolete		obsolete
+./usr/share/man/man8/service.8			man-sysutil-man		.man
 ./usr/share/man/man8/services_mkdb.8		man-sysutil-man		.man
 ./usr/share/man/man8/sesd.8			man-sysutil-man		.man
 ./usr/share/man/man8/setencstat.8		man-sysutil-man		.man

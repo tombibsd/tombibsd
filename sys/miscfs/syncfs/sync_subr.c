@@ -239,11 +239,17 @@ sched_sync(void *arg)
 			synced = false;
 			if (mutex_tryenter(vp->v_interlock)) {
 				mutex_exit(&syncer_data_lock);
-				if (vget(vp, LK_EXCLUSIVE | LK_NOWAIT) == 0) {
-					synced = true;
-					(void) VOP_FSYNC(vp, curlwp->l_cred,
-					    FSYNC_LAZY, 0, 0);
-					vput(vp);
+				if (vget(vp, LK_NOWAIT, false /* !wait */)
+				    == 0) {
+					if (vn_lock(vp, LK_EXCLUSIVE|LK_NOWAIT)
+					    == 0) {
+						synced = true;
+						(void) VOP_FSYNC(vp,
+						    curlwp->l_cred, FSYNC_LAZY,
+						    0, 0);
+						VOP_UNLOCK(vp);
+					}
+					vrele(vp);
 				}
 				mutex_enter(&syncer_data_lock);
 			}

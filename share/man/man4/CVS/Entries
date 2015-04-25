@@ -1,4 +1,4 @@
-/Makefile/1.618/Tue Dec  9 04:15:49 2014/-kk/
+/Makefile/1.619/Mon Feb 16 03:13:59 2015/-kk/
 /aac.4/1.14/Sat Feb 19 10:54:31 2011/-kk/
 /ac97.4/1.2/Wed Jun 22 04:19:09 2005/-kk/
 /acardide.4/1.4/Mon Oct 19 18:41:08 2009/-kk/
@@ -39,7 +39,7 @@
 /aibs.4/1.9/Tue Mar 25 02:35:14 2014/-kk/
 /aic.4/1.10/Tue Mar  5 15:10:44 2002/-kk/
 /akbd.4/1.1/Fri Sep 26 19:15:15 2003/-kk/
-/alc.4/1.3/Wed Dec 14 13:24:14 2011/-kk/
+/alc.4/1.5/Mon Jan 26 07:10:08 2015/-kk/
 /ale.4/1.5/Thu Nov 29 00:12:21 2012/-kk/
 /alipm.4/1.4/Tue Mar 25 02:35:14 2014/-kk/
 /altmem.4/1.5/Tue Mar 25 02:35:14 2014/-kk/
@@ -63,7 +63,7 @@
 /ate.4/1.8/Wed Apr 30 13:10:53 2008/-kk/
 /ath.4/1.31/Tue Mar 13 19:25:39 2012/-kk/
 /athn.4/1.7/Mon May 19 16:25:21 2014/-kk/
-/atphy.4/1.2/Fri Jan 16 23:26:31 2009/-kk/
+/atphy.4/1.3/Mon Jan 26 07:10:08 2015/-kk/
 /atppc.4/1.15/Sat Jan 31 21:28:45 2004/-kk/
 /attimer.4/1.4/Mon Mar  9 19:24:28 2009/-kk/
 /atu.4/1.2/Mon Jan 24 09:04:12 2005/-kk/
@@ -80,7 +80,7 @@
 /auvitek.4/1.6/Tue Aug 30 07:23:05 2011/-kk/
 /awi.4/1.28/Fri Jan 15 19:24:49 2010/-kk/
 /axe.4/1.8/Wed Jun 23 21:03:16 2010/-kk/
-/axen.4/1.2/Tue Oct 29 08:27:10 2013/-kk/
+/axen.4/1.3/Wed Apr 22 07:35:32 2015/-kk/
 /az.4/1.6/Sat Mar 20 04:52:59 2004/-kk/
 /azalia.4/1.7/Tue Mar 13 19:25:39 2012/-kk/
 /battery_pmu.4/1.5/Mon May 18 14:41:41 2009/-kk/
@@ -105,7 +105,7 @@
 /bthidev.4/1.9/Sun Dec  2 19:59:11 2007/-kk/
 /bthub.4/1.8/Sun Oct 17 11:45:36 2010/-kk/
 /btkbd.4/1.5/Sun May 17 06:46:46 2009/-kk/
-/btmagic.4/1.2/Mon Oct 11 15:15:57 2010/-kk/
+/btmagic.4/1.4/Sun Apr 12 03:34:22 2015/-kk/
 /btms.4/1.3/Sat Dec 23 06:58:20 2006/-kk/
 /btsco.4/1.12/Tue Dec  9 04:43:30 2014/-kk/
 /btuart.4/1.11/Tue Mar 25 02:35:14 2014/-kk/
@@ -116,7 +116,7 @@
 /cas.4/1.3/Fri Jan 15 19:24:49 2010/-kk/
 /ccd.4/1.32/Tue Dec  9 04:15:49 2014/-kk/
 /cd.4/1.20/Sat Jun 23 20:29:06 2012/-kk/
-/cdce.4/1.10/Tue Mar 25 02:35:14 2014/-kk/
+/cdce.4/1.12/Mon Jan 12 06:47:44 2015/-kk/
 /cec.4/1.4/Wed Apr 30 13:10:53 2008/-kk/
 /cfb.4/1.4/Wed Apr 30 13:10:53 2008/-kk/
 /cgd.4/1.18/Tue Dec 17 04:13:19 2013/-kk/
@@ -294,6 +294,7 @@
 /itesio.4/1.11/Tue Mar 25 02:35:15 2014/-kk/
 /iwi.4/1.19/Tue Mar 25 02:35:15 2014/-kk/
 /iwic.4/1.6/Tue Mar 25 02:35:15 2014/-kk/
+/iwm.4/1.2/Sat Mar 21 02:37:28 2015/-kk/
 /iwn.4/1.13/Tue Dec  9 04:15:50 2014/-kk/
 /ix.4/1.7/Wed Apr 30 13:10:54 2008/-kk/
 /ixg.4/1.6/Tue Mar 25 02:35:15 2014/-kk/
@@ -310,7 +311,7 @@
 /lc.4/1.9/Wed Apr 30 13:10:54 2008/-kk/
 /ld.4/1.19/Sat Nov  5 09:22:44 2011/-kk/
 /le.4/1.23/Sun Aug 10 14:43:53 2008/-kk/
-/lii.4/1.2/Wed Apr 30 13:10:54 2008/-kk/
+/lii.4/1.3/Mon Jan 26 07:10:10 2015/-kk/
 /lm.4/1.32/Sun Feb 21 05:16:29 2010/-kk/
 /lmc.4/1.22/Tue Mar 25 02:35:15 2014/-kk/
 /lmenv.4/1.1/Thu Oct 24 10:28:54 2013/-kk/
@@ -432,8 +433,8 @@
 /re.4/1.16/Tue Mar 25 02:35:15 2014/-kk/
 /rgephy.4/1.3/Wed Jan  1 02:45:19 2014/-kk/
 /rlphy.4/1.2/Thu Jan  5 12:32:27 2006/-kk/
-/rnd.4/1.20/Tue Apr 17 08:28:20 2012/-kk/
-/route.4/1.22/Thu Oct 24 10:28:54 2013/-kk/
+/rnd.4/1.22/Wed Apr 22 07:35:33 2015/-kk/
+/route.4/1.25/Thu Apr  2 02:27:44 2015/-kk/
 /rs5c372rtc.4/1.3/Thu Feb 25 17:08:01 2010/-kk/
 /rt.4/1.5/Wed Jan  2 04:09:13 2002/-kk/
 /rtfps.4/1.9/Thu Aug  7 10:31:03 2003/-kk/
@@ -503,15 +504,15 @@
 /sv.4/1.10/Wed Apr 30 13:10:54 2008/-kk/
 /svwsata.4/1.3/Mon Oct 19 18:41:09 2009/-kk/
 /swsensor.4/1.12/Mon Aug 27 20:52:40 2012/-kk/
-/swwdog.4/1.8/Wed Jun  8 12:19:14 2011/-kk/
+/swwdog.4/1.9/Wed Apr 22 07:35:33 2015/-kk/
 /sysmon.4/1.5/Tue Mar 25 02:35:15 2014/-kk/
 /tap.4/1.11/Thu Mar 12 13:14:18 2009/-kk/
 /tc.4/1.4/Mon Oct 29 18:59:55 2001/-kk/
 /tcds.4/1.5/Wed Apr 30 13:10:54 2008/-kk/
 /tcic.4/1.3/Wed Apr 30 13:10:54 2008/-kk/
 /tcom.4/1.7/Fri May  2 18:11:05 2008/-kk/
-/tcp.4/1.29/Thu Oct 24 10:28:54 2013/-kk/
-/tdvfb.4/1.7/Fri Aug  3 21:51:11 2012/-kk/
+/tcp.4/1.31/Sat Mar 21 02:20:49 2015/-kk/
+/tdvfb.4/1.8/Sat Mar 21 02:20:49 2015/-kk/
 /termios.4/1.36/Sat Oct  1 08:50:28 2011/-kk/
 /tfb.4/1.4/Wed Apr 30 13:10:54 2008/-kk/
 /thinkpad.4/1.4/Tue Mar 25 02:35:15 2014/-kk/
@@ -535,7 +536,7 @@
 /u3g.4/1.8/Tue Mar 25 02:35:15 2014/-kk/
 /uark.4/1.1/Sun May 30 22:22:18 2010/-kk/
 /uatp.4/1.4/Tue Mar 25 02:35:15 2014/-kk/
-/uaudio.4/1.25/Tue Sep 20 19:31:47 2011/-kk/
+/uaudio.4/1.29/Thu Feb  5 08:40:53 2015/-kk/
 /uberry.4/1.3/Mon May 26 08:13:06 2008/-kk/
 /ubsa.4/1.7/Wed Apr 30 13:10:54 2008/-kk/
 /ubsec.4/1.5/Thu Apr 24 14:29:57 2014/-kk/
@@ -577,7 +578,7 @@
 /urio.4/1.9/Tue Mar 13 19:25:42 2012/-kk/
 /url.4/1.8/Wed Apr 30 13:10:54 2008/-kk/
 /urndis.4/1.5/Tue Mar 25 02:35:16 2014/-kk/
-/urtw.4/1.4/Thu Oct 24 10:28:54 2013/-kk/
+/urtw.4/1.5/Mon Jan 26 07:10:12 2015/-kk/
 /urtwn.4/1.14/Fri Oct  3 09:08:50 2014/-kk/
 /usb.4/1.104/Thu Feb 13 15:22:09 2014/-kk/
 /uscanner.4/1.12/Tue Sep 20 19:31:47 2011/-kk/

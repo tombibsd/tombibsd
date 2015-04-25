@@ -1147,7 +1147,7 @@ int
 coda_link(void *v)
 {
 /* true args */
-    struct vop_link_args *ap = v;
+    struct vop_link_v2_args *ap = v;
     vnode_t *vp = ap->a_vp;
     struct cnode *cp = VTOC(vp);
     vnode_t *dvp = ap->a_dvp;
@@ -1208,7 +1208,6 @@ coda_link(void *v)
     CODADEBUG(CODA_LINK,	myprintf(("in link result %d\n",error)); )
 
 exit:
-    vput(dvp);
     return(error);
 }
 

@@ -81,7 +81,7 @@
 #ifndef _DEV_PCI_IF_MSKVAR_H_
 #define _DEV_PCI_IF_MSKVAR_H_
 
-#include <sys/rnd.h>
+#include <sys/rndsource.h>
 
 struct sk_jpool_entry {
 	int                             slot;

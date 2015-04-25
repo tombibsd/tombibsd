@@ -189,6 +189,7 @@ struct sdmmc_function {
 
 	void *bbuf;			/* bounce buffer */
 	bus_dmamap_t bbuf_dmap;		/* DMA map for bounce buffer */
+	bus_dmamap_t sseg_dmap;		/* DMA map for single segment */
 };
 
 /*

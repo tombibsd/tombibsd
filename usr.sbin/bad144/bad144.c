@@ -168,7 +168,7 @@ main(int argc, char *argv[])
 		errx(7, "Disk sector size too large/small (%d)",
 		    dp->d_secsize);
 #ifdef __i386__
-	if (dp->d_type == DTYPE_SCSI)
+	if (dp->d_type == DKTYPE_SCSI)
 		errx(1, "SCSI disks don't use bad144!");
 	/* are we inside a DOS partition? */
 	if (dp->d_partitions[0].p_offset) {

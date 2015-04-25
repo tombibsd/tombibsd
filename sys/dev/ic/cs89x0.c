@@ -226,7 +226,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/ioctl.h>
 #include <sys/errno.h>
 
-#include <sys/rnd.h>
+#include <sys/rndsource.h>
 
 #include <net/if.h>
 #include <net/if_ether.h>

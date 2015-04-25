@@ -5,6 +5,6 @@
 #include <machine/asm.h>
 
 ENTRY(copysignf)
-	fsgnj.s	fv0, fa0, fa1
+	fsgnj.s	fa0, fa0, fa1
 	ret
 END(copysignf)

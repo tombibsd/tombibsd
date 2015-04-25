@@ -23,10 +23,10 @@ disks="$(iostat -x | cut -f 1 -d ' ' )"
 	# nfs and "device" (the header of iostat)
 for i in $disks; do
 	case $i in
-	[cfm]d[0-9]*|dk[0-9]*|st[0-9]*|nfs|device) 
+	[cfm]d[0-9]*|dk[0-9]*|st[0-9]*|nfs[0-9]*|device) 
 		;;
 	*)
-		if disklabel $i > /dev/null 1>&2; then
+		if disklabel $i > /dev/null 2>&1; then
 			disklabel $i > "$work_dir/disklabel.$i"
 		fi
 		;;

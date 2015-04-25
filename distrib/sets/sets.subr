@@ -261,6 +261,7 @@ SUBST="${SUBST};s#@MACHINE@#${MACHINE}#g"
 #	ssp			${HAVE_SSP} != no
 #	tpm			${MKTPM} != no
 #	x11			${MKX11} != no && ${X11FLAVOUR} != "Xorg"
+#	x11radeonkms		${MKX11} != no && ${MKX11RADEONKMS} != no
 #	xorg			${MKX11} != no && ${X11FLAVOUR} == "Xorg"
 #	xorg_server		${MKXORG_SERVER} != no
 #	yp			${MKYP} != no
@@ -319,6 +320,12 @@ list_set_files()
 				wanted[".man"] = 1
 			if ("endian" in wanted)
 				wanted["endian=" "'"${TARGET_ENDIANNESS}"'"] = 1
+			if ("machine" in wanted)
+				wanted["machine=" "'"${MACHINE}"'"] = 1
+			if ("machine_arch" in wanted)
+				wanted["machine_arch=" "'"${MACHINE_ARCH}"'"] = 1
+			if ("machine_cpu" in wanted)
+				wanted["machine_cpu=" "'"${MACHINE_CPU}"'"] = 1
 		}
 
 		/^#/ {

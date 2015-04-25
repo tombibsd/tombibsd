@@ -501,7 +501,7 @@ linux32_sys_signal(struct lwp *l, const struct linux32_sys_signal_args *uap, reg
 {
 	/* {
 		syscallarg(int) signum;
-		syscallarg(linux32_handler_t) handler;
+		syscallarg(linux32_handlerp_t) handler;
 	} */
         struct sigaction nbsa, obsa;
         int error, sig;

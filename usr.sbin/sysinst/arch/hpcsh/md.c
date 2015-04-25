@@ -110,7 +110,6 @@ md_pre_disklabel(void)
 int
 md_post_disklabel(void)
 {
-
 	return 0;
 }
 

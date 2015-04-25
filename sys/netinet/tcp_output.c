@@ -439,6 +439,7 @@ tcp_build_datapkt(struct tcpcb *tp, struct socket *so, int off,
 	if (tp->t_force && len == 1)
 		tcps[TCP_STAT_SNDPROBE]++;
 	else if (SEQ_LT(tp->snd_nxt, tp->snd_max)) {
+		tp->t_sndrexmitpack++;
 		tcps[TCP_STAT_SNDREXMITPACK]++;
 		tcps[TCP_STAT_SNDREXMITBYTE] += len;
 	} else {
@@ -1401,6 +1402,9 @@ send:
 	if (win < (long)(int32_t)(tp->rcv_adv - tp->rcv_nxt))
 		win = (long)(int32_t)(tp->rcv_adv - tp->rcv_nxt);
 	th->th_win = htons((u_int16_t) (win>>tp->rcv_scale));
+	if (th->th_win == 0) {
+		tp->t_sndzerowin++;
+	}
 	if (SEQ_GT(tp->snd_up, tp->snd_nxt)) {
 		u_int32_t urp = tp->snd_up - tp->snd_nxt;
 		if (urp > IP_MAXPACKET)

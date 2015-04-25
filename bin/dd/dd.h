@@ -98,7 +98,8 @@ typedef struct {
 	struct timeval	start;		/* start time of dd */
 } STAT;
 
-/* Flags (in ddflags). */
+/* Flags (in ddflags, iflag and oflag). */
+#define	C_NONE		0x00000
 #define	C_ASCII		0x00001
 #define	C_BLOCK		0x00002
 #define	C_BS		0x00004
@@ -121,3 +122,5 @@ typedef struct {
 #define	C_UNBLOCK	0x80000
 #define	C_OSYNC		0x100000
 #define	C_SPARSE	0x200000
+#define	C_IFLAG		0x400000
+#define	C_OFLAG		0x800000

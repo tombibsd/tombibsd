@@ -714,7 +714,8 @@ lfs_bmapv(struct proc *p, fsid_t *fsidp, BLOCK_INFO *blkiov, int blkcnt)
 				lfs_vunref(vp);
 				if (VTOI(vp)->i_lfs_iflags & LFSI_BMAP) {
 					mutex_enter(vp->v_interlock);
-					if (vget(vp, LK_NOWAIT) == 0) {
+					if (vget(vp, LK_NOWAIT,
+						false /* !wait */) == 0) {
 						if (! vrecycle(vp))
 							vrele(vp);
 					}
@@ -832,7 +833,7 @@ lfs_bmapv(struct proc *p, fsid_t *fsidp, BLOCK_INFO *blkiov, int blkcnt)
 		/* Recycle as above. */
 		if (ip->i_lfs_iflags & LFSI_BMAP) {
 			mutex_enter(vp->v_interlock);
-			if (vget(vp, LK_NOWAIT) == 0) {
+			if (vget(vp, LK_NOWAIT, false /* !wait */) == 0) {
 				if (! vrecycle(vp))
 					vrele(vp);
 			}
@@ -1182,7 +1183,7 @@ lfs_fastvget(struct mount *mp, ino_t ino, daddr_t daddr, struct vnode **vpp,
 		retries = 0;
 	    again:
 		error = bread(ump->um_devvp, LFS_FSBTODB(fs, daddr), fs->lfs_ibsize,
-			      NOCRED, 0, &bp);
+			      0, &bp);
 		if (error) {
 			DLOG((DLOG_CLEAN, "lfs_fastvget: bread failed (%d)\n",
 			      error));

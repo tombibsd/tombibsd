@@ -37,7 +37,7 @@ EVBARM_BOARDS.armv7hf+=		ALLWINNER_A80
 #EVBARM_BOARDS.armv4+=		ARMADILLO9
 EVBARM_BOARDS.armv4+=		GEMINI
 EVBARM_BOARDS.armv4+=		INTEGRATOR
-KERNEL_SETS.armv4+=		INTEGRATOR_CP
+EVBARM_BOARDS.armv4+=		INTEGRATOR_CP
 KERNEL_SETS.armv4+=		IXM1200
 #EVBARM_BOARDS.armv4+=		MINI2440
 #EVBARM_BOARDS.armv4+=		MPCSA_GENERIC
@@ -71,6 +71,8 @@ EVBARM_BOARDS.armv5t+=		SHEEVAPLUG
 #EVBARM_BOARDS.armv6hf+= 	IMX31LITE
 EVBARM_BOARDS.armv6+=		RPI
 EVBARM_BOARDS.armv6hf+=	 	RPI
+KERNEL_SETS.armv6+=		RPI2
+KERNEL_SETS.armv6hf+=	 	RPI2
 EVBARM_BOARDS.armv6+=		TISDP2420
 EVBARM_BOARDS.armv6hf+= 	TISDP2420
 #EVBARM_BOARDS.armv6+=		TISDP2430
@@ -102,11 +104,16 @@ EVBARM_BOARDS.armv7hf+=		MIRABOX
 #EVBARM_BOARDS.armv7+=		N900
 EVBARM_BOARDS.armv7+=		NETWALKER
 EVBARM_BOARDS.armv7hf+=		NETWALKER
+EVBARM_BOARDS.armv7+=		ODROID-C1
+EVBARM_BOARDS.armv7hf+=		ODROID-C1
 EVBARM_BOARDS.armv7+=		OMAP5EVM
 EVBARM_BOARDS.armv7hf+=		OMAP5EVM
-#EVBARM_BOARDS.armv7+=		OVERO
+EVBARM_BOARDS.armv7+=		OVERO
+EVBARM_BOARDS.armv7hf+=		OVERO
 EVBARM_BOARDS.armv7+=		PANDABOARD
 EVBARM_BOARDS.armv7hf+= 	PANDABOARD
+EVBARM_BOARDS.armv7+=		RPI2
+EVBARM_BOARDS.armv7hf+=	 	RPI2
 EVBARM_BOARDS.armv7+=		KOBO
 EVBARM_BOARDS.armv7hf+= 	KOBO
 .endif
@@ -126,7 +133,7 @@ __mkimage: .USE
 	TOOL_MTREE=${TOOL_MTREE} \
 	HOST_SH=${HOST_SH} \
 	${HOST_SH} ${MKIMAGE} -x -h ${.TARGET:S/smp_//} -D ${DESTDIR} \
-	    -K ${.ALLSRC} -S ${NETBSDSRCDIR} ${MKI_OPTS.${.TARGET}} \
+	    -S ${NETBSDSRCDIR} ${MKI_OPTS.${.TARGET}} \
 	    ${IMAGE.dir}/${.TARGET:S/smp_//}.img.gz
 
 ARCHES.arm=		armv4 xscale armv5t armv6 armv7
@@ -155,22 +162,21 @@ BUILD_KERNELS+=		${board}_INSTALL
 KERNEL_SETS+=		${KERNEL_SETS.${arch}}
 .endfor
 
-.if !empty(KERNEL_SETS:MBEAGLEBOARD) && !empty(KERNEL_SETS:MBEAGLEBONE)
-smp_beagleboard: ${IMAGE.kern}/netbsd-BEAGLEBOARD.ub.gz __mkimage
-#            XXX ${IMAGE.kern}/netbsd-BEAGLEBONE.ub.gz
-.if empty(ALL_KERNELS) || (!empty(ALL_KERNELS:MBEAGLEBOARD) && !empty(ALL_KERNELS:MBEAGLEBONE))
-SNAP_MD_POST_DEPS+=	smp_beagleboard
-.endif
+.if !empty(MACHINE_ARCH:M*armv7*) && empty(ALL_KERNELS)
+smp_armv7: __mkimage
+MKI_OPTS.smp_armv7=	-K ${IMAGE.kern}
+SNAP_MD_POST_DEPS+=	smp_armv7
 .endif
 
 .if !empty(KERNEL_SETS:MRPI)
-smp_rpi: ${IMAGE.kern}/netbsd-RPI.bin.gz __mkimage
+smp_rpi: __mkimage
 .if empty(ALL_KERNELS) || !empty(ALL_KERNELS:MRPI)
+MKI_OPTS.smp_rpi=	-K ${IMAGE.kern}/netbsd-RPI.bin.gz
 SNAP_MD_POST_DEPS+=	smp_rpi
 .endif
-MKI_OPTS.smp_rpi_inst="-b"
 smp_rpi_inst: ${IMAGE.instk}/netbsd-RPI_INSTALL.bin.gz __mkimage
 .if empty(ALL_KERNELS) || !empty(ALL_KERNELS:MRPI_INSTALL)
+MKI_OPTS.smp_rpi_inst=	-b -K ${IMAGE.instk}/netbsd-RPI_INSTALL.bin.gz
 SNAP_MD_POST_DEPS+=	smp_rpi_inst
 .endif
 .endif

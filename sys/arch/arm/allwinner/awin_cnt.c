@@ -102,11 +102,7 @@ awin_cnt_attach(device_t parent, device_t self, void *aux)
 	sc->sc_tc.tc_frequency = AWIN_REF_FREQ;
 	sc->sc_tc.tc_name = "CNT64";
 	sc->sc_tc.tc_priv = sc;
-#ifdef MULTIPROCESSOR
-	sc->sc_tc.tc_quality = 900;
-#else
 	sc->sc_tc.tc_quality = 200;
-#endif
 
 	tc_init(&sc->sc_tc);
 }

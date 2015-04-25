@@ -522,7 +522,7 @@ msdosfs_read(void *v)
 		 * vnode for the directory.
 		 */
 		error = bread(pmp->pm_devvp, de_bn2kb(pmp, lbn), blsize,
-		    NOCRED, 0, &bp);
+		    0, &bp);
 		if (error) {
 			goto bad;
 		}
@@ -532,8 +532,13 @@ msdosfs_read(void *v)
 	} while (error == 0 && uio->uio_resid > 0 && n != 0);
 
 out:
-	if ((ap->a_ioflag & IO_SYNC) == IO_SYNC)
-		error = deupdat(dep, 1);
+	if ((ap->a_ioflag & IO_SYNC) == IO_SYNC) {
+		int uerror;
+
+		uerror = deupdat(dep, 1);
+		if (error == 0)
+			error = uerror;
+	}
 bad:
 	fstrans_done(vp->v_mount);
 	return (error);
@@ -1105,7 +1110,7 @@ abortit:
 		} else
 			bn = cntobn(pmp, cn);
 		error = bread(pmp->pm_devvp, de_bn2kb(pmp, bn),
-		    pmp->pm_bpcluster, NOCRED, B_MODIFY, &bp);
+		    pmp->pm_bpcluster, B_MODIFY, &bp);
 		if (error) {
 			/* XXX should really panic here, fs is corrupt */
 			VOP_UNLOCK(fvp);
@@ -1496,7 +1501,7 @@ msdosfs_readdir(void *v)
 		if ((error = pcbmap(dep, lbn, &bn, &cn, &blsize)) != 0)
 			break;
 		error = bread(pmp->pm_devvp, de_bn2kb(pmp, bn), blsize,
-		    NOCRED, 0, &bp);
+		    0, &bp);
 		if (error) {
 			goto bad;
 		}

@@ -61,12 +61,7 @@ MKGCC?=		no
 #
 .if ${MKGCC:Uyes} != "no"
 
-# Platforms still using GCC 4.5
-.if \
-      ${MACHINE_CPU} == "m68k"
-HAVE_GCC?=    45
-
-.elif ${MACHINE} == "playstation2" || ${MACHINE_CPU} == "aarch64"
+.if ${MACHINE} == "playstation2" || ${MACHINE_CPU} == "aarch64"
 HAVE_GCC?=    0
 .else
 # Otherwise, default to GCC4.8
@@ -74,12 +69,16 @@ HAVE_GCC?=    48
 .endif
 
 #
+# Platforms that can't run a modern GCC natively
+.if ${MACHINE_ARCH} == "m68000"
+MKGCCCMDS?=	no
+.endif
+
+#
 # We import the old gcc as "gcc.old" when upgrading.  EXTERNAL_GCC_SUBDIR is
 # set to the relevant subdirectory in src/external/gpl3 for his HAVE_GCC.
 #
-.if ${HAVE_GCC} == 45
-EXTERNAL_GCC_SUBDIR=	gcc.old
-.elif ${HAVE_GCC} == 48
+.if ${HAVE_GCC} == 48
 EXTERNAL_GCC_SUBDIR=	gcc
 .else
 EXTERNAL_GCC_SUBDIR=	/does/not/exist
@@ -1250,7 +1249,7 @@ X11SRCDIRMIT?=		${X11SRCDIR}/external/mit
 	FS ICE SM X11 XScrnSaver XTrap Xau Xcomposite Xcursor Xdamage \
 	Xdmcp Xevie Xext Xfixes Xfont Xft Xi Xinerama Xmu Xpm \
 	Xrandr Xrender Xres Xt Xtst Xv XvMC Xxf86dga Xxf86misc Xxf86vm drm \
-	fontenc xkbfile xkbui Xaw lbxutil Xfontcache pciaccess xcb \
+	fontenc xkbfile xkbui Xaw Xfontcache pciaccess xcb \
 	pthread-stubs
 X11SRCDIR.${_lib}?=		${X11SRCDIRMIT}/lib${_lib}/dist
 .endfor
@@ -1264,21 +1263,21 @@ X11SRCDIR.${_proto}proto?=		${X11SRCDIRMIT}/${_proto}proto/dist
 .endfor
 
 .for _dir in \
-	xtrans fontconfig expat freetype evieext mkfontscale bdftopcf \
-	xkbcomp xorg-cf-files imake xorg-server xbiff xkbdata xkeyboard-config \
+	xtrans fontconfig freetype evieext mkfontscale bdftopcf \
+	xkbcomp xorg-cf-files imake xorg-server xbiff xkeyboard-config \
 	xbitmaps appres xeyes xev xedit sessreg pixman \
 	beforelight bitmap editres makedepend fonttosfnt fslsfonts fstobdf \
-	glu glw mesa-demos MesaDemos MesaGLUT MesaLib \
-	ico iceauth lbxproxy listres lndir \
+	glu glw mesa-demos MesaGLUT MesaLib MesaLib7 \
+	ico iceauth listres lndir \
 	luit xproxymanagementprotocol mkfontdir oclock proxymngr rgb \
 	setxkbmap smproxy twm viewres x11perf xauth xcalc xclipboard \
-	xclock xcmsdb xconsole xcutsel xditview xdpyinfo xdriinfo xdm \
+	xclock xcmsdb xconsole xditview xdpyinfo xdriinfo xdm \
 	xfd xf86dga xfindproxy xfontsel xfwp xgamma xgc xhost xinit \
 	xkill xload xlogo xlsatoms xlsclients xlsfonts xmag xmessage \
 	xmh xmodmap xmore xman xprop xrandr xrdb xrefresh xset \
 	xsetmode xsetpointer xsetroot xsm xstdcmap xvidtune xvinfo \
-	xwininfo xwud xprehashprinterlist xplsprinters xkbprint xkbevd \
-	xterm xwd xfs xfsinfo xphelloworld xtrap xkbutils xkbcomp \
+	xwininfo xwud xkbprint xkbevd \
+	xterm xwd xfs xfsinfo xtrap xkbutils xkbcomp \
 	xkeyboard-config xinput xcb-util xorg-docs \
 	font-adobe-100dpi font-adobe-75dpi font-adobe-utopia-100dpi \
 	font-adobe-utopia-75dpi font-adobe-utopia-type1 \
@@ -1298,15 +1297,21 @@ X11SRCDIR.xf86-input-${_i}?=	${X11SRCDIRMIT}/xf86-input-${_i}/dist
 .endfor
 
 .for _v in \
-	ag10e apm ark ast ati chips cirrus crime \
+	ag10e apm ark ast ati ati-kms chips cirrus crime \
 	geode glint i128 i740 igs imstt intel mach64 mga \
 	neomagic newport nsc nv nvxbox openchrome pnozz \
 	r128 radeonhd rendition \
 	s3 s3virge savage siliconmotion sis suncg14 \
 	suncg6 sunffb sunleo suntcx \
-	tdfx tga trident tseng vesa vga via vmware wsfb xgi
+	tdfx tga trident tseng vesa vga vmware wsfb xgi
 X11SRCDIR.xf86-video-${_v}?=	${X11SRCDIRMIT}/xf86-video-${_v}/dist
 .endfor
+
+# Build the ati 6.x (UMS supported) or 7.x (KMS demanded) drivers
+.if ${MACHINE_ARCH} == "x86_64" || ${MACHINE_ARCH} == "i386"
+MKX11RADEONKMS?=		yes
+.endif
+MKX11RADEONKMS?=		no
 
 .if ${X11FLAVOUR} == "Xorg"
 X11DRI?=			yes

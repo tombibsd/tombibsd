@@ -41,6 +41,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/param.h>
 #include <sys/systm.h>
 #include <sys/device.h>
+#include <sys/module.h>
 #include <sys/event.h>
 #include <sys/conf.h>
 
@@ -49,6 +50,8 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 static uint8_t	iic_smbus_crc8(uint16_t);
 static uint8_t	iic_smbus_pec(int, uint8_t *, uint8_t *);
+
+static int	i2cexec_modcmd(modcmd_t, void *);
 
 /*
  * iic_exec:
@@ -341,4 +344,19 @@ iic_smbus_pec(int count, uint8_t *s, uint8_t *r)
 			crc = iic_smbus_crc8((crc ^ r[i]) << 8);
 
 	return crc;
+}
+
+MODULE(MODULE_CLASS_MISC, i2cexec, NULL);
+
+static int
+i2cexec_modcmd(modcmd_t cmd, void *opaque)
+{
+	switch (cmd) {
+	case MODULE_CMD_INIT:
+	case MODULE_CMD_FINI:
+		return 0;
+		break;
+	default:
+		return ENOTTY;
+	}
 }

@@ -41,3 +41,5 @@ DPADD+=		${LIBL}
 .include "Makefile.ops-c"
 
 .include <bsd.prog.mk>
+
+${SRCS}: ops.h

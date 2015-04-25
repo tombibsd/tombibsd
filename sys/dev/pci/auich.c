@@ -123,7 +123,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/sysctl.h>
 #include <sys/audioio.h>
 #include <sys/bus.h>
-#include <sys/rnd.h>
+#include <sys/rndsource.h>
 
 #include <dev/pci/pcidevs.h>
 #include <dev/pci/pcivar.h>

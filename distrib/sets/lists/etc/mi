@@ -227,6 +227,7 @@
 ./etc/rc.d/altqd				etc-router-rc
 ./etc/rc.d/amd					etc-amd-rc
 ./etc/rc.d/apmd					etc-sys-rc
+./etc/rc.d/blacklistd				etc-sys-rc
 ./etc/rc.d/bluetooth				etc-sys-rc
 ./etc/rc.d/bootconf.sh				etc-sys-rc
 ./etc/rc.d/bootparams				etc-bootserver-rc
@@ -268,6 +269,7 @@
 ./etc/rc.d/ipsec				etc-net-rc
 ./etc/rc.d/irdaattach				etc-sys-rc
 ./etc/rc.d/iscsi_target				etc-iscsi-rc
+./etc/rc.d/iscsid				etc-iscsi-rc
 ./etc/rc.d/isdnd				etc-isdn-rc
 ./etc/rc.d/isibootd				etc-bootserver-rc
 ./etc/rc.d/kdc					etc-krb5-rc
@@ -283,6 +285,7 @@
 ./etc/rc.d/makemandb				etc-man-rc
 ./etc/rc.d/mdnsd				etc-mdns-rc
 ./etc/rc.d/mixerctl				etc-audio-rc
+./etc/rc.d/modules				etc-sys-rc
 ./etc/rc.d/mopd					etc-bootserver-rc
 ./etc/rc.d/motd					etc-sys-rc
 ./etc/rc.d/mountall				etc-sys-rc
@@ -316,6 +319,7 @@
 ./etc/rc.d/random_seed				etc-sys-rc
 ./etc/rc.d/rarpd				etc-bootserver-rc
 ./etc/rc.d/rbootd				etc-bootserver-rc
+./etc/rc.d/resize_root				etc-sys-rc
 ./etc/rc.d/rndctl				etc-sys-rc
 ./etc/rc.d/root					etc-sys-rc
 ./etc/rc.d/route6d				etc-router-rc

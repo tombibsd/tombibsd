@@ -550,7 +550,7 @@ unpack(struct name *smopts, struct name *np)
 	 * the terminating 0 pointer.  Additional spots may be needed
 	 * to pass along -f to the host mailer.
 	 */
-	extra = 3 * count(smopts);
+	extra = 3 + count(smopts);
 	extra++;
 	metoo = value(ENAME_METOO) != NULL;
 	if (metoo)

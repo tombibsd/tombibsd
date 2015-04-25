@@ -60,8 +60,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <netinet/if_inarp.h>
 #endif
 
-#include <sys/rnd.h>
-
 #include <sys/bus.h>
 
 #include <dev/pci/pcireg.h>

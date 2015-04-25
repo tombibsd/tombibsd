@@ -33,6 +33,8 @@
 #include <sys/cdefs.h>
 __KERNEL_RCSID(0, "$NetBSD$");
 
+#include "opt_imx.h"
+
 #include <sys/bus.h>
 #include <sys/device.h>
 #include <sys/param.h>
@@ -46,9 +48,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 int
 imxi2c_match(device_t parent __unused, struct cfdata *match __unused, void *aux)
 {
-	struct axi_attach_args *aa;
-
-	aa = aux;
+	struct axi_attach_args *aa = aux;
 
 	switch (aa->aa_addr) {
 	case IMX6_AIPS2_BASE + AIPS2_I2C1_BASE:
@@ -64,20 +64,13 @@ imxi2c_match(device_t parent __unused, struct cfdata *match __unused, void *aux)
 void
 imxi2c_attach(device_t parent __unused, device_t self, void *aux)
 {
-	struct imxi2c_softc *sc;
-	struct axi_attach_args *aa;
-	struct i2cbus_attach_args iba;
+	struct axi_attach_args *aa = aux;
 
-	aa = aux;
-	sc = device_private(self);
-
-	imxi2c_attach_common(parent, self, aa->aa_iot, aa->aa_addr, aa->aa_size,
-	    aa->aa_irq, 0);
+	if (aa->aa_size <= 0)
+		aa->aa_size = I2C_SIZE;
 
 	imxi2c_set_freq(self, imx6_get_clock(IMX6CLK_PERCLK), 400000);
-
-	memset(&iba, 0, sizeof(iba));
-	iba.iba_tag = &sc->sc_i2c;
-	config_found_ia(sc->sc_dev, "i2cbus", &iba, iicbus_print);
+	imxi2c_attach_common(parent, self,
+	    aa->aa_iot, aa->aa_addr, aa->aa_size, aa->aa_irq, 0);
 }
 

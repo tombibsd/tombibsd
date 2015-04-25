@@ -1,4 +1,5 @@
 /*	$NetBSD$	*/
+
 /*	$OpenBSD: strlcat.c,v 1.13 2005/08/08 08:05:37 espie Exp $	*/
 
 /*

@@ -48,7 +48,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/select.h>
 #include <sys/systm.h>
 #include <sys/sysctl.h>
-#include <sys/rnd.h>
 #include <sys/rndsink.h>
 #if DIAGNOSTIC
 #include <sys/rngtest.h>

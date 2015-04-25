@@ -8,6 +8,6 @@
 #include "memcpy_xscale.S"
 #endif
 
-#if defined(__ARM_EABI__)
+#if defined(__ARM_EABI__) && !defined(_RUMPKERNEL)
 STRONG_ALIAS(__aeabi_memcpy, memcpy)
 #endif

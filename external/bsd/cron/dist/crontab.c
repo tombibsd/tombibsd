@@ -612,7 +612,7 @@ cleanTempFile(void)
 	}
 }
 
-static void
+static __dead void
 bail(int signo)
 {
 

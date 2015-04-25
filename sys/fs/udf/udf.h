@@ -94,6 +94,7 @@ extern int udf_verbose;
 #define DPRINTFIF(name, cond, arg) {}
 #endif
 
+VFS_PROTOS(udf);
 
 /* constants to identify what kind of identifier we are dealing with */
 #define UDF_REGID_DOMAIN		 1
@@ -339,7 +340,6 @@ struct udf_mount {
 
 	/* rb tree for lookup icb to udf_node and sorted list for sync */
 	kmutex_t	ihash_lock;
-	kmutex_t	get_node_lock;
 	struct rb_tree	udf_node_tree;
 
 	/* syncing */

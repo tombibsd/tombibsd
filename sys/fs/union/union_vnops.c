@@ -1176,7 +1176,7 @@ union_remove(void *v)
 int
 union_link(void *v)
 {
-	struct vop_link_args /* {
+	struct vop_link_v2_args /* {
 		struct vnode *a_dvp;
 		struct vnode *a_vp;
 		struct componentname *a_cnp;
@@ -1233,7 +1233,6 @@ union_link(void *v)
 					 */
 					error = EEXIST;
 					VOP_UNLOCK(ap->a_vp);
-					vput(ap->a_dvp);
 					vput(vp);
 					return (error);
 				}
@@ -1247,20 +1246,10 @@ union_link(void *v)
 	if (dvp == NULLVP)
 		error = EROFS;
 
-	if (error) {
-		vput(ap->a_dvp);
+	if (error)
 		return (error);
-	}
 
-	/*
-	 * Account for VOP_LINK to vrele dvp.
-	 * Note: VOP_LINK will unlock dvp.
-	 */
-	vref(dvp);
-	error = VOP_LINK(dvp, vp, cnp);
-	vrele(ap->a_dvp);
-
-	return error;
+	return VOP_LINK(dvp, vp, cnp);
 }
 
 int

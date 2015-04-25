@@ -139,7 +139,7 @@ ffs_balloc_ufs1(struct inode *ip, off_t offset, int bufsize, struct buf **bpp)
 
 			if (bpp != NULL) {
 				error = bread(ip->i_devvp, lbn, fs->fs_bsize,
-				    NULL, 0, bpp);
+				    0, bpp);
 				if (error) {
 					brelse(*bpp, 0);
 					return (error);
@@ -165,7 +165,7 @@ ffs_balloc_ufs1(struct inode *ip, off_t offset, int bufsize, struct buf **bpp)
 
 				if (bpp != NULL) {
 					error = bread(ip->i_devvp, lbn, osize,
-					    NULL, 0, bpp);
+					    0, bpp);
 					if (error) {
 						brelse(*bpp, 0);
 						return (error);
@@ -251,7 +251,7 @@ ffs_balloc_ufs1(struct inode *ip, off_t offset, int bufsize, struct buf **bpp)
 
 	for (i = 1;;) {
 		error = bread(ip->i_devvp, indirs[i].in_lbn, fs->fs_bsize,
-		    NULL, 0, &bp);
+		    0, &bp);
 		if (error) {
 			brelse(bp, 0);
 			return error;
@@ -321,8 +321,7 @@ ffs_balloc_ufs1(struct inode *ip, off_t offset, int bufsize, struct buf **bpp)
 	}
 	brelse(bp, 0);
 	if (bpp != NULL) {
-		error = bread(ip->i_devvp, lbn, (int)fs->fs_bsize, NULL, 0,
-		    &nbp);
+		error = bread(ip->i_devvp, lbn, (int)fs->fs_bsize, 0, &nbp);
 		if (error) {
 			brelse(nbp, 0);
 			return error;
@@ -390,7 +389,7 @@ ffs_balloc_ufs2(struct inode *ip, off_t offset, int bufsize, struct buf **bpp)
 
 			if (bpp != NULL) {
 				error = bread(ip->i_devvp, lbn, fs->fs_bsize,
-				    NULL, 0, bpp);
+				    0, bpp);
 				if (error) {
 					brelse(*bpp, 0);
 					return (error);
@@ -416,7 +415,7 @@ ffs_balloc_ufs2(struct inode *ip, off_t offset, int bufsize, struct buf **bpp)
 
 				if (bpp != NULL) {
 					error = bread(ip->i_devvp, lbn, osize,
-					    NULL, 0, bpp);
+					    0, bpp);
 					if (error) {
 						brelse(*bpp, 0);
 						return (error);
@@ -502,7 +501,7 @@ ffs_balloc_ufs2(struct inode *ip, off_t offset, int bufsize, struct buf **bpp)
 
 	for (i = 1;;) {
 		error = bread(ip->i_devvp, indirs[i].in_lbn, fs->fs_bsize,
-		    NULL, 0, &bp);
+		    0, &bp);
 		if (error) {
 			brelse(bp, 0);
 			return error;
@@ -572,7 +571,7 @@ ffs_balloc_ufs2(struct inode *ip, off_t offset, int bufsize, struct buf **bpp)
 	}
 	brelse(bp, 0);
 	if (bpp != NULL) {
-		error = bread(ip->i_devvp, lbn, (int)fs->fs_bsize, NULL, 0,
+		error = bread(ip->i_devvp, lbn, (int)fs->fs_bsize, 0,
 		    &nbp);
 		if (error) {
 			brelse(nbp, 0);

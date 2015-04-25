@@ -60,6 +60,7 @@
  */
 
 #include <sys/callout.h>
+#include <sys/rndsource.h>
 
 /*
  * Misc. definitions for the Intel i82557 fast Ethernet controller

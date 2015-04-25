@@ -98,8 +98,8 @@ ctl_attach(device_t parent, device_t self, void *aux)
 	sc->sc_dev = self;
 	csc = sc;
 
-	sc->iot = SGIMIPS_BUS_SPACE_NORMAL;
-	if (bus_space_map(sc->iot, ma->ma_addr, 0,
+	sc->iot = normal_memt;
+	if (bus_space_map(sc->iot, ma->ma_addr, 0x10000 /* XXX */,
 	    BUS_SPACE_MAP_LINEAR, &sc->ioh))
 		panic("ctl_attach: could not allocate memory\n");
 

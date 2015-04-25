@@ -71,6 +71,7 @@ typedef unsigned short	tlb_asid_t;
 #if defined(_KERNEL)
 typedef struct label_t {	/* Used by setjmp & longjmp */
         register_t lb_reg[16];	/* */
+	__uint32_t lb_sr;
 } label_t;
 #endif
          

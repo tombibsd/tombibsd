@@ -245,7 +245,7 @@ static struct awin_gpio_softc {
 	bus_space_tag_t sc_bst;
 	bus_space_handle_t sc_bsh;
 } awin_gpio_sc = {
-	.sc_bst = &awin_bs_tag,
+	.sc_bst = &armv7_generic_bs_tag,
 };
 
 CFATTACH_DECL_NEW(awin_gpio, sizeof(struct awin_gpio_softc),
@@ -254,8 +254,8 @@ CFATTACH_DECL_NEW(awin_gpio, sizeof(struct awin_gpio_softc),
 static int
 awin_gpio_match(device_t parent, cfdata_t cf, void *aux)
 {
-	struct awinio_attach_args * const aio = aux;
-	const struct awin_locators * const loc = &aio->aio_loc;
+	struct awinio_attach_args * const aio __diagused = aux;
+	const struct awin_locators * const loc __diagused = &aio->aio_loc;
 
 	KASSERT(!strcmp(cf->cf_name, loc->loc_name));
 	KASSERT(loc->loc_port == AWINIOCF_PORT_DEFAULT);
@@ -660,7 +660,7 @@ awin_gpio_pinset_acquire(const struct awin_gpio_pinset *req)
 	/*
 	 * Now update any config register that changed.
 	 */
-	awin_gpio_update_cfg_regs(&awin_bs_tag, grp, &ncfg);
+	awin_gpio_update_cfg_regs(&armv7_generic_bs_tag, grp, &ncfg);
 
 	/*
 	 * Mark all these pins as in use.
@@ -754,7 +754,7 @@ awin_gpio_pin_ctl(void *cookie, int pin, int flags)
 	/*
 	 * Now update any config register that changed.
 	 */
-	awin_gpio_update_cfg_regs(&awin_bs_tag, grp, &ncfg);
+	awin_gpio_update_cfg_regs(&armv7_generic_bs_tag, grp, &ncfg);
 }
 
 bool

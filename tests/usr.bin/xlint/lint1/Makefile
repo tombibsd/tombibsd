@@ -52,6 +52,7 @@ FILES+=		d_type_conv1.c
 FILES+=		d_type_conv2.c
 FILES+=		d_type_conv3.c
 FILES+=		d_typename_as_var.c
+FILES+=		d_typefun.c
 FILES+=		d_zero_sized_arrays.c
 
 .include <bsd.test.mk>

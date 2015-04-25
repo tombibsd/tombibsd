@@ -119,9 +119,9 @@
 #define RCSID(name)	__RCSID(name)
 
 #if defined(_LP64)
-#define	SZREG	4
-#else
 #define	SZREG	8
+#else
+#define	SZREG	4
 #endif
 
 #define	ALSK	15		/* stack alignment */

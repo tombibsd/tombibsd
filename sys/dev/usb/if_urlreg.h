@@ -29,6 +29,8 @@
  *
  */
 
+#include <sys/rndsource.h>
+
 #define	URL_IFACE_INDEX		0
 #define	URL_CONFIG_NO		1
 

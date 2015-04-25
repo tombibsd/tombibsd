@@ -135,6 +135,8 @@ void	splx_noprof(int);
 void	spl0(void);
 int	splintr(uint32_t *);
 
+void	softint_deliver(void);
+
 struct cpu_info;
 
 void	ipi_init(struct cpu_info *);

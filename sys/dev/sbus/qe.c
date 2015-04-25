@@ -83,7 +83,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/syslog.h>
 #include <sys/device.h>
 #include <sys/malloc.h>
-#include <sys/rnd.h>
 
 #include <net/if.h>
 #include <net/if_dl.h>

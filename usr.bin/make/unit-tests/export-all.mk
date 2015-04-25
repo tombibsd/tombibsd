@@ -17,7 +17,7 @@ UT_OKDIR = ${${here}/../${here:T}:L:${M_tA}:T}
 
 .export
 
-.include "export"
+.include "export.mk"
 
 UT_TEST=export-all
 UT_ALL=even this gets exported

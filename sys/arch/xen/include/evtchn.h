@@ -67,5 +67,6 @@ struct pintrhand {
 
 struct pintrhand *pirq_establish(int, int, int (*)(void *), void *, int,
      const char *);
+void pirq_disestablish(struct pintrhand *);
 
 #endif /*  _XEN_EVENTS_H_ */

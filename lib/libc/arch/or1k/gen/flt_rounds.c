@@ -36,6 +36,7 @@
 __RCSID("$NetBSD$");
 #endif /* LIBC_SCCS and not lint */
 
+#include "namespace.h"
 #include <ieeefp.h>
 #include <float.h>
 #include <stdint.h>

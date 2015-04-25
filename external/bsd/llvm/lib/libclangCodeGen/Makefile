@@ -50,7 +50,6 @@ SRCS+=	BackendUtil.cpp \
 	ItaniumCXXABI.cpp \
 	MicrosoftCXXABI.cpp \
 	ModuleBuilder.cpp \
-	SanitizerBlacklist.cpp \
 	SanitizerMetadata.cpp \
 	TargetInfo.cpp
 

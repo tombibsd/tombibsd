@@ -147,6 +147,8 @@ void ext2fs_set_inode_guid(struct inode *);
 /* ext2fs_readwrite.c */
 int ext2fs_read(void *);
 int ext2fs_write(void *);
+int ext2fs_bufrd(struct vnode *, struct uio *, int, kauth_cred_t);
+int ext2fs_bufwr(struct vnode *, struct uio *, int, kauth_cred_t);
 
 /* ext2fs_vnops.c */
 int ext2fs_create(void *);

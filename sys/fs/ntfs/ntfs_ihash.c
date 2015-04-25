@@ -40,7 +40,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/kernel.h>
 #include <sys/lock.h>
 #include <sys/vnode.h>
-#include <sys/proc.h>
 #include <sys/mount.h>
 #include <sys/mallocvar.h>
 

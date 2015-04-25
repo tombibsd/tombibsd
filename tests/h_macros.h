@@ -75,7 +75,7 @@ tests_makegarbage(void *space, size_t len)
 	uint16_t randval;
 
 	while (len >= sizeof(randval)) {
-		*sb++ = (random() & 0xffff);
+		*sb++ = (uint16_t)random();
 		len -= sizeof(*sb);
 	}
 	randval = (uint16_t)random();

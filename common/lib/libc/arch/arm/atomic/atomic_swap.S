@@ -87,6 +87,11 @@ STRONG_ALIAS(_atomic_swap_ptr,_atomic_swap_32)
 #if (!defined(_KERNEL) || defined(_RUMPKERNEL)) && !defined(_STANDALONE)
 ENTRY_NP(__sync_lock_release_4)
 	mov	r1, #0
+#ifdef _ARM_ARCH_7
+	dmb
+#else
+	mcr	p15, 0, r1, c7, c10, 5	/* data memory barrier */
+#endif
 	strb	r1, [r0]
 	RET
 END(__sync_lock_release_4)
@@ -123,6 +128,11 @@ STRONG_ALIAS(_atomic_swap_uchar,_atomic_swap_8)
 #if (!defined(_KERNEL) || defined(_RUMPKERNEL)) && !defined(_STANDALONE)
 ENTRY_NP(__sync_lock_release_1)
 	mov	r1, #0
+#ifdef _ARM_ARCH_7
+	dmb
+#else
+	mcr	p15, 0, r1, c7, c10, 5	/* data memory barrier */
+#endif
 	strb	r1, [r0]
 	RET
 END(__sync_lock_release_1)

@@ -13,4 +13,6 @@ SRCS+=	drm_agpsupport.c
 SRCS+=	drm_pci.c
 SRCS+=	drm_pci_module.c
 
+SRCS+=	drmfb_pci.c
+
 .include <bsd.kmodule.mk>

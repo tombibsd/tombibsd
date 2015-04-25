@@ -11,11 +11,13 @@ SRCS+=	ARM_DWARF_Registers.cpp \
 	KQueue.cpp \
 	PseudoTerminal.cpp \
 	Range.cpp \
+	RegisterNumber.cpp \
 	SharingPtr.cpp \
 	StringExtractor.cpp \
 	StringExtractorGDBRemote.cpp \
 	StringLexer.cpp \
-	TimeSpecTimeout.cpp
+	TimeSpecTimeout.cpp \
+	UriParser.cpp
 
 .if defined(HOSTLIB)
 .include <bsd.hostlib.mk>

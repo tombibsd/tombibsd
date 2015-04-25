@@ -14,6 +14,9 @@ SHLIB_MINOR=	0
 
 LIB=mudflap
 SRCS=mf-runtime.c mf-heuristics.c mf-hooks1.c mf-hooks2.c
+
+.include <bsd.own.mk>
+
 INCS=mf-runtime.h
 INCSDIR=/usr/include/gcc-4.8
 

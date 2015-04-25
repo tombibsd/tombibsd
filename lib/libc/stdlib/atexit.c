@@ -120,10 +120,12 @@ atexit_handler_alloc(void *dso)
 void __section(".text.startup")
 __libc_atexit_init(void)
 {
+#ifdef _REENTRANT
 	mutexattr_t atexit_mutex_attr;
 	mutexattr_init(&atexit_mutex_attr);
 	mutexattr_settype(&atexit_mutex_attr, PTHREAD_MUTEX_RECURSIVE);
 	mutex_init(&__atexit_mutex, &atexit_mutex_attr);
+#endif
 }
 
 /*
@@ -133,6 +135,17 @@ __libc_atexit_init(void)
  *
  *	http://www.codesourcery.com/cxx-abi/abi.html#dso-dtor
  */
+#if defined(__ARM_EABI__) && !defined(lint)
+int
+__aeabi_atexit(void *arg, void (*func)(void *), void *dso);
+
+int
+__aeabi_atexit(void *arg, void (*func)(void *), void *dso)
+{
+	return __cxa_atexit(func, arg, dso);
+}
+#endif
+
 int
 __cxa_atexit(void (*func)(void *), void *arg, void *dso)
 {

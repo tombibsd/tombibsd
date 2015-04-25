@@ -548,7 +548,7 @@ cd9660_rrip_loop(struct iso_directory_record *isodir, ISO_RRIP_ANALYZE *ana,
 			    || ana->iso_ce_off + ana->iso_ce_len > ana->imp->logical_block_size
 			    || bread(ana->imp->im_devvp,
 				     ana->iso_ce_blk << (ana->imp->im_bshift - DEV_BSHIFT),
-				     ana->imp->logical_block_size, NOCRED,
+				     ana->imp->logical_block_size,
 				     0, &bp))
 				/* what to do now? */
 				break;

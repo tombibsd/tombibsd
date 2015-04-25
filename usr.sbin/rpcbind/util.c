@@ -360,6 +360,7 @@ network_init()
 			if (debugging)
 				perror("setsockopt v6 multicast");
 	}
+	freeifaddrs(ifp);
 #endif
 
 	/* close(s); */

@@ -136,6 +136,29 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <arm/locore.h>
 #include <arm/arm32/machdep.h>
 
+static int
+docpureset(int howto)
+{
+	if (howto & RB_POWERDOWN)
+		printf("WARNING: powerdown not supported\r\n");
+
+	if (howto & RB_HALT) {
+		printf("The operating system has halted.\r\n");
+		printf("Please press any key to reboot.\r\n");
+		cnpollc(true);	/* for proper keyboard command handling */
+		/* If there is no keyboard, cngetc() returns 0, so loop */
+		while (cngetc() == 0)
+			delay(100000);
+		cnpollc(false);		
+	}
+
+	printf("rebooting...\r\n");
+	if (cpu_reset_address)
+		(*cpu_reset_address)();
+	cpu_reset();
+	/*NOTREACHED*/
+}
+
 void
 cpu_reboot(int howto, char *bootstr)
 {
@@ -146,15 +169,7 @@ cpu_reboot(int howto, char *bootstr)
 	 */
 	if (cold) {
 		doshutdownhooks();
-		printf("The operating system has halted.\r\n");
-		printf("Please press any key to reboot.\r\n");
-		cnpollc(true);	/* for proper keyboard command handling */
-		cngetc();
-		cnpollc(false);		
-		printf("rebooting...\r\n");
-		if (cpu_reset_address)
-			(*cpu_reset_address)();
-		cpu_reset();
+		docpureset(RB_HALT | howto);
 	}
 
 	/*
@@ -187,17 +202,6 @@ cpu_reboot(int howto, char *bootstr)
 	/* Make sure IRQ's are disabled */
 	IRQdisable;
 
-	if (howto & RB_HALT) {
-		printf("The operating system has halted.\r\n");
-		printf("Please press any key to reboot.\r\n");
-		cnpollc(true);	/* for proper keyboard command handling */
-		cngetc();
-		cnpollc(false);		
-	}
-
-	printf("rebooting...\r\n");
-	if (cpu_reset_address)
-		(*cpu_reset_address)();
-	cpu_reset();
-	/*NOTREACHED*/
+	docpureset(howto);
+	__unreachable();
 }

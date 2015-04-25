@@ -64,4 +64,24 @@ kmemdup(const void *src, size_t len, gfp_t gfp)
 	return dst;
 }
 
+static inline char *
+kstrndup(const char *src, size_t maxlen, gfp_t gfp)
+{
+	char *dst;
+	size_t len;
+
+	if (src == NULL)
+		return NULL;
+
+	len = strnlen(src, maxlen);
+	dst = kmalloc(len + 1, gfp);
+	if (dst == NULL)
+		return NULL;
+
+	(void)memcpy(dst, src, len);
+	dst[len] = '\0';
+
+	return dst;
+}
+
 #endif  /* _LINUX_STRING_H_ */

@@ -49,7 +49,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #ifdef __FreeBSD__
 #include "opt_inet6.h"
 #endif
-#include "opt_ipsec.h"
 
 #include <sys/param.h>
 #include <sys/systm.h>

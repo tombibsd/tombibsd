@@ -1,12 +1,5 @@
 #	$NetBSD$
 
-# XXX WE NEED A WAY TO DETERMINE THESE AT COMPILE-TIME BASED ON
-# XXX COMPILER OPTIONS.
-
-# These are good for StrongARM with -mcpu=strongarm
-#CPPFLAGS+=	-DDES_RISC1
-
-# These are good for XScale with -mcpu=xscale
-#CPPFLAGS+=	-DDES_RISC1 -DDES_PTR
-
+.PATH.S: ${.PARSEDIR}
+CPPFLAGS+=	-DDES_INT -DDES_UNROLL
 .include "${.CURDIR}/des.inc"

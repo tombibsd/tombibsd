@@ -1254,7 +1254,19 @@
  */
 #define DLT_IPMI_HPM_2	260
 
-#define DLT_MATCHING_MAX	260	/* highest value in the "matching" range */
+/*
+ * per  Joshua Wright <jwright@hasborg.com>, formats for Zwave captures.
+ */
+#define DLT_ZWAVE_R1_R2  261
+#define DLT_ZWAVE_R3     262
+
+/*
+ * per Steve Karg <skarg@users.sourceforge.net>, formats for Wattstopper
+ * Digital Lighting Management room bus serial protocol captures.
+ */
+#define DLT_WATTSTOPPER_DLM     263
+
+#define DLT_MATCHING_MAX	263	/* highest value in the "matching" range */
 
 /*
  * DLT and savefile link type values are split into a class and

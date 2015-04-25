@@ -10,6 +10,6 @@ STRONG_ALIAS(fminl, fmin)
 #endif
 
 ENTRY(fmin)
-	fmin.d	fv0, fa0, fa1
+	fmin.d	fa0, fa0, fa1
 	ret
 END(fmin)

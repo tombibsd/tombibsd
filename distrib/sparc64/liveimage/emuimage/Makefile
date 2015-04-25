@@ -11,7 +11,7 @@ BOOTDISK=		sd0		# for QEMU
 LIVEIMAGEMB=		${EMUIMAGEMB}
 .endif
 PRIMARY_BOOT=		bootblk
-#SECONDARY_BOOT=	# nothing
+SECONDARY_BOOT=		ofwboot
 #SECONDARY_BOOT_ARG=	# unnecessary
 
 USE_SUNLABEL=		yes

@@ -30,3 +30,22 @@
  */
 
 #include <sys/types.h>
+
+#if defined(__i386__)
+#if !defined(_ILP32)
+#define _ILP32
+#endif
+
+#elif defined(__amd64__)
+#if !defined(_LP64)
+#define _LP64
+#endif
+
+#elif defined(__arm__)
+#if !defined(_ILP32)
+#define _ILP32
+#endif
+
+#else
+#error "architecture not supported"
+#endif

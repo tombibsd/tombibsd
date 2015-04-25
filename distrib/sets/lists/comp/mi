@@ -207,6 +207,7 @@
 ./usr/include/bfd/bfd.h				comp-obsolete		obsolete
 ./usr/include/bfd/libiberty.h			comp-obsolete		obsolete
 ./usr/include/bitstring.h			comp-c-include
+./usr/include/blacklist.h			comp-c-include
 ./usr/include/bluetooth.h			comp-c-include
 ./usr/include/bm.h				comp-c-include
 ./usr/include/bzlib.h				comp-c-include
@@ -397,6 +398,8 @@
 ./usr/include/dev/filemon/filemon.h		comp-c-include
 ./usr/include/dev/fssvar.h			comp-c-include
 ./usr/include/dev/hpc/hpcfbio.h			comp-c-include
+./usr/include/dev/hdaudio/hdaudioio.h		comp-c-include
+./usr/include/dev/hdaudio/hdaudioreg.h		comp-c-include
 ./usr/include/dev/i2c/i2c_bus.h			comp-obsolete		obsolete
 ./usr/include/dev/i2c/i2c_eeprom.h		comp-obsolete		obsolete
 ./usr/include/dev/i2c/i2c_io.h			comp-c-include
@@ -613,8 +616,8 @@
 ./usr/include/dev/ofw/openfirmio.h		comp-c-include
 ./usr/include/dev/pci/amrio.h			comp-c-include
 ./usr/include/dev/pci/amrreg.h			comp-c-include
-./usr/include/dev/pci/hdaudio/hdaudioio.h	comp-c-include
-./usr/include/dev/pci/hdaudio/hdaudioreg.h	comp-c-include
+./usr/include/dev/pci/hdaudio/hdaudioio.h	comp-obsolete		obsolete
+./usr/include/dev/pci/hdaudio/hdaudioreg.h	comp-obsolete		obsolete
 ./usr/include/dev/pci/if_devar.h		comp-obsolete		obsolete
 ./usr/include/dev/pci/if_fxpreg.h		comp-obsolete		obsolete
 ./usr/include/dev/pci/if_fxpvar.h		comp-obsolete		obsolete
@@ -2500,7 +2503,8 @@
 ./usr/include/lzma/hardware.h			comp-c-include
 ./usr/include/lzma/index.h			comp-c-include
 ./usr/include/lzma/index_hash.h			comp-c-include
-./usr/include/lzma/lzma.h			comp-c-include
+./usr/include/lzma/lzma.h			comp-obsolete		obsolete
+./usr/include/lzma/lzma12.h			comp-c-include
 ./usr/include/lzma/stream_flags.h		comp-c-include
 ./usr/include/lzma/version.h			comp-c-include
 ./usr/include/lzma/vli.h			comp-c-include
@@ -2635,6 +2639,7 @@
 ./usr/include/netconfig.h			comp-c-include
 ./usr/include/netdb.h				comp-c-include
 ./usr/include/netgroup.h			comp-c-include
+./usr/include/netinet/dccp.h			comp-c-include
 ./usr/include/netinet/icmp6.h			comp-c-include
 ./usr/include/netinet/icmp_var.h		comp-c-include
 ./usr/include/netinet/if_arc.h			comp-obsolete		obsolete
@@ -3263,6 +3268,7 @@
 ./usr/include/sys/resourcevar.h			comp-c-include
 ./usr/include/sys/rmd160.h			comp-c-include
 ./usr/include/sys/rnd.h				comp-c-include
+./usr/include/sys/rndio.h			comp-c-include
 ./usr/include/sys/rwlock.h			comp-c-include
 ./usr/include/sys/sa.h				comp-obsolete		obsolete
 ./usr/include/sys/satypes.h			comp-obsolete		obsolete
@@ -3512,6 +3518,8 @@
 ./usr/lib/libbfd.a				comp-obsolete		obsolete
 ./usr/lib/libbind9.a				comp-bind-lib
 ./usr/lib/libbind9_p.a				comp-bind-proflib	profile
+./usr/lib/libblacklist.a			comp-c-lib
+./usr/lib/libblacklist_p.a			comp-c-proflib		profile
 ./usr/lib/libbluetooth.a			comp-c-lib
 ./usr/lib/libbluetooth_p.a			comp-c-proflib		profile
 ./usr/lib/libbsdmalloc.a			comp-c-lib
@@ -3584,10 +3592,12 @@
 ./usr/lib/libg2c.a				comp-obsolete		gcc=4,obsolete
 ./usr/lib/libg2c_p.a				comp-fortran-proflib	gcc=3,profile
 ./usr/lib/libg2c_p.a				comp-obsolete		gcc=4,obsolete
-./usr/lib/libgcc.a				comp-c-lib		gcccmds
+./usr/lib/libgcc.a				comp-c-lib		gcc=45
+./usr/lib/libgcc.a				comp-c-lib		gcc=48
 ./usr/lib/libgcc_p.a				comp-c-proflib		obsolete
 ./usr/lib/libgcc_s.a				comp-obsolete		obsolete
-./usr/lib/libgcov.a				comp-c-lib		gcccmds
+./usr/lib/libgcov.a				comp-c-lib		gcc=45
+./usr/lib/libgcov.a				comp-c-lib		gcc=48
 ./usr/lib/libgmp.a				-unknown-		obsolete
 ./usr/lib/libgmp.a				comp-c-lib		obsolete
 ./usr/lib/libgmp_p.a				comp-c-proflib		obsolete
@@ -3696,8 +3706,10 @@
 ./usr/lib/libntp_p.a				comp-obsolete		obsolete
 ./usr/lib/libnvpair.a				comp-zfs-lib		zfs
 ./usr/lib/libnvpair_p.a				comp-zfs-proflib	profile,zfs
-./usr/lib/libobjc.a				comp-objc-lib		gcccmds
-./usr/lib/libobjc_p.a				comp-objc-proflib	profile,gcccmds
+./usr/lib/libobjc.a				comp-objc-lib		gcc=45
+./usr/lib/libobjc.a				comp-objc-lib		gcc=48
+./usr/lib/libobjc_p.a				comp-objc-proflib	profile,gcc=45
+./usr/lib/libobjc_p.a				comp-objc-proflib	profile,gcc=48
 ./usr/lib/libopenpgpsdk.a			comp-obsolete		obsolete
 ./usr/lib/libopenpgpsdk_p.a			comp-obsolete		obsolete
 ./usr/lib/libossaudio.a				comp-c-lib
@@ -3866,6 +3878,8 @@
 ./usr/lib/librumpkern_sljit_p.a			comp-c-proflib		profile,sljit,rump
 ./usr/lib/librumpkern_solaris.a			comp-c-lib		zfs,rump
 ./usr/lib/librumpkern_solaris_p.a		comp-c-proflib		profile,zfs,rump
+./usr/lib/librumpkern_sysproxy.a			comp-c-lib		rump
+./usr/lib/librumpkern_sysproxy_p.a			comp-c-proflib		profile,rump
 ./usr/lib/librumpkern_time.a			comp-obsolete obsolete
 ./usr/lib/librumpkern_time_p.a			comp-obsolete obsolete
 ./usr/lib/librumpkern_tty.a			comp-c-lib		rump
@@ -3931,9 +3945,12 @@
 ./usr/lib/libssl_p.a				comp-c-proflib		profile,crypto
 ./usr/lib/libssp.a				comp-obsolete		obsolete
 ./usr/lib/libssp_p.a				comp-obsolete		obsolete
-./usr/lib/libstdc++.a				comp-cxx-lib		cxx,gcccmds,libstdcxx
-./usr/lib/libstdc++_p.a				comp-cxx-proflib	profile,cxx,gcccmds,libstdcxx
-./usr/lib/libsupc++.a				comp-cxx-lib		cxx,gcccmds,libstdcxx
+./usr/lib/libstdc++.a				comp-cxx-lib		cxx,libstdcxx,gcc=45
+./usr/lib/libstdc++.a				comp-cxx-lib		cxx,libstdcxx,gcc=48
+./usr/lib/libstdc++_p.a				comp-cxx-proflib	profile,cxx,libstdcxx,gcc=45
+./usr/lib/libstdc++_p.a				comp-cxx-proflib	profile,cxx,libstdcxx,gcc=48
+./usr/lib/libsupc++.a				comp-cxx-lib		cxx,libstdcxx,gcc=45
+./usr/lib/libsupc++.a				comp-cxx-lib		cxx,libstdcxx,gcc=48
 ./usr/lib/libtddl.a				comp-c-lib		tpm
 ./usr/lib/libtddl_p.a				comp-c-proflib		tpm,profile
 ./usr/lib/libtelnet.a				comp-obsolete		obsolete
@@ -3990,6 +4007,7 @@
 ./usr/libdata/lint/llib-larchive.ln		comp-c-lintlib		lint
 ./usr/libdata/lint/llib-lasn1.ln		comp-krb5-lintlib	lint,kerberos
 ./usr/libdata/lint/llib-lbind9.ln		comp-bind-lintlib	lint
+./usr/libdata/lint/llib-lblacklist.ln		comp-c-lintlib		lint
 ./usr/libdata/lint/llib-lbluetooth.ln		comp-c-lintlib		lint
 ./usr/libdata/lint/llib-lbsdmalloc.ln		comp-c-lintlib		lint
 ./usr/libdata/lint/llib-lbz2.ln			comp-c-lintlib		lint
@@ -4110,6 +4128,8 @@
 ./usr/libexec/f771				comp-obsolete		gcc=4,obsolete
 ./usr/libexec/lint1				comp-c-bin
 ./usr/libexec/lint2				comp-c-bin
+./usr/libexec/lto-wrapper			comp-c-bin		gcc=48,pic
+./usr/libexec/lto1				comp-c-bin		gcc=48,pic
 ./usr/libexec/pcpp				comp-c-bin		pcc
 ./usr/sbin/config				comp-obsolete		obsolete
 ./usr/sbin/config.new				comp-obsolete		obsolete
@@ -5631,6 +5651,12 @@
 ./usr/share/man/cat3/bitstring.0		comp-c-catman		.cat
 ./usr/share/man/cat3/bkgd.0			comp-c-catman		.cat
 ./usr/share/man/cat3/bkgdset.0			comp-c-catman		.cat
+./usr/share/man/cat3/blacklist.0		comp-c-catman		.cat
+./usr/share/man/cat3/blacklist_close.0		comp-c-catman		.cat
+./usr/share/man/cat3/blacklist_open.0		comp-c-catman		.cat
+./usr/share/man/cat3/blacklist_r.0		comp-c-catman		.cat
+./usr/share/man/cat3/blacklist_sa.0		comp-c-catman		.cat
+./usr/share/man/cat3/blacklist_sa_r.0		comp-c-catman		.cat
 ./usr/share/man/cat3/blowfish.0			comp-obsolete		obsolete
 ./usr/share/man/cat3/bluetooth.0		comp-c-catman		.cat
 ./usr/share/man/cat3/bm.0			comp-c-catman		.cat
@@ -6389,6 +6415,8 @@
 ./usr/share/man/cat3/estrlcat.0			comp-c-catman		.cat
 ./usr/share/man/cat3/estrlcpy.0			comp-c-catman		.cat
 ./usr/share/man/cat3/estrndup.0			comp-c-catman		.cat
+./usr/share/man/cat3/estrtoi.0			comp-c-catman		.cat
+./usr/share/man/cat3/estrtou.0			comp-c-catman		.cat
 ./usr/share/man/cat3/etext.0			comp-c-catman		.cat
 ./usr/share/man/cat3/ether_aton.0		comp-c-catman		.cat
 ./usr/share/man/cat3/ether_hostton.0		comp-c-catman		.cat
@@ -7838,6 +7866,7 @@
 ./usr/share/man/cat3/lhash.0			comp-obsolete		obsolete
 ./usr/share/man/cat3/libarchive.0		comp-c-catman		.cat
 ./usr/share/man/cat3/libarchive_internals.0	comp-c-catman		.cat
+./usr/share/man/cat3/libblacklist.0		comp-c-catman		.cat
 ./usr/share/man/cat3/libiscsi.0			comp-c-catman		iscsi,.cat
 ./usr/share/man/cat3/libmagic.0			comp-c-catman		.cat
 ./usr/share/man/cat3/libmj.0			comp-c-catman		crypto,.cat
@@ -8288,6 +8317,7 @@
 ./usr/share/man/cat3/popcountl.0		comp-c-catman		.cat
 ./usr/share/man/cat3/popcountll.0		comp-c-catman		.cat
 ./usr/share/man/cat3/popen.0			comp-c-catman		.cat
+./usr/share/man/cat3/popenve.0			comp-c-catman		.cat
 ./usr/share/man/cat3/pos_form_cursor.0		comp-c-catman		.cat
 ./usr/share/man/cat3/pos_menu_cursor.0		comp-c-catman		.cat
 ./usr/share/man/cat3/posix2time.0		comp-c-catman		.cat
@@ -8740,6 +8770,8 @@
 ./usr/share/man/cat3/re_exec.0			comp-c-catman		.cat
 ./usr/share/man/cat3/readdir.0			comp-c-catman		.cat
 ./usr/share/man/cat3/readdir_r.0		comp-c-catman		.cat
+./usr/share/man/cat3/reallocarr.0		comp-c-catman		.cat
+./usr/share/man/cat3/reallocarray.0		comp-c-catman		.cat
 ./usr/share/man/cat3/realloc.0			comp-c-catman		.cat
 ./usr/share/man/cat3/realpath.0			comp-c-catman		.cat
 ./usr/share/man/cat3/recno.0			comp-c-catman		.cat
@@ -9187,13 +9219,16 @@
 ./usr/share/man/cat3/strsvisx.0			comp-c-catman		.cat
 ./usr/share/man/cat3/strtod.0			comp-c-catman		.cat
 ./usr/share/man/cat3/strtof.0			comp-c-catman		.cat
+./usr/share/man/cat3/strtoi.0			comp-c-catman		.cat
 ./usr/share/man/cat3/strtoimax.0		comp-c-catman		.cat
 ./usr/share/man/cat3/strtok.0			comp-c-catman		.cat
 ./usr/share/man/cat3/strtok_r.0			comp-c-catman		.cat
 ./usr/share/man/cat3/strtol.0			comp-c-catman		.cat
 ./usr/share/man/cat3/strtold.0			comp-c-catman		.cat
 ./usr/share/man/cat3/strtoll.0			comp-c-catman		.cat
+./usr/share/man/cat3/strtonum.0			comp-c-catman		.cat
 ./usr/share/man/cat3/strtoq.0			comp-c-catman		.cat
+./usr/share/man/cat3/strtou.0			comp-c-catman		.cat
 ./usr/share/man/cat3/strtoul.0			comp-c-catman		.cat
 ./usr/share/man/cat3/strtoull.0			comp-c-catman		.cat
 ./usr/share/man/cat3/strtoumax.0		comp-c-catman		.cat
@@ -9873,6 +9908,7 @@
 ./usr/share/man/cat9/btoc.0			comp-sys-catman		.cat
 ./usr/share/man/cat9/btodb.0			comp-sys-catman		.cat
 ./usr/share/man/cat9/buffercache.0		comp-sys-catman		.cat
+./usr/share/man/cat9/bufferio.0			comp-sys-catman		.cat
 ./usr/share/man/cat9/bufq.0			comp-sys-catman		.cat
 ./usr/share/man/cat9/bus_dma.0			comp-sys-catman		.cat
 ./usr/share/man/cat9/bus_dmamap_create.0	comp-sys-catman		.cat
@@ -10040,8 +10076,8 @@
 ./usr/share/man/cat9/cprng_strong64.0		comp-sys-catman		.cat
 ./usr/share/man/cat9/cprng_strong_create.0	comp-sys-catman		.cat
 ./usr/share/man/cat9/cprng_strong_destroy.0	comp-sys-catman		.cat
-./usr/share/man/cat9/cprng_strong_getflags.0	comp-sys-catman		.cat
-./usr/share/man/cat9/cprng_strong_setflags.0	comp-sys-catman		.cat
+./usr/share/man/cat9/cprng_strong_getflags.0	comp-obsolete		obsolete
+./usr/share/man/cat9/cprng_strong_setflags.0	comp-obsolete		obsolete
 ./usr/share/man/cat9/cpu_configure.0		comp-sys-catman		.cat
 ./usr/share/man/cat9/cpu_coredump.0		comp-sys-catman		.cat
 ./usr/share/man/cat9/cpu_dump.0			comp-sys-catman		.cat
@@ -10525,6 +10561,8 @@
 ./usr/share/man/cat9/nanotime.0			comp-sys-catman		.cat
 ./usr/share/man/cat9/nanouptime.0		comp-sys-catman		.cat
 ./usr/share/man/cat9/need_resched.0		comp-obsolete		obsolete
+./usr/share/man/cat9/nestiobuf_done.0		comp-sys-catman		.cat
+./usr/share/man/cat9/nestiobuf_setup.0		comp-sys-catman		.cat
 ./usr/share/man/cat9/nextrunqueue.0		comp-obsolete		obsolete
 ./usr/share/man/cat9/npf_ncode.0		comp-obsolete		obsolete
 ./usr/share/man/cat9/nullop.0			comp-sys-catman		.cat
@@ -10738,6 +10776,7 @@
 ./usr/share/man/cat9/rasops_reconfig.0		comp-sys-catman		.cat
 ./usr/share/man/cat9/ratecheck.0		comp-sys-catman		.cat
 ./usr/share/man/cat9/readdisklabel.0		comp-sys-catman		.cat
+./usr/share/man/cat9/realloc.0			comp-sys-catman		.cat
 ./usr/share/man/cat9/realloc.0			comp-sys-catman		.cat
 ./usr/share/man/cat9/relookup.0			comp-sys-catman		.cat
 ./usr/share/man/cat9/remrunqueue.0		comp-obsolete		obsolete
@@ -11140,6 +11179,21 @@
 ./usr/share/man/cat9/vwakeup.0			comp-sys-catman		.cat
 ./usr/share/man/cat9/wakeup.0			comp-sys-catman		.cat
 ./usr/share/man/cat9/wdc.0			comp-sys-catman		.cat
+./usr/share/man/cat9/wapbl.0			comp-sys-catman		.cat
+./usr/share/man/cat9/wapbl_start.0		comp-sys-catman		.cat
+./usr/share/man/cat9/wapbl_stop.0		comp-sys-catman		.cat
+./usr/share/man/cat9/wapbl_begin.0		comp-sys-catman		.cat
+./usr/share/man/cat9/wapbl_end.0		comp-sys-catman		.cat
+./usr/share/man/cat9/wapbl_flush.0		comp-sys-catman		.cat
+./usr/share/man/cat9/wapbl_discard.0		comp-sys-catman		.cat
+./usr/share/man/cat9/wapbl_add_buf.0		comp-sys-catman		.cat
+./usr/share/man/cat9/wapbl_remove_buf.0		comp-sys-catman		.cat
+./usr/share/man/cat9/wapbl_resize_buf.0		comp-sys-catman		.cat
+./usr/share/man/cat9/wapbl_register_inode.0	comp-sys-catman		.cat
+./usr/share/man/cat9/wapbl_unregister_inode.0	comp-sys-catman		.cat
+./usr/share/man/cat9/wapbl_register_deallocation.0	comp-sys-catman		.cat
+./usr/share/man/cat9/wapbl_jlock_assert.0	comp-sys-catman		.cat
+./usr/share/man/cat9/wapbl_junlock_assert.0	comp-sys-catman		.cat
 ./usr/share/man/cat9/workqueue.0		comp-sys-catman		.cat
 ./usr/share/man/cat9/workqueue_create.0		comp-sys-catman		.cat
 ./usr/share/man/cat9/workqueue_destroy.0	comp-sys-catman		.cat
@@ -12537,6 +12591,12 @@
 ./usr/share/man/html3/bitstring.html		comp-c-htmlman		html
 ./usr/share/man/html3/bkgd.html			comp-c-htmlman		html
 ./usr/share/man/html3/bkgdset.html		comp-c-htmlman		html
+./usr/share/man/html3/blacklist.html		comp-c-html		html
+./usr/share/man/html3/blacklist_close.html	comp-c-html		html
+./usr/share/man/html3/blacklist_open.html	comp-c-html		html
+./usr/share/man/html3/blacklist_r.html		comp-c-html		html
+./usr/share/man/html3/blacklist_sa.html		comp-c-html		html
+./usr/share/man/html3/blacklist_sa_r.html	comp-c-html		html
 ./usr/share/man/html3/bluetooth.html		comp-c-htmlman		html
 ./usr/share/man/html3/bm.html			comp-c-htmlman		html
 ./usr/share/man/html3/bm_comp.html		comp-c-htmlman		html
@@ -13258,6 +13318,8 @@
 ./usr/share/man/html3/estrlcat.html		comp-c-htmlman		html
 ./usr/share/man/html3/estrlcpy.html		comp-c-htmlman		html
 ./usr/share/man/html3/estrndup.html		comp-c-htmlman		html
+./usr/share/man/html3/estrtoi.html		comp-c-htmlman		html
+./usr/share/man/html3/estrtou.html		comp-c-htmlman		html
 ./usr/share/man/html3/etext.html		comp-c-htmlman		html
 ./usr/share/man/html3/ether_aton.html		comp-c-htmlman		html
 ./usr/share/man/html3/ether_hostton.html	comp-c-htmlman		html
@@ -14683,6 +14745,7 @@
 ./usr/share/man/html3/lh_stats.html		comp-c-htmlman		crypto,html
 ./usr/share/man/html3/libarchive.html		comp-c-htmlman		html
 ./usr/share/man/html3/libarchive_internals.html	comp-c-htmlman		html
+./usr/share/man/html3/libblacklist.html		comp-c-html		html
 ./usr/share/man/html3/libiscsi.html		comp-c-htmlman		iscsi,html
 ./usr/share/man/html3/libmagic.html		comp-c-htmlman		html
 ./usr/share/man/html3/libmj.html		comp-c-htmlman		crypto,html
@@ -15117,6 +15180,7 @@
 ./usr/share/man/html3/popcountl.html		comp-c-htmlman		html
 ./usr/share/man/html3/popcountll.html		comp-c-htmlman		html
 ./usr/share/man/html3/popen.html		comp-c-htmlman		html
+./usr/share/man/html3/popenve.html		comp-c-htmlman		html
 ./usr/share/man/html3/pos_form_cursor.html	comp-c-htmlman		html
 ./usr/share/man/html3/pos_menu_cursor.html	comp-c-htmlman		html
 ./usr/share/man/html3/posix2time.html		comp-c-htmlman		html
@@ -15565,6 +15629,8 @@
 ./usr/share/man/html3/re_exec.html		comp-c-htmlman		html
 ./usr/share/man/html3/readdir.html		comp-c-htmlman		html
 ./usr/share/man/html3/readdir_r.html		comp-c-htmlman		html
+./usr/share/man/html3/reallocarr.html		comp-c-htmlman		html
+./usr/share/man/html3/reallocarray.html		comp-c-htmlman		html
 ./usr/share/man/html3/realloc.html		comp-c-htmlman		html
 ./usr/share/man/html3/realpath.html		comp-c-htmlman		html
 ./usr/share/man/html3/recno.html		comp-c-htmlman		html
@@ -15992,13 +16058,16 @@
 ./usr/share/man/html3/strsvisx.html		comp-c-htmlman		html
 ./usr/share/man/html3/strtod.html		comp-c-htmlman		html
 ./usr/share/man/html3/strtof.html		comp-c-htmlman		html
+./usr/share/man/html3/strtoi.html		comp-c-htmlman		html
 ./usr/share/man/html3/strtoimax.html		comp-c-htmlman		html
 ./usr/share/man/html3/strtok.html		comp-c-htmlman		html
 ./usr/share/man/html3/strtok_r.html		comp-c-htmlman		html
 ./usr/share/man/html3/strtol.html		comp-c-htmlman		html
 ./usr/share/man/html3/strtold.html		comp-c-htmlman		html
 ./usr/share/man/html3/strtoll.html		comp-c-htmlman		html
+./usr/share/man/html3/strtonum.html		comp-c-htmlman		html
 ./usr/share/man/html3/strtoq.html		comp-c-htmlman		html
+./usr/share/man/html3/strtou.html		comp-c-htmlman		html
 ./usr/share/man/html3/strtoul.html		comp-c-htmlman		html
 ./usr/share/man/html3/strtoull.html		comp-c-htmlman		html
 ./usr/share/man/html3/strtoumax.html		comp-c-htmlman		html
@@ -16641,6 +16710,7 @@
 ./usr/share/man/html9/btoc.html			comp-sys-htmlman	html
 ./usr/share/man/html9/btodb.html		comp-sys-htmlman	html
 ./usr/share/man/html9/buffercache.html		comp-sys-htmlman	html
+./usr/share/man/html9/bufferio.html		comp-sys-htmlman	html
 ./usr/share/man/html9/bufq.html			comp-sys-htmlman	html
 ./usr/share/man/html9/bus_dma.html		comp-sys-htmlman	html
 ./usr/share/man/html9/bus_dmamap_create.html	comp-sys-htmlman	html
@@ -16803,8 +16873,8 @@
 ./usr/share/man/html9/cprng_strong64.html	comp-sys-htmlman	html
 ./usr/share/man/html9/cprng_strong_create.html	comp-sys-htmlman	html
 ./usr/share/man/html9/cprng_strong_destroy.html	comp-sys-htmlman	html
-./usr/share/man/html9/cprng_strong_getflags.html comp-sys-htmlman	html
-./usr/share/man/html9/cprng_strong_setflags.html comp-sys-htmlman	html
+./usr/share/man/html9/cprng_strong_getflags.html comp-obsolete		obsolete
+./usr/share/man/html9/cprng_strong_setflags.html comp-obsolete		obsolete
 ./usr/share/man/html9/cpu_configure.html	comp-sys-htmlman	html
 ./usr/share/man/html9/cpu_coredump.html		comp-sys-htmlman	html
 ./usr/share/man/html9/cpu_dump.html		comp-sys-htmlman	html
@@ -17266,6 +17336,8 @@
 ./usr/share/man/html9/namei.html		comp-sys-htmlman	html
 ./usr/share/man/html9/nanotime.html		comp-sys-htmlman	html
 ./usr/share/man/html9/nanouptime.html		comp-sys-htmlman	html
+./usr/share/man/html9/nestiobuf_done.html	comp-sys-htmlman	html
+./usr/share/man/html9/nestiobuf_setup.html	comp-sys-htmlman	html
 ./usr/share/man/html9/npf_ncode.html		comp-obsolete		obsolete
 ./usr/share/man/html9/nullop.html		comp-sys-htmlman	html
 ./usr/share/man/html9/old_sysctl.html		comp-sys-htmlman	html
@@ -17834,6 +17906,21 @@
 ./usr/share/man/html9/vwakeup.html		comp-sys-htmlman	html
 ./usr/share/man/html9/wakeup.html		comp-sys-htmlman	html
 ./usr/share/man/html9/wdc.html			comp-sys-htmlman	html
+./usr/share/man/html9/wapbl.html		comp-sys-htmlman	html
+./usr/share/man/html9/wapbl_start.html		comp-sys-htmlman	html
+./usr/share/man/html9/wapbl_stop.html		comp-sys-htmlman	html
+./usr/share/man/html9/wapbl_begin.html		comp-sys-htmlman	html
+./usr/share/man/html9/wapbl_end.html		comp-sys-htmlman	html
+./usr/share/man/html9/wapbl_flush.html		comp-sys-htmlman	html
+./usr/share/man/html9/wapbl_discard.html	comp-sys-htmlman	html
+./usr/share/man/html9/wapbl_add_buf.html	comp-sys-htmlman	html
+./usr/share/man/html9/wapbl_remove_buf.html	comp-sys-htmlman	html
+./usr/share/man/html9/wapbl_resize_buf.html	comp-sys-htmlman	html
+./usr/share/man/html9/wapbl_register_inode.html	comp-sys-htmlman	html
+./usr/share/man/html9/wapbl_unregister_inode.html	comp-sys-htmlman	html
+./usr/share/man/html9/wapbl_register_deallocation.html	comp-sys-htmlman	html
+./usr/share/man/html9/wapbl_jlock_assert.html	comp-sys-htmlman	html
+./usr/share/man/html9/wapbl_junlock_assert.html	comp-sys-htmlman	html
 ./usr/share/man/html9/workqueue.html		comp-sys-htmlman	html
 ./usr/share/man/html9/workqueue_create.html	comp-sys-htmlman	html
 ./usr/share/man/html9/workqueue_destroy.html	comp-sys-htmlman	html
@@ -19263,6 +19350,12 @@
 ./usr/share/man/man3/bitstring.3		comp-c-man		.man
 ./usr/share/man/man3/bkgd.3			comp-c-man		.man
 ./usr/share/man/man3/bkgdset.3			comp-c-man		.man
+./usr/share/man/man3/blacklist.3		comp-c-man		.man
+./usr/share/man/man3/blacklist_close.3		comp-c-man		.man
+./usr/share/man/man3/blacklist_open.3		comp-c-man		.man
+./usr/share/man/man3/blacklist_r.3		comp-c-man		.man
+./usr/share/man/man3/blacklist_sa.3		comp-c-man		.man
+./usr/share/man/man3/blacklist_sa_r.3		comp-c-man		.man
 ./usr/share/man/man3/blowfish.3			comp-obsolete		obsolete
 ./usr/share/man/man3/bluetooth.3		comp-c-man		.man
 ./usr/share/man/man3/bm.3			comp-c-man		.man
@@ -20039,6 +20132,8 @@
 ./usr/share/man/man3/estrlcat.3			comp-c-man		.man
 ./usr/share/man/man3/estrlcpy.3			comp-c-man		.man
 ./usr/share/man/man3/estrndup.3			comp-c-man		.man
+./usr/share/man/man3/estrtoi.3			comp-c-man		.man
+./usr/share/man/man3/estrtou.3			comp-c-man		.man
 ./usr/share/man/man3/etext.3			comp-c-man		.man
 ./usr/share/man/man3/ether_aton.3		comp-c-man		.man
 ./usr/share/man/man3/ether_hostton.3		comp-c-man		.man
@@ -21488,6 +21583,7 @@
 ./usr/share/man/man3/lhash.3			comp-obsolete		obsolete
 ./usr/share/man/man3/libarchive.3		comp-c-man		.man
 ./usr/share/man/man3/libarchive_internals.3	comp-c-man		.man
+./usr/share/man/man3/libblacklist.3		comp-c-man		.man
 ./usr/share/man/man3/libiscsi.3			comp-c-man		iscsi,.man
 ./usr/share/man/man3/libmagic.3			comp-c-man		.man
 ./usr/share/man/man3/libmj.3			comp-c-man		crypto,.man
@@ -21938,6 +22034,7 @@
 ./usr/share/man/man3/popcountl.3		comp-c-man		.man
 ./usr/share/man/man3/popcountll.3		comp-c-man		.man
 ./usr/share/man/man3/popen.3			comp-c-man		.man
+./usr/share/man/man3/popenve.3			comp-c-man		.man
 ./usr/share/man/man3/pos_form_cursor.3		comp-c-man		.man
 ./usr/share/man/man3/pos_menu_cursor.3		comp-c-man		.man
 ./usr/share/man/man3/posix2time.3		comp-c-man		.man
@@ -22390,6 +22487,8 @@
 ./usr/share/man/man3/re_exec.3			comp-c-man		.man
 ./usr/share/man/man3/readdir.3			comp-c-man		.man
 ./usr/share/man/man3/readdir_r.3		comp-c-man		.man
+./usr/share/man/man3/reallocarr.3		comp-c-man		.man
+./usr/share/man/man3/reallocarray.3		comp-c-man		.man
 ./usr/share/man/man3/realloc.3			comp-c-man		.man
 ./usr/share/man/man3/realpath.3			comp-c-man		.man
 ./usr/share/man/man3/recno.3			comp-c-man		.man
@@ -22833,13 +22932,16 @@
 ./usr/share/man/man3/strsvisx.3			comp-c-man		.man
 ./usr/share/man/man3/strtod.3			comp-c-man		.man
 ./usr/share/man/man3/strtof.3			comp-c-man		.man
+./usr/share/man/man3/strtoi.3			comp-c-man		.man
 ./usr/share/man/man3/strtoimax.3		comp-c-man		.man
 ./usr/share/man/man3/strtok.3			comp-c-man		.man
 ./usr/share/man/man3/strtok_r.3			comp-c-man		.man
 ./usr/share/man/man3/strtol.3			comp-c-man		.man
 ./usr/share/man/man3/strtold.3			comp-c-man		.man
 ./usr/share/man/man3/strtoll.3			comp-c-man		.man
+./usr/share/man/man3/strtonum.3			comp-c-man		.man
 ./usr/share/man/man3/strtoq.3			comp-c-man		.man
+./usr/share/man/man3/strtou.3			comp-c-man		.man
 ./usr/share/man/man3/strtoul.3			comp-c-man		.man
 ./usr/share/man/man3/strtoull.3			comp-c-man		.man
 ./usr/share/man/man3/strtoumax.3		comp-c-man		.man
@@ -23518,6 +23620,7 @@
 ./usr/share/man/man9/btoc.9			comp-sys-man		.man
 ./usr/share/man/man9/btodb.9			comp-sys-man		.man
 ./usr/share/man/man9/buffercache.9		comp-sys-man		.man
+./usr/share/man/man9/bufferio.9			comp-sys-man		.man
 ./usr/share/man/man9/bufq.9			comp-sys-man		.man
 ./usr/share/man/man9/bus_dma.9			comp-sys-man		.man
 ./usr/share/man/man9/bus_dmamap_create.9	comp-sys-man		.man
@@ -23685,8 +23788,8 @@
 ./usr/share/man/man9/cprng_strong64.9		comp-sys-man		.man
 ./usr/share/man/man9/cprng_strong_create.9	comp-sys-man		.man
 ./usr/share/man/man9/cprng_strong_destroy.9	comp-sys-man		.man
-./usr/share/man/man9/cprng_strong_getflags.9	comp-sys-man		.man
-./usr/share/man/man9/cprng_strong_setflags.9	comp-sys-man		.man
+./usr/share/man/man9/cprng_strong_getflags.9	comp-obsolete		obsolete
+./usr/share/man/man9/cprng_strong_setflags.9	comp-obsolete		obsolete
 ./usr/share/man/man9/cpu_configure.9		comp-sys-man		.man
 ./usr/share/man/man9/cpu_coredump.9		comp-sys-man		.man
 ./usr/share/man/man9/cpu_dump.9			comp-sys-man		.man
@@ -24170,6 +24273,8 @@
 ./usr/share/man/man9/nanotime.9			comp-sys-man		.man
 ./usr/share/man/man9/nanouptime.9		comp-sys-man		.man
 ./usr/share/man/man9/need_resched.9		comp-obsolete		obsolete
+./usr/share/man/man9/nestiobuf_done.9		comp-sys-man		.man
+./usr/share/man/man9/nestiobuf_setup.9		comp-sys-man		.man
 ./usr/share/man/man9/nextrunqueue.9		comp-obsolete		obsolete
 ./usr/share/man/man9/npf_ncode.9		comp-obsolete		obsolete
 ./usr/share/man/man9/nullop.9			comp-sys-man		.man
@@ -24785,6 +24890,21 @@
 ./usr/share/man/man9/vwakeup.9			comp-sys-man		.man
 ./usr/share/man/man9/wakeup.9			comp-sys-man		.man
 ./usr/share/man/man9/wdc.9			comp-sys-man		.man
+./usr/share/man/man9/wapbl.9			comp-sys-man		.man
+./usr/share/man/man9/wapbl_start.9		comp-sys-man		.man
+./usr/share/man/man9/wapbl_stop.9		comp-sys-man		.man
+./usr/share/man/man9/wapbl_begin.9		comp-sys-man		.man
+./usr/share/man/man9/wapbl_end.9		comp-sys-man		.man
+./usr/share/man/man9/wapbl_flush.9		comp-sys-man		.man
+./usr/share/man/man9/wapbl_discard.9		comp-sys-man		.man
+./usr/share/man/man9/wapbl_add_buf.9		comp-sys-man		.man
+./usr/share/man/man9/wapbl_remove_buf.9		comp-sys-man		.man
+./usr/share/man/man9/wapbl_resize_buf.9		comp-sys-man		.man
+./usr/share/man/man9/wapbl_register_inode.9	comp-sys-man		.man
+./usr/share/man/man9/wapbl_unregister_inode.9	comp-sys-man		.man
+./usr/share/man/man9/wapbl_register_deallocation.9	comp-sys-man	.man
+./usr/share/man/man9/wapbl_jlock_assert.9	comp-sys-man		.man
+./usr/share/man/man9/wapbl_junlock_assert.9	comp-sys-man		.man
 ./usr/share/man/man9/workqueue.9		comp-sys-man		.man
 ./usr/share/man/man9/workqueue_create.9		comp-sys-man		.man
 ./usr/share/man/man9/workqueue_destroy.9	comp-sys-man		.man

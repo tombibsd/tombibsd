@@ -18,6 +18,7 @@ options 	MPC8544
 options 	PPC_HAVE_SPE
 no options 	GUR_BASE
 options 	GUR_BASE=0xe0000000
+options 	ROUTERBOOT
 
 options 	PAX_ASLR=0
 

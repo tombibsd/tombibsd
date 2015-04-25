@@ -240,3 +240,8 @@ file	dev/i2c/axp809.c			axp809pm	needs-flag
 device	ac100ic
 attach	ac100ic at iic
 file	dev/i2c/ac100.c				ac100ic		needs-flag
+
+# ACT8846 Power Management Unit
+device	act8846pm
+attach	act8846pm at iic
+file	dev/i2c/act8846.c			act8846pm	needs-flag

@@ -11,6 +11,8 @@ CPPFLAGS.Thread.cpp+=	-I${LLDB_SRCDIR}/source/Plugins/Process/Utility
 SRCS+=	ABI.cpp \
 	CPPLanguageRuntime.cpp \
 	ExecutionContext.cpp \
+	InstrumentationRuntime.cpp \
+	InstrumentationRuntimeStopInfo.cpp \
 	JITLoader.cpp \
 	JITLoaderList.cpp \
 	LanguageRuntime.cpp \
@@ -43,6 +45,7 @@ SRCS+=	ABI.cpp \
 	ThreadPlanBase.cpp \
 	ThreadPlanCallFunction.cpp \
 	ThreadPlanCallUserExpression.cpp \
+	ThreadPlanPython.cpp \
 	ThreadPlanRunToAddress.cpp \
 	ThreadPlanShouldStopHere.cpp \
 	ThreadPlanStepInRange.cpp \

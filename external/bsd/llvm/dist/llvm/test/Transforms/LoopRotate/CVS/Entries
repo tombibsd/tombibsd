@@ -3,13 +3,14 @@
 /PhiSelfReference-1.ll/1.1.1.1/Sun Jan  5 16:16:43 2014/-kk/
 /alloca.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /basic.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
-/crash.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
-/dbgvalue.ll/1.1.1.3/Thu Feb 27 08:52:26 2014/-kk/
+/crash.ll/1.1.1.2/Sat Mar 21 02:43:21 2015/-kk/
+/dbgvalue.ll/1.1.1.4/Thu Feb  5 08:39:02 2015/-kk/
 /indirectbr.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /multiple-exits.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/nosimplifylatch.ll/1.1.1.1/Thu Jan 29 19:54:37 2015/-kk/
 /phi-duplicate.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /pr2639.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
 /preserve-loop-simplify.ll/1.1.1.1/Fri Feb 14 20:12:49 2014/-kk/
 /preserve-scev.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
-/simplifylatch.ll/1.1.1.1/Thu Nov 28 14:18:07 2013/-kk/
+/simplifylatch.ll/1.1.1.2/Thu Feb  5 08:39:02 2015/-kk/
 D

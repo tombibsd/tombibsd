@@ -3,6 +3,7 @@
 PROG=		devpubd
 SRCS=		devpubd.c
 MAN=		devpubd.8
+WARNS=		6
 
 BINDIR?=	/sbin
 

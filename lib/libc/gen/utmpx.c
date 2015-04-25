@@ -82,7 +82,7 @@ old2new(struct utmpx *utx)
 static void
 new2old(struct utmpx *utx)
 {
-	struct timeval otv;
+	struct otimeval otv;
 	struct timeval *tv = &utx->ut_tv;
 
 	otv.tv_sec = (long)tv->tv_sec;

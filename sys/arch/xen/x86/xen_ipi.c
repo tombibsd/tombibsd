@@ -131,6 +131,7 @@ xen_ipi_init(void)
 	hypervisor_enable_event(evtchn);
 }
 
+#ifdef DIAGNOSTIC
 static inline bool /* helper */
 valid_ipimask(uint32_t ipimask)
 {
@@ -145,6 +146,7 @@ valid_ipimask(uint32_t ipimask)
 	}
 
 }
+#endif
 
 int
 xen_send_ipi(struct cpu_info *ci, uint32_t ipimask)

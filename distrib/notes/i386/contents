@@ -70,6 +70,10 @@ The monolithic kernel which doesn't use kernel modules.
 .
 The installation kernel.
 .
+.			It Pa netbsd-LEGACY.gz
+.
+The kernel containing support for ISA (VGA and PC Display) display devices.
+.
 .			It Pa netbsd-INSTALL_XEN3PAE_DOMU.gz
 .			It Pa netbsd-INSTALL_XEN3_DOMU.gz
 .			It Pa netbsd-XEN3PAE_DOMU.gz

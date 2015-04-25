@@ -53,6 +53,6 @@ CPPFLAGS+=	-I../backend
 # Build the specs.h file
 CLEANFILES+=	specs.h
 specs.h: Makefile
-	for f in cp objc; do \
+	for f in cp lto objc objcp; do \
 		echo "#include \"$$f/lang-specs.h\""; \
 	done > specs.h

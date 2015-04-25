@@ -199,6 +199,11 @@ cpu_getmcontext(struct lwp *l, mcontext_t *mcp, unsigned int *flags)
 
 	mcp->_mc_tlsbase = (uintptr_t)l->l_private;
 	*flags |= _UC_TLSBASE;
+
+#ifdef __PROG32
+	const struct pcb * const pcb = lwp_getpcb(l);
+	mcp->_mc_user_tpid = pcb->pcb_user_pid_rw;
+#endif
 }
 
 int
@@ -267,6 +272,11 @@ cpu_setmcontext(struct lwp *l, const mcontext_t *mcp, unsigned int flags)
 	if (flags & _UC_CLRSTACK)
 		l->l_sigstk.ss_flags &= ~SS_ONSTACK;
 	mutex_exit(p->p_lock);
+
+#ifdef __PROG32
+	struct pcb * const pcb = lwp_getpcb(l);
+	pcb->pcb_user_pid_rw = mcp->_mc_user_tpid;
+#endif
 
 	return (0);
 }

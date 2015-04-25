@@ -93,6 +93,10 @@ mainbus_attach(device_t parent, device_t self, void *aux)
 	/* send ourselves an IPI */
 	MTC0(0x12345678, CP0_CORE_MBOX, 0);
 	delay(1000);
+
+	/* send the other core an IPI */
+	MTC0(0x12345678, CP0_CORE_MBOX, 1);
+	delay(1000);
 #endif
 }
 

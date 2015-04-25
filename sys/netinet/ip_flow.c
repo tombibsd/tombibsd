@@ -234,7 +234,8 @@ ipflow_fastforward(struct mbuf *m)
 	 * Route and interface still up?
 	 */
 	if ((rt = rtcache_validate(&ipf->ipf_ro)) == NULL ||
-	    (rt->rt_ifp->if_flags & IFF_UP) == 0)
+	    (rt->rt_ifp->if_flags & IFF_UP) == 0 ||
+	    (rt->rt_flags & (RTF_BLACKHOLE | RTF_BROADCAST)) != 0)
 		return 0;
 
 	/*

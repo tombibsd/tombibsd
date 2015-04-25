@@ -294,10 +294,11 @@ char	*getwd(char *);				/* obsoleted by getcwd() */
 /*
  * X/Open CAE Specification Issue 5 Version 2
  */
-#if (_XOPEN_SOURCE - 0) >= 500 || defined(_NETBSD_SOURCE)
+#if (_POSIX_C_SOURCE - 0) >= 200112L || (_XOPEN_SOURCE - 0) >= 500 || \
+    defined(_NETBSD_SOURCE)
 ssize_t	 pread(int, void *, size_t, off_t);
 ssize_t	 pwrite(int, const void *, size_t, off_t);
-#endif
+#endif /* (_POSIX_C_SOURCE - 0) >= 200112L || ... */
 
 /*
  * X/Open Extended API set 2 (a.k.a. C063)
@@ -308,7 +309,7 @@ int	linkat(int, const char *, int, const char *, int);
 int	renameat(int, const char *, int, const char *);
 int	faccessat(int, const char *, int, int);
 int	fchownat(int, const char *, uid_t, gid_t, int);
-int	readlinkat(int, const char *, char *, size_t);
+ssize_t	readlinkat(int, const char *, char *, size_t);
 int	symlinkat(const char *, int, const char *);
 int	unlinkat(int, const char *, int);
 #endif

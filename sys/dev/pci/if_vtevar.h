@@ -32,6 +32,8 @@
 #ifndef	_IF_VTEVAR_H
 #define	_IF_VTEVAR_H
 
+#include <sys/rndsource.h>
+
 #define	VTE_TX_RING_CNT		64
 #define	VTE_TX_RING_ALIGN	16
 /*

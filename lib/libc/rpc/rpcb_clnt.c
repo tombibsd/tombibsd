@@ -983,8 +983,8 @@ done:
  *
  * Assuming that the address is all properly allocated
  */
-int
-rpcb_getaddr(rpcprog_t program, rpcvers_t version,
+bool_t
+rpcb_getaddr(const rpcprog_t program, const rpcvers_t version,
 	const struct netconfig *nconf, struct netbuf *address,
 	const char *host)
 {

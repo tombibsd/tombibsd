@@ -40,8 +40,9 @@
 #define PIC_MAXMAXSOURCES	(PIC_MAXSOURCES+8*32)
 
 /*
- * The BCM53xx uses a generic interrupt controller so pull that stuff.
+ * The OMAP5 uses a generic interrupt controller so pull in that stuff.
  */
+#define __HAVE_PIC_PENDING_INTRS
 #include <arm/cortex/gic_intr.h>
 #include <arm/cortex/gtmr_intr.h>      /* Generic Timer PPIs */
 

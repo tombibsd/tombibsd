@@ -219,7 +219,7 @@ xc3028_firmware_open(struct xc3028 *xc)
 
 done:
 	if (fw)
-		firmware_free(fw, 0);
+		firmware_free(fw, fwlen);
 	mutex_exit(&xc3028_firmware_lock);
 
 	if (error)
@@ -564,7 +564,7 @@ xc3028_tune_dtv(struct xc3028 *xc, const struct dvb_frontend_parameters *params)
 	return 0;
 }
 
-MODULE(MODULE_CLASS_DRIVER, xc3028, "iic");
+MODULE(MODULE_CLASS_DRIVER, xc3028, "i2cexec");
 
 static int
 xc3028_modcmd(modcmd_t cmd, void *opaque)

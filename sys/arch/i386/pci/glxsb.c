@@ -36,6 +36,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/callout.h>
 #include <sys/bus.h>
 #include <sys/cprng.h>
+#include <sys/rndsource.h>
 
 #include <machine/cpufunc.h>
 

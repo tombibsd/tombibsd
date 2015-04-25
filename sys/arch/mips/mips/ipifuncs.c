@@ -84,7 +84,7 @@ ipi_syncicache(struct cpu_info *ci)
 	pmap_tlb_syncicache_wanted(ci);
 }
 
-#ifdef __HAVE_PREEEMPTION
+#ifdef __HAVE_PREEMPTION
 static inline void
 ipi_kpreempt(struct cpu_info *ci)
 {

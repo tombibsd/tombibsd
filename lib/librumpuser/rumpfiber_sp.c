@@ -33,6 +33,7 @@
 __RCSID("$NetBSD$");
 #endif /* !lint */
 
+#include <stdint.h>
 #include <stdlib.h>
 
 #include <rump/rumpuser.h>

@@ -357,7 +357,8 @@ literal:
 
 		case 'Z':
 			tzset();
-			if (strncmp((const char *)bp, gmt, 3) == 0) {
+			if (strncmp((const char *)bp, gmt, 3) == 0 ||
+			    strncmp((const char *)bp, utc, 3) == 0) {
 				tm->tm_isdst = 0;
 #ifdef TM_GMTOFF
 				tm->TM_GMTOFF = 0;

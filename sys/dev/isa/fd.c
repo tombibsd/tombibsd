@@ -115,7 +115,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/fdio.h>
 #include <sys/conf.h>
 #include <sys/vnode.h>
-#include <sys/rnd.h>
+#include <sys/rndsource.h>
 
 #include <prop/proplib.h>
 
@@ -1415,7 +1415,7 @@ fdioctl(dev_t dev, u_long cmd, void *addr, int flag, struct lwp *l)
 #endif
 		memset(lp, 0, sizeof(*lp));
 
-		lp->d_type = DTYPE_FLOPPY;
+		lp->d_type = DKTYPE_FLOPPY;
 		lp->d_secsize = FDC_BSIZE;
 		lp->d_nsectors = fd->sc_type->sectrac;
 		lp->d_ntracks = fd->sc_type->heads;

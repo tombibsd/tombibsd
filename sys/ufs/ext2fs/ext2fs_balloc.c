@@ -129,7 +129,7 @@ ext2fs_balloc(struct inode *ip, daddr_t bn, int size,
 			 */
 
 			if (bpp != NULL) {
-				error = bread(vp, bn, fs->e2fs_bsize, NOCRED,
+				error = bread(vp, bn, fs->e2fs_bsize,
 					      B_MODIFY, &bp);
 				if (error) {
 					return (error);
@@ -208,7 +208,7 @@ ext2fs_balloc(struct inode *ip, daddr_t bn, int size,
 	 */
 	for (i = 1;;) {
 		error = bread(vp,
-		    indirs[i].in_lbn, (int)fs->e2fs_bsize, NOCRED, 0, &bp);
+		    indirs[i].in_lbn, (int)fs->e2fs_bsize, 0, &bp);
 		if (error) {
 			goto fail;
 		}
@@ -292,7 +292,7 @@ ext2fs_balloc(struct inode *ip, daddr_t bn, int size,
 	brelse(bp, 0);
 	if (bpp != NULL) {
 		if (flags & B_CLRBUF) {
-			error = bread(vp, lbn, (int)fs->e2fs_bsize, NOCRED,
+			error = bread(vp, lbn, (int)fs->e2fs_bsize,
 				      B_MODIFY, &nbp);
 			if (error) {
 				goto fail;
@@ -320,7 +320,7 @@ fail:
 			int r;
 
 			r = bread(vp, indirs[unwindidx].in_lbn,
-			    (int)fs->e2fs_bsize, NOCRED, B_MODIFY, &bp);
+			    (int)fs->e2fs_bsize, B_MODIFY, &bp);
 			if (r) {
 				panic("Could not unwind indirect block, error %d", r);
 			} else {

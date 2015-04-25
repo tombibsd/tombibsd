@@ -32,8 +32,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 
 #include <uvm/uvm_extern.h>
 
-static struct pmap thepmap;
-struct pmap *const kernel_pmap_ptr = &thepmap;
+#include "rump_private.h"
 
 void
 pmap_kenter_pa(vaddr_t va, paddr_t pa, vm_prot_t prot, u_int fl)

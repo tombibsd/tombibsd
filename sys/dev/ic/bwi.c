@@ -1939,7 +1939,7 @@ invalid:
 	error = EINVAL;
 
 free_and_fail:
-	firmware_free(fwi->fwi_data, 0);
+	firmware_free(fwi->fwi_data, fwi->fwi_size);
 	fwi->fwi_data = NULL;
 	fwi->fwi_size = 0;
 
@@ -1953,7 +1953,7 @@ bwi_mac_fw_image_free(struct bwi_mac *mac, struct bwi_fw_image *fwi)
 	if (fwi->fwi_data != NULL) {
 		DPRINTF(mac->mac_sc, BWI_DBG_FIRMWARE, "freeing firmware %s\n",
 		    fwi->fwi_name);
-		firmware_free(fwi->fwi_data, 0);
+		firmware_free(fwi->fwi_data, fwi->fwi_size);
 		fwi->fwi_data = NULL;
 		fwi->fwi_size = 0;
 	}
@@ -9140,7 +9140,6 @@ bwi_encap(struct bwi_softc *sc, int idx, struct mbuf *m,
 
 		MGETHDR(m_new, M_DONTWAIT, MT_DATA);
 		if (m_new == NULL) {
-			m_freem(m);
 			error = ENOBUFS;
 			aprint_error_dev(sc->sc_dev,
 			    "can't defrag TX buffer (1)\n");
@@ -9151,7 +9150,6 @@ bwi_encap(struct bwi_softc *sc, int idx, struct mbuf *m,
 		if (m->m_pkthdr.len > MHLEN) {
 			MCLGET(m_new, M_DONTWAIT);
 			if (!(m_new->m_flags & M_EXT)) {
-				m_freem(m);
 				m_freem(m_new);
 				error = ENOBUFS;
 			}

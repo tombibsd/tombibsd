@@ -31,6 +31,17 @@ run_and_check()
 	local atfname="${1}"; shift
 	local makename="${1}"; shift
 
+	# these tests fail since the backout of the patch in PR
+	# 49085 - adjust for more concrete PR if there is one
+	case ${makename} in
+	escape)		atf_expect_fail "see PR toolchain/49085";;
+	impsrc)		atf_expect_fail "see PR toolchain/49085";;
+	phony*)		atf_expect_fail "see PR toolchain/49085";;
+	posix1)		atf_expect_fail "see PR toolchain/49085";;
+	suffixes)	atf_expect_fail "see PR toolchain/49085"
+			atf_fail "this uses up all memory and then fails";;
+	esac
+
 	local srcdir="$(atf_get_srcdir)"
 
 	local testdir="$(atf_get_srcdir)/unit-tests"

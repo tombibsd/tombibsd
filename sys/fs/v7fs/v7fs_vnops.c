@@ -722,7 +722,7 @@ out:
 int
 v7fs_link(void *v)
 {
-	struct vop_link_args /* {
+	struct vop_link_v2_args /* {
 				struct vnode *a_dvp;
 				struct vnode *a_vp;
 				struct componentname *a_cnp;
@@ -750,8 +750,6 @@ v7fs_link(void *v)
 
 	VOP_UNLOCK(vp);
 unlock:
-	vput(dvp);
-
 	return error;
 }
 

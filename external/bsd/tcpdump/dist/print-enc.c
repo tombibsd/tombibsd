@@ -122,11 +122,11 @@ enc_if_print(netdissect_options *ndo,
 	case AF_INET:
 		ip_print(ndo, p, length);
 		break;
-#ifdef INET6
+#ifdef AF_INET6
 	case AF_INET6:
 		ip6_print(ndo, p, length);
 		break;
-#endif /*INET6*/
+#endif
 	}
 
 out:

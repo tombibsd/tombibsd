@@ -1,6 +1,7 @@
 D/BasicAA////
 D/BlockFrequencyInfo////
 D/BranchProbabilityInfo////
+D/CFLAliasAnalysis////
 D/CallGraph////
 D/CostModel////
 D/Delinearization////

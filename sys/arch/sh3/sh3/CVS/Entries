@@ -6,14 +6,14 @@
 /compat_16_machdep.c/1.1/Sat Nov 22 01:53:41 2008/-kk/
 /core_machdep.c/1.5/Tue Jan 14 16:04:58 2014/-kk/
 /cpu.c/1.14/Sun Apr  5 00:04:51 2009/-kk/
-/cpu_in_cksum.S/1.4/Tue Sep 27 00:35:38 2011/-kk/
+/cpu_in_cksum.S/1.5/Mon Jan 12 06:48:25 2015/-kk/
 /db_disasm.c/1.22/Fri Apr 11 02:03:38 2014/-kk/
 /db_interface.c/1.61/Fri Jan 28 21:06:07 2011/-kk/
 /db_memrw.c/1.9/Sat Jun  7 03:25:13 2008/-kk/
 /db_trace.c/1.25/Tue Nov 12 02:18:41 2013/-kk/
 /devreg.c/1.8/Wed Mar 18 10:22:36 2009/-kk/
 /disksubr.c/1.29/Thu Oct 24 10:28:57 2013/-kk/
-/exception.c/1.63/Sun Jul  8 20:14:12 2012/-kk/
+/exception.c/1.64/Sat Mar 21 02:37:42 2015/-kk/
 /exception_vector.S/1.49/Fri Feb  4 04:14:25 2011/-kk/
 /genassym.cf/1.20/Fri Jan 14 02:06:30 2011/-kk/
 /interrupt.c/1.29/Mon Dec 20 00:25:43 2010/-kk/
@@ -21,7 +21,7 @@
 /kobj_machdep.c/1.4/Fri Nov 21 23:18:11 2008/-kk/
 /lock_stubs.S/1.13/Sun May 25 15:56:12 2008/-kk/
 /locore_c.c/1.31/Fri Nov 27 03:23:13 2009/-kk/
-/locore_subr.S/1.54/Tue Feb  1 01:54:14 2011/-kk/
+/locore_subr.S/1.55/Sat Mar 21 02:21:06 2015/-kk/
 /mmu.c/1.18/Mon Apr 28 20:23:35 2008/-kk/
 /mmu_sh3.c/1.15/Sun Feb 12 16:34:10 2012/-kk/
 /mmu_sh4.c/1.14/Sun Feb 12 16:34:10 2012/-kk/

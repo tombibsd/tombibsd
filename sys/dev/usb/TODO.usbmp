@@ -41,8 +41,8 @@ convert uhidev users to MPSAFE:
   - own cdevsw that isn't D_MPSAFE; need to check intr handlers
 
   uhid(4)
-  - needs some locking here (not completely tested changes)
-  - done
+  - D_MPSAFE not set as all users need it first.
+  - mostly done
 
   ukbd(4)
   ums(4)
@@ -135,7 +135,7 @@ driver testing:		STATUS
   - ral
   - rum
   - run
-  - urtw
+  - urtw		working
   - urtwn
   - upgt
   - zyd

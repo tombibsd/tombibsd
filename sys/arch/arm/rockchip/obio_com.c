@@ -143,12 +143,10 @@ obiouart_attach(device_t parent, device_t self, void *aux)
 	com_attach_subr(sc);
 	aprint_naive("\n");
 
-#if 1
 	KASSERT(obio->obio_intr != OBIOCF_INTR_DEFAULT);
-	osc->sc_ih = intr_establish(obio->obio_intr, IPL_SERIAL, IST_EDGE,
+	osc->sc_ih = intr_establish(obio->obio_intr, IPL_SERIAL, IST_LEVEL,
 			comintr, sc);
 	if (osc->sc_ih == NULL)
 		panic("%s: failed to establish interrup %d",
 		    device_xname(self), obio->obio_intr);
-#endif
 }

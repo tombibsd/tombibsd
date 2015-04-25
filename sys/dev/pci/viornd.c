@@ -51,7 +51,7 @@
 #include <sys/kernel.h>
 #include <sys/device.h>
 #include <sys/callout.h>
-#include <sys/rnd.h>
+#include <sys/rndsource.h>
 #include <sys/mutex.h>
 #include <dev/pci/pcidevs.h>
 #include <dev/pci/pcivar.h>
@@ -205,6 +205,7 @@ viornd_attach( device_t parent, device_t self, void *aux)
 	viornd_get(VIORND_BUFSIZE, sc);
 	return;
 vio_failed:
+	bus_dmamap_unload(vsc->sc_dmat, sc->sc_dmamap);
 load_failed:
 	bus_dmamap_destroy(vsc->sc_dmat, sc->sc_dmamap);
 create_failed:

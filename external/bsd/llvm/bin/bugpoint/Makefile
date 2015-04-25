@@ -26,8 +26,10 @@ LLVM_LIBS+= \
 	BitWriter \
 	InstCombine \
 	Instrumentation \
+	MC \
 	Linker \
 	ScalarOpts \
+	ProfileData \
 	Target \
 	ipo \
 	Vectorize \

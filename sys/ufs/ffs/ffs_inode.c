@@ -149,7 +149,7 @@ ffs_update(struct vnode *vp, const struct timespec *acc,
 	}							/* XXX */
 	error = bread(ip->i_devvp,
 		      FFS_FSBTODB(fs, ino_to_fsba(fs, ip->i_number)),
-		      (int)fs->fs_bsize, NOCRED, B_MODIFY, &bp);
+		      (int)fs->fs_bsize, B_MODIFY, &bp);
 	if (error) {
 		return (error);
 	}

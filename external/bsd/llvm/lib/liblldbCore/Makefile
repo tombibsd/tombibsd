@@ -18,7 +18,6 @@ SRCS+=	Address.cpp \
 	Broadcaster.cpp \
 	Communication.cpp \
 	Connection.cpp \
-	ConnectionFileDescriptor.cpp \
 	ConnectionMachPort.cpp \
 	ConnectionSharedMemory.cpp \
 	ConstString.cpp \

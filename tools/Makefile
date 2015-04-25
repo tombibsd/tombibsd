@@ -211,6 +211,10 @@ SUBDIR+=	elftosb
 SUBDIR+=	mkubootimage
 .endif
 
+.if ${MKX11} != "no" && ${X11FLAVOUR} == "Xorg"
+SUBDIR+=	../external/mit/xorg/tools/makestrs
+.endif
+
 .endif # TOOLCHAIN_BUILDRUMP
 
 check_MKTOOLS: .PHONY .NOTMAIN

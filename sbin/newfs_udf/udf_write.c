@@ -317,6 +317,7 @@ udf_derive_format(int req_enable, int req_disable, int force)
 int
 udf_proces_names(void)
 {
+	struct timeval time_of_day;
 	uint32_t primary_nr;
 	uint64_t volset_nr;
 
@@ -335,8 +336,9 @@ udf_proces_names(void)
 		if (mmc_discinfo.disc_flags & MMC_DFLAGS_BARCODEVALID) {
 			volset_nr = mmc_discinfo.disc_barcode;
 		} else {
-			volset_nr  =  (uint32_t) random();
-			volset_nr |= ((uint64_t) random()) << 32;
+			(void)gettimeofday(&time_of_day, NULL);
+			volset_nr  =  (uint64_t) random();
+			volset_nr |= ((uint64_t) time_of_day.tv_sec) << 32;
 		}
 		context.volset_name = calloc(128,1);
 		sprintf(context.volset_name, "%016"PRIx64, volset_nr);

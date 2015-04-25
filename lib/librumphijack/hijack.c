@@ -113,6 +113,7 @@ enum dualcall {
 	DUALCALL_LINK, DUALCALL_RENAME,
 	DUALCALL_MKDIR, DUALCALL_RMDIR,
 	DUALCALL_UTIMES, DUALCALL_LUTIMES, DUALCALL_FUTIMES,
+	DUALCALL_UTIMENSAT, DUALCALL_FUTIMENS,
 	DUALCALL_TRUNCATE, DUALCALL_FTRUNCATE,
 	DUALCALL_FSYNC,
 	DUALCALL_ACCESS,
@@ -305,6 +306,8 @@ struct sysnames {
 	{ DUALCALL_UTIMES,	S(REALUTIMES),	RSYS_NAME(UTIMES)	},
 	{ DUALCALL_LUTIMES,	S(REALLUTIMES),	RSYS_NAME(LUTIMES)	},
 	{ DUALCALL_FUTIMES,	S(REALFUTIMES),	RSYS_NAME(FUTIMES)	},
+	{ DUALCALL_UTIMENSAT,	"utimensat",	RSYS_NAME(UTIMENSAT)	},
+	{ DUALCALL_FUTIMENS,	"futimens",	RSYS_NAME(FUTIMENS)	},
 	{ DUALCALL_OPEN,	"open",		RSYS_NAME(OPEN)		},
 	{ DUALCALL_CHDIR,	"chdir",	RSYS_NAME(CHDIR)	},
 	{ DUALCALL_FCHDIR,	"fchdir",	RSYS_NAME(FCHDIR)	},
@@ -521,6 +524,33 @@ whichpath(const char *path)
 #else
 #define DPRINTF(x)
 #endif
+
+#define ATCALL(type, name, rcname, args, proto, vars)			\
+type name args								\
+{									\
+	type (*fun) proto;						\
+	int isrump = -1;						\
+									\
+	if (fd == AT_FDCWD || *path == '/') {				\
+		isrump = path_isrump(path);				\
+	} else {							\
+		isrump = fd_isrump(fd);					\
+	}								\
+									\
+	DPRINTF(("%s -> %d:%s (%s)\n", __STRING(name),			\
+	    fd, path, isrump ? "rump" : "host"));			\
+									\
+	assert(isrump != -1);						\
+	if (isrump) {							\
+		fun = syscalls[rcname].bs_rump;				\
+		if (fd != AT_FDCWD)					\
+			fd = fd_host2rump(fd);				\
+		path = path_host2rump(path);				\
+	} else {							\
+		fun = syscalls[rcname].bs_host;				\
+	}								\
+	return fun vars;						\
+}
 
 #define FDCALL(type, name, rcname, args, proto, vars)			\
 type name args								\
@@ -1691,7 +1721,8 @@ fork(void)
 }
 #ifdef VFORK
 /* we do not have the luxury of not requiring a stackframe */
-__strong_alias(VFORK,fork);
+#define	__strong_alias_macro(m, f)	__strong_alias(m, f)
+__strong_alias_macro(VFORK,fork);
 #endif
 
 int
@@ -2235,6 +2266,13 @@ __sysctl(const int *name, unsigned int namelen, void *old, size_t *oldlenp,
  * Rest are std type calls.
  */
 
+#ifdef HAVE_UTIMENSAT
+ATCALL(int, utimensat, DUALCALL_UTIMENSAT,				\
+	(int fd, const char *path, const struct timespec t[2], int f),	\
+	(int, const char *, const struct timespec [2], int),
+	(fd, path, t, f))
+#endif
+
 FDCALL(int, bind, DUALCALL_BIND,					\
 	(int fd, const struct sockaddr *name, socklen_t namelen),	\
 	(int, const struct sockaddr *, socklen_t),			\
@@ -2389,6 +2427,11 @@ FDCALL(int, futimes, DUALCALL_FUTIMES,					\
 	(int fd, const struct timeval *tv),				\
 	(int, const struct timeval *),					\
 	(fd, tv))
+
+FDCALL(int, futimens, DUALCALL_FUTIMENS,				\
+	(int fd, const struct timespec *ts),				\
+	(int, const struct timespec *),					\
+	(fd, ts))
 
 #ifdef HAVE_CHFLAGS
 FDCALL(int, fchflags, DUALCALL_FCHFLAGS,				\

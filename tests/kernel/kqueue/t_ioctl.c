@@ -53,7 +53,8 @@ ATF_TC_BODY(kfilter_byfilter, tc)
 {
 	char buf[32];
 	struct kfilter_mapping km;
-	int i, kq;
+	int kq;
+	uint32_t i;
 
 	RL(kq = kqueue());
 

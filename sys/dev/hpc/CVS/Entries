@@ -22,7 +22,7 @@
 /hpccmap.c/1.4/Sun Apr 14 09:07:04 2002/-kk/
 /hpccmap_gen.c/1.5/Sun Dec 11 12:21:22 2005/-kk/
 /hpccmapvar.h/1.2/Tue May  8 14:46:06 2001/-kk/
-/hpcfb.c/1.58/Sat Nov 13 13:51:59 2010/-kk/
+/hpcfb.c/1.60/Sun Apr 12 03:35:01 2015/-kk/
 /hpcfbio.h/1.2/Sun Jul 22 09:56:41 2001/-kk/
 /hpcfbvar.h/1.4/Sun Mar  4 06:01:47 2007/-kk/
 /hpcin.c/1.15/Sat Oct 27 17:18:17 2012/-kk/

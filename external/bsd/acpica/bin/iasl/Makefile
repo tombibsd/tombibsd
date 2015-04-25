@@ -57,6 +57,8 @@ SRCS+= \
 	asloptions.c \
 	aslpredef.c \
 	aslprepkg.c \
+	aslprintf.c \
+	aslprune.c \
 	aslresource.c \
 	aslrestype1.c \
 	aslrestype1i.c \
@@ -112,6 +114,7 @@ SRCS+=  dbfileio.c
 .PATH: ${TOPDIR}/../disassembler
 SRCS+= \
 	dmbuffer.c \
+	dmcstyle.c \
 	dmdeferred.c \
 	dmnames.c \
 	dmobject.c \

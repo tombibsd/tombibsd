@@ -60,6 +60,7 @@ LLVM_LIBS+= \
 	InstCombine \
 	Instrumentation \
 	ScalarOpts \
+	ProfileData \
 	Analysis \
 	MC \
 	TransformsUtils \

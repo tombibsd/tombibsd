@@ -715,7 +715,6 @@ JobPrintCommand(void *cmdp, void *jobp)
 	    shutUp = DEBUG(LOUD) ? FALSE : TRUE;
 	    break;
 	case '-':
-	    job->flags |= JOB_IGNERR;
 	    errOff = TRUE;
 	    break;
 	case '+':
@@ -794,6 +793,7 @@ JobPrintCommand(void *cmdp, void *jobp)
 		 * to ignore errors. Set cmdTemplate to use the weirdness
 		 * instead of the simple "%s\n" template.
 		 */
+		job->flags |= JOB_IGNERR;
 		if (!(job->flags & JOB_SILENT) && !shutUp) {
 			if (commandShell->hasEchoCtl) {
 				DBPRINTF("%s\n", commandShell->echoOff);
@@ -1878,16 +1878,16 @@ end_loop:
 		(void)fflush(stdout);
 	    }
 	}
-	if (i < max - 1) {
-	    /* shift the remaining characters down */
-	    (void)memcpy(job->outBuf, &job->outBuf[i + 1], max - (i + 1));
+	/*
+	 * max is the last offset still in the buffer. Move any remaining
+	 * characters to the start of the buffer and update the end marker
+	 * curPos.
+	 */
+	if (i < max) {
+	    (void)memmove(job->outBuf, &job->outBuf[i + 1], max - (i + 1));
 	    job->curPos = max - (i + 1);
-
 	} else {
-	    /*
-	     * We have written everything out, so we just start over
-	     * from the start of the buffer. No copying. No nothing.
-	     */
+	    assert(i == max);
 	    job->curPos = 0;
 	}
     }

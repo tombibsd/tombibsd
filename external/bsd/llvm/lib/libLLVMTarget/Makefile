@@ -8,7 +8,6 @@ LIB=	LLVMTarget
 
 SRCS+=	Target.cpp \
 	TargetIntrinsicInfo.cpp \
-	TargetJITInfo.cpp \
 	TargetLibraryInfo.cpp \
 	TargetLoweringObjectFile.cpp \
 	TargetMachine.cpp \

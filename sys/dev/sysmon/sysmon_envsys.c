@@ -76,7 +76,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/proc.h>
 #include <sys/mutex.h>
 #include <sys/kmem.h>
-#include <sys/rnd.h>
+#include <sys/rndsource.h>
 
 #include <dev/sysmon/sysmonvar.h>
 #include <dev/sysmon/sysmon_envsysvar.h>
@@ -485,6 +485,7 @@ sysmon_envsys_create(void)
 	TAILQ_INIT(&sme->sme_sensors_list);
 	LIST_INIT(&sme->sme_events_list);
 	mutex_init(&sme->sme_mtx, MUTEX_DEFAULT, IPL_NONE);
+	mutex_init(&sme->sme_work_mtx, MUTEX_DEFAULT, IPL_NONE);
 	cv_init(&sme->sme_condvar, "sme_wait");
 
 	return sme;
@@ -508,6 +509,7 @@ sysmon_envsys_destroy(struct sysmon_envsys *sme)
 		TAILQ_REMOVE(&sme->sme_sensors_list, edata, sensors_head);
 	}
 	mutex_destroy(&sme->sme_mtx);
+	mutex_destroy(&sme->sme_work_mtx);
 	cv_destroy(&sme->sme_condvar);
 	kmem_free(sme, sizeof(*sme));
 }

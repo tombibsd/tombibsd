@@ -1362,7 +1362,7 @@ rumpuser_sp_init(const char *url,
 	/*LINTED*/
 	if (bind(s, sap, parsetab[idx].slen) == -1) {
 		error = errno;
-		fprintf(stderr, "rump_sp: server bind failed\n");
+		fprintf(stderr, "rump_sp: failed to bind to URL %s\n", url);
 		goto out;
 	}
 	if (listen(s, MAXCLI) == -1) {

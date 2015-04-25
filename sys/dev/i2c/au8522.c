@@ -419,7 +419,7 @@ au8522_get_snr(struct au8522 *au)
 	return 0;
 }
 
-MODULE(MODULE_CLASS_DRIVER, au8522, "iic");
+MODULE(MODULE_CLASS_DRIVER, au8522, "i2cexec");
 
 static int
 au8522_modcmd(modcmd_t cmd, void *opaque)

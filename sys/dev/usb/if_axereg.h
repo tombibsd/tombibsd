@@ -38,6 +38,7 @@
  * Definitions for the ASIX Electronics AX88172 to ethernet controller.
  */
 
+#include <sys/rndsource.h>
 
 /*
  * Vendor specific commands

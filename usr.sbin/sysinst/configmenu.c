@@ -252,10 +252,12 @@ check_root_password(void)
 static int
 add_new_user(struct menudesc *menu, void *arg)
 {
-	char username[STRSIZE];
+	char username[STRSIZE] = "";
 	int inwheel=0;
 
 	msg_prompt(MSG_addusername, NULL, username, sizeof username -1);
+	if (strlen(username) == 0)
+		return 0;
 	process_menu(MENU_yesno, deconst(MSG_addusertowheel));
 	inwheel = yesno;
 	ushell = "/bin/csh";

@@ -892,8 +892,8 @@ ext2fs_read_dotdot(struct vnode *vp, kauth_cred_t cred, ino_t *ino_ret)
 	KASSERT(ino_ret != NULL);
 	KASSERT(vp->v_type == VDIR);
 
-	error = vn_rdwr(UIO_READ, vp, &dirbuf, sizeof dirbuf, (off_t)0,
-	    UIO_SYSSPACE, IO_NODELOCKED, cred, NULL, NULL);
+	error = ufs_bufio(UIO_READ, vp, &dirbuf, sizeof dirbuf, (off_t)0,
+	    IO_NODELOCKED, cred, NULL, NULL);
 	if (error)
 		return error;
 
@@ -924,8 +924,8 @@ ext2fs_rename_replace_dotdot(struct vnode *vp,
 	VTOI(fdvp)->i_e2fs_nlink--;
 	VTOI(fdvp)->i_flag |= IN_CHANGE;
 
-	error = vn_rdwr(UIO_READ, vp, &dirbuf, sizeof dirbuf, (off_t)0,
-	    UIO_SYSSPACE, IO_NODELOCKED, cred, NULL, NULL);
+	error = ufs_bufio(UIO_READ, vp, &dirbuf, sizeof dirbuf, (off_t)0,
+	    IO_NODELOCKED, cred, NULL, NULL);
 	if (error)
 		return error;
 
@@ -944,8 +944,8 @@ ext2fs_rename_replace_dotdot(struct vnode *vp,
 
 	dirbuf.dotdot_ino = h2fs32(VTOI(tdvp)->i_number);
 	/* XXX WTF?  Why not check error?  */
-	(void)vn_rdwr(UIO_WRITE, vp, &dirbuf, sizeof dirbuf, (off_t)0,
-	    UIO_SYSSPACE, (IO_NODELOCKED | IO_SYNC), cred, NULL, NULL);
+	(void)ufs_bufio(UIO_WRITE, vp, &dirbuf, sizeof dirbuf, (off_t)0,
+	    (IO_NODELOCKED | IO_SYNC), cred, NULL, NULL);
 
 	return 0;
 }

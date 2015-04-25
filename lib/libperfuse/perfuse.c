@@ -539,6 +539,15 @@ perfuse_init(struct perfuse_callbacks *pc, struct perfuse_mount_info *pmi)
 	puffs_flags |= PUFFS_FLAG_IAONDEMAND;
 #endif
 
+	/*
+	 * FUSE filesystem do not expect [amc]time and size
+	 * updates to be sent by the kernel, they do the
+	 * updates on their own after other operations.
+	 */
+#ifdef PUFFS_KFLAG_NOFLUSH_META
+	puffs_flags |= PUFFS_KFLAG_NOFLUSH_META;
+#endif
+
 	if (perfuse_diagflags & PDF_PUFFS)
 		puffs_flags |= PUFFS_FLAG_OPDUMP;
 

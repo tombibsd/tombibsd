@@ -151,9 +151,10 @@ char *strndup(const char *str, size_t n);
 #ifdef NDEBUG
 #define DPRINTF(x, ...) (void)0
 #else
+void dbprintf(const char *, const char *, size_t, const char *, ...)
+    __printflike(4, 5);
 #define DPRINTF(x, ...) /*LINTED null effect */(void)(Debug & (x) \
-    ? (printf("%s:%s:%s:%.4d\t", make_timestamp(NULL, true), \
-    __FILE__, __func__, __LINE__), printf(__VA_ARGS__)) : 0)
+    ? dbprintf(__FILE__, __func__, __LINE__, __VA_ARGS__) : 0)
 #endif
 
 /* shortcuts for libevent */

@@ -19,7 +19,6 @@ makeoptions	BOARDTYPE="cubietruck"
 # Cubietruck is an A20
 #
 no options 	ALLWINNER_A10
-no options 	CPU_CORTEXA8
 no makeoptions	CPUFLAGS
 makeoptions	CPUFLAGS="-mcpu=cortex-a7 -mfpu=neon"
 

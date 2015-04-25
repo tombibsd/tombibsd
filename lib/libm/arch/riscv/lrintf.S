@@ -10,9 +10,9 @@ STRONG_ALIAS(llrintf,lrintf)
 
 ENTRY(lrintf)
 #ifdef _LP64
-	fcvt.l.s	v0, fa0
+	fcvt.l.s	a0, fa0
 #else
-	fcvt.w.s	v0, fa0
+	fcvt.w.s	a0, fa0
 #endif
 	ret
 END(lrintf)

@@ -28,12 +28,10 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/kernel.h>
 #include <sys/device.h>
 #include <sys/module.h>
-#include <sys/rnd.h>
+#include <sys/rndsource.h>
 #include <sys/malloc.h>
 #include <sys/mbuf.h>
 #include <sys/cpu.h>
-#include <sys/rnd.h>
-#include <sys/cprng.h>
 
 #include <x86/specialreg.h>
 

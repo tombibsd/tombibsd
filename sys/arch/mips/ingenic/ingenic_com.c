@@ -56,7 +56,7 @@ void	ingenic_puts(const char *);
 void	ingenic_putchar(char);
 
 #ifndef CONMODE
-# define CONMODE ((TTYDEF_CFLAG & ~(CSIZE | PARENB)) | CS8)
+# define CONMODE ((TTYDEF_CFLAG & ~(CSIZE | CSTOPB | PARENB)) | CS8)
 #endif
 
 
@@ -163,7 +163,7 @@ ingenic_com_cnattach(void)
 	 * so we just leave alone whatever u-boot set up
 	 * my uplcom is too tolerant to show any difference
 	 */
-	comcnattach1(&regs, -1, 6000000, COM_TYPE_INGENIC, CONMODE);
+	comcnattach1(&regs, 115200, 48000000, COM_TYPE_INGENIC, CONMODE);
 }
 
 static int
@@ -184,7 +184,7 @@ ingenic_com_attach(device_t parent, device_t self, void *args)
 	struct com_softc *sc = &isc->sc_com;
 
 	sc->sc_dev = self;
-	sc->sc_frequency = 12000000;
+	sc->sc_frequency = 48000000;
 	sc->sc_type = COM_TYPE_INGENIC;
 	memset(&sc->sc_regs, 0, sizeof(sc->sc_regs));
 	COM_INIT_REGS(sc->sc_regs, &ingenic_com_mbst, regh, 0);

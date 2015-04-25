@@ -3,6 +3,7 @@
 .ifndef AMU_MAKEFILE_INC
 AMU_MAKEFILE_INC=
 WARNS?=	1
+CWARNFLAGS.clang+=	-Wno-error=enum-conversion
 
 .include <bsd.own.mk>
 
@@ -17,7 +18,7 @@ CPPFLAGS+= -DHAVE_CONFIG_H -I${.CURDIR}/../../include -I${IDIST}/libamu \
     -I${IDIST}/include
 
 LIBAMUOBJDIR!=	cd ${AMUTILS}/lib/libamu && ${PRINTOBJDIR}
-CPPFLAGS+=	-I${LIBAMUOBJDIR}
+CPPFLAGS+=	-I${LIBAMUOBJDIR} -DDEBUG
 
 .if (${USE_HESIOD} != "no")
 CPPFLAGS+=-DHAVE_MAP_HESIOD=1

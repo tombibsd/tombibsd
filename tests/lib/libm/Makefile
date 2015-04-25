@@ -4,7 +4,6 @@
 
 TESTSDIR=	${TESTSBASE}/lib/libm
 
-# ARM fenv is incomplete, so we can not enable that here
 .if ${MACHINE_CPU} == "aarch64" || ${MACHINE_CPU} == "arm" \
     || ${MACHINE_ARCH} == "hppa" \
     || ${MACHINE_ARCH} == "sparc" || ${MACHINE_ARCH} == "sparc64" \
@@ -15,6 +14,8 @@ CPPFLAGS+=	-DHAVE_FENV_H
 .if ${MACHINE} == "alpha"
 COPTS+=	-mfloat-ieee -mieee-with-inexact -mfp-trap-mode=sui -mtrap-precision=i
 .endif
+
+CPPFLAGS.t_fmod.c+=	-I${.CURDIR}/../libc/gen
 
 TESTS_C+=	t_acos
 TESTS_C+=	t_asin

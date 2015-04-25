@@ -90,8 +90,8 @@ struct awin_gpio_pindata {
 
 struct awin_dma_channel;
 
-extern struct bus_space awin_bs_tag;
-extern struct bus_space awin_a4x_bs_tag;
+extern struct bus_space armv7_generic_bs_tag;
+extern struct bus_space armv7_generic_a4x_bs_tag;
 extern bus_space_handle_t awin_core_bsh;
 #if defined(ALLWINNER_A80)
 extern bus_space_handle_t awin_core2_bsh;

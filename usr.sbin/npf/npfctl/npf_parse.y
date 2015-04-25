@@ -31,10 +31,12 @@
 
 %{
 
-#include <stdio.h>
 #include <err.h>
-#include <vis.h>
 #include <netdb.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <vis.h>
 
 #include "npfctl.h"
 
@@ -616,7 +618,8 @@ filt_opts
 	;
 
 filt_addr
-	: addr_or_ifaddr	{ $$ = $1; }
+	: list			{ $$ = $1; }
+	| addr_or_ifaddr	{ $$ = $1; }
 	| TABLE_ID		{ $$ = npfctl_parse_table_id($1); }
 	| ANY			{ $$ = NULL; }
 	;

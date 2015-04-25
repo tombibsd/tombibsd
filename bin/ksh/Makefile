@@ -1,6 +1,7 @@
 #	$NetBSD$
 
 WARNS=3
+CWARNFLAGS.clang+=	-Wno-error=cast-qual
 
 .include <bsd.own.mk>
 

@@ -32,7 +32,7 @@
 #include "atomic_op_asm.h"
 
 ENTRY_NP(_atomic_swap_32)
-	amoswap.w.aq	v0, a1, 0(a0)
+	amoswap.w.aq	a0, a1, 0(a0)
 	ret
 END(_atomic_swap_32)
 

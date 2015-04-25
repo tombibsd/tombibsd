@@ -54,6 +54,7 @@ __RCSID("$NetBSD$");
 #include <stddef.h>
 #include <stdint.h>
 #include <string.h>
+#include <inttypes.h>
 #include <fcntl.h>
 #include "mdef.h"
 #include "stdd.h"
@@ -180,17 +181,17 @@ expand_builtin(const char *argv[], int argc, int td)
 	{
 		int base = 10;
 		int maxdigits = 0;
-		const char *errstr;
+		int e;
 
 		if (argc > 3) {
-			base = strtonum(argv[3], 2, 36, &errstr);
-			if (errstr) {
+			base = strtoi(argv[3], NULL, 0, 2, 36, &e);
+			if (e) {
 				m4errx(1, "expr: base %s invalid.", argv[3]);
 			}
 		}
 		if (argc > 4) {
-			maxdigits = strtonum(argv[4], 0, INT_MAX, &errstr);
-			if (errstr) {
+			maxdigits = strtoi(argv[4], NULL, 0, 0, INT_MAX, &e);
+			if (e) {
 				m4errx(1, "expr: maxdigits %s invalid.", argv[4]);
 			}
 		}
@@ -840,9 +841,9 @@ doundiv(const char *argv[], int argc)
 
 	if (argc > 2) {
 		for (ind = 2; ind < argc; ind++) {
-			const char *errstr;
-			n = strtonum(argv[ind], 1, INT_MAX, &errstr);
-			if (errstr) {
+			int e;
+			n = strtoi(argv[ind], NULL, 0, 1, INT_MAX, &e);
+			if (e) {
 				if (errno == EINVAL && mimic_gnu)
 					getdivfile(argv[ind]);
 			} else {

@@ -38,11 +38,17 @@
 #include <sys/cdefs.h>
 
 /*
- * Pickup definition of uintptr_t
+ * Pickup definition of size_t and uintptr_t
  */
+#include <machine/ansi.h>
 #include <sys/stdint.h>
 #ifndef _KERNEL
 #include <stdbool.h>
+#endif
+
+#ifdef	_BSD_SIZE_T_
+typedef	_BSD_SIZE_T_ size_t;
+#undef	_BSD_SIZE_T_
 #endif
 
 /*

@@ -112,8 +112,10 @@ shrink_ffsv1_partial_cg_body()
 	atf_check -o ignore -e ignore newfs -V1 -F -s 5760 ${IMG}
 
 	# shrink so there's a partial cg at the end
+	atf_check -s exit:0 resize_ffs -c -s 4000 -y ${IMG}
 	atf_check -s exit:0 resize_ffs -s 4000 -y ${IMG}
 	atf_check -s exit:0 -o ignore fsck_ffs -f -n -F ${IMG}
+	atf_check -s exit:1 resize_ffs -c -s 4000 -y ${IMG}
 }
 
 atf_init_test_cases()

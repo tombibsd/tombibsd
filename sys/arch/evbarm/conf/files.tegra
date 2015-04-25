@@ -1,0 +1,10 @@
+#	$NetBSD$
+#
+# NVIDIA Tegra configuration info
+#
+
+file	arch/evbarm/tegra/tegra_machdep.c
+
+defparam opt_machdep.h				BOOT_ARGS
+
+include "arch/arm/nvidia/files.tegra"

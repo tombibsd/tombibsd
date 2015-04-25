@@ -46,18 +46,7 @@ __KERNEL_RCSID(1, "$NetBSD$");
 #include <arm/imx/imx6_reg.h>
 #include <arm/imx/imx6_mmdcreg.h>
 #include <arm/imx/imx6_ccmreg.h>
-#include <arm/imx/imxclockvar.h>
 #include <arm/imx/imxwdogreg.h>
-
-/*
- * PERIPHCLK_N is an arm root clock divider for MPcore interupt controller.
- * PERIPHCLK_N is equal to, or greater than two.
- * see "Cortex-A9 MPCore Technical Reference Manual" -
- *     Chapter 5: Clocks, Resets, and Power Management, 5.1: Clocks.
- */
-#ifndef PERIPHCLK_N
-#define PERIPHCLK_N	2
-#endif
 
 bus_space_tag_t imx6_ioreg_bst = &imx_bs_tag;
 bus_space_handle_t imx6_ioreg_bsh;
@@ -219,7 +208,7 @@ imx6_device_register(device_t self, void *aux)
 	 */
 	if (device_is_a(self, "a9tmr") || device_is_a(self, "a9wdt")) {
 		prop_dictionary_set_uint32(dict, "frequency",
-		   imx6_armrootclk() / PERIPHCLK_N);
+		   imx6_armrootclk() / IMX6_PERIPHCLK_N);
 		return;
 	}
 }

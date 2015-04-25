@@ -6,7 +6,7 @@
 
 PROG=	wpa_passphrase
 SRCS= \
-md5.c \
+common.c \
 os_unix.c \
 wpa_debug.c \
 wpa_passphrase.c \

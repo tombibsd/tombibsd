@@ -141,15 +141,12 @@ rpc_call(
 	/* XXX: nettype may be NULL ??? */
 
 #ifdef _REENTRANT
-	if (__isthreaded == 0) {
-		rcp = rpc_call_private_main;
-	} else {
+	if (__isthreaded) {
 		thr_once(&rpc_call_once, rpc_call_setup);
 		rcp = thr_getspecific(rpc_call_key);
-	}
-#else
-	rcp = rpc_call_private_main;
+	} else
 #endif
+		rcp = rpc_call_private_main;
 	if (rcp == NULL) {
 		rcp = malloc(sizeof (*rcp));
 		if (rcp == NULL) {
@@ -157,10 +154,12 @@ rpc_call(
 			rpc_createerr.cf_error.re_errno = errno;
 			return (rpc_createerr.cf_stat);
 		}
-		if (__isthreaded == 0)
-			rpc_call_private_main = rcp;
-		else
+#ifdef _REENTRANT
+		if (__isthreaded)
 			thr_setspecific(rpc_call_key, (void *) rcp);
+		else
+#endif
+			rpc_call_private_main = rcp;
 		rcp->valid = 0;
 		rcp->client = NULL;
 	}

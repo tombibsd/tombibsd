@@ -66,9 +66,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/device.h>
 #include <sys/bus.h>
 
-
-#include <sys/rnd.h>
-
 #include <net/if.h>
 #include <net/if_ether.h>
 #include <net/if_media.h>

@@ -20,3 +20,6 @@ CPPFLAGS+= -DINET6
 
 .include <bsd.lib.mk>
 .include <bsd.klinks.mk>
+
+SYS_P=rump_linux_sys
+.include "../Makefile.sys"

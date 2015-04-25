@@ -404,18 +404,14 @@ nfs_boot_enbroadcast(struct socket *so)
 int
 nfs_boot_sobind_ipport(struct socket *so, uint16_t port, struct lwp *l)
 {
-	struct mbuf *m;
-	struct sockaddr_in *sin;
+	struct sockaddr_in sin;
 	int error;
 
-	m = m_getclr(M_WAIT, MT_SONAME);
-	sin = mtod(m, struct sockaddr_in *);
-	sin->sin_len = m->m_len = sizeof(*sin);
-	sin->sin_family = AF_INET;
-	sin->sin_addr.s_addr = INADDR_ANY;
-	sin->sin_port = htons(port);
-	error = sobind(so, m, l);
-	m_freem(m);
+	sin.sin_len = sizeof(sin);
+	sin.sin_family = AF_INET;
+	sin.sin_addr.s_addr = INADDR_ANY;
+	sin.sin_port = htons(port);
+	error = sobind(so, (struct sockaddr *)&sin, l);
 	return (error);
 }
 
@@ -432,7 +428,7 @@ int
 nfs_boot_sendrecv(struct socket *so, struct mbuf *nam,
 		int (*sndproc)(struct mbuf *, void *, int),
 		struct mbuf *snd,
-		int (*rcvproc)(struct mbuf *, void *),
+		int (*rcvproc)(struct mbuf **, void *),
 		struct mbuf **rcv, struct mbuf **from_p,
 		void *context, struct lwp *lwp)
 {
@@ -510,7 +506,7 @@ send_again:
 			panic("nfs_boot_sendrecv: return size");
 #endif
 
-		if ((*rcvproc)(m, context))
+		if ((*rcvproc)(&m, context))
 			continue;
 
 		if (rcv)

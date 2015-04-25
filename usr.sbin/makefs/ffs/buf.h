@@ -75,8 +75,7 @@ struct buf {
 
 struct kauth_cred;
 void		bcleanup(void);
-int		bread(struct vnode *, daddr_t, int, struct kauth_cred *,
-    int, struct buf **);
+int		bread(struct vnode *, daddr_t, int, int, struct buf **);
 void		brelse(struct buf *, int);
 int		bwrite(struct buf *);
 struct buf *	getblk(struct vnode *, daddr_t, int, int, int);

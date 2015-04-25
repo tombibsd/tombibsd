@@ -308,7 +308,7 @@ ffs_alloccg(struct inode *ip, int cg, daddr_t bpref, int size)
 	if (fs->fs_cs(fs, cg).cs_nbfree == 0 && size == fs->fs_bsize)
 		return (0);
 	error = bread(ip->i_devvp, FFS_FSBTODB(fs, cgtod(fs, cg)),
-	    (int)fs->fs_cgsize, NULL, 0, &bp);
+	    (int)fs->fs_cgsize, 0, &bp);
 	if (error) {
 		return (0);
 	}
@@ -451,7 +451,7 @@ ffs_blkfree(struct inode *ip, daddr_t bno, long size)
 		return;
 	}
 	error = bread(ip->i_devvp, FFS_FSBTODB(fs, cgtod(fs, cg)),
-	    (int)fs->fs_cgsize, NULL, 0, &bp);
+	    (int)fs->fs_cgsize, 0, &bp);
 	if (error) {
 		brelse(bp, 0);
 		return;

@@ -34,6 +34,8 @@
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <sys/rndsource.h>
+
 #define CDCE_RX_LIST_CNT	1
 #define CDCE_TX_LIST_CNT	1
 #define CDCE_BUFSZ		1542

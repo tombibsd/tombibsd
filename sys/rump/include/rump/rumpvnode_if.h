@@ -5,7 +5,7 @@
  * (Modifications made here may easily be lost!)
  *
  * Created from the file:
- *	NetBSD: vnode_if.src,v 1.67 2014/07/25 08:16:47 dholland Exp
+ *	NetBSD: vnode_if.src,v 1.69 2015/04/20 23:08:07 riastradh Exp
  * by the script:
  *	NetBSD: vnode_if.sh,v 1.60 2014/01/13 12:07:55 hannken Exp
  */

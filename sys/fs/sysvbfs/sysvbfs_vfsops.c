@@ -336,6 +336,7 @@ sysvbfs_loadvnode(struct mount *mp, struct vnode *vp,
 	}
 
 	bnode = pool_get(&sysvbfs_node_pool, PR_WAITOK);
+	memset(bnode, 0, sizeof(*bnode));
 
 	vp->v_tag = VT_SYSVBFS;
 	vp->v_op = sysvbfs_vnodeop_p;

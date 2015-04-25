@@ -777,8 +777,13 @@ m_copym0(struct mbuf *m, int off0, int len, int wait, int deep)
 				/*
 				 * we are unsure about the way m was allocated.
 				 * copy into multiple MCLBYTES cluster mbufs.
+				 *
+				 * recompute m_len, it is no longer valid if MCLGET()
+				 * fails to allocate a cluster. Then we try to split
+				 * the source into normal sized mbufs.
 				 */
 				MCLGET(n, wait);
+				n->m_len = 0;
 				n->m_len = M_TRAILINGSPACE(n);
 				n->m_len = m_copylen(len, n->m_len);
 				n->m_len = min(n->m_len, m->m_len - off);

@@ -51,7 +51,7 @@ static int sockaddr_dl_cmp(const struct sockaddr *, const struct sockaddr *);
 static int link_attach(struct socket *, int);
 static void link_detach(struct socket *);
 static int link_accept(struct socket *, struct mbuf *);
-static int link_bind(struct socket *, struct mbuf *, struct lwp *);
+static int link_bind(struct socket *, struct sockaddr *, struct lwp *);
 static int link_listen(struct socket *, struct lwp *);
 static int link_connect(struct socket *, struct mbuf *, struct lwp *);
 static int link_connect2(struct socket *, struct socket *);
@@ -274,7 +274,7 @@ link_accept(struct socket *so, struct mbuf *nam)
 }
 
 static int
-link_bind(struct socket *so, struct mbuf *nam, struct lwp *l)
+link_bind(struct socket *so, struct sockaddr *nam, struct lwp *l)
 {
 	KASSERT(solocked(so));
 

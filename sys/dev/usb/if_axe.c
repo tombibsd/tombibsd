@@ -106,7 +106,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/sockio.h>
 #include <sys/systm.h>
 
-#include <sys/rnd.h>
+#include <sys/rndsource.h>
 
 #include <net/if.h>
 #include <net/if_dl.h>
@@ -852,6 +852,9 @@ axe_attach(device_t parent, device_t self, void *aux)
 	splx(s);
 
 	usbd_add_drv_event(USB_EVENT_DRIVER_ATTACH, sc->axe_udev, sc->axe_dev);
+
+	if (!pmf_device_register(self, NULL, NULL))
+		aprint_error_dev(self, "couldn't establish power handler\n");
 }
 
 int
@@ -866,6 +869,8 @@ axe_detach(device_t self, int flags)
 	/* Detached before attached finished, so just bail out. */
 	if (!sc->axe_attached)
 		return 0;
+
+	pmf_device_deregister(self);
 
 	sc->axe_dying = true;
 

@@ -196,7 +196,7 @@ pmap_pai_check(struct pmap_tlb_info *ti)
 }
 
 #ifdef MULTIPROCESSOR
-static inline bool
+__unused static inline bool
 pmap_tlb_intersecting_active_p(pmap_t pm, struct pmap_tlb_info *ti)
 {
 #if PMAP_TLB_MAX == 1

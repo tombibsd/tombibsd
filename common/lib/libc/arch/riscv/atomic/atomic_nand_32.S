@@ -31,11 +31,12 @@
 #include "atomic_op_asm.h"
 
 ENTRY_NP(_atomic_nand_32)
-1:	lr.w	v0, 0(a0)
-	not	t0, v0
-	and	t0, t0, a1
-	sc.w	v1, t0, 0(a0)
-	bnez	v1, 1b
+	mv	t0, a0
+1:	lr.w	a0, 0(t0)
+	not	t2, a0
+	and	t2, t2, a1
+	sc.w	t1, t2, 0(t0)
+	bnez	t1, 1b
 	ret
 END(_atomic_nand_32)
 
@@ -50,11 +51,12 @@ CRT_ALIAS(__sync_fetch_and_nand_4,_atomic_nand_32)
 CRT_ALIAS(__atomic_fetch_nand_4,_atomic_nand_32)
 
 ENTRY_NP(_atomic_nand_32_nv)
-1:	lr.w	v0, 0(a0)
-	not	v0, v0
-	and	v0, v0, a1
-	sc.w	v1, v0, 0(a0)
-	bnez	v1, 1b
+	mv	t0, a0
+1:	lr.w	a0, 0(t0)
+	not	a0, a0
+	and	a0, a0, a1
+	sc.w	t1, a0, 0(t0)
+	bnez	t1, 1b
 	ret
 END(_atomic_nand_32_nv)
 

@@ -65,7 +65,7 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <dev/mii/miivar.h>
 
 #include <net/bpf.h>
-#include <sys/rnd.h>
+#include <sys/rndsource.h>
 
 #include <dev/ic/lan9118reg.h>
 #include <dev/ic/lan9118var.h>

@@ -260,6 +260,9 @@ int ipsec4_output(struct mbuf *, struct socket *, int,
 	struct secpolicy **, u_long *, bool *, bool *);
 int ipsec4_input(struct mbuf *, int);
 int ipsec4_forward(struct mbuf *, int *);
+#ifdef INET6
+int ipsec6_input(struct mbuf *);
+#endif
 
 static __inline struct secpolicy*
 ipsec4_getpolicybysock(

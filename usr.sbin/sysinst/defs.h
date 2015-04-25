@@ -451,6 +451,7 @@ int	write_disklabel(void);
 int	make_filesystems(void);
 int	make_fstab(void);
 int	mount_disks(void);
+int	set_swap_if_low_ram(const char *, partinfo *);
 int	set_swap(const char *, partinfo *);
 int	check_swap(const char *, int);
 char *bootxx_name(void);

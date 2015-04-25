@@ -85,13 +85,13 @@ GETTEMP(char *path, int *doopen, int domkdir, int slen, int oflags)
 
 	/* Fill space with random characters */
 	while (trv >= path && *trv == 'X') {
-		r = arc4random_uniform(sizeof(padchar) - 1);
+		r = arc4random_uniform((unsigned int)(sizeof(padchar) - 1));
 		*trv-- = padchar[r];
 	}
 	start = trv + 1;
 
 	/* save first combination of random characters */
-	memcpy(carrybuf, start, suffp - start);
+	memcpy(carrybuf, start, (size_t)(suffp - start));
 
 	/*
 	 * check the target directory.

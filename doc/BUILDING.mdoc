@@ -33,7 +33,7 @@
 .\" Toolchain prefix for commands
 .ds toolprefix nb
 .
-.Dd August 7, 2014
+.Dd April 7, 2015
 .Dt BUILDING 8
 .Os NetBSD
 .
@@ -783,9 +783,9 @@ The style of X11 cross-built, set to either
 or
 .Dq XFree86 .
 .DFLT
-.Dq Xorg
-on amd64, i386, macppc, shark and sparc64 platforms,
 .Dq XFree86
+on acorn32, alpha, amiga, mac68k, pmax, and sun3 platforms,
+.Dq Xorg
 on everything else.
 .
 .El
@@ -1287,7 +1287,7 @@ because
 relies on information in
 .Sy DESTDIR Ns Pa /METALOG .
 .
-.It live-image
+.It Sy live-image
 Create
 .Nx
 live images in the

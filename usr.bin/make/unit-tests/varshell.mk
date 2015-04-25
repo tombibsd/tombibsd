@@ -3,7 +3,7 @@
 # Test VAR != shell command
 
 EXEC_FAILED		!= /bin/no/such/command
-TERMINATED_BY_SIGNAL	!= kill -ALRM $$$$
+TERMINATED_BY_SIGNAL	!= kill -14 $$$$
 ERROR_NO_OUTPUT		!= false
 ERROR_WITH_OUTPUT	!= echo "output before the error"; false
 NO_ERROR_NO_OUTPUT	!= true

@@ -43,6 +43,11 @@ if [ -f $d/configure ]; then
 #endif
 	d
 }
+/_EVENT_SIZEOF_LONG_LONG/ {
+	a\
+#define _EVENT_SIZEOF_LONG_LONG 8
+	d
+}
 /_EVENT_SIZEOF_LONG/ {
 	a\
 #ifdef _LP64\

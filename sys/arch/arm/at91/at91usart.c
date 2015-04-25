@@ -82,9 +82,8 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include "opt_ddb.h"
 #include "opt_kgdb.h"
 
-#include "rnd.h"
 #ifdef RND_COM
-#include <sys/rnd.h>
+#include <sys/rndsource.h>
 #endif
 
 #ifdef	NOTYET

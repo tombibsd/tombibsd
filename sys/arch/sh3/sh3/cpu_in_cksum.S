@@ -27,6 +27,9 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#ifndef _LOCORE
+#define _LOCORE
+#endif
 #include <machine/endian.h>
 #include <machine/asm.h>
 #include "assym.h"

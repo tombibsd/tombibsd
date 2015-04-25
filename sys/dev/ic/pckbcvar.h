@@ -34,10 +34,6 @@
 
 #include <dev/pckbport/pckbportvar.h>
 
-
-
-#include <sys/rnd.h>
-
 typedef void *pckbc_tag_t;
 typedef int pckbc_slot_t;
 #define	PCKBC_KBD_SLOT	0

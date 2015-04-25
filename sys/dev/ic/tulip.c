@@ -592,7 +592,7 @@ tlp_detach(struct tulip_softc *sc)
 	struct tulip_rxsoft *rxs;
 	struct tulip_txsoft *txs;
 	device_t self = sc->sc_dev;
-	int i;
+	int i, s;
 
 	/*
 	 * Succeed now if there isn't any work to do.
@@ -600,9 +600,14 @@ tlp_detach(struct tulip_softc *sc)
 	if ((sc->sc_flags & TULIPF_ATTACHED) == 0)
 		return (0);
 
-	/* Unhook our tick handler. */
-	if (sc->sc_tick)
-		callout_stop(&sc->sc_tick_callout);
+	s = splnet();
+	/* Stop the interface. Callouts are stopped in it. */
+	tlp_stop(ifp, 1);
+	splx(s);
+
+	/* Destroy our callouts. */
+	callout_destroy(&sc->sc_nway_callout);
+	callout_destroy(&sc->sc_tick_callout);
 
 	if (sc->sc_flags & TULIPF_HAS_MII) {
 		/* Detach all PHYs */

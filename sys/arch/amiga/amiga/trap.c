@@ -461,11 +461,6 @@ trapmmufault(int type, u_int code, u_int v, struct frame *fp, struct lwp *l, u_q
 		return;
 	}
 nogo:
-	if (rv == EACCES) {
-		ksi.ksi_code = SEGV_ACCERR;
-		rv = EFAULT;
-	} else
-		ksi.ksi_code = SEGV_MAPERR;
 	if (type == T_MMUFLT) {
 		if (onfault) {
 			trapcpfault(l, fp, rv);
@@ -478,13 +473,25 @@ nogo:
 		panictrap(type, code, v, fp);
 	}
 	ksi.ksi_addr = (void *)v;
-	if (rv == ENOMEM) {
+	switch (rv) {
+	case ENOMEM:
 		printf("UVM: pid %d (%s), uid %d killed: out of swap\n",
-		       p->p_pid, p->p_comm,
-		       l->l_cred ? kauth_cred_geteuid(l->l_cred) : -1);
+		    p->p_pid, p->p_comm,
+		    l->l_cred ? kauth_cred_geteuid(l->l_cred) : -1);
 		ksi.ksi_signo = SIGKILL;
-	} else {
+		break;
+	case EINVAL:
+		ksi.ksi_signo = SIGBUS;
+		ksi.ksi_code = BUS_ADRERR;
+		break;
+	case EACCES:
 		ksi.ksi_signo = SIGSEGV;
+		ksi.ksi_code = SEGV_ACCERR;
+		break;
+	default:
+		ksi.ksi_signo = SIGSEGV;
+		ksi.ksi_code = SEGV_MAPERR;
+		break;
 	}
 	trapsignal(l, &ksi);
 	if ((type & T_USER) == 0)

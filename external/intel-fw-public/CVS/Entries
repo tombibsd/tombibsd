@@ -1,5 +1,5 @@
 /Makefile.inc/1.2/Thu Oct 24 10:28:53 2013/-kk/
-/Makefile/1.8/Tue Dec  9 04:14:36 2014/-kk/
+/Makefile/1.9/Sat Mar 21 02:19:24 2015/-kk/
 D/ipw3945////
 D/iwl100////
 D/iwl1000////
@@ -7,6 +7,7 @@ D/iwl105////
 D/iwl135////
 D/iwl2000////
 D/iwl2030////
+D/iwl3160////
 D/iwl4965////
 D/iwl5000////
 D/iwl5150////
@@ -14,3 +15,5 @@ D/iwl6000////
 D/iwl6005////
 D/iwl6030////
 D/iwl6050////
+D/iwl7260////
+D/iwl7265////

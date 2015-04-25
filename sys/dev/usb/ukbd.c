@@ -478,8 +478,7 @@ ukbd_attach(device_t parent, device_t self, void *aux)
 
 	callout_init(&sc->sc_delay, 0);
 
-	usb_init_task(&sc->sc_ledtask, ukbd_set_leds_task, sc,
-	    USB_TASKQ_MPSAFE);
+	usb_init_task(&sc->sc_ledtask, ukbd_set_leds_task, sc, 0);
 
 	/* Flash the leds; no real purpose, just shows we're alive. */
 	ukbd_set_leds(sc, WSKBD_LED_SCROLL | WSKBD_LED_NUM | WSKBD_LED_CAPS

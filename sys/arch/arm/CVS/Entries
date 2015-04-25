@@ -1,6 +1,7 @@
 /Makefile.inc/1.1/Mon Apr  4 19:43:34 2011/-kk/
 /Makefile/1.8/Wed Jun 25 03:33:39 2008/-kk/
 D/allwinner////
+D/amlogic////
 D/arm////
 D/arm32////
 D/at91////
@@ -19,6 +20,7 @@ D/ixp12x0////
 D/mainbus////
 D/marvell////
 D/mpcore////
+D/nvidia////
 D/ofw////
 D/omap////
 D/pic////
@@ -28,3 +30,4 @@ D/sa11x0////
 D/samsung////
 D/vfp////
 D/xscale////
+D/zynq////

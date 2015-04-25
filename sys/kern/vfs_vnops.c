@@ -673,7 +673,7 @@ vn_stat(struct vnode *vp, struct stat *sb)
 		break;
 	default:
 		return (EBADF);
-	};
+	}
 	sb->st_mode = mode;
 	sb->st_nlink = va.va_nlink;
 	sb->st_uid = va.va_uid;

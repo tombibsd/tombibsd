@@ -2987,7 +2987,7 @@ static int data_cmd(SMTPD_STATE *state, int argc, SMTPD_TOKEN *unused_argv)
     }
 
     /*
-     * PREPEND message headers.
+     * PREPEND message headers above our own Received: header.
      */
     if (state->prepend)
 	for (cpp = state->prepend->argv; *cpp; cpp++)
@@ -3082,6 +3082,7 @@ static int data_cmd(SMTPD_STATE *state, int argc, SMTPD_TOKEN *unused_argv)
 		    "\t(envelope-from %s)", STR(state->buffer));
 #endif
     }
+
     smtpd_chat_reply(state, "354 End data with <CR><LF>.<CR><LF>");
     state->where = SMTPD_AFTER_DATA;
 

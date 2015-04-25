@@ -1444,6 +1444,7 @@ ac97_attach_type(struct ac97_host_if *host_if, device_t sc_dev, int type, kmutex
 
 		if (as->ext_mid == 0 || as->ext_mid == 0xffff) {
 			aprint_normal_dev(sc_dev, "no modem codec found\n");
+			free(as, M_DEVBUF);
 			return ENXIO;
 		}
 		as->type = AC97_CODEC_TYPE_MODEM;

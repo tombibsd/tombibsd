@@ -24,6 +24,10 @@ file	arch/evbarm/ifpga/ifpga_pci.c		ifpga & pci
 attach	plcom at ifpga with plcom_ifpga
 file	arch/evbarm/ifpga/plcom_ifpga.c		plcom_ifpga
 
+# Integrator MMCI host controller
+attach	plmmc at ifpga with plmmc_ifpga
+file	arch/evbarm/ifpga/plmmc_ifpga.c		plmmc_ifpga
+
 # Integrator real-time clock
 device plrtc
 attach plrtc at ifpga

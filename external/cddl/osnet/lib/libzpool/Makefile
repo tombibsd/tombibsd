@@ -26,7 +26,7 @@ SRCS=		kernel.c kernel2.c atomic.c
 # Sun stuff
 SRCS+=		${ZFS_COMMON_OBJS:C/.o$/.c/}
 SRCS+=		${ZFS_SHARED_OBJS:C/.o$/.c/}
-SRCS+=		taskq.c util.c list.o u8_textprep.o
+SRCS+=		taskq.c util.c list.c u8_textprep.c
 
 print:
 	echo ${LIST_SRCS} ${LIST_OBJS}

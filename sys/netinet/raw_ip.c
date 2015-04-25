@@ -557,10 +557,10 @@ rip_accept(struct socket *so, struct mbuf *nam)
 }
 
 static int
-rip_bind(struct socket *so, struct mbuf *nam, struct lwp *l)
+rip_bind(struct socket *so, struct sockaddr *nam, struct lwp *l)
 {
 	struct inpcb *inp = sotoinpcb(so);
-	struct sockaddr_in *addr;
+	struct sockaddr_in *addr = (struct sockaddr_in *)nam;
 	int error = 0;
 	int s;
 
@@ -568,12 +568,10 @@ rip_bind(struct socket *so, struct mbuf *nam, struct lwp *l)
 	KASSERT(inp != NULL);
 	KASSERT(nam != NULL);
 
+	if (addr->sin_len != sizeof(*addr))
+		return EINVAL;
+
 	s = splsoftnet();
-	addr = mtod(nam, struct sockaddr_in *);
-	if (nam->m_len != sizeof(*addr)) {
-		error = EINVAL;
-		goto release;
-	}
 	if (IFNET_EMPTY()) {
 		error = EADDRNOTAVAIL;
 		goto release;

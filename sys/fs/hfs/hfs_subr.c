@@ -319,7 +319,7 @@ hfs_pread(struct vnode *vp, void *buf, size_t secsz, uint64_t off,
 
 		error = bread(vp, (start + curoff) / DEV_BSIZE,/* no rounding involved*/
 		   RBSZ(min(len - curoff + (off - start), MAXBSIZE), secsz),
-		   cred, 0, &bp);
+		   0, &bp);
 
 		if (error == 0)
 			memcpy((uint8_t*)buf + curoff, (uint8_t*)bp->b_data +

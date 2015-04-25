@@ -36,8 +36,6 @@
 
 #ifdef _KERNEL
 
-#include "opt_ipsec.h"
-
 struct secpolicy;
 struct secpolicyindex;
 struct ipsecrequest;

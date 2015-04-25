@@ -50,14 +50,8 @@ void	intel_gtt_chipset_flush(void);
 void	intel_gtt_insert_entries(bus_dmamap_t, unsigned, unsigned);
 void	intel_gtt_clear_range(unsigned, unsigned);
 
-#define	AGP_DCACHE_MEMORY	1
-#define	AGP_PHYS_MEMORY		2
-
-/* XXX Dummy stubs -- should make these mean something and respect them.   */
-#define	AGP_USER_MEMORY		0
-#define	AGP_USER_CACHED_MEMORY	0
-
-#define	AGP_USER_CACHED_MEMORY_GFDT	__BIT(3)
+#define	AGP_USER_MEMORY		1
+#define	AGP_USER_CACHED_MEMORY	2
 
 extern int	intel_iommu_gfx_mapped;
 

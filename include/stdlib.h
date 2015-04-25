@@ -123,6 +123,10 @@ double	 strtod(const char * __restrict, char ** __restrict);
 long	 strtol(const char * __restrict, char ** __restrict, int);
 unsigned long
 	 strtoul(const char * __restrict, char ** __restrict, int);
+#ifdef _OPENBSD_SOURCE
+long long strtonum(const char *, long long, long long, const char **);
+void	*reallocarray(void *, size_t, size_t);
+#endif
 int	 system(const char *);
 
 /* These are currently just stubs. */
@@ -334,6 +338,8 @@ int	 l64a_r(long, char *, int);
 
 size_t	shquote(const char *, char *, size_t);
 size_t	shquotev(int, char * const *, char *, size_t);
+
+int	reallocarr(void *, size_t, size_t);
 #endif /* _NETBSD_SOURCE */
 #endif /* _POSIX_C_SOURCE || _XOPEN_SOURCE || _NETBSD_SOURCE */
 

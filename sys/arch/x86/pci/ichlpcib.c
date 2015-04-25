@@ -257,6 +257,10 @@ static struct lpcib_device {
 	{ PCI_VENDOR_INTEL, PCI_PRODUCT_INTEL_Q87_LPC, 1, 0 },
 	{ PCI_VENDOR_INTEL, PCI_PRODUCT_INTEL_QM87_LPC, 1, 0 },
 	{ PCI_VENDOR_INTEL, PCI_PRODUCT_INTEL_B85_LPC, 1, 0 },
+	{ PCI_VENDOR_INTEL, PCI_PRODUCT_INTEL_H97_LPC, 1, 0 },
+	{ PCI_VENDOR_INTEL, PCI_PRODUCT_INTEL_Z97_LPC, 1, 0 },
+	{ PCI_VENDOR_INTEL, PCI_PRODUCT_INTEL_X99_LPC, 1, 0 },
+	{ PCI_VENDOR_INTEL, PCI_PRODUCT_INTEL_X99_LPC_2, 1, 0 },
 	{ PCI_VENDOR_INTEL, PCI_PRODUCT_INTEL_C222_LPC, 1, 0 },
 	{ PCI_VENDOR_INTEL, PCI_PRODUCT_INTEL_C224_LPC, 1, 0 },
 	{ PCI_VENDOR_INTEL, PCI_PRODUCT_INTEL_C226_LPC, 1, 0 },
@@ -303,6 +307,7 @@ lpcibattach(device_t parent, device_t self, void *aux)
 	struct pci_attach_args *pa = aux;
 	struct lpcib_softc *sc = device_private(self);
 	struct lpcib_device *lpcib_dev;
+	pcireg_t pmbase;
 
 	sc->sc_pa = *pa;
 
@@ -324,12 +329,16 @@ lpcibattach(device_t parent, device_t self, void *aux)
 	 *
 	 * The PMBASE register is alike PCI BAR but not completely compatible
 	 * with it. The PMBASE define the base address and the type but
-	 * not describe the size.
+	 * not describe the size. The value of the register may be lower
+	 * than LPCIB_PCI_PM_SIZE. It makes impossible to use
+	 * pci_mapreg_submap() because the function does range check.
 	 */
-	if (pci_mapreg_submap(pa, LPCIB_PCI_PMBASE, PCI_MAPREG_TYPE_IO, 0,
-		LPCIB_PCI_PM_SIZE, 0, &sc->sc_iot, &sc->sc_ioh, NULL,
-		&sc->sc_iosize)) {
-		aprint_error_dev(self, "can't map power management i/o space\n");
+	sc->sc_iot = pa->pa_iot;
+	pmbase = pci_conf_read(pa->pa_pc, pa->pa_tag, LPCIB_PCI_PMBASE);
+	if (bus_space_map(sc->sc_iot, PCI_MAPREG_IO_ADDR(pmbase),
+	    LPCIB_PCI_PM_SIZE, 0, &sc->sc_ioh) != 0) {
+		aprint_error_dev(self,
+	    	"can't map power management i/o space\n");
 		return;
 	}
 
@@ -1082,11 +1091,14 @@ lpcib_gpio_configure(device_t self)
 	/*
 	 * The GPIO_BASE register is alike PCI BAR but not completely
 	 * compatible with it. The PMBASE define the base address and the type
-	 * but not describe the size.
+	 * but not describe the size. The value of the register may be lower
+	 * than LPCIB_PCI_GPIO_SIZE. It makes impossible to use
+	 * pci_mapreg_submap() because the function does range check.
 	 */
-	rv = pci_mapreg_submap(&sc->sc_pa, base_reg, PCI_MAPREG_TYPE_IO, 0,
-	    LPCIB_PCI_GPIO_SIZE, 0, &sc->sc_gpio_iot, &sc->sc_gpio_ioh,
-	    NULL, &sc->sc_gpio_ios);
+	sc->sc_gpio_iot = sc->sc_pa.pa_iot;
+	reg = pci_conf_read(sc->sc_pa.pa_pc, sc->sc_pa.pa_tag, base_reg);
+	rv = bus_space_map(sc->sc_gpio_iot, PCI_MAPREG_IO_ADDR(reg),
+	    LPCIB_PCI_GPIO_SIZE, 0, &sc->sc_gpio_ioh);
 	if (rv != 0) {
 		aprint_error_dev(self, "can't map general purpose i/o space(rv = %d)\n", rv);
 		return;

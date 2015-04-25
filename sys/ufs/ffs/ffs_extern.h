@@ -92,7 +92,7 @@ int	ffs_alloc(struct inode *, daddr_t, daddr_t , int, int, kauth_cred_t,
 		  daddr_t *);
 int	ffs_realloccg(struct inode *, daddr_t, daddr_t, int, int ,
 		      kauth_cred_t, struct buf **, daddr_t *);
-int	ffs_valloc(struct vnode *, int, kauth_cred_t, struct vnode **);
+int	ffs_valloc(struct vnode *, int, kauth_cred_t, ino_t *);
 daddr_t	ffs_blkpref_ufs1(struct inode *, daddr_t, int, int, int32_t *);
 daddr_t	ffs_blkpref_ufs2(struct inode *, daddr_t, int, int, int64_t *);
 int	ffs_blkalloc(struct inode *, daddr_t, long);
@@ -127,6 +127,10 @@ int	ffs_cgupdate(struct ufsmount *, int);
 /* ffs_vnops.c */
 int	ffs_read(void *);
 int	ffs_write(void *);
+int	ffs_bufio(enum uio_rw, struct vnode *, void *, size_t, off_t, int,
+	    kauth_cred_t, size_t *, struct lwp *);
+int	ffs_bufrd(struct vnode *, struct uio *, int, kauth_cred_t);
+int	ffs_bufwr(struct vnode *, struct uio *, int, kauth_cred_t);
 int	ffs_fsync(void *);
 int	ffs_spec_fsync(void *);
 int	ffs_reclaim(void *);

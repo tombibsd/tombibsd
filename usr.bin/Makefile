@@ -21,7 +21,7 @@ SUBDIR= apply asa at audio audiocfg \
 	moduli msgc msgs \
 	nbperf netgroup netstat newgrp newsyslog nfsstat nice nl nohup \
 	pagesize passwd paste patch pathchk pkill pmap pmc pr \
-	printenv printf progress pwhash qsubst quota radioctl rdist \
+	printenv printf progress pwait pwhash qsubst quota radioctl rdist \
 	renice rev revoke rfcomm_sppd rlogin rpcgen rpcinfo rs rsh \
 	rup ruptime rusers rwall rwho \
 	script sdiff sdpquery sed seq shar shlock \

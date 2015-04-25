@@ -72,7 +72,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 /*#define UHCI_CTL_LOOP */
 
 
-
 #ifdef UHCI_DEBUG
 uhci_softc_t *thesc;
 #define DPRINTF(x)	if (uhcidebug) printf x

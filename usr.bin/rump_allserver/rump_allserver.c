@@ -284,7 +284,8 @@ main(int argc, char *argv[])
 			}
 
 			if (key == NULL || hostpath == NULL ||
-			    (flen == 0 && partition == 0)) {
+			    (flen == 0
+			      && partition == 0 && ftype != RUMP_ETFS_REG)) {
 				fprintf(stderr, "incomplete drivespec\n");
 				usage();
 			}

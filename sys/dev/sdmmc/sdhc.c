@@ -86,6 +86,7 @@ struct sdhc_host {
 #define SHF_USE_DMA		0x0001
 #define SHF_USE_4BIT_MODE	0x0002
 #define SHF_USE_8BIT_MODE	0x0004
+#define SHF_MODE_DMAEN		0x0008 /* needs SDHC_DMA_ENABLE in mode */
 };
 
 #define HDEVNAME(hp)	(device_xname((hp)->sc->sc_dev))
@@ -268,7 +269,11 @@ sdhc_host_found(struct sdhc_softc *sc, bus_space_tag_t iot,
 	mutex_init(&hp->intr_mtx, MUTEX_DEFAULT, IPL_SDMMC);
 	cv_init(&hp->intr_cv, "sdhcintr");
 
-	sdhcver = HREAD2(hp, SDHC_HOST_CTL_VERSION);
+	if (ISSET(hp->sc->sc_flags, SDHC_FLAG_ENHANCED)) {
+		sdhcver = HREAD4(hp, SDHC_ESDHC_HOST_CTL_VERSION);
+	} else {
+		sdhcver = HREAD2(hp, SDHC_HOST_CTL_VERSION);
+	}
 	aprint_normal_dev(sc->sc_dev, "SD Host Specification ");
 	hp->specver = SDHC_SPEC_VERSION(sdhcver);
 	switch (SDHC_SPEC_VERSION(sdhcver)) {
@@ -305,11 +310,19 @@ sdhc_host_found(struct sdhc_softc *sc, bus_space_tag_t iot,
 		mutex_exit(&hp->host_mtx);
 	}
 
-	/* Use DMA if the host system and the controller support it. */
+	/*
+	 * Use DMA if the host system and the controller support it.
+	 * Suports integrated or external DMA egine, with or without
+	 * SDHC_DMA_ENABLE in the command.
+	 */
 	if (ISSET(sc->sc_flags, SDHC_FLAG_FORCE_DMA) ||
 	    (ISSET(sc->sc_flags, SDHC_FLAG_USE_DMA &&
 	     ISSET(caps, SDHC_DMA_SUPPORT)))) {
 		SET(hp->flags, SHF_USE_DMA);
+		if (!ISSET(sc->sc_flags, SDHC_FLAG_EXTERNAL_DMA) ||
+		    ISSET(sc->sc_flags, SDHC_FLAG_EXTDMA_DMAEN))
+			SET(hp->flags, SHF_MODE_DMAEN);
+
 		aprint_normal_dev(sc->sc_dev, "using DMA transfer\n");
 	}
 
@@ -421,7 +434,9 @@ sdhc_host_found(struct sdhc_softc *sc, bus_space_tag_t iot,
 	if (ISSET(caps, SDHC_HIGH_SPEED_SUPP))
 		saa.saa_caps |= SMC_CAPS_SD_HIGHSPEED;
 	if (ISSET(hp->flags, SHF_USE_DMA)) {
-		saa.saa_caps |= SMC_CAPS_DMA | SMC_CAPS_MULTI_SEG_DMA;
+		saa.saa_caps |= SMC_CAPS_DMA;
+		if (!ISSET(hp->sc->sc_flags, SDHC_FLAG_ENHANCED))
+			saa.saa_caps |= SMC_CAPS_MULTI_SEG_DMA;
 	}
 	if (ISSET(sc->sc_flags, SDHC_FLAG_SINGLE_ONLY))
 		saa.saa_caps |= SMC_CAPS_SINGLE_ONLY;
@@ -1199,7 +1214,7 @@ sdhc_start_command(struct sdhc_host *hp, struct sdmmc_command *cmd)
 		mode |= SDHC_AUTO_CMD12_ENABLE;
 	}
 	if (cmd->c_dmamap != NULL && cmd->c_datalen > 0 &&
-	    !ISSET(sc->sc_flags, SDHC_FLAG_EXTERNAL_DMA)) {
+	    ISSET(hp->flags,  SHF_MODE_DMAEN)) {
 		mode |= SDHC_DMA_ENABLE;
 	}
 
@@ -1245,7 +1260,8 @@ sdhc_start_command(struct sdhc_host *hp, struct sdmmc_command *cmd)
 	}
 
 	/* Set DMA start address. */
-	if (ISSET(mode, SDHC_DMA_ENABLE))
+	if (ISSET(mode, SDHC_DMA_ENABLE) &&
+	    !ISSET(sc->sc_flags, SDHC_FLAG_EXTERNAL_DMA))
 		HWRITE4(hp, SDHC_DMA_ADDR, cmd->c_dmamap->dm_segs[0].ds_addr);
 
 	/*
@@ -1625,7 +1641,7 @@ sdhc_soft_reset(struct sdhc_host *hp, int mask)
 	}
 
 	if (ISSET(hp->sc->sc_flags, SDHC_FLAG_ENHANCED)) {
-		HWRITE4(hp, SDHC_DMA_CTL, SDHC_DMA_SNOOP);
+		HSET4(hp, SDHC_DMA_CTL, SDHC_DMA_SNOOP);
 	}
 
 	return 0;

@@ -316,7 +316,7 @@ update_inoblk(struct lfs *fs, daddr_t offset, kauth_cred_t cred,
 	 * DO NOT update disk blocks, we do that separately.
 	 */
 	error = bread(devvp, LFS_FSBTODB(fs, offset), fs->lfs_ibsize,
-	    cred, 0, &dbp);
+	    0, &dbp);
 	if (error) {
 		DLOG((DLOG_RF, "update_inoblk: bread returned %d\n", error));
 		return error;
@@ -416,7 +416,7 @@ check_segsum(struct lfs *fs, daddr_t offset, u_int64_t nextserial,
 
 	/* Read in the segment summary */
 	error = bread(devvp, LFS_FSBTODB(fs, offset), fs->lfs_sumsize,
-	    cred, 0, &bp);
+	    0, &bp);
 	if (error)
 		return -1;
 
@@ -489,7 +489,7 @@ check_segsum(struct lfs *fs, daddr_t offset, u_int64_t nextserial,
 			if (flags & CHECK_CKSUM) {
 				/* Read in the head and add to the buffer */
 				error = bread(devvp, LFS_FSBTODB(fs, offset), fs->lfs_bsize,
-					      cred, 0, &dbp);
+					      0, &dbp);
 				if (error) {
 					offset = -1;
 					goto err2;
@@ -516,7 +516,7 @@ check_segsum(struct lfs *fs, daddr_t offset, u_int64_t nextserial,
 				size = fip->fi_lastlength;
 			if (flags & CHECK_CKSUM) {
 				error = bread(devvp, LFS_FSBTODB(fs, offset), size,
-				    cred, 0, &dbp);
+				    0, &dbp);
 				if (error) {
 					offset = -1;
 					goto err2;

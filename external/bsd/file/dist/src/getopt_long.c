@@ -1,4 +1,5 @@
 /*	$NetBSD$	*/
+
 /*	NetBSD: getopt_long.c,v 1.21.4.1 2008/01/09 01:34:14 matt Exp 	*/
 
 /*-

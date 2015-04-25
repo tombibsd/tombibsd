@@ -2,7 +2,7 @@
 
 /*
  * dhcpcd - DHCP client daemon
- * Copyright (c) 2006-2014 Roy Marples <roy@marples.name>
+ * Copyright (c) 2006-2015 Roy Marples <roy@marples.name>
  * All rights reserved
 
  * Redistribution and use in source and binary forms, with or without
@@ -39,7 +39,7 @@
 struct ra_opt {
 	TAILQ_ENTRY(ra_opt) next;
 	uint16_t type;
-	struct timeval expire;
+	struct timespec expire;
 	char *option;
 };
 
@@ -50,7 +50,7 @@ struct ra {
 	char sfrom[INET6_ADDRSTRLEN];
 	unsigned char *data;
 	size_t data_len;
-	struct timeval received;
+	struct timespec received;
 	unsigned char flags;
 	uint32_t lifetime;
 	uint32_t reachable;
@@ -103,10 +103,10 @@ void ipv6nd_neighbour(struct dhcpcd_ctx *, struct in6_addr *, int);
 #else
 #define ipv6nd_startrs(a) {}
 #define ipv6nd_findaddr(a, b, c) (0)
-#define ipv6nd_free(a)
+#define ipv6nd_free(a) {}
 #define ipv6nd_hasra(a) (0)
 #define ipv6nd_dadcompleted(a) (0)
-#define ipv6nd_drop(a)
+#define ipv6nd_drop(a) {}
 #endif
 
 #endif

@@ -262,7 +262,7 @@ ext2fs_update(struct vnode *vp, const struct timespec *acc,
 
 	error = bread(ip->i_devvp,
 			  EXT2_FSBTODB(fs, ino_to_fsba(fs, ip->i_number)),
-			  (int)fs->e2fs_bsize, NOCRED, B_MODIFY, &bp);
+			  (int)fs->e2fs_bsize, B_MODIFY, &bp);
 	if (error) {
 		return (error);
 	}

@@ -209,6 +209,8 @@ decode_tag_internal(ev_uint32_t *ptag, struct evbuffer *evbuf, int dodrain)
 	 */
 	data = evbuffer_pullup(
 		evbuf, len < sizeof(number) + 1 ? len : sizeof(number) + 1);
+	if (!data)
+		return (-1);
 
 	while (count++ < len) {
 		ev_uint8_t lower = *data++;
@@ -315,6 +317,8 @@ do {									\
 									\
 	/* XXX(niels): faster? */					\
 	data = evbuffer_pullup(evbuf, offset + 1) + offset;		\
+	if (!data)							\
+		return (-1);						\
 									\
 	nibbles = ((data[0] & 0xf0) >> 4) + 1;				\
 	if (nibbles > maxnibbles || (nibbles >> 1) + 1 > len)		\
@@ -322,6 +326,8 @@ do {									\
 	len = (nibbles >> 1) + 1;					\
 									\
 	data = evbuffer_pullup(evbuf, offset + len) + offset;		\
+	if (!data)							\
+		return (-1);						\
 									\
 	while (nibbles > 0) {						\
 		number <<= 4;						\

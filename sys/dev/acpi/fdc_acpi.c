@@ -38,8 +38,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/disk.h>
 #include <sys/systm.h>
 
-#include <sys/rnd.h>
-
 #include <dev/acpi/acpireg.h>
 #include <dev/acpi/acpivar.h>
 

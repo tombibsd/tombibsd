@@ -57,6 +57,8 @@
 #ifndef _DEV_IC_CS89X0VAR_H_
 #define	_DEV_IC_CS89X0VAR_H_
 
+#include <sys/rndsource.h>
+
 /*
  * Ethernet software status per interface.
  *

@@ -386,9 +386,9 @@ umidi_attach(device_t parent, device_t self, void *aux)
 	}
 	err = attach_all_mididevs(sc);
 	if (err != USBD_NORMAL_COMPLETION) {
-		goto out_free_jacks;
 		aprint_error_dev(self,
 		    "attach_all_mididevs failed. (err=%d)\n", err);
+		goto out_free_jacks;
 	}
 
 #ifdef UMIDI_DEBUG
@@ -493,8 +493,6 @@ umidi_open(void *addr,
 	KASSERT(mutex_owned(&sc->sc_lock));
 	DPRINTF(("umidi_open: sc=%p\n", sc));
 
-	if (!sc)
-		return ENXIO;
 	if (mididev->opened)
 		return EBUSY;
 	if (sc->sc_dying)
@@ -512,7 +510,8 @@ umidi_open(void *addr,
 		KASSERT(mididev->opened);
 		if (err != USBD_NORMAL_COMPLETION &&
 		    err != USBD_IN_PROGRESS) {
-			close_out_jack(mididev->out_jack);
+			if (mididev->out_jack)
+				close_out_jack(mididev->out_jack);
 			goto bad;
 		}
 	}

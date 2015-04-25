@@ -40,6 +40,7 @@ __RCSID("$NetBSD$");
 
 #include <err.h>
 #include <errno.h>
+#include <inttypes.h>
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -154,5 +155,33 @@ evasprintf(char ** __restrict ret, const char * __restrict format, va_list ap)
 	int rv;
 	if ((rv = vasprintf(ret, format, ap)) == -1)
 		(*efunc)(1, "Cannot format string");
+	return rv;
+}
+
+intmax_t
+estrtoi(const char * nptr, int base, intmax_t lo, intmax_t hi)
+{
+	int e;
+	intmax_t rv = strtoi(nptr, NULL, base, lo, hi, &e);
+	if (e != 0) {
+		errno = e;
+		(*efunc)(1,
+		    "Cannot convert string value '%s' with base %d to a number in range [%jd .. %jd]",
+		    nptr, base, lo, hi);
+	}
+	return rv;
+}
+
+uintmax_t
+estrtou(const char * nptr, int base, uintmax_t lo, uintmax_t hi)
+{
+	int e;
+	uintmax_t rv = strtou(nptr, NULL, base, lo, hi, &e);
+	if (e != 0) {
+		errno = e;
+		(*efunc)(1,
+		    "Cannot convert string value '%s' with base %d to a number in range [%ju .. %ju]",
+		    nptr, base, lo, hi);
+	}
 	return rv;
 }

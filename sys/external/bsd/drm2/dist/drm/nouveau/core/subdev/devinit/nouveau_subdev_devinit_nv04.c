@@ -403,8 +403,10 @@ nv04_devinit_fini(struct nouveau_object *object, bool suspend)
 		return ret;
 
 	/* unslave crtcs */
+#if 0	/* XXX Can't happen: priv->owner is unsigned.  */
 	if (priv->owner < 0)
 		priv->owner = nv_rdvgaowner(priv);
+#endif
 	nv_wrvgaowner(priv, 0);
 
 	return 0;

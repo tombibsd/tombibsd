@@ -584,6 +584,10 @@ It is useful for file systems such as
 .Xr mount_psshfs 8
 which depend on a single connection.
 .El
+.Sh RETURN VALUES
+These functions generally return \-1 to signal error and set
+.Er errno
+to indicate the type of error.
 .Sh CODE REFERENCES
 The current users of
 .Nm
@@ -596,10 +600,6 @@ See
 and
 .Pa src/usr.sbin/puffs/mount_9p
 for the respective usage examples.
-.Sh RETURN VALUES
-These functions generally return \-1 to signal error and set
-.Er errno
-to indicate the type of error.
 .Sh SEE ALSO
 .Xr puffs 3 ,
 .Xr puffs_cc 3 ,

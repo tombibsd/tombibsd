@@ -133,7 +133,7 @@ spdmem_i2c_read(struct spdmem_softc *softc, uint8_t reg)
 	return val;
 }
 
-MODULE(MODULE_CLASS_DRIVER, spdmem, "iic");
+MODULE(MODULE_CLASS_DRIVER, spdmem, "i2cexec");
 
 #ifdef _MODULE
 #include "ioconf.c"

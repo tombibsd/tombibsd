@@ -308,11 +308,12 @@ x(JFS2,		16,	"jfs")		/* IBM JFS2 */ \
 x(CGD,		17,	"cgd")		/* cryptographic pseudo-disk */ \
 x(VINUM,	18,	"vinum")	/* vinum volume */ \
 x(FLASH,	19,	"flash")	/* flash memory devices */ \
-x(DM,           20,     "dm")           /* device-mapper pseudo-disk devices */\
-x(RUMPD,	21,     "rumpd")	/* rump virtual disk */ \
+x(DM,		20,	"dm")		/* device-mapper pseudo-disk devices */\
+x(RUMPD,	21,	"rumpd")	/* rump virtual disk */ \
+x(MD,		22,	"md")		/* memory disk */ \
     
 #ifndef _LOCORE
-#define DKTYPE_NUMS(tag, number, name) __CONCAT(DTYPE_,tag=number),
+#define DKTYPE_NUMS(tag, number, name) __CONCAT(DKTYPE_,tag=number),
 #ifndef DKTYPE_ENUMNAME
 #define DKTYPE_ENUMNAME
 #endif

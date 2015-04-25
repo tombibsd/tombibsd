@@ -4,9 +4,9 @@
 
 defpseudodev	iscsi : scsi
 
-defflag	  	ISCSI_DEBUG
-defflag	  	ISCSI_PERFTEST
-defflag	  	ISCSI_TEST_MODE
+defparam	ISCSI_DEBUG
+defflag 	ISCSI_PERFTEST
+defflag 	ISCSI_TEST_MODE
 
 file	dev/iscsi/base64.c		iscsi
 file	dev/iscsi/iscsi_ioctl.c		iscsi

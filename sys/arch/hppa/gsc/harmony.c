@@ -73,7 +73,7 @@
 #include <sys/kmem.h>
 #include <uvm/uvm_extern.h>
 
-#include <sys/rnd.h>
+#include <sys/rndsource.h>
 
 #include <sys/audioio.h>
 #include <dev/audio_if.h>

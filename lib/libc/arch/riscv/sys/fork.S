@@ -39,7 +39,7 @@ ENTRY(__fork)
 	SYSTRAP(fork)		// pid = fork()
 	JUMP_TO_CERROR()	/* error */
 	/* success */
-	addi	v1, v1, -1	// v1 0->0xffffffff in parent, 1->0 in child
-	and	v0, v0, v1	// v0 = child pid in parent, 0 in child
+	addi	a1, a1, -1	// a1 0->0xffffffff in parent, 1->0 in child
+	and	a0, a0, a1	// a0 = child pid in parent, 0 in child
 	ret
 END(__fork)

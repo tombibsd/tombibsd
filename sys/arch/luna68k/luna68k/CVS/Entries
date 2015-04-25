@@ -1,6 +1,6 @@
 /autoconf.c/1.15/Fri Jan 31 08:48:37 2014/-kk/
 /clock.c/1.9/Thu Oct 24 10:28:57 2013/-kk/
-/disksubr.c/1.30/Thu Oct 24 10:28:57 2013/-kk/
+/disksubr.c/1.31/Mon Jan 12 06:48:10 2015/-kk/
 /genassym.cf/1.20/Sat Nov  5 15:37:17 2011/-kk/
 /isr.c/1.22/Fri Apr 11 02:03:31 2014/-kk/
 /isr.h/1.4/Sat Mar 14 14:46:01 2009/-kk/
@@ -8,6 +8,6 @@
 /machdep.c/1.98/Fri Apr 11 02:03:31 2014/-kk/
 /mainbus.c/1.13/Fri Jan 31 08:48:37 2014/-kk/
 /pmap_bootstrap.c/1.36/Thu Oct 24 10:28:57 2013/-kk/
-/trap.c/1.68/Sun Feb 19 21:06:13 2012/-kk/
+/trap.c/1.69/Sat Mar 21 02:37:38 2015/-kk/
 /vectors.s/1.4/Thu Oct 24 10:28:57 2013/-kk/
 D

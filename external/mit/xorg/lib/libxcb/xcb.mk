@@ -18,7 +18,7 @@ SHLIB_MAJOR?=	0
 SHLIB_MINOR?=	1
 
 PKGCONFIG=	xcb-${XCBEXT}
-PKGCONFIG_VERSION.${PKGCONFIG}=     1.9
+PKGCONFIG_VERSION.${PKGCONFIG}=     1.10
 
 .include <bsd.x11.mk>
 .include <bsd.lib.mk>

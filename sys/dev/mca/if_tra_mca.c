@@ -42,7 +42,6 @@ __KERNEL_RCSID(0, "$NetBSD$");
 #include <sys/device.h>
 #include <sys/socket.h>
 #include <sys/syslog.h>
-#include <sys/rnd.h>
 
 #include <net/if.h>
 #include <net/if_ether.h>

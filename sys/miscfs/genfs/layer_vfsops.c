@@ -221,7 +221,6 @@ layerfs_loadvnode(struct mount *mp, struct vnode *vp,
 	/* Share the interlock with the lower node. */
 	mutex_obj_hold(lowervp->v_interlock);
 	uvm_obj_setlock(&vp->v_uobj, lowervp->v_interlock);
-	vp->v_iflag |= VI_LAYER | VI_LOCKSHARE;
 
 	vp->v_tag = lmp->layerm_tag;
 	vp->v_type = lowervp->v_type;

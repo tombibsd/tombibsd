@@ -50,18 +50,10 @@ SRCS+=	locks_up.c
 SRCS+=	locks.c
 .endif
 
-MKREPRO?=no
-
-.if ${MKREPRO} == "yes"
-_NVFLAGS=-r
-.else
-_NVFLAGS=
-.endif
-
 vers.c: ${RUMPTOP}/../conf/newvers.sh ${RUMPTOP}/../conf/osrelease.sh \
 		${RUMPTOP}/../sys/param.h ${_NETBSD_VERSION_DEPENDS}
 	${_MKMSG_CREATE} vers.c
-	${HOST_SH} ${RUMPTOP}/../conf/newvers.sh -i RUMP-ROAST -n ${_NVFLAGS}
+	${HOST_SH} ${RUMPTOP}/../conf/newvers.sh -i RUMP-ROAST -n -r
 SRCS+=		vers.c
 CLEANFILES+=	vers.c version
 
@@ -162,6 +154,7 @@ SRCS+=	cprng_fast.c
 # compat
 SRCS+=	kern_select_50.c
 SRCS+=	kern_time_50.c
+SRCS+=	rndpseudo_50.c
 
 # Set RUMP_UNREAL_ALLOCATORS to "yes" to use memory allocation hypercalls
 # directly instead of the kmem/pool allocators backed by hypercalls.

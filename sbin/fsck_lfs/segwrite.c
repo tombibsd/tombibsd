@@ -472,7 +472,7 @@ lfs_update_single(struct lfs * fs, struct segment * sp, daddr_t lbn,
 		break;
 	default:
 		ap = &a[num - 1];
-		if (bread(vp, ap->in_lbn, fs->lfs_bsize, NULL, 0, &bp))
+		if (bread(vp, ap->in_lbn, fs->lfs_bsize, 0, &bp))
 			errx(1, "lfs_updatemeta: bread bno %" PRId64,
 			    ap->in_lbn);
 

@@ -103,8 +103,8 @@ imc_attach(device_t parent, device_t self, void *aux)
 	struct mainbus_attach_args *ma = aux;
 	uint32_t sysid;
 
-	isc.iot = SGIMIPS_BUS_SPACE_HPC;
-	if (bus_space_map(isc.iot, ma->ma_addr, 0,
+	isc.iot = normal_memt;
+	if (bus_space_map(isc.iot, ma->ma_addr, 0x100,
 	    BUS_SPACE_MAP_LINEAR, &isc.ioh))
 		panic("imc_attach: could not allocate memory\n");
 
